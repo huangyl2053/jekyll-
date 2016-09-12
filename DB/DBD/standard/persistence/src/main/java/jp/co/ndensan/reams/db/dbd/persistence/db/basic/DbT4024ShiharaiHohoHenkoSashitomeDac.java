@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4024ShiharaiHohoHenkoSashit
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4024ShiharaiHohoHenkoSashitome.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4024ShiharaiHohoHenkoSashitome.johoBunruiKubun;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4024ShiharaiHohoHenkoSashitome.kanriKubun;
-import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4024ShiharaiHohoHenkoSashitome.logicalDeletedFlag;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4024ShiharaiHohoHenkoSashitome.renNo;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4024ShiharaiHohoHenkoSashitome.rirekiNo;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4024ShiharaiHohoHenkoSashitome.sashitomeKojoJotaiKubun;
@@ -148,7 +147,7 @@ public class DbT4024ShiharaiHohoHenkoSashitomeDac implements ISaveable<DbT4024Sh
      * @return 支払方法変更差止
      */
     @Transaction
-    public DbT4024ShiharaiHohoHenkoSashitomeEntity select支払方法変更差止(HihokenshaNo 被保険者番号,
+    public List<DbT4024ShiharaiHohoHenkoSashitomeEntity> select支払方法変更差止(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
             RString 整理番号) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
@@ -163,9 +162,8 @@ public class DbT4024ShiharaiHohoHenkoSashitomeDac implements ISaveable<DbT4024Sh
                                 eq(johoBunruiKubun, new RString("1")),
                                 eq(sashitomeKojoJotaiKubun, new RString("01")),
                                 eq(sashitome_ShokanSeiriNo, 整理番号),
-                                eq(sashitome_ServiceTeikyoYM, サービス提供年月),
-                                eq(logicalDeletedFlag, false))).
-                toObject(DbT4024ShiharaiHohoHenkoSashitomeEntity.class);
+                                eq(sashitome_ServiceTeikyoYM, サービス提供年月))).
+                toList(DbT4024ShiharaiHohoHenkoSashitomeEntity.class);
     }
 
     /**

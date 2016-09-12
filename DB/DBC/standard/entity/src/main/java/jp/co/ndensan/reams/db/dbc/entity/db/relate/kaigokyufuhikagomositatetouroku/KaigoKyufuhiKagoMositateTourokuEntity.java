@@ -42,6 +42,8 @@ public class KaigoKyufuhiKagoMositateTourokuEntity implements Serializable {
      * <br/> {@link DbT3059KagoMoshitateEntity}のMD5値を計算し、設定します。
      */
     public void initializeMd5ToEntities() {
-        this.dbT3059.initializeMd5();
+        if (this.dbT3059 != null) {
+            this.dbT3059.initializeMd5();
+        }
     }
 }

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteitsuchishohakkou;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3036ShokanHanteiKekkaEntity;
 
@@ -16,7 +17,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3036ShokanHanteiKekkaEntity
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShokanShikyuKetteiTsuchishoHakkouEntity {
+public class ShokanShikyuKetteiTsuchishoHakkouEntity implements Serializable {
 
     private DbT3036ShokanHanteiKekkaEntity dbT3036Entity;
     private DbT3034ShokanShinseiEntity dbT3034Entity;

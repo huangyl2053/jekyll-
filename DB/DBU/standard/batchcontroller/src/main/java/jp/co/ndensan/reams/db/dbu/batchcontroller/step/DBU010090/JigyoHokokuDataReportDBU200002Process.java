@@ -76,10 +76,10 @@ public class JigyoHokokuDataReportDBU200002Process extends BatchProcessBase<Shor
         reportData.set保険者番号(保険者番号);
         reportData.setプログラムID(processParameter.getバッチID());
         reportData.set処理名称(BatchInfo.getBatchName(SubGyomuCode.DBU介護統計報告, processParameter.getバッチID()));
-        reportData.set項目コード1(entity.getKomokuNo1());
-        reportData.set項目コード2(entity.getKomokuNo2());
-        reportData.set項目コード3(entity.getKomokuNo3());
-        reportData.set項目コード4(entity.getKomokuNo4());
+        reportData.set項目コード1(new RString("被保険者番号"));
+        reportData.set項目コード2(new RString("サービス年月"));
+        reportData.set項目コード3(new RString("履歴番号"));
+        reportData.set項目コード4(new RString("証記載保険者番号"));
         reportData.set項目値1(entity.getKomoku1());
         reportData.set項目値2(entity.getKomoku2());
         reportData.set項目値3(entity.getKomoku3());

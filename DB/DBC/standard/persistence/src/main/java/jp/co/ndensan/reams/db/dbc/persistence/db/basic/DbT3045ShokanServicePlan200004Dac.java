@@ -364,8 +364,7 @@ public class DbT3045ShokanServicePlan200004Dac implements ISaveable<DbT3045Shoka
                 where(and(
                                 eq(hiHokenshaNo, 被保険者番号),
                                 eq(serviceTeikyoYM, サービス提供年月),
-                                eq(seiriNo, 整理番号),
-                                eq(DbT3045ShokanServicePlan200004.isDeleted, false)
+                                eq(seiriNo, 整理番号)
                         )).
                 toList(DbT3045ShokanServicePlan200004Entity.class);
     }

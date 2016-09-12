@@ -86,6 +86,7 @@ public class FutanWariaiHanteiIchiranProcess extends BatchKeyBreakBase<Futanwari
     private static final RString RSTRING = new RString("0003");
     private static final RString RSTRING_TWO = new RString("2");
     private static final RString RSTRING_THREE = new RString("3");
+    private static final RString 年度STRING = new RString("年度");
     private RString eucFilePath;
     private FileSpoolManager manager;
     private RString 共通_文字コード;
@@ -99,6 +100,7 @@ public class FutanWariaiHanteiIchiranProcess extends BatchKeyBreakBase<Futanwari
     private BatchReportWriter<FutanWariaiHanteiIchiranSource> batchReportWriter;
     private ReportSourceWriter<FutanWariaiHanteiIchiranSource> reportSourceWriter;
     private CsvWriter<FutanWariaiHanteiIchiranCsvEntity> eucCsvWriter;
+    @BatchWriter
     private IBatchTableWriter tempResultListDbWriter;
 
     @Override
@@ -183,7 +185,7 @@ public class FutanWariaiHanteiIchiranProcess extends BatchKeyBreakBase<Futanwari
     private RString パターン107(FlexibleYear year) {
         RString wareki = RString.EMPTY;
         if (year != null) {
-            wareki = year.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
+            wareki = year.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(年度STRING);
         }
         return wareki;
     }

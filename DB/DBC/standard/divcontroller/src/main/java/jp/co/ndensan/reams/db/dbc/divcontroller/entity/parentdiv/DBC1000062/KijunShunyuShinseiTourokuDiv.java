@@ -8,17 +8,26 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000062;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.IKaigoAtenaInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.KaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * KijunShunyuShinseiTouroku のクラスファイル 
- * 
- * @author 自動生成
+ * KijunShunyuShinseiTouroku のクラスファイル
+ *
+ * @reamsid_L DBC-4620-010 wangkanglei
  */
 public class KijunShunyuShinseiTourokuDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
@@ -222,7 +231,7 @@ public class KijunShunyuShinseiTourokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLin1(HorizontalLine lin1) {
+    public void setLin1(HorizontalLine lin1) {
         this.getIchiran().setLin1(lin1);
     }
 
@@ -232,7 +241,7 @@ public class KijunShunyuShinseiTourokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnAddIchiran(Button btnAddIchiran) {
+    public void setBtnAddIchiran(Button btnAddIchiran) {
         this.getIchiran().setBtnAddIchiran(btnAddIchiran);
     }
 
@@ -242,7 +251,7 @@ public class KijunShunyuShinseiTourokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgIchiran(DataGrid<dgIchiran_Row> dgIchiran) {
+    public void setDgIchiran(DataGrid<dgIchiran_Row> dgIchiran) {
         this.getIchiran().setDgIchiran(dgIchiran);
     }
 
@@ -257,7 +266,7 @@ public class KijunShunyuShinseiTourokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnShowShotokuJokyo(ButtonDialog btnShowShotokuJokyo) {
+    public void setBtnShowShotokuJokyo(ButtonDialog btnShowShotokuJokyo) {
         this.getMeisai().setBtnShowShotokuJokyo(btnShowShotokuJokyo);
     }
 
@@ -267,7 +276,7 @@ public class KijunShunyuShinseiTourokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnShowZennendo(ButtonDialog btnShowZennendo) {
+    public void setBtnShowZennendo(ButtonDialog btnShowZennendo) {
         this.getMeisai().setBtnShowZennendo(btnShowZennendo);
     }
 
@@ -277,7 +286,7 @@ public class KijunShunyuShinseiTourokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setSetaiJoho(SetaiJohoDiv SetaiJoho) {
+    public void setSetaiJoho(SetaiJohoDiv SetaiJoho) {
         this.getMeisai().setSetaiJoho(SetaiJoho);
     }
 
@@ -287,7 +296,7 @@ public class KijunShunyuShinseiTourokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtSetaiCode(TextBoxCode txtSetaiCode) {
+    public void setTxtSetaiCode(TextBoxCode txtSetaiCode) {
         this.getMeisai().getSetaiJoho().setTxtSetaiCode(txtSetaiCode);
     }
 
@@ -297,7 +306,7 @@ public class KijunShunyuShinseiTourokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShoriNendo(TextBoxFlexibleDate txtShoriNendo) {
+    public void setTxtShoriNendo(TextBoxFlexibleDate txtShoriNendo) {
         this.getMeisai().getSetaiJoho().setTxtShoriNendo(txtShoriNendo);
     }
 
@@ -307,7 +316,7 @@ public class KijunShunyuShinseiTourokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtSetaiinHaakuKijunYMD(TextBoxFlexibleDate txtSetaiinHaakuKijunYMD) {
+    public void setTxtSetaiinHaakuKijunYMD(TextBoxFlexibleDate txtSetaiinHaakuKijunYMD) {
         this.getMeisai().getSetaiJoho().setTxtSetaiinHaakuKijunYMD(txtSetaiinHaakuKijunYMD);
     }
 
@@ -317,7 +326,7 @@ public class KijunShunyuShinseiTourokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShinseiYMD(TextBoxFlexibleDate txtShinseiYMD) {
+    public void setTxtShinseiYMD(TextBoxFlexibleDate txtShinseiYMD) {
         this.getMeisai().getSetaiJoho().setTxtShinseiYMD(txtShinseiYMD);
     }
 
@@ -327,7 +336,7 @@ public class KijunShunyuShinseiTourokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShinseishoSakuseiYMD(TextBoxFlexibleDate txtShinseishoSakuseiYMD) {
+    public void setTxtShinseishoSakuseiYMD(TextBoxFlexibleDate txtShinseishoSakuseiYMD) {
         this.getMeisai().getSetaiJoho().setTxtShinseishoSakuseiYMD(txtShinseishoSakuseiYMD);
     }
 
@@ -337,7 +346,7 @@ public class KijunShunyuShinseiTourokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setSetaiJoho2(SetaiJoho2Div SetaiJoho2) {
+    public void setSetaiJoho2(SetaiJoho2Div SetaiJoho2) {
         this.getMeisai().getSetaiJoho().setSetaiJoho2(SetaiJoho2);
     }
 
@@ -347,7 +356,7 @@ public class KijunShunyuShinseiTourokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtSetaiKazei(TextBox txtSetaiKazei) {
+    public void setTxtSetaiKazei(TextBox txtSetaiKazei) {
         this.getMeisai().getSetaiJoho().getSetaiJoho2().setTxtSetaiKazei(txtSetaiKazei);
     }
 
@@ -357,7 +366,7 @@ public class KijunShunyuShinseiTourokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTekiyoStartYM(TextBoxFlexibleDate txtTekiyoStartYM) {
+    public void setTxtTekiyoStartYM(TextBoxFlexibleDate txtTekiyoStartYM) {
         this.getMeisai().getSetaiJoho().getSetaiJoho2().setTxtTekiyoStartYM(txtTekiyoStartYM);
     }
 
@@ -367,7 +376,7 @@ public class KijunShunyuShinseiTourokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTekiyoEndYM(TextBoxFlexibleDate txtTekiyoEndYM) {
+    public void setTxtTekiyoEndYM(TextBoxFlexibleDate txtTekiyoEndYM) {
         this.getMeisai().getSetaiJoho().getSetaiJoho2().setTxtTekiyoEndYM(txtTekiyoEndYM);
     }
 
@@ -377,7 +386,7 @@ public class KijunShunyuShinseiTourokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlSanteiKijunGaku(DropDownList ddlSanteiKijunGaku) {
+    public void setDdlSanteiKijunGaku(DropDownList ddlSanteiKijunGaku) {
         this.getMeisai().getSetaiJoho().getSetaiJoho2().setDdlSanteiKijunGaku(ddlSanteiKijunGaku);
     }
 
@@ -387,7 +396,7 @@ public class KijunShunyuShinseiTourokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKetteiYMD(TextBoxFlexibleDate txtKetteiYMD) {
+    public void setTxtKetteiYMD(TextBoxFlexibleDate txtKetteiYMD) {
         this.getMeisai().getSetaiJoho().getSetaiJoho2().setTxtKetteiYMD(txtKetteiYMD);
     }
 
@@ -397,7 +406,7 @@ public class KijunShunyuShinseiTourokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKetteiTsuchishoHakkoYMD(TextBoxFlexibleDate txtKetteiTsuchishoHakkoYMD) {
+    public void setTxtKetteiTsuchishoHakkoYMD(TextBoxFlexibleDate txtKetteiTsuchishoHakkoYMD) {
         this.getMeisai().getSetaiJoho().getSetaiJoho2().setTxtKetteiTsuchishoHakkoYMD(txtKetteiTsuchishoHakkoYMD);
     }
 
@@ -407,7 +416,7 @@ public class KijunShunyuShinseiTourokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setFuyoKojo(FuyoKojoDiv FuyoKojo) {
+    public void setFuyoKojo(FuyoKojoDiv FuyoKojo) {
         this.getMeisai().getSetaiJoho().setFuyoKojo(FuyoKojo);
     }
 
@@ -417,7 +426,7 @@ public class KijunShunyuShinseiTourokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setButtonPanel(ButtonPanelDiv ButtonPanel) {
+    public void setButtonPanel(ButtonPanelDiv ButtonPanel) {
         this.getMeisai().getSetaiJoho().getFuyoKojo().setButtonPanel(ButtonPanel);
     }
 
@@ -427,7 +436,7 @@ public class KijunShunyuShinseiTourokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnSetaiSaiSanshutsu(Button btnSetaiSaiSanshutsu) {
+    public void setBtnSetaiSaiSanshutsu(Button btnSetaiSaiSanshutsu) {
         this.getMeisai().getSetaiJoho().getFuyoKojo().getButtonPanel().setBtnSetaiSaiSanshutsu(btnSetaiSaiSanshutsu);
     }
 
@@ -437,7 +446,7 @@ public class KijunShunyuShinseiTourokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnKojoSaiSanshutsu(Button btnKojoSaiSanshutsu) {
+    public void setBtnKojoSaiSanshutsu(Button btnKojoSaiSanshutsu) {
         this.getMeisai().getSetaiJoho().getFuyoKojo().getButtonPanel().setBtnKojoSaiSanshutsu(btnKojoSaiSanshutsu);
     }
 
@@ -447,7 +456,7 @@ public class KijunShunyuShinseiTourokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblKojoTaisho(Label lblKojoTaisho) {
+    public void setLblKojoTaisho(Label lblKojoTaisho) {
         this.getMeisai().getSetaiJoho().getFuyoKojo().setLblKojoTaisho(lblKojoTaisho);
     }
 
@@ -457,7 +466,7 @@ public class KijunShunyuShinseiTourokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setZennenKojoTaisho(ZennenKojoTaishoDiv ZennenKojoTaisho) {
+    public void setZennenKojoTaisho(ZennenKojoTaishoDiv ZennenKojoTaisho) {
         this.getMeisai().getSetaiJoho().getFuyoKojo().setZennenKojoTaisho(ZennenKojoTaisho);
     }
 
@@ -467,7 +476,7 @@ public class KijunShunyuShinseiTourokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtUnder16(TextBoxNum txtUnder16) {
+    public void setTxtUnder16(TextBoxNum txtUnder16) {
         this.getMeisai().getSetaiJoho().getFuyoKojo().getZennenKojoTaisho().setTxtUnder16(txtUnder16);
     }
 
@@ -477,7 +486,7 @@ public class KijunShunyuShinseiTourokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtOver16(TextBoxNum txtOver16) {
+    public void setTxtOver16(TextBoxNum txtOver16) {
         this.getMeisai().getSetaiJoho().getFuyoKojo().getZennenKojoTaisho().setTxtOver16(txtOver16);
     }
 
@@ -487,7 +496,7 @@ public class KijunShunyuShinseiTourokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLin2(HorizontalLine lin2) {
+    public void setLin2(HorizontalLine lin2) {
         this.getMeisai().setLin2(lin2);
     }
 
@@ -497,7 +506,7 @@ public class KijunShunyuShinseiTourokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnAddMeisai(ButtonDialog btnAddMeisai) {
+    public void setBtnAddMeisai(ButtonDialog btnAddMeisai) {
         this.getMeisai().setBtnAddMeisai(btnAddMeisai);
     }
 
@@ -507,7 +516,7 @@ public class KijunShunyuShinseiTourokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblTotalShunyu(Label lblTotalShunyu) {
+    public void setLblTotalShunyu(Label lblTotalShunyu) {
         this.getMeisai().setLblTotalShunyu(lblTotalShunyu);
     }
 
@@ -517,7 +526,7 @@ public class KijunShunyuShinseiTourokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTotalShunyu(TextBoxNum txtTotalShunyu) {
+    public void setTxtTotalShunyu(TextBoxNum txtTotalShunyu) {
         this.getMeisai().setTxtTotalShunyu(txtTotalShunyu);
     }
 
@@ -527,7 +536,7 @@ public class KijunShunyuShinseiTourokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnCalcTotalShunyu(Button btnCalcTotalShunyu) {
+    public void setBtnCalcTotalShunyu(Button btnCalcTotalShunyu) {
         this.getMeisai().setBtnCalcTotalShunyu(btnCalcTotalShunyu);
     }
 
@@ -537,7 +546,7 @@ public class KijunShunyuShinseiTourokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgMeisai(DataGrid<dgMeisai_Row> dgMeisai) {
+    public void setDgMeisai(DataGrid<dgMeisai_Row> dgMeisai) {
         this.getMeisai().setDgMeisai(dgMeisai);
     }
 
@@ -547,7 +556,7 @@ public class KijunShunyuShinseiTourokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnMeisaiKautei(Button btnMeisaiKautei) {
+    public void setBtnMeisaiKautei(Button btnMeisaiKautei) {
         this.getMeisai().setBtnMeisaiKautei(btnMeisaiKautei);
     }
 
@@ -557,7 +566,7 @@ public class KijunShunyuShinseiTourokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnMeisaiCancel(Button btnMeisaiCancel) {
+    public void setBtnMeisaiCancel(Button btnMeisaiCancel) {
         this.getMeisai().setBtnMeisaiCancel(btnMeisaiCancel);
     }
 
@@ -567,7 +576,7 @@ public class KijunShunyuShinseiTourokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLin3(HorizontalLine lin3) {
+    public void setLin3(HorizontalLine lin3) {
         this.getMeisai().setLin3(lin3);
     }
 
@@ -577,7 +586,7 @@ public class KijunShunyuShinseiTourokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblDescription(Label lblDescription) {
+    public void setLblDescription(Label lblDescription) {
         this.getMeisai().setLblDescription(lblDescription);
     }
 

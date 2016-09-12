@@ -98,16 +98,15 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
         boolean is広域 = false;
         RDate システム日付 = RDate.getNowDate();
         RTime システム時刻 = RDate.getNowTime();
-        if (合併情報区分_合併あり.equals(合併情報区分)) {
-            is合併あり = true;
-            div.setHiddenGappei(new RString("合併"));
-        } else {
-            if (DonyuKeitaiCode.事務単一.getCode().equals(導入形態コード)) {
-                is単一 = true;
-            } else if (DonyuKeitaiCode.事務広域.getCode().equals(導入形態コード)) {
-                is広域 = true;
-                div.setHiddenKouiki(new RString("広域"));
+        if (DonyuKeitaiCode.事務単一.getCode().equals(導入形態コード)) {
+            is単一 = true;
+            if (合併情報区分_合併あり.equals(合併情報区分)) {
+                is合併あり = true;
+                div.setHiddenGappei(new RString("合併"));
             }
+        } else if (DonyuKeitaiCode.事務広域.getCode().equals(導入形態コード)) {
+            is広域 = true;
+            div.setHiddenKouiki(new RString("広域"));
         }
         set過去の集計結果表示非表示(is合併あり, is単一, is広域);
         div.getDdlHokokuNendo().setDataSource(get報告年度(システム日付));
@@ -146,6 +145,7 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
             set実行単位選択変更();
             set市町村選択ボタン活性();
             set作成日時();
+            set集計エリア();
         }
         if (実行単位選択過去の集計.equals(実行単位選択前)
                 && (実行単位選択集計のみ.equals(実行単位選択) || 実行単位選択集計後に印刷.equals(実行単位選択))) {
@@ -165,35 +165,8 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
                 div.getRadKoikiRengo().setSelectedKey(new RString("koiki"));
                 div.getBtnShichosonSelect().setDisabled(true);
             }
+            set集計エリア();
         }
-        div.getTxttxtShukeiNendo1().clearValue();
-        div.getTxtShukeiNendo2().clearValue();
-        div.getTxtShukeiNendo3().clearValue();
-        div.getTxtShukeiNendo4().clearValue();
-        div.getTxtShukeiNendo5().clearValue();
-        div.getTxtShukeiNendo6().clearValue();
-        div.getTxtShukeiNendo7().clearValue();
-        div.getTxtShukeiNendo8().clearValue();
-        div.getTxtShukeiFromYM1().clearValue();
-        div.getTxtShukeiFromYM2().clearValue();
-        div.getTxtShukeiFromYM3().clearValue();
-        div.getTxtShukeiFromYM4().clearValue();
-        div.getTxtShukeiFromYM5().clearValue();
-        div.setHiddenShukeiFromYM5(RString.EMPTY);
-        div.getTxtShukeiFromYM6().clearValue();
-        div.setHiddenShukeiFromYM6(RString.EMPTY);
-        div.getTxtShukeiFromYM7().clearValue();
-        div.getTxtShukeiFromYM8().clearValue();
-        div.getTxtShukeiToYM1().clearValue();
-        div.getTxtShukeiToYM2().clearValue();
-        div.getTxtShukeiToYM3().clearValue();
-        div.getTxtShukeiToYM4().clearValue();
-        div.getTxtShukeiToYM5().clearValue();
-        div.setHiddenShukeiToYM5(RString.EMPTY);
-        div.getTxtShukeiToYM6().clearValue();
-        div.setHiddenShukeiToYM6(RString.EMPTY);
-        div.getTxtShukeiToYM7().clearValue();
-        div.getTxtShukeiToYM8().clearValue();
         div.setHiddenJikkoTaniZen(実行単位選択);
     }
 
@@ -347,6 +320,7 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
             ShoriDateKanri 給付決定高額合算分処理日付管理情報, RDate システム日付) {
         RString 状況集計方法 = DbBusinessConfig.get(ConfigNameDBU.事業状況報告_一般状況集計方法, システム日付, SubGyomuCode.DBU介護統計報告);
         RString 給付集計方法 = DbBusinessConfig.get(ConfigNameDBU.事業状況報告_保険給付集計方法, システム日付, SubGyomuCode.DBU介護統計報告);
+        set集計エリア();
         if (様式12処理日付管理情報 != null) {
             div.getTxttxtShukeiNendo1().setValue(new FlexibleDate(様式12処理日付管理情報.get年度().toDateString().concat(集計)));
             div.getTxtShukeiFromYM1().setValue(様式12処理日付管理情報.get対象開始年月日());
@@ -393,7 +367,10 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
             div.getTxtSakuseiYMD8().setValue(new FlexibleDate(給付決定高額合算分処理日付管理情報.get基準日時().getDate().toDateString()));
             div.getTxtSakuseiTime8().setValue(給付決定高額合算分処理日付管理情報.get基準日時().getRDateTime().getTime());
         }
+        setチェックボックス状況14();
         setチェックボックス非活性();
+        set一般状況集計年月選択ラジオ非活性();
+        set保険給付決定集計年月選択ラジオ非活性();
     }
 
     /**
@@ -695,14 +672,17 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
             div.getRadGappeiShichoson().setDisplayNone(true);
             div.getRadKoikiRengo().setDisplayNone(true);
             div.getBtnShichosonSelect().setDisplayNone(true);
+            if (is合併あり) {
+                div.getRadGappeiShichoson().setDisplayNone(false);
+                div.getBtnShichosonSelect().setDisplayNone(false);
+                div.getRadKoikiRengo().setDisplayNone(true);
+                div.getBtnShichosonSelect().setDisabled(true);
+                div.getRadGappeiShichoson().setDisabled(true);
+            }
         } else if (is広域) {
             div.getRadGappeiShichoson().setDisplayNone(true);
             div.getBtnShichosonSelect().setDisabled(true);
             div.getRadKoikiRengo().setDisabled(true);
-        } else if (is合併あり) {
-            div.getRadKoikiRengo().setDisplayNone(true);
-            div.getBtnShichosonSelect().setDisabled(true);
-            div.getRadGappeiShichoson().setDisabled(true);
         }
     }
 
@@ -1344,6 +1324,37 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
             }
         }
         return new RString("2");
+    }
+
+    private void set集計エリア() {
+        div.getTxttxtShukeiNendo1().clearValue();
+        div.getTxtShukeiNendo2().clearValue();
+        div.getTxtShukeiNendo3().clearValue();
+        div.getTxtShukeiNendo4().clearValue();
+        div.getTxtShukeiNendo5().clearValue();
+        div.getTxtShukeiNendo6().clearValue();
+        div.getTxtShukeiNendo7().clearValue();
+        div.getTxtShukeiNendo8().clearValue();
+        div.getTxtShukeiFromYM1().clearValue();
+        div.getTxtShukeiFromYM2().clearValue();
+        div.getTxtShukeiFromYM3().clearValue();
+        div.getTxtShukeiFromYM4().clearValue();
+        div.getTxtShukeiFromYM5().clearValue();
+        div.setHiddenShukeiFromYM5(RString.EMPTY);
+        div.getTxtShukeiFromYM6().clearValue();
+        div.setHiddenShukeiFromYM6(RString.EMPTY);
+        div.getTxtShukeiFromYM7().clearValue();
+        div.getTxtShukeiFromYM8().clearValue();
+        div.getTxtShukeiToYM1().clearValue();
+        div.getTxtShukeiToYM2().clearValue();
+        div.getTxtShukeiToYM3().clearValue();
+        div.getTxtShukeiToYM4().clearValue();
+        div.getTxtShukeiToYM5().clearValue();
+        div.setHiddenShukeiToYM5(RString.EMPTY);
+        div.getTxtShukeiToYM6().clearValue();
+        div.setHiddenShukeiToYM6(RString.EMPTY);
+        div.getTxtShukeiToYM7().clearValue();
+        div.getTxtShukeiToYM8().clearValue();
     }
 
     private static class DateComparator implements Comparator<KeyValueDataSource>, Serializable {

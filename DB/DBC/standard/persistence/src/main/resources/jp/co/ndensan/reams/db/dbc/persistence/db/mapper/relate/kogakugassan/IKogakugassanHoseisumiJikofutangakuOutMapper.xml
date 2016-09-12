@@ -21,7 +21,7 @@
             AND "DbT3070"."isDeleted" = FALSE) AS "DbT3070KogakuGassanJikoFutanGaku"
         WHERE
             "DbT3070KogakuGassanJikoFutanGaku".rowNum = 1
-        AND "DbT3070KogakuGassanJikoFutanGaku"."sofuTaishoGaiFlag" <![CDATA[<>]]> #{介護合算_送付対象外}
+        AND ("DbT3070KogakuGassanJikoFutanGaku"."sofuTaishoGaiFlag" IS NULL OR "DbT3070KogakuGassanJikoFutanGaku"."sofuTaishoGaiFlag" <![CDATA[<>]]> #{介護合算_送付対象外})
         AND ("DbT3070KogakuGassanJikoFutanGaku"."hoseiZumi_SofuYM" IS NULL OR "DbT3070KogakuGassanJikoFutanGaku"."hoseiZumi_SofuYM" = ''
             OR "DbT3070KogakuGassanJikoFutanGaku"."saisoFlag" = #{国保連データ再送フラグ_再送要}
             <if test="saishoriKubun == 1">
@@ -121,11 +121,12 @@
         FROM "DbWT37K1KogakuGassanJikoFutanGaku"
         INNER JOIN "DbWT1001Hihokensha"
                ON "DbWT1001Hihokensha"."exRenban" = "DbWT37K1KogakuGassanJikoFutanGaku"."renban"
-        WHERE "DbWT37K1KogakuGassanJikoFutanGaku"."sofuJogaiFlag" = FALSE
+        WHERE ("DbWT37K1KogakuGassanJikoFutanGaku"."sofuJogaiFlag" = FALSE
           AND (("DbWT37K1KogakuGassanJikoFutanGaku"."batchHoseiJissiYMD" IS NULL
            OR  "DbWT37K1KogakuGassanJikoFutanGaku"."batchHoseiJissiYMD" = '')
            AND  ("DbWT37K1KogakuGassanJikoFutanGaku"."realHoseiJissiYMD" IS NULL
-           OR  "DbWT37K1KogakuGassanJikoFutanGaku"."realHoseiJissiYMD" = ''))
+           OR  "DbWT37K1KogakuGassanJikoFutanGaku"."realHoseiJissiYMD" = '')))
+         OR  "DbWT37K1KogakuGassanJikoFutanGaku"."sofuJogaiFlag" = TRUE
         ${出力順},
         "DbWT37K1KogakuGassanJikoFutanGaku"."hihokenshaNo",
         "DbWT37K1KogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo"

@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatena
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.KaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.IKaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.KaigoShikakuKihonDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -39,6 +40,8 @@ public class JukoKisambiTokushuTorokuDiv extends Panel {
     private KaigoShikakuKihonDiv ccdShikakuKihon;
     @JsonProperty("ccdAtenaInfo")
     private KaigoAtenaInfoDiv ccdAtenaInfo;
+    @JsonProperty("hdnShoKisaiHokenshaNo")
+    private RString hdnShoKisaiHokenshaNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -107,6 +110,24 @@ public class JukoKisambiTokushuTorokuDiv extends Panel {
     @JsonProperty("ccdAtenaInfo")
     public IKaigoAtenaInfoDiv getCcdAtenaInfo() {
         return ccdAtenaInfo;
+    }
+
+    /*
+     * gethdnShoKisaiHokenshaNo
+     * @return hdnShoKisaiHokenshaNo
+     */
+    @JsonProperty("hdnShoKisaiHokenshaNo")
+    public RString getHdnShoKisaiHokenshaNo() {
+        return hdnShoKisaiHokenshaNo;
+    }
+
+    /*
+     * sethdnShoKisaiHokenshaNo
+     * @param hdnShoKisaiHokenshaNo hdnShoKisaiHokenshaNo
+     */
+    @JsonProperty("hdnShoKisaiHokenshaNo")
+    public void setHdnShoKisaiHokenshaNo(RString hdnShoKisaiHokenshaNo) {
+        this.hdnShoKisaiHokenshaNo = hdnShoKisaiHokenshaNo;
     }
 
     /*

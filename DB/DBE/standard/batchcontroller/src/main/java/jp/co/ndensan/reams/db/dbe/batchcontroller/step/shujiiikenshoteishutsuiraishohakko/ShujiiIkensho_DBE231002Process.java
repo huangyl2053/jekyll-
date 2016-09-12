@@ -6,11 +6,11 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.shujiiikenshoteishutsuiraishohakko;
 
 import jp.co.ndensan.reams.db.dbe.business.core.iraishoikkatsuhakko.IraishoIkkatsuHakkoBusiness;
-import jp.co.ndensan.reams.db.dbe.business.report.ikenshokinyuyoshi.IkenshokinyuyoshiReport;
-import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity;
-import jp.co.ndensan.reams.db.dbe.entity.report.ikenshokinyuyoshi.IkenshokinyuyoshiReportSource;
+import jp.co.ndensan.reams.db.dbz.business.report.ikenshokinyuyoshi.IkenshokinyuyoshiReport;
+import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
+import jp.co.ndensan.reams.db.dbz.entity.report.ikenshokinyuyoshi.IkenshokinyuyoshiReportSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
@@ -34,7 +34,7 @@ public class ShujiiIkensho_DBE231002Process extends BatchProcessBase<ShujiiIkens
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hakkoichiranhyo.IShujiiIkenshoTeishutsuIraishoHakkoMapper."
             + "get主治医意見書提出依頼書発行");
-    private static final ReportId 帳票ID = ReportIdDBE.DBE231001.getReportId();
+    private static final ReportId 帳票ID = ReportIdDBZ.DBE231001.getReportId();
     private ShujiiIkenshoTeishutsuIraishoHakkoProcessParamter processParamter;
     @BatchWriter
     private BatchReportWriter<IkenshokinyuyoshiReportSource> batchWriter;
@@ -67,6 +67,6 @@ public class ShujiiIkensho_DBE231002Process extends BatchProcessBase<ShujiiIkens
                 バッチ出力条件リストの出力(市町村名,
                         出力ページ数,
                         導入団体コード,
-                        ReportIdDBE.DBE231001)).print();
+                        ReportIdDBZ.DBE231001.getReportId().value(), ReportIdDBZ.DBE231001.getReportName())).print();
     }
 }

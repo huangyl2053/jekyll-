@@ -12,13 +12,16 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0500011.DBC0
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0500011.KougakuKetteiTuutisyoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0500011.KougakuKetteiTuutisyoHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.kougakuketteituutisyo.KougakuKetteiTuutisyoManager;
-import jp.co.ndensan.reams.db.dbc.service.core.servicenokanribangourendou.ServiceNoKanribangouRendou2;
+import jp.co.ndensan.reams.db.dbc.service.core.kogakuservicehiketteitsuchishotan.KogakuServicehiKetteiTsuchishoTan;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
@@ -66,12 +69,14 @@ public class KougakuKetteiTuutisyo {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         } else {
             div.getKyoTuuKaigoAtena().initialize(key.get識別コード());
-            div.getKyoTuuKaigoNinnteiSikaku().initialize(new RString("209007"), key.get被保険者番号().value());
+            Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
+            LasdecCode 市町村コード = 地方公共団体.getLasdecCode_();
+            div.getKyoTuuKaigoNinnteiSikaku().initialize(市町村コード.value(), key.get被保険者番号().value());
             div.getKougakuKetteiTuutisyoBunsho().initialize(ReportIdDBC.DBC100007.getReportId(), FlexibleDate.getNowDate());
             div.getDdlServiceYearMonth().setDataSource(getHandler().onLoad_ddlServiceYearMonth(サービス提供年月リスト));
         }
         div.getTxtHakkoubi().setValue(RDate.getNowDate());
-        ServiceNoKanribangouRendou2 manager2 = ServiceNoKanribangouRendou2.createInstance();
+        KogakuServicehiKetteiTsuchishoTan manager2 = KogakuServicehiKetteiTsuchishoTan.createInstance();
         ReportId 帳票分類ID = new ReportId("DBC100007_KogakuKetteiTsuchiSho");
         ChohyoSeigyoHanyo 支払予定日印字有無 = manager2.load帳票制御汎用(帳票分類ID, new RString("支払予定日印字有無"));
         if (支払予定日印字有無.get設定値().equals(new RString("0"))) {

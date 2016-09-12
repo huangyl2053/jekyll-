@@ -255,9 +255,7 @@
         "dbT3072_sikyugakuKeisanKekkaRenrakuhyoSakuseiYMD"
         FROM CSV対象
         INNER JOIN
-        rgua."UaFt200FindShikibetsuTaisho"('1','','1','DB','0','','','','','','','','','','','0','0','','','','',
-        '','','0','0','','','','','','','','','','0','','1','1','1','1','0','0', '0','0','0','0', '0','','',
-        '','','','','','0','0','','','0','0','0','','','','','','','','','','','','','','','','','','', '{  }')AS "ShikibetsuTaisho"
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> AS "ShikibetsuTaisho"
         ON "ShikibetsuTaisho"."shikibetsuCode" = "dbT1001HihokenshaDaicho_shikibetsuCode"
         INNER JOIN rgua."UaFt250FindAtesaki"('DB','DBC','',FALSE,'','',TRUE ,TRUE ,TRUE ,TRUE ,'') AS "Atesaki"
         ON "Atesaki"."shikibetsuCode" = "dbT1001HihokenshaDaicho_shikibetsuCode"

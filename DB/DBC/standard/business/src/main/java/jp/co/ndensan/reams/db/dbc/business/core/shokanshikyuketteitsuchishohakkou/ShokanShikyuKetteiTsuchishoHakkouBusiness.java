@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.shokanshikyuketteitsuchishohakkou;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteitsuchishohakkou.ShokanShikyuKetteiTsuchishoHakkouEntity;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanHanteiKekka;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
  *
  * @reamsid_L DBC-5310-010 liuyl
  */
-public class ShokanShikyuKetteiTsuchishoHakkouBusiness {
+public class ShokanShikyuKetteiTsuchishoHakkouBusiness implements Serializable {
 
     private final ShokanShikyuKetteiTsuchishoHakkouEntity entity;
 

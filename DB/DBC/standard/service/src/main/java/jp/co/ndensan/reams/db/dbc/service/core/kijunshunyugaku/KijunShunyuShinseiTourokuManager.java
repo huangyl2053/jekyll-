@@ -19,10 +19,12 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -37,6 +39,9 @@ public class KijunShunyuShinseiTourokuManager {
     private final MapperProvider mapperProvider;
     private final DbT3116KijunShunyugakuTekiyoKanriDac dbT3116Dac;
     private final DbT3105SogoJigyoTaishoshaDac dbT3105Dac;
+    private final DbT4001JukyushaDaichoDac dbT4001Dac;
+    private static final RString STR_ONE = new RString("1");
+    private static final RString STR_履歴番号 = new RString("0000");
 
     /**
      * コンストラクタです。
@@ -45,6 +50,7 @@ public class KijunShunyuShinseiTourokuManager {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.dbT3116Dac = InstanceProvider.create(DbT3116KijunShunyugakuTekiyoKanriDac.class);
         this.dbT3105Dac = InstanceProvider.create(DbT3105SogoJigyoTaishoshaDac.class);
+        this.dbT4001Dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
     }
 
     /**
@@ -120,12 +126,14 @@ public class KijunShunyuShinseiTourokuManager {
     /**
      * 受給の取得のメソッドです。
      *
-     * @param parameter Map
+     * @param 被保険者番号 HihokenshaNo
+     * @param 世帯基準日 FlexibleDate
+     * @param 被保険者番号Flag boolean
      * @return 受給者台帳カウント
      */
-    public int get受給(Map<String, Object> parameter) {
-        IKijunShunyuShinseiTourokuMapper mapper = mapperProvider.create(IKijunShunyuShinseiTourokuMapper.class);
-        List<DbT4001JukyushaDaichoEntity> 受給者台帳List = mapper.get受給(parameter);
+    public int get受給(HihokenshaNo 被保険者番号, FlexibleDate 世帯基準日, boolean 被保険者番号Flag) {
+        List<DbT4001JukyushaDaichoEntity> 受給者台帳List = dbT4001Dac.get受給(被保険者番号,
+                世帯基準日, STR_ONE, STR_履歴番号, 被保険者番号Flag);
         if (受給者台帳List == null || 受給者台帳List.isEmpty()) {
             return 0;
         } else {

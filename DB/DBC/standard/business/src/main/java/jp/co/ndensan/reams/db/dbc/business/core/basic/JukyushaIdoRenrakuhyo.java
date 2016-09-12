@@ -900,6 +900,18 @@ public class JukyushaIdoRenrakuhyo
     }
 
     /**
+     * modify KogakuShikyuHanteiKekka
+     *
+     * @return ShokanMeisaiJushochiTokurei {@link ShokanMeisai}のクローン
+     */
+    public JukyushaIdoRenrakuhyo modified() {
+        DbT3001JukyushaIdoRenrakuhyoEntity addedEntity = this.toEntity();
+        addedEntity.setState(EntityDataState.Modified);
+        //TODO メッセージの検討
+        return new JukyushaIdoRenrakuhyo(addedEntity, id);
+    }
+
+    /**
      * {@link JukyushaIdoRenrakuhyo}のシリアライズ形式を提供します。
      *
      * @return {@link JukyushaIdoRenrakuhyo}のシリアライズ形式

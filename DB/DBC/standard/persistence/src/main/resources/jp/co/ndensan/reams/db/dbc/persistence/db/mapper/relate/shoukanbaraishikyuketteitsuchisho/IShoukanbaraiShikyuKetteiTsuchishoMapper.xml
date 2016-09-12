@@ -9,25 +9,28 @@
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shoukanbaraishikyuketteitsuchisho.ShoukanbaraiShikyuKetteiTsuchishoParameter"
             resultMap="resultMap_ShoukanbaraiShikyu" fetchSize="500">
         SELECT 
-           償還払支給判定結果.*,
-	   償還払支給申請.*
+           <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3036ShokanHanteiKekkaMapper.allColumns_DbT3036ShokanHanteiKekka" />,
+	   <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.allColumns_DbT3034ShokanShinsei" />
         FROM
-           rgdb."DbT3036ShokanHanteiKekka" AS 償還払支給判定結果,
-           rgdb."DbT3034ShokanShinsei" AS 償還払支給申請
+           rgdb."DbT3036ShokanHanteiKekka" AS "DbT3036ShokanHanteiKekka",
+           rgdb."DbT3034ShokanShinsei" AS "DbT3034ShokanShinsei"
         WHERE
-            償還払支給判定結果."hiHokenshaNo" = #{被保険者番号}
-	AND 償還払支給判定結果."serviceTeikyoYM" = #{サービス提供年月}
-	AND 償還払支給判定結果."seiriNo" = #{整理番号}
-	AND 償還払支給判定結果."hiHokenshaNo" = 償還払支給申請."hiHokenshaNo"
-	AND 償還払支給判定結果."serviceTeikyoYM" = 償還払支給申請."serviceTeikyoYM"
-	AND 償還払支給判定結果."seiriNo" = 償還払支給申請."seiriNo"
+            "DbT3036ShokanHanteiKekka"."hiHokenshaNo" = #{被保険者番号}
+	AND "DbT3036ShokanHanteiKekka"."serviceTeikyoYM" = #{サービス提供年月}
+	AND "DbT3036ShokanHanteiKekka"."seiriNo" = #{整理番号}
+	AND "DbT3036ShokanHanteiKekka"."hiHokenshaNo" = "DbT3034ShokanShinsei"."hiHokenshaNo"
+	AND "DbT3036ShokanHanteiKekka"."serviceTeikyoYM" = "DbT3034ShokanShinsei"."serviceTeikyoYM"
+	AND "DbT3036ShokanHanteiKekka"."seiriNo" = "DbT3034ShokanShinsei"."seiriNo"
    </select>  
    <resultMap id="resultMap_ShoukanbaraiShikyu" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shoukanbaraishikyuketteitsuchisho.ShoukanbaraiShikyuEntity" autoMapping="true">
-       <id property="償還払支給判定結果.hiHokenshaNo" column="hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-       <id property="償還払支給判定結果.serviceTeikyoYM" column="serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-       <id property="償還払支給判定結果.seiriNo" column="seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <association property="償還払支給判定結果" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3036ShokanHanteiKekkaMapper.ResultMap_DbT3036ShokanHanteiKekkaEntity"/>
-        <association property="償還払支給申請" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.ResultMap_DbT3034ShokanShinseiEntity"/>  
+       <id property="償還払支給判定結果.hiHokenshaNo" column="dbT3036ShokanHanteiKekka_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+       <id property="償還払支給判定結果.serviceTeikyoYM" column="dbT3036ShokanHanteiKekka_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+       <id property="償還払支給判定結果.seiriNo" column="dbT3036ShokanHanteiKekka_seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+       <id property="償還払支給申請.hiHokenshaNo" column="dbT3034ShokanShinsei_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+       <id property="償還払支給申請.serviceTeikyoYM" column="dbT3034ShokanShinsei_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+       <id property="償還払支給申請.seiriNo" column="dbT3034ShokanShinsei_seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+       <association property="償還払支給判定結果" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3036ShokanHanteiKekkaMapper.ResultMap_DbT3036ShokanHanteiKekkaEntity"/>
+       <association property="償還払支給申請" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.ResultMap_DbT3034ShokanShinseiEntity"/>  
     </resultMap>
     
     <select id="select被保険者宛名情報" resultOrdered="true"

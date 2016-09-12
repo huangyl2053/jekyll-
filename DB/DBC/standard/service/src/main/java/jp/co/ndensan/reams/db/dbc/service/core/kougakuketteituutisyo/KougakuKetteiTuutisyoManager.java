@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class KougakuKetteiTuutisyoManager {
 
     private final DbT3057KogakuShikyuHanteiKekkaDac 高額介護サービス費支給判定結果dac;
+    private static final int INDEX_4 = 4;
 
     /**
      * 初期化メソッドです。
@@ -43,7 +44,7 @@ public class KougakuKetteiTuutisyoManager {
     }
 
     /**
-     * サービス提供年月
+     * サービス提供年月を取得する。
      *
      * @param 被保険者番号 HihokenshaNo
      * @return List<FlexibleYearMonth>
@@ -59,6 +60,13 @@ public class KougakuKetteiTuutisyoManager {
         return returnList;
     }
 
+    /**
+     * 管理番号を取得する。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @return List<RString>
+     */
     public List<RString> get管理番号(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月) {
         List<Integer> intList = new ArrayList<>();
         List<RString> 管理番号リスト = new ArrayList<>();
@@ -70,20 +78,41 @@ public class KougakuKetteiTuutisyoManager {
         }
         for (Integer integer : intList) {
             RString 管理番号 = new RString(integer);
-            RString 管理番号padLeft = 管理番号.padLeft("0", 4);
+            RString 管理番号padLeft = 管理番号.padLeft("0", INDEX_4);
             管理番号リスト.add(管理番号padLeft);
         }
         return 管理番号リスト;
     }
 
+    /**
+     * 前回発行日を取得する。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @param 履歴番号 int
+     * @return FlexibleDate
+     */
     public FlexibleDate get前回発行日(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, int 履歴番号) {
         return 高額介護サービス費支給判定結果dac.select前回発行日(被保険者番号, サービス提供年月, 履歴番号).getKetteiTsuchishoSakuseiYMD();
     }
 
+    /**
+     * 更新データを読み込みする。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @param 履歴番号 int
+     * @return KogakuShikyuHanteiKekka
+     */
     public KogakuShikyuHanteiKekka 更新データ読み込み(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, int 履歴番号) {
         return new KogakuShikyuHanteiKekka(高額介護サービス費支給判定結果dac.select前回発行日(被保険者番号, サービス提供年月, 履歴番号));
     }
 
+    /**
+     * DB更新を行う。
+     *
+     * @param 画面情報 KogakuShikyuHanteiKekka
+     */
     @Transaction
     public void save(KogakuShikyuHanteiKekka 画面情報) {
         高額介護サービス費支給判定結果dac.save(画面情報.toEntity());

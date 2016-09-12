@@ -38,12 +38,12 @@ public class ChushutsuJokenDiv extends Panel {
     private TextBoxCode txtChikuCodeTo;
     @JsonProperty("btnChikuJushoCodeTo")
     private ButtonDialog btnChikuJushoCodeTo;
-    @JsonProperty("btnChikuGyoseikuCodeTo")
-    private ButtonDialog btnChikuGyoseikuCodeTo;
     @JsonProperty("txtChikuNameTo")
     private TextBox txtChikuNameTo;
     @JsonProperty("ShichosonSpace1")
     private Space ShichosonSpace1;
+    @JsonProperty("btnChikuGyoseikuCodeTo")
+    private ButtonDialog btnChikuGyoseikuCodeTo;
     @JsonProperty("InputMode")
     private RString InputMode;
     @JsonProperty("SearchLevel")
@@ -200,24 +200,6 @@ public class ChushutsuJokenDiv extends Panel {
     }
 
     /*
-     * getbtnChikuGyoseikuCodeTo
-     * @return btnChikuGyoseikuCodeTo
-     */
-    @JsonProperty("btnChikuGyoseikuCodeTo")
-    public ButtonDialog getBtnChikuGyoseikuCodeTo() {
-        return btnChikuGyoseikuCodeTo;
-    }
-
-    /*
-     * setbtnChikuGyoseikuCodeTo
-     * @param btnChikuGyoseikuCodeTo btnChikuGyoseikuCodeTo
-     */
-    @JsonProperty("btnChikuGyoseikuCodeTo")
-    public void setBtnChikuGyoseikuCodeTo(ButtonDialog btnChikuGyoseikuCodeTo) {
-        this.btnChikuGyoseikuCodeTo = btnChikuGyoseikuCodeTo;
-    }
-
-    /*
      * gettxtChikuNameTo
      * @return txtChikuNameTo
      */
@@ -251,6 +233,24 @@ public class ChushutsuJokenDiv extends Panel {
     @JsonProperty("ShichosonSpace1")
     public void setShichosonSpace1(Space ShichosonSpace1) {
         this.ShichosonSpace1 = ShichosonSpace1;
+    }
+
+    /*
+     * getbtnChikuGyoseikuCodeTo
+     * @return btnChikuGyoseikuCodeTo
+     */
+    @JsonProperty("btnChikuGyoseikuCodeTo")
+    public ButtonDialog getBtnChikuGyoseikuCodeTo() {
+        return btnChikuGyoseikuCodeTo;
+    }
+
+    /*
+     * setbtnChikuGyoseikuCodeTo
+     * @param btnChikuGyoseikuCodeTo btnChikuGyoseikuCodeTo
+     */
+    @JsonProperty("btnChikuGyoseikuCodeTo")
+    public void setBtnChikuGyoseikuCodeTo(ButtonDialog btnChikuGyoseikuCodeTo) {
+        this.btnChikuGyoseikuCodeTo = btnChikuGyoseikuCodeTo;
     }
 
     /*

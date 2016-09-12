@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD3020003;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Sep 09 11:39:51 CST 2016 
+ * Sat Sep 10 17:57:56 CST 2016 
  */
 
 
@@ -36,7 +36,11 @@ public class dgJikoKisambi_Row extends DataRow {
     private RString jikoKisaibiJiyu;
     private TextBoxFlexibleDate tokushuJikoKisaibi;
     private DropDownList tokushuJikoKisaibiJiyu;
-    private RString jikoKisambiKanri;
+    private RString hdnFukaNendo;
+    private RString minoKannoKubun;
+    private RString jikoKubun;
+    private RString hdnFuchoTokucho;
+    private RString hdnTsuchishoNo;
 
     public dgJikoKisambi_Row() {
         super();
@@ -52,7 +56,11 @@ public class dgJikoKisambi_Row extends DataRow {
         this.jikoKisaibiJiyu = RString.EMPTY;
         this.tokushuJikoKisaibi = new TextBoxFlexibleDate();
         this.tokushuJikoKisaibiJiyu = new DropDownList();
-        this.jikoKisambiKanri = RString.EMPTY;
+        this.hdnFukaNendo = RString.EMPTY;
+        this.minoKannoKubun = RString.EMPTY;
+        this.jikoKubun = RString.EMPTY;
+        this.hdnFuchoTokucho = RString.EMPTY;
+        this.hdnTsuchishoNo = RString.EMPTY;
         this.setOriginalData("fukaNendo", fukaNendo);
         this.setOriginalData("fuchoTokucho", fuchoTokucho);
         this.setOriginalData("tsuchishoNo", tsuchishoNo);
@@ -65,10 +73,14 @@ public class dgJikoKisambi_Row extends DataRow {
         this.setOriginalData("jikoKisaibiJiyu", jikoKisaibiJiyu);
         this.setOriginalData("tokushuJikoKisaibi", tokushuJikoKisaibi);
         this.setOriginalData("tokushuJikoKisaibiJiyu", tokushuJikoKisaibiJiyu);
-        this.setOriginalData("jikoKisambiKanri", jikoKisambiKanri);
+        this.setOriginalData("hdnFukaNendo", hdnFukaNendo);
+        this.setOriginalData("minoKannoKubun", minoKannoKubun);
+        this.setOriginalData("jikoKubun", jikoKubun);
+        this.setOriginalData("hdnFuchoTokucho", hdnFuchoTokucho);
+        this.setOriginalData("hdnTsuchishoNo", hdnTsuchishoNo);
     }
 
-    public dgJikoKisambi_Row(RString fukaNendo, RString fuchoTokucho, RString tsuchishoNo, RString ki, RString choteigaku, TextBoxFlexibleDate nokigen, RString shunyugaku, RString minogaku, TextBoxFlexibleDate jikoKisaibi, RString jikoKisaibiJiyu, TextBoxFlexibleDate tokushuJikoKisaibi, DropDownList tokushuJikoKisaibiJiyu, RString jikoKisambiKanri) {
+    public dgJikoKisambi_Row(RString fukaNendo, RString fuchoTokucho, RString tsuchishoNo, RString ki, RString choteigaku, TextBoxFlexibleDate nokigen, RString shunyugaku, RString minogaku, TextBoxFlexibleDate jikoKisaibi, RString jikoKisaibiJiyu, TextBoxFlexibleDate tokushuJikoKisaibi, DropDownList tokushuJikoKisaibiJiyu, RString hdnFukaNendo, RString minoKannoKubun, RString jikoKubun, RString hdnFuchoTokucho, RString hdnTsuchishoNo) {
         super();
         this.setOriginalData("fukaNendo", fukaNendo);
         this.setOriginalData("fuchoTokucho", fuchoTokucho);
@@ -82,7 +94,11 @@ public class dgJikoKisambi_Row extends DataRow {
         this.setOriginalData("jikoKisaibiJiyu", jikoKisaibiJiyu);
         this.setOriginalData("tokushuJikoKisaibi", tokushuJikoKisaibi);
         this.setOriginalData("tokushuJikoKisaibiJiyu", tokushuJikoKisaibiJiyu);
-        this.setOriginalData("jikoKisambiKanri", jikoKisambiKanri);
+        this.setOriginalData("hdnFukaNendo", hdnFukaNendo);
+        this.setOriginalData("minoKannoKubun", minoKannoKubun);
+        this.setOriginalData("jikoKubun", jikoKubun);
+        this.setOriginalData("hdnFuchoTokucho", hdnFuchoTokucho);
+        this.setOriginalData("hdnTsuchishoNo", hdnTsuchishoNo);
         this.fukaNendo = fukaNendo;
         this.fuchoTokucho = fuchoTokucho;
         this.tsuchishoNo = tsuchishoNo;
@@ -95,7 +111,11 @@ public class dgJikoKisambi_Row extends DataRow {
         this.jikoKisaibiJiyu = jikoKisaibiJiyu;
         this.tokushuJikoKisaibi = tokushuJikoKisaibi;
         this.tokushuJikoKisaibiJiyu = tokushuJikoKisaibiJiyu;
-        this.jikoKisambiKanri = jikoKisambiKanri;
+        this.hdnFukaNendo = hdnFukaNendo;
+        this.minoKannoKubun = minoKannoKubun;
+        this.jikoKubun = jikoKubun;
+        this.hdnFuchoTokucho = hdnFuchoTokucho;
+        this.hdnTsuchishoNo = hdnTsuchishoNo;
     }
 
     public dgJikoKisambi_Row(DataGridSetting gridSetting) {
@@ -112,7 +132,11 @@ public class dgJikoKisambi_Row extends DataRow {
         this.jikoKisaibiJiyu = RString.EMPTY;
         this.tokushuJikoKisaibi = new TextBoxFlexibleDate();
         this.tokushuJikoKisaibiJiyu = DropDownList.createInstance(gridSetting.getColumn("tokushuJikoKisaibiJiyu").getCellDetails());
-        this.jikoKisambiKanri = RString.EMPTY;
+        this.hdnFukaNendo = RString.EMPTY;
+        this.minoKannoKubun = RString.EMPTY;
+        this.jikoKubun = RString.EMPTY;
+        this.hdnFuchoTokucho = RString.EMPTY;
+        this.hdnTsuchishoNo = RString.EMPTY;
         this.setOriginalData("fukaNendo", fukaNendo);
         this.setOriginalData("fuchoTokucho", fuchoTokucho);
         this.setOriginalData("tsuchishoNo", tsuchishoNo);
@@ -125,7 +149,11 @@ public class dgJikoKisambi_Row extends DataRow {
         this.setOriginalData("jikoKisaibiJiyu", jikoKisaibiJiyu);
         this.setOriginalData("tokushuJikoKisaibi", tokushuJikoKisaibi);
         this.setOriginalData("tokushuJikoKisaibiJiyu", tokushuJikoKisaibiJiyu);
-        this.setOriginalData("jikoKisambiKanri", jikoKisambiKanri);
+        this.setOriginalData("hdnFukaNendo", hdnFukaNendo);
+        this.setOriginalData("minoKannoKubun", minoKannoKubun);
+        this.setOriginalData("jikoKubun", jikoKubun);
+        this.setOriginalData("hdnFuchoTokucho", hdnFuchoTokucho);
+        this.setOriginalData("hdnTsuchishoNo", hdnTsuchishoNo);
     }
 
     public RString getFukaNendo() {
@@ -176,8 +204,24 @@ public class dgJikoKisambi_Row extends DataRow {
         return tokushuJikoKisaibiJiyu;
     }
 
-    public RString getJikoKisambiKanri() {
-        return jikoKisambiKanri;
+    public RString getHdnFukaNendo() {
+        return hdnFukaNendo;
+    }
+
+    public RString getMinoKannoKubun() {
+        return minoKannoKubun;
+    }
+
+    public RString getJikoKubun() {
+        return jikoKubun;
+    }
+
+    public RString getHdnFuchoTokucho() {
+        return hdnFuchoTokucho;
+    }
+
+    public RString getHdnTsuchishoNo() {
+        return hdnTsuchishoNo;
     }
 
     public void setFukaNendo(RString fukaNendo) {
@@ -240,9 +284,29 @@ public class dgJikoKisambi_Row extends DataRow {
         this.tokushuJikoKisaibiJiyu = tokushuJikoKisaibiJiyu;
     }
 
-    public void setJikoKisambiKanri(RString jikoKisambiKanri) {
-        this.setOriginalData("jikoKisambiKanri", jikoKisambiKanri);
-        this.jikoKisambiKanri = jikoKisambiKanri;
+    public void setHdnFukaNendo(RString hdnFukaNendo) {
+        this.setOriginalData("hdnFukaNendo", hdnFukaNendo);
+        this.hdnFukaNendo = hdnFukaNendo;
+    }
+
+    public void setMinoKannoKubun(RString minoKannoKubun) {
+        this.setOriginalData("minoKannoKubun", minoKannoKubun);
+        this.minoKannoKubun = minoKannoKubun;
+    }
+
+    public void setJikoKubun(RString jikoKubun) {
+        this.setOriginalData("jikoKubun", jikoKubun);
+        this.jikoKubun = jikoKubun;
+    }
+
+    public void setHdnFuchoTokucho(RString hdnFuchoTokucho) {
+        this.setOriginalData("hdnFuchoTokucho", hdnFuchoTokucho);
+        this.hdnFuchoTokucho = hdnFuchoTokucho;
+    }
+
+    public void setHdnTsuchishoNo(RString hdnTsuchishoNo) {
+        this.setOriginalData("hdnTsuchishoNo", hdnTsuchishoNo);
+        this.hdnTsuchishoNo = hdnTsuchishoNo;
     }
 
     // </editor-fold>

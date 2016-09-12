@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.hanyolistkogakugassan;
 
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -21,7 +23,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class HanyoListKogakuGassanKeisanMybatisParameter
+public class HanyoListKogakuGassanKeisanMybatisParameter extends UaFt200FindShikibetsuTaishoParam
         implements IMyBatisParameter {
 
     private final RString 抽出区分;
@@ -44,6 +46,7 @@ public class HanyoListKogakuGassanKeisanMybatisParameter
      *
      * コンストラクタです
      *
+     * @param searchKey IShikibetsuTaishoPSMSearchKey
      * @param 抽出区分 RString
      * @param データ区分 RString
      * @param データ種類 RString
@@ -61,6 +64,7 @@ public class HanyoListKogakuGassanKeisanMybatisParameter
      * @param 介護合算_仮算定データ RString
      */
     public HanyoListKogakuGassanKeisanMybatisParameter(
+            IShikibetsuTaishoPSMSearchKey searchKey,
             RString 抽出区分,
             RString データ区分,
             RString データ種類,
@@ -77,6 +81,7 @@ public class HanyoListKogakuGassanKeisanMybatisParameter
             RString 出力項目,
             RString 介護合算_仮算定データ
     ) {
+        super(searchKey);
         this.抽出区分 = 抽出区分;
         this.データ区分 = データ区分;
         this.データ種類 = データ種類;

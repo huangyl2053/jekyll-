@@ -112,6 +112,7 @@ public class JigyobunShikyugakuCalcPanelHandler {
         div.getChushutsuJoken().getTxtZenkaiUketoriYM().setDisabled(false);
         div.getChushutsuJoken().getTxtZenkaiUketoriDate().setDisabled(false);
         div.getChushutsuJoken().getTxtZenkaiUketoriTime().setDisabled(false);
+        div.getChushutsuJoken().getTxtUketoriYM().setRequired(true);
         div.getChushutsuJoken().getTxtHihokenshaNo().setDisabled(true);
         div.getChushutsuJoken().getDdlNendo().setDisabled(true);
         div.getChushutsuJoken().getBtnHihokenshaSearch().setDisabled(true);
@@ -124,6 +125,7 @@ public class JigyobunShikyugakuCalcPanelHandler {
         div.getChushutsuJoken().getTxtZenkaiUketoriYM().setDisabled(true);
         div.getChushutsuJoken().getTxtZenkaiUketoriDate().setDisabled(true);
         div.getChushutsuJoken().getTxtZenkaiUketoriTime().setDisabled(true);
+        div.getChushutsuJoken().getTxtUketoriYM().setRequired(false);
         div.getChushutsuJoken().getTxtHihokenshaNo().setDisabled(false);
         div.getChushutsuJoken().getDdlNendo().setDisabled(false);
         div.getChushutsuJoken().getBtnHihokenshaSearch().setDisabled(false);

@@ -8,7 +8,7 @@
      SELECT
          <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanshikyuketteiin.IDbWT0001HihokenshaMapper.allColumns_DbWT0001Hihokensha" />
      FROM
-         rgdb."DbWT0001HihokenshaTemp"
+         "DbWT0001Hihokensha"
     </sql>
     <sql id="allColumns_DbWT0001Hihokensha">
         "meisaiRenban" as dbWT0001_連番,

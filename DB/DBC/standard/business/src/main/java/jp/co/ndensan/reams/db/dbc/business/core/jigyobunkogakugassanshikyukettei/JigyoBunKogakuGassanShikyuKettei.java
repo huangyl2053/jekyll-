@@ -41,6 +41,7 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.jusho.banchi.Banchi;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -95,12 +96,12 @@ public class JigyoBunKogakuGassanShikyuKettei {
      * @param entity entity
      * @param iKoza iKoza
      * @param 市町村名MasterMap 市町村名MasterMap
-     * @param 市町村名 市町村名
+     * @param association association
      * @param 連番 連番
      * @return JigyoBunKogakuGassanShikyuKetteibanAriEUCEntity
      */
     public JigyoBunKogakuGassanShikyuKetteibanAriEUCEntity set連番ありEUCEntity(JigyoBunKogakuGassanShikyuKetteiRelateEntity entity, IKoza iKoza,
-            Map<RString, KoseiShichosonMaster> 市町村名MasterMap, RString 市町村名, int 連番) {
+            Map<RString, KoseiShichosonMaster> 市町村名MasterMap, Association association, int 連番) {
         JigyoBunKogakuGassanShikyuKetteibanAriEUCEntity eucEntity = new JigyoBunKogakuGassanShikyuKetteibanAriEUCEntity();
         UaFt200FindShikibetsuTaishoEntity 宛名Entity = entity.get宛名Entity();
         if (宛名Entity != null) {
@@ -177,8 +178,8 @@ public class JigyoBunKogakuGassanShikyuKettei {
         if (市町村名MasterMap != null && !市町村名MasterMap.isEmpty()) {
             eucEntity.set市町村名(市町村名MasterMap.get(entity.get市町村コード()).get市町村名称());
         }
-        eucEntity.set保険者コード(processParameter.get保険者コード());
-        eucEntity.set保険者名(市町村名);
+        eucEntity.set保険者コード(association.get地方公共団体コード().value());
+        eucEntity.set保険者名(association.get市町村名());
         eucEntity.set空白(new RString(" "));
         eucEntity.set被保険者番号(entity.get被保険者番号());
         eucEntity.set資格取得事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getCodeShubetsu(), entity.get資格取得事由コード()));
@@ -362,11 +363,11 @@ public class JigyoBunKogakuGassanShikyuKettei {
      * @param entity entity
      * @param iKoza iKoza
      * @param 市町村名MasterMap 市町村名MasterMap
-     * @param 市町村名 市町村名
+     * @param association association
      * @return JigyoBunKogakuGassanShikyuKetteibanAriEUCEntity
      */
     public JigyoBunKogakuGassanShikyuKetteibanNashiEUCEntity set連番なしEUCEntity(JigyoBunKogakuGassanShikyuKetteiRelateEntity entity, IKoza iKoza,
-            Map<RString, KoseiShichosonMaster> 市町村名MasterMap, RString 市町村名) {
+            Map<RString, KoseiShichosonMaster> 市町村名MasterMap, Association association) {
         JigyoBunKogakuGassanShikyuKetteibanNashiEUCEntity eucEntity = new JigyoBunKogakuGassanShikyuKetteibanNashiEUCEntity();
         UaFt200FindShikibetsuTaishoEntity 宛名Entity = entity.get宛名Entity();
         if (宛名Entity != null) {
@@ -442,8 +443,8 @@ public class JigyoBunKogakuGassanShikyuKettei {
         if (市町村名MasterMap != null && !市町村名MasterMap.isEmpty()) {
             eucEntity.set市町村名(市町村名MasterMap.get(entity.get市町村コード()).get市町村名称());
         }
-        eucEntity.set保険者コード(processParameter.get保険者コード());
-        eucEntity.set保険者名(市町村名);
+        eucEntity.set保険者コード(association.get地方公共団体コード().value());
+        eucEntity.set保険者名(association.get市町村名());
         eucEntity.set空白(new RString(" "));
         eucEntity.set被保険者番号(entity.get被保険者番号());
         eucEntity.set資格取得事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getCodeShubetsu(), entity.get資格取得事由コード()));
@@ -876,59 +877,59 @@ public class JigyoBunKogakuGassanShikyuKettei {
         /**
          * 行政区コード
          */
-        行政区コード(new RString("0004"), new RString(""), new RString("ShikibetsuTaisho_gyoseikuCode")),
+        行政区コード(new RString("0004"), new RString(""), new RString("\"ShikibetsuTaisho_gyoseikuCode\"")),
         /**
          * 世帯コード
          */
-        世帯コード(new RString("0008"), new RString(""), new RString("ShikibetsuTaisho_setaiCode")),
+        世帯コード(new RString("0008"), new RString(""), new RString("\"ShikibetsuTaisho_setaiCode\"")),
         /**
          * 識別コード
          */
-        識別コード(new RString("0009"), new RString(""), new RString("ShikibetsuTaisho_shikibetsuCode")),
+        識別コード(new RString("0009"), new RString(""), new RString("\"ShikibetsuTaisho_shikibetsuCode\"")),
         /**
          * 氏名５０音カナ
          */
-        氏名５０音カナ(new RString("0010"), new RString(""), new RString("ShikibetsuTaisho_kanaShimei")),
+        氏名５０音カナ(new RString("0010"), new RString(""), new RString("\"ShikibetsuTaisho_kanaShimei\"")),
         /**
          * 市町村コード
          */
-        市町村コード(new RString("0016"), new RString(""), new RString("shichosonCode")),
+        市町村コード(new RString("0016"), new RString(""), new RString("\"shichosonCode\"")),
         /**
          * 証記載保険者番号
          *
          * TODO QA1685 出力順について、ご提供した資料「帳票出力順管理.xls」より、取得した出力順項目はDB検索SQLで下記の項目がない
          */
-        証記載保険者番号(new RString("0103"), new RString(""), new RString("shoKisaiHokenshaNo")),
+        証記載保険者番号(new RString("0103"), new RString(""), new RString("\"shoKisaiHokenshaNo\"")),
         /**
          * 被保険者番号
          */
-        被保険者番号(new RString("0104"), new RString(""), new RString("hihokenshaNo")),
+        被保険者番号(new RString("0104"), new RString(""), new RString("\"hihokenshaNo\"")),
         /**
          * 要介護度
          */
-        要介護度(new RString("0403"), new RString(""), new RString("yokaigoJotaiKubunCode")),
+        要介護度(new RString("0403"), new RString(""), new RString("\"yokaigoJotaiKubunCode\"")),
         /**
          * 認定開始日
          *
          * TODO QA1685 出力順について、ご提供した資料「帳票出力順管理.xls」より、取得した出力順項目はDB検索SQLで下記の項目がない
          */
-        認定開始日(new RString("0411"), new RString(""), new RString("ninteiKaishiYMD")),
+        認定開始日(new RString("0411"), new RString(""), new RString("\"ninteiKaishiYMD\"")),
         /**
          * 整理番号
          *
          * TODO QA1685 出力順について、ご提供した資料「帳票出力順管理.xls」より、取得した出力順項目はDB検索SQLで下記の項目がない
          */
-        整理番号(new RString("0305"), new RString(""), new RString("shikyuSeiriNo")),
+        整理番号(new RString("0305"), new RString(""), new RString("shikyuSeiriNo\"")),
         /**
          * 支払方法
          */
-        支払方法(new RString("0312"), new RString(""), new RString("shiharaiHohoKubun")),
+        支払方法(new RString("0312"), new RString(""), new RString("shiharaiHohoKubun\"")),
         /**
          * 通知書作成日
          *
          * TODO QA1685 出力順について、ご提供した資料「帳票出力順管理.xls」より、取得した出力順項目はDB検索SQLで下記の項目がない
          */
-        通知書作成日(new RString("0410"), new RString(""), new RString("tsuchishoSakuseiYMD"));
+        通知書作成日(new RString("0410"), new RString(""), new RString("tsuchishoSakuseiYMD\""));
 
         private final RString 項目ID;
         private final RString フォームフィールド名;

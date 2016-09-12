@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110080.KogakugassanSou
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110080.KogakugassanSoufuSetteiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110080.UpdateKogakuGassanMiSofuProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110080.UpdateKogakuGassanSofuProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110130.HokenshaKyufujissekiOutDoErrorProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110130.HokenshaKyufujissekiOutGetHihokenshaAtenaProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110130.HokenshaKyufujissekiOutListSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoInterfaceKanriKousinProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110080.DBC110080_KogakugassanHoseisumiJikofutangakuOutParameter;
@@ -44,7 +46,8 @@ public class DBC110080_KogakugassanHoseisumiJikofutangakuOut extends BatchFlowBa
 
     private static final String 送付対象データ取得 = "getFile";
     private static final String 高額合算自己負担額明細データの存在確認 = "meisaiKakunin";
-    private static final String 宛名情報取得 = "getAtena";
+    private static final String 被保険者_宛名情報取得 = "getHihokenshaAtena";
+    private static final String エラー登録 = "doError";
     private static final String 送付除外区分設定 = "soufuSettei";
     private static final String 送付ファイル作成 = "soufuFairuSakusei";
     private static final String 帳票出力_送付一覧表 = "gassanSofuReprot";
@@ -55,7 +58,6 @@ public class DBC110080_KogakugassanHoseisumiJikofutangakuOut extends BatchFlowBa
     private static final String 処理結果リスト作成 = "kokuhorenkyoutsuDoShoriKekkaListSakuseiProcess";
 
     private static final RString データがある = new RString("1");
-    private static final RString 被保険者_宛名情報取得BATCHID = new RString("HokenshaKyufujissekiOutHihokenshaAtenaFlow");
 
     private KogakugassanProcessParameter processParameter;
     private int レコード件数合計 = 0;
@@ -76,7 +78,8 @@ public class DBC110080_KogakugassanHoseisumiJikofutangakuOut extends BatchFlowBa
         executeStep(送付対象データ取得);
         if (データがある.equals((getResult(RString.class, new RString(送付対象データ取得), KogakugassanReadDataProcess.PARAMETER_OUT_FLOWFLAG)))) {
             executeStep(高額合算自己負担額明細データの存在確認);
-            executeStep(宛名情報取得);
+            executeStep(被保険者_宛名情報取得);
+            executeStep(エラー登録);
             executeStep(送付除外区分設定);
             executeStep(送付ファイル作成);
             レコード件数合計 = getResult(
@@ -113,13 +116,25 @@ public class DBC110080_KogakugassanHoseisumiJikofutangakuOut extends BatchFlowBa
     }
 
     /**
-     * 宛名情報取得操作です。
+     * 被保険者_宛名情報取得です。
      *
-     * @return IBatchFlowCommand
+     * @return HokenshaKyufujissekiOutGetHihokenshaAtenaProcess
      */
-    @Step(宛名情報取得)
-    protected IBatchFlowCommand callGetAtenaProcess() {
-        return otherBatchFlow(被保険者_宛名情報取得BATCHID, SubGyomuCode.DBC介護給付, null).define();
+    @Step(被保険者_宛名情報取得)
+    protected IBatchFlowCommand callGetHihokenshaAtenaProcess() {
+        return loopBatch(HokenshaKyufujissekiOutGetHihokenshaAtenaProcess.class).define();
+
+    }
+
+    /**
+     * エラー登録です。
+     *
+     * @return HokenshaKyufujissekiOutDoErrorProcess
+     */
+    @Step(エラー登録)
+    protected IBatchFlowCommand callDoErrorrProcess() {
+        return loopBatch(HokenshaKyufujissekiOutDoErrorProcess.class).define();
+
     }
 
     /**

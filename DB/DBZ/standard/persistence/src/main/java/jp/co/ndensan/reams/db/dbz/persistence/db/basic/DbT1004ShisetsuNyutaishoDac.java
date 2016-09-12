@@ -44,6 +44,7 @@ public class DbT1004ShisetsuNyutaishoDac implements ISaveable<DbT1004ShisetsuNyu
     @InjectSession
     private SqlSession session;
     private static final int INT_3 = 3;
+    private static final int INT_1 = 1;
 
     /**
      * 主キーで介護保険施設入退所を取得します。
@@ -198,5 +199,27 @@ public class DbT1004ShisetsuNyutaishoDac implements ISaveable<DbT1004ShisetsuNyu
                 order(by(taishoYMD, DESC)).
                 limit(INT_3).
                 toList(DbT1004ShisetsuNyutaishoEntity.class);
+    }
+
+    /**
+     * 施設入退所Orderの取得です。
+     *
+     * @param 識別コード 識別コード
+     * @param 台帳種別 台帳種別
+     * @return DbT1004ShisetsuNyutaishoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    public DbT1004ShisetsuNyutaishoEntity get施設入退所Order(ShikibetsuCode 識別コード,
+            RString 台帳種別) throws NullPointerException {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_識別コード.toString()));
+        requireNonNull(台帳種別, UrSystemErrorMessages.値がnull.getReplacedMessage("台帳種別"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT1004ShisetsuNyutaisho.class).
+                where(and(eq(DbT1004ShisetsuNyutaisho.shikibetsuCode, 識別コード),
+                                eq(DbT1004ShisetsuNyutaisho.daichoShubetsu, 台帳種別))).
+                order(by(DbT1004ShisetsuNyutaisho.rirekiNo)).
+                limit(INT_1).
+                toObject(DbT1004ShisetsuNyutaishoEntity.class);
     }
 }

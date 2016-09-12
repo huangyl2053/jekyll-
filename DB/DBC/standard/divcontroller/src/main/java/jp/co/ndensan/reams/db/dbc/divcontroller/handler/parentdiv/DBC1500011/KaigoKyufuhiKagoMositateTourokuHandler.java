@@ -218,7 +218,7 @@ public class KaigoKyufuhiKagoMositateTourokuHandler {
 
     private KagoMoshitate set新規DB出力データ(KagoMoshitate data) {
         data = data.createBuilderForEdit().set申立年月日(new FlexibleDate(div.getTxtMeisaiMoshitateDate().getValue()
-                .seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString())).build();
+                .seireki().separator(Separator.NONE).fillType(FillType.ZERO).toDateString())).build();
         RString 申立者区分コード = RString.EMPTY;
         RString 申立者区分 = div.getTxtMeisaiMoshitateshaKubun().getValue();
         for (KagoMoshitate_MoshitateshaKubun 申立者区分_ENUM : KagoMoshitate_MoshitateshaKubun.values()) {

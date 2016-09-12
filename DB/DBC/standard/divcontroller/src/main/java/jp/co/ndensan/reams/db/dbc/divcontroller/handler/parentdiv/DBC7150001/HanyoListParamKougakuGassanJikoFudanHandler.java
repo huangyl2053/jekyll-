@@ -33,8 +33,8 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
 
     private final HanyoListParamKougakuGassanJikoFudanDiv div;
     private static final RString 国保連取込情報 = new RString("国保連取込情報");
-    private static final RString 証明書計算処理時作成_申請書有 = new RString("証明書計算処理時作成(申請書有)");
-    private static final RString 証明書計算処理時作成_全受給者 = new RString("証明書計算処理時作成(全受給者)");
+    private static final RString 証明書計算処理時作成_申請書有 = new RString("証明書計算処理時作成（申請書有）");
+    private static final RString 証明書計算処理時作成_全受給者 = new RString("証明書計算処理時作成（全受給者）");
     private static final RString KEY0 = new RString("key0");
     private static final RString KEY1 = new RString("key1");
     private static final RString KEY2 = new RString("key2");
@@ -113,7 +113,7 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
             div.getRadDataShurui().setSelectedKey(KEY1);
             div.getTxtJikoFutangakuKakunin().setDisabled(true);
             div.getTxtHoseizumiJikoFutangaku().setDisabled(false);
-            div.getTxtJikoFutanngakuShoumeisho().setDisabled(false);
+            div.getTxtJikoFutanngakuShoumeisho().setDisabled(true);
         }
         if (証明書計算処理時作成_全受給者.equals(div.getDdlDetaSakuseiKubun().getSelectedValue())) {
             List<KeyValueDataSource> disabledItems = new ArrayList<>();

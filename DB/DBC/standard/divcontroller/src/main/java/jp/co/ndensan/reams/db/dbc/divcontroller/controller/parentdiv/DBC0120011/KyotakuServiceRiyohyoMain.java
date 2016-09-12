@@ -222,7 +222,7 @@ public class KyotakuServiceRiyohyoMain {
         HihokenshaNo 被保険者番号 = 対象者.get被保険者番号();
         RString 前排他キー = 排他キー.concat(被保険者番号.getColumnValue());
         LockingKey key = new LockingKey(前排他キー);
-        if (!RealInitialLocker.tryGetLock(key)) {
+        if (!RealInitialLocker.tryGetLock(key) && !ResponseHolder.isReRequest()) {
             throw new PessimisticLockingException();
         }
         RString 表示モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);

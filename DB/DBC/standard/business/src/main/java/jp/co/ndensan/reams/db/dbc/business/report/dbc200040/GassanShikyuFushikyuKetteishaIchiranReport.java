@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.dbc200040;
 
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteitsuchisho.KogakugassanShikyuKetteiTsuchiIchiran;
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc200040.GassanShikyuFushikyuKetteishaIchiranSource;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -21,7 +21,7 @@ public class GassanShikyuFushikyuKetteishaIchiranReport
         extends Report<GassanShikyuFushikyuKetteishaIchiranSource> {
 
     private final KogakugassanShikyuKetteiTsuchiIchiran 帳票出力対象データ;
-    private final RDateTime 作成日時;
+    private final YMDHMS 作成日時;
     private final boolean 集計Flag;
     private final GassanShikyuFushikyuKetteishaIchiranParameter paramter;
     private final RString 内部帳票文字切れ制御;
@@ -29,14 +29,14 @@ public class GassanShikyuFushikyuKetteishaIchiranReport
     /**
      *
      * @param 帳票出力対象データ KogakugassanShikyuKetteiTsuchiIchiran
-     * @param 作成日時 RDateTime
+     * @param 作成日時 YMDHMS
      * @param 集計Flag boolean
      * @param paramter GassanShikyuFushikyuKetteishaIchiranParameter
      * @param 内部帳票文字切れ制御 RString
      */
     public GassanShikyuFushikyuKetteishaIchiranReport(
             KogakugassanShikyuKetteiTsuchiIchiran 帳票出力対象データ,
-            RDateTime 作成日時, boolean 集計Flag, GassanShikyuFushikyuKetteishaIchiranParameter paramter,
+            YMDHMS 作成日時, boolean 集計Flag, GassanShikyuFushikyuKetteishaIchiranParameter paramter,
             RString 内部帳票文字切れ制御) {
         this.帳票出力対象データ = 帳票出力対象データ;
         this.作成日時 = 作成日時;
@@ -47,7 +47,12 @@ public class GassanShikyuFushikyuKetteishaIchiranReport
 
     @Override
     public void writeBy(ReportSourceWriter<GassanShikyuFushikyuKetteishaIchiranSource> writer) {
-        writeLine(writer, 帳票出力対象データ, 集計Flag);
+        if (集計Flag) {
+            writeLine(writer, null, true);
+            writeLine(writer, 帳票出力対象データ, true);
+        } else {
+            writeLine(writer, 帳票出力対象データ, false);
+        }
     }
 
     private void writeLine(ReportSourceWriter<GassanShikyuFushikyuKetteishaIchiranSource> writer,

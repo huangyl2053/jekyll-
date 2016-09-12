@@ -232,6 +232,10 @@ public enum ReportIdDBD {
      */
     DBD200014(new ReportId("DBD200014_HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiran"), new RString("訪問介護利用者負担額減額認定者リスト")),
     /**
+     * 訪問介護利用者負担額減額該当者リストの帳票ＩＤです。
+     */
+    DBD200003(new ReportId("DBD200014_HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiran"), new RString("訪問介護利用者負担額減額該当者リスト")),
+    /**
      * 負担限度額認定者リストの帳票ＩＤです。
      */
     DBD200016(new ReportId("DBD200016_FutanGendogakuNinteishaIchiran"), new RString("負担限度額認定者リスト")),

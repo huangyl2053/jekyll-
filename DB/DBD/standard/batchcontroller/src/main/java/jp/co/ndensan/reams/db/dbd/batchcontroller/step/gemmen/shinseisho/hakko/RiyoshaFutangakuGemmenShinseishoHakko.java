@@ -54,7 +54,6 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class RiyoshaFutangakuGemmenShinseishoHakko extends BatchProcessBase<RiyoshaFutangakuGemmenShinseishoHakkoEntity> {
 
     private static final RString TITLE = new RString("（特別療養老人ホームの要介護旧措置入所者に関する認定申請）");
-    private static final RString JOBNO_NAME = new RString("【ジョブ番号】");
     private static final RString HAKKONICHI = new RString("【発行日】");
     private static final RString SHUTSURYOKUJUN = new RString("【出力順】");
     private static final RString なし = new RString("なし");
@@ -121,10 +120,10 @@ public class RiyoshaFutangakuGemmenShinseishoHakko extends BatchProcessBase<Riyo
         RiyoshaFutangakuGengakuMenjyoShinseishoBodyItem bodyItem = new RiyoshaFutangakuGengakuMenjyoShinseishoBodyItem(
                 get認証者(),
                 entity.is旧措置者フラグ() ? TITLE : RString.EMPTY,
-                entity.get被保険者番号().value(),
                 kojin.get名称().getKana().value(),
-                保険者番号.value(),
                 kojin.get名称().getName().value(),
+                保険者番号.value(),
+                entity.get被保険者番号().value(),
                 get被保険者生年月日(kojin),
                 kojin.get性別().getName().getShortJapanese(),
                 kojin.get住所().get郵便番号().getEditedYubinNo(),
@@ -142,7 +141,6 @@ public class RiyoshaFutangakuGemmenShinseishoHakko extends BatchProcessBase<Riyo
 
     private void バッチ出力条件リストの出力() {
         RStringBuilder builder = new RStringBuilder();
-        builder.append(JOBNO_NAME);
         builder.append(RString.HALF_SPACE);
         builder.append(JobContextHolder.getJobId());
         RString ジョブ番号 = builder.toRString();
@@ -175,14 +173,18 @@ public class RiyoshaFutangakuGemmenShinseishoHakko extends BatchProcessBase<Riyo
     }
 
     private RString get認証者() {
+        RDate 発行日 = RDate.getNowDate();
+        if (!processParamter.get発行日().isEmpty()) {
+            発行日 = new RDate(
+                    processParamter.get発行日().getYearValue(),
+                    processParamter.get発行日().getMonthValue(),
+                    processParamter.get発行日().getDayValue());
+        }
         return NinshoshaSourceBuilderFactory.createInstance(
                 ninshosha,
                 association,
                 reportSourceWriter.getImageFolderPath(),
-                new RDate(
-                        processParamter.get発行日().getYearValue(),
-                        processParamter.get発行日().getMonthValue(),
-                        processParamter.get発行日().getDayValue()))
+                発行日)
                 .buildSource().ninshoshaYakushokuMei;
     }
 

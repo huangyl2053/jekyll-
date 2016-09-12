@@ -5,12 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0070011;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.sofujoho.SofujohoBusiness;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.sofujoho.SofujohoMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0070011.SofujohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0070011.SofujohoHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0070011.SofujohoValidationHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0070011.dgSofuIchiran_Row;
 import jp.co.ndensan.reams.db.dbc.service.core.sofujoho.KagoMousitatesyoSouhuJyohouFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
@@ -69,6 +71,8 @@ public class Sofujoho {
                 onClick_btnSearch(過誤申立書情報, 経過措置, 総合事業費過誤申立書情報);
         ValidationMessageControlPairs validPairs1 = getValidationHandler(div).過誤申立送付情報照会(情報Business);
         if (validPairs1.iterator().hasNext()) {
+            List<dgSofuIchiran_Row> rowList = new ArrayList<>();
+            div.getDgSofuIchiran().setDataSource(rowList);
             return ResponseData.of(div).addValidationMessages(validPairs1).respond();
         }
         return ResponseData.of(div).respond();
@@ -89,6 +93,8 @@ public class Sofujoho {
                 onClick_btnSearch(過誤申立書情報, 経過措置, 総合事業費過誤申立書情報);
         ValidationMessageControlPairs validPairs1 = getValidationHandler(div).過誤申立送付情報照会(情報Business);
         if (validPairs1.iterator().hasNext()) {
+            List<dgSofuIchiran_Row> rowList = new ArrayList<>();
+            div.getDgSofuIchiran().setDataSource(rowList);
             return ResponseData.of(div).addValidationMessages(validPairs1).respond();
         }
         return ResponseData.of(div).respond();

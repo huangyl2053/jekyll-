@@ -143,7 +143,7 @@ public class TokuchiJissekiKanriListSakuseiProcess extends BatchProcessBase<Toku
         builder.append(new RString(parameter.get年月範囲の終了().toString()));
         出力条件.add(builder.toRString());
 
-        if (!parameter.get事業者番号().isNullOrEmpty()) {
+        if (parameter.get事業者番号() != null && !parameter.get事業者番号().isEmpty()) {
             builder.append(事業者番号);
             builder.append(new RString(parameter.get事業者番号().toString()));
         }

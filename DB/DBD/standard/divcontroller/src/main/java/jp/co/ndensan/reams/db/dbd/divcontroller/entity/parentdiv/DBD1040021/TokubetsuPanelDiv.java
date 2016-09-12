@@ -34,6 +34,32 @@ public class TokubetsuPanelDiv extends Panel {
     private ChohyoShutsuryokujunDiv ccdChohyoShutsuryokujun;
     @JsonProperty("hiddenJigyoshaMode")
     private RString hiddenJigyoshaMode;
+    @JsonProperty("HdnChikuShubetsuName")
+    private RString HdnChikuShubetsuName;
+    @JsonProperty("HdnIsMultiSelected")
+    private RString HdnIsMultiSelected;
+    @JsonProperty("HdnTitle")
+    private RString HdnTitle;
+    @JsonProperty("HdnInputCode")
+    private RString HdnInputCode;
+    @JsonProperty("HdnLasdecCode")
+    private RString HdnLasdecCode;
+    @JsonProperty("HdnRenban")
+    private RString HdnRenban;
+    @JsonProperty("HdnOutputCode")
+    private RString HdnOutputCode;
+    @JsonProperty("HdnName")
+    private RString HdnName;
+    @JsonProperty("HdnKanaName")
+    private RString HdnKanaName;
+    @JsonProperty("HdnYubinNo")
+    private RString HdnYubinNo;
+    @JsonProperty("HdnShogakkokuCode")
+    private RString HdnShogakkokuCode;
+    @JsonProperty("HdnChugakkokuCode")
+    private RString HdnChugakkokuCode;
+    @JsonProperty("HdnTohyokuCode")
+    private RString HdnTohyokuCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -84,6 +110,240 @@ public class TokubetsuPanelDiv extends Panel {
     @JsonProperty("hiddenJigyoshaMode")
     public void setHiddenJigyoshaMode(RString hiddenJigyoshaMode) {
         this.hiddenJigyoshaMode = hiddenJigyoshaMode;
+    }
+
+    /*
+     * getHdnChikuShubetsuName
+     * @return HdnChikuShubetsuName
+     */
+    @JsonProperty("HdnChikuShubetsuName")
+    public RString getHdnChikuShubetsuName() {
+        return HdnChikuShubetsuName;
+    }
+
+    /*
+     * setHdnChikuShubetsuName
+     * @param HdnChikuShubetsuName HdnChikuShubetsuName
+     */
+    @JsonProperty("HdnChikuShubetsuName")
+    public void setHdnChikuShubetsuName(RString HdnChikuShubetsuName) {
+        this.HdnChikuShubetsuName = HdnChikuShubetsuName;
+    }
+
+    /*
+     * getHdnIsMultiSelected
+     * @return HdnIsMultiSelected
+     */
+    @JsonProperty("HdnIsMultiSelected")
+    public RString getHdnIsMultiSelected() {
+        return HdnIsMultiSelected;
+    }
+
+    /*
+     * setHdnIsMultiSelected
+     * @param HdnIsMultiSelected HdnIsMultiSelected
+     */
+    @JsonProperty("HdnIsMultiSelected")
+    public void setHdnIsMultiSelected(RString HdnIsMultiSelected) {
+        this.HdnIsMultiSelected = HdnIsMultiSelected;
+    }
+
+    /*
+     * getHdnTitle
+     * @return HdnTitle
+     */
+    @JsonProperty("HdnTitle")
+    public RString getHdnTitle() {
+        return HdnTitle;
+    }
+
+    /*
+     * setHdnTitle
+     * @param HdnTitle HdnTitle
+     */
+    @JsonProperty("HdnTitle")
+    public void setHdnTitle(RString HdnTitle) {
+        this.HdnTitle = HdnTitle;
+    }
+
+    /*
+     * getHdnInputCode
+     * @return HdnInputCode
+     */
+    @JsonProperty("HdnInputCode")
+    public RString getHdnInputCode() {
+        return HdnInputCode;
+    }
+
+    /*
+     * setHdnInputCode
+     * @param HdnInputCode HdnInputCode
+     */
+    @JsonProperty("HdnInputCode")
+    public void setHdnInputCode(RString HdnInputCode) {
+        this.HdnInputCode = HdnInputCode;
+    }
+
+    /*
+     * getHdnLasdecCode
+     * @return HdnLasdecCode
+     */
+    @JsonProperty("HdnLasdecCode")
+    public RString getHdnLasdecCode() {
+        return HdnLasdecCode;
+    }
+
+    /*
+     * setHdnLasdecCode
+     * @param HdnLasdecCode HdnLasdecCode
+     */
+    @JsonProperty("HdnLasdecCode")
+    public void setHdnLasdecCode(RString HdnLasdecCode) {
+        this.HdnLasdecCode = HdnLasdecCode;
+    }
+
+    /*
+     * getHdnRenban
+     * @return HdnRenban
+     */
+    @JsonProperty("HdnRenban")
+    public RString getHdnRenban() {
+        return HdnRenban;
+    }
+
+    /*
+     * setHdnRenban
+     * @param HdnRenban HdnRenban
+     */
+    @JsonProperty("HdnRenban")
+    public void setHdnRenban(RString HdnRenban) {
+        this.HdnRenban = HdnRenban;
+    }
+
+    /*
+     * getHdnOutputCode
+     * @return HdnOutputCode
+     */
+    @JsonProperty("HdnOutputCode")
+    public RString getHdnOutputCode() {
+        return HdnOutputCode;
+    }
+
+    /*
+     * setHdnOutputCode
+     * @param HdnOutputCode HdnOutputCode
+     */
+    @JsonProperty("HdnOutputCode")
+    public void setHdnOutputCode(RString HdnOutputCode) {
+        this.HdnOutputCode = HdnOutputCode;
+    }
+
+    /*
+     * getHdnName
+     * @return HdnName
+     */
+    @JsonProperty("HdnName")
+    public RString getHdnName() {
+        return HdnName;
+    }
+
+    /*
+     * setHdnName
+     * @param HdnName HdnName
+     */
+    @JsonProperty("HdnName")
+    public void setHdnName(RString HdnName) {
+        this.HdnName = HdnName;
+    }
+
+    /*
+     * getHdnKanaName
+     * @return HdnKanaName
+     */
+    @JsonProperty("HdnKanaName")
+    public RString getHdnKanaName() {
+        return HdnKanaName;
+    }
+
+    /*
+     * setHdnKanaName
+     * @param HdnKanaName HdnKanaName
+     */
+    @JsonProperty("HdnKanaName")
+    public void setHdnKanaName(RString HdnKanaName) {
+        this.HdnKanaName = HdnKanaName;
+    }
+
+    /*
+     * getHdnYubinNo
+     * @return HdnYubinNo
+     */
+    @JsonProperty("HdnYubinNo")
+    public RString getHdnYubinNo() {
+        return HdnYubinNo;
+    }
+
+    /*
+     * setHdnYubinNo
+     * @param HdnYubinNo HdnYubinNo
+     */
+    @JsonProperty("HdnYubinNo")
+    public void setHdnYubinNo(RString HdnYubinNo) {
+        this.HdnYubinNo = HdnYubinNo;
+    }
+
+    /*
+     * getHdnShogakkokuCode
+     * @return HdnShogakkokuCode
+     */
+    @JsonProperty("HdnShogakkokuCode")
+    public RString getHdnShogakkokuCode() {
+        return HdnShogakkokuCode;
+    }
+
+    /*
+     * setHdnShogakkokuCode
+     * @param HdnShogakkokuCode HdnShogakkokuCode
+     */
+    @JsonProperty("HdnShogakkokuCode")
+    public void setHdnShogakkokuCode(RString HdnShogakkokuCode) {
+        this.HdnShogakkokuCode = HdnShogakkokuCode;
+    }
+
+    /*
+     * getHdnChugakkokuCode
+     * @return HdnChugakkokuCode
+     */
+    @JsonProperty("HdnChugakkokuCode")
+    public RString getHdnChugakkokuCode() {
+        return HdnChugakkokuCode;
+    }
+
+    /*
+     * setHdnChugakkokuCode
+     * @param HdnChugakkokuCode HdnChugakkokuCode
+     */
+    @JsonProperty("HdnChugakkokuCode")
+    public void setHdnChugakkokuCode(RString HdnChugakkokuCode) {
+        this.HdnChugakkokuCode = HdnChugakkokuCode;
+    }
+
+    /*
+     * getHdnTohyokuCode
+     * @return HdnTohyokuCode
+     */
+    @JsonProperty("HdnTohyokuCode")
+    public RString getHdnTohyokuCode() {
+        return HdnTohyokuCode;
+    }
+
+    /*
+     * setHdnTohyokuCode
+     * @param HdnTohyokuCode HdnTohyokuCode
+     */
+    @JsonProperty("HdnTohyokuCode")
+    public void setHdnTohyokuCode(RString HdnTohyokuCode) {
+        this.HdnTohyokuCode = HdnTohyokuCode;
     }
 
     /*
@@ -250,16 +510,6 @@ public class TokubetsuPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnChikuGyoseikuCodeTo() {
-        return this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getChushutsuJoken4().getChushutsuJoken().getBtnChikuGyoseikuCodeTo();
-    }
-
-    @JsonIgnore
-    public void  setBtnChikuGyoseikuCodeTo(ButtonDialog btnChikuGyoseikuCodeTo) {
-        this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getChushutsuJoken4().getChushutsuJoken().setBtnChikuGyoseikuCodeTo(btnChikuGyoseikuCodeTo);
-    }
-
-    @JsonIgnore
     public TextBox getTxtChikuNameTo() {
         return this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getChushutsuJoken4().getChushutsuJoken().getTxtChikuNameTo();
     }
@@ -277,6 +527,16 @@ public class TokubetsuPanelDiv extends Panel {
     @JsonIgnore
     public void  setShichosonSpace1(Space ShichosonSpace1) {
         this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getChushutsuJoken4().getChushutsuJoken().setShichosonSpace1(ShichosonSpace1);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnChikuGyoseikuCodeTo() {
+        return this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getChushutsuJoken4().getChushutsuJoken().getBtnChikuGyoseikuCodeTo();
+    }
+
+    @JsonIgnore
+    public void  setBtnChikuGyoseikuCodeTo(ButtonDialog btnChikuGyoseikuCodeTo) {
+        this.getTokubetsuTiikiKasannKeigennJiqsekiKannriRisuto().getChushutsuJoken4().getChushutsuJoken().setBtnChikuGyoseikuCodeTo(btnChikuGyoseikuCodeTo);
     }
 
     @JsonIgnore

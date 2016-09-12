@@ -310,6 +310,9 @@ public class KijunShunyuShinseiTouroku {
         }
         if (チェック済み.equals(div.getHdnFlag1()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             div.setHdnFlag1(チェックなし);
+            div.setHdnFlag2(チェックなし);
+            div.setHdnFlag3(チェックなし);
+            div.setHdnFlag4(チェックなし);
             return ResponseData.of(div).respond();
         }
 
@@ -325,18 +328,25 @@ public class KijunShunyuShinseiTouroku {
         if (!チェック済み.equals(div.getHdnFlag2())) {
             validPairs = getValidationHandler(div).世帯再算出Validate();
             if (validPairs.iterator().hasNext()) {
+                div.setHdnFlag2(チェック済み);
                 return ResponseData.of(div).addValidationMessages(validPairs).respond();
             }
         }
 
-        validPairs = getValidationHandler(div).受給者事業対象者Validate();
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        if (!チェック済み.equals(div.getHdnFlag3())) {
+            validPairs = getValidationHandler(div).受給者事業対象者Validate();
+            if (validPairs.iterator().hasNext()) {
+                div.setHdnFlag3(チェック済み);
+                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            }
         }
 
-        validPairs = getValidationHandler(div).算定基準額Validate();
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        if (!チェック済み.equals(div.getHdnFlag4())) {
+            validPairs = getValidationHandler(div).算定基準額Validate();
+            if (validPairs.iterator().hasNext()) {
+                div.setHdnFlag4(チェック済み);
+                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            }
         }
 
         Decimal 総収入額 = div.getMeisai().getTxtTotalShunyu().getValue();

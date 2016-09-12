@@ -47,7 +47,13 @@ public class DBC180030_KanendoRiyoshaFutanwariaiHanteiParameter extends BatchPar
     @BatchParameter(key = KEY_処理日時, name = "処理日時")
     private RDateTime 処理日時;
     @BatchParameter(key = KEY_抽出回数, name = "抽出回数")
-    private Integer 抽出回数;
+    private int 抽出回数;
+
+    /**
+     * コンストラクタです。
+     */
+    public DBC180030_KanendoRiyoshaFutanwariaiHanteiParameter() {
+    }
 
     /**
      * processのパラメータを生成します。
@@ -62,7 +68,8 @@ public class DBC180030_KanendoRiyoshaFutanwariaiHanteiParameter extends BatchPar
             parameter.setKijunbi(new FlexibleDate(基準日.toDateString()));
         }
         if (1 < ループ回数) {
-            parameter.setKijunbi(new FlexibleDate(基準日.toDateString()));
+            RString 前回終了date = 対象年度.minusYear(ループ回数 - 1).toDateString().concat(new RString("0731"));
+            parameter.setKijunbi(new FlexibleDate(前回終了date));
         }
         parameter.setShoriKubun(new RString("2"));
         parameter.setChushutsuKaishiNichiji(抽出開始日時);

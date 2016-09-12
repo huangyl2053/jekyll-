@@ -144,7 +144,7 @@ public class IdoufunRiyoushyafutanKanendoMainHandler {
     }
 
     private RString getパターン141(YMDHMS 日時) {
-        if (!日時.isEmpty()) {
+        if (日時 != null && !日時.isEmpty()) {
             return strToTime(日時.toDateString()).toFormattedTimeString(DisplayTimeFormat.HH_mm_ss);
         }
         return RString.EMPTY;

@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0410021;
 
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120160.DBC120160_KagoKetteiHokenshaInParameter;
+import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410021.TsuchishoJoho171Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoBunruiKanri;
@@ -55,6 +56,12 @@ public class TsuchishoJoho171 {
         }
         if (div.getCcdKokurenJohoTorikomi().get出力順ID() != null) {
             parameter.set出力順ID(new RString(div.getCcdKokurenJohoTorikomi().get出力順ID()));
+        }
+        RString 再処理区分 = div.getCcdKokurenJohoTorikomi().get再処理区分();
+        if (SaiShoriKubun.再処理.get名称().equals(再処理区分)) {
+            parameter.set再処理区分(SaiShoriKubun.再処理);
+        } else {
+            parameter.set再処理区分(SaiShoriKubun.空白);
         }
         return ResponseData.of(parameter).respond();
     }

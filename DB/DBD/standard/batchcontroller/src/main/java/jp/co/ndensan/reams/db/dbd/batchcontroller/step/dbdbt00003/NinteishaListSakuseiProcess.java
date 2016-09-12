@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbdbt00003;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd200014.HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReport;
 import jp.co.ndensan.reams.db.dbd.business.report.dbdbt00003.NinteishaListSakuseiProcessProperty;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.HihokenshaKeizaiJokyo;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TaishoKikan;
@@ -15,6 +16,7 @@ import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt00003.NinteishaList
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00003.KakuninListCsvEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00003.NinteishaListSakuseiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00003.SetaiInRisutoEntity;
+import jp.co.ndensan.reams.db.dbd.entity.report.dbd200014.HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
 import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
@@ -39,6 +41,8 @@ import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFa
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -60,6 +64,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
+import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
@@ -106,16 +111,20 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
     private boolean 項目名付加;
 
     private NinteishaListSakuseiProcessParameter parameter;
+
+    private RString 出力順;
+    private IOutputOrder outputOrder;
+
     @BatchWriter
-    //TODO
-//    private BatchReportWriter<> batchReportWrite;
+    private BatchReportWriter<HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource> batchReportWrite;
+    private ReportSourceWriter<HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource> reportSourceWriter;
+
     private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.riyoshafutangakugengakunintei"
-            + ".IRiyoshafutangakuGengakuNintei.get訪問介護利用者負担額減額認定者リスト");
+            + ".IRiyoshafutangakuGengakuNinteiMapper.get訪問介護利用者負担額減額認定者リスト");
 
     @Override
     protected void initialize() {
         association = AssociationFinderFactory.createInstance().getAssociation();
-//   batchReportWrite = BatchReportFactory.createBatchReportWriter(parameter.get帳票ID(), SubGyomuCode.DBD介護受給);
         personalDataList = new ArrayList<>();
     }
 
@@ -127,15 +136,19 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
         key.set基準日(parameter.get基準日());
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         RString psmShikibetsuTaisho = new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
-        IOutputOrder outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance()
+        outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance()
                 .get出力順(SubGyomuCode.DBD介護受給, REPORTID, REAMSLOGINID, parameter.get改頁出力順ID());
-        RString 出力順 = MyBatisOrderByClauseCreator
-                .create(NinteishaListSakuseiProcessProperty.DBD200003_HomonKaigoRiyoshaFutangakuGengakuGaitoshaIchiran.class, outputOrder);
+        if (outputOrder != null) {
+            出力順 = MyBatisOrderByClauseCreator
+                    .create(NinteishaListSakuseiProcessProperty.DBD200003_HomonKaigoRiyoshaFutangakuGengakuGaitoshaIchiran.class, outputOrder);
+        }
         return new BatchDbReader(MAPPERPATH, parameter.toNinteishaListSakuseiMybatisParameter(psmShikibetsuTaisho, 出力順));
     }
 
     @Override
     protected void createWriter() {
+        batchReportWrite = BatchReportFactory.createBatchReportWriter(parameter.get帳票ID().value()).create();
+        reportSourceWriter = new ReportSourceWriter<>(batchReportWrite);
 
         if (TargetList.認定者リスト.getコード().equals(parameter.get対象リスト().getコード())) {
             manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID_認定者, UzUDE0831EucAccesslogFileType.Csv);
@@ -155,11 +168,15 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
 
     @Override
     protected void process(NinteishaListSakuseiEntity t) {
+        HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReport find
+                = new HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReport(parameter.get帳票作成日時(),
+                        parameter.get対象リスト(), t, association, outputOrder);
+        find.writeBy(reportSourceWriter);
+
         personalDataList.add(toPersonalData(t));
         KakuninListCsvEntity eucCsvEntity = new KakuninListCsvEntity();
         setEucCsvEntity(eucCsvEntity, t);
         eucCsvWriter.writeLine(eucCsvEntity);
-
     }
 
     private PersonalData toPersonalData(NinteishaListSakuseiEntity entity) {

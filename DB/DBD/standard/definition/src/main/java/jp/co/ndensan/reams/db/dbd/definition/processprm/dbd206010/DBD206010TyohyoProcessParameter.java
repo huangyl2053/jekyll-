@@ -32,6 +32,7 @@ public class DBD206010TyohyoProcessParameter implements IBatchProcessParameter {
     private RString 資格喪失者選択;
     private RString 事業者番号;
     private Long 改頁出力順ID;
+    private Long 出力順ID;
 
     /**
      *

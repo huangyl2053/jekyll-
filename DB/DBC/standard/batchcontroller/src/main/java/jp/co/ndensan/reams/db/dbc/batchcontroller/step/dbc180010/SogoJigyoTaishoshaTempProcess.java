@@ -33,6 +33,7 @@ public class SogoJigyoTaishoshaTempProcess extends BatchProcessBase<SogoJigyoTai
 
     @BatchWriter
     private IBatchTableWriter tempDbWriter;
+    @BatchWriter
     private IBatchTableWriter tempResultListDbWriter;
 
     @Override

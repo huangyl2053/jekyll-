@@ -5,14 +5,16 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd200017;
 
-import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd206010.ShafukugemmenTaishoshaJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200017.JigyoshoMukeShakaiFukushiHojinKeigenReportSource;
+import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -35,6 +37,7 @@ public class JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranEditor implemen
     private final Association 地方公共団体;
     private final Association association;
     private final IOutputOrder iOutputOrder;
+    private final IOutputOrder breakIOutputOrder;
     private final int index;
     private static final int LISTINDEX_0 = 0;
     private static final int LISTINDEX_1 = 1;
@@ -49,14 +52,16 @@ public class JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranEditor implemen
      * @param 地方公共団体 Association
      * @param association Association
      * @param iOutputOrder IOutputOrder
+     * @param breakIOutputOrder IOutputOrder
      * @param index int
      */
     public JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranEditor(ShafukugemmenTaishoshaJohoEntity 社福減免対象者情報,
-            Association 地方公共団体, Association association, IOutputOrder iOutputOrder, int index) {
+            Association 地方公共団体, Association association, IOutputOrder iOutputOrder, IOutputOrder breakIOutputOrder, int index) {
         this.社福減免対象者情報 = 社福減免対象者情報;
         this.地方公共団体 = 地方公共団体;
         this.association = association;
         this.iOutputOrder = iOutputOrder;
+        this.breakIOutputOrder = breakIOutputOrder;
         this.index = index;
     }
 
@@ -94,8 +99,8 @@ public class JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranEditor implemen
             source.listHihokenshaName_1 = 社福減免対象者情報.get名称() == null ? RString.EMPTY : 社福減免対象者情報.get名称().value();
             source.listMeisai_1 = new RString(index);
             source.listMeisai_2 = 社福減免対象者情報.get被保険者番号() == null ? RString.EMPTY : 社福減免対象者情報.get被保険者番号().value();
-            if (new RString("1").equals(社福減免対象者情報.get住民種別コード())
-                    || new RString("3").equals(社福減免対象者情報.get住民種別コード())) {
+            if (JuminShubetsu.日本人.getCode().equals(社福減免対象者情報.get住民種別コード())
+                    || JuminShubetsu.住登外個人_日本人.getCode().equals(社福減免対象者情報.get住民種別コード())) {
                 source.listMeisai_3 = 社福減免対象者情報.get生年月日() == null ? RString.EMPTY : 社福減免対象者情報.get生年月日().
                         wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).
                         fillType(FillType.BLANK).toDateString();
@@ -158,39 +163,41 @@ public class JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranEditor implemen
     }
 
     private void setiOutputOrder(JigyoshoMukeShakaiFukushiHojinKeigenReportSource source) {
-        List<ISetSortItem> 設定項目リスト = this.iOutputOrder.get設定項目リスト();
-        for (int i = 0; i < 設定項目リスト.size(); i++) {
-            if (i == LISTINDEX_0) {
-                source.shutsuryokujun1 = 設定項目リスト.get(LISTINDEX_0).get項目名();
-                if (設定項目リスト.get(LISTINDEX_0).is改頁項目()) {
-                    source.kaiPege1 = 設定項目リスト.get(LISTINDEX_0).get項目名();
-                }
-            }
-            if (i == LISTINDEX_1) {
-                source.shutsuryokujun2 = 設定項目リスト.get(LISTINDEX_1).get項目名();
-                if (設定項目リスト.get(LISTINDEX_1).is改頁項目()) {
-                    source.kaiPege2 = 設定項目リスト.get(LISTINDEX_1).get項目名();
-                }
-            }
-            if (i == LISTINDEX_2) {
-                source.shutsuryokujun3 = 設定項目リスト.get(LISTINDEX_2).get項目名();
-                if (設定項目リスト.get(LISTINDEX_2).is改頁項目()) {
-                    source.kaiPege3 = 設定項目リスト.get(LISTINDEX_2).get項目名();
-                }
-            }
-            if (i == LISTINDEX_3) {
-                source.shutsuryokujun4 = 設定項目リスト.get(LISTINDEX_3).get項目名();
-                if (設定項目リスト.get(LISTINDEX_3).is改頁項目()) {
-                    source.kaiPege4 = 設定項目リスト.get(LISTINDEX_3).get項目名();
-                }
-            }
-            if (i == LISTINDEX_4) {
-                source.shutsuryokujun5 = 設定項目リスト.get(LISTINDEX_4).get項目名();
-                if (設定項目リスト.get(LISTINDEX_4).is改頁項目()) {
-                    source.kaiPege5 = 設定項目リスト.get(LISTINDEX_4).get項目名();
-                }
-            }
+
+        Map<Integer, ISetSortItem> 出力順Map = ChohyoUtil.get出力順項目Map(iOutputOrder);
+        if (出力順Map.get(LISTINDEX_0) != null) {
+            source.shutsuryokujun1 = 出力順Map.get(LISTINDEX_0).get項目名();
         }
+        if (出力順Map.get(LISTINDEX_1) != null) {
+            source.shutsuryokujun2 = 出力順Map.get(LISTINDEX_1).get項目名();
+        }
+        if (出力順Map.get(LISTINDEX_2) != null) {
+            source.shutsuryokujun3 = 出力順Map.get(LISTINDEX_2).get項目名();
+        }
+        if (出力順Map.get(LISTINDEX_3) != null) {
+            source.shutsuryokujun4 = 出力順Map.get(LISTINDEX_3).get項目名();
+        }
+        if (出力順Map.get(LISTINDEX_4) != null) {
+            source.shutsuryokujun5 = 出力順Map.get(LISTINDEX_4).get項目名();
+        }
+
+        Map<Integer, ISetSortItem> 改頁Map = ChohyoUtil.get改頁項目Map(breakIOutputOrder);
+        if (改頁Map.get(LISTINDEX_0) != null) {
+            source.kaiPege1 = 改頁Map.get(LISTINDEX_0).get項目名();
+        }
+        if (改頁Map.get(LISTINDEX_1) != null) {
+            source.kaiPege1 = 改頁Map.get(LISTINDEX_1).get項目名();
+        }
+        if (改頁Map.get(LISTINDEX_2) != null) {
+            source.kaiPege1 = 改頁Map.get(LISTINDEX_2).get項目名();
+        }
+        if (改頁Map.get(LISTINDEX_3) != null) {
+            source.kaiPege1 = 改頁Map.get(LISTINDEX_3).get項目名();
+        }
+        if (改頁Map.get(LISTINDEX_4) != null) {
+            source.kaiPege1 = 改頁Map.get(LISTINDEX_4).get項目名();
+        }
+
     }
 
 }

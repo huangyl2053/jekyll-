@@ -83,8 +83,8 @@ public class ShuruiShikyuGendogakuMain {
         List<ServiceShuruiShikyuGendoGaku> shikyuGendoGakuList
                 = ViewStateHolder.get(ViewStateKeys.サービス種類支給限度額, ServiceShuruiShikyuGendoGakuHolder.class)
                 .getServiceShuruiShikyuGendoGakuList();
-        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
+        if ((new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode()))
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
             ShuruiShikyuGendogakuMainValidationHandler validationHandler = getValidationHandler();
@@ -111,8 +111,8 @@ public class ShuruiShikyuGendogakuMain {
                     if (pairs.iterator().hasNext()) {
                         return ResponseData.of(div).addValidationMessages(pairs).respond();
                     }
-                    validationHandler.要支援2入力チェック警告(pairs, div);
                     validationHandler.要支援1入力チェック警告(pairs, div);
+                    validationHandler.要支援2入力チェック警告(pairs, div);
                     if (pairs.iterator().hasNext()) {
                         return ResponseData.of(div).addValidationMessages(pairs).respond();
                     }

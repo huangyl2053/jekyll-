@@ -7,11 +7,11 @@ package jp.co.ndensan.reams.db.dbe.service.report.chosairaisho;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.report.chosairaisho.ChosaIraishoHeadItem;
-import jp.co.ndensan.reams.db.dbe.business.report.chosairaisho.ChosaIraishoProperty;
-import jp.co.ndensan.reams.db.dbe.business.report.chosairaisho.ChosaIraishoReport;
-import jp.co.ndensan.reams.db.dbe.business.report.chosairaisho.ChosaIraishoReportJoho;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.chosairaisho.ChosaIraishoReportSource;
+import jp.co.ndensan.reams.db.dbz.business.report.chosairaisho.ChosaIraishoHeadItem;
+import jp.co.ndensan.reams.db.dbz.business.report.chosairaisho.ChosaIraishoProperty;
+import jp.co.ndensan.reams.db.dbz.business.report.chosairaisho.ChosaIraishoReport;
+import jp.co.ndensan.reams.db.dbz.business.report.chosairaisho.ChosaIraishoReportJoho;
+import jp.co.ndensan.reams.db.dbz.entity.report.chosairaisho.ChosaIraishoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Printer;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 

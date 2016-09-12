@@ -5,10 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbb021051;
 
-import java.util.List;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,16 +20,13 @@ import lombok.Setter;
 @Setter
 public class DBB021051MyBatisParameter implements IMyBatisParameter {
 
-    private RString 抽出対象者;
-    private RYearMonth 基準年月;
     private RString 資格区分;
     private RString 市町村指定;
+    private RString 抽出対象者;
+    private RString 市町村指定に市町村コード;
+    private RString 基準年月の年;
+    private RString 基準年月の月;
     private RString 最優先住所;
-    private RString 敬称;
-    private RString 被保番号表示;
-    private RString 宛先住所設定;
-    private RString 出力順ID;
-    private List<RString> 出力順設定リスト;
-    private RString 業務コード;
+    private RString 出力順;
 
 }

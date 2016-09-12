@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd206010.KeikakuJigyoshaJohoProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd206010.SabisuKeikakuJigyoshaJohoProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd206010.TyohyoShutuyukuProcess;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd206010.DBD206010_JigyoshoMukeShakaFukushiHojinKeigenTaishoshaIchiranHakkoParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD206010.DBD206010_JigyoshoMukeShakaFukushiHojinKeigenTaishoshaIchiranHakkoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.core.shafugemmentaisyousyalist.JigyoshaSentaku;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd206010.DBD206010ProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd206010.DBD206010TyohyoProcessParameter;
@@ -50,7 +50,7 @@ public class DBD206010_JigyoshoMukeShakaFukushiHojinKeigenTaishoshaIchiranHakko
     }
 
     /**
-     * batchProcessです。
+     * get計画事業者データのProcessです。
      *
      * @return IBatchFlowCommand
      */
@@ -62,7 +62,7 @@ public class DBD206010_JigyoshoMukeShakaFukushiHojinKeigenTaishoshaIchiranHakko
     }
 
     /**
-     * batchProcessです。
+     * getサービス事業者データのProcessです。
      *
      * @return IBatchFlowCommand
      */
@@ -74,12 +74,12 @@ public class DBD206010_JigyoshoMukeShakaFukushiHojinKeigenTaishoshaIchiranHakko
     }
 
     /**
-     * batchProcessです。
+     * set帳票出力のProcessです。
      *
      * @return IBatchFlowCommand
      */
     @Step(帳票出力を行う)
-    protected IBatchFlowCommand set帳票123出力() {
+    protected IBatchFlowCommand set帳票出力() {
         return loopBatch(TyohyoShutuyukuProcess.class)
                 .arguments(createTyohyoProcessParameter(systemTime))
                 .define();
@@ -93,6 +93,7 @@ public class DBD206010_JigyoshoMukeShakaFukushiHojinKeigenTaishoshaIchiranHakko
         processParameter.set事業者番号(parameter.get事業者番号());
         processParameter.set処理日時(parameter.get処理日時());
         processParameter.set改頁出力順ID(parameter.get改頁出力順ID());
+        processParameter.set出力順ID(parameter.get出力順ID());
         processParameter.set資格喪失者選択(parameter.get資格喪失者選択());
         return processParameter;
     }
@@ -107,6 +108,8 @@ public class DBD206010_JigyoshoMukeShakaFukushiHojinKeigenTaishoshaIchiranHakko
         processParameter.set資格喪失者選択(parameter.get資格喪失者選択());
         processParameter.set事業者番号(parameter.get事業者番号());
         processParameter.set改頁出力順ID(parameter.get改頁出力順ID());
+        processParameter.set出力順ID(parameter.get出力順ID());
+
         return processParameter;
     }
 

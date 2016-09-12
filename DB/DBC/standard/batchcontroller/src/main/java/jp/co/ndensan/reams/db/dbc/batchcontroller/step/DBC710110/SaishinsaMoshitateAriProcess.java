@@ -79,11 +79,13 @@ public class SaishinsaMoshitateAriProcess extends BatchProcessBase<SaishinsaMosh
     private Association association;
     private RString 市町村名;
     private List<PersonalData> personalDataList;
+    private boolean flag;
     @BatchWriter
     private CsvWriter<HanyoListSaishinsaMoshitateAriEUCEntity> eucCsvWriter;
 
     @Override
     protected void initialize() {
+        flag = false;
         association = AssociationFinderFactory.createInstance().getAssociation();
         List<KoseiShichosonMaster> 構成市町村マスタ = KoseiShichosonJohoFinder.createInstance().get現市町村情報();
         市町村名MasterMap = new HashMap<>();
@@ -119,12 +121,16 @@ public class SaishinsaMoshitateAriProcess extends BatchProcessBase<SaishinsaMosh
 
     @Override
     protected void process(SaishinsaMoshitateRelateEntity entity) {
+        flag = true;
         eucCsvWriter.writeLine(new SaishinsaMoshitate().setRenbanariEUCEntity(entity, 連番++, processParameter, 市町村名MasterMap, association));
         personalDataList.add(toPersonalData(entity));
     }
 
     @Override
     protected void afterExecute() {
+        if (!flag) {
+            eucCsvWriter.writeLine(new SaishinsaMoshitate().setRenbanariEUCEntity());
+        }
         eucCsvWriter.close();
         AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
         manager.spool(eucFilePath, log);
@@ -145,13 +151,20 @@ public class SaishinsaMoshitateAriProcess extends BatchProcessBase<SaishinsaMosh
     }
 
     private RString get出力件数(Decimal 出力件数) {
+        if (!flag) {
+            return new RString("0");
+        }
         RString 保険者コード = processParameter.getHokenshacode().value();
         if (保険者コード_全市町村.equals(保険者コード)) {
             市町村名 = 市町村名_全市町村;
         } else if (!RString.isNullOrEmpty(保険者コード)) {
             IAssociationFinder finder = AssociationFinderFactory.createInstance();
-            association = finder.getAssociation(new LasdecCode(保険者コード));
-            市町村名 = association.get市町村名();
+            try {
+                association = finder.getAssociation(new LasdecCode(保険者コード));
+                市町村名 = association.get市町村名();
+            } catch (IllegalArgumentException e) {
+                市町村名 = RString.EMPTY;
+            }
         } else {
             市町村名 = RString.EMPTY;
         }

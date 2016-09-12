@@ -28,7 +28,7 @@ public enum SogoJigyoTaishoshaTorokuSpec implements IPredicate<SogoJigyoTaishosh
                     RDate 開始日 = div.getSougouZigyouTaishouShousai().getTxtymfromto().getFromValue();
                     RDate 終了日 = div.getSougouZigyouTaishouShousai().getTxtymfromto().getToValue();
                     if (終了日 != null && 開始日 != null) {
-                        return 開始日.isBefore(終了日);
+                        return 開始日.isBeforeOrEquals(終了日);
                     }
                     return true;
                 }
