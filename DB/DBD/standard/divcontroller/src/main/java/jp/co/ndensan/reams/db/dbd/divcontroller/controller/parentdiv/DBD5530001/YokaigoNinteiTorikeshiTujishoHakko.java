@@ -240,7 +240,9 @@ public class YokaigoNinteiTorikeshiTujishoHakko {
             要介護度 = RString.EMPTY;
         }
         JukyushaDaicho jukyushaDaicho = JukyushaDaichoService.createJukyushaDaichoService().get受給者台帳(parameter);
-        JukyushaDaichoService.createJukyushaDaichoService().insert(jukyushaDaicho, 異動理由, 要介護度, 認定有効期間開始年月日,
-                認定有効期間終了年月日, 認定取消通知書発行年月日);
+        if (jukyushaDaicho != null) {
+            JukyushaDaichoService.createJukyushaDaichoService().insert(jukyushaDaicho, 異動理由, 要介護度, 認定有効期間開始年月日,
+                    認定有効期間終了年月日, 認定取消通知書発行年月日);
+        }
     }
 }
