@@ -99,8 +99,8 @@ public class ChosaOCRTorikomiHandler {
         div.getTxtKaisaiNichiji().setValue(torikomiList.get(0).get介護認定審査会開催年月日());
         div.getTxtKaisaiTimeRange().setFromValue(RTime.of(rStringToInt(torikomiList.get(0).get介護認定審査会開始時刻().substring(0, 2)),
                 rStringToInt(torikomiList.get(0).get介護認定審査会開始時刻().substring(2))));
-        div.getTxtKaisaiTimeRange().setToValue(RTime.of(rStringToInt(torikomiList.get(0).get介護認定審査会開始時刻().substring(0, 2)),
-                rStringToInt(torikomiList.get(0).get介護認定審査会開始時刻().substring(2))));
+        div.getTxtKaisaiTimeRange().setToValue(RTime.of(rStringToInt(torikomiList.get(0).get介護認定審査会終了時刻().substring(0, 2)),
+                rStringToInt(torikomiList.get(0).get介護認定審査会終了時刻().substring(2))));
     }
 
     /**
