@@ -6,8 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kyodojukyushakoshinkekkaichiran;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -24,7 +22,5 @@ public class KyodoJukyushaKoshinkekkaIchiranReportData {
     private DbWT5C30KyoudouShoriEntity 共同処理一時TBL;
     private DbWT0001HihokenshaEntity 被保険者一時TBL;
     private DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity 共同処理用受給者異動基本送付TBL;
-    private DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity 共同処理用受給者異動償還送付TBL;
-    private DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity 共同処理用受給者異動高額送付TBL;
 
 }
