@@ -277,7 +277,7 @@ public class GassanShikyugakuKeisankekkaRanrakuhyoSofuProcess extends BatchProce
     private void get出力順() {
         RString 出力順 = RString.EMPTY;
         IChohyoShutsuryokujunFinder fider = ChohyoShutsuryokujunFinderFactory.createInstance();
-        outputOrder = fider.get出力順(SubGyomuCode.DBB介護賦課,
+        outputOrder = fider.get出力順(SubGyomuCode.DBC介護給付,
                 ReportIdDBC.DBC200036.getReportId(), Long.parseLong(processParameter.get出力順ID().toString()));
         if (outputOrder != null) {
             出力順 = MyBatisOrderByClauseCreator.create(
