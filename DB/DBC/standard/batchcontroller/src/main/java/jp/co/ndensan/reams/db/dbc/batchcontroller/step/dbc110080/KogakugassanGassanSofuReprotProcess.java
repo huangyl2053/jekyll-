@@ -93,6 +93,8 @@ public class KogakugassanGassanSofuReprotProcess extends BatchKeyBreakBase<Syutu
     private static final Code コード = new Code("0003");
     private static final RString 漢字_被保険者番号 = new RString("被保険者番号");
     private static final FlexibleYear 管理年度 = new FlexibleYear("0000");
+    private static final RString 被保険者番号R = new RString("被保険者番号");
+    private static final RString 支給申請書整理番号R = new RString("支給申請書整理番号");
 
     private KogakugassanProcessParameter processParameter;
     private KogakugassanMybatisParameter mybatisParam;
@@ -284,5 +286,7 @@ public class KogakugassanGassanSofuReprotProcess extends BatchKeyBreakBase<Syutu
                 pageBreakKeys.add(item.get項目ID());
             }
         }
+        並び順リスト.add(被保険者番号R);
+        並び順リスト.add(支給申請書整理番号R);
     }
 }
