@@ -50,8 +50,6 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
     private static final RString 公費２ = new RString("公費２");
     private static final RString 公費３ = new RString("公費３");
     private static final int INT_ZERO = 0;
-    private static final int 年の初月 = 1;
-    private static final int 年の末月 = 12;
 
     private final KyufuJissekiSyokaiMeisaiSyukeiDiv div;
 
