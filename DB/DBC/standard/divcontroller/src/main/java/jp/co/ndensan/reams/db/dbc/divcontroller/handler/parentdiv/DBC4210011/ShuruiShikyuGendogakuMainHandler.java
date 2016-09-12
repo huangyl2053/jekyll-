@@ -462,7 +462,7 @@ public class ShuruiShikyuGendogakuMainHandler {
         div.getShuruiShikyuGendogakuShosai().setDisabled(true);
         div.getShuruiShikyuGendogakuShosai().setVisible(true);
         div.getShuruiShikyuGendogakuShosai().getDdlServiceShurui().setDisabled(true);
-        div.getShuruiShikyuGendogakuShosai().getDdlServiceShurui().setSelectedKey(new RString(Integer.toString(ゼロ)));
+        div.getShuruiShikyuGendogakuShosai().getDdlServiceShurui().setSelectedIndex(ゼロ);
         div.getShuruiShikyuGendogakuShosai().getTxtTekiyoKikanRange().setFromDisabled(true);
         div.getShuruiShikyuGendogakuShosai().getTxtTekiyoKikanRange().clearFromValue();
         div.getShuruiShikyuGendogakuShosai().getTxtTekiyoKikanRange().setToDisabled(true);
