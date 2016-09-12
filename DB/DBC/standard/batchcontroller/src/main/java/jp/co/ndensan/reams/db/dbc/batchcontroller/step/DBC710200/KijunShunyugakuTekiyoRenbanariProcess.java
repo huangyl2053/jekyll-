@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistparam.HanyoListParam
 import jp.co.ndensan.reams.db.dbc.entity.euc.hanyolistparam.HanyoListParamRenbanariEUCEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
-import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
+import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -165,7 +165,7 @@ public class KijunShunyugakuTekiyoRenbanariProcess extends BatchProcessBase<Hany
         IOutputOrder outputOrder = finder.get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701020.getReportId(), processParameter.get出力順ID());
         RString 出力順 = RString.EMPTY;
         if (outputOrder != null) {
-            出力順 = ReportUtil.get出力順OrderBy(MyBatisOrderByClauseCreator.create(
+            出力順 = ChohyoUtil.get出力順OrderBy(MyBatisOrderByClauseCreator.create(
                     KijunShunyugakuTekiyo.ShutsuryokujunEnum.class, outputOrder), NUM5);
         }
         return 出力順;

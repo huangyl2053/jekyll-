@@ -127,8 +127,8 @@ public enum ShuruiShikyuGendogakuMainSpec implements IPredicate<ShuruiShikyuGend
                             new ServiceShuruiCode(div.getShuruiShikyuGendogakuShosai().getDdlServiceShurui().getSelectedKey()), 適用期間From);
                     if (!result.isEmpty() && (new RString("1")).equals(result.get(0).getDbT7130entity().getShien2InKahiKubun())) {
                         return (result.get(0).getDbT7130entity() != null
-                        && !(div.getShuruiShikyuGendogakuShosai().getTxtYoshien1ShikyuGendogaku().getValue() == null
-                        || (div.getShuruiShikyuGendogakuShosai().getTxtYoshien1ShikyuGendogaku().getValue().compareTo(Decimal.ZERO) == 0)));
+                        && !(div.getShuruiShikyuGendogakuShosai().getTxtYoshien2ShikyuGendogaku().getValue() == null
+                        || (div.getShuruiShikyuGendogakuShosai().getTxtYoshien2ShikyuGendogaku().getValue().compareTo(Decimal.ZERO) == 0)));
                     } else if (result.isEmpty()) {
                         return false;
                     }
