@@ -294,12 +294,12 @@ public class shoSaiPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTbTaishoNen() {
+    public TextBoxDate getTbTaishoNen() {
         return this.getNaiyoArea().getTbTaishoNen();
     }
 
     @JsonIgnore
-    public void  setTbTaishoNen(TextBox tbTaishoNen) {
+    public void  setTbTaishoNen(TextBoxDate tbTaishoNen) {
         this.getNaiyoArea().setTbTaishoNen(tbTaishoNen);
     }
 
