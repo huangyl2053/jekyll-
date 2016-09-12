@@ -70,7 +70,14 @@
             B."zenkokuJushoCode",
             B."jusho",
             B."gyoseikuCode",
-            B."gyoseikuName"
+            B."gyoseikuName",
+            B."banchiCode1",
+            B."chikuCode1",
+            B."chikuCode2",
+            B."setaiCode",
+            B."gaikokujinKanaShimei",
+            B."shoriYMD",
+            DbT7051."yubinNo"
         FROM 
             rgdb."DbV4001JukyushaDaicho" AS DbV4001
         INNER JOIN
@@ -106,8 +113,7 @@
                 AND DbV4001."chokkinIdoJiyuCode" IS NOT NULL
             </if>
             
-        ORDER BY
-            #{出力順}    
+            ${出力順}    
         
     </select>
     
