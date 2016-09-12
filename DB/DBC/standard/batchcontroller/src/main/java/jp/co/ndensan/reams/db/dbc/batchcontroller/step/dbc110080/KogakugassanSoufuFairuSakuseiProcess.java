@@ -194,7 +194,7 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
                 = 被保険者氏名_漢字 == null || 被保険者氏名_漢字.isEmpty() ? RString.EMPTY : 被保険者氏名_漢字.getColumnValue().trim();
         // TODO 40バイト QA1430
         meisaiEntity.set被保険者氏名_漢字(囲み文字(被保険者氏名_漢字R));
-        meisaiEntity.set生年月日(formatDate(高額合算自己負担額一時Entity.getUmareYMD()));
+        meisaiEntity.set生年月日(trimDate(高額合算自己負担額一時Entity.getUmareYMD()));
         Code 性別 = 高額合算自己負担額一時Entity.getSeibetsuCode();
         RString 性別R = 性別 == null || 性別.isEmpty() ? RString.EMPTY : 性別.getColumnValue().trim();
         meisaiEntity.set性別(性別R);
@@ -553,10 +553,6 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
 
     private RString trimRString(RString str) {
         return str == null || str.isEmpty() ? RString.EMPTY : str.trim();
-    }
-
-    private RString formatDate(FlexibleDate date) {
-        return date == null || date.isEmpty() ? RString.EMPTY : new RString(date.toString()).trim();
     }
 
     private RString 囲み文字(RString str) {
