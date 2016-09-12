@@ -68,9 +68,9 @@ public enum DbzErrorMessages implements IMessageGettable, IValidationMessage {
     最大取得件数範囲外(54, "表示件数上限999以下に指定してください。"),
     ファイル指定なし(55, "ファイルが指定されていません。"),
     対象者を選択(56, "対象者を選択してください。"),
+    アップロードファイル無し(56, "ファイルがアップロードされていません。"),
     必須項目_追加メッセージあり(57, "必須項目_追加メッセージあり:?"),
     暦上日以外を入力(58, "暦上日を入力してください。");
-
 
     private final transient Message message;
 
