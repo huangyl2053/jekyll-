@@ -57,10 +57,27 @@ public class PostMainPanelFinder {
         if (再発行対象リスト != null && !再発行対象リスト.isEmpty()) {
             for (PostMainPanelEntity item : 再発行対象リスト) {
                 List items = new ArrayList();
-                items.add(new RString(item.get市町村コード().toString()));
-                items.add(new RString(item.get市町村名称().toString()));
-                items.add(new RString(item.get基準日時().toString()));
-                items.add(new RString(item.get対象開始日時().toString()));
+
+                if (item.get市町村コード() != null || !item.get市町村コード().toString().isEmpty()) {
+                    items.add(new RString(item.get市町村コード().toString()));
+                } else {
+                    items.add(RString.EMPTY);
+                }
+                if (item.get市町村名称() != null && !item.get市町村名称().toString().isEmpty()) {
+                    items.add(new RString(item.get市町村名称().toString()));
+                } else {
+                    items.add(RString.EMPTY);
+                }
+                if (item.get基準日時() != null && !item.get基準日時().toString().isEmpty()) {
+                    items.add(new RString(item.get基準日時().toString()));
+                } else {
+                    items.add(RString.EMPTY);
+                }
+                if (item.get対象開始日時() != null && !item.get対象開始日時().toString().isEmpty()) {
+                    items.add(new RString(item.get対象開始日時().toString()));
+                } else {
+                    items.add(RString.EMPTY);
+                }
                 items.add(item.get市町村識別ID());
                 listDataSource.add(items);
             }
@@ -84,10 +101,26 @@ public class PostMainPanelFinder {
         if (再発行対象リスト != null && !再発行対象リスト.isEmpty()) {
             for (PostMainPanelEntity item : 再発行対象リスト) {
                 List items = new ArrayList();
-                items.add(new RString(item.get市町村コード().toString()));
-                items.add(new RString(item.get市町村名称().toString()));
-                items.add(new RString(item.get基準日時().toString()));
-                items.add(new RString(item.get対象開始日時().toString()));
+                if (item.get市町村コード() != null || !item.get市町村コード().toString().isEmpty()) {
+                    items.add(new RString(item.get市町村コード().toString()));
+                } else {
+                    items.add(RString.EMPTY);
+                }
+                if (item.get市町村名称() != null && !item.get市町村名称().toString().isEmpty()) {
+                    items.add(new RString(item.get市町村名称().toString()));
+                } else {
+                    items.add(RString.EMPTY);
+                }
+                if (item.get基準日時() != null && !item.get基準日時().toString().isEmpty()) {
+                    items.add(new RString(item.get基準日時().toString()));
+                } else {
+                    items.add(RString.EMPTY);
+                }
+                if (item.get対象開始日時() != null && !item.get対象開始日時().toString().isEmpty()) {
+                    items.add(new RString(item.get対象開始日時().toString()));
+                } else {
+                    items.add(RString.EMPTY);
+                }
                 items.add(item.get市町村識別ID());
 
                 businessList.add(items);
