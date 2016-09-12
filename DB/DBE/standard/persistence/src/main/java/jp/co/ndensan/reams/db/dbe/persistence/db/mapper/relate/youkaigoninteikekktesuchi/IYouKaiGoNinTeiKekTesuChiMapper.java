@@ -6,14 +6,15 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.youkaigoninteikekktesuchi;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiMapperParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.dbe090001.YouKaiGoNinTeiKekTesuChiMybitisParamter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 要介護認定結果情報のマッパーインタフェースです。
- * 
+ *
  * @reamsid_L DBE-0220-010 wangkun
  */
 public interface IYouKaiGoNinTeiKekTesuChiMapper {
@@ -41,13 +42,13 @@ public interface IYouKaiGoNinTeiKekTesuChiMapper {
      * @return YouKaiGoNinTeiKekTesuChiRelateEntity 要介護認定結果情報RelateEntityクラスです。
      */
     List<YouKaiGoNinTeiKekTesuChiRelateEntity> getCyouHyouSyuTsuRyoKu(YouKaiGoNinTeiKekTesuChiMybitisParamter param);
-    
-    
+
     /**
-     * 主治医意見書作成依頼情報を更新します。
+     * KEYより主治医意見書作成依頼情報を取得します。
      *
-     * @param entity entity
-     * @return 更新件数
+     * @param 申請書管理番号 申請書管理番号
+     * @param 主治医意見書作成依頼履歴番号 主治医意見書作成依頼履歴番号
+     * @return DbT5301ShujiiIkenshoIraiJohoEntity
      */
-    int updateShuJiIkenSyoSaKuSeiIraiJyouHou(DbT5301ShujiiIkenshoIraiJohoEntity entity);
+    DbT5301ShujiiIkenshoIraiJohoEntity get主治医意見書作成依頼情報ByKey(RString 申請書管理番号, int 主治医意見書作成依頼履歴番号);
 }

@@ -24,9 +24,9 @@ public final class HokenshaList implements Iterable<HokenshaSummary> {
 
     private HokenshaList(List<? extends HokenshaSummary> list, boolean is広域) {
         this.map = createLasdecCodeMap(list);
-        if (this.map.size() != list.size()) {
-            throw new IllegalArgumentException("引数のlistに市町村コードの重複があります。");
-        }
+//        if (this.map.size() != list.size()) {
+//            throw new IllegalArgumentException("引数のlistに市町村コードの重複があります。");
+//        }
         this.list = Collections.<HokenshaSummary>unmodifiableList(list);
         this.isKoikiFlag = is広域;
     }

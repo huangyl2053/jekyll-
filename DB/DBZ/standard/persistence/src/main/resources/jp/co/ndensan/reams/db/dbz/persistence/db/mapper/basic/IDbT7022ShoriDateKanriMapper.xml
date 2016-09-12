@@ -63,13 +63,13 @@
         <result property="taishoKaishiTimestamp" column="dbT7022ShoriDateKanri_taishoKaishiTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
         <result property="taishoShuryoTimestamp" column="dbT7022ShoriDateKanri_taishoShuryoTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
     </resultMap>
-    <select id="getEntity" resultMap="ResultMap_DbT7022ShoriDateKanriEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT7022ShoriDateKanriEntity">
         SELECT
         <include refid="allColumns_DbT7022ShoriDateKanri" />
         FROM
         rgdb."DbT7022ShoriDateKanri"
     </select>
-    <select id="getTaishoShuryoYMD" resultMap="ResultMap_DbT7022ShoriDateKanriEntity">
+    <select resultOrdered="true" id="getTaishoShuryoYMD" resultMap="ResultMap_DbT7022ShoriDateKanriEntity">
         SELECT
         <include refid="allColumns_DbT7022ShoriDateKanri" />
         FROM
@@ -81,37 +81,4 @@
         ORDER BY rgdb."DbT7022ShoriDateKanri"."taishoShuryoTimestamp" DESC
         LIMIT 1
     </select>
-    <select id="get処理日付管理マスタByKey"
-            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity"
-            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate.ParameterSetMybatisParameter" fetchSize="500">
-        SELECT
-        *
-        FROM
-        rgdb."DbT7022ShoriDateKanri"
-        WHERE
-        "shichosonCode" = #{市町村コード}
-        AND "shoriName" = #{処理名}
-        AND "shoriEdaban" = #{処理枝番}
-        AND "nendo" = #{年度}
-        AND "nendoNaiRenban" = #{年度内連番}
-    </select>
-<!--    <select id="get処理日付管理マスタ登録処理" resultMap="ResultMap_DbT7022ShoriDateKanriEntity"
-     parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatis.param.kaigojyuminhyokoukiu.KaiGoJuminHyokouKiuMapperParameter" fetchSize="500">
-        SELECT
-        <include refid="allColumns_DbT7022ShoriDateKanri" />
-        FROM
-        rgdb."DbT7022ShoriDateKanri"
-        WHERE
-        rgdb."DbT7022ShoriDateKanri"."subGyomuCode" = 'DBU' AND
-        rgdb."DbT7022ShoriDateKanri"."shoriName" = '介護住民票個別事項連携情報作成【広域運用】' AND
-        <foreach  
-            collection="kobetsuKoikiunyoParameterList"
-            item="item"
-            open="("  
-            separator="OR"  
-            close=")">  
-             rgdb."DbT7022ShoriDateKanri"."shichosonCode" = #{item.shichosonCode}
-        </foreach>
-        ORDER BY rgdb."DbT7022ShoriDateKanri"."taishoShuryoTimestamp" DESC
-    </select>-->
 </mapper>

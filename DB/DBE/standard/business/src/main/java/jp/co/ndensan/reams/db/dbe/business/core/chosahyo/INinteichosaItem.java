@@ -5,10 +5,10 @@
 package jp.co.ndensan.reams.db.dbe.business.core.chosahyo;
 
 import jp.co.ndensan.reams.db.dbe.business.core.IAnswerItem;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.chosahyo.INinteichosaItemGroup;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.chosahyo.INinteichosaItemKubun;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.chosahyo.INinteichosaItemSubGroup;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ninteichosaitemno.NinteichosaItemNo;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyo.INinteichosaItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyo.INinteichosaItemKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyo.INinteichosaItemSubGroup;
+import jp.co.ndensan.reams.db.dbe.definition.core.ninteichosaitemno.NinteichosaItemNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**

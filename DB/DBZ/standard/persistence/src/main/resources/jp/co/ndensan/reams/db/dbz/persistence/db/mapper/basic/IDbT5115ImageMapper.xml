@@ -44,4 +44,10 @@
         <result property="imageSharedFileId" column="dbT5115Image_imageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
     </resultMap>
 
+    <select id="getEntity" resultMap="ResultMap_DbT5115ImageEntity">
+        <!--SELECT
+        <include refid="allColumns_DbT5115Image"/>
+        FROM
+        rgdb."DbT5115Image"-->
+    </select>
 </mapper>

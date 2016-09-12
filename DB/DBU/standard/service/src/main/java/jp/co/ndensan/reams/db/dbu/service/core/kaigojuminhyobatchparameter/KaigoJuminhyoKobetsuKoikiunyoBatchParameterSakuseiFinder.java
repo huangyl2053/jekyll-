@@ -11,7 +11,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigojuminhyokobetsukoikiunyo.KaigoJuminhyoKobetsuKoikiunyo;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.kobetsujikorenkeiinfosakuseikoiki.KaigoJuminhyoKobetsuParameter;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.kobetsujikorenkeiinfosakuseikoiki.KobetsuKoikiunyoParameter;
-import jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyokobetsu.KaigojuminhyokobetsuEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojuminhyokobetsu.KaigojuminhyokobetsuEntity;
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.kaigojuminhyokobetsu.IKaigoJuminhyoKobetsuMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -87,8 +87,11 @@ public class KaigoJuminhyoKobetsuKoikiunyoBatchParameterSakuseiFinder {
         for (KaigoJuminhyoKobetsuParameter list : kobetsuLsit) {
             KobetsuKoikiunyoParameter batchParameter = new KobetsuKoikiunyoParameter();
             batchParameter.setDateTo(RDate.getNowDateTime());
-            batchParameter.setDateFrom(RDateTime.of(list.getKonkaiStSakuseiYMD().toDateString(),
-                    new RString(list.getKonkaiStSakuseiTime().toString())));
+            if (list.getKonkaiStSakuseiYMD() != null) {
+                batchParameter.setDateFrom(RDateTime.of(list.getKonkaiStSakuseiYMD().toDateString(),
+                        new RString(list.getKonkaiStSakuseiTime().toString())));
+            }
+            batchParameter.setShichosonCode(list.getSakiShichoson());
             batchParameterList.add(batchParameter);
         }
         return SearchResult.of(batchParameterList, 0, false);

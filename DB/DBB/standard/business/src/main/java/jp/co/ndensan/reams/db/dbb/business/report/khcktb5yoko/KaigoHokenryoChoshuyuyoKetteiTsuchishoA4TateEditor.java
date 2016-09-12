@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.choshuyuyojoho.Choshu
 import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.kibetsuchochuyuyo.KibetsuChoshuYuyo;
 import jp.co.ndensan.reams.db.dbb.business.report.choshuyuyo.KibetsuChoshyuYuyoKikan;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HyojiCodes;
+import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbb.entity.report.khcktb5yoko.KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateSource;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
@@ -23,7 +24,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.CompKaigoToiawasesakiSource;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.IKaigoToiawasesakiSourceBuilder;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.kyotsu.HokenryoChoshuYuyoShurui;
 import jp.co.ndensan.reams.ur.urz.business.core.date.DateEditor;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
@@ -60,6 +60,7 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateEditor
     private static final int 定数_TEN = 10;
     private static final RString RSTR_0 = new RString("　");
     private static final RString 波線 = new RString("～");
+    private static final RString FORMAT_1桁 = new RString("%02d");
     private static final RString 期_1 = new RString("01");
     private static final RString 期_2 = new RString("02");
     private static final RString 期_3 = new RString("03");
@@ -253,8 +254,11 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateEditor
         if (特徴期月.isPresent()) {
             期別徴収猶予期間.set特徴期(edit2桁文字列(特徴期月.get期()));
             期別徴収猶予期間.set特徴月(editInt2桁文字列(特徴期月.get月AsInt()));
-            期別徴収猶予期間.set特徴期別金額(DecimalFormatter
-                    .toコンマ区切りRString(get期と特徴期別金額の対応(徴収猶予決定通知書情報, 特徴期月.get期()), 0));
+            Decimal 期と特徴期別金額 = get期と特徴期別金額の対応(徴収猶予決定通知書情報, 特徴期月.get期());
+            if (期と特徴期別金額 != null) {
+                期別徴収猶予期間.set特徴期別金額(DecimalFormatter
+                        .toコンマ区切りRString(期と特徴期別金額, 0));
+            }
         } else {
             期別徴収猶予期間.set特徴期(RString.EMPTY);
             期別徴収猶予期間.set特徴月(RString.EMPTY);
@@ -264,8 +268,11 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateEditor
         if (普徴期月.isPresent()) {
             期別徴収猶予期間.set普徴期(edit2桁文字列(普徴期月.get期()));
             期別徴収猶予期間.set普徴月(editInt2桁文字列(普徴期月.get月AsInt()));
-            期別徴収猶予期間.set普徴期別金額(DecimalFormatter
-                    .toコンマ区切りRString(get月と普徴期別金額の対応(徴収猶予決定通知書情報, 普徴期月.get月()), 0));
+            Decimal 月と普徴期別金額 = get月と普徴期別金額の対応(徴収猶予決定通知書情報, 普徴期月.get月());
+            if (月と普徴期別金額 != null) {
+                期別徴収猶予期間.set普徴期別金額(DecimalFormatter
+                        .toコンマ区切りRString(月と普徴期別金額, 0));
+            }
             期別徴収猶予期間.set徴収猶予期間(get徴収猶予期間(徴収猶予決定通知書情報, 普徴期月));
         } else {
             期別徴収猶予期間.set普徴期(RString.EMPTY);
@@ -375,8 +382,8 @@ public class KaigoHokenryoChoshuyuyoKetteiTsuchishoA4TateEditor
         List<KibetsuChoshuYuyo> 介護期別徴収猶予List = choshuYuyoJoho.get介護期別徴収猶予();
         for (KibetsuChoshuYuyo 介護期別徴収猶予 : 介護期別徴収猶予List) {
             RString 徴収方法 = 介護期別徴収猶予.get徴収方法();
-            RString 期 = new RString(String.valueOf(介護期別徴収猶予.get期()));
-            if (ChoshuHohoKibetsu.普通徴収.code().equals(徴収方法) && 普徴期月.get期().equals(期)) {
+            RString 期 = new RString(String.format(FORMAT_1桁.toString(), 介護期別徴収猶予.get期()));
+            if (ChoshuHohoKibetsu.普通徴収.getコード().equals(徴収方法) && 普徴期月.get期().equals(期)) {
                 徴収猶予期間 = new RString(DateEditor.to西暦(介護期別徴収猶予.get徴収猶予開始日()).toString()
                         + 波線.toString() + DateEditor.to西暦(介護期別徴収猶予.get徴収猶予終了日()).toString());
             }

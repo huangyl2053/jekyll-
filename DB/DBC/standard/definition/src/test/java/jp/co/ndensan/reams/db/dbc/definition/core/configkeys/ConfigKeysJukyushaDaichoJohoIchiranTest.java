@@ -8,10 +8,10 @@ import org.junit.Test;
 
 /**
  * 受給者台帳情報一覧コンフィグキーのテストクラスです。
- * 
- * @author LDNS 
+ *
+ * @author LDNS
  */
-public class ConfigKeysJukyushaDaichoJohoIchiranTest extends DbcTestBase{
+public class ConfigKeysJukyushaDaichoJohoIchiranTest extends DbcTestBase {
 
     @Test(expected = NullPointerException.class)
     public void 引数がNullである場合_toValueは_NullPointerExceptionが発生する() {
@@ -71,56 +71,6 @@ public class ConfigKeysJukyushaDaichoJohoIchiranTest extends DbcTestBase{
     @Test
     public void 引数に無しを指定した場合_toValueは_国保連取込_受給者台帳情報一覧_有効区分を返す() {
         assertThat(ConfigKeysJukyushaDaichoJohoIchiran.toValue(new RString("無し")), is(ConfigKeysJukyushaDaichoJohoIchiran.国保連取込_受給者台帳情報一覧_有効区分));
-    }
-
-    @Test
-    public void 国保連取込_受給者台帳情報一覧を指定した場合_getコードは_無しを返す() {
-        assertThat(ConfigKeysJukyushaDaichoJohoIchiran.国保連取込_受給者台帳情報一覧.getコード(), is(new RString("無し")));
-    }
-
-    @Test
-    public void 国保連取込_受給者台帳情報一覧_バッチIDを指定した場合_getコードは_無しを返す() {
-        assertThat(ConfigKeysJukyushaDaichoJohoIchiran.国保連取込_受給者台帳情報一覧_バッチID.getコード(), is(new RString("無し")));
-    }
-
-    @Test
-    public void 国保連取込_受給者台帳情報一覧_一覧表示順を指定した場合_getコードは_無しを返す() {
-        assertThat(ConfigKeysJukyushaDaichoJohoIchiran.国保連取込_受給者台帳情報一覧_一覧表示順.getコード(), is(new RString("無し")));
-    }
-
-    @Test
-    public void 国保連取込_受給者台帳情報一覧_交換情報識別番号を指定した場合_getコードは_無しを返す() {
-        assertThat(ConfigKeysJukyushaDaichoJohoIchiran.国保連取込_受給者台帳情報一覧_交換情報識別番号.getコード(), is(new RString("無し")));
-    }
-
-    @Test
-    public void 国保連取込_受給者台帳情報一覧_再処理不可区分を指定した場合_getコードは_無しを返す() {
-        assertThat(ConfigKeysJukyushaDaichoJohoIchiran.国保連取込_受給者台帳情報一覧_再処理不可区分.getコード(), is(new RString("無し")));
-    }
-
-    @Test
-    public void 国保連取込_受給者台帳情報一覧_処理サイクル区分を指定した場合_getコードは_無しを返す() {
-        assertThat(ConfigKeysJukyushaDaichoJohoIchiran.国保連取込_受給者台帳情報一覧_処理サイクル区分.getコード(), is(new RString("無し")));
-    }
-
-    @Test
-    public void 国保連取込_受給者台帳情報一覧_処理月を指定した場合_getコードは_無しを返す() {
-        assertThat(ConfigKeysJukyushaDaichoJohoIchiran.国保連取込_受給者台帳情報一覧_処理月.getコード(), is(new RString("無し")));
-    }
-
-    @Test
-    public void 国保連取込_受給者台帳情報一覧_処理名称を指定した場合_getコードは_無しを返す() {
-        assertThat(ConfigKeysJukyushaDaichoJohoIchiran.国保連取込_受給者台帳情報一覧_処理名称.getコード(), is(new RString("無し")));
-    }
-
-    @Test
-    public void 国保連取込_受給者台帳情報一覧_排他チェック有り区分を指定した場合_getコードは_無しを返す() {
-        assertThat(ConfigKeysJukyushaDaichoJohoIchiran.国保連取込_受給者台帳情報一覧_排他チェック有り区分.getコード(), is(new RString("無し")));
-    }
-
-    @Test
-    public void 国保連取込_受給者台帳情報一覧_有効区分を指定した場合_getコードは_無しを返す() {
-        assertThat(ConfigKeysJukyushaDaichoJohoIchiran.国保連取込_受給者台帳情報一覧_有効区分.getコード(), is(new RString("無し")));
     }
 
     @Test

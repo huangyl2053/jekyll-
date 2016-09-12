@@ -14,8 +14,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanMeisai;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanMeisaiResult;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820022.KyufuShiharayiMeisaiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820022.dgdKyufuhiMeisai_Row;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -29,7 +27,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -135,9 +132,9 @@ public class KyufuShiharayiMeisaiPanelHandler {
      * clear給付費明細登録
      */
     public void clear給付費明細登録() {
-        div.getPanelThree().getPanelFour().getCcdServiceCodeInput().setサービス種類コード(null);
-        div.getPanelThree().getPanelFour().getCcdServiceCodeInput().setサービス項目コード(null);
-        div.getPanelThree().getPanelFour().getCcdServiceCodeInput().setサービス名称(null);
+        div.getPanelThree().getPanelFour().getCcdServiceCodeInput().setサービス種類コード(RString.EMPTY);
+        div.getPanelThree().getPanelFour().getCcdServiceCodeInput().setサービス項目コード(RString.EMPTY);
+        div.getPanelThree().getPanelFour().getCcdServiceCodeInput().setサービス名称(RString.EMPTY);
         div.getPanelThree().getPanelFour().getTxtTanyi().clearValue();
         div.getPanelThree().getPanelFour().getTxtKaisu().clearValue();
         div.getPanelThree().getPanelFour().getTxtServiceTanyi().clearValue();
@@ -163,28 +160,28 @@ public class KyufuShiharayiMeisaiPanelHandler {
      * modifyRow
      *
      * @param row dgdKyufuhiMeisai_Row
+     * @param state RString
      */
-    public void modifyRow(dgdKyufuhiMeisai_Row row) {
-        RString state = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
+    public void modifyRow(dgdKyufuhiMeisai_Row row, RString state) {
         if (修正.equals(state)) {
             boolean flag = checkState(row);
             if (flag) {
                 row.setRowState(RowState.Modified);
-                setDgdKyufuhiMeisai(row);
+                setDgdKyufuhiMeisai(row, state);
             }
         } else if (削除.equals(state)) {
             if (RowState.Added.equals(row.getRowState())) {
                 div.getPanelThree().getDgdKyufuhiMeisai().getDataSource().remove(
-                        Integer.parseInt(div.getPanelThree().getRowId().toString()));
+                        div.getPanelThree().getRowId().getValue().intValue());
                 clear給付費明細登録();
                 div.getPanelThree().getPanelFour().setDisabled(true);
             } else {
                 row.setRowState(RowState.Deleted);
-                setDgdKyufuhiMeisai(row);
+                setDgdKyufuhiMeisai(row, state);
             }
         } else if (登録.equals(state)) {
             row.setRowState(RowState.Added);
-            setDgdKyufuhiMeisai(row);
+            setDgdKyufuhiMeisai(row, state);
         }
     }
 
@@ -222,7 +219,7 @@ public class KyufuShiharayiMeisaiPanelHandler {
         return !ddgRow.getDefaultDataName5().equals(div.getPanelThree().getPanelFour().getTxtTeikiyo().getValue());
     }
 
-    private void setDgdKyufuhiMeisai(dgdKyufuhiMeisai_Row ddgRow) {
+    private void setDgdKyufuhiMeisai(dgdKyufuhiMeisai_Row ddgRow, RString state) {
 
         RStringBuilder builder = new RStringBuilder();
         if (div.getPanelThree().getPanelFour().getCcdServiceCodeInput().getサービスコード1() != null) {
@@ -248,7 +245,7 @@ public class KyufuShiharayiMeisaiPanelHandler {
         if (div.getPanelThree().getPanelFour().getTxtTeikiyo().getValue() != null) {
             ddgRow.setDefaultDataName5(div.getPanelThree().getPanelFour().getTxtTeikiyo().getValue());
         }
-        if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+        if (登録.equals(state)) {
             List<dgdKyufuhiMeisai_Row> list = div.getPanelThree().getDgdKyufuhiMeisai().getDataSource();
             list.add(ddgRow);
         }
@@ -287,10 +284,13 @@ public class KyufuShiharayiMeisaiPanelHandler {
 
     /**
      * 保存処理
+     *
+     * @param meisaiPar ShoukanharaihishinseimeisaikensakuParameter
+     * @param 処理モード RString
+     * @param shkonlist List<ShokanMeisaiResult>
      */
-    public void 保存処理() {
-        ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
-                ShoukanharaihishinseimeisaikensakuParameter.class);
+    public void 保存処理(ShoukanharaihishinseimeisaikensakuParameter meisaiPar, RString 処理モード,
+            List<ShokanMeisaiResult> shkonlist) {
         HihokenshaNo 被保険者番号 = meisaiPar.get被保険者番号();
         FlexibleYearMonth サービス年月 = meisaiPar.getサービス年月();
         RString 整理番号 = meisaiPar.get整理番号();
@@ -299,12 +299,11 @@ public class KyufuShiharayiMeisaiPanelHandler {
         RString 明細番号 = meisaiPar.get明細番号();
         List<ShokanMeisai> entityList = new ArrayList<>();
         List<dgdKyufuhiMeisai_Row> dgrow = div.getPanelThree().getDgdKyufuhiMeisai().getDataSource();
-        if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
+        if (削除.equals(処理モード)) {
             SyokanbaraihiShikyuShinseiKetteManager.createInstance().
                     delShokanSyomeisyo(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         } else {
             int max連番 = 0;
-            List<ShokanMeisaiResult> shkonlist = ViewStateHolder.get(ViewStateKeys.給付費明細登録, List.class);
             Map<RString, ShokanMeisai> mapList = new HashMap<>();
             for (ShokanMeisaiResult shokanMeisaiResult : shkonlist) {
                 mapList.put(shokanMeisaiResult.getEntity().get連番(), shokanMeisaiResult.getEntity());
@@ -367,10 +366,10 @@ public class KyufuShiharayiMeisaiPanelHandler {
      * get制御
      *
      * @param shikibetsuNoKanri ShikibetsuNoKanri
+     * @param meisaiPar ShoukanharaihishinseimeisaikensakuParameter
      */
-    public void getボタンを制御(ShikibetsuNoKanri shikibetsuNoKanri) {
-        ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
-                ShoukanharaihishinseimeisaikensakuParameter.class);
+    public void getボタンを制御(ShikibetsuNoKanri shikibetsuNoKanri,
+            ShoukanharaihishinseimeisaikensakuParameter meisaiPar) {
         HihokenshaNo 被保険者番号 = meisaiPar.get被保険者番号();
         FlexibleYearMonth サービス年月 = meisaiPar.getサービス年月();
         RString 整理番号 = meisaiPar.get整理番号();
@@ -563,23 +562,6 @@ public class KyufuShiharayiMeisaiPanelHandler {
     }
 
     /**
-     * putViewState
-     */
-    public void putViewState() {
-        ViewStateHolder.put(ViewStateKeys.処理モード, ViewStateHolder.get(ViewStateKeys.処理モード, RString.class));
-        ViewStateHolder.put(ViewStateKeys.申請日, div.getPanelTwo().getTxtShinseiYMD().getValue());
-        ShoukanharaihishinseikensakuParameter paramter = new ShoukanharaihishinseikensakuParameter(
-                ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
-                ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class),
-                ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
-                new JigyoshaNo(div.getPanelTwo().getTxtJigyoshaBango().getValue()),
-                div.getPanelTwo().getTxtShomeisho().getValue(),
-                div.getPanelTwo().getTxtMeisaiBango().getValue(),
-                null);
-        ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, paramter);
-    }
-
-    /**
      * readOnly給付費明細登録
      *
      * @param flag boolean
@@ -589,7 +571,16 @@ public class KyufuShiharayiMeisaiPanelHandler {
         div.getPanelThree().getPanelFour().getTxtKaisu().setReadOnly(flag);
         div.getPanelThree().getPanelFour().getTxtServiceTanyi().setReadOnly(flag);
         div.getPanelThree().getPanelFour().getTxtTeikiyo().setReadOnly(flag);
+        div.getPanelThree().getPanelFour().getCcdServiceCodeInput().setReadOnly(flag);
+    }
 
+    /**
+     *
+     * @param flag boolean
+     */
+    public void 制御(boolean flag) {
+        div.getPanelThree().getBtnAdd().setDisabled(flag);
+        div.getPanelThree().getDgdKyufuhiMeisai().setDisabled(flag);
     }
 
 }

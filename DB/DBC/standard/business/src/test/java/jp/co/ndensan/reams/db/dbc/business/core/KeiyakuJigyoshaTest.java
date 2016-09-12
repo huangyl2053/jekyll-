@@ -5,8 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core;
 
-import jp.co.ndensan.reams.db.dbc.business.core.KeiyakuJigyosha;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.EigyoKeitai;
+import jp.co.ndensan.reams.db.dbc.definition.core.eigyokeitai.EigyoKeitai;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;

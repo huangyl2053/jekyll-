@@ -64,6 +64,13 @@ public interface IHihosyosaiDiv extends ICommonChildDivBaseProperties {
     SearchResult<HihokenshaDaicho> getGridData();
 
     /**
+     * 住所地特例履歴情報の変更履歴グリッドのデータを取得します。
+     *
+     * @return SearchResult<HihokenshaDaicho> 変更履歴グリッド
+     */
+    SearchResult<HihokenshaDaicho> 住所地特例履歴情報取得();
+
+    /**
      * 施設入退所の保存処理する。
      */
     public void 施設入退所保存処理();
@@ -145,4 +152,11 @@ public interface IHihosyosaiDiv extends ICommonChildDivBaseProperties {
      * @return ValidationMessageControlPairs ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs 取得日と喪失日の前後順();
+
+    /**
+     * 資格変更情報グリッドに、状態が「追加」となっているデータが存在するかをチェックします。
+     *
+     * @return 状態が「追加」になっているデータが存在する場合、{@code true}
+     */
+    boolean is資格変更情報追加済み();
 }

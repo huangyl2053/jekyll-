@@ -5,8 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.kazeihantei;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.HokenryoDankaiHanteiParameter;
-import jp.co.ndensan.reams.db.dbz.definition.core.fuka.KazeiKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -28,13 +30,9 @@ public class KazeiHanteiMiShinkoku implements IKazeiHantei {
     @Override
     public void hokenryoDankaiShiyoShinai(HokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter) {
         if (hokenryoDankaiHanteiParameter.getSeigyoJoho().getMishinkokuKazeiKubun() != null) {
-            hokenryoDankaiHanteiParameter.getFukaKonkyo().setHonninKazeiKubun(
-                    hokenryoDankaiHanteiParameter.getSeigyoJoho().getMishinkokuKazeiKubun());
-
-            if (hokenryoDankaiHanteiParameter.getFukaKonkyo().getHonninKazeiKubun().equals(KazeiKubun.valueOf("課税"))) {
-                hokenryoDankaiHanteiParameter.getFukaKonkyo().setSetaiKazeiKubun(KazeiKubun.valueOf("課税"));
-            }
-
+            List<KazeiKubun> setaiinKazeiKubunList = new ArrayList<>();
+            setaiinKazeiKubunList.add(hokenryoDankaiHanteiParameter.getSeigyoJoho().getShotokuChosachuKazeiKubun());
+            hokenryoDankaiHanteiParameter.getFukaKonkyo().setSetaiinKazeiKubunList(setaiinKazeiKubunList);
         }
     }
 }

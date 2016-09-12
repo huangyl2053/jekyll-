@@ -3,14 +3,15 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.ShotokuJo
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue May 31 22:37:34 JST 2016 
+ * Wed Jun 22 11:20:11 CST 2016 
  */
 
 
 
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ImageDialog;
 
 
 /**
@@ -20,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
  */
 
 public class dgSetaiShotoku_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     private RString shikibetsuCodeHihokenshaNo;
     private RString shimei;
@@ -29,7 +30,9 @@ public class dgSetaiShotoku_Row extends DataRow {
     private RString idoDate;
     private RString riyoshaFutandankai;
     private RString seihoRorei;
-    private Button memo;
+    private ImageDialog memo;
+    private RString juminzeiGemmenMae;
+    private RString juminzeiGemmenGo;
     private RString juminzei;
     private RString gokeiShotokuKingaku;
     private RString nenkinShunyu;
@@ -45,7 +48,9 @@ public class dgSetaiShotoku_Row extends DataRow {
         this.idoDate = RString.EMPTY;
         this.riyoshaFutandankai = RString.EMPTY;
         this.seihoRorei = RString.EMPTY;
-        this.memo = new Button();
+        this.memo = new ImageDialog();
+        this.juminzeiGemmenMae = RString.EMPTY;
+        this.juminzeiGemmenGo = RString.EMPTY;
         this.juminzei = RString.EMPTY;
         this.gokeiShotokuKingaku = RString.EMPTY;
         this.nenkinShunyu = RString.EMPTY;
@@ -59,6 +64,8 @@ public class dgSetaiShotoku_Row extends DataRow {
         this.setOriginalData("riyoshaFutandankai", riyoshaFutandankai);
         this.setOriginalData("seihoRorei", seihoRorei);
         this.setOriginalData("memo", memo);
+        this.setOriginalData("juminzeiGemmenMae", juminzeiGemmenMae);
+        this.setOriginalData("juminzeiGemmenGo", juminzeiGemmenGo);
         this.setOriginalData("juminzei", juminzei);
         this.setOriginalData("gokeiShotokuKingaku", gokeiShotokuKingaku);
         this.setOriginalData("nenkinShunyu", nenkinShunyu);
@@ -66,7 +73,7 @@ public class dgSetaiShotoku_Row extends DataRow {
         this.setOriginalData("koseiDate", koseiDate);
     }
 
-    public dgSetaiShotoku_Row(RString shikibetsuCodeHihokenshaNo, RString shimei, RString seinengappiSeibetsuZokugara, RString shubetsu, RString idoDate, RString riyoshaFutandankai, RString seihoRorei, Button memo, RString juminzei, RString gokeiShotokuKingaku, RString nenkinShunyu, RString nenkinShotoku, RString koseiDate) {
+    public dgSetaiShotoku_Row(RString shikibetsuCodeHihokenshaNo, RString shimei, RString seinengappiSeibetsuZokugara, RString shubetsu, RString idoDate, RString riyoshaFutandankai, RString seihoRorei, ImageDialog memo, RString juminzeiGemmenMae, RString juminzeiGemmenGo, RString juminzei, RString gokeiShotokuKingaku, RString nenkinShunyu, RString nenkinShotoku, RString koseiDate) {
         super();
         this.setOriginalData("shikibetsuCodeHihokenshaNo", shikibetsuCodeHihokenshaNo);
         this.setOriginalData("shimei", shimei);
@@ -76,6 +83,8 @@ public class dgSetaiShotoku_Row extends DataRow {
         this.setOriginalData("riyoshaFutandankai", riyoshaFutandankai);
         this.setOriginalData("seihoRorei", seihoRorei);
         this.setOriginalData("memo", memo);
+        this.setOriginalData("juminzeiGemmenMae", juminzeiGemmenMae);
+        this.setOriginalData("juminzeiGemmenGo", juminzeiGemmenGo);
         this.setOriginalData("juminzei", juminzei);
         this.setOriginalData("gokeiShotokuKingaku", gokeiShotokuKingaku);
         this.setOriginalData("nenkinShunyu", nenkinShunyu);
@@ -89,11 +98,47 @@ public class dgSetaiShotoku_Row extends DataRow {
         this.riyoshaFutandankai = riyoshaFutandankai;
         this.seihoRorei = seihoRorei;
         this.memo = memo;
+        this.juminzeiGemmenMae = juminzeiGemmenMae;
+        this.juminzeiGemmenGo = juminzeiGemmenGo;
         this.juminzei = juminzei;
         this.gokeiShotokuKingaku = gokeiShotokuKingaku;
         this.nenkinShunyu = nenkinShunyu;
         this.nenkinShotoku = nenkinShotoku;
         this.koseiDate = koseiDate;
+    }
+
+    public dgSetaiShotoku_Row(DataGridSetting gridSetting) {
+        super();
+        this.shikibetsuCodeHihokenshaNo = RString.EMPTY;
+        this.shimei = RString.EMPTY;
+        this.seinengappiSeibetsuZokugara = RString.EMPTY;
+        this.shubetsu = RString.EMPTY;
+        this.idoDate = RString.EMPTY;
+        this.riyoshaFutandankai = RString.EMPTY;
+        this.seihoRorei = RString.EMPTY;
+        this.memo = ImageDialog.createInstance(gridSetting.getColumn("memo").getCellDetails());
+        this.juminzeiGemmenMae = RString.EMPTY;
+        this.juminzeiGemmenGo = RString.EMPTY;
+        this.juminzei = RString.EMPTY;
+        this.gokeiShotokuKingaku = RString.EMPTY;
+        this.nenkinShunyu = RString.EMPTY;
+        this.nenkinShotoku = RString.EMPTY;
+        this.koseiDate = RString.EMPTY;
+        this.setOriginalData("shikibetsuCodeHihokenshaNo", shikibetsuCodeHihokenshaNo);
+        this.setOriginalData("shimei", shimei);
+        this.setOriginalData("seinengappiSeibetsuZokugara", seinengappiSeibetsuZokugara);
+        this.setOriginalData("shubetsu", shubetsu);
+        this.setOriginalData("idoDate", idoDate);
+        this.setOriginalData("riyoshaFutandankai", riyoshaFutandankai);
+        this.setOriginalData("seihoRorei", seihoRorei);
+        this.setOriginalData("memo", memo);
+        this.setOriginalData("juminzeiGemmenMae", juminzeiGemmenMae);
+        this.setOriginalData("juminzeiGemmenGo", juminzeiGemmenGo);
+        this.setOriginalData("juminzei", juminzei);
+        this.setOriginalData("gokeiShotokuKingaku", gokeiShotokuKingaku);
+        this.setOriginalData("nenkinShunyu", nenkinShunyu);
+        this.setOriginalData("nenkinShotoku", nenkinShotoku);
+        this.setOriginalData("koseiDate", koseiDate);
     }
 
     public RString getShikibetsuCodeHihokenshaNo() {
@@ -124,8 +169,16 @@ public class dgSetaiShotoku_Row extends DataRow {
         return seihoRorei;
     }
 
-    public Button getMemo() {
+    public ImageDialog getMemo() {
         return memo;
+    }
+
+    public RString getJuminzeiGemmenMae() {
+        return juminzeiGemmenMae;
+    }
+
+    public RString getJuminzeiGemmenGo() {
+        return juminzeiGemmenGo;
     }
 
     public RString getJuminzei() {
@@ -183,9 +236,19 @@ public class dgSetaiShotoku_Row extends DataRow {
         this.seihoRorei = seihoRorei;
     }
 
-    public void setMemo(Button memo) {
+    public void setMemo(ImageDialog memo) {
         this.setOriginalData("memo", memo);
         this.memo = memo;
+    }
+
+    public void setJuminzeiGemmenMae(RString juminzeiGemmenMae) {
+        this.setOriginalData("juminzeiGemmenMae", juminzeiGemmenMae);
+        this.juminzeiGemmenMae = juminzeiGemmenMae;
+    }
+
+    public void setJuminzeiGemmenGo(RString juminzeiGemmenGo) {
+        this.setOriginalData("juminzeiGemmenGo", juminzeiGemmenGo);
+        this.juminzeiGemmenGo = juminzeiGemmenGo;
     }
 
     public void setJuminzei(RString juminzei) {

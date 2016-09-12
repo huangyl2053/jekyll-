@@ -13,16 +13,17 @@ import static jp.co.ndensan.reams.db.dbx.definition.core.hokensha.HokenshaKosei.
 import static jp.co.ndensan.reams.db.dbx.definition.core.hokensha.HokenshaKosei.広域市町村;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.kaigoninteiatenainfo.KaigoNinteiAtenaInfoBusiness;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.HdnShoriTypeStatus;
+import jp.co.ndensan.reams.db.dbz.definition.core.hokensha.HdnShoriTypeStatus;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kaigoninteiatenainfo.KaigoNinteiAtenaInfoParameter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiAtenaInfo.KaigoNinteiAtenaInfoDiv.AtenaType;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiAtenaInfo.KaigoNinteiAtenaInfoDiv.ShoriType;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.kaigoninteiatenainfo.KaigoNinteiAtenaInfoManager;
+import jp.co.ndensan.reams.db.dbz.service.core.kaigoninteiatenainfo.KaigoNinteiAtenaInfoManager;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ur.urz.definition.core.memo.MemoShikibetsuTaisho;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -33,7 +34,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 介護認定宛名情報の取得するクラスです。
  *
- * @reamsid_L DBE-1300-050 lizhuoxuan
+ * @reamsid_L DBZ-1300-050 lizhuoxuan
  */
 public class KaigoNinteiAtenaInfoHandler {
 
@@ -106,8 +107,16 @@ public class KaigoNinteiAtenaInfoHandler {
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.未定義
                 ), true);
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
-        KaigoNinteiAtenaInfoParameter infoParameter = KaigoNinteiAtenaInfoParameter.createSelectByKeyParam(shinseishoKanriNo.value(), shikibetsuCode.value(),
-                new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
+        RString 識別コード = RString.EMPTY;
+        RString 申請書管理番号 = RString.EMPTY;
+        if (shikibetsuCode != null && !RString.isNullOrEmpty(shikibetsuCode.value())) {
+            識別コード = shikibetsuCode.value();
+        }
+        if (shinseishoKanriNo != null && !RString.isNullOrEmpty(shinseishoKanriNo.value())) {
+            申請書管理番号 = shinseishoKanriNo.value();
+        }
+        KaigoNinteiAtenaInfoParameter infoParameter = KaigoNinteiAtenaInfoParameter.createSelectByKeyParam(識別コード, 申請書管理番号,
+                new RString(uaFt200Psm.toString()));
         List<KaigoNinteiAtenaInfoBusiness> ninteiList = KaigoNinteiAtenaInfoManager.createInstance()
                 .getKaigoNinteiAtenaInfo(infoParameter).records();
         if (ninteiList != null && !ninteiList.isEmpty()) {
@@ -115,12 +124,21 @@ public class KaigoNinteiAtenaInfoHandler {
         }
     }
 
-    private void set介護認定宛名情報(KaigoNinteiAtenaInfoBusiness business) {
+    /**
+     *
+     * @param business
+     */
+    public void set介護認定宛名情報(KaigoNinteiAtenaInfoBusiness business) {
         div.getTxtShimei().setValue(business.get氏名());
         div.getTxtBirthYMD().setValue(new RDate(business.get生年月日().toString()));
         div.getTxtNenrei().setValue(business.get年齢());
         div.getTxtSeibetsu().setValue(business.get性別());
-        div.getTxtJuminShubetsu().setValue(business.get住民種別コード());
+        if (business.get性別().equals(new RString("1"))) {
+            div.getTxtSeibetsu().setValue(new RString("男"));
+        } else if (business.get性別().equals(new RString("2"))) {
+            div.getTxtSeibetsu().setValue(new RString("女"));
+        }
+        div.getTxtJuminShubetsu().setValue(JuminJotai.toValue(business.get住民種別コード()).住民状態略称());
         div.getTxtShikiBetsuCode().setValue(business.get識別コード());
         div.getTxtKojinNo().setValue(new RString(business.get個人番号().toString()));
         div.getTxtYubinNo().setValue(business.get郵便番号());

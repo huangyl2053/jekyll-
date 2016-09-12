@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 @lombok.Value
 public class NinteiChosaHoshuTankaIdentifier implements Serializable {
 
+    private static final long serialVersionUID = 2098190294776693772L;
     private final Code 調査区分;
     private final Code 訪問種別;
     private final FlexibleYearMonth 開始年月;

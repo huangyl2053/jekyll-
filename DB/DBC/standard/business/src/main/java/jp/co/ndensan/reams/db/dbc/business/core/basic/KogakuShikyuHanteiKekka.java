@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3057KogakuShikyuHanteiKekka
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -21,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 高額介護サービス費支給判定結果を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-040 quxiaodong
  */
 public class KogakuShikyuHanteiKekka
         extends ModelBase<KogakuShikyuHanteiKekkaIdentifier, DbT3057KogakuShikyuHanteiKekkaEntity, KogakuShikyuHanteiKekka>
@@ -262,13 +263,32 @@ public class KogakuShikyuHanteiKekka
     @Override
     public KogakuShikyuHanteiKekka deleted() {
         DbT3057KogakuShikyuHanteiKekkaEntity deletedEntity = this.toEntity();
-        if (deletedEntity.getState() != EntityDataState.Added) {
-            deletedEntity.setState(EntityDataState.Deleted);
-        } else {
-            //TODO メッセージの検討
-            throw new IllegalStateException(UrErrorMessages.不正.toString());
-        }
+        deletedEntity.setState(EntityDataState.Deleted);
         return new KogakuShikyuHanteiKekka(deletedEntity, id);
+    }
+
+    /**
+     * 修正KogakuShikyuHanteiKekka
+     *
+     * @return ShokanMeisaiJushochiTokurei {@link ShokanMeisai}のクローン
+     */
+    public KogakuShikyuHanteiKekka modified() {
+        DbT3057KogakuShikyuHanteiKekkaEntity modifiedEntity = this.toEntity();
+        modifiedEntity.setState(EntityDataState.Modified);
+        //TODO メッセージの検討
+        return new KogakuShikyuHanteiKekka(modifiedEntity, id);
+    }
+
+    /**
+     * add KogakuShikyuHanteiKekka
+     *
+     * @return ShokanMeisaiJushochiTokurei {@link ShokanMeisai}のクローン
+     */
+    public KogakuShikyuHanteiKekka added() {
+        DbT3057KogakuShikyuHanteiKekkaEntity addedEntity = this.toEntity();
+        addedEntity.setState(EntityDataState.Added);
+        //TODO メッセージの検討
+        return new KogakuShikyuHanteiKekka(addedEntity, id);
     }
 
     /**

@@ -14,7 +14,7 @@
     </resultMap>
     <select id="get社福軽減額サービス種類"
             resultMap="resultMap_ShokanShukei"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraihishikyushinseikette.ShafukukeigenServiceParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraihishikyushinseikette.ShafukukeigenServiceParameter" fetchSize="500" resultOrdered="true">
         SELECT
             A."serviceShuruiCode",
             B."serviceShuruiMeisho",
@@ -53,7 +53,7 @@
     </resultMap>
     <select id="get給付実績基本情報"
             resultMap="resultMap_KyufujissekiKihon"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraihishikyushinseikette.KyufujissekiKihonParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraihishikyushinseikette.KyufujissekiKihonParameter" fetchSize="500" resultOrdered="true">
         SELECT ROW_NUMBER() over(order by B."shinsaYM" DESC)as row ,* FROM
         ( SELECT
             A."shinsaYM",

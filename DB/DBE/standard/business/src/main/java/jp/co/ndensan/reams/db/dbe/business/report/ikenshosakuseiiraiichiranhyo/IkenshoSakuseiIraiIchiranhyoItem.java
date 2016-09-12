@@ -43,6 +43,7 @@ public class IkenshoSakuseiIraiIchiranhyoItem {
     private RString listIchiranhyo_7;
     private RString listIchiranhyo_8;
     private RString listIchiranhyo_9;
+    private RString shujiiIryokikanCode;
 
     /**
      * コンストラクタを作成します。
@@ -77,6 +78,7 @@ public class IkenshoSakuseiIraiIchiranhyoItem {
      * @param listIchiranhyo_7 生年月日
      * @param listIchiranhyo_8 性別
      * @param listIchiranhyo_9 提出期限
+     * @param shujiiIryokikanCode 主治医医療機関コード
      */
     public IkenshoSakuseiIraiIchiranhyoItem(RString hakkoYMD, RString denshiKoin, RString ninshoshaYakushokuMei1,
             RString ninshoshaYakushokuMei, RString ninshoshaYakushokuMei2, RString ninshoshaShimeiKakeru,
@@ -84,7 +86,8 @@ public class IkenshoSakuseiIraiIchiranhyoItem {
             RString jushoText, RString kikanNameText, RString shimeiText, RString meishoFuyo, RString printTimeStamp,
             RString tsuchibun1, RString listIchiranhyo_2, RString listIchiranhyo_3, RString listIchiranhyo_4,
             RString listIchiranhyo_5, RString listIchiranhyo_6, RString listIchiranhyo_7, RString listIchiranhyo_8,
-            RString listIchiranhyo_9) {
+            RString listIchiranhyo_9,
+            RString shujiiIryokikanCode) {
         this.hakkoYMD = hakkoYMD;
         this.denshiKoin = denshiKoin;
         this.ninshoshaYakushokuMei1 = ninshoshaYakushokuMei1;
@@ -109,5 +112,6 @@ public class IkenshoSakuseiIraiIchiranhyoItem {
         this.listIchiranhyo_7 = listIchiranhyo_7;
         this.listIchiranhyo_8 = listIchiranhyo_8;
         this.listIchiranhyo_9 = listIchiranhyo_9;
+        this.shujiiIryokikanCode = shujiiIryokikanCode;
     }
 }

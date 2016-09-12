@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.shinseirirekij
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.shinseitodokedejoho.ShinseitodokedeJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.tennyushibo.TennyuShibo;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.tsuchishohakkojoho.TsuchishoHakkoJoho;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteikekkajoho.NinteiKekkaJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteikekkajoho.NinteiKekkaJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinseijoho.ninteishinseijoho.NinteiShinseiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteikekkajoho.INinteiKekkaJohoMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;

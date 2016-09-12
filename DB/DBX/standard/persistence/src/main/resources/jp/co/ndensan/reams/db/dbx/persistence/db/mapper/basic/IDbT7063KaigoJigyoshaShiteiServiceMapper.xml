@@ -335,7 +335,7 @@
         <result property="seikatuKinoKojoGroupKatsudoKasan" column="dbT7063KaigoJigyoshaShiteiService_seikatuKinoKojoGroupKatsudoKasan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="kaigoShokuinShoguKaizenKasan" column="dbT7063KaigoJigyoshaShiteiService_kaigoShokuinShoguKaizenKasan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
     </resultMap>
-    <select id="getEntity" resultMap="ResultMap_DbT7063KaigoJigyoshaShiteiServiceEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT7063KaigoJigyoshaShiteiServiceEntity">
         SELECT
         <include refid="allColumns_DbT7063KaigoJigyoshaShiteiService"/>
         FROM

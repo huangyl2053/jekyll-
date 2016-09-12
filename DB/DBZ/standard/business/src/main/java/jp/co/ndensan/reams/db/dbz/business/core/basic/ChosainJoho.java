@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.io.Serializable;
+import java.util.Objects;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ParentModelBase;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
@@ -18,12 +18,17 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.ModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 調査員情報を管理するクラスです。
+ *
+ * @reamsid_L DBZ-9999-011 sunhaidi
  */
-public class ChosainJoho extends ParentModelBase<ChosainJohoIdentifier, DbT5913ChosainJohoEntity, ChosainJoho> implements Serializable {
+public class ChosainJoho extends ModelBase<ChosainJohoIdentifier, DbT5913ChosainJohoEntity, ChosainJoho> implements Serializable {
+
+    private static final long serialVersionUID = 1471570426779306781L;
 
     private final DbT5913ChosainJohoEntity entity;
     private final ChosainJohoIdentifier id;
@@ -81,7 +86,6 @@ public class ChosainJoho extends ParentModelBase<ChosainJohoIdentifier, DbT5913C
         this.id = id;
     }
 
-//TODO getterを見直してください。意味のある単位でValueObjectを作成して公開してください。
     /**
      * 市町村コードを返します。
      *
@@ -96,8 +100,8 @@ public class ChosainJoho extends ParentModelBase<ChosainJohoIdentifier, DbT5913C
      *
      * @return 認定調査委託先コード
      */
-    public ChosaItakusakiCode get認定調査委託先コード() {
-        return new ChosaItakusakiCode(entity.getNinteiChosaItakusakiCode());
+    public RString get認定調査委託先コード() {
+        return entity.getNinteiChosaItakusakiCode();
     }
 
     /**
@@ -105,8 +109,8 @@ public class ChosainJoho extends ParentModelBase<ChosainJohoIdentifier, DbT5913C
      *
      * @return 認定調査員コード
      */
-    public ChosainCode get認定調査員コード() {
-        return new ChosainCode(entity.getNinteiChosainCode());
+    public RString get認定調査員コード() {
+        return entity.getNinteiChosainCode();
     }
 
     /**
@@ -200,11 +204,20 @@ public class ChosainJoho extends ParentModelBase<ChosainJohoIdentifier, DbT5913C
     }
 
     /**
+     * 所属機関名称を返します。
+     *
+     * @return 所属機関名称
+     */
+    public RString get所属機関名称() {
+        return entity.getShozokuKikanName();
+    }
+
+    /**
      * 状況フラグを返します。
      *
      * @return 状況フラグ
      */
-    public boolean is状況フラグ() {
+    public boolean is状況フラグ有効() {
         return entity.getJokyoFlag();
     }
 
@@ -229,15 +242,13 @@ public class ChosainJoho extends ParentModelBase<ChosainJohoIdentifier, DbT5913C
     }
 
     /**
-     * 調査員情報のみを変更対象とします。<br/>
-     * {@link DbT5913ChosainJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 調査員情報のみを変更対象とします。<br/> {@link DbT5913ChosainJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ChosainJoho}
      */
-    @Override
     public ChosainJoho modifiedModel() {
-        DbT5913ChosainJohoEntity modifiedEntity = this.toEntity();
-        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
+        DbT5913ChosainJohoEntity modifiedEntity = entity.clone();
+        if (modifiedEntity.getState().equals(EntityDataState.Unchanged)) {
             modifiedEntity.setState(EntityDataState.Modified);
         }
         return new ChosainJoho(
@@ -245,8 +256,7 @@ public class ChosainJoho extends ParentModelBase<ChosainJohoIdentifier, DbT5913C
     }
 
     /**
-     * 保持する調査員情報を削除対象とします。<br/>
-     * {@link DbT5913ChosainJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する調査員情報を削除対象とします。<br/> {@link DbT5913ChosainJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ChosainJoho}
      */
@@ -256,7 +266,6 @@ public class ChosainJoho extends ParentModelBase<ChosainJohoIdentifier, DbT5913C
         if (deletedEntity.getState() != EntityDataState.Added) {
             deletedEntity.setState(EntityDataState.Deleted);
         } else {
-            //TODO メッセージの検討
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new ChosainJoho(deletedEntity, id);
@@ -274,12 +283,12 @@ public class ChosainJoho extends ParentModelBase<ChosainJohoIdentifier, DbT5913C
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {
 
-        private static final long serialVersionUID = 1L;
+        private static final long serialVersionUID = 1471570426779306781L;
         private final DbT5913ChosainJohoEntity entity;
         private final ChosainJohoIdentifier id;
 
@@ -303,5 +312,23 @@ public class ChosainJoho extends ParentModelBase<ChosainJohoIdentifier, DbT5913C
         return new ChosainJohoBuilder(entity, id);
     }
 
-//TODO これはあくまでも雛形によるクラス生成です、必要な業務ロジックの追加、ValueObjectの導出を行う必要があります。
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ChosainJoho other = (ChosainJoho) obj;
+        return Objects.equals(this.id, other.id);
+    }
+
 }

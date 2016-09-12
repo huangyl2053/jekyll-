@@ -43,18 +43,18 @@ public class ChosahyoKihonchosaKatamenItem {
     /**
      * インスタンスを生成します。
      *
-     * @param shinseiYY1 証記載保険者番号1
-     * @param shinseiYY2 証記載保険者番号2
-     * @param shinseiMM1 証記載保険者番号3
-     * @param shinseiMM2 証記載保険者番号4
-     * @param shinseiDD1 証記載保険者番号5
-     * @param shinseiDD2 証記載保険者番号6
-     * @param hokenshaNo1 申請年1
-     * @param hokenshaNo2 申請年2
-     * @param hokenshaNo3 申請月1
-     * @param hokenshaNo4 申請月2
-     * @param hokenshaNo5 申請日1
-     * @param hokenshaNo6 申請日2
+     * @param shinseiYY1 申請年1
+     * @param shinseiYY2 申請年2
+     * @param shinseiMM1 申請月1
+     * @param shinseiMM2 申請月2
+     * @param shinseiDD1 申請日1
+     * @param shinseiDD2 申請日2
+     * @param hokenshaNo1 証記載保険者番号1
+     * @param hokenshaNo2 証記載保険者番号2
+     * @param hokenshaNo3 証記載保険者番号3
+     * @param hokenshaNo4 証記載保険者番号4
+     * @param hokenshaNo5 証記載保険者番号5
+     * @param hokenshaNo6 証記載保険者番号6
      * @param hihokenshaNo1 被保険者番号1
      * @param hihokenshaNo2 被保険者番号2
      * @param hihokenshaNo3 被保険者番号3

@@ -12,7 +12,7 @@
     
     
     <select id="getKoseiShichosonMasterRelateEntity" resultMap="resultMap_KoseiShichosonMasterEntity"
-     parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.koseishichosonmaster.KoseiShichosonMasterMapperParameter" fetchSize="500">
+     parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.koseishichosonmaster.KoseiShichosonMasterMapperParameter" fetchSize="500" resultOrdered="true">
     SELECT
         DbT5051KoseiShichosonMaster.*,
         DbT5911ShujiiIryoKikanJoho.*,

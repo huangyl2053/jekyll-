@@ -17,7 +17,7 @@
      <result property="通常メモ件数" column="通常メモ件数"/> 
      <result property="重要メモ件数" column="重要メモ件数"/> 
     </resultMap>
-        <select id="getNinteiChousaSukeList" resultMap="resultMap_getNinteiEntity" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichousasukejuru.NinteiChousaSukejuruParameter" fetchSize="500">
+        <select resultOrdered="true" id="getNinteiChousaSukeList" resultMap="resultMap_getNinteiEntity" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichousasukejuru.NinteiChousaSukejuruParameter" fetchSize="500">
         SELECT 
             CASE WHEN T3."ninteiChosaYoteiYMD"  IS NULL  THEN  T3."memoYMD"
             ELSE T3."ninteiChosaYoteiYMD" END AS "memoTIME",

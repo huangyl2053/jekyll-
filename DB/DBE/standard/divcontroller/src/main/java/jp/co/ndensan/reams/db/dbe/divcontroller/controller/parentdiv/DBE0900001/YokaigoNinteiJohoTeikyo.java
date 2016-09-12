@@ -5,13 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE0900001;
 
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.yokaigoninteijohoteikyo.YokaigoBatchParameter;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.yokaigoninteijohoteikyo.YokaigoBatchParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0900001.DBE0900001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0900001.YokaigoNinteiJohoTeikyoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0900001.dgNinteiKekkaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0900001.YokaigoNinteiJohoTeikyoHandler;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -19,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 要介護認定情報提供Divを制御クラスです。
@@ -38,7 +40,8 @@ public class YokaigoNinteiJohoTeikyo {
      * @return ResponseData
      */
     public ResponseData<YokaigoNinteiJohoTeikyoDiv> onLoad(YokaigoNinteiJohoTeikyoDiv div) {
-        getHandler(div).onLoad();
+        RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
+        getHandler(div).onLoad(被保険者番号);
         return ResponseData.of(div).setState(DBE0900001StateName.初期表示);
     }
 
@@ -87,16 +90,6 @@ public class YokaigoNinteiJohoTeikyo {
     }
 
     /**
-     * 「検索へ戻る」ボタン押下します。
-     *
-     * @param div YokaigoNinteiJohoTeikyoDiv
-     * @return ResponseData
-     */
-    public ResponseData<YokaigoNinteiJohoTeikyoDiv> btn_kensakuback(YokaigoNinteiJohoTeikyoDiv div) {
-        return ResponseData.of(div).respond();
-    }
-
-    /**
      * 「一覧へ戻る」ボタン押下します。
      *
      * @param div YokaigoNinteiJohoTeikyoDiv
@@ -104,17 +97,8 @@ public class YokaigoNinteiJohoTeikyo {
      */
     public ResponseData<YokaigoNinteiJohoTeikyoDiv> btn_BackSearchResult(YokaigoNinteiJohoTeikyoDiv div) {
         onLoad(div);
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 再検索処理を実施します。
-     *
-     * @param div YokaigoNinteiJohoTeikyoDiv
-     * @return ResponseData
-     */
-    public ResponseData<YokaigoNinteiJohoTeikyoDiv> btn_ToSearch(YokaigoNinteiJohoTeikyoDiv div) {
-        return ResponseData.of(div).respond();
+        getHandler(div).btn_BackSearchResult();
+        return ResponseData.of(div).setState(DBE0900001StateName.初期表示);
     }
 
     /**

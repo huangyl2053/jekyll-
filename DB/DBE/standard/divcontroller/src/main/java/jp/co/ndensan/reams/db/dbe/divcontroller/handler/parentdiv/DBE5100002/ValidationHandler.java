@@ -103,7 +103,7 @@ public class ValidationHandler {
     private static enum RRVMessages implements IValidationMessage {
 
         Validate対象者一覧未表示(UrErrorMessages.対象データなし),
-        Validate対象者一覧未選択(UrErrorMessages.選択されていない),
+        Validate対象者一覧未選択(UrErrorMessages.選択されていない, "審査会"),
         Validate未開催以外の場合(DbeErrorMessages.審査会開催済み),
         Validateダミーフラグがチェックされた場合(DbzErrorMessages.ダミー審査会選択不可);
         private final Message message;

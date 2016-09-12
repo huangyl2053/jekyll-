@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchisho
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchisho.TokubetsuChoshuKaishiTsuchishoSealerReport;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiTsuchiShoKyotsu;
+import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchisho.TokubetsuChoshuKaishiTsuchishoB52RenchoSource;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchisho.TokubetsuChoshuKaishiTsuchishoB52Source;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchisho.TokubetsuChoshuKaishiTsuchishoB5RenchoSource;
@@ -31,7 +32,7 @@ import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchisho.T
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.CompKaigoToiawasesakiSource;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.IKaigoToiawasesakiSourceBuilder;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.report.parts.kaigotoiawasesaki.KaigoToiawasesakiSourceBuilderCreator;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
@@ -63,6 +64,36 @@ public class TokubetsuChoshuKaishiTsuchishoPrintService {
 
     private static final RString 種別コード = NinshoshaDenshikoinshubetsuCode.保険者印.getコード();
     private static final RString RSTRING_1 = new RString("1");
+
+    /**
+     * 帳票を出力します。
+     *
+     * @param 編集後本算定通知書共通情報 EditedHonSanteiTsuchiShoKyotsu
+     * @param 宛名連番 RString
+     * @param 本算定通知書情報 HonSanteiTsuchiShoKyotsu
+     * @param reportManager ReportManager
+     */
+    public void print(EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
+            RString 宛名連番, HonSanteiTsuchiShoKyotsu 本算定通知書情報, ReportManager reportManager) {
+
+        RString 帳票ID = 本算定通知書情報.get帳票ID().getColumnValue();
+
+        if (ReportIdDBB.DBB100032.getReportId().getColumnValue().equals(帳票ID)) {
+            printB5横タイプ(編集後本算定通知書共通情報, 宛名連番, 本算定通知書情報, reportManager);
+        } else if (ReportIdDBB.DBB100033.getReportId().getColumnValue().equals(帳票ID)) {
+            printB5横タイプ連帳(編集後本算定通知書共通情報, 宛名連番, 本算定通知書情報, reportManager);
+        } else if (ReportIdDBB.DBB100034.getReportId().getColumnValue().equals(帳票ID)) {
+            printシーラタイプ(編集後本算定通知書共通情報, 本算定通知書情報, reportManager);
+        } else if (ReportIdDBB.DBB100035.getReportId().getColumnValue().equals(帳票ID)) {
+            printシーラタイプ連帳(編集後本算定通知書共通情報, 本算定通知書情報, reportManager);
+        } else if (ReportIdDBB.DBB100036.getReportId().getColumnValue().equals(帳票ID)) {
+            printB5横タイプ2(編集後本算定通知書共通情報, 宛名連番, 本算定通知書情報, reportManager);
+        } else if (ReportIdDBB.DBB100037.getReportId().getColumnValue().equals(帳票ID)) {
+            printB5横タイプ2連帳(編集後本算定通知書共通情報, 宛名連番, 本算定通知書情報, reportManager);
+        } else if (ReportIdDBB.DBB100038.getReportId().getColumnValue().equals(帳票ID)) {
+            printA4縦(編集後本算定通知書共通情報, 宛名連番, 本算定通知書情報, reportManager);
+        }
+    }
 
     /**
      * B5横タイプ printメソッド

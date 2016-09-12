@@ -6,8 +6,8 @@ package jp.co.ndensan.reams.db.dbe.business.core.ninteichosairai;
 
 //import jp.co.ndensan.reams.db.dbz.definition.valueobject.KaigoJigyoshaNo;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.definition.core.ChosaItakuKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaItakuKubunCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -24,7 +24,7 @@ public class NinteichosaItakusaki {
     private final KaigoJigyoshaNo 介護事業者番号;
     private final JigyoshaNo 事業者番号;
     private final boolean 有効区分;
-    private final ChosaItakuKubun 調査委託区分;
+    private final ChosaItakuKubunCode 調査委託区分;
     private final int 割付定員;
     private final RString 割付地区;
     private final RString 機関の区分;
@@ -43,7 +43,7 @@ public class NinteichosaItakusaki {
      * @throws NullPointerException 引数がnullの場合
      */
     public NinteichosaItakusaki(LasdecCode 市町村コード, KaigoJigyoshaNo 介護事業者番号, JigyoshaNo 事業者番号,
-            boolean 有効区分, ChosaItakuKubun 調査委託区分,
+            boolean 有効区分, ChosaItakuKubunCode 調査委託区分,
             int 割付定員, RString 割付地区, RString 機関の区分) throws NullPointerException {
 
         requireNonNull(市町村コード, UrSystemErrorMessages.引数がnullのため生成不可.getReplacedMessage("市町村コード", getClass().getName()));
@@ -102,7 +102,7 @@ public class NinteichosaItakusaki {
      *
      * @return 調査委託区分
      */
-    public ChosaItakuKubun getChosaItakuKubun() {
+    public ChosaItakuKubunCode getChosaItakuKubun() {
         return 調査委託区分;
     }
 

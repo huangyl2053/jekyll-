@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho;
 
 import java.io.Serializable;
@@ -14,7 +13,8 @@ import lombok.Setter;
 /**
  *
  * 認定申請連絡先情報のビジネスコレクションクラスです。
- * @reamsid_L DBE-1300-100 dongyabin
+ *
+ * @reamsid_L DBZ-1300-100 dongyabin
  */
 @Getter
 @Setter

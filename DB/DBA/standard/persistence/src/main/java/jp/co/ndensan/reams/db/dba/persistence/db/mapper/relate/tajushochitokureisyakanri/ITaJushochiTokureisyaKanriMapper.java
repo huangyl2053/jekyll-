@@ -5,7 +5,8 @@
 package jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tajushochitokureisyakanri;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisyakanri.TaJushochiTokureisyaKanriParameter;
+import jp.co.ndensan.reams.db.dba.definition.mybatisprm.tajushochitokureisyakanri.TaJushochiTokureisyaKanriParameter;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.otheraddressledger.OtherAddressInfFromDBEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tajushochitokureisyakan.TaJushochiTokureisyaKanriRelateEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tajushochitokureisyakan.TashichosonRelateEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
@@ -42,6 +43,22 @@ public interface ITaJushochiTokureisyaKanriMapper {
     TaJushochiTokureisyaKanriRelateEntity get事業者名称_住所地特例対象施設(TaJushochiTokureisyaKanriParameter parameter);
 
     /**
+     * 入所施設種類がDBZ介護共通基盤Enum.施設種類.介護保険施設の場合に事業者取得します。
+     *
+     * @param parameter TaJushochiTokureisyaKanriParameter
+     * @return OtherAddressInfFromDBEntity
+     */
+    OtherAddressInfFromDBEntity get事業者_介護保険施設(TaJushochiTokureisyaKanriParameter parameter);
+
+    /**
+     * 入所施設種類がDBZ介護共通基盤Enum.施設種類.住所地特例対象施設の場合に事業者取得します。
+     *
+     * @param parameter TaJushochiTokureisyaKanriParameter
+     * @return OtherAddressInfFromDBEntity
+     */
+    OtherAddressInfFromDBEntity get事業者_住所地特例対象施設(TaJushochiTokureisyaKanriParameter parameter);
+
+    /**
      * 宛名情報PSMで取得します。
      *
      * @param 宛名情報PSM検索条件 TaJushochiTokureisyaKanriParameter
@@ -56,7 +73,7 @@ public interface ITaJushochiTokureisyaKanriMapper {
      * @return 施設入退所情報リスト件数
      */
     int select施設入退所情報リスト件数取得(
-            jp.co.ndensan.reams.db.dba.definition.mybatis.param.tajushochitokureisya.TaJushochiTokureisyaKanriParameter 施設入退所情報リスト件数取得);
+            jp.co.ndensan.reams.db.dba.definition.mybatisprm.tajushochitokureisya.TaJushochiTokureisyaKanriParameter 施設入退所情報リスト件数取得);
 
     /**
      * 他市町村住所地特例情報取得します。

@@ -6,11 +6,11 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.choshuyuyo.IChoshuYuyoMapper">
 
-    <select id="select介護賦課徴収猶予ByKey" resultMap="resultMap_ChoshuYuyoEntity" fetchSize="500">
+    <select resultOrdered="true" id="select介護賦課徴収猶予ByKey" resultMap="resultMap_ChoshuYuyoEntity" fetchSize="500">
         <include refid="selectChoshuYuyoEntity" />
     </select>
 
-    <select id="select介護賦課徴収猶予リストBy主キー1" resultMap="resultMap_ChoshuYuyoEntity" fetchSize="500">
+    <select resultOrdered="true" id="select介護賦課徴収猶予リストBy主キー1" resultMap="resultMap_ChoshuYuyoEntity" fetchSize="500">
         <include refid="selectChoshuYuyoEntity" />
     </select>
 

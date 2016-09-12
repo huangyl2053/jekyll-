@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC7010001
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuBatchParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7010001.HanyorisutoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7010001.HanyorisutoPanelHandler;
-import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
+import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
@@ -40,7 +40,7 @@ public class HanyorisutoPanel {
      */
     public ResponseData<HanyorisutoPanelDiv> onBeforeOpenDialog_btnSienJigyosyano(HanyorisutoPanelDiv div) {
         JigyoshaMode mode = new JigyoshaMode();
-        mode.setJigyoshaShubetsu(ShisetsuType.介護保険施設.code());
+        mode.setJigyoshaShubetsu(ShisetsuType.介護保険施設.getコード());
         div.getChushutsuJokenPanel().setHiddenJigyoshaMode(DataPassingConverter.serialize(mode));
         return createResponse(div);
     }

@@ -1,0 +1,1175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <!--@reamsid_L DBB-0830-050 xuhao--> 
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchoheijunkakakutei.ITokuchoHeinjunkaKakuteiMapper">
+    
+    <!--特徴平準化賦課Temp 一時テーブルを作成します-->
+    <insert id="create特徴平準化賦課Temp">
+        CREATE TEMP TABLE "TEMP_TABLE_TokuchoHeinjunkaFuka"
+        (
+        "choteiNendoBefore" rshare."UDD012YSeireki",
+        "fukaNendoBefore" rshare."UDD012YSeireki",
+        "tsuchishoNoBefore" rgdb."DbUDD008TsuchishoNo",
+        "rirekiNoBefore" smallint,
+        "hihokenshaNoBefore" rgdb."DbUDD002HihokenshaNo",
+        "shikibetsuCodeBefore" rshare."UDD001ShikibetsuCode",
+        "setaiCodeBefore" rshare."UDD051SetaiCode",
+        "setaiInsuBefore" smallint,
+        "shikakuShutokuYMDBefore" rshare."UDD015YMD",
+        "shikakuShutokuJiyuBefore" character varying(2),
+        "shikakuSoshitsuYMDBefore" rshare."UDD015YMD",
+        "shikakuSoshitsuJiyuBefore" character varying(2),
+        "seihofujoShuruiBefore" character varying(2),
+        "seihoKaishiYMDBefore" rshare."UDD015YMD",
+        "seihoHaishiYMDBefore" rshare."UDD015YMD",
+        "ronenKaishiYMDBefore" rshare."UDD015YMD",
+        "ronenHaishiYMDBefore" rshare."UDD015YMD",
+        "fukaYMDBefore" rshare."UDD015YMD",
+        "kazeiKubunBefore" character varying(1),
+        "setaikazeiKubunBefore" character varying(1),
+        "gokeiShotokuGakuBefore" numeric(12,0),
+        "nenkinShunyuGakuBefore" numeric(12,0),
+        "hokenryoDankaiBefore" character varying(3),
+        "hokenryoDankai1Before" character varying(3),
+        "nengakuHokenryo1Before" numeric(7,0),
+        "tsukiwariStartYM1Before" rshare."UDD014YM",
+        "tsukiwariEndYM1Before" rshare."UDD014YM",
+        "hokenryoDankai2Before" character varying(3),
+        "nengakuHokenryo2Before" numeric(7,0),
+        "tsukiwariStartYM2Before" rshare."UDD014YM",
+        "tsukiwariEndYM2Before" rshare."UDD014YM",
+        "choteiNichijiBefore" rshare."UDD018YMDHMS",
+        "choteiJiyu1Before" character varying(2),
+        "choteiJiyu2Before" character varying(2),
+        "choteiJiyu3Before" character varying(2),
+        "choteiJiyu4Before" character varying(2),
+        "koseiMBefore" character varying(2),
+        "gemmenMaeHokenryoBefore" numeric(7,0),
+        "gemmenGakuBefore" numeric(7,0),
+        "kakuteiHokenryoBefore" numeric(7,0),
+        "hokenryoDankaiKarisannteiBefore" character varying(3),
+        "choshuHohoRirekiNoBefore" smallint,
+        "idoKijunNichijiBefore" rshare."UDD018YMDHMS",
+        "kozaKubunBefore" character varying(1),
+        "kyokaisoKubunBefore" character varying(1),
+        "shokkenKubunBefore" character varying(1),
+        "fukaShichosonCodeBefore" rshare."UDD023LasdecCode",
+        "tkSaishutsuKampuGakuBefore" numeric(7,0),
+        "fuSaishutsuKampuGakuBefore" numeric(7,0),
+        "tkGaku01Before" numeric,
+        "tkGaku02Before" numeric,
+        "tkGaku03Before" numeric,
+        "tkGaku04Before" numeric,
+        "tkGaku05Before" numeric,
+        "tkGaku06Before" numeric,
+        "fuGaku01Before" numeric,
+        "fuGaku02Before" numeric,
+        "fuGaku03Before" numeric,
+        "fuGaku04Before" numeric,
+        "fuGaku05Before" numeric,
+        "fuGaku06Before" numeric,
+        "fuGaku07Before" numeric,
+        "fuGaku08Before" numeric,
+        "fuGaku09Before" numeric,
+        "fuGaku10Before" numeric,
+        "fuGaku11Before" numeric,
+        "fuGaku12Before" numeric,
+        "fuGaku13Before" numeric,
+        "fuGaku14Before" numeric,
+        "choteiNendo" rshare."UDD012YSeireki",
+        "fukaNendo" rshare."UDD012YSeireki",
+        "tsuchishoNo" rgdb."DbUDD008TsuchishoNo",
+        "rirekiNo" smallint,
+        "hihokenshaNo" rgdb."DbUDD002HihokenshaNo",
+        "shikibetsuCode" rshare."UDD001ShikibetsuCode",
+        "setaiCode" rshare."UDD051SetaiCode",
+        "setaiInsu" smallint,
+        "shikakuShutokuYMD" rshare."UDD015YMD",
+        "shikakuShutokuJiyu" character varying(2),
+        "shikakuSoshitsuYMD" rshare."UDD015YMD",
+        "shikakuSoshitsuJiyu" character varying(2),
+        "seihofujoShurui" character varying(2),
+        "seihoKaishiYMD" rshare."UDD015YMD",
+        "seihoHaishiYMD" rshare."UDD015YMD",
+        "ronenKaishiYMD" rshare."UDD015YMD",
+        "ronenHaishiYMD" rshare."UDD015YMD",
+        "fukaYMD" rshare."UDD015YMD",
+        "kazeiKubun" character varying(1),
+        "setaikazeiKubun" character varying(1),
+        "gokeiShotokuGaku" numeric(12,0),
+        "nenkinShunyuGaku" numeric(12,0),
+        "hokenryoDankai" character varying(3),
+        "hokenryoDankai1" character varying(3),
+        "nengakuHokenryo1" numeric(7,0),
+        "tsukiwariStartYM1" rshare."UDD014YM",
+        "tsukiwariEndYM1" rshare."UDD014YM",
+        "hokenryoDankai2" character varying(3),
+        "nengakuHokenryo2" numeric(7,0),
+        "tsukiwariStartYM2" rshare."UDD014YM",
+        "tsukiwariEndYM2" rshare."UDD014YM",
+        "choteiNichiji" rshare."UDD018YMDHMS",
+        "choteiJiyu1" character varying(2),
+        "choteiJiyu2" character varying(2),
+        "choteiJiyu3" character varying(2),
+        "choteiJiyu4" character varying(2),
+        "koseiM" character varying(2),
+        "gemmenMaeHokenryo" numeric(7,0),
+        "gemmenGaku" numeric(7,0),
+        "kakuteiHokenryo" numeric(7,0),
+        "hokenryoDankaiKarisanntei" character varying(3),
+        "choshuHohoRirekiNo" smallint,
+        "idoKijunNichiji" rshare."UDD018YMDHMS",
+        "kozaKubun" character varying(1),
+        "kyokaisoKubun" character varying(1),
+        "shokkenKubun" character varying(1),
+        "fukaShichosonCode" rshare."UDD023LasdecCode",
+        "tkSaishutsuKampuGaku" numeric(7,0),
+        "fuSaishutsuKampuGaku" numeric(7,0),
+        "tkGaku01" numeric,
+        "tkGaku02" numeric,
+        "tkGaku03" numeric,
+        "tkGaku04" numeric,
+        "tkGaku05" numeric,
+        "tkGaku06" numeric,
+        "fuGaku01" numeric,
+        "fuGaku02" numeric,
+        "fuGaku03" numeric,
+        "fuGaku04" numeric,
+        "fuGaku05" numeric,
+        "fuGaku06" numeric,
+        "fuGaku07" numeric,
+        "fuGaku08" numeric,
+        "fuGaku09" numeric,
+        "fuGaku10" numeric,
+        "fuGaku11" numeric,
+        "fuGaku12" numeric,
+        "fuGaku13" numeric,
+        "fuGaku14" numeric,
+        "choteiId" character varying(100),
+        "shunoId" character varying(100)
+        )
+    </insert>
+    
+     <!--特徴平準化賦課Temp 一時テーブルに登録します。--> 
+    <insert id="inset特徴平準化賦課Temp" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunkakakutei.TokuchoHeinjunkaKakuteiEntity">
+        INSERT INTO 
+        "TEMP_TABLE_TokuchoHeinjunkaFuka"
+        VALUES
+        (#{平準化前調定年度},
+        #{平準化前賦課年度},
+        #{平準化前通知書番号},
+        #{平準化前履歴番号},
+        #{平準化前被保険者番号},
+        #{平準化前識別コード},
+        #{平準化前世帯コード},
+        #{平準化前世帯員数},
+        #{平準化前資格取得日},
+        #{平準化前資格取得事由},
+        #{平準化前資格喪失日},
+        #{平準化前資格喪失事由},
+        #{平準化前生活保護扶助種類},
+        #{平準化前生保開始日},
+        #{平準化前生保廃止日},
+        #{平準化前老年開始日},
+        #{平準化前老年廃止日},
+        #{平準化前賦課期日},
+        #{平準化前課税区分},
+        #{平準化前世帯課税区分},
+        #{平準化前合計所得金額},
+        #{平準化前公的年金収入額},
+        #{平準化前保険料段階},
+        #{平準化前保険料算定段階1},
+        #{平準化前算定年額保険料1},
+        #{平準化前月割開始年月1},
+        #{平準化前月割終了年月1},
+        #{平準化前保険料算定段階2},
+        #{平準化前算定年額保険料2},
+        #{平準化前月割開始年月2},
+        #{平準化前月割終了年月2},
+        #{平準化前調定日時},
+        #{平準化前調定事由1},
+        #{平準化前調定事由2},
+        #{平準化前調定事由3},
+        #{平準化前調定事由4},
+        #{平準化前更正月},
+        #{平準化前減免前介護保険料_年額},
+        #{平準化前減免額},
+        #{平準化前確定介護保険料_年額},
+        #{平準化前保険料段階_仮算定時},
+        #{平準化前徴収方法履歴番号},
+        #{平準化前異動基準日時},
+        #{平準化前口座区分},
+        #{平準化前境界層区分},
+        #{平準化前職権区分},
+        #{平準化前賦課市町村コード},
+        #{平準化前特徴歳出還付額},
+        #{平準化前普徴歳出還付額},
+        #{平準化前特徴期別金額01},
+        #{平準化前特徴期別金額02},
+        #{平準化前特徴期別金額03},
+        #{平準化前特徴期別金額04},
+        #{平準化前特徴期別金額05},
+        #{平準化前特徴期別金額06},
+        #{平準化前普徴期別金額01},
+        #{平準化前普徴期別金額02},
+        #{平準化前普徴期別金額03},
+        #{平準化前普徴期別金額04},
+        #{平準化前普徴期別金額05},
+        #{平準化前普徴期別金額06},
+        #{平準化前普徴期別金額07},
+        #{平準化前普徴期別金額08},
+        #{平準化前普徴期別金額09},
+        #{平準化前普徴期別金額10},
+        #{平準化前普徴期別金額11},
+        #{平準化前普徴期別金額12},
+        #{平準化前普徴期別金額13},
+        #{平準化前普徴期別金額14},
+        #{調定年度},
+        #{賦課年度},
+        #{通知書番号},
+        #{履歴番号},
+        #{被保険者番号},
+        #{識別コード},
+        #{世帯コード},
+        #{世帯員数},
+        #{資格取得日},
+        #{資格取得事由},
+        #{資格喪失日},
+        #{資格喪失事由},
+        #{生活保護扶助種類},
+        #{生保開始日},
+        #{生保廃止日},
+        #{老年開始日},
+        #{老年廃止日},
+        #{賦課期日},
+        #{課税区分},
+        #{世帯課税区分},
+        #{合計所得金額},
+        #{公的年金収入額},
+        #{保険料段階},
+        #{保険料算定段階1},
+        #{算定年額保険料1},
+        #{月割開始年月1},
+        #{月割終了年月1},
+        #{保険料算定段階2},
+        #{算定年額保険料2},
+        #{月割開始年月2},
+        #{月割終了年月2},
+        #{調定日時},
+        #{調定事由1},
+        #{調定事由2},
+        #{調定事由3},
+        #{調定事由4},
+        #{更正月},
+        #{減免前介護保険料_年額},
+        #{減免額},
+        #{確定介護保険料_年額},
+        #{保険料段階_仮算定時},
+        #{徴収方法履歴番号},
+        #{異動基準日時},
+        #{口座区分},
+        #{境界層区分},
+        #{職権区分},
+        #{賦課市町村コード},
+        #{特徴歳出還付額},
+        #{普徴歳出還付額},
+        #{特徴期別金額01},
+        #{特徴期別金額02},
+        #{特徴期別金額03},
+        #{特徴期別金額04},
+        #{特徴期別金額05},
+        #{特徴期別金額06},
+        #{普徴期別金額01},
+        #{普徴期別金額02},
+        #{普徴期別金額03},
+        #{普徴期別金額04},
+        #{普徴期別金額05},
+        #{普徴期別金額06},
+        #{普徴期別金額07},
+        #{普徴期別金額08},
+        #{普徴期別金額09},
+        #{普徴期別金額10},
+        #{普徴期別金額11},
+        #{普徴期別金額12},
+        #{普徴期別金額13},
+        #{普徴期別金額14},
+        #{調定ID},
+        #{収納ID}
+        )
+    </insert>
+    
+    <resultMap id="resultMap_FukaInfo" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity" autoMapping="true">
+        <id property="介護賦課Entity.choteiNendo" column="dbT2002Fuka_choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="介護賦課Entity.fukaNendo" column="dbT2002Fuka_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="介護賦課Entity.tsuchishoNo" column="dbT2002Fuka_tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
+        <id property="介護賦課Entity.rirekiNo" column="dbT2002Fuka_rirekiNo" />
+        <association property="介護賦課Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.ResultMap_DbT2002FukaEntity"/>
+        <collection property="介護期別RelateEntity"
+                    resultMap="resultMap_KibetsuEntity"/>
+    </resultMap>
+
+    <resultMap id="resultMap_KibetsuEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity" autoMapping="true">
+        <id property="介護期別Entity.choshuHouhou" column="dbT2003Kibetsu_choshuHouhou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="介護期別Entity.ki" column="dbT2003Kibetsu_ki" />
+        <association property="介護期別Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.ResultMap_DbT2003KibetsuEntity"/>
+        <collection property="調定共通Entity" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.ResultMap_UrT0705ChoteiKyotsuEntity"/>
+    </resultMap>
+    
+    <select resultOrdered="true" id="select平準化前の賦課の情報" resultMap="resultMap_FukaInfo"
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheinjunkakakutei.HeinjunkaAfterParameter" fetchSize="500">
+        <include refid="selectHeinjunkaBefor" />
+    </select>
+    <sql id="selectHeinjunkaBefor">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka" />,
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>,
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu"/>
+        FROM
+        rgdb."DbT2002Fuka" AS "DbT2002Fuka"
+        INNER JOIN
+        "TEMP_TABLE_TokuchoHeinjunkaFuka" AS TEMP
+        ON
+        "DbT2002Fuka"."choteiNendo" = TEMP."choteiNendo" and
+        "DbT2002Fuka"."fukaNendo" = TEMP."fukaNendo" and
+        "DbT2002Fuka"."tsuchishoNo" = TEMP."tsuchishoNo" and
+        "DbT2002Fuka"."rirekiNo" = TEMP."rirekiNo" - 1
+        INNER JOIN
+        rgdb."DbT2003Kibetsu" AS "DbT2003Kibetsu"
+        ON
+        "DbT2003Kibetsu"."choteiNendo" = "DbT2002Fuka"."choteiNendo" and
+        "DbT2003Kibetsu"."fukaNendo" = "DbT2002Fuka"."fukaNendo" and
+        "DbT2003Kibetsu"."tsuchishoNo" = "DbT2002Fuka"."tsuchishoNo" and
+        "DbT2003Kibetsu"."rirekiNo" = "DbT2002Fuka"."rirekiNo" and
+        "DbT2003Kibetsu"."choshuHouhou" = '1'
+        INNER JOIN
+        rgdb."UrT0705ChoteiKyotsu" AS "UrT0705ChoteiKyotsu"
+        ON
+        "UrT0705ChoteiKyotsu"."choteiId" = "DbT2003Kibetsu"."choteiId"
+    </sql>
+    
+    <update id="update特徴平準化賦課Temp"
+            parameterType="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunkakakutei.TokuchoHeinjunkaKakuteiEntity">
+        UPDATE "TEMP_TABLE_TokuchoHeinjunkaFuka"
+        SET     "choteiNendoBefore" = #{平準化前調定年度},
+                "fukaNendoBefore" = #{平準化前賦課年度},
+                "tsuchishoNoBefore" = #{平準化前通知書番号},
+                "rirekiNoBefore" = #{平準化前履歴番号},
+                "hihokenshaNoBefore" = #{平準化前被保険者番号},
+                "shikibetsuCodeBefore" = #{平準化前識別コード},
+                "setaiCodeBefore" = #{平準化前世帯コード},
+                "setaiInsuBefore" = #{平準化前世帯員数},
+                "shikakuShutokuYMDBefore" = #{平準化前資格取得日},
+                "shikakuShutokuJiyuBefore" = #{平準化前資格取得事由},
+                "shikakuSoshitsuYMDBefore" = #{平準化前資格喪失日},
+                "shikakuSoshitsuJiyuBefore" = #{平準化前資格喪失事由},
+                "seihofujoShuruiBefore" = #{平準化前生活保護扶助種類},
+                "seihoKaishiYMDBefore" = #{平準化前生保開始日},
+                "seihoHaishiYMDBefore" = #{平準化前生保廃止日},
+                "ronenKaishiYMDBefore" = #{平準化前老年開始日},
+                "ronenHaishiYMDBefore" = #{平準化前老年廃止日},
+                "fukaYMDBefore" = #{平準化前賦課期日},
+                "kazeiKubunBefore" = #{平準化前課税区分},
+                "setaikazeiKubunBefore" = #{平準化前世帯課税区分},
+                "gokeiShotokuGakuBefore" = #{平準化前合計所得金額},
+                "nenkinShunyuGakuBefore" = #{平準化前公的年金収入額},
+                "hokenryoDankaiBefore" = #{平準化前保険料段階},
+                "hokenryoDankai1Before" = #{平準化前保険料算定段階1},
+                "nengakuHokenryo1Before" = #{平準化前算定年額保険料1},
+                "tsukiwariStartYM1Before" = #{平準化前月割開始年月1},
+                "tsukiwariEndYM1Before" = #{平準化前月割終了年月1},
+                "hokenryoDankai2Before" = #{平準化前保険料算定段階2},
+                "nengakuHokenryo2Before" = #{平準化前算定年額保険料2},
+                "tsukiwariStartYM2Before" = #{平準化前月割開始年月2},
+                "tsukiwariEndYM2Before" = #{平準化前月割終了年月2},
+                "choteiNichijiBefore" = #{平準化前調定日時},
+                "choteiJiyu1Before" = #{平準化前調定事由1},
+                "choteiJiyu2Before" = #{平準化前調定事由2},
+                "choteiJiyu3Before" = #{平準化前調定事由3},
+                "choteiJiyu4Before" = #{平準化前調定事由4},
+                "koseiMBefore" = #{平準化前更正月},
+                "gemmenMaeHokenryoBefore" = #{平準化前減免前介護保険料_年額},
+                "gemmenGakuBefore" = #{平準化前減免額},
+                "kakuteiHokenryoBefore" = #{平準化前確定介護保険料_年額},
+                "hokenryoDankaiKarisannteiBefore" = #{平準化前保険料段階_仮算定時},
+                "choshuHohoRirekiNoBefore" = #{平準化前徴収方法履歴番号},
+                "idoKijunNichijiBefore" = #{平準化前異動基準日時},
+                "kozaKubunBefore" = #{平準化前口座区分},
+                "kyokaisoKubunBefore" = #{平準化前境界層区分},
+                "shokkenKubunBefore" = #{平準化前職権区分},
+                "fukaShichosonCodeBefore" = #{平準化前賦課市町村コード},
+                "tkSaishutsuKampuGakuBefore" = #{平準化前特徴歳出還付額},
+                "fuSaishutsuKampuGakuBefore" = #{平準化前普徴歳出還付額},
+                "tkGaku01Before" = #{平準化前特徴期別金額01},
+                "tkGaku02Before" = #{平準化前特徴期別金額02},
+                "tkGaku03Before" = #{平準化前特徴期別金額03},
+                "tkGaku04Before" = #{平準化前特徴期別金額04},
+                "tkGaku05Before" = #{平準化前特徴期別金額05},
+                "tkGaku06Before" = #{平準化前特徴期別金額06},
+                "fuGaku01Before" = #{平準化前普徴期別金額01},
+                "fuGaku02Before" = #{平準化前普徴期別金額02},
+                "fuGaku03Before" = #{平準化前普徴期別金額03},
+                "fuGaku04Before" = #{平準化前普徴期別金額04},
+                "fuGaku05Before" = #{平準化前普徴期別金額05},
+                "fuGaku06Before" = #{平準化前普徴期別金額06},
+                "fuGaku07Before" = #{平準化前普徴期別金額07},
+                "fuGaku08Before" = #{平準化前普徴期別金額08},
+                "fuGaku09Before" = #{平準化前普徴期別金額09},
+                "fuGaku10Before" = #{平準化前普徴期別金額10},
+                "fuGaku11Before" = #{平準化前普徴期別金額11},
+                "fuGaku12Before" = #{平準化前普徴期別金額12},
+                "fuGaku13Before" = #{平準化前普徴期別金額13},
+                "fuGaku14Before" = #{平準化前普徴期別金額14}
+        WHERE  "choteiNendo" = #{平準化前調定年度}
+        AND     "fukaNendo" = #{平準化前賦課年度}
+        AND     "tsuchishoNo" = #{平準化前通知書番号}
+        AND     "rirekiNo" - 1 = #{平準化前履歴番号}
+    </update>
+    
+    <resultMap id="resultMap_TokuchoHeinjunkaKakuteiEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunkakakutei.TokuchoHeinjunkaKakuteiEntity">
+        <result property="平準化前調定年度" column="choteiNendoBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="平準化前賦課年度" column="fukaNendoBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="平準化前通知書番号" column="tsuchishoNoBefore" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
+        <result property="平準化前履歴番号" column="rirekiNoBefore" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
+        <result property="平準化前被保険者番号" column="hihokenshaNoBefore" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="平準化前識別コード" column="shikibetsuCodeBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="平準化前世帯コード" column="setaiCodeBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
+        <result property="平準化前世帯員数" column="setaiInsuBefore" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
+        <result property="平準化前資格取得日" column="shikakuShutokuYMDBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="平準化前資格取得事由" column="shikakuShutokuJiyuBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="平準化前資格喪失日" column="shikakuSoshitsuYMDBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="平準化前資格喪失事由" column="shikakuSoshitsuJiyuBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="平準化前生活保護扶助種類" column="seihofujoShuruiBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="平準化前生保開始日" column="seihoKaishiYMDBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="平準化前生保廃止日" column="seihoHaishiYMDBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="平準化前老年開始日" column="ronenKaishiYMDBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="平準化前老年廃止日" column="ronenHaishiYMDBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="平準化前賦課期日" column="fukaYMDBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="平準化前課税区分" column="kazeiKubunBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="平準化前世帯課税区分" column="setaikazeiKubunBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="平準化前合計所得金額" column="gokeiShotokuGakuBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前公的年金収入額" column="nenkinShunyuGakuBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前保険料段階" column="hokenryoDankaiBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="平準化前保険料算定段階1" column="hokenryoDankai1Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="平準化前算定年額保険料1" column="nengakuHokenryo1Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前月割開始年月1" column="tsukiwariStartYM1Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="平準化前月割終了年月1" column="tsukiwariEndYM1Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="平準化前保険料算定段階2" column="hokenryoDankai2Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="平準化前算定年額保険料2" column="nengakuHokenryo2Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前月割開始年月2" column="tsukiwariStartYM2Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="平準化前月割終了年月2" column="tsukiwariEndYM2Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="平準化前調定日時" column="choteiNichijiBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="平準化前調定事由1" column="choteiJiyu1Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="平準化前調定事由2" column="choteiJiyu2Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="平準化前調定事由3" column="choteiJiyu3Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="平準化前調定事由4" column="choteiJiyu4Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="平準化前更正月" column="koseiMBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="平準化前減免前介護保険料_年額" column="gemmenMaeHokenryoBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前減免額" column="gemmenGakuBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前確定介護保険料_年額" column="kakuteiHokenryoBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前保険料段階_仮算定時" column="hokenryoDankaiKarisannteiBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="平準化前徴収方法履歴番号" column="choshuHohoRirekiNoBefore" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
+        <result property="平準化前異動基準日時" column="idoKijunNichijiBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="平準化前口座区分" column="kozaKubunBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="平準化前境界層区分" column="kyokaisoKubunBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="平準化前職権区分" column="shokkenKubunBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="平準化前賦課市町村コード" column="fukaShichosonCodeBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="平準化前特徴歳出還付額" column="tkSaishutsuKampuGakuBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前普徴歳出還付額" column="fuSaishutsuKampuGakuBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前特徴期別金額01" column="tkGaku01Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前特徴期別金額02" column="tkGaku02Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前特徴期別金額03" column="tkGaku03Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前特徴期別金額04" column="tkGaku04Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前特徴期別金額05" column="tkGaku05Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前特徴期別金額06" column="tkGaku06Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前普徴期別金額01" column="fuGaku01Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前普徴期別金額02" column="fuGaku02Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前普徴期別金額03" column="fuGaku03Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前普徴期別金額04" column="fuGaku04Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前普徴期別金額05" column="fuGaku05Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前普徴期別金額06" column="fuGaku06Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前普徴期別金額07" column="fuGaku07Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前普徴期別金額08" column="fuGaku08Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前普徴期別金額09" column="fuGaku09Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前普徴期別金額10" column="fuGaku10Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前普徴期別金額11" column="fuGaku11Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前普徴期別金額12" column="fuGaku12Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前普徴期別金額13" column="fuGaku13Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前普徴期別金額14" column="fuGaku14Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="調定年度" column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="賦課年度" column="fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="通知書番号" column="tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
+        <result property="履歴番号" column="rirekiNo" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
+        <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="識別コード" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="世帯コード" column="setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
+        <result property="世帯員数" column="setaiInsu" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
+        <result property="資格取得日" column="shikakuShutokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="資格取得事由" column="shikakuShutokuJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格喪失日" column="shikakuSoshitsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="資格喪失事由" column="shikakuSoshitsuJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="生活保護扶助種類" column="seihofujoShurui" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="生保開始日" column="seihoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="生保廃止日" column="seihoHaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="老年開始日" column="ronenKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="老年廃止日" column="ronenHaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="賦課期日" column="fukaYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="課税区分" column="kazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="世帯課税区分" column="setaikazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="合計所得金額" column="gokeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="公的年金収入額" column="nenkinShunyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="保険料段階" column="hokenryoDankai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="保険料算定段階1" column="hokenryoDankai1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="算定年額保険料1" column="nengakuHokenryo1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="月割開始年月1" column="tsukiwariStartYM1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="月割終了年月1" column="tsukiwariEndYM1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="保険料算定段階2" column="hokenryoDankai2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="算定年額保険料2" column="nengakuHokenryo2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="月割開始年月2" column="tsukiwariStartYM2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="月割終了年月2" column="tsukiwariEndYM2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="調定日時" column="choteiNichiji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="調定事由1" column="choteiJiyu1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調定事由2" column="choteiJiyu2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調定事由3" column="choteiJiyu3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調定事由4" column="choteiJiyu4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="更正月" column="koseiM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="減免前介護保険料_年額" column="gemmenMaeHokenryo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="減免額" column="gemmenGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="確定介護保険料_年額" column="kakuteiHokenryo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="保険料段階_仮算定時" column="hokenryoDankaiKarisanntei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="徴収方法履歴番号" column="choshuHohoRirekiNo" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
+        <result property="異動基準日時" column="idoKijunNichiji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="口座区分" column="kozaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="境界層区分" column="kyokaisoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="職権区分" column="shokkenKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="賦課市町村コード" column="fukaShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="特徴歳出還付額" column="tkSaishutsuKampuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴歳出還付額" column="fuSaishutsuKampuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="特徴期別金額01" column="tkGaku01" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="特徴期別金額02" column="tkGaku02" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="特徴期別金額03" column="tkGaku03" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="特徴期別金額04" column="tkGaku04" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="特徴期別金額05" column="tkGaku05" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="特徴期別金額06" column="tkGaku06" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴期別金額01" column="fuGaku01" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴期別金額02" column="fuGaku02" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴期別金額03" column="fuGaku03" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴期別金額04" column="fuGaku04" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴期別金額05" column="fuGaku05" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴期別金額06" column="fuGaku06" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴期別金額07" column="fuGaku07" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴期別金額08" column="fuGaku08" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴期別金額09" column="fuGaku09" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴期別金額10" column="fuGaku10" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴期別金額11" column="fuGaku11" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴期別金額12" column="fuGaku12" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴期別金額13" column="fuGaku13" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴期別金額14" column="fuGaku14" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="調定ID" column="choteiId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="収納ID" column="shunoId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    <select resultOrdered="true" id="select特徴平準化賦課Temp" resultMap="resultMap_TokuchoHeinjunkaKakuteiEntity" fetchSize="500">
+        SELECT TEMP.*
+        FROM "TEMP_TABLE_TokuchoHeinjunkaFuka" AS TEMP
+    </select>
+    
+     <insert id="create賦課Temp">
+        CREATE TEMP TABLE "TEMP_TABLE_FukaTemp"
+        (
+        "choteiNendoBefore" rshare."UDD012YSeireki",
+        "fukaNendoBefore" rshare."UDD012YSeireki",
+        "tsuchishoNoBefore" rgdb."DbUDD008TsuchishoNo",
+        "rirekiNoBefore" smallint,
+        "hihokenshaNoBefore" rgdb."DbUDD002HihokenshaNo",
+        "shikibetsuCodeBefore" rshare."UDD001ShikibetsuCode",
+        "setaiCodeBefore" rshare."UDD051SetaiCode",
+        "setaiInsuBefore" smallint,
+        "shikakuShutokuYMDBefore" rshare."UDD015YMD",
+        "shikakuShutokuJiyuBefore" character varying(2),
+        "shikakuSoshitsuYMDBefore" rshare."UDD015YMD",
+        "shikakuSoshitsuJiyuBefore" character varying(2),
+        "seihofujoShuruiBefore" character varying(2),
+        "seihoKaishiYMDBefore" rshare."UDD015YMD",
+        "seihoHaishiYMDBefore" rshare."UDD015YMD",
+        "ronenKaishiYMDBefore" rshare."UDD015YMD",
+        "ronenHaishiYMDBefore" rshare."UDD015YMD",
+        "fukaYMDBefore" rshare."UDD015YMD",
+        "kazeiKubunBefore" character varying(1),
+        "setaikazeiKubunBefore" character varying(1),
+        "gokeiShotokuGakuBefore" numeric(12,0),
+        "nenkinShunyuGakuBefore" numeric(12,0),
+        "hokenryoDankaiBefore" character varying(3),
+        "hokenryoDankai1Before" character varying(3),
+        "nengakuHokenryo1Before" numeric(7,0),
+        "tsukiwariStartYM1Before" rshare."UDD014YM",
+        "tsukiwariEndYM1Before" rshare."UDD014YM",
+        "hokenryoDankai2Before" character varying(3),
+        "nengakuHokenryo2Before" numeric(7,0),
+        "tsukiwariStartYM2Before" rshare."UDD014YM",
+        "tsukiwariEndYM2Before" rshare."UDD014YM",
+        "choteiNichijiBefore" rshare."UDD018YMDHMS",
+        "choteiJiyu1Before" character varying(2),
+        "choteiJiyu2Before" character varying(2),
+        "choteiJiyu3Before" character varying(2),
+        "choteiJiyu4Before" character varying(2),
+        "koseiMBefore" character varying(2),
+        "gemmenMaeHokenryoBefore" numeric(7,0),
+        "gemmenGakuBefore" numeric(7,0),
+        "kakuteiHokenryoBefore" numeric(7,0),
+        "hokenryoDankaiKarisannteiBefore" character varying(3),
+        "choshuHohoRirekiNoBefore" smallint,
+        "idoKijunNichijiBefore" rshare."UDD018YMDHMS",
+        "kozaKubunBefore" character varying(1),
+        "kyokaisoKubunBefore" character varying(1),
+        "shokkenKubunBefore" character varying(1),
+        "fukaShichosonCodeBefore" rshare."UDD023LasdecCode",
+        "tkSaishutsuKampuGakuBefore" numeric(7,0),
+        "fuSaishutsuKampuGakuBefore" numeric(7,0),
+        "tkGaku01Before" numeric,
+        "tkGaku02Before" numeric,
+        "tkGaku03Before" numeric,
+        "tkGaku04Before" numeric,
+        "tkGaku05Before" numeric,
+        "tkGaku06Before" numeric,
+        "fuGaku01Before" numeric,
+        "fuGaku02Before" numeric,
+        "fuGaku03Before" numeric,
+        "fuGaku04Before" numeric,
+        "fuGaku05Before" numeric,
+        "fuGaku06Before" numeric,
+        "fuGaku07Before" numeric,
+        "fuGaku08Before" numeric,
+        "fuGaku09Before" numeric,
+        "fuGaku10Before" numeric,
+        "fuGaku11Before" numeric,
+        "fuGaku12Before" numeric,
+        "fuGaku13Before" numeric,
+        "fuGaku14Before" numeric,
+        "choteiNendo" rshare."UDD012YSeireki",
+        "fukaNendo" rshare."UDD012YSeireki",
+        "tsuchishoNo" rgdb."DbUDD008TsuchishoNo",
+        "rirekiNo" smallint,
+        "hihokenshaNoAfter" rgdb."DbUDD002HihokenshaNo",
+        "shikibetsuCodeAfter" rshare."UDD001ShikibetsuCode",
+        "setaiCode" rshare."UDD051SetaiCode",
+        "setaiInsu" smallint,
+        "shikakuShutokuYMD" rshare."UDD015YMD",
+        "shikakuShutokuJiyu" character varying(2),
+        "shikakuSoshitsuYMD" rshare."UDD015YMD",
+        "shikakuSoshitsuJiyu" character varying(2),
+        "seihofujoShurui" character varying(2),
+        "seihoKaishiYMD" rshare."UDD015YMD",
+        "seihoHaishiYMD" rshare."UDD015YMD",
+        "ronenKaishiYMD" rshare."UDD015YMD",
+        "ronenHaishiYMD" rshare."UDD015YMD",
+        "fukaYMD" rshare."UDD015YMD",
+        "kazeiKubun" character varying(1),
+        "setaikazeiKubun" character varying(1),
+        "gokeiShotokuGaku" numeric(12,0),
+        "nenkinShunyuGaku" numeric(12,0),
+        "hokenryoDankai" character varying(3),
+        "hokenryoDankai1" character varying(3),
+        "nengakuHokenryo1" numeric(7,0),
+        "tsukiwariStartYM1" rshare."UDD014YM",
+        "tsukiwariEndYM1" rshare."UDD014YM",
+        "hokenryoDankai2" character varying(3),
+        "nengakuHokenryo2" numeric(7,0),
+        "tsukiwariStartYM2" rshare."UDD014YM",
+        "tsukiwariEndYM2" rshare."UDD014YM",
+        "choteiNichiji" rshare."UDD018YMDHMS",
+        "choteiJiyu1" character varying(2),
+        "choteiJiyu2" character varying(2),
+        "choteiJiyu3" character varying(2),
+        "choteiJiyu4" character varying(2),
+        "koseiM" character varying(2),
+        "gemmenMaeHokenryo" numeric(7,0),
+        "gemmenGaku" numeric(7,0),
+        "kakuteiHokenryo" numeric(7,0),
+        "hokenryoDankaiKarisanntei" character varying(3),
+        "choshuHohoRirekiNo" smallint,
+        "idoKijunNichiji" rshare."UDD018YMDHMS",
+        "kozaKubun" character varying(1),
+        "kyokaisoKubun" character varying(1),
+        "shokkenKubun" character varying(1),
+        "fukaShichosonCode" rshare."UDD023LasdecCode",
+        "tkSaishutsuKampuGaku" numeric(7,0),
+        "fuSaishutsuKampuGaku" numeric(7,0),
+        "tkGaku01" numeric,
+        "tkGaku02" numeric,
+        "tkGaku03" numeric,
+        "tkGaku04" numeric,
+        "tkGaku05" numeric,
+        "tkGaku06" numeric,
+        "fuGaku01" numeric,
+        "fuGaku02" numeric,
+        "fuGaku03" numeric,
+        "fuGaku04" numeric,
+        "fuGaku05" numeric,
+        "fuGaku06" numeric,
+        "fuGaku07" numeric,
+        "fuGaku08" numeric,
+        "fuGaku09" numeric,
+        "fuGaku10" numeric,
+        "fuGaku11" numeric,
+        "fuGaku12" numeric,
+        "fuGaku13" numeric,
+        "fuGaku14" numeric,
+         "choteiId" character varying(100),
+        "shunoId" character varying(100),
+        "taishoKubun" character varying(1)
+        )
+    </insert>
+    
+    <insert id="inset賦課Temp" parameterType="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunkakakutei.FukaTempEntity">
+        INSERT INTO 
+        "TEMP_TABLE_FukaTemp"
+        VALUES
+        (#{平準化前調定年度},
+        #{平準化前賦課年度},
+        #{平準化前通知書番号},
+        #{平準化前履歴番号},
+        #{平準化前被保険者番号},
+        #{平準化前識別コード},
+        #{平準化前世帯コード},
+        #{平準化前世帯員数},
+        #{平準化前資格取得日},
+        #{平準化前資格取得事由},
+        #{平準化前資格喪失日},
+        #{平準化前資格喪失事由},
+        #{平準化前生活保護扶助種類},
+        #{平準化前生保開始日},
+        #{平準化前生保廃止日},
+        #{平準化前老年開始日},
+        #{平準化前老年廃止日},
+        #{平準化前賦課期日},
+        #{平準化前課税区分},
+        #{平準化前世帯課税区分},
+        #{平準化前合計所得金額},
+        #{平準化前公的年金収入額},
+        #{平準化前保険料段階},
+        #{平準化前保険料算定段階1},
+        #{平準化前算定年額保険料1},
+        #{平準化前月割開始年月1},
+        #{平準化前月割終了年月1},
+        #{平準化前保険料算定段階2},
+        #{平準化前算定年額保険料2},
+        #{平準化前月割開始年月2},
+        #{平準化前月割終了年月2},
+        #{平準化前調定日時},
+        #{平準化前調定事由1},
+        #{平準化前調定事由2},
+        #{平準化前調定事由3},
+        #{平準化前調定事由4},
+        #{平準化前更正月},
+        #{平準化前減免前介護保険料_年額},
+        #{平準化前減免額},
+        #{平準化前確定介護保険料_年額},
+        #{平準化前保険料段階_仮算定時},
+        #{平準化前徴収方法履歴番号},
+        #{平準化前異動基準日時},
+        #{平準化前口座区分},
+        #{平準化前境界層区分},
+        #{平準化前職権区分},
+        #{平準化前賦課市町村コード},
+        #{平準化前特徴歳出還付額},
+        #{平準化前普徴歳出還付額},
+        #{平準化前特徴期別金額01},
+        #{平準化前特徴期別金額02},
+        #{平準化前特徴期別金額03},
+        #{平準化前特徴期別金額04},
+        #{平準化前特徴期別金額05},
+        #{平準化前特徴期別金額06},
+        #{平準化前普徴期別金額01},
+        #{平準化前普徴期別金額02},
+        #{平準化前普徴期別金額03},
+        #{平準化前普徴期別金額04},
+        #{平準化前普徴期別金額05},
+        #{平準化前普徴期別金額06},
+        #{平準化前普徴期別金額07},
+        #{平準化前普徴期別金額08},
+        #{平準化前普徴期別金額09},
+        #{平準化前普徴期別金額10},
+        #{平準化前普徴期別金額11},
+        #{平準化前普徴期別金額12},
+        #{平準化前普徴期別金額13},
+        #{平準化前普徴期別金額14},
+        #{調定年度},
+        #{賦課年度},
+        #{通知書番号},
+        #{履歴番号},
+        #{被保険者番号},
+        #{識別コード},
+        #{世帯コード},
+        #{世帯員数},
+        #{資格取得日},
+        #{資格取得事由},
+        #{資格喪失日},
+        #{資格喪失事由},
+        #{生活保護扶助種類},
+        #{生保開始日},
+        #{生保廃止日},
+        #{老年開始日},
+        #{老年廃止日},
+        #{賦課期日},
+        #{課税区分},
+        #{世帯課税区分},
+        #{合計所得金額},
+        #{公的年金収入額},
+        #{保険料段階},
+        #{保険料算定段階1},
+        #{算定年額保険料1},
+        #{月割開始年月1},
+        #{月割終了年月1},
+        #{保険料算定段階2},
+        #{算定年額保険料2},
+        #{月割開始年月2},
+        #{月割終了年月2},
+        #{調定日時},
+        #{調定事由1},
+        #{調定事由2},
+        #{調定事由3},
+        #{調定事由4},
+        #{更正月},
+        #{減免前介護保険料_年額},
+        #{減免額},
+        #{確定介護保険料_年額},
+        #{保険料段階_仮算定時},
+        #{徴収方法履歴番号},
+        #{異動基準日時},
+        #{口座区分},
+        #{境界層区分},
+        #{職権区分},
+        #{賦課市町村コード},
+        #{特徴歳出還付額},
+        #{普徴歳出還付額},
+        #{特徴期別金額01},
+        #{特徴期別金額02},
+        #{特徴期別金額03},
+        #{特徴期別金額04},
+        #{特徴期別金額05},
+        #{特徴期別金額06},
+        #{普徴期別金額01},
+        #{普徴期別金額02},
+        #{普徴期別金額03},
+        #{普徴期別金額04},
+        #{普徴期別金額05},
+        #{普徴期別金額06},
+        #{普徴期別金額07},
+        #{普徴期別金額08},
+        #{普徴期別金額09},
+        #{普徴期別金額10},
+        #{普徴期別金額11},
+        #{普徴期別金額12},
+        #{普徴期別金額13},
+        #{普徴期別金額14},
+        #{調定ID},
+        #{収納ID},
+        #{対象区分}
+        )
+    </insert>
+    
+    <update id="update調定共通_介護継承">
+        UPDATE rgdb."UrT0705ChoteiKyotsu" AS A
+        SET    "fukaShoriJokyo" = true
+        FROM(
+        SELECT "UrT0705"."choteiId" 
+        FROM rgdb."UrT0705ChoteiKyotsu" AS "UrT0705"
+        INNER JOIN
+        rgdb."DbT2003Kibetsu" AS "DbT2003"
+        ON  "DbT2003"."choteiId" = "UrT0705"."choteiId"
+        INNER JOIN
+        "TEMP_TABLE_FukaTemp" AS C
+        ON  C."choteiNendo" = "DbT2003"."choteiNendo"
+        AND C."fukaNendo" = "DbT2003"."fukaNendo"
+        AND C."tsuchishoNo" = "DbT2003"."tsuchishoNo"
+        AND C."rirekiNo" = "DbT2003"."rirekiNo"
+        AND C."taishoKubun" = '1') AS B
+        WHERE A."choteiId" = B."choteiId"
+    </update>
+    
+    
+    <delete id="delete調定額内訳_介護継承" parameterType="java.util.Map">
+        delete from rgdb."UrT0706ChoteigakuUchiwake"
+        where "UrT0706ChoteigakuUchiwake"."choteiId" IN
+        <foreach item="choteiId" index="index" collection="choteiId" open="(" separator="," close=")">
+            #{choteiId}
+        </foreach>
+    </delete>
+    
+    <delete id="delete調定状況_介護継承" parameterType="java.util.Map">
+        delete from rgdb."UrT0707ChoteiJokyo"
+        where "UrT0707ChoteiJokyo"."choteiJokyoId" IN
+        <foreach item="shunoId" index="index" collection="shunoId" open="(" separator="," close=")">
+            #{shunoId}
+        </foreach>
+    </delete>
+    
+    <delete id="delete収納管理マスタ_介護継承" parameterType="java.util.Map">
+        delete from rgdb."UrT0700ShunoKanri"
+        where "UrT0700ShunoKanri"."shunoId" IN
+        <foreach item="shunoId" index="index" collection="shunoId" open="(" separator="," close=")">
+            #{shunoId}
+        </foreach>
+    </delete>
+    
+    <delete id="delete調定共通_介護継承" parameterType="java.util.Map">
+        delete from rgdb."UrT0705ChoteiKyotsu"
+        where "UrT0705ChoteiKyotsu"."choteiId" IN
+        <foreach item="choteiId" index="index" collection="choteiId" open="(" separator="," close=")">
+            #{choteiId}
+        </foreach>
+    </delete>
+    
+    <resultMap id="resultMap_FukaTempEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunkakakutei.FukaTempEntity">
+        <result property="平準化前調定年度" column="choteiNendoBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="平準化前賦課年度" column="fukaNendoBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="平準化前通知書番号" column="tsuchishoNoBefore" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
+        <result property="平準化前履歴番号" column="rirekiNoBefore" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
+        <result property="平準化前被保険者番号" column="hihokenshaNoBefore" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="平準化前識別コード" column="shikibetsuCodeBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="平準化前世帯コード" column="setaiCodeBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
+        <result property="平準化前世帯員数" column="setaiInsuBefore" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
+        <result property="平準化前資格取得日" column="shikakuShutokuYMDBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="平準化前資格取得事由" column="shikakuShutokuJiyuBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="平準化前資格喪失日" column="shikakuSoshitsuYMDBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="平準化前資格喪失事由" column="shikakuSoshitsuJiyuBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="平準化前生活保護扶助種類" column="seihofujoShuruiBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="平準化前生保開始日" column="seihoKaishiYMDBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="平準化前生保廃止日" column="seihoHaishiYMDBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="平準化前老年開始日" column="ronenKaishiYMDBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="平準化前老年廃止日" column="ronenHaishiYMDBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="平準化前賦課期日" column="fukaYMDBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="平準化前課税区分" column="kazeiKubunBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="平準化前世帯課税区分" column="setaikazeiKubunBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="平準化前合計所得金額" column="gokeiShotokuGakuBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前公的年金収入額" column="nenkinShunyuGakuBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前保険料段階" column="hokenryoDankaiBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="平準化前保険料算定段階1" column="hokenryoDankai1Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="平準化前算定年額保険料1" column="nengakuHokenryo1Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前月割開始年月1" column="tsukiwariStartYM1Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="平準化前月割終了年月1" column="tsukiwariEndYM1Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="平準化前保険料算定段階2" column="hokenryoDankai2Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="平準化前算定年額保険料2" column="nengakuHokenryo2Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前月割開始年月2" column="tsukiwariStartYM2Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="平準化前月割終了年月2" column="tsukiwariEndYM2Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="平準化前調定日時" column="choteiNichijiBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="平準化前調定事由1" column="choteiJiyu1Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="平準化前調定事由2" column="choteiJiyu2Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="平準化前調定事由3" column="choteiJiyu3Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="平準化前調定事由4" column="choteiJiyu4Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="平準化前更正月" column="koseiMBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="平準化前減免前介護保険料_年額" column="gemmenMaeHokenryoBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前減免額" column="gemmenGakuBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前確定介護保険料_年額" column="kakuteiHokenryoBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前保険料段階_仮算定時" column="hokenryoDankaiKarisannteiBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="平準化前徴収方法履歴番号" column="choshuHohoRirekiNoBefore" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
+        <result property="平準化前異動基準日時" column="idoKijunNichijiBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="平準化前口座区分" column="kozaKubunBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="平準化前境界層区分" column="kyokaisoKubunBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="平準化前職権区分" column="shokkenKubunBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="平準化前賦課市町村コード" column="fukaShichosonCodeBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="平準化前特徴歳出還付額" column="tkSaishutsuKampuGakuBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前普徴歳出還付額" column="fuSaishutsuKampuGakuBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前特徴期別金額01" column="tkGaku01Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前特徴期別金額02" column="tkGaku02Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前特徴期別金額03" column="tkGaku03Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前特徴期別金額04" column="tkGaku04Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前特徴期別金額05" column="tkGaku05Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前特徴期別金額06" column="tkGaku06Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前普徴期別金額01" column="fuGaku01Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前普徴期別金額02" column="fuGaku02Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前普徴期別金額03" column="fuGaku03Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前普徴期別金額04" column="fuGaku04Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前普徴期別金額05" column="fuGaku05Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前普徴期別金額06" column="fuGaku06Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前普徴期別金額07" column="fuGaku07Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前普徴期別金額08" column="fuGaku08Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前普徴期別金額09" column="fuGaku09Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前普徴期別金額10" column="fuGaku10Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前普徴期別金額11" column="fuGaku11Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前普徴期別金額12" column="fuGaku12Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前普徴期別金額13" column="fuGaku13Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="平準化前普徴期別金額14" column="fuGaku14Before" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="調定年度" column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="賦課年度" column="fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="通知書番号" column="tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
+        <result property="履歴番号" column="rirekiNo" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
+        <result property="被保険者番号" column="hihokenshaNoAfter" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="識別コード" column="shikibetsuCodeAfter" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="世帯コード" column="setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
+        <result property="世帯員数" column="setaiInsu" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
+        <result property="資格取得日" column="shikakuShutokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="資格取得事由" column="shikakuShutokuJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格喪失日" column="shikakuSoshitsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="資格喪失事由" column="shikakuSoshitsuJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="生活保護扶助種類" column="seihofujoShurui" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="生保開始日" column="seihoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="生保廃止日" column="seihoHaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="老年開始日" column="ronenKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="老年廃止日" column="ronenHaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="賦課期日" column="fukaYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="課税区分" column="kazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="世帯課税区分" column="setaikazeiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="合計所得金額" column="gokeiShotokuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="公的年金収入額" column="nenkinShunyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="保険料段階" column="hokenryoDankai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="保険料算定段階1" column="hokenryoDankai1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="算定年額保険料1" column="nengakuHokenryo1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="月割開始年月1" column="tsukiwariStartYM1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="月割終了年月1" column="tsukiwariEndYM1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="保険料算定段階2" column="hokenryoDankai2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="算定年額保険料2" column="nengakuHokenryo2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="月割開始年月2" column="tsukiwariStartYM2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="月割終了年月2" column="tsukiwariEndYM2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="調定日時" column="choteiNichiji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="調定事由1" column="choteiJiyu1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調定事由2" column="choteiJiyu2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調定事由3" column="choteiJiyu3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調定事由4" column="choteiJiyu4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="更正月" column="koseiM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="減免前介護保険料_年額" column="gemmenMaeHokenryo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="減免額" column="gemmenGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="確定介護保険料_年額" column="kakuteiHokenryo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="保険料段階_仮算定時" column="hokenryoDankaiKarisanntei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="徴収方法履歴番号" column="choshuHohoRirekiNo" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
+        <result property="異動基準日時" column="idoKijunNichiji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="口座区分" column="kozaKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="境界層区分" column="kyokaisoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="職権区分" column="shokkenKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="賦課市町村コード" column="fukaShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="特徴歳出還付額" column="tkSaishutsuKampuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴歳出還付額" column="fuSaishutsuKampuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="特徴期別金額01" column="tkGaku01" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="特徴期別金額02" column="tkGaku02" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="特徴期別金額03" column="tkGaku03" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="特徴期別金額04" column="tkGaku04" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="特徴期別金額05" column="tkGaku05" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="特徴期別金額06" column="tkGaku06" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴期別金額01" column="fuGaku01" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴期別金額02" column="fuGaku02" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴期別金額03" column="fuGaku03" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴期別金額04" column="fuGaku04" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴期別金額05" column="fuGaku05" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴期別金額06" column="fuGaku06" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴期別金額07" column="fuGaku07" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴期別金額08" column="fuGaku08" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴期別金額09" column="fuGaku09" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴期別金額10" column="fuGaku10" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴期別金額11" column="fuGaku11" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴期別金額12" column="fuGaku12" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴期別金額13" column="fuGaku13" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="普徴期別金額14" column="fuGaku14" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="調定ID" column="choteiId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="収納ID" column="shunoId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="対象区分" column="taishoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    <select resultOrdered="true" id="select賦課Temp" resultMap="resultMap_FukaTempEntity" fetchSize="500">
+        SELECT TEMP.*
+        FROM "TEMP_TABLE_FukaTemp" AS TEMP
+    </select>
+    
+    <resultMap id="ResultMap_UeT0511NenkinTokuchoKaifuJohoEntity" type="jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity" autoMapping="true">
+        <id property="gyomuCode" column="gyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyomuCodeTypeHandler" />
+        <id property="shoriNendo" column="shoriNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler" />
+        <id property="tsuchiNaiyoCode" column="tsuchiNaiyoCode" typeHandler="jp.co.ndensan.reams.ue.uex.entity.typehandlers.TsuchiNaiyoCodeTypeHandler" />
+        <id property="shoriTaishoYM" column="shoriTaishoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler" />
+        <id property="kisoNenkinNo" column="kisoNenkinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <id property="nenkinCode" column="nenkinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <id property="koseiCityCode" column="koseiCityCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <id property="renban" column="renban" />
+        <result property="insertDantaiCd" column="insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="isDeleted" />
+        <result property="updateCount" column="updateCount" />
+        <result property="lastUpdateTimestamp" column="lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shoriTimestamp" column="shoriTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler" />
+        <result property="renkeiShubetsu" column="renkeiShubetsu" typeHandler="jp.co.ndensan.reams.ue.uex.entity.typehandlers.RenkeiShubetsuTypeHandler" />
+        <result property="hosokuTsuki" column="hosokuTsuki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="tenbikiTsuki" column="tenbikiTsuki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shikibetsuCode" column="ShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
+        <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="kokuhoSetaiCode" column="kokuhoSetaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler" />
+        <result property="dtCityCode" column="dtCityCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtTokubetsuChoshuGimushaCode" column="dtTokubetsuChoshuGimushaCode" typeHandler="jp.co.ndensan.reams.ue.uex.entity.typehandlers.TokubetsuChoshuGimushaCodeTypeHandler" />
+        <result property="dtTsuchiNaiyoCode" column="dtTsuchiNaiyoCode" typeHandler="jp.co.ndensan.reams.ue.uex.entity.typehandlers.TsuchiNaiyoCodeTypeHandler" />
+        <result property="dtBaitaiCode" column="dtBaitaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtTokubetsuChoshuSeidoCode" column="dtTokubetsuChoshuSeidoCode" typeHandler="jp.co.ndensan.reams.ue.uex.entity.typehandlers.TokubetsuChoshuSeidoCodeTypeHandler" />
+        <result property="dtSakuseiYMD" column="dtSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtKisoNenkinNo" column="dtKisoNenkinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtNenkinCode" column="dtNenkinCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtYobi1" column="dtYobi1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtBirthDay" column="dtBirthDay" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtSeibetsu" column="dtSeibetsu" typeHandler="jp.co.ndensan.reams.ue.uex.entity.typehandlers.SeibetsuCodeNenkinTokuchoTypeHandler" />
+        <result property="dtKanaShimei" column="dtKanaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtShiftCode1" column="dtShiftCode1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtKanjiShimei" column="dtKanjiShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtShiftCode2" column="dtShiftCode2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtYubinNo" column="dtYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtKanaJusho" column="dtKanaJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtShiftCode3" column="dtShiftCode3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtKanjiJusho" column="dtKanjiJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtShiftCode4" column="dtShiftCode4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtKakushuKubun" column="dtKakushuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtShoriKekka" column="dtShoriKekka" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtKokiIkanCode" column="dtKokiIkanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtKakushuYMD" column="dtKakushuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtKakushuKingaku1" column="dtKakushuKingaku1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtKakushuKingaku2" column="dtKakushuKingaku2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtKakushuKingaku3" column="dtKakushuKingaku3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtYobi2" column="dtYobi2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtKyosaiNenkinshoshoKigoNo" column="dtKyosaiNenkinshoshoKigoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtKakushuKingaku4" column="dtKakushuKingaku4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtKakushuKingaku5" column="dtKakushuKingaku5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtKakushuKingaku6" column="dtKakushuKingaku6" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtKakushuKingaku7" column="dtKakushuKingaku7" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtKakushuKingaku8" column="dtKakushuKingaku8" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtTeishiYM" column="dtTeishiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtYobi4Juminzei" column="dtYobi4Juminzei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="dtKojinNo" column="dtKojinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+    <resultMap id="resultMap_selectTokuchoHeinjunkaKakuteiItirannEntity" autoMapping="true"
+               type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunkakakutei.TokuchoHeinjunkaKakuteiItirannEntity">
+        <id property="fukeEntity.調定年度" column="choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="fukeEntity.賦課年度" column="fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="fukeEntity.通知書番号" column="tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
+        <id property="fukeEntity.履歴番号" column="rirekiNo" />
+        <id property="年金特徴回付情報_介護継承.shoriTaishoYM" column="shoriTaishoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler" />
+        <id property="年金特徴回付情報_介護継承.koseiCityCode" column="koseiCityCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <id property="年金特徴回付情報_介護継承.renban" column="renban" />
+        <association property="fukeEntity" resultMap="resultMap_FukaTempEntity"/>
+        <association property="徴収方法Newest" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.ResultMap_DbV2001ChoshuHohoEntity"/>
+        <association property="年金特徴回付情報_介護継承" resultMap="ResultMap_UeT0511NenkinTokuchoKaifuJohoEntity"/>
+        <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+    </resultMap>
+    <select resultOrdered="true" id="selest特徴平準化確定一覧"
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheinjunkakakutei.TokuchoHeinjunkaKakuteiItirannParameter"
+            resultMap="resultMap_selectTokuchoHeinjunkaKakuteiItirannEntity" fetchSize="500">
+        <include refid="selectTokuchoHeinjunkaKakuteiItirannEntity" />
+    </select>
+    <sql id="selectTokuchoHeinjunkaKakuteiItirannEntity" >
+        SELECT TEMP.*,
+               <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.allColumns_DbV2001ChoshuHoho"/>,
+               "UeT0511NenkinTokuchoKaifuJoho".*,
+               <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
+        FROM "TEMP_TABLE_FukaTemp" AS TEMP
+        INNER JOIN 
+            rgua."UaFt200FindShikibetsuTaisho"('',#{調定日},FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
+        ON
+            "ShikibetsuTaisho"."shikibetsuCode" = TEMP."shikibetsuCodeAfter"
+        INNER JOIN rgdb."DbV2001ChoshuHoho" AS "DbV2001ChoshuHoho"
+        ON  "DbV2001ChoshuHoho"."fukaNendo" = TEMP."fukaNendo"
+        AND "DbV2001ChoshuHoho"."hihokenshaNo" = TEMP."hihokenshaNoAfter"
+        INNER JOIN rgue."UeT0511NenkinTokuchoKaifuJoho" AS "UeT0511NenkinTokuchoKaifuJoho"
+        ON "UeT0511NenkinTokuchoKaifuJoho"."gyomuCode" = 'DB'
+        AND "UeT0511NenkinTokuchoKaifuJoho"."shoriNendo" =#{調定年度}
+        AND "UeT0511NenkinTokuchoKaifuJoho"."tsuchiNaiyoCode" IN ('00', '30')
+        AND "DbV2001ChoshuHoho"."kariNenkinNo" = "UeT0511NenkinTokuchoKaifuJoho"."kisoNenkinNo"
+        AND "DbV2001ChoshuHoho"."kariNenkinCode" = "UeT0511NenkinTokuchoKaifuJoho"."nenkinCode"
+        AND "DbV2001ChoshuHoho"."kariHosokuM" = "UeT0511NenkinTokuchoKaifuJoho"."hosokuTsuki"
+    </sql>
+    
+</mapper>

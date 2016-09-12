@@ -13,19 +13,19 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 要介護認定結果情報提供票（主治医）のEditorです。
- * 
+ *
  * @reamsid_L DBE-0220-020 wangkun
  */
 public class JohoTeikyoShiryoEditor implements IJohoTeikyoShiryoEditor {
 
-    private final JohoTeikyoShiryoItem item;
+    private final JohoTeikyoShiryo item;
 
     /**
      * インスタンスを生成します。
      *
-     * @param item {@link JohoTeikyoShiryoItem}
+     * @param item {@link JohoTeikyoShiryo}
      */
-    protected JohoTeikyoShiryoEditor(JohoTeikyoShiryoItem item) {
+    protected JohoTeikyoShiryoEditor(JohoTeikyoShiryo item) {
         this.item = item;
     }
 
@@ -43,8 +43,6 @@ public class JohoTeikyoShiryoEditor implements IJohoTeikyoShiryoEditor {
                         .separator(Separator.JAPANESE)
                         .fillType(FillType.BLANK).toDateString();
             }
-            source.hokenshaName1 = item.getHokenshaName1();
-            source.hokenshaName2 = item.getHokenshaName2();
             source.title = item.getTitle();
             source.tsuchibun1 = item.getTsuchibun1();
             source.hihokenshaName = item.getHihokenshaName();
@@ -73,15 +71,24 @@ public class JohoTeikyoShiryoEditor implements IJohoTeikyoShiryoEditor {
                         .fillType(FillType.BLANK).toDateString();
             }
             source.shinsakaiIken = item.getShinsakaiIken();
+            source.denshiKoin = item.getDenshiKoin();
+            source.koinMojiretsu = item.getKoinMojiretsu();
+            source.koinShoryaku = item.getKoinShoryaku();
+            source.ninshoshaShimeiKakeru = item.getNinshoshaShimeiKakeru();
+            source.ninshoshaShimeiKakenai = item.getNinshoshaShimeiKakenai();
+            source.ninshoshaYakushokuMei = item.getNinshoshaYakushokuMei();
+            source.ninshoshaYakushokuMei1 = item.getNinshoshaYakushokuMei1();
+            source.ninshoshaYakushokuMei2 = item.getNinshoshaYakushokuMei2();
+            source.bunshoNo = item.getBunshoNo();
+            source.pageCount = item.getPageCount();
+            source.customerBarCode = item.getCustomerBarCode();
+            source.jushoText = item.getJushoText();
+            source.kikanNameText = item.getKikanNameText();
+            source.shimeiText = item.getShimeiText();
+            source.meishoFuyo = item.getMeishoFuyo();
+            source.sonota = item.getSonota();
             source.tsuchibun2 = item.getTsuchibun2();
-            source.tsuchibun3 = item.getTsuchibun3();
-            source.tsuchibun4 = item.getTsuchibun4();
-            source.tsuchibun5 = item.getTsuchibun5();
-            source.tsuchibun6 = item.getTsuchibun6();
-            source.tsuchibun7 = item.getTsuchibun7();
-            source.tsuchibun8 = item.getTsuchibun8();
-            source.tsuchibun9 = item.getTsuchibun9();
-            source.tsuchibun10 = item.getTsuchibun10();
+            source.yubinNo = item.getYubinNo();
         }
         return source;
     }

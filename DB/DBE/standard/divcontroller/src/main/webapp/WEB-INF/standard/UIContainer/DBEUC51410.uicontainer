@@ -1,0 +1,60 @@
+﻿{
+ "uiContainerName": "DBEUC51410",
+ "displayWizard": false,
+ "subGyomuCode": "DBE",
+ "steps": [
+  {
+   "id": 1,
+   "name": "審査会開催予定登録",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE5100001",
+     "toLayoutTitle": "審査会一覧",
+     "toState": "審査会開催予定登録"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE5100001",
+     "layoutTitle": "審査会一覧",
+     "eventName": "審査会開催予定登録2へ",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE5140002",
+     "toLayoutTitle": "介護認定審査会委員割付",
+     "toState": "初期表示"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE5140002",
+     "layoutTitle": "介護認定審査会委員割付",
+     "eventName": "開催予定登録に戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE5100001",
+     "toLayoutTitle": "審査会一覧",
+     "toState": "審査会開催予定登録"
+    },
+    {
+     "id": "4",
+     "type": "end",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE5140002",
+     "layoutTitle": "介護認定審査会委員割付",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

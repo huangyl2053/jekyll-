@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -32,44 +31,44 @@ public enum ChosaAnser34 {
      * コード:4 名称:全介助 略称:全介助
      */
     全介助("4", "全介助");
-    private final Code code;
+    private final RString code;
     private final RString fullName;
 
     private ChosaAnser34(String code, String fullname) {
-        this.code = new Code(code);
+        this.code = new RString(code);
         this.fullName = new RString(fullname);
     }
 
     /**
-     * 認定調査項目内容25のコードを返します。
+     * 認定調査項目内容34のコードを返します。
      *
-     * @return 認定調査項目内容25のコード
+     * @return 認定調査項目内容34のコード
      */
-    public Code getコード() {
+    public RString getコード() {
         return code;
     }
 
     /**
-     * 認定調査項目内容25の名称を返します。
+     * 認定調査項目内容34の名称を返します。
      *
-     * @return 認定調査項目内容25の名称
+     * @return 認定調査項目内容34の名称
      */
     public RString get名称() {
         return fullName;
     }
 
     /**
-     * 認定調査項目内容25のコードと一致する内容を探します。
+     * 認定調査項目内容34のコードと一致する内容を探します。
      *
-     * @param code 認定調査項目内容25のコード
-     * @return {@code code} に対応する認定調査項目内容25
+     * @param code 認定調査項目内容34のコード
+     * @return {@code code} に対応する認定調査項目内容34
      */
-    public static ChosaAnser34 toValue(Code code) {
-        for (ChosaAnser34 anser01 : ChosaAnser34.values()) {
-            if (anser01.code.equals(code)) {
-                return anser01;
+    public static ChosaAnser34 toValue(RString code) {
+        for (ChosaAnser34 anser34 : ChosaAnser34.values()) {
+            if (anser34.code.equals(code)) {
+                return anser34;
             }
         }
-        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("認定調査項目内容25"));
+        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("認定調査項目内容34"));
     }
 }

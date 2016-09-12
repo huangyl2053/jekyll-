@@ -27,7 +27,7 @@
      "condition": "",
      "toLayoutSubGyomuCode": "DBA",
      "toLayoutName": "DBA2050011",
-     "toLayoutTitle": "適用除外",
+     "toLayoutTitle": "適用除外異動",
      "toState": "照会適用"
     },
     {
@@ -41,7 +41,7 @@
      "condition": "解除",
      "toLayoutSubGyomuCode": "DBA",
      "toLayoutName": "DBA2050011",
-     "toLayoutTitle": "適用除外",
+     "toLayoutTitle": "適用除外異動",
      "toState": "照会解除"
     },
     {
@@ -55,7 +55,7 @@
      "condition": "変更",
      "toLayoutSubGyomuCode": "DBA",
      "toLayoutName": "DBA2050011",
-     "toLayoutTitle": "適用除外",
+     "toLayoutTitle": "適用除外異動",
      "toState": "照会変更"
     },
     {
@@ -63,10 +63,10 @@
      "type": "ordinal",
      "layoutSubGyomuCode": "DBA",
      "layoutName": "DBA2050011",
-     "layoutTitle": "適用除外",
+     "layoutTitle": "適用除外異動",
      "eventName": "検索に戻る",
-     "destroy": false,
-     "condition": "対象者検索",
+     "destroy": true,
+     "condition": "",
      "toLayoutSubGyomuCode": "DBZ",
      "toLayoutName": "DBZ0200001",
      "toLayoutTitle": "対象者検索",
@@ -77,9 +77,9 @@
      "type": "ordinal",
      "layoutSubGyomuCode": "DBA",
      "layoutName": "DBA2050011",
-     "layoutTitle": "適用除外",
-     "eventName": "検索に戻る",
-     "destroy": false,
+     "layoutTitle": "適用除外異動",
+     "eventName": "検索結果一覧に戻る",
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBZ",
      "toLayoutName": "DBZ0200001",
@@ -91,7 +91,7 @@
      "type": "end",
      "layoutSubGyomuCode": "DBA",
      "layoutName": "DBA2050011",
-     "layoutTitle": "適用除外",
+     "layoutTitle": "適用除外異動",
      "eventName": "完了",
      "destroy": false,
      "condition": ""

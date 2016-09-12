@@ -6,11 +6,11 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikensho.shujiiikenshoiraijoho.IShujiiIkenshoIraiJohoMapper">
 
-    <select id="select主治医意見書作成依頼情報ByKey" resultMap="resultMap_ShujiiIkenshoIraiJohoEntity" fetchSize="500">
+    <select resultOrdered="true" id="select主治医意見書作成依頼情報ByKey" resultMap="resultMap_ShujiiIkenshoIraiJohoEntity" fetchSize="500">
         <include refid="selectShujiiIkenshoIraiJohoEntity" />
     </select>
 
-    <select id="select主治医意見書作成依頼情報リストBy主キー1" resultMap="resultMap_ShujiiIkenshoIraiJohoEntity" fetchSize="500">
+    <select resultOrdered="true" id="select主治医意見書作成依頼情報リストBy主キー1" resultMap="resultMap_ShujiiIkenshoIraiJohoEntity" fetchSize="500">
         <include refid="selectShujiiIkenshoIraiJohoEntity" />
     </select>
 

@@ -20,7 +20,7 @@
         <result property="kyuShichosonMeisho" column="DbT7056Gappei_kyuShichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="lastUpdateTimestamp" column="DbT1001Hiho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler" />
     </resultMap>
-    <select id="getSikakuKanrenIdo" resultMap="resultMap_getSikakuKanrenIdo" parameterType="jp.co.ndensan.reams.db.dbz.definition.param.sikakukanrenido.SikakuKanrenIdoParameter" fetchSize="500">
+    <select resultOrdered="true" id="getSikakuKanrenIdo" resultMap="resultMap_getSikakuKanrenIdo" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.sikakukanrenido.SikakuKanrenIdoParameter" fetchSize="500">
         SELECT
         DbT1001Hiho. "hihokenshaNo" as "DbT1001Hiho_hihokenshaNoD",
         DbT1001Hiho."idoYMD" as "DbT1001Hiho_idoYMD",

@@ -12,7 +12,7 @@ import static jp.co.ndensan.reams.db.dbe.business.core.taishouwaritsuke.CheckFor
 import static jp.co.ndensan.reams.db.dbe.business.core.taishouwaritsuke.CheckForNullUtil.checkNullForRString;
 import static jp.co.ndensan.reams.db.dbe.business.core.taishouwaritsuke.CheckForNullUtil.checkNullForShinseishoKanriNo;
 import static jp.co.ndensan.reams.db.dbe.business.core.taishouwaritsuke.CheckForNullUtil.checkNullForShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbe.entity.taishouwaritsuke.KohoshaIchiranEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.taishouwaritsuke.KohoshaIchiranEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;

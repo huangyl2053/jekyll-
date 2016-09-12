@@ -732,6 +732,8 @@ dbc/db/dbc/TsuchishoJoho172/onImplement
 dbc/db/dbc/TsuchishoJoho172/onLoad
 dbc/db/dbc/TsuchishoJoho175/onImplement
 dbc/db/dbc/TsuchishoJoho175/onLoad
+dbc/db/dbc/TsuchishoJoho177/onClick_btnExcute
+dbc/db/dbc/TsuchishoJoho177/onLoad
 dbc/db/dbc/TsuchishoJoho221/onClick_btnExcute
 dbc/db/dbc/TsuchishoJoho221/onLoad
 dbc/db/dbc/TsuchishoJoho222/onClick_btnExcute
@@ -794,3 +796,9 @@ dbc/db/dbc/YoguKonyuhiShikyuShinseiPnlTotal/onSelectByModifyButton
 dbc/db/dbc/YoguKonyuhiShikyuShinseiPnlTotal/onSelectBySelectButton
 dbc/db/dbc/YoguKonyuhiShikyuShinseiShinsazumiSearchPanel/onClick_btnSearchMishinsa
 dbc/db/dbc/YoguKonyuhiShikyuShinseiShinsazumiSearchPanel/onLoad
+dbc/db/dbc/ShikyuketteituchishoSakuseiJyoken/onClick_batch1
+dbc/db/dbc/ShikyuketteituchishoSakuseiJyoken/onClick_batch2
+dbc/db/dbc/ShikyuketteituchishoSakuseiJyoken/onClick_btnExcute
+dbc/db/dbc/ShikyuketteituchishoSakuseiJyoken/onClick_radHizukeSentaku
+dbc/db/dbc/ShikyuketteituchishoSakuseiJyoken/onClick_radKetteibiIkkatsuKoshinKubun
+dbc/db/dbc/ShikyuketteituchishoSakuseiJyoken/onLoad

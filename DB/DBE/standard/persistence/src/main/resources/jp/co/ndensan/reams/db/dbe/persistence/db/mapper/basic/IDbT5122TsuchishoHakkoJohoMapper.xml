@@ -54,7 +54,7 @@
         <result property="tsuchiKubunKigenYMD" column="dbT5122TsuchishoHakkoJoho_tsuchiKubunKigenYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="tsuchiKanryoYMD" column="dbT5122TsuchishoHakkoJoho_tsuchiKanryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
-    <select id="getEntity" resultMap="ResultMap_DbT5122TsuchishoHakkoJohoEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5122TsuchishoHakkoJohoEntity">
         SELECT
         <include refid="allColumns_DbT5122TsuchishoHakkoJoho"/>
         FROM

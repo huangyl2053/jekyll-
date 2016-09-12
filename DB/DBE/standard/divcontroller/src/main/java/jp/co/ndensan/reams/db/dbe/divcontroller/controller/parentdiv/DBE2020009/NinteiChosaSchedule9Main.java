@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteichosaitakusakijoho.Ninteic
 import jp.co.ndensan.reams.db.dbe.business.report.chosaschedulehyo.ChosaSchedulehyoReportJoho;
 import jp.co.ndensan.reams.db.dbe.business.report.chosaschedulehyojikankanri.ChosaSchedulehyoJikankanriReportJoho;
 import jp.co.ndensan.reams.db.dbe.business.report.chosaschedulehyotyousayin.ChosaSchedulehyoTyousayinReportJoho;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosaitakusakijoho.JiKanKanRiParameter;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosaitakusakijoho.JiMuSyoParameter;
-import jp.co.ndensan.reams.db.dbe.definition.ninteichosaitakusakijoho.NinteichosaScheduleParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosaitakusakijoho.JiKanKanRiParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosaitakusakijoho.JiMuSyoParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosaitakusakijoho.NinteichosaScheduleParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020009.DBE2020009StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020009.NinteiChosaSchedule9MainDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020009.NinteiChosaSchedule9MainHandler;
@@ -23,10 +23,10 @@ import jp.co.ndensan.reams.db.dbe.service.core.basic.ninteichosaitakusakijoho.Ni
 import jp.co.ndensan.reams.db.dbe.service.report.chosaschedulehyo.ChosaSchedulehyoPrintService;
 import jp.co.ndensan.reams.db.dbe.service.report.chosaschedulehyojikankanri.ChosaSchedulehyoJikankanriPrintService;
 import jp.co.ndensan.reams.db.dbe.service.report.chosaschedulehyotyousayin.ChosaSchedulehyoTyousayinPrintService;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChosainJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaItakusakiJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -59,7 +59,7 @@ public class NinteiChosaSchedule9Main {
      * @return ResponseData<NinteiChosaSchedule9MainDiv>
      */
     public ResponseData<NinteiChosaSchedule9MainDiv> onLoad(NinteiChosaSchedule9MainDiv div) {
-        RString 地区コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class);
+        RString 地区コード = ViewStateHolder.get(ViewStateKeys.地区コード, RString.class);
         List<ChikuShichosonBusiness> chikuShichosonList = 市町村リスト(地区コード);
         getHandler(div).load(地区コード, chikuShichosonList);
         return ResponseData.of(div).setState(DBE2020009StateName.初期化);

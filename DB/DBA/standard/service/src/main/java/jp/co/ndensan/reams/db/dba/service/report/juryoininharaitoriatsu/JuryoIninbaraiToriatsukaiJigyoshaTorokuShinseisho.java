@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dba.service.report.juryoininharaitoriatsu;
 
 import java.util.ArrayList;
@@ -12,12 +11,17 @@ import jp.co.ndensan.reams.db.dba.business.report.juryoininharaitoriatsu.JuryoIn
 import jp.co.ndensan.reams.db.dba.business.report.juryoininharaitoriatsu.JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishProerty;
 import jp.co.ndensan.reams.db.dba.business.report.juryoininharaitoriatsu.JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishReport;
 import jp.co.ndensan.reams.db.dba.entity.report.juryoininharaitoriatsu.JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishoReportSource;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
-import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
-import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
+import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -31,42 +35,50 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 /**
  *
  * 介護保険受領委任払い取扱事業者登録申請書のPrintクラスです。
+ *
  * @reamsid_L DBA-0540-080 dongyabin
  */
 public class JuryoIninbaraiToriatsukaiJigyoshaTorokuShinseisho {
-    
+
     /**
      * 介護保険受領委任払い取扱事業者登録申請書Print処理です。
+     *
      * @return 介護保険受領委任払い取扱事業者登録申請書作成_帳票
      */
     public SourceDataCollection createJuryoIninbaraiToriatsukaiJigyoshaTorokuShinseishoChohyo() {
         JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishProerty proerty = new JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishProerty();
         try (ReportManager reportManager = new ReportManager()) {
-            try (ReportAssembler<JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishoReportSource> assembler = 
-                    createAssembler(proerty, reportManager)) {
-                INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
-                INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険, 
-                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
-                        null, null);
-                for (JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishReport report : toReports(ninshoshaSourceBuilder.buildSource()
-                        .ninshoshaYakushokuMei)) {
-                    ReportSourceWriter<JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishoReportSource> reportSourceWriter = 
-                            new ReportSourceWriter(assembler);
-                        report.writeBy(reportSourceWriter);
+            try (ReportAssembler<JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishoReportSource> assembler
+                    = createAssembler(proerty, reportManager)) {
+                ReportSourceWriter<JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishoReportSource> reportSourceWriter
+                        = new ReportSourceWriter(assembler);
+                Ninshosha nishosha = NinshoshaFinderFactory.createInstance().get帳票認証者(
+                        GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード());
+                Association association = AssociationFinderFactory.createInstance().getAssociation();
+                INinshoshaSourceBuilder ninshoshaSourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
+                        nishosha, association, reportSourceWriter.getImageFolderPath(), RDate.getNowDate());
+                for (JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishReport report
+                     : toReports(ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei)) {
+                    report.writeBy(reportSourceWriter);
                 }
             }
             return reportManager.publish();
         }
     }
-    
+
     private static List<JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishReport> toReports(RString ninshoshaYakushokuMei) {
         List<JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishReport> list = new ArrayList<>();
-        JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishItem item = new JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishItem(ninshoshaYakushokuMei);
+        RStringBuilder 認証者 = new RStringBuilder();
+        if (!RString.isNullOrEmpty(ninshoshaYakushokuMei)) {
+            認証者.append(ninshoshaYakushokuMei);
+            認証者.append(new RString("長様"));
+        }
+        JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishItem item = new JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishItem(認証者.toRString());
         list.add(JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishReport.createReport(item));
         return list;
     }
-    
-     private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(
+
+    private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(
             IReportProperty<T> property, ReportManager manager) {
         ReportAssemblerBuilder builder = manager.reportAssembler(property.reportId().value(), property.subGyomuCode());
         for (BreakAggregator<? super T, ?> breaker : property.breakers()) {

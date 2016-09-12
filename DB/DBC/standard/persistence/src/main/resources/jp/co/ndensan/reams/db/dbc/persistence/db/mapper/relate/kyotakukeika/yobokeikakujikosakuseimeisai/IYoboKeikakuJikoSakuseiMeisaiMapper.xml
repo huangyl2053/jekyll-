@@ -5,7 +5,7 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyotakukeika.yobokeikakujikosakuseimeisai.IYoboKeikakuJikoSakuseiMeisaiMapper">
 
-    <select id="select予防給付計画自己作成明細ByKey" 
+    <select resultOrdered="true" id="select予防給付計画自己作成明細ByKey" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyotakukeika.yobokeikakujikosakuseimeisai.YoboKeikakuJikoSakuseiMeisaiMapperParameter" 
             resultMap="resultMap_YoboKeikakuJikoSakuseiMeisaiEntity" fetchSize="500">
         <include refid="selectYoboKeikakuJikoSakuseiMeisaiEntity" />

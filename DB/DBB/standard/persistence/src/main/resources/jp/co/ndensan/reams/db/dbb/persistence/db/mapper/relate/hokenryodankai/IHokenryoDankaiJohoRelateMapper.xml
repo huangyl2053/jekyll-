@@ -6,7 +6,7 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.hokenryodankai.IHokenryoDankaiJohoRelateMapper">
 
-    <select id="select保険料ランクの情報ByKey" resultMap="resultMap_HokenryoDankaiJohoRelateEntity" fetchSize="500">
+    <select resultOrdered="true" id="select保険料ランクの情報ByKey" resultMap="resultMap_HokenryoDankaiJohoRelateEntity" fetchSize="500">
         <include refid="selectHokenryoDankaiJohoRelateEntity" />
     </select>
 

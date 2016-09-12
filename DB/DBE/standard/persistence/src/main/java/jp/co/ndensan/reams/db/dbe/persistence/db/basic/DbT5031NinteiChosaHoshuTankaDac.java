@@ -18,7 +18,9 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -26,6 +28,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 認定調査報酬単価のデータアクセスクラスです。
+ *
+ * @reamsid_L DBE-9999-021 dingyi
  */
 public class DbT5031NinteiChosaHoshuTankaDac implements ISaveable<DbT5031NinteiChosaHoshuTankaEntity> {
 
@@ -92,5 +96,35 @@ public class DbT5031NinteiChosaHoshuTankaDac implements ISaveable<DbT5031NinteiC
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 認定調査報酬単価を全件返します（識別子降順）。
+     *
+     * @return DbT5031NinteiChosaHoshuTankaEntityの{@code list}
+     */
+    @Transaction
+    public List<DbT5031NinteiChosaHoshuTankaEntity> selectAllOrderBy() {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5031NinteiChosaHoshuTanka.class).
+                order(by(chosaKubun, Order.DESC),
+                        by(homonShubetsu, Order.DESC),
+                        by(kaishiYM, Order.DESC),
+                        by(shuryoYM, Order.DESC)).
+                toList(DbT5031NinteiChosaHoshuTankaEntity.class);
+    }
+
+    /**
+     * DbT5031NinteiChosaHoshuTankaEntityを物理削除します。
+     *
+     * @param entity entity
+     * @return 削除件数
+     */
+    @Transaction
+    public int saveOrDeletePhysicalBy(DbT5031NinteiChosaHoshuTankaEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査報酬単価エンティティ"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
     }
 }

@@ -3,21 +3,26 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.YokaigoNi
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Mar 31 15:15:30 CST 2016
+ * Thu Jun 16 14:27:58 CST 2016 
  */
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+
+
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+
 
 /**
- * dgShinsakaiIchiran_Row のクラスファイル
- *
+ * dgShinsakaiIchiran_Row のクラスファイル 
+ * 
+ * @author 自動生成
  */
+
 public class dgShinsakaiIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     private TextBoxFlexibleDate kaisaiYoteiDate;
     private TextBoxTime yoteiKaishiTime;
@@ -37,6 +42,7 @@ public class dgShinsakaiIchiran_Row extends DataRow {
     private RString shiryoSakuseiKubun;
     private RString shinchokuJokyo;
     private Boolean dummyFlag;
+    private RString gogitaiNo;
 
     public dgShinsakaiIchiran_Row() {
         super();
@@ -58,6 +64,7 @@ public class dgShinsakaiIchiran_Row extends DataRow {
         this.shiryoSakuseiKubun = RString.EMPTY;
         this.shinchokuJokyo = RString.EMPTY;
         this.dummyFlag = false;
+        this.gogitaiNo = RString.EMPTY;
         this.setOriginalData("kaisaiYoteiDate", kaisaiYoteiDate);
         this.setOriginalData("yoteiKaishiTime", yoteiKaishiTime);
         this.setOriginalData("yoteiShuryoTime", yoteiShuryoTime);
@@ -76,9 +83,10 @@ public class dgShinsakaiIchiran_Row extends DataRow {
         this.setOriginalData("shiryoSakuseiKubun", shiryoSakuseiKubun);
         this.setOriginalData("shinchokuJokyo", shinchokuJokyo);
         this.setOriginalData("dummyFlag", dummyFlag);
+        this.setOriginalData("gogitaiNo", gogitaiNo);
     }
 
-    public dgShinsakaiIchiran_Row(TextBoxFlexibleDate kaisaiYoteiDate, TextBoxTime yoteiKaishiTime, TextBoxTime yoteiShuryoTime, RString shinsakaiMeisho, RString gogitaiMeisho, RString shurui, RString shinsakaiKaijo, TextBoxFlexibleDate kaisaiDay, TextBoxTime kaisaiTime, TextBoxTime shuryoTime, TextBoxNum yoteiTeiin, TextBoxNum wariateNinzu, TextBoxNum taishoNinzu, RString onseiKiroku, TextBoxFlexibleDate dataShutsuryoku, RString shiryoSakuseiKubun, RString shinchokuJokyo, Boolean dummyFlag) {
+    public dgShinsakaiIchiran_Row(TextBoxFlexibleDate kaisaiYoteiDate, TextBoxTime yoteiKaishiTime, TextBoxTime yoteiShuryoTime, RString shinsakaiMeisho, RString gogitaiMeisho, RString shurui, RString shinsakaiKaijo, TextBoxFlexibleDate kaisaiDay, TextBoxTime kaisaiTime, TextBoxTime shuryoTime, TextBoxNum yoteiTeiin, TextBoxNum wariateNinzu, TextBoxNum taishoNinzu, RString onseiKiroku, TextBoxFlexibleDate dataShutsuryoku, RString shiryoSakuseiKubun, RString shinchokuJokyo, Boolean dummyFlag, RString gogitaiNo) {
         super();
         this.setOriginalData("kaisaiYoteiDate", kaisaiYoteiDate);
         this.setOriginalData("yoteiKaishiTime", yoteiKaishiTime);
@@ -98,6 +106,7 @@ public class dgShinsakaiIchiran_Row extends DataRow {
         this.setOriginalData("shiryoSakuseiKubun", shiryoSakuseiKubun);
         this.setOriginalData("shinchokuJokyo", shinchokuJokyo);
         this.setOriginalData("dummyFlag", dummyFlag);
+        this.setOriginalData("gogitaiNo", gogitaiNo);
         this.kaisaiYoteiDate = kaisaiYoteiDate;
         this.yoteiKaishiTime = yoteiKaishiTime;
         this.yoteiShuryoTime = yoteiShuryoTime;
@@ -116,6 +125,7 @@ public class dgShinsakaiIchiran_Row extends DataRow {
         this.shiryoSakuseiKubun = shiryoSakuseiKubun;
         this.shinchokuJokyo = shinchokuJokyo;
         this.dummyFlag = dummyFlag;
+        this.gogitaiNo = gogitaiNo;
     }
 
     public TextBoxFlexibleDate getKaisaiYoteiDate() {
@@ -188,6 +198,10 @@ public class dgShinsakaiIchiran_Row extends DataRow {
 
     public Boolean getDummyFlag() {
         return dummyFlag;
+    }
+
+    public RString getGogitaiNo() {
+        return gogitaiNo;
     }
 
     public void setKaisaiYoteiDate(TextBoxFlexibleDate kaisaiYoteiDate) {
@@ -278,6 +292,11 @@ public class dgShinsakaiIchiran_Row extends DataRow {
     public void setDummyFlag(Boolean dummyFlag) {
         this.setOriginalData("dummyFlag", dummyFlag);
         this.dummyFlag = dummyFlag;
+    }
+
+    public void setGogitaiNo(RString gogitaiNo) {
+        this.setOriginalData("gogitaiNo", gogitaiNo);
+        this.gogitaiNo = gogitaiNo;
     }
 
     // </editor-fold>

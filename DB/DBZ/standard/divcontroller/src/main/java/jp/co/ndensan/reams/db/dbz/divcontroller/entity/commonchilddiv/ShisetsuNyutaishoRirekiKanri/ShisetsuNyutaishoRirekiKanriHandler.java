@@ -11,21 +11,27 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.kaigohohenshisetsu.KaigoHohenShisetsuBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.service.kaigohohenshisetsunyutaishoshakanri.KaigoHohenShisetsuNyutaishoshaKanriManager;
+import jp.co.ndensan.reams.db.dbz.service.core.kaigohohenshisetsunyutaishoshakanri.KaigoHohenShisetsuNyutaishoshaKanriManager;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 
@@ -67,12 +73,12 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
         if (施設入退所情報 != null && !施設入退所情報.isEmpty()) {
             List<ShisetsuNyutaisho> 更新施設入退所情報
                     = KaigoHohenShisetsuNyutaishoshaKanriManager.createInstance().get介護保険施設入退所一覧By識別コード(識別コード).records();
-            ViewStateHolder.put(ViewStateKeys.施設入退所履歴_施設入退所情報, Models.create(更新施設入退所情報));
+            ViewStateHolder.put(ViewStateKeys.施設入退所情報, Models.create(更新施設入退所情報));
             一覧の設定(施設入退所情報);
         } else {
-            ViewStateHolder.put(ViewStateKeys.施設入退所履歴_施設入退所情報, Models.create(new ArrayList()));
+            ViewStateHolder.put(ViewStateKeys.施設入退所情報, Models.create(new ArrayList()));
         }
-        switch (div.getMode_表示モード()) {
+        switch (div.getMode_DisplayMode()) {
             case 照会:
                 break;
             case 照会選択有:
@@ -98,12 +104,36 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
         if (施設入退所情報 != null && !施設入退所情報.isEmpty()) {
             List<ShisetsuNyutaisho> 更新施設入退所情報
                     = KaigoHohenShisetsuNyutaishoshaKanriManager.createInstance().get介護保険施設入退所一覧By識別コードと台帳種別(識別コード, 台帳種別).records();
-            ViewStateHolder.put(ViewStateKeys.施設入退所履歴_施設入退所情報, Models.create(更新施設入退所情報));
+            ViewStateHolder.put(ViewStateKeys.施設入退所情報, Models.create(更新施設入退所情報));
             一覧の設定(施設入退所情報);
         } else {
-            ViewStateHolder.put(ViewStateKeys.施設入退所履歴_施設入退所情報, Models.create(new ArrayList()));
+            ViewStateHolder.put(ViewStateKeys.施設入退所情報, Models.create(new ArrayList()));
         }
-        switch (div.getMode_表示モード()) {
+        switch (div.getMode_DisplayMode()) {
+            case 照会:
+                break;
+            case 照会選択有:
+                break;
+            case 資格異動:
+                資格異動モード();
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * 施設入退所履歴に初期化を設定します。外部からグリッドに設定するデータと、保存対象のデータを受け取ります。
+     *
+     * @param データソース グリッドに設定するデータソース
+     * @param 施設入退所情報Model 施設入退所情報Model
+     */
+    public void initialize(List<dgShisetsuNyutaishoRireki_Row> データソース, Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 施設入退所情報Model) {
+
+        div.getDgShisetsuNyutaishoRireki().setDataSource(データソース);
+        ViewStateHolder.put(ViewStateKeys.施設入退所情報, 施設入退所情報Model);
+
+        switch (div.getMode_DisplayMode()) {
             case 照会:
                 break;
             case 照会選択有:
@@ -118,10 +148,24 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
 
     /**
      * 「追加する」ボタンを押下する場合、施設入退所情報パネルを活性します。
+     *
+     * @return ShisetsuNyutaishoRirekiKanriDiv
      */
-    public void onClick_btnAddShisetsuNyutaisho() {
-        div.setInputMode(追加);
-        施設入退所情報活性();
+    public ValidationMessageControlPairs onClick_btnAddShisetsuNyutaisho() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        List<dgShisetsuNyutaishoRireki_Row> rowList = div.getDgShisetsuNyutaishoRireki().getDataSource();
+
+        for (dgShisetsuNyutaishoRireki_Row row : rowList) {
+            if (row.getTaishoDate().getValue().isEmpty()) {
+                validPairs.add(new ValidationMessageControlPair(ShisetsuRirekiErrorMessage.履歴退所日));
+            }
+        }
+        if (!validPairs.existsError()) {
+            div.setInputMode(追加);
+            施設入退所情報活性();
+        }
+        return validPairs;
+
     }
 
     /**
@@ -132,10 +176,10 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
     public void onSelectBySelectButton_dgShisetsuNyutaishoRireki(dgShisetsuNyutaishoRireki_Row row) {
         div.getShisetsuNyutaishoInput().getTxtNyushoDate().setValue(row.getNyushoDate().getValue());
         div.getShisetsuNyutaishoInput().getTxtTaishoDate().setValue(row.getTaishoDate().getValue());
-        if (台帳種別表示機能.equals(new RString(div.getMode_利用().toString()))) {
+        if (ShisetsuNyutaishoRirekiKanriDiv.Riyou.台帳種別表示機能.equals(div.getMode_Riyou())) {
             div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().set台帳種別(row.getDaichoShubetsuKey());
         }
-        if (!適用除外者対象機能.equals(new RString(div.getMode_利用().toString()))) {
+        if (!ShisetsuNyutaishoRirekiKanriDiv.Riyou.適用除外者対象機能.equals(div.getMode_Riyou())) {
             div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().set施設種類(row.getShisetsuShuruiKey());
         }
         div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().setNyuryokuShisetsuKodo(row.getShisetsuCode());
@@ -156,10 +200,10 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
         div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().setDisabled(false);
         div.getShisetsuNyutaishoInput().getTxtNyushoDate().setValue(row.getNyushoDate().getValue());
         div.getShisetsuNyutaishoInput().getTxtTaishoDate().setValue(row.getTaishoDate().getValue());
-        if (!適用除外者対象機能.equals(new RString(div.getMode_利用().toString()))) {
+        if (!ShisetsuNyutaishoRirekiKanriDiv.Riyou.適用除外者対象機能.equals(div.getMode_Riyou())) {
             div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().set施設種類(row.getShisetsuShuruiKey());
         }
-        if (台帳種別表示機能.equals(new RString(div.getMode_利用().toString()))) {
+        if (ShisetsuNyutaishoRirekiKanriDiv.Riyou.台帳種別表示機能.equals(div.getMode_Riyou())) {
             div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().set台帳種別(row.getDaichoShubetsuKey());
         }
         div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().setNyuryokuShisetsuKodo(row.getShisetsuCode());
@@ -180,16 +224,31 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
         div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().setDisabled(true);
         div.getShisetsuNyutaishoInput().getTxtNyushoDate().setValue(row.getNyushoDate().getValue());
         div.getShisetsuNyutaishoInput().getTxtTaishoDate().setValue(row.getTaishoDate().getValue());
-        if (!適用除外者対象機能.equals(new RString(div.getMode_利用().toString()))) {
+        if (!ShisetsuNyutaishoRirekiKanriDiv.Riyou.適用除外者対象機能.equals(div.getMode_Riyou())) {
             div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().set施設種類(row.getShisetsuShuruiKey());
         }
-        if (台帳種別表示機能.equals(new RString(div.getMode_利用().toString()))) {
+        if (ShisetsuNyutaishoRirekiKanriDiv.Riyou.台帳種別表示機能.equals(div.getMode_Riyou())) {
             div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().set台帳種別(row.getDaichoShubetsuKey());
         }
         div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().setNyuryokuShisetsuKodo(row.getShisetsuCode());
         div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().setShisetsuMeisho(row.getShisetsu());
         div.getShisetsuNyutaishoInput().getBtnShisetsuNyutaishoKakutei().setDisabled(false);
         div.getShisetsuNyutaishoInput().getBtnShisetsuNyutaishoTorikeshi().setDisabled(false);
+    }
+
+    private static enum ShisetsuRirekiErrorMessage implements IValidationMessage {
+
+        履歴退所日(UrErrorMessages.必須, "履歴の退所日");
+        private final Message message;
+
+        private ShisetsuRirekiErrorMessage(IMessageGettable message, String... replacements) {
+            this.message = message.getMessage().replace(replacements);
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
     }
 
     /**
@@ -214,7 +273,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
      */
     public void onClick_btnShisetsuNyutaishoKakutei(dgShisetsuNyutaishoRireki_Row row) {
         Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 施設入退所情報Model
-                = ViewStateHolder.get(ViewStateKeys.施設入退所履歴_施設入退所情報, Models.class);
+                = ViewStateHolder.get(ViewStateKeys.施設入退所情報, Models.class);
         ShikibetsuCode 識別コード = new ShikibetsuCode(div.getShikibetsuCode());
         List<dgShisetsuNyutaishoRireki_Row> listRow = div.getDgShisetsuNyutaishoRireki().getDataSource();
         dgShisetsuNyutaishoRireki_Row newRow = new dgShisetsuNyutaishoRireki_Row();
@@ -258,10 +317,11 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
                 listRow.remove(row);
             }
         }
-        ViewStateHolder.put(ViewStateKeys.施設入退所履歴_施設入退所情報, Models.create(施設入退所情報Model));
+        ViewStateHolder.put(ViewStateKeys.施設入退所情報, Models.create(施設入退所情報Model));
         div.setInputMode(RString.EMPTY);
         Collections.sort(listRow, new ShisetsuNyutaishoRirekiKanriHandler.NyushoDateComparator());
         div.getDgShisetsuNyutaishoRireki().setDataSource(listRow);
+
         onClick_btnShisetsuNyutaishoTorikeshi();
     }
 
@@ -271,7 +331,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
     public void saveShisetsuNyutaisho() {
         ShikibetsuCode 識別コード = new ShikibetsuCode(div.getShikibetsuCode());
         Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 施設入退所情報Model
-                = ViewStateHolder.get(ViewStateKeys.施設入退所履歴_施設入退所情報, Models.class);
+                = ViewStateHolder.get(ViewStateKeys.施設入退所情報, Models.class);
         List<dgShisetsuNyutaishoRireki_Row> listRow = div.getDgShisetsuNyutaishoRireki().getDataSource();
         for (dgShisetsuNyutaishoRireki_Row row : listRow) {
             if (RString.isNullOrEmpty(row.getState())) {
@@ -300,6 +360,15 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
      */
     public List<dgShisetsuNyutaishoRireki_Row> get施設入退所履歴一覧() {
         return div.getDgShisetsuNyutaishoRireki().getDataSource();
+    }
+
+    /**
+     * 施設入退所履歴の一覧を取得します。
+     *
+     * @return List<dgShisetsuNyutaishoRireki_Row> 施設入退所履歴の一覧
+     */
+    public Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> getSaveData() {
+        return ViewStateHolder.get(ViewStateKeys.施設入退所情報, Models.class);
     }
 
     private void 一覧の設定(List<KaigoHohenShisetsuBusiness> 施設入退所情報) {
@@ -367,21 +436,21 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
     }
 
     private void 資格異動モード() {
-        ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.台帳種別表示, new RString("台帳種別表示無し"));
-        switch (div.getMode_利用()) {
+        ViewStateHolder.put(ViewStateKeys.台帳種別表示, new RString("台帳種別表示無し"));
+        switch (div.getMode_Riyou()) {
             case 台帳種別表示機能:
-                ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.台帳種別表示, new RString("台帳種別表示有り"));
+                ViewStateHolder.put(ViewStateKeys.台帳種別表示, new RString("台帳種別表示有り"));
                 break;
             case 全施設対象機能:
                 break;
             case 被保険者対象機能:
-                ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.被保険者, new RString("被保険者"));
+                ViewStateHolder.put(ViewStateKeys.被保険者, new RString("被保険者"));
                 break;
             case 他市町村住所地特例者対象機能:
-                ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.他市町村住所地特例者, new RString("他市町村住所地特例者"));
+                ViewStateHolder.put(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.他市町村住所地特例者, new RString("他市町村住所地特例者"));
                 break;
             case 適用除外者対象機能:
-                ViewStateHolder.put(jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys.適用除外者, new RString("適用除外者"));
+                ViewStateHolder.put(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.適用除外者, new RString("適用除外者"));
                 break;
             default:
                 break;
@@ -418,19 +487,19 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
             退所処理年月日 = new FlexibleDate(RDate.getNowDate().toString());
             退所年月日 = div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue();
         }
-        if (台帳種別表示機能.equals(new RString(div.getMode_利用().toString()))) {
+        if (台帳種別表示機能.equals(new RString(div.getMode_Riyou().toString()))) {
             台帳種別 = row.getDaichoShubetsuKey();
             施設種類 = row.getShisetsuShuruiKey();
-        } else if (被保険者対象機能.equals(new RString(div.getMode_利用().toString()))) {
+        } else if (被保険者対象機能.equals(new RString(div.getMode_Riyou().toString()))) {
             台帳種別 = row.getDaichoShubetsuKey();
             施設種類 = row.getShisetsuShuruiKey();
-        } else if (他市町村住所地特例者対象機能.equals(new RString(div.getMode_利用().toString()))) {
+        } else if (他市町村住所地特例者対象機能.equals(new RString(div.getMode_Riyou().toString()))) {
             台帳種別 = row.getDaichoShubetsuKey();
             施設種類 = row.getShisetsuShuruiKey();
-        } else if (適用除外者対象機能.equals(new RString(div.getMode_利用().toString()))) {
+        } else if (適用除外者対象機能.equals(new RString(div.getMode_Riyou().toString()))) {
             台帳種別 = row.getDaichoShubetsuKey();
             施設種類 = row.getShisetsuShuruiKey();
-        } else if (全施設対象機能.equals(new RString(div.getMode_利用().toString()))) {
+        } else if (全施設対象機能.equals(new RString(div.getMode_Riyou().toString()))) {
             施設種類 = row.getShisetsuShuruiKey();
         }
         if (div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getNyuryokuShisetsuKodo() != null
@@ -466,25 +535,24 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
             入所年月日 = div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue();
             施設入退所情報.set入所処理年月日(入所処理年月日).set入所年月日(入所年月日);
         }
-        if (div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue() != null
-                && !div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue().isEmpty()) {
+        if (div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue() != null) {
             退所処理年月日 = new FlexibleDate(RDate.getNowDate().toString());
             退所年月日 = div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue();
             施設入退所情報.set退所処理年月日(退所処理年月日).set退所年月日(退所年月日);
         }
-        if (台帳種別表示機能.equals(new RString(div.getMode_利用().toString()))) {
+        if (台帳種別表示機能.equals(new RString(div.getMode_Riyou().toString()))) {
             台帳種別 = row.getDaichoShubetsuKey();
             施設種類 = row.getShisetsuShuruiKey();
-        } else if (被保険者対象機能.equals(new RString(div.getMode_利用().toString()))) {
+        } else if (被保険者対象機能.equals(new RString(div.getMode_Riyou().toString()))) {
             台帳種別 = row.getDaichoShubetsuKey();
             施設種類 = row.getShisetsuShuruiKey();
-        } else if (他市町村住所地特例者対象機能.equals(new RString(div.getMode_利用().toString()))) {
+        } else if (他市町村住所地特例者対象機能.equals(new RString(div.getMode_Riyou().toString()))) {
             台帳種別 = row.getDaichoShubetsuKey();
             施設種類 = row.getShisetsuShuruiKey();
-        } else if (適用除外者対象機能.equals(new RString(div.getMode_利用().toString()))) {
+        } else if (適用除外者対象機能.equals(new RString(div.getMode_Riyou().toString()))) {
             台帳種別 = row.getDaichoShubetsuKey();
             施設種類 = row.getShisetsuShuruiKey();
-        } else if (全施設対象機能.equals(new RString(div.getMode_利用().toString()))) {
+        } else if (全施設対象機能.equals(new RString(div.getMode_Riyou().toString()))) {
             施設種類 = row.getShisetsuShuruiKey();
         }
         if (div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getNyuryokuShisetsuKodo() != null
@@ -515,31 +583,44 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
 
     private void 施設種類と台帳種別の設定(dgShisetsuNyutaishoRireki_Row newRow) {
 
-        if (台帳種別表示機能.equals(new RString(div.getMode_利用().toString()))) {
+        if (台帳種別表示機能.equals(new RString(div.getMode_Riyou().toString()))) {
             newRow.setDaichoShubetsu(get台帳種別(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getDaichoShubetsu()));
             newRow.setDaichoShubetsuKey(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getDaichoShubetsu());
             newRow.setShisetsuShurui(get施設種類(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設種類()));
             newRow.setShisetsuShuruiKey(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設種類());
             施設種類(newRow.getDaichoShubetsuKey(), newRow);
-        } else if (被保険者対象機能.equals(new RString(div.getMode_利用().toString()))) {
+        } else if (被保険者対象機能.equals(new RString(div.getMode_Riyou().toString()))) {
             newRow.setDaichoShubetsu(DaichoType.被保険者.get名称());
             newRow.setDaichoShubetsuKey(DaichoType.被保険者.getコード());
             newRow.setShisetsuShurui(get施設種類(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設種類()));
             newRow.setShisetsuShuruiKey(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設種類());
-        } else if (他市町村住所地特例者対象機能.equals(new RString(div.getMode_利用().toString()))) {
+        } else if (他市町村住所地特例者対象機能.equals(new RString(div.getMode_Riyou().toString()))) {
             newRow.setDaichoShubetsu(DaichoType.他市町村住所地特例者.get名称());
             newRow.setDaichoShubetsuKey(DaichoType.他市町村住所地特例者.getコード());
             newRow.setShisetsuShurui(get施設種類(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設種類()));
             newRow.setShisetsuShuruiKey(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設種類());
-        } else if (適用除外者対象機能.equals(new RString(div.getMode_利用().toString()))) {
+        } else if (適用除外者対象機能.equals(new RString(div.getMode_Riyou().toString()))) {
             newRow.setDaichoShubetsu(DaichoType.適用除外者.get名称());
             newRow.setDaichoShubetsuKey(DaichoType.適用除外者.getコード());
             newRow.setShisetsuShurui(ShisetsuType.適用除外施設.get名称());
             newRow.setShisetsuShuruiKey(ShisetsuType.適用除外施設.getコード());
-        } else if (全施設対象機能.equals(new RString(div.getMode_利用().toString()))) {
+        } else if (全施設対象機能.equals(new RString(div.getMode_Riyou().toString()))) {
             newRow.setShisetsuShurui(get施設種類(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設種類()));
             newRow.setShisetsuShuruiKey(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設種類());
         }
+    }
+
+    public boolean isSavable() {
+        List<dgShisetsuNyutaishoRireki_Row> listRow = div.getDgShisetsuNyutaishoRireki().getDataSource();
+        for (dgShisetsuNyutaishoRireki_Row row : listRow) {
+            if (RString.isNullOrEmpty(row.getState())) {
+                continue;
+            }
+            if (追加.equals(row.getState()) || 更新.equals(row.getState()) || 削除.equals(row.getState())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static class RirekiNoDateComparator implements Comparator<dgShisetsuNyutaishoRireki_Row>, Serializable {

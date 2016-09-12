@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shujiiikentokusokujo;
 
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiiikentokusokujo.ShujiiIkenTokusokujoParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikentokusokujo.ShujiiIkenTokusokujoParameter;
 
 /**
  * 主治医意見書のマッパーインタフェースです。

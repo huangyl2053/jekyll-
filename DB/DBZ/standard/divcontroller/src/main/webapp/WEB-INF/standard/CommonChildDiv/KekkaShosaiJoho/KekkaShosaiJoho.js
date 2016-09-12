@@ -27,7 +27,7 @@ var DBZ;
                 }
                 ShoriType.prototype.SoshitsuMode = function () {
                     this.controls.ccdNinteiInput().ShoriType().InputMode();
-                    this.controls.ccdShinseiSonotaJohoInput().ShoriType().SoshitsuMode();
+                    this.controls.ccdShinseiSonotaJohoInput().ShoriType().ZenbuSoshitsuMode();
                     this.controls.btnToroku().displayNone = false;
                 };
                 ShoriType.prototype.ShokkenTorikeshiInputMode = function () {
@@ -40,6 +40,11 @@ var DBZ;
                     this.controls.ccdNinteiInput().ShoriType().ShokaiMode();
                     this.controls.ccdShinseiSonotaJohoInput().ShoriType().ShokaiMode();
                     this.controls.btnToroku().displayNone = true;
+                };
+                ShoriType.prototype.InputMode = function () {
+                    this.controls.ccdNinteiInput().ShoriType().InputMode();
+                    this.controls.ccdShinseiSonotaJohoInput().ShoriType().ShokaiMode();
+                    this.controls.btnToroku().displayNone = false;
                 };
                 return ShoriType;
             })();

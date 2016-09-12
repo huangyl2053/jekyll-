@@ -31,7 +31,7 @@ and open the template in the editor.
         <result property="roomKigoNo" column="dbT1004ShisetsuNyutaisho_roomKigoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
-    <select id="getShiSeTsuJyoHon_A" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kaigohohenshisetsu.KaigoHohenShisetsuMybatisParameter" resultMap="ResultMap_DbT1004ShisetsuNyutaishoEntity">
+    <select resultOrdered="true" id="getShiSeTsuJyoHon_A" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kaigohohenshisetsu.KaigoHohenShisetsuMybatisParameter" resultMap="ResultMap_DbT1004ShisetsuNyutaishoEntity">
         (SELECT  
             DbT1004."shikibetsuCode" as "dbT1004ShisetsuNyutaisho_shikibetsuCode",
             DbT1004."rirekiNo" as "dbT1004ShisetsuNyutaisho_rirekiNo",
@@ -140,7 +140,7 @@ and open the template in the editor.
                 DbT1004."rirekiNo", DbT1004."nyushoYMD")
     </select>
     
-    <select id="getShiSeTsuJyoHon_I" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kaigohohenshisetsu.KaigoHohenShisetsuMybatisParameter" resultMap="ResultMap_DbT1004ShisetsuNyutaishoEntity">
+    <select resultOrdered="true" id="getShiSeTsuJyoHon_I" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kaigohohenshisetsu.KaigoHohenShisetsuMybatisParameter" resultMap="ResultMap_DbT1004ShisetsuNyutaishoEntity">
         <if test="被保険者台帳_他住所地特例者台帳の時_フラグ">
           (SELECT  
                 DbT1004."shikibetsuCode" as "dbT1004ShisetsuNyutaisho_shikibetsuCode",
@@ -268,7 +268,7 @@ and open the template in the editor.
     </resultMap>
     
     <!--施設情報の取得を取得します-->
-    <select id="get施設情報の取得_A" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kaigohohenshisetsu.KaigoHohenShisetsuMybatisParameter" resultMap="result_selct施設情報の取得">
+    <select resultOrdered="true" id="get施設情報の取得_A" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kaigohohenshisetsu.KaigoHohenShisetsuMybatisParameter" resultMap="result_selct施設情報の取得">
         (SELECT  
             DbT1004."shikibetsuCode"         AS  shikibetsuCode
           , DbT1004."rirekiNo"               AS  rirekiNo
@@ -356,7 +356,7 @@ and open the template in the editor.
     </select>
       
     <!--施設情報の取得を取得します-->
-    <select id="get施設情報の取得_I" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kaigohohenshisetsu.KaigoHohenShisetsuMybatisParameter" resultMap="result_selct施設情報の取得">
+    <select resultOrdered="true" id="get施設情報の取得_I" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kaigohohenshisetsu.KaigoHohenShisetsuMybatisParameter" resultMap="result_selct施設情報の取得">
         <if test="被保険者台帳_他住所地特例者台帳の時_フラグ">
             ( SELECT  
                 DbT1004."shikibetsuCode"         AS  shikibetsuCode

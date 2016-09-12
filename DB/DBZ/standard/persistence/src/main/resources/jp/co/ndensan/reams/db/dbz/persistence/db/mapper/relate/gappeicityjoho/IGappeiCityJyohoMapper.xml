@@ -121,8 +121,8 @@
     </sql>
     
     <!-- 単一全合併市町村情報の取得処理 -->
-    <select id="getTannitsugappeijoho" resultMap="tannitsuGappeiJyohoResultMap" 
-            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gappeijoho.GappeiJyohoSpecificParameter" fetchSize="500">
+    <select resultOrdered="true" id="getTannitsugappeijoho" resultMap="tannitsuGappeiJyohoResultMap" 
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.gappeijoho.GappeiJyohoSpecificParameter" fetchSize="500">
         SELECT 
             <include refid="allColumn_TannitsuSearch"></include>
         FROM 
@@ -142,8 +142,8 @@
     </select>
     
     <!-- 単一全合併市町村情報検索の取得処理 -->
-    <select id="getTannitsugappeijohokensaku" resultMap="tannitsuGappeiJyohoResultMap" 
-            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gappeijoho.GappeiJyohoSpecificParameter" fetchSize="500">
+    <select resultOrdered="true" id="getTannitsugappeijohokensaku" resultMap="tannitsuGappeiJyohoResultMap" 
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.gappeijoho.GappeiJyohoSpecificParameter" fetchSize="500">
         SELECT 
             <include refid="allColumn_TannitsuSearch"></include>
         FROM 
@@ -199,8 +199,8 @@
     </sql>
     
     <!-- 広域全合併市町村情報の取得処理 -->
-    <select id="getKouikigappeijoho" resultMap="gappeiJyohoKouikiResultMap"
-            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gappeijoho.GappeiJyohoSpecificParameter" fetchSize="500">
+    <select resultOrdered="true" id="getKouikigappeijoho" resultMap="gappeiJyohoKouikiResultMap"
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.gappeijoho.GappeiJyohoSpecificParameter" fetchSize="500">
         SELECT 
             <include refid="allColumn_KouikiSearch"></include>
         FROM 
@@ -218,8 +218,8 @@
     </select>
     
     <!-- 広域全合併市町村情報検索の取得処理 -->
-    <select id="getKouikigappeijohokensaku" resultMap="gappeiJyohoKouikiResultMap"
-            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gappeijoho.GappeiJyohoSpecificParameter" fetchSize="500">
+    <select resultOrdered="true" id="getKouikigappeijohokensaku" resultMap="gappeiJyohoKouikiResultMap"
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.gappeijoho.GappeiJyohoSpecificParameter" fetchSize="500">
         SELECT 
             <include refid="allColumn_KouikiSearch"></include>
         FROM 
@@ -247,8 +247,8 @@
     </select>            
     
     <!-- 最新単一合併市町村情報の取得処理 -->
-    <select id="getSaishintannitsugappeijoho" resultMap="tannitsuGappeiJyohoResultMap" 
-            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gappeijoho.GappeiJyohoSpecificParameter" fetchSize="500">
+    <select resultOrdered="true" id="getSaishintannitsugappeijoho" resultMap="tannitsuGappeiJyohoResultMap" 
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.gappeijoho.GappeiJyohoSpecificParameter" fetchSize="500">
         SELECT 
             gappei."chiikiNo" AS "DbT7055GappeiJoho_chiikiNo",
             gappei."gappeiShurui" AS "DbT7055GappeiJoho_gappeiShurui",
@@ -271,8 +271,8 @@
         LIMIT 1
     </select>    
     <!-- 合併市町村情報検索の取得処理 -->
-    <select id="getSennyoukouikigappeijohokensaku単一" resultMap="tannitsuGappeiJyohoResultMap" 
-            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gappeijoho.GappeiJyohoSpecificParameter" fetchSize="500">
+    <select resultOrdered="true" id="getSennyoukouikigappeijohokensaku単一" resultMap="tannitsuGappeiJyohoResultMap" 
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.gappeijoho.GappeiJyohoSpecificParameter" fetchSize="500">
         SELECT 
             <include refid="allColumn_TannitsuSearch"></include>
         FROM 
@@ -287,8 +287,8 @@
             shichoson."hyojiUmu" = #{hyoujium} 
     </select>
     <!-- 合併市町村情報検索の取得処理 -->
-    <select id="getSennyoukouikigappeijohokensaku広域" resultMap="gappeiJyohoKouikiResultMap"
-            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gappeijoho.GappeiJyohoSpecificParameter" fetchSize="500">
+    <select resultOrdered="true" id="getSennyoukouikigappeijohokensaku広域" resultMap="gappeiJyohoKouikiResultMap"
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.gappeijoho.GappeiJyohoSpecificParameter" fetchSize="500">
         SELECT 
             <include refid="allColumn_KouikiSearch"></include>
         FROM 
@@ -301,8 +301,8 @@
             kosei."gappeiKyuShichosonHyojiUmu" = #{hyoujium}  
     </select>
     <!-- 最新広域合併市町村情報の取得処理 -->
-    <select id="getKouikigappeijohokennsaku" resultMap="gappeiJyohoKouikiResultMap"
-            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gappeijoho.GappeiJyohoSpecificParameter" fetchSize="500">
+    <select resultOrdered="true" id="getKouikigappeijohokennsaku" resultMap="gappeiJyohoKouikiResultMap"
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.gappeijoho.GappeiJyohoSpecificParameter" fetchSize="500">
         SELECT
             info."DbT7055GappeiJoho_chiikiNo",
             info."DbT7055GappeiJoho_gappeiShurui" ,
@@ -372,8 +372,8 @@
     </select>
     
     <!-- 検索キーによる単一合併市町村情報の取得処理 -->
-    <select id="getKensakukitannitsugappeijoho" resultMap="tannitsuGappeiJyohoResultMap"
-            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gappeijoho.GappeiJyohoSpecificParameter" fetchSize="500">
+    <select resultOrdered="true" id="getKensakukitannitsugappeijoho" resultMap="tannitsuGappeiJyohoResultMap"
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.gappeijoho.GappeiJyohoSpecificParameter" fetchSize="500">
         SELECT 
             <include refid="allColumn_TannitsuSearch"></include>
         FROM 
@@ -397,8 +397,8 @@
     </select> 
     
     <!-- 検索キーによる広域合併市町村情報の取得処理 -->
-    <select id="getKensakukikouikigappeijoho" resultMap="KouikiGappeiJyohoResultMap"
-            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gappeijoho.GappeiJyohoSpecificParameter" fetchSize="500">
+    <select resultOrdered="true" id="getKensakukikouikigappeijoho" resultMap="KouikiGappeiJyohoResultMap"
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.gappeijoho.GappeiJyohoSpecificParameter" fetchSize="500">
         SELECT 
             gappeiJoho."chiikiNo" AS "DbT7055GappeiJoho_chiikiNo",
             gappeiJoho."gappeiShurui" AS "DbT7055GappeiJoho_gappeiShurui",
@@ -482,4 +482,33 @@
                 #{kijyuYMD} between koseiShichosonMaster."kanyuYMD" and koseiShichosonMaster."ridatsuYMD"
         </if>        
     </select>
+    
+    <!-- 広域全合併市町村情報の取得処理 -->
+    <select resultOrdered="true" id="getKouikigappeijohoWithSort" resultMap="gappeiJyohoKouikiResultMap"
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.gappeijoho.GappeiJyohoSpecificParameter" fetchSize="500">
+        SELECT 
+            <include refid="allColumn_KouikiSearch"></include>
+        FROM 
+            rgdb."DbT7055GappeiJoho" AS gappei 
+        INNER JOIN
+            rgdb."DbT7051KoseiShichosonMaster" AS kosei
+        ON
+            gappei."chiikiNo" = kosei."gappeiChiikiNo" 
+        WHERE 
+            1 = 1
+        <if test="useHyoujium">
+            AND 
+                kosei."gappeiKyuShichosonHyojiUmu" = '1'  
+        </if>
+        <if test="null!=gappeiJohoSortOrder and gappeiJohoSortOrder.getコード() == 1">
+            ORDER BY 
+                gappei."gappeiYMD" DESC,
+                gappei."chiikiNo" DESC
+        </if>
+        <if test="null!=gappeiJohoSortOrder and gappeiJohoSortOrder.getコード() == 2">
+            ORDER BY 
+                gappei."kokuhorenDataFromYMD" DESC,
+                gappei."chiikiNo" DESC
+        </if>                 
+    </select>  
 </mapper>

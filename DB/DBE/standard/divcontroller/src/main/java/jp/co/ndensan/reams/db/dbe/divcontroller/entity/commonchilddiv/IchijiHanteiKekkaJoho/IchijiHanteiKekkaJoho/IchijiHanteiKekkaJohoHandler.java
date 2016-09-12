@@ -10,14 +10,14 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteikekkajohosearch.IchijiHanteiKekkaJohoSearchBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJohoBuilder;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.KoroshoIfShikibetsuCode;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho2;
 import jp.co.ndensan.reams.db.dbe.service.core.ichijihanteikekkajohosearch.IchijiHanteiKekkaJohoSearchManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.ninteishinseijoho.NinteiShinseiJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoKihonChosa;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoJoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKeikoku;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode06;
@@ -26,7 +26,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.Ich
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.JotaiAnteiseiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.SuiteiKyufuKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.helper.ModeType;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoKihonChosaManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShujiiIkenshoJohoManager;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -34,7 +33,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 一次判定結果情報のハンドラークラスです。
@@ -59,16 +57,15 @@ public class IchijiHanteiKekkaJohoHandler {
     /**
      * 画面初期化処理です。
      *
+     * @param shinseishoKanriNo ShinseishoKanriNo
+     * @param modeType ModeType
      */
-    public void onLoad() {
-
-        ShinseishoKanriNo shinseishoKanriNo = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        ModeType modeType = ViewStateHolder.get(ViewStateKeys.モード, ModeType.class);
+    public void onLoad(ShinseishoKanriNo shinseishoKanriNo, ModeType modeType) {
 
         if (ModeType.SHOKAI_MODE.equals(modeType)) {
 
             NinteiShinseiJohoManager ninteiShinseiJohoManager = new NinteiShinseiJohoManager();
-            NinteiShinseiJoho ninteiShinseiJoho = ninteiShinseiJohoManager.
+            NinteiShinseiJoho2 ninteiShinseiJoho = ninteiShinseiJohoManager.
                     get要介護認定申請情報(shinseishoKanriNo);
 
             IchijiHanteiKekkaJohoManager ichijiHanteiKekkaJohoManager = new IchijiHanteiKekkaJohoManager();
@@ -265,75 +262,68 @@ public class IchijiHanteiKekkaJohoHandler {
     /**
      * 呼び出し元画面への戻り値設定。
      *
+     * @param shinseishoKanriNo ShinseishoKanriNo
+     * @return IchijiHanteiKekkaJoho
      */
-    public void 呼び出し元画面への戻り値() {
+    public IchijiHanteiKekkaJoho 呼び出し元画面への戻り値(ShinseishoKanriNo shinseishoKanriNo) {
 
-        ShinseishoKanriNo shinseishoKanriNo = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        ModeType modeType = ViewStateHolder.get(ViewStateKeys.モード, ModeType.class);
+        IchijiHanteiKekkaJohoSearchManager manager = IchijiHanteiKekkaJohoSearchManager.createIntance();
+        IchijiHanteiKekkaJohoSearchBusiness business = manager.getIchijiHanteiKekkaJoho(shinseishoKanriNo);
+        if (business != null
+                && business.get厚労省IF識別コード() != null
+                && (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(
+                        business.get厚労省IF識別コード().value())
+                || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(
+                        business.get厚労省IF識別コード().value()))) {
+            IchijiHanteiKekkaJoho ichijiHanteiKekkaJoho = new IchijiHanteiKekkaJoho(shinseishoKanriNo);
 
-        if (ModeType.SHOKAI_MODE.equals(modeType)) {
-
-            RString 一次判定結果 = div.getTxtIchijiHanteiKekka().getValue();
-            ViewStateHolder.put(ViewStateKeys.一次判定結果_一次判定結果, 一次判定結果);
-
-        } else if (ModeType.ADD_MODE.equals(modeType)) {
-            IchijiHanteiKekkaJohoSearchManager manager = IchijiHanteiKekkaJohoSearchManager.createIntance();
-            IchijiHanteiKekkaJohoSearchBusiness business = manager.getIchijiHanteiKekkaJoho(shinseishoKanriNo);
-            if (business != null
-                    && business.get厚労省IF識別コード() != null
-                    && (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(
-                            business.get厚労省IF識別コード().value())
-                    || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(
-                            business.get厚労省IF識別コード().value()))) {
-                IchijiHanteiKekkaJoho ichijiHanteiKekkaJoho = new IchijiHanteiKekkaJoho(shinseishoKanriNo);
-
-                boolean kariIchijiHanteiKubun = false;
-                if (div.getTxtJiritsudoIkensho().getValue().isNullOrEmpty()) {
-                    kariIchijiHanteiKubun = true;
-                }
-                IchijiHanteiKekkaJohoBuilder builder = ichijiHanteiKekkaJoho.createBuilderForEdit();
-                builder.set仮一次判定区分(kariIchijiHanteiKubun);
-                builder.set要介護認定一次判定年月日(new FlexibleDate(RDate.getNowDate().toDateString()));
-                builder.set要介護認定一次判定結果コード(new Code(business.get一次判定結果()));
-                builder.set要介護認定一次判定結果コード_認知症加算(new Code(business.get認知症加算後の一次判定結果()));
-                builder.set要介護認定等基準時間(Integer.valueOf(div.getTxtKijunJikan().getValue().toString()));
-                builder.set要介護認定等基準時間_食事(Integer.valueOf(div.getTxtShokuji().getValue().toString()));
-                builder.set要介護認定等基準時間_排泄(Integer.valueOf(div.getTxtHaisetsu().getValue().toString()));
-                builder.set要介護認定等基準時間_移動(Integer.valueOf(div.getTxtIdo().getValue().toString()));
-                builder.set要介護認定等基準時間_清潔保持(Integer.valueOf(div.getTxtSeiketsuHoji().getValue().toString()));
-                builder.set要介護認定等基準時間_間接ケア(Integer.valueOf(div.getTxtKansetsuCare().getValue().toString()));
-                builder.set要介護認定等基準時間_BPSD関連(Integer.valueOf(div.getTxtBpsdKanren().getValue().toString()));
-                builder.set要介護認定等基準時間_機能訓練(Integer.valueOf(div.getTxtKinoKunren().getValue().toString()));
-                builder.set要介護認定等基準時間_医療関連(Integer.valueOf(div.getTxtIryoKanren().getValue().toString()));
-                builder.set要介護認定等基準時間_認知症加算(Integer.valueOf(div.getTxtNinchishoKasan().getValue().toString()));
-                builder.set中間評価項目得点第1群(Integer.valueOf(div.getTxtDai1gun().getValue().toString()));
-                builder.set中間評価項目得点第2群(Integer.valueOf(div.getTxtDai2gun().getValue().toString()));
-                builder.set中間評価項目得点第3群(Integer.valueOf(div.getTxtDai3gun().getValue().toString()));
-                builder.set中間評価項目得点第4群(Integer.valueOf(div.getTxtDai4gun().getValue().toString()));
-                builder.set中間評価項目得点第5群(Integer.valueOf(div.getTxtDai5gun().getValue().toString()));
-                builder.set中間評価項目得点第6群(0);
-                builder.set中間評価項目得点第7群(0);
-                builder.set要介護認定一次判定警告コード(business.get一次判定警告コード());
-                builder.set要介護認定状態の安定性コード(new Code(business.get状態の安定性()));
-                builder.set認知症自立度Ⅱ以上の蓋然性(new Decimal(div.getTxtGaizensei().getValue().toString()));
-                builder.set認知機能及び状態安定性から推定される給付区分コード(new Code(business.get認知機能及び状態安定性から推定される給付区分()));
-                builder.set運動能力の低下していない認知症高齢者の指標コード(new Code("1"));
-                builder.set日常生活自立度の組み合わせ_自立(0);
-                builder.set日常生活自立度の組み合わせ_要支援(0);
-                builder.set日常生活自立度の組み合わせ_要介護１(0);
-                builder.set日常生活自立度の組み合わせ_要介護２(0);
-                builder.set日常生活自立度の組み合わせ_要介護３(0);
-                builder.set日常生活自立度の組み合わせ_要介護４(0);
-                builder.set日常生活自立度の組み合わせ_要介護５(0);
-                builder.set認知症高齢者の日常生活自立度の蓋然性評価コード(Code.EMPTY);
-                builder.set認知症高齢者の日常生活自立度の蓋然性評価(0);
-                builder.set一次判定結果送付区分(RString.EMPTY);
-                builder.set一次判定結果送付年月日(FlexibleDate.EMPTY);
-                builder.setチャート(RString.EMPTY);
-                builder.set状態像(RString.EMPTY);
-
-                ViewStateHolder.put(ViewStateKeys.一次判定結果_一次判定結果情報, builder.build());
+            boolean kariIchijiHanteiKubun = false;
+            if (div.getTxtJiritsudoIkensho().getValue().isNullOrEmpty()) {
+                kariIchijiHanteiKubun = true;
             }
+            IchijiHanteiKekkaJohoBuilder builder = ichijiHanteiKekkaJoho.createBuilderForEdit();
+            builder.set仮一次判定区分(kariIchijiHanteiKubun);
+            builder.set要介護認定一次判定年月日(new FlexibleDate(RDate.getNowDate().toDateString()));
+            builder.set要介護認定一次判定結果コード(new Code(business.get一次判定結果()));
+            builder.set要介護認定一次判定結果コード_認知症加算(new Code(business.get認知症加算後の一次判定結果()));
+            builder.set要介護認定等基準時間(Integer.valueOf(div.getTxtKijunJikan().getValue().toString()));
+            builder.set要介護認定等基準時間_食事(Integer.valueOf(div.getTxtShokuji().getValue().toString()));
+            builder.set要介護認定等基準時間_排泄(Integer.valueOf(div.getTxtHaisetsu().getValue().toString()));
+            builder.set要介護認定等基準時間_移動(Integer.valueOf(div.getTxtIdo().getValue().toString()));
+            builder.set要介護認定等基準時間_清潔保持(Integer.valueOf(div.getTxtSeiketsuHoji().getValue().toString()));
+            builder.set要介護認定等基準時間_間接ケア(Integer.valueOf(div.getTxtKansetsuCare().getValue().toString()));
+            builder.set要介護認定等基準時間_BPSD関連(Integer.valueOf(div.getTxtBpsdKanren().getValue().toString()));
+            builder.set要介護認定等基準時間_機能訓練(Integer.valueOf(div.getTxtKinoKunren().getValue().toString()));
+            builder.set要介護認定等基準時間_医療関連(Integer.valueOf(div.getTxtIryoKanren().getValue().toString()));
+            builder.set要介護認定等基準時間_認知症加算(Integer.valueOf(div.getTxtNinchishoKasan().getValue().toString()));
+            builder.set中間評価項目得点第1群(Integer.valueOf(div.getTxtDai1gun().getValue().toString()));
+            builder.set中間評価項目得点第2群(Integer.valueOf(div.getTxtDai2gun().getValue().toString()));
+            builder.set中間評価項目得点第3群(Integer.valueOf(div.getTxtDai3gun().getValue().toString()));
+            builder.set中間評価項目得点第4群(Integer.valueOf(div.getTxtDai4gun().getValue().toString()));
+            builder.set中間評価項目得点第5群(Integer.valueOf(div.getTxtDai5gun().getValue().toString()));
+            builder.set中間評価項目得点第6群(0);
+            builder.set中間評価項目得点第7群(0);
+            builder.set要介護認定一次判定警告コード(business.get一次判定警告コード());
+            builder.set要介護認定状態の安定性コード(new Code(business.get状態の安定性()));
+            builder.set認知症自立度Ⅱ以上の蓋然性(new Decimal(div.getTxtGaizensei().getValue().toString()));
+            builder.set認知機能及び状態安定性から推定される給付区分コード(new Code(business.get認知機能及び状態安定性から推定される給付区分()));
+            builder.set運動能力の低下していない認知症高齢者の指標コード(new Code("1"));
+            builder.set日常生活自立度の組み合わせ_自立(0);
+            builder.set日常生活自立度の組み合わせ_要支援(0);
+            builder.set日常生活自立度の組み合わせ_要介護１(0);
+            builder.set日常生活自立度の組み合わせ_要介護２(0);
+            builder.set日常生活自立度の組み合わせ_要介護３(0);
+            builder.set日常生活自立度の組み合わせ_要介護４(0);
+            builder.set日常生活自立度の組み合わせ_要介護５(0);
+            builder.set認知症高齢者の日常生活自立度の蓋然性評価コード(Code.EMPTY);
+            builder.set認知症高齢者の日常生活自立度の蓋然性評価(0);
+            builder.set一次判定結果送付区分(RString.EMPTY);
+            builder.set一次判定結果送付年月日(FlexibleDate.EMPTY);
+            builder.setチャート(RString.EMPTY);
+            builder.set状態像(RString.EMPTY);
+
+            return builder.build();
         }
+        return null;
     }
 }

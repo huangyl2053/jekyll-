@@ -7,15 +7,10 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1030001;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shafukukeigen.ShakaifukuRiyoshaFutanKeigen;
-import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shakaifukushihojinkeigen.ShakaifukuRiyoshaFutanKeigenToJotai;
-import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1030001.DBD1030001Handler;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.shakaifukushihojinkeigen.ShakaiFukushiHojinKeigenService;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urd.service.core.seikatsuhogo.SeikatsuhogoManagerFactory;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -25,7 +20,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 社会福祉法人等利用者負担軽減申請バリデーションクラスです。
@@ -226,15 +220,9 @@ public enum DBD1030001DivSpec implements IPredicate<DBD1030001Div> {
                 public boolean apply(DBD1030001Div div) {
                     FlexibleDate 適用開始日 = div.getTxtTekiyoYMD().getValue();
                     ShakaiFukushiHojinKeigenService service = ShakaiFukushiHojinKeigenService.createIntance();
-                    TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-                    HihokenshaNo 被保険者番号;
-                    if (null == taishoshaKey) {
-                        被保険者番号 = HihokenshaNo.EMPTY;
-                    } else {
-                        被保険者番号 = taishoshaKey.get被保険者番号();
-                    }
-                    if (null == 被保険者番号) {
-                        被保険者番号 = HihokenshaNo.EMPTY;
+                    HihokenshaNo 被保険者番号 = HihokenshaNo.EMPTY;
+                    if (div.getHiddenHihokenshaNo() != null) {
+                        被保険者番号 = new HihokenshaNo(div.getHiddenHihokenshaNo());
                     }
                     return service.canBe利用者(被保険者番号, 適用開始日);
                 }
@@ -313,30 +301,27 @@ public enum DBD1030001DivSpec implements IPredicate<DBD1030001Div> {
                  */
                 @Override
                 public boolean apply(DBD1030001Div div) {
-                    ArrayList<ShakaifukuRiyoshaFutanKeigenToJotai> 情報と状態ArrayList
-                    = ViewStateHolder.get(DBD1030001Handler.DBD1030001ViewStateKey.申請一覧情報と状態, ArrayList.class);
-                    List<ShakaifukuRiyoshaFutanKeigenToJotai> 情報と状態List = new ArrayList<>();
-                    for (ShakaifukuRiyoshaFutanKeigenToJotai 情報と状態 : 情報と状態ArrayList) {
-                        if (!new RString("削除").equals(情報と状態.get状態())
-                        && new RString("1").equals(情報と状態.get社会福祉法人等利用者負担軽減情報().get決定区分())) {
-                            情報と状態List.add(情報と状態);
+                    List<dgShinseiList_Row> rows = div.getDgShinseiList().getDataSource();
+                    List<dgShinseiList_Row> checkRows = new ArrayList<>();
+                    for (dgShinseiList_Row row : rows) {
+                        if (!new RString("削除").equals(row.getJotai())
+                        && new RString("承認する").equals(row.getKetteiKubun())) {
+                            checkRows.add(row);
                         }
                     }
-                    int length = 情報と状態List.size();
+                    int length = checkRows.size();
                     if (length < 2) {
                         return true;
                     }
                     for (int index = 0; index <= length - 2; index++) {
                         int index2 = index + 1;
                         while (index2 <= length - 1) {
-                            ShakaifukuRiyoshaFutanKeigenToJotai 情報と状態 = 情報と状態List.get(index);
-                            ShakaifukuRiyoshaFutanKeigenToJotai 情報と状態2 = 情報と状態List.get(index2);
-                            ShakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減情報 = 情報と状態.get社会福祉法人等利用者負担軽減情報();
-                            ShakaifukuRiyoshaFutanKeigen 社会福祉法人等利用者負担軽減情報2 = 情報と状態2.get社会福祉法人等利用者負担軽減情報();
-                            if (!社会福祉法人等利用者負担軽減情報.get適用終了年月日()
-                            .isBeforeOrEquals(社会福祉法人等利用者負担軽減情報2.get適用開始年月日())
-                            && !社会福祉法人等利用者負担軽減情報2.get適用終了年月日()
-                            .isBeforeOrEquals(社会福祉法人等利用者負担軽減情報.get適用開始年月日())) {
+                            dgShinseiList_Row row1 = checkRows.get(index);
+                            dgShinseiList_Row row2 = checkRows.get(index2);
+                            if (!row1.getTxtYukoKigenYMD().getValue()
+                            .isBeforeOrEquals(row2.getTxtTekiyoYMD().getValue())
+                            && !row2.getTxtYukoKigenYMD().getValue()
+                            .isBeforeOrEquals(row1.getTxtTekiyoYMD().getValue())) {
                                 return false;
                             }
                             index2++;
@@ -354,14 +339,12 @@ public enum DBD1030001DivSpec implements IPredicate<DBD1030001Div> {
                  */
                 @Override
                 public boolean apply(DBD1030001Div div) {
-                    ArrayList<ShakaifukuRiyoshaFutanKeigenToJotai> 情報と状態ArrayList
-                    = ViewStateHolder.get(DBD1030001Handler.DBD1030001ViewStateKey.申請一覧情報と状態, ArrayList.class);
-                    for (ShakaifukuRiyoshaFutanKeigenToJotai 情報と状態 : 情報と状態ArrayList) {
-                        ShakaifukuRiyoshaFutanKeigen 情報 = 情報と状態.get社会福祉法人等利用者負担軽減情報();
-                        if (new RString("追加").equals(情報と状態.get状態())
-                        && new RString("1").equals(情報.get決定区分())
+                    List<dgShinseiList_Row> rows = div.getDgShinseiList().getDataSource();
+                    for (dgShinseiList_Row row : rows) {
+                        if (new RString("追加").equals(row.getJotai())
+                        && new RString("承認する").equals(row.getKetteiKubun())
                         && ShakaiFukushiHojinKeigenService.createIntance()
-                        .exsits確認番号In同一年度(情報.get確認番号(), 情報.get適用開始年月日())) {
+                        .exsits確認番号In同一年度(row.getKakuninNo(), row.getTxtKetteiYMD().getValue())) {
                             return false;
                         }
                     }
@@ -405,15 +388,9 @@ public enum DBD1030001DivSpec implements IPredicate<DBD1030001Div> {
                 public boolean apply(DBD1030001Div div) {
                     Decimal 減免率_分子 = div.getTxtKeigenRitsuBunshi().getValue();
                     FlexibleDate 適用開始日 = div.getTxtTekiyoYMD().getValue();
-                    TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-                    ShikibetsuCode 識別コード;
-                    if (null == taishoshaKey) {
-                        識別コード = ShikibetsuCode.EMPTY;
-                    } else {
-                        識別コード = taishoshaKey.get識別コード();
-                    }
-                    if (null == 識別コード) {
-                        識別コード = ShikibetsuCode.EMPTY;
+                    ShikibetsuCode 識別コード = ShikibetsuCode.EMPTY;
+                    if (div.getHiddenShikibetsuCode() != null) {
+                        識別コード = new ShikibetsuCode(div.getHiddenShikibetsuCode());
                     }
                     return 減免率_分子.compareTo(new Decimal("100")) != 0
                     || !new FlexibleDate("20110331").isBefore(適用開始日)

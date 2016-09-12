@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.relate;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DaichoType;
+import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
@@ -98,7 +98,7 @@ public class ShisetsuNyutaishoDac implements IModifiable<DbT1004ShisetsuNyutaish
                 where(
                         and(
                                 eq(DbT1004ShisetsuNyutaisho.shikibetsuCode, 識別コード),
-                                eq(DbT1004ShisetsuNyutaisho.daichoShubetsu, 台帳種別.getCode())
+                                eq(DbT1004ShisetsuNyutaisho.daichoShubetsu, 台帳種別.getコード())
                         )
                 ).
                 toList(DbT1004ShisetsuNyutaishoEntity.class);

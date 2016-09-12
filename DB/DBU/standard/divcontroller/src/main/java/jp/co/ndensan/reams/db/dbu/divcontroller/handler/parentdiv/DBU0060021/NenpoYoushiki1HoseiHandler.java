@@ -8,20 +8,19 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0060021;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
-import jp.co.ndensan.reams.db.dbu.definition.core.zigyouhoukokunenpou.ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiDataIdentifier;
-import jp.co.ndensan.reams.db.dbu.definition.jigyohokokunenpo.TempJigyoHokokuNenpoDetalParameter;
+import jp.co.ndensan.reams.db.dbu.definition.core.zigyouhoukokunenpou.ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokunenpo.TempJigyoHokokuNenpoDetalParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060021.NenpoYoushiki1HoseiDiv;
-import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * 老人保健受給者台帳管理ハンドラクラスです。
- * 
+ *
  * @reamsid_L DBU-1060-020 wangkun
  */
 public class NenpoYoushiki1HoseiHandler {
@@ -68,8 +67,20 @@ public class NenpoYoushiki1HoseiHandler {
      * @param param 遷移画面と事業状況報告（年報）補正検索画面は渡す項目Entityクラスです。
      */
     public void initialize(List<JigyoHokokuTokeiData> 事業報告集計一覧データリスト, ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity param) {
-        div.getHihokenshabango().getTxthokokuYM().setValue(new FlexibleDate("201501"));
-        div.getHihokenshabango().getTxtShukeiY().setValue(new FlexibleDate("201501"));
+        if (param.get画面報告年度().isEmpty()) {
+            div.getHihokenshabango().getTxthokokuYM().setValue(FlexibleDate.EMPTY);
+        } else {
+            div.getHihokenshabango().getTxthokokuYM().setValue(new FlexibleDate(Integer.parseInt(param.get画面報告年度().toString()),
+                    RDate.getNowDate().getMonthValue(),
+                    RDate.getNowDate().getDayValue()));
+        }
+        if (param.get画面集計年度().isEmpty()) {
+            div.getHihokenshabango().getTxtShukeiY().setValue(FlexibleDate.EMPTY);
+        } else {
+            div.getHihokenshabango().getTxtShukeiY().setValue(new FlexibleDate(Integer.parseInt(param.get画面集計年度().toString()),
+                    RDate.getNowDate().getMonthValue(),
+                    RDate.getNowDate().getDayValue()));
+        }
         div.getHihokenshabango().getTxtHihokenshabango().setValue(param.get保険者コード());
         div.getHihokenshabango().getTxthihokenshamei().setValue(param.get市町村名称());
         for (JigyoHokokuTokeiData data : 事業報告集計一覧データリスト) {
@@ -85,13 +96,12 @@ public class NenpoYoushiki1HoseiHandler {
     /**
      * 画面修正データの取得します。
      *
+     * @param jigyoHokokuTokeiData 事業報告統計データ
      * @return List<JigyoHokokuTokeiData> 事業報告統計データを管理リスト
      */
-    public List<JigyoHokokuTokeiData> 修正データの取得() {
+    public List<JigyoHokokuTokeiData> 修正データの取得(Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> jigyoHokokuTokeiData) {
         List<JigyoHokokuTokeiData> modifyData = new ArrayList();
         List<TempJigyoHokokuNenpoDetalParameter> tempModifyData = getTempModifyData();
-        Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> jigyoHokokuTokeiData
-                = ViewStateHolder.get(ViewStateKeys.開催場所情報一覧, Models.class);
         for (TempJigyoHokokuNenpoDetalParameter paramData : tempModifyData) {
             for (JigyoHokokuTokeiData viewData : jigyoHokokuTokeiData) {
                 if (paramData.get縦番号().compareTo(viewData.get縦番号()) == 0
@@ -437,49 +447,49 @@ public class NenpoYoushiki1HoseiHandler {
         List<TempJigyoHokokuNenpoDetalParameter> tempList = new ArrayList();
         tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(Decimal.ONE, Decimal.ONE,
                 div.getYoshikiichihoseiMeisai().getTxtnendomatsugenzaihihokenshasuVal().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_2, Decimal.ONE, 
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_2, Decimal.ONE,
                 div.getYoshikiichihoseiMeisai().getTxtnendomatsugenzaihihokenshasuni().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_3, Decimal.ONE, 
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_3, Decimal.ONE,
                 div.getYoshikiichihoseiMeisai().getTxtnendomatsugenzaihihokenshasusan().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_4, Decimal.ONE, 
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_4, Decimal.ONE,
                 div.getYoshikiichihoseiMeisai().getTxtnendomatsugenzaihihokensu().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_5, Decimal.ONE, 
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_5, Decimal.ONE,
                 div.getYoshikiichihoseiMeisai().getTxtnendomatsugenzaihihokenshasuyon().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_6, Decimal.ONE, 
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_6, Decimal.ONE,
                 div.getYoshikiichihoseiMeisai().getTxtnendomatsugenzaihihokenshasuyondankai().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_7, Decimal.ONE, 
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_7, Decimal.ONE,
                 div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka1().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_8, Decimal.ONE, 
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_8, Decimal.ONE,
                 div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka2().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_9, Decimal.ONE, 
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_9, Decimal.ONE,
                 div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka3().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(Decimal.TEN, Decimal.ONE, 
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(Decimal.TEN, Decimal.ONE,
                 div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka4().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_11, Decimal.ONE, 
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_11, Decimal.ONE,
                 div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka5().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_12, Decimal.ONE, 
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_12, Decimal.ONE,
                 div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka6().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_13, Decimal.ONE, 
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_13, Decimal.ONE,
                 div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka7().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_14, Decimal.ONE, 
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_14, Decimal.ONE,
                 div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka8().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_15, Decimal.ONE, 
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_15, Decimal.ONE,
                 div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka9().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_16, Decimal.ONE, 
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_16, Decimal.ONE,
                 div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka10().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_17, Decimal.ONE, 
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_17, Decimal.ONE,
                 div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka11().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_18, Decimal.ONE, 
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_18, Decimal.ONE,
                 div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka12().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_19, Decimal.ONE, 
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_19, Decimal.ONE,
                 div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka13().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_20, Decimal.ONE, 
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_20, Decimal.ONE,
                 div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka14().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_21, Decimal.ONE, 
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_21, Decimal.ONE,
                 div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka15().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_22, Decimal.ONE, 
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_22, Decimal.ONE,
                 div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuka16().getValue()));
-        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_23, Decimal.ONE, 
+        tempList.add(TempJigyoHokokuNenpoDetalParameter.createParameterForTempParam(NUM_23, Decimal.ONE,
                 div.getYoshikiichihoseiMeisai().getTxtnendohihokenshasuFumei().getValue()));
 
         return tempList;

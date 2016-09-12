@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020071;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  * tpl1 のクラスファイル
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
  */
 public class tpl1Div extends TabPanel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -55,2047 +55,2047 @@ public class tpl1Div extends TabPanel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public TextBox getTextBox1() {
+    public TextBoxNum getTextBox1() {
         return this.getTbl1().getTextBox1();
     }
 
     @JsonIgnore
-    public TextBox getTextBox2() {
+    public TextBoxNum getTextBox2() {
         return this.getTbl1().getTextBox2();
     }
 
     @JsonIgnore
-    public TextBox getTextBox3() {
+    public TextBoxNum getTextBox3() {
         return this.getTbl1().getTextBox3();
     }
 
     @JsonIgnore
-    public TextBox getTextBox4() {
+    public TextBoxNum getTextBox4() {
         return this.getTbl1().getTextBox4();
     }
 
     @JsonIgnore
-    public TextBox getTextBox5() {
+    public TextBoxNum getTextBox5() {
         return this.getTbl1().getTextBox5();
     }
 
     @JsonIgnore
-    public TextBox getTextBox6() {
+    public TextBoxNum getTextBox6() {
         return this.getTbl1().getTextBox6();
     }
 
     @JsonIgnore
-    public TextBox getTextBox7() {
+    public TextBoxNum getTextBox7() {
         return this.getTbl1().getTextBox7();
     }
 
     @JsonIgnore
-    public TextBox getTextBox8() {
+    public TextBoxNum getTextBox8() {
         return this.getTbl1().getTextBox8();
     }
 
     @JsonIgnore
-    public TextBox getTextBox9() {
+    public TextBoxNum getTextBox9() {
         return this.getTbl1().getTextBox9();
     }
 
     @JsonIgnore
-    public TextBox getTextBox10() {
+    public TextBoxNum getTextBox10() {
         return this.getTbl1().getTextBox10();
     }
 
     @JsonIgnore
-    public TextBox getTextBox11() {
+    public TextBoxNum getTextBox11() {
         return this.getTbl1().getTextBox11();
     }
 
     @JsonIgnore
-    public TextBox getTextBox12() {
+    public TextBoxNum getTextBox12() {
         return this.getTbl1().getTextBox12();
     }
 
     @JsonIgnore
-    public TextBox getTextBox13() {
+    public TextBoxNum getTextBox13() {
         return this.getTbl1().getTextBox13();
     }
 
     @JsonIgnore
-    public TextBox getTextBox14() {
+    public TextBoxNum getTextBox14() {
         return this.getTbl1().getTextBox14();
     }
 
     @JsonIgnore
-    public TextBox getTextBox15() {
+    public TextBoxNum getTextBox15() {
         return this.getTbl1().getTextBox15();
     }
 
     @JsonIgnore
-    public TextBox getTextBox16() {
+    public TextBoxNum getTextBox16() {
         return this.getTbl1().getTextBox16();
     }
 
     @JsonIgnore
-    public TextBox getTextBox17() {
+    public TextBoxNum getTextBox17() {
         return this.getTbl1().getTextBox17();
     }
 
     @JsonIgnore
-    public TextBox getTextBox18() {
+    public TextBoxNum getTextBox18() {
         return this.getTbl1().getTextBox18();
     }
 
     @JsonIgnore
-    public TextBox getTextBox19() {
+    public TextBoxNum getTextBox19() {
         return this.getTbl1().getTextBox19();
     }
 
     @JsonIgnore
-    public TextBox getTextBox20() {
+    public TextBoxNum getTextBox20() {
         return this.getTbl1().getTextBox20();
     }
 
     @JsonIgnore
-    public TextBox getTextBox21() {
+    public TextBoxNum getTextBox21() {
         return this.getTbl1().getTextBox21();
     }
 
     @JsonIgnore
-    public TextBox getTextBox22() {
+    public TextBoxNum getTextBox22() {
         return this.getTbl1().getTextBox22();
     }
 
     @JsonIgnore
-    public TextBox getTextBox23() {
+    public TextBoxNum getTextBox23() {
         return this.getTbl1().getTextBox23();
     }
 
     @JsonIgnore
-    public TextBox getTextBox24() {
+    public TextBoxNum getTextBox24() {
         return this.getTbl1().getTextBox24();
     }
 
     @JsonIgnore
-    public TextBox getTextBox25() {
+    public TextBoxNum getTextBox25() {
         return this.getTbl1().getTextBox25();
     }
 
     @JsonIgnore
-    public TextBox getTextBox26() {
+    public TextBoxNum getTextBox26() {
         return this.getTbl1().getTextBox26();
     }
 
     @JsonIgnore
-    public TextBox getTextBox27() {
+    public TextBoxNum getTextBox27() {
         return this.getTbl1().getTextBox27();
     }
 
     @JsonIgnore
-    public TextBox getTextBox28() {
+    public TextBoxNum getTextBox28() {
         return this.getTbl1().getTextBox28();
     }
 
     @JsonIgnore
-    public TextBox getTextBox29() {
+    public TextBoxNum getTextBox29() {
         return this.getTbl1().getTextBox29();
     }
 
     @JsonIgnore
-    public TextBox getTextBox30() {
+    public TextBoxNum getTextBox30() {
         return this.getTbl1().getTextBox30();
     }
 
     @JsonIgnore
-    public TextBox getTextBox31() {
+    public TextBoxNum getTextBox31() {
         return this.getTbl1().getTextBox31();
     }
 
     @JsonIgnore
-    public TextBox getTextBox32() {
+    public TextBoxNum getTextBox32() {
         return this.getTbl1().getTextBox32();
     }
 
     @JsonIgnore
-    public TextBox getTextBox33() {
+    public TextBoxNum getTextBox33() {
         return this.getTbl1().getTextBox33();
     }
 
     @JsonIgnore
-    public TextBox getTextBox35() {
+    public TextBoxNum getTextBox35() {
         return this.getTbl1().getTextBox35();
     }
 
     @JsonIgnore
-    public TextBox getTextBox36() {
+    public TextBoxNum getTextBox36() {
         return this.getTbl1().getTextBox36();
     }
 
     @JsonIgnore
-    public TextBox getTextBox37() {
+    public TextBoxNum getTextBox37() {
         return this.getTbl1().getTextBox37();
     }
 
     @JsonIgnore
-    public TextBox getTextBox38() {
+    public TextBoxNum getTextBox38() {
         return this.getTbl1().getTextBox38();
     }
 
     @JsonIgnore
-    public TextBox getTextBox39() {
+    public TextBoxNum getTextBox39() {
         return this.getTbl1().getTextBox39();
     }
 
     @JsonIgnore
-    public TextBox getTextBox40() {
+    public TextBoxNum getTextBox40() {
         return this.getTbl1().getTextBox40();
     }
 
     @JsonIgnore
-    public TextBox getTextBox41() {
+    public TextBoxNum getTextBox41() {
         return this.getTbl1().getTextBox41();
     }
 
     @JsonIgnore
-    public TextBox getTextBox42() {
+    public TextBoxNum getTextBox42() {
         return this.getTbl1().getTextBox42();
     }
 
     @JsonIgnore
-    public TextBox getTextBox43() {
+    public TextBoxNum getTextBox43() {
         return this.getTbl1().getTextBox43();
     }
 
     @JsonIgnore
-    public TextBox getTextBox44() {
+    public TextBoxNum getTextBox44() {
         return this.getTbl1().getTextBox44();
     }
 
     @JsonIgnore
-    public TextBox getTextBox34() {
+    public TextBoxNum getTextBox34() {
         return this.getTbl1().getTextBox34();
     }
 
     @JsonIgnore
-    public TextBox getTextBox45() {
+    public TextBoxNum getTextBox45() {
         return this.getTbl1().getTextBox45();
     }
 
     @JsonIgnore
-    public TextBox getTextBox46() {
+    public TextBoxNum getTextBox46() {
         return this.getTbl1().getTextBox46();
     }
 
     @JsonIgnore
-    public TextBox getTextBox47() {
+    public TextBoxNum getTextBox47() {
         return this.getTbl1().getTextBox47();
     }
 
     @JsonIgnore
-    public TextBox getTextBox48() {
+    public TextBoxNum getTextBox48() {
         return this.getTbl1().getTextBox48();
     }
 
     @JsonIgnore
-    public TextBox getTextBox49() {
+    public TextBoxNum getTextBox49() {
         return this.getTbl1().getTextBox49();
     }
 
     @JsonIgnore
-    public TextBox getTextBox50() {
+    public TextBoxNum getTextBox50() {
         return this.getTbl1().getTextBox50();
     }
 
     @JsonIgnore
-    public TextBox getTextBox51() {
+    public TextBoxNum getTextBox51() {
         return this.getTbl1().getTextBox51();
     }
 
     @JsonIgnore
-    public TextBox getTextBox52() {
+    public TextBoxNum getTextBox52() {
         return this.getTbl1().getTextBox52();
     }
 
     @JsonIgnore
-    public TextBox getTextBox53() {
+    public TextBoxNum getTextBox53() {
         return this.getTbl1().getTextBox53();
     }
 
     @JsonIgnore
-    public TextBox getTextBox54() {
+    public TextBoxNum getTextBox54() {
         return this.getTbl1().getTextBox54();
     }
 
     @JsonIgnore
-    public TextBox getTextBox55() {
+    public TextBoxNum getTextBox55() {
         return this.getTbl1().getTextBox55();
     }
 
     @JsonIgnore
-    public TextBox getTextBox56() {
+    public TextBoxNum getTextBox56() {
         return this.getTbl1().getTextBox56();
     }
 
     @JsonIgnore
-    public TextBox getTextBox57() {
+    public TextBoxNum getTextBox57() {
         return this.getTbl1().getTextBox57();
     }
 
     @JsonIgnore
-    public TextBox getTextBox58() {
+    public TextBoxNum getTextBox58() {
         return this.getTbl1().getTextBox58();
     }
 
     @JsonIgnore
-    public TextBox getTextBox59() {
+    public TextBoxNum getTextBox59() {
         return this.getTbl1().getTextBox59();
     }
 
     @JsonIgnore
-    public TextBox getTextBox60() {
+    public TextBoxNum getTextBox60() {
         return this.getTbl1().getTextBox60();
     }
 
     @JsonIgnore
-    public TextBox getTextBox61() {
+    public TextBoxNum getTextBox61() {
         return this.getTbl1().getTextBox61();
     }
 
     @JsonIgnore
-    public TextBox getTextBox62() {
+    public TextBoxNum getTextBox62() {
         return this.getTbl1().getTextBox62();
     }
 
     @JsonIgnore
-    public TextBox getTextBox63() {
+    public TextBoxNum getTextBox63() {
         return this.getTbl1().getTextBox63();
     }
 
     @JsonIgnore
-    public TextBox getTextBox64() {
+    public TextBoxNum getTextBox64() {
         return this.getTbl1().getTextBox64();
     }
 
     @JsonIgnore
-    public TextBox getTextBox65() {
+    public TextBoxNum getTextBox65() {
         return this.getTbl1().getTextBox65();
     }
 
     @JsonIgnore
-    public TextBox getTextBox66() {
+    public TextBoxNum getTextBox66() {
         return this.getTbl1().getTextBox66();
     }
 
     @JsonIgnore
-    public TextBox getTextBox67() {
+    public TextBoxNum getTextBox67() {
         return this.getTbl1().getTextBox67();
     }
 
     @JsonIgnore
-    public TextBox getTextBox68() {
+    public TextBoxNum getTextBox68() {
         return this.getTbl1().getTextBox68();
     }
 
     @JsonIgnore
-    public TextBox getTextBox69() {
+    public TextBoxNum getTextBox69() {
         return this.getTbl1().getTextBox69();
     }
 
     @JsonIgnore
-    public TextBox getTextBox70() {
+    public TextBoxNum getTextBox70() {
         return this.getTbl1().getTextBox70();
     }
 
     @JsonIgnore
-    public TextBox getTextBox71() {
+    public TextBoxNum getTextBox71() {
         return this.getTbl1().getTextBox71();
     }
 
     @JsonIgnore
-    public TextBox getTextBox72() {
+    public TextBoxNum getTextBox72() {
         return this.getTbl1().getTextBox72();
     }
 
     @JsonIgnore
-    public TextBox getTextBox73() {
+    public TextBoxNum getTextBox73() {
         return this.getTbl1().getTextBox73();
     }
 
     @JsonIgnore
-    public TextBox getTextBox74() {
+    public TextBoxNum getTextBox74() {
         return this.getTbl1().getTextBox74();
     }
 
     @JsonIgnore
-    public TextBox getTextBox75() {
+    public TextBoxNum getTextBox75() {
         return this.getTbl1().getTextBox75();
     }
 
     @JsonIgnore
-    public TextBox getTextBox76() {
+    public TextBoxNum getTextBox76() {
         return this.getTbl1().getTextBox76();
     }
 
     @JsonIgnore
-    public TextBox getTextBox77() {
+    public TextBoxNum getTextBox77() {
         return this.getTbl1().getTextBox77();
     }
 
     @JsonIgnore
-    public TextBox getTextBox78() {
+    public TextBoxNum getTextBox78() {
         return this.getTbl1().getTextBox78();
     }
 
     @JsonIgnore
-    public TextBox getTextBox79() {
+    public TextBoxNum getTextBox79() {
         return this.getTbl1().getTextBox79();
     }
 
     @JsonIgnore
-    public TextBox getTextBox80() {
+    public TextBoxNum getTextBox80() {
         return this.getTbl1().getTextBox80();
     }
 
     @JsonIgnore
-    public TextBox getTextBox81() {
+    public TextBoxNum getTextBox81() {
         return this.getTbl1().getTextBox81();
     }
 
     @JsonIgnore
-    public TextBox getTextBox82() {
+    public TextBoxNum getTextBox82() {
         return this.getTbl1().getTextBox82();
     }
 
     @JsonIgnore
-    public TextBox getTextBox83() {
+    public TextBoxNum getTextBox83() {
         return this.getTbl1().getTextBox83();
     }
 
     @JsonIgnore
-    public TextBox getTextBox84() {
+    public TextBoxNum getTextBox84() {
         return this.getTbl1().getTextBox84();
     }
 
     @JsonIgnore
-    public TextBox getTextBox85() {
+    public TextBoxNum getTextBox85() {
         return this.getTbl1().getTextBox85();
     }
 
     @JsonIgnore
-    public TextBox getTextBox86() {
+    public TextBoxNum getTextBox86() {
         return this.getTbl1().getTextBox86();
     }
 
     @JsonIgnore
-    public TextBox getTextBox87() {
+    public TextBoxNum getTextBox87() {
         return this.getTbl1().getTextBox87();
     }
 
     @JsonIgnore
-    public TextBox getTextBox88() {
+    public TextBoxNum getTextBox88() {
         return this.getTbl1().getTextBox88();
     }
 
     @JsonIgnore
-    public TextBox getTextBox89() {
+    public TextBoxNum getTextBox89() {
         return this.getTbl1().getTextBox89();
     }
 
     @JsonIgnore
-    public TextBox getTextBox90() {
+    public TextBoxNum getTextBox90() {
         return this.getTbl1().getTextBox90();
     }
 
     @JsonIgnore
-    public TextBox getTextBox91() {
+    public TextBoxNum getTextBox91() {
         return this.getTbl1().getTextBox91();
     }
 
     @JsonIgnore
-    public TextBox getTextBox92() {
+    public TextBoxNum getTextBox92() {
         return this.getTbl1().getTextBox92();
     }
 
     @JsonIgnore
-    public TextBox getTextBox93() {
+    public TextBoxNum getTextBox93() {
         return this.getTbl1().getTextBox93();
     }
 
     @JsonIgnore
-    public TextBox getTextBox94() {
+    public TextBoxNum getTextBox94() {
         return this.getTbl1().getTextBox94();
     }
 
     @JsonIgnore
-    public TextBox getTextBox95() {
+    public TextBoxNum getTextBox95() {
         return this.getTbl1().getTextBox95();
     }
 
     @JsonIgnore
-    public TextBox getTextBox96() {
+    public TextBoxNum getTextBox96() {
         return this.getTbl1().getTextBox96();
     }
 
     @JsonIgnore
-    public TextBox getTextBox97() {
+    public TextBoxNum getTextBox97() {
         return this.getTbl1().getTextBox97();
     }
 
     @JsonIgnore
-    public TextBox getTextBox98() {
+    public TextBoxNum getTextBox98() {
         return this.getTbl1().getTextBox98();
     }
 
     @JsonIgnore
-    public TextBox getTextBox99() {
+    public TextBoxNum getTextBox99() {
         return this.getTbl1().getTextBox99();
     }
 
     @JsonIgnore
-    public TextBox getTextBox100() {
+    public TextBoxNum getTextBox100() {
         return this.getTbl1().getTextBox100();
     }
 
     @JsonIgnore
-    public TextBox getTextBox101() {
+    public TextBoxNum getTextBox101() {
         return this.getTbl1().getTextBox101();
     }
 
     @JsonIgnore
-    public TextBox getTextBox102() {
+    public TextBoxNum getTextBox102() {
         return this.getTbl1().getTextBox102();
     }
 
     @JsonIgnore
-    public TextBox getTextBox103() {
+    public TextBoxNum getTextBox103() {
         return this.getTbl1().getTextBox103();
     }
 
     @JsonIgnore
-    public TextBox getTextBox104() {
+    public TextBoxNum getTextBox104() {
         return this.getTbl1().getTextBox104();
     }
 
     @JsonIgnore
-    public TextBox getTextBox105() {
+    public TextBoxNum getTextBox105() {
         return this.getTbl1().getTextBox105();
     }
 
     @JsonIgnore
-    public TextBox getTextBox106() {
+    public TextBoxNum getTextBox106() {
         return this.getTbl1().getTextBox106();
     }
 
     @JsonIgnore
-    public TextBox getTextBox107() {
+    public TextBoxNum getTextBox107() {
         return this.getTbl1().getTextBox107();
     }
 
     @JsonIgnore
-    public TextBox getTextBox108() {
+    public TextBoxNum getTextBox108() {
         return this.getTbl1().getTextBox108();
     }
 
     @JsonIgnore
-    public TextBox getTextBox109() {
+    public TextBoxNum getTextBox109() {
         return this.getTbl1().getTextBox109();
     }
 
     @JsonIgnore
-    public TextBox getTextBox110() {
+    public TextBoxNum getTextBox110() {
         return this.getTbl1().getTextBox110();
     }
 
     @JsonIgnore
-    public TextBox getTextBox111() {
+    public TextBoxNum getTextBox111() {
         return this.getTbl1().getTextBox111();
     }
 
     @JsonIgnore
-    public TextBox getTextBox112() {
+    public TextBoxNum getTextBox112() {
         return this.getTbl1().getTextBox112();
     }
 
     @JsonIgnore
-    public TextBox getTextBox113() {
+    public TextBoxNum getTextBox113() {
         return this.getTbl1().getTextBox113();
     }
 
     @JsonIgnore
-    public TextBox getTextBox114() {
+    public TextBoxNum getTextBox114() {
         return this.getTbl1().getTextBox114();
     }
 
     @JsonIgnore
-    public TextBox getTextBox115() {
+    public TextBoxNum getTextBox115() {
         return this.getTbl1().getTextBox115();
     }
 
     @JsonIgnore
-    public TextBox getTextBox116() {
+    public TextBoxNum getTextBox116() {
         return this.getTbl1().getTextBox116();
     }
 
     @JsonIgnore
-    public TextBox getTextBox117() {
+    public TextBoxNum getTextBox117() {
         return this.getTbl1().getTextBox117();
     }
 
     @JsonIgnore
-    public TextBox getTextBox118() {
+    public TextBoxNum getTextBox118() {
         return this.getTbl1().getTextBox118();
     }
 
     @JsonIgnore
-    public TextBox getTextBox119() {
+    public TextBoxNum getTextBox119() {
         return this.getTbl1().getTextBox119();
     }
 
     @JsonIgnore
-    public TextBox getTextBox120() {
+    public TextBoxNum getTextBox120() {
         return this.getTbl1().getTextBox120();
     }
 
     @JsonIgnore
-    public TextBox getTextBox121() {
+    public TextBoxNum getTextBox121() {
         return this.getTbl1().getTextBox121();
     }
 
     @JsonIgnore
-    public TextBox getTextBox122() {
+    public TextBoxNum getTextBox122() {
         return this.getTbl1().getTextBox122();
     }
 
     @JsonIgnore
-    public TextBox getTextBox123() {
+    public TextBoxNum getTextBox123() {
         return this.getTbl1().getTextBox123();
     }
 
     @JsonIgnore
-    public TextBox getTextBox124() {
+    public TextBoxNum getTextBox124() {
         return this.getTbl1().getTextBox124();
     }
 
     @JsonIgnore
-    public TextBox getTextBox125() {
+    public TextBoxNum getTextBox125() {
         return this.getTbl1().getTextBox125();
     }
 
     @JsonIgnore
-    public TextBox getTextBox126() {
+    public TextBoxNum getTextBox126() {
         return this.getTbl1().getTextBox126();
     }
 
     @JsonIgnore
-    public TextBox getTextBox127() {
+    public TextBoxNum getTextBox127() {
         return this.getTbl1().getTextBox127();
     }
 
     @JsonIgnore
-    public TextBox getTextBox128() {
+    public TextBoxNum getTextBox128() {
         return this.getTbl1().getTextBox128();
     }
 
     @JsonIgnore
-    public TextBox getTextBox129() {
+    public TextBoxNum getTextBox129() {
         return this.getTbl1().getTextBox129();
     }
 
     @JsonIgnore
-    public TextBox getTextBox130() {
+    public TextBoxNum getTextBox130() {
         return this.getTbl1().getTextBox130();
     }
 
     @JsonIgnore
-    public TextBox getTextBox131() {
+    public TextBoxNum getTextBox131() {
         return this.getTbl1().getTextBox131();
     }
 
     @JsonIgnore
-    public TextBox getTextBox132() {
+    public TextBoxNum getTextBox132() {
         return this.getTbl1().getTextBox132();
     }
 
     @JsonIgnore
-    public TextBox getTextBox133() {
+    public TextBoxNum getTextBox133() {
         return this.getTbl1().getTextBox133();
     }
 
     @JsonIgnore
-    public TextBox getTextBox134() {
+    public TextBoxNum getTextBox134() {
         return this.getTbl1().getTextBox134();
     }
 
     @JsonIgnore
-    public TextBox getTextBox135() {
+    public TextBoxNum getTextBox135() {
         return this.getTbl1().getTextBox135();
     }
 
     @JsonIgnore
-    public TextBox getTextBox136() {
+    public TextBoxNum getTextBox136() {
         return this.getTbl1().getTextBox136();
     }
 
     @JsonIgnore
-    public TextBox getTextBox137() {
+    public TextBoxNum getTextBox137() {
         return this.getTbl1().getTextBox137();
     }
 
     @JsonIgnore
-    public TextBox getTextBox138() {
+    public TextBoxNum getTextBox138() {
         return this.getTbl1().getTextBox138();
     }
 
     @JsonIgnore
-    public TextBox getTextBox139() {
+    public TextBoxNum getTextBox139() {
         return this.getTbl1().getTextBox139();
     }
 
     @JsonIgnore
-    public TextBox getTextBox140() {
+    public TextBoxNum getTextBox140() {
         return this.getTbl1().getTextBox140();
     }
 
     @JsonIgnore
-    public TextBox getTextBox141() {
+    public TextBoxNum getTextBox141() {
         return this.getTbl1().getTextBox141();
     }
 
     @JsonIgnore
-    public TextBox getTextBox142() {
+    public TextBoxNum getTextBox142() {
         return this.getTbl1().getTextBox142();
     }
 
     @JsonIgnore
-    public TextBox getTextBox143() {
+    public TextBoxNum getTextBox143() {
         return this.getTbl1().getTextBox143();
     }
 
     @JsonIgnore
-    public TextBox getTextBox144() {
+    public TextBoxNum getTextBox144() {
         return this.getTbl1().getTextBox144();
     }
 
     @JsonIgnore
-    public TextBox getTextBox145() {
+    public TextBoxNum getTextBox145() {
         return this.getTbl1().getTextBox145();
     }
 
     @JsonIgnore
-    public TextBox getTextBox146() {
+    public TextBoxNum getTextBox146() {
         return this.getTbl1().getTextBox146();
     }
 
     @JsonIgnore
-    public TextBox getTextBox147() {
+    public TextBoxNum getTextBox147() {
         return this.getTbl1().getTextBox147();
     }
 
     @JsonIgnore
-    public TextBox getTextBox148() {
+    public TextBoxNum getTextBox148() {
         return this.getTbl1().getTextBox148();
     }
 
     @JsonIgnore
-    public TextBox getTextBox149() {
+    public TextBoxNum getTextBox149() {
         return this.getTbl1().getTextBox149();
     }
 
     @JsonIgnore
-    public TextBox getTextBox150() {
+    public TextBoxNum getTextBox150() {
         return this.getTbl1().getTextBox150();
     }
 
     @JsonIgnore
-    public TextBox getTextBox151() {
+    public TextBoxNum getTextBox151() {
         return this.getTbl1().getTextBox151();
     }
 
     @JsonIgnore
-    public TextBox getTextBox152() {
+    public TextBoxNum getTextBox152() {
         return this.getTbl1().getTextBox152();
     }
 
     @JsonIgnore
-    public TextBox getTextBox153() {
+    public TextBoxNum getTextBox153() {
         return this.getTbl1().getTextBox153();
     }
 
     @JsonIgnore
-    public TextBox getTextBox154() {
+    public TextBoxNum getTextBox154() {
         return this.getTbl1().getTextBox154();
     }
 
     @JsonIgnore
-    public TextBox getTextBox155() {
+    public TextBoxNum getTextBox155() {
         return this.getTbl1().getTextBox155();
     }
 
     @JsonIgnore
-    public TextBox getTextBox156() {
+    public TextBoxNum getTextBox156() {
         return this.getTbl1().getTextBox156();
     }
 
     @JsonIgnore
-    public TextBox getTextBox157() {
+    public TextBoxNum getTextBox157() {
         return this.getTbl1().getTextBox157();
     }
 
     @JsonIgnore
-    public TextBox getTextBox158() {
+    public TextBoxNum getTextBox158() {
         return this.getTbl1().getTextBox158();
     }
 
     @JsonIgnore
-    public TextBox getTextBox159() {
+    public TextBoxNum getTextBox159() {
         return this.getTbl1().getTextBox159();
     }
 
     @JsonIgnore
-    public TextBox getTextBox160() {
+    public TextBoxNum getTextBox160() {
         return this.getTbl1().getTextBox160();
     }
 
     @JsonIgnore
-    public TextBox getTextBox161() {
+    public TextBoxNum getTextBox161() {
         return this.getTbl1().getTextBox161();
     }
 
     @JsonIgnore
-    public TextBox getTextBox162() {
+    public TextBoxNum getTextBox162() {
         return this.getTbl1().getTextBox162();
     }
 
     @JsonIgnore
-    public TextBox getTextBox163() {
+    public TextBoxNum getTextBox163() {
         return this.getTbl1().getTextBox163();
     }
 
     @JsonIgnore
-    public TextBox getTextBox164() {
+    public TextBoxNum getTextBox164() {
         return this.getTbl1().getTextBox164();
     }
 
     @JsonIgnore
-    public TextBox getTextBox165() {
+    public TextBoxNum getTextBox165() {
         return this.getTbl1().getTextBox165();
     }
 
     @JsonIgnore
-    public TextBox getTextBox166() {
+    public TextBoxNum getTextBox166() {
         return this.getTbl1().getTextBox166();
     }
 
     @JsonIgnore
-    public TextBox getTextBox167() {
+    public TextBoxNum getTextBox167() {
         return this.getTbl1().getTextBox167();
     }
 
     @JsonIgnore
-    public TextBox getTextBox168() {
+    public TextBoxNum getTextBox168() {
         return this.getTbl1().getTextBox168();
     }
 
     @JsonIgnore
-    public TextBox getTextBox169() {
+    public TextBoxNum getTextBox169() {
         return this.getTbl1().getTextBox169();
     }
 
     @JsonIgnore
-    public TextBox getTextBox170() {
+    public TextBoxNum getTextBox170() {
         return this.getTbl1().getTextBox170();
     }
 
     @JsonIgnore
-    public TextBox getTextBox171() {
+    public TextBoxNum getTextBox171() {
         return this.getTbl1().getTextBox171();
     }
 
     @JsonIgnore
-    public TextBox getTextBox172() {
+    public TextBoxNum getTextBox172() {
         return this.getTbl1().getTextBox172();
     }
 
     @JsonIgnore
-    public TextBox getTextBox173() {
+    public TextBoxNum getTextBox173() {
         return this.getTbl1().getTextBox173();
     }
 
     @JsonIgnore
-    public TextBox getTextBox174() {
+    public TextBoxNum getTextBox174() {
         return this.getTbl1().getTextBox174();
     }
 
     @JsonIgnore
-    public TextBox getTextBox175() {
+    public TextBoxNum getTextBox175() {
         return this.getTbl1().getTextBox175();
     }
 
     @JsonIgnore
-    public TextBox getTextBox176() {
+    public TextBoxNum getTextBox176() {
         return this.getTbl1().getTextBox176();
     }
 
     @JsonIgnore
-    public TextBox getTextBox177() {
+    public TextBoxNum getTextBox177() {
         return this.getTbl1().getTextBox177();
     }
 
     @JsonIgnore
-    public TextBox getTextBox178() {
+    public TextBoxNum getTextBox178() {
         return this.getTbl1().getTextBox178();
     }
 
     @JsonIgnore
-    public TextBox getTextBox179() {
+    public TextBoxNum getTextBox179() {
         return this.getTbl1().getTextBox179();
     }
 
     @JsonIgnore
-    public TextBox getTextBox180() {
+    public TextBoxNum getTextBox180() {
         return this.getTbl1().getTextBox180();
     }
 
     @JsonIgnore
-    public TextBox getTextBox181() {
+    public TextBoxNum getTextBox181() {
         return this.getTbl1().getTextBox181();
     }
 
     @JsonIgnore
-    public TextBox getTextBox182() {
+    public TextBoxNum getTextBox182() {
         return this.getTbl1().getTextBox182();
     }
 
     @JsonIgnore
-    public TextBox getTextBox183() {
+    public TextBoxNum getTextBox183() {
         return this.getTbl1().getTextBox183();
     }
 
     @JsonIgnore
-    public TextBox getTextBox184() {
+    public TextBoxNum getTextBox184() {
         return this.getTbl1().getTextBox184();
     }
 
     @JsonIgnore
-    public TextBox getTextBox185() {
+    public TextBoxNum getTextBox185() {
         return this.getTbl1().getTextBox185();
     }
 
     @JsonIgnore
-    public TextBox getTextBox186() {
+    public TextBoxNum getTextBox186() {
         return this.getTbl1().getTextBox186();
     }
 
     @JsonIgnore
-    public TextBox getTextBox187() {
+    public TextBoxNum getTextBox187() {
         return this.getTbl1().getTextBox187();
     }
 
     @JsonIgnore
-    public TextBox getTextBox188() {
+    public TextBoxNum getTextBox188() {
         return this.getTbl1().getTextBox188();
     }
 
     @JsonIgnore
-    public TextBox getTextBox189() {
+    public TextBoxNum getTextBox189() {
         return this.getTbl1().getTextBox189();
     }
 
     @JsonIgnore
-    public TextBox getTextBox190() {
+    public TextBoxNum getTextBox190() {
         return this.getTbl1().getTextBox190();
     }
 
     @JsonIgnore
-    public TextBox getTextBox191() {
+    public TextBoxNum getTextBox191() {
         return this.getTbl1().getTextBox191();
     }
 
     @JsonIgnore
-    public TextBox getTextBox192() {
+    public TextBoxNum getTextBox192() {
         return this.getTbl1().getTextBox192();
     }
 
     @JsonIgnore
-    public TextBox getTextBox193() {
+    public TextBoxNum getTextBox193() {
         return this.getTbl1().getTextBox193();
     }
 
     @JsonIgnore
-    public TextBox getTextBox194() {
+    public TextBoxNum getTextBox194() {
         return this.getTbl1().getTextBox194();
     }
 
     @JsonIgnore
-    public TextBox getTextBox195() {
+    public TextBoxNum getTextBox195() {
         return this.getTbl1().getTextBox195();
     }
 
     @JsonIgnore
-    public TextBox getTextBox196() {
+    public TextBoxNum getTextBox196() {
         return this.getTbl1().getTextBox196();
     }
 
     @JsonIgnore
-    public TextBox getTextBox197() {
+    public TextBoxNum getTextBox197() {
         return this.getTbl1().getTextBox197();
     }
 
     @JsonIgnore
-    public TextBox getTextBox198() {
+    public TextBoxNum getTextBox198() {
         return this.getTbl1().getTextBox198();
     }
 
     @JsonIgnore
-    public TextBox getTextBox199() {
+    public TextBoxNum getTextBox199() {
         return this.getTbl1().getTextBox199();
     }
 
     @JsonIgnore
-    public TextBox getTextBox200() {
+    public TextBoxNum getTextBox200() {
         return this.getTbl1().getTextBox200();
     }
 
     @JsonIgnore
-    public TextBox getTextBox201() {
+    public TextBoxNum getTextBox201() {
         return this.getTbl1().getTextBox201();
     }
 
     @JsonIgnore
-    public TextBox getTextBox202() {
+    public TextBoxNum getTextBox202() {
         return this.getTbl1().getTextBox202();
     }
 
     @JsonIgnore
-    public TextBox getTextBox203() {
+    public TextBoxNum getTextBox203() {
         return this.getTbl1().getTextBox203();
     }
 
     @JsonIgnore
-    public TextBox getTextBox204() {
+    public TextBoxNum getTextBox204() {
         return this.getTbl1().getTextBox204();
     }
 
     @JsonIgnore
-    public TextBox getTextBox205() {
+    public TextBoxNum getTextBox205() {
         return this.getTbl1().getTextBox205();
     }
 
     @JsonIgnore
-    public TextBox getTextBox206() {
+    public TextBoxNum getTextBox206() {
         return this.getTbl1().getTextBox206();
     }
 
     @JsonIgnore
-    public TextBox getTextBox207() {
+    public TextBoxNum getTextBox207() {
         return this.getTbl1().getTextBox207();
     }
 
     @JsonIgnore
-    public TextBox getTextBox208() {
+    public TextBoxNum getTextBox208() {
         return this.getTbl1().getTextBox208();
     }
 
     @JsonIgnore
-    public TextBox getTextBox209() {
+    public TextBoxNum getTextBox209() {
         return this.getTbl1().getTextBox209();
     }
 
     @JsonIgnore
-    public TextBox getTextBox210() {
+    public TextBoxNum getTextBox210() {
         return this.getTbl1().getTextBox210();
     }
 
     @JsonIgnore
-    public TextBox getTextBox211() {
+    public TextBoxNum getTextBox211() {
         return this.getTbl1().getTextBox211();
     }
 
     @JsonIgnore
-    public TextBox getTextBox212() {
+    public TextBoxNum getTextBox212() {
         return this.getTbl1().getTextBox212();
     }
 
     @JsonIgnore
-    public TextBox getTextBox213() {
+    public TextBoxNum getTextBox213() {
         return this.getTbl1().getTextBox213();
     }
 
     @JsonIgnore
-    public TextBox getTextBox214() {
+    public TextBoxNum getTextBox214() {
         return this.getTbl1().getTextBox214();
     }
 
     @JsonIgnore
-    public TextBox getTextBox215() {
+    public TextBoxNum getTextBox215() {
         return this.getTbl1().getTextBox215();
     }
 
     @JsonIgnore
-    public TextBox getTextBox216() {
+    public TextBoxNum getTextBox216() {
         return this.getTbl1().getTextBox216();
     }
 
     @JsonIgnore
-    public TextBox getTextBox217() {
+    public TextBoxNum getTextBox217() {
         return this.getTbl1().getTextBox217();
     }
 
     @JsonIgnore
-    public TextBox getTextBox218() {
+    public TextBoxNum getTextBox218() {
         return this.getTbl1().getTextBox218();
     }
 
     @JsonIgnore
-    public TextBox getTextBox219() {
+    public TextBoxNum getTextBox219() {
         return this.getTbl1().getTextBox219();
     }
 
     @JsonIgnore
-    public TextBox getTextBox220() {
+    public TextBoxNum getTextBox220() {
         return this.getTbl1().getTextBox220();
     }
 
     @JsonIgnore
-    public TextBox getTextBox221() {
+    public TextBoxNum getTextBox221() {
         return this.getTbl1().getTextBox221();
     }
 
     @JsonIgnore
-    public TextBox getTextBox222() {
+    public TextBoxNum getTextBox222() {
         return this.getTbl1().getTextBox222();
     }
 
     @JsonIgnore
-    public TextBox getTextBox223() {
+    public TextBoxNum getTextBox223() {
         return this.getTbl1().getTextBox223();
     }
 
     @JsonIgnore
-    public TextBox getTextBox224() {
+    public TextBoxNum getTextBox224() {
         return this.getTbl1().getTextBox224();
     }
 
     @JsonIgnore
-    public TextBox getTextBox225() {
+    public TextBoxNum getTextBox225() {
         return this.getTbl1().getTextBox225();
     }
 
     @JsonIgnore
-    public TextBox getTextBox226() {
+    public TextBoxNum getTextBox226() {
         return this.getTbl1().getTextBox226();
     }
 
     @JsonIgnore
-    public TextBox getTextBox227() {
+    public TextBoxNum getTextBox227() {
         return this.getTbl1().getTextBox227();
     }
 
     @JsonIgnore
-    public TextBox getTextBox228() {
+    public TextBoxNum getTextBox228() {
         return this.getTbl1().getTextBox228();
     }
 
     @JsonIgnore
-    public TextBox getTextBox229() {
+    public TextBoxNum getTextBox229() {
         return this.getTbl1().getTextBox229();
     }
 
     @JsonIgnore
-    public TextBox getTextBox230() {
+    public TextBoxNum getTextBox230() {
         return this.getTbl1().getTextBox230();
     }
 
     @JsonIgnore
-    public TextBox getTextBox231() {
+    public TextBoxNum getTextBox231() {
         return this.getTbl1().getTextBox231();
     }
 
     @JsonIgnore
-    public TextBox getTextBox232() {
+    public TextBoxNum getTextBox232() {
         return this.getTbl1().getTextBox232();
     }
 
     @JsonIgnore
-    public TextBox getTextBox233() {
+    public TextBoxNum getTextBox233() {
         return this.getTbl1().getTextBox233();
     }
 
     @JsonIgnore
-    public TextBox getTextBox234() {
+    public TextBoxNum getTextBox234() {
         return this.getTbl1().getTextBox234();
     }
 
     @JsonIgnore
-    public TextBox getTextBox235() {
+    public TextBoxNum getTextBox235() {
         return this.getTbl1().getTextBox235();
     }
 
     @JsonIgnore
-    public TextBox getTextBox236() {
+    public TextBoxNum getTextBox236() {
         return this.getTbl1().getTextBox236();
     }
 
     @JsonIgnore
-    public TextBox getTextBox237() {
+    public TextBoxNum getTextBox237() {
         return this.getTbl1().getTextBox237();
     }
 
     @JsonIgnore
-    public TextBox getTextBox238() {
+    public TextBoxNum getTextBox238() {
         return this.getTbl1().getTextBox238();
     }
 
     @JsonIgnore
-    public TextBox getTextBox239() {
+    public TextBoxNum getTextBox239() {
         return this.getTbl1().getTextBox239();
     }
 
     @JsonIgnore
-    public TextBox getTextBox240() {
+    public TextBoxNum getTextBox240() {
         return this.getTbl1().getTextBox240();
     }
 
     @JsonIgnore
-    public TextBox getTextBox241() {
+    public TextBoxNum getTextBox241() {
         return this.getTbl1().getTextBox241();
     }
 
     @JsonIgnore
-    public TextBox getTextBox242() {
+    public TextBoxNum getTextBox242() {
         return this.getTbl1().getTextBox242();
     }
 
     @JsonIgnore
-    public TextBox getTextBox243() {
+    public TextBoxNum getTextBox243() {
         return this.getTbl1().getTextBox243();
     }
 
     @JsonIgnore
-    public TextBox getTextBox244() {
+    public TextBoxNum getTextBox244() {
         return this.getTbl1().getTextBox244();
     }
 
     @JsonIgnore
-    public TextBox getTextBox245() {
+    public TextBoxNum getTextBox245() {
         return this.getTbl1().getTextBox245();
     }
 
     @JsonIgnore
-    public TextBox getTextBox246() {
+    public TextBoxNum getTextBox246() {
         return this.getTbl1().getTextBox246();
     }
 
     @JsonIgnore
-    public TextBox getTextBox247() {
+    public TextBoxNum getTextBox247() {
         return this.getTbl1().getTextBox247();
     }
 
     @JsonIgnore
-    public TextBox getTextBox248() {
+    public TextBoxNum getTextBox248() {
         return this.getTbl1().getTextBox248();
     }
 
     @JsonIgnore
-    public TextBox getTextBox249() {
+    public TextBoxNum getTextBox249() {
         return this.getTbl1().getTextBox249();
     }
 
     @JsonIgnore
-    public TextBox getTextBox250() {
+    public TextBoxNum getTextBox250() {
         return this.getTbl1().getTextBox250();
     }
 
     @JsonIgnore
-    public TextBox getTextBox251() {
+    public TextBoxNum getTextBox251() {
         return this.getTbl1().getTextBox251();
     }
 
     @JsonIgnore
-    public TextBox getTextBox252() {
+    public TextBoxNum getTextBox252() {
         return this.getTbl1().getTextBox252();
     }
 
     @JsonIgnore
-    public TextBox getTextBox253() {
+    public TextBoxNum getTextBox253() {
         return this.getTbl1().getTextBox253();
     }
 
     @JsonIgnore
-    public TextBox getTextBox254() {
+    public TextBoxNum getTextBox254() {
         return this.getTbl1().getTextBox254();
     }
 
     @JsonIgnore
-    public TextBox getTextBox255() {
+    public TextBoxNum getTextBox255() {
         return this.getTbl1().getTextBox255();
     }
 
     @JsonIgnore
-    public TextBox getTextBox256() {
+    public TextBoxNum getTextBox256() {
         return this.getTbl1().getTextBox256();
     }
 
     @JsonIgnore
-    public TextBox getTextBox257() {
+    public TextBoxNum getTextBox257() {
         return this.getTbl1().getTextBox257();
     }
 
     @JsonIgnore
-    public TextBox getTextBox258() {
+    public TextBoxNum getTextBox258() {
         return this.getTbl1().getTextBox258();
     }
 
     @JsonIgnore
-    public TextBox getTextBox259() {
+    public TextBoxNum getTextBox259() {
         return this.getTbl1().getTextBox259();
     }
 
     @JsonIgnore
-    public TextBox getTextBox260() {
+    public TextBoxNum getTextBox260() {
         return this.getTbl1().getTextBox260();
     }
 
     @JsonIgnore
-    public TextBox getTextBox261() {
+    public TextBoxNum getTextBox261() {
         return this.getTbl1().getTextBox261();
     }
 
     @JsonIgnore
-    public TextBox getTextBox262() {
+    public TextBoxNum getTextBox262() {
         return this.getTbl1().getTextBox262();
     }
 
     @JsonIgnore
-    public TextBox getTextBox263() {
+    public TextBoxNum getTextBox263() {
         return this.getTbl1().getTextBox263();
     }
 
     @JsonIgnore
-    public TextBox getTextBox264() {
+    public TextBoxNum getTextBox264() {
         return this.getTbl1().getTextBox264();
     }
 
     @JsonIgnore
-    public TextBox getTextBox265() {
+    public TextBoxNum getTextBox265() {
         return this.getTbl1().getTextBox265();
     }
 
     @JsonIgnore
-    public TextBox getTextBox266() {
+    public TextBoxNum getTextBox266() {
         return this.getTbl1().getTextBox266();
     }
 
     @JsonIgnore
-    public TextBox getTextBox267() {
+    public TextBoxNum getTextBox267() {
         return this.getTbl1().getTextBox267();
     }
 
     @JsonIgnore
-    public TextBox getTextBox268() {
+    public TextBoxNum getTextBox268() {
         return this.getTbl1().getTextBox268();
     }
 
     @JsonIgnore
-    public TextBox getTextBox269() {
+    public TextBoxNum getTextBox269() {
         return this.getTbl1().getTextBox269();
     }
 
     @JsonIgnore
-    public TextBox getTextBox270() {
+    public TextBoxNum getTextBox270() {
         return this.getTbl1().getTextBox270();
     }
 
     @JsonIgnore
-    public TextBox getTextBox271() {
+    public TextBoxNum getTextBox271() {
         return this.getTbl1().getTextBox271();
     }
 
     @JsonIgnore
-    public TextBox getTextBox272() {
+    public TextBoxNum getTextBox272() {
         return this.getTbl1().getTextBox272();
     }
 
     @JsonIgnore
-    public TextBox getTextBox273() {
+    public TextBoxNum getTextBox273() {
         return this.getTbl1().getTextBox273();
     }
 
     @JsonIgnore
-    public TextBox getTextBox274() {
+    public TextBoxNum getTextBox274() {
         return this.getTbl1().getTextBox274();
     }
 
     @JsonIgnore
-    public TextBox getTextBox275() {
+    public TextBoxNum getTextBox275() {
         return this.getTbl1().getTextBox275();
     }
 
     @JsonIgnore
-    public TextBox getTextBox276() {
+    public TextBoxNum getTextBox276() {
         return this.getTbl1().getTextBox276();
     }
 
     @JsonIgnore
-    public TextBox getTextBox277() {
+    public TextBoxNum getTextBox277() {
         return this.getTbl1().getTextBox277();
     }
 
     @JsonIgnore
-    public TextBox getTextBox278() {
+    public TextBoxNum getTextBox278() {
         return this.getTbl1().getTextBox278();
     }
 
     @JsonIgnore
-    public TextBox getTextBox279() {
+    public TextBoxNum getTextBox279() {
         return this.getTbl1().getTextBox279();
     }
 
     @JsonIgnore
-    public TextBox getTextBox280() {
+    public TextBoxNum getTextBox280() {
         return this.getTbl1().getTextBox280();
     }
 
     @JsonIgnore
-    public TextBox getTextBox281() {
+    public TextBoxNum getTextBox281() {
         return this.getTbl1().getTextBox281();
     }
 
     @JsonIgnore
-    public TextBox getTextBox282() {
+    public TextBoxNum getTextBox282() {
         return this.getTbl1().getTextBox282();
     }
 
     @JsonIgnore
-    public TextBox getTextBox283() {
+    public TextBoxNum getTextBox283() {
         return this.getTbl1().getTextBox283();
     }
 
     @JsonIgnore
-    public TextBox getTextBox284() {
+    public TextBoxNum getTextBox284() {
         return this.getTbl1().getTextBox284();
     }
 
     @JsonIgnore
-    public TextBox getTextBox285() {
+    public TextBoxNum getTextBox285() {
         return this.getTbl1().getTextBox285();
     }
 
     @JsonIgnore
-    public TextBox getTextBox286() {
+    public TextBoxNum getTextBox286() {
         return this.getTbl1().getTextBox286();
     }
 
     @JsonIgnore
-    public TextBox getTextBox287() {
+    public TextBoxNum getTextBox287() {
         return this.getTbl1().getTextBox287();
     }
 
     @JsonIgnore
-    public TextBox getTextBox288() {
+    public TextBoxNum getTextBox288() {
         return this.getTbl1().getTextBox288();
     }
 
     @JsonIgnore
-    public TextBox getTextBox289() {
+    public TextBoxNum getTextBox289() {
         return this.getTbl1().getTextBox289();
     }
 
     @JsonIgnore
-    public TextBox getTextBox290() {
+    public TextBoxNum getTextBox290() {
         return this.getTbl1().getTextBox290();
     }
 
     @JsonIgnore
-    public TextBox getTextBox291() {
+    public TextBoxNum getTextBox291() {
         return this.getTbl1().getTextBox291();
     }
 
     @JsonIgnore
-    public TextBox getTextBox292() {
+    public TextBoxNum getTextBox292() {
         return this.getTbl1().getTextBox292();
     }
 
     @JsonIgnore
-    public TextBox getTextBox293() {
+    public TextBoxNum getTextBox293() {
         return this.getTbl1().getTextBox293();
     }
 
     @JsonIgnore
-    public TextBox getTextBox294() {
+    public TextBoxNum getTextBox294() {
         return this.getTbl1().getTextBox294();
     }
 
     @JsonIgnore
-    public TextBox getTextBox295() {
+    public TextBoxNum getTextBox295() {
         return this.getTbl1().getTextBox295();
     }
 
     @JsonIgnore
-    public TextBox getTextBox296() {
+    public TextBoxNum getTextBox296() {
         return this.getTbl1().getTextBox296();
     }
 
     @JsonIgnore
-    public TextBox getTextBox297() {
+    public TextBoxNum getTextBox297() {
         return this.getTbl1().getTextBox297();
     }
 
     @JsonIgnore
-    public TextBox getTextBox298() {
+    public TextBoxNum getTextBox298() {
         return this.getTbl1().getTextBox298();
     }
 
     @JsonIgnore
-    public TextBox getTextBox299() {
+    public TextBoxNum getTextBox299() {
         return this.getTbl1().getTextBox299();
     }
 
     @JsonIgnore
-    public TextBox getTextBox300() {
+    public TextBoxNum getTextBox300() {
         return this.getTbl1().getTextBox300();
     }
 
     @JsonIgnore
-    public TextBox getTextBox301() {
+    public TextBoxNum getTextBox301() {
         return this.getTbl1().getTextBox301();
     }
 
     @JsonIgnore
-    public TextBox getTextBox302() {
+    public TextBoxNum getTextBox302() {
         return this.getTbl1().getTextBox302();
     }
 
     @JsonIgnore
-    public TextBox getTextBox303() {
+    public TextBoxNum getTextBox303() {
         return this.getTbl1().getTextBox303();
     }
 
     @JsonIgnore
-    public TextBox getTextBox304() {
+    public TextBoxNum getTextBox304() {
         return this.getTbl1().getTextBox304();
     }
 
     @JsonIgnore
-    public TextBox getTextBox305() {
+    public TextBoxNum getTextBox305() {
         return this.getTbl1().getTextBox305();
     }
 
     @JsonIgnore
-    public TextBox getTextBox306() {
+    public TextBoxNum getTextBox306() {
         return this.getTbl1().getTextBox306();
     }
 
     @JsonIgnore
-    public TextBox getTextBox307() {
+    public TextBoxNum getTextBox307() {
         return this.getTbl1().getTextBox307();
     }
 
     @JsonIgnore
-    public TextBox getTextBox308() {
+    public TextBoxNum getTextBox308() {
         return this.getTbl1().getTextBox308();
     }
 
     @JsonIgnore
-    public TextBox getTextBox309() {
+    public TextBoxNum getTextBox309() {
         return this.getTbl1().getTextBox309();
     }
 
     @JsonIgnore
-    public TextBox getTextBox310() {
+    public TextBoxNum getTextBox310() {
         return this.getTbl1().getTextBox310();
     }
 
     @JsonIgnore
-    public TextBox getTextBox311() {
+    public TextBoxNum getTextBox311() {
         return this.getTbl1().getTextBox311();
     }
 
     @JsonIgnore
-    public TextBox getTextBox312() {
+    public TextBoxNum getTextBox312() {
         return this.getTbl1().getTextBox312();
     }
 
     @JsonIgnore
-    public TextBox getTextBox313() {
+    public TextBoxNum getTextBox313() {
         return this.getTbl1().getTextBox313();
     }
 
     @JsonIgnore
-    public TextBox getTextBox314() {
+    public TextBoxNum getTextBox314() {
         return this.getTbl1().getTextBox314();
     }
 
     @JsonIgnore
-    public TextBox getTextBox315() {
+    public TextBoxNum getTextBox315() {
         return this.getTbl1().getTextBox315();
     }
 
     @JsonIgnore
-    public TextBox getTextBox316() {
+    public TextBoxNum getTextBox316() {
         return this.getTbl1().getTextBox316();
     }
 
     @JsonIgnore
-    public TextBox getTextBox317() {
+    public TextBoxNum getTextBox317() {
         return this.getTbl1().getTextBox317();
     }
 
     @JsonIgnore
-    public TextBox getTextBox318() {
+    public TextBoxNum getTextBox318() {
         return this.getTbl1().getTextBox318();
     }
 
     @JsonIgnore
-    public TextBox getTextBox319() {
+    public TextBoxNum getTextBox319() {
         return this.getTbl1().getTextBox319();
     }
 
     @JsonIgnore
-    public TextBox getTextBox320() {
+    public TextBoxNum getTextBox320() {
         return this.getTbl1().getTextBox320();
     }
 
     @JsonIgnore
-    public TextBox getTextBox321() {
+    public TextBoxNum getTextBox321() {
         return this.getTbl1().getTextBox321();
     }
 
     @JsonIgnore
-    public TextBox getTextBox322() {
+    public TextBoxNum getTextBox322() {
         return this.getTbl1().getTextBox322();
     }
 
     @JsonIgnore
-    public TextBox getTextBox323() {
+    public TextBoxNum getTextBox323() {
         return this.getTbl1().getTextBox323();
     }
 
     @JsonIgnore
-    public TextBox getTextBox324() {
+    public TextBoxNum getTextBox324() {
         return this.getTbl1().getTextBox324();
     }
 
     @JsonIgnore
-    public TextBox getTextBox325() {
+    public TextBoxNum getTextBox325() {
         return this.getTbl1().getTextBox325();
     }
 
     @JsonIgnore
-    public TextBox getTextBox326() {
+    public TextBoxNum getTextBox326() {
         return this.getTbl1().getTextBox326();
     }
 
     @JsonIgnore
-    public TextBox getTextBox327() {
+    public TextBoxNum getTextBox327() {
         return this.getTbl1().getTextBox327();
     }
 
     @JsonIgnore
-    public TextBox getTextBox328() {
+    public TextBoxNum getTextBox328() {
         return this.getTbl1().getTextBox328();
     }
 
     @JsonIgnore
-    public TextBox getTextBox329() {
+    public TextBoxNum getTextBox329() {
         return this.getTbl1().getTextBox329();
     }
 
     @JsonIgnore
-    public TextBox getTextBox330() {
+    public TextBoxNum getTextBox330() {
         return this.getTbl1().getTextBox330();
     }
 
     @JsonIgnore
-    public TextBox getTextBox331() {
+    public TextBoxNum getTextBox331() {
         return this.getTbl1().getTextBox331();
     }
 
     @JsonIgnore
-    public TextBox getTextBox332() {
+    public TextBoxNum getTextBox332() {
         return this.getTbl1().getTextBox332();
     }
 
     @JsonIgnore
-    public TextBox getTextBox333() {
+    public TextBoxNum getTextBox333() {
         return this.getTbl1().getTextBox333();
     }
 
     @JsonIgnore
-    public TextBox getTextBox334() {
+    public TextBoxNum getTextBox334() {
         return this.getTbl1().getTextBox334();
     }
 
     @JsonIgnore
-    public TextBox getTextBox335() {
+    public TextBoxNum getTextBox335() {
         return this.getTbl1().getTextBox335();
     }
 
     @JsonIgnore
-    public TextBox getTextBox336() {
+    public TextBoxNum getTextBox336() {
         return this.getTbl1().getTextBox336();
     }
 
     @JsonIgnore
-    public TextBox getTextBox337() {
+    public TextBoxNum getTextBox337() {
         return this.getTbl1().getTextBox337();
     }
 
     @JsonIgnore
-    public TextBox getTextBox338() {
+    public TextBoxNum getTextBox338() {
         return this.getTbl1().getTextBox338();
     }
 
     @JsonIgnore
-    public TextBox getTextBox339() {
+    public TextBoxNum getTextBox339() {
         return this.getTbl1().getTextBox339();
     }
 
     @JsonIgnore
-    public TextBox getTextBox340() {
+    public TextBoxNum getTextBox340() {
         return this.getTbl1().getTextBox340();
     }
 
     @JsonIgnore
-    public TextBox getTextBox341() {
+    public TextBoxNum getTextBox341() {
         return this.getTbl1().getTextBox341();
     }
 
     @JsonIgnore
-    public TextBox getTextBox342() {
+    public TextBoxNum getTextBox342() {
         return this.getTbl1().getTextBox342();
     }
 
     @JsonIgnore
-    public TextBox getTextBox343() {
+    public TextBoxNum getTextBox343() {
         return this.getTbl1().getTextBox343();
     }
 
     @JsonIgnore
-    public TextBox getTextBox344() {
+    public TextBoxNum getTextBox344() {
         return this.getTbl1().getTextBox344();
     }
 
     @JsonIgnore
-    public TextBox getTextBox345() {
+    public TextBoxNum getTextBox345() {
         return this.getTbl1().getTextBox345();
     }
 
     @JsonIgnore
-    public TextBox getTextBox346() {
+    public TextBoxNum getTextBox346() {
         return this.getTbl1().getTextBox346();
     }
 
     @JsonIgnore
-    public TextBox getTextBox347() {
+    public TextBoxNum getTextBox347() {
         return this.getTbl1().getTextBox347();
     }
 
     @JsonIgnore
-    public TextBox getTextBox348() {
+    public TextBoxNum getTextBox348() {
         return this.getTbl1().getTextBox348();
     }
 
     @JsonIgnore
-    public TextBox getTextBox349() {
+    public TextBoxNum getTextBox349() {
         return this.getTbl1().getTextBox349();
     }
 
     @JsonIgnore
-    public TextBox getTextBox350() {
+    public TextBoxNum getTextBox350() {
         return this.getTbl1().getTextBox350();
     }
 
     @JsonIgnore
-    public TextBox getTextBox351() {
+    public TextBoxNum getTextBox351() {
         return this.getTbl1().getTextBox351();
     }
 
     @JsonIgnore
-    public TextBox getTextBox352() {
+    public TextBoxNum getTextBox352() {
         return this.getTbl1().getTextBox352();
     }
 
     @JsonIgnore
-    public TextBox getTextBox353() {
+    public TextBoxNum getTextBox353() {
         return this.getTbl1().getTextBox353();
     }
 
     @JsonIgnore
-    public TextBox getTextBox354() {
+    public TextBoxNum getTextBox354() {
         return this.getTbl1().getTextBox354();
     }
 
     @JsonIgnore
-    public TextBox getTextBox355() {
+    public TextBoxNum getTextBox355() {
         return this.getTbl1().getTextBox355();
     }
 
     @JsonIgnore
-    public TextBox getTextBox356() {
+    public TextBoxNum getTextBox356() {
         return this.getTbl1().getTextBox356();
     }
 
     @JsonIgnore
-    public TextBox getTextBox357() {
+    public TextBoxNum getTextBox357() {
         return this.getTbl1().getTextBox357();
     }
 
     @JsonIgnore
-    public TextBox getTextBox358() {
+    public TextBoxNum getTextBox358() {
         return this.getTbl1().getTextBox358();
     }
 
     @JsonIgnore
-    public TextBox getTextBox359() {
+    public TextBoxNum getTextBox359() {
         return this.getTbl1().getTextBox359();
     }
 
     @JsonIgnore
-    public TextBox getTextBox360() {
+    public TextBoxNum getTextBox360() {
         return this.getTbl1().getTextBox360();
     }
 
     @JsonIgnore
-    public TextBox getTextBox361() {
+    public TextBoxNum getTextBox361() {
         return this.getTbl1().getTextBox361();
     }
 
     @JsonIgnore
-    public TextBox getTextBox362() {
+    public TextBoxNum getTextBox362() {
         return this.getTbl1().getTextBox362();
     }
 
     @JsonIgnore
-    public TextBox getTextBox363() {
+    public TextBoxNum getTextBox363() {
         return this.getTbl1().getTextBox363();
     }
 
     @JsonIgnore
-    public TextBox getTextBox364() {
+    public TextBoxNum getTextBox364() {
         return this.getTbl1().getTextBox364();
     }
 
     @JsonIgnore
-    public TextBox getTextBox365() {
+    public TextBoxNum getTextBox365() {
         return this.getTbl1().getTextBox365();
     }
 
     @JsonIgnore
-    public TextBox getTextBox366() {
+    public TextBoxNum getTextBox366() {
         return this.getTbl1().getTextBox366();
     }
 
     @JsonIgnore
-    public TextBox getTextBox367() {
+    public TextBoxNum getTextBox367() {
         return this.getTbl1().getTextBox367();
     }
 
     @JsonIgnore
-    public TextBox getTextBox368() {
+    public TextBoxNum getTextBox368() {
         return this.getTbl1().getTextBox368();
     }
 
     @JsonIgnore
-    public TextBox getTextBox369() {
+    public TextBoxNum getTextBox369() {
         return this.getTbl1().getTextBox369();
     }
 
     @JsonIgnore
-    public TextBox getTextBox370() {
+    public TextBoxNum getTextBox370() {
         return this.getTbl1().getTextBox370();
     }
 
     @JsonIgnore
-    public TextBox getTextBox371() {
+    public TextBoxNum getTextBox371() {
         return this.getTbl1().getTextBox371();
     }
 
     @JsonIgnore
-    public TextBox getTextBox372() {
+    public TextBoxNum getTextBox372() {
         return this.getTbl1().getTextBox372();
     }
 
     @JsonIgnore
-    public TextBox getTextBox373() {
+    public TextBoxNum getTextBox373() {
         return this.getTbl1().getTextBox373();
     }
 
     @JsonIgnore
-    public TextBox getTextBox374() {
+    public TextBoxNum getTextBox374() {
         return this.getTbl1().getTextBox374();
     }
 
     @JsonIgnore
-    public TextBox getTextBox375() {
+    public TextBoxNum getTextBox375() {
         return this.getTbl1().getTextBox375();
     }
 
     @JsonIgnore
-    public TextBox getTextBox376() {
+    public TextBoxNum getTextBox376() {
         return this.getTbl1().getTextBox376();
     }
 
     @JsonIgnore
-    public TextBox getTextBox377() {
+    public TextBoxNum getTextBox377() {
         return this.getTbl1().getTextBox377();
     }
 
     @JsonIgnore
-    public TextBox getTextBox378() {
+    public TextBoxNum getTextBox378() {
         return this.getTbl1().getTextBox378();
     }
 
     @JsonIgnore
-    public TextBox getTextBox379() {
+    public TextBoxNum getTextBox379() {
         return this.getTbl1().getTextBox379();
     }
 
     @JsonIgnore
-    public TextBox getTextBox380() {
+    public TextBoxNum getTextBox380() {
         return this.getTbl1().getTextBox380();
     }
 
     @JsonIgnore
-    public TextBox getTextBox381() {
+    public TextBoxNum getTextBox381() {
         return this.getTbl1().getTextBox381();
     }
 
     @JsonIgnore
-    public TextBox getTextBox382() {
+    public TextBoxNum getTextBox382() {
         return this.getTbl1().getTextBox382();
     }
 
     @JsonIgnore
-    public TextBox getTextBox383() {
+    public TextBoxNum getTextBox383() {
         return this.getTbl1().getTextBox383();
     }
 
     @JsonIgnore
-    public TextBox getTextBox384() {
+    public TextBoxNum getTextBox384() {
         return this.getTbl1().getTextBox384();
     }
 
     @JsonIgnore
-    public TextBox getTextBox385() {
+    public TextBoxNum getTextBox385() {
         return this.getTbl1().getTextBox385();
     }
 
     @JsonIgnore
-    public TextBox getTextBox386() {
+    public TextBoxNum getTextBox386() {
         return this.getTbl1().getTextBox386();
     }
 
     @JsonIgnore
-    public TextBox getTextBox387() {
+    public TextBoxNum getTextBox387() {
         return this.getTbl1().getTextBox387();
     }
 
     @JsonIgnore
-    public TextBox getTextBox388() {
+    public TextBoxNum getTextBox388() {
         return this.getTbl1().getTextBox388();
     }
 
     @JsonIgnore
-    public TextBox getTextBox389() {
+    public TextBoxNum getTextBox389() {
         return this.getTbl1().getTextBox389();
     }
 
     @JsonIgnore
-    public TextBox getTextBox390() {
+    public TextBoxNum getTextBox390() {
         return this.getTbl1().getTextBox390();
     }
 
     @JsonIgnore
-    public TextBox getTextBox391() {
+    public TextBoxNum getTextBox391() {
         return this.getTbl1().getTextBox391();
     }
 
     @JsonIgnore
-    public TextBox getTextBox392() {
+    public TextBoxNum getTextBox392() {
         return this.getTbl1().getTextBox392();
     }
 
     @JsonIgnore
-    public TextBox getTextBox393() {
+    public TextBoxNum getTextBox393() {
         return this.getTbl1().getTextBox393();
     }
 
     @JsonIgnore
-    public TextBox getTextBox394() {
+    public TextBoxNum getTextBox394() {
         return this.getTbl1().getTextBox394();
     }
 
     @JsonIgnore
-    public TextBox getTextBox395() {
+    public TextBoxNum getTextBox395() {
         return this.getTbl1().getTextBox395();
     }
 
     @JsonIgnore
-    public TextBox getTextBox396() {
+    public TextBoxNum getTextBox396() {
         return this.getTbl1().getTextBox396();
     }
 
     @JsonIgnore
-    public TextBox getTextBox397() {
+    public TextBoxNum getTextBox397() {
         return this.getTbl1().getTextBox397();
     }
 
     @JsonIgnore
-    public TextBox getTextBox398() {
+    public TextBoxNum getTextBox398() {
         return this.getTbl1().getTextBox398();
     }
 
     @JsonIgnore
-    public TextBox getTextBox399() {
+    public TextBoxNum getTextBox399() {
         return this.getTbl1().getTextBox399();
     }
 
     @JsonIgnore
-    public TextBox getTextBox400() {
+    public TextBoxNum getTextBox400() {
         return this.getTbl1().getTextBox400();
     }
 
     @JsonIgnore
-    public TextBox getTextBox401() {
+    public TextBoxNum getTextBox401() {
         return this.getTbl1().getTextBox401();
     }
 
     @JsonIgnore
-    public TextBox getTextBox402() {
+    public TextBoxNum getTextBox402() {
         return this.getTbl1().getTextBox402();
     }
 
     @JsonIgnore
-    public TextBox getTextBox403() {
+    public TextBoxNum getTextBox403() {
         return this.getTbl1().getTextBox403();
     }
 
     @JsonIgnore
-    public TextBox getTextBox404() {
+    public TextBoxNum getTextBox404() {
         return this.getTbl1().getTextBox404();
     }
 
     @JsonIgnore
-    public TextBox getTextBox405() {
+    public TextBoxNum getTextBox405() {
         return this.getTbl1().getTextBox405();
     }
 
     @JsonIgnore
-    public TextBox getTextBox406() {
+    public TextBoxNum getTextBox406() {
         return this.getTbl1().getTextBox406();
     }
 
     @JsonIgnore
-    public TextBox getTextBox407() {
+    public TextBoxNum getTextBox407() {
         return this.getTbl1().getTextBox407();
     }
 
     @JsonIgnore
-    public TextBox getTextBox408() {
+    public TextBoxNum getTextBox408() {
         return this.getTbl1().getTextBox408();
     }
 
     @JsonIgnore
-    public TextBox getTextBox409() {
+    public TextBoxNum getTextBox409() {
         return this.getTbl1().getTextBox409();
     }
 

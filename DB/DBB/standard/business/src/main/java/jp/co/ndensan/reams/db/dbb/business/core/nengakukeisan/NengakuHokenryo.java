@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan;
 
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -15,20 +15,20 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public class NengakuHokenryo {
 
-    private FlexibleDate fukaNendo;
+    private FlexibleYear fukaNendo;
     private Decimal hokenryoNengaku;
 
     /**
      * @return the fukaNendo
      */
-    public FlexibleDate getFukaNendo() {
+    public FlexibleYear getFukaNendo() {
         return fukaNendo;
     }
 
     /**
      * @param fukaNendo the fukaNendo to set
      */
-    protected void setFukaNendo(FlexibleDate fukaNendo) {
+    protected void setFukaNendo(FlexibleYear fukaNendo) {
         this.fukaNendo = fukaNendo;
     }
 

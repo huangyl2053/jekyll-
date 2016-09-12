@@ -5,10 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.itakusakichosainichiran;
 
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.itakusakichosainzichiran.JyoukyouType;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.itakusakichosainzichiran.NarabiJunType;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.itakusakichosainzichiran.NextPageType;
+import jp.co.ndensan.reams.db.dbe.business.core.itakusakichosainichiran.ItakusakiChosainIchiranHead;
+import jp.co.ndensan.reams.db.dbe.definition.core.itakusakichosainzichiran.JyoukyouType;
+import jp.co.ndensan.reams.db.dbe.definition.core.itakusakichosainzichiran.NarabiJunType;
+import jp.co.ndensan.reams.db.dbe.definition.core.itakusakichosainzichiran.NextPageType;
 import jp.co.ndensan.reams.db.dbe.entity.report.itakusakichosainichiran.ItakusakiChosainIchiranReportSource;
+import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.Sikaku;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -20,27 +23,28 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 /**
  *
  * 認定調査委託先・認定調査員一覧表ヘッダEditorです。
+ *
  * @reamsid_L DBE-0290-020 dongyabin
  */
 public class ItakusakiChosainIchiranHeaderEditor implements ItakusakiChosainIchiranEditor {
 
-    private final ItakusakiChosainIchiranHeadItem item;
-
+    private static final RString 有効_VALUE = new RString("有効");
+    private static final RString 無効_VALUE = new RString("無効");
     private static final RString KANA = new RString("～");
-
     private static final RString DATE_時 = new RString("時");
     private static final RString DATE_分 = new RString("分");
     private static final RString DATE_秒 = new RString("秒");
     private static final RString DATE_作成 = new RString("作成");
     private static final RString 帳票名 = new RString("介護保険 調査委託先・調査員一覧表");
     private static final RString 改頁 = new RString("認定調査委託先コード毎");
+    private final ItakusakiChosainIchiranHead item;
 
     /**
      * インスタンスを生成します。
      *
-     * @param item {@link ItakusakiChosainIchiranHeadItem}
+     * @param item {@link ItakusakiChosainIchiranHead}
      */
-    protected ItakusakiChosainIchiranHeaderEditor(ItakusakiChosainIchiranHeadItem item) {
+    protected ItakusakiChosainIchiranHeaderEditor(ItakusakiChosainIchiranHead item) {
         this.item = item;
     }
 
@@ -108,7 +112,35 @@ public class ItakusakiChosainIchiranHeaderEditor implements ItakusakiChosainIchi
         source.page3 = RString.EMPTY;
         source.page4 = RString.EMPTY;
         source.page5 = RString.EMPTY;
-
+        source.listIchiranhyoUpper_1 = item.getShujiiIryokikanCode();
+        source.listIchiranhyoUpper_2 = item.getIryoKikanMeishoKana();
+        source.listIchiranhyoUpper_3 = item.getDaihyoshaNameKana();
+        source.listIchiranhyoUpper_4 = item.getYubinNo();
+        source.listIchiranhyoUpper_5 = item.getTelNo();
+        if (item.isJokyoFlag()) {
+            source.listIchiranhyoUpper_6 = 有効_VALUE;
+        } else if (!item.isJokyoFlag()) {
+            source.listIchiranhyoUpper_6 = 無効_VALUE;
+        }
+        source.listIchiranhyoUpper_7 = item.getShujiiCode();
+        source.listIchiranhyoUpper_8 = item.getShujiiKana();
+        source.listIchiranhyoUpper_9 = item.getChosainShikaku();
+        if (item.getChosainShikaku() != null) {
+            source.listIchiranhyoUpper_10 = Sikaku.toValue(item.getChosainShikaku()).get名称();
+        }
+        if (item.isShujiiJokyoFlag()) {
+            source.listIchiranhyoUpper_11 = 有効_VALUE;
+        } else if (!item.isShujiiJokyoFlag()) {
+            source.listIchiranhyoUpper_11 = 無効_VALUE;
+        }
+        source.listIchiranhyoLower1_1 = item.getIryoKikanMeisho();
+        source.listIchiranhyoLower1_2 = item.getDaihyoshaName();
+        source.listIchiranhyoLower1_3 = item.getJusho();
+        source.listIchiranhyoLower2_1 = item.getShujiiName();
+        if (!item.getSeibetsu().trim().isEmpty()) {
+            source.listIchiranhyoLower2_2 = Seibetsu.toValue(item.getSeibetsu()).get名称();
+        }
+        source.listIchiranhyoLower2_3 = item.getShinryokaName();
         return source;
     }
 

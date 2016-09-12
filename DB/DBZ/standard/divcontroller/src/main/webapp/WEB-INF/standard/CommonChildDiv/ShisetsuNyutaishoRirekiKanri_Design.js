@@ -71,10 +71,6 @@ var DBZ;
                 return new UZA.TextBoxFlexibleDate(this.convFiledName("txtTaishoDate"));
             };
 
-            Controls.prototype.ccdShisetsuJoho = function () {
-                return new DBZ.ShisetsuJohoCommonChildDiv.ModeController(this.convFiledName("ccdShisetsuJoho"));
-            };
-
             Controls.prototype.btnShisetsuNyutaishoKakutei = function () {
                 return new UZA.Button(this.convFiledName("btnShisetsuNyutaishoKakutei"));
             };

@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hihokensha.hihokenshadaicho;
 
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.hihokensha.hihokenshadaicho.HihokenshaDaichoMapperParameter;
+import jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokensha.hihokenshadaicho.HihokenshaDaichoMapperParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokensha.hihokenshadaicho.HihokenshaDaichoRelateEntity;
 
 /**

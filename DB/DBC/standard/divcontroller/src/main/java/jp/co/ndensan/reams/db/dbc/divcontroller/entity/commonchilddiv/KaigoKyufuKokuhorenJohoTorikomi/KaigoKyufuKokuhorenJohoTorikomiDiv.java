@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -30,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  */
 public class KaigoKyufuKokuhorenJohoTorikomiDiv extends Panel implements IKaigoKyufuKokuhorenJohoTorikomiDiv {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -170,7 +171,7 @@ public class KaigoKyufuKokuhorenJohoTorikomiDiv extends Panel implements IKaigoK
     @JsonProperty("modes")
     private HashSet<Mode> modes;
 
-    public static enum 表示モード implements ICommonChildDivMode {
+    public static enum HyoujiModo implements ICommonChildDivMode {
 
         Mode1("Mode1"),
         ModeShutsuryokujunJoken2("ModeShutsuryokujunJoken2"),
@@ -178,14 +179,14 @@ public class KaigoKyufuKokuhorenJohoTorikomiDiv extends Panel implements IKaigoK
 
         private final String name;
 
-        private 表示モード(final String name) {
+        private HyoujiModo(final String name) {
             this.name = name;
         }
 
-        public static 表示モード getEnum(String str) {
-            表示モード[] enumArray = 表示モード.values();
+        public static HyoujiModo getEnum(String str) {
+            HyoujiModo[] enumArray = HyoujiModo.values();
 
-            for (表示モード enumStr : enumArray) {
+            for (HyoujiModo enumStr : enumArray) {
                 if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
@@ -200,14 +201,12 @@ public class KaigoKyufuKokuhorenJohoTorikomiDiv extends Panel implements IKaigoK
 
     }
 
-    @JsonIgnore
-    public 表示モード getMode_表示モード() {
-        return (表示モード) _CommonChildDivModeUtil.getMode(this.modes, 表示モード.class);
+    public HyoujiModo getMode_HyoujiModo() {
+        return (HyoujiModo) _CommonChildDivModeUtil.getMode(this.modes, HyoujiModo.class);
     }
 
-    @JsonIgnore
-    public void setMode_表示モード(表示モード value) {
-        _CommonChildDivModeUtil.setMode(this.modes, 表示モード.class, value);
+    public void setMode_HyoujiModo(HyoujiModo value) {
+        _CommonChildDivModeUtil.setMode(this.modes, HyoujiModo.class, value);
     }
 
     /*
@@ -272,8 +271,8 @@ public class KaigoKyufuKokuhorenJohoTorikomiDiv extends Panel implements IKaigoK
     //--------------- この行より下にコードを追加してください -------------------
     @JsonIgnore
     @Override
-    public void onLoadMode1() {
-        KaigoKyufuKokuhorenJohoTorikomiHandler.of(this).onLoadMode1();
+    public void initialize(KokuhorenDataTorikomiViewStateClass parmater) {
+        KaigoKyufuKokuhorenJohoTorikomiHandler.of(this).onLoadMode1(parmater);
     }
 
     @JsonIgnore
@@ -284,14 +283,18 @@ public class KaigoKyufuKokuhorenJohoTorikomiDiv extends Panel implements IKaigoK
 
     @JsonIgnore
     @Override
-    public void onLoadModeShutsuryokujunJoken2(SubGyomuCode サブ業務コード, ReportId 帳票ID) {
-        KaigoKyufuKokuhorenJohoTorikomiHandler.of(this).onLoadModeShutsuryokujunJoken2(サブ業務コード, 帳票ID);
+    public void initialize(SubGyomuCode サブ業務コード,
+            ReportId 帳票ID,
+            KokuhorenDataTorikomiViewStateClass parmater) {
+        KaigoKyufuKokuhorenJohoTorikomiHandler.of(this).onLoadModeShutsuryokujunJoken2(サブ業務コード, 帳票ID, parmater);
     }
 
     @JsonIgnore
     @Override
-    public void onLoadModeKakuninMsgJoken3(SubGyomuCode サブ業務コード, ReportId 帳票ID) {
-        KaigoKyufuKokuhorenJohoTorikomiHandler.of(this).onLoadModeKakuninMsgJoken3(サブ業務コード, 帳票ID);
+    public void initialize(KokuhorenDataTorikomiViewStateClass parmater,
+            SubGyomuCode サブ業務コード,
+            ReportId 帳票ID) {
+        KaigoKyufuKokuhorenJohoTorikomiHandler.of(this).onLoadModeKakuninMsgJoken3(サブ業務コード, 帳票ID, parmater);
     }
 
     @JsonIgnore

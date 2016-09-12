@@ -5,9 +5,9 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shujiiiryokikanmaster.IKoseiShujiiIryoKikanMasterMapper">
 
-    <select id="selectShujiiIryoKikanJohoCount"
+    <select resultOrdered="true" id="selectShujiiIryoKikanJohoCount"
              resultType="int"
-             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterSearchParameter">
+             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterSearchParameter">
         SELECT
         COUNT(0)
         FROM
@@ -18,9 +18,9 @@
         AND "DbT5911ShujiiIryoKikanJoho"."shujiiIryokikanCode" = #{主治医医療機関コード}
     </select>
 
-    <select id="selectShujiiJohoCount"
+    <select resultOrdered="true" id="selectShujiiJohoCount"
             resultType="int"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterSearchParameter">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterSearchParameter">
         SELECT
         COUNT(0)
         FROM
@@ -31,8 +31,8 @@
         AND "DbT5912ShujiiJoho"."shujiiIryokikanCode" = #{主治医医療機関コード}
     </select>
 
-    <select id="selectShujiKikanJohoIchiranList"
-           parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterMapperParameter"
+    <select resultOrdered="true" id="selectShujiKikanJohoIchiranList"
+           parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterMapperParameter"
            resultMap="resultMap_KoseiShujiiIryoKikanMasterEntity"            fetchSize="500">
         SELECT
         DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_shichosonCode" AS "dbT5911ShujiiIryoKikanJoho_shichosonCode",
@@ -132,8 +132,8 @@
         <result property="jokyoFlag" column="dbT5911ShujiiIryoKikanJoho_jokyoFlag" />
     </resultMap>
 
-    <select id="selectShujiiIryoKikanJohoList"
-             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterMapperParameter"
+    <select resultOrdered="true" id="selectShujiiIryoKikanJohoList"
+             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiiryokikanjohomaster.KoseiShujiiIryoKikanMasterMapperParameter"
              resultMap="ResultMap_DbT5911ShujiiIryoKikanJohoEntity" fetchSize="500">
         SELECT
         DbT5911ShujiiIryoKikanJoho.*

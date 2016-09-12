@@ -5,7 +5,7 @@
 
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fukajohotoroku.IFukaJohoTorokuMapper">
 
-    <select id="selectAll" resultMap="resultMap_DbT2002FukaJohoTemp" fetchSize="500">
+    <select resultOrdered="true" id="selectAll" resultMap="resultMap_DbT2002FukaJohoTemp" fetchSize="500">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fukajohotoroku.IFukaJohoTorokuMapper.allColumns_DbT2002FukaJohoTemp" />
         FROM
@@ -163,7 +163,7 @@
         <association property="賦課情報一時Entity" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fukajohotoroku.IFukaJohoTorokuMapper.resultMap_DbT2002FukaJohoTemp"/>
     </resultMap>
 
-    <select id="get登録情報" resultMap="resultMap_FukaJohoToroku" fetchSize="500">
+    <select resultOrdered="true" id="get登録情報" resultMap="resultMap_FukaJohoToroku" fetchSize="500">
         SELECT
         <include refid="allColumns_DbT2002FukaJohoTemp" />,
         choteiIdToroku."choteiId",
@@ -180,15 +180,16 @@
         DbT0700."kazeiNendo",
         DbT0700."tsuchishoNo"
         FROM
-        "DbT0700ShunoKanriTemp" DbT0700,
-        "DbT0705ChoteiKyotsuTemp" DbT0705
+        "UrT0700ShunoKanri_work" DbT0700,
+        "UrT0705ChoteiKyotsu_work" DbT0705
         WHERE
         DbT0700."shunoId" = DbT0705."shunoId"
         )choteiIdToroku
         ON
         choteiIdToroku."choteiNendo" = dbT2002."choteiNendo"
         AND choteiIdToroku."kazeiNendo" = dbT2002."fukaNendo"
-        AND choteiIdToroku."tsuchishoNo" = dbT2002."tsuchishoNo"
+        <!--TODO QA1470一時案対応 2016/08/01 王暁冬-->
+        AND choteiIdToroku."tsuchishoNo" = (CAST(dbT2002."tsuchishoNo" AS numeric))
         ORDER BY
         dbT2002."choteiNendo",
         dbT2002."fukaNendo",

@@ -6,12 +6,12 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijoho.gogitaiwariateiinjoho.IGogitaiWariateIinJohoMapper">
 
     <select id="select合議体割当委員情報ByKey" resultMap="resultMap_GogitaiWariateIinJohoRelateEntity" 
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJohoMapperParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJohoMapperParameter" fetchSize="500" resultOrdered="true">
         <include refid="selectGogitaiWariateIinJohoRelateEntity" />
     </select>
 
     <select id="select合議体割当委員情報リストBy主キー1" resultMap="resultMap_GogitaiWariateIinJohoRelateEntity" 
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJohoMapperParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJohoMapperParameter" fetchSize="500" resultOrdered="true">
         <include refid="selectGogitaiWariateIinJohoRelateEntity" />
     </select>
 

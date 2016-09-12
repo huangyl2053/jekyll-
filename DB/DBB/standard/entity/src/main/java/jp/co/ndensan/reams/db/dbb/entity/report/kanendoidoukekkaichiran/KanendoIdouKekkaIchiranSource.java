@@ -3,6 +3,7 @@ package jp.co.ndensan.reams.db.dbb.entity.report.kanendoidoukekkaichiran;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportKojinNo;
 
 /**
  * 帳票設計_DBBRP45001_2_本算定異動（過年度）結果一覧表
@@ -69,8 +70,10 @@ public class KanendoIdouKekkaIchiranSource implements IReportSource {
     public RString listFuchoKi_14;
     @ReportItem(name = "list1_1", length = 16, order = 28)
     public RString list1_1;
+    @ReportKojinNo(id = "A")
     @ReportItem(name = "list1_2", length = 20, order = 29)
     public RString list1_2;
+    @ReportKojinNo(id = "A")
     @ReportItem(name = "list1_3", length = 39, order = 30)
     public RString list1_3;
     @ReportItem(name = "list1_4", length = 7, order = 31)

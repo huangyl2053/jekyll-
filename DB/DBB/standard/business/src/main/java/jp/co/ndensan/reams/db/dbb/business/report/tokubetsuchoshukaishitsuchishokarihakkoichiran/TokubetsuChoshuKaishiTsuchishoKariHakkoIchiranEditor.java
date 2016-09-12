@@ -163,12 +163,21 @@ public class TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranEditor implements ITo
         if (編集後仮算定通知書共通情報entity.get更正後() != null) {
             source.listLower_4 = 編集後仮算定通知書共通情報entity.get更正後().get更正後特別徴収義務者();
             source.listLower_5 = 編集後仮算定通知書共通情報entity.get更正後().get更正後特別徴収対象年金();
-            source.listLower_7 = DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報entity.get更正後().
-                    get更正後特徴期別金額01(), 0);
-            source.listLower_9 = DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報entity.get更正後().
-                    get更正後特徴期別金額02(), 0);
-            source.listLower_11 = DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報entity.get更正後().
-                    get更正後特徴期別金額03(), 0);
+            if (編集後仮算定通知書共通情報entity.get更正後().
+                    get更正後特徴期別金額01() != null) {
+                source.listLower_7 = DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報entity.get更正後().
+                        get更正後特徴期別金額01(), 0);
+            }
+            if (編集後仮算定通知書共通情報entity.get更正後().
+                    get更正後特徴期別金額02() != null) {
+                source.listLower_9 = DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報entity.get更正後().
+                        get更正後特徴期別金額02(), 0);
+            }
+            if (編集後仮算定通知書共通情報entity.get更正後().
+                    get更正後特徴期別金額03() != null) {
+                source.listLower_11 = DecimalFormatter.toコンマ区切りRString(編集後仮算定通知書共通情報entity.get更正後().
+                        get更正後特徴期別金額03(), 0);
+            }
         }
     }
 

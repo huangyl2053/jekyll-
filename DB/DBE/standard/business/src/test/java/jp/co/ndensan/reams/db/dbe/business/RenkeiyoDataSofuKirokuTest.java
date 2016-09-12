@@ -5,11 +5,11 @@
 package jp.co.ndensan.reams.db.dbe.business;
 
 import jp.co.ndensan.reams.db.dbe.business.core.RenkeiyoDataSofuKiroku;
-import jp.co.ndensan.reams.db.dbe.definition.core.HikiwatashiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.NinteiShinseijiKubun;
-import jp.co.ndensan.reams.db.dbe.definition.core.SaiChousaSoufuKubun;
-import jp.co.ndensan.reams.db.dbe.definition.core.SaiIkenshoSoufuKubun;
-import jp.co.ndensan.reams.db.dbe.definition.core.SaiSoufuKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.dokuji.HikiwatashiKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.dokuji.SaiChousaSoufuKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.dokuji.SaiIkenshoSoufuKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.dokuji.SaiSoufuKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;

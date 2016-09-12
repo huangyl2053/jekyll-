@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.KeisangojohoAtenaKozaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.honsanteikekkaicihiran.HonsanteiKekkaIcihiranReportSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
-import jp.co.ndensan.reams.db.dbz.service.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -72,8 +72,9 @@ public class HonsanteiKekkaIcihiranPrintService {
             FlexibleYear 賦課年度,
             YMDHMS 調定日時,
             Long 出力順ID) {
-
-        HonsanteiKekkaIcihiranProperty property = new HonsanteiKekkaIcihiranProperty();
+        IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
+                .get出力順(SubGyomuCode.DBB介護賦課, 帳票分類Id, 出力順ID);
+        HonsanteiKekkaIcihiranProperty property = new HonsanteiKekkaIcihiranProperty(並び順);
 
         IAssociationFinder finder = AssociationFinderFactory.createInstance();
         Association association = finder.getAssociation();
@@ -87,9 +88,8 @@ public class HonsanteiKekkaIcihiranPrintService {
         for (KeisangojohoAtenaKozaEntity entity : 計算後情報_宛名_口座EntityList) {
 
             IKojin 宛名情報 = ShikibetsuTaishoFactory.createKojin(entity.get宛名Entity());
-            JushoHenshu jushoHenshu = JushoHenshu.createInstance();
             ChohyoSeigyoKyotsu 帳票制御共通 = load帳票制御共通(帳票分類Id);
-            RString 住所編集 = jushoHenshu.editJusho(帳票制御共通, 宛名情報);
+            RString 住所編集 = JushoHenshu.editJusho(帳票制御共通, 宛名情報, AssociationFinderFactory.createInstance().getAssociation());
             住所編集リスト.add(住所編集);
         }
 

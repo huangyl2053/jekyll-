@@ -11,8 +11,8 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.IShujiiIkenshoItemGroup;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.IShujiiIkenshoItemKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.ikensho.IShujiiIkenshoItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.core.ikensho.IShujiiIkenshoItemKubun;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 
 /**
@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 public class ShujiiIkensho<E extends IShujiiIkenshoItemKubun, T extends IShujiiIkenshoItem> {
 
     private final Map<E, T> 意見書定義;
-    private final IShujiiIkenshoItemGroup[] 意見書項目グループ;
+    private final List<IShujiiIkenshoItemGroup> 意見書項目グループ;
 
     /**
      * インスタンスを生成します。
@@ -33,7 +33,7 @@ public class ShujiiIkensho<E extends IShujiiIkenshoItemKubun, T extends IShujiiI
      * @param 意見書定義 意見書定義
      * @param 意見書項目グループ 意見書項目グループ
      */
-    public ShujiiIkensho(Map<E, T> 意見書定義, IShujiiIkenshoItemGroup[] 意見書項目グループ) {
+    public ShujiiIkensho(Map<E, T> 意見書定義, List<IShujiiIkenshoItemGroup> 意見書項目グループ) {
         this.意見書定義 = requireNonNull(意見書定義, UrSystemErrorMessages.値がnull.getReplacedMessage("意見書定義"));
         this.意見書項目グループ = requireNonNull(意見書項目グループ, UrSystemErrorMessages.値がnull.getReplacedMessage("意見書項目グループ"));
     }
@@ -102,7 +102,7 @@ public class ShujiiIkensho<E extends IShujiiIkenshoItemKubun, T extends IShujiiI
      *
      * @return 意見書項目グループ
      */
-    public IShujiiIkenshoItemGroup[] get意見書項目グループ() {
-        return 意見書項目グループ.clone();
+    public List<IShujiiIkenshoItemGroup> get意見書項目グループ() {
+        return 意見書項目グループ;
     }
 }

@@ -47,7 +47,6 @@ class ShujiiIkenshoTeishutsuIraishoEditor implements IShujiiIkenshoTeishutsuIrai
         source.shimeiText = item.getShimeiText();
         source.meishoFuyo = item.getMeishoFuyo();
         source.customerBarCode = item.getCustomerBarCode();
-        source.atenaRenban = item.getAtenaRenban();
         source.sonota = item.getSonota();
         source.title = item.getTitle();
         source.tsuchibun1 = item.getTsuchibun1();

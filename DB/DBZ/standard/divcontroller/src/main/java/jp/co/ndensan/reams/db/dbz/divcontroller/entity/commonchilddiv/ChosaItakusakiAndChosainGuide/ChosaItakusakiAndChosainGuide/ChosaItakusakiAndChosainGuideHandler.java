@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjoho;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaItakuKubunCode;
@@ -23,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 /**
  * 調査委託先＆調査員ガイドDivのHandlerクラスです。
  *
- * @reamsid_L DBE-1300-020 wanghui
+ * @reamsid_L DBZ-1300-020 wanghui
  */
 public class ChosaItakusakiAndChosainGuideHandler {
 
@@ -62,7 +63,7 @@ public class ChosaItakusakiAndChosainGuideHandler {
      * 「条件をクリアする」ボタン押下、検索条件をクリアします。
      */
     public void 検索条件クリア() {
-        div.getHokensha().loadHokenshaList();
+        div.getHokensha().loadHokenshaList(GyomuBunrui.介護認定);
         div.getTxtChosaItakusakiCodeFrom().clearValue();
         div.getTxtChosaItakuaskiCodeTo().clearValue();
         div.getTxtChosaItakusakiName().clearValue();
@@ -101,6 +102,7 @@ public class ChosaItakusakiAndChosainGuideHandler {
                 kensakuKekkaIchiran_Row.setChosainKanaShimei(nullToEmpty(business.get調査員氏名カナ()));
                 kensakuKekkaIchiran_Row.setChosainHJokyo(nullToEmpty(business.is調査員状況フラグ()
                         ? new RString("有効") : new RString("無効")));
+                kensakuKekkaIchiran_Row.setShichosonCode(business.get市町村コード());
                 if (!business.is状況フラグ() || !business.is調査員状況フラグ()) {
                     kensakuKekkaIchiran_Row.setRowBgColor(DataGridCellBgColor.bgColorGray);
                     div.getDgKensakuKekkaIchiran().setReadOnly(true);
@@ -123,7 +125,7 @@ public class ChosaItakusakiAndChosainGuideHandler {
         if (dataPassModel != null) {
             対象モード = nullToEmpty(dataPassModel.get対象モード());
             if (RString.isNullOrEmpty(dataPassModel.get市町村コード())) {
-                dataPassModel.set市町村コード(div.getHokensha().getSelectedItem().get市町村コード().value());
+                dataPassModel.set市町村コード(div.getDgKensakuKekkaIchiran().getClickedItem().getShichosonCode());
             }
             if (ChosaItakusakiAndChosainGuideDiv.TaishoMode.Itakusaki.toString().equals(対象モード.toString())) {
                 dataPassModel.set委託先コード(div.getDgKensakuKekkaIchiran().getClickedItem().getItakusakicode().getValue());

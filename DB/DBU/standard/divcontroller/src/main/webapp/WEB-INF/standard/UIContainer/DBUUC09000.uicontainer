@@ -51,7 +51,7 @@
      "layoutName": "DBU0900021",
      "layoutTitle": "審査請求書登録",
      "eventName": "一覧に戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBU",
      "toLayoutName": "DBU0900011",

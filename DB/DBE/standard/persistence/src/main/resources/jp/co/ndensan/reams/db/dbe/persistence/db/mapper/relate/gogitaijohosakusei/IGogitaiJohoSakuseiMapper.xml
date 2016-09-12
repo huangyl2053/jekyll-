@@ -6,7 +6,7 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijohosakusei.IGogitaiJohoSakuseiMapper">
 
-    <select id="getGogitaiJohoSakuseiGridList" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijohosakusei.GogitaiJohoSakuseiParameter" resultMap="resultMap_GogitaiJohoSakuseiRelateEntity">
+    <select resultOrdered="true" id="getGogitaiJohoSakuseiGridList" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.gogitaijohosakusei.GogitaiJohoSakuseiParameter" resultMap="resultMap_GogitaiJohoSakuseiRelateEntity">
         <include refid="selectGogitaiJohoSakuseiGridList" />        
     </select>
     <sql id="selectGogitaiJohoSakuseiGridList">
@@ -44,7 +44,7 @@
     </sql>
     
     
-    <select id="getShinsainList" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijohosakusei.GogitaiJohoSakuseiParameter" resultMap="resultMap_GogitaiJohoSakuseiRelateEntity" fetchSize="500">
+    <select resultOrdered="true" id="getShinsainList" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.gogitaijohosakusei.GogitaiJohoSakuseiParameter" resultMap="resultMap_GogitaiJohoSakuseiRelateEntity" fetchSize="500">
         SELECT
             DbT5593GogitaiWariateIinJoho."gogitaichoKubunCode" AS "dbT5593GogitaiWariateIinJoho_gogitaichoKubunCode",
             DbT5593GogitaiWariateIinJoho."shinsakaiIinCode" AS "dbT5593GogitaiWariateIinJoho_shinsakaiIinCode",
@@ -61,7 +61,7 @@
     </select>
     
     
-    <select id="getGogitaiJohoForCSV" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijohosakusei.GogitaiJohoSakuseiParameter" resultMap="resultMap_GogitaiJohoSakuseiRelateEntity" fetchSize="500">
+    <select resultOrdered="true" id="getGogitaiJohoForCSV" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.gogitaijohosakusei.GogitaiJohoSakuseiParameter" resultMap="resultMap_GogitaiJohoSakuseiRelateEntity" fetchSize="500">
         <include refid="selectGogitaiJohoForCSV" />        
     </select>
     <sql id="selectGogitaiJohoForCSV">
@@ -98,7 +98,7 @@
             DbT5591GogitaiJoho."gogitaiNo"
     </sql>
     
-    <select id="getKaisaiBashoJohoCount" parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" resultType="int">
+    <select resultOrdered="true" id="getKaisaiBashoJohoCount" parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" resultType="int">
         SELECT 
             COUNT(0)
         FROM 
@@ -107,7 +107,7 @@
             DbT5592ShinsakaiKaisaiBashoJoho."shinsakaiKaisaiBashoCode" = #{shinsakaiKaisaiBashoCode} 
     </select>
     
-    <select id="getShinsakaiIinJohoCount" parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" resultType="int">
+    <select resultOrdered="true" id="getShinsakaiIinJohoCount" parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" resultType="int">
         SELECT 
             COUNT(0)
         FROM 
@@ -116,7 +116,7 @@
             DbT5594ShinsakaiIinJoho."shinsakaiIinCode" = #{shinsakaiIinCode} 
     </select>
     
-    <select id="getGogitaiJohoCount" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijohosakusei.GogitaiJohoSakuseiParameter" resultType="int">
+    <select resultOrdered="true" id="getGogitaiJohoCount" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.gogitaijohosakusei.GogitaiJohoSakuseiParameter" resultType="int">
         SELECT 
             COUNT(0)
         FROM 
@@ -126,7 +126,7 @@
             DbT5591GogitaiJoho."gogitaiYukoKikanKaishiYMD" = #{合議体有効期間開始年月日}
     </select>
     
-    <select id="getGogitaiWariateIinJohoCount" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.gogitaijohosakusei.GogitaiJohoSakuseiParameter" resultType="int">
+    <select resultOrdered="true" id="getGogitaiWariateIinJohoCount" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.gogitaijohosakusei.GogitaiJohoSakuseiParameter" resultType="int">
         SELECT 
             COUNT(0)
         FROM 

@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ChosaIrai
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ikenshoprint.IkenshoPrintParameterModel;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.gamensenikbn.GamenSeniKbn;
+import jp.co.ndensan.reams.db.dbe.definition.core.gamensenikbn.GamenSeniKbn;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -79,32 +79,34 @@ public class PrintValidationHandler {
             }
 
             RString selectKey = div.getRadJyushinKikan().getSelectedKey();
-            if (KEY0.equals(selectKey)) {
+            if (!div.getShindanMeirei().isDisplayNone()) {
+                if (KEY0.equals(selectKey)) {
 
-                if (div.getTxtJyushinymd().getValue() == null) {
-                    validPairs.add(new ValidationMessageControlPair(new ValidationMessages(UrErrorMessages.必須項目_追加メッセージあり, "受診日"), div.getTxtJyushinymd()));
-                }
-                if (div.getTxtJushinTime().getValue() == null) {
-                    validPairs.add(new ValidationMessageControlPair(new ValidationMessages(UrErrorMessages.必須項目_追加メッセージあり, "時分"), div.getTxtJushinTime()));
-                }
-            } else {
+                    if (div.getTxtJyushinymd().getValue() == null) {
+                        validPairs.add(new ValidationMessageControlPair(new ValidationMessages(UrErrorMessages.必須項目_追加メッセージあり, "受診日"), div.getTxtJyushinymd()));
+                    }
+                    if (div.getTxtJushinTime().getValue() == null) {
+                        validPairs.add(new ValidationMessageControlPair(new ValidationMessages(UrErrorMessages.必須項目_追加メッセージあり, "時分"), div.getTxtJushinTime()));
+                    }
+                } else {
 
-                if (div.getTxtJushinKikan().getFromValue() == null) {
-                    validPairs.add(new ValidationMessageControlPair(new ValidationMessages(UrErrorMessages.必須項目_追加メッセージあり, "受診期間(開始日)"), div.getTxtJushinKikan()));
-                }
-                if (div.getTxtJushinKikan().getToValue() == null) {
-                    validPairs.add(new ValidationMessageControlPair(new ValidationMessages(UrErrorMessages.必須項目_追加メッセージあり, "受診期間(終了日)"), div.getTxtJushinKikan()));
+                    if (div.getTxtJushinKikan().getFromValue() == null) {
+                        validPairs.add(new ValidationMessageControlPair(new ValidationMessages(UrErrorMessages.必須項目_追加メッセージあり, "受診期間(開始日)"), div.getTxtJushinKikan()));
+                    }
+                    if (div.getTxtJushinKikan().getToValue() == null) {
+                        validPairs.add(new ValidationMessageControlPair(new ValidationMessages(UrErrorMessages.必須項目_追加メッセージあり, "受診期間(終了日)"), div.getTxtJushinKikan()));
+                    }
+
                 }
 
                 if (RString.isNullOrEmpty(div.getTxtJushinBasho().getValue())) {
                     validPairs.add(new ValidationMessageControlPair(new ValidationMessages(UrErrorMessages.必須項目_追加メッセージあり, "受診場所"), div.getTxtJushinBasho()));
                 }
             }
-
-            RString key = div.getRadTeishutsuKigen().getSelectedKey();
-            if (KEY2.equals(key) && div.getTxtKyotsuDay().getValue() == null) {
-                validPairs.add(new ValidationMessageControlPair(new ValidationMessages(UrErrorMessages.必須項目_追加メッセージあり, "共通日付"), div.getTxtKyotsuDay()));
-            }
+        }
+        RString key = div.getRadTeishutsuKigen().getSelectedKey();
+        if (KEY2.equals(key) && div.getTxtKyotsuDay().getValue() == null) {
+            validPairs.add(new ValidationMessageControlPair(new ValidationMessages(UrErrorMessages.必須項目_追加メッセージあり, "共通日付"), div.getTxtKyotsuDay()));
         }
         return validPairs;
     }

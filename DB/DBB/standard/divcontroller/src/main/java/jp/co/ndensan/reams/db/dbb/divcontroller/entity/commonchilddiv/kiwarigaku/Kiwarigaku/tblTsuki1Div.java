@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  * @author 自動生成
  */
 public class tblTsuki1Div extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -392,7 +392,7 @@ public class tblTsuki1Div extends TablePanel {
  * @author 自動生成
  */
 class celTsuki0AttblTsuki1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTsuki0")
     private Label lblTsuki0;
 
@@ -422,7 +422,7 @@ class celTsuki0AttblTsuki1 extends TableCell {
  * @author 自動生成
  */
 class celTsukiAttblTsuki1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTsuki")
     private Label lblTsuki;
 
@@ -452,7 +452,7 @@ class celTsukiAttblTsuki1 extends TableCell {
  * @author 自動生成
  */
 class celTsuki1AttblTsuki1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTsuki1")
     private Label lblTsuki1;
 
@@ -482,7 +482,7 @@ class celTsuki1AttblTsuki1 extends TableCell {
  * @author 自動生成
  */
 class celTsuki2AttblTsuki1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTsuki2")
     private Label lblTsuki2;
 
@@ -512,7 +512,7 @@ class celTsuki2AttblTsuki1 extends TableCell {
  * @author 自動生成
  */
 class celTsuki3AttblTsuki1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTsuki3")
     private Label lblTsuki3;
 
@@ -542,7 +542,7 @@ class celTsuki3AttblTsuki1 extends TableCell {
  * @author 自動生成
  */
 class celTsuki4AttblTsuki1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTsuki4")
     private Label lblTsuki4;
 
@@ -572,7 +572,7 @@ class celTsuki4AttblTsuki1 extends TableCell {
  * @author 自動生成
  */
 class celTsuki5AttblTsuki1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTsuki5")
     private Label lblTsuki5;
 
@@ -602,7 +602,7 @@ class celTsuki5AttblTsuki1 extends TableCell {
  * @author 自動生成
  */
 class celTsuki6AttblTsuki1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTsuki6")
     private Label lblTsuki6;
 
@@ -632,7 +632,7 @@ class celTsuki6AttblTsuki1 extends TableCell {
  * @author 自動生成
  */
 class celTsuki7AttblTsuki1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTsuki7")
     private Label lblTsuki7;
 
@@ -662,7 +662,7 @@ class celTsuki7AttblTsuki1 extends TableCell {
  * @author 自動生成
  */
 class celTsuki8AttblTsuki1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTsuki8")
     private Label lblTsuki8;
 
@@ -692,7 +692,7 @@ class celTsuki8AttblTsuki1 extends TableCell {
  * @author 自動生成
  */
 class celTsuki9AttblTsuki1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTsuki9")
     private Label lblTsuki9;
 
@@ -722,7 +722,7 @@ class celTsuki9AttblTsuki1 extends TableCell {
  * @author 自動生成
  */
 class celTsuki10AttblTsuki1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTsuki10")
     private Label lblTsuki10;
 
@@ -752,7 +752,7 @@ class celTsuki10AttblTsuki1 extends TableCell {
  * @author 自動生成
  */
 class celTsuki11AttblTsuki1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTsuki11")
     private Label lblTsuki11;
 
@@ -782,7 +782,7 @@ class celTsuki11AttblTsuki1 extends TableCell {
  * @author 自動生成
  */
 class celTsuki12AttblTsuki1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTsuki12")
     private Label lblTsuki12;
 

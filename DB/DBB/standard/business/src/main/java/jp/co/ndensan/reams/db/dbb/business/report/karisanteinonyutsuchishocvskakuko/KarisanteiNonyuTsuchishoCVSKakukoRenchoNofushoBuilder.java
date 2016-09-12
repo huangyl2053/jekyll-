@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvskakuko;
 
-import jp.co.ndensan.reams.db.dbb.entity.report.karisanteinonyutsuchishocvskakuko.KarisanteiNonyuTsuchishoCVSKakukoSource;
+import jp.co.ndensan.reams.db.dbb.entity.report.karisanteinonyutsuchishocvskakuko.KarisanteiNonyuTsuchishoCVSKakukoRenchoSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
@@ -31,11 +31,11 @@ public class KarisanteiNonyuTsuchishoCVSKakukoRenchoNofushoBuilder implements IK
     /**
      * 帳票ソースをビルドします。
      *
-     * @return {@link KarisanteiNonyuTsuchishoCVSKakukoRenchoNofushoSource}
+     * @return {@link KarisanteiNonyuTsuchishoCVSKakukoRenchoSource}
      */
     @Override
-    public KarisanteiNonyuTsuchishoCVSKakukoSource build() {
-        return ReportEditorJoiner.from(new KarisanteiNonyuTsuchishoCVSKakukoSource()).join(nofushoEditor).buildSource();
+    public KarisanteiNonyuTsuchishoCVSKakukoRenchoSource build() {
+        return ReportEditorJoiner.from(new KarisanteiNonyuTsuchishoCVSKakukoRenchoSource()).join(nofushoEditor).buildSource();
 
     }
 

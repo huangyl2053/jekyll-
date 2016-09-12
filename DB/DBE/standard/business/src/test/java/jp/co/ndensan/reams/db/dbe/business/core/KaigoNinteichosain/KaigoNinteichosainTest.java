@@ -6,10 +6,10 @@ package jp.co.ndensan.reams.db.dbe.business.core.KaigoNinteichosain;
 
 import jp.co.ndensan.reams.db.dbe.business.core.kaigoninteichosain.KaigoNinteichosain;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosairai.NinteichosaItakusaki;
-import jp.co.ndensan.reams.db.dbe.definition.core.ChosaItakuKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ChosainJokyo;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.kaigoninteichosainno.KaigoNinteichosainNo;
+import jp.co.ndensan.reams.db.dbe.definition.core.kaigoninteichosainno.KaigoNinteichosainNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaItakuKubunCode;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -70,7 +70,7 @@ public class KaigoNinteichosainTest extends TestBase {
                     new KaigoJigyoshaNo(new RString("0000000001")),
                     new JigyoshaNo(new RString("0000000001")),
                     true,
-                    ChosaItakuKubun.その他,
+                    ChosaItakuKubunCode.その他,
                     1,
                     new RString("地区１"),
                     new RString("介護保険施設"));

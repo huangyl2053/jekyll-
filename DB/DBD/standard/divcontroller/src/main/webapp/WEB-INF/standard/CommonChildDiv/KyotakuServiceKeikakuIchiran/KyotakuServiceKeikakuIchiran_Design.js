@@ -4,8 +4,52 @@ var DBD;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_select = function () {
+                return "onClick_select";
+            };
+
             Events.CloseOK = function () {
                 return "CloseOK";
+            };
+
+            Events.onClick_btnKeikakuIraiUketsuke = function () {
+                return "onClick_btnKeikakuIraiUketsuke";
+            };
+
+            Events.onClick_btnJikosakuseiKeikaku = function () {
+                return "onClick_btnJikosakuseiKeikaku";
+            };
+
+            Events.onClick_btnKyotakuService = function () {
+                return "onClick_btnKyotakuService";
+            };
+
+            Events.onClickClose_keikakuIraiUketsuke = function () {
+                return "onClickClose_keikakuIraiUketsuke";
+            };
+
+            Events.onClickClose_jikosakuseiKeikaku = function () {
+                return "onClickClose_jikosakuseiKeikaku";
+            };
+
+            Events.onClick_btnShuruiGendoGakuKakunin = function () {
+                return "onClick_btnShuruiGendoGakuKakunin";
+            };
+
+            Events.onSelect_dgKyotakuService = function () {
+                return "onSelect_dgKyotakuService";
+            };
+
+            Events.onClickClose_kyotakuServiceJoho = function () {
+                return "onClickClose_kyotakuServiceJoho";
+            };
+
+            Events.onClickClose_kyotakuServiceMeisai = function () {
+                return "onClickClose_kyotakuServiceMeisai";
+            };
+
+            Events.onClickClose_shuruiGendoGakuKakunin = function () {
+                return "onClickClose_shuruiGendoGakuKakunin";
             };
             return Events;
         })();

@@ -13,10 +13,10 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.uz.uza.core._ControlDataHolder;
+//import jp.co.ndensan.reams.uz.uza.core._ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._IServletControlData;
+//import jp.co.ndensan.reams.uz.uza.ui.servlets._IServletControlData;
 import org.yaml.snakeyaml.Yaml;
 
 /**
@@ -152,7 +152,8 @@ public final class YamlLoader {
 
     private Object load(RString fileName) {
         InputStream input = null;
-        RString urlHeader = new RString(((_IServletControlData) _ControlDataHolder.getControlData()).getUrlHeader());
+        RString urlHeader = RString.EMPTY;
+//        RString urlHeader = new RString(((_IServletControlData) _ControlDataHolder.getControlData()).getUrlHeader());
         try {
             URL url = new URL(urlHeader.concat(rootPath).concat(fileName).toString());
             input = url.openStream();

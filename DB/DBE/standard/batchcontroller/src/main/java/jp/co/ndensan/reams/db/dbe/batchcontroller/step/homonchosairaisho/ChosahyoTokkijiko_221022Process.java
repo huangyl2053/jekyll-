@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.homonchosairaisho;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyotokkijiko.ChosahyoTokkijikoItem;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyotokkijiko.ChosahyoTokkijikoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyotokkijiko.ChosahyoTokkijikoReport;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.iraisho.GridParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
@@ -102,7 +102,6 @@ public class ChosahyoTokkijiko_221022Process extends BatchProcessBase<HomonChosa
     private RString 申請月2;
     private RString 申請日1;
     private RString 申請日2;
-    private List<ChosahyoTokkijikoItem> itemList;
     private IHomonChosaIraishoMapper iHomonChosaIraishoMapper;
     private HomonChosaIraishoProcessParamter processParamter;
     @BatchWriter
@@ -114,7 +113,6 @@ public class ChosahyoTokkijiko_221022Process extends BatchProcessBase<HomonChosa
     @Override
     protected void initialize() {
         iHomonChosaIraishoMapper = getMapper(IHomonChosaIraishoMapper.class);
-        itemList = new ArrayList<>();
     }
 
     @Override
@@ -131,25 +129,21 @@ public class ChosahyoTokkijiko_221022Process extends BatchProcessBase<HomonChosa
 
     @Override
     protected void process(HomonChosaIraishoRelateEntity entity) {
-        // 内部QA：614　Redmine：＃75422　排他制限の確認
         update認定調査依頼情報(entity);
-        itemList.add(setItem(entity));
+        ChosahyoTokkijikoReport report = new ChosahyoTokkijikoReport(setItem(entity));
+        report.writeBy(reportSourceWriter);
     }
 
     @Override
     protected void afterExecute() {
-        if (itemList != null && !itemList.isEmpty()) {
-            ChosahyoTokkijikoReport report = ChosahyoTokkijikoReport.createFrom(itemList);
-            report.writeBy(reportSourceWriter);
-        }
         バッチ出力条件リストの出力();
     }
 
-    private ChosahyoTokkijikoItem setItem(HomonChosaIraishoRelateEntity entity) {
+    private ChosahyoTokkijikoBusiness setItem(HomonChosaIraishoRelateEntity entity) {
         get保険者番号(entity);
         get被保険者番号(entity);
         get申請日(entity);
-        return new ChosahyoTokkijikoItem(保険者番号1,
+        return new ChosahyoTokkijikoBusiness(保険者番号1,
                 保険者番号2,
                 保険者番号3,
                 保険者番号4,

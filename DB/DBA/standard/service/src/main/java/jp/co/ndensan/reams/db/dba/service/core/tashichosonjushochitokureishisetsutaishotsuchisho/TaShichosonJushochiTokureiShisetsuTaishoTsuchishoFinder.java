@@ -8,12 +8,13 @@ package jp.co.ndensan.reams.db.dba.service.core.tashichosonjushochitokureishiset
 import java.util.Map;
 import jp.co.ndensan.reams.db.dba.business.core.tashichosonjushochitokureishisetsutaishotsuchisho.TatokuKanrenChohyoTaishoTsuchishoBusiness;
 import jp.co.ndensan.reams.db.dba.business.core.tatokukanrenchohyoshiji.TatokuKanrenChohyoShijiData;
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tashitaishotsuchisho.TaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatisParameter;
+import jp.co.ndensan.reams.db.dba.definition.mybatisprm.tashitaishotsuchisho.TaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatisParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tashihenkotsuchisho.ShisetsuJyohoRelateEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tashitaishotsuchisho.TaShichosonJushochiTokureiShisetsuTaishoTsuchishoRelateEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tashitaishotsuchisho.TatokuKanrenChohyoTaishoTsuchishoEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tashitaishotsuchisho.ITaShichosonJushochiTokureiShisetsuTaishoTsuchishoMapper;
 import jp.co.ndensan.reams.db.dba.service.core.tajushochito.ShisetsuJyohoFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
@@ -33,7 +34,6 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCode;
@@ -110,13 +110,20 @@ public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder {
         }
 
         TsuchishoTeikeibunManager tsuchishoTeikeibunManager = new TsuchishoTeikeibunManager();
+        TsuchishoTeikeibunInfo tsuchishoTeikeibunInfoTemp =  tsuchishoTeikeibunManager.get最新適用日(
+                SubGyomuCode.DBA介護資格,
+                new ReportId("DBA100005_JushochitokureiShisetsuTaishoTsuchisho"), 
+                KamokuCode.EMPTY, 
+                INT1, 
+                INT1);
+        
         TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = tsuchishoTeikeibunManager.get通知書定形文検索(
                 SubGyomuCode.DBA介護資格,
                 new ReportId("DBA100005_JushochitokureiShisetsuTaishoTsuchisho"),
                 KamokuCode.EMPTY,
-                1,
-                1,
-                new FlexibleDate(RDate.getNowDate().toDateString()));
+                INT1,
+                INT1,
+                tsuchishoTeikeibunInfoTemp.getチェック用最新適用日());
         if (tsuchishoTeikeibunInfo != null
                 && tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity() != null) {
             outEntity.set見出し(tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence());
@@ -143,7 +150,10 @@ public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder {
             outEntity.set退所年月日(施設情報Entity.get退所年月日().
                     wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                     separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-            outEntity.set退所事由(CodeMaster.getCodeMeisho(new CodeShubetsu("0011"), new Code(施設情報Entity.get退所事由())));
+              outEntity.set退所事由(CodeMaster.getCodeRyakusho(
+                    DBACodeShubetsu.介護資格解除事由_他特例者.getコード(),
+                    new Code(施設情報Entity.get退所事由()),
+                    FlexibleDate.getNowDate()));
             outEntity.set施設名称(施設情報Entity.get事業者名称());
             outEntity.set施設電話番号(施設情報Entity.get電話番号());
             outEntity.set施設FAX番号(施設情報Entity.getFax番号());
@@ -166,7 +176,12 @@ public class TaShichosonJushochiTokureiShisetsuTaishoTsuchishoFinder {
                 = this.mapperProvider.create(ITaShichosonJushochiTokureiShisetsuTaishoTsuchishoMapper.class);
         getEntity = mapper1.selectTaShichosonJushochiTokureiShisetsuTaishoTsuchishoMybatis(params);
         if (getEntity != null) {
-            this.郵便番号と住所を編集する(outEntity);
+            if (!inBusiness.is住所出力不要フラグ()) {
+                this.郵便番号と住所を編集する(outEntity);
+            } else {
+                outEntity.set郵便番号(RString.EMPTY);
+                outEntity.set住所(RString.EMPTY);
+            }
 
             outEntity.set対象者名カナ(getEntity.getカナ名称());
             outEntity.set対象者名(getEntity.get名称());

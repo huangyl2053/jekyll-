@@ -8,11 +8,14 @@ package jp.co.ndensan.reams.db.dbz.service.core.hihokensha.roreifukushinenkinjuk
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyusha;
 import jp.co.ndensan.reams.db.dbz.definition.core.roreifukushinenkinjoho.RoreiFukushiNenkinJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7006RoreiFukushiNenkinJukyushaDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -51,9 +54,9 @@ public class RoreiFukushiNenkinJukyushaManager {
     }
 
     /**
-     * 老齢福祉年金受給者{@link RoreiFukushiNenkinJukyusha}を保存します。
+     * {@link RoreiFukushiNenkinJukyusha 老齢福祉年金受給者}を保存します。
      *
-     * @param 老齢福祉年金受給者 {@link RoreiFukushiNenkinJukyusha}
+     * @param 老齢福祉年金受給者 {@link RoreiFukushiNenkinJukyusha 老齢福祉年金受給者}
      * @return 更新件数 更新結果の件数を返します。
      */
     @Transaction
@@ -63,6 +66,22 @@ public class RoreiFukushiNenkinJukyushaManager {
             return false;
         }
         return 1 == dac.saveOrDeletePhysicalBy(老齢福祉年金受給者.toEntity());
+    }
+
+    /**
+     * 指定の{@link RoreiFukushiNenkinJukyusha 老齢福祉年金受給者}複数件を保存します。
+     *
+     * @param 老齢福祉年金受給者s {@link RoreiFukushiNenkinJukyusha 老齢福祉年金受給者}複数件
+     * @return 更新件数
+     */
+    @Transaction
+    public int save老齢福祉年金受給者All(Iterable<? extends RoreiFukushiNenkinJukyusha> 老齢福祉年金受給者s) {
+        requireNonNull(老齢福祉年金受給者s, UrSystemErrorMessages.値がnull.getReplacedMessage("老齢福祉年金受給者"));
+        int result = 0;
+        for (RoreiFukushiNenkinJukyusha t : 老齢福祉年金受給者s) {
+            result += save老齢福祉年金受給者(t) ? 1 : 0;
+        }
+        return result;
     }
 
     /**
@@ -96,5 +115,23 @@ public class RoreiFukushiNenkinJukyushaManager {
     public int checkSameJukyuKaishibi(RoreiFukushiNenkinJohoMapperParameter addCheck) {
         return dac.countfor老齢福祉年金履歴情報を取得(
                 addCheck.getShikibetsuCode(), addCheck.getJukyuKaishiYMD());
+    }
+
+    /**
+     * 老齢福祉年金受給者判定。
+     *
+     * @param 識別コード 識別コード
+     * @param 被保険者番号 被保険者番号
+     * @param 所得基準年月日 所得基準年月日
+     * @return List<DbT7006RoreiFukushiNenkinJukyushaEntity>
+     *
+     */
+    @Transaction
+    public boolean 老齢福祉年金受給者判定(
+            ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FlexibleDate 所得基準年月日) {
+        if (dac.count老齢福祉年金受給者(識別コード, 被保険者番号, 所得基準年月日) > 0) {
+            return true;
+        }
+        return false;
     }
 }

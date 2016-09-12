@@ -6,9 +6,9 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5140002;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJohoBuilder;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJohoIdentifier;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho2;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho2Builder;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho2Identifier;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinwaritsuke.ShinsakaiKaisaiYoteiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinwaritsuke.ShinsakaiiinJoho;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140002.ShinsakaiIinWaritsukeDiv;
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5140002.Shi
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5140002.ShinsakaiIinWaritsukeValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai2.ShinsakaiKaisaiYoteiJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai2.ShinsakaiiinJohoManager;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -47,8 +47,8 @@ public class ShinsakaiIinWaritsuke {
      * コンストラクタです。
      */
     public ShinsakaiIinWaritsuke() {
-        開催番号 = ViewStateHolder.get(ViewStateKeys.介護認定審査会委員割付_開催番号, RString.class);
-        開催年月日 = ViewStateHolder.get(ViewStateKeys.介護認定審査会委員割付_開催年月日, RString.class);
+        開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
+        開催年月日 = ViewStateHolder.get(ViewStateKeys.開催年月日, RString.class);
         kaisaiYoteiJohomanager = ShinsakaiKaisaiYoteiJohoManager.createInstance();
         iinJohomanager = ShinsakaiiinJohoManager.createInstance();
     }
@@ -62,10 +62,10 @@ public class ShinsakaiIinWaritsuke {
     public ResponseData<ShinsakaiIinWaritsukeDiv> onLoad(ShinsakaiIinWaritsukeDiv div) {
         List<ShinsakaiKaisaiYoteiJoho> kaisaiYoteiJohoList = kaisaiYoteiJohomanager
                 .search審査会開催予定情報Of開催番号(開催番号).records();
-        getHandler(div).onLoad(kaisaiYoteiJohoList);
+        getHandler(div).onLoad(kaisaiYoteiJohoList, 開催番号);
         List<ShinsakaiiinJoho> iinJoholist = iinJohomanager.search審査会委員情報Of開催番号(開催番号, 開催年月日).records();
         getHandler(div).setDataGrid(iinJoholist);
-        Models<ShinsakaiWariateIinJohoIdentifier, ShinsakaiWariateIinJoho> models
+        Models<ShinsakaiWariateIinJoho2Identifier, ShinsakaiWariateIinJoho2> models
                 = Models.create(iinJohomanager.searchByKaisaiNo(開催番号).records());
         ViewStateHolder.put(ViewStateKeys.介護認定審査会割当委員情報_一覧, models);
         return ResponseData.of(div).respond();
@@ -148,16 +148,16 @@ public class ShinsakaiIinWaritsuke {
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             getHandler(div).前排他制御処理();
-            Models<ShinsakaiWariateIinJohoIdentifier, ShinsakaiWariateIinJoho> models
+            Models<ShinsakaiWariateIinJoho2Identifier, ShinsakaiWariateIinJoho2> models
                     = ViewStateHolder.get(ViewStateKeys.介護認定審査会割当委員情報_一覧, Models.class);
-            for (ShinsakaiWariateIinJoho iinJoho : models) {
+            for (ShinsakaiWariateIinJoho2 iinJoho : models) {
                 iinJohomanager.deletePhysicalByKaisaiNo(iinJoho.toEntity());
             }
             List<dgShinsakaiIinKoseiIchiran_Row> koseiIchiranGridList
                     = div.getDgShinsakaiIinKoseiIchiran().getDataSource();
             for (dgShinsakaiIinKoseiIchiran_Row row : koseiIchiranGridList) {
-                ShinsakaiWariateIinJoho wariateIinJoho = new ShinsakaiWariateIinJoho(開催番号, row.getShinsakaiIinCode());
-                ShinsakaiWariateIinJohoBuilder builder = wariateIinJoho.createBuilderForEdit();
+                ShinsakaiWariateIinJoho2 wariateIinJoho = new ShinsakaiWariateIinJoho2(開催番号, row.getShinsakaiIinCode());
+                ShinsakaiWariateIinJoho2Builder builder = wariateIinJoho.createBuilderForEdit();
                 builder.set介護認定審査会開催年月日(new FlexibleDate(div.getTxtKaisaiYoteibi().getValue().toDateString()));
                 builder.set介護認定審査会議長区分コード(new Code(row.getGogitaichoKubun()));
                 builder.set委員出席(true);

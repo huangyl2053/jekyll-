@@ -19,9 +19,9 @@
         <result property="shinsakaiShinchokuJokyo" column="DbT5501_shinsakaiShinchokuJokyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="gogitaiDummyFlag" column="DbT5591_gogitaiDummyFlag"/>
     </resultMap>
-    <select id="getShinsaKayiJidouWaritsukeList"
+    <select resultOrdered="true" id="getShinsaKayiJidouWaritsukeList"
                 resultMap="resultMap_ShinsaKayiJidouWaritsukeRelateEntity" 
-                parameterType="jp.co.ndensan.reams.db.dbe.definition.kaigoninteishinsakai.KaigoNinteiShinsakaiParameter" fetchSize="500">
+                parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.kaigoninteishinsakai.KaigoNinteiShinsakaiParameter" fetchSize="500">
         SELECT 
          DbT5501."shinsakaiKaisaiNo" as "DbT5501_shinsakaiKaisaiNo"
         ,'第'||DbT5501."shinsakaiKaisaiNo"||'回審査会' as "審査会名称"

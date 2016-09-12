@@ -4,14 +4,15 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.chosahyo;
 
+import java.util.Arrays;
 import jp.co.ndensan.reams.db.dbe.business.core.ChoiceItem;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ChoiceResultItem;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.chosahyo.INinteichosaItemGroup;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.chosahyo.INinteichosaItemSubGroup;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.chosahyo.NinteichosaItemGroupOf2009;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.chosahyo.NinteichosaItemSubGroupOf2009;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ninteichosaitemno.NinteichosaItemNo;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyo.INinteichosaItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyo.INinteichosaItemSubGroup;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyo.NinteichosaItemGroupOf2009;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyo.NinteichosaItemKubunOfKihon;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyo.NinteichosaItemSubGroupOf2009;
+import jp.co.ndensan.reams.db.dbe.definition.core.ninteichosaitemno.NinteichosaItemNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
@@ -157,6 +158,6 @@ public class NinteichosaItemTest extends DbeTestBase {
                 flg == AS_調査項目番号がNULL ? null : new NinteichosaItemNo(new RString("1-1")),
                 flg == AS_調査項目区分がNULL ? null : NinteichosaItemKubunOfKihon.麻痺等の有無_右上肢,
                 flg == AS_表示名称がNULL ? null : new RString("右上肢"),
-                flg == AS_回答項目がNULL ? null : new ChoiceItem(ChoiceResultItem.NaiAru.values()));
+                flg == AS_回答項目がNULL ? null : new ChoiceItem(Arrays.asList(ChoiceResultItem.NaiAru.values())));
     }
 }

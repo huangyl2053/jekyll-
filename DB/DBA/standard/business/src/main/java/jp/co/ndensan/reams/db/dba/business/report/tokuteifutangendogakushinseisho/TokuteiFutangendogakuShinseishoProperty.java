@@ -22,6 +22,6 @@ public class TokuteiFutangendogakuShinseishoProperty
      * コンストラクタです。
      */
     public TokuteiFutangendogakuShinseishoProperty() {
-        super(SubGyomuCode.DBA介護資格, ReportIdDBA.DBD800004.getReportId());
+        super(SubGyomuCode.DBD介護受給, ReportIdDBA.DBD800004.getReportId());
     }
 }

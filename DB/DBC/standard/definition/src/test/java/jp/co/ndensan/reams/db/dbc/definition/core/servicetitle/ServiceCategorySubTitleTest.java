@@ -8,10 +8,10 @@ import org.junit.Test;
 
 /**
  * サブタイトルのテストクラスです。
- * 
- * @author LDNS 
+ *
+ * @author LDNS
  */
-public class ServiceCategorySubTitleTest extends DbcTestBase{
+public class ServiceCategorySubTitleTest extends DbcTestBase {
 
     @Test(expected = NullPointerException.class)
     public void 引数がNullである場合_toValueは_NullPointerExceptionが発生する() {
@@ -41,26 +41,6 @@ public class ServiceCategorySubTitleTest extends DbcTestBase{
     @Test
     public void 引数に無しを指定した場合_toValueは_サブタイトルなしを返す() {
         assertThat(ServiceCategorySubTitle.toValue(new RString("無し")), is(ServiceCategorySubTitle.サブタイトルなし));
-    }
-
-    @Test
-    public void 訪問通所を指定した場合_getコードは_無しを返す() {
-        assertThat(ServiceCategorySubTitle.訪問通所.getコード(), is(new RString("無し")));
-    }
-
-    @Test
-    public void 短期入所を指定した場合_getコードは_無しを返す() {
-        assertThat(ServiceCategorySubTitle.短期入所.getコード(), is(new RString("無し")));
-    }
-
-    @Test
-    public void 地域密着を指定した場合_getコードは_無しを返す() {
-        assertThat(ServiceCategorySubTitle.地域密着.getコード(), is(new RString("無し")));
-    }
-
-    @Test
-    public void サブタイトルなしを指定した場合_getコードは_無しを返す() {
-        assertThat(ServiceCategorySubTitle.サブタイトルなし.getコード(), is(new RString("無し")));
     }
 
     @Test

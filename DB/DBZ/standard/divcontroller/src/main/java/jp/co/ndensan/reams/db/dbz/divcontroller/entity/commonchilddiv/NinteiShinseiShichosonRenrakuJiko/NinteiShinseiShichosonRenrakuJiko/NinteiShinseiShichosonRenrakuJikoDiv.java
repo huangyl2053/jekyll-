@@ -3,7 +3,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShi
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
- * @reamsid_L DBE-1300-090  suguangjun
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -13,14 +12,17 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 
 /**
- * NinteiShinseiShichosonRenrakuJiko のクラスファイル 
- * 
+ * NinteiShinseiShichosonRenrakuJiko のクラスファイル
+ *
  * @author 自動生成
  */
 public class NinteiShinseiShichosonRenrakuJikoDiv extends Panel implements INinteiShinseiShichosonRenrakuJikoDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -199,4 +201,5 @@ public class NinteiShinseiShichosonRenrakuJikoDiv extends Panel implements INint
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+
 }

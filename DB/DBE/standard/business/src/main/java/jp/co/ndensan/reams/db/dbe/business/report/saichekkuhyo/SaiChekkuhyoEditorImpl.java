@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAns
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser15;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser16;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser17;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -242,7 +241,7 @@ public class SaiChekkuhyoEditorImpl implements ISaiChekkuhyoEditor {
 
     private RString setChosaAnser01(RString chosakekkaNo) {
         RString chosaAnser;
-        if (new RString(ChosaAnser01.あり.getコード().toString()).equals(chosakekkaNo)) {
+        if (ChosaAnser01.あり.getコード().equals(chosakekkaNo)) {
             chosaAnser = ChosaAnser01.あり.get名称();
         } else {
             chosaAnser = ChosaAnser01.なし.get名称();
@@ -253,7 +252,7 @@ public class SaiChekkuhyoEditorImpl implements ISaiChekkuhyoEditor {
     private RString getChosaAnser02(RString chosakekkaNo) {
         RString chosaAnser = RString.EMPTY;
         if (!RString.isNullOrEmpty(chosakekkaNo)) {
-            chosaAnser = ChosaAnser02.toValue(new Code(chosakekkaNo)).get名称();
+            chosaAnser = ChosaAnser02.toValue(chosakekkaNo).get名称();
         }
         return chosaAnser;
     }
@@ -261,7 +260,7 @@ public class SaiChekkuhyoEditorImpl implements ISaiChekkuhyoEditor {
     private RString getChosaAnser03(RString chosakekkaNo) {
         RString chosaAnser = RString.EMPTY;
         if (!RString.isNullOrEmpty(chosakekkaNo)) {
-            chosaAnser = ChosaAnser03.toValue(new Code(chosakekkaNo)).get名称();
+            chosaAnser = ChosaAnser03.toValue(chosakekkaNo).get名称();
         }
         return chosaAnser;
     }
@@ -269,7 +268,7 @@ public class SaiChekkuhyoEditorImpl implements ISaiChekkuhyoEditor {
     private RString getChosaAnser04(RString chosakekkaNo) {
         RString chosaAnser = RString.EMPTY;
         if (!RString.isNullOrEmpty(chosakekkaNo)) {
-            chosaAnser = ChosaAnser04.toValue(new Code(chosakekkaNo)).get名称();
+            chosaAnser = ChosaAnser04.toValue(chosakekkaNo).get名称();
         }
         return chosaAnser;
     }
@@ -277,7 +276,7 @@ public class SaiChekkuhyoEditorImpl implements ISaiChekkuhyoEditor {
     private RString getChosaAnser06(RString chosakekkaNo) {
         RString chosaAnser = RString.EMPTY;
         if (!RString.isNullOrEmpty(chosakekkaNo)) {
-            chosaAnser = ChosaAnser06.toValue(new Code(chosakekkaNo)).get名称();
+            chosaAnser = ChosaAnser06.toValue(chosakekkaNo).get名称();
         }
         return chosaAnser;
     }
@@ -285,7 +284,7 @@ public class SaiChekkuhyoEditorImpl implements ISaiChekkuhyoEditor {
     private RString getChosaAnser07(RString chosakekkaNo) {
         RString chosaAnser = RString.EMPTY;
         if (!RString.isNullOrEmpty(chosakekkaNo)) {
-            chosaAnser = ChosaAnser07.toValue(new Code(chosakekkaNo)).get名称();
+            chosaAnser = ChosaAnser07.toValue(chosakekkaNo).get名称();
         }
         return chosaAnser;
     }
@@ -293,7 +292,7 @@ public class SaiChekkuhyoEditorImpl implements ISaiChekkuhyoEditor {
     private RString getChosaAnser08(RString chosakekkaNo) {
         RString chosaAnser = RString.EMPTY;
         if (!RString.isNullOrEmpty(chosakekkaNo)) {
-            chosaAnser = ChosaAnser08.toValue(new Code(chosakekkaNo)).get名称();
+            chosaAnser = ChosaAnser08.toValue(chosakekkaNo).get名称();
         }
         return chosaAnser;
     }
@@ -301,7 +300,7 @@ public class SaiChekkuhyoEditorImpl implements ISaiChekkuhyoEditor {
     private RString getChosaAnser09(RString chosakekkaNo) {
         RString chosaAnser = RString.EMPTY;
         if (!RString.isNullOrEmpty(chosakekkaNo)) {
-            chosaAnser = ChosaAnser09.toValue(new Code(chosakekkaNo)).get名称();
+            chosaAnser = ChosaAnser09.toValue(chosakekkaNo).get名称();
         }
         return chosaAnser;
     }
@@ -309,7 +308,7 @@ public class SaiChekkuhyoEditorImpl implements ISaiChekkuhyoEditor {
     private RString getChosaAnser10(RString chosakekkaNo) {
         RString chosaAnser = RString.EMPTY;
         if (!RString.isNullOrEmpty(chosakekkaNo)) {
-            chosaAnser = ChosaAnser10.toValue(new Code(chosakekkaNo)).get名称();
+            chosaAnser = ChosaAnser10.toValue(chosakekkaNo).get名称();
         }
         return chosaAnser;
     }
@@ -317,7 +316,7 @@ public class SaiChekkuhyoEditorImpl implements ISaiChekkuhyoEditor {
     private RString getChosaAnser11(RString chosakekkaNo) {
         RString chosaAnser = RString.EMPTY;
         if (!RString.isNullOrEmpty(chosakekkaNo)) {
-            chosaAnser = ChosaAnser11.toValue(new Code(chosakekkaNo)).get名称();
+            chosaAnser = ChosaAnser11.toValue(chosakekkaNo).get名称();
         }
         return chosaAnser;
     }
@@ -325,7 +324,7 @@ public class SaiChekkuhyoEditorImpl implements ISaiChekkuhyoEditor {
     private RString getChosaAnser12(RString chosakekkaNo) {
         RString chosaAnser = RString.EMPTY;
         if (!RString.isNullOrEmpty(chosakekkaNo)) {
-            chosaAnser = ChosaAnser12.toValue(new Code(chosakekkaNo)).get名称();
+            chosaAnser = ChosaAnser12.toValue(chosakekkaNo).get名称();
         }
         return chosaAnser;
     }
@@ -333,7 +332,7 @@ public class SaiChekkuhyoEditorImpl implements ISaiChekkuhyoEditor {
     private RString getChosaAnser13(RString chosakekkaNo) {
         RString chosaAnser = RString.EMPTY;
         if (!RString.isNullOrEmpty(chosakekkaNo)) {
-            chosaAnser = ChosaAnser13.toValue(new Code(chosakekkaNo)).get名称();
+            chosaAnser = ChosaAnser13.toValue(chosakekkaNo).get名称();
         }
         return chosaAnser;
     }
@@ -341,7 +340,7 @@ public class SaiChekkuhyoEditorImpl implements ISaiChekkuhyoEditor {
     private RString getChosaAnser14(RString chosakekkaNo) {
         RString chosaAnser = RString.EMPTY;
         if (!RString.isNullOrEmpty(chosakekkaNo)) {
-            chosaAnser = ChosaAnser14.toValue(new Code(chosakekkaNo)).get名称();
+            chosaAnser = ChosaAnser14.toValue(chosakekkaNo).get名称();
         }
         return chosaAnser;
     }
@@ -349,17 +348,19 @@ public class SaiChekkuhyoEditorImpl implements ISaiChekkuhyoEditor {
     private RString getChosaAnser15(RString chosakekkaNo) {
         RString chosaAnser = RString.EMPTY;
         if (!RString.isNullOrEmpty(chosakekkaNo)) {
-            chosaAnser = ChosaAnser15.toValue(new Code(chosakekkaNo)).get名称();
+            chosaAnser = ChosaAnser15.toValue(chosakekkaNo).get名称();
         }
         return chosaAnser;
     }
 
     private RString setChosaAnser16(RString chosakekkaNo) {
-        RString chosaAnser;
-        if (new RString(ChosaAnser16.ある.getコード().toString()).equals(chosakekkaNo)) {
+        RString chosaAnser = RString.EMPTY;
+        if (ChosaAnser16.ある.getコード().equals(chosakekkaNo)) {
             chosaAnser = ChosaAnser16.ある.get名称();
-        } else {
+        } else if (ChosaAnser16.ない.getコード().equals(chosakekkaNo)) {
             chosaAnser = ChosaAnser16.ない.get名称();
+        } else if (ChosaAnser16.ときどきある.getコード().equals(chosakekkaNo)) {
+            chosaAnser = ChosaAnser16.ときどきある.get名称();
         }
         return chosaAnser;
     }
@@ -367,7 +368,7 @@ public class SaiChekkuhyoEditorImpl implements ISaiChekkuhyoEditor {
     private RString getChosaAnser17(RString chosakekkaNo) {
         RString chosaAnser = RString.EMPTY;
         if (!RString.isNullOrEmpty(chosakekkaNo)) {
-            chosaAnser = ChosaAnser17.toValue(new Code(chosakekkaNo)).get名称();
+            chosaAnser = ChosaAnser17.toValue(chosakekkaNo).get名称();
         }
         return chosaAnser;
     }

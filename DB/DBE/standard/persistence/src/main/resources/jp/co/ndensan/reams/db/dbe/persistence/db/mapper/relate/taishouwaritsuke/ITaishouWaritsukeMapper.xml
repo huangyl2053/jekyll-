@@ -5,8 +5,8 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.taishouwaritsuke.ITaishouWaritsukeMapper">
-    <select id="getTaishouWaritsukeHead" resultType="jp.co.ndensan.reams.db.dbe.entity.taishouwaritsuke.TaishouWaritsukeHeadEntity"
-            parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
+    <select id="getTaishouWaritsukeHead" resultType="jp.co.ndensan.reams.db.dbe.entity.db.relate.taishouwaritsuke.TaishouWaritsukeHeadEntity"
+            parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500" resultOrdered="true">
         SELECT
         ('第'||dbt5501."shinsakaiKaisaiNo"||'回審査会') AS 審査会名称,
         DbT5591."gogitaiMei" AS 合議体名称,
@@ -33,7 +33,7 @@
         DbT5501."shinsakaiKaisaiNo" = #{kaisaiNo}
     </select>
 
-    <select id="getTaishouIchiran"  resultType="jp.co.ndensan.reams.db.dbe.entity.taishouwaritsuke.TaishouIchiranEntity" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.taishouwaritsuke.TaishouIchiranMapperParameter">
+    <select id="getTaishouIchiran"  resultType="jp.co.ndensan.reams.db.dbe.entity.db.relate.taishouwaritsuke.TaishouIchiranEntity" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.taishouwaritsuke.TaishouIchiranMapperParameter" resultOrdered="true">
         SELECT
         DbT5502."shinsakaiOrder" AS 介護認定審査会審査順,
         DbT5502."shinsakaiOrderKakuteiFlag" AS 介護認定審査会審査順確定フラグ,
@@ -121,7 +121,7 @@
         </if>
     </select>
 
-    <select id="getKohoshaIchiran"  resultType="jp.co.ndensan.reams.db.dbe.entity.taishouwaritsuke.KohoshaIchiranEntity" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.taishouwaritsuke.KohoshaIchiranMapperParameter">
+    <select id="getKohoshaIchiran"  resultType="jp.co.ndensan.reams.db.dbe.entity.db.relate.taishouwaritsuke.KohoshaIchiranEntity" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.taishouwaritsuke.KohoshaIchiranMapperParameter" resultOrdered="true">
         SELECT
         DbT5101."shinsakaiYusenWaritsukeKubunCode" AS 介護認定審査会優先振分区分コード,
         DbT5101."hihokenshaNo" AS 被保険者番号,
@@ -210,7 +210,7 @@
         DbT5101."ninteiShinseiYMD" ASC
     </select>
 
-    <select id="countShinsakaiWariateIinJoho"  resultType="int" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.taishouwaritsuke.CountShinsakaiWariateIinJohoMapperParameter">
+    <select id="countShinsakaiWariateIinJoho"  resultType="int" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.taishouwaritsuke.CountShinsakaiWariateIinJohoMapperParameter" resultOrdered="true">
         SELECT
         COUNT(0)
         FROM
@@ -244,7 +244,7 @@
         </if>
     </select>
 
-    <select id="countShinsakaiIinJogaiJoho"  resultType="int" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.taishouwaritsuke.CountShinsakaiIinJogaiJohoMapperParameter">
+    <select id="countShinsakaiIinJogaiJoho"  resultType="int" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.taishouwaritsuke.CountShinsakaiIinJogaiJohoMapperParameter" resultOrdered="true">
         SELECT
         COUNT(0)
         FROM

@@ -7,11 +7,14 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0050001
 
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050001.KakushuShinseishoHakkoDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0050001.KakushuShinseishoHakkoHandler;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 各種申請書の発行処理です。
@@ -59,7 +62,8 @@ public class KakushuShinseishoHakko {
     }
 
     private KakushuShinseishoHakkoHandler getHandler(KakushuShinseishoHakkoDiv div) {
-        return new KakushuShinseishoHakkoHandler(div);
+        return new KakushuShinseishoHakkoHandler(div,
+                ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class));
     }
 
 }

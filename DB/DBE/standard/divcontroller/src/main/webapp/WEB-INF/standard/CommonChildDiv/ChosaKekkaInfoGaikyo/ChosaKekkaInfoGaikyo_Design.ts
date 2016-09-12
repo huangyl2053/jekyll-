@@ -8,6 +8,10 @@ module DBE {
 
         export class Events {
 
+            public static onClick_Moderu(): string {
+                return "onClick_Moderu";
+            }
+
         }
 
         export class Controls {

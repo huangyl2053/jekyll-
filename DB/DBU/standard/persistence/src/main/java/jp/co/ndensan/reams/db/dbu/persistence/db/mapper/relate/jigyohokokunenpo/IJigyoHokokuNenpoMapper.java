@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyohokokunenpo;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbu.definition.jigyohokokunenpo.JigyoHokokuNenpoParameter;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokunenpo.JigyoHokokuNenpoParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
 
 /**

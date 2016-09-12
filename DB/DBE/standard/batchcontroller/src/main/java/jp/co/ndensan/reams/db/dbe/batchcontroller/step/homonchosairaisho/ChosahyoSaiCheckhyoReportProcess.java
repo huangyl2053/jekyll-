@@ -119,7 +119,6 @@ public class ChosahyoSaiCheckhyoReportProcess extends BatchProcessBase<HomonChos
 
     @Override
     protected void process(HomonChosaIraishoRelateEntity entity) {
-//        内部QA：614　Redmine：＃75422　排他制限の確認
         getcheckEntityList(entity);
         update認定調査依頼情報(entity);
     }
@@ -202,7 +201,7 @@ public class ChosahyoSaiCheckhyoReportProcess extends BatchProcessBase<HomonChos
         item.setZenkaiChosakekkaNo20(前回連番Map.get(NinteichosaKomokuMapping09B.聴力.getコード()));
         item.setZenkaiChosakekkaNo21(前回連番Map.get(NinteichosaKomokuMapping09B.移乗.getコード()));
         item.setZenkaiChosakekkaNo22(前回連番Map.get(NinteichosaKomokuMapping09B.移動.getコード()));
-        item.setZenkaiChosakekkaNo23(前回連番Map.get(NinteichosaKomokuMapping09B.嚥下.getコード()));
+        item.setZenkaiChosakekkaNo23(前回連番Map.get(NinteichosaKomokuMapping09B.えん下.getコード()));
         item.setZenkaiChosakekkaNo24(前回連番Map.get(NinteichosaKomokuMapping09B.食事摂取.getコード()));
         item.setZenkaiChosakekkaNo25(前回連番Map.get(NinteichosaKomokuMapping09B.排尿.getコード()));
         item.setZenkaiChosakekkaNo26(前回連番Map.get(NinteichosaKomokuMapping09B.排便.getコード()));
@@ -279,7 +278,7 @@ public class ChosahyoSaiCheckhyoReportProcess extends BatchProcessBase<HomonChos
         item.setKonkaiChosakekkaNo20(今回連番Map.get(NinteichosaKomokuMapping09B.聴力.getコード()));
         item.setKonkaiChosakekkaNo21(今回連番Map.get(NinteichosaKomokuMapping09B.移乗.getコード()));
         item.setKonkaiChosakekkaNo22(今回連番Map.get(NinteichosaKomokuMapping09B.移動.getコード()));
-        item.setKonkaiChosakekkaNo23(今回連番Map.get(NinteichosaKomokuMapping09B.嚥下.getコード()));
+        item.setKonkaiChosakekkaNo23(今回連番Map.get(NinteichosaKomokuMapping09B.えん下.getコード()));
         item.setKonkaiChosakekkaNo24(今回連番Map.get(NinteichosaKomokuMapping09B.食事摂取.getコード()));
         item.setKonkaiChosakekkaNo25(今回連番Map.get(NinteichosaKomokuMapping09B.排尿.getコード()));
         item.setKonkaiChosakekkaNo26(今回連番Map.get(NinteichosaKomokuMapping09B.排便.getコード()));

@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.ShisetsuJohoCommonChildDiv;
 
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShisetsuType;
+import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.ShisetsuJohoCommonChildDivDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.ShisetsuJohoHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -43,7 +43,7 @@ public class ShisetsuJohoCommonChildDiv {
         JigyoshaMode mode = new JigyoshaMode();
 
         if (requestDiv.getRadKaigoHokenShisetsu().getSelectedKey() != null
-                && !requestDiv.getRadKaigoHokenShisetsu().getSelectedKey().isEmpty()) {
+            && !requestDiv.getRadKaigoHokenShisetsu().getSelectedKey().isEmpty()) {
 
             mode.setJigyoshaShubetsu(requestDiv.getRadKaigoHokenShisetsu().getSelectedKey());
             requestDiv.getRadKaigoHokenShisetsu().getDisabledItem().clear();
@@ -52,7 +52,7 @@ public class ShisetsuJohoCommonChildDiv {
         }
 
         if (requestDiv.getRadOtherTokureiShisetsu().getSelectedKey() != null
-                && !requestDiv.getRadOtherTokureiShisetsu().getSelectedKey().isEmpty()) {
+            && !requestDiv.getRadOtherTokureiShisetsu().getSelectedKey().isEmpty()) {
 
             mode.setJigyoshaShubetsu(requestDiv.getRadOtherTokureiShisetsu().getSelectedKey());
             requestDiv.getRadKaigoHokenShisetsu().getDisabledItem().clear();
@@ -61,7 +61,7 @@ public class ShisetsuJohoCommonChildDiv {
         }
 
         if (requestDiv.getRadTekiyoJyogaiShisetsu().getSelectedKey() != null
-                && !requestDiv.getRadTekiyoJyogaiShisetsu().getSelectedKey().isEmpty()) {
+            && !requestDiv.getRadTekiyoJyogaiShisetsu().getSelectedKey().isEmpty()) {
 
             mode.setJigyoshaShubetsu(requestDiv.getRadTekiyoJyogaiShisetsu().getSelectedKey());
             requestDiv.getRadKaigoHokenShisetsu().getDisabledItem().clear();
@@ -70,13 +70,13 @@ public class ShisetsuJohoCommonChildDiv {
         }
 
         if ((requestDiv.getRadKaigoHokenShisetsu().getSelectedKey() == null
-                || requestDiv.getRadKaigoHokenShisetsu().getSelectedKey().isEmpty())
-                && (requestDiv.getRadOtherTokureiShisetsu().getSelectedKey() == null
+             || requestDiv.getRadKaigoHokenShisetsu().getSelectedKey().isEmpty())
+            && (requestDiv.getRadOtherTokureiShisetsu().getSelectedKey() == null
                 || requestDiv.getRadOtherTokureiShisetsu().getSelectedKey().isEmpty())
-                && (requestDiv.getRadTekiyoJyogaiShisetsu().getSelectedKey() == null
+            && (requestDiv.getRadTekiyoJyogaiShisetsu().getSelectedKey() == null
                 || requestDiv.getRadTekiyoJyogaiShisetsu().getSelectedKey().isEmpty())) {
 
-            mode.setJigyoshaShubetsu(ShisetsuType.適用除外施設.getCode());
+            mode.setJigyoshaShubetsu(ShisetsuType.適用除外施設.getコード());
         }
 
         requestDiv.setJigyoshaMode(DataPassingConverter.serialize(mode));
@@ -93,8 +93,12 @@ public class ShisetsuJohoCommonChildDiv {
 
         JigyoshaMode mode = DataPassingConverter.deserialize(requestDiv.getJigyoshaMode(), JigyoshaMode.class);
 
-        requestDiv.getTxtNyuryokuShisetsuKodo().setValue(mode.getJigyoshaNo().value());
-        requestDiv.getTxtNyuryokuShisetsuMeisho().setValue(mode.getJigyoshaName().value());
+        if (mode.getJigyoshaNo() != null) {
+            requestDiv.getTxtNyuryokuShisetsuKodo().setValue(mode.getJigyoshaNo().value());
+        }
+        if (mode.getJigyoshaName() != null) {
+            requestDiv.getTxtNyuryokuShisetsuMeisho().setValue(mode.getJigyoshaName().value());
+        }
         return ResponseData.of(requestDiv).respond();
     }
 

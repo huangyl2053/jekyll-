@@ -5,14 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320002;
 
-import jp.co.ndensan.reams.db.dbb.business.viewstate.FukaShokaiKey;
-import jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.DbbViewStateKey;
+import jp.co.ndensan.reams.db.dbb.business.core.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
 import static jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320002.DBB0320002TransitionEventName.履歴一覧;
 import static jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320002.DBB0320002TransitionEventName.期割;
 import static jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320002.DBB0320002TransitionEventName.減免;
 import static jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320002.DBB0320002TransitionEventName.特別徴収;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320002.SetaiinFukaShokaiControlDiv;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -75,7 +75,7 @@ public class SetaiinFukaShokaiControl {
 
         // 賦課照会コントロールキーより、ViewStateに賦課履歴表示情報を保存する。
         FukaShokaiKey key = FukaShokaiController.getFukaShokaiKeyInViewState();
-        ViewStateHolder.put(DbbViewStateKey.FukaShokaiKey, key);
+        ViewStateHolder.put(ViewStateKeys.賦課照会キー, key);
         // 賦課履歴へ遷移する。
         return ResponseData.of(div).forwardWithEventName(履歴一覧).respond();
     }
@@ -90,7 +90,7 @@ public class SetaiinFukaShokaiControl {
 
         // 賦課照会コントロールキーを渡す。
         FukaShokaiKey key = FukaShokaiController.getFukaShokaiKeyInViewState();
-        ViewStateHolder.put(DbbViewStateKey.FukaShokaiKey, key);
+        ViewStateHolder.put(ViewStateKeys.賦課照会キー, key);
         // 賦課根拠・期割へ遷移する。
         return ResponseData.of(div).forwardWithEventName(期割).respond();
 
@@ -106,7 +106,7 @@ public class SetaiinFukaShokaiControl {
 
         // 賦課照会コントロールキーを渡す。
         FukaShokaiKey key = FukaShokaiController.getFukaShokaiKeyInViewState();
-        ViewStateHolder.put(DbbViewStateKey.FukaShokaiKey, key);
+        ViewStateHolder.put(ViewStateKeys.賦課照会キー, key);
         // 特別徴収へ遷移する。
         return ResponseData.of(div).forwardWithEventName(特別徴収).respond();
 
@@ -122,7 +122,7 @@ public class SetaiinFukaShokaiControl {
 
         // 賦課照会コントロールキーを渡す。
         FukaShokaiKey key = FukaShokaiController.getFukaShokaiKeyInViewState();
-        ViewStateHolder.put(DbbViewStateKey.FukaShokaiKey, key);
+        ViewStateHolder.put(ViewStateKeys.賦課照会キー, key);
         // 減免・徴収猶予へ遷移する。
         return ResponseData.of(div).forwardWithEventName(減免).respond();
 

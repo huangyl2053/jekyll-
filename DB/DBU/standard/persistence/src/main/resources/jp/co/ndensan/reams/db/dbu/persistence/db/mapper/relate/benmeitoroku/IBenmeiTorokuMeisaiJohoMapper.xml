@@ -3,8 +3,8 @@
 <!-- @reamsid_L DBU-1080-020  lijia -->
 <mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.benmeitoroku.IBenmeiTorokuMeisaiJohoMapper">
 
-    <select id="getBenmeiTorokuMeisaiJoho" resultMap="resultMap_BenmeiTorokuMeisaiJohoEntity" 
-            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatis.param.benmeitoroku.BenmeiTorokuMeisaiJohoParameter" fetchSize="500">
+    <select resultOrdered="true" id="getBenmeiTorokuMeisaiJoho" resultMap="resultMap_BenmeiTorokuMeisaiJohoEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.benmeitoroku.BenmeiTorokuMeisaiJohoParameter" fetchSize="500">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.benmeitoroku.IBenmeiTorokuMeisaiJohoMapper.allColumns_BenmeiTorokuMeisaiJoho" />
         FROM

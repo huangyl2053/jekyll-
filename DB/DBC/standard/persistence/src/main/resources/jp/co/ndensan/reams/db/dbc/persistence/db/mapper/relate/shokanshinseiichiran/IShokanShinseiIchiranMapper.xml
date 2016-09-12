@@ -15,7 +15,7 @@
         <result property="jigyoshaNo" column="jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
          <result property="meisaiNo" column="meisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-    <select id="select償還払支給申請リスト照会"
+    <select resultOrdered="true" id="select償還払支給申請リスト照会"
             resultMap="ShokanShinseiIchiranRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanshinseiichiran.ShokanShinseiIchiranParameter" fetchSize="500">
         SELECT
@@ -95,7 +95,7 @@
         shokanShinsei."serviceTeikyoYM" DESC,
         shokanShinsei."seiriNo" DESC
     </select>
-    <select id="select償還払支給申請リスト申請"
+    <select resultOrdered="true" id="select償還払支給申請リスト申請"
             resultMap="ShokanShinseiIchiranRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanshinseiichiran.ShokanShinseiIchiranParameter" fetchSize="500">
 
@@ -172,7 +172,7 @@
         shokanShinsei."serviceTeikyoYM" DESC,
         shokanShinsei."seiriNo" DESC
     </select>
-    <select id="select償還払支給申請情報件数取得"
+    <select resultOrdered="true" id="select償還払支給申請情報件数取得"
             resultType="java.lang.Integer"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanshinseiichiran.ShokanShinseiIchiranParameterCount" fetchSize="500">
         SELECT

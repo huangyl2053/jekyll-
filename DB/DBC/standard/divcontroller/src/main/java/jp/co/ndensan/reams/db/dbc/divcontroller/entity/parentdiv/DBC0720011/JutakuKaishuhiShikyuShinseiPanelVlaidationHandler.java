@@ -5,13 +5,19 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0720011;
 
-import jp.co.ndensan.reams.db.dbc.definition.message.jutakukaishuhishikyushinsei.JutakuKaishuhiShikyuShinseiErrorMessages;
+import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0720011.MishinsaShikyuShinseiListPanelValidator;
 import jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0720011.SearchConditionToMishinsaShikyuShinseiPanelValidator;
 import jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0720011.ShinsaButtonDivValidator;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationDictionary;
 import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationDictionaryBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -22,6 +28,10 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class JutakuKaishuhiShikyuShinseiPanelVlaidationHandler {
 
     private final JutakuKaishuhiShikyuShinseiPanelDiv div;
+    private static final RString メッセージ_申請日 = new RString("支給申請日（FROM)と支給申請日（TO)");
+    private static final RString メッセージ_申請日FROM = new RString("支給申請日（FROM)");
+    private static final RString メッセージ_申請日TO = new RString("支給申請日（TO)");
+    private static final RString メッセージ_決定日 = new RString("決定日");
 
     /**
      * コンストラクタです
@@ -101,5 +111,27 @@ public class JutakuKaishuhiShikyuShinseiPanelVlaidationHandler {
                         div.getMishinsaShikyuShinseiListPanel().getDgMishinsaShikyuShinsei())
                 .add(JutakuKaishuhiShikyuShinseiErrorMessages.決定日のチェック,
                         div.getMishinsaShikyuShinseiListPanel().getTxtKetteiYMD()).build();
+    }
+
+    private static enum JutakuKaishuhiShikyuShinseiErrorMessages implements IValidationMessage {
+
+        支給申請日FROMと支給申請日TOの必須チェック(UrErrorMessages.必須項目_追加メッセージあり, メッセージ_申請日.toString()),
+        支給申請日FROMと支給申請日TOの有効性チェック(DbzErrorMessages.期間が不正_未来日付不可, メッセージ_申請日FROM.toString(),
+                メッセージ_申請日TO.toString()),
+        データ選択のチェック(UrErrorMessages.対象行を選択),
+        未審査のチェック(DbcErrorMessages.未審査有りで保存不可),
+        決定日のチェック(UrErrorMessages.必須項目_追加メッセージあり, メッセージ_決定日.toString());
+
+        private final Message message;
+
+        private JutakuKaishuhiShikyuShinseiErrorMessages(IMessageGettable message, String... replacements) {
+            this.message = message.getMessage().replace(replacements);
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
+
     }
 }

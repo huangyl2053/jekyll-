@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1140011.DBA1
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1140011.JukiNendoTorokushaListDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1140011.JukinenTotorokuValidationHandler;
 import jp.co.ndensan.reams.db.dba.service.core.jukirendotorokushalist.JukiRendoTorokushaListFinder;
+import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
+import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -108,6 +110,8 @@ public class JukiNendoTorokushaList {
                 div.getTxtkonkaishuryo().getValue(),
                 div.getChktaishodaicho().getSelectedKeys(),
                 RString.EMPTY);
+        IUrControlData controlData = UrControlDataFactory.createInstance();
+        parameter.setLoginUserId(controlData.getLoginInfo().getUserId());
         return ResponseData.of(parameter).forwardWithEventName(DBA1140011TransitionEventName.処理終了).respond();
     }
 

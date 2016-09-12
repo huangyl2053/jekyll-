@@ -5,7 +5,7 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteischedule.ninteichosaschedule.INinteichosaScheduleMapper">
 
-    <select id="select認定調査スケジュール情報ByKey" resultMap="resultMap_NinteichosaScheduleEntity" fetchSize="500">
+    <select resultOrdered="true" id="select認定調査スケジュール情報ByKey" resultMap="resultMap_NinteichosaScheduleEntity" fetchSize="500">
         <include refid="selectNinteichosaScheduleEntity" />
     </select>
 

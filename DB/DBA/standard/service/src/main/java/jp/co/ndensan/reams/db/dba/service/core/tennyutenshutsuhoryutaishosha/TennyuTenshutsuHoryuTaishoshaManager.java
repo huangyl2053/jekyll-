@@ -7,21 +7,29 @@ package jp.co.ndensan.reams.db.dba.service.core.tennyutenshutsuhoryutaishosha;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.business.core.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanri;
-import jp.co.ndensan.reams.db.dba.business.core.tennyutenshutsuhoryutaishosha.ITennyuTenshutsuHoryuTaishosha;
-import jp.co.ndensan.reams.db.dba.business.core.tennyutenshutsuhoryutaishosha.TennyushutsuHoryuTaishoshaBusiness;
-import jp.co.ndensan.reams.db.dba.business.core.tennyutenshutsuhoryutaishosha.TenshutsuHoryuTaishoshaBusiness;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.tennyutenshutsuhoryutaishosha.TennyushutsuHoryuTaishoshaEntity;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.tennyutenshutsuhoryutaishosha.TenshutsuHoryuTaishoshaEntity;
+import java.util.Map;
+import jp.co.ndensan.reams.db.dba.business.core.tennyutenshutsuhoryu.TennyuHoryuTaisho;
+import jp.co.ndensan.reams.db.dba.business.core.tennyutenshutsuhoryu.TenshutsuHoryuTaisho;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.tennyutenshutsuhoryu.TennyushutsuHoryuTaishoshaRelateEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.tennyutenshutsuhoryu.TenshutsuHoryuTaishoshaRelateEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tennyutenshutsuhoryutaishosha.ITennyuTenshutsuHoryuTaishoshaMapper;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.TennyushutsuHoryuTaishosha;
 import jp.co.ndensan.reams.db.dbz.business.core.TenshutsuHoryuTaishosha;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1010TennyushutsuHoryuTaishoshaEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1011TenshutsuHoryuTaishoshaEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1010TennyushutsuHoryuTaishoshaDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1011TenshutsuHoryuTaishoshaDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.kojin._KojinManager;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -34,15 +42,19 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class TennyuTenshutsuHoryuTaishoshaManager {
 
     private final MapperProvider mapperProvider;
+    private final DbT1001HihokenshaDaichoDac hihokenshaDaichoDac;
     private final DbT1011TenshutsuHoryuTaishoshaDac tenshutsuHoryuTaishoshaDac;
     private final DbT1010TennyushutsuHoryuTaishoshaDac tennyushutsuHoryuTaishoshaDac;
 
     /**
      * コンストラクタです。
      */
-    TennyuTenshutsuHoryuTaishoshaManager(MapperProvider mapperProvider, DbT1011TenshutsuHoryuTaishoshaDac tenshutsuHoryuTaishoshaDac,
+    TennyuTenshutsuHoryuTaishoshaManager(MapperProvider mapperProvider,
+            DbT1001HihokenshaDaichoDac hihokenshaDaichoDac,
+            DbT1011TenshutsuHoryuTaishoshaDac tenshutsuHoryuTaishoshaDac,
             DbT1010TennyushutsuHoryuTaishoshaDac tennyushutsuHoryuTaishoshaDac) {
         this.mapperProvider = mapperProvider;
+        this.hihokenshaDaichoDac = hihokenshaDaichoDac;
         this.tenshutsuHoryuTaishoshaDac = tenshutsuHoryuTaishoshaDac;
         this.tennyushutsuHoryuTaishoshaDac = tennyushutsuHoryuTaishoshaDac;
     }
@@ -52,6 +64,7 @@ public class TennyuTenshutsuHoryuTaishoshaManager {
      */
     public TennyuTenshutsuHoryuTaishoshaManager() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
+        this.hihokenshaDaichoDac = InstanceProvider.create(DbT1001HihokenshaDaichoDac.class);
         this.tenshutsuHoryuTaishoshaDac = InstanceProvider.create(DbT1011TenshutsuHoryuTaishoshaDac.class);
         this.tennyushutsuHoryuTaishoshaDac = InstanceProvider.create(DbT1010TennyushutsuHoryuTaishoshaDac.class);
     }
@@ -68,18 +81,18 @@ public class TennyuTenshutsuHoryuTaishoshaManager {
     /**
      * 転出保留対象者情報の取得処理します。
      *
-     * @return SearchResult<ITennyuTenshutsuHoryuTaishosha>
+     * @return SearchResult<TenshutsuHoryuTaisho>
      */
     @Transaction
-    public SearchResult<ITennyuTenshutsuHoryuTaishosha> getTenshutsuHoryuTaishoshaList() {
+    public SearchResult<TenshutsuHoryuTaisho> getTenshutsuHoryuTaishoshas() {
         ITennyuTenshutsuHoryuTaishoshaMapper mapper = mapperProvider.create(ITennyuTenshutsuHoryuTaishoshaMapper.class);
-        List<TennyushutsuHoryuTaishoshaEntity> entityList = mapper.get転出保留対象者情報の取得処理();
+        List<TenshutsuHoryuTaishoshaRelateEntity> entityList = mapper.get転出保留対象者情報の取得処理();
         if (entityList.isEmpty()) {
-            return SearchResult.of(Collections.<ShikakuShutokuJogaishaKanri>emptyList(), 0, false);
+            return SearchResult.of(Collections.<TenshutsuHoryuTaisho>emptyList(), 0, false);
         }
-        List<ITennyuTenshutsuHoryuTaishosha> businessList = new ArrayList<>();
-        for (TennyushutsuHoryuTaishoshaEntity entity : entityList) {
-            businessList.add(new TennyushutsuHoryuTaishoshaBusiness(entity));
+        List<TenshutsuHoryuTaisho> businessList = new ArrayList<>();
+        for (TenshutsuHoryuTaishoshaRelateEntity entity : entityList) {
+            businessList.add(new TenshutsuHoryuTaisho(entity));
         }
         return SearchResult.of(businessList, 0, false);
     }
@@ -87,18 +100,18 @@ public class TennyuTenshutsuHoryuTaishoshaManager {
     /**
      * 転入保留対象者情報の取得処理します。
      *
-     * @return SearchResult<ITennyuTenshutsuHoryuTaishosha>
+     * @return SearchResult<TennyuHoryuTaisho>
      */
     @Transaction
-    public SearchResult<ITennyuTenshutsuHoryuTaishosha> getTennyuHoryuTaishoshaList() {
+    public SearchResult<TennyuHoryuTaisho> getTennyuHoryuTaishoshas() {
         ITennyuTenshutsuHoryuTaishoshaMapper mapper = mapperProvider.create(ITennyuTenshutsuHoryuTaishoshaMapper.class);
-        List<TenshutsuHoryuTaishoshaEntity> entityList = mapper.get転入保留対象者情報の取得処理();
+        List<TennyushutsuHoryuTaishoshaRelateEntity> entityList = mapper.get転入保留対象者情報の取得処理();
         if (entityList.isEmpty()) {
-            return SearchResult.of(Collections.<ShikakuShutokuJogaishaKanri>emptyList(), 0, false);
+            return SearchResult.of(Collections.<TennyuHoryuTaisho>emptyList(), 0, false);
         }
-        List<ITennyuTenshutsuHoryuTaishosha> businessList = new ArrayList<>();
-        for (TenshutsuHoryuTaishoshaEntity entity : entityList) {
-            businessList.add(new TenshutsuHoryuTaishoshaBusiness(entity));
+        List<TennyuHoryuTaisho> businessList = new ArrayList<>();
+        for (TennyushutsuHoryuTaishoshaRelateEntity entity : entityList) {
+            businessList.add(new TennyuHoryuTaisho(entity));
         }
         return SearchResult.of(businessList, 0, false);
     }
@@ -106,18 +119,18 @@ public class TennyuTenshutsuHoryuTaishoshaManager {
     /**
      * 広域保留対象者 情報の取得処理します。
      *
-     * @return SearchResult<ITennyuTenshutsuHoryuTaishosha>
+     * @return SearchResult<TennyuHoryuTaisho>
      */
     @Transaction
-    public SearchResult<ITennyuTenshutsuHoryuTaishosha> getKoikiHoryuTaishoshaList() {
+    public SearchResult<TennyuHoryuTaisho> getKoikiHoryuTaishoshas() {
         ITennyuTenshutsuHoryuTaishoshaMapper mapper = mapperProvider.create(ITennyuTenshutsuHoryuTaishoshaMapper.class);
-        List<TenshutsuHoryuTaishoshaEntity> entityList = mapper.get広域保留対象者情報の取得処理();
+        List<TennyushutsuHoryuTaishoshaRelateEntity> entityList = mapper.get広域保留対象者情報の取得処理();
         if (entityList.isEmpty()) {
-            return SearchResult.of(Collections.<ShikakuShutokuJogaishaKanri>emptyList(), 0, false);
+            return SearchResult.of(Collections.<TennyuHoryuTaisho>emptyList(), 0, false);
         }
-        List<ITennyuTenshutsuHoryuTaishosha> businessList = new ArrayList<>();
-        for (TenshutsuHoryuTaishoshaEntity entity : entityList) {
-            businessList.add(new TenshutsuHoryuTaishoshaBusiness(entity));
+        List<TennyuHoryuTaisho> businessList = new ArrayList<>();
+        for (TennyushutsuHoryuTaishoshaRelateEntity entity : entityList) {
+            businessList.add(new TennyuHoryuTaisho(entity));
         }
         return SearchResult.of(businessList, 0, false);
     }
@@ -129,7 +142,7 @@ public class TennyuTenshutsuHoryuTaishoshaManager {
      * @return true:削除した false:削除しない
      */
     @Transaction
-    public boolean delTenshutsuHoryuTaishosha(TenshutsuHoryuTaishosha 転出保留対象者) {
+    public boolean delete転出保留対象者(TenshutsuHoryuTaishosha 転出保留対象者) {
         return 1 == tenshutsuHoryuTaishoshaDac.deletePhysical(転出保留対象者.toEntity());
     }
 
@@ -140,37 +153,46 @@ public class TennyuTenshutsuHoryuTaishoshaManager {
      * @return true:削除した false:削除しない
      */
     @Transaction
-    public boolean delTennyushutsuHoryuTaishosha(TennyushutsuHoryuTaishosha 転入保留対象者) {
+    public boolean delete転入保留対象者(TennyushutsuHoryuTaishosha 転入保留対象者) {
         return 1 == tennyushutsuHoryuTaishoshaDac.deletePhysical(転入保留対象者.toEntity());
     }
 
     /**
-     * 転入保留対象者情報を取得します。
+     * 宛名Mapを取得します。
      *
-     * @return SearchResult<TennyushutsuHoryuTaishosha>
+     * @param 識別コードList List<ShikibetsuCode>
+     * @return 宛名Map
      */
     @Transaction
-    public SearchResult<TennyushutsuHoryuTaishosha> getAllTennyuHoryuTaishosha() {
-        List<TennyushutsuHoryuTaishosha> 対象者List = new ArrayList<>();
-        List<DbT1010TennyushutsuHoryuTaishoshaEntity> list = tennyushutsuHoryuTaishoshaDac.selectAll();
-        for (DbT1010TennyushutsuHoryuTaishoshaEntity entity : list) {
-            対象者List.add(new TennyushutsuHoryuTaishosha(entity));
+    public Map<ShikibetsuCode, IKojin> get宛名Map(List<ShikibetsuCode> 識別コードList) {
+        IShikibetsuTaishoSearchKey 識別対象検索キー = new ShikibetsuTaishoSearchKeyBuilder(
+                ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true)
+                .set識別コードリスト(識別コードList).build();
+        List<IKojin> 宛名 = new _KojinManager().get個人s(識別対象検索キー);
+        Map<ShikibetsuCode, IKojin> 宛名Map = new HashMap<>();
+        for (IKojin iKojin : 宛名) {
+            宛名Map.put(iKojin.get識別コード(), iKojin);
         }
-        return SearchResult.of(対象者List, 0, false);
+        return 宛名Map;
     }
 
     /**
-     * 転出保留対象者情報を取得します。
+     * 転出保留対象者情報を一括喪失します。
      *
-     * @return SearchResult<TennyushutsuHoryuTaishosha>
+     * @param 被保険者台帳 List<HihokenshaDaicho>
+     * @param 転出保留対象者 List<TenshutsuHoryuTaishosha>
      */
     @Transaction
-    public SearchResult<TenshutsuHoryuTaishosha> getAllTenshutsuHoryuTaishosha() {
-        List<TenshutsuHoryuTaishosha> 対象者List = new ArrayList<>();
-        List<DbT1011TenshutsuHoryuTaishoshaEntity> list = tenshutsuHoryuTaishoshaDac.selectAll();
-        for (DbT1011TenshutsuHoryuTaishoshaEntity entity : list) {
-            対象者List.add(new TenshutsuHoryuTaishosha(entity));
+    public void do一括喪失(List<HihokenshaDaicho> 被保険者台帳, List<TenshutsuHoryuTaishosha> 転出保留対象者) {
+        save被保険者台帳(被保険者台帳);
+        for (TenshutsuHoryuTaishosha taishosha : 転出保留対象者) {
+            delete転出保留対象者(taishosha);
         }
-        return SearchResult.of(対象者List, 0, false);
+    }
+
+    private void save被保険者台帳(List<HihokenshaDaicho> 被保険者台帳) {
+        for (HihokenshaDaicho hihokenshaDaicho : 被保険者台帳) {
+            hihokenshaDaichoDac.save(hihokenshaDaicho.toEntity());
+        }
     }
 }

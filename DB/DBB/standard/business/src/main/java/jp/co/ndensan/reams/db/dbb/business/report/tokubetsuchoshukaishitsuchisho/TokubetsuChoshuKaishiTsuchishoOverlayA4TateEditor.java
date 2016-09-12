@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 特別徴収開始通知書（本算定） A4縦・オーバレイタイプ帳票Editor
@@ -197,13 +196,13 @@ public class TokubetsuChoshuKaishiTsuchishoOverlayA4TateEditor implements ITokub
         source.hokenryoGaku12Gatsu2 = set特徴期別金額(特徴期別金額5期);
         if (編集後本算定通知書共通情報.get更正後() != null) {
             if (編集後本算定通知書共通情報.get更正後().get保険料率() != null) {
-                source.hokenryoRitsu = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get更正後().get保険料率(), 0);
+                source.hokenryoRitsu = new RString(編集後本算定通知書共通情報.get更正後().get保険料率().toString());
             }
             if (編集後本算定通知書共通情報.get更正後().get確定保険料_年額() != null) {
-                source.nendoHokenryo = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get更正後().get確定保険料_年額(), 0);
+                source.nendoHokenryo = new RString(編集後本算定通知書共通情報.get更正後().get確定保険料_年額().toString());
             }
             if (編集後本算定通知書共通情報.get更正後().get普通徴収額合計() != null) {
-                source.fuchoNofugaku = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get更正後().get普通徴収額合計(), 0);
+                source.fuchoNofugaku = new RString(編集後本算定通知書共通情報.get更正後().get普通徴収額合計().toString());
             }
         }
         source.hokenryoGaku8Gatsu = set特徴期別金額(特徴期別金額3期);
@@ -232,7 +231,7 @@ public class TokubetsuChoshuKaishiTsuchishoOverlayA4TateEditor implements ITokub
                 金額3期 = 特徴期別金額.get金額();
             }
         }
-        return DecimalFormatter.toコンマ区切りRString(金額1期.add(金額2期).add(金額3期), 0);
+        return new RString(金額1期.add(金額2期).add(金額3期).toString());
     }
 
     /**
@@ -253,7 +252,7 @@ public class TokubetsuChoshuKaishiTsuchishoOverlayA4TateEditor implements ITokub
                 break;
             }
         }
-        return DecimalFormatter.toコンマ区切りRString(金額, 0);
+        return new RString(金額.toString());
     }
 
     /**
@@ -274,6 +273,6 @@ public class TokubetsuChoshuKaishiTsuchishoOverlayA4TateEditor implements ITokub
                 break;
             }
         }
-        return DecimalFormatter.toコンマ区切りRString(金額, 0);
+        return new RString(金額.toString());
     }
 }

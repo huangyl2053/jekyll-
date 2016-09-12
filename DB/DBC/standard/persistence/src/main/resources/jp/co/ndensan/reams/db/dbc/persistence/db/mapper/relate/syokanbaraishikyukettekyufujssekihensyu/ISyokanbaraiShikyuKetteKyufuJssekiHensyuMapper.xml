@@ -7,7 +7,7 @@
                     
     <select id="get宛名"
             resultMap="resultMap_DealKyufujissekiEntity"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraishikyukettekyufujssekihensyu.SyokanbaraiShikyuKetteKyufuJssekiHensyuParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraishikyukettekyufujssekihensyu.SyokanbaraiShikyuKetteKyufuJssekiHensyuParameter" fetchSize="500" resultOrdered="true">
             SELECT 
              T1."seinengappiYMD",
              T1."seibetsuCode"

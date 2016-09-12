@@ -15,7 +15,9 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
@@ -25,7 +27,6 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
  */
 public class NenreiTotatsushaTorokuListBatch {
 
-    private static final RString 印刷時刻 = new RString("   時  分  秒");
     private static final RString 被保険者氏名 = new RString("該当データがありません");
 
     /**
@@ -37,13 +38,10 @@ public class NenreiTotatsushaTorokuListBatch {
     public List<NenreitotatsuKakuninListItem> getNenreiTotatsushaTorokuChohyoData(
             NenreiTotatsuTorokushaListEntity entity) {
         List<NenreitotatsuKakuninListItem> list = new ArrayList();
-        RDate nowDate = RDate.getNowDate();
-        RString 印刷日時 = nowDate.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         for (NenreiTotatsushaJouhouEntity nenreiTotatsushaJouhouEntity : entity.get年齢到達者情報()) {
             NenreiTotatsuTorokushaListTyouHyouListEntity tyouHyouListEntity
                     = new NenreiTotatsuTorokushaListTyouHyouListEntity();
-            tyouHyouListEntity.set印刷日時(new RString(印刷日時.toString() + 印刷時刻.toString()));
+            tyouHyouListEntity.set印刷日時(get印刷日時());
             tyouHyouListEntity.set市町村コード(new RString(entity.get市町村コード().toString()));
             tyouHyouListEntity.set市町村名(entity.get市町村名());
             tyouHyouListEntity.set並び順１(entity.get並び順_1());
@@ -51,6 +49,11 @@ public class NenreiTotatsushaTorokuListBatch {
             tyouHyouListEntity.set並び順３(entity.get並び順_3());
             tyouHyouListEntity.set並び順４(entity.get並び順_4());
             tyouHyouListEntity.set並び順５(entity.get並び順_5());
+            tyouHyouListEntity.set改頁１(entity.get改頁１());
+            tyouHyouListEntity.set改頁２(entity.get改頁２());
+            tyouHyouListEntity.set改頁３(entity.get改頁３());
+            tyouHyouListEntity.set改頁４(entity.get改頁４());
+            tyouHyouListEntity.set改頁５(entity.get改頁５());
             if (nenreiTotatsushaJouhouEntity.get識別コード() == null) {
                 set帳票データ作成用Entityの部分項目(tyouHyouListEntity, nenreiTotatsushaJouhouEntity);
                 tyouHyouListEntity.setリスト下_被保険者氏名(被保険者氏名);
@@ -124,11 +127,6 @@ public class NenreiTotatsushaTorokuListBatch {
             NenreiTotatsuTorokushaListTyouHyouListEntity tyouHyouListEntity,
             NenreiTotatsushaJouhouEntity nenreiTotatsushaJouhouEntity) {
         tyouHyouListEntity.set対象情報タイトル(nenreiTotatsushaJouhouEntity.get対象情報タイトル());
-        tyouHyouListEntity.set改頁１(nenreiTotatsushaJouhouEntity.get改頁１());
-        tyouHyouListEntity.set改頁２(nenreiTotatsushaJouhouEntity.get改頁２());
-        tyouHyouListEntity.set改頁３(nenreiTotatsushaJouhouEntity.get改頁３());
-        tyouHyouListEntity.set改頁４(nenreiTotatsushaJouhouEntity.get改頁４());
-        tyouHyouListEntity.set改頁５(nenreiTotatsushaJouhouEntity.get改頁５());
         tyouHyouListEntity.set開始タイトル(nenreiTotatsushaJouhouEntity.get開始タイトル());
         tyouHyouListEntity.set終了タイトル(nenreiTotatsushaJouhouEntity.get終了タイトル());
         tyouHyouListEntity.set区分タイトル(nenreiTotatsushaJouhouEntity.get区分タイトル());
@@ -236,5 +234,24 @@ public class NenreiTotatsushaTorokuListBatch {
         tyouHyouListEntity.setリスト下_異動情報4(nenreiTotatsushaJouhouEntity.get異動情報データ4());
         tyouHyouListEntity.setリスト下_異動情報5(nenreiTotatsushaJouhouEntity.get異動情報データ5());
         tyouHyouListEntity.setリスト下_異動情報6(nenreiTotatsushaJouhouEntity.get異動情報データ6());
+    }
+
+    private static RString get印刷日時() {
+        RStringBuilder systemDateTime = new RStringBuilder();
+        RDateTime datetime = RDate.getNowDateTime();
+        systemDateTime.append(datetime.getDate().wareki().eraType(EraType.KANJI).
+                firstYear(FirstYear.GAN_NEN).
+                separator(Separator.JAPANESE).
+                fillType(FillType.BLANK).toDateString());
+        systemDateTime.append(RString.HALF_SPACE);
+        systemDateTime.append(String.format("%2d", datetime.getHour()));
+        systemDateTime.append(new RString("時"));
+        systemDateTime.append(String.format("%2d", datetime.getMinute()));
+        systemDateTime.append(new RString("分"));
+        systemDateTime.append(String.format("%2d", datetime.getSecond()));
+        systemDateTime.append(new RString("秒"));
+        systemDateTime.append(RString.HALF_SPACE);
+        systemDateTime.append(new RString("作成"));
+        return systemDateTime.toRString();
     }
 }

@@ -15,7 +15,8 @@ public enum DBD2010001TransitionEventName implements IContainerEvents {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     処理完了("処理完了"),
-    検索に戻る("検索に戻る");
+    検索条件へ("検索条件へ"),
+    検索結果一覧へ("検索結果一覧へ");
 
     private final RString name;
 

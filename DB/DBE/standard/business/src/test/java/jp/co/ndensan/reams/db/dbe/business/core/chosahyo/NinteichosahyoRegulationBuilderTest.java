@@ -4,16 +4,17 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.chosahyo;
 
+import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.ChoiceItem;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ChoiceResultItem;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.chosahyo.INinteichosaItemGroup;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.chosahyo.INinteichosaItemSubGroup;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.chosahyo.NinteichosaItemGroupOf2009;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.chosahyo.NinteichosaItemKubunOfKihon;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.chosahyo.NinteichosaItemSubGroup;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.chosahyo.NinteichosaItemSubGroupOf2009;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyo.INinteichosaItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyo.INinteichosaItemSubGroup;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyo.NinteichosaItemGroupOf2009;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyo.NinteichosaItemKubunOfKihon;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyo.NinteichosaItemSubGroup;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosahyo.NinteichosaItemSubGroupOf2009;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
@@ -123,17 +124,17 @@ public class NinteichosahyoRegulationBuilderTest extends DbeTestBase {
         Map<NinteichosaItemKubunOfKihon, INinteichosaItem> 調査票定義 = new EnumMap<>(NinteichosaItemKubunOfKihon.class);
         NinteichosahyoRegulationBuilder builder = new NinteichosahyoRegulationBuilder(調査票定義);
         builder.set調査項目グループ(NinteichosaItemGroupOf2009.第１群, NinteichosaItemSubGroupOf2009.麻痺等の有無);
-        builder.set調査項目("1-1", NinteichosaItemKubunOfKihon.麻痺等の有無_左上肢, "左上肢", new ChoiceItem(ChoiceResultItem.Checked.values()));
+        builder.set調査項目("1-1", NinteichosaItemKubunOfKihon.麻痺等の有無_左上肢, "左上肢", new ChoiceItem(Arrays.asList(ChoiceResultItem.Checked.values())));
         builder.set調査項目グループ(NinteichosaItemGroupOf2009.第１群, NinteichosaItemSubGroupOf2009.麻痺等の有無);
-        builder.set調査項目("1-1", NinteichosaItemKubunOfKihon.麻痺等の有無_右上肢, "右上肢", new ChoiceItem(ChoiceResultItem.Checked.values()));
+        builder.set調査項目("1-1", NinteichosaItemKubunOfKihon.麻痺等の有無_右上肢, "右上肢", new ChoiceItem(Arrays.asList(ChoiceResultItem.Checked.values())));
         builder.set調査項目グループ(NinteichosaItemGroupOf2009.第１群, NinteichosaItemSubGroupOf2009.拘縮の有無);
-        builder.set調査項目("1-2", NinteichosaItemKubunOfKihon.関節の動く範囲の制限_肩関節, "肩", new ChoiceItem(ChoiceResultItem.Checked.values()));
+        builder.set調査項目("1-2", NinteichosaItemKubunOfKihon.関節の動く範囲の制限_肩関節, "肩", new ChoiceItem(Arrays.asList(ChoiceResultItem.Checked.values())));
         builder.set調査項目グループ(NinteichosaItemGroupOf2009.第２群, NinteichosaItemSubGroup.なし);
-        builder.set調査項目("2-1", NinteichosaItemKubunOfKihon.移乗, "移乗", new ChoiceItem(ChoiceResultItem.Kaijo3.values()));
+        builder.set調査項目("2-1", NinteichosaItemKubunOfKihon.移乗, "移乗", new ChoiceItem(Arrays.asList(ChoiceResultItem.Kaijo3.values())));
         builder.set調査項目グループ(NinteichosaItemGroupOf2009.第２群, NinteichosaItemSubGroup.なし);
-        builder.set調査項目("2-1", NinteichosaItemKubunOfKihon.移動, "移動", new ChoiceItem(ChoiceResultItem.Kaijo3.values()));
+        builder.set調査項目("2-1", NinteichosaItemKubunOfKihon.移動, "移動", new ChoiceItem(Arrays.asList(ChoiceResultItem.Kaijo3.values())));
         builder.set調査項目グループ(NinteichosaItemGroupOf2009.第３群, NinteichosaItemSubGroup.なし);
-        builder.set調査項目("3-1", NinteichosaItemKubunOfKihon.意思の伝達, "意思の伝達", new ChoiceItem(ChoiceResultItem.DekiruDekinai2.values()));
+        builder.set調査項目("3-1", NinteichosaItemKubunOfKihon.意思の伝達, "意思の伝達", new ChoiceItem(Arrays.asList(ChoiceResultItem.DekiruDekinai2.values())));
         return 調査票定義;
     }
 }

@@ -5,7 +5,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.konyuhishikyushisei.IFukushiyoguKonyuhiShikyuGendogakuMapper">
     <select id="select支給申請一覧"
             resultMap="Result_ShikyuShinseiList"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyushisei.ShokanShikyuShinseiParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyushisei.ShokanShikyuShinseiParameter" fetchSize="500" resultOrdered="true">
         SELECT
         ShokanKihon."hiHokenshaNo" AS "hiHokenshaNo",
         ShokanKihon."serviceTeikyoYM" AS "serviceTeikyoYM",
@@ -79,7 +79,7 @@
     
     <select id="select要介護認定状態区分コード"
             resultType="jp.co.ndensan.reams.uz.uza.biz.Code"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyushisei.ServiceShuruiCodeParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyushisei.ServiceShuruiCodeParameter" fetchSize="500" resultOrdered="true">
         SELECT
         JukyushaDaicho."yokaigoJotaiKubunCode" AS "yokaigoJotaiKubunCode"
         FROM
@@ -99,7 +99,7 @@
     
     <select id="select措置元市町村データ"
             resultMap="Result_Shichoson"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyushisei.ServiceShuruiCodeParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyushisei.ServiceShuruiCodeParameter" fetchSize="500" resultOrdered="true">
         SELECT
         KoseiShichosonMaster."shoKisaiHokenshaNo",
         KoseiShichosonMaster."shichosonMeisho"
@@ -129,7 +129,7 @@
     
     <select id="select支払結果情報"
             resultMap="Result_ShibaraiKekka"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyushisei.ShibaraiKekkaParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.fukushiyogukonyuhishikyushisei.ShibaraiKekkaParameter" fetchSize="500" resultOrdered="true">
         SELECT
         SUM(ShokanShinsei."shiharaiKingakuTotal") AS "shiharaiKingakuTotal",
         SUM(ShokanShinsei."hokenTaishoHiyogaku") AS "hokenTaishoHiyogaku",

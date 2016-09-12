@@ -18,17 +18,16 @@ import java.util.logging.Logger;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1140011.ShotokuJohoTorokuTotalDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1140011.dgSetaiShotoku_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.config.FukaKeisanConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.ShotokuHikidashiConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.Shotoku;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
-import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigKeysHizuke;
-import jp.co.ndensan.reams.db.dbz.definition.core.fuka.KazeiKubun;
+import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;
+import jp.co.ndensan.reams.db.dbx.definition.core.config.ConfigKeysHizuke;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.GekihenkanwaSochi;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.TorokuGyomu;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShotokuManager;
 import jp.co.ndensan.reams.db.dbz.service.core.setaiinshotokujoho.SetaiinShotokuJohoFinder;
@@ -52,7 +51,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 画面設計_DBBGM13003_所得照会回答内容登録のハンドラクラス
@@ -81,7 +79,6 @@ public final class ShotokuJohoTorokuHandler {
 
     private static final int 所得引出_64歳 = 64;
 
-    private final FukaTaishoshaKey viewStateData;
     private final SetaiinShotokuJohoFinder 世帯員所得情報Finder;
     private final DataGridSetting shotokuJohoGridSetting;
 
@@ -91,7 +88,6 @@ public final class ShotokuJohoTorokuHandler {
      * @param div
      */
     private ShotokuJohoTorokuHandler(ShotokuJohoTorokuTotalDiv div) {
-        this.viewStateData = ViewStateHolder.get(ViewStateKey.賦課対象者, FukaTaishoshaKey.class);
         this.世帯員所得情報Finder = SetaiinShotokuJohoFinder.createInstance();
         this.div = div;
         this.shotokuJohoGridSetting = div.getDgSetaiShotoku().getGridSetting();
@@ -110,14 +106,15 @@ public final class ShotokuJohoTorokuHandler {
     /**
      * 画面初期化処理です。
      *
+     * @param viewStateData FukaTaishoshaKey
      */
-    public void onload() {
-        set初期状態_データ準備();
+    public void onload(FukaTaishoshaKey viewStateData) {
+        set初期状態_データ準備(viewStateData);
         set初期状態_表示制御();
         changeTo初期状態(true);
     }
 
-    private void set初期状態_データ準備() {
+    private void set初期状態_データ準備(FukaTaishoshaKey viewStateData) {
         TsuchishoNo 通知書番号 = viewStateData.get通知書番号();
         FlexibleYear 賦課年度 = viewStateData.get賦課年度();
         LasdecCode 市町村コード = viewStateData.get市町村コード();
@@ -126,7 +123,7 @@ public final class ShotokuJohoTorokuHandler {
         YMDHMS 所得基準日時 = YMDHMS.now();
         KaigoFukaKihonSearchKey searchKey = new KaigoFukaKihonSearchKey.Builder(通知書番号, 賦課年度, 市町村コード, 識別コード).build();
         div.getKaigoFukaKihon().load(searchKey);
-        div.getKaigoAtenaInfo().onLoad(識別コード);
+        div.getKaigoAtenaInfo().initialize(識別コード);
         load世帯所得情報一覧(識別コード, 所得年度, 所得基準日時, true);
         日付関連_所得年度コンフィグによる制御(div.getSetaiShotokuInfo().getTxtSetaiIchiranKazeiNendo().getDomain());
         AccessLogger.log(AccessLogType.照会, toPersonalData(識別コード));

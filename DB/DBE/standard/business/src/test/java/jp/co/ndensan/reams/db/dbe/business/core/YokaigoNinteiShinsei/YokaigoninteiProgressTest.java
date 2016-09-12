@@ -5,7 +5,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.YokaigoNinteiShinsei;
 
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigonintei.YokaigoNinteiProgress;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ConsentsToEnkitsuchiHakko;
+import jp.co.ndensan.reams.db.dbe.definition.core.ConsentsToEnkitsuchiHakko;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

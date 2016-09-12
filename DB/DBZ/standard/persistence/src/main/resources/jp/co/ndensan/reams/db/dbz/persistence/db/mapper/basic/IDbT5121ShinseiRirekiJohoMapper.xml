@@ -42,7 +42,7 @@
         <result property="lastUpdateReamsLoginId" column="dbT5121ShinseiRirekiJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="zenkaiShinseishoKanriNo" column="dbT5121ShinseiRirekiJoho_zenkaiShinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
     </resultMap>
-    <select id="getEntity" resultMap="ResultMap_DbT5121ShinseiRirekiJohoEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5121ShinseiRirekiJohoEntity">
         SELECT
         <include refid="allColumns_DbT5121ShinseiRirekiJoho"/>
         FROM

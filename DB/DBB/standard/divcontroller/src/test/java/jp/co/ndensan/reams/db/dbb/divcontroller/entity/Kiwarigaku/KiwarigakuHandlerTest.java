@@ -9,9 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.Kiwarigaku;
 import jp.co.ndensan.reams.db.dbb.business.core.KiwarigakuCalculator;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.Kibetsu;
+import jp.co.ndensan.reams.db.dbx.business.core.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.KibetsuChoteiKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.KiwarigakuMeisai;
+import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kiwarigaku.Kiwarigaku.KiwarigakuDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kiwarigaku.Kiwarigaku.KiwarigakuHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kiwarigaku.Kiwarigaku.tblKiwariGaku1Div;
@@ -29,7 +30,6 @@ import jp.co.ndensan.reams.db.dbz.business.config.FukaKeisanConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.HizukeConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.KanendoConfig;
 import jp.co.ndensan.reams.db.dbz.business.config.TokuchoConfig;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.fuka.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
@@ -384,7 +384,7 @@ public class KiwarigakuHandlerTest extends DbbTestBase {
     private static KibetsuChoteiKyotsu create期別調定共通Model(ChoshuHohoKibetsu 徴収方法, int 期, int 期別額) {
 //        KibetsuChoteiKyotsu model = KibetsuChoteiKyotsuModelTestHelper.createModel();
         KibetsuChoteiKyotsu model = new KibetsuChoteiKyotsu();
-        Kibetsu kibetsu = model.get介護期別モデル().createBuilderForEdit().set徴収方法(徴収方法.code()).set期(期).build();
+        Kibetsu kibetsu = model.get介護期別モデル().createBuilderForEdit().set徴収方法(徴収方法.getコード()).set期(期).build();
         KibetsuChoteiKyotsu retModel = new KibetsuChoteiKyotsu(kibetsu, model.get調定共通モデル());
         retModel.get調定共通モデル().set調定額(new Decimal(期別額));
 

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeijoho;
+package jp.co.ndensan.reams.db.dbx.business.core.gappeijoho.gappeijoho;
 
 import jp.co.ndensan.reams.db.dbx.business.core.gappeijoho.GappeiJoho;
 import jp.co.ndensan.reams.db.dbx.business.core.gappeijoho.GappeiJohoBuilder;

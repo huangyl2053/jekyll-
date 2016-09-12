@@ -53,7 +53,7 @@ public class IdoCheckListBatchParameter extends BatchParameterBase {
     @BatchParameter(key = KEY_ROREI_FUKUSHI_NENKIN_FLAG, name = "老齢福祉年金フラグ")
     private boolean roreiFukushiNenkinFlag;
     @BatchParameter(key = KEY_SHUTURYOKU_JUN_ID, name = "出力順ID")
-    private long shuturyokuJunId;
+    private Long shuturyokuJunId;
 
     /**
      * 異動チェックリスト帳票データ作成のパラメータを作成します。

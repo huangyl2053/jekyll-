@@ -8,12 +8,32 @@ module DBZ {
 
         export class Events {
 
-            public static onClick_btnToroku(): string {
-                return "onClick_btnToroku";
+            public static onClick_btnShinkiTsuika(): string {
+                return "onClick_btnShinkiTsuika";
+            }
+
+            public static onSelect_ShinsakaiIinIchiran(): string {
+                return "onSelect_ShinsakaiIinIchiran";
+            }
+
+            public static onClick_btnDelete(): string {
+                return "onClick_btnDelete";
+            }
+
+            public static onBlur_txtShinsakaiIinCode(): string {
+                return "onBlur_txtShinsakaiIinCode";
+            }
+
+            public static onClose_btnShinsakaiIinGuide(): string {
+                return "onClose_btnShinsakaiIinGuide";
             }
 
             public static onClick_btnModoru(): string {
                 return "onClick_btnModoru";
+            }
+
+            public static onClick_btnToroku(): string {
+                return "onClick_btnToroku";
             }
 
             public static onClick_btnKakutei(): string {
@@ -81,12 +101,12 @@ module DBZ {
                 return new UZA.Label(this.convFiledName("lblShozokuKikan"));
             }
 
-            public btnToroku(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnToroku"));
-            }
-
             public btnModoru(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnModoru"));
+            }
+
+            public btnToroku(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnToroku"));
             }
 
             public btnKakutei(): UZA.Button {

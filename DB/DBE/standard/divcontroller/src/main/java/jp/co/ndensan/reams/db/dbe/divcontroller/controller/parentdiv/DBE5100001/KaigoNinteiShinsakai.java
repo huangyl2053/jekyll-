@@ -7,13 +7,12 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5100001
 
 import java.util.HashMap;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.taishouwaritsuke.TaishouWaritsukeViewStateKey;
-import jp.co.ndensan.reams.db.dbe.definition.kaigoninteishinsakai.KaigoNinteiShinsakaiParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.kaigoninteishinsakai.KaigoNinteiShinsakaiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100001.DBE5100001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100001.DBE5100001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100001.KaigoNinteiShinsakaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5100001.KaigoNinteiShinsakaiValidationHandler;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -32,18 +31,24 @@ public class KaigoNinteiShinsakai {
     private static final RString 遷移モード_介護認定審査会対象者割付 = new RString("kaisaiYoteiToroku");
     private static final RString 遷移モード_介護認定審査会資料作成 = new RString("shinsakaiShiryoSakusei");
     private static final RString 遷移モード_介護認定審査会委員事前審査結果登録 = new RString("jizenKekkaToroku");
+    private static final RString 遷移モード_介護認定審査会委員事前審査 = new RString("jizenKekkaToroku");
     private static final RString 遷移モード_審査会結果登録 = new RString("shinsaKekkaToroku");
     private static final RString 遷移モード_介護認定審査会審査結果データ取込み = new RString("dataShutsuryoku");
     private static final RString 遷移モード_介護認定審査会審査結果登録 = new RString("shinsaKekkaToroku");
-    private static final RString メニューID_審査会個人別状況照会 = new RString("DBEMN11004");
-    private static final RString メニューID_介護認定審査会審査対象データ出力 = new RString("DBEMN51004");
-    private static final RString メニューID_介護認定審査会対象者割付 = new RString("DBEMN51005");
-    private static final RString メニューID_介護認定審査会資料作成 = new RString("DBEMN51007");
-    private static final RString メニューID_介護認定審査会委員事前審査結果登録 = new RString("DBEMN51008");
-    private static final RString メニューID_審査会開催結果登録 = new RString("DBEMN52001");
-    private static final RString メニューID_審査会審査結果登録 = new RString("DBEMN52003");
-    private static final RString メニューID_介護認定審査会審査結果データ取込み = new RString("DBEMN52002");
-    private static final RString メニューID_介護認定審査会審査結果登録 = new RString("DBEMN52004");
+    private static final RString メニューID_審査会個人別状況照会 = new RString("DBEMN21004");
+    private static final RString メニューID_介護認定審査会審査対象データ出力 = new RString("DBEMN61004");
+    private static final RString メニューID_介護認定審査会対象者割付 = new RString("DBEMN61005");
+    private static final RString メニューID_介護認定審査会資料作成 = new RString("DBEMN61007");
+//<<<<<<< HEAD
+//    private static final RString メニューID_介護認定審査会委員事前審査結果登録 = new RString("DBEMN61008");
+//=======
+    private static final RString メニューID_介護認定審査会委員事前審査 = new RString("DBEMN61008");
+    private static final RString メニューID_介護認定審査会委員事前審査結果登録 = new RString("DBEMN61009");
+//>>>>>>> origin/sync
+    private static final RString メニューID_審査会開催結果登録 = new RString("DBEMN62001");
+    private static final RString メニューID_審査会審査結果登録 = new RString("DBEMN62003");
+    private static final RString メニューID_介護認定審査会審査結果データ取込み = new RString("DBEMN62002");
+    private static final RString メニューID_介護認定審査会審査結果登録 = new RString("DBEMN62004");
     private static final int 数字_0 = 0;
 
     /**
@@ -70,7 +75,7 @@ public class KaigoNinteiShinsakai {
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        ViewStateHolder.put(ViewStateKeys.審査会一覧_開催番号, div.getCcdShinsakaiItiran().get開催番号List().get(数字_0));
+        ViewStateHolder.put(ViewStateKeys.開催番号, div.getCcdShinsakaiItiran().get開催番号List().get(数字_0));
         return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.個人別状況照会へ遷移する).respond();
     }
 
@@ -85,7 +90,7 @@ public class KaigoNinteiShinsakai {
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        ViewStateHolder.put(ViewStateKeys.審査会一覧_開催番号,
+        ViewStateHolder.put(ViewStateKeys.開催番号,
                 new KaigoNinteiShinsakaiParameter(div.getCcdShinsakaiItiran().get開催番号List()));
         return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.データ出力を実行する).respond();
     }
@@ -101,7 +106,7 @@ public class KaigoNinteiShinsakai {
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        ViewStateHolder.put(TaishouWaritsukeViewStateKey.介護認定審査会番号, div.getCcdShinsakaiItiran().get開催番号List().get(数字_0));
+        ViewStateHolder.put(ViewStateKeys.介護認定審査会番号, div.getCcdShinsakaiItiran().get開催番号List().get(数字_0));
         return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.審査会対象者割付へ遷移する).respond();
     }
 
@@ -116,7 +121,7 @@ public class KaigoNinteiShinsakai {
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        ViewStateHolder.put(ViewStateKeys.審査会一覧_開催番号,
+        ViewStateHolder.put(ViewStateKeys.開催番号,
                 new KaigoNinteiShinsakaiParameter(div.getCcdShinsakaiItiran().get開催番号List()));
         return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.自動割付を実行する).respond();
     }
@@ -147,7 +152,7 @@ public class KaigoNinteiShinsakai {
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-        ViewStateHolder.put(ViewStateKeys.審査会一覧_開催番号,
+        ViewStateHolder.put(ViewStateKeys.開催番号,
                 new KaigoNinteiShinsakaiParameter(div.getCcdShinsakaiItiran().get開催番号List()));
         return ResponseData.of(div).forwardWithEventName(DBE5100001TransitionEventName.データ取込みを実行する).respond();
     }
@@ -173,7 +178,8 @@ public class KaigoNinteiShinsakai {
     private ValidationMessageControlPairs check_審査会選択(KaigoNinteiShinsakaiDiv div) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         validationMessages.add(createValidationHandler(div).審査会データ空チェック());
-        validationMessages.add(createValidationHandler(div).審査会未選択チェック_選択());
+        validationMessages.add(createValidationHandler(div).
+                審査会未選択チェック_選択(ViewStateHolder.get(ViewStateKeys.開催番号, RString.class)));
         return validationMessages;
     }
 
@@ -184,8 +190,9 @@ public class KaigoNinteiShinsakai {
         mode.put(メニューID_介護認定審査会対象者割付, 遷移モード_介護認定審査会対象者割付);
         mode.put(メニューID_介護認定審査会資料作成, 遷移モード_介護認定審査会資料作成);
         mode.put(メニューID_介護認定審査会委員事前審査結果登録, 遷移モード_介護認定審査会委員事前審査結果登録);
+        mode.put(メニューID_介護認定審査会委員事前審査, 遷移モード_介護認定審査会委員事前審査);
         mode.put(メニューID_審査会開催結果登録, 遷移モード_審査会結果登録);
-        mode.put(メニューID_審査会審査結果登録, 遷移モード_審査会結果登録);
+        mode.put(メニューID_審査会審査結果登録, 遷移モード_介護認定審査会委員事前審査結果登録);
         mode.put(メニューID_介護認定審査会審査結果データ取込み, 遷移モード_介護認定審査会審査結果データ取込み);
         mode.put(メニューID_介護認定審査会審査結果登録, 遷移モード_介護認定審査会審査結果登録);
         return mode;
@@ -197,8 +204,9 @@ public class KaigoNinteiShinsakai {
         state.put(メニューID_介護認定審査会審査対象データ出力, DBE5100001StateName.データ出力_モバイル);
         state.put(メニューID_介護認定審査会対象者割付, DBE5100001StateName.対象者割付);
         state.put(メニューID_介護認定審査会資料作成, DBE5100001StateName.審査会資料);
-        state.put(メニューID_介護認定審査会委員事前審査結果登録, DBE5100001StateName.事前結果登録);
-        state.put(メニューID_審査会開催結果登録, DBE5100001StateName.審査結果登録);
+        state.put(メニューID_介護認定審査会委員事前審査結果登録, DBE5100001StateName.事前審査結果登録);
+        state.put(メニューID_介護認定審査会委員事前審査, DBE5100001StateName.事前審査);
+        state.put(メニューID_審査会開催結果登録, DBE5100001StateName.開催結果登録);
         state.put(メニューID_審査会審査結果登録, DBE5100001StateName.審査結果登録);
         state.put(メニューID_介護認定審査会審査結果データ取込み, DBE5100001StateName.データ取込み_モバイル);
         state.put(メニューID_介護認定審査会審査結果登録, DBE5100001StateName.結果登録_OCR);

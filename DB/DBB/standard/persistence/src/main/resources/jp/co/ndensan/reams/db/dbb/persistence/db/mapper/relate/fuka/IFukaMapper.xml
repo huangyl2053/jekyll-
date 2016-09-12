@@ -6,7 +6,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka.IFukaMapper">
     
     <!-- RelateEntityを取得できるSQL。 -->
-    <select id="select介護賦課ByKey" resultMap="resultMap_FukaEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.FukaMapperParameter" fetchSize="500">
+    <select resultOrdered="true" id="select介護賦課ByKey" resultMap="resultMap_FukaEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.FukaMapperParameter" fetchSize="500">
         SELECT
         dbT2002Fuka.*,
         dbT2003Kibetsu.*
@@ -30,7 +30,7 @@
         INNER JOIN
         (
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>
         FROM
         rgdb."DbT2003Kibetsu"
         )
@@ -47,7 +47,7 @@
     </select>
         
     <!-- RelateEntityを取得できるSQL。 -->
-    <select id="select介護賦課リストBy主キー1" resultMap="resultMap_FukaEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.FukaMapperParameter" fetchSize="500">
+    <select resultOrdered="true" id="select介護賦課リストBy主キー1" resultMap="resultMap_FukaEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.FukaMapperParameter" fetchSize="500">
         SELECT
         dbT2002Fuka.*,
         dbT2003Kibetsu.*
@@ -71,7 +71,7 @@
         INNER JOIN
         (
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>
         FROM
         rgdb."DbT2003Kibetsu"
         )
@@ -88,7 +88,7 @@
     </select>
 
     <!-- RelateEntityを取得できるSQL。 -->
-    <select id="getFukaEntity" resultMap="resultMap_FukaEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.FukaMapperParameter" fetchSize="500">
+    <select resultOrdered="true" id="getFukaEntity" resultMap="resultMap_FukaEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.FukaMapperParameter" fetchSize="500">
         SELECT
         dbT2002Fuka.*,
         dbT2003Kibetsu.*
@@ -112,7 +112,7 @@
         INNER JOIN
         (
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu"/>
         FROM
         rgdb."DbT2003Kibetsu"
         )
@@ -137,7 +137,7 @@
         <association property="介護賦課Entity" 
                      resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.ResultMap_DbT2002FukaEntity"/>
         <collection property="介護期別Entity" 
-                    resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2003KibetsuMapper.ResultMap_DbT2003KibetsuEntity"/>
+                    resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.ResultMap_DbT2003KibetsuEntity"/>
     </resultMap>
     
     <sql id="FukaRowNumber">
@@ -153,7 +153,7 @@
     </sql>
 
     <!-- RelateEntityを取得できるSQL。 -->
-    <select id="get前賦課履歴" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.ResultMap_DbT2002FukaEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.FukaMapperParameter" fetchSize="500">
+    <select resultOrdered="true" id="get前賦課履歴" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.ResultMap_DbT2002FukaEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.FukaMapperParameter" fetchSize="500">
         SELECT
             <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka" />
         FROM  (<include refid="FukaRowNumber" />) As "DbT2002Fuka"

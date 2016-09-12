@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shokaishujokyolist;
 
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shokaishujokyolist.ShoKaishuJokyoListDiv.グリッド表示モード;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shokaishujokyolist.ShoKaishuJokyoListDiv.一覧パネル高さ;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shokaishujokyolist.ShoKaishuJokyoListDiv.GridHyojiMode;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shokaishujokyolist.ShoKaishuJokyoListDiv.IchiranPanelTakasa;
 
 /**
  *
@@ -28,14 +28,14 @@ public class ShoKaishuJokyoListHandler {
     /**
      * DataGridの選択ボタンのモード設定をします。（表示する/表示しない)
      */
-    void setMode_DataGridのisShowSelectButtonColumn(グリッド表示モード gridViewMode) {
-        div.setMode_グリッド表示モード(gridViewMode);
+    void setMode_DataGridのisShowSelectButtonColumn(GridHyojiMode gridViewMode) {
+        div.setMode_GridHyojiMode(gridViewMode);
     }
 
     /**
      * DataGridの高さのモード設定をします。
      */
-    void setMode_DataGridのheight(一覧パネル高さ gridHeight) {
-        div.setMode_一覧パネル高さ(gridHeight);
+    void setMode_DataGridのheight(IchiranPanelTakasa gridHeight) {
+        div.setMode_IchiranPanelTakasa(gridHeight);
     }
 }

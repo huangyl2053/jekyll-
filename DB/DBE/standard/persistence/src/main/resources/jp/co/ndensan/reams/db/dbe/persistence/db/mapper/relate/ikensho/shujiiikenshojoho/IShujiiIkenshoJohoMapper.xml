@@ -5,11 +5,11 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikensho.shujiiikenshojoho.IShujiiIkenshoJohoMapper">
 
-    <select id="select要介護認定主治医意見書情報ByKey" resultMap="resultMap_ShujiiIkenshoJohoEntity" fetchSize="500">
+    <select resultOrdered="true" id="select要介護認定主治医意見書情報ByKey" resultMap="resultMap_ShujiiIkenshoJohoEntity" fetchSize="500">
         <include refid="selectShujiiIkenshoJohoEntity" />
     </select>
 
-    <select id="select要介護認定主治医意見書情報リストBy主キー1" resultMap="resultMap_ShujiiIkenshoJohoEntity" fetchSize="500">
+    <select resultOrdered="true" id="select要介護認定主治医意見書情報リストBy主キー1" resultMap="resultMap_ShujiiIkenshoJohoEntity" fetchSize="500">
         <include refid="selectShujiiIkenshoJohoEntity" />
     </select>
 
@@ -32,7 +32,7 @@
          ON 
          DbT5302ShujiiIkenshoJoho."dbT5302ShujiiIkenshoJoho_shinseishoKanriNo" = DbT5303ShujiiIkenshoKinyuItem."dbT5303ShujiiIkenshoKinyuItem_shinseishoKanriNo"
          AND DbT5302ShujiiIkenshoJoho."dbT5302ShujiiIkenshoJoho_ikenshoIraiRirekiNo" = DbT5303ShujiiIkenshoKinyuItem."dbT5303ShujiiIkenshoKinyuItem_ikenshoIraiRirekiNo"
-         INNER JOIN
+         LEFT JOIN
          (
          SELECT
          <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5304ShujiiIkenshoIkenItemMapper.allColumns_DbT5304ShujiiIkenshoIkenItem" />

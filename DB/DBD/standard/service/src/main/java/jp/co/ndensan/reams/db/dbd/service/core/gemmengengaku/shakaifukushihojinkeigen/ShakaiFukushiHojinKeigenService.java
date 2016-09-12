@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shafukukeigen.ShakaifukuRiyoshaFutanKeigen;
-import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.shakaifukushihojinkeigen.GemmenKubun;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.shakaifukushihojinkeigen.ShakaiFukushiHojinKeigenParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenEntity;
@@ -18,10 +17,11 @@ import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4017ShakaiFukushiHojin
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku.shakaifukushihojinkeigen.IShakaiFukushiHojinKeigenMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.SetaiinShotoku;
-import jp.co.ndensan.reams.db.dbz.definition.core.fuka.KazeiKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
@@ -76,7 +76,7 @@ public class ShakaiFukushiHojinKeigenService {
     public List<ShakaifukuRiyoshaFutanKeigen> load社会福祉法人等利用者負担軽減申請All(HihokenshaNo 被保険者番号) {
         List<ShakaifukuRiyoshaFutanKeigen> 社会福祉法人等利用者負担軽減の情報List = new ArrayList<>();
         ShakaiFukushiHojinKeigenParameter 検索条件 = new ShakaiFukushiHojinKeigenParameter(
-                被保険者番号, GemmenGengakuShurui.社会福祉法人等軽減.getコード());
+                被保険者番号, GemmenGengakuShurui.社会福祉法人等利用者負担軽減.getコード());
         IShakaiFukushiHojinKeigenMapper mapper = mapperProvider.create(IShakaiFukushiHojinKeigenMapper.class);
         List<ShafukuRiyoshaFutanKeigenEntity> entityList = mapper.get社会福祉法人等利用者負担軽減の情報List(検索条件);
         if (entityList != null && !entityList.isEmpty()) {
@@ -181,7 +181,7 @@ public class ShakaiFukushiHojinKeigenService {
         List<SetaiinShotoku> 世帯員所得情報List = setaiinShotokuJohoFinder.get世帯員所得情報(識別コード, 所得年度, null);
         for (SetaiinShotoku 世帯員所得情報 : 世帯員所得情報List) {
             if (識別コード.equals(世帯員所得情報.get識別コード())
-                    && KazeiKubun.課税.getコード().equals(世帯員所得情報.get課税区分_住民税減免前())) {
+                    && !KazeiKubun.課税.getコード().equals(世帯員所得情報.get課税区分_住民税減免前())) {
                 return GemmenKubun.非課税_老年受給;
             }
         }

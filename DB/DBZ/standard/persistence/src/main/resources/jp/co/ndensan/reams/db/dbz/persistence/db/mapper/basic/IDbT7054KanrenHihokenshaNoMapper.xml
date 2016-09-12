@@ -48,7 +48,7 @@
         <result property="shikibetsuCode" column="dbT7054KanrenHihokenshaNo_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
     </resultMap>
     
-        <select id="getEntity" resultMap="ResultMap_DbT7054KanrenHihokenshaNoEntity">
+        <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT7054KanrenHihokenshaNoEntity">
 	SELECT
 	<include refid="allColumns_DbT7054KanrenHihokenshaNo"/>
 	FROM

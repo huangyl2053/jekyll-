@@ -53,31 +53,6 @@ public class NinteiChosaHoshuTankaBuilderTest extends DbeTestBase {
 
             sut = business.createBuilderForEdit();
         }
-//TODO Key項目のテストメソッドは削除して下さい。
-
-        @Test
-        public void 戻り値の調査区分は_設定した値と同じ調査区分を返す() {
-            business = sut.set調査区分(DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_調査区分).build();
-            assertThat(business.get調査区分(), is(DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_調査区分));
-        }
-
-        @Test
-        public void 戻り値の訪問種別は_設定した値と同じ訪問種別を返す() {
-            business = sut.set訪問種別(DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_訪問種別).build();
-            assertThat(business.get訪問種別(), is(DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_訪問種別));
-        }
-
-        @Test
-        public void 戻り値の開始年月は_設定した値と同じ開始年月を返す() {
-            business = sut.set開始年月(DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_開始年月).build();
-            assertThat(business.get開始年月(), is(DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_開始年月));
-        }
-
-        @Test
-        public void 戻り値の終了年月は_設定した値と同じ終了年月を返す() {
-            business = sut.set終了年月(DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_終了年月).build();
-            assertThat(business.get終了年月(), is(DbT5031NinteiChosaHoshuTankaEntityGenerator.DEFAULT_終了年月));
-        }
 
         @Test
         public void 戻り値の単価は_設定した値と同じ単価を返す() {

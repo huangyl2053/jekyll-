@@ -7,13 +7,13 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.yokaigon
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.shinsakaikaisai.ShinsakaiKaisai;
 import jp.co.ndensan.reams.db.dbz.business.core.shinsakaikaisai.ShinsakaiKaisaiMode;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.IsShiryoSakuseiZumi;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.YokaigoNinteiShinsakaiIchiranList.YokaigoNinteiShinsakaiIchiranList.YokaigoNinteiShinsakaiIchiranListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.YokaigoNinteiShinsakaiIchiranList.YokaigoNinteiShinsakaiIchiranList.dgShinsakaiIchiran_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
@@ -115,14 +115,13 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
             }
             if (ShinsakaiShinchokuJokyo.未開催.getコード().equals(shinsakaiKaisai.get介護認定審査会進捗状況())) {
                 row.setShinchokuJokyo(RString.EMPTY);
-            }
-            if (ShinsakaiShinchokuJokyo.未開催_割付完了.getコード().equals(shinsakaiKaisai.get介護認定審査会進捗状況())) {
+            } else if (ShinsakaiShinchokuJokyo.未開催_割付完了.getコード().equals(shinsakaiKaisai.get介護認定審査会進捗状況())) {
                 row.setShinchokuJokyo(介護認定審査会進捗状況_開催済);
-            }
-            if (ShinsakaiShinchokuJokyo.中止.getコード().equals(shinsakaiKaisai.get介護認定審査会進捗状況())) {
-                row.setShinchokuJokyo(ShinsakaiShinchokuJokyo.中止.get名称());
+            } else {
+                row.setShinchokuJokyo(ShinsakaiShinchokuJokyo.toValue(shinsakaiKaisai.get介護認定審査会進捗状況()).get名称());
             }
             row.setDummyFlag(shinsakaiKaisai.isダミーフラグ());
+            row.setGogitaiNo(shinsakaiKaisai.get合議体番号());
             list.add(row);
         }
         div.getDgShinsakaiIchiran().setDataSource(list);
@@ -135,10 +134,11 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
     public void get開催番号() {
         RString 合議体名称 = div.getDgShinsakaiIchiran().getActiveRow().getShinsakaiMeisho();
         RString 開催番号 = RString.EMPTY;
-        if (!合議体名称.isNullOrEmpty()) {
+        if (!RString.isNullOrEmpty(合議体名称)) {
             開催番号 = 合議体名称.substring(1, 合議体名称.length() - LENGTH_4);
         }
-        ViewStateHolder.put(ViewStateKeys.介護認定審査会共有一覧_開催番号, 開催番号);
+
+        ViewStateHolder.put(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.開催番号, 開催番号);
         div.setHdnSelectedGridLine(new RString(String.valueOf(div.getDgShinsakaiIchiran().getActiveRow().getId())));
     }
 
@@ -193,9 +193,9 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
                 }
             }
             mode.set審査会一覧Grid(shinsakaiKaisaiList);
-            ViewStateHolder.put(ViewStateKeys.介護認定審査会共有一覧_選択審査会一覧, mode);
+            ViewStateHolder.put(ViewStateKeys.選択審査会一覧, mode);
         } else {
-            ViewStateHolder.put(ViewStateKeys.介護認定審査会共有一覧_選択審査会一覧, null);
+            ViewStateHolder.put(ViewStateKeys.選択審査会一覧, null);
         }
     }
 
@@ -206,8 +206,8 @@ public class YokaigoNinteiShinsakaiIchiranListHandler {
     private RString get介護認定審査会進捗状況(dgShinsakaiIchiran_Row row) {
         if (介護認定審査会進捗状況_開催済.equals(row.getShinchokuJokyo())) {
             return ShinsakaiShinchokuJokyo.未開催_割付完了.getコード();
-        } else if (ShinsakaiShinchokuJokyo.中止.get名称().equals(row.getShinchokuJokyo())) {
-            return ShinsakaiShinchokuJokyo.中止.getコード();
+        } else if (!RString.isNullOrEmpty(row.getShinchokuJokyo())) {
+            return ShinsakaiShinchokuJokyo.valueOf(row.getShinchokuJokyo().toString()).getコード();
         } else {
             return ShinsakaiShinchokuJokyo.未開催.getコード();
         }

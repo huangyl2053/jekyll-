@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.kihonchosainput;
 
-import jp.co.ndensan.reams.db.dbz.entity.db.kihonchosainput.KihonChosaInputEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.kihonchosainput.KihonChosaInputEntity;
 
 /**
  * {@link KihonChosaInput}の編集を行うビルダークラスです。

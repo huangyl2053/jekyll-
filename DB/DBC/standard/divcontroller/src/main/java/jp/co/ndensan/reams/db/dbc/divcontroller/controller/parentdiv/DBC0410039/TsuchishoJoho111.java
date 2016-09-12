@@ -6,19 +6,26 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0410039;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.kokuhorenkyoutsu.KokuhorenKyoutsuBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410039.TsuchishoJoho111Div;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoBunruiKanri;
+import jp.co.ndensan.reams.db.dbz.definition.core.viewstatename.ViewStateHolderName;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoBunruiKanriManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 国保連情報受取データ取込_[111]給付実績情報のクラスです。
@@ -39,7 +46,9 @@ public class TsuchishoJoho111 {
     public ResponseData<TsuchishoJoho111Div> onLoad(TsuchishoJoho111Div div) {
         ChohyoBunruiKanri code = ChohyoBunruiKanriManager.createInstance().get帳票分類管理(SubGyomuCode.DBC介護給付,
                 new ReportId(帳票ID));
-        div.getCcdKokurenJohoTorikomi().onLoadModeKakuninMsgJoken3(SubGyomuCode.DBC介護給付, code.get帳票分類ID());
+        KokuhorenDataTorikomiViewStateClass parmater = ViewStateHolder.get(ViewStateHolderName.国保連取込情報,
+                KokuhorenDataTorikomiViewStateClass.class);
+        div.getCcdKokurenJohoTorikomi().initialize(parmater, SubGyomuCode.DBC介護給付, code.get帳票分類ID());
         return ResponseData.of(div).respond();
     }
 
@@ -49,9 +58,19 @@ public class TsuchishoJoho111 {
      * @param div TsuchishoJoho111Div
      * @return ResponseData
      */
-    public ResponseData<TsuchishoJoho111Div> onClick_btnExcute(TsuchishoJoho111Div div) {
-        // TODO QA471 パラメータ作成ビジネスを呼び出して、バッチを起動する
-        return ResponseData.of(div).respond();
+    public ResponseData<KokuhorenKyoutsuBatchParameter> onClick_btnExcute(TsuchishoJoho111Div div) {
+        KokuhorenKyoutsuBatchParameter parameter = new KokuhorenKyoutsuBatchParameter();
+        RDate 処理年月 = div.getCcdKokurenJohoTorikomi().get処理年月();
+        Long 出力順ID = div.getCcdKokurenJohoTorikomi().get出力順ID();
+        RString 再処理区分 = div.getCcdKokurenJohoTorikomi().get再処理区分();
+        parameter.setShoriYM(new FlexibleYearMonth(処理年月.getYearMonth().toDateString()));
+        parameter.setShutsuryokujunId(new RString(出力順ID));
+        if (SaiShoriKubun.再処理.get名称().equals(再処理区分)) {
+            parameter.setSaishoriKubun(SaiShoriKubun.再処理);
+        } else if (SaiShoriKubun.空白.get名称().equals(再処理区分)) {
+            parameter.setSaishoriKubun(SaiShoriKubun.空白);
+        }
+        return ResponseData.of(parameter).respond();
     }
 
     /**

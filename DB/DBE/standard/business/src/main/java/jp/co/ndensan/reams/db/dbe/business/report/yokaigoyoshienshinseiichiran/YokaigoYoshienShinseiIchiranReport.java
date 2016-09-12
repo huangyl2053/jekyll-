@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.yokaigoyoshienshinseiichiran;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.yokaigoyoshienshinseiichiran.YokaigoYoshienShinseiIchiranReportSource;
@@ -45,6 +46,19 @@ public class YokaigoYoshienShinseiIchiranReport extends Report<YokaigoYoshienShi
     /**
      * インスタンスを生成します。
      *
+     * @param item 要介護認定・要支援認定等申請者一覧表のITEM
+     * @return 要介護認定・要支援認定等申請者一覧表のReport
+     */
+    public static YokaigoYoshienShinseiIchiranReport createFrom(
+            @NonNull YokaigoYoshienShinseiIchiranItem item) {
+        List<YokaigoYoshienShinseiIchiranItem> list = new ArrayList<>();
+        list.add(item);
+        return new YokaigoYoshienShinseiIchiranReport(list);
+    }
+
+    /**
+     * インスタンスを生成します。
+     *
      * @param itemList 要介護認定・要支援認定等申請者一覧表のITEMリスト
      */
     protected YokaigoYoshienShinseiIchiranReport(
@@ -66,11 +80,9 @@ public class YokaigoYoshienShinseiIchiranReport extends Report<YokaigoYoshienShi
         RStringBuilder printTimeStamp = new RStringBuilder();
         printTimeStamp.append(date);
         printTimeStamp.append(time);
-        int renban = 1;
         for (YokaigoYoshienShinseiIchiranItem item : itemList) {
             item.setTitle(ReportIdDBE.DBE011001.getReportName());
             item.setPrintTimeStamp(printTimeStamp.toRString());
-            item.setRenban(new RString(String.valueOf(renban++)));
             IYokaigoYoshienShinseiIchiranEditor editor = new YokaigoYoshienShinseiIchiranEditorImpl(item);
             IYokaigoYoshienShinseiIchiranBuilder builder = new YokaigoYoshienShinseiIchiranBuilderImpl(editor);
             reportSourceWriter.writeLine(builder);

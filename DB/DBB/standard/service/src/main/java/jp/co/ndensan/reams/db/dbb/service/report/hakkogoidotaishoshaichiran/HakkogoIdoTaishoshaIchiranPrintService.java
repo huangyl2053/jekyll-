@@ -5,26 +5,22 @@
  */
 package jp.co.ndensan.reams.db.dbb.service.report.hakkogoidotaishoshaichiran;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.validation.constraints.NotNull;
-import jp.co.ndensan.reams.db.dbb.business.core.tsuchishohakkogoidosha.TsuchiShoHakkoGoIdosha;
 import jp.co.ndensan.reams.db.dbb.business.core.tsuchishohakkogoidosha.TsuchiShoHakkogoIdoshaListJoho;
-import jp.co.ndensan.reams.db.dbb.business.report.hakkogoidotaishoshaichiran.HakkogoIdoTaishoshaIchiranItem;
 import jp.co.ndensan.reams.db.dbb.business.report.hakkogoidotaishoshaichiran.HakkogoIdoTaishoshaIchiranProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.hakkogoidotaishoshaichiran.HakkogoIdoTaishoshaIchiranReport;
-import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.report.hakkogoidotaishoshaichiran.HakkogoIdoTaishoshaIchiranSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.report.Printer;
+import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
+import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.Report;
+import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
+import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
+import jp.co.ndensan.reams.uz.uza.report.ReportManager;
+import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
-import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
+import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 
 /**
  * DBBRP32001_通知書発行後異動把握帳票PrintService
@@ -32,8 +28,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
  * @reamsid_L DBB-0690-030 surun
  */
 public class HakkogoIdoTaishoshaIchiranPrintService {
-
-    private static final RString NENDO = new RString("年度");
 
     /**
      * printメソッド
@@ -43,74 +37,47 @@ public class HakkogoIdoTaishoshaIchiranPrintService {
      * @param 帳票作成日時 YMDHMS
      * @return SourceDataCollection
      */
-    public SourceDataCollection print(
+    public SourceDataCollection printSingle(
             @NotNull TsuchiShoHakkogoIdoshaListJoho 発行後異動者一覧情報,
             @NotNull Association 導入団体クラス,
             @NotNull YMDHMS 帳票作成日時) {
-        HakkogoIdoTaishoshaIchiranProperty property = new HakkogoIdoTaishoshaIchiranProperty();
-        List<HakkogoIdoTaishoshaIchiranItem> targets = setItems(発行後異動者一覧情報, 導入団体クラス, 帳票作成日時);
-        return new Printer<HakkogoIdoTaishoshaIchiranSource>().spool(property, toReports(targets));
+        SourceDataCollection collection;
+        try (ReportManager reportManager = new ReportManager()) {
+            print(発行後異動者一覧情報, 導入団体クラス, 帳票作成日時, reportManager);
+            collection = reportManager.publish();
+        }
+        return collection;
+
     }
 
     /**
-     * toReportsメソッド
-     *
-     * @param targets List<HakkogoIdoTaishoshaIchiranItem>
-     * @return List<HakkogoIdoTaishoshaIchiranReport>
-     */
-    private static List<HakkogoIdoTaishoshaIchiranReport> toReports(List<HakkogoIdoTaishoshaIchiranItem> targets) {
-        List<HakkogoIdoTaishoshaIchiranReport> list = new ArrayList<>();
-        list.add(HakkogoIdoTaishoshaIchiranReport.createForm(targets));
-        return list;
-    }
-
-    /**
-     * setItemsメソッド
+     * print
      *
      * @param 発行後異動者一覧情報 TsuchiShoHakkogoIdoshaListJoho
      * @param 導入団体クラス Association
      * @param 帳票作成日時 YMDHMS
-     * @return List<HakkogoIdoTaishoshaIchiranItem>
+     * @param reportManager ReportManager
      */
-    private List<HakkogoIdoTaishoshaIchiranItem> setItems(
-            TsuchiShoHakkogoIdoshaListJoho 発行後異動者一覧情報,
-            Association 導入団体クラス,
-            YMDHMS 帳票作成日時) {
-        List<HakkogoIdoTaishoshaIchiranItem> targets = new ArrayList<>();
-        if (!発行後異動者一覧情報.get異動者リスト().isEmpty()) {
-            for (TsuchiShoHakkoGoIdosha tsuchiShoHakkoGoIdosha : 発行後異動者一覧情報.get異動者リスト()) {
-                HakkogoIdoTaishoshaIchiranItem item = new HakkogoIdoTaishoshaIchiranItem();
-                item.setHokenshaNo(導入団体クラス.get地方公共団体コード().value());
-                item.setHokenshaName(導入団体クラス.get市町村名());
-                item.setTsuchishoName(発行後異動者一覧情報.get通知書名());
-                RString 帳票作成日 = 帳票作成日時.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                        separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
-                RString 帳票作成時 = 帳票作成日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
-                item.setPrintTimeStamp(帳票作成日.concat(" " + 帳票作成時));
-                item.setFukaNendo(発行後異動者一覧情報.get異動者リスト().get(0).get賦課年度().wareki().eraType(EraType.KANJI)
-                        .firstYear(FirstYear.GAN_NEN).toDateString().concat(NENDO));
-                RString 通知書発行日 = 発行後異動者一覧情報.get通知書発行日時().getDate().wareki().eraType(EraType.KANJI)
-                        .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
-                RString 通知書発行時 = 発行後異動者一覧情報.get通知書発行日時().getRDateTime().getTime()
-                        .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
-                item.setTsuchishoHakkoTimeStamp(通知書発行日.concat(" " + 通知書発行時));
-                RString 最終計算処理日 = 発行後異動者一覧情報.get最終計算処理日時().getDate().wareki().eraType(EraType.KANJI)
-                        .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
-                RString 最終計算処理時 = 発行後異動者一覧情報.get最終計算処理日時().getRDateTime().getTime()
-                        .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
-                item.setLastCalculationTimeStamp(最終計算処理日.concat(" " + 最終計算処理時));
-                item.setListIdosha_1(new RString(Integer.valueOf(tsuchiShoHakkoGoIdosha.get該当連番()).toString()));
-                item.setListIdosha_2(tsuchiShoHakkoGoIdosha.get被保険者番号().value());
-                item.setListIdosha_3(tsuchiShoHakkoGoIdosha.get識別コード().value());
-                item.setListIdosha_4(tsuchiShoHakkoGoIdosha.get通知書番号().value());
-                item.setListIdosha_5(tsuchiShoHakkoGoIdosha.get氏名().getName().value());
-                item.setListIdosha_6(tsuchiShoHakkoGoIdosha.get異動日().wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.GAN_NEN)
-                        .separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString());
-                item.setListIdosha_7(tsuchiShoHakkoGoIdosha.get異動内容().get名称());
-                item.setTitle(ReportIdDBB.DBB200028.getReportName());
-                targets.add(item);
-            }
+    public void print(TsuchiShoHakkogoIdoshaListJoho 発行後異動者一覧情報, Association 導入団体クラス,
+            YMDHMS 帳票作成日時, ReportManager reportManager) {
+        HakkogoIdoTaishoshaIchiranProperty property = new HakkogoIdoTaishoshaIchiranProperty();
+        try (ReportAssembler<HakkogoIdoTaishoshaIchiranSource> assembler = createAssembler(property, reportManager)) {
+            ReportSourceWriter<HakkogoIdoTaishoshaIchiranSource> reportSourceWriter
+                    = new ReportSourceWriter(assembler);
+            new HakkogoIdoTaishoshaIchiranReport(発行後異動者一覧情報, 導入団体クラス, 帳票作成日時).writeBy(reportSourceWriter);
         }
-        return targets;
+
     }
+
+    private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(
+            IReportProperty<T> property, ReportManager manager) {
+        ReportAssemblerBuilder builder = manager.reportAssembler(property.reportId().value(), property.subGyomuCode());
+        for (BreakAggregator<? super T, ?> breaker : property.breakers()) {
+            builder.addBreak(breaker);
+        }
+        builder.isHojinNo(property.containsHojinNo());
+        builder.isKojinNo(property.containsKojinNo());
+        return builder.<T>create();
+    }
+
 }

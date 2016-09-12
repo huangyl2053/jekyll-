@@ -12,8 +12,12 @@ var DBZ;
                 return "onClick_btnYokaigodoGuide";
             };
 
-            Events.onClick_lostFocus = function () {
-                return "onClick_lostFocus";
+            Events.onClick_kaishiLostFocus = function () {
+                return "onClick_kaishiLostFocus";
+            };
+
+            Events.onClick_syuryoLostFocus = function () {
+                return "onClick_syuryoLostFocus";
             };
 
             Events.onClick_btnSixMonthLater = function () {

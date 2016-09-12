@@ -51,16 +51,16 @@ module DBZ {
                 return new DBZ.ShinseiSonotaJohoInput.ModeController(this.convFiledName("ccdShinseiSonotaJohoInput"));
             }
 
+            public btnModoru(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnModoru"));
+            }
+
             public txtShinseiKubunShinsei(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtShinseiKubunShinsei"));
             }
 
             public txtShinseiKubunLaw(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtShinseiKubunLaw"));
-            }
-
-            public btnModoru(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnModoru"));
             }
 
             public btnToroku(): UZA.Button {

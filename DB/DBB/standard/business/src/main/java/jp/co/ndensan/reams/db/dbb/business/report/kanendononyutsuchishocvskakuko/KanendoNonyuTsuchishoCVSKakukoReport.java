@@ -5,10 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.kanendononyutsuchishocvskakuko;
 
-import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
-import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
+import java.util.ArrayList;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.report.NonyuTsuchisho;
+import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.HonSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.entity.report.kanendononyutsuchishocvskakuko.KanendoNonyuTsuchishoCVSKakukoSource;
-import jp.co.ndensan.reams.uz.uza.report.Report;
+import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -16,50 +18,40 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBB-9110-180 huangh
  */
-public class KanendoNonyuTsuchishoCVSKakukoReport extends Report<KanendoNonyuTsuchishoCVSKakukoSource> {
+public class KanendoNonyuTsuchishoCVSKakukoReport extends NonyuTsuchisho<KanendoNonyuTsuchishoCVSKakukoSource> {
 
-    private final KariSanteiNonyuTsuchiShoJoho item;
-
-    /**
-     * インスタンスを生成します。
-     *
-     * @param item 保険料納入通知書（本算定過年度）【コンビニ角公タイプ】のITEM
-     * @return 保険料納入通知書（本算定過年度）【コンビニ角公タイプ】のReport
-     */
-    public static KanendoNonyuTsuchishoCVSKakukoReport createFrom(
-            KariSanteiNonyuTsuchiShoJoho item) {
-        return new KanendoNonyuTsuchishoCVSKakukoReport(item);
-    }
+    private final HonSanteiNonyuTsuchiShoJoho item;
+    private final NinshoshaSource ninshoshaSource;
 
     /**
      * インスタンスを生成します。
      *
      * @param item 保険料納入通知書（本算定過年度）【コンビニ角公タイプ】のITEM
+     * @param ninshoshaSource NinshoshaSource
      */
-    protected KanendoNonyuTsuchishoCVSKakukoReport(
-            KariSanteiNonyuTsuchiShoJoho item) {
+    public KanendoNonyuTsuchishoCVSKakukoReport(
+            HonSanteiNonyuTsuchiShoJoho item,
+            NinshoshaSource ninshoshaSource) {
 
         this.item = item;
+        this.ninshoshaSource = ninshoshaSource;
+
     }
 
     @Override
     public void writeBy(ReportSourceWriter<KanendoNonyuTsuchishoCVSKakukoSource> reportSourceWriter) {
 
-        boolean 作成フラグ = true;
+        IKanendoNonyuTsuchishoCVSKakukoEditor coverEditor = new KanendoNonyuTsuchishoCVSKakukoEditor(item, ninshoshaSource);
+        IKanendoNonyuTsuchishoCVSKakukoBuilder builder = new KanendoNonyuTsuchishoCVSKakukoBuilder(coverEditor);
+        reportSourceWriter.writeLine(builder);
+    }
 
-        for (NonyuTsuchiShoKiJoho 納入通知書期情報 : item.get納入通知書期情報リスト()) {
-
-            if (Integer.valueOf(納入通知書期情報.get納付書納付額欄().toString()) > 0) {
-
-                作成フラグ = false;
-                break;
-            }
-        }
-        if (作成フラグ) {
-            IKanendoNonyuTsuchishoCVSKakukoEditor coverEditor = new KanendoNonyuTsuchishoCVSKakukoEditor(item);
-            IKanendoNonyuTsuchishoCVSKakukoBuilder builder = new KanendoNonyuTsuchishoCVSKakukoBuilder(coverEditor);
-            reportSourceWriter.writeLine(builder);
-
-        }
+    @Override
+    public List<NonyuTsuchisho<KanendoNonyuTsuchishoCVSKakukoSource>> devidedByPage() {
+        List<NonyuTsuchisho<KanendoNonyuTsuchishoCVSKakukoSource>> nonyuTsuchishoList = new ArrayList<>();
+        KanendoNonyuTsuchishoCVSKakukoReport report
+                = new KanendoNonyuTsuchishoCVSKakukoReport(item, ninshoshaSource);
+        nonyuTsuchishoList.add(report);
+        return nonyuTsuchishoList;
     }
 }

@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3006KyotakuKeikakuJigyoshaS
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT3006KyotakuKeikakuJigyoshaSakuseiDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -100,5 +101,24 @@ public class KyotakuKeikakuJigyoshaSakuseiManager {
             return false;
         }
         return 1 == dac.save(居宅給付計画事業者作成.toEntity());
+    }
+
+    /**
+     * 居宅給付計画事業者作成{@link KyotakuKeikakuJigyoshaSakusei}を削除します。
+     *
+     * @param 居宅給付計画事業者作成 {@link KyotakuKeikakuJigyoshaSakusei}
+     * @return 更新件数 更新結果の件数を返します。
+     */
+    @Transaction
+    public boolean saveByForDeletePhysical居宅給付計画事業者作成(KyotakuKeikakuJigyoshaSakusei 居宅給付計画事業者作成) {
+        requireNonNull(居宅給付計画事業者作成, UrSystemErrorMessages.値がnull.getReplacedMessage("居宅給付計画事業者作成"));
+        if (!居宅給付計画事業者作成.hasChanged()) {
+            return false;
+        }
+        if (居宅給付計画事業者作成.toEntity().getState().equals(EntityDataState.Deleted)) {
+            return 1 == dac.delete(居宅給付計画事業者作成.toEntity());
+        } else {
+            return 1 == dac.save(居宅給付計画事業者作成.toEntity());
+        }
     }
 }

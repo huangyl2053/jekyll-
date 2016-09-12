@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  */
 public class FukakonkyoAndKiwariDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -307,11 +307,6 @@ public class FukakonkyoAndKiwariDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblHokenryo() {
-        return this.getTblFukaKonkyo().getKikan().getTblKikan1().getLblHokenryo();
-    }
-
-    @JsonIgnore
     public Label getLblKikan1() {
         return this.getTblFukaKonkyo().getKikan().getTblKikan1().getLblKikan1();
     }
@@ -334,11 +329,6 @@ public class FukakonkyoAndKiwariDiv extends Panel {
     @JsonIgnore
     public Label getLblHokenryoSansyutsu1() {
         return this.getTblFukaKonkyo().getKikan().getTblKikan1().getLblHokenryoSansyutsu1();
-    }
-
-    @JsonIgnore
-    public Label getLblHokenryo1() {
-        return this.getTblFukaKonkyo().getKikan().getTblKikan1().getLblHokenryo1();
     }
 
     @JsonIgnore
@@ -374,11 +364,6 @@ public class FukakonkyoAndKiwariDiv extends Panel {
     @JsonIgnore
     public Label getLblHokenryoSansyutsu2() {
         return this.getTblFukaKonkyo().getKikan().getTblKikan2().getLblHokenryoSansyutsu2();
-    }
-
-    @JsonIgnore
-    public Label getLblHokenryo2() {
-        return this.getTblFukaKonkyo().getKikan().getTblKikan2().getLblHokenryo2();
     }
 
     @JsonIgnore

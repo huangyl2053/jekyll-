@@ -8,11 +8,11 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.KaigoTeikeibun;
+import jp.co.ndensan.reams.db.dbz.definition.core.teikeibun.TeikeibunKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.teikeibun.TeikeibunShubetsuElseTokki;
+import jp.co.ndensan.reams.db.dbz.definition.core.teikeibun.TeikeibunShubetsuTokki;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoTeikeibun.KaigoTeikeibunDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoTeikeibun.dgTeikeibun_Row;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.TeikeibunShubetsuTokki;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.TeikeibunShubetsuElseTokki;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.TeikeibunKubun;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -43,7 +43,7 @@ public class KaigoTeikeibunSelector {
             div.getDdlTeikenbunShubetsu().setDisabled(true);
         }
 //        if (div.getTeikeiShubetsu().isEmpty()) {
-            //定型区分、種別"001"をキーにして定型文情報を検索
+        //定型区分、種別"001"をキーにして定型文情報を検索
 //            list = new KaigoTeikeibunFinder().getTeikeibunList(
 //                    div.getTeikeiKbn(),
 //                    new RString("001"));
@@ -52,14 +52,12 @@ public class KaigoTeikeibunSelector {
 //            list = new KaigoTeikeibunFinder().getTeikeibunList(
 //                    div.getTeikeiKbn());
 //        } else {
-            //定型区分、種別をキーにして定型文情報を検索
+        //定型区分、種別をキーにして定型文情報を検索
 //            list = new KaigoTeikeibunFinder().getTeikeibunList(
 //                    div.getTeikeiKbn(),
 //                    div.getTeikeiShubetsu());
-
 //            div.getDdlTeikenbunShubetsu().setDisabled(true);
 //        }
-
         //定型文データグリッドの設定
         List<dgTeikeibun_Row> teikeibunList = getDgTeikeibunList(list);
         div.getDgTeikeibun().setDataSource(teikeibunList);
@@ -89,39 +87,39 @@ public class KaigoTeikeibunSelector {
 
         List<KeyValueDataSource> dataSource = new ArrayList<>();
 
-        if (div.getTeikeiKbn().equals(TeikeibunKubun.特記事項.getCode())) {
+        if (div.getTeikeiKbn().equals(TeikeibunKubun.特記事項.getコード())) {
 
             if (div.getTeikeiShubetsu().isEmpty()) {
 
                 for (TeikeibunShubetsuTokki value : TeikeibunShubetsuTokki.values()) {
                     dataSource.add(new KeyValueDataSource(
-                            value.getCode(), value.toRString())
+                            value.getコード(), value.get名称())
                     );
                 }
 
             } else {
 
                 dataSource.add(new KeyValueDataSource(
-                        TeikeibunShubetsuTokki.toValue(div.getTeikeiShubetsu()).getCode(),
-                        TeikeibunShubetsuTokki.toValue(div.getTeikeiShubetsu()).toRString()));
+                        TeikeibunShubetsuTokki.toValue(div.getTeikeiShubetsu()).getコード(),
+                        TeikeibunShubetsuTokki.toValue(div.getTeikeiShubetsu()).get名称()));
 
             }
 
-        } else if (div.getTeikeiKbn().equals(TeikeibunKubun.特記事項以外.getCode())) {
+        } else if (div.getTeikeiKbn().equals(TeikeibunKubun.特記事項以外.getコード())) {
 
             if (div.getTeikeiShubetsu().isEmpty()) {
 
                 for (TeikeibunShubetsuElseTokki value : TeikeibunShubetsuElseTokki.values()) {
                     dataSource.add(new KeyValueDataSource(
-                            value.getCode(), value.toRString())
+                            value.getコード(), value.get名称())
                     );
                 }
 
             } else {
 
                 dataSource.add(new KeyValueDataSource(
-                        TeikeibunShubetsuElseTokki.toValue(div.getTeikeiShubetsu()).getCode(),
-                        TeikeibunShubetsuElseTokki.toValue(div.getTeikeiShubetsu()).toRString()));
+                        TeikeibunShubetsuElseTokki.toValue(div.getTeikeiShubetsu()).getコード(),
+                        TeikeibunShubetsuElseTokki.toValue(div.getTeikeiShubetsu()).get名称()));
 
             }
         }

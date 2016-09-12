@@ -21,6 +21,6 @@ public class HomonkaigoRiyoushaFutangakuGengakuShinseishoProerty extends ReportP
      * コンストラクタです。
      */
     public HomonkaigoRiyoushaFutangakuGengakuShinseishoProerty() {
-        super(SubGyomuCode.DBA介護資格, ReportIdDBA.DBD800005.getReportId());
+        super(SubGyomuCode.DBD介護受給, ReportIdDBA.DBD800005.getReportId());
     }
 }

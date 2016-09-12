@@ -10,8 +10,10 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshashohakkokanribo.KayiSyuuJiyuu;
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshashohakkokanribo.KouFuJiyuu;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
@@ -30,10 +32,6 @@ public class HihokenshashoHakkoKanriboFinder {
 
     private static final RString メニューID_DBAMN72001 = new RString("DBAMN72001");
     private static final RString メニューID_DBAMN72002 = new RString("DBAMN72002");
-    private static final CodeShubetsu コード種別_0002 = new CodeShubetsu("0002");
-    private static final CodeShubetsu コード種別_0003 = new CodeShubetsu("0003");
-    private static final CodeShubetsu コード種別_0004 = new CodeShubetsu("0004");
-    private static final CodeShubetsu コード種別_0005 = new CodeShubetsu("0005");
 
     /**
      * コンストラクタです。
@@ -89,17 +87,15 @@ public class HihokenshashoHakkoKanriboFinder {
         List<KouFuJiyuu> kouFuJiyuuList = new ArrayList<>();
         CodeShubetsu codeShubetsu = CodeShubetsu.EMPTY;
         if (メニューID_DBAMN72001.equals(menuID)) {
-            codeShubetsu = コード種別_0002;
+            codeShubetsu = DBACodeShubetsu.被保険者証交付事由.getコード();
         } else if (メニューID_DBAMN72002.equals(menuID)) {
-            codeShubetsu = コード種別_0004;
+            codeShubetsu = DBACodeShubetsu.資格者証交付事由.getコード();
         }
-        List<UzT0007CodeEntity> entityList = CodeMaster.getCode(SubGyomuCode.DBA介護資格, codeShubetsu);
+        List<UzT0007CodeEntity> entityList = CodeMaster.getCode(SubGyomuCode.DBA介護資格, codeShubetsu, FlexibleDate.getNowDate());
         if (entityList == null) {
             return SearchResult.of(Collections.<UzT0007CodeEntity>emptyList(), 0, false);
         }
         for (UzT0007CodeEntity entity : entityList) {
-            RString name = CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, codeShubetsu, entity.getコード());
-            entity.setコード名称(name);
             kouFuJiyuuList.add(new KouFuJiyuu(entity));
         }
         return SearchResult.of(kouFuJiyuuList, 0, false);
@@ -116,17 +112,15 @@ public class HihokenshashoHakkoKanriboFinder {
         List<KayiSyuuJiyuu> kayiSyuuJiyuuList = new ArrayList<>();
         CodeShubetsu codeShubetsu = CodeShubetsu.EMPTY;
         if (メニューID_DBAMN72001.equals(menuID)) {
-            codeShubetsu = コード種別_0003;
+            codeShubetsu = DBACodeShubetsu.被保険者証回収事由.getコード();
         } else if (メニューID_DBAMN72002.equals(menuID)) {
-            codeShubetsu = コード種別_0005;
+            codeShubetsu = DBACodeShubetsu.資格者証回収事由.getコード();
         }
-        List<UzT0007CodeEntity> codeentityList = CodeMaster.getCode(SubGyomuCode.DBA介護資格, codeShubetsu);
+        List<UzT0007CodeEntity> codeentityList = CodeMaster.getCode(SubGyomuCode.DBA介護資格, codeShubetsu, FlexibleDate.getNowDate());
         if (codeentityList == null) {
             return SearchResult.of(Collections.<UzT0007CodeEntity>emptyList(), 0, false);
         }
         for (UzT0007CodeEntity entity : codeentityList) {
-            RString name = CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, codeShubetsu, entity.getコード());
-            entity.setコード名称(name);
             kayiSyuuJiyuuList.add(new KayiSyuuJiyuu(entity));
         }
         return SearchResult.of(kayiSyuuJiyuuList, 0, false);

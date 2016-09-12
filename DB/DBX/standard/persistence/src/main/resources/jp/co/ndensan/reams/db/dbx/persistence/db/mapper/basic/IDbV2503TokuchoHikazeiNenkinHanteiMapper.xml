@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbV2503TokuchoHikazeiNenkinHanteiビューとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbV2503TokuchoHikazeiNenkinHanteiMapper">
+
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbV2503TokuchoHikazeiNenkinHantei">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbV2503TokuchoHikazeiNenkinHanteiMapper.allColumns_DbV2503TokuchoHikazeiNenkinHantei" />
+        FROM
+        rgdb."DbV2503TokuchoHikazeiNenkinHantei"
+
+    </sql>
+
+    <sql id="allColumns_DbV2503TokuchoHikazeiNenkinHantei">
+        "DbV2503TokuchoHikazeiNenkinHantei"."tsuchishoNo" as "DbV2503TokuchoHikazeiNenkinHantei_tsuchishoNo",
+        "DbV2503TokuchoHikazeiNenkinHantei"."choteiNendo" as "DbV2503TokuchoHikazeiNenkinHantei_choteiNendo",
+        "DbV2503TokuchoHikazeiNenkinHantei"."kazeiNendo" as "DbV2503TokuchoHikazeiNenkinHantei_kazeiNendo",
+        "DbV2503TokuchoHikazeiNenkinHantei"."ki" as "DbV2503TokuchoHikazeiNenkinHantei_ki",
+        "DbV2503TokuchoHikazeiNenkinHantei"."isHikazeiNenkin" as "DbV2503TokuchoHikazeiNenkinHantei_isHikazeiNenkin"
+    </sql>
+
+
+    <!--ビューDbV2503TokuchoHikazeiNenkinHanteiの項目をDbV2503TokuchoHikazeiNenkinHanteiEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbV2503TokuchoHikazeiNenkinHanteiEntity" type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV2503TokuchoHikazeiNenkinHanteiEntity" autoMapping="true">
+        <result property="tsuchishoNo" column="DbV2503TokuchoHikazeiNenkinHantei_tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
+        <result property="choteiNendo" column="DbV2503TokuchoHikazeiNenkinHantei_choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="kazeiNendo" column="DbV2503TokuchoHikazeiNenkinHantei_kazeiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="ki" column="DbV2503TokuchoHikazeiNenkinHantei_ki"/>
+        <result property="isHikazeiNenkin" column="DbV2503TokuchoHikazeiNenkinHantei_isHikazeiNenkin"/>
+    </resultMap>
+
+    <select id="getEntity" resultMap="ResultMap_DbV2503TokuchoHikazeiNenkinHanteiEntity" resultOrdered = "true">
+        SELECT
+        <include refid="allColumns_DbV2503TokuchoHikazeiNenkinHantei"/>
+        FROM
+        rgdb."DbV2503TokuchoHikazeiNenkinHantei"
+    </select>
+
+</mapper>

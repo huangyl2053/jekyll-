@@ -10,6 +10,7 @@ import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3006KyotakuKeikakuJigyoshaSakuseiEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -139,6 +140,15 @@ public class KyotakuKeikakuJigyoshaSakusei
     }
 
     /**
+     * サービス種類コードを返します。
+     *
+     * @return サービス種類コード
+     */
+    public ServiceShuruiCode getサービス種類コード() {
+        return entity.getServiceShuruiCode();
+    }
+
+    /**
      * 計画事業者番号を返します。
      *
      * @return 計画事業者番号
@@ -195,7 +205,8 @@ public class KyotakuKeikakuJigyoshaSakusei
     }
 
     /**
-     * 居宅給付計画事業者作成のみを変更対象とします。<br/> {@link DbT3006KyotakuKeikakuJigyoshaSakuseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 居宅給付計画事業者作成のみを変更対象とします。<br/>
+     * {@link DbT3006KyotakuKeikakuJigyoshaSakuseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link KyotakuKeikakuJigyoshaSakusei}
      */
@@ -209,7 +220,8 @@ public class KyotakuKeikakuJigyoshaSakusei
     }
 
     /**
-     * 保持する居宅給付計画事業者作成を削除対象とします。<br/> {@link DbT3006KyotakuKeikakuJigyoshaSakuseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する居宅給付計画事業者作成を削除対象とします。<br/>
+     * {@link DbT3006KyotakuKeikakuJigyoshaSakuseiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link KyotakuKeikakuJigyoshaSakusei}
      */

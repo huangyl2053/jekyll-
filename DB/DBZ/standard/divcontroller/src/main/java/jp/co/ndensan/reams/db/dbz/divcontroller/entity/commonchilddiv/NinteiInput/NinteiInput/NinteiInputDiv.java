@@ -1,42 +1,43 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiInput.NinteiInput;
+
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-
 import java.util.HashSet;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteiinput.NinteiInputDataPassModel;
+import jp.co.ndensan.reams.db.dbz.business.core.ninteiinput.NinteiInputNaiyo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteiinput.NinteiInputHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteiinput.NinteiInputValidationHandler;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 
 /**
  * NinteiInput のクラスファイル。
  *
- * @reamsid_L DBE-1300-080 yaodongsheng
+ * @reamsid_L DBZ-1300-080 yaodongsheng
  */
 public class NinteiInputDiv extends Panel implements INinteiInputDiv {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -57,6 +58,8 @@ public class NinteiInputDiv extends Panel implements INinteiInputDiv {
     private RString hdnKoroshoIfShikibetsuCode;
     @JsonProperty("hdnHihokenshaNo")
     private RString hdnHihokenshaNo;
+    @JsonProperty("hdnNinteiYmd")
+    private RString hdnNinteiYmd;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -64,11 +67,12 @@ public class NinteiInputDiv extends Panel implements INinteiInputDiv {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
+ /*
      * getNinteiJoho
      * @return NinteiJoho
      */
     @JsonProperty("NinteiJoho")
+    @Override
     public NinteiJohoDiv getNinteiJoho() {
         return NinteiJoho;
     }
@@ -105,6 +109,7 @@ public class NinteiInputDiv extends Panel implements INinteiInputDiv {
      * @return txtShinsakaiIken
      */
     @JsonProperty("txtShinsakaiIken")
+    @Override
     public TextBoxMultiLine getTxtShinsakaiIken() {
         return txtShinsakaiIken;
     }
@@ -188,6 +193,24 @@ public class NinteiInputDiv extends Panel implements INinteiInputDiv {
     @JsonProperty("hdnHihokenshaNo")
     public void setHdnHihokenshaNo(RString hdnHihokenshaNo) {
         this.hdnHihokenshaNo = hdnHihokenshaNo;
+    }
+
+    /*
+     * gethdnNinteiYmd
+     * @return hdnNinteiYmd
+     */
+    @JsonProperty("hdnNinteiYmd")
+    public RString getHdnNinteiYmd() {
+        return hdnNinteiYmd;
+    }
+
+    /*
+     * sethdnNinteiYmd
+     * @param hdnNinteiYmd hdnNinteiYmd
+     */
+    @JsonProperty("hdnNinteiYmd")
+    public void setHdnNinteiYmd(RString hdnNinteiYmd) {
+        this.hdnNinteiYmd = hdnNinteiYmd;
     }
 
     /*
@@ -417,5 +440,25 @@ public class NinteiInputDiv extends Panel implements INinteiInputDiv {
     @Override
     public ValidationMessageControlPairs 開始終了日前後順check() {
         return new NinteiInputValidationHandler(this).開始終了日前後順check();
+    }
+
+    /**
+     * 画面一覧内容を取得。
+     *
+     * @return NinteiInputNaiyo
+     */
+    @Override
+    public NinteiInputNaiyo getNaiyo() {
+        return new NinteiInputHandler(this).getNaiyo();
+    }
+
+    /**
+     * Service一覧内容を取得。
+     *
+     * @return dgServiceIchiran_Row
+     */
+    @Override
+    public List<dgServiceIchiran_Row> getServiceRow() {
+        return new NinteiInputHandler(this).getServiceRow();
     }
 }

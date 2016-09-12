@@ -66,8 +66,8 @@
         <result property="ikenshoSakuseiKaisuKubun" column="ikenshoSakuseiKaisuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="zaitakuShisetsuKubun" column="zaitakuShisetsuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-    <select id="select認定調査依頼情報" resultMap="resultMap_select認定調査依頼情報" 
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter" fetchSize="500">
+    <select resultOrdered="true" id="select認定調査依頼情報" resultMap="resultMap_select認定調査依頼情報" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter" fetchSize="500">
           SELECT 
                   A."hihokenshaNo"
                  ,A."hihokenshaName"
@@ -118,10 +118,63 @@
                  </if>
              AND A."logicalDeletedFlag" = FALSE
             ORDER BY A."shinseishoKanriNo"
-    
     </select>
-    <select id="select主治医意見書依頼情報" resultMap="resultMap_select認定調査依頼情報"
-              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
+     <select resultOrdered="true" id="select更新用認定調査依頼情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.ResultMap_DbT5201NinteichosaIraiJohoEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter" fetchSize="500">
+           SELECT 
+                <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.allColumns_DbT5201NinteichosaIraiJoho" />
+            FROM
+                rgdb."DbT5201NinteichosaIraiJoho"
+                INNER JOIN
+                (
+                 SELECT 
+                      A."shinseishoKanriNo"
+                     ,B."ninteichosaIraiRirekiNo"
+                FROM
+                     rgdb."DbT5101NinteiShinseiJoho" AS A
+                     INNER JOIN 
+                     rgdb."DbT7051KoseiShichosonMaster" AS A1
+                     ON A."shoKisaiHokenshaNo" = A1."shoKisaiHokenshaNo"
+                     LEFT JOIN 
+                     rgdb."DbT5201NinteichosaIraiJoho" AS B
+                     ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
+                     AND B."logicalDeletedFlag" = FALSE
+                     AND NOT EXISTS (
+                            SELECT 'X' 
+                             FROM rgdb."DbT5201NinteichosaIraiJoho" AS B1
+                             WHERE 
+                                  B."shinseishoKanriNo" = B1."shinseishoKanriNo"
+                                  AND B1."logicalDeletedFlag" = FALSE
+                                  AND B."ninteichosaIraiRirekiNo" <![CDATA[<]]> B1."ninteichosaIraiRirekiNo"
+
+                     )
+                     LEFT JOIN 
+                      rgdb."DbT5910NinteichosaItakusakiJoho" AS C
+                      ON B."ninteichosaItakusakiCode" = C."ninteichosaItakusakiCode"
+                      AND C."shichosonCode" = A1."shichosonCode"
+                      AND C."jokyoFlag" = TRUE
+                     LEFT JOIN 
+                      rgdb."DbT5913ChosainJoho" AS D
+                      ON B."ninteichosaItakusakiCode" = D."ninteiChosaItakusakiCode"
+                      AND B."ninteiChosainCode"  = D."ninteiChosainCode" 
+                      AND D."shichosonCode" = A1."shichosonCode"
+                      AND D."jokyoFlag" = TRUE
+                WHERE
+                     A."shinseishoKanriNo" IN 
+                     <foreach collection="申請書管理番号リスト" item="code" open="(" separator="," close=")">
+                         #{code} 
+                     </foreach>
+                     <if test="uses証記載保険者番号">
+                         AND A."shoKisaiHokenshaNo" = #{証記載保険者番号}
+                     </if>
+                 AND A."logicalDeletedFlag" = FALSE
+                ORDER BY A."shinseishoKanriNo"
+                )  temp
+                ON "DbT5201NinteichosaIraiJoho"."shinseishoKanriNo" = temp."shinseishoKanriNo"
+                AND "DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo" = temp."ninteichosaIraiRirekiNo"
+    </select>
+    <select resultOrdered="true" id="select主治医意見書依頼情報" resultMap="resultMap_select認定調査依頼情報"
+              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
          SELECT 
                 A."hihokenshaNo"
                ,A."hihokenshaName"
@@ -173,10 +226,64 @@
           AND A."logicalDeletedFlag" = FALSE
          ORDER BY A."shinseishoKanriNo"
     </select>
-    
-     <select id="select認定調査依頼書" resultMap="resultMap_select認定調査依頼情報"
-              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter" fetchSize="500">
+     <select resultOrdered="true" id="select更新用主治医意見書依頼情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.ResultMap_DbT5301ShujiiIkenshoIraiJohoEntity"
+              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
+         SELECT 
+               <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.allColumns_DbT5301ShujiiIkenshoIraiJoho" />
+         FROM
+               rgdb."DbT5301ShujiiIkenshoIraiJoho"
+               INNER JOIN 
+              (
+                 SELECT 
+                         A."shinseishoKanriNo"
+                        ,B."ikenshoIraiRirekiNo"
+                  FROM
+                       rgdb."DbT5101NinteiShinseiJoho" AS A
+                       INNER JOIN 
+                       rgdb."DbT7051KoseiShichosonMaster" AS A1
+                       ON A."shoKisaiHokenshaNo" = A1."shoKisaiHokenshaNo"
+                       LEFT JOIN 
+                       rgdb."DbT5301ShujiiIkenshoIraiJoho" AS B
+                       ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
+                       AND B."logicalDeletedFlag" = FALSE
+                       AND NOT EXISTS (
+                              SELECT 'X' 
+                               FROM rgdb."DbT5301ShujiiIkenshoIraiJoho" AS B1
+                               WHERE 
+                                    B."shinseishoKanriNo" = B1."shinseishoKanriNo"
+                                    AND B1."logicalDeletedFlag" = FALSE
+                                    AND B."ikenshoIraiRirekiNo" <![CDATA[<]]> B1."ikenshoIraiRirekiNo"
+
+                       )
+                       LEFT JOIN 
+                        rgdb."DbT5911ShujiiIryoKikanJoho" AS C
+                        ON B."shujiiIryokikanCode" = C."shujiiIryokikanCode"
+                        AND C."shichosonCode" = A1."shichosonCode"
+                        AND C."jokyoFlag" = TRUE
+                       LEFT JOIN 
+                        rgdb."DbT5912ShujiiJoho" AS D
+                        ON B."shujiiIryokikanCode" = D."shujiiIryokikanCode"
+                        AND B."shujiiCode"  = D."shujiiCode" 
+                        AND D."shichosonCode" = A1."shichosonCode"
+                        AND D."jokyoFlag" = TRUE
+                  WHERE
+                       A."shinseishoKanriNo" IN 
+                       <foreach collection="申請書管理番号リスト" item="code" open="(" separator="," close=")">
+                              #{code} 
+                       </foreach>
+                       <if test="uses証記載保険者番号">
+                              AND A."shoKisaiHokenshaNo" = #{証記載保険者番号}
+                       </if>
+                   AND A."logicalDeletedFlag" = FALSE
+                  ORDER BY A."shinseishoKanriNo"
+               ) temp
+               ON "DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = temp."shinseishoKanriNo" 
+               AND "DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo" = temp."ikenshoIraiRirekiNo" 
+    </select>
+     <select resultOrdered="true" id="select認定調査依頼書" resultMap="resultMap_select認定調査依頼情報"
+              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter" fetchSize="500">
              SELECT 
+                 DISTINCT
                   A."hihokenshaNo"
                  ,A."hihokenshaKana"
                  ,A."hihokenshaName"
@@ -230,8 +337,8 @@
                  A."shinseishoKanriNo" = #{申請書管理番号}
              AND A."logicalDeletedFlag" = FALSE
      </select>
-    <select id="select認定調査依頼一覧表" resultMap="resultMap_select認定調査依頼情報"
-               parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter" fetchSize="500">
+    <select resultOrdered="true" id="select認定調査依頼一覧表" resultMap="resultMap_select認定調査依頼情報"
+               parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter" fetchSize="500">
            SELECT 
                   A."hihokenshaNo"
                  ,A."ninteiShinseiYMD"
@@ -288,9 +395,10 @@
            ORDER BY 
                   A."shinseishoKanriNo"
       </select>
-      <select id="select認定調査票_概況調査" resultMap="resultMap_select認定調査依頼情報"
-              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
+      <select resultOrdered="true" id="select認定調査票_概況調査" resultMap="resultMap_select認定調査依頼情報"
+              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
             SELECT 
+                  DISTINCT
                   A."shinseishoKanriNo"
                  ,A."shoKisaiHokenshaNo"
                  ,A."ninteiShinseiYMD"
@@ -361,9 +469,10 @@
 
       </select>
       
-       <select id="select認定調査票差異チェック票" resultMap="resultMap_select認定調査依頼情報"
-              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
+       <select resultOrdered="true" id="select認定調査票差異チェック票" resultMap="resultMap_select認定調査依頼情報"
+              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
             SELECT 
+                  DISTINCT
                   A."hihokenshaNo"
                  ,A."hihokenshaName"
                  ,A."seinengappiYMD"
@@ -381,7 +490,7 @@
                  LEFT JOIN 
                  rgdb."DbT5121ShinseiRirekiJoho" AS B
                  ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
-                 LEFT JOIN 
+                 INNER JOIN 
                   rgdb."DbT5203NinteichosahyoKihonChosa" AS C
                   ON B."zenkaiShinseishoKanriNo" = C."shinseishoKanriNo"
                   AND NOT EXISTS (
@@ -392,7 +501,10 @@
                               AND C."ninteichosaRirekiNo" <![CDATA[<]]>  C1."ninteichosaRirekiNo"
 
                  )
-                 AND C."koroshoIfShikibetsuCode" = A."koroshoIfShikibetsuCode"
+                 AND C."koroshoIfShikibetsuCode" = 
+                  (SELECT "koroshoIfShikibetsuCode" 
+                           FROM rgdb."DbT5101NinteiShinseiJoho" 
+                         WHERE "shinseishoKanriNo" = B."zenkaiShinseishoKanriNo")
                  INNER JOIN 
                   rgdb."DbT5116IchijiHanteiKekkaJoho" AS D
                   ON C."shinseishoKanriNo" = D."shinseishoKanriNo"
@@ -417,9 +529,10 @@
              AND A."logicalDeletedFlag" = FALSE
        </select>
        
-      <select id="select意見書作成依頼書" resultMap="resultMap_select認定調査依頼情報"
-                parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
+      <select resultOrdered="true" id="select意見書作成依頼書" resultMap="resultMap_select認定調査依頼情報"
+                parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
            SELECT 
+                DISTINCT
                 A."shoKisaiHokenshaNo"
                ,A."hihokenshaNo"
                ,A."hihokenshaKana"
@@ -473,8 +586,8 @@
         
         </select>
         
-         <select id="select意見書作成依頼一覧表" resultMap="resultMap_select認定調査依頼情報"
-                 parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
+         <select resultOrdered="true" id="select意見書作成依頼一覧表" resultMap="resultMap_select認定調査依頼情報"
+                 parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
                 SELECT 
                     A."hihokenshaNo"
                    ,A."hihokenshaKana"
@@ -482,6 +595,7 @@
                    ,A."seinengappiYMD"
                    ,A."seibetsu"
                    ,A."jusho"
+                   ,A."ninteiShinseiYMD"
                    ,B."ikenshoSakuseiIraiYMD"
                    ,B."ikenshoSakuseiKigenYMD"
                    ,B."shujiiIryokikanCode"
@@ -529,9 +643,10 @@
          
          </select>
          
-        <select id="select主治医意見書記入用紙" resultMap="resultMap_select認定調査依頼情報"
-                   parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
+        <select resultOrdered="true" id="select主治医意見書記入用紙" resultMap="resultMap_select認定調査依頼情報"
+                   parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
                     SELECT 
+                      DISTINCT
                       A."shinseishoKanriNo"
                      ,A."shoKisaiHokenshaNo"
                      ,A."hihokenshaNo"
@@ -545,7 +660,7 @@
                      ,A."yubinNo"
                      ,A."telNo"
                      ,A."shujiiIryokikanCode"
-                     ,A"shujiiCode"
+                     ,A."shujiiCode"
                      ,B."shichosonCode"
                      ,C."iryoKikanMeisho"
                      ,C."jusho" AS "iryoKikanJusho"
@@ -573,9 +688,10 @@
                 AND A."logicalDeletedFlag" = FALSE
          </select>
          
-            <select id="select主治医意見書作成料請求書" resultMap="resultMap_select認定調査依頼情報"
-                   parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
+            <select resultOrdered="true" id="select主治医意見書作成料請求書" resultMap="resultMap_select認定調査依頼情報"
+                   parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
                SELECT 
+                    DISTINCT
                     A."shinseishoKanriNo"
                    ,A."hihokenshaNo"
                    ,A."hihokenshaKana"
@@ -616,15 +732,16 @@
                    rgdb."DbT5911ShujiiIryoKikanJoho" AS E
                    ON E."shujiiIryokikanCode" = A."shujiiIryokikanCode"
                    AND E."shichosonCode" = C."shichosonCode"
-                   AND E."jokyoFlag" = FALSE
+                   AND E."jokyoFlag" = TRUE
              WHERE
                   A."shinseishoKanriNo" = #{申請書管理番号}
               AND A."logicalDeletedFlag" = FALSE
          </select>
          
-          <select id="select介護保険診断命令書" resultMap="resultMap_select認定調査依頼情報"
-                  parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
+          <select resultOrdered="true" id="select介護保険診断命令書" resultMap="resultMap_select認定調査依頼情報"
+                  parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
                 SELECT 
+                       DISTINCT
                         A."hihokenshaNo"
                        ,A."hihokenshaName"
                        ,A."shinseishoKanriNo"

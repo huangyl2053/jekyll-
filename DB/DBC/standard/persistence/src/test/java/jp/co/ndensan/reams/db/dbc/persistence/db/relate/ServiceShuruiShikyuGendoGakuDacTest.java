@@ -9,8 +9,8 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ServiceShuruiShikyuGendoGa
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7111ServiceShuruiShikyuGendoGakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT7111ServiceShuruiShikyuGendoGakuDac;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.IYokaigoJotaiKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.YokaigoJotaiKubun09A;
+import jp.co.ndensan.reams.db.dbz.definition.core.IYokaigoJotaiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubun09A;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
@@ -88,7 +88,7 @@ public class ServiceShuruiShikyuGendoGakuDacTest {
         // TODO 個別のMapperのテストクラスで項目単位の転記処理を確認しているため、全項目について確認する必要はありません。
         @Test
         public void データが見つかる検索条件を渡すと_サービス種類支給限度額モデル返す() {
-            assertThat(sut.selectByKey(サービス種類コード1, 要介護状態区分1, 適用開始年月1, 履歴番号).get().getサービス種類コード(), is(サービス種類コード1));
+            assertThat(sut.selectByKey(サービス種類コード1, 要介護状態区分1, 適用開始年月1, 履歴番号).get().getServiceShuruiCode(), is(サービス種類コード1));
         }
 
         // データが見つからない値を指定するように修正してください。
@@ -103,10 +103,10 @@ public class ServiceShuruiShikyuGendoGakuDacTest {
         @Test
         public void データが見つかる検索条件を渡すと_モデルリストを返す() {
             TestSupport.insertDbT7111(サービス種類コード1, 要介護状態区分1, 適用開始年月1, 履歴番号);
-            IItemList<ServiceShuruiShikyuGendoGaku> modelList = sut.selectAll();
+            IItemList<DbT7111ServiceShuruiShikyuGendoGakuEntity> modelList = sut.selectAll();
             assertThat(modelList.size(), is(1));
             // 任意の項目が一致するテストケースを記述してください。
-            assertThat(modelList.toList().get(0).getサービス種類コード(), is(サービス種類コード1));
+            assertThat(modelList.toList().get(0).getServiceShuruiCode(), is(サービス種類コード1));
         }
 
         @Test
@@ -130,10 +130,10 @@ public class ServiceShuruiShikyuGendoGakuDacTest {
         @Test
         public void データが見つかる検索条件を渡すと_モデルリストを返す() {
             TestSupport.insertDbT7111(サービス種類コード1, 要介護状態区分1, 適用開始年月1, 履歴番号);
-            IItemList<ServiceShuruiShikyuGendoGaku> modelList = sut.selectサービス種類支給限度額リスト(要介護状態区分1, 基準日);
+            IItemList<DbT7111ServiceShuruiShikyuGendoGakuEntity> modelList = sut.selectサービス種類支給限度額リスト(要介護状態区分1, 基準日);
             assertThat(modelList.size(), is(1));
             // 任意の項目が一致するテストケースを記述してください。
-            assertThat(modelList.toList().get(0).getサービス種類コード(), is(サービス種類コード1));
+            assertThat(modelList.toList().get(0).getServiceShuruiCode(), is(サービス種類コード1));
         }
 
         @Test
@@ -153,10 +153,10 @@ public class ServiceShuruiShikyuGendoGakuDacTest {
         @Test
         public void データが見つかる検索条件を渡すと_モデルリストを返す() {
             TestSupport.insertDbT7111(サービス種類コード1, 要介護状態区分1, 適用開始年月1, 履歴番号);
-            IItemList<ServiceShuruiShikyuGendoGaku> modelList = sut.selectサービス種類支給限度額リスト(要介護状態区分1);
+            IItemList<DbT7111ServiceShuruiShikyuGendoGakuEntity> modelList = sut.selectサービス種類支給限度額リスト(要介護状態区分1);
             assertThat(modelList.size(), is(1));
             // 任意の項目が一致するテストケースを記述してください。
-            assertThat(modelList.toList().get(0).getサービス種類コード(), is(サービス種類コード1));
+            assertThat(modelList.toList().get(0).getServiceShuruiCode(), is(サービス種類コード1));
         }
 
         @Test
@@ -178,7 +178,7 @@ public class ServiceShuruiShikyuGendoGakuDacTest {
         public void 全ての有効なモデルを持つServiceShuruiShikyuGendoGakuRelateモデルを渡した時_insertは_1を返す() {
             ServiceShuruiShikyuGendoGaku model = new ServiceShuruiShikyuGendoGaku(DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.createDbT7111ServiceShuruiShikyuGendoGakuEntity());
 
-            assertThat(sut.insert(model), is(1));
+            assertThat(sut.insert(model.toEntity()), is(1));
         }
     }
 
@@ -213,8 +213,8 @@ public class ServiceShuruiShikyuGendoGakuDacTest {
         public void 全ての有効なモデルを持つServiceShuruiShikyuGendoGakuRelateモデルを渡した時_deleteは_1を返す() {
             ServiceShuruiShikyuGendoGaku model = new ServiceShuruiShikyuGendoGaku(DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.createDbT7111ServiceShuruiShikyuGendoGakuEntity());
 
-            sut.insert(model);
-            assertThat(sut.delete(model), is(1));
+            sut.insert(model.toEntity());
+            assertThat(sut.delete(model.toEntity()), is(1));
         }
     }
 
@@ -230,8 +230,8 @@ public class ServiceShuruiShikyuGendoGakuDacTest {
         public void 全ての有効なモデルを持つServiceShuruiShikyuGendoGakuRelateモデルを渡した時_deletePhysicalは_1を返す() {
             ServiceShuruiShikyuGendoGaku model = new ServiceShuruiShikyuGendoGaku(DbT7111ServiceShuruiShikyuGendoGakuEntityGenerator.createDbT7111ServiceShuruiShikyuGendoGakuEntity());
 
-            sut.insert(model);
-            assertThat(sut.deletePhysical(model), is(1));
+            sut.insert(model.toEntity());
+            assertThat(sut.deletePhysical(model.toEntity()), is(1));
         }
     }
 

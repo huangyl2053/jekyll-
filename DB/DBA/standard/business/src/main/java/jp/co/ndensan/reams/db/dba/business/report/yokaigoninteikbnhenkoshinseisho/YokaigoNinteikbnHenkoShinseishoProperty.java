@@ -25,6 +25,6 @@ public class YokaigoNinteikbnHenkoShinseishoProperty
      * インスタンスを生成します。
      */
     public YokaigoNinteikbnHenkoShinseishoProperty() {
-        super(SubGyomuCode.DBA介護資格, ID);
+        super(SubGyomuCode.DBD介護受給, ID);
     }
 }

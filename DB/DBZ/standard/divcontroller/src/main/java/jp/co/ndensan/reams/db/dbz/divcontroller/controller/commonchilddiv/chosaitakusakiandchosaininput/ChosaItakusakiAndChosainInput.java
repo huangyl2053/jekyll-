@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 /**
  * 共有子Div「調査委託先/調査員入力」のDivControllerです。
  *
- * @reamsid_L DBE-1300-030 zhangguopeng
+ * @reamsid_L DBZ-1300-030 zhangguopeng
  */
 public class ChosaItakusakiAndChosainInput {
 
@@ -61,10 +61,7 @@ public class ChosaItakusakiAndChosainInput {
      * @return レスポンス
      */
     public ResponseData<ChosaItakusakiAndChosainInputDiv> onClick_BtnClear(ChosaItakusakiAndChosainInputDiv div) {
-        div.getTxtChosaItakusakiCode().clearValue();
-        div.getTxtChosaItakusakiName().clearValue();
-        div.getTxtChosainCode().clearValue();
-        div.getTxtChosainName().clearValue();
+        getHandler(div).onClick_BtnClear();
         return ResponseData.of(div).respond();
     }
 

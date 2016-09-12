@@ -75,14 +75,11 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoA4TateEditor implements IKa
         }
 
         reportSource.genmenAto = DecimalFormatter.toコンマ区切りRString(更正後.get減免額(), 0);
-        reportSource.genmenMae = DecimalFormatter.toコンマ区切りRString(更正前.get減免額(), 0);
         reportSource.hihokenshaNo = 編集後本算定通知書共通情報.get被保険者番号().value();
         reportSource.hokenGakuAto = DecimalFormatter.toコンマ区切りRString(更正後.get確定保険料_年額(), 0);
-        reportSource.hokenGakuMae = DecimalFormatter.toコンマ区切りRString(更正前.get確定保険料_年額(), 0);
         reportSource.hokenRitsuAto = DecimalFormatter.toコンマ区切りRString(更正後.get保険料率(), 0);
-        reportSource.hokenRitsuMae = DecimalFormatter.toコンマ区切りRString(更正前.get保険料率(), 0);
         reportSource.hokenSanshutsuAto = DecimalFormatter.toコンマ区切りRString(更正後.get減免前保険料_年額(), 0);
-        reportSource.hokenSanshutsuMae = DecimalFormatter.toコンマ区切りRString(更正前.get減免前保険料_年額(), 0);
+
         HyojiCodes 表示コード = 編集後本算定通知書共通情報.get表示コード();
         reportSource.hyojicode1 = 表示コード.get表示コード１();
         reportSource.hyojicode2 = 表示コード.get表示コード２();
@@ -101,20 +98,29 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoA4TateEditor implements IKa
         reportSource.setaiCode = 編集後本算定通知書共通情報.get編集後個人().get世帯コード().value();
         reportSource.shikibetsuCode = 編集後本算定通知書共通情報.get識別コード().value();
         reportSource.shotokuKbnAto = 更正後.get保険料段階();
-        reportSource.shotokuKbnMae = 更正前.get保険料段階();
         reportSource.shutokuYmdAto = 更正後.get期間_自();
-        reportSource.shutokuYmdMae = 更正前.get期間_自();
         reportSource.soshitsuYmdAto = 更正後.get期間_至();
-        reportSource.soshitsuYmdMae = 更正前.get期間_至();
+
         set調定年度_タイトル_通知文1(reportSource, item.get本算定決定通知書情報());
         set通知文1と通知区分(reportSource, 編集後本算定通知書共通情報);
         reportSource.tsuchishoNo = 編集後本算定通知書共通情報.get通知書番号().value();
         reportSource.tsukisuAto = 更正後.get月数_ケ月();
-        reportSource.tsukisuMae = 更正前.get月数_ケ月();
+
         reportSource.zogenGaku = DecimalFormatter.toコンマ区切りRString(編集後本算定通知書共通情報.get増減額(), 0);
         reportSource.koseigoHokenryoGaku = DecimalFormatter.toコンマ区切りRString(更正後.get確定保険料_年額(), 0);
         reportSource.tokuchoGimusha = 更正後.get特別徴収義務者();
         reportSource.tokuchoTaishoNenkin = 更正後.get特別徴収対象年金();
+
+        if (更正前 != null) {
+            reportSource.genmenMae = DecimalFormatter.toコンマ区切りRString(更正前.get減免額(), 0);
+            reportSource.hokenGakuMae = DecimalFormatter.toコンマ区切りRString(更正前.get確定保険料_年額(), 0);
+            reportSource.hokenRitsuMae = DecimalFormatter.toコンマ区切りRString(更正前.get保険料率(), 0);
+            reportSource.hokenSanshutsuMae = DecimalFormatter.toコンマ区切りRString(更正前.get減免前保険料_年額(), 0);
+            reportSource.shotokuKbnMae = 更正前.get保険料段階();
+            reportSource.shutokuYmdMae = 更正前.get期間_自();
+            reportSource.soshitsuYmdMae = 更正前.get期間_至();
+            reportSource.tsukisuMae = 更正前.get月数_ケ月();
+        }
         return reportSource;
     }
 
@@ -138,25 +144,27 @@ public class KaigoHokenryogakuHenkoKenChushiTsuchishoA4TateEditor implements IKa
 
     private boolean is期別金額変更(EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報) {
         boolean is変更 = false;
-        List<UniversalPhase> 更正前普徴期別金額リスト = 編集後本算定通知書共通情報.get更正前().get普徴期別金額リスト();
-        List<UniversalPhase> 更正後普徴期別金額リスト = 編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト();
+        if (編集後本算定通知書共通情報.get更正前() != null) {
+            List<UniversalPhase> 更正前普徴期別金額リスト = 編集後本算定通知書共通情報.get更正前().get普徴期別金額リスト();
+            List<UniversalPhase> 更正後普徴期別金額リスト = 編集後本算定通知書共通情報.get更正後().get普徴期別金額リスト();
 
-        for (UniversalPhase 更正前 : 更正前普徴期別金額リスト) {
-            for (UniversalPhase 更正後 : 更正後普徴期別金額リスト) {
-                if (更正前.get期() == 更正後.get期() && !更正前.get金額().equals(更正後.get金額())) {
-                    is変更 = true;
+            for (UniversalPhase 更正前 : 更正前普徴期別金額リスト) {
+                for (UniversalPhase 更正後 : 更正後普徴期別金額リスト) {
+                    if (更正前.get期() == 更正後.get期() && !更正前.get金額().equals(更正後.get金額())) {
+                        is変更 = true;
+                    }
                 }
             }
-        }
 
-        List<CharacteristicsPhase> 更正前特徴期別金額リスト = 編集後本算定通知書共通情報.get更正前().get特徴期別金額リスト();
-        List<CharacteristicsPhase> 更正後特徴期別金額リスト = 編集後本算定通知書共通情報.get更正後().get特徴期別金額リスト();
+            List<CharacteristicsPhase> 更正前特徴期別金額リスト = 編集後本算定通知書共通情報.get更正前().get特徴期別金額リスト();
+            List<CharacteristicsPhase> 更正後特徴期別金額リスト = 編集後本算定通知書共通情報.get更正後().get特徴期別金額リスト();
 
-        for (CharacteristicsPhase 更正前 : 更正前特徴期別金額リスト) {
-            for (CharacteristicsPhase 更正後 : 更正後特徴期別金額リスト) {
+            for (CharacteristicsPhase 更正前 : 更正前特徴期別金額リスト) {
+                for (CharacteristicsPhase 更正後 : 更正後特徴期別金額リスト) {
 
-                if (更正前.get期() == 更正後.get期() && !更正前.get金額().equals(更正後.get金額())) {
-                    is変更 = true;
+                    if (更正前.get期() == 更正後.get期() && !更正前.get金額().equals(更正後.get金額())) {
+                        is変更 = true;
+                    }
                 }
             }
         }

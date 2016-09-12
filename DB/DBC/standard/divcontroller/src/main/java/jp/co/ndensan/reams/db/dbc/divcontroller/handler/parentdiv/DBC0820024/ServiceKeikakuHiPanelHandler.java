@@ -18,15 +18,13 @@ import jp.co.ndensan.reams.db.dbc.definition.core.shinsahoho.ShinsaHohoKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDiv.IServiceCodeInputCommonChildDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820024.ServiceKeikakuHiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820024.dgdYichiran_Row;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -40,7 +38,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
@@ -54,7 +51,6 @@ public class ServiceKeikakuHiPanelHandler {
     private final ServiceKeikakuHiPanelDiv div;
     private static final int 連番LENGTH = 2;
     private static final RString 連番_1 = new RString("01");
-    private static final RString コード種別 = new RString("0002");
     private static final RString 事業者区分BLANK = new RString("0");
     private static final FlexibleYearMonth サービス年月_200904 = new FlexibleYearMonth("200904");
     private static final FlexibleYearMonth サービス年月_200903 = new FlexibleYearMonth("200903");
@@ -79,30 +75,40 @@ public class ServiceKeikakuHiPanelHandler {
     /**
      * onLoad処理 サービス提供年月が平成２１年4月以降の場合
      *
+     * @param 画面モード RString
      * @param entity200904List List<ShokanServicePlan200904Result>
      */
-    public void onLoad200904(List<ShokanServicePlan200904Result> entity200904List) {
-        setサービス計画費共通エリアLoad(entity200904List);
-        setサービス計画費グリッドエリア(entity200904List);
+    public void onLoad200904(List<ShokanServicePlan200904Result> entity200904List, RString 画面モード) {
+        setサービス計画費共通エリアRequired(true);
+        setサービス計画費グリッドエリアRequired(false);
+        setサービス計画費Required(false);
+        setサービス計画費共通エリアLoad(entity200904List, 画面モード);
+        setサービス計画費グリッドエリア(entity200904List, 画面モード);
 
     }
 
     /**
      * onLoad処理 サービス年月が200604～200903の場合
      *
+     * @param 画面モード RString
      * @param entity200604 ShokanServicePlan200604Result
      */
-    public void onLoad200604(ShokanServicePlan200604Result entity200604) {
-        setサービス計画費エリア200604(entity200604);
+    public void onLoad200604(ShokanServicePlan200604Result entity200604, RString 画面モード) {
+        setサービス計画費共通エリアRequired(false);
+        setサービス計画費グリッドエリアRequired(false);
+        setサービス計画費エリア200604(entity200604, 画面モード);
     }
 
     /**
      * onLoad処理 サービス年月が200603以前の場合
      *
      * @param entity200004 ServiceKeikakuHiRealtEntity
+     * @param 画面モード RString
      */
-    public void onLoad200004(ShokanServicePlan200004Result entity200004) {
-        setサービス計画費エリア200004(entity200004);
+    public void onLoad200004(ShokanServicePlan200004Result entity200004, RString 画面モード) {
+        setサービス計画費共通エリアRequired(false);
+        setサービス計画費グリッドエリアRequired(false);
+        setサービス計画費エリア200004(entity200004, 画面モード);
     }
 
     /**
@@ -131,10 +137,9 @@ public class ServiceKeikakuHiPanelHandler {
      * ボタン制御
      *
      * @param shikibetsuNoKanri ShikibetsuNoKanri
+     * @param paramter ShoukanharaihishinseimeisaikensakuParameter
      */
-    public void getボタンを制御(ShikibetsuNoKanri shikibetsuNoKanri) {
-        ShoukanharaihishinseimeisaikensakuParameter paramter = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
-                ShoukanharaihishinseimeisaikensakuParameter.class);
+    public void getボタンを制御(ShikibetsuNoKanri shikibetsuNoKanri, ShoukanharaihishinseimeisaikensakuParameter paramter) {
         HihokenshaNo 被保険者番号 = paramter.get被保険者番号();
         FlexibleYearMonth サービス年月 = paramter.getサービス年月();
         RString 整理番号 = paramter.get整理番号();
@@ -159,6 +164,7 @@ public class ServiceKeikakuHiPanelHandler {
      */
     public void click追加() {
         div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().setDisplayNone(false);
+        setサービス計画費グリッドエリアRequired(true);
         setサービス計画費共通エリア(null);
         clickクリア();
     }
@@ -170,6 +176,7 @@ public class ServiceKeikakuHiPanelHandler {
      */
     public void click修正(dgdYichiran_Row row) {
         div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().setDisplayNone(false);
+        setサービス計画費グリッドエリアRequired(true);
         setサービス計画費共通エリア(null);
         clickクリア();
         setサービス計画費共通エリアdown(row);
@@ -183,6 +190,7 @@ public class ServiceKeikakuHiPanelHandler {
      */
     public void click削除(dgdYichiran_Row row) {
         div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().setDisplayNone(false);
+        setサービス計画費グリッドエリアRequired(false);
         setサービス計画費共通エリア(null);
         clickクリア();
         setサービス計画費共通エリアdown(row);
@@ -206,6 +214,27 @@ public class ServiceKeikakuHiPanelHandler {
         div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getTxtTekiyoUp().setReadOnly(true);
         div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getBtnClear().setDisabled(true);
         div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getBtnKeisan().setDisabled(true);
+    }
+
+    /**
+     * 「確定する」ボタンを押下した際に実行します。合計の値の設定
+     */
+    public void set合計() {
+        List<dgdYichiran_Row> dataSource = div.getPanelServiceKeikakuhiUp().getDgdYichiran().getDataSource();
+        Decimal 単位合計 = Decimal.ZERO;
+        // TODO ramlファイルの修正は許可されない、
+//        Decimal 請求額合計 = Decimal.ZERO;
+        for (dgdYichiran_Row row : dataSource) {
+            if (RowState.Deleted.equals(row.getRowState())) {
+                continue;
+            }
+            if (row.getDefaultDataName4().getValue() != null) {
+                単位合計 = 単位合計.add(row.getDefaultDataName4().getValue());
+            }
+            // TODO ramlファイルの修正は許可されない、
+//            if ()
+        }
+        div.getPanelServiceKeikakuhiUp().getTxtGokeiTanyi().setValue(単位合計);
     }
 
     /**
@@ -251,6 +280,7 @@ public class ServiceKeikakuHiPanelHandler {
      * 「確定する」ボタンを押下 登録の場合
      */
     public void 確定_登録() {
+        setサービス計画費グリッドエリアRequired(false);
         dgdYichiran_Row row = new dgdYichiran_Row();
         登録パネル_グリッド(row);
         List<dgdYichiran_Row> rowList = div.getPanelServiceKeikakuhiUp().getDgdYichiran().getDataSource();
@@ -263,6 +293,7 @@ public class ServiceKeikakuHiPanelHandler {
      * 「確定する」ボタンを押下 修正の場合
      */
     public void 確定_修正() {
+        setサービス計画費グリッドエリアRequired(false);
         dgdYichiran_Row row = div.getPanelServiceKeikakuhiUp().getDgdYichiran().getClickedItem();
         RowState state = row.getRowState();
         if (!RowState.Added.equals(state)) {
@@ -280,6 +311,7 @@ public class ServiceKeikakuHiPanelHandler {
      * 「確定する」ボタンを押下 削除の場合
      */
     public void 確定_削除() {
+        setサービス計画費グリッドエリアRequired(false);
         dgdYichiran_Row row = div.getPanelServiceKeikakuhiUp().getDgdYichiran().getClickedItem();
         RowState state = row.getRowState();
         if (RowState.Added.equals(state)) {
@@ -319,13 +351,11 @@ public class ServiceKeikakuHiPanelHandler {
     }
 
     /**
-     *
+     * @param entity200604 ShokanServicePlan200604Result
      * @return サービス年月が200604～200903の場合 画面内容の変更有無
      */
-    public Boolean 変更チェック処理200604() {
+    public Boolean 変更チェック処理200604(ShokanServicePlan200604Result entity200604) {
         int flag = 0;
-        ShokanServicePlan200604Result entity200604 = ViewStateHolder.get(
-                ViewStateKeys.償還払い費支給申請決定_サービス計画費, ShokanServicePlan200604Result.class);
         if (entity200604 == null) {
             return true;
         }
@@ -359,13 +389,11 @@ public class ServiceKeikakuHiPanelHandler {
     }
 
     /**
-     *
+     * @param entity200004 ShokanServicePlan200004Result
      * @return サービス年月が200603以前の場合 画面内容の変更有無
      */
-    public Boolean 変更チェック処理200004() {
+    public Boolean 変更チェック処理200004(ShokanServicePlan200004Result entity200004) {
         int flag = 0;
-        ShokanServicePlan200004Result entity200004 = ViewStateHolder.get(
-                ViewStateKeys.償還払い費支給申請決定_サービス計画費, ShokanServicePlan200004Result.class);
         if (entity200004 == null) {
             return true;
         }
@@ -397,11 +425,17 @@ public class ServiceKeikakuHiPanelHandler {
     /**
      * 「申請を保存する」ボタン 保存処理 Handler処理
      *
+     * @param parameter ShoukanharaihishinseimeisaikensakuParameter
+     * @param entity200904List List<ShokanServicePlan200904Result>
+     * @param entity200604Result ShokanServicePlan200604Result
+     * @param entity200004Result ShokanServicePlan200004Result
      * @param 画面モード RString
      */
-    public void 保存処理(RString 画面モード) {
-        ShoukanharaihishinseimeisaikensakuParameter parameter = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
-                ShoukanharaihishinseimeisaikensakuParameter.class);
+    public void 保存処理(RString 画面モード,
+            ShoukanharaihishinseimeisaikensakuParameter parameter,
+            List<ShokanServicePlan200904Result> entity200904List,
+            ShokanServicePlan200604Result entity200604Result,
+            ShokanServicePlan200004Result entity200004Result) {
         HihokenshaNo 被保険者番号 = parameter.get被保険者番号();
         FlexibleYearMonth サービス年月 = parameter.getサービス年月();
         RString 整理番号 = parameter.get整理番号();
@@ -417,8 +451,6 @@ public class ServiceKeikakuHiPanelHandler {
             ShokanServicePlan200004 entity200004 = null;
             if (サービス年月_200904.isBeforeOrEquals(サービス年月)) {
                 List<dgdYichiran_Row> rowList = div.getPanelServiceKeikakuhiUp().getDgdYichiran().getDataSource();
-                List<ShokanServicePlan200904Result> entity200904List = ViewStateHolder.get(
-                        ViewStateKeys.償還払い費支給申請決定_サービス計画費, List.class);
                 entityList = 保存_データ_200904(rowList,
                         entity200904List,
                         entityList,
@@ -429,8 +461,6 @@ public class ServiceKeikakuHiPanelHandler {
                         明細番号,
                         整理番号);
             } else if (サービス年月_200604.isBeforeOrEquals(サービス年月) && !サービス年月_200903.isBefore(サービス年月)) {
-                ShokanServicePlan200604Result entity200604Result = ViewStateHolder.get(
-                        ViewStateKeys.償還払い費支給申請決定_サービス計画費, ShokanServicePlan200604Result.class);
                 entity200604 = 保存_データ_200604(entity200604Result,
                         被保険者番号,
                         サービス年月,
@@ -439,8 +469,6 @@ public class ServiceKeikakuHiPanelHandler {
                         明細番号,
                         整理番号);
             } else {
-                ShokanServicePlan200004Result entity200004Result = ViewStateHolder.get(
-                        ViewStateKeys.償還払い費支給申請決定_サービス計画費, ShokanServicePlan200004Result.class);
                 entity200004 = 保存_データ_200004(entity200004Result,
                         被保険者番号,
                         サービス年月,
@@ -458,31 +486,33 @@ public class ServiceKeikakuHiPanelHandler {
      * 入力されたデータをクリアし 内容の破棄
      *
      * @param サービス年月 サービス年月
+     * @param entity200904List List<ShokanServicePlan200904Result>
+     * @param entity200604 ShokanServicePlan200604Result
+     * @param entity200004Result ShokanServicePlan200004Result
+     * @param 画面モード RString
      */
-    public void 登録モード変更処理(FlexibleYearMonth サービス年月) {
+    public void 登録モード変更処理(FlexibleYearMonth サービス年月,
+            List<ShokanServicePlan200904Result> entity200904List,
+            ShokanServicePlan200604Result entity200604,
+            ShokanServicePlan200004Result entity200004Result,
+            RString 画面モード) {
         if (サービス年月_200904.isBeforeOrEquals(サービス年月)) {
-            List<ShokanServicePlan200904Result> entity200904List = ViewStateHolder.get(
-                    ViewStateKeys.償還払い費支給申請決定_サービス計画費, List.class);
             if (entity200904List == null || entity200904List.isEmpty()) {
                 load事業者区分リスト200904();
             } else {
-                onLoad200904(entity200904List);
+                onLoad200904(entity200904List, 画面モード);
             }
         } else if (サービス年月_200604.isBeforeOrEquals(サービス年月) && !サービス年月_200903.isBefore(サービス年月)) {
-            ShokanServicePlan200604Result entity200604 = ViewStateHolder.get(
-                    ViewStateKeys.償還払い費支給申請決定_サービス計画費, ShokanServicePlan200604Result.class);
             if (entity200604 == null) {
                 load事業者区分リスト200904前();
             } else {
-                onLoad200604(entity200604);
+                onLoad200604(entity200604, 画面モード);
             }
         } else {
-            ShokanServicePlan200004Result entity200004Result = ViewStateHolder.get(
-                    ViewStateKeys.償還払い費支給申請決定_サービス計画費, ShokanServicePlan200004Result.class);
             if (entity200004Result == null) {
                 load事業者区分リスト200904前();
             } else {
-                onLoad200004(entity200004Result);
+                onLoad200004(entity200004Result, 画面モード);
             }
         }
     }
@@ -810,7 +840,7 @@ public class ServiceKeikakuHiPanelHandler {
         KeyValueDataSource dataSourceBlank = new KeyValueDataSource(事業者区分BLANK, RString.EMPTY);
         dataSourceList.add(dataSourceBlank);
         List<UzT0007CodeEntity> 事業者区分リスト = CodeMaster.getCode(
-                SubGyomuCode.DBC介護給付, new CodeShubetsu(コード種別), FlexibleDate.getNowDate());
+                SubGyomuCode.DBC介護給付, DBCCodeShubetsu.指定_基準該当等事業所区分.getコード(), FlexibleDate.getNowDate());
         for (UzT0007CodeEntity 事業者区分 : 事業者区分リスト) {
             KeyValueDataSource dataSource = new KeyValueDataSource(事業者区分.getコード().value(), 事業者区分.getコード名称());
             dataSourceList.add(dataSource);
@@ -859,8 +889,7 @@ public class ServiceKeikakuHiPanelHandler {
         div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getTxtTekiyoUp().setValue(摘要);
     }
 
-    private void setサービス計画費共通エリアLoad(List<ShokanServicePlan200904Result> entity200904List) {
-        RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
+    private void setサービス計画費共通エリアLoad(List<ShokanServicePlan200904Result> entity200904List, RString 画面モード) {
         ShokanServicePlan200904Result entity200904 = entity200904List.get(0);
         for (int i = 1; i < entity200904List.size(); i++) {
             if (new Decimal(entity200904.getEntity().get連番().toString())
@@ -897,8 +926,7 @@ public class ServiceKeikakuHiPanelHandler {
         }
     }
 
-    private void setサービス計画費グリッドエリア(List<ShokanServicePlan200904Result> entity200904List) {
-        RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
+    private void setサービス計画費グリッドエリア(List<ShokanServicePlan200904Result> entity200904List, RString 画面モード) {
         List<dgdYichiran_Row> dataSource = new ArrayList<>();
         int i = 0;
         Decimal 単位合計 = Decimal.ZERO;
@@ -934,8 +962,7 @@ public class ServiceKeikakuHiPanelHandler {
         }
     }
 
-    private void setサービス計画費エリア200604(ShokanServicePlan200604Result entity200604) {
-        RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
+    private void setサービス計画費エリア200604(ShokanServicePlan200604Result entity200604, RString 画面モード) {
         load事業者区分リスト200904前();
         if (!entity200604.getEntity().get指定_基準該当事業者区分コード().isNullOrEmpty()) {
             div.getPanelServiceKeikakuhiDown().getDdlShiteiJigyoshaKubunCode().setSelectedKey(
@@ -975,8 +1002,7 @@ public class ServiceKeikakuHiPanelHandler {
         }
     }
 
-    private void setサービス計画費エリア200004(ShokanServicePlan200004Result entity200004) {
-        RString 画面モード = ViewStateHolder.get(ViewStateKeys.画面モード, RString.class);
+    private void setサービス計画費エリア200004(ShokanServicePlan200004Result entity200004, RString 画面モード) {
         load事業者区分リスト200904前();
         if (!entity200004.getEntity().get指定_基準該当事業者区分コード().isNullOrEmpty()) {
             div.getPanelServiceKeikakuhiDown().getDdlShiteiJigyoshaKubunCode().setSelectedKey(
@@ -1009,6 +1035,26 @@ public class ServiceKeikakuHiPanelHandler {
             div.getPanelServiceKeikakuhiDown().getTxtTanyisuTanka().setDisabled(true);
             div.getPanelServiceKeikakuhiDown().getTxtSeikyugakuDown().setDisabled(true);
         }
+    }
+
+    private void setサービス計画費共通エリアRequired(boolean flag) {
+        div.getPanelServiceKeikakuhiUp().getDdlJigyoshaKubun().setRequired(flag);
+        div.getPanelServiceKeikakuhiUp().getRdoShinsahouhou().setRequired(flag);
+        div.getPanelServiceKeikakuhiUp().getTxtTodokedeYMD().setRequired(flag);
+        div.getPanelServiceKeikakuhiUp().getTxtTanyiTanka().setRequired(flag);
+    }
+
+    private void setサービス計画費グリッドエリアRequired(boolean flag) {
+        div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getTxtTanyiUp().setRequired(flag);
+        div.getPanelServiceKeikakuhiUp().getPanelServiceKeikakuhiToroku().getTxtKaisu().setRequired(flag);
+    }
+
+    private void setサービス計画費Required(boolean flag) {
+        div.getPanelServiceKeikakuhiDown().getDdlShiteiJigyoshaKubunCode().setRequired(flag);
+        div.getPanelServiceKeikakuhiDown().getTxtTodokedeDate().setRequired(flag);
+        div.getPanelServiceKeikakuhiDown().getRdoShinsaHouhou().setRequired(flag);
+        div.getPanelServiceKeikakuhiDown().getTxtTanyiDown().setRequired(flag);
+        div.getPanelServiceKeikakuhiDown().getTxtTanyisuTanka().setRequired(flag);
     }
 
     private Boolean 変更チェック(dgdYichiran_Row row) {
@@ -1098,23 +1144,6 @@ public class ServiceKeikakuHiPanelHandler {
         List<KeyValueDataSource> 審査方法区分リスト = get審査方法リスト();
         div.getPanelServiceKeikakuhiDown().getRdoShinsaHouhou().setDataSource(審査方法区分リスト);
         div.getPanelServiceKeikakuhiDown().getRdoShinsaHouhou().setSelectedIndex(0);
-    }
-
-    /**
-     * パラメータ設定
-     */
-    public void putViewState() {
-        ViewStateHolder.put(ViewStateKeys.処理モード, ViewStateHolder.get(ViewStateKeys.処理モード, RString.class));
-        ViewStateHolder.put(ViewStateKeys.申請日, div.getPanelHead().getTxtShinseiYMD().getValue());
-        ShoukanharaihishinseikensakuParameter paramter = new ShoukanharaihishinseikensakuParameter(
-                ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
-                ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class),
-                ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
-                new JigyoshaNo(div.getPanelHead().getTxtJigyoshaBango().getValue()),
-                div.getPanelHead().getTxtShomeisho().getValue(),
-                div.getPanelHead().getTxtMeisayiBango().getValue(),
-                null);
-        ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, paramter);
     }
 
     private void set基本情報ボタン制御(ShikibetsuNoKanri shikibetsuNoKanri, HihokenshaNo 被保険者番号,

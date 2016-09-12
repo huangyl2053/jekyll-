@@ -7,15 +7,16 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020008;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.basic.chosachikugroup.ChosaChikuGroupMaster;
+import jp.co.ndensan.reams.db.dbe.business.core.chosachikugroup.ChosaChikuGroupMaster;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteischedule.chosachikugroup.ChosaChikuGroup;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020008.ChosaChikuGroupChosaChikuInputDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020008.NinteiChosaSchedule8MainDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020008.dgChosaChikuGroupChosaChikuList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020008.dgChosaChikuGroupList_Row;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -23,15 +24,14 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
  * 認定調査スケジュール登録8のハンドラークラスです。
- * 
- * @reamsid_L DBE-0024-010  suguangjun 
+ *
+ * @reamsid_L DBE-0024-010 suguangjun
  */
 public class NinteiChosaSchedule8MainHandler {
 
     private static final RString 状態_追加 = new RString("追加");
     private static final RString 状態_修正 = new RString("修正");
     private static final RString 状態_削除 = new RString("削除");
-    private static final RString CODESHUBETSU_5002 = new RString("5002");
     private final NinteiChosaSchedule8MainDiv div;
 
     /**
@@ -79,7 +79,7 @@ public class NinteiChosaSchedule8MainHandler {
             dataGrid.setChosaChikuCode(chosaChikuGroupMaster.get調査地区コード() == null ? RString.EMPTY
                     : chosaChikuGroupMaster.get調査地区コード().getColumnValue());
             dataGrid.setChosaChikuName(CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援,
-                    new CodeShubetsu(CODESHUBETSU_5002), chosaChikuGroupMaster.get調査地区コード()));
+                    DBECodeShubetsu.調査地区コード.getコード(), chosaChikuGroupMaster.get調査地区コード(), FlexibleDate.getNowDate()));
             dataGrid.setShichosonCode(chosaChikuGroupMaster.get市町村コード().getColumnValue());
             dataGrid.setShichosonName(chosaChikuGroupMaster.get市町村名称());
             dataGridList.add(dataGrid);
@@ -116,9 +116,9 @@ public class NinteiChosaSchedule8MainHandler {
      */
     public void setTxtChosaChikuMeisho() {
         div.getTxtChosaChikuMeisho1().setValue(CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援,
-                new CodeShubetsu(CODESHUBETSU_5002),
+                DBECodeShubetsu.調査地区コード.getコード(),
                 new Code(div.getChosaChikuGroupChosaChikuInput().getTxtChosaChikuCode1() == null ? RString.EMPTY
-                        : div.getChosaChikuGroupChosaChikuInput().getTxtChosaChikuCode1().getValue())));
+                        : div.getChosaChikuGroupChosaChikuInput().getTxtChosaChikuCode1().getValue()), FlexibleDate.getNowDate()));
     }
 
     /**

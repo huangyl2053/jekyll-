@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.MaSuKin
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -127,5 +128,14 @@ public class MaSuKinGuBusiness {
      */
     public FlexibleDate getマスキング完了年月日() {
         return entity.getMaskingKanryoYMD();
+    }
+
+    /**
+     * イメージ共有ファイルIDを返します。
+     *
+     * @return イメージ共有ファイルID
+     */
+    public RDateTime getイメージ共有ファイルID() {
+        return entity.getImageSharedFileId();
     }
 }

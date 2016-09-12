@@ -16,8 +16,12 @@ module DBZ {
                 return "onClick_btnYokaigodoGuide";
             }
 
-            public static onClick_lostFocus(): string {
-                return "onClick_lostFocus";
+            public static onClick_kaishiLostFocus(): string {
+                return "onClick_kaishiLostFocus";
+            }
+
+            public static onClick_syuryoLostFocus(): string {
+                return "onClick_syuryoLostFocus";
             }
 
             public static onClick_btnSixMonthLater(): string {

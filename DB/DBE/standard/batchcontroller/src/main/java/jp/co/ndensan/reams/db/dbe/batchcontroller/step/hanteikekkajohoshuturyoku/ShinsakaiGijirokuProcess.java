@@ -6,19 +6,27 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.hanteikekkajohoshuturyoku;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.report.shinsakaigijiroku.ShinsakaiGijirokuReport;
+import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuMybatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaigijiroku.IinJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaigijiroku.ShinsakaiGijirokuEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaigijiroku.ShinsakaiKaisaiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaigijiroku.ShinsakaiKekkaJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaigijiroku.ShinsakaiGijirokuReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hanteikekkajohoshuturyoku.IHanteiKekkaJohoShuturyokuMapper;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.Sikaku;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  * 介護認定審査会議事録のデータを作成します。
@@ -27,7 +35,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ShinsakaiGijirokuProcess extends BatchProcessBase<ShinsakaiKekkaJohoRelateEntity> {
 
-//    private static final ReportId ID = ReportIdDBE.DBE525003.getReportId();
+    private static final ReportId ID = ReportIdDBE.DBE525003.getReportId();
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hanteikekkajohoshuturyoku."
             + "IHanteiKekkaJohoShuturyokuMapper.getShinsakaiKekkaJoho");
@@ -42,9 +50,10 @@ public class ShinsakaiGijirokuProcess extends BatchProcessBase<ShinsakaiKekkaJoh
     private int 一次判定を変更した件数;
     private int 審査会意見を付した件数;
 
-//    @BatchWriter
-//    private BatchReportWriter<ShinsakaiGijirokuReportSource> batchReportWriter;
-//    private ReportSourceWriter<ShinsakaiGijirokuReportSource> reportSourceWriter;
+    @BatchWriter
+    private BatchReportWriter<ShinsakaiGijirokuReportSource> batchReportWriter;
+    private ReportSourceWriter<ShinsakaiGijirokuReportSource> reportSourceWriter;
+
     @Override
     protected void initialize() {
         システム時刻 = RDateTime.now();
@@ -59,8 +68,8 @@ public class ShinsakaiGijirokuProcess extends BatchProcessBase<ShinsakaiKekkaJoh
 
     @Override
     protected void createWriter() {
-//        batchReportWriter = BatchReportFactory.createBatchReportWriter(ID.value()).create();
-//        reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(ID.value()).create();
+        reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
     }
 
     @Override
@@ -96,7 +105,7 @@ public class ShinsakaiGijirokuProcess extends BatchProcessBase<ShinsakaiKekkaJoh
         shinsakaiGijirokuEntity.set未審査(未審査);
         shinsakaiGijirokuEntity.set一次判定を変更した件数(一次判定を変更した件数);
         shinsakaiGijirokuEntity.set審査会意見を付した件数(審査会意見を付した件数);
-//        ShinsakaiGijirokuReport report = new ShinsakaiGijirokuReport(shinsakaiGijirokuEntity);
-//        report.writeBy(reportSourceWriter);
+        ShinsakaiGijirokuReport report = new ShinsakaiGijirokuReport(shinsakaiGijirokuEntity);
+        report.writeBy(reportSourceWriter);
     }
 }

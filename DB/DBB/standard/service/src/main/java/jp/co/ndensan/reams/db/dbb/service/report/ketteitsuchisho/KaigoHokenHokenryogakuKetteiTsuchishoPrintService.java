@@ -18,9 +18,10 @@ import jp.co.ndensan.reams.db.dbb.entity.report.ketteitsuchisho.KaigoHokenHokenr
 import jp.co.ndensan.reams.db.dbz.business.core.basic.KaigoToiawasesaki;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.CompKaigoToiawasesakiSource;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.KaigoToiawasesakiSourceBuilder;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.KaigoToiawasesakiManager;
-import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
+import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
+import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -73,7 +74,8 @@ public class KaigoHokenHokenryogakuKetteiTsuchishoPrintService {
                 NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課,
                         property.reportId(),
                         発行日,
-                        NinshoshaDenshikoinshubetsuCode.toValue(帳票分類ID.value()),
+                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
+                        KenmeiFuyoKubunType.付与なし,
                         reportSourceWriter);
                 CompKaigoToiawasesakiSource compKaigoToiawasesakiSource = getCompKaigoToiawasesakiSource(帳票分類ID);
                 for (KaigoHokenHokenryogakuKetteiTsuchishoJoho joho : entities) {
@@ -124,7 +126,8 @@ public class KaigoHokenHokenryogakuKetteiTsuchishoPrintService {
                 NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBB介護賦課,
                         property.reportId(),
                         発行日,
-                        NinshoshaDenshikoinshubetsuCode.toValue(帳票分類ID.value()),
+                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
+                        KenmeiFuyoKubunType.付与なし,
                         reportSourceWriter);
                 CompKaigoToiawasesakiSource compKaigoToiawasesakiSource = getCompKaigoToiawasesakiSource(帳票分類ID);
                 for (KaigoHokenHokenryogakuKetteiTsuchishoJoho joho : entities) {

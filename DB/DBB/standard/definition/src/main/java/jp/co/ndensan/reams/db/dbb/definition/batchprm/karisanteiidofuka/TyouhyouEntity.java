@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.batchprm.karisanteiidofuka;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -16,14 +17,21 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TyouhyouEntity {
+public class TyouhyouEntity implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     private ReportId 帳票分類ID;
     private ReportId 帳票ID;
     private RString 出力順ID;
 
     /**
-     * コンストラクタです。<br/>
+     * コンストラクタです。
+     */
+    public TyouhyouEntity() {
+    }
+
+    /**
+     * コンストラクタです。
      *
      * @param 出力順ID ReportId
      * @param 帳票ID RString

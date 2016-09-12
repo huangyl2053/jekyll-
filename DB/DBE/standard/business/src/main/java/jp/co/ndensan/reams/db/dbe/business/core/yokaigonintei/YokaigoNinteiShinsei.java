@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.yokaigonintei;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteiresult.NinteiResultSimple;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinsei.NinteiShinseiRiyu;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseitorisage.NinteiShinseiTorisage;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsakaiYusenWaritsukeKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.ShinsakaiYusenWaritsukeKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.NinteichosaIraiRirekiNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;

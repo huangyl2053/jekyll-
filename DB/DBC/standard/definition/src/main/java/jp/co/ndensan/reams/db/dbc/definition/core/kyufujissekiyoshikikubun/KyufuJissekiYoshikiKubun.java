@@ -369,16 +369,22 @@ public enum KyufuJissekiYoshikiKubun {
     /**
      * コード:3411 名称:償還_高額介護給付費 備考:_3411_高額介護給付費
      */
-    _3411_高額介護給付費("3411", "償還_高額介護給付費", "_3411_高額介護給付費");
+    _3411_高額介護給付費("3411", "償還_高額介護給付費", "_3411_高額介護給付費"),
+    /**
+     * コード:3421 名称:償還_高額介護総合事業 備考:_3421_高額介護総合事業
+     */
+    _3421_高額介護総合事業("3421", "償還_高額介護総合事業", "_3421_高額介護総合事業");
 
     private final RString code;
     private final RString fullName;
     private final RString shortName;
+    private final RString 様式番号;
 
     private KyufuJissekiYoshikiKubun(String code, String fullname, String shortName) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
         this.shortName = new RString(shortName);
+        this.様式番号 = to様式番号(this.fullName);
     }
 
     /**
@@ -406,6 +412,15 @@ public enum KyufuJissekiYoshikiKubun {
      */
     public RString get備考() {
         return shortName;
+    }
+
+    /**
+     * 給付実績の様式区分の様式番号を返します。
+     *
+     * @return 給付実績の様式区分の様式番号
+     */
+    public RString get様式番号() {
+        return this.様式番号;
     }
 
     /**
@@ -514,5 +529,16 @@ public enum KyufuJissekiYoshikiKubun {
 
     private static String getサービス提供年月が平成２１年４月以降の場合() {
         return "サービス提供年月が平成２１年４月以降の場合";
+    }
+
+    private static RString to様式番号(RString youSikiNo) {
+        if (youSikiNo.contains(new RString("現物_"))) {
+            return youSikiNo.replace(new RString("現物_"), RString.EMPTY);
+        } else if (youSikiNo.contains(new RString("償還_"))) {
+            return youSikiNo.replace(new RString("償還_"), RString.EMPTY);
+        } else if (youSikiNo.contains(new RString("償還_様式"))) {
+            return youSikiNo.replace(new RString("償還_様式"), RString.EMPTY);
+        }
+        return youSikiNo;
     }
 }

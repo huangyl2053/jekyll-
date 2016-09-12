@@ -21,6 +21,6 @@ public class KyufuhiKariireiShinseishoProerty extends ReportPropertyBase<Kyufuhi
      * コンストラクタです。
      */
     public KyufuhiKariireiShinseishoProerty() {
-        super(SubGyomuCode.DBA介護資格, ReportIdDBA.DBC800018.getReportId());
+        super(SubGyomuCode.DBC介護給付, ReportIdDBA.DBC800018.getReportId());
     }
 }

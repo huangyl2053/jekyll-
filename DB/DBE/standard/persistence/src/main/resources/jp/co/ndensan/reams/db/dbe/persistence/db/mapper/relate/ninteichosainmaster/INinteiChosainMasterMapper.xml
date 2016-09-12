@@ -4,9 +4,9 @@
 <!-- @reamsid_L DBE-0280-010 sunhaidi -->
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosainmaster.INinteiChosainMasterMapper">
-      <select id="selectNinteichosaItakusakiJoho"  
+      <select resultOrdered="true" id="selectNinteichosaItakusakiJoho"  
               resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
-              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosainmaster.NinteiChosainMasterSearchParameter">
+              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosainmaster.NinteiChosainMasterSearchParameter">
       SELECT
           "DbT5910NinteichosaItakusakiJoho"."jigyoshaMeisho"
        FROM
@@ -16,9 +16,9 @@
        AND  "DbT5910NinteichosaItakusakiJoho"."shichosonCode" = #{市町村コード}
        AND  "DbT5910NinteichosaItakusakiJoho"."ninteichosaItakusakiCode" = #{調査委託先コード}
      </select>
-     <select id="selectNinteichosaIraiJohoCount"  
+     <select resultOrdered="true" id="selectNinteichosaIraiJohoCount"  
               resultType="int"
-              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosainmaster.NinteiChosainMasterSearchParameter">
+              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosainmaster.NinteiChosainMasterSearchParameter">
         SELECT        
             COUNT(0)
         FROM        
@@ -37,9 +37,9 @@
         AND "DbT5101NinteiShinseiJoho"."ninteiChosaItakusakiCode" = #{調査委託先コード}
         AND "DbT5101NinteiShinseiJoho"."ninteiChosainCode" = #{調査員コード}
     </select>
-    <select id="selectNinteiShinseiJohoCount"  
+    <select resultOrdered="true" id="selectNinteiShinseiJohoCount"  
               resultType="int"
-              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosainmaster.NinteiChosainMasterSearchParameter">
+              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosainmaster.NinteiChosainMasterSearchParameter">
         SELECT        
             COUNT(0)    
         FROM        
@@ -54,9 +54,9 @@
         AND "DbT5101NinteiShinseiJoho"."ninteiChosaItakusakiCode" = #{調査委託先コード}
         AND "DbT5101NinteiShinseiJoho"."ninteiChosainCode" = #{調査員コード}
     </select>
-    <select id="selectChosainJohoCount"  
+    <select resultOrdered="true" id="selectChosainJohoCount"  
             resultType="int"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosainmaster.NinteiChosainMasterSearchParameter">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosainmaster.NinteiChosainMasterSearchParameter">
         SELECT        
              COUNT(0)    
         FROM        
@@ -67,8 +67,8 @@
         AND "DbT5913ChosainJoho"."ninteiChosaItakusakiCode" = #{調査委託先コード}
         AND "DbT5913ChosainJoho"."ninteiChosainCode" = #{調査員コード}
     </select>
-    <select id="selectChosainJohoIchiranList"  
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosainmaster.NinteiChosainMasterMapperParameter" 
+    <select resultOrdered="true" id="selectChosainJohoIchiranList"  
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosainmaster.NinteiChosainMasterMapperParameter" 
             resultMap="resultMap_NinteiChosainMasterEntity" fetchSize="500">
         SELECT
         DbT5913ChosainJoho."dbT5913ChosainJoho_shichosonCode",
@@ -191,8 +191,8 @@
         </if>
        
     </select>
-     <select id="selectChosainJohoList"  
-        parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosainmaster.NinteiChosainMasterMapperParameter" 
+     <select resultOrdered="true" id="selectChosainJohoList"  
+        parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosainmaster.NinteiChosainMasterMapperParameter" 
         resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5913ChosainJohoMapper.ResultMap_DbT5913ChosainJohoEntity"  fetchSize="500" >
         SELECT
         DbT5913ChosainJoho.*

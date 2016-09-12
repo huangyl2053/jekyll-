@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * DBZ.NinteiInput_認定情報のdDataPassModelです。
  *
- * @reamsid_L DBE-1300-080 yaodongsheng
+ * @reamsid_L DBZ-1300-080 yaodongsheng
  */
 @lombok.Getter
 @lombok.Setter
@@ -32,4 +32,5 @@ public class NinteiInputDataPassModel implements Serializable {
     private ShinseishoKanriNo 申請書管理番号;
     private RString subGyomuCode;
     private RString 厚労省IFコード;
+    private List<RString> サービス一覧リスト;
 }

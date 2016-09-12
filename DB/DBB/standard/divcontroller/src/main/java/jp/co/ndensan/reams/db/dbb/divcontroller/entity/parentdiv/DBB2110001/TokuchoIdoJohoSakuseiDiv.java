@@ -1,21 +1,19 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2110001;
+
 /**
- * このコードはツールによって生成されました。
- * このファイルへの変更は、再生成時には損失するため
- * 不正な動作の原因になります。
+ * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2110001.TokuchoIdoJohoSaiSakuseiDiv;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2110001.tbldgTokuchoIdoJohoDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Icon;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * TokuchoIdoJohoSakusei のクラスファイル 
- * 
- * @author 自動生成
+ * TokuchoIdoJohoSakusei のクラスファイル
+ *
+ * @reamsid_L DBB-1840-010 zhangrui
  */
 public class TokuchoIdoJohoSakuseiDiv extends Panel {
     /*
@@ -24,6 +22,7 @@ public class TokuchoIdoJohoSakuseiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("tbldgTokuchoIdoJoho")
     private tbldgTokuchoIdoJohoDiv tbldgTokuchoIdoJoho;
     @JsonProperty("TokuchoIdoJohoSaiSakusei")
@@ -42,7 +41,7 @@ public class TokuchoIdoJohoSakuseiDiv extends Panel {
 
     @JsonProperty("tbldgTokuchoIdoJoho")
     public void setTbldgTokuchoIdoJoho(tbldgTokuchoIdoJohoDiv tbldgTokuchoIdoJoho) {
-        this.tbldgTokuchoIdoJoho=tbldgTokuchoIdoJoho;
+        this.tbldgTokuchoIdoJoho = tbldgTokuchoIdoJoho;
     }
 
     @JsonProperty("TokuchoIdoJohoSaiSakusei")
@@ -52,7 +51,7 @@ public class TokuchoIdoJohoSakuseiDiv extends Panel {
 
     @JsonProperty("TokuchoIdoJohoSaiSakusei")
     public void setTokuchoIdoJohoSaiSakusei(TokuchoIdoJohoSaiSakuseiDiv TokuchoIdoJohoSaiSakusei) {
-        this.TokuchoIdoJohoSaiSakusei=TokuchoIdoJohoSaiSakusei;
+        this.TokuchoIdoJohoSaiSakusei = TokuchoIdoJohoSaiSakusei;
     }
 
     /*

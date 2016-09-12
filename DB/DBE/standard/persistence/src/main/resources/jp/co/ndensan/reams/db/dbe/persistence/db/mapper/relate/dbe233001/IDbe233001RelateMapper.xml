@@ -22,7 +22,7 @@
         <result property="temp_申請区分コード" column="temp_申請区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="temp_処理名" column="temp_処理名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
-    <select id="select主治医意見書督促状ByKey" resultMap="resultMap_ShujiiIkenTokusokujoRelateEntity"
+    <select resultOrdered="true" id="select主治医意見書督促状ByKey" resultMap="resultMap_ShujiiIkenTokusokujoRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe233001.ShuturyokuJyoukenProcessParamter" fetchSize="500">
         SELECT
         DbT5911ShujiiIryoKikanJoho."yubinNo"  AS  temp_事業者郵便番号,
@@ -55,6 +55,7 @@
         rgdb."DbT5912ShujiiJoho"  AS  DbT5912ShujiiJoho
         ON  DbT5912ShujiiJoho."shichosonCode" = DbT5911ShujiiIryoKikanJoho."shichosonCode"
         AND  DbT5912ShujiiJoho."shujiiIryokikanCode" = DbT5911ShujiiIryoKikanJoho."shujiiIryokikanCode"
+        AND  DbT5912ShujiiJoho."shujiiCode" = DbT5101NinteiShinseiJoho."shujiiCode"
         INNER JOIN
         (
         SELECT
@@ -134,7 +135,7 @@
         <result property="temp_主治医氏名" column="temp_主治医氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="temp_事業者電話番号" column="temp_事業者電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
     </resultMap>
-    <select id="select主治医意見書督促対象者一覧表ByKey" resultMap="resultMap_ShujiiIkenTokusokujoHakkoRelateEntity"
+    <select resultOrdered="true" id="select主治医意見書督促対象者一覧表ByKey" resultMap="resultMap_ShujiiIkenTokusokujoHakkoRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe233001.ShuturyokuJyoukenProcessParamter"
             fetchSize="500">
         SELECT
@@ -164,6 +165,8 @@
         INNER JOIN
         rgdb."DbT5912ShujiiJoho" AS DbT5912ShujiiJoho
         ON DbT5912ShujiiJoho."shichosonCode" = DbT5911ShujiiIryoKikanJoho."shichosonCode"
+        AND  DbT5912ShujiiJoho."shujiiIryokikanCode" = DbT5911ShujiiIryoKikanJoho."shujiiIryokikanCode"
+        AND  DbT5912ShujiiJoho."shujiiCode" = DbT5101NinteiShinseiJoho."shujiiCode"
         INNER JOIN
         (
         SELECT
@@ -207,5 +210,31 @@
                 AND  DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo" = #{temp_保険者コード}
             </if>
         </where>
+    </select>
+    
+    <select resultOrdered="true" id="select市町村コード"
+        resultType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity"
+        parameterType="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"
+        fetchSize="500">
+        SELECT
+        DbT7051."shichosonCode" AS shichosonCode
+        FROM rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
+        WHERE
+        DbT7051."shoKisaiHokenshaNo" = #{保険者コード}
+        LIMIT 1
+    </select>
+    
+    <select resultOrdered="true" id="select宛名機関"
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe233001.ShujiiIkenTokusokujoMybitisParamter"
+            fetchSize="500">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5912ShujiiJohoMapper.allColumns_DbT5912ShujiiJoho"/>
+        FROM
+        rgdb."DbT5912ShujiiJoho"
+        WHERE
+        "shujiiIryokikanCode" = #{temp_主治医医療機関コード}
+        AND "shujiiCode" = #{temp_主治医コード}
+        AND "shichosonCode" = #{temp_市町村コード}
     </select>
 </mapper>

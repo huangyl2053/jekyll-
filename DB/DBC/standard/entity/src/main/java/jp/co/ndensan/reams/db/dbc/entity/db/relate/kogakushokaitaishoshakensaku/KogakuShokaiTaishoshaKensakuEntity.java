@@ -5,12 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakushokaitaishoshakensaku;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokeiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3056KogakuShikyuShinseiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3057KogakuShikyuHanteiKekkaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3058KogakuShikyuShinsaKetteiEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,14 +22,40 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KogakuShokaiTaishoshaKensakuEntity {
 
-    private HihokenshaNo 被保険者番号;
-    private AtenaMeisho 申請者氏名;
-    private FlexibleYearMonth サービス提供年月;
-    private Decimal 高額支給額;
-    private FlexibleDate 申請日;
-    private FlexibleDate 決定日;
-    private RString 支給区分コード;
-    private Decimal 支給金額;
-    private boolean 高額自動償還;
-    private Decimal 履歴番号;
+    /**
+     * -- GETTER -- 高額介護サービス費支給申請Entityを返します。
+     *
+     * @return 高額介護サービス費支給申請Entity -- SETTER -- 高額介護サービス費支給申請Entityを設定します。
+     *
+     * @param 高額介護サービス費支給申請Entity 高額介護サービス費支給申請Entity
+     */
+    private DbT3056KogakuShikyuShinseiEntity 高額介護サービス費支給申請Entity;
+
+    /**
+     * -- GETTER -- 高額介護サービス費支給判定結果Entityを返します。
+     *
+     * @return 高額介護サービス費支給判定結果Entity -- SETTER -- 高額介護サービス費支給判定結果Entityを設定します。
+     *
+     * @param 高額介護サービス費支給判定結果Entity 高額介護サービス費支給判定結果Entity
+     */
+    private DbT3057KogakuShikyuHanteiKekkaEntity 高額介護サービス費支給判定結果Entity;
+
+    /**
+     * -- GETTER -- 高額介護サービス費支給審査決定Entityを返します。
+     *
+     * @return 高額介護サービス費支給審査決定Entity -- SETTER -- 高額介護サービス費支給審査決定Entityを設定します。
+     *
+     * @param 高額介護サービス費支給審査決定Entity 高額介護サービス費支給審査決定Entity
+     */
+    private DbT3058KogakuShikyuShinsaKetteiEntity 高額介護サービス費支給審査決定Entity;
+
+    /**
+     * -- GETTER -- 高額介護サービス費給付対象者合計Entityを返します。
+     *
+     * @return 高額介護サービス費給付対象者合計Entity -- SETTER -- 高額介護サービス費給付対象者合計Entityを設定します。
+     *
+     * @param 高額介護サービス費給付対象者合計Entity 高額介護サービス費給付対象者合計Entity
+     */
+    private DbT3055KogakuKyufuTaishoshaGokeiEntity 高額介護サービス費給付対象者合計Entity;
+
 }

@@ -9,7 +9,7 @@ and open the template in the editor.
 
 
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.honsanteiidokanendofukakakutei.IFukaKakuteiMapper">
-    <select id="select更新後の賦課内容" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.kanendoidofukakakutei.KanendoIdoFukaKakuteiEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofukakakutei.FukaKakuteiParameter" fetchSize="500">
+    <select resultOrdered="true" id="select更新後の賦課内容" resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.kanendoidofukakakutei.KanendoIdoFukaKakuteiEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofukakakutei.FukaKakuteiParameter" fetchSize="500">
         SELECT 
         Fuka."choteiNendo" as "調定年度",
         Fuka."fukaNendo" as "賦課年度",
@@ -46,7 +46,7 @@ and open the template in the editor.
         Fuka."fukaNendo" DESC
     </select>  
     
-    <select id="select調定共通ForUpdate" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofukakakutei.FukaKakuteiParameter">
+    <select resultOrdered="true" id="select調定共通ForUpdate" resultType="jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honsanteiidokanendofukakakutei.FukaKakuteiParameter">
         select distinct ChoteiKyotsu.*
         from rgdb."UrT0705ChoteiKyotsu" as ChoteiKyotsu 
         INNER JOIN rgdb."DbT2003Kibetsu" as Kibetsu 

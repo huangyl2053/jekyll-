@@ -5,18 +5,22 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.RiyoshaFu
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengaku;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 
 /**
- * RiyoshaFutangakuGemmen のクラスファイル 
- * 
- * @author 自動生成
+ * RiyoshaFutangakuGemmen のクラスファイル
+ *
+ * @reamsid_L DBD-3560-060 wangjie2
  */
 public class RiyoshaFutangakuGemmenDiv extends Panel implements IRiyoshaFutangakuGemmenDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -29,6 +33,8 @@ public class RiyoshaFutangakuGemmenDiv extends Panel implements IRiyoshaFutangak
     private RiyoshaFutangakuGemmenDetailDiv RiyoshaFutangakuGemmenDetail;
     @JsonProperty("btnClose")
     private Button btnClose;
+    @JsonProperty("hihokenshaNo")
+    private RString hihokenshaNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -90,7 +96,33 @@ public class RiyoshaFutangakuGemmenDiv extends Panel implements IRiyoshaFutangak
         this.btnClose = btnClose;
     }
 
+    /*
+     * gethihokenshaNo
+     * @return hihokenshaNo
+     */
+    @JsonProperty("hihokenshaNo")
+    public RString getHihokenshaNo() {
+        return hihokenshaNo;
+    }
+
+    /*
+     * sethihokenshaNo
+     * @param hihokenshaNo hihokenshaNo
+     */
+    @JsonProperty("hihokenshaNo")
+    public void setHihokenshaNo(RString hihokenshaNo) {
+        this.hihokenshaNo = hihokenshaNo;
+    }
+
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    @Override
+    public List<RiyoshaFutangakuGengaku> initializa(HihokenshaNo 被保険者番号) {
+        return getHandler(this).onLoad(被保険者番号);
+    }
+
+    private RiyoshaFutangakuGemmenHandler getHandler(RiyoshaFutangakuGemmenDiv div) {
+        return new RiyoshaFutangakuGemmenHandler(div);
+    }
 
 }

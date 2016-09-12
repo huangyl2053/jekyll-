@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.config.GaitoshaKensakuConfig;
-import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigKeysHizuke.日付関連_当初年度;
-import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigKeysHizuke.日付関連_所得年度;
-import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigKeysHizuke.日付関連_調定年度;
-import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigKeysHizuke.日付関連_遡及年度;
+import static jp.co.ndensan.reams.db.dbx.definition.core.config.ConfigKeysHizuke.日付関連_当初年度;
+import static jp.co.ndensan.reams.db.dbx.definition.core.config.ConfigKeysHizuke.日付関連_所得年度;
+import static jp.co.ndensan.reams.db.dbx.definition.core.config.ConfigKeysHizuke.日付関連_調定年度;
+import static jp.co.ndensan.reams.db.dbx.definition.core.config.ConfigKeysHizuke.日付関連_遡及年度;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.FukaSearchMenu;
 import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.FukaSearchMenuGroup;
 import jp.co.ndensan.reams.db.dbz.divcontroller.controller.helper.FukaTaishoshaSearchValidationHelper;
@@ -110,7 +110,7 @@ public class HihokenshaFinderHandler {
     FlexibleYear get賦課年度() {
         DropDownList item = div.getKaigoFinder().getDdlFukaNendo();
         return (item != null && item.getSelectedKey() != null && !item.getSelectedKey().equals(FlexibleYear.MAX.toDateString()))
-                ? new FlexibleYear(item.getSelectedKey().toString()) : FlexibleYear.MAX;
+               ? new FlexibleYear(item.getSelectedKey().toString()) : FlexibleYear.MAX;
     }
 
     /**
@@ -156,7 +156,7 @@ public class HihokenshaFinderHandler {
      * @return 宛名条件
      */
     IShikibetsuTaishoSearchKey get宛名条件() {
-        div.getCcdAtenaFinder().load(ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登内優先));
+        // div.getCcdAtenaFinder().load(ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登内優先));
         return div.getCcdAtenaFinder().makeShikibetsuTaishoSearchKey();
     }
 
@@ -202,15 +202,19 @@ public class HihokenshaFinderHandler {
 
         int 開始年度 = 0;
         int 終了年度 = 0;
+        int firstIndex = 0;
         if (menu.is(FukaSearchMenuGroup.更正計算系)) {
             開始年度 = 調定年度;
             終了年度 = 遡及年度;
+            firstIndex = 0;
         } else if (menu.is(FukaSearchMenuGroup.所得照会系)) {
             開始年度 = 所得年度;
             終了年度 = 当初年度;
+            firstIndex = 0;
         } else if (menu.is(FukaSearchMenuGroup.照会系)) {
             開始年度 = 調定年度;
             終了年度 = 当初年度;
+            firstIndex = 1;
             ddlSourceList.add(new KeyValueDataSource(new RString("9999"), new RString("全年度")));
         }
         for (int i = 開始年度; i >= 終了年度; i--) {
@@ -218,6 +222,8 @@ public class HihokenshaFinderHandler {
             ddlSourceList.add(source);
         }
         div.getKaigoFinder().getDdlFukaNendo().setDataSource(ddlSourceList);
+        int size = ddlSourceList.size();
+        div.getKaigoFinder().getDdlFukaNendo().setSelectedIndex(firstIndex <= size - 1 ? firstIndex : 0);
     }
 
     /**

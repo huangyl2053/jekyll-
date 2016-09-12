@@ -11,7 +11,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.iraisho.IraishoIkkatsuHakkoResult;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.iraisho.GridParameter;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.iraisho.IraishoIkkatsuHakkoBatchParamter;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.iraisho.IraishoIkkatsuHakkoParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.iraisho.IraishoIkkatsuHakkoParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2400001.DBE2400001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2400001.IraishoIkkatsuHakkoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2400001.dgNinteiChosaIraiTaishoIchiran_Row;
@@ -192,15 +192,19 @@ public class IraishoIkkatsuHakko {
     public ResponseData<IraishoIkkatsuHakkoBatchParamter> onClick_btnBatchRegister(IraishoIkkatsuHakkoDiv div) {
         IraishoIkkatsuHakkoBatchParamter param = new IraishoIkkatsuHakkoBatchParamter();
         if (STATE_NINTEIO.equals(div.getState())) {
+            param.setIraiFromYMD(div.getTxtIraibiFrom().getValue() == null
+                    ? RString.EMPTY : div.getTxtIraibiFrom().getValue().toDateString());
+            param.setIraiToYMD(div.getTxtIraibiTo().getValue() == null
+                    ? RString.EMPTY : div.getTxtIraibiTo().getValue().toDateString());
             setNinteParam(param, div);
         }
         if (STATE_SHUJII.equals(div.getState())) {
+            param.setIraiFromYMD(div.getTxtShujiiIkenshoSakuseiIraibiFrom().getValue() == null
+                    ? RString.EMPTY : div.getTxtShujiiIkenshoSakuseiIraibiFrom().getValue().toDateString());
+            param.setIraiToYMD(div.getTxtShujiiIkenshoSakuseiIraibiTo().getValue() == null
+                    ? RString.EMPTY : div.getTxtShujiiIkenshoSakuseiIraibiTo().getValue().toDateString());
             setShujiiParam(param, div);
         }
-        param.setIraiFromYMD(div.getTxtIraibiFrom().getValue() == null
-                ? RString.EMPTY : div.getTxtIraibiFrom().getValue().toDateString());
-        param.setIraiToYMD(div.getTxtIraibiTo().getValue() == null
-                ? RString.EMPTY : div.getTxtIraibiTo().getValue().toDateString());
         param.setHakkobi(div.getTxtHakkobi().getValue() == null
                 ? RString.EMPTY : div.getTxtHakkobi().getValue().toDateString());
         if (SELECTED_KEY0.equals(div.getRadTeishutsuKigen().getSelectedKey())) {
@@ -242,8 +246,8 @@ public class IraishoIkkatsuHakko {
             }
         }
         List<GridParameter> ninteiChosaIraiList = new ArrayList<>();
-        GridParameter gridParameter = new GridParameter();
         for (dgNinteiChosaIraiTaishoIchiran_Row row : div.getDgNinteiChosaIraiTaishoIchiran().getSelectedItems()) {
+            GridParameter gridParameter = new GridParameter();
             gridParameter.setNinteichosaItakusakiCode(row.getNinteiChosaitakusaki());
             gridParameter.setNinteiChosainCode(row.getNinteiChosainNo());
             gridParameter.setShoKisaiHokenshaNo(row.getShoKisaiHokenshaNo());
@@ -307,8 +311,8 @@ public class IraishoIkkatsuHakko {
             }
         }
         List<GridParameter> shujiiIkenshoSakuseiIraiList = new ArrayList<>();
-        GridParameter gridParameter = new GridParameter();
         for (dgShujiiIkenshoSakuseiIraiTaishoIchiran_Row row : div.getDgShujiiIkenshoSakuseiIraiTaishoIchiran().getSelectedItems()) {
+            GridParameter gridParameter = new GridParameter();
             gridParameter.setShujiiIryoKikanCode(row.getShujiiIryoKikanCode());
             gridParameter.setIshiNo(row.getIshiNo());
             gridParameter.setShoKisaiHokenshaNo(row.getShoKisaiHokenshaNo());

@@ -9,7 +9,7 @@
         <result property="shichosonCode" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="shichosonMeisho" column="市町村名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
-    <select id="select調査地区情報" resultMap="resultMap_ChosaChikuEntity" fetchSize="500">
+    <select resultOrdered="true" id="select調査地区情報" resultMap="resultMap_ChosaChikuEntity" fetchSize="500">
         SELECT
         DbT5224ChikuShichoson."chosaChikuCode" AS 調査地区コード,
         DbT5224ChikuShichoson."shichosonCode" AS 市町村コード,
@@ -30,8 +30,8 @@
         <result property="jigyoshaMeisho" column="認定調査委託先名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="chosainShimei" column="認定調査員名氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
-    <select id="select認定調査員一覧" resultMap="resultMap_ChosaChikuList" 
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chosachiku.ChosaChikuMapperParameter" fetchSize="500">
+    <select resultOrdered="true" id="select認定調査員一覧" resultMap="resultMap_ChosaChikuList" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosachiku.ChosaChikuMapperParameter" fetchSize="500">
         SELECT
         DbT5223ChikuNinteiChosain."yusenNo" AS 優先番号,
         DbT5223ChikuNinteiChosain."ninteiChosaItakusakiCode" AS 認定調査委託先コード,
@@ -54,13 +54,4 @@
         AND DbT5223ChikuNinteiChosain."shichosonCode" = #{shichosonCode}
         ORDER BY DbT5223ChikuNinteiChosain."yusenNo"
     </select>
-    
-    <delete id="delete認定調査員情報" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chosachiku.ChosaChikuMapperParameter">
-        DELETE 
-        FROM rgdb."DbT5223ChikuNinteiChosain" AS DbT5223ChikuNinteiChosain
-        WHERE DbT5223ChikuNinteiChosain."chosaChikuCode" = #{chosaChikuCode}
-        AND DbT5223ChikuNinteiChosain."ninteiChosaItakusakiCode" = #{ninteiChosaItakusakiCode}
-        AND DbT5223ChikuNinteiChosain."ninteiChosainCode" = #{ninteiChosainCode}
-        AND DbT5223ChikuNinteiChosain."shichosonCode" = #{shichosonCode}
-    </delete>
 </mapper>

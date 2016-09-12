@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tennyutenshutsuhoryutaishosha;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.tennyutenshutsuhoryutaishosha.TennyushutsuHoryuTaishoshaEntity;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.tennyutenshutsuhoryutaishosha.TenshutsuHoryuTaishoshaEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.tennyutenshutsuhoryu.TennyushutsuHoryuTaishoshaRelateEntity;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.tennyutenshutsuhoryu.TenshutsuHoryuTaishoshaRelateEntity;
 
 /**
  * 転入転出保留対象者管理のMapperクラスです。
@@ -19,22 +19,22 @@ public interface ITennyuTenshutsuHoryuTaishoshaMapper {
     /**
      * 転出保留対象者情報の取得する。
      *
-     * @return List<TennyuTenshutsuHoryuEntity>
+     * @return List<TenshutsuHoryuTaishoshaRelateEntity>
      */
-    List<TennyushutsuHoryuTaishoshaEntity> get転出保留対象者情報の取得処理();
+    List<TenshutsuHoryuTaishoshaRelateEntity> get転出保留対象者情報の取得処理();
 
     /**
-     * 転入 広域保留対象者情報の取得する。
+     * 転入保留対象者情報の取得する。
      *
-     * @return List<TennyuTenshutsuHoryuEntity>
+     * @return List<TennyushutsuHoryuTaishoshaRelateEntity>
      */
-    List<TenshutsuHoryuTaishoshaEntity> get転入保留対象者情報の取得処理();
+    List<TennyushutsuHoryuTaishoshaRelateEntity> get転入保留対象者情報の取得処理();
 
     /**
-     * 転入 広域保留対象者情報の取得する。
+     * 広域保留対象者情報の取得する。
      *
-     * @return List<TennyuTenshutsuHoryuEntity>
+     * @return List<TennyushutsuHoryuTaishoshaRelateEntity>
      */
-    List<TenshutsuHoryuTaishoshaEntity> get広域保留対象者情報の取得処理();
+    List<TennyushutsuHoryuTaishoshaRelateEntity> get広域保留対象者情報の取得処理();
 
 }

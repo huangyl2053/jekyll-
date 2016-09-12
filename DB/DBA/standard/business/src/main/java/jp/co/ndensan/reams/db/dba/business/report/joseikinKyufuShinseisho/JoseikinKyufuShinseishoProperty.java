@@ -22,6 +22,6 @@ public class JoseikinKyufuShinseishoProperty
      * コンストラクタです。
      */
     public JoseikinKyufuShinseishoProperty() {
-        super(SubGyomuCode.DBA介護資格, ReportIdDBA.DBC800017.getReportId());
+        super(SubGyomuCode.DBC介護給付, ReportIdDBA.DBC800017.getReportId());
     }
 }

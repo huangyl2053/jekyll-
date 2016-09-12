@@ -8,9 +8,9 @@
         <result property="nyushoShisetsuCode" column="shisetsuNyutaisho_nyushoShisetsuCode"   typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler" />
     </resultMap>
 
-    <select id="getShisetsuNyutaisho"
+    <select resultOrdered="true" id="getShisetsuNyutaisho"
             resultMap="resultMap_DbT1004ShisetsuNyutaishoEntity"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.hihokenshadaichosakusei.HihokenshaDaichoSakuseiParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshadaichosakusei.HihokenshaDaichoSakuseiParameter" fetchSize="500">
         SELECT
         shisetsuNyutaisho."nyushoShisetsuShurui" AS "shisetsuNyutaisho_nyushoShisetsuShurui",
         shisetsuNyutaisho."nyushoShisetsuCode" AS "shisetsuNyutaisho_nyushoShisetsuCode"
@@ -31,9 +31,9 @@
         <result property="jigyoshaMeisho" column="taishoShisetsu_jigyoshaMeisho"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
     </resultMap>
 
-    <select id="getKaigoJogaiTokureiTaisho"
+    <select resultOrdered="true" id="getKaigoJogaiTokureiTaisho"
             resultMap="resultMap_KaigoJogaiTokureiTaishoEntity"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.hihokenshadaichosakusei.HihokenshaDaichoSakuseiParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshadaichosakusei.HihokenshaDaichoSakuseiParameter" fetchSize="500">
         SELECT
         taishoShisetsu."jigyoshaNo" AS "taishoShisetsu_jigyoshaNo",
         taishoShisetsu."jigyoshaMeisho" AS "taishoShisetsu_jigyoshaMeisho"
@@ -52,9 +52,9 @@
         <result property="jigyoshaName"                  column="kaigoJigyosha_jigyoshaName"	    typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
     </resultMap>
 
-    <select id="getKaigoJigyosha"
+    <select resultOrdered="true" id="getKaigoJigyosha"
             resultMap="resultMap_DbT7060KaigoJigyoshaEntity"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.hihokenshadaichosakusei.HihokenshaDaichoSakuseiParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshadaichosakusei.HihokenshaDaichoSakuseiParameter" fetchSize="500">
         SELECT
         kaigoJigyosha."jigyoshaNo" AS "kaigoJigyosha_jigyoshaNo",
         kaigoJigyosha."jigyoshaName" AS "kaigoJigyosha_jigyoshaName"
@@ -80,9 +80,9 @@
         <result property="jukyuTeishiShuryoYMD"    column="UrT0528Sei_jukyuTeishiShuryoYMD"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
     </resultMap>
     
-    <select id="getSeikatsuHogoJukyusha"
+    <select resultOrdered="true" id="getSeikatsuHogoJukyusha"
             resultMap="resultMap_ShisetsuNyutaishoEntity"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.hihokenshadaichosakusei.HihokenshaDaichoSakuseiParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshadaichosakusei.HihokenshaDaichoSakuseiParameter" fetchSize="500">
         SELECT
         A."shikibetsuCode" AS "UrT0508Sei_shikibetsuCode",
         A."jukyuKaishiYMD" AS "UrT0508Sei_jukyuKaishiYMD",
@@ -164,9 +164,9 @@
         <result property="logicalDeletedFlag" column="dbT1001_logicalDeletedFlag" />
     </resultMap>
 
-    <select id="getHihokenshaDaicho"
+    <select resultOrdered="true" id="getHihokenshaDaicho"
             resultMap="ResultMap_DbT1001HihokenshaDaichoEntity"
-            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.hihokenshadaichosakusei.HihokenshaDaichoSakuseiParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.hihokenshadaichosakusei.HihokenshaDaichoSakuseiParameter" fetchSize="500">
         SELECT
         DbT1001."hihokenshaNo" AS "dbT1001_hihokenshaNo",
         DbT1001."idoYMD" AS "dbT1001_idoYMD",
@@ -208,5 +208,8 @@
             AND														
             "shikibetsuCode" = #{shikibetsuCode}	
         </if>
+        ORDER BY
+            DbT1001."idoYMD" DESC,
+            DbT1001."edaNo" DESC
     </select>
 </mapper>

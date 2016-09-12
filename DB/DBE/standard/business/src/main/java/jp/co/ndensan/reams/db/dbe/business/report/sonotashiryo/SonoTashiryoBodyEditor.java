@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.sonotashiryo;
 
-import jp.co.ndensan.reams.db.dbe.entity.report.source.sonotashiryo.SonoTashiryo;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.SonoTashiryoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.sonotashiryo.SonoTashiryoReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -18,14 +18,14 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
  */
 public class SonoTashiryoBodyEditor implements ISonoTashiryoBodyEditor {
 
-    private final SonoTashiryo item;
+    private final SonoTashiryoEntity item;
 
     /**
      * インスタンスを生成します。
      *
      * @param item {@link JohoTeikyoShiryoItem}
      */
-    protected SonoTashiryoBodyEditor(SonoTashiryo item) {
+    protected SonoTashiryoBodyEditor(SonoTashiryoEntity item) {
         this.item = item;
     }
 

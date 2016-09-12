@@ -12,8 +12,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
  * {@link HokenryoGenmenChoshuYoyuShinseishoReportSource}のプロパティです。
- * 
- * @reamsid_L DBA-0540-692  suguangjun
+ *
+ * @reamsid_L DBA-0540-692 suguangjun
  */
 public class HokenryoGenmenChoshuYoyuShinseishoProerty extends ReportPropertyBase<HokenryoGenmenChoshuYoyuShinseishoReportSource> {
 
@@ -21,6 +21,6 @@ public class HokenryoGenmenChoshuYoyuShinseishoProerty extends ReportPropertyBas
      * コンストラクタです。
      */
     public HokenryoGenmenChoshuYoyuShinseishoProerty() {
-        super(SubGyomuCode.DBA介護資格, ReportIdDBA.DBB800001.getReportId());
+        super(SubGyomuCode.DBB介護賦課, ReportIdDBA.DBB800001.getReportId());
     }
 }

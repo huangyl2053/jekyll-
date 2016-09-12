@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Value;
 
@@ -20,6 +21,7 @@ public class ChohyoSeigyoHanyoIdentifier implements Serializable {
     private final SubGyomuCode サブ業務コード;
     private final ReportId 帳票分類ID;
     private final RString 項目名;
+    private final FlexibleYear 管理年度;
 
     /**
      * コンストラクタです。
@@ -27,13 +29,16 @@ public class ChohyoSeigyoHanyoIdentifier implements Serializable {
      * @param サブ業務コード サブ業務コード
      * @param 帳票分類ID 帳票分類ID
      * @param 項目名 項目名
+     * @param 管理年度 管理年度
      */
     public ChohyoSeigyoHanyoIdentifier(SubGyomuCode サブ業務コード,
             ReportId 帳票分類ID,
-            RString 項目名) {
+            RString 項目名,
+            FlexibleYear 管理年度) {
         this.サブ業務コード = サブ業務コード;
         this.帳票分類ID = 帳票分類ID;
         this.項目名 = 項目名;
+        this.管理年度 = 管理年度;
     }
 
     /**
@@ -61,5 +66,14 @@ public class ChohyoSeigyoHanyoIdentifier implements Serializable {
      */
     public RString get項目名() {
         return 項目名;
+    }
+
+    /**
+     * get管理年度
+     *
+     * @return 管理年度
+     */
+    public FlexibleYear get管理年度() {
+        return 管理年度;
     }
 }

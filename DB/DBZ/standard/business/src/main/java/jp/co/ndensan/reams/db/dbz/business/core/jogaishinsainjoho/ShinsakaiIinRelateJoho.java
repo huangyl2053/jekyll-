@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 審査会委員情報のRelateBusinessクラス。
  *
- * @reamsid_L DBE-1300-040 dongyabin
+ * @reamsid_L DBZ-1300-040 dongyabin
  */
 public class ShinsakaiIinRelateJoho {
 
@@ -249,5 +249,23 @@ public class ShinsakaiIinRelateJoho {
      */
     public RString getその他機関コード() {
         return entity.getSonotaKikanCode();
+    }
+
+    /**
+     * 市町村コードを取得します。
+     *
+     * @return 市町村コード
+     */
+    public RString get市町村コード() {
+        return entity.getShichosonCode();
+    }
+
+    /**
+     * 除外対象審査会委員コードを取得します。
+     *
+     * @return 除外対象審査会委員コード
+     */
+    public RString get除外対象審査会委員コード() {
+        return entity.getJogaiTaishoShinsakaiIinCode();
     }
 }

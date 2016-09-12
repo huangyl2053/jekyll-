@@ -20,21 +20,4 @@ public interface IDbT7037ShoKofuKaishuMapper {
      * @deprecated マッピング検証用のメソッドであるため、テストコード以外から使用しないで下さい。
      */
     DbT7037ShoKofuKaishuEntity getEntity();
-
-    /**
-     * 更新処理です。
-     *
-     * @param entity 証交付回収テーブルのエンティティクラス
-     * @return 更新件数
-     */
-    int updateShoKaishuKanri(DbT7037ShoKofuKaishuEntity entity);
-
-    /**
-     * 更新処理です。
-     *
-     * @param entity 証交付回収テーブルのエンティティクラス
-     * @return 更新件数
-     */
-    int updateShokaishuKanriRnlisakuju(DbT7037ShoKofuKaishuEntity entity);
-
 }

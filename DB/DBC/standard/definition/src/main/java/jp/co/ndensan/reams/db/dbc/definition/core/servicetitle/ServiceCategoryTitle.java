@@ -6,38 +6,27 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * タイトルを表す列挙型です。
  *
- * @author LDNS
+ * @reamsid_L DBC-9999-023 liangbc
  */
 public enum ServiceCategoryTitle {
 
     /**
      * コード:無し 名称:指定居宅サービス 略称:定義なし
      */
-    指定居宅サービス("無し", "指定居宅サービス"),
+    指定居宅サービス("指定居宅サービス"),
     /**
      * コード:無し 名称:居宅介護 略称:定義なし
      */
-    居宅介護("無し", "居宅介護"),
+    居宅介護("居宅介護"),
     /**
      * コード:無し 名称:指定施設サービス等 略称:定義なし
      */
-    指定施設サービス等("無し", "指定施設サービス等");
+    指定施設サービス等("指定施設サービス等");
 
-    private final RString code;
     private final RString fullName;
 
-    private ServiceCategoryTitle(String code, String fullname) {
-        this.code = new RString(code);
+    private ServiceCategoryTitle(String fullname) {
         this.fullName = new RString(fullname);
-    }
-
-    /**
-     * タイトルのコードを返します。
-     *
-     * @return タイトルのコード
-     */
-    public RString getコード() {
-        return code;
     }
 
     /**
@@ -50,15 +39,15 @@ public enum ServiceCategoryTitle {
     }
 
     /**
-     * タイトルのコードと一致する内容を探します。
+     * タイトルと一致する内容を探します。
      *
-     * @param code タイトルのコード
-     * @return {@code code} に対応するタイトル
+     * @param fullname タイトル
+     * @return {fullname} に対応するタイトル
      */
-    public static ServiceCategoryTitle toValue(RString code) {
+    public static ServiceCategoryTitle toValue(RString fullname) {
 
         for (ServiceCategoryTitle serviceCategoryTitle : ServiceCategoryTitle.values()) {
-            if (serviceCategoryTitle.code.equals(code)) {
+            if (serviceCategoryTitle.get名称().equals(fullname)) {
                 return serviceCategoryTitle;
             }
         }

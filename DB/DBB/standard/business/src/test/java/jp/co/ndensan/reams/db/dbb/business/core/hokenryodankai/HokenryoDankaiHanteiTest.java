@@ -5,12 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai;
 
+import java.util.List;
+import java.util.ArrayList;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core.TsukibetsuHokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core.TsukibetsuHokenryoDankaiTest;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.FukaKonkyo;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.HokenryoDankaiHanteiParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.SeigyoJohoTest;
-import jp.co.ndensan.reams.db.dbz.definition.core.fuka.KazeiKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -50,8 +52,9 @@ public class HokenryoDankaiHanteiTest {
         FukaKonkyo fukakonkyo = new FukaKonkyo();
         HokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter;
 
-        fukakonkyo.setHonninKazeiKubun(KazeiKubun.valueOf("非課税"));
-        fukakonkyo.setSetaiKazeiKubun(KazeiKubun.valueOf("課税"));
+        List<KazeiKubun> setaiinKazeiKubunList = new ArrayList<>();
+        setaiinKazeiKubunList.add(KazeiKubun.valueOf("課税"));
+        fukakonkyo.setSetaiinKazeiKubunList(setaiinKazeiKubunList);
         fukakonkyo.setGokeiShotoku(new Decimal(500000));
         fukakonkyo.setKotekiNenkinShunyu(new Decimal(100000));
 
@@ -85,8 +88,8 @@ public class HokenryoDankaiHanteiTest {
         FukaKonkyo fukakonkyo = new FukaKonkyo();
         HokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter;
 
-        fukakonkyo.setHonninKazeiKubun(KazeiKubun.valueOf("非課税"));
-        fukakonkyo.setSetaiKazeiKubun(KazeiKubun.valueOf("非課税"));
+        List<KazeiKubun> setaiinKazeiKubunList = new ArrayList<>();
+        fukakonkyo.setSetaiinKazeiKubunList(setaiinKazeiKubunList);
         fukakonkyo.setGokeiShotoku(new Decimal(500000));
         fukakonkyo.setKotekiNenkinShunyu(new Decimal(800000));
 
@@ -118,8 +121,9 @@ public class HokenryoDankaiHanteiTest {
         FukaKonkyo fukakonkyo = new FukaKonkyo();
         HokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter;
 
-        fukakonkyo.setHonninKazeiKubun(KazeiKubun.valueOf("非課税"));
-        fukakonkyo.setSetaiKazeiKubun(KazeiKubun.valueOf("課税"));
+        List<KazeiKubun> setaiinKazeiKubunList = new ArrayList<>();
+        setaiinKazeiKubunList.add(KazeiKubun.valueOf("課税"));
+        fukakonkyo.setSetaiinKazeiKubunList(setaiinKazeiKubunList);
         fukakonkyo.setGokeiShotoku(new Decimal(500000));
         fukakonkyo.setKotekiNenkinShunyu(new Decimal(200000));
 
@@ -151,8 +155,8 @@ public class HokenryoDankaiHanteiTest {
         FukaKonkyo fukakonkyo = new FukaKonkyo();
         HokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter;
 
-        fukakonkyo.setHonninKazeiKubun(KazeiKubun.valueOf("非課税"));
-        fukakonkyo.setSetaiKazeiKubun(KazeiKubun.valueOf("非課税"));
+        List<KazeiKubun> setaiinKazeiKubunList = new ArrayList<>();
+        fukakonkyo.setSetaiinKazeiKubunList(setaiinKazeiKubunList);
         fukakonkyo.setGokeiShotoku(new Decimal(1300000));
         fukakonkyo.setKotekiNenkinShunyu(new Decimal(0));
         fukakonkyo.setSeihoStartYMD(new FlexibleDate("2014/07/25"));
@@ -184,8 +188,8 @@ public class HokenryoDankaiHanteiTest {
         FukaKonkyo fukakonkyo = new FukaKonkyo();
         HokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter;
 
-        fukakonkyo.setHonninKazeiKubun(KazeiKubun.valueOf("非課税"));
-        fukakonkyo.setSetaiKazeiKubun(KazeiKubun.valueOf("非課税"));
+        List<KazeiKubun> setaiinKazeiKubunList = new ArrayList<>();
+        fukakonkyo.setSetaiinKazeiKubunList(setaiinKazeiKubunList);
         fukakonkyo.setGokeiShotoku(new Decimal(500000));
         fukakonkyo.setKotekiNenkinShunyu(new Decimal(0));
         fukakonkyo.setSeihoStartYMD(new FlexibleDate("2014/01/25"));
@@ -218,8 +222,8 @@ public class HokenryoDankaiHanteiTest {
         FukaKonkyo fukakonkyo = new FukaKonkyo();
         HokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter;
 
-        fukakonkyo.setHonninKazeiKubun(KazeiKubun.valueOf("非課税"));
-        fukakonkyo.setSetaiKazeiKubun(KazeiKubun.valueOf("非課税"));
+        List<KazeiKubun> setaiinKazeiKubunList = new ArrayList<>();
+        fukakonkyo.setSetaiinKazeiKubunList(setaiinKazeiKubunList);
         fukakonkyo.setGokeiShotoku(new Decimal(500000));
         fukakonkyo.setKotekiNenkinShunyu(new Decimal(300001));
         fukakonkyo.setSeihoStartYMD(new FlexibleDate("2015/01/25"));

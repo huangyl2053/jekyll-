@@ -1,0 +1,5 @@
+﻿ShinsakaiIinCode,varchar,RString,,,,,介護認定審査会委員コード,A
+kaishiYM,UDD014YM,FlexibleYearMonth,,,,,開始年月,A
+shuryoYM,UDD014YM,FlexibleYearMonth,,,,,終了年月,A
+tanka,numeric,Decimal,,,,,単価,A
+sonotatanka,numeric,Decimal,,,,,その他単価,A

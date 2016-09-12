@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.service.report.johoteikyoshiryo;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.report.johoteikyoshiryo.JohoTeikyoShiryoItem;
+import jp.co.ndensan.reams.db.dbe.business.report.johoteikyoshiryo.JohoTeikyoShiryo;
 import jp.co.ndensan.reams.db.dbe.business.report.johoteikyoshiryo.JohoTeikyoShiryoProperty;
 import jp.co.ndensan.reams.db.dbe.business.report.johoteikyoshiryo.JohoTeikyoShiryoReport;
 import jp.co.ndensan.reams.db.dbe.entity.report.johoteikyoshiryo.JohoTeikyoShiryoReportSource;
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 
 /**
  * 要介護認定結果情報提供票（主治医）Printerです。
- * 
+ *
  * @reamsid_L DBE-0220-020 wangkun
  */
 public class JohoTeikyoShiryoService {
@@ -24,17 +24,17 @@ public class JohoTeikyoShiryoService {
     /**
      * 医療機関・主治医一覧表を印刷します。
      *
-     * @param itemlist 医療機関・主治医一覧表作成_帳票クラスパラメータクラス
+     * @param item 医療機関・主治医一覧表作成_帳票クラスパラメータクラス
      * @return {@link SourceDataCollection}
      */
-    public SourceDataCollection print(List<JohoTeikyoShiryoItem> itemlist) {
+    public SourceDataCollection print(JohoTeikyoShiryo item) {
         JohoTeikyoShiryoProperty property = new JohoTeikyoShiryoProperty();
-        return new Printer<JohoTeikyoShiryoReportSource>().spool(property, toReports(itemlist));
+        return new Printer<JohoTeikyoShiryoReportSource>().spool(property, toReports(item));
     }
 
-    private static List<JohoTeikyoShiryoReport> toReports(List<JohoTeikyoShiryoItem> itemlist) {
+    private static List<JohoTeikyoShiryoReport> toReports(JohoTeikyoShiryo item) {
         List<JohoTeikyoShiryoReport> list = new ArrayList<>();
-        list.add(JohoTeikyoShiryoReport.createFrom(itemlist));
+        list.add(new JohoTeikyoShiryoReport(item));
         return list;
     }
 }

@@ -11,8 +11,8 @@
         <result column="shinsakaiIinShikakuCode" property="shinsakaiIinShikaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
     </resultMap>
 
-    <select id="get審査会委員一覧情報" resultMap="result_NinteiShinsakaiIinGuideEntity" 
-            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.ninteishinsakaiiinguide.NinteiShinsakaiIinGuideMapperParameter">
+    <select resultOrdered="true" id="get審査会委員一覧情報" resultMap="result_NinteiShinsakaiIinGuideEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ninteishinsakaiiinguide.NinteiShinsakaiIinGuideMapperParameter">
         SELECT
         rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinCode" AS "shinsakaiIinCode",
         rgdb."DbT5594ShinsakaiIinJoho"."shinsakaiIinShimei" AS "shinsakaiIinShimei",

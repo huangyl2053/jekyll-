@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7023RendoHoryuTokuteiJushoE
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7023RendoHoryuTokuteiJushoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -104,20 +105,28 @@ public class TennyuHoryuTokuteiManager {
      */
     @Transaction
     public RString getKanriNo() {
-        return dac.selectKanriNo().getKanriNo();
+        ITennyuHoryuTokuteiMapper mapper = mapperProvider.create(ITennyuHoryuTokuteiMapper.class);
+        RString entity = mapper.getKanriNo();
+        if (!RString.isNullOrEmpty(entity)) {
+            return entity;
+        }
+        return RString.EMPTY;
     }
 
     /**
      * 転入保留特定住所の登録、更新、削除処理します。
      *
      * @param rendoHoryu RendoHoryuTokuteiJusho
+     * @param state EntityDataState
      * @return count 件数
      */
     @Transaction
-    public int insertOrUpdateOrDel(RendoHoryuTokuteiJusho rendoHoryu) {
-        if (!rendoHoryu.hasChanged()) {
-            return 0;
+    public int insertOrUpdateOrDel(RendoHoryuTokuteiJusho rendoHoryu, EntityDataState state) {
+        DbT7023RendoHoryuTokuteiJushoEntity entity = rendoHoryu.toEntity();
+        entity.setState(state);
+        if (state == EntityDataState.Deleted) {
+            entity.setIsDeleted(true);
         }
-        return dac.save(rendoHoryu.toEntity());
+        return dac.save(entity);
     }
 }

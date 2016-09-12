@@ -4,7 +4,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.setai.ISetaiinMapper">
     <select id="get宛名識別対象PSM"
             resultType="jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity"
-            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.setai.SetaiinParameter">
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.setai.SetaiinParameter" resultOrdered="true">
         SELECT A.*
         FROM
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />  AS A

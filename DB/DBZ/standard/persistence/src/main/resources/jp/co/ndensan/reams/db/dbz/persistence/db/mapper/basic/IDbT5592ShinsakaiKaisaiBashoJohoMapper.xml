@@ -51,7 +51,7 @@
     </resultMap>
     
     
-   <select id="getEntity" resultMap="ResultMap_DbT5592ShinsakaiKaisaiBashoJohoEntity">
+   <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5592ShinsakaiKaisaiBashoJohoEntity">
         SELECT
         <include refid="allColumns_DbT5592ShinsakaiKaisaiBashoJoho"/>
         FROM
@@ -60,9 +60,9 @@
         rgdb."DbT5592ShinsakaiKaisaiBashoJoho"."isDeleted" = FALSE
     </select>
    
-    <select id="getYiChiRanEntity"
+    <select resultOrdered="true" id="getYiChiRanEntity"
             resultMap="ResultMap_DbT5592ShinsakaiKaisaiBashoJohoEntity"
-            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter" fetchSize="500" >
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter" fetchSize="500" >
         SELECT
         <include refid="allColumns_DbT5592ShinsakaiKaisaiBashoJoho"/>
         FROM

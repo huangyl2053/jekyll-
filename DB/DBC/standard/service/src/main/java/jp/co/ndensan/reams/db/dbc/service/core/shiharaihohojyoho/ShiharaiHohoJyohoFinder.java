@@ -2,22 +2,23 @@ package jp.co.ndensan.reams.db.dbc.service.core.shiharaihohojyoho;
 
 import java.util.ArrayList;
 import java.util.List;
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JuryoininKeiyakuJigyosha;
-import jp.co.ndensan.reams.db.dbc.business.core.shiharaihohojyoho.kozajohopsm.KozaJohoPSM;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.KeiyakushaParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.KozaParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyoshaEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.shiharaihohojyoho.KozaJohoPSMEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shiharaihohojyoho.IShiharaiHohoJyohoMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
+import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
-import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.KozaYotoKubunCodeValue;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.KozaSearchParameter;
-import jp.co.ndensan.reams.ua.uax.entity.db.relate.KozaRelateEntity;
-import jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.ua.uax.service.core.koza.KozaService;
+import jp.co.ndensan.reams.ur.urc.business.core.shunokamoku.shunokamoku.IShunoKamoku;
+import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.authority.AuthorityKind;
+import jp.co.ndensan.reams.ur.urc.service.core.kamoku.shunokamoku.ShunoKamokuFinder;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -59,72 +60,48 @@ public class ShiharaiHohoJyohoFinder {
      * 口座情報パラメータで口座IDリストを取得します。
      *
      * @param parameter 口座情報パラメータ
-     * @return SearchResult<KozaJoho>
+     * @return SearchResult<Koza>
      */
-    public SearchResult<KozaJohoPSM> getKozaIDList(KozaParameter parameter) {
+    public SearchResult<Koza> getKozaIDList(KozaParameter parameter) {
 
-        IShiharaiHohoJyohoMapper mapper = mapperProvider.create(IShiharaiHohoJyohoMapper.class);
-        List<KozaJohoPSM> 口座ID = new ArrayList<>();
-        List<KozaJohoPSMEntity> entityList = mapper.get口座IDリストByKozaParameter(parameter);
-        if (entityList == null || entityList.isEmpty()) {
+        requireNonNull(parameter.getShikibetsuCode(), UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        if (parameter.getShikibetsuCode().isEmpty()) {
+            throw new IllegalArgumentException("引数の識別コードには空以外を指定してください。");
+        }
+        IShunoKamoku shunoKamoku = ShunoKamokuFinder.createInstance().get科目(parameter.getKamokuCode());
+        if (shunoKamoku == null) {
+            throw new ApplicationException("科目情報の取得に失敗しました。");
+        }
+        List<Koza> 口座ID = new ArrayList<>();
+        KozaSearchKeyBuilder keyBuilder = new KozaSearchKeyBuilder();
+        keyBuilder.set業務コード(GyomuCode.DB介護保険);
+        keyBuilder.setサブ業務コード(SubGyomuCode.DBC介護給付);
+        keyBuilder.set科目コード(shunoKamoku.getコード());
+        keyBuilder.set識別コード(parameter.getShikibetsuCode());
+        List<Koza> kozaList = KozaService.createKozaManager(AuthorityKind.参照権限収納科目).get口座(keyBuilder.build());
+        if (kozaList == null || kozaList.isEmpty()) {
             return SearchResult.of(口座ID, 0, false);
         }
-        for (KozaJohoPSMEntity entity : entityList) {
-            口座ID.add(new KozaJohoPSM(entity));
-        }
-        return SearchResult.of(口座ID, 0, false);
+        return SearchResult.of(kozaList, 0, false);
     }
 
     /**
      * 口座IDで口座情報を取得します。
      *
      * @param parameter 口座ID
-     * @return SearchResult<KozaJohoPSM>
+     * @return SearchResult<Koza>
      */
-    public SearchResult<KozaJohoPSM> getKozaJyoho(KozaParameter parameter) {
-        IShiharaiHohoJyohoMapper mapper = mapperProvider.create(IShiharaiHohoJyohoMapper.class);
-        IKozaRelateMapper kozaMapper = mapperProvider.create(IKozaRelateMapper.class);
-        List<KozaJohoPSMEntity> entityList = mapper.get口座情報ByKey(parameter);
-        List<KozaJohoPSM> kozaJohoPSMList = new ArrayList<>();
+    public SearchResult<Koza> getKozaJyoho(KozaParameter parameter) {
         KozaSearchKeyBuilder kozaBuilder = new KozaSearchKeyBuilder();
-        if (entityList != null && !entityList.isEmpty()) {
-            kozaBuilder.set業務コード(entityList.get(0).getGyomuCode());
-            kozaBuilder.setサブ業務コード(entityList.get(0).getSubGyomuCode());
-            kozaBuilder.set科目コード(entityList.get(0).getKamokuCode());
-            kozaBuilder.set用途区分(new KozaYotoKubunCodeValue(entityList.get(0).getYotoKubun() == null
-                    ? Code.EMPTY : entityList.get(0).getYotoKubun()));
+        kozaBuilder.set業務コード(GyomuCode.DB介護保険);
+        kozaBuilder.setサブ業務コード(SubGyomuCode.DBC介護給付);
+        kozaBuilder.set口座ID(parameter.getKozaId());
+        List<Koza> kozaList = new ArrayList<>();
+        List<Koza> koza = KozaService.createKozaManager(AuthorityKind.参照権限収納科目).get口座(kozaBuilder.build());
+        if (koza == null || koza.isEmpty()) {
+            return SearchResult.of(kozaList, 0, false);
         }
-        List<RString> 業務固有キーList = new ArrayList<>();
-        List<KamokuCode> kamokuCodeList = new ArrayList<>();
-        if (entityList != null && !entityList.isEmpty()) {
-            for (KozaJohoPSMEntity entity : entityList) {
-                kamokuCodeList.add(entity.getKamokuCode());
-                業務固有キーList.add(entity.getGyomuKoyuKey());
-                kozaBuilder.set業務固有キーリスト(業務固有キーList);
-            }
-        }
-        KozaSearchParameter kozaSearchParameter = new KozaSearchParameter(kozaBuilder.build(), kamokuCodeList);
-        List<KozaRelateEntity> kozaRelateList = null;
-        if (kozaSearchParameter.has権限有科目()) {
-            kozaRelateList = kozaMapper.select(kozaSearchParameter);
-        }
-        if (kozaRelateList == null) {
-            KozaJohoPSMEntity psmEntity = new KozaJohoPSMEntity();
-            kozaJohoPSMList.add(new KozaJohoPSM(psmEntity));
-            return SearchResult.of(kozaJohoPSMList, 0, false);
-        }
-        for (KozaRelateEntity entity : kozaRelateList) {
-            KozaJohoPSMEntity psmEntity = new KozaJohoPSMEntity();
-            psmEntity.setKinyuKikanCode(entity.getUaT0310KozaEntity().getKinyuKikanCode());
-            psmEntity.setKinyuKikanShitenCode(entity.getUaT0310KozaEntity().getKinyuKikanShitenCode());
-            psmEntity.setTemban(entity.getUaT0310KozaEntity().getTemban());
-            psmEntity.setYokinShubetsu(entity.getUaT0310KozaEntity().getYokinShubetsu());
-            psmEntity.setKozaNo(entity.getUaT0310KozaEntity().getKozaNo());
-            psmEntity.setKozaMeiginin(entity.getUaT0310KozaEntity().getKozaMeiginin());
-            psmEntity.setKozaMeigininKanji(entity.getUaT0310KozaEntity().getKozaMeigininKanji());
-            kozaJohoPSMList.add(new KozaJohoPSM(psmEntity));
-        }
-        return SearchResult.of(kozaJohoPSMList, 0, false);
+        return SearchResult.of(koza, 0, false);
     }
 
     /**

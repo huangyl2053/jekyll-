@@ -13,7 +13,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
  *
  * @reamsid_L DBC-0980-470 lijunjun
  */
-public class KagoKetteitsuchishoTorikomiIchiranHokenshaBunBuilder implements IKagoKetteitsuchishoTorikomiIchiranHokenshaBunBuilder {
+public class KagoKetteitsuchishoTorikomiIchiranHokenshaBunBuilder
+        implements IKagoKetteitsuchishoTorikomiIchiranHokenshaBunBuilder {
 
     private final IKagoKetteitsuchishoTorikomiIchiranHokenshaBunEditor headerEditor;
     private final IKagoKetteitsuchishoTorikomiIchiranHokenshaBunEditor bodyEditor;
@@ -24,7 +25,8 @@ public class KagoKetteitsuchishoTorikomiIchiranHokenshaBunBuilder implements IKa
      * @param headerEditor IKagoKetteitsuchishoTorikomiIchiranHokenshaBunEditor
      * @param bodyEditor IKagoKetteitsuchishoTorikomiIchiranHokenshaBunEditor
      */
-    public KagoKetteitsuchishoTorikomiIchiranHokenshaBunBuilder(IKagoKetteitsuchishoTorikomiIchiranHokenshaBunEditor headerEditor,
+    public KagoKetteitsuchishoTorikomiIchiranHokenshaBunBuilder(
+            IKagoKetteitsuchishoTorikomiIchiranHokenshaBunEditor headerEditor,
             IKagoKetteitsuchishoTorikomiIchiranHokenshaBunEditor bodyEditor) {
         this.headerEditor = headerEditor;
         this.bodyEditor = bodyEditor;

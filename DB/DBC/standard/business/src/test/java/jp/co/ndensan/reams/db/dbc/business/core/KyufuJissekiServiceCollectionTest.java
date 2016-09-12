@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.InputShikibetsuNo;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.ServiceCategory;
+import jp.co.ndensan.reams.db.dbc.definition.core.servicecategory.ServiceCategory;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;

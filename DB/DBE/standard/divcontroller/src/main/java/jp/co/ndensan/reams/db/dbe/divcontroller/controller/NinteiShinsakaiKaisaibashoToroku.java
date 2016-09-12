@@ -12,16 +12,17 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5120001.Nint
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5120001.dgKaisaibashoIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5120001.NinteiShinsakaiKaisaibashoTorokuHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.gogitaijoho.shinsakaikaisaibashojoho.ShinsakaiKaisaiBashoJohoManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -45,7 +46,6 @@ public class NinteiShinsakaiKaisaibashoToroku {
     private static final RString 追加モード = new RString("追加");
     private static final RString 通常 = new RString("通常");
     private static final RString デフォルト検索条件 = new RString("yuuKo");
-    private static final CodeShubetsu コード種別 = new CodeShubetsu("5001");
     private static final boolean 有効 = true;
     private static final boolean 全て = false;
 
@@ -95,8 +95,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
      * @param div NinteiShinsakaiKaisaibashoTorokuDiv
      * @return ResponseData
      */
-    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv>
-            onClick_btnTsuiKa(NinteiShinsakaiKaisaibashoTorokuDiv div) {
+    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> onClick_btnTsuiKa(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         if ((更新モード.equals(div.getShinakaiKaisaIbashoShosai().getJyotai()) && isUpdateHasChange(div))
                 || (isAddHasChange(div) && 追加モード.equals(div.getShinakaiKaisaIbashoShosai().getJyotai()))) {
             if (!ResponseHolder.isReRequest()) {
@@ -121,8 +120,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
      * @param div NinteiShinsakaiKaisaibashoTorokuDiv
      * @return ResponseData
      */
-    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv>
-            onClick_dataGridOnSelectByDeleteButton(NinteiShinsakaiKaisaibashoTorokuDiv div) {
+    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> onClick_dataGridOnSelectByDeleteButton(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.削除の確認.getMessage().getCode(),
                     UrQuestionMessages.削除の確認.getMessage().evaluate());
@@ -141,8 +139,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
      * @param div NinteiShinsakaiKaisaibashoTorokuDiv
      * @return ResponseData
      */
-    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv>
-            onClick_dataGridOnSelectByModifyButton(NinteiShinsakaiKaisaibashoTorokuDiv div) {
+    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> onClick_dataGridOnSelectByModifyButton(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         if ((更新モード.equals(div.getShinakaiKaisaIbashoShosai().getJyotai()) && isUpdateHasChange(div))
                 || (isAddHasChange(div) && 追加モード.equals(div.getShinakaiKaisaIbashoShosai().getJyotai()))) {
             if (!ResponseHolder.isReRequest()) {
@@ -181,8 +178,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
      * @param div NinteiShinsakaiKaisaibashoTorokuDiv
      * @return ResponseData
      */
-    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv>
-            onClick_btnback(NinteiShinsakaiKaisaibashoTorokuDiv div) {
+    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> onClick_btnback(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         if ((更新モード.equals(div.getShinakaiKaisaIbashoShosai().getJyotai()) && isUpdateHasChange(div))
                 || (isAddHasChange(div) && 追加モード.equals(div.getShinakaiKaisaIbashoShosai().getJyotai()))) {
             if (!ResponseHolder.isReRequest()) {
@@ -206,8 +202,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
      * @param div NinteiShinsakaiKaisaibashoTorokuDiv
      * @return ResponseData
      */
-    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv>
-            onClick_btnSyuuSei(NinteiShinsakaiKaisaibashoTorokuDiv div) {
+    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> onClick_btnSyuuSei(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         開催場所コードの重複チェック(div);
         開催地区コードの存在チェック(div);
         getHandler(div).開催場所一覧の更新();
@@ -221,8 +216,7 @@ public class NinteiShinsakaiKaisaibashoToroku {
      * @param div NinteiShinsakaiKaisaibashoTorokuDiv
      * @return ResponseData
      */
-    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv>
-            onClick_btnUpdate(NinteiShinsakaiKaisaibashoTorokuDiv div) {
+    public ResponseData<NinteiShinsakaiKaisaibashoTorokuDiv> onClick_btnUpdate(NinteiShinsakaiKaisaibashoTorokuDiv div) {
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
@@ -230,7 +224,9 @@ public class NinteiShinsakaiKaisaibashoToroku {
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            getHandler(div).save();
+            Models<ShinsakaiKaisaiBashoJohoIdentifier, ShinsakaiKaisaiBashoJoho> shinsakaiKaisaiBashoJohoList
+                    = ViewStateHolder.get(ViewStateKeys.開催場所情報一覧, Models.class);
+            getHandler(div).save(shinsakaiKaisaiBashoJohoList);
             onLoad(div);
         }
         return ResponseData.of(div).respond();
@@ -307,18 +303,16 @@ public class NinteiShinsakaiKaisaibashoToroku {
     }
 
     private void 開催地区コードの存在チェック(NinteiShinsakaiKaisaibashoTorokuDiv div) {
-        // CodeMaster.getCode(コード種別,div.getCcdKaisaiChikuCode().getCode());
-        // QA292は同様の問題があります、暫定以下の方式を実現。
         if (!div.getCcdKaisaiChikuCode().getCode().isEmpty()) {
-            List<UzT0007CodeEntity> codeList = CodeMaster.getCode();
+            List<UzT0007CodeEntity> codeList = CodeMaster.getCode(SubGyomuCode.DBE認定支援, DBECodeShubetsu.審査会地区コード.getコード(),
+                    FlexibleDate.getNowDate());
             if (codeList == null || codeList.isEmpty()) {
                 throw new ApplicationException(UrErrorMessages.コードマスタなし.getMessage().replace(
                         div.getCcdKaisaiChikuCode().getCode().getColumnValue().toString()));
             }
             boolean isNotExits = true;
             for (UzT0007CodeEntity entity : codeList) {
-                if (コード種別.equals(entity.getコード種別())
-                        && div.getCcdKaisaiChikuCode().getCode().equals(entity.getコード())) {
+                if (div.getCcdKaisaiChikuCode().getCode().equals(entity.getコード())) {
                     isNotExits = false;
                 }
             }

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--概要： 支払方法変更管理のマッピング用XMLです。-->
+<!-- @reamsid_L DBD-3650-040 x_lilh -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.shiharaihohohenkohaakuichiran.IShiharaiHohoHenkoHaakuMapper">
+    
+    <resultMap id="resultMap_ShiharaiHohoHenkoHaakuResultEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd207010.ShiharaiHohoHenkoHaakuResultEntity" autoMapping="true">
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+    </resultMap>
+    
+    <select resultOrdered="true" id="find支払方法変更滞納者情報" resultMap="resultMap_ShiharaiHohoHenkoHaakuResultEntity"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd207010.ShiharaiHohoHenkoHaakuMybatisParameter" fetchSize="500">
+       	SELECT
+		Distinct(賦課Newest."hihokenshaNo") AS 被保険者番号
+	FROM
+		rgdb."DbV2002Fuka" AS 賦課Newest
+	INNER JOIN rgdb."DbT2003Kibetsu" AS 介護期別
+		ON	賦課Newest."choteiNendo" = 介護期別."choteiNendo" AND
+			賦課Newest."fukaNendo" = 介護期別."fukaNendo" AND
+			賦課Newest."tsuchishoNo" = 介護期別."tsuchishoNo" AND
+			賦課Newest."rirekiNo" = 介護期別."rirekiNo"
+	INNER JOIN rgdb."UrT0705ChoteiKyotsu" AS 調定共通_介護継承
+		ON	介護期別."choteiId" = 調定共通_介護継承."choteiId"
+	LEFT JOIN 
+			(
+			SELECT 
+         			時効起算日管理_明細."shoKisaiHokenshaNo" as "dbT4023JikoKisambiKanri_shoKisaiHokenshaNo",
+         			時効起算日管理_明細."hihokenshaNo" as "dbT4023JikoKisambiKanri_hihokenshaNo",
+         			時効起算日管理_明細."choteiNendo" as "dbT4023JikoKisambiKanri_choteiNendo",
+         			時効起算日管理_明細."fukaNendo" as "dbT4023JikoKisambiKanri_fukaNendo",
+         			時効起算日管理_明細."tokucho_FuchoKubun" as "dbT4023JikoKisambiKanri_tokucho_FuchoKubun",
+         			時効起算日管理_明細."tsuchishoNo" as "dbT4023JikoKisambiKanri_tsuchishoNo",
+         			時効起算日管理_明細."shuno_Ki_Tsuki" as "dbT4023JikoKisambiKanri_shuno_Ki_Tsuki",
+         			時効起算日管理_明細."rirekiNo" as "dbT4023JikoKisambiKanri_rirekiNo",
+         			時効起算日管理_明細."insertDantaiCd" as "dbT4023JikoKisambiKanri_insertDantaiCd",
+         			時効起算日管理_明細."insertTimestamp" as "dbT4023JikoKisambiKanri_insertTimestamp",
+         			時効起算日管理_明細."insertReamsLoginId" as "dbT4023JikoKisambiKanri_insertReamsLoginId",
+         			時効起算日管理_明細."insertContextId" as "dbT4023JikoKisambiKanri_insertContextId",
+         			時効起算日管理_明細."isDeleted" as "dbT4023JikoKisambiKanri_isDeleted",
+         			時効起算日管理_明細."updateCount" as "dbT4023JikoKisambiKanri_updateCount",
+         			時効起算日管理_明細."lastUpdateTimestamp" as "dbT4023JikoKisambiKanri_lastUpdateTimestamp",
+         			時効起算日管理_明細."lastUpdateReamsLoginId" as "dbT4023JikoKisambiKanri_lastUpdateReamsLoginId",
+         			時効起算日管理_明細."jikoKisanYMD" as "dbT4023JikoKisambiKanri_jikoKisanYMD",
+         			時効起算日管理_明細."jikoKisanYMDKubun" as "dbT4023JikoKisambiKanri_jikoKisanYMDKubun",
+         			時効起算日管理_明細."logicalDeletedFlag" as "dbT4023JikoKisambiKanri_logicalDeletedFlag"
+			FROM
+				rgdb."DbT4023JikoKisambiKanri" AS 時効起算日管理_明細
+			INNER JOIN 
+				(
+				SELECT 
+					"hihokenshaNo", "choteiNendo", "fukaNendo", "tokucho_FuchoKubun", "tsuchishoNo", "shuno_Ki_Tsuki", MAX("jikoKisanYMD") AS "jikoKisanYMD"
+				FROM
+					rgdb."DbT4023JikoKisambiKanri" AS 時効起算日管理temp
+				WHERE
+					時効起算日管理temp."tokucho_FuchoKubun" = '2'
+				GROUP BY
+					"hihokenshaNo", "choteiNendo", "fukaNendo", "tokucho_FuchoKubun", "tsuchishoNo", "shuno_Ki_Tsuki"
+				) 時効起算日管理_最大情報
+			ON	時効起算日管理_最大情報."hihokenshaNo" = 時効起算日管理_明細."hihokenshaNo" AND
+				時効起算日管理_最大情報."choteiNendo" = 時効起算日管理_明細."choteiNendo" AND
+				時効起算日管理_最大情報."fukaNendo" = 時効起算日管理_明細."fukaNendo" AND
+				時効起算日管理_最大情報."tsuchishoNo" = 時効起算日管理_明細."tsuchishoNo" AND
+				時効起算日管理_最大情報."shuno_Ki_Tsuki" = 時効起算日管理_明細."shuno_Ki_Tsuki" AND
+				時効起算日管理_最大情報."tokucho_FuchoKubun" = 時効起算日管理_明細."tokucho_FuchoKubun" AND
+				時効起算日管理_最大情報."jikoKisanYMD" = 時効起算日管理_明細."jikoKisanYMD"
+			) AS 時効起算日管理
+		ON	賦課Newest."hihokenshaNo" = 時効起算日管理."dbT4023JikoKisambiKanri_hihokenshaNo" AND
+			賦課Newest."choteiNendo" = 時効起算日管理."dbT4023JikoKisambiKanri_choteiNendo" AND
+			賦課Newest."fukaNendo" = 時効起算日管理."dbT4023JikoKisambiKanri_fukaNendo" AND
+			賦課Newest."tsuchishoNo" = 時効起算日管理."dbT4023JikoKisambiKanri_tsuchishoNo" AND
+			cast(介護期別."ki" as varchar(3)) = 時効起算日管理."dbT4023JikoKisambiKanri_shuno_Ki_Tsuki" AND
+			介護期別."choshuHouhou" = 時効起算日管理."dbT4023JikoKisambiKanri_tokucho_FuchoKubun"
+	INNER JOIN rgdb."DbT4001JukyushaDaicho" AS 認定情報
+		ON   賦課Newest."hihokenshaNo" = 認定情報."hihokenshaNo"
+	LEFT JOIN (
+			SELECT
+				"shunoId" AS "shunoId",
+				SUM(収入temp."shunyugaku") AS "shunyugaku"
+			FROM
+				rgca."CaT0701Shunyu" AS 収入temp
+			WHERE
+				収入temp."shunyuYMD" <![CDATA[<=]]> #{基準日} AND
+                                収入temp."sokuhoKubun"  =  false
+			GROUP BY
+				"shunoId"
+			) AS 収入
+		ON   調定共通_介護継承."shunoId"  =  収入."shunoId"
+	LEFT JOIN (
+			SELECT
+                    償還払支給申請."hiHokenshaNo" as "dbT3034ShokanShinsei_hiHokenshaNo",
+                    償還払支給申請."serviceTeikyoYM" as "dbT3034ShokanShinsei_serviceTeikyoYM",
+                    償還払支給申請."seiriNo" as "dbT3034ShokanShinsei_seiriNo",
+                    償還払支給申請."insertDantaiCd" as "dbT3034ShokanShinsei_insertDantaiCd",
+                    償還払支給申請."insertTimestamp" as "dbT3034ShokanShinsei_insertTimestamp",
+                    償還払支給申請."insertReamsLoginId" as "dbT3034ShokanShinsei_insertReamsLoginId",
+                    償還払支給申請."insertContextId" as "dbT3034ShokanShinsei_insertContextId",
+                    償還払支給申請."isDeleted" as "dbT3034ShokanShinsei_isDeleted",
+                    償還払支給申請."updateCount" as "dbT3034ShokanShinsei_updateCount",
+                    償還払支給申請."lastUpdateTimestamp" as "dbT3034ShokanShinsei_lastUpdateTimestamp",
+                    償還払支給申請."lastUpdateReamsLoginId" as "dbT3034ShokanShinsei_lastUpdateReamsLoginId",
+                    償還払支給申請."shoKisaiHokenshaNo" as "dbT3034ShokanShinsei_shoKisaiHokenshaNo",
+                    償還払支給申請."uketsukeYMD" as "dbT3034ShokanShinsei_uketsukeYMD",
+                    償還払支給申請."shinseiYMD" as "dbT3034ShokanShinsei_shinseiYMD",
+                    償還払支給申請."shinseiRiyu" as "dbT3034ShokanShinsei_shinseiRiyu",
+                    償還払支給申請."shinseishaKubun" as "dbT3034ShokanShinsei_shinseishaKubun",
+                    償還払支給申請."shinseishaNameKanji" as "dbT3034ShokanShinsei_shinseishaNameKanji",
+                    償還払支給申請."shinseishaNameKana" as "dbT3034ShokanShinsei_shinseishaNameKana",
+                    償還払支給申請."shinseishaYubinNo" as "dbT3034ShokanShinsei_shinseishaYubinNo",
+                    償還払支給申請."shinseishaAddress" as "dbT3034ShokanShinsei_shinseishaAddress",
+                    償還払支給申請."shinseishaTelNo" as "dbT3034ShokanShinsei_shinseishaTelNo",
+                    償還払支給申請."shinseiJigyoshaNo" as "dbT3034ShokanShinsei_shinseiJigyoshaNo",
+                    償還払支給申請."riyushoSakuseiYMD" as "dbT3034ShokanShinsei_riyushoSakuseiYMD",
+                    償還払支給申請."riyushoSakuseishaName" as "dbT3034ShokanShinsei_riyushoSakuseishaName",
+                    償還払支給申請."riyushoSakuseishaKanaName" as "dbT3034ShokanShinsei_riyushoSakuseishaKanaName",
+                    償還払支給申請."riyushoSakuseiJigyoshaNo" as "dbT3034ShokanShinsei_riyushoSakuseiJigyoshaNo",
+                    償還払支給申請."shiharaiKingakuTotal" as "dbT3034ShokanShinsei_shiharaiKingakuTotal",
+                    償還払支給申請."hokenTaishoHiyogaku" as "dbT3034ShokanShinsei_hokenTaishoHiyogaku",
+                    償還払支給申請."hokenKyufugaku" as "dbT3034ShokanShinsei_hokenKyufugaku",
+                    償還払支給申請."riyoshaFutangaku" as "dbT3034ShokanShinsei_riyoshaFutangaku",
+                    償還払支給申請."shikyuShinseiShinsaKubun" as "dbT3034ShokanShinsei_shikyuShinseiShinsaKubun",
+                    償還払支給申請."shinsaHohoKubun" as "dbT3034ShokanShinsei_shinsaHohoKubun",
+                    償還払支給申請."sofuKubun" as "dbT3034ShokanShinsei_sofuKubun",
+                    償還払支給申請."sofuYM" as "dbT3034ShokanShinsei_sofuYM",
+                    償還払支給申請."kokuhorenSaisofuFlag" as "dbT3034ShokanShinsei_kokuhorenSaisofuFlag",
+                    償還払支給申請."shiharaiHohoKubunCode" as "dbT3034ShokanShinsei_shiharaiHohoKubunCode",
+                    償還払支給申請."shiharaiBasho" as "dbT3034ShokanShinsei_shiharaiBasho",
+                    償還払支給申請."shiharaiKaishiYMD" as "dbT3034ShokanShinsei_shiharaiKaishiYMD",
+                    償還払支給申請."shiharaiShuryoYMD" as "dbT3034ShokanShinsei_shiharaiShuryoYMD",
+                    償還払支給申請."shiharaiKaishiTime" as "dbT3034ShokanShinsei_shiharaiKaishiTime",
+                    償還払支給申請."shiharaiShuryoTime" as "dbT3034ShokanShinsei_shiharaiShuryoTime",
+                    償還払支給申請."kozaID" as "dbT3034ShokanShinsei_kozaID",
+                    償還払支給申請."juryoininKeiyakuNo" as "dbT3034ShokanShinsei_juryoininKeiyakuNo",
+                    償還払支給申請."jutakuShoyusha" as "dbT3034ShokanShinsei_jutakuShoyusha",
+                    償還払支給申請."hihokenshaKankei" as "dbT3034ShokanShinsei_hihokenshaKankei",
+                    償還払支給申請."yokaigo3DankaiHenko" as "dbT3034ShokanShinsei_yokaigo3DankaiHenko",
+                    償還払支給申請."jutakuJushoHenko" as "dbT3034ShokanShinsei_jutakuJushoHenko",
+                    償還払支給申請."shinsaYMD" as "dbT3034ShokanShinsei_shinsaYMD",
+                    償還払支給申請."shinsaKekka" as "dbT3034ShokanShinsei_shinsaKekka",
+                    償還払支給申請."jizenServiceTeikyoYM" as "dbT3034ShokanShinsei_jizenServiceTeikyoYM",
+                    償還払支給申請."jizenSeiriNo" as "dbT3034ShokanShinsei_jizenSeiriNo",
+                    償還払支給申請."kaishuShinseiKubun" as "dbT3034ShokanShinsei_kaishuShinseiKubun",
+                    償還払支給申請."kaishuShinseiTorikeshijiyuCode" as "dbT3034ShokanShinsei_kaishuShinseiTorikeshijiyuCode",
+                    償還払支給申請."ryoshuYMD" as "dbT3034ShokanShinsei_ryoshuYMD"
+				<!--,償還払支給判定結果.*-->
+			FROM
+				rgdb."DbT3034ShokanShinsei" AS 償還払支給申請
+			LEFT JOIN rgdb."DbT3036ShokanHanteiKekka" AS 償還払支給判定結果
+				ON 	償還払支給申請."hiHokenshaNo" = 償還払支給判定結果."hiHokenshaNo" AND
+					償還払支給申請."serviceTeikyoYM" = 償還払支給判定結果."serviceTeikyoYM" AND
+					償還払支給申請."seiriNo" = 償還払支給判定結果."seiriNo"
+			) AS 償還
+		ON   償還."dbT3034ShokanShinsei_hiHokenshaNo" = 認定情報."hihokenshaNo"
+                
+	WHERE
+		介護期別."choshuHouhou" = '2' AND
+		(認定情報."soshitsuYMD" IS null OR 認定情報."soshitsuYMD" = '')
+		<!-- AND 調定共通_介護継承."choteigaku" <![CDATA[>]]> 収入."shunyugaku" -->
+               <if test="is被保険者選択_被保険者全員_0">
+                   AND (#{被保険者全員の滞納期間} + 調定共通_介護継承."nokigenYMD") <![CDATA[<=]]> #{基準日}
+                </if>
+                 <if test="is被保険者選択_被保険者全員以外_1">
+                    <if test="is受給者全員">
+                       AND (#{受給者全員の滞納期間} + 調定共通_介護継承."nokigenYMD") <![CDATA[<=]]> #{基準日}
+                    </if>
+                    <if test="is受給認定申請中者">
+                       AND (#{受給認定申請中者の滞納期間} +  調定共通_介護継承."nokigenYMD") <![CDATA[<=]]> #{基準日}
+                       AND 認定情報.申請状況区分 = '0'
+                    </if>
+                    <if test="is受給認定日抽出">
+                      AND (#{受給認定日抽出の滞納期間} +  調定共通_介護継承."nokigenYMD") <![CDATA[<=]]> #{基準日}
+                      AND  #{受給認定日抽出の開始} <![CDATA[<=]]> 認定情報."ninteiYMD"
+                      AND  認定情報."ninteiYMD" <![CDATA[<=]]> #{受給認定日抽出の終了}
+                    </if>
+                   <if test="is受給申請中者">
+                        AND (#{償還申請中者の滞納期間} +  調定共通_介護継承."nokigenYMD") <![CDATA[<=]]> #{基準日}
+                        AND (償還."ketteiYMD" IS null OR 償還."ketteiYMD" = '')
+                    </if>
+                    <if test="is受給支給決定日抽出">
+                        AND (#{償還支給決定日抽出の滞納期間} + 調定共通_介護継承."nokigenYMD") <![CDATA[<=]]> #{基準日} 
+                        AND #{受給支給決定日抽出の開始} <![CDATA[<=]]> 償還."ketteiYMD"
+                        AND 償還."ketteiYMD" <![CDATA[<=]]> #{受給支給決定日抽出の終了}
+                    </if>
+                </if>
+    </select>
+</mapper>

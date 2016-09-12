@@ -13,44 +13,44 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBZ-9999-023 huangh
  */
-public enum IchijiHanteiKekkaCode02 {
+public enum IchijiHanteiKekkaCode02 implements IIchijiHanteiKekkaCode {
 
     /**
-     * コード:01 名称:非該当 略称:非該
+     * コード:01 名称:非該 略称:無
      */
-    非該("01", "非該当", "非該"),
+    非該当("01", "非該"),
     /**
-     * コード:11 名称:要支援 略称:支援
+     * コード:11 名称:支援 略称:無
      */
-    支援("11", "要支援", "支援"),
+    要支援("11", "支援"),
     /**
-     * コード:21 名称:要介護1 略称:介1
+     * コード:21 名称:介1 略称:無
      */
-    介1("21", "要介護1", "介1"),
+    要介護1("21", "介1"),
     /**
-     * コード:22 名称:要介護2 略称:介2
+     * コード:22 名称:介2 略称:無
      */
-    介2("22", "要介護2", "介2"),
+    要介護2("22", "介2"),
     /**
-     * コード:23 名称:要介護3 略称:介3
+     * コード:23 名称:介3 略称:無
      */
-    介3("23", "要介護3", "介3"),
+    要介護3("23", "介3"),
     /**
-     * コード:24 名称:要介護4 略称:介4
+     * コード:24 名称:介4 略称:無
      */
-    介4("24", "要介護4", "介4"),
+    要介護4("24", "介4"),
     /**
-     * コード:25 名称:要介護5 略称:介5
+     * コード:25 名称:介5 略称:無
      */
-    介5("25", "要介護5", "介5");
+    要介護5("25", "介5");
 
     private final RString code;
     private final RString fullName;
     private final RString shortName;
 
-    private IchijiHanteiKekkaCode02(String code, String fullname, String shortName) {
+    private IchijiHanteiKekkaCode02(String code, String shortName) {
         this.code = new RString(code);
-        this.fullName = new RString(fullname);
+        this.fullName = new RString(name());
         this.shortName = new RString(shortName);
     }
 
@@ -59,6 +59,7 @@ public enum IchijiHanteiKekkaCode02 {
      *
      * @return 要介護認定一次判定結果コード02のコード
      */
+    @Override
     public RString getコード() {
         return code;
     }
@@ -68,6 +69,7 @@ public enum IchijiHanteiKekkaCode02 {
      *
      * @return 要介護認定一次判定結果コード02の名称
      */
+    @Override
     public RString get名称() {
         return fullName;
     }
@@ -77,6 +79,7 @@ public enum IchijiHanteiKekkaCode02 {
      *
      * @return 要介護認定一次判定結果コード02の略称
      */
+    @Override
     public RString get略称() {
         return shortName;
     }
@@ -88,11 +91,19 @@ public enum IchijiHanteiKekkaCode02 {
      * @return {@code code} に対応する要介護認定一次判定結果コード02
      */
     public static IchijiHanteiKekkaCode02 toValue(RString code) {
+        IchijiHanteiKekkaCode02 value = toValueOrNull(code);
+        if (value == null) {
+            throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("要介護認定一次判定結果コード02"));
+        }
+        return value;
+    }
+
+    static IchijiHanteiKekkaCode02 toValueOrNull(RString code) {
         for (IchijiHanteiKekkaCode02 ichijiHanteiKekkaCode02 : IchijiHanteiKekkaCode02.values()) {
             if (ichijiHanteiKekkaCode02.code.equals(code)) {
                 return ichijiHanteiKekkaCode02;
             }
         }
-        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("要介護認定一次判定結果コード02"));
+        return null;
     }
 }

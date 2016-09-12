@@ -48,7 +48,7 @@
         <result property="shuryoYM" column="dbT5032ShujiiIkenshoHoshuTanka_shuryoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="tanka" column="dbT5032ShujiiIkenshoHoshuTanka_tanka" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
-    <select id="getEntity" resultMap="ResultMap_DbT5032ShujiiIkenshoHoshuTankaEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5032ShujiiIkenshoHoshuTankaEntity">
         SELECT
         <include refid="allColumns_DbT5032ShujiiIkenshoHoshuTanka"/>
         FROM

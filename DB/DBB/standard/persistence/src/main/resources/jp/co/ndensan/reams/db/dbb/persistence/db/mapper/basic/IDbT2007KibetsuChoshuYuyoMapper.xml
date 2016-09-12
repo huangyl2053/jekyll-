@@ -56,7 +56,7 @@
         <result property="yuyoEndYMD" column="dbT2007KibetsuChoshuYuyo_yuyoEndYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
     
-    <select id="getEntity" resultMap="ResultMap_DbT2007KibetsuChoshuYuyoEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT2007KibetsuChoshuYuyoEntity">
         SELECT
         <include refid="allColumns_DbT2007KibetsuChoshuYuyo" />
         FROM

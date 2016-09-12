@@ -12,7 +12,7 @@ import lombok.Setter;
 /**
  * 主治医医療機関＆主治医RelateEntityクラスです。
  *
- * @reamsid_L DBE-1300-130 xuyannan
+ * @reamsid_L DBZ-1300-130 xuyannan
  */
 @Getter
 @Setter

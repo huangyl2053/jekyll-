@@ -18,11 +18,12 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0020001.DBB0
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0020001.IdoTaishoshaIchiranDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0020001.dgIdoTaishoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0020001.IdoTaishoshaIchiranHandler;
-import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.idotaishoshaichiranparameter.IdoTaishoshaIchiranparameter;
 import jp.co.ndensan.reams.db.dbb.service.report.hakkogoidotaishoshaichiran.HakkogoIdoTaishoshaIchiranPrintService;
 import jp.co.ndensan.reams.db.dbb.service.report.tsuchishohakkogoidosha.TsuchiShoHakkogoIdoHaaku;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.IName;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -33,6 +34,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
@@ -53,6 +55,7 @@ public class IdoTaishoshaIchiran {
     private static final RString 一覧表発行する = new RString("btnHakko");
     private static final RString 即時賦課更生へ = new RString("btnToSokujiKosei");
     private static final RString 各種通知書発行へ = new RString("btnToKakushuTsuchishoHakko");
+    private static final int 整数_ZERO = 0;
 
     /**
      * onLoad
@@ -64,10 +67,12 @@ public class IdoTaishoshaIchiran {
         List<PublishedReportInfo> 発行帳票情報List = TsuchiShoHakkogoIdoHaaku.createInstance().get帳票情報();
         Map<RString, RString> 帳票名Map = TsuchiShoHakkogoIdoHaaku.createInstance().get通知書名称(発行帳票情報List);
         div.getDdlTsuchishoMeisho().setDataSource(KeyValueDataSourceConverter.getDataSource(帳票名Map));
-        div.getDdlTsuchishoMeisho().setSelectedIndex(0);
+        if (帳票名Map.size() != 整数_ZERO) {
+            div.getDdlTsuchishoMeisho().setSelectedIndex(整数_ZERO);
+        }
         Map<ReportId, List<YMDHMS>> 発行日時Map = TsuchiShoHakkogoIdoHaaku.createInstance().get作成日時(発行帳票情報List);
         ViewStateHolder.put(ViewStateKeys.発行日時Map, (Serializable) 発行日時Map);
-        getHandler(div).set作成日時();
+        getHandler(div).set作成日時(発行日時Map);
         getHandler(div).set最終計算処理日時();
         List<dgIdoTaishoshaIchiran_Row> rowList = new ArrayList<>();
         div.getDgIdoTaishoshaIchiran().setDataSource(rowList);
@@ -81,7 +86,8 @@ public class IdoTaishoshaIchiran {
      * @return div
      */
     public ResponseData<IdoTaishoshaIchiranDiv> onChange_ddlMeisho(IdoTaishoshaIchiranDiv div) {
-        getHandler(div).set作成日時();
+        Map<ReportId, List<YMDHMS>> map = ViewStateHolder.get(ViewStateKeys.発行日時Map, Map.class);
+        getHandler(div).set作成日時(map);
         getHandler(div).set最終計算処理日時();
         div.getDgIdoTaishoshaIchiran().getDataSource().clear();
         return ResponseData.of(div).respond();
@@ -148,7 +154,7 @@ public class IdoTaishoshaIchiran {
      * @return div
      */
     public ResponseData<IdoTaishoshaIchiranDiv> onClick_btnToKakushu(IdoTaishoshaIchiranDiv div) {
-        getHandler(div).putViewState();
+        putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBB0020001TransitionEventName.各種通知書作成へ).respond();
     }
 
@@ -159,7 +165,7 @@ public class IdoTaishoshaIchiran {
      * @return div
      */
     public ResponseData<IdoTaishoshaIchiranDiv> onClick_btnToSokujiKosei(IdoTaishoshaIchiranDiv div) {
-        getHandler(div).putViewState();
+        putViewState(div);
         return ResponseData.of(div).forwardWithEventName(DBB0020001TransitionEventName.即時更生へ).respond();
     }
 
@@ -211,11 +217,22 @@ public class IdoTaishoshaIchiran {
         TsuchiShoHakkogoIdoshaListJoho 発行後異動者一覧情報 = new TsuchiShoHakkogoIdoshaListJoho(
                 通知書発行日時, 最終計算処理日時, 通知書名, 異動者リスト);
         return ResponseData.of(new HakkogoIdoTaishoshaIchiranPrintService().
-                print(発行後異動者一覧情報, association, 帳票作成日時)).respond();
+                printSingle(発行後異動者一覧情報, association, 帳票作成日時)).respond();
     }
 
     private IdoTaishoshaIchiranHandler getHandler(IdoTaishoshaIchiranDiv div) {
         return IdoTaishoshaIchiranHandler.of(div);
+    }
+
+    private void putViewState(IdoTaishoshaIchiranDiv div) {
+        dgIdoTaishoshaIchiran_Row row = div.getDgIdoTaishoshaIchiran().getClickedItem();
+        IdoTaishoshaIchiranparameter par = new IdoTaishoshaIchiranparameter(
+                new FlexibleYear(row.getTexYSeireki().toString()),
+                new HihokenshaNo(row.getTxtHihoNo().toString()),
+                new TsuchishoNo(row.getTxtTsuchishoNo().toString()),
+                new ShikibetsuCode(row.getTxtShikibetsuCode().toString())
+        );
+        ViewStateHolder.put(ViewStateKeys.異動者一覧Par, par);
     }
 
 }

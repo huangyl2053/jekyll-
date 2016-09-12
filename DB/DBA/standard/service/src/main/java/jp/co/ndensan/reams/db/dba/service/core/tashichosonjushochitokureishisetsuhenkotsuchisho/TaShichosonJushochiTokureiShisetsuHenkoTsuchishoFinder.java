@@ -9,8 +9,8 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dba.business.core.tashichosonjushochitokureishisetsuhenkotsuchisho.TatokuKanrenChohyoHenkoTsuchishoBusiness;
 import jp.co.ndensan.reams.db.dba.business.core.tashichosonjushochitokureishisetsuhenkotsuchisho.TatokuKanrenChohyoRenrakuhyoBusiness;
 import jp.co.ndensan.reams.db.dba.business.core.tatokukanrenchohyoshiji.TatokuKanrenChohyoShijiData;
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tashihenkotsuchisho.TaShichosonJushochiTokureiShisetsuHenkoTsuchishoMybatisParameter;
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tashihenkotsuchisho.TatokuKanrenChohyoRenrakuhyoMybatisParameter;
+import jp.co.ndensan.reams.db.dba.definition.mybatisprm.tashihenkotsuchisho.TaShichosonJushochiTokureiShisetsuHenkoTsuchishoMybatisParameter;
+import jp.co.ndensan.reams.db.dba.definition.mybatisprm.tashihenkotsuchisho.TatokuKanrenChohyoRenrakuhyoMybatisParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tashihenkotsuchisho.ShisetsuJyohoRelateEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tashihenkotsuchisho.TaShichosonJushochiTokureiShisetsuHenkoTsuchishoRelateEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tashihenkotsuchisho.TatokuKanrenChohyoHenkoTsuchishoEntity;
@@ -104,13 +104,20 @@ public class TaShichosonJushochiTokureiShisetsuHenkoTsuchishoFinder {
         }
 
         TsuchishoTeikeibunManager tsuchishoTeikeibunManager = new TsuchishoTeikeibunManager();
+        // TODO n8372王イクカン （tsuchishoTeikeibunManagerの日付範囲の検索メソッドの追加が必要です。暫定対応として、最新の日付に対する通知文を設定する。） 2016/08/25
+        TsuchishoTeikeibunInfo kaishiYMDInfo = tsuchishoTeikeibunManager.get最新適用日(
+                SubGyomuCode.DBA介護資格,
+                new ReportId("DBA100006_JushochitokureiShisetsuHenkoTsuchisho"),
+                KamokuCode.EMPTY,
+                1,
+                1);
         TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = tsuchishoTeikeibunManager.get通知書定形文検索(
                 SubGyomuCode.DBA介護資格,
                 new ReportId("DBA100006_JushochitokureiShisetsuHenkoTsuchisho"),
                 KamokuCode.EMPTY,
                 1,
                 1,
-                new FlexibleDate(RDate.getNowDate().toDateString()));
+                kaishiYMDInfo.getチェック用最新適用日());
         if (tsuchishoTeikeibunInfo != null
                 && tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity() != null) {
             outEntity.set見出し(tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence());
@@ -210,13 +217,20 @@ public class TaShichosonJushochiTokureiShisetsuHenkoTsuchishoFinder {
         }
 
         TsuchishoTeikeibunManager tsuchishoTeikeibunManager = new TsuchishoTeikeibunManager();
+        // TODO n8373けい政 （tsuchishoTeikeibunManagerの日付範囲の検索メソッドの追加が必要です。暫定対応として、最新の日付に対する通知文を設定する。） 2016/08/25
+        TsuchishoTeikeibunInfo kaishiYMDInfo = tsuchishoTeikeibunManager.get最新適用日(
+                SubGyomuCode.DBA介護資格,
+                new ReportId("DBA100007_TashichosonJushochitokureishaRenrakuhyo"),
+                KamokuCode.EMPTY,
+                1,
+                1);
         TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = tsuchishoTeikeibunManager.get通知書定形文検索(
                 SubGyomuCode.DBA介護資格,
-                new ReportId("DBA100006_JushochitokureiShisetsuHenkoTsuchisho"),
+                new ReportId("DBA100007_TashichosonJushochitokureishaRenrakuhyo"),
                 KamokuCode.EMPTY,
                 1,
                 1,
-                new FlexibleDate(RDate.getNowDate().toDateString()));
+                kaishiYMDInfo.getチェック用最新適用日());
         if (tsuchishoTeikeibunInfo != null
                 && tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity() != null) {
             outEntity.set見出し(tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence());
@@ -278,10 +292,14 @@ public class TaShichosonJushochiTokureiShisetsuHenkoTsuchishoFinder {
                 outEntity.set性別(Seibetsu.女.get名称());
             }
 
-            if (entity.get転入前郵便番号() != null) {
-                outEntity.set郵便番号(entity.get転入前郵便番号().getEditedYubinNo());
+            if (!inBusiness.is住所出力不要フラグ()) {
+                YubinNo 転入前郵便番号 = entity.get転入前郵便番号();
+                outEntity.set郵便番号(転入前郵便番号 == null ? RString.EMPTY : 転入前郵便番号.getEditedYubinNo());
+                outEntity.set住所(entity.get転入前住所());
+            } else {
+                outEntity.set郵便番号(RString.EMPTY);
+                outEntity.set住所(RString.EMPTY);
             }
-            outEntity.set住所(entity.get転入前住所());
             outEntity.set転入年月日(entity.get登録異動年月日().
                     wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                     separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());

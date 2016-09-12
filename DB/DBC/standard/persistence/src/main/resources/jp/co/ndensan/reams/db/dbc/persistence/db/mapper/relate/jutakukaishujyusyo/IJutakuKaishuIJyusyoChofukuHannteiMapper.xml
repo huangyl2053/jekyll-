@@ -11,7 +11,7 @@
     </resultMap>
     
     <select id="selectKaishuJyusyoChofukuToroku" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.relate.JutakuKaishuJyusyoChofukuHannteiMapperParameter" 
-     resultMap="JutakuKaishuJyusyoChofukuHannteiEntity"  fetchSize="500" >
+     resultMap="JutakuKaishuJyusyoChofukuHannteiEntity"  fetchSize="500"  resultOrdered="true">
           SELECT																
 	     shokanShinsei."jutakuJushoHenko"	 AS	"jutakuJushoHenko" ,									
 	     T1."jutakuKaishuJutakuAddress"		AS	"jutakuKaishuJutakuAddress"								

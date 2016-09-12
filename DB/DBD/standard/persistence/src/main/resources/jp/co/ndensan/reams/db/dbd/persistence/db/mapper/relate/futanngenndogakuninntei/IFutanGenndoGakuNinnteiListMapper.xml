@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--@reamsid_L DBD-3981-050 jingge-->
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor. jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.temptable
+-->
+
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.futanngenndogakuninntei.IFutanGenndoGakuNinnteiListMapper">
+<resultMap id="resultMap_IFutanGenndoGakuNinnteiListEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.FutanGenndoGakuNinnteiListEntity" autoMapping="true">
+  <result property="hihokenshaNo" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+  <result property="ninteishoHakkoZumi" column="認定証発行済み" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+  <result property="tsuchiHakkoZumi" column="通知書発行済み" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+  <result property="shikibetsuCode" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+  <result property="shinseiYMD" column="申請日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+  <result property="ketteiYMD" column="決定日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+  <result property="tekiyoYMD" column="適用日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+  <result property="yukoKigenYMD" column="有効期限" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+  <result property="ketteiKubun" column="決定区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+  <result property="riyoshaFutanDankai" column="利用者負担段階" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>  
+  <result property="nyushoShisetsuCode" column="入所施設コード" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+  <result property="shikakuSoshitsuYMD" column="資格喪失年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+  <result property="shichosonCode"  column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+  <association property="psmEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+</resultMap> 
+<resultMap id="resultMap_FutanGenndoGakuNinnteiTempTableEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd1200902.temptable.FutanGenndoGakuNinnteiTempTableEntity" autoMapping="true">
+  <result property="hihokenshaNo" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+  <result property="ninteishoHakkoZumi" column="認定証発行済み" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+  <result property="tsuchiHakkoZumi" column="通知書発行済み" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+  <result property="shikibetsuCode" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+  <result property="shinseiYMD" column="申請日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+  <result property="ketteiYMD" column="決定日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+  <result property="tekiyoYMD" column="適用日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+  <result property="yukoKigenYMD" column="有効期限" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+  <result property="ketteiKubun" column="決定区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+  <result property="riyoshaFutanDankai" column="利用者負担段階" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>  
+</resultMap>    
+<select id="get負担額認定証_決定通知書発行一覧表発行情報"
+        resultMap="resultMap_IFutanGenndoGakuNinnteiListEntity"
+        parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd1200902.FutanGenndoGakuNinnteiListMybatisParameter" fetchSize="500" resultOrdered="true">
+    SELECT
+      "FutanGenndoGakuNinnteiTempTable"."hihokenshaNo" AS 被保険者番号,
+      "FutanGenndoGakuNinnteiTempTable"."ninteishoHakkoZumi" AS 認定証発行済み,
+      "FutanGenndoGakuNinnteiTempTable"."tsuchiHakkoZumi" AS 通知書発行済み,
+      "FutanGenndoGakuNinnteiTempTable"."shikibetsuCode" AS 識別コード,
+      "FutanGenndoGakuNinnteiTempTable"."shinseiYMD" AS 申請日,
+      "FutanGenndoGakuNinnteiTempTable"."ketteiYMD" AS 決定日,
+      "FutanGenndoGakuNinnteiTempTable"."tekiyoYMD" AS 適用日,
+      "FutanGenndoGakuNinnteiTempTable"."yukoKigenYMD" AS 有効期限,
+      "FutanGenndoGakuNinnteiTempTable"."ketteiKubun" AS 決定区分,
+      "FutanGenndoGakuNinnteiTempTable"."riyoshaFutanDankai" AS 利用者負担段階,
+      D."nyushoShisetsuCode" AS 入所施設コード,
+      C."shikakuSoshitsuYMD" AS 資格喪失年月日,
+      C."shichosonCode" AS 市町村コード,
+      <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+    FROM
+      "FutanGenndoGakuNinnteiTempTable"
+    INNER JOIN 
+      rgdb."DbV1001HihokenshaDaicho" AS C
+    ON C."hihokenshaNo" = "FutanGenndoGakuNinnteiTempTable"."hihokenshaNo"
+    AND C."logicalDeletedFlag" = FALSE
+    LEFT JOIN(
+        SELECT 
+        D2.*
+    FROM
+        rgdb."DbT1004ShisetsuNyutaisho" AS D2
+    INNER JOIN
+    (
+      SELECT * FROM (																												
+                    SELECT * , ROW_NUMBER() OVER (PARTITION BY 介護保険施設入退所."shikibetsuCode"																										
+                                     ORDER BY 介護保険施設入退所."rirekiNo" DESC) AS 介護保険施設入退所_番号																									
+                    FROM																											
+                            rgdb."DbT1004ShisetsuNyutaisho" AS 介護保険施設入退所																									
+                    WHERE																											
+                            介護保険施設入退所."daichoShubetsu" = '1'																										
+                    ) AS 介護保険施設入退所2																											
+            WHERE																												
+                    介護保険施設入退所2.介護保険施設入退所_番号 = 1
+    ) AS D1
+    ON D1."shikibetsuCode" = D2."shikibetsuCode"
+    AND D1."rirekiNo" = D2."rirekiNo"
+  ) AS D
+  ON D."shikibetsuCode" = "FutanGenndoGakuNinnteiTempTable"."shikibetsuCode"
+  INNER JOIN rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+      '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+      true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
+   ON "ShikibetsuTaisho"."shikibetsuCode" = C."shikibetsuCode"
+   ${出力順}
+    
+</select>
+<select id="get負担限度額認定の認定証発行一時テーブル"
+        parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd1200902.ShakaiFukushiHoujinnKeigenParameter"
+        resultMap="resultMap_FutanGenndoGakuNinnteiTempTableEntity" fetchSize="500" resultOrdered="true">
+    SELECT
+      "FutanGenndoGakuNinnteiTempTable"."hihokenshaNo" AS 被保険者番号,
+      "FutanGenndoGakuNinnteiTempTable"."ninteishoHakkoZumi" AS 認定証発行済み,
+      "FutanGenndoGakuNinnteiTempTable"."tsuchiHakkoZumi" AS 通知書発行済み,
+      "FutanGenndoGakuNinnteiTempTable"."shikibetsuCode" AS 識別コード,
+      "FutanGenndoGakuNinnteiTempTable"."shinseiYMD" AS 申請日,
+      "FutanGenndoGakuNinnteiTempTable"."ketteiYMD" AS 決定日,
+      "FutanGenndoGakuNinnteiTempTable"."tekiyoYMD" AS 適用日,
+      "FutanGenndoGakuNinnteiTempTable"."yukoKigenYMD" AS 有効期限,
+      "FutanGenndoGakuNinnteiTempTable"."ketteiKubun" AS 決定区分,
+      "FutanGenndoGakuNinnteiTempTable"."riyoshaFutanDankai" AS 利用者負担段階
+       FROM "FutanGenndoGakuNinnteiTempTable"
+       WHERE "FutanGenndoGakuNinnteiTempTable"."hihokenshaNo" =#{被保険者番号}
+       AND  "FutanGenndoGakuNinnteiTempTable"."shikibetsuCode" =#{識別コード}
+       LIMIT 1
+</select>
+</mapper>

@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.HokenshaI
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.business.core.hokensha.Hokensha;
-import jp.co.ndensan.reams.db.dbz.business.core.hokensha.KenCodeJigyoshaInputGuide;
+import jp.co.ndensan.reams.db.dbz.business.core.hokenshainputguide.Hokensha;
+import jp.co.ndensan.reams.db.dbz.business.core.hokenshainputguide.KenCodeJigyoshaInputGuide;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;

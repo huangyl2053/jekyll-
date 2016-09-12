@@ -9,22 +9,28 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseitodokedesha.NinteiShinseiTodokedeshaDataPassModel;
+import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseitodokedesha.NinteiShinseiTodokedeshaNaiyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.JigyoshaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiTodokedeDaikoKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseiTodokedesha.NinteiShinseiTodokedesha.NinteiShinseiTodokedeshaDiv;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AgeArrivalDay;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
  * 介護認定申請届出者のHandlerクラスです。
  *
- * @reamsid_L DBE-1300-110 yaodongsheng
+ * @reamsid_L DBZ-1300-110 yaodongsheng
  */
 public class NinteiShinseiTodokedeshaHandler {
 
+    private static final RString 管内 = new RString("key0");
+    private static final RString 管外 = new RString("key1");
     private final NinteiShinseiTodokedeshaDiv div;
 
     /**
@@ -61,7 +67,55 @@ public class NinteiShinseiTodokedeshaHandler {
             shinseiKankeishaCodeList.add(code.getCode());
         }
         div.getDdlShinseiKankeisha().setDataSource(setDataSource(shinseiKankeishaCodeList, false));
+        if ((NinteiShinseiTodokedeshaDiv.ShoriType.ShokaiMode).equals(div.getMode_ShoriType())) {
+            div.getTxtJigyoshaCode().setValue(model.get申請届出代行事業者番号());
+            div.getTxtHonninKankeisei().setValue(model.get続柄());
+            div.getTxtShimei().setValue(model.get氏名());
+            div.getTxtKanaShimei().setValue(model.getカナ氏名());
+            if (!RString.isNullOrEmpty(model.get電話番号())) {
+                div.getTxtTelNo().setDomain(new TelNo(model.get電話番号()));
+            }
+            if (!RString.isNullOrEmpty(model.get郵便番号())) {
+                div.getTxtYubinNo().setValue(new YubinNo(model.get郵便番号()));
+            }
+            div.getCcdChoikiInput().load(ChoikiCode.EMPTY, model.get住所());
+            if (!RString.isNullOrEmpty(model.get申請届出代行区分コード())) {
+                div.getDdlTodokledeDaikoKubun().setSelectedKey(model.get申請届出代行区分コード());
+            }
+            if (!RString.isNullOrEmpty(model.get事業者区分())) {
+                div.getDdlShinseiKankeisha().setSelectedKey(model.get事業者区分());
+            }
+        }
         setHidden(model);
+        div.setMode_DisplayType(NinteiShinseiTodokedeshaDiv.DisplayType.管内);
+    }
+
+    /**
+     * 画面一覧内容を取得。
+     *
+     * @return NinteiShinseiTodokedeshaNaiyo NinteiShinseiTodokedeshaNaiyo
+     */
+    public NinteiShinseiTodokedeshaNaiyo get一覧内容() {
+        NinteiShinseiTodokedeshaNaiyo naiyo = new NinteiShinseiTodokedeshaNaiyo();
+        naiyo.set届出代行区分(div.getDdlTodokledeDaikoKubun().getSelectedKey());
+        naiyo.set管内管外区分(div.getRadKannaiKangai().getSelectedKey());
+        naiyo.set事業者コード(div.getTxtJigyoshaCode().getValue());
+        naiyo.set事業者名称(div.getTxtJigyoshaName().getValue());
+        naiyo.set申請関係者(div.getDdlShinseiKankeisha().getSelectedKey());
+        naiyo.setカナ氏名(div.getTxtKanaShimei().getValue());
+        naiyo.set氏名(div.getTxtShimei().getValue());
+        naiyo.set本人との関係性(div.getTxtHonninKankeisei().getValue());
+        naiyo.set電話番号(div.getTxtTelNo().getDomain().getColumnValue());
+        if (管内.equals(div.getRadKannaiKangai().getSelectedKey())) {
+            naiyo.set郵便番号(div.getTxtYubinNo().getValue());
+            naiyo.set町域入力住所コード(div.getCcdChoikiInput().get町域コード().getColumnValue());
+            naiyo.set町域入力住所名称(div.getCcdChoikiInput().get町域名称());
+        } else if (管外.equals(div.getRadKannaiKangai().getSelectedKey())) {
+            naiyo.set全国郵便番号(div.getCcdZenkokuJushoInput().get郵便番号().value());
+            naiyo.set全国住所コード(div.getCcdZenkokuJushoInput().get全国住所コード().getColumnValue());
+            naiyo.set全国住所名称(div.getCcdZenkokuJushoInput().get全国住所名称());
+        }
+        return naiyo;
     }
 
     private List<KeyValueDataSource> setDataSource(List<RString> codeList, boolean kubun) {

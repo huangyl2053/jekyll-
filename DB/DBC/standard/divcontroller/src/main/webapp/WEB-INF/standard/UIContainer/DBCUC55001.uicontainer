@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC55001",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "基準収入額適用通知書_決定通知書作成",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC1000074",
+     "toLayoutTitle": "基準収入額決定通知書発行",
+     "toState": "shoki"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC1000074",
+     "layoutTitle": "基準収入額決定通知書発行",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

@@ -8,11 +8,11 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0020061;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
-import jp.co.ndensan.reams.db.dbu.definition.jigyohokokugeppoo.JigyoHokokuGeppoDetalSearchParameter;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoo.JigyoHokokuGeppoDetalSearchParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020061.YoshikiIchiBesshiDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.JigyoHokokuGeppoParameter;
-import jp.co.ndensan.reams.db.dbu.service.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHako;
-import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbu.service.core.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHako;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -32,6 +31,7 @@ public final class YoshikiIchiBesshiHandler {
 
     private final YoshikiIchiBesshiDiv div;
     private static final RString 削除 = new RString("削除");
+    private static final RString 更新 = new RString("更新");
     private static final int DATA_1 = 1;
     private static final int DATA_2 = 2;
     private static final int DATA_3 = 3;
@@ -67,13 +67,29 @@ public final class YoshikiIchiBesshiHandler {
      * setViewState
      *
      * @param 引き継ぎデータ JigyoHokokuGeppoParameter
-     * @param viewState RString
+     * @param 状態 RString
      */
-    public void setViewState(JigyoHokokuGeppoParameter 引き継ぎデータ, RString viewState) {
-        if (削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+    public void setViewState(JigyoHokokuGeppoParameter 引き継ぎデータ, RString 状態) {
+        if (状態.equals(削除)) {
             div.setDisabled(true);
         }
         initializeKihoneria(引き継ぎデータ);
+    }
+
+    /**
+     * show削除正常終了
+     */
+    public void show削除正常終了() {
+        div.getKanryoMessage().getCcdKanryoMessage().setSuccessMessage(new RString(
+                UrInformationMessages.正常終了.getMessage().replace(削除.toString()).evaluate()));
+    }
+
+    /**
+     * show更新正常終了
+     */
+    public void show更新正常終了() {
+        div.getKanryoMessage().getCcdKanryoMessage().setSuccessMessage(new RString(
+                UrInformationMessages.正常終了.getMessage().replace(更新.toString()).evaluate()));
     }
 
     /**
@@ -110,11 +126,11 @@ public final class YoshikiIchiBesshiHandler {
      * @param 引き継ぎデータ JigyoHokokuGeppoParameter
      */
     public void initializeKihoneria(JigyoHokokuGeppoParameter 引き継ぎデータ) {
-//        FlexibleDate 報告年月 = new FlexibleDate(引き継ぎデータ.get報告年月());
+        FlexibleDate 報告年月 = new FlexibleDate(引き継ぎデータ.get報告年月());
         FlexibleDate 集計年月 = new FlexibleDate(引き継ぎデータ.get集計年月());
         RString 保険者コード = 引き継ぎデータ.get保険者コード();
         RString 保険者名 = 引き継ぎデータ.get市町村名称();
-        div.getYoshikiIchiBesshiHeader().getTxtHokokuNengetsu().setValue(new RDate(引き継ぎデータ.get報告年月().toString()));
+        div.getYoshikiIchiBesshiHeader().getTxtHokokuNengetsu().setValue(new RDate(報告年月.toString()));
         div.getYoshikiIchiBesshiHeader().getTxtShukeiNengetsu().setValue(new RDate(集計年月.toString()));
         div.getYoshikiIchiBesshiHeader().getTxtYosikiHosei().setValue(保険者コード);
         div.getYoshikiIchiBesshiHeader().getTxtHokensyaName().setValue(保険者名);
@@ -136,7 +152,7 @@ public final class YoshikiIchiBesshiHandler {
                         引き継ぎデータ.get行統計対象区分(),
                         new LasdecCode(引き継ぎデータ.get行市町村コード()),
                         new Code(引き継ぎデータ.get行表番号()),
-                        new Code("0100"));
+                        DATA);
         List<JigyoHokokuTokeiData> 更新前データリスト = JigyoHokokuGeppoHoseiHako
                 .createInstance().getJigyoHokokuGeppoDetal(par);
         return 更新前データリスト;
@@ -175,45 +191,59 @@ public final class YoshikiIchiBesshiHandler {
     /**
      * 修正データ
      *
+     * @param 引き継ぎデータ JigyoHokokuGeppoParameter
      * @return List<JigyoHokokuTokeiData>
      */
-    public List<JigyoHokokuTokeiData> get修正データ() {
+    public List<JigyoHokokuTokeiData> get修正データ(List<JigyoHokokuTokeiData> 引き継ぎデータ) {
         List<JigyoHokokuTokeiData> 修正データリスト = new ArrayList<>();
-        JigyoHokokuGeppoParameter 引き継ぎデータ = ViewStateHolder.get(jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.ViewStateKeys.事業報告基本,
-                JigyoHokokuGeppoParameter.class);
-        List<JigyoHokokuTokeiData> 更新前データリスト = get更新前データリスト(引き継ぎデータ);
-        for (JigyoHokokuTokeiData entity : 更新前データリスト) {
-            if (entity.get横番号().equals(DATA_ONE) && entity.get縦番号().equals(DATA_ONE)
-                    && entity.get集計番号().equals(DATA)
-                    && !entity.get集計結果値().equals(div.getYoshikiIchiBesshiIchi()
-                            .getTxtZengetsumatsugenzai().getValue())) {
+        for (JigyoHokokuTokeiData entity : 引き継ぎデータ) {
+            if (isdata_ONE(entity)) {
                 entity = entity.createBuilderForEdit().set集計結果値(
                         div.getYoshikiIchiBesshiIchi().getTxtZengetsumatsugenzai().getValue()).build();
                 修正データリスト.add(entity);
             }
-            if (entity.get横番号().equals(DATA_TWO) && entity.get縦番号().equals(DATA_ONE)
-                    && entity.get集計番号().equals(DATA)
-                    && !entity.get集計結果値().equals(div.getYoshikiIchiBesshiIchi().getTxtTogetsuChuzo().getValue())) {
+            if (isdata_TWO(entity)) {
                 entity = entity.createBuilderForEdit().set集計結果値(
                         div.getYoshikiIchiBesshiIchi().getTxtTogetsuChuzo().getValue()).build();
                 修正データリスト.add(entity);
             }
-            if (entity.get横番号().equals(DATA_THREE) && entity.get縦番号().equals(DATA_ONE)
-                    && entity.get集計番号().equals(DATA)
-                    && !entity.get集計結果値().equals(div.getYoshikiIchiBesshiIchi()
-                            .getTxtTogetsuChugen().getValue())) {
+            if (isdata_THREE(entity)) {
                 entity = entity.createBuilderForEdit().set集計結果値(
                         div.getYoshikiIchiBesshiIchi().getTxtTogetsuChugen().getValue()).build();
                 修正データリスト.add(entity);
             }
-            if (entity.get横番号().equals(DATA_FOUR) && entity.get縦番号().equals(DATA_ONE)
-                    && entity.get集計番号().equals(DATA)
-                    && !entity.get集計結果値().equals(div.getYoshikiIchiBesshiIchi().getTxtTogetsumatsugenzai().getValue())) {
+            if (isdata_FOUR(entity)) {
                 entity = entity.createBuilderForEdit().set集計結果値(
                         div.getYoshikiIchiBesshiIchi().getTxtTogetsumatsugenzai().getValue()).build();
                 修正データリスト.add(entity);
             }
         }
         return 修正データリスト;
+    }
+
+    private boolean isdata_FOUR(JigyoHokokuTokeiData entity) {
+        return entity.get横番号().equals(DATA_FOUR) && entity.get縦番号().equals(DATA_ONE)
+                && entity.get集計番号().equals(DATA)
+                && !entity.get集計結果値().equals(div.getYoshikiIchiBesshiIchi().getTxtTogetsumatsugenzai().getValue());
+    }
+
+    private boolean isdata_THREE(JigyoHokokuTokeiData entity) {
+        return entity.get横番号().equals(DATA_THREE) && entity.get縦番号().equals(DATA_ONE)
+                && entity.get集計番号().equals(DATA)
+                && !entity.get集計結果値().equals(div.getYoshikiIchiBesshiIchi()
+                        .getTxtTogetsuChugen().getValue());
+    }
+
+    private boolean isdata_TWO(JigyoHokokuTokeiData entity) {
+        return entity.get横番号().equals(DATA_TWO) && entity.get縦番号().equals(DATA_ONE)
+                && entity.get集計番号().equals(DATA)
+                && !entity.get集計結果値().equals(div.getYoshikiIchiBesshiIchi().getTxtTogetsuChuzo().getValue());
+    }
+
+    private boolean isdata_ONE(JigyoHokokuTokeiData entity) {
+        return entity.get横番号().equals(DATA_ONE) && entity.get縦番号().equals(DATA_ONE)
+                && entity.get集計番号().equals(DATA)
+                && !entity.get集計結果値().equals(div.getYoshikiIchiBesshiIchi()
+                        .getTxtZengetsumatsugenzai().getValue());
     }
 }

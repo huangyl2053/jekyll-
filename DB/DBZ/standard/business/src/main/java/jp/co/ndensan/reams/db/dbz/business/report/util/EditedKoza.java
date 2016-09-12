@@ -33,6 +33,16 @@ public class EditedKoza {
     }
 
     /**
+     * コンストラクタです。
+     *
+     * @param 口座 口座
+     */
+    public EditedKoza(IKoza 口座) {
+        this.口座 = 口座;
+        this.帳票制御共通 = null;
+    }
+
+    /**
      * 金融機関コードと支店コードを半角ハイフンで連結した文字列を返します。
      *
      * @return 金融機関コード
@@ -81,6 +91,10 @@ public class EditedKoza {
      */
     public RString get口座名義人優先() {
         if (口座 != null) {
+            if (帳票制御共通 == null) {
+                return get口座名義人カナ優先();
+            }
+
             if (表示する.equals(帳票制御共通.get口座名義人カナ優先区分())) {
                 return get口座名義人カナ優先();
             } else if (表示しない.equals(帳票制御共通.get口座名義人カナ優先区分())) {

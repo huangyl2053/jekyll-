@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiNyushoshaKaig
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810025.TokuteiNyushoshaHiyoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810025.dgdTokuteiYichiran_Row;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyou;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
@@ -24,7 +23,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 償還払い状況照会_特定入所者費用のハンドラクラスです。
@@ -167,8 +165,10 @@ public class TokuteiNyushoshaHiyoHandler {
 
     /**
      * 特定入所者費用照会パネルの設定のメソッドます。
+     *
+     * @param サービス年月 FlexibleYearMonth
      */
-    public void set特定入所者費用照会パネル() {
+    public void set特定入所者費用照会パネル(FlexibleYearMonth サービス年月) {
         dgdTokuteiYichiran_Row row = div.getPanelTokutei().getDgdTokuteiYichiran().getClickedItem();
         RString serviceCodeShuruyi = new RString(row.getDefaultDataName1().subSequence(0, 2).toString());
         RString serviceCodeKoumoku = new RString(row.getDefaultDataName1().subSequence(2, SIX).toString());
@@ -177,7 +177,7 @@ public class TokuteiNyushoshaHiyoHandler {
         List<KaigoServiceNaiyou> serviceCodeList = ShokanbaraiJyokyoShokai.createInstance().getServiceCodeInfo(
                 new KaigoServiceShuruiCode(serviceCodeShuruyi),
                 serviceCodeKoumoku,
-                ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class));
+                サービス年月);
         if (serviceCodeList != null) {
             Collections.sort(serviceCodeList, new Comparator<KaigoServiceNaiyou>() {
                 @Override

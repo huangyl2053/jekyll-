@@ -11,13 +11,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 介護認定申請届出者のHandlerクラスです。
  *
- * @reamsid_L DBE-1300-110 yaodongsheng
+ * @reamsid_L DBZ-1300-110 yaodongsheng
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class NinteiShinseiTodokedeshaDataPassModel implements Serializable {
 
+    private RString 申請届出代行区分コード;
+    private RString 事業者区分;
+    private RString 申請届出代行事業者番号;
     private RString 申請書管理番号;
     private RString 識別コード;
     private RString 氏名;

@@ -9,7 +9,7 @@ and open the template in the editor.
 
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhoreninterfacekanri.IKokuhorenInterfaceKanriMapper">
 
-    <select id="selectbyKey" parameterType="java.util.Map" resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanriEntity"  fetchSize="500">
+    <select resultOrdered="true" id="selectbyKey" parameterType="java.util.Map" resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3104KokuhorenInterfaceKanriEntity"  fetchSize="500">
         select * from rgdb."DbT3104KokuhorenInterfaceKanri" where "shoriYM" = #{shoriYM} and "kokanShikibetsuNo" = #{kokanShikibetsuNo}
     </select>
 

@@ -50,7 +50,7 @@
         <result property="serviceJokyo" column="dbT4207NinteichosahyoServiceJokyo_serviceJokyo" />
     </resultMap>
     
-    <select id="getEntity" resultMap="ResultMap_DbT4207NinteichosahyoServiceJokyoEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT4207NinteichosahyoServiceJokyoEntity">
         SELECT
         <include refid="allColumns_DbT4207NinteichosahyoServiceJokyo"/>
         FROM

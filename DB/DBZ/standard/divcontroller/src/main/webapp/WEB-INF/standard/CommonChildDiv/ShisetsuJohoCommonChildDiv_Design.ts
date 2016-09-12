@@ -16,6 +16,10 @@ module DBZ {
                 return "onBlur_nyuryokuShisetsuKodo";
             }
 
+            public static onChange_nyuryokuShisetsuKodo(): string {
+                return "onChange_nyuryokuShisetsuKodo";
+            }
+
             public static onOkClose_btnSenTaKu(): string {
                 return "onOkClose_btnSenTaKu";
             }

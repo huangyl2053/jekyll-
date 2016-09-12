@@ -1,7 +1,7 @@
 package jp.co.ndensan.reams.db.dbb.entity.report.source.tsukibetsusuiihyo;
 
-import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
@@ -58,10 +58,6 @@ public class TsukibetsuSuiihyoReportSource implements IReportSource {
     public RString list_16;
     @ReportItem(name = "choshuHouhouTitle", length = 4, order = 23)
     public RString choshuHouhouTitle;
-    @ReportItem(name = "ninsuGokeiTitle", length = 2, order = 24)
-    public RString ninsuGokeiTitle;
-    @ReportItem(name = "kingakuGokeiTitle", length = 2, order = 25)
-    public RString kingakuGokeiTitle;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

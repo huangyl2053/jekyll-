@@ -89,4 +89,12 @@ public class ShujiiIryokikanShujiiIchiranhyoReportSource implements IReportSourc
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
+
+    /**
+     * 主治医医療機関・主治医一覧表の改ページ項目です。
+     */
+    public enum ReportSourceFields {
+
+        listIchiranhyoUpper_1;
+    }
 }

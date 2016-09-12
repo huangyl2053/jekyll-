@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.report.kanendoidoukekkaichiran;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.entity.report.kanendoidoukekkaichiran.KanendoIdouKekkaIchiranSource;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
@@ -55,10 +56,11 @@ public class KanendoIdouKekkaIchiranHeaderEditor implements IKanendoIdouKekkaIch
 
     @Override
     public KanendoIdouKekkaIchiranSource edit(KanendoIdouKekkaIchiranSource source) {
-        source.printTimeStamp = inputEntity.get調定日時().getDate().wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString()
-                .concat(" " + inputEntity.get調定日時().getRDateTime().getTime()
-                        .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒) + " " + SAKUSEI);
+        RString date = inputEntity.get調定日時().getDate().wareki().eraType(EraType.KANJI)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        RString time = inputEntity.get調定日時().getRDateTime().getTime()
+                .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE).concat(SAKUSEI);
+        source.printTimeStamp = date.concat(RString.HALF_SPACE).concat(time);
         FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil();
         KitsukiList 期月リスト_普徴 = 月期対応取得_普徴.get期月リスト();
         List<Kitsuki> 表記リスト = 期月リスト_普徴.toList();
@@ -71,20 +73,21 @@ public class KanendoIdouKekkaIchiranHeaderEditor implements IKanendoIdouKekkaIch
                 期の表記.add(RString.EMPTY);
             }
         }
-        source.listFuchoKi_1 = 期の表記.get(NUM_13);
-        source.listFuchoKi_2 = 期の表記.get(NUM_12);
-        source.listFuchoKi_3 = 期の表記.get(NUM_11);
-        source.listFuchoKi_4 = 期の表記.get(NUM_10);
-        source.listFuchoKi_5 = 期の表記.get(NUM_9);
-        source.listFuchoKi_6 = 期の表記.get(NUM_8);
-        source.listFuchoKi_7 = 期の表記.get(NUM_7);
-        source.listFuchoKi_8 = 期の表記.get(NUM_6);
-        source.listFuchoKi_9 = 期の表記.get(NUM_5);
-        source.listFuchoKi_10 = 期の表記.get(NUM_4);
-        source.listFuchoKi_11 = 期の表記.get(NUM_3);
-        source.listFuchoKi_12 = 期の表記.get(NUM_2);
-        source.listFuchoKi_13 = 期の表記.get(NUM_1);
-        source.listFuchoKi_14 = 期の表記.get(NUM_0);
+        Collections.reverse(期の表記);
+        source.listFuchoKi_1 = 期の表記.get(NUM_0);
+        source.listFuchoKi_2 = 期の表記.get(NUM_1);
+        source.listFuchoKi_3 = 期の表記.get(NUM_2);
+        source.listFuchoKi_4 = 期の表記.get(NUM_3);
+        source.listFuchoKi_5 = 期の表記.get(NUM_4);
+        source.listFuchoKi_6 = 期の表記.get(NUM_5);
+        source.listFuchoKi_7 = 期の表記.get(NUM_6);
+        source.listFuchoKi_8 = 期の表記.get(NUM_7);
+        source.listFuchoKi_9 = 期の表記.get(NUM_8);
+        source.listFuchoKi_10 = 期の表記.get(NUM_9);
+        source.listFuchoKi_11 = 期の表記.get(NUM_10);
+        source.listFuchoKi_12 = 期の表記.get(NUM_11);
+        source.listFuchoKi_13 = 期の表記.get(NUM_12);
+        source.listFuchoKi_14 = 期の表記.get(NUM_13);
         return source;
     }
 

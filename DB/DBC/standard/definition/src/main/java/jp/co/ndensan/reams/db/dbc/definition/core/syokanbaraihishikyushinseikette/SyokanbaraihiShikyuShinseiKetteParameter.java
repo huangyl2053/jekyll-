@@ -28,8 +28,9 @@ public class SyokanbaraihiShikyuShinseiKetteParameter {
     private final RString 整理番号;
     private final FlexibleDate 決定年月日;
     private final RString 支給区分;
+    private final Decimal 支払金額合計初期;
     private final Decimal 支払金額合計;
-    private final int 差額金額;
+    private final Decimal 差額金額;
     private final RString 増減理由等;
     private final RString 不支給理由等1;
     private final RString 不支給理由等2;
@@ -47,6 +48,7 @@ public class SyokanbaraihiShikyuShinseiKetteParameter {
      * @param 整理番号 整理番号
      * @param 決定年月日 決定年月日
      * @param 支給区分 支給区分
+     * @param 支払金額合計初期 支払金額合計初期
      * @param 支払金額合計 支払金額合計
      * @param 差額金額 差額金額
      * @param 増減理由等 増減理由等
@@ -59,8 +61,8 @@ public class SyokanbaraihiShikyuShinseiKetteParameter {
      * @param 決定情報一覧List 決定情報一覧List
      */
     protected SyokanbaraihiShikyuShinseiKetteParameter(HihokenshaNo 被保険者番号,
-            FlexibleYearMonth サービス提供年月, RString 整理番号, FlexibleDate 決定年月日, RString 支給区分,
-            Decimal 支払金額合計, int 差額金額, RString 増減理由等, RString 不支給理由等1,
+            FlexibleYearMonth サービス提供年月, RString 整理番号, FlexibleDate 決定年月日, RString 支給区分, Decimal 支払金額合計初期,
+            Decimal 支払金額合計, Decimal 差額金額, RString 増減理由等, RString 不支給理由等1,
             RString 不支給理由等2, int 増減単位, boolean 差額金額登録フラグ, RString 画面モード, ShikibetsuCode 識別コード,
             List<SyokanbaraihiShikyuShinseiKetteEntity> 決定情報一覧List) {
         this.被保険者番号 = 被保険者番号;
@@ -68,6 +70,7 @@ public class SyokanbaraihiShikyuShinseiKetteParameter {
         this.整理番号 = 整理番号;
         this.決定年月日 = 決定年月日;
         this.支給区分 = 支給区分;
+        this.支払金額合計初期 = 支払金額合計初期;
         this.支払金額合計 = 支払金額合計;
         this.差額金額 = 差額金額;
         this.増減理由等 = 増減理由等;
@@ -88,6 +91,7 @@ public class SyokanbaraihiShikyuShinseiKetteParameter {
      * @param 整理番号 整理番号
      * @param 決定年月日 決定年月日
      * @param 支給区分 支給区分
+     * @param 支払金額合計初期 支払金額合計初期
      * @param 支払金額合計 支払金額合計
      * @param 差額金額 差額金額
      * @param 増減理由等 増減理由等
@@ -102,11 +106,11 @@ public class SyokanbaraihiShikyuShinseiKetteParameter {
      */
     public static SyokanbaraihiShikyuShinseiKetteParameter createSelectByKeyParam(
             HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月, RString 整理番号,
-            FlexibleDate 決定年月日, RString 支給区分, Decimal 支払金額合計, int 差額金額, RString 増減理由等,
+            FlexibleDate 決定年月日, RString 支給区分, Decimal 支払金額合計初期, Decimal 支払金額合計, Decimal 差額金額, RString 増減理由等,
             RString 不支給理由等1, RString 不支給理由等2, int 増減単位, boolean 差額金額登録フラグ,
             RString 画面モード, ShikibetsuCode 識別コード, List<SyokanbaraihiShikyuShinseiKetteEntity> 決定情報一覧List) {
         return new SyokanbaraihiShikyuShinseiKetteParameter(被保険者番号, サービス提供年月, 整理番号, 決定年月日,
-                支給区分, 支払金額合計, 差額金額, 増減理由等, 不支給理由等1, 不支給理由等2, 増減単位,
+                支給区分, 支払金額合計初期, 支払金額合計, 差額金額, 増減理由等, 不支給理由等1, 不支給理由等2, 増減単位,
                 差額金額登録フラグ, 画面モード, 識別コード, 決定情報一覧List);
     }
 }

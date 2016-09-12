@@ -14,18 +14,18 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
- * ZenkaiNinteiKekkaJoho のクラスファイル 
- * 
+ * ZenkaiNinteiKekkaJoho のクラスファイル
+ *
  * @reamsid_L DBE-3000-020 dongyabin
  */
 public class ZenkaiNinteiKekkaJohoDiv extends Panel implements IZenkaiNinteiKekkaJohoDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -50,6 +50,8 @@ public class ZenkaiNinteiKekkaJohoDiv extends Panel implements IZenkaiNinteiKekk
     private RString hdnGamenKubun;
     @JsonProperty("hdnZenkaiShinseishoKanriNo")
     private RString hdnZenkaiShinseishoKanriNo;
+    @JsonProperty("hdnKekkaShosaiJohoModel")
+    private RString hdnKekkaShosaiJohoModel;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -220,6 +222,24 @@ public class ZenkaiNinteiKekkaJohoDiv extends Panel implements IZenkaiNinteiKekk
     }
 
     /*
+     * gethdnKekkaShosaiJohoModel
+     * @return hdnKekkaShosaiJohoModel
+     */
+    @JsonProperty("hdnKekkaShosaiJohoModel")
+    public RString getHdnKekkaShosaiJohoModel() {
+        return hdnKekkaShosaiJohoModel;
+    }
+
+    /*
+     * sethdnKekkaShosaiJohoModel
+     * @param hdnKekkaShosaiJohoModel hdnKekkaShosaiJohoModel
+     */
+    @JsonProperty("hdnKekkaShosaiJohoModel")
+    public void setHdnKekkaShosaiJohoModel(RString hdnKekkaShosaiJohoModel) {
+        this.hdnKekkaShosaiJohoModel = hdnKekkaShosaiJohoModel;
+    }
+
+    /*
      * [共有子DIVモード]
      */
     @JsonProperty("modes")
@@ -301,9 +321,9 @@ public class ZenkaiNinteiKekkaJohoDiv extends Panel implements IZenkaiNinteiKekk
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
-    
     /**
      * 前回認定結果Divの初期化です。
+     *
      * @param subGyomuCode 画面モード
      * @param shinseishoKanriNo 申請書管理番号
      * @param 参照結果 参照結果
@@ -314,7 +334,7 @@ public class ZenkaiNinteiKekkaJohoDiv extends Panel implements IZenkaiNinteiKekk
             RString 参照結果) {
         getHandler().onLoad(subGyomuCode, shinseishoKanriNo, 参照結果);
     }
-    
+
     private ZenkaiNinteiKekkaJohoHandler getHandler() {
         return new ZenkaiNinteiKekkaJohoHandler(this);
     }

@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanTokuteiNyushoshaKaig
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.ShokanKihonParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820025.TokuteiNyushoshaHiyoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820025.dgdTokuteiYichiran_Row;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
@@ -22,6 +21,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceKomokuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -29,7 +29,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 償還払い費支給申請決定_サービス提供証明書(特定入所者費用）のハンドラクラスです。
@@ -83,11 +82,10 @@ public class TokuteiNyushoshaHiyoPanelHandler {
      * ボタンを制御のメソッドます。
      *
      * @param shikibetsuNoKanri ShikibetsuNoKanri
+     * @param meisaiPar 償還払費申請明細検索キー
      */
-    public void getボタンを制御(ShikibetsuNoKanri shikibetsuNoKanri) {
+    public void getボタンを制御(ShikibetsuNoKanri shikibetsuNoKanri, ShoukanharaihishinseimeisaikensakuParameter meisaiPar) {
 
-        ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
-                ShoukanharaihishinseimeisaikensakuParameter.class);
         HihokenshaNo 被保険者番号 = meisaiPar.get被保険者番号();
         FlexibleYearMonth サービス年月 = meisaiPar.getサービス年月();
         RString 整理番号 = meisaiPar.get整理番号();
@@ -351,10 +349,9 @@ public class TokuteiNyushoshaHiyoPanelHandler {
 
     /**
      * 特定入所者費登録エリア設定のメソッドます。
-     *
-     * @param row dgdTokuteiYichiran_Row
      */
-    public void set特定入所者費登録エリア(dgdTokuteiYichiran_Row row) {
+    public void set特定入所者費登録エリア() {
+        dgdTokuteiYichiran_Row row = div.getPanelTokutei().getDgdTokuteiYichiran().getClickedItem();
         if (!row.getDefaultDataName1().isEmpty() && row.getDefaultDataName1().length() == SIX) {
             RString serviceCodeShuruyi = new RString(row.getDefaultDataName1().substring(0, 2).toString());
             RString serviceCodeKoumoku = new RString(row.getDefaultDataName1().substring(2, SIX).toString());
@@ -421,15 +418,15 @@ public class TokuteiNyushoshaHiyoPanelHandler {
      * 特定入所者費登録エリアの「確定する」ボタンのメソッドます。
      *
      * @param dgdRow dgdTokuteiYichiran_Row
+     * @param state 状態
      */
-    public void modifyRow(dgdTokuteiYichiran_Row dgdRow) {
-        RString state = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
+    public void modifyRow(dgdTokuteiYichiran_Row dgdRow, RString state) {
         if (修正.equals(state)) {
             if (RowState.Added.equals(dgdRow.getRowState())) {
                 dgdRow.setRowState(RowState.Added);
-                setDgdTokuteiYichiran_Row(dgdRow);
+                setDgdTokuteiYichiran_Row(dgdRow, state);
             } else {
-                modifiedDgdTokuteiYichiran(dgdRow);
+                modifiedDgdTokuteiYichiran(dgdRow, state);
             }
         } else if (削除.equals(state)) {
             if (RowState.Added.equals(dgdRow.getRowState())) {
@@ -443,15 +440,15 @@ public class TokuteiNyushoshaHiyoPanelHandler {
             }
         } else if (登録.equals(state)) {
             dgdRow.setRowState(RowState.Added);
-            setDgdTokuteiYichiran_Row(dgdRow);
+            setDgdTokuteiYichiran_Row(dgdRow, state);
         }
     }
 
-    private void modifiedDgdTokuteiYichiran(dgdTokuteiYichiran_Row dgdRow) {
+    private void modifiedDgdTokuteiYichiran(dgdTokuteiYichiran_Row dgdRow, RString 状態) {
         boolean flag = modifiedCheck(dgdRow);
         if (flag) {
             dgdRow.setRowState(RowState.Modified);
-            setDgdTokuteiYichiran_Row(dgdRow);
+            setDgdTokuteiYichiran_Row(dgdRow, 状態);
         }
     }
 
@@ -487,7 +484,7 @@ public class TokuteiNyushoshaHiyoPanelHandler {
                 .getTxtRiyoshafutangaku().getValue()));
     }
 
-    private void setDgdTokuteiYichiran_Row(dgdTokuteiYichiran_Row dgdRow) {
+    private void setDgdTokuteiYichiran_Row(dgdTokuteiYichiran_Row dgdRow, RString 状態) {
         RString サービス種類コード = div.getPanelTokutei().getPanelMeisai().getCcdServiceCodeInput().getサービスコード1();
         RString サービス項目コード = div.getPanelTokutei().getPanelMeisai().getCcdServiceCodeInput().getサービスコード2();
         RStringBuilder builder = new RStringBuilder();
@@ -514,7 +511,7 @@ public class TokuteiNyushoshaHiyoPanelHandler {
             dgdRow.getDefaultDataName7().setValue(div.getPanelTokutei().getPanelMeisai()
                     .getTxtRiyoshafutangaku().getValue());
         }
-        if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+        if (登録.equals(状態)) {
             List<dgdTokuteiYichiran_Row> list = div.getPanelTokutei().getDgdTokuteiYichiran().getDataSource();
             list.add(dgdRow);
         }
@@ -540,25 +537,28 @@ public class TokuteiNyushoshaHiyoPanelHandler {
 
     /**
      * 「申請を保存する」ボタンのメソッドます。
+     *
+     * @param meisaiPar 償還払費申請明細検索キー
+     * @param 処理モード RString
+     * @param serviceHiyoList 償還払請求特定入所者介護サービス費用データ
      */
-    public void 保存処理() {
-        ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
-                ShoukanharaihishinseimeisaikensakuParameter.class);
+    public void 保存処理(ShoukanharaihishinseimeisaikensakuParameter meisaiPar,
+            RString 処理モード,
+            List<ShokanTokuteiNyushoshaKaigoServiceHiyo> serviceHiyoList) {
+
         HihokenshaNo 被保険者番号 = meisaiPar.get被保険者番号();
         FlexibleYearMonth サービス年月 = meisaiPar.getサービス年月();
         RString 整理番号 = meisaiPar.get整理番号();
         JigyoshaNo 事業者番号 = meisaiPar.get事業者番号();
         RString 様式番号 = meisaiPar.get様式番号();
         RString 明細番号 = meisaiPar.get明細番号();
-        if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
+        if (削除.equals(処理モード)) {
             SyokanbaraihiShikyuShinseiKetteManager.createInstance().delShokanSyomeisyo(被保険者番号,
                     サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         } else {
             Map<RString, ShokanTokuteiNyushoshaKaigoServiceHiyo> map = new HashMap<>();
             List<ShokanTokuteiNyushoshaKaigoServiceHiyo> 特定入所者費用List = new ArrayList<>();
             int 連番 = 0;
-            List<ShokanTokuteiNyushoshaKaigoServiceHiyo> serviceHiyoList = ViewStateHolder.get(
-                    ViewStateKeys.償還払請求特定入所者介護サービス費用データ, List.class);
             for (ShokanTokuteiNyushoshaKaigoServiceHiyo entity : serviceHiyoList) {
                 map.put(entity.get連番(), entity);
                 if (連番 < Integer.valueOf(entity.get連番().toString())) {
@@ -675,19 +675,24 @@ public class TokuteiNyushoshaHiyoPanelHandler {
 
     /**
      * パラメータ設定のメソッドます。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @return 償還払費申請検索キー
      */
-    public void putViewState() {
-        ViewStateHolder.put(ViewStateKeys.処理モード, ViewStateHolder.get(ViewStateKeys.処理モード, RString.class));
-        ViewStateHolder.put(ViewStateKeys.申請日, div.getPanelHead().getTxtShinseiYMD().getValue());
+    public ShoukanharaihishinseikensakuParameter putViewState(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス年月,
+            RString 整理番号) {
         ShoukanharaihishinseikensakuParameter paramter = new ShoukanharaihishinseikensakuParameter(
-                ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
-                ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class),
-                ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
+                被保険者番号,
+                サービス年月,
+                整理番号,
                 new JigyoshaNo(div.getPanelHead().getTxtJigyoshaBango().getValue()),
                 div.getPanelHead().getTxtShomeisho().getValue(),
                 div.getPanelHead().getTxtMeisaiBango().getValue(),
                 null);
-        ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, paramter);
+        return paramter;
     }
 
     /**
@@ -704,5 +709,38 @@ public class TokuteiNyushoshaHiyoPanelHandler {
         div.getPanelTokutei().getPanelMeisai().getTxtHokenbun().setReadOnly(flag);
         div.getPanelTokutei().getPanelMeisai().getTxtRiyoshafutangaku().setReadOnly(flag);
         div.getPanelTokutei().getPanelMeisai().getBtnKeisan().setDisabled(flag);
+        div.getPanelTokutei().getPanelMeisai().getBtnClear().setDisabled(flag);
+    }
+
+    /**
+     * ヘッダエリアの設定のメソッドます。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @param 被保険者番号 HihokenshaNo
+     */
+    public void setヘッダエリア(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
+        div.getPanelCcd().getCcdKaigoAtenaInfo().initialize(識別コード);
+        if (被保険者番号 != null && !被保険者番号.isEmpty()) {
+            div.getPanelCcd().getCcdKaigoShikakuKihon().initialize(被保険者番号);
+        } else {
+            div.getPanelCcd().getCcdKaigoShikakuKihon().setVisible(false);
+        }
+    }
+
+    /**
+     * 削除モードの初期化のメソッドます。
+     */
+    public void set削除状態() {
+        div.getPanelTokutei().getBtnAdd().setDisabled(true);
+        div.getPanelTokutei().getDgdTokuteiYichiran().setReadOnly(true);
+    }
+
+    /**
+     * 特定入所者費登録エリア制御のメソッドます。
+     *
+     * @param flag boolean
+     */
+    public void set登録エリア制御(boolean flag) {
+        div.getPanelTokutei().getPanelMeisai().setVisible(flag);
     }
 }

@@ -11,20 +11,22 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum TokuchoFuchoKubun {
 
     /**
-     * コード:※1 名称:特別徴収 略称:定義なし
+     * コード:※1 名称:特別徴収 略称:定義なし 略称:特徴
      */
-    特別徴収("※1", "特別徴収"),
+    特別徴収("1", "特別徴収", "特徴"),
     /**
-     * コード:※2 名称:普通徴収 略称:定義なし
+     * コード:※2 名称:普通徴収 略称:定義なし 略称:普徴
      */
-    普通徴収("※2", "普通徴収");
+    普通徴収("2", "普通徴収", "普徴");
 
     private final RString code;
     private final RString fullName;
+    private final RString shortName;
 
-    private TokuchoFuchoKubun(String code, String fullname) {
+    private TokuchoFuchoKubun(String code, String fullname, String shortName) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+        this.shortName = new RString(shortName);
     }
 
     /**
@@ -43,6 +45,15 @@ public enum TokuchoFuchoKubun {
      */
     public RString get名称() {
         return fullName;
+    }
+
+    /**
+     * 特徴普徴区分の略称を返します。
+     *
+     * @return 特徴普徴区分の略称
+     */
+    public RString get略称() {
+        return shortName;
     }
 
     /**

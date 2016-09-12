@@ -9,24 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JuryoininKeiyakuJigyosha;
 import jp.co.ndensan.reams.db.dbc.definition.core.keiyakushurui.JuryoIninKeiyakuShurui;
-import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.juryoininkeiyakujigyosha.JuryoininKeiyakuJigyoshaParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300011.PtnTotalDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300011.dgKeiyakuJigyosya_Row;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbc.service.core.basic.JuryoininKeiyakuJigyoshaManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 受領委任契約事業者登録・追加・修正・照会_検索のHandlerクラス
@@ -37,6 +29,7 @@ public final class PtnTotalHandler {
 
     private final PtnTotalDiv div;
     private static final RString 参照 = new RString("参照");
+    private static final RString KEY_1 = new RString("1");
 
     /**
      * コンストラクタです。
@@ -61,15 +54,16 @@ public final class PtnTotalHandler {
      * 初期化設定
      *
      * @param 初期フラグ 初期フラグ
+     * @param 状態 状態
+     * @param 最大取得件数 最大取得件数
      */
-    public void set初期化状態(boolean 初期フラグ) {
-        RString 状態 = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
+    public void set初期化状態(boolean 初期フラグ, RString 状態, Decimal 最大取得件数) {
         if (参照.equals(状態)) {
             div.getPnlData().getDgKeiyakuJigyosya().getGridSetting().setIsShowModifyButtonColumn(false);
             div.getPnlData().getDgKeiyakuJigyosya().getGridSetting().setIsShowDeleteButtonColumn(false);
         }
         if (初期フラグ) {
-            div.getPnlCondition().getRdoBango().setSelectedKey(new RString("1"));
+            div.getPnlCondition().getRdoBango().setSelectedKey(KEY_1);
         }
         div.getPnlCondition().getTxtJigyosyakeyakuNo().clearValue();
         div.getPnlCondition().getTxtJigyosyakeyakuNo().setDisabled(false);
@@ -109,8 +103,6 @@ public final class PtnTotalHandler {
                     get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(),
                             SubGyomuCode.DBU介護統計報告).toString()));
         } else {
-            Decimal 最大取得件数 = ViewStateHolder
-                    .get(ViewStateKeys.受領委任契約事業者検索最大件数, Decimal.class);
             div.getPnlCondition().getTxtMaxCount().setValue(最大取得件数);
         }
         div.getPnlData().setDisplayNone(true);
@@ -195,97 +187,21 @@ public final class PtnTotalHandler {
     }
 
     /**
-     * 検索ボタンの動作
+     * Gridセット
+     *
+     * @param count int
+     * @param dataList List<JuryoininKeiyakuJigyosha>
      */
-    public void click検索() {
-        div.getPnlCondition().setDisplayNone(true);
-        div.getPnlData().setDisplayNone(false);
-        div.getPnlData().getBtnSearchAgain().setDisabled(false);
-
-        boolean selectedBango = false;
-        boolean selectedName = false;
-        boolean selectedJusho = false;
-        RString keiyakuJigyoshaNo = null;
-        AtenaKanaMeisho keiyakuJigyoshaKanaName = null;
-        boolean sameKanaName = false;
-        AtenaMeisho keiyakuJigyoshaName = null;
-        boolean sameJigyoshaName = false;
-        RString keiyakuShurui = null;
-        YubinNo keiyakuJigyoshaYubinNo = null;
-        AtenaJusho keiyakuJigyoshaJusho = null;
-        boolean sameJusho = false;
-
-        if (new RString("1").equals(div.getPnlCondition().getRdoBango().getSelectedKey())) {
-            selectedBango = true;
-            keiyakuJigyoshaNo = new RString(div.getPnlCondition().getTxtJigyosyakeyakuNo().getValue().toString());
-        } else if (new RString("2").equals(div.getPnlCondition().getRdoMeisyo().getSelectedKey())) {
-            selectedName = true;
-            if (!div.getPnlCondition().getTxtMeisyoKana().getValue().isNullOrEmpty()) {
-                keiyakuJigyoshaKanaName = new AtenaKanaMeisho(div.getPnlCondition().getTxtMeisyoKana().getValue());
-            }
-            if (div.getPnlCondition().getChkMeisyoKana().isAllSelected()) {
-                sameKanaName = true;
-            }
-            if (!div.getPnlCondition().getTxtMeisyoKanji().getValue().isNullOrEmpty()) {
-                keiyakuJigyoshaName = new AtenaMeisho(div.getPnlCondition().getTxtMeisyoKanji().getValue());
-            }
-            if (div.getPnlCondition().getChkMeisyoKanji().isAllSelected()) {
-                sameJigyoshaName = true;
-            }
-            if (!RString.EMPTY.equals(div.getPnlCondition().getDdlKeiyakuSyurui().getSelectedKey())) {
-                keiyakuShurui = div.getPnlCondition().getDdlKeiyakuSyurui().getSelectedKey();
-            }
-        } else if (new RString("3").equals(div.getPnlCondition().getRdoJyusyo().getSelectedKey())) {
-            selectedJusho = true;
-            if (!div.getPnlCondition().getTxtYubin().getValue().isEmpty()) {
-                keiyakuJigyoshaYubinNo = div.getPnlCondition().getTxtYubin().getValue();
-            }
-            if (!div.getPnlCondition().getTxtJyusyoKanji().getValue().isNullOrEmpty()) {
-                keiyakuJigyoshaJusho = new AtenaJusho(div.getPnlCondition().getTxtJyusyoKanji().getValue());
-            }
-            if (div.getPnlCondition().getChkJyusyoKanji().isAllSelected()) {
-                sameJusho = true;
-            }
-        }
-
-        JuryoininKeiyakuJigyoshaParameter parameter = JuryoininKeiyakuJigyoshaParameter.createMybatisParam(
-                selectedBango,
-                selectedName,
-                selectedJusho,
-                keiyakuJigyoshaNo,
-                keiyakuJigyoshaKanaName,
-                sameKanaName,
-                keiyakuJigyoshaName,
-                sameJigyoshaName,
-                keiyakuShurui,
-                keiyakuJigyoshaYubinNo,
-                keiyakuJigyoshaJusho,
-                sameJusho);
-
-        ViewStateHolder.put(ViewStateKeys.受領委任契約事業者検索キー, parameter);
-        List<JuryoininKeiyakuJigyosha> dataList = JuryoininKeiyakuJigyoshaManager.createInstance()
-                .getJuryoininKeiyakuJigyoshaList(parameter);
+    public void setGrid(int count, List<JuryoininKeiyakuJigyosha> dataList) {
         List<dgKeiyakuJigyosya_Row> data = new ArrayList<>();
-        if (dataList == null || dataList.isEmpty()) {
-            div.getPnlData().getDgKeiyakuJigyosya().setDataSource(data);
-            return;
-        }
-        int count = 0;
-        int limit = div.getPnlCondition().getTxtMaxCount().getValue().intValue();
-        if (dataList.size() > limit) {
-            count = limit;
-        } else {
-            count = dataList.size();
-        }
-        ViewStateHolder.put(ViewStateKeys.受領委任契約事業者一覧データ, (ArrayList<JuryoininKeiyakuJigyosha>) dataList);
-        ViewStateHolder.put(ViewStateKeys.受領委任契約事業者検索最大件数, div.getPnlCondition().getTxtMaxCount().getValue());
-
         for (int i = 0; i < count; i++) {
             dgKeiyakuJigyosya_Row row = new dgKeiyakuJigyosya_Row();
 
             row.setTxtKeiyakuJigyoshaNo(dataList.get(i).get契約事業者番号());
-            row.setTxtKeiyakuJigyoshaName(dataList.get(i).get契約事業者名称().value());
-            row.setTxtKeiyakuJigyoshaJusho(dataList.get(i).get契約事業者住所().value());
+            row.setTxtKeiyakuJigyoshaName(dataList.get(i).get契約事業者名称() == null ? null
+                    : dataList.get(i).get契約事業者名称().getColumnValue());
+            row.setTxtKeiyakuJigyoshaJusho(dataList.get(i).get契約事業者住所() == null ? null
+                    : dataList.get(i).get契約事業者住所().getColumnValue());
             TextBoxDate 開始年月日 = new TextBoxDate();
             RDate 開始年月日RDate = RDate.canConvert(new RString(dataList.get(i).get開始年月日().toString()))
                     ? new RDate(dataList.get(i).get開始年月日().toString()) : null;
@@ -312,17 +228,4 @@ public final class PtnTotalHandler {
         div.getPnlData().getBtnSearchAgain().setDisabled(true);
     }
 
-    /**
-     * 引継ぎデータの設定
-     */
-    public void setSelectedRow() {
-        ArrayList<JuryoininKeiyakuJigyosha> allData
-                = ViewStateHolder.get(ViewStateKeys.受領委任契約事業者一覧データ, ArrayList.class);
-        for (JuryoininKeiyakuJigyosha tmp : allData) {
-            if (tmp.get契約事業者番号().equals(
-                    div.getPnlData().getDgKeiyakuJigyosya().getSelectedItems().get(0).getTxtKeiyakuJigyoshaNo())) {
-                ViewStateHolder.put(ViewStateKeys.受領委任契約事業者詳細データ, tmp);
-            }
-        }
-    }
 }

@@ -13,12 +13,10 @@ import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.KetteiHenkoTsuchisho
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0310003.HonKakushuTsuchiUchiwakeKakuninDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0310003.dgKakushuTsuchiUchiwakeSentaku_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0310003.dgTsuchishoSettei_Row;
-import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbb.service.core.honsanteifuka.Honsanteifuka;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 打ち分け方法確認のHandler
@@ -99,9 +97,9 @@ public class HonKakushuTsuchiUchiwakeKakuninHandler {
         row1.setTxtChosyuHoho(徴収なし);
         row1.setTxtJotai(資格継続_イコール);
         row1.getTxtTsuchisyoShitei().setDataSource(通知書List);
-        row1.getTxtTsuchisyoShitei().setSelectedKey(方法情報一覧.get選択通知書01());
+        row1 = set通知書(row1, 方法情報一覧.get選択通知書01());
         row1.getTxtGenkinKozaShitei().setDataSource(対象者List);
-        row1.getTxtGenkinKozaShitei().setSelectedKey(方法情報一覧.get選択現金口座01());
+        row1 = set対象者(row1, 方法情報一覧.get選択現金口座01());
         row1.getTxtHakkojiGroup().setValue(方法情報一覧.get出力順グループ名01());
         dataSources.add(row1);
 
@@ -109,9 +107,9 @@ public class HonKakushuTsuchiUchiwakeKakuninHandler {
         row2.setTxtChosyuHoho(徴収なし);
         row2.setTxtJotai(資格継続_大或);
         row2.getTxtTsuchisyoShitei().setDataSource(通知書List);
-        row2.getTxtTsuchisyoShitei().setSelectedKey(方法情報一覧.get選択通知書02());
+        row2 = set通知書(row2, 方法情報一覧.get選択通知書02());
         row2.getTxtGenkinKozaShitei().setDataSource(対象者List);
-        row2.getTxtGenkinKozaShitei().setSelectedKey(方法情報一覧.get選択現金口座02());
+        row2 = set対象者(row2, 方法情報一覧.get選択現金口座02());
         row2.getTxtHakkojiGroup().setValue(方法情報一覧.get出力順グループ名02());
         dataSources.add(row2);
 
@@ -119,9 +117,9 @@ public class HonKakushuTsuchiUchiwakeKakuninHandler {
         row3.setTxtChosyuHoho(徴収なし);
         row3.setTxtJotai(資格喪失_イコール);
         row3.getTxtTsuchisyoShitei().setDataSource(通知書List);
-        row3.getTxtTsuchisyoShitei().setSelectedKey(方法情報一覧.get選択通知書03());
+        row3 = set通知書(row3, 方法情報一覧.get選択通知書03());
         row3.getTxtGenkinKozaShitei().setDataSource(対象者List);
-        row3.getTxtGenkinKozaShitei().setSelectedKey(方法情報一覧.get選択現金口座03());
+        row3 = set対象者(row3, 方法情報一覧.get選択現金口座03());
         row3.getTxtHakkojiGroup().setValue(方法情報一覧.get出力順グループ名03());
         dataSources.add(row3);
 
@@ -129,9 +127,9 @@ public class HonKakushuTsuchiUchiwakeKakuninHandler {
         row4.setTxtChosyuHoho(徴収なし);
         row4.setTxtJotai(資格喪失_大或);
         row4.getTxtTsuchisyoShitei().setDataSource(通知書List);
-        row4.getTxtTsuchisyoShitei().setSelectedKey(方法情報一覧.get選択通知書04());
+        row4 = set通知書(row4, 方法情報一覧.get選択通知書04());
         row4.getTxtGenkinKozaShitei().setDataSource(対象者List);
-        row4.getTxtGenkinKozaShitei().setSelectedKey(方法情報一覧.get選択現金口座04());
+        row4 = set対象者(row4, 方法情報一覧.get選択現金口座04());
         row4.getTxtHakkojiGroup().setValue(方法情報一覧.get出力順グループ名04());
         dataSources.add(row4);
 
@@ -139,9 +137,9 @@ public class HonKakushuTsuchiUchiwakeKakuninHandler {
         row5.setTxtChosyuHoho(徴収なし);
         row5.setTxtJotai(資格喪失);
         row5.getTxtTsuchisyoShitei().setDataSource(通知書List);
-        row5.getTxtTsuchisyoShitei().setSelectedKey(方法情報一覧.get選択通知書05());
+        row5 = set通知書(row5, 方法情報一覧.get選択通知書05());
         row5.getTxtGenkinKozaShitei().setDataSource(対象者List);
-        row5.getTxtGenkinKozaShitei().setSelectedKey(方法情報一覧.get選択現金口座05());
+        row5 = set対象者(row5, 方法情報一覧.get選択現金口座05());
         row5.getTxtHakkojiGroup().setValue(方法情報一覧.get出力順グループ名05());
         dataSources.add(row5);
 
@@ -149,9 +147,9 @@ public class HonKakushuTsuchiUchiwakeKakuninHandler {
         row6.setTxtChosyuHoho(特別徴収);
         row6.setTxtJotai(仮徴収は特別徴収);
         row6.getTxtTsuchisyoShitei().setDataSource(通知書List);
-        row6.getTxtTsuchisyoShitei().setSelectedKey(方法情報一覧.get選択通知書06());
+        row6 = set通知書(row6, 方法情報一覧.get選択通知書06());
         row6.getTxtGenkinKozaShitei().setDataSource(対象者List);
-        row6.getTxtGenkinKozaShitei().setSelectedKey(方法情報一覧.get選択現金口座06());
+        row6 = set対象者(row6, 方法情報一覧.get選択現金口座06());
         row6.getTxtHakkojiGroup().setValue(方法情報一覧.get出力順グループ名06());
         dataSources.add(row6);
 
@@ -159,9 +157,9 @@ public class HonKakushuTsuchiUchiwakeKakuninHandler {
         row7.setTxtChosyuHoho(特別徴収);
         row7.setTxtJotai(仮徴収は特別徴収_から);
         row7.getTxtTsuchisyoShitei().setDataSource(通知書List);
-        row7.getTxtTsuchisyoShitei().setSelectedKey(方法情報一覧.get選択通知書07());
+        row7 = set通知書(row7, 方法情報一覧.get選択通知書07());
         row7.getTxtGenkinKozaShitei().setDataSource(対象者List);
-        row7.getTxtGenkinKozaShitei().setSelectedKey(方法情報一覧.get選択現金口座07());
+        row7 = set対象者(row7, 方法情報一覧.get選択現金口座07());
         row7.getTxtHakkojiGroup().setValue(方法情報一覧.get出力順グループ名07());
         dataSources.add(row7);
 
@@ -169,9 +167,9 @@ public class HonKakushuTsuchiUchiwakeKakuninHandler {
         row8.setTxtChosyuHoho(特別徴収);
         row8.setTxtJotai(仮徴収は普通徴収);
         row8.getTxtTsuchisyoShitei().setDataSource(通知書List);
-        row8.getTxtTsuchisyoShitei().setSelectedKey(方法情報一覧.get選択通知書08());
+        row8 = set通知書(row8, 方法情報一覧.get選択通知書08());
         row8.getTxtGenkinKozaShitei().setDataSource(対象者List);
-        row8.getTxtGenkinKozaShitei().setSelectedKey(方法情報一覧.get選択現金口座08());
+        row8 = set対象者(row8, 方法情報一覧.get選択現金口座08());
         row8.getTxtHakkojiGroup().setValue(方法情報一覧.get出力順グループ名08());
         dataSources.add(row8);
 
@@ -179,9 +177,9 @@ public class HonKakushuTsuchiUchiwakeKakuninHandler {
         row9.setTxtChosyuHoho(普通徴収);
         row9.setTxtJotai(資格継続_なし);
         row9.getTxtTsuchisyoShitei().setDataSource(通知書List);
-        row9.getTxtTsuchisyoShitei().setSelectedKey(方法情報一覧.get選択通知書09());
+        row9 = set通知書(row9, 方法情報一覧.get選択通知書09());
         row9.getTxtGenkinKozaShitei().setDataSource(対象者List);
-        row9.getTxtGenkinKozaShitei().setSelectedKey(方法情報一覧.get選択現金口座09());
+        row9 = set対象者(row9, 方法情報一覧.get選択現金口座09());
         row9.getTxtHakkojiGroup().setValue(方法情報一覧.get出力順グループ名09());
         dataSources.add(row9);
 
@@ -189,9 +187,9 @@ public class HonKakushuTsuchiUchiwakeKakuninHandler {
         row10.setTxtChosyuHoho(普通徴収);
         row10.setTxtJotai(資格継続_特別);
         row10.getTxtTsuchisyoShitei().setDataSource(通知書List);
-        row10.getTxtTsuchisyoShitei().setSelectedKey(方法情報一覧.get選択通知書10());
+        row10 = set通知書(row10, 方法情報一覧.get選択通知書10());
         row10.getTxtGenkinKozaShitei().setDataSource(対象者List);
-        row10.getTxtGenkinKozaShitei().setSelectedKey(方法情報一覧.get選択現金口座10());
+        row10 = set対象者(row10, 方法情報一覧.get選択現金口座10());
         row10.getTxtHakkojiGroup().setValue(方法情報一覧.get出力順グループ名10());
         dataSources.add(row10);
 
@@ -199,9 +197,9 @@ public class HonKakushuTsuchiUchiwakeKakuninHandler {
         row11.setTxtChosyuHoho(普通徴収);
         row11.setTxtJotai(資格継続_普通);
         row11.getTxtTsuchisyoShitei().setDataSource(通知書List);
-        row11.getTxtTsuchisyoShitei().setSelectedKey(方法情報一覧.get選択通知書11());
+        row11 = set通知書(row11, 方法情報一覧.get選択通知書11());
         row11.getTxtGenkinKozaShitei().setDataSource(対象者List);
-        row11.getTxtGenkinKozaShitei().setSelectedKey(方法情報一覧.get選択現金口座11());
+        row11 = set対象者(row11, 方法情報一覧.get選択現金口座11());
         row11.getTxtHakkojiGroup().setValue(方法情報一覧.get出力順グループ名11());
         dataSources.add(row11);
 
@@ -209,9 +207,9 @@ public class HonKakushuTsuchiUchiwakeKakuninHandler {
         row12.setTxtChosyuHoho(普通徴収);
         row12.setTxtJotai(資格喪失_特別);
         row12.getTxtTsuchisyoShitei().setDataSource(通知書List);
-        row12.getTxtTsuchisyoShitei().setSelectedKey(方法情報一覧.get選択通知書12());
+        row12 = set通知書(row12, 方法情報一覧.get選択通知書12());
         row12.getTxtGenkinKozaShitei().setDataSource(対象者List);
-        row12.getTxtGenkinKozaShitei().setSelectedKey(方法情報一覧.get選択現金口座12());
+        row12 = set対象者(row12, 方法情報一覧.get選択現金口座12());
         row12.getTxtHakkojiGroup().setValue(方法情報一覧.get出力順グループ名12());
         dataSources.add(row12);
 
@@ -219,13 +217,27 @@ public class HonKakushuTsuchiUchiwakeKakuninHandler {
         row13.setTxtChosyuHoho(普通徴収);
         row13.setTxtJotai(資格喪失_普通);
         row13.getTxtTsuchisyoShitei().setDataSource(通知書List);
-        row13.getTxtTsuchisyoShitei().setSelectedKey(方法情報一覧.get選択通知書13());
+        row13 = set通知書(row13, 方法情報一覧.get選択通知書13());
         row13.getTxtGenkinKozaShitei().setDataSource(対象者List);
-        row13.getTxtGenkinKozaShitei().setSelectedKey(方法情報一覧.get選択現金口座13());
+        row13 = set対象者(row13, 方法情報一覧.get選択現金口座13());
         row13.getTxtHakkojiGroup().setValue(方法情報一覧.get出力順グループ名13());
         dataSources.add(row13);
 
         div.getDgTsuchishoSettei().setDataSource(dataSources);
+    }
+
+    private dgTsuchishoSettei_Row set通知書(dgTsuchishoSettei_Row row, RString 通知書) {
+        if (通知書 != null && !通知書.isEmpty()) {
+            row.getTxtTsuchisyoShitei().setSelectedKey(通知書);
+        }
+        return row;
+    }
+
+    private dgTsuchishoSettei_Row set対象者(dgTsuchishoSettei_Row row, RString 対象者) {
+        if (対象者 != null && !対象者.isEmpty()) {
+            row.getTxtTsuchisyoShitei().setSelectedKey(対象者);
+        }
+        return row;
     }
 
     /**
@@ -300,23 +312,27 @@ public class HonKakushuTsuchiUchiwakeKakuninHandler {
 
     /**
      * 変更区分=1の場合「設定を保存する」ボタン押下時の保存処理Handler
+     *
+     * @param 打ち分け条件View RString
+     * @return 打ち分け条件 RString
      */
-    public void 設定時保存処理_変更区分_1() {
+    public RString 設定時保存処理_変更区分_1(RString 打ち分け条件View) {
         Honsanteifuka 本算定賦課計算 = Honsanteifuka.createInstance();
-        TsuchishoUchiwakeJoken 変更打分け方法 = get確認画面の打分け方法(true);
+        TsuchishoUchiwakeJoken 変更打分け方法 = get確認画面の打分け方法(true, 打ち分け条件View);
         RString 打ち分け条件 = div.getTxtTsuchishoSetteiHozonMeisho().getValue();
-        ViewStateHolder.put(ViewStateKeys.打分け方法情報キー, 打ち分け条件);
         変更打分け方法 = 変更打分け方法.createBuilderForEdit().set打ち分け条件(打ち分け条件).build();
         本算定賦課計算.regutiwakehouhoujyoho2(変更打分け方法, new RString(String.valueOf(変更区分_1)));
+        return 打ち分け条件;
     }
 
     /**
      * 変更区分=0の場合「設定を保存する」ボタン押下時の保存処理Handler
+     *
+     * @param 打ち分け条件 RString
      */
-    public void 設定時保存処理_変更区分_0() {
+    public void 設定時保存処理_変更区分_0(RString 打ち分け条件) {
         Honsanteifuka 本算定賦課計算 = Honsanteifuka.createInstance();
-        TsuchishoUchiwakeJoken 変更打分け方法 = get確認画面の打分け方法(true);
-        RString 打ち分け条件 = ViewStateHolder.get(ViewStateKeys.打分け方法情報キー, RString.class);
+        TsuchishoUchiwakeJoken 変更打分け方法 = get確認画面の打分け方法(true, 打ち分け条件);
         変更打分け方法 = 変更打分け方法.createBuilderForEdit().set打ち分け条件(打ち分け条件).build();
         本算定賦課計算.regutiwakehouhoujyoho2(変更打分け方法, new RString(String.valueOf(変更区分_0)));
     }
@@ -325,11 +341,11 @@ public class HonKakushuTsuchiUchiwakeKakuninHandler {
      * 確認画面の打分け方法の取得
      *
      * @param flag 新規１の場合flag==true else flag==false
+     * @param 打ち分け条件 RString
      * @return 確認画面の打分け方法
      */
-    public TsuchishoUchiwakeJoken get確認画面の打分け方法(boolean flag) {
+    public TsuchishoUchiwakeJoken get確認画面の打分け方法(boolean flag, RString 打ち分け条件) {
         Honsanteifuka 本算定賦課計算 = Honsanteifuka.createInstance();
-        RString 打ち分け条件 = ViewStateHolder.get(ViewStateKeys.打分け方法情報キー, RString.class);
         List<TsuchishoUchiwakeJoken> jokenList = 本算定賦課計算.getutiwakehouhoujyoho2(打ち分け条件);
         TsuchishoUchiwakeJoken joken = new TsuchishoUchiwakeJoken(打ち分け条件,
                 RDateTime.now(),

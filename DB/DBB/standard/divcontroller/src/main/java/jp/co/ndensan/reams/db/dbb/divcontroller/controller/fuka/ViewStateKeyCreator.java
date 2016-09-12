@@ -6,10 +6,10 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka;
 
 import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuYuyo;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
-import jp.co.ndensan.reams.db.dbb.business.viewstate.FukaShokaiKey;
-import jp.co.ndensan.reams.db.dbb.business.viewstate.MaeRirekiKey;
-import jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.fuka.GemmenChoshuYuyoStateKubun;
+import jp.co.ndensan.reams.db.dbx.business.core.fuka.Fuka;
+import jp.co.ndensan.reams.db.dbb.business.core.viewstate.FukaShokaiKey;
+import jp.co.ndensan.reams.db.dbb.business.core.viewstate.MaeRirekiKey;
+import jp.co.ndensan.reams.db.dbb.definition.core.gemmenchoshuyuyo.GemmenChoshuYuyoStateKubun;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.ChoshuYuyoManager;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -89,6 +89,6 @@ public final class ViewStateKeyCreator {
         if (!modeloid.isPresent()) {
             return false;
         }
-        return modeloid.get().get徴収猶予状態区分().equals(GemmenChoshuYuyoStateKubun.決定_承認.code());
+        return modeloid.get().get徴収猶予状態区分().equals(GemmenChoshuYuyoStateKubun.決定_承認.getコード());
     }
 }

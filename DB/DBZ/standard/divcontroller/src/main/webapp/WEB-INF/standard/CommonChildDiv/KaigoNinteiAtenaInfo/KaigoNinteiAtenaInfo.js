@@ -57,36 +57,6 @@ var DBZ;
                 function ShoriType(controls) {
                     this.controls = controls;
                 }
-//                ShoriType.prototype.NormalAddMode = function () {
-//                    this.controls.txtShimei().readOnly = true;
-//                    this.controls.txtBirthYMD().readOnly = true;
-//                    this.controls.txtNenrei().readOnly = true;
-//                    this.controls.txtSeibetsu().readOnly = true;
-//                    this.controls.txtYubinNo().readOnly = true;
-//                    this.controls.txtJusho().readOnly = true;
-//                    this.controls.txtTelNo().readOnly = true;
-//                };
-//
-//                ShoriType.prototype.NormalUpdateMode = function () {
-//                    this.controls.txtShimei().readOnly = true;
-//                    this.controls.txtBirthYMD().readOnly = true;
-//                    this.controls.txtNenrei().readOnly = true;
-//                    this.controls.txtSeibetsu().readOnly = true;
-//                    this.controls.txtYubinNo().readOnly = true;
-//                    this.controls.txtJusho().readOnly = true;
-//                    this.controls.txtTelNo().readOnly = true;
-//                };
-//
-//                ShoriType.prototype.SeihoAddMode = function () {
-//                    this.controls.txtShimei().readOnly = true;
-//                    this.controls.txtBirthYMD().readOnly = true;
-//                    this.controls.txtNenrei().readOnly = true;
-//                    this.controls.txtSeibetsu().readOnly = true;
-//                    this.controls.txtYubinNo().readOnly = true;
-//                    this.controls.txtJusho().readOnly = true;
-//                    this.controls.txtTelNo().readOnly = true;
-//                };
-
                 ShoriType.prototype.SeihoUpdateMode = function () {
                     this.controls.txtShimei().readOnly = false;
                     this.controls.txtBirthYMD().readOnly = false;

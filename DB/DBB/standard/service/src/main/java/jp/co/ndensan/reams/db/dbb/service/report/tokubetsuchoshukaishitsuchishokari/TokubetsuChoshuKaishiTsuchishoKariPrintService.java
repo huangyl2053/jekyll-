@@ -26,11 +26,11 @@ import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishoka
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariSealerRenchoSource;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishokari.TokubetsuChoshuKaishiTsuchishoKariSealerSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.CompKaigoToiawasesakiSource;
 import jp.co.ndensan.reams.db.dbz.business.report.parts.kaigotoiawasesaki.IKaigoToiawasesakiSourceBuilder;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
-import jp.co.ndensan.reams.db.dbz.service.core.kanri.JushoHenshu;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.report.parts.kaigotoiawasesaki.KaigoToiawasesakiSourceBuilderCreator;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
@@ -75,8 +75,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariPrintService {
             RString 宛名連番, ReportManager reportManager) {
 
         TokubetsuChoshuKaishiTsuchishoKariB5Property property = new TokubetsuChoshuKaishiTsuchishoKariB5Property();
-        JushoHenshu jushoHenshu = JushoHenshu.createInstance();
-        EditedAtesaki 編集後宛先 = jushoHenshu.create編集後宛先(仮算定通知書情報.get宛先情報(),
+        EditedAtesaki 編集後宛先 = JushoHenshu.create編集後宛先(仮算定通知書情報.get宛先情報(),
                 仮算定通知書情報.get地方公共団体(), 仮算定通知書情報.get帳票制御共通());
 
         try (ReportAssembler<TokubetsuChoshuKaishiTsuchishoKariB5Source> assembler = createAssembler(property, reportManager);) {
@@ -123,8 +122,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariPrintService {
             RString 宛名連番, ReportManager reportManager) {
         TokubetsuChoshuKaishiTsuchishoKariB5RenchoProperty property = new TokubetsuChoshuKaishiTsuchishoKariB5RenchoProperty();
 
-        JushoHenshu jushoHenshu = JushoHenshu.createInstance();
-        EditedAtesaki 編集後宛先 = jushoHenshu.create編集後宛先(仮算定通知書情報.get宛先情報(),
+        EditedAtesaki 編集後宛先 = JushoHenshu.create編集後宛先(仮算定通知書情報.get宛先情報(),
                 仮算定通知書情報.get地方公共団体(), 仮算定通知書情報.get帳票制御共通());
 
         try (ReportAssembler<TokubetsuChoshuKaishiTsuchishoKariB5RenchoSource> assembler = createAssembler(property, reportManager);) {
@@ -168,8 +166,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariPrintService {
 
         TokubetsuChoshuKaishiTsuchishoKariSealerProperty property = new TokubetsuChoshuKaishiTsuchishoKariSealerProperty();
 
-        JushoHenshu jushoHenshu = JushoHenshu.createInstance();
-        EditedAtesaki 編集後宛先 = jushoHenshu.create編集後宛先(仮算定通知書情報.get宛先情報(),
+        EditedAtesaki 編集後宛先 = JushoHenshu.create編集後宛先(仮算定通知書情報.get宛先情報(),
                 仮算定通知書情報.get地方公共団体(), 仮算定通知書情報.get帳票制御共通());
 
         try (ReportAssembler<TokubetsuChoshuKaishiTsuchishoKariSealerSource> assembler = createAssembler(property, reportManager);) {
@@ -213,8 +210,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariPrintService {
 
         TokubetsuChoshuKaishiTsuchishoKariSealerRenchoProperty property = new TokubetsuChoshuKaishiTsuchishoKariSealerRenchoProperty();
 
-        JushoHenshu jushoHenshu = JushoHenshu.createInstance();
-        EditedAtesaki 編集後宛先 = jushoHenshu.create編集後宛先(仮算定通知書情報.get宛先情報(),
+        EditedAtesaki 編集後宛先 = JushoHenshu.create編集後宛先(仮算定通知書情報.get宛先情報(),
                 仮算定通知書情報.get地方公共団体(), 仮算定通知書情報.get帳票制御共通());
 
         try (ReportAssembler<TokubetsuChoshuKaishiTsuchishoKariSealerRenchoSource> assembler = createAssembler(property, reportManager);) {
@@ -260,8 +256,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariPrintService {
 
         TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateProperty property = new TokubetsuChoshuKaishiTsuchishoKariOverlayA4TateProperty();
 
-        JushoHenshu jushoHenshu = JushoHenshu.createInstance();
-        EditedAtesaki 編集後宛先 = jushoHenshu.create編集後宛先(仮算定通知書情報.get宛先情報(),
+        EditedAtesaki 編集後宛先 = JushoHenshu.create編集後宛先(仮算定通知書情報.get宛先情報(),
                 仮算定通知書情報.get地方公共団体(), 仮算定通知書情報.get帳票制御共通());
 
         IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー = KaigoToiawasesakiSourceBuilderCreator.create(
@@ -313,8 +308,7 @@ public class TokubetsuChoshuKaishiTsuchishoKariPrintService {
 
         TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoProperty property = new TokubetsuChoshuKaishiTsuchishoKariOverlayB5YokoProperty();
 
-        JushoHenshu jushoHenshu = JushoHenshu.createInstance();
-        EditedAtesaki 編集後宛先 = jushoHenshu.create編集後宛先(仮算定通知書情報.get宛先情報(),
+        EditedAtesaki 編集後宛先 = JushoHenshu.create編集後宛先(仮算定通知書情報.get宛先情報(),
                 仮算定通知書情報.get地方公共団体(), 仮算定通知書情報.get帳票制御共通());
 
         IKaigoToiawasesakiSourceBuilder 介護問合せ先ソースビルダー = KaigoToiawasesakiSourceBuilderCreator.create(

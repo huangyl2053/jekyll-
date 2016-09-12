@@ -30,7 +30,7 @@ public class ChosaTokkiShokai {
      * @param div ChosaTokkiShokaiDiv
      * @return ResponseData<FukaTaishoshaSearchDiv>
      */
-    public ResponseData<ChosaTokkiShokaiDiv> onLoad(ChosaTokkiShokaiDiv div) {
+    public ResponseData<ChosaTokkiShokaiDiv> initialize(ChosaTokkiShokaiDiv div) {
         ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(div.getShinseishoKanriNo());
         int 認定調査依頼履歴番号 = Integer.parseInt(div.getNinteichosaRirekiNo().toString());
         ArrayList<RString> 認定調査特記事項番号List = DataPassingConverter.deserialize(div.getNinteichosaTokkijikoNoList(), ArrayList.class);

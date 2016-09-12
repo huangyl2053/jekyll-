@@ -10,12 +10,12 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
-import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.shikakutokusojouho.ShikakuTokusoJouho;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.JushochitokureishaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuShutokuJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.jushochitokureisha.JushochitokureishaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -109,9 +109,9 @@ public class ShikakuRirekiInfoHandler {
                             ? FlexibleDate.EMPTY : business.get資格喪失年月日());
                     dgShikakuRirekiInfo_Row.getSoshitsuTodokedeDate().setValue(business.get資格喪失届出年月日());
                     dgShikakuRirekiInfo_Row.setSoshitsuJiyu(business.get喪失事由コード() == null
-                            ? RString.EMPTY : ShikakuSoshitsuJiyu.toValue(business.get喪失事由コード()).getName());
+                            ? RString.EMPTY : ShikakuSoshitsuJiyu.toValue(business.get喪失事由コード()).get名称());
                     dgShikakuRirekiInfo_Row.setJutokuKubun(business.get住所地特例フラグ() == null
-                            ? RString.EMPTY : JushochitokureishaKubun.toValue(business.get住所地特例フラグ()).getName());
+                            ? RString.EMPTY : JushochitokureishaKubun.toValue(business.get住所地特例フラグ()).get名称());
                     dgShikakuRirekiInfo_Row.setShozaiHokensha(ShichosonSecurityJoho.getKanriJoho(GyomuBunrui.介護事務).get市町村情報().get市町村名称() == null
                             ? RString.EMPTY : ShichosonSecurityJoho.getKanriJoho(GyomuBunrui.介護事務).get市町村情報().get市町村名称());
                     dgShikakuRirekiInfo_Row.setSochimotoHokensha(RString.EMPTY);
@@ -140,9 +140,9 @@ public class ShikakuRirekiInfoHandler {
                     dgShikakuRirekiInfo_Row.getSoshitsuTodokedeDate().setValue(business.get資格喪失届出年月日() == null
                             ? FlexibleDate.EMPTY : business.get資格喪失届出年月日());
                     dgShikakuRirekiInfo_Row.setSoshitsuJiyu(business.get喪失事由コード() == null
-                            ? RString.EMPTY : ShikakuSoshitsuJiyu.toValue(business.get喪失事由コード()).getName());
+                            ? RString.EMPTY : ShikakuSoshitsuJiyu.toValue(business.get喪失事由コード()).get名称());
                     dgShikakuRirekiInfo_Row.setJutokuKubun(business.get住所地特例フラグ() == null
-                            ? RString.EMPTY : JushochitokureishaKubun.toValue(business.get住所地特例フラグ()).getName());
+                            ? RString.EMPTY : JushochitokureishaKubun.toValue(business.get住所地特例フラグ()).get名称());
                     dgShikakuRirekiInfo_Row.setShozaiHokensha(business.get市町村名称() == null
                             ? RString.EMPTY : business.get市町村名称());
                     dgShikakuRirekiInfo_Row.setSochimotoHokensha(business.get措置元保険者() == null

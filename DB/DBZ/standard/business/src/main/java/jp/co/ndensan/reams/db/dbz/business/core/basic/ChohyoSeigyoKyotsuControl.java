@@ -174,6 +174,15 @@ public class ChohyoSeigyoKyotsuControl extends
     }
 
     /**
+     * 代納人表示使用区分を返します。
+     *
+     * @return 代納人表示使用区分
+     */
+    public RString get代納人表示使用区分() {
+        return entity.getDainoninHyojiShiyoKubun();
+    }
+
+    /**
      * カスタマバーコード使用区分を返します。
      *
      * @return カスタマバーコード使用区分

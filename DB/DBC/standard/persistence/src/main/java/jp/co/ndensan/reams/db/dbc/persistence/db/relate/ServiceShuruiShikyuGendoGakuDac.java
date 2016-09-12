@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.relate;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ServiceShuruiShikyuGendoGaku;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.IYokaigoJotaiKubun;
+//import jp.co.ndensan.reams.db.dbc.business.core.basic.ServiceShuruiShikyuGendoGaku;
+import jp.co.ndensan.reams.db.dbz.definition.core.IYokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7111ServiceShuruiShikyuGendoGaku;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7111ServiceShuruiShikyuGendoGakuEntity;
@@ -36,7 +36,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @author n8187 久保田 英男
  */
-public class ServiceShuruiShikyuGendoGakuDac implements IModifiable<ServiceShuruiShikyuGendoGaku> {
+public class ServiceShuruiShikyuGendoGakuDac implements IModifiable<DbT7111ServiceShuruiShikyuGendoGakuEntity> {
 
     @InjectSession
     private SqlSession session;
@@ -52,7 +52,7 @@ public class ServiceShuruiShikyuGendoGakuDac implements IModifiable<ServiceShuru
      * @return ServiceShuruiShikyuGendoGaku
      */
     @Transaction
-    public Optional<ServiceShuruiShikyuGendoGaku> selectByKey(ServiceShuruiCode サービス種類コード,
+    public Optional<DbT7111ServiceShuruiShikyuGendoGakuEntity> selectByKey(ServiceShuruiCode サービス種類コード,
             IYokaigoJotaiKubun 要介護状態区分,
             FlexibleYearMonth 適用開始年月,
             int 履歴番号) {
@@ -71,15 +71,15 @@ public class ServiceShuruiShikyuGendoGakuDac implements IModifiable<ServiceShuru
      * @return List<ServiceShuruiShikyuGendoGaku>
      */
     @Transaction
-    public IItemList<ServiceShuruiShikyuGendoGaku> selectAll() {
+    public IItemList<DbT7111ServiceShuruiShikyuGendoGakuEntity> selectAll() {
 
         List<DbT7111ServiceShuruiShikyuGendoGakuEntity> サービス種類支給限度額List = サービス種類支給限度額Dac.selectAll();
-        List<ServiceShuruiShikyuGendoGaku> list = new ArrayList<>();
+//        List<ServiceShuruiShikyuGendoGaku> list = new ArrayList<>();
 
-        for (DbT7111ServiceShuruiShikyuGendoGakuEntity サービス種類支給限度額 : サービス種類支給限度額List) {
-            list.add(create(サービス種類支給限度額));
-        }
-        IItemList<ServiceShuruiShikyuGendoGaku> 台帳リスト = ItemList.of(list);
+//        for (DbT7111ServiceShuruiShikyuGendoGakuEntity サービス種類支給限度額 : サービス種類支給限度額List) {
+//            list.add(create(サービス種類支給限度額));
+//        }
+        IItemList<DbT7111ServiceShuruiShikyuGendoGakuEntity> 台帳リスト = ItemList.of(サービス種類支給限度額List);
 
         return 台帳リスト;
     }
@@ -92,7 +92,7 @@ public class ServiceShuruiShikyuGendoGakuDac implements IModifiable<ServiceShuru
      * @return JukyushaDaicho
      */
     @Transaction
-    public IItemList<ServiceShuruiShikyuGendoGaku> selectサービス種類支給限度額リスト(IYokaigoJotaiKubun 要介護状態区分,
+    public IItemList<DbT7111ServiceShuruiShikyuGendoGakuEntity> selectサービス種類支給限度額リスト(IYokaigoJotaiKubun 要介護状態区分,
             FlexibleDate 基準日) {
 
         requireNonNull(要介護状態区分, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護状態区分"));
@@ -108,12 +108,12 @@ public class ServiceShuruiShikyuGendoGakuDac implements IModifiable<ServiceShuru
                 order(by(DbT7111ServiceShuruiShikyuGendoGaku.rirekiNo, Order.DESC)).
                 toList(DbT7111ServiceShuruiShikyuGendoGakuEntity.class);
 
-        List<ServiceShuruiShikyuGendoGaku> list = new ArrayList<>();
+        List<DbT7111ServiceShuruiShikyuGendoGakuEntity> list = new ArrayList<>();
 
         for (DbT7111ServiceShuruiShikyuGendoGakuEntity サービス種類支給限度額 : サービス種類支給限度額List) {
             list.add(create(サービス種類支給限度額));
         }
-        IItemList<ServiceShuruiShikyuGendoGaku> サービス種類支給限度額リスト = ItemList.of(list);
+        IItemList<DbT7111ServiceShuruiShikyuGendoGakuEntity> サービス種類支給限度額リスト = ItemList.of(list);
 
         return サービス種類支給限度額リスト;
     }
@@ -125,7 +125,7 @@ public class ServiceShuruiShikyuGendoGakuDac implements IModifiable<ServiceShuru
      * @return JukyushaDaicho
      */
     @Transaction
-    public IItemList<ServiceShuruiShikyuGendoGaku> selectサービス種類支給限度額リスト(IYokaigoJotaiKubun 要介護状態区分) {
+    public IItemList<DbT7111ServiceShuruiShikyuGendoGakuEntity> selectサービス種類支給限度額リスト(IYokaigoJotaiKubun 要介護状態区分) {
 
         requireNonNull(要介護状態区分, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護状態区分"));
 
@@ -137,26 +137,26 @@ public class ServiceShuruiShikyuGendoGakuDac implements IModifiable<ServiceShuru
                 order(by(DbT7111ServiceShuruiShikyuGendoGaku.rirekiNo, Order.DESC)).
                 toList(DbT7111ServiceShuruiShikyuGendoGakuEntity.class);
 
-        List<ServiceShuruiShikyuGendoGaku> list = new ArrayList<>();
+        List<DbT7111ServiceShuruiShikyuGendoGakuEntity> list = new ArrayList<>();
 
         for (DbT7111ServiceShuruiShikyuGendoGakuEntity サービス種類支給限度額 : サービス種類支給限度額List) {
             list.add(create(サービス種類支給限度額));
         }
-        IItemList<ServiceShuruiShikyuGendoGaku> サービス種類支給限度額リスト = ItemList.of(list);
+        IItemList<DbT7111ServiceShuruiShikyuGendoGakuEntity> サービス種類支給限度額リスト = ItemList.of(list);
 
         return サービス種類支給限度額リスト;
     }
 
-    private ServiceShuruiShikyuGendoGaku create(DbT7111ServiceShuruiShikyuGendoGakuEntity サービス種類支給限度額エンティティ) {
+    private DbT7111ServiceShuruiShikyuGendoGakuEntity create(DbT7111ServiceShuruiShikyuGendoGakuEntity サービス種類支給限度額エンティティ) {
         if (サービス種類支給限度額エンティティ == null) {
             return null;
         }
 
-        return new ServiceShuruiShikyuGendoGaku(サービス種類支給限度額エンティティ);
+        return サービス種類支給限度額エンティティ;
     }
 
     @Override
-    public int insert(ServiceShuruiShikyuGendoGaku data) {
+    public int insert(DbT7111ServiceShuruiShikyuGendoGakuEntity data) {
 
         int result = 0;
 
@@ -164,35 +164,35 @@ public class ServiceShuruiShikyuGendoGakuDac implements IModifiable<ServiceShuru
             return result;
         }
 
-        result = サービス種類支給限度額Dac.save(data.toEntity());
+        result = サービス種類支給限度額Dac.save(data);
 
         // TODO リストで持っているクラスについては修正が必要になります。
         return result;
     }
 
     @Override
-    public int update(ServiceShuruiShikyuGendoGaku data) {
+    public int update(DbT7111ServiceShuruiShikyuGendoGakuEntity data) {
         int result = 0;
 
         if (data == null) {
             return result;
         }
 
-        result = サービス種類支給限度額Dac.save(data.toEntity());
+        result = サービス種類支給限度額Dac.save(data);
 
         // TODO リストで持っているクラスについては修正が必要になります。
         return result;
     }
 
     @Override
-    public int delete(ServiceShuruiShikyuGendoGaku data) {
+    public int delete(DbT7111ServiceShuruiShikyuGendoGakuEntity data) {
         int result = 0;
 
         if (data == null) {
             return result;
         }
 
-        result = サービス種類支給限度額Dac.save(data.toEntity());
+        result = サービス種類支給限度額Dac.save(data);
 
         // TODO リストで持っているクラスについては修正が必要になります。
         return result;
@@ -204,14 +204,14 @@ public class ServiceShuruiShikyuGendoGakuDac implements IModifiable<ServiceShuru
      * @param data ServiceShuruiShikyuGendoGaku
      * @return int 件数
      */
-    public int deletePhysical(ServiceShuruiShikyuGendoGaku data) {
+    public int deletePhysical(DbT7111ServiceShuruiShikyuGendoGakuEntity data) {
         int result = 0;
 
         if (data == null) {
             return result;
         }
 
-        result = サービス種類支給限度額Dac.save(data.toEntity());
+        result = サービス種類支給限度額Dac.save(data);
 
         // TODO リストで持っているクラスについては修正が必要になります。
         return result;

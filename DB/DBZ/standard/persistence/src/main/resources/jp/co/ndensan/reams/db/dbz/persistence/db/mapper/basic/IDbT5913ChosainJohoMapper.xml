@@ -69,7 +69,7 @@
         <result property="shozokuKikanName" column="dbT5913ChosainJoho_shozokuKikanName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jokyoFlag" column="dbT5913ChosainJoho_jokyoFlag" />
     </resultMap>
-<select id="getEntity" resultMap="ResultMap_DbT5913ChosainJohoEntity">
+<select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5913ChosainJohoEntity">
     SELECT
     <include refid="allColumns_DbT5913ChosainJoho" />
     FROM

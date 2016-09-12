@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC20002",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "異動分利用者負担割合判定（過年度）",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC2000013",
+     "toLayoutTitle": "異動分利用者負担割合判定（過年度）",
+     "toState": ""
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC2000013",
+     "layoutTitle": "異動分利用者負担割合判定（過年度）",
+     "eventName": "終了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

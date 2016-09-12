@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaikaisaikekkajo
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaikekkajoho.ShinsakaiKaisaiKekkaJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaikekkajoho.ShinsakaiKaisaiKekkaJoho2;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5511ShinsakaiKaisaiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5511ShinsakaiKaisaiKekkaJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -57,7 +57,7 @@ public class ShinsakaiKaisaiKekkaJohoManager {
      * @return ShinsakaiKaisaiKekkaJoho
      */
     @Transaction
-    public ShinsakaiKaisaiKekkaJoho get介護認定審査会開催結果情報(
+    public ShinsakaiKaisaiKekkaJoho2 get介護認定審査会開催結果情報(
             RString 介護認定審査会開催番号) {
         requireNonNull(介護認定審査会開催番号, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催番号"));
 
@@ -67,7 +67,7 @@ public class ShinsakaiKaisaiKekkaJohoManager {
             return null;
         }
         entity.initializeMd5();
-        return new ShinsakaiKaisaiKekkaJoho(entity);
+        return new ShinsakaiKaisaiKekkaJoho2(entity);
     }
 
     /**
@@ -76,12 +76,12 @@ public class ShinsakaiKaisaiKekkaJohoManager {
      * @return ShinsakaiKaisaiKekkaJohoの{@code list}
      */
     @Transaction
-    public List<ShinsakaiKaisaiKekkaJoho> get介護認定審査会開催結果情報一覧() {
-        List<ShinsakaiKaisaiKekkaJoho> businessList = new ArrayList<>();
+    public List<ShinsakaiKaisaiKekkaJoho2> get介護認定審査会開催結果情報一覧() {
+        List<ShinsakaiKaisaiKekkaJoho2> businessList = new ArrayList<>();
 
         for (DbT5511ShinsakaiKaisaiKekkaJohoEntity entity : dac.selectAll()) {
             entity.initializeMd5();
-            businessList.add(new ShinsakaiKaisaiKekkaJoho(entity));
+            businessList.add(new ShinsakaiKaisaiKekkaJoho2(entity));
         }
 
         return businessList;
@@ -94,7 +94,7 @@ public class ShinsakaiKaisaiKekkaJohoManager {
      * @return 更新件数 更新結果の件数を返します。
      */
     @Transaction
-    public boolean save介護認定審査会開催結果情報(ShinsakaiKaisaiKekkaJoho 介護認定審査会開催結果情報) {
+    public boolean save介護認定審査会開催結果情報(ShinsakaiKaisaiKekkaJoho2 介護認定審査会開催結果情報) {
         requireNonNull(介護認定審査会開催結果情報, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催結果情報"));
         if (!介護認定審査会開催結果情報.hasChanged()) {
             return false;

@@ -12,15 +12,15 @@ import jp.co.ndensan.reams.db.dba.business.report.yokaigoninteikbnhenkoshinseish
 import jp.co.ndensan.reams.db.dba.business.report.yokaigoninteikbnhenkoshinseisho.YokaigoNinteikbnHenkoShinseishoProperty;
 import jp.co.ndensan.reams.db.dba.business.report.yokaigoninteikbnhenkoshinseisho.YokaigoNinteikbnHenkoShinseishoReport;
 import jp.co.ndensan.reams.db.dba.definition.core.yokaigoninteikubunhenkoshinseisho.YokaigoNinteikubunHenkoShinseishoParameter;
-import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dba.entity.report.yokaigoninteikbnhenkoshinseisho.YokaigoNinteikbnHenkoShinseishoReportSource;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.yokaigoninteikubunhenkoshinseisho.IYokaigoNinteikubunHenkoShinseishoMapper;
 import jp.co.ndensan.reams.db.dba.service.core.tokuteifutangendogakushinseisho.TokuteifutanGendogakuShinseisho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.GaikokujinSeinengappiHyojihoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
@@ -30,11 +30,14 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
+import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
-import jp.co.ndensan.reams.ur.urz.service.report.parts.ninshosha.INinshoshaSourceBuilderCreator;
-import jp.co.ndensan.reams.ur.urz.service.report.sourcebuilder.ReportSourceBuilders;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
 import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibunInfo;
 import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunManager;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -112,10 +115,11 @@ public class YokaigoNinteikubunHenkoShinseisho {
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<YokaigoNinteikbnHenkoShinseishoReportSource> assembler
                     = createAssembler(property, reportManager)) {
-                INinshoshaSourceBuilderCreator ninshoshaSourceBuilderCreator = ReportSourceBuilders.ninshoshaSourceBuilder();
-                INinshoshaSourceBuilder ninshoshaSourceBuilder = ninshoshaSourceBuilderCreator.create(GyomuCode.DB介護保険,
-                        NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
-                        null, null);
+                Ninshosha nishosha = NinshoshaFinderFactory.createInstance().get帳票認証者(
+                        GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード());
+                Association association = AssociationFinderFactory.createInstance().getAssociation();
+                INinshoshaSourceBuilder ninshoshaSourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
+                        nishosha, association, RString.EMPTY, RDate.getNowDate());
                 for (YokaigoNinteikbnHenkoShinseishoReport report : toReports(dac, mapper,
                         get被保険者基本情報取得(識別コード, 被保険者番号),
                         識別コード,
@@ -138,10 +142,10 @@ public class YokaigoNinteikubunHenkoShinseisho {
             RString ninshoshaYakushokuMei) {
         List<YokaigoNinteikbnHenkoShinseishoReport> list = new ArrayList<>();
         if (JuminShubetsu.日本人.getCode().equals(business.get住民種別コード())
-                || JuminShubetsu.住登外個人_日本人.getCode().equals(business.get住民種別コード())) {
+            || JuminShubetsu.住登外個人_日本人.getCode().equals(business.get住民種別コード())) {
             生年月日 = パターン12(business.get生年月日());
         } else if (JuminShubetsu.外国人.getCode().equals(business.get住民種別コード())
-                || JuminShubetsu.住登外個人_外国人.getCode().equals(business.get住民種別コード())) {
+                   || JuminShubetsu.住登外個人_外国人.getCode().equals(business.get住民種別コード())) {
             生年月日 = get生年月日_外国人(business);
         }
 
@@ -157,10 +161,10 @@ public class YokaigoNinteikubunHenkoShinseisho {
         if (entity != null) {
             Code 要介護認定状態区分コード = entity.getYokaigoJotaiKubunCode();
             if (要介護認定状態区分コード != null && 認定支援申請以外.equals(entity.getShinseishoKubun())) {
-                要介護状態区分 = YokaigoJotaiKubun09.toValue(codetoRstring(要介護認定状態区分コード)).getName();
+                要介護状態区分 = YokaigoJotaiKubun09.toValue(codetoRstring(要介護認定状態区分コード)).get名称();
             }
             if (要介護認定状態区分コード != null && 認定支援申請.equals(entity.getShinseishoKubun())) {
-                要支援状態区分 = YokaigoJotaiKubun09.toValue(codetoRstring(要介護認定状態区分コード)).getName();
+                要支援状態区分 = YokaigoJotaiKubun09.toValue(codetoRstring(要介護認定状態区分コード)).get名称();
             }
             if (entity.getNinteiYukoKikanKaishiYMD() != null) {
                 認定有効期間開始 = パターン12(entity.getNinteiYukoKikanKaishiYMD());

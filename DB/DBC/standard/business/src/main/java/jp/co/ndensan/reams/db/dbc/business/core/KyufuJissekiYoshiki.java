@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.core;
 
 import java.util.HashMap;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.KyufuJissekiYoshikiKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.KyufuJissekiYoshikiKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**

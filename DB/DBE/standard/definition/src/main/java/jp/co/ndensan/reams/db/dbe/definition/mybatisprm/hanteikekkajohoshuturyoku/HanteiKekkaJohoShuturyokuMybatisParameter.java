@@ -20,6 +20,7 @@ import lombok.Getter;
 public class HanteiKekkaJohoShuturyokuMybatisParameter implements IMyBatisParameter {
 
     private final RString hakkouTyouhyou;
+    private final List<RString> kaisaiBangouList;
     private final RString kaisaiBangou;
     private final List<RString> shoriJotaiKubun;
     private final RString shoKisaiHokenshaNo;
@@ -29,6 +30,7 @@ public class HanteiKekkaJohoShuturyokuMybatisParameter implements IMyBatisParame
      * コンストラクタです。
      *
      * @param hakkouTyouhyou 発行帳票
+     * @param kaisaiBangouList 開催番号List
      * @param kaisaiBangou 開催番号
      * @param shoriJotaiKubun 処理状態区分
      * @param shoKisaiHokenshaNo 証記載保険者番号
@@ -36,12 +38,13 @@ public class HanteiKekkaJohoShuturyokuMybatisParameter implements IMyBatisParame
      */
     protected HanteiKekkaJohoShuturyokuMybatisParameter(
             RString hakkouTyouhyou,
+            List<RString> kaisaiBangouList,
             RString kaisaiBangou,
             List<RString> shoriJotaiKubun,
             RString shoKisaiHokenshaNo,
             boolean isShoKisaiHokenshaNoFlag) {
-
         this.hakkouTyouhyou = hakkouTyouhyou;
+        this.kaisaiBangouList = kaisaiBangouList;
         this.kaisaiBangou = kaisaiBangou;
         this.shoriJotaiKubun = shoriJotaiKubun;
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
@@ -51,6 +54,7 @@ public class HanteiKekkaJohoShuturyokuMybatisParameter implements IMyBatisParame
     /**
      *
      * @param hakkouTyouhyou 発行帳票
+     * @param kaisaiBangouList 開催番号List
      * @param kaisaiBangou 開催番号
      * @param shoriJotaiKubun 処理状態区分
      * @param shoKisaiHokenshaNo 証記載保険者番号
@@ -58,6 +62,7 @@ public class HanteiKekkaJohoShuturyokuMybatisParameter implements IMyBatisParame
      */
     public static HanteiKekkaJohoShuturyokuMybatisParameter creatParameter(
             RString hakkouTyouhyou,
+            List<RString> kaisaiBangouList,
             RString kaisaiBangou,
             List<RString> shoriJotaiKubun,
             RString shoKisaiHokenshaNo) {
@@ -67,6 +72,7 @@ public class HanteiKekkaJohoShuturyokuMybatisParameter implements IMyBatisParame
         }
         return new HanteiKekkaJohoShuturyokuMybatisParameter(
                 hakkouTyouhyou,
+                kaisaiBangouList,
                 kaisaiBangou,
                 shoriJotaiKubun,
                 shoKisaiHokenshaNo,

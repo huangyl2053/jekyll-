@@ -28,7 +28,7 @@ var DBZ;
                 }
                 ShoriType.prototype.TokushuTsuikaMode = function () {
                     this.controls.ddlIdoJiyu().readOnly = false;
-                    this.controls.ddlSakujoJiyu().readOnly = true;
+                    this.controls.ddlSakujoJiyu().disabled = true;
                     this.controls.txtRiyu().readOnly = false;
                     this.controls.txtSoshitsuDay().readOnly = true;
                     this.controls.txtTorisageDay().readOnly = true;
@@ -40,7 +40,7 @@ var DBZ;
 
                 ShoriType.prototype.TokushuShuseiMode = function () {
                     this.controls.ddlIdoJiyu().readOnly = false;
-                    this.controls.ddlSakujoJiyu().readOnly = true;
+                    this.controls.ddlSakujoJiyu().disabled = true;
                     this.controls.txtRiyu().readOnly = false;
                     this.controls.txtSoshitsuDay().readOnly = true;
                     this.controls.txtTorisageDay().readOnly = true;
@@ -49,9 +49,9 @@ var DBZ;
                     this.controls.txtJukyuShikakuHakkoDay1().readOnly = false;
                     this.controls.txtJukyuShikakuHakkoDay2().readOnly = false;
                 };
-                ShoriType.prototype.TokushuSakujoMode = function () {
+                ShoriType.prototype.TokushuSakujyoMode = function () {
                     this.controls.ddlIdoJiyu().readOnly = true;
-                    this.controls.ddlSakujoJiyu().readOnly = false;
+                    this.controls.ddlSakujoJiyu().disabled = false;
                     this.controls.txtRiyu().readOnly = true;
                     this.controls.txtSoshitsuDay().readOnly = true;
                     this.controls.txtTorisageDay().readOnly = true;
@@ -63,7 +63,7 @@ var DBZ;
 
                 ShoriType.prototype.TokushuRirekiShuseiMode = function () {
                     this.controls.ddlIdoJiyu().readOnly = true;
-                    this.controls.ddlSakujoJiyu().readOnly = true;
+                    this.controls.ddlSakujoJiyu().disabled = true;
                     this.controls.txtRiyu().readOnly = false;
                     this.controls.txtSoshitsuDay().readOnly = true;
                     this.controls.txtTorisageDay().readOnly = true;
@@ -75,7 +75,7 @@ var DBZ;
 
                 ShoriType.prototype.NinteiMode = function () {
                     this.controls.ddlIdoJiyu().readOnly = true;
-                    this.controls.ddlSakujoJiyu().readOnly = true;
+                    this.controls.ddlSakujoJiyu().disabled = true;
                     this.controls.txtRiyu().readOnly = false;
                     this.controls.txtSoshitsuDay().readOnly = true;
                     this.controls.txtTorisageDay().readOnly = true;
@@ -86,7 +86,7 @@ var DBZ;
                 };
                 ShoriType.prototype.KyakkaMode = function () {
                     this.controls.ddlIdoJiyu().readOnly = false;
-                    this.controls.ddlSakujoJiyu().readOnly = true;
+                    this.controls.ddlSakujoJiyu().disabled = true;
                     this.controls.txtRiyu().readOnly = false;
                     this.controls.txtSoshitsuDay().readOnly = true;
                     this.controls.txtTorisageDay().readOnly = true;
@@ -98,7 +98,7 @@ var DBZ;
 
                 ShoriType.prototype.ShokkenKisaiMode = function () {
                     this.controls.ddlIdoJiyu().readOnly = true;
-                    this.controls.ddlSakujoJiyu().readOnly = true;
+                    this.controls.ddlSakujoJiyu().disabled = true;
                     this.controls.txtRiyu().readOnly = false;
                     this.controls.txtSoshitsuDay().readOnly = true;
                     this.controls.txtTorisageDay().readOnly = true;
@@ -107,9 +107,9 @@ var DBZ;
                     this.controls.txtJukyuShikakuHakkoDay1().readOnly = true;
                     this.controls.txtJukyuShikakuHakkoDay2().readOnly = true;
                 };
-                ShoriType.prototype.TorisageMode = function () {
+                ShoriType.prototype.TorikeshiMode = function () {
                     this.controls.ddlIdoJiyu().readOnly = false;
-                    this.controls.ddlSakujoJiyu().readOnly = true;
+                    this.controls.ddlSakujoJiyu().disabled = true;
                     this.controls.txtRiyu().readOnly = false;
                     this.controls.txtSoshitsuDay().readOnly = true;
                     this.controls.txtTorisageDay().readOnly = true;
@@ -118,33 +118,31 @@ var DBZ;
                     this.controls.txtJukyuShikakuHakkoDay1().readOnly = true;
                     this.controls.txtJukyuShikakuHakkoDay2().readOnly = true;
                 };
-                ShoriType.prototype.ShokkenTorisageMode = function () {
+                ShoriType.prototype.ZenbuSoshitsuMode = function () {
                     this.controls.ddlIdoJiyu().readOnly = false;
-                    this.controls.ddlSakujoJiyu().readOnly = true;
+                    this.controls.ddlSakujoJiyu().disabled = true;
                     this.controls.txtRiyu().readOnly = false;
                     this.controls.txtSoshitsuDay().readOnly = true;
-                    this.controls.txtTorisageDay().readOnly = true;
+                    this.controls.txtTorisageDay().readOnly = false;
                     this.controls.txtToshoNinteiKikanFrom().readOnly = false;
                     this.controls.txtToshoNinteiKikanTo().readOnly = false;
                     this.controls.txtJukyuShikakuHakkoDay1().readOnly = true;
                     this.controls.txtJukyuShikakuHakkoDay2().readOnly = true;
                 };
-
-                ShoriType.prototype.SoshitsuMode = function () {
+                ShoriType.prototype.IchibuSoshitsuMode = function () {
                     this.controls.ddlIdoJiyu().readOnly = false;
-                    this.controls.ddlSakujoJiyu().readOnly = true;
+                    this.controls.ddlSakujoJiyu().disabled = true;
                     this.controls.txtRiyu().readOnly = false;
-                    this.controls.txtSoshitsuDay().readOnly = true;
+                    this.controls.txtSoshitsuDay().readOnly = false;
                     this.controls.txtTorisageDay().readOnly = true;
                     this.controls.txtToshoNinteiKikanFrom().readOnly = true;
                     this.controls.txtToshoNinteiKikanTo().readOnly = true;
                     this.controls.txtJukyuShikakuHakkoDay1().readOnly = true;
                     this.controls.txtJukyuShikakuHakkoDay2().readOnly = true;
                 };
-
                 ShoriType.prototype.JukyuShikakushashoMode = function () {
                     this.controls.ddlIdoJiyu().readOnly = true;
-                    this.controls.ddlSakujoJiyu().readOnly = true;
+                    this.controls.ddlSakujoJiyu().disabled = true;
                     this.controls.txtRiyu().readOnly = false;
                     this.controls.txtSoshitsuDay().readOnly = true;
                     this.controls.txtTorisageDay().readOnly = true;
@@ -156,7 +154,7 @@ var DBZ;
 
                 ShoriType.prototype.ShokaiMode = function () {
                     this.controls.ddlIdoJiyu().readOnly = true;
-                    this.controls.ddlSakujoJiyu().readOnly = true;
+                    this.controls.ddlSakujoJiyu().disabled = true;
                     this.controls.txtRiyu().readOnly = true;
                     this.controls.txtSoshitsuDay().readOnly = true;
                     this.controls.txtTorisageDay().readOnly = true;
@@ -165,20 +163,10 @@ var DBZ;
                     this.controls.txtJukyuShikakuHakkoDay1().readOnly = true;
                     this.controls.txtJukyuShikakuHakkoDay2().readOnly = true;
                 };
-                ShoriType.prototype.RirekiTsuika = function () {
-                    this.controls.ddlIdoJiyu().readOnly = false;
-                    this.controls.ddlSakujoJiyu().readOnly = true;
-                    this.controls.txtRiyu().readOnly = true;
-                    this.controls.txtSoshitsuDay().readOnly = true;
-                    this.controls.txtTorisageDay().readOnly = true;
-                    this.controls.txtToshoNinteiKikanFrom().readOnly = true;
-                    this.controls.txtToshoNinteiKikanTo().readOnly = true;
-                    this.controls.txtJukyuShikakuHakkoDay1().readOnly = true;
-                    this.controls.txtJukyuShikakuHakkoDay2().readOnly = true;
-                };
-                ShoriType.prototype.RirekiSakujoShusei = function () {
+
+                ShoriType.prototype.RirekiSakujoShuseiMode = function () {
                     this.controls.ddlIdoJiyu().readOnly = true;
-                    this.controls.ddlSakujoJiyu().readOnly = false;
+                    this.controls.ddlSakujoJiyu().disabled = false;
                     this.controls.txtRiyu().readOnly = true;
                     this.controls.txtSoshitsuDay().readOnly = true;
                     this.controls.txtTorisageDay().readOnly = true;
@@ -187,20 +175,22 @@ var DBZ;
                     this.controls.txtJukyuShikakuHakkoDay1().readOnly = false;
                     this.controls.txtJukyuShikakuHakkoDay2().readOnly = false;
                 };
-                ShoriType.prototype.RirekiShinseiTorisage = function () {
+
+                ShoriType.prototype.RirekiTsuikaMode = function () {
                     this.controls.ddlIdoJiyu().readOnly = false;
-                    this.controls.ddlSakujoJiyu().readOnly = true;
-                    this.controls.txtRiyu().readOnly = false;
+                    this.controls.ddlSakujoJiyu().disabled = true;
+                    this.controls.txtRiyu().readOnly = true;
                     this.controls.txtSoshitsuDay().readOnly = true;
-                    this.controls.txtTorisageDay().readOnly = false;
-                    this.controls.txtToshoNinteiKikanFrom().readOnly = false;
-                    this.controls.txtToshoNinteiKikanTo().readOnly = false;
-                    this.controls.txtJukyuShikakuHakkoDay1().readOnly = false;
-                    this.controls.txtJukyuShikakuHakkoDay2().readOnly = false;
+                    this.controls.txtTorisageDay().readOnly = true;
+                    this.controls.txtToshoNinteiKikanFrom().readOnly = true;
+                    this.controls.txtToshoNinteiKikanTo().readOnly = true;
+                    this.controls.txtJukyuShikakuHakkoDay1().readOnly = true;
+                    this.controls.txtJukyuShikakuHakkoDay2().readOnly = true;
                 };
-                ShoriType.prototype.RirekiNinteiTorisage = function () {
+
+                ShoriType.prototype.TorikeshiRirekiTsuikaMode = function () {
                     this.controls.ddlIdoJiyu().readOnly = false;
-                    this.controls.ddlSakujoJiyu().readOnly = true;
+                    this.controls.ddlSakujoJiyu().disabled = true;
                     this.controls.txtRiyu().readOnly = false;
                     this.controls.txtSoshitsuDay().readOnly = false;
                     this.controls.txtTorisageDay().readOnly = true;
@@ -209,12 +199,25 @@ var DBZ;
                     this.controls.txtJukyuShikakuHakkoDay1().readOnly = false;
                     this.controls.txtJukyuShikakuHakkoDay2().readOnly = false;
                 };
-                ShoriType.prototype.RirekTsuikaKyakka = function () {
+
+                ShoriType.prototype.RirekiTsuikaKyakkaMode = function () {
                     this.controls.ddlIdoJiyu().readOnly = false;
-                    this.controls.ddlSakujoJiyu().readOnly = true;
+                    this.controls.ddlSakujoJiyu().disabled = true;
                     this.controls.txtRiyu().readOnly = false;
                     this.controls.txtSoshitsuDay().readOnly = true;
                     this.controls.txtTorisageDay().readOnly = true;
+                    this.controls.txtToshoNinteiKikanFrom().readOnly = false;
+                    this.controls.txtToshoNinteiKikanTo().readOnly = false;
+                    this.controls.txtJukyuShikakuHakkoDay1().readOnly = false;
+                    this.controls.txtJukyuShikakuHakkoDay2().readOnly = false;
+                };
+
+                ShoriType.prototype.ShinseiTorikeshiTsuikaMode = function () {
+                    this.controls.ddlIdoJiyu().readOnly = false;
+                    this.controls.ddlSakujoJiyu().disabled = true;
+                    this.controls.txtRiyu().readOnly = false;
+                    this.controls.txtSoshitsuDay().readOnly = true;
+                    this.controls.txtTorisageDay().readOnly = false;
                     this.controls.txtToshoNinteiKikanFrom().readOnly = false;
                     this.controls.txtToshoNinteiKikanTo().readOnly = false;
                     this.controls.txtJukyuShikakuHakkoDay1().readOnly = false;

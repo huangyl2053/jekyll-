@@ -4,19 +4,23 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1150001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.ZenkokuJushoInput.IZenkokuJushoInputDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.ZenkokuJushoInput.ZenkokuJushoInputDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
 
 /**
- * SofusakiNyuryokuPanel のクラスファイル 
- * 
- * @author 自動生成
+ * SofusakiNyuryokuPanel のクラスファイル
+ *
+ * @reamsid_L DBB-1710-010 xuhao
  */
 public class SofusakiNyuryokuPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -39,8 +43,12 @@ public class SofusakiNyuryokuPanelDiv extends Panel {
     private TextBox txtSofusakiSama;
     @JsonProperty("lblSama")
     private Label lblSama;
+    @JsonProperty("TextNo")
+    private TextBox TextNo;
     @JsonProperty("ccdZenkokuJushoInput1")
     private ZenkokuJushoInputDiv ccdZenkokuJushoInput1;
+    @JsonProperty("TextNO1")
+    private TextBox TextNO1;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -193,12 +201,48 @@ public class SofusakiNyuryokuPanelDiv extends Panel {
     }
 
     /*
+     * getTextNo
+     * @return TextNo
+     */
+    @JsonProperty("TextNo")
+    public TextBox getTextNo() {
+        return TextNo;
+    }
+
+    /*
+     * setTextNo
+     * @param TextNo TextNo
+     */
+    @JsonProperty("TextNo")
+    public void setTextNo(TextBox TextNo) {
+        this.TextNo = TextNo;
+    }
+
+    /*
      * getccdZenkokuJushoInput1
      * @return ccdZenkokuJushoInput1
      */
     @JsonProperty("ccdZenkokuJushoInput1")
     public IZenkokuJushoInputDiv getCcdZenkokuJushoInput1() {
         return ccdZenkokuJushoInput1;
+    }
+
+    /*
+     * getTextNO1
+     * @return TextNO1
+     */
+    @JsonProperty("TextNO1")
+    public TextBox getTextNO1() {
+        return TextNO1;
+    }
+
+    /*
+     * setTextNO1
+     * @param TextNO1 TextNO1
+     */
+    @JsonProperty("TextNO1")
+    public void setTextNO1(TextBox TextNO1) {
+        this.TextNO1 = TextNO1;
     }
 
     // </editor-fold>

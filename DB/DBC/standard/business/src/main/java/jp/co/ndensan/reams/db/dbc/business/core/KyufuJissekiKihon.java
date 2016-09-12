@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core;
 
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.KeikokuKubun;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.KyufuJissekiKubun;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.KyufuSakuseiKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.keikoku.KeikokuKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.kyufujissekikubun.KyufuJissekiKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.kyufusakuseikubun.KyufuSakuseiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ServiceTeikyoYM;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;

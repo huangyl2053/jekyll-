@@ -8,9 +8,9 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninchishokoreishajiritsudo.Ninch
 import jp.co.ndensan.reams.db.dbe.business.core.ShogaiKoreishaJiritsudoKomoku;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.DentatsuNoryokuKomoku;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.NinchiNoryokuKomoku;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShokujiKoiHyokaKomoku;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.TankiKiokuKomoku;
+import jp.co.ndensan.reams.db.dbe.definition.core.NinchiNoryokuKomoku;
+import jp.co.ndensan.reams.db.dbe.definition.core.ShokujiKoiHyokaKomoku;
+import jp.co.ndensan.reams.db.dbe.definition.core.TankiKiokuKomoku;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

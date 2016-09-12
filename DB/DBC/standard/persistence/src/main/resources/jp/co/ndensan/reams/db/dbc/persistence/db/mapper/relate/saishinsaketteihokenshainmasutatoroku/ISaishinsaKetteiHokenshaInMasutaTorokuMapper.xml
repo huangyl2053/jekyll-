@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-2520-011 sunhui -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.saishinsaketteihokenshainmasutatoroku.ISaishinsaKetteiHokenshaInMasutaTorokuMapper">
+
+    <!--再審査決定明細一時TBLの全データ--> 
+    <select resultOrdered="true" id="getSaiShinsaKetteiMeisaiTempTBLData"
+            resultMap="resultMap_SaiShinsaKetteiMeisaiTempEntity" fetchSize="500">
+        <include refid="selectSaiShinsaKetteiMeisaiTempEntity" />
+    </select>
+    <sql id="selectSaiShinsaKetteiMeisaiTempEntity" >
+        SELECT DISTINCT
+        "DbWT3064SaishinsaKetteiMeisai"."toriatsukaiYM" as 取扱年月,
+        "DbWT3064SaishinsaKetteiMeisai"."rirekiNo" as 履歴番号,
+        "DbWT3064SaishinsaKetteiMeisai"."renban" as 決定明細連番,
+        "DbWT3064SaishinsaKetteiMeisai"."jigyoshoNo" as 事業所番号,
+        "DbWT3064SaishinsaKetteiMeisai"."jigyoshoName" as 事業所名,
+        "DbWT3064SaishinsaKetteiMeisai"."kohiFutanshaNo" as 公費負担者番号,
+        "DbWT3064SaishinsaKetteiMeisai"."kohiJukyushaNo" as 公費受給者番号,
+        "DbWT3064SaishinsaKetteiMeisai"."kohiShokisaiHokenshaNo" as 公費証記載保険者番号,
+        "DbWT3064SaishinsaKetteiMeisai"."serviceTeikyoYM" as サービス提供年月,
+        "DbWT3064SaishinsaKetteiMeisai"."serviceShuruiCode" as サービス種類コード,
+        "DbWT3064SaishinsaKetteiMeisai"."serviceShuruiMei" as サービス種類名,
+        "DbWT3064SaishinsaKetteiMeisai"."kagomoushitateJiyuCode" as 申立事由コード,
+        "DbWT3064SaishinsaKetteiMeisai"."kagomoushitateJiyu" as 申立事由,
+        "DbWT3064SaishinsaKetteiMeisai"."saishinsaResultCode" as 再審査結果コード,
+        "DbWT3064SaishinsaKetteiMeisai"."toshoSeikyuTanisu" as 当初請求単位数,
+        "DbWT3064SaishinsaKetteiMeisai"."genshinSeikyuTanisu" as 原審単位数,
+        "DbWT3064SaishinsaKetteiMeisai"."moushitateTanisu" as 申立単位数,
+        "DbWT3064SaishinsaKetteiMeisai"."ketteiTanisu" as 決定単位数,
+        "DbWT3064SaishinsaKetteiMeisai"."choseiTanisu" as 調整単位数,
+        "DbWT3064SaishinsaKetteiMeisai"."hokenshaFutangaku" as 保険者負担額,
+        "DbWT3064SaishinsaKetteiMeisai"."torikomiYM" as 取込年月,
+        "DbWT0001Hihokensha"."meisaiRenban" as 被保険者連番,
+        "DbWT0001Hihokensha"."shoHokenshaNo" as 証記載保険者番号,
+        "DbWT0001Hihokensha"."orgHihokenshaNo" as 被保険者番号,
+        "DbWT0001Hihokensha"."serviceTeikyoYmd" as サービス提供年月末日,
+        "DbWT0001Hihokensha"."orgHihokenshaKanaShimei" as 被保険者カナ氏名,
+        "DbWT0001Hihokensha"."orgHihokenshaShimei" as 被保険者氏名,
+        "DbWT0001Hihokensha"."oldShichosonCode" as 旧市町村コード,
+        "DbWT0001Hihokensha"."henkanHihokenshaNo" as 変換被保険者番号,
+        "DbWT0001Hihokensha"."hihokenshaNo" as 登録被保険者番号,
+        "DbWT0001Hihokensha"."shichosonCode" as 市町村コード,
+        "DbWT0001Hihokensha"."kannaiKangaiKubun" as 管内管外区分,
+        "DbWT0001Hihokensha"."yubinNo" as 郵便番号,
+        "DbWT0001Hihokensha"."choikiCode" as 町域コード,
+        "DbWT0001Hihokensha"."gyoseikuCode" as 行政区コード,
+        "DbWT0001Hihokensha"."gyoseikuMei" as 行政区名,
+        "DbWT0001Hihokensha"."jusho" as 住所,
+        "DbWT0001Hihokensha"."banchi" as 番地,
+        "DbWT0001Hihokensha"."katagaki" as 方書,
+        "DbWT0001Hihokensha"."kanaMeisho" as 宛名カナ名称,
+        "DbWT0001Hihokensha"."meisho" as 宛名名称,
+        "DbWT0001Hihokensha"."shimei50onKana" as 氏名50音カナ,
+        "DbWT0001Hihokensha"."shikibetsuCode" as 識別コード,
+        "DbWT0001Hihokensha"."shikakuShutokuYmd" as 資格取得日,
+        "DbWT0001Hihokensha"."shikakuShutokuJiyuCode" as 資格取得事由コード,
+        "DbWT0001Hihokensha"."shikakuSoshitsuYmd" as 資格喪失日,
+        "DbWT0001Hihokensha"."shikakuSoshitsuJiyuCode" as 資格喪失事由コード,
+        "DbWT0001Hihokensha"."setaiShuyakuNo" as 世帯集約番号
+        FROM
+        "DbWT3064SaishinsaKetteiMeisai","DbWT0001Hihokensha"
+        WHERE   
+        "DbWT3064SaishinsaKetteiMeisai"."renban" = "DbWT0001Hihokensha"."meisaiRenban"
+    </sql>
+    <resultMap id="resultMap_SaiShinsaKetteiMeisaiTempEntity" autoMapping="true"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsaketteihokenshainmasutatoroku.SaiShinsaKetteiMeisaiTempEntity">
+        
+        <result property="取扱年月" column="取扱年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="履歴番号" column="履歴番号" />
+        <result property="決定明細連番" column="決定明細連番" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="事業所番号" column="事業所番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="事業所名" column="事業所名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="公費負担者番号" column="公費負担者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="公費受給者番号" column="公費受給者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="公費証記載保険者番号" column="公費証記載保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <result property="サービス提供年月" column="サービス提供年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="サービス種類コード" column="サービス種類コード" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="サービス種類名" column="サービス種類名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申立事由コード" column="申立事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申立事由" column="申立事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="再審査結果コード" column="再審査結果コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="当初請求単位数" column="当初請求単位数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="原審単位数" column="原審単位数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="申立単位数" column="申立単位数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="決定単位数" column="決定単位数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="調整単位数" column="調整単位数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="保険者負担額" column="保険者負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="取込年月" column="取込年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="被保険者連番" column="被保険者連番" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="証記載保険者番号" column="証記載保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="サービス提供年月末日" column="サービス提供年月末日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="被保険者カナ氏名" column="被保険者カナ氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者氏名" column="被保険者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="旧市町村コード" column="旧市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="変換被保険者番号" column="変換被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="登録被保険者番号" column="登録被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="管内管外区分" column="管内管外区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="郵便番号" column="郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="町域コード" column="町域コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChoikiCodeTypeHandler"/>
+        <result property="行政区コード" column="行政区コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="行政区名" column="行政区名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住所" column="住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="番地" column="番地" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="方書" column="方書" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="宛名カナ名称" column="宛名カナ名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="宛名名称" column="宛名名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="氏名50音カナ" column="氏名50音カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格取得日" column="資格取得日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="資格取得事由コード" column="資格取得事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格喪失日" column="資格喪失日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="資格喪失事由コード" column="資格喪失事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="世帯集約番号" column="世帯集約番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap> 
+
+    <!--再審査決定集計一時TBLの全データ--> 
+    <select resultOrdered="true" id="getSaiShinsaKetteiShukeiTempTBLData"
+            resultMap="resultMap_SaiShinsaKetteiShukeiTempEntity" fetchSize="500">
+        <include refid="selectSaiShinsaKetteiShukeiTempEntity" />
+    </select>
+    <sql id="selectSaiShinsaKetteiShukeiTempEntity" >
+        SELECT DISTINCT
+        "DbWT3063SaishinsaKetteiShukei"."hdrToriatsukaiYM" as 取扱年月,
+        "DbWT3063SaishinsaKetteiShukei"."hdrRirekiNo" as 履歴番号,
+        "DbWT3063SaishinsaKetteiShukei"."shoKisaiHokenshaNo" as 証記載保険者番号,
+        "DbWT3063SaishinsaKetteiShukei"."shoKisaiHokenshaName" as 証記載保険者名,
+        "DbWT3063SaishinsaKetteiShukei"."sakuseiYMD" as 作成年月日,
+        "DbWT3063SaishinsaKetteiShukei"."kokuhorenName" as 国保連合会名,
+        "DbWT3063SaishinsaKetteiShukei"."shinsakaiName" as 審査委員会名,
+        "DbWT3063SaishinsaKetteiShukei"."kaigoKyufuhiSeikyuKensu" as 介護給付費_請求_件数,
+        "DbWT3063SaishinsaKetteiShukei"."kaigoKyufuhiSeikyuTanisu" as 介護給付費_請求_単位数,
+        "DbWT3063SaishinsaKetteiShukei"."kaigoKyufuhiSeikyuFutangaku" as 介護給付費_請求_保険者負担額,
+        "DbWT3063SaishinsaKetteiShukei"."kaigoKyufuhiKetteiKensu" as 介護給付費_決定_件数,
+        "DbWT3063SaishinsaKetteiShukei"."kaigoKyufuhiKetteiTanisu" as 介護給付費_決定_単位数,
+        "DbWT3063SaishinsaKetteiShukei"."kaigoKyufuhiKetteiFutangaku" as 介護給付費_決定_保険者負担額,
+        "DbWT3063SaishinsaKetteiShukei"."kaigoKyufuhiChoseiKensu" as 介護給付費_調整_件数,
+        "DbWT3063SaishinsaKetteiShukei"."kaigoKyufuhiChoseiTanisu" as 介護給付費_調整_単位数,
+        "DbWT3063SaishinsaKetteiShukei"."kaigoKyufuhiChoseiFutangaku" as 介護給付費_調整_保険者負担額,
+        "DbWT3063SaishinsaKetteiShukei"."kogakuKaigoServicehiSeikyuKensu" as 高額介護サービス費_請求_件数,
+        "DbWT3063SaishinsaKetteiShukei"."kogakuKaigoServicehiSeikyuTanisu" as 高額介護サービス費_請求_単位数,
+        "DbWT3063SaishinsaKetteiShukei"."kogakuKaigoServicehiSeikyuFutangaku" as 高額介護サービス費_請求_保険者負担額,
+        "DbWT3063SaishinsaKetteiShukei"."kogakuKaigoServicehiKetteiKensu" as 高額介護サービス費_決定_件数,
+        "DbWT3063SaishinsaKetteiShukei"."kogakuKaigoServicehiKetteiTanisu" as 高額介護サービス費_決定_単位数,
+        "DbWT3063SaishinsaKetteiShukei"."kogakuKaigoServicehiKetteiFutangaku" as 高額介護サービス費_決定_保険者負担額,
+        "DbWT3063SaishinsaKetteiShukei"."kogakuKaigoServicehiChoseiKensu" as 高額介護サービス費_調整_件数,
+        "DbWT3063SaishinsaKetteiShukei"."kogakuKaigoServicehiChoseiTanisu" as 高額介護サービス費_調整_単位数,
+        "DbWT3063SaishinsaKetteiShukei"."kogakuKaigoServicehiChoseiFutangaku" as 高額介護サービス費_調整_保険者負担額,
+        "DbWT3063SaishinsaKetteiShukei"."hdrTorikomiYM" as 取込年月,
+        "DbWT3063SaishinsaKetteiShukei"."hokenshaNo" as 保険者番号,
+        "DbWT3063SaishinsaKetteiShukei"."hokenshaName" as 保険者名
+        FROM
+        "DbWT3063SaishinsaKetteiShukei"
+    </sql>
+    <resultMap id="resultMap_SaiShinsaKetteiShukeiTempEntity" autoMapping="true"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsaketteihokenshainmasutatoroku.SaiShinsaKetteiShukeiTempEntity">
+        
+        <result property="取扱年月" column="取扱年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="履歴番号" column="履歴番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="証記載保険者番号" column="証記載保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="証記載保険者名" column="証記載保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="作成年月日" column="作成年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="国保連合会名" column="国保連合会名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="審査委員会名" column="審査委員会名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="介護給付費_請求_件数" column="介護給付費_請求_件数" />
+        <result property="介護給付費_請求_単位数" column="介護給付費_請求_単位数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="介護給付費_請求_保険者負担額" column="介護給付費_請求_保険者負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="介護給付費_決定_件数" column="介護給付費_決定_件数" />
+        <result property="介護給付費_決定_単位数" column="介護給付費_決定_単位数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="介護給付費_決定_保険者負担額" column="介護給付費_決定_保険者負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="介護給付費_調整_件数" column="介護給付費_調整_件数" />
+        <result property="介護給付費_調整_単位数" column="介護給付費_調整_単位数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="介護給付費_調整_保険者負担額" column="介護給付費_調整_保険者負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額介護サービス費_請求_件数" column="高額介護サービス費_請求_件数" />
+        <result property="高額介護サービス費_請求_単位数" column="高額介護サービス費_請求_単位数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額介護サービス費_請求_保険者負担額" column="高額介護サービス費_請求_保険者負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額介護サービス費_決定_件数" column="高額介護サービス費_決定_件数" />
+        <result property="高額介護サービス費_決定_単位数" column="高額介護サービス費_決定_単位数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額介護サービス費_決定_保険者負担額" column="高額介護サービス費_決定_保険者負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額介護サービス費_調整_件数" column="高額介護サービス費_調整_件数" />
+        <result property="高額介護サービス費_調整_単位数" column="高額介護サービス費_調整_単位数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額介護サービス費_調整_保険者負担額" column="高額介護サービス費_調整_保険者負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="取込年月" column="取込年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="保険者番号" column="保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="保険者名" column="保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+    <!--再審査決定集計一時テーブルを作成します--> 
+    <insert id="createTmpDbWT3063SaishinsaKetteiShukei">
+        CREATE TEMP TABLE "DbWT3063SaishinsaKetteiShukei"
+        ("hdrToriatsukaiYM" rshare."UDD014YM",
+        "hdrRirekiNo" integer,
+        "shoKisaiHokenshaNo" character varying,
+        "shoKisaiHokenshaName" character varying,
+        "sakuseiYMD"rshare."UDD015YMD",
+        "kokuhorenName" character varying,
+        "shinsakaiName" character varying(15),
+        "kaigoKyufuhiSeikyuKensu" integer,
+        "kaigoKyufuhiSeikyuTanisu" numeric(12,0),
+        "kaigoKyufuhiSeikyuFutangaku" numeric(12,0),
+        "kaigoKyufuhiKetteiKensu" integer,
+        "kaigoKyufuhiKetteiTanisu" numeric(12,0),
+        "kaigoKyufuhiKetteiFutangaku" numeric(12,0),
+        "kaigoKyufuhiChoseiKensu" integer,
+        "kaigoKyufuhiChoseiTanisu" numeric(13,0),
+        "kaigoKyufuhiChoseiFutangaku" numeric(13,0),
+        "kogakuKaigoServicehiSeikyuKensu" integer,
+        "kogakuKaigoServicehiSeikyuTanisu" numeric(12,0),
+        "kogakuKaigoServicehiSeikyuFutangaku" numeric(12,0),
+        "kogakuKaigoServicehiKetteiKensu" integer,
+        "kogakuKaigoServicehiKetteiTanisu" numeric(12,0),
+        "kogakuKaigoServicehiKetteiFutangaku" numeric(12,0),
+        "kogakuKaigoServicehiChoseiKensu" integer,
+        "kogakuKaigoServicehiChoseiTanisu" numeric(13,0),
+        "kogakuKaigoServicehiChoseiFutangaku" numeric(13,0),
+        "hdrTorikomiYM" rshare."UDD014YM",
+        "hokenshaNo" character varying,
+        "hokenshaName" character varying
+        )
+    </insert>
+    
+    <!-- 再審査決定明細一時テーブルを作成します -->
+    <insert id="createTmpDbWT3064SaishinsaKetteiMeisai">
+        CREATE TEMP TABLE "DbWT3064SaishinsaKetteiMeisai"
+        ("toriatsukaiYM" rshare."UDD014YM",
+        "rirekiNo" integer,
+        "renban" integer,
+        "jigyoshoNo" rgdb."DbUDD003HokenshaNo", 
+        "jigyoshoName" character varying,
+        "kohiFutanshaNo" character varying(8),
+        "kohiJukyushaNo" character varying,
+        "kohiShokisaiHokenshaNo" rgdb."DbUDD003HokenshaNo", 
+        "serviceTeikyoYM" rshare."UDD014YM",
+        "serviceShuruiCode" rgdb."DbUDD005ServiceShuruiCode",
+        "serviceShuruiMei" character varying(12),
+        "kagomoushitateJiyuCode" character varying,
+        "kagomoushitateJiyu" character varying,
+        "saishinsaResultCode" character varying,
+        "toshoSeikyuTanisu" numeric,
+        "genshinSeikyuTanisu" numeric,
+        "moushitateTanisu" numeric,
+        "ketteiTanisu" numeric,
+        "choseiTanisu" numeric,
+        "hokenshaFutangaku" numeric,
+        "torikomiYM" rshare."UDD014YM"
+        )
+    </insert>
+     
+    <!--被保険者一時テーブルを作成します-->
+    <insert id="createTmpDbWT0001Hihokensha">
+        CREATE TEMP TABLE "DbWT0001Hihokensha"
+        ("meisaiRenban" numeric,
+        "shoHokenshaNo" rgdb."DbUDD002HihokenshaNo",
+        "orgHihokenshaNo" rgdb."DbUDD002HihokenshaNo",
+        "serviceTeikyoYmd" rshare."UDD015YMD",
+        "orgHihokenshaKanaShimei" character varying,
+        "orgHihokenshaShimei" character varying,
+        "oldShichosonCode" character varying,
+        "henkanHihokenshaNo" rgdb."DbUDD002HihokenshaNo",
+        "hihokenshaNo" rgdb."DbUDD002HihokenshaNo",
+        "shichosonCode" character varying,
+        "kannaiKangaiKubun" character varying,
+        "yubinNo" rshare."UDD003YubinNo",
+        "choikiCode" rshare."UDD023LasdecCode",
+        "gyoseikuCode" character varying,
+        "gyoseikuMei" character varying,
+        "jusho" character varying,
+        "banchi" character varying,
+        "katagaki" character varying,
+        "kanaMeisho" character varying,
+        "meisho" character varying,
+        "shimei50onKana" character varying,
+        "shikibetsuCode" character varying,
+        "shikakuShutokuYmd" rshare."UDD015YMD",
+        "shikakuShutokuJiyuCode" character varying,
+        "shikakuSoshitsuYmd" rshare."UDD015YMD",
+        "shikakuSoshitsuJiyuCode" character varying,
+        "setaiShuyakuNo" character varying
+        )
+    </insert>
+    
+    <!-- 再審査決定集計一時テーブルに登録する -->
+    <insert id="insertTmpDbWT3063SaishinsaKetteiShukei"
+            parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsaketteihokenshainmasutatoroku.SaiShinsaKetteiShukeiTempEntity">
+        INSERT INTO "DbWT3063SaishinsaKetteiShukei"
+        VALUES (
+        #{取扱年月},
+        #{履歴番号},
+        #{証記載保険者番号},
+        #{証記載保険者名},
+        #{作成年月日},
+        #{国保連合会名},
+        #{審査委員会名},
+        #{介護給付費_請求_件数},
+        #{介護給付費_請求_単位数},
+        #{介護給付費_請求_保険者負担額},
+        #{介護給付費_決定_件数},
+        #{介護給付費_決定_単位数},
+        #{介護給付費_決定_保険者負担額},
+        #{介護給付費_調整_件数},
+        #{介護給付費_調整_単位数},
+        #{介護給付費_調整_保険者負担額},
+        #{高額介護サービス費_請求_件数},
+        #{高額介護サービス費_請求_単位数},
+        #{高額介護サービス費_請求_保険者負担額},
+        #{高額介護サービス費_決定_件数},
+        #{高額介護サービス費_決定_単位数},
+        #{高額介護サービス費_決定_保険者負担額},
+        #{高額介護サービス費_調整_件数},
+        #{高額介護サービス費_調整_単位数},
+        #{高額介護サービス費_調整_保険者負担額},
+        #{取込年月},
+        #{保険者番号},
+        #{保険者名}
+        )
+    </insert>
+    
+    <!--再審査決定明細一時テーブルに登録する--> 
+    <insert id="insertTmpDbWT3064SaishinsaKetteiMeisai" 
+            parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsaketteihokenshainmasutatoroku.DbWT3064SaishinsaKetteiMeisai">
+        INSERT INTO "DbWT3064SaishinsaKetteiMeisai"
+        VALUES (
+        #{取扱年月},
+        #{履歴番号},
+        #{決定明細連番},
+        #{事業所番号},
+        #{事業所名},
+        #{公費負担者番号},
+        #{公費受給者番号},
+        #{公費証記載保険者番号},
+        #{サービス提供年月},
+        #{サービス種類コード},
+        #{サービス種類名},
+        #{申立事由コード},
+        #{申立事由},
+        #{再審査結果コード},
+        #{当初請求単位数},
+        #{原審単位数},
+        #{申立単位数},
+        #{決定単位数},
+        #{調整単位数},
+        #{保険者負担額},
+        #{取込年月}
+        )
+    </insert>
+    
+    <!-- 被保険者一時テーブルに登録する -->
+    <insert id="insertTmpDbWT0001Hihokensha"
+            parameterType="jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsaketteihokenshainmasutatoroku.DbWT0001Hihokensha">
+        INSERT INTO "DbWT0001Hihokensha"
+        VALUES (
+        #{被保険者連番},
+        #{証記載保険者番号},
+        #{被保険者番号},
+        #{サービス提供年月末日},
+        #{被保険者カナ氏名},
+        #{被保険者氏名},
+        #{旧市町村コード},
+        #{変換被保険者番号},
+        #{登録被保険者番号},
+        #{市町村コード},
+        #{管内管外区分},
+        #{郵便番号},
+        #{町域コード},
+        #{行政区コード},
+        #{行政区名},
+        #{住所},
+        #{番地},
+        #{方書},
+        #{宛名カナ名称},
+        #{宛名名称},
+        #{氏名50音カナ},
+        #{識別コード},
+        #{資格取得日},
+        #{資格取得事由コード},
+        #{資格喪失日},
+        #{資格喪失事由コード},
+        #{世帯集約番号}
+        )
+    </insert>
+</mapper>

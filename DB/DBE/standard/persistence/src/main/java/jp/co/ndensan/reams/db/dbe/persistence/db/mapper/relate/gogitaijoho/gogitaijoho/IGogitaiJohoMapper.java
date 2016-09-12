@@ -6,7 +6,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijoho.gogi
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijoho.gogitaijoho.GogitaiJohoRelateEntity;
-import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter;
 
 /**
  * 合議体情報のマッパーインタフェースです。

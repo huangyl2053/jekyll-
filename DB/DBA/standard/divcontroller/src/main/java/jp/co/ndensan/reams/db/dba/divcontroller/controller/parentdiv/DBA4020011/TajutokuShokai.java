@@ -52,8 +52,8 @@ public class TajutokuShokai {
      * @return ResponseData<TajutokuShokaiDiv> 他市町村住所地特例者照会Div
      */
     public ResponseData<TajutokuShokaiDiv> onLoad(TajutokuShokaiDiv div) {
-        div.getShikakuKihonJoho().getCcdKaigoAtenaInfo().onLoad(key.get識別コード());
-        div.getShikakuKihonJoho().getCcdShikakuJoho().onLoad(key.get識別コード());
+        div.getShikakuKihonJoho().getCcdKaigoAtenaInfo().initialize(key.get識別コード());
+        div.getShikakuKihonJoho().getCcdShikakuJoho().initialize(key.get識別コード());
         div.getTajutokuTekiyoJohoIchiran().getCcdTaJushochiTokureishaKanri().initialize(key.get識別コード());
         div.getJutokuJohoTeiseiIchiran().setIsOpen(false);
         return ResponseData.of(div).respond();

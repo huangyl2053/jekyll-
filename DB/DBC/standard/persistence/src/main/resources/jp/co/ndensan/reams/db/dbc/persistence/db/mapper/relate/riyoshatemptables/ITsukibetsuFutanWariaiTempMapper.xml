@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-4950-030 liuyang -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshatemptables.ITsukibetsuFutanWariaiTempMapper">
+
+    <sql id="allColumns_TsukibetsuFutanWariaiTemp">
+        "TsukibetsuFutanWariaiTemp"."taishoNendo"as "TsukibetsuFutanWariaiTemp_taishoNendo",
+        "TsukibetsuFutanWariaiTemp"."hihokenshaNo"as "TsukibetsuFutanWariaiTemp_hihokenshaNo",
+        "TsukibetsuFutanWariaiTemp"."rirekiNo"as "TsukibetsuFutanWariaiTemp_rirekiNo",
+        "TsukibetsuFutanWariaiTemp"."shokenFlag" as "TsukibetsuFutanWariaiTemp_shokenFlag",
+        "TsukibetsuFutanWariaiTemp"."futanwariaiKubunAug"as "TsukibetsuFutanWariaiTemp_futanwariaiKubunAug",
+        "TsukibetsuFutanWariaiTemp"."futanwariaiKubunSept"as "TsukibetsuFutanWariaiTemp_futanwariaiKubunSept",
+        "TsukibetsuFutanWariaiTemp"."futanwariaiKubunOct"as "TsukibetsuFutanWariaiTemp_futanwariaiKubunOct",
+        "TsukibetsuFutanWariaiTemp"."futanwariaiKubunNov"as "TsukibetsuFutanWariaiTemp_futanwariaiKubunNov",
+        "TsukibetsuFutanWariaiTemp"."futanwariaiKubunDec"as "TsukibetsuFutanWariaiTemp_futanwariaiKubunDec",
+        "TsukibetsuFutanWariaiTemp"."futanwariaiKubunJan"as "TsukibetsuFutanWariaiTemp_futanwariaiKubunJan",
+        "TsukibetsuFutanWariaiTemp"."futanwariaiKubunFeb"as "TsukibetsuFutanWariaiTemp_futanwariaiKubunFeb",
+        "TsukibetsuFutanWariaiTemp"."futanwariaiKubunMar"as "TsukibetsuFutanWariaiTemp_futanwariaiKubunMar",
+        "TsukibetsuFutanWariaiTemp"."futanwariaiKubunApr"as "TsukibetsuFutanWariaiTemp_futanwariaiKubunApr",
+        "TsukibetsuFutanWariaiTemp"."futanwariaiKubunMay"as "TsukibetsuFutanWariaiTemp_futanwariaiKubunMay",
+        "TsukibetsuFutanWariaiTemp"."futanwariaiKubunJun"as "TsukibetsuFutanWariaiTemp_futanwariaiKubunJun",
+        "TsukibetsuFutanWariaiTemp"."futanwariaiKubunJul"as "TsukibetsuFutanWariaiTemp_futanwariaiKubunJul"
+    </sql>
+
+    <sql id="allColumns_TsukibetsuFutanWariaiTempShin">
+        "TsukibetsuFutanWariaiNewTemp"."taishoNendo"as "TsukibetsuFutanWariaiNewTemp_taishoNendo",
+        "TsukibetsuFutanWariaiNewTemp"."hihokenshaNo"as "TsukibetsuFutanWariaiNewTemp_hihokenshaNo",
+        "TsukibetsuFutanWariaiNewTemp"."rirekiNo"as "TsukibetsuFutanWariaiNewTemp_rirekiNo",
+        "TsukibetsuFutanWariaiNewTemp"."shokenFlag"as "TsukibetsuFutanWariaiNewTemp_shokenFlag",
+        "TsukibetsuFutanWariaiNewTemp"."futanwariaiKubunAug"as "TsukibetsuFutanWariaiNewTemp_futanwariaiKubunAug",
+        "TsukibetsuFutanWariaiNewTemp"."futanwariaiKubunSept"as "TsukibetsuFutanWariaiNewTemp_futanwariaiKubunSept",
+        "TsukibetsuFutanWariaiNewTemp"."futanwariaiKubunOct"as "TsukibetsuFutanWariaiNewTemp_futanwariaiKubunOct",
+        "TsukibetsuFutanWariaiNewTemp"."futanwariaiKubunNov"as "TsukibetsuFutanWariaiNewTemp_futanwariaiKubunNov",
+        "TsukibetsuFutanWariaiNewTemp"."futanwariaiKubunDec"as "TsukibetsuFutanWariaiNewTemp_futanwariaiKubunDec",
+        "TsukibetsuFutanWariaiNewTemp"."futanwariaiKubunJan"as "TsukibetsuFutanWariaiNewTemp_futanwariaiKubunJan",
+        "TsukibetsuFutanWariaiNewTemp"."futanwariaiKubunFeb"as "TsukibetsuFutanWariaiNewTemp_futanwariaiKubunFeb",
+        "TsukibetsuFutanWariaiNewTemp"."futanwariaiKubunMar"as "TsukibetsuFutanWariaiNewTemp_futanwariaiKubunMar",
+        "TsukibetsuFutanWariaiNewTemp"."futanwariaiKubunApr"as "TsukibetsuFutanWariaiNewTemp_futanwariaiKubunApr",
+        "TsukibetsuFutanWariaiNewTemp"."futanwariaiKubunMay"as "TsukibetsuFutanWariaiNewTemp_futanwariaiKubunMay",
+        "TsukibetsuFutanWariaiNewTemp"."futanwariaiKubunJun"as "TsukibetsuFutanWariaiNewTemp_futanwariaiKubunJun",
+        "TsukibetsuFutanWariaiNewTemp"."futanwariaiKubunJul"as "TsukibetsuFutanWariaiNewTemp_futanwariaiKubunJul"
+    </sql>
+
+    <sql id="allColumns_TsukibetsuFutanWariaiTempGen">
+        "TsukibetsuFutanWariaiGenTemp"."taishoNendo"as "TsukibetsuFutanWariaiGenTemp_taishoNendo",
+        "TsukibetsuFutanWariaiGenTemp"."hihokenshaNo"as "TsukibetsuFutanWariaiGenTemp_hihokenshaNo",
+        "TsukibetsuFutanWariaiGenTemp"."rirekiNo"as "TsukibetsuFutanWariaiGenTemp_rirekiNo",
+        "TsukibetsuFutanWariaiGenTemp"."shokenFlag"as "TsukibetsuFutanWariaiGenTemp_shokenFlag",
+        "TsukibetsuFutanWariaiGenTemp"."futanwariaiKubunAug"as "TsukibetsuFutanWariaiGenTemp_futanwariaiKubunAug",
+        "TsukibetsuFutanWariaiGenTemp"."futanwariaiKubunSept"as "TsukibetsuFutanWariaiGenTemp_futanwariaiKubunSept",
+        "TsukibetsuFutanWariaiGenTemp"."futanwariaiKubunOct"as "TsukibetsuFutanWariaiGenTemp_futanwariaiKubunOct",
+        "TsukibetsuFutanWariaiGenTemp"."futanwariaiKubunNov"as "TsukibetsuFutanWariaiGenTemp_futanwariaiKubunNov",
+        "TsukibetsuFutanWariaiGenTemp"."futanwariaiKubunDec"as "TsukibetsuFutanWariaiGenTemp_futanwariaiKubunDec",
+        "TsukibetsuFutanWariaiGenTemp"."futanwariaiKubunJan"as "TsukibetsuFutanWariaiGenTemp_futanwariaiKubunJan",
+        "TsukibetsuFutanWariaiGenTemp"."futanwariaiKubunFeb"as "TsukibetsuFutanWariaiGenTemp_futanwariaiKubunFeb",
+        "TsukibetsuFutanWariaiGenTemp"."futanwariaiKubunMar"as "TsukibetsuFutanWariaiGenTemp_futanwariaiKubunMar",
+        "TsukibetsuFutanWariaiGenTemp"."futanwariaiKubunApr"as "TsukibetsuFutanWariaiGenTemp_futanwariaiKubunApr",
+        "TsukibetsuFutanWariaiGenTemp"."futanwariaiKubunMay"as "TsukibetsuFutanWariaiGenTemp_futanwariaiKubunMay",
+        "TsukibetsuFutanWariaiGenTemp"."futanwariaiKubunJun"as "TsukibetsuFutanWariaiGenTemp_futanwariaiKubunJun",
+        "TsukibetsuFutanWariaiGenTemp"."futanwariaiKubunJul"as "TsukibetsuFutanWariaiGenTemp_futanwariaiKubunJul"
+    </sql>
+
+    <resultMap id="ResultMap_TsukibetsuFutanWariaiTempEntityShin" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.TsukibetsuFutanWariaiTempEntity" autoMapping="true">
+        <result property="taishoNendo" column="TsukibetsuFutanWariaiNewTemp_taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hihokenshaNo" column="TsukibetsuFutanWariaiNewTemp_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="rirekiNo" column="TsukibetsuFutanWariaiNewTemp_rirekiNo" />
+        <result property="shokenFlag" column="TsukibetsuFutanWariaiNewTemp_shokenFlag" />
+        <result property="futanwariaiKubunAug" column="TsukibetsuFutanWariaiNewTemp_futanwariaiKubunAug" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futanwariaiKubunSept" column="TsukibetsuFutanWariaiNewTemp_futanwariaiKubunSept" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futanwariaiKubunOct" column="TsukibetsuFutanWariaiNewTemp_futanwariaiKubunOct" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futanwariaiKubunNov" column="TsukibetsuFutanWariaiNewTemp_futanwariaiKubunNov" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futanwariaiKubunDec" column="TsukibetsuFutanWariaiNewTemp_futanwariaiKubunDec" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futanwariaiKubunJan" column="TsukibetsuFutanWariaiNewTemp_futanwariaiKubunJan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futanwariaiKubunFeb" column="TsukibetsuFutanWariaiNewTemp_futanwariaiKubunFeb" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futanwariaiKubunMar" column="TsukibetsuFutanWariaiNewTemp_futanwariaiKubunMar" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futanwariaiKubunApr" column="TsukibetsuFutanWariaiNewTemp_futanwariaiKubunApr" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futanwariaiKubunMay" column="TsukibetsuFutanWariaiNewTemp_futanwariaiKubunMay" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futanwariaiKubunJun" column="TsukibetsuFutanWariaiNewTemp_futanwariaiKubunJun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futanwariaiKubunJul" column="TsukibetsuFutanWariaiNewTemp_futanwariaiKubunJul" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+    <resultMap id="ResultMap_TsukibetsuFutanWariaiTempEntityGen" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.TsukibetsuFutanWariaiTempEntity" autoMapping="true">
+        <result property="taishoNendo" column="TsukibetsuFutanWariaiGenTemp_taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hihokenshaNo" column="TsukibetsuFutanWariaiGenTemp_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="rirekiNo" column="TsukibetsuFutanWariaiGenTemp_rirekiNo" />
+        <result property="shokenFlag" column="TsukibetsuFutanWariaiGenTemp_shokenFlag" />
+        <result property="futanwariaiKubunAug" column="TsukibetsuFutanWariaiGenTemp_futanwariaiKubunAug" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futanwariaiKubunSept" column="TsukibetsuFutanWariaiGenTemp_futanwariaiKubunSept" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futanwariaiKubunOct" column="TsukibetsuFutanWariaiGenTemp_futanwariaiKubunOct" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futanwariaiKubunNov" column="TsukibetsuFutanWariaiGenTemp_futanwariaiKubunNov" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futanwariaiKubunDec" column="TsukibetsuFutanWariaiGenTemp_futanwariaiKubunDec" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futanwariaiKubunJan" column="TsukibetsuFutanWariaiGenTemp_futanwariaiKubunJan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futanwariaiKubunFeb" column="TsukibetsuFutanWariaiGenTemp_futanwariaiKubunFeb" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futanwariaiKubunMar" column="TsukibetsuFutanWariaiGenTemp_futanwariaiKubunMar" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futanwariaiKubunApr" column="TsukibetsuFutanWariaiGenTemp_futanwariaiKubunApr" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futanwariaiKubunMay" column="TsukibetsuFutanWariaiGenTemp_futanwariaiKubunMay" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futanwariaiKubunJun" column="TsukibetsuFutanWariaiGenTemp_futanwariaiKubunJun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futanwariaiKubunJul" column="TsukibetsuFutanWariaiGenTemp_futanwariaiKubunJul" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+    <resultMap id="ResultMap_TsukibetsuFutanWariaiTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.TsukibetsuFutanWariaiTempEntity" autoMapping="true">
+        <result property="taishoNendo" column="TsukibetsuFutanWariaiTemp_taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hihokenshaNo" column="TsukibetsuFutanWariaiTemp_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="rirekiNo" column="TsukibetsuFutanWariaiTemp_rirekiNo" />
+        <result property="shokenFlag" column="TsukibetsuFutanWariaiTemp_shokenFlag" />
+        <result property="futanwariaiKubunAug" column="TsukibetsuFutanWariaiTemp_futanwariaiKubunAug" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futanwariaiKubunSept" column="TsukibetsuFutanWariaiTemp_futanwariaiKubunSept" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futanwariaiKubunOct" column="TsukibetsuFutanWariaiTemp_futanwariaiKubunOct" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futanwariaiKubunNov" column="TsukibetsuFutanWariaiTemp_futanwariaiKubunNov" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futanwariaiKubunDec" column="TsukibetsuFutanWariaiTemp_futanwariaiKubunDec" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futanwariaiKubunJan" column="TsukibetsuFutanWariaiTemp_futanwariaiKubunJan" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futanwariaiKubunFeb" column="TsukibetsuFutanWariaiTemp_futanwariaiKubunFeb" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futanwariaiKubunMar" column="TsukibetsuFutanWariaiTemp_futanwariaiKubunMar" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futanwariaiKubunApr" column="TsukibetsuFutanWariaiTemp_futanwariaiKubunApr" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futanwariaiKubunMay" column="TsukibetsuFutanWariaiTemp_futanwariaiKubunMay" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futanwariaiKubunJun" column="TsukibetsuFutanWariaiTemp_futanwariaiKubunJun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="futanwariaiKubunJul" column="TsukibetsuFutanWariaiTemp_futanwariaiKubunJul" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+</mapper>
+
+

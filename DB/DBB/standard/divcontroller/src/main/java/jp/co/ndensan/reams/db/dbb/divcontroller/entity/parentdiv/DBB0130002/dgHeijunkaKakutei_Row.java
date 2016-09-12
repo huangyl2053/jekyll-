@@ -1,25 +1,29 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0130002;
-
-/**
- * このコードはツールによって生成されました。 このファイルへの変更は、以下の状況下で不正な動作の原因になったり、 コードが再生成されるときに損失したりします。 Thu Nov 27 20:32:52 JST 2014
+/*
+ * このコードはツールによって生成されました。
+ * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
+ * コードが再生成されるときに損失したりします。
+ * Tue Jul 12 19:58:08 CST 2016
  */
 
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  * dgHeijunkaKakutei_Row のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBB-0830-010 wangkanglei
  */
 public class dgHeijunkaKakutei_Row extends DataRow {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     private RString txtHokenryoDankai;
     private TextBoxNum txtSagaku;
     private RString txtHeijunkaKensu;
     private RString txtKakuteiKensu;
     private RString txtTaishogaiKensu;
+    private RString txtDankaiKubun;
 
     public dgHeijunkaKakutei_Row() {
         super();
@@ -28,20 +32,29 @@ public class dgHeijunkaKakutei_Row extends DataRow {
         this.txtHeijunkaKensu = RString.EMPTY;
         this.txtKakuteiKensu = RString.EMPTY;
         this.txtTaishogaiKensu = RString.EMPTY;
+        this.txtDankaiKubun = RString.EMPTY;
+        this.setOriginalData("txtHokenryoDankai", txtHokenryoDankai);
+        this.setOriginalData("txtSagaku", txtSagaku);
+        this.setOriginalData("txtHeijunkaKensu", txtHeijunkaKensu);
+        this.setOriginalData("txtKakuteiKensu", txtKakuteiKensu);
+        this.setOriginalData("txtTaishogaiKensu", txtTaishogaiKensu);
+        this.setOriginalData("txtDankaiKubun", txtDankaiKubun);
     }
 
-    public dgHeijunkaKakutei_Row(RString txtHokenryoDankai, TextBoxNum txtSagaku, RString txtHeijunkaKensu, RString txtKakuteiKensu, RString txtTaishogaiKensu) {
+    public dgHeijunkaKakutei_Row(RString txtHokenryoDankai, TextBoxNum txtSagaku, RString txtHeijunkaKensu, RString txtKakuteiKensu, RString txtTaishogaiKensu, RString txtDankaiKubun) {
         super();
         this.setOriginalData("txtHokenryoDankai", txtHokenryoDankai);
         this.setOriginalData("txtSagaku", txtSagaku);
         this.setOriginalData("txtHeijunkaKensu", txtHeijunkaKensu);
         this.setOriginalData("txtKakuteiKensu", txtKakuteiKensu);
         this.setOriginalData("txtTaishogaiKensu", txtTaishogaiKensu);
+        this.setOriginalData("txtDankaiKubun", txtDankaiKubun);
         this.txtHokenryoDankai = txtHokenryoDankai;
         this.txtSagaku = txtSagaku;
         this.txtHeijunkaKensu = txtHeijunkaKensu;
         this.txtKakuteiKensu = txtKakuteiKensu;
         this.txtTaishogaiKensu = txtTaishogaiKensu;
+        this.txtDankaiKubun = txtDankaiKubun;
     }
 
     public RString getTxtHokenryoDankai() {
@@ -62,6 +75,10 @@ public class dgHeijunkaKakutei_Row extends DataRow {
 
     public RString getTxtTaishogaiKensu() {
         return txtTaishogaiKensu;
+    }
+
+    public RString getTxtDankaiKubun() {
+        return txtDankaiKubun;
     }
 
     public void setTxtHokenryoDankai(RString txtHokenryoDankai) {
@@ -89,4 +106,10 @@ public class dgHeijunkaKakutei_Row extends DataRow {
         this.txtTaishogaiKensu = txtTaishogaiKensu;
     }
 
+    public void setTxtDankaiKubun(RString txtDankaiKubun) {
+        this.setOriginalData("txtDankaiKubun", txtDankaiKubun);
+        this.txtDankaiKubun = txtDankaiKubun;
+    }
+
+    // </editor-fold>
 }

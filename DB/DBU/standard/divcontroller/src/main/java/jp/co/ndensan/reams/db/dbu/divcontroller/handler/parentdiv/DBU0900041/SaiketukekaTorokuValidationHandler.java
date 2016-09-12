@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 審査請求書登録_登録画面のバリデーションハンドラークラスです。
@@ -49,12 +48,11 @@ public class SaiketukekaTorokuValidationHandler {
      * 調査員情報登録エリアの編集チェック処理です。
      *
      * @param 修正後の値 修正後の値
+     * @param 修正前の値 修正前の値
      * @return 判定結果(true:変更あり,false:変更なし)
      */
-    public boolean 修正_変更有無チェック(RString 修正後の値) {
+    public boolean 修正_変更有無チェック(RString 修正後の値, RString 修正前の値) {
         修正後の値 = 修正後の値 == null ? RString.EMPTY : 修正後の値;
-        RString 修正前の値 = ViewStateHolder.get(SaiketukekaTorokuPanelHandler.Dbu900041Keys.修正前の値, RString.class) == null
-                ? RString.EMPTY : ViewStateHolder.get(SaiketukekaTorokuPanelHandler.Dbu900041Keys.修正前の値, RString.class);
         return !修正後の値.toString().equals(修正前の値.toString());
     }
 

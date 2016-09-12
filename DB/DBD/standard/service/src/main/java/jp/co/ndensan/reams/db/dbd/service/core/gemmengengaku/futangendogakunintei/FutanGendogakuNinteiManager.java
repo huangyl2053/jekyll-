@@ -10,11 +10,15 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNintei;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinsei;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiMapperParameter;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiShinseiMapperParameter;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.ninteishoketteitsuchishokobetsuhakko.NinteiJohoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.relate.futangendogakunintei.FutanGendogakuNinteiParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT4018FutanGendogakuNinteiDac;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengaku.futangendogakunintei.IFutanGendogakuNinteiMapper;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.shinsei.GemmenGengakuShinseiManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShurui;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -195,6 +199,52 @@ public class FutanGendogakuNinteiManager {
         if (relateEntity == null) {
             return null;
         }
+        return new FutanGendogakuNintei(relateEntity);
+    }
+
+    /**
+     * 主キー1に合致する負担限度額認定のリストを返します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return FutanGendogakuNinteiの{@code list}
+     */
+    @Transaction
+    public List<FutanGendogakuNintei> get負担限度額認定リストBy被保険者番号(HihokenshaNo 被保険者番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        IFutanGendogakuNinteiMapper mapper = mapperProvider.create(IFutanGendogakuNinteiMapper.class);
+        FutanGendogakuNinteiShinseiMapperParameter 検索条件 = FutanGendogakuNinteiShinseiMapperParameter.createParam(
+                被保険者番号, GemmenGengakuShurui.負担限度額認定.getコード());
+
+        List<FutanGendogakuNinteiEntity> relateEntityList = mapper.select負担限度額認定リストBy被保険者番号(検索条件);
+
+        ArrayList<FutanGendogakuNintei> 介護保険負担限度額認定List = new ArrayList<>();
+        for (FutanGendogakuNinteiEntity relateEntity : relateEntityList) {
+            relateEntity.initializeMd5ToEntities();
+            介護保険負担限度額認定List.add(new FutanGendogakuNintei(relateEntity));
+        }
+        return 介護保険負担限度額認定List;
+
+    }
+
+    /**
+     * 被保険者番号、減免減額種類、履歴番号により、取得された負担限度額認定申請の情報を返します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param 減免減額種類 減免減額種類
+     * @param 履歴番号 履歴番号
+     * @return FutanGendogakuNintei
+     */
+    @Transaction
+    public FutanGendogakuNintei get負担限度額認定(HihokenshaNo 被保険者番号, RString 減免減額種類, int 履歴番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(減免減額種類, UrSystemErrorMessages.値がnull.getReplacedMessage("減免減額種類"));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+
+        IFutanGendogakuNinteiMapper mapper = mapperProvider.create(IFutanGendogakuNinteiMapper.class);
+        NinteiJohoParameter 検索条件 = NinteiJohoParameter.createParameter(被保険者番号, 減免減額種類, 履歴番号);
+        FutanGendogakuNinteiEntity relateEntity = mapper.select負担限度額認定(検索条件);
+
+        relateEntity.initializeMd5ToEntities();
         return new FutanGendogakuNintei(relateEntity);
     }
 }

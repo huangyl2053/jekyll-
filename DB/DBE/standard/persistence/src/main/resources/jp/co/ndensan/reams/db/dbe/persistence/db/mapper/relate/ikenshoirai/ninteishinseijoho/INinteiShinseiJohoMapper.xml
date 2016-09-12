@@ -5,7 +5,7 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikenshoirai.ninteishinseijoho.INinteiShinseiJohoMapper">
 
-    <select id="select要介護認定申請情報ByKey" resultMap="resultMap_NinteiShinseiJohoEntity" fetchSize="500">
+    <select resultOrdered="true" id="select要介護認定申請情報ByKey" resultMap="resultMap_NinteiShinseiJohoEntity" fetchSize="500">
         <include refid="selectNinteiShinseiJohoEntity" />
     </select>
 

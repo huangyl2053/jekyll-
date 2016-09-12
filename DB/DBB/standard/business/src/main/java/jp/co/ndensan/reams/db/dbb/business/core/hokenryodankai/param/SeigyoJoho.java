@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param;
 
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
-import jp.co.ndensan.reams.db.dbz.definition.core.fuka.KazeiKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -62,7 +62,7 @@ public class SeigyoJoho {
     /**
      * @param hokenryoDankaiList the hokenryoDankaiList to set
      */
-    protected void setHokenryoDankaiList(HokenryoDankaiList hokenryoDankaiList) {
+    public void setHokenryoDankaiList(HokenryoDankaiList hokenryoDankaiList) {
         this.hokenryoDankaiList = hokenryoDankaiList;
     }
 
@@ -76,7 +76,7 @@ public class SeigyoJoho {
     /**
      * @param kijunNenkinShunyu01 the kijunNenkinShunyu01 to set
      */
-    protected void setKijunNenkinShunyu01(Decimal kijunNenkinShunyu01) {
+    public void setKijunNenkinShunyu01(Decimal kijunNenkinShunyu01) {
         this.kijunNenkinShunyu01 = kijunNenkinShunyu01;
     }
 
@@ -90,7 +90,7 @@ public class SeigyoJoho {
     /**
      * @param kijunNenkinShunyu02 the kijunNenkinShunyu02 to set
      */
-    protected void setKijunNenkinShunyu02(Decimal kijunNenkinShunyu02) {
+    public void setKijunNenkinShunyu02(Decimal kijunNenkinShunyu02) {
         this.kijunNenkinShunyu02 = kijunNenkinShunyu02;
     }
 
@@ -104,7 +104,7 @@ public class SeigyoJoho {
     /**
      * @param kijunNenkinShunyu03 the kijunNenkinShunyu03 to set
      */
-    protected void setKijunNenkinShunyu03(Decimal kijunNenkinShunyu03) {
+    public void setKijunNenkinShunyu03(Decimal kijunNenkinShunyu03) {
         this.kijunNenkinShunyu03 = kijunNenkinShunyu03;
     }
 
@@ -118,7 +118,7 @@ public class SeigyoJoho {
     /**
      * @param kijunShotokuKingaku01 the kijunShotokuKingaku01 to set
      */
-    protected void setKijunShotokuKingaku01(Decimal kijunShotokuKingaku01) {
+    public void setKijunShotokuKingaku01(Decimal kijunShotokuKingaku01) {
         this.kijunShotokuKingaku01 = kijunShotokuKingaku01;
     }
 
@@ -132,7 +132,7 @@ public class SeigyoJoho {
     /**
      * @param kijunShotokuKingaku02 the kijunShotokuKingaku02 to set
      */
-    protected void setKijunShotokuKingaku02(Decimal kijunShotokuKingaku02) {
+    public void setKijunShotokuKingaku02(Decimal kijunShotokuKingaku02) {
         this.kijunShotokuKingaku02 = kijunShotokuKingaku02;
     }
 
@@ -146,7 +146,7 @@ public class SeigyoJoho {
     /**
      * @param kijunShotokuKingaku03 the kijunShotokuKingaku03 to set
      */
-    protected void setKijunShotokuKingaku03(Decimal kijunShotokuKingaku03) {
+    public void setKijunShotokuKingaku03(Decimal kijunShotokuKingaku03) {
         this.kijunShotokuKingaku03 = kijunShotokuKingaku03;
     }
 
@@ -160,7 +160,7 @@ public class SeigyoJoho {
     /**
      * @param kijunShotokuKingaku04 the kijunShotokuKingaku04 to set
      */
-    protected void setKijunShotokuKingaku04(Decimal kijunShotokuKingaku04) {
+    public void setKijunShotokuKingaku04(Decimal kijunShotokuKingaku04) {
         this.kijunShotokuKingaku04 = kijunShotokuKingaku04;
     }
 
@@ -174,7 +174,7 @@ public class SeigyoJoho {
     /**
      * @param kijunShotokuKingaku05 the kijunShotokuKingaku05 to set
      */
-    protected void setKijunShotokuKingaku05(Decimal kijunShotokuKingaku05) {
+    public void setKijunShotokuKingaku05(Decimal kijunShotokuKingaku05) {
         this.kijunShotokuKingaku05 = kijunShotokuKingaku05;
     }
 
@@ -188,7 +188,7 @@ public class SeigyoJoho {
     /**
      * @param kijunShotokuKingaku06 the kijunShotokuKingaku06 to set
      */
-    protected void setKijunShotokuKingaku06(Decimal kijunShotokuKingaku06) {
+    public void setKijunShotokuKingaku06(Decimal kijunShotokuKingaku06) {
         this.kijunShotokuKingaku06 = kijunShotokuKingaku06;
     }
 
@@ -202,7 +202,7 @@ public class SeigyoJoho {
     /**
      * @param kijunShotokuKingaku07 the kijunShotokuKingaku07 to set
      */
-    protected void setKijunShotokuKingaku07(Decimal kijunShotokuKingaku07) {
+    public void setKijunShotokuKingaku07(Decimal kijunShotokuKingaku07) {
         this.kijunShotokuKingaku07 = kijunShotokuKingaku07;
     }
 
@@ -216,7 +216,7 @@ public class SeigyoJoho {
     /**
      * @param kijunShotokuKingaku08 the kijunShotokuKingaku08 to set
      */
-    protected void setKijunShotokuKingaku08(Decimal kijunShotokuKingaku08) {
+    public void setKijunShotokuKingaku08(Decimal kijunShotokuKingaku08) {
         this.kijunShotokuKingaku08 = kijunShotokuKingaku08;
     }
 
@@ -230,7 +230,7 @@ public class SeigyoJoho {
     /**
      * @param kijunShotokuKingaku09 the kijunShotokuKingaku09 to set
      */
-    protected void setKijunShotokuKingaku09(Decimal kijunShotokuKingaku09) {
+    public void setKijunShotokuKingaku09(Decimal kijunShotokuKingaku09) {
         this.kijunShotokuKingaku09 = kijunShotokuKingaku09;
     }
 
@@ -244,7 +244,7 @@ public class SeigyoJoho {
     /**
      * @param kijunShotokuKingaku10 the kijunShotokuKingaku10 to set
      */
-    protected void setKijunShotokuKingaku10(Decimal kijunShotokuKingaku10) {
+    public void setKijunShotokuKingaku10(Decimal kijunShotokuKingaku10) {
         this.kijunShotokuKingaku10 = kijunShotokuKingaku10;
     }
 
@@ -258,7 +258,7 @@ public class SeigyoJoho {
     /**
      * @param kijunShotokuKingaku11 the kijunShotokuKingaku11 to set
      */
-    protected void setKijunShotokuKingaku11(Decimal kijunShotokuKingaku11) {
+    public void setKijunShotokuKingaku11(Decimal kijunShotokuKingaku11) {
         this.kijunShotokuKingaku11 = kijunShotokuKingaku11;
     }
 
@@ -272,7 +272,7 @@ public class SeigyoJoho {
     /**
      * @param kijunShotokuKingaku12 the kijunShotokuKingaku12 to set
      */
-    protected void setKijunShotokuKingaku12(Decimal kijunShotokuKingaku12) {
+    public void setKijunShotokuKingaku12(Decimal kijunShotokuKingaku12) {
         this.kijunShotokuKingaku12 = kijunShotokuKingaku12;
     }
 
@@ -286,7 +286,7 @@ public class SeigyoJoho {
     /**
      * @param kijunShotokuKingaku13 the kijunShotokuKingaku13 to set
      */
-    protected void setKijunShotokuKingaku13(Decimal kijunShotokuKingaku13) {
+    public void setKijunShotokuKingaku13(Decimal kijunShotokuKingaku13) {
         this.kijunShotokuKingaku13 = kijunShotokuKingaku13;
     }
 
@@ -300,7 +300,7 @@ public class SeigyoJoho {
     /**
      * @param kijunShotokuKingaku14 the kijunShotokuKingaku14 to set
      */
-    protected void setKijunShotokuKingaku14(Decimal kijunShotokuKingaku14) {
+    public void setKijunShotokuKingaku14(Decimal kijunShotokuKingaku14) {
         this.kijunShotokuKingaku14 = kijunShotokuKingaku14;
     }
 
@@ -314,7 +314,7 @@ public class SeigyoJoho {
     /**
      * @param kijunShotokuKingaku15 the kijunShotokuKingaku15 to set
      */
-    protected void setKijunShotokuKingaku15(Decimal kijunShotokuKingaku15) {
+    public void setKijunShotokuKingaku15(Decimal kijunShotokuKingaku15) {
         this.kijunShotokuKingaku15 = kijunShotokuKingaku15;
     }
 
@@ -328,7 +328,7 @@ public class SeigyoJoho {
     /**
      * @param kazeisouShotokuDankai the kazeisouShotokuDankai to set
      */
-    protected void setKazeisouShotokuDankai(RString kazeisouShotokuDankai) {
+    public void setKazeisouShotokuDankai(RString kazeisouShotokuDankai) {
         this.kazeisouShotokuDankai = kazeisouShotokuDankai;
     }
 
@@ -342,7 +342,7 @@ public class SeigyoJoho {
     /**
      * @param usesMishinkokuDankai the usesMishinkokuDankai to set
      */
-    protected void setUsesMishinkokuDankai(boolean usesMishinkokuDankai) {
+    public void setUsesMishinkokuDankai(boolean usesMishinkokuDankai) {
         this.usesMishinkokuDankai = usesMishinkokuDankai;
     }
 
@@ -356,7 +356,7 @@ public class SeigyoJoho {
     /**
      * @param mishinkokuDankai the mishinkokuDankai to set
      */
-    protected void setMishinkokuDankai(RString mishinkokuDankai) {
+    public void setMishinkokuDankai(RString mishinkokuDankai) {
         this.mishinkokuDankai = mishinkokuDankai;
     }
 
@@ -370,7 +370,7 @@ public class SeigyoJoho {
     /**
      * @param mishinkokuKazeiKubun the mishinkokuKazeiKubun to set
      */
-    protected void setMishinkokuKazeiKubun(KazeiKubun mishinkokuKazeiKubun) {
+    public void setMishinkokuKazeiKubun(KazeiKubun mishinkokuKazeiKubun) {
         this.mishinkokuKazeiKubun = mishinkokuKazeiKubun;
     }
 
@@ -384,7 +384,7 @@ public class SeigyoJoho {
     /**
      * @param usesShotokuChosachuDankai the usesShotokuChosachuDankai to set
      */
-    protected void setUsesShotokuChosachuDankai(boolean usesShotokuChosachuDankai) {
+    public void setUsesShotokuChosachuDankai(boolean usesShotokuChosachuDankai) {
         this.usesShotokuChosachuDankai = usesShotokuChosachuDankai;
     }
 
@@ -398,7 +398,7 @@ public class SeigyoJoho {
     /**
      * @param shotokuChosachuDankai the shotokuChosachuDankai to set
      */
-    protected void setShotokuChosachuDankai(RString shotokuChosachuDankai) {
+    public void setShotokuChosachuDankai(RString shotokuChosachuDankai) {
         this.shotokuChosachuDankai = shotokuChosachuDankai;
     }
 
@@ -412,7 +412,7 @@ public class SeigyoJoho {
     /**
      * @param shotokuChosachuKazeiKubun the shotokuChosachuKazeiKubun to set
      */
-    protected void setShotokuChosachuKazeiKubun(KazeiKubun shotokuChosachuKazeiKubun) {
+    public void setShotokuChosachuKazeiKubun(KazeiKubun shotokuChosachuKazeiKubun) {
         this.shotokuChosachuKazeiKubun = shotokuChosachuKazeiKubun;
     }
 
@@ -426,7 +426,7 @@ public class SeigyoJoho {
     /**
      * @param usesKazeiTorikeshiDankai the usesKazeiTorikeshiDankai to set
      */
-    protected void setUsesKazeiTorikeshiDankai(boolean usesKazeiTorikeshiDankai) {
+    public void setUsesKazeiTorikeshiDankai(boolean usesKazeiTorikeshiDankai) {
         this.usesKazeiTorikeshiDankai = usesKazeiTorikeshiDankai;
     }
 
@@ -440,7 +440,7 @@ public class SeigyoJoho {
     /**
      * @param kazeiTorikeshiDankai the kazeiTorikeshiDankai to set
      */
-    protected void setKazeiTorikeshiDankai(RString kazeiTorikeshiDankai) {
+    public void setKazeiTorikeshiDankai(RString kazeiTorikeshiDankai) {
         this.kazeiTorikeshiDankai = kazeiTorikeshiDankai;
     }
 
@@ -454,7 +454,7 @@ public class SeigyoJoho {
     /**
      * @param kazeiTorikeshiKazeiKubun the kazeiTorikeshiKazeiKubun to set
      */
-    protected void setKazeiTorikeshiKazeiKubun(KazeiKubun kazeiTorikeshiKazeiKubun) {
+    public void setKazeiTorikeshiKazeiKubun(KazeiKubun kazeiTorikeshiKazeiKubun) {
         this.kazeiTorikeshiKazeiKubun = kazeiTorikeshiKazeiKubun;
     }
 

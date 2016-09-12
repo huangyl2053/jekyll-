@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-3620-050 liangbc -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.taino.ITainoJokyoMapper">
+
+    <resultMap id="resultMap_TainoJohoRelateEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.taino.TainoJohoRelateEntity" autoMapping="true">
+        <result property="調定年度" column="調定年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler" />
+        <result property="賦課年度" column="賦課年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler" />
+        <result property="通知書番号" column="通知書番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler" />
+        <result property="期" column="期" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="徴収方法" column="徴収方法" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="納期限" column="納期限" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTypeHandler" />
+        <result property="調定額" column="調定額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="督促状発行年月日" column="督促状発行年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTypeHandler" />
+        <result property="時効起算年月日" column="時効起算年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="時効起算日区分" column="時効起算日区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <association property="収入リスト" resultMap="resultMap_ShunyuSummaryEntity"/>
+    </resultMap>
+
+    <resultMap id="resultMap_ShunyuSummaryEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.taino.ShunyuSummaryEntity" autoMapping="true">
+        <result property="収入額" column="収入額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <result property="収入年月日" column="収入年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTypeHandler" />
+    </resultMap>
+
+    <select id="selectTainoJoho" resultMap="resultMap_TainoJohoRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.taino.TainoJokyoMapperParameter" fetchSize="500" resultOrdered="true">
+        SELECT
+        A."choteiNendo" AS 調定年度,
+        A."fukaNendo" AS 賦課年度,
+        A."tsuchishoNo" AS 通知書番号,
+        B."ki" AS 期,
+        B."choshuHouhou" AS 徴収方法,
+        C."nokigenYMD" AS 納期限,
+        C."choteigaku" AS 調定額,
+        D."shunyugaku" AS 収入額,
+        D."shunyuYMD" AS 収入年月日,
+        F."maxymd" AS 督促状発行年月日,
+        G."jikoKisanYMD" AS 時効起算年月日,
+        G."jikoKisanYMDKubun" AS 時効起算日区分
+        FROM
+        rgdb."DbV2002Fuka" AS A
+        INNER JOIN
+        rgdb."DbT2003Kibetsu" AS B
+        ON
+        B."choteiNendo" = A."choteiNendo"
+        AND B."fukaNendo" = A."fukaNendo"
+        AND B."tsuchishoNo" = A."tsuchishoNo"
+        AND B."rirekiNo" = A."rirekiNo"
+        INNER JOIN
+        rgdb."UrT0705ChoteiKyotsu" AS C
+        ON
+        C."choteiId" = B."choteiId"
+        LEFT JOIN
+        (
+        SELECT
+        Shunyu."shunoId",
+        Shunyu."shunyuYMD",
+        Shunyu."shunyugaku"
+        FROM
+        rgca."CaT0701Shunyu" AS Shunyu
+        WHERE
+        Shunyu."shunyuYMD" &lt;= #{基準日}
+        AND Shunyu."sokuhoKubun" = FALSE
+        )AS D
+        ON
+        C."shunoId" = D."shunoId"
+        LEFT JOIN
+        (
+        SELECT
+        "shunoId",
+        MAX("tokusokujoHakkoYMD") AS maxymd
+        FROM
+        rgca."CaT1018TokusokuHakkoRireki"
+        WHERE
+        "tokusokujoHakkoYMD" &lt;= #{基準日}
+        GROUP BY
+        "shunoId"
+        ) AS F
+        ON
+        F."shunoId" = C."shunoId"
+        LEFT JOIN
+        (
+        SELECT
+        G2.*
+        FROM
+        rgdb."DbT4023JikoKisambiKanri" AS G2
+        INNER JOIN(
+        SELECT
+        "hihokenshaNo",
+        "choteiNendo",
+        "fukaNendo",
+        "tokucho_FuchoKubun",
+        "tsuchishoNo",
+        "shuno_Ki_Tsuki",
+        MAX("rirekiNo") AS g1rirekino
+        FROM
+        rgdb."DbT4023JikoKisambiKanri"
+        WHERE
+        "lastUpdateTimestamp" &lt; #{基準日時}
+        AND "logicalDeletedFlag" = FALSE
+        GROUP BY
+        "hihokenshaNo",
+        "choteiNendo",
+        "fukaNendo",
+        "tokucho_FuchoKubun",
+        "tsuchishoNo",
+        "shuno_Ki_Tsuki"
+        ) AS G1
+        ON
+        G2."hihokenshaNo" = G1."hihokenshaNo"
+        AND G2."choteiNendo" = G1."choteiNendo"
+        AND G2."fukaNendo" = G1."fukaNendo"
+        AND G2."tokucho_FuchoKubun" = G1."tokucho_FuchoKubun"
+        AND G2."tsuchishoNo" = G1."tsuchishoNo"
+        AND G2."shuno_Ki_Tsuki" = G1."shuno_Ki_Tsuki"
+        AND G2."rirekiNo" = G1."g1rirekino"
+        ) AS G
+        ON
+        G."hihokenshaNo" = A."hihokenshaNo"
+        AND G."choteiNendo" = A."choteiNendo"
+        AND G."fukaNendo" = A."fukaNendo"
+        AND G."tsuchishoNo" = A."tsuchishoNo"
+        AND G."shuno_Ki_Tsuki" = LPAD(B."ki"::varchar,3,'0')
+        WHERE
+        A."hihokenshaNo" = #{被保険者番号}
+        AND A."fukaNendo" &lt;= #{賦課年度}
+        AND #{賦課年度十年前} &lt;= A."fukaNendo"
+        ORDER BY
+        A."fukaNendo" DESC,
+        A."choteiNendo",
+        B."ki",
+        D."shunyuYMD"
+    </select>
+
+    <select id = "searchShiharaiHohoHenkoTaino" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4022ShiharaiHohoHenkoTainoMapper.ResultMap_DbT4022ShiharaiHohoHenkoTainoEntity" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.taino.SearchShiharaiHohoHenkoTainoParameter" fetchSize="500" resultOrdered="true">
+        SELECT
+        A.*
+        FROM(<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4022ShiharaiHohoHenkoTainoMapper.noDeleted_DbT4022ShiharaiHohoHenkoTaino" />)AS A
+        INNER JOIN
+        (
+        SELECT
+        B1."hihokenshaNo",
+        B1."kanriKubun",
+        B1."rirekiNo",
+        B1."tainoHanteiKubun",
+        B1."choteiNendo",
+        B1."fukaNendo",
+        B1."Tokucho_fuchoKubun",
+        B1."shuno_Ki_Tsuki",
+        B1."renNo",
+        MAX("tsuchishoNo") AS tsuchishoNo
+        FROM
+        rgdb."DbT4022ShiharaiHohoHenkoTaino" B1
+        INNER JOIN
+        (
+        SELECT
+        A1."hihokenshaNo",
+        A1."kanriKubun",
+        A1."rirekiNo",
+        A1."tainoHanteiKubun",
+        A1."choteiNendo",
+        A1."fukaNendo",
+        A1."Tokucho_fuchoKubun",
+        A1."shuno_Ki_Tsuki",
+        MAX("renNo") AS renNo
+        FROM
+        rgdb."DbT4022ShiharaiHohoHenkoTaino" A1
+        WHERE
+        A1."hihokenshaNo" = #{被保険者番号}
+        AND	A1."kanriKubun" = #{管理区分}
+        AND	A1."rirekiNo" = #{履歴番号}
+        AND	A1."tainoHanteiKubun" = #{滞納判定区分}
+        GROUP BY
+        A1."hihokenshaNo",
+        A1."kanriKubun",
+        A1."rirekiNo",
+        A1."tainoHanteiKubun",
+        A1."choteiNendo",
+        A1."fukaNendo",
+        A1."Tokucho_fuchoKubun",
+        A1."shuno_Ki_Tsuki"
+        ) A2
+        ON	A2."hihokenshaNo" = B1."hihokenshaNo"
+        AND	A2."kanriKubun" = B1."kanriKubun"
+        AND	A2."rirekiNo" = B1."rirekiNo"
+        AND	A2."tainoHanteiKubun" = B1."tainoHanteiKubun"
+        AND	A2."choteiNendo" = B1."choteiNendo"
+        AND	A2."fukaNendo" = B1."fukaNendo"
+        AND	A2."Tokucho_fuchoKubun" = B1."Tokucho_fuchoKubun"
+        AND	A2."shuno_Ki_Tsuki" = B1."shuno_Ki_Tsuki"
+        AND	A2.renNo = B1."renNo"
+        GROUP BY
+        B1."hihokenshaNo",
+        B1."kanriKubun",
+        B1."rirekiNo",
+        B1."tainoHanteiKubun",
+        B1."choteiNendo",
+        B1."fukaNendo",
+        B1."Tokucho_fuchoKubun",
+        B1."shuno_Ki_Tsuki",
+        B1."renNo"
+        ) B
+        ON	B."hihokenshaNo" = A."dbT4022ShiharaiHohoHenkoTaino_hihokenshaNo"
+        AND	B."kanriKubun" = A."dbT4022ShiharaiHohoHenkoTaino_kanriKubun"
+        AND	B."rirekiNo" = A."dbT4022ShiharaiHohoHenkoTaino_rirekiNo"
+        AND	B."tainoHanteiKubun" = A."dbT4022ShiharaiHohoHenkoTaino_tainoHanteiKubun"
+        AND	B."choteiNendo" = A."dbT4022ShiharaiHohoHenkoTaino_choteiNendo"
+        AND	B."fukaNendo" = A."dbT4022ShiharaiHohoHenkoTaino_fukaNendo"
+        AND	B."Tokucho_fuchoKubun" = A."dbT4022ShiharaiHohoHenkoTaino_Tokucho_fuchoKubun"
+        AND	B."shuno_Ki_Tsuki" = A."dbT4022ShiharaiHohoHenkoTaino_shuno_Ki_Tsuki"
+        AND	B."renNo" = A."dbT4022ShiharaiHohoHenkoTaino_renNo"
+        AND	B.tsuchishoNo = A."dbT4022ShiharaiHohoHenkoTaino_tsuchishoNo"
+        ORDER BY
+        A."dbT4022ShiharaiHohoHenkoTaino_fukaNendo" DESC,
+        A."dbT4022ShiharaiHohoHenkoTaino_choteiNendo",
+        A."dbT4022ShiharaiHohoHenkoTaino_shuno_Ki_Tsuki"
+    </select>
+</mapper>

@@ -54,7 +54,7 @@
         <result property="chosaItakuryoShiharaiMemo" column="dbT5601NinteiChosaHoshuJissekiJoho_chosaItakuryoShiharaiMemo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="isGinkoFurikomiShutsuryoku" column="dbT5601NinteiChosaHoshuJissekiJoho_isGinkoFurikomiShutsuryoku" />
     </resultMap>
-   <select id="getEntity" resultMap="ResultMap_DbT5601NinteiChosaHoshuJissekiJohoEntity">
+   <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5601NinteiChosaHoshuJissekiJohoEntity">
         SELECT
         <include refid="allColumns_DbT5601NinteiChosaHoshuJissekiJoho"/>
         FROM

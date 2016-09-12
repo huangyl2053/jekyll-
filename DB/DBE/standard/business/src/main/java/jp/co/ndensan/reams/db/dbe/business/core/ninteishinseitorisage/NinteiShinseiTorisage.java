@@ -5,8 +5,8 @@
 package jp.co.ndensan.reams.db.dbe.business.core.ninteishinseitorisage;
 
 import jp.co.ndensan.reams.db.dbe.business.core.TorisageRiyu;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsaKeizokuKubun;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.TorisageKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.ShinsaKeizokuKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.TorisageKubun;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**

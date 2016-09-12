@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： ６５歳年齢到達資格異動のマッピング用XMLです。 -->
+<!-- @reamsid_L DBA-0330-010 xuyue -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.nenreitotatsushikakuido.INenreitotatsuShikakuIdoRelateMapper">
+
+    <!-- ShikakuIdoTaishoshaEntityの項目にマッピングします。-->
+    <resultMap id="resultMap_ShikakuIdoTaishoshaEntity" type="jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichokoshin.ShikakuIdoTaishoshaEntity" autoMapping="true">
+        <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
+        <result property="現全国地方公共団体コード" column="現全国地方公共団体コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
+        <result property="旧全国地方公共団体コード" column="旧全国地方公共団体コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
+        <result property="住民種別コード" column="住民種別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="住民状態コード" column="住民状態コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="生年月日" column="生年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+    </resultMap>
+    <select resultOrdered="true" id="select資格異動対象者"
+            resultMap="resultMap_ShikakuIdoTaishoshaEntity"
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.nenreitotatsushikakuido.AtenaMybatisParameter"
+            fetchSize="500">
+        SELECT
+        "shikibetsuCode" AS 識別コード,
+        "genLasdecCode" AS 現全国地方公共団体コード,
+        "kyuLasdecCode" AS 旧全国地方公共団体コード,
+        "juminShubetsuCode" AS 住民種別コード,
+        "juminJotaiCode" AS 住民状態コード,
+        "seinengappiYMD" AS 生年月日
+        FROM
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
+        WHERE
+        "seinengappiYMD" <![CDATA[>=]]> #{開始日}
+        AND 
+        "seinengappiYMD" <![CDATA[<=]]> #{終了日}
+    </select>
+
+</mapper>

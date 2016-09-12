@@ -33,7 +33,7 @@ public class HonsanteifukaParameter implements Serializable {
     private RString 出力期;
     private List<RString> 納入_対象者;
     private RDate 納入_発行日;
-    private RString 生活保護対象者;
+    private RString 納入_生活保護対象者をまとめて先頭に出力;
     private RString 納入_ページごとに山分け;
     private RString 打分け条件情報;
     private boolean 一括発行起動フラグ;

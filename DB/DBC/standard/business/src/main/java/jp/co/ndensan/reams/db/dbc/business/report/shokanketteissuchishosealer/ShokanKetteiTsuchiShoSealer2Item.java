@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.business.report.shokanketteissuchishosealer;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import lombok.Getter;
 
 /**
  * 償還払支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ2）のITEMです。
@@ -14,7 +13,8 @@ import lombok.Getter;
  * @reamsid_L DBC-1000-140 hezhenzhen
  *
  */
-@Getter
+@lombok.Getter
+@lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShokanKetteiTsuchiShoSealer2Item {
 
@@ -116,7 +116,6 @@ public class ShokanKetteiTsuchiShoSealer2Item {
     private final RString tsuban2;
     private final RString torikeshiShiharaikikan;
     private final RString riyuTitle;
-    private final RString 増減の理由;
     private final RString タイトル1;
     private final RString タイトル2;
     private final RString 当ページ;
@@ -233,7 +232,6 @@ public class ShokanKetteiTsuchiShoSealer2Item {
      * @param tsuban2 通番2
      * @param torikeshiShiharaikikan 取消支払期間
      * @param riyuTitle 増減の理由タイトル
-     * @param 増減の理由 増減の理由
      * @param タイトル1 タイトル1
      * @param タイトル2 タイトル2
      * @param 当ページ 当ページ
@@ -273,7 +271,7 @@ public class ShokanKetteiTsuchiShoSealer2Item {
             RString title2_2_1, RString title2_2_2, RString title2_3_1, RString title2_3_2, RString title2_4,
             RString torikeshi1, RString torikeshi2, RString mochimono1, RString torikeshiMochimono1,
             RString mochimono2, RString torikeshiMochimono2, RString mochimono3, RString shoHokenshaNo,
-            RString serviceYM, RString tsuban2, RString torikeshiShiharaikikan, RString riyuTitle, RString 増減の理由,
+            RString serviceYM, RString tsuban2, RString torikeshiShiharaikikan, RString riyuTitle,
             RString タイトル1, RString タイトル2, RString 当ページ, RString ページ総数, RString 被保険者氏名２,
             RString 通知文, RString 情報文, RString 円1, RString 円2, RString 円3, RString 円4, RString title,
             RString torikeshiShiharaibasho, RString hihokenshaNo21, RString gyoseiku2) {
@@ -375,7 +373,6 @@ public class ShokanKetteiTsuchiShoSealer2Item {
         this.tsuban2 = tsuban2;
         this.torikeshiShiharaikikan = torikeshiShiharaikikan;
         this.riyuTitle = riyuTitle;
-        this.増減の理由 = 増減の理由;
         this.タイトル1 = タイトル1;
         this.タイトル2 = タイトル2;
         this.当ページ = 当ページ;

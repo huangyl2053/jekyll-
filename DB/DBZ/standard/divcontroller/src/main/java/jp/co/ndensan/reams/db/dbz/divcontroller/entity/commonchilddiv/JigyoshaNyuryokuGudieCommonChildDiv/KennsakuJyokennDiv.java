@@ -11,12 +11,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * KennsakuJyokenn のクラスファイル 
- * 
+ * KennsakuJyokenn のクラスファイル
+ *
  * @reamsid_L DBA-0140-010 houtianpeng
  */
 public class KennsakuJyokennDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -24,7 +24,7 @@ public class KennsakuJyokennDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("txtJIgyoshaNo")
-    private TextBox txtJIgyoshaNo;
+    private TextBoxCode txtJIgyoshaNo;
     @JsonProperty("txtYukouKaishibi")
     private TextBoxDateRange txtYukouKaishibi;
     @JsonProperty("txtJigyoshamei")
@@ -49,7 +49,7 @@ public class KennsakuJyokennDiv extends Panel {
      * @return txtJIgyoshaNo
      */
     @JsonProperty("txtJIgyoshaNo")
-    public TextBox getTxtJIgyoshaNo() {
+    public TextBoxCode getTxtJIgyoshaNo() {
         return txtJIgyoshaNo;
     }
 
@@ -58,7 +58,7 @@ public class KennsakuJyokennDiv extends Panel {
      * @param txtJIgyoshaNo txtJIgyoshaNo
      */
     @JsonProperty("txtJIgyoshaNo")
-    public void setTxtJIgyoshaNo(TextBox txtJIgyoshaNo) {
+    public void setTxtJIgyoshaNo(TextBoxCode txtJIgyoshaNo) {
         this.txtJIgyoshaNo = txtJIgyoshaNo;
     }
 

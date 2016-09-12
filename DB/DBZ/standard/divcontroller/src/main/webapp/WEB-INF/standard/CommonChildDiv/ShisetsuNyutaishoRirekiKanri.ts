@@ -18,11 +18,11 @@ module DBZ {
 
             public priorities(): Array {
                 return [
-                    "表示モード",
-                    "表示Heightサイズ",
-                    "表示widthサイズ",
-                    "明細表示モード",
-                    "利用"
+                    "DisplayMode",
+                    "DataGridHeight",
+                    "DataGridWidth",
+                    "MeisaiMode",
+                    "Riyou"
                 ];
             }
 
@@ -34,25 +34,25 @@ module DBZ {
                 return new PublicProperties(this.fieldName);
             }
 
-            public 表示モード() {
-                return new Modes.表示モード(this.controls);
+            public DisplayMode() {
+                return new Modes.DisplayMode(this.controls);
             }
 
-            public 表示Heightサイズ() {
-                return new Modes.表示heightサイズ(this.controls);
+            public DataGridHeight() {
+                return new Modes.DataGridHeight(this.controls);
             }
 
-            public 表示widthサイズ() {
-                return new Modes.表示widthサイズ(this.controls);
+            public DataGridWidth() {
+                return new Modes.DataGridWidth(this.controls);
             }
 
 
-            public 明細表示モード() {
-                return new Modes.明細表示モード(this.controls);
+            public MeisaiMode() {
+                return new Modes.MeisaiMode(this.controls);
             }
 
-            public 利用() {
-                return new Modes.利用(this.controls);
+            public Riyou() {
+                return new Modes.Riyou(this.controls);
             }
 
         }
@@ -60,7 +60,7 @@ module DBZ {
         export module Modes {
 
 
-            export class 表示モード {
+            export class DisplayMode {
                 private controls: Controls;
                 private gridWidthCalc;
 
@@ -117,7 +117,7 @@ module DBZ {
                     this.controls.btnAddShisetsuNyutaisho().displayNone = true;
 
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
-					gridSetting.isShowSelectButtonColumn = true;
+                    gridSetting.isShowSelectButtonColumn = true;
                     gridSetting.isShowDeleteButtonColumn = false;
                     gridSetting.isShowModifyButtonColumn = false;
                     var columns = gridSetting.columns;
@@ -156,7 +156,7 @@ module DBZ {
                 }
             }
 
-            export class 表示heightサイズ {
+            export class DataGridHeight {
                 private controls: Controls;
 
                 constructor(controls: Controls) {
@@ -193,7 +193,7 @@ module DBZ {
                 }
             }
 
-            export class 表示widthサイズ {
+            export class DataGridWidth {
                 private controls: Controls;
 
                 constructor(controls: Controls) {
@@ -222,7 +222,7 @@ module DBZ {
             }
 
 
-            export class 明細表示モード {
+            export class MeisaiMode {
                 private controls: Controls;
 
                 constructor(controls: Controls) {
@@ -287,9 +287,7 @@ module DBZ {
 
             }
 
-
-
-            export class 利用{
+		export class Riyou{
 			private gridWidthCalc;
 			private controls: Controls;
                     constructor(controls: Controls) {
@@ -297,8 +295,8 @@ module DBZ {
                 }
 
 				  public 台帳種別表示機能(): void {
-					// 台帳種別表示
-					var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
+                    // 台帳種別表示
+                    var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
 
                     var columns = gridSetting.columns;
                     for (var i = 0; i < columns.length; i++) {
@@ -312,9 +310,9 @@ module DBZ {
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
 
-					this.controls.ccdShisetsuJoho().State().DaichoShubetsuAriMode();
+                    //this.controls.ccdShisetsuJoho().State().DaichoShubetsuAriMode();
 
-					//施設種類表示
+					//施設種類表示、転出先保険者番号表示
 					var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
 
                     var columns = gridSetting.columns;
@@ -322,11 +320,15 @@ module DBZ {
                         if (columns[i].dataName === 'shisetsuShurui') {
                             columns[i].visible = true;
                         }
+                        if (columns[i].dataName === 'txtTenshutsusakiHokenshaBango') {
+                            columns[i].visible = true;
+                        }
                     }
                     gridSetting.columns = columns;
 
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
+                    //this.controls.TenshutsusakiJohoPanel().displayNone = false;
 
                 }
 
@@ -347,9 +349,9 @@ module DBZ {
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
 
-					this.controls.ccdShisetsuJoho().State().DaichoShubetsuNashiMode();
+                    //this.controls.ccdShisetsuJoho().State().DaichoShubetsuNashiMode();
 
-					//施設種類表示
+					//施設種類表示、転出先保険者番号表示
 					var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
 
                     var columns = gridSetting.columns;
@@ -357,11 +359,15 @@ module DBZ {
                         if (columns[i].dataName === 'shisetsuShurui') {
                             columns[i].visible = true;
                         }
+                        if (columns[i].dataName === 'txtTenshutsusakiHokenshaBango') {
+                            columns[i].visible = true;
+                        }
                     }
                     gridSetting.columns = columns;
 
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
+                    //this.controls.TenshutsusakiJohoPanel().displayNone = false;
 
 					}
 
@@ -381,9 +387,9 @@ module DBZ {
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
 
-					this.controls.ccdShisetsuJoho().State().OtherTokureiMode();
+                    //this.controls.ccdShisetsuJoho().State().OtherTokureiMode();
 
-					//施設種類表示
+					//施設種類表示、転出先保険者番号表示
 					var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
 
                     var columns = gridSetting.columns;
@@ -391,10 +397,14 @@ module DBZ {
                         if (columns[i].dataName === 'shisetsuShurui') {
                             columns[i].visible = true;
                         }
+                        if (columns[i].dataName === 'txtTenshutsusakiHokenshaBango') {
+                            columns[i].visible = true;
+                        }
                     }
                     gridSetting.columns = columns;
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
+                    //this.controls.TenshutsusakiJohoPanel().displayNone = false;
                 }
 
 					public 他市町村住所地特例者対象機能(): void {
@@ -412,9 +422,9 @@ module DBZ {
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
 
-					this.controls.ccdShisetsuJoho().State().OtherTokureiMode();
+                    //this.controls.ccdShisetsuJoho().State().OtherTokureiMode();
 
-					//施設種類表示
+					//施設種類表示、転出先保険者番号非表示
 					var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
 
                     var columns = gridSetting.columns;
@@ -422,17 +432,21 @@ module DBZ {
                         if (columns[i].dataName === 'shisetsuShurui') {
                             columns[i].visible = true;
                         }
+                        if (columns[i].dataName === 'txtTenshutsusakiHokenshaBango') {
+                            columns[i].visible = false;
+                        }
                     }
                     gridSetting.columns = columns;
 
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
+                    //this.controls.TenshutsusakiJohoPanel().displayNone = true;
 
                 	}
 
                	 public 適用除外者対象機能(): void {
-					// 台帳種別非表示
-				   var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
+                    // 台帳種別非表示
+                    var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
 
                     var columns = gridSetting.columns;
                     for (var i = 0; i < columns.length; i++) {
@@ -445,14 +459,17 @@ module DBZ {
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
 
-					this.controls.ccdShisetsuJoho().State().TekiyoJogaiMode();
+                    //this.controls.ccdShisetsuJoho().State().TekiyoJogaiMode();
 
-					//施設種類非表示
-					var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
+                    //施設種類、転出先保険者番号非表示
+                    var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
 
                     var columns = gridSetting.columns;
                     for (var i = 0; i < columns.length; i++) {
                         if (columns[i].dataName === 'shisetsuShurui') {
+                            columns[i].visible = false;
+                        }
+                        if (columns[i].dataName === 'txtTenshutsusakiHokenshaBango') {
                             columns[i].visible = false;
                         }
                     }
@@ -460,6 +477,7 @@ module DBZ {
 
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
+                    //this.controls.TenshutsusakiJohoPanel().displayNone = true;
 
 
                 }

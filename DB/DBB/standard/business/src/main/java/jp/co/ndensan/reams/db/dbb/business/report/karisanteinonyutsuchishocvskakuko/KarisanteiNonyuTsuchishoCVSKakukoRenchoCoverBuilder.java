@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvskakuko;
 
-import jp.co.ndensan.reams.db.dbb.entity.report.karisanteinonyutsuchishocvskakuko.KarisanteiNonyuTsuchishoCVSKakukoSource;
+import jp.co.ndensan.reams.db.dbb.entity.report.karisanteinonyutsuchishocvskakuko.KarisanteiNonyuTsuchishoCVSKakukoRenchoSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
@@ -29,11 +29,11 @@ public class KarisanteiNonyuTsuchishoCVSKakukoRenchoCoverBuilder implements IKar
     /**
      * 帳票ソースをビルドします。
      *
-     * @return {@link KarisanteiNonyuTsuchishoCVSKakukoSource}
+     * @return {@link KarisanteiNonyuTsuchishoCVSKakukoRenchoSource}
      */
     @Override
-    public KarisanteiNonyuTsuchishoCVSKakukoSource build() {
-        return ReportEditorJoiner.from(new KarisanteiNonyuTsuchishoCVSKakukoSource())
+    public KarisanteiNonyuTsuchishoCVSKakukoRenchoSource build() {
+        return ReportEditorJoiner.from(new KarisanteiNonyuTsuchishoCVSKakukoRenchoSource())
                 .join(renchoCoverEditor).buildSource();
     }
 

@@ -14,7 +14,7 @@
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE5100001",
      "toLayoutTitle": "審査会一覧",
-     "toState": "事前結果登録"
+     "toState": "事前審査結果登録"
     },
     {
      "id": "2",
@@ -42,7 +42,7 @@
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE5100001",
      "toLayoutTitle": "審査会一覧",
-     "toState": "事前結果登録"
+     "toState": "事前審査結果登録"
     },
     {
      "id": "4",

@@ -44,7 +44,7 @@
         <result property="imageSharedFileId" column="dbT4115Image_imageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
     </resultMap>
     
-        <select id="getEntity" resultMap="ResultMap_DbT4115ImageEntity">
+        <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT4115ImageEntity">
 <!--	SELECT
 	<include refid="allColumns_DbT4115Image"/>
 	FROM

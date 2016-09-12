@@ -10,14 +10,6 @@ module DBZ {
 
         export class Events {
 
-            public static onClick_btnClear(): string {
-                return "onClick_btnClear";
-            }
-
-            public static onClick_btnSearch(): string {
-                return "onClick_btnSearch";
-            }
-
             public static onBlur_txtMaxNumber(): string {
                 return "onBlur_txtMaxNumber";
             }
@@ -97,14 +89,6 @@ module DBZ {
 
             public ButtonsForHihokenshaFinder(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("ButtonsForHihokenshaFinder"));
-            }
-
-            public btnClear(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnClear"));
-            }
-
-            public btnSearch(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnSearch"));
             }
 
             public txtMaxNumber(): UZA.TextBoxNum {

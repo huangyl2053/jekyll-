@@ -14,14 +14,14 @@ import jp.co.ndensan.reams.db.dba.entity.report.koikinaijushochitokureishaichira
  */
 class KoikinaiJushochitokureishaIchiranhyoBodyEditor implements IKoikinaiJushochitokureishaIchiranhyoEditor {
 
-    private final KoikinaiJushochitokureishaIchiranhyoBodyItem item;
+    private final KoikinaiJushochitokureishaIchiranhyoBody item;
 
     /**
      * インスタンスを生成します。
      *
      * @param item {@link KoikinaiJushochitokureishaIchiranhyoItem}
      */
-    protected KoikinaiJushochitokureishaIchiranhyoBodyEditor(KoikinaiJushochitokureishaIchiranhyoBodyItem item) {
+    protected KoikinaiJushochitokureishaIchiranhyoBodyEditor(KoikinaiJushochitokureishaIchiranhyoBody item) {
         this.item = item;
     }
 

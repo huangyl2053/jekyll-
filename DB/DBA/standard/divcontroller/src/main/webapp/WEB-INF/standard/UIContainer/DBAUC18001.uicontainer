@@ -53,6 +53,20 @@
      "toLayoutName": "DBA1080011",
      "toLayoutTitle": "資格取得除外者登録",
      "toState": "初期状態"
+    },
+    {
+     "id": "5",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBZ",
+     "layoutName": "DBZ0200001",
+     "layoutTitle": "対象者検索",
+     "eventName": "終了",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA1080011",
+     "toLayoutTitle": "資格取得除外者登録",
+     "toState": "初期状態"
     }
    ]
   }

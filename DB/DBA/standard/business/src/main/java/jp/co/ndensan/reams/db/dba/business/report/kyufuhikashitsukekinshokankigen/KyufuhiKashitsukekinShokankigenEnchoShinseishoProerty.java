@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 /**
  * KyufuhiKashitsukekinShokankigenEnchoShinseishoProertyのプロパティです。
  *
- * @reamsid_L DBA-0540-702  lijia
- * 
+ * @reamsid_L DBA-0540-702 lijia
+ *
  */
 public class KyufuhiKashitsukekinShokankigenEnchoShinseishoProerty extends
         ReportPropertyBase<KyufuKashitsukekinShokanKigenEnchoShinseishoReportSource> {
@@ -23,7 +23,7 @@ public class KyufuhiKashitsukekinShokankigenEnchoShinseishoProerty extends
      * コンストラクタです。
      */
     public KyufuhiKashitsukekinShokankigenEnchoShinseishoProerty() {
-        super(SubGyomuCode.DBA介護資格, ReportIdDBA.DBC800019.getReportId());
+        super(SubGyomuCode.DBC介護給付, ReportIdDBA.DBC800019.getReportId());
     }
 
 }

@@ -10,14 +10,15 @@ import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHak
 import jp.co.ndensan.reams.db.dbu.definition.processprm.hihokenshasho.IkkatsuHakkoProcessParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshasho.IkkatsuHakkoRelateEntity;
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.hihokenshasho.IIkkatsuHakkoMapper;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
@@ -58,7 +59,7 @@ public class IkkatsuHakkoDBInsertProcess extends SimpleBatchProcessBase {
 
     @Override
     protected void process() {
-        if (processPrm.getTestShutsuryokuFlag().toString().equals("0")) {
+        if (!processPrm.isTestShutsuryokuFlag()) {
             for (IkkatsuHakkoRelateEntity entity : 被保険者証一覧リスト) {
                 iIkkatsuHakkoMapper.insertShoKofuKaishu(set証交付回収Entity(entity));
             }
@@ -104,8 +105,9 @@ public class IkkatsuHakkoDBInsertProcess extends SimpleBatchProcessBase {
                 kofuRiyu = KOFURIYU_VALUE2;
                 break;
             case "3":
-                UzT0007CodeEntity codeMastEntity = CodeMaster.getCode(SubGyomuCode.DBA介護資格, new CodeShubetsu("0002"),
-                        new Code(entity.getIdoJiyuCode()));
+                UzT0007CodeEntity codeMastEntity = CodeMaster.getCode(SubGyomuCode.DBA介護資格, DBACodeShubetsu.被保険者証交付事由.getコード(),
+                        new Code(entity.getIdoJiyuCode()),
+                        FlexibleDate.getNowDate());
                 if (codeMastEntity != null) {
                     kofuJiyu = codeMastEntity.getコード().value();
                     kofuRiyu = codeMastEntity.getコード名称();
@@ -138,7 +140,8 @@ public class IkkatsuHakkoDBInsertProcess extends SimpleBatchProcessBase {
                 mybatisPrm.getShikibetsuCode(),
                 mybatisPrm.getPsmShikibetsuTaisho(),
                 mybatisPrm.getPsmAtesaki(),
-                mybatisPrm.getNenreiTotatsuYMD());
+                mybatisPrm.getNenreiTotatsuYMD(),
+                RString.EMPTY);
         IkkatsuHakkoRelateEntity rirekiNoEntity = iIkkatsuHakkoMapper.getSaishinrirekiNo(mybatisParam);
         int rirekiNo;
         if (rirekiNoEntity == null) {

@@ -100,6 +100,22 @@ public class JukyushaIdoRenrakuhyoManager {
     }
 
     /**
+     * 受給者異動連絡票情報を全件返します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param 異動日 異動日
+     * @return JukyushaIdoRenrakuhyo
+     */
+    @Transaction
+    public JukyushaIdoRenrakuhyo get受給者異動連絡票情報(RString 被保険者番号, RString 異動日) {
+        DbT3001JukyushaIdoRenrakuhyoEntity entity = dac.selectAll受給者異動連絡票情報(被保険者番号, 異動日);
+        if (entity != null) {
+            return new JukyushaIdoRenrakuhyo(entity);
+        }
+        return null;
+    }
+
+    /**
      * 受給者異動送付{@link JukyushaIdoRenrakuhyo}を保存します。
      *
      * @param 受給者異動送付 {@link JukyushaIdoRenrakuhyo}

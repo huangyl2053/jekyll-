@@ -17,7 +17,11 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.NullsOrder;
+import jp.co.ndensan.reams.uz.uza.util.db.OrderBy;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -28,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class DbV1003TashichosonJushochiTokureiAliveDac implements ISaveable<DbV1003TashichosonJushochiTokureiEntity> {
 
+    private static final int 件数_1 = 1;
     @InjectSession
     private SqlSession session;
 
@@ -61,6 +66,26 @@ public class DbV1003TashichosonJushochiTokureiAliveDac implements ISaveable<DbV1
     }
 
     /**
+     * 識別コードで他市町村住所地特例者台帳管理Aliveを取得します。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @return DbV1003TashichosonJushochiTokureiEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbV1003TashichosonJushochiTokureiEntity selectByShikibetsuCode(ShikibetsuCode 識別コード) throws NullPointerException {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select()
+                .table(DbV1003TashichosonJushochiTokurei.class)
+                .where(eq(shikibetsuCode, 識別コード))
+                .order(new OrderBy(idoYMD, Order.DESC, NullsOrder.LAST), new OrderBy(idoYMD, Order.DESC, NullsOrder.LAST))
+                .toObject(DbV1003TashichosonJushochiTokureiEntity.class);
+    }
+
+    /**
      * 他市町村住所地特例者台帳管理Aliveを全件返します。
      *
      * @return List<DbV1003TashichosonJushochiTokureiEntity>
@@ -87,5 +112,26 @@ public class DbV1003TashichosonJushochiTokureiAliveDac implements ISaveable<DbV1
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 他市町村住所地特例情報の取得します。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @return DbT1003TashichosonJushochiTokureiEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbV1003TashichosonJushochiTokureiEntity get他市町村住所地特例情報(ShikibetsuCode 識別コード) throws NullPointerException {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbV1003TashichosonJushochiTokurei.class).
+                where(eq(shikibetsuCode, 識別コード)).
+                order(by(shikibetsuCode, Order.DESC)).
+                limit(件数_1).
+                toObject(DbV1003TashichosonJushochiTokureiEntity.class);
     }
 }

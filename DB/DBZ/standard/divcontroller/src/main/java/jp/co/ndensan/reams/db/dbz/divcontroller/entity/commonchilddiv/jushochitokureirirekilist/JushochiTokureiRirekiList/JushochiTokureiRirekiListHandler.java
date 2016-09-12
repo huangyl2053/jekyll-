@@ -7,12 +7,13 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochit
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.util.ObjectUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.jushotitokure.JushotiTokureiBusiness;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ViewExecutionStatus;
+import jp.co.ndensan.reams.db.dbz.definition.core.ViewExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuJutokuKaijoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuJutokuTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochitokureirirekilist.JushochiTokureiRirekiList.JushochiTokureiRirekiListDiv.DisplayType;
@@ -110,7 +111,7 @@ public class JushochiTokureiRirekiListHandler {
 
         jutokuRirekiDiv.getJutokuTekiyoInput().getTxtTekiyoDate().setValue(row.getTekiyoDate().getValue());
         jutokuRirekiDiv.getJutokuTekiyoInput().getTxtTekiyoTodokedeDate().setValue(row.getTekiyoTodokedeDate().getValue());
-        jutokuRirekiDiv.getJutokuTekiyoInput().getDdlTekiyoJiyu().setDataSource(getCode(new CodeShubetsu("0014")));
+        jutokuRirekiDiv.getJutokuTekiyoInput().getDdlTekiyoJiyu().setDataSource(getCode(DBACodeShubetsu.介護資格住特適用.getコード()));
         try {
             jutokuRirekiDiv.getJutokuTekiyoInput().getDdlTekiyoJiyu().setSelectedKey(row.getTekiyoJiyuKey());
         } catch (SystemException e) {
@@ -119,7 +120,7 @@ public class JushochiTokureiRirekiListHandler {
         }
         jutokuRirekiDiv.getJutokuKaijoInput().getTxtKaijoDate().setValue(row.getKaijoDate().getValue());
         jutokuRirekiDiv.getJutokuKaijoInput().getTxtKaijoTodokedeDate().setValue(row.getKaijoTodokedeDate().getValue());
-        jutokuRirekiDiv.getJutokuKaijoInput().getDdlKaijoJiyu().setDataSource(getCode(new CodeShubetsu("0015")));
+        jutokuRirekiDiv.getJutokuKaijoInput().getDdlKaijoJiyu().setDataSource(getCode(DBACodeShubetsu.介護資格住特解除.getコード()));
         try {
             jutokuRirekiDiv.getJutokuKaijoInput().getDdlKaijoJiyu().setSelectedKey(row.getKaijoJiyuKey());
         } catch (SystemException e) {
@@ -296,8 +297,8 @@ public class JushochiTokureiRirekiListHandler {
             jutokuRirekiDiv.getDgJutoku().setDataSource(dgJutokuList);
         }
 
-        jutokuRirekiDiv.getJutokuTekiyoInput().getDdlTekiyoJiyu().setDataSource(getCode(new CodeShubetsu("0014")));
-        jutokuRirekiDiv.getJutokuKaijoInput().getDdlKaijoJiyu().setDataSource(getCode(new CodeShubetsu("0015")));
+        jutokuRirekiDiv.getJutokuTekiyoInput().getDdlTekiyoJiyu().setDataSource(getCode(DBACodeShubetsu.介護資格住特適用.getコード()));
+        jutokuRirekiDiv.getJutokuKaijoInput().getDdlKaijoJiyu().setDataSource(getCode(DBACodeShubetsu.介護資格住特解除.getコード()));
 
         // 画面に初期化表示制御
         initBtnDisplay();
@@ -360,7 +361,7 @@ public class JushochiTokureiRirekiListHandler {
 
     private List<KeyValueDataSource> getCode(CodeShubetsu codeShubetsu) {
 
-        List<UzT0007CodeEntity> codeValueList = CodeMaster.getCode(SubGyomuCode.DBA介護資格, codeShubetsu);
+        List<UzT0007CodeEntity> codeValueList = CodeMaster.getCode(SubGyomuCode.DBA介護資格, codeShubetsu, FlexibleDate.getNowDate());
 
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         dataSourceList.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
@@ -387,8 +388,7 @@ public class JushochiTokureiRirekiListHandler {
                     new HihokenshaNo(row.getHihokenshaNo()), new FlexibleDate(row.getIdoYMD().getText()), row.getEdaNo());
 
             if (hihokenshaDaicho == null) {
-                returnList.add(new HihokenshaDaicho(HihokenshaNo.EMPTY, FlexibleDate.EMPTY, RString.EMPTY));
-                continue;
+                hihokenshaDaicho = new HihokenshaDaicho(HihokenshaNo.EMPTY, FlexibleDate.EMPTY, RString.EMPTY);
             }
             HihokenshaDaichoBuilder builder = hihokenshaDaicho.createBuilderForEdit();
 

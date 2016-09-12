@@ -6,18 +6,17 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020010;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosascheduleinput.NinteiChosaScheduleGamenkoumuku;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020010.NinteiChosaScheduleInputDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaSchedule;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 認定調査スケジュール登録10のHandlerクラスです。
@@ -95,48 +94,46 @@ public class NinteiChosaScheduleInputHandler {
      * @param temp_立会人2 temp_立会人2
      * @param temp_連絡先2 temp_連絡先2
      * @param temp_対象者メモ temp_対象者メモ
+     * @param key_予約可否 key_予約可否
+     * @param key_予約状況 key_予約状況
+     * @param key_認定調査員コード key_認定調査員コード
+     * @param key_モード key_モード
+     * @param key_認定調査委託先コード key_認定調査委託先コード
+     * @param key_時間枠 key_時間枠
+     * @param key_設定日 key_設定日
+     * @param 対象者を検索するモード 対象者を検索するモード
+     * @param 画面項目 画面項目
      */
     public void onLoad(RString temp_申請者管理番号3, RString temp_認定調査員名称, RString temp_認定調査委託先名称, RString temp_予約可否,
             RString temp_備考, RString temp_予約状況, RString temp_被保番号, RString temp_被保険者区分コード, RString temp_保険者,
             FlexibleDate temp_認定申請日, RString temp_申請区分_申請時, RString temp_氏名, RString temp_カナ氏名, RString temp_場所,
-            RString temp_駐車場, RString temp_立会人1, RString temp_連絡先1, RString temp_立会人2, RString temp_連絡先2, RString temp_対象者メモ) {
-        予約可否 = get予約可のKEY(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_予約可否, RString.class));
-        予約状況 = get予約状況のKEY(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_予約状況, RString.class));
-        モード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_モード, RString.class);
-        認定調査員コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_認定調査員コード, RString.class);
-        認定調査委託先コード = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_認定調査委託先コード, RString.class);
-        時間枠 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_時間枠, RString.class);
-        設定日 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_設定日, FlexibleDate.class);
-        if (モード_1.equals(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_対象者を検索するモード, RString.class))) {
-            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_対象者を検索するモード, RString.EMPTY);
-            boolean 状態 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_認定調査員コード状態, boolean.class);
-            boolean 予約可否状態 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_予約可否状態, boolean.class);
-            boolean 備考状態 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_備考状態, boolean.class);
-            boolean 予約状況状態 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_予約状況状態, boolean.class);
-            boolean 被保番号状態 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_被保番号状態, boolean.class);
-            boolean 場所状態 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_場所状態, boolean.class);
-            設定日 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_調査日値, FlexibleDate.class);
-            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_設定日, 設定日);
-            div.getWariateJokyo().getTxtNinteiChosainCode().setValue(
-                    chickNull(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_認定調査員コード値, RString.class)));
-            div.getWariateJokyo().getTxtNinteiChosainName().setValue(
-                    chickNull(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_認定調査員氏名値, RString.class)));
-            div.getWariateJokyo().getTxtNinteiChosaItakusakiCode().setValue(
-                    chickNull(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_認定調査委託先コード値, RString.class)));
-            div.getWariateJokyo().getTxtNinteiChosaItakusakiName().setValue(
-                    chickNull(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_認定調査委託先名称値, RString.class)));
-            div.getWariateJokyo().getTxtNinteiChosaDate().setValue(
-                    chickNull(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_調査日値, FlexibleDate.class)));
-            div.getWariateJokyo().getTxtNinteiChosaTime().setValue(
-                    chickNull(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_調査日時値, RString.class)));
-            div.getWariateJokyo().getTxtNinteiChosaTimeFrame().setValue(
-                    chickNull(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_時間枠値, RString.class)));
-            div.getWariateJokyo().getRadYoyakuKahi().setSelectedKey(
-                    chickNull(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_予約可否値, RString.class)));
-            div.getWariateJokyo().getTxtNinteiChosaBiko().setValue(
-                    chickNull(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_備考値, RString.class)));
-            div.getWariateJokyo().getRadYoyakuJokyo().setSelectedKey(
-                    chickNull(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_予約状況値, RString.class)));
+            RString temp_駐車場, RString temp_立会人1, RString temp_連絡先1, RString temp_立会人2, RString temp_連絡先2, RString temp_対象者メモ,
+            RString key_予約可否, RString key_予約状況, RString key_モード, RString key_認定調査員コード, RString key_認定調査委託先コード,
+            RString key_時間枠, FlexibleDate key_設定日, RString 対象者を検索するモード, NinteiChosaScheduleGamenkoumuku 画面項目) {
+        予約可否 = get予約可のKEY(key_予約可否);
+        予約状況 = get予約状況のKEY(key_予約状況);
+        モード = key_モード;
+        認定調査員コード = key_認定調査員コード;
+        認定調査委託先コード = key_認定調査委託先コード;
+        時間枠 = key_時間枠;
+        設定日 = key_設定日;
+        if (モード_1.equals(対象者を検索するモード)) {
+            boolean 状態 = 画面項目.is認定調査員コード状態();
+            boolean 予約可否状態 = 画面項目.is予約可否状態();
+            boolean 備考状態 = 画面項目.is備考状態();
+            boolean 予約状況状態 = 画面項目.is予約状況状態();
+            boolean 被保番号状態 = 画面項目.is被保番号状態();
+            boolean 場所状態 = 画面項目.is場所状態();
+            div.getWariateJokyo().getTxtNinteiChosainCode().setValue(chickNull(画面項目.get認定調査員コード値()));
+            div.getWariateJokyo().getTxtNinteiChosainName().setValue(chickNull(画面項目.get認定調査員氏名値()));
+            div.getWariateJokyo().getTxtNinteiChosaItakusakiCode().setValue(chickNull(画面項目.get認定調査委託先コード値()));
+            div.getWariateJokyo().getTxtNinteiChosaItakusakiName().setValue(chickNull(画面項目.get認定調査委託先名称値()));
+            div.getWariateJokyo().getTxtNinteiChosaDate().setValue(chickNull(画面項目.get調査日値()));
+            div.getWariateJokyo().getTxtNinteiChosaTime().setValue(chickNull(画面項目.get調査日時値()));
+            div.getWariateJokyo().getTxtNinteiChosaTimeFrame().setValue(chickNull(画面項目.get時間枠値()));
+            div.getWariateJokyo().getRadYoyakuKahi().setSelectedKey(chickNull(画面項目.get予約可否値()));
+            div.getWariateJokyo().getTxtNinteiChosaBiko().setValue(chickNull(画面項目.get備考値()));
+            div.getWariateJokyo().getRadYoyakuJokyo().setSelectedKey(chickNull(画面項目.get予約状況値()));
             div.getButtonArea().getBtnSearchTaishosha().setVisible(true);
             div.getButtonArea().getBtnDisplayLatestInformation().setVisible(true);
             div.getButtonArea().getBtnSearchTaishosha().setDisabled(false);
@@ -152,13 +149,8 @@ public class NinteiChosaScheduleInputHandler {
             div.getWariateJokyo().getTxtNinteiChosaBiko().setDisabled(備考状態);
             div.getWariateJokyo().getRadYoyakuJokyo().setDisabled(予約状況状態);
             set対象者詳細Grid値(temp_被保番号, temp_被保険者区分コード, temp_保険者, temp_認定申請日, temp_申請区分_申請時, temp_氏名,
-                    temp_カナ氏名, ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_場所値, RString.class),
-                    ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_駐車場値, RString.class),
-                    ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_立会人１値, RString.class),
-                    ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_連絡先１値, RString.class),
-                    ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_立会人２値, RString.class),
-                    ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_連絡先２値, RString.class),
-                    ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_対象者メモ値, RString.class));
+                    temp_カナ氏名, 画面項目.get場所値(), 画面項目.get駐車場値(), 画面項目.get立会人１値(), 画面項目.get連絡先１値(),
+                    画面項目.get立会人２値(), 画面項目.get連絡先２値(), 画面項目.get対象者メモ値());
             div.getTaishoshaShosai().getTxtHihoBangoNumber().setDisabled(被保番号状態);
             div.getTaishoshaShosai().getTxtHihoBangoGosu().setDisabled(被保番号状態);
             div.getTaishoshaShosai().getTxtHokenshaName().setDisabled(被保番号状態);

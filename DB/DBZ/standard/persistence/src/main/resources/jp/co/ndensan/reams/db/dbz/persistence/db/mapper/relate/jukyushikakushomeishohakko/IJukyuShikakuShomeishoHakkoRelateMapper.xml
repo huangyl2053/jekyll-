@@ -52,7 +52,7 @@
         <result property="sonotanoGoukeiShotokuKingakuGoukei" column="sonotanoGoukeiShotokuKingakuGoukei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
     </resultMap>
 
-    <select id="getJukyuShikakuShomeishoHakko" resultMap="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter" fetchSize="500">
+    <select resultOrdered="true" id="getJukyuShikakuShomeishoHakko" resultMap="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter" fetchSize="500">
         SELECT TB1."hihokenshaNo"   AS  "hihokenshaNo"
         ,COALESCE(D."tenshutsuKakuteiIdoYMD",D."tenshutsuYoteiIdoYMD") AS "idoYMD"
         ,TB1."yokaigoJotaiKubunCode"  AS "yokaigoJotaiKubunCode"
@@ -89,7 +89,7 @@
             TB1."shikibetsuCode" = D."shikibetsuCode"
     </select>
 
-    <select id="getServiceCode" resultMap="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter" fetchSize="500">
+    <select resultOrdered="true" id="getServiceCode" resultMap="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter" fetchSize="500">
         SELECT
         Jukyusha."shiteiServiceShurui01" AS "shiteiServiceShurui01",
         Jukyusha."shiteiServiceShurui02" AS "shiteiServiceShurui02",
@@ -133,7 +133,7 @@
         DESC LIMIT 1
     </select>
 
-    <select id="getServiceMei" resultMap="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter" fetchSize="500">
+    <select resultOrdered="true" id="getServiceMei" resultMap="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter" fetchSize="500">
         SELECT
         DbT7130."serviceShuruiMeisho",
         DbT7130."serviceShuruiRyakusho"
@@ -147,7 +147,7 @@
             OR DbT7130."serviceShuruiCd" IS NULL)
     </select>
 
-    <select id="getNinTeiShinSeiChuData" resultMap="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter" fetchSize="500">
+    <select resultOrdered="true" id="getNinTeiShinSeiChuData" resultMap="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter" fetchSize="500">
         SELECT
         TB2."jukyuShinseiJiyu" AS "jukyuShinseiJiyu"
         ,TB2."shinseishoKanriNo" AS "shinseishoKanriNo"
@@ -164,7 +164,7 @@
         DESC LIMIT 1
     </select>
 
-    <select id="getNinTeiChouSaJou" resultMap="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter" fetchSize="500">
+    <select resultOrdered="true" id="getNinTeiChouSaJou" resultMap="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter" fetchSize="500">
         SELECT
         E."ninteichosaJisshiYMD" AS "ninteichosaJisshiYMD"
         FROM
@@ -177,7 +177,7 @@
         DESC LIMIT 1
     </select>
     
-     <select id="getFuDanuRiAiKuBen" resultMap="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter" fetchSize="500">
+     <select resultOrdered="true" id="getFuDanuRiAiKuBen" resultMap="resultMap_JukyuShikakuShomeishoHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.jukyushikakushomeishohakko.JukyuShikakuShomeishoHakkoParameter" fetchSize="500">
             SELECT
                TB2."futanWariaiKubun" AS futanWariaiKubun,
                TB2."setaiIchigouHihokenshaSu" AS setaiIchigouHihokenshaSu,

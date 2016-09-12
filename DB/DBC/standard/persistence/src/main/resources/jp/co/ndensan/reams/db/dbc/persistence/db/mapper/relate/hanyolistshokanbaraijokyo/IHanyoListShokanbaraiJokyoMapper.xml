@@ -3,7 +3,7 @@
 
 <!-- @reamsid_L DBC-3093-020 chenaoqi -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hanyolistshokanbaraijokyo.IHanyoListShokanbaraiJokyoMapper">
-    <select id="getCSVData"
+    <select resultOrdered="true" id="getCSVData"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoMybatisParameter"
             resultMap="resultMap_HanyoListShokanbaraiJokyoEntity" fetchSize="500">
         <include refid="selectHanyoListShokanbaraiJokyoEntity" />
@@ -51,15 +51,15 @@
         DbV1005."faxNo" as fax番号_05,					
         DbV1005."yukoKaishiYMD" as 有効開始日_05,					
         DbV1005."yukoShuryoYMD" as 有効終了日_05,					
-        DbV4001."jukyuShinseiJiyu" as 受給申請事由,
-        DbV4001."jukyuShinseiYMD" as 受給申請年月日,
-        DbV4001."yokaigoJotaiKubunCode" as 要介護認定状態区分コード,
-        DbV4001."ninteiYukoKikanKaishiYMD" as 認定有効期間開始日,
-        DbV4001."ninteiYukoKikanShuryoYMD" as 認定有効期間終了日,
-        DbV4001."ninteiYMD" as 受給認定日,
-        DbV4001."yokaigoJotaiKubunCode" as 旧措置者フラグ,
-        DbT4001."minashiCode" as みなし要介護区分コード,
-        DbV4001."chokkinIdoJiyuCode" as 直近異動事由コード,
+        DbT4001."受給申請事由" as 受給申請事由,
+        DbT4001."受給申請年月日" as 受給申請年月日,
+        DbT4001."要介護認定状態区分コード" as 要介護認定状態区分コード,
+        DbT4001."認定有効期間開始日" as 認定有効期間開始日,
+        DbT4001."認定有効期間終了日" as 認定有効期間終了日,
+        DbT4001."受給認定日" as 受給認定日,
+        DbT4001."旧措置フラグ" as 旧措置者フラグ,
+        DbT4001."みなし要介護区分コード" as みなし要介護区分コード,
+        DbT4001."直近異動事由コード" as 直近異動事由コード,
         DbT3034.*,
         DbT3035.*,
         DbT3036.*,
@@ -70,19 +70,19 @@
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>
         From 
-        (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.noDeleted_DbT3034ShokanShinsei" />) As DbT3034
+        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.noDeleted_DbT3034ShokanShinsei" />) As DbT3034
         LEFT OUTER JOIN 
         (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3035ShokanJutakuKaishuJizenShinseiMapper.noDeleted_DbT3035ShokanJutakuKaishuJizenShinsei" />) As DbT3035
         ON DbT3034."dbT3034ShokanShinsei_hiHokenshaNo" = DbT3035."dbT3035ShokanJutakuKaishuJizenShinsei_hiHokenshaNo"
         AND DbT3034."dbT3034ShokanShinsei_jizenServiceTeikyoYM" = DbT3035."dbT3035ShokanJutakuKaishuJizenShinsei_serviceTeikyoYM"
         AND DbT3034."dbT3034ShokanShinsei_jizenSeiriNo" = DbT3035."dbT3035ShokanJutakuKaishuJizenShinsei_seiriNo"
         LEFT OUTER JOIN 
-        (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3036ShokanHanteiKekkaMapper.noDeleted_DbT3036ShokanHanteiKekka" />) As DbT3036
+        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3036ShokanHanteiKekkaMapper.noDeleted_DbT3036ShokanHanteiKekka" />) As DbT3036
         ON DbT3034."dbT3034ShokanShinsei_hiHokenshaNo" = DbT3036."dbT3036ShokanHanteiKekka_hiHokenshaNo"
         AND DbT3034."dbT3034ShokanShinsei_serviceTeikyoYM" = DbT3036."dbT3036ShokanHanteiKekka_serviceTeikyoYM"
         AND DbT3034."dbT3034ShokanShinsei_seiriNo" = DbT3036."dbT3036ShokanHanteiKekka_seiriNo"
         LEFT OUTER JOIN 
-        (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3038ShokanKihonMapper.noDeleted_DbT3038ShokanKihon" />) As DbT3038
+        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3038ShokanKihonMapper.noDeleted_DbT3038ShokanKihon" />) As DbT3038
         ON DbT3034."dbT3034ShokanShinsei_hiHokenshaNo" = DbT3038."dbT3038ShokanKihon_hiHokenshaNo"
         AND DbT3034."dbT3034ShokanShinsei_serviceTeikyoYM" = DbT3038."dbT3038ShokanKihon_serviceTeikyoYM"
         AND DbT3034."dbT3034ShokanShinsei_seiriNo" = DbT3038."dbT3038ShokanKihon_seiriNo"
@@ -103,6 +103,8 @@
         ON DbT3034."dbT3034ShokanShinsei_hiHokenshaNo" = DbV1001."hihokenshaNo"
         LEFT OUTER JOIN rgdb."DbV1004HihokenshaShisetsuNyutaisho" As DbV1004
         ON DbV1001."shikibetsuCode" = DbV1004."shikibetsuCode"
+        AND DbV1004."nyushoYMD" <![CDATA[<=]]> (DbT3034."dbT3034ShokanShinsei_serviceTeikyoYM" || '01')
+        AND (DbT3034."dbT3034ShokanShinsei_serviceTeikyoYM" || '01') <![CDATA[<=]]> "taishoYMD"
         LEFT OUTER JOIN rgdb."DbV1005KaigoJogaiTokureiTaishoShisetsu" As DbV1005
         ON DbV1004."nyushoShisetsuShurui" = DbV1005."jigyoshaShubetsu"
         AND DbV1004."nyushoShisetsuCode" = DbV1005."jigyoshaNo"
@@ -112,15 +114,55 @@
         LEFT OUTER JOIN rgdb."DbT7062KaigoJigyoshaDaihyosha" As DbT7062
         ON DbV1004."nyushoShisetsuCode" = DbT7062."jigyoshaNo"
         AND DbT7062."yukoKaishiYMD"=(select MAX("yukoKaishiYMD") from rgdb."DbT7062KaigoJigyoshaDaihyosha" where  "jigyoshaNo"=DbV1004."nyushoShisetsuCode")
-        LEFT OUTER JOIN rgdb."DbV4001JukyushaDaicho" As DbV4001
-        ON DbV4001."hihokenshaNo" = DbV1001."hihokenshaNo"
-        LEFT OUTER JOIN rgdb."DbT4001JukyushaDaicho" As DbT4001
-        ON DbT4001."shichosonCode" = DbV4001."shichosonCode"
-        AND DbT4001."hihokenshaNo" = DbV4001."hihokenshaNo"
-        AND DbT4001."rirekiNo" = DbV4001."rirekiNo"
-        AND DbT4001."edaban" = DbV4001."edaban"
-        AND DbT4001."jukyuShinseiJiyu" = DbV4001."jukyuShinseiJiyu"
-        INNER JOIN 
+        LEFT OUTER JOIN (
+                SELECT
+                        *
+                FROM (
+                        SELECT
+                        DbT3034_all."hiHokenshaNo" as 被保険者番号,
+                        DbT3034_all."serviceTeikyoYM" as サービス提供年月,
+                        DbT3034_all."seiriNo" as 整理番号,
+                        DbT4001."jukyuShinseiJiyu" as 受給申請事由,
+                        DbT4001."jukyuShinseiYMD" as 受給申請年月日,
+                        DbT4001."yokaigoJotaiKubunCode" as 要介護認定状態区分コード,
+                        DbT4001."ninteiYukoKikanKaishiYMD" as 認定有効期間開始日,	
+                        DbT4001."ninteiYukoKikanShuryoYMD" as 認定有効期間終了日,
+                        DbT4001."ninteiYMD" as 受給認定日,
+                        DbT4001."kyuSochishaFlag" as 旧措置フラグ,
+                        DbT4001."minashiCode" as みなし要介護区分コード,
+                        DbT4001."chokkinIdoJiyuCode" as 直近異動事由コード
+                        <!-- ROW_NUMBER() OVER (PARTITION BY DbT4001."shichosonCode", DbT4001."hihokenshaNo" ORDER BY DbT4001."rirekiNo" DESC, DbT4001."edaban" DESC) As 番号 -->
+                        FROM
+                                rgdb."DbT3034ShokanShinsei" As DbT3034_all
+                        INNER JOIN
+                                rgdb."DbT4001JukyushaDaicho" As DbT4001
+                                ON DbT4001."hihokenshaNo" = DbT3034_all."hiHokenshaNo"
+                                AND DbT4001."logicalDeletedFlag" = false
+                                AND DbT4001."yukoMukoKubun" = '1'
+                                AND DbT4001."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> (DbT3034_all."serviceTeikyoYM" || '31')
+                                AND (DbT3034_all."serviceTeikyoYM" || '01') <![CDATA[<=]]> DbT4001."ninteiYukoKikanShuryoYMD"
+                                AND DbT4001."ninteiYukoKikanKaishiYMD"  = (
+                                               
+                                SELECT MAX(DbT4001_2."ninteiYukoKikanKaishiYMD") FROM rgdb."DbT3034ShokanShinsei" As DbT3034_all_2
+                                INNER JOIN
+                                rgdb."DbT4001JukyushaDaicho" As DbT4001_2
+                                ON DbT4001_2."hihokenshaNo" = DbT3034_all."hiHokenshaNo"
+                                AND DbT4001_2."hihokenshaNo" = DbT3034_all_2."hiHokenshaNo"
+                                AND DbT4001_2."logicalDeletedFlag" = false
+                                AND DbT4001_2."yukoMukoKubun" = '1'
+                                        AND DbT4001_2."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> (DbT3034_all_2."serviceTeikyoYM" || '31')
+                                        AND (DbT3034_all_2."serviceTeikyoYM" || '01') <![CDATA[<=]]> DbT4001_2."ninteiYukoKikanShuryoYMD"
+                                        )
+                                        
+                                
+                ) AS DbT4001_corresponding
+                <!-- WHERE
+                     DbT4001_corresponding.番号 = 1 -->
+        ) As DbT4001
+        ON DbT4001."被保険者番号" = DbT3034."dbT3034ShokanShinsei_hiHokenshaNo"
+        AND DbT4001."サービス提供年月" = DbT3034."dbT3034ShokanShinsei_serviceTeikyoYM"
+        AND DbT4001."整理番号" = DbT3034."dbT3034ShokanShinsei_seiriNo"
+        INNER JOIN
         rgua."UaFt200FindShikibetsuTaisho"('1','','1','DB','0','','','','','','','','','','','0','0','','','','',
         '','','0','0','','','','','','','','','','0','','1','1','1','1','1','1', '1','1','1','1', '1','','',
         '','','','','','0','0','','','0','0','0','','','','','','','','','','','','','','','','','','', '{  }')AS "ShikibetsuTaisho"
@@ -277,11 +319,11 @@
         <result property="みなし要介護区分コード" column="みなし要介護区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="直近異動事由コード" column="直近異動事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <association property="支給申請Entity" 
-                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.ResultMap_DbT3034ShokanShinseiEntity"/>
+                     resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3034ShokanShinseiMapper.ResultMap_DbT3034ShokanShinseiEntity"/>
         <association property="支給住宅Entity" 
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3035ShokanJutakuKaishuJizenShinseiMapper.ResultMap_DbT3035ShokanJutakuKaishuJizenShinseiEntity"/>
         <association property="判定結果情報Entity" 
-                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3036ShokanHanteiKekkaMapper.ResultMap_DbT3036ShokanHanteiKekkaEntity"/>
+                     resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3036ShokanHanteiKekkaMapper.ResultMap_DbT3036ShokanHanteiKekkaEntity"/>
         <association property="福祉用具Entity"
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3048ShokanFukushiYoguHanbaihiMapper.ResultMap_DbT3048ShokanFukushiYoguHanbaihiEntity"/>
         <association property="請求住宅Entity"
@@ -293,6 +335,6 @@
         <association property="宛先Entity" 
                      resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
         <collection property="請求基本List"
-                    resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3038ShokanKihonMapper.ResultMap_DbT3038ShokanKihonEntity"/>
+                    resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3038ShokanKihonMapper.ResultMap_DbT3038ShokanKihonEntity"/>
     </resultMap>  
 </mapper>

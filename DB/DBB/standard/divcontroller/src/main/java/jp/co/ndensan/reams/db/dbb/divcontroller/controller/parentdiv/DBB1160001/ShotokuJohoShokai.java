@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB1160001
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1160001.ShotokuJohoShokaiDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -39,7 +39,7 @@ public class ShotokuJohoShokai {
      * @return div
      */
     public ResponseData<ShotokuJohoShokaiDiv> onLoad(ShotokuJohoShokaiDiv div) {
-        FukaTaishoshaKey viewStateData = ViewStateHolder.get(ViewStateKey.賦課対象者, FukaTaishoshaKey.class);
+        FukaTaishoshaKey viewStateData = ViewStateHolder.get(ViewStateKeys.賦課対象者, FukaTaishoshaKey.class);
         TsuchishoNo 通知書番号 = viewStateData.get通知書番号();
         FlexibleYear 賦課年度 = viewStateData.get賦課年度();
         LasdecCode 市町村コード = viewStateData.get市町村コード();
@@ -48,7 +48,7 @@ public class ShotokuJohoShokai {
         FlexibleDate 世帯基準年月日 = FlexibleDate.getNowDate();
         FlexibleYear 所得年度 = viewStateData.get賦課年度();
         YMDHMS 所得基準日時 = YMDHMS.now();
-        div.getKaigoAtenaInfo().onLoad(識別コード);
+        div.getKaigoAtenaInfo().initialize(識別コード);
         KaigoFukaKihonSearchKey searchKey = new KaigoFukaKihonSearchKey.Builder(通知書番号, 賦課年度, 市町村コード, 識別コード).build();
         div.getKaigoFukaKihon().load(searchKey);
         div.getSetaiShotokuIchiran().initialize(識別コード, 世帯基準年月日, 所得年度, 所得基準日時);

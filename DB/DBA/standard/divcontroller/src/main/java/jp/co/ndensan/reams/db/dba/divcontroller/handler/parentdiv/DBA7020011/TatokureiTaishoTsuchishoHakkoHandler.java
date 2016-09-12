@@ -10,11 +10,12 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.tajushochitokureisyakanri.TaJushochiTokureisyaKanriMaster;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7020011.TatokureiTaishoTsuchishoHakkoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7020011.dgJushochiTokureiRireki_Row;
-import jp.co.ndensan.reams.db.dba.service.tashichosonjushochitokureisharenrakuhyo.TashichosonJushochitokureishaRenrakuhyoFinder;
+import jp.co.ndensan.reams.db.dba.service.core.tashichosonjushochitokureisharenrakuhyo.TashichosonJushochitokureishaRenrakuhyoFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokurei;
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokureiIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShisetsuType;
+import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNo;
@@ -24,7 +25,6 @@ import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaShubetsu;
 import jp.co.ndensan.reams.ur.urz.service.core.hokenja.HokenjaManagerFactory;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -49,8 +49,6 @@ public class TatokureiTaishoTsuchishoHakkoHandler {
     private final RString 役場_役所名敬称 = new RString("役場・役所名敬称");
     private final RString 担当課名 = new RString("担当課名");
     private final RString 担当課名敬称 = new RString("担当課名敬称");
-    private static final CodeShubetsu 介護他特適用理由 = new CodeShubetsu("0008");
-    private static final CodeShubetsu 介護他特解除理由 = new CodeShubetsu("0011");
 
     /**
      * コンストラクタです。
@@ -64,7 +62,7 @@ public class TatokureiTaishoTsuchishoHakkoHandler {
     /**
      * 適用情報Gridの設定。
      *
-     * 
+     *
      * @param masterList 適用情報取得
      */
     public void 適用情報Gridの設定(List<TaJushochiTokureisyaKanriMaster> masterList) {
@@ -97,7 +95,7 @@ public class TatokureiTaishoTsuchishoHakkoHandler {
         row.getNyushoDate().setValue(master.getNyushoYMD() == null ? FlexibleDate.EMPTY : master.getNyushoYMD());
         row.getTaishoDate().setValue(master.getTaishoYMD() == null ? FlexibleDate.EMPTY : master.getTaishoYMD());
         row.setShisetsuShurui(master.getNyushoShisetsuShurui() == null ? RString.EMPTY
-                : ShisetsuType.toValue(master.getNyushoShisetsuShurui()).getName());
+                : ShisetsuType.toValue(master.getNyushoShisetsuShurui()).get名称());
         row.setNyushoShisetsu(master.getNyushoShisetsuCode() == null ? RString.EMPTY : master.getNyushoShisetsuCode().value());
         row.getRenrakuhyoHakkoDate().setValue(master.getTatokuRenrakuhyoHakkoYMD() == null
                 ? FlexibleDate.EMPTY : master.getTatokuRenrakuhyoHakkoYMD());
@@ -145,10 +143,12 @@ public class TatokureiTaishoTsuchishoHakkoHandler {
 
         dgJushochiTokureiRireki_Row row = div.getTajutokuTekiyoJohoIchiran().getDgJushochiTokureiRireki().getActiveRow();
         Hokenja hokenja = 保険者情報取得(new HokenjaNo(row.getSochiHokenshaNo()));
-        div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().
-                getTxtYubinNo().setValue(hokenja.get郵便番号() == null ? YubinNo.EMPTY : hokenja.get郵便番号());
-        div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtJusho().
-                setValue(hokenja.get住所() == null ? RString.EMPTY : hokenja.get住所());
+        if (hokenja != null) {
+            div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().
+                    getTxtYubinNo().setValue(hokenja.get郵便番号() == null ? YubinNo.EMPTY : hokenja.get郵便番号());
+            div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtJusho().
+                    setValue(hokenja.get住所() == null ? RString.EMPTY : hokenja.get住所());
+        }
         div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtYakushoMei().setValue(row.getSochiHokenshaMeisho());
         div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().set枝番(row.getEdaNo());
         div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().
@@ -204,15 +204,15 @@ public class TatokureiTaishoTsuchishoHakkoHandler {
             RString 文書番号発番方法 = bushoNo.get文書番号発番方法();
             if (BunshoNoHatsubanHoho.固定.getCode().equals(文書番号発番方法)) {
                 div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo()
-                        .getTxtBunshoBango().setValue(bushoNo.edit文書番号());
+                        .getCcdBunshoBangoInput().setDecorationClass(bushoNo.edit文書番号());
                 div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getBtnJidoFuban().setDisplayNone(true);
             } else if (BunshoNoHatsubanHoho.手入力.getCode().equals(文書番号発番方法)) {
                 div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo()
-                        .getTxtBunshoBango().setValue(RString.EMPTY);
+                        .getCcdBunshoBangoInput().setDecorationClass(RString.EMPTY);
                 div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getBtnJidoFuban().setDisplayNone(true);
             } else if (BunshoNoHatsubanHoho.自動採番.getCode().equals(文書番号発番方法)) {
                 div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo()
-                        .getTxtBunshoBango().setValue(RString.EMPTY);
+                        .getCcdBunshoBangoInput().setDecorationClass(RString.EMPTY);
                 div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getBtnJidoFuban().setDisplayNone(false);
             }
         }
@@ -233,15 +233,19 @@ public class TatokureiTaishoTsuchishoHakkoHandler {
         if (適用事由コード == null || 適用事由コード.isEmpty()) {
             return RString.EMPTY;
         }
-        return CodeMaster.getCodeRyakusho(介護他特適用理由, new Code(適用事由コード)) == null
-                ? RString.EMPTY : CodeMaster.getCodeRyakusho(介護他特適用理由, new Code(適用事由コード));
+        return CodeMaster.getCodeRyakusho(DBACodeShubetsu.介護資格適用事由_他特例者.getコード(),
+                new Code(適用事由コード), new FlexibleDate(RDate.getNowDate().toDateString())) == null
+                ? RString.EMPTY : CodeMaster.getCodeRyakusho(DBACodeShubetsu.介護資格適用事由_他特例者.getコード(),
+                        new Code(適用事由コード), new FlexibleDate(RDate.getNowDate().toDateString()));
     }
 
     private RString get解除事由(RString 解除事由コード) {
         if (解除事由コード == null || 解除事由コード.isEmpty()) {
             return RString.EMPTY;
         }
-        return CodeMaster.getCodeRyakusho(介護他特解除理由, new Code(解除事由コード)) == null
-                ? RString.EMPTY : CodeMaster.getCodeRyakusho(介護他特解除理由, new Code(解除事由コード));
+        return CodeMaster.getCodeRyakusho(DBACodeShubetsu.介護資格解除事由_他特例者.getコード(),
+                new Code(解除事由コード), new FlexibleDate(RDate.getNowDate().toDateString())) == null
+                ? RString.EMPTY : CodeMaster.getCodeRyakusho(DBACodeShubetsu.介護資格解除事由_他特例者.getコード(),
+                        new Code(解除事由コード), new FlexibleDate(RDate.getNowDate().toDateString()));
     }
 }

@@ -21,7 +21,8 @@ public enum DBA1050011TransitionEventName implements IContainerEvents {
     修正("修正"),
     削除("削除"),
     詳細("詳細"),
-    賦課エラー修正完了("賦課エラー修正完了");
+    賦課エラー修正完了("賦課エラー修正完了"),
+    検索結果一覧へ("検索結果一覧へ");
 
     private final RString name;
 

@@ -4,12 +4,10 @@ import jp.co.ndensan.reams.db.dbu.business.core.saiketukekameisaijoho.Saiketukek
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0900041.SaiketukekaTorokuPanelDiv;
 import jp.co.ndensan.reams.db.dbu.service.core.saiketukekatoroku.SaiketukekaToroku;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 裁決結果登録_登録DivのHandlerクラスです。
@@ -31,46 +29,53 @@ public class SaiketukekaTorokuPanelHandler {
 
     /**
      * 裁決結果登録修正状態の初期化です。
+     *
+     * @param 識別コード 識別コード
+     * @param 被保険者番号 被保険者番号
+     * @param 審査請求届出日 審査請求届出日
+     *
+     * @return 修正前の値
      */
-    public void 修正_初期化の編集() {
+    public RString 修正_初期化の編集(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FlexibleDate 審査請求届出日) {
 
-        初期化の編集();
+        初期化の編集(識別コード, 被保険者番号, 審査請求届出日);
         活性の恢復();
-        初期画面値の保持();
-        共有子DIVの初期化();
+        RString 修正前の値 = 初期画面値の保持();
+        共有子DIVの初期化(識別コード, 被保険者番号);
+        return 修正前の値;
     }
 
     /**
      * 裁決結果登録削除状態の初期化です。
+     *
+     * @param 識別コード 識別コード
+     * @param 被保険者番号 被保険者番号
+     * @param 審査請求届出日 審査請求届出日
      */
-    public void 削除_初期化の編集() {
+    public void 削除_初期化の編集(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FlexibleDate 審査請求届出日) {
 
-        初期化の編集();
+        初期化の編集(識別コード, 被保険者番号, 審査請求届出日);
         削除状態の非活性();
-        共有子DIVの初期化();
+        共有子DIVの初期化(識別コード, 被保険者番号);
     }
 
-    private void 初期化の編集() {
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-        FlexibleDate 審査請求届出日 = ViewStateHolder.get(ViewStateKeys.審査請求届出日, FlexibleDate.class);
+    private void 初期化の編集(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FlexibleDate 審査請求届出日) {
 
         裁決結果登録明細情報の編集(識別コード, 被保険者番号, 審査請求届出日);
     }
 
-    private void 共有子DIVの初期化() {
+    private void 共有子DIVの初期化(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
 
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-
-        div.getAtenaInfoCommonChildDiv().onLoad(識別コード);
-        div.getKaigoShikakuKihonCommonChildDiv().onLoad(被保険者番号);
+        div.getAtenaInfoCommonChildDiv().initialize(識別コード);
+        div.getKaigoShikakuKihonCommonChildDiv().initialize(被保険者番号);
     }
 
     /**
      * 裁決結果登録明細情報エリアの初期画面値の保持です。
+     *
+     * @return 修正前の値
      */
-    public void 初期画面値の保持() {
+    public RString 初期画面値の保持() {
 
         RString 裁決結果 = div.getSaiketukekaMeisaiPanel().getTxtMultiLineSaiketukeka().getText();
         RString 裁決理由 = div.getSaiketukekaMeisaiPanel().getTxtMultiLineSaiketuRiyu().getText();
@@ -86,7 +91,7 @@ public class SaiketukekaTorokuPanelHandler {
         if (弁明書作成日 != null) {
             修正前の値 = 修正前の値.concat(弁明書作成日);
         }
-        ViewStateHolder.put(Dbu900041Keys.修正前の値, 修正前の値);
+        return 修正前の値;
     }
 
     private void 削除状態の非活性() {

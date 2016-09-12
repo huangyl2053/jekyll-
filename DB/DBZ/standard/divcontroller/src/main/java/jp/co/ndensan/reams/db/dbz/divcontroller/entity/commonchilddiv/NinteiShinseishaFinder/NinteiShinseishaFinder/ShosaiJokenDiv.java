@@ -6,18 +6,10 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShi
  */
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.CodeInputDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.ICodeInputDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNumRange;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
 
 /**
  * ShosaiJoken のクラスファイル
@@ -25,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
  * @reamsid_L DBE-3000-010 sunhaidi
  */
 public class ShosaiJokenDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -270,16 +262,6 @@ public class ShosaiJokenDiv extends Panel {
     @JsonIgnore
     public void  setLblYubinNo(Label lblYubinNo) {
         this.getKihonJoho().setLblYubinNo(lblYubinNo);
-    }
-
-    @JsonIgnore
-    public ButtonDialog getBtnYubinNoGuide() {
-        return this.getKihonJoho().getBtnYubinNoGuide();
-    }
-
-    @JsonIgnore
-    public void  setBtnYubinNoGuide(ButtonDialog btnYubinNoGuide) {
-        this.getKihonJoho().setBtnYubinNoGuide(btnYubinNoGuide);
     }
 
     @JsonIgnore
@@ -663,12 +645,12 @@ public class ShosaiJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxtCheckDay() {
+    public TextBoxDate getTxtCheckDay() {
         return this.getKaigoNinteiShinsakaiJoho().getTxtCheckDay();
     }
 
     @JsonIgnore
-    public void  setTxtCheckDay(TextBox txtCheckDay) {
+    public void  setTxtCheckDay(TextBoxDate txtCheckDay) {
         this.getKaigoNinteiShinsakaiJoho().setTxtCheckDay(txtCheckDay);
     }
 
@@ -803,16 +785,6 @@ public class ShosaiJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnKaisaiNumberStart() {
-        return this.getKaigoNinteiShinsakaiJoho().getBtnKaisaiNumberStart();
-    }
-
-    @JsonIgnore
-    public void  setBtnKaisaiNumberStart(Button btnKaisaiNumberStart) {
-        this.getKaigoNinteiShinsakaiJoho().setBtnKaisaiNumberStart(btnKaisaiNumberStart);
-    }
-
-    @JsonIgnore
     public TextBox getTxtKaisaiNumberStart() {
         return this.getKaigoNinteiShinsakaiJoho().getTxtKaisaiNumberStart();
     }
@@ -830,16 +802,6 @@ public class ShosaiJokenDiv extends Panel {
     @JsonIgnore
     public void  setLblKaisaiNoFor(Label lblKaisaiNoFor) {
         this.getKaigoNinteiShinsakaiJoho().setLblKaisaiNoFor(lblKaisaiNoFor);
-    }
-
-    @JsonIgnore
-    public Button getBtnKaisaiNumberEnd() {
-        return this.getKaigoNinteiShinsakaiJoho().getBtnKaisaiNumberEnd();
-    }
-
-    @JsonIgnore
-    public void  setBtnKaisaiNumberEnd(Button btnKaisaiNumberEnd) {
-        this.getKaigoNinteiShinsakaiJoho().setBtnKaisaiNumberEnd(btnKaisaiNumberEnd);
     }
 
     @JsonIgnore
@@ -963,33 +925,8 @@ public class ShosaiJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxCode getTxtGeninShikkanCode() {
-        return this.getSonotaJoho().getTxtGeninShikkanCode();
-    }
-
-    @JsonIgnore
-    public void  setTxtGeninShikkanCode(TextBoxCode txtGeninShikkanCode) {
-        this.getSonotaJoho().setTxtGeninShikkanCode(txtGeninShikkanCode);
-    }
-
-    @JsonIgnore
-    public ButtonDialog getBtnGeninShikkanGuide() {
-        return this.getSonotaJoho().getBtnGeninShikkanGuide();
-    }
-
-    @JsonIgnore
-    public void  setBtnGeninShikkanGuide(ButtonDialog btnGeninShikkanGuide) {
-        this.getSonotaJoho().setBtnGeninShikkanGuide(btnGeninShikkanGuide);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtGeninShikkanName() {
-        return this.getSonotaJoho().getTxtGeninShikkanName();
-    }
-
-    @JsonIgnore
-    public void  setTxtGeninShikkanName(TextBox txtGeninShikkanName) {
-        this.getSonotaJoho().setTxtGeninShikkanName(txtGeninShikkanName);
+    public ICodeInputDiv getCcdGeninShikkan() {
+        return this.getSonotaJoho().getCcdGeninShikkan();
     }
 
     @JsonIgnore

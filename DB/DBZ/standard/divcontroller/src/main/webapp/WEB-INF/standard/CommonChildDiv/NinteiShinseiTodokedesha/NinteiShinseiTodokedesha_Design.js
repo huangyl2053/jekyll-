@@ -20,6 +20,10 @@ var DBZ;
                 return "onClick_btnZenkaiFukusha";
             };
 
+            Events.onClick_lostFocus = function () {
+                return "onClick_lostFocus";
+            };
+
             Events.onChangeChkKannaiKangai = function () {
                 return "onChangeChkKannaiKangai";
             };
@@ -88,7 +92,7 @@ var DBZ;
             };
 
             Controls.prototype.txtHonninKankeisei = function () {
-                return new UZA.TextBoxCode(this.convFiledName("txtHonninKankeisei"));
+                return new UZA.TextBox(this.convFiledName("txtHonninKankeisei"));
             };
 
             Controls.prototype.radKannaiKangai = function () {

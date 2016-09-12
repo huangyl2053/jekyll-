@@ -49,7 +49,7 @@
         <result property="chosachikugroupname" column="dbT5225ChosaChikuGroup_chosachikugroupname" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="yusenNo" column="dbT5225ChosaChikuGroup_yusenNo" />
     </resultMap>
-    <select id="getEntity" resultMap="ResultMap_DbT5225ChosaChikuGroupEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5225ChosaChikuGroupEntity">
         <!--    SELECT
         <include refid="allColumns_DbT5225ChosaChikuGroup" />
         FROM

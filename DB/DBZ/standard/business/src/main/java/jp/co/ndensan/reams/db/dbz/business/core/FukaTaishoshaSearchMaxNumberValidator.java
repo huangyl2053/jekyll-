@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core;
 
-import jp.co.ndensan.reams.db.dbz.business.validation.FukaTaishoshaSearchValidationMessage;
+import jp.co.ndensan.reams.db.dbz.business.core.validation.FukaTaishoshaSearchValidationMessage;
 import jp.co.ndensan.reams.uz.uza.core.validation.IValidatable;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
@@ -37,6 +37,8 @@ public class FukaTaishoshaSearchMaxNumberValidator implements IValidatable {
         IValidationMessages validationMessages = ValidationMessagesFactory.createInstance();
 
         if (null != 最大表示件数入力値.getValue() && 最大表示件数入力値.getValue().intValue() > 最大表示件数) {
+            validationMessages.add(FukaTaishoshaSearchValidationMessage.最大取得件数上限超過);
+        } else if (null != 最大表示件数入力値.getValue() && 最大表示件数入力値.getValue().intValue() == 0) {
             validationMessages.add(FukaTaishoshaSearchValidationMessage.最大取得件数上限超過);
         }
 

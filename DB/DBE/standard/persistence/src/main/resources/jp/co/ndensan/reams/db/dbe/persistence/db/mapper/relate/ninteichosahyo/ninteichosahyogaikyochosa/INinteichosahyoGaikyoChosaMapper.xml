@@ -5,11 +5,11 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosahyo.ninteichosahyogaikyochosa.INinteichosahyoGaikyoChosaMapper">
 
-    <select id="select認定調査票_概況調査ByKey" resultMap="resultMap_NinteichosahyoGaikyoChosaEntity" fetchSize="500">
+    <select resultOrdered="true" id="select認定調査票_概況調査ByKey" resultMap="resultMap_NinteichosahyoGaikyoChosaEntity" fetchSize="500">
         <include refid="selectNinteichosahyoGaikyoChosaEntity" />
     </select>
 
-    <select id="select認定調査票_概況調査リストBy主キー1" resultMap="resultMap_NinteichosahyoGaikyoChosaEntity" fetchSize="500">
+    <select resultOrdered="true" id="select認定調査票_概況調査リストBy主キー1" resultMap="resultMap_NinteichosahyoGaikyoChosaEntity" fetchSize="500">
         <include refid="selectNinteichosahyoGaikyoChosaEntity" />
     </select>
 

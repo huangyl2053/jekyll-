@@ -61,6 +61,7 @@ public class DbTKeisangoJohoTempTableEntity extends DbTableEntityBase<DbTKeisang
     @TempTableColumnOrder(13)
     private RString sakuseiShoriName;
     @TempTableColumnOrder(14)
+    @PrimaryKey
     private int fukaRirekiNo;
     @TempTableColumnOrder(15)
     private HihokenshaNo hihokenshaNo;

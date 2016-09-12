@@ -8,64 +8,53 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-9999-023 liangbc
  */
-public enum ConfigKeysKyodoshoriJukyushaJohoIchiran {
+public enum ConfigKeysKyodoshoriJukyushaJohoIchiran implements IConfigKeysKokuhorenTorikomi {
 
     /**
      * コード:無し 名称:国保連取込_共同処理用受給者情報一覧 略称:定義なし
      */
-    国保連取込_共同処理用受給者情報一覧("無し", "国保連取込_共同処理用受給者情報一覧"),
+    国保連取込_共同処理用受給者情報一覧("国保連取込_共同処理用受給者情報一覧"),
     /**
      * コード:無し 名称:国保連取込_共同処理用受給者情報一覧_バッチID 略称:定義なし
      */
-    国保連取込_共同処理用受給者情報一覧_バッチID("無し", "国保連取込_共同処理用受給者情報一覧_バッチID"),
+    国保連取込_共同処理用受給者情報一覧_バッチID("国保連取込_共同処理用受給者情報一覧_バッチID"),
     /**
      * コード:無し 名称:国保連取込_共同処理用受給者情報一覧_一覧表示順 略称:定義なし
      */
-    国保連取込_共同処理用受給者情報一覧_一覧表示順("無し", "国保連取込_共同処理用受給者情報一覧_一覧表示順"),
+    国保連取込_共同処理用受給者情報一覧_一覧表示順("国保連取込_共同処理用受給者情報一覧_一覧表示順"),
     /**
      * コード:無し 名称:国保連取込_共同処理用受給者情報一覧_交換情報識別番号 略称:定義なし
      */
-    国保連取込_共同処理用受給者情報一覧_交換情報識別番号("無し", "国保連取込_共同処理用受給者情報一覧_交換情報識別番号"),
+    国保連取込_共同処理用受給者情報一覧_交換情報識別番号("国保連取込_共同処理用受給者情報一覧_交換情報識別番号"),
     /**
      * コード:無し 名称:国保連取込_共同処理用受給者情報一覧_再処理不可区分 略称:定義なし
      */
-    国保連取込_共同処理用受給者情報一覧_再処理不可区分("無し", "国保連取込_共同処理用受給者情報一覧_再処理不可区分"),
+    国保連取込_共同処理用受給者情報一覧_再処理不可区分("国保連取込_共同処理用受給者情報一覧_再処理不可区分"),
     /**
      * コード:無し 名称:国保連取込_共同処理用受給者情報一覧_処理サイクル区分 略称:定義なし
      */
-    国保連取込_共同処理用受給者情報一覧_処理サイクル区分("無し", "国保連取込_共同処理用受給者情報一覧_処理サイクル区分"),
+    国保連取込_共同処理用受給者情報一覧_処理サイクル区分("国保連取込_共同処理用受給者情報一覧_処理サイクル区分"),
     /**
      * コード:無し 名称:国保連取込_共同処理用受給者情報一覧_処理月 略称:定義なし
      */
-    国保連取込_共同処理用受給者情報一覧_処理月("無し", "国保連取込_共同処理用受給者情報一覧_処理月"),
+    国保連取込_共同処理用受給者情報一覧_処理月("国保連取込_共同処理用受給者情報一覧_処理月"),
     /**
      * コード:無し 名称:国保連取込_共同処理用受給者情報一覧_処理名称 略称:定義なし
      */
-    国保連取込_共同処理用受給者情報一覧_処理名称("無し", "国保連取込_共同処理用受給者情報一覧_処理名称"),
+    国保連取込_共同処理用受給者情報一覧_処理名称("国保連取込_共同処理用受給者情報一覧_処理名称"),
     /**
      * コード:無し 名称:国保連取込_共同処理用受給者情報一覧_排他チェック有り区分 略称:定義なし
      */
-    国保連取込_共同処理用受給者情報一覧_排他チェック有り区分("無し", "国保連取込_共同処理用受給者情報一覧_排他チェック有り区分"),
+    国保連取込_共同処理用受給者情報一覧_排他チェック有り区分("国保連取込_共同処理用受給者情報一覧_排他チェック有り区分"),
     /**
      * コード:無し 名称:国保連取込_共同処理用受給者情報一覧_有効区分 略称:定義なし
      */
-    国保連取込_共同処理用受給者情報一覧_有効区分("無し", "国保連取込_共同処理用受給者情報一覧_有効区分");
+    国保連取込_共同処理用受給者情報一覧_有効区分("国保連取込_共同処理用受給者情報一覧_有効区分");
 
-    private final RString code;
     private final RString fullName;
 
-    private ConfigKeysKyodoshoriJukyushaJohoIchiran(String code, String fullname) {
-        this.code = new RString(code);
+    private ConfigKeysKyodoshoriJukyushaJohoIchiran(String fullname) {
         this.fullName = new RString(fullname);
-    }
-
-    /**
-     * 共同処理用受給者情報一覧コンフィグキーのコードを返します。
-     *
-     * @return 共同処理用受給者情報一覧コンフィグキーのコード
-     */
-    public RString getコード() {
-        return code;
     }
 
     /**
@@ -77,16 +66,70 @@ public enum ConfigKeysKyodoshoriJukyushaJohoIchiran {
         return fullName;
     }
 
+    @Override
+    public Enum getバッチID() {
+        return 国保連取込_共同処理用受給者情報一覧_バッチID;
+    }
+
+    @Override
+    public Enum get一覧表示順() {
+        return 国保連取込_共同処理用受給者情報一覧_一覧表示順;
+    }
+
+    @Override
+    public Enum get交換情報識別番号() {
+        return 国保連取込_共同処理用受給者情報一覧_交換情報識別番号;
+    }
+
+    @Override
+    public Enum get再処理不可区分() {
+        return 国保連取込_共同処理用受給者情報一覧_再処理不可区分;
+    }
+
+    @Override
+    public Enum get処理サイクル区分() {
+        return 国保連取込_共同処理用受給者情報一覧_処理サイクル区分;
+    }
+
+    @Override
+    public Enum get処理月() {
+        return 国保連取込_共同処理用受給者情報一覧_処理月;
+    }
+
+    @Override
+    public Enum get処理名称() {
+        return 国保連取込_共同処理用受給者情報一覧_処理名称;
+    }
+
+    @Override
+    public Enum get排他チェック有り区分() {
+        return 国保連取込_共同処理用受給者情報一覧_排他チェック有り区分;
+    }
+
+    @Override
+    public Enum get有効区分() {
+        return 国保連取込_共同処理用受給者情報一覧_有効区分;
+    }
+
     /**
-     * 共同処理用受給者情報一覧コンフィグキーのコードと一致する内容を探します。
+     * 国保連取込_共同処理用受給者情報一覧
      *
-     * @param code 共同処理用受給者情報一覧コンフィグキーのコード
+     * @return 国保連取込_共同処理用受給者情報一覧
+     */
+    public static IConfigKeysKokuhorenTorikomi getEnum() {
+        return 国保連取込_共同処理用受給者情報一覧;
+    }
+
+    /**
+     * 共同処理用受給者情報一覧コンフィグキーの名称と一致する内容を探します。
+     *
+     * @param fullname 共同処理用受給者情報一覧コンフィグキーの名称
      * @return {@code code} に対応する共同処理用受給者情報一覧コンフィグキー
      */
-    public static ConfigKeysKyodoshoriJukyushaJohoIchiran toValue(RString code) {
+    public static ConfigKeysKyodoshoriJukyushaJohoIchiran toValue(RString fullname) {
 
         for (ConfigKeysKyodoshoriJukyushaJohoIchiran value : ConfigKeysKyodoshoriJukyushaJohoIchiran.values()) {
-            if (value.code.equals(code)) {
+            if (value.get名称().equals(fullname)) {
                 return value;
             }
         }

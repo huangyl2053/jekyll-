@@ -13,7 +13,7 @@
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0220011",
-     "toLayoutTitle": "対象者検索",
+     "toLayoutTitle": "受給者異動連絡票変更登録",
      "toState": "対象者検索"
     },
     {
@@ -21,9 +21,9 @@
      "type": "ordinal",
      "layoutSubGyomuCode": "DBC",
      "layoutName": "DBC0220011",
-     "layoutTitle": "対象者検索",
+     "layoutTitle": "受給者異動連絡票変更登録",
      "eventName": "連絡票変更",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0220013",
@@ -36,12 +36,12 @@
      "layoutSubGyomuCode": "DBC",
      "layoutName": "DBC0220013",
      "layoutTitle": "受給者異動･訂正連絡票作成",
-     "eventName": "対象者検索へ",
-     "destroy": false,
+     "eventName": "検索結果一覧",
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0220011",
-     "toLayoutTitle": "対象者検索",
+     "toLayoutTitle": "受給者異動連絡票変更登録",
      "toState": "対象者一覧"
     },
     {
@@ -49,7 +49,7 @@
      "type": "end",
      "layoutSubGyomuCode": "DBC",
      "layoutName": "DBC0220011",
-     "layoutTitle": "対象者検索",
+     "layoutTitle": "受給者異動連絡票変更登録",
      "eventName": "完了",
      "destroy": false,
      "condition": ""
@@ -59,8 +59,8 @@
      "type": "ordinal",
      "layoutSubGyomuCode": "DBC",
      "layoutName": "DBC0220011",
-     "layoutTitle": "対象者検索",
-     "eventName": "該当者検索へ",
+     "layoutTitle": "受給者異動連絡票変更登録",
+     "eventName": "該当者検索",
      "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBZ",
@@ -79,7 +79,21 @@
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0220011",
-     "toLayoutTitle": "対象者検索",
+     "toLayoutTitle": "受給者異動連絡票変更登録",
+     "toState": "対象者検索"
+    },
+    {
+     "id": "7",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0220013",
+     "layoutTitle": "受給者異動･訂正連絡票作成",
+     "eventName": "再検索",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0220011",
+     "toLayoutTitle": "受給者異動連絡票変更登録",
      "toState": "対象者検索"
     }
    ]

@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA1020011;
 
 import jp.co.ndensan.reams.db.dba.business.core.nenreitotatsushikakuido.NenreitotatsuJoken;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.dbamn71001.Dbamn71001BatchFlowParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.nenreitotatsushikakuido.NenreitotatsuShikakuIdoBatchFlowParameter;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1020011.NenReiTotatsuSearchConditionDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1020011.NenReiTotatsuSearchConditionHandler;
 import jp.co.ndensan.reams.db.dba.service.core.nenreitotatsushikakuido.NenreitotatsuShikakuIdo;
@@ -32,7 +32,7 @@ public class NenReiTotatsuSearchCondition {
      * @return ResponseData
      */
     public ResponseData<NenReiTotatsuSearchConditionDiv> onLoad(NenReiTotatsuSearchConditionDiv div) {
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("BatchRegister"), false);
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("BatchRegister"), true);
         createHandler(div).load(new NenreitotatsuJoken(new NenreitotatsuShikakuIdo().getNenreitotatsuJoken()));
         return createResponse(div);
     }
@@ -60,11 +60,6 @@ public class NenReiTotatsuSearchCondition {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
-        }
         return createResponse(div);
     }
 
@@ -74,9 +69,9 @@ public class NenReiTotatsuSearchCondition {
      * @param div NenReiTotatsuSearchCondition のクラスファイル。
      * @return ResponseData
      */
-    public ResponseData<Dbamn71001BatchFlowParameter> batchRegister(NenReiTotatsuSearchConditionDiv div) {
-        ResponseData<Dbamn71001BatchFlowParameter> response = new ResponseData<>();
-        Dbamn71001BatchFlowParameter param = new NenreitotatsuShikakuIdo()
+    public ResponseData<NenreitotatsuShikakuIdoBatchFlowParameter> batchRegister(NenReiTotatsuSearchConditionDiv div) {
+        ResponseData<NenreitotatsuShikakuIdoBatchFlowParameter> response = new ResponseData<>();
+        NenreitotatsuShikakuIdoBatchFlowParameter param = new NenreitotatsuShikakuIdo()
                 .getNenreitotatsuJokenBatchParameter(div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanFrom().getValue(),
                         div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo().getValue());
         response.data = param;

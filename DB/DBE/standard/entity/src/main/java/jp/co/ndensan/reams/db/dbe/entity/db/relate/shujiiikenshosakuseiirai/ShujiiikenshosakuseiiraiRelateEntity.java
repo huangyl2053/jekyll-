@@ -48,6 +48,7 @@ public class ShujiiikenshosakuseiiraiRelateEntity {
     private RString iryoKikanMeisho;
     private RString iryoKikanJusho;
     private TelNo iryoKikanTelNo;
+    private RString iryoKikanFaxNo;
     private AtenaMeisho shujiiName;
     private FlexibleDate ikenshoSakuseiIraiYMD;
     private FlexibleDate iraishoShutsuryokuYMD;
@@ -61,4 +62,6 @@ public class ShujiiikenshosakuseiiraiRelateEntity {
     private int rirekiNo;
     private int preRirekiNo;
     private boolean shisetsuNyushoFlag;
+    private YubinNo iryoKikanYubinNo;
+    private RString daihyoshaName;
 }

@@ -45,7 +45,7 @@
         <result property="lastUpdateReamsLoginId" column="dbT7025KoikiNoHatsuban_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="no" column="dbT7025KoikiNoHatsuban_no" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-<select id="getEntity" resultMap="ResultMap_DbT7025KoikiNoHatsubanEntity">
+<select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT7025KoikiNoHatsubanEntity">
     SELECT
     <include refid="allColumns_DbT7025KoikiNoHatsuban"/>
     FROM

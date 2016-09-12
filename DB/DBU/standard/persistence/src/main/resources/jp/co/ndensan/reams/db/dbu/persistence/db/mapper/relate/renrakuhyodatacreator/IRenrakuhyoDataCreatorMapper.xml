@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 介護保険連絡票作成 用XMLです。 -->
+<!-- @reamsid_L DBA-1290-020 linghuhang -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.renrakuhyodatacreator.IRenrakuhyoDataCreatorMapper">
+    <select resultOrdered="true" id="get利用者負担額" resultType="Decimal" 
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.renrakuhyodatacreator.FutangakuGengakuMybatisParameter" fetchSize="500" >
+            SELECT
+              dbt3033."hokenRiyoshaFutangaku" 
+            FROM
+              rgdb."DbT3017KyufujissekiKihon" AS dbt3017 
+              INNER JOIN rgdb."DbT3033KyufujissekiShukei" AS dbt3033 
+                ON dbt3017."hiHokenshaNo" = dbt3033."hiHokenshaNo" 
+                AND dbt3017."serviceTeikyoYM" = dbt3033."serviceTeikyoYM" 
+            WHERE
+              dbt3017."hiHokenshaNo" = #{hokenshaNo}
+              AND dbt3017."serviceTeikyoYM" = #{serviceTeikyoYM}
+    </select>
+</mapper>

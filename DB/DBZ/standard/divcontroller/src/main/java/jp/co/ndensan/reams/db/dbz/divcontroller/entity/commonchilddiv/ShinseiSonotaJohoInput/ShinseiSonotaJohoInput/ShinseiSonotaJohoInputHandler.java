@@ -9,8 +9,19 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.Datakubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.SakujoJiyuCode;
-// TODO n8187久保田 dbxのJukyushaDaichoManagerに置換すること。
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinseiSonotaJohoInput.ShinseiSonotaJohoInput.ShinseiSonotaJohoInputDiv.ShoriType.IchibuSoshitsuMode;
+import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinseiSonotaJohoInput.ShinseiSonotaJohoInput.ShinseiSonotaJohoInputDiv.ShoriType.JukyuShikakushashoMode;
+import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinseiSonotaJohoInput.ShinseiSonotaJohoInput.ShinseiSonotaJohoInputDiv.ShoriType.KyakkaMode;
+import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinseiSonotaJohoInput.ShinseiSonotaJohoInput.ShinseiSonotaJohoInputDiv.ShoriType.NinteiMode;
+import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinseiSonotaJohoInput.ShinseiSonotaJohoInput.ShinseiSonotaJohoInputDiv.ShoriType.ShokaiMode;
+import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinseiSonotaJohoInput.ShinseiSonotaJohoInput.ShinseiSonotaJohoInputDiv.ShoriType.ShokkenKisaiMode;
+import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinseiSonotaJohoInput.ShinseiSonotaJohoInput.ShinseiSonotaJohoInputDiv.ShoriType.TokushuRirekiShuseiMode;
+import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinseiSonotaJohoInput.ShinseiSonotaJohoInput.ShinseiSonotaJohoInputDiv.ShoriType.TokushuSakujyoMode;
+import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinseiSonotaJohoInput.ShinseiSonotaJohoInput.ShinseiSonotaJohoInputDiv.ShoriType.TokushuShuseiMode;
+import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinseiSonotaJohoInput.ShinseiSonotaJohoInput.ShinseiSonotaJohoInputDiv.ShoriType.TokushuTsuikaMode;
+import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinseiSonotaJohoInput.ShinseiSonotaJohoInput.ShinseiSonotaJohoInputDiv.ShoriType.TorikeshiMode;
+import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShinseiSonotaJohoInput.ShinseiSonotaJohoInput.ShinseiSonotaJohoInputDiv.ShoriType.ZenbuSoshitsuMode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -18,16 +29,16 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 /**
  * 共有子Div「申請その他情報」の実装クラスです。
  *
- * @author n8235 船山洋介
+ * @reamsid_L DBZ-1300-120 houtianpeng
  */
 public class ShinseiSonotaJohoInputHandler {
 
     private final ShinseiSonotaJohoInputDiv div;
-    private final RString TSUJO_IDOJIYU_KEY = new RString("0");
-    private final RString TORIKESHI_IDOJIYU_KEY = new RString("1");
-    private final RString SHUTOKU_IDOJIYU_KEY = new RString("2");
-    private final RString KYAKKA_IDOJIYU_KEY = new RString("3");
-    private final RString SHINSEITORIKESHI_IDOJIYU_KEY = new RString("4");
+    private final RString 通常 = new RString("00");
+    private final RString 職権取消 = new RString("1");
+    private final RString 取得事由 = new RString("2");
+    private final RString 却下事由 = new RString("3");
+    private final RString 申請取消事由 = new RString("4");
 
     /**
      * コンストラクタです。
@@ -42,46 +53,17 @@ public class ShinseiSonotaJohoInputHandler {
      * 初期化を行います。
      */
     public void initialize() {
-        hasSetMode();
-        setInitialData();
+        clear();
+        移動事由ddlの設定();
+        div.getDdlSakujoJiyu().setDataSource(get削除事由ddl());
     }
 
-    private void setInitialData() {
-
-        if (div.getHdnDatabaseSubGyomuCode().equals(SubGyomuCode.DBE認定支援.value())) {
-            return;
-        }
-
-//        JukyushaDaichoManager jukyushaDaichoManager = new JukyushaDaichoManager();
-//        Optional<JukyushaDaicho> 直近受給者台帳 = jukyushaDaichoManager.get受給者台帳By申請書管理番号(new ShinseishoKanriNo(div.getHdnShinseishoKanriNo()));
-//        if (直近受給者台帳.isPresent()) {
-//            setChokkinJukyushaJoho(直近受給者台帳);
-//        }
-    }
-
-//    private void setChokkinJukyushaJoho(Optional<JukyushaDaicho> 直近受給者台帳) {
-//        div.getDdlIdoJiyu().setSelectedKey(直近受給者台帳.get().getデータ区分().value());
-//
-//        if (div.getMode_ShoriType().equals(ShinseiSonotaJohoInputDiv.ShoriType.TokushuSakujoMode)) {
-//            div.getDdlSakujoJiyu().setSelectedKey(直近受給者台帳.get().get削除事由コード().value());
-//        }
-//
-//        div.getTxtRiyu().setValue(直近受給者台帳.get().get異動理由());
-//        div.getTxtSoshitsuDay().setValue(直近受給者台帳.get().get喪失年月日());
-//        div.getTxtTorisageDay().setValue(直近受給者台帳.get().get認定取消通知書発行年月日());
-//        div.getTxtToshoNinteiKikanFrom().setValue(直近受給者台帳.get().get当初認定有効開始年月日());
-//        div.getTxtToshoNinteiKikanTo().setValue(直近受給者台帳.get().get当初認定有効終了年月日());
-//        div.getTxtJukyuShikakuHakkoDay1().setValue(直近受給者台帳.get().get受給資格証明書発行年月日１());
-//        div.getTxtJukyuShikakuHakkoDay2().setValue(直近受給者台帳.get().get受給資格証明書発行年月日２());
-//    }
     /**
      * 入力値をクリアします。
      */
     public void clear() {
         div.getDdlIdoJiyu().setSelectedKey(DropDownList.BLANKLINE_KEY);
-        if (div.getMode_ShoriType().equals(ShinseiSonotaJohoInputDiv.ShoriType.TokushuSakujoMode)) {
-            div.getDdlSakujoJiyu().setSelectedKey(DropDownList.BLANKLINE_KEY);
-        }
+        div.getDdlSakujoJiyu().setSelectedKey(DropDownList.BLANKLINE_KEY);
         div.getTxtRiyu().clearValue();
         div.getTxtSoshitsuDay().clearValue();
         div.getTxtTorisageDay().clearValue();
@@ -91,68 +73,193 @@ public class ShinseiSonotaJohoInputHandler {
         div.getTxtJukyuShikakuHakkoDay2().clearValue();
     }
 
-    private void hasSetMode() {
+    /**
+     * 異動事由の設定。
+     *
+     * @param key RString
+     */
+    public void setDdlIdoJiyu(RString key) {
+
+        div.getDdlIdoJiyu().setSelectedKey(key);
+    }
+
+    /**
+     * 削除事由の設定。
+     *
+     * @param key RString
+     */
+    public void setDdlSakujoJiyu(RString key) {
+
+        div.getDdlSakujoJiyu().setSelectedKey(key);
+    }
+
+    /**
+     * 理由の設定。
+     *
+     * @param value RString
+     */
+    public void setTxtRiyu(RString value) {
+
+        div.getTxtRiyu().setValue(value);
+    }
+
+    /**
+     * 喪失日の設定。
+     *
+     * @param day FlexibleDate
+     */
+    public void setTxtSoshitsuDay(FlexibleDate day) {
+
+        div.getTxtSoshitsuDay().setValue(day);
+    }
+
+    /**
+     * 取下日の設定。
+     *
+     * @param day FlexibleDate
+     */
+    public void setTxtTorisageDay(FlexibleDate day) {
+
+        div.getTxtTorisageDay().setValue(day);
+    }
+
+    /**
+     * 当初認定期間の設定。
+     *
+     * @param day FlexibleDate
+     */
+    public void setTxtToshoNinteiKikanFrom(FlexibleDate day) {
+
+        div.getTxtToshoNinteiKikanFrom().setValue(day);
+    }
+
+    /**
+     * 当初認定期間の設定。
+     *
+     * @param day FlexibleDate
+     */
+    public void setTxtToshoNinteiKikanTo(FlexibleDate day) {
+
+        div.getTxtToshoNinteiKikanTo().setValue(day);
+    }
+
+    /**
+     * 発行日１の設定。
+     *
+     * @param day FlexibleDate
+     */
+    public void setTxtJukyuShikakuHakkoDay1(FlexibleDate day) {
+
+        div.getTxtJukyuShikakuHakkoDay1().setValue(day);
+    }
+
+    /**
+     * 発行日２の設定。
+     *
+     * @param day FlexibleDate
+     */
+    public void setTxtJukyuShikakuHakkoDay2(FlexibleDate day) {
+
+        div.getTxtJukyuShikakuHakkoDay2().setValue(day);
+    }
+
+    private void 移動事由ddlの設定() {
+
         switch (div.getMode_ShoriType()) {
+            case ZenbuSoshitsuMode:
+            case IchibuSoshitsuMode:
+                div.getDdlIdoJiyu().setDataSource(get移動事由ddl_職権取消());
+                break;
             case TokushuTsuikaMode:
             case TokushuShuseiMode:
             case ShokkenKisaiMode:
-                div.getDdlIdoJiyu().setDataSource(getDataKubunByStartWith(SHUTOKU_IDOJIYU_KEY));
+                div.getDdlIdoJiyu().setDataSource(get移動事由ddl_取得事由());
                 break;
-
-            case NinteiMode:
-                div.getDdlIdoJiyu().setDataSource(getDataKubunByStartWith(TSUJO_IDOJIYU_KEY));
-                break;
-
             case KyakkaMode:
-                div.getDdlIdoJiyu().setDataSource(getDataKubunByStartWith(KYAKKA_IDOJIYU_KEY));
+                div.getDdlIdoJiyu().setDataSource(get移動事由ddl_却下事由());
                 break;
-
-            case TorisageMode:
-                div.getDdlIdoJiyu().setDataSource(getDataKubunByStartWith(SHINSEITORIKESHI_IDOJIYU_KEY));
+            case TorikeshiMode:
+                div.getDdlIdoJiyu().setDataSource(get移動事由ddl_申請取消事由());
                 break;
-
-            case RirekTsuikaKyakka:
-            case SoshitsuMode:
-                div.getDdlIdoJiyu().setDataSource(getDataKubunByStartWith(TORIKESHI_IDOJIYU_KEY));
-                break;
-
-            case TokushuSakujoMode:
-                div.getDdlSakujoJiyu().setDataSource(getSakujoJiyuDataSource());
-                div.getDdlIdoJiyu().setDataSource(getDataKubun());
-                break;
-            default:
-
             case TokushuRirekiShuseiMode:
             case JukyuShikakushashoMode:
             case ShokaiMode:
-                div.getDdlIdoJiyu().setDataSource(getDataKubun());
+            case TokushuSakujyoMode:
+                div.getDdlIdoJiyu().setDataSource(get移動事由ddl());
+                break;
+            case NinteiMode:
+                div.getDdlIdoJiyu().setDataSource(get移動事由ddl_通常());
+                break;
+            default:
                 break;
         }
-
     }
 
-    private List<KeyValueDataSource> getDataKubun() {
+    private List<KeyValueDataSource> get移動事由ddl_通常() {
+        List<KeyValueDataSource> dataSource = new ArrayList<>();
+        for (Datakubun target : Datakubun.values()) {
+            if (target.getコード().equals(通常)) {
+                KeyValueDataSource keyValueData = new KeyValueDataSource(target.getコード(), target.get名称());
+                dataSource.add(keyValueData);
+            }
+        }
+        return dataSource;
+    }
+
+    private List<KeyValueDataSource> get移動事由ddl_職権取消() {
+        List<KeyValueDataSource> dataSource = new ArrayList<>();
+        for (Datakubun target : Datakubun.values()) {
+            if (target.getコード().startsWith(職権取消)) {
+                KeyValueDataSource keyValueData = new KeyValueDataSource(target.getコード(), target.get名称());
+                dataSource.add(keyValueData);
+            }
+        }
+        return dataSource;
+    }
+
+    private List<KeyValueDataSource> get移動事由ddl_取得事由() {
+        List<KeyValueDataSource> dataSource = new ArrayList<>();
+        for (Datakubun target : Datakubun.values()) {
+            if (target.getコード().startsWith(取得事由)) {
+                KeyValueDataSource keyValueData = new KeyValueDataSource(target.getコード(), target.get名称());
+                dataSource.add(keyValueData);
+            }
+        }
+        return dataSource;
+    }
+
+    private List<KeyValueDataSource> get移動事由ddl_却下事由() {
+        List<KeyValueDataSource> dataSource = new ArrayList<>();
+        for (Datakubun target : Datakubun.values()) {
+            if (target.getコード().startsWith(却下事由)) {
+                KeyValueDataSource keyValueData = new KeyValueDataSource(target.getコード(), target.get名称());
+                dataSource.add(keyValueData);
+            }
+        }
+        return dataSource;
+    }
+
+    private List<KeyValueDataSource> get移動事由ddl_申請取消事由() {
+        List<KeyValueDataSource> dataSource = new ArrayList<>();
+        for (Datakubun target : Datakubun.values()) {
+            if (target.getコード().startsWith(申請取消事由)) {
+                KeyValueDataSource keyValueData = new KeyValueDataSource(target.getコード(), target.get名称());
+                dataSource.add(keyValueData);
+            }
+        }
+        return dataSource;
+    }
+
+    private List<KeyValueDataSource> get移動事由ddl() {
         List<KeyValueDataSource> dataSource = new ArrayList<>();
         for (Datakubun target : Datakubun.values()) {
             KeyValueDataSource keyValueData = new KeyValueDataSource(target.getコード(), target.get名称());
             dataSource.add(keyValueData);
         }
         return dataSource;
-
     }
 
-    private List<KeyValueDataSource> getDataKubunByStartWith(RString startWith) {
-        List<KeyValueDataSource> dataSource = new ArrayList<>();
-        for (Datakubun target : Datakubun.values()) {
-            if (target.getコード().startsWith(startWith)) {
-                dataSource.add(new KeyValueDataSource(target.getコード(), target.get名称()));
-            }
-        }
-        return dataSource;
-
-    }
-
-    private List<KeyValueDataSource> getSakujoJiyuDataSource() {
+    private List<KeyValueDataSource> get削除事由ddl() {
         List<KeyValueDataSource> dataSource = new ArrayList<>();
         for (SakujoJiyuCode target : SakujoJiyuCode.values()) {
             KeyValueDataSource keyValueData = new KeyValueDataSource(target.getコード(), target.get名称());

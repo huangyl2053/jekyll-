@@ -26,6 +26,10 @@ module DBZ {
                 return "onClick_btnZenkaiFukusha";
             }
 
+            public static onClick_lostFocus(): string {
+                return "onClick_lostFocus";
+            }
+
             public static onChangeChkKannaiKangai(): string {
                 return "onChangeChkKannaiKangai";
             }
@@ -95,8 +99,8 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtKanaShimei"));
             }
 
-            public txtHonninKankeisei(): UZA.TextBoxCode {
-                return new UZA.TextBoxCode(this.convFiledName("txtHonninKankeisei"));
+            public txtHonninKankeisei(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtHonninKankeisei"));
             }
 
             public radKannaiKangai(): UZA.RadioButton {

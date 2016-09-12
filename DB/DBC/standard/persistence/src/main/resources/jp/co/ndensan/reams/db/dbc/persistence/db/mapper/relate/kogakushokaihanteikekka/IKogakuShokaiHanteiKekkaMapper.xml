@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-3000-050 gongliang -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakushokaihanteikekka.IKogakuShokaiHanteiKekkaMapper">
+
+    <select id="get高額介護支給判定結果" resultMap="resultMap_KogakuShokai"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakushokaihanteikekka.KogakuShokaiHanteiKekkaParam"
+            fetchSize="500" resultOrdered="true">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3056KogakuShikyuShinseiMapper.allColumns_DbT3056KogakuShikyuShinsei" />,
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3057KogakuShikyuHanteiKekkaMapper.allColumns_DbT3057KogakuShikyuHanteiKekka" />,
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3058KogakuShikyuShinsaKetteiMapper.allColumns_DbT3058KogakuShikyuShinsaKettei" />,
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3055KogakuKyufuTaishoshaGokeiMapper.allColumns_DbT3055KogakuKyufuTaishoshaGokei" />,
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3054KogakuKyufuTaishoshaMeisaiMapper.allColumns_DbT3054KogakuKyufuTaishoshaMeisai" />,
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.allColumns_DbT7060KaigoJigyosha" />
+        FROM
+        (SELECT *
+        FROM rgdb."DbT3056KogakuShikyuShinsei" AS A1
+        WHERE NOT EXISTS (
+        SELECT *
+        FROM rgdb."DbT3056KogakuShikyuShinsei" AS A2
+        WHERE A1."hihokenshaNo" = A2."hihokenshaNo"
+        AND   A1."serviceTeikyoYM" = A2."serviceTeikyoYM"
+        AND   A1."shoKisaiHokenshaNo" = A2."shoKisaiHokenshaNo"
+        AND   A1."rirekiNo" <![CDATA[<]]> A2."rirekiNo")) AS "DbT3056KogakuShikyuShinsei"
+        LEFT JOIN rgdb."DbT3057KogakuShikyuHanteiKekka" AS "DbT3057KogakuShikyuHanteiKekka"
+        ON      "DbT3056KogakuShikyuShinsei"."hihokenshaNo" = "DbT3057KogakuShikyuHanteiKekka"."hihokenshaNo"
+        AND "DbT3056KogakuShikyuShinsei"."serviceTeikyoYM" = "DbT3057KogakuShikyuHanteiKekka"."serviceTeikyoYM"
+        AND "DbT3056KogakuShikyuShinsei"."shoKisaiHokenshaNo" = "DbT3057KogakuShikyuHanteiKekka"."shoKisaiHokenshaNo"
+        AND "DbT3056KogakuShikyuShinsei"."rirekiNo" = "DbT3057KogakuShikyuHanteiKekka"."rirekiNo"
+        LEFT JOIN rgdb."DbT3058KogakuShikyuShinsaKettei" AS "DbT3058KogakuShikyuShinsaKettei"
+        ON      "DbT3056KogakuShikyuShinsei"."hihokenshaNo" = "DbT3058KogakuShikyuShinsaKettei"."hihokenshaNo"
+        AND "DbT3056KogakuShikyuShinsei"."serviceTeikyoYM" = "DbT3058KogakuShikyuShinsaKettei"."serviceTeikyoYM"
+        AND "DbT3056KogakuShikyuShinsei"."shoKisaiHokenshaNo" = "DbT3058KogakuShikyuShinsaKettei"."shoKisaiHokenshaNo"
+        AND "DbT3056KogakuShikyuShinsei"."rirekiNo" = "DbT3058KogakuShikyuShinsaKettei"."rirekiNo"
+        LEFT JOIN rgdb."DbT3055KogakuKyufuTaishoshaGokei" AS "DbT3055KogakuKyufuTaishoshaGokei"
+        ON      "DbT3056KogakuShikyuShinsei"."hihokenshaNo" = "DbT3055KogakuKyufuTaishoshaGokei"."hihokenshaNo"
+        AND "DbT3056KogakuShikyuShinsei"."serviceTeikyoYM" = "DbT3055KogakuKyufuTaishoshaGokei"."serviceTeikyoYM"
+        AND "DbT3056KogakuShikyuShinsei"."rirekiNo" = "DbT3055KogakuKyufuTaishoshaGokei"."rirekiNo"
+        LEFT JOIN rgdb."DbT3054KogakuKyufuTaishoshaMeisai" AS "DbT3054KogakuKyufuTaishoshaMeisai"
+        ON      "DbT3056KogakuShikyuShinsei"."hihokenshaNo" = "DbT3054KogakuKyufuTaishoshaMeisai"."hihokenshaNo"
+        AND "DbT3056KogakuShikyuShinsei"."serviceTeikyoYM" = "DbT3054KogakuKyufuTaishoshaMeisai"."serviceTeikyoYM"
+        AND "DbT3056KogakuShikyuShinsei"."rirekiNo" = "DbT3054KogakuKyufuTaishoshaMeisai"."rirekiNo"
+        LEFT JOIN
+        (SELECT *
+        FROM rgdb."DbT7060KaigoJigyosha"
+        WHERE "yukoShuryoYMD" is NULL
+        OR "yukoShuryoYMD" = '') AS "DbT7060KaigoJigyosha"
+        ON "DbT3054KogakuKyufuTaishoshaMeisai"."jigyoshaNo" = "DbT7060KaigoJigyosha"."jigyoshaNo"
+        WHERE "DbT3056KogakuShikyuShinsei"."hihokenshaNo" = #{被保険者番号}
+        AND   "DbT3056KogakuShikyuShinsei"."serviceTeikyoYM" = #{提供年月}
+        ORDER BY
+        "DbT3056KogakuShikyuShinsei"."shoKisaiHokenshaNo" ASC,
+        "DbT3054KogakuKyufuTaishoshaMeisai"."jigyoshaNo" ASC,
+        "DbT3054KogakuKyufuTaishoshaMeisai"."serviceShuruiCode" ASC
+    </select>
+    <resultMap id="resultMap_KogakuShokai"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakushokaihanteikekka.KogakuShokaiHanteiKekkaEntity" autoMapping="true">
+        <id column="dbT3056KogakuShikyuShinsei_hihokenshaNo" />
+        <id column="dbT3056KogakuShikyuShinsei_serviceTeikyoYM" />
+        <id column="dbT3056KogakuShikyuShinsei_shoKisaiHokenshaNo" />
+        <id column="dbT3056KogakuShikyuShinsei_rirekiNo" />
+        <association property="高額介護サービス費支給申請Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3056KogakuShikyuShinseiMapper.ResultMap_DbT3056KogakuShikyuShinseiEntity"/>
+        <association property="高額介護サービス費支給判定結果Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3057KogakuShikyuHanteiKekkaMapper.ResultMap_DbT3057KogakuShikyuHanteiKekkaEntity"/>
+        <association property="高額介護サービス費支給審査決定Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3058KogakuShikyuShinsaKetteiMapper.ResultMap_DbT3058KogakuShikyuShinsaKetteiEntity"/>
+        <association property="高額介護サービス費給付対象者合計Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3055KogakuKyufuTaishoshaGokeiMapper.ResultMap_DbT3055KogakuKyufuTaishoshaGokeiEntity"/>
+        <collection property="高額介護サービス費給付対象者明細List" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3054KogakuKyufuTaishoshaMeisaiMapper.ResultMap_DbT3054KogakuKyufuTaishoshaMeisaiEntity"/>
+        <collection property="介護事業者List" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.ResultMap_DbT7060KaigoJigyoshaEntity"/>
+    </resultMap>
+
+    <select id="get事業高額介護支給判定結果" resultMap="resultMap_JigyoKogakuShokai"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakushokaihanteikekka.KogakuShokaiHanteiKekkaParam"
+            fetchSize="500" resultOrdered="true">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3110JigyoKogakuShikyuShinseiMapper.allColumns_DbT3110JigyoKogakuShikyuShinsei" />,
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3111JigyoKogakuShikyuHanteiKekkaMapper.allColumns_DbT3111JigyoKogakuShikyuHanteiKekka" />,
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3112KogakuShikyuShinsaKetteiMapper.allColumns_DbT3112KogakuShikyuShinsaKettei" />,
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3109JigyoKogakuKyufuTaishoshaGokeiMapper.allColumns_DbT3109JigyoKogakuKyufuTaishoshaGokei" />,
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3108JigyoKogakuKyufuTaishoshaMeisaiMapper.allColumns_DbT3108JigyoKogakuKyufuTaishoshaMeisai" />,
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.allColumns_DbT7060KaigoJigyosha" />
+        FROM
+        (SELECT *
+        FROM rgdb."DbT3110JigyoKogakuShikyuShinsei" AS A1
+        WHERE NOT EXISTS (
+        SELECT *
+        FROM rgdb."DbT3110JigyoKogakuShikyuShinsei" AS A2
+        WHERE A1."hihokenshaNo" = A2."hihokenshaNo"
+        AND   A1."serviceTeikyoYM" = A2."serviceTeikyoYM"
+        AND   A1."shoKisaiHokenshaNo" = A2."shoKisaiHokenshaNo"
+        AND   A1."rirekiNo" <![CDATA[<]]> A2."rirekiNo")) AS "DbT3110JigyoKogakuShikyuShinsei"
+        LEFT JOIN rgdb."DbT3111JigyoKogakuShikyuHanteiKekka" AS "DbT3111JigyoKogakuShikyuHanteiKekka"
+        ON      "DbT3110JigyoKogakuShikyuShinsei"."hihokenshaNo" = "DbT3111JigyoKogakuShikyuHanteiKekka"."hihokenshaNo"
+        AND "DbT3110JigyoKogakuShikyuShinsei"."serviceTeikyoYM" = "DbT3111JigyoKogakuShikyuHanteiKekka"."serviceTeikyoYM"
+        AND "DbT3110JigyoKogakuShikyuShinsei"."shoKisaiHokenshaNo" = "DbT3111JigyoKogakuShikyuHanteiKekka"."shoKisaiHokenshaNo"
+        AND "DbT3110JigyoKogakuShikyuShinsei"."rirekiNo" = "DbT3111JigyoKogakuShikyuHanteiKekka"."rirekiNo"
+        LEFT JOIN rgdb."DbT3112KogakuShikyuShinsaKettei" AS "DbT3112KogakuShikyuShinsaKettei"
+        ON      "DbT3110JigyoKogakuShikyuShinsei"."hihokenshaNo" = "DbT3112KogakuShikyuShinsaKettei"."hihokenshaNo"
+        AND "DbT3110JigyoKogakuShikyuShinsei"."serviceTeikyoYM" = "DbT3112KogakuShikyuShinsaKettei"."serviceTeikyoYM"
+        AND "DbT3110JigyoKogakuShikyuShinsei"."shoKisaiHokenshaNo" = "DbT3112KogakuShikyuShinsaKettei"."shoKisaiHokenshaNo"
+        AND "DbT3110JigyoKogakuShikyuShinsei"."rirekiNo" = "DbT3112KogakuShikyuShinsaKettei"."rirekiNo"
+        LEFT JOIN rgdb."DbT3109JigyoKogakuKyufuTaishoshaGokei" AS "DbT3109JigyoKogakuKyufuTaishoshaGokei"
+        ON      "DbT3110JigyoKogakuShikyuShinsei"."hihokenshaNo" = "DbT3109JigyoKogakuKyufuTaishoshaGokei"."hihokenshaNo"
+        AND "DbT3110JigyoKogakuShikyuShinsei"."serviceTeikyoYM" = "DbT3109JigyoKogakuKyufuTaishoshaGokei"."serviceTeikyoYM"
+        AND "DbT3110JigyoKogakuShikyuShinsei"."rirekiNo" = "DbT3109JigyoKogakuKyufuTaishoshaGokei"."rirekiNo"
+        LEFT JOIN rgdb."DbT3108JigyoKogakuKyufuTaishoshaMeisai" AS "DbT3108JigyoKogakuKyufuTaishoshaMeisai"
+        ON      "DbT3110JigyoKogakuShikyuShinsei"."hihokenshaNo" = "DbT3108JigyoKogakuKyufuTaishoshaMeisai"."hihokenshaNo"
+        AND "DbT3110JigyoKogakuShikyuShinsei"."serviceTeikyoYM" = "DbT3108JigyoKogakuKyufuTaishoshaMeisai"."serviceTeikyoYM"
+        AND "DbT3110JigyoKogakuShikyuShinsei"."rirekiNo" = "DbT3108JigyoKogakuKyufuTaishoshaMeisai"."rirekiNo"
+        LEFT JOIN
+        (SELECT *
+        FROM rgdb."DbT7060KaigoJigyosha"
+        WHERE "yukoShuryoYMD" is NULL
+        OR "yukoShuryoYMD" = '') AS "DbT7060KaigoJigyosha"
+        ON "DbT3108JigyoKogakuKyufuTaishoshaMeisai"."jigyoshaNo" = "DbT7060KaigoJigyosha"."jigyoshaNo"
+        WHERE "DbT3110JigyoKogakuShikyuShinsei"."hihokenshaNo" = #{被保険者番号}
+        AND   "DbT3110JigyoKogakuShikyuShinsei"."serviceTeikyoYM" = #{提供年月}
+        ORDER BY
+        "DbT3110JigyoKogakuShikyuShinsei"."shoKisaiHokenshaNo" ASC,
+        "DbT3108JigyoKogakuKyufuTaishoshaMeisai"."jigyoshaNo" ASC,
+        "DbT3108JigyoKogakuKyufuTaishoshaMeisai"."serviceShuruiCode" ASC
+    </select>
+    <resultMap id="resultMap_JigyoKogakuShokai"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakushokaihanteikekka.JigyoKogakuShokaiHanteiKekkaEntity" autoMapping="true">
+        <id column="dbT3110JigyoKogakuShikyuShinsei_hihokenshaNo" />
+        <id column="dbT3110JigyoKogakuShikyuShinsei_serviceTeikyoYM" />
+        <id column="dbT3110JigyoKogakuShikyuShinsei_shoKisaiHokenshaNo" />
+        <id column="dbT3110JigyoKogakuShikyuShinsei_rirekiNo" />
+        <association property="事業高額介護サービス費支給申請Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3110JigyoKogakuShikyuShinseiMapper.ResultMap_DbT3110JigyoKogakuShikyuShinseiEntity"/>
+        <association property="事業高額介護サービス費支給判定結果Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3111JigyoKogakuShikyuHanteiKekkaMapper.ResultMap_DbT3111JigyoKogakuShikyuHanteiKekkaEntity"/>
+        <association property="事業高額介護サービス費支給審査決定Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3112KogakuShikyuShinsaKetteiMapper.ResultMap_DbT3112KogakuShikyuShinsaKetteiEntity"/>
+        <association property="事業高額介護サービス費給付対象者合計Entity" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3109JigyoKogakuKyufuTaishoshaGokeiMapper.ResultMap_DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity"/>
+        <collection property="事業高額介護サービス費給付対象者明細List" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3108JigyoKogakuKyufuTaishoshaMeisaiMapper.ResultMap_DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity"/>
+        <collection property="介護事業者List" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.ResultMap_DbT7060KaigoJigyoshaEntity"/>
+    </resultMap>
+
+</mapper>

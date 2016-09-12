@@ -16,9 +16,9 @@ import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
-import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
+import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiPSMSearchKeyBuilder;
@@ -29,14 +29,12 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.SofusakiRiyoKub
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiGyomuHanteiKey;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.report.daikoprint.DaikoPrintItem;
+import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.definition.report.ReportId;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.daikoprint.DaikoPrintFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.daikoprint.IDaikoPrint;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
@@ -87,6 +85,8 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
     private static final int EIGHT = 8;
     private static final int NINE = 9;
     private static final int TEN = 10;
+    private static final int 文字数_38 = 38;
+    private static final int 文字数_76 = 76;
     private static final int パターン番号_5 = 5;
     private static final RString 帳票制御汎用キー_シーラタイプタイトル１ = new RString("シーラタイプタイトル１");
     private static final RString 帳票制御汎用キー_シーラタイプタイトル２ = new RString("シーラタイプタイトル２");
@@ -127,7 +127,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
 
         NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(
                 SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100004.getReportId(), batchPram.getHakkoYMD(),
-                NinshoshaDenshikoinshubetsuCode.保険者印, reportSourceWriter);
+                NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
         RString 文書番号 = ReportUtil.get文書番号(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100004.getReportId(), batchPram.getHakkoYMD());
 
         IAtesakiGyomuHanteiKey 宛先業務判定キー = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBC介護給付);
@@ -222,19 +222,19 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
         List<Decimal> ページ数 = new ArrayList<>();
         ページ数.add(Decimal.ONE);
         // TODO 出力順関連
-        IOutputOrder outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().
-                get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100004.getReportId(),
-                        Long.parseLong(batchPram.getSyutujunId().toString()));
+//        IOutputOrder outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().
+//                get出力順(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100004.getReportId(),
+//                        Long.parseLong(batchPram.getSyutujunId().toString()));
         List<RString> 出力順項目 = new ArrayList<>();
         List<RString> 改ページ項目 = new ArrayList<>();
-        if (outputOrder != null && outputOrder.get設定項目リスト() != null) {
-            for (ISetSortItem sortItem : outputOrder.get設定項目リスト()) {
-                出力順項目.add(sortItem.get項目ID());
-                if (sortItem.is改頁項目()) {
-                    改ページ項目.add(sortItem.get項目ID());
-                }
-            }
-        }
+//        if (outputOrder != null && outputOrder.get設定項目リスト() != null) {
+//            for (ISetSortItem sortItem : outputOrder.get設定項目リスト()) {
+//                出力順項目.add(sortItem.get項目ID());
+//                if (sortItem.is改頁項目()) {
+//                    改ページ項目.add(sortItem.get項目ID());
+//                }
+//            }
+//        }
         Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
         DaikoPrintItem daikoPrintItem = new DaikoPrintItem(SubGyomuCode.DBC介護給付,
                 導入団体クラス.getLasdecCode_(), 導入団体クラス.get市町村名(),
@@ -325,7 +325,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
                 EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(
                         Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         ketteiTsuchiShoSealer.setKekka(ShikyuFushikyuKubun.toValue(business.get支給不支給決定区分()).get名称());
-        ketteiTsuchiShoSealer.set増減の理由(business.get増減理由等());
+        ketteiTsuchiShoSealer = set増減の理由(ketteiTsuchiShoSealer, business.get増減理由等());
         ketteiTsuchiShoSealer.setShiharaiBasho(batchPram.getShiharaiBasho());
         ketteiTsuchiShoSealer.setShiharaiStartYMD(business.get支払期間開始年月日() == null
                 ? RString.EMPTY : business.get支払期間開始年月日().wareki().eraType(
@@ -521,6 +521,20 @@ public class ShokanBaraiShikyuKetteiTsuchishoSealerType1 {
             ketteiTsuchiShoSealer.setTaishoYM4(business.get提供年月() == null ? RString.EMPTY : business.get提供年月().wareki().eraType(
                     EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             ketteiTsuchiShoSealer.setShikyuGaku4(nullToZero(business.get支給額()));
+        }
+        return ketteiTsuchiShoSealer;
+    }
+
+    private ShokanKetteiTsuchiShoSealer set増減の理由(ShokanKetteiTsuchiShoSealer ketteiTsuchiShoSealer, RString 増減の理由) {
+        if (RString.isNullOrEmpty(増減の理由) || 増減の理由.length() <= 文字数_38) {
+            ketteiTsuchiShoSealer.setRiyu1(増減の理由);
+        } else if (増減の理由.length() <= 文字数_76) {
+            ketteiTsuchiShoSealer.setRiyu1(増減の理由.substring(ZERO, 文字数_38));
+            ketteiTsuchiShoSealer.setRiyu2(増減の理由.substring(文字数_38));
+        } else {
+            ketteiTsuchiShoSealer.setRiyu1(増減の理由.substring(ZERO, 文字数_38));
+            ketteiTsuchiShoSealer.setRiyu2(増減の理由.substring(文字数_38, 文字数_76));
+            ketteiTsuchiShoSealer.setRiyu3(RString.EMPTY);
         }
         return ketteiTsuchiShoSealer;
     }

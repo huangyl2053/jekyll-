@@ -82,7 +82,7 @@
         <result property="logicalDeletedFlag" column="dbT4301ShujiiIkenshoIraiJoho_logicalDeletedFlag" />
     </resultMap>
     
-    <select id="getEntity" resultMap="ResultMap_DbT4301ShujiiIkenshoIraiJohoEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT4301ShujiiIkenshoIraiJohoEntity">
         SELECT
         <include refid="allColumns_DbT4301ShujiiIkenshoIraiJoho"/>
         FROM

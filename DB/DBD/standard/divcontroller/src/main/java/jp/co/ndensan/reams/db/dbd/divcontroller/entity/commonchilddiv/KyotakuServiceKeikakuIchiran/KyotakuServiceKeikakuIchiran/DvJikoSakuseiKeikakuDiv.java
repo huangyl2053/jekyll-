@@ -15,21 +15,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class DvJikoSakuseiKeikakuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtJikoShinkiShinsei")
-    private TextBox txtJikoShinkiShinsei;
-    @JsonProperty("txtJikoSaishinsei")
-    private TextBox txtJikoSaishinsei;
-    @JsonProperty("txtJikoHenkoShinsei")
-    private TextBox txtJikoHenkoShinsei;
-    @JsonProperty("txtJikoServiceHenko")
-    private TextBox txtJikoServiceHenko;
+    @JsonProperty("txtJikoNinteiShinseiJokyo")
+    private TextBox txtJikoNinteiShinseiJokyo;
     @JsonProperty("linLine6")
     private HorizontalLine linLine6;
     @JsonProperty("txtSetteiYM")
@@ -58,75 +52,21 @@ public class DvJikoSakuseiKeikakuDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * gettxtJikoShinkiShinsei
-     * @return txtJikoShinkiShinsei
+     * gettxtJikoNinteiShinseiJokyo
+     * @return txtJikoNinteiShinseiJokyo
      */
-    @JsonProperty("txtJikoShinkiShinsei")
-    public TextBox getTxtJikoShinkiShinsei() {
-        return txtJikoShinkiShinsei;
+    @JsonProperty("txtJikoNinteiShinseiJokyo")
+    public TextBox getTxtJikoNinteiShinseiJokyo() {
+        return txtJikoNinteiShinseiJokyo;
     }
 
     /*
-     * settxtJikoShinkiShinsei
-     * @param txtJikoShinkiShinsei txtJikoShinkiShinsei
+     * settxtJikoNinteiShinseiJokyo
+     * @param txtJikoNinteiShinseiJokyo txtJikoNinteiShinseiJokyo
      */
-    @JsonProperty("txtJikoShinkiShinsei")
-    public void setTxtJikoShinkiShinsei(TextBox txtJikoShinkiShinsei) {
-        this.txtJikoShinkiShinsei = txtJikoShinkiShinsei;
-    }
-
-    /*
-     * gettxtJikoSaishinsei
-     * @return txtJikoSaishinsei
-     */
-    @JsonProperty("txtJikoSaishinsei")
-    public TextBox getTxtJikoSaishinsei() {
-        return txtJikoSaishinsei;
-    }
-
-    /*
-     * settxtJikoSaishinsei
-     * @param txtJikoSaishinsei txtJikoSaishinsei
-     */
-    @JsonProperty("txtJikoSaishinsei")
-    public void setTxtJikoSaishinsei(TextBox txtJikoSaishinsei) {
-        this.txtJikoSaishinsei = txtJikoSaishinsei;
-    }
-
-    /*
-     * gettxtJikoHenkoShinsei
-     * @return txtJikoHenkoShinsei
-     */
-    @JsonProperty("txtJikoHenkoShinsei")
-    public TextBox getTxtJikoHenkoShinsei() {
-        return txtJikoHenkoShinsei;
-    }
-
-    /*
-     * settxtJikoHenkoShinsei
-     * @param txtJikoHenkoShinsei txtJikoHenkoShinsei
-     */
-    @JsonProperty("txtJikoHenkoShinsei")
-    public void setTxtJikoHenkoShinsei(TextBox txtJikoHenkoShinsei) {
-        this.txtJikoHenkoShinsei = txtJikoHenkoShinsei;
-    }
-
-    /*
-     * gettxtJikoServiceHenko
-     * @return txtJikoServiceHenko
-     */
-    @JsonProperty("txtJikoServiceHenko")
-    public TextBox getTxtJikoServiceHenko() {
-        return txtJikoServiceHenko;
-    }
-
-    /*
-     * settxtJikoServiceHenko
-     * @param txtJikoServiceHenko txtJikoServiceHenko
-     */
-    @JsonProperty("txtJikoServiceHenko")
-    public void setTxtJikoServiceHenko(TextBox txtJikoServiceHenko) {
-        this.txtJikoServiceHenko = txtJikoServiceHenko;
+    @JsonProperty("txtJikoNinteiShinseiJokyo")
+    public void setTxtJikoNinteiShinseiJokyo(TextBox txtJikoNinteiShinseiJokyo) {
+        this.txtJikoNinteiShinseiJokyo = txtJikoNinteiShinseiJokyo;
     }
 
     /*

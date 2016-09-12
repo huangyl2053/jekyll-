@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.gappeicityjoho;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gappeijoho.GappeiJyohoSpecificParameter;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.gappeijoho.GappeiJyohoSpecificParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.gappeijoho.GappeiCityJyohoRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.gappeijoho.KouikiGappeiJyohoRelateEntity;
 
@@ -96,4 +96,12 @@ public interface IGappeiCityJyohoMapper {
      * @return List<KouikiGappeiJyohoRelateEntity>
      */
     List<KouikiGappeiJyohoRelateEntity> getKensakukikouikigappeijoho(GappeiJyohoSpecificParameter params);
+
+    /**
+     * ソート順を指定して全合併旧市町村情報を取得します（広域内合併に対応する）。
+     *
+     * @param params 合併市町村情報取得用パラメータクラス
+     * @return List<GappeiCityJyohoRelateEntity>
+     */
+    List<GappeiCityJyohoRelateEntity> getKouikigappeijohoWithSort(GappeiJyohoSpecificParameter params);
 }

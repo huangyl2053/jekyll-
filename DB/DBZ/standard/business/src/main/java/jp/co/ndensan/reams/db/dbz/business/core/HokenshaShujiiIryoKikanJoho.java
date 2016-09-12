@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbz.business.core;
 import java.io.Serializable;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4911ShujiiIryoKikanJohoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.IShujiiIryoKikanJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;

@@ -13,11 +13,11 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810023.Toku
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810023.ddgToteishinryoTokubetushinryo_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810023.dgdTokuteiShinryohi_Row;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0810023.TokuteiShinryohiHandler;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0810014.ServiceTeiKyoShomeishoParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -56,12 +56,12 @@ public class TokuteiShinryouhi {
         RString 証明書 = parameter.getServiceYM();
         TaishoshaKey 引継ぎデータ = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ShikibetsuCode 識別コード = 引継ぎデータ.get識別コード();
-        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_様式番号, RString.class);
-        RDate 申請日 = new RDate(ViewStateHolder.get(ViewStateKeys.償還払申請一覧_申請日, RString.class).toString());
+        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
+        RDate 申請日 = new RDate(ViewStateHolder.get(ViewStateKeys.申請日, RString.class).toString());
 
-        div.getPanelOne().getCcdKaigoAtenaInfo().onLoad(識別コード);
+        div.getPanelOne().getCcdKaigoAtenaInfo().initialize(識別コード);
         if (!被保険者番号.isEmpty()) {
-            div.getPanelOne().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
+            div.getPanelOne().getCcdKaigoShikakuKihon().initialize(被保険者番号);
         } else {
             div.getPanelOne().getCcdKaigoShikakuKihon().setVisible(false);
         }
@@ -115,6 +115,7 @@ public class TokuteiShinryouhi {
     public ResponseData<TokuteiShinryouhiDiv> onClick_dgdTokuteiShinryohi(TokuteiShinryouhiDiv div) {
         ServiceTeiKyoShomeishoParameter parameter = ViewStateHolder.get(
                 ViewStateKeys.基本情報パラメータ, ServiceTeiKyoShomeishoParameter.class);
+        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
         dgdTokuteiShinryohi_Row row = div.getPanelThree().getDgdTokuteiShinryohi().getClickedItem();
         List<ShokanTokuteiShinryoTokubetsuRyoyo> shokanTokuteiShinryoTokubetsuRyoyoList = ShokanbaraiJyokyoShokai
                 .createInstance().getTokuteyiShinnryouhiTokubeturyoyohi(
@@ -122,14 +123,15 @@ public class TokuteiShinryouhi {
                         parameter.getServiceTeikyoYM(),
                         parameter.getSeiriNp(),
                         parameter.getJigyoshaNo(),
-                        ViewStateHolder.get(ViewStateKeys.償還払申請一覧_様式番号, RString.class),
+                        様式番号,
                         parameter.getMeisaiNo(),
                         row.getRemban());
         if (shokanTokuteiShinryoTokubetsuRyoyoList == null || shokanTokuteiShinryoTokubetsuRyoyoList.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
         getHandler(div).set特定診療費_特別診療費パネル(shokanTokuteiShinryoTokubetsuRyoyoList,
-                parameter.getServiceTeikyoYM());
+                parameter.getServiceTeikyoYM(),
+                様式番号);
         div.getPanelThree().getPanelFour().setVisible(false);
         div.getPanelThree().getPanelFive().setVisible(true);
         return createResponse(div);
@@ -151,7 +153,7 @@ public class TokuteiShinryouhi {
                         parameter.getServiceTeikyoYM(),
                         parameter.getSeiriNp(),
                         parameter.getJigyoshaNo(),
-                        ViewStateHolder.get(ViewStateKeys.償還払申請一覧_様式番号, RString.class),
+                        ViewStateHolder.get(ViewStateKeys.様式番号, RString.class),
                         parameter.getMeisaiNo(),
                         row.getRemban());
         if (shokanTokuteiShinryohiList == null || shokanTokuteiShinryohiList.isEmpty()) {

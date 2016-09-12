@@ -11,13 +11,17 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaicho;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaicho.edaNo;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaicho.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaicho.idoYMD;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaicho.shikibetsuCode;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -29,6 +33,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  * @reamsid_L DBA-1300-030 lishengli
  */
 public class DbV1001HihokenshaDaichoAliveDac {
+
+    private static final RString 項目名_被保険者番号 = new RString("被保険者番号");
 
     @InjectSession
     private SqlSession session;
@@ -47,7 +53,7 @@ public class DbV1001HihokenshaDaichoAliveDac {
             HihokenshaNo 被保険者番号,
             FlexibleDate 異動日,
             RString 枝番) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(項目名_被保険者番号.toString()));
         requireNonNull(異動日, UrSystemErrorMessages.値がnull.getReplacedMessage("異動日"));
         requireNonNull(枝番, UrSystemErrorMessages.値がnull.getReplacedMessage("枝番"));
 
@@ -60,6 +66,25 @@ public class DbV1001HihokenshaDaichoAliveDac {
                                 eq(idoYMD, 異動日),
                                 eq(edaNo, 枝番))).
                 toObject(DbV1001HihokenshaDaichoEntity.class);
+    }
+
+    /**
+     * 識別コードで被保険者台帳管理を取得します。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @return List<DbV1001HihokenshaDaichoEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbV1001HihokenshaDaichoEntity> selectBy識別コード(ShikibetsuCode 識別コード) throws NullPointerException {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbV1001HihokenshaDaicho.class).
+                where(eq(shikibetsuCode, 識別コード)).
+                toList(DbV1001HihokenshaDaichoEntity.class);
     }
 
     /**
@@ -99,7 +124,7 @@ public class DbV1001HihokenshaDaichoAliveDac {
      */
     @Transaction
     public DbV1001HihokenshaDaichoEntity get最新の被保険者台帳情報(HihokenshaNo 被保険者番号) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(項目名_被保険者番号.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -108,4 +133,63 @@ public class DbV1001HihokenshaDaichoAliveDac {
                 where(eq(hihokenshaNo, 被保険者番号)).
                 toObject(DbV1001HihokenshaDaichoEntity.class);
     }
+
+    /**
+     * 被保険者番号により、被保険者台帳管理Aliveを取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return List<DbV1001HihokenshaDaichoEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbV1001HihokenshaDaichoEntity get被保険者台帳情報(HihokenshaNo 被保険者番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(項目名_被保険者番号.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbV1001HihokenshaDaicho.class).
+                where(eq(hihokenshaNo, 被保険者番号))
+                .order(by(DbV1001HihokenshaDaicho.idoYMD, Order.DESC), by(DbV1001HihokenshaDaicho.edaNo, Order.DESC)).limit(1).
+                toObject(DbV1001HihokenshaDaichoEntity.class);
+    }
+
+    /**
+     * 被保険者番号により、被保険者台帳管理Aliveを取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return List<DbV1001HihokenshaDaichoEntity>
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbV1001HihokenshaDaichoEntity get被保険者台帳(HihokenshaNo 被保険者番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(項目名_被保険者番号.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbV1001HihokenshaDaicho.class).
+                where(eq(hihokenshaNo, 被保険者番号)).
+                toObject(DbV1001HihokenshaDaichoEntity.class);
+    }
+
+    /**
+     * 被保険者番号を取得。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return DbT1001HihokenshaDaichoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbV1001HihokenshaDaichoEntity get被保険者台帳取得(HihokenshaNo 被保険者番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(項目名_被保険者番号.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbV1001HihokenshaDaicho.class).
+                where(eq(hihokenshaNo, 被保険者番号)).
+                toObject(DbV1001HihokenshaDaichoEntity.class);
+    }
+
 }

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 意見書作成報酬照会のマッピング用XMLです。 -->
+<!--@reamsid_L DBE-1930-010 chenxiangyu-->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikenshohoshushokai.IIkenshoHoshuShokaiRelateMapper">
+                   
+    <select id="select合計額リスト" resultMap="resultMap_IkenshoHoshuShokaiRelateEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshohoshushokai.IkenshoHoshuShokaiMapperParameter" fetchSize="500" resultOrdered="true">
+        <if test="batchFlag"> WITH t1 as	(</if>
+              SELECT                    T7051."shichosonCode",													
+					T5602."shujiiIryoKikanCode",											
+					T5911."iryoKikanMeisho",													
+					T5912."shujiiName",													
+					T5602."iraishoSakuseiIraiYMD" AS "依頼日",													
+					T5602."ikenshoKinyuYMD" AS "記入日",												
+					T5602."ikenshoJuryoYMD" AS "入手日",													
+					T5101."shoKisaiHokenshaNo" AS "保険者",													
+					T5101."hihokenshaNo",													
+					T5101."hihokenshaName",	
+					CASE WHEN T5302."ikenshoSakuseiKaisuKubun"='1' AND T5302."zaitakuShisetsuKubun"='1' THEN '○' ELSE '' END AS "在宅_新",
+					CASE WHEN T5302."ikenshoSakuseiKaisuKubun"='2' AND T5302."zaitakuShisetsuKubun"='1' THEN '○' ELSE '' END AS "在宅_継",
+					CASE WHEN T5302."ikenshoSakuseiKaisuKubun"='1' AND T5302."zaitakuShisetsuKubun"='2' THEN '○' ELSE '' END AS "施設_新",
+					CASE WHEN T5302."ikenshoSakuseiKaisuKubun"='2' AND T5302."zaitakuShisetsuKubun"='2' THEN '○' ELSE '' END AS "施設_継",												
+					T5302."ikenshoIraiKubun",											
+					T5602."shujiiCode",													
+					T5602."ikenshoSakuseiryo",													
+					T5602."ikenshoBettoShinryohi",
+                                        T5602."ikenshoHoshu",	
+                                        T5602."shinseishoKanriNo",
+                                        T5602."ikenshoIraiRirekiNo"							
+		FROM		rgdb."DbT5602ShujiiIkenshoHoshuJissekiJoho" AS  T5602													
+		INNER JOIN	rgdb."DbT5101NinteiShinseiJoho" AS  T5101													
+		ON			T5101."shinseishoKanriNo"=T5602."shinseishoKanriNo"													
+		AND			T5101."logicalDeletedFlag"=False																							
+		INNER JOIN	rgdb."DbT7051KoseiShichosonMaster" AS  T7051													
+		ON			T7051."shoKisaiHokenshaNo"=T5101."shoKisaiHokenshaNo"																								
+		INNER JOIN	rgdb."DbT5911ShujiiIryoKikanJoho" AS T5911													
+		ON			T5911."shichosonCode"=T7051."shichosonCode"												
+		AND			T5911."shujiiIryokikanCode"=T5602."shujiiIryoKikanCode"																									
+		INNER JOIN	rgdb."DbT5912ShujiiJoho" AS  T5912													
+		ON			T5912."shichosonCode"=T7051."shichosonCode"													
+		AND			T5912."shujiiIryokikanCode"=T5602."shujiiIryoKikanCode"													
+		AND			T5912."shujiiCode"=T5602."shujiiCode"										
+		INNER JOIN	rgdb."DbT5302ShujiiIkenshoJoho" AS  T5302													
+		ON			T5602."shinseishoKanriNo"=T5302."shinseishoKanriNo"	
+		AND			T5602."ikenshoIraiRirekiNo"=T5302."ikenshoIraiRirekiNo"																								
+		WHERE	 1=1
+                <if test="作成依頼日開始Flag">
+                    AND #{作成依頼日開始} <![CDATA[<=]]> T5602."iraishoSakuseiIraiYMD"
+                </if>
+                <if test="作成依頼日終了Flag">
+                    AND T5602."iraishoSakuseiIraiYMD" <![CDATA[<=]]> #{作成依頼日終了}
+                </if>
+                <if test="batchFlag">
+                    AND
+                     <foreach collection="ikenshoBusiness" item="ikensho" open="(" separator="OR" close=")">
+                    (T5602."shujiiIryoKikanCode"=#{ikensho.主治医医療機関コード}												
+                     AND T5602."shujiiCode"=#{ikensho.主治医コード}												
+                     AND T5602."shinseishoKanriNo"=#{ikensho.申請書管理番号}												
+                     AND T5602."ikenshoIraiRirekiNo"=#{ikensho.主治医意見書作成依頼履歴番号})
+                     </foreach>	 
+                </if>
+                <if test="画面Flag">
+		    ORDER BY            T7051."shichosonCode",													
+		    			T5602."shujiiIryoKikanCode",													
+		    			T5602."shujiiCode",													
+					T5602."iraishoSakuseiIraiYMD" DESC	
+                </if>												
+		<if test="最大表示件数Flag">
+                    LIMIT #{最大表示件数}	
+                </if> 	
+                <if test="batchFlag">) SELECT A.*, B.*, C.*,D.*,E.*,F.*,G.*,H.*,K.*
+                                        FROM t1 as A,
+                    (SELECT COUNT(1) AS 在新_合計 FROM t1 AS T WHERE T."在宅_新"='○') as B
+                    ,(SELECT COUNT(1) AS 在継_合計 FROM t1 AS T WHERE T."在宅_継"='○') as C
+                    ,(SELECT COUNT(1) AS 施新_合計 FROM t1 AS T WHERE T."施設_新"='○') as D
+                    ,(SELECT COUNT(1) AS 施継_合計 FROM t1 AS T WHERE T."施設_継"='○') as E
+                    ,(SELECT SUM(T."ikenshoSakuseiryo") AS 作成料_合計 FROM t1 AS T ) as F
+                    ,(SELECT SUM(T."ikenshoBettoShinryohi") AS 診断検査費用_合計 FROM t1 AS T ) as G
+                    ,(SELECT SUM(T."ikenshoHoshu") AS 合計 FROM t1 AS T ) as H
+                   ,(SELECT 
+					SUM(
+					CASE 
+					J.count%25
+					WHEN 0 THEN J.count/25
+					ELSE J.count/25 + 1
+					END) AS count
+					FROM
+					(SELECT COUNT(1) AS count FROM t1 as T group by  T."shujiiIryoKikanCode") as J) as K
+              
+                </if>									
+    </select>
+    <resultMap id="resultMap_IkenshoHoshuShokaiRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshohoshushokai.IkenshoHoshuShokaiRelateEntity" autoMapping="true">
+        <result property="市町村コード" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="主治医医療機関コード" column="shujiiIryoKikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="医療機関名称" column="iryoKikanMeisho"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="主治医氏名" column="shujiiName"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="主治医意見書作成依頼年月日" column="依頼日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="主治医意見書記入年月日" column="記入日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="主治医意見書受領年月日" column="入手日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="証記載保険者番号" column="保険者"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="被保険者氏名" column="hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="在宅_新" column="在宅_新" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="在宅_継" column="在宅_継" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="施設_新" column="施設_新" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="施設_継" column="施設_継"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="主治医意見書依頼区分" column="ikenshoIraiKubun"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="主治医コード" column="shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="主治医意見書作成料" column="ikenshoSakuseiryo" />
+        <result property="主治医意見書別途診療費" column="ikenshoBettoShinryohi"/>
+        <result property="主治医意見書報酬" column="ikenshoHoshu" />
+        <result property="申請書管理番号" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="主治医意見書作成依頼履歴番号" column="ikenshoIraiRirekiNo" />
+        <result property="在新_合計" column="在新_合計" />
+        <result property="在継_合計" column="在継_合計" />
+        <result property="施新_合計" column="施新_合計" />
+        <result property="施継_合計" column="施継_合計" />
+        <result property="作成料_合計" column="作成料_合計" />
+        <result property="診断検査費用_合計" column="診断検査費用_合計" />
+        <result property="合計" column="合計" />
+        <result property="件数" column="count" />
+    </resultMap>
+</mapper>

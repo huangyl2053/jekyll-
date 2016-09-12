@@ -5,7 +5,7 @@
 
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.taisyosyajidowaritsuke.ITaisyosyaJidoWaritsukeRelateMapper">
 
-    <select id="selectTaisyosya" resultMap="resultMap_Dbe510001Entity" parameterType="java.lang.Boolean" fetchSize="500">
+    <select resultOrdered="true" id="selectTaisyosya" resultMap="resultMap_Dbe510001Entity" parameterType="java.lang.Boolean" fetchSize="500">
         SELECT
         DbT5101."shinsakaiYusenWaritsukeKubunCode"
         , DbT5101."hihokenshaNo"
@@ -99,7 +99,7 @@
         , DbT5101."ninteiShinseiYMD" ASC
     </select>
 
-    <select id="selectYoteiJohoForUpdate"
+    <select resultOrdered="true" id="selectYoteiJohoForUpdate"
             resultType="jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5501ShinsakaiKaisaiYoteiJohoEntity"
             parameterType="jp.co.ndensan.reams.uz.uza.lang.RString"
             fetchSize="500">
@@ -123,7 +123,7 @@
         WHERE dbT5501."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
     </select>
 
-    <select id="selectNinteiShinseiJohoByKey" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity"
+    <select resultOrdered="true" id="selectNinteiShinseiJohoByKey" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity"
             parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
         SELECT DbT5101."ninteiChosaItakusakiCode"
         ,DbT5101."ninteiChosainCode"
@@ -134,7 +134,7 @@
         WHERE DbT5101."shinseishoKanriNo" = #{shinseishoKanriNo}
     </select>
 
-    <select id="selectCountShinsakaiWariateIinJoho"
+    <select resultOrdered="true" id="selectCountShinsakaiWariateIinJoho"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.taisyosyajidowaritsuke.TaisyosyaJidoWaritsukeMybatisParameter"
             resultType="int"
             fetchSize="500">
@@ -157,7 +157,7 @@
         </if>
     </select>
 
-    <select id="selectCountShinsakaiIinJogaiJoho"
+    <select resultOrdered="true" id="selectCountShinsakaiIinJogaiJoho"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.taisyosyajidowaritsuke.TaisyosyaJidoWaritsukeMybatisParameter"
             resultType="int"
             fetchSize="500">
@@ -169,7 +169,7 @@
         AND DbT5503."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
     </select>
 
-    <select id="selectMaxShinsakaiOrder"
+    <select resultOrdered="true" id="selectMaxShinsakaiOrder"
             parameterType="jp.co.ndensan.reams.uz.uza.lang.RString"
             resultType="int"
             fetchSize="500">

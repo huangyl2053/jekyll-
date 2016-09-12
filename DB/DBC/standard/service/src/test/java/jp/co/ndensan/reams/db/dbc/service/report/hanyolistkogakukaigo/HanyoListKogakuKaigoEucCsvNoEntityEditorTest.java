@@ -31,7 +31,7 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditorTest {
 
         @BeforeClass
         public static void test() throws NoSuchMethodException {
-            sut = new HanyoListKogakuKaigoEucCsvNoEntityEditor();
+            sut = new HanyoListKogakuKaigoEucCsvNoEntityEditor(FlexibleDate.getNowDate());
             method = HanyoListKogakuKaigoEucCsvNoEntityEditor.class
                     .getDeclaredMethod(
                             "convertDayOfWeek", FlexibleDate.class);

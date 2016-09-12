@@ -4,17 +4,23 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB3110001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * Shinseiinfo のクラスファイル 
- * 
- * @author 自動生成
+ * Shinseiinfo のクラスファイル
+ *
+ * @reamsid_L DBB-1660-010 gongliang
  */
 public class ShinseiinfoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -30,7 +36,7 @@ public class ShinseiinfoDiv extends Panel {
     @JsonProperty("txtShinseiGemmengaku")
     private TextBoxNum txtShinseiGemmengaku;
     @JsonProperty("btnGemmenShurui")
-    private Button btnGemmenShurui;
+    private ButtonDialog btnGemmenShurui;
     @JsonProperty("txtGemmenShurui")
     private TextBox txtGemmenShurui;
     @JsonProperty("txtShinseiRiyu")
@@ -119,7 +125,7 @@ public class ShinseiinfoDiv extends Panel {
      * @return btnGemmenShurui
      */
     @JsonProperty("btnGemmenShurui")
-    public Button getBtnGemmenShurui() {
+    public ButtonDialog getBtnGemmenShurui() {
         return btnGemmenShurui;
     }
 
@@ -128,7 +134,7 @@ public class ShinseiinfoDiv extends Panel {
      * @param btnGemmenShurui btnGemmenShurui
      */
     @JsonProperty("btnGemmenShurui")
-    public void setBtnGemmenShurui(Button btnGemmenShurui) {
+    public void setBtnGemmenShurui(ButtonDialog btnGemmenShurui) {
         this.btnGemmenShurui = btnGemmenShurui;
     }
 

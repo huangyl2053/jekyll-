@@ -7,14 +7,16 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ninteiin
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBDCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteiinput.NinteiInputDataPassModel;
+import jp.co.ndensan.reams.db.dbz.business.core.ninteiinput.NinteiInputNaiyo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiInput.NinteiInput.NinteiInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiInput.NinteiInput.dgServiceIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.service.core.ninteiinput.NinteiInputFinder;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
@@ -22,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 /**
  * DBZ.NinteiInput_認定情報のHandlerクラスです。
  *
- * @reamsid_L DBE-1300-080 yaodongsheng
+ * @reamsid_L DBZ-1300-080 yaodongsheng
  */
 public class NinteiInputHandler {
 
@@ -44,8 +46,12 @@ public class NinteiInputHandler {
      */
     public void initialize(NinteiInputDataPassModel model) {
         div.setHdnShinseishoKanriNo(model.get申請書管理番号() == null ? RString.EMPTY : model.get申請書管理番号().value());
-        div.getRadNinteiKubun().setSelectedValue(model.get認定区分());
-        div.getChkMinashiKoshinNintei().setSelectedItemsByKey(model.getみなし更新認定());
+        if (!RString.isNullOrEmpty(model.get認定区分())) {
+            div.getRadNinteiKubun().setSelectedKey(model.get認定区分());
+        }
+        if (model.getみなし更新認定() != null && !model.getみなし更新認定().isEmpty()) {
+            div.getChkMinashiKoshinNintei().setSelectedItemsByKey(model.getみなし更新認定());
+        }
         div.setHdnDatabaseSubGyomuCode(model.getSubGyomuCode());
         div.setHdnKoroshoIfShikibetsuCode(model.get厚労省IFコード());
         div.getTxtNinteiYMD().setValue(model.get認定年月日());
@@ -55,7 +61,8 @@ public class NinteiInputHandler {
         div.getTxtYukoKaishiYMD().setValue(model.get有効開始年月日());
         div.getTxtYukoShuryoYMD().setValue(model.get有効終了年月日());
         NinteiInputFinder ninteiInputFinder = NinteiInputFinder.createInstance();
-        List<UzT0007CodeEntity> entityList = CodeMaster.getCode(SubGyomuCode.DBD介護受給, new CodeShubetsu("0002"));
+        List<UzT0007CodeEntity> entityList = CodeMaster.getCode(SubGyomuCode.DBD介護受給,
+                DBDCodeShubetsu.指定サービス種類コード.getコード(), FlexibleDate.getNowDate());
         List<dgServiceIchiran_Row> rowList = new ArrayList<>();
         for (UzT0007CodeEntity entity : entityList) {
             dgServiceIchiran_Row row = new dgServiceIchiran_Row();
@@ -64,13 +71,67 @@ public class NinteiInputHandler {
             rowList.add(row);
         }
         div.getDgServiceIchiran().setDataSource(rowList);
-        List<JukyushaDaicho> jukyushaDaichoList = ninteiInputFinder.getサービス(model.get申請書管理番号()).records();
-        setSelect(rowList, jukyushaDaichoList);
-        if (!new RString("TemnyuMode").equals(new RString(div.getMode_ShoriType().toString()))
-                && !new RString("InputMode").equals(new RString(div.getMode_ShoriType().toString()))
-                && !new RString("TokushuTsuikaMode").equals(new RString(div.getMode_ShoriType().toString()))
-                && !new RString("TokushuShuseiMode").equals(new RString(div.getMode_ShoriType().toString()))) {
+        if (model.getサービス一覧リスト() != null && !model.getサービス一覧リスト().isEmpty()) {
+            setSelectIchiran(rowList, model.getサービス一覧リスト());
+        } else {
+            List<JukyushaDaicho> jukyushaDaichoList = ninteiInputFinder.getサービス(model.get申請書管理番号()).records();
+            setSelect(rowList, jukyushaDaichoList);
+        }
+        if (new RString("TemnyuMode").equals(new RString(div.getMode_ShoriType().toString()))
+                || new RString("InputMode").equals(new RString(div.getMode_ShoriType().toString()))
+                || new RString("TokushuTsuikaMode").equals(new RString(div.getMode_ShoriType().toString()))
+                || new RString("TokushuShuseiMode").equals(new RString(div.getMode_ShoriType().toString()))
+                || new RString("TokushuShinseiTorikeshiMode").equals(new RString(div.getMode_ShoriType().toString()))
+                || new RString("ShokkenTsuikaMode").equals(new RString(div.getMode_ShoriType().toString()))
+                || new RString("ShokkenShuseiMode").equals(new RString(div.getMode_ShoriType().toString()))
+                || new RString("KyakkaTorikeshiRirekiShusei").equals(new RString(div.getMode_ShoriType().toString()))) {
+            div.getDgServiceIchiran().setReadOnly(false);
+        } else {
             div.getDgServiceIchiran().setReadOnly(true);
+        }
+    }
+
+    /**
+     * 画面一覧内容を取得。
+     *
+     * @return NinteiInputNaiyo NinteiInputNaiyo
+     */
+    public NinteiInputNaiyo getNaiyo() {
+        NinteiInputNaiyo naiyo = new NinteiInputNaiyo();
+        naiyo.set認定区分(div.getRadNinteiKubun().getSelectedKey());
+        naiyo.setみなし更新認定(div.getChkMinashiKoshinNintei().getSelectedKeys());
+        naiyo.set認定年月日(div.getTxtNinteiYMD().getValue());
+        naiyo.set有効終了年月日(div.getTxtYukoShuryoYMD().getValue());
+        naiyo.set有効開始年月日(div.getTxtYukoKaishiYMD().getValue());
+        naiyo.set要介護度コード(div.getTxtYokaigodoCode().getValue());
+        naiyo.set要介護度名称(div.getTxtYokaigodoName().getValue());
+        naiyo.set審査会意見(div.getTxtShinsakaiIken().getValue());
+        return naiyo;
+    }
+
+    /**
+     * Service一覧内容を取得。
+     *
+     * @return NinteiInputNaiyo NinteiInputNaiyo
+     */
+    public List<dgServiceIchiran_Row> getServiceRow() {
+        List<dgServiceIchiran_Row> rowList = new ArrayList<>();
+        for (dgServiceIchiran_Row row : div.getDgServiceIchiran().getDataSource()) {
+            if (row.getSelected()) {
+                rowList.add(row);
+            }
+        }
+        return rowList;
+    }
+
+    private void setSelectIchiran(List<dgServiceIchiran_Row> rowList, List<RString> サービス一覧リスト) {
+        for (RString サービスコード : サービス一覧リスト) {
+            for (dgServiceIchiran_Row row : rowList) {
+                if (row.getCode().equals(サービスコード)) {
+                    row.setSelected(true);
+                    break;
+                }
+            }
         }
     }
 

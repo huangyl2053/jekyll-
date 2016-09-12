@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-0980-421 surun -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kagoketteihokenshainkouhifutann.IKagoKetteiHokenshaInKouhiFutannMapper">
+    <!--過誤決定集計一時テーブルを作成します-->
+    <insert id="create過誤決定集計一時TBL">
+        CREATE TEMP TABLE "DbWT3060KagoKetteiShukei"
+        (
+        "hdrToriatsukaiYm" rshare."UDD014YM",
+        "hdrRirekiNo" smallint,
+        "hdrShoHokenshaNo" rgdb."DbUDD003HokenshaNo",
+        "hdrShoHokenshaMei" character varying(40),
+        "sakuseiYmd" rshare."UDD015YMD",
+        "kaigoKyufuhiKensu" integer,
+        "kaigoKyufuhiTanisu" numeric(13,0),
+        "kaigoKyufuhiFutangaku" numeric(13,0),
+        "kogakuServicehiKensu" integer,
+        "kogakuServicehiTanisu" numeric(13,0),
+        "kogakuServicehiFutangaku" numeric(13,0),
+        "tokuteiNyushoshaServicehiKensu" integer,
+        "tokuteiNyushoshaServicehiTanisu" numeric(13,0),
+        "tokuteiNyushoshaServicehiFutangaku" numeric(13,0),
+        "hdrTorikomiYm" rshare."UDD014YM",
+        "hokenshaNo" rgdb."DbUDD003HokenshaNo",
+        "hokenshaMei" character varying(40)
+        )
+    </insert>
+    
+    <!--過誤決定明細一時テーブルを作成します-->
+    <insert id="create過誤決定明細一時TBL">
+        CREATE TEMP TABLE "DbWT3061KagoKetteiMeisai"
+        (
+        "toriatsukaiYm" rshare."UDD014YM",
+        "rirekiNo" smallint,
+        "renban" smallint,
+        "jigyoshoNo" rgdb."DbUDD004JigyoshaNo",
+        "jigyoshoMei" character varying(40),
+        "kohiFutanshaNo" character varying(40),
+        "kohiJukyushaNo" character varying(40),
+        "kohiShokisaiHokenshaNo" rgdb."DbUDD003HokenshaNo",
+        "serviceTeikyoYm" rshare."UDD014YM",
+        "serviceShuruiCode" rgdb."DbUDD005ServiceShuruiCode",
+        "serviceShuruiName" character varying(40),
+        "kagomoushitateJiyuCode" rshare."UDD035Code",
+        "kagomoushitateJiyu" character varying(40),
+        "tanisu" numeric(13,0),
+        "hokenshaFutangaku" numeric(13,0),
+        "torikomiYm" rshare."UDD014YM"
+        )
+    </insert>
+    
+    <insert id="create被保険者一時TBL">
+        CREATE TEMP TABLE "DbWT0001Hihokensha"
+        (
+        "meisaiRenban" smallint,
+        "shoHokenshaNo" rgdb."DbUDD003HokenshaNo",
+        "orgHihokenshaNo" rgdb."DbUDD002HihokenshaNo",
+        "serviceTeikyoYmd" rshare."UDD015YMD",
+        "orgHihokenshaKanaShimei" character varying(40),   
+        "orgHihokenshaShimei" character varying(40),
+        "oldShichosonCode" rshare."UDD023LasdecCode",
+        "henkanHihokenshaNo" rgdb."DbUDD002HihokenshaNo",
+        "hihokenshaNo" rgdb."DbUDD002HihokenshaNo",
+        "shichosonCode" rshare."UDD023LasdecCode",
+        "kannaiKangaiKubun" character varying(40),
+        "yubinNo" character varying(40),
+        "choikiCode" character varying(40),
+        "gyoseikuCode" character varying(40),
+        "gyoseikuMei" character varying(40),
+        "jusho" character varying(40),
+        "banchi" character varying(40),
+        "katagaki" character varying(40),
+        "kanaMeisho" character varying(40),
+        "meisho" character varying(40),
+        "shimei50onKana" character varying(40),
+        "shikakuShutokuYmd" rshare."UDD015YMD",
+        "shikakuShutokuJiyuCode" character varying(2),
+        "shikakuSoshitsuYmd" rshare."UDD015YMD",
+        "shikakuSoshitsuJiyuCode" character varying(2),
+        "setaiShuyakuNo" character varying(40),
+        "shikibetsuCode" rshare."UDD001ShikibetsuCode",
+        CONSTRAINT "DbWT0001_pkey" PRIMARY KEY ("meisaiRenban")
+        )
+    </insert>
+    
+    <insert id="create処理結果リスト一時TBL">
+        CREATE TEMP TABLE "DbWT0002KokuhorenTorikomiError"
+        (
+        "errorKubun" character varying(40),
+        "shoHokanehshaNo" rgdb."DbUDD003HokenshaNo",
+        "hihokenshaNo" rgdb."DbUDD002HihokenshaNo",
+        "key1" character varying(40),
+        "key2" character varying(40),
+        "key3" character varying(40),
+        "key4" character varying(40),
+        "key5" character varying(40),
+        "hihokenshaKanaShimei" character varying(40),
+        "hihokenshaShimei" character varying(40),
+        "biko" character varying(40)
+        )
+    </insert>
+    
+    <!--過誤決定集計一時テーブルに登録します-->
+    <insert id="過誤決定集計一時TBLに登録" parameterType="jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT3060KagoKetteiShukeiTempEntity">
+        INSERT INTO "DbWT3060KagoKetteiShukei" 
+        VALUES 
+        (
+        #{取扱年月},
+        #{履歴番号},
+        #{証記載保険者番号},
+        #{証記載保険者名},
+        #{作成年月日},
+        #{介護給付費件数},
+        #{介護給付費単位数},
+        #{介護給付費保険者負担額},
+        #{高額介護サービス費件数},
+        #{高額介護サービス費単位数},
+        #{高額介護サービス費保険者負担額},
+        #{特定入所者介護サービス費等件数},
+        #{特定入所者介護サービス費等費用額},
+        #{特定入所者介護サービス費等保険者負担額},
+        #{取込年月},
+        #{保険者番号},
+        #{保険者名})
+    </insert>
+    
+    <!--過誤決定明細一時テーブルに登録します-->
+    <insert id="過誤決定明細一時TBLに登録" parameterType="jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT3061KagoKetteiMeisaiTempEntity">
+        INSERT INTO "DbWT3061KagoKetteiMeisai"
+        VALUES 
+        (
+        #{取扱年月},
+        #{履歴番号},
+        #{連番},
+        #{事業所番号},
+        #{事業所名},
+        #{公費負担者番号},
+        #{公費受給者番号},
+        #{公費証記載保険者番号},
+        #{サービス提供年月},
+        #{サービス種類コード},
+        #{サービス種類名},
+        #{過誤申立事由コード},
+        #{過誤申立事由},
+        #{単位数},
+        #{保険者負担額},
+        #{取込年月})
+    </insert>
+    
+    <!--被保険者一時テーブルに登録します-->
+    <insert id="被保険者一時TBLに登録" parameterType="jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity">
+        INSERT INTO "DbWT0001Hihokensha"
+        VALUES 
+        (
+        #{連番},
+        #{証記載保険者番号},
+        #{被保険者番号},
+        #{サービス提供年月末日},
+        #{被保険者カナ氏名},
+        #{被保険者氏名},
+        #{旧市町村コード},
+        #{変換被保険者番号},
+        #{登録被保険者番号},
+        #{市町村コード},
+        #{管内管外区分},
+        #{郵便番号},
+        #{町域コード},
+        #{行政区コード},
+        #{行政区名},
+        #{住所},
+        #{番地},
+        #{方書},
+        #{宛名カナ名称},
+        #{宛名名称},
+        #{氏名50音カナ},
+        #{資格取得日},
+        #{資格取得事由コード},
+        #{資格喪失日},
+        #{資格喪失事由コード},
+        #{世帯集約番号},
+        #{識別コード}
+        )
+    </insert>
+    
+    <!--処理結果リスト一時TBLに登録します-->
+    <insert id="処理結果リスト一時TBLに登録" parameterType="jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0002KokuhorenTorikomiErrorTempEntity">
+        INSERT INTO "DbWT0002KokuhorenTorikomiError"
+        VALUES 
+        (
+        #{エラー区分},
+        #{証記載保険者番号},
+        #{被保険者番号},
+        #{キー1},
+        #{キー2},
+        #{キー3},
+        #{キー4},
+        #{キー5},
+        #{被保険者カナ氏名},
+        #{被保険者氏名},
+        #{備考}
+        )
+    </insert>
+</mapper>

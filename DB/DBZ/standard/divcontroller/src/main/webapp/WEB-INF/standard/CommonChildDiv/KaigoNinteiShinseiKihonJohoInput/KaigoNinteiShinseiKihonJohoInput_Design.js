@@ -4,6 +4,10 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onChange_ddlHihokenshaKubun = function () {
+                return "onChange_ddlHihokenshaKubun";
+            };
+
             Events.onOkClose_btnServiceSakujoTeikeibun = function () {
                 return "onOkClose_btnServiceSakujoTeikeibun";
             };

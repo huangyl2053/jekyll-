@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.batchprm.hanteikekkajohoshuturyoku;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
@@ -23,10 +24,13 @@ import lombok.Setter;
 public class HanteiKekkaJohoShuturyokuBatchParameter extends BatchParameterBase {
 
     private static final String KEY_HAKKOUTYOUHYOU = "hakkouTyouhyou";
+    private static final String KEY_KAISAIBANGOULIST = "kaisaiBangouList";
     private static final String KEY_KAISAIBANGOU = "kaisaiBangou";
 
     @BatchParameter(key = KEY_HAKKOUTYOUHYOU, name = "発行帳票")
     private RString hakkouTyouhyou;
+    @BatchParameter(key = KEY_KAISAIBANGOULIST, name = "開催番号")
+    private List<RString> kaisaiBangouList;
     @BatchParameter(key = KEY_KAISAIBANGOU, name = "開催番号")
     private RString kaisaiBangou;
 
@@ -38,6 +42,7 @@ public class HanteiKekkaJohoShuturyokuBatchParameter extends BatchParameterBase 
     public HanteiKekkaJohoShuturyokuProcessParameter toHanteiKekkaJohoShuturyokuProcessParameter() {
         return new HanteiKekkaJohoShuturyokuProcessParameter(
                 hakkouTyouhyou,
+                kaisaiBangouList,
                 kaisaiBangou);
     }
 }

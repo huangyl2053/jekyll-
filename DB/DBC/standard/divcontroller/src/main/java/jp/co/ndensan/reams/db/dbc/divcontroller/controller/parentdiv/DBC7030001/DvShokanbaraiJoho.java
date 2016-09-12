@@ -12,12 +12,14 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7030001.DvSh
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7030001.DvShokanbaraiJohoHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC7030001.DvShokanbaraiJohoValidationHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.dvshokanbaraijoho.DvShokanbaraiJohoManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 汎用リスト出力(償還払い状況)のパネルです。
@@ -45,7 +47,8 @@ public class DvShokanbaraiJoho {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
             }
         }
-        getHandler(div).initialize抽出条件パネル();
+        RString 市町村判定 = getHandler(div).initialize抽出条件パネル();
+        ViewStateHolder.put(ViewStateKeys.市町村判定, 市町村判定);
         div.getDvShokanbaraiParam().getCcdShokanShutsuryokujun().load(SubGyomuCode.DBC介護給付, 帳票ID);
         return createResponse(div);
     }
@@ -90,7 +93,8 @@ public class DvShokanbaraiJoho {
      * @return バッチを起動する
      */
     public ResponseData<HanyoListShokanbaraiJokyoBatchParameter> onClick_btnBatchRegister(DvShokanbaraiJohoDiv div) {
-        HanyoListShokanbaraiJokyoBatchParameter parameter = getHandler(div).setBatchParamter();
+        RString 市町村判定 = ViewStateHolder.get(ViewStateKeys.市町村判定, RString.class);
+        HanyoListShokanbaraiJokyoBatchParameter parameter = getHandler(div).setBatchParamter(市町村判定);
         return ResponseData.of(parameter).respond();
     }
 

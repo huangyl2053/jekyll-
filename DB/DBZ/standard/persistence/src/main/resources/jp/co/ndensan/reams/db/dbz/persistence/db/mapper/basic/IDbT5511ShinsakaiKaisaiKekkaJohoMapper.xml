@@ -54,7 +54,7 @@
         <result property="shoyoJikanGokei" column="dbT5511ShinsakaiKaisaiKekkaJoho_shoyoJikanGokei" />
         <result property="shinsakaiJisshiNinzu" column="dbT5511ShinsakaiKaisaiKekkaJoho_shinsakaiJisshiNinzu" />
     </resultMap>
-   <select id="getEntity" resultMap="ResultMap_DbT5511ShinsakaiKaisaiKekkaJohoEntity">
+   <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5511ShinsakaiKaisaiKekkaJohoEntity">
         SELECT
         <include refid="allColumns_DbT5511ShinsakaiKaisaiKekkaJoho"/>
         FROM

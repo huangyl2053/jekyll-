@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.shujiiikensho1;
 
-import jp.co.ndensan.reams.db.dbe.entity.db.shujiiikensho.ShujiiikenshoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujikensho.ShujiiikenshoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikensho1.ShujiiikenshoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -34,7 +34,7 @@ public class ShujiiikenshoReport extends Report<ShujiiikenshoReportSource> {
      * @param reportSourceWriter 帳票Writer
      */
     @Override
-    protected void writeBy(ReportSourceWriter<ShujiiikenshoReportSource> reportSourceWriter) {
+    public void writeBy(ReportSourceWriter<ShujiiikenshoReportSource> reportSourceWriter) {
         IShujiiikenshoEditor editor = new ShujiiikenshoEditor(entity);
         IShujiiikenshoBuilder builder = new ShujiiikenshoBuilder(editor);
         reportSourceWriter.writeLine(builder);

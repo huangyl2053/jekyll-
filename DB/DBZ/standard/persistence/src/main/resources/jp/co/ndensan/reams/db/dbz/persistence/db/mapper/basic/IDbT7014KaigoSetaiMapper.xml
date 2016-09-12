@@ -51,7 +51,7 @@
         <result property="setaiInshikibetsuCode" column="dbT7014KaigoSetai_setaiInshikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="honninKubun" column="dbT7014KaigoSetai_honninKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-<select id="getEntity" resultMap="ResultMap_DbT7014KaigoSetaiEntity">
+<select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT7014KaigoSetaiEntity">
     SELECT
     <include refid="allColumns_DbT7014KaigoSetai" />
     FROM

@@ -70,13 +70,13 @@
         <result property="renkeiFileName" column="dbT7035RendoPattern_renkeiFileName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
-    <select id="getEntity" resultMap="ResultMap_DbT7035RendoPatternEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT7035RendoPatternEntity">
         SELECT
         <include refid="allColumns_DbT7035RendoPattern"/>
         FROM
         rgdb."DbT7035RendoPattern"
     </select>
-    <select id="getRendoPatternEntity" parameterType="jp.co.ndensan.reams.uz.uza.lang.FlexibleDate" resultMap="ResultMap_DbT7035RendoPatternEntity">
+    <select resultOrdered="true" id="getRendoPatternEntity" parameterType="jp.co.ndensan.reams.uz.uza.lang.FlexibleDate" resultMap="ResultMap_DbT7035RendoPatternEntity">
         SELECT
         <include refid="allColumns_DbT7035RendoPattern"/>
         FROM

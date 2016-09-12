@@ -68,7 +68,7 @@
         <result property="shiryoSakuseiZumiFlag" column="dbT5501ShinsakaiKaisaiYoteiJoho_shiryoSakuseiZumiFlag" />
         <result property="mobileDataOutputYMD" column="dbT5501ShinsakaiKaisaiYoteiJoho_mobileDataOutputYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
-   <select id="getEntity" resultMap="ResultMap_DbT5501ShinsakaiKaisaiYoteiJohoEntity">
+   <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5501ShinsakaiKaisaiYoteiJohoEntity">
         SELECT
         <include refid="allColumns_DbT5501ShinsakaiKaisaiYoteiJoho"/>
         FROM

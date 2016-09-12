@@ -4,9 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ikensho;
 
+import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.IShujiiIkenshoItemGroup;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.IShujiiIkenshoItemKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.ikensho.IShujiiIkenshoItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.core.ikensho.IShujiiIkenshoItemKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -20,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class ShujiiIkenshoEditor<E extends IShujiiIkenshoItemKubun, T extends IShujiiIkenshoItem> {
 
     private Map<E, T> regulation;
-    private final IShujiiIkenshoItemGroup[] itemGroup;
+    private final List<IShujiiIkenshoItemGroup> itemGroup;
 
     /**
      * インスタンスを生成します。

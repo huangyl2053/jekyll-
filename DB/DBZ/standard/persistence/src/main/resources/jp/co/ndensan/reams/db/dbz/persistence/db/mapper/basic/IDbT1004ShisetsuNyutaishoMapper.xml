@@ -63,7 +63,7 @@
         <result property="roomKigoNo" column="dbT1004ShisetsuNyutaisho_roomKigoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
-        <select id="getEntity" resultMap="ResultMap_DbT1004ShisetsuNyutaishoEntity">
+        <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT1004ShisetsuNyutaishoEntity">
 	SELECT
 	<include refid="allColumns_DbT1004ShisetsuNyutaisho"/>
 	FROM

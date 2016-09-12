@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  * DBZ.NinteiInput_認定情報のdivControlerです。
  *
- * @reamsid_L DBE-1300-080 yaodongsheng
+ * @reamsid_L DBZ-1300-080 yaodongsheng
  */
 public class NinteiInput {
 
@@ -57,6 +57,12 @@ public class NinteiInput {
      */
     public ResponseData<NinteiInputDiv> onClick_btnYokaigodoGuide(NinteiInputDiv div) {
         div.getTxtYokaigodoCode().setValue(div.getHdnKoroshoIfShikibetsuCode());
+        if (div.getTxtNinteiYMD().getValue() == null) {
+            div.setHdnNinteiYmd(RString.EMPTY);
+        } else {
+            div.setHdnNinteiYmd(new RString(div.getTxtNinteiYMD().getValue().toString()));
+        }
+
         return ResponseData.of(div).respond();
     }
 
@@ -121,13 +127,27 @@ public class NinteiInput {
     }
 
     /**
-     * 開始または終了日がlostFocusです。
+     * 開始日がlostFocusです。
      *
      * @param div NinteiInputDiv
      * @return NinteiInputDiv
      */
-    public ResponseData<NinteiInputDiv> onClick_lostFocus(NinteiInputDiv div) {
-        ValidationMessageControlPairs validPairs = getValidationHandler(div).開始終了日check();
+    public ResponseData<NinteiInputDiv> onClick_kaishiLostFocus(NinteiInputDiv div) {
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).開始日check();
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 終了日がlostFocusです。
+     *
+     * @param div NinteiInputDiv
+     * @return NinteiInputDiv
+     */
+    public ResponseData<NinteiInputDiv> onClick_syuryoLostFocus(NinteiInputDiv div) {
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).終了日check();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }

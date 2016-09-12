@@ -6,7 +6,7 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shujiiikenshosakuseiirai.IShujiiIkenshoSakuseiIraiMapper">
 
-    <select id="get申請者情報" resultMap="resultMap_Shujiiikenshosakuseiirai"
+    <select resultOrdered="true" id="get申請者情報" resultMap="resultMap_Shujiiikenshosakuseiirai"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshosakuseiirai.ShujiiIkenshoSakuseiIraiParameter"
             fetchSize="500">
         SELECT
@@ -31,6 +31,9 @@
         "DbT5911ShujiiIryoKikanJoho"."iryoKikanMeisho",
         "DbT5911ShujiiIryoKikanJoho"."jusho" AS "iryoKikanJusho",
         "DbT5911ShujiiIryoKikanJoho"."telNo"  AS "iryoKikanTelNo",
+        "DbT5911ShujiiIryoKikanJoho"."faxNo" AS "iryoKikanFaxNo",
+        "DbT5911ShujiiIryoKikanJoho"."yubinNo" AS "iryoKikanYubinNo",
+        "DbT5911ShujiiIryoKikanJoho"."daihyoshaName",
         "DbT5912ShujiiJoho"."shujiiName",
         "DbT5301ShujiiIkenshoIraiJoho"."ikenshoSakuseiIraiYMD",
         "DbT5301ShujiiIkenshoIraiJoho"."iraishoShutsuryokuYMD",
@@ -45,7 +48,7 @@
         <include refid="selectJouken" />
     </select>
 
-    <select id="get要介護認定申請情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.ResultMap_DbT5101NinteiShinseiJohoEntity"
+    <select resultOrdered="true" id="get要介護認定申請情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.ResultMap_DbT5101NinteiShinseiJohoEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshosakuseiirai.ShujiiIkenshoSakuseiIraiParameter"
             fetchSize="500">
         SELECT
@@ -53,7 +56,7 @@
         <include refid="selectJouken" />
     </select>
 
-    <select id="get主治医意見書作成依頼情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.ResultMap_DbT5301ShujiiIkenshoIraiJohoEntity"
+    <select resultOrdered="true" id="get主治医意見書作成依頼情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.ResultMap_DbT5301ShujiiIkenshoIraiJohoEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshosakuseiirai.ShujiiIkenshoSakuseiIraiParameter"
             fetchSize="500">
         SELECT
@@ -61,7 +64,7 @@
         <include refid="selectJouken" />
     </select>
 
-    <select id="get宛名情報" resultMap="resultMap_ShujiiIraiAtena"
+    <select resultOrdered="true" id="get宛名情報" resultMap="resultMap_ShujiiIraiAtena"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshosakuseiirai.ShujiiIraiAtenaJohoParameter"
             fetchSize="500">
         SELECT
@@ -84,13 +87,6 @@
     <sql id="selectJouken">
         FROM
         rgdb."DbT5101NinteiShinseiJoho" AS "DbT5101NinteiShinseiJoho"
-        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS "DbT5105NinteiShinseiJoho"
-        ON
-        "DbT5105NinteiShinseiJoho"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
-        AND "DbT5105NinteiShinseiJoho"."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
-        AND "DbT5105NinteiShinseiJoho"."ninteiShinsakaiWariateKanryoYMD" IS NULL
-        AND "DbT5105NinteiShinseiJoho"."ninteiShinsakaiKanryoYMD" IS NULL
-        AND "DbT5105NinteiShinseiJoho"."centerSoshinYMD" IS NULL
 
         LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" AS "DbT7051KoseiShichosonMaster"
         ON
@@ -173,17 +169,6 @@
             FROM rgdb."DbT5203NinteichosahyoKihonChosa" NinteichosahyoKihonChosa
             WHERE NinteichosahyoKihonChosa."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo")
         </if>
-        <if test="useShujiiIkenshoIraiJoho">
-            LEFT JOIN
-            rgdb."DbT5301ShujiiIkenshoIraiJoho" DbT5301ShujiiIkenshoIraiJoho
-            ON "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
-            AND DbT5301ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo" =
-            (SELECT MAX(ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo")
-            FROM rgdb."DbT5301ShujiiIkenshoIraiJoho" ShujiiIkenshoIraiJoho
-            WHERE ShujiiIkenshoIraiJoho."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
-            AND ShujiiIkenshoIraiJoho."logicalDeletedFlag" = FALSE)
-            AND "DbT5101NinteiShinseiJoho"."logicalDeletedFlag" = FALSE
-        </if>
         <if test="useShujiiIkenshoJoho">
             LEFT JOIN
             rgdb."DbT5302ShujiiIkenshoJoho" DbT5302ShujiiIkenshoJoho
@@ -236,9 +221,6 @@
         "DbT5101NinteiShinseiJoho"."logicalDeletedFlag" = FALSE
         AND ("DbT5101NinteiShinseiJoho"."shoriJotaiKubun" = #{shoriJotaiKubunTsujo}
         OR  "DbT5101NinteiShinseiJoho"."shoriJotaiKubun" = #{shoriJotaiKubunEnki})
-        <if test="useHihokenshaNo">
-            AND  "DbT5101NinteiShinseiJoho"."hihokenshaNo" = #{hihokenshaNo}
-        </if>
         <if test="useHihokenshaNo">
             AND "DbT5101NinteiShinseiJoho"."hihokenshaNo" = #{hihokenshaNo}
         </if>
@@ -346,13 +328,19 @@
         <if test="useIkenshoJuryoYMDTo">
             AND DbT5302ShujiiIkenshoJoho."ikenshoJuryoYMD" <![CDATA[<=]]> #{ikenshoJuryoYMDTo}
         </if>
-        <if test="useIkenItem13">
+        <if test="useIkenItem13 and !useIkenItem14">
             AND DbT5304ShujiiIkenshoIkenItem."remban" = 13
             AND DbT5304ShujiiIkenshoIkenItem."ikenItem" = #{ikenItem13}
         </if>
-        <if test="useIkenItem14">
+        <if test="!useIkenItem13 and useIkenItem14">
             AND DbT5304ShujiiIkenshoIkenItem."remban" = 14
             AND DbT5304ShujiiIkenshoIkenItem."ikenItem" = #{ikenItem14}
+        </if>
+        <if test="useIkenItem13 and useIkenItem14">
+            AND ((DbT5304ShujiiIkenshoIkenItem."remban" = 13
+            AND DbT5304ShujiiIkenshoIkenItem."ikenItem" = #{ikenItem13})
+            OR (DbT5304ShujiiIkenshoIkenItem."remban" = 14
+            AND DbT5304ShujiiIkenshoIkenItem."ikenItem" = #{ikenItem14}))
         </if>
         <if test="useIchijiHanteiYMDFrom">
             AND DbT5116IchijiHanteiKekkaJoho."ichijiHanteiYMD" <![CDATA[>=]]> #{ichijiHanteiYMDFrom}
@@ -614,11 +602,14 @@
         <result property="seikyushoShutsuryokuYMD" column="seikyushoShutsuryokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="ikenshoIraiKubun" column="ikenshoIraiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="preIryoKikanMeisho" column="preIryoKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="iryoKikanFaxNo" column="iryoKikanFaxNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="preShujiiName" column="preShujiiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <result property="shinseiShinseijiKubunCode" column="ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="rirekiNo" column="rirekiNo"/>
         <result property="preRirekiNo" column="preRirekiNo"/>
         <result property="shisetsuNyushoFlag" column="shisetsuNyushoFlag"/>
+        <result property="iryoKikanYubinNo" column="iryoKikanYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="daihyoshaName" column="daihyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     <resultMap id="resultMap_ShujiiIraiAtena" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshosakuseiirai.ShujiiIraiAtenaJohoRelateEntity" autoMapping="true">
         <result property="atenaKikanMeisho" column="atenaKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

@@ -39,7 +39,7 @@ public class GemmenGengakuShuruiTest {
 
         @Theory
         public void それぞれの要素が特定のコードを返却する(Fixture p) {
-            assertThat(p.sut.code(), is(p.code));
+            assertThat(p.sut.getコード(), is(p.code));
         }
 
         @Theory

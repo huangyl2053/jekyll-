@@ -21,7 +21,7 @@
            <result property="chosainShimei"  column="ChosainJoho_chosainShimei"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
     
-    <select id="get調査員情報取得"
+    <select resultOrdered="true" id="get調査員情報取得"
             resultMap="resultMap_getNinteiChosaScheduleRelateEntity" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.core.ninteichosascheduleinput.NinteiChosaScheduleInputParameter" fetchSize="500">
        SELECT 																	
@@ -62,7 +62,7 @@
         </if>
     </select>
     
-    <select id="get調査員情報"
+    <select resultOrdered="true" id="get調査員情報"
             resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5221NinteichosaScheduleEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.core.ninteichosascheduleinput.NinteiChosaScheduleInputParameter" fetchSize="500">
        SELECT 																	

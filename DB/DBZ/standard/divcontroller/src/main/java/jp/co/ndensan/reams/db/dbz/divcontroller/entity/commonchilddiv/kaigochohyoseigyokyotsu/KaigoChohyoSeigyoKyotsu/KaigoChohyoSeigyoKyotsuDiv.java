@@ -7,17 +7,26 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigochoh
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatesakijushosettei.KaigoAtesakiJushoSettei.IKaigoAtesakiJushoSetteiDiv;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * KaigoChohyoSeigyoKyotsu のクラスファイル
  *
- * @author 自動生成
+ * @reamsid_L DBB-1770-070 yebangqiang
  */
 public class KaigoChohyoSeigyoKyotsuDiv extends Panel implements IKaigoChohyoSeigyoKyotsuDiv {
 
@@ -486,4 +495,31 @@ public class KaigoChohyoSeigyoKyotsuDiv extends Panel implements IKaigoChohyoSei
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    /**
+     * 介護帳票制御共通情報の初期化
+     *
+     * @param subGyomuCode サブ業務コード
+     * @param reportId 帳票分類ID
+     */
+    @Override
+    public void initialize(SubGyomuCode subGyomuCode, ReportId reportId) {
+        KaigoChohyoSeigyoKyotsuHandler handler = new KaigoChohyoSeigyoKyotsuHandler(this);
+        ChohyoSeigyoKyotsuManager 帳票制御共通Mgr = new ChohyoSeigyoKyotsuManager();
+        ChohyoSeigyoKyotsu 帳票制御共通 = 帳票制御共通Mgr.get帳票制御共通(subGyomuCode, reportId);
+        handler.initialize(subGyomuCode, reportId, 帳票制御共通);
+        ViewStateHolder.put(ViewStateKeys.帳票制御共通, 帳票制御共通);
+    }
+
+    /**
+     * 介護帳票制御共通情報の保存
+     *
+     * @param subGyomuCode サブ業務コード
+     * @param reportId 帳票分類ID
+     */
+    @Override
+    public void save(SubGyomuCode subGyomuCode, ReportId reportId) {
+        KaigoChohyoSeigyoKyotsuHandler handler = new KaigoChohyoSeigyoKyotsuHandler(this);
+        ChohyoSeigyoKyotsu 帳票制御共通 = ViewStateHolder.get(ViewStateKeys.帳票制御共通, ChohyoSeigyoKyotsu.class);
+        handler.save(subGyomuCode, reportId, 帳票制御共通);
+    }
 }

@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype;
 
+import jp.co.ndensan.reams.db.dbz.definition.core.IShikakuIdoJiyu;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 

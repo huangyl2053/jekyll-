@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidogennen;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -18,11 +19,18 @@ import lombok.Setter;
 @Setter
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ChohyoResult {
+public class ChohyoResult implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     private ReportId 帳票分類ID;
     private RString 帳票ID;
     private RString 出力順ID;
+
+    /**
+     * コンストラクタです。
+     */
+    public ChohyoResult() {
+    }
 
     /**
      * コンストラクタです。

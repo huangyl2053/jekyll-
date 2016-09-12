@@ -5,11 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.hakkogoidotaishoshaichiran;
 
-import java.util.List;
+import jp.co.ndensan.reams.db.dbb.business.core.tsuchishohakkogoidosha.TsuchiShoHakkoGoIdosha;
+import jp.co.ndensan.reams.db.dbb.business.core.tsuchishohakkogoidosha.TsuchiShoHakkogoIdoshaListJoho;
 import jp.co.ndensan.reams.db.dbb.entity.report.hakkogoidotaishoshaichiran.HakkogoIdoTaishoshaIchiranSource;
+import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import lombok.NonNull;
 
 /**
  * 通知書発行後異動把握帳票HakkogoIdoTaishoshaIchiranReport
@@ -18,34 +20,38 @@ import lombok.NonNull;
  */
 public class HakkogoIdoTaishoshaIchiranReport extends Report<HakkogoIdoTaishoshaIchiranSource> {
 
-    private final List<HakkogoIdoTaishoshaIchiranItem> targets;
+    private final TsuchiShoHakkogoIdoshaListJoho 発行後異動者一覧情報;
+    private final Association 導入団体クラス;
+    private final YMDHMS 帳票作成日時;
 
     /**
      * コンストラクタです。
      *
-     * @param targets List<HakkogoIdoTaishoshaIchiranItem>
+     * @param 発行後異動者一覧情報 TsuchiShoHakkogoIdoshaListJoho
+     * @param 導入団体クラス Association
+     * @param 帳票作成日時 YMDHMS
      */
-    protected HakkogoIdoTaishoshaIchiranReport(List<HakkogoIdoTaishoshaIchiranItem> targets) {
-        this.targets = targets;
+    public HakkogoIdoTaishoshaIchiranReport(TsuchiShoHakkogoIdoshaListJoho 発行後異動者一覧情報,
+            Association 導入団体クラス, YMDHMS 帳票作成日時) {
+        this.発行後異動者一覧情報 = 発行後異動者一覧情報;
+        this.導入団体クラス = 導入団体クラス;
+        this.帳票作成日時 = 帳票作成日時;
     }
 
     /**
-     * createFormメソッド
+     * writeBy
      *
-     * @param items List<HakkogoIdoTaishoshaIchiranItem>
-     * @return HakkogoIdoTaishoshaIchiranReport
+     * @param writer ReportSourceWriter<HakkogoIdoTaishoshaIchiranSource>
      */
-    public static HakkogoIdoTaishoshaIchiranReport createForm(@NonNull List<HakkogoIdoTaishoshaIchiranItem> items) {
-        return new HakkogoIdoTaishoshaIchiranReport(items);
-    }
-
     @Override
     public void writeBy(ReportSourceWriter<HakkogoIdoTaishoshaIchiranSource> writer) {
-        for (HakkogoIdoTaishoshaIchiranItem target : targets) {
-            IHakkogoIdoTaishoshaIchiranEditor headerEditor = new HakkogoIdoTaishoshaIchiranHeaderEditor(target);
-            IHakkogoIdoTaishoshaIchiranEditor bodyEditor = new HakkogoIdoTaishoshaIchiranBodyEditor(target);
-            IHakkogoIdoTaishoshaIchiranBuilder builder = new HakkogoIdoTaishoshaIchiranBuilder(headerEditor, bodyEditor);
-            writer.writeLine(builder);
+        if (発行後異動者一覧情報 != null && !発行後異動者一覧情報.get異動者リスト().isEmpty()) {
+            for (TsuchiShoHakkoGoIdosha tsuchiShoHakkoGoIdosha : 発行後異動者一覧情報.get異動者リスト()) {
+                IHakkogoIdoTaishoshaIchiranEditor headerEditor = new HakkogoIdoTaishoshaIchiranHeaderEditor(発行後異動者一覧情報, 導入団体クラス, 帳票作成日時);
+                IHakkogoIdoTaishoshaIchiranEditor bodyEditor = new HakkogoIdoTaishoshaIchiranBodyEditor(tsuchiShoHakkoGoIdosha);
+                IHakkogoIdoTaishoshaIchiranBuilder builder = new HakkogoIdoTaishoshaIchiranBuilder(headerEditor, bodyEditor);
+                writer.writeLine(builder);
+            }
         }
     }
 

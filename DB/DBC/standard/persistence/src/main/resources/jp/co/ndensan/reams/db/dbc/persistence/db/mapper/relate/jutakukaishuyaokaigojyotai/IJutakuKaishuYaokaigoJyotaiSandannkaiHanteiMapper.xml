@@ -2,11 +2,11 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- @reamsid_L DBC-0992-160 surun -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jutakukaishuyaokaigojyotai.IJutakuKaishuYaokaigoJyotaiSandannkaiHanteiMapper">
-    <select id="select要介護認定状態区分コードByParam" parameterType="java.util.Map" resultType="jp.co.ndensan.reams.uz.uza.biz.Code">
+    <select resultOrdered="true" id="select要介護認定状態区分コードByParam" parameterType="java.util.Map" resultType="jp.co.ndensan.reams.uz.uza.biz.Code">
         <include refid="selectYokaigoJotaiKubunCode" />
     </select>
 
-    <select id="selectサービス提供年月ByParam" parameterType="java.util.Map" resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3034ShokanShinseiEntity">
+    <select resultOrdered="true" id="selectサービス提供年月ByParam" parameterType="java.util.Map" resultType="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity">
         <include refid="selectShokanShinsei" />
     </select>
 

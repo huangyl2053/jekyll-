@@ -32,7 +32,7 @@
         <result property="juminJotaiCode"   column="PSM_juminJotaiCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     <select id="getKyokaisoKanriMasterList" resultMap="resultMap_KoseiShichosonMasterEntity"
-            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kyokaisogaitosha.KyokaisoGaitoshaMybatisParameter"  fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.kyokaisogaitosha.KyokaisoGaitoshaMybatisParameter"  fetchSize="500" resultOrdered="true">
         SELECT
         DbT1006Kyokaiso."DbT1001Hiho_shichosonCode" as "DbT1006Kyokaiso_shichosonCode",
         DbT1006Kyokaiso."DbT1001Hiho_shikibetsuCode" as "DbT1006Kyokaiso_shikibetsuCode",

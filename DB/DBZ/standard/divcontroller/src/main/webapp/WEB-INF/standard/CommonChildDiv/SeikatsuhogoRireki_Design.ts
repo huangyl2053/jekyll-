@@ -41,8 +41,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
 
-            public btnAddRow(): UZA.ButtonDialog {
-                return new UZA.ButtonDialog(this.convFiledName("btnAddRow"));
+            public btnRirekiAdd(): UZA.ButtonDialog {
+                return new UZA.ButtonDialog(this.convFiledName("btnRirekiAdd"));
             }
 
             public dgSeikatsuhogoRireki(): UZA.DataGrid {

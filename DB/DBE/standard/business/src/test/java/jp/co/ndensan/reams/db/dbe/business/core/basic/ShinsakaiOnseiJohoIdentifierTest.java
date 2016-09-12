@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaionseijoho.ShinsakaiOnseiJohoIdentifier;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaionseijoho.ShinsakaiOnseiJoho2Identifier;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5512ShinsakaiOnseiJohoEntityGenerator;
 import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
@@ -17,7 +17,7 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
- * {@link ShinsakaiOnseiJohoIdentifier}のテストクラスです。
+ * {@link ShinsakaiOnseiJoho2Identifier}のテストクラスです。
  */
 @RunWith(Enclosed.class)
 public class ShinsakaiOnseiJohoIdentifierTest extends DbeTestBase {
@@ -38,7 +38,7 @@ public class ShinsakaiOnseiJohoIdentifierTest extends DbeTestBase {
 
         @Test
         public void シリアライズできる() {
-            ShinsakaiOnseiJohoIdentifier sut = new ShinsakaiOnseiJohoIdentifier(介護認定審査会開催番号, 連番);
+            ShinsakaiOnseiJoho2Identifier sut = new ShinsakaiOnseiJoho2Identifier(介護認定審査会開催番号, 連番);
             assertThat(sut, is(serializable()));
         }
     }

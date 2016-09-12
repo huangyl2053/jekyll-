@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 import jp.co.ndensan.reams.db.dbu.definition.core.zigyouhoukokunenpou.ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060011.PanelBaseDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060011.dgHoseitaishoYoshiki_Row;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.JigyohokokuNenpoHoseiHyoji;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.JigyohokokuNenpoHoseiHyoji;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -13,15 +13,16 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
  * 事業報告（年報）補正、発行_検索のHandlerクラスです。
- * 
- * @reamsid_L DBU-1060-010  lijia
- * 
+ *
+ * @reamsid_L DBU-1060-010 lijia
+ *
  */
 public class PanelBaseHandler {
 
     private final PanelBaseDiv div;
     private static final int 日付の月_06 = 6;
     private static final int 保険者コード_なな = 7;
+    private static final int 件数 = 1;
 
     /**
      * コンストラクタです。
@@ -39,12 +40,11 @@ public class PanelBaseHandler {
      * @param 市町村情報リスト 市町村情報リスト
      */
     public void set市町村情報(List<KeyValueDataSource> 市町村情報リスト) {
-        div.getTaishokensaku().getDdlShichoson().setDataSource(市町村情報リスト);
-        if (1 < 市町村情報リスト.size()) {
+        if (件数 < 市町村情報リスト.size()) {
             div.getTaishokensaku().getDdlShichoson().setIsBlankLine(true);
-        } else if (市町村情報リスト.size() == 1) {
-            div.getTaishokensaku().getDdlShichoson().setDisplayNone(true);
-            div.getTaishokensaku().getDdlShichoson().setSelectedIndex(1);
+            div.getTaishokensaku().getDdlShichoson().setDataSource(市町村情報リスト);
+        } else {
+            div.getTaishokensaku().getDdlShichoson().setVisible(false);
         }
     }
 

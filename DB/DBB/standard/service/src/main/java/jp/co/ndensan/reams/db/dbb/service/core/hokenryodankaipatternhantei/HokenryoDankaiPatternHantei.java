@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbb.service.core.hokenryodankaipatternhantei;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.definition.core.hokenryodankaipatternhantei.HokenryoDankaiPattern;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankaiEntity;
+import jp.co.ndensan.reams.db.dbb.business.core.basic.HokenryoDankai;
+import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HokenryoDankaiPattern;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -41,10 +41,10 @@ public class HokenryoDankaiPatternHantei {
      * 賦課年度・保険料段階リストを元に、保険料段階のパターンを判定して返します。
      *
      * @param 賦課年度 FlexibleYear
-     * @param entities List<DbT2013HokenryoDankaiEntity>
+     * @param entities List<HokenryoDankai>
      * @return HokenryoDankaiPattern
      */
-    public HokenryoDankaiPattern decideHokenryoDankaiPattern(FlexibleYear 賦課年度, List<DbT2013HokenryoDankaiEntity> entities) {
+    public HokenryoDankaiPattern decideHokenryoDankaiPattern(FlexibleYear 賦課年度, List<HokenryoDankai> entities) {
         if (賦課年度.getYearValue() <= 賦課年度_2005) {
             return HokenryoDankaiPattern.パターン無し;
         } else if (賦課年度.getYearValue() >= 賦課年度_2006 && 賦課年度.getYearValue() <= 賦課年度_2008) {
@@ -58,7 +58,7 @@ public class HokenryoDankaiPatternHantei {
         }
     }
 
-    private HokenryoDankaiPattern get2009_2011_パターン判定処理(List<DbT2013HokenryoDankaiEntity> entitylist) {
+    private HokenryoDankaiPattern get2009_2011_パターン判定処理(List<HokenryoDankai> entitylist) {
         if (パターン判定処理(entitylist, 定値_04, 定値_040)) {
             if (パターン判定処理(entitylist, 定値_05, 定値_040)) {
                 return HokenryoDankaiPattern._2009_パターン1;
@@ -71,7 +71,7 @@ public class HokenryoDankaiPatternHantei {
         return HokenryoDankaiPattern.パターン無し;
     }
 
-    private HokenryoDankaiPattern get2012_2014_パターン判定処理(List<DbT2013HokenryoDankaiEntity> entitylist) {
+    private HokenryoDankaiPattern get2012_2014_パターン判定処理(List<HokenryoDankai> entitylist) {
         if (パターン判定処理(entitylist, 定値_03, 定値_030)) {
             return get段階区分の判定03030判定処理(entitylist);
         } else if (パターン判定処理(entitylist, 定値_03, 定値_031)) {
@@ -89,7 +89,7 @@ public class HokenryoDankaiPatternHantei {
         return HokenryoDankaiPattern.パターン無し;
     }
 
-    private HokenryoDankaiPattern get段階区分の判定03030判定処理(List<DbT2013HokenryoDankaiEntity> entitylist) {
+    private HokenryoDankaiPattern get段階区分の判定03030判定処理(List<HokenryoDankai> entitylist) {
         if (パターン判定処理(entitylist, 定値_04, 定値_030) && パターン判定処理(entitylist, 定値_05, 定値_040)
                 && パターン判定処理(entitylist, 定値_06, 定値_040)) {
             return HokenryoDankaiPattern._2012_パターン1;
@@ -112,9 +112,9 @@ public class HokenryoDankaiPatternHantei {
         return HokenryoDankaiPattern.パターン無し;
     }
 
-    private boolean パターン判定処理(List<DbT2013HokenryoDankaiEntity> entitylist, RString インデックス, RString 段階区分の判定) {
-        for (DbT2013HokenryoDankaiEntity entity : entitylist) {
-            if (インデックス.equals(entity.getDankaiIndex()) && 段階区分の判定.equals(entity.getDankaiKubun())) {
+    private boolean パターン判定処理(List<HokenryoDankai> entitylist, RString インデックス, RString 段階区分の判定) {
+        for (HokenryoDankai entity : entitylist) {
+            if (インデックス.equals(entity.get段階インデックス()) && 段階区分の判定.equals(entity.get段階区分())) {
                 return true;
             }
         }

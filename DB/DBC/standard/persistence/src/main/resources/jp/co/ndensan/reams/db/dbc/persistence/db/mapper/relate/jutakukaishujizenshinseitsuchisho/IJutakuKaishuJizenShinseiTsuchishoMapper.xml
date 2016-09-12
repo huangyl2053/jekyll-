@@ -20,7 +20,7 @@
     </resultMap>
     <select id="get事業者情報"
             resultMap="resultMap_KuJigyosha"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.core.jutakukaishujizenshinseitsuchisho.JutakuKaishuJizenShinseiParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.core.jutakukaishujizenshinseitsuchisho.JutakuKaishuJizenShinseiParameter" fetchSize="500" resultOrdered="true">
         SELECT
             A."hihokenshaNo",
             A."keiyakuJigyoshaNo",

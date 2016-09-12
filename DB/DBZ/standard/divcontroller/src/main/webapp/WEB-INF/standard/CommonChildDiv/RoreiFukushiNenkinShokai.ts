@@ -12,19 +12,15 @@ module DBZ
                 this.controls = new Controls(fieldName);
             }
             
-            /////////////////////////////
             public ModeA() {
                 return new Modes.ModeA(this.controls);
             }
-            
-            public ModeB() {
+			 public ModeB() {
                 return new Modes.ModeB(this.controls);
             }
-            ////////////////////////////
 			 public ModeC() {
                 return new Modes.ModeC(this.controls);
             }
-            ////////////////////////////
 
             public Properties() {
                 return new UZA.CommonChildDiv(this.fieldName);
@@ -33,19 +29,16 @@ module DBZ
             public PublicProperties() {
                 return new PublicProperties(this.fieldName);
             }
-            ////////////////////////////////////////////////////
             
             public priorities(): Array<string> {
                 return [
                     "ModeA","ModeB","ModeC"
                 ];
             }
-            ////////////////////////////////////////////////////
         }
 
         export module Modes {
         
-        //////////////////////////////////
               //初期状態
               export class ModeA {
                 private controls: Controls;
@@ -60,27 +53,31 @@ module DBZ
               
               
               }
-			  
               
-              //更新モード
+              
               export class ModeB {
                 private controls: Controls;
                 constructor(controls: Controls) {
                     this.controls = controls;
                 }
 
-
                  public update(): void {
-                     this.controls.panelRireki().displayNone = true;
+                     this.controls.panelRireki().displayNone = false;
                      this.controls.panelInput().displayNone = false;
                      
                      this.controls.txtStartDate().readOnly = false;
                      this.controls.txtEndDate().readOnly = false;
+                     
+					 this.controls.btnAdd().displayNone = false;
+					 this.controls.datagridRireki().gridSetting.isShowSelectButtonColumn = true;
+                     this.controls.datagridRireki().gridSetting.isShowModifyButtonColumn = true;
+                     this.controls.datagridRireki().gridSetting.isShowDeleteButtonColumn = true;
+                     this.controls.datagridRireki()._control.afterPropertiesSet();
                 }
-
               
               
               }
+              
 			   export class ModeC {
                 private controls: Controls;
                 constructor(controls: Controls) {
@@ -88,23 +85,35 @@ module DBZ
                 }
 
                  public init(): void {
-                  
+                     this.controls.panelRireki().displayNone = false;
                      this.controls.panelInput().displayNone = true;
 					 this.controls.btnAdd().displayNone = true;					
 					 this.controls.datagridRireki().gridSetting.isShowSelectButtonColumn = false;
                      this.controls.datagridRireki().gridSetting.isShowModifyButtonColumn = false;
                      this.controls.datagridRireki().gridSetting.isShowDeleteButtonColumn = false;
                      this.controls.datagridRireki()._control.afterPropertiesSet();
-					  
-					 
-					 
+                }
+                
+                
+
+
+                 public update(): void {
+                     this.controls.panelRireki().displayNone = false;
+                     this.controls.panelInput().displayNone = false;
+                     
+                     this.controls.txtStartDate().readOnly = false;
+                     this.controls.txtEndDate().readOnly = false;
+                     
+					 this.controls.btnAdd().displayNone = false;
+					 this.controls.datagridRireki().gridSetting.isShowSelectButtonColumn = true;
+                     this.controls.datagridRireki().gridSetting.isShowModifyButtonColumn = true;
+                     this.controls.datagridRireki().gridSetting.isShowDeleteButtonColumn = true;
+                     this.controls.datagridRireki()._control.afterPropertiesSet();
                 }
               
               
               }
 
-        
-        //////////////////////////////////
         
         }
     }

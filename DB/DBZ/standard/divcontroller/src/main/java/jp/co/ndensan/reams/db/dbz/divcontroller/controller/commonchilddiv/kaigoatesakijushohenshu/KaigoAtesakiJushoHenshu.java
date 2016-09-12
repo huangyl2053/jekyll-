@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 public class KaigoAtesakiJushoHenshu {
 
     /**
-     * onLoad時の処理です。<br/>
+     * onLoad時の処理です。
      *
      * @param div {@link KaigoAtesakiJushoHenshuDiv  介護住所編集方法ダイアログDiv}
      * @return 介護住所編集方法ダイアログDivを持つResponseData
@@ -28,7 +28,7 @@ public class KaigoAtesakiJushoHenshu {
     }
 
     /**
-     * 確定btnの処理です。<br/>
+     * 確定btnの処理です。
      *
      * @param div {@link KaigoAtesakiJushoHenshuDiv  介護住所編集方法ダイアログDiv}
      * @return 介護住所編集方法ダイアログDivを持つResponseData

@@ -5,14 +5,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 遷移画面と事業状況報告（年報）補正検索画面は渡す項目Entityクラスです。
- * 
- * @reamsid_L DBU-1060-010  lijia
- * 
+ *
+ * @reamsid_L DBU-1060-010 lijia
+ *
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity implements Serializable {
+
+    private static final long serialVersionUID = -2468578993427554952L;
 
     private RString 行報告年;
     private RString 行集計対象年;

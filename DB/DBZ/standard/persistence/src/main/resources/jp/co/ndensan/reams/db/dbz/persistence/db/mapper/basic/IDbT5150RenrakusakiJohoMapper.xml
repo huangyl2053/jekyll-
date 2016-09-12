@@ -63,7 +63,7 @@
         <result property="priority" column="dbT5150RenrakusakiJoho_priority" />
     </resultMap>
     
-    <select id="getEntity" resultMap="ResultMap_DbT5150RenrakusakiJohoEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5150RenrakusakiJohoEntity">
         SELECT
         <include refid="allColumns_DbT5150RenrakusakiJoho"/>
         FROM

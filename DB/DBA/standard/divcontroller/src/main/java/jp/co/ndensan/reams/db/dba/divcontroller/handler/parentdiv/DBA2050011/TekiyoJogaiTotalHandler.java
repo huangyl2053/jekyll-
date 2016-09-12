@@ -20,6 +20,7 @@ public class TekiyoJogaiTotalHandler {
 
     private final TekiyoJogaiTotalDiv div;
     private static final RString 遷移元メニューID_適用 = new RString("DBAMN32001");
+    private static final RString 遷移元メニューID_適用_転入転出保留対象者管理 = new RString("DBAMN61002");
     private static final RString 遷移元メニューID_解除 = new RString("DBAMN32002");
     private static final RString 遷移元メニューID_変更 = new RString("DBAMN32003");
 
@@ -39,13 +40,21 @@ public class TekiyoJogaiTotalHandler {
      * @param 遷移元メニューID 遷移元メニューID
      */
     public void initialize(ShikibetsuCode 識別コード, RString 遷移元メニューID) {
-        div.getShikakuKihonJoho().getCcdAtenaJoho().onLoad(識別コード);
+        div.getShikakuKihonJoho().getCcdAtenaJoho().initialize(識別コード);
+//<<<<<<< HEAD
         if (遷移元メニューID_適用.equals(遷移元メニューID)) {
-            div.getTekiyoJogaiJohoIchiran().getCcdTekiyoJogaiRireki().set状態(new RString(DisplayMode.適用登録モード.toString()));
+//            div.getTekiyoJogaiJohoIchiran().getCcdTekiyoJogaiRireki().set状態(new RString(DisplayMode.適用登録モード.toString()));
+            div.getTekiyoJogaiJohoIchiran().getCcdTekiyoJogaiRireki().setDiplayMode(DisplayMode.適用登録モード);
+//=======
+//        if (遷移元メニューID_適用.equals(遷移元メニューID) || 遷移元メニューID_適用_転入転出保留対象者管理.equals(遷移元メニューID)) {
+//            div.getTekiyoJogaiJohoIchiran().getCcdTekiyoJogaiRireki().set状態(new RString(DisplayMode.適用登録モード.toString()));
+//>>>>>>> origin/sync
         } else if (遷移元メニューID_解除.equals(遷移元メニューID)) {
-            div.getTekiyoJogaiJohoIchiran().getCcdTekiyoJogaiRireki().set状態(new RString(DisplayMode.解除モード.toString()));
+//            div.getTekiyoJogaiJohoIchiran().getCcdTekiyoJogaiRireki().set状態(new RString(DisplayMode.解除モード.toString()));
+            div.getTekiyoJogaiJohoIchiran().getCcdTekiyoJogaiRireki().setDiplayMode(DisplayMode.解除モード);
         } else if (遷移元メニューID_変更.equals(遷移元メニューID)) {
-            div.getTekiyoJogaiJohoIchiran().getCcdTekiyoJogaiRireki().set状態(new RString(DisplayMode.照会モード.toString()));
+//            div.getTekiyoJogaiJohoIchiran().getCcdTekiyoJogaiRireki().set状態(new RString(DisplayMode.照会モード.toString()));
+            div.getTekiyoJogaiJohoIchiran().getCcdTekiyoJogaiRireki().setDiplayMode(DisplayMode.照会モード);
         }
         div.getTekiyoJogaiJohoIchiran().getCcdTekiyoJogaiRireki().initialize(識別コード);
         div.getTekiyoJogaiJohoIchiran().getCddShisetsuNyutaishoRirekiKanri().initialize(識別コード, DaichoType.適用除外者.getコード());

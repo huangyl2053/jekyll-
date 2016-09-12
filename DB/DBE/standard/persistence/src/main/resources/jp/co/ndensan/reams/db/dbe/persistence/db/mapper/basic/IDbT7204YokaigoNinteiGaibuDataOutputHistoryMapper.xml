@@ -44,7 +44,7 @@
         <result property="dataOutputKaishiYMDHM" column="dbT7204YokaigoNinteiGaibuDataOutputHistory_dataOutputKaishiYMDHM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMTypeHandler"/>
         <result property="dataOutputShuryoYMDHM" column="dbT7204YokaigoNinteiGaibuDataOutputHistory_dataOutputShuryoYMDHM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMTypeHandler"/>
     </resultMap>
-   <select id="getEntity" resultMap="ResultMap_DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity">
+   <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity">
         SELECT
         <include refid="allColumns_DbT7204YokaigoNinteiGaibuDataOutputHistory"/>
         FROM

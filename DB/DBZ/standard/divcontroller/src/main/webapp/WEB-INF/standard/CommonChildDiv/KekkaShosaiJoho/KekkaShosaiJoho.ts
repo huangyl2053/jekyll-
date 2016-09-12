@@ -31,7 +31,7 @@ module DBZ {
                 }
                 public SoshitsuMode(): void {
                     this.controls.ccdNinteiInput().ShoriType().InputMode();
-                    this.controls.ccdShinseiSonotaJohoInput().ShoriType().SoshitsuMode();
+                    this.controls.ccdShinseiSonotaJohoInput().ShoriType().ZenbuSoshitsuMode();
                     this.controls.btnToroku().displayNone = false;
 
                 }
@@ -47,6 +47,11 @@ module DBZ {
                     this.controls.ccdShinseiSonotaJohoInput().ShoriType().ShokaiMode();
                     this.controls.btnToroku().displayNone = true;
                 
+                }
+                public InputMode(): void {
+                    this.controls.ccdNinteiInput().ShoriType().InputMode();
+                    this.controls.ccdShinseiSonotaJohoInput().ShoriType().ShokaiMode();
+                    this.controls.btnToroku().displayNone = false;
                 }
             }
         }

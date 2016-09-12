@@ -7,9 +7,11 @@ package jp.co.ndensan.reams.db.dba.batchcontroller.step.nenreitotatsutorokushali
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.business.core.nenreitotatsutorokushalist.NenreiTotatsuTorokushaBusiness;
 import jp.co.ndensan.reams.db.dba.business.report.nenreitotatsukakuninlist.NenreitotatsuKakuninListItem;
 import jp.co.ndensan.reams.db.dba.business.report.nenreitotatsukakuninlist.NenreitotatsuKakuninListReport;
 import jp.co.ndensan.reams.db.dba.definition.processprm.nenreitotatsutorokushalistbatch.NenreiTotatsuTorokushaListProcessParameter;
+import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.nenreitotatsushatorokusha.NenreiTotatsuTorokushaListEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.nenreitotatsushatorokusha.NenreiTotatsushaJouhouEntity;
 import jp.co.ndensan.reams.db.dba.entity.report.nenreitotatsukakuninlist.NenreitotatsuKakuninListReportSource;
@@ -33,18 +35,13 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
-import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
  * 年齢到達登録者リストを作成します。
@@ -53,30 +50,19 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
  */
 public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotatsushaJouhouEntity> {
 
-    private static final ReportId ID = new ReportId("DBA200008_NenreitotatsuKakuninList");
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.nenreitotatsutorokusha."
             + "INenreiTotatsuTorokushaMapper.getHiHokenshaDaichoList");
-    private static final RString データ種別_被保険者台帳 = new RString("データ種別：被保険者台帳");
-    private static final RString 取得情報 = new RString("取得情報");
-    private static final RString 喪失情報 = new RString("喪失情報");
-    private static final RString 資格 = new RString("資格");
-    private static final RString 異動情報 = new RString("異動情報");
     private static final RString 処理名 = new RString("年齢到達登録者リスト");
     private static final RString 処理枝番 = new RString("0000");
     private static final FlexibleYear 年度 = new FlexibleYear("0000");
     private static final RString 年度内連番 = new RString("0000");
     private static final int 日付桁数 = 8;
-    private static final int 対象情報 = 1;
-    private static final RString CODESHUBETSU_喪失事由被保険者 = new RString("0010");
-    private static final RString CODESHUBETSU_住特適用 = new RString("0014");
-    private static final RString CODESHUBETSU_住特解除 = new RString("0015");
-    private static final Code CODE_取得事由被保険者 = new Code("02");
-    private static final Code CODE_変更事由被保険者 = new Code("31");
     private INenreiTotatsuTorokushaMapper iNenreiTotatsuTorokushaMapper;
     private NenreiTotatsuTorokushaListProcessParameter processParameter;
     private List<NenreitotatsuKakuninListItem> item;
     private List<NenreiTotatsushaJouhouEntity> nenreiTotatsushaJouhoulist;
+    private NenreiTotatsuTorokushaBusiness business;
     private ShikibetsuCode old識別コード;
 
     @BatchWriter
@@ -89,40 +75,19 @@ public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotats
     protected void initialize() {
         item = new ArrayList<>();
         nenreiTotatsushaJouhoulist = new ArrayList<>();
+        business = new NenreiTotatsuTorokushaBusiness();
         old識別コード = new ShikibetsuCode("");
     }
 
     @Override
     protected IBatchReader createReader() {
-        List<Code> 喪失事由被保険者Codes = new ArrayList<>();
-        List<Code> 住特適用Codes = new ArrayList<>();
-        List<Code> 住特解除Codes = new ArrayList<>();
-        List<UzT0007CodeEntity> 喪失事由被保険者List = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
-                new CodeShubetsu(CODESHUBETSU_喪失事由被保険者.toString()));
-        List<UzT0007CodeEntity> 住特適用LIst = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
-                new CodeShubetsu(CODESHUBETSU_住特適用.toString()));
-        List<UzT0007CodeEntity> 住特解除List = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
-                new CodeShubetsu(CODESHUBETSU_住特解除.toString()));
-        for (UzT0007CodeEntity uzT0007CodeEntity : 喪失事由被保険者List) {
-            喪失事由被保険者Codes.add(uzT0007CodeEntity.getコード());
-        }
-        for (UzT0007CodeEntity uzT0007CodeEntity : 住特適用LIst) {
-            住特適用Codes.add(uzT0007CodeEntity.getコード());
-        }
-        for (UzT0007CodeEntity uzT0007CodeEntity : 住特解除List) {
-            住特解除Codes.add(uzT0007CodeEntity.getコード());
-        }
-        processParameter.setShutokuJiyu_Hihokensha(CODE_取得事由被保険者);
-        processParameter.setSoshitsuJiyu_Hihokensha(喪失事由被保険者Codes);
-        processParameter.setHenkoJiyu_Hihokensha(CODE_変更事由被保険者);
-        processParameter.setJutokuTekiyo(住特適用Codes);
-        processParameter.setJutokuKaijo(住特解除Codes);
+        processParameter = business.setParameter(processParameter);
         return new BatchDbReader(MYBATIS_SELECT_ID, processParameter.toNenreiTotatsushaTorokuListMybatisParameter());
     }
 
     @Override
     protected void createWriter() {
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(ID.value()).create();
+        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBA.DBA200008.getReportId().value()).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         tableWriter = new BatchPermanentTableWriter<>(DbT7022ShoriDateKanriEntity.class);
     }
@@ -167,22 +132,11 @@ public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotats
                 old識別コード = new識別コード;
             }
         }
-        nenreiTotatsushaJouhoulist.add(nenreiTotatsushaJouhouEntity);
+        nenreiTotatsushaJouhoulist.add(business.setCodeToName(nenreiTotatsushaJouhouEntity));
     }
 
     @Override
     protected void afterExecute() {
-        if (nenreiTotatsushaJouhoulist.isEmpty()) {
-            NenreiTotatsushaJouhouEntity nenreiTotatsushaJouhouEntity = new NenreiTotatsushaJouhouEntity();
-            nenreiTotatsushaJouhouEntity.set対象情報タイトル(データ種別_被保険者台帳);
-            nenreiTotatsushaJouhouEntity.set対象情報(対象情報);
-            nenreiTotatsushaJouhouEntity.set開始タイトル(取得情報);
-            nenreiTotatsushaJouhouEntity.set終了タイトル(喪失情報);
-            nenreiTotatsushaJouhouEntity.set区分タイトル(資格);
-            nenreiTotatsushaJouhouEntity.set異動情報タイトル4(異動情報);
-            nenreiTotatsushaJouhoulist.add(nenreiTotatsushaJouhouEntity);
-        }
-
         // TODO 2-上記取得した年齢到達者情報リストをソートする(技術点を提出しました)
         NenreiTotatsuTorokushaListEntity entity = new NenreiTotatsuTorokushaListEntity();
         entity.set市町村コード(AssociationFinderFactory.createInstance().getAssociation()
@@ -194,7 +148,12 @@ public class NenreiTotatsuTorokushaProcess extends BatchProcessBase<NenreiTotats
         entity.set並び順_3(RString.EMPTY);
         entity.set並び順_4(RString.EMPTY);
         entity.set並び順_5(RString.EMPTY);
-        entity.set年齢到達者情報(nenreiTotatsushaJouhoulist);
+        entity.set改頁１(RString.EMPTY);
+        entity.set改頁２(RString.EMPTY);
+        entity.set改頁３(RString.EMPTY);
+        entity.set改頁４(RString.EMPTY);
+        entity.set改頁５(RString.EMPTY);
+        entity.set年齢到達者情報(business.setPrintTitleData(nenreiTotatsushaJouhoulist));
         NenreiTotatsushaTorokuListBatch batch = new NenreiTotatsushaTorokuListBatch();
         item = batch.getNenreiTotatsushaTorokuChohyoData(entity);
         NenreitotatsuKakuninListReport report = NenreitotatsuKakuninListReport

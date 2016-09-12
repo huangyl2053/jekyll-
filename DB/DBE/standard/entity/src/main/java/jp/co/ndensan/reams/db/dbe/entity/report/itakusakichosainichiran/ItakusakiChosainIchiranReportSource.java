@@ -7,6 +7,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 /**
  *
  * 調査委託先・調査員一覧表Sourceクラスです。
+ *
  * @reamsid_L DBE-0290-020 dongyabin
  */
 public class ItakusakiChosainIchiranReportSource implements IReportSource {
@@ -88,4 +89,12 @@ public class ItakusakiChosainIchiranReportSource implements IReportSource {
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
+
+    /**
+     * 調査委託先・調査員一覧表の改ページ項目です。
+     */
+    public enum ReportSourceFields {
+
+        listIchiranhyoUpper_1;
+    }
 }

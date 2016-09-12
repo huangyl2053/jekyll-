@@ -32,6 +32,13 @@ public interface IShikakuHenkoRirekiDiv extends ICommonChildDivBaseProperties {
     SearchResult<HihokenshaDaicho> getGridData();
 
     /**
+     * 被保険者資格詳細異動用、変更履歴グリッドのデータを取得します。
+     *
+     * @return List<HihokenshaDaicho>
+     */
+    SearchResult<HihokenshaDaicho> getGridDataFor資格詳細異動();
+
+    /**
      * 変更事由DDLを設定します。
      *
      * @param key 変更事由key
@@ -45,4 +52,11 @@ public interface IShikakuHenkoRirekiDiv extends ICommonChildDivBaseProperties {
      * @param mode モードキー
      */
     void setDisplayTypeBykey(RString mode);
+
+    /**
+     * グリッド上に、状態が「追加」となっているデータが存在するかをチェックします。
+     *
+     * @return 状態が「追加」になっているデータが存在する場合、{@code true}
+     */
+    boolean is追加済み();
 }

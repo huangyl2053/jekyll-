@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC80101",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "振込明細・振込みデータ作成",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC8010001",
+     "toLayoutTitle": "振込明細・振込みデータ作成",
+     "toState": "標準"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC8010001",
+     "layoutTitle": "振込明細・振込みデータ作成",
+     "eventName": "dummy",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

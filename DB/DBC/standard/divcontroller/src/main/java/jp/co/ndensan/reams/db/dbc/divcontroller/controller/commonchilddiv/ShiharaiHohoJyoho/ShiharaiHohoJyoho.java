@@ -1,7 +1,6 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.commonchilddiv.ShiharaiHohoJyoho;
 
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JuryoininKeiyakuJigyosha;
-import jp.co.ndensan.reams.db.dbc.business.core.shiharaihohojyoho.kozajohopsm.KozaJohoPSM;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.KeiyakushaParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.KozaParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.SikyuSinseiJyohoParameter;
@@ -9,8 +8,9 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiHo
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShiharaiHohoJyoho.ShiharaiHohoJyoho.ShiharaiHohoJyohoHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.shiharaihohojyoho.ShiharaiHohoJyohoFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
-import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
+import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.ShunoKamokuShubetsu;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -135,9 +135,9 @@ public class ShiharaiHohoJyoho {
         ShiharaiHohoJyohoHandler handler = getHandler(div);
         getHandler(div).clear口座払い();
         if (!div.getDdlKozaID().getSelectedKey().isNullOrEmpty()) {
-            SearchResult<KozaJohoPSM> kozaJohoPSM = ShiharaiHohoJyohoFinder.createInstance().
+            SearchResult<Koza> koza = ShiharaiHohoJyohoFinder.createInstance().
                     getKozaJyoho(KozaParameter.createParam(Long.parseLong(div.getDdlKozaID().getSelectedKey().toString()), null, null));
-            handler.口座払いエリアの初期化(kozaJohoPSM.records().get(0), Long.parseLong(div.getDdlKozaID().getSelectedKey().toString()));
+            handler.口座払いエリアの初期化(koza.records().get(0), Long.parseLong(div.getDdlKozaID().getSelectedKey().toString()));
         } else {
             getHandler(div).clear口座払い();
         }
@@ -166,8 +166,7 @@ public class ShiharaiHohoJyoho {
     public ResponseData<ShiharaiHohoJyohoDiv> onOkClose_ddlKozaID(ShiharaiHohoJyohoDiv div) {
 
         ResponseData<ShiharaiHohoJyohoDiv> response = new ResponseData<>();
-        KamokuCode 業務内区分コード = KamokuCode.EMPTY;
-        業務内区分コード = getHandler(div).get業務内区分コード(業務内区分コード);
+        ShunoKamokuShubetsu 業務内区分コード = getHandler(div).get業務内区分コード();
         SikyuSinseiJyohoParameter parameter = ViewStateHolder.
                 get(ViewStateKeys.支給申請情報パラメータ, SikyuSinseiJyohoParameter.class);
         getHandler(div).set口座ID(parameter, 業務内区分コード);

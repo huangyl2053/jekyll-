@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -26,7 +26,7 @@ public class IChiJiHanTeiRelateEntity {
     private ShinseishoKanriNo shinseishoKanriNo;
     private Code koroshoIfShikibetsuCode;
     private RString hihokenshaNo;
-    private AtenaKanaMeisho hihokenshaKana;
+    private AtenaMeisho hihokenshaName;
     private Code shinseijiKubunCode;
     private FlexibleDate ninteiShinseiYMD;
     private FlexibleDate ninteichosaKanryoYMD;
@@ -34,6 +34,7 @@ public class IChiJiHanTeiRelateEntity {
     private RString shichosonMeisho;
     private FlexibleDate johoTorokuKanryoYMD;
     private FlexibleDate ichijiHanteiYMD;
+    private FlexibleDate ichijiHanteiKanryoYMD;
     private Code ichijiHanteiKekkaCode;
     private RString ichijiHnateiKeikokuCode;
     private boolean kariIchijiHanteiKubun;

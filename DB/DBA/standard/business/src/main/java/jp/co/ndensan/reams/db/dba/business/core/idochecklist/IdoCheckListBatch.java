@@ -188,9 +188,9 @@ public class IdoCheckListBatch {
     }
 
     private RString flexToRstr(FlexibleDate date) {
-        if (date == null) {
-            return RString.EMPTY;
+        if (date != null && !date.isEmpty()) {
+            return date.wareki().separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
         }
-        return date.wareki().separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString();
+        return RString.EMPTY;
     }
 }

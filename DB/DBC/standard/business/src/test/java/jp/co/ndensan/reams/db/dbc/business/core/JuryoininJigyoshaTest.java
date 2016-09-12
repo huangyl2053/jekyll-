@@ -5,12 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core;
 
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.JutakuKaishuKeiyakuKubun;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.KogakuKyufuKeiyakuKubun;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.ShokanbaraiKyufuKeiyakuKubun;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.TokuteiFukushiYoguHanbaiKeiyakuKubun;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.ToriatsukaiKakuyakushoKubun;
-import jp.co.ndensan.reams.db.dbc.definition.core.valueobject.keiyakuno.KeiyakuNo;
+import jp.co.ndensan.reams.db.dbc.definition.core.jutakukaishukeiyaku.JutakuKaishuKeiyakuKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.kogakukyufukeiyaku.KogakuKyufuKeiyakuKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.kyufukeiyaku.ShokanbaraiKyufuKeiyakuKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.kyufukeiyaku.TokuteiFukushiYoguHanbaiKeiyakuKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.kyufukeiyaku.ToriatsukaiKakuyakushoKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.keiyakuno.KeiyakuNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -68,18 +68,18 @@ public class JuryoininJigyoshaTest extends DbcTestBase {
         @Test
         public void 引数に必要な値が渡された時_インスタンスが生成される() {
             sut = new JuryoininJigyosha(契約番号, 契約期間, 処理日時,
-                    //                    届出年月日, 届出者, 契約登録年月日, 
+                    //                    届出年月日, 届出者, 契約登録年月日,
                     契約事業者
-//                    住宅改修契約区分, 特定福祉用具販売契約区分,
-//                    償還払給付契約区分, 高額給付契約区分, 取扱確約書区分
-);
+            //                    住宅改修契約区分, 特定福祉用具販売契約区分,
+            //                    償還払給付契約区分, 高額給付契約区分, 取扱確約書区分
+            );
             assertThat(sut, is(instanceOf(JuryoininJigyosha.class)));
         }
 
         @Test(expected = NullPointerException.class)
         public void 契約番号がnullの時_NullPointerExceptionが発生する() {
             sut = new JuryoininJigyosha(null, 契約期間, 処理日時,
-                    //                    届出年月日, 届出者, 契約登録年月日, 
+                    //                    届出年月日, 届出者, 契約登録年月日,
                     契約事業者
             //                    住宅改修契約区分, 特定福祉用具販売契約区分,
             //                    償還払給付契約区分, 高額給付契約区分, 取扱確約書区分
@@ -89,7 +89,7 @@ public class JuryoininJigyoshaTest extends DbcTestBase {
         @Test(expected = NullPointerException.class)
         public void 契約期間がnullの時_NullPointerExceptionが発生する() {
             sut = new JuryoininJigyosha(契約番号, null, 処理日時,
-                    //                    届出年月日, 届出者, 契約登録年月日, 
+                    //                    届出年月日, 届出者, 契約登録年月日,
                     契約事業者
             //                    住宅改修契約区分, 特定福祉用具販売契約区分,
             //                    償還払給付契約区分, 高額給付契約区分, 取扱確約書区分
@@ -99,7 +99,7 @@ public class JuryoininJigyoshaTest extends DbcTestBase {
         @Test(expected = NullPointerException.class)
         public void 処理日時がnullの時_NullPointerExceptionが発生する() {
             sut = new JuryoininJigyosha(契約番号, 契約期間, null,
-                    //                    届出年月日, 届出者, 契約登録年月日, 
+                    //                    届出年月日, 届出者, 契約登録年月日,
                     契約事業者
             //                    住宅改修契約区分, 特定福祉用具販売契約区分,
             //                    償還払給付契約区分, 高額給付契約区分, 取扱確約書区分
@@ -109,7 +109,7 @@ public class JuryoininJigyoshaTest extends DbcTestBase {
         @Test(expected = NullPointerException.class)
         public void 契約事業者がnullの時_NullPointerExceptionが発生する() {
             sut = new JuryoininJigyosha(契約番号, 契約期間, 処理日時,
-                    //                    届出年月日, 届出者, 契約登録年月日, 
+                    //                    届出年月日, 届出者, 契約登録年月日,
                     null
             //                    住宅改修契約区分, 特定福祉用具販売契約区分,
             //                    償還払給付契約区分, 高額給付契約区分, 取扱確約書区分

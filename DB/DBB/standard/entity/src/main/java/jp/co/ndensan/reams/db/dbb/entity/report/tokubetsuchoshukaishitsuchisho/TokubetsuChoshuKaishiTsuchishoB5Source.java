@@ -16,6 +16,11 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
  */
 public class TokubetsuChoshuKaishiTsuchishoB5Source implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
+    //SUPPRESS CHECKSTYLE STRING-USE-CHECK//
+
+    public static final String ITEM_NENDO = "nendo";
+    //SUPPRESS CHECKSTYLE STRING-USE-CHECK//
+    public static final String ITEM_TSUCHISHONO2 = "tsuchishoNo2";
 
     @ReportItem(name = "nendo", length = 4, order = 1)
     public RString nendo;
@@ -200,5 +205,6 @@ public class TokubetsuChoshuKaishiTsuchishoB5Source implements IReportSource {
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
+
 // </editor-fold>
 }

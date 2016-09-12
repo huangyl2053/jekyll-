@@ -53,7 +53,6 @@ import jp.co.ndensan.reams.ua.uax.business.core.dainonin.DainoninRelate;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.service.core.dainonin.DainoninRelateFinderFactory;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -214,14 +213,8 @@ public class KakushuTsuchishoSakuseiFath {
         賦課台帳情報.set代納人連絡先1(代納人連絡先1);
         賦課台帳情報.set代納人連絡先2(代納人連絡先2);
 
-        List<DbT1006KyokaisoGaitoshaEntity> 境界層当該者情報 = new ArrayList<>();
-        if (賦課の情報更正後.get調定日時() != null && !賦課の情報更正後.get調定日時().isEmpty()) {
-            境界層当該者情報 = 境界層該当者Dac.select境界層該当者(賦課の情報更正後.get被保険者番号(),
-                    new FlexibleDate(賦課の情報更正後.get調定日時().getDate().toDateString()));
-        }
-        if (境界層当該者情報 != null && !境界層当該者情報.isEmpty()) {
-            賦課台帳情報.set境界層当該者情報(境界層当該者情報.get(0));
-        }
+        DbT1006KyokaisoGaitoshaEntity 境界層当該者情報 = 境界層該当者Dac.select境界層該当者情報(賦課の情報更正後.get被保険者番号());
+        賦課台帳情報.set境界層当該者情報(境界層当該者情報);
         DbT1001HihokenshaDaichoEntity 被保険者台帳情報 = 被保険者台帳管理Dac.selectByHihokensha(賦課の情報更正後.get被保険者番号());
         賦課台帳情報.set被保険者台帳情報(被保険者台帳情報);
         List<DbT4021ShiharaiHohoHenkoEntity> 支払方法変更リスト = 支払方法変更Dac.get支支払方法変更(賦課の情報更正後.get被保険者番号());
@@ -471,22 +464,22 @@ public class KakushuTsuchishoSakuseiFath {
                 return get収入額(thisKibetsu.getChoteiKyotsu(identifier));
             }
         }
-        return Decimal.ZERO;
+        return null;
     }
 
     private Decimal get収入額(ChoteiKyotsu 調定共通情報) {
         if (収入情報取得PSM == null || 収入情報取得PSM.isEmpty() || 調定共通情報 == null) {
-            return Decimal.ZERO;
+            return null;
         }
         for (TotalShunyuRelateEntity 収入情報 : 収入情報取得PSM) {
             if (収入情報.get収納キーRelateEntity() == null || 収入情報.get収納キーRelateEntity().get収納管理Entity() == null) {
                 continue;
             }
             if (調定共通情報.get収納ID().equals(収入情報.get収納キーRelateEntity().get収納管理Entity().getShunoId())) {
-                return 収入情報.get最新収入Entity() == null ? Decimal.ZERO : 収入情報.get最新収入Entity().getShunyugaku();
+                return 収入情報.get最新収入Entity() == null ? null : 収入情報.get最新収入Entity().getShunyugaku();
             }
         }
-        return Decimal.ZERO;
+        return null;
     }
 
     /**
@@ -506,12 +499,13 @@ public class KakushuTsuchishoSakuseiFath {
         requireNonNull(仮算定_本算定_過年度区分, UrSystemErrorMessages.値がnull.getReplacedMessage(定値_仮算定_本算定_過年度区分.toString()));
 
         RString 納入通知書タイプ = get納入通知書タイプ(出力期);
+        RString 過年度納入通知書タイプ = get過年度納入通知書タイプ(出力期);
         if (仮算定_区分.equals(仮算定_本算定_過年度区分)) {
             return get仮算定帳票ID(納入通知書制御情報, 納入通知書タイプ);
         } else if (本算定_区分.equals(仮算定_本算定_過年度区分)) {
             return get本算定帳票ID(納入通知書制御情報, 納入通知書タイプ);
         } else if (過年度_区分.equals(仮算定_本算定_過年度区分)) {
-            return get過年度帳票ID(納入通知書制御情報, 納入通知書タイプ);
+            return get過年度帳票ID(納入通知書制御情報, 過年度納入通知書タイプ);
         }
         return null;
     }
@@ -521,9 +515,6 @@ public class KakushuTsuchishoSakuseiFath {
         if (定値_期毎.equals(納入通知書タイプ)
                 && KigotoTsuchishoType.標準版期毎タイプ.equals(納入通知書制御情報.get期毎納入通知書タイプ())) {
             return ReportIdDBB.DBB100014.getReportId();
-        } else if (定値_銀振型5期.equals(納入通知書タイプ)) {
-            throw new ApplicationException(UrErrorMessages.該当データなし
-                    .getMessage().replace(定値_銀振型5期.toString()).evaluate());
         } else if (定値_銀振型4期.equals(納入通知書タイプ)
                 && GinfuriTsuchishoType.標準版銀振タイプ.equals(納入通知書制御情報.get銀振納入通知書タイプ())) {
             return ReportIdDBB.DBB100018.getReportId();
@@ -608,6 +599,53 @@ public class KakushuTsuchishoSakuseiFath {
             }
         }
         return null;
+    }
+
+    private RString get過年度納入通知書タイプ(RString 出力期) {
+
+        RString 設定値 = 定値_0;
+        RDate 運用日 = RDate.getNowDate();
+        switch (Integer.parseInt(出力期.toString())) {
+            case 定値_1期:
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.過年度期情報_納付書の型1, 運用日, SubGyomuCode.DBB介護賦課);
+                break;
+            case 定値_2期:
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.過年度期情報_納付書の型2, 運用日, SubGyomuCode.DBB介護賦課);
+                break;
+            case 定値_3期:
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.過年度期情報_納付書の型3, 運用日, SubGyomuCode.DBB介護賦課);
+                break;
+            case 定値_4期:
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.過年度期情報_納付書の型4, 運用日, SubGyomuCode.DBB介護賦課);
+                break;
+            case 定値_5期:
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.過年度期情報_納付書の型5, 運用日, SubGyomuCode.DBB介護賦課);
+                break;
+            case 定値_6期:
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.過年度期情報_納付書の型6, 運用日, SubGyomuCode.DBB介護賦課);
+                break;
+            case 定値_7期:
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.過年度期情報_納付書の型7, 運用日, SubGyomuCode.DBB介護賦課);
+                break;
+            case 定値_8期:
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.過年度期情報_納付書の型8, 運用日, SubGyomuCode.DBB介護賦課);
+                break;
+            case 定値_9期:
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.過年度期情報_納付書の型9, 運用日, SubGyomuCode.DBB介護賦課);
+                break;
+            case 定値_10期:
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.過年度期情報_納付書の型10, 運用日, SubGyomuCode.DBB介護賦課);
+                break;
+            case 定値_11期:
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.過年度期情報_納付書の型11, 運用日, SubGyomuCode.DBB介護賦課);
+                break;
+            case 定値_12期:
+                設定値 = DbBusinessConfig.get(ConfigNameDBB.過年度期情報_納付書の型12, 運用日, SubGyomuCode.DBB介護賦課);
+                break;
+            default:
+                break;
+        }
+        return set納入通知書タイプ(設定値);
     }
 
     private RString get納入通知書タイプ(RString 出力期) {

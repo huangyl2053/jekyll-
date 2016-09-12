@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaionseijoho;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaionseijoho.ShinsakaiOnseiJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaionseijoho.ShinsakaiOnseiJoho2;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5512ShinsakaiOnseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5512ShinsakaiOnseiJohoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -49,7 +49,7 @@ public class ShinsakaiOnseiJohoManager {
      * @return ShinsakaiOnseiJoho
      */
     @Transaction
-    public ShinsakaiOnseiJoho get介護認定審査会音声情報(
+    public ShinsakaiOnseiJoho2 get介護認定審査会音声情報(
             RString 介護認定審査会開催番号,
             int 連番) {
         requireNonNull(介護認定審査会開催番号, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催番号"));
@@ -62,7 +62,7 @@ public class ShinsakaiOnseiJohoManager {
             return null;
         }
         entity.initializeMd5();
-        return new ShinsakaiOnseiJoho(entity);
+        return new ShinsakaiOnseiJoho2(entity);
     }
 
     /**
@@ -71,12 +71,12 @@ public class ShinsakaiOnseiJohoManager {
      * @return ShinsakaiOnseiJohoの{@code list}
      */
     @Transaction
-    public List<ShinsakaiOnseiJoho> get介護認定審査会音声情報一覧() {
-        List<ShinsakaiOnseiJoho> businessList = new ArrayList<>();
+    public List<ShinsakaiOnseiJoho2> get介護認定審査会音声情報一覧() {
+        List<ShinsakaiOnseiJoho2> businessList = new ArrayList<>();
 
         for (DbT5512ShinsakaiOnseiJohoEntity entity : dac.selectAll()) {
             entity.initializeMd5();
-            businessList.add(new ShinsakaiOnseiJoho(entity));
+            businessList.add(new ShinsakaiOnseiJoho2(entity));
         }
 
         return businessList;
@@ -89,7 +89,7 @@ public class ShinsakaiOnseiJohoManager {
      * @return 更新件数 更新結果の件数を返します。
      */
     @Transaction
-    public boolean save介護認定審査会音声情報(ShinsakaiOnseiJoho 介護認定審査会音声情報) {
+    public boolean save介護認定審査会音声情報(ShinsakaiOnseiJoho2 介護認定審査会音声情報) {
         requireNonNull(介護認定審査会音声情報, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会音声情報"));
         if (!介護認定審査会音声情報.hasChanged()) {
             return false;

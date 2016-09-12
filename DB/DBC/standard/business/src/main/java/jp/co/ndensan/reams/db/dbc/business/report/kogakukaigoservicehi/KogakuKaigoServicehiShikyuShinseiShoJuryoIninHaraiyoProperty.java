@@ -25,6 +25,6 @@ public class KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoProperty
      * インスタンスを生成します。
      */
     public KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoProperty() {
-        super(SubGyomuCode.DBA介護資格, ID);
+        super(SubGyomuCode.DBC介護給付, ID);
     }
 }

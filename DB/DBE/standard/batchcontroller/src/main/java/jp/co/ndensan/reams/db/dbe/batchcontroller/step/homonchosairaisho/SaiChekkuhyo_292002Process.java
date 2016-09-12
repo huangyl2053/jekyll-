@@ -53,7 +53,7 @@ public class SaiChekkuhyo_292002Process extends BatchProcessBase<HomonChosaIrais
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper."
             + "relate.hakkoichiranhyo.IHomonChosaIraishoMapper.get認定調査結果");
-    private static final ReportId 帳票ID = ReportIdDBE.DBE292001.getReportId();
+    private static final ReportId 帳票ID = ReportIdDBE.DBE292002.getReportId();
     private static final RString 文字列1 = new RString("1");
     private static final RString IRAIFROMYMD = new RString("【依頼開始日】");
     private static final RString IRAITOYMD = new RString("【依頼終了日】");
@@ -111,7 +111,6 @@ public class SaiChekkuhyo_292002Process extends BatchProcessBase<HomonChosaIrais
 
     @Override
     protected void process(HomonChosaIraishoRelateEntity entity) {
-//        内部QA：614　Redmine：＃75422　排他制限の確認
         getcheckEntityList(entity);
         update認定調査依頼情報(entity);
     }

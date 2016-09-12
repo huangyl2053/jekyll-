@@ -11,13 +11,37 @@
      "id": "1",
      "type": "start",
      "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0200001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "該当者一覧"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBZ",
+     "layoutName": "DBZ0200001",
+     "layoutTitle": "対象者検索",
+     "eventName": "対象者特定",
+     "destroy": false,
+     "condition": "",
      "toLayoutSubGyomuCode": "DBD",
      "toLayoutName": "DBD5530001",
      "toLayoutTitle": "要介護認定取消通知書発行",
      "toState": "初期表示"
     },
     {
-     "id": "2",
+     "id": "3",
+     "type": "end",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD5530001",
+     "layoutTitle": "要介護認定取消通知書発行",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    },
+    {
+     "id": "4",
      "type": "ordinal",
      "layoutSubGyomuCode": "DBD",
      "layoutName": "DBD5530001",
@@ -28,17 +52,7 @@
      "toLayoutSubGyomuCode": "DBZ",
      "toLayoutName": "DBZ0200001",
      "toLayoutTitle": "対象者検索",
-     "toState": "検索条件"
-    },
-    {
-     "id": "3",
-     "type": "end",
-     "layoutSubGyomuCode": "DBZ",
-     "layoutName": "DBZ0200001",
-     "layoutTitle": "対象者検索",
-     "eventName": "終了",
-     "destroy": false,
-     "condition": ""
+     "toState": "該当者一覧"
     }
    ]
   }

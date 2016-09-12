@@ -8,11 +8,12 @@ package jp.co.ndensan.reams.db.dbb.business.report.karisanteinonyutsuchishocvsmu
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.KariSanteiNonyuTsuchiShoJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.NonyuTsuchiShoKiJoho;
-import jp.co.ndensan.reams.db.dbb.entity.report.karisanteinonyutsuchishocvsmulti.KarisanteiNonyuTsuchishoCVSMultiSource;
+import jp.co.ndensan.reams.db.dbb.definition.core.ShoriKubun;
+import jp.co.ndensan.reams.db.dbb.entity.report.karisanteinonyutsuchishocvsmulti.KarisanteiNonyuTsuchishoCVSMultiRenchoSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 保険料納入通知書（仮算定）【コンビニマルチ収納タイプ】納付書のEditorです。
+ * 保険料納入通知書（仮算定）【コンビニマルチ収納タイプ】（連帳）納付書のEditorです。
  *
  * @reamsid_L DBB-9110-050 huangh
  */
@@ -21,13 +22,14 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoNofushoEditor implements IKar
     private final KariSanteiNonyuTsuchiShoJoho item;
     private final Map<Integer, NonyuTsuchiShoKiJoho> map;
 
-    private static final RString NOKIGEN = new RString("納期限");
+    private static final RString NOKIGEN = new RString("本状の納期限");
     private static final RString HANKAKU_X = new RString("X");
     private static final RString HOSHI_2 = new RString("**");
     private static final RString HOSHI_4 = new RString("****");
     private static final RString HOSHI_11 = new RString("***********");
     private static final RString HOSHI_13 = new RString("*************");
     private static final RString HOSHI_16 = new RString("****************");
+    private static final RString HOSHI_22 = new RString("**********************");
     private static final RString HOSHI_28 = new RString("****************************");
 
     private static final int INT_3 = 3;
@@ -53,31 +55,39 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoNofushoEditor implements IKar
     }
 
     @Override
-    public KarisanteiNonyuTsuchishoCVSMultiSource edit(KarisanteiNonyuTsuchishoCVSMultiSource source) {
+    public KarisanteiNonyuTsuchishoCVSMultiRenchoSource edit(KarisanteiNonyuTsuchishoCVSMultiRenchoSource source) {
         editSource(source);
-        source.layout = KarisanteiNonyuTsuchishoCVSMultiSource.Layouts.DBB100027_NonyuTsuchishoCVSMultiRenchoNofusho;
+        source.layoutBreakItem = 2;
         return source;
     }
 
-    private KarisanteiNonyuTsuchishoCVSMultiSource editSource(KarisanteiNonyuTsuchishoCVSMultiSource source) {
+    private KarisanteiNonyuTsuchishoCVSMultiRenchoSource editSource(KarisanteiNonyuTsuchishoCVSMultiRenchoSource source) {
+        int pageCount1 = 0;
+        for (int key : map.keySet()) {
+            if (key >= INT_3 && key <= INT_6) {
+                pageCount1 = INT_5;
+            } else if (key >= INT_7 && key <= INT_10) {
+                pageCount1 = INT_9;
+            }
+        }
 
-        this.edit納付書1(source);
+        this.edit納付書1(source, pageCount1);
 
-        this.edit納付書2(source);
+        this.edit納付書2(source, pageCount1);
 
-        this.edit納付書3(source);
+        this.edit納付書3(source, pageCount1);
 
-        this.edit納付書4(source);
+        this.edit納付書4(source, pageCount1);
 
         return source;
     }
 
-    private KarisanteiNonyuTsuchishoCVSMultiSource edit納付書1(KarisanteiNonyuTsuchishoCVSMultiSource source) {
+    private KarisanteiNonyuTsuchishoCVSMultiRenchoSource edit納付書1(KarisanteiNonyuTsuchishoCVSMultiRenchoSource source, int pageCount1) {
 
         if (item.get納付書共通() != null) {
-            source.kamokumei = item.get納付書共通().get科目名称();
-            source.shimei = item.get納付書共通().get納付者氏名();
-            source.gimushaShimei = item.get納付書共通().get被代納人氏名();
+            source.detail_kamokumei1 = item.get納付書共通().get科目名称();
+            source.detail_shimei1 = item.get納付書共通().get納付者氏名();
+            source.detail_gimushaShimei1 = item.get納付書共通().get被代納人氏名();
         }
 
         NonyuTsuchiShoKiJoho 納入通知書期情報 = null;
@@ -88,67 +98,73 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoNofushoEditor implements IKar
         }
 
         if (納入通知書期情報 != null) {
-            source.shunoKikanBango1 = 納入通知書期情報.get収納機関番号表示用();
-            //TODO
-            source.nofuBango = 納入通知書期情報.get納付番号();
-            source.kakuninBango1 = 納入通知書期情報.get確認番号();
-            source.nofuKubun1 = 納入通知書期情報.get納付区分();
-            source.ocrId1 = 納入通知書期情報.getOcrid();
-            source.barcodeCvsBarcode1 = 納入通知書期情報.getバーコード情報();
-            source.cvsBarcodeNaiyo11 = 納入通知書期情報.getバーコード情報上段();
-            source.cvsBarcodeNaiyo21 = 納入通知書期情報.getバーコード情報下段();
-            source.kibetsu = 納入通知書期情報.get期表記();
-            source.gokeigaku = 納入通知書期情報.get納付額表記();
-            source.nokigenYmd = 納入通知書期情報.get納期限表記();
-            source.honzei = 納入通知書期情報.get納付額表記();
-            source.ocr11 = 納入通知書期情報.getOcr().get(1);
-            source.ocr21 = 納入通知書期情報.getOcr().get(2);
+            source.detail_shunoKikanBango1 = 納入通知書期情報.get収納機関番号表示用();
+            source.detail_nofuBango1 = 納入通知書期情報.get納付番号();
+            source.detail_kakuninBango1 = 納入通知書期情報.get確認番号();
+            source.detail_nofuKubun1 = 納入通知書期情報.get納付区分();
+            source.detail_ocrId1 = 納入通知書期情報.getOcrid();
+            source.detail_barcodeCvsBarcode1 = 納入通知書期情報.getバーコード情報();
+            source.detail_cvsBarcodeNaiyo11 = 納入通知書期情報.getバーコード情報上段();
+            source.detail_cvsBarcodeNaiyo21 = 納入通知書期情報.getバーコード情報下段();
+            source.detail_kibetsu1 = 納入通知書期情報.get期表記();
+            source.detail_gokeigaku11 = 納入通知書期情報.get納付額表記();
+            source.detail_nokigenYmd1 = 納入通知書期情報.get納期限表記();
+            source.detail_honzei1 = 納入通知書期情報.get納付額表記();
+            if (納入通知書期情報.getOcr() != null) {
+                source.detail_ocr11 = 納入通知書期情報.getOcr().get(1);
+                source.detail_ocr21 = 納入通知書期情報.getOcr().get(2);
+            }
 
             if (納入通知書期情報.getコンビニ支払期限() != null) {
-                source.cvsToriatsukaikigen1 = 納入通知書期情報.getコンビニ支払期限().toDateString();
+                source.detail_cvsToriatsukaikigen1 = 納入通知書期情報.getコンビニ支払期限().toDateString();
             }
             if (item.get納付書共通() != null) {
-                source.ryoshushoNendo1 = item.get納付書共通().get調定年度表記();
-                source.nendoNenbun = item.get納付書共通().get年度年分表記();
-                source.ryoshushoNenbun1 = item.get納付書共通().get賦課年度表記();
-                source.hakkoYmd = item.get納付書共通().get発行日表記();
+                source.detail_ryoshushoNendo1 = item.get納付書共通().get調定年度表記();
+                source.detail_nendoNenbun1 = item.get納付書共通().get年度年分表記();
+                source.detail_ryoshushoNenbun1 = item.get納付書共通().get賦課年度表記();
+                source.detail_hakkoYmd1 = item.get納付書共通().get発行日表記();
             }
             if (item.get納付書共通() != null
                     && item.get納付書共通().get通知書番号() != null) {
-                source.tsuchishoNo = item.get納付書共通().get通知書番号().value();
+                source.detail_tsuchishoNo1 = item.get納付書共通().get通知書番号().value();
             }
         } else {
-            source.ryoshushoNendo1 = HOSHI_4;
-            source.nendoNenbun = HOSHI_4;
-            source.kibetsu = HOSHI_2;
-            source.ryoshushoNenbun1 = HOSHI_4;
-            source.gokeigaku = HOSHI_13;
-            source.tsuchishoNo = HOSHI_16;
-            source.nokigenYmd = HOSHI_11;
-            source.hakkoYmd = HOSHI_11;
-            source.honzei = HOSHI_13;
-            source.ocr11 = HOSHI_28;
-            source.ocr21 = HOSHI_28;
-            source.cvsToriatsukaikigen1 = HOSHI_16;
+            source.detail_ryoshushoNendo1 = HOSHI_4;
+            source.detail_nendoNenbun1 = HOSHI_4;
+            source.detail_kibetsu1 = HOSHI_2;
+            source.detail_ryoshushoNenbun1 = HOSHI_4;
+            source.detail_gokeigaku11 = HOSHI_13;
+            source.detail_tsuchishoNo1 = HOSHI_16;
+            source.detail_nokigenYmd1 = HOSHI_11;
+            source.detail_hakkoYmd1 = HOSHI_11;
+            source.detail_honzei1 = HOSHI_13;
+            source.detail_ocr11 = HOSHI_22;
+            source.detail_ocr21 = HOSHI_28;
+            source.detail_cvsToriatsukaikigen1 = HOSHI_16;
         }
 
-        source.nokigenTitle = NOKIGEN;
-        source.tokusokuTesuryo = RString.EMPTY;
-        source.ocrCut1 = HANKAKU_X;
-        source.entaikin = RString.EMPTY;
-        source.biko11 = RString.EMPTY;
-        source.biko21 = RString.EMPTY;
-        source.funyuFukanBango1 = RString.EMPTY;
+        source.detail_nokigenTitle11 = NOKIGEN;
+        source.detail_tokusokuTesuryo1 = RString.EMPTY;
+        source.detail_ocrCut1 = HANKAKU_X;
+        source.detail_entaikin1 = RString.EMPTY;
+        source.detail_biko11 = RString.EMPTY;
+        source.detail_biko21 = RString.EMPTY;
+        if (ShoriKubun.バッチ.equals(item.get処理区分())) {
+            source.detail_funyuFukanBango1
+                    = new RString("F").concat(new RString(item.get連番()).padLeft("0", INT_6)).concat("-").concat(new RString(pageCount1));
+        } else {
+            source.detail_funyuFukanBango1 = new RString("F").concat("-").concat(new RString(pageCount1));
+        }
 
         return source;
     }
 
-    private KarisanteiNonyuTsuchishoCVSMultiSource edit納付書2(KarisanteiNonyuTsuchishoCVSMultiSource source) {
+    private KarisanteiNonyuTsuchishoCVSMultiRenchoSource edit納付書2(KarisanteiNonyuTsuchishoCVSMultiRenchoSource source, int pageCount1) {
 
         if (item.get納付書共通() != null) {
-            source.kamokumei = item.get納付書共通().get科目名称();
-            source.shimei = item.get納付書共通().get納付者氏名();
-            source.gimushaShimei = item.get納付書共通().get被代納人氏名();
+            source.detail_kamokumei2 = item.get納付書共通().get科目名称();
+            source.detail_shimei2 = item.get納付書共通().get納付者氏名();
+            source.detail_gimushaShimei2 = item.get納付書共通().get被代納人氏名();
         }
 
         NonyuTsuchiShoKiJoho 納入通知書期情報 = null;
@@ -159,67 +175,74 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoNofushoEditor implements IKar
         }
 
         if (納入通知書期情報 != null) {
-            source.shunoKikanBango2 = 納入通知書期情報.get収納機関番号表示用();
-            //TODO
-            source.nofuBango = 納入通知書期情報.get納付番号();
-            source.kakuninBango2 = 納入通知書期情報.get確認番号();
-            source.nofuKubun2 = 納入通知書期情報.get納付区分();
-            source.ocrId2 = 納入通知書期情報.getOcrid();
-            source.barcodeCvsBarcode2 = 納入通知書期情報.getバーコード情報();
-            source.cvsBarcodeNaiyo12 = 納入通知書期情報.getバーコード情報上段();
-            source.cvsBarcodeNaiyo22 = 納入通知書期情報.getバーコード情報下段();
-            source.kibetsu = 納入通知書期情報.get期表記();
-            source.gokeigaku = 納入通知書期情報.get納付額表記();
-            source.nokigenYmd = 納入通知書期情報.get納期限表記();
-            source.honzei = 納入通知書期情報.get納付額表記();
-            source.ocr12 = 納入通知書期情報.getOcr().get(1);
-            source.ocr22 = 納入通知書期情報.getOcr().get(2);
+            source.detail_shunoKikanBango2 = 納入通知書期情報.get収納機関番号表示用();
+            source.detail_nofuBango2 = 納入通知書期情報.get納付番号();
+            source.detail_kakuninBango2 = 納入通知書期情報.get確認番号();
+            source.detail_nofuKubun2 = 納入通知書期情報.get納付区分();
+            source.detail_ocrId2 = 納入通知書期情報.getOcrid();
+            source.detail_barcodeCvsBarcode2 = 納入通知書期情報.getバーコード情報();
+            source.detail_cvsBarcodeNaiyo12 = 納入通知書期情報.getバーコード情報上段();
+            source.detail_cvsBarcodeNaiyo22 = 納入通知書期情報.getバーコード情報下段();
+            source.detail_kibetsu2 = 納入通知書期情報.get期表記();
+            source.detail_gokeigaku12 = 納入通知書期情報.get納付額表記();
+            source.detail_nokigenYmd2 = 納入通知書期情報.get納期限表記();
+            source.detail_honzei2 = 納入通知書期情報.get納付額表記();
+            if (納入通知書期情報.getOcr() != null) {
+                source.detail_ocr12 = 納入通知書期情報.getOcr().get(1);
+                source.detail_ocr22 = 納入通知書期情報.getOcr().get(2);
+            }
 
             if (納入通知書期情報.getコンビニ支払期限() != null) {
-                source.cvsToriatsukaikigen2 = 納入通知書期情報.getコンビニ支払期限().toDateString();
+                source.detail_cvsToriatsukaikigen2 = 納入通知書期情報.getコンビニ支払期限().toDateString();
             }
             if (item.get納付書共通() != null) {
-                source.ryoshushoNendo2 = item.get納付書共通().get調定年度表記();
-                source.nendoNenbun = item.get納付書共通().get年度年分表記();
-                source.ryoshushoNenbun2 = item.get納付書共通().get賦課年度表記();
-                source.hakkoYmd = item.get納付書共通().get発行日表記();
+                source.detail_ryoshushoNendo2 = item.get納付書共通().get調定年度表記();
+                source.detail_nendoNenbun2 = item.get納付書共通().get年度年分表記();
+                source.detail_ryoshushoNenbun2 = item.get納付書共通().get賦課年度表記();
+                source.detail_hakkoYmd2 = item.get納付書共通().get発行日表記();
             }
             if (item.get納付書共通() != null
                     && item.get納付書共通().get通知書番号() != null) {
-                source.tsuchishoNo = item.get納付書共通().get通知書番号().value();
+                source.detail_tsuchishoNo2 = item.get納付書共通().get通知書番号().value();
             }
         } else {
-            source.ryoshushoNendo2 = HOSHI_4;
-            source.nendoNenbun = HOSHI_4;
-            source.kibetsu = HOSHI_2;
-            source.ryoshushoNenbun2 = HOSHI_4;
-            source.gokeigaku = HOSHI_13;
-            source.tsuchishoNo = HOSHI_16;
-            source.nokigenYmd = HOSHI_11;
-            source.hakkoYmd = HOSHI_11;
-            source.honzei = HOSHI_13;
-            source.ocr12 = HOSHI_28;
-            source.ocr22 = HOSHI_28;
-            source.cvsToriatsukaikigen2 = HOSHI_16;
+            source.detail_ryoshushoNendo2 = HOSHI_4;
+            source.detail_nendoNenbun2 = HOSHI_4;
+            source.detail_kibetsu2 = HOSHI_2;
+            source.detail_ryoshushoNenbun2 = HOSHI_4;
+            source.detail_gokeigaku12 = HOSHI_13;
+            source.detail_tsuchishoNo2 = HOSHI_16;
+            source.detail_nokigenYmd2 = HOSHI_11;
+            source.detail_hakkoYmd2 = HOSHI_11;
+            source.detail_honzei2 = HOSHI_13;
+            source.detail_ocr12 = HOSHI_22;
+            source.detail_ocr22 = HOSHI_28;
+            source.detail_cvsToriatsukaikigen2 = HOSHI_16;
         }
 
-        source.nokigenTitle = NOKIGEN;
-        source.tokusokuTesuryo = RString.EMPTY;
-        source.ocrCut2 = HANKAKU_X;
-        source.entaikin = RString.EMPTY;
-        source.biko12 = RString.EMPTY;
-        source.biko22 = RString.EMPTY;
-        source.funyuFukanBango2 = RString.EMPTY;
+        source.detail_nokigenTitle12 = NOKIGEN;
+        source.detail_tokusokuTesuryo2 = RString.EMPTY;
+        source.detail_ocrCut2 = HANKAKU_X;
+        source.detail_entaikin2 = RString.EMPTY;
+        source.detail_biko12 = RString.EMPTY;
+        source.detail_biko22 = RString.EMPTY;
+        if (ShoriKubun.バッチ.equals(item.get処理区分())) {
+            source.detail_funyuFukanBango2
+                    = new RString("F").concat(new RString(item.get連番()).padLeft("0", INT_6)).concat("-").concat(new RString(pageCount1 + 1));
+        } else {
+            source.detail_funyuFukanBango2
+                    = new RString("F").concat("-").concat(new RString(pageCount1 + 1));
+        }
 
         return source;
     }
 
-    private KarisanteiNonyuTsuchishoCVSMultiSource edit納付書3(KarisanteiNonyuTsuchishoCVSMultiSource source) {
+    private KarisanteiNonyuTsuchishoCVSMultiRenchoSource edit納付書3(KarisanteiNonyuTsuchishoCVSMultiRenchoSource source, int pageCount1) {
 
         if (item.get納付書共通() != null) {
-            source.kamokumei = item.get納付書共通().get科目名称();
-            source.shimei = item.get納付書共通().get納付者氏名();
-            source.gimushaShimei = item.get納付書共通().get被代納人氏名();
+            source.detail_kamokumei3 = item.get納付書共通().get科目名称();
+            source.detail_shimei3 = item.get納付書共通().get納付者氏名();
+            source.detail_gimushaShimei3 = item.get納付書共通().get被代納人氏名();
         }
 
         NonyuTsuchiShoKiJoho 納入通知書期情報 = null;
@@ -230,67 +253,74 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoNofushoEditor implements IKar
         }
 
         if (納入通知書期情報 != null) {
-            source.shunoKikanBango3 = 納入通知書期情報.get収納機関番号表示用();
-            //TODO
-            source.nofuBango = 納入通知書期情報.get納付番号();
-            source.kakuninBango3 = 納入通知書期情報.get確認番号();
-            source.nofuKubun3 = 納入通知書期情報.get納付区分();
-            source.ocrId3 = 納入通知書期情報.getOcrid();
-            source.barcodeCvsBarcode3 = 納入通知書期情報.getバーコード情報();
-            source.cvsBarcodeNaiyo13 = 納入通知書期情報.getバーコード情報上段();
-            source.cvsBarcodeNaiyo23 = 納入通知書期情報.getバーコード情報下段();
-            source.kibetsu = 納入通知書期情報.get期表記();
-            source.gokeigaku = 納入通知書期情報.get納付額表記();
-            source.nokigenYmd = 納入通知書期情報.get納期限表記();
-            source.honzei = 納入通知書期情報.get納付額表記();
-            source.ocr13 = 納入通知書期情報.getOcr().get(1);
-            source.ocr23 = 納入通知書期情報.getOcr().get(2);
+            source.detail_shunoKikanBango3 = 納入通知書期情報.get収納機関番号表示用();
+            source.detail_nofuBango3 = 納入通知書期情報.get納付番号();
+            source.detail_kakuninBango3 = 納入通知書期情報.get確認番号();
+            source.detail_nofuKubun3 = 納入通知書期情報.get納付区分();
+            source.detail_ocrId3 = 納入通知書期情報.getOcrid();
+            source.detail_barcodeCvsBarcode3 = 納入通知書期情報.getバーコード情報();
+            source.detail_cvsBarcodeNaiyo13 = 納入通知書期情報.getバーコード情報上段();
+            source.detail_cvsBarcodeNaiyo23 = 納入通知書期情報.getバーコード情報下段();
+            source.detail_kibetsu3 = 納入通知書期情報.get期表記();
+            source.detail_gokeigaku13 = 納入通知書期情報.get納付額表記();
+            source.detail_nokigenYmd3 = 納入通知書期情報.get納期限表記();
+            source.detail_honzei3 = 納入通知書期情報.get納付額表記();
+            if (納入通知書期情報.getOcr() != null) {
+                source.detail_ocr13 = 納入通知書期情報.getOcr().get(1);
+                source.detail_ocr23 = 納入通知書期情報.getOcr().get(2);
+            }
 
             if (納入通知書期情報.getコンビニ支払期限() != null) {
-                source.cvsToriatsukaikigen3 = 納入通知書期情報.getコンビニ支払期限().toDateString();
+                source.detail_cvsToriatsukaikigen3 = 納入通知書期情報.getコンビニ支払期限().toDateString();
             }
             if (item.get納付書共通() != null) {
-                source.ryoshushoNendo3 = item.get納付書共通().get調定年度表記();
-                source.nendoNenbun = item.get納付書共通().get年度年分表記();
-                source.ryoshushoNenbun3 = item.get納付書共通().get賦課年度表記();
-                source.hakkoYmd = item.get納付書共通().get発行日表記();
+                source.detail_ryoshushoNendo3 = item.get納付書共通().get調定年度表記();
+                source.detail_nendoNenbun3 = item.get納付書共通().get年度年分表記();
+                source.detail_ryoshushoNenbun3 = item.get納付書共通().get賦課年度表記();
+                source.detail_hakkoYmd3 = item.get納付書共通().get発行日表記();
             }
             if (item.get納付書共通() != null
                     && item.get納付書共通().get通知書番号() != null) {
-                source.tsuchishoNo = item.get納付書共通().get通知書番号().value();
+                source.detail_tsuchishoNo3 = item.get納付書共通().get通知書番号().value();
             }
         } else {
-            source.ryoshushoNendo3 = HOSHI_4;
-            source.nendoNenbun = HOSHI_4;
-            source.kibetsu = HOSHI_2;
-            source.ryoshushoNenbun3 = HOSHI_4;
-            source.gokeigaku = HOSHI_13;
-            source.tsuchishoNo = HOSHI_16;
-            source.nokigenYmd = HOSHI_11;
-            source.hakkoYmd = HOSHI_11;
-            source.honzei = HOSHI_13;
-            source.ocr13 = HOSHI_28;
-            source.ocr23 = HOSHI_28;
-            source.cvsToriatsukaikigen3 = HOSHI_16;
+            source.detail_ryoshushoNendo3 = HOSHI_4;
+            source.detail_nendoNenbun3 = HOSHI_4;
+            source.detail_kibetsu3 = HOSHI_2;
+            source.detail_ryoshushoNenbun3 = HOSHI_4;
+            source.detail_gokeigaku13 = HOSHI_13;
+            source.detail_tsuchishoNo3 = HOSHI_16;
+            source.detail_nokigenYmd3 = HOSHI_11;
+            source.detail_hakkoYmd3 = HOSHI_11;
+            source.detail_honzei3 = HOSHI_13;
+            source.detail_ocr13 = HOSHI_22;
+            source.detail_ocr23 = HOSHI_28;
+            source.detail_cvsToriatsukaikigen3 = HOSHI_16;
         }
 
-        source.nokigenTitle = NOKIGEN;
-        source.tokusokuTesuryo = RString.EMPTY;
-        source.ocrCut3 = HANKAKU_X;
-        source.entaikin = RString.EMPTY;
-        source.biko13 = RString.EMPTY;
-        source.biko23 = RString.EMPTY;
-        source.funyuFukanBango3 = RString.EMPTY;
+        source.detail_nokigenTitle13 = NOKIGEN;
+        source.detail_tokusokuTesuryo3 = RString.EMPTY;
+        source.detail_ocrCut3 = HANKAKU_X;
+        source.detail_entaikin3 = RString.EMPTY;
+        source.detail_biko13 = RString.EMPTY;
+        source.detail_biko23 = RString.EMPTY;
+        if (ShoriKubun.バッチ.equals(item.get処理区分())) {
+            source.detail_funyuFukanBango3
+                    = new RString("F").concat(new RString(item.get連番()).padLeft("0", INT_6)).concat("-").concat(new RString(pageCount1 + 2));
+        } else {
+            source.detail_funyuFukanBango3
+                    = new RString("F").concat("-").concat(new RString(pageCount1 + 2));
+        }
 
         return source;
     }
 
-    private KarisanteiNonyuTsuchishoCVSMultiSource edit納付書4(KarisanteiNonyuTsuchishoCVSMultiSource source) {
+    private KarisanteiNonyuTsuchishoCVSMultiRenchoSource edit納付書4(KarisanteiNonyuTsuchishoCVSMultiRenchoSource source, int pageCount1) {
 
         if (item.get納付書共通() != null) {
-            source.kamokumei = item.get納付書共通().get科目名称();
-            source.shimei = item.get納付書共通().get納付者氏名();
-            source.gimushaShimei = item.get納付書共通().get被代納人氏名();
+            source.detail_kamokumei4 = item.get納付書共通().get科目名称();
+            source.detail_shimei4 = item.get納付書共通().get納付者氏名();
+            source.detail_gimushaShimei4 = item.get納付書共通().get被代納人氏名();
         }
 
         NonyuTsuchiShoKiJoho 納入通知書期情報 = null;
@@ -301,57 +331,63 @@ public class KarisanteiNonyuTsuchishoCVSMultiRenchoNofushoEditor implements IKar
         }
 
         if (納入通知書期情報 != null) {
-            source.shunoKikanBango4 = 納入通知書期情報.get収納機関番号表示用();
-            //TODO
-            source.nofuBango = 納入通知書期情報.get納付番号();
-            source.kakuninBango4 = 納入通知書期情報.get確認番号();
-            source.nofuKubun4 = 納入通知書期情報.get納付区分();
-            source.ocrId4 = 納入通知書期情報.getOcrid();
-            source.barcodeCvsBarcode4 = 納入通知書期情報.getバーコード情報();
-            source.cvsBarcodeNaiyo14 = 納入通知書期情報.getバーコード情報上段();
-            source.cvsBarcodeNaiyo24 = 納入通知書期情報.getバーコード情報下段();
-            source.kibetsu = 納入通知書期情報.get期表記();
-            source.gokeigaku = 納入通知書期情報.get納付額表記();
-            source.nokigenYmd = 納入通知書期情報.get納期限表記();
-            source.honzei = 納入通知書期情報.get納付額表記();
-            source.ocr14 = 納入通知書期情報.getOcr().get(1);
-            source.ocr24 = 納入通知書期情報.getOcr().get(2);
+            source.detail_shunoKikanBango4 = 納入通知書期情報.get収納機関番号表示用();
+            source.detail_nofuBango4 = 納入通知書期情報.get納付番号();
+            source.detail_kakuninBango4 = 納入通知書期情報.get確認番号();
+            source.detail_nofuKubun4 = 納入通知書期情報.get納付区分();
+            source.detail_ocrId4 = 納入通知書期情報.getOcrid();
+            source.detail_barcodeCvsBarcode4 = 納入通知書期情報.getバーコード情報();
+            source.detail_cvsBarcodeNaiyo14 = 納入通知書期情報.getバーコード情報上段();
+            source.detail_cvsBarcodeNaiyo24 = 納入通知書期情報.getバーコード情報下段();
+            source.detail_kibetsu4 = 納入通知書期情報.get期表記();
+            source.detail_gokeigaku14 = 納入通知書期情報.get納付額表記();
+            source.detail_nokigenYmd4 = 納入通知書期情報.get納期限表記();
+            source.detail_honzei4 = 納入通知書期情報.get納付額表記();
+            if (納入通知書期情報.getOcr() != null) {
+                source.detail_ocr14 = 納入通知書期情報.getOcr().get(1);
+                source.detail_ocr24 = 納入通知書期情報.getOcr().get(2);
+            }
 
             if (納入通知書期情報.getコンビニ支払期限() != null) {
-                source.cvsToriatsukaikigen4 = 納入通知書期情報.getコンビニ支払期限().toDateString();
+                source.detail_cvsToriatsukaikigen4 = 納入通知書期情報.getコンビニ支払期限().toDateString();
             }
             if (item.get納付書共通() != null) {
-                source.ryoshushoNendo4 = item.get納付書共通().get調定年度表記();
-                source.nendoNenbun = item.get納付書共通().get年度年分表記();
-                source.ryoshushoNenbun4 = item.get納付書共通().get賦課年度表記();
-                source.hakkoYmd = item.get納付書共通().get発行日表記();
+                source.detail_ryoshushoNendo4 = item.get納付書共通().get調定年度表記();
+                source.detail_nendoNenbun4 = item.get納付書共通().get年度年分表記();
+                source.detail_ryoshushoNenbun4 = item.get納付書共通().get賦課年度表記();
+                source.detail_hakkoYmd4 = item.get納付書共通().get発行日表記();
             }
             if (item.get納付書共通() != null
                     && item.get納付書共通().get通知書番号() != null) {
-                source.tsuchishoNo = item.get納付書共通().get通知書番号().value();
+                source.detail_tsuchishoNo4 = item.get納付書共通().get通知書番号().value();
             }
         } else {
-            source.ryoshushoNendo4 = HOSHI_4;
-            source.nendoNenbun = HOSHI_4;
-            source.kibetsu = HOSHI_2;
-            source.ryoshushoNenbun4 = HOSHI_4;
-            source.gokeigaku = HOSHI_13;
-            source.tsuchishoNo = HOSHI_16;
-            source.nokigenYmd = HOSHI_11;
-            source.hakkoYmd = HOSHI_11;
-            source.honzei = HOSHI_13;
-            source.ocr14 = HOSHI_28;
-            source.ocr24 = HOSHI_28;
-            source.cvsToriatsukaikigen4 = HOSHI_16;
+            source.detail_ryoshushoNendo4 = HOSHI_4;
+            source.detail_nendoNenbun4 = HOSHI_4;
+            source.detail_kibetsu4 = HOSHI_2;
+            source.detail_ryoshushoNenbun4 = HOSHI_4;
+            source.detail_gokeigaku14 = HOSHI_13;
+            source.detail_tsuchishoNo4 = HOSHI_16;
+            source.detail_nokigenYmd4 = HOSHI_11;
+            source.detail_hakkoYmd4 = HOSHI_11;
+            source.detail_honzei4 = HOSHI_13;
+            source.detail_ocr14 = HOSHI_22;
+            source.detail_ocr24 = HOSHI_28;
+            source.detail_cvsToriatsukaikigen4 = HOSHI_16;
         }
 
-        source.nokigenTitle = NOKIGEN;
-        source.tokusokuTesuryo = RString.EMPTY;
-        source.ocrCut4 = HANKAKU_X;
-        source.entaikin = RString.EMPTY;
-        source.biko14 = RString.EMPTY;
-        source.biko24 = RString.EMPTY;
-        source.funyuFukanBango4 = RString.EMPTY;
+        source.detail_nokigenTitle14 = NOKIGEN;
+        source.detail_tokusokuTesuryo4 = RString.EMPTY;
+        source.detail_ocrCut4 = HANKAKU_X;
+        source.detail_entaikin4 = RString.EMPTY;
+        source.detail_biko14 = RString.EMPTY;
+        source.detail_biko24 = RString.EMPTY;
+        if (ShoriKubun.バッチ.equals(item.get処理区分())) {
+            source.detail_funyuFukanBango4
+                    = new RString("F").concat(new RString(item.get連番()).padLeft("0", INT_6)).concat("-").concat(new RString(pageCount1 + INT_3));
+        } else {
+            source.detail_funyuFukanBango4 = new RString("F").concat("-").concat(new RString(pageCount1 + INT_3));
+        }
 
         return source;
     }

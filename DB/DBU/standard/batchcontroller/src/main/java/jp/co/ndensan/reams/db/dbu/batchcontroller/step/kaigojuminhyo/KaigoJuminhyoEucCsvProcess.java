@@ -8,24 +8,25 @@ package jp.co.ndensan.reams.db.dbu.batchcontroller.step.kaigojuminhyo;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.kaigojuminhyo.KaigoJuminhyoProcessParameter;
-import jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyo.IKaigoJuminhyoEucCsvEntity;
-import jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyo.KaigoJuminhyoEntity;
-import jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyo.KaigoJuminhyoTashaJukiDataEntity;
-import jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyo.KaigoJuminhyoTashajukiHachiEucCsvEntity;
-import jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyo.KaigoJuminhyoTashajukiJunitoJugoEucCsvEntity;
-import jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyo.RendoPatternEntity;
-import jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyo.TashajukiHachiCSVDataEntity;
-import jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyo.TashajukiJunitoJugoCSVDataEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojuminhyo.KaigoJuminhyoRelateEntity;
-import jp.co.ndensan.reams.db.dbu.service.core.basic.kaigojuminhyo.KaigoJyuminhyouTashajukiCSVDataSakuseiFinder;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.RenkeiDataFormatVersion;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojuminhyokobetsujikou.IKaigoJuminhyoEucCsvEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojuminhyokobetsujikou.KaigoJuminhyoEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojuminhyokobetsujikou.KaigoJuminhyoTashaJukiDataEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojuminhyokobetsujikou.KaigoJuminhyoTashajukiHachiEucCsvEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojuminhyokobetsujikou.KaigoJuminhyoTashajukiJunitoJugoEucCsvEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojuminhyokobetsujikou.RendoPatternEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojuminhyokobetsujikou.TashajukiHachiCSVDataEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojuminhyokobetsujikou.TashajukiJunitoJugoCSVDataEntity;
+import jp.co.ndensan.reams.db.dbu.service.core.kaigojuminhyo.KaigoJyuminhyouTashajukiCSVDataSakuseiFinder;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.RenkeiDataFormatVersion;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7035RendoPatternEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7035RendoPatternMapper;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -39,15 +40,16 @@ import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
  * 介護住民票個別事項連携情報作成【他社住基】のバッチ処理のCSV出力のプロセスクラスです。
- * 
- * @reamsid_L DBU-0350-020  lijia
- * 
+ *
+ * @reamsid_L DBU-0350-020 lijia
+ *
  */
 public class KaigoJuminhyoEucCsvProcess extends BatchProcessBase<KaigoJuminhyoRelateEntity> {
 
@@ -58,6 +60,7 @@ public class KaigoJuminhyoEucCsvProcess extends BatchProcessBase<KaigoJuminhyoRe
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString 日時 = new RString("@日時@");
     private static final RString 市町村コード = new RString("@市町村コード@");
+    private static final RString 日付 = new RString("yyyyMMddHHmmss");
     private FileSpoolManager manager;
     private RString eucFilePath;
     private RString renkeiFileName;
@@ -78,18 +81,22 @@ public class KaigoJuminhyoEucCsvProcess extends BatchProcessBase<KaigoJuminhyoRe
         if (processParameter.getTaishoKaishiTimestamp() == null && processParameter.getTaishoShuryoTimestamp() == null) {
             shoriDateKanriMapper = getMapper(IDbT7022ShoriDateKanriMapper.class);
             shoriDateKanriEntity = shoriDateKanriMapper.getTaishoShuryoYMD();
-            //if (RDate.getNowDateTime().isBefore(shoriDateKanriEntity.getTaishoShuryoTimestamp().getRDateTime())) {
-                //TODO 技術点NO:31　バッチメッセージの出力　DBZErrorMessage．DBZE00006を返して、バッチ処理終了。
-            //}
-            processParameter.setTaishoKaishiTimestamp(shoriDateKanriEntity.getTaishoShuryoTimestamp().getRDateTime());
+            YMDHMS taishoShuryoTimestamp = null;
+            if (shoriDateKanriEntity != null) {
+                taishoShuryoTimestamp = shoriDateKanriEntity.getTaishoShuryoTimestamp();
+            }
+            if (taishoShuryoTimestamp != null) {
+                is日期期間判定(taishoShuryoTimestamp.getRDateTime());
+                processParameter.setTaishoKaishiTimestamp(taishoShuryoTimestamp.getRDateTime());
+            }
             processParameter.setTaishoShuryoTimestamp(RDate.getNowDateTime());
         }
 
         rendoPatternMapper = getMapper(IDbT7035RendoPatternMapper.class);
         dbT7035RendoPatternEntity = rendoPatternMapper.getRendoPatternEntity(new FlexibleDate(RDate.getNowDate().toDateString()));
-        //if (dbT7035RendoPatternEntity == null) {
-            //TODO 技術点NO:31　バッチメッセージの出力 DbzErrorMessages.連携パターン取得エラー.getMessage();
-        //}
+        if (dbT7035RendoPatternEntity == null) {
+            throw new BatchInterruptedException(DbzErrorMessages.連携パターン取得エラー.getMessage().toString());
+        }
         rendoPatternEntity = new RendoPatternEntity();
         rendoPatternEntity.setSakiFormatVersion(dbT7035RendoPatternEntity.getSakiFormatVersion());
         rendoPatternEntity.setSakiEncodeKeitai(dbT7035RendoPatternEntity.getSakiEncodeKeitai());
@@ -157,7 +164,7 @@ public class KaigoJuminhyoEucCsvProcess extends BatchProcessBase<KaigoJuminhyoRe
     @Override
     protected void process(KaigoJuminhyoRelateEntity entity) {
         KaigoJuminhyoEntity kaigoJuminhyoEntity = new KaigoJuminhyoEntity();
-        kaigoJuminhyoEntity.setHihokenshaNo(new HihokenshaNo(entity.getDbT1001HihokenshaDaichoEntity().getHihokenshaNo().value()));
+        kaigoJuminhyoEntity.setHihokenshaNo(entity.getDbT1001HihokenshaDaichoEntity().getHihokenshaNo());
         kaigoJuminhyoEntity.setIdoYMD(entity.getDbT1001HihokenshaDaichoEntity().getIdoYMD());
         kaigoJuminhyoEntity.setEdaNo(entity.getDbT1001HihokenshaDaichoEntity().getEdaNo());
         kaigoJuminhyoEntity.setIdoJiyuCode(entity.getDbT1001HihokenshaDaichoEntity().getIdoJiyuCode());
@@ -310,7 +317,7 @@ public class KaigoJuminhyoEucCsvProcess extends BatchProcessBase<KaigoJuminhyoRe
                             entity.get最終レコード区分(),
                             entity.get連番(),
                             entity.getＦＩＬＬＥＲ1(),
-                            entity.get被保険者番号(),
+                            entity.get被保険者番号() == null ? RString.EMPTY : entity.get被保険者番号().getColumnValue(),
                             entity.get識別コード(),
                             entity.get資格取得日(),
                             entity.get資格喪失日(),
@@ -335,7 +342,7 @@ public class KaigoJuminhyoEucCsvProcess extends BatchProcessBase<KaigoJuminhyoRe
                             entity.get最終レコード区分(),
                             entity.get連番(),
                             entity.get識別コード(),
-                            entity.get被保険者番号(),
+                            entity.get被保険者番号() == null ? RString.EMPTY : entity.get被保険者番号().getColumnValue(),
                             entity.get資格取得日(),
                             entity.get資格喪失日(),
                             entity.get資格被保険者区分(),
@@ -434,12 +441,12 @@ public class KaigoJuminhyoEucCsvProcess extends BatchProcessBase<KaigoJuminhyoRe
         if (entity.getInsertTimestamp() == null) {
             tashaJukiDataEntity.set挿入日時(RString.EMPTY);
         } else {
-            tashaJukiDataEntity.set挿入日時(new RString(entity.getInsertTimestamp().toString()));
+            tashaJukiDataEntity.set挿入日時(entity.getInsertTimestamp().format西暦(日付.toString()));
         }
         if (entity.getLastUpdateTimestamp() == null) {
             tashaJukiDataEntity.set更新日時(RString.EMPTY);
         } else {
-            tashaJukiDataEntity.set更新日時(new RString(entity.getLastUpdateTimestamp().toString()));
+            tashaJukiDataEntity.set更新日時(entity.getLastUpdateTimestamp().format西暦(日付.toString()));
         }
         tashaJukiDataEntity.set受給者市町村コード(entity.getDbT4001ShichosonCode());
         tashaJukiDataEntity.set受給者被保険者番号(entity.getDbT4001HihokenshaNo());
@@ -524,13 +531,19 @@ public class KaigoJuminhyoEucCsvProcess extends BatchProcessBase<KaigoJuminhyoRe
         if (entity.getDbT4001InsertTimestamp() == null) {
             tashaJukiDataEntity.set受給者挿入日時(RString.EMPTY);
         } else {
-            tashaJukiDataEntity.set受給者挿入日時(new RString(entity.getDbT4001InsertTimestamp().toString()));
+            tashaJukiDataEntity.set受給者挿入日時(entity.getDbT4001InsertTimestamp().format西暦(日付.toString()));
         }
         if (entity.getDbT4001LastUpdateTimestamp() == null) {
-            tashaJukiDataEntity.set受給者挿入日時(RString.EMPTY);
+            tashaJukiDataEntity.set受給者更新日時(RString.EMPTY);
         } else {
-            tashaJukiDataEntity.set受給者挿入日時(new RString(entity.getDbT4001LastUpdateTimestamp().toString()));
+            tashaJukiDataEntity.set受給者更新日時(entity.getDbT4001LastUpdateTimestamp().format西暦(日付.toString()));
         }
         return tashaJukiDataEntity;
+    }
+
+    private void is日期期間判定(RDateTime 終了日時) {
+        if (RDate.getNowDateTime().isBefore(終了日時)) {
+            throw new BatchInterruptedException(DbzErrorMessages.期間が不正_未来日付不可.getMessage().toString());
+        }
     }
 }

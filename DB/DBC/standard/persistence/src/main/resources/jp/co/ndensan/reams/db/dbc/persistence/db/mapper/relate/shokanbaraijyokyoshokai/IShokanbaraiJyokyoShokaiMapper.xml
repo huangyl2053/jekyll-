@@ -20,7 +20,7 @@
     </resultMap>
     <select id="getサービス提供証明書一覧"
             resultMap="resultMap_ServiceTeikyoShomeisho"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500" resultOrdered="true">
         SELECT
         BASIC."hiHokenshaNo",
         BASIC."serviceTeikyoYM",
@@ -109,7 +109,7 @@
     </resultMap>
     <select id="get償還払請求明細一覧"
             resultMap="resultMap_ShokanMeisaiEntity"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500" resultOrdered="true">
         SELECT
         SHOKANMEISAI.*
         ,KAIGOSERVICENAIYOUB."serviceName"
@@ -183,7 +183,7 @@
     </resultMap>
     <select id="get償還払請求明細住特一覧"
             resultMap="resultMap_ShokanMeisaiJushochiTokureiEntity"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500" resultOrdered="true">
         SELECT
         SHOKANMEISAIJUSHOCHITOKUREI.*,
         KAIGOSERVICENAIYOUB."serviceName",
@@ -259,7 +259,7 @@
     </resultMap>
     <select id="get償還払請求サービス計画200904データ"
             resultMap="resultMap_ShokanServicePlan200904Entity"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500" resultOrdered="true">
         SELECT
         SHOKANSERVICEPLAN200904.*
         ,KAIGOSERVICENAIYOUB."serviceName"
@@ -329,7 +329,7 @@
     </resultMap>
     <select id="get償還払請求サービス計画200604データ"
             resultMap="resultMap_ShokanServicePlan200604Entity"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500" resultOrdered="true">
         SELECT
         SHOKANSERVICEPLAN200604.*
         ,KAIGOSERVICENAIYOUB."serviceName"
@@ -399,7 +399,7 @@
     </resultMap>
     <select id="get償還払請求サービス計画200004データ"
             resultMap="resultMap_ShokanServicePlan200004Entity"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500" resultOrdered="true">
         SELECT
         SHOKANSERVICEPLAN200004.*
         ,KAIGOSERVICENAIYOUB."serviceName"
@@ -464,17 +464,17 @@
         <id column="dbT3053ShokanShukei_renban"/>
         <result property="serviceShuruiRyakusho" column="serviceShuruiRyakusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="entity"
-                     resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3053ShokanShukeiMapper.ResultMap_DbT3053ShokanShukeiEntity">
+                     resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3053ShokanShukeiMapper.ResultMap_DbT3053ShokanShukeiEntity">
         </association>
     </resultMap>
     <select id="get償還払請求集計データ"
             resultMap="resultMap_ShokanShukeiEntity"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500" resultOrdered="true">
         SELECT
         SSHOKANSHUKEI.*,
         KAIGOSERVICESHURUIB."serviceShuruiRyakusho"
         FROM
-        (<include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3053ShokanShukeiMapper.noDeleted_DbT3053ShokanShukei" />) AS SSHOKANSHUKEI
+        (<include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3053ShokanShukeiMapper.noDeleted_DbT3053ShokanShukei" />) AS SSHOKANSHUKEI
         LEFT JOIN
         (SELECT
         KAIGOSERVICESHURUI."serviceShuruiCd",
@@ -532,7 +532,7 @@
     </resultMap>
     <select id="get償還払請求社会福祉法人軽減額データ"
             resultMap="resultMap_ShokanShakaiFukushiHojinKeigengakuEntity"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500" resultOrdered="true">
         SELECT
         SHOKANSHAKAIFUKUSHIHOJINKEIGENGAKU.*,
         KAIGOSERVICESHURUIB."serviceShuruiRyakusho"
@@ -580,7 +580,7 @@
 
     <select id="get識別番号管理データ"
             resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanriEntity"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500" resultOrdered="true">
         SELECT
         SHIKIBETSUNOKANRI.*
         FROM
@@ -597,7 +597,7 @@
 
     <select id="get介護事業者情報"
             resultType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500" resultOrdered="true">
         SELECT
         KAIGOJIGYOSHA.*
         FROM
@@ -614,7 +614,7 @@
 
     <select id="get特定診療サービスコード"
             resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT7120TokuteiShinryoServiceCodeEntity"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokaiParameter" fetchSize="500" resultOrdered="true">
         SELECT
         TOKUTEISHINRYOSERVICECODE.*
         FROM

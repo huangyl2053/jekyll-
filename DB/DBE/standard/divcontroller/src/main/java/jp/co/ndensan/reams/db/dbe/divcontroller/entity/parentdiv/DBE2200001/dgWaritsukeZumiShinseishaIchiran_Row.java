@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu May 05 15:04:38 CST 2016 
+ * Wed Jun 08 10:43:29 CST 2016 
  */
 
 
@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  */
 
 public class dgWaritsukeZumiShinseishaIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     private TextBoxNum no;
     private ButtonDialog shokai;
@@ -73,6 +73,7 @@ public class dgWaritsukeZumiShinseishaIchiran_Row extends DataRow {
     private RString renrakusakiShimei;
     private RString renrakusakiTuzukigara;
     private RString renrakusakiJusho;
+    private RString shichosonCode;
 
     public dgWaritsukeZumiShinseishaIchiran_Row() {
         super();
@@ -125,6 +126,7 @@ public class dgWaritsukeZumiShinseishaIchiran_Row extends DataRow {
         this.renrakusakiShimei = RString.EMPTY;
         this.renrakusakiTuzukigara = RString.EMPTY;
         this.renrakusakiJusho = RString.EMPTY;
+        this.shichosonCode = RString.EMPTY;
         this.setOriginalData("no", no);
         this.setOriginalData("shokai", shokai);
         this.setOriginalData("jotai", jotai);
@@ -174,9 +176,10 @@ public class dgWaritsukeZumiShinseishaIchiran_Row extends DataRow {
         this.setOriginalData("renrakusakiShimei", renrakusakiShimei);
         this.setOriginalData("renrakusakiTuzukigara", renrakusakiTuzukigara);
         this.setOriginalData("renrakusakiJusho", renrakusakiJusho);
+        this.setOriginalData("shichosonCode", shichosonCode);
     }
 
-    public dgWaritsukeZumiShinseishaIchiran_Row(TextBoxNum no, ButtonDialog shokai, RString jotai, RString hihokenshaNo, RString hihokenshaShimei, RString seibetsu, TextBoxDate ninteiShinseiDay, RString shinseiKubunShinseiji, RString chiku, RString zenkaiChosaItakusaki, RString zenkaiChosain, RString chosaIraiDay, RString chosaKubun, RString hokensha, RString jusho, RString shujiIryoKikan, RString shujii, RString zenkaiShujiIryoKikan, RString zenkaiShujii, TextBoxDate iraishoShutsuryokuDay, TextBoxDate chosahyoNadoShutsuryookuDay, RString ninteichosaKanryoYMD, RString shinseishoKanriNo, RString ninteichosaIraiRirekiNo, RString koroshoIfShikibetsuCode, RString waritsukeTeiin, RString chosaKanoNinzuPerMonth, RString ninteichosaKigenYMD, RString hihokenshaKana, RString seinengappiYMD, RString yubinNo, RString telNo, RString homonChosasakiYubinNo, RString homonChosasakiJusho, RString homonChosasakiName, RString homonChosasakiTelNo, RString ninteiShinseiYMDKoShin, RString zenkaiNinteiYMD, RString zenYokaigoKubunCode, RString age, RString ninteiChosainCode, RString hokenshaNo, RString ninteiChosaItakusakiCode, RString renrakusakiYubinNo, RString renrakusakiTelNo, RString renrakusakiKeitaiTelNo, RString renrakusakiShimei, RString renrakusakiTuzukigara, RString renrakusakiJusho) {
+    public dgWaritsukeZumiShinseishaIchiran_Row(TextBoxNum no, ButtonDialog shokai, RString jotai, RString hihokenshaNo, RString hihokenshaShimei, RString seibetsu, TextBoxDate ninteiShinseiDay, RString shinseiKubunShinseiji, RString chiku, RString zenkaiChosaItakusaki, RString zenkaiChosain, RString chosaIraiDay, RString chosaKubun, RString hokensha, RString jusho, RString shujiIryoKikan, RString shujii, RString zenkaiShujiIryoKikan, RString zenkaiShujii, TextBoxDate iraishoShutsuryokuDay, TextBoxDate chosahyoNadoShutsuryookuDay, RString ninteichosaKanryoYMD, RString shinseishoKanriNo, RString ninteichosaIraiRirekiNo, RString koroshoIfShikibetsuCode, RString waritsukeTeiin, RString chosaKanoNinzuPerMonth, RString ninteichosaKigenYMD, RString hihokenshaKana, RString seinengappiYMD, RString yubinNo, RString telNo, RString homonChosasakiYubinNo, RString homonChosasakiJusho, RString homonChosasakiName, RString homonChosasakiTelNo, RString ninteiShinseiYMDKoShin, RString zenkaiNinteiYMD, RString zenYokaigoKubunCode, RString age, RString ninteiChosainCode, RString hokenshaNo, RString ninteiChosaItakusakiCode, RString renrakusakiYubinNo, RString renrakusakiTelNo, RString renrakusakiKeitaiTelNo, RString renrakusakiShimei, RString renrakusakiTuzukigara, RString renrakusakiJusho, RString shichosonCode) {
         super();
         this.setOriginalData("no", no);
         this.setOriginalData("shokai", shokai);
@@ -227,6 +230,7 @@ public class dgWaritsukeZumiShinseishaIchiran_Row extends DataRow {
         this.setOriginalData("renrakusakiShimei", renrakusakiShimei);
         this.setOriginalData("renrakusakiTuzukigara", renrakusakiTuzukigara);
         this.setOriginalData("renrakusakiJusho", renrakusakiJusho);
+        this.setOriginalData("shichosonCode", shichosonCode);
         this.no = no;
         this.shokai = shokai;
         this.jotai = jotai;
@@ -276,6 +280,7 @@ public class dgWaritsukeZumiShinseishaIchiran_Row extends DataRow {
         this.renrakusakiShimei = renrakusakiShimei;
         this.renrakusakiTuzukigara = renrakusakiTuzukigara;
         this.renrakusakiJusho = renrakusakiJusho;
+        this.shichosonCode = shichosonCode;
     }
 
     public TextBoxNum getNo() {
@@ -472,6 +477,10 @@ public class dgWaritsukeZumiShinseishaIchiran_Row extends DataRow {
 
     public RString getRenrakusakiJusho() {
         return renrakusakiJusho;
+    }
+
+    public RString getShichosonCode() {
+        return shichosonCode;
     }
 
     public void setNo(TextBoxNum no) {
@@ -717,6 +726,11 @@ public class dgWaritsukeZumiShinseishaIchiran_Row extends DataRow {
     public void setRenrakusakiJusho(RString renrakusakiJusho) {
         this.setOriginalData("renrakusakiJusho", renrakusakiJusho);
         this.renrakusakiJusho = renrakusakiJusho;
+    }
+
+    public void setShichosonCode(RString shichosonCode) {
+        this.setOriginalData("shichosonCode", shichosonCode);
+        this.shichosonCode = shichosonCode;
     }
 
     // </editor-fold>

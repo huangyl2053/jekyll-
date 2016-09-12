@@ -4,26 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JuryoininKeiyakuJigyosha;
 import jp.co.ndensan.reams.db.dbc.business.core.shiharaihoho.UzT0007CodeBusiness;
-import jp.co.ndensan.reams.db.dbc.business.core.shiharaihohojyoho.kozajohopsm.KozaJohoPSM;
-import jp.co.ndensan.reams.db.dbc.definition.core.kozabunrui.KozaBunruiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.KeiyakushaParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.KozaParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.SikyuSinseiJyohoParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.shiharaihohojyoho.ShiharaiHohoJyohoFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikan;
 import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikanShiten;
+import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.ua.uax.service.core.kinyukikan.KinyuKikanManager;
 import jp.co.ndensan.reams.ua.uax.service.core.kinyukikan.KinyuKikanShitenManager;
+import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.ShunoKamokuShubetsu;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
-import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -49,29 +48,14 @@ public class ShiharaiHohoJyohoHandler {
     private final RString 修正 = new RString("修正");
     private final RString 照会 = new RString("照会");
     private final RString 登録 = new RString("登録");
-    private final RString 償還払給付費 = new RString("001");
-    private final RString 高額給付費 = new RString("002");
-    private final RString 高額合算給付費 = new RString("003");
-    private final RString 償還払い状況照会 = new RString("DBCMN11006");
-    private final RString 福祉用具購入費支給申請 = new RString("DBCMN51001");
-    private final RString 住宅改修費支給申請 = new RString("DBCMN52002");
-    private final RString 住宅改修費事前申請 = new RString("DBCMN52001");
-    private final RString 償還払い費支給申請 = new RString("DBCMN53001");
-    private final RString 高額サービス費支給申請 = new RString("DBCMN42001");
-    private final RString 高額合算支給申請1 = new RString("DBCMN61001");
-    private final RString 高額合算支給申請2 = new RString("DBCMN61002");
-    private final RString 高額合算支給申請3 = new RString("DBCMN61003");
-    private final RString 高額合算支給申請4 = new RString("DBCMN61004");
-    private final RString 高額合算支給申請5 = new RString("DBCMN61005");
-    private final RString 高額合算支給申請6 = new RString("DBCMN61006");
-    private final RString 高額合算支給申請7 = new RString("DBCMN61007");
-    private final RString 高額合算支給申請8 = new RString("DBCMN61008");
-    private final RString 高額合算支給申請9 = new RString("DBCMN61009");
-    private final RString 高額合算支給申請10 = new RString("DBCMN61010");
-    private final RString 高額合算支給申請11 = new RString("DBCMN61011");
-    private final RString 高額合算支給申請12 = new RString("DBCMN61012");
-    private final RString 高額合算支給決定情報補正 = new RString("DBCMN62004");
-    private final RString 福祉用具購入費支給申請一括審査_決定 = new RString("DBCMN51002");
+    private final RString 償還払い状況照会 = new RString("DBCUC00500");
+    private final RString 福祉用具購入費支給申請 = new RString("DBCUC06011");
+    private final RString 住宅改修費支給申請 = new RString("DBCUC07100");
+    private final RString 住宅改修費事前申請 = new RString("DBCUC07000");
+    private final RString 償還払い費支給申請 = new RString("DBCUC08100");
+    private final RString 高額サービス費支給申請 = new RString("DBCUC04400");
+    private final RString 高額合算支給申請 = new RString("DBCUC11000");
+    private final RString 高額合算支給決定情報補正 = new RString("DBCUC12300");
     private final RString 曜日_日 = new RString("日曜");
     private final RString 曜日_土 = new RString("土曜");
     private final ShiharaiHohoJyohoDiv div;
@@ -95,9 +79,8 @@ public class ShiharaiHohoJyohoHandler {
     public void initialize(SikyuSinseiJyohoParameter 支給申請情報, RString 状態) {
         div.setHdnTxtSubGyomuCode(SubGyomuCode.DBC介護給付.value());
         div.setHdnTxtShikibetsuCode(支給申請情報.getShikibetsuCode() == null ? RString.EMPTY : 支給申請情報.getShikibetsuCode().value());
-        KamokuCode 業務内区分コード = KamokuCode.EMPTY;
 
-        業務内区分コード = get業務内区分コード(業務内区分コード);
+        ShunoKamokuShubetsu 業務内区分コード = get業務内区分コード();
 
         set口座ID(支給申請情報, 業務内区分コード);
 
@@ -111,9 +94,16 @@ public class ShiharaiHohoJyohoHandler {
             }
             if (ShiharaiHohoKubun.口座払.equals(支払方法区分)) {
                 div.getRadKoza().setSelectedKey(支払方法区分.getコード());
-                口座払いエリアの初期化(ShiharaiHohoJyohoFinder.createInstance()
+                List<Koza> koza = ShiharaiHohoJyohoFinder.createInstance()
                         .getKozaJyoho(KozaParameter.createParam(支給申請情報.
-                                        getKozaId(), null, null)).records().get(0), 支給申請情報.getKozaId());
+                                        getKozaId(), null, null)).records();
+                if (!koza.isEmpty()) {
+
+                    口座払いエリアの初期化(koza.get(0), 支給申請情報.getKozaId());
+                } else {
+
+                    口座払いエリアの初期化状態();
+                }
             }
             if (ShiharaiHohoKubun.受領委任払.equals(支払方法区分)) {
                 div.getRadJyryoinin().setSelectedKey(支払方法区分.getコード());
@@ -126,7 +116,8 @@ public class ShiharaiHohoJyohoHandler {
                 受領委任払いエリアの初期化(支給申請情報, 受領委任契約事業者, new RString("初期"));
             }
         }
-        if ((業務内区分コード.equals(new KamokuCode(償還払給付費)) || 業務内区分コード.equals(new KamokuCode(高額給付費)))) {
+        if ((業務内区分コード.equals(ShunoKamokuShubetsu.介護給付_償還)
+                || 業務内区分コード.equals(ShunoKamokuShubetsu.介護給付_高額))) {
 
             if (状態.equals(照会)) {
 
@@ -141,7 +132,7 @@ public class ShiharaiHohoJyohoHandler {
                 償還払給付または高額給付の修正モード(支給申請情報.getShiharaiHohoKubun());
             }
         }
-        if (業務内区分コード.equals(new KamokuCode(高額合算給付費))) {
+        if (業務内区分コード.equals(ShunoKamokuShubetsu.介護給付_高額合算)) {
 
             if (状態.equals(照会)) {
 
@@ -165,9 +156,9 @@ public class ShiharaiHohoJyohoHandler {
      * @param 口座ID 口座ID
      * @return List<KeyValueDataSource>
      */
-    public List<KeyValueDataSource> set口座ID(List<KozaJohoPSM> list,Long 口座ID) {
+    public List<KeyValueDataSource> set口座ID(List<Koza> list, Long 口座ID) {
         List<KeyValueDataSource> 口座IDリスト = new ArrayList<>();
-        for (KozaJohoPSM kozaId : list) {
+        for (Koza kozaId : list) {
             RString 口座 = new RString(String.valueOf(kozaId.get口座ID()));
             口座IDリスト.add(new KeyValueDataSource(口座, 口座));
         }
@@ -589,7 +580,7 @@ public class ShiharaiHohoJyohoHandler {
      * @param 口座情報 口座情報
      * @param kozaID 口座番号
      */
-    public void 口座払いエリアの初期化(KozaJohoPSM 口座情報, Long kozaID) {
+    public void 口座払いエリアの初期化(Koza 口座情報, Long kozaID) {
         div.getDdlKozaID().setSelectedKey(new RString(String.valueOf(kozaID)));
         KinyuKikanCode 金融機関コード = 口座情報.get金融機関コード() == null
                 ? new KinyuKikanCode(RString.EMPTY) : 口座情報.get金融機関コード();
@@ -617,7 +608,7 @@ public class ShiharaiHohoJyohoHandler {
             div.getTxtYokinShubetsu().setDisplayNone(false);
             div.getTxtTenban().setDisplayNone(true);
         }
-        UzT0007CodeBusiness uzT0007CodeBusiness = 預金種別に対する名称(nullToEmpty(口座情報.get預金種別()));
+        UzT0007CodeBusiness uzT0007CodeBusiness = 預金種別に対する名称(nullToEmpty(口座情報.get預金種別().get預金種別コード()));
         if (uzT0007CodeBusiness != null) {
 
             div.getTxtYokinShubetsu().setValue(uzT0007CodeBusiness.getコード名称() == null ? RString.EMPTY : uzT0007CodeBusiness.getコード名称());
@@ -625,6 +616,19 @@ public class ShiharaiHohoJyohoHandler {
         div.getTxtKozaNo().setValue(口座情報.get口座番号());
         div.getTxtMeigininKana().setDomain(口座情報.get口座名義人());
         div.getTtxtMeigininKanji().setDomain(口座情報.get口座名義人漢字());
+        div.getTxtTenban().setReadOnly(true);
+        div.getTxtKinyuKikanShitenCode().setReadOnly(true);
+        div.getTxtYokinShubetsu().setReadOnly(true);
+    }
+
+    /**
+     * 口座払いエリアの初期化状態。
+     *
+     */
+    public void 口座払いエリアの初期化状態() {
+        div.getTxtKinyuKikanShitenCode().setDisplayNone(false);
+        div.getTxtYokinShubetsu().setDisplayNone(false);
+        div.getTxtTenban().setDisplayNone(true);
         div.getTxtTenban().setReadOnly(true);
         div.getTxtKinyuKikanShitenCode().setReadOnly(true);
         div.getTxtYokinShubetsu().setReadOnly(true);
@@ -923,58 +927,47 @@ public class ShiharaiHohoJyohoHandler {
         div.getTxtMeigininKana1().setReadOnly(true);
         div.getTxtMeigininKanji1().setReadOnly(true);
     }
+
     /**
      * 口座IDの設定。
      *
      * @param 支給申請情報 SikyuSinseiJyohoParameter
      * @param 業務内区分コード KamokuCode
      */
-    public void set口座ID(SikyuSinseiJyohoParameter 支給申請情報, KamokuCode 業務内区分コード) {
-        List<KozaJohoPSM> 口座IDリスト = ShiharaiHohoJyohoFinder.createInstance()
+    public void set口座ID(SikyuSinseiJyohoParameter 支給申請情報, ShunoKamokuShubetsu 業務内区分コード) {
+        List<Koza> 口座IDリスト = ShiharaiHohoJyohoFinder.createInstance()
                 .getKozaIDList(KozaParameter.createParam(0, 支給申請情報.getShikibetsuCode(), 業務内区分コード)).records();
-        div.getDdlKozaID().setDataSource(set口座ID(口座IDリスト,支給申請情報.getKozaId()));
+        div.getDdlKozaID().setDataSource(set口座ID(口座IDリスト, 支給申請情報.getKozaId()));
     }
 
     /**
      * 業務内区分の設定。
      *
-     * @param 業務内区分コード KamokuCode
      * @return 業務内区分コード
      */
-    public KamokuCode get業務内区分コード(KamokuCode 業務内区分コード) {
+    public ShunoKamokuShubetsu get業務内区分コード() {
 
         IUrControlData controlData = UrControlDataFactory.createInstance();
-        RString menuID = controlData.getMenuID();
+        RString uiContainerId = controlData.getUIContainerId();
 
-        if (償還払い状況照会.equals(menuID)
-                || 福祉用具購入費支給申請.equals(menuID)
-                || 住宅改修費支給申請.equals(menuID)
-                || 住宅改修費事前申請.equals(menuID)
-                || 償還払い費支給申請.equals(menuID)
-                || 福祉用具購入費支給申請一括審査_決定.equals(menuID)) {
+        if (償還払い状況照会.equals(uiContainerId)
+                || 福祉用具購入費支給申請.equals(uiContainerId)
+                || 住宅改修費支給申請.equals(uiContainerId)
+                || 住宅改修費事前申請.equals(uiContainerId)
+                || 償還払い費支給申請.equals(uiContainerId)) {
 
-            業務内区分コード = new KamokuCode(String.format("%03d", Integer.valueOf(KozaBunruiKubun.償還払い支給.getコード().toString())));
-        }
-        if (高額サービス費支給申請.equals(menuID)) {
+            return ShunoKamokuShubetsu.介護給付_償還;
 
-            業務内区分コード = new KamokuCode(String.format("%03d", Integer.valueOf(KozaBunruiKubun.高額介護サービス費支給.getコード().toString())));
         }
-        if (高額合算支給申請1.equals(menuID)
-                || 高額合算支給申請2.equals(menuID)
-                || 高額合算支給申請3.equals(menuID)
-                || 高額合算支給申請4.equals(menuID)
-                || 高額合算支給申請5.equals(menuID)
-                || 高額合算支給申請6.equals(menuID)
-                || 高額合算支給申請7.equals(menuID)
-                || 高額合算支給申請8.equals(menuID)
-                || 高額合算支給申請9.equals(menuID)
-                || 高額合算支給申請10.equals(menuID)
-                || 高額合算支給申請11.equals(menuID)
-                || 高額合算支給申請12.equals(menuID)
-                || 高額合算支給決定情報補正.equals(menuID)) {
-            業務内区分コード = new KamokuCode(String.format("%03d", Integer.valueOf(KozaBunruiKubun.高額合算費支給.getコード().toString())));
+        if (高額サービス費支給申請.equals(uiContainerId)) {
+
+            return ShunoKamokuShubetsu.介護給付_高額;
         }
-        return 業務内区分コード;
+        if (高額合算支給申請.equals(uiContainerId)
+                || 高額合算支給決定情報補正.equals(uiContainerId)) {
+            return ShunoKamokuShubetsu.介護給付_高額合算;
+        }
+        return null;
     }
 
     private RString nullToEmpty(RString obj) {

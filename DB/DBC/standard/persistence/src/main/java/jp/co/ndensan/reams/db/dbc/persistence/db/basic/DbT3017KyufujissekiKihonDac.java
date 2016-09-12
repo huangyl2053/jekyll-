@@ -35,6 +35,7 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Order.DESC;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -46,6 +47,7 @@ public class DbT3017KyufujissekiKihonDac implements ISaveable<DbT3017Kyufujissek
 
     @InjectSession
     private SqlSession session;
+    private static final int INT_1 = 1;
 
     /**
      * 主キーで給付実績基本を取得します。
@@ -166,5 +168,25 @@ public class DbT3017KyufujissekiKihonDac implements ISaveable<DbT3017Kyufujissek
                                 eq(seiriNo, 整理番号))).
                 order(by(shinsaYM, DESC)).
                 toList(DbT3017KyufujissekiKihonEntity.class);
+    }
+
+    /**
+     * 被保険者番号、サービス提供年月により、給付実績基本情報を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス提供年月 FlexibleYearMonth
+     * @return DbT3017KyufujissekiKihonEntity
+     */
+    public DbT3017KyufujissekiKihonEntity get給付実績基本(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス提供年月) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT3017KyufujissekiKihon.class).
+                where(and(
+                                eq(hiHokenshaNo, 被保険者番号),
+                                leq(serviceTeikyoYM, サービス提供年月))).
+                order(by(serviceTeikyoYM, DESC)).
+                limit(INT_1).
+                toObject(DbT3017KyufujissekiKihonEntity.class);
     }
 }

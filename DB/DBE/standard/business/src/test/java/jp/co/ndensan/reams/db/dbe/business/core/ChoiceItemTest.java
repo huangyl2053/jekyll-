@@ -4,6 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core;
 
+import java.util.Arrays;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ChoiceResultItem;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.IAnswerResultItem;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
@@ -36,17 +37,17 @@ public class ChoiceItemTest extends DbeTestBase {
 
         @Test
         public void 選択肢に_ないある_が設定されている時_toValueは_コード1指定で_ない_を返す() {
-            assertThat(new ChoiceItem(ChoiceResultItem.NaiAru.values()).toValue(new RString("1")), is((IAnswerResultItem) ChoiceResultItem.NaiAru.ない));
+            assertThat(new ChoiceItem(Arrays.asList(ChoiceResultItem.NaiAru.values())).toValue(new RString("1")), is((IAnswerResultItem) ChoiceResultItem.NaiAru.ない));
         }
 
         @Test
         public void 選択肢に_ないある_が設定されている時_toValueは_コード2指定で_ある_を返す() {
-            assertThat(new ChoiceItem(ChoiceResultItem.NaiAru.values()).toValue(new RString("2")), is((IAnswerResultItem) ChoiceResultItem.NaiAru.ある));
+            assertThat(new ChoiceItem(Arrays.asList(ChoiceResultItem.NaiAru.values())).toValue(new RString("2")), is((IAnswerResultItem) ChoiceResultItem.NaiAru.ある));
         }
 
         @Test
         public void 選択肢の設定がない時_toValueは_NULLを返す() {
-            assertThat(new ChoiceItem(createChoice(1)).toValue(new RString("999")), nullValue());
+            assertThat(new ChoiceItem(Arrays.asList(createChoice(1))).toValue(new RString("999")), nullValue());
         }
     }
 
@@ -54,12 +55,12 @@ public class ChoiceItemTest extends DbeTestBase {
 
         @Test
         public void 選択項目を指定した時_isWapperForは_TRUEを返す() {
-            assertThat(new ChoiceItem(createChoice(1)).isWapperFor(ChoiceItem.class), is(true));
+            assertThat(new ChoiceItem(Arrays.asList(createChoice(1))).isWapperFor(ChoiceItem.class), is(true));
         }
 
         @Test
         public void 入力項目を指定した時_isWapperForは_FALSEを返す() {
-            assertThat(new ChoiceItem(createChoice(1)).isWapperFor(InputItem.class), is(false));
+            assertThat(new ChoiceItem(Arrays.asList(createChoice(1))).isWapperFor(InputItem.class), is(false));
         }
     }
 
@@ -67,7 +68,7 @@ public class ChoiceItemTest extends DbeTestBase {
 
         @Test
         public void 選択項目を指定した時_unwrapは_選択項目のインスタンスを返す() {
-            assertThat(new ChoiceItem(createChoice(1)).unwrap(ChoiceItem.class), instanceOf(ChoiceItem.class));
+            assertThat(new ChoiceItem(Arrays.asList(createChoice(1))).unwrap(ChoiceItem.class), instanceOf(ChoiceItem.class));
         }
     }
 
@@ -75,17 +76,17 @@ public class ChoiceItemTest extends DbeTestBase {
 
         @Test
         public void 選択肢が0件の時_asListは_0件のリストを返す() {
-            assertThat(new ChoiceItem(createChoice(0)).asList().size(), is(0));
+            assertThat(new ChoiceItem(Arrays.asList(createChoice(0))).asList().size(), is(0));
         }
 
         @Test
         public void 選択肢が1件の時_asListは_1件のリストを返す() {
-            assertThat(new ChoiceItem(createChoice(1)).asList().size(), is(1));
+            assertThat(new ChoiceItem(Arrays.asList(createChoice(1))).asList().size(), is(1));
         }
 
         @Test
         public void 選択肢が2件の時_asListは_2件のリストを返す() {
-            assertThat(new ChoiceItem(createChoice(2)).asList().size(), is(2));
+            assertThat(new ChoiceItem(Arrays.asList(createChoice(2))).asList().size(), is(2));
         }
     }
 

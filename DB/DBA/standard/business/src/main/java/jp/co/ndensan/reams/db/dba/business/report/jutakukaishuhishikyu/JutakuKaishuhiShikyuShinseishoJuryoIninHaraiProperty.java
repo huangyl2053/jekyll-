@@ -25,6 +25,6 @@ public class JutakuKaishuhiShikyuShinseishoJuryoIninHaraiProperty
      * インスタンスを生成します。
      */
     public JutakuKaishuhiShikyuShinseishoJuryoIninHaraiProperty() {
-        super(SubGyomuCode.DBA介護資格, ID);
+        super(SubGyomuCode.DBC介護給付, ID);
     }
 }

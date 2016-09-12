@@ -8,8 +8,12 @@ module DBD {
 
         export class Events {
 
-            public static CloseOK(): string {
-                return "CloseOK";
+            public static onClick_btnClose(): string {
+                return "onClick_btnClose";
+            }
+
+            public static onClick_btnSaiHyoji(): string {
+                return "onClick_btnSaiHyoji";
             }
 
         }

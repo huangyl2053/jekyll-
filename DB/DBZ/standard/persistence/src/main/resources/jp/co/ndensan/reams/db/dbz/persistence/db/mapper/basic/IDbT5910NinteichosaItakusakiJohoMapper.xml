@@ -75,7 +75,7 @@
         <result property="kikanKubun" column="dbT5910NinteichosaItakusakiJoho_kikanKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jokyoFlag" column="dbT5910NinteichosaItakusakiJoho_jokyoFlag" />
     </resultMap>
-<select id="getEntity" resultMap="ResultMap_DbT5910NinteichosaItakusakiJohoEntity">
+<select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5910NinteichosaItakusakiJohoEntity">
     SELECT
     <include refid="allColumns_DbT5910NinteichosaItakusakiJoho" />
     FROM

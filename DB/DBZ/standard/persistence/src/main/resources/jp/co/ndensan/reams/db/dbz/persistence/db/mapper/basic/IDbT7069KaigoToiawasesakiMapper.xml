@@ -58,7 +58,7 @@
         <result property="tantoshaName" column="dbT7069KaigoToiawasesaki_tantoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
-    <select id="getEntity" resultMap="ResultMap_DbT7069KaigoToiawasesakiEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT7069KaigoToiawasesakiEntity">
 	SELECT
 	<include refid="allColumns_DbT7069KaigoToiawasesaki"/>
 	FROM

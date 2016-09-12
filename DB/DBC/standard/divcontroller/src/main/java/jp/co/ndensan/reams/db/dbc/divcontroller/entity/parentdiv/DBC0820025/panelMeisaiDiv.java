@@ -19,15 +19,13 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 public class panelMeisaiDiv extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdServiceCodeInput")
-    private ServiceCodeInputCommonChildDivDiv ccdServiceCodeInput;
     @JsonProperty("txtHyojyuntanka")
     private TextBoxNum txtHyojyuntanka;
     @JsonProperty("txtFutangenndogaku")
@@ -48,6 +46,8 @@ public class panelMeisaiDiv extends Panel {
     private Button btnCancel;
     @JsonProperty("btnClear")
     private Button btnClear;
+    @JsonProperty("ccdServiceCodeInput")
+    private ServiceCodeInputCommonChildDivDiv ccdServiceCodeInput;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -55,15 +55,6 @@ public class panelMeisaiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getccdServiceCodeInput
-     * @return ccdServiceCodeInput
-     */
-    @JsonProperty("ccdServiceCodeInput")
-    public IServiceCodeInputCommonChildDiv getCcdServiceCodeInput() {
-        return ccdServiceCodeInput;
-    }
-
     /*
      * gettxtHyojyuntanka
      * @return txtHyojyuntanka
@@ -242,6 +233,15 @@ public class panelMeisaiDiv extends Panel {
     @JsonProperty("btnClear")
     public void setBtnClear(Button btnClear) {
         this.btnClear = btnClear;
+    }
+
+    /*
+     * getccdServiceCodeInput
+     * @return ccdServiceCodeInput
+     */
+    @JsonProperty("ccdServiceCodeInput")
+    public IServiceCodeInputCommonChildDiv getCcdServiceCodeInput() {
+        return ccdServiceCodeInput;
     }
 
     // </editor-fold>

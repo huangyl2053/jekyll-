@@ -18,8 +18,8 @@ import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokureiBuilde
 import jp.co.ndensan.reams.db.dbz.business.core.TekiyoJogaisha;
 import jp.co.ndensan.reams.db.dbz.business.core.TekiyoJogaishaBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.shikakufuseigo.ShikakuFuseigoBusiness;
+import jp.co.ndensan.reams.db.dbz.definition.core.config.ConfigKeysNenreiTotatsuKijunJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigKeysNenreiTotatsuKijunJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.fuseigoriyu.FuseigoRiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.jogaiidojiyu.JogaiKaijoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.jogaiidojiyu.JogaiTekiyoJiyu;
@@ -31,12 +31,10 @@ import jp.co.ndensan.reams.db.dbz.definition.core.tatokureiidojiyu.TatokureiKaij
 import jp.co.ndensan.reams.db.dbz.definition.core.tatokureiidojiyu.TatokureiTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZA010001.ShikakuFuseigoShuseiMainDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZA010001.dgShikakuFuseigoIchiran_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.service.core.shikakufuseigo.ShikakuSeigoseiCheckJohoManager;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -44,7 +42,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayDateFormat;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 資格不整合修正の抽象Handlerクラスです。
@@ -54,7 +51,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class ShikakuFuseigoShuseiMainHandler {
 
     private final ShikakuFuseigoShuseiMainDiv div;
-    private final ShikakuSeigoseiCheckJohoManager manager;
 
     private static final RString GRID_BR = new RString("<br/>");
     private static final int NUMBER_FLAG_1 = 1;
@@ -70,7 +66,6 @@ public class ShikakuFuseigoShuseiMainHandler {
      */
     public ShikakuFuseigoShuseiMainHandler(ShikakuFuseigoShuseiMainDiv div) {
         this.div = div;
-        this.manager = ShikakuSeigoseiCheckJohoManager.createInstance();
         第１号被保険者到達基準年齢 = Integer.valueOf(DbBusinessConfig.get(
                 ConfigKeysNenreiTotatsuKijunJoho.年齢到達基準_第１号被保険者到達基準年齢,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString());
@@ -111,9 +106,12 @@ public class ShikakuFuseigoShuseiMainHandler {
             if (business.get処理日時() != null && business.get処理日時().isAfter(処理日時)) {
                 処理日時 = business.get処理日時();
             }
-            if (business.get台帳種別().equals(daichoType) && gaiHyoji == business.is対象外フラグ()) {
+            if (daichoType.equals(business.get台帳種別()) && gaiHyoji == business.is対象外フラグ()) {
                 dgShikakuFuseigoIchiran_Row row = new dgShikakuFuseigoIchiran_Row();
                 row.setIgnoree(business.is対象外フラグ() ? new RString("○") : RString.EMPTY);
+                if (business.get被保険者番号() == null || business.get識別コード() == null) {
+                    continue;
+                }
                 row.setHihoNo(business.get被保険者番号().value());
                 row.setShikibetsuCode(business.get識別コード().value());
                 row.setHihoNoAndShikibetsuCode(toAppendBR(business.get被保険者番号().value(), business.get識別コード().value()));
@@ -121,15 +119,7 @@ public class ShikakuFuseigoShuseiMainHandler {
                 row.setShimei(business.get氏名().value());
                 row.setKanaAndShimsei(toAppendBR(business.get氏名カナ().value(), business.get氏名().value()));
                 row.setJuminJotai(business.get住民状態());
-                if (business.is日本人()) {
-                    row.getTxtBirthDay().setDisplayFormatEnum(DisplayDateFormat.平YYMMDD);
-                    row.setJuminJotaiAndBirthDay(toAppendBR(business.get住民状態(),
-                            business.get生年月日().wareki().eraType(EraType.KANJI_RYAKU).toDateString()));
-                } else {
-                    row.getTxtBirthDay().setDisplayFormatEnum(DisplayDateFormat.YYYYperiodMMperiodDD);
-                    row.setJuminJotaiAndBirthDay(toAppendBR(business.get住民状態(),
-                            business.get生年月日().seireki().toDateString()));
-                }
+                set住民状態And生年月日(business.get住民状態(), business.is日本人(), business.get生年月日(), row);
                 row.getTxtBirthDay().setValue(business.get生年月日());
                 row.setSeibetsu(business.get性別());
                 row.setNenrei(business.get年齢());
@@ -142,34 +132,35 @@ public class ShikakuFuseigoShuseiMainHandler {
         div.getTxtShoriDateTime().setValue(rdateToRstr(処理日時));
     }
 
-    /**
-     * 不整合チェック結果（最新の不整合内容）を明細エリアに表示する
-     *
-     * @param daichoType 台帳種別
-     */
-    public void setMeisaiByDaichoType(RString daichoType) {
-        IKojin 個人情報 = ViewStateHolder.get(ViewStateKeys.資格不整合_個人情報, IKojin.class);
-        FuseigoRiyu 不整合理由 = ViewStateHolder.get(ViewStateKeys.資格不整合_不整合理由, FuseigoRiyu.class);
-        div.getShikakuFuseigoIchiran().setDisabled(true);
-        if (DaichoType.被保険者.getコード().equals(daichoType)) {
-            setDdlByHihokensha();
-            setHihokenshaMeisai(不整合理由, 個人情報);
-        }
-        if (DaichoType.他市町村住所地特例者.getコード().equals(daichoType)) {
-            setDdlByTashichoson();
-            setTashichosonMeisai(不整合理由, 個人情報);
-        }
-        if (DaichoType.適用除外者.getコード().equals(daichoType)) {
-            setDdlByTekiyo();
-            setTekiyoMeisai(不整合理由, 個人情報);
+    private void set住民状態And生年月日(RString 住民状態, boolean is日本人, FlexibleDate 生年月日, dgShikakuFuseigoIchiran_Row row) {
+        if (is日本人) {
+            row.getTxtBirthDay().setDisplayFormatEnum(DisplayDateFormat.平YYMMDD);
+            if (生年月日 != null && !生年月日.isEmpty()) {
+                row.setJuminJotaiAndBirthDay(toAppendBR(住民状態,
+                        生年月日.wareki().eraType(EraType.KANJI_RYAKU).toDateString()));
+            } else {
+                row.setJuminJotaiAndBirthDay(toAppendBR(住民状態,
+                        RString.EMPTY));
+            }
+
+        } else {
+            row.getTxtBirthDay().setDisplayFormatEnum(DisplayDateFormat.YYYYperiodMMperiodDD);
+            if (生年月日 != null && !生年月日.isEmpty()) {
+                row.setJuminJotaiAndBirthDay(toAppendBR(住民状態,
+                        生年月日.seireki().toDateString()));
+            } else {
+                row.setJuminJotaiAndBirthDay(toAppendBR(住民状態,
+                        RString.EMPTY));
+            }
         }
     }
 
     /**
      * 資格取得エリア、取得除外エリアの表示切替
+     *
+     * @param 不整合理由 不整合理由
      */
-    public void setSyutokuJogai() {
-        FuseigoRiyu 不整合理由 = ViewStateHolder.get(ViewStateKeys.資格不整合_不整合理由, FuseigoRiyu.class);
+    public void setSyutokuJogai(FuseigoRiyu 不整合理由) {
         if (不整合理由 == FuseigoRiyu.資格管理情報未登録者) {
             if (div.getChkShutokuJogai().isAllSelected()) {
                 div.getDdlShikakuShutokuJiyu().setDisabled(true);
@@ -189,9 +180,10 @@ public class ShikakuFuseigoShuseiMainHandler {
 
     /**
      * 住所地特例適用エリア、資格喪失エリアの表示切替
+     *
+     * @param 不整合理由 不整合理由
      */
-    public void setShikakuSoushitu() {
-        FuseigoRiyu 不整合理由 = ViewStateHolder.get(ViewStateKeys.資格不整合_不整合理由, FuseigoRiyu.class);
+    public void setShikakuSoushitu(FuseigoRiyu 不整合理由) {
         if (不整合理由 == FuseigoRiyu.資格取得者_転出者
                 || 不整合理由 == FuseigoRiyu.資格喪失日_転出予定者 || 不整合理由 == FuseigoRiyu.資格喪失日_転出確定者) {
             if (div.getChkJutoku().isAllSelected()) {
@@ -211,26 +203,13 @@ public class ShikakuFuseigoShuseiMainHandler {
     }
 
     /**
-     * ViewStateに保存されている修正後の情報に、画面入力値を反映する。
+     * 他特の情報を設定します
      *
-     * @param 台帳種別 RString
+     * @param 不整合理由 不整合理由
+     * @param 修正後の他特の情報 修正後の他特の情報
+     * @return TashichosonJushochiTokurei
      */
-    public void set修正後の情報(RString 台帳種別) {
-        FuseigoRiyu 不整合理由 = ViewStateHolder.get(ViewStateKeys.資格不整合_不整合理由, FuseigoRiyu.class);
-        if (台帳種別.equals(DaichoType.被保険者.getコード())) {
-            set資格の情報(不整合理由);
-        }
-        if (台帳種別.equals(DaichoType.適用除外者.getコード())) {
-            set除外の情報(不整合理由);
-        }
-        if (台帳種別.equals(DaichoType.他市町村住所地特例者.getコード())) {
-            set他特の情報(不整合理由);
-        }
-    }
-
-    private void set他特の情報(FuseigoRiyu 不整合理由) {
-        TashichosonJushochiTokurei 修正後の他特の情報
-                = ViewStateHolder.get(ViewStateKeys.資格不整合_修正後の他特の情報, TashichosonJushochiTokurei.class);
+    public TashichosonJushochiTokurei set他特の情報(FuseigoRiyu 不整合理由, TashichosonJushochiTokurei 修正後の他特の情報) {
         TashichosonJushochiTokureiBuilder 他特の情報修正後Builder = 修正後の他特の情報.createBuilderForEdit();
         switch (不整合理由) {
             case 他住所地特例適用日_転入者:
@@ -244,11 +223,17 @@ public class ShikakuFuseigoShuseiMainHandler {
                 他特の情報修正後Builder.set解除届出年月日(div.getTxtTatokuKaijoTodokedeYmd().getValue());
                 break;
         }
-        ViewStateHolder.put(ViewStateKeys.資格不整合_修正後の他特の情報, 他特の情報修正後Builder.build());
+        return 他特の情報修正後Builder.build();
     }
 
-    private void set除外の情報(FuseigoRiyu 不整合理由) {
-        TekiyoJogaisha 修正後の除外の情報 = ViewStateHolder.get(ViewStateKeys.資格不整合_修正後の除外の情報, TekiyoJogaisha.class);
+    /**
+     * 除外の情報を設定します
+     *
+     * @param 不整合理由 不整合理由
+     * @param 修正後の除外の情報 修正後の除外の情報
+     * @return TekiyoJogaisha
+     */
+    public TekiyoJogaisha set除外の情報(FuseigoRiyu 不整合理由, TekiyoJogaisha 修正後の除外の情報) {
         TekiyoJogaishaBuilder 除外の情報修正後Builder = 修正後の除外の情報.createBuilderForEdit();
         switch (不整合理由) {
             case 除外適用日_転入者:
@@ -262,11 +247,17 @@ public class ShikakuFuseigoShuseiMainHandler {
                 除外の情報修正後Builder.set解除届出年月日(div.getTxtTekiyoJogaiKaijoTodokedeYmd().getValue());
                 break;
         }
-        ViewStateHolder.put(ViewStateKeys.資格不整合_修正後の除外の情報, 除外の情報修正後Builder.build());
+        return 除外の情報修正後Builder.build();
     }
 
-    private void set資格の情報(FuseigoRiyu 不整合理由) {
-        HihokenshaDaicho 修正後の資格の情報 = ViewStateHolder.get(ViewStateKeys.資格不整合_修正後の資格の情報, HihokenshaDaicho.class);
+    /**
+     * 資格の情報を設定します
+     *
+     * @param 不整合理由 不整合理由
+     * @param 修正後の資格の情報 修正後の資格の情報
+     * @return HihokenshaDaicho
+     */
+    public HihokenshaDaicho set資格の情報(FuseigoRiyu 不整合理由, HihokenshaDaicho 修正後の資格の情報) {
         switch (不整合理由) {
             case 資格変更者_１号被保険者到達:
                 HihokenshaDaicho 資格の情報1 = new HihokenshaDaicho(修正後の資格の情報.get被保険者番号(),
@@ -277,20 +268,11 @@ public class ShikakuFuseigoShuseiMainHandler {
                 builder1.set資格変更届出年月日(div.getTxtShikakuHenkoTodokedeYmd().getValue());
                 builder1.set第1号資格取得年月日(div.getTxtShikakuHenkoYmd().getValue());
                 builder1.set異動事由コード(div.getDdlShikakuHenkoJiyu().getSelectedKey());
-                ViewStateHolder.put(ViewStateKeys.資格不整合_修正後の資格の情報, builder1.build());
-                break;
+                return builder1.build();
             case 資格取得日_転入者:
             case 資格取得日_年齢到達者:
             case 資格管理情報未登録者:
-                if (div.getChkShutokuJogai().isAllSelected()) {
-                    int 履歴番号 = manager.getMax履歴番号(ShikibetsuCode.EMPTY);
-                    ShikakuShutokuJogaisha 資格取得除外者 = new ShikakuShutokuJogaisha(修正後の資格の情報.get識別コード(), 履歴番号);
-                    ShikakuShutokuJogaishaBuilder builder3 = 資格取得除外者.createBuilderForEdit();
-                    builder3.set市町村コード(修正後の資格の情報.get市町村コード());
-                    builder3.set資格取得除外年月日(div.getTxtShutokuJogaiYmd().getValue());
-                    builder3.set資格取得除外理由(div.getTxtShutokuJogaiRiyu().getValue());
-                    ViewStateHolder.put(ViewStateKeys.資格不整合_取得除外の情報, builder3.build());
-                } else {
+                if (!div.getChkShutokuJogai().isAllSelected()) {
                     HihokenshaDaicho 資格の情報2 = new HihokenshaDaicho(修正後の資格の情報.get被保険者番号(),
                             div.getTxtShikakuShutokuYmd().getValue(), 修正後の資格の情報.get枝番());
                     HihokenshaDaichoBuilder builder2 = set資格の情報Common(資格の情報2, 修正後の資格の情報, NUMBER_FLAG_2);
@@ -299,11 +281,11 @@ public class ShikakuFuseigoShuseiMainHandler {
                     builder2.set資格取得事由コード(div.getDdlShikakuShutokuJiyu().getSelectedKey());
                     builder2.set資格取得年月日(div.getTxtShikakuShutokuYmd().getValue());
                     builder2.set資格取得届出年月日(div.getTxtShikakuShutokuTodokedeYmd().getValue());
-                    ViewStateHolder.put(ViewStateKeys.資格不整合_修正後の資格の情報, builder2.build());
+                    return builder2.build();
                 }
                 break;
             default:
-                if (div.getChkJutoku().isIsAllSelectable()) {
+                if (div.getChkJutoku().isAllSelected()) {
                     HihokenshaDaicho 資格の情報4 = new HihokenshaDaicho(修正後の資格の情報.get被保険者番号(),
                             div.getTxtJutokuTekiyoDate().getValue(), 修正後の資格の情報.get枝番());
                     HihokenshaDaichoBuilder builder4 = set資格の情報Common(資格の情報4, 修正後の資格の情報, NUMBER_FLAG_4);
@@ -311,7 +293,7 @@ public class ShikakuFuseigoShuseiMainHandler {
                     builder4.set住所地特例適用事由コード(div.getDdlJutokuTekiyoJiyu().getSelectedKey());
                     builder4.set適用年月日(div.getTxtJutokuTekiyoDate().getValue());
                     builder4.set適用届出年月日(div.getTxtJutokuTekiyoTodokedeDate().getValue());
-                    ViewStateHolder.put(ViewStateKeys.資格不整合_修正後の資格の情報, builder4.build());
+                    return builder4.build();
                 } else {
                     HihokenshaDaicho 資格の情報5 = new HihokenshaDaicho(修正後の資格の情報.get被保険者番号(),
                             div.getTxtShikakuSoshitsuYmd().getValue(), 修正後の資格の情報.get枝番());
@@ -320,10 +302,30 @@ public class ShikakuFuseigoShuseiMainHandler {
                     builder5.set資格喪失事由コード(div.getDdlShikakuSoshitsuJiyu().getSelectedKey());
                     builder5.set資格喪失年月日(div.getTxtShikakuSoshitsuYmd().getValue());
                     builder5.set資格喪失届出年月日(div.getTxtShikakuSoshitsuTodokedeYmd().getValue());
-                    ViewStateHolder.put(ViewStateKeys.資格不整合_修正後の資格の情報, builder5.build());
+                    return builder5.build();
                 }
-                break;
         }
+        return null;
+    }
+
+    /**
+     * 取得除外の情報を設定します
+     *
+     * @param 不整合理由 不整合理由
+     * @param 履歴番号 履歴番号
+     * @param 修正後の資格の情報 修正後の資格の情報
+     * @return ShikakuShutokuJogaisha
+     */
+    public ShikakuShutokuJogaisha set取得除外の情報(FuseigoRiyu 不整合理由, int 履歴番号, HihokenshaDaicho 修正後の資格の情報) {
+        if (div.getChkShutokuJogai().isAllSelected() && 不整合理由 == FuseigoRiyu.資格管理情報未登録者) {
+            ShikakuShutokuJogaisha 資格取得除外者 = new ShikakuShutokuJogaisha(修正後の資格の情報.get識別コード(), 履歴番号 + 1);
+            ShikakuShutokuJogaishaBuilder builder3 = 資格取得除外者.createBuilderForEdit();
+            builder3.set市町村コード(修正後の資格の情報.get市町村コード());
+            builder3.set資格取得除外年月日(div.getTxtShutokuJogaiYmd().getValue());
+            builder3.set資格取得除外理由(div.getTxtShutokuJogaiRiyu().getValue());
+            return builder3.build();
+        }
+        return null;
     }
 
     private HihokenshaDaichoBuilder set資格の情報Common(HihokenshaDaicho 資格の情報, HihokenshaDaicho 修正後の資格の情報, int flag) {
@@ -388,9 +390,16 @@ public class ShikakuFuseigoShuseiMainHandler {
         return 資格の情報修正後Builder;
     }
 
-    private void setTekiyoMeisai(FuseigoRiyu 不整合理由, IKojin 個人情報) {
-        TekiyoJogaisha 現在の他特の情報 = ViewStateHolder.get(ViewStateKeys.資格不整合_現在の除外の情報, TekiyoJogaisha.class);
-        TekiyoJogaisha 修正後の他特の情報 = ViewStateHolder.get(ViewStateKeys.資格不整合_修正後の除外の情報, TekiyoJogaisha.class);
+    /**
+     * 適用除外の場合、不整合チェック結果（最新の不整合内容）を明細エリアに表示する
+     *
+     * @param 不整合理由 不整合理由
+     * @param 個人情報 個人情報
+     * @param 現在の他特の情報 現在の他特の情報
+     * @param 修正後の他特の情報 修正後の他特の情報
+     */
+    public void setTekiyoMeisai(FuseigoRiyu 不整合理由, IKojin 個人情報, TekiyoJogaisha 現在の他特の情報, TekiyoJogaisha 修正後の他特の情報) {
+        setDdlByTekiyo();
         switch (不整合理由) {
             case 除外適用日_転入者:
                 div.getDdlTekiyoJogaiKaijoJiyu().setDisabled(true);
@@ -432,28 +441,46 @@ public class ShikakuFuseigoShuseiMainHandler {
         div.getTxtTenshutsuYoteiYmd().setValue(個人情報.get転出予定().get異動年月日());
         div.getTxtTenshutsuKakuteiYmd().setValue(個人情報.get転出確定().get異動年月日());
         if (現在の他特の情報 != null) {
-            div.getTxtCurrentTekiyoJogaiTekiyoJiyu().setValue(JogaiTekiyoJiyu.toValue(現在の他特の情報.get適用除外適用事由コード()).get略称());
+            try {
+                div.getTxtCurrentTekiyoJogaiTekiyoJiyu().setValue(JogaiTekiyoJiyu.toValue(現在の他特の情報.get適用除外適用事由コード()).get名称());
+            } catch (IllegalArgumentException e) {
+                div.getTxtCurrentTekiyoJogaiTekiyoJiyu().setValue(RString.EMPTY);
+            }
             div.getTxtCurrentTekiyoJogaiTekiyoYmd().setValue(現在の他特の情報.get適用年月日());
             div.getTxtCurrentTekiyoJogaiTekiyoTodokedeYmd().setValue(現在の他特の情報.get適用届出年月日());
-            div.getTxtCurrentTekiyoJogaiKaijoJiyu().setValue(JogaiKaijoJiyu.toValue(現在の他特の情報.get適用除外解除事由コード()).get略称());
+            try {
+                div.getTxtCurrentTekiyoJogaiKaijoJiyu().setValue(JogaiKaijoJiyu.toValue(現在の他特の情報.get適用除外解除事由コード()).get名称());
+            } catch (IllegalArgumentException e) {
+                div.getTxtCurrentTekiyoJogaiKaijoJiyu().setValue(RString.EMPTY);
+            }
             div.getTxtCurrentTekiyoJogaiKaijoYmd().setValue(現在の他特の情報.get解除年月日());
             div.getTxtCurrentTekiyoJogaiKaijoTodokedeYmd().setValue(現在の他特の情報.get解除届出年月日());
         }
         if (修正後の他特の情報 != null) {
-            div.getDdlTekiyoJogaiTekiyoJiyu().setSelectedKey(修正後の他特の情報.get適用除外適用事由コード());
+            if (!RString.isNullOrEmpty(修正後の他特の情報.get適用除外適用事由コード())) {
+                div.getDdlTekiyoJogaiTekiyoJiyu().setSelectedKey(修正後の他特の情報.get適用除外適用事由コード());
+            }
             div.getTxtTekiyoJogaiTekiyoYmd().setValue(修正後の他特の情報.get適用年月日());
             div.getTxtTekiyoJogaiTekiyoTodokedeYmd().setValue(修正後の他特の情報.get適用届出年月日());
-            div.getDdlTekiyoJogaiKaijoJiyu().setSelectedKey(修正後の他特の情報.get適用除外解除事由コード());
+            if (!RString.isNullOrEmpty(修正後の他特の情報.get適用除外解除事由コード())) {
+                div.getDdlTekiyoJogaiKaijoJiyu().setSelectedKey(修正後の他特の情報.get適用除外解除事由コード());
+            }
             div.getTxtTekiyoJogaiKaijoYmd().setValue(修正後の他特の情報.get解除年月日());
             div.getTxtTekiyoJogaiKaijoTodokedeYmd().setValue(修正後の他特の情報.get解除届出年月日());
         }
     }
 
-    private void setTashichosonMeisai(FuseigoRiyu 不整合理由, IKojin 個人情報) {
-        TashichosonJushochiTokurei 現在の他特の情報 = ViewStateHolder.get(ViewStateKeys.資格不整合_現在の他特の情報,
-                TashichosonJushochiTokurei.class);
-        TashichosonJushochiTokurei 修正後の他特の情報 = ViewStateHolder.get(ViewStateKeys.資格不整合_修正後の他特の情報,
-                TashichosonJushochiTokurei.class);
+    /**
+     * 他市町村住所地特例者の場合、不整合チェック結果（最新の不整合内容）を明細エリアに表示する
+     *
+     * @param 不整合理由 不整合理由
+     * @param 個人情報 個人情報
+     * @param 現在の他特の情報 現在の他特の情報
+     * @param 修正後の他特の情報 修正後の他特の情報
+     */
+    public void setTashichosonMeisai(FuseigoRiyu 不整合理由, IKojin 個人情報,
+            TashichosonJushochiTokurei 現在の他特の情報, TashichosonJushochiTokurei 修正後の他特の情報) {
+        setDdlByTashichoson();
         switch (不整合理由) {
             case 他住所地特例適用日_転入者:
                 div.getDdlTatokuKaijoJiyu().setDisabled(true);
@@ -495,29 +522,49 @@ public class ShikakuFuseigoShuseiMainHandler {
         div.getTxtTenshutsuYoteiYmd().setValue(個人情報.get転出予定().get異動年月日());
         div.getTxtTenshutsuKakuteiYmd().setValue(個人情報.get転出確定().get異動年月日());
         if (現在の他特の情報 != null) {
-            div.getTxtCurrentTatokuTekiyoJiyu().setValue(
-                    TatokureiTekiyoJiyu.toValue(現在の他特の情報.get他市町村住所地特例適用事由コード()).get略称());
+            try {
+                div.getTxtCurrentTatokuTekiyoJiyu().setValue(
+                        TatokureiTekiyoJiyu.toValue(現在の他特の情報.get他市町村住所地特例適用事由コード()).get名称());
+            } catch (IllegalArgumentException e) {
+                div.getTxtCurrentTatokuTekiyoJiyu().setValue(RString.EMPTY);
+            }
             div.getTxtCurrentTatokuTekiyoYmd().setValue(現在の他特の情報.get適用年月日());
             div.getTxtCurrentTatokuTekiyoTodokedeYmd().setValue(現在の他特の情報.get適用届出年月日());
-            div.getTxtCurrentTatokuKaijoJiyu().setValue(
-                    TatokureiKaijoJiyu.toValue(現在の他特の情報.get他市町村住所地特例解除事由コード()).get略称());
+            try {
+                div.getTxtCurrentTatokuKaijoJiyu().setValue(
+                        TatokureiKaijoJiyu.toValue(現在の他特の情報.get他市町村住所地特例解除事由コード()).get名称());
+            } catch (IllegalArgumentException e) {
+                div.getTxtCurrentTatokuKaijoJiyu().setValue(RString.EMPTY);
+            }
             div.getTxtCurrentTatokuKaijoYmd().setValue(現在の他特の情報.get解除年月日());
             div.getTxtCurrentTatokuKaijoTodokedeYmd().setValue(現在の他特の情報.get解除届出年月日());
         }
         if (修正後の他特の情報 != null) {
-            div.getDdlTatokuTekiyoJiyu().setSelectedKey(修正後の他特の情報.get他市町村住所地特例適用事由コード());
+            if (!RString.isNullOrEmpty(修正後の他特の情報.get他市町村住所地特例適用事由コード())) {
+                div.getDdlTatokuTekiyoJiyu().setSelectedKey(修正後の他特の情報.get他市町村住所地特例適用事由コード());
+            }
             div.getTxtTatokuTekiyoYmd().setValue(修正後の他特の情報.get適用年月日());
             div.getTxtTatokuTekiyoTodokedeYmd().setValue(修正後の他特の情報.get適用届出年月日());
-            div.getDdlTatokuKaijoJiyu().setSelectedKey(修正後の他特の情報.get他市町村住所地特例解除事由コード());
+            if (!RString.isNullOrEmpty(修正後の他特の情報.get他市町村住所地特例解除事由コード())) {
+                div.getDdlTatokuKaijoJiyu().setSelectedKey(修正後の他特の情報.get他市町村住所地特例解除事由コード());
+            }
             div.getTxtTatokuKaijoYmd().setValue(修正後の他特の情報.get解除年月日());
             div.getTxtTatokuKaijoTodokedeYmd().setValue(修正後の他特の情報.get解除届出年月日());
         }
     }
 
-    private void setHihokenshaMeisai(FuseigoRiyu 不整合理由, IKojin 個人情報) {
-        HihokenshaDaicho 現在の資格の情報 = ViewStateHolder.get(ViewStateKeys.資格不整合_現在の資格の情報, HihokenshaDaicho.class);
-        HihokenshaDaicho 修正後の資格の情報 = ViewStateHolder.get(ViewStateKeys.資格不整合_修正後の資格の情報, HihokenshaDaicho.class);
-        ShikakuShutokuJogaisha 資格取得除外の情報 = ViewStateHolder.get(ViewStateKeys.資格不整合_取得除外の情報, ShikakuShutokuJogaisha.class);
+    /**
+     * 被保険者の場合、不整合チェック結果（最新の不整合内容）を明細エリアに表示する
+     *
+     * @param 不整合理由 不整合理由
+     * @param 個人情報 個人情報
+     * @param 現在の資格の情報 現在の資格の情報
+     * @param 修正後の資格の情報 修正後の資格の情報
+     * @param 資格取得除外の情報 資格取得除外の情報
+     */
+    public void setHihokenshaMeisai(FuseigoRiyu 不整合理由, IKojin 個人情報, HihokenshaDaicho 現在の資格の情報,
+            HihokenshaDaicho 修正後の資格の情報, ShikakuShutokuJogaisha 資格取得除外の情報) {
+        setDdlByHihokensha();
         setDisableHihokensha(不整合理由, 個人情報);
         div.getTxtFusugoNaiyo().setValue(不整合理由.get名称());
         div.getTxtShikibetsuCode().setValue(個人情報.get識別コード().value());
@@ -544,16 +591,32 @@ public class ShikakuFuseigoShuseiMainHandler {
         div.getTxtTenshutsuYoteiYmd().setValue(個人情報.get転出予定().get異動年月日());
         div.getTxtTenshutsuKakuteiYmd().setValue(個人情報.get転出確定().get異動年月日());
         if (現在の資格の情報 != null) {
-            div.getTxtCurrentShikakuShutokuJiyu().setValue(ShikakuShutokuJiyu.toValue(現在の資格の情報.get資格取得事由コード()).get名称());
+            try {
+                div.getTxtCurrentShikakuShutokuJiyu().setValue(ShikakuShutokuJiyu.toValue(現在の資格の情報.get資格取得事由コード()).get名称());
+            } catch (IllegalArgumentException e) {
+                div.getTxtCurrentShikakuShutokuJiyu().setValue(RString.EMPTY);
+            }
             div.getTxtCurrentShikakuShutokuYmd().setValue(現在の資格の情報.get資格取得年月日());
             div.getTxtCurrentShikakuShutokuTodokedeYmd().setValue(現在の資格の情報.get資格取得届出年月日());
-            div.getTxtCurrentShikakuHenkoJiyu().setValue(ShikakuHenkoJiyu.toValue(現在の資格の情報.get資格変更事由コード()).get名称());
+            try {
+                div.getTxtCurrentShikakuHenkoJiyu().setValue(ShikakuHenkoJiyu.toValue(現在の資格の情報.get資格変更事由コード()).get名称());
+            } catch (IllegalArgumentException e) {
+                div.getTxtCurrentShikakuHenkoJiyu().setValue(RString.EMPTY);
+            }
             div.getTxtCurrentShikakuHenkoYmd().setValue(現在の資格の情報.get資格変更年月日());
             div.getTxtCurrentShikakuHenkoTodokedeYmd().setValue(現在の資格の情報.get資格変更届出年月日());
-            div.getTxtCurrentJutokuTekiyoJiyu().setValue(ShikakuJutokuTekiyoJiyu.toValue(現在の資格の情報.get住所地特例適用事由コード()).get名称());
+            try {
+                div.getTxtCurrentJutokuTekiyoJiyu().setValue(ShikakuJutokuTekiyoJiyu.toValue(現在の資格の情報.get住所地特例適用事由コード()).get名称());
+            } catch (IllegalArgumentException e) {
+                div.getTxtCurrentJutokuTekiyoJiyu().setValue(RString.EMPTY);
+            }
             div.getTxtCurrentJutokuTekiyoDate().setValue(現在の資格の情報.get適用年月日());
             div.getTxtCurrentJutokuTekiyoTodokedeDate().setValue(現在の資格の情報.get適用届出年月日());
-            div.getTxtCurrentShikakuSoshitsuJiyu().setValue(ShikakuSoshitsuJiyu.toValue(現在の資格の情報.get資格喪失事由コード()).get名称());
+            try {
+                div.getTxtCurrentShikakuSoshitsuJiyu().setValue(ShikakuSoshitsuJiyu.toValue(現在の資格の情報.get資格喪失事由コード()).get名称());
+            } catch (IllegalArgumentException e) {
+                div.getTxtCurrentShikakuSoshitsuJiyu().setValue(RString.EMPTY);
+            }
             div.getTxtCurrentShikakuSoshitsuYmd().setValue(現在の資格の情報.get資格喪失年月日());
             div.getTxtCurrentShikakuSoshitsuTodokedeYmd().setValue(現在の資格の情報.get資格喪失届出年月日());
         }
@@ -563,16 +626,24 @@ public class ShikakuFuseigoShuseiMainHandler {
         }
         if (修正後の資格の情報 != null) {
             div.getTxtHihoNo().setValue(修正後の資格の情報.get被保険者番号().value());
-            div.getDdlShikakuShutokuJiyu().setSelectedKey(修正後の資格の情報.get資格取得事由コード());
+            if (!RString.isNullOrEmpty(修正後の資格の情報.get資格取得事由コード())) {
+                div.getDdlShikakuShutokuJiyu().setSelectedKey(修正後の資格の情報.get資格取得事由コード());
+            }
             div.getTxtShikakuShutokuYmd().setValue(修正後の資格の情報.get資格取得年月日());
             div.getTxtShikakuShutokuTodokedeYmd().setValue(修正後の資格の情報.get資格取得届出年月日());
-            div.getDdlShikakuHenkoJiyu().setSelectedKey(修正後の資格の情報.get資格変更事由コード());
+            if (!RString.isNullOrEmpty(修正後の資格の情報.get資格変更事由コード())) {
+                div.getDdlShikakuHenkoJiyu().setSelectedKey(修正後の資格の情報.get資格変更事由コード());
+            }
             div.getTxtShikakuHenkoYmd().setValue(修正後の資格の情報.get資格変更年月日());
             div.getTxtShikakuHenkoTodokedeYmd().setValue(修正後の資格の情報.get資格変更届出年月日());
-            div.getDdlJutokuTekiyoJiyu().setSelectedKey(修正後の資格の情報.get住所地特例適用事由コード());
+            if (!RString.isNullOrEmpty(修正後の資格の情報.get住所地特例適用事由コード())) {
+                div.getDdlJutokuTekiyoJiyu().setSelectedKey(修正後の資格の情報.get住所地特例適用事由コード());
+            }
             div.getTxtJutokuTekiyoDate().setValue(修正後の資格の情報.get適用年月日());
             div.getTxtJutokuTekiyoTodokedeDate().setValue(修正後の資格の情報.get適用届出年月日());
-            div.getDdlShikakuSoshitsuJiyu().setSelectedKey(修正後の資格の情報.get資格喪失事由コード());
+            if (!RString.isNullOrEmpty(修正後の資格の情報.get資格喪失事由コード())) {
+                div.getDdlShikakuSoshitsuJiyu().setSelectedKey(修正後の資格の情報.get資格喪失事由コード());
+            }
             div.getTxtShikakuSoshitsuYmd().setValue(修正後の資格の情報.get資格喪失年月日());
             div.getTxtShikakuSoshitsuTodokedeYmd().setValue(修正後の資格の情報.get資格喪失届出年月日());
         }

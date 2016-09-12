@@ -5,25 +5,43 @@
  */
 package jp.co.ndensan.reams.db.dba.service.core.hihokenshadaichokoshin;
 
+import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.definition.batchprm.dbamn71001.Dbamn71001BatchFlowParameter;
+import jp.co.ndensan.reams.db.dba.definition.batchprm.nenreitotatsushikakuido.NenreitotatsuShikakuIdoBatchFlowParameter;
+import jp.co.ndensan.reams.db.dba.definition.processprm.nenreitotatsushikakuido.HihokenshaDaichoKoshinProcessParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichokoshin.SaishinIdohiDataEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichokoshin.ShikakuIdoTaishoshaEntity;
+import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.nenreitotatsushikakuido.INenreitotatsuShikakuIdoRelateMapper;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1002TekiyoJogaishaEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokureiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1009ShikakuShutokuJogaishaEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1010TennyushutsuHoryuTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1002TekiyoJogaishaDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1003TashichosonJushochiTokureiDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1009ShikakuShutokuJogaishaDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1010TennyushutsuHoryuTaishoshaDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
+import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.hihokenshanotsukiban.HihokenshanotsukibanFinder;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth._DateOfBirth;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AgeArrivalDay;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -41,6 +59,11 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class HihokenshaDaichoKoshin {
 
+    private final MapperProvider mapperProvider;
+    private final DbT1010TennyushutsuHoryuTaishoshaDac dac1010Dac;
+    private final DbT1003TashichosonJushochiTokureiDac dbt1003;
+    private final DbT1002TekiyoJogaishaDac dbt1002Dac;
+    private final DbT1009ShikakuShutokuJogaishaDac dbt1009Dac;
     private final DbT1001HihokenshaDaichoDac dbT1001Dac;
     private final DbT7022ShoriDateKanriDac db7022Dac;
     private final HihokenshaShikakuShutokuManager hihokenshaManager;
@@ -57,6 +80,11 @@ public class HihokenshaDaichoKoshin {
      * コンストラクタです。
      */
     public HihokenshaDaichoKoshin() {
+        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
+        this.dac1010Dac = InstanceProvider.create(DbT1010TennyushutsuHoryuTaishoshaDac.class);
+        this.dbt1002Dac = InstanceProvider.create(DbT1002TekiyoJogaishaDac.class);
+        this.dbt1003 = InstanceProvider.create(DbT1003TashichosonJushochiTokureiDac.class);
+        this.dbt1009Dac = InstanceProvider.create(DbT1009ShikakuShutokuJogaishaDac.class);
         this.dbT1001Dac = InstanceProvider.create(DbT1001HihokenshaDaichoDac.class);
         this.db7022Dac = InstanceProvider.create(DbT7022ShoriDateKanriDac.class);
         hihokenshaManager = HihokenshaShikakuShutokuManager.createInstance();
@@ -65,26 +93,92 @@ public class HihokenshaDaichoKoshin {
     /**
      * {@link InstanceProvider#create}にて生成した{@link HihokenshaDaichoKoshin}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link HihokenshaDaichoKoshin}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link HihokenshaDaichoKoshin}のインスタンス
      */
     public static HihokenshaDaichoKoshin createInstance() {
         return InstanceProvider.create(HihokenshaDaichoKoshin.class);
+    }
 
+    /**
+     * 通常運用時（スケジューラ機能による毎朝一日１回の起動）、バッチ内で抽出条件を生成します。
+     *
+     * @return 処理日付管理マスタ
+     */
+    public DbT7022ShoriDateKanriEntity selectバッチ内で抽出条件() {
+        return db7022Dac.selectByKey(SubGyomuCode.DBA介護資格, 市町村コード, 処理名, 処理枝番, 年度, 年度内連番);
+    }
+
+    /**
+     * 資格異動対象者の取得と被保険者台帳の更新を行います。
+     *
+     * @param parameter 資格異動対象者情報取得のパラメータ
+     */
+    @Transaction
+    public void 資格異動対象者の取得と被保険者台帳の更新(HihokenshaDaichoKoshinProcessParameter parameter) {
+        INenreitotatsuShikakuIdoRelateMapper mapper = mapperProvider.create(INenreitotatsuShikakuIdoRelateMapper.class);
+
+        FlexibleDate 年齢到達期間開始日 = parameter.get開始日().minusYear(AGE_65).plusDay(1);
+        FlexibleDate 年齢到達期間終了日 = parameter.get終了日().minusYear(AGE_65).plusDay(1);
+
+        ShikibetsuTaishoPSMSearchKeyBuilder key = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
+        key.setデータ取得区分(DataShutokuKubun.直近レコード);
+        List<JuminShubetsu> juminShubetsuList = new ArrayList<>();
+        juminShubetsuList.add(JuminShubetsu.日本人);
+        juminShubetsuList.add(JuminShubetsu.外国人);
+        juminShubetsuList.add(JuminShubetsu.住登外個人_日本人);
+        juminShubetsuList.add(JuminShubetsu.住登外個人_外国人);
+        key.set住民種別(juminShubetsuList);
+        List<JuminJotai> juminJotaiList = new ArrayList<>();
+        juminJotaiList.add(JuminJotai.住民);
+        juminJotaiList.add(JuminJotai.住登外);
+        juminJotaiList.add(JuminJotai.消除者);
+        juminJotaiList.add(JuminJotai.転出者);
+        key.set住民状態(juminJotaiList);
+        IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey = key.build();
+
+        List<ShikakuIdoTaishoshaEntity> 資格異動対象者List = mapper.select資格異動対象者(parameter
+                .toAtenaMybatisParameter(shikibetsuTaishoPSMSearchKey, 年齢到達期間開始日, 年齢到達期間終了日));
+
+        List<DbT1003TashichosonJushochiTokureiEntity> 他市町村住所地特例List;
+        List<DbT1002TekiyoJogaishaEntity> 適用除外者List;
+        List<DbT1009ShikakuShutokuJogaishaEntity> 資格取得除外者List;
+        List<DbT1010TennyushutsuHoryuTaishoshaEntity> 転入保留対象者List;
+
+        for (ShikakuIdoTaishoshaEntity entity : 資格異動対象者List) {
+
+            AgeCalculator ageCalculator = new AgeCalculator(new _DateOfBirth(entity.get生年月日()),
+                    JuminJotai.住民, FlexibleDate.MAX, AgeArrivalDay.前日);
+            FlexibleDate age = ageCalculator.get年齢到達日(AGE_65);
+
+            他市町村住所地特例List = dbt1003.select他市町村住所地特例(entity.get識別コード(), age);
+            if (!他市町村住所地特例List.isEmpty()) {
+                continue;
+            }
+
+            適用除外者List = dbt1002Dac.select適用除外者(entity.get識別コード(), age);
+            if (!適用除外者List.isEmpty()) {
+                continue;
+            }
+
+            資格取得除外者List = dbt1009Dac.selectBy識別コード(entity.get識別コード());
+            if (!資格取得除外者List.isEmpty()) {
+                continue;
+            }
+
+            転入保留対象者List = dac1010Dac.selectBy識別コード(entity.get識別コード());
+            if (!転入保留対象者List.isEmpty()) {
+                continue;
+            }
+            updHihokenshaDaichoEntity(entity);
+        }
     }
 
     /**
      * 被保険者台帳管理の更新を行います。
      *
-     * @param entityList 資格異動対象者List
+     * @param entity 資格異動対象者
      */
-    @Transaction
-    public void updHihokenshaDaicho(List<ShikakuIdoTaishoshaEntity> entityList) {
-
-        for (ShikakuIdoTaishoshaEntity entity : entityList) {
-            updHihokenshaDaichoEntity(entity);
-        }
-    }
-
     private void updHihokenshaDaichoEntity(ShikakuIdoTaishoshaEntity entity) {
 
         SaishinIdohiDataEntity saishinIdohiDataEntity = new SaishinIdohiDataEntity();
@@ -130,7 +224,7 @@ public class HihokenshaDaichoKoshin {
         if ((dbT1001HihokenshaDaichoEntity != null && (JuminJotai.住登外.コード().equals(entity.get住民状態コード())
                 || JuminJotai.転出者.コード().equals(entity.get住民状態コード())
                 || JuminJotai.消除者.コード().equals(entity.get住民状態コード())))
-                && (saishinIdohiDataEntity.get資格取得年月日() != null && saishinIdohiDataEntity.get資格喪失年月日() == null
+                && (saishinIdohiDataEntity.get資格取得年月日() != null && (saishinIdohiDataEntity.get資格喪失年月日() == null || saishinIdohiDataEntity.get資格喪失年月日().isEmpty())
                 && saishinIdohiDataEntity.get被保険者区分コード().equals(HihokenshaKubunCode.第２号被保険者.getコード())
                 && 住所地特例フラグ_1.equals(saishinIdohiDataEntity.get住所地特例フラグ()))) {
 
@@ -173,7 +267,7 @@ public class HihokenshaDaichoKoshin {
      * @param param バッチパラメータ
      */
     @Transaction
-    public void updNenreitotatsuJoken(Dbamn71001BatchFlowParameter param) {
+    public void updNenreitotatsuJoken(NenreitotatsuShikakuIdoBatchFlowParameter param) {
 
         DbT7022ShoriDateKanriEntity entity = db7022Dac.selectByKey(SubGyomuCode.DBA介護資格, 市町村コード, 処理名, 処理枝番, 年度, 年度内連番);
 
@@ -200,7 +294,7 @@ public class HihokenshaDaichoKoshin {
 
     private void updateHihokenshaDaicho(ShikakuIdoTaishoshaEntity entity, SaishinIdohiDataEntity saishinIdohiDataEntity, FlexibleDate age) {
         枝番 = hihokenshaManager.getSaidaiEdaban(saishinIdohiDataEntity.get被保険者番号(), age);
-        if (saishinIdohiDataEntity.get資格取得年月日() != null && saishinIdohiDataEntity.get資格喪失年月日() != null
+        if (saishinIdohiDataEntity.get資格取得年月日() != null && saishinIdohiDataEntity.get資格喪失年月日() != null && !saishinIdohiDataEntity.get資格喪失年月日().isEmpty()
                 && saishinIdohiDataEntity.get被保険者区分コード().equals(HihokenshaKubunCode.第２号被保険者.getコード())) {
 
             DbT1001HihokenshaDaichoEntity insertEn = new DbT1001HihokenshaDaichoEntity();
@@ -220,7 +314,7 @@ public class HihokenshaDaichoKoshin {
             insertEn.setKyuShichosonCode(entity.get旧全国地方公共団体コード());
             insertEn.setLogicalDeletedFlag(false);
             dbT1001Dac.save(insertEn);
-        } else if (saishinIdohiDataEntity.get資格取得年月日() != null && saishinIdohiDataEntity.get資格喪失年月日() == null
+        } else if (saishinIdohiDataEntity.get資格取得年月日() != null && (saishinIdohiDataEntity.get資格喪失年月日() == null || saishinIdohiDataEntity.get資格喪失年月日().isEmpty())
                 && saishinIdohiDataEntity.get被保険者区分コード().equals(HihokenshaKubunCode.第２号被保険者.getコード())) {
 
             DbT1001HihokenshaDaichoEntity insertEn = new DbT1001HihokenshaDaichoEntity();
@@ -239,6 +333,7 @@ public class HihokenshaDaichoKoshin {
             insertEn.setHihokennshaKubunCode(ShikakuKubun._１号.getコード());
             insertEn.setShikakuHenkoJiyuCode(idoJiyuCode);
             insertEn.setShikakuHenkoYMD(age);
+            insertEn.setShikakuHenkoTodokedeYMD(age);
             insertEn.setKoikinaiJushochiTokureiFlag(saishinIdohiDataEntity.get広域内住所地特例フラグ());
             insertEn.setKoikinaiTokureiSochimotoShichosonCode(saishinIdohiDataEntity.get広住特措置元市町村コード());
             insertEn.setKyuShichosonCode(saishinIdohiDataEntity.get旧市町村コード());

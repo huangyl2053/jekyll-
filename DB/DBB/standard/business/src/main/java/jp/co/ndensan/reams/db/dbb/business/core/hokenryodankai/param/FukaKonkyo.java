@@ -5,9 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param;
 
-import jp.co.ndensan.reams.db.dbz.definition.core.fuka.KazeiKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import java.util.List;
 
 /**
  * 賦課根拠パラメータというクラスです。
@@ -21,8 +22,7 @@ public class FukaKonkyo {
     private FlexibleDate seihoEndYMD;
     private FlexibleDate roreiNenkinStartYMD;
     private FlexibleDate roreiNenkinEndYMD;
-    private KazeiKubun setaiKazeiKubun;
-    private KazeiKubun honninKazeiKubun;
+    private List<KazeiKubun> setaiinKazeiKubunList;
     private Decimal gokeiShotoku;
     private Decimal kotekiNenkinShunyu;
 
@@ -97,31 +97,17 @@ public class FukaKonkyo {
     }
 
     /**
-     * @return the setaiKazeiKubun
+     * @return the List<KazeiKubun>
      */
-    public KazeiKubun getSetaiKazeiKubun() {
-        return setaiKazeiKubun;
+    public List<KazeiKubun> getSetaiinKazeiKubunList() {
+        return setaiinKazeiKubunList;
     }
 
     /**
-     * @param setaiKazeiKubun the setaiKazeiKubun to set
+     * @param setaiinKazeiKubunList the setaiinKazeiKubunList to set
      */
-    public void setSetaiKazeiKubun(KazeiKubun setaiKazeiKubun) {
-        this.setaiKazeiKubun = setaiKazeiKubun;
-    }
-
-    /**
-     * @return the honninKazeiKubun
-     */
-    public KazeiKubun getHonninKazeiKubun() {
-        return honninKazeiKubun;
-    }
-
-    /**
-     * @param honninKazeiKubun the honninKazeiKubun to set
-     */
-    public void setHonninKazeiKubun(KazeiKubun honninKazeiKubun) {
-        this.honninKazeiKubun = honninKazeiKubun;
+    public void setSetaiinKazeiKubunList(List<KazeiKubun> setaiinKazeiKubunList) {
+        this.setaiinKazeiKubunList = setaiinKazeiKubunList;
     }
 
     /**
@@ -153,14 +139,16 @@ public class FukaKonkyo {
     }
 
     /**
-     * @param honninKazeiKubun honninKazeiKubun
+     * @param setaiinKazeiKubunList setaiinKazeiKubunList
      * @return 世帯課税
      */
-    public boolean is世帯課税(KazeiKubun honninKazeiKubun) {
+    public boolean is世帯課税(List<KazeiKubun> setaiinKazeiKubunList) {
 
         boolean 世帯課税 = false;
-        if (KazeiKubun.課税.getコード().equals(honninKazeiKubun.getコード())) {
-            世帯課税 = true;
+        for (KazeiKubun honninKazeiKubun : setaiinKazeiKubunList) {
+            if (KazeiKubun.課税.getコード().equals(honninKazeiKubun.getコード())) {
+                世帯課税 = true;
+            }
         }
         return 世帯課税;
     }

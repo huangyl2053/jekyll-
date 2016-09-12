@@ -4,17 +4,22 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB3150001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 
 /**
- * TorikeshiJoho のクラスファイル 
- * 
- * @author 自動生成
+ * TorikeshiJoho のクラスファイル
+ *
+ * @reamsid_L DBB-1680-010 gongliang
  */
 public class TorikeshiJohoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -24,7 +29,7 @@ public class TorikeshiJohoDiv extends Panel {
     @JsonProperty("txtTorikeshiYMD")
     private TextBoxDate txtTorikeshiYMD;
     @JsonProperty("btnTorikeshiShurui")
-    private Button btnTorikeshiShurui;
+    private ButtonDialog btnTorikeshiShurui;
     @JsonProperty("txtTorikeshiShurui")
     private TextBox txtTorikeshiShurui;
     @JsonProperty("txtTorikeshiRiyu")
@@ -59,7 +64,7 @@ public class TorikeshiJohoDiv extends Panel {
      * @return btnTorikeshiShurui
      */
     @JsonProperty("btnTorikeshiShurui")
-    public Button getBtnTorikeshiShurui() {
+    public ButtonDialog getBtnTorikeshiShurui() {
         return btnTorikeshiShurui;
     }
 
@@ -68,7 +73,7 @@ public class TorikeshiJohoDiv extends Panel {
      * @param btnTorikeshiShurui btnTorikeshiShurui
      */
     @JsonProperty("btnTorikeshiShurui")
-    public void setBtnTorikeshiShurui(Button btnTorikeshiShurui) {
+    public void setBtnTorikeshiShurui(ButtonDialog btnTorikeshiShurui) {
         this.btnTorikeshiShurui = btnTorikeshiShurui;
     }
 

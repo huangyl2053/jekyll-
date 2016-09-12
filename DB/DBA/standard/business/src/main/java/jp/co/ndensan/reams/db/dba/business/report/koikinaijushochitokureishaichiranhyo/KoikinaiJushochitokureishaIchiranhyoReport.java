@@ -9,7 +9,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.entity.report.koikinaijushochitokureishaichiranhyo.KoikinaiJushochitokureishaIchiranhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import lombok.NonNull;
 
 /**
  * 広域内住所地特例者一覧表のReportです。
@@ -18,24 +17,8 @@ import lombok.NonNull;
  */
 public class KoikinaiJushochitokureishaIchiranhyoReport extends Report<KoikinaiJushochitokureishaIchiranhyoReportSource> {
 
-    private final List<KoikinaiJushochitokureishaIchiranhyoBodyItem> bodyItemList;
-    private final KoikinaiJushochitokureishaIchiranhyoHeadItem headItem;
-
-    /**
-     * インスタンスを生成します。
-     *
-     * @param headItem 広域内住所地特例者一覧表ヘッダのITEM
-     * @param itemList 広域内住所地特例者一覧表ボディのITEMリスト
-     * @return 広域内住所地特例者一覧表のReport
-     */
-    public static KoikinaiJushochitokureishaIchiranhyoReport createFrom(
-            KoikinaiJushochitokureishaIchiranhyoHeadItem headItem,
-            @NonNull List<KoikinaiJushochitokureishaIchiranhyoBodyItem> itemList) {
-
-        return new KoikinaiJushochitokureishaIchiranhyoReport(
-                headItem,
-                itemList);
-    }
+    private final List<KoikinaiJushochitokureishaIchiranhyoBody> bodyItemList;
+    private final KoikinaiJushochitokureishaIchiranhyoHead headItem;
 
     /**
      * インスタンスを生成します。
@@ -43,9 +26,9 @@ public class KoikinaiJushochitokureishaIchiranhyoReport extends Report<KoikinaiJ
      * @param headItem 広域内住所地特例者一覧表ヘッダのITEM
      * @param itemList 広域内住所地特例者一覧表のITEMリスト
      */
-    protected KoikinaiJushochitokureishaIchiranhyoReport(
-            KoikinaiJushochitokureishaIchiranhyoHeadItem headItem,
-            List<KoikinaiJushochitokureishaIchiranhyoBodyItem> itemList) {
+    public KoikinaiJushochitokureishaIchiranhyoReport(
+            KoikinaiJushochitokureishaIchiranhyoHead headItem,
+            List<KoikinaiJushochitokureishaIchiranhyoBody> itemList) {
 
         this.headItem = headItem;
         this.bodyItemList = itemList;
@@ -57,7 +40,7 @@ public class KoikinaiJushochitokureishaIchiranhyoReport extends Report<KoikinaiJ
      */
     @Override
     public void writeBy(ReportSourceWriter<KoikinaiJushochitokureishaIchiranhyoReportSource> reportSourceWriter) {
-        for (KoikinaiJushochitokureishaIchiranhyoBodyItem bodyItem : bodyItemList) {
+        for (KoikinaiJushochitokureishaIchiranhyoBody bodyItem : bodyItemList) {
             IKoikinaiJushochitokureishaIchiranhyoEditor headerEditor = new KoikinaiJushochitokureishaIchiranhyoHeaderEditor(headItem);
             IKoikinaiJushochitokureishaIchiranhyoEditor bodyEditor = new KoikinaiJushochitokureishaIchiranhyoBodyEditor(bodyItem);
             IKoikinaiJushochitokureishaIchiranhyoBuilder builder = new KoikinaiJushochitokureishaIchiranhyoBuilderImpl(headerEditor, bodyEditor);

@@ -21,8 +21,6 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  */
 public class JigyoshaNyuryokuGudieCommonChildDiv {
 
-    private JigyoshaMode mode;
-
     /**
      * 事業者・施設選択入力ガイドの初期化。<br/>
      *
@@ -32,7 +30,7 @@ public class JigyoshaNyuryokuGudieCommonChildDiv {
     public ResponseData<JigyoshaNyuryokuGudieCommonChildDivDiv> onLoad(JigyoshaNyuryokuGudieCommonChildDivDiv requestDiv) {
 
         ResponseData<JigyoshaNyuryokuGudieCommonChildDivDiv> responseData = new ResponseData<>();
-        mode = DataPassingConverter.deserialize(requestDiv.getJigyoshaMode(), JigyoshaMode.class);
+        JigyoshaMode mode = DataPassingConverter.deserialize(requestDiv.getJigyoshaMode(), JigyoshaMode.class);
         if (mode != null) {
             createHandlerOf(requestDiv).initialize(mode);
         }
@@ -69,12 +67,39 @@ public class JigyoshaNyuryokuGudieCommonChildDiv {
      * @return ResponseData<JigyoshaNyuryokuGudieCommonChildDivDiv>
      */
     public ResponseData<JigyoshaNyuryokuGudieCommonChildDivDiv> onclick_BtnClear(JigyoshaNyuryokuGudieCommonChildDivDiv requestDiv) {
-
-        mode = DataPassingConverter.deserialize(requestDiv.getJigyoshaMode(), JigyoshaMode.class);
+        requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getTxtYukouKaishibi().setDisabled(false);
+        requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getTxtJigyoshamei().setDisabled(false);
+        requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getTxtYubinNo().setDisabled(false);
+        requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getTxtJusho().setDisabled(false);
+        requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getServiceJigyosha().setDisabled(false);
+        JigyoshaMode mode = DataPassingConverter.deserialize(requestDiv.getJigyoshaMode(), JigyoshaMode.class);
         createHandlerOf(requestDiv).clear(mode);
         return createResponseData(requestDiv);
     }
 
+    /**
+     * 事業者番号の連動。<br/>
+     *
+     * @param requestDiv JigyoshaNyuryokuGudieCommonChildDivDiv
+     * @return ResponseData<JigyoshaNyuryokuGudieCommonChildDivDiv>
+     */
+    public ResponseData<JigyoshaNyuryokuGudieCommonChildDivDiv> onBlur_JigyoshaNo(JigyoshaNyuryokuGudieCommonChildDivDiv requestDiv) {
+        if(!requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getTxtJIgyoshaNo().getValue().isEmpty()){
+            requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getTxtYukouKaishibi().setDisabled(true);
+            requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getTxtJigyoshamei().setDisabled(true);
+            requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getTxtYubinNo().setDisabled(true);
+            requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getTxtJusho().setDisabled(true);
+            requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getServiceJigyosha().setDisabled(true);
+        }else{
+            requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getTxtYukouKaishibi().setDisabled(false);
+            requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getTxtJigyoshamei().setDisabled(false);
+            requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getTxtYubinNo().setDisabled(false);
+            requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getTxtJusho().setDisabled(false);
+            requestDiv.getJigyoshaNyuryokuGudieCommonChildDiv().getTaishoJigyoshaKensaku().getKennsakuJyokenn().getServiceJigyosha().setDisabled(false);
+        }
+        return createResponseData(requestDiv);
+    }
+    
     /**
      * 県コードと郡市コードの連動。<br/>
      *
@@ -83,7 +108,7 @@ public class JigyoshaNyuryokuGudieCommonChildDiv {
      */
     public ResponseData<JigyoshaNyuryokuGudieCommonChildDivDiv> onChange_BtnKenCode(JigyoshaNyuryokuGudieCommonChildDivDiv requestDiv) {
 
-        mode = DataPassingConverter.deserialize(requestDiv.getJigyoshaMode(), JigyoshaMode.class);
+        JigyoshaMode mode = DataPassingConverter.deserialize(requestDiv.getJigyoshaMode(), JigyoshaMode.class);
         createHandlerOf(requestDiv).search_GunshiCode(mode);
         return createResponseData(requestDiv);
     }
@@ -96,14 +121,14 @@ public class JigyoshaNyuryokuGudieCommonChildDiv {
      */
     public ResponseData<JigyoshaNyuryokuGudieCommonChildDivDiv> select_BtnSenTaKu(JigyoshaNyuryokuGudieCommonChildDivDiv requestDiv) {
 
-        mode = DataPassingConverter.deserialize(requestDiv.getJigyoshaMode(), JigyoshaMode.class);
+        JigyoshaMode mode = DataPassingConverter.deserialize(requestDiv.getJigyoshaMode(), JigyoshaMode.class);
         mode.setJigyoshaNo(new KaigoJigyoshaNo(requestDiv.getJigyoshaItirann().getDgJigyoshaItiran().getSelectedItems().get(0).getTxtJigyoshaNo()));
         mode.setJigyoshaName(new AtenaMeisho(requestDiv.getJigyoshaItirann().getDgJigyoshaItiran().getSelectedItems().get(0).getTxtMeisho()));
         mode.setYukoKaishiYMD(requestDiv.getJigyoshaItirann().getDgJigyoshaItiran()
                 .getSelectedItems().get(0).getTxtYukoKaishibiYMD().getValue().toDateString());
-        requestDiv.setJigyoshaMode(DataPassingConverter.serialize(mode));
 
-        return createResponseData(requestDiv);
+        requestDiv.setJigyoshaMode(DataPassingConverter.serialize(mode));
+        return ResponseData.of(requestDiv).respond();
     }
 
     /**
@@ -114,7 +139,7 @@ public class JigyoshaNyuryokuGudieCommonChildDiv {
      */
     public ResponseData<JigyoshaNyuryokuGudieCommonChildDivDiv> select_BtnSilyuuseyi(JigyoshaNyuryokuGudieCommonChildDivDiv requestDiv) {
 
-        mode = DataPassingConverter.deserialize(requestDiv.getJigyoshaMode(), JigyoshaMode.class);
+        JigyoshaMode mode = DataPassingConverter.deserialize(requestDiv.getJigyoshaMode(), JigyoshaMode.class);
         mode.setJigyoshaNo(new KaigoJigyoshaNo(requestDiv.getJigyoshaItirann().getDgJigyoshaItiran().getSelectedItems().get(0).getTxtJigyoshaNo()));
         mode.setJigyoshaName(new AtenaMeisho(requestDiv.getJigyoshaItirann().getDgJigyoshaItiran().getSelectedItems().get(0).getTxtMeisho()));
         mode.setYukoKaishiYMD(requestDiv.getJigyoshaItirann().getDgJigyoshaItiran()
@@ -132,7 +157,7 @@ public class JigyoshaNyuryokuGudieCommonChildDiv {
      */
     public ResponseData<JigyoshaNyuryokuGudieCommonChildDivDiv> select_BtnSakujo(JigyoshaNyuryokuGudieCommonChildDivDiv requestDiv) {
 
-        mode = DataPassingConverter.deserialize(requestDiv.getJigyoshaMode(), JigyoshaMode.class);
+        JigyoshaMode mode = DataPassingConverter.deserialize(requestDiv.getJigyoshaMode(), JigyoshaMode.class);
         mode.setJigyoshaNo(new KaigoJigyoshaNo(requestDiv.getJigyoshaItirann().getDgJigyoshaItiran().getSelectedItems().get(0).getTxtJigyoshaNo()));
         mode.setJigyoshaName(new AtenaMeisho(requestDiv.getJigyoshaItirann().getDgJigyoshaItiran().getSelectedItems().get(0).getTxtMeisho()));
         mode.setYukoKaishiYMD(requestDiv.getJigyoshaItirann().getDgJigyoshaItiran()

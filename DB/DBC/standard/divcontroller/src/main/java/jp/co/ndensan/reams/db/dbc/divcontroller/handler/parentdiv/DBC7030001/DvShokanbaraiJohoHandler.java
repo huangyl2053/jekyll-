@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7030001.DvKe
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7030001.DvShokanChushutsuJokenDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7030001.DvShokanbaraiJohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7030001.dgYoshikiNo_Row;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.service.core.dvshokanbaraijoho.DvShokanbaraiJohoManager;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
@@ -34,7 +33,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 汎用リスト出力(償還払い状況)のHandlerです。
@@ -71,8 +69,10 @@ public class DvShokanbaraiJohoHandler {
 
     /**
      * 抽出条件パネルの初期化メソッドです。
+     *
+     * @return 市町村判定 RString
      */
-    public void initialize抽出条件パネル() {
+    public RString initialize抽出条件パネル() {
         ShichosonSecurityJoho 市町村セキュリティ情報
                 = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(GyomuBunrui.介護事務);
         DvShokanChushutsuJokenDiv panel = div.getDvShokanbaraiParam().getDvShokanChushutsuJoken();
@@ -88,7 +88,6 @@ public class DvShokanbaraiJohoHandler {
             panel.getCcdShokanHokenshaList().setDisabled(true);
             panel.getCcdShokanHokenshaList().setVisible(false);
         }
-        ViewStateHolder.put(ViewStateKeys.市町村判定, 市町村判定);
         List<ShikibetsuNoKanri> 様式番号一覧 = DvShokanbaraiJohoManager.createInstance().select様式名称とコード();
         set様式番号一覧(様式番号一覧);
         List<RString> selectedItems = new ArrayList<>();
@@ -103,6 +102,7 @@ public class DvShokanbaraiJohoHandler {
         panel.getDdlShokanKetteiJoho().setSelectedValue(すべて);
         panel.getRadKogakuShiharaisaki().setSelectedValue(すべて);
         panel.getCcdKogakuKinyuKikan().setMode_State(KinyuKikanInputDiv.State.入力);
+        return 市町村判定;
     }
 
     /**
@@ -135,9 +135,10 @@ public class DvShokanbaraiJohoHandler {
     /**
      * バッチパラメータの設定する。
      *
+     * @param 市町村判定 RString
      * @return バッチ用パラメータ
      */
-    public HanyoListShokanbaraiJokyoBatchParameter setBatchParamter() {
+    public HanyoListShokanbaraiJokyoBatchParameter setBatchParamter(RString 市町村判定) {
         HanyoListShokanbaraiJokyoBatchParameter parameter = new HanyoListShokanbaraiJokyoBatchParameter();
         DvKensakuJokenDiv panel = div.getDvShokanbaraiParam().getDvShokanChushutsuJoken().getDvKensakuJoken();
         RDate サービス提供年月F = panel.getTxtShokanServiceTeikyoYM().getFromValue();
@@ -176,7 +177,7 @@ public class DvShokanbaraiJohoHandler {
         List<dgYoshikiNo_Row> rowLists = div.getDvShokanbaraiParam().getDvShokanChushutsuJoken().getDgYoshikiNo().getSelectedItems();
         RStringBuilder builder = get様式番号Builder(rowLists);
         RString 様式番号 = builder.length() == 0 ? RString.EMPTY : builder.substring(0, builder.length() - 1);
-        List<RString> 保険者DDL = get保険者DDL();
+        List<RString> 保険者DDL = get保険者DDL(市町村判定);
         RString 保険者コード = 保険者DDL.get(0);
         RString 保険者名 = 保険者DDL.get(1);
         boolean 項目名付加 = div.getDvShokanbaraiParam().getDvCsvHenshuHoho().getChkCsvHenshuHoho().getSelectedKeys().contains(項目名);
@@ -224,9 +225,8 @@ public class DvShokanbaraiJohoHandler {
         return builder;
     }
 
-    private List<RString> get保険者DDL() {
+    private List<RString> get保険者DDL(RString 市町村判定) {
         List<RString> 保険者DDL = new ArrayList<>();
-        RString 市町村判定 = ViewStateHolder.get(ViewStateKeys.市町村判定, RString.class);
         if (広域.equals(市町村判定)) {
             HokenshaSummary 保険者DDLSelected = div.getDvShokanbaraiParam().getDvShokanChushutsuJoken().getCcdShokanHokenshaList().getSelectedItem();
             if (!全市町村.equals(保険者DDLSelected.get市町村名称())) {

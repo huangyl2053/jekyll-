@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-0980-301 surun -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kagoketteihokenshainmasterinsert.IKagoKetteiHokenshaInMasterInsertMapper">
+    
+    <select resultOrdered="true" id = "insert過誤決定集計" parameterType="java.util.Map" fetchSize="500">
+        INSERT INTO rgdb."DbT3060KagoKetteiShukei" 
+        (
+        "toriatsukaiYM",
+        "hokenshaKubun",
+        "rirekiNo",
+        "kaigoKyufuhiKensu",
+        "kaigoKyufuhiTanisu",
+        "kaigoKyufuhiFutangaku",
+        "kogakuServicehiKensu",
+        "kogakuServicehiTanisu",
+        "kogakuServicehiFutangaku",
+        "tokuteiNyushoshaServicehiKensu",
+        "tokuteiNyushoshaServicehiTanisu",
+        "tokuteiNyushoshaServicehiFutangaku",
+        "kohiFutanshaNo",
+        "sakuseiYMD",
+        "torikomiYM") 
+        SELECT
+            TEMP."hdrToriatsukaiYm",
+            #{保険者区分},
+            TEMP."hdrRirekiNo",
+            TEMP."kaigoKyufuhiKensu",
+            TEMP."kaigoKyufuhiTanisu",
+            TEMP."kaigoKyufuhiFutangaku",
+            TEMP."kogakuServicehiKensu",
+            TEMP."kogakuServicehiTanisu",
+            TEMP."kogakuServicehiFutangaku",
+            TEMP."tokuteiNyushoshaServicehiKensu",
+            TEMP."tokuteiNyushoshaServicehiTanisu",
+            TEMP."tokuteiNyushoshaServicehiFutangaku",
+            TEMP."hdrShoHokenshaNo",
+            TEMP."sakuseiYmd",
+            TEMP."hdrTorikomiYm"
+        FROM  "DbWT3060KagoKetteiShukei" AS TEMP
+    </select>
+    
+    <select resultOrdered="true" id="insert過誤決定明細" parameterType="java.util.Map" fetchSize="500">
+        INSERT INTO rgdb."DbT3061KagoKetteiMeisai"
+        (
+        "toriatsukaiYM",
+        "hokenshaKubun",    
+        "rirekiNo",
+        "jigyoshoNo",
+        "jigyoshoName",
+        "hiHokenshaNo",
+        "kohiJukyushaNo",
+        "shokisaiHokenshaNo",
+        "serviceTeikyoYM",
+        "serviceShuruiCode",
+        "serviceShuruiName",
+        "kagomoushitateJiyuCode",
+        "kagomoushitateJiyu",
+        "tanisu",
+        "hokenshaFutangaku",
+        "torikomiYM"
+        )
+        SELECT
+            TEMP."toriatsukaiYm",
+            #{保険者区分},
+            TEMP."rirekiNo",
+            TEMP."jigyoshoNo",
+            TEMP."jigyoshoMei",
+            TEMP."hihokenshaNo",
+            TEMP."kohiJukyushaNo",
+            TEMP."kohiShokisaiHokenshaNo",
+            TEMP."serviceTeikyoYm",
+            TEMP."serviceShuruiCode",
+            TEMP."serviceShuruiName",
+            TEMP."kagomoushitateJiyuCode",
+            TEMP."kagomoushitateJiyu",
+            TEMP."tanisu",
+            TEMP."hokenshaFutangaku",
+            TEMP."torikomiYm"
+        FROM(SELECT 
+            DbWT3061."toriatsukaiYm",
+            DbWT3061."rirekiNo",
+            DbWT3061."jigyoshoNo",
+            DbWT3061."jigyoshoMei",
+            DbWT0001."hihokenshaNo",
+            DbWT3061."kohiJukyushaNo",
+            DbWT3061."kohiShokisaiHokenshaNo",
+            DbWT3061."serviceTeikyoYm",
+            DbWT3061."serviceShuruiCode",
+            DbWT3061."serviceShuruiName",
+            DbWT3061."kagomoushitateJiyuCode",
+            DbWT3061."kagomoushitateJiyu",
+            DbWT3061."tanisu",
+            DbWT3061."hokenshaFutangaku",
+            DbWT3061."torikomiYm"
+        
+        FROM "DbWT3061KagoKetteiMeisai" AS DbWT3061,
+             "DbWT0001Hihokensha" AS DbWT0001
+        WHERE 
+            DbWT3061."renban" = DbWT0001."meisaiRenban") AS TEMP
+      
+        
+    </select>
+</mapper>

@@ -5,12 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320005;
 
-import jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.DbbViewStateKey;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbInformationMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320005.input.FukaHikakuInput;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320005.input.FukaHikakuTargets;
 import static jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320005.DBB0320005TransitionEventName.選択画面に戻る;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320005.FukaJohoHikakuDiv;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -33,7 +33,7 @@ public class FukaJohoHikaku {
             return onClick_btnBack(div);
         }
 
-        FukaHikakuInput input = ViewStateHolder.get(DbbViewStateKey.FukaHikakuInput, FukaHikakuInput.class);
+        FukaHikakuInput input = ViewStateHolder.get(ViewStateKeys.賦課比較キー, FukaHikakuInput.class);
         FukaHikakuTargets 比較対象 = input.get比較対象();
         if (!ResponseHolder.isReRequest() && !比較対象.canCompare()) {
             return ResponseData.of(div).addMessage(DbbInformationMessages.比較対象データなし.getMessage()).respond();
@@ -51,7 +51,7 @@ public class FukaJohoHikaku {
      */
     public ResponseData<FukaJohoHikakuDiv> onClick_btnBack(FukaJohoHikakuDiv div) {
         RString eventName;
-        FukaHikakuInput input = ViewStateHolder.get(DbbViewStateKey.FukaHikakuInput, FukaHikakuInput.class);
+        FukaHikakuInput input = ViewStateHolder.get(ViewStateKeys.賦課比較キー, FukaHikakuInput.class);
         if (input.isBackTo賦課照会画面()) {
             eventName = new RString("賦課照会に戻る");
         } else {

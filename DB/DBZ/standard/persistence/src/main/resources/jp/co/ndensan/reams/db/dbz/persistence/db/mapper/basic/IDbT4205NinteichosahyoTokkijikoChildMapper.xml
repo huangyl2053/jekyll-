@@ -56,7 +56,7 @@
         <result property="tokkiJiko" column="dbT4205NinteichosahyoTokkijikoChild_tokkiJiko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
-    <select id="getEntity" resultMap="ResultMap_DbT4205NinteichosahyoTokkijikoChildEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT4205NinteichosahyoTokkijikoChildEntity">
         SELECT
         <include refid="allColumns_DbT4205NinteichosahyoTokkijikoChild"/>
         FROM

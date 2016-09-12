@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!-- @reamsid_L DBE-1300-130 xuyannan -->
+<!-- @reamsid_L DBZ-1300-130 xuyannan -->
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.shujiiiryokikanandshujiiguide.IShujiiIryokikanAndShujiiGuideMapper">
     <resultMap id="resultMap_主治医医療機関_主治医情報" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujiiRelateEntity" autoMapping="true">
@@ -27,8 +27,8 @@
         <result property="shiteiiFlag" column="shiteiiFlag" />
         <result property="shujiiJohojokyoFlag" column="shujiiJohojokyoFlag" />
     </resultMap> 
-    <select id="get主治医医療機関_主治医情報" resultMap="resultMap_主治医医療機関_主治医情報" 
-            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujiiGuideParameter" 
+    <select resultOrdered="true" id="get主治医医療機関_主治医情報" resultMap="resultMap_主治医医療機関_主治医情報" 
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujiiGuideParameter" 
             fetchSize="500">
         SELECT
             DbT5911."shichosonCode" AS "shichosonCode"
@@ -116,8 +116,8 @@
         LIMIT #{maxCount}
     </select>
     
-    <select id="get子主治医医療機関_子主治医情報" resultMap="resultMap_主治医医療機関_主治医情報" 
-            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujiiGuideParameter" 
+    <select resultOrdered="true" id="get子主治医医療機関_子主治医情報" resultMap="resultMap_主治医医療機関_主治医情報" 
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujiiGuideParameter" 
             fetchSize="500">
         SELECT
             DbT4911."shichosonCode" AS "shichosonCode"

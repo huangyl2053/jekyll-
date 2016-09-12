@@ -12,13 +12,13 @@ import jp.co.ndensan.reams.db.dbc.business.report.daisanshakouihigaitodokekaigoh
 import jp.co.ndensan.reams.db.dbc.business.report.daisanshakouihigaitodokekaigohokenyo.DaisanshaKouiHigaitodokeKaigoHokenyoReport;
 import jp.co.ndensan.reams.db.dbc.entity.report.daisanshakouihigaitodokekaigohokenyo.DaisanshaKouiHigaitodokeKaigoHokenyoReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ShinseiJokyoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.tokuteifutangendogakushinseisho.HihokenshaKihonBusiness;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.GaikokujinSeinengappiHyojihoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.GaikokujinSeinengappiHyojihoho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7068ChohyoBunruiKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
@@ -134,8 +134,8 @@ public class DaisanshaKoiniyoruHigaitodokeChohyo {
                 birthYMD,
                 business.get被保険者氏名(),
                 business.getフリガナ(),
-                business.get保険者番号() == null ? RString.EMPTY : business.get保険者番号().getColumnValue(),
                 business.get被保険者番号() == null ? RString.EMPTY : business.get被保険者番号().getColumnValue(),
+                business.get保険者番号() == null ? RString.EMPTY : business.get保険者番号().getColumnValue(),
                 RString.EMPTY,
                 get認定有効期間及び要介護状態区分(business).get(2));
         list.add(DaisanshaKouiHigaitodokeKaigoHokenyoReport.createReport(item));

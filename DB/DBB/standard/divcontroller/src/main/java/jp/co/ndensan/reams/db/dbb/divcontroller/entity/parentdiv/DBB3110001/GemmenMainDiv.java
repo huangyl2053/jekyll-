@@ -7,16 +7,26 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB3110001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Space;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * GemmenMain のクラスファイル 
- * 
- * @author 自動生成
+ * GemmenMain のクラスファイル
+ *
+ * @reamsid_L DBB-1660-010 gongliang
  */
 public class GemmenMainDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -139,7 +149,7 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShinseiJokyo(TextBox txtShinseiJokyo) {
+    public void setTxtShinseiJokyo(TextBox txtShinseiJokyo) {
         this.getShinseiJokyo().setTxtShinseiJokyo(txtShinseiJokyo);
     }
 
@@ -149,7 +159,7 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnTesei(Button btnTesei) {
+    public void setBtnTesei(Button btnTesei) {
         this.getShinseiJokyo().setBtnTesei(btnTesei);
     }
 
@@ -159,8 +169,48 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnTorikeshi(Button btnTorikeshi) {
+    public void setBtnTorikeshi(Button btnTorikeshi) {
         this.getShinseiJokyo().setBtnTorikeshi(btnTorikeshi);
+    }
+
+    @JsonIgnore
+    public TextBoxDate getTxtTorikeshiYMD() {
+        return this.getTorikeshiInfo().getTxtTorikeshiYMD();
+    }
+
+    @JsonIgnore
+    public void setTxtTorikeshiYMD(TextBoxDate txtTorikeshiYMD) {
+        this.getTorikeshiInfo().setTxtTorikeshiYMD(txtTorikeshiYMD);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnTorikeshiShurui() {
+        return this.getTorikeshiInfo().getBtnTorikeshiShurui();
+    }
+
+    @JsonIgnore
+    public void setBtnTorikeshiShurui(ButtonDialog btnTorikeshiShurui) {
+        this.getTorikeshiInfo().setBtnTorikeshiShurui(btnTorikeshiShurui);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtTorikeshiShurui() {
+        return this.getTorikeshiInfo().getTxtTorikeshiShurui();
+    }
+
+    @JsonIgnore
+    public void setTxtTorikeshiShurui(TextBox txtTorikeshiShurui) {
+        this.getTorikeshiInfo().setTxtTorikeshiShurui(txtTorikeshiShurui);
+    }
+
+    @JsonIgnore
+    public TextBoxMultiLine getTxtTorikeshiRiyu() {
+        return this.getTorikeshiInfo().getTxtTorikeshiRiyu();
+    }
+
+    @JsonIgnore
+    public void setTxtTorikeshiRiyu(TextBoxMultiLine txtTorikeshiRiyu) {
+        this.getTorikeshiInfo().setTxtTorikeshiRiyu(txtTorikeshiRiyu);
     }
 
     @JsonIgnore
@@ -169,7 +219,7 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtChoteiYY(TextBoxDate txtChoteiYY) {
+    public void setTxtChoteiYY(TextBoxDate txtChoteiYY) {
         this.getShinseiinfo().setTxtChoteiYY(txtChoteiYY);
     }
 
@@ -179,7 +229,7 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtFukaYY(TextBoxDate txtFukaYY) {
+    public void setTxtFukaYY(TextBoxDate txtFukaYY) {
         this.getShinseiinfo().setTxtFukaYY(txtFukaYY);
     }
 
@@ -189,7 +239,7 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShinseiYMD(TextBoxDate txtShinseiYMD) {
+    public void setTxtShinseiYMD(TextBoxDate txtShinseiYMD) {
         this.getShinseiinfo().setTxtShinseiYMD(txtShinseiYMD);
     }
 
@@ -199,17 +249,17 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShinseiGemmengaku(TextBoxNum txtShinseiGemmengaku) {
+    public void setTxtShinseiGemmengaku(TextBoxNum txtShinseiGemmengaku) {
         this.getShinseiinfo().setTxtShinseiGemmengaku(txtShinseiGemmengaku);
     }
 
     @JsonIgnore
-    public Button getBtnGemmenShurui() {
+    public ButtonDialog getBtnGemmenShurui() {
         return this.getShinseiinfo().getBtnGemmenShurui();
     }
 
     @JsonIgnore
-    public void  setBtnGemmenShurui(Button btnGemmenShurui) {
+    public void setBtnGemmenShurui(ButtonDialog btnGemmenShurui) {
         this.getShinseiinfo().setBtnGemmenShurui(btnGemmenShurui);
     }
 
@@ -219,7 +269,7 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtGemmenShurui(TextBox txtGemmenShurui) {
+    public void setTxtGemmenShurui(TextBox txtGemmenShurui) {
         this.getShinseiinfo().setTxtGemmenShurui(txtGemmenShurui);
     }
 
@@ -229,7 +279,7 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShinseiRiyu(TextBoxMultiLine txtShinseiRiyu) {
+    public void setTxtShinseiRiyu(TextBoxMultiLine txtShinseiRiyu) {
         this.getShinseiinfo().setTxtShinseiRiyu(txtShinseiRiyu);
     }
 
@@ -239,7 +289,7 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKetteiYMD(TextBoxFlexibleDate txtKetteiYMD) {
+    public void setTxtKetteiYMD(TextBoxFlexibleDate txtKetteiYMD) {
         this.getKeteiinfo().setTxtKetteiYMD(txtKetteiYMD);
     }
 
@@ -249,7 +299,7 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtZenkaiGemmengaku(TextBoxNum txtZenkaiGemmengaku) {
+    public void setTxtZenkaiGemmengaku(TextBoxNum txtZenkaiGemmengaku) {
         this.getKeteiinfo().setTxtZenkaiGemmengaku(txtZenkaiGemmengaku);
     }
 
@@ -259,7 +309,7 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setRadKetteiKubun(RadioButton radKetteiKubun) {
+    public void setRadKetteiKubun(RadioButton radKetteiKubun) {
         this.getKeteiinfo().setRadKetteiKubun(radKetteiKubun);
     }
 
@@ -269,7 +319,7 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKetteiRiyu(TextBoxMultiLine txtKetteiRiyu) {
+    public void setTxtKetteiRiyu(TextBoxMultiLine txtKetteiRiyu) {
         this.getKeteiinfo().setTxtKetteiRiyu(txtKetteiRiyu);
     }
 
@@ -279,7 +329,7 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setSpaKetteiJoho(Space spaKetteiJoho) {
+    public void setSpaKetteiJoho(Space spaKetteiJoho) {
         this.getKeteiinfo().setSpaKetteiJoho(spaKetteiJoho);
     }
 
@@ -289,7 +339,7 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtGemmengaku(TextBoxNum txtGemmengaku) {
+    public void setTxtGemmengaku(TextBoxNum txtGemmengaku) {
         this.getKiwarigaku().setTxtGemmengaku(txtGemmengaku);
     }
 
@@ -299,7 +349,7 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnCalculate(Button btnCalculate) {
+    public void setBtnCalculate(Button btnCalculate) {
         this.getKiwarigaku().setBtnCalculate(btnCalculate);
     }
 
@@ -309,7 +359,7 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setKiwarigakuPanel1(KiwarigakuPanel1Div KiwarigakuPanel1) {
+    public void setKiwarigakuPanel1(KiwarigakuPanel1Div KiwarigakuPanel1) {
         this.getKiwarigaku().setKiwarigakuPanel1(KiwarigakuPanel1);
     }
 
@@ -369,6 +419,26 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
+    public Label getLblFuchoKi13() {
+        return this.getKiwarigaku().getKiwarigakuPanel1().getLblFuchoKi13();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoGemmemMae13() {
+        return this.getKiwarigaku().getKiwarigakuPanel1().getLblFuchoGemmemMae13();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoGemmemGo13() {
+        return this.getKiwarigaku().getKiwarigakuPanel1().getLblFuchoGemmemGo13();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoNokigen13() {
+        return this.getKiwarigaku().getKiwarigakuPanel1().getLblFuchoNokigen13();
+    }
+
+    @JsonIgnore
     public Label getLblTokuchoKi1() {
         return this.getKiwarigaku().getKiwarigakuPanel1().getLblTokuchoKi1();
     }
@@ -386,6 +456,26 @@ public class GemmenMainDiv extends Panel {
     @JsonIgnore
     public Label getLblKiwarigaku5Gatsu() {
         return this.getKiwarigaku().getKiwarigakuPanel1().getLblKiwarigaku5Gatsu();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoKi14() {
+        return this.getKiwarigaku().getKiwarigakuPanel1().getLblFuchoKi14();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoGemmemMae14() {
+        return this.getKiwarigaku().getKiwarigakuPanel1().getLblFuchoGemmemMae14();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoGemmemGo14() {
+        return this.getKiwarigaku().getKiwarigakuPanel1().getLblFuchoGemmemGo14();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoNokigen14() {
+        return this.getKiwarigaku().getKiwarigakuPanel1().getLblFuchoNokigen14();
     }
 
     @JsonIgnore
@@ -719,8 +809,48 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
+    public Label getLblFuchoKi11() {
+        return this.getKiwarigaku().getKiwarigakuPanel1().getLblFuchoKi11();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoGemmemMae11() {
+        return this.getKiwarigaku().getKiwarigakuPanel1().getLblFuchoGemmemMae11();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoGemmemGo11() {
+        return this.getKiwarigaku().getKiwarigakuPanel1().getLblFuchoGemmemGo11();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoNokigen11() {
+        return this.getKiwarigaku().getKiwarigakuPanel1().getLblFuchoNokigen11();
+    }
+
+    @JsonIgnore
     public Label getLblKiwarigaku5Gatsu2() {
         return this.getKiwarigaku().getKiwarigakuPanel1().getLblKiwarigaku5Gatsu2();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoKi12() {
+        return this.getKiwarigaku().getKiwarigakuPanel1().getLblFuchoKi12();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoGemmemMae12() {
+        return this.getKiwarigaku().getKiwarigakuPanel1().getLblFuchoGemmemMae12();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoGemmemGo12() {
+        return this.getKiwarigaku().getKiwarigakuPanel1().getLblFuchoGemmemGo12();
+    }
+
+    @JsonIgnore
+    public Label getLblFuchoNokigen12() {
+        return this.getKiwarigaku().getKiwarigakuPanel1().getLblFuchoNokigen12();
     }
 
     @JsonIgnore
@@ -754,7 +884,7 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setKiwarigakuKanendo1(KiwarigakuKanendo1Div KiwarigakuKanendo1) {
+    public void setKiwarigakuKanendo1(KiwarigakuKanendo1Div KiwarigakuKanendo1) {
         this.getKiwarigaku().setKiwarigakuKanendo1(KiwarigakuKanendo1);
     }
 
@@ -764,7 +894,7 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKanendoChoteiYY1(TextBoxDate txtKanendoChoteiYY1) {
+    public void setTxtKanendoChoteiYY1(TextBoxDate txtKanendoChoteiYY1) {
         this.getKiwarigaku().getKiwarigakuKanendo1().setTxtKanendoChoteiYY1(txtKanendoChoteiYY1);
     }
 
@@ -774,7 +904,7 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKanendoFukaYY1(TextBoxDate txtKanendoFukaYY1) {
+    public void setTxtKanendoFukaYY1(TextBoxDate txtKanendoFukaYY1) {
         this.getKiwarigaku().getKiwarigakuKanendo1().setTxtKanendoFukaYY1(txtKanendoFukaYY1);
     }
 
@@ -784,7 +914,7 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setKiwarigakuPanel2(KiwarigakuPanel2Div KiwarigakuPanel2) {
+    public void setKiwarigakuPanel2(KiwarigakuPanel2Div KiwarigakuPanel2) {
         this.getKiwarigaku().getKiwarigakuKanendo1().setKiwarigakuPanel2(KiwarigakuPanel2);
     }
 
@@ -819,8 +949,38 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
+    public Label getKi1() {
+        return this.getKiwarigaku().getKiwarigakuKanendo1().getKiwarigakuPanel2().getKi1();
+    }
+
+    @JsonIgnore
+    public Label getMae1() {
+        return this.getKiwarigaku().getKiwarigakuKanendo1().getKiwarigakuPanel2().getMae1();
+    }
+
+    @JsonIgnore
+    public Label getGo1() {
+        return this.getKiwarigaku().getKiwarigakuKanendo1().getKiwarigakuPanel2().getGo1();
+    }
+
+    @JsonIgnore
+    public Label getNokigen1() {
+        return this.getKiwarigaku().getKiwarigakuKanendo1().getKiwarigakuPanel2().getNokigen1();
+    }
+
+    @JsonIgnore
     public Label getLblKiwarigaku2Total() {
         return this.getKiwarigaku().getKiwarigakuKanendo1().getKiwarigakuPanel2().getLblKiwarigaku2Total();
+    }
+
+    @JsonIgnore
+    public Label getMaeTotalMae1() {
+        return this.getKiwarigaku().getKiwarigakuKanendo1().getKiwarigakuPanel2().getMaeTotalMae1();
+    }
+
+    @JsonIgnore
+    public Label getMaeTotalGo1() {
+        return this.getKiwarigaku().getKiwarigakuKanendo1().getKiwarigakuPanel2().getMaeTotalGo1();
     }
 
     @JsonIgnore
@@ -829,7 +989,7 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setKiwarigakuKanendo2(KiwarigakuKanendo2Div KiwarigakuKanendo2) {
+    public void setKiwarigakuKanendo2(KiwarigakuKanendo2Div KiwarigakuKanendo2) {
         this.getKiwarigaku().setKiwarigakuKanendo2(KiwarigakuKanendo2);
     }
 
@@ -839,7 +999,7 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKanendoChoteiYY2(TextBoxDate txtKanendoChoteiYY2) {
+    public void setTxtKanendoChoteiYY2(TextBoxDate txtKanendoChoteiYY2) {
         this.getKiwarigaku().getKiwarigakuKanendo2().setTxtKanendoChoteiYY2(txtKanendoChoteiYY2);
     }
 
@@ -849,7 +1009,7 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKanendoFukaYY2(TextBoxDate txtKanendoFukaYY2) {
+    public void setTxtKanendoFukaYY2(TextBoxDate txtKanendoFukaYY2) {
         this.getKiwarigaku().getKiwarigakuKanendo2().setTxtKanendoFukaYY2(txtKanendoFukaYY2);
     }
 
@@ -859,7 +1019,7 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setKiwarigakuPanel3(KiwarigakuPanel3Div KiwarigakuPanel3) {
+    public void setKiwarigakuPanel3(KiwarigakuPanel3Div KiwarigakuPanel3) {
         this.getKiwarigaku().getKiwarigakuKanendo2().setKiwarigakuPanel3(KiwarigakuPanel3);
     }
 
@@ -894,8 +1054,38 @@ public class GemmenMainDiv extends Panel {
     }
 
     @JsonIgnore
+    public Label getKi2() {
+        return this.getKiwarigaku().getKiwarigakuKanendo2().getKiwarigakuPanel3().getKi2();
+    }
+
+    @JsonIgnore
+    public Label getMae2() {
+        return this.getKiwarigaku().getKiwarigakuKanendo2().getKiwarigakuPanel3().getMae2();
+    }
+
+    @JsonIgnore
+    public Label getGo2() {
+        return this.getKiwarigaku().getKiwarigakuKanendo2().getKiwarigakuPanel3().getGo2();
+    }
+
+    @JsonIgnore
+    public Label getNokigen() {
+        return this.getKiwarigaku().getKiwarigakuKanendo2().getKiwarigakuPanel3().getNokigen();
+    }
+
+    @JsonIgnore
     public Label getLblKiwarigaku3Total() {
         return this.getKiwarigaku().getKiwarigakuKanendo2().getKiwarigakuPanel3().getLblKiwarigaku3Total();
+    }
+
+    @JsonIgnore
+    public Label getMaeTotalMae2() {
+        return this.getKiwarigaku().getKiwarigakuKanendo2().getKiwarigakuPanel3().getMaeTotalMae2();
+    }
+
+    @JsonIgnore
+    public Label getMaeTotalGo2() {
+        return this.getKiwarigaku().getKiwarigakuKanendo2().getKiwarigakuPanel3().getMaeTotalGo2();
     }
 
     // </editor-fold>

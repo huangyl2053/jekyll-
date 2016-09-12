@@ -5,21 +5,18 @@
  */
 package jp.co.ndensan.reams.db.dbb.service.report.TokubetsuChoshuKaishi;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.TokubetsuChoshuKaishiProperty;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.TokubetsuChoshuKaishiReport;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedHonSanteiTsuchiShoKyotsu;
-import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.TokubetsuChoshuKaishiSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -43,20 +40,20 @@ public class TokubetsuChoshuKaishiPrintService {
 
     private static final int NUM0 = 0;
     private static final int NUM1 = 1;
-    private static final int NUM_1 = -1;
     private static final int NUM5 = 5;
+    private static final ReportId 特別徴収開始通知書本算定_帳票分類ID = new ReportId("DBB100032_TokubetsuChoshuKaishiTsuchishoDaihyo");
 
     /**
      * 特別徴収開始通知書（本算定）発行一覧表(単一帳票出力用)
      *
      * @param 編集後本算定通知書共通情報 List< EditedHonSanteiTsuchiShoKyotsu>
      * @param 賦課年度 FlexibleYear
-     * @param 出力順ID long
+     * @param 出力順ID RString
      * @param 帳票作成日時 RDateTime
      * @return SourceDataCollection
      */
     public SourceDataCollection printSingle(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報, FlexibleYear 賦課年度,
-            long 出力順ID, RDateTime 帳票作成日時) {
+            RString 出力順ID, RDateTime 帳票作成日時) {
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
             print(編集後本算定通知書共通情報, 賦課年度, 出力順ID, 帳票作成日時, reportManager);
@@ -70,13 +67,18 @@ public class TokubetsuChoshuKaishiPrintService {
      *
      * @param 編集後本算定通知書共通情報 List< EditedHonSanteiTsuchiShoKyotsu>
      * @param 賦課年度 FlexibleYear
-     * @param 出力順ID long
+     * @param 出力順ID RString
      * @param 帳票作成日時 RDateTime
      * @param reportManager ReportManager
      */
-    public void print(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報, FlexibleYear 賦課年度, long 出力順ID,
+    public void print(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報, FlexibleYear 賦課年度, RString 出力順ID,
             RDateTime 帳票作成日時, ReportManager reportManager) {
-        TokubetsuChoshuKaishiProperty property = new TokubetsuChoshuKaishiProperty();
+        IOutputOrder 並び順 = null;
+        if (!RString.isNullOrEmpty(出力順ID)) {
+            並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
+                    .get出力順(SubGyomuCode.DBB介護賦課, 特別徴収開始通知書本算定_帳票分類ID, Long.parseLong(出力順ID.toString()));
+        }
+        TokubetsuChoshuKaishiProperty property = new TokubetsuChoshuKaishiProperty(並び順);
         try (ReportAssembler<TokubetsuChoshuKaishiSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<TokubetsuChoshuKaishiSource> reportSourceWriter
                     = new ReportSourceWriter(assembler);
@@ -84,10 +86,9 @@ public class TokubetsuChoshuKaishiPrintService {
             Association association = finder.getAssociation();
             RString 市町村コード = association.get地方公共団体コード().value();
             RString 市町村名 = association.get市町村名();
-            IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
-                    .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200011.getReportId(), 出力順ID);
+
             if (並び順 == null || 並び順.get設定項目リスト() == null || 並び順.get設定項目リスト().isEmpty()) {
-                executereport(編集後本算定通知書共通情報, 賦課年度, 帳票作成日時, 市町村コード, 市町村名, new ArrayList(),
+                executeReport(編集後本算定通知書共通情報, 賦課年度, 帳票作成日時, 市町村コード, 市町村名, new ArrayList(),
                         new ArrayList(), reportSourceWriter);
                 return;
             }
@@ -103,15 +104,14 @@ public class TokubetsuChoshuKaishiPrintService {
                     break;
                 }
             }
-            executereport(編集後本算定通知書共通情報, 賦課年度, 帳票作成日時, 市町村コード, 市町村名, 出力項目リスト,
+            executeReport(編集後本算定通知書共通情報, 賦課年度, 帳票作成日時, 市町村コード, 市町村名, 出力項目リスト,
                     改頁項目リスト, reportSourceWriter);
         }
     }
 
-    private void executereport(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報,
+    private void executeReport(List<EditedHonSanteiTsuchiShoKyotsu> 編集後本算定通知書共通情報,
             FlexibleYear 賦課年度, RDateTime 帳票作成日時, RString 市町村コード, RString 市町村名,
             List<RString> 出力項目リスト, List<RString> 改頁項目リスト, ReportSourceWriter<TokubetsuChoshuKaishiSource> reportSourceWriter) {
-        Collections.sort(編集後本算定通知書共通情報, new EntityComparator());
         int i = NUM1;
         for (EditedHonSanteiTsuchiShoKyotsu editedhonsanteitsuchishokyotsu : 編集後本算定通知書共通情報) {
             TokubetsuChoshuKaishiReport report = new TokubetsuChoshuKaishiReport(
@@ -132,39 +132,4 @@ public class TokubetsuChoshuKaishiPrintService {
         return builder.<T>create();
     }
 
-    private static class EntityComparator implements Comparator<EditedHonSanteiTsuchiShoKyotsu>, Serializable {
-
-        private static final long serialVersionUID = -224230396008236394L;
-
-        /**
-         * compare処理です。
-         *
-         * @param entity1 EditedHonSanteiTsuchiShoKyotsu
-         * @param entity2 EditedHonSanteiTsuchiShoKyotsu
-         * @return 結果 int
-         */
-        @Override
-        public int compare(EditedHonSanteiTsuchiShoKyotsu entity1, EditedHonSanteiTsuchiShoKyotsu entity2) {
-            int flag = entity1.get通知書番号().compareTo(entity2.get通知書番号());
-            if (flag == NUM0) {
-                if (entity1.get編集後宛先() == null) {
-                    flag = NUM1;
-                } else if (entity2.get編集後宛先() == null) {
-                    flag = NUM_1;
-                } else {
-                    flag = entity1.get編集後宛先().get郵便番号().compareTo(entity2.get編集後宛先().get郵便番号());
-                }
-            }
-            if (flag == NUM0) {
-                if (entity1.get編集後個人() == null) {
-                    flag = NUM1;
-                } else if (entity1.get編集後個人() == null) {
-                    flag = NUM_1;
-                } else {
-                    flag = entity1.get編集後個人().get名称().getName().value().compareTo(entity2.get編集後個人().get名称().getName().value());
-                }
-            }
-            return flag;
-        }
-    }
 }

@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -118,9 +119,11 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
         return source;
     }
 
-    private void editorSource_partONE(KeisangojohoAtenaKozaEntity 計算後情報_宛名_口座Entity, HonsanteiKekkaIcihiranReportSource source) {
+    private void editorSource_partONE(KeisangojohoAtenaKozaEntity 計算後情報_宛名_口座Entity,
+            HonsanteiKekkaIcihiranReportSource source) {
         if (調定日時 != null) {
-            RString 帳票作成年月日 = 調定日時.getRDateTime().getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+            RString 帳票作成年月日 = 調定日時.getRDateTime().getDate().wareki()
+                    .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             RString 帳票作成時 = 調定日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
             source.printTimeStamp = 帳票作成年月日.concat(RString.HALF_SPACE).concat(帳票作成時)
@@ -186,7 +189,8 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
 
     }
 
-    private void editorSource_partTWO(KeisangojohoAtenaKozaEntity entity, HonsanteiKekkaIcihiranReportSource source) {
+    private void editorSource_partTWO(KeisangojohoAtenaKozaEntity entity,
+            HonsanteiKekkaIcihiranReportSource source) {
         if (entity.get被保険者番号() != null) {
             source.listCenter_1 = entity.get被保険者番号().value();
         }
@@ -197,7 +201,8 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
             source.listCenter_3 = entity.get資格喪失日().wareki().toDateString();
         }
         ShikakuKikan shikakuKikan = new ShikakuKikan();
-        ShikakuKikanJoho shikakuKikanJoho = shikakuKikan.get資格期間(賦課年度, entity.get資格取得日(), entity.get資格喪失日());
+        ShikakuKikanJoho shikakuKikanJoho = shikakuKikan.get資格期間(賦課年度,
+                entity.get資格取得日(), entity.get資格喪失日());
         source.listCenter_4 = new RString(String.valueOf(shikakuKikanJoho.get月数()));
         if (entity.get確定介護保険料_年額() != null) {
             source.listCenter_5 = DecimalFormatter.toコンマ区切りRString(entity.get確定介護保険料_年額(), 0);
@@ -214,78 +219,149 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
 
     }
 
-    private void editorSource_partTHREE(KeisangojohoAtenaKozaEntity entity, HonsanteiKekkaIcihiranReportSource source) {
-        if (entity.get特徴期別金額01() != null) {
-            source.listLower_1 = DecimalFormatter.toコンマ区切りRString(entity.get特徴期別金額01(), 0);
-        }
-        if (entity.get特徴期別金額02() != null) {
-            source.listLower_2 = DecimalFormatter.toコンマ区切りRString(entity.get特徴期別金額02(), 0);
-        }
-        if (entity.get特徴期別金額03() != null) {
-            source.listLower_3 = DecimalFormatter.toコンマ区切りRString(entity.get特徴期別金額03(), 0);
-        }
-        if (entity.get特徴期別金額04() != null) {
-            source.listLower_4 = DecimalFormatter.toコンマ区切りRString(entity.get特徴期別金額04(), 0);
-        }
-        if (entity.get特徴期別金額05() != null) {
-            source.listLower_5 = DecimalFormatter.toコンマ区切りRString(entity.get特徴期別金額05(), 0);
-        }
-        if (entity.get特徴期別金額06() != null) {
-            source.listLower_6 = DecimalFormatter.toコンマ区切りRString(entity.get特徴期別金額06(), 0);
-        }
-
-        if (entity.get普徴期別金額01() != null) {
-            source.listLower_7 = set普徴額_x期(entity.get普徴期別金額01());
-        }
-        if (entity.get普徴期別金額02() != null) {
-            source.listLower_8 = set普徴額_x期(entity.get普徴期別金額02());
-        }
-        if (entity.get普徴期別金額03() != null) {
-            source.listLower_9 = set普徴額_x期(entity.get普徴期別金額03());
-        }
-        if (entity.get普徴期別金額04() != null) {
-
-            source.listLower_10 = set普徴額_x期(entity.get普徴期別金額04());
-        }
-        if (entity.get普徴期別金額05() != null) {
-            source.listLower_11 = set普徴額_x期(entity.get普徴期別金額05());
-        }
-        if (entity.get普徴期別金額06() != null) {
-            source.listLower_12 = set普徴額_x期(entity.get普徴期別金額06());
-        }
-        if (entity.get普徴期別金額07() != null) {
-            source.listLower_13 = set普徴額_x期(entity.get普徴期別金額07());
-        }
-        if (entity.get普徴期別金額08() != null) {
-            source.listLower_14 = set普徴額_x期(entity.get普徴期別金額08());
-        }
-        if (entity.get普徴期別金額09() != null) {
-            source.listLower_15 = set普徴額_x期(entity.get普徴期別金額09());
-        }
-        if (entity.get普徴期別金額10() != null) {
-            source.listLower_16 = set普徴額_x期(entity.get普徴期別金額10());
-        }
-        if (entity.get普徴期別金額11() != null) {
-            source.listLower_17 = set普徴額_x期(entity.get普徴期別金額11());
-        }
-        if (entity.get普徴期別金額12() != null) {
-            source.listLower_18 = set普徴額_x期(entity.get普徴期別金額12());
-        }
+    private void editorSource_partTHREE(KeisangojohoAtenaKozaEntity entity,
+            HonsanteiKekkaIcihiranReportSource source) {
+        source.listLower_1 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get特徴期別金額01()), 0);
+        source.listLower_2 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get特徴期別金額02()), 0);
+        source.listLower_3 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get特徴期別金額03()), 0);
+        source.listLower_4 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get特徴期別金額04()), 0);
+        source.listLower_5 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get特徴期別金額05()), 0);
+        source.listLower_6 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get特徴期別金額06()), 0);
+        set普徴額_x期(entity, source);
     }
 
-    private RString set普徴額_x期(Decimal 普徴期別金額) {
+    private void set普徴額_x期(KeisangojohoAtenaKozaEntity entity,
+            HonsanteiKekkaIcihiranReportSource source) {
         FuchoKiUtil 月期対応取得_普徴 = new FuchoKiUtil();
         KitsukiList 期月リスト_普徴 = 月期対応取得_普徴.get期月リスト();
-        List<Kitsuki> 表記リスト = 期月リスト_普徴.toList();
-        Kitsuki 最終法定納期 = 期月リスト_普徴.get最終法定納期();
-        for (Kitsuki 期 : 表記リスト) {
-            if (期.get期AsInt() <= 最終法定納期.get期AsInt()) {
-                return DecimalFormatter.toコンマ区切りRString(普徴期別金額, 0);
-            } else {
-                return RString.EMPTY;
-            }
+        KitsukiList kitsukiList = 期月リスト_普徴.filtered本算定期間();
+        Kitsuki 最終法定納期 = kitsukiList.get最終法定納期();
+        if (最終法定納期.get期AsInt() == NUM_1) {
+            source.listLower_7 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額01()), 0);
+        } else {
+            source.listLower_7 = RString.EMPTY;
         }
-        return RString.EMPTY;
+        if (最終法定納期.get期AsInt() == NUM_2) {
+            source.listLower_7 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額01()), 0);
+            source.listLower_8 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額02()), 0);
+        } else {
+            source.listLower_8 = RString.EMPTY;
+        }
+        if (最終法定納期.get期AsInt() == NUM_3) {
+            source.listLower_7 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額01()), 0);
+            source.listLower_8 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額02()), 0);
+            source.listLower_9 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額03()), 0);
+        } else {
+            source.listLower_9 = RString.EMPTY;
+        }
+        if (最終法定納期.get期AsInt() == NUM_4) {
+            source.listLower_7 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額01()), 0);
+            source.listLower_8 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額02()), 0);
+            source.listLower_9 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額03()), 0);
+            source.listLower_10 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額04()), 0);
+        } else {
+            source.listLower_10 = RString.EMPTY;
+        }
+        if (最終法定納期.get期AsInt() == NUM_5) {
+            source.listLower_7 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額01()), 0);
+            source.listLower_8 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額02()), 0);
+            source.listLower_9 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額03()), 0);
+            source.listLower_10 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額04()), 0);
+            source.listLower_11 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額05()), 0);
+        } else {
+            source.listLower_11 = RString.EMPTY;
+        }
+        if (最終法定納期.get期AsInt() == NUM_6) {
+            source.listLower_7 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額01()), 0);
+            source.listLower_8 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額02()), 0);
+            source.listLower_9 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額03()), 0);
+            source.listLower_10 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額04()), 0);
+            source.listLower_11 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額05()), 0);
+            source.listLower_12 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額06()), 0);
+        } else {
+            source.listLower_12 = RString.EMPTY;
+        }
+        if (最終法定納期.get期AsInt() == NUM_7) {
+            source.listLower_7 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額01()), 0);
+            source.listLower_8 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額02()), 0);
+            source.listLower_9 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額03()), 0);
+            source.listLower_10 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額04()), 0);
+            source.listLower_11 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額05()), 0);
+            source.listLower_12 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額06()), 0);
+            source.listLower_13 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額07()), 0);
+        } else {
+            source.listLower_13 = RString.EMPTY;
+        }
+        if (最終法定納期.get期AsInt() == NUM_8) {
+            source.listLower_7 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額01()), 0);
+            source.listLower_8 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額02()), 0);
+            source.listLower_9 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額03()), 0);
+            source.listLower_10 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額04()), 0);
+            source.listLower_11 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額05()), 0);
+            source.listLower_12 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額06()), 0);
+            source.listLower_13 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額07()), 0);
+            source.listLower_14 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額08()), 0);
+        } else {
+            source.listLower_14 = RString.EMPTY;
+        }
+        if (最終法定納期.get期AsInt() == NUM_9) {
+            source.listLower_7 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額01()), 0);
+            source.listLower_8 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額02()), 0);
+            source.listLower_9 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額03()), 0);
+            source.listLower_10 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額04()), 0);
+            source.listLower_11 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額05()), 0);
+            source.listLower_12 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額06()), 0);
+            source.listLower_13 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額07()), 0);
+            source.listLower_14 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額08()), 0);
+            source.listLower_15 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額09()), 0);
+        } else {
+            source.listLower_15 = RString.EMPTY;
+        }
+        if (最終法定納期.get期AsInt() == NUM_10) {
+            source.listLower_7 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額01()), 0);
+            source.listLower_8 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額02()), 0);
+            source.listLower_9 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額03()), 0);
+            source.listLower_10 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額04()), 0);
+            source.listLower_11 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額05()), 0);
+            source.listLower_12 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額06()), 0);
+            source.listLower_13 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額07()), 0);
+            source.listLower_14 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額08()), 0);
+            source.listLower_15 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額09()), 0);
+            source.listLower_16 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額10()), 0);
+        } else {
+            source.listLower_16 = RString.EMPTY;
+        }
+        if (最終法定納期.get期AsInt() == NUM_11) {
+            source.listLower_7 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額01()), 0);
+            source.listLower_8 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額02()), 0);
+            source.listLower_9 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額03()), 0);
+            source.listLower_10 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額04()), 0);
+            source.listLower_11 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額05()), 0);
+            source.listLower_12 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額06()), 0);
+            source.listLower_13 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額07()), 0);
+            source.listLower_14 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額08()), 0);
+            source.listLower_15 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額09()), 0);
+            source.listLower_16 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額10()), 0);
+            source.listLower_17 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額11()), 0);
+        } else {
+            source.listLower_17 = RString.EMPTY;
+        }
+        if (最終法定納期.get期AsInt() == NUM_12) {
+            source.listLower_7 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額01()), 0);
+            source.listLower_8 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額02()), 0);
+            source.listLower_9 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額03()), 0);
+            source.listLower_10 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額04()), 0);
+            source.listLower_11 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額05()), 0);
+            source.listLower_12 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額06()), 0);
+            source.listLower_13 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額07()), 0);
+            source.listLower_14 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額08()), 0);
+            source.listLower_15 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額09()), 0);
+            source.listLower_16 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額10()), 0);
+            source.listLower_17 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額11()), 0);
+            source.listLower_18 = DecimalFormatter.toコンマ区切りRString(nullTOZero(entity.get普徴期別金額12()), 0);
+        } else {
+            source.listLower_18 = RString.EMPTY;
+        }
     }
 
     private void set出力順(HonsanteiKekkaIcihiranReportSource source) {
@@ -477,17 +553,17 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
 
     private void set月別取得段階(KeisangojohoAtenaKozaEntity entity, HonsanteiKekkaIcihiranReportSource source) {
         RString 更正前後区分 = entity.get更正前後区分();
-        FlexibleDate 月割開始年月1 = entity.get月割開始年月1();
+        FlexibleYearMonth 月割開始年月1 = entity.get月割開始年月1();
         int 開始月1 = 月割開始年月1.getMonthValue();
-        FlexibleDate 月割終了年月1 = entity.get月割終了年月1();
+        FlexibleYearMonth 月割終了年月1 = entity.get月割終了年月1();
         int 終了月1 = 月割終了年月1.getMonthValue();
         if (entity.get保険料算定段階1().length() >= NUM_2) {
             RString 保険料算定段階1 = entity.get保険料算定段階1().substring(NUM_0, NUM_2).trimStart(CHAR_0);
             set月別取得段階(source, 開始月1, 終了月1, 保険料算定段階1, 更正前後区分);
         }
-        FlexibleDate 月割開始年月2 = entity.get月割開始年月2();
+        FlexibleYearMonth 月割開始年月2 = entity.get月割開始年月2();
         int 開始月2 = 月割開始年月2.getMonthValue();
-        FlexibleDate 月割終了年月2 = entity.get月割終了年月2();
+        FlexibleYearMonth 月割終了年月2 = entity.get月割終了年月2();
         int 終了月2 = 月割終了年月2.getMonthValue();
         if (entity.get保険料算定段階2().length() >= NUM_2) {
             RString 保険料算定段階2 = entity.get保険料算定段階2().substring(NUM_0, NUM_2).trimStart(CHAR_0);

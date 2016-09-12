@@ -60,7 +60,7 @@
         <result property="kikaiKiki" column="dbT4206GaikyoTokkiChild_kikaiKiki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
-    <select id="getEntity" resultMap="ResultMap_DbT4206GaikyoTokkiChildEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT4206GaikyoTokkiChildEntity">
         SELECT
         <include refid="allColumns_DbT4206GaikyoTokkiChild"/>
         FROM

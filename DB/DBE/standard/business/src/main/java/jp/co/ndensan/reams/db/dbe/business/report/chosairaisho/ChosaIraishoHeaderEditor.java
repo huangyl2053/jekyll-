@@ -64,7 +64,6 @@ class ChosaIraishoHeaderEditor implements IChosaIraishoEditor {
         source.meishoFuyo = item.getMeishoFuyo();
         source.customerBarCode = item.getCustomerBarCode();
         source.sonota = item.getSonota();
-        source.atenaRenban = item.getAtenaRenban();
         source.customerBarCode = item.getCustomerBarCode();
         source.title = item.getTitle();
         source.tsuchibun1 = item.getTsuchibun1();
@@ -83,7 +82,7 @@ class ChosaIraishoHeaderEditor implements IChosaIraishoEditor {
         if (item.getBirthYMD() == null || item.getBirthYMD().isEmpty()) {
             source.birthYMD = RString.EMPTY;
         } else {
-            source.birthYMD = パターン12(new RDate(item.getBirthYMD().toString()));
+            source.birthYMD = 生年月日_パターン12(new RDate(item.getBirthYMD().toString()));
         }
         source.birthGengoMeiji = item.getBirthGengoMeiji();
         source.birthGengoTaisho = item.getBirthGengoTaisho();
@@ -112,6 +111,12 @@ class ChosaIraishoHeaderEditor implements IChosaIraishoEditor {
     }
 
     private RString パターン12(RDate rDate) {
+        return rDate.wareki().eraType(EraType.KANJI)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                .fillType(FillType.BLANK).toDateString();
+    }
+
+    private RString 生年月日_パターン12(RDate rDate) {
         RString 生年月日 = rDate.wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
                 .fillType(FillType.BLANK).toDateString();

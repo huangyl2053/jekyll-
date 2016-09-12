@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-1420-020 wangjie2 -->
+
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.koshinshinseishahaakulist.IKoshinShinseishaHaakuListMapper">
+
+    <resultMap id="resultMap_更新未申請者把握情報" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5110001.UpdateNotApplicantEntity" autoMapping="true">
+        <result property="申請書管理番号" column="申請書管理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="被保険者氏名" column="被保険者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="被保険者氏名カナ" column="被保険者氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="郵便番号" column="郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="住所" column="住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="生年月日" column="生年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="年齢" column="年齢" />
+        <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+    <resultMap id="resultMap_前回の情報" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5110001.PreviousInformationEntity" autoMapping="true">
+        <result property="厚労省IF識別コード" column="厚労省IF識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定申請年月日" column="認定申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="認定申請区分_申請時_コード" column="認定申請区分_申請時_コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査委託先コード" column="認定調査委託先コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="入所施設コード" column="入所施設コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査委託先情報_事業者名称" column="認定調査委託先情報_事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="二次判定年月日" column="二次判定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="二次判定認定有効期間" column="二次判定認定有効期間" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="二次判定認定有効開始年月日" column="二次判定認定有効開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="二次判定認定有効終了年月日" column="二次判定認定有効終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="二次判定要介護状態区分コード" column="二次判定要介護状態区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="介護事業者_事業者名称" column="介護事業者_事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    </resultMap>
+
+    <select resultOrdered="true" id="get更新未申請者把握リスト情報"
+            resultMap = "resultMap_更新未申請者把握情報"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd5110001.KoshinShinseishaHaakuListMyBatisParameter"
+            fetchSize="500">
+        SELECT 
+            A."shinseishoKanriNo" AS 申請書管理番号,
+            A."hihokenshaNo" AS 被保険者番号,
+            A."hihokenshaName" AS 被保険者氏名,
+            A."hihokenshaKana" AS 被保険者氏名カナ,
+            A."yubinNo" AS 郵便番号,
+            A.jusho AS 住所,
+            A."seinengappiYMD" AS 生年月日,
+            A.age AS 年齢,
+            A."shikibetsuCode" AS 識別コード
+        FROM 
+            rgdb."DbT4101NinteiShinseiJoho" AS A
+        WHERE 
+            A."ninteiShinseiShinseijiKubunCode" = #{認定申請区分_申請時_コード}
+            AND A."koshinTsuchiHakkoYMD" IS NOT NULL AND A."koshinTsuchiHakkoYMD" != ''
+            AND A."koshinTsuchiHakkoKanryoYMD" IS NOT NULL AND A."koshinTsuchiHakkoKanryoYMD" != ''
+        <if test="is印刷範囲指定が対象月まで">
+            AND  A."zenkaiYukoKikanEnd" <![CDATA[<=]]> #{認定有効期間_終了月}
+        </if>
+        <if test="is印刷範囲指定が範囲指定">
+            AND  A."zenkaiYukoKikanEnd" <![CDATA[<=]]> #{認定有効期間_終了月_To}
+            AND  #{認定有効期間_終了月_From} <![CDATA[<=]]> A."zenkaiYukoKikanEnd"
+        </if>
+        ORDER BY
+            A."hihokenshaKana" ASC,A."ninteiShinseiYMD" ASC
+    </select>
+    
+    <select resultOrdered="true" id="get前回の情報"
+            resultMap = "resultMap_前回の情報"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd5110001.KoshinShinseishaHaakuListMyBatisParameter"
+            fetchSize="500">
+        SELECT 
+            B."koroshoIfShikibetsuCode" AS 厚労省IF識別コード,
+            B."ninteiShinseiYMD" AS 認定申請年月日,
+            B."ninteiShinseiShinseijiKubunCode" AS 認定申請区分_申請時_コード,
+            B."ninteiChosaItakusakiCode" AS 認定調査委託先コード,
+            B."nyushoShisetsuCode" AS 入所施設コード,
+            E."jigyoshaMeisho" AS 認定調査委託先情報_事業者名称,
+            B1."nijiHanteiYMD" AS 二次判定年月日,
+            B1."nijiHanteiNinteiYukoKikan" AS 二次判定認定有効期間,
+            B1."nijiHanteiNinteiYukoKaishiYMD" AS 二次判定認定有効開始年月日,
+            B1."nijiHanteiNinteiYukoShuryoYMD" AS 二次判定認定有効終了年月日,
+            B1."nijiHanteiYokaigoJotaiKubunCode" AS 二次判定要介護状態区分コード,
+            F."jigyoshaName" AS 介護事業者_事業者名称
+        FROM
+            rgdb."DbT4101NinteiShinseiJoho" AS B
+        LEFT JOIN
+            rgdb."DbT4102NinteiKekkaJoho" AS B1
+            ON B."shinseishoKanriNo" = B1."shinseishoKanriNo"
+        INNER JOIN
+            rgdb."DbT7051KoseiShichosonMaster" AS C
+            ON B."shoKisaiHokenshaNo" = C."shoKisaiHokenshaNo"
+        LEFT JOIN
+            rgdb."DbT4910NinteichosaItakusakiJoho" AS E
+            ON B."ninteiChosaItakusakiCode" = E."ninteichosaItakusakiCode"
+            AND C."shichosonCode" = E."shichosonCode"
+        LEFT JOIN
+            rgdb."DbT7060KaigoJigyosha" AS F
+            ON B."nyushoShisetsuCode" = F."jigyoshaNo"
+            AND NOT EXISTS(
+                           SELECT 'X'
+                           FROM rgdb."DbT7060KaigoJigyosha" AS F1
+                           WHERE F."jigyoshaNo" = F1."jigyoshaNo"
+                                 AND F."yukoKaishiYMD" <![CDATA[<]]> F1."yukoKaishiYMD"
+                          )
+        WHERE B."shinseishoKanriNo" = (
+                                        SELECT D."zenkaiShinseishoKanriNo"
+                                        FROM rgdb."DbT4121ShinseiRirekiJoho" AS D
+                                        WHERE D."shinseishoKanriNo" = #{申請書管理番号}
+                                       )
+    </select>
+
+
+</mapper>

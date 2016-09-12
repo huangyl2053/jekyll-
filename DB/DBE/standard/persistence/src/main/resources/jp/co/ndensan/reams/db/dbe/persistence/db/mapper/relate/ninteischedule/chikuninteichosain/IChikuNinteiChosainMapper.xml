@@ -6,7 +6,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteischedule.chikuninteichosain.IChikuNinteiChosainMapper">
 
     <select id="select地区認定調査員ByKey" resultMap="resultMap_ChikuNinteiChosainEntity" 
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteischedule.chikuninteichosain.ChikuNinteiChosainMapperParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteischedule.chikuninteichosain.ChikuNinteiChosainMapperParameter" fetchSize="500" resultOrdered="true">
         <include refid="selectChikuNinteiChosainEntity" />
     </select>
     <sql id="selectChikuNinteiChosainEntity">

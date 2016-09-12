@@ -15,9 +15,8 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteichosaschedule.NinteichosaS
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020001.NinteiChosaSchedulePanelDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020001.dgNinteiChosaSchedule_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.sukejurutouroku.SukejuruTourokuFinder;
-import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.DayOfWeek;
@@ -29,9 +28,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Seireki;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
-import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
  * 認定調査スケジュール登録1の取得処理。
@@ -41,7 +38,6 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 public class NinteiChosaScheduleHandler {
 
     private final NinteiChosaSchedulePanelDiv ninteidiv;
-    private static final RString 状態_初期状態 = new RString("初期状態");
 
     /**
      * コンストラクタです。
@@ -57,7 +53,6 @@ public class NinteiChosaScheduleHandler {
      *
      */
     public void initialize() {
-        状態_初期状態.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class));
         ninteidiv.getTxtSetteiYM().setValue(new FlexibleDate(RDate.getNowDate().toString()));
         List<ChikuShichosonBusiness> chikuList = SukejuruTourokuFinder.createInstance()
                 .getChikuShichosonList().records();
@@ -74,11 +69,11 @@ public class NinteiChosaScheduleHandler {
     private List<ChosaChiku> get対象地区List(List<ChikuShichosonBusiness> chikuList) {
         List<ChosaChiku> list = new ArrayList<>();
         for (ChikuShichosonBusiness chikuShichosonBusiness : chikuList) {
-            UzT0007CodeEntity entity = CodeMaster.getCode(SubGyomuCode.DBE認定支援,
-                    new CodeShubetsu("5002"), chikuShichosonBusiness.getChosaChikuCode());
+            RString 調査地区名称 = CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援,
+                    DBECodeShubetsu.調査地区コード.getコード(), chikuShichosonBusiness.getChosaChikuCode(), FlexibleDate.getNowDate());
             ChosaChiku chiku = new ChosaChiku();
-            if (entity != null) {
-                chiku.set調査地区名称(entity.getコード名称());
+            if (!RString.isNullOrEmpty(調査地区名称)) {
+                chiku.set調査地区名称(調査地区名称);
                 chiku.set調査地区コード(chikuShichosonBusiness.getChosaChikuCode().getColumnValue());
                 list.add(chiku);
             } else {
@@ -110,10 +105,10 @@ public class NinteiChosaScheduleHandler {
             if (data_map.containsKey(dateIndex.seireki().fillType(FillType.ZERO).toDateString())) {
                 NinteichosaScheduleBusiness jigyoshaInput = data_map.get(dateIndex.seireki().fillType(FillType.ZERO).toDateString());
                 if (jigyoshaInput.getメモ年月日().getDayOfWeek() == DayOfWeek.SATURDAY) {
-                    dgJigyoshaItiran.setRowBgColor(DataGridCellBgColor.bgColorGreen);
+                    dgJigyoshaItiran.setRowBgColor(DataGridCellBgColor.bgColorLightGreen);
                 } else if (jigyoshaInput.getメモ年月日().getDayOfWeek() == DayOfWeek.SUNDAY
-                        && (new RDate(jigyoshaInput.getメモ年月日().toString()).isNationalHoliday())) {
-                    dgJigyoshaItiran.setRowBgColor(DataGridCellBgColor.bgColorRed);
+                           && (new RDate(jigyoshaInput.getメモ年月日().toString()).isNationalHoliday())) {
+                    dgJigyoshaItiran.setRowBgColor(DataGridCellBgColor.bgColorLightRed);
                 }
                 if (jigyoshaInput.getメモ年月日() != null) {
                     dgJigyoshaItiran.getDate().setValue(new RDate(jigyoshaInput.getメモ年月日().toString()));
@@ -122,11 +117,13 @@ public class NinteiChosaScheduleHandler {
                 if (jigyoshaInput.get全午前件数() != 0) {
                     dgJigyoshaItiran.setAkiAM(new RString("○"));
                 }
-                dgJigyoshaItiran.setAkiAMCount(new RString(String.valueOf(jigyoshaInput.get全午前件数() - jigyoshaInput.get午前の仮予約件数() - jigyoshaInput.get午前の確定件数())));
+                dgJigyoshaItiran.setAkiAMCount(new RString(String.valueOf(jigyoshaInput.get全午前件数() - jigyoshaInput.get午前の仮予約件数()
+                                                                          - jigyoshaInput.get午前の確定件数())));
                 if (jigyoshaInput.get全午後件数() != 0) {
                     dgJigyoshaItiran.setAkiPM(new RString("●"));
                 }
-                dgJigyoshaItiran.setAkiPMCount(new RString(String.valueOf(jigyoshaInput.get全午後件数() - jigyoshaInput.get午後の仮予約件数() - jigyoshaInput.get午後の確定件数())));
+                dgJigyoshaItiran.setAkiPMCount(new RString(String.valueOf(jigyoshaInput.get全午後件数() - jigyoshaInput.get午後の仮予約件数()
+                                                                          - jigyoshaInput.get午後の確定件数())));
                 if (jigyoshaInput.get午前の仮予約件数() != 0) {
                     dgJigyoshaItiran.setKariYoyakuAM(new RString("△"));
                 }
@@ -164,13 +161,13 @@ public class NinteiChosaScheduleHandler {
 
     private void hiduke(dgNinteiChosaSchedule_Row dgJigyoshaItiran, FlexibleDate dateIndex) {
         if (dateIndex.getDayOfWeek() == DayOfWeek.SATURDAY) {
-            dgJigyoshaItiran.setRowBgColor(DataGridCellBgColor.bgColorGreen);
+            dgJigyoshaItiran.setRowBgColor(DataGridCellBgColor.bgColorLightGreen);
         }
         if (dateIndex.getDayOfWeek() == DayOfWeek.SUNDAY) {
-            dgJigyoshaItiran.setRowBgColor(DataGridCellBgColor.bgColorRed);
+            dgJigyoshaItiran.setRowBgColor(DataGridCellBgColor.bgColorLightRed);
         }
         if (new RDate(dateIndex.toString()).isNationalHoliday()) {
-            dgJigyoshaItiran.setRowBgColor(DataGridCellBgColor.bgColorRed);
+            dgJigyoshaItiran.setRowBgColor(DataGridCellBgColor.bgColorLightRed);
         }
     }
 

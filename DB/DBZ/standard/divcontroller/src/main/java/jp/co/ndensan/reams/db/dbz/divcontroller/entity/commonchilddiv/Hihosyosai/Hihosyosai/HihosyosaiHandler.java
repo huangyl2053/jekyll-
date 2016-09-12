@@ -19,8 +19,11 @@ import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenSh
 import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonmaster.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbz.business.core.shichoson.Shichoson;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochitokureirirekilist.JushochiTokureiRirekiList.dgJutoku_Row;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.hihousyosai.HihousyosaiFinder;
+import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.ShikibetsuTaishoSearchEntityHolder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
@@ -30,7 +33,6 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikib
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.persistence.db.basic.UaFt200FindShikibetsuTaishoFunctionDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -63,8 +65,6 @@ public class HihosyosaiHandler {
     private final RString 合併情報区分 = new RString("1");
     private final RString 広域保険者 = new RString("1");
     private final RString 単一保険者 = new RString("2");
-    private final CodeShubetsu 取得事由コード種別 = new CodeShubetsu("0007");
-    private final CodeShubetsu 喪失事由コード種別 = new CodeShubetsu("0011");
     private final HihosyosaiDiv div;
 
     /**
@@ -214,6 +214,31 @@ public class HihosyosaiHandler {
     }
 
     /**
+     * 住所地特例履歴情報を取得します。
+     *
+     * @return 住所地特例履歴情報 住所地特例履歴情報
+     */
+    public SearchResult<jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho> 住所地特例履歴情報取得() {
+        List<dgJutoku_Row> dgJutokuList = div.getCcdJyusyotiTokure().getDgJutoku().getDataSource();
+        List<jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho> returnList = new ArrayList<>();
+        for (dgJutoku_Row row : dgJutokuList) {
+            DbT1001HihokenshaDaichoEntity entity = new DbT1001HihokenshaDaichoEntity();
+            if (!RString.isNullOrEmpty(row.getState())) {
+                entity.setJushochitokureiKaijoJiyuCode(row.getKaijoJiyuKey() == null ? RString.EMPTY : row.getKaijoJiyuKey());
+                entity.setJushochitokureiKaijoTodokedeYMD(row.getKaijoTodokedeDate().getValue());
+                entity.setJushochitokureiKaijoYMD(row.getKaijoDate().getValue());
+                entity.setJushochitokureiTekiyoJiyuCode(row.getTekiyoJiyuKey() == null ? RString.EMPTY : row.getTekiyoJiyuKey());
+                entity.setJushochitokureiTekiyoTodokedeYMD(row.getTekiyoTodokedeDate().getValue());
+                entity.setJushochitokureiTekiyoYMD(row.getTekiyoDate().getValue());
+                jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho hihokenshaDaicho
+                        = new jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho(entity);
+                returnList.add(hihokenshaDaicho);
+            }
+        }
+        return SearchResult.of(returnList, 0, false);
+    }
+
+    /**
      * 資格関連異動一覧を取得します。
      *
      * @return 資格関連異動一覧 資格関連異動一覧
@@ -287,16 +312,6 @@ public class HihosyosaiHandler {
         }
         if (単一保険者.equals(広域と市町村判断())) {
             List<KeyValueDataSource> keyValueList = new ArrayList<>();
-            if (市町村コード != null && !市町村コード.isEmpty()) {
-                KeyValueDataSource keyValue = new KeyValueDataSource();
-                keyValue.setKey(市町村コード.getColumnValue());
-                keyValue.setValue(市町村コード.getColumnValue());
-                keyValueList.add(keyValue);
-                div.getDdlSyozaiHokensya().setDataSource(keyValueList);
-                div.getDdlSyozaiHokensya().setSelectedKey(市町村コード.getColumnValue());
-            }
-        } else if (広域保険者.equals(広域と市町村判断())) {
-            List<KeyValueDataSource> keyValueList = new ArrayList<>();
             if (現地方公共団体コード != null && !現地方公共団体コード.isEmpty()) {
                 KeyValueDataSource keyValue = new KeyValueDataSource();
                 keyValue.setKey(現地方公共団体コード.getColumnValue());
@@ -304,6 +319,16 @@ public class HihosyosaiHandler {
                 keyValueList.add(keyValue);
                 div.getDdlSyozaiHokensya().setDataSource(keyValueList);
                 div.getDdlSyozaiHokensya().setSelectedKey(現地方公共団体コード.getColumnValue());
+            }
+        } else if (広域保険者.equals(広域と市町村判断())) {
+            List<KeyValueDataSource> keyValueList = new ArrayList<>();
+            if (市町村コード != null && !市町村コード.isEmpty()) {
+                KeyValueDataSource keyValue = new KeyValueDataSource();
+                keyValue.setKey(市町村コード.getColumnValue());
+                keyValue.setValue(市町村コード.getColumnValue());
+                keyValueList.add(keyValue);
+                div.getDdlSyozaiHokensya().setDataSource(keyValueList);
+                div.getDdlSyozaiHokensya().setSelectedKey(市町村コード.getColumnValue());
             }
         }
         if (is合併市町村()) {
@@ -414,7 +439,9 @@ public class HihosyosaiHandler {
     }
 
     private List<KeyValueDataSource> get取得事由() {
-        List<UzT0007CodeEntity> 取得事由List = CodeMaster.getCode(SubGyomuCode.DBA介護資格, 取得事由コード種別);
+        FlexibleDate 基准日 = new FlexibleDate(RDate.getNowDate().toDateString());
+        List<UzT0007CodeEntity> 取得事由List = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
+                DBACodeShubetsu.介護資格取得事由_被保険者.getCodeShubetsu(), 基准日);
         List<KeyValueDataSource> keyValueList = new ArrayList<>();
         for (UzT0007CodeEntity entity : 取得事由List) {
             KeyValueDataSource keyValue = new KeyValueDataSource();
@@ -455,7 +482,9 @@ public class HihosyosaiHandler {
     }
 
     private List<KeyValueDataSource> get喪失事由() {
-        List<UzT0007CodeEntity> 喪失事由List = CodeMaster.getCode(SubGyomuCode.DBA介護資格, 喪失事由コード種別);
+        FlexibleDate 基准日 = new FlexibleDate(RDate.getNowDate().toDateString());
+        List<UzT0007CodeEntity> 喪失事由List = CodeMaster.getCode(SubGyomuCode.DBA介護資格,
+                DBACodeShubetsu.介護資格解除事由_他特例者.getCodeShubetsu(), 基准日);
         List<KeyValueDataSource> keyValueList = new ArrayList<>();
         for (UzT0007CodeEntity entity : 喪失事由List) {
             KeyValueDataSource keyValue = new KeyValueDataSource();

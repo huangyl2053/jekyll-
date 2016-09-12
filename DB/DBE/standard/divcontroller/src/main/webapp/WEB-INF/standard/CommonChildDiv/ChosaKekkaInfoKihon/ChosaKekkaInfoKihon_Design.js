@@ -4,6 +4,9 @@ var DBE;
         var Events = (function () {
             function Events() {
             }
+            Events.onClick_Moderu = function () {
+                return "onClick_Moderu";
+            };
             return Events;
         })();
         ChosaKekkaInfoKihon.Events = Events;
@@ -45,11 +48,11 @@ var DBE;
             };
 
             Controls.prototype.txtNinchishoNichijoSeikatsuJiritsudoCode = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtNinchishoNichijoSeikatsuJiritsudoCode"));
+                return new UZA.TextBoxCode(this.convFiledName("txtNinchishoNichijoSeikatsuJiritsudoCode"));
             };
 
             Controls.prototype.txtShogaiNichijoSeikatsuJiritsudoCode = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtShogaiNichijoSeikatsuJiritsudoCode"));
+                return new UZA.TextBoxCode(this.convFiledName("txtShogaiNichijoSeikatsuJiritsudoCode"));
             };
 
             Controls.prototype.Button1 = function () {

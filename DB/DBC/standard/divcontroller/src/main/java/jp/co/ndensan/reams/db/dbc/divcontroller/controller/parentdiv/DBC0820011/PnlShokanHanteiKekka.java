@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0820011
 
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820011.DBC0820011TransitionEventName.償還申請;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820011.PnlShokanHanteiKekkaDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -39,8 +39,8 @@ public class PnlShokanHanteiKekka {
         TaishoshaKey 引継ぎデータ = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
 
         ShikibetsuCode 識別コード = 引継ぎデータ.get識別コード();
-        div.getPanelAtenaShikaku().getCcdKaigoAtenalInfo().onLoad(識別コード);
-        div.getPanelAtenaShikaku().getCcdKaigoShikakuKihon().onLoad(識別コード);
+        div.getPanelAtenaShikaku().getCcdKaigoAtenalInfo().initialize(識別コード);
+        div.getPanelAtenaShikaku().getCcdKaigoShikakuKihon().initialize(識別コード);
 
         HihokenshaNo 被保険者番号 = 引継ぎデータ.get被保険者番号();
         FlexibleYearMonth 前月 = FlexibleDate.getNowDate().plusMonth(-1).getYearMonth();
@@ -55,7 +55,7 @@ public class PnlShokanHanteiKekka {
      * @param div PnlShokanHanteiKekkaDiv
      * @return ResponseData
      */
-    public ResponseData<PnlShokanHanteiKekkaDiv> onClick_InsertButton(PnlShokanHanteiKekkaDiv div) {
+    public ResponseData<PnlShokanHanteiKekkaDiv> onClick_btnInsert(PnlShokanHanteiKekkaDiv div) {
         ViewStateHolder.put(ViewStateKeys.画面モード, 新規);
         return ResponseData.of(div).forwardWithEventName(償還申請).respond();
     }
@@ -66,7 +66,7 @@ public class PnlShokanHanteiKekka {
      * @param div PnlShokanHanteiKekkaDiv
      * @return ResponseData
      */
-    public ResponseData<PnlShokanHanteiKekkaDiv> onClick_ModifyButton(PnlShokanHanteiKekkaDiv div) {
+    public ResponseData<PnlShokanHanteiKekkaDiv> onClick_btnModify(PnlShokanHanteiKekkaDiv div) {
         ViewStateHolder.put(ViewStateKeys.画面モード, 修正);
         return ResponseData.of(div).forwardWithEventName(償還申請).respond();
     }
@@ -77,7 +77,7 @@ public class PnlShokanHanteiKekka {
      * @param div PnlShokanHanteiKekkaDiv
      * @return ResponseData
      */
-    public ResponseData<PnlShokanHanteiKekkaDiv> onClick_DeleteButton(PnlShokanHanteiKekkaDiv div) {
+    public ResponseData<PnlShokanHanteiKekkaDiv> onClick_btnDelete(PnlShokanHanteiKekkaDiv div) {
         ViewStateHolder.put(ViewStateKeys.画面モード, 削除);
         return ResponseData.of(div).forwardWithEventName(償還申請).respond();
     }

@@ -47,7 +47,7 @@
         <result property="lastUpdateReamsLoginId" column="dbT7028KakushuShinKyuNoHenkan_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shinNo" column="dbT7028KakushuShinKyuNoHenkan_shinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-<select id="getEntity" resultMap="ResultMap_DbT7028KakushuShinKyuNoHenkanEntity">
+<select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT7028KakushuShinKyuNoHenkanEntity">
     SELECT
     <include refid="allColumns_DbT7028KakushuShinKyuNoHenkan"/>
     FROM

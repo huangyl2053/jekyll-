@@ -3,7 +3,7 @@
 <!-- 概要： 資格取得除外者の取得のマッピング用XMLです。 -->
 <!-- @reamsid_L DBA-0521-020 lijia -->
 <mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.hihokenshashisaku.IHihokenshaShisakuMapper">
-    <select id="get宛名情報" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatis.param.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriParameter" fetchSize="500">
+    <select resultOrdered="true" id="get宛名情報" resultMap="resultMap_getIkkatsuHakkoRelateEntity" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriParameter" fetchSize="500">
         SELECT
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
         FROM

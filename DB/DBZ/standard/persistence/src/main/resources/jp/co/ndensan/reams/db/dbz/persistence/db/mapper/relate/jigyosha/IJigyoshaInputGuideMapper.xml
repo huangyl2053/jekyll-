@@ -39,7 +39,8 @@
     </resultMap>
 
 
-    <select id="getServiceJigyoshaInputGuide" resultMap="resultMap_serviceJigyoshaInputGuideEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.jigyosha.JigyoshaInputGuideParameter" fetchSize="500">
+    <select resultOrdered="true" id="getServiceJigyoshaInputGuide" resultMap="resultMap_serviceJigyoshaInputGuideEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.jigyosha.JigyoshaInputGuideParameter" fetchSize="500">
+    SELECT * FROM(
         SELECT
         dbT7060Kaigo."jigyoshaNo" AS "dbT7060Kaigo_jigyoshaNo",
         dbT7060Kaigo."yukoKaishiYMD" AS "dbT7060Kaigo_yukoKaishiYMD",
@@ -50,27 +51,36 @@
         dbT7060Kaigo."jigyoshaAddress" AS "dbT7060Kaigo_jigyoshaAddress",
         dbT7060Kaigo."telNo" AS "dbT7060Kaigo_telNo",
         dbT7063Kaigo."serviceShuruiCode" AS "dbT7063Kaigo_serviceShuruiCode",
-        dbT7130Kaigo."serviceShuruiRyakusho" AS "dbT7130Kaigo_serviceShuruiRyakusho"
+        dbT7130Kaigo2."serviceShuruiRyakusho" AS "dbT7130Kaigo_serviceShuruiRyakusho",
+        row_number() OVER (PARTITION BY dbT7060Kaigo."jigyoshaNo" 
+        ORDER BY dbT7060Kaigo."jigyoshaNo" DESC,dbT7060Kaigo."yukoKaishiYMD" DESC,dbT7063Kaigo."yukoKaishiYMD" DESC) AS rank_number
         FROM
         rgdb."DbT7060KaigoJigyosha" AS dbT7060Kaigo
         LEFT JOIN
         rgdb."DbT7063KaigoJigyoshaShiteiService" AS dbT7063Kaigo
         ON
         dbT7060Kaigo."jigyoshaNo" =  dbT7063Kaigo."jigyoshaNo"
-        LEFT JOIN
-        rgdb."DbT7130KaigoServiceShurui" AS dbT7130Kaigo
+        LEFT JOIN 
+        (SELECT * FROM
+            (SELECT 
+               dbT7130Kaigo."serviceShuruiCd",
+               dbT7130Kaigo."teikyoKaishiYM",
+               dbT7130Kaigo."serviceShuruiRyakusho",
+               dbT7130Kaigo."isDeleted",
+               row_number() over(PARTITION by dbT7130Kaigo."serviceShuruiCd" order by  dbT7130Kaigo."teikyoKaishiYM" desc) AS rank_number1
+             FROM rgdb."DbT7130KaigoServiceShurui" AS dbT7130Kaigo) AS dbT7130Kaigo1
+             WHERE rank_number1 = 1) AS dbT7130Kaigo2
         ON
-        dbT7063Kaigo."serviceShuruiCode" = dbT7130Kaigo."serviceShuruiCd"
-
+        dbT7063Kaigo."serviceShuruiCode" = dbT7130Kaigo2."serviceShuruiCd"
         WHERE
         dbT7060Kaigo."isDeleted" <![CDATA[<>]]> TRUE
         AND
         dbT7063Kaigo."isDeleted"  <![CDATA[<>]]> TRUE
         AND
-        dbT7130Kaigo."isDeleted"  <![CDATA[<>]]> TRUE
+        dbT7130Kaigo2."isDeleted"  <![CDATA[<>]]> TRUE
 
         <if test="isJigyoshaNoFlag" >
-            AND dbT7060Kaigo."jigyoshaNo" = #{jigyoshaNo}
+            AND dbT7060Kaigo."jigyoshaNo" like #{jigyoshaNo} || '%'
         </if>
         <if test = "!isJigyoshaNoFlag">
             <if test = "isYukoKaishiYMDFromFlag and !isYukoKaishiYMDToFlag">
@@ -126,6 +136,8 @@
             <if test = "isServiceShuRui">
                 AND
                 dbT7063Kaigo."serviceShuruiCode" = #{serviceShuRui}
+            </if>
+            <if test = "isKenCode">
                 AND
                 SUBSTRING(dbT7060Kaigo."jigyoshaNo",1,2) = #{kenCode}
             </if>
@@ -137,12 +149,12 @@
                 AND
                 SUBSTRING(dbT7060Kaigo."jigyoshaNo",4,2) = #{gunshiCode}
             </if>
-        </if>
-        ORDER BY
-        dbT7060Kaigo."jigyoshaNo"
+        </if>) AS dbT7060Kaigo1
+        WHERE rank_number = 1
     </select>
 
-    <select id="getTekiyoJogaiInputGuide" resultMap="resultMap_tekiyoJogaiInputGuideEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.jigyosha.JigyoshaInputGuideParameter" fetchSize="500">
+    <select resultOrdered="true" id="getTekiyoJogaiInputGuide" resultMap="resultMap_tekiyoJogaiInputGuideEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.jigyosha.JigyoshaInputGuideParameter" fetchSize="500">
+    SELECT * FROM(
         SELECT
         dbT1005Kaigo."jigyoshaNo" AS "dbT1005Kaigo_jigyoshaNo",
         dbT1005Kaigo."yukoKaishiYMD" AS "dbT1005Kaigo_yukoKaishiYMD",
@@ -151,7 +163,9 @@
         dbT1005Kaigo."jigyoshaKanaMeisho" AS "dbT1005Kaigo_jigyoshaKanaMeisho",
         dbT1005Kaigo."jigyoshaJusho" AS "dbT1005Kaigo_jigyoshaJusho",
         dbT1005Kaigo."jigyoshaKanaJusho" AS "dbT1005Kaigo_jigyoshaKanaJusho",
-        dbT1005Kaigo."telNo" AS "dbT1005Kaigo_telNo"
+        dbT1005Kaigo."telNo" AS "dbT1005Kaigo_telNo",
+        row_number() OVER (PARTITION BY dbT1005Kaigo."jigyoshaNo" 
+        ORDER BY dbT1005Kaigo."jigyoshaNo" DESC,dbT1005Kaigo."yukoKaishiYMD" DESC) AS rank_number
         FROM
         rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" AS dbT1005Kaigo
         WHERE
@@ -204,12 +218,11 @@
                     dbT1005Kaigo."jigyoshaJusho" LIKE  #{address} || '%'
                 </if>
             </if>
-        </if>
-
-        ORDER BY
-        dbT1005Kaigo."jigyoshaNo"
+        </if>) AS dbT1005Kaigo1
+        WHERE rank_number = 1
     </select>
-    <select id="getOtherTokureiInputGuide" resultMap="resultMap_otherTokureiInputGuideEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.jigyosha.JigyoshaInputGuideParameter" fetchSize="500">
+    <select resultOrdered="true" id="getOtherTokureiInputGuide" resultMap="resultMap_otherTokureiInputGuideEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.jigyosha.JigyoshaInputGuideParameter" fetchSize="500">
+    SELECT * FROM(
         SELECT
         dbT1005Kaigo."jigyoshaNo" AS "dbT1005Kaigo_jigyoshaNo",
         dbT1005Kaigo."yukoKaishiYMD" AS "dbT1005Kaigo_yukoKaishiYMD",
@@ -218,7 +231,9 @@
         dbT1005Kaigo."jigyoshaJusho" AS "dbT1005Kaigo_jigyoshaJusho",
         dbT1005Kaigo."jigyoshaKanaMeisho" AS "dbT1005Kaigo_jigyoshaKanaMeisho",
         dbT1005Kaigo."jigyoshaKanaJusho" AS "dbT1005Kaigo_jigyoshaKanaJusho",
-        dbT1005Kaigo."telNo" AS "dbT1005Kaigo_telNo"
+        dbT1005Kaigo."telNo" AS "dbT1005Kaigo_telNo",
+        row_number() OVER (PARTITION BY dbT1005Kaigo."jigyoshaNo" 
+        ORDER BY dbT1005Kaigo."jigyoshaNo" DESC,dbT1005Kaigo."yukoKaishiYMD" DESC) AS rank_number
         FROM
         rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" AS dbT1005Kaigo
         WHERE
@@ -226,14 +241,12 @@
         AND
         <if test = "isKannaiKangaiKubun1Flg">
             dbT1005Kaigo."kannaiKangaiKubun" = #{kannaiKangaiKubun1}
+            AND
         </if>
         <if test = "isKannaiKangaiKubun2Flg">
             dbT1005Kaigo."kannaiKangaiKubun" = #{kannaiKangaiKubun2}
+            AND
         </if>
-        <if test = "isKannaiKangaiKubunFlg">
-            dbT1005Kaigo."kannaiKangaiKubun" in (#{kannaiKangaiKubun1},#{kannaiKangaiKubun2})
-        </if>
-        AND
         dbT1005Kaigo."jigyoshaShubetsu"= #{jigyoshaShubetsu}
         <if test="isJigyoshaNoFlag" >
             AND dbT1005Kaigo."jigyoshaNo"  = #{jigyoshaNo}
@@ -281,8 +294,7 @@
                     dbT1005Kaigo."jigyoshaJusho" LIKE  #{address} || '%'
                 </if>
             </if>
-        </if>
-        ORDER BY
-        dbT1005Kaigo."jigyoshaNo"
+        </if>) AS dbT1005Kaigo1
+        WHERE rank_number = 1
     </select>
 </mapper>

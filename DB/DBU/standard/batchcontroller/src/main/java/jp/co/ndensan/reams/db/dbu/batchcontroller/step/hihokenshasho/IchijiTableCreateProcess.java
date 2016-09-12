@@ -17,28 +17,28 @@ import jp.co.ndensan.reams.db.dba.entity.report.hihokenshashohakkoichiranhyo.Hih
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.hihokenshasho.IkkatsuHakkoProcessParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshasho.IkkatsuHakkoRelateEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshasho.SogoJigyoTaishoshaRelateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshashohakkoichiranhyo.IchiranyoShohakkoshaEntity;
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.hihokenshasho.IIkkatsuHakkoMapper;
 import jp.co.ndensan.reams.db.dbu.service.core.hihokenshashohakkoichiranhyo.HihokenshashoHakkoIchiranHyoFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.service.core.hihokenshanotsukiban.HihokenshanotsukibanFinder;
+import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
-import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
@@ -59,6 +59,7 @@ public class IchijiTableCreateProcess extends SimpleBatchProcessBase {
     private IkkatsuHakkoProcessParameter processPrm;
     private IkkatsuHakkoMybatisParameter mybatisPrm;
     private IIkkatsuHakkoMapper iIkkatsuHakkoMapper;
+    private boolean 両方フラグ;
     private List<HihokenshashoHakkoIchiranHyoItem> itemList;
     @BatchWriter
     private BatchReportWriter<HihokenshashoHakkoIchiranhyoReportSource> batchReportWriter;
@@ -85,8 +86,14 @@ public class IchijiTableCreateProcess extends SimpleBatchProcessBase {
             }
             iIkkatsuHakkoMapper.updateShisetyuJotaiFlag();
         } else {
+            Map<Integer, RString> 改頁Map = ReportUtil.get改頁項目(SubGyomuCode.DBA介護資格,
+                    processPrm.getShutsuryokujunId(),
+                    帳票ID);
+            Map<Integer, ISetSortItem> 出力順Map = ReportUtil.get出力順項目(SubGyomuCode.DBA介護資格,
+                    processPrm.getShutsuryokujunId(),
+                    帳票ID);
             List<IchiranyoShohakkoshaEntity> ichiranyoShohakkoshaEntityList = new HihokenshashoHakkoIchiranHyoFinder().
-                    createHihokenshashoHakkoIchiranHyo(processPrm.getKofuYMD(), データ抽出list, get出力順());
+                    createHihokenshashoHakkoIchiranHyo(processPrm.getKofuYMD(), データ抽出list, 出力順Map, 改頁Map);
             for (IchiranyoShohakkoshaEntity ichiranyoShohakkoshaEntity : ichiranyoShohakkoshaEntityList) {
                 itemList.add(setItem(ichiranyoShohakkoshaEntity));
             }
@@ -128,21 +135,12 @@ public class IchijiTableCreateProcess extends SimpleBatchProcessBase {
                 entity.get交付_非交付事由());
     }
 
-    private IOutputOrder get出力順() {
-        IOutputOrder shutsuryokujunId = null;
-        IChohyoShutsuryokujunFinder chohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
-        RString reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
-        if (!RString.isNullOrEmpty(processPrm.getShutsuryokujunId())) {
-            shutsuryokujunId = chohyoShutsuryokujunFinder.get出力順(SubGyomuCode.DBA介護資格,
-                    帳票ID,
-                    reamsLoginID,
-                    Long.valueOf(processPrm.getShutsuryokujunId().toString()));
-        }
-        return shutsuryokujunId;
-    }
-
     private void アクセスログ(IkkatsuHakkoRelateEntity entity) {
-        AccessLogger.log(AccessLogType.照会, PersonalData.of(entity.getShikibetsuCode()));
+        if (entity.getShikibetsuCode() != null && !entity.getShikibetsuCode().isEmpty()) {
+            AccessLogger.log(AccessLogType.照会, PersonalData.of(entity.getShikibetsuCode()));
+        } else {
+            AccessLogger.log(AccessLogType.照会, PersonalData.of(ShikibetsuCode.EMPTY));
+        }
     }
 
     private List<IkkatsuHakkoRelateEntity> データ抽出() {
@@ -164,7 +162,64 @@ public class IchijiTableCreateProcess extends SimpleBatchProcessBase {
     }
 
     private List<IkkatsuHakkoRelateEntity> get受給者のみ() {
-        return iIkkatsuHakkoMapper.getJukyushaDaichoIdo(mybatisPrm);
+        List<IkkatsuHakkoRelateEntity> 受給者EntityList = new ArrayList<>();
+        iIkkatsuHakkoMapper.create受給者台帳Temp(mybatisPrm);
+        iIkkatsuHakkoMapper.create総合事業対象者Temp(mybatisPrm);
+        List<SogoJigyoTaishoshaRelateEntity> 受給者台帳EntityList = iIkkatsuHakkoMapper.get受給者台帳Tempのみ();
+        for (SogoJigyoTaishoshaRelateEntity entity : 受給者台帳EntityList) {
+            受給者EntityList.add(get受給者台帳編集処理(entity));
+        }
+        List<SogoJigyoTaishoshaRelateEntity> 総合事業対象者EntityList = iIkkatsuHakkoMapper.get総合事業対象者Tempのみ();
+        for (SogoJigyoTaishoshaRelateEntity entity : 総合事業対象者EntityList) {
+            両方フラグ = false;
+            受給者EntityList.add(get総合事業対象者編集処理(entity, 両方フラグ));
+        }
+        List<SogoJigyoTaishoshaRelateEntity> 両方EntityList = iIkkatsuHakkoMapper.get受給者台帳と総合事業対象者の両方();
+        for (SogoJigyoTaishoshaRelateEntity entity : 両方EntityList) {
+            両方フラグ = false;
+            if (entity.get認定年月日().isBefore(entity.getチェックリスト実施日())) {
+                両方フラグ = true;
+                受給者EntityList.add(get総合事業対象者編集処理(entity, 両方フラグ));
+            } else {
+                受給者EntityList.add(get受給者台帳編集処理(entity));
+            }
+        }
+        return 受給者EntityList;
+    }
+
+    private IkkatsuHakkoRelateEntity get総合事業対象者編集処理(SogoJigyoTaishoshaRelateEntity entity, boolean 両方フラグ) {
+        IkkatsuHakkoRelateEntity 総合事業対象者Entity = new IkkatsuHakkoRelateEntity();
+        総合事業対象者Entity.setHihokenshaNo(entity.get被保険者番号());
+        if (両方フラグ) {
+            総合事業対象者Entity.setShikibetsuCode(getShikibetsuCode(entity.get識別コード_受給()));
+            総合事業対象者Entity.setShichosonCode(entity.get市町村コード_受給());
+        } else {
+            総合事業対象者Entity.setShikibetsuCode(getShikibetsuCode(entity.get識別コード_ビュー()));
+            総合事業対象者Entity.setShichosonCode(entity.get市町村コード_ビュー());
+        }
+        総合事業対象者Entity.setInsertTimestamp(entity.get挿入日時_総合());
+        総合事業対象者Entity.setLastUpdateTimestamp(entity.get更新日時_総合());
+        総合事業対象者Entity.setTaisyoKubun(new RString("2"));
+        return 総合事業対象者Entity;
+    }
+
+    private ShikibetsuCode getShikibetsuCode(RString value) {
+        ShikibetsuCode shikibetsuCode = ShikibetsuCode.EMPTY;
+        if (!RString.isNullOrEmpty(value)) {
+            shikibetsuCode = new ShikibetsuCode(value);
+        }
+        return shikibetsuCode;
+    }
+
+    private IkkatsuHakkoRelateEntity get受給者台帳編集処理(SogoJigyoTaishoshaRelateEntity entity) {
+        IkkatsuHakkoRelateEntity 受給者のみEntity = new IkkatsuHakkoRelateEntity();
+        受給者のみEntity.setHihokenshaNo(entity.get被保険者番号());
+        受給者のみEntity.setShikibetsuCode(getShikibetsuCode(entity.get識別コード_受給()));
+        受給者のみEntity.setShichosonCode(entity.get市町村コード_受給());
+        受給者のみEntity.setInsertTimestamp(entity.get挿入日時_受給());
+        受給者のみEntity.setLastUpdateTimestamp(entity.get更新日時_受給());
+        受給者のみEntity.setTaisyoKubun(new RString("1"));
+        return 受給者のみEntity;
     }
 
     private List<IkkatsuHakkoRelateEntity> get年齢到達予定者() {
@@ -195,7 +250,8 @@ public class IchijiTableCreateProcess extends SimpleBatchProcessBase {
                     mybatisPrm.getShikibetsuCode(),
                     new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()),
                     mybatisPrm.getPsmAtesaki(),
-                    mybatisPrm.getNenreiTotatsuYMD());
+                    mybatisPrm.getNenreiTotatsuYMD(),
+                    RString.EMPTY);
             List<IkkatsuHakkoRelateEntity> 年齢到達予定者List = iIkkatsuHakkoMapper.getNenreiTotatsuYotesha(mybatisParam);
             for (IkkatsuHakkoRelateEntity nenreiTotatsuYotesha : 年齢到達予定者List) {
                 HihokenshaNo hihokenshaNo = HihokenshanotsukibanFinder.createInstance().
@@ -243,6 +299,5 @@ public class IchijiTableCreateProcess extends SimpleBatchProcessBase {
         } else {
             受給者台帳異動Map.put(被保険者異動Entiy.getHihokenshaNo().value(), 被保険者異動Entiy);
         }
-
     }
 }

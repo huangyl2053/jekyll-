@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core;
 
-import jp.co.ndensan.reams.db.dbz.business.validation.NinteiInputValidationMessage;
+import jp.co.ndensan.reams.db.dbz.business.core.validation.NinteiInputValidationMessage;
 import jp.co.ndensan.reams.uz.uza.core.validation.IValidatable;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

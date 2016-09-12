@@ -4,8 +4,16 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
-            Events.onClick_BtnUpload = function () {
-                return "onClick_BtnUpload";
+            Events.uploadFiles1 = function () {
+                return "uploadFiles1";
+            };
+
+            Events.uploadFiles = function () {
+                return "uploadFiles";
+            };
+
+            Events.close_Dialog = function () {
+                return "close_Dialog";
             };
             return Events;
         })();
@@ -31,6 +39,10 @@ var DBZ;
                 return new UZA.Panel(this.convFiledNameSelf());
             };
 
+            Controls.prototype.uplUploadFile1 = function () {
+                return new UZA.UploadPanel(this.convFiledName("uplUploadFile1"));
+            };
+
             Controls.prototype.uplUploadFile = function () {
                 return new UZA.UploadPanel(this.convFiledName("uplUploadFile"));
             };
@@ -41,6 +53,10 @@ var DBZ;
 
             Controls.prototype.lblUploadFileName = function () {
                 return new UZA.Label(this.convFiledName("lblUploadFileName"));
+            };
+
+            Controls.prototype.btnUpload1 = function () {
+                return new UZA.Button(this.convFiledName("btnUpload1"));
             };
 
             Controls.prototype.btnUpload = function () {

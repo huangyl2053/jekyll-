@@ -7,15 +7,13 @@ package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmenjokyo;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenjokyo.GemmenJokyoParameter;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.common.NursingCareInformationCodeEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.common.NursingCareInformationCodeEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.homonkaigogengaku.HomonKaigoRiyoshaFutangakuGengakuEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.shafukukeigen.ShafukuRiyoshaFutanKeigenEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.tokubetsuchikikasangemmen.TokubetsuchiikiKasanGemmenEntity;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
 
@@ -36,14 +34,6 @@ public interface IGemmenJokyoMapper {
     List<NursingCareInformationCodeEntity> get要介護認定情報(GemmenJokyoParameter parameter);
 
     /**
-     * 申請中情報を取得します。
-     *
-     * @param parameter パラメータク
-     * @return DbT4001JukyushaDaichoEntity
-     */
-    DbT4001JukyushaDaichoEntity get申請中情報(GemmenJokyoParameter parameter);
-
-    /**
      * 老齢年金情報を取得します。
      *
      * @param parameter パラメータク
@@ -58,14 +48,6 @@ public interface IGemmenJokyoMapper {
      * @return List<DbT4021ShiharaiHohoHenkoEntity>
      */
     List<DbT4021ShiharaiHohoHenkoEntity> get支払方法変更情報(GemmenJokyoParameter parameter);
-
-    /**
-     * 支払方法変更情報を取得します。
-     *
-     * @param parameter パラメータク
-     * @return List<DbV1001HihokenshaDaichoEntity>
-     */
-    List<DbV1001HihokenshaDaichoEntity> get識別コード(GemmenJokyoParameter parameter);
 
     /**
      * 利用者負担割合明細を取得します。

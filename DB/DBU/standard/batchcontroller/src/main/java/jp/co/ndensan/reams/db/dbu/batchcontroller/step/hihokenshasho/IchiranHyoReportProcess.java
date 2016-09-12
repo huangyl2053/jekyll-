@@ -6,28 +6,43 @@
 package jp.co.ndensan.reams.db.dbu.batchcontroller.step.hihokenshasho;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dba.business.report.hihokenshashohakkoichiranhyo.HihokenshashoHakkoIchiranHyoItem;
 import jp.co.ndensan.reams.db.dba.business.report.hihokenshashohakkoichiranhyo.HihokenshashoHakkoIchiranHyoReport;
 import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
+import jp.co.ndensan.reams.db.dba.entity.report.hihokenshadaichohakkoichiranhyo.HihokenshaDaichoHakkoIchiranhyoReportSource;
 import jp.co.ndensan.reams.db.dba.entity.report.hihokenshashohakkoichiranhyo.HihokenshashoHakkoIchiranhyoReportSource;
+import jp.co.ndensan.reams.db.dbu.definition.core.hihokenshasho.IchiranHyoReportBreakItem;
+import jp.co.ndensan.reams.db.dbu.definition.core.hihokenshasho.IchiranHyoReportShutsuryoItem;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hihokenshasho.IkkatsuHakkoMybatisParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.hihokenshasho.IkkatsuHakkoProcessParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshasho.IkkatsuHakkoRelateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshashohakkoichiranhyo.IchiranyoShohakkoshaEntity;
 import jp.co.ndensan.reams.db.dbu.service.core.hihokenshashohakkoichiranhyo.HihokenshashoHakkoIchiranHyoFinder;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
+import jp.co.ndensan.reams.db.dbz.business.core.mybatisorderbycreator.BreakPageCreator;
+import jp.co.ndensan.reams.db.dbz.business.core.mybatisorderbycreator.MyBatisOrderByCreator;
+import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
-import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -36,14 +51,18 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  * @reamsid_L DBU-0420-020 duanzhanli
  *
  */
-public class IchiranHyoReportProcess extends BatchProcessBase<IkkatsuHakkoRelateEntity> {
+public class IchiranHyoReportProcess extends BatchKeyBreakBase<IkkatsuHakkoRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.hihokenshasho.IIkkatsuHakkoMapper.getHihokenshaIchiran");
     private static final ReportId 帳票ID = ReportIdDBA.DBA200003.getReportId();
+    private static final int INT3 = 3;
+    private static final int INT4 = 4;
     private List<IkkatsuHakkoRelateEntity> 帳票用Entityリスト;
     private IkkatsuHakkoProcessParameter processPrm;
+    private IkkatsuHakkoMybatisParameter mybatisPrm;
     private List<HihokenshashoHakkoIchiranHyoItem> itemList;
+    private static List<RString> pageBreakKeys;
     @BatchWriter
     private BatchReportWriter<HihokenshashoHakkoIchiranhyoReportSource> batchReportWriter;
     private ReportSourceWriter<HihokenshashoHakkoIchiranhyoReportSource> reportSourceWriter;
@@ -52,29 +71,51 @@ public class IchiranHyoReportProcess extends BatchProcessBase<IkkatsuHakkoRelate
     protected void initialize() {
         帳票用Entityリスト = new ArrayList<>();
         itemList = new ArrayList<>();
+        getSQLOrderBy();
+        getPageBreakKeys();
     }
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID, processPrm.toIkkatsuHakkoMybatisParameter());
+        return new BatchDbReader(MYBATIS_SELECT_ID, mybatisPrm);
 
     }
 
     @Override
     protected void createWriter() {
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(帳票ID.value()).create();
+        if (pageBreakKeys != null && !pageBreakKeys.isEmpty()) {
+            batchReportWriter = BatchReportFactory.createBatchReportWriter(帳票ID.value()).
+                    addBreak(new BreakerCatalog<HihokenshaDaichoHakkoIchiranhyoReportSource>().simplePageBreaker(pageBreakKeys)).create();
+        } else {
+            batchReportWriter = BatchReportFactory.createBatchReportWriter(帳票ID.value()).create();
+        }
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
     }
 
     @Override
-    protected void process(IkkatsuHakkoRelateEntity entity) {
+    protected void usualProcess(IkkatsuHakkoRelateEntity entity) {
+        アクセスログ(entity);
         帳票用Entityリスト.add(entity);
+    }
+
+    private void アクセスログ(IkkatsuHakkoRelateEntity entity) {
+        if (entity.getShikibetsuCode() != null && !entity.getShikibetsuCode().isEmpty()) {
+            AccessLogger.log(AccessLogType.照会, PersonalData.of(entity.getShikibetsuCode()));
+        } else {
+            AccessLogger.log(AccessLogType.照会, PersonalData.of(ShikibetsuCode.EMPTY));
+        }
     }
 
     @Override
     protected void afterExecute() {
+        Map<Integer, RString> 改頁Map = ReportUtil.get改頁項目(SubGyomuCode.DBA介護資格,
+                processPrm.getShutsuryokujunId(),
+                帳票ID);
+        Map<Integer, ISetSortItem> 出力順Map = ReportUtil.get出力順項目(SubGyomuCode.DBA介護資格,
+                processPrm.getShutsuryokujunId(),
+                帳票ID);
         List<IchiranyoShohakkoshaEntity> ichiranyoShohakkoshaEntityList = new HihokenshashoHakkoIchiranHyoFinder().
-                createHihokenshashoHakkoIchiranHyo(processPrm.getKofuYMD(), 帳票用Entityリスト, get出力順());
+                createHihokenshashoHakkoIchiranHyo(processPrm.getKofuYMD(), 帳票用Entityリスト, 出力順Map, 改頁Map);
         for (IchiranyoShohakkoshaEntity entity : ichiranyoShohakkoshaEntityList) {
             itemList.add(setItem(entity));
         }
@@ -111,17 +152,76 @@ public class IchiranHyoReportProcess extends BatchProcessBase<IkkatsuHakkoRelate
                 entity.get交付_非交付事由());
     }
 
-    private IOutputOrder get出力順() {
-        IOutputOrder shutsuryokujunId = null;
-        IChohyoShutsuryokujunFinder chohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
-        RString reamsLoginID = UrControlDataFactory.createInstance().getLoginInfo().getUserId();
-        if (!RString.isNullOrEmpty(processPrm.getShutsuryokujunId())) {
-            shutsuryokujunId = chohyoShutsuryokujunFinder.get出力順(SubGyomuCode.DBA介護資格,
-                    帳票ID,
-                    reamsLoginID,
-                    Long.valueOf(processPrm.getShutsuryokujunId().toString()));
+    private void getSQLOrderBy() {
+        IOutputOrder shutsuryokujunId = ReportUtil.get出力順ID(SubGyomuCode.DBA介護資格,
+                processPrm.getShutsuryokujunId(),
+                帳票ID);
+        RString orderBy = MyBatisOrderByCreator.createWithOutOrderBy(IchiranHyoReportShutsuryoItem.class, shutsuryokujunId);
+        mybatisPrm = IkkatsuHakkoMybatisParameter.
+                createSelectByKeyParam(processPrm.getShutsuryokuJokenCode(),
+                        getKonkaiYMDHMS(processPrm.getKonkaiFromYMD(), processPrm.getKonkaiFromHMS()),
+                        processPrm.getKonkaiToYMD(),
+                        getKonkaiYMDHMS(processPrm.getKonkaiToYMD(), processPrm.getKonkaiToHMS()),
+                        processPrm.getKonkaiKijunYMD(),
+                        getKonkaiYMDHMS(processPrm.getKonkaiKijunYMD(), processPrm.getKonkaiKijunHMS()),
+                        processPrm.getKofuYMD(),
+                        processPrm.getShinseishoKanriNo(),
+                        processPrm.getSeinengappiToYMD(),
+                        processPrm.getSeinengappiFromYMD(),
+                        processPrm.getHihokenshaNo(),
+                        processPrm.getShikibetsuCode(),
+                        processPrm.getPsmShikibetsuTaisho(),
+                        processPrm.getPsmAtesaki(),
+                        processPrm.getNenreiTotatsuYMD(),
+                        orderBy);
+    }
+
+    private RDateTime getKonkaiYMDHMS(FlexibleDate konkaiYMD, RTime konkaiHMS) {
+        RDateTime konkaiYMDHMS = RDateTime.of(konkaiYMD.getYearValue(),
+                konkaiYMD.getMonthValue(),
+                konkaiYMD.getDayValue(),
+                konkaiHMS.getHour(),
+                konkaiHMS.getMinute(),
+                konkaiHMS.getSecond(),
+                konkaiHMS.getMillisOfSecond());
+        return konkaiYMDHMS;
+    }
+
+    private void getPageBreakKeys() {
+        Map<Integer, RString> 改頁Map = ReportUtil.get改頁項目(SubGyomuCode.DBA介護資格,
+                processPrm.getShutsuryokujunId(),
+                帳票ID);
+        List<RString> pageBreakKeyList = new ArrayList<>();
+        if (!RString.isNullOrEmpty(改頁Map.get(0))) {
+            pageBreakKeyList.add(BreakPageCreator.getBreakPageName(IchiranHyoReportBreakItem.class, 改頁Map.get(0)));
         }
-        return shutsuryokujunId;
+        if (!RString.isNullOrEmpty(改頁Map.get(1))) {
+            pageBreakKeyList.add(BreakPageCreator.getBreakPageName(IchiranHyoReportBreakItem.class, 改頁Map.get(1)));
+        }
+        if (!RString.isNullOrEmpty(改頁Map.get(2))) {
+            pageBreakKeyList.add(BreakPageCreator.getBreakPageName(IchiranHyoReportBreakItem.class, 改頁Map.get(2)));
+        }
+        if (!RString.isNullOrEmpty(改頁Map.get(INT3))) {
+            pageBreakKeyList.add(BreakPageCreator.getBreakPageName(IchiranHyoReportBreakItem.class, 改頁Map.get(INT3)));
+        }
+        if (!RString.isNullOrEmpty(改頁Map.get(INT4))) {
+            pageBreakKeyList.add(BreakPageCreator.getBreakPageName(IchiranHyoReportBreakItem.class, 改頁Map.get(INT4)));
+        }
+        pageBreakKeys = Collections.unmodifiableList(pageBreakKeyList);
+
+    }
+
+    @Override
+    protected void keyBreakProcess(IkkatsuHakkoRelateEntity current) {
+        if (hasBrek(getBefore(), current)) {
+            HihokenshashoHakkoIchiranHyoReport report = HihokenshashoHakkoIchiranHyoReport.createReport(itemList);
+            report.writeBy(reportSourceWriter);
+            itemList = new ArrayList<>();
+        }
+    }
+
+    private boolean hasBrek(IkkatsuHakkoRelateEntity before, IkkatsuHakkoRelateEntity current) {
+        return !before.getHihokenshaNo().equals(current.getHihokenshaNo());
     }
 
 }

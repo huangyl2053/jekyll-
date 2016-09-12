@@ -14,9 +14,9 @@ import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshoiraijoho.Sh
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshojoho.ShujiiIkenshoJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshojoho.ShujiiIkenshoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku13;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -71,11 +71,11 @@ public class TokubetsuIryoIkenHandler {
      */
     public void onLoad() {
         NinteiShinseiJoho shinseiJohoModels
-                = ViewStateHolder.get(ViewStateKeys.主治医意見書登録_意見書情報, NinteiShinseiJoho.class);
+                = ViewStateHolder.get(ViewStateKeys.意見書情報, NinteiShinseiJoho.class);
         ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(
-                ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_申請書管理番号, RString.class));
+                ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class));
         int 履歴番号 = Integer.parseInt(
-                ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, RString.class).toString());
+                ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, RString.class).toString());
         ShujiiIkenshoIraiJohoIdentifier 依頼情報Key = new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号);
         ShujiiIkenshoJohoIdentifier 主治医意見書情報Key = new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号);
         if (shinseiJohoModels.getShujiiIkenshoIraiJoho(依頼情報Key).
@@ -97,11 +97,11 @@ public class TokubetsuIryoIkenHandler {
         List<KeyValueDataSource> 特別な対応 = div.getChkTokubetsuTaiou().getDataSource();
         List<KeyValueDataSource> 失禁への対応 = div.getChkShikkinTaio().getDataSource();
         NinteiShinseiJoho shinseiJohoModels
-                = ViewStateHolder.get(ViewStateKeys.主治医意見書登録_意見書情報, NinteiShinseiJoho.class);
+                = ViewStateHolder.get(ViewStateKeys.意見書情報, NinteiShinseiJoho.class);
         ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(
-                ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_申請書管理番号, RString.class));
+                ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class));
         int 履歴番号 = Integer.parseInt(
-                ViewStateHolder.get(ViewStateKeys.要介護認定申請検索_主治医意見書作成依頼履歴番号, RString.class).toString());
+                ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, RString.class).toString());
         ShujiiIkenshoIraiJohoIdentifier 依頼情報の識別子 = new ShujiiIkenshoIraiJohoIdentifier(管理番号, 履歴番号);
         ShujiiIkenshoJohoIdentifier 意見書情報の識別子 = new ShujiiIkenshoJohoIdentifier(管理番号, 履歴番号);
 
@@ -138,7 +138,7 @@ public class TokubetsuIryoIkenHandler {
                     = new ShujiiIkenshoIkenItemIdentifier(管理番号, 履歴番号, Integer.parseInt(失禁への対応KEY.toString()));
             データ編集(shinseiJohoModels, 依頼情報の識別子, 意見書情報の識別子, true, 意見書意見項目の識別子);
         }
-        ViewStateHolder.put(ViewStateKeys.主治医意見書登録_意見書情報, shinseiJohoModels);
+        ViewStateHolder.put(ViewStateKeys.意見書情報, shinseiJohoModels);
     }
 
     private void モード判断(
@@ -313,7 +313,7 @@ public class TokubetsuIryoIkenHandler {
                     shinseiJohoModels.getShujiiIkenshoIraiJoho(依頼情報Key).createBuilderForEdit().setShujiiIkenshoJoho(shinseiJohoModels.getShujiiIkenshoIraiJoho(依頼情報Key).
                             getSeishinTechoNini(主治医意見書情報Key).createBuilderForEdit().setShujiiIkenshoIkenItem(意見書情報).build()).build());
         }
-        ViewStateHolder.put(ViewStateKeys.主治医意見書登録_意見書情報, shinseiJohoModels);
+        ViewStateHolder.put(ViewStateKeys.意見書情報, shinseiJohoModels);
     }
 
     private void データクリア(NinteiShinseiJoho shinseiJohoModels,

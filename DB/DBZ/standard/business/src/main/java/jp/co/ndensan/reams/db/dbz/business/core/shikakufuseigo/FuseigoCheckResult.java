@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbz.business.core.shikakufuseigo;
 
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.core.fuseigoriyu.FuseigoRiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakufuseigo.DaichoFuseigoJotai;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 不整合チェック結果のビジネスクラスです
@@ -23,7 +23,7 @@ public class FuseigoCheckResult {
     private FuseigoRiyu 不整合理由;
     private IKojin 個人;
     private HihokenshaDaicho 現在の資格の情報;
-    private RString 被保険者台帳状態;
+    private DaichoFuseigoJotai 被保険者台帳状態;
     private HihokenshaDaicho 修正後の資格の情報;
 
 }

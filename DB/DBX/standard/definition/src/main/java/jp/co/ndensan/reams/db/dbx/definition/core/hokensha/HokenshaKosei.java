@@ -5,87 +5,71 @@
  */
 package jp.co.ndensan.reams.db.dbx.definition.core.hokensha;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 保険者の構成です。
+ * 保険者構成を表す列挙型です。
  *
- * @author N3327 三浦 凌
- * @author n8223 朴義一
+ * @reamsid_L DBX-9999-023 liangbc
  */
 public enum HokenshaKosei {
 
     /**
-     * 単一市町村の保険者であることを表します。<br/>
-     * コード:"1"
+     * コード:1 名称:単一市町村 略称:定義なし
      */
-    単一市町村("1"),
+    単一市町村("1", "単一市町村"),
     /**
-     * 広域保険者であることを表します。<br/>
-     * コード:"2"
+     * コード:2 名称:広域市町村 略称:定義なし
      */
-    広域市町村("2"),
+    広域市町村("2", "広域市町村"),
     /**
-     * 広域保険者あることを表します。<br/>
-     * コード:"3"
+     * コード:3 名称:広域保険者 略称:定義なし
      */
-    広域保険者("3"),
+    広域保険者("3", "広域保険者"),
     /**
-     * 広域審査会であることを表します。<br/>
-     * コード:"4"
+     * コード:4 名称:広域審査会 略称:定義なし
      */
-    広域審査会("4");
+    広域審査会("4", "広域審査会");
 
-    private final RString theCode;
+    private final RString code;
+    private final RString fullName;
 
-    private HokenshaKosei(String code) {
-        this.theCode = new RString(code);
+    private HokenshaKosei(String code, String fullname) {
+        this.code = new RString(code);
+        this.fullName = new RString(fullname);
     }
 
     /**
-     * コードを返します。
+     * 保険者構成のコードを返します。
      *
-     * @return コード
+     * @return 保険者構成のコード
      */
-    public RString code() {
-        return this.theCode;
+    public RString getコード() {
+        return code;
     }
 
     /**
-     * 引数のコードに対応する HokenshaKosei を返します。
+     * 保険者構成の名称を返します。
      *
-     * @param code コード
-     * @return コードに対応する HokenshaKosei
-     * @throws IllegalArgumentException コードに対応する HokenshaKosei が無い時
+     * @return 保険者構成の名称
      */
-    public static HokenshaKosei toValue(RString code) throws IllegalArgumentException {
-        HokenshaKosei value = CodeToValue.get(code);
-        if (value != null) {
-            return value;
-        }
-        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage(HokenshaKosei.class.getSimpleName()));
+    public RString get名称() {
+        return fullName;
     }
 
-    //<editor-fold defaultstate="collapsed" desc="CodeToValue">
-    private static final class CodeToValue {
-
-        private static final Map<RString, HokenshaKosei> DICTHIONARY;
-
-        static {
-            Map<RString, HokenshaKosei> map = new HashMap<>();
-            for (HokenshaKosei value : values()) {
-                map.put(value.code(), value);
+    /**
+     * 保険者構成のコードと一致する内容を探します。
+     *
+     * @param code 保険者構成のコード
+     * @return {@code code} に対応する保険者構成
+     */
+    public static HokenshaKosei toValue(RString code) {
+        for (HokenshaKosei hokenshaKosei : HokenshaKosei.values()) {
+            if (hokenshaKosei.code.equals(code)) {
+                return hokenshaKosei;
             }
-            DICTHIONARY = Collections.unmodifiableMap(map);
         }
-
-        static HokenshaKosei get(RString code) {
-            return DICTHIONARY.get(code);
-        }
+        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("保険者構成"));
     }
-    //</editor-fold>
 }

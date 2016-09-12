@@ -4,14 +4,6 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
-            Events.onClick_btnClear = function () {
-                return "onClick_btnClear";
-            };
-
-            Events.onClick_btnSearch = function () {
-                return "onClick_btnSearch";
-            };
-
             Events.onBlur_txtMaxNumber = function () {
                 return "onBlur_txtMaxNumber";
             };
@@ -85,14 +77,6 @@ var DBZ;
 
             Controls.prototype.ButtonsForHihokenshaFinder = function () {
                 return new UZA.Panel(this.convFiledName("ButtonsForHihokenshaFinder"));
-            };
-
-            Controls.prototype.btnClear = function () {
-                return new UZA.Button(this.convFiledName("btnClear"));
-            };
-
-            Controls.prototype.btnSearch = function () {
-                return new UZA.Button(this.convFiledName("btnSearch"));
             };
 
             Controls.prototype.txtMaxNumber = function () {

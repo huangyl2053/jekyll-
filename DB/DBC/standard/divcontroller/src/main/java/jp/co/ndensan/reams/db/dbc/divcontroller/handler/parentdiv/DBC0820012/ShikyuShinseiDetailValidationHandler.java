@@ -5,9 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820012;
 
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShinsei;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820012.ShikyuShinseiDetailDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820012.pnlShinseiDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -50,7 +49,8 @@ public class ShikyuShinseiDetailValidationHandler {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         RString 処理モード = div.getPanelHead().getTxtShoriMode().getValue();
         if (MODEL_ADD.equals(処理モード)) {
-            if (is入力()) {
+            if (div.getPanelHead().getTxtSeiribango().getValue() == null
+                    || div.getPanelHead().getTxtSeiribango().getValue().isEmpty()) {
                 validPairs.add(new ValidationMessageControlPair(
                         new IdocheckMessages(UrErrorMessages.存在しない, SHOUKANSIKYUUSINSEI.toString())));
             }
@@ -61,37 +61,6 @@ public class ShikyuShinseiDetailValidationHandler {
             }
         }
         return validPairs;
-    }
-
-    private boolean is入力() {
-        pnlShinseiDiv pnlDiv = div.getPnlShinsei();
-        if (pnlDiv.getTxtShinseiYMD().getValue() == null) {
-            return true;
-        }
-        if (pnlDiv.getTxtUketsukeYMD().getValue() == null) {
-            return true;
-        }
-        if (pnlDiv.getTxtKisaiHokensyaBango().getValue() == null
-                || pnlDiv.getTxtKisaiHokensyaBango().getValue().isEmpty()) {
-            return true;
-        }
-        if (pnlDiv.getTxtShimeikana().getDomain() == null
-                || pnlDiv.getTxtShimeikana().getDomain().isEmpty()) {
-            return true;
-        }
-        if (pnlDiv.getTxtShimeiKanji().getDomain() == null
-                || pnlDiv.getTxtShimeiKanji().getDomain().isEmpty()) {
-            return true;
-        }
-        if (pnlDiv.getTxtTelNo().getDomain() == null
-                || pnlDiv.getTxtTelNo().getDomain().isEmpty()) {
-            return true;
-        }
-        if (pnlDiv.getTxtMulShinseiRiyu().getValue() == null
-                || pnlDiv.getTxtMulShinseiRiyu().getValue().isEmpty()) {
-            return true;
-        }
-        return pnlDiv.getTxtNumShiharaKingakuGk().getValue() == null;
     }
 
     /**
@@ -124,6 +93,10 @@ public class ShikyuShinseiDetailValidationHandler {
         Decimal 保険請求金額 = div.getPnlShinsei().getTxtNumHokentaisyoHiyouGaku().getValue();
         Decimal 自己負担額合計 = div.getPnlShinsei().getTxtNumHokenKyufuGaku().getValue();
         Decimal 支払金額合計 = div.getPnlShinsei().getTxtNumShiharaKingakuGk().getValue();
+        if ((自己負担額合計 == null || Decimal.ZERO.equals(自己負担額合計))
+                && (保険請求金額 == null || Decimal.ZERO.equals(保険請求金額))) {
+            return validPairs;
+        }
         保険請求金額 = (保険請求金額 == null ? Decimal.ZERO : 保険請求金額);
         自己負担額合計 = (自己負担額合計 == null ? Decimal.ZERO : 自己負担額合計);
         支払金額合計 = (支払金額合計 == null ? Decimal.ZERO : 支払金額合計);

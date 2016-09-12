@@ -23,9 +23,9 @@
         <result property="seibetsu" column="dbT5912ShujiiJoho_seibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
 
-    <select id="selectShujiiIchiranList"
+    <select resultOrdered="true" id="selectShujiiIchiranList"
             resultMap="resultMap_ShujiiJohoRelateEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiijoho.ShujiiMasterMapperParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiijoho.ShujiiMasterMapperParameter" fetchSize="500">
         SELECT
         DbT5912ShujiiJoho."dbT5912ShujiiJoho_shichosonCode" AS dbT5912ShujiiJoho_shichosonCode,
         DbT7051KoseiShichosonMaster."dbT7051KoseiShichosonMaster_shichosonMeisho" AS dbT7051KoseiShichosonMaster_shichosonMeisho,
@@ -165,9 +165,9 @@
         </if>
     </select>
     <!--主治医情報の重複チェック-->
-    <select id="selectShujiiJohoCount"
+    <select resultOrdered="true" id="selectShujiiJohoCount"
             resultType="int"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiijoho.ShujiiMasterSearchParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiijoho.ShujiiMasterSearchParameter" fetchSize="500">
         SELECT
         COUNT(0)
         FROM
@@ -181,9 +181,9 @@
     </select>
 
     <!-- 主治医情報の削除処理-->
-    <select id="selectNinteiShinseiJohoCount"
+    <select resultOrdered="true" id="selectNinteiShinseiJohoCount"
             resultType="int"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiijoho.ShujiiMasterSearchParameter">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiijoho.ShujiiMasterSearchParameter">
         SELECT
         COUNT(0)
         FROM
@@ -200,9 +200,9 @@
         DbT5101Nintei."shujiiCode" = #{主治医コード}
     </select>
 
-    <select id="selectIkenshoIraiJohoCount"
+    <select resultOrdered="true" id="selectIkenshoIraiJohoCount"
             resultType="int"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiijoho.ShujiiMasterSearchParameter">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiijoho.ShujiiMasterSearchParameter">
         SELECT
         COUNT(0)
         FROM
@@ -223,8 +223,8 @@
         DbT5301Shuji."shujiiCode" = #{主治医コード}
     </select>
 
-    <select id="selectShujiiJohoList"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiijoho.ShujiiMasterMapperParameter"
+    <select resultOrdered="true" id="selectShujiiJohoList"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiijoho.ShujiiMasterMapperParameter"
             resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5912ShujiiJohoMapper.ResultMap_DbT5912ShujiiJohoEntity"  fetchSize="500" >
         SELECT
         DbT5912ShujiiJoho.*
@@ -292,9 +292,9 @@
         DbT5912ShujiiJoho."dbT5912ShujiiJoho_shujiiCode";
     </select>
 
-    <select id="selectShujiiIryoKikanJoho"
+    <select resultOrdered="true" id="selectShujiiIryoKikanJoho"
             resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiijoho.ShujiiMasterSearchParameter">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiijoho.ShujiiMasterSearchParameter">
         SELECT
         "UrT0516IryoKikan"."iryoKikanMeisho"
         FROM
@@ -303,9 +303,9 @@
         "UrT0516IryoKikan"."iryoKikanCode" = #{主治医医療機関コード}
     </select>
 
-    <select id="selectShichosonMeisho"
+    <select resultOrdered="true" id="selectShichosonMeisho"
             resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shujiijoho.ShujiiMasterSearchParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiijoho.ShujiiMasterSearchParameter" fetchSize="500">
         SELECT
         DbT7051KoseiShi."shichosonMeisho"
         FROM

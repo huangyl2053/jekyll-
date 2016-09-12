@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param;
 import java.util.HashMap;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HasuChoseiHoho;
+import jp.co.ndensan.reams.db.dbb.definition.core.fuka.HasuChoseiTaisho;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -22,6 +23,7 @@ public class NengakuSeigyoJoho {
     private HasuChoseiHoho 端数調整方法;
     private Decimal 端数単位_ランク用;
     private HasuChoseiHoho 端数調整方法_ランク用;
+    private HasuChoseiTaisho 端数調整対象;
     private Map<RString, RankBetsuKijunKingaku> ランク別制御情報;
 
     /**
@@ -94,6 +96,24 @@ public class NengakuSeigyoJoho {
      */
     protected void set端数調整方法_ランク用(HasuChoseiHoho 端数調整方法_ランク用) {
         this.端数調整方法_ランク用 = 端数調整方法_ランク用;
+    }
+
+    /**
+     * 端数調整方法_ランク用を取得する。
+     *
+     * @return Decimal
+     */
+    public HasuChoseiTaisho get端数調整対象() {
+        return 端数調整対象;
+    }
+
+    /**
+     * 端数調整対象を設定する。
+     *
+     * @param 端数調整対象 端数調整対象
+     */
+    protected void set端数調整対象(HasuChoseiTaisho 端数調整対象) {
+        this.端数調整対象 = 端数調整対象;
     }
 
     /**

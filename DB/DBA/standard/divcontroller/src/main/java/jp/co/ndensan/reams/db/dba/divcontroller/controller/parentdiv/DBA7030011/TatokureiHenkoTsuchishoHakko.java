@@ -7,19 +7,18 @@ import jp.co.ndensan.reams.db.dba.business.core.tajushochitokureisyakanri.Tashic
 import jp.co.ndensan.reams.db.dba.business.core.tashichosonjushochitokureishisetsuhenkotsuchisho.TatokuKanrenChohyoHenkoTsuchishoBusiness;
 import jp.co.ndensan.reams.db.dba.business.core.tatokukanrenchohyoshiji.TatokuKanrenChohyoShijiData;
 import jp.co.ndensan.reams.db.dba.business.report.shisetsuhenkotsuchisho.ShisetsuHenkoTsuchishoItem;
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.tatokukanrenchohyoshijidata.TatokuKanrenParameter;
+import jp.co.ndensan.reams.db.dba.definition.mybatisprm.tatokukanrenchohyoshijidata.TatokuKanrenParameter;
 import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7030011.TatokureiHenkoTsuchishoHakkoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA7030011.TatokureiHenkoTsuchishoHakkoHandler;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA7030011.TatokureiHenkoTsuchishoHakkoValidationHandler;
 import jp.co.ndensan.reams.db.dba.service.core.tajushochito.TaJushochiTokureisyaKanriManager;
+import jp.co.ndensan.reams.db.dba.service.core.tashichosonjushochitokureisharenrakuhyo.TashichosonJushochitokureishaRenrakuhyoFinder;
 import jp.co.ndensan.reams.db.dba.service.core.tashichosonjushochitokureishisetsuhenkotsuchisho.TaShichosonJushochiTokureiShisetsuHenkoTsuchishoFinder;
 import jp.co.ndensan.reams.db.dba.service.report.shisetsuhenkotsuchisho.ShisetsuHenkoTsuchishoPrintService;
-import jp.co.ndensan.reams.db.dba.service.tashichosonjushochitokureisharenrakuhyo.TashichosonJushochitokureishaRenrakuhyoFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokurei;
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokureiIdentifier;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -59,19 +58,20 @@ public class TatokureiHenkoTsuchishoHakko {
      * @return ResponseData<TatokureiHenkoTsuchishoHakkoDiv>
      */
     public ResponseData<TatokureiHenkoTsuchishoHakkoDiv> onLoad(TatokureiHenkoTsuchishoHakkoDiv div) {
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード();
-        div.getCcdKaigoAtenaInfo().onLoad(識別コード);
-        div.getCcdKaigoShikakuJoho().onLoad(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get被保険者番号());
-        List<TaJushochiTokureisyaKanriMaster> tekiyoJohoList = get適用情報(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード());
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード();
+        div.getCcdKaigoAtenaInfo().initialize(識別コード);
+        div.getCcdKaigoShikakuJoho().initialize(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号());
+        List<TaJushochiTokureisyaKanriMaster> tekiyoJohoList = get適用情報(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード());
         if (tekiyoJohoList != null && !tekiyoJohoList.isEmpty()) {
             TashichosonBusiness 住所地特例Model = TaJushochiTokureisyaKanriManager.createInstance().get他市町村住所地特例(識別コード);
-            ViewStateHolder.put(ViewStateKeys.他住所地特例者管理_他住所地特例, Models.create(住所地特例Model.get住所地特例List()));
+            ViewStateHolder.put(ViewStateKeys.他住所地特例, Models.create(住所地特例Model.get住所地特例List()));
         } else {
-            ViewStateHolder.put(ViewStateKeys.他住所地特例者管理_他住所地特例, Models.create(new ArrayList()));
+            ViewStateHolder.put(ViewStateKeys.他住所地特例, Models.create(new ArrayList()));
         }
         createHandler(div).適用情報Gridの設定(tekiyoJohoList == null ? new ArrayList() : tekiyoJohoList);
         createHandler(div).適用情報の名称編集(ReportIdDBA.DBA100006.getReportId());
-        createHandler(div).get初期文書番号取得(ReportIdDBA.DBA100007.getReportId());
+        createHandler(div).get初期文書番号取得(ReportIdDBA.DBA100006.getReportId());
+        div.getTajutokuTekiyoJohoIchiran().getReportPublish().setIsPublish(true);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(発行ボタン, true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(発行チェックボタン, true);
         return ResponseData.of(div).respond();
@@ -101,8 +101,8 @@ public class TatokureiHenkoTsuchishoHakko {
         IBunshoNoFinder bushoFineder = BunshoNoFinderFactory.createInstance();
         BunshoNo bushoNo = bushoFineder.get文書番号管理(ReportIdDBA.DBA100006.getReportId(), FlexibleDate.getNowDate());
         if (bushoNo != null) {
-            div.getTajutokuTekiyoJohoIchiran().getReportPublish().
-                    getHenshuNaiyo().getTxtBunshoBango().setValue(bushoNo.edit文書番号(countedItem.nextString()));
+            div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().
+                    getCcdBunshoBangoInput().setDecorationClass(bushoNo.edit文書番号(countedItem.nextString()));
         }
         return ResponseData.of(div).respond();
     }
@@ -115,9 +115,9 @@ public class TatokureiHenkoTsuchishoHakko {
      */
     public ResponseData<SourceDataCollection> btnPrint(TatokureiHenkoTsuchishoHakkoDiv div) {
 
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード();
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード();
         Models<TashichosonJushochiTokureiIdentifier, TashichosonJushochiTokurei> 他市町村住所地特例
-                = ViewStateHolder.get(ViewStateKeys.他住所地特例者管理_他住所地特例, Models.class);
+                = ViewStateHolder.get(ViewStateKeys.他住所地特例, Models.class);
         TatokuKanrenChohyoShijiData business = 帳票発行指示データ作成(div, false);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(発行チェックボタン, true);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(発行ボタン, true);
@@ -167,7 +167,7 @@ public class TatokureiHenkoTsuchishoHakko {
         return TashichosonJushochitokureishaRenrakuhyoFinder.createInstance().
                 setChohyoData(TatokuKanrenParameter.
                         createParam_TatokuKanren(div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtYubinNo().getValue(),
-                                div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtBunshoBango().getValue(),
+                                div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getCcdBunshoBangoInput().get文書番号(),
                                 div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtJusho().getValue(),
                                 div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getCcdPrintContentsSetting().getIssueDate() == null
                                 ? FlexibleDate.EMPTY : new FlexibleDate(div.getTajutokuTekiyoJohoIchiran().getReportPublish().
@@ -180,8 +180,8 @@ public class TatokureiHenkoTsuchishoHakko {
                                 : div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtTantokamei().getValue(),
                                 div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtSam() == null ? RString.EMPTY
                                 : div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtSam().getValue(),
-                                ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード() == null
-                                ? ShikibetsuCode.EMPTY : ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード(),
+                                ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード() == null
+                                ? ShikibetsuCode.EMPTY : ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード(),
                                 div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().get措置保険者番号(),
                                 div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo() == null ? FlexibleDate.EMPTY
                                 : new FlexibleDate(div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().get異動日()),
@@ -197,8 +197,8 @@ public class TatokureiHenkoTsuchishoHakko {
         item.setBunshoNo(business.get文書番号());
         item.setHokenshaJusho(business.get保険者住所());
         item.setHakkoYMD(business.get発行年月日());
-        item.setHokenshaName(business.get保険者名());
-        item.setTantoBushoName(business.get担当部署名());
+        item.setHokenshaName(business.get保険者名().concat(business.get保険者名敬称()));
+        item.setTantoBushoName(business.get担当部署名().concat(business.get担当部署名敬称()));
         item.setBarcode(business.getバーコード情報());
         item.setMidashi1(business.get見出し());
         item.setHihokenshaNo1(business.get被保険者番号１());

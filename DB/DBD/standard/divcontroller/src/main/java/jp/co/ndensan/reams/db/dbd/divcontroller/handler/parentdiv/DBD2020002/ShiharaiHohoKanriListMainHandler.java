@@ -3,15 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD2020002;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd207010.Dbd207010BatchFlowParameter;
-import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohokanrilist.ShiharaiHohoKanriListData;
+import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2020002.ShiharaiHohoKanriListMainDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
@@ -23,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 /**
  * 支払方法変更管理リストハンドラクラスです。
  *
- * @reamsid_L DBD-3630-010  zhulx
+ * @reamsid_L DBD-3630-010 zhulx
  */
 public class ShiharaiHohoKanriListMainHandler {
 
@@ -49,6 +48,7 @@ public class ShiharaiHohoKanriListMainHandler {
     public void onLoad() {
         onLoad登録者の選択情報();
         onChange_radTorokusha();
+        div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD200007.getReportId());
     }
 
     /**
@@ -110,28 +110,6 @@ public class ShiharaiHohoKanriListMainHandler {
     }
 
     /**
-     * バッチ用パラメータを作成します。
-     *
-     * @return CreateShiharaiHohoListBatchParameter 支払方法変更管理リスト_バッチ用のパラメータ
-     */
-    public Dbd207010BatchFlowParameter batchParameter() {
-        ShiharaiHohoKanriListData tempData = new ShiharaiHohoKanriListData();
-        tempData.set基準日(div.getChushutsuJoken().getTxtKijunYMD().getValue());
-        tempData.set登録者選択(div.getRadTorokusha().getSelectedKey());
-        tempData.set差止予告登録者の選択(div.getChushutsuJoken().getDdl2GoSashitomeYokoku().getSelectedKey());
-        tempData.set差止登録者の選択(div.getChushutsuJoken().getDdlGoSashitomeToroku().getSelectedKey());
-        tempData.set償還予告登録者の選択(div.getChushutsuJoken().getDdl2GoShokanYokoku().getSelectedKey());
-        tempData.set償還決定登録者の選択(div.getChushutsuJoken().getDdl1GoShokanKettei().getSelectedKey());
-        tempData.set償還決定登録者1の選択(div.getChushutsuJoken().getDdl1GoShokanKetteiSashitomeAriOnly().getSelectedKey());
-        tempData.set償還決定登録者2の選択(div.getChushutsuJoken().getDdl1GoShokanKetteiKojoAriOnly().getSelectedKey());
-        tempData.set改頁出力順ID(new RString(String.valueOf(div.getCcdChohyoShutsuryokujun().get出力順ID())));
-        tempData.set帳票ID(new RString("DBD200007_ShiharaiHohoHenkoKanriIchiran"));
-        Dbd207010BatchFlowParameter batchParameter = new Dbd207010BatchFlowParameter();
-        batchParameter.toDbd207010BatchParameter(tempData);
-        return batchParameter;
-    }
-
-    /**
      * コンストラクタです。
      *
      * @param div PtnTotalDiv
@@ -152,7 +130,7 @@ public class ShiharaiHohoKanriListMainHandler {
         }
         return validPairs;
     }
-    
+
     private static class IdocheckMessages implements IValidationMessage {
 
         private final Message message;
@@ -186,7 +164,7 @@ public class ShiharaiHohoKanriListMainHandler {
         dataSources.add(kv);
         kv = new KeyValueDataSource(DROPDOWNKEY1, new RString("通知書未発行のみ"));
         dataSources.add(kv);
-        
+
         if (RADIOBUTTONKEY1.equals(torokushaKbn)
                 || RADIOBUTTONKEY2.equals(torokushaKbn)) {
             kv = new KeyValueDataSource(DROPDOWNKEY2, new RString("適用中者のみ"));

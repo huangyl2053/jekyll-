@@ -4,17 +4,18 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ikensho;
 
+import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.ChoiceItem;
 import jp.co.ndensan.reams.db.dbe.business.core.InputItem;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ChoiceResultItem;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.IShujiiIkenshoItemGroup;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.IShujiiIkenshoItemSubGroup;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.ShujiiIkenshoItemGroupOf2009;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.ShujiiIkenshoItemKubun;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.ShujiiIkenshoItemSubGroup;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.ShujiiIkenshoItemSubGroupOf2009;
+import jp.co.ndensan.reams.db.dbe.definition.core.ikensho.IShujiiIkenshoItemGroup;
+import jp.co.ndensan.reams.db.dbe.definition.core.ikensho.IShujiiIkenshoItemSubGroup;
+import jp.co.ndensan.reams.db.dbe.definition.core.ikensho.ShujiiIkenshoItemGroupOf2009;
+import jp.co.ndensan.reams.db.dbe.definition.core.ikensho.ShujiiIkenshoItemKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.ikensho.ShujiiIkenshoItemSubGroup;
+import jp.co.ndensan.reams.db.dbe.definition.core.ikensho.ShujiiIkenshoItemSubGroupOf2009;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
@@ -128,13 +129,13 @@ public class ShujiiIkenshoRegulationBuilderTest extends DbeTestBase {
         builder.set意見書項目グループ(ShujiiIkenshoItemGroupOf2009.傷病, ShujiiIkenshoItemSubGroupOf2009.診断名_発症年月日);
         builder.set意見書項目("1-1", ShujiiIkenshoItemKubun.診断名2, "２．診断名", new InputItem());
         builder.set意見書項目グループ(ShujiiIkenshoItemGroupOf2009.傷病, ShujiiIkenshoItemSubGroupOf2009.安定性);
-        builder.set意見書項目("1-2", ShujiiIkenshoItemKubun.症状の安定性, "症状の安定性", new ChoiceItem(ChoiceResultItem.Antei.values()));
+        builder.set意見書項目("1-2", ShujiiIkenshoItemKubun.症状の安定性, "症状の安定性", new ChoiceItem(Arrays.asList(ChoiceResultItem.Antei.values())));
         builder.set意見書項目グループ(ShujiiIkenshoItemGroupOf2009.特別医療, ShujiiIkenshoItemSubGroup.なし);
-        builder.set意見書項目("2-1", ShujiiIkenshoItemKubun.点滴の管理, "点滴の管理", new ChoiceItem(ChoiceResultItem.Checked.values()));
+        builder.set意見書項目("2-1", ShujiiIkenshoItemKubun.点滴の管理, "点滴の管理", new ChoiceItem(Arrays.asList(ChoiceResultItem.Checked.values())));
         builder.set意見書項目グループ(ShujiiIkenshoItemGroupOf2009.特別医療, ShujiiIkenshoItemSubGroup.なし);
-        builder.set意見書項目("2-1", ShujiiIkenshoItemKubun.中心静脈栄養, "中心静脈栄養", new ChoiceItem(ChoiceResultItem.Checked.values()));
+        builder.set意見書項目("2-1", ShujiiIkenshoItemKubun.中心静脈栄養, "中心静脈栄養", new ChoiceItem(Arrays.asList(ChoiceResultItem.Checked.values())));
         builder.set意見書項目グループ(ShujiiIkenshoItemGroupOf2009.心身状態, ShujiiIkenshoItemSubGroup.なし);
-        builder.set意見書項目("3-1", ShujiiIkenshoItemKubun.障害高齢者日常生活自立度, "障害高齢者の日常生活自立度(寝たきり度)", new ChoiceItem(ChoiceResultItem.ShogaiJiritsu.values()));
+        builder.set意見書項目("3-1", ShujiiIkenshoItemKubun.障害高齢者日常生活自立度, "障害高齢者の日常生活自立度(寝たきり度)", new ChoiceItem(Arrays.asList(ChoiceResultItem.ShogaiJiritsu.values())));
         return 意見書定義;
     }
 }

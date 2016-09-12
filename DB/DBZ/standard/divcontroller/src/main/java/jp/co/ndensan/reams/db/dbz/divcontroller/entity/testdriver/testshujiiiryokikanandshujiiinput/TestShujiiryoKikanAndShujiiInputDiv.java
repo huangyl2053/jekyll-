@@ -4,19 +4,21 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.testdriver.testshujiiiry
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shujiiIryokikanandshujiiinput.IShujiiIryokikanAndShujiiInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * TestShujiiryoKikanAndShujiiInput のクラスファイル 
- * 
+ * TestShujiiryoKikanAndShujiiInput のクラスファイル
+ *
  * @author 自動生成
  */
 public class TestShujiiryoKikanAndShujiiInputDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-44">
     /*
      * [ private の作成 ]
@@ -52,7 +54,7 @@ public class TestShujiiryoKikanAndShujiiInputDiv extends Panel {
 
     @JsonProperty("txtSubGyomuCode")
     public void setTxtSubGyomuCode(TextBox txtSubGyomuCode) {
-        this.txtSubGyomuCode=txtSubGyomuCode;
+        this.txtSubGyomuCode = txtSubGyomuCode;
     }
 
     @JsonProperty("txtShichosonCode")
@@ -62,7 +64,7 @@ public class TestShujiiryoKikanAndShujiiInputDiv extends Panel {
 
     @JsonProperty("txtShichosonCode")
     public void setTxtShichosonCode(TextBox txtShichosonCode) {
-        this.txtShichosonCode=txtShichosonCode;
+        this.txtShichosonCode = txtShichosonCode;
     }
 
     @JsonProperty("txtShinseishoKanriNo")
@@ -72,7 +74,7 @@ public class TestShujiiryoKikanAndShujiiInputDiv extends Panel {
 
     @JsonProperty("txtShinseishoKanriNo")
     public void setTxtShinseishoKanriNo(TextBox txtShinseishoKanriNo) {
-        this.txtShinseishoKanriNo=txtShinseishoKanriNo;
+        this.txtShinseishoKanriNo = txtShinseishoKanriNo;
     }
 
     @JsonProperty("btnTestDataSet")
@@ -82,7 +84,7 @@ public class TestShujiiryoKikanAndShujiiInputDiv extends Panel {
 
     @JsonProperty("btnTestDataSet")
     public void setBtnTestDataSet(Button btnTestDataSet) {
-        this.btnTestDataSet=btnTestDataSet;
+        this.btnTestDataSet = btnTestDataSet;
     }
 
     @JsonProperty("ccdShujiiIryokikanAndShujiiInput")
@@ -97,7 +99,7 @@ public class TestShujiiryoKikanAndShujiiInputDiv extends Panel {
 
     @JsonProperty("hdnTestShinseishoKanriNo")
     public void setHdnTestShinseishoKanriNo(RString hdnTestShinseishoKanriNo) {
-        this.hdnTestShinseishoKanriNo=hdnTestShinseishoKanriNo;
+        this.hdnTestShinseishoKanriNo = hdnTestShinseishoKanriNo;
     }
 
     @JsonProperty("hdnTestDatabaseSubGyomuCode")
@@ -107,7 +109,7 @@ public class TestShujiiryoKikanAndShujiiInputDiv extends Panel {
 
     @JsonProperty("hdnTestDatabaseSubGyomuCode")
     public void setHdnTestDatabaseSubGyomuCode(RString hdnTestDatabaseSubGyomuCode) {
-        this.hdnTestDatabaseSubGyomuCode=hdnTestDatabaseSubGyomuCode;
+        this.hdnTestDatabaseSubGyomuCode = hdnTestDatabaseSubGyomuCode;
     }
 
     // </editor-fold>

@@ -107,4 +107,16 @@ public class DbT5914SonotaKikanJohoDac implements ISaveable<DbT5914SonotaKikanJo
                                 eq(DbT5914SonotaKikanJoho.haishiFlag, false)))
                 .toList(DbT5914SonotaKikanJohoEntity.class);
     }
+
+    /**
+     * DbT5914SonotaKikanJohoEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 件数
+     */
+    @Transaction
+    public int saveOrDelete(DbT5914SonotaKikanJohoEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("その他機関エンティティ"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
+    }
 }

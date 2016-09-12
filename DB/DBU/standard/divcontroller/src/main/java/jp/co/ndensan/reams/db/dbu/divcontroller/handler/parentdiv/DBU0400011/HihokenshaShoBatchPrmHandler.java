@@ -81,7 +81,6 @@ public class HihokenshaShoBatchPrmHandler {
             div.getTxtKonkaiShoriKijunYMD().setDisabled(true);
             div.getTxtKonkaiShoriKijunTime().setValue(RDate.getNowTime());
             div.getTxtKonkaiShoriKijunTime().setDisabled(true);
-            div.getChkTest().setDisabled(true);
         }
     }
 
@@ -124,7 +123,6 @@ public class HihokenshaShoBatchPrmHandler {
      */
     public void saihakkoSelect(List<HihokenshashoIkkatsuHakkoModel> resultList) {
         HihokenshashoIkkatsuHakkoModel hakkoModel = resultList.get(0);
-        div.getRadShutsuryokuJoken().setDisabled(true);
         if (hakkoModel.getTaishoKaishiTimestamp() != null) {
             div.getTxtZenkaiChushutsuFromYMD().setValue(hakkoModel.getTaishoKaishiTimestamp().getDate());
             div.getTxtZenkaiChushutsuFromTime().setValue(hakkoModel.getTaishoKaishiTimestamp().getRDateTime().getTime());

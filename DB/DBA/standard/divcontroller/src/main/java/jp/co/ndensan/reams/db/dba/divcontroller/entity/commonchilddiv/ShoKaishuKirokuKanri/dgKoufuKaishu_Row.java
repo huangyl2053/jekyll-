@@ -3,13 +3,14 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishu
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu May 19 23:08:02 CST 2016 
+ * Wed Aug 31 14:46:06 JST 2016 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 
 /**
@@ -19,15 +20,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgKoufuKaishu_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
 
     private RString status;
     private RString koufuType;
-    private RString koufuDate;
+    private TextBoxDate koufuDate;
     private RString koufuJiyu;
-    private RString kaishuDate;
+    private TextBoxDate kaishuDate;
     private RString kaishuJiyu;
-    private RString yukoKigen;
+    private TextBoxDate yukoKigen;
     private RString kofuRiyu;
     private RString kaishuRiyu;
     private RString rirekiNo;
@@ -39,11 +40,11 @@ public class dgKoufuKaishu_Row extends DataRow {
         super();
         this.status = RString.EMPTY;
         this.koufuType = RString.EMPTY;
-        this.koufuDate = RString.EMPTY;
+        this.koufuDate = new TextBoxDate();
         this.koufuJiyu = RString.EMPTY;
-        this.kaishuDate = RString.EMPTY;
+        this.kaishuDate = new TextBoxDate();
         this.kaishuJiyu = RString.EMPTY;
-        this.yukoKigen = RString.EMPTY;
+        this.yukoKigen = new TextBoxDate();
         this.kofuRiyu = RString.EMPTY;
         this.kaishuRiyu = RString.EMPTY;
         this.rirekiNo = RString.EMPTY;
@@ -65,7 +66,7 @@ public class dgKoufuKaishu_Row extends DataRow {
         this.setOriginalData("kaishuJiyuNo", kaishuJiyuNo);
     }
 
-    public dgKoufuKaishu_Row(RString status, RString koufuType, RString koufuDate, RString koufuJiyu, RString kaishuDate, RString kaishuJiyu, RString yukoKigen, RString kofuRiyu, RString kaishuRiyu, RString rirekiNo, RString koufuTypeNo, RString koufuJiyuNo, RString kaishuJiyuNo) {
+    public dgKoufuKaishu_Row(RString status, RString koufuType, TextBoxDate koufuDate, RString koufuJiyu, TextBoxDate kaishuDate, RString kaishuJiyu, TextBoxDate yukoKigen, RString kofuRiyu, RString kaishuRiyu, RString rirekiNo, RString koufuTypeNo, RString koufuJiyuNo, RString kaishuJiyuNo) {
         super();
         this.setOriginalData("status", status);
         this.setOriginalData("koufuType", koufuType);
@@ -103,7 +104,7 @@ public class dgKoufuKaishu_Row extends DataRow {
         return koufuType;
     }
 
-    public RString getKoufuDate() {
+    public TextBoxDate getKoufuDate() {
         return koufuDate;
     }
 
@@ -111,7 +112,7 @@ public class dgKoufuKaishu_Row extends DataRow {
         return koufuJiyu;
     }
 
-    public RString getKaishuDate() {
+    public TextBoxDate getKaishuDate() {
         return kaishuDate;
     }
 
@@ -119,7 +120,7 @@ public class dgKoufuKaishu_Row extends DataRow {
         return kaishuJiyu;
     }
 
-    public RString getYukoKigen() {
+    public TextBoxDate getYukoKigen() {
         return yukoKigen;
     }
 
@@ -157,7 +158,7 @@ public class dgKoufuKaishu_Row extends DataRow {
         this.koufuType = koufuType;
     }
 
-    public void setKoufuDate(RString koufuDate) {
+    public void setKoufuDate(TextBoxDate koufuDate) {
         this.setOriginalData("koufuDate", koufuDate);
         this.koufuDate = koufuDate;
     }
@@ -167,7 +168,7 @@ public class dgKoufuKaishu_Row extends DataRow {
         this.koufuJiyu = koufuJiyu;
     }
 
-    public void setKaishuDate(RString kaishuDate) {
+    public void setKaishuDate(TextBoxDate kaishuDate) {
         this.setOriginalData("kaishuDate", kaishuDate);
         this.kaishuDate = kaishuDate;
     }
@@ -177,7 +178,7 @@ public class dgKoufuKaishu_Row extends DataRow {
         this.kaishuJiyu = kaishuJiyu;
     }
 
-    public void setYukoKigen(RString yukoKigen) {
+    public void setYukoKigen(TextBoxDate yukoKigen) {
         this.setOriginalData("yukoKigen", yukoKigen);
         this.yukoKigen = yukoKigen;
     }

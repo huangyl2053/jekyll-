@@ -5,11 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbu.batchcontroller.flow.hihokenshasho;
 
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.hihokenshasho.HihokenshashoA4ReportProcess;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.hihokenshasho.HihokenshashoB4ReportProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.hihokenshasho.IchijiTableCreateProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.hihokenshasho.IchijiTableUpdateProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.hihokenshasho.IchiranHyoReportProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.hihokenshasho.IkkatsuHakkoDBInsertProcess;
-import jp.co.ndensan.reams.db.dbu.batchcontroller.step.hihokenshasho.IkkatsuHakkoReportProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.hihokenshasho.TaishoShutokuProcess;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.hihokenshasho.IkkatsuHakkoBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -29,17 +30,21 @@ public class IkkatsuHakkoFlow extends BatchFlowBase<IkkatsuHakkoBatchParameter> 
         executeStep(CREATEICHIJITABLE_PROCESS);
         executeStep(TAISHOSHUTOKU_PROCESS);
         executeStep(ICHIJITABLEUPDATE_PROCESS);
-        executeStep(IKKATSUHAKKOREPORT_PROCESS);
         executeStep(ICHIRANHYOREPORTPROCESS);
-        executeStep(IKKATSUHAKKODBINSERT_PROCESS);
+        executeStep(HIHOKENSHASHOB4);
+        executeStep(HIHOKENSHASHOA4);
+        if (!getParameter().isTestShutsuryokuFlag()) {
+            executeStep(IKKATSUHAKKODBINSERT_PROCESS);
+        }
     }
 
     private static final String CREATEICHIJITABLE_PROCESS = "createIchijiTableProcess";
     private static final String TAISHOSHUTOKU_PROCESS = "taishoShutokuProcess";
     private static final String ICHIJITABLEUPDATE_PROCESS = "ichijiTableUpdateProcess";
-    private static final String IKKATSUHAKKOREPORT_PROCESS = "ikkatsuHakkoReportProcess";
     private static final String ICHIRANHYOREPORTPROCESS = "IchiranHyoReportProcess";
-    private static final String IKKATSUHAKKODBINSERT_PROCESS = "ikkatsuHakkoDBInsertProcess"; //@Stepの定数はメソッドの近くに置くと見やすくていい。
+    private static final String IKKATSUHAKKODBINSERT_PROCESS = "ikkatsuHakkoDBInsertProcess";
+    private static final String HIHOKENSHASHOB4 = "hihokenshashoB4";
+    private static final String HIHOKENSHASHOA4 = "hihokenshashoA4";
 
     /**
      * 一時テーブルの作成とデータの登録です。
@@ -72,16 +77,6 @@ public class IkkatsuHakkoFlow extends BatchFlowBase<IkkatsuHakkoBatchParameter> 
     }
 
     /**
-     * 帳票出力パラメータの取得です。
-     *
-     * @return 帳票出力パラメータ
-     */
-    @Step(IKKATSUHAKKOREPORT_PROCESS)
-    protected IBatchFlowCommand ikkatsuHakkoReportProcess() {
-        return simpleBatch(IkkatsuHakkoReportProcess.class).arguments(getParameter().toIkkatsuHakkoProcessParameter()).define();
-    }
-
-    /**
      * 帳票「被保険者証発行一覧表」の出力処理クラスです。
      *
      * @return IchiranHyoReportProcess
@@ -89,6 +84,26 @@ public class IkkatsuHakkoFlow extends BatchFlowBase<IkkatsuHakkoBatchParameter> 
     @Step(ICHIRANHYOREPORTPROCESS)
     protected IBatchFlowCommand callIchiranHyoReportProcess() {
         return loopBatch(IchiranHyoReportProcess.class).arguments(getParameter().toIkkatsuHakkoProcessParameter()).define();
+    }
+
+    /**
+     * 帳票「介護保険被保険者証（B4版）」の出力処理クラスです。
+     *
+     * @return IchiranHyoReportProcess
+     */
+    @Step(HIHOKENSHASHOB4)
+    protected IBatchFlowCommand callHihokenshashoB4ReportProcess() {
+        return loopBatch(HihokenshashoB4ReportProcess.class).arguments(getParameter().toIkkatsuHakkoProcessParameter()).define();
+    }
+
+    /**
+     * 帳票「介護保険被保険者証（A4版）」の出力処理クラスです。
+     *
+     * @return IchiranHyoReportProcess
+     */
+    @Step(HIHOKENSHASHOA4)
+    protected IBatchFlowCommand callHihokenshashoA4ReportProcess() {
+        return loopBatch(HihokenshashoA4ReportProcess.class).arguments(getParameter().toIkkatsuHakkoProcessParameter()).define();
     }
 
     /**

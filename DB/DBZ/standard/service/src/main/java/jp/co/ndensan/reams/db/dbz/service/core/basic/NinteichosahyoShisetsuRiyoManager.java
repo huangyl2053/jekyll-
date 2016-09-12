@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoShisetsuRiyo
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5210NinteichosahyoShisetsuRiyoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5210NinteichosahyoShisetsuRiyoDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -128,5 +129,27 @@ public class NinteichosahyoShisetsuRiyoManager {
             return false;
         }
         return 1 == dac.save(認定調査票_概況調査_施設利用.toEntity());
+    }
+
+    /**
+     * 主キーに連番除外の認定調査票_概況調査_施設利用を返します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @param 認定調査依頼履歴番号 認定調査依頼履歴番号
+     * @return NinteichosahyoShisetsuRiyo
+     */
+    @Transaction
+    public SearchResult<NinteichosahyoShisetsuRiyo> get連番除外の認定調査票_概況調査_施設利用(
+            ShinseishoKanriNo 申請書管理番号,
+            int 認定調査依頼履歴番号) {
+
+        List<NinteichosahyoShisetsuRiyo> list = new ArrayList<>();
+        List<DbT5210NinteichosahyoShisetsuRiyoEntity> entityList = dac.selectBy連番除外(
+                申請書管理番号,
+                認定調査依頼履歴番号);
+        for (DbT5210NinteichosahyoShisetsuRiyoEntity entity : entityList) {
+            list.add(new NinteichosahyoShisetsuRiyo(entity));
+        }
+        return SearchResult.of(list, 0, false);
     }
 }

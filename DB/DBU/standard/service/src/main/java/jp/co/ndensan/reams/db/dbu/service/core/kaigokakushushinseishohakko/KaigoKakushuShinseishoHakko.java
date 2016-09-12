@@ -195,7 +195,7 @@ public class KaigoKakushuShinseishoHakko {
                 riyoshaFutangakuGengakuMenjyo.createKaigoHokenRiyoshaFutangakuGengakuMenjyoShinseishoChohyo(識別コード, 被保険者番号);
             }
             if (ShinseishoChohyoShurui.介護保険特定負担限度額申請書.getコード().equals(entity.get申請書ID())) {
-                TokuteifutanGendogakuShinseisho tokuteifutanGendogaku = new TokuteifutanGendogakuShinseisho();
+                TokuteifutanGendogakuShinseisho tokuteifutanGendogaku = TokuteifutanGendogakuShinseisho.createInstance();
                 tokuteifutanGendogaku.createTokuteifutanGendogakuShinseishoChohyo(識別コード, 被保険者番号);
             }
             if (ShinseishoChohyoShurui.訪問介護利用者負担額減額申請書.getコード().equals(entity.get申請書ID())) {

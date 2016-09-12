@@ -7,10 +7,10 @@ package jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaiwariatejoho;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJoho;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaiwariatejoho.ShinsakaiWariateJohoMapperParameter;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.taishouwaritsuke.ShinsakaiOrderKakuteiFlagMapperParameter;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho2;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJoho2;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiwariatejoho.ShinsakaiWariateJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.taishouwaritsuke.ShinsakaiOrderKakuteiFlagMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaiwariatejoho.IShinsakaiWariateJohoMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
@@ -73,7 +73,7 @@ public class ShinsakaiWariateJohoManager {
      * @return ShinsakaiWariateJoho
      */
     @Transaction
-    public ShinsakaiWariateJoho get介護認定審査会割当情報(ShinsakaiWariateJohoMapperParameter 介護認定審査会割当情報検索条件) {
+    public ShinsakaiWariateJoho2 get介護認定審査会割当情報(ShinsakaiWariateJohoMapperParameter 介護認定審査会割当情報検索条件) {
         requireNonNull(介護認定審査会割当情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会割当情報検索条件"));
         IShinsakaiWariateJohoMapper mapper = mapperProvider.create(IShinsakaiWariateJohoMapper.class);
 
@@ -82,7 +82,7 @@ public class ShinsakaiWariateJohoManager {
             return null;
         }
         relateEntity.initializeMd5ToEntities();
-        return new ShinsakaiWariateJoho(relateEntity);
+        return new ShinsakaiWariateJoho2(relateEntity);
     }
 
     /**
@@ -92,7 +92,7 @@ public class ShinsakaiWariateJohoManager {
      * @return ShinsakaiWariateJoho
      */
     @Transaction
-    public ShinsakaiWariateJoho get介護認定審査会割当情報by主キー_審査順確定フラグ非一致(ShinsakaiOrderKakuteiFlagMapperParameter 介護認定審査会割当情報検索条件) {
+    public ShinsakaiWariateJoho2 get介護認定審査会割当情報by主キー_審査順確定フラグ非一致(ShinsakaiOrderKakuteiFlagMapperParameter 介護認定審査会割当情報検索条件) {
         requireNonNull(介護認定審査会割当情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会割当情報検索条件"));
         IShinsakaiWariateJohoMapper mapper = mapperProvider.create(IShinsakaiWariateJohoMapper.class);
 
@@ -101,7 +101,7 @@ public class ShinsakaiWariateJohoManager {
             return null;
         }
         relateEntity.initializeMd5ToEntities();
-        return new ShinsakaiWariateJoho(relateEntity);
+        return new ShinsakaiWariateJoho2(relateEntity);
     }
 
     /**
@@ -111,12 +111,12 @@ public class ShinsakaiWariateJohoManager {
      * @return 更新件数 更新結果の件数を返します。
      */
     @Transaction
-    public boolean save介護認定審査会割当情報(ShinsakaiWariateJoho 介護認定審査会割当情報) {
+    public boolean save介護認定審査会割当情報(ShinsakaiWariateJoho2 介護認定審査会割当情報) {
         requireNonNull(介護認定審査会割当情報, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会割当情報"));
         if (!介護認定審査会割当情報.hasChanged()) {
             return false;
         }
-        save要介護認定申請情報リスト(介護認定審査会割当情報.getNinteiShinseiJohoList());
+        save要介護認定申請情報リスト(介護認定審査会割当情報.getNinteiShinseiJoho2List());
         return 1 == dac.save(介護認定審査会割当情報.toEntity());
     }
 
@@ -127,17 +127,17 @@ public class ShinsakaiWariateJohoManager {
      * @return 更新件数 更新結果の件数を返します。
      */
     @Transaction
-    public boolean saveOrDeletePhysicalBy介護認定審査会割当情報(ShinsakaiWariateJoho 介護認定審査会割当情報) {
+    public boolean saveOrDeletePhysicalBy介護認定審査会割当情報(ShinsakaiWariateJoho2 介護認定審査会割当情報) {
         requireNonNull(介護認定審査会割当情報, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会割当情報"));
         if (!介護認定審査会割当情報.hasChanged()) {
             return false;
         }
-        save要介護認定申請情報リスト(介護認定審査会割当情報.getNinteiShinseiJohoList());
+        save要介護認定申請情報リスト(介護認定審査会割当情報.getNinteiShinseiJoho2List());
         return 1 == dac.saveOrDeletePhysicalBy(介護認定審査会割当情報.toEntity());
     }
 
-    private void save要介護認定申請情報リスト(List<NinteiShinseiJoho> 要介護認定申請情報List) {
-        for (NinteiShinseiJoho 要介護認定申請情報 : 要介護認定申請情報List) {
+    private void save要介護認定申請情報リスト(List<NinteiShinseiJoho2> 要介護認定申請情報List) {
+        for (NinteiShinseiJoho2 要介護認定申請情報 : 要介護認定申請情報List) {
             要介護認定申請情報Manager.save要介護認定申請情報(要介護認定申請情報);
         }
     }

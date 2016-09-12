@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.chosachikuchichoson.ChosaChikuChichosonBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.chosachikuchichoson.UzT0007CodeBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chosachikuchichoson.ChosaChikuChichosonParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosachikuchichoson.ChosaChikuChichosonParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020007.NinteiChosaSchedule7MainDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020007.dgChosaChikuChichosonList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020007.dgChosaChikuList_Row;
@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuShichoson;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuShichosonBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuShichosonIdentifier;
 import jp.co.ndensan.reams.db.dbz.definition.core.koseishichosonselector.KoseiShiChosonSelectorModel;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -27,7 +26,6 @@ import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
@@ -232,10 +230,10 @@ public class MainPanelHandler {
 
     /**
      * 市町村検索が戻します。
+     *
+     * @param dataPassModel 構成市町村選択_引き継ぎデータ
      */
-    public void onOkClose_Dialog() {
-        KoseiShiChosonSelectorModel dataPassModel = ViewStateHolder.get(
-                ViewStateKeys.構成市町村選択_引き継ぎデータ, KoseiShiChosonSelectorModel.class);
+    public void onOkClose_Dialog(KoseiShiChosonSelectorModel dataPassModel) {
         if (dataPassModel != null) {
             div.getChosaChikuShichosoInput().getTxtShichoSonCode().setValue(dataPassModel.get市町村コード());
             div.getChosaChikuShichosoInput().getTxtShichoSonMeisho().setValue(dataPassModel.get市町村名称());
@@ -310,12 +308,12 @@ public class MainPanelHandler {
 
     /**
      * 「保存する」ボタンを押下します。
+     *
+     * @param models 認定調査スケジュール登録7_地区市町村情報
      */
-    public void onClick_HozonnBtn() {
+    public void onClick_HozonnBtn(Models<ChikuShichosonIdentifier, ChikuShichoson> models) {
         前排他制御処理();
         List<dgChosaChikuChichosonList_Row> rowList = div.getChosaChikuShichosonPanel().getDgChosaChikuChichosonList().getDataSource();
-        Models<ChikuShichosonIdentifier, ChikuShichoson> models
-                = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録7_地区市町村情報, Models.class);
         for (dgChosaChikuChichosonList_Row listRow : rowList) {
             if (状態_追加.equals(listRow.getJotai())) {
                 ChikuShichoson chikuShichoson = new ChikuShichoson(

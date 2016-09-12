@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.fuka;
 
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003KibetsuEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.helper.DbT2003KibetsuEntityGenerator;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003KibetsuEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.helper.DbT2003KibetsuEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbbTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -72,7 +72,6 @@ public class KibetsuTest extends DbbTestBase {
 //        public void 主キー名4がnullである場合に_NullPointerExceptionが発生する() {
 //            sut = new Kibetsu(調定年度, 賦課年度, 通知書番号, null, 徴収方法, 期);
 //        }
-
         @Test(expected = NullPointerException.class)
         public void 主キー名5がnullである場合に_NullPointerExceptionが発生する() {
             sut = new Kibetsu(調定年度, 賦課年度, 通知書番号, 履歴番号, null, 期);

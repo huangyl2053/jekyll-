@@ -8,10 +8,10 @@ package jp.co.ndensan.reams.db.dbb.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.Kibetsu;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003KibetsuEntity;
-import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2003KibetsuDac;
+import jp.co.ndensan.reams.db.dbx.business.core.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003KibetsuEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2003KibetsuDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護期別を管理するクラスです。
+ *
+ * @reamsid_L DBB-9999-022 xuxin
  */
 public class KibetsuManager {
 
@@ -112,4 +114,29 @@ public class KibetsuManager {
         }
         return 1 == dac.save(介護期別.toEntity());
     }
+
+    /**
+     * 引数に一致する介護期別情報を返します。
+     *
+     * @param 調定年度 FlexibleYear
+     * @param 賦課年度 FlexibleYear
+     * @param 通知書番号 TsuchishoNo
+     * @param 履歴番号 int
+     * @return List<Kibetsu>
+     */
+    @Transaction
+    public List<Kibetsu> get介護期別_期昇順(
+            FlexibleYear 調定年度,
+            FlexibleYear 賦課年度,
+            TsuchishoNo 通知書番号,
+            int 履歴番号) {
+
+        List<Kibetsu> businessList = new ArrayList<>();
+        for (DbT2003KibetsuEntity entity : dac.select介護期別_期ASC(調定年度, 賦課年度, 通知書番号, 履歴番号)) {
+            entity.initializeMd5();
+            businessList.add(new Kibetsu(entity));
+        }
+        return businessList;
+    }
+
 }

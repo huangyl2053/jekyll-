@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC24300",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "住宅改修理由書作成手数料支給（不支給）決定通知書作成",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC2430011",
+     "toLayoutTitle": "住宅改修理由書作成手数料支給（不支給）決定通知書作成",
+     "toState": ""
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC2430011",
+     "layoutTitle": "住宅改修理由書作成手数料支給（不支給）決定通知書作成",
+     "eventName": "処理完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

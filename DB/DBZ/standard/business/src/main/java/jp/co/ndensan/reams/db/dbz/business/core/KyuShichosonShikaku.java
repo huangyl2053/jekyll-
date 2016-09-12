@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import static java.util.Objects.requireNonNull;
 import java.util.TreeMap;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.GesshoGetsumatsuKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.GesshoGetsumatsuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;

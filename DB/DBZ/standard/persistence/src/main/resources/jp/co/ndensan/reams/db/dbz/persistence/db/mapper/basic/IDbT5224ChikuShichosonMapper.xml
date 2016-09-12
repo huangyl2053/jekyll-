@@ -47,7 +47,7 @@
         <result property="yusenNo" column="dbT5224ChikuShichoson_yusenNo" />
         <result property="jiChikuFlag" column="dbT5224ChikuShichoson_jiChikuFlag" />
     </resultMap>
-<select id="getEntity" resultMap="ResultMap_DbT5224ChikuShichosonEntity">
+<select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5224ChikuShichosonEntity">
     SELECT
     <include refid="allColumns_DbT5224ChikuShichoson" />
     FROM

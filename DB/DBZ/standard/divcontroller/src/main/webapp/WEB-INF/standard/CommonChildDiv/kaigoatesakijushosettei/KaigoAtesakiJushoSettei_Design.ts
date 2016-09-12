@@ -8,8 +8,12 @@ module DBZ {
 
         export class Events {
 
-            public static onCkCloseBtnAtesakiJushoSettei(): string {
-                return "onCkCloseBtnAtesakiJushoSettei";
+            public static onChange_radJushoSettei(): string {
+                return "onChange_radJushoSettei";
+            }
+
+            public static onOkClose_radJushoSettei(): string {
+                return "onOkClose_radJushoSettei";
             }
 
         }

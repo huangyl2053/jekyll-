@@ -33,9 +33,9 @@
         <result property="ikenshoIraiRirekiNo" column="dbT5301ShujiiIkenshoIraiJoho_ikenshoIraiRirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
-    <select id="getSyuJiSenTakuYiChiRan"
+    <select resultOrdered="true" id="getSyuJiSenTakuYiChiRan"
             resultMap="ResultMap_YouKaiGoNinTeiKekTesuChiRelateEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiMapperParameter" fetchSize="500" >
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiMapperParameter" fetchSize="500" >
         SELECT
         rgdb."DbT5911ShujiiIryoKikanJoho"."shujiiIryokikanCode" AS youKaiGoNinTeiKekTesuChiRelateEntity_shujiiIryokikanCode,
         rgdb."DbT5911ShujiiIryoKikanJoho"."iryoKikanMeisho" AS youKaiGoNinTeiKekTesuChiRelateEntity_iryoKikanMeisho,
@@ -44,7 +44,8 @@
         rgdb."DbT5911ShujiiIryoKikanJoho"."jusho" AS youKaiGoNinTeiKekTesuChiRelateEntity_jusho,
         rgdb."DbT5912ShujiiJoho"."shujiiCode" AS youKaiGoNinTeiKekTesuChiRelateEntity_shujiiCode,
         rgdb."DbT5912ShujiiJoho"."shujiiName" AS youKaiGoNinTeiKekTesuChiRelateEntity_shujiiName,
-        COUNT(0) AS youKaiGoNinTeiKekTesuChiRelateEntity_taiSyouCount
+        COUNT(0) AS youKaiGoNinTeiKekTesuChiRelateEntity_taiSyouCount,
+        rgdb."DbT5051KoseiShichosonMaster"."shichosonCode" AS shichosonCode
         FROM
         rgdb."DbT5101NinteiShinseiJoho"
         INNER JOIN  rgdb."DbT5102NinteiKekkaJoho"
@@ -91,10 +92,6 @@
             AND
             rgdb."DbT5101NinteiShinseiJoho"."shujiiCode" = #{主治医コード}
         </if>
-        <if test="useMaDaNyuRyouKu">
-            AND
-            rgdb."DbT5301ShujiiIkenshoIraiJoho"."ninteiJohoTeikyoYMD" IS NULL
-        </if>
         GROUP BY
         rgdb."DbT5911ShujiiIryoKikanJoho"."shujiiIryokikanCode",
         rgdb."DbT5911ShujiiIryoKikanJoho"."iryoKikanMeisho",
@@ -102,15 +99,16 @@
         rgdb."DbT5911ShujiiIryoKikanJoho"."telNo",
         rgdb."DbT5911ShujiiIryoKikanJoho"."jusho",
         rgdb."DbT5912ShujiiJoho"."shujiiCode",
-        rgdb."DbT5912ShujiiJoho"."shujiiName"
+        rgdb."DbT5912ShujiiJoho"."shujiiName",
+        rgdb."DbT5051KoseiShichosonMaster"."shichosonCode"
         ORDER BY
         rgdb."DbT5911ShujiiIryoKikanJoho"."shujiiIryokikanCode",
         rgdb."DbT5912ShujiiJoho"."shujiiCode"
     </select>
 
-    <select id="getKeKaTsuChiSyuTsuRyoKuTaiSyou"
+    <select resultOrdered="true" id="getKeKaTsuChiSyuTsuRyoKuTaiSyou"
             resultMap="ResultMap_YouKaiGoNinTeiKekTesuChiRelateEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiMapperParameter" fetchSize="500" >
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiMapperParameter" fetchSize="500" >
         SELECT
         rgdb."DbT5101NinteiShinseiJoho"."hihokenshaNo" AS dbT5101NinteiShinseiJoho_hihokenshaNo,
         rgdb."DbT5101NinteiShinseiJoho"."hihokenshaName" AS dbT5101NinteiShinseiJoho_hihokenshaName,
@@ -159,15 +157,11 @@
             AND
             rgdb."DbT5102NinteiKekkaJoho"."nijiHanteiYMD" <![CDATA[<=]]> #{二次判定期間To}
         </if>
-        <if test="useMaDaNyuRyouKu">
-            AND
-            rgdb."DbT5301ShujiiIkenshoIraiJoho"."ninteiJohoTeikyoYMD" IS NULL
-        </if>
         ORDER BY
         rgdb."DbT5101NinteiShinseiJoho"."hihokenshaNo"
     </select>
 
-    <select id="getCyouHyouSyuTsuRyoKu"
+    <select resultOrdered="true" id="getCyouHyouSyuTsuRyoKu"
             resultMap="ResultMap_YouKaiGoNinTeiKekTesuChiRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.dbe090001.YouKaiGoNinTeiKekTesuChiMybitisParamter" fetchSize="500" >
         SELECT
@@ -180,7 +174,8 @@
         rgdb."DbT5102NinteiKekkaJoho"."nijiHanteiNinteiYukoShuryoYMD"  AS dbT5102NinteiKekkaJoho_nijiHanteiNinteiYukoShuryoYMD,
         rgdb."DbT5102NinteiKekkaJoho"."shinsakaiIken" AS dbT5102NinteiKekkaJoho_shinsakaiIken,
         rgdb."DbT5101NinteiShinseiJoho"."shinseishoKanriNo"  AS dbT5101NinteiShinseiJoho_shinseishoKanriNo,
-        rgdb."DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo" AS dbT5301ShujiiIkenshoIraiJoho_ikenshoIraiRirekiNo
+        rgdb."DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo" AS dbT5301ShujiiIkenshoIraiJoho_ikenshoIraiRirekiNo,
+        rgdb."DbT5101NinteiShinseiJoho"."hihokenshaNo" AS dbT5101NinteiShinseiJoho_hihokenshaNo
         FROM
         rgdb."DbT5101NinteiShinseiJoho"
         INNER JOIN  rgdb."DbT5051KoseiShichosonMaster"
@@ -232,16 +227,15 @@
         rgdb."DbT5101NinteiShinseiJoho"."hihokenshaNo"
     </select>
 
-    <!-- 主治医意見書作成依頼情報更新 -->
-    <update id="updateShuJiIkenSyoSaKuSeiIraiJyouHou" parameterType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity" >
-        UPDATE
-        rgdb."DbT5301ShujiiIkenshoIraiJoho"
-        SET
-        "ninteiJohoTeikyoYMD" = #{ninteiJohoTeikyoYMD}
+    <select resultOrdered="true" id="get主治医意見書作成依頼情報ByKey" fetchSize="500" 
+        resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity"
+            parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" >
+        SELECT 
+          * 
+        FROM 
+          rgdb."DbT5301ShujiiIkenshoIraiJoho" AS DbT5301
         WHERE
-        "shinseishoKanriNo" = #{shinseishoKanriNo}
-        AND "ikenshoIraiRirekiNo" = #{ikenshoIraiRirekiNo}
-        AND "logicalDeletedFlag" = false
-        AND "isDeleted" = false
-    </update>
+          DbT5301."shinseishoKanriNo" = #{param1}
+          AND DbT5301."ikenshoIraiRirekiNo" = #{param2}
+    </select>
 </mapper>

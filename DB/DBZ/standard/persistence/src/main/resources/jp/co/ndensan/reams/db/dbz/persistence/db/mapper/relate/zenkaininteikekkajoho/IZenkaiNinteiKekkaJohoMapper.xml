@@ -3,7 +3,7 @@
 <!-- @reamsid_L DBE-3000-020 dongyabin -->
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.zenkaininteikekkajoho.IZenkaiNinteiKekkaJohoMapper">
-    <select id="get要介護度_前回受給" 
+    <select resultOrdered="true" id="get要介護度_前回受給" 
             resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.ResultMap_DbT4101NinteiShinseiJohoEntity"
             fetchSize="500">
         SELECT
@@ -18,7 +18,7 @@
             A."shinseishoKanriNo" = #{shinseishoKanriNo}
     </select>
     
-    <select id="get要介護度_前回認定" 
+    <select resultOrdered="true" id="get要介護度_前回認定" 
             resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.ResultMap_DbT5101NinteiShinseiJohoEntity"
             fetchSize="500">
         SELECT
@@ -33,7 +33,7 @@
             A."shinseishoKanriNo" = #{shinseishoKanriNo}
     </select>
     
-    <select id="get要介護度_今回受給" 
+    <select resultOrdered="true" id="get要介護度_今回受給" 
             resultMap="resultMap_ZenkaiNinteiKekkaJohoRelateEntity"
             fetchSize="500">
         SELECT
@@ -50,7 +50,7 @@
         A."shinseishoKanriNo" = #{shinseishoKanriNo}
     </select>
     
-    <select id="get要介護度_今回認定" 
+    <select resultOrdered="true" id="get要介護度_今回認定" 
             resultMap="resultMap_ZenkaiNinteiKekkaJohoRelateEntity"
             fetchSize="500">
         SELECT
@@ -67,7 +67,7 @@
         A."shinseishoKanriNo" = #{shinseishoKanriNo}
     </select>
     
-    <select id="get前回申請管理番号_受給" 
+    <select resultOrdered="true" id="get前回申請管理番号_受給" 
             resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
             fetchSize="500">
         SELECT 	
@@ -78,7 +78,7 @@
             A."shinseishoKanriNo" = #{shinseishoKanriNo}
     </select>
     
-    <select id="get前回申請管理番号_認定" 
+    <select resultOrdered="true" id="get前回申請管理番号_認定" 
             resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
             fetchSize="500">
         SELECT 	
@@ -96,5 +96,60 @@
         <result property="nijiHanteiNinteiYukoKaishiYMD" column="nijiHanteiNinteiYukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="nijiHanteiNinteiYukoShuryoYMD" column="nijiHanteiNinteiYukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap> 
+    
+    <select resultOrdered="true" id="get受給_結果詳細情報" 
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.relate.zenkaininteikekkajoho.KekkaShosaiJohoRelateEntity"
+            fetchSize="500">
+        SELECT
+         T4101."torisageKubunCode" AS 取下区分コード
+          , T4101."ninteiShinseiYMD" AS 認定申請年月日
+          , T4101."koroshoIfShikibetsuCode" AS 厚労省IF識別コード
+          , T4102."nijiHanteiYokaigoJotaiKubunCode" AS 二次判定要介護状態区分コード
+          , T4102."nijiHanteiNinteiYukoKaishiYMD" AS 二次判定認定有効開始年月日
+          , T4102."nijiHanteiNinteiYukoShuryoYMD" AS 二次判定認定有効終了年月日
+          , T4102."shinsakaiIken" AS 介護認定審査会意見
+          , V4001."chokkinIdoJiyuCode" AS 直近異動事由コード
+          , V4001."sakujoJiyuCode" AS 削除事由コード
+          , T4101."ninteiShinseiRiyu" AS 認定申請理由
+          , V4001."soshitsuYMD" AS 喪失年月日
+          , T4101."torisageYMD" AS 取下年月日
+          , V4001."toshoNinteiYukoKaishiYMD" AS 当初認定有効開始年月日
+          , V4001."toshoNinteiYukoShuryoYMD" AS 当初認定有効終了年月日
+          , V4001."jukyuShikakuShomeishoHakkoYMD1" AS 受給資格証明書発行年月日１
+          , V4001."jukyuShikakuShomeishoHakkoYMD2" AS 受給資格証明書発行年月日２
+          , T4101."ninteiShinseiShinseijiKubunCode" AS 認定申請区分_申請時_コード
+          , T4101."ninteiShinseiHoreiKubunCode" AS 認定申請区分_法令_コード 
+        FROM
+          rgdb."DbT4101NinteiShinseiJoho" AS T4101 
+          INNER JOIN rgdb."DbV4001JukyushaDaicho" AS V4001 
+            ON T4101."shinseishoKanriNo" = V4001."shinseishoKanriNo" 
+          LEFT JOIN rgdb."DbT4102NinteiKekkaJoho" AS T4102 
+            ON T4102."shinseishoKanriNo" = T4101."shinseishoKanriNo" 
+        WHERE
+          T4101."shinseishoKanriNo" = #{shinseishoKanriNo}
+    </select>
+    
+    <select resultOrdered="true" id="get認定_結果詳細情報" 
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.relate.zenkaininteikekkajoho.KekkaShosaiJohoRelateEntity"
+            fetchSize="500">
+        SELECT
+         T5101."torisageKubunCode" AS 取下区分コード
+          , T5101."ninteiShinseiYMD" AS 認定申請年月日
+          , T5101."koroshoIfShikibetsuCode" AS 厚労省IF識別コード
+          , T5102."nijiHanteiYokaigoJotaiKubunCode" AS 二次判定要介護状態区分コード
+          , T5102."nijiHanteiNinteiYukoKaishiYMD" AS 二次判定認定有効開始年月日
+          , T5102."nijiHanteiNinteiYukoShuryoYMD" AS 二次判定認定有効終了年月日
+          , T5102."shinsakaiIken" AS 介護認定審査会意見
+          , T5101."ninteiShinseiRiyu" AS 認定申請理由
+          , T5101."torisageYMD" AS 取下年月日
+          , T5101."ninteiShinseiShinseijiKubunCode" AS 認定申請区分_申請時_コード
+          , T5101."ninteiShinseiHoreiKubunCode" AS 認定申請区分_法令_コード 
+        FROM
+          rgdb."DbT5101NinteiShinseiJoho" AS T5101 
+          LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS T5102 
+            ON T5102."shinseishoKanriNo" = T5101."shinseishoKanriNo" 
+        WHERE
+          T5101."shinseishoKanriNo" = #{shinseishoKanriNo}
+    </select>
     
 </mapper>

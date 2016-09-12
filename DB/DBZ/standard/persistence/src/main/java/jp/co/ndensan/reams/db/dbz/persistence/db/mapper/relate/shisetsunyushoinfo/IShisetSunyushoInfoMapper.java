@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.shisetsunyushoinfo;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.param.shisetsunyushoinfo.ShisetSunyushoInfoParameter;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shisetsunyushoinfo.ShisetSunyushoInfoParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shisetsunyushoinfo.ShisetSunyushoInfoRelateEntity;
 
 /**

@@ -54,7 +54,7 @@
         <result property="bemmeisha" column="dbT7003BemmeishaJoho_bemmeisha" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
-<select id="getEntity" resultMap="ResultMap_DbT7003BemmeishaJohoEntity">
+<select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT7003BemmeishaJohoEntity">
 <!--    SELECT
     <include refid="allColumns_DbT7003BemmeishaJoho" />
     FROM

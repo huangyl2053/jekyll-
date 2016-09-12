@@ -5,14 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbe.service.core.ninnteichousakekkatouroku1;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousakekkatouroku1.TempData;
-import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.dbe2210001.NinteiChosaJohoMybatisParameter;
-import jp.co.ndensan.reams.db.dbe.entity.ninnteichousakekkatouroku1.TempDataEntity;
-import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.dbe2210001.IDbe2210001RelateMapper;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninnteichousakekkatouroku1.NinteiChosaJohoMybatisParameter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninnteichousakekkatouroku1.TempDataEntity;
+import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninnteichousakekkatouroku1.INinnteiChousaKekkaTouroku1RelateMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5203NinteichosahyoKihonChosaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItemEntity;
@@ -61,12 +62,13 @@ public class NinnteiChousaKekkaTouroku1Finder {
     public TempData get認定調査情報(int temp_認定調査履歴番号,
             RString temp_認定調査委託先コード,
             ShinseishoKanriNo temp_申請書管理番号) {
-        IDbe2210001RelateMapper mapper = mapperProvider.create(IDbe2210001RelateMapper.class);
-        TempDataEntity entity = mapper.get認定調査情報(new NinteiChosaJohoMybatisParameter(temp_認定調査履歴番号, temp_認定調査委託先コード,
+        INinnteiChousaKekkaTouroku1RelateMapper mapper = mapperProvider.create(INinnteiChousaKekkaTouroku1RelateMapper.class);
+        List<TempDataEntity> entityList = mapper.get認定調査情報(new NinteiChosaJohoMybatisParameter(temp_認定調査履歴番号, temp_認定調査委託先コード,
                 temp_申請書管理番号, RString.EMPTY));
 
         TempData data = new TempData();
-        if (entity != null) {
+        if (entityList != null && !entityList.isEmpty()) {
+            TempDataEntity entity = entityList.get(0);
             data.setTemp_厚労省IF識別コード(entity.getTemp_厚労省IF識別コード());
             data.setTemp_認定調査依頼区分コード(entity.getTemp_認定調査依頼区分コード());
             data.setTemp_認定調査回数(entity.getTemp_認定調査回数());
@@ -84,21 +86,28 @@ public class NinnteiChousaKekkaTouroku1Finder {
     public TempData get既存概況調査情報(int temp_認定調査履歴番号,
             ShinseishoKanriNo temp_申請書管理番号) {
 
-        IDbe2210001RelateMapper mapper = mapperProvider.create(IDbe2210001RelateMapper.class);
+        INinnteiChousaKekkaTouroku1RelateMapper mapper = mapperProvider.create(INinnteiChousaKekkaTouroku1RelateMapper.class);
         RString 概況調査テキストイメージ区分 = DbBusinessConfig.get(ConfigNameDBE.概況調査テキストイメージ区分, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         TempDataEntity entity = mapper.get既存概況調査情報(new NinteiChosaJohoMybatisParameter(temp_認定調査履歴番号, RString.EMPTY,
                 temp_申請書管理番号, 概況調査テキストイメージ区分));
 
-        TempData data = new TempData();
-        if (entity != null) {
-            data.setTemp_現在の状況コード(entity.getTemp_現在の状況コード());
-            data.setTemp_現在のサービス区分コード(entity.getTemp_現在のサービス区分コード());
-            data.setTemp_利用施設名(entity.getTemp_利用施設名());
-            data.setTemp_利用施設住所(entity.getTemp_利用施設住所());
-            data.setTemp_利用施設電話番号(entity.getTemp_利用施設電話番号());
-            data.setTemp_利用施設郵便番号(entity.getTemp_利用施設郵便番号());
-            data.setTemp_特記(entity.getTemp_特記());
+        if (entity == null) {
+            return null;
         }
+
+        TempData data = new TempData();
+        data.setTemp_現在の状況コード(entity.getTemp_現在の状況コード());
+        data.setTemp_現在のサービス区分コード(entity.getTemp_現在のサービス区分コード());
+        data.setTemp_利用施設名(entity.getTemp_利用施設名());
+        data.setTemp_利用施設住所(entity.getTemp_利用施設住所());
+        data.setTemp_利用施設電話番号(entity.getTemp_利用施設電話番号());
+        data.setTemp_利用施設郵便番号(entity.getTemp_利用施設郵便番号());
+        data.setTemp_特記(entity.getTemp_特記());
+        data.setTemp_調査実施場所コード(entity.getTemp_調査実施場所コード());
+        data.setTemp_調査実施場所名称(entity.getTemp_調査実施場所名称());
+        data.setTemp_調査委託先コード(entity.getTemp_調査委託先コード());
+        data.setTemp_調査員コード(entity.getTemp_調査員コード());
+        data.setTemp_調査実施年月日(entity.getTemp_調査実施年月日());
         return data;
     }
 

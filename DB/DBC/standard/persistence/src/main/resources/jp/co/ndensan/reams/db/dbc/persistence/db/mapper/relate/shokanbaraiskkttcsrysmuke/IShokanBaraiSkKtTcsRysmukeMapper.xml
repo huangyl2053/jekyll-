@@ -15,7 +15,7 @@
         <result property="keiyakuJigyoshaTelNo" column="keiyakuJigyoshaTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
     </resultMap>
 
-    <select id="get受任者情報" resultMap="resultMap_JuninInfo"
+    <select resultOrdered="true" id="get受任者情報" resultMap="resultMap_JuninInfo"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanbaraiskkttcsrysmuke.ShokanBaraiSkKtTcsRysmukeParameter" fetchSize="500">
         SELECT
         A."hihokenshaNo"

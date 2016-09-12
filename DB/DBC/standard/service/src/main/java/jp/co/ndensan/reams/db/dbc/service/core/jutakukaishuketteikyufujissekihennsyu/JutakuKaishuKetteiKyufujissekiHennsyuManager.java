@@ -10,9 +10,9 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.syokanbaraishikyuketteky
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3027KyufujissekiJutakuKaishuhiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3033KyufujissekiShukeiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3038ShokanKihonEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3038ShokanKihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3049ShokanJutakuKaishuEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3053ShokanShukeiEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3053ShokanShukeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshinsei.GeifuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.syokanbaraishikyukettekyufujssekihensyu.DealKyufujissekiEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3017KyufujissekiKihonDac;
@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.KokanShikib
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
@@ -135,9 +135,7 @@ public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
             throw new ApplicationException(UrErrorMessages.存在しない
                     .getMessage().replace(認定有効期間.toString()).evaluate());
         }
-        KokanShikibetsuNo 交換情報識別番号 = null;
-        交換情報識別番号 = getKokanShikibetsuNo(サービス提供年月, 交換情報識別番号);
-
+        KokanShikibetsuNo 交換情報識別番号 = getKokanShikibetsuNo(サービス提供年月);
         DbT3017KyufujissekiKihonEntity 給付実績基本entity = new DbT3017KyufujissekiKihonEntity();
         RString 通し番号 = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.実績管理番号.getコード()).nextString();
         給付実績基本entity.setKokanShikibetsuNo(交換情報識別番号);
@@ -238,8 +236,8 @@ public class JutakuKaishuKetteiKyufujissekiHennsyuManager {
     }
 
     private KokanShikibetsuNo getKokanShikibetsuNo(
-            FlexibleYearMonth サービス提供年月,
-            KokanShikibetsuNo 交換情報識別番号) {
+            FlexibleYearMonth サービス提供年月) {
+        KokanShikibetsuNo 交換情報識別番号;
         if (サービス提供年月.isBeforeOrEquals(平成１５年３月)) {
             交換情報識別番号 = new KokanShikibetsuNo(DATA_1131);
         } else if (平成１５年４月.isBeforeOrEquals(サービス提供年月)

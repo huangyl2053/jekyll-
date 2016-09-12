@@ -68,7 +68,7 @@
         <result property="nijiHanteiKekkaInputHoho" column="dbT5129TennyuShibo_nijiHanteiKekkaInputHoho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="nijiHanteiKekkaInputYMD" column="dbT5129TennyuShibo_nijiHanteiKekkaInputYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
-    <select id="getEntity" resultMap="ResultMap_DbT5129TennyuShiboEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5129TennyuShiboEntity">
         SELECT
         <include refid="allColumns_DbT5129TennyuShibo"/>
         FROM

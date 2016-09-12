@@ -25,6 +25,16 @@
             <artifactId>DbxEntity</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxBusiness</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxService</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <!-- 公開系 -->
 
         <!-- テスト -->
@@ -33,5 +43,6 @@
             <artifactId>DbxTestHelper</artifactId>
             <version>${project.version}</version>
         </dependency>
+
     </dependencies>
 </project>

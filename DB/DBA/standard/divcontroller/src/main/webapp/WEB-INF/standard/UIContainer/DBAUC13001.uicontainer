@@ -56,7 +56,7 @@
      "toLayoutSubGyomuCode": "DBA",
      "toLayoutName": "DBA1050021",
      "toLayoutTitle": "被保険者資格詳細異動",
-     "toState": "初期状態"
+     "toState": "照会状態"
     },
     {
      "id": "5",
@@ -79,8 +79,22 @@
      "layoutName": "DBA1030011",
      "layoutTitle": "資格喪失異動",
      "eventName": "完了",
-     "destroy": false,
+     "destroy": true,
      "condition": ""
+    },
+    {
+     "id": "7",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA1030011",
+     "layoutTitle": "資格喪失異動",
+     "eventName": "検索結果一覧",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0200001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "該当者一覧"
     }
    ]
   }

@@ -9,16 +9,21 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJuryoininKeiyakusha;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanJuryoininKeiyakushaBuilder;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanjuryoininkeiyakusha.ChkKeiyakuNoParameter;
+import jp.co.ndensan.reams.db.dbc.business.core.shokanjuryoininkeiyakusha.ChkTorokuzumiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.keiyakuservice.KeiyakuServiceShurui;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyushinseishoumu.ShikyushinseishoUmuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shoninkubun.ShoninKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0310012.PnlTotalPanelDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0310011.PnlTotalSearchParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0310012.PnlTotalPanelParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanjuryoininkeiyakusha.ShokanJuryoininKeiyakushaFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -27,7 +32,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 受領委任契約（福祉用具購入費・住宅改修費）登録・追加・修正・照会_登録画面のHandlerクラスです。
@@ -45,7 +50,18 @@ public class PnlTotalPanelHandler {
     private static final RString 承認通知書再発行区分キー_0 = new RString("0");
     private static final RString 承認通知書再発行区分キー_1 = new RString("1");
     private static final RString 承認通知書再発行区分 = new RString("承認通知書再発行区分");
+    private static final RString 契約申請受付日 = new RString("契約申請受付日");
+    private static final RString 契約申請日 = new RString("契約申請日");
+    private static final RString 契約事業者番号 = new RString("契約事業者番号");
+    private static final RString 決定区分 = new RString("決定区分");
+    private static final RString 不承認理由 = new RString("不承認理由");
+    private static final RString 年度 = new RString("年度");
+    private static final RString 番号 = new RString("番号");
+    private static final RString 受領委任契約番号 = new RString("受領委任契約番号");
+    private static final RString 償還受領委任契約者 = new RString("償還受領委任契約者");
     private static final RYear 過年度 = new RYear(2000);
+    private static final Decimal 一割 = new Decimal(0.1);
+    private static final Decimal 九割 = new Decimal(0.9);
     private static final int 四 = 4;
     private static final int 五 = 5;
     private static final int 八 = 8;
@@ -303,15 +319,236 @@ public class PnlTotalPanelHandler {
     }
 
     /**
+     * 決定年月日
+     */
+    public void onBlur決定年月日() {
+        if (div.getPnlCommon().getPnlDetail().getTxtKeyakukettebi().getValue() != null) {
+            div.getPnlCommon().getPnlDetail().getRdoKettekubun().setSelectedKey(ShoninKubun.承認する.getコード());
+            div.getPnlCommon().getPnlDetail().getRdoKettekubun().setDisabled(false);
+            div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().setDisabled(true);
+            div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().clearValue();
+            div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().setDisabled(false);
+            div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2().setDisabled(false);
+            div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninkikan().setDisabled(false);
+            div.getPnlCommon().getPnlDetail().getPnlHidari().getChkSaihakoukubun().setDisabled(false);
+            div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHiyogakugokei().setDisabled(false);
+            div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtRiyosyajikofutangaku().setDisabled(false);
+            div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokentaisyohiyogaku().setDisabled(false);
+            div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokenkyufuhiyogaku().setDisabled(false);
+        } else {
+            div.getPnlCommon().getPnlDetail().getRdoKettekubun().setDisabled(true);
+            div.getPnlCommon().getPnlDetail().getRdoKettekubun().setSelectedKey(ShoninKubun.承認する.getコード());
+            div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().clearValue();
+            div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().setDisabled(true);
+            div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().setSelectedKey(RString.EMPTY);
+            div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().setDisabled(true);
+            div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2().clearValue();
+            div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2().setDisabled(true);
+            div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninkikan().clearFromValue();
+            div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninkikan().clearToValue();
+            div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninkikan().setDisabled(true);
+            div.getPnlCommon().getPnlDetail().getPnlHidari().getChkSaihakoukubun()
+                    .setSelectedItemsByKey(new ArrayList<RString>());
+            div.getPnlCommon().getPnlDetail().getPnlHidari().getChkSaihakoukubun().setDisabled(true);
+            div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHiyogakugokei().clearValue();
+            div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHiyogakugokei().setDisabled(true);
+            div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtRiyosyajikofutangaku().clearValue();
+            div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtRiyosyajikofutangaku().setDisabled(true);
+            div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokentaisyohiyogaku().clearValue();
+            div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokentaisyohiyogaku().setDisabled(true);
+            div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokenkyufuhiyogaku().clearValue();
+            div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokenkyufuhiyogaku().setDisabled(true);
+        }
+    }
+
+    /**
+     * click決定区分
+     */
+    public void click決定区分() {
+        if (ShoninKubun.承認する.getコード().equals(div.getPnlCommon().getPnlDetail()
+                .getRdoKettekubun().getSelectedKey())) {
+            div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().setDisabled(true);
+            div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().clearValue();
+            div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().setDisabled(false);
+            div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2().setDisabled(false);
+            div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninkikan().setDisabled(false);
+            div.getPnlCommon().getPnlDetail().getPnlHidari().getChkSaihakoukubun().setDisabled(false);
+            div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHiyogakugokei().setDisabled(false);
+            div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtRiyosyajikofutangaku().setDisabled(false);
+            div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokentaisyohiyogaku().setDisabled(false);
+            div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokenkyufuhiyogaku().setDisabled(false);
+        } else if (ShoninKubun.承認しない.getコード().equals(div.getPnlCommon().getPnlDetail()
+                .getRdoKettekubun().getSelectedKey())) {
+            div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().setDisabled(false);
+            div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().setSelectedKey(RString.EMPTY);
+            div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().setDisabled(true);
+            div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2().clearValue();
+            div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2().setDisabled(true);
+            div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninkikan().clearFromValue();
+            div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninkikan().clearToValue();
+            div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtSyoninkikan().setDisabled(true);
+            div.getPnlCommon().getPnlDetail().getPnlHidari().getChkSaihakoukubun()
+                    .setSelectedItemsByKey(new ArrayList<RString>());
+            div.getPnlCommon().getPnlDetail().getPnlHidari().getChkSaihakoukubun().setDisabled(true);
+            div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHiyogakugokei().clearValue();
+            div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHiyogakugokei().setDisabled(true);
+            div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtRiyosyajikofutangaku().clearValue();
+            div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtRiyosyajikofutangaku().setDisabled(true);
+            div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokentaisyohiyogaku().clearValue();
+            div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokentaisyohiyogaku().setDisabled(true);
+            div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokenkyufuhiyogaku().clearValue();
+            div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokenkyufuhiyogaku().setDisabled(true);
+        }
+    }
+
+    /**
+     * onBlur保険対象費用額
+     */
+    public void onBlur保険対象費用額() {
+        Decimal 保険対象費用額 = div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
+                .getTxtHokentaisyohiyogaku().getValue();
+        if (保険対象費用額 == null || 保険対象費用額 == Decimal.ZERO) {
+            return;
+        }
+        Decimal 利用者自己負担額 = div.getPnlCommon().getPnlDetail().getPnlKyufuhi()
+                .getTxtRiyosyajikofutangaku().getValue();
+        Decimal 保険給付費用額 = div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokenkyufuhiyogaku().getValue();
+        if (利用者自己負担額 == null && 保険給付費用額 == null) {
+            div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtRiyosyajikofutangaku()
+                    .setValue(少数点以下は切れ(保険対象費用額.multiply(一割)));
+            div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokenkyufuhiyogaku()
+                    .setValue(少数点以下は切れ(保険対象費用額.multiply(九割)));
+            if (少数点以下は切れ(保険対象費用額.multiply(一割)).add(少数点以下は切れ(保険対象費用額.multiply(九割)))
+                    .compareTo(保険対象費用額) < 0) {
+                div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokenkyufuhiyogaku()
+                        .setValue(保険対象費用額.subtract(少数点以下は切れ(保険対象費用額.multiply(一割))));
+            }
+        } else if (利用者自己負担額 == null && 保険給付費用額 != null) {
+            div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtRiyosyajikofutangaku()
+                    .setValue(少数点以下は切れ(保険対象費用額.multiply(一割)));
+        } else if (利用者自己負担額 != null && 保険給付費用額 == null) {
+            div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokenkyufuhiyogaku()
+                    .setValue(少数点以下は切れ(保険対象費用額.multiply(九割)));
+            if (利用者自己負担額.add(少数点以下は切れ(保険対象費用額.multiply(九割))).compareTo(保険対象費用額) < 0) {
+                div.getPnlCommon().getPnlDetail().getPnlKyufuhi().getTxtHokenkyufuhiyogaku()
+                        .setValue(保険対象費用額.subtract(少数点以下は切れ(保険対象費用額.multiply(一割))));
+            }
+        }
+    }
+
+    private Decimal 少数点以下は切れ(Decimal decimal) {
+        return new Decimal((int) Math.floor(decimal.doubleValue()));
+    }
+
+    /**
+     * 例外チェック
+     *
+     * @param 画面モード RString
+     * @param キー TaishoshaKey
+     * @param shokan ShokanJuryoininKeiyakusha
+     */
+    public void 例外チェック(RString 画面モード, TaishoshaKey キー, ShokanJuryoininKeiyakusha shokan) {
+        if (div.getPnlCommon().getPnlDetail().getTxtKeyakushinseuketukebi().getValue() == null) {
+            throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(契約申請受付日.toString()).evaluate());
+        }
+        if (div.getPnlCommon().getPnlDetail().getTxtKeyakushinseibi().getValue() == null) {
+            throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(契約申請日.toString()).evaluate());
+        }
+        if (div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaNo().getValue().isEmpty()) {
+            throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(契約事業者番号.toString()).evaluate());
+        }
+        if (div.getPnlCommon().getPnlDetail().getTxtKeyakukettebi().getValue() != null
+                && div.getPnlCommon().getPnlDetail().getRdoKettekubun().getSelectedKey().isEmpty()) {
+            throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(決定区分.toString()).evaluate());
+        }
+        if (div.getPnlCommon().getPnlDetail().getTxtKeyakukettebi().getValue() != null
+                && ShoninKubun.承認する.getコード().equals(div.getPnlCommon().getPnlDetail().getRdoKettekubun().getSelectedKey())) {
+            if (div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().getSelectedKey().isEmpty()) {
+                throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(年度.toString()).evaluate());
+            }
+            if (div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango1().getValue() == null
+                    || div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango1().getValue().toString().isEmpty()
+                    || div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2().getValue() == null
+                    || div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2().getValue().toString().isEmpty()) {
+                throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(番号.toString()).evaluate());
+            }
+            if (is受領委任契約番号重複(画面モード, キー, shokan)) {
+                throw new ApplicationException(UrErrorMessages.既に存在.getMessage()
+                        .replace(受領委任契約番号.toString()).evaluate());
+            }
+        } else if (ShoninKubun.承認しない.getコード().equals(div.getPnlCommon().getPnlDetail()
+                .getRdoKettekubun().getSelectedKey())
+                && div.getPnlCommon().getPnlDetail().getTxtFusyoninriyu().getValue().isEmpty()) {
+            throw new ApplicationException(UrErrorMessages.必須.getMessage().replace(不承認理由.toString()).evaluate());
+        }
+        if (is存在チェック(画面モード, キー, shokan)) {
+            throw new ApplicationException(UrErrorMessages.既に登録済.getMessage()
+                    .replace(償還受領委任契約者.toString()).evaluate());
+        }
+    }
+
+    private boolean is受領委任契約番号重複(RString 画面モード, TaishoshaKey キー, ShokanJuryoininKeiyakusha shokan) {
+        ShokanJuryoininKeiyakushaFinder finder = InstanceProvider.create(ShokanJuryoininKeiyakushaFinder.class);
+        HihokenshaNo 被保険者番号;
+        if (登録.equals(画面モード)) {
+            被保険者番号 = キー.get被保険者番号();
+        } else {
+            被保険者番号 = shokan.get被保険者番号();
+        }
+        ChkKeiyakuNoParameter parameter = new ChkKeiyakuNoParameter(
+                被保険者番号,
+                new FlexibleDate(div.getPnlCommon().getPnlDetail()
+                        .getTxtKeyakushinseibi().getValue().toDateString()),
+                div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaNo().getValue(),
+                div.getPnlCommon().getPnlDetail().getDdlKeiyakuServiceType().getSelectedKey(),
+                new FlexibleYear(div.getPnlCommon().getPnlDetail().getPnlHidari().getDdlYear().getSelectedValue()),
+                div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango1().getValue() == null ? null
+                : new RString(div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango1().getValue().toString()),
+                div.getPnlCommon().getPnlDetail().getPnlHidari().getTxtBango2().getValue(),
+                画面モード);
+        return !finder.chkKeiyakuNo(parameter);
+    }
+
+    private boolean is存在チェック(RString 画面モード, TaishoshaKey キー, ShokanJuryoininKeiyakusha shokan) {
+        ChkTorokuzumiParameter parameter;
+        if (div.getPnlCommon().getPnlDetail().getTxtKeyakushinseibi().getValue() == null) {
+            return true;
+        }
+        if (登録.equals(画面モード)) {
+            parameter = new ChkTorokuzumiParameter(
+                    キー.get被保険者番号(),
+                    null,
+                    null,
+                    null,
+                    new FlexibleDate(div.getPnlCommon().getPnlDetail().getTxtKeyakushinseibi().getValue().toDateString()),
+                    div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaNo().getValue(),
+                    div.getPnlCommon().getPnlDetail().getDdlKeiyakuServiceType().getSelectedKey(),
+                    画面モード);
+        } else {
+            parameter = new ChkTorokuzumiParameter(
+                    shokan.get被保険者番号(),
+                    shokan.get申請年月日(),
+                    shokan.get契約事業者番号(),
+                    shokan.get契約サービス種類(),
+                    new FlexibleDate(div.getPnlCommon().getPnlDetail().getTxtKeyakushinseibi().getValue().toDateString()),
+                    div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaNo().getValue(),
+                    div.getPnlCommon().getPnlDetail().getDdlKeiyakuServiceType().getSelectedKey(),
+                    画面モード);
+        }
+        ShokanJuryoininKeiyakushaFinder finder = InstanceProvider.create(ShokanJuryoininKeiyakushaFinder.class);
+        return !finder.chkTorokuzumi(parameter);
+    }
+
+    /**
      * パラメータを作成する。
      *
+     * @param キー TaishoshaKey
      * @return PnlTotalPanelParameter パラメータ
      */
-    public PnlTotalPanelParameter createParameter() {
-        TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+    public PnlTotalPanelParameter createParameter(TaishoshaKey キー) {
         PnlTotalPanelParameter parameter = new PnlTotalPanelParameter(
-                key.get識別コード(),
-                key.get被保険者番号().getColumnValue(),
+                キー.get識別コード(),
+                キー.get被保険者番号().getColumnValue(),
                 div.getPnlCommon().getPnlDetail().getTxtKeyakushinseuketukebi().getValue(),
                 div.getPnlCommon().getPnlDetail().getTxtKeyakushinseibi().getValue(),
                 div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaNo().getValue(),
@@ -343,22 +580,20 @@ public class PnlTotalPanelHandler {
      * 保存処理メソッド
      *
      * @param 画面モード RString
+     * @param キー TaishoshaKey
+     * @param shokan ShokanJuryoininKeiyakusha
      */
-    public void 保存処理(RString 画面モード) {
+    public void 保存処理(RString 画面モード, TaishoshaKey キー, ShokanJuryoininKeiyakusha shokan) {
         ShokanJuryoininKeiyakushaFinder finder = ShokanJuryoininKeiyakushaFinder.createInstance();
-        ShokanJuryoininKeiyakusha shokan;
         if (登録.equals(画面モード)) {
-            TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-            shokan = new ShokanJuryoininKeiyakusha(
-                    key.get被保険者番号(),
+            ShokanJuryoininKeiyakusha newShokan = new ShokanJuryoininKeiyakusha(
+                    キー.get被保険者番号(),
                     new FlexibleDate(div.getPnlCommon().getPnlDetail().getTxtKeyakushinseibi().getValue().toDateString()),
                     div.getPnlCommon().getPnlDetail().getTxtKeyakujigyosyaNo().getValue(),
                     div.getPnlCommon().getPnlDetail().getDdlKeiyakuServiceType().getSelectedKey());
-            shokan = build契約者情報(shokan);
-            finder.insShokanJuryoininKeiyakusha(shokan);
+            newShokan = build契約者情報(newShokan);
+            finder.insShokanJuryoininKeiyakusha(newShokan);
         } else {
-            shokan = ViewStateHolder.
-                    get(ViewStateKeys.契約者一覧情報, ShokanJuryoininKeiyakusha.class);
             if (修正.equals(画面モード)) {
                 finder.updShokanJuryoininKeiyakusha(build契約者情報(shokan));
             } else if (削除.equals(画面モード)) {
@@ -370,7 +605,7 @@ public class PnlTotalPanelHandler {
     /**
      * 契約者情報build
      *
-     * @param shokan
+     * @param shokan ShokanJuryoininKeiyakusha
      * @return ShokanJuryoininKeiyakusha
      */
     private ShokanJuryoininKeiyakusha build契約者情報(ShokanJuryoininKeiyakusha shokan) {

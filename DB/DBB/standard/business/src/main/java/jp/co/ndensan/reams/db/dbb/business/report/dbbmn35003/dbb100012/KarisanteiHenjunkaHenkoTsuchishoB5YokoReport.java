@@ -26,9 +26,7 @@ import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesak
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -45,6 +43,8 @@ public class KarisanteiHenjunkaHenkoTsuchishoB5YokoReport extends Report<Karisan
     private final NinshoshaSource ninshoshaSource;
     private final CompKaigoToiawasesakiSource kaigoToiawasesakiSource;
     private final List<KarisanteiHenjunkaHenkoTsuchishoB5YokoItem> outputItemList;
+    private static final int NUM8 = 8;
+    private static final int NUM16 = 16;
 
     /**
      * コンストラクタです。
@@ -83,6 +83,9 @@ public class KarisanteiHenjunkaHenkoTsuchishoB5YokoReport extends Report<Karisan
     }
 
     private void setOutputItemList() {
+        if (仮算定納入通知書情報 == null || 仮算定納入通知書情報.get編集後仮算定通知書共通情報() == null) {
+            return;
+        }
         KarisanteiHenjunkaHenkoTsuchishoB5YokoItem item;
 
         EditedKariSanteiTsuchiShoKyotsu 編集後仮算定通知書共通情報 = 仮算定納入通知書情報.get編集後仮算定通知書共通情報();
@@ -96,6 +99,11 @@ public class KarisanteiHenjunkaHenkoTsuchishoB5YokoReport extends Report<Karisan
         }
         if (普徴納期情報リスト != null && 普徴納期情報リスト.size() > 行) {
             行 = 普徴納期情報リスト.size();
+        }
+        if (行 < NUM8) {
+            行 = NUM8;
+        } else if (行 > NUM8 && 行 < NUM16) {
+            行 = NUM16;
         }
 
         for (int index = 0; index < 行; index++) {
@@ -205,20 +213,16 @@ public class KarisanteiHenjunkaHenkoTsuchishoB5YokoReport extends Report<Karisan
             EditedKariSanteiTsuchiShoKyotsuBeforeCorrection 更正前, EditedKariSanteiTsuchiShoKyotsuAfterCorrection 更正後) {
 
         if (更正前.get期間_自() != null) {
-            item.setShutokuYmdMae(new FlexibleDate(更正前.get期間_自()).wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+            item.setShutokuYmdMae(更正前.get期間_自());
         }
         if (更正後.get期間_自() != null) {
-            item.setShutokuYmdAto(new FlexibleDate(更正後.get期間_自()).wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+            item.setShutokuYmdAto(更正後.get期間_自());
         }
         if (更正前.get期間_至() != null) {
-            item.setSoshitsuYmdMae(new FlexibleDate(更正前.get期間_至()).wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+            item.setSoshitsuYmdMae(更正前.get期間_至());
         }
         if (更正後.get期間_至() != null) {
-            item.setSoshitsuYmdAto(new FlexibleDate(更正後.get期間_至()).wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+            item.setSoshitsuYmdAto(更正後.get期間_至());
         }
     }
 
@@ -265,14 +269,14 @@ public class KarisanteiHenjunkaHenkoTsuchishoB5YokoReport extends Report<Karisan
     private void set普徴(int 行, KarisanteiHenjunkaHenkoTsuchishoB5YokoItem item, List<UniversalSignDeliveryInformation> 普徴納期情報リスト,
             EditedKariSanteiTsuchiShoKyotsuBeforeCorrection 更正前, EditedKariSanteiTsuchiShoKyotsuAfterCorrection 更正後) {
         RString 期別 = RString.EMPTY;
-        if (普徴納期情報リスト != null && 普徴納期情報リスト.get(行) != null && 普徴納期情報リスト.get(行).get期月() != null) {
+        if (普徴納期情報リスト != null && 普徴納期情報リスト.size() > 行 && 普徴納期情報リスト.get(行) != null && 普徴納期情報リスト.get(行).get期月() != null) {
             期別 = 普徴納期情報リスト.get(行).get期月().get期();
             item.setListKibetsu_5(普徴納期情報リスト.get(行).get期月().get期());
             item.setListKibetsu_6(普徴納期情報リスト.get(行).get期月().get月() != null ? 普徴納期情報リスト.get(行).get期月().get月().getコード() : RString.EMPTY);
         }
 
-        Decimal 更正前期別金額 = Decimal.ZERO;
-        Decimal 更正後期別金額 = Decimal.ZERO;
+        Decimal 更正前期別金額 = null;
+        Decimal 更正後期別金額 = null;
         List<UniversalPhase> 更正前普徴期別金額リスト = 更正前.get更正前普徴期別金額リスト();
         if (更正前普徴期別金額リスト == null) {
             更正前普徴期別金額リスト = new ArrayList<>();
@@ -282,31 +286,35 @@ public class KarisanteiHenjunkaHenkoTsuchishoB5YokoReport extends Report<Karisan
             更正後普徴期別金額リスト = new ArrayList<>();
         }
         for (UniversalPhase 期別金額 : 更正前普徴期別金額リスト) {
-            if (new RString(期別金額.get期()).equals(期別)) {
+            if (new RString(期別金額.get期()).padZeroToLeft(2).equals(期別.padZeroToLeft(2))) {
                 更正前期別金額 = 期別金額.get金額();
             }
         }
         for (UniversalPhase 期別金額 : 更正後普徴期別金額リスト) {
-            if (new RString(期別金額.get期()).equals(期別)) {
+            if (new RString(期別金額.get期()).padZeroToLeft(2).equals(期別.padZeroToLeft(2))) {
                 更正後期別金額 = 期別金額.get金額();
             }
         }
-        if (更正前期別金額 == Decimal.ZERO && 更正後期別金額 == Decimal.ZERO) {
+        set更正前と更正後の期別金額(item, 更正前期別金額, 更正後期別金額);
+    }
+
+    private void set更正前と更正後の期別金額(KarisanteiHenjunkaHenkoTsuchishoB5YokoItem item, Decimal 更正前期別金額, Decimal 更正後期別金額) {
+        if ((更正前期別金額 == null || Decimal.ZERO.equals(更正前期別金額)) && (更正後期別金額 == null || Decimal.ZERO.equals(更正後期別金額))) {
             item.setListKibetsu_7(RString.EMPTY);
             item.setListKibetsu_8(RString.EMPTY);
-        } else if (更正前期別金額 == Decimal.ZERO && 更正後期別金額 != Decimal.ZERO) {
+        } else if ((更正前期別金額 == null || Decimal.ZERO.equals(更正前期別金額)) && (更正後期別金額 != null && !Decimal.ZERO.equals(更正後期別金額))) {
             item.setListKibetsu_7(new RString("0"));
 
             IKingakuFormatter 更正後期別金額formatter = KingakuFormatter.create(更正後期別金額);
             RString 更正後期別金額RStr = new RString(更正後期別金額formatter.format(KingakuUnit.円).setCommaSeparated().toString());
             item.setListKibetsu_8(更正後期別金額RStr);
-        } else if (更正前期別金額 != Decimal.ZERO && 更正後期別金額 == Decimal.ZERO) {
+        } else if ((更正前期別金額 != null && !Decimal.ZERO.equals(更正前期別金額)) && (更正後期別金額 == null || Decimal.ZERO.equals(更正後期別金額))) {
 
             IKingakuFormatter 更正前期別金額formatter = KingakuFormatter.create(更正前期別金額);
             RString 更正前期別金額RStr = new RString(更正前期別金額formatter.format(KingakuUnit.円).setCommaSeparated().toString());
             item.setListKibetsu_7(更正前期別金額RStr);
             item.setListKibetsu_8(new RString("0"));
-        } else if (更正前期別金額 != Decimal.ZERO && 更正後期別金額 != Decimal.ZERO) {
+        } else if (更正前期別金額 != null && !Decimal.ZERO.equals(更正前期別金額) && 更正後期別金額 != null && !Decimal.ZERO.equals(更正後期別金額)) {
             IKingakuFormatter 更正前期別金額formatter = KingakuFormatter.create(更正前期別金額);
             RString 更正前期別金額RStr = new RString(更正前期別金額formatter.format(KingakuUnit.円).setCommaSeparated().toString());
             item.setListKibetsu_7(更正前期別金額RStr);

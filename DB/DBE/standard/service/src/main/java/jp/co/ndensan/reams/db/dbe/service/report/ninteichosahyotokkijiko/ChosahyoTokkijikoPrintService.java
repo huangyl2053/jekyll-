@@ -5,9 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.service.report.ninteichosahyotokkijiko;
 
-import java.util.ArrayList;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyotokkijiko.ChosahyoTokkijikoItem;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyotokkijiko.ChosahyoTokkijikoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyotokkijiko.ChosahyoTokkijikoProperty;
 import jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyotokkijiko.ChosahyoTokkijikoReport;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosahyotokkijiko.ChosahyoTokkijikoReportSource;
@@ -24,17 +22,15 @@ public class ChosahyoTokkijikoPrintService {
     /**
      * 要介護認定調査票（特記事項）を印刷します。
      *
-     * @param itemList 要介護認定調査票（特記事項）作成_帳票クラスパラメータクラス
+     * @param business 要介護認定調査票（特記事項）作成_帳票クラスパラメータクラス
      * @return {@link SourceDataCollection}
      */
-    public SourceDataCollection print(List<ChosahyoTokkijikoItem> itemList) {
+    public SourceDataCollection print(ChosahyoTokkijikoBusiness business) {
         ChosahyoTokkijikoProperty property = new ChosahyoTokkijikoProperty();
-        return new Printer<ChosahyoTokkijikoReportSource>().spool(property, toReports(itemList));
+        return new Printer<ChosahyoTokkijikoReportSource>().spool(property, toReports(business));
     }
 
-    private static List<ChosahyoTokkijikoReport> toReports(List<ChosahyoTokkijikoItem> itemList) {
-        List<ChosahyoTokkijikoReport> list = new ArrayList<>();
-        list.add(ChosahyoTokkijikoReport.createFrom(itemList));
-        return list;
+    private static ChosahyoTokkijikoReport toReports(ChosahyoTokkijikoBusiness business) {
+        return new ChosahyoTokkijikoReport(business);
     }
 }

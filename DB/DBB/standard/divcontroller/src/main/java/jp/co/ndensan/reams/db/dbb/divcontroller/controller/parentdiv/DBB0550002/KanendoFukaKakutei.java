@@ -10,10 +10,12 @@ import jp.co.ndensan.reams.db.dbb.business.core.honsanteiidokanendofukakakutei.K
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbInformationMessages;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbQuestionMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550002.KanendoFukaKakuteiDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0550002.dgKanendoFukaIchiran_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0550002.KanendoFukaKakuteiHandler;
-import jp.co.ndensan.reams.db.dbb.service.honsanteiidokanendofukakakutei.HonsanteiIdoKanendoFukaKakutei;
+import jp.co.ndensan.reams.db.dbb.service.core.honsanteiidokanendofukakakutei.HonsanteiIdoKanendoFukaKakutei;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -25,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -132,7 +135,7 @@ public class KanendoFukaKakutei {
      */
     public ResponseData<KanendoFukaKakuteiDiv> onClick_dgKanendoFukaIchiran(KanendoFukaKakuteiDiv div) {
         // TODO 介護保険料賦課比較画面（DBB0320005）画面へ遷移する
-        getKanendoFukaKakuteiHandler(div).setViewState();
+        setViewState(div);
         return ResponseData.of(div).respond();
     }
 
@@ -151,6 +154,14 @@ public class KanendoFukaKakutei {
             return ResponseData.of(div).respond();
         }
         return ResponseData.of(div).respond();
+    }
+
+    private void setViewState(KanendoFukaKakuteiDiv div) {
+        dgKanendoFukaIchiran_Row row = div.getKaNendoIdoFukaIchiran().getDgKanendoFukaIchiran().getClickedItem();
+        ViewStateHolder.put(ViewStateKeys.調定年度, row.getTxtChoteiNendo().getValue());
+        ViewStateHolder.put(ViewStateKeys.賦課年度, row.getTxtChoteiNendo().getValue());
+        ViewStateHolder.put(ViewStateKeys.通知書番号, row.getTxtChoteiNendo().getValue());
+        ViewStateHolder.put(ViewStateKeys.履歴番号, row.getTxtChoteiNendo().getValue());
     }
 
     private KanendoFukaKakuteiHandler getKanendoFukaKakuteiHandler(KanendoFukaKakuteiDiv div) {

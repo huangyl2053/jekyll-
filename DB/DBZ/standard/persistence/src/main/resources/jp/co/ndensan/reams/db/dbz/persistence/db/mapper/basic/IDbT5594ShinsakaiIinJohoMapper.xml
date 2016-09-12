@@ -72,7 +72,7 @@
         <result property="haishiFlag" column="dbT5594ShinsakaiIinJoho_haishiFlag" />
         <result property="haishiYMD" column="dbT5594ShinsakaiIinJoho_haishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
-   <select id="getEntity" resultMap="ResultMap_DbT5594ShinsakaiIinJohoEntity">
+   <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5594ShinsakaiIinJohoEntity">
         SELECT
         <include refid="allColumns_DbT5594ShinsakaiIinJoho"/>
         FROM

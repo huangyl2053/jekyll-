@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.business.config.shikaku;
 
 import jp.co.ndensan.reams.db.dbz.business.config.ConfigValueBoolean;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.shikaku.ConfigKeysHihokenshashoJushoEdit;
+import jp.co.ndensan.reams.db.dbz.definition.core.config.ConfigKeysHihokenshashoJushoEdit;
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.GunNamePrint;
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.HowToEditJusho;
 import jp.co.ndensan.reams.db.dbx.definition.core.hokensha.KatagakiPrint;

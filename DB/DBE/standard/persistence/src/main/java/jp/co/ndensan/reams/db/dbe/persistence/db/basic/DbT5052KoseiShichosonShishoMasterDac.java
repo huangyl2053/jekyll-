@@ -24,6 +24,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 構成市町村支所マスタのデータアクセスクラスです。
+ *
+ * @reamsid_L DBE-9999-021 chengsanyuan
  */
 public class DbT5052KoseiShichosonShishoMasterDac implements ISaveable<DbT5052KoseiShichosonShishoMasterEntity> {
 
@@ -66,6 +68,22 @@ public class DbT5052KoseiShichosonShishoMasterDac implements ISaveable<DbT5052Ko
 
         return accessor.select().
                 table(DbT5052KoseiShichosonShishoMaster.class).
+                toList(DbT5052KoseiShichosonShishoMasterEntity.class);
+    }
+
+    /**
+     * 市町村コードで構成市町村支所マスタを取得します。
+     *
+     * @param 市町村コード 市町村コード
+     * @return DbT5052KoseiShichosonShishoMasterEntityの{@code list}
+     */
+    @Transaction
+    public List<DbT5052KoseiShichosonShishoMasterEntity> selectByShichosonCode(LasdecCode 市町村コード) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5052KoseiShichosonShishoMaster.class).
+                where(eq(shichosonCode, 市町村コード)).
                 toList(DbT5052KoseiShichosonShishoMasterEntity.class);
     }
 

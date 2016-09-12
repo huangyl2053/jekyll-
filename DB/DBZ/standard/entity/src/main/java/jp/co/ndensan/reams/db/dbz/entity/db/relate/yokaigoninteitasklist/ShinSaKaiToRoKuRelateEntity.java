@@ -40,4 +40,5 @@ public class ShinSaKaiToRoKuRelateEntity {
     private RString shinsakaiKaishiYoteiTime;
     private RString shinsakaiKaisaiNo;
     private int gogitaiNo;
+    private FlexibleDate shinsakaiWariateYMD;
 }

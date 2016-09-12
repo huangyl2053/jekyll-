@@ -11,17 +11,20 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.chochuyuyo.ChoshuYuyo;
 import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.chochuyuyo.ChoshuYuyoIdentifier;
+import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.choteikyotsu.ChoteiKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.choteikyotsu.ChoteiKyotsuIdentifier;
 import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.kibetsu.KibetsuIdentifier;
 import jp.co.ndensan.reams.db.dbb.business.core.choshuyuyo.kibetsuchochuyuyo.KibetsuChoshuYuyo;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.choshuyuyo.ChoshuYuyoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.choshuyuyo.ChoshuYuyoJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.choshuyuyo.KibetsuEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -41,7 +44,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 徴収猶予の情報を管理するクラスです。
  *
- * @reamsid_L DBB-9999-013 huangh
+ * @reamsid_L DBB-9999-013 xicongwang
  */
 public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, DbT2002FukaEntity, ChoshuYuyoJoho> implements Serializable {
 
@@ -1071,7 +1074,7 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
     public FlexibleDate get徴収猶予申請年月日() {
 
         ChoshuYuyo 徴収猶予 = get徴収猶予();
-        return 徴収猶予 != null ? 徴収猶予.get徴収猶予申請年月日() : FlexibleDate.EMPTY;
+        return 徴収猶予 != null ? 徴収猶予.get徴収猶予申請年月日() : null;
     }
 
     /**
@@ -1082,7 +1085,7 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
     public FlexibleDate get徴収猶予決定年月日() {
 
         ChoshuYuyo 徴収猶予 = get徴収猶予();
-        return 徴収猶予 != null ? 徴収猶予.get徴収猶予決定年月日() : FlexibleDate.EMPTY;
+        return 徴収猶予 != null ? 徴収猶予.get徴収猶予決定年月日() : null;
     }
 
     /**
@@ -1093,7 +1096,7 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
     public FlexibleDate get徴収猶予取消年月日() {
 
         ChoshuYuyo 徴収猶予 = get徴収猶予();
-        return 徴収猶予 != null ? 徴収猶予.get徴収猶予取消年月日() : FlexibleDate.EMPTY;
+        return 徴収猶予 != null ? 徴収猶予.get徴収猶予取消年月日() : null;
     }
 
     /**
@@ -1104,7 +1107,7 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
     public Code get徴収猶予種類コード() {
 
         ChoshuYuyo 徴収猶予 = get徴収猶予();
-        return 徴収猶予 != null ? 徴収猶予.get徴収猶予種類コード() : Code.EMPTY;
+        return 徴収猶予 != null ? 徴収猶予.get徴収猶予種類コード() : null;
     }
 
     /**
@@ -1115,7 +1118,7 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
     public RString get徴収猶予取消事由() {
 
         ChoshuYuyo 徴収猶予 = get徴収猶予();
-        return 徴収猶予 != null ? 徴収猶予.get徴収猶予取消事由() : RString.EMPTY;
+        return 徴収猶予 != null ? 徴収猶予.get徴収猶予取消事由() : null;
     }
 
     /**
@@ -1126,7 +1129,7 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
     public RString get徴収猶予状態区分() {
 
         ChoshuYuyo 徴収猶予 = get徴収猶予();
-        return 徴収猶予 != null ? 徴収猶予.get徴収猶予状態区分() : RString.EMPTY;
+        return 徴収猶予 != null ? 徴収猶予.get徴収猶予状態区分() : null;
     }
 
     /**
@@ -1137,7 +1140,7 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
     public RString get徴収猶予作成区分() {
 
         ChoshuYuyo 徴収猶予 = get徴収猶予();
-        return 徴収猶予 != null ? 徴収猶予.get徴収猶予作成区分() : RString.EMPTY;
+        return 徴収猶予 != null ? 徴収猶予.get徴収猶予作成区分() : null;
     }
 
     /**
@@ -1160,9 +1163,35 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
     public List<KibetsuChoshuYuyo> get介護期別徴収猶予() {
         ChoshuYuyo 徴収猶予 = get徴収猶予();
         if (徴収猶予 == null) {
-            return new ArrayList<>();
+            return null;
         }
         return 徴収猶予.getKibetsuChoshuYuyoList();
+    }
+
+    /**
+     * 賦課の情報が保持する賦課の情報RelateEntityをリストで返します。
+     *
+     * @return 賦課の情報RelateEntity
+     */
+    public FukaJohoRelateEntity get賦課の情報RelateEntity() {
+        List<jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity> 介護期別RelateEntityList = new ArrayList<>();
+        List<Kibetsu> 介護期別List = new ArrayList<>(kibetsu.values());
+        for (Kibetsu 介護期別 : 介護期別List) {
+            jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity 介護期別RelateEntity
+                    = new jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity();
+            介護期別RelateEntity.set介護期別Entity(介護期別.toEntity());
+            List<UrT0705ChoteiKyotsuEntity> 調定共通RelateEntityList = new ArrayList<>();
+            List<ChoteiKyotsu> 調定共通EntityList = 介護期別.getChoteiKyotsuList();
+            for (ChoteiKyotsu 調定共通 : 調定共通EntityList) {
+                調定共通RelateEntityList.add(調定共通.toEntity());
+            }
+            介護期別RelateEntity.set調定共通Entity(調定共通RelateEntityList);
+            介護期別RelateEntityList.add(介護期別RelateEntity);
+        }
+        FukaJohoRelateEntity 賦課の情報RelateEntity = new FukaJohoRelateEntity();
+        賦課の情報RelateEntity.set介護期別RelateEntity(介護期別RelateEntityList);
+        賦課の情報RelateEntity.set介護賦課Entity(entity);
+        return 賦課の情報RelateEntity;
     }
 
     /**
@@ -1175,7 +1204,7 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
     private Decimal get期別金額(int 期, RString 徴収方法期別) {
 
         if (kibetsu == null || kibetsu.values() == null || kibetsu.values().isEmpty()) {
-            return Decimal.ZERO;
+            return null;
         }
         List<Kibetsu> 介護期別List = new ArrayList<>(kibetsu.values());
         for (Kibetsu 介護期別 : 介護期別List) {
@@ -1186,7 +1215,7 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
                 return 介護期別.getChoteiKyotsu(identifier).get調定額();
             }
         }
-        return Decimal.ZERO;
+        return null;
     }
 
     /**
@@ -1200,11 +1229,11 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
 
         ChoshuYuyo 徴収猶予 = get徴収猶予();
         if (徴収猶予 == null) {
-            return FlexibleDate.EMPTY;
+            return null;
         }
         List<KibetsuChoshuYuyo> 介護期別徴収猶予情報List = 徴収猶予.getKibetsuChoshuYuyoList();
         if (介護期別徴収猶予情報List == null || 介護期別徴収猶予情報List.isEmpty()) {
-            return FlexibleDate.EMPTY;
+            return null;
         }
         for (KibetsuChoshuYuyo 介護期別徴収猶予情報 : 介護期別徴収猶予情報List) {
             if (徴収方法期別.equals(介護期別徴収猶予情報.get徴収方法())
@@ -1212,7 +1241,7 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
                 return 介護期別徴収猶予情報.get徴収猶予開始日();
             }
         }
-        return FlexibleDate.EMPTY;
+        return null;
     }
 
     /**
@@ -1226,11 +1255,11 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
 
         ChoshuYuyo 徴収猶予 = get徴収猶予();
         if (徴収猶予 == null) {
-            return FlexibleDate.EMPTY;
+            return null;
         }
         List<KibetsuChoshuYuyo> 介護期別徴収猶予情報List = 徴収猶予.getKibetsuChoshuYuyoList();
         if (介護期別徴収猶予情報List == null || 介護期別徴収猶予情報List.isEmpty()) {
-            return FlexibleDate.EMPTY;
+            return null;
         }
         for (KibetsuChoshuYuyo 介護期別徴収猶予情報 : 介護期別徴収猶予情報List) {
             if (徴収方法期別.equals(介護期別徴収猶予情報.get徴収方法())
@@ -1238,7 +1267,7 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
                 return 介護期別徴収猶予情報.get徴収猶予終了日();
             }
         }
-        return FlexibleDate.EMPTY;
+        return null;
     }
 
     /**
@@ -1264,7 +1293,8 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
     /**
      * 徴収猶予の情報配下の要素を削除対象とします。<br/>
      * {@link ChoshuYuyoJohoRelateEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
-     * 徴収猶予の情報配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link ChoshuYuyoJoho}を返します。
+     * 徴収猶予の情報配下の要素である精神手帳任意項目情報の{@link Models#deleteOrRemoveAll() }を実行します。
+     * 削除処理結果となる{@link ChoshuYuyoJoho}を返します。
      *
      * @return 削除対象処理実施後の{@link ChoshuYuyoJoho}
      * @throws IllegalStateException ChoshuYuyoJohoRelateEntityのデータ状態が変更の場合
@@ -1288,7 +1318,8 @@ public class ChoshuYuyoJoho extends ParentModelBase<ChoshuYuyoJohoIdentifier, Db
     }
 
     /**
-     * 徴収猶予の情報のみを変更対象とします。<br/> {@link ChoshuYuyoJohoRelateEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 徴収猶予の情報のみを変更対象とします。<br/>
+     * {@link ChoshuYuyoJohoRelateEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ChoshuYuyoJoho}
      */

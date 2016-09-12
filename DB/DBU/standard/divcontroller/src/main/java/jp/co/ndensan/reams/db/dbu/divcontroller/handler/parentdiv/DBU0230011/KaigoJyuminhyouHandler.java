@@ -10,15 +10,13 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigojuminhyokobetsukoikiunyo.KaigoJuminhyoKobetsuKoikiunyo;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0230011.KobetsuJikoRenkeiInfoSakuseiKoikiDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0230011.dgKobetsuJikoRenkeiInfoSakuseiKoik_Row;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
-import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 介護住民票個別事項連携情報作成【広域運用】画面のハンドラークラスです。
@@ -101,6 +99,8 @@ public class KaigoJyuminhyouHandler {
             div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromTime().setDisabled(false);
         }
         div.getKonkaiInfoInput().getChkZenken().setSelectedItemsByKey(key);
+        div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getSelectedItems().get(数値_0).setModifyButtonState(DataGridButtonState.Disabled);
+        div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getSelectedItems().get(数値_0).setSelectable(false);
     }
 
     /**
@@ -110,6 +110,8 @@ public class KaigoJyuminhyouHandler {
     public void onClick_CloseButton() {
         div.getKonkaiInfoInput().setIsOpen(false);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(実行, false);
+        div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getClickedItem().setSelectable(true);
+        div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getClickedItem().setModifyButtonState(DataGridButtonState.Enabled);
     }
 
     /**
@@ -123,7 +125,9 @@ public class KaigoJyuminhyouHandler {
             div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromYMD().setDisabled(true);
             div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromTime().setDisabled(true);
         } else {
-            dgKobetsuJikoRenkeiInfoSakuseiKoik_Row dgRow = div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getSelectedItems().get(数値_0);
+            List<dgKobetsuJikoRenkeiInfoSakuseiKoik_Row> dgRowList = div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getDataSource();
+            int rowcount = div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getClickedItem().getId();
+            dgKobetsuJikoRenkeiInfoSakuseiKoik_Row dgRow = dgRowList.get(rowcount);
             div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromYMD().setValue(dgRow.getTxtKonkaiStSakuseiYMD().getValue());
             div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromTime().setValue(dgRow.getTxtKonkaiStSakuseiTime().getValue());
             div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromYMD().setDisabled(false);
@@ -132,54 +136,40 @@ public class KaigoJyuminhyouHandler {
     }
 
     /**
+     * 確定するボタン押下の場合、入力チェック実行します。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs validateCheck() {
+        return createValidationHandler(div).validateCheck();
+    }
+
+    /**
      * 画面確定処理です。
      *
      */
     public void onClick_KakuButton() {
+        div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getClickedItem().setSelectable(true);
+        div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getClickedItem().setModifyButtonState(DataGridButtonState.Enabled);
+        div.getKonkaiInfoInput().setIsOpen(false);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(実行, false);
+        List<dgKobetsuJikoRenkeiInfoSakuseiKoik_Row> dgRowList = div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getDataSource();
+        int rowcount = div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getClickedItem().getId();
+        dgKobetsuJikoRenkeiInfoSakuseiKoik_Row dgRow = dgRowList.get(rowcount);
         if (div.getKonkaiInfoInput().getChkZenken().isAllSelected()) {
-            div.getKonkaiInfoInput().setIsOpen(false);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(実行, false);
-            List<dgKobetsuJikoRenkeiInfoSakuseiKoik_Row> dgRowList = div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getDataSource();
-            int rowcount = div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getClickedItem().getId();
-            dgKobetsuJikoRenkeiInfoSakuseiKoik_Row dgRow = dgRowList.get(rowcount);
             dgRow.getTxtZenkenSakusei().setValue(new RString("する"));
             dgRow.getTxtKonkaiStSakuseiYMD().clearValue();
             dgRow.getTxtKonkaiStSakuseiTime().clearValue();
-            dgRowList.set(rowcount, dgRow);
-            div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().setDataSource(dgRowList);
         } else {
-            if (div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromYMD().getValue() == null) {
-                div.getKonkaiInfoInput().setIsOpen(false);
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(実行, false);
-                List<dgKobetsuJikoRenkeiInfoSakuseiKoik_Row> dgRowList = div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getDataSource();
-                int rowcount = div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getClickedItem().getId();
-                dgKobetsuJikoRenkeiInfoSakuseiKoik_Row dgRow = dgRowList.get(rowcount);
-                dgRow.getTxtZenkenSakusei().setValue(RString.EMPTY);
-                dgRow.getTxtKonkaiStSakuseiYMD().setValue(div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromYMD().getValue());
-                dgRow.getTxtKonkaiStSakuseiTime().setValue(div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromTime().getValue());
-                dgRowList.set(rowcount, dgRow);
-                div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().setDataSource(dgRowList);
-            } else if ((div.getKonkaiInfoInput().getTxtZenkaiChushutsuToYMD().getValue() == null
-                    && div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromYMD().getValue() != null)
-                    || (RDateTime.of(div.getKonkaiInfoInput().getTxtZenkaiChushutsuToYMD().getValue().toDateString(),
-                            div.getKonkaiInfoInput().getTxtZenkaiChushutsuToTime().getValue().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss))
-                    .isBefore(RDateTime.of(div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromYMD().getValue().toDateString(),
-                                    div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromTime().getValue()
-                                    .toFormattedTimeString(DisplayTimeFormat.HH_mm_ss))))) {
-                throw new ApplicationException(DbzErrorMessages.期間が不正_未来日付不可.getMessage()
-                        .replace("今回開始日と今回開始時", "前回終了日と前回終了時").evaluate());
-            } else {
-                div.getKonkaiInfoInput().setIsOpen(false);
-                CommonButtonHolder.setDisabledByCommonButtonFieldName(実行, false);
-                List<dgKobetsuJikoRenkeiInfoSakuseiKoik_Row> dgRowList = div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getDataSource();
-                int rowcount = div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().getClickedItem().getId();
-                dgKobetsuJikoRenkeiInfoSakuseiKoik_Row dgRow = dgRowList.get(rowcount);
-                dgRow.getTxtZenkenSakusei().setValue(RString.EMPTY);
-                dgRow.getTxtKonkaiStSakuseiYMD().setValue(div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromYMD().getValue());
-                dgRow.getTxtKonkaiStSakuseiTime().setValue(div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromTime().getValue());
-                dgRowList.set(rowcount, dgRow);
-                div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().setDataSource(dgRowList);
-            }
+            dgRow.getTxtZenkenSakusei().setValue(RString.EMPTY);
+            dgRow.getTxtKonkaiStSakuseiYMD().setValue(div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromYMD().getValue());
+            dgRow.getTxtKonkaiStSakuseiTime().setValue(div.getKonkaiInfoInput().getTxtKonkaiChushutsuFromTime().getValue());
         }
+        dgRowList.set(rowcount, dgRow);
+        div.getDgKobetsuJikoRenkeiInfoSakuseiKoik().setDataSource(dgRowList);
+    }
+
+    private KaigoJyuminValidationHandler createValidationHandler(KobetsuJikoRenkeiInfoSakuseiKoikiDiv div) {
+        return new KaigoJyuminValidationHandler(div);
     }
 }

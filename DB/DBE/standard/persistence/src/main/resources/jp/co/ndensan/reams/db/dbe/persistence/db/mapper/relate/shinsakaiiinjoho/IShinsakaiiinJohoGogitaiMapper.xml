@@ -5,7 +5,7 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <!-- @reamsid_L DBE-0130-060 yaodongsheng -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaiiinjoho.IShinsakaiiinJohoGogitaiMapper">
-    <select id="search審査会委員情報"
+    <select resultOrdered="true" id="search審査会委員情報"
             resultMap="resultMap_ShinsakaiIinJoho" fetchSize="500">
         SELECT 
             DBT5594."shinsakaiIinCode"
@@ -27,6 +27,10 @@
             rgdb."DbT5591GogitaiJoho" AS DBT5591
         ON
             DBT5591."gogitaiNo" = DBT5501."gogitaiNo"
+        AND
+            DBT5591."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> DBT5501."shinsakaiKaisaiYoteiYMD"
+        AND 
+            DBT5501."shinsakaiKaisaiYoteiYMD" <![CDATA[<=]]> DBT5591."gogitaiYukoKikanShuryoYMD"
         WHERE
             DBT5594."haishiFlag" = FALSE
     </select>

@@ -12,10 +12,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @reamsid_L DBC-1030-090 lijunjun
  */
 public enum DBC0820029StateName implements IStateEnumerations {
-// <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
+// <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
     NoChange(""),
-    Default("default");
+    新規修正モード("新規修正モード"),
+    削除モード("削除モード");
 
     private final RString name;
 

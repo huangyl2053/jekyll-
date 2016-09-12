@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.service.report.ninnteichousairai;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyotokkijiko.ChosahyoTokkijikoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.report.chosahyokihonchosakatamen.ChosahyoKihonchosaKatamenItem;
 import jp.co.ndensan.reams.db.dbe.business.report.chosahyokihonchosakatamen.ChosahyoKihonchosaKatamenProperty;
 import jp.co.ndensan.reams.db.dbe.business.report.chosahyokihonchosakatamen.ChosahyoKihonchosaKatamenReport;
@@ -16,7 +17,6 @@ import jp.co.ndensan.reams.db.dbe.business.report.chosairaisho.ChosaIraishoRepor
 import jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaItem;
 import jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaProperty;
 import jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaReport;
-import jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyotokkijiko.ChosahyoTokkijikoItem;
 import jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyotokkijiko.ChosahyoTokkijikoProperty;
 import jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyotokkijiko.ChosahyoTokkijikoReport;
 import jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyotokkijikofree.ChosahyoTokkijikoFreeProperty;
@@ -32,7 +32,9 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.chosairaisho.ChosaIraisho
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosahyogaikyochosa.ChosahyoGaikyochosaReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosahyotokkijiko.ChosahyoTokkijikoReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.saichekkuhyo.SaiChekkuhyoReportSource;
-import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
+import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -73,7 +75,7 @@ public class NinteiChosaIraiPrintService {
         try (ReportAssembler<ChosaIraishoReportSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<ChosaIraishoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
             NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE220001.getReportId(),
-                    FlexibleDate.getNowDate(), reportSourceWriter);
+                    FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
             List<ChosaIraishoHeadItem> 要介護認定調査依頼書 = new ArrayList<>();
             for (ChosaIraishoHeadItem item : 要介護認定調査依頼書List) {
                 item = new ChosaIraishoHeadItem(
@@ -94,7 +96,6 @@ public class NinteiChosaIraiPrintService {
                         item.getMeishoFuyo(),
                         item.getCustomerBarCode(),
                         item.getSonota(),
-                        item.getAtenaRenban(),
                         item.getTitle(),
                         item.getTsuchibun1(),
                         item.getHihokenshaNo1(),
@@ -175,10 +176,10 @@ public class NinteiChosaIraiPrintService {
      *
      * @param 認定調査票_特記事項List 認定調査票_概況調査List
      */
-    public void print認定調査票_特記事項(List<ChosahyoTokkijikoItem> 認定調査票_特記事項List) {
+    public void print認定調査票_特記事項(List<ChosahyoTokkijikoBusiness> 認定調査票_特記事項List) {
         List<ChosahyoTokkijikoReport> list = new ArrayList<>();
         if (!認定調査票_特記事項List.isEmpty()) {
-            list.add(ChosahyoTokkijikoReport.createFrom(認定調査票_特記事項List));
+            list.add(new ChosahyoTokkijikoReport(認定調査票_特記事項List));
         }
         ChosahyoTokkijikoProperty property = new ChosahyoTokkijikoProperty();
         try (ReportAssembler<ChosahyoTokkijikoReportSource> assembler = createAssembler(property, reportManager)) {
@@ -194,7 +195,7 @@ public class NinteiChosaIraiPrintService {
      *
      * @param 認定調査票_特記事項List 認定調査票_概況調査List
      */
-    public void print認定調査票_特記事項_フリー様式(List<ChosahyoTokkijikoItem> 認定調査票_特記事項List) {
+    public void print認定調査票_特記事項_フリー様式(List<ChosahyoTokkijikoBusiness> 認定調査票_特記事項List) {
         List<ChosahyoTokkijikoFreeReport> list = new ArrayList<>();
         if (!認定調査票_特記事項List.isEmpty()) {
             list.add(ChosahyoTokkijikoFreeReport.createFrom(認定調査票_特記事項List));
@@ -225,10 +226,34 @@ public class NinteiChosaIraiPrintService {
                 report.writeBy(reportSourceWriter);
             }
         }
+    }
 
+    /**
+     * 要介護認定調査票差異チェック票_両面右を出力します。
+     *
+     * @param チェック票List 要介護認定調査票差異チェック票List
+     */
+    public void print要介護認定調査票差異チェック票_両面右(List<SaiChekkuhyoItem> チェック票List) {
         List<SaiChekkuhyoRyoumenReport> ryoumenReportList = new ArrayList<>();
         ryoumenReportList.add(SaiChekkuhyoRyoumenReport.createFrom(チェック票List));
-        SaiChekkuhyoRyoumenProperty ryoumenproperty = new SaiChekkuhyoRyoumenProperty();
+        SaiChekkuhyoRyoumenProperty ryoumenproperty = new SaiChekkuhyoRyoumenProperty(ReportIdDBE.DBE292002.getReportId());
+        try (ReportAssembler<SaiChekkuhyoReportSource> assembler = createAssembler(ryoumenproperty, reportManager)) {
+            for (SaiChekkuhyoRyoumenReport report : ryoumenReportList) {
+                ReportSourceWriter<SaiChekkuhyoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+                report.writeBy(reportSourceWriter);
+            }
+        }
+    }
+
+    /**
+     * 要介護認定調査票差異チェック票_両面左を出力します。
+     *
+     * @param チェック票List 要介護認定調査票差異チェック票List
+     */
+    public void print要介護認定調査票差異チェック票_両面左(List<SaiChekkuhyoItem> チェック票List) {
+        List<SaiChekkuhyoRyoumenReport> ryoumenReportList = new ArrayList<>();
+        ryoumenReportList.add(SaiChekkuhyoRyoumenReport.createFrom(チェック票List));
+        SaiChekkuhyoRyoumenProperty ryoumenproperty = new SaiChekkuhyoRyoumenProperty(ReportIdDBE.DBE292003.getReportId());
         try (ReportAssembler<SaiChekkuhyoReportSource> assembler = createAssembler(ryoumenproperty, reportManager)) {
             for (SaiChekkuhyoRyoumenReport report : ryoumenReportList) {
                 ReportSourceWriter<SaiChekkuhyoReportSource> reportSourceWriter = new ReportSourceWriter(assembler);

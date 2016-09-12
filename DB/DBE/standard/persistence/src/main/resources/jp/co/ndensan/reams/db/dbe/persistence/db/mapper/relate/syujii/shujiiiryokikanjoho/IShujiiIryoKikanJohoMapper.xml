@@ -5,7 +5,7 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.syujii.shujiiiryokikanjoho.IShujiiIryoKikanJohoMapper">
 
-    <select id="select主治医医療機関情報ByKey" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.syujii.shujiiiryokikanjoho.ShujiiIryoKikanJohoMapperParameter" resultMap="resultMap_ShujiiIryoKikanJohoEntity" fetchSize="500">
+    <select resultOrdered="true" id="select主治医医療機関情報ByKey" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.syujii.shujiiiryokikanjoho.ShujiiIryoKikanJohoMapperParameter" resultMap="resultMap_ShujiiIryoKikanJohoEntity" fetchSize="500">
         <include refid="selectShujiiIryoKikanJohoEntity" />
     </select>
 

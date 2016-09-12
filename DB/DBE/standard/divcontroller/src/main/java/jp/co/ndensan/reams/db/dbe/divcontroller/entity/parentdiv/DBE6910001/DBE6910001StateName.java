@@ -19,7 +19,8 @@ public enum DBE6910001StateName implements IStateEnumerations {
     審査明細("審査明細"),
     意見明細("意見明細"),
     訪問明細("訪問明細"),
-    完了状態("完了状態");
+    完了状態("完了状態"),
+    委員別明細("委員別明細");
 
     private final RString name;
 

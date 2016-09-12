@@ -11,23 +11,20 @@ import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 /**
  *
  * 認定調査委託先・認定調査員一覧表Builderクラスです。
+ *
  * @reamsid_L DBE-0290-020 dongyabin
  */
 public class ItakusakiChosainIchiranBuilderItem implements ItakusakiChosainIchiranBuilder {
 
     private final ItakusakiChosainIchiranEditor headEditor;
-    private final ItakusakiChosainIchiranEditor bodyEditor;
 
     /**
      * インスタンスを生成します。
      *
      * @param headEditor {@link ItakusakiChosainIchiranEditor}
-     * @param bodyEditor {@link ItakusakiChosainIchiranEditor}
      */
-    public ItakusakiChosainIchiranBuilderItem(ItakusakiChosainIchiranEditor headEditor,
-            ItakusakiChosainIchiranEditor bodyEditor) {
+    public ItakusakiChosainIchiranBuilderItem(ItakusakiChosainIchiranEditor headEditor) {
         this.headEditor = headEditor;
-        this.bodyEditor = bodyEditor;
     }
 
     /**
@@ -38,7 +35,7 @@ public class ItakusakiChosainIchiranBuilderItem implements ItakusakiChosainIchir
     @Override
     public ItakusakiChosainIchiranReportSource build() {
         return ReportEditorJoiner.from(new ItakusakiChosainIchiranReportSource())
-                .join(headEditor).join(bodyEditor).buildSource();
+                .join(headEditor).buildSource();
     }
 
 }

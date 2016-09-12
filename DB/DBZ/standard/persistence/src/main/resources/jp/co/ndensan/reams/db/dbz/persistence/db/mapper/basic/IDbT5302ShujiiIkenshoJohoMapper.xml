@@ -120,7 +120,7 @@
         <result property="ikenshoMemo" column="dbT5302ShujiiIkenshoJoho_ikenshoMemo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
-    <select id="getEntity" resultMap="ResultMap_DbT5302ShujiiIkenshoJohoEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5302ShujiiIkenshoJohoEntity">
         SELECT
         <include refid="allColumns_DbT5302ShujiiIkenshoJoho" />
         FROM

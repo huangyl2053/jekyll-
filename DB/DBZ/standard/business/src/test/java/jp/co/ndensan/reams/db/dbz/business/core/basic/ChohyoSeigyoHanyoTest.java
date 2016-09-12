@@ -5,11 +5,12 @@
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import jp.co.ndensan.reams.db.dbz.business.helper.IsSerializable;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7067ChohyoSeigyoHanyoEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
@@ -35,6 +36,7 @@ public class ChohyoSeigyoHanyoTest extends DbzTestBase {
     private static SubGyomuCode 主キー名1;
     private static ReportId 主キー名2;
     private static RString 主キー名3;
+    private static FlexibleYear 主キー名4;
 
     @BeforeClass
     public static void setUpClass() {
@@ -57,24 +59,24 @@ public class ChohyoSeigyoHanyoTest extends DbzTestBase {
 //TODO 主キー名を置換してください
         @Test(expected = NullPointerException.class)
         public void 主キー名1がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new ChohyoSeigyoHanyo(null, 主キー名2, 主キー名3);
+            sut = new ChohyoSeigyoHanyo(null, 主キー名2, 主キー名3, 主キー名4);
         }
 
         @Test(expected = NullPointerException.class)
         public void 主キー名2がnullである場合に_NullPointerExceptionが発生する() {
-            sut = new ChohyoSeigyoHanyo(主キー名1, null, 主キー名3);
+            sut = new ChohyoSeigyoHanyo(主キー名1, null, 主キー名3, 主キー名4);
         }
 
         @Test
         public void 指定したキーが保持するDbT7067ChohyoSeigyoHanyoEntityにセットされている() {
-            sut = new ChohyoSeigyoHanyo(主キー名1, 主キー名2, 主キー名3);
+            sut = new ChohyoSeigyoHanyo(主キー名1, 主キー名2, 主キー名3, 主キー名4);
             assertThat(sut.identifier().getサブ業務コード(), is(主キー名1));
             assertThat(sut.identifier().get帳票分類ID(), is(主キー名2));
         }
 
         @Test
         public void 指定したキーが保持するChohyoSeigyoHanyoIdentifierにセットされている() {
-            sut = new ChohyoSeigyoHanyo(主キー名1, 主キー名2, 主キー名3);
+            sut = new ChohyoSeigyoHanyo(主キー名1, 主キー名2, 主キー名3, 主キー名4);
             assertThat(sut.getサブ業務コード(), is(主キー名1));
             assertThat(sut.get帳票分類ID(), is(主キー名2));
         }

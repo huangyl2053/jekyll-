@@ -3,19 +3,24 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItak
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Apr 05 16:42:43 CST 2016
+ * Mon Aug 08 21:41:52 JST 2016 
  */
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+
+
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+
 
 /**
- * dgKensakuKekkaIchiran_Row のクラスファイル
- *
+ * dgKensakuKekkaIchiran_Row のクラスファイル 
+ * 
+ * @author 自動生成
  */
+
 public class dgKensakuKekkaIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     private TextBoxCode itakusakicode;
     private RString itakusakiMeisho;
@@ -26,6 +31,7 @@ public class dgKensakuKekkaIchiran_Row extends DataRow {
     private RString chosainShimei;
     private RString chosainKanaShimei;
     private RString chosainHJokyo;
+    private RString shichosonCode;
 
     public dgKensakuKekkaIchiran_Row() {
         super();
@@ -38,6 +44,7 @@ public class dgKensakuKekkaIchiran_Row extends DataRow {
         this.chosainShimei = RString.EMPTY;
         this.chosainKanaShimei = RString.EMPTY;
         this.chosainHJokyo = RString.EMPTY;
+        this.shichosonCode = RString.EMPTY;
         this.setOriginalData("itakusakicode", itakusakicode);
         this.setOriginalData("itakusakiMeisho", itakusakiMeisho);
         this.setOriginalData("itakusakiKanaMeisho", itakusakiKanaMeisho);
@@ -47,9 +54,10 @@ public class dgKensakuKekkaIchiran_Row extends DataRow {
         this.setOriginalData("chosainShimei", chosainShimei);
         this.setOriginalData("chosainKanaShimei", chosainKanaShimei);
         this.setOriginalData("chosainHJokyo", chosainHJokyo);
+        this.setOriginalData("shichosonCode", shichosonCode);
     }
 
-    public dgKensakuKekkaIchiran_Row(TextBoxCode itakusakicode, RString itakusakiMeisho, RString itakusakiKanaMeisho, RString itakusakiKubun, RString itakusakiJokyo, RString chosainCode, RString chosainShimei, RString chosainKanaShimei, RString chosainHJokyo) {
+    public dgKensakuKekkaIchiran_Row(TextBoxCode itakusakicode, RString itakusakiMeisho, RString itakusakiKanaMeisho, RString itakusakiKubun, RString itakusakiJokyo, RString chosainCode, RString chosainShimei, RString chosainKanaShimei, RString chosainHJokyo, RString shichosonCode) {
         super();
         this.setOriginalData("itakusakicode", itakusakicode);
         this.setOriginalData("itakusakiMeisho", itakusakiMeisho);
@@ -60,6 +68,7 @@ public class dgKensakuKekkaIchiran_Row extends DataRow {
         this.setOriginalData("chosainShimei", chosainShimei);
         this.setOriginalData("chosainKanaShimei", chosainKanaShimei);
         this.setOriginalData("chosainHJokyo", chosainHJokyo);
+        this.setOriginalData("shichosonCode", shichosonCode);
         this.itakusakicode = itakusakicode;
         this.itakusakiMeisho = itakusakiMeisho;
         this.itakusakiKanaMeisho = itakusakiKanaMeisho;
@@ -69,6 +78,7 @@ public class dgKensakuKekkaIchiran_Row extends DataRow {
         this.chosainShimei = chosainShimei;
         this.chosainKanaShimei = chosainKanaShimei;
         this.chosainHJokyo = chosainHJokyo;
+        this.shichosonCode = shichosonCode;
     }
 
     public TextBoxCode getItakusakicode() {
@@ -105,6 +115,10 @@ public class dgKensakuKekkaIchiran_Row extends DataRow {
 
     public RString getChosainHJokyo() {
         return chosainHJokyo;
+    }
+
+    public RString getShichosonCode() {
+        return shichosonCode;
     }
 
     public void setItakusakicode(TextBoxCode itakusakicode) {
@@ -150,6 +164,11 @@ public class dgKensakuKekkaIchiran_Row extends DataRow {
     public void setChosainHJokyo(RString chosainHJokyo) {
         this.setOriginalData("chosainHJokyo", chosainHJokyo);
         this.chosainHJokyo = chosainHJokyo;
+    }
+
+    public void setShichosonCode(RString shichosonCode) {
+        this.setOriginalData("shichosonCode", shichosonCode);
+        this.shichosonCode = shichosonCode;
     }
 
     // </editor-fold>

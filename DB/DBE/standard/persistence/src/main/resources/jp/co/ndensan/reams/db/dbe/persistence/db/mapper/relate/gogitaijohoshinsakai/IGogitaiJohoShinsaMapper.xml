@@ -12,7 +12,7 @@
         <result property="合議体精神科医存在フラグ" column="gogitaiSeishinkaSonzaiFlag"/>
         <result property="介護認定審査会委員氏名" column="shinsakaiIinShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-    <select id="get合議体情報"
+    <select resultOrdered="true" id="get合議体情報"
             resultMap="resultMap_GogitaiJoho" fetchSize="500">
         SELECT
         DbT5591."gogitaiNo" AS "gogitaiNo"
@@ -25,6 +25,10 @@
         rgdb."DbT5593GogitaiWariateIinJoho" AS DbT5593
         ON
         DbT5593."gogitaiNo" =  DbT5591."gogitaiNo"
+        AND
+        DbT5591."gogitaiYukoKikanKaishiYMD" = DbT5593."gogitaiYukoKikanKaishiYMD"
+        AND
+        DbT5591."gogitaiYukoKikanShuryoYMD" = DbT5593."gogitaiYukoKikanShuryoYMD"
         INNER JOIN
         rgdb."DbT5594ShinsakaiIinJoho" AS DbT5594
         ON
@@ -42,7 +46,7 @@
         <result property="委員定員" column="shinsakaiIinTeiin"/>
         <result property="催予定場所コード" column="shinsakaiKaisaiBashoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-    <select id="get開催予定情報"
+    <select resultOrdered="true" id="get開催予定情報"
             resultMap="resultMap_ShinsakaiIinJoho"
             parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
         SELECT
@@ -60,7 +64,11 @@
         rgdb."DbT5591GogitaiJoho" AS DbT5591
         ON
         DbT5501."gogitaiNo" =  DbT5591."gogitaiNo"
+        AND
+        DBT5591."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> DBT5501."shinsakaiKaisaiYoteiYMD"
+        AND 
+        DBT5501."shinsakaiKaisaiYoteiYMD" <![CDATA[<=]]> DBT5591."gogitaiYukoKikanShuryoYMD"
         WHERE
-        SUBSTRING(DbT5501."shinsakaiKaisaiYoteiYMD", 7, 2) = #{コピー日}
+        DbT5501."shinsakaiKaisaiYoteiYMD" = #{コピー日}
     </select>
 </mapper>

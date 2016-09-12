@@ -176,6 +176,7 @@ public class TokubetsuChoshuTotal {
             return ResponseData.of(div).setState(平21年以降);
         } else if (調定年度.isBeforeOrEquals(平成17年)) {
             div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().setVisible(false);
+            div.getTokubetsuChoshu().getTabTokucho().setSelectedItem(div.getTokubetsuChoshu().getTabTokucho().getTplKibetsuHasuJoho());
             return ResponseData.of(div).setState(平17年以前);
         } else {
             div.getTokubetsuChoshu().getTabTokucho().getTplTokubetsuChoshuHosoku().setVisible(true);

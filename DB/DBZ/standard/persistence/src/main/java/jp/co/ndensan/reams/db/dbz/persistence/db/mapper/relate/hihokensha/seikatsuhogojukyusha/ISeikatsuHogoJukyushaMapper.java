@@ -1,0 +1,24 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.hihokensha.seikatsuhogojukyusha;
+
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyushaMapperParameter;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokensha.seikatsuhogojukyusha.SeikatsuHogoJukyushaRelateEntity;
+
+/**
+ * 生活保護受給者のマッパーインタフェースです。
+ *
+ * @reamsid_L DBA-9999-011 sunhaidi
+ */
+public interface ISeikatsuHogoJukyushaMapper {
+
+    /**
+     * 生活保護受給者情報をキー検索で１件取得します。
+     *
+     * @param 生活保護受給者検索条件 生活保護受給者検索条件
+     * @return SeikatsuHogoJukyushaEntity
+     */
+    SeikatsuHogoJukyushaRelateEntity select生活保護受給者ByKey(SeikatsuHogoJukyushaMapperParameter 生活保護受給者検索条件);
+}

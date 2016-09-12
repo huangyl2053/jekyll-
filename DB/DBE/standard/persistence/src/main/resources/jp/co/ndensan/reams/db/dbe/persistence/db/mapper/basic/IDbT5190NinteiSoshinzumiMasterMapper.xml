@@ -58,7 +58,7 @@
         <result property="saiChosaSofuKubun" column="dbT5190NinteiSoshinzumiMaster_saiChosaSofuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="saiIkenshoSofuKubun" column="dbT5190NinteiSoshinzumiMaster_saiIkenshoSofuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-    <select id="getEntity" resultMap="ResultMap_DbT5190NinteiSoshinzumiMasterEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5190NinteiSoshinzumiMasterEntity">
         SELECT
         <include refid="allColumns_DbT5190NinteiSoshinzumiMaster"/>
         FROM

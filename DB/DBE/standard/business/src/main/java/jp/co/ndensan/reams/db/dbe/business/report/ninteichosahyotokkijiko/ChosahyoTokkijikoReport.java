@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyotokkijiko;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyotokkijiko.ChosahyoTokkijikoBusiness;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosahyotokkijiko.ChosahyoTokkijikoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -17,25 +18,25 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class ChosahyoTokkijikoReport extends Report<ChosahyoTokkijikoReportSource> {
 
-    private final List<ChosahyoTokkijikoItem> itemList;
+    private List<ChosahyoTokkijikoBusiness> businessList;
+    private ChosahyoTokkijikoBusiness business;
 
     /**
      * インスタンスを生成します。
      *
-     * @param itemList 要介護認定調査票（特記事項）のItem
-     * @return 要介護認定調査票（特記事項）のReport
+     * @param business 要介護認定調査票（特記事項）のbusiness
      */
-    public static ChosahyoTokkijikoReport createFrom(List<ChosahyoTokkijikoItem> itemList) {
-        return new ChosahyoTokkijikoReport(itemList);
+    public ChosahyoTokkijikoReport(ChosahyoTokkijikoBusiness business) {
+        this.business = business;
     }
 
     /**
      * インスタンスを生成します。
      *
-     * @param itemList 要介護認定調査票（特記事項）のItem
+     * @param businessList 要介護認定調査票（特記事項）のbusinessList
      */
-    protected ChosahyoTokkijikoReport(List<ChosahyoTokkijikoItem> itemList) {
-        this.itemList = itemList;
+    public ChosahyoTokkijikoReport(List<ChosahyoTokkijikoBusiness> businessList) {
+        this.businessList = businessList;
     }
 
     /**
@@ -45,8 +46,14 @@ public class ChosahyoTokkijikoReport extends Report<ChosahyoTokkijikoReportSourc
      */
     @Override
     public void writeBy(ReportSourceWriter<ChosahyoTokkijikoReportSource> reportSourceWriter) {
-        for (ChosahyoTokkijikoItem item : itemList) {
-            IChosahyoTokkijikoEditor editor = new ChosahyoTokkijikoEditorImpl(item);
+        if (business == null) {
+            for (ChosahyoTokkijikoBusiness chosahyoTokkijikoBusiness : businessList) {
+                IChosahyoTokkijikoEditor editor = new ChosahyoTokkijikoEditorImpl(chosahyoTokkijikoBusiness);
+                IChosahyoTokkijikoBuilder builder = new ChosahyoTokkijikoBuilderImpl(editor);
+                reportSourceWriter.writeLine(builder);
+            }
+        } else {
+            IChosahyoTokkijikoEditor editor = new ChosahyoTokkijikoEditorImpl(business);
             IChosahyoTokkijikoBuilder builder = new ChosahyoTokkijikoBuilderImpl(editor);
             reportSourceWriter.writeLine(builder);
         }

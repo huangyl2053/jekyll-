@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsu
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -94,5 +95,17 @@ public class ChohyoSeigyoKyotsuManager {
             return false;
         }
         return 1 == dac.save(帳票制御共通.toEntity());
+    }
+
+    /**
+     * 帳票制御共通{@link ChohyoSeigyoKyotsu}を更新します。
+     *
+     * @param 帳票制御共通 {@link ChohyoSeigyoKyotsu}
+     */
+    @Transaction
+    public void update帳票制御共通(ChohyoSeigyoKyotsu 帳票制御共通) {
+        DbT7065ChohyoSeigyoKyotsuEntity entity = 帳票制御共通.toEntity();
+        entity.setState(EntityDataState.Modified);
+        dac.save(entity);
     }
 }

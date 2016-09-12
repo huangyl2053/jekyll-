@@ -6,8 +6,10 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikenshoprint;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
 
 /**
  * 依頼書・認定調査票(OCR)・主治医意見書印刷のマッパーインタフェースです。
@@ -31,6 +33,22 @@ public interface IChosaIraishoAndChosahyoAndIkenshoPrintMapper {
      * @return 主治医意見書依頼情報リスト
      */
     List<ChosaIraishoAndChosahyoAndIkenshoPrintEntity> select主治医意見書依頼情報(ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter);
+
+    /**
+     * 認定調査依頼情報を検索します。
+     *
+     * @param parameter ChosaIraishoAndChosahyoAndIkenshoPrintParameter
+     * @return 更新用認定調査依頼情報リスト
+     */
+    List<DbT5201NinteichosaIraiJohoEntity> select更新用認定調査依頼情報(ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter);
+
+    /**
+     * 主治医意見書依頼情報を検索します。
+     *
+     * @param parameter ChosaIraishoAndChosahyoAndIkenshoPrintParameter
+     * @return 更新用主治医意見書依頼情報リスト
+     */
+    List<DbT5301ShujiiIkenshoIraiJohoEntity> select更新用主治医意見書依頼情報(ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter);
 
     /**
      * 認定調査依頼書情報を検索します。
@@ -62,7 +80,7 @@ public interface IChosaIraishoAndChosahyoAndIkenshoPrintMapper {
      * @param parameter ChosaIraishoAndChosahyoAndIkenshoPrintParameter
      * @return 認定調査票差異チェック票情報
      */
-    ChosaIraishoAndChosahyoAndIkenshoPrintEntity select認定調査票差異チェック票(ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter);
+    List<ChosaIraishoAndChosahyoAndIkenshoPrintEntity> select認定調査票差異チェック票(ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter);
 
     /**
      * 意見書作成依頼書票情報を検索します。

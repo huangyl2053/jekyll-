@@ -107,13 +107,13 @@ public class ShinsakaiJizenKekkaJoho
     }
 
     /**
-     * 一次判定結果変更理由を返します。
+     * 有効期間を返します。
      *
-     * @return 一次判定結果変更理由
+     * @return 有効期間
      */
-//    public RString get一次判定結果変更理由() {
-//        return entity.getIchijiHanteiHenkoRiyu();
-//    }
+    public int get有効期間() {
+        return entity.getYukokikan();
+    }
 
     /**
      * 二次判定結果コードを返します。
@@ -190,7 +190,7 @@ public class ShinsakaiJizenKekkaJoho
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {

@@ -6,34 +6,29 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820021;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanKihon;
-import jp.co.ndensan.reams.db.dbc.definition.message.DbcWarningMessages;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanKihon;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820021.KihonInfoMainPanelDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
-import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
-import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
@@ -50,20 +45,12 @@ public class KihonInfoMainPanelHandler {
     private static final RString 設定可任意 = new RString("2");
     private static final RString 削除 = new RString("削除");
     private static final RString 固定明細番号 = new RString("0001");
-    private static final RString 入所年月日 = new RString("入所年月日");
-    private static final RString 退所年月日 = new RString("退所年月日");
     private static final RString KEY = new RString("key0");
     private static final RString 有 = new RString("2");
     private static final RString 無し = new RString("1");
-    private static final int 日数 = 30;
-    private static final int NUM_1 = 1;
     private static final FlexibleYearMonth 平成２１年３月 = new FlexibleYearMonth("200903");
     private static final FlexibleYearMonth 平成２１年４月 = new FlexibleYearMonth("200904");
     private static final FlexibleYearMonth 平成14年１月 = new FlexibleYearMonth("200201");
-    private static final RString コード_0001 = new RString("0001");
-    private static final RString コード_0009 = new RString("0009");
-    private static final RString コード_0048 = new RString("0048");
-    private static final RString コード_0010 = new RString("0010");
     private static final RString STR_2171 = new RString("2171");
     private static final RString STR_2172 = new RString("2172");
     private static final RString STR_2173 = new RString("2173");
@@ -91,6 +78,10 @@ public class KihonInfoMainPanelHandler {
     private static final RString STR_2162 = new RString("2162");
     private static final RString STR_2163 = new RString("2163");
     private static final RString STR_2164 = new RString("2164");
+    private static final RString KEY_1 = new RString("1");
+    private static final RString KEY_2 = new RString("2");
+    private static final RString KEY_3 = new RString("3");
+    private static final RString KEY_4 = new RString("4");
 
     /**
      * コンストラクタです。
@@ -129,7 +120,7 @@ public class KihonInfoMainPanelHandler {
     public void set初期基本情報() {
         FlexibleDate date = new FlexibleDate(RDate.getNowDate().toDateString());
         List<UzT0007CodeEntity> codeList1 = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
-                new CodeShubetsu(コード_0001), date);
+                DBCCodeShubetsu.計画作成区分.getコード(), date);
         List<KeyValueDataSource> keyValueDataSource1 = new ArrayList<>();
         keyValueDataSource1.add(new KeyValueDataSource(KEY, RString.EMPTY));
         for (UzT0007CodeEntity code : codeList1) {
@@ -138,7 +129,7 @@ public class KihonInfoMainPanelHandler {
         div.getPanelKihon().getPanelKyotaku().getDdlKeikakuSakuseiKubun().setDataSource(keyValueDataSource1);
 
         List<UzT0007CodeEntity> codeList2 = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
-                new CodeShubetsu(コード_0009), date);
+                DBCCodeShubetsu.中止理由コード.getコード(), date);
         List<KeyValueDataSource> keyValueDataSource2 = new ArrayList<>();
         keyValueDataSource2.add(new KeyValueDataSource(KEY, RString.EMPTY));
         for (UzT0007CodeEntity code : codeList2) {
@@ -147,7 +138,7 @@ public class KihonInfoMainPanelHandler {
         div.getPanelKihon().getPanelServiceKikan().getDdlCyushiRiyu().setDataSource(keyValueDataSource2);
 
         List<UzT0007CodeEntity> codeList3 = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
-                new CodeShubetsu(コード_0048), date);
+                DBCCodeShubetsu.入所_院_前の状況コード.getコード(), date);
         List<KeyValueDataSource> keyValueDataSource3 = new ArrayList<>();
         keyValueDataSource3.add(new KeyValueDataSource(KEY, RString.EMPTY));
         for (UzT0007CodeEntity code : codeList3) {
@@ -156,7 +147,7 @@ public class KihonInfoMainPanelHandler {
         div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlNyushoMaeState().setDataSource(keyValueDataSource3);
 
         List<UzT0007CodeEntity> codeList4 = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
-                new CodeShubetsu(コード_0010), date);
+                DBCCodeShubetsu.退所_院_後の状態コード.getコード(), date);
         List<KeyValueDataSource> keyValueDataSource4 = new ArrayList<>();
         keyValueDataSource4.add(new KeyValueDataSource(KEY, RString.EMPTY));
         for (UzT0007CodeEntity code : codeList4) {
@@ -171,8 +162,11 @@ public class KihonInfoMainPanelHandler {
      *
      * @param shokanKihon ShokanKihon
      * @param サービス年月 FlexibleYearMonth
+     * @param list 様式番号List
+     * @param 様式番号 RString
      */
-    public void set基本情報(ShokanKihon shokanKihon, FlexibleYearMonth サービス年月) {
+    public void set基本情報(ShokanKihon shokanKihon, FlexibleYearMonth サービス年月,
+            List<RString> list, RString 様式番号) {
         set初期基本情報();
         if (shokanKihon.get居宅サービス計画作成区分コード() != null
                 && !shokanKihon.get居宅サービス計画作成区分コード().isEmpty()) {
@@ -199,7 +193,7 @@ public class KihonInfoMainPanelHandler {
             div.getPanelKihon().getPanelServiceKikan().getTxtServiceKikan().setToValue(
                     new RDate(shokanKihon.get中止年月日().toString()));
         }
-        set登録項目(shokanKihon, サービス年月);
+        set登録項目(shokanKihon, サービス年月, list, 様式番号);
         if (shokanKihon.get入所_院年月日() != null) {
             div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoYMD().setValue(new RDate(
                     shokanKihon.get入所_院年月日().toString()));
@@ -219,10 +213,9 @@ public class KihonInfoMainPanelHandler {
         }
     }
 
-    private void set登録項目(ShokanKihon shokanKihon, FlexibleYearMonth サービス年月) {
+    private void set登録項目(ShokanKihon shokanKihon, FlexibleYearMonth サービス年月,
+            List<RString> list, RString 様式番号) {
 
-        List<RString> list = ViewStateHolder.get(ViewStateKeys.様式番号List, List.class);
-        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
         if (サービス年月.isBeforeOrEquals(平成２１年３月)) {
             div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlNyushoMaeState().setDisplayNone(true);
             div.getPanelKihon().getPanelServiceKikan().getDdlCyushiRiyu().setDisplayNone(false);
@@ -253,18 +246,21 @@ public class KihonInfoMainPanelHandler {
     /**
      * データ保存処理を行うのメソッドます。
      *
+     * @param meisaiPar 償還払費申請明細検索キー
+     * @param shokanKihon 償還払請求基本データ
+     * @param 処理モード RString
+     * @param list 様式番号List
      * @return 明細番号 RString
      */
-    public RString 保存処理() {
-        ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
-                ShoukanharaihishinseimeisaikensakuParameter.class);
+    public RString 保存処理(ShoukanharaihishinseimeisaikensakuParameter meisaiPar, ShokanKihon shokanKihon,
+            RString 処理モード, List<RString> list) {
         HihokenshaNo 被保険者番号 = meisaiPar.get被保険者番号();
         FlexibleYearMonth サービス年月 = meisaiPar.getサービス年月();
         RString 整理番号 = meisaiPar.get整理番号();
         JigyoshaNo 事業者番号 = meisaiPar.get事業者番号();
         RString 様式番号 = meisaiPar.get様式番号();
         RString 明細番号 = meisaiPar.get明細番号();
-        if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
+        if (削除.equals(処理モード)) {
             SyokanbaraihiShikyuShinseiKetteManager.createInstance().delShokanSyomeisyo(
                     被保険者番号,
                     サービス年月,
@@ -273,9 +269,8 @@ public class KihonInfoMainPanelHandler {
                     様式番号,
                     明細番号);
         } else {
-            明細番号 = RString.EMPTY;
-            ShokanKihon shokanKihon = ViewStateHolder.get(ViewStateKeys.償還払請求基本データ, ShokanKihon.class);
             if (shokanKihon == null) {
+                明細番号 = RString.EMPTY;
                 shokanKihon = new ShokanKihon(
                         被保険者番号,
                         サービス年月,
@@ -283,16 +278,17 @@ public class KihonInfoMainPanelHandler {
                         事業者番号,
                         様式番号,
                         固定明細番号).createBuilderForEdit().build();
-                shokanKihon = save基本情報(shokanKihon, サービス年月, 様式番号);
+                shokanKihon = save基本情報(shokanKihon, サービス年月, 様式番号, list);
             } else {
-                shokanKihon = save基本情報(shokanKihon, サービス年月, 様式番号);
+                shokanKihon = save基本情報(shokanKihon, サービス年月, 様式番号, list);
             }
             明細番号 = SyokanbaraihiShikyuShinseiKetteManager.createInstance().updShokanKihon(明細番号, shokanKihon);
         }
         return 明細番号;
     }
 
-    private ShokanKihon save基本情報(ShokanKihon shokanKihon, FlexibleYearMonth サービス年月, RString 様式番号) {
+    private ShokanKihon save基本情報(ShokanKihon shokanKihon, FlexibleYearMonth サービス年月,
+            RString 様式番号, List<RString> list) {
         List<RString> keyList = div.getPanelKihon().getPanelKyotaku().getChkKyusochi().getSelectedKeys();
         if (!keyList.isEmpty()) {
             shokanKihon = shokanKihon.createBuilderForEdit().set旧措置入所者特例コード(有).build();
@@ -329,7 +325,7 @@ public class KihonInfoMainPanelHandler {
         } else {
             shokanKihon = shokanKihon.createBuilderForEdit().set中止年月日(null).build();
         }
-        shokanKihon = save登録項目(shokanKihon, サービス年月, 様式番号);
+        shokanKihon = save登録項目(shokanKihon, サービス年月, 様式番号, list);
         RDate 入所_院年月日 = div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoYMD().getValue();
         if (入所_院年月日 != null) {
             shokanKihon = shokanKihon.createBuilderForEdit()
@@ -372,8 +368,9 @@ public class KihonInfoMainPanelHandler {
         return shokanKihon;
     }
 
-    private ShokanKihon save登録項目(ShokanKihon shokanKihon, FlexibleYearMonth サービス年月, RString 様式番号) {
-        List<RString> list = ViewStateHolder.get(ViewStateKeys.様式番号List, List.class);
+    private ShokanKihon save登録項目(ShokanKihon shokanKihon, FlexibleYearMonth サービス年月,
+            RString 様式番号, List<RString> list) {
+
         RString 中止理由Key;
         RString 入所_院前の状況Key;
         if (サービス年月.isBeforeOrEquals(平成２１年３月)) {
@@ -407,29 +404,29 @@ public class KihonInfoMainPanelHandler {
     /**
      * 画面内容の変更有無チェックを行うのメソッドます。
      *
+     * @param shokanKihon 償還払請求基本データ
+     * @param サービス年月 FlexibleYearMonth
+     * @param list 様式番号List
+     * @param 様式番号 RString
      * @return boolean
      */
-    public boolean get内容変更状態() {
-        ShokanKihon shokanKihon = ViewStateHolder.get(ViewStateKeys.償還払請求基本データ, ShokanKihon.class);
+    public boolean get内容変更状態(ShokanKihon shokanKihon, FlexibleYearMonth サービス年月, List<RString> list, RString 様式番号) {
         RString 明細番号 = div.getPanelTwo().getTxtMeisaiBango().getValue();
         if (shokanKihon != null && 明細番号 != null && !明細番号.isEmpty()) {
             if (checkPanelKyotaku(shokanKihon)) {
                 return true;
             }
-            if (checkPanelServiceKikan(shokanKihon)) {
+            if (checkPanelServiceKikan(shokanKihon, サービス年月, list, 様式番号)) {
                 return true;
             }
-            return checkPanelShisetuNyutaisyoInfo(shokanKihon);
+            return checkPanelShisetuNyutaisyoInfo(shokanKihon, サービス年月, list, 様式番号);
         } else {
-            return check登録場合();
+            return check登録場合(サービス年月, list, 様式番号);
         }
     }
 
-    private boolean check登録場合() {
+    private boolean check登録場合(FlexibleYearMonth サービス年月, List<RString> list, RString 様式番号) {
         RString 事業者 = div.getPanelKihon().getPanelKyotaku().getCcdShisetsuJoho().getNyuryokuShisetsuKodo();
-        FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
-        List<RString> list = ViewStateHolder.get(ViewStateKeys.様式番号List, List.class);
-        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
         if (is登録場合(事業者)) {
             if ((サービス年月.isBeforeOrEquals(平成２１年３月) || (平成２１年４月.isBeforeOrEquals(サービス年月)
                     && !list.contains(様式番号)))
@@ -501,7 +498,10 @@ public class KihonInfoMainPanelHandler {
         return false;
     }
 
-    private boolean checkPanelServiceKikan(ShokanKihon shokanKihon) {
+    private boolean checkPanelServiceKikan(ShokanKihon shokanKihon,
+            FlexibleYearMonth サービス年月,
+            List<RString> list,
+            RString 様式番号) {
         RDate row開始年月日 = div.getPanelKihon().getPanelServiceKikan().getTxtServiceKikan().getFromValue();
         if (shokanKihon.get開始年月日() == null) {
             if (row開始年月日 != null) {
@@ -528,9 +528,6 @@ public class KihonInfoMainPanelHandler {
             }
         }
 
-        FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
-        List<RString> list = ViewStateHolder.get(ViewStateKeys.様式番号List, List.class);
-        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
         if (サービス年月.isBeforeOrEquals(平成２１年３月)
                 || (平成２１年４月.isBeforeOrEquals(サービス年月) && !list.contains(様式番号))) {
             RString 中止理由コード = shokanKihon.get中止理由_入所_院前の状況コード();
@@ -545,7 +542,10 @@ public class KihonInfoMainPanelHandler {
         return false;
     }
 
-    private boolean checkPanelShisetuNyutaisyoInfo(ShokanKihon shokanKihon) {
+    private boolean checkPanelShisetuNyutaisyoInfo(ShokanKihon shokanKihon,
+            FlexibleYearMonth サービス年月,
+            List<RString> list,
+            RString 様式番号) {
         RDate row入所_院年月日 = div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoYMD().getValue();
         if (shokanKihon.get入所_院年月日() == null) {
             if (row入所_院年月日 != null) {
@@ -581,13 +581,13 @@ public class KihonInfoMainPanelHandler {
         if (!new Decimal(shokanKihon.get外泊日数()).equals(row外泊日数)) {
             return true;
         }
-        return checkDdl(shokanKihon);
+        return checkDdl(shokanKihon, サービス年月, list, 様式番号);
     }
 
-    private boolean checkDdl(ShokanKihon shokanKihon) {
-        FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
-        List<RString> list = ViewStateHolder.get(ViewStateKeys.様式番号List, List.class);
-        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
+    private boolean checkDdl(ShokanKihon shokanKihon,
+            FlexibleYearMonth サービス年月,
+            List<RString> list,
+            RString 様式番号) {
         if (!サービス年月.isBeforeOrEquals(平成２１年３月)
                 && !(平成２１年４月.isBeforeOrEquals(サービス年月) && !list.contains(様式番号))) {
             RString 入所_院前の状況コード = shokanKihon.get中止理由_入所_院前の状況コード();
@@ -615,30 +615,34 @@ public class KihonInfoMainPanelHandler {
 
     /**
      * パラメータ設定のメソッドます。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param サービス年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @return paramter 償還払費申請検索キー
      */
-    public void putViewState() {
-        ViewStateHolder.put(ViewStateKeys.処理モード, ViewStateHolder.get(ViewStateKeys.処理モード, RString.class));
-        ViewStateHolder.put(ViewStateKeys.申請日, div.getPanelTwo().getTxtShinseiDate().getValue());
+    public ShoukanharaihishinseikensakuParameter putViewState(HihokenshaNo 被保険者番号,
+            FlexibleYearMonth サービス年月, RString 整理番号) {
         ShoukanharaihishinseikensakuParameter paramter = new ShoukanharaihishinseikensakuParameter(
-                ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
-                ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class),
-                ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
+                被保険者番号,
+                サービス年月,
+                整理番号,
                 new JigyoshaNo(div.getPanelTwo().getTxtJigyoshaBango().getValue()),
                 div.getPanelTwo().getTxtShomeisho().getValue(),
                 div.getPanelTwo().getTxtMeisaiBango().getValue(),
                 div.getPanelKihon().getPanelKyotaku().getTxtHokenKyufuritsu().getValue());
-        ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, paramter);
+        return paramter;
     }
 
     /**
      * ボタンを制御のメソッドます。
      *
      * @param shikibetsuNoKanri ShikibetsuNoKanri
+     * @param meisaiPar 償還払費申請明細検索キー
      */
-    public void getボタンを制御(ShikibetsuNoKanri shikibetsuNoKanri) {
+    public void getボタンを制御(ShikibetsuNoKanri shikibetsuNoKanri,
+            ShoukanharaihishinseimeisaikensakuParameter meisaiPar) {
 
-        ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
-                ShoukanharaihishinseimeisaikensakuParameter.class);
         HihokenshaNo 被保険者番号 = meisaiPar.get被保険者番号();
         FlexibleYearMonth サービス年月 = meisaiPar.getサービス年月();
         RString 整理番号 = meisaiPar.get整理番号();
@@ -832,8 +836,10 @@ public class KihonInfoMainPanelHandler {
 
     /**
      * 様式番号に対応する番号のメソッドます。
+     *
+     * @return 様式番号 List
      */
-    public void put様式番号ViewState() {
+    public ArrayList<RString> put様式番号ViewState() {
         ArrayList<RString> list = new ArrayList<>();
         list.add(STR_2171);
         list.add(STR_2172);
@@ -850,15 +856,21 @@ public class KihonInfoMainPanelHandler {
         list.add(STR_21A1);
         list.add(STR_21A2);
         list.add(STR_21A3);
-        ViewStateHolder.put(ViewStateKeys.様式番号List, list);
+        return list;
     }
 
     /**
      * 入力チェックのメソッドます。
      *
+     * @param 様式番号List List
+     * @param サービス年月 FlexibleYearMonth
+     * @param 様式番号 RString
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs get入力チェックメッセージ() {
+    public ValidationMessageControlPairs get入力チェックメッセージ(
+            List<RString> 様式番号List,
+            FlexibleYearMonth サービス年月,
+            RString 様式番号) {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         ArrayList<RString> list = new ArrayList<>();
         list.add(STR_2144);
@@ -873,22 +885,14 @@ public class KihonInfoMainPanelHandler {
         list.add(STR_2162);
         list.add(STR_2163);
         list.add(STR_2164);
-        FlexibleYearMonth サービス年月 = ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class);
-        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
-        if (!サービス年月.isBefore(平成14年１月) && list.contains(様式番号)
-                && div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoYMD().getValue() == null) {
-            pairs.add(new ValidationMessageControlPair(new KihonInfoMainPanelHandler.IdocheckMessages(
-                    UrErrorMessages.必須項目_追加メッセージあり, 入所年月日.toString()),
-                    div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoYMD()));
+        KihonInfoMainPanelValidationHandler validation = new KihonInfoMainPanelValidationHandler(div);
+        if (!サービス年月.isBefore(平成14年１月) && list.contains(様式番号)) {
+            pairs = validation.必須チェックValidate();
         }
-        RDate 入所_院年月日 = div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoYMD().getValue();
-        RDate 退所_院年月日 = div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtTaishoYMD().getValue();
-        if (入所_院年月日 != null && 退所_院年月日 != null) {
-            int 期間_日数 = 退所_院年月日.plusDay(NUM_1).getBetweenDays(入所_院年月日);
-            if (期間_日数 > 日数) {
-                pairs.add(new ValidationMessageControlPair(new KihonInfoMainPanelHandler.IdocheckMessages(
-                        DbcWarningMessages.日数３０日超過, 入所年月日.toString(), 退所年月日.toString()),
-                        div.getPanelKihon().getPanelShisetuNyutaisyoInfo()));
+        if (様式番号List.contains(様式番号)) {
+            pairs.add(validation.入所院実日数の必須チェックValidate());
+            if (平成２１年４月.isBeforeOrEquals(サービス年月)) {
+                pairs.add(validation.入所院前の状況の必須チェックValidate());
             }
         }
         return pairs;
@@ -898,10 +902,11 @@ public class KihonInfoMainPanelHandler {
      * 画面の個別設定のメソッドます。
      *
      * @param サービス年月 FlexibleYearMonth
+     * @param list 様式番号List
+     * @param 様式番号 RString
      */
-    public void set画面の個別設定(FlexibleYearMonth サービス年月) {
-        List<RString> list = ViewStateHolder.get(ViewStateKeys.様式番号List, List.class);
-        RString 様式番号 = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
+    public void set画面の個別設定(FlexibleYearMonth サービス年月, List<RString> list, RString 様式番号) {
+
         if (サービス年月.isBeforeOrEquals(平成２１年３月)
                 || (平成２１年４月.isBeforeOrEquals(サービス年月) && !list.contains(様式番号))) {
             div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlNyushoMaeState().setDisplayNone(true);
@@ -912,17 +917,71 @@ public class KihonInfoMainPanelHandler {
         }
     }
 
-    private static class IdocheckMessages implements IValidationMessage {
-
-        private final Message message;
-
-        public IdocheckMessages(IMessageGettable message, String... replacements) {
-            this.message = message.getMessage().replace(replacements);
+    /**
+     * ヘッダエリアの設定のメソッドます。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @param 被保険者番号 HihokenshaNo
+     */
+    public void setヘッダエリア(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {
+        div.getPanelCcd().getCcdKaigoAtenaInfo().initialize(識別コード);
+        if (被保険者番号 != null && !被保険者番号.isEmpty()) {
+            div.getPanelCcd().getCcdKaigoShikakuKihon().initialize(被保険者番号);
+        } else {
+            div.getPanelCcd().getCcdKaigoShikakuKihon().setVisible(false);
         }
+    }
 
-        @Override
-        public Message getMessage() {
-            return message;
+    /**
+     * 削除モードの初期化のメソッドます。
+     */
+    public void set削除状態() {
+        div.getPanelKihon().setReadOnly(true);
+        div.getPanelKihon().getPanelKyotaku().getDdlKeikakuSakuseiKubun().setDisabled(true);
+        div.getPanelKihon().getPanelServiceKikan().getDdlCyushiRiyu().setDisabled(true);
+        div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlNyushoMaeState().setDisabled(true);
+        div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getDdlTaishoMaeState().setDisabled(true);
+    }
+
+    /**
+     * 登録モードの初期化のメソッドます。
+     *
+     * @param 保険給付率 HokenKyufuRitsu
+     */
+    public void set登録状態(HokenKyufuRitsu 保険給付率) {
+        div.getPanelKihon().getPanelKyotaku().getChkKyusochi().setDisabled(false);
+        div.getPanelKihon().getPanelKyotaku().getChkKyusochi().setReadOnly(false);
+        if (保険給付率 != null) {
+            div.getPanelKihon().getPanelKyotaku().getTxtHokenKyufuritsu().setValue(保険給付率.value());
+        } else {
+            div.getPanelKihon().getPanelKyotaku().getTxtHokenKyufuritsu().setValue(null);
         }
+    }
+
+    /**
+     * 明細番号設定のメソッドます。
+     *
+     * @param 明細番号 RString
+     */
+    public void set明細番号(RString 明細番号) {
+        div.getPanelTwo().getTxtMeisaiBango().setValue(明細番号);
+    }
+
+    /**
+     * 画面項目を取得する。
+     *
+     * @return map
+     */
+    public Map<RString, Object> get画面項目() {
+        Map<RString, Object> map = new HashMap<>();
+        RDate 入所_院年月日 = div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoYMD().getValue();
+        RDate 退所_院年月日 = div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtTaishoYMD().getValue();
+        Decimal 外泊日数 = div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtGaigakuNissu().getValue();
+        Decimal 入所_院実日数 = div.getPanelKihon().getPanelShisetuNyutaisyoInfo().getTxtNyushoJitsuNissu().getValue();
+        map.put(KEY_1, 入所_院年月日);
+        map.put(KEY_2, 退所_院年月日);
+        map.put(KEY_3, 外泊日数);
+        map.put(KEY_4, 入所_院実日数);
+        return map;
     }
 }

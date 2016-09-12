@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTas
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.CyoSaNyuSyuBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.CyoSaiRaiBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.GeTuReiSyoRiBusiness;
@@ -19,6 +21,8 @@ import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.NiJiHanTei
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShiSeiKeTuKeBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKaiBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKaiToRoKuBusiness;
+import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKeTuKeBusiness;
+import jp.co.ndensan.reams.db.dbz.definition.core.dokuji.NijiHanteiKekkaInputHoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
@@ -32,19 +36,22 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.Ich
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode99;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiKaisuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiTokusokuHoho;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.kekka.NijiHanteiKekkaInputHoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinsakaiYusenWaritsukeKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
-import jp.co.ndensan.reams.db.dbz.definition.param.yokaigoninteitasklist.YokaigoNinteiTaskListParameter;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter;
 import jp.co.ndensan.reams.db.dbz.service.core.yokaigoninteitasklist.YokaigoNinteiTaskListFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -72,12 +79,27 @@ public class YokaigoNinteiTaskListHandler {
     private static final RString 審査会登録モード = new RString("審査会登録モード");
     private static final RString 二次判定モード = new RString("二次判定モード");
     private static final RString 月例処理モード = new RString("月例処理モード");
+    private static final RString 審査受付モード = new RString("審査受付モード");
     private static final Code 認定ｿﾌﾄ99 = new Code(new RString("99A"));
     private static final Code 認定ｿﾌﾄ2002 = new Code(new RString("02A"));
     private static final Code 認定ｿﾌﾄ2006 = new Code(new RString("06A"));
     private static final Code 認定ｿﾌﾄ2009_A = new Code(new RString("09A"));
     private static final Code 認定ｿﾌﾄ2009_B = new Code(new RString("09B"));
-    private static final CodeShubetsu コード種別 = new CodeShubetsu("5002");
+    private static final RString 調査票イメージ = new RString("C0007_BAK.PNG");
+    private static final RString 調査票特記イメージ_C4101 = new RString("C4101_BAK.PNG");
+    private static final RString 調査票特記イメージ_C4102 = new RString("C4102_BAK.PNG");
+    private static final RString 調査票特記イメージ_C4103 = new RString("C4103_BAK.PNG");
+    private static final RString 調査票特記イメージ_C4104 = new RString("C4104_BAK.PNG");
+    private static final RString 調査票特記イメージ_C4105 = new RString("C4105_BAK.PNG");
+    private static final RString 調査票特記イメージ_C4106 = new RString("C4106_BAK.PNG");
+    private static final RString 主治医意見書イメージ_E0001 = new RString("E0001_BAK.PNG");
+    private static final RString 主治医意見書イメージ_E0002 = new RString("E0002_BAK.PNG");
+    private static final RString その他資料イメージ_F1401A01 = new RString("F1401A01_BAK.PNG");
+    private static final RString その他資料イメージ_F1401B02 = new RString("F1401B02_BAK.PNG");
+    private static final RString その他資料イメージ_F1401C03 = new RString("F1401C03_BAK.PNG");
+    private static final RString その他資料イメージ_F1401D04 = new RString("F1401D04_BAK.PNG");
+    private static final RString その他資料イメージ_F1401E05 = new RString("F1401E05_BAK.PNG");
+    private static final RString その他資料イメージ_F1401F06 = new RString("F1401F06_BAK.PNG");
     private static final int インデックス_0 = 0;
     private static final int インデックス_1 = 1;
     private static final int インデックス_2 = 2;
@@ -154,7 +176,10 @@ public class YokaigoNinteiTaskListHandler {
     private static final int インデックス_73 = 73;
     private static final int インデックス_74 = 74;
     private static final int インデックス_75 = 75;
-
+    private static final int インデックス_82 = 82;
+    private static final int インデックス_83 = 83;
+    private static final int インデックス_84 = 84;
+    private static final int インデックス_85 = 85;
 
     /**
      * コンストラクタです。
@@ -248,12 +273,28 @@ public class YokaigoNinteiTaskListHandler {
             List<IChiJiHanTeiBusiness> 一次判定List = YokaigoNinteiTaskListFinder.createInstance().
                     get一次判定モード(YokaigoNinteiTaskListParameter.
                             createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード())).records();
+            if (!一次判定List.isEmpty()) {
+                ShinSaKaiBusiness 前一次判定Model = YokaigoNinteiTaskListFinder.createInstance().
+                        get前一次判定(YokaigoNinteiTaskListParameter.
+                                createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード()));
+                ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(前一次判定Model.get要介護認定完了情報Lsit()));
+            } else {
+                ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
+            }
             一次判定モード(一次判定List);
         }
         if (マスキングモード.equals(モード)) {
             List<MaSuKinGuBusiness> マスキングList = YokaigoNinteiTaskListFinder.createInstance().
                     getマスキングモード(YokaigoNinteiTaskListParameter.
                             createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード())).records();
+            if (!マスキングList.isEmpty()) {
+                ShinSaKaiBusiness 前マスキングModel = YokaigoNinteiTaskListFinder.createInstance().
+                        get前マスキング(YokaigoNinteiTaskListParameter.
+                                createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード()));
+                ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(前マスキングModel.get要介護認定完了情報Lsit()));
+            } else {
+                ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
+            }
             マスキングモード(マスキングList);
         }
         if (審査会登録モード.equals(モード)) {
@@ -288,7 +329,29 @@ public class YokaigoNinteiTaskListHandler {
             List<GeTuReiSyoRiBusiness> 月例処理List = YokaigoNinteiTaskListFinder.createInstance().
                     get月例処理モード(YokaigoNinteiTaskListParameter.
                             createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード())).records();
+            if (!月例処理List.isEmpty()) {
+                ShinSaKaiBusiness 前月例処理Model = YokaigoNinteiTaskListFinder.createInstance().
+                        get前月例処理(YokaigoNinteiTaskListParameter.
+                                createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード()));
+                ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(前月例処理Model.get要介護認定完了情報Lsit()));
+            } else {
+                ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
+            }
             月例処理モード(月例処理List);
+        }
+        if (審査受付モード.equals(モード)) {
+            List<ShinSaKeTuKeBusiness> 審査受付List = YokaigoNinteiTaskListFinder.createInstance().
+                    get審査受付モード(YokaigoNinteiTaskListParameter.
+                            createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード())).records();
+            if (!審査受付List.isEmpty()) {
+                ShinSaKaiBusiness 前審査受付Model = YokaigoNinteiTaskListFinder.createInstance().
+                        get前審査受付(YokaigoNinteiTaskListParameter.
+                                createParameter(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード()));
+                ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(前審査受付Model.get要介護認定完了情報Lsit()));
+            } else {
+                ViewStateHolder.put(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.create(new ArrayList()));
+            }
+            審査受付モード(審査受付List);
         }
     }
 
@@ -423,11 +486,14 @@ public class YokaigoNinteiTaskListHandler {
             row.setChosaTokusokuHoho(business.get認定調査督促方法() == null ? RString.EMPTY
                     : new RString(NinteichosaTokusokuHoho.toValue(business.get認定調査督促方法()).name()));
             row.getChosaTokusokuCount().setValue(new Decimal(business.get認定調査督促回数()));
-            row.getChosaTokusokuLiit().setValue(new RDate(business.get認定調査期限年月日().toString()));
+            row.setChikuCode(RString.isNullOrEmpty(business.get地区コード()) ? RString.EMPTY : business.get地区コード());
             row.setChosaTokusokuChiku(business.get地区コード() == null ? RString.EMPTY
-                    : CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, コード種別, new Code(business.get地区コード())));
+                    : CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援,
+                            DBECodeShubetsu.調査地区コード.getコード(),
+                            new Code(business.get地区コード()), new FlexibleDate(RDate.getNowDate().toDateString())));
             row.setNinteichosaIraiRirekiNo(new RString(String.valueOf(business.get認定調査依頼履歴番号())));
             row.setShinseishoKanriNo(business.get申請書管理番号() == null ? RString.EMPTY : business.get申請書管理番号().value());
+            row.setKoroshoIfShikibetsuCode(business.get厚労省IF識別コード() == null ? RString.EMPTY : business.get厚労省IF識別コード().value());
             調査依頼モードの日付設定(row, business);
             rowList.add(row);
         }
@@ -435,8 +501,9 @@ public class YokaigoNinteiTaskListHandler {
         div.getTxtCompleteCount().setValue(new RString(String.valueOf(completeCount)));
         div.getDgNinteiTaskList().setDataSource(rowList);
     }
+
     private void 調査依頼モードの日付設定(dgNinteiTaskList_Row row, CyoSaiRaiBusiness business) {
-        
+
         if (business.get認定申請年月日() != null && !business.get認定申請年月日().isEmpty()) {
             row.getNinteiShinseiDay().setValue(new RDate(business.get認定申請年月日().toString()));
         }
@@ -496,7 +563,7 @@ public class YokaigoNinteiTaskListHandler {
                 row.getIkenshoIraiKanryoDay().setValue(new RDate(business.get主治医意見書作成依頼完了年月日().toString()));
             }
             row.getIkenshoIraiIkenCount().setValue(new Decimal(business.get再作成依頼回数()));
-            row.setIkenshoIraiShokai(business.get意見書作成回数区分() == null
+            row.setIkenshoIraiShokai(business.get意見書作成回数区分() == null || business.get意見書作成回数区分().isEmpty()
                     ? RString.EMPTY : IkenshoSakuseiKaisuKubun.toValue(business.get意見書作成回数区分().getKey()).get名称());
             row.setKonkaiShujiiIryokikan(business.get今回医療機関() == null ? RString.EMPTY : business.get今回医療機関());
             row.setKonkaiShujii(business.get今回主治医() == null ? RString.EMPTY : business.get今回主治医());
@@ -505,7 +572,7 @@ public class YokaigoNinteiTaskListHandler {
             row.setYubinNumber(business.get郵便番号() == null ? RString.EMPTY : business.get郵便番号().value());
             row.setJusho(business.get住所() == null ? RString.EMPTY : business.get住所().value());
             row.setNyushoShisetsu(business.get入所施設() == null ? RString.EMPTY : business.get入所施設().value());
-            row.setIkenshoTokusokuHoho(business.get主治医意見書作成督促方法() == null
+            row.setIkenshoTokusokuHoho(business.get主治医意見書作成督促方法() == null || business.get主治医意見書作成督促方法().isEmpty()
                     ? RString.EMPTY : IkenshoSakuseiTokusokuHoho.toValue(business.get主治医意見書作成督促方法()).get名称());
             row.getIkenshoTokusokuCount().setValue(new Decimal(business.get主治医意見書作成督促回数()));
             row.setNyushoShisetsuCode(business.get入所施設コード() == null ? RString.EMPTY : business.get入所施設コード().value());
@@ -579,7 +646,9 @@ public class YokaigoNinteiTaskListHandler {
                     : new RString(NinteichosaTokusokuHoho.toValue(business.get認定調査督促方法()).name()));
             row.getChosaTokusokuCount().setValue(new Decimal(business.get認定調査督促回数()));
             row.setChosaTokusokuChiku(business.get地区コード() == null ? RString.EMPTY
-                    : CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, コード種別, new Code(business.get地区コード())));
+                    : CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援,
+                            DBECodeShubetsu.調査地区コード.getコード(),
+                            new Code(business.get地区コード()), new FlexibleDate(RDate.getNowDate().toDateString())));
             row.setNinteiChosaItakusakiCode(business.get認定調査委託先コード() == null
                     ? RString.EMPTY : business.get認定調査委託先コード().value());
             row.setNinteiChosainCode(business.get調査員コード() == null
@@ -714,6 +783,7 @@ public class YokaigoNinteiTaskListHandler {
         div.getTxtCompleteCount().setValue(new RString(String.valueOf(completeCount)));
         div.getDgNinteiTaskList().setDataSource(rowList);
     }
+
     private void 一次判定モードの日付設定(dgNinteiTaskList_Row row, IChiJiHanTeiBusiness business) {
         if (business.get認定申請年月日() != null && !business.get認定申請年月日().isEmpty()) {
             row.getNinteiShinseiDay().setValue(new RDate(business.get認定申請年月日().toString()));
@@ -721,8 +791,8 @@ public class YokaigoNinteiTaskListHandler {
         if (business.get認定申請年月日() != null && !business.get認定申請年月日().isEmpty()) {
             row.getChosahyoKanryoDay().setValue(new RDate(business.get認定申請年月日().toString()));
         }
-        if (business.get要介護認定一次判定年月日() != null && !business.get要介護認定一次判定年月日().isEmpty()) {
-            row.getIchijiHanteiKanryoDay().setValue(new RDate(business.get要介護認定一次判定年月日().toString()));
+        if (business.get要介護認定一次判定完了年月日() != null && !business.get要介護認定一次判定完了年月日().isEmpty()) {
+            row.getIchijiHanteiKanryoDay().setValue(new RDate(business.get要介護認定一次判定完了年月日().toString()));
         }
         if (business.is仮一次判定区分()) {
             if (business.get要介護認定一次判定年月日() != null && !business.get要介護認定一次判定年月日().isEmpty()) {
@@ -734,6 +804,7 @@ public class YokaigoNinteiTaskListHandler {
             }
         }
     }
+
     private void マスキングモード(List<MaSuKinGuBusiness> マスキングList) {
 
         div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_0).setVisible(true);
@@ -746,6 +817,10 @@ public class YokaigoNinteiTaskListHandler {
         div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_25).setVisible(true);
         div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_31).setVisible(true);
         div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_55).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_82).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_83).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_84).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_85).setVisible(true);
         List<dgNinteiTaskList_Row> rowList = new ArrayList<>();
         int completeCount = 0;
         for (MaSuKinGuBusiness business : マスキングList) {
@@ -760,6 +835,23 @@ public class YokaigoNinteiTaskListHandler {
                 row.getIkenshoNyushuKanryoDay().setValue(new RDate(business.get主治医意見書登録完了年月日().toString()));
             }
             row.setShinseishoKanriNo(business.get申請書管理番号() == null ? RString.EMPTY : business.get申請書管理番号().value());
+            if (get調査票(business.getイメージ共有ファイルID())) {
+
+                row.setCyoSaHyo(new RString("○"));
+            }
+            if (get調査票特記(business.getイメージ共有ファイルID())) {
+
+                row.setCyoSaHyoToKi(new RString("○"));
+            }
+            if (get主治医意見書(business.getイメージ共有ファイルID())) {
+
+                row.setJyuJiIiKenJyo(new RString("○"));
+            }
+            if (getその他資料(business.getイメージ共有ファイルID())) {
+
+                row.setSoNoTaShiRyo(new RString("○"));
+            }
+
             マスキングモードの日付設定(row, business);
             rowList.add(row);
         }
@@ -767,6 +859,59 @@ public class YokaigoNinteiTaskListHandler {
         div.getTxtCompleteCount().setValue(new RString(String.valueOf(completeCount)));
         div.getDgNinteiTaskList().setDataSource(rowList);
     }
+
+    private boolean get調査票(RDateTime sharedFileId) {
+
+        return RString.isNullOrEmpty(共有ファイルを引き出す(sharedFileId, 調査票イメージ));
+    }
+
+    private boolean get調査票特記(RDateTime sharedFileId) {
+
+        return RString.isNullOrEmpty(共有ファイルを引き出す(sharedFileId, 調査票特記イメージ_C4101))
+                || RString.isNullOrEmpty(共有ファイルを引き出す(sharedFileId, 調査票特記イメージ_C4102))
+                || RString.isNullOrEmpty(共有ファイルを引き出す(sharedFileId, 調査票特記イメージ_C4103))
+                || RString.isNullOrEmpty(共有ファイルを引き出す(sharedFileId, 調査票特記イメージ_C4104))
+                || RString.isNullOrEmpty(共有ファイルを引き出す(sharedFileId, 調査票特記イメージ_C4105))
+                || RString.isNullOrEmpty(共有ファイルを引き出す(sharedFileId, 調査票特記イメージ_C4106));
+    }
+
+    private boolean get主治医意見書(RDateTime sharedFileId) {
+
+        return RString.isNullOrEmpty(共有ファイルを引き出す(sharedFileId, 主治医意見書イメージ_E0001))
+                || RString.isNullOrEmpty(共有ファイルを引き出す(sharedFileId, 主治医意見書イメージ_E0002));
+    }
+
+    private boolean getその他資料(RDateTime sharedFileId) {
+
+        return RString.isNullOrEmpty(共有ファイルを引き出す(sharedFileId, その他資料イメージ_F1401A01))
+                || RString.isNullOrEmpty(共有ファイルを引き出す(sharedFileId, その他資料イメージ_F1401B02))
+                || RString.isNullOrEmpty(共有ファイルを引き出す(sharedFileId, その他資料イメージ_F1401C03))
+                || RString.isNullOrEmpty(共有ファイルを引き出す(sharedFileId, その他資料イメージ_F1401D04))
+                || RString.isNullOrEmpty(共有ファイルを引き出す(sharedFileId, その他資料イメージ_F1401E05))
+                || RString.isNullOrEmpty(共有ファイルを引き出す(sharedFileId, その他資料イメージ_F1401F06));
+    }
+
+    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
+        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbe/WEB-INF/image/"));
+        ReadOnlySharedFileEntryDescriptor descriptor
+                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
+                        sharedFileId);
+        try {
+            SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
+        } catch (Exception e) {
+            return RString.EMPTY;
+        }
+        return Path.combinePath(new RString("/db/dbe/image/"), sharedFileName);
+    }
+
+    private RString 共有ファイルを引き出す(RDateTime イメージID, RString イメージ名) {
+        RString imagePath = RString.EMPTY;
+        if (イメージID != null) {
+            imagePath = getFilePath(イメージID, イメージ名);
+        }
+        return imagePath;
+    }
+
     private void マスキングモードの日付設定(dgNinteiTaskList_Row row, MaSuKinGuBusiness business) {
         if (business.get認定申請年月日() != null && !business.get認定申請年月日().isEmpty()) {
             row.getNinteiShinseiDay().setValue(new RDate(business.get認定申請年月日().toString()));
@@ -784,6 +929,7 @@ public class YokaigoNinteiTaskListHandler {
             row.getMaskingKanryoDay().setValue(new RDate(business.getマスキング完了年月日().toString()));
         }
     }
+
     private void 審査会登録モード(List<ShinSaKaiToRoKuBusiness> 審査会登録List) {
 
         div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_0).setVisible(true);
@@ -851,6 +997,7 @@ public class YokaigoNinteiTaskListHandler {
             row.getChosahyoKanryoDay().setValue(new RDate(business.get認定調査完了年月日().toString()));
         }
     }
+
     private void 二次判定モード(List<NiJiHanTeiBusiness> 二次判定List) {
         div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_0).setVisible(true);
         div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_1).setVisible(true);
@@ -905,6 +1052,7 @@ public class YokaigoNinteiTaskListHandler {
         div.getTxtCompleteCount().setValue(new RString(String.valueOf(completeCount)));
         div.getDgNinteiTaskList().setDataSource(rowList);
     }
+
     private void 月例処理モード(List<GeTuReiSyoRiBusiness> 月例処理List) {
 
         div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_0).setVisible(true);
@@ -942,6 +1090,40 @@ public class YokaigoNinteiTaskListHandler {
         div.getTxtCompleteCount().setValue(new RString(String.valueOf(completeCount)));
         div.getDgNinteiTaskList().setDataSource(rowList);
     }
+
+    private void 審査受付モード(List<ShinSaKeTuKeBusiness> 審査受付List) {
+
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_0).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_1).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_2).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_3).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_4).setVisible(true);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_8).setVisible(true);
+        List<dgNinteiTaskList_Row> rowList = new ArrayList<>();
+        int completeCount = 0;
+        for (ShinSaKeTuKeBusiness business : 審査受付List) {
+
+            dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
+            row.setHokensha(business.get保険者() == null ? RString.EMPTY : business.get保険者());
+            if (business.get認定申請年月日() != null && !business.get認定申請年月日().isEmpty()) {
+                row.getNinteiShinseiDay().setValue(new RDate(business.get認定申請年月日().toString()));
+            }
+            row.setHihoNumber(business.get被保険者番号() == null ? RString.EMPTY : business.get被保険者番号());
+            row.setHihoShimei(business.get被保険者氏名() == null ? RString.EMPTY : business.get被保険者氏名().value());
+            row.setShinseiKubunShinseiji(business.get認定申請区分_申請時コード() == null
+                    ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(business.get認定申請区分_申請時コード().getKey()).get名称());
+            if (business.get認定申請情報登録完了年月日() != null && !business.get認定申請情報登録完了年月日().isEmpty()) {
+                completeCount++;
+                row.getShinseiUketsukeKanryoDay().setValue(new RDate(business.get認定申請情報登録完了年月日().toString()));
+            }
+            row.setShinseishoKanriNo(business.get申請書管理番号() == null ? RString.EMPTY : business.get申請書管理番号().value());
+            rowList.add(row);
+        }
+        div.getTxtTotalCount().setValue(new RString(String.valueOf(審査受付List.size())));
+        div.getTxtCompleteCount().setValue(new RString(String.valueOf(completeCount)));
+        div.getDgNinteiTaskList().setDataSource(rowList);
+    }
+
     private void 共通状態() {
 
         div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_0).setVisible(false);
@@ -1020,6 +1202,10 @@ public class YokaigoNinteiTaskListHandler {
         div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_73).setVisible(false);
         div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_74).setVisible(false);
         div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_75).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_82).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_83).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_84).setVisible(false);
+        div.getDgNinteiTaskList().getGridSetting().getColumns().get(インデックス_85).setVisible(false);
     }
 
     private RString 一次判定結果の名称を取得する(Code 厚労省IF識別コード, Code 一次判定結果コード) {
@@ -1052,11 +1238,11 @@ public class YokaigoNinteiTaskListHandler {
     }
 
     /**
-     * 一览件数を取得します。
+     * 一覧件数を取得します。
      *
-     * @return 一览件数
+     * @return 一覧件数
      */
-    public RString 一览件数() {
+    public RString 一覧件数() {
 
         return div.getTxtTotalCount().getValue();
     }
@@ -1069,5 +1255,14 @@ public class YokaigoNinteiTaskListHandler {
     public List<dgNinteiTaskList_Row> getCheckbox() {
 
         return div.getDgNinteiTaskList().getSelectedItems();
+    }
+
+    /**
+     * 一览にデータを取得します。
+     *
+     * @return 一览のデータ
+     */
+    public List<dgNinteiTaskList_Row> getDataSource() {
+        return div.getDgNinteiTaskList().getDataSource();
     }
 }

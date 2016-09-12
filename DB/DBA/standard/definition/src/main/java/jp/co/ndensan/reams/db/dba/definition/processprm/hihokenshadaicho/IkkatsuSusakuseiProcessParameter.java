@@ -26,10 +26,12 @@ public class IkkatsuSusakuseiProcessParameter implements IBatchProcessParameter 
 
     private boolean chushutsuFlag;
     private boolean shutsuryokuFlag;
-    private RString shutsuryokujunId;
+    private Long shutsuryokujunId;
     private LasdecCode shichosonCode;
     private ShikibetsuCode shikibetsuCode;
     private RString psmShikibetsuTaisho;
+    private RString orderby;
+    private RString loginUserId;
 
     /**
      * コンストラクタ
@@ -37,13 +39,16 @@ public class IkkatsuSusakuseiProcessParameter implements IBatchProcessParameter 
      * @param 資格喪失者抽出フラグ 資格喪失者抽出フラグ
      * @param 出力フラグ 出力フラグ
      * @param 出力順ID 出力順ID
+     * @param 登録ユーザーID 登録ユーザーID
      */
     public IkkatsuSusakuseiProcessParameter(boolean 資格喪失者抽出フラグ,
             boolean 出力フラグ,
-            RString 出力順ID) {
+            Long 出力順ID,
+            RString 登録ユーザーID) {
         this.chushutsuFlag = 資格喪失者抽出フラグ;
         this.shutsuryokuFlag = 出力フラグ;
         this.shutsuryokujunId = 出力順ID;
+        this.loginUserId = 登録ユーザーID;
     }
 
     /**
@@ -52,6 +57,10 @@ public class IkkatsuSusakuseiProcessParameter implements IBatchProcessParameter 
      * @return mybatisパラメータ
      */
     public IkkatsuSakuseiMybatisParameter toIkkatsuHakkoMybatisParameter() {
-        return IkkatsuSakuseiMybatisParameter.createSelectByKeyParam(chushutsuFlag, shichosonCode, shikibetsuCode, psmShikibetsuTaisho);
+        return IkkatsuSakuseiMybatisParameter.createSelectByKeyParam(chushutsuFlag,
+                shichosonCode,
+                shikibetsuCode,
+                psmShikibetsuTaisho,
+                orderby);
     }
 }

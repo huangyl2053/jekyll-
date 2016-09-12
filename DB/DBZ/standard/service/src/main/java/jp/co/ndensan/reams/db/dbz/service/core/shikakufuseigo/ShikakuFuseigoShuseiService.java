@@ -6,13 +6,10 @@
 package jp.co.ndensan.reams.db.dbz.service.core.shikakufuseigo;
 
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.hokenshakosei.HokenshaKosei;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokurei;
 import jp.co.ndensan.reams.db.dbz.business.core.TekiyoJogaisha;
@@ -20,6 +17,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.shikakufuseigo.FuseigoCheckResul
 import jp.co.ndensan.reams.db.dbz.business.core.shikakufuseigo.FuseigoCheckResultOfTatokurei;
 import jp.co.ndensan.reams.db.dbz.business.core.shikakufuseigo.FuseigoCheckResultOfTekiyoJogai;
 import jp.co.ndensan.reams.db.dbz.definition.core.fuseigoriyu.FuseigoRiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakufuseigo.DaichoFuseigoJotai;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.hihokenshadaicho.HihokenshaDaichoSearchCondition;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
@@ -27,8 +25,6 @@ import jp.co.ndensan.reams.db.dbz.service.core.basic.TashichosonJushochiTokureiM
 import jp.co.ndensan.reams.db.dbz.service.core.basic.TekiyoJogaishaManager;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -111,12 +107,12 @@ public class ShikakuFuseigoShuseiService {
         result.set現在の資格の情報(資格の情報);
         result.set修正後の資格の情報(修正後の資格の情報);
         if (資格の情報 == null) {
-            result.set被保険者台帳状態(new RString("未作成"));
+            result.set被保険者台帳状態(DaichoFuseigoJotai.未作成);
         } else {
             if (不整合理由 == null) {
-                result.set被保険者台帳状態(new RString("不整合なし"));
+                result.set被保険者台帳状態(DaichoFuseigoJotai.不整合なし);
             } else {
-                result.set被保険者台帳状態(new RString("不整合あり"));
+                result.set被保険者台帳状態(DaichoFuseigoJotai.不整合あり);
             }
         }
 
@@ -149,12 +145,12 @@ public class ShikakuFuseigoShuseiService {
         result.set個人(個人情報);
         result.set修正後の除外の情報(除外の情報修正後);
         if (除外の情報 == null) {
-            result.set適用除外者台帳状態(new RString("未作成"));
+            result.set適用除外者台帳状態(DaichoFuseigoJotai.未作成);
         }
         if (不整合理由 == null) {
-            result.set適用除外者台帳状態(new RString("不整合なし"));
+            result.set適用除外者台帳状態(DaichoFuseigoJotai.不整合なし);
         } else {
-            result.set適用除外者台帳状態(new RString("不整合あり"));
+            result.set適用除外者台帳状態(DaichoFuseigoJotai.不整合あり);
         }
         return result;
     }
@@ -185,12 +181,12 @@ public class ShikakuFuseigoShuseiService {
         result.set個人(個人情報);
         result.set修正後の他特の情報(他特の情報修正後);
         if (他特の情報 == null) {
-            result.set他市町村住所地特例台帳状態(new RString("未作成"));
+            result.set他市町村住所地特例台帳状態(DaichoFuseigoJotai.未作成);
         }
         if (不整合理由 == null) {
-            result.set他市町村住所地特例台帳状態(new RString("不整合なし"));
+            result.set他市町村住所地特例台帳状態(DaichoFuseigoJotai.不整合なし);
         } else {
-            result.set他市町村住所地特例台帳状態(new RString("不整合あり"));
+            result.set他市町村住所地特例台帳状態(DaichoFuseigoJotai.不整合あり);
         }
         return result;
     }
@@ -203,8 +199,9 @@ public class ShikakuFuseigoShuseiService {
      * @return Map<RString, DbzErrorMessages>
      */
     public Map<RString, DbzErrorMessages> validate被保台帳整合(IKojin 個人情報, HihokenshaDaicho 資格の情報) {
-        RString 保険者構成 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者構成, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-        if (HokenshaKosei.広域市町村.getコード().equals(保険者構成)) {
+        ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        RString 導入形態コード = shichosonSecurityJoho.get導入形態コード().value();
+        if (DonyuKeitaiCode.事務広域.getCode().equals(導入形態コード)) {
             KoikiShikakuJukiValidator validator = KoikiShikakuJukiValidator.createInstance();
             return validator.validate(個人情報, 資格の情報, dbt1001manager.get資格の情報For資格不整合(
                     資格の情報.get被保険者番号(), 資格の情報.get識別コード(), 資格の情報.get異動日()));

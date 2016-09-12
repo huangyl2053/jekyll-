@@ -9,14 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.choshuhoho.ChoshuHohoResult;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHoho;
-import jp.co.ndensan.reams.db.dbb.definition.core.choteijiyu.ChoteiJiyuCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0540001.MainPanelDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0540001.choshuHouhou_Row;
-import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.ChoshuHohoManager;
-import jp.co.ndensan.reams.db.dbb.service.core.kanri.ChosyuHohoHenko;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
+import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -30,7 +28,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
@@ -56,7 +53,6 @@ public class MainPanelHandler {
     private static final int 整数_9 = 9;
     private static final int 整数_10 = 10;
     private static final int 整数_11 = 11;
-    private static final int 整数_12 = 12;
     private static final int 現在の月_1 = 1;
     private static final int 現在の月_2 = 2;
     private static final int 現在の月_3 = 3;
@@ -128,7 +124,7 @@ public class MainPanelHandler {
      * @param key KaigoFukaKihonSearchKey
      */
     public void setヘッダエリア(ShikibetsuCode 識別コード, KaigoFukaKihonSearchKey key) {
-        div.getAtenaInfo().getKiagoAtenaInfo().onLoad(識別コード);
+        div.getAtenaInfo().getKiagoAtenaInfo().initialize(識別コード);
         div.getAtenaInfo().getKaigoFukaKihon().load(key);
         this.set共通エリア();
 
@@ -137,16 +133,12 @@ public class MainPanelHandler {
     /**
      * 世帯所得情報一覧エリアの設定
      *
-     * @param 賦課年度 賦課年度
-     * @param 被保険者番号 被保険者番号
+     * @param 賦課年度 FlexibleYear
+     * @param 被保険者番号 HihokenshaNo
+     * @param serviceResult ChoshuHohoResult
      */
-    public void set世帯所得情報一覧エリア(FlexibleYear 賦課年度, HihokenshaNo 被保険者番号) {
-
-        ChoshuHohoResult serviceResult = ChosyuHohoHenko.createInstance()
-                .getChosyuHoho(賦課年度, 被保険者番号);
-        ViewStateHolder.put(ViewStateKeys.徴収方法データ, serviceResult.getHoho());
-        ViewStateHolder.put(ViewStateKeys.特別徴収停止日時, serviceResult.getHoho().get特別徴収停止日時());
-        ViewStateHolder.put(ViewStateKeys.特別徴収停止事由コード, serviceResult.getHoho().get特別徴収停止事由コード());
+    public void set世帯所得情報一覧エリア(FlexibleYear 賦課年度,
+            HihokenshaNo 被保険者番号, ChoshuHohoResult serviceResult) {
         RDate fukaNendo = new RDate(賦課年度.wareki().firstYear(FirstYear.ICHI_NEN).toDateString().toString());
         div.getChoshuInfo().getTxtFukaNendo().setValue(fukaNendo);
         if (null != serviceResult.getHoho().get本徴収_年金コード()) {
@@ -171,7 +163,11 @@ public class MainPanelHandler {
         choshuHouhou_Row row現在 = new choshuHouhou_Row();
         choshuHouhou_Row row変更後 = new choshuHouhou_Row();
         row現在.getTxtHenkouMaeAto().setValue(現在の行);
-        row現在.setTxtZen3Gatsu(get徴収方法の名称(ChoshuHoho.toValue(serviceResult.getChoshuHoho3gat()).get名称()));
+        if (serviceResult.getChoshuHoho3gat() != null && !serviceResult.getChoshuHoho3gat().isEmpty()) {
+            row現在.setTxtZen3Gatsu(get徴収方法の名称(ChoshuHoho.toValue(serviceResult.getChoshuHoho3gat()).get名称()));
+        } else {
+            row現在.setTxtZen3Gatsu(get徴収方法の名称(ChoshuHoho.toValue(コード_0).get名称()));
+        }
         row現在.setTxt4Gatsu(get徴収方法の名称(ChoshuHoho.toValue(serviceResult.getHoho().get徴収方法4月()).get名称()));
         row現在.setTxt5Gatsu(get徴収方法の名称(ChoshuHoho.toValue(serviceResult.getHoho().get徴収方法5月()).get名称()));
         row現在.setTxt6Gatsu(get徴収方法の名称(ChoshuHoho.toValue(serviceResult.getHoho().get徴収方法6月()).get名称()));
@@ -201,7 +197,11 @@ public class MainPanelHandler {
         row現在.setCellBgColor(翌の名_4.toString(), setBgColor(serviceResult.getHoho().get徴収方法翌4月()));
         rows.add(row現在);
         row変更後.getTxtHenkouMaeAto().setValue(変更後の行);
-        row変更後.setTxtZen3Gatsu(get徴収方法の名称(ChoshuHoho.toValue(serviceResult.getChoshuHoho3gat()).get名称()));
+        if (serviceResult.getChoshuHoho3gat() != null && !serviceResult.getChoshuHoho3gat().isEmpty()) {
+            row変更後.setTxtZen3Gatsu(get徴収方法の名称(ChoshuHoho.toValue(serviceResult.getChoshuHoho3gat()).get名称()));
+        } else {
+            row変更後.setTxtZen3Gatsu(get徴収方法の名称(ChoshuHoho.toValue(コード_0).get名称()));
+        }
         row変更後.setTxt4Gatsu(get徴収方法の名称(ChoshuHoho.toValue(serviceResult.getHoho().get徴収方法4月()).get名称()));
         row変更後.setTxt5Gatsu(get徴収方法の名称(ChoshuHoho.toValue(serviceResult.getHoho().get徴収方法5月()).get名称()));
         row変更後.setTxt6Gatsu(get徴収方法の名称(ChoshuHoho.toValue(serviceResult.getHoho().get徴収方法6月()).get名称()));
@@ -245,8 +245,62 @@ public class MainPanelHandler {
         } else {
             edit空白以外を選択した場合();
             edit現在の月の徴収方法はなしの場合();
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, false);
+            if (保存活性()) {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, false);
+            } else {
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(保存する, true);
+            }
         }
+    }
+
+    private boolean 保存活性() {
+        if (!div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt4Gatsu().
+                equals(div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt4Gatsu())) {
+            return true;
+        }
+        if (!div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt5Gatsu().
+                equals(div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt5Gatsu())) {
+            return true;
+        }
+        if (!div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt6Gatsu().
+                equals(div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt6Gatsu())) {
+            return true;
+        }
+        if (!div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt7Gatsu().
+                equals(div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt7Gatsu())) {
+            return true;
+        }
+        if (!div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt8Gatsu().
+                equals(div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt8Gatsu())) {
+            return true;
+        }
+        if (!div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt9Gatsu().
+                equals(div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt9Gatsu())) {
+            return true;
+        }
+        if (!div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt10Gatsu().
+                equals(div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt10Gatsu())) {
+            return true;
+        }
+        if (!div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt11Gatsu().
+                equals(div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt11Gatsu())) {
+            return true;
+        }
+        if (!div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt12Gatsu().
+                equals(div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt12Gatsu())) {
+            return true;
+        }
+        if (!div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt1Gatsu().
+                equals(div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt1Gatsu())) {
+            return true;
+        }
+        if (!div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt2Gatsu().
+                equals(div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt2Gatsu())) {
+            return true;
+        }
+        return !div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0).getTxt3Gatsu().
+                equals(div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).getTxt3Gatsu());
+
     }
 
     /**
@@ -254,10 +308,14 @@ public class MainPanelHandler {
      *
      * @param 賦課年度 賦課年度
      * @param 被保険者番号 被保険者番号
+     * @param 徴収方法データ ChoshuHoho
+     * @param 停止日時 YMDHMS
+     * @param 停止事由コード RString
      */
-    public void saveボタンを押下(FlexibleYear 賦課年度, HihokenshaNo 被保険者番号) {
-
-        dataSaveEdit(賦課年度, 被保険者番号);
+    public void saveボタンを押下(FlexibleYear 賦課年度, HihokenshaNo 被保険者番号,
+            jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho 徴収方法データ,
+            YMDHMS 停止日時, RString 停止事由コード) {
+        dataSaveEdit(賦課年度, 被保険者番号, 徴収方法データ, 停止日時, 停止事由コード);
     }
 
     private DataGridCellBgColor setBgColor(RString コード) {
@@ -346,6 +404,7 @@ public class MainPanelHandler {
     private void set背景色も普通徴収の色に変更04To09(RString gatsu) {
 
         if (月_4.equals(gatsu)) {
+            edit空白を選択した場合();
             div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).setTxt4Gatsu(
                     get徴収方法の名称(ChoshuHoho.toValue(コード_3).get名称()));
             div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).setTxt5Gatsu(
@@ -371,6 +430,7 @@ public class MainPanelHandler {
             div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).setCellBgColor(
                     名_9.toString(), DataGridCellBgColor.bgColorLightRed);
         } else if (月_5.equals(gatsu)) {
+            edit空白を選択した場合();
             div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).setTxt5Gatsu(
                     get徴収方法の名称(ChoshuHoho.toValue(コード_3).get名称()));
             div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).setTxt6Gatsu(
@@ -392,6 +452,7 @@ public class MainPanelHandler {
             div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).setCellBgColor(
                     名_9.toString(), DataGridCellBgColor.bgColorLightRed);
         } else if (月_6.equals(gatsu)) {
+            edit空白を選択した場合();
             div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).setTxt6Gatsu(
                     get徴収方法の名称(ChoshuHoho.toValue(コード_3).get名称()));
             div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).setTxt7Gatsu(
@@ -409,6 +470,7 @@ public class MainPanelHandler {
             div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).setCellBgColor(
                     名_9.toString(), DataGridCellBgColor.bgColorLightRed);
         } else if (月_7.equals(gatsu)) {
+            edit空白を選択した場合();
             div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).setTxt7Gatsu(
                     get徴収方法の名称(ChoshuHoho.toValue(コード_3).get名称()));
             div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).setTxt8Gatsu(
@@ -422,6 +484,7 @@ public class MainPanelHandler {
             div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).setCellBgColor(
                     名_9.toString(), DataGridCellBgColor.bgColorLightRed);
         } else if (月_8.equals(gatsu)) {
+            edit空白を選択した場合();
             div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).setTxt8Gatsu(
                     get徴収方法の名称(ChoshuHoho.toValue(コード_3).get名称()));
             div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).setTxt9Gatsu(
@@ -431,6 +494,7 @@ public class MainPanelHandler {
             div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).setCellBgColor(
                     名_9.toString(), DataGridCellBgColor.bgColorLightRed);
         } else if (月_9.equals(gatsu)) {
+            edit空白を選択した場合();
             div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).setTxt9Gatsu(
                     get徴収方法の名称(ChoshuHoho.toValue(コード_3).get名称()));
             div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).setCellBgColor(
@@ -442,6 +506,7 @@ public class MainPanelHandler {
 
     private void set背景色も普通徴収の色に変更10To03(RString gatsu) {
         if (月_10.equals(gatsu)) {
+            edit空白を選択した場合();
             div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).setTxt10Gatsu(
                     get徴収方法の名称(ChoshuHoho.toValue(コード_3).get名称()));
             div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).setTxt11Gatsu(
@@ -467,6 +532,7 @@ public class MainPanelHandler {
             div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).setCellBgColor(
                     名_3.toString(), DataGridCellBgColor.bgColorLightRed);
         } else if (月_11.equals(gatsu)) {
+            edit空白を選択した場合();
             div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).setTxt11Gatsu(
                     get徴収方法の名称(ChoshuHoho.toValue(コード_3).get名称()));
             div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).setTxt12Gatsu(
@@ -488,6 +554,7 @@ public class MainPanelHandler {
             div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).setCellBgColor(
                     名_3.toString(), DataGridCellBgColor.bgColorLightRed);
         } else if (月_12.equals(gatsu)) {
+            edit空白を選択した場合();
             div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).setTxt12Gatsu(
                     get徴収方法の名称(ChoshuHoho.toValue(コード_3).get名称()));
             div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).setTxt1Gatsu(
@@ -505,6 +572,7 @@ public class MainPanelHandler {
             div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).setCellBgColor(
                     名_3.toString(), DataGridCellBgColor.bgColorLightRed);
         } else if (月_1.equals(gatsu)) {
+            edit空白を選択した場合();
             div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).setTxt1Gatsu(
                     get徴収方法の名称(ChoshuHoho.toValue(コード_3).get名称()));
             div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).setTxt2Gatsu(
@@ -518,6 +586,7 @@ public class MainPanelHandler {
             div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).setCellBgColor(
                     名_3.toString(), DataGridCellBgColor.bgColorLightRed);
         } else if (月_2.equals(gatsu)) {
+            edit空白を選択した場合();
             div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).setTxt2Gatsu(
                     get徴収方法の名称(ChoshuHoho.toValue(コード_3).get名称()));
             div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).setTxt3Gatsu(
@@ -527,6 +596,7 @@ public class MainPanelHandler {
             div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).setCellBgColor(
                     名_3.toString(), DataGridCellBgColor.bgColorLightRed);
         } else if (月_3.equals(gatsu)) {
+            edit空白を選択した場合();
             div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).setTxt3Gatsu(
                     get徴収方法の名称(ChoshuHoho.toValue(コード_3).get名称()));
             div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1).setCellBgColor(
@@ -535,7 +605,6 @@ public class MainPanelHandler {
     }
 
     private void edit現在の月の徴収方法はなしの場合() {
-
         choshuHouhou_Row row現在 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(0);
         choshuHouhou_Row row変更後 = div.getChoshuInfo().getChoshuHouhou().getDataSource().get(1);
         RString getなし名称 = get徴収方法の名称(ChoshuHoho.toValue(コード_0).get名称());
@@ -574,8 +643,8 @@ public class MainPanelHandler {
         continueEdit(getなし名称, row現在, row変更後);
     }
 
-    private void continueEdit(RString getなし名称, choshuHouhou_Row row現在, choshuHouhou_Row row変更後) {
-
+    private void continueEdit(RString getなし名称,
+            choshuHouhou_Row row現在, choshuHouhou_Row row変更後) {
         if (getなし名称.equals(row現在.getTxt11Gatsu())) {
             row変更後.setTxt11Gatsu(getなし名称);
             row変更後.setCellBgColor(名_11.toString(), row現在.getCellBgColor(名_11.toString()));
@@ -602,18 +671,17 @@ public class MainPanelHandler {
         }
     }
 
-    private void dataSaveEdit(FlexibleYear 賦課年度, HihokenshaNo 被保険者番号) {
+    private void dataSaveEdit(FlexibleYear 賦課年度, HihokenshaNo 被保険者番号,
+            jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho 徴収方法データ,
+            YMDHMS 停止日時, RString 停止事由コード) {
         int 現在の月;
         final int three = 3;
         YMDHMS 特別徴収停止日時 = null;
         RString 特別徴収停止事由コード = null;
         RDate システム日付 = RDate.getNowDate();
-        jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho 徴収方法データ = ViewStateHolder.
-                get(ViewStateKeys.徴収方法データ, jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho.class);
-        jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho 徴収方法_変更後
-                = new jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho(
+        jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho 徴収方法_変更後
+                = new jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho(
                         賦課年度, 被保険者番号, 徴収方法データ.get履歴番号() + 1);
-
         RStringBuilder builder = new RStringBuilder(賦課年度.plusYear(1).toString());
         RString 賦課年度日付 = builder.append(RSTR_0331).toRString();
         RDate 賦課日付 = new RDate(賦課年度日付.toString());
@@ -675,8 +743,8 @@ public class MainPanelHandler {
                 特別徴収停止事由コード = ChoteiJiyuCode.徴収方法修正.getコード();
                 break;
             } else {
-                特別徴収停止日時 = ViewStateHolder.get(ViewStateKeys.特別徴収停止日時, YMDHMS.class);
-                特別徴収停止事由コード = ViewStateHolder.get(ViewStateKeys.特別徴収停止事由コード, RString.class);
+                特別徴収停止日時 = 停止日時;
+                特別徴収停止事由コード = 停止事由コード;
             }
 
         }

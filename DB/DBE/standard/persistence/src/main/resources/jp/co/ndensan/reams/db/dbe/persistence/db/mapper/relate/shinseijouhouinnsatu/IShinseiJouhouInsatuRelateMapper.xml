@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBE-1390-020 suguangjun -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinseijouhouinnsatu.IShinseiJouhouInsatuRelateMapper">
+    <resultMap id="resultMap_ShinseiJouhouInsatuEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinseimonitor.ShinseiMonitorEntity" autoMapping="true">
+	<result property="申請書管理番号" column="dbT5101Nintei_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="保険者番号" column="dbT5101Nintei_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者番号" column="dbT5101Nintei_hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者氏名カナ" column="dbT5101Nintei_hihokenshaKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="氏名" column="dbT5101Nintei_hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="性別" column="dbT5101Nintei_seibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="生年月日" column="dbT5101Nintei_seinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定申請区分申請時コード" column="dbT5101Nintei_ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定申請年月日" column="dbT5101Nintei_ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="前回認定有効期間開始日" column="dbT5101Nintei_zenkaiYukoKikanStart" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="前回認定有効期間終了日" column="dbT5101Nintei_zenkaiYukoKikanEnd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="保険者名" column="dbT7051Kosei_shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回申請管理番号" column="dbT5121Shinsei_zenkaiShinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回申請区分" column="dbT5101Nin_ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回認定申請年月日" column="dbT5101Nin_ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="前回二次判定結果コード" column="dbT5102Nin_nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="前回月数" column="dbT5102Nin_nijiHanteiNinteiYukoKikan"/>
+        <result property="厚労省認定ソフトバージョン" column="dbT5101Nin_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査事業所" column="dbT5910Nintei_jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="調査員氏名" column="dbT5913Chosai_chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="医療機関名" column="dbT5911Shujii_iryoKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="主治医氏名" column="dbT5912Shujii_shujiiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="住民状態コード" column="D_juminJotaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="消除異動年月日" column="D_shojoIdoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+    
+   <select resultOrdered="true" id="selectShinseiJouhou"
+            resultMap="resultMap_ShinseiJouhouInsatuEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinseijouhouinnsatu.ShinseiJouhouInsatuMybatisParameter" fetchSize="500">
+       SELECT
+            dbT5101Nintei."shinseishoKanriNo" AS "dbT5101Nintei_shinseishoKanriNo",	
+            dbT5101Nintei."shoKisaiHokenshaNo" AS "dbT5101Nintei_shoKisaiHokenshaNo",
+            dbT5101Nintei."hihokenshaNo" AS "dbT5101Nintei_hihokenshaNo", 	
+            dbT5101Nintei."hihokenshaKana" AS "dbT5101Nintei_hihokenshaKana",	
+            dbT5101Nintei."hihokenshaName" AS "dbT5101Nintei_hihokenshaName",
+            dbT5101Nintei.seibetsu AS "dbT5101Nintei_seibetsu",	
+            dbT5101Nintei."seinengappiYMD" AS "dbT5101Nintei_seinengappiYMD",	
+            dbT5101Nintei."ninteiShinseiShinseijiKubunCode" AS "dbT5101Nintei_ninteiShinseiShinseijiKubunCode",	
+            dbT5101Nintei."ninteiShinseiYMD" AS "dbT5101Nintei_ninteiShinseiYMD",	
+            dbT5101Nintei."zenkaiYukoKikanStart" AS "dbT5101Nintei_zenkaiYukoKikanStart", 	
+            dbT5101Nintei."zenkaiYukoKikanEnd" AS "dbT5101Nintei_zenkaiYukoKikanEnd", 
+            dbT7051Kosei."shichosonMeisho" AS "dbT7051Kosei_shichosonMeisho",  	
+            dbT5121Shinsei. "zenkaiShinseishoKanriNo" AS "dbT5121Shinsei_zenkaiShinseishoKanriNo",	
+            dbT5101Nin."ninteiShinseiShinseijiKubunCode" AS "dbT5101Nin_ninteiShinseiShinseijiKubunCode", 	
+            dbT5101Nin."ninteiShinseiYMD" AS "dbT5101Nin_ninteiShinseiYMD", 	
+            dbT5102Nin."nijiHanteiYokaigoJotaiKubunCode" AS "dbT5102Nin_nijiHanteiYokaigoJotaiKubunCode", 	
+            dbT5102Nin."nijiHanteiNinteiYukoKikan" AS "dbT5102Nin_nijiHanteiNinteiYukoKikan", 	
+            dbT5101Nin."koroshoIfShikibetsuCode" AS "dbT5101Nin_koroshoIfShikibetsuCode", 
+            dbT5910Nintei."jigyoshaMeisho" AS "dbT5910Nintei_jigyoshaMeisho", 	
+            dbT5913Chosai."chosainShimei" AS "dbT5913Chosai_chosainShimei",	
+            dbT5911Shujii."iryoKikanMeisho" AS "dbT5911Shujii_iryoKikanMeisho", 
+            dbT5912Shujii."shujiiName" AS "dbT5912Shujii_shujiiName",	
+            PSM."juminJotaiCode" AS "D_juminJotaiCode" ,	
+            PSM."shojoIdoYMD" AS "D_shojoIdoYMD"
+       FROM
+       rgdb."DbT5101NinteiShinseiJoho" AS dbT5101Nintei
+       LEFT JOIN rgdb."DbT5121ShinseiRirekiJoho" AS dbT5121Shinsei	
+       ON dbT5121Shinsei."shinseishoKanriNo"=dbT5101Nintei."shinseishoKanriNo"
+       LEFT JOIN rgdb."DbT5101NinteiShinseiJoho" AS dbT5101Nin	
+       ON dbT5121Shinsei."zenkaiShinseishoKanriNo"=dbT5101Nin."shinseishoKanriNo"	
+       LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS dbT5102Nin	
+       ON dbT5121Shinsei."zenkaiShinseishoKanriNo" = dbT5102Nin."shinseishoKanriNo"
+       INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS dbT5105Nintei
+       ON dbT5101Nintei."shinseishoKanriNo"=dbT5105Nintei."shinseishoKanriNo"
+       INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS dbT7051Kosei
+       ON dbT7051Kosei."shoKisaiHokenshaNo"=dbT5101Nintei."shoKisaiHokenshaNo"
+       LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS dbT5910Nintei	
+       ON dbT5101Nintei."ninteiChosaItakusakiCode" = dbT5910Nintei."ninteichosaItakusakiCode"
+       AND dbT5910Nintei."shichosonCode" = dbT7051Kosei."shichosonCode"	
+       LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS dbT5911Shujii	
+       ON dbT5101Nintei."shujiiIryokikanCode"=dbT5911Shujii."shujiiIryokikanCode"
+       AND dbT5911Shujii."shichosonCode"=dbT7051Kosei."shichosonCode"
+       LEFT JOIN rgdb."DbT5913ChosainJoho" AS dbT5913Chosai	
+       ON dbT5913Chosai."ninteiChosaItakusakiCode"=dbT5101Nintei."ninteiChosaItakusakiCode"
+       AND dbT5913Chosai."ninteiChosainCode"=dbT5101Nintei."ninteiChosainCode"	
+       AND dbT5913Chosai."shichosonCode"=dbT7051Kosei."shichosonCode"	
+       LEFT JOIN rgdb."DbT5912ShujiiJoho" AS dbT5912Shujii	
+       ON dbT5912Shujii."shujiiIryokikanCode"=dbT5101Nintei."shujiiIryokikanCode"
+       AND dbT5912Shujii."shujiiCode"=dbT5101Nintei."shujiiCode"	
+       AND dbT5912Shujii."shichosonCode"=dbT7051Kosei."shichosonCode"
+       LEFT JOIN 	
+            rgua.${psmShikibetsuTaisho} AS PSM
+        ON
+        dbT5101Nintei."shikibetsuCode" = PSM."shikibetsuCode"
+       WHERE
+        <if test="sakuseijyoukenuser">
+            CASE WHEN dbT5101Nintei."lastUpdateTimestamp" IS NULL THEN
+            #{shorikaFrom} <![CDATA[<=]]> dbT5101Nintei."insertTimestamp"
+            AND dbT5101Nintei."insertTimestamp" <![CDATA[<=]]> #{shorikaTo}
+            WHEN dbT5101Nintei."lastUpdateTimestamp" IS NOT NULL  THEN
+            #{shorikaFrom} <![CDATA[<=]]> dbT5101Nintei."lastUpdateTimestamp" 
+            AND dbT5101Nintei."lastUpdateTimestamp" <![CDATA[<=]]> #{shorikaTo}
+            END
+            AND        
+        </if>
+       dbT5105Nintei."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+       AND dbT5105Nintei."ninteichosaIraiKanryoYMD" IS NULL
+       AND dbT5105Nintei."ninteichosaKanryoYMD" IS NULL
+       AND dbT5105Nintei."ikenshoSakuseiIraiKanryoYMD" IS NULL
+       AND dbT5105Nintei."ikenshoTorokuKanryoYMD" IS NULL
+       AND dbT5105Nintei."ichijiHanteiKanryoYMD" IS NULL
+       AND dbT5105Nintei."maskingKanryoYMD" IS NULL
+       AND dbT5105Nintei."ninteiShinsakaiWariateKanryoYMD" IS NULL
+       AND dbT5105Nintei."ninteiShinsakaiKanryoYMD" IS NULL
+       AND dbT5105Nintei."centerSoshinYMD" IS NULL
+       AND dbT5101Nintei."shoriJotaiKubun" IN ('0', '3')
+       AND dbT5101Nintei."logicalDeletedFlag" = FALSE
+        <if test="!sakuseijyoukenuser">
+                AND
+                #{shinnseikaFrom} <![CDATA[<=]]> dbT5101Nintei."ninteiShinseiYMD"
+                AND 
+                dbT5101Nintei."ninteiShinseiYMD" <![CDATA[<=]]> #{shinnseikaTo}
+        </if>	
+        ORDER BY 
+               dbT5101Nintei."hihokenshaKana" ASC,
+               dbT5101Nintei."ninteiShinseiYMD" ASC  															
+   </select>
+</mapper>

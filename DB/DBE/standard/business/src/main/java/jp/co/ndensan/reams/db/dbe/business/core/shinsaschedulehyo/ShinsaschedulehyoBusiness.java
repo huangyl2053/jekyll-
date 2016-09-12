@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.kaigoninteishinsakaischedule.WeekRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import static jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.hokensha.UnyoKeitaiKubun.広域連合;
+import static jp.co.ndensan.reams.db.dbz.definition.core.hokensha.UnyoKeitaiKubun.広域連合;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;

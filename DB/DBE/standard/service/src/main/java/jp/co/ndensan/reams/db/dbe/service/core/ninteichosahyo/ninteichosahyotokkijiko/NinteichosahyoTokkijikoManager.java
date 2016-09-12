@@ -101,13 +101,16 @@ public class NinteichosahyoTokkijikoManager {
             RString 特記事項テキスト_イメージ区分,
             Code 原本マスク区分) {
 
-        NinteichosahyoTokkijiko ninteichosahyoTokkijiko = new NinteichosahyoTokkijiko(dac.selectByKey(申請書管理番号,
+        DbT5205NinteichosahyoTokkijikoEntity entiy = dac.selectByKey(申請書管理番号,
                 認定調査依頼履歴番号,
                 認定調査特記事項番号,
                 認定調査特記事項連番,
                 特記事項テキスト_イメージ区分,
-                原本マスク区分));
-
-        return ninteichosahyoTokkijiko;
+                原本マスク区分);
+        if (entiy == null) {
+            return null;
+        } else {
+            return new NinteichosahyoTokkijiko(entiy);
+        }
     }
 }

@@ -5,18 +5,18 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0020021;
 
-import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
-import jp.co.ndensan.reams.db.dbu.definition.jigyohokokugeppoo.JigyoHokokuGeppoDetalSearchParameter;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoo.JigyoHokokuGeppoDetalSearchParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020021.DBU0020021StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020021.JigyoHokokuGeppoYoshikiIchiHoseiDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020021.tplFirstHihokensyaUtiwakeDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020021.tplFirstHihokensyasuDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.JigyoHokokuGeppoParameter;
-import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbu.service.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHako;
+import jp.co.ndensan.reams.db.dbu.service.core.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHako;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -24,7 +24,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -48,6 +47,10 @@ public class JigyoHokokuGeppoYoshikiIchiHoseiHandler {
     private static final Code 集計番号_0200 = new Code("0200");
     private static final Code 集計番号_0301 = new Code("0301");
     private static final Code 集計番号_0302 = new Code("0302");
+
+    private static final RString KEY_第1号被保険者数情報 = new RString("第1号被保険者数情報");
+    private static final RString KEY_第1号被保険者増減内訳情報_当月中増 = new RString("第1号被保険者増減内訳情報_当月中増");
+    private static final RString KEY_第1号被保険者増減内訳情報_当月中滅 = new RString("第1号被保険者増減内訳情報_当月中滅");
 
     private final JigyoHokokuGeppoYoshikiIchiHoseiDiv parentDiv;
 
@@ -85,8 +88,9 @@ public class JigyoHokokuGeppoYoshikiIchiHoseiHandler {
      * 画面データ設定する。
      *
      * @param 引き継ぎデータ JigyoHokokuGeppoParameter
+     * @return Map<RString, List<JigyoHokokuTokeiData>>
      */
-    public void onLoad(JigyoHokokuGeppoParameter 引き継ぎデータ) {
+    public Map<RString, List<JigyoHokokuTokeiData>> onLoad(JigyoHokokuGeppoParameter 引き継ぎデータ) {
         List<JigyoHokokuTokeiData> 第1号被保険者数情報
                 = get事業報告月報詳細データリスト(引き継ぎデータ, 集計番号_0200);
         List<JigyoHokokuTokeiData> 第1号被保険者増減内訳情報_当月中増
@@ -96,11 +100,11 @@ public class JigyoHokokuGeppoYoshikiIchiHoseiHandler {
         loadList(第1号被保険者数情報);
         loadList(第1号被保険者増減内訳情報_当月中増);
         loadList(第1号被保険者増減内訳情報_当月中滅);
-        ViewStateHolder.put(ViewStateKeys.第1号被保険者数情報, (Serializable) 第1号被保険者数情報);
-        ViewStateHolder.put(ViewStateKeys.第1号被保険者増減内訳情報_当月中増,
-                (Serializable) 第1号被保険者増減内訳情報_当月中増);
-        ViewStateHolder.put(ViewStateKeys.第1号被保険者増減内訳情報_当月中滅,
-                (Serializable) 第1号被保険者増減内訳情報_当月中滅);
+        Map<RString, List<JigyoHokokuTokeiData>> resultMap = new HashMap<>();
+        resultMap.put(KEY_第1号被保険者数情報, 第1号被保険者数情報);
+        resultMap.put(KEY_第1号被保険者増減内訳情報_当月中増, 第1号被保険者増減内訳情報_当月中増);
+        resultMap.put(KEY_第1号被保険者増減内訳情報_当月中滅, 第1号被保険者増減内訳情報_当月中滅);
+        return resultMap;
     }
 
     private void loadList(List<JigyoHokokuTokeiData> datalist) {
@@ -267,7 +271,7 @@ public class JigyoHokokuGeppoYoshikiIchiHoseiHandler {
     /**
      * 引き継ぎデータより、事業報告月報詳細データリストを取得する。
      *
-     * @param 引き継ぎデータ HoseitaishoYoshikiIchiranParameter
+     * @param 引き継ぎデータ JigyoHokokuGeppoHoseiHakoResult
      * @param 集計番号 Code
      * @return List<JigyoHokokuNenpoResult>
      */
@@ -302,28 +306,10 @@ public class JigyoHokokuGeppoYoshikiIchiHoseiHandler {
      * 引き継ぎデータより、データ削除する。
      *
      * @param 引き継ぎデータ JigyoHokokuGeppoParameter
-     * @return boolean DB操作結果
      */
-    public boolean delete(JigyoHokokuGeppoParameter 引き継ぎデータ) {
-        int row = deleteByParameter(引き継ぎデータ, 集計番号_0200);
-        row = row + deleteByParameter(引き継ぎデータ, 集計番号_0301);
-        row = row + deleteByParameter(引き継ぎデータ, 集計番号_0302);
-        return 0 <= row;
-    }
-
-    private int deleteByParameter(JigyoHokokuGeppoParameter 引き継ぎデータ, Code 集計番号) {
+    public void delete(List<JigyoHokokuTokeiData> 引き継ぎデータ) {
         JigyoHokokuGeppoHoseiHako finder = InstanceProvider.create(JigyoHokokuGeppoHoseiHako.class);
-        JigyoHokokuGeppoDetalSearchParameter parameter
-                = JigyoHokokuGeppoDetalSearchParameter.createParameterForJigyoHokokuGeppoDetal(
-                        new FlexibleYear(引き継ぎデータ.get行報告年()),
-                        引き継ぎデータ.get行報告月(),
-                        new FlexibleYear(引き継ぎデータ.get行集計対象年()),
-                        引き継ぎデータ.get行集計対象月(),
-                        引き継ぎデータ.get行統計対象区分(),
-                        new LasdecCode(引き継ぎデータ.get行市町村コード()),
-                        new Code(引き継ぎデータ.get行表番号()),
-                        集計番号);
-        return finder.deleteJigyoHokokuGeppoData(parameter);
+        finder.deleteJigyoHokokuGeppoData(引き継ぎデータ);
     }
 
     /**
@@ -358,19 +344,15 @@ public class JigyoHokokuGeppoYoshikiIchiHoseiHandler {
     /**
      * 引き継ぎデータより、画面修正データを抽出する。
      *
-     * @param 引き継ぎデータ HoseitaishoYoshikiIchiranParameter
+     * @param 第1号被保険者数情報 List<JigyoHokokuTokeiData>
+     * @param 第1号被保険者増減内訳情報_当月中増 List<JigyoHokokuTokeiData>
+     * @param 第1号被保険者増減内訳情報_当月中滅 List<JigyoHokokuTokeiData>
      * @return List<JigyoHokokuNenpoUpdateParameter> 修正データリスト
      */
     public List<JigyoHokokuTokeiData> get修正データリスト(
-            JigyoHokokuGeppoParameter 引き継ぎデータ) {
+            List<JigyoHokokuTokeiData> 第1号被保険者数情報, List<JigyoHokokuTokeiData> 第1号被保険者増減内訳情報_当月中増,
+            List<JigyoHokokuTokeiData> 第1号被保険者増減内訳情報_当月中滅) {
         List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト = new ArrayList<>();
-
-        List<JigyoHokokuTokeiData> 第1号被保険者数情報
-                = ViewStateHolder.get(ViewStateKeys.第1号被保険者数情報, List.class);
-        List<JigyoHokokuTokeiData> 第1号被保険者増減内訳情報_当月中増
-                = ViewStateHolder.get(ViewStateKeys.第1号被保険者増減内訳情報_当月中増, List.class);
-        List<JigyoHokokuTokeiData> 第1号被保険者増減内訳情報_当月中滅
-                = ViewStateHolder.get(ViewStateKeys.第1号被保険者増減内訳情報_当月中滅, List.class);
         事業報告月報詳細データリスト.addAll(第1号被保険者数情報);
         事業報告月報詳細データリスト.addAll(第1号被保険者増減内訳情報_当月中増);
         事業報告月報詳細データリスト.addAll(第1号被保険者増減内訳情報_当月中滅);

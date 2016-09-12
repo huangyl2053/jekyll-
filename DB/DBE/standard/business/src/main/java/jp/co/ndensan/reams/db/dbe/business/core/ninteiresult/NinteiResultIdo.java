@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ninteiresult;
 
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.NinteiResultIdoJiyuKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.NinteiResultIdoJiyuKubun;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**

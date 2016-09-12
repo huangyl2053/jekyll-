@@ -17,8 +17,8 @@
         <result property="jukyuTeishiShuryoYMD" column="B_jukyuTeishiShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="fujoShuruiCode" column="C_fujoShuruiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
-    <select id="get生活保護履歴情報" resultMap="result_SeikatsuhogoRelateEntity"
-            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatis.param.seikatsuhogorireki.SeikatsuhogoParameter">
+    <select resultOrdered="true" id="get生活保護履歴情報" resultMap="result_SeikatsuhogoRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.seikatsuhogorireki.SeikatsuhogoParameter">
       SELECT
           A."shikibetsuCode" AS A_shikibetsuCode
 	  ,A."gyomuCode" AS A_gyomuCode

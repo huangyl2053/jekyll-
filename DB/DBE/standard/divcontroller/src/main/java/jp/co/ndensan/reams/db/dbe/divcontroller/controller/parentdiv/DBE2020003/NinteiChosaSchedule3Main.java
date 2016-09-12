@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020003.DBE2
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020003.NinteiChosaSchedule3MainDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020003.MainPanelHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020003.MainPanelValidatisonHandler;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -40,16 +40,19 @@ public class NinteiChosaSchedule3Main {
      * @return ResponseData
      */
     public ResponseData<NinteiChosaSchedule3MainDiv> onLoad(NinteiChosaSchedule3MainDiv div) {
-        if (スケジュール編集初期化.equals(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_画面ステート, RString.class))) {
-            getHandler(div).initialize();
+        if (スケジュール編集初期化.equals(ViewStateHolder.get(ViewStateKeys.画面ステート, RString.class))) {
+            RString 地区コード = ViewStateHolder.get(ViewStateKeys.地区コード, RString.class);
+            getHandler(div).initialize(地区コード);
             return ResponseData.of(div).setState(DBE2020003StateName.スケジュール編集);
         }
-        if (スケジュール照会初期化.equals(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_画面ステート, RString.class))) {
-            getHandler(div).initialize();
+        if (スケジュール照会初期化.equals(ViewStateHolder.get(ViewStateKeys.画面ステート, RString.class))) {
+            RString 地区コード = ViewStateHolder.get(ViewStateKeys.地区コード, RString.class);
+            getHandler(div).initialize(地区コード);
             return ResponseData.of(div).setState(DBE2020003StateName.スケジュール照会);
         }
-        if (未定者管理初期化.equals(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_画面ステート, RString.class))) {
-            getHandler(div).initialize();
+        if (未定者管理初期化.equals(ViewStateHolder.get(ViewStateKeys.画面ステート, RString.class))) {
+            RString 地区コード = ViewStateHolder.get(ViewStateKeys.地区コード, RString.class);
+            getHandler(div).initialize(地区コード);
             return ResponseData.of(div).setState(DBE2020003StateName.未定者);
         }
         return ResponseData.of(div).respond();
@@ -62,7 +65,8 @@ public class NinteiChosaSchedule3Main {
      * @return ResponseData
      */
     public ResponseData<NinteiChosaSchedule3MainDiv> onClick_Condition(NinteiChosaSchedule3MainDiv div) {
-        getHandler(div).検索条件クリア();
+        RString 地区コード = ViewStateHolder.get(ViewStateKeys.地区コード, RString.class);
+        getHandler(div).検索条件クリア(地区コード);
         return ResponseData.of(div).respond();
     }
 
@@ -93,19 +97,28 @@ public class NinteiChosaSchedule3Main {
         if (validationMessageControl.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessageControl).respond();
         }
-        if (スケジュール編集初期化.equals(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_画面ステート, RString.class))) {
+        if (スケジュール編集初期化.equals(ViewStateHolder.get(ViewStateKeys.画面ステート, RString.class))) {
             getHandler(div).検索対象未定者リスト_モード1();
-            データ空チェック(div);
+            ValidationMessageControlPairs validationMessage = getalidatisonHandler(div).データ空のチェック();
+            if (validationMessage.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validationMessage).respond();
+            }
             return ResponseData.of(div).setState(DBE2020003StateName.スケジュール編集);
         }
-        if (スケジュール照会初期化.equals(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_画面ステート, RString.class))) {
+        if (スケジュール照会初期化.equals(ViewStateHolder.get(ViewStateKeys.画面ステート, RString.class))) {
             getHandler(div).該当者一覧照会リスト();
-            データ空チェック(div);
+            ValidationMessageControlPairs validation = getalidatisonHandler(div).データ空のチェック();
+            if (validation.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validation).respond();
+            }
             return ResponseData.of(div).setState(DBE2020003StateName.スケジュール照会);
         }
-        if (未定者管理初期化.equals(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_画面ステート, RString.class))) {
+        if (未定者管理初期化.equals(ViewStateHolder.get(ViewStateKeys.画面ステート, RString.class))) {
             getHandler(div).検索対象未定者リスト_モード3();
-            データ空チェック(div);
+            ValidationMessageControlPairs validationMessages = getalidatisonHandler(div).データ空のチェック();
+            if (validationMessages.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+            }
             return ResponseData.of(div).setState(DBE2020003StateName.未定者);
         }
         return ResponseData.of(div).respond();
@@ -118,42 +131,45 @@ public class NinteiChosaSchedule3Main {
      * @return ResponseData
      */
     public ResponseData<NinteiChosaSchedule3MainDiv> onClick_Selection(NinteiChosaSchedule3MainDiv div) {
-        if (スケジュール照会初期化.equals(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_画面ステート, RString.class))) {
-            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_対象者区分, 対象者区分);
+        if (スケジュール照会初期化.equals(ViewStateHolder.get(ViewStateKeys.画面ステート, RString.class))) {
+            ViewStateHolder.put(ViewStateKeys.対象者区分, 対象者区分);
             ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_モード, 照会モード);
         }
-        if (未定者管理初期化.equals(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_画面ステート, RString.class))) {
-            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_対象者区分, div.getRadMiteishaKanri().getSelectedKey());
-            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_地区コード, div.getDdlTaishoChiku().getSelectedKey());
-            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_設定日, ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_設定日, FlexibleDate.class));
-            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_申請書管理番号3, div.getDgResultList().getSelectedItems().get(0).getShinseishoKanriNo());
-            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_調査員状況02, div.getDgResultList().getSelectedItems().get(0).getJokyo());
-            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_地区コード, div.getDdlTaishoChiku().getSelectedKey());
-            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_認定調査委託先コード, div.getDgResultList().getSelectedItems().get(0).getNinteiChosaItakusakiCode());
-            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_認定調査員コード, div.getDgResultList().getSelectedItems().get(0).getNinteiChosainCode());
-            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_時間枠, div.getDgResultList().getSelectedItems().get(0).getNinteiChosaJikanWaku());
-            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_予約可否, div.getDgResultList().getSelectedItems().get(0).getYoyakuKaoFlag());
-            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_予約状況, div.getDgResultList().getSelectedItems().get(0).getJokyo());
-            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_保険者, div.getDdlHokensha().getSelectedKey());
+        if (未定者管理初期化.equals(ViewStateHolder.get(ViewStateKeys.画面ステート, RString.class))) {
+            ViewStateHolder.put(ViewStateKeys.対象者区分, div.getRadMiteishaKanri().getSelectedKey());
+            ViewStateHolder.put(ViewStateKeys.地区コード, div.getDdlTaishoChiku().getSelectedKey());
+            ViewStateHolder.put(ViewStateKeys.設定日, ViewStateHolder.get(ViewStateKeys.設定日, FlexibleDate.class));
+            ViewStateHolder.put(ViewStateKeys.申請書管理番号3, div.getDgResultList().getSelectedItems().get(0).getShinseishoKanriNo());
+            ViewStateHolder.put(ViewStateKeys.調査員状況02, div.getDgResultList().getSelectedItems().get(0).getJokyo());
+            ViewStateHolder.put(ViewStateKeys.地区コード, div.getDdlTaishoChiku().getSelectedKey());
+            ViewStateHolder.put(ViewStateKeys.認定調査委託先コード, div.getDgResultList().getSelectedItems().get(0).getNinteiChosaItakusakiCode());
+            ViewStateHolder.put(ViewStateKeys.認定調査員コード, div.getDgResultList().getSelectedItems().get(0).getNinteiChosainCode());
+            ViewStateHolder.put(ViewStateKeys.時間枠, div.getDgResultList().getSelectedItems().get(0).getNinteiChosaJikanWaku());
+            ViewStateHolder.put(ViewStateKeys.予約可否, div.getDgResultList().getSelectedItems().get(0).getYoyakuKaoFlag());
+            ViewStateHolder.put(ViewStateKeys.予約状況, div.getDgResultList().getSelectedItems().get(0).getJokyo());
+            ViewStateHolder.put(ViewStateKeys.保険者, div.getDdlHokensha().getSelectedKey());
             ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_モード, 未定者モード);
             return ResponseData.of(div).respond();
         }
-        if (スケジュール編集初期化.equals(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_画面ステート, RString.class))) {
-            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_対象者区分, div.getRadScheduleEdit().getSelectedKey());
+        if (スケジュール編集初期化.equals(ViewStateHolder.get(ViewStateKeys.画面ステート, RString.class))) {
+            ViewStateHolder.put(ViewStateKeys.対象者区分, div.getRadScheduleEdit().getSelectedKey());
             ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_モード, 編集モード);
         }
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_地区コード, div.getDdlTaishoChiku().getSelectedKey());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_市町村コード, div.getDgResultList().getSelectedItems().get(0).getShichosonCode());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_認定調査委託先コード, div.getDgResultList().getSelectedItems().get(0).getNinteiChosaItakusakiCode());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_認定調査員コード, div.getDgResultList().getSelectedItems().get(0).getNinteiChosainCode());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_設定日, div.getDgResultList().getSelectedItems().get(0).getNinteiChosaYmd().getValue());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_時間枠, div.getDgResultList().getSelectedItems().get(0).getNinteiChosaJikanWaku());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_予約可否, div.getDgResultList().getSelectedItems().get(0).getYoyakuKaoFlag());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_予約状況, div.getDgResultList().getSelectedItems().get(0).getJokyo());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_申請書管理番号3, div.getDgResultList().getSelectedItems().get(0).getShinseishoKanriNo());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_保険者, div.getDdlHokensha().getSelectedKey());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_調査員状況02, div.getDgResultList().getSelectedItems().get(0).getJokyo());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_画面番号, 画面番号);
+        ViewStateHolder.put(ViewStateKeys.地区コード, div.getDdlTaishoChiku().getSelectedKey());
+        ViewStateHolder.put(ViewStateKeys.市町村コード, div.getDgResultList().getSelectedItems().get(0).getShichosonCode());
+        ViewStateHolder.put(ViewStateKeys.認定調査委託先コード, div.getDgResultList().getSelectedItems().get(0).getNinteiChosaItakusakiCode());
+        ViewStateHolder.put(ViewStateKeys.認定調査員コード, div.getDgResultList().getSelectedItems().get(0).getNinteiChosainCode());
+        ViewStateHolder.put(ViewStateKeys.設定日, div.getDgResultList().getSelectedItems().get(0).getNinteiChosaYmd().getValue());
+        ViewStateHolder.put(ViewStateKeys.時間枠, div.getDgResultList().getSelectedItems().get(0).getNinteiChosaJikanWaku());
+        ViewStateHolder.put(ViewStateKeys.予約可否, div.getDgResultList().getSelectedItems().get(0).getYoyakuKaoFlag());
+        ViewStateHolder.put(ViewStateKeys.予約状況, div.getDgResultList().getSelectedItems().get(0).getJokyo());
+        ViewStateHolder.put(ViewStateKeys.申請書管理番号3, div.getDgResultList().getSelectedItems().get(0).getShinseishoKanriNo());
+        ViewStateHolder.put(ViewStateKeys.保険者, div.getDdlHokensha().getSelectedKey());
+        ViewStateHolder.put(ViewStateKeys.調査員状況02, div.getDgResultList().getSelectedItems().get(0).getJokyo());
+        ViewStateHolder.put(ViewStateKeys.画面番号, 画面番号);
+        if (編集モード.equals(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録10_対象者を検索, RString.class))) {
+            ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録10_対象者を検索するモード, 編集モード);
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -173,13 +189,5 @@ public class NinteiChosaSchedule3Main {
 
     private MainPanelValidatisonHandler getalidatisonHandler(NinteiChosaSchedule3MainDiv div) {
         return new MainPanelValidatisonHandler(div);
-    }
-
-    private ResponseData<NinteiChosaSchedule3MainDiv> データ空チェック(NinteiChosaSchedule3MainDiv div) {
-        ValidationMessageControlPairs validationMessageControlPairs = getalidatisonHandler(div).データ空のチェック();
-        if (validationMessageControlPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validationMessageControlPairs).respond();
-        }
-        return ResponseData.of(div).addValidationMessages(validationMessageControlPairs).respond();
     }
 }

@@ -36,7 +36,7 @@ and open the template in the editor.
         <result property="転入PSM_登録異動届出日" column="転入PSM_登録異動届出日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
 
-    <select id="get転入転出異動情報"
+    <select resultOrdered="true" id="get転入転出異動情報"
             parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.hiroshimadomain.HiroshimaDomainMybatisParameter"
             resultMap="resultMap_getHiroshimaDomainRelateEntity" fetchSize="500">
         SELECT

@@ -18,17 +18,17 @@ public enum MobileDataShutsuryokuFlag {
     /**
      * コード:0 名称:未出力 略称:定義なし
      */
-    未出力("0", "未出力"),
+    未出力(false, "未出力"),
     /**
      * コード:1 名称:出力済 略称:定義なし
      */
-    出力済("1", "出力済");
+    出力済(true, "出力済");
 
-    private final RString code;
+    private final boolean code;
     private final RString fullName;
 
-    private MobileDataShutsuryokuFlag(String code, String fullname) {
-        this.code = new RString(code);
+    private MobileDataShutsuryokuFlag(boolean code, String fullname) {
+        this.code = code;
         this.fullName = new RString(fullname);
     }
 
@@ -37,7 +37,7 @@ public enum MobileDataShutsuryokuFlag {
      *
      * @return モバイルデータ出力フラグのコード
      */
-    public RString getコード() {
+    public boolean isモバイルデータ出力() {
         return code;
     }
 
@@ -56,10 +56,10 @@ public enum MobileDataShutsuryokuFlag {
      * @param code モバイルデータ出力フラグのコード
      * @return {@code code} に対応するモバイルデータ出力フラグ
      */
-    public static MobileDataShutsuryokuFlag toValue(RString code) {
+    public static MobileDataShutsuryokuFlag toValue(boolean code) {
 
         for (MobileDataShutsuryokuFlag mobileDataShutsuryokuFlag : MobileDataShutsuryokuFlag.values()) {
-            if (mobileDataShutsuryokuFlag.code.equals(code)) {
+            if (mobileDataShutsuryokuFlag.code == code) {
                 return mobileDataShutsuryokuFlag;
             }
         }

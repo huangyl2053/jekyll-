@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.definition.core.hanteikekkajouhoushuturyoku;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsei.ShoriJotaiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -153,8 +153,7 @@ public final class HanteiKekkaJouhouShuturyokuParameter {
      * @param kaisaiNoList List
      * @param 最大表示件数 Decimal
      * @param 一致 一致
-     * @return HanteiKekkaJouhouShuturyokuParameter
-     * HanteiKekkaJouhouShuturyokuParameter
+     * @return HanteiKekkaJouhouShuturyokuParameter HanteiKekkaJouhouShuturyokuParameter
      */
     public static HanteiKekkaJouhouShuturyokuParameter createParam(
             RString 二次判定日From,

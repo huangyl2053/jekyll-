@@ -56,4 +56,5 @@ public class CyoSaiRaiRelateEntity {
     private RString before_before_chosainShimei;
     private RString chikuCode;
     private int ninteichosaIraiRirekiNo;
+    private Code koroshoIfShikibetsuCode;
 }

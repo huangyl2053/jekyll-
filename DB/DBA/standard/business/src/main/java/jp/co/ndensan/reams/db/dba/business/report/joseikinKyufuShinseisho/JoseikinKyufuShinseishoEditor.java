@@ -49,7 +49,7 @@ public class JoseikinKyufuShinseishoEditor implements IJoseikinKyufuShinseishoEd
         source.telNo = item.getTelNo();
         source.tsuchiBun = item.getTsuchiBun();
         source.yubinNo = item.getYubinNo();
-
+        source.ninshoshaYakushokuMei = item.getNinshoshaYakushokuMei();
         return source;
     }
 }

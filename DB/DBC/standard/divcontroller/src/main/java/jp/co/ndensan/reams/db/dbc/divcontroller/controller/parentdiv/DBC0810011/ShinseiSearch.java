@@ -9,10 +9,10 @@ import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC08100
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810011.DBC0810011TransitionEventName.償還払い費支給申請;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810011.DBC0810011TransitionEventName.福祉用具購入費支給;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0810011.ShinseiSearchDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0600011.PnlTotalParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -43,12 +43,12 @@ public class ShinseiSearch {
     public ResponseData<ShinseiSearchDiv> onLoad(ShinseiSearchDiv div) {
         TaishoshaKey 引継ぎデータ = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ShikibetsuCode 識別コード = 引継ぎデータ.get識別コード();
-        div.getPanelAtenaShikaku().getCcdKaigoAtenalInfo().onLoad(識別コード);
+        div.getPanelAtenaShikaku().getCcdKaigoAtenalInfo().initialize(識別コード);
         ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
         HihokenshaNo 被保険者番号 = 引継ぎデータ.get被保険者番号();
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         if (被保険者番号 != null) {
-            div.getPanelAtenaShikaku().getCcdKaigoShikakuKihon().onLoad(被保険者番号);
+            div.getPanelAtenaShikaku().getCcdKaigoShikakuKihon().initialize(被保険者番号);
         }
         div.getPanelShokan().getCcdShokanShinseiList().initialize(照会, 被保険者番号, FlexibleYearMonth.MIN, FlexibleYearMonth.MAX);
         return ResponseData.of(div).respond();
@@ -61,19 +61,19 @@ public class ShinseiSearch {
      * @return ResponseData<ShinseiSearchDiv>
      */
     public ResponseData<ShinseiSearchDiv> onClick_SelectButton(ShinseiSearchDiv div) {
-        RString yoshikiNo = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_様式番号, RString.class);
+        RString yoshikiNo = ViewStateHolder.get(ViewStateKeys.様式番号, RString.class);
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         FlexibleYearMonth サービス年月 = new FlexibleYearMonth((new RDate(
-                ViewStateHolder.get(ViewStateKeys.償還払申請一覧_サービス年月, RString.class).
+                ViewStateHolder.get(ViewStateKeys.サービス年月, RString.class).
                 toString())).getYearMonth().toDateString());
-        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_整理番号, RString.class);
-        JigyoshaNo 事業者番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_事業者番号, JigyoshaNo.class);
-        RString 明細番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_明細番号, RString.class);
+        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
+        JigyoshaNo 事業者番号 = ViewStateHolder.get(ViewStateKeys.事業者番号, JigyoshaNo.class);
+        RString 明細番号 = ViewStateHolder.get(ViewStateKeys.明細番号, RString.class);
         if (yoshikiNo.startsWith(判定_21C)) {
             ViewStateHolder.put(ViewStateKeys.状態, 参照);
             PnlTotalParameter parameter = new PnlTotalParameter(被保険者番号, サービス年月, 整理番号,
                     事業者番号, yoshikiNo, 明細番号);
-            ViewStateHolder.put(ViewStateKeys.支給申請情報検索キー, parameter);
+            ViewStateHolder.put(ViewStateKeys.検索キー, parameter);
             return ResponseData.of(div).forwardWithEventName(福祉用具購入費支給).respond();
         } else if (yoshikiNo.startsWith(判定_21D)) {
             ViewStateHolder.put(ViewStateKeys.表示モード, 照会_モード);

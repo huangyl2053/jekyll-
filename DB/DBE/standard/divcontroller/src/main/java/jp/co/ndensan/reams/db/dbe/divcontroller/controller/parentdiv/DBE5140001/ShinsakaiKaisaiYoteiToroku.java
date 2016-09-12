@@ -15,27 +15,26 @@ import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiKaisaiYoteiJohoId
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijohoshinsakai.GogitaiJohoShinsaRelateBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikaisaikekka.ShinsakaiKaisaiYoteiJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.dbe5140001.ShinsakaiKaisaiYoteiJohoParameter;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140001.DBE5140001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140001.DBE5140001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140001.ShinsakaiKaisaiYoteiTorokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140001.dgKaisaiYoteiNyuryokuran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140001.dgShinsakaiKaisaiGogitaiJoho_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140001.dgShinsakaiKaisaiYoteiIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5140001.ShinsakaiKaisaiYoteiTorokuValidationHandler;
-import jp.co.ndensan.reams.db.dbe.service.core.shinsakaikaisaiyoteitoroku.ShinsakaiKaisaiYoteiTorokuManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai1.GogitaiManager;
+import jp.co.ndensan.reams.db.dbe.service.core.shinsakai1.MonthlyShinsakaiKaisaiYoteiJoho;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai1.ShinsakaiKaisaiYoteiJohoManager;
+import jp.co.ndensan.reams.db.dbe.service.core.shinsakaikaisaiyoteitoroku.ShinsakaiKaisaiYoteiTorokuManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -80,7 +79,6 @@ public class ShinsakaiKaisaiYoteiToroku {
     private static final int INDEX_8 = 8;
     private static final int INDEX_9 = 9;
     private static final int INDEX_10 = 10;
-    private static final LockingKey LOCKINGKEY = new LockingKey(new RString("ShinsakaiNo"));
     private static final RString MARU = new RString("○○");
     private static final RString 審査会名称 = new RString("第○○回審査会");
     private static final RString 汎用キー = new RString("審査会開催番号");
@@ -98,6 +96,9 @@ public class ShinsakaiKaisaiYoteiToroku {
     private static final RString モード_初期化 = new RString("初期化");
     private static final RString モード_クリア = new RString("クリア");
     private static final RString モード_登録 = new RString("登録");
+    private static final RString モード_中止 = new RString("中止");
+    private static final RString モード_週COPY = new RString("週COPY");
+    private static final RString 保存 = new RString("保存");
     private static final QuestionMessage HAKIMESSAGE = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
             UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
     private static final QuestionMessage SYORIMESSAGE = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
@@ -106,7 +107,7 @@ public class ShinsakaiKaisaiYoteiToroku {
             UrWarningMessages.未保存情報の破棄確認.getMessage().replace("審議会開催予定").evaluate());
     private final ShinsakaiKaisaiYoteiJohoManager yoteiJohoManager;
     private final GogitaiManager gogitaiManager;
-//    private final MonthlyShinsakaiKaisaiYoteiJoho monthYoteJoho;
+    private final MonthlyShinsakaiKaisaiYoteiJoho monthYoteJoho;
     private final ShinsakaiKaisaiYoteiTorokuManager yoteiTorokuManager;
     private static List<RString> 時間枠;
     private static List<ShinsakaiKaisaiYoteiJohoParameter> yoteiJohoEntityList = new ArrayList<>();
@@ -121,7 +122,7 @@ public class ShinsakaiKaisaiYoteiToroku {
     public ShinsakaiKaisaiYoteiToroku() {
         this.yoteiJohoManager = InstanceProvider.create(ShinsakaiKaisaiYoteiJohoManager.class);
         this.gogitaiManager = InstanceProvider.create(GogitaiManager.class);
-//        this.monthYoteJoho = InstanceProvider.create(MonthlyShinsakaiKaisaiYoteiJoho.class);
+        this.monthYoteJoho = InstanceProvider.create(MonthlyShinsakaiKaisaiYoteiJoho.class);
         this.yoteiTorokuManager = InstanceProvider.create(ShinsakaiKaisaiYoteiTorokuManager.class);
     }
 
@@ -280,6 +281,7 @@ public class ShinsakaiKaisaiYoteiToroku {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(SYORIMESSAGE).respond();
         }
+        モード = モード_中止;
         set中止(div.getDgKaisaiYoteiNyuryokuran().getActiveRow().getKaisaiGogitai1());
         return ResponseData.of(div).respond();
     }
@@ -300,6 +302,7 @@ public class ShinsakaiKaisaiYoteiToroku {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(SYORIMESSAGE).respond();
         }
+        モード = モード_中止;
         set中止(div.getDgKaisaiYoteiNyuryokuran().getActiveRow().getKaisaiGogitai2());
         return ResponseData.of(div).respond();
     }
@@ -320,6 +323,7 @@ public class ShinsakaiKaisaiYoteiToroku {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(SYORIMESSAGE).respond();
         }
+        モード = モード_中止;
         set中止(div.getDgKaisaiYoteiNyuryokuran().getActiveRow().getKaisaiGogitai3());
         return ResponseData.of(div).respond();
     }
@@ -340,12 +344,13 @@ public class ShinsakaiKaisaiYoteiToroku {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(SYORIMESSAGE).respond();
         }
+        モード = モード_中止;
         set中止(div.getDgKaisaiYoteiNyuryokuran().getActiveRow().getKaisaiGogitai4());
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 「「開催予定詳細をクリアする」ボタン。<br/>
+     * 「開催予定詳細をクリアする」ボタン。<br/>
      *
      * @param div ShinsakaiKaisaiYoteiTorokuDiv
      * @return ResponseData<ShinsakaiKaisaiYoteiTorokuDiv>
@@ -403,11 +408,49 @@ public class ShinsakaiKaisaiYoteiToroku {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(SYORIMESSAGE).respond();
         }
-//        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
-//                .equals(ResponseHolder.getMessageCode())
-//                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-//            //TODO 待確認
-//        }
+        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            RStringBuilder 開始指定日 = new RStringBuilder();
+            FlexibleDate 週コピー開始日 = new FlexibleDate(開始指定日.append(
+                    getLblMonth(div.getLblMonth().getText())).append(div.getTxtCopyTo().getValue().padZeroToLeft(INDEX_2)).toRString());
+            RStringBuilder から指定日 = new RStringBuilder();
+            FlexibleDate 週コピーから日 = new FlexibleDate(から指定日.append(
+                    getLblMonth(div.getLblMonth().getText())).append(div.getTxtCopyFrom().getValue().padZeroToLeft(INDEX_2)).toRString());
+            List<ShinsakaiKaisaiYoteiJohoParameter> removeList = new ArrayList<>();
+            for (int i = 0; i < INDEX_7; i++) {
+                FlexibleDate 開始日 = 週コピー開始日.plusDay(i);
+                for (ShinsakaiKaisaiYoteiJohoParameter entity2 : yoteiJohoEntityList2) {
+                    if (new RString(開始日.toString()).equals(new RString(entity2.get日付().toString()))) {
+                        removeList.add(entity2);
+                    }
+                }
+            }
+            yoteiJohoEntityList2.removeAll(removeList);
+            List<UzV0002HolidayListEntity> holiDay = HolidayAccessor.getHolidayList(HolidayCategory.日本の休日.getCategoryId());
+            List<RString> holiDayList = new ArrayList<>();
+            for (UzV0002HolidayListEntity entity : holiDay) {
+                holiDayList.add(entity.getHolidayDate().toDateString());
+            }
+            for (int i = 0; i < INDEX_7; i++) {
+                FlexibleDate 開始日 = 週コピー開始日.plusDay(i);
+                FlexibleDate から日 = 週コピーから日.plusDay(i);
+                if (!holiDayList.contains(new RString(開始日.toString())) && !holiDayList.contains(
+                        new RString(から日.toString()))) {
+                    List<ShinsakaiKaisaiYoteiJohoBusiness> businessList = new ArrayList<>();
+                    SearchResult<ShinsakaiKaisaiYoteiJohoBusiness> yoteiJohoNichiBusinessList = monthYoteJoho.copy審査会開催予定情報(
+                            new RString(から日.toString()), new RString(開始日.toString()), businessList);
+                    for (ShinsakaiKaisaiYoteiJohoBusiness yoteiJohoBusiness : yoteiJohoNichiBusinessList.records()) {
+                        内部実績AddEntity(yoteiJohoBusiness);
+                    }
+                }
+            }
+            モード = モード_週COPY;
+            set介護認定審査会開催予定一覧(getLblMonth(div.getLblMonth().getText()));
+            if (div.getTxtSeteibi().getValue() != null) {
+                set開催予定入力欄(div.getTxtSeteibi().getValue());
+            }
+        }
         return ResponseData.of(div).respond();
 
     }
@@ -444,6 +487,8 @@ public class ShinsakaiKaisaiYoteiToroku {
         if (new RString(UrWarningMessages.未保存情報の破棄確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            ViewStateHolder.put(ViewStateKeys.開催番号, div.getDgShinsakaiKaisaiYoteiIchiran().getSelectedItems().get(0).getKaisaiGogitai1());
+            ViewStateHolder.put(ViewStateKeys.開催年月日, div.getDgShinsakaiKaisaiYoteiIchiran().getSelectedItems().get(0).getKaisaiYoteibi());
             return ResponseData.of(div).respond();
         }
         return ResponseData.of(div).respond();
@@ -482,9 +527,6 @@ public class ShinsakaiKaisaiYoteiToroku {
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            if (!RealInitialLocker.tryGetLock(LOCKINGKEY)) {
-                throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
-            }
             set番号();
             Models<ShinsakaiKaisaiYoteiJohoIdentifier, ShinsakaiKaisaiYoteiJoho> models
                     = ViewStateHolder.get(ViewStateKeys.介護認定審査会開催予定情報, Models.class);
@@ -517,8 +559,9 @@ public class ShinsakaiKaisaiYoteiToroku {
                     yoteiTorokuManager.insertOrUpdate(builder.build());
                 }
             }
-            RealInitialLocker.release(LOCKINGKEY);
-            init();
+            div.getCcdKanryoMessege().setMessage(new RString(
+                    UrInformationMessages.正常終了.getMessage().replace(保存.toString()).evaluate()), RString.EMPTY, RString.EMPTY, true);
+            return ResponseData.of(div).setState(DBE5140001StateName.完了);
         }
         return ResponseData.of(div).respond();
     }
@@ -549,6 +592,8 @@ public class ShinsakaiKaisaiYoteiToroku {
 
     private void clear入力() {
         div.getTxtSeteibi().setValue(null);
+        div.getBtnDayBefore().setDisabled(true);
+        div.getBtnDayAfter().setDisabled(true);
         List<dgKaisaiYoteiNyuryokuran_Row> rowList = div.getDgKaisaiYoteiNyuryokuran().getDataSource();
         for (dgKaisaiYoteiNyuryokuran_Row row : rowList) {
             row.getKaisaiGogitai1().setValue(RString.EMPTY);
@@ -575,6 +620,7 @@ public class ShinsakaiKaisaiYoteiToroku {
             }
         }
         if (!shinkiList.isEmpty()) {
+            yoteiJohoEntityList2.removeAll(shinkiList);
             Collections.sort(shinkiList, new Comparator<ShinsakaiKaisaiYoteiJohoParameter>() {
                 @Override
                 public int compare(ShinsakaiKaisaiYoteiJohoParameter entity1, ShinsakaiKaisaiYoteiJohoParameter entity2) {
@@ -586,19 +632,7 @@ public class ShinsakaiKaisaiYoteiToroku {
                 entity.set開催番号(開催番号);
                 entity.set審査会名称(entity.get審査会名称().replace(MARU, 開催番号));
             }
-            for (ShinsakaiKaisaiYoteiJohoParameter entity : yoteiJohoEntityList2) {
-                set内部番号(shinkiList, entity);
-            }
-        }
-    }
-
-    private void set内部番号(List<ShinsakaiKaisaiYoteiJohoParameter> shinkiList, ShinsakaiKaisaiYoteiJohoParameter entity) {
-        for (ShinsakaiKaisaiYoteiJohoParameter shinkiEntity : shinkiList) {
-            if (entity.get日付().equals(shinkiEntity.get日付()) && entity.get開始予定時刻().equals(shinkiEntity.get開始予定時刻())
-                    && entity.get終了予定時刻().equals(shinkiEntity.get終了予定時刻()) && entity.get合議体番号() == shinkiEntity.get合議体番号()) {
-                entity.set開催番号(shinkiEntity.get開催番号());
-                entity.set審査会名称(shinkiEntity.get審査会名称());
-            }
+            yoteiJohoEntityList2.addAll(shinkiList);
         }
     }
 
@@ -675,6 +709,10 @@ public class ShinsakaiKaisaiYoteiToroku {
         ShinsakaiKaisaiYoteiJohoBusiness yoteiJohoBusiness = yoteiJohoManager.save開催予定情報(
                 div.getTxtSeteibi().getValue().toDateString(),
                 開始時間, 終了時間, 合議体番号);
+        内部実績AddEntity(yoteiJohoBusiness);
+    }
+
+    private void 内部実績AddEntity(ShinsakaiKaisaiYoteiJohoBusiness yoteiJohoBusiness) {
         ShinsakaiKaisaiYoteiJohoParameter entity = new ShinsakaiKaisaiYoteiJohoParameter();
         entity.set予定定員(yoteiJohoBusiness.get予定定員());
         entity.set介護認定審査会進捗状況(yoteiJohoBusiness.get介護認定審査会進捗状況());
@@ -692,13 +730,31 @@ public class ShinsakaiKaisaiYoteiToroku {
 
     private ValidationMessageControlPairs getWeekCopyCheck(ShinsakaiKaisaiYoteiTorokuValidationHandler validationHandler) {
         ValidationMessageControlPairs validPairs = validationHandler.週コピーから日チェック();
-        validPairs = validationHandler.週コピー開始日チェック(validPairs);
-        return validationHandler.週コピー開始日以降予定チェック(validPairs);
+        if (validPairs.iterator().hasNext()) {
+            return validPairs;
+        }
+        validPairs = validationHandler.週コピー開始日チェック();
+        if (validPairs.iterator().hasNext()) {
+            return validPairs;
+        }
+        RStringBuilder 指定日 = new RStringBuilder();
+        FlexibleDate 週コピー開始日 = new FlexibleDate(指定日.append(
+                getLblMonth(div.getLblMonth().getText())).append(div.getTxtCopyTo().getValue().padZeroToLeft(INDEX_2)).toRString());
+        for (int i = 0; i < INDEX_7; i++) {
+            SearchResult<ShinsakaiKaisaiYoteiJohoBusiness> yoteiJohoNichiBusinessList = yoteiJohoManager.search審査会開催予定情報Of指定日(
+                    new RString(週コピー開始日.plusDay(i).toString()));
+            if (!yoteiJohoNichiBusinessList.records().isEmpty()) {
+                return validationHandler.週コピー開始日以降予定チェック();
+            }
+        }
+        return validPairs;
     }
 
     private ValidationMessageControlPairs get審査会委員割付Check(ShinsakaiKaisaiYoteiTorokuValidationHandler validationHandler) {
         ValidationMessageControlPairs validPairs = validationHandler.合議体未選択チェック();
         validPairs = validationHandler.審査会番号付番チェック(validPairs);
+        yoteiTorokuManager.get開催予定登録チェック(MARU);
+        yoteiTorokuManager.get割付可能チェック(MARU);
         return validationHandler.割付可能チェック(validPairs);
     }
 
@@ -719,7 +775,6 @@ public class ShinsakaiKaisaiYoteiToroku {
         }
         div.getTxtSeteibi().setDisabled(true);
         set開催予定入力欄(date);
-        div.getBtnWeekCopy().setDisabled(true);
         div.getBtnShinsakaiIinWaritsuke().setDisabled(true);
     }
 
@@ -847,7 +902,9 @@ public class ShinsakaiKaisaiYoteiToroku {
     }
 
     private void setClearSelected(FlexibleDate zenbuDate, dgShinsakaiKaisaiYoteiIchiran_Row dgShinsakaRow) {
-        if ((モード.equals(モード_登録) || モード.equals(モード_クリア)) && div.getTxtSeteibi().getText().equals(new RString(zenbuDate.toString()))) {
+        if ((モード.equals(モード_登録) || モード.equals(モード_クリア) || モード.equals(モード_中止))
+                && div.getTxtSeteibi().getText().equals(new RString(zenbuDate.toString())) || (モード.equals(モード_週COPY)
+                && div.getTxtSeteibi().getValue() != null && div.getTxtSeteibi().getText().equals(new RString(zenbuDate.toString())))) {
             dgShinsakaRow.setSelected(true);
         } else {
             dgShinsakaRow.setSelected(false);
@@ -885,11 +942,23 @@ public class ShinsakaiKaisaiYoteiToroku {
     }
 
     private void set内部審査会名称用(dgShinsakaiKaisaiYoteiIchiran_Row dgShinsakaRow, FlexibleDate zenbuDate) {
+        if (!yoteiJohoEntityList2.isEmpty()) {
+            Collections.sort(yoteiJohoEntityList2, new Comparator<ShinsakaiKaisaiYoteiJohoParameter>() {
+                @Override
+                public int compare(ShinsakaiKaisaiYoteiJohoParameter entity1, ShinsakaiKaisaiYoteiJohoParameter entity2) {
+                    return entity1.get日付().compareTo(entity2.get日付());
+                }
+            });
+        }
         RString juKo = RString.EMPTY;
         RStringBuilder 審査会名称作成 = new RStringBuilder();
         int index = -1;
         RStringBuilder juKoyo = new RStringBuilder();
+
         for (ShinsakaiKaisaiYoteiJohoParameter entity : yoteiJohoEntityList2) {
+            if (entity.get日付().getMonthValue() != Integer.valueOf(getLblMonth(div.getLblMonth().getText()).substring(INDEX_4).toString())) {
+                return;
+            }
             if (juKo.equals(juKoyo.append(entity.get日付().toString()).append(
                     entity.get開始予定時刻()).append(entity.get終了予定時刻()).toRString())) {
                 setBreak(審査会名称作成, entity.get介護認定審査会進捗状況(), entity.get審査会名称());
@@ -995,8 +1064,10 @@ public class ShinsakaiKaisaiYoteiToroku {
         }
         if (指定日.getYearMonth().getLastDay() == 指定日.getDayValue()) {
             div.getBtnDayAfter().setDisabled(true);
+            div.getBtnDayBefore().setDisabled(false);
         } else if (指定日.getDayValue() == 1) {
             div.getBtnDayBefore().setDisabled(true);
+            div.getBtnDayAfter().setDisabled(false);
         } else {
             div.getBtnDayBefore().setDisabled(false);
             div.getBtnDayAfter().setDisabled(false);

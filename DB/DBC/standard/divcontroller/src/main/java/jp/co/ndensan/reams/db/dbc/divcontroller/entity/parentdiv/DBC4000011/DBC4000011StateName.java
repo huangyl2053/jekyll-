@@ -16,6 +16,10 @@ public enum DBC4000011StateName implements IStateEnumerations {
 
     NoChange(""),
     初期状態("初期状態"),
+    検索結果表示状態("検索結果表示状態"),
+    追加状態("追加状態"),
+    修正状態("修正状態"),
+    削除状態("削除状態"),
     完了状態("完了状態");
 
     private final RString name;

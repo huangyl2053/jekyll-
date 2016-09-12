@@ -84,7 +84,7 @@
         <result property="ninchishoJiritsudoIIijoNoGaizensei" column="dbT5510IchiGojiHanteiKekkaJoho_ninchishoJiritsudoIIijoNoGaizensei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="suiteiKyufuKubunCode" column="dbT5510IchiGojiHanteiKekkaJoho_suiteiKyufuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
     </resultMap>
-   <select id="getEntity" resultMap="ResultMap_DbT5510IchiGojiHanteiKekkaJohoEntity">
+   <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5510IchiGojiHanteiKekkaJohoEntity">
         SELECT
         <include refid="allColumns_DbT5510IchiGojiHanteiKekkaJoho"/>
         FROM

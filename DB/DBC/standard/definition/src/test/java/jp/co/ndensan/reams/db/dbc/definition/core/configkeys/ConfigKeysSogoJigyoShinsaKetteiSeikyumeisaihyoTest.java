@@ -8,10 +8,10 @@ import org.junit.Test;
 
 /**
  * 総合事業費審査決定請求明細表情報コンフィグキーのテストクラスです。
- * 
- * @author LDNS 
+ *
+ * @author LDNS
  */
-public class ConfigKeysSogoJigyoShinsaKetteiSeikyumeisaihyoTest extends DbcTestBase{
+public class ConfigKeysSogoJigyoShinsaKetteiSeikyumeisaihyoTest extends DbcTestBase {
 
     @Test(expected = NullPointerException.class)
     public void 引数がNullである場合_toValueは_NullPointerExceptionが発生する() {
@@ -71,56 +71,6 @@ public class ConfigKeysSogoJigyoShinsaKetteiSeikyumeisaihyoTest extends DbcTestB
     @Test
     public void 引数に無しを指定した場合_toValueは_国保連取込_総合事業費審査決定請求明細表情報_有効区分を返す() {
         assertThat(ConfigKeysSogoJigyoShinsaKetteiSeikyumeisaihyo.toValue(new RString("無し")), is(ConfigKeysSogoJigyoShinsaKetteiSeikyumeisaihyo.国保連取込_総合事業費審査決定請求明細表情報_有効区分));
-    }
-
-    @Test
-    public void 国保連取込_総合事業費審査決定請求明細表情報を指定した場合_getコードは_無しを返す() {
-        assertThat(ConfigKeysSogoJigyoShinsaKetteiSeikyumeisaihyo.国保連取込_総合事業費審査決定請求明細表情報.getコード(), is(new RString("無し")));
-    }
-
-    @Test
-    public void 国保連取込_総合事業費審査決定請求明細表情報_バッチIDを指定した場合_getコードは_無しを返す() {
-        assertThat(ConfigKeysSogoJigyoShinsaKetteiSeikyumeisaihyo.国保連取込_総合事業費審査決定請求明細表情報_バッチID.getコード(), is(new RString("無し")));
-    }
-
-    @Test
-    public void 国保連取込_総合事業費審査決定請求明細表情報_一覧表示順を指定した場合_getコードは_無しを返す() {
-        assertThat(ConfigKeysSogoJigyoShinsaKetteiSeikyumeisaihyo.国保連取込_総合事業費審査決定請求明細表情報_一覧表示順.getコード(), is(new RString("無し")));
-    }
-
-    @Test
-    public void 国保連取込_総合事業費審査決定請求明細表情報_交換情報識別番号を指定した場合_getコードは_無しを返す() {
-        assertThat(ConfigKeysSogoJigyoShinsaKetteiSeikyumeisaihyo.国保連取込_総合事業費審査決定請求明細表情報_交換情報識別番号.getコード(), is(new RString("無し")));
-    }
-
-    @Test
-    public void 国保連取込_総合事業費審査決定請求明細表情報_再処理不可区分を指定した場合_getコードは_無しを返す() {
-        assertThat(ConfigKeysSogoJigyoShinsaKetteiSeikyumeisaihyo.国保連取込_総合事業費審査決定請求明細表情報_再処理不可区分.getコード(), is(new RString("無し")));
-    }
-
-    @Test
-    public void 国保連取込_総合事業費審査決定請求明細表情報_処理サイクル区分を指定した場合_getコードは_無しを返す() {
-        assertThat(ConfigKeysSogoJigyoShinsaKetteiSeikyumeisaihyo.国保連取込_総合事業費審査決定請求明細表情報_処理サイクル区分.getコード(), is(new RString("無し")));
-    }
-
-    @Test
-    public void 国保連取込_総合事業費審査決定請求明細表情報_処理月を指定した場合_getコードは_無しを返す() {
-        assertThat(ConfigKeysSogoJigyoShinsaKetteiSeikyumeisaihyo.国保連取込_総合事業費審査決定請求明細表情報_処理月.getコード(), is(new RString("無し")));
-    }
-
-    @Test
-    public void 国保連取込_総合事業費審査決定請求明細表情報_処理名称を指定した場合_getコードは_無しを返す() {
-        assertThat(ConfigKeysSogoJigyoShinsaKetteiSeikyumeisaihyo.国保連取込_総合事業費審査決定請求明細表情報_処理名称.getコード(), is(new RString("無し")));
-    }
-
-    @Test
-    public void 国保連取込_総合事業費審査決定請求明細表情報_排他チェック有り区分を指定した場合_getコードは_無しを返す() {
-        assertThat(ConfigKeysSogoJigyoShinsaKetteiSeikyumeisaihyo.国保連取込_総合事業費審査決定請求明細表情報_排他チェック有り区分.getコード(), is(new RString("無し")));
-    }
-
-    @Test
-    public void 国保連取込_総合事業費審査決定請求明細表情報_有効区分を指定した場合_getコードは_無しを返す() {
-        assertThat(ConfigKeysSogoJigyoShinsaKetteiSeikyumeisaihyo.国保連取込_総合事業費審査決定請求明細表情報_有効区分.getコード(), is(new RString("無し")));
     }
 
     @Test

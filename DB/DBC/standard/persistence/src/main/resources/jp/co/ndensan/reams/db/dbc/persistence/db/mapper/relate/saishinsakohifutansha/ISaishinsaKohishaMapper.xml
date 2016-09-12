@@ -131,7 +131,7 @@
     </resultMap>
     
     <!-- 一時テーブルのデータの取得-->
-    <select id="select被保険者番号From一時テーブル" resultMap="resultMap_Hihokensha" fetchSize="500">
+    <select resultOrdered="true" id="select被保険者番号From一時テーブル" resultMap="resultMap_Hihokensha" fetchSize="500">
         SELECT DISTINCT SAISHIN."hiHokenshaNo"
         FROM "TABLE_SAISHINSAMESAIICHIJI" AS SAISHIN
     </select>
@@ -149,7 +149,7 @@
     <!-- 被保険者台帳管理から市町村コード取得 -->
     <select id="select市町村コードFrom被保険者台帳管理"
             resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kagoketteikohifutanshain.ShichosonHihokenshaParameter">
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kagoketteikohifutanshain.ShichosonHihokenshaParameter" resultOrdered="true">
      SELECT
          <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.allColumns_DbT1001HihokenshaDaicho" />
      FROM

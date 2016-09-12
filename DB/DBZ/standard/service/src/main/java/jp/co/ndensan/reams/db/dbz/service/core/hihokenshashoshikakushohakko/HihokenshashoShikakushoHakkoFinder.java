@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbz.service.core.hihokenshashoshikakushohakko;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
@@ -16,19 +15,20 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntit
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7060KaigoJigyoshaDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7130KaigoServiceShuruiDac;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonCodeYoriShichoson;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShisetsuType;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.ConfigKeysShiharaiHohoHenko;
+import jp.co.ndensan.reams.db.dbz.definition.core.config.ConfigKeysShiharaiHohoHenko;
 import jp.co.ndensan.reams.db.dbz.definition.core.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoMapperParameter;
 import static jp.co.ndensan.reams.db.dbz.definition.core.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoMapperParameter.createParam;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.core.ShiharaiHenkoKanriKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoKanriKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.KyotakuKeikakuTodokedeEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.hihokenshoshikakushohakko.ServiceTypeListEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokenshoshikakushohakko.HihokenshoShikakushoHakkoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokenshoshikakushohakko.HihokenshoShikakushoRirekiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokenshoshikakushohakko.KyotakuKeikakuTodokedeEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.hihokenshoshikakushohakko.ServiceTypeListEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1001HihokenshaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1004ShisetsuNyutaishoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1005KaigoJogaiTokureiTaishoShisetsuDac;
@@ -36,7 +36,7 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4021ShiharaiHohoHenkoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.hihokenshoshikakushohakko.IHihokenshoShikakushoHakkoMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
+import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -56,6 +56,8 @@ public class HihokenshashoShikakushoHakkoFinder {
     private static final RString MENUID_DBUMN12001 = new RString("DBUMN12001");
     private static final RString MENUID_DBUMN12002 = new RString("DBUMN12002");
     private static final RString JIBUNSAKUSEI = new RString("自己作成");
+    private static final RString RIREKIKUBUN_1 = new RString("1");
+
     private final MapperProvider mapperProvider;
     private final DbT1001HihokenshaDaichoDac dbT1001Dac;
     private final DbT4001JukyushaDaichoDac dbT4001Dac;
@@ -117,40 +119,44 @@ public class HihokenshashoShikakushoHakkoFinder {
      * @param 被保険者番号 被保険者番号
      * @param メニューID メニューID
      * @param 識別コード ShikibetsuCode
+     * @param 履歴区分 RString
      * @return 被保険者証資格証発行情報取得Entity
      */
     @Transaction
     public HihokenshoShikakushoHakkoEntity 被保険者証資格証発行情報取得(
             HihokenshaNo 被保険者番号,
             RString メニューID,
-            ShikibetsuCode 識別コード) {
+            ShikibetsuCode 識別コード,
+            RString 履歴区分) {
 
         // SQL発行
         IHihokenshoShikakushoHakkoMapper mapper = this.mapperProvider.create(IHihokenshoShikakushoHakkoMapper.class);
-        HihokenshoShikakushoHakkoMapperParameter parameter
-                = createParam(被保険者番号,
-                        メニューID,
-                        YukoMukoKubun.有効.getコード(),
-                        Boolean.FALSE,
-                        RString.EMPTY,
-                        FlexibleDate.EMPTY,
-                        FlexibleDate.EMPTY,
-                        RString.EMPTY,
-                        FlexibleDate.EMPTY,
-                        FlexibleDate.EMPTY);
-        HihokenshoShikakushoHakkoEntity entity = mapper.被保険者証資格証発行情報取得(parameter);
+
+        //履歴情報の取得
+        HihokenshoShikakushoRirekiEntity 履歴情報Entity = mapper.被保険者証資格証履歴情報取得(被保険者番号, 履歴区分);
+        if (null == 履歴情報Entity) {
+            return null;
+        }
+        HihokenshoShikakushoHakkoEntity entity = mapper.被保険者証資格証発行情報取得(履歴情報Entity);
 
         if (null == entity) {
             return null;
         }
+
+        if (RIREKIKUBUN_1.equals(履歴情報Entity.get区分())) {
+
+            // 指定サービス種類の取得
+            this.指定サービス種類の取得(entity, 被保険者番号);
+
+            // 限度額データ取得
+            this.限度額データ取得(entity);
+        } else {
+            //総合事業対象者情報の取得
+            総合事業対象者情報取得(entity, 履歴情報Entity);
+        }
+
         // 保険者情報取得
         this.保険者情報取得(entity, 被保険者番号);
-
-        // 指定サービス種類の取得
-        this.指定サービス種類の取得(entity, 被保険者番号);
-
-        // 限度額データ取得
-        this.限度額データ取得(entity);
 
         // 給付制限データ取得
         this.給付制限データ取得(entity, メニューID, 被保険者番号);
@@ -162,6 +168,24 @@ public class HihokenshashoShikakushoHakkoFinder {
         this.施設入退所データ取得(entity, 識別コード);
 
         return entity;
+    }
+
+//    /**
+//     * 被保険者証資格証発行情報取得です。
+//     *
+//     * @param 被保険者番号 被保険者番号
+//     * @return boolean
+//     */
+//    @Transaction
+//    public boolean 履歴情報取得(HihokenshaNo 被保険者番号) {
+//
+//        List<DbT4001JukyushaDaichoEntity> dbT4001List = dbT4001Dac.select受給者台帳Count(被保険者番号);
+//        return true;
+//    }
+    private void 総合事業対象者情報取得(HihokenshoShikakushoHakkoEntity entity,
+            HihokenshoShikakushoRirekiEntity 履歴情報Entity) {
+        entity.setチェックリスト実施日(履歴情報Entity.get年月日());
+
     }
 
     /**
@@ -366,7 +390,7 @@ public class HihokenshashoShikakushoHakkoFinder {
             RString 入所施設種類 = dbT1004EntityList.get(i).getNyushoShisetsuShurui();
             RString 事業者名称 = RString.EMPTY;
 
-            if (ShisetsuType.介護保険施設.getCode().equals(入所施設種類)) {
+            if (ShisetsuType.介護保険施設.getコード().equals(入所施設種類)) {
 
                 List<DbT7060KaigoJigyoshaEntity> dbT7060List = dbT7060Dac.
                         select事業者名称(dbT1004EntityList.get(i).getNyushoShisetsuCode());
@@ -375,7 +399,7 @@ public class HihokenshashoShikakushoHakkoFinder {
                         && dbT7060List.get(0).getJigyoshaName() != null) {
                     事業者名称 = dbT7060List.get(0).getJigyoshaName().value();
                 }
-            } else if (ShisetsuType.住所地特例対象施設.getCode().equals(入所施設種類)) {
+            } else if (ShisetsuType.住所地特例対象施設.getコード().equals(入所施設種類)) {
                 List<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> dbT1005List = dbT1005Dac.
                         selectJigyoshaJohoFor施設名取得(dbT1004EntityList.get(i).getNyushoShisetsuCode());
 

@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.SonotaKikanJoho;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5914SonotaKikanJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5914SonotaKikanJohoDac;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * その他機関情報を管理するクラスです。
+ *
+ * @reamsid_L DBE-9999-021 suguangjun
  */
 public class SonotaKikanJohoManager {
 
@@ -94,5 +96,20 @@ public class SonotaKikanJohoManager {
             return false;
         }
         return 1 == dac.save(その他機関情報.toEntity());
+    }
+
+    /**
+     * その他機関情報{@link SonotaKikanJoho}を保存します。
+     *
+     * @param その他機関情報 {@link SonotaKikanJoho}
+     * @return 更新件数 更新結果の件数を返します。
+     */
+    @Transaction
+    public boolean saveOrDeleteその他機関情報(SonotaKikanJoho その他機関情報) {
+        requireNonNull(その他機関情報, UrSystemErrorMessages.値がnull.getReplacedMessage("その他機関情報"));
+        if (!その他機関情報.hasChanged()) {
+            return false;
+        }
+        return 1 == dac.saveOrDelete(その他機関情報.toEntity());
     }
 }

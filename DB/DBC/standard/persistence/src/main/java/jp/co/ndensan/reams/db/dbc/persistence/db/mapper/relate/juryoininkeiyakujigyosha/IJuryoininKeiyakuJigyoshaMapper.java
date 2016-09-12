@@ -21,7 +21,7 @@ public interface IJuryoininKeiyakuJigyoshaMapper {
      * 契約事業者一覧取得
      *
      * @param parameter JuryoininKeiyakuJigyoshaParameter
-     * @return DbT3077JuryoininKeiyakuJigyoshaEntity
+     * @return List<DbT3077JuryoininKeiyakuJigyoshaEntity>
      */
     List<DbT3077JuryoininKeiyakuJigyoshaEntity> get契約事業者一覧(JuryoininKeiyakuJigyoshaParameter parameter);
 
@@ -29,8 +29,8 @@ public interface IJuryoininKeiyakuJigyoshaMapper {
      * 契約事業者取得処理
      *
      * @param parameter parameter
-     * @return JuryoininKeiyakuJigyosha
+     * @return List<DbT3077JuryoininKeiyakuJigyoshaEntity>
      */
-    DbT3077JuryoininKeiyakuJigyoshaEntity get契約事業者(Map<String, Object> parameter);
+    List<DbT3077JuryoininKeiyakuJigyoshaEntity> get契約事業者(Map<String, Object> parameter);
 
 }

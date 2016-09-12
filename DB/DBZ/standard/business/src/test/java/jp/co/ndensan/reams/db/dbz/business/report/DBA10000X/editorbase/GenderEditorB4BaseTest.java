@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.editorbase;
 
-import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakkoModel;
-import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshashoModel;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshashikakuhakko.HihokenshaShikakuHakkoModel;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshashikakuhakko.HihokenshashoModel;
 import jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.HihokenshashoB4;
 import jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.HihokenshashoB4UpperEditData;
 import jp.co.ndensan.reams.db.dbz.business.report.DBA10000X.IHihokenshashoB4CommonEditData;

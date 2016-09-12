@@ -5,7 +5,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
- * 
+ *
  * 護保険特定負担限度額申請書の帳票データのクラスです。
  *
  * @reamsid_L DBA-0540-688 houtianpeng

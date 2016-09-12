@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320002;
 
+import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.DBB0320001KihonJohoDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
@@ -18,7 +19,7 @@ public class DBB0320002KihonJoho {
     /**
      * 初期処理です。
      *
-     * @param div 基本情報Div
+     * @param div
      * @return レスポンスデータ
      */
     public ResponseData<DBB0320001KihonJohoDiv> initialize(DBB0320001KihonJohoDiv div) {

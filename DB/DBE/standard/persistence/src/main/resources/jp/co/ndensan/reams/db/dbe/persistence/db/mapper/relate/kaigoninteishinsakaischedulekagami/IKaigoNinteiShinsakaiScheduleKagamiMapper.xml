@@ -13,7 +13,7 @@
         <result property="sonotaKikanCode"  column="sonotaKikanCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
 
-    <select id="get出力明細一覧" resultMap="resultMap_getKaigoNinteiShinsakaiScheduleKagami"
+    <select resultOrdered="true" id="get出力明細一覧" resultMap="resultMap_getKaigoNinteiShinsakaiScheduleKagami"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.kaigoninteishinsakaischedulekagami.KaigoNinteiShinsakaiScheduleKagamiMybitisParamter" fetchSize="500">
         SELECT
         dbt5594."yubinNo" As yubinNo,
@@ -42,7 +42,7 @@
             </foreach>
         </if>
     </select>
-    <select id="get医療機関名称" resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
+    <select resultOrdered="true" id="get医療機関名称" resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
              parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
         SELECT
         dbt5911."iryoKikanMeisho"
@@ -52,7 +52,7 @@
         dbt5911."shujiiIryokikanCode" = #{kikanCode}
         LIMIT 1
     </select>
-    <select id="get事業者名称" resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
+    <select resultOrdered="true" id="get事業者名称" resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
              parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
         SELECT
         dbt4910."jigyoshaMeisho"
@@ -62,7 +62,7 @@
         dbt4910."ninteichosaItakusakiCode" = #{kikanCode}
         LIMIT 1
     </select>
-    <select id="get機関名称" resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
+    <select resultOrdered="true" id="get機関名称" resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
              parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
         SELECT
         dbt5914."sonotaKikanCode"

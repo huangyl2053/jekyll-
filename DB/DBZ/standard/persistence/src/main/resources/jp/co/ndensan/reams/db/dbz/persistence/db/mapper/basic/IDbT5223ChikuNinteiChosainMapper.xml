@@ -51,7 +51,7 @@
         <result property="yusenNo" column="dbT5223ChikuNinteiChosain_yusenNo" />
         <result property="biko" column="dbT5223ChikuNinteiChosain_biko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-<select id="getEntity" resultMap="ResultMap_DbT5223ChikuNinteiChosainEntity">
+<select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5223ChikuNinteiChosainEntity">
     SELECT
     <include refid="allColumns_DbT5223ChikuNinteiChosain" />
     FROM

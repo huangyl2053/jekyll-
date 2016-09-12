@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.service.core.shinsakai.ninteishinseijoho;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho2;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
@@ -44,7 +44,8 @@ public class NinteiShinseiJohoManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link NinteiShinseiJohoManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link NinteiShinseiJohoManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link NinteiShinseiJohoManager}のインスタンス
      */
     public static NinteiShinseiJohoManager createInstance() {
         return InstanceProvider.create(NinteiShinseiJohoManager.class);
@@ -54,10 +55,10 @@ public class NinteiShinseiJohoManager {
      * 主キーに合致する要介護認定申請情報を返します。
      *
      * @param 申請書管理番号 申請書管理番号
-     * @return NinteiShinseiJoho
+     * @return NinteiShinseiJoho2
      */
     @Transaction
-    public NinteiShinseiJoho get要介護認定申請情報(
+    public NinteiShinseiJoho2 get要介護認定申請情報(
             ShinseishoKanriNo 申請書管理番号) {
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
 
@@ -67,34 +68,34 @@ public class NinteiShinseiJohoManager {
             return null;
         }
         entity.initializeMd5();
-        return new NinteiShinseiJoho(entity);
+        return new NinteiShinseiJoho2(entity);
     }
 
     /**
      * 要介護認定申請情報を全件返します。
      *
-     * @return NinteiShinseiJohoの{@code list}
+     * @return NinteiShinseiJoho2の{@code list}
      */
     @Transaction
-    public List<NinteiShinseiJoho> get要介護認定申請情報一覧() {
-        List<NinteiShinseiJoho> businessList = new ArrayList<>();
+    public List<NinteiShinseiJoho2> get要介護認定申請情報一覧() {
+        List<NinteiShinseiJoho2> businessList = new ArrayList<>();
 
         for (DbT5101NinteiShinseiJohoEntity entity : dac.selectAll()) {
             entity.initializeMd5();
-            businessList.add(new NinteiShinseiJoho(entity));
+            businessList.add(new NinteiShinseiJoho2(entity));
         }
 
         return businessList;
     }
 
     /**
-     * 要介護認定申請情報{@link NinteiShinseiJoho}を保存します。
+     * 要介護認定申請情報{@link NinteiShinseiJoho2}を保存します。
      *
-     * @param 要介護認定申請情報 {@link NinteiShinseiJoho}
+     * @param 要介護認定申請情報 {@link NinteiShinseiJoho2}
      * @return 更新件数 更新結果の件数を返します。
      */
     @Transaction
-    public boolean save要介護認定申請情報(NinteiShinseiJoho 要介護認定申請情報) {
+    public boolean save要介護認定申請情報(NinteiShinseiJoho2 要介護認定申請情報) {
         requireNonNull(要介護認定申請情報, UrSystemErrorMessages.値がnull.getReplacedMessage("要介護認定申請情報"));
         if (!要介護認定申請情報.hasChanged()) {
             return false;

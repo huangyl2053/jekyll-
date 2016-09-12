@@ -9,18 +9,22 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
+import jp.co.ndensan.reams.db.dbb.business.core.gemmen.choteikyotsu.ChoteiKyotsu;
 import jp.co.ndensan.reams.db.dbb.business.core.gemmen.choteikyotsu.ChoteiKyotsuIdentifier;
 import jp.co.ndensan.reams.db.dbb.business.core.gemmen.gemmen.Gemmen;
 import jp.co.ndensan.reams.db.dbb.business.core.gemmen.gemmen.GemmenIdentifier;
 import jp.co.ndensan.reams.db.dbb.business.core.gemmen.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.business.core.gemmen.kibetsu.KibetsuIdentifier;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2004GemmenEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.gemmen.GemmenJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.gemmen.KibetsuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -40,7 +44,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 /**
  * 減免の情報を管理するクラスです。
  *
- * @reamsid_L DBB-9999-013 huangh
+ * @reamsid_L DBB-9999-013 xicongwang
  */
 public class GemmenJoho extends ParentModelBase<GemmenJohoIdentifier, DbT2002FukaEntity, GemmenJoho> implements Serializable {
 
@@ -800,7 +804,7 @@ public class GemmenJoho extends ParentModelBase<GemmenJohoIdentifier, DbT2002Fuk
     public RString get減免状態区分() {
 
         Gemmen 介護賦課減免 = get介護賦課減免();
-        return 介護賦課減免 != null ? 介護賦課減免.get減免状態区分() : RString.EMPTY;
+        return 介護賦課減免 != null ? 介護賦課減免.get減免状態区分() : null;
     }
 
     /**
@@ -811,7 +815,7 @@ public class GemmenJoho extends ParentModelBase<GemmenJohoIdentifier, DbT2002Fuk
     public RString get減免作成区分() {
 
         Gemmen 介護賦課減免 = get介護賦課減免();
-        return 介護賦課減免 != null ? 介護賦課減免.get減免作成区分() : RString.EMPTY;
+        return 介護賦課減免 != null ? 介護賦課減免.get減免作成区分() : null;
     }
 
     /**
@@ -822,7 +826,29 @@ public class GemmenJoho extends ParentModelBase<GemmenJohoIdentifier, DbT2002Fuk
     public FlexibleDate get減免決定日() {
 
         Gemmen 介護賦課減免 = get介護賦課減免();
-        return 介護賦課減免 != null ? 介護賦課減免.get減免決定日() : FlexibleDate.EMPTY;
+        return 介護賦課減免 != null ? 介護賦課減免.get減免決定日() : null;
+    }
+
+    /**
+     * 減免取消日を返します。
+     *
+     * @return 減免取消日
+     */
+    public FlexibleDate get減免取消日() {
+
+        Gemmen 介護賦課減免 = get介護賦課減免();
+        return 介護賦課減免 != null ? 介護賦課減免.get減免取消日() : null;
+    }
+
+    /**
+     * 取消減免額を返します。
+     *
+     * @return 取消減免額
+     */
+    public Decimal get取消減免額() {
+
+        Gemmen 介護賦課減免 = get介護賦課減免();
+        return 介護賦課減免 != null ? 介護賦課減免.get取消減免額() : null;
     }
 
     /**
@@ -833,7 +859,7 @@ public class GemmenJoho extends ParentModelBase<GemmenJohoIdentifier, DbT2002Fuk
     public RString get減免事由() {
 
         Gemmen 介護賦課減免 = get介護賦課減免();
-        return 介護賦課減免 != null ? 介護賦課減免.get減免事由() : RString.EMPTY;
+        return 介護賦課減免 != null ? 介護賦課減免.get減免事由() : null;
     }
 
     /**
@@ -858,7 +884,7 @@ public class GemmenJoho extends ParentModelBase<GemmenJohoIdentifier, DbT2002Fuk
     private Decimal get期別金額(int 期, RString 徴収方法期別) {
 
         if (kibetsu == null || kibetsu.values() == null || kibetsu.values().isEmpty()) {
-            return Decimal.ZERO;
+            return null;
         }
         List<Kibetsu> 介護期別List = new ArrayList<>(kibetsu.values());
         for (Kibetsu 介護期別 : 介護期別List) {
@@ -869,7 +895,7 @@ public class GemmenJoho extends ParentModelBase<GemmenJohoIdentifier, DbT2002Fuk
                 return 介護期別.getChoteiKyotsu(identifier).get調定額();
             }
         }
-        return Decimal.ZERO;
+        return null;
     }
 
     /**
@@ -893,8 +919,10 @@ public class GemmenJoho extends ParentModelBase<GemmenJohoIdentifier, DbT2002Fuk
     }
 
     /**
-     * 減免の情報配下の要素を削除対象とします。<br/> {@link DbT2002FukaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
-     * 減免の情報配下の要素である減免の情報の{@link Models#deleteOrRemoveAll() }を実行します。 削除処理結果となる{@link GemmenJoho}を返します。
+     * 減免の情報配下の要素を削除対象とします。<br/>
+     * {@link DbT2002FukaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 減免の情報配下の要素である減免の情報の{@link Models#deleteOrRemoveAll() }を実行します。
+     * 削除処理結果となる{@link GemmenJoho}を返します。
      *
      * @return 削除対象処理実施後の{@link GemmenJoho}
      * @throws IllegalStateException DbT2002FukaEntityのデータ状態が変更の場合
@@ -918,7 +946,8 @@ public class GemmenJoho extends ParentModelBase<GemmenJohoIdentifier, DbT2002Fuk
     }
 
     /**
-     * 減免の情報のみを変更対象とします。<br/> {@link DbT2002FukaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 減免の情報のみを変更対象とします。<br/>
+     * {@link DbT2002FukaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link GemmenJoho}
      */
@@ -979,6 +1008,58 @@ public class GemmenJoho extends ParentModelBase<GemmenJohoIdentifier, DbT2002Fuk
      */
     public List<Kibetsu> getKibetsuList() {
         return new ArrayList<>(kibetsu.values());
+    }
+
+    /**
+     * 賦課の情報が保持する賦課の情報をリストで返します。
+     *
+     * @return 賦課の情報
+     */
+    public FukaJoho get賦課の情報() {
+        List<jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity> 介護期別RelateEntityList = new ArrayList<>();
+        List<Kibetsu> 介護期別List = new ArrayList<>(kibetsu.values());
+        for (Kibetsu 介護期別 : 介護期別List) {
+            jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity 介護期別RelateEntity
+                    = new jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity();
+            介護期別RelateEntity.set介護期別Entity(介護期別.toEntity());
+            List<UrT0705ChoteiKyotsuEntity> 調定共通RelateEntityList = new ArrayList<>();
+            List<ChoteiKyotsu> 調定共通EntityList = 介護期別.getChoteiKyotsuList();
+            for (ChoteiKyotsu 調定共通 : 調定共通EntityList) {
+                調定共通RelateEntityList.add(調定共通.toEntity());
+            }
+            介護期別RelateEntity.set調定共通Entity(調定共通RelateEntityList);
+            介護期別RelateEntityList.add(介護期別RelateEntity);
+        }
+        FukaJohoRelateEntity 賦課の情報RelateEntity = new FukaJohoRelateEntity();
+        賦課の情報RelateEntity.set介護期別RelateEntity(介護期別RelateEntityList);
+        賦課の情報RelateEntity.set介護賦課Entity(entity);
+        return new FukaJoho(賦課の情報RelateEntity);
+    }
+
+    /**
+     * 賦課の情報が保持する賦課の情報RelateEntityをリストで返します。
+     *
+     * @return 賦課の情報RelateEntity
+     */
+    public FukaJohoRelateEntity get賦課の情報RelateEntity() {
+        List<jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity> 介護期別RelateEntityList = new ArrayList<>();
+        List<Kibetsu> 介護期別List = new ArrayList<>(kibetsu.values());
+        for (Kibetsu 介護期別 : 介護期別List) {
+            jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity 介護期別RelateEntity
+                    = new jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.kibetsu.KibetsuEntity();
+            介護期別RelateEntity.set介護期別Entity(介護期別.toEntity());
+            List<UrT0705ChoteiKyotsuEntity> 調定共通RelateEntityList = new ArrayList<>();
+            List<ChoteiKyotsu> 調定共通EntityList = 介護期別.getChoteiKyotsuList();
+            for (ChoteiKyotsu 調定共通 : 調定共通EntityList) {
+                調定共通RelateEntityList.add(調定共通.toEntity());
+            }
+            介護期別RelateEntity.set調定共通Entity(調定共通RelateEntityList);
+            介護期別RelateEntityList.add(介護期別RelateEntity);
+        }
+        FukaJohoRelateEntity 賦課の情報RelateEntity = new FukaJohoRelateEntity();
+        賦課の情報RelateEntity.set介護期別RelateEntity(介護期別RelateEntityList);
+        賦課の情報RelateEntity.set介護賦課Entity(entity);
+        return 賦課の情報RelateEntity;
     }
 
     /**

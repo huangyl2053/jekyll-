@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 高額合算自己負担額明細を管理するクラスです。
+ *
+ * @reamsid_L DBC-4800-010 huzongcheng
  */
 public class KogakuGassanJikoFutanGakuMeisaiManager {
 
@@ -83,6 +85,45 @@ public class KogakuGassanJikoFutanGakuMeisaiManager {
     }
 
     /**
+     * 対象月除く合致する高額合算自己負担額明細を返します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 対象年度 TaishoNendo
+     * @param 保険者番号 HokenshaNo
+     * @param 支給申請書整理番号 ShikyuShinseishoSeiriNo
+     * @param 履歴番号 RirekiNo
+     * @return List<KogakuGassanJikoFutanGakuMeisai>
+     */
+    @Transaction
+    public List<KogakuGassanJikoFutanGakuMeisai> get対象月除く負担額明細(
+            HihokenshaNo 被保険者番号,
+            FlexibleYear 対象年度,
+            HokenshaNo 保険者番号,
+            RString 支給申請書整理番号,
+            int 履歴番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(対象年度, UrSystemErrorMessages.値がnull.getReplacedMessage("対象年度"));
+        requireNonNull(保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者番号"));
+        requireNonNull(支給申請書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("支給申請書整理番号"));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+
+        List<KogakuGassanJikoFutanGakuMeisai> businessList = new ArrayList<>();
+
+        for (DbT3071KogakuGassanJikoFutanGakuMeisaiEntity entity : dac.selectMeisai(
+                被保険者番号,
+                対象年度,
+                保険者番号,
+                支給申請書整理番号,
+                履歴番号
+        )) {
+            entity.initializeMd5();
+            businessList.add(new KogakuGassanJikoFutanGakuMeisai(entity));
+        }
+
+        return businessList;
+    }
+
+    /**
      * 高額合算自己負担額明細を全件返します。
      *
      * @return List<KogakuGassanJikoFutanGakuMeisai>
@@ -106,7 +147,8 @@ public class KogakuGassanJikoFutanGakuMeisaiManager {
      * @return 更新件数 更新結果の件数を返します。
      */
     @Transaction
-    public boolean save高額合算自己負担額明細(KogakuGassanJikoFutanGakuMeisai 高額合算自己負担額明細) {
+    public boolean save高額合算自己負担額明細(KogakuGassanJikoFutanGakuMeisai 高額合算自己負担額明細
+    ) {
         requireNonNull(高額合算自己負担額明細, UrSystemErrorMessages.値がnull.getReplacedMessage("高額合算自己負担額明細"));
         if (!高額合算自己負担額明細.hasChanged()) {
             return false;

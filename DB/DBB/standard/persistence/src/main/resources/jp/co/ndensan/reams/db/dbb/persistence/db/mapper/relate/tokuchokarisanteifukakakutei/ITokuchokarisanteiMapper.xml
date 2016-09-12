@@ -3,12 +3,9 @@
 <!-- 概要： 介護賦課徴収猶予のマッピング用XMLです。 -->
 <!-- @reamsid_L DBB-0800-020 wanghui    -->
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchokarisanteifukakakutei.ITokuchokarisanteiMapper">
-    <update id="updShoKofuKaishuJoho" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.relate.tokuchokarisanteifukakakutei.TokuchoKarisanteiFukaKakuteiMapperParameter" >
-        UPDATE rgdb."UrT0705ChoteiKyotsu"
-        SET
-        "fukaShoriJokyo" = TRUE
-        WHERE  EXISTS
-        (SELECT
+    <select resultOrdered="true" id="updShoKofuKaishuJoho" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity"
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.relate.tokuchokarisanteifukakakutei.TokuchoKarisanteiFukaKakuteiMapperParameter" >
+       SELECT
         UrT0705Chote."choteiId"
         FROM
         rgdb."UrT0705ChoteiKyotsu" as UrT0705Chote
@@ -30,6 +27,5 @@
         DbT2002Fuka."fukaNendo"=#{fukaNendo}
         AND
         DbT2002Fuka."choteiNichiji" =#{choteiTimestamp}
-        )
-    </update>
+    </select>
 </mapper>

@@ -7,15 +7,15 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.fukarirek
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.HokenryoDankaiUtil;
 import jp.co.ndensan.reams.db.dbb.business.core.FukaRireki;
 import jp.co.ndensan.reams.db.dbb.business.core.Kiwarigaku;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.Fuka;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.HokenryoDankai;
+import jp.co.ndensan.reams.db.dbb.business.util.HokenryoDankaiUtil;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.FukaMiscManager;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.HokenryoDankaiManager;
 import jp.co.ndensan.reams.db.dbb.service.core.relate.KiwarigakuManager;
+import jp.co.ndensan.reams.db.dbx.business.core.fuka.Fuka;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.session.PanelSessionAccessor;
 
@@ -134,11 +135,23 @@ public class FukaRirekiAllHandler {
     }
 
     /**
+     * 賦課履歴を取得して保持している場合は{@code true}を返します。
+     *
+     * @return 賦課履歴を取得して保持している場合は{@code true}.
+     */
+    public boolean hasLoaded() {
+        return PanelSessionAccessor.containsKey(div, SESSION_NAME);
+    }
+
+    /**
      * 選択されている行の賦課履歴を返します。行が選択されていない場合は全賦課履歴を返します。
      *
      * @return 賦課履歴
      */
     public FukaRireki get賦課履歴() {
+        if (!hasLoaded()) {
+            return FukaRireki.EMPTY;
+        }
         FukaRireki 賦課履歴 = new FukaRireki(PanelSessionAccessor.get(div, SESSION_NAME, ItemList.class).toList());
         List<dgFukaRirekiAll_Row> rowList = div.getDgFukaRirekiAll().getSelectedItems();
         if (rowList.isEmpty()) {
@@ -150,6 +163,36 @@ public class FukaRirekiAllHandler {
             TsuchishoNo 通知書番号 = new TsuchishoNo(row.getTsuchishoNo());
             return new FukaRireki(賦課履歴.get賦課履歴(賦課年度, 調定年度, 通知書番号).toList());
         }
+    }
+
+    /**
+     * 選択されている行の通知書番号を返します。
+     *
+     * @return 通知書番号 TsuchishoNo
+     */
+    public TsuchishoNo getClicked通知書番号() {
+        dgFukaRirekiAll_Row row = div.getDgFukaRirekiAll().getClickedItem();
+        return new TsuchishoNo(row.getTsuchishoNo());
+    }
+
+    /**
+     * 選択されている行の調定年度を返します。
+     *
+     * @return 調定年度 FlexibleYear
+     */
+    public FlexibleYear getClicked調定年度() {
+        dgFukaRirekiAll_Row row = div.getDgFukaRirekiAll().getClickedItem();
+        return new FlexibleYear(row.getChoteiNendoHidden());
+    }
+
+    /**
+     * 選択されている行の賦課年度を返します。
+     *
+     * @return 賦課年度 FlexibleYear
+     */
+    public FlexibleYear getClicked賦課年度() {
+        dgFukaRirekiAll_Row row = div.getDgFukaRirekiAll().getClickedItem();
+        return new FlexibleYear(row.getFukaNendoHidden());
     }
 
     private int set全賦課履歴(IItemList<Fuka> modelList) {
@@ -187,8 +230,8 @@ public class FukaRirekiAllHandler {
         List<dgFukaRirekiAll_Row> selectedItem = new ArrayList<>();
         for (dgFukaRirekiAll_Row row : div.getDgFukaRirekiAll().getDataSource()) {
             if (row.getChoteiNendoHidden().equals(調定年度.value().toDateString())
-                    && row.getFukaNendoHidden().equals(賦課年度.value().toDateString())
-                    && row.getTsuchishoNo().equals(通知書番号.value())) {
+                && row.getFukaNendoHidden().equals(賦課年度.value().toDateString())
+                && row.getTsuchishoNo().equals(通知書番号.value())) {
                 selectedItem.add(row);
             }
         }

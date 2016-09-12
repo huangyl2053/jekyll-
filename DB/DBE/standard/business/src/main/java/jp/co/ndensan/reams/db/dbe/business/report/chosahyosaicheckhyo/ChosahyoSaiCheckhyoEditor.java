@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAns
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser15;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser16;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaAnser17;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -315,9 +314,9 @@ class ChosahyoSaiCheckhyoEditor implements IChosahyoSaiCheckhyoEditor {
 
     private RString setChosaAnser01(RString zenkaiChosakekkaNo) {
         RString chosaAnser = RString.EMPTY;
-        if (new RString(ChosaAnser01.あり.getコード().toString()).equals(zenkaiChosakekkaNo)) {
+        if (ChosaAnser01.あり.getコード().equals(zenkaiChosakekkaNo)) {
             chosaAnser = ChosaAnser01.あり.get名称();
-        } else if (new RString(ChosaAnser01.なし.getコード().toString()).equals(zenkaiChosakekkaNo)) {
+        } else if (ChosaAnser01.なし.getコード().equals(zenkaiChosakekkaNo)) {
             chosaAnser = ChosaAnser01.なし.get名称();
         }
         return chosaAnser;
@@ -326,7 +325,7 @@ class ChosahyoSaiCheckhyoEditor implements IChosahyoSaiCheckhyoEditor {
     private RString getChosaAnser02(RString zenkaiChosakekkaNo) {
         RString chosaAnser = RString.EMPTY;
         if (!RString.isNullOrEmpty(zenkaiChosakekkaNo)) {
-            chosaAnser = ChosaAnser02.toValue(new Code(zenkaiChosakekkaNo)).get名称();
+            chosaAnser = ChosaAnser02.toValue(zenkaiChosakekkaNo).get名称();
         }
         return chosaAnser;
     }
@@ -334,7 +333,7 @@ class ChosahyoSaiCheckhyoEditor implements IChosahyoSaiCheckhyoEditor {
     private RString getChosaAnser03(RString zenkaiChosakekkaNo) {
         RString chosaAnser = RString.EMPTY;
         if (!RString.isNullOrEmpty(zenkaiChosakekkaNo)) {
-            chosaAnser = ChosaAnser03.toValue(new Code(zenkaiChosakekkaNo)).get名称();
+            chosaAnser = ChosaAnser03.toValue(zenkaiChosakekkaNo).get名称();
         }
         return chosaAnser;
     }
@@ -342,7 +341,7 @@ class ChosahyoSaiCheckhyoEditor implements IChosahyoSaiCheckhyoEditor {
     private RString getChosaAnser04(RString zenkaiChosakekkaNo) {
         RString chosaAnser = RString.EMPTY;
         if (!RString.isNullOrEmpty(zenkaiChosakekkaNo)) {
-            chosaAnser = ChosaAnser04.toValue(new Code(zenkaiChosakekkaNo)).get名称();
+            chosaAnser = ChosaAnser04.toValue(zenkaiChosakekkaNo).get名称();
         }
         return chosaAnser;
     }
@@ -350,7 +349,7 @@ class ChosahyoSaiCheckhyoEditor implements IChosahyoSaiCheckhyoEditor {
     private RString getChosaAnser06(RString zenkaiChosakekkaNo) {
         RString chosaAnser = RString.EMPTY;
         if (!RString.isNullOrEmpty(zenkaiChosakekkaNo)) {
-            chosaAnser = ChosaAnser06.toValue(new Code(zenkaiChosakekkaNo)).get名称();
+            chosaAnser = ChosaAnser06.toValue(zenkaiChosakekkaNo).get名称();
         }
         return chosaAnser;
     }
@@ -358,7 +357,7 @@ class ChosahyoSaiCheckhyoEditor implements IChosahyoSaiCheckhyoEditor {
     private RString getChosaAnser07(RString zenkaiChosakekkaNo) {
         RString chosaAnser = RString.EMPTY;
         if (!RString.isNullOrEmpty(zenkaiChosakekkaNo)) {
-            chosaAnser = ChosaAnser07.toValue(new Code(zenkaiChosakekkaNo)).get名称();
+            chosaAnser = ChosaAnser07.toValue(zenkaiChosakekkaNo).get名称();
         }
         return chosaAnser;
     }
@@ -366,7 +365,7 @@ class ChosahyoSaiCheckhyoEditor implements IChosahyoSaiCheckhyoEditor {
     private RString getChosaAnser08(RString zenkaiChosakekkaNo) {
         RString chosaAnser = RString.EMPTY;
         if (!RString.isNullOrEmpty(zenkaiChosakekkaNo)) {
-            chosaAnser = ChosaAnser08.toValue(new Code(zenkaiChosakekkaNo)).get名称();
+            chosaAnser = ChosaAnser08.toValue(zenkaiChosakekkaNo).get名称();
         }
         return chosaAnser;
     }
@@ -374,7 +373,7 @@ class ChosahyoSaiCheckhyoEditor implements IChosahyoSaiCheckhyoEditor {
     private RString getChosaAnser09(RString zenkaiChosakekkaNo) {
         RString chosaAnser = RString.EMPTY;
         if (!RString.isNullOrEmpty(zenkaiChosakekkaNo)) {
-            chosaAnser = ChosaAnser09.toValue(new Code(zenkaiChosakekkaNo)).get名称();
+            chosaAnser = ChosaAnser09.toValue(zenkaiChosakekkaNo).get名称();
         }
         return chosaAnser;
     }
@@ -382,7 +381,7 @@ class ChosahyoSaiCheckhyoEditor implements IChosahyoSaiCheckhyoEditor {
     private RString getChosaAnser10(RString zenkaiChosakekkaNo) {
         RString chosaAnser = RString.EMPTY;
         if (!RString.isNullOrEmpty(zenkaiChosakekkaNo)) {
-            chosaAnser = ChosaAnser10.toValue(new Code(zenkaiChosakekkaNo)).get名称();
+            chosaAnser = ChosaAnser10.toValue(zenkaiChosakekkaNo).get名称();
         }
         return chosaAnser;
     }
@@ -390,7 +389,7 @@ class ChosahyoSaiCheckhyoEditor implements IChosahyoSaiCheckhyoEditor {
     private RString getChosaAnser11(RString zenkaiChosakekkaNo) {
         RString chosaAnser = RString.EMPTY;
         if (!RString.isNullOrEmpty(zenkaiChosakekkaNo)) {
-            chosaAnser = ChosaAnser11.toValue(new Code(zenkaiChosakekkaNo)).get名称();
+            chosaAnser = ChosaAnser11.toValue(zenkaiChosakekkaNo).get名称();
         }
         return chosaAnser;
     }
@@ -398,7 +397,7 @@ class ChosahyoSaiCheckhyoEditor implements IChosahyoSaiCheckhyoEditor {
     private RString getChosaAnser12(RString zenkaiChosakekkaNo) {
         RString chosaAnser = RString.EMPTY;
         if (!RString.isNullOrEmpty(zenkaiChosakekkaNo)) {
-            chosaAnser = ChosaAnser12.toValue(new Code(zenkaiChosakekkaNo)).get名称();
+            chosaAnser = ChosaAnser12.toValue(zenkaiChosakekkaNo).get名称();
         }
         return chosaAnser;
     }
@@ -406,7 +405,7 @@ class ChosahyoSaiCheckhyoEditor implements IChosahyoSaiCheckhyoEditor {
     private RString getChosaAnser13(RString zenkaiChosakekkaNo) {
         RString chosaAnser = RString.EMPTY;
         if (!RString.isNullOrEmpty(zenkaiChosakekkaNo)) {
-            chosaAnser = ChosaAnser13.toValue(new Code(zenkaiChosakekkaNo)).get名称();
+            chosaAnser = ChosaAnser13.toValue(zenkaiChosakekkaNo).get名称();
         }
         return chosaAnser;
     }
@@ -414,7 +413,7 @@ class ChosahyoSaiCheckhyoEditor implements IChosahyoSaiCheckhyoEditor {
     private RString getChosaAnser14(RString zenkaiChosakekkaNo) {
         RString chosaAnser = RString.EMPTY;
         if (!RString.isNullOrEmpty(zenkaiChosakekkaNo)) {
-            chosaAnser = ChosaAnser14.toValue(new Code(zenkaiChosakekkaNo)).get名称();
+            chosaAnser = ChosaAnser14.toValue(zenkaiChosakekkaNo).get名称();
         }
         return chosaAnser;
     }
@@ -422,17 +421,19 @@ class ChosahyoSaiCheckhyoEditor implements IChosahyoSaiCheckhyoEditor {
     private RString getChosaAnser15(RString zenkaiChosakekkaNo) {
         RString chosaAnser = RString.EMPTY;
         if (!RString.isNullOrEmpty(zenkaiChosakekkaNo)) {
-            chosaAnser = ChosaAnser15.toValue(new Code(zenkaiChosakekkaNo)).get名称();
+            chosaAnser = ChosaAnser15.toValue(zenkaiChosakekkaNo).get名称();
         }
         return chosaAnser;
     }
 
-    private RString setChosaAnser16(RString zenkaiChosakekkaNo) {
+    private RString setChosaAnser16(RString chosakekkaNo) {
         RString chosaAnser = RString.EMPTY;
-        if (new RString(ChosaAnser16.ある.getコード().toString()).equals(zenkaiChosakekkaNo)) {
+        if (ChosaAnser16.ある.getコード().equals(chosakekkaNo)) {
             chosaAnser = ChosaAnser16.ある.get名称();
-        } else if (new RString(ChosaAnser16.ない.getコード().toString()).equals(zenkaiChosakekkaNo)) {
+        } else if (ChosaAnser16.ない.getコード().equals(chosakekkaNo)) {
             chosaAnser = ChosaAnser16.ない.get名称();
+        } else if (ChosaAnser16.ときどきある.getコード().equals(chosakekkaNo)) {
+            chosaAnser = ChosaAnser16.ときどきある.get名称();
         }
         return chosaAnser;
     }
@@ -440,7 +441,7 @@ class ChosahyoSaiCheckhyoEditor implements IChosahyoSaiCheckhyoEditor {
     private RString getChosaAnser17(RString zenkaiChosakekkaNo) {
         RString chosaAnser = RString.EMPTY;
         if (!RString.isNullOrEmpty(zenkaiChosakekkaNo)) {
-            chosaAnser = ChosaAnser17.toValue(new Code(zenkaiChosakekkaNo)).get名称();
+            chosaAnser = ChosaAnser17.toValue(zenkaiChosakekkaNo).get名称();
         }
         return chosaAnser;
     }

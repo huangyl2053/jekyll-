@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.Models;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * {@link RiyoshaFutangakuGengaku}の編集を行うビルダークラスです。
@@ -42,6 +43,18 @@ public class RiyoshaFutangakuGengakuBuilder {
         this.entity = entity.clone();
         this.id = id;
         this.gemmenGengakuShinsei = gemmenGengakuShinsei;
+    }
+
+    /**
+     * EntityDataStateを設定します
+     *
+     * @param state EntityDataState
+     * @return {@link RiyoshaFutangakuGengakuBuilder}
+     */
+    public RiyoshaFutangakuGengakuBuilder setState(EntityDataState state) {
+        requireNonNull(state, UrSystemErrorMessages.値がnull.getReplacedMessage("EntityDataState"));
+        entity.setState(state);
+        return this;
     }
 
     /**

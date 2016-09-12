@@ -233,7 +233,7 @@
     </sql>
 
     <!--一時テーブルの決定通知書情報の取得-->
-    <select id="get決定通知書情報"
+    <select resultOrdered="true" id="get決定通知書情報"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoIkkatsuSakuseiParameter"
             resultMap="resultMap_KetteiTsuchiSho"
             fetchSize="500">
@@ -373,7 +373,7 @@
             AND
             DbT3036ShokanHanteiKekka."ketteiYMD" <![CDATA[<=]]> #{dataTo}
         </if>
-        <if test="chusyutuKetteiFlag">
+        <if test="chusyutuKetteiShaUketsukeFlag">
             AND
             DbT3036ShokanHanteiKekka."ketteiIchiranTorikomiYM" = #{ketteishaUketsukeYM}
         </if>
@@ -386,7 +386,7 @@
     </select>
 
     <!--一時テーブルの決定通知書明細情報の取得-->
-    <select id="get決定通知書明細情報"
+    <select resultOrdered="true" id="get決定通知書明細情報"
             resultMap="resultMap_KetteiTsuchiShoMeisai"
             fetchSize="500">
         SELECT
@@ -440,9 +440,7 @@
         SELECT
         <include refid="selectKetteiTsuchiSho" />
         ,DbT3043ShokanShokujiHiyo."yoshikiNo" AS "yoshikiNo"
-        <!-- TODO QA1178確認中-->
-        --,DbT3043ShokanShokujiHiyo.サービスコード AS "serviceCode"
-        ,'' AS "serviceCode"
+        ,'500000' AS "serviceCode"
         ,DbT3043ShokanShokujiHiyo."tensuKingaku" AS "kaishuKingaku"
         ,'' AS "zougenRiyu"
         ,'' AS "kinyuKikanCodeName"
@@ -558,7 +556,7 @@
         ShokanKetteiTsuchiShoTemp."seiriNo" = DbT3047ShokanServicePlan200904."seiriNo"
     </select>
 
-    <select id="get金融機関と預金種別"
+    <select resultOrdered="true" id="get金融機関と預金種別"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoUpdateParameter"
             resultMap="resultMap_KetteiTsuchiShoMeisai"
             fetchSize="500">
@@ -622,7 +620,7 @@
         AND TEMP."kinyuKikanCode" = ShokanKetteiTsuchiShoMeisaiTemp."kinyuKikanCode"
     </select>
 
-    <select id="get支店名称"
+    <select resultOrdered="true" id="get支店名称"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanketteitsuchishoikkatsu.ShokanKetteiTsuchiShoUpdateParameter"
             resultMap="resultMap_KetteiTsuchiShoMeisai"
             fetchSize="500">
@@ -681,7 +679,7 @@
         AND TEMP."kinyuKikanShitenCode"=ShokanKetteiTsuchiShoMeisaiTemp."kinyuKikanShitenCode"
     </select>
 
-    <select id="get様式名称"
+    <select resultOrdered="true" id="get様式名称"
             resultMap="resultMap_KetteiTsuchiShoMeisai"
             fetchSize="500">
         SELECT
@@ -735,7 +733,7 @@
         AND TEMP."yoshikiNo"=ShokanKetteiTsuchiShoMeisaiTemp."yoshikiNo"
     </select>
 
-    <select id="getサービス種類"
+    <select resultOrdered="true" id="getサービス種類"
             resultMap="resultMap_KetteiTsuchiShoMeisai"
             fetchSize="500">
 
@@ -793,13 +791,13 @@
         AND TEMP."seiriNo"=ShokanKetteiTsuchiShoMeisaiTemp."seiriNo"
         AND TEMP."serviceCode"=ShokanKetteiTsuchiShoMeisaiTemp."serviceCode"
     </select>
-    <select id="get償還払支給判定結果情報"
+    <select resultOrdered="true" id="get償還払支給判定結果情報"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shokanketteitsuchishoikkatsu.ShokanHanteiKekkaUpdataParameter"
-            resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3036ShokanHanteiKekkaMapper.ResultMap_DbT3036ShokanHanteiKekkaEntity"
+            resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3036ShokanHanteiKekkaMapper.ResultMap_DbT3036ShokanHanteiKekkaEntity"
             fetchSize="500">
         SELECT
         DISTINCT
-        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3036ShokanHanteiKekkaMapper.allColumns_DbT3036ShokanHanteiKekka" />
+        <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3036ShokanHanteiKekkaMapper.allColumns_DbT3036ShokanHanteiKekka" />
         FROM
         rgdb."DbT3036ShokanHanteiKekka" AS "DbT3036ShokanHanteiKekka"
         <if test="chusyutuUketsukeFlag">
@@ -829,7 +827,7 @@
             "DbT3036ShokanHanteiKekka"."ketteiIchiranTorikomiYM" = #{ketteishaUketsukeYM}
         </if>
     </select>
-    <select id="get最大年度内連番"
+    <select resultOrdered="true" id="get最大年度内連番"
             resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
             fetchSize="1">
         SELECT
@@ -837,7 +835,7 @@
         FROM
         rgdb."DbT7022ShoriDateKanri" AS DbT7022ShoriDateKanri
     </select>
-    <select id="get帳票データ"
+    <select resultOrdered="true" id="get帳票データ"
             resultMap="resultMap_chohyoData"
             fetchSize="500">
         SELECT

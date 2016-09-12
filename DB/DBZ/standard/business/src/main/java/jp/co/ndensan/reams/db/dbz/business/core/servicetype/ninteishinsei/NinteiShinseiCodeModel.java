@@ -10,14 +10,23 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 市町村連絡事項のダイアログパラメータクラスです。
- * 
- * @reamsid_L DBE-1300-090  suguangjun 
+ *
+ * @reamsid_L DBZ-1300-090 suguangjun
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class NinteiShinseiCodeModel implements Serializable {
 
+    private static final long serialVersionUID = 7323078136744691791L;
+
+    public enum HyojiMode {
+
+        InputMode,
+        ShokaiMode;
+    }
+
     private RString 連絡事項;
-    private RString 表示モード;
+    private HyojiMode 表示モード;
+
 }

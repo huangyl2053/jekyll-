@@ -1,15 +1,18 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.ShisetsuNyutaishoRirekiKanri;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.ShisetsuNyutaishoRirekiKanriDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.ShisetsuNyutaishoRirekiKanriHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.ShisetsuNyutaishoRirekiKanriValidationHandler;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.dgShisetsuNyutaishoRireki_Row;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -20,14 +23,32 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class ShisetsuNyutaishoRirekiKanri {
 
     /**
+     * 画面初期化を表示する。
+     *
+     * @param requestDiv 施設入退所履歴Div
+     * @return ResponseData<ShisetsuNyutaishoRirekiKanriDiv>
+     */
+    public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onLoad(ShisetsuNyutaishoRirekiKanriDiv requestDiv) {
+        if (!RString.isNullOrEmpty(requestDiv.getSyokikaMode())) {
+            requestDiv.set表示モード(requestDiv.getSyokikaMode());
+            getHandler(requestDiv).initialize(new ShikibetsuCode(requestDiv.getShikibetsuCode()));
+        }
+        return ResponseData.of(requestDiv).respond();
+    }
+
+    /**
      * 「追加する」ボタンを押下する場合、施設入退所情報パネルを活性します。
      *
      * @param requestDiv 施設入退所履歴Div
      * @return ResponseData<ShisetsuNyutaishoRirekiKanriDiv>
      */
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onClick_btnAddShisetsuNyutaisho(ShisetsuNyutaishoRirekiKanriDiv requestDiv) {
-        getHandler(requestDiv).onClick_btnAddShisetsuNyutaisho();
-        return ResponseData.of(requestDiv).respond();
+        ValidationMessageControlPairs validPairs = getHandler(requestDiv).onClick_btnAddShisetsuNyutaisho();
+        if (validPairs.existsError()) {
+            return ResponseData.of(requestDiv).addValidationMessages(validPairs).respond();
+        } else {
+            return ResponseData.of(requestDiv).respond();
+        }
     }
 
     /**
@@ -81,6 +102,7 @@ public class ShisetsuNyutaishoRirekiKanri {
      * @return ResponseData<ShisetsuNyutaishoRirekiKanriDiv>
      */
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onClick_btnShisetsuNyutaishoKakutei(ShisetsuNyutaishoRirekiKanriDiv requestDiv) {
+
         ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).validateForUpdate();
         if (vallidation.iterator().hasNext()) {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();

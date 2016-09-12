@@ -11,8 +11,8 @@
         <result property="shichosonMeisho" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
     
-    <select id="select調査地区市町村一覧" resultMap="resultMap_ChosaChikuChichosonJoho" 
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chosachikuchichoson.ChosaChikuChichosonParameter" 
+    <select resultOrdered="true" id="select調査地区市町村一覧" resultMap="resultMap_ChosaChikuChichosonJoho" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosachikuchichoson.ChosaChikuChichosonParameter" 
             fetchSize="500">
         SELECT
             DbT5224."yusenNo" AS yusenNo
@@ -29,7 +29,7 @@
             DbT5224."yusenNo"
     </select>
     
-    <delete id="delete地区市町村情報" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chosachikuchichoson.ChosaChikuChichosonParameter">
+    <delete id="delete地区市町村情報" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosachikuchichoson.ChosaChikuChichosonParameter">
         DELETE FROM 
             rgdb."DbT5224ChikuShichoson" AS DbT5224
         WHERE DbT5224."chosaChikuCode" = #{chosaChikuCode}

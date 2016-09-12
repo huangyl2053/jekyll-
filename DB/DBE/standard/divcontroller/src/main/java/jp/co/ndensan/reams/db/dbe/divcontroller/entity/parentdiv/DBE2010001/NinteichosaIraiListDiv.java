@@ -1,31 +1,33 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001;
-
-/**
- * このコードはツールによって生成されました。 このファイルへの変更は、再生成時には損失するため 不正な動作の原因になります。
+/*
+ * このコードはツールによって生成されました。
+ * このファイルへの変更は、再生成時には損失するため
+ * 不正な動作の原因になります。
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.IYokaigoNinteiTaskListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.YokaigoNinteiTaskListDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * NinteichosaIraiList のクラスファイル
- *
+ * NinteichosaIraiList のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class NinteichosaIraiListDiv extends Panel {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-
-    @JsonProperty("ButtonsForNinteichosaIraiListTop")
-    private ButtonsForNinteichosaIraiListTopDiv ButtonsForNinteichosaIraiListTop;
-    @JsonProperty("dgNinteichosaIraiList")
-    private DataGrid<dgNinteichosaIraiList_Row> dgNinteichosaIraiList;
-    @JsonProperty("ButtonsForNinteichosaIraiListBottom")
-    private ButtonsForNinteichosaIraiListBottomDiv ButtonsForNinteichosaIraiListBottom;
+    @JsonProperty("chosairaitaishoshaichiran")
+    private chosairaitaishoshaichiranDiv chosairaitaishoshaichiran;
+    @JsonProperty("chosairaiselect")
+    private chosairaiselectDiv chosairaiselect;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -33,34 +35,89 @@ public class NinteichosaIraiListDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("ButtonsForNinteichosaIraiListTop")
-    public ButtonsForNinteichosaIraiListTopDiv getButtonsForNinteichosaIraiListTop() {
-        return ButtonsForNinteichosaIraiListTop;
+    /*
+     * getchosairaitaishoshaichiran
+     * @return chosairaitaishoshaichiran
+     */
+    @JsonProperty("chosairaitaishoshaichiran")
+    public chosairaitaishoshaichiranDiv getChosairaitaishoshaichiran() {
+        return chosairaitaishoshaichiran;
     }
 
-    @JsonProperty("ButtonsForNinteichosaIraiListTop")
-    public void setButtonsForNinteichosaIraiListTop(ButtonsForNinteichosaIraiListTopDiv ButtonsForNinteichosaIraiListTop) {
-        this.ButtonsForNinteichosaIraiListTop = ButtonsForNinteichosaIraiListTop;
+    /*
+     * setchosairaitaishoshaichiran
+     * @param chosairaitaishoshaichiran chosairaitaishoshaichiran
+     */
+    @JsonProperty("chosairaitaishoshaichiran")
+    public void setChosairaitaishoshaichiran(chosairaitaishoshaichiranDiv chosairaitaishoshaichiran) {
+        this.chosairaitaishoshaichiran = chosairaitaishoshaichiran;
     }
 
-    @JsonProperty("dgNinteichosaIraiList")
-    public DataGrid<dgNinteichosaIraiList_Row> getDgNinteichosaIraiList() {
-        return dgNinteichosaIraiList;
+    /*
+     * getchosairaiselect
+     * @return chosairaiselect
+     */
+    @JsonProperty("chosairaiselect")
+    public chosairaiselectDiv getChosairaiselect() {
+        return chosairaiselect;
     }
 
-    @JsonProperty("dgNinteichosaIraiList")
-    public void setDgNinteichosaIraiList(DataGrid<dgNinteichosaIraiList_Row> dgNinteichosaIraiList) {
-        this.dgNinteichosaIraiList = dgNinteichosaIraiList;
+    /*
+     * setchosairaiselect
+     * @param chosairaiselect chosairaiselect
+     */
+    @JsonProperty("chosairaiselect")
+    public void setChosairaiselect(chosairaiselectDiv chosairaiselect) {
+        this.chosairaiselect = chosairaiselect;
     }
 
-    @JsonProperty("ButtonsForNinteichosaIraiListBottom")
-    public ButtonsForNinteichosaIraiListBottomDiv getButtonsForNinteichosaIraiListBottom() {
-        return ButtonsForNinteichosaIraiListBottom;
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public IYokaigoNinteiTaskListDiv getCcdTaskList() {
+        return this.getChosairaitaishoshaichiran().getCcdTaskList();
     }
 
-    @JsonProperty("ButtonsForNinteichosaIraiListBottom")
-    public void setButtonsForNinteichosaIraiListBottom(ButtonsForNinteichosaIraiListBottomDiv ButtonsForNinteichosaIraiListBottom) {
-        this.ButtonsForNinteichosaIraiListBottom = ButtonsForNinteichosaIraiListBottom;
+    @JsonIgnore
+    public ButtonDownLoad getBtndataoutput() {
+        return this.getChosairaiselect().getBtndataoutput();
     }
 
+    @JsonIgnore
+    public void  setBtndataoutput(ButtonDownLoad btndataoutput) {
+        this.getChosairaiselect().setBtndataoutput(btndataoutput);
+    }
+
+    @JsonIgnore
+    public Button getBtniraiauto() {
+        return this.getChosairaiselect().getBtniraiauto();
+    }
+
+    @JsonIgnore
+    public void  setBtniraiauto(Button btniraiauto) {
+        this.getChosairaiselect().setBtniraiauto(btniraiauto);
+    }
+
+    @JsonIgnore
+    public ButtonDownLoad getBtnchosadataoutput() {
+        return this.getChosairaiselect().getBtnchosadataoutput();
+    }
+
+    @JsonIgnore
+    public void  setBtnchosadataoutput(ButtonDownLoad btnchosadataoutput) {
+        this.getChosairaiselect().setBtnchosadataoutput(btnchosadataoutput);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnTaOutput() {
+        return this.getChosairaiselect().getBtnTaOutput();
+    }
+
+    @JsonIgnore
+    public void  setBtnTaOutput(ButtonDialog btnTaOutput) {
+        this.getChosairaiselect().setBtnTaOutput(btnTaOutput);
+    }
+
+    // </editor-fold>
 }

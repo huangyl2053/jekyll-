@@ -9,26 +9,28 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import jp.co.ndensan.reams.db.dbx.business.core.gappeijoho.gappeishichoson.GappeiShichoson;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.util.ObjectUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaichoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonmaster.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbz.business.core.sikakukanrenido.SikakuKanrenIdo;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ViewExecutionStatus;
+import jp.co.ndensan.reams.db.dbz.definition.core.ViewExecutionStatus;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuHenkoJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.param.sikakukanrenido.SikakuKanrenIdoParameter;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.sikakukanrenido.SikakuKanrenIdoParameter;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.shikakuhenkorireki.ShikakuhenkorirekiFinder;
-import jp.co.ndensan.reams.db.dbz.service.sikakukanrenidoa.SikakuKanrenIdoFinder;
+import jp.co.ndensan.reams.db.dbz.service.core.sikakukanrenidoa.SikakuKanrenIdoFinder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -64,9 +66,14 @@ public class ShikakuHenkoRirekiHandler {
     private static final RString 半角コロン = new RString(":");
     private static final RString 追加状態 = new RString("追加");
     private static final RString 修正状態 = new RString("修正");
+    private static final RString 削除状態 = new RString("削除");
     private static final RString MENUID_DBAMN52003 = new RString("DBAMN52003");
     private static final RString MENUID_DBAMN52004 = new RString("DBAMN52004");
     private static final RString MENUID_DBAMN52002 = new RString("DBAMN52002");
+
+    private static final RString MENUID_DBAMN23001 = new RString("DBAMN23001");
+    private static final RString MENUID_DBAMN23002 = new RString("DBAMN23002");
+    private static final RString MENUID_DBAMN23003 = new RString("DBAMN23003");
 
     private final ShikakuHenkoRirekiDiv div;
 
@@ -100,8 +107,12 @@ public class ShikakuHenkoRirekiHandler {
             div.setMode_HokenshaJohoDisplayMode(ShikakuHenkoRirekiDiv.HokenshaJohoDisplayMode.KoikiGappeiAri);
         }
         div.getDgHenko().setDataSource(get資格変更履歴(被保険者番号, 識別コード, 取得日));
-        div.getHenkoHokenshaJoho().getDdlHenkoSochimotoHokensha().setDataSource(get措置元保険者DDL());
-        div.getHenkoHokenshaJoho().getDdlHenkoKyuHokensha().setDataSource(get旧保険者リスト情報());
+        if (!is単一) {
+            div.getHenkoHokenshaJoho().getDdlHenkoSochimotoHokensha().setDataSource(get措置元保険者DDL());
+        }
+        if (is合併有り) {
+            div.getHenkoHokenshaJoho().getDdlHenkoKyuHokensha().setDataSource(get旧保険者リスト情報());
+        }
         div.getDdlHenkoJiyu().setDataSource(get変更事由リスト情報());
         div.getHenkoHokenshaJoho().getDdlJuminJoho().setDataSource(get住民情報DDL(識別コード));
         if (ShikakuHenkoRirekiDiv.DisplayType.shokai.equals(div.getMode_DisplayType())) {
@@ -112,20 +123,21 @@ public class ShikakuHenkoRirekiHandler {
             div.getDgHenko().getGridSetting().setIsShowDeleteButtonColumn(false);
             div.getDgHenko().getGridSetting().setIsShowRowState(false);
         } else if (ShikakuHenkoRirekiDiv.DisplayType.toroku.equals(div.getMode_DisplayType())) {
-            div.getBtnAdd().setDisabled(true);
+            div.getBtnAdd().setDisabled(false);
             div.setMode_ShoriNichijiDisplayMode(ShikakuHenkoRirekiDiv.ShoriNichijiDisplayMode.VisibleFalse);
             div.setMode_MeisaiMode(ShikakuHenkoRirekiDiv.MeisaiMode.toroku);
             for (dgHenko_Row row : div.getDgHenko().getDataSource()) {
-                row.setDeleteButtonState(DataGridButtonState.Disabled);
-                row.setModifyButtonState(DataGridButtonState.Disabled);
+                row.setDeleteButtonState(DataGridButtonState.Enabled);
+                row.setModifyButtonState(DataGridButtonState.Enabled);
             }
-            div.setInputMode(ViewExecutionStatus.Add.getValue());
         } else if (ShikakuHenkoRirekiDiv.DisplayType.teiseitoroku.equals(div.getMode_DisplayType())) {
             div.setMode_ShoriNichijiDisplayMode(ShikakuHenkoRirekiDiv.ShoriNichijiDisplayMode.VisibleFalse);
             div.setMode_MeisaiMode(ShikakuHenkoRirekiDiv.MeisaiMode.toroku);
             div.getBtnHenkoKakutei().setVisible(true);
             div.getBtnHenkoTorikeshi().setVisible(true);
         }
+        div.getHenkoInput().setDisabled(true);
+        div.setInputMode(ViewExecutionStatus.Add.getValue());
     }
 
     /**
@@ -168,6 +180,18 @@ public class ShikakuHenkoRirekiHandler {
         div.getTxtHenkoDate().clearValue();
         div.getTxtHenkoTodokedeDate().clearValue();
         div.getDdlHenkoJiyu().setSelectedIndex(0);
+
+        RString menuId = ResponseHolder.getMenuID();
+        if (MENUID_DBAMN23001.equals(menuId)) {
+            div.setDdlHenkoJiyu(ShikakuHenkoJiyu.転居.getコード(), true);
+        }
+        if (MENUID_DBAMN23002.equals(menuId)) {
+            div.setDdlHenkoJiyu(ShikakuHenkoJiyu.氏名変更.getコード(), true);
+        }
+        if (MENUID_DBAMN23003.equals(menuId)) {
+            div.setDdlHenkoJiyu(ShikakuHenkoJiyu.その他.getコード(), false);
+        }
+
         div.getDdlHenkoSochimotoHokensha().setSelectedIndex(0);
         div.getDdlHenkoKyuHokensha().setSelectedIndex(0);
         div.getDdlJuminJoho().setSelectedIndex(0);
@@ -196,7 +220,7 @@ public class ShikakuHenkoRirekiHandler {
      */
     public void updateEntryData(HihokenshaDaicho 被保険者台帳情報) {
         Models<HihokenshaDaichoIdentifier, HihokenshaDaicho> result
-                = ViewStateHolder.get(ViewStateKeys.資格変更履歴_被保険者台帳情報, Models.class);
+                = ViewStateHolder.get(ViewStateKeys.被保険者台帳情報, Models.class);
         TextBoxFlexibleDate 変更日 = new TextBoxFlexibleDate();
         変更日.setValue(div.getTxtHenkoDate().getValue());
         TextBoxFlexibleDate 変更届出日 = new TextBoxFlexibleDate();
@@ -222,7 +246,9 @@ public class ShikakuHenkoRirekiHandler {
                     異動日,
                     被保険者台帳情報.get枝番()
             );
-            div.getDgHenko().getDataSource().add(row);
+            List<dgHenko_Row> dataSource = div.getDgHenko().getDataSource();
+            dataSource.add(row);
+            Collections.sort(dataSource, new HenkoRirekiComparator());
             result.add(setHihokenshaDaicho(被保険者台帳情報, row));
         } else if (div.getInputMode().equals(ViewExecutionStatus.Modify.getValue())) {
             RString 状態 = 修正状態;
@@ -262,7 +288,7 @@ public class ShikakuHenkoRirekiHandler {
                 result.add(被保険者台帳情報);
             }
         }
-        ViewStateHolder.put(ViewStateKeys.資格変更履歴_被保険者台帳情報, result);
+        ViewStateHolder.put(ViewStateKeys.被保険者台帳情報, result);
     }
 
     private HihokenshaDaicho setHihokenshaDaicho(HihokenshaDaicho hihokenshaDaicho, dgHenko_Row row) {
@@ -409,10 +435,19 @@ public class ShikakuHenkoRirekiHandler {
         List<HihokenshaDaicho> hihokenshaDaichoList = manager.get最新被保険者台帳(被保険者番号);
         Models<HihokenshaDaichoIdentifier, HihokenshaDaicho> result = Models.create(hihokenshaDaichoList);
         List<dgHenko_Row> rows = new ArrayList<>();
-        for (SikakuKanrenIdo sikakuKanrenIdo : kanrenIdos) {
-            rows.add(getDgHenko_RowFromSikakuKanrenIdo(sikakuKanrenIdo, 識別コード));
+        Set<RString> keys = new HashSet<>();
+        for (SikakuKanrenIdo shikakuKanrenIdo : kanrenIdos) {
+            RString key = new RStringBuilder()
+                    .append(shikakuKanrenIdo.get資格変更年月日().toString())
+                    .append(shikakuKanrenIdo.get住所地特例適用事由コード()).toRString();
+            if (keys.contains(key)) {
+                continue;
+            } else {
+                keys.add(key);
+            }
+            rows.add(getDgHenko_RowFromSikakuKanrenIdo(shikakuKanrenIdo, 識別コード));
         }
-        ViewStateHolder.put(ViewStateKeys.資格変更履歴_被保険者台帳情報, result);
+        ViewStateHolder.put(ViewStateKeys.被保険者台帳情報, result);
         return rows;
     }
 
@@ -542,5 +577,35 @@ public class ShikakuHenkoRirekiHandler {
             }
         }
         return RString.EMPTY;
+    }
+
+    /**
+     * 新規に入力したデータ（グリッド上で状態を持つデータ）が存在しているかをチェックします。
+     *
+     * @return 1件以上、状態に値が設定されているデータが存在した場合{@code true}
+     */
+    public boolean checkInputNewData() {
+        for (dgHenko_Row row : div.getDgHenko().getDataSource()) {
+            if (row.getState().equals(追加状態)
+                || row.getState().equals(修正状態)
+                || row.getState().equals(削除状態)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private class HenkoRirekiComparator implements Comparator<dgHenko_Row> {
+
+        @Override
+        public int compare(dgHenko_Row o1, dgHenko_Row o2) {
+            return -1 * o1.getHenkoDate().getValue().compareTo(o2.getHenkoDate().getValue());
+        }
+
+    }
+
+    public void setDisabledMeisaiButtons(boolean isDisable) {
+        div.getHenkoInput().getBtnHenkoKakutei().setDisabled(isDisable);
+        div.getHenkoInput().getBtnHenkoTorikeshi().setDisabled(isDisable);
     }
 }

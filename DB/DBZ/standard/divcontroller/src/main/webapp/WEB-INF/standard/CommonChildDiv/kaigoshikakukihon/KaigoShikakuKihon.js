@@ -6,47 +6,47 @@
                 this.fieldName = fieldName;
                 this.controls = new KaigoShikakuKihon.Controls(fieldName);
             }
-            ModeController.prototype.被保履歴ボタンを = function () {
-                return new Modes.被保履歴ボタンを(this.controls);
+            ModeController.prototype.HihoRirekiButtonWo = function () {
+                return new Modes.HihoRirekiButtonWo(this.controls);
             };
 
-            ModeController.prototype.認定履歴ボタンを = function () {
-                return new Modes.認定履歴ボタンを(this.controls);
+            ModeController.prototype.NinteiRirekiButtonWo = function () {
+                return new Modes.NinteiRirekiButtonWo(this.controls);
             };
             return ModeController;
         })();
         KaigoShikakuKihon.ModeController = ModeController;
 
         (function (Modes) {
-            var 被保履歴ボタンを = (function () {
-                function 被保履歴ボタンを(controls) {
+            var HihoRirekiButtonWo = (function () {
+                function HihoRirekiButtonWo(controls) {
                     this.controls = controls;
                 }
-                被保履歴ボタンを.prototype.表示する = function () {
+                HihoRirekiButtonWo.prototype.HyojiSuru = function () {
                     this.controls.btnHihoRireki().displayNone = false;
                 };
 
-                被保履歴ボタンを.prototype.表示しない = function () {
+                HihoRirekiButtonWo.prototype.HyojiShinai = function () {
                     this.controls.btnHihoRireki().displayNone = true;
                 };
-                return 被保履歴ボタンを;
+                return HihoRirekiButtonWo;
             })();
-            Modes.被保履歴ボタンを = 被保履歴ボタンを;
+            Modes.HihoRirekiButtonWo = HihoRirekiButtonWo;
 
-            var 認定履歴ボタンを = (function () {
-                function 認定履歴ボタンを(controls) {
+            var NinteiRirekiButtonWo = (function () {
+                function NinteiRirekiButtonWo(controls) {
                     this.controls = controls;
                 }
-                認定履歴ボタンを.prototype.表示する = function () {
+                NinteiRirekiButtonWo.prototype.HyojiSuru = function () {
                     this.controls.btnNinteiRireki().displayNone = false;
                 };
 
-                認定履歴ボタンを.prototype.表示しない = function () {
+                NinteiRirekiButtonWo.prototype.HyojiShinai = function () {
                     this.controls.btnNinteiRireki().displayNone = true;
                 };
-                return 認定履歴ボタンを;
+                return NinteiRirekiButtonWo;
             })();
-            Modes.認定履歴ボタンを = 認定履歴ボタンを;
+            Modes.NinteiRirekiButtonWo = NinteiRirekiButtonWo;
         })(KaigoShikakuKihon.Modes || (KaigoShikakuKihon.Modes = {}));
         var Modes = KaigoShikakuKihon.Modes;
     })(DBZ.KaigoShikakuKihon || (DBZ.KaigoShikakuKihon = {}));

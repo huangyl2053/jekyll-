@@ -56,7 +56,7 @@
         <result property="saiImageSofuKubun" column="dbT5191RenkeiyoDataSofuKiroku_saiImageSofuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="saiSoshinYMD" column="dbT5191RenkeiyoDataSofuKiroku_saiSoshinYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
-    <select id="getEntity" resultMap="ResultMap_DbT5191RenkeiyoDataSofuKirokuEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5191RenkeiyoDataSofuKirokuEntity">
         SELECT
         <include refid="allColumns_DbT5191RenkeiyoDataSofuKiroku"/>
         FROM

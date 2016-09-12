@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-2520-012 surun -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.saishinsaketteihokenshaincsvfileread.ISaishinsaKetteiHokenshaInCsvFileReadMapper">
+    <!--再審査決定集計一時TBLを作成します-->
+    <insert id="create再審査決定集計一時TBL">
+        CREATE TEMP TABLE "DbWT3063SaishinsaKetteiShukei"
+        (
+        "hdrToriatsukaiYM" rshare."UDD014YM",
+        "hdrRirekiNo" smallint,
+        "shoKisaiHokenshaNo" rgdb."DbUDD003HokenshaNo",
+        "shoKisaiHokenshaName" character varying(40),
+        "sakuseiYMD" rshare."UDD015YMD",
+        "kokuhorenName" character varying(40),
+        "shinsakaiName" character varying(40),
+        "kaigoKyufuhiSeikyuKensu" integer,
+        "kaigoKyufuhiSeikyuTanisu" numeric(13,0),
+        "kaigoKyufuhiSeikyuFutangaku" numeric(13,0),
+        "kaigoKyufuhiKetteiKensu" integer,
+        "kaigoKyufuhiKetteiTanisu" numeric(13,0),
+        "kaigoKyufuhiKetteiFutangaku" numeric(13,0),
+        "kaigoKyufuhiChoseiKensu" integer,
+        "kaigoKyufuhiChoseiTanisu" numeric(13,0),
+        "kaigoKyufuhiChoseiFutangaku" numeric(13,0),
+        "kogakuKaigoServicehiSeikyuKensu" integer,
+        "kogakuKaigoServicehiSeikyuTanisu" numeric(13,0),
+        "kogakuKaigoServicehiSeikyuFutangaku" numeric(13,0),
+        "kogakuKaigoServicehiKetteiKensu" integer,
+        "kogakuKaigoServicehiKetteiTanisu" numeric(13,0),
+        "kogakuKaigoServicehiKetteiFutangaku" numeric(13,0),
+        "kogakuKaigoServicehiChoseiKensu" integer,
+        "kogakuKaigoServicehiChoseiTanisu" numeric(13,0),
+        "kogakuKaigoServicehiChoseiFutangaku" numeric(13,0),
+        "hdrTorikomiYM" rshare."UDD014YM",
+        "hokenshaNo" rgdb."DbUDD003HokenshaNo",
+        "hokenshaName" character varying(40)
+        )
+    </insert>
+    
+    <!--再審査決定明細一時TBLを作成します-->
+    <insert id="create再審査決定明細一時TBL">
+        CREATE TEMP TABLE "DbWT3064SaishinsaKetteiMeisai"
+        (
+        "toriatsukaiYM" rshare."UDD014YM",
+        "rirekiNo" smallint,
+        "renban" smallint,
+        "jigyoshoNo" rgdb."DbUDD004JigyoshaNo",
+        "jigyoshoName" character varying(40),
+        "kohiFutanshaNo" character varying(40),
+        "kohiJukyushaNo" character varying(40),
+        "kohiShokisaiHokenshaNo" rgdb."DbUDD003HokenshaNo",
+        "serviceTeikyoYM" rshare."UDD014YM",
+        "serviceShuruiCode" rgdb."DbUDD005ServiceShuruiCode",
+        "serviceShuruiMei" character varying(40),
+        "kagomoushitateJiyuCode" rshare."UDD035Code",
+        "kagomoushitateJiyu" character varying(40),
+        "saishinsaResultCode" character varying(40),
+        "toshoSeikyuTanisu" numeric(13,0),
+        "genshinSeikyuTanisu" numeric(13,0),
+        "moushitateTanisu" numeric(13,0),
+        "ketteiTanisu" numeric(13,0),
+        "choseiTanisu" numeric(13,0),
+        "hokenshaFutangaku" numeric(13,0),
+        "torikomiYM" rshare."UDD014YM"
+        )
+    </insert>
+    
+    <insert id="create被保険者一時TBL">
+        CREATE TEMP TABLE "DbWT0001Hihokensha"
+        (
+        "meisaiRenban" smallint,
+        "shoHokenshaNo" rgdb."DbUDD003HokenshaNo",
+        "orgHihokenshaNo" rgdb."DbUDD002HihokenshaNo",
+        "serviceTeikyoYmd" rshare."UDD015YMD",
+        "orgHihokenshaKanaShimei" character varying(40),   
+        "orgHihokenshaShimei" character varying(40),
+        "oldShichosonCode" rshare."UDD023LasdecCode",
+        "henkanHihokenshaNo" rgdb."DbUDD002HihokenshaNo",
+        "hihokenshaNo" rgdb."DbUDD002HihokenshaNo",
+        "shichosonCode" rshare."UDD023LasdecCode",
+        "kannaiKangaiKubun" character varying(40),
+        "yubinNo" rshare."UDD003YubinNo",
+        "choikiCode" rshare."UDD007ChoikiCode",
+        "gyoseikuCode" character varying(40),
+        "gyoseikuMei" character varying(40),
+        "jusho" character varying(40),
+        "banchi" character varying(40),
+        "katagaki" character varying(40),
+        "kanaMeisho" character varying(40),
+        "meisho" character varying(40),
+        "shimei50onKana" character varying(40),
+        "shikakuShutokuYmd" rshare."UDD015YMD",
+        "shikakuShutokuJiyuCode" character(2),
+        "shikakuSoshitsuYmd" rshare."UDD015YMD",
+        "shikakuSoshitsuJiyuCode" character(2),
+        "setaiShuyakuNo" character varying(40),
+        "shikibetsuCode" rshare."UDD001ShikibetsuCode"
+        )
+    </insert>
+    
+    <insert id="create処理結果リスト一時TBL">
+        CREATE TEMP TABLE "DbWT0002KokuhorenTorikomiError"
+        (
+        "errorKubun" character varying(40),
+        "shoHokanehshaNo" rgdb."DbUDD003HokenshaNo",
+        "hihokenshaNo" rgdb."DbUDD002HihokenshaNo",
+        "key1" character varying(40),
+        "key2" character varying(40),
+        "key3" character varying(40),
+        "key4" character varying(40),
+        "key5" character varying(40),
+        "hihokenshaKanaShimei" character varying(40),
+        "hihokenshaShimei" character varying(40),
+        "biko" character varying(40)
+        )
+    </insert>
+    
+    <!--再審査決定集計一時テーブルに登録します-->
+    <insert id="再審査決定集計一時TBLに登録" parameterType="jp.co.ndensan.reams.db.dbc.entity.csv.saishinsaketteihokenshain.DbWT3063SaishinsaKetteiShukeiTempEntity">
+        INSERT INTO "DbWT3063SaishinsaKetteiShukei"
+        VALUES 
+        (
+        #{取扱年月},
+        #{履歴番号},
+        #{証記載保険者番号},
+        #{証記載保険者名},
+        #{作成年月日},
+        #{国保連合会名},
+        #{審査委員会名},
+        #{介護給付費請求件数},
+        #{介護給付費請求単位数},
+        #{介護給付費請求保険者負担額},
+        #{介護給付費決定件数},
+        #{介護給付費決定単位数},
+        #{介護給付費決定保険者負担額},
+        #{介護給付費調整件数},
+        #{介護給付費調整単位数},
+        #{介護給付費調整保険者負担額},
+        #{高額介護サービス費請求件数},
+        #{高額介護サービス費請求単位数},
+        #{高額介護サービス費請求保険者負担額},
+        #{高額介護サービス費決定件数},
+        #{高額介護サービス費決定単位数},
+        #{高額介護サービス費決定保険者負担額},
+        #{高額介護サービス費調整件数},
+        #{高額介護サービス費調整単位数},
+        #{高額介護サービス費調整保険者負担額},
+        #{取込年月},
+        #{保険者番号},
+        #{保険者名}
+        )
+    </insert>
+    
+    <!--再審査決定明細一時テーブルに登録します-->
+    <insert id="再審査決定明細一時TBLに登録" parameterType="jp.co.ndensan.reams.db.dbc.entity.csv.saishinsaketteihokenshain.DbWT3064SaishinsaKetteiMeisaiTempEntity">
+        INSERT INTO "DbWT3064SaishinsaKetteiMeisai"
+        VALUES 
+        (
+        #{取扱年月},
+        #{履歴番号},
+        #{連番},
+        #{事業所番号},
+        #{事業所名},
+        #{公費負担者番号},
+        #{公費受給者番号},
+        #{公費証記載保険者番号},
+        #{サービス提供年月},
+        #{サービス種類コード},
+        #{サービス種類名},
+        #{申立事由コード},
+        #{申立事由},
+        #{再審査結果コード},
+        #{当初請求単位数},
+        #{原審単位数},
+        #{申立単位数},
+        #{決定単位数},
+        #{調整単位数},
+        #{保険者負担額},
+        #{取込年月}
+        )
+    </insert>
+    
+    <!--被保険者一時テーブルに登録します-->
+    <insert id="被保険者一時TBLに登録" parameterType="jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity">
+        INSERT INTO "DbWT0001Hihokensha"
+        VALUES 
+        (
+        #{連番},
+        #{証記載保険者番号},
+        #{被保険者番号},
+        #{サービス提供年月末日},
+        #{被保険者カナ氏名},
+        #{被保険者氏名},
+        #{旧市町村コード},
+        #{変換被保険者番号},
+        #{登録被保険者番号},
+        #{市町村コード},
+        #{管内管外区分},
+        #{郵便番号},
+        #{町域コード},
+        #{行政区コード},
+        #{行政区名},
+        #{住所},
+        #{番地},
+        #{方書},
+        #{宛名カナ名称},
+        #{宛名名称},
+        #{氏名50音カナ},
+        #{資格取得日},
+        #{資格取得事由コード},
+        #{資格喪失日},
+        #{資格喪失事由コード},
+        #{世帯集約番号},
+        #{識別コード}
+        )
+    </insert>
+    
+    <!--処理結果リスト一時TBLに登録します-->
+    <insert id="処理結果リスト一時TBLに登録" parameterType="jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0002KokuhorenTorikomiErrorTempEntity">
+        INSERT INTO "DbWT0002KokuhorenTorikomiError"
+        VALUES 
+        (
+        #{エラー区分},
+        #{証記載保険者番号},
+        #{被保険者番号},
+        #{キー1},
+        #{キー2},
+        #{キー3},
+        #{キー4},
+        #{キー5},
+        #{被保険者カナ氏名},
+        #{被保険者氏名},
+        #{備考}
+        )
+    </insert>
+</mapper>

@@ -55,20 +55,27 @@ public class IkkatsuHakkoBatchParameter extends BatchParameterBase {
     @BatchParameter(key = KEY_KOFU_YMD, name = "交付日")
     private FlexibleDate kofuYMD;
     @BatchParameter(key = KEY_TESTSHUTSURYOKUFLAG, name = "テスト出力するフラグ")
-    private RString testShutsuryokuFlag;
+    private boolean testShutsuryokuFlag;
     @BatchParameter(key = KEY_SAIHAKKOFLAG, name = "再発行するフラグ")
-    private RString saihakkoFlag;
+    private boolean saihakkoFlag;
     @BatchParameter(key = KEY_HAKKOU_YMD, name = "発行日")
     private FlexibleDate hakkouYMD;
     @BatchParameter(key = KEY_HAKKOU_HMS, name = "発行日時の時分秒")
     private RTime hakkouHMS;
     @BatchParameter(key = KEY_SHUTSURYOKUJUN_ID, name = "出力順ID")
-    private RString shutsuryokujunId;
+    private Long shutsuryokujunId;
     @BatchParameter(key = KEY_SHOHYOJITYPE, name = "証表示タイプ")
     private RString shohyojiType;
 
     /**
-     * コンストラクタです。<br/>
+     * コンストラクタです。
+     */
+    public IkkatsuHakkoBatchParameter() {
+
+    }
+
+    /**
+     * コンストラクタです。
      *
      * @param shutsuryokuJokenCode 出力条件コード
      * @param konkaiFromYMD 今回の開始日
@@ -94,11 +101,11 @@ public class IkkatsuHakkoBatchParameter extends BatchParameterBase {
             FlexibleDate konkaikijunYMD,
             RTime konkaiKijunHMS,
             FlexibleDate kofuYMD,
-            RString testShutsuryokuFlag,
-            RString saihakkoFlag,
+            boolean testShutsuryokuFlag,
+            boolean saihakkoFlag,
             FlexibleDate hakkouYMD,
             RTime hakkouHMS,
-            RString shutsuryokujunId,
+            Long shutsuryokujunId,
             RString shohyojiType) {
         this.shutsuryokuJokenCode = shutsuryokuJokenCode;
         this.konkaiFromYMD = konkaiFromYMD;

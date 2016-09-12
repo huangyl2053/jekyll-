@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanri;
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriParameter;
+import jp.co.ndensan.reams.db.dba.definition.mybatisprm.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.shikakushutokujogaishakanri.ShikakuShutokuJogaishaKanriEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.shikakushutoku.IShikakuShutokuJogaishaKanriMapper;
 import jp.co.ndensan.reams.db.dbz.business.core.ShikakuShutokuJogaisha;
@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -146,7 +147,17 @@ public class ShikakuShutokuJogaishaKanriManager {
         int insertCount = 0;
         for (ShikakuShutokuJogaisha shikakuShutokuJogaisha : insertKuJogaishaList) {
             DbT1009ShikakuShutokuJogaishaEntity shikakuentity = shikakuShutokuJogaisha.toEntity();
+            int 履歴番号 = dac.select履歴番号(shikakuentity.getShikibetsuCode()) == null
+                    ? 1 : dac.select履歴番号(shikakuentity.getShikibetsuCode()).getRirekiNo();
+            if (!EntityDataState.Added.equals(shikakuentity.getState())) {
+                if (shikakuentity.getRirekiNo() <= 履歴番号) {
+                    shikakuentity.setRirekiNo(履歴番号 + 1);
+                } else {
+                    shikakuentity.setRirekiNo(shikakuentity.getRirekiNo() + 1);
+                }
+            }
             shikakuentity.setIsDeleted(false);
+            shikakuentity.setState(EntityDataState.Added);
             insertCount = insertCount + dac.save(shikakuentity);
         }
         return insertCount;
@@ -176,6 +187,7 @@ public class ShikakuShutokuJogaishaKanriManager {
         for (ShikakuShutokuJogaisha shikakuShutokuJogaisha : deleteKuJogaishaList) {
             DbT1009ShikakuShutokuJogaishaEntity shikakuentity = shikakuShutokuJogaisha.toEntity();
             shikakuentity.setIsDeleted(true);
+            shikakuentity.setState(EntityDataState.Deleted);
             deleteCount = deleteCount + dac.save(shikakuentity);
         }
         return deleteCount;
@@ -206,6 +218,10 @@ public class ShikakuShutokuJogaishaKanriManager {
      */
     @Transaction
     public int select履歴番号(ShikibetsuCode 識別コード) {
-        return dac.select履歴番号(識別コード) == null ? 1 : dac.select履歴番号(識別コード).getRirekiNo();
+        DbT1009ShikakuShutokuJogaishaEntity entity = dac.select履歴番号(識別コード);
+        if (entity == null) {
+            return 1;
+        }
+        return entity.getRirekiNo() + 1;
     }
 }

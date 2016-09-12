@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.config.shikaku;
 
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.shikaku.ConfigKeysHihokenshashoSofusakiInfo;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configvalues.MojigireControlType;
+import jp.co.ndensan.reams.db.dbz.definition.core.config.ConfigKeysHihokenshashoSofusakiInfo;
+import jp.co.ndensan.reams.db.dbz.definition.core.configvalues.MojigireControlType;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbaTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;

@@ -167,6 +167,7 @@ var DBZ;
                     this.controls.txtYukoKaishiYMD().readOnly = false;
                     this.controls.txtYukoShuryoYMD().readOnly = false;
 
+                    this.controls.radNinteiKubun().selectedItem = "0";
                     this.controls.radNinteiKubun().readOnly = false;
                     this.controls.radNinteiKubun().displayNone = false;
 
@@ -188,6 +189,7 @@ var DBZ;
                     this.controls.txtYukoKaishiYMD().readOnly = false;
                     this.controls.txtYukoShuryoYMD().readOnly = false;
 
+                    this.controls.radNinteiKubun().selectedItem = "0";
                     this.controls.radNinteiKubun().readOnly = true;
                     this.controls.radNinteiKubun().displayNone = false;
 

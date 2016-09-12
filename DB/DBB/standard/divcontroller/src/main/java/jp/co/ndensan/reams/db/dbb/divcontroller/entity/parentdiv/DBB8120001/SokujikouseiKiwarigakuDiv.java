@@ -4,26 +4,28 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8120001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
- * SokujikouseiKiwarigaku のクラスファイル 
- * 
- * @author 自動生成
+ * SokujikouseiKiwarigaku のクラスファイル
+ *
+ * @reamsid_L DBB-0660-010 tianshuai
  */
 public class SokujikouseiKiwarigakuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ddlChoteiNendo")
-    private DropDownList ddlChoteiNendo;
     @JsonProperty("tblKiwarigaku")
     private tblKiwarigakuDiv tblKiwarigaku;
 
@@ -33,24 +35,22 @@ public class SokujikouseiKiwarigakuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("ddlChoteiNendo")
-    public DropDownList getDdlChoteiNendo() {
-        return ddlChoteiNendo;
-    }
-
-    @JsonProperty("ddlChoteiNendo")
-    public void setDdlChoteiNendo(DropDownList ddlChoteiNendo) {
-        this.ddlChoteiNendo=ddlChoteiNendo;
-    }
-
+    /*
+     * gettblKiwarigaku
+     * @return tblKiwarigaku
+     */
     @JsonProperty("tblKiwarigaku")
     public tblKiwarigakuDiv getTblKiwarigaku() {
         return tblKiwarigaku;
     }
 
+    /*
+     * settblKiwarigaku
+     * @param tblKiwarigaku tblKiwarigaku
+     */
     @JsonProperty("tblKiwarigaku")
     public void setTblKiwarigaku(tblKiwarigakuDiv tblKiwarigaku) {
-        this.tblKiwarigaku=tblKiwarigaku;
+        this.tblKiwarigaku = tblKiwarigaku;
     }
 
     /*
@@ -522,8 +522,8 @@ public class SokujikouseiKiwarigakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblFuchoKi7() {
-        return this.getTblKiwarigaku().getLblFuchoKi7();
+    public Label getLblFuchoKi10() {
+        return this.getTblKiwarigaku().getLblFuchoKi10();
     }
 
     @JsonIgnore
@@ -567,8 +567,8 @@ public class SokujikouseiKiwarigakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblFuchoKi8() {
-        return this.getTblKiwarigaku().getLblFuchoKi8();
+    public Label getLblFuchoKi11() {
+        return this.getTblKiwarigaku().getLblFuchoKi11();
     }
 
     @JsonIgnore
@@ -642,8 +642,8 @@ public class SokujikouseiKiwarigakuDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblFuchoKi9() {
-        return this.getTblKiwarigaku().getLblFuchoKi9();
+    public Label getLblFuchoKi12() {
+        return this.getTblKiwarigaku().getLblFuchoKi12();
     }
 
     @JsonIgnore

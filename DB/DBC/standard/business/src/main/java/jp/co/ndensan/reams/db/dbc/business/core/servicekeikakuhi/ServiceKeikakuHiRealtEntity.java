@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
+ * 償還払請求サービス計画情報用entityクラスです。
  *
  * @reamsid_L DBC-1030-200 xicongwang
  */

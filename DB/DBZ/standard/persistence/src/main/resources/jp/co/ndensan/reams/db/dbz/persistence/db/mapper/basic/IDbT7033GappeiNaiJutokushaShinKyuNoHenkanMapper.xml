@@ -57,7 +57,7 @@
         <result property="kaishiYMD" column="dbT7033GappeiNaiJutokushaShinKyuNoHenkan_kaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="shuryoYMD" column="dbT7033GappeiNaiJutokushaShinKyuNoHenkan_shuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
-<select id="getEntity" resultMap="ResultMap_DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity">
+<select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT7033GappeiNaiJutokushaShinKyuNoHenkanEntity">
     SELECT
     <include refid="allColumns_DbT7033GappeiNaiJutokushaShinKyuNoHenkan"/>
     FROM

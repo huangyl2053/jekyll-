@@ -7,12 +7,11 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.Seikatsuh
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.seikatsuhogorireki.SeikaatsuhogoDataModel;
-import jp.co.ndensan.reams.ur.urd.definition.core.seikatsuhogo.KaigoRyoDairiNofuKubun;
-import jp.co.ndensan.reams.ur.urd.definition.core.seikatsuhogo.KyugoShisetsuNyuTaishoKubun;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.seikatsuhogorireki.SeikaatsuhogoDataModel;
+import jp.co.ndensan.reams.ur.urz.definition.core.codemaster.URZCodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -31,13 +30,10 @@ public class SeikatsuhogoDetailHandler {
     private static final RString 表示モード_修正 = new RString("修正");
     private static final RString 表示モード_削除 = new RString("削除");
     private static final RString 表示モード_照会 = new RString("照会");
-    private static final CodeShubetsu コード種別 = new CodeShubetsu("0017");
-    private static final RString 代理納付有 = new RString("1");
+    private static final RString 介護保険料代理納付区分 = new RString("代理納付有");
     private static final RString 該当 = new RString("gaito");
     private static final RString 非該当 = new RString("higaito");
     private static final RString 入退所区分_未該当 = new RString("未該当");
-    private static final RString 入退所区分_入所 = new RString("入所");
-    private static final RString 入退所区分_退所 = new RString("退所");
     private static final RString 状態 = new RString("txtJotai");
     private static final RString 受給停止開始日 = new RString("txtTeishiKaishiYMD");
     private static final RString 受給停止終了日 = new RString("txtTeishiShuryoYMD");
@@ -64,26 +60,26 @@ public class SeikatsuhogoDetailHandler {
         div.getTxtJukyushaNo().setValue(nullTOEmpty(生活保護受給Object.get受給者番号()));
         div.getTxtJukyuKaishiYMD().setValue(生活保護受給Object.get受給開始日());
         div.getTxtJukyuHaishiYMD().setValue(生活保護受給Object.get受給廃止日());
-        div.getRadDairinofuKubun().setSelectedKey(代理納付有.equals(new KaigoRyoDairiNofuKubun(生活保護受給Object.get納付区分()).value().code())
+        div.getRadDairinofuKubun().setSelectedKey(介護保険料代理納付区分.equals(生活保護受給Object.get納付区分())
                 ? 該当 : 非該当);
         div.getTxtDainoNofuYM().setValue(生活保護受給Object.get納付年月());
-        if (入退所区分_未該当.equals(new KyugoShisetsuNyuTaishoKubun(生活保護受給Object.get入退所区分()).value().toRString())) {
-            div.getRadNyutaishoKubun().setSelectedValue(入退所区分_未該当);
-        } else {
-            div.getRadNyutaishoKubun().setSelectedValue(new KyugoShisetsuNyuTaishoKubun(生活保護受給Object.get入退所区分()).value().toRString());
+        if (!RString.isNullOrEmpty(生活保護受給Object.get入退所区分())) {
+            if (入退所区分_未該当.equals(生活保護受給Object.get入退所区分())) {
+                div.getRadNyutaishoKubun().setSelectedValue(入退所区分_未該当);
+            } else {
+                div.getRadNyutaishoKubun().setSelectedValue(生活保護受給Object.get入退所区分());
+            }
         }
-        if (生活保護受給Object.get入所日() == null || RString.isNullOrEmpty(生活保護受給Object.get入所日().toDateString())) {
-            div.getTxtNyutaishoYMD().setValue(生活保護受給Object.get退所日());
-        } else {
-            div.getTxtNyutaishoYMD().setValue(生活保護受給Object.get入所日());
-        }
+        div.getTxtNyutaishoYMD().setValue(生活保護受給Object.get入所日());
         RString 扶助種類コード = 生活保護受給Object.get扶助種類コード();
         if (!RString.isNullOrEmpty(扶助種類コード)) {
             List<RString> 無連結扶助種類コード = 扶助種類コード.split(連結);
             List<RString> 扶助種類KEY = new ArrayList<>();
             for (KeyValueDataSource dataSource : div.getChkFujoShurui().getDataSource()) {
                 for (RString コード : 無連結扶助種類コード) {
-                    if (dataSource.getValue().equals(CodeMaster.getCodeMeisho(SubGyomuCode.URZ業務共通_共通系, コード種別, new Code(コード)))) {
+                    if (dataSource.getValue().equals(CodeMaster.getCodeMeisho(SubGyomuCode.URZ業務共通_共通系,
+                            URZCodeShubetsu.扶助種類コード.getCodeShubetsu(), new Code(コード),
+                            new FlexibleDate(RDate.getNowDate().toDateString())))) {
                         扶助種類KEY.add(dataSource.getKey());
                         break;
                     }
@@ -91,7 +87,8 @@ public class SeikatsuhogoDetailHandler {
                 div.getChkFujoShurui().setSelectedItemsByKey(扶助種類KEY);
             }
         }
-        if (!new RString(カラ).equals(生活保護受給Object.get受給停止期間())) {
+        if (!RString.isNullOrEmpty(生活保護受給Object.get受給停止期間())
+                && !new RString(カラ).equals(生活保護受給Object.get受給停止期間())) {
             List<RString> 受給停止期間 = 生活保護受給Object.get受給停止期間().split(連結);
             List<RString> 停止終了日 = new ArrayList<>();
             boolean 識別 = true;
@@ -164,11 +161,7 @@ public class SeikatsuhogoDetailHandler {
         dataModel.set納付区分(div.getRadDairinofuKubun().getSelectedValue());
         dataModel.set納付年月(div.getTxtDainoNofuYM().getValue());
         dataModel.set入退所区分(div.getRadNyutaishoKubun().getSelectedValue());
-        if (入退所区分_入所.equals(div.getRadNyutaishoKubun().getSelectedValue())) {
-            dataModel.set入所日(div.getTxtNyutaishoYMD().getValue());
-        } else if (入退所区分_退所.equals(div.getRadNyutaishoKubun().getSelectedValue())) {
-            dataModel.set退所日(div.getTxtNyutaishoYMD().getValue());
-        }
+        dataModel.set入所日(div.getTxtNyutaishoYMD().getValue());
         RStringBuilder shuruiCode = new RStringBuilder();
         RStringBuilder shurui = new RStringBuilder();
         for (KeyValueDataSource dataSource : div.getChkFujoShurui().getSelectedItems()) {
@@ -188,6 +181,7 @@ public class SeikatsuhogoDetailHandler {
     public void onbtn_Cancel() {
         div.getTxtTeishiKaishiYMD().clearValue();
         div.getTxtTeishiShuryoYMD().clearValue();
+        div.getTeishiKikanInput().setDisabled(true);
     }
 
     /**

@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbd.service.core.common;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbd.business.core.common.NursingCareInformationBusiness;
 import jp.co.ndensan.reams.db.dbd.business.core.common.VariousReductionInformation;
-import jp.co.ndensan.reams.db.dbd.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbd.business.core.futanwariai.RiyoshaFutanWariaiMeisai;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNintei;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.homonkaigogengaku.HomonKaigoRiyoshaFutangakuGengaku;
@@ -17,29 +17,31 @@ import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.riyoshafutangengak
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shafukukeigen.ShakaifukuRiyoshaFutanKeigen;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.tokubetsuchikikasangemmen.TokubetsuchiikiKasanGemmen;
 import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.ShiharaiHohoHenkoSummary;
-import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.GemmenGengakuShurui;
-import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
-import jp.co.ndensan.reams.db.dbd.definition.core.shiharaihohohenko.ShiharaiHenkoTorokuKubun;
-import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ShinseiJokyoKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoTorokuKubun;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenjokyo.GemmenJokyoParameter;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.common.NursingCareInformationCodeEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.common.NursingCareInformationEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.futangendogakunintei.FutanGendogakuNinteiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.homonkaigogengaku.HomonKaigoRiyoshaFutangakuGengakuEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.shafukukeigen.ShafukuRiyoshaFutanKeigenEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.tokubetsuchikikasangemmen.TokubetsuchiikiKasanGemmenEntity;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmenjokyo.IGemmenJokyoMapper;
+import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShurui;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ShinseiJokyoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV1001HihokenshaDaichoAliveDac;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RoreiFukushiNenkinJukyusha;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.KoroshoInterfaceShikibetsuCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.YokaigoJotaiKubunSupport;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.core.ShiharaiHenkoKanriKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
+import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoKanriKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyushaEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -110,10 +112,8 @@ public class GemmenJokyoFinder {
      */
     @Transaction
     public List<JukyushaDaicho> find申請中情報(HihokenshaNo 被保険者番号) {
-        IGemmenJokyoMapper mapper = mapperProvider.create(IGemmenJokyoMapper.class);
-        GemmenJokyoParameter parameter = new GemmenJokyoParameter();
-        parameter.set被保険者番号(被保険者番号);
-        DbT4001JukyushaDaichoEntity entity = mapper.get申請中情報(parameter);
+        DbT4001JukyushaDaichoDac dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
+        DbT4001JukyushaDaichoEntity entity = dac.select申請中情報By被保険者番号(被保険者番号);
         List<JukyushaDaicho> 申請中情報List = new ArrayList<>();
         if (entity != null) {
             JukyushaDaicho 申請中情報 = new JukyushaDaicho(entity);
@@ -142,7 +142,7 @@ public class GemmenJokyoFinder {
     private List<TokubetsuchiikiKasanGemmen> get特別地域加算減免の情報(HihokenshaNo 被保険者番号) {
         IGemmenJokyoMapper mapper = mapperProvider.create(IGemmenJokyoMapper.class);
         GemmenJokyoParameter parameter = new GemmenJokyoParameter();
-        parameter.set減免減額種類コード(GemmenGengakuShurui.社会福祉法人等軽減.getコード());
+        parameter.set減免減額種類コード(GemmenGengakuShurui.社会福祉法人等利用者負担軽減.getコード());
         parameter.set被保険者番号(被保険者番号);
         List<TokubetsuchiikiKasanGemmen> 特別地域加算減免の情報List = new ArrayList<>();
         TokubetsuchiikiKasanGemmenEntity entity = mapper.get特別地域加算減免の情報(parameter);
@@ -168,7 +168,7 @@ public class GemmenJokyoFinder {
     private List<ShakaifukuRiyoshaFutanKeigen> get社会福祉法人等利用者負担軽減の情報(HihokenshaNo 被保険者番号) {
         IGemmenJokyoMapper mapper = mapperProvider.create(IGemmenJokyoMapper.class);
         GemmenJokyoParameter parameter = new GemmenJokyoParameter();
-        parameter.set減免減額種類コード(GemmenGengakuShurui.社会福祉法人等軽減.getコード());
+        parameter.set減免減額種類コード(GemmenGengakuShurui.社会福祉法人等利用者負担軽減.getコード());
         parameter.set被保険者番号(被保険者番号);
         ShafukuRiyoshaFutanKeigenEntity entity = mapper.get社会福祉法人等利用者負担軽減の情報(parameter);
         List<ShakaifukuRiyoshaFutanKeigen> 社会福祉法人等利用者負担軽減の情報List = new ArrayList<>();
@@ -292,14 +292,12 @@ public class GemmenJokyoFinder {
      */
     @Transaction
     public ShikibetsuCode get識別コード(HihokenshaNo 被保険者番号) {
-        IGemmenJokyoMapper mapper = mapperProvider.create(IGemmenJokyoMapper.class);
-        GemmenJokyoParameter parameter = new GemmenJokyoParameter();
-        parameter.set被保険者番号(被保険者番号);
-        List<DbV1001HihokenshaDaichoEntity> dbV1001EntityList = mapper.get識別コード(parameter);
-        if (null == dbV1001EntityList || dbV1001EntityList.isEmpty()) {
+        DbV1001HihokenshaDaichoAliveDac dac = InstanceProvider.create(DbV1001HihokenshaDaichoAliveDac.class);
+        DbV1001HihokenshaDaichoEntity dbV1001Entity = dac.get最新の被保険者台帳情報(被保険者番号);
+        if (null == dbV1001Entity) {
             return ShikibetsuCode.EMPTY;
         }
-        return dbV1001EntityList.get(0).getShikibetsuCode();
+        return dbV1001Entity.getShikibetsuCode();
     }
 
     /**

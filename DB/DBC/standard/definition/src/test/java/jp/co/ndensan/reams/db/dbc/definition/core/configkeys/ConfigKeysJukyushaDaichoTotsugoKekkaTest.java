@@ -8,10 +8,10 @@ import org.junit.Test;
 
 /**
  * 受給者台帳突合結果情報随時コンフィグキーのテストクラスです。
- * 
- * @author LDNS 
+ *
+ * @author LDNS
  */
-public class ConfigKeysJukyushaDaichoTotsugoKekkaTest extends DbcTestBase{
+public class ConfigKeysJukyushaDaichoTotsugoKekkaTest extends DbcTestBase {
 
     @Test(expected = NullPointerException.class)
     public void 引数がNullである場合_toValueは_NullPointerExceptionが発生する() {
@@ -71,56 +71,6 @@ public class ConfigKeysJukyushaDaichoTotsugoKekkaTest extends DbcTestBase{
     @Test
     public void 引数に無しを指定した場合_toValueは_国保連取込_受給者台帳突合結果情報随時_有効区分を返す() {
         assertThat(ConfigKeysJukyushaDaichoTotsugoKekka.toValue(new RString("無し")), is(ConfigKeysJukyushaDaichoTotsugoKekka.国保連取込_受給者台帳突合結果情報随時_有効区分));
-    }
-
-    @Test
-    public void 国保連取込_受給者台帳突合結果情報随時を指定した場合_getコードは_無しを返す() {
-        assertThat(ConfigKeysJukyushaDaichoTotsugoKekka.国保連取込_受給者台帳突合結果情報随時.getコード(), is(new RString("無し")));
-    }
-
-    @Test
-    public void 国保連取込_受給者台帳突合結果情報随時_バッチIDを指定した場合_getコードは_無しを返す() {
-        assertThat(ConfigKeysJukyushaDaichoTotsugoKekka.国保連取込_受給者台帳突合結果情報随時_バッチID.getコード(), is(new RString("無し")));
-    }
-
-    @Test
-    public void 国保連取込_受給者台帳突合結果情報随時_一覧表示順を指定した場合_getコードは_無しを返す() {
-        assertThat(ConfigKeysJukyushaDaichoTotsugoKekka.国保連取込_受給者台帳突合結果情報随時_一覧表示順.getコード(), is(new RString("無し")));
-    }
-
-    @Test
-    public void 国保連取込_受給者台帳突合結果情報随時_交換情報識別番号を指定した場合_getコードは_無しを返す() {
-        assertThat(ConfigKeysJukyushaDaichoTotsugoKekka.国保連取込_受給者台帳突合結果情報随時_交換情報識別番号.getコード(), is(new RString("無し")));
-    }
-
-    @Test
-    public void 国保連取込_受給者台帳突合結果情報随時_再処理不可区分を指定した場合_getコードは_無しを返す() {
-        assertThat(ConfigKeysJukyushaDaichoTotsugoKekka.国保連取込_受給者台帳突合結果情報随時_再処理不可区分.getコード(), is(new RString("無し")));
-    }
-
-    @Test
-    public void 国保連取込_受給者台帳突合結果情報随時_処理サイクル区分を指定した場合_getコードは_無しを返す() {
-        assertThat(ConfigKeysJukyushaDaichoTotsugoKekka.国保連取込_受給者台帳突合結果情報随時_処理サイクル区分.getコード(), is(new RString("無し")));
-    }
-
-    @Test
-    public void 国保連取込_受給者台帳突合結果情報随時_処理月を指定した場合_getコードは_無しを返す() {
-        assertThat(ConfigKeysJukyushaDaichoTotsugoKekka.国保連取込_受給者台帳突合結果情報随時_処理月.getコード(), is(new RString("無し")));
-    }
-
-    @Test
-    public void 国保連取込_受給者台帳突合結果情報随時_処理名称を指定した場合_getコードは_無しを返す() {
-        assertThat(ConfigKeysJukyushaDaichoTotsugoKekka.国保連取込_受給者台帳突合結果情報随時_処理名称.getコード(), is(new RString("無し")));
-    }
-
-    @Test
-    public void 国保連取込_受給者台帳突合結果情報随時_排他チェック有り区分を指定した場合_getコードは_無しを返す() {
-        assertThat(ConfigKeysJukyushaDaichoTotsugoKekka.国保連取込_受給者台帳突合結果情報随時_排他チェック有り区分.getコード(), is(new RString("無し")));
-    }
-
-    @Test
-    public void 国保連取込_受給者台帳突合結果情報随時_有効区分を指定した場合_getコードは_無しを返す() {
-        assertThat(ConfigKeysJukyushaDaichoTotsugoKekka.国保連取込_受給者台帳突合結果情報随時_有効区分.getコード(), is(new RString("無し")));
     }
 
     @Test

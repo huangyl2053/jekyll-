@@ -11,14 +11,12 @@ import jp.co.ndensan.reams.db.dbc.business.core.fukushiyogukonyuhishikyushisei.F
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600011.PnlTotalDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0600011.dgShikyuShinseiList_Row;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0600011.PnlTotalParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 福祉用具購入費支給申請_検索のHandlerです
@@ -89,19 +87,17 @@ public final class PnlTotalHandler {
     }
 
     /**
-     * putViewStateHolder
+     * getViesStateParameter
      *
-     * @param 状態 状態
+     * @param 被保険者番号 HihokenshaNo
+     * @return parameter PnlTotalParameter
      */
-    public void putViewStateHolder(RString 状態) {
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+    public PnlTotalParameter getViesStateParameter(HihokenshaNo 被保険者番号) {
         dgShikyuShinseiList_Row row = div.getYoguKonyuhiShikyuShinseiList().getDgShikyuShinseiList().getClickedItem();
         FlexibleYearMonth eMonth = new FlexibleYearMonth(new RDate(row.getTxtTeikyoYM().
                 toString()).getYearMonth().toString());
-        PnlTotalParameter parameter = new PnlTotalParameter(被保険者番号, eMonth, row.getTxtSerialNo(),
+        return new PnlTotalParameter(被保険者番号, eMonth, row.getTxtSerialNo(),
                 new JigyoshaNo(row.getTxtJigyosyaNo()), row.getTxtYoshikiNo(), row.getTxtMeisaiNo());
-        ViewStateHolder.put(ViewStateKeys.支給申請情報検索キー, parameter);
-        ViewStateHolder.put(ViewStateKeys.状態, 状態);
-    }
 
+    }
 }

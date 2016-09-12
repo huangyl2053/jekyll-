@@ -6,17 +6,6 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shiharaihohojyoho.IShiharaiHohoJyohoMapper">
 
-    <resultMap id="shiharaiHohoJyoho_kozaId" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shiharaihohojyoho.KozaJohoPSMEntity" autoMapping="true">
-        <result property="kozaId" column="kozaId"/>
-    </resultMap>
-    <resultMap id="resultMap_Koza" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shiharaihohojyoho.KozaJohoPSMEntity" autoMapping="true">
-        <result property="gyomuCode" column="UaT0100_gyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyomuCodeTypeHandler"/>
-        <result property="subGyomuCode" column="UaT0100_subGyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SubGyomuCodeTypeHandler"/>
-        <result property="kamokuCode" column="UaT0100_kamokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KamokuCodeTypeHandler"/>
-        <result property="gyomuKoyuKey" column="UaT0310_gyomuKoyuKey" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="yotoKubun" column="UaT0310_yotoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-    </resultMap>
-
     <resultMap id="resultMap_DbT3077JuryoininKeiyakuJigyoshaEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3077JuryoininKeiyakuJigyoshaEntity" autoMapping="true">
         <id property="keiyakuJigyoshaNo" column="DbT3077_keiyakuJigyoshaNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="keiyakuJigyoshaName" column="DbT3077_keiyakuJigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
@@ -28,40 +17,9 @@
         <result property="kozaMeiginin" column="DbT3077_kozaMeiginin" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <result property="kozaMeigininKana" column="DbT3077_kozaMeigininKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
     </resultMap>
-    <select id="get口座IDリストByKozaParameter"
-            resultMap="shiharaiHohoJyoho_kozaId"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.KozaParameter" fetchSize="500">
-        SELECT "kozaId"
-        FROM rgua."UaT0310Koza" UaT0310
-        LEFT JOIN rgua."UaT0100GyomubetsuPrimaryKey" UaT0100
-        ON UaT0310."gyomubetsuPrimaryKey" = UaT0100."gyomubetsuPrimaryKey"
-        WHERE UaT0310."shikibetsuCode" = #{shikibetsuCode}
-        AND UaT0100."kamokuCode" = #{kamokuCode}
-        ORDER BY
-        UaT0310."kaishiYMD" DESC
-    </select>
-
-    <select id="get口座情報ByKey"
-             resultMap="resultMap_Koza"
-             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.KozaParameter" fetchSize="500">
-        SELECT
-        DISTINCT
-        UaT0100."gyomuCode" as UaT0100_gyomuCode,
-        UaT0100."subGyomuCode" as UaT0100_subGyomuCode,
-        UaT0100."kamokuCode" as UaT0100_kamokuCode,
-        UaT0310."gyomuKoyuKey" as UaT0310_gyomuKoyuKey,
-        UaT0310."yotoKubun" as UaT0310_yotoKubun,
-        UaT0310."kaishiYMD" as UaT0310_kaishiYMD
-        FROM rgua."UaT0310Koza" UaT0310
-        LEFT JOIN rgua."UaT0100GyomubetsuPrimaryKey" UaT0100
-        ON UaT0310."gyomubetsuPrimaryKey" = UaT0100."gyomubetsuPrimaryKey"
-        WHERE UaT0310."kozaId" = #{kozaId}
-        ORDER BY
-        UaT0310_kaishiYMD DESC
-    </select>
 
     <select id="get契約事業者情報" resultMap="resultMap_DbT3077JuryoininKeiyakuJigyoshaEntity"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.KeiyakushaParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.shiharaihohojyoho.KeiyakushaParameter" fetchSize="500" resultOrdered="true">
         SELECT
         DbT3077."keiyakuJigyoshaNo" AS "DbT3077_keiyakuJigyoshaNo"
         ,DbT3077."keiyakuJigyoshaName" AS "DbT3077_keiyakuJigyoshaName"

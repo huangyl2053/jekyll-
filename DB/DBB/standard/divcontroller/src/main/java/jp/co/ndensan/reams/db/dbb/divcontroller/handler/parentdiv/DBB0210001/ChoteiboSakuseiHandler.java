@@ -10,7 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0210001.ChoteiboSakuseiDiv;
 import jp.co.ndensan.reams.db.dbz.business.config.HizukeConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShoriName;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -59,7 +59,7 @@ public final class ChoteiboSakuseiHandler {
 
         ShoriDateKanriManager manager = InstanceProvider.create(ShoriDateKanriManager.class);
         ShoriDateKanri result = manager.get抽出調定日時(SubGyomuCode.DBB介護賦課,
-                ShoriName.調定簿作成.toRString(),
+                ShoriName.調定簿作成.get名称(),
                 処理年度);
         if (result == null) {
             RDateTime dateTime = RDateTime.of(処理年度.getYearValue(), 四月, INT_1, 0, 0, 0);

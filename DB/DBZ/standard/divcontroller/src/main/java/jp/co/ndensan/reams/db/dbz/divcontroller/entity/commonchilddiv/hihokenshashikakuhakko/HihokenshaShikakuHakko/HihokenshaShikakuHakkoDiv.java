@@ -1,10 +1,10 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hihokenshashikakuhakko.HihokenshaShikakuHakko;
+
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -66,7 +66,7 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
+ /*
      * getYukoKigenInfo
      * @return YukoKigenInfo
      */
@@ -762,6 +762,6 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
     @Override
     public void initialize(HihokenshaNo 被保険者番号, RString メニューID, ShikibetsuCode 識別コード) {
         HihokenshaShikakuHakkoHandler handler = new HihokenshaShikakuHakkoHandler(this);
-        handler.initialize(被保険者番号, メニューID, 識別コード);
+        handler.initialize(被保険者番号, メニューID, 識別コード, new RString("1"));
     }
 }

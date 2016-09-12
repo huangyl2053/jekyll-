@@ -43,7 +43,7 @@
         <result property="lastUpdateReamsLoginId" column="dbT5512ShinsakaiOnseiJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
-   <select id="getEntity" resultMap="ResultMap_DbT5512ShinsakaiOnseiJohoEntity">
+   <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5512ShinsakaiOnseiJohoEntity">
         SELECT
         <include refid="allColumns_DbT5512ShinsakaiOnseiJoho"/>
         FROM

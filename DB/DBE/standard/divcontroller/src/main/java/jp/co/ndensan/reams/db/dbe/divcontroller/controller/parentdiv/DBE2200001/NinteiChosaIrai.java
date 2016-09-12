@@ -10,11 +10,10 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.NinnteiChousairaiBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.NinteichosaIraiJohoRelateBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.WaritsukeBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.NinteichosaIraiKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsei.ChosaKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.NinteichosaIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninnteichousairai.NinnteiChousairaiParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninnteichousairai.NinnteiChousairaiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.DBE2200001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.NinteiChosaIraiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.dgChosaItakusakiIchiran_Row;
@@ -26,18 +25,21 @@ import jp.co.ndensan.reams.db.dbe.service.core.basic.NinteiKanryoJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ninnteichousairai.NinnteiChousairaiFinder;
 import jp.co.ndensan.reams.db.dbe.service.report.ninnteichousairai.NinteiChosaIraiPrintService;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJohoIdentifier;
-import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteiShinseiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosaIraiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.shishosecurityjoho.ShishoSecurityJoho;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -51,6 +53,7 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
@@ -98,7 +101,7 @@ public class NinteiChosaIrai {
      * @return ResponseData<NinteiChosaIraiDiv>
      */
     public ResponseData<NinteiChosaIraiDiv> onLoad(NinteiChosaIraiDiv div) {
-        getHandler(div).load();
+        getHandler(div).load(true);
 
         ShoKisaiHokenshaNo 保険者番号 = div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号();
         RString 支所コード = ShishoSecurityJoho.createInstance().getShishoCode(ControlDataHolder.getUserId());
@@ -106,7 +109,31 @@ public class NinteiChosaIrai {
         ViewStateHolder.put(ViewStateKeys.証記載保険者番号, 保険者番号);
         List<NinnteiChousairaiBusiness> 認定調査委託先List = NinnteiChousairaiFinder.createInstance().getNinnteiChousaItaku(
                 NinnteiChousairaiParameter.createParam調査委託先Or未割付申請者(保険者番号, 支所コード)).records();
-        getHandler(div).set認定調査委託先一覧(認定調査委託先List);
+        boolean コード取得結果 = getHandler(div).set認定調査委託先一覧(認定調査委託先List);
+        if (!コード取得結果) {
+            throw new ApplicationException(UrErrorMessages.対象データなし.getMessage());
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 保険者リストの選択処理です。
+     *
+     * @param div NinteiChosaIraiDiv
+     * @return ResponseData<NinteiChosaIraiDiv>
+     */
+    public ResponseData<NinteiChosaIraiDiv> onChange_ccdHokenshaList(NinteiChosaIraiDiv div) {
+        getHandler(div).load(false);
+        ShoKisaiHokenshaNo 保険者番号 = div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号();
+        RString 支所コード = ShishoSecurityJoho.createInstance().getShishoCode(ControlDataHolder.getUserId());
+        ViewStateHolder.put(ViewStateKeys.支所コード, 支所コード);
+        ViewStateHolder.put(ViewStateKeys.証記載保険者番号, 保険者番号);
+        List<NinnteiChousairaiBusiness> 認定調査委託先List = NinnteiChousairaiFinder.createInstance().getNinnteiChousaItaku(
+                NinnteiChousairaiParameter.createParam調査委託先Or未割付申請者(保険者番号, 支所コード)).records();
+        boolean コード取得結果 = getHandler(div).set認定調査委託先一覧(認定調査委託先List);
+        if (!コード取得結果) {
+            throw new ApplicationException(UrErrorMessages.対象データなし.getMessage());
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -124,6 +151,7 @@ public class NinteiChosaIrai {
         ViewStateHolder.put(ViewStateKeys.認定調査委託先コード, row.getChosaItakusakiCode().getValue());
 
         ViewStateHolder.put(ViewStateKeys.保険者名称, row.getHokenshaName());
+        ViewStateHolder.put(ViewStateKeys.認定調査委託先割付定員, row.getWaritsukeTeiin().getText());
         RString 支所コード = ViewStateHolder.get(ViewStateKeys.支所コード, RString.class);
         ShoKisaiHokenshaNo 保険者番号 = ViewStateHolder.get(ViewStateKeys.証記載保険者番号, ShoKisaiHokenshaNo.class);
         NinnteiChousairaiParameter parameter = NinnteiChousairaiParameter.createParamfor調査員情報(
@@ -148,7 +176,7 @@ public class NinteiChosaIrai {
 
         ChosainCode chosainCode = new ChosainCode(row.getChosainCode().getValue());
         ViewStateHolder.put(ViewStateKeys.調査員コード, row.getChosainCode().getValue());
-
+        ViewStateHolder.put(ViewStateKeys.調査員割付可能人数_月, row.getChosaKanoNinzuPerMonth());
         setData(div, chosainCode);
         getHandler(div).init印刷条件DIV();
         div.getChoisaItakusakiIchiran().setIsOpen(false);
@@ -182,8 +210,8 @@ public class NinteiChosaIrai {
             ninteiKanryoJohoList = 割付済み一覧.get(0).getNinteiKanryoJohoList();
             ninteichosaIraiJohoList = 割付済み一覧.get(0).getNinteichosaIraiJohoList();
         }
-        ViewStateHolder.put(ViewStateKeys.検索結果_認定調査依頼情報, Models.create(ninteichosaIraiJohoList));
-        ViewStateHolder.put(ViewStateKeys.検索結果_要介護認定完了情報, Models.create(ninteiKanryoJohoList));
+        ViewStateHolder.put(ViewStateKeys.認定調査依頼情報, Models.create(ninteichosaIraiJohoList));
+        ViewStateHolder.put(ViewStateKeys.要介護認定完了情報, Models.create(ninteiKanryoJohoList));
     }
 
     /**
@@ -226,23 +254,30 @@ public class NinteiChosaIrai {
         int 既存割付済み人数 = getHandler(div).get既存割付済み人数();
         RString 調査員コード = ViewStateHolder.get(ViewStateKeys.調査員コード, RString.class);
         RString 認定調査委託先コード = ViewStateHolder.get(ViewStateKeys.認定調査委託先コード, RString.class);
-        int count = 割付人数 + 既存割付済み人数;
-
-        for (dgMiwaritsukeShinseishaIchiran_Row row : selectedItems) {
-            int waritsukeTeiin = nullToZero(row.getWaritsukeTeiin());
-            int chosaKanoNinzuPerMonth = nullToZero(row.getChosaKanoNinzuPerMonth());
-
-            if (!RString.isNullOrEmpty(認定調査委託先コード)
-                    && RString.isNullOrEmpty(調査員コード)
-                    && waritsukeTeiin < count) {
-                isWaritsuke = true;
+        List<dgWaritsukeZumiShinseishaIchiran_Row> waritsukeZumiList = div.getDgWaritsukeZumiShinseishaIchiran().getDataSource();
+        int waritsukeZumiCount = 0;
+        RYearMonth chosaIraiDay = div.getTxtChosaIraiDay().getValue().getYearMonth();
+        for (dgWaritsukeZumiShinseishaIchiran_Row row : waritsukeZumiList) {
+            RYearMonth chosaIrai = new RDate(row.getChosaIraiDay().toString()).getYearMonth();
+            if ((RString.EMPTY.equals(row.getJotai()) || WARITSUKE_ZUMI.equals(row.getJotai()))
+                    && chosaIraiDay.equals(chosaIrai)) {
+                waritsukeZumiCount++;
             }
+        }
+        RString 認定調査委託先割付定員 = ViewStateHolder.get(ViewStateKeys.認定調査委託先割付定員, RString.class);
+        RString 調査員割付可能人数_月 = ViewStateHolder.get(ViewStateKeys.調査員割付可能人数_月, RString.class);
+        int waritsukeTeiin = nullToZero(認定調査委託先割付定員);
+        int chosaKanoNinzuPerMonth = nullToZero(調査員割付可能人数_月);
+        if (!RString.isNullOrEmpty(認定調査委託先コード)
+                && RString.isNullOrEmpty(調査員コード)
+                && waritsukeTeiin < (割付人数 + 既存割付済み人数)) {
+            isWaritsuke = true;
+        }
 
-            if (!RString.isNullOrEmpty(認定調査委託先コード)
-                    && !RString.isNullOrEmpty(調査員コード)
-                    && chosaKanoNinzuPerMonth < count) {
-                isWaritsuke = true;
-            }
+        if (!RString.isNullOrEmpty(認定調査委託先コード)
+                && !RString.isNullOrEmpty(調査員コード)
+                && chosaKanoNinzuPerMonth < (割付人数 + waritsukeZumiCount)) {
+            isWaritsuke = true;
         }
 
         return isWaritsuke;
@@ -394,6 +429,7 @@ public class NinteiChosaIrai {
                             .set認定調査期限年月日(認定調査期限年月日)
                             .set論理削除フラグ(false).build();
                     ninteichosaIraiJohoManager.save認定調査依頼情報(ninteichosaIraiJoho);
+                    update要介護認定申請情報(申請書管理番号, 調査員コード, 認定調査委託先コード);
                 }
 
                 if (ChosaKubun.再調査.get名称().equals(row.getChosaKubun())) {
@@ -416,10 +452,18 @@ public class NinteiChosaIrai {
         div.getDgWaritsukeZumiShinseishaIchiran().setDataSource(waritsukeZumiShinseishaIchiran);
     }
 
+    private void update要介護認定申請情報(ShinseishoKanriNo 申請書管理番号, RString 調査員コード, RString 認定調査委託先コード) {
+        NinteiShinseiJohoManager manager = NinteiShinseiJohoManager.createInstance();
+        NinteiShinseiJoho ninteiShinseiJoho = manager.get要介護認定申請情報(申請書管理番号);
+        ninteiShinseiJoho = ninteiShinseiJoho.createBuilderForEdit().set認定調査委託先コード(new ChosaItakusakiCode(認定調査委託先コード))
+                .set認定調査員コード(new ChosainCode(調査員コード)).build();
+        manager.save要介護認定申請情報(ninteiShinseiJoho.modifiedModel());
+    }
+
     private void updateNinteichosaIraiJoho(NinteiChosaIraiDiv div) {
         List<dgMiwaritsukeShinseishaIchiran_Row> miwaritsukeShinseishaIchiran = div.getDgMiwaritsukeShinseishaIchiran().getDataSource();
-        Models<NinteichosaIraiJohoIdentifier, NinteichosaIraiJoho> ninteichosaIraiJohoList = ViewStateHolder.get(ViewStateKeys.検索結果_認定調査依頼情報, Models.class);
-        Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> ninteiKanryoJohoList = ViewStateHolder.get(ViewStateKeys.検索結果_要介護認定完了情報, Models.class);
+        Models<NinteichosaIraiJohoIdentifier, NinteichosaIraiJoho> ninteichosaIraiJohoList = ViewStateHolder.get(ViewStateKeys.認定調査依頼情報, Models.class);
+        Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> ninteiKanryoJohoList = ViewStateHolder.get(ViewStateKeys.要介護認定完了情報, Models.class);
         NinteichosaIraiJohoManager ninteichosaIraiJohoManager = NinteichosaIraiJohoManager.createInstance();
         NinteiKanryoJohoManager ninteiKanryoJohoManager = NinteiKanryoJohoManager.createInstance();
         for (dgMiwaritsukeShinseishaIchiran_Row row : miwaritsukeShinseishaIchiran) {
@@ -515,9 +559,9 @@ public class NinteiChosaIrai {
         if (CONFIGVALUE1.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
             ninteiChosaIraiPrintService.print要介護認定調査票差異チェック票(getHandler(div).create調査票差異チェック票_DBE292001パラメータ());
         } else if (CONFIGVALUE2.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
-            ninteiChosaIraiPrintService.print要介護認定調査票差異チェック票(getHandler(div).create調査票差異チェック票_DBE292002パラメータ());
-            ninteiChosaIraiPrintService.print要介護認定調査票差異チェック票(getHandler(div).create調査票差異チェック票_DBE292003パラメータ());
-            ninteiChosaIraiPrintService.print要介護認定調査票差異チェック票(getHandler(div).create調査票差異チェック票_DBE292004パラメータ());
+            ninteiChosaIraiPrintService.print要介護認定調査票差異チェック票_両面右(getHandler(div).create調査票差異チェック票_DBE292004パラメータ());
+        } else if (CONFIGVALUE3.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票差異チェック票_印刷タイプ, date, SubGyomuCode.DBE認定支援))) {
+            ninteiChosaIraiPrintService.print要介護認定調査票差異チェック票_両面左(getHandler(div).create調査票差異チェック票_DBE292004パラメータ());
         }
     }
 

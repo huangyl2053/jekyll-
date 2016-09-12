@@ -9,15 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikaisaikekka.ShinsakaiKaisaiYoteiJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikaisaikekka.ShinsakaiWariateIinJohoBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.shinsakai.IsShusseki;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.shinsakai.IssotaiUmu;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.shinsakai.KaigoninteiShinsakaiGichoKubunCode;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.core.Sikaku;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.hoshu.GogitaichoKubunCode;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsakai.IsChikokuUmu;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.KaigoninteiShinsakaiGichoKubunCode;
+import jp.co.ndensan.reams.db.dbe.definition.core.hoshu.GogitaichoKubunCode;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.IsChikokuUmu;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.IsShusseki;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.IssotaiUmu;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.ShinsakaiKaisaiKekkaDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5210001.dgShinsakaiIinIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.Sikaku;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
@@ -136,7 +136,7 @@ public class ShinsakaiKaisaiKekkaHandler {
     private List<KeyValueDataSource> setIsShusseki() {
         List<KeyValueDataSource> shusseki = new ArrayList<>();
         for (IsShusseki isShusseki : IsShusseki.values()) {
-            KeyValueDataSource dataSource = new KeyValueDataSource(new RString(String.valueOf(isShusseki.is出席())), isShusseki.get名称());
+            KeyValueDataSource dataSource = new KeyValueDataSource(new RString(String.valueOf(isShusseki.is委員出席())), isShusseki.get名称());
             shusseki.add(dataSource);
         }
         return shusseki;
@@ -145,7 +145,7 @@ public class ShinsakaiKaisaiKekkaHandler {
     private List<KeyValueDataSource> setIssotaiUmu() {
         List<KeyValueDataSource> sotaiUmu = new ArrayList<>();
         for (IssotaiUmu issotaiUmu : IssotaiUmu.values()) {
-            KeyValueDataSource dataSource = new KeyValueDataSource(new RString(String.valueOf(issotaiUmu.is早退())), issotaiUmu.get名称());
+            KeyValueDataSource dataSource = new KeyValueDataSource(new RString(String.valueOf(issotaiUmu.is委員早退())), issotaiUmu.get名称());
             sotaiUmu.add(dataSource);
         }
         return sotaiUmu;

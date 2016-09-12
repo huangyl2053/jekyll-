@@ -8,13 +8,9 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0020071;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
-import jp.co.ndensan.reams.db.dbu.definition.jigyohokokugeppoo.JigyoHokokuGeppoDetalSearchParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020071.HoseiHakkoYoshiki2KensuEtcTotalPanelDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.JigyoHokokuGeppoParameter;
-import jp.co.ndensan.reams.db.dbu.service.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHako;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.db.dbu.service.core.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHako;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -74,10 +70,6 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuDataHandler {
     private static final Decimal 縦番号_36 = new Decimal("36");
     private static final Decimal 縦番号_37 = new Decimal("37");
     private static final Decimal 縦番号_38 = new Decimal("38");
-    private static final Code 集計番号_0102 = new Code("0102");
-    private static final Code 集計番号_0202 = new Code("0202");
-    private static final Code 集計番号_0302 = new Code("0302");
-    private static final Code 集計番号_0402 = new Code("0402");
     private static final RString 単位数総数 = new RString("01");
     private static final RString 単位数第２号被保険者分再掲 = new RString("02");
     private static final RString 単位数総数特例分 = new RString("03");
@@ -111,151 +103,162 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuDataHandler {
      */
     public boolean is整合性チェック_件数_NG3() {
 
-        return is整合性チェック_NG_件数_整合3_1() || is整合性チェック_NG_件数_整合3_2() || is整合性チェック_NG_件数_整合3_3();
+        return is整合性チェック_NG_件数_整合3_1() || is整合性チェック_NG_件数_整合3_2()
+                || is整合性チェック_NG_件数_整合3_3();
     }
 
     private boolean is整合性チェック_NG_件数_整合3_1() {
-        return is整合性チェック_NG_件数_3_1() || is整合性チェック_NG_件数_3_2() || is整合性チェック_NG_件数_3_3() || is整合性チェック_NG_件数_3_4()
-                || is整合性チェック_NG_件数_3_5() || is整合性チェック_NG_件数_3_6() || is整合性チェック_NG_件数_3_7() || is整合性チェック_NG_件数_3_8()
-                || is整合性チェック_NG_件数_3_9() || is整合性チェック_NG_件数_3_10() || is整合性チェック_NG_件数_3_11() || is整合性チェック_NG_件数_3_12()
+        return is整合性チェック_NG_件数_3_1() || is整合性チェック_NG_件数_3_2()
+                || is整合性チェック_NG_件数_3_3() || is整合性チェック_NG_件数_3_4()
+                || is整合性チェック_NG_件数_3_5() || is整合性チェック_NG_件数_3_6()
+                || is整合性チェック_NG_件数_3_7() || is整合性チェック_NG_件数_3_8()
+                || is整合性チェック_NG_件数_3_9() || is整合性チェック_NG_件数_3_10()
+                || is整合性チェック_NG_件数_3_11() || is整合性チェック_NG_件数_3_12()
                 || is整合性チェック_NG_件数_3_13();
     }
 
     private boolean is整合性チェック_NG_件数_整合3_2() {
-        return is整合性チェック_NG_件数_3_14() || is整合性チェック_NG_件数_3_15() || is整合性チェック_NG_件数_3_16() || is整合性チェック_NG_件数_3_17()
-                || is整合性チェック_NG_件数_3_18() || is整合性チェック_NG_件数_3_19() || is整合性チェック_NG_件数_3_20() || is整合性チェック_NG_件数_3_21()
-                || is整合性チェック_NG_件数_3_22() || is整合性チェック_NG_件数_3_23() || is整合性チェック_NG_件数_3_24() || is整合性チェック_NG_件数_3_25()
+        return is整合性チェック_NG_件数_3_14() || is整合性チェック_NG_件数_3_15()
+                || is整合性チェック_NG_件数_3_16() || is整合性チェック_NG_件数_3_17()
+                || is整合性チェック_NG_件数_3_18() || is整合性チェック_NG_件数_3_19()
+                || is整合性チェック_NG_件数_3_20() || is整合性チェック_NG_件数_3_21()
+                || is整合性チェック_NG_件数_3_22() || is整合性チェック_NG_件数_3_23()
+                || is整合性チェック_NG_件数_3_24() || is整合性チェック_NG_件数_3_25()
                 || is整合性チェック_NG_件数_3_26();
     }
 
     private boolean is整合性チェック_NG_件数_整合3_3() {
-        return is整合性チェック_NG_件数_3_27() || is整合性チェック_NG_件数_3_28() || is整合性チェック_NG_件数_3_29() || is整合性チェック_NG_件数_3_30()
-                || is整合性チェック_NG_件数_3_31() || is整合性チェック_NG_件数_3_32() || is整合性チェック_NG_件数_3_33() || is整合性チェック_NG_件数_3_34()
-                || is整合性チェック_NG_件数_3_35() || is整合性チェック_NG_件数_3_36() || is整合性チェック_NG_件数_3_37() || is整合性チェック_NG_件数_3_38();
+        return is整合性チェック_NG_件数_3_27() || is整合性チェック_NG_件数_3_28()
+                || is整合性チェック_NG_件数_3_29() || is整合性チェック_NG_件数_3_30()
+                || is整合性チェック_NG_件数_3_31() || is整合性チェック_NG_件数_3_32()
+                || is整合性チェック_NG_件数_3_33() || is整合性チェック_NG_件数_3_34()
+                || is整合性チェック_NG_件数_3_35() || is整合性チェック_NG_件数_3_36()
+                || is整合性チェック_NG_件数_3_37() || is整合性チェック_NG_件数_3_38();
     }
 
     private boolean is整合性チェック_NG_件数_3_1() {
 
-        RString 居宅介護予防サービス要支援計 = div.getPnlMain().getTbl1().getTextBox3().getValue();
-        RString 居宅介護予防サービス要介護計 = div.getPnlMain().getTbl1().getTextBox10().getValue();
-        RString 居宅介護予防サービス合計 = div.getPnlMain().getTbl1().getTextBox11().getValue();
+        Decimal 居宅介護予防サービス要支援計 = div.getPnlMain().getTbl1().getTextBox3().getValue();
+        Decimal 居宅介護予防サービス要介護計 = div.getPnlMain().getTbl1().getTextBox10().getValue();
+        Decimal 居宅介護予防サービス合計 = div.getPnlMain().getTbl1().getTextBox11().getValue();
 
         return 入力チェック3(居宅介護予防サービス要支援計, 居宅介護予防サービス要介護計, 居宅介護予防サービス合計);
     }
 
     private boolean is整合性チェック_NG_件数_3_2() {
 
-        RString 訪問サービス要支援計 = div.getPnlMain().getTbl1().getTextBox14().getValue();
-        RString 訪問サービス要介護計 = div.getPnlMain().getTbl1().getTextBox21().getValue();
-        RString 訪問サービス合計 = div.getPnlMain().getTbl1().getTextBox22().getValue();
+        Decimal 訪問サービス要支援計 = div.getPnlMain().getTbl1().getTextBox14().getValue();
+        Decimal 訪問サービス要介護計 = div.getPnlMain().getTbl1().getTextBox21().getValue();
+        Decimal 訪問サービス合計 = div.getPnlMain().getTbl1().getTextBox22().getValue();
 
         return 入力チェック3(訪問サービス要支援計, 訪問サービス要介護計, 訪問サービス合計);
     }
 
     private boolean is整合性チェック_NG_件数_3_3() {
 
-        RString 訪問介護要支援計 = div.getPnlMain().getTbl1().getTextBox25().getValue();
-        RString 訪問介護要介護計 = div.getPnlMain().getTbl1().getTextBox32().getValue();
-        RString 訪問介護合計 = div.getPnlMain().getTbl1().getTextBox33().getValue();
+        Decimal 訪問介護要支援計 = div.getPnlMain().getTbl1().getTextBox25().getValue();
+        Decimal 訪問介護要介護計 = div.getPnlMain().getTbl1().getTextBox32().getValue();
+        Decimal 訪問介護合計 = div.getPnlMain().getTbl1().getTextBox33().getValue();
 
         return 入力チェック3(訪問介護要支援計, 訪問介護要介護計, 訪問介護合計);
     }
 
     private boolean is整合性チェック_NG_件数_3_4() {
 
-        RString 訪問入浴介護要支援計 = div.getPnlMain().getTbl1().getTextBox37().getValue();
-        RString 訪問入浴介護要介護計 = div.getPnlMain().getTbl1().getTextBox44().getValue();
-        RString 訪問入浴介護合計 = div.getPnlMain().getTbl1().getTextBox45().getValue();
+        Decimal 訪問入浴介護要支援計 = div.getPnlMain().getTbl1().getTextBox37().getValue();
+        Decimal 訪問入浴介護要介護計 = div.getPnlMain().getTbl1().getTextBox44().getValue();
+        Decimal 訪問入浴介護合計 = div.getPnlMain().getTbl1().getTextBox45().getValue();
 
         return 入力チェック3(訪問入浴介護要支援計, 訪問入浴介護要介護計, 訪問入浴介護合計);
     }
 
     private boolean is整合性チェック_NG_件数_3_5() {
 
-        RString 訪問看護要支援計 = div.getPnlMain().getTbl1().getTextBox47().getValue();
-        RString 訪問看護要介護計 = div.getPnlMain().getTbl1().getTextBox54().getValue();
-        RString 訪問看護要合計 = div.getPnlMain().getTbl1().getTextBox55().getValue();
+        Decimal 訪問看護要支援計 = div.getPnlMain().getTbl1().getTextBox47().getValue();
+        Decimal 訪問看護要介護計 = div.getPnlMain().getTbl1().getTextBox54().getValue();
+        Decimal 訪問看護要合計 = div.getPnlMain().getTbl1().getTextBox55().getValue();
 
         return 入力チェック3(訪問看護要支援計, 訪問看護要介護計, 訪問看護要合計);
     }
 
     private boolean is整合性チェック_NG_件数_3_6() {
 
-        RString 訪問リハビリテーション要支援計 = div.getPnlMain().getTbl1().getTextBox58().getValue();
-        RString 訪問リハビリテーション要介護計 = div.getPnlMain().getTbl1().getTextBox65().getValue();
-        RString 訪問リハビリテーション合計 = div.getPnlMain().getTbl1().getTextBox66().getValue();
+        Decimal 訪問リハビリテーション要支援計 = div.getPnlMain().getTbl1().getTextBox58().getValue();
+        Decimal 訪問リハビリテーション要介護計 = div.getPnlMain().getTbl1().getTextBox65().getValue();
+        Decimal 訪問リハビリテーション合計 = div.getPnlMain().getTbl1().getTextBox66().getValue();
 
         return 入力チェック3(訪問リハビリテーション要支援計, 訪問リハビリテーション要介護計, 訪問リハビリテーション合計);
     }
 
     private boolean is整合性チェック_NG_件数_3_7() {
 
-        RString 居宅療養管理指導要支援計 = div.getPnlMain().getTbl1().getTextBox69().getValue();
-        RString 居宅療養管理指導要介護計 = div.getPnlMain().getTbl1().getTextBox76().getValue();
-        RString 居宅療養管理指導合計 = div.getPnlMain().getTbl1().getTextBox77().getValue();
+        Decimal 居宅療養管理指導要支援計 = div.getPnlMain().getTbl1().getTextBox69().getValue();
+        Decimal 居宅療養管理指導要介護計 = div.getPnlMain().getTbl1().getTextBox76().getValue();
+        Decimal 居宅療養管理指導合計 = div.getPnlMain().getTbl1().getTextBox77().getValue();
 
         return 入力チェック3(居宅療養管理指導要支援計, 居宅療養管理指導要介護計, 居宅療養管理指導合計);
     }
 
     private boolean is整合性チェック_NG_件数_3_8() {
 
-        RString 通所サービス要支援計 = div.getPnlMain().getTbl1().getTextBox80().getValue();
-        RString 通所サービス要介護計 = div.getPnlMain().getTbl1().getTextBox87().getValue();
-        RString 通所サービス要合計 = div.getPnlMain().getTbl1().getTextBox88().getValue();
+        Decimal 通所サービス要支援計 = div.getPnlMain().getTbl1().getTextBox80().getValue();
+        Decimal 通所サービス要介護計 = div.getPnlMain().getTbl1().getTextBox87().getValue();
+        Decimal 通所サービス要合計 = div.getPnlMain().getTbl1().getTextBox88().getValue();
 
         return 入力チェック3(通所サービス要支援計, 通所サービス要介護計, 通所サービス要合計);
     }
 
     private boolean is整合性チェック_NG_件数_3_9() {
 
-        RString 通所介護要支援計 = div.getPnlMain().getTbl1().getTextBox91().getValue();
-        RString 通所介護要介護計 = div.getPnlMain().getTbl1().getTextBox98().getValue();
-        RString 通所介護合計 = div.getPnlMain().getTbl1().getTextBox99().getValue();
+        Decimal 通所介護要支援計 = div.getPnlMain().getTbl1().getTextBox91().getValue();
+        Decimal 通所介護要介護計 = div.getPnlMain().getTbl1().getTextBox98().getValue();
+        Decimal 通所介護合計 = div.getPnlMain().getTbl1().getTextBox99().getValue();
 
         return 入力チェック3(通所介護要支援計, 通所介護要介護計, 通所介護合計);
     }
 
     private boolean is整合性チェック_NG_件数_3_10() {
 
-        RString 通所リハビリテーション要支援計 = div.getPnlMain().getTbl1().getTextBox102().getValue();
-        RString 通所リハビリテーション要介護計 = div.getPnlMain().getTbl1().getTextBox109().getValue();
-        RString 通所リハビリテーション合計 = div.getPnlMain().getTbl1().getTextBox110().getValue();
+        Decimal 通所リハビリテーション要支援計 = div.getPnlMain().getTbl1().getTextBox102().getValue();
+        Decimal 通所リハビリテーション要介護計 = div.getPnlMain().getTbl1().getTextBox109().getValue();
+        Decimal 通所リハビリテーション合計 = div.getPnlMain().getTbl1().getTextBox110().getValue();
 
         return 入力チェック3(通所リハビリテーション要支援計, 通所リハビリテーション要介護計, 通所リハビリテーション合計);
     }
 
     private boolean is整合性チェック_NG_件数_3_11() {
 
-        RString 短期入所サービス要支援計 = div.getPnlMain().getTbl1().getTextBox113().getValue();
-        RString 短期入所サービス要介護計 = div.getPnlMain().getTbl1().getTextBox120().getValue();
-        RString 短期入所サービス合計 = div.getPnlMain().getTbl1().getTextBox121().getValue();
+        Decimal 短期入所サービス要支援計 = div.getPnlMain().getTbl1().getTextBox113().getValue();
+        Decimal 短期入所サービス要介護計 = div.getPnlMain().getTbl1().getTextBox120().getValue();
+        Decimal 短期入所サービス合計 = div.getPnlMain().getTbl1().getTextBox121().getValue();
 
         return 入力チェック3(短期入所サービス要支援計, 短期入所サービス要介護計, 短期入所サービス合計);
     }
 
     private boolean is整合性チェック_NG_件数_3_12() {
 
-        RString 短期入所生活介護要支援計 = div.getPnlMain().getTbl1().getTextBox124().getValue();
-        RString 短期入所生活介護要介護計 = div.getPnlMain().getTbl1().getTextBox131().getValue();
-        RString 短期入所生活介護合計 = div.getPnlMain().getTbl1().getTextBox132().getValue();
+        Decimal 短期入所生活介護要支援計 = div.getPnlMain().getTbl1().getTextBox124().getValue();
+        Decimal 短期入所生活介護要介護計 = div.getPnlMain().getTbl1().getTextBox131().getValue();
+        Decimal 短期入所生活介護合計 = div.getPnlMain().getTbl1().getTextBox132().getValue();
 
         return 入力チェック3(短期入所生活介護要支援計, 短期入所生活介護要介護計, 短期入所生活介護合計);
     }
 
     private boolean is整合性チェック_NG_件数_3_13() {
 
-        RString 短期入所療養介護介護老人保健施設要支援計 = div.getPnlMain().getTbl1().getTextBox135().getValue();
-        RString 短期入所療養介護介護老人保健施設要介護計 = div.getPnlMain().getTbl1().getTextBox142().getValue();
-        RString 短期入所療養介護介護老人保健施設合計 = div.getPnlMain().getTbl1().getTextBox143().getValue();
+        Decimal 短期入所療養介護介護老人保健施設要支援計 = div.getPnlMain().getTbl1().getTextBox135().getValue();
+        Decimal 短期入所療養介護介護老人保健施設要介護計 = div.getPnlMain().getTbl1().getTextBox142().getValue();
+        Decimal 短期入所療養介護介護老人保健施設合計 = div.getPnlMain().getTbl1().getTextBox143().getValue();
 
-        return 入力チェック3(短期入所療養介護介護老人保健施設要支援計, 短期入所療養介護介護老人保健施設要介護計, 短期入所療養介護介護老人保健施設合計);
+        return 入力チェック3(短期入所療養介護介護老人保健施設要支援計,
+                短期入所療養介護介護老人保健施設要介護計, 短期入所療養介護介護老人保健施設合計);
     }
 
     private boolean is整合性チェック_NG_件数_3_14() {
 
-        RString 短期入所療養介護介護療養型医療施設要支援計 = div.getPnlMain().getTbl1().getTextBox146().getValue();
-        RString 短期入所療養介護介護療養型医療施設等要介護計 = div.getPnlMain().getTbl1().getTextBox153().getValue();
-        RString 短期入所療養介護介護療養型医療施設等合計 = div.getPnlMain().getTbl1().getTextBox154().getValue();
+        Decimal 短期入所療養介護介護療養型医療施設要支援計 = div.getPnlMain().getTbl1().getTextBox146().getValue();
+        Decimal 短期入所療養介護介護療養型医療施設等要介護計 = div.getPnlMain().getTbl1().getTextBox153().getValue();
+        Decimal 短期入所療養介護介護療養型医療施設等合計 = div.getPnlMain().getTbl1().getTextBox154().getValue();
 
         return 入力チェック3(短期入所療養介護介護療養型医療施設要支援計, 短期入所療養介護介護療養型医療施設等要介護計,
                 短期入所療養介護介護療養型医療施設等合計);
@@ -263,126 +266,129 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuDataHandler {
 
     private boolean is整合性チェック_NG_件数_3_15() {
 
-        RString 福祉用具住宅改修サービス要支援計 = div.getPnlMain().getTbl1().getTextBox157().getValue();
-        RString 福祉用具住宅改修サービス要介護計 = div.getPnlMain().getTbl1().getTextBox164().getValue();
-        RString 福祉用具住宅改修サービス合計 = div.getPnlMain().getTbl1().getTextBox165().getValue();
+        Decimal 福祉用具住宅改修サービス要支援計 = div.getPnlMain().getTbl1().getTextBox157().getValue();
+        Decimal 福祉用具住宅改修サービス要介護計 = div.getPnlMain().getTbl1().getTextBox164().getValue();
+        Decimal 福祉用具住宅改修サービス合計 = div.getPnlMain().getTbl1().getTextBox165().getValue();
 
         return 入力チェック3(福祉用具住宅改修サービス要支援計, 福祉用具住宅改修サービス要介護計, 福祉用具住宅改修サービス合計);
     }
 
     private boolean is整合性チェック_NG_件数_3_16() {
 
-        RString 福祉用具貸与要支援計 = div.getPnlMain().getTbl1().getTextBox168().getValue();
-        RString 福祉用具貸与要介護計 = div.getPnlMain().getTbl1().getTextBox175().getValue();
-        RString 福祉用具貸与合計 = div.getPnlMain().getTbl1().getTextBox176().getValue();
+        Decimal 福祉用具貸与要支援計 = div.getPnlMain().getTbl1().getTextBox168().getValue();
+        Decimal 福祉用具貸与要介護計 = div.getPnlMain().getTbl1().getTextBox175().getValue();
+        Decimal 福祉用具貸与合計 = div.getPnlMain().getTbl1().getTextBox176().getValue();
 
         return 入力チェック3(福祉用具貸与要支援計, 福祉用具貸与要介護計, 福祉用具貸与合計);
     }
 
     private boolean is整合性チェック_NG_件数_3_17() {
 
-        RString 福祉用具購入費要支援計 = div.getPnlMain().getTbl1().getTextBox179().getValue();
-        RString 福祉用具購入費要介護計 = div.getPnlMain().getTbl1().getTextBox186().getValue();
-        RString 福祉用具購入費合計 = div.getPnlMain().getTbl1().getTextBox187().getValue();
+        Decimal 福祉用具購入費要支援計 = div.getPnlMain().getTbl1().getTextBox179().getValue();
+        Decimal 福祉用具購入費要介護計 = div.getPnlMain().getTbl1().getTextBox186().getValue();
+        Decimal 福祉用具購入費合計 = div.getPnlMain().getTbl1().getTextBox187().getValue();
 
         return 入力チェック3(福祉用具購入費要支援計, 福祉用具購入費要介護計, 福祉用具購入費合計);
     }
 
     private boolean is整合性チェック_NG_件数_3_18() {
 
-        RString 住宅改修費要支援計 = div.getPnlMain().getTbl1().getTextBox190().getValue();
-        RString 住宅改修費要介護計 = div.getPnlMain().getTbl1().getTextBox197().getValue();
-        RString 住宅改修費合計 = div.getPnlMain().getTbl1().getTextBox198().getValue();
+        Decimal 住宅改修費要支援計 = div.getPnlMain().getTbl1().getTextBox190().getValue();
+        Decimal 住宅改修費要介護計 = div.getPnlMain().getTbl1().getTextBox197().getValue();
+        Decimal 住宅改修費合計 = div.getPnlMain().getTbl1().getTextBox198().getValue();
 
         return 入力チェック3(住宅改修費要支援計, 住宅改修費要介護計, 住宅改修費合計);
     }
 
     private boolean is整合性チェック_NG_件数_3_19() {
 
-        RString 特定施設入居者生活介護要支援計 = div.getPnlMain().getTbl1().getTextBox201().getValue();
-        RString 特定施設入居者生活介護要介護計 = div.getPnlMain().getTbl1().getTextBox208().getValue();
-        RString 特定施設入居者生活介護合計 = div.getPnlMain().getTbl1().getTextBox209().getValue();
+        Decimal 特定施設入居者生活介護要支援計 = div.getPnlMain().getTbl1().getTextBox201().getValue();
+        Decimal 特定施設入居者生活介護要介護計 = div.getPnlMain().getTbl1().getTextBox208().getValue();
+        Decimal 特定施設入居者生活介護合計 = div.getPnlMain().getTbl1().getTextBox209().getValue();
 
         return 入力チェック3(特定施設入居者生活介護要支援計, 特定施設入居者生活介護要介護計, 特定施設入居者生活介護合計);
     }
 
     private boolean is整合性チェック_NG_件数_3_20() {
 
-        RString 介護予防支援居宅介護支援要支援計 = div.getPnlMain().getTbl1().getTextBox212().getValue();
-        RString 介護予防支援居宅介護支援要介護計 = div.getPnlMain().getTbl1().getTextBox219().getValue();
-        RString 介護予防支援居宅介護支援合計 = div.getPnlMain().getTbl1().getTextBox220().getValue();
+        Decimal 介護予防支援居宅介護支援要支援計 = div.getPnlMain().getTbl1().getTextBox212().getValue();
+        Decimal 介護予防支援居宅介護支援要介護計 = div.getPnlMain().getTbl1().getTextBox219().getValue();
+        Decimal 介護予防支援居宅介護支援合計 = div.getPnlMain().getTbl1().getTextBox220().getValue();
 
         return 入力チェック3(介護予防支援居宅介護支援要支援計, 介護予防支援居宅介護支援要介護計, 介護予防支援居宅介護支援合計);
     }
 
     private boolean is整合性チェック_NG_件数_3_21() {
 
-        RString 地域密着型介護予防サービス要支援計 = div.getPnlMain().getTbl1().getTextBox223().getValue();
-        RString 地域密着型介護予防サービス要介護計 = div.getPnlMain().getTbl1().getTextBox230().getValue();
-        RString 地域密着型介護予防サービス合計 = div.getPnlMain().getTbl1().getTextBox231().getValue();
+        Decimal 地域密着型介護予防サービス要支援計 = div.getPnlMain().getTbl1().getTextBox223().getValue();
+        Decimal 地域密着型介護予防サービス要介護計 = div.getPnlMain().getTbl1().getTextBox230().getValue();
+        Decimal 地域密着型介護予防サービス合計 = div.getPnlMain().getTbl1().getTextBox231().getValue();
 
-        return 入力チェック3(地域密着型介護予防サービス要支援計, 地域密着型介護予防サービス要介護計, 地域密着型介護予防サービス合計);
+        return 入力チェック3(地域密着型介護予防サービス要支援計,
+                地域密着型介護予防サービス要介護計, 地域密着型介護予防サービス合計);
     }
 
     private boolean is整合性チェック_NG_件数_3_22() {
 
-        RString 定期巡回随時対応型訪問介護看護要支援計 = div.getPnlMain().getTbl1().getTextBox234().getValue();
-        RString 定期巡回随時対応型訪問介護看護要介護計 = div.getPnlMain().getTbl1().getTextBox240().getValue();
-        RString 定期巡回随時対応型訪問介護看護合計 = div.getPnlMain().getTbl1().getTextBox241().getValue();
+        Decimal 定期巡回随時対応型訪問介護看護要支援計 = div.getPnlMain().getTbl1().getTextBox234().getValue();
+        Decimal 定期巡回随時対応型訪問介護看護要介護計 = div.getPnlMain().getTbl1().getTextBox240().getValue();
+        Decimal 定期巡回随時対応型訪問介護看護合計 = div.getPnlMain().getTbl1().getTextBox241().getValue();
 
-        return 入力チェック3(定期巡回随時対応型訪問介護看護要支援計, 定期巡回随時対応型訪問介護看護要介護計, 定期巡回随時対応型訪問介護看護合計);
+        return 入力チェック3(定期巡回随時対応型訪問介護看護要支援計,
+                定期巡回随時対応型訪問介護看護要介護計, 定期巡回随時対応型訪問介護看護合計);
     }
 
     private boolean is整合性チェック_NG_件数_3_23() {
 
-        RString 夜間対応型訪問介護要支援計 = div.getPnlMain().getTbl1().getTextBox244().getValue();
-        RString 夜間対応型訪問介護要介護計 = div.getPnlMain().getTbl1().getTextBox250().getValue();
-        RString 夜間対応型訪問介護合計 = div.getPnlMain().getTbl1().getTextBox251().getValue();
+        Decimal 夜間対応型訪問介護要支援計 = div.getPnlMain().getTbl1().getTextBox244().getValue();
+        Decimal 夜間対応型訪問介護要介護計 = div.getPnlMain().getTbl1().getTextBox250().getValue();
+        Decimal 夜間対応型訪問介護合計 = div.getPnlMain().getTbl1().getTextBox251().getValue();
 
         return 入力チェック3(夜間対応型訪問介護要支援計, 夜間対応型訪問介護要介護計, 夜間対応型訪問介護合計);
     }
 
     private boolean is整合性チェック_NG_件数_3_24() {
 
-        RString 認知症対応型通所介護要支援計 = div.getPnlMain().getTbl1().getTextBox254().getValue();
-        RString 認知症対応型通所介護要介護計 = div.getPnlMain().getTbl1().getTextBox261().getValue();
-        RString 認知症対応型通所介護合計 = div.getPnlMain().getTbl1().getTextBox262().getValue();
+        Decimal 認知症対応型通所介護要支援計 = div.getPnlMain().getTbl1().getTextBox254().getValue();
+        Decimal 認知症対応型通所介護要介護計 = div.getPnlMain().getTbl1().getTextBox261().getValue();
+        Decimal 認知症対応型通所介護合計 = div.getPnlMain().getTbl1().getTextBox262().getValue();
 
         return 入力チェック3(認知症対応型通所介護要支援計, 認知症対応型通所介護要介護計, 認知症対応型通所介護合計);
     }
 
     private boolean is整合性チェック_NG_件数_3_25() {
 
-        RString 小規模多機能型居宅介護要支援計 = div.getPnlMain().getTbl1().getTextBox265().getValue();
-        RString 小規模多機能型居宅介護要介護計 = div.getPnlMain().getTbl1().getTextBox272().getValue();
-        RString 小規模多機能型居宅介護合計 = div.getPnlMain().getTbl1().getTextBox273().getValue();
+        Decimal 小規模多機能型居宅介護要支援計 = div.getPnlMain().getTbl1().getTextBox265().getValue();
+        Decimal 小規模多機能型居宅介護要介護計 = div.getPnlMain().getTbl1().getTextBox272().getValue();
+        Decimal 小規模多機能型居宅介護合計 = div.getPnlMain().getTbl1().getTextBox273().getValue();
 
         return 入力チェック3(小規模多機能型居宅介護要支援計, 小規模多機能型居宅介護要介護計, 小規模多機能型居宅介護合計);
     }
 
     private boolean is整合性チェック_NG_件数_3_26() {
 
-        RString 認知症対応型共同生活介護要支援計 = div.getPnlMain().getTbl1().getTextBox276().getValue();
-        RString 認知症対応型共同生活介護要介護計 = div.getPnlMain().getTbl1().getTextBox282().getValue();
-        RString 認知症対応型共同生活介護合計 = div.getPnlMain().getTbl1().getTextBox283().getValue();
+        Decimal 認知症対応型共同生活介護要支援計 = div.getPnlMain().getTbl1().getTextBox276().getValue();
+        Decimal 認知症対応型共同生活介護要介護計 = div.getPnlMain().getTbl1().getTextBox282().getValue();
+        Decimal 認知症対応型共同生活介護合計 = div.getPnlMain().getTbl1().getTextBox283().getValue();
 
         return 入力チェック3(認知症対応型共同生活介護要支援計, 認知症対応型共同生活介護要介護計, 認知症対応型共同生活介護合計);
     }
 
     private boolean is整合性チェック_NG_件数_3_27() {
 
-        RString 地域密着型特定施設入居者生活介護要支援計 = div.getPnlMain().getTbl1().getTextBox286().getValue();
-        RString 地域密着型特定施設入居者生活介護要介護計 = div.getPnlMain().getTbl1().getTextBox292().getValue();
-        RString 地域密着型特定施設入居者生活介護合計 = div.getPnlMain().getTbl1().getTextBox293().getValue();
+        Decimal 地域密着型特定施設入居者生活介護要支援計 = div.getPnlMain().getTbl1().getTextBox286().getValue();
+        Decimal 地域密着型特定施設入居者生活介護要介護計 = div.getPnlMain().getTbl1().getTextBox292().getValue();
+        Decimal 地域密着型特定施設入居者生活介護合計 = div.getPnlMain().getTbl1().getTextBox293().getValue();
 
-        return 入力チェック3(地域密着型特定施設入居者生活介護要支援計, 地域密着型特定施設入居者生活介護要介護計, 地域密着型特定施設入居者生活介護合計);
+        return 入力チェック3(地域密着型特定施設入居者生活介護要支援計,
+                地域密着型特定施設入居者生活介護要介護計, 地域密着型特定施設入居者生活介護合計);
     }
 
     private boolean is整合性チェック_NG_件数_3_28() {
 
-        RString 地域密着型介護老人福祉施設入所者生活介護要支援計 = div.getPnlMain().getTbl1().getTextBox296().getValue();
-        RString 地域密着型介護老人福祉施設入所者生活介護要介護計 = div.getPnlMain().getTbl1().getTextBox302().getValue();
-        RString 地域密着型介護老人福祉施設入所者生活介護合計 = div.getPnlMain().getTbl1().getTextBox303().getValue();
+        Decimal 地域密着型介護老人福祉施設入所者生活介護要支援計 = div.getPnlMain().getTbl1().getTextBox296().getValue();
+        Decimal 地域密着型介護老人福祉施設入所者生活介護要介護計 = div.getPnlMain().getTbl1().getTextBox302().getValue();
+        Decimal 地域密着型介護老人福祉施設入所者生活介護合計 = div.getPnlMain().getTbl1().getTextBox303().getValue();
 
         return 入力チェック3(地域密着型介護老人福祉施設入所者生活介護要支援計, 地域密着型介護老人福祉施設入所者生活介護要介護計,
                 地域密着型介護老人福祉施設入所者生活介護合計);
@@ -390,90 +396,90 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuDataHandler {
 
     private boolean is整合性チェック_NG_件数_3_29() {
 
-        RString 複合型サービス要支援計 = div.getPnlMain().getTbl1().getTextBox306().getValue();
-        RString 複合型サービス要介護計 = div.getPnlMain().getTbl1().getTextBox312().getValue();
-        RString 複合型サービス合計 = div.getPnlMain().getTbl1().getTextBox313().getValue();
+        Decimal 複合型サービス要支援計 = div.getPnlMain().getTbl1().getTextBox306().getValue();
+        Decimal 複合型サービス要介護計 = div.getPnlMain().getTbl1().getTextBox312().getValue();
+        Decimal 複合型サービス合計 = div.getPnlMain().getTbl1().getTextBox313().getValue();
 
         return 入力チェック3(複合型サービス要支援計, 複合型サービス要介護計, 複合型サービス合計);
     }
 
     private boolean is整合性チェック_NG_件数_3_30() {
 
-        RString 施設サービス要支援計 = div.getPnlMain().getTbl1().getTextBox316().getValue();
-        RString 施設サービス要介護計 = div.getPnlMain().getTbl1().getTextBox323().getValue();
-        RString 施設サービス合計 = div.getPnlMain().getTbl1().getTextBox324().getValue();
+        Decimal 施設サービス要支援計 = div.getPnlMain().getTbl1().getTextBox316().getValue();
+        Decimal 施設サービス要介護計 = div.getPnlMain().getTbl1().getTextBox323().getValue();
+        Decimal 施設サービス合計 = div.getPnlMain().getTbl1().getTextBox324().getValue();
 
         return 入力チェック3(施設サービス要支援計, 施設サービス要介護計, 施設サービス合計);
     }
 
     private boolean is整合性チェック_NG_件数_3_31() {
 
-        RString 介護老人福祉施設_1_要支援計 = div.getPnlMain().getTbl1().getTextBox327().getValue();
-        RString 介護老人福祉施設_1_要介護計 = div.getPnlMain().getTbl1().getTextBox334().getValue();
-        RString 介護老人福祉施設_1_合計 = div.getPnlMain().getTbl1().getTextBox335().getValue();
+        Decimal 介護老人福祉施設_1_要支援計 = div.getPnlMain().getTbl1().getTextBox327().getValue();
+        Decimal 介護老人福祉施設_1_要介護計 = div.getPnlMain().getTbl1().getTextBox334().getValue();
+        Decimal 介護老人福祉施設_1_合計 = div.getPnlMain().getTbl1().getTextBox335().getValue();
 
         return 入力チェック3(介護老人福祉施設_1_要支援計, 介護老人福祉施設_1_要介護計, 介護老人福祉施設_1_合計);
     }
 
     private boolean is整合性チェック_NG_件数_3_32() {
 
-        RString 介護老人保健施設_1_要支援計 = div.getPnlMain().getTbl1().getTextBox338().getValue();
-        RString 介護老人保健施設_1_要介護計 = div.getPnlMain().getTbl1().getTextBox344().getValue();
-        RString 介護老人保健施設_1_合計 = div.getPnlMain().getTbl1().getTextBox345().getValue();
+        Decimal 介護老人保健施設_1_要支援計 = div.getPnlMain().getTbl1().getTextBox338().getValue();
+        Decimal 介護老人保健施設_1_要介護計 = div.getPnlMain().getTbl1().getTextBox344().getValue();
+        Decimal 介護老人保健施設_1_合計 = div.getPnlMain().getTbl1().getTextBox345().getValue();
 
         return 入力チェック3(介護老人保健施設_1_要支援計, 介護老人保健施設_1_要介護計, 介護老人保健施設_1_合計);
     }
 
     private boolean is整合性チェック_NG_件数_3_33() {
 
-        RString 介護療養型医療施設要支援計 = div.getPnlMain().getTbl1().getTextBox348().getValue();
-        RString 介護療養型医療施設要介護計 = div.getPnlMain().getTbl1().getTextBox354().getValue();
-        RString 介護療養型医療施設合計 = div.getPnlMain().getTbl1().getTextBox355().getValue();
+        Decimal 介護療養型医療施設要支援計 = div.getPnlMain().getTbl1().getTextBox348().getValue();
+        Decimal 介護療養型医療施設要介護計 = div.getPnlMain().getTbl1().getTextBox354().getValue();
+        Decimal 介護療養型医療施設合計 = div.getPnlMain().getTbl1().getTextBox355().getValue();
 
         return 入力チェック3(介護療養型医療施設要支援計, 介護療養型医療施設要介護計, 介護療養型医療施設合計);
     }
 
     private boolean is整合性チェック_NG_件数_3_34() {
 
-        RString 食事提供費用再掲要支援計 = div.getPnlMain().getTbl1().getTextBox358().getValue();
-        RString 食事提供費用再掲要介護計 = div.getPnlMain().getTbl1().getTextBox365().getValue();
-        RString 食事提供費用再掲合計 = div.getPnlMain().getTbl1().getTextBox366().getValue();
+        Decimal 食事提供費用再掲要支援計 = div.getPnlMain().getTbl1().getTextBox358().getValue();
+        Decimal 食事提供費用再掲要介護計 = div.getPnlMain().getTbl1().getTextBox365().getValue();
+        Decimal 食事提供費用再掲合計 = div.getPnlMain().getTbl1().getTextBox366().getValue();
 
         return 入力チェック3(食事提供費用再掲要支援計, 食事提供費用再掲要介護計, 食事提供費用再掲合計);
     }
 
     private boolean is整合性チェック_NG_件数_3_35() {
 
-        RString 介護老人福祉施設_2_要支援計 = div.getPnlMain().getTbl1().getTextBox369().getValue();
-        RString 介護老人福祉施設_2_要介護計 = div.getPnlMain().getTbl1().getTextBox376().getValue();
-        RString 介護老人福祉施設_2_合計 = div.getPnlMain().getTbl1().getTextBox377().getValue();
+        Decimal 介護老人福祉施設_2_要支援計 = div.getPnlMain().getTbl1().getTextBox369().getValue();
+        Decimal 介護老人福祉施設_2_要介護計 = div.getPnlMain().getTbl1().getTextBox376().getValue();
+        Decimal 介護老人福祉施設_2_合計 = div.getPnlMain().getTbl1().getTextBox377().getValue();
 
         return 入力チェック3(介護老人福祉施設_2_要支援計, 介護老人福祉施設_2_要介護計, 介護老人福祉施設_2_合計);
     }
 
     private boolean is整合性チェック_NG_件数_3_36() {
 
-        RString 介護老人保健施設_2_要支援計 = div.getPnlMain().getTbl1().getTextBox380().getValue();
-        RString 介護老人保健施設_2_要介護計 = div.getPnlMain().getTbl1().getTextBox386().getValue();
-        RString 介護老人保健施設_2_合計 = div.getPnlMain().getTbl1().getTextBox387().getValue();
+        Decimal 介護老人保健施設_2_要支援計 = div.getPnlMain().getTbl1().getTextBox380().getValue();
+        Decimal 介護老人保健施設_2_要介護計 = div.getPnlMain().getTbl1().getTextBox386().getValue();
+        Decimal 介護老人保健施設_2_合計 = div.getPnlMain().getTbl1().getTextBox387().getValue();
 
         return 入力チェック3(介護老人保健施設_2_要支援計, 介護老人保健施設_2_要介護計, 介護老人保健施設_2_合計);
     }
 
     private boolean is整合性チェック_NG_件数_3_37() {
 
-        RString 介護療養型医療施設要支援計 = div.getPnlMain().getTbl1().getTextBox390().getValue();
-        RString 介護療養型医療施設要介護計 = div.getPnlMain().getTbl1().getTextBox396().getValue();
-        RString 介護療養型医療施設合計 = div.getPnlMain().getTbl1().getTextBox397().getValue();
+        Decimal 介護療養型医療施設要支援計 = div.getPnlMain().getTbl1().getTextBox390().getValue();
+        Decimal 介護療養型医療施設要介護計 = div.getPnlMain().getTbl1().getTextBox396().getValue();
+        Decimal 介護療養型医療施設合計 = div.getPnlMain().getTbl1().getTextBox397().getValue();
 
         return 入力チェック3(介護療養型医療施設要支援計, 介護療養型医療施設要介護計, 介護療養型医療施設合計);
     }
 
     private boolean is整合性チェック_NG_件数_3_38() {
 
-        RString 総計要支援計 = div.getPnlMain().getTbl1().getTextBox400().getValue();
-        RString 総計要介護計 = div.getPnlMain().getTbl1().getTextBox408().getValue();
-        RString 総計合計 = div.getPnlMain().getTbl1().getTextBox409().getValue();
+        Decimal 総計要支援計 = div.getPnlMain().getTbl1().getTextBox400().getValue();
+        Decimal 総計要介護計 = div.getPnlMain().getTbl1().getTextBox408().getValue();
+        Decimal 総計合計 = div.getPnlMain().getTbl1().getTextBox409().getValue();
 
         return 入力チェック3(総計要支援計, 総計要介護計, 総計合計);
     }
@@ -485,151 +491,161 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuDataHandler {
      */
     public boolean is整合性チェック_単位数_NG3() {
 
-        return is整合性チェック_NG_単位数_整合3_1() || is整合性チェック_NG_単位数_整合3_2() || is整合性チェック_NG_単位数_整合3_3();
+        return is整合性チェック_NG_単位数_整合3_1() || is整合性チェック_NG_単位数_整合3_2()
+                || is整合性チェック_NG_単位数_整合3_3();
     }
 
     private boolean is整合性チェック_NG_単位数_整合3_1() {
-        return is整合性チェック_NG_単位数_3_1() || is整合性チェック_NG_単位数_3_2() || is整合性チェック_NG_単位数_3_3() || is整合性チェック_NG_単位数_3_4()
-                || is整合性チェック_NG_単位数_3_5() || is整合性チェック_NG_単位数_3_6() || is整合性チェック_NG_単位数_3_7() || is整合性チェック_NG_単位数_3_8()
-                || is整合性チェック_NG_単位数_3_9() || is整合性チェック_NG_単位数_3_10() || is整合性チェック_NG_単位数_3_11() || is整合性チェック_NG_単位数_3_12()
+        return is整合性チェック_NG_単位数_3_1() || is整合性チェック_NG_単位数_3_2()
+                || is整合性チェック_NG_単位数_3_3() || is整合性チェック_NG_単位数_3_4()
+                || is整合性チェック_NG_単位数_3_5() || is整合性チェック_NG_単位数_3_6()
+                || is整合性チェック_NG_単位数_3_7() || is整合性チェック_NG_単位数_3_8()
+                || is整合性チェック_NG_単位数_3_9() || is整合性チェック_NG_単位数_3_10()
+                || is整合性チェック_NG_単位数_3_11() || is整合性チェック_NG_単位数_3_12()
                 || is整合性チェック_NG_単位数_3_13();
     }
 
     private boolean is整合性チェック_NG_単位数_整合3_2() {
-        return is整合性チェック_NG_単位数_3_14() || is整合性チェック_NG_単位数_3_15() || is整合性チェック_NG_単位数_3_16()
-                || is整合性チェック_NG_単位数_3_19() || is整合性チェック_NG_単位数_3_20() || is整合性チェック_NG_単位数_3_21()
-                || is整合性チェック_NG_単位数_3_22() || is整合性チェック_NG_単位数_3_23() || is整合性チェック_NG_単位数_3_24()
-                || is整合性チェック_NG_単位数_3_25() || is整合性チェック_NG_単位数_3_26();
+        return is整合性チェック_NG_単位数_3_14() || is整合性チェック_NG_単位数_3_15()
+                || is整合性チェック_NG_単位数_3_16() || is整合性チェック_NG_単位数_3_19()
+                || is整合性チェック_NG_単位数_3_20() || is整合性チェック_NG_単位数_3_21()
+                || is整合性チェック_NG_単位数_3_22() || is整合性チェック_NG_単位数_3_23()
+                || is整合性チェック_NG_単位数_3_24() || is整合性チェック_NG_単位数_3_25()
+                || is整合性チェック_NG_単位数_3_26();
     }
 
     private boolean is整合性チェック_NG_単位数_整合3_3() {
-        return is整合性チェック_NG_単位数_3_27() || is整合性チェック_NG_単位数_3_28() || is整合性チェック_NG_単位数_3_29() || is整合性チェック_NG_単位数_3_30()
-                || is整合性チェック_NG_単位数_3_31() || is整合性チェック_NG_単位数_3_32() || is整合性チェック_NG_単位数_3_33() || is整合性チェック_NG_単位数_3_34()
-                || is整合性チェック_NG_単位数_3_35() || is整合性チェック_NG_単位数_3_36() || is整合性チェック_NG_単位数_3_37() || is整合性チェック_NG_単位数_3_38();
+        return is整合性チェック_NG_単位数_3_27() || is整合性チェック_NG_単位数_3_28()
+                || is整合性チェック_NG_単位数_3_29() || is整合性チェック_NG_単位数_3_30()
+                || is整合性チェック_NG_単位数_3_31() || is整合性チェック_NG_単位数_3_32()
+                || is整合性チェック_NG_単位数_3_33() || is整合性チェック_NG_単位数_3_34()
+                || is整合性チェック_NG_単位数_3_35() || is整合性チェック_NG_単位数_3_36()
+                || is整合性チェック_NG_単位数_3_37() || is整合性チェック_NG_単位数_3_38();
     }
 
     private boolean is整合性チェック_NG_単位数_3_1() {
 
-        RString 居宅介護予防サービス要支援計 = div.getPnlMain().getTbl2().getTextBox412().getValue();
-        RString 居宅介護予防サービス要介護計 = div.getPnlMain().getTbl2().getTextBox419().getValue();
-        RString 居宅介護予防サービス合計 = div.getPnlMain().getTbl2().getTextBox420().getValue();
+        Decimal 居宅介護予防サービス要支援計 = div.getPnlMain().getTbl2().getTextBox412().getValue();
+        Decimal 居宅介護予防サービス要介護計 = div.getPnlMain().getTbl2().getTextBox419().getValue();
+        Decimal 居宅介護予防サービス合計 = div.getPnlMain().getTbl2().getTextBox420().getValue();
 
         return 入力チェック3(居宅介護予防サービス要支援計, 居宅介護予防サービス要介護計, 居宅介護予防サービス合計);
     }
 
     private boolean is整合性チェック_NG_単位数_3_2() {
 
-        RString 訪問サービス要支援計 = div.getPnlMain().getTbl2().getTextBox423().getValue();
-        RString 訪問サービス要介護計 = div.getPnlMain().getTbl2().getTextBox430().getValue();
-        RString 訪問サービス合計 = div.getPnlMain().getTbl2().getTextBox431().getValue();
+        Decimal 訪問サービス要支援計 = div.getPnlMain().getTbl2().getTextBox423().getValue();
+        Decimal 訪問サービス要介護計 = div.getPnlMain().getTbl2().getTextBox430().getValue();
+        Decimal 訪問サービス合計 = div.getPnlMain().getTbl2().getTextBox431().getValue();
 
         return 入力チェック3(訪問サービス要支援計, 訪問サービス要介護計, 訪問サービス合計);
     }
 
     private boolean is整合性チェック_NG_単位数_3_3() {
 
-        RString 訪問介護要支援計 = div.getPnlMain().getTbl2().getTextBox434().getValue();
-        RString 訪問介護要介護計 = div.getPnlMain().getTbl2().getTextBox441().getValue();
-        RString 訪問介護合計 = div.getPnlMain().getTbl2().getTextBox442().getValue();
+        Decimal 訪問介護要支援計 = div.getPnlMain().getTbl2().getTextBox434().getValue();
+        Decimal 訪問介護要介護計 = div.getPnlMain().getTbl2().getTextBox441().getValue();
+        Decimal 訪問介護合計 = div.getPnlMain().getTbl2().getTextBox442().getValue();
 
         return 入力チェック3(訪問介護要支援計, 訪問介護要介護計, 訪問介護合計);
     }
 
     private boolean is整合性チェック_NG_単位数_3_4() {
 
-        RString 訪問入浴介護要支援計 = div.getPnlMain().getTbl2().getTextBox445().getValue();
-        RString 訪問入浴介護要介護計 = div.getPnlMain().getTbl2().getTextBox452().getValue();
-        RString 訪問入浴介護合計 = div.getPnlMain().getTbl2().getTextBox453().getValue();
+        Decimal 訪問入浴介護要支援計 = div.getPnlMain().getTbl2().getTextBox445().getValue();
+        Decimal 訪問入浴介護要介護計 = div.getPnlMain().getTbl2().getTextBox452().getValue();
+        Decimal 訪問入浴介護合計 = div.getPnlMain().getTbl2().getTextBox453().getValue();
 
         return 入力チェック3(訪問入浴介護要支援計, 訪問入浴介護要介護計, 訪問入浴介護合計);
     }
 
     private boolean is整合性チェック_NG_単位数_3_5() {
 
-        RString 訪問看護要支援計 = div.getPnlMain().getTbl2().getTextBox456().getValue();
-        RString 訪問看護要介護計 = div.getPnlMain().getTbl2().getTextBox463().getValue();
-        RString 訪問看護要合計 = div.getPnlMain().getTbl2().getTextBox464().getValue();
+        Decimal 訪問看護要支援計 = div.getPnlMain().getTbl2().getTextBox456().getValue();
+        Decimal 訪問看護要介護計 = div.getPnlMain().getTbl2().getTextBox463().getValue();
+        Decimal 訪問看護要合計 = div.getPnlMain().getTbl2().getTextBox464().getValue();
 
         return 入力チェック3(訪問看護要支援計, 訪問看護要介護計, 訪問看護要合計);
     }
 
     private boolean is整合性チェック_NG_単位数_3_6() {
 
-        RString 訪問リハビリテーション要支援計 = div.getPnlMain().getTbl2().getTextBox467().getValue();
-        RString 訪問リハビリテーション要介護計 = div.getPnlMain().getTbl2().getTextBox474().getValue();
-        RString 訪問リハビリテーション合計 = div.getPnlMain().getTbl2().getTextBox475().getValue();
+        Decimal 訪問リハビリテーション要支援計 = div.getPnlMain().getTbl2().getTextBox467().getValue();
+        Decimal 訪問リハビリテーション要介護計 = div.getPnlMain().getTbl2().getTextBox474().getValue();
+        Decimal 訪問リハビリテーション合計 = div.getPnlMain().getTbl2().getTextBox475().getValue();
 
         return 入力チェック3(訪問リハビリテーション要支援計, 訪問リハビリテーション要介護計, 訪問リハビリテーション合計);
     }
 
     private boolean is整合性チェック_NG_単位数_3_7() {
 
-        RString 居宅療養管理指導要支援計 = div.getPnlMain().getTbl2().getTextBox478().getValue();
-        RString 居宅療養管理指導要介護計 = div.getPnlMain().getTbl2().getTextBox485().getValue();
-        RString 居宅療養管理指導合計 = div.getPnlMain().getTbl2().getTextBox486().getValue();
+        Decimal 居宅療養管理指導要支援計 = div.getPnlMain().getTbl2().getTextBox478().getValue();
+        Decimal 居宅療養管理指導要介護計 = div.getPnlMain().getTbl2().getTextBox485().getValue();
+        Decimal 居宅療養管理指導合計 = div.getPnlMain().getTbl2().getTextBox486().getValue();
 
         return 入力チェック3(居宅療養管理指導要支援計, 居宅療養管理指導要介護計, 居宅療養管理指導合計);
     }
 
     private boolean is整合性チェック_NG_単位数_3_8() {
 
-        RString 通所サービス要支援計 = div.getPnlMain().getTbl2().getTextBox489().getValue();
-        RString 通所サービス要介護計 = div.getPnlMain().getTbl2().getTextBox496().getValue();
-        RString 通所サービス要合計 = div.getPnlMain().getTbl2().getTextBox497().getValue();
+        Decimal 通所サービス要支援計 = div.getPnlMain().getTbl2().getTextBox489().getValue();
+        Decimal 通所サービス要介護計 = div.getPnlMain().getTbl2().getTextBox496().getValue();
+        Decimal 通所サービス要合計 = div.getPnlMain().getTbl2().getTextBox497().getValue();
 
         return 入力チェック3(通所サービス要支援計, 通所サービス要介護計, 通所サービス要合計);
     }
 
     private boolean is整合性チェック_NG_単位数_3_9() {
 
-        RString 通所介護要支援計 = div.getPnlMain().getTbl2().getTextBox500().getValue();
-        RString 通所介護要介護計 = div.getPnlMain().getTbl2().getTextBox507().getValue();
-        RString 通所介護合計 = div.getPnlMain().getTbl2().getTextBox508().getValue();
+        Decimal 通所介護要支援計 = div.getPnlMain().getTbl2().getTextBox500().getValue();
+        Decimal 通所介護要介護計 = div.getPnlMain().getTbl2().getTextBox507().getValue();
+        Decimal 通所介護合計 = div.getPnlMain().getTbl2().getTextBox508().getValue();
 
         return 入力チェック3(通所介護要支援計, 通所介護要介護計, 通所介護合計);
     }
 
     private boolean is整合性チェック_NG_単位数_3_10() {
 
-        RString 通所リハビリテーション要支援計 = div.getPnlMain().getTbl2().getTextBox511().getValue();
-        RString 通所リハビリテーション要介護計 = div.getPnlMain().getTbl2().getTextBox518().getValue();
-        RString 通所リハビリテーション合計 = div.getPnlMain().getTbl2().getTextBox519().getValue();
+        Decimal 通所リハビリテーション要支援計 = div.getPnlMain().getTbl2().getTextBox511().getValue();
+        Decimal 通所リハビリテーション要介護計 = div.getPnlMain().getTbl2().getTextBox518().getValue();
+        Decimal 通所リハビリテーション合計 = div.getPnlMain().getTbl2().getTextBox519().getValue();
 
         return 入力チェック3(通所リハビリテーション要支援計, 通所リハビリテーション要介護計, 通所リハビリテーション合計);
     }
 
     private boolean is整合性チェック_NG_単位数_3_11() {
 
-        RString 短期入所サービス要支援計 = div.getPnlMain().getTbl2().getTextBox522().getValue();
-        RString 短期入所サービス要介護計 = div.getPnlMain().getTbl2().getTextBox529().getValue();
-        RString 短期入所サービス合計 = div.getPnlMain().getTbl2().getTextBox530().getValue();
+        Decimal 短期入所サービス要支援計 = div.getPnlMain().getTbl2().getTextBox522().getValue();
+        Decimal 短期入所サービス要介護計 = div.getPnlMain().getTbl2().getTextBox529().getValue();
+        Decimal 短期入所サービス合計 = div.getPnlMain().getTbl2().getTextBox530().getValue();
 
         return 入力チェック3(短期入所サービス要支援計, 短期入所サービス要介護計, 短期入所サービス合計);
     }
 
     private boolean is整合性チェック_NG_単位数_3_12() {
 
-        RString 短期入所生活介護要支援計 = div.getPnlMain().getTbl2().getTextBox533().getValue();
-        RString 短期入所生活介護要介護計 = div.getPnlMain().getTbl2().getTextBox540().getValue();
-        RString 短期入所生活介護合計 = div.getPnlMain().getTbl2().getTextBox541().getValue();
+        Decimal 短期入所生活介護要支援計 = div.getPnlMain().getTbl2().getTextBox533().getValue();
+        Decimal 短期入所生活介護要介護計 = div.getPnlMain().getTbl2().getTextBox540().getValue();
+        Decimal 短期入所生活介護合計 = div.getPnlMain().getTbl2().getTextBox541().getValue();
 
         return 入力チェック3(短期入所生活介護要支援計, 短期入所生活介護要介護計, 短期入所生活介護合計);
     }
 
     private boolean is整合性チェック_NG_単位数_3_13() {
 
-        RString 短期入所療養介護介護老人保健施設要支援計 = div.getPnlMain().getTbl2().getTextBox544().getValue();
-        RString 短期入所療養介護介護老人保健施設要介護計 = div.getPnlMain().getTbl2().getTextBox551().getValue();
-        RString 短期入所療養介護介護老人保健施設合計 = div.getPnlMain().getTbl2().getTextBox552().getValue();
+        Decimal 短期入所療養介護介護老人保健施設要支援計 = div.getPnlMain().getTbl2().getTextBox544().getValue();
+        Decimal 短期入所療養介護介護老人保健施設要介護計 = div.getPnlMain().getTbl2().getTextBox551().getValue();
+        Decimal 短期入所療養介護介護老人保健施設合計 = div.getPnlMain().getTbl2().getTextBox552().getValue();
 
-        return 入力チェック3(短期入所療養介護介護老人保健施設要支援計, 短期入所療養介護介護老人保健施設要介護計, 短期入所療養介護介護老人保健施設合計);
+        return 入力チェック3(短期入所療養介護介護老人保健施設要支援計,
+                短期入所療養介護介護老人保健施設要介護計, 短期入所療養介護介護老人保健施設合計);
     }
 
     private boolean is整合性チェック_NG_単位数_3_14() {
 
-        RString 短期入所療養介護介護療養型医療施設等要支援計 = div.getPnlMain().getTbl2().getTextBox555().getValue();
-        RString 短期入所療養介護介護療養型医療施設等要介護計 = div.getPnlMain().getTbl2().getTextBox562().getValue();
-        RString 短期入所療養介護介護療養型医療施設等合計 = div.getPnlMain().getTbl2().getTextBox563().getValue();
+        Decimal 短期入所療養介護介護療養型医療施設等要支援計 = div.getPnlMain().getTbl2().getTextBox555().getValue();
+        Decimal 短期入所療養介護介護療養型医療施設等要介護計 = div.getPnlMain().getTbl2().getTextBox562().getValue();
+        Decimal 短期入所療養介護介護療養型医療施設等合計 = div.getPnlMain().getTbl2().getTextBox563().getValue();
 
         return 入力チェック3(短期入所療養介護介護療養型医療施設等要支援計, 短期入所療養介護介護療養型医療施設等要介護計,
                 短期入所療養介護介護療養型医療施設等合計);
@@ -637,108 +653,111 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuDataHandler {
 
     private boolean is整合性チェック_NG_単位数_3_15() {
 
-        RString 福祉用具住宅改修サービス要支援計 = div.getPnlMain().getTbl2().getTextBox566().getValue();
-        RString 福祉用具住宅改修サービス要介護計 = div.getPnlMain().getTbl2().getTextBox573().getValue();
-        RString 福祉用具住宅改修サービス合計 = div.getPnlMain().getTbl2().getTextBox574().getValue();
+        Decimal 福祉用具住宅改修サービス要支援計 = div.getPnlMain().getTbl2().getTextBox566().getValue();
+        Decimal 福祉用具住宅改修サービス要介護計 = div.getPnlMain().getTbl2().getTextBox573().getValue();
+        Decimal 福祉用具住宅改修サービス合計 = div.getPnlMain().getTbl2().getTextBox574().getValue();
 
         return 入力チェック3(福祉用具住宅改修サービス要支援計, 福祉用具住宅改修サービス要介護計, 福祉用具住宅改修サービス合計);
     }
 
     private boolean is整合性チェック_NG_単位数_3_16() {
 
-        RString 福祉用具貸与要支援計 = div.getPnlMain().getTbl2().getTextBox577().getValue();
-        RString 福祉用具貸与要介護計 = div.getPnlMain().getTbl2().getTextBox584().getValue();
-        RString 福祉用具貸与合計 = div.getPnlMain().getTbl2().getTextBox585().getValue();
+        Decimal 福祉用具貸与要支援計 = div.getPnlMain().getTbl2().getTextBox577().getValue();
+        Decimal 福祉用具貸与要介護計 = div.getPnlMain().getTbl2().getTextBox584().getValue();
+        Decimal 福祉用具貸与合計 = div.getPnlMain().getTbl2().getTextBox585().getValue();
 
         return 入力チェック3(福祉用具貸与要支援計, 福祉用具貸与要介護計, 福祉用具貸与合計);
     }
 
     private boolean is整合性チェック_NG_単位数_3_19() {
 
-        RString 特定施設入居者生活介護要支援計 = div.getPnlMain().getTbl2().getTextBox610().getValue();
-        RString 特定施設入居者生活介護要介護計 = div.getPnlMain().getTbl2().getTextBox617().getValue();
-        RString 特定施設入居者生活介護合計 = div.getPnlMain().getTbl2().getTextBox618().getValue();
+        Decimal 特定施設入居者生活介護要支援計 = div.getPnlMain().getTbl2().getTextBox610().getValue();
+        Decimal 特定施設入居者生活介護要介護計 = div.getPnlMain().getTbl2().getTextBox617().getValue();
+        Decimal 特定施設入居者生活介護合計 = div.getPnlMain().getTbl2().getTextBox618().getValue();
 
         return 入力チェック3(特定施設入居者生活介護要支援計, 特定施設入居者生活介護要介護計, 特定施設入居者生活介護合計);
     }
 
     private boolean is整合性チェック_NG_単位数_3_20() {
 
-        RString 介護予防支援居宅介護支援要支援計 = div.getPnlMain().getTbl2().getTextBox621().getValue();
-        RString 介護予防支援居宅介護支援要介護計 = div.getPnlMain().getTbl2().getTextBox628().getValue();
-        RString 介護予防支援居宅介護支援合計 = div.getPnlMain().getTbl2().getTextBox629().getValue();
+        Decimal 介護予防支援居宅介護支援要支援計 = div.getPnlMain().getTbl2().getTextBox621().getValue();
+        Decimal 介護予防支援居宅介護支援要介護計 = div.getPnlMain().getTbl2().getTextBox628().getValue();
+        Decimal 介護予防支援居宅介護支援合計 = div.getPnlMain().getTbl2().getTextBox629().getValue();
 
         return 入力チェック3(介護予防支援居宅介護支援要支援計, 介護予防支援居宅介護支援要介護計, 介護予防支援居宅介護支援合計);
     }
 
     private boolean is整合性チェック_NG_単位数_3_21() {
 
-        RString 地域密着型介護予防サービス要支援計 = div.getPnlMain().getTbl2().getTextBox632().getValue();
-        RString 地域密着型介護予防サービス要介護計 = div.getPnlMain().getTbl2().getTextBox639().getValue();
-        RString 地域密着型介護予防サービス合計 = div.getPnlMain().getTbl2().getTextBox640().getValue();
+        Decimal 地域密着型介護予防サービス要支援計 = div.getPnlMain().getTbl2().getTextBox632().getValue();
+        Decimal 地域密着型介護予防サービス要介護計 = div.getPnlMain().getTbl2().getTextBox639().getValue();
+        Decimal 地域密着型介護予防サービス合計 = div.getPnlMain().getTbl2().getTextBox640().getValue();
 
-        return 入力チェック3(地域密着型介護予防サービス要支援計, 地域密着型介護予防サービス要介護計, 地域密着型介護予防サービス合計);
+        return 入力チェック3(地域密着型介護予防サービス要支援計,
+                地域密着型介護予防サービス要介護計, 地域密着型介護予防サービス合計);
     }
 
     private boolean is整合性チェック_NG_単位数_3_22() {
 
-        RString 定期巡回随時対応型訪問介護看護要支援計 = div.getPnlMain().getTbl2().getTextBox643().getValue();
-        RString 定期巡回随時対応型訪問介護看護要介護計 = div.getPnlMain().getTbl2().getTextBox649().getValue();
-        RString 定期巡回随時対応型訪問介護看護合計 = div.getPnlMain().getTbl2().getTextBox650().getValue();
+        Decimal 定期巡回随時対応型訪問介護看護要支援計 = div.getPnlMain().getTbl2().getTextBox643().getValue();
+        Decimal 定期巡回随時対応型訪問介護看護要介護計 = div.getPnlMain().getTbl2().getTextBox649().getValue();
+        Decimal 定期巡回随時対応型訪問介護看護合計 = div.getPnlMain().getTbl2().getTextBox650().getValue();
 
-        return 入力チェック3(定期巡回随時対応型訪問介護看護要支援計, 定期巡回随時対応型訪問介護看護要介護計, 定期巡回随時対応型訪問介護看護合計);
+        return 入力チェック3(定期巡回随時対応型訪問介護看護要支援計,
+                定期巡回随時対応型訪問介護看護要介護計, 定期巡回随時対応型訪問介護看護合計);
     }
 
     private boolean is整合性チェック_NG_単位数_3_23() {
 
-        RString 夜間対応型訪問介護要支援計 = div.getPnlMain().getTbl2().getTextBox653().getValue();
-        RString 夜間対応型訪問介護要介護計 = div.getPnlMain().getTbl2().getTextBox659().getValue();
-        RString 夜間対応型訪問介護合計 = div.getPnlMain().getTbl2().getTextBox660().getValue();
+        Decimal 夜間対応型訪問介護要支援計 = div.getPnlMain().getTbl2().getTextBox653().getValue();
+        Decimal 夜間対応型訪問介護要介護計 = div.getPnlMain().getTbl2().getTextBox659().getValue();
+        Decimal 夜間対応型訪問介護合計 = div.getPnlMain().getTbl2().getTextBox660().getValue();
 
         return 入力チェック3(夜間対応型訪問介護要支援計, 夜間対応型訪問介護要介護計, 夜間対応型訪問介護合計);
     }
 
     private boolean is整合性チェック_NG_単位数_3_24() {
 
-        RString 認知症対応型通所介護要支援計 = div.getPnlMain().getTbl2().getTextBox663().getValue();
-        RString 認知症対応型通所介護要介護計 = div.getPnlMain().getTbl2().getTextBox670().getValue();
-        RString 認知症対応型通所介護合計 = div.getPnlMain().getTbl2().getTextBox671().getValue();
+        Decimal 認知症対応型通所介護要支援計 = div.getPnlMain().getTbl2().getTextBox663().getValue();
+        Decimal 認知症対応型通所介護要介護計 = div.getPnlMain().getTbl2().getTextBox670().getValue();
+        Decimal 認知症対応型通所介護合計 = div.getPnlMain().getTbl2().getTextBox671().getValue();
 
         return 入力チェック3(認知症対応型通所介護要支援計, 認知症対応型通所介護要介護計, 認知症対応型通所介護合計);
     }
 
     private boolean is整合性チェック_NG_単位数_3_25() {
 
-        RString 小規模多機能型居宅介護要支援計 = div.getPnlMain().getTbl2().getTextBox674().getValue();
-        RString 小規模多機能型居宅介護要介護計 = div.getPnlMain().getTbl2().getTextBox681().getValue();
-        RString 小規模多機能型居宅介護合計 = div.getPnlMain().getTbl2().getTextBox682().getValue();
+        Decimal 小規模多機能型居宅介護要支援計 = div.getPnlMain().getTbl2().getTextBox674().getValue();
+        Decimal 小規模多機能型居宅介護要介護計 = div.getPnlMain().getTbl2().getTextBox681().getValue();
+        Decimal 小規模多機能型居宅介護合計 = div.getPnlMain().getTbl2().getTextBox682().getValue();
 
         return 入力チェック3(小規模多機能型居宅介護要支援計, 小規模多機能型居宅介護要介護計, 小規模多機能型居宅介護合計);
     }
 
     private boolean is整合性チェック_NG_単位数_3_26() {
 
-        RString 認知症対応型共同生活介護要支援計 = div.getPnlMain().getTbl2().getTextBox685().getValue();
-        RString 認知症対応型共同生活介護要介護計 = div.getPnlMain().getTbl2().getTextBox691().getValue();
-        RString 認知症対応型共同生活介護合計 = div.getPnlMain().getTbl2().getTextBox692().getValue();
+        Decimal 認知症対応型共同生活介護要支援計 = div.getPnlMain().getTbl2().getTextBox685().getValue();
+        Decimal 認知症対応型共同生活介護要介護計 = div.getPnlMain().getTbl2().getTextBox691().getValue();
+        Decimal 認知症対応型共同生活介護合計 = div.getPnlMain().getTbl2().getTextBox692().getValue();
 
         return 入力チェック3(認知症対応型共同生活介護要支援計, 認知症対応型共同生活介護要介護計, 認知症対応型共同生活介護合計);
     }
 
     private boolean is整合性チェック_NG_単位数_3_27() {
 
-        RString 地域密着型特定施設入居者生活介護要支援計 = div.getPnlMain().getTbl2().getTextBox695().getValue();
-        RString 地域密着型特定施設入居者生活介護要介護計 = div.getPnlMain().getTbl2().getTextBox701().getValue();
-        RString 地域密着型特定施設入居者生活介護合計 = div.getPnlMain().getTbl2().getTextBox702().getValue();
+        Decimal 地域密着型特定施設入居者生活介護要支援計 = div.getPnlMain().getTbl2().getTextBox695().getValue();
+        Decimal 地域密着型特定施設入居者生活介護要介護計 = div.getPnlMain().getTbl2().getTextBox701().getValue();
+        Decimal 地域密着型特定施設入居者生活介護合計 = div.getPnlMain().getTbl2().getTextBox702().getValue();
 
-        return 入力チェック3(地域密着型特定施設入居者生活介護要支援計, 地域密着型特定施設入居者生活介護要介護計, 地域密着型特定施設入居者生活介護合計);
+        return 入力チェック3(地域密着型特定施設入居者生活介護要支援計,
+                地域密着型特定施設入居者生活介護要介護計, 地域密着型特定施設入居者生活介護合計);
     }
 
     private boolean is整合性チェック_NG_単位数_3_28() {
 
-        RString 地域密着型介護老人福祉施設入所者生活介護要支援計 = div.getPnlMain().getTbl2().getTextBox705().getValue();
-        RString 地域密着型介護老人福祉施設入所者生活介護要介護計 = div.getPnlMain().getTbl2().getTextBox711().getValue();
-        RString 地域密着型介護老人福祉施設入所者生活介護合計 = div.getPnlMain().getTbl2().getTextBox712().getValue();
+        Decimal 地域密着型介護老人福祉施設入所者生活介護要支援計 = div.getPnlMain().getTbl2().getTextBox705().getValue();
+        Decimal 地域密着型介護老人福祉施設入所者生活介護要介護計 = div.getPnlMain().getTbl2().getTextBox711().getValue();
+        Decimal 地域密着型介護老人福祉施設入所者生活介護合計 = div.getPnlMain().getTbl2().getTextBox712().getValue();
 
         return 入力チェック3(地域密着型介護老人福祉施設入所者生活介護要支援計, 地域密着型介護老人福祉施設入所者生活介護要介護計,
                 地域密着型介護老人福祉施設入所者生活介護合計);
@@ -746,141 +765,124 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuDataHandler {
 
     private boolean is整合性チェック_NG_単位数_3_29() {
 
-        RString 複合型サービス要支援計 = div.getPnlMain().getTbl2().getTextBox715().getValue();
-        RString 複合型サービス要介護計 = div.getPnlMain().getTbl2().getTextBox721().getValue();
-        RString 複合型サービス合計 = div.getPnlMain().getTbl2().getTextBox722().getValue();
+        Decimal 複合型サービス要支援計 = div.getPnlMain().getTbl2().getTextBox715().getValue();
+        Decimal 複合型サービス要介護計 = div.getPnlMain().getTbl2().getTextBox721().getValue();
+        Decimal 複合型サービス合計 = div.getPnlMain().getTbl2().getTextBox722().getValue();
 
         return 入力チェック3(複合型サービス要支援計, 複合型サービス要介護計, 複合型サービス合計);
     }
 
     private boolean is整合性チェック_NG_単位数_3_30() {
 
-        RString 施設サービス要支援計 = div.getPnlMain().getTbl2().getTextBox725().getValue();
-        RString 施設サービス要介護計 = div.getPnlMain().getTbl2().getTextBox732().getValue();
-        RString 施設サービス合計 = div.getPnlMain().getTbl2().getTextBox733().getValue();
+        Decimal 施設サービス要支援計 = div.getPnlMain().getTbl2().getTextBox725().getValue();
+        Decimal 施設サービス要介護計 = div.getPnlMain().getTbl2().getTextBox732().getValue();
+        Decimal 施設サービス合計 = div.getPnlMain().getTbl2().getTextBox733().getValue();
 
         return 入力チェック3(施設サービス要支援計, 施設サービス要介護計, 施設サービス合計);
     }
 
     private boolean is整合性チェック_NG_単位数_3_31() {
 
-        RString 介護老人福祉施設_1_要支援計 = div.getPnlMain().getTbl2().getTextBox736().getValue();
-        RString 介護老人福祉施設_1_要介護計 = div.getPnlMain().getTbl2().getTextBox743().getValue();
-        RString 介護老人福祉施設_1_合計 = div.getPnlMain().getTbl2().getTextBox744().getValue();
+        Decimal 介護老人福祉施設_1_要支援計 = div.getPnlMain().getTbl2().getTextBox736().getValue();
+        Decimal 介護老人福祉施設_1_要介護計 = div.getPnlMain().getTbl2().getTextBox743().getValue();
+        Decimal 介護老人福祉施設_1_合計 = div.getPnlMain().getTbl2().getTextBox744().getValue();
 
         return 入力チェック3(介護老人福祉施設_1_要支援計, 介護老人福祉施設_1_要介護計, 介護老人福祉施設_1_合計);
     }
 
     private boolean is整合性チェック_NG_単位数_3_32() {
 
-        RString 介護老人保健施設_1_要支援計 = div.getPnlMain().getTbl2().getTextBox747().getValue();
-        RString 介護老人保健施設_1_要介護計 = div.getPnlMain().getTbl2().getTextBox753().getValue();
-        RString 介護老人保健施設_1_合計 = div.getPnlMain().getTbl2().getTextBox754().getValue();
+        Decimal 介護老人保健施設_1_要支援計 = div.getPnlMain().getTbl2().getTextBox747().getValue();
+        Decimal 介護老人保健施設_1_要介護計 = div.getPnlMain().getTbl2().getTextBox753().getValue();
+        Decimal 介護老人保健施設_1_合計 = div.getPnlMain().getTbl2().getTextBox754().getValue();
 
         return 入力チェック3(介護老人保健施設_1_要支援計, 介護老人保健施設_1_要介護計, 介護老人保健施設_1_合計);
     }
 
     private boolean is整合性チェック_NG_単位数_3_33() {
 
-        RString 介護療養型医療施設_1_要支援計 = div.getPnlMain().getTbl2().getTextBox757().getValue();
-        RString 介護療養型医療施設_1_要介護計 = div.getPnlMain().getTbl2().getTextBox763().getValue();
-        RString 介護療養型医療施設_1_合計 = div.getPnlMain().getTbl2().getTextBox764().getValue();
+        Decimal 介護療養型医療施設_1_要支援計 = div.getPnlMain().getTbl2().getTextBox757().getValue();
+        Decimal 介護療養型医療施設_1_要介護計 = div.getPnlMain().getTbl2().getTextBox763().getValue();
+        Decimal 介護療養型医療施設_1_合計 = div.getPnlMain().getTbl2().getTextBox764().getValue();
 
         return 入力チェック3(介護療養型医療施設_1_要支援計, 介護療養型医療施設_1_要介護計, 介護療養型医療施設_1_合計);
     }
 
     private boolean is整合性チェック_NG_単位数_3_34() {
 
-        RString 食事提供費用再掲要支援計 = div.getPnlMain().getTbl2().getTextBox757().getValue();
-        RString 食事提供費用再掲要介護計 = div.getPnlMain().getTbl2().getTextBox774().getValue();
-        RString 食事提供費用再掲合計 = div.getPnlMain().getTbl2().getTextBox775().getValue();
+        Decimal 食事提供費用再掲要支援計 = div.getPnlMain().getTbl2().getTextBox757().getValue();
+        Decimal 食事提供費用再掲要介護計 = div.getPnlMain().getTbl2().getTextBox774().getValue();
+        Decimal 食事提供費用再掲合計 = div.getPnlMain().getTbl2().getTextBox775().getValue();
 
         return 入力チェック3(食事提供費用再掲要支援計, 食事提供費用再掲要介護計, 食事提供費用再掲合計);
     }
 
     private boolean is整合性チェック_NG_単位数_3_35() {
 
-        RString 介護老人福祉施設_2_要支援計 = div.getPnlMain().getTbl2().getTextBox778().getValue();
-        RString 介護老人福祉施設_2_要介護計 = div.getPnlMain().getTbl2().getTextBox785().getValue();
-        RString 介護老人福祉施設_2_合計 = div.getPnlMain().getTbl2().getTextBox786().getValue();
+        Decimal 介護老人福祉施設_2_要支援計 = div.getPnlMain().getTbl2().getTextBox778().getValue();
+        Decimal 介護老人福祉施設_2_要介護計 = div.getPnlMain().getTbl2().getTextBox785().getValue();
+        Decimal 介護老人福祉施設_2_合計 = div.getPnlMain().getTbl2().getTextBox786().getValue();
 
         return 入力チェック3(介護老人福祉施設_2_要支援計, 介護老人福祉施設_2_要介護計, 介護老人福祉施設_2_合計);
     }
 
     private boolean is整合性チェック_NG_単位数_3_36() {
 
-        RString 介護老人保健施設_2_要支援計 = div.getPnlMain().getTbl2().getTextBox789().getValue();
-        RString 介護老人保健施設_2_要介護計 = div.getPnlMain().getTbl2().getTextBox795().getValue();
-        RString 介護老人保健施設_2_合計 = div.getPnlMain().getTbl2().getTextBox796().getValue();
+        Decimal 介護老人保健施設_2_要支援計 = div.getPnlMain().getTbl2().getTextBox789().getValue();
+        Decimal 介護老人保健施設_2_要介護計 = div.getPnlMain().getTbl2().getTextBox795().getValue();
+        Decimal 介護老人保健施設_2_合計 = div.getPnlMain().getTbl2().getTextBox796().getValue();
 
         return 入力チェック3(介護老人保健施設_2_要支援計, 介護老人保健施設_2_要介護計, 介護老人保健施設_2_合計);
     }
 
     private boolean is整合性チェック_NG_単位数_3_37() {
 
-        RString 介護療養型医療施設_2_要支援計 = div.getPnlMain().getTbl2().getTextBox799().getValue();
-        RString 介護療養型医療施設_2_要介護計 = div.getPnlMain().getTbl2().getTextBox805().getValue();
-        RString 介護療養型医療施設_2_合計 = div.getPnlMain().getTbl2().getTextBox806().getValue();
+        Decimal 介護療養型医療施設_2_要支援計 = div.getPnlMain().getTbl2().getTextBox799().getValue();
+        Decimal 介護療養型医療施設_2_要介護計 = div.getPnlMain().getTbl2().getTextBox805().getValue();
+        Decimal 介護療養型医療施設_2_合計 = div.getPnlMain().getTbl2().getTextBox806().getValue();
 
         return 入力チェック3(介護療養型医療施設_2_要支援計, 介護療養型医療施設_2_要介護計, 介護療養型医療施設_2_合計);
     }
 
     private boolean is整合性チェック_NG_単位数_3_38() {
 
-        RString 総計要支援計 = div.getPnlMain().getTbl2().getTextBox809().getValue();
-        RString 総計要介護計 = div.getPnlMain().getTbl2().getTextBox817().getValue();
-        RString 総計合計 = div.getPnlMain().getTbl2().getTextBox818().getValue();
+        Decimal 総計要支援計 = div.getPnlMain().getTbl2().getTextBox809().getValue();
+        Decimal 総計要介護計 = div.getPnlMain().getTbl2().getTextBox817().getValue();
+        Decimal 総計合計 = div.getPnlMain().getTbl2().getTextBox818().getValue();
 
         return 入力チェック3(総計要支援計, 総計要介護計, 総計合計);
     }
 
-    private boolean 入力チェック3(RString 入力要支援計,
-            RString 入力要介護計,
-            RString 入力合計) {
-        Decimal 要支援計 = (null == 入力要支援計 || 入力要支援計.isEmpty()
-                ? Decimal.ZERO : new Decimal(入力要支援計.toString()));
-        Decimal 要介護計 = (null == 入力要介護計 || 入力要介護計.isEmpty())
-                ? Decimal.ZERO : new Decimal(入力要介護計.toString());
-        Decimal 合計 = (null == 入力合計 || 入力合計.isEmpty())
-                ? Decimal.ZERO : new Decimal(入力合計.toString());
+    private boolean 入力チェック3(Decimal 入力要支援計,
+            Decimal 入力要介護計,
+            Decimal 入力合計) {
+        Decimal 要支援計 = 入力要支援計 == null ? Decimal.ZERO : 入力要支援計;
+        Decimal 要介護計 = 入力要介護計 == null ? Decimal.ZERO : 入力要介護計;
+        Decimal 合計 = 入力合計 == null ? Decimal.ZERO : 入力合計;
         return !要支援計.add(要介護計).equals(合計);
-    }
-
-    private List<JigyoHokokuTokeiData> get事業報告月報詳細データリスト(
-            JigyoHokokuGeppoParameter 引き継ぎデータ, Code 集計番号) {
-        JigyoHokokuGeppoHoseiHako finder = new JigyoHokokuGeppoHoseiHako();
-        JigyoHokokuGeppoDetalSearchParameter parameter
-                = JigyoHokokuGeppoDetalSearchParameter.createParameterForJigyoHokokuGeppoDetal(
-                        new FlexibleYear(引き継ぎデータ.get行報告年()),
-                        引き継ぎデータ.get行報告月(),
-                        new FlexibleYear(引き継ぎデータ.get行集計対象年()),
-                        引き継ぎデータ.get行集計対象月(),
-                        引き継ぎデータ.get行統計対象区分(),
-                        new LasdecCode(引き継ぎデータ.get行市町村コード()),
-                        new Code(引き継ぎデータ.get行表番号()),
-                        集計番号);
-        return finder.getJigyoHokokuGeppoDetal(parameter);
     }
 
     /**
      * 修正データリストを取得のメソッドます。
      *
-     * @param 引き継ぎデータ JigyoHokokuGeppoParameter
+     * @param 単位数引き継ぎデータ List<JigyoHokokuTokeiData>
+     * @param 事業報告基本データ JigyoHokokuGeppoParameter
      * @return List<JigyoHokokuTokeiData>
      */
-    public List<JigyoHokokuTokeiData> get単位数修正データリスト(JigyoHokokuGeppoParameter 引き継ぎデータ) {
+    public List<JigyoHokokuTokeiData> get単位数修正データリスト(List<JigyoHokokuTokeiData> 単位数引き継ぎデータ,
+            JigyoHokokuGeppoParameter 事業報告基本データ) {
 
         List<JigyoHokokuTokeiData> 修正データリスト = new ArrayList<>();
         List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト = new ArrayList<>();
-
-        if (引き継ぎデータ.get行集計番号().startsWith(単位数総数.toString())) {
-            事業報告月報詳細データリスト = get事業報告月報詳細データリスト(引き継ぎデータ, 集計番号_0102);
-        } else if (引き継ぎデータ.get行集計番号().startsWith(単位数第２号被保険者分再掲.toString())) {
-            事業報告月報詳細データリスト = get事業報告月報詳細データリスト(引き継ぎデータ, 集計番号_0202);
-        } else if (引き継ぎデータ.get行集計番号().startsWith(単位数総数特例分.toString())) {
-            事業報告月報詳細データリスト = get事業報告月報詳細データリスト(引き継ぎデータ, 集計番号_0302);
-        } else if (引き継ぎデータ.get行集計番号().startsWith(単位数第２号被保険者分再掲特例分.toString())) {
-            事業報告月報詳細データリスト = get事業報告月報詳細データリスト(引き継ぎデータ, 集計番号_0402);
+//        RString 集計番号 = new RString(事業報告基本データ.get集計番号().toString());
+        if (事業報告基本データ.get行集計番号().startsWith(単位数総数)) {
+            事業報告月報詳細データリスト = 単位数引き継ぎデータ;
+        } else if (事業報告基本データ.get行集計番号().startsWith(単位数第２号被保険者分再掲)) {
+            事業報告月報詳細データリスト = 単位数引き継ぎデータ;
+        } else if (事業報告基本データ.get行集計番号().startsWith(単位数総数特例分)) {
+            事業報告月報詳細データリスト = 単位数引き継ぎデータ;
+        } else if (事業報告基本データ.get行集計番号().startsWith(単位数第２号被保険者分再掲特例分)) {
+            事業報告月報詳細データリスト = 単位数引き継ぎデータ;
         }
 
         修正データリスト = get事業報告修正データリスト(事業報告月報詳細データリスト, 修正データリスト);
@@ -1381,18 +1383,18 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuDataHandler {
     private List<JigyoHokokuTokeiData> get事業報告修正データ_3(List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
             List<JigyoHokokuTokeiData> 修正データリスト,
             Decimal 縦番号,
-            RString 集計結果値1,
-            RString 集計結果値2,
-            RString 集計結果値3,
-            RString 集計結果値4,
-            RString 集計結果値5,
-            RString 集計結果値6,
-            RString 集計結果値7,
-            RString 集計結果値8,
-            RString 集計結果値9,
-            RString 集計結果値10,
-            RString 集計結果値11,
-            RString 集計結果値12) {
+            Decimal 集計結果値1,
+            Decimal 集計結果値2,
+            Decimal 集計結果値3,
+            Decimal 集計結果値4,
+            Decimal 集計結果値5,
+            Decimal 集計結果値6,
+            Decimal 集計結果値7,
+            Decimal 集計結果値8,
+            Decimal 集計結果値9,
+            Decimal 集計結果値10,
+            Decimal 集計結果値11,
+            Decimal 集計結果値12) {
         修正データリスト = set集計結果値(集計結果値1, 修正データリスト, 事業報告月報詳細データリスト, 横番号_1, 縦番号);
         修正データリスト = set集計結果値(集計結果値2, 修正データリスト, 事業報告月報詳細データリスト, 横番号_2, 縦番号);
         修正データリスト = set集計結果値(集計結果値3, 修正データリスト, 事業報告月報詳細データリスト, 横番号_3, 縦番号);
@@ -1411,17 +1413,17 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuDataHandler {
     private List<JigyoHokokuTokeiData> get事業報告修正データ_2(List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
             List<JigyoHokokuTokeiData> 修正データリスト,
             Decimal 縦番号,
-            RString 集計結果値1,
-            RString 集計結果値2,
-            RString 集計結果値3,
-            RString 集計結果値4,
-            RString 集計結果値5,
-            RString 集計結果値6,
-            RString 集計結果値7,
-            RString 集計結果値8,
-            RString 集計結果値9,
-            RString 集計結果値10,
-            RString 集計結果値11) {
+            Decimal 集計結果値1,
+            Decimal 集計結果値2,
+            Decimal 集計結果値3,
+            Decimal 集計結果値4,
+            Decimal 集計結果値5,
+            Decimal 集計結果値6,
+            Decimal 集計結果値7,
+            Decimal 集計結果値8,
+            Decimal 集計結果値9,
+            Decimal 集計結果値10,
+            Decimal 集計結果値11) {
         修正データリスト = set集計結果値(集計結果値1, 修正データリスト, 事業報告月報詳細データリスト, 横番号_1, 縦番号);
         修正データリスト = set集計結果値(集計結果値2, 修正データリスト, 事業報告月報詳細データリスト, 横番号_3, 縦番号);
         修正データリスト = set集計結果値(集計結果値3, 修正データリスト, 事業報告月報詳細データリスト, 横番号_4, 縦番号);
@@ -1439,16 +1441,16 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuDataHandler {
     private List<JigyoHokokuTokeiData> get事業報告修正データ_1(List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
             List<JigyoHokokuTokeiData> 修正データリスト,
             Decimal 縦番号,
-            RString 集計結果値1,
-            RString 集計結果値2,
-            RString 集計結果値3,
-            RString 集計結果値4,
-            RString 集計結果値5,
-            RString 集計結果値6,
-            RString 集計結果値7,
-            RString 集計結果値8,
-            RString 集計結果値9,
-            RString 集計結果値10) {
+            Decimal 集計結果値1,
+            Decimal 集計結果値2,
+            Decimal 集計結果値3,
+            Decimal 集計結果値4,
+            Decimal 集計結果値5,
+            Decimal 集計結果値6,
+            Decimal 集計結果値7,
+            Decimal 集計結果値8,
+            Decimal 集計結果値9,
+            Decimal 集計結果値10) {
         修正データリスト = set集計結果値(集計結果値1, 修正データリスト, 事業報告月報詳細データリスト, 横番号_3, 縦番号);
         修正データリスト = set集計結果値(集計結果値2, 修正データリスト, 事業報告月報詳細データリスト, 横番号_4, 縦番号);
         修正データリスト = set集計結果値(集計結果値3, 修正データリスト, 事業報告月報詳細データリスト, 横番号_5, 縦番号);
@@ -1465,17 +1467,17 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuDataHandler {
     private List<JigyoHokokuTokeiData> get事業報告修正データ(List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
             List<JigyoHokokuTokeiData> 修正データリスト,
             Decimal 縦番号,
-            RString 集計結果値1,
-            RString 集計結果値2,
-            RString 集計結果値3,
-            RString 集計結果値4,
-            RString 集計結果値5,
-            RString 集計結果値6,
-            RString 集計結果値7,
-            RString 集計結果値8,
-            RString 集計結果値9,
-            RString 集計結果値10,
-            RString 集計結果値11) {
+            Decimal 集計結果値1,
+            Decimal 集計結果値2,
+            Decimal 集計結果値3,
+            Decimal 集計結果値4,
+            Decimal 集計結果値5,
+            Decimal 集計結果値6,
+            Decimal 集計結果値7,
+            Decimal 集計結果値8,
+            Decimal 集計結果値9,
+            Decimal 集計結果値10,
+            Decimal 集計結果値11) {
         修正データリスト = set集計結果値(集計結果値1, 修正データリスト, 事業報告月報詳細データリスト, 横番号_2, 縦番号);
         修正データリスト = set集計結果値(集計結果値2, 修正データリスト, 事業報告月報詳細データリスト, 横番号_3, 縦番号);
         修正データリスト = set集計結果値(集計結果値3, 修正データリスト, 事業報告月報詳細データリスト, 横番号_4, 縦番号);
@@ -1491,13 +1493,13 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuDataHandler {
     }
 
     private List<JigyoHokokuTokeiData> set集計結果値(
-            RString 集計結果値,
+            Decimal 集計結果値,
             List<JigyoHokokuTokeiData> 修正データリスト,
             List<JigyoHokokuTokeiData> 事業報告月報詳細データリスト,
             Decimal 横番号,
             Decimal 縦番号) {
         JigyoHokokuTokeiData entity = check事業報告統計データ(事業報告月報詳細データリスト, 横番号, 縦番号);
-        if (集計結果値 == null || 集計結果値.isEmpty()) {
+        if (集計結果値 == null) {
             if (entity != null && entity.get集計結果値() != null) {
                 entity = entity.createBuilderForEdit().set集計結果値(null).build();
                 entity = entity.modifiedModel();
@@ -1506,16 +1508,16 @@ public class HoseiHakkoYoshiki2KensuEtcTotalPanelTannisuuDataHandler {
             }
         } else {
             if (entity == null) {
-                entity = set事業報告統計データ(事業報告月報詳細データリスト, 横番号, 縦番号, new Decimal(集計結果値.toString()));
+                entity = set事業報告統計データ(事業報告月報詳細データリスト, 横番号, 縦番号, 集計結果値);
                 修正データリスト.add(entity);
                 return 修正データリスト;
             } else if (entity.get集計結果値() == null) {
-                entity = entity.createBuilderForEdit().set集計結果値(new Decimal(集計結果値.toString())).build();
+                entity = entity.createBuilderForEdit().set集計結果値(集計結果値).build();
                 entity = entity.modifiedModel();
                 修正データリスト.add(entity);
                 return 修正データリスト;
-            } else if (!entity.get集計結果値().equals(new Decimal(集計結果値.toString()))) {
-                entity = entity.createBuilderForEdit().set集計結果値(new Decimal(集計結果値.toString())).build();
+            } else if (!entity.get集計結果値().equals(集計結果値)) {
+                entity = entity.createBuilderForEdit().set集計結果値(集計結果値).build();
                 entity = entity.modifiedModel();
                 修正データリスト.add(entity);
                 return 修正データリスト;

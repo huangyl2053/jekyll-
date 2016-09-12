@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -28,11 +27,11 @@ public enum ChosaAnser24 {
      * コード:3 名称:横になっていることが多い 略称:横になっていることが多い
      */
     横になっていることが多い("3", "横になっていることが多い");
-    private final Code code;
+    private final RString code;
     private final RString fullName;
 
     private ChosaAnser24(String code, String fullname) {
-        this.code = new Code(code);
+        this.code = new RString(code);
         this.fullName = new RString(fullname);
     }
 
@@ -41,7 +40,7 @@ public enum ChosaAnser24 {
      *
      * @return 認定調査項目内容24のコード
      */
-    public Code getコード() {
+    public RString getコード() {
         return code;
     }
 
@@ -60,10 +59,10 @@ public enum ChosaAnser24 {
      * @param code 認定調査項目内容24のコード
      * @return {@code code} に対応する認定調査項目内容24
      */
-    public static ChosaAnser24 toValue(Code code) {
-        for (ChosaAnser24 anser01 : ChosaAnser24.values()) {
-            if (anser01.code.equals(code)) {
-                return anser01;
+    public static ChosaAnser24 toValue(RString code) {
+        for (ChosaAnser24 anser24 : ChosaAnser24.values()) {
+            if (anser24.code.equals(code)) {
+                return anser24;
             }
         }
         throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("認定調査項目内容24"));

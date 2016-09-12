@@ -22,7 +22,7 @@
         <result property="chosainShimei" column="chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
     
-    <select id="get認定調査依頼発行一覧" resultMap="resultMap_getNinteiChosaIrai" 
+    <select resultOrdered="true" id="get認定調査依頼発行一覧" resultMap="resultMap_getNinteiChosaIrai" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo.NinteiChosaIraiMybitisParamter" fetchSize="500">
         SELECT
             dbT5201."iraishoShutsuryokuYMD",

@@ -10,8 +10,10 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkyotakuservicekeikak
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
+import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -24,7 +26,6 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Katagaki;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
@@ -57,14 +58,22 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
     private static final RString 適用除外施設 = new RString("21");
     private static final RString 特例状態住特 = new RString("住特");
     private static final RString FLAG = new RString("1");
-    private static final RString 介護資格取得事由 = new RString("0007");
-    private static final RString 介護資格喪失事由 = new RString("0010");
     private static final RString 表示名称_新規 = new RString("新規");
     private static final RString 表示名称_変更 = new RString("変更");
     private static final RString 表示名称_暫定 = new RString("暫定");
     private static final RString 表示名称_指定居宅介護支援事業者作成 = new RString("指定居宅介護支援事業者作成");
     private static final RString 表示名称_基準該当居宅介護支援事業者作成 = new RString("基準該当居宅介護支援事業者作成");
     private static final RString 表示名称_介護予防支援事業者作成 = new RString("介護予防支援事業者作成");
+    private final FlexibleDate システム日付;
+
+    /**
+     * コンストラクタです。
+     *
+     * @param システム日付 FlexibleDate
+     */
+    public HanyoListKyotakuServiceKeikakuCsvEntityEditor(FlexibleDate システム日付) {
+        this.システム日付 = システム日付;
+    }
 
     /**
      * editor
@@ -414,7 +423,7 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
                 ? RString.EMPTY : entity.getDbV1001被保険者番号().value());
         RString 資格取得事由 = RString.EMPTY;
         if (entity.getDbV1001資格取得事由コード() != null && !entity.getDbV1001資格取得事由コード().isEmpty()) {
-            資格取得事由 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, new CodeShubetsu(介護資格取得事由),
+            資格取得事由 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, DBACodeShubetsu.介護資格取得事由_被保険者.getコード(),
                     new Code(entity.getDbV1001資格取得事由コード()), FlexibleDate.getNowDate());
         }
         csvEntity.set資格取得事由(isNull(資格取得事由)
@@ -423,7 +432,7 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
         csvEntity.set資格取得届出日(dataToRString(entity.getDbV1001資格取得届出年月日(), parameter));
         RString 喪失事由 = RString.EMPTY;
         if (entity.getDbV1001資格喪失事由コード() != null && !entity.getDbV1001資格喪失事由コード().isEmpty()) {
-            喪失事由 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, new CodeShubetsu(介護資格喪失事由),
+            喪失事由 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, DBACodeShubetsu.介護資格喪失事由_被保険者.getコード(),
                     new Code(entity.getDbV1001資格喪失事由コード()), FlexibleDate.getNowDate());
         }
         csvEntity.set喪失事由(isNull(喪失事由)
@@ -440,12 +449,12 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
         }
         HokenshaList hokenshaList = HokenshaListLoader.createInstance().getShichosonCodeNameList(GyomuBunrui.介護事務);
         if (FLAG.equals(entity.getDbV1001広域内住所地特例フラグ())) {
-            if (entity.getDbV1001広住特措置元市町村コード() != null) {
+            if (entity.getDbV1001広住特措置元市町村コード() != null && !entity.getDbV1001広住特措置元市町村コード().isEmpty()) {
                 HokenshaSummary hokenshaSummary = hokenshaList.get(entity.getDbV1001広住特措置元市町村コード());
                 csvEntity.set資格証記載保険者番号(hokenshaSummary.get証記載保険者番号().getColumnValue());
             }
         } else {
-            if (entity.getDbV1001市町村コード() != null) {
+            if (entity.getDbV1001市町村コード() != null && !entity.getDbV1001市町村コード().isEmpty()) {
                 HokenshaSummary hokenshaSummary = hokenshaList.get(entity.getDbV1001市町村コード());
                 csvEntity.set資格証記載保険者番号(hokenshaSummary.get証記載保険者番号().getColumnValue());
             }
@@ -553,10 +562,13 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
         csvEntity.set計画適用終了日(dataToRString(entity.getDbT3006適用終了年月日(), parameter));
         csvEntity.set計画届出日(dataToRString(entity.getDbT3005届出年月日(), parameter));
         csvEntity.set計画作成日(dataToRString(entity.getDbT3007計画作成年月日(), parameter));
-        csvEntity.set計画変更日(
-                entity.getDbT3007被保険者番号().isEmpty()
-                ? dataToRString(entity.getDbT3006事業者変更年月日(), parameter)
-                : dataToRString(entity.getDbT3007計画変更年月日(), parameter));
+        RString 変更年月日;
+        if (entity.getDbT3007被保険者番号() == null || entity.getDbT3007被保険者番号().isEmpty()) {
+            変更年月日 = dataToRString(entity.getDbT3006事業者変更年月日(), parameter);
+        } else {
+            変更年月日 = dataToRString(entity.getDbT3007計画変更年月日(), parameter);
+        }
+        csvEntity.set計画変更日(変更年月日);
         csvEntity.set変更理由(isNull(entity.getDbT3007変更理由())
                 ? RString.EMPTY : entity.getDbT3007変更理由());
         csvEntity.set委託先計画事業者番号(isNull(entity.getDbT3006委託先事業者番号())
@@ -573,8 +585,11 @@ public class HanyoListKyotakuServiceKeikakuCsvEntityEditor {
         csvEntity.set受給申請事由(isNull(entity.getDbV4001受給申請事由())
                 ? RString.EMPTY : entity.getDbV4001受給申請事由().value());
         csvEntity.set受給申請日(dataToRString(entity.getDbV4001受給申請年月日(), parameter));
-        csvEntity.set受給要介護度(isNull(entity.getDbV4001要介護認定状態区分コード())
-                ? RString.EMPTY : entity.getDbV4001要介護認定状態区分コード().value());
+        if (entity.getDbV4001要介護認定状態区分コード() == null || entity.getDbV4001要介護認定状態区分コード().isEmpty()) {
+            csvEntity.set受給要介護度(RString.EMPTY);
+        } else {
+            csvEntity.set受給要介護度(YokaigoJotaiKubunSupport.toValue(システム日付, entity.getDbV4001要介護認定状態区分コード().value()).getName());
+        }
         csvEntity.set受給認定開始日(dataToRString(entity.getDbV4001認定有効期間開始日(), parameter));
         csvEntity.set受給認定終了日(dataToRString(entity.getDbV4001認定有効期間終了日(), parameter));
         csvEntity.set受給認定日(dataToRString(entity.getDbV4001受給認定日(), parameter));

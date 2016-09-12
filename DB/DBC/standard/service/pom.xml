@@ -39,6 +39,10 @@
             <groupId>jp.co.ndensan.reams.db.dbd</groupId>
             <artifactId>DbdPersistence</artifactId>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbd</groupId>
+            <artifactId>DbdService</artifactId>
+        </dependency>
         <!-- DBX -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>

@@ -16,7 +16,7 @@
 	   <result property="kaijyoTelNo"  column="kaijyoTelNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
     
-    <select id="get出力明細一覧" resultMap="resultMap_getKaigoNinteiShinsakaiSchedule" 
+    <select resultOrdered="true" id="get出力明細一覧" resultMap="resultMap_getKaigoNinteiShinsakaiSchedule" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.kaigoninteishinsakaischedule.KaigoNinteiShinsakaiScheduleMybitisParamter" fetchSize="500">
         SELECT DISTINCT
             '第' || dbT5501."shinsakaiKaisaiNo" || '回' AS shinsakai,
@@ -47,7 +47,7 @@
 	   <result property="gogitai"  column="gogitaiNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
     
-     <select id="get年間" resultMap="resultMap_getNenkan" 
+     <select resultOrdered="true" id="get年間" resultMap="resultMap_getNenkan" 
              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.kaigoninteishinsakaischedule.KaigoNinteiShinsakaiScheduleMybitisParamter" fetchSize="500">
          SELECT
             "shinsakaiKaisaiYoteiYMD",

@@ -10,35 +10,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShukei;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShukei;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanbaraijyokyoshokai.ShokanShukeiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.ShokanKihonParameter;
-import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.ShokanbaraiJutakuShikyuGendogakuHanteiCheck;
 import jp.co.ndensan.reams.db.dbc.definition.core.shinsahoho.ShinsaHohoKubun;
-import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820030.SeikyuGakuShukeiPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820030.dgdSeikyugakushukei_Row;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
-import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
-import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 償還払い費支給申請決定_サービス提供証明書(請求額集計）
@@ -55,9 +44,6 @@ public class SeikyuGakuShukeiPanelHandler {
     private static final RString 設定不可 = new RString("0");
     private static final RString 設定可必須 = new RString("1");
     private static final RString 設定可任意 = new RString("2");
-    private static final RString 対象単位 = new RString("対象単位");
-    private static final RString 対象単位合計 = new RString("（対象単位+対象外単位）と等しい");
-    private static final RString 単位合計 = new RString("単位合計");
     private static final RString コロン = new RString(":");
     private static final int NUM = 10;
     private static final int NUM1 = 100;
@@ -142,11 +128,12 @@ public class SeikyuGakuShukeiPanelHandler {
 
     /**
      * set請求額集計登録
+     *
+     * @param 給付率 Decimal
      */
-    public void set請求額集計登録() {
+    public void set請求額集計登録(Decimal 給付率) {
         dgdSeikyugakushukei_Row row = div.getPanelSeikyugakuShukei().getDgdSeikyugakushukei().getClickedItem();
-        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtKyufuritsu().setValue(
-                ViewStateHolder.get(ViewStateKeys.給付率, Decimal.class));
+        div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtKyufuritsu().setValue(給付率);
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTanyigokeiHokenbun().setValue(
                 row.getDefaultDataName2().getValue());
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTanyiTanka().setValue(
@@ -209,28 +196,28 @@ public class SeikyuGakuShukeiPanelHandler {
      * modifyRow
      *
      * @param row dgdSeikyugakushukei_Row
+     * @param state RString
      */
-    public void modifyRow(dgdSeikyugakushukei_Row row) {
-        RString state = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
+    public void modifyRow(dgdSeikyugakushukei_Row row, RString state) {
         if (修正.equals(state)) {
             boolean flag = checkState(row);
             if (flag) {
                 row.setRowState(RowState.Modified);
-                setDgdKyufuhiMeisai(row);
+                setDgdKyufuhiMeisai(row, state);
             }
         } else if (削除.equals(state)) {
             if (RowState.Added.equals(row.getRowState())) {
                 div.getPanelSeikyugakuShukei().getDgdSeikyugakushukei().getDataSource().remove(
-                        Integer.parseInt(div.getPanelSeikyugakuShukei().getRowId().toString()));
+                        div.getPanelSeikyugakuShukei().getRowId().getValue().intValue());
                 clear請求額集計登録();
                 div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().setDisabled(true);
             } else {
                 row.setRowState(RowState.Deleted);
-                setDgdKyufuhiMeisai(row);
+                setDgdKyufuhiMeisai(row, state);
             }
         } else if (登録.equals(state)) {
             row.setRowState(RowState.Added);
-            setDgdKyufuhiMeisai(row);
+            setDgdKyufuhiMeisai(row, state);
         }
 
     }
@@ -297,8 +284,9 @@ public class SeikyuGakuShukeiPanelHandler {
      * setDgdKyufuhiMeisai
      *
      * @param ddgRow dgdSeikyugakushukei_Row
+     * @param state RString
      */
-    private void setDgdKyufuhiMeisai(dgdSeikyugakushukei_Row ddgRow) {
+    private void setDgdKyufuhiMeisai(dgdSeikyugakushukei_Row ddgRow, RString state) {
         RStringBuilder builder = new RStringBuilder();
         RString サービス種類コード = div.getPanelSeikyugakuShukei().
                 getPanelSeikyuShokai().getCcdServiceTypeInput().getサービス種類コード();
@@ -374,91 +362,13 @@ public class SeikyuGakuShukeiPanelHandler {
             ddgRow.setDefaultDataName19(div.getPanelSeikyugakuShukei().
                     getPanelSeikyuShokai().getCcdServiceTypeInput().getサービス種類コード());
         }
-        if (登録.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
+        if (登録.equals(state)) {
             List<dgdSeikyugakushukei_Row> list = div.getPanelSeikyugakuShukei().getDgdSeikyugakushukei().getDataSource();
             list.add(ddgRow);
         }
         clear請求額集計登録();
         div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().setVisible(false);
 
-    }
-
-    /**
-     * 入力チェック
-     *
-     * @return validPairs
-     */
-    public ValidationMessageControlPairs 入力チェック() {
-        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
-                ShoukanharaihishinseimeisaikensakuParameter.class);
-        RString 様式番号 = meisaiPar.get様式番号();
-        Decimal 限度額対象単位 = div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTaishoTanyi().getValue();
-        Decimal 限度額対象外単位 = div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTaishoGaiTanyi().getValue();
-        Decimal 保険分単位合計 = div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().getTxtTanyigokeiHokenbun().getValue();
-        ServiceShuruiCode サービス種類コード = new ServiceShuruiCode(div.getPanelSeikyugakuShukei().
-                getPanelSeikyuShokai().getCcdServiceTypeInput().getサービス種類コード());
-        ShokanbaraiJutakuShikyuGendogakuHanteiCheck shcheck = new ShokanbaraiJutakuShikyuGendogakuHanteiCheck();
-        boolean falg2 = true;
-        boolean falg1 = div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
-                getTxtKeikakuTanyi().getValue() != null && div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
-                getTxtTaishoTanyi().getValue() != null && div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
-                getTxtTaishoGaiTanyi().getValue() != null;
-        if (div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
-                getTxtTaishoTanyi().getValue() != null && div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
-                getTxtTaishoGaiTanyi().getValue() != null) {
-            falg2 = !div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
-                    getTxtKeikakuTanyi().getValue().equals(div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
-                            getTxtTaishoTanyi().getValue().add(div.getPanelSeikyugakuShukei().getPanelSeikyuShokai().
-                                    getTxtTaishoGaiTanyi().getValue()));
-        }
-        boolean falg3 = shcheck.chkShokanbaraiJutakuShikyuGendogakuTaishoTani(様式番号, 限度額対象単位, サービス種類コード);
-        boolean falg4 = true;
-        if (限度額対象外単位 != null && 限度額対象単位 != null && 保険分単位合計 != null) {
-            falg4 = shcheck.chkShokanbaraiJutakuShikyuGendogakuTaniGokei(
-                    様式番号, 限度額対象外単位, 限度額対象単位, 保険分単位合計, サービス種類コード);
-        }
-        if (falg1 && falg2) {
-            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                    DbcErrorMessages.計画単位数不一致)));
-        }
-        List<dgdSeikyugakushukei_Row> rowData = div.getPanelSeikyugakuShukei().getDgdSeikyugakushukei().getDataSource();
-        List<dgdSeikyugakushukei_Row> rowList = new ArrayList<>();
-        rowList.addAll(rowData);
-        rowList.remove(div.getPanelSeikyugakuShukei().getDgdSeikyugakushukei().getClickedItem());
-        for (dgdSeikyugakushukei_Row row : rowList) {
-            ServiceShuruiCode serviceCode = new ServiceShuruiCode(row.getDefaultDataName19());
-            if (div.getPanelSeikyugakuShukei().
-                    getPanelSeikyuShokai().getCcdServiceTypeInput().getサービス種類コード().equals(serviceCode.value())) {
-                validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                        DbcErrorMessages.サービス種類が登録済)));
-            }
-        }
-        if (falg3) {
-            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                    UrErrorMessages.必須, 対象単位.toString())));
-        }
-        if (限度額対象外単位 != null && 限度額対象単位 != null && 保険分単位合計 != null && falg4) {
-            validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(
-                    UrErrorMessages.項目に対する制約, 単位合計.toString(), 対象単位合計.toString())));
-        }
-
-        return validPairs;
-
-    }
-
-    private static class IdocheckMessages implements IValidationMessage {
-
-        private final Message message;
-
-        public IdocheckMessages(IMessageGettable message, String... replacements) {
-            this.message = message.getMessage().replace(replacements);
-        }
-
-        @Override
-        public Message getMessage() {
-            return message;
-        }
     }
 
     /**
@@ -503,10 +413,13 @@ public class SeikyuGakuShukeiPanelHandler {
 
     /**
      * 保存処理
+     *
+     * @param meisaiPar ShoukanharaihishinseimeisaikensakuParameter
+     * @param 処理モード RString
+     * @param shkonlist List<ShokanShukeiResult> shkonlist
      */
-    public void 保存処理() {
-        ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
-                ShoukanharaihishinseimeisaikensakuParameter.class);
+    public void 保存処理(ShoukanharaihishinseimeisaikensakuParameter meisaiPar, RString 処理モード,
+            List<ShokanShukeiResult> shkonlist) {
         HihokenshaNo 被保険者番号 = meisaiPar.get被保険者番号();
         FlexibleYearMonth サービス年月 = meisaiPar.getサービス年月();
         RString 整理番号 = meisaiPar.get整理番号();
@@ -515,12 +428,11 @@ public class SeikyuGakuShukeiPanelHandler {
         RString 明細番号 = meisaiPar.get明細番号();
         List<ShokanShukei> entityList = new ArrayList<>();
         List<dgdSeikyugakushukei_Row> dgrow = div.getPanelSeikyugakuShukei().getDgdSeikyugakushukei().getDataSource();
-        if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
+        if (削除.equals(処理モード)) {
             SyokanbaraihiShikyuShinseiKetteManager.createInstance().
                     delShokanSyomeisyo(被保険者番号, サービス年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         } else {
             int max連番 = 0;
-            List<ShokanShukeiResult> shkonlist = ViewStateHolder.get(ViewStateKeys.請求額集計一覧情報, List.class);
             Map<RString, ShokanShukei> mapList = new HashMap<>();
             for (ShokanShukeiResult shokanShukeiResult : shkonlist) {
                 mapList.put(shokanShukeiResult.getShukei().get連番(), shokanShukeiResult.getShukei());
@@ -578,34 +490,44 @@ public class SeikyuGakuShukeiPanelHandler {
             entity = entity.createBuilderForEdit().set請求額(row.getDefaultDataName4().getValue()).build();
         }
         if (row.getDefaultDataName6().getValue() != null) {
-            entity = entity.createBuilderForEdit().set利用者負担額(row.getDefaultDataName6().getValue().intValue()).build();
+            entity = entity.createBuilderForEdit().set利用者負担額(
+                    row.getDefaultDataName6().getValue().intValue()).build();
         }
         if (row.getDefaultDataName7().getValue() != null) {
-            entity = entity.createBuilderForEdit().set限度額管理対象単位数(row.getDefaultDataName7().getValue().intValue()).build();
+            entity = entity.createBuilderForEdit().set限度額管理対象単位数(
+                    row.getDefaultDataName7().getValue().intValue()).build();
         }
         if (row.getDefaultDataName8().getValue() != null) {
-            entity = entity.createBuilderForEdit().set限度額管理対象外単位数(row.getDefaultDataName8().getValue().intValue()).build();
+            entity = entity.createBuilderForEdit().set限度額管理対象外単位数(
+                    row.getDefaultDataName8().getValue().intValue()).build();
         }
         if (row.getDefaultDataName9().getValue() != null) {
-            entity = entity.createBuilderForEdit().set短期入所計画日数(row.getDefaultDataName9().getValue().intValue()).build();
+            entity = entity.createBuilderForEdit().set短期入所計画日数(
+                    row.getDefaultDataName9().getValue().intValue()).build();
         }
         if (row.getDefaultDataName10().getValue() != null) {
-            entity = entity.createBuilderForEdit().set短期入所実日数(row.getDefaultDataName10().getValue().intValue()).build();
+            entity = entity.createBuilderForEdit().set短期入所実日数(
+                    row.getDefaultDataName10().getValue().intValue()).build();
         }
         if (row.getDefaultDataName11().getValue() != null) {
-            entity = entity.createBuilderForEdit().set出来高医療費単位数合計(row.getDefaultDataName11().getValue().intValue()).build();
+            entity = entity.createBuilderForEdit().set出来高医療費単位数合計(
+                    row.getDefaultDataName11().getValue().intValue()).build();
         }
         if (row.getDefaultDataName12().getValue() != null) {
-            entity = entity.createBuilderForEdit().set出来高医療費請求額(row.getDefaultDataName12().getValue()).build();
+            entity = entity.createBuilderForEdit().set出来高医療費請求額(
+                    row.getDefaultDataName12().getValue()).build();
         }
         if (row.getDefaultDataName13().getValue() != null) {
-            entity = entity.createBuilderForEdit().set出来高医療費利用者負担額(row.getDefaultDataName13().getValue()).build();
+            entity = entity.createBuilderForEdit().set出来高医療費利用者負担額(
+                    row.getDefaultDataName13().getValue()).build();
         }
         if (row.getDefaultDataName14().getValue() != null) {
-            entity = entity.createBuilderForEdit().set計画単位数(row.getDefaultDataName14().getValue().intValue()).build();
+            entity = entity.createBuilderForEdit().set計画単位数(
+                    row.getDefaultDataName14().getValue().intValue()).build();
         }
         if (row.getDefaultDataName17().getValue() != null) {
-            entity = entity.createBuilderForEdit().setサービス実日数(row.getDefaultDataName17().getValue().intValue()).build();
+            entity = entity.createBuilderForEdit().setサービス実日数(
+                    row.getDefaultDataName17().getValue().intValue()).build();
         }
         if (row.getDefaultDataName18() != null) {
             entity = entity.createBuilderForEdit().set審査方法区分コード(row.getDefaultDataName18()).build();
@@ -657,10 +579,9 @@ public class SeikyuGakuShukeiPanelHandler {
      * get制御
      *
      * @param shikibetsuNoKanri ShikibetsuNoKanri
+     * @param meisaiPar ShoukanharaihishinseimeisaikensakuParameter
      */
-    public void get制御(ShikibetsuNoKanri shikibetsuNoKanri) {
-        ShoukanharaihishinseimeisaikensakuParameter meisaiPar = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
-                ShoukanharaihishinseimeisaikensakuParameter.class);
+    public void get制御(ShikibetsuNoKanri shikibetsuNoKanri, ShoukanharaihishinseimeisaikensakuParameter meisaiPar) {
         HihokenshaNo 被保険者番号 = meisaiPar.get被保険者番号();
         FlexibleYearMonth サービス年月 = meisaiPar.getサービス年月();
         RString 整理番号 = meisaiPar.get整理番号();
@@ -850,23 +771,6 @@ public class SeikyuGakuShukeiPanelHandler {
         } else if (設定可任意.equals(shikibetsuNoKanri.get社会福祉法人軽減設定区分())) {
             div.getPanelHead().getBtnShafukukeigengaku().setIconNameEnum(IconName.NONE);
         }
-    }
-
-    /**
-     * putViewState
-     */
-    public void putViewState() {
-        ViewStateHolder.put(ViewStateKeys.処理モード, ViewStateHolder.get(ViewStateKeys.処理モード, RString.class));
-        ViewStateHolder.put(ViewStateKeys.申請日, div.getPanelHead().getTxtShinseiYMD().getValue());
-        ShoukanharaihishinseikensakuParameter paramter = new ShoukanharaihishinseikensakuParameter(
-                ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
-                ViewStateHolder.get(ViewStateKeys.サービス年月, FlexibleYearMonth.class),
-                ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
-                new JigyoshaNo(div.getPanelHead().getTxtJigyoshaBango().getValue()),
-                div.getPanelHead().getTxtShomeisho().getValue(),
-                div.getPanelHead().getTxtMeisaiBango().getValue(),
-                null);
-        ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, paramter);
     }
 
     /**

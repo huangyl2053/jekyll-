@@ -18,11 +18,13 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ImageManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoTokkijikoManager;
+import jp.co.ndensan.reams.db.dbz.service.core.chosatokkishokai.ChosaTokkiShokaiFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.io.File;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -45,7 +47,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -76,6 +78,8 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     private RString ninteichosaRirekiNo;
     @JsonProperty("ninteichosaTokkijikoNoList")
     private RString ninteichosaTokkijikoNoList;
+    @JsonProperty("downLoadFilePath")
+    private RString downLoadFilePath;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -297,6 +301,24 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     @JsonProperty("ninteichosaTokkijikoNoList")
     public void setNinteichosaTokkijikoNoList(RString ninteichosaTokkijikoNoList) {
         this.ninteichosaTokkijikoNoList = ninteichosaTokkijikoNoList;
+    }
+
+    /*
+     * getdownLoadFilePath
+     * @return downLoadFilePath
+     */
+    @JsonProperty("downLoadFilePath")
+    public RString getDownLoadFilePath() {
+        return downLoadFilePath;
+    }
+
+    /*
+     * setdownLoadFilePath
+     * @param downLoadFilePath downLoadFilePath
+     */
+    @JsonProperty("downLoadFilePath")
+    public void setDownLoadFilePath(RString downLoadFilePath) {
+        this.downLoadFilePath = downLoadFilePath;
     }
 
     /*
@@ -570,6 +592,11 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
         rembanPageNo = new RString("0");
         tokkijikoNoPageNo = new RString("0");
         ViewStateHolder.put(ChosaTokkiShokaiKey.認定調査特記事項List, 認定調査特記事項List);
+        ImageManager imageManager = InstanceProvider.create(ImageManager.class);
+        ChosaTokkiShokaiFinder finder = InstanceProvider.create(ChosaTokkiShokaiFinder.class);
+        Image イメージ情報 = imageManager.getイメージ情報(new ShinseishoKanriNo(shinseishoKanriNo));
+        FilesystemName sharedFileName = finder.selectSharedFileNameByKey(new ShinseishoKanriNo(shinseishoKanriNo));
+        downLoadFilePath = getDownLoadFilePath(イメージ情報.getイメージ共有ファイルID(), sharedFileName);
         initializa(認定調査特記事項List.get(0).get(0));
     }
 
@@ -585,10 +612,8 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
                 = NinteiChosaTokkiJikou.getEnumByDbt5205認定調査特記事項番号(認定調査特記事項.get特記情報().get認定調査特記事項番号());
         boolean is特記事項テキスト_イメージ区分がテキスト
                 = is特記事項テキスト_イメージ区分がテキスト(認定調査特記事項.get特記情報().get特記事項テキスト_イメージ区分());
-        boolean is原本マスク区分が原本
-                = is原本マスク区分が原本(認定調査特記事項.get特記情報().get原本マスク区分().getColumnValue());
         initializaテキストエリア(認定調査特記事項マッピング, 認定調査特記事項, is特記事項テキスト_イメージ区分がテキスト);
-        initializaイメージエリア(認定調査特記事項マッピング, 認定調査特記事項, is特記事項テキスト_イメージ区分がテキスト, is原本マスク区分が原本);
+        initializaイメージエリア(認定調査特記事項マッピング, 認定調査特記事項, is特記事項テキスト_イメージ区分がテキスト);
         setButtonsDisable(is特記事項テキスト_イメージ区分がテキスト);
     }
 
@@ -619,33 +644,35 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
 
     @JsonIgnore
     private void initializaイメージエリア(NinteiChosaTokkiJikou 認定調査特記事項マッピング, ChosaTokkiShokaiJoho 認定調査特記事項,
-            boolean is特記事項テキスト_イメージ区分がテキスト, boolean is原本マスク区分が原本) {
+            boolean is特記事項テキスト_イメージ区分がテキスト) {
         this.ImageTokki.getTxtTokkiJikouNoImage().setValue(認定調査特記事項マッピング.get画面表示用特記事項番号());
         this.ImageTokki.getTxtTokkiJikoNoImage().setValue(new Decimal(認定調査特記事項.get特記情報().get認定調査特記事項連番()));
         this.ImageTokki.getTxtTokkiJikouNameImage().setValue(認定調査特記事項マッピング.get特記事項名());
-        getImage(認定調査特記事項.get特記情報(), is特記事項テキスト_イメージ区分がテキスト, is原本マスク区分が原本);
+        if (!is特記事項テキスト_イメージ区分がテキスト) {
+            getImage(認定調査特記事項.get特記情報());
+        }
     }
 
     @JsonIgnore
-    private void getImage(NinteichosahyoTokkijiko 認定調査特記事項, boolean is特記事項テキスト_イメージ区分がテキスト, boolean is原本マスク区分が原本) {
+    private void getImage(NinteichosahyoTokkijiko 認定調査特記事項) {
         if (TokkijikoTextImageKubun.イメージ.getコード().equals(認定調査特記事項.get特記事項テキスト_イメージ区分())) {
-            ImageManager imageManager = InstanceProvider.create(ImageManager.class);
-            Image イメージ情報 = imageManager.getイメージ情報(new ShinseishoKanriNo(shinseishoKanriNo));
-            if (イメージ情報 != null) {
-                RDateTime sharedFileId = イメージ情報.getイメージ共有ファイルID();
-                if (!is特記事項テキスト_イメージ区分がテキスト && is原本マスク区分が原本) {
-                    RString sharedFileName = replaceShareFileName(
-                            NinteiChosaTokkiJikou.getEnumBy画面認定調査特記事項番号(TestTokki.getTxtTokkiJikouNo().getValue()).getイメージファイル(),
-                            認定調査特記事項.get認定調査特記事項連番(), !is特記事項テキスト_イメージ区分がテキスト && true);
-                    ImageTokki.getImgGenpoImage().setSrc(getFilePath(sharedFileId, sharedFileName));
-                } else if (!is特記事項テキスト_イメージ区分がテキスト && !is原本マスク区分が原本) {
-                    RString sharedFileName = replaceShareFileName(
-                            NinteiChosaTokkiJikou.getEnumBy画面認定調査特記事項番号(TestTokki.getTxtTokkiJikouNo().getValue()).getイメージファイル(),
-                            認定調査特記事項.get認定調査特記事項連番(), false);
-                    ImageTokki.getImgMaskingImage().setSrc(getFilePath(sharedFileId, sharedFileName));
-                }
+            RString path原本 = getImageSrc(Path.combinePath(downLoadFilePath, replaceShareFileName(
+                    NinteiChosaTokkiJikou.getEnumBy画面認定調査特記事項番号(TestTokki.getTxtTokkiJikouNo().getValue()).getイメージファイル(),
+                    認定調査特記事項.get認定調査特記事項連番(), true)));
+            RString pathマスク = getImageSrc(Path.combinePath(downLoadFilePath, replaceShareFileName(
+                    NinteiChosaTokkiJikou.getEnumBy画面認定調査特記事項番号(TestTokki.getTxtTokkiJikouNo().getValue()).getイメージファイル(),
+                    認定調査特記事項.get認定調査特記事項連番(), false)));
+            if (File.exists(pathマスク)) {
+                ImageTokki.getImgGenpoImage().setSrc(pathマスク);
+                ImageTokki.getImgMaskingImage().setSrc(path原本);
+            } else {
+                ImageTokki.getImgGenpoImage().setSrc(path原本);
             }
         }
+    }
+
+    private RString getImageSrc(RString path) {
+        return Path.combinePath(new RString(File.separator + "db"), new RString("dbz"), path.substring(path.indexOf("image")));
     }
 
     @JsonIgnore
@@ -731,13 +758,12 @@ public class ChosaTokkiShokaiDiv extends Panel implements IChosaTokkiShokaiDiv {
     }
 
     @JsonIgnore
-    private RString getFilePath(RDateTime sharedFileId, RString sharedFileName) {
-        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app/webapps/db#dbz/WEB-INF/image/"));
+    private RString getDownLoadFilePath(RDateTime sharedFileId, FilesystemName sharedFileName) {
+        RString imagePath = Path.combinePath(Path.getUserHomePath(), new RString("app"), new RString("webapps"), new RString("db#dbz"),
+                new RString("WEB-INF"), new RString("image"));
         ReadOnlySharedFileEntryDescriptor descriptor
-                = new ReadOnlySharedFileEntryDescriptor(new FilesystemName(sharedFileName),
-                        sharedFileId);
-        SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath));
-        return Path.combinePath(new RString("/db/dbz/image/"), sharedFileName);
+                = new ReadOnlySharedFileEntryDescriptor(sharedFileName, sharedFileId);
+        return SharedFile.copyToLocal(descriptor, new FilesystemPath(imagePath)).toRString();
     }
 
     @JsonIgnore

@@ -8,7 +8,7 @@
 
     <select id="get最新住宅改修住所"
             resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujizenshinsei.NewJutakuKaishuHiEntity"
-            parameterType="java.util.Map" fetchSize="500">
+            parameterType="java.util.Map" fetchSize="500" resultOrdered="true">
         SELECT
         shinsei."serviceTeikyoYM" AS "serviceTeikyoYM",
         kaishu."jutakuKaishuJutakuAddress" AS "jutakuKaishuJutakuAddress"
@@ -28,7 +28,7 @@
    
     <select id="get開始サービス提供年月ある"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jutakukaishujizenshinsei.JutakuKaishuHiParameter"
-            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3034ShokanShinseiEntity" fetchSize="500">
+            resultType="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity" fetchSize="500" resultOrdered="true">
         SELECT *
         FROM
         rgdb."DbT3034ShokanShinsei" T1
@@ -63,7 +63,7 @@
     
     <select id="get開始サービス提供年月なし"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jutakukaishujizenshinsei.JutakuKaishuHiParameter"
-            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3034ShokanShinseiEntity" fetchSize="500">
+            resultType="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity" fetchSize="500" resultOrdered="true">
         SELECT *
         FROM
         rgdb."DbT3034ShokanShinsei" T1
@@ -105,7 +105,7 @@
     </resultMap>
     <select id="get住宅改修費支払結果"
             resultMap="resultMap_ShiharaiKekkaResult"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jutakukaishujizenshinsei.JutakuKaishuHiParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jutakukaishujizenshinsei.JutakuKaishuHiParameter" fetchSize="500" resultOrdered="true">
         SELECT
         SUM(T1."shiharaiKingakuTotal") AS "shiharaiKingakuTotal",
         SUM(T1."hokenTaishoHiyogaku") AS "hokenTaishoHiyogaku",
@@ -146,7 +146,7 @@
 
     <select id="getWK給付率"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jutakukaishujizenshinsei.JutakuKaishuHiParameter"
-            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujizenshinsei.KyufuritsuEntity" fetchSize="500">
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.jutakukaishujizenshinsei.KyufuritsuEntity" fetchSize="500" resultOrdered="true">
         SELECT 
             futanWariai."rirekiNo" AS "rirekiNo",
             wariaiMeisai."edaNo" AS "edaNo",

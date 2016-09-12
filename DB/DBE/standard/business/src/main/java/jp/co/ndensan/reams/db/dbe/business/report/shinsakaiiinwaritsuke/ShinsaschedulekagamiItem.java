@@ -29,7 +29,6 @@ public class ShinsaschedulekagamiItem {
     private final RString ninshoshaYakushokuMei;
     private final RString ninshoshaYakushokuMei1;
     private final RString ninshoshaYakushokuMei2;
-    private final RString atenaRenban;
     private final RString customerBarCode;
     private final RString yubinNo;
     private final RString jushoText;
@@ -54,7 +53,6 @@ public class ShinsaschedulekagamiItem {
      * @param ninshoshaYakushokuMei 認証者役職名
      * @param ninshoshaYakushokuMei1 認証者役職名1行目
      * @param ninshoshaYakushokuMei2 認証者役職名2行目
-     * @param atenaRenban 宛名連番
      * @param customerBarCode カスタマーバーコード
      * @param yubinNo 宛名郵便番号
      * @param jushoText 宛名住所
@@ -77,7 +75,6 @@ public class ShinsaschedulekagamiItem {
             RString ninshoshaYakushokuMei,
             RString ninshoshaYakushokuMei1,
             RString ninshoshaYakushokuMei2,
-            RString atenaRenban,
             RString customerBarCode,
             RString yubinNo,
             RString jushoText,
@@ -99,7 +96,6 @@ public class ShinsaschedulekagamiItem {
         this.ninshoshaYakushokuMei = ninshoshaYakushokuMei;
         this.ninshoshaYakushokuMei1 = ninshoshaYakushokuMei1;
         this.ninshoshaYakushokuMei2 = ninshoshaYakushokuMei2;
-        this.atenaRenban = atenaRenban;
         this.customerBarCode = customerBarCode;
         this.yubinNo = yubinNo;
         this.jushoText = jushoText;

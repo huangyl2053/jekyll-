@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShi
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Apr 08 13:45:44 CST 2016 
+ * Thu Aug 04 11:39:56 JST 2016 
  */
 
 
@@ -15,11 +15,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * dgShinsakaiIinIchiran_Row のクラスファイル 
  * 
- * 
+ * @author 自動生成
  */
 
 public class dgShinsakaiIinIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     private RString code;
     private RString shinsakaiIinName;

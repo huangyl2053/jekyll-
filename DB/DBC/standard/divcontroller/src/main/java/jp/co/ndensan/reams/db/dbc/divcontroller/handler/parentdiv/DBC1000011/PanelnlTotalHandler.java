@@ -202,10 +202,10 @@ public class PanelnlTotalHandler {
         if (キー.equals(div.getRadKetteishaUketsukeYM().getSelectedKey())) {
             paramter.set抽出モード(抽出条件_3);
         }
-        paramter.set決定日付From(div.getTxtUketsukebi().getFromValue());
-        paramter.set決定日付To(div.getTxtUketsukebi().getToValue());
-        paramter.set受付日付From(div.getTxtKeteibiJoken().getFromValue());
-        paramter.set受付日付To(div.getTxtKeteibiJoken().getToValue());
+        paramter.set受付日付From(div.getTxtUketsukebi().getFromValue());
+        paramter.set受付日付To(div.getTxtUketsukebi().getToValue());
+        paramter.set決定日付From(div.getTxtKeteibiJoken().getFromValue());
+        paramter.set決定日付To(div.getTxtKeteibiJoken().getToValue());
         paramter.set決定者受付年月(div.getTxtKeteishaUketsukeYM().getDomain());
         if (キー.equals(div.getRadInnsho().getSelectedKey())) {
             paramter.set印書(抽出条件_1);

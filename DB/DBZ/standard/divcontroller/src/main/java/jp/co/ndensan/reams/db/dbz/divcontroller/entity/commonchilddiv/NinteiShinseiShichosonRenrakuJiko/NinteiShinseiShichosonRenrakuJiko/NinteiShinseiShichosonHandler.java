@@ -5,20 +5,18 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseiShichosonRenrakuJiko.NinteiShinseiShichosonRenrakuJiko;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ninteishinsei.NinteiShinseiCodeModel;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 共有子Div「市町村連絡事項」の実装クラスです。
  *
- * @reamsid_L DBE-1300-090 suguangjun
+ * @reamsid_L DBZ-1300-090 suguangjun
  */
 public class NinteiShinseiShichosonHandler {
 
-    private static final RString InputMode = new RString("InputMode");
-    private static final RString ShokaiMode = new RString("ShokaiMode");
     private final NinteiShinseiShichosonRenrakuJikoDiv div;
 
     /**
@@ -37,14 +35,14 @@ public class NinteiShinseiShichosonHandler {
      */
     public void initialize(NinteiShinseiCodeModel shinseiCodeModel) {
         div.getTxtRenrakujiko().clearValue();
-        if (InputMode.equals(shinseiCodeModel.get表示モード())) {
+        if (NinteiShinseiCodeModel.HyojiMode.InputMode.equals(shinseiCodeModel.get表示モード())) {
             div.getTxtRenrakujiko().setValue(shinseiCodeModel.get連絡事項());
             div.getBtnModoru().setDisabled(false);
             div.getBtnToroku().setDisabled(false);
             div.getTxtRenrakujiko().setDisabled(false);
-        } else if (ShokaiMode.equals(shinseiCodeModel.get表示モード())) {
+        } else if (NinteiShinseiCodeModel.HyojiMode.ShokaiMode.equals(shinseiCodeModel.get表示モード())) {
             div.getTxtRenrakujiko().setValue(shinseiCodeModel.get連絡事項());
-            div.getBtnModoru().setDisabled(true);
+            div.getBtnModoru().setDisabled(false);
             div.getBtnToroku().setDisabled(true);
             div.getTxtRenrakujiko().setDisabled(true);
         }

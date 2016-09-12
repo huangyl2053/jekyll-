@@ -5,25 +5,22 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0020031;
 
-import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
-import jp.co.ndensan.reams.db.dbu.definition.jigyohokokugeppoo.JigyoHokokuGeppoDetalSearchParameter;
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020031.DBU0020031StateName;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoo.JigyoHokokuGeppoDetalSearchParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020031.YoshikiIchinoniIchinosanHoseiDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.JigyoHokokuGeppoParameter;
-import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbu.service.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHako;
+import jp.co.ndensan.reams.db.dbu.service.core.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHako;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.core.ui.response.IStateEnumerations;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -42,14 +39,7 @@ public class YoshikiIchinoniIchinosanHoseiHandler {
     private static final Code 集計番号_０９００ = new Code("0900");
     private static final Code 集計番号_１０２０ = new Code("1020");
     private static final Code 集計番号_１００２ = new Code("1002");
-    private static final RString 修正状態 = new RString("更新");
     private static final RString 削除状態 = new RString("削除");
-    private static final RString 食費_居住費3 = new RString("(3)食費・居住費に係る負担限度額認定（総括）");
-    private static final RString 食費_居住費6 = new RString("(6)食費・居住費に係る負担限度額認定（再掲：第２号被保険者分）");
-    private static final RString 利用者負担滅額4 = new RString("(4)利用者負担滅額・免除認定（総括）");
-    private static final RString 利用者負担滅額7 = new RString("(7)利用者負担滅額・免除認定（再掲：第２号被保険者分）");
-    private static final RString 介護老人福祉5 = new RString("(5)介護老人福祉施設旧措置入所者に係る滅額・免除認定（総括）");
-    private static final RString 介護老人福祉8 = new RString("(8)介護老人福祉施設旧措置入所者に係る滅額・免除認定（再掲：第２号被保険者分）");
     private static final Decimal NUM_2 = new Decimal("2");
     private static final Decimal NUM_3 = new Decimal("3");
     private static final Decimal NUM_4 = new Decimal("4");
@@ -91,6 +81,12 @@ public class YoshikiIchinoniIchinosanHoseiHandler {
     private static final RString STR_007 = new RString("007");
     private static final RString STR_107 = new RString("107");
     private static final RString STR_207 = new RString("207");
+    private static final RString 様式種類_11 = new RString("11");
+    private static final RString 様式種類_12 = new RString("12");
+    private static final RString 様式種類_21 = new RString("21");
+    private static final RString 様式種類_22 = new RString("22");
+    private static final RString 様式種類_31 = new RString("31");
+    private static final RString 様式種類_32 = new RString("32");
 
     /**
      * コンストラクタです。
@@ -119,87 +115,14 @@ public class YoshikiIchinoniIchinosanHoseiHandler {
         div.getPanelHead().getTxtShukeiNengetsu().setValue(new RDate(集計年月.toString()));
         div.getPanelHead().getTxtYosikiHosei().setValue(引き継ぎデータ.get保険者コード());
         div.getPanelHead().getTxtHokensyaName().setValue(引き継ぎデータ.get市町村名称());
-        set様式種類();
     }
 
     /**
-     * 様式１の２、様式１の３補正画面のinitializeイベント。
+     * 食費_居住費の設定。
      *
-     * @param 引き継ぎデータ JigyoHokokuGeppoParameter
-     * @param 状態 RString
-     * @return stateName
+     * @param 食費_居住費list List
      */
-    public IStateEnumerations initialize(JigyoHokokuGeppoParameter 引き継ぎデータ, RString 状態) {
-        RString 様式種類 = 引き継ぎデータ.get行様式種類コード();
-        List<RString> list11 = ViewStateHolder.get(ViewStateKeys.様式種類_11, List.class);
-        List<RString> list12 = ViewStateHolder.get(ViewStateKeys.様式種類_12, List.class);
-        List<RString> list21 = ViewStateHolder.get(ViewStateKeys.様式種類_21, List.class);
-        List<RString> list22 = ViewStateHolder.get(ViewStateKeys.様式種類_22, List.class);
-        List<RString> list31 = ViewStateHolder.get(ViewStateKeys.様式種類_31, List.class);
-        List<RString> list32 = ViewStateHolder.get(ViewStateKeys.様式種類_32, List.class);
-        if (list11.contains(様式種類)) {
-            List<JigyoHokokuTokeiData> 食費_居住費3List = get事業報告月報詳細データリスト(引き継ぎデータ, 集計番号_０７１０);
-            set食費_居住費(食費_居住費3List);
-            div.getPanelDaisan().setTitle(食費_居住費3);
-            ViewStateHolder.put(ViewStateKeys.食費_居住費データリスト, (Serializable) 食費_居住費3List);
-            if (修正状態.equals(状態)) {
-                return DBU0020031StateName.修正状態1;
-            }
-            return DBU0020031StateName.削除状態1;
-        } else if (list21.contains(様式種類)) {
-            List<JigyoHokokuTokeiData> 食費_居住費6List = get事業報告月報詳細データリスト(引き継ぎデータ, 集計番号_１０１０);
-            set食費_居住費(食費_居住費6List);
-            div.getPanelDaisan().setTitle(食費_居住費6);
-            ViewStateHolder.put(ViewStateKeys.食費_居住費データリスト, (Serializable) 食費_居住費6List);
-            if (修正状態.equals(状態)) {
-                return DBU0020031StateName.修正状態1;
-            }
-            return DBU0020031StateName.削除状態1;
-        } else if (list31.contains(様式種類)) {
-            List<JigyoHokokuTokeiData> 利用者負担滅額4List = get事業報告月報詳細データリスト(引き継ぎデータ, 集計番号_０６００);
-            set利用者負担滅額(利用者負担滅額4List);
-            div.getPanelDaiyon().setTitle(利用者負担滅額4);
-            ViewStateHolder.put(ViewStateKeys.利用者負担滅額データリスト, (Serializable) 利用者負担滅額4List);
-            if (修正状態.equals(状態)) {
-                return DBU0020031StateName.修正状態2;
-            }
-            return DBU0020031StateName.削除状態2;
-        } else if (list12.contains(様式種類)) {
-            List<JigyoHokokuTokeiData> 利用者負担滅額7List = get事業報告月報詳細データリスト(引き継ぎデータ, 集計番号_０９００);
-            set利用者負担滅額(利用者負担滅額7List);
-            div.getPanelDaiyon().setTitle(利用者負担滅額7);
-            ViewStateHolder.put(ViewStateKeys.利用者負担滅額データリスト, (Serializable) 利用者負担滅額7List);
-            if (修正状態.equals(状態)) {
-                return DBU0020031StateName.修正状態2;
-            }
-            return DBU0020031StateName.削除状態2;
-        } else if (list22.contains(様式種類)) {
-            List<JigyoHokokuTokeiData> 特定負担限度額5List = get事業報告月報詳細データリスト(引き継ぎデータ, 集計番号_０７２０);
-            List<JigyoHokokuTokeiData> 利用者負担5List = get事業報告月報詳細データリスト(引き継ぎデータ, 集計番号_０７０２);
-            set特定負担限度額と利用者負担(特定負担限度額5List, 利用者負担5List);
-            div.getPanelDaigo().setTitle(介護老人福祉5);
-            ViewStateHolder.put(ViewStateKeys.特定負担限度額データリスト, (Serializable) 特定負担限度額5List);
-            ViewStateHolder.put(ViewStateKeys.利用者負担データリスト, (Serializable) 利用者負担5List);
-            if (修正状態.equals(状態)) {
-                return DBU0020031StateName.修正状態3;
-            }
-            return DBU0020031StateName.削除状態3;
-        } else if (list32.contains(様式種類)) {
-            List<JigyoHokokuTokeiData> 特定負担限度額8List = get事業報告月報詳細データリスト(引き継ぎデータ, 集計番号_１０２０);
-            List<JigyoHokokuTokeiData> 利用者負担8List = get事業報告月報詳細データリスト(引き継ぎデータ, 集計番号_１００２);
-            set特定負担限度額と利用者負担(特定負担限度額8List, 利用者負担8List);
-            div.getPanelDaigo().setTitle(介護老人福祉8);
-            ViewStateHolder.put(ViewStateKeys.特定負担限度額データリスト, (Serializable) 特定負担限度額8List);
-            ViewStateHolder.put(ViewStateKeys.利用者負担データリスト, (Serializable) 利用者負担8List);
-            if (修正状態.equals(状態)) {
-                return DBU0020031StateName.修正状態3;
-            }
-            return DBU0020031StateName.削除状態3;
-        }
-        return DBU0020031StateName.NoChange;
-    }
-
-    private void set食費_居住費(List<JigyoHokokuTokeiData> 食費_居住費list) {
+    public void set食費_居住費(List<JigyoHokokuTokeiData> 食費_居住費list) {
         for (JigyoHokokuTokeiData entity : 食費_居住費list) {
             if (entity.get集計結果値() != null) {
                 switch (entity.get縦番号().intValue()) {
@@ -231,7 +154,12 @@ public class YoshikiIchinoniIchinosanHoseiHandler {
         }
     }
 
-    private void set利用者負担滅額(List<JigyoHokokuTokeiData> 利用者負担滅額list) {
+    /**
+     * 利用者負担滅額の設定。
+     *
+     * @param 利用者負担滅額list List
+     */
+    public void set利用者負担滅額(List<JigyoHokokuTokeiData> 利用者負担滅額list) {
         for (JigyoHokokuTokeiData entity : 利用者負担滅額list) {
             if (entity.get横番号().equals(Decimal.ONE) && entity.get集計結果値() != null) {
                 switch (entity.get縦番号().intValue()) {
@@ -262,7 +190,13 @@ public class YoshikiIchinoniIchinosanHoseiHandler {
         }
     }
 
-    private void set特定負担限度額と利用者負担(List<JigyoHokokuTokeiData> 特定負担限度額5list,
+    /**
+     * 特定負担限度額と利用者負担の設定。
+     *
+     * @param 特定負担限度額5list List
+     * @param 利用者負担5list List
+     */
+    public void set特定負担限度額と利用者負担(List<JigyoHokokuTokeiData> 特定負担限度額5list,
             List<JigyoHokokuTokeiData> 利用者負担5list) {
         for (JigyoHokokuTokeiData entity : 特定負担限度額5list) {
             if (entity.get集計結果値() != null) {
@@ -667,7 +601,7 @@ public class YoshikiIchinoniIchinosanHoseiHandler {
      * @param 集計番号 Code
      * @return List<JigyoHokokuNenpoResult>
      */
-    private List<JigyoHokokuTokeiData> get事業報告月報詳細データリスト(
+    public List<JigyoHokokuTokeiData> get事業報告月報詳細データリスト(
             JigyoHokokuGeppoParameter 引き継ぎデータ, Code 集計番号) {
         JigyoHokokuGeppoDetalSearchParameter parameter
                 = JigyoHokokuGeppoDetalSearchParameter.createParameterForJigyoHokokuGeppoDetal(
@@ -685,38 +619,44 @@ public class YoshikiIchinoniIchinosanHoseiHandler {
     /**
      * 引き継ぎデータより、画面修正データを抽出する。
      *
-     * @param 引き継ぎデータ JigyoHokokuGeppoParameter
+     * @param 引き継ぎデータ JigyoHokokuGeppoHoseiHakoResult
+     * @param 様式種類List11 List
+     * @param 様式種類List12 List
+     * @param 様式種類List21 List
+     * @param 様式種類List22 List
+     * @param 様式種類List31 List
+     * @param 様式種類List32 List
+     * @param 食費_居住費データリスト List
+     * @param 利用者負担滅額データリスト List
+     * @param 特定負担限度額データリスト List
+     * @param 利用者負担データリスト List
      * @return List<JigyoHokokuNenpoUpdateParameter> 修正データリスト
      */
-    public List<JigyoHokokuTokeiData> get修正データリスト(JigyoHokokuGeppoParameter 引き継ぎデータ) {
+    public List<JigyoHokokuTokeiData> get修正データリスト(JigyoHokokuGeppoParameter 引き継ぎデータ,
+            List<RString> 様式種類List11,
+            List<RString> 様式種類List12,
+            List<RString> 様式種類List21,
+            List<RString> 様式種類List22,
+            List<RString> 様式種類List31,
+            List<RString> 様式種類List32,
+            List<JigyoHokokuTokeiData> 食費_居住費データリスト,
+            List<JigyoHokokuTokeiData> 利用者負担滅額データリスト,
+            List<JigyoHokokuTokeiData> 特定負担限度額データリスト,
+            List<JigyoHokokuTokeiData> 利用者負担データリスト) {
         List<JigyoHokokuTokeiData> 修正データリスト = new ArrayList<>();
         RString 様式種類 = 引き継ぎデータ.get行様式種類コード();
-        List<RString> list11 = ViewStateHolder.get(ViewStateKeys.様式種類_11, List.class);
-        List<RString> list12 = ViewStateHolder.get(ViewStateKeys.様式種類_12, List.class);
-        List<RString> list21 = ViewStateHolder.get(ViewStateKeys.様式種類_21, List.class);
-        List<RString> list22 = ViewStateHolder.get(ViewStateKeys.様式種類_22, List.class);
-        List<RString> list31 = ViewStateHolder.get(ViewStateKeys.様式種類_31, List.class);
-        List<RString> list32 = ViewStateHolder.get(ViewStateKeys.様式種類_32, List.class);
-        if (list11.contains(様式種類) || list21.contains(様式種類)) {
-            List<JigyoHokokuTokeiData> 食費_居住費データリスト = ViewStateHolder
-                    .get(ViewStateKeys.食費_居住費データリスト, List.class);
+        if (様式種類List11.contains(様式種類) || 様式種類List21.contains(様式種類)) {
             修正データリスト = get食費_居住費修正データリスト(食費_居住費データリスト, 修正データリスト);
-        } else if (list31.contains(様式種類) || list12.contains(様式種類)) {
-            List<JigyoHokokuTokeiData> 利用者負担滅額データリスト = ViewStateHolder
-                    .get(ViewStateKeys.利用者負担滅額データリスト, List.class);
+        } else if (様式種類List31.contains(様式種類) || 様式種類List12.contains(様式種類)) {
             修正データリスト = get利用者負担滅額修正データリスト(利用者負担滅額データリスト, 修正データリスト);
-        } else if (list22.contains(様式種類) || list32.contains(様式種類)) {
-            List<JigyoHokokuTokeiData> 特定負担限度額データリスト = ViewStateHolder
-                    .get(ViewStateKeys.特定負担限度額データリスト, List.class);
-            List<JigyoHokokuTokeiData> 利用者負担データリスト = ViewStateHolder
-                    .get(ViewStateKeys.利用者負担データリスト, List.class);
+        } else if (様式種類List22.contains(様式種類) || 様式種類List32.contains(様式種類)) {
             修正データリスト = get特定と利用者修正データリスト(
                     特定負担限度額データリスト,
                     利用者負担データリスト,
                     修正データリスト,
                     様式種類,
-                    list22,
-                    list32);
+                    様式種類List22,
+                    様式種類List32);
         }
         return 修正データリスト;
     }
@@ -1031,51 +971,9 @@ public class YoshikiIchinoniIchinosanHoseiHandler {
      *
      * @param 引き継ぎデータ JigyoHokokuGeppoParameter
      */
-    public void delete(JigyoHokokuGeppoParameter 引き継ぎデータ) {
+    public void delete(List<JigyoHokokuTokeiData> 引き継ぎデータ) {
         JigyoHokokuGeppoHoseiHako finder = InstanceProvider.create(JigyoHokokuGeppoHoseiHako.class);
-        RString 様式種類 = 引き継ぎデータ.get行様式種類コード();
-        List<RString> list11 = ViewStateHolder.get(ViewStateKeys.様式種類_11, List.class);
-        List<RString> list12 = ViewStateHolder.get(ViewStateKeys.様式種類_12, List.class);
-        List<RString> list21 = ViewStateHolder.get(ViewStateKeys.様式種類_21, List.class);
-        List<RString> list22 = ViewStateHolder.get(ViewStateKeys.様式種類_22, List.class);
-        List<RString> list31 = ViewStateHolder.get(ViewStateKeys.様式種類_31, List.class);
-        List<RString> list32 = ViewStateHolder.get(ViewStateKeys.様式種類_32, List.class);
-        if (list11.contains(様式種類)) {
-            JigyoHokokuGeppoDetalSearchParameter parameter = getParameter(引き継ぎデータ, 集計番号_０７１０);
-            finder.deleteJigyoHokokuGeppoData(parameter);
-        } else if (list21.contains(様式種類)) {
-            JigyoHokokuGeppoDetalSearchParameter parameter = getParameter(引き継ぎデータ, 集計番号_１０１０);
-            finder.deleteJigyoHokokuGeppoData(parameter);
-        } else if (list31.contains(様式種類)) {
-            JigyoHokokuGeppoDetalSearchParameter parameter = getParameter(引き継ぎデータ, 集計番号_０６００);
-            finder.deleteJigyoHokokuGeppoData(parameter);
-        } else if (list12.contains(様式種類)) {
-            JigyoHokokuGeppoDetalSearchParameter parameter = getParameter(引き継ぎデータ, 集計番号_０９００);
-            finder.deleteJigyoHokokuGeppoData(parameter);
-        } else if (list22.contains(様式種類)) {
-            JigyoHokokuGeppoDetalSearchParameter parameter = getParameter(引き継ぎデータ, 集計番号_０７２０);
-            finder.deleteJigyoHokokuGeppoData(parameter);
-            parameter = getParameter(引き継ぎデータ, 集計番号_０７０２);
-            finder.deleteJigyoHokokuGeppoData(parameter);
-        } else if (list32.contains(様式種類)) {
-            JigyoHokokuGeppoDetalSearchParameter parameter = getParameter(引き継ぎデータ, 集計番号_１０２０);
-            finder.deleteJigyoHokokuGeppoData(parameter);
-            parameter = getParameter(引き継ぎデータ, 集計番号_１００２);
-            finder.deleteJigyoHokokuGeppoData(parameter);
-        }
-    }
-
-    private JigyoHokokuGeppoDetalSearchParameter getParameter(JigyoHokokuGeppoParameter 引き継ぎデータ,
-            Code 集計番号) {
-        return JigyoHokokuGeppoDetalSearchParameter.createParameterForJigyoHokokuGeppoDetal(
-                new FlexibleYear(引き継ぎデータ.get行報告年()),
-                引き継ぎデータ.get行報告月(),
-                new FlexibleYear(引き継ぎデータ.get行集計対象年()),
-                引き継ぎデータ.get行集計対象月(),
-                引き継ぎデータ.get行統計対象区分(),
-                new LasdecCode(引き継ぎデータ.get行市町村コード()),
-                new Code(引き継ぎデータ.get行表番号()),
-                集計番号);
+        finder.deleteJigyoHokokuGeppoData(引き継ぎデータ);
     }
 
     /**
@@ -1115,37 +1013,41 @@ public class YoshikiIchinoniIchinosanHoseiHandler {
 
     /**
      * 様式種類の初期化のメソッドます。
+     *
+     * @return map 様式種類
      */
-    public void set様式種類() {
+    public Map<RString, ArrayList<RString>> set様式種類() {
+        Map<RString, ArrayList<RString>> map = new HashMap<>();
         ArrayList<RString> list11 = new ArrayList<>();
         list11.add(STR_002);
         list11.add(STR_102);
         list11.add(STR_202);
-        ViewStateHolder.put(ViewStateKeys.様式種類_11, list11);
+        map.put(様式種類_11, list11);
         ArrayList<RString> list12 = new ArrayList<>();
         list12.add(STR_005);
         list12.add(STR_105);
         list12.add(STR_205);
-        ViewStateHolder.put(ViewStateKeys.様式種類_12, list12);
+        map.put(様式種類_12, list12);
         ArrayList<RString> list21 = new ArrayList<>();
         list21.add(STR_003);
         list21.add(STR_103);
         list21.add(STR_203);
-        ViewStateHolder.put(ViewStateKeys.様式種類_21, list21);
+        map.put(様式種類_21, list21);
         ArrayList<RString> list22 = new ArrayList<>();
         list22.add(STR_006);
         list22.add(STR_106);
         list22.add(STR_206);
-        ViewStateHolder.put(ViewStateKeys.様式種類_22, list22);
+        map.put(様式種類_22, list22);
         ArrayList<RString> list31 = new ArrayList<>();
         list31.add(STR_004);
         list31.add(STR_104);
         list31.add(STR_204);
-        ViewStateHolder.put(ViewStateKeys.様式種類_31, list31);
+        map.put(様式種類_31, list31);
         ArrayList<RString> list32 = new ArrayList<>();
         list32.add(STR_007);
         list32.add(STR_107);
         list32.add(STR_207);
-        ViewStateHolder.put(ViewStateKeys.様式種類_32, list32);
+        map.put(様式種類_32, list32);
+        return map;
     }
 }

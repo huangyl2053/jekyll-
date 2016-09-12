@@ -4,18 +4,25 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2110001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.OutputChohyoIchiran.IOutputChohyoIchiranDiv;
+import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.OutputChohyoIchiran.OutputChohyoIchiranDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Icon;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
 
 /**
- * TokuchoSofuJohoSakusei のクラスファイル 
- * 
- * @author 自動生成
+ * TokuchoSofuJohoSakusei のクラスファイル
+ *
+ * @reamsid_L DBB-1840-010 zhangrui
  */
 public class TokuchoSofuJohoSakuseiDiv extends PanelBatchParameter {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -26,6 +33,8 @@ public class TokuchoSofuJohoSakuseiDiv extends PanelBatchParameter {
     private DropDownList ddlFukaNendo;
     @JsonProperty("tbldgTokuchoIdoJoho")
     private tbldgTokuchoIdoJohoDiv tbldgTokuchoIdoJoho;
+    @JsonProperty("ccdOutputChohyoIchiran")
+    private OutputChohyoIchiranDiv ccdOutputChohyoIchiran;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -67,6 +76,15 @@ public class TokuchoSofuJohoSakuseiDiv extends PanelBatchParameter {
     @JsonProperty("tbldgTokuchoIdoJoho")
     public void setTbldgTokuchoIdoJoho(tbldgTokuchoIdoJohoDiv tbldgTokuchoIdoJoho) {
         this.tbldgTokuchoIdoJoho = tbldgTokuchoIdoJoho;
+    }
+
+    /*
+     * getccdOutputChohyoIchiran
+     * @return ccdOutputChohyoIchiran
+     */
+    @JsonProperty("ccdOutputChohyoIchiran")
+    public IOutputChohyoIchiranDiv getCcdOutputChohyoIchiran() {
+        return ccdOutputChohyoIchiran;
     }
 
     /*

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 高額一覧共有子Divのマッピング用XMLです。 -->
+<!-- @reamsid_L DBC-2020-050 quxiaodong -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kougakushinseiichiranjohyou.IKougakuShinseiIchiranJohyouMapper">
+
+    <resultMap id="resultMap_KougakuShinseiIchiranJohyouEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kougakushinseiichiranjohyou.KougakuShinseiIchiranJohyouEntity" autoMapping="true">
+        <result property="サービス年月" column="サービス年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="管理番号" column="管理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="利用者負担額合計" column="利用者負担額合計" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="算定基準額" column="算定基準額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="支払済額合計" column="支払済額合計" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額支給額" column="高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="決定支給額" column="決定支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="支給区分" column="支給区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="対象取込年月" column="対象取込年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="判定送付年月" column="判定送付年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="判定取込年月" column="判定取込年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="証記載番号" column="証記載番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <result property="対象者判定審査年月" column="対象者判定審査年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="決定年月日" column="決定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+    <select resultOrdered="true" id="getKougakuShinseiIchiranJohyou"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kougakushinseiichiranjohyou.KougakuShinseiIchiranJohyouParameter"
+            resultMap="resultMap_KougakuShinseiIchiranJohyouEntity" fetchSize="500">
+        SELECT
+        B."serviceTeikyoYM" AS サービス年月,
+        B."rirekiNo" AS 管理番号,
+        A."riyoshaFutanGakuGokei" AS 利用者負担額合計,
+        A."santeiKijunGaku" AS 算定基準額,
+        A."shiharaiSumiKingakuGokei" AS 支払済額合計,
+        A."KogakuShikyuGaku" AS 高額支給額,
+        C."shikyuKingaku" AS 決定支給額,
+        C."shikyuKubunCode" AS 支給区分,
+        A."tashoshaUketoriYM" AS 対象取込年月,
+        C."hanteiKekkaSofuYM" AS 判定送付年月,
+        D."ketteishaUketoriYM" AS 判定取込年月,
+        B."shoKisaiHokenshaNo" AS 証記載番号,
+        A."taishoshaHanteiShinsaYM" AS 対象者判定審査年月,
+        C."ketteiYMD" AS 決定年月日
+        FROM
+        rgdb."DbT3056KogakuShikyuShinsei" AS B
+        LEFT JOIN 
+        rgdb."DbT3057KogakuShikyuHanteiKekka" AS C
+        ON
+         B."hihokenshaNo" = C."hihokenshaNo" AND
+         B."serviceTeikyoYM" = C."serviceTeikyoYM" AND
+         B."shoKisaiHokenshaNo" = C."shoKisaiHokenshaNo" AND
+         B."rirekiNo" = C."rirekiNo"
+        LEFT JOIN 
+        rgdb."DbT3055KogakuKyufuTaishoshaGokei" AS A
+        ON
+         B."hihokenshaNo" = A."hihokenshaNo" AND
+         B."serviceTeikyoYM" = A."serviceTeikyoYM" AND
+         B."rirekiNo" = A."rirekiNo"
+        LEFT JOIN 
+        rgdb."DbT3058KogakuShikyuShinsaKettei" AS D
+        ON
+         B."hihokenshaNo" = D."hihokenshaNo" AND
+         B."serviceTeikyoYM" = D."serviceTeikyoYM" AND
+         B."rirekiNo" = D."rirekiNo"
+         WHERE
+         B."hihokenshaNo" = #{hiHokenshaNo}  
+          <if test="serviceTeikyoYMFrom != null and !serviceTeikyoYMFrom.isEmpty()">
+            AND #{serviceTeikyoYMFrom}<![CDATA[<=]]>B."serviceTeikyoYM"
+          </if>
+          <if test="serviceTeikyoYMTo != null and !serviceTeikyoYMTo.isEmpty()">
+            AND B."serviceTeikyoYM"<![CDATA[<=]]>#{serviceTeikyoYMTo} 
+          </if>
+        ORDER BY
+        サービス年月  DESC,
+        管理番号  DESC
+    </select>
+    <select resultOrdered="true" id="getJigyouKougakuShinseiIchiranJohyou"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kougakushinseiichiranjohyou.KougakuShinseiIchiranJohyouParameter"
+            resultMap="resultMap_KougakuShinseiIchiranJohyouEntity" fetchSize="500">
+        SELECT
+        B."serviceTeikyoYM" AS サービス年月,
+        B."rirekiNo" AS 管理番号,
+        A."riyoshaFutanGakuGokei" AS 利用者負担額合計,
+        A."santeiKijunGaku" AS 算定基準額,
+        A."shiharaiSumiKingakuGokei" AS 支払済額合計,
+        A."jigyoKogakuShikyuGaku" AS 高額支給額,
+        C."shiharaiKingaku" AS 決定支給額,
+        C."shiharaiKubunCode" AS 支給区分,
+        A."tashoshaUketoriYM" AS 対象取込年月,
+        C."hanteiKekkaSofuYM" AS 判定送付年月,
+        D."ketteishaUketoriYM" AS 判定取込年月,
+        B."shoKisaiHokenshaNo" AS 証記載番号,
+        A."taishoshaHanteiShinsaYM" AS 対象者判定審査年月,
+        C."ketteiYMD" AS 決定年月日
+        FROM
+        rgdb."DbT3110JigyoKogakuShikyuShinsei" AS B
+        LEFT JOIN 
+        rgdb."DbT3111JigyoKogakuShikyuHanteiKekka" AS C
+        ON
+         B."hihokenshaNo" = C."hihokenshaNo" AND
+         B."serviceTeikyoYM" = C."serviceTeikyoYM" AND
+         B."shoKisaiHokenshaNo" = C."shoKisaiHokenshaNo" AND
+         B."rirekiNo" = C."rirekiNo"
+        LEFT JOIN 
+        rgdb."DbT3109JigyoKogakuKyufuTaishoshaGokei" AS A
+        ON
+         B."hihokenshaNo" = A."hihokenshaNo" AND
+         B."serviceTeikyoYM" = A."serviceTeikyoYM" AND
+         B."rirekiNo" = A."rirekiNo"
+        LEFT JOIN 
+        rgdb."DbT3112KogakuShikyuShinsaKettei" AS D
+        ON
+         B."hihokenshaNo" = D."hihokenshaNo" AND
+         B."serviceTeikyoYM" = D."serviceTeikyoYM" AND
+         B."rirekiNo" = D."rirekiNo"
+         WHERE
+         B."hihokenshaNo" = #{hiHokenshaNo}   
+         <if test="serviceTeikyoYMFrom != null and !serviceTeikyoYMFrom.isEmpty()">
+            AND #{serviceTeikyoYMFrom}<![CDATA[<=]]>B."serviceTeikyoYM"
+         </if>
+         <if test="serviceTeikyoYMTo != null and !serviceTeikyoYMTo.isEmpty()">
+            AND B."serviceTeikyoYM"<![CDATA[<=]]>#{serviceTeikyoYMTo} 
+         </if>
+        ORDER BY
+        サービス年月  DESC,
+        管理番号  DESC	
+    </select>
+</mapper>

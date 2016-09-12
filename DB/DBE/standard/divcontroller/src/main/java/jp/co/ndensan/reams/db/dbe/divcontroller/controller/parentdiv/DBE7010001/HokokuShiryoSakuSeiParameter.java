@@ -27,6 +27,7 @@ public class HokokuShiryoSakuSeiParameter {
     private static final RString SELECTKEY_KEY2 = new RString("key2");
     private static final RString SELECTKEY_KEY3 = new RString("key3");
     private static final RString KEY_対象年月 = new RString("0");
+    private static final RString 全て合議体 = new RString("全て");
     private final HokokuShiryoSakuSeiFinder finder;
 
     /**
@@ -132,11 +133,13 @@ public class HokokuShiryoSakuSeiParameter {
 
     private void set合議体番号DLL(HokokuShiryoSakuSeiParameterDiv div, List<GogitaiJoho> 合議体番号リスト) {
         List<KeyValueDataSource> 合議体番号DLL = new ArrayList<>();
+        合議体番号DLL.add(new KeyValueDataSource(RString.EMPTY, 全て合議体));
         for (GogitaiJoho 合議体番号 : 合議体番号リスト) {
             合議体番号DLL.add(new KeyValueDataSource(
                     new RString(String.valueOf(合議体番号.get合議体番号())), 合議体番号.get合議体名称()));
         }
         div.getDdlGogitaiBango().setDataSource(合議体番号DLL);
+        div.getDdlGogitaiBango().setSelectedIndex(0);
     }
 
     private HokokuShiryoSakuSeiBatchParameter getBatchParameter(HokokuShiryoSakuSeiParameterDiv div) {
@@ -148,8 +151,12 @@ public class HokokuShiryoSakuSeiParameter {
                 div.getChkCsvShutsuryoku().getSelectedKeys().contains(SELECTKEY_KEY0),
                 div.getTxtShuturyokuSaki().getValue(),
                 div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value(),
+                div.getCcdHokenshaList().getSelectedItem().get市町村コード(),
+                div.getCcdHokenshaList().getSelectedItem().get市町村名称(),
                 getHiHokensyaKubun(div).getコード(),
                 div.getDdlGogitaiBango().getSelectedKey().isEmpty() ? -1 : Integer.parseInt(div.getDdlGogitaiBango().getSelectedKey().toString()),
+                div.getDdlGogitaiBango().getSelectedValue(),
+                getGogitaiBango(div),
                 KEY_対象年月.equals(div.getRadKubun().getSelectedKey()),
                 div.getTxtNengetsu().getDomain().toDateString(),
                 div.getTxtKijyunYMD().getValue(),
@@ -157,7 +164,8 @@ public class HokokuShiryoSakuSeiParameter {
                 div.getTxtTaishoGappi().getFromValue() == null ? RString.EMPTY : div.getTxtTaishoGappi().getFromValue().toDateString(),
                 div.getTxtTaishoGappi().getToValue() == null ? RString.EMPTY : div.getTxtTaishoGappi().getToValue().toDateString(),
                 div.getChkShukeiTani().getSelectedKeys().contains(SELECTKEY_KEY0),
-                div.getChkShukeiTani().getSelectedKeys().contains(SELECTKEY_KEY1));
+                div.getChkShukeiTani().getSelectedKeys().contains(SELECTKEY_KEY1)
+        );
     }
 
     private HihokenshaKubun getHiHokensyaKubun(HokokuShiryoSakuSeiParameterDiv div) {
@@ -186,6 +194,14 @@ public class HokokuShiryoSakuSeiParameter {
             return HihokenshaKubun.その他;
         }
         return HihokenshaKubun.選択なし;
+    }
+
+    private List<Integer> getGogitaiBango(HokokuShiryoSakuSeiParameterDiv div) {
+        List<Integer> gogitaiBango = new ArrayList<>();
+        for (int i = 1; i < div.getDdlGogitaiBango().getDataSource().size(); i++) {
+            gogitaiBango.add(Integer.parseInt(div.getDdlGogitaiBango().getDataSource().get(i).getKey().toString()));
+        }
+        return gogitaiBango;
     }
 
     private HokokuShiryoSakuSeiParameterHandler getHandler(HokokuShiryoSakuSeiParameterDiv div) {

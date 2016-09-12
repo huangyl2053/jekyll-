@@ -7,9 +7,9 @@ package jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaiwariateiinjoh
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiiinjoho.ShinsakaiIinJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaiwariateiinjoho.ShinsakaiWariateIinJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiiinjoho.ShinsakaiIinJoho2;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho2;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiwariateiinjoho.ShinsakaiWariateIinJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5503ShinsakaiWariateIinJohoDac;
@@ -73,7 +73,7 @@ public class ShinsakaiWariateIinJohoManager {
      * @return ShinsakaiWariateIinJoho
      */
     @Transaction
-    public ShinsakaiWariateIinJoho get介護認定審査会割当委員情報(ShinsakaiWariateIinJohoMapperParameter 介護認定審査会割当委員情報検索条件) {
+    public ShinsakaiWariateIinJoho2 get介護認定審査会割当委員情報(ShinsakaiWariateIinJohoMapperParameter 介護認定審査会割当委員情報検索条件) {
         requireNonNull(介護認定審査会割当委員情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会割当委員情報検索条件"));
         IShinsakaiWariateIinJohoMapper mapper = mapperProvider.create(IShinsakaiWariateIinJohoMapper.class);
 
@@ -82,7 +82,7 @@ public class ShinsakaiWariateIinJohoManager {
             return null;
         }
         relateEntity.initializeMd5ToEntities();
-        return new ShinsakaiWariateIinJoho(relateEntity);
+        return new ShinsakaiWariateIinJoho2(relateEntity);
     }
 
     /**
@@ -92,7 +92,7 @@ public class ShinsakaiWariateIinJohoManager {
      * @return 更新件数 更新結果の件数を返します。
      */
     @Transaction
-    public boolean save介護認定審査会割当委員情報(ShinsakaiWariateIinJoho 介護認定審査会割当委員情報) {
+    public boolean save介護認定審査会割当委員情報(ShinsakaiWariateIinJoho2 介護認定審査会割当委員情報) {
         requireNonNull(介護認定審査会割当委員情報, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会割当委員情報"));
         if (!介護認定審査会割当委員情報.hasChanged()) {
             return false;
@@ -101,8 +101,8 @@ public class ShinsakaiWariateIinJohoManager {
         return 1 == dac.save(介護認定審査会割当委員情報.toEntity());
     }
 
-    private void save介護認定審査会委員情報リスト(List<ShinsakaiIinJoho> 介護認定審査会委員情報List) {
-        for (ShinsakaiIinJoho 介護認定審査会委員情報 : 介護認定審査会委員情報List) {
+    private void save介護認定審査会委員情報リスト(List<ShinsakaiIinJoho2> 介護認定審査会委員情報List) {
+        for (ShinsakaiIinJoho2 介護認定審査会委員情報 : 介護認定審査会委員情報List) {
             介護認定審査会委員情報Manager.save介護認定審査会委員情報(介護認定審査会委員情報);
         }
     }
@@ -115,7 +115,7 @@ public class ShinsakaiWariateIinJohoManager {
      * いずれかのテーブルに削除があればtrueを返す
      */
     @Transaction
-    public boolean deletePhysical(ShinsakaiWariateIinJoho 介護認定審査会割当委員情報) {
+    public boolean deletePhysical(ShinsakaiWariateIinJoho2 介護認定審査会割当委員情報) {
         requireNonNull(介護認定審査会割当委員情報, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会割当委員情報"));
         return 1 == dac.deletePhysical(介護認定審査会割当委員情報.toEntity());
     }

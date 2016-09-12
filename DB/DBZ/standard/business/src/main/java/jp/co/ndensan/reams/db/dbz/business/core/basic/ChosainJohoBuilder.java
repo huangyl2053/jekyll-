@@ -6,18 +6,17 @@
 package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link ChosainJoho}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBZ-9999-011 sunhaidi
  */
 public class ChosainJohoBuilder {
 
@@ -38,44 +37,6 @@ public class ChosainJohoBuilder {
         this.entity = entity.clone();
         this.id = id;
 
-    }
-
-//TODO Key項目のsetterメソッドは削除してください。
-//TODO 一緒に置換される値のまとまりで不変なクラスを作成し、その単位でsetterを作る様に見直してください。
-    /**
-     * 市町村コードを設定します。
-     *
-     * @param 市町村コード 市町村コード
-     * @return {@link ChosainJohoBuilder}
-     */
-    public ChosainJohoBuilder set市町村コード(LasdecCode 市町村コード) {
-        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
-        entity.setShichosonCode(市町村コード);
-        return this;
-    }
-
-    /**
-     * 認定調査委託先コードを設定します。
-     *
-     * @param 認定調査委託先コード 認定調査委託先コード
-     * @return {@link ChosainJohoBuilder}
-     */
-    public ChosainJohoBuilder set認定調査委託先コード(ChosaItakusakiCode 認定調査委託先コード) {
-        requireNonNull(認定調査委託先コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査委託先コード"));
-        entity.setNinteiChosaItakusakiCode(認定調査委託先コード.getColumnValue());
-        return this;
-    }
-
-    /**
-     * 認定調査員コードを設定します。
-     *
-     * @param 認定調査員コード 認定調査員コード
-     * @return {@link ChosainJohoBuilder}
-     */
-    public ChosainJohoBuilder set認定調査員コード(ChosainCode 認定調査員コード) {
-        requireNonNull(認定調査員コード, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査員コード"));
-        entity.setNinteiChosainCode(認定調査員コード.getColumnValue());
-        return this;
     }
 
     /**
@@ -145,7 +106,8 @@ public class ChosainJohoBuilder {
      * @return {@link ChosainJohoBuilder}
      */
     public ChosainJohoBuilder set調査可能人数_月(int 調査可能人数_月) {
-        requireNonNull(調査可能人数_月, UrSystemErrorMessages.値がnull.getReplacedMessage("調査可能人数_月"));
+        requireNonNull(調査可能人数_月, UrSystemErrorMessages.値がnull.getReplacedMessage("調査可能人数／月")
+        );
         entity.setChosaKanoNinzuPerMonth(調査可能人数_月);
         return this;
     }
@@ -187,14 +149,26 @@ public class ChosainJohoBuilder {
     }
 
     /**
-     * fax番号を設定します。
+     * FAX番号を設定します。
      *
      * @param fax番号 FAX番号
      * @return {@link ChosainJohoBuilder}
      */
-    public ChosainJohoBuilder setFax番号(TelNo fax番号) {
+    public ChosainJohoBuilder setFAX番号(TelNo fax番号) {
         requireNonNull(fax番号, UrSystemErrorMessages.値がnull.getReplacedMessage("FAX番号"));
         entity.setFaxNo(fax番号);
+        return this;
+    }
+
+    /**
+     * 所属機関名称を設定します。
+     *
+     * @param 所属機関名称 所属機関名称
+     * @return {@link ChosainJohoBuilder}
+     */
+    public ChosainJohoBuilder set所属機関名称(RString 所属機関名称) {
+        requireNonNull(所属機関名称, UrSystemErrorMessages.値がnull.getReplacedMessage("所属機関名称"));
+        entity.setShozokuKikanName(所属機関名称);
         return this;
     }
 

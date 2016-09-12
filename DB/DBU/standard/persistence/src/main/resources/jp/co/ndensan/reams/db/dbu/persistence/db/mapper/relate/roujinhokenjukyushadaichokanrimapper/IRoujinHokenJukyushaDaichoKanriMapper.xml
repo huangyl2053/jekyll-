@@ -3,11 +3,11 @@
 <!-- 概要： 適用除外者のマッピング用XMLです。 -->
 <!-- @reamsid_L DBU-1110-020 zhangzhiming -->
 <mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.roujinhokenjukyushadaichokanrimapper.IRoujinHokenJukyushaDaichoKanriMapper">
-    <select id="selectJyohou" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"
-            parameterType="jp.co.ndensan.reams.db.dbu.definition.roujinhokenjukyushadaichokanri.RoujinHokenJukyushaDaichoKanriParameter" fetchSize="500">
+    <select resultOrdered="true" id="selectJyohou" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.roujinhokenjukyushadaichokanri.RoujinHokenJukyushaDaichoKanriParameter" fetchSize="500">
         SELECT
-        "genLasdecCode" AS "ShikibetsuTaisho_genLasdecCode"
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
         FROM
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" /> AS "ShikibetsuTaisho"
     </select>
 </mapper>

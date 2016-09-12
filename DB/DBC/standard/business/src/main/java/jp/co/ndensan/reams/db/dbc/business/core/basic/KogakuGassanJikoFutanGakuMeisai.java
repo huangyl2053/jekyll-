@@ -72,7 +72,8 @@ public class KogakuGassanJikoFutanGakuMeisai
      * コンストラクタです。<br/>
      * DBより取得した{@link DbT3071KogakuGassanJikoFutanGakuMeisaiEntity}より{@link KogakuGassanJikoFutanGakuMeisai}を生成します。
      *
-     * @param entity DBより取得した{@link DbT3071KogakuGassanJikoFutanGakuMeisaiEntity}
+     * @param entity
+     * DBより取得した{@link DbT3071KogakuGassanJikoFutanGakuMeisaiEntity}
      */
     public KogakuGassanJikoFutanGakuMeisai(DbT3071KogakuGassanJikoFutanGakuMeisaiEntity entity) {
         this.entity = requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("高額合算自己負担額明細"));
@@ -294,7 +295,7 @@ public class KogakuGassanJikoFutanGakuMeisai
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {

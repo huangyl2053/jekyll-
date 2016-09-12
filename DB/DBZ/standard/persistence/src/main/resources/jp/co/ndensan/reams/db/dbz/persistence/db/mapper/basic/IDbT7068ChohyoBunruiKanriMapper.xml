@@ -46,7 +46,7 @@
         <result property="chohyoBunruiID" column="dbT7068ChohyoBunruiKanri_chohyoBunruiID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ReportIdTypeHandler"/>
     </resultMap>
     
-    <select id="getEntity" resultMap="ResultMap_DbT7068ChohyoBunruiKanriEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT7068ChohyoBunruiKanriEntity">
 	SELECT
 	<include refid="allColumns_DbT7068ChohyoBunruiKanri"/>
 	FROM

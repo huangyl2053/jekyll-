@@ -7,14 +7,17 @@ package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBAM010011;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.core.hihokenshno.HihokenshaNoFubammotoJoho;
-import jp.co.ndensan.reams.db.dba.definition.enumeratedtype.core.hihokenshno.HihokenshaNoFubanHoho;
+import jp.co.ndensan.reams.db.dba.definition.core.hihokenshno.HihokenshaNoFubammotoJoho;
+import jp.co.ndensan.reams.db.dba.definition.core.hihokenshno.HihokenshaNoFubanHoho;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBAM010011.FubanHohoMainDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBA;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
+import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.CountedItem;
@@ -192,67 +195,73 @@ public class FubanHohoMainHandler {
     public void editFubanHoho() {
         RString 被保険者番号付番方法 = div.getFubanHoho().getDdlHihokenshaBangoFubanHoho().getSelectedKey();
         RString 付番元情報 = div.getFubanHoho().getFubanMotoJoho().getDdlFubanmotoJoho().getSelectedKey();
-        BusinessConfig.update(SubGyomuCode.DBA介護資格, ConfigNameDBA.被保険者番号付番方法_付番方法,
-                div.getFubanHoho().getDdlHihokenshaBangoFubanHoho().getSelectedKey(), RString.EMPTY, RString.EMPTY, RDate.getNowDate());
+        IUrControlData controlData = UrControlDataFactory.createInstance();
+        RString menuID = controlData.getMenuID();
+        RStringBuilder 変更理由 = new RStringBuilder();
+        変更理由.append(menuID);
+        変更理由.append(new RString("を使用して更新"));
+        BusinessConfig.update(ConfigNameDBA.被保険者番号付番方法_付番方法,
+                div.getFubanHoho().getDdlHihokenshaBangoFubanHoho().getSelectedKey(), 変更理由.toRString(), RString.EMPTY, RDate.getNowDate());
         if (カスタマイズ付番.equals(被保険者番号付番方法)) {
-            BusinessConfig.update(SubGyomuCode.DBA介護資格, ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_付番元情報,
-                    div.getFubanHoho().getFubanMotoJoho().getDdlFubanmotoJoho().getSelectedKey(), RString.EMPTY, RString.EMPTY, RDate.getNowDate());
+            BusinessConfig.update(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_付番元情報,
+                    div.getFubanHoho().getFubanMotoJoho().getDdlFubanmotoJoho().getSelectedKey(), 変更理由.toRString(),
+                    RString.EMPTY, RDate.getNowDate());
         } else {
-            BusinessConfig.update(SubGyomuCode.DBA介護資格, ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_付番元情報,
-                    未設定, RString.EMPTY, RString.EMPTY, RDate.getNowDate());
+            BusinessConfig.update(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_付番元情報,
+                    未設定, 変更理由.toRString(), RString.EMPTY, RDate.getNowDate());
         }
         if (カスタマイズ付番.equals(被保険者番号付番方法) && 住民コード.equals(付番元情報)
                 || カスタマイズ付番.equals(被保険者番号付番方法) && 自動連番付番.equals(付番元情報)) {
-            BusinessConfig.update(SubGyomuCode.DBA介護資格, ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_付番元情報_開始位置,
-                    flexRString(div.getFubanHoho().getFubanMotoJoho().getTxtKaishiKetaIchi().getValue()), RString.EMPTY,
+            BusinessConfig.update(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_付番元情報_開始位置,
+                    flexRString(div.getFubanHoho().getFubanMotoJoho().getTxtKaishiKetaIchi().getValue()), 変更理由.toRString(),
                     RString.EMPTY, RDate.getNowDate());
         } else {
-            BusinessConfig.update(SubGyomuCode.DBA介護資格, ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_付番元情報_開始位置, new RString("00"),
-                    RString.EMPTY, RString.EMPTY, RDate.getNowDate());
+            BusinessConfig.update(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_付番元情報_開始位置, new RString("00"),
+                    変更理由.toRString(), RString.EMPTY, RDate.getNowDate());
         }
         if (カスタマイズ付番.equals(被保険者番号付番方法) && 住民コード.equals(付番元情報)) {
-            BusinessConfig.update(SubGyomuCode.DBA介護資格, ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_付番元情報_有効桁数,
-                    flexRString(div.getFubanHoho().getFubanMotoJoho().getTxtYukoKetasu().getValue()), RString.EMPTY,
+            BusinessConfig.update(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_付番元情報_有効桁数,
+                    flexRString(div.getFubanHoho().getFubanMotoJoho().getTxtYukoKetasu().getValue()), 変更理由.toRString(),
                     RString.EMPTY, RDate.getNowDate());
         } else {
-            BusinessConfig.update(SubGyomuCode.DBA介護資格, ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_付番元情報_有効桁数,
-                    new RString("00"), RString.EMPTY, RString.EMPTY, RDate.getNowDate());
+            BusinessConfig.update(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_付番元情報_有効桁数,
+                    new RString("00"), 変更理由.toRString(), RString.EMPTY, RDate.getNowDate());
         }
         if (カスタマイズ付番.equals(被保険者番号付番方法) && 住民コード.equals(付番元情報)
                 || カスタマイズ付番.equals(被保険者番号付番方法) && 自動連番付番.equals(付番元情報)) {
-            BusinessConfig.update(SubGyomuCode.DBA介護資格, ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_前付与番号_桁数,
-                    flexRString(div.getFubanHoho().getMaeFukaJoho().getTxtMaeFukaKetasu().getValue()), RString.EMPTY,
+            BusinessConfig.update(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_前付与番号_桁数,
+                    flexRString(div.getFubanHoho().getMaeFukaJoho().getTxtMaeFukaKetasu().getValue()), 変更理由.toRString(),
                     RString.EMPTY, RDate.getNowDate());
-            BusinessConfig.update(SubGyomuCode.DBA介護資格, ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_後付与番号_桁数,
-                    flexRString(div.getFubanHoho().getAtoFukaJoho().getTxtAtoFukaKetasu().getValue()), RString.EMPTY,
+            BusinessConfig.update(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_後付与番号_桁数,
+                    flexRString(div.getFubanHoho().getAtoFukaJoho().getTxtAtoFukaKetasu().getValue()), 変更理由.toRString(),
                     RString.EMPTY, RDate.getNowDate());
         } else {
-            BusinessConfig.update(SubGyomuCode.DBA介護資格, ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_前付与番号_桁数,
-                    new RString("00"), RString.EMPTY, RString.EMPTY, RDate.getNowDate());
-            BusinessConfig.update(SubGyomuCode.DBA介護資格, ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_後付与番号_桁数,
-                    new RString("00"), RString.EMPTY, RString.EMPTY, RDate.getNowDate());
+            BusinessConfig.update(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_前付与番号_桁数,
+                    new RString("00"), 変更理由.toRString(), RString.EMPTY, RDate.getNowDate());
+            BusinessConfig.update(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_後付与番号_桁数,
+                    new RString("00"), 変更理由.toRString(), RString.EMPTY, RDate.getNowDate());
         }
         if (カスタマイズ付番.equals(被保険者番号付番方法) && 住民コード.equals(付番元情報)
                 || カスタマイズ付番.equals(被保険者番号付番方法) && 自動連番付番.equals(付番元情報)) {
             if (new Decimal(0).equals(div.getFubanHoho().getMaeFukaJoho().getTxtMaeFukaKetasu().getValue())) {
-                BusinessConfig.update(SubGyomuCode.DBA介護資格, ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_前付与番号,
-                        RString.EMPTY, RString.EMPTY, RString.EMPTY, RDate.getNowDate());
+                BusinessConfig.update(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_前付与番号,
+                        RString.EMPTY, 変更理由.toRString(), RString.EMPTY, RDate.getNowDate());
             }
             if (new Decimal(0).equals(div.getFubanHoho().getAtoFukaJoho().getTxtAtoFukaKetasu().getValue())) {
-                BusinessConfig.update(SubGyomuCode.DBA介護資格, ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_後付与番号,
-                        RString.EMPTY, RString.EMPTY, RString.EMPTY, RDate.getNowDate());
+                BusinessConfig.update(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_後付与番号,
+                        RString.EMPTY, 変更理由.toRString(), RString.EMPTY, RDate.getNowDate());
             }
-            BusinessConfig.update(SubGyomuCode.DBA介護資格, ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_前付与番号,
-                    div.getFubanHoho().getMaeFukaJoho().getTxtMaeFukaCode().getValue(), RString.EMPTY,
+            BusinessConfig.update(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_前付与番号,
+                    div.getFubanHoho().getMaeFukaJoho().getTxtMaeFukaCode().getValue(), 変更理由.toRString(),
                     RString.EMPTY, RDate.getNowDate());
-            BusinessConfig.update(SubGyomuCode.DBA介護資格, ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_後付与番号,
-                    div.getFubanHoho().getAtoFukaJoho().getTxtAtoFukaCode().getValue(), RString.EMPTY,
+            BusinessConfig.update(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_後付与番号,
+                    div.getFubanHoho().getAtoFukaJoho().getTxtAtoFukaCode().getValue(), 変更理由.toRString(),
                     RString.EMPTY, RDate.getNowDate());
         } else {
-            BusinessConfig.update(SubGyomuCode.DBA介護資格, ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_前付与番号,
-                    RString.EMPTY, RString.EMPTY, RString.EMPTY, RDate.getNowDate());
-            BusinessConfig.update(SubGyomuCode.DBA介護資格, ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_後付与番号,
-                    RString.EMPTY, RString.EMPTY, RString.EMPTY, RDate.getNowDate());
+            BusinessConfig.update(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_前付与番号,
+                    RString.EMPTY, 変更理由.toRString(), RString.EMPTY, RDate.getNowDate());
+            BusinessConfig.update(ConfigNameDBA.被保険者番号付番方法_カスタマイズ付番_後付与番号,
+                    RString.EMPTY, 変更理由.toRString(), RString.EMPTY, RDate.getNowDate());
         }
     }
 

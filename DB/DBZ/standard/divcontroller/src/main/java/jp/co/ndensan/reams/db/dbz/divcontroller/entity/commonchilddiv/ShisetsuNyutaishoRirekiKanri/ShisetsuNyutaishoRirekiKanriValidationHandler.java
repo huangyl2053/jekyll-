@@ -5,6 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbz.divcontroller.validations.TextBoxFlexibleDateValidator;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -21,6 +26,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 public class ShisetsuNyutaishoRirekiKanriValidationHandler {
 
     private final ShisetsuNyutaishoRirekiKanriDiv div;
+    private final RString 追加 = new RString("追加");
+    private final RString 更新 = new RString("修正");
 
     /**
      * コンストラクタです。
@@ -38,13 +45,12 @@ public class ShisetsuNyutaishoRirekiKanriValidationHandler {
      */
     public ValidationMessageControlPairs validateForUpdate() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue() == null
-                || div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().isEmpty()) {
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.入所日, div.getShisetsuNyutaishoInput().getTxtNyushoDate()));
-        } else {
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getShisetsuNyutaishoInput().getTxtNyushoDate()));
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(div.getShisetsuNyutaishoInput().getTxtTaishoDate()));
+        if (!div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().isEmpty()) {
             if (div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue() != null
-                    && !div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue().isEmpty()
-                    && !div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().
+                && !div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue().isEmpty()
+                && !div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().
                     isBeforeOrEquals(div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue())) {
                 validPairs.add(new ValidationMessageControlPair(
                         RRVMessages.前後関係逆転,
@@ -52,11 +58,106 @@ public class ShisetsuNyutaishoRirekiKanriValidationHandler {
                         div.getShisetsuNyutaishoInput().getTxtNyushoDate()));
             }
         }
-        if (RString.isNullOrEmpty(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().getNyuryokuShisetsuKodo())) {
-            validPairs.add(new ValidationMessageControlPair(RRVMessages.入所施設コード));
-        }
+
         if (RString.isNullOrEmpty(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設種類())) {
             validPairs.add(new ValidationMessageControlPair(RRVMessages.施設種類));
+        }
+
+        List<dgShisetsuNyutaishoRireki_Row> rowList = div.getDgShisetsuNyutaishoRireki().getDataSource();
+        Collections.sort(rowList, new Comparator<dgShisetsuNyutaishoRireki_Row>() {
+            @Override
+            public int compare(dgShisetsuNyutaishoRireki_Row o1, dgShisetsuNyutaishoRireki_Row o2) {
+                return o1.getNyushoDate().getValue().compareTo(o2.getNyushoDate().getValue()) - 1;
+            }
+        });
+        Collections.reverse(rowList);
+        if (追加.equals(div.getInputMode())) {
+            if (div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().isEmpty()) {
+                return validPairs;
+            }
+            if (rowList.isEmpty()) {
+                return validPairs;
+            }
+            if (div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue()
+                    .compareTo(rowList.get(0).getTaishoDate().getValue()) <= 0) {
+                validPairs.add(new ValidationMessageControlPair(RRVMessages.施設入所期間重複_入所日,
+                        div.getShisetsuNyutaishoInput().getTxtNyushoDate()));
+            }
+        }
+        if (更新.equals(div.getInputMode())) {
+            int rowId = div.getDgShisetsuNyutaishoRireki().getClickedItem().getId();
+
+            if (div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().isEmpty()) {
+                return validPairs;
+            } else if (rowList.size() == 1) {
+                return validPairs;
+            } else {
+                if (rowId == 0) {
+                    if (rowList.get(1).getTaishoDate().getValue().isEmpty()) {
+                        if (div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue()
+                                .compareTo(rowList.get(1).getNyushoDate().getValue()) <= 0) {
+                            validPairs.add(new ValidationMessageControlPair(RRVMessages.施設入所期間重複_入所日,
+                                    div.getShisetsuNyutaishoInput().getTxtNyushoDate()));
+                        }
+                    } else {
+                        if (div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue()
+                                .compareTo(rowList.get(1).getTaishoDate().getValue()) <= 0) {
+                            validPairs.add(new ValidationMessageControlPair(RRVMessages.施設入所期間重複_入所日,
+                                    div.getShisetsuNyutaishoInput().getTxtNyushoDate()));
+                        }
+                    }
+                } else if (rowId == rowList.size() - 1) {
+                    if (div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue().isEmpty()) {
+                        if (div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue()
+                                .compareTo(rowList.get(rowList.size() - 2).getNyushoDate().getValue()) >= 0) {
+                            validPairs.add(new ValidationMessageControlPair(RRVMessages.施設入所期間重複_入所日,
+                                    div.getShisetsuNyutaishoInput().getTxtNyushoDate()));
+                        }
+                    } else {
+                        if (div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue()
+                                .compareTo(rowList.get(rowList.size() - 2).getNyushoDate().getValue()) >= 0) {
+                            validPairs.add(new ValidationMessageControlPair(RRVMessages.施設入所期間重複_退所日,
+                                    div.getShisetsuNyutaishoInput().getTxtTaishoDate()));
+                        }
+                    }
+                } else {
+                    if (rowList.get(rowId + 1).getTaishoDate().getValue().isEmpty()) {
+                        if (div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue()
+                                .compareTo(rowList.get(rowId + 1).getNyushoDate().getValue()) <= 0) {
+                            validPairs.add(new ValidationMessageControlPair(RRVMessages.施設入所期間重複_入所日,
+                                    div.getShisetsuNyutaishoInput().getTxtNyushoDate()));
+                        }
+                    } else {
+                        if (div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue()
+                                .compareTo(rowList.get(rowId + 1).getTaishoDate().getValue()) <= 0) {
+                            validPairs.add(new ValidationMessageControlPair(RRVMessages.施設入所期間重複_入所日,
+                                    div.getShisetsuNyutaishoInput().getTxtNyushoDate()));
+                        }
+                    }
+
+                    if (div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue().isEmpty()) {
+                        if (div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue()
+                                .compareTo(rowList.get(rowId - 1).getNyushoDate().getValue()) >= 0) {
+                            validPairs.add(new ValidationMessageControlPair(RRVMessages.施設入所期間重複_入所日,
+                                    div.getShisetsuNyutaishoInput().getTxtNyushoDate()));
+                        }
+                    } else {
+                        if (div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue()
+                                .compareTo(rowList.get(rowId - 1).getNyushoDate().getValue()) >= 0) {
+                            validPairs.add(new ValidationMessageControlPair(RRVMessages.施設入所期間重複_退所日,
+                                    div.getShisetsuNyutaishoInput().getTxtTaishoDate()));
+                        }
+                    }
+
+                }
+            }
+
+            if (div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue().isEmpty()) {
+                if (rowId != 0) {
+                    validPairs.add(new ValidationMessageControlPair(RRVMessages.退所日,
+                            div.getShisetsuNyutaishoInput().getTxtTaishoDate()));
+                }
+            }
         }
         return validPairs;
     }
@@ -64,9 +165,12 @@ public class ShisetsuNyutaishoRirekiKanriValidationHandler {
     private static enum RRVMessages implements IValidationMessage {
 
         入所日(UrErrorMessages.必須, "入所日"),
+        退所日(UrErrorMessages.必須, "退所日"),
         入所施設コード(UrErrorMessages.必須, "入所施設コード"),
         施設種類(UrErrorMessages.必須, "施設種類"),
-        前後関係逆転(UrErrorMessages.前後関係逆転, "入所日", "退所日");
+        前後関係逆転(UrErrorMessages.前後関係逆転, "入所日", "退所日"),
+        施設入所期間重複_入所日(DbzErrorMessages.施設入所期間重複, "入所日"),
+        施設入所期間重複_退所日(DbzErrorMessages.施設入所期間重複, "退所日");
         private final Message message;
 
         private RRVMessages(IMessageGettable message, String... replacements) {

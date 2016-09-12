@@ -1,9 +1,9 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0070011;
-/**
+/*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Sat Jun 14 13:51:24 JST 2014 
+ * Fri Aug 19 17:54:09 JST 2016 
  */
 
 
@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgSofuIchiran_Row extends DataRow {
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
 
     private RString txtJigyoshaNo;
     private RString txtJigyoshaName;
@@ -43,6 +44,16 @@ public class dgSofuIchiran_Row extends DataRow {
         this.txtServiceTeikyoYM = RString.EMPTY;
         this.txtMoshitateYMD = RString.EMPTY;
         this.txtShokisaiHokenshaNo = RString.EMPTY;
+        this.setOriginalData("txtJigyoshaNo", txtJigyoshaNo);
+        this.setOriginalData("txtJigyoshaName", txtJigyoshaName);
+        this.setOriginalData("txtHihoNo", txtHihoNo);
+        this.setOriginalData("txtHihoName", txtHihoName);
+        this.setOriginalData("txtMoshitateshaKubun", txtMoshitateshaKubun);
+        this.setOriginalData("txtStyle", txtStyle);
+        this.setOriginalData("txtMoshitateRiyu", txtMoshitateRiyu);
+        this.setOriginalData("txtServiceTeikyoYM", txtServiceTeikyoYM);
+        this.setOriginalData("txtMoshitateYMD", txtMoshitateYMD);
+        this.setOriginalData("txtShokisaiHokenshaNo", txtShokisaiHokenshaNo);
     }
 
     public dgSofuIchiran_Row(RString txtJigyoshaNo, RString txtJigyoshaName, RString txtHihoNo, RString txtHihoName, RString txtMoshitateshaKubun, RString txtStyle, RString txtMoshitateRiyu, RString txtServiceTeikyoYM, RString txtMoshitateYMD, RString txtShokisaiHokenshaNo) {
@@ -159,4 +170,5 @@ public class dgSofuIchiran_Row extends DataRow {
         this.txtShokisaiHokenshaNo = txtShokisaiHokenshaNo;
     }
 
+    // </editor-fold>
 }

@@ -25,7 +25,11 @@ public enum ErrorCode {
     /**
      * コード:04 名称:賦課に減免あり 略称:定義なし
      */
-    賦課に減免あり("04", "賦課に減免あり");
+    賦課に減免あり("04", "賦課に減免あり"),
+    /**
+     * コード:09 名称:職権変更該当 略称:定義なし
+     */
+    職権変更該当("09", "職権変更該当");
 
     private final RString code;
     private final RString fullName;

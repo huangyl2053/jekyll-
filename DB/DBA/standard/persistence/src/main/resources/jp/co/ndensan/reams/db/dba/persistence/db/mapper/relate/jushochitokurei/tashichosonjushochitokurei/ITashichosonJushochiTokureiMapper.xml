@@ -5,7 +5,7 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.jushochitokurei.tashichosonjushochitokurei.ITashichosonJushochiTokureiMapper">
 
-    <select id="select他市町村住所地特例ByKey" resultMap="resultMap_TashichosonJushochiTokureiEntity" fetchSize="500">
+    <select resultOrdered="true" id="select他市町村住所地特例ByKey" resultMap="resultMap_TashichosonJushochiTokureiEntity" fetchSize="500">
         <include refid="selectTashichosonJushochiTokureiEntity" />
     </select>
 

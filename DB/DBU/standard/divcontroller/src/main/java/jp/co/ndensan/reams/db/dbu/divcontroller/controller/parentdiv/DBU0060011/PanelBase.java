@@ -5,13 +5,13 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.jigyohokokunenpo.JigyoHokokuNenpoResult;
 import jp.co.ndensan.reams.db.dbu.business.core.jigyohokokunenpo.ShichosonCodeNameResult;
 import jp.co.ndensan.reams.db.dbu.definition.core.zigyouhoukokunenpou.ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity;
-import jp.co.ndensan.reams.db.dbu.definition.enumeratedtype.DbuViewStateKey;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060011.DBU0060011TransitionEventName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060011.PanelBaseDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060011.dgHoseitaishoYoshiki_Row;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0060011.PanelBaseHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.jigyohokokunenpo.JigyoHokokuNenpoHoseiHakoManager;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.JigyohokokuNenpoHoseiHyoji;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.JigyohokokuNenpoHoseiHyoji;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -26,8 +26,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 /**
  * 事業報告（年報）補正、発行_検索を表示するDivControllerです。
  *
- * @reamsid_L DBU-1060-010  lijia
- * 
+ * @reamsid_L DBU-1060-010 lijia
+ *
  */
 public class PanelBase {
 
@@ -52,7 +52,7 @@ public class PanelBase {
     private static final int 集計番号_0100 = 100;
     private static final int 集計番号_0200 = 200;
     private static final int 保険者区分_るく = 6;
-    private static final int 保険者区分_なな = 6;
+    private static final int 保険者区分_なな = 7;
     private List<JigyoHokokuNenpoResult> 事業報告集計一覧データリスト;
 
     /**
@@ -64,7 +64,7 @@ public class PanelBase {
     public ResponseData<PanelBaseDiv> onLoad(PanelBaseDiv baseDiv) {
         init初期状態(baseDiv);
         ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity entity
-                = ViewStateHolder.get(DbuViewStateKey.補正検索画面情報, ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity.class);
+                = ViewStateHolder.get(ViewStateKeys.補正検索画面情報, ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity.class);
         if ((null != entity) && (!baseDiv.getTaishokensaku().getDdlShichoson().getDataSource().isEmpty())) {
             baseDiv.getTaishokensaku().getDdlShichoson().setSelectedKey(entity.get選択した市町村コード());
 
@@ -154,7 +154,7 @@ public class PanelBase {
      */
     public ResponseData<PanelBaseDiv> onSelectByModifyButton_dgHoseitaishoYoshiki(PanelBaseDiv baseDiv) {
         ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity entity = getHandler(baseDiv).saveEntityToViewState(処理種別_修正);
-        ViewStateHolder.put(DbuViewStateKey.補正検索画面情報, entity);
+        ViewStateHolder.put(ViewStateKeys.補正検索画面情報, entity);
         return get遷移先画面(baseDiv);
     }
 
@@ -166,7 +166,7 @@ public class PanelBase {
      */
     public ResponseData<PanelBaseDiv> onSelectByDeleteButton_dgHoseitaishoYoshiki(PanelBaseDiv baseDiv) {
         ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity entity = getHandler(baseDiv).saveEntityToViewState(処理種別_削除);
-        ViewStateHolder.put(DbuViewStateKey.補正検索画面情報, entity);
+        ViewStateHolder.put(ViewStateKeys.補正検索画面情報, entity);
         return get遷移先画面(baseDiv);
     }
 

@@ -16,10 +16,10 @@ import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteiresult.IchijiHanteiR
 import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteiresult.JotaiAnteiseiKubun;
 import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteikeikoku.IchijiHanteiKeikokuList;
 import jp.co.ndensan.reams.db.dbe.business.helper.IchijiHanteiTestBusinessCreator;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.IchijiHanteiResultSofuKubun;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.KariIchijiHanteiKubun;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.KoroshoIFKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.IchijiHanteiResultSofuKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.KariIchijiHanteiKubun;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -66,7 +66,7 @@ public class IchijiHanteiResultDetailTest {
         public void setUp() {
             申請書管理番号 = new ShinseishoKanriNo(new RString("001"));
             厚労省IF区分 = KoroshoIFKubun.V02A;
-            仮一次判定区分 = KariIchijiHanteiKubun.仮判定;
+            仮一次判定区分 = KariIchijiHanteiKubun.仮一次判定;
             一次判定年月日 = new FlexibleDate("20060401");
             一次判定結果 = new IchijiHanteiResultKomoku(new Code(new RString("001")), new RString("名称"), new RString("略称"));
             認知症加算一次判定結果 = new IchijiHanteiResultKomoku(new Code(new RString("001")), new RString("名称"), new RString("略称"));

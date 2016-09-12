@@ -17,9 +17,9 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanbaraiskkttcsrysmuke.Sho
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.shokanbaraiskkttcsrysmuke.IShokanBaraiSkKtTcsRysmukeMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.NinshoshaDenshikoinshubetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
-import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
+import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.AtesakiPSMSearchKeyBuilder;
@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.GyomuKoyuKeyRiy
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.SofusakiRiyoKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.atesaki.IAtesakiGyomuHanteiKey;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
+import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -126,7 +127,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
 
         NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(
                 SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100005.getReportId(),
-                batchPram.getHakkoYMD(), NinshoshaDenshikoinshubetsuCode.保険者印, reportSourceWriter);
+                batchPram.getHakkoYMD(), NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
         RString 文書番号 = ReportUtil.get文書番号(SubGyomuCode.DBC介護給付,
                 ReportIdDBC.DBC100005.getReportId(), batchPram.getHakkoYMD());
 
@@ -143,6 +144,7 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
         RString key = RString.EMPTY;
         Decimal 支給金額 = Decimal.ZERO;
         RString 給付の種類 = RString.EMPTY;
+        RString 増減理由等 = RString.EMPTY;
         RString サービス種類コード = RString.EMPTY;
         ShokanKetteiTsuchiShoHihokenshabunItem item = new ShokanKetteiTsuchiShoHihokenshabunItem();
         for (ShokanKetteiTsuchiShoShiharai shoShiharai : businessList) {
@@ -158,21 +160,24 @@ public class ShokanBaraiShikyuKetteiTsuchishoRiyoshamuke {
                 key = getKey(shoShiharai);
                 支給金額 = shoShiharai.get支給額();
                 給付の種類 = shoShiharai.get種類();
+                増減理由等 = shoShiharai.get増減理由等();
                 サービス種類コード = shoShiharai.getサービス種類コード();
             }
-            // TODO QA1137 増減理由等、帳票設計がない
             if (給付の種類.length() <= 文字数_38) {
                 item.setKyufuShu1(給付の種類);
-                item.setRiyu1(shoShiharai.get増減理由等());
             } else if (給付の種類.length() <= 文字数_76) {
                 item.setKyufuShu1(給付の種類.substring(ZERO, 文字数_38));
                 item.setKyufuShu2(給付の種類.substring(文字数_38));
-                item.setRiyu2(shoShiharai.get増減理由等());
             } else {
                 item.setKyufuShu1(給付の種類.substring(ZERO, 文字数_38));
                 item.setKyufuShu2(給付の種類.substring(文字数_38, 文字数_76));
                 item.setKyufuShu3(給付の種類.substring(文字数_76));
-                item.setRiyu3(shoShiharai.get増減理由等());
+            }
+            if (増減理由等.length() <= 文字数_38) {
+                item.setRiyu1(増減理由等);
+            } else {
+                item.setRiyu1(増減理由等.substring(ZERO, 文字数_38));
+                item.setRiyu2(増減理由等.substring(文字数_38));
             }
             item.setBunshoNo(文書番号);
             item.setHihokenshaName(shoShiharai.get被保険者氏名());

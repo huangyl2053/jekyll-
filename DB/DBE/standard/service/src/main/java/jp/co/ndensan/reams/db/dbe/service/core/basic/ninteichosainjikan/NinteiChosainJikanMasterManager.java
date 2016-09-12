@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosainjikan.NinteiChosainBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninteichosainjikan.NinteiChosainJikanMasterParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosainjikan.NinteiChosainJikanMasterParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.ninteichosainjikan.NinteiChosainEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosainjikan.INinteiChosainJikanMasterMapper;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
@@ -217,10 +217,9 @@ public class NinteiChosainJikanMasterManager {
     @Transaction
     public void 更新(DbT5221NinteichosaScheduleEntity 変更前データ, DbT5221NinteichosaScheduleEntity 変更後データ) {
         変更後データ.setState(EntityDataState.Added);
+        変更前データ.setState(EntityDataState.Deleted);
         dac.saveOrDelete(変更前データ);
-        if (!EntityDataState.Added.equals(変更前データ.getState())) {
-            dac.save(変更後データ);
-        }
+        dac.save(変更後データ);
     }
 
     /**

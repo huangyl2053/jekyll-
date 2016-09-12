@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.chosachiku;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.chosachiku.ChosaChikuMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosachiku.ChosaChikuMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.chosachiku.ChosaChikuEntity;
 
 /**
@@ -30,13 +30,4 @@ public interface IChosaChikuMapper {
      * @return List<ChosaChikuEntity>
      */
     List<ChosaChikuEntity> select認定調査員一覧(ChosaChikuMapperParameter paramer);
-
-    /**
-     * 地区認定調査員情報の削除処理する。
-     *
-     * @param paramer ChosaChikuMapperParameter
-     * @return int
-     */
-    int delete認定調査員情報(ChosaChikuMapperParameter paramer);
-
 }

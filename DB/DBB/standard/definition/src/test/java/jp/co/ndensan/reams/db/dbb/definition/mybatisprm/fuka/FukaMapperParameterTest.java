@@ -49,7 +49,6 @@ public class FukaMapperParameterTest extends DbbTestBase {
 //        public void 履歴番号にNullを指定すると_NullPointerExceptionが発生する() {
 //            FukaMapperParameter sut = FukaMapperParameter.createParam(choteiNendo, fukaNendo, tsuchishoNo, null);
 //        }
-
         @Test
         public void 引数にNull以外を指定すると_パラメータが生成できる() {
             FukaMapperParameter sut = FukaMapperParameter.createParam(choteiNendo, fukaNendo, tsuchishoNo, rirekiNo);

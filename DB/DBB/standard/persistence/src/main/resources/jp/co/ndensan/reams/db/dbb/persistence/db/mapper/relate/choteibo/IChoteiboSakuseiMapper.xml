@@ -18,7 +18,7 @@
     </resultMap>
 
     <!-- 期別のデータの取得-->
-    <select id="select期別のデータ" resultMap="resultMap_KibetsuDataEntity" parameterType="java.util.Map" fetchSize="500">
+    <select resultOrdered="true" id="select期別のデータ" resultMap="resultMap_KibetsuDataEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT
         A."choteiNendo",
         A."fukaNendo",
@@ -141,7 +141,7 @@
         <result property="choteigaku" column="choteigaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
     <!-- 当月末の段階データをキー検索で取得します。 -->
-    <select id="select当月末の段階データ" resultMap="resultMap_DankaiDataEntity" parameterType="java.util.Map" fetchSize="500">
+    <select resultOrdered="true" id="select当月末の段階データ" resultMap="resultMap_DankaiDataEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT
         A."choteiNendo",
         A."fukaNendo",
@@ -205,7 +205,7 @@
     </select>
 
     <!-- 前月末の段階データをキー検索で取得します。 -->
-    <select id="select前月末の段階データ" resultMap="resultMap_DankaiDataEntity" parameterType="java.util.Map" fetchSize="500">
+    <select resultOrdered="true" id="select前月末の段階データ" resultMap="resultMap_DankaiDataEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT
         A."choteiNendo",
         A."fukaNendo",
@@ -268,7 +268,7 @@
 
     <!-- 処理日付管理マスタに基準日時を取得します。 -->
     <select id="select処理日付" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.ResultMap_DbT7022ShoriDateKanriEntity"
-            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.choteibo.ChoteiboShoriHizukeMyBatisParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.choteibo.ChoteiboShoriHizukeMyBatisParameter" fetchSize="500" resultOrdered="true">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.allColumns_DbT7022ShoriDateKanri" />
         FROM
@@ -335,7 +335,7 @@
     </resultMap>
 
     <!-- 段階の件数を取得します。 -->
-    <select id="select所得段階の件数" resultMap="resultMap_DankaiKensuEntity" parameterType="java.util.Map" fetchSize="500">
+    <select resultOrdered="true" id="select所得段階の件数" resultMap="resultMap_DankaiKensuEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT
         COUNT(DISTINCT A."hihokenshaNo") AS "dankaiKensu",
         A."choteiNendo",
@@ -424,7 +424,7 @@
         <result property="naiheisyaKensu" column="naiheisyaKensu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
     <!-- 内併徴者数をします。 -->
-    <select id="select内併徴者数" resultMap="resultMap_NaiheisyaKensuEntity" parameterType="java.util.Map" fetchSize="500">
+    <select resultOrdered="true" id="select内併徴者数" resultMap="resultMap_NaiheisyaKensuEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT a."choteiNendo", a."fukaNendo", a."dankai", a."karisanFlag", COUNT(a."hihokenshaNo") AS "naiheisyaKensu", '1' AS "choshuHouhou"
         FROM (
         SELECT "choteiNendo", "fukaNendo", "dankai", "hihokenshaNo", "karisanFlag"
@@ -483,7 +483,7 @@
 
     <!-- 増部分の計算 -->
     <!-- 該当段階の前月末と当月末の間に調定額の異動の判断 -->
-    <select id="select増の調定額の小計" resultMap="resultMap_DankaiShokeiEntity_Fue" parameterType="java.util.Map" fetchSize="500">
+    <select resultOrdered="true" id="select増の調定額の小計" resultMap="resultMap_DankaiShokeiEntity_Fue" parameterType="java.util.Map" fetchSize="500">
         SELECT
         "choteiNendo",
         "fukaNendo",
@@ -511,7 +511,7 @@
 
     <!-- 減部分の計算 -->
     <!-- 該当段階の前月末と当月末の間に調定額の異動の判断 -->
-    <select id="select減の調定額の小計" resultMap="resultMap_DankaiShokeiEntity_Gen" parameterType="java.util.Map" fetchSize="500">
+    <select resultOrdered="true" id="select減の調定額の小計" resultMap="resultMap_DankaiShokeiEntity_Gen" parameterType="java.util.Map" fetchSize="500">
         SELECT 
             "choteiNendo", 
             "fukaNendo", 
@@ -585,7 +585,7 @@
     </resultMap>
 
     <!-- 期別情報を取得します。-->
-    <select id="select期別情報" resultMap="resultMap_KibetsuEntity" parameterType="java.util.Map" fetchSize="500">
+    <select resultOrdered="true" id="select期別情報" resultMap="resultMap_KibetsuEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT
         "TmpKibetsu".*
         FROM
@@ -613,7 +613,7 @@
     </resultMap>
 
     <!-- 段階情報を取得します。-->
-    <select id="select段階情報" resultMap="resultMap_DanKaiEntity" parameterType="java.util.Map" fetchSize="500">
+    <select resultOrdered="true" id="select段階情報" resultMap="resultMap_DanKaiEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT
         "TmpDankai".*
         FROM
@@ -707,7 +707,7 @@
     </resultMap>
 
     <!-- 段階小計情報を取得します。-->
-    <select id="select段階小計情報" resultMap="resultMap_DankaiShokeiEntity" parameterType="java.util.Map" fetchSize="500">
+    <select resultOrdered="true" id="select段階小計情報" resultMap="resultMap_DankaiShokeiEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT
         "TmpDankaiShokei".*
         FROM
@@ -738,7 +738,7 @@
     </resultMap>
 
     <!-- 期別小計情報を取得します。-->
-    <select id="select期別小計情報" resultMap="resultMap_KibetsuShokeiEntity" parameterType="java.util.Map" fetchSize="500">
+    <select resultOrdered="true" id="select期別小計情報" resultMap="resultMap_KibetsuShokeiEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT
         "TmpKibetsuShokei".*
         FROM
@@ -837,7 +837,7 @@
     </resultMap>
 
     <!-- 段階合計情報を取得します。-->
-    <select id="select段階合計From段階小計一時テーブル" resultMap="resultMap_DankaiGokeiEntity_1" parameterType="java.util.Map" fetchSize="500">
+    <select resultOrdered="true" id="select段階合計From段階小計一時テーブル" resultMap="resultMap_DankaiGokeiEntity_1" parameterType="java.util.Map" fetchSize="500">
         SELECT
             A."choteiNendo",
             A."fukaNendo",
@@ -882,7 +882,7 @@
     </resultMap>
 
     <!-- 減免の件数と減免額の計算 -->
-    <select id="select減免の件数と減免額" resultMap="resultMap_GenmenEntity" parameterType="java.util.Map" fetchSize="500">
+    <select resultOrdered="true" id="select減免の件数と減免額" resultMap="resultMap_GenmenEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT "choteiNendo", "fukaNendo", COUNT("tsuchishoNo") AS "genmenCount", SUM("gemmenGaku") AS "genmenChoteigaku"
         FROM rgdb."DbT2002Fuka" a
         WHERE "rirekiNo" = 
@@ -916,7 +916,7 @@
 
     <!-- 歳出還付の件数と金額の計算 -->
     <!-- 特別徴収の場合 -->
-    <select id="select特徴歳出還付情報" resultMap="resultMap_SaishutsuKampuEntity_Tk" parameterType="java.util.Map" fetchSize="500">
+    <select resultOrdered="true" id="select特徴歳出還付情報" resultMap="resultMap_SaishutsuKampuEntity_Tk" parameterType="java.util.Map" fetchSize="500">
         SELECT
         A."choteiNendo",
         A."fukaNendo",
@@ -953,7 +953,7 @@
         <result property="fuSaishutsuKampuChoteiGaku" column="fuSaishutsuKampuChoteiGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
     <!-- 普通徴収の場合 -->
-    <select id="select普徴歳出還付情報" resultMap="resultMap_SaishutsuKampuEntity_Fu" parameterType="java.util.Map" fetchSize="500">
+    <select resultOrdered="true" id="select普徴歳出還付情報" resultMap="resultMap_SaishutsuKampuEntity_Fu" parameterType="java.util.Map" fetchSize="500">
         SELECT
         A."choteiNendo",
         A."fukaNendo",
@@ -997,7 +997,7 @@
 
     <!-- 期別のデータの取得 -->
     <!-- 徴収方法が「特別徴収」の場合-->
-    <select id="select特徴期別のデータ" resultMap="resultMap_TokuchoKibetusDataEntity" parameterType="java.util.Map" fetchSize="500">
+    <select resultOrdered="true" id="select特徴期別のデータ" resultMap="resultMap_TokuchoKibetusDataEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT
         A."choteiNendo",
         A."choshuHouhou",
@@ -1094,7 +1094,7 @@
 
     <!-- 期別のデータの取得 -->
     <!-- 徴収方法が「普通徴収」の場合-->
-    <select id="select普徴期別小計情報" resultMap="resultMap_KibetsuShokeiEntity" parameterType="java.util.Map" fetchSize="500">
+    <select resultOrdered="true" id="select普徴期別小計情報" resultMap="resultMap_KibetsuShokeiEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT
         A.*
         FROM
@@ -1125,7 +1125,7 @@
     </resultMap>
 
     <!-- 徴収方法が「普通徴収」の場合、期別小計の合計情報を取得します。-->
-    <select id="select期別小計の合計情報" resultMap="resultMap_KibetsuShokeiGokeiEntity" parameterType="java.util.Map" fetchSize="500">
+    <select resultOrdered="true" id="select期別小計の合計情報" resultMap="resultMap_KibetsuShokeiGokeiEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT
         A."choteiNendo",
         A."choshuHouhou",
@@ -1171,7 +1171,7 @@
 
     <!-- 段階データの取得 -->
     <!-- 当月末のデータの取得 -->
-    <select id="select当月末の段階のデータ" resultMap="resultMap_DangatsuDankaiDataEntity" parameterType="java.util.Map" fetchSize="500">
+    <select resultOrdered="true" id="select当月末の段階のデータ" resultMap="resultMap_DangatsuDankaiDataEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT
         A."choshuHouhou",
         A."dankai",
@@ -1229,7 +1229,7 @@
     </resultMap>
 
     <!-- 前月末の段階のデータの取得 -->
-    <select id="select前月末の段階のデータ" resultMap="resultMap_ZengatsuDankaiDataEntity" parameterType="java.util.Map" fetchSize="500">
+    <select resultOrdered="true" id="select前月末の段階のデータ" resultMap="resultMap_ZengatsuDankaiDataEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT
         A."choshuHouhou",
         A."dankai",
@@ -1279,7 +1279,7 @@
     </resultMap>
 
     <!-- 所得段階の特徴/普徴者数の集計 -->
-    <select id="select段階の特徴と普徴者数" resultMap="resultMap_DankaiTksaiToFusaiKensuEntity" parameterType="java.util.Map" fetchSize="500">
+    <select resultOrdered="true" id="select段階の特徴と普徴者数" resultMap="resultMap_DankaiTksaiToFusaiKensuEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT
         A."choshuHouhou",
         A."dankai",
@@ -1335,7 +1335,7 @@
 
     <!-- 各部分合計 -->
     <!-- 期別部分の集計 -->
-    <select id="select期別部分のデータ" resultMap="resultMap_KibetsuBubunDataEntity" parameterType="java.util.Map" fetchSize="500">
+    <select resultOrdered="true" id="select期別部分のデータ" resultMap="resultMap_KibetsuBubunDataEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT
         A."choteiNendo",
         A."choshuHouhou",
@@ -1435,7 +1435,7 @@
     </resultMap>
 
     <!-- その他部分のデータ-->
-    <select id="selectその他部分のデータ" resultMap="resultMap_SonotaBubunDataEntity" parameterType="java.util.Map" fetchSize="500">
+    <select resultOrdered="true" id="selectその他部分のデータ" resultMap="resultMap_SonotaBubunDataEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT
         A."choshuHouhou",
         A."dogetsuFlag",
@@ -1502,7 +1502,7 @@
     </resultMap>
 
     <!-- 期別合計情報を取得します。-->
-    <select id="select期別合計情報" resultMap="resultMap_KibetsuGokeiEntity" parameterType="java.util.Map" fetchSize="500">
+    <select resultOrdered="true" id="select期別合計情報" resultMap="resultMap_KibetsuGokeiEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT
             A.*
         FROM
@@ -1531,7 +1531,7 @@
     </resultMap>
 
     <!-- 段階合計情報を取得します。-->
-    <select id="select段階合計情報" resultMap="resultMap_DankaiGokeiEntity" parameterType="java.util.Map" fetchSize="500">
+    <select resultOrdered="true" id="select段階合計情報" resultMap="resultMap_DankaiGokeiEntity" parameterType="java.util.Map" fetchSize="500">
         SELECT
             A.*
         FROM
@@ -1573,7 +1573,7 @@
         <result property="naiheisyaKensuCount" column="naiheisyaKensuCount" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
     <!-- 合計部分情報を取得します。-->
-    <select id="selectAll合計部分情報" resultMap="resultMap_GokeiBubunEntity" fetchSize="500">
+    <select resultOrdered="true" id="selectAll合計部分情報" resultMap="resultMap_GokeiBubunEntity" fetchSize="500">
         SELECT "TmpGokeiBubun".* FROM "TmpGokeiBubun"
     </select>
 
@@ -1602,7 +1602,7 @@
         <result property="fuSaishutsuKampuChoteigakuSoukei" column="fuSaishutsuKampuChoteigakuSoukei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
     <!-- 合計部分情報を取得します。-->
-    <select id="selectAll合計部分総計情報" resultMap="resultMap_GokeiBubunSoukeiEntity" fetchSize="500">
+    <select resultOrdered="true" id="selectAll合計部分総計情報" resultMap="resultMap_GokeiBubunSoukeiEntity" fetchSize="500">
         SELECT "TmpGokeiBubunSoukei".* FROM "TmpGokeiBubunSoukei"
     </select>
     

@@ -10,21 +10,21 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigojuminhyokobetsukoikiunyo.KaigoJuminhyoKobetsuKoikiunyo;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.kobetsujikorenkeiinfosakuseikoiki.KobetsuKoikiunyoParameter;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.kaigojyuminhyokoukiu.KaiGoJuminHyokouKiuProcessParameter;
-import jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyo.IKaigoJuminhyoEucCsvEntity;
-import jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyo.KaigoJuminhyoEntity;
-import jp.co.ndensan.reams.db.dbu.entity.db.kaigojuminhyo.RendoPatternEntity;
-import jp.co.ndensan.reams.db.dbu.entity.db.kaigojyuminhyoutashajuki.KaigoJyuminhyouKoikiunyoJuniCSVDataEntity;
-import jp.co.ndensan.reams.db.dbu.entity.db.kaigojyuminhyoutashajuki.KaigoJyuminhyouKoikiunyoJuniEucCSVDataEntity;
-import jp.co.ndensan.reams.db.dbu.entity.db.kaigojyuminhyoutashajuki.KaigoJyuminhyouTashajukiCSVDateEntity;
-import jp.co.ndensan.reams.db.dbu.entity.db.kaigojyuminhyoutashajuki.KaigoJyuminhyouTashajukiDateEntity;
-import jp.co.ndensan.reams.db.dbu.entity.db.kaigojyuminhyoutashajuki.KaigoJyuminhyouTashajukiEucCSVDateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojuminhyo.KaigoJuminhyoRelateEntity;
-import jp.co.ndensan.reams.db.dbu.service.core.basic.kaigojyuminhyoutashajuki.KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojuminhyokobetsujikou.IKaigoJuminhyoEucCsvEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojuminhyokobetsujikou.KaigoJuminhyoEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojuminhyokobetsujikou.RendoPatternEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojyuminhyoutashajuki.KaigoJyuminhyouKoikiunyoJuniCSVDataEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojyuminhyoutashajuki.KaigoJyuminhyouKoikiunyoJuniEucCSVDataEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojyuminhyoutashajuki.KaigoJyuminhyouTashajukiCSVDateEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojyuminhyoutashajuki.KaigoJyuminhyouTashajukiDateEntity;
+import jp.co.ndensan.reams.db.dbu.entity.db.relate.kaigojyuminhyoutashajuki.KaigoJyuminhyouTashajukiEucCSVDateEntity;
 import jp.co.ndensan.reams.db.dbu.service.core.kaigojuminhyobatchparameter.KaigoJuminhyoKobetsuKoikiunyoBatchParameterSakuseiFinder;
+import jp.co.ndensan.reams.db.dbu.service.core.kaigojyuminhyoutashajuki.KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.kaigojyuminhyokoukiu.KaiGoJuminHyokouKiuParameter;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.RenkeiDataFormatVersion;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SofuRenkeiDataKyoyuFileName;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.RenkeiDataFormatVersion;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SofuRenkeiDataKyoyuFileName;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7035RendoPatternEntity;
@@ -78,7 +78,7 @@ public class KaiGoJuminHyokouKiuEucCsvProcess extends BatchProcessBase<KaigoJumi
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private KaiGoJuminHyokouKiuProcessParameter processParameter;
-    private final int maxKeepVersions = 50;
+    private final int maxKeepVersions = 1000;
     private FileSpoolManager manager;
     private KaigoJyuminhyouKoikiunyoCSVDataSakuseiFinder finder;
     List<KaigoJyuminhyouTashajukiCSVDateEntity> hachiCSVDataEntityList = new ArrayList<>();
@@ -89,6 +89,7 @@ public class KaiGoJuminHyokouKiuEucCsvProcess extends BatchProcessBase<KaigoJumi
     private IDbT1001HihokenshaDaichoMapper mapper;
     private OutputParameter<RString> outSharedFileName;
     private OutputParameter<RDateTime> outSharedFileID;
+    private static final RString 日付 = new RString("yyyyMMddHHmmssSSS");
 
     @Override
     protected void beforeExecute() {
@@ -334,26 +335,26 @@ public class KaiGoJuminHyokouKiuEucCsvProcess extends BatchProcessBase<KaigoJumi
             List<KaigoJyuminhyouTashajukiDateEntity> entityList = get介護住民票個別事項連携情報リストのIsEmpty(kaigoJuminhyoEntityList);
             for (int i = 0; i < processParameter.getKobetsuKoikiunyoParameterList().size(); i++) {
                 junitoJugoCSVDataEntityList
-                        = finder.getKaigoJyuminhyouKoikiunyoJuniCSVData(entityList,
+                        = finder.getKaigoJyuminhyouKoikiunyoJugoCSVData(entityList,
                                 processParameter.getKobetsuKoikiunyoParameterList().get(i).getShichosonCode(),
                                 rendoPatternEntity.getCodeHenkanKubun()).records();
                 get広域12桁または15桁CSVデータのCSV出力(junitoJugoCSVDataEntityList);
 
             }
         }
+        eucCsvWriterJunitoJugo.close();
         for (int i = 0; i < processParameter.getKobetsuKoikiunyoParameterList().size(); i++) {
             FilesystemName ファイル名称 = new FilesystemName(new RString(processParameter
                     .getKobetsuKoikiunyoParameterList().get(0).getShichosonCode().toString())
                     .concat(SofuRenkeiDataKyoyuFileName.介護個別事項異動情報_一定間隔.get名称()));
-            setSharedFile(ファイル名称, eucFilePath);
+            setSharedFile(ファイル名称);
         }
-        eucCsvWriterJunitoJugo.close();
         manager.spool(eucFilePath);
     }
 
-    private void setSharedFile(FilesystemName 共有ファイル名, RString path) {
-        SharedFile.defineSharedFile(共有ファイル名, maxKeepVersions, null, null, false, null);
-        RDateTime fileId = SharedFile.copyToSharedFile(new FilesystemPath(path.toString()), 共有ファイル名);
+    private void setSharedFile(FilesystemName 共有ファイル名) {
+        SharedFile.defineSharedFile(共有ファイル名, maxKeepVersions, SharedFile.GROUP_ALL, null, false, null);
+        RDateTime fileId = SharedFile.copyToSharedFile(new FilesystemPath(eucFilePath), 共有ファイル名);
         outSharedFileName.setValue(共有ファイル名.toRString());
         outSharedFileID.setValue(fileId);
     }
@@ -503,12 +504,12 @@ public class KaiGoJuminHyokouKiuEucCsvProcess extends BatchProcessBase<KaigoJumi
         if (entity.getInsertTimestamp() == null) {
             tashaJukiDataEntity.set挿入日時(RString.EMPTY);
         } else {
-            tashaJukiDataEntity.set挿入日時(new RString(entity.getInsertTimestamp().toString()));
+            tashaJukiDataEntity.set挿入日時(entity.getInsertTimestamp().format西暦(日付.toString()));
         }
         if (entity.getLastUpdateTimestamp() == null) {
             tashaJukiDataEntity.set更新日時(RString.EMPTY);
         } else {
-            tashaJukiDataEntity.set更新日時(new RString(entity.getLastUpdateTimestamp().toString()));
+            tashaJukiDataEntity.set更新日時(entity.getLastUpdateTimestamp().format西暦(日付.toString()));
         }
         tashaJukiDataEntity.set受給者市町村コード(entity.getDbT4001ShichosonCode());
         tashaJukiDataEntity.set受給者被保険者番号(entity.getDbT4001HihokenshaNo());
@@ -593,12 +594,12 @@ public class KaiGoJuminHyokouKiuEucCsvProcess extends BatchProcessBase<KaigoJumi
         if (entity.getDbT4001InsertTimestamp() == null) {
             tashaJukiDataEntity.set受給者挿入日時(RString.EMPTY);
         } else {
-            tashaJukiDataEntity.set受給者挿入日時(new RString(entity.getDbT4001InsertTimestamp().toString()));
+            tashaJukiDataEntity.set受給者挿入日時(entity.getDbT4001InsertTimestamp().format西暦(日付.toString()));
         }
         if (entity.getDbT4001LastUpdateTimestamp() == null) {
-            tashaJukiDataEntity.set受給者挿入日時(RString.EMPTY);
+            tashaJukiDataEntity.set受給者更新日時(RString.EMPTY);
         } else {
-            tashaJukiDataEntity.set受給者挿入日時(new RString(entity.getDbT4001LastUpdateTimestamp().toString()));
+            tashaJukiDataEntity.set受給者更新日時(entity.getDbT4001LastUpdateTimestamp().format西暦(日付.toString()));
         }
         return tashaJukiDataEntity;
     }

@@ -79,7 +79,7 @@
      "layoutName": "DBA2010012",
      "layoutTitle": "施設登録",
      "eventName": "再検索",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBA",
      "toLayoutName": "DBA2010011",
@@ -93,6 +93,16 @@
      "layoutName": "DBA2010011",
      "layoutTitle": "検索条件・事業者一覧",
      "eventName": "終了",
+     "destroy": false,
+     "condition": ""
+    },
+    {
+     "id": "8",
+     "type": "end",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA2010012",
+     "layoutTitle": "施設登録",
+     "eventName": "完了",
      "destroy": false,
      "condition": ""
     }

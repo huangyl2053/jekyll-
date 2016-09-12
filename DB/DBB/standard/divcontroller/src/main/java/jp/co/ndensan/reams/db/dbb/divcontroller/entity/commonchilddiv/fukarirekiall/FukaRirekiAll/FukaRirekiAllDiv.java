@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -88,9 +89,30 @@ public class FukaRirekiAllDiv extends Panel implements IFukaRirekiAllDiv {
         return getHandler().get賦課履歴();
     }
 
+    @Override
+//<<<<<<< HEAD
+    public boolean hasLoaded() {
+        return getHandler().hasLoaded();
+    }
+//=======
+
+    public TsuchishoNo getClicked通知書番号() {
+        return getHandler().getClicked通知書番号();
+    }
+
+    @Override
+    public FlexibleYear getClicked調定年度() {
+        return getHandler().getClicked調定年度();
+    }
+
+    @Override
+    public FlexibleYear getClicked賦課年度() {
+        return getHandler().getClicked賦課年度();
+//>>>>>>> origin/sync
+    }
+
     @JsonIgnore
     public FukaRirekiAllHandler getHandler() {
         return new FukaRirekiAllHandler(this);
     }
-
 }

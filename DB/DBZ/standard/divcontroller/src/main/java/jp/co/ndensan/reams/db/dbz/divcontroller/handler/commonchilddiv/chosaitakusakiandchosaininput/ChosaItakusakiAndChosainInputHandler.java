@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 調査委託先/調査員入力共有子DivののHandlerクラスです。
  *
- * @reamsid_L DBE-1300-030 zhangguopeng
+ * @reamsid_L DBZ-1300-030 zhangguopeng
  */
 public class ChosaItakusakiAndChosainInputHandler {
 
@@ -132,4 +132,15 @@ public class ChosaItakusakiAndChosainInputHandler {
         div.getTxtChosainName().setValue(chosaItakusakiAndChosain.get調査員氏名());
 
     }
+
+    /**
+     * onClick_btnClearボタンを押下した、共有子Div内の項目に設定された値をすべてクリアします。
+     */
+    public void onClick_BtnClear() {
+        div.getTxtChosaItakusakiCode().clearValue();
+        div.getTxtChosaItakusakiName().clearValue();
+        div.getTxtChosainCode().clearValue();
+        div.getTxtChosainName().clearValue();
+    }
+
 }

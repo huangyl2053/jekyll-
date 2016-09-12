@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.IsExistJ
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.ChosaItakusakiAndChosainInputDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -31,7 +30,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 要介護認定情報提供Divを制御クラスです。
@@ -61,13 +59,13 @@ public class YokaigoNinteiJohoTeikyoHandler {
     /**
      * 画面情報を設定します。
      *
+     * @param 被保険者番号 被保険者番号
      */
-    public void onLoad() {
+    public void onLoad(RString 被保険者番号) {
         div.getNinteiKekkaShosai().setIsOpen(false);
         div.getHakkoChohyo().setIsOpen(false);
         div.getNInteiRirekiInfo().setIsOpen(true);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnkensakuback"), false);
-        RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnToSearch"), false);
         HihokenshaJyuhouBusiness 被保険者情報 = YokaigoNinteiJohoTeikyoFinder.createInstance().select被保険者情報(被保険者番号);
         if (被保険者情報 != null) {
             div.getTxtHihokenshaNo().setValue(被保険者情報.get被保険者番号());
@@ -95,7 +93,11 @@ public class YokaigoNinteiJohoTeikyoHandler {
                 row.setShinseiKubunHorei(NinteiShinseiHoreiCode.toValue(business.get申請区分_法令().getKey()).get名称());
                 row.getShinseiTorisageDay().setValue(getNull(business.get取下年月日()));
                 row.getNinteiDay().setValue(getNull(business.get二次判定年月日()));
-                row.setYoKaigodo(YokaigoJotaiKubun09.toValue(business.get二次判定区分コード().getKey()).get名称());
+                if (YokaigoJotaiKubun09.なし.getコード().equals(business.get二次判定区分コード().value())) {
+                    row.setYoKaigodo(RString.EMPTY);
+                } else {
+                    row.setYoKaigodo(YokaigoJotaiKubun09.toValue(business.get二次判定区分コード().getKey()).get名称());
+                }
                 RStringBuilder builder = new RStringBuilder();
                 builder.append(business.get二次判定認定有効期間());
                 builder.append(月);
@@ -172,6 +174,33 @@ public class YokaigoNinteiJohoTeikyoHandler {
     }
 
     /**
+     * 「一覧へ戻る」ボタン押下します。
+     *
+     */
+    public void btn_BackSearchResult() {
+        div.getTxtShinseibi().clearValue();
+        div.getTxtShinseiKubunShin().clearValue();
+        div.getTxtShinseiKubun().clearValue();
+        div.getTxtNinteiChosaIraibi().clearValue();
+        div.getTxtNinteiChosaJisshibi().clearValue();
+        div.getTxtNinteiChosaJuryobi().clearValue();
+        div.getCcdChosaItakusakiAndChosainInput().clear();
+        div.getTxtIkenshoIraibi().clearValue();
+        div.getTxtIkenshoJuryobi().clearValue();
+        div.getCcdShujiiIryoKikanAndShujiiInput().clear();
+        div.getTxtShinsakaiYoteibi().clearValue();
+        div.getTxtShinsakaiKaisaibi().clearValue();
+        div.getChkNinteiChosahyo().setSelectedItemsByKey(new ArrayList<RString>());
+        div.getChkTokkiJiko().setSelectedItemsByKey(new ArrayList<RString>());
+        div.getChkShujiiIkensho().setSelectedItemsByKey(new ArrayList<RString>());
+        div.getChkSonotaShiryo().setSelectedItemsByKey(new ArrayList<RString>());
+        div.getChkIchijiHanteiKekka().setSelectedItemsByKey(new ArrayList<RString>());
+        div.getRadTokkiJikoMasking().setSelectedKey(キー_0);
+        div.getRadShujii().setSelectedKey(キー_0);
+        div.getRadSohotaShiryoMasking().setSelectedKey(キー_0);
+    }
+
+    /**
      * 特記事項チェックボックス変更します。
      *
      */
@@ -221,7 +250,7 @@ public class YokaigoNinteiJohoTeikyoHandler {
     }
 
     private RDate getNull(FlexibleDate date) {
-        if (date == null) {
+        if (date == null || date.isEmpty()) {
             return null;
         }
         return new RDate(date.toString());

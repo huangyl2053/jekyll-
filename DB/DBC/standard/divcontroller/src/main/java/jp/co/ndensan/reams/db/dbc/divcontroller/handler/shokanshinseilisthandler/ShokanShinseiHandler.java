@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbc.service.core.shokanshinseiichiran.ShokanShinse
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -53,7 +53,7 @@ public class ShokanShinseiHandler {
      * @param サービス年月To サービス年月To
      */
     public void onLoad(RString 状態, HihokenshaNo 被保険者番号, FlexibleYearMonth サービス年月From, FlexibleYearMonth サービス年月To) {
-        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_被保険者番号, 被保険者番号);
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         ViewStateHolder.put(ViewStateKeys.状態, 状態);
         SearchResult<ShokanShinseiIchiran> shokandhinseiichiran;
         if (照会.equals(状態)) {

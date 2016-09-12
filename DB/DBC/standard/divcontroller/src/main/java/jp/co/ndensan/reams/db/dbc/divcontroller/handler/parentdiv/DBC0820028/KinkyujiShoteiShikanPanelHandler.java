@@ -15,12 +15,12 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShoteiShikkanShisets
 import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraihishikyushinseikette.ShokanKihonParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820028.KinkyujiShoteiShikanPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820028.dgdKinkyujiShoteiList_Row;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseimeisaikensakuParameter;
+import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinseikette.SyokanbaraihiShikyuShinseiKetteManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -31,7 +31,6 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 償還払い費支給申請決定_サービス提供証明書(緊急時・所定疾患）画面のハンドラクラスです
@@ -88,24 +87,41 @@ public final class KinkyujiShoteiShikanPanelHandler {
     /**
      * 申請共通エリア
      *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 整理番号 RString
      * @param サービス年月 FlexibleYearMonth
      * @param 申請日 RDate
      * @param 事業者番号 JigyoshaNo
      * @param 明細番号 RString
      * @param 証明書 RString
      * @param 様式番号 RString
+     * @param 識別コード ShikibetsuCode
+     * @return ArrayList<ShokanShoteiShikkanShisetsuRyoyo>
      */
-    public void initPanelHead(FlexibleYearMonth サービス年月,
+    public ArrayList<ShokanShoteiShikkanShisetsuRyoyo> initPanelHead(HihokenshaNo 被保険者番号,
+            RString 整理番号,
+            FlexibleYearMonth サービス年月,
             RDate 申請日,
             JigyoshaNo 事業者番号,
             RString 明細番号,
             RString 証明書,
-            RString 様式番号) {
+            RString 様式番号,
+            ShikibetsuCode 識別コード) {
+
+        div.getPanelCcd().getCcdKaigoAtenaInfo().initialize(識別コード);
+        div.getPanelCcd().getCcdKaigoShikakuKihon().initialize(被保険者番号);
+
         div.getPanelHead().getTxtServiceTeikyoYM().setValue(new RDate(サービス年月.toString()));
         div.getPanelHead().getTxtShinseiYMD().setValue(new RDate(申請日.wareki().toDateString().toString()));
         div.getPanelHead().getTxtJigyoshaBango().setValue(事業者番号.getColumnValue());
         div.getPanelHead().getTxtMeisaiBango().setValue(明細番号);
         div.getPanelHead().getTxtShomeisho().setValue(証明書);
+
+        ShokanbaraiJyokyoShokai finder = ShokanbaraiJyokyoShokai.createInstance();
+        ArrayList<ShokanShoteiShikkanShisetsuRyoyo> list = (ArrayList<ShokanShoteiShikkanShisetsuRyoyo>) finder.
+                getShoteiShikanShisetsuRyoyohiEtcData(被保険者番号, サービス年月, 整理番号, 事業者番号,
+                        様式番号, 明細番号, null);
+        return list;
     }
 
     /**
@@ -180,6 +196,7 @@ public final class KinkyujiShoteiShikanPanelHandler {
      * 追加する設定
      */
     public void initAdd() {
+        div.setRowId(RString.EMPTY);
         div.getBtnAdd().setDisabled(true);
         div.getPanelDetail().setDisplayNone(false);
         div.getPanelDetail().getPanelShobyoName().setDisabled(false);
@@ -294,13 +311,7 @@ public final class KinkyujiShoteiShikanPanelHandler {
         return div.getDgdKinkyujiShoteiList().getDataSource().get(Integer.parseInt(div.getRowId().toString()));
     }
 
-    /**
-     * 確定する設定
-     *
-     * @param row dgdKinkyujiShoteiList_Row
-     */
-    public void confirm(dgdKinkyujiShoteiList_Row row) {
-        RString state = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
+    private void confirm(dgdKinkyujiShoteiList_Row row, RString state) {
         if (修正.equals(state)) {
             row.setRowState(RowState.Modified);
         } else if (削除.equals(state)) {
@@ -395,11 +406,10 @@ public final class KinkyujiShoteiShikanPanelHandler {
      * ボタン表示制御処理
      *
      * @param entity ShikibetsuNoKanri
+     * @param parameter ShoukanharaihishinseimeisaikensakuParameter
      */
-    public void getボタンを制御(ShikibetsuNoKanri entity) {
+    public void getボタンを制御(ShikibetsuNoKanri entity, ShoukanharaihishinseimeisaikensakuParameter parameter) {
 
-        ShoukanharaihishinseimeisaikensakuParameter parameter = ViewStateHolder.get(
-                ViewStateKeys.償還払費申請明細検索キー, ShoukanharaihishinseimeisaikensakuParameter.class);
         FlexibleYearMonth サービス年月 = parameter.getサービス年月();
         HihokenshaNo 被保険者番号 = parameter.get被保険者番号();
         RString 整理番号 = parameter.get整理番号();
@@ -574,11 +584,14 @@ public final class KinkyujiShoteiShikanPanelHandler {
 
     /**
      * 申請を保存する設定
+     *
+     * @param keys ShoukanharaihishinseimeisaikensakuParameter
+     * @param 処理モード RString
+     * @param shokanShoteiShikkanShisetsuRyoyoList 償還払請求所定疾患施設療養費データ
      */
-    public void 保存処理() {
+    public void 保存処理(ShoukanharaihishinseimeisaikensakuParameter keys,
+            RString 処理モード, List<ShokanShoteiShikkanShisetsuRyoyo> shokanShoteiShikkanShisetsuRyoyoList) {
 
-        ShoukanharaihishinseimeisaikensakuParameter keys = ViewStateHolder.get(ViewStateKeys.償還払費申請明細検索キー,
-                ShoukanharaihishinseimeisaikensakuParameter.class);
         JigyoshaNo 事業者番号 = keys.get事業者番号();
         RString 様式番号 = keys.get様式番号();
         HihokenshaNo 被保険者番号 = keys.get被保険者番号();
@@ -586,13 +599,11 @@ public final class KinkyujiShoteiShikanPanelHandler {
                 getValue().toDateString().substring(0, SIX));
         RString 整理番号 = keys.get整理番号();
         RString 明細番号 = keys.get明細番号();
-        if (削除.equals(ViewStateHolder.get(ViewStateKeys.処理モード, RString.class))) {
+        if (削除.equals(処理モード)) {
             SyokanbaraihiShikyuShinseiKetteManager.createInstance().delShokanSyomeisyo(
                     被保険者番号, 提供購入年月, 整理番号, 事業者番号, 様式番号, 明細番号);
         } else {
             int max連番 = 0;
-            List<ShokanShoteiShikkanShisetsuRyoyo> shokanShoteiShikkanShisetsuRyoyoList = ViewStateHolder.get(
-                    ViewStateKeys.償還払請求所定疾患施設療養費等データ, List.class);
             Map<RString, ShokanShoteiShikkanShisetsuRyoyo> map = new HashMap<>();
             for (ShokanShoteiShikkanShisetsuRyoyo entity : shokanShoteiShikkanShisetsuRyoyoList) {
                 map.put(entity.get連番(), entity);
@@ -1078,21 +1089,90 @@ public final class KinkyujiShoteiShikanPanelHandler {
     }
 
     /**
-     * ViewStateに以下の情報を設定する
+     * Parameterに以下の情報を設定する
+     *
+     * @return ShoukanharaihishinseimeisaikensakuParameter
      */
-    public void putViewState() {
-        ViewStateHolder.put(ViewStateKeys.処理モード, ViewStateHolder.get(ViewStateKeys.処理モード, RString.class));
-        ViewStateHolder.put(ViewStateKeys.申請日, div.getPanelHead().getTxtShinseiYMD().getValue());
-        ShoukanharaihishinseikensakuParameter paramter = new ShoukanharaihishinseikensakuParameter(
-                ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class),
+    public ShoukanharaihishinseimeisaikensakuParameter setParameter() {
+        ShoukanharaihishinseimeisaikensakuParameter parameter = new ShoukanharaihishinseimeisaikensakuParameter(
+                null,
                 new FlexibleYearMonth(div.getPanelHead().getTxtServiceTeikyoYM().getValue().
                         toDateString().substring(0, SIX)),
-                ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
+                div.getPanelHead().getTxtShinseiYMD().getValue(),
+                null,
                 new JigyoshaNo(div.getPanelHead().getTxtJigyoshaBango().getValue()),
                 div.getPanelHead().getTxtShomeisho().getValue(),
-                div.getPanelHead().getTxtMeisaiBango().getValue(),
-                null);
-        ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, paramter);
+                div.getPanelHead().getTxtMeisaiBango().getValue());
+        return parameter;
     }
 
+    /**
+     * 削除初期化
+     */
+    public void init_Delete() {
+        div.getBtnAdd().setDisabled(true);
+        div.getDgdKinkyujiShoteiList().setReadOnly(true);
+        div.getPanelDetail().setDisplayNone(true);
+    }
+
+    /**
+     * 「修正ボタン」押下設置
+     */
+    public void click_Modify() {
+        div.getPanelDetail().setDisplayNone(false);
+        div.getPanelDetail().getPanelShobyoName().setDisabled(false);
+        div.getPanelDetail().getPanelOshinTuyin().setDisabled(false);
+        div.getPanelDetail().getPanelJiryoutensu().setDisabled(false);
+        div.setRowId(new RString(String.valueOf(div.getDgdKinkyujiShoteiList().getClickedRowId())));
+    }
+
+    /**
+     * 「削除ボタン」押下設置
+     */
+    public void click_Delete() {
+        div.getPanelDetail().setDisplayNone(false);
+        div.getPanelDetail().getPanelShobyoName().setDisabled(true);
+        div.getPanelDetail().getPanelOshinTuyin().setDisabled(true);
+        div.getPanelDetail().getPanelJiryoutensu().setDisabled(true);
+        div.setRowId(new RString(String.valueOf(div.getDgdKinkyujiShoteiList().getClickedRowId())));
+    }
+
+    /**
+     * 「取消ボタン」押下設置
+     */
+    public void click_Cancel() {
+        div.getBtnAdd().setDisabled(false);
+        div.getPanelDetail().setDisplayNone(true);
+    }
+
+    /**
+     * 「確定ボタン」押下設置
+     *
+     * @param state RString
+     */
+    public void click_Confirm(RString state) {
+        div.getBtnAdd().setDisabled(false);
+        div.getPanelDetail().setDisplayNone(true);
+
+        List<dgdKinkyujiShoteiList_Row> list = div.getDgdKinkyujiShoteiList().getDataSource();
+        if (登録.equals(state)) {
+            if (!RString.EMPTY.equals(div.getRowId())) {
+                dgdKinkyujiShoteiList_Row row = getSelectedRow();
+                confirm(row, state);
+                list.set(Integer.parseInt(div.getRowId().toString()), row);
+            } else {
+                dgdKinkyujiShoteiList_Row row = new dgdKinkyujiShoteiList_Row();
+                confirm(row, state);
+                list.add(row);
+            }
+        } else if (登録_削除.equals(state)) {
+            dgdKinkyujiShoteiList_Row row = getSelectedRow();
+            confirm(row, state);
+        } else {
+            dgdKinkyujiShoteiList_Row row = getSelectedRow();
+            confirm(row, state);
+            list.set(Integer.parseInt(div.getRowId().toString()), row);
+        }
+        div.getDgdKinkyujiShoteiList().setDataSource(list);
+    }
 }

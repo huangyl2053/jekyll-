@@ -6,20 +6,20 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0820012;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShinsei;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820012.DBC0820012StateName.削除モード;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820012.DBC0820012StateName.登録修正モード;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820012.DBC0820012TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0820012.ShikyuShinseiDetailDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820012.ShikyuShinseiDetailHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0820012.ShikyuShinseiDetailValidationHandler;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0820012.ShikyuShinseiDetailParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.shoukanharaihishinseikensaku.ShoukanharaihishinseikensakuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.shokanbaraijyokyoshokai.ShokanbaraiJyokyoShokai;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -54,6 +54,7 @@ public class ShikyuShinseiDetail {
     private static final RString メッセージ_更新 = new RString("更新");
     private static final RString 申請を保存する = new RString("btnUpdate");
     private static final RString 申請を削除する = new RString("btnDelete");
+    private static final RString 確認 = new RString("確認");
 
     /**
      * 画面初期化処理です。
@@ -71,9 +72,9 @@ public class ShikyuShinseiDetail {
         ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
         HihokenshaNo 被保険者番号 = 引継ぎデータ.get被保険者番号();
         FlexibleYearMonth サービス年月 = new FlexibleYearMonth((new RDate(
-                ViewStateHolder.get(ViewStateKeys.償還払申請一覧_サービス年月, RString.class).
+                ViewStateHolder.get(ViewStateKeys.サービス年月, RString.class).
                 toString())).getYearMonth().toDateString());
-        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_整理番号, RString.class);
+        RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
 
         ShikyuShinseiDetailHandler handler = getHandler(div);
         handler.load介護宛名情報(識別コード);
@@ -81,7 +82,7 @@ public class ShikyuShinseiDetail {
         RString config = DbBusinessConfig.get(ConfigNameDBC.国保連共同処理受託区分_償還,
                 RDate.getNowDate(), SubGyomuCode.DBC介護給付);
         ShokanShinsei 償還払支給申請 = handler.load支給申請一覧情報(被保険者番号, サービス年月, 整理番号, 画面モード, config);
-        ViewStateHolder.put(ViewStateKeys.償還払支給申請詳細データ, 償還払支給申請);
+        ViewStateHolder.put(ViewStateKeys.詳細データ, 償還払支給申請);
         if (!MODEL_ADD.equals(画面モード)) {
             handler.set支給申請一覧情報(被保険者番号, サービス年月, 整理番号, 画面モード, 償還払支給申請, config);
         }
@@ -113,7 +114,7 @@ public class ShikyuShinseiDetail {
                     return setAdd(div, 画面モード);
                 }
             } else if (MODEL_UPD.equals(画面モード)) {
-                ShokanShinsei 償還払支給申請 = ViewStateHolder.get(ViewStateKeys.償還払支給申請詳細データ, ShokanShinsei.class);
+                ShokanShinsei 償還払支給申請 = ViewStateHolder.get(ViewStateKeys.詳細データ, ShokanShinsei.class);
                 boolean flag = getHandler(div).is変更あり(償還払支給申請);
                 if (!flag) {
                     return isChange(div);
@@ -163,7 +164,7 @@ public class ShikyuShinseiDetail {
         if (valid.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(valid).respond();
         }
-        ShokanShinsei 償還払支給申請 = ViewStateHolder.get(ViewStateKeys.償還払支給申請詳細データ, ShokanShinsei.class);
+        ShokanShinsei 償還払支給申請 = ViewStateHolder.get(ViewStateKeys.詳細データ, ShokanShinsei.class);
         if (!ResponseHolder.isReRequest()) {
             RString 新整理番号 = getHandler(div).insert(画面モード, 償還払支給申請);
             if (null != 新整理番号 && !新整理番号.isEmpty()) {
@@ -183,13 +184,17 @@ public class ShikyuShinseiDetail {
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
-
-        ValidationMessageControlPairs valid = getValidationHandler(div).validateFor支払金額合計整合性チェック();
+        ValidationMessageControlPairs valid = new ValidationMessageControlPairs();
+        if (!ResponseHolder.isWarningIgnoredRequest() && !div.getCheckFlag().equals(確認)) {
+            valid = getValidationHandler(div).validateFor支払金額合計整合性チェック();
+        }
         if (valid.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(valid).respond();
         }
-        ShokanShinsei 償還払支給申請 = ViewStateHolder.get(ViewStateKeys.償還払支給申請詳細データ, ShokanShinsei.class);
-        if (!ResponseHolder.isReRequest()) {
+
+        ShokanShinsei 償還払支給申請 = ViewStateHolder.get(ViewStateKeys.詳細データ, ShokanShinsei.class);
+        if (!new RString(UrInformationMessages.正常終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+            div.setCheckFlag(確認);
             boolean flag = getHandler(div).update(画面モード, 償還払支給申請);
             if (flag) {
                 return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().
@@ -225,15 +230,15 @@ public class ShikyuShinseiDetail {
         RString 処理モード = parameter.get処理モード();
         if (MODEL_DEL.equals(処理モード)) {
             ViewStateHolder.put(ViewStateKeys.被保険者番号, 引継ぎデータ.get被保険者番号());
-            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月, parameter.getサービス提供年月().toDateString());
-            ViewStateHolder.put(ViewStateKeys.償還払申請一覧_整理番号, parameter.get整理番号());
+            ViewStateHolder.put(ViewStateKeys.サービス年月, parameter.getサービス提供年月().toDateString());
+            ViewStateHolder.put(ViewStateKeys.整理番号, parameter.get整理番号());
             return ResponseData.of(div).forwardWithEventName(DBC0820012TransitionEventName.一覧に戻る).respond();
         }
         boolean flag;
         if (MODEL_ADD.equals(処理モード)) {
             flag = getHandler(div).is変更あり_ADD();
         } else {
-            ShokanShinsei 償還払支給申請 = ViewStateHolder.get(ViewStateKeys.償還払支給申請詳細データ, ShokanShinsei.class);
+            ShokanShinsei 償還払支給申請 = ViewStateHolder.get(ViewStateKeys.詳細データ, ShokanShinsei.class);
             flag = getHandler(div).is変更あり(償還払支給申請);
         }
         if (flag) {
@@ -251,8 +256,8 @@ public class ShikyuShinseiDetail {
             }
         }
         ViewStateHolder.put(ViewStateKeys.被保険者番号, 引継ぎデータ.get被保険者番号());
-        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月, parameter.getサービス提供年月().toDateString());
-        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_整理番号, parameter.get整理番号());
+        ViewStateHolder.put(ViewStateKeys.サービス年月, parameter.getサービス提供年月().toDateString());
+        ViewStateHolder.put(ViewStateKeys.整理番号, parameter.get整理番号());
         return ResponseData.of(div).forwardWithEventName(DBC0820012TransitionEventName.一覧に戻る).respond();
     }
 
@@ -305,16 +310,16 @@ public class ShikyuShinseiDetail {
         TaishoshaKey 引継ぎデータ = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ShikyuShinseiDetailParameter parameter = getHandler(div).setParameter();
         ViewStateHolder.put(ViewStateKeys.画面モード, parameter.get処理モード());
-        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_被保険者番号, 引継ぎデータ.get被保険者番号());
-        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_サービス年月, parameter.getサービス提供年月().toDateString());
-        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_整理番号, parameter.get整理番号());
-        ViewStateHolder.put(ViewStateKeys.償還払申請一覧_申請日, parameter.get申請日());
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, 引継ぎデータ.get被保険者番号());
+        ViewStateHolder.put(ViewStateKeys.サービス年月, parameter.getサービス提供年月().toDateString());
+        ViewStateHolder.put(ViewStateKeys.整理番号, parameter.get整理番号());
+        ViewStateHolder.put(ViewStateKeys.申請日, parameter.get申請日());
         ShoukanharaihishinseikensakuParameter 償還払費申請検索 = new ShoukanharaihishinseikensakuParameter(
                 引継ぎデータ.get被保険者番号(),
                 new FlexibleYearMonth(parameter.getサービス提供年月().toString()),
                 parameter.get整理番号(), null,
                 null, null, null);
-        ViewStateHolder.put(ViewStateKeys.償還払費申請検索キー, 償還払費申請検索);
+        ViewStateHolder.put(ViewStateKeys.検索キー, 償還払費申請検索);
     }
 
     private ValidationMessageControlPairs 申請既存チェック(ShikyuShinseiDetailDiv div) {
@@ -326,9 +331,9 @@ public class ShikyuShinseiDetail {
             TaishoshaKey 引継ぎデータ = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
             HihokenshaNo 被保険者番号 = 引継ぎデータ.get被保険者番号();
             FlexibleYearMonth サービス年月 = new FlexibleYearMonth((new RDate(
-                    ViewStateHolder.get(ViewStateKeys.償還払申請一覧_サービス年月, RString.class).
+                    ViewStateHolder.get(ViewStateKeys.サービス年月, RString.class).
                     toString())).getYearMonth().toDateString());
-            RString 整理番号 = ViewStateHolder.get(ViewStateKeys.償還払申請一覧_整理番号, RString.class);
+            RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
             List<ShokanShinsei> 支給申請一覧情報リスト = InstanceProvider.create(ShokanbaraiJyokyoShokai.class)
                     .getShokanbaraiShinseiJyohoDetail(被保険者番号, サービス年月, 整理番号);
             if (支給申請一覧情報リスト.isEmpty()) {

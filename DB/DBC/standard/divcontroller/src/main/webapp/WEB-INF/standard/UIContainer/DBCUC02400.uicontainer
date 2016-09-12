@@ -1,0 +1,74 @@
+﻿{
+ "uiContainerName": "DBCUC02400",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "共同処理用受給者異動連絡票エラー訂正",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0240011",
+     "toLayoutTitle": "共同処理用受給者異動連絡票エラー訂正",
+     "toState": "初期状態"
+    },
+    {
+     "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0240011",
+     "layoutTitle": "共同処理用受給者異動連絡票エラー訂正",
+     "eventName": "修正",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0260012",
+     "toLayoutTitle": "共同処理用受給者訂正連絡票登録",
+     "toState": "初期状態"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0260012",
+     "layoutTitle": "共同処理用受給者訂正連絡票登録",
+     "eventName": "完了",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0240011",
+     "toLayoutTitle": "共同処理用受給者異動連絡票エラー訂正",
+     "toState": "初期状態"
+    },
+    {
+     "id": "4",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0260012",
+     "layoutTitle": "共同処理用受給者訂正連絡票登録",
+     "eventName": "検索結果一覧",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0240011",
+     "toLayoutTitle": "共同処理用受給者異動連絡票エラー訂正",
+     "toState": "初期状態"
+    },
+    {
+     "id": "5",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0240011",
+     "layoutTitle": "共同処理用受給者異動連絡票エラー訂正",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

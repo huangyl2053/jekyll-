@@ -7,11 +7,12 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE9020001;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.basic.shujiijoho.ShujiiMaster;
+import jp.co.ndensan.reams.db.dbe.business.core.shujiijoho.ShujiiMaster;
 import jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiijoho.ShujiiJoho;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9020001.ShujiiJohoInputDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9020001.ShujiiMasterDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9020001.dgShujiiIchiran_Row;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -66,14 +67,14 @@ public class ShujiiMasterHandler {
      * 画面初期化処理です。
      */
     public void load() {
-        div.getCcdHokenshaList().loadHokenshaList();
+        div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
     }
 
     /**
      * 検索条件入力項目をクリアします。
      */
     public void clearKensakuJoken() {
-        div.getCcdHokenshaList().loadHokenshaList();
+        div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         div.getTxtSearchShujiiIryokikanCodeFrom().clearValue();
         div.getTxtSearchShujiiIryokikanCodeTo().clearValue();
         div.getTxtSearchShujiiIryokikanMeisho().clearValue();

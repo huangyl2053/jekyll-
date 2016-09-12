@@ -7,14 +7,14 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320004
 
 import jp.co.ndensan.reams.db.dbb.business.core.basic.Gemmen;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuYuyo;
-import jp.co.ndensan.reams.db.dbb.business.viewstate.FukaShokaiKey;
-import jp.co.ndensan.reams.db.dbb.definition.valueobject.code.fuka.DBBCodeShubetsu;
+import jp.co.ndensan.reams.db.dbb.business.core.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320004.ChoshuYuyoDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320004.GemmenChoshuYuyoDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320004.GemmenDiv;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.ChoshuYuyoManager;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.GemmenManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBBCodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -71,7 +71,8 @@ public class GemmenChoshuYuyo {
             div.getTxtGemmenShinseiGaku().setValue(model.get申請減免額());
             div.getTxtGemmenShinseiRiyu().setValue(model.get申請事由());
             div.getTxtGemmenKetteiYMD().setValue(new RDate(model.get減免決定日().toString()));
-            div.getTxtGemmenShurui().setValue(CodeMasterNoOption.getCodeMeisho(DBBCodeShubetsu.保険料減免種類.getCodeShubetsu(), new Code(model.get減免種類コード().value())));
+            div.getTxtGemmenShurui().setValue(CodeMasterNoOption.getCodeMeisho(
+                    DBBCodeShubetsu.保険料減免種類.getコード(), new Code(model.get減免種類コード().value())));
             div.getTxtGemmenShouninRiyu().setValue(model.get減免事由());
         }
     }

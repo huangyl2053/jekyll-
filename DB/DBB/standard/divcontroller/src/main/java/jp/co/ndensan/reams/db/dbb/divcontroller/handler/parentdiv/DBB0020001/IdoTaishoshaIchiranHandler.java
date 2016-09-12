@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0020001;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -14,19 +13,12 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.core.tsuchishohakkogoidosha.TsuchiShoHakkoGoIdosha;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0020001.IdoTaishoshaIchiranDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0020001.dgIdoTaishoshaIchiran_Row;
-import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.idotaishoshaichiranparameter.IdoTaishoshaIchiranparameter;
 import jp.co.ndensan.reams.db.dbb.service.report.tsuchishohakkogoidosha.TsuchiShoHakkogoIdoHaaku;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * IdoTaishoshaIchiranHandler
@@ -40,6 +32,7 @@ public final class IdoTaishoshaIchiranHandler {
     private static final int TEN = 10;
     private static final int TWELVE = 12;
     private static final int FOURTEEN = 14;
+    private static final int 整数_ZERO = 0;
 
     private IdoTaishoshaIchiranHandler(IdoTaishoshaIchiranDiv div) {
         this.div = div;
@@ -57,33 +50,36 @@ public final class IdoTaishoshaIchiranHandler {
 
     /**
      * set作成日時
+     *
+     * @param map Map
      */
-    public void set作成日時() {
+    public void set作成日時(Map<ReportId, List<YMDHMS>> map) {
         RString select帳票ID = div.getDdlTsuchishoMeisho().getSelectedKey();
-        Map<ReportId, List<YMDHMS>> map = ViewStateHolder.get(ViewStateKeys.発行日時Map, Map.class);
         List<YMDHMS> 作成日時List = map.get(new ReportId(select帳票ID));
-        Comparator<YMDHMS> comparator = new Comparator<YMDHMS>() {
-            @Override
-            public int compare(YMDHMS s1, YMDHMS s2) {
-                return s2.compareTo(s1);
+        if (作成日時List != null && !作成日時List.isEmpty()) {
+            Comparator<YMDHMS> comparator = new Comparator<YMDHMS>() {
+                @Override
+                public int compare(YMDHMS s1, YMDHMS s2) {
+                    return s2.compareTo(s1);
+                }
+            };
+            Collections.sort(作成日時List, comparator);
+            List<KeyValueDataSource> 作成日時KeyValue = new ArrayList<>();
+            for (YMDHMS 作成日時 : 作成日時List) {
+                RString hh = new RString(作成日時.toString().substring(EIGHT, TEN));
+                RString mm = new RString(作成日時.toString().substring(TEN, TWELVE));
+                RString ss = new RString(作成日時.toString().substring(TWELVE, FOURTEEN));
+                RString ymd = new RString(作成日時.getDate().wareki().toDateString().toString());
+                RString hms = hh.concat(new RString(":")).concat(mm).concat(new RString(":")).concat(ss);
+                RString ymdhms = ymd.concat(new RString(" ")).concat(hms);
+                if (!作成日時KeyValue.contains(
+                        new KeyValueDataSource(new RString(作成日時.toString()), ymdhms))) {
+                    作成日時KeyValue.add(new KeyValueDataSource(new RString(作成日時.toString()), ymdhms));
+                }
             }
-        };
-        Collections.sort(作成日時List, comparator);
-        List<KeyValueDataSource> 作成日時KeyValue = new ArrayList<>();
-        for (YMDHMS 作成日時 : 作成日時List) {
-            RString hh = new RString(作成日時.toString().substring(EIGHT, TEN));
-            RString mm = new RString(作成日時.toString().substring(TEN, TWELVE));
-            RString ss = new RString(作成日時.toString().substring(TWELVE, FOURTEEN));
-            RString ymd = new RString(作成日時.getDate().wareki().toDateString().toString());
-            RString hms = hh.concat(new RString(":")).concat(mm).concat(new RString(":")).concat(ss);
-            RString ymdhms = ymd.concat(new RString(" ")).concat(hms);
-            if (!作成日時KeyValue.contains(
-                    new KeyValueDataSource(new RString(作成日時.toString()), ymdhms))) {
-                作成日時KeyValue.add(new KeyValueDataSource(new RString(作成日時.toString()), ymdhms));
-            }
+            div.getDdlSakuseiYMD().setDataSource(作成日時KeyValue);
+            div.getDdlSakuseiYMD().setSelectedIndex(整数_ZERO);
         }
-        div.getDdlSakuseiYMD().setDataSource(作成日時KeyValue);
-        div.getDdlSakuseiYMD().setSelectedIndex(0);
     }
 
     /**
@@ -94,13 +90,15 @@ public final class IdoTaishoshaIchiranHandler {
         RString 帳票作成日時 = div.getDdlSakuseiYMD().getSelectedKey();
         YMDHMS par帳票作成日時 = new YMDHMS(帳票作成日時);
         YMDHMS 最終計算処理日時 = TsuchiShoHakkogoIdoHaaku.createInstance().get計算処理日時(par帳票ID, par帳票作成日時);
-        RString hh = new RString(最終計算処理日時.toString().substring(EIGHT, TEN));
-        RString mm = new RString(最終計算処理日時.toString().substring(TEN, TWELVE));
-        RString ss = new RString(最終計算処理日時.toString().substring(TWELVE, FOURTEEN));
-        RString ymd = new RString(最終計算処理日時.getDate().wareki().toDateString().toString());
-        RString hms = hh.concat(new RString(":")).concat(mm).concat(new RString(":")).concat(ss);
-        RString ymdhms = ymd.concat(new RString(" ")).concat(hms);
-        div.getTxtLastKeisanShoriTime().setValue(ymdhms);
+        if (最終計算処理日時 != null && 最終計算処理日時.isEmpty()) {
+            RString hh = new RString(最終計算処理日時.toString().substring(EIGHT, TEN));
+            RString mm = new RString(最終計算処理日時.toString().substring(TEN, TWELVE));
+            RString ss = new RString(最終計算処理日時.toString().substring(TWELVE, FOURTEEN));
+            RString ymd = new RString(最終計算処理日時.getDate().wareki().toDateString().toString());
+            RString hms = hh.concat(new RString(":")).concat(mm).concat(new RString(":")).concat(ss);
+            RString ymdhms = ymd.concat(new RString(" ")).concat(hms);
+            div.getTxtLastKeisanShoriTime().setValue(ymdhms);
+        }
     }
 
     /**
@@ -144,21 +142,4 @@ public final class IdoTaishoshaIchiranHandler {
         div.getDgIdoTaishoshaIchiran().setDataSource(rowList);
     }
 
-    /**
-     * putViewState
-     */
-    public void putViewState() {
-        List<IdoTaishoshaIchiranparameter> listPar = new ArrayList<>();
-        List<dgIdoTaishoshaIchiran_Row> rowList = div.getDgIdoTaishoshaIchiran().getDataSource();
-        for (dgIdoTaishoshaIchiran_Row row : rowList) {
-            IdoTaishoshaIchiranparameter par = new IdoTaishoshaIchiranparameter(
-                    new FlexibleYear(row.getTexYSeireki().toString()),
-                    new HihokenshaNo(row.getTxtHihoNo().toString()),
-                    new TsuchishoNo(row.getTxtTsuchishoNo().toString()),
-                    new ShikibetsuCode(row.getTxtShikibetsuCode().toString())
-            );
-            listPar.add(par);
-        }
-        ViewStateHolder.put(ViewStateKeys.異動者一覧Par, (Serializable) listPar);
-    }
 }

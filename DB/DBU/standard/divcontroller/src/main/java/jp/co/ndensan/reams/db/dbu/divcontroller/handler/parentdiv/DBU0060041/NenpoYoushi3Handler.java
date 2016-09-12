@@ -11,9 +11,10 @@ import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiDataBuilder;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiDataIdentifier;
 import jp.co.ndensan.reams.db.dbu.definition.core.nenpoyoushi3.NenpoYoushi3DetalParameter;
-import jp.co.ndensan.reams.db.dbu.definition.core.nenpoyoushi3.NenpoYoushi3ViewStateKeys;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060041.NenpoYoushi3Div;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -62,10 +63,10 @@ public class NenpoYoushi3Handler {
      * @param 保険者名称 保険者名称
      */
     public void initialize(RString 補正フラグ,
-            FlexibleDate 報告年度, FlexibleDate 集計年度, RString 保険者コード, RString 保険者名称) {
-        div.getHihokenshabango().getTxthokokuYM().setValue(報告年度);
+            RDate 報告年度, RDate 集計年度, RString 保険者コード, RString 保険者名称) {
+        div.getHihokenshabango().getTxthokokuYM().setValue(new FlexibleDate(報告年度.toDateString()));
         div.getHihokenshabango().getTxthokokuYM().setDisabled(true);
-        div.getHihokenshabango().getTxtShukeiY().setValue(集計年度);
+        div.getHihokenshabango().getTxtShukeiY().setValue(new FlexibleDate(集計年度.toDateString()));
         div.getHihokenshabango().getTxtShukeiY().setDisabled(true);
         div.getHihokenshabango().getTxtHihokenshabango().setValue(保険者コード);
         div.getHihokenshabango().getTxtHihokenshabango().setDisabled(true);
@@ -119,7 +120,7 @@ public class NenpoYoushi3Handler {
     public List<JigyoHokokuTokeiData> get修正データ() {
         List<JigyoHokokuTokeiData> list = new ArrayList<>();
         Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 保険料収納状況データ = ViewStateHolder.
-                get(NenpoYoushi3ViewStateKeys.保険料収納状況データ, Models.class);
+                get(ViewStateKeys.保険料収納状況データ, Models.class);
         List<NenpoYoushi3DetalParameter> 保険料収納状況画面データ = get保険料収納状況画面データ();
         for (NenpoYoushi3DetalParameter parameter : 保険料収納状況画面データ) {
             for (JigyoHokokuTokeiData data : 保険料収納状況データ) {
@@ -134,7 +135,7 @@ public class NenpoYoushi3Handler {
             }
         }
         Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 保険給付支払状況データ = ViewStateHolder.
-                get(NenpoYoushi3ViewStateKeys.保険給付支払状況データ, Models.class);
+                get(ViewStateKeys.保険給付支払状況データ, Models.class);
         List<NenpoYoushi3DetalParameter> 保険給付支払状況画面データ = get保険給付支払状況画面データ();
         for (NenpoYoushi3DetalParameter parameter : 保険給付支払状況画面データ) {
             for (JigyoHokokuTokeiData data : 保険給付支払状況データ) {
@@ -455,6 +456,7 @@ public class NenpoYoushi3Handler {
             div.getShokuhikyojunofutannintei().getTxtlmishiharaigaku1().setValue(data.get集計結果値());
         }
     }
+
     private void set支払状況詳細データ2(JigyoHokokuTokeiData data) {
         if (縦番号_2.equals(data.get縦番号()) && 横番号_1.equals(data.get横番号())) {
             div.getShokuhikyojunofutannintei().getTxtShiharaigi2().setValue(data.get集計結果値());
@@ -472,6 +474,7 @@ public class NenpoYoushi3Handler {
             div.getShokuhikyojunofutannintei().getTxtlmishiharaigaku2().setValue(data.get集計結果値());
         }
     }
+
     private void set支払状況詳細データ3(JigyoHokokuTokeiData data) {
         if (縦番号_3.equals(data.get縦番号()) && 横番号_1.equals(data.get横番号())) {
             div.getShokuhikyojunofutannintei().getTxtShiharaigi3().setValue(data.get集計結果値());
@@ -489,7 +492,7 @@ public class NenpoYoushi3Handler {
             div.getShokuhikyojunofutannintei().getTxtlmishiharaigaku3().setValue(data.get集計結果値());
         }
     }
-    
+
     private void set支払状況詳細データ4(JigyoHokokuTokeiData data) {
         if (縦番号_4.equals(data.get縦番号()) && 横番号_1.equals(data.get横番号())) {
             div.getShokuhikyojunofutannintei().getTxtShiharaigi4().setValue(data.get集計結果値());
@@ -500,7 +503,7 @@ public class NenpoYoushi3Handler {
         if (縦番号_4.equals(data.get縦番号()) && 横番号_3.equals(data.get横番号())) {
             div.getShokuhikyojunofutannintei().getTxtChoshu4().setValue(data.get集計結果値());
         }
-         if (縦番号_4.equals(data.get縦番号()) && 横番号_4.equals(data.get横番号())) {
+        if (縦番号_4.equals(data.get縦番号()) && 横番号_4.equals(data.get横番号())) {
             div.getShokuhikyojunofutannintei().getTxtReinyu4().setValue(data.get集計結果値());
         }
         if (縦番号_4.equals(data.get縦番号()) && 横番号_5.equals(data.get横番号())) {
@@ -508,7 +511,7 @@ public class NenpoYoushi3Handler {
         }
     }
 
-    private void set支払状況詳細データ5(JigyoHokokuTokeiData data) {       
+    private void set支払状況詳細データ5(JigyoHokokuTokeiData data) {
         if (縦番号_5.equals(data.get縦番号()) && 横番号_1.equals(data.get横番号())) {
             div.getShokuhikyojunofutannintei().getTxtShiharaigi5().setValue(data.get集計結果値());
         }
@@ -525,8 +528,8 @@ public class NenpoYoushi3Handler {
             div.getShokuhikyojunofutannintei().getTxtlmishiharaigaku5().setValue(data.get集計結果値());
         }
     }
-    
-    private void set支払状況詳細データ6(JigyoHokokuTokeiData data) {  
+
+    private void set支払状況詳細データ6(JigyoHokokuTokeiData data) {
         if (縦番号_6.equals(data.get縦番号()) && 横番号_1.equals(data.get横番号())) {
             div.getShokuhikyojunofutannintei().getTxtShiharaigi6().setValue(data.get集計結果値());
         }
@@ -543,8 +546,8 @@ public class NenpoYoushi3Handler {
             div.getShokuhikyojunofutannintei().getTxtlmishiharaigaku6().setValue(data.get集計結果値());
         }
     }
-    
-    private void set支払状況詳細データ7(JigyoHokokuTokeiData data) {       
+
+    private void set支払状況詳細データ7(JigyoHokokuTokeiData data) {
         if (縦番号_7.equals(data.get縦番号()) && 横番号_1.equals(data.get横番号())) {
             div.getShokuhikyojunofutannintei().getTxtShiharaigi7().setValue(data.get集計結果値());
         }

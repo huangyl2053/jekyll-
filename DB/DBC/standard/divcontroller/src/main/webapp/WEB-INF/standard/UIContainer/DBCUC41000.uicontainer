@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBCUC41000",
+ "displayWizard": false,
+ "subGyomuCode": "DBC",
+ "steps": [
+  {
+   "id": 1,
+   "name": "サービスコード異動連絡票",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC4100011",
+     "toLayoutTitle": "サービスコード異動連絡票",
+     "toState": "サービスコード異動連絡票"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC4100011",
+     "layoutTitle": "サービスコード異動連絡票",
+     "eventName": "実行",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

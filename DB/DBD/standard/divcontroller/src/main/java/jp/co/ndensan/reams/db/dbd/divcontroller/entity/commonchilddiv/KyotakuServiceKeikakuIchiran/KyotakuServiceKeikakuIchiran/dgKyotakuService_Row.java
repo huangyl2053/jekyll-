@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.KyotakuSe
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Apr 27 22:56:31 JST 2016 
+ * Tue Jun 21 20:01:55 CST 2016 
  */
 
 
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgKyotakuService_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     private RString jigyoshaNo;
     private RString serviceCode;
@@ -38,6 +38,9 @@ public class dgKyotakuService_Row extends DataRow {
     private RString hokenKyufuGaku;
     private RString riyoushaFutanTaishobun;
     private RString riyoushaFutanZengaku;
+    private RString serviceShuruiCode;
+    private RString serviceKomokuCode;
+    private RString serviceName;
 
     public dgKyotakuService_Row() {
         super();
@@ -58,6 +61,9 @@ public class dgKyotakuService_Row extends DataRow {
         this.hokenKyufuGaku = RString.EMPTY;
         this.riyoushaFutanTaishobun = RString.EMPTY;
         this.riyoushaFutanZengaku = RString.EMPTY;
+        this.serviceShuruiCode = RString.EMPTY;
+        this.serviceKomokuCode = RString.EMPTY;
+        this.serviceName = RString.EMPTY;
         this.setOriginalData("jigyoshaNo", jigyoshaNo);
         this.setOriginalData("serviceCode", serviceCode);
         this.setOriginalData("tani", tani);
@@ -75,9 +81,12 @@ public class dgKyotakuService_Row extends DataRow {
         this.setOriginalData("hokenKyufuGaku", hokenKyufuGaku);
         this.setOriginalData("riyoushaFutanTaishobun", riyoushaFutanTaishobun);
         this.setOriginalData("riyoushaFutanZengaku", riyoushaFutanZengaku);
+        this.setOriginalData("serviceShuruiCode", serviceShuruiCode);
+        this.setOriginalData("serviceKomokuCode", serviceKomokuCode);
+        this.setOriginalData("serviceName", serviceName);
     }
 
-    public dgKyotakuService_Row(RString jigyoshaNo, RString serviceCode, RString tani, RString waribikigoRitsu, RString waribikigoTani, RString kaisu, RString serviceTani, RString shuruiGendoKijunChoka, RString shuruiGendoKijunNai, RString kubunGendoKijunChoka, RString kubunGendoKijunNai, RString taniTanka, RString hiyoSogaku, RString kyufuRitsu, RString hokenKyufuGaku, RString riyoushaFutanTaishobun, RString riyoushaFutanZengaku) {
+    public dgKyotakuService_Row(RString jigyoshaNo, RString serviceCode, RString tani, RString waribikigoRitsu, RString waribikigoTani, RString kaisu, RString serviceTani, RString shuruiGendoKijunChoka, RString shuruiGendoKijunNai, RString kubunGendoKijunChoka, RString kubunGendoKijunNai, RString taniTanka, RString hiyoSogaku, RString kyufuRitsu, RString hokenKyufuGaku, RString riyoushaFutanTaishobun, RString riyoushaFutanZengaku, RString serviceShuruiCode, RString serviceKomokuCode, RString serviceName) {
         super();
         this.setOriginalData("jigyoshaNo", jigyoshaNo);
         this.setOriginalData("serviceCode", serviceCode);
@@ -96,6 +105,9 @@ public class dgKyotakuService_Row extends DataRow {
         this.setOriginalData("hokenKyufuGaku", hokenKyufuGaku);
         this.setOriginalData("riyoushaFutanTaishobun", riyoushaFutanTaishobun);
         this.setOriginalData("riyoushaFutanZengaku", riyoushaFutanZengaku);
+        this.setOriginalData("serviceShuruiCode", serviceShuruiCode);
+        this.setOriginalData("serviceKomokuCode", serviceKomokuCode);
+        this.setOriginalData("serviceName", serviceName);
         this.jigyoshaNo = jigyoshaNo;
         this.serviceCode = serviceCode;
         this.tani = tani;
@@ -113,6 +125,9 @@ public class dgKyotakuService_Row extends DataRow {
         this.hokenKyufuGaku = hokenKyufuGaku;
         this.riyoushaFutanTaishobun = riyoushaFutanTaishobun;
         this.riyoushaFutanZengaku = riyoushaFutanZengaku;
+        this.serviceShuruiCode = serviceShuruiCode;
+        this.serviceKomokuCode = serviceKomokuCode;
+        this.serviceName = serviceName;
     }
 
     public RString getJigyoshaNo() {
@@ -181,6 +196,18 @@ public class dgKyotakuService_Row extends DataRow {
 
     public RString getRiyoushaFutanZengaku() {
         return riyoushaFutanZengaku;
+    }
+
+    public RString getServiceShuruiCode() {
+        return serviceShuruiCode;
+    }
+
+    public RString getServiceKomokuCode() {
+        return serviceKomokuCode;
+    }
+
+    public RString getServiceName() {
+        return serviceName;
     }
 
     public void setJigyoshaNo(RString jigyoshaNo) {
@@ -266,6 +293,21 @@ public class dgKyotakuService_Row extends DataRow {
     public void setRiyoushaFutanZengaku(RString riyoushaFutanZengaku) {
         this.setOriginalData("riyoushaFutanZengaku", riyoushaFutanZengaku);
         this.riyoushaFutanZengaku = riyoushaFutanZengaku;
+    }
+
+    public void setServiceShuruiCode(RString serviceShuruiCode) {
+        this.setOriginalData("serviceShuruiCode", serviceShuruiCode);
+        this.serviceShuruiCode = serviceShuruiCode;
+    }
+
+    public void setServiceKomokuCode(RString serviceKomokuCode) {
+        this.setOriginalData("serviceKomokuCode", serviceKomokuCode);
+        this.serviceKomokuCode = serviceKomokuCode;
+    }
+
+    public void setServiceName(RString serviceName) {
+        this.setOriginalData("serviceName", serviceName);
+        this.serviceName = serviceName;
     }
 
     // </editor-fold>

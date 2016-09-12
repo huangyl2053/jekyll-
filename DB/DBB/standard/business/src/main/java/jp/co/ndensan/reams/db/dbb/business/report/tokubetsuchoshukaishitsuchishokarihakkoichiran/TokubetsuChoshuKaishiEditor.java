@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 帳票設計_DBBRP43002_4_特別徴収開始通知書（本算定）TokubetsuChoshuKaishiEditor
@@ -34,7 +35,7 @@ public class TokubetsuChoshuKaishiEditor implements ITokubetsuChoshuKaishiEditor
     private final RDateTime 帳票作成日時;
     private final RString 市町村コード;
     private final RString 市町村名;
-    private final int num;
+    private final int 連番;
     private static final int NUM0 = 0;
     private static final int NUM1 = 1;
     private static final int NUM2 = 2;
@@ -59,11 +60,11 @@ public class TokubetsuChoshuKaishiEditor implements ITokubetsuChoshuKaishiEditor
      * @param 帳票作成日時 RString
      * @param 市町村コード RString
      * @param 市町村名 RString
-     * @param num int
+     * @param 連番 int
      */
     protected TokubetsuChoshuKaishiEditor(EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
             FlexibleYear 賦課年度, List<RString> 出力項目リスト, List<RString> 改頁項目リスト,
-            RDateTime 帳票作成日時, RString 市町村コード, RString 市町村名, int num) {
+            RDateTime 帳票作成日時, RString 市町村コード, RString 市町村名, int 連番) {
         this.編集後本算定通知書共通情報 = 編集後本算定通知書共通情報;
         this.賦課年度 = 賦課年度;
         this.出力項目リスト = 出力項目リスト;
@@ -71,7 +72,7 @@ public class TokubetsuChoshuKaishiEditor implements ITokubetsuChoshuKaishiEditor
         this.帳票作成日時 = 帳票作成日時;
         this.市町村コード = 市町村コード;
         this.市町村名 = 市町村名;
-        this.num = num;
+        this.連番 = 連番;
     }
 
     @Override
@@ -101,11 +102,11 @@ public class TokubetsuChoshuKaishiEditor implements ITokubetsuChoshuKaishiEditor
                 get更正後().get特徴期別金額リスト() != null && !編集後本算定通知書共通情報.get更正後().get特徴期別金額リスト().isEmpty()) {
             for (CharacteristicsPhase entity : 編集後本算定通知書共通情報.get更正後().get特徴期別金額リスト()) {
                 if (entity != null && entity.get期() != null && Integer.valueOf(entity.get期().toString()) == NUM4) {
-                    source.listLower_7 = new RString(entity.get金額().toString());
+                    source.listLower_7 = (entity.get金額() == null ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(entity.get金額(), 0));
                 } else if (entity != null && entity.get期() != null && Integer.valueOf(entity.get期().toString()) == NUM5) {
-                    source.listLower_9 = new RString(entity.get金額().toString());
+                    source.listLower_9 = (entity.get金額() == null ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(entity.get金額(), 0));
                 } else if (entity != null && entity.get期() != null && Integer.valueOf(entity.get期().toString()) == NUM6) {
-                    source.listLower_11 = new RString(entity.get金額().toString());
+                    source.listLower_11 = (entity.get金額() == null ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(entity.get金額(), 0));
                 }
             }
         }
@@ -119,8 +120,8 @@ public class TokubetsuChoshuKaishiEditor implements ITokubetsuChoshuKaishiEditor
 
     private void listlowers(TokubetsuChoshuKaishiSource source) {
         source.titleChoshugaku = 本徴収額;
-        if (NUM0 <= num) {
-            source.listUpper_1 = new RString(num);
+        if (NUM0 <= 連番) {
+            source.listUpper_1 = new RString(連番);
         }
         if (編集後本算定通知書共通情報 != null) {
             if (編集後本算定通知書共通情報.get編集後宛先() != null) {

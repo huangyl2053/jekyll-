@@ -22,7 +22,7 @@
         <result property="dbT5913_JokyoFlag" column="調査員状況" />
     </resultMap>
      
-    <select id="getNinteiChoSain"             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.itakusakichosainichiran.ItakusakiChosainIchiranMybitisParamter" 
+    <select resultOrdered="true" id="getNinteiChoSain"             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.itakusakichosainichiran.ItakusakiChosainIchiranMybitisParamter" 
             resultMap="haishameigihenkouiraiResult" fetchSize="500">
         SELECT
             DbT5910."ninteichosaItakusakiCode" AS "調査委託先コード",

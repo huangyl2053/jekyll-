@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.ShikakuTokusoRirekiDiv;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 共有子Div「資格得喪履歴」のイベントを定義したDivControllerです。
@@ -17,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
  */
 public class ShikakuTokusoRireki {
 
+    private static final RString 照会モード_Dialog = new RString("shokai_Dialog");
+
     /**
      * 資格得喪履歴の初期化処理します。
      *
@@ -24,8 +27,13 @@ public class ShikakuTokusoRireki {
      * @return 資格得喪履歴div
      */
     public ResponseData<ShikakuTokusoRirekiDiv> initialize(ShikakuTokusoRirekiDiv div) {
+
         if (div.getMode() != null && !div.getMode().isEmpty()) {
-            div.setMode_DisplayType(ShikakuTokusoRirekiDiv.DisplayType.valueOf(div.getMode().toString()));
+            if (div.getMode().equals(照会モード_Dialog)) {
+                div.setDialogDisplay();
+            } else {
+                div.setMode_DisplayType(ShikakuTokusoRirekiDiv.DisplayType.valueOf(div.getMode().toString()));
+            }
             div.initialize(new HihokenshaNo(div.getHdnHihokenshaNo()), new ShikibetsuCode(div.getHdnShikibetsuCode()));
         }
         return ResponseData.of(div).respond();

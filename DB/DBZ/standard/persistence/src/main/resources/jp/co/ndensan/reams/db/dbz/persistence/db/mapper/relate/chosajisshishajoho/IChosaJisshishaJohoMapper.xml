@@ -62,7 +62,7 @@
     
     
     <!-- 所属機関のデータソースの取得処理 -->
-    <select id="getSyozokuKikan" resultMap="ResultMap_DbT5910Entity" 
+    <select resultOrdered="true" id="getSyozokuKikan" resultMap="ResultMap_DbT5910Entity" 
             fetchSize="500">
         SELECT
           A."ninteichosaItakusakiCode" AS "dbT5910NinteichosaItakusakiJoho_ninteichosaItakusakiCode",
@@ -78,7 +78,7 @@
     </select>
     
     <!--記入者のデータソースの取得処理--> 
-    <select id="getKinyusha" 
+    <select resultOrdered="true" id="getKinyusha" 
             resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5913ChosainJohoMapper.ResultMap_DbT5913ChosainJohoEntity" 
             fetchSize="500">
         SELECT
@@ -96,7 +96,7 @@
     </select>
     
      <!--記入者の初期値の取得処理--> 
-    <select id="getKinyushaEmpty" 
+    <select resultOrdered="true" id="getKinyushaEmpty" 
             resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5913ChosainJohoMapper.ResultMap_DbT5913ChosainJohoEntity" 
             fetchSize="500">
         SELECT

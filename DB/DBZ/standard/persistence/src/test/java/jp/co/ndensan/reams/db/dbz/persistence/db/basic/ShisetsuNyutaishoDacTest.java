@@ -5,10 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ShisetsuNyutaishoDac;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DaichoType;
+import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.helper.ShisetsuNyutaishoEntityMock;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestDacBase;
@@ -119,7 +118,7 @@ public class ShisetsuNyutaishoDacTest extends DbzTestDacBase {
         public void 指定するデータがあり履歴もある時_select個人識別コード_基準日は_履歴最新の一件を返す() {
             DbT1004ShisetsuNyutaishoEntity result = sut.select(個人識別コード, 入所日);
             DaichoType newest台帳種別 = DaichoType.適用除外者;
-            assertThat(result.getDaichoShubetsu(), is(newest台帳種別.getCode()));
+            assertThat(result.getDaichoShubetsu(), is(newest台帳種別.getコード()));
         }
 
         static void createEntityForInsert個人識別コード_基準日() {
@@ -127,11 +126,11 @@ public class ShisetsuNyutaishoDacTest extends DbzTestDacBase {
                     = ShisetsuNyutaishoEntityMock.create施設入退所Entity();
 
             entity.setShikibetsuCode(個人識別コード);
-            entity.setDaichoShubetsu(DaichoType.被保険者.getCode());
+            entity.setDaichoShubetsu(DaichoType.被保険者.getコード());
             sut.insert(entity);
 
             entity.setShikibetsuCode(個人識別コード);
-            entity.setDaichoShubetsu(DaichoType.適用除外者.getCode());
+            entity.setDaichoShubetsu(DaichoType.適用除外者.getコード());
             sut.insert(entity);
         }
     }
@@ -229,23 +228,23 @@ public class ShisetsuNyutaishoDacTest extends DbzTestDacBase {
                     = ShisetsuNyutaishoEntityMock.create施設入退所Entity();
 
             entity.setShikibetsuCode(個人識別コード1);
-            entity.setDaichoShubetsu(DaichoType.他市町村住所地特例者.getCode());
+            entity.setDaichoShubetsu(DaichoType.他市町村住所地特例者.getコード());
             sut.insert(entity);
 
             entity.setShikibetsuCode(個人識別コード2);
-            entity.setDaichoShubetsu(DaichoType.被保険者.getCode());
+            entity.setDaichoShubetsu(DaichoType.被保険者.getコード());
             sut.insert(entity);
 
             entity.setShikibetsuCode(個人識別コード2);
-            entity.setDaichoShubetsu(DaichoType.被保険者.getCode());
+            entity.setDaichoShubetsu(DaichoType.被保険者.getコード());
             sut.insert(entity);
 
             entity.setShikibetsuCode(個人識別コード1);
-            entity.setDaichoShubetsu(DaichoType.被保険者.getCode());
+            entity.setDaichoShubetsu(DaichoType.被保険者.getコード());
             sut.insert(entity);
 
             entity.setShikibetsuCode(個人識別コード2);
-            entity.setDaichoShubetsu(DaichoType.適用除外者.getCode());
+            entity.setDaichoShubetsu(DaichoType.適用除外者.getコード());
             sut.insert(entity);
         }
     }

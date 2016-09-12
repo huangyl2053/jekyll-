@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.definition.processprm.idochecklist;
 
-import jp.co.ndensan.reams.db.dba.definition.mybatis.param.idochecklist.IdoCheckListGetDataParameter;
+import jp.co.ndensan.reams.db.dba.definition.mybatisprm.idochecklist.IdoCheckListGetDataParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -28,7 +28,7 @@ public class IdoCheckListGetDataProcessParameter implements IBatchProcessParamet
     private boolean tekiyoJogaishaDaichouFlag;
     private boolean seikatsuHogoFlag;
     private boolean roreiFukushiNenkinFlag;
-    private long shuturyokuJunId;
+    private Long shuturyokuJunId;
     private RDateTime konkaiKaishi;
     private RDateTime konkaiShuryo;
 
@@ -48,7 +48,7 @@ public class IdoCheckListGetDataProcessParameter implements IBatchProcessParamet
             RDateTime konkaiKaishi, RDateTime konkaiShuryo,
             boolean hihokenshaDaichouFlag, boolean jushochiTokureiKanriFlag,
             boolean tekiyoJogaishaDaichouFlag, boolean seikatsuHogoFlag,
-            boolean roreiFukushiNenkinFlag, long shuturyokuJunId) {
+            boolean roreiFukushiNenkinFlag, Long shuturyokuJunId) {
         this.konkaiKaishi = konkaiKaishi;
         this.konkaiShuryo = konkaiShuryo;
         this.hihokenshaDaichouFlag = hihokenshaDaichouFlag;

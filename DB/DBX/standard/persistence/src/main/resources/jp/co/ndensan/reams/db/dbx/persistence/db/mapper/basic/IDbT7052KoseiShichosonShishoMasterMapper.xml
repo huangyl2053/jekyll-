@@ -46,7 +46,7 @@
         <result property="shishoMei" column="dbT7052KoseiShichosonShishoMaster_shishoMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
-     <select id="getEntity" resultMap="ResultMap_DbT7052KoseiShichosonShishoMasterEntity">
+     <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT7052KoseiShichosonShishoMasterEntity">
 	SELECT
 	<include refid="allColumns_DbT7052KoseiShichosonShishoMaster"/>
 	FROM

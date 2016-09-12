@@ -8,9 +8,9 @@ package jp.co.ndensan.reams.db.dbe.service.core.shinsakai2;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho2;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinwaritsuke.ShinsakaiiinJoho;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaiiinwaritsuke.ShinsakaiIinWaritsukeParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinwaritsuke.ShinsakaiIinWaritsukeParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaiiinwaritsuke.ShinsakaiiinJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsakaiiinwaritsuke.IShinsakaiIinWaritsukeMapper;
@@ -130,14 +130,14 @@ public class ShinsakaiiinJohoManager {
      * @return SearchResult<ShinsakaiWariateIinJoho>
      */
     @Transaction
-    public SearchResult<ShinsakaiWariateIinJoho> searchByKaisaiNo(RString kaisaiNo) {
+    public SearchResult<ShinsakaiWariateIinJoho2> searchByKaisaiNo(RString kaisaiNo) {
         requireNonNull(kaisaiNo, UrSystemErrorMessages.値がnull.getReplacedMessage("開催番号"));
         List<DbT5503ShinsakaiWariateIinJohoEntity> entityList = dac.selectBy開催番号(kaisaiNo);
-        List<ShinsakaiWariateIinJoho> businessList = new ArrayList();
+        List<ShinsakaiWariateIinJoho2> businessList = new ArrayList();
         for (DbT5503ShinsakaiWariateIinJohoEntity entity : entityList) {
             ShinsakaiWariateIinJohoRelateEntity relateEntity = new ShinsakaiWariateIinJohoRelateEntity();
             relateEntity.set介護認定審査会割当委員情報Entity(entity);
-            businessList.add(new ShinsakaiWariateIinJoho(relateEntity));
+            businessList.add(new ShinsakaiWariateIinJoho2(relateEntity));
         }
         return SearchResult.of(businessList, 0, false);
     }

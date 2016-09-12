@@ -25,7 +25,7 @@
         <result property="kyuShichosonMeisho" column="DbT7056Gappei_kyuShichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="lastUpdateTimestamp" column="DbT1001Hiho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler" />
     </resultMap>
-    <select id="getShikakuJoho" resultMap="resultMap_getShikakuJohoEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.shikakutokuso.ShikakuTokusoParameter" fetchSize="500">
+    <select resultOrdered="true" id="getShikakuJoho" resultMap="resultMap_getShikakuJohoEntity" parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shikakutokuso.ShikakuTokusoParameter" fetchSize="500">
         SELECT
         DbT1001Hiho. "hihokenshaNo" as "DbT1001Hiho_hihokenshaNo",
         DbT1001Hiho."idoYMD" as "DbT1001Hiho_idoYMD",
@@ -39,18 +39,18 @@
         DbT1001Hiho."shikakuSoshitsuTodokedeYMD" as "DbT1001Hiho_shikakuSoshitsuTodokedeYMD",
         DbT1001Hiho."shikakuSoshitsuJiyuCode" as "DbT1001Hiho_jushochitokureiKaijoJiyuCode",
         DbT1001Hiho."jushochiTokureiFlag" as "DbT1001Hiho_jushochiTokureiFlag",
-        DbT7051KoseiShicho."shichosonCode" as "DbT7051KoseiShicho_shichosonCode",
+        DbT1001Hiho."shichosonCode" as "DbT7051KoseiShicho_shichosonCode",
         DbT7051KoseiShicho."shichosonMeisho" as "DbT7051KoseiShicho_shichosonMeisho",
-        DbT7051Kosei."shichosonCode" as "DbT7051Kosei_shichosonCode2",
+        DbT1001Hiho."koikinaiTokureiSochimotoShichosonCode" as "DbT7051Kosei_shichosonCode2",
         DbT7051Kosei."shichosonMeisho" as "DbT7051Kosei_shichosonMeisho2",
-        DbT7056Gappei."kyuShichosonCode" as "DbT7056Gappei_kyuShichosonCode",
+        DbT1001Hiho."kyuShichosonCode" as "DbT7056Gappei_kyuShichosonCode",
         DbT7056Gappei."kyuShichosonMeisho" as "DbT7056Gappei_kyuShichosonMeisho",
         DbT1001Hiho."lastUpdateTimestamp" as "DbT1001Hiho_lastUpdateTimestamp"
 
         FROM
         rgdb."DbT1001HihokenshaDaicho" as DbT1001Hiho
         LEFT JOIN
-        rgdb ."DbT7051KoseiShichosonMaster" as DbT7051KoseiShicho
+        rgdb."DbT7051KoseiShichosonMaster" as DbT7051KoseiShicho
         ON
         DbT1001Hiho."shichosonCode" = DbT7051KoseiShicho."shichosonCode"
         AND
@@ -58,7 +58,7 @@
         LEFT JOIN
         rgdb."DbT7051KoseiShichosonMaster" as DbT7051Kosei
         ON
-        DbT1001Hiho. "koikinaiTokureiSochimotoShichosonCode" = DbT7051Kosei."shichosonCode"
+        DbT1001Hiho."koikinaiTokureiSochimotoShichosonCode" = DbT7051Kosei."shichosonCode"
         AND
         DbT7051Kosei."gappeiKyuShichosonKubun" = '0'
         LEFT JOIN

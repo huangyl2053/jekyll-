@@ -6,20 +6,18 @@
 package jp.co.ndensan.reams.db.dbu.service.core.hihokenshashohakkoichiranhyo;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshasho.IkkatsuHakkoRelateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.hihokenshashohakkoichiranhyo.IchiranyoShohakkoshaEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7060KaigoJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7060KaigoJigyoshaDac;
 import jp.co.ndensan.reams.db.dbz.definition.core.chohyo.kyotsu.JushoHenshuChoikiHenshuHoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.chohyo.kyotsu.JushoHenshuKubun;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
@@ -34,7 +32,6 @@ import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth._DateOfBirth;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AgeArrivalDay;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.definition.core.jusho.KannaiKangaiKubunType;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
@@ -83,6 +80,8 @@ public class HihokenshashoHakkoIchiranHyoFinder {
     private static final RString 番地のみ = new RString("4");
     private static final RString 表示無し_住所は印字しない = new RString("5");
     private static final RString 帳票ID_被保険者証 = new RString("DBA100001_Hihokenshasho");
+    private static final RString 受給者台帳 = new RString("1");
+    private static final RString 総合事業対象者 = new RString("2");
     private static final int INDEX_0 = 0;
     private static final int INDEX_1 = 1;
     private static final int INDEX_2 = 2;
@@ -101,26 +100,28 @@ public class HihokenshashoHakkoIchiranHyoFinder {
      *
      * @param 交付日 交付日
      * @param inEntityList List<被保険者証一覧表Entity>
-     * @param iOutputOrder 出力順
+     * @param 出力順Map 出力順Map
+     * @param 改頁Map 改頁Map
      * @return 被保険者証一覧表編集クラス
      */
     public List<IchiranyoShohakkoshaEntity> createHihokenshashoHakkoIchiranHyo(FlexibleDate 交付日,
-            List<IkkatsuHakkoRelateEntity> inEntityList, IOutputOrder iOutputOrder) {
+            List<IkkatsuHakkoRelateEntity> inEntityList, Map<Integer, ISetSortItem> 出力順Map, Map<Integer, RString> 改頁Map) {
         List<IchiranyoShohakkoshaEntity> outEntitylist = new ArrayList<>();
 
         if (!inEntityList.isEmpty()) {
-            outEntitylist = createHihokenshashoHakkoIchiranHyoDataあり(交付日, inEntityList, iOutputOrder);
+            outEntitylist = createHihokenshashoHakkoIchiranHyoDataあり(交付日, inEntityList, 出力順Map, 改頁Map);
             if (outEntitylist.isEmpty()) {
-                outEntitylist.add(createHihokenshashoHakkoIchiranHyoDataなし(iOutputOrder));
+                outEntitylist.add(createHihokenshashoHakkoIchiranHyoDataなし(出力順Map));
             }
         } else {
-            outEntitylist.add(createHihokenshashoHakkoIchiranHyoDataなし(iOutputOrder));
+            outEntitylist.add(createHihokenshashoHakkoIchiranHyoDataなし(出力順Map));
         }
         return outEntitylist;
     }
 
     private List<IchiranyoShohakkoshaEntity> createHihokenshashoHakkoIchiranHyoDataあり(FlexibleDate 交付日,
-            List<IkkatsuHakkoRelateEntity> inEntityList, IOutputOrder iOutputOrder) {
+            List<IkkatsuHakkoRelateEntity> inEntityList, Map<Integer, ISetSortItem> 出力順Map,
+            Map<Integer, RString> 改頁Map) {
         List<IchiranyoShohakkoshaEntity> outEntitylist = new ArrayList<>();
         for (int i = 0; i < inEntityList.size(); i++) {
             IchiranyoShohakkoshaEntity ichiranyoShohakkoshaEntity = new IchiranyoShohakkoshaEntity();
@@ -138,20 +139,22 @@ public class HihokenshashoHakkoIchiranHyoFinder {
             if (association != null) {
                 ichiranyoShohakkoshaEntity.set保険者名(association.get市町村名());
             }
-            if (iOutputOrder != null) {
-                setソート順と改頁キー(ichiranyoShohakkoshaEntity, iOutputOrder);
-            }
+            setソート順と改頁キー(ichiranyoShohakkoshaEntity, 出力順Map, 改頁Map);
             if (!ikkatsuHakkoRelateEntity.isShisetyuJotaiFlag()) {
                 ichiranyoShohakkoshaEntity.set帳票連番(new RString(Integer.valueOf(i + 1).toString()));
             } else {
                 ichiranyoShohakkoshaEntity.set帳票連番(RString.EMPTY);
             }
-            if (ikkatsuHakkoRelateEntity.getHihokenshaNo().isEmpty()) {
+            if (ikkatsuHakkoRelateEntity.getHihokenshaNo() != null && ikkatsuHakkoRelateEntity.getHihokenshaNo().isEmpty()) {
                 ichiranyoShohakkoshaEntity.set被保険者番号(HihokenshaNo.EMPTY);
             } else {
                 ichiranyoShohakkoshaEntity.set被保険者番号(ikkatsuHakkoRelateEntity.getHihokenshaNo());
             }
-            ichiranyoShohakkoshaEntity.set氏名(isNull(new RString(ikkatsuHakkoRelateEntity.getMeisho().toString())));
+            if (ikkatsuHakkoRelateEntity.getMeisho() != null && !ikkatsuHakkoRelateEntity.getMeisho().isEmpty()) {
+                ichiranyoShohakkoshaEntity.set氏名(new RString(ikkatsuHakkoRelateEntity.getMeisho().toString()));
+            } else {
+                ichiranyoShohakkoshaEntity.set氏名(RString.EMPTY);
+            }
             if (ikkatsuHakkoRelateEntity.getSeinengappiYMD() != null) {
                 ichiranyoShohakkoshaEntity.set生年月日_年齢(set生年月日_年齢(交付日, ikkatsuHakkoRelateEntity));
             } else {
@@ -162,17 +165,20 @@ public class HihokenshashoHakkoIchiranHyoFinder {
             ichiranyoShohakkoshaEntity.set認定開始日_認定終了日(set認定開始日_認定終了日(ikkatsuHakkoRelateEntity));
             DbT7060KaigoJigyoshaDac dbT7060Dac = InstanceProvider.create(DbT7060KaigoJigyoshaDac.class);
             if (ShisetsuType.介護保険施設.getコード().equals(ikkatsuHakkoRelateEntity.getNyushoShisetsuShurui())) {
-                List<DbT7060KaigoJigyoshaEntity> dbT7060EntityList = dbT7060Dac.select事業者名称(new JigyoshaNo(
-                        isNull(new RString(ikkatsuHakkoRelateEntity.getNyushoShisetsuCode().toString()))));
+                List<DbT7060KaigoJigyoshaEntity> dbT7060EntityList = new ArrayList<>();
+                if (!ikkatsuHakkoRelateEntity.getNyushoShisetsuCode().isEmpty()) {
+                    dbT7060EntityList = dbT7060Dac.select事業者名称(ikkatsuHakkoRelateEntity.getNyushoShisetsuCode());
+                }
                 if (!dbT7060EntityList.isEmpty()) {
                     ichiranyoShohakkoshaEntity.set施設名(new RString(dbT7060EntityList.get(0).getJigyoshaName().toString()));
                 }
             }
             if (ShisetsuType.住所地特例対象施設.getコード().equals(ikkatsuHakkoRelateEntity.getNyushoShisetsuShurui())) {
-                DbT1005KaigoJogaiTokureiTaishoShisetsuDac dbT1005Dac = InstanceProvider.create(DbT1005KaigoJogaiTokureiTaishoShisetsuDac.class);
-                List<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> dbT1005EntityList
-                        = dbT1005Dac.select事業者名称(new JigyoshaNo(
-                                        isNull(new RString(ikkatsuHakkoRelateEntity.getNyushoShisetsuCode().toString()))));
+                List<DbT1005KaigoJogaiTokureiTaishoShisetsuEntity> dbT1005EntityList = new ArrayList<>();
+                if (!ikkatsuHakkoRelateEntity.getNyushoShisetsuCode().isEmpty()) {
+                    DbT1005KaigoJogaiTokureiTaishoShisetsuDac dbT1005Dac = InstanceProvider.create(DbT1005KaigoJogaiTokureiTaishoShisetsuDac.class);
+                    dbT1005EntityList = dbT1005Dac.select事業者名称(ikkatsuHakkoRelateEntity.getNyushoShisetsuCode());
+                }
                 if (!dbT1005EntityList.isEmpty()) {
                     ichiranyoShohakkoshaEntity.set施設名(new RString(dbT1005EntityList.get(0).getJigyoshaMeisho().toString()));
                 }
@@ -214,16 +220,19 @@ public class HihokenshashoHakkoIchiranHyoFinder {
                 && (!RString.isNullOrEmpty(new RString(ikkatsuHakkoRelateEntity.getShikakuShutokuYMD().toString())))
                 && (!RString.isNullOrEmpty(new RString(ikkatsuHakkoRelateEntity.getShikakuSoshitsuYMD().toString()))))
                 || (RString.isNullOrEmpty(ikkatsuHakkoRelateEntity.getHihokenshaNo().getColumnValue()))) {
-            RString 交付事由 = CodeMasterNoOption.getCodeRyakusho(
-                    SubGyomuCode.DBA介護資格, new CodeShubetsu("0002"), new Code("01"), new FlexibleDate(RDate.getNowDate().toString()));
+            RString 交付事由 = CodeMasterNoOption.getCodeRyakusho(SubGyomuCode.DBA介護資格, DBACodeShubetsu.被保険者証交付事由.getコード(),
+                    new Code("01"), new FlexibleDate(RDate.getNowDate().toString()));
             if (交付事由.isEmpty()) {
                 交付事由 = new RString("01");
             }
             ichiranyoShohakkoshaEntity.set交付_非交付事由(交付事由);
         } else {
-            RString 交付事由 = CodeMasterNoOption.getCodeRyakusho(SubGyomuCode.DBA介護資格, new CodeShubetsu("0002"),
-                    new Code(isNull(ikkatsuHakkoRelateEntity.getIdoJiyuCode())),
-                    new FlexibleDate(RDate.getNowDate().toString()));
+            Code 被保険者証交付事由 = Code.EMPTY;
+            if (!RString.isNullOrEmpty(ikkatsuHakkoRelateEntity.getIdoJiyuCode())) {
+                被保険者証交付事由 = new Code(ikkatsuHakkoRelateEntity.getIdoJiyuCode());
+            }
+            RString 交付事由 = CodeMasterNoOption.getCodeRyakusho(SubGyomuCode.DBA介護資格, DBACodeShubetsu.被保険者証交付事由.getコード(),
+                    被保険者証交付事由, new FlexibleDate(RDate.getNowDate().toString()));
             if (交付事由.isEmpty()) {
                 交付事由 = ikkatsuHakkoRelateEntity.getIdoJiyuCode();
             }
@@ -231,68 +240,40 @@ public class HihokenshashoHakkoIchiranHyoFinder {
         }
     }
 
-    private void setソート順と改頁キー(IchiranyoShohakkoshaEntity ichiranyoShohakkoshaEntity, IOutputOrder iOutputOrder) {
-        List<ISetSortItem> iSetSortItemList = iOutputOrder.get設定項目リスト();
-        Map<Integer, RString> ソート順Map = new HashMap<>();
-        List<Integer> ソート順キーList = new ArrayList<>();
-        Map<Integer, RString> 改頁Map = new HashMap<>();
-        List<Integer> 改頁キーList = new ArrayList<>();
-        for (ISetSortItem iSetSortItem : iSetSortItemList) {
-            ソート順Map.put(iSetSortItem.get出力順位(), iSetSortItem.get項目名());
-            ソート順キーList.add(iSetSortItem.get出力順位());
-            if (iSetSortItem.is改頁項目()) {
-                改頁Map.put(iSetSortItem.get出力順位(), iSetSortItem.get項目名());
-                改頁キーList.add(iSetSortItem.get出力順位());
-            }
-        }
-        Collections.sort(ソート順キーList);
+    private void setソート順と改頁キー(IchiranyoShohakkoshaEntity ichiranyoShohakkoshaEntity,
+            Map<Integer, ISetSortItem> 出力順Map, Map<Integer, RString> 改頁Map) {
         ichiranyoShohakkoshaEntity.setソート順１(RString.EMPTY);
         ichiranyoShohakkoshaEntity.setソート順２(RString.EMPTY);
         ichiranyoShohakkoshaEntity.setソート順３(RString.EMPTY);
         ichiranyoShohakkoshaEntity.setソート順４(RString.EMPTY);
         ichiranyoShohakkoshaEntity.setソート順５(RString.EMPTY);
-        for (int j = 0; j < ソート順キーList.size(); j++) {
-            Integer ソート順キー = ソート順キーList.get(j);
-            if (j == INDEX_0) {
-                ichiranyoShohakkoshaEntity.setソート順１(ソート順Map.get(ソート順キー));
-            } else if (j == INDEX_1) {
-                ichiranyoShohakkoshaEntity.setソート順２(ソート順Map.get(ソート順キー));
-            } else if (j == INDEX_2) {
-                ichiranyoShohakkoshaEntity.setソート順３(ソート順Map.get(ソート順キー));
-            } else if (j == INDEX_3) {
-                ichiranyoShohakkoshaEntity.setソート順４(ソート順Map.get(ソート順キー));
-            } else if (j == INDEX_4) {
-                ichiranyoShohakkoshaEntity.setソート順５(ソート順Map.get(ソート順キー));
-            }
+        if (出力順Map.get(INDEX_0) != null) {
+            ichiranyoShohakkoshaEntity.setソート順１(出力順Map.get(INDEX_0).get項目名());
         }
-        Collections.sort(改頁キーList);
-        ichiranyoShohakkoshaEntity.set改頁１(RString.EMPTY);
-        ichiranyoShohakkoshaEntity.set改頁２(RString.EMPTY);
-        ichiranyoShohakkoshaEntity.set改頁３(RString.EMPTY);
-        ichiranyoShohakkoshaEntity.set改頁４(RString.EMPTY);
-        ichiranyoShohakkoshaEntity.set改頁５(RString.EMPTY);
-        for (int k = 0; k < 改頁キーList.size(); k++) {
-            Integer 改頁キー = 改頁キーList.get(k);
-            if (k == INDEX_0) {
-                ichiranyoShohakkoshaEntity.set改頁１(改頁Map.get(改頁キー));
-            } else if (k == INDEX_1) {
-                ichiranyoShohakkoshaEntity.set改頁２(改頁Map.get(改頁キー));
-            } else if (k == INDEX_2) {
-                ichiranyoShohakkoshaEntity.set改頁３(改頁Map.get(改頁キー));
-            } else if (k == INDEX_3) {
-                ichiranyoShohakkoshaEntity.set改頁４(改頁Map.get(改頁キー));
-            } else if (k == INDEX_4) {
-                ichiranyoShohakkoshaEntity.set改頁５(改頁Map.get(改頁キー));
-            }
+        if (出力順Map.get(INDEX_1) != null) {
+            ichiranyoShohakkoshaEntity.setソート順２(出力順Map.get(INDEX_1).get項目名());
         }
+        if (出力順Map.get(INDEX_2) != null) {
+            ichiranyoShohakkoshaEntity.setソート順３(出力順Map.get(INDEX_2).get項目名());
+        }
+        if (出力順Map.get(INDEX_3) != null) {
+            ichiranyoShohakkoshaEntity.setソート順４(出力順Map.get(INDEX_3).get項目名());
+        }
+        if (出力順Map.get(INDEX_4) != null) {
+            ichiranyoShohakkoshaEntity.setソート順５(出力順Map.get(INDEX_4).get項目名());
+        }
+        ichiranyoShohakkoshaEntity.set改頁１(改頁Map.get(INDEX_0));
+        ichiranyoShohakkoshaEntity.set改頁２(改頁Map.get(INDEX_1));
+        ichiranyoShohakkoshaEntity.set改頁３(改頁Map.get(INDEX_2));
+        ichiranyoShohakkoshaEntity.set改頁４(改頁Map.get(INDEX_3));
+        ichiranyoShohakkoshaEntity.set改頁５(改頁Map.get(INDEX_4));
     }
 
     private RString set生年月日_年齢(FlexibleDate 交付日, IkkatsuHakkoRelateEntity ikkatsuHakkoRelateEntity) {
 
         RString 生年月日_年齢 = RString.EMPTY;
         IDateOfBirth dateOfBirth = new _DateOfBirth(new FlexibleDate(ikkatsuHakkoRelateEntity.getSeinengappiYMD().toString()));
-        AgeCalculator agecalculator = new AgeCalculator(
-                dateOfBirth, JuminJotai.valueOf(ikkatsuHakkoRelateEntity.getJuminJotaiCode().toString()),
+        AgeCalculator agecalculator = new AgeCalculator(dateOfBirth, JuminJotai.toValue(ikkatsuHakkoRelateEntity.getJuminJotaiCode()),
                 FlexibleDate.MAX, AgeArrivalDay.前日, 交付日);
         RString 年齢 = agecalculator.get年齢();
         if (null != 年齢 && !年齢.isEmpty()) {
@@ -325,16 +306,16 @@ public class HihokenshashoHakkoIchiranHyoFinder {
         RString 番地 = RString.EMPTY;
         RString 方書 = RString.EMPTY;
         RString 行政区名 = RString.EMPTY;
-        if (!RString.isNullOrEmpty(new RString(ikkatsuHakkoRelateEntity.getJuminJotaiCode().toString()))) {
+        if (ikkatsuHakkoRelateEntity.getJuminJotaiCode() != null && !ikkatsuHakkoRelateEntity.getJuminJotaiCode().isEmpty()) {
             住所 = new RString(ikkatsuHakkoRelateEntity.getJuminJotaiCode().toString());
         }
-        if (!RString.isNullOrEmpty(new RString(ikkatsuHakkoRelateEntity.getJuminShubetsuCode().toString()))) {
+        if (ikkatsuHakkoRelateEntity.getJuminShubetsuCode() != null && !ikkatsuHakkoRelateEntity.getJuminShubetsuCode().isEmpty()) {
             番地 = new RString(ikkatsuHakkoRelateEntity.getJuminShubetsuCode().toString());
         }
-        if (!RString.isNullOrEmpty(new RString(ikkatsuHakkoRelateEntity.getKatagaki().toString()))) {
+        if (ikkatsuHakkoRelateEntity.getKatagaki() != null && !ikkatsuHakkoRelateEntity.getKatagaki().isEmpty()) {
             方書 = new RString(ikkatsuHakkoRelateEntity.getKatagaki().toString());
         }
-        if (!RString.isNullOrEmpty(new RString(ikkatsuHakkoRelateEntity.getJuminShubetsuCode().toString()))) {
+        if (ikkatsuHakkoRelateEntity.getJuminShubetsuCode() != null && !ikkatsuHakkoRelateEntity.getJuminShubetsuCode().isEmpty()) {
             行政区名 = new RString(ikkatsuHakkoRelateEntity.getJuminShubetsuCode().toString());
         }
         if (KannaiKangaiKubunType.管外.code().equals(ikkatsuHakkoRelateEntity.getKannaiKangaiKubun())) {
@@ -471,17 +452,22 @@ public class HihokenshashoHakkoIchiranHyoFinder {
     }
 
     private RString set要介護(IkkatsuHakkoRelateEntity ikkatsuHakkoRelateEntity) {
-
-        FlexibleDate 認定有効期間開始年月日 = ikkatsuHakkoRelateEntity.getNinteiYukoKikanKaishiYMD();
-        FlexibleDate 認定有効期間終了年月日 = ikkatsuHakkoRelateEntity.getNinteiYukoKikanShuryoYMD();
-        RString 要介護 = get要介護状態区分コード(認定有効期間終了年月日, ikkatsuHakkoRelateEntity.getYokaigoJotaiKubunCode());
-        if (null == 認定有効期間開始年月日 && null == 認定有効期間終了年月日) {
-            要介護 = RString.EMPTY;
+        RString 要介護 = RString.EMPTY;
+        if (受給者台帳.equals(ikkatsuHakkoRelateEntity.getTaisyoKubun())) {
+            FlexibleDate 認定有効期間開始年月日 = ikkatsuHakkoRelateEntity.getNinteiYukoKikanKaishiYMD();
+            FlexibleDate 認定有効期間終了年月日 = ikkatsuHakkoRelateEntity.getNinteiYukoKikanShuryoYMD();
+            要介護 = get要介護状態区分コード(認定有効期間終了年月日, ikkatsuHakkoRelateEntity.getYokaigoJotaiKubunCode());
+            if (null == 認定有効期間開始年月日 && null == 認定有効期間終了年月日) {
+                要介護 = RString.EMPTY;
+            }
+        } else if (総合事業対象者.equals(ikkatsuHakkoRelateEntity.getTaisyoKubun())) {
+            要介護 = new RString("事業対象者");
         }
         return 要介護;
     }
 
-    private IchiranyoShohakkoshaEntity createHihokenshashoHakkoIchiranHyoDataなし(IOutputOrder iOutputOrder) {
+    private IchiranyoShohakkoshaEntity createHihokenshashoHakkoIchiranHyoDataなし(
+            Map<Integer, ISetSortItem> 出力順Map) {
         IchiranyoShohakkoshaEntity ichiranyoShohakkoshaEntity = new IchiranyoShohakkoshaEntity();
 
         ichiranyoShohakkoshaEntity.set作成日付(new RString(RDate.getNowDateTime().getDate().wareki().eraType(EraType.KANJI).firstYear(
@@ -498,35 +484,20 @@ public class HihokenshashoHakkoIchiranHyoFinder {
             ichiranyoShohakkoshaEntity.set保険者名(RString.EMPTY);
         }
 
-        if (iOutputOrder != null) {
-            List<ISetSortItem> iSetSortItemList = iOutputOrder.get設定項目リスト();
-            Map<Integer, RString> ソート順Map = new HashMap<>();
-            List<Integer> ソート順キーList = new ArrayList<>();
-            for (ISetSortItem iSetSortItem : iSetSortItemList) {
-                ソート順Map.put(iSetSortItem.get出力順位(), iSetSortItem.get項目名());
-                ソート順キーList.add(iSetSortItem.get出力順位());
-            }
-
-            Collections.sort(ソート順キーList);
-            ichiranyoShohakkoshaEntity.setソート順１(RString.EMPTY);
-            ichiranyoShohakkoshaEntity.setソート順２(RString.EMPTY);
-            ichiranyoShohakkoshaEntity.setソート順３(RString.EMPTY);
-            ichiranyoShohakkoshaEntity.setソート順４(RString.EMPTY);
-            ichiranyoShohakkoshaEntity.setソート順５(RString.EMPTY);
-            for (int j = 0; j < ソート順キーList.size(); j++) {
-                Integer ソート順キー = ソート順キーList.get(j);
-                if (j == INDEX_0) {
-                    ichiranyoShohakkoshaEntity.setソート順１(ソート順Map.get(ソート順キー));
-                } else if (j == INDEX_1) {
-                    ichiranyoShohakkoshaEntity.setソート順２(ソート順Map.get(ソート順キー));
-                } else if (j == INDEX_2) {
-                    ichiranyoShohakkoshaEntity.setソート順３(ソート順Map.get(ソート順キー));
-                } else if (j == INDEX_3) {
-                    ichiranyoShohakkoshaEntity.setソート順４(ソート順Map.get(ソート順キー));
-                } else if (j == INDEX_4) {
-                    ichiranyoShohakkoshaEntity.setソート順５(ソート順Map.get(ソート順キー));
-                }
-            }
+        if (出力順Map.get(INDEX_0) != null) {
+            ichiranyoShohakkoshaEntity.setソート順１(出力順Map.get(INDEX_0).get項目名());
+        }
+        if (出力順Map.get(INDEX_1) != null) {
+            ichiranyoShohakkoshaEntity.setソート順２(出力順Map.get(INDEX_1).get項目名());
+        }
+        if (出力順Map.get(INDEX_2) != null) {
+            ichiranyoShohakkoshaEntity.setソート順３(出力順Map.get(INDEX_2).get項目名());
+        }
+        if (出力順Map.get(INDEX_3) != null) {
+            ichiranyoShohakkoshaEntity.setソート順４(出力順Map.get(INDEX_3).get項目名());
+        }
+        if (出力順Map.get(INDEX_4) != null) {
+            ichiranyoShohakkoshaEntity.setソート順５(出力順Map.get(INDEX_4).get項目名());
         }
         ichiranyoShohakkoshaEntity.set送付先住所(new RString("該当データはありません"));
         ichiranyoShohakkoshaEntity.setページ数(RString.EMPTY);
@@ -562,13 +533,5 @@ public class HihokenshashoHakkoIchiranHyoFinder {
             return YokaigoJotaiKubun06.toValue(要介護認定状態区分コード.getColumnValue()).get名称();
         }
         return YokaigoJotaiKubun09.toValue(要介護認定状態区分コード.getColumnValue()).get名称();
-    }
-
-    private RString isNull(RString 対象項目) {
-        if (RString.isNullOrEmpty(対象項目)) {
-            return RString.EMPTY;
-        } else {
-            return 対象項目;
-        }
     }
 }

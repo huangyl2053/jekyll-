@@ -146,7 +146,6 @@ public class ShokanKetteiTsuchiShoSealer2Service {
                 item.getTsuban2(),
                 item.getTorikeshiShiharaikikan(),
                 item.getRiyuTitle(),
-                item.get増減の理由(),
                 item.getTitle1(),
                 item.getTitle2(),
                 item.getPage(),

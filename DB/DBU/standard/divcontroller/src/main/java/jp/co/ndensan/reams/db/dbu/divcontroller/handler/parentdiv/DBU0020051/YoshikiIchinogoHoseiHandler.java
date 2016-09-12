@@ -5,25 +5,18 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0020051;
 
-import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
-import jp.co.ndensan.reams.db.dbu.definition.jigyohokokugeppoo.JigyoHokokuGeppoDetalSearchParameter;
-import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020051.DBU0020051StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020051.YoshikiIchinogoHoseiDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.JigyoHokokuGeppoParameter;
-import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbu.service.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHako;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.core.ui.response.IStateEnumerations;
+import jp.co.ndensan.reams.db.dbu.service.core.jigyohokokugeppohoseihako.JigyoHokokuGeppoHoseiHako;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -34,18 +27,11 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class YoshikiIchinogoHoseiHandler {
 
     private final YoshikiIchinogoHoseiDiv div;
-    private static final RString 修正状態 = new RString("更新");
     private static final RString 削除状態 = new RString("削除");
-    private static final RString 要介護 = new RString("(11)要介護(要支援)認定者数");
-    private static final RString 居宅介護 = new RString("(12)居宅介護(介護予防)サビース受給者数");
-    private static final RString 地域密着型 = new RString("(13)地域密着型(介護予防)サビース受給者数");
-    private static final RString 施設介護 = new RString("(14)施設介護サビース受給者数");
-    private static final Code 集計番号_1100 = new Code("1100");
-    private static final Code 集計番号_1200 = new Code("1200");
-    private static final Code 集計番号_1400 = new Code("1400");
-    private static final Code 集計番号_1391 = new Code("1391");
-    private static final Code 集計番号_1392 = new Code("1392");
-    private static final Code 集計番号_1393 = new Code("1393");
+    private static final RString 様式種類_11 = new RString("11");
+    private static final RString 様式種類_21 = new RString("21");
+    private static final RString 様式種類_31 = new RString("31");
+    private static final RString 様式種類_41 = new RString("41");
     private static final int NUMBER_1 = 1;
     private static final int NUMBER_2 = 2;
     private static final int NUMBER_3 = 3;
@@ -126,100 +112,41 @@ public class YoshikiIchinogoHoseiHandler {
         div.getPnlMain().getTxtShukeiNengetsu().setValue(new RDate(集計年月.toString()));
         div.getPnlMain().getTxtYosikiHosei().setValue(引き継ぎデータ.get保険者コード());
         div.getPnlMain().getTxtHokensyaName().setValue(引き継ぎデータ.get市町村名称());
-        set様式種類();
-    }
-
-    /**
-     * 画面初期化処理です
-     *
-     * @param 引き継ぎデータ JigyoHokokuGeppoParameter
-     * @param 状態 RString
-     * @return stateName
-     */
-    public IStateEnumerations initialize(JigyoHokokuGeppoParameter 引き継ぎデータ, RString 状態) {
-        RString 様式種類 = 引き継ぎデータ.get行様式種類コード();
-        List<RString> list11 = ViewStateHolder.get(ViewStateKeys.様式種類_11, List.class);
-        List<RString> list21 = ViewStateHolder.get(ViewStateKeys.様式種類_21, List.class);
-        List<RString> list31 = ViewStateHolder.get(ViewStateKeys.様式種類_31, List.class);
-        List<RString> list41 = ViewStateHolder.get(ViewStateKeys.様式種類_41, List.class);
-        if (list11.contains(様式種類)) {
-            List<JigyoHokokuTokeiData> 要介護list = get事業報告月報詳細データリスト(引き継ぎデータ, 集計番号_1100);
-            set要介護認定者数(要介護list);
-            div.getPnl11().setTitle(要介護);
-            ViewStateHolder.put(ViewStateKeys.要介護データリスト, (Serializable) 要介護list);
-            if (修正状態.equals(状態)) {
-                return DBU0020051StateName.修正状態1;
-            }
-            return DBU0020051StateName.削除状態1;
-        } else if (list21.contains(様式種類)) {
-            List<JigyoHokokuTokeiData> 居宅介護list = get事業報告月報詳細データリスト(引き継ぎデータ, 集計番号_1200);
-            set居宅介護認定者数(居宅介護list);
-            div.getPnl12().setTitle(居宅介護);
-            ViewStateHolder.put(ViewStateKeys.居宅介護データリスト, (Serializable) 居宅介護list);
-            if (修正状態.equals(状態)) {
-                return DBU0020051StateName.修正状態2;
-            }
-            return DBU0020051StateName.削除状態2;
-        } else if (list31.contains(様式種類)) {
-            List<JigyoHokokuTokeiData> 地域密着型list = get事業報告月報詳細データリスト(引き継ぎデータ, 集計番号_1400);
-            set地域密着型認定者数(地域密着型list);
-            div.getPnl13().setTitle(地域密着型);
-            ViewStateHolder.put(ViewStateKeys.地域密着型データリスト, (Serializable) 地域密着型list);
-            if (修正状態.equals(状態)) {
-                return DBU0020051StateName.修正状態3;
-            }
-            return DBU0020051StateName.削除状態3;
-        } else if (list41.contains(様式種類)) {
-            List<JigyoHokokuTokeiData> 施設介護list1 = get事業報告月報詳細データリスト(引き継ぎデータ, 集計番号_1391);
-            List<JigyoHokokuTokeiData> 施設介護list2 = get事業報告月報詳細データリスト(引き継ぎデータ, 集計番号_1392);
-            List<JigyoHokokuTokeiData> 施設介護list3 = get事業報告月報詳細データリスト(引き継ぎデータ, 集計番号_1393);
-            set施設介護認定者数1(施設介護list1);
-            set施設介護認定者数2(施設介護list2);
-            set施設介護認定者数3(施設介護list3);
-            div.getPnl14().setTitle(施設介護);
-            ViewStateHolder.put(ViewStateKeys.施設介護1データリスト, (Serializable) 施設介護list1);
-            ViewStateHolder.put(ViewStateKeys.施設介護2データリスト, (Serializable) 施設介護list2);
-            ViewStateHolder.put(ViewStateKeys.施設介護3データリスト, (Serializable) 施設介護list3);
-            if (修正状態.equals(状態)) {
-                return DBU0020051StateName.修正状態4;
-            }
-            return DBU0020051StateName.削除状態4;
-        }
-        return DBU0020051StateName.NoChange;
     }
 
     /**
      * 引き継ぎデータより、画面修正データを抽出する。
      *
      * @param 引き継ぎデータ JigyoHokokuGeppoParameter
-     * @return List<JigyoHokokuNenpoUpdateParameter> 修正データリスト
+     * @param list11 List<RString>
+     * @param list21 List<RString>
+     * @param list31 List<RString>
+     * @param list41 List<RString>
+     * @param 要介護データリスト List<JigyoHokokuTokeiData>
+     * @param 居宅介護データリスト List<JigyoHokokuTokeiData>
+     * @param 地域密着型データリスト List<JigyoHokokuTokeiData>
+     * @param 施設介護1データリスト List<JigyoHokokuTokeiData>
+     * @param 施設介護2データリスト List<JigyoHokokuTokeiData>
+     * @param 施設介護3データリスト List<JigyoHokokuTokeiData>
+     * @return List<JigyoHokokuTokeiData>
      */
-    public List<JigyoHokokuTokeiData> get修正データリスト(JigyoHokokuGeppoParameter 引き継ぎデータ) {
+    public List<JigyoHokokuTokeiData> get修正データリスト(JigyoHokokuGeppoParameter 引き継ぎデータ,
+            List<RString> list11, List<RString> list21,
+            List<RString> list31, List<RString> list41,
+            List<JigyoHokokuTokeiData> 要介護データリスト, List<JigyoHokokuTokeiData> 居宅介護データリスト,
+            List<JigyoHokokuTokeiData> 地域密着型データリスト,
+            List<JigyoHokokuTokeiData> 施設介護1データリスト,
+            List<JigyoHokokuTokeiData> 施設介護2データリスト,
+            List<JigyoHokokuTokeiData> 施設介護3データリスト) {
         List<JigyoHokokuTokeiData> 修正データリスト = new ArrayList<>();
         RString 様式種類 = 引き継ぎデータ.get行様式種類コード();
-        List<RString> list11 = ViewStateHolder.get(ViewStateKeys.様式種類_11, List.class);
-        List<RString> list21 = ViewStateHolder.get(ViewStateKeys.様式種類_21, List.class);
-        List<RString> list31 = ViewStateHolder.get(ViewStateKeys.様式種類_31, List.class);
-        List<RString> list41 = ViewStateHolder.get(ViewStateKeys.様式種類_41, List.class);
         if (list11.contains(様式種類)) {
-            List<JigyoHokokuTokeiData> 要介護データリスト = ViewStateHolder
-                    .get(ViewStateKeys.要介護データリスト, List.class);
             修正データリスト = get要介護修正データリスト(要介護データリスト, 修正データリスト);
         } else if (list21.contains(様式種類)) {
-            List<JigyoHokokuTokeiData> 居宅介護データリスト = ViewStateHolder
-                    .get(ViewStateKeys.居宅介護データリスト, List.class);
             修正データリスト = get居宅介護データリスト(居宅介護データリスト, 修正データリスト);
         } else if (list31.contains(様式種類)) {
-            List<JigyoHokokuTokeiData> 地域密着型データリスト = ViewStateHolder
-                    .get(ViewStateKeys.地域密着型データリスト, List.class);
             修正データリスト = get地域密着型データリスト(地域密着型データリスト, 修正データリスト);
         } else if (list41.contains(様式種類)) {
-            List<JigyoHokokuTokeiData> 施設介護1データリスト = ViewStateHolder
-                    .get(ViewStateKeys.施設介護1データリスト, List.class);
-            List<JigyoHokokuTokeiData> 施設介護2データリスト = ViewStateHolder
-                    .get(ViewStateKeys.施設介護2データリスト, List.class);
-            List<JigyoHokokuTokeiData> 施設介護3データリスト = ViewStateHolder
-                    .get(ViewStateKeys.施設介護3データリスト, List.class);
             修正データリスト = get施設介護データリスト(
                     施設介護1データリスト, 施設介護2データリスト, 施設介護3データリスト, 修正データリスト);
         }
@@ -227,47 +154,13 @@ public class YoshikiIchinogoHoseiHandler {
     }
 
     /**
-     * 引き継ぎデータより、データ削除する。
+     * 引き継ぎデータより、データ削除する
      *
      * @param 引き継ぎデータ JigyoHokokuGeppoParameter
      */
-    public void delete(JigyoHokokuGeppoParameter 引き継ぎデータ) {
+    public void delete(List<JigyoHokokuTokeiData> 引き継ぎデータ) {
         JigyoHokokuGeppoHoseiHako finder = InstanceProvider.create(JigyoHokokuGeppoHoseiHako.class);
-        RString 様式種類 = 引き継ぎデータ.get行様式種類コード();
-        List<RString> list11 = ViewStateHolder.get(ViewStateKeys.様式種類_11, List.class);
-        List<RString> list21 = ViewStateHolder.get(ViewStateKeys.様式種類_21, List.class);
-        List<RString> list31 = ViewStateHolder.get(ViewStateKeys.様式種類_31, List.class);
-        List<RString> list41 = ViewStateHolder.get(ViewStateKeys.様式種類_41, List.class);
-        if (list11.contains(様式種類)) {
-            JigyoHokokuGeppoDetalSearchParameter parameter = getParameter(引き継ぎデータ, 集計番号_1100);
-            finder.deleteJigyoHokokuGeppoData(parameter);
-        } else if (list21.contains(様式種類)) {
-            JigyoHokokuGeppoDetalSearchParameter parameter = getParameter(引き継ぎデータ, 集計番号_1200);
-            finder.deleteJigyoHokokuGeppoData(parameter);
-        } else if (list31.contains(様式種類)) {
-            JigyoHokokuGeppoDetalSearchParameter parameter = getParameter(引き継ぎデータ, 集計番号_1400);
-            finder.deleteJigyoHokokuGeppoData(parameter);
-        } else if (list41.contains(様式種類)) {
-            JigyoHokokuGeppoDetalSearchParameter parameter = getParameter(引き継ぎデータ, 集計番号_1391);
-            finder.deleteJigyoHokokuGeppoData(parameter);
-            parameter = getParameter(引き継ぎデータ, 集計番号_1392);
-            finder.deleteJigyoHokokuGeppoData(parameter);
-            parameter = getParameter(引き継ぎデータ, 集計番号_1393);
-            finder.deleteJigyoHokokuGeppoData(parameter);
-        }
-    }
-
-    private JigyoHokokuGeppoDetalSearchParameter getParameter(JigyoHokokuGeppoParameter 引き継ぎデータ,
-            Code 集計番号) {
-        return JigyoHokokuGeppoDetalSearchParameter.createParameterForJigyoHokokuGeppoDetal(
-                new FlexibleYear(引き継ぎデータ.get行報告年()),
-                引き継ぎデータ.get行報告月(),
-                new FlexibleYear(引き継ぎデータ.get行集計対象年()),
-                引き継ぎデータ.get行集計対象月(),
-                引き継ぎデータ.get行統計対象区分(),
-                new LasdecCode(引き継ぎデータ.get行市町村コード()),
-                new Code(引き継ぎデータ.get行表番号()),
-                集計番号);
+        finder.deleteJigyoHokokuGeppoData(引き継ぎデータ);
     }
 
     /**
@@ -654,7 +547,12 @@ public class YoshikiIchinogoHoseiHandler {
         return entity;
     }
 
-    private void set要介護認定者数(List<JigyoHokokuTokeiData> 要介護list) {
+    /**
+     * set要介護認定者数
+     *
+     * @param 要介護list (List<JigyoHokokuTokeiData>
+     */
+    public void set要介護認定者数(List<JigyoHokokuTokeiData> 要介護list) {
         for (JigyoHokokuTokeiData entity : 要介護list) {
             if (entity.get集計結果値() != null) {
                 switch (entity.get縦番号().intValue()) {
@@ -680,7 +578,12 @@ public class YoshikiIchinogoHoseiHandler {
         }
     }
 
-    private void set居宅介護認定者数(List<JigyoHokokuTokeiData> 居宅介護list) {
+    /**
+     * set居宅介護認定者数
+     *
+     * @param 居宅介護list List<JigyoHokokuTokeiData>
+     */
+    public void set居宅介護認定者数(List<JigyoHokokuTokeiData> 居宅介護list) {
         for (JigyoHokokuTokeiData entity : 居宅介護list) {
             if (entity.get集計結果値() != null) {
                 switch (entity.get縦番号().intValue()) {
@@ -700,7 +603,12 @@ public class YoshikiIchinogoHoseiHandler {
         }
     }
 
-    private void set地域密着型認定者数(List<JigyoHokokuTokeiData> 地域密着型list) {
+    /**
+     * set地域密着型認定者数
+     *
+     * @param 地域密着型list List<JigyoHokokuTokeiData>
+     */
+    public void set地域密着型認定者数(List<JigyoHokokuTokeiData> 地域密着型list) {
         for (JigyoHokokuTokeiData entity : 地域密着型list) {
             if (entity.get集計結果値() != null) {
                 switch (entity.get縦番号().intValue()) {
@@ -720,7 +628,12 @@ public class YoshikiIchinogoHoseiHandler {
         }
     }
 
-    private void set施設介護認定者数1(List<JigyoHokokuTokeiData> 施設介護list) {
+    /**
+     * set施設介護認定者数1
+     *
+     * @param 施設介護list List<JigyoHokokuTokeiData>
+     */
+    public void set施設介護認定者数1(List<JigyoHokokuTokeiData> 施設介護list) {
         for (JigyoHokokuTokeiData entity : 施設介護list) {
             if (entity.get集計結果値() != null) {
                 switch (entity.get縦番号().intValue()) {
@@ -740,7 +653,12 @@ public class YoshikiIchinogoHoseiHandler {
         }
     }
 
-    private void set施設介護認定者数2(List<JigyoHokokuTokeiData> 施設介護list) {
+    /**
+     * set施設介護認定者数2
+     *
+     * @param 施設介護list List<JigyoHokokuTokeiData>
+     */
+    public void set施設介護認定者数2(List<JigyoHokokuTokeiData> 施設介護list) {
         for (JigyoHokokuTokeiData entity : 施設介護list) {
             if (entity.get集計結果値() != null) {
                 switch (entity.get縦番号().intValue()) {
@@ -760,7 +678,12 @@ public class YoshikiIchinogoHoseiHandler {
         }
     }
 
-    private void set施設介護認定者数3(List<JigyoHokokuTokeiData> 施設介護list) {
+    /**
+     * set施設介護認定者数3
+     *
+     * @param 施設介護list List<JigyoHokokuTokeiData>
+     */
+    public void set施設介護認定者数3(List<JigyoHokokuTokeiData> 施設介護list) {
         for (JigyoHokokuTokeiData entity : 施設介護list) {
             if (entity.get集計結果値() != null) {
                 switch (entity.get縦番号().intValue()) {
@@ -1625,13 +1548,16 @@ public class YoshikiIchinogoHoseiHandler {
 
     /**
      * 様式種類の初期化のメソッドます。
+     *
+     * @return Map<RString, ArrayList<RString>>
      */
-    public void set様式種類() {
+    public Map<RString, ArrayList<RString>> set様式種類() {
+        Map<RString, ArrayList<RString>> map = new HashMap<>();
         ArrayList<RString> list11 = new ArrayList<>();
         list11.add(STR_010);
         list11.add(STR_110);
         list11.add(STR_210);
-        ViewStateHolder.put(ViewStateKeys.様式種類_11, list11);
+        map.put(様式種類_11, list11);
         ArrayList<RString> list21 = new ArrayList<>();
         list21.add(STR_011);
         list21.add(STR_012);
@@ -1642,7 +1568,7 @@ public class YoshikiIchinogoHoseiHandler {
         list21.add(STR_211);
         list21.add(STR_212);
         list21.add(STR_213);
-        ViewStateHolder.put(ViewStateKeys.様式種類_21, list21);
+        map.put(様式種類_21, list21);
         ArrayList<RString> list31 = new ArrayList<>();
         list31.add(STR_014);
         list31.add(STR_015);
@@ -1653,7 +1579,7 @@ public class YoshikiIchinogoHoseiHandler {
         list31.add(STR_214);
         list31.add(STR_215);
         list31.add(STR_216);
-        ViewStateHolder.put(ViewStateKeys.様式種類_31, list31);
+        map.put(様式種類_31, list31);
         ArrayList<RString> list41 = new ArrayList<>();
         list41.add(STR_017);
         list41.add(STR_018);
@@ -1664,22 +1590,7 @@ public class YoshikiIchinogoHoseiHandler {
         list41.add(STR_217);
         list41.add(STR_218);
         list41.add(STR_219);
-        ViewStateHolder.put(ViewStateKeys.様式種類_41, list41);
+        map.put(様式種類_41, list41);
+        return map;
     }
-
-    private List<JigyoHokokuTokeiData> get事業報告月報詳細データリスト(
-            JigyoHokokuGeppoParameter 引き継ぎデータ, Code 集計番号) {
-        JigyoHokokuGeppoDetalSearchParameter parameter
-                = JigyoHokokuGeppoDetalSearchParameter.createParameterForJigyoHokokuGeppoDetal(
-                        new FlexibleYear(引き継ぎデータ.get行報告年()),
-                        引き継ぎデータ.get行報告月(),
-                        new FlexibleYear(引き継ぎデータ.get行集計対象年()),
-                        引き継ぎデータ.get行集計対象月(),
-                        引き継ぎデータ.get行統計対象区分(),
-                        new LasdecCode(引き継ぎデータ.get行市町村コード()),
-                        new Code(引き継ぎデータ.get行表番号()),
-                        集計番号);
-        return JigyoHokokuGeppoHoseiHako.createInstance().getJigyoHokokuGeppoDetal(parameter);
-    }
-
 }

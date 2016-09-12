@@ -27,11 +27,6 @@ public class NenreiTotatsushaJouhouEntity {
     private AtenaKanaMeisho 被保険者カナ氏名;
     private AtenaMeisho 被保険者氏名;
     private int 対象情報;
-    private RString 改頁１;
-    private RString 改頁２;
-    private RString 改頁３;
-    private RString 改頁４;
-    private RString 改頁５;
     private RString 対象情報タイトル;
     private RString 開始タイトル;
     private RString 終了タイトル;

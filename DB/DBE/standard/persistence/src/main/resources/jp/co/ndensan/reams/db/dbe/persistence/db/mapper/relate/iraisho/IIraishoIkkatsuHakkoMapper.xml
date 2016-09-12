@@ -19,11 +19,11 @@
             rgdb."DbT5101NinteiShinseiJoho"                  
         <where>                    
             AND "DbT5910NinteichosaItakusakiJoho"."shichosonCode" = "DbT7051KoseiShichosonMaster"."shichosonCode"                  
-            AND "DbT5910NinteichosaItakusakiJoho"."ninteichosaItakusakiCode" = "DbT5201NinteichosaIraiJoho"."ninteichosaItakusakiCode"                  
+            AND "DbT5910NinteichosaItakusakiJoho"."ninteichosaItakusakiCode" = "DbT5101NinteiShinseiJoho"."ninteiChosaItakusakiCode"                  
             AND "DbT5913ChosainJoho"."shichosonCode" = "DbT7051KoseiShichosonMaster"."shichosonCode"                  
-            AND "DbT5913ChosainJoho"."ninteiChosaItakusakiCode" = "DbT5201NinteichosaIraiJoho"."ninteichosaItakusakiCode"                  
-            AND "DbT5913ChosainJoho"."ninteiChosainCode" = "DbT5201NinteichosaIraiJoho"."ninteiChosainCode"                  
-            AND "DbT5201NinteichosaIraiJoho"."shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"                  
+            AND "DbT5913ChosainJoho"."ninteiChosaItakusakiCode" = "DbT5101NinteiShinseiJoho"."ninteiChosaItakusakiCode"                  
+            AND "DbT5913ChosainJoho"."ninteiChosainCode" = "DbT5101NinteiShinseiJoho"."ninteiChosainCode"                  
+            AND "DbT5201NinteichosaIraiJoho"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"                  
             AND "DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo" = 
             (SELECT 
                 MAX("ninteichosaIraiRirekiNo") 
@@ -31,10 +31,10 @@
                 rgdb."DbT5201NinteichosaIraiJoho"
             WHERE
                 "shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"
-            AND "logicalDeletedFlag" = false
             )                  
             AND "DbT5201NinteichosaIraiJoho"."logicalDeletedFlag" = false                  
-            AND "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"                  
+            AND "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"      
+            AND "DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo" = "DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo"         
             AND "DbT5101NinteiShinseiJoho"."shoriJotaiKubun" IN (#{通常},#{延期})                 
             AND "DbT5101NinteiShinseiJoho"."logicalDeletedFlag" = false                  
             AND "DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL                  
@@ -70,7 +70,7 @@
          </where>
     </sql>
     
-    <select id="getNinteiChousaIrai" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.iraisho.IraishoIkkatsuHakkoParameter" resultMap="resultMap_IraishoIkkatsuHakkoRelateEntity" fetchSize="500">
+    <select resultOrdered="true" id="getNinteiChousaIrai" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.iraisho.IraishoIkkatsuHakkoParameter" resultMap="resultMap_IraishoIkkatsuHakkoRelateEntity" fetchSize="500">
         SELECT
             MAX(sabuKueri."ninteichosaItakusakiCode") AS "ninteichosaItakusakiCode",							
             MAX(sabuKueri."jigyoshaMeisho") AS "jigyoshaMeisho",							
@@ -119,10 +119,10 @@
                 rgdb."DbT5301ShujiiIkenshoIraiJoho"
             WHERE
                 "shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"
-            AND "logicalDeletedFlag" = false
             )										
             AND "DbT5301ShujiiIkenshoIraiJoho"."logicalDeletedFlag"=false										
-            AND "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"										
+            AND "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = "DbT5105NinteiKanryoJoho"."shinseishoKanriNo"
+            AND "DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo" = "DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo"         										
             AND "DbT5101NinteiShinseiJoho"."shoriJotaiKubun" IN (#{通常},#{延期})										
             AND "DbT5101NinteiShinseiJoho"."logicalDeletedFlag" = false									
             AND "DbT5105NinteiKanryoJoho"."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL                  
@@ -158,7 +158,7 @@
          </where>
     </sql>
     
-    <select id="getShuziiIkenshoIrai" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatis.param.iraisho.IraishoIkkatsuHakkoParameter" resultMap="resultMap_IraishoIkkatsuHakkoRelateEntity" fetchSize="500">
+    <select resultOrdered="true" id="getShuziiIkenshoIrai" parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.iraisho.IraishoIkkatsuHakkoParameter" resultMap="resultMap_IraishoIkkatsuHakkoRelateEntity" fetchSize="500">
         SELECT
             MAX(sabuKueri."shujiiIryokikanCode") AS "shujiiIryokikanCode",							
             MAX(sabuKueri."iryoKikanMeisho") AS "iryoKikanMeisho",							

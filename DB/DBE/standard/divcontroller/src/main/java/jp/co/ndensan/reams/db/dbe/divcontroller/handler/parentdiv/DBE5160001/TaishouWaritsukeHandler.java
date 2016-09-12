@@ -7,38 +7,37 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5160001;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoBuilder;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJoho;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJohoBuilder;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.ninteishinseijoho.NinteiShinseiJoho2;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJoho2;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJoho2Builder;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJoho2;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJoho2Builder;
 import jp.co.ndensan.reams.db.dbe.business.core.taishouwaritsuke.KohoshaIchiran;
 import jp.co.ndensan.reams.db.dbe.business.core.taishouwaritsuke.TaishouWaritsukeHead;
 import jp.co.ndensan.reams.db.dbe.business.core.taishouwaritsuke.Taishouichiran;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.taishouwaritsuke.TaishouWaritsukeViewStateKey;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.chosa.NinchishoNichijoSeikatsuJiritsudoCode;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.chosa.ShogaiNichijoSeikatsuJiritsudoCode;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsakai.IsShinsakaiJidoWaritsuke;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsei.ShinsakaiYusenWaritsukeKubunCode;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoMapperParameter;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinsakaiwariatejoho.ShinsakaiWariateJohoMapperParameter;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.taishouwaritsuke.CountShinsakaiIinJogaiJohoMapperParameter;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.taishouwaritsuke.CountShinsakaiWariateIinJohoMapperParameter;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.taishouwaritsuke.KohoshaIchiranMapperParameter;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.taishouwaritsuke.TaishouIchiranMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.IsShinsakaiJidoWaritsuke;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiwariatejoho.ShinsakaiWariateJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.taishouwaritsuke.CountShinsakaiIinJogaiJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.taishouwaritsuke.CountShinsakaiWariateIinJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.taishouwaritsuke.KohoshaIchiranMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.taishouwaritsuke.TaishouIchiranMapperParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5160001.TaishouWaritsukeDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5160001.dgTaishoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5160001.dgWaritsukeKohoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.konicho.taishouwaritsuke.TaishouWaritsukeFinder;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJohoManager;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.DbeConfigKey;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.config.DbeConfigKey;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinsakaiYusenWaritsukeKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -49,7 +48,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
@@ -83,9 +81,10 @@ public class TaishouWaritsukeHandler {
 
     /**
      * 画面初期化表示、画面項目に設定されている値をクリアする。
+     *
+     * @param 介護認定審査会番号 介護認定審査会番号
      */
-    public void initializtion() {
-        RString 介護認定審査会番号 = ViewStateHolder.get(TaishouWaritsukeViewStateKey.介護認定審査会番号, RString.class);
+    public void initializtion(RString 介護認定審査会番号) {
         div.getShinsakaiTaishoshaWaritsuke().setKaigoNinteiShinsakaiKaisaiNo(介護認定審査会番号);
         ヘッドエリア検索();
         対象者一覧検索();
@@ -223,9 +222,9 @@ public class TaishouWaritsukeHandler {
         ShinsakaiKaisaiYoteiJohoMapperParameter mapperParameter
                 = ShinsakaiKaisaiYoteiJohoMapperParameter.createSelectByKeyParam(
                         div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo());
-        ShinsakaiKaisaiYoteiJoho joho = johoManager.get介護認定審査会開催予定情報(mapperParameter);
+        ShinsakaiKaisaiYoteiJoho2 joho = johoManager.get介護認定審査会開催予定情報(mapperParameter);
         if (joho != null) {
-            ShinsakaiKaisaiYoteiJohoBuilder builder = joho.createBuilderForEdit();
+            ShinsakaiKaisaiYoteiJoho2Builder builder = joho.createBuilderForEdit();
             if (is登録ボタン押下) {
                 builder.set介護認定審査会割当済み人数(div.getTxtWaritsukeNinzu().getValue().intValue());
             } else {
@@ -243,7 +242,7 @@ public class TaishouWaritsukeHandler {
      */
     public boolean isオブザーバーチェックOK(dgWaritsukeKohoshaIchiran_Row row) {
         TaishouWaritsukeFinder finder = TaishouWaritsukeFinder.createInstance();
-        NinteiShinseiJoho shinseiJoho = finder.get申請書情報by申請書管理番号(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
+        NinteiShinseiJoho2 shinseiJoho = finder.get申請書情報by申請書管理番号(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
         boolean is機関まで = DbBusinessConfig.get(DbeConfigKey.オブザーバーチェック, RDate.getNowDate(), SubGyomuCode.DBE認定支援).equals(機関まで);
         if (shinseiJoho != null) {
             CountShinsakaiWariateIinJohoMapperParameter param = CountShinsakaiWariateIinJohoMapperParameter.createCountKohoshaIchiranMapperParameter(
@@ -283,7 +282,8 @@ public class TaishouWaritsukeHandler {
             div.getTxtShinsakaiKaijo().setValue(waritsukeHead.get介護認定審査会開催場所名称());
             div.getTxtShinsakaiChiku().setValue(waritsukeHead.get地区コード().getColumnValue());
             div.getTxtShinsakauChikuName().setValue(
-                    CodeMaster.getCodeMeisho(SubGyomuCode.DBE認定支援, new CodeShubetsu("5001"), waritsukeHead.get地区コード()));
+                    CodeMaster.getCodeMeisho(
+                            SubGyomuCode.DBE認定支援, new CodeShubetsu("5001"), waritsukeHead.get地区コード(), FlexibleDate.getNowDate()));
             div.getTxtKaisaiDate().setValue(waritsukeHead.get開催予定日());
             div.getTxtYoteiKaishiTime().setValue(new RTime(waritsukeHead.get予定開始時間()));
             div.getTxtYoteiShuryoTime().setValue(new RTime(waritsukeHead.get予定終了時間()));
@@ -586,20 +586,20 @@ public class TaishouWaritsukeHandler {
                         = ShinsakaiWariateJohoMapperParameter.createSelectByKeyParam(
                                 div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(),
                                 new ShinseishoKanriNo(row.getShinseishoKanriNo()));
-                ShinsakaiWariateJoho shinsakaiWariateJoho = johoManager.get介護認定審査会割当情報(mapperParameter);
+                ShinsakaiWariateJoho2 shinsakaiWariateJoho = johoManager.get介護認定審査会割当情報(mapperParameter);
                 if (!row.getNo().equals(new RString(String.valueOf(gridソート順))) || (shinsakaiWariateJoho != null
                         && row.getShinsajunKakuteiFlag().equals(審査順確定フラグ_確定) != (shinsakaiWariateJoho.is介護認定審査会審査順確定フラグ()))) {
-                    ShinsakaiWariateJohoBuilder johoBuilder = shinsakaiWariateJoho.createBuilderForEdit();
+                    ShinsakaiWariateJoho2Builder johoBuilder = shinsakaiWariateJoho.createBuilderForEdit();
                     johoBuilder.set介護認定審査会審査順(gridソート順);
                     johoBuilder.set介護認定審査会審査順確定フラグ(shinsakaiWariateJoho.is介護認定審査会審査順確定フラグ());
                     johoManager.save介護認定審査会割当情報(johoBuilder.build().modifiedModel());
                 }
             }
             if (row.getJotaiFlag().equals(new RString("2"))) {
-                ShinsakaiWariateJoho shinsakaiWariateJoho = new ShinsakaiWariateJoho(
+                ShinsakaiWariateJoho2 shinsakaiWariateJoho = new ShinsakaiWariateJoho2(
                         div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(),
                         new ShinseishoKanriNo(row.getShinseishoKanriNo()));
-                ShinsakaiWariateJohoBuilder builder = shinsakaiWariateJoho.createBuilderForEdit();
+                ShinsakaiWariateJoho2Builder builder = shinsakaiWariateJoho.createBuilderForEdit();
                 builder.set介護認定審査会開催年月日(div.getTxtKaisaiDate().getValue());
                 builder.set介護認定審査会割当年月日(new FlexibleDate(RDate.getNowDate().toString()));
                 builder.set介護認定審査会審査順(gridソート順);
@@ -619,7 +619,7 @@ public class TaishouWaritsukeHandler {
                         = ShinsakaiWariateJohoMapperParameter.createSelectByKeyParam(
                                 div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(),
                                 new ShinseishoKanriNo(row.getShinseishoKanriNo()));
-                ShinsakaiWariateJoho shinsakaiWariateJoho = johoManager.get介護認定審査会割当情報(parameter);
+                ShinsakaiWariateJoho2 shinsakaiWariateJoho = johoManager.get介護認定審査会割当情報(parameter);
                 if (shinsakaiWariateJoho != null) {
                     johoManager.saveOrDeletePhysicalBy介護認定審査会割当情報(shinsakaiWariateJoho.deleted());
                 }

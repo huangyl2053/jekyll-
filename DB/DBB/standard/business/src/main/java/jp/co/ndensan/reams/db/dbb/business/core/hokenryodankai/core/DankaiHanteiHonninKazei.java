@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core;
 
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.param.HokenryoDankaiHanteiParameter;
-import jp.co.ndensan.reams.db.dbz.definition.core.fuka.KazeiKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 
 /**
  * 段階判定_本人課税というクラスです。
@@ -16,7 +16,13 @@ class DankaiHanteiHonninKazei implements IHanteiHoho {
 
     @Override
     public boolean matches(HokenryoDankaiHanteiParameter hokenryoDankaiHanteiParameter) {
-        return hokenryoDankaiHanteiParameter.getFukaKonkyo().getHonninKazeiKubun().equals(KazeiKubun.valueOf("課税"));
+        if (!hokenryoDankaiHanteiParameter.getFukaKonkyo().getSetaiinKazeiKubunList().isEmpty()) {
+            for (KazeiKubun honninKazeiKubun : hokenryoDankaiHanteiParameter.getFukaKonkyo().getSetaiinKazeiKubunList()) {
+                if (KazeiKubun.課税.getコード().equals(honninKazeiKubun.getコード())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
-
 }

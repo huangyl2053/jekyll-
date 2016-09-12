@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- * 施設入退所異動Divのコントローラです。QA-1017確認中 王暁冬 2016/04/01
+ * 施設入退所異動Divのコントローラです。
  *
  * @reamsid_L DBA-0360-040 wangxiaodong
  */
@@ -84,24 +84,11 @@ public class ShisetsuNyutaishoIdo {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             div.getShisetsuNyutaishoRireki().getCcdShisetsuNyutaishoRirekiKanri().saveShisetsuNyutaisho();
             RealInitialLocker.release(前排他ロックキー);
-            div.getKaigoKanryoMessageOya().getCcdKaigoKanryoMessage().setSuccessMessage(
+            div.getKaigoKanryoMessagePanel().getCcdKaigoKanryoMessage().setSuccessMessage(
                     new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
             return ResponseData.of(div).setState(DBA2020011StateName.完了状態);
         }
         return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 完了」ボタンを押下します。
-     *
-     * @param div 施設入退所異動Div
-     * @return レスポンス
-     */
-    public ResponseData<ShisetsuNyutaishoIdoDiv> onClick_commonButtonUpdateDone(ShisetsuNyutaishoIdoDiv div) {
-
-        RealInitialLocker.release(前排他ロックキー);
-        onLoad(div);
-        return ResponseData.of(div).setState(DBA2020011StateName.初期状態);
     }
 
     private boolean is履歴期間重複(ShisetsuNyutaishoIdoDiv div) {

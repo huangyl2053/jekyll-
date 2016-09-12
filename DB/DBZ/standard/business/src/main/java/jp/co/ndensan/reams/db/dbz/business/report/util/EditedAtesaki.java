@@ -307,4 +307,13 @@ public class EditedAtesaki {
         }
         return 管内住所編集パターン;
     }
+
+    /**
+     * 管内管外区分を返します。
+     *
+     * @return 管内管外区分
+     */
+    public RString get管内管外区分() {
+        return 宛先.toEntity().getKannaiKangaiKubun();
+    }
 }

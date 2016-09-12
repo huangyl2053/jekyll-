@@ -13,21 +13,19 @@ import java.util.Set;
 import jp.co.ndensan.reams.db.dbe.business.core.gaikyotokkiyichirannyuroku.GaikyoTokkiYichiranNyurokuBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyotokkijiko.NinteichosahyoTokkijiko;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyotokkijiko.NinteichosahyoTokkijikoBuilder;
-import jp.co.ndensan.reams.db.dbe.definition.core.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.chosa.GenponMaskKubun;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.chosa.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210003.GaikyoTokkiYichiranNyurokuDiv;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosahyo.ninteichosahyotokkijiko.NinteichosahyoTokkijikoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomoku09B;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosajisshishajoho.ChosaJisshishaJohoModel;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.core.chosahyokomoku.NinteichosaKomoku09B;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaJisshishaJoho.ChosaJisshishaJoho.ChosaJisshishaJohoDiv;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -116,32 +114,18 @@ public class GaikyoTokkiYichiranNyurokuHandler {
 
     }
 
-    private enum DBE2210003Keys {
-
-        入力内容を取り消す用データ
-    }
-
     /**
      * 認定調査結果登録3初期化の設定します。
      *
+     * @param model ChosaJisshishaJohoModel
+     * @param temp_申請書管理番号 ShinseishoKanriNo
+     * @param temp_認定調査履歴番号 int
+     * @return HashMap<RString, GaikyoTokkiYichiranNyurokuBusiness>
      */
-    public void onLoad() {
-
-        ChosaJisshishaJohoModel model = new ChosaJisshishaJohoModel();
-        ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        RString 調査実施日 = ViewStateHolder.get(ViewStateKeys.調査実施日, RString.class);
-        RString 調査実施場所 = ViewStateHolder.get(ViewStateKeys.調査実施場所, RString.class);
-        RString 実施場所名称 = ViewStateHolder.get(ViewStateKeys.実施場所名称, RString.class);
-        RString 所属機関 = ViewStateHolder.get(ViewStateKeys.所属機関, RString.class);
-        RString 記入者 = ViewStateHolder.get(ViewStateKeys.記入者, RString.class);
-        RString 調査区分 = ViewStateHolder.get(ViewStateKeys.調査区分, RString.class);
-        model.set調査実施日(調査実施日);
-        model.set調査実施場所(調査実施場所);
-        model.set実施場所名称(実施場所名称);
-        model.set所属機関(所属機関);
-        model.set記入者(記入者);
-        model.set調査区分(調査区分);
-        model.set申請書管理番号(temp_申請書管理番号.getColumnValue());
+    public HashMap<RString, GaikyoTokkiYichiranNyurokuBusiness> onLoad(
+            ChosaJisshishaJohoModel model,
+            ShinseishoKanriNo temp_申請書管理番号,
+            int temp_認定調査履歴番号) {
 
         div.getChosaTaisho().getCcdNinteiShinseishaKihonInfo().initialize(temp_申請書管理番号);
         div.getChosaTaisho().getCcdNinteiShinseiRenrakusakiKihon().initialize(temp_申請書管理番号);
@@ -149,7 +133,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
         div.getCcdChosaJisshishaJoho().intialize(model);
 
         当前ページ数 = 1;
-        this.set各特記事項基本情報();
+        this.set各特記事項基本情報(temp_申請書管理番号, temp_認定調査履歴番号);
 
         this.set初期化活性制御();
 
@@ -166,7 +150,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
         div.getTokkiNyuryoku()
                 .setHiddenGaikyoTokkiNyurokuMap(DataPassingConverter.serialize(gaikyoTokkiNyurokuMap));
 
-        ViewStateHolder.put(DBE2210003Keys.入力内容を取り消す用データ, gaikyoTokkiNyurokuMap);
+        return gaikyoTokkiNyurokuMap;
     }
 
     /**
@@ -282,6 +266,8 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             div.getTokkiNyuryoku().getTblSecondTokkiJiko().setDisabled(false);
             div.getTokkiNyuryoku().getTxtSecondChosaKomokuNo().setDisabled(false);
             div.getTokkiNyuryoku().getTxtSecondTokkiJiko().setDisabled(false);
+            div.getTokkiNyuryoku().getTxtSecondTokkiRenban().setDisabled(true);
+            div.getTokkiNyuryoku().getTxtSecondTokkiJikoMeisho().setDisabled(true);
             div.getTokkiNyuryoku().getBtnSecondTokkiJikoTeikeibun().setDisabled(false);
 
             GaikyoTokkiYichiranNyurokuBusiness entity = new GaikyoTokkiYichiranNyurokuBusiness();
@@ -297,6 +283,8 @@ public class GaikyoTokkiYichiranNyurokuHandler {
                     setTemp_認定調査特記事項連番(new RString(div.getTokkiNyuryoku().getTxtFirstTokkiRenban().getValue().toString()));
             entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
                     setTemp_特記事項名称(div.getTokkiNyuryoku().getTxtFirstChosaKomokuMeisho().getValue());
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_特記事項(div.getTokkiNyuryoku().getTxtFirstTokkiJiko().getValue());
             gaikyoTokkiNyurokuMap.put(key1, entity);
         } else {
             gaikyoTokkiNyurokuMap.get(key1).getGaikyoTokkiYichiranNyurokuRelateEntity().
@@ -304,7 +292,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             gaikyoTokkiNyurokuMap.get(key1).getGaikyoTokkiYichiranNyurokuRelateEntity().
                     setTemp_認定調査特記事項連番(new RString(div.getTokkiNyuryoku().getTxtFirstTokkiRenban().getValue().toString()));
             gaikyoTokkiNyurokuMap.get(key1).getGaikyoTokkiYichiranNyurokuRelateEntity().
-                    setTemp_特記事項(div.getTokkiNyuryoku().getTxtFirstChosaKomokuMeisho().getValue());
+                    setTemp_特記事項名称(div.getTokkiNyuryoku().getTxtFirstChosaKomokuMeisho().getValue());
         }
 
         div.getTokkiNyuryoku()
@@ -344,6 +332,8 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             div.getTokkiNyuryoku().getTblThirdTokkiJiko().setDisabled(false);
             div.getTokkiNyuryoku().getTxtThirdChosaKomokuNo().setDisabled(false);
             div.getTokkiNyuryoku().getTxtThirdTokkiJiko().setDisabled(false);
+            div.getTokkiNyuryoku().getTxtThirdTokkiRenban().setDisabled(true);
+            div.getTokkiNyuryoku().getTxtThirdTokkiJikoMeisho().setDisabled(true);
             div.getTokkiNyuryoku().getBtnThirdTokkiJikoTeikeibun().setDisabled(false);
 
             GaikyoTokkiYichiranNyurokuBusiness entity = new GaikyoTokkiYichiranNyurokuBusiness();
@@ -359,6 +349,8 @@ public class GaikyoTokkiYichiranNyurokuHandler {
                     setTemp_認定調査特記事項連番(new RString(div.getTokkiNyuryoku().getTxtSecondTokkiRenban().getValue().toString()));
             entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
                     setTemp_特記事項名称(div.getTokkiNyuryoku().getTxtSecondTokkiJikoMeisho().getValue());
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_特記事項(div.getTokkiNyuryoku().getTxtSecondTokkiJiko().getValue());
             gaikyoTokkiNyurokuMap.put(key2, entity);
         } else {
             gaikyoTokkiNyurokuMap.get(key2).getGaikyoTokkiYichiranNyurokuRelateEntity().
@@ -366,7 +358,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             gaikyoTokkiNyurokuMap.get(key2).getGaikyoTokkiYichiranNyurokuRelateEntity().
                     setTemp_認定調査特記事項連番(new RString(div.getTokkiNyuryoku().getTxtSecondTokkiRenban().getValue().toString()));
             gaikyoTokkiNyurokuMap.get(key2).getGaikyoTokkiYichiranNyurokuRelateEntity().
-                    setTemp_特記事項(div.getTokkiNyuryoku().getTxtSecondTokkiJikoMeisho().getValue());
+                    setTemp_特記事項名称(div.getTokkiNyuryoku().getTxtSecondTokkiJikoMeisho().getValue());
         }
 
         div.getTokkiNyuryoku()
@@ -407,6 +399,8 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             div.getTokkiNyuryoku().getTblFourthTokkiJiko().setDisabled(false);
             div.getTokkiNyuryoku().getTxtFourthChosaKomokuNo().setDisabled(false);
             div.getTokkiNyuryoku().getTxtFourthTokkiJiko().setDisabled(false);
+            div.getTokkiNyuryoku().getTxtFourthTokkiRenban().setDisabled(true);
+            div.getTokkiNyuryoku().getTxtFourthTokkiJikoMeisho().setDisabled(true);
             div.getTokkiNyuryoku().getBtnFourthTokkiJikoTeikeibun().setDisabled(false);
 
             GaikyoTokkiYichiranNyurokuBusiness entity = new GaikyoTokkiYichiranNyurokuBusiness();
@@ -422,6 +416,8 @@ public class GaikyoTokkiYichiranNyurokuHandler {
                     setTemp_認定調査特記事項連番(new RString(div.getTokkiNyuryoku().getTxtThirdTokkiRenban().getValue().toString()));
             entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
                     setTemp_特記事項名称(div.getTokkiNyuryoku().getTxtThirdTokkiJikoMeisho().getValue());
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_特記事項(div.getTokkiNyuryoku().getTxtThirdTokkiJiko().getValue());
             gaikyoTokkiNyurokuMap.put(key3, entity);
         } else {
             gaikyoTokkiNyurokuMap.get(key3).getGaikyoTokkiYichiranNyurokuRelateEntity().
@@ -429,7 +425,7 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             gaikyoTokkiNyurokuMap.get(key3).getGaikyoTokkiYichiranNyurokuRelateEntity().
                     setTemp_認定調査特記事項連番(new RString(div.getTokkiNyuryoku().getTxtThirdTokkiRenban().getValue().toString()));
             gaikyoTokkiNyurokuMap.get(key3).getGaikyoTokkiYichiranNyurokuRelateEntity().
-                    setTemp_特記事項(div.getTokkiNyuryoku().getTxtThirdTokkiJikoMeisho().getValue());
+                    setTemp_特記事項名称(div.getTokkiNyuryoku().getTxtThirdTokkiJikoMeisho().getValue());
         }
 
         div.getTokkiNyuryoku()
@@ -470,6 +466,8 @@ public class GaikyoTokkiYichiranNyurokuHandler {
             div.getTokkiNyuryoku().getTblFifthTokkiJiko().setDisabled(false);
             div.getTokkiNyuryoku().getTxtFifthChosaKomokuNo().setDisabled(false);
             div.getTokkiNyuryoku().getTxtFifthTokkiJiko().setDisabled(false);
+            div.getTokkiNyuryoku().getTxtFifthTokkiRenban().setDisabled(true);
+            div.getTokkiNyuryoku().getTxtFifthTokkiJikoMeisho().setDisabled(true);
             div.getTokkiNyuryoku().getBtnFifthTokkiJikoTeikeibun().setDisabled(false);
 
             GaikyoTokkiYichiranNyurokuBusiness entity = new GaikyoTokkiYichiranNyurokuBusiness();
@@ -484,6 +482,8 @@ public class GaikyoTokkiYichiranNyurokuHandler {
                     setTemp_認定調査特記事項連番(new RString(div.getTokkiNyuryoku().getTxtFourthTokkiRenban().getValue().toString()));
             entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
                     setTemp_特記事項名称(div.getTokkiNyuryoku().getTxtFourthTokkiJikoMeisho().getValue());
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_特記事項(div.getTokkiNyuryoku().getTxtFourthTokkiJiko().getValue());
             gaikyoTokkiNyurokuMap.put(key4, entity);
         } else {
             gaikyoTokkiNyurokuMap.get(key4).getGaikyoTokkiYichiranNyurokuRelateEntity().
@@ -543,6 +543,8 @@ public class GaikyoTokkiYichiranNyurokuHandler {
                     setTemp_認定調査特記事項連番(new RString(div.getTokkiNyuryoku().getTxtFifthTokkiRenban().getValue().toString()));
             entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
                     setTemp_特記事項名称(div.getTokkiNyuryoku().getTxtFifthTokkiJikoMeisho().getValue());
+            entity.getGaikyoTokkiYichiranNyurokuRelateEntity().
+                    setTemp_特記事項(div.getTokkiNyuryoku().getTxtFifthTokkiJiko().getValue());
             gaikyoTokkiNyurokuMap.put(key5, entity);
         } else {
             gaikyoTokkiNyurokuMap.get(key5).getGaikyoTokkiYichiranNyurokuRelateEntity().
@@ -560,19 +562,18 @@ public class GaikyoTokkiYichiranNyurokuHandler {
     /**
      * 「特記事項を保存する」ボタンの操作処理を行う。
      *
+     * @param temp_申請書管理番号 temp_申請書管理番号
+     * @param temp_認定調査履歴番号 temp_認定調査履歴番号
      */
-    public void onClick_Save() {
+    public void onClick_Save(ShinseishoKanriNo temp_申請書管理番号, int temp_認定調査履歴番号) {
 
         NinteichosahyoTokkijikoManager manager = InstanceProvider.create(NinteichosahyoTokkijikoManager.class);
 
         gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);
 
-        ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
-
         Set<Entry<RString, GaikyoTokkiYichiranNyurokuBusiness>> set = gaikyoTokkiNyurokuMap.entrySet();
         Iterator<Entry<RString, GaikyoTokkiYichiranNyurokuBusiness>> it = set.iterator();
-        RString 認定調査特記事項番号 = RString.EMPTY;
+        RString 認定調査特記事項番号;
 
         while (it.hasNext()) {
             Entry<RString, GaikyoTokkiYichiranNyurokuBusiness> entry = it.next();
@@ -622,10 +623,9 @@ public class GaikyoTokkiYichiranNyurokuHandler {
     /**
      * 「入力内容を取り消し」ボタンの操作処理を行う。
      *
+     * @param gaikyoTokkiNyurokuMap HashMap<RString, GaikyoTokkiYichiranNyurokuBusiness>
      */
-    public void onClick_btnCancel() {
-
-        gaikyoTokkiNyurokuMap = ViewStateHolder.get(DBE2210003Keys.入力内容を取り消す用データ, HashMap.class);
+    public void onClick_btnCancel(HashMap<RString, GaikyoTokkiYichiranNyurokuBusiness> gaikyoTokkiNyurokuMap) {
 
         当前ページ数 = 1;
 
@@ -648,12 +648,9 @@ public class GaikyoTokkiYichiranNyurokuHandler {
      * 各特記事項基本情報を設定します。
      *
      */
-    private void set各特記事項基本情報() {
+    private void set各特記事項基本情報(ShinseishoKanriNo temp_申請書管理番号, int temp_認定調査履歴番号) {
 
         NinteichosahyoTokkijikoManager manager = InstanceProvider.create(NinteichosahyoTokkijikoManager.class);
-
-        ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
 
         List<NinteichosahyoTokkijiko> returnList = manager.get認定調査票_特記情報(temp_申請書管理番号, temp_認定調査履歴番号);
 
@@ -834,6 +831,9 @@ public class GaikyoTokkiYichiranNyurokuHandler {
     public void tokkiJikoHasChanged(int record, RString 特記事項) {
 
         gaikyoTokkiNyurokuMap = DataPassingConverter.deserialize(div.getTokkiNyuryoku().getHiddenGaikyoTokkiNyurokuMap(), HashMap.class);
+        if (gaikyoTokkiNyurokuMap == null || gaikyoTokkiNyurokuMap.isEmpty()) {
+            return;
+        }
         当前ページ数 = Integer.valueOf(div.getTokkiNyuryoku().getHiddenPageNo().toString());
         RString key = new RString(String.valueOf(当前ページ数).concat(String.valueOf(record)));
 

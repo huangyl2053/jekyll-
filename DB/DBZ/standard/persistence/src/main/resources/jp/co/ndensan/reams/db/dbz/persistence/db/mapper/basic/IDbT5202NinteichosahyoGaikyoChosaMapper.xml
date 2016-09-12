@@ -82,7 +82,7 @@
         <result property="tokkijikoJuryoYMD" column="dbT5202NinteichosahyoGaikyoChosa_tokkijikoJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
 
-    <select id="getEntity" resultMap="ResultMap_DbT5202NinteichosahyoGaikyoChosaEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5202NinteichosahyoGaikyoChosaEntity">
         <!--SELECT
         <include refid="allColumns_DbT5202NinteichosahyoGaikyoChosa"/>
         FROM

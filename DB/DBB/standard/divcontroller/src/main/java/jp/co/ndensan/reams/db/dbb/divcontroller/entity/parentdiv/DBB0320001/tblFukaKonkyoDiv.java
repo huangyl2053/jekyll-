@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  */
 public class tblFukaKonkyoDiv extends TablePanel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -188,7 +188,7 @@ public class tblFukaKonkyoDiv extends TablePanel {
  */
 class celFukaKonkyoAttblFukaKonkyo extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("tblFukakonkyoMeisai")
     private tblFukakonkyoMeisaiDiv tblFukakonkyoMeisai;
     @JsonProperty("lblDamy")
@@ -300,7 +300,7 @@ class celFukaKonkyoAttblFukaKonkyo extends TableCell {
  */
 class celKiwariAttblFukaKonkyo extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("ccdKiwarigaku")
     private KiwarigakuDiv ccdKiwarigaku;
 
@@ -323,7 +323,7 @@ class celKiwariAttblFukaKonkyo extends TableCell {
  */
 class celKikanAttblFukaKonkyo extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("Kikan")
     private KikanDiv Kikan;
     @JsonProperty("FukakonkyoNengaku")
@@ -375,7 +375,7 @@ class celKikanAttblFukaKonkyo extends TableCell {
  */
 class celChoteiJiyuAttblFukaKonkyo extends TableCell {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("txtFukashokaiChoteiJiyu1")
     private TextBox txtFukashokaiChoteiJiyu1;
     @JsonProperty("txtFukashokaiChoteiJiyu2")

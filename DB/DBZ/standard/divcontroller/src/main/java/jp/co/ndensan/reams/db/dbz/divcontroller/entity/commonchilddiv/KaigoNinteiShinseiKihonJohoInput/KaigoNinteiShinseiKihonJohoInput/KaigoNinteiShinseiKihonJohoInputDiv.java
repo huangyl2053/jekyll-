@@ -4,7 +4,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNint
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -14,15 +13,30 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShishoCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 
 /**
  * KaigoNinteiShinseiKihonJohoInput のクラスファイル
  *
- * @reamsid_L DBE-1300-070 wangxiaodong
+ * @reamsid_L DBZ-1300-070 wangxiaodong
  */
 public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigoNinteiShinseiKihonJohoInputDiv {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -402,16 +416,6 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
     @JsonProperty("modes")
     private HashSet<Mode> modes;
 
-    @Override
-    public void setInputMode(RString inputType) {
-        this.setMode_InputType(InputType.getEnum(inputType.toString()));
-    }
-
-    @Override
-    public void initialize() {
-        getHandler(this).initialize();
-    }
-
     public static enum InputType implements ICommonChildDivMode {
 
         AllInputMode("AllInputMode"),
@@ -439,7 +443,7 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
             InputType[] enumArray = InputType.values();
 
             for (InputType enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -454,11 +458,11 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
     }
 
     public InputType getMode_InputType() {
-        return (InputType) _CommonChildDivModeUtil.getMode(this.modes, InputType.class);
+        return (InputType) _CommonChildDivModeUtil.getMode( this.modes, InputType.class );
     }
 
-    public void setMode_InputType(InputType value) {
-        _CommonChildDivModeUtil.setMode(this.modes, InputType.class, value);
+    public void setMode_InputType( InputType value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, InputType.class , value );
     }
 
     /*
@@ -470,7 +474,7 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
     }
 
     @JsonIgnore
-    public void setBtnServiceSakujoTeikeibun(ButtonDialog btnServiceSakujoTeikeibun) {
+    public void  setBtnServiceSakujoTeikeibun(ButtonDialog btnServiceSakujoTeikeibun) {
         this.getServiceSakujo().setBtnServiceSakujoTeikeibun(btnServiceSakujoTeikeibun);
     }
 
@@ -480,7 +484,7 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
     }
 
     @JsonIgnore
-    public void setTxtServiceSakujo(TextBoxMultiLine txtServiceSakujo) {
+    public void  setTxtServiceSakujo(TextBoxMultiLine txtServiceSakujo) {
         this.getServiceSakujo().setTxtServiceSakujo(txtServiceSakujo);
     }
 
@@ -490,7 +494,7 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
     }
 
     @JsonIgnore
-    public void setBtnNinteiShinseiRiyuTeikeibun(ButtonDialog btnNinteiShinseiRiyuTeikeibun) {
+    public void  setBtnNinteiShinseiRiyuTeikeibun(ButtonDialog btnNinteiShinseiRiyuTeikeibun) {
         this.getNinteiShinseiRiyu().setBtnNinteiShinseiRiyuTeikeibun(btnNinteiShinseiRiyuTeikeibun);
     }
 
@@ -500,12 +504,99 @@ public class KaigoNinteiShinseiKihonJohoInputDiv extends Panel implements IKaigo
     }
 
     @JsonIgnore
-    public void setTxtNinteiShinseRiyu(TextBoxMultiLine txtNinteiShinseRiyu) {
+    public void  setTxtNinteiShinseRiyu(TextBoxMultiLine txtNinteiShinseRiyu) {
         this.getNinteiShinseiRiyu().setTxtNinteiShinseRiyu(txtNinteiShinseRiyu);
     }
 
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
+    @Override
+    public void setInputMode(RString inputType) {
+        this.setMode_InputType(InputType.getEnum(inputType.toString()));
+    }
+
+    @Override
+    public void initialize() {
+        getHandler(this).initialize();
+    }
+
+    @Override
+    public KaigoNinteiShinseiKihonJohoInputDiv getKaigoNinteiShinseiKihonJohoInputDiv() {
+        return this;
+    }
+
+    @Override
+    public void setRadShinseishoKubun(RString selectKey) {
+        this.getRadShinseishoKubun().setSelectedKey(selectKey);
+    }
+
+    @Override
+    public void setTxtShinseiJokyo(RString value) {
+        this.getTxtShinseiJokyo().setValue(value);
+    }
+
+    @Override
+    public void setTxtShinseiYMD(RDate value) {
+        this.getTxtShinseiYMD().setValue(value);
+    }
+
+    @Override
+    public void setShinseiShubetsu(JukyuShinseiJiyu value) {
+        this.getDdlShinseiShubetsu().setSelectedKey(value.getコード());
+    }
+
+    @Override
+    public void setShinseiKubunShinseiji(NinteiShinseiShinseijiKubunCode value) {
+        this.getDdlShinseiKubunShinseiji().setSelectedKey(value.getコード());
+    }
+
+    @Override
+    public void setShinseiKubunHorei(NinteiShinseiHoreiCode value) {
+        this.getDdlShinseiKubunHorei().setSelectedKey(value.getコード());
+    }
+
+    @Override
+    public void setShisho(ShishoCode shishoCode) {
+        this.getDdlShisho().setSelectedKey(shishoCode.value());
+    }
+
+    @Override
+    public void setKyuSochisha(List<RString> selectedKeys) {
+        this.getChkKyuSochisha().setSelectedItemsByKey(selectedKeys);
+    }
+
+    @Override
+    public void setHihokenshaKubun(HihokenshaKubunCode value) {
+        this.getDdlHihokenshaKubun().setSelectedKey(value.getコード());
+    }
+
+    @Override
+    public void setChkShikakuShutokuMae(List<RString> selectedKeys) {
+        this.getChkShikakuShutokuMae().setSelectedItemsByKey(selectedKeys);
+    }
+
+    @Override
+    public void setTokuteiShippei(TokuteiShippei value) {
+        this.getDdlTokuteiShippei().setSelectedKey(value.getコード());
+    }
+
+    @Override
+    public void setServiceSakujoTeikeibun(RString teikeibun) {
+        this.getTxtServiceSakujo().setValue(teikeibun);
+        this.setHdnServiceSakujoTeikeibun(teikeibun);
+    }
+
+    @Override
+    public void setNinteiShinseRiyuTeikeibun(RString teikeibun) {
+        this.getTxtNinteiShinseRiyu().setValue(teikeibun);
+        this.setHdnNinteiRiyuTeikeibun(teikeibun);
+    }
+
+    @Override
+    public void setRequiredForDdlTokuteiShippei(boolean isRequired) {
+        this.getDdlTokuteiShippei().setRequired(isRequired);
+    }
+
     private KaigoNinteiShinseiKihonJohoInputHandler getHandler(KaigoNinteiShinseiKihonJohoInputDiv div) {
         return new KaigoNinteiShinseiKihonJohoInputHandler(div);
     }

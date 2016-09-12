@@ -49,7 +49,7 @@
         <result property="ninchishoNichijoSeikatsuJiritsudoCode" column="dbT5203NinteichosahyoKihonChosa_ninchishoNichijoSeikatsuJiritsudoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="shogaiNichijoSeikatsuJiritsudoCode" column="dbT5203NinteichosahyoKihonChosa_shogaiNichijoSeikatsuJiritsudoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
     </resultMap>
-    <select id="getEntity" resultMap="ResultMap_DbT5203NinteichosahyoKihonChosaEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5203NinteichosahyoKihonChosaEntity">
         <!--SELECT
         <include refid="allColumns_DbT5203NinteichosahyoKihonChosa"/>
         FROM

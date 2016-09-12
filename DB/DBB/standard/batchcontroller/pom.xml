@@ -20,6 +20,10 @@
             <artifactId>DbbEntity</artifactId>
         </dependency>
         <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbb</groupId>
+            <artifactId>DbbBusiness</artifactId>
+        </dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbbDefinition</artifactId>
         </dependency>
@@ -30,6 +34,12 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbbService</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>UrzBatchController</artifactId>
+                    <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- DBX -->
         <dependency>
@@ -42,6 +52,10 @@
             <artifactId>DbzBatchController</artifactId>
         </dependency>
         <!-- 公開系 -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ue.uex</groupId>
+            <artifactId>UexBatchController</artifactId>
+        </dependency>
         <!-- テスト -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
@@ -51,11 +65,23 @@
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzPersistence</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzPersistence</artifactId>
+        </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ca.cax</groupId>
             <artifactId>CaxBusiness</artifactId>
             <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ca.cax</groupId>
+            <artifactId>CaxBatchController</artifactId>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urz</groupId>
+            <artifactId>UrzBatchController</artifactId>
         </dependency>
     </dependencies>
 

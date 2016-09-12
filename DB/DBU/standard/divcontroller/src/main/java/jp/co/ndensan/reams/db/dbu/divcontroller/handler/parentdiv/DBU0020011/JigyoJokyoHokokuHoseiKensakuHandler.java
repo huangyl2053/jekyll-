@@ -13,14 +13,12 @@ import jp.co.ndensan.reams.db.dbu.business.core.jigyohokokugeppohoseihako.Shicho
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020011.JigyoJokyoHokokuHoseiKensakuDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0020011.dgHoseitaishoYoshiki_Row;
 import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.JigyoHokokuGeppoParameter;
-import jp.co.ndensan.reams.db.dbu.divcontroller.viewbox.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.JigyohokokuGeppoHoseiHyoji;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.JigyohokokuGeppoHoseiHyoji;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 事業報告（月報）補正発行検索。
@@ -100,9 +98,10 @@ public final class JigyoJokyoHokokuHoseiKensakuHandler {
     /**
      * ParameterをViewStateに書き込みます。
      *
-     * @param 状態 状態
+     * @param map Map
+     * @return 事業報告基本
      */
-    public void putViewStateHolder(RString 状態) {
+    public JigyoHokokuGeppoParameter putViewStateHolder(Map<RString, ShichosonCodeResult> map) {
         dgHoseitaishoYoshiki_Row row = div.getHoseitaishoYoshikiIchiran().getDgHoseitaishoYoshiki().getClickedItem();
         JigyoHokokuGeppoParameter parameter = new JigyoHokokuGeppoParameter();
         parameter.set行報告年(new RString(row.getTxtHokokuYM().getValue().seireki().getYear().toString()));
@@ -125,12 +124,10 @@ public final class JigyoJokyoHokokuHoseiKensakuHandler {
             parameter.set市町村名称(市町村.get(1));
             parameter.set選択した市町村コード(市町村.get(0));
             LasdecCode 市町村コード = new LasdecCode(市町村.get(0));
-            Map<RString, ShichosonCodeResult> map = ViewStateHolder.get(ViewStateKeys.市町村Entiyリスト, Map.class);
             ShichosonCodeResult codeResult = map.get(市町村コード.value());
             parameter.set保険者コード(codeResult.get保険者コード());
         }
-        ViewStateHolder.put(ViewStateKeys.事業報告基本, parameter);
-        ViewStateHolder.put(ViewStateKeys.状態, 状態);
+        return parameter;
     }
 
     /**
@@ -191,34 +188,34 @@ public final class JigyoJokyoHokokuHoseiKensakuHandler {
         if ((JigyohokokuGeppoHoseiHyoji.保険者_要介護_要支援_認定者数.getコード()).equals(hdnYoshikiCode)
                 || JigyohokokuGeppoHoseiHyoji.保険者_現物分_居宅介護_介護予防_サービス受給者数.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.保険者_償還_審査年月__居宅介護_介護予防_サービス受給者数.getコード()
+                || JigyohokokuGeppoHoseiHyoji.保険者_償還_審査年月_居宅介護_介護予防_サービス受給者数.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.保険者_償還_決定年月__居宅介護_介護予防_サービス受給者数.getコード()
+                || JigyohokokuGeppoHoseiHyoji.保険者_償還_決定年月_居宅介護_介護予防_サービス受給者数.getコード()
                 .equals(hdnYoshikiCode)
                 || JigyohokokuGeppoHoseiHyoji.保険者_現物分_地域密着型_介護予防_サービス受給者数.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.保険者_償還_審査年月__地域密着型_介護予防_サービス受給者数.getコード()
+                || JigyohokokuGeppoHoseiHyoji.保険者_償還_審査年月_地域密着型_介護予防_サービス受給者数.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.保険者_償還_決定年月__地域密着型_介護予防_サービス受給者数.getコード()
+                || JigyohokokuGeppoHoseiHyoji.保険者_償還_決定年月_地域密着型_介護予防_サービス受給者数.getコード()
                 .equals(hdnYoshikiCode)
                 || JigyohokokuGeppoHoseiHyoji.保険者_現物分_施設介護サービス受給者数.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.保険者_償還_審査年月__施設介護サービス受給者数.getコード()
+                || JigyohokokuGeppoHoseiHyoji.保険者_償還_審査年月_施設介護サービス受給者数.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.保険者_償還_決定年月__施設介護サービス受給者数.getコード()
+                || JigyohokokuGeppoHoseiHyoji.保険者_償還_決定年月_施設介護サービス受給者数.getコード()
                 .equals(hdnYoshikiCode)
                 || JigyohokokuGeppoHoseiHyoji.構成市町村_要介護_要支援_認定者数.getコード().equals(hdnYoshikiCode)
                 || JigyohokokuGeppoHoseiHyoji.構成市町村_現物分_居宅介護_介護予防_サービス受給者数.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_審査年月__居宅介護_介護予防_サービス受給者数.getコード()
+                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_審査年月_居宅介護_介護予防_サービス受給者数.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_決定年月__居宅介護_介護予防_サービス受給者数.getコード()
+                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_決定年月_居宅介護_介護予防_サービス受給者数.getコード()
                 .equals(hdnYoshikiCode)
                 || JigyohokokuGeppoHoseiHyoji.構成市町村_現物分_地域密着型_介護予防_サービス受給者数.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_審査年月__地域密着型_介護予防_サービス受給者数.getコード()
+                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_審査年月_地域密着型_介護予防_サービス受給者数.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_決定年月__地域密着型_介護予防_サービス受給者数.getコード()
+                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_決定年月_地域密着型_介護予防_サービス受給者数.getコード()
                 .equals(hdnYoshikiCode)
                 || JigyohokokuGeppoHoseiHyoji.構成市町村_現物分_施設介護サービス受給者数.getコード()
                 .equals(hdnYoshikiCode)) {
@@ -234,28 +231,28 @@ public final class JigyoJokyoHokokuHoseiKensakuHandler {
      * @return 画面2の様式種類の1
      */
     public RString 画面2の様式種類の1(RString hdnYoshikiCode) {
-        if (JigyohokokuGeppoHoseiHyoji.構成市町村_償還_審査年月__施設介護サービス受給者数.getコード()
+        if (JigyohokokuGeppoHoseiHyoji.構成市町村_償還_審査年月_施設介護サービス受給者数.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_決定年月__施設介護サービス受給者数.getコード()
+                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_決定年月_施設介護サービス受給者数.getコード()
                 .equals(hdnYoshikiCode)
                 || JigyohokokuGeppoHoseiHyoji.旧市町村_要介護_要支援_認定者数.getコード().equals(hdnYoshikiCode)
                 || JigyohokokuGeppoHoseiHyoji.旧市町村_現物分_居宅介護_介護予防_サービス受給者数.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_審査年月__居宅介護_介護予防_サービス受給者数.getコード()
+                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_審査年月_居宅介護_介護予防_サービス受給者数.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_決定年月__居宅介護_介護予防_サービス受給者数.getコード()
+                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_決定年月_居宅介護_介護予防_サービス受給者数.getコード()
                 .equals(hdnYoshikiCode)
                 || JigyohokokuGeppoHoseiHyoji.旧市町村_現物分_地域密着型_介護予防_サービス受給者数.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_審査年月__地域密着型_介護予防_サービス受給者数.getコード()
+                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_審査年月_地域密着型_介護予防_サービス受給者数.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_決定年月__地域密着型_介護予防_サービス受給者数.getコード()
+                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_決定年月_地域密着型_介護予防_サービス受給者数.getコード()
                 .equals(hdnYoshikiCode)
                 || JigyohokokuGeppoHoseiHyoji.旧市町村_現物分_施設介護サービス受給者数.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_審査年月__施設介護サービス受給者数.getコード()
+                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_審査年月_施設介護サービス受給者数.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_決定年月__施設介護サービス受給者数.getコード()
+                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_決定年月_施設介護サービス受給者数.getコード()
                 .equals(hdnYoshikiCode)) {
             return 画面の様式種類_2;
         }
@@ -277,21 +274,21 @@ public final class JigyoJokyoHokokuHoseiKensakuHandler {
                 .equals(hdnYoshikiCode)
                 || JigyohokokuGeppoHoseiHyoji.保険者_現物分_介護給付_予防給付4第２号被保険者分_再掲_特例分.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.保険者_償還_審査年月__介護給付_予防給付1総数.getコード()
+                || JigyohokokuGeppoHoseiHyoji.保険者_償還_審査年月_介護給付_予防給付1総数.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.保険者_償還_審査年月__介護給付_予防給付2第２号被保険者分_再掲.getコード()
+                || JigyohokokuGeppoHoseiHyoji.保険者_償還_審査年月_介護給付_予防給付2第２号被保険者分_再掲.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.保険者_償還_審査年月__介護給付_予防給付3総数特例分.getコード()
+                || JigyohokokuGeppoHoseiHyoji.保険者_償還_審査年月_介護給付_予防給付3総数特例分.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.保険者_償還_審査年月__介護給付_予防給付4第２号被保険者分_再掲_特例分.getコード()
+                || JigyohokokuGeppoHoseiHyoji.保険者_償還_審査年月_介護給付_予防給付4第２号被保険者分_再掲_特例分.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.保険者_償還_決定年月__介護給付_予防給付1総数.getコード()
+                || JigyohokokuGeppoHoseiHyoji.保険者_償還_決定年月_介護給付_予防給付1総数.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.保険者_償還_決定年月__介護給付_予防給付2第２号被保険者分_再掲.getコード()
+                || JigyohokokuGeppoHoseiHyoji.保険者_償還_決定年月_介護給付_予防給付2第２号被保険者分_再掲.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.保険者_償還_決定年月__介護給付_予防給付3総数特例分.getコード()
+                || JigyohokokuGeppoHoseiHyoji.保険者_償還_決定年月_介護給付_予防給付3総数特例分.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.保険者_償還_決定年月__介護給付_予防給付4第２号被保険者分_再掲_特例分.getコード()
+                || JigyohokokuGeppoHoseiHyoji.保険者_償還_決定年月_介護給付_予防給付4第２号被保険者分_再掲_特例分.getコード()
                 .equals(hdnYoshikiCode)
                 || JigyohokokuGeppoHoseiHyoji.構成市町村_現物分_介護給付_予防給付1総数.getコード()
                 .equals(hdnYoshikiCode)
@@ -301,9 +298,9 @@ public final class JigyoJokyoHokokuHoseiKensakuHandler {
                 .equals(hdnYoshikiCode)
                 || JigyohokokuGeppoHoseiHyoji.構成市町村_現物分_介護給付_予防給付4第２号被保険者分_再掲_特例分.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_審査年月__介護給付_予防給付1総数.getコード()
+                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_審査年月_介護給付_予防給付1総数.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_審査年月__介護給付_予防給付2第２号被保険者分_再掲.getコード()
+                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_審査年月_介護給付_予防給付2第２号被保険者分_再掲.getコード()
                 .equals(hdnYoshikiCode)) {
             return 画面の様式種類_3;
         }
@@ -317,17 +314,17 @@ public final class JigyoJokyoHokokuHoseiKensakuHandler {
      * @return 画面3の様式種類の1
      */
     public RString 画面3の様式種類の1(RString hdnYoshikiCode) {
-        if (JigyohokokuGeppoHoseiHyoji.構成市町村_償還_審査年月__介護給付_予防給付3総数特例分.getコード()
+        if (JigyohokokuGeppoHoseiHyoji.構成市町村_償還_審査年月_介護給付_予防給付3総数特例分.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_審査年月__介護給付_予防給付4第２号被保険者分_再掲_特例分.getコード()
+                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_審査年月_介護給付_予防給付4第２号被保険者分_再掲_特例分.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_決定年月__介護給付_予防給付1総数.getコード()
+                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_決定年月_介護給付_予防給付1総数.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_決定年月__介護給付_予防給付2第２号被保険者分_再掲.getコード()
+                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_決定年月_介護給付_予防給付2第２号被保険者分_再掲.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_決定年月__介護給付_予防給付3総数特例分.getコード()
+                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_決定年月_介護給付_予防給付3総数特例分.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_決定年月__介護給付_予防給付4第２号被保険者分_再掲_特例分.getコード()
+                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_決定年月_介護給付_予防給付4第２号被保険者分_再掲_特例分.getコード()
                 .equals(hdnYoshikiCode)
                 || JigyohokokuGeppoHoseiHyoji.旧市町村_現物分_介護給付_予防給付1総数.getコード()
                 .equals(hdnYoshikiCode)
@@ -337,21 +334,21 @@ public final class JigyoJokyoHokokuHoseiKensakuHandler {
                 .equals(hdnYoshikiCode)
                 || JigyohokokuGeppoHoseiHyoji.旧市町村_現物分_介護給付_予防給付4第２号被保険者分_再掲_特例分.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_審査年月__介護給付_予防給付1総数.getコード()
+                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_審査年月_介護給付_予防給付1総数.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_審査年月__介護給付_予防給付2第２号被保険者分_再掲.getコード()
+                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_審査年月_介護給付_予防給付2第２号被保険者分_再掲.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_審査年月__介護給付_予防給付3総数特例分.getコード()
+                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_審査年月_介護給付_予防給付3総数特例分.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_審査年月__介護給付_予防給付4第２号被保険者分_再掲_特例分.getコード()
+                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_審査年月_介護給付_予防給付4第２号被保険者分_再掲_特例分.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_決定年月__介護給付_予防給付1総数.getコード()
+                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_決定年月_介護給付_予防給付1総数.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_決定年月__介護給付_予防給付2第２号被保険者分_再掲.getコード()
+                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_決定年月_介護給付_予防給付2第２号被保険者分_再掲.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_決定年月__介護給付_予防給付3総数特例分.getコード()
+                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_決定年月_介護給付_予防給付3総数特例分.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_決定年月__介護給付_予防給付4第２号被保険者分_再掲_特例分.getコード()
+                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_決定年月_介護給付_予防給付4第２号被保険者分_再掲_特例分.getコード()
                 .equals(hdnYoshikiCode)) {
             return 画面の様式種類_3;
         }
@@ -369,37 +366,37 @@ public final class JigyoJokyoHokokuHoseiKensakuHandler {
                 .equals(hdnYoshikiCode)
                 || JigyohokokuGeppoHoseiHyoji.保険者_現物分_特定入所者介護_介護予防_サービス費2第２号被保険者分.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.保険者_償還_審査年月__特定入所者介護_介護予防_サービス費1総数.getコード()
+                || JigyohokokuGeppoHoseiHyoji.保険者_償還_審査年月_特定入所者介護_介護予防_サービス費1総数.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.保険者_償還_審査年月__特定入所者介護_介護予防_サービス費2第２号被保険者分.getコード()
+                || JigyohokokuGeppoHoseiHyoji.保険者_償還_審査年月_特定入所者介護_介護予防_サービス費2第２号被保険者分.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.保険者_償還_決定年月__特定入所者介護_介護予防_サービス費1総数.getコード()
+                || JigyohokokuGeppoHoseiHyoji.保険者_償還_決定年月_特定入所者介護_介護予防_サービス費1総数.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.保険者_償還_決定年月__特定入所者介護_介護予防_サービス費2第２号被保険者分.getコード()
+                || JigyohokokuGeppoHoseiHyoji.保険者_償還_決定年月_特定入所者介護_介護予防_サービス費2第２号被保険者分.getコード()
                 .equals(hdnYoshikiCode)
                 || JigyohokokuGeppoHoseiHyoji.構成市町村_現物分_特定入所者介護_介護予防_サービス費1総数.getコード()
                 .equals(hdnYoshikiCode)
                 || JigyohokokuGeppoHoseiHyoji.構成市町村_現物分_特定入所者介護_介護予防_サービス費2第２号被保険者分.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_審査年月__特定入所者介護_介護予防_サービス費1総数.getコード()
+                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_審査年月_特定入所者介護_介護予防_サービス費1総数.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_審査年月__特定入所者介護_介護予防_サービス費2第２号被保険者分.getコード()
+                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_審査年月_特定入所者介護_介護予防_サービス費2第２号被保険者分.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_決定年月__特定入所者介護_介護予防_サービス費1総数.getコード()
+                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_決定年月_特定入所者介護_介護予防_サービス費1総数.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_決定年月__特定入所者介護_介護予防_サービス費2第２号被保険者分.getコード()
+                || JigyohokokuGeppoHoseiHyoji.構成市町村_償還_決定年月_特定入所者介護_介護予防_サービス費2第２号被保険者分.getコード()
                 .equals(hdnYoshikiCode)
                 || JigyohokokuGeppoHoseiHyoji.旧市町村_現物分_特定入所者介護_介護予防_サービス費1総数.getコード()
                 .equals(hdnYoshikiCode)
                 || JigyohokokuGeppoHoseiHyoji.旧市町村_現物分_特定入所者介護_介護予防_サービス費2第２号被保険者分.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_審査年月__特定入所者介護_介護予防_サービス費1総数.getコード()
+                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_審査年月_特定入所者介護_介護予防_サービス費1総数.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_審査年月__特定入所者介護_介護予防_サービス費2第２号被保険者分.getコード()
+                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_審査年月_特定入所者介護_介護予防_サービス費2第２号被保険者分.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_決定年月__特定入所者介護_介護予防_サービス費1総数.getコード()
+                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_決定年月_特定入所者介護_介護予防_サービス費1総数.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_決定年月__特定入所者介護_介護予防_サービス費2第２号被保険者分.getコード()
+                || JigyohokokuGeppoHoseiHyoji.旧市町村_償還_決定年月_特定入所者介護_介護予防_サービス費2第２号被保険者分.getコード()
                 .equals(hdnYoshikiCode)) {
             return 画面の様式種類_4;
         }
@@ -438,10 +435,10 @@ public final class JigyoJokyoHokokuHoseiKensakuHandler {
                 || JigyohokokuGeppoHoseiHyoji.旧市町村_高額医療合算介護_介護予防_サービス費.getコード()
                 .equals(hdnYoshikiCode)) {
             return 画面の様式種類_6;
-        } else if ((JigyohokokuGeppoHoseiHyoji.保険者__別紙_第１号被保険者のいる世帯.getコード()).equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.構成市町村__別紙_第１号被保険者のいる世帯.getコード()
+        } else if ((JigyohokokuGeppoHoseiHyoji.保険者_別紙_第１号被保険者のいる世帯.getコード()).equals(hdnYoshikiCode)
+                || JigyohokokuGeppoHoseiHyoji.構成市町村_別紙_第１号被保険者のいる世帯.getコード()
                 .equals(hdnYoshikiCode)
-                || JigyohokokuGeppoHoseiHyoji.旧市町村__別紙_第１号被保険者のいる世帯.getコード()
+                || JigyohokokuGeppoHoseiHyoji.旧市町村_別紙_第１号被保険者のいる世帯.getコード()
                 .equals(hdnYoshikiCode)) {
             return 画面の様式種類_7;
         } else if ((JigyohokokuGeppoHoseiHyoji.保険者_第１号被保険者数_第１号被保険者増減内訳.getコード())

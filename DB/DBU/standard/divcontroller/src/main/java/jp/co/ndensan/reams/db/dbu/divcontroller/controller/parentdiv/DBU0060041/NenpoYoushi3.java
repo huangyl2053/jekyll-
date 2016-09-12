@@ -9,15 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiData;
 import jp.co.ndensan.reams.db.dbu.business.core.basic.JigyoHokokuTokeiDataIdentifier;
-import jp.co.ndensan.reams.db.dbu.definition.core.nenpoyoushi3.NenpoYoushi3ViewStateKeys;
 import jp.co.ndensan.reams.db.dbu.definition.core.zigyouhoukokunenpou.ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity;
-import jp.co.ndensan.reams.db.dbu.definition.enumeratedtype.DbuViewStateKey;
-import jp.co.ndensan.reams.db.dbu.definition.jigyohokokunenpo.SearchJigyoHokokuNenpo;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokunenpo.SearchJigyoHokokuNenpo;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060041.DBU0060041StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060041.DBU0060041TransitionEventName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0060041.NenpoYoushi3Div;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0060041.NenpoYoushi3Handler;
 import jp.co.ndensan.reams.db.dbu.service.core.jigyohokokunenpo.JigyoHokokuNenpoHoseiHakoManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -25,8 +24,8 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
@@ -52,8 +51,8 @@ public class NenpoYoushi3 {
     private FlexibleYear 集計対象年;
     private LasdecCode 市町村コード;
     private RString 様式種類コード;
-    private FlexibleDate 報告年度;
-    private FlexibleDate 集計年度;
+    private RDate 報告年度;
+    private RDate 集計年度;
     private RString 保険者コード;
     private RString 保険者名称;
     private RString 補正フラグ;
@@ -66,9 +65,9 @@ public class NenpoYoushi3 {
      */
     public ResponseData<NenpoYoushi3Div> onLoad(NenpoYoushi3Div div) {
         ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity entity
-                = ViewStateHolder.get(DbuViewStateKey.補正検索画面情報, ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity.class);
-        報告年度 = new FlexibleDate(entity.get画面報告年度());
-        集計年度 = new FlexibleDate(entity.get画面集計年度());
+                = ViewStateHolder.get(ViewStateKeys.補正検索画面情報, ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity.class);
+        報告年度 = new RDate(entity.get画面報告年度().toString());
+        集計年度 = new RDate(entity.get画面集計年度().toString());
         保険者コード = entity.get保険者コード();
         保険者名称 = entity.get市町村名称();
         補正フラグ = entity.get補正フラグ();
@@ -114,7 +113,7 @@ public class NenpoYoushi3 {
      */
     public ResponseData<NenpoYoushi3Div> onClick_hozon(NenpoYoushi3Div div) {
         ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity entity
-                = ViewStateHolder.get(DbuViewStateKey.補正検索画面情報, ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity.class);
+                = ViewStateHolder.get(ViewStateKeys.補正検索画面情報, ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity.class);
 
         補正フラグ = entity.get補正フラグ();
         if (補正フラグ.equals(フラグ_修正)) {
@@ -137,24 +136,32 @@ public class NenpoYoushi3 {
             }
             return ResponseData.of(div).respond();
         } else if (補正フラグ.equals(フラグ_削除)) {
-            List<JigyoHokokuTokeiData> 事業報告集計一覧データリスト = new ArrayList<>();
-            Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 保険料収納状況データ
-                    = ViewStateHolder.get(NenpoYoushi3ViewStateKeys.保険料収納状況データ, Models.class);
-            for (JigyoHokokuTokeiData 保険料収納 : 保険料収納状況データ) {
-                事業報告集計一覧データリスト.add(保険料収納);
-            }
-            Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 保険給付支払状況データ = ViewStateHolder.
-                    get(NenpoYoushi3ViewStateKeys.保険給付支払状況データ, Models.class);
-            for (JigyoHokokuTokeiData 保険給付支払 : 保険給付支払状況データ) {
-                事業報告集計一覧データリスト.add(保険給付支払);
-            }
-            JigyoHokokuNenpoHoseiHakoManager.createInstance().deleteJigyoHokokuNenpoData(事業報告集計一覧データリスト);
+            JigyoHokokuNenpoHoseiHakoManager.createInstance().deleteJigyoHokokuNenpoData(del事業報告集計情報());
             div.getKanryoMessage().getCcdKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage()
                     .replace("削除").evaluate()),
                     RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBU0060041StateName.完了状態);
         }
         return ResponseData.of(div).respond();
+    }
+
+    private List<JigyoHokokuTokeiData> del事業報告集計情報() {
+        List<JigyoHokokuTokeiData> 事業報告集計一覧データリスト = new ArrayList<>();
+        Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 保険料収納状況データ
+                = ViewStateHolder.get(ViewStateKeys.保険料収納状況データ, Models.class);
+        if (保険料収納状況データ != null) {
+            for (JigyoHokokuTokeiData 件数 : 保険料収納状況データ) {
+                事業報告集計一覧データリスト.add(件数);
+            }
+        }
+        Models<JigyoHokokuTokeiDataIdentifier, JigyoHokokuTokeiData> 保険給付支払状況データ = ViewStateHolder.
+                get(ViewStateKeys.保険給付支払状況データ, Models.class);
+        if (保険給付支払状況データ != null) {
+            for (JigyoHokokuTokeiData 費用額 : 保険給付支払状況データ) {
+                事業報告集計一覧データリスト.add(費用額);
+            }
+        }
+        return 事業報告集計一覧データリスト;
     }
 
     /**
@@ -182,7 +189,7 @@ public class NenpoYoushi3 {
 
     private boolean get保険料収納状況データ(NenpoYoushi3Div div) {
         ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity entity
-                = ViewStateHolder.get(DbuViewStateKey.補正検索画面情報, ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity.class);
+                = ViewStateHolder.get(ViewStateKeys.補正検索画面情報, ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity.class);
         報告年 = new FlexibleYear(entity.get行報告年());
         集計対象年 = new FlexibleYear(entity.get行集計対象年());
         市町村コード = new LasdecCode(entity.get行市町村コード());
@@ -191,14 +198,14 @@ public class NenpoYoushi3 {
         SearchJigyoHokokuNenpo jigyoHokokuNenpoSearch = new SearchJigyoHokokuNenpo(報告年, 集計対象年, 市町村コード, 様式種類コード, 集計番号_0100);
         List<JigyoHokokuTokeiData> 事業報告集計一覧データリスト = JigyoHokokuNenpoHoseiHakoManager.createInstance().
                 getJigyoHokokuNenpoDetal(jigyoHokokuNenpoSearch).records();
-        ViewStateHolder.put(NenpoYoushi3ViewStateKeys.保険料収納状況データ, Models.create(事業報告集計一覧データリスト));
+        ViewStateHolder.put(ViewStateKeys.保険料収納状況データ, Models.create(事業報告集計一覧データリスト));
         getHandler(div).set保険料収納状況詳細データ(事業報告集計一覧データリスト);
         return !事業報告集計一覧データリスト.isEmpty();
     }
 
     private boolean get保険給付支払状況データ(NenpoYoushi3Div div) {
         ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity entity
-                = ViewStateHolder.get(DbuViewStateKey.補正検索画面情報, ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity.class);
+                = ViewStateHolder.get(ViewStateKeys.補正検索画面情報, ZigyouHoukokuNenpouHoseihakouKensakuRelateEntity.class);
         報告年 = new FlexibleYear(entity.get行報告年());
         集計対象年 = new FlexibleYear(entity.get行集計対象年());
         市町村コード = new LasdecCode(entity.get行市町村コード());
@@ -206,7 +213,7 @@ public class NenpoYoushi3 {
         SearchJigyoHokokuNenpo jigyoHokokuNenpoSearch = new SearchJigyoHokokuNenpo(報告年, 集計対象年, 市町村コード, 様式種類コード, 集計番号_0200);
         List<JigyoHokokuTokeiData> 事業報告集計一覧データリスト = JigyoHokokuNenpoHoseiHakoManager.createInstance().
                 getJigyoHokokuNenpoDetal(jigyoHokokuNenpoSearch).records();
-        ViewStateHolder.put(NenpoYoushi3ViewStateKeys.保険給付支払状況データ, Models.create(事業報告集計一覧データリスト));
+        ViewStateHolder.put(ViewStateKeys.保険給付支払状況データ, Models.create(事業報告集計一覧データリスト));
         getHandler(div).set保険給付支払状況詳細データ(事業報告集計一覧データリスト);
         return !事業報告集計一覧データリスト.isEmpty();
     }

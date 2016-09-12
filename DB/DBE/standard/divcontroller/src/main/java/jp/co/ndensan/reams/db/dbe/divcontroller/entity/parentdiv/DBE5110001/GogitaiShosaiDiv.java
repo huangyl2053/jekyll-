@@ -4,28 +4,18 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5110001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Space;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
 
 /**
- * GogitaiShosai のクラスファイル
- *
+ * GogitaiShosai のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class GogitaiShosaiDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -56,22 +46,20 @@ public class GogitaiShosaiDiv extends Panel {
     private RadioButton radSeishinkaiSonzai;
     @JsonProperty("radDummyFlag")
     private RadioButton radDummyFlag;
-    @JsonProperty("spSpace")
-    private Space spSpace;
-    @JsonProperty("lblShinsain")
-    private Label lblShinsain;
-    @JsonProperty("lblHoketsuShinsain")
-    private Label lblHoketsuShinsain;
+    @JsonProperty("lin1")
+    private HorizontalLine lin1;
+    @JsonProperty("GogitaiShinsakaiIinSentaku")
+    private GogitaiShinsakaiIinSentakuDiv GogitaiShinsakaiIinSentaku;
     @JsonProperty("dgShinsainList")
     private DataGrid<dgShinsainList_Row> dgShinsainList;
-    @JsonProperty("btnShinsainSelect")
-    private ButtonDialog btnShinsainSelect;
+    @JsonProperty("GogitaiVerticalLine1")
+    private GogitaiVerticalLine1Div GogitaiVerticalLine1;
+    @JsonProperty("GogitaiHoketsuIinSentaku")
+    private GogitaiHoketsuIinSentakuDiv GogitaiHoketsuIinSentaku;
     @JsonProperty("dgHoketsuShinsainList")
     private DataGrid<dgHoketsuShinsainList_Row> dgHoketsuShinsainList;
-    @JsonProperty("btnSubShinsainSelect")
-    private ButtonDialog btnSubShinsainSelect;
-    @JsonProperty("spSpace1")
-    private Space spSpace1;
+    @JsonProperty("lin3")
+    private HorizontalLine lin3;
     @JsonProperty("btnKosin")
     private Button btnKosin;
     @JsonProperty("btnback")
@@ -300,57 +288,39 @@ public class GogitaiShosaiDiv extends Panel {
     }
 
     /*
-     * getspSpace
-     * @return spSpace
+     * getlin1
+     * @return lin1
      */
-    @JsonProperty("spSpace")
-    public Space getSpSpace() {
-        return spSpace;
+    @JsonProperty("lin1")
+    public HorizontalLine getLin1() {
+        return lin1;
     }
 
     /*
-     * setspSpace
-     * @param spSpace spSpace
+     * setlin1
+     * @param lin1 lin1
      */
-    @JsonProperty("spSpace")
-    public void setSpSpace(Space spSpace) {
-        this.spSpace = spSpace;
+    @JsonProperty("lin1")
+    public void setLin1(HorizontalLine lin1) {
+        this.lin1 = lin1;
     }
 
     /*
-     * getlblShinsain
-     * @return lblShinsain
+     * getGogitaiShinsakaiIinSentaku
+     * @return GogitaiShinsakaiIinSentaku
      */
-    @JsonProperty("lblShinsain")
-    public Label getLblShinsain() {
-        return lblShinsain;
+    @JsonProperty("GogitaiShinsakaiIinSentaku")
+    public GogitaiShinsakaiIinSentakuDiv getGogitaiShinsakaiIinSentaku() {
+        return GogitaiShinsakaiIinSentaku;
     }
 
     /*
-     * setlblShinsain
-     * @param lblShinsain lblShinsain
+     * setGogitaiShinsakaiIinSentaku
+     * @param GogitaiShinsakaiIinSentaku GogitaiShinsakaiIinSentaku
      */
-    @JsonProperty("lblShinsain")
-    public void setLblShinsain(Label lblShinsain) {
-        this.lblShinsain = lblShinsain;
-    }
-
-    /*
-     * getlblHoketsuShinsain
-     * @return lblHoketsuShinsain
-     */
-    @JsonProperty("lblHoketsuShinsain")
-    public Label getLblHoketsuShinsain() {
-        return lblHoketsuShinsain;
-    }
-
-    /*
-     * setlblHoketsuShinsain
-     * @param lblHoketsuShinsain lblHoketsuShinsain
-     */
-    @JsonProperty("lblHoketsuShinsain")
-    public void setLblHoketsuShinsain(Label lblHoketsuShinsain) {
-        this.lblHoketsuShinsain = lblHoketsuShinsain;
+    @JsonProperty("GogitaiShinsakaiIinSentaku")
+    public void setGogitaiShinsakaiIinSentaku(GogitaiShinsakaiIinSentakuDiv GogitaiShinsakaiIinSentaku) {
+        this.GogitaiShinsakaiIinSentaku = GogitaiShinsakaiIinSentaku;
     }
 
     /*
@@ -372,21 +342,39 @@ public class GogitaiShosaiDiv extends Panel {
     }
 
     /*
-     * getbtnShinsainSelect
-     * @return btnShinsainSelect
+     * getGogitaiVerticalLine1
+     * @return GogitaiVerticalLine1
      */
-    @JsonProperty("btnShinsainSelect")
-    public ButtonDialog getBtnShinsainSelect() {
-        return btnShinsainSelect;
+    @JsonProperty("GogitaiVerticalLine1")
+    public GogitaiVerticalLine1Div getGogitaiVerticalLine1() {
+        return GogitaiVerticalLine1;
     }
 
     /*
-     * setbtnShinsainSelect
-     * @param btnShinsainSelect btnShinsainSelect
+     * setGogitaiVerticalLine1
+     * @param GogitaiVerticalLine1 GogitaiVerticalLine1
      */
-    @JsonProperty("btnShinsainSelect")
-    public void setBtnShinsainSelect(ButtonDialog btnShinsainSelect) {
-        this.btnShinsainSelect = btnShinsainSelect;
+    @JsonProperty("GogitaiVerticalLine1")
+    public void setGogitaiVerticalLine1(GogitaiVerticalLine1Div GogitaiVerticalLine1) {
+        this.GogitaiVerticalLine1 = GogitaiVerticalLine1;
+    }
+
+    /*
+     * getGogitaiHoketsuIinSentaku
+     * @return GogitaiHoketsuIinSentaku
+     */
+    @JsonProperty("GogitaiHoketsuIinSentaku")
+    public GogitaiHoketsuIinSentakuDiv getGogitaiHoketsuIinSentaku() {
+        return GogitaiHoketsuIinSentaku;
+    }
+
+    /*
+     * setGogitaiHoketsuIinSentaku
+     * @param GogitaiHoketsuIinSentaku GogitaiHoketsuIinSentaku
+     */
+    @JsonProperty("GogitaiHoketsuIinSentaku")
+    public void setGogitaiHoketsuIinSentaku(GogitaiHoketsuIinSentakuDiv GogitaiHoketsuIinSentaku) {
+        this.GogitaiHoketsuIinSentaku = GogitaiHoketsuIinSentaku;
     }
 
     /*
@@ -408,39 +396,21 @@ public class GogitaiShosaiDiv extends Panel {
     }
 
     /*
-     * getbtnSubShinsainSelect
-     * @return btnSubShinsainSelect
+     * getlin3
+     * @return lin3
      */
-    @JsonProperty("btnSubShinsainSelect")
-    public ButtonDialog getBtnSubShinsainSelect() {
-        return btnSubShinsainSelect;
+    @JsonProperty("lin3")
+    public HorizontalLine getLin3() {
+        return lin3;
     }
 
     /*
-     * setbtnSubShinsainSelect
-     * @param btnSubShinsainSelect btnSubShinsainSelect
+     * setlin3
+     * @param lin3 lin3
      */
-    @JsonProperty("btnSubShinsainSelect")
-    public void setBtnSubShinsainSelect(ButtonDialog btnSubShinsainSelect) {
-        this.btnSubShinsainSelect = btnSubShinsainSelect;
-    }
-
-    /*
-     * getspSpace1
-     * @return spSpace1
-     */
-    @JsonProperty("spSpace1")
-    public Space getSpSpace1() {
-        return spSpace1;
-    }
-
-    /*
-     * setspSpace1
-     * @param spSpace1 spSpace1
-     */
-    @JsonProperty("spSpace1")
-    public void setSpSpace1(Space spSpace1) {
-        this.spSpace1 = spSpace1;
+    @JsonProperty("lin3")
+    public void setLin3(HorizontalLine lin3) {
+        this.lin3 = lin3;
     }
 
     /*
@@ -477,6 +447,59 @@ public class GogitaiShosaiDiv extends Panel {
     @JsonProperty("btnback")
     public void setBtnback(Button btnback) {
         this.btnback = btnback;
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public Label getLblShinsain() {
+        return this.getGogitaiShinsakaiIinSentaku().getLblShinsain();
+    }
+
+    @JsonIgnore
+    public void  setLblShinsain(Label lblShinsain) {
+        this.getGogitaiShinsakaiIinSentaku().setLblShinsain(lblShinsain);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnShinsainSelect() {
+        return this.getGogitaiShinsakaiIinSentaku().getBtnShinsainSelect();
+    }
+
+    @JsonIgnore
+    public void  setBtnShinsainSelect(ButtonDialog btnShinsainSelect) {
+        this.getGogitaiShinsakaiIinSentaku().setBtnShinsainSelect(btnShinsainSelect);
+    }
+
+    @JsonIgnore
+    public VerticalLine getLin2() {
+        return this.getGogitaiVerticalLine1().getLin2();
+    }
+
+    @JsonIgnore
+    public void  setLin2(VerticalLine lin2) {
+        this.getGogitaiVerticalLine1().setLin2(lin2);
+    }
+
+    @JsonIgnore
+    public Label getLblHoketsuShinsain() {
+        return this.getGogitaiHoketsuIinSentaku().getLblHoketsuShinsain();
+    }
+
+    @JsonIgnore
+    public void  setLblHoketsuShinsain(Label lblHoketsuShinsain) {
+        this.getGogitaiHoketsuIinSentaku().setLblHoketsuShinsain(lblHoketsuShinsain);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnSubShinsainSelect() {
+        return this.getGogitaiHoketsuIinSentaku().getBtnSubShinsainSelect();
+    }
+
+    @JsonIgnore
+    public void  setBtnSubShinsainSelect(ButtonDialog btnSubShinsainSelect) {
+        this.getGogitaiHoketsuIinSentaku().setBtnSubShinsainSelect(btnSubShinsainSelect);
     }
 
     // </editor-fold>

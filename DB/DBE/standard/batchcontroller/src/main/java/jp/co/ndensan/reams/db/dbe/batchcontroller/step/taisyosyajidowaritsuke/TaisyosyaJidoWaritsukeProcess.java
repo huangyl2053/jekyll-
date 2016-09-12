@@ -8,6 +8,8 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.taisyosyajidowaritsuke.Taisyo
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.taisyosyajidowaritsuke.ITaisyosyaJidoWaritsukeRelateMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5502ShinsakaiWariateJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -107,8 +109,8 @@ public class TaisyosyaJidoWaritsukeProcess extends SimpleBatchProcessBase {
                 対象者.getShinseishoKanriNo().value(),
                 要介護認定申請情報.getNinteiChosaItakusakiCode(),
                 要介護認定申請情報.getNinteiChosainCode(),
-                要介護認定申請情報.getShujiiIryokikanCode().value(),
-                要介護認定申請情報.getShujiiCode().value(),
+                get主治医医療機関コード(要介護認定申請情報.getShujiiIryokikanCode()),
+                get主治医コード(要介護認定申請情報.getShujiiCode()),
                 要介護認定申請情報.getNyushoShisetsuCode(),
                 オブザーバー_機関.equals(DbBusinessConfig.get(
                                 ConfigNameDBE.オブザーバーチェック, RDate.getNowDate(), SubGyomuCode.DBE認定支援)));
@@ -132,5 +134,19 @@ public class TaisyosyaJidoWaritsukeProcess extends SimpleBatchProcessBase {
     private PersonalData toPersonalData(RString 開催番号, RString 申請書管理番号) {
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), 開催番号, 申請書管理番号);
         return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
+    }
+
+    private RString get主治医医療機関コード(ShujiiIryokikanCode 主治医医療機関コード) {
+        if (主治医医療機関コード == null) {
+            return RString.EMPTY;
+        }
+        return 主治医医療機関コード.value();
+    }
+
+    private RString get主治医コード(ShujiiCode 主治医コード) {
+        if (主治医コード == null) {
+            return RString.EMPTY;
+        }
+        return 主治医コード.value();
     }
 }

@@ -5,8 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core;
 
-import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiServiceCategory;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.ServiceCategory;
+import jp.co.ndensan.reams.db.dbc.definition.core.servicecategory.ServiceCategory;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

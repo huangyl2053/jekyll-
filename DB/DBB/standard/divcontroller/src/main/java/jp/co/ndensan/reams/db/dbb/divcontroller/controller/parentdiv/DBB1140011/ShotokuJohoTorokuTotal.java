@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1140011.DBB1
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1140011.ShotokuJohoTorokuTotalDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1140011.ShotokuJohoTorokuHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1140011.ShotokuJohoTorokuValidationHandler;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -38,7 +38,8 @@ public class ShotokuJohoTorokuTotal {
      * @return div
      */
     public ResponseData<ShotokuJohoTorokuTotalDiv> onLoad(ShotokuJohoTorokuTotalDiv div) {
-        getHandler(div).onload();
+        FukaTaishoshaKey viewStateData = ViewStateHolder.get(ViewStateKeys.賦課対象者, FukaTaishoshaKey.class);
+        getHandler(div).onload(viewStateData);
         return ResponseData.of(div).respond();
     }
 
@@ -49,7 +50,7 @@ public class ShotokuJohoTorokuTotal {
      * @return 所得照会回答内容登録情報Divを持つResponseData
      */
     public ResponseData<ShotokuJohoTorokuTotalDiv> onClick_btnSaiHyoji(ShotokuJohoTorokuTotalDiv div) {
-        FukaTaishoshaKey viewStateData = ViewStateHolder.get(ViewStateKey.賦課対象者, FukaTaishoshaKey.class);
+        FukaTaishoshaKey viewStateData = ViewStateHolder.get(ViewStateKeys.賦課対象者, FukaTaishoshaKey.class);
         ShikibetsuCode 識別コード = viewStateData.get識別コード();
         RDate kazeiNendo = new RDate(div.getSetaiShotokuInfo().getDdlSetaiIchiranKazeiNendo().getSelectedValue().toString());
         FlexibleYear 所得年度 = new FlexibleYear(kazeiNendo.getYear().toString());
@@ -105,7 +106,7 @@ public class ShotokuJohoTorokuTotal {
      * @return 所得照会回答内容登録Divを持つResponseData
      */
     public ResponseData<ShotokuJohoTorokuTotalDiv> onClick_chkSetaiIchiranAll(ShotokuJohoTorokuTotalDiv div) {
-        FukaTaishoshaKey viewStateData = ViewStateHolder.get(ViewStateKey.賦課対象者, FukaTaishoshaKey.class);
+        FukaTaishoshaKey viewStateData = ViewStateHolder.get(ViewStateKeys.賦課対象者, FukaTaishoshaKey.class);
         ShikibetsuCode 識別コード = viewStateData.get識別コード();
         RString 所得Year = div.getDdlSetaiIchiranKazeiNendo().getSelectedValue();
         FlexibleYear 所得年度 = new FlexibleYear(new RDate(所得Year.toString()).getYear().toString());
@@ -126,7 +127,7 @@ public class ShotokuJohoTorokuTotal {
      */
     public ResponseData<ShotokuJohoTorokuTotalDiv> onClick_btnSave(ShotokuJohoTorokuTotalDiv div) {
         boolean success = getHandler(div).save世帯登録();
-        FukaTaishoshaKey viewStateData = ViewStateHolder.get(ViewStateKey.賦課対象者, FukaTaishoshaKey.class);
+        FukaTaishoshaKey viewStateData = ViewStateHolder.get(ViewStateKeys.賦課対象者, FukaTaishoshaKey.class);
         ShikibetsuCode 識別コード = viewStateData.get識別コード();
         RString 氏名又は名称 = div.getAtenaInfo().getKaigoAtenaInfo().get氏名漢字();
         div.getKanryoMessage().getCcdKaigoKanryoMessage().setMessage(処理名, 識別コード.value(), 氏名又は名称, success);

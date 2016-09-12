@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-3560-011 xuyue -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.jukyushokai.IJukyushaShokaiMapper">
+
+    <resultMap id="resultMap_申請情報の取得" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.jukyushokai.JukyuShokaiShinseiEntity" autoMapping="true">
+        <id column="dbT4001JukyushaDaicho_shichosonCode" />
+        <id column="dbT4001JukyushaDaicho_hihokenshaNo" />
+        <id column="dbT4001JukyushaDaicho_rirekiNo" />
+        <id column="dbT4001JukyushaDaicho_edaban"/>
+        <id column="dbT4001JukyushaDaicho_jukyuShinseiJiyu" />
+        <association property="受給者台帳Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.ResultMap_DbT4001JukyushaDaichoEntity"/>
+        <association property="要介護認定インターフェース情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4003YokaigoNinteiInterfaceMapper.ResultMap_DbT4003YokaigoNinteiInterfaceEntity"/>
+    </resultMap>
+
+    <select resultOrdered="true" id="find申請情報" resultMap="resultMap_申請情報の取得" fetchSize="500">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.allColumns_DbT4001JukyushaDaicho" />,
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4003YokaigoNinteiInterfaceMapper.allColumns_DbT4003YokaigoNinteiInterface" />
+        FROM
+        rgdb."DbT4001JukyushaDaicho" as "DbT4001JukyushaDaicho"
+        LEFT JOIN
+        rgdb."DbT4003YokaigoNinteiInterface" as "DbT4003YokaigoNinteiInterface"
+        ON
+        "DbT4001JukyushaDaicho"."shinseishoKanriNo" = "DbT4003YokaigoNinteiInterface"."shinseishoKanriNo"
+        AND "DbT4003YokaigoNinteiInterface"."keshikomiFlag" = '1'
+        WHERE
+        "DbT4001JukyushaDaicho"."hihokenshaNo" = #{被保険者番号}  AND
+        (
+        "DbT4001JukyushaDaicho"."logicalDeletedFlag" = false OR
+        ("DbT4001JukyushaDaicho"."logicalDeletedFlag" = true  AND
+        ("DbT4001JukyushaDaicho"."sakujoJiyuCode" != '' OR "DbT4001JukyushaDaicho"."sakujoJiyuCode" != #{削除事由コード})
+        )
+        )
+    </select>
+
+    <select resultOrdered="true" id="find申請認定情報"
+            resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.jukyushokai.JukyuShokaiShinseiNinteiEntity" fetchSize="500">
+        WITH 処理対象 AS (
+        SELECT
+        *
+        FROM
+        rgdb."DbT4001JukyushaDaicho" AS "Dbt4001"
+        WHERE
+        "Dbt4001"."shichosonCode" = #{市町村コード}
+        AND "Dbt4001"."rirekiNo" =  #{履歴番号}
+        AND "Dbt4001".edaban  =  #{枝番}
+        AND "Dbt4001"."jukyuShinseiJiyu" = #{受給申請事由}
+        )
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.allColumns_DbT4001JukyushaDaicho" />,
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho" />,
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5120ShinseitodokedeJohoMapper.allColumns_DbT5120ShinseitodokedeJoho" />,
+        "DbT5911ShujiiIryoKikanJoho"."iryoKikanMeisho" AS 医療機関名称,
+        "DbT5912ShujiiJoho"."shujiiName" AS 主治医氏名,
+        "DbT5912ShujiiJoho"."shiteiiFlag" AS 指定医フラグ,
+        "前回認定情報"."申請書管理番号" AS 申請書管理番号,
+        "前回認定情報"."前回要介護状態区分コード" AS 前回要介護状態区分コード,
+        "前回認定情報"."前回認定年月日" AS 前回認定年月日,
+        "前回認定情報"."前回有効期間開始" AS 前回有効期間開始,
+        "前回認定情報"."前回有効期間終了" AS 前回有効期間終了,
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4003YokaigoNinteiInterfaceMapper.allColumns_DbT4003YokaigoNinteiInterface" />,
+        "資格者証交付情報".*
+        FROM
+        処理対象 as "DbT4001JukyushaDaicho"
+        LEFT JOIN
+        rgdb."DbT5101NinteiShinseiJoho" as "DbT5101NinteiShinseiJoho"
+        ON
+        "DbT4001JukyushaDaicho"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
+        LEFT JOIN
+        rgdb."DbT5120ShinseitodokedeJoho" as "DbT5120ShinseitodokedeJoho"
+        ON
+        "DbT5120ShinseitodokedeJoho"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
+        LEFT JOIN
+        rgdb."DbT5121ShinseiRirekiJoho" as "DbT5121ShinseiRirekiJoho"
+        ON
+        "DbT5121ShinseiRirekiJoho"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
+        LEFT JOIN
+        rgdb."DbT5911ShujiiIryoKikanJoho" as "DbT5911ShujiiIryoKikanJoho"
+        ON
+        "DbT5911ShujiiIryoKikanJoho"."shichosonCode" = "DbT4001JukyushaDaicho"."shichosonCode"
+        AND "DbT5911ShujiiIryoKikanJoho"."shujiiIryokikanCode" = "DbT5101NinteiShinseiJoho"."shujiiIryokikanCode"
+        LEFT JOIN
+        rgdb."DbT5912ShujiiJoho" as "DbT5912ShujiiJoho"
+        ON "DbT5912ShujiiJoho"."shichosonCode" =  "DbT4001JukyushaDaicho"."shichosonCode"
+        AND "DbT5912ShujiiJoho"."shujiiIryokikanCode" = "DbT5101NinteiShinseiJoho"."shujiiIryokikanCode"
+        AND "DbT5912ShujiiJoho"."shujiiCode" = "DbT5101NinteiShinseiJoho"."shujiiCode"
+        LEFT JOIN
+        (
+        SELECT
+        A."shinseishoKanriNo" AS "申請書管理番号",
+        A."yokaigoJotaiKubunCode" AS "前回要介護状態区分コード",
+        A."ninteiYMD" AS "前回認定年月日",
+        A."ninteiYukoKikanKaishiYMD" AS "前回有効期間開始",
+        A."ninteiYukoKikanShuryoYMD" AS "前回有効期間終了"
+        FROM
+        rgdb."DbT4001JukyushaDaicho" AS A
+        ) as "前回認定情報"
+        ON
+        "前回認定情報"."申請書管理番号" = "DbT5121ShinseiRirekiJoho"."zenkaiShinseishoKanriNo"
+        LEFT JOIN
+        rgdb."DbT4003YokaigoNinteiInterface" as "DbT4003YokaigoNinteiInterface"
+        ON
+        "DbT4003YokaigoNinteiInterface"."shinseishoKanriNo" = "DbT4001JukyushaDaicho"."shinseishoKanriNo"
+        AND "DbT4003YokaigoNinteiInterface"."keshikomiFlag" = '1'
+        LEFT JOIN
+        (
+        SELECT *
+        FROM (
+        SELECT
+        "DbT7037ShoKofuKaishu"."hihokenshaNo" AS dbt7037_被保険者番号,
+        "DbT7037ShoKofuKaishu"."yukoKigenYMD" AS dbt7037_有効期限,
+        "DbT7037ShoKofuKaishu"."kofuYMD" AS dbt7037_交付年月日,
+        ROW_NUMBER() OVER(
+        PARTITION BY
+        "DbT7037ShoKofuKaishu"."hihokenshaNo",
+        "DbT7037ShoKofuKaishu"."kofuShoShurui"
+        ORDER BY "DbT7037ShoKofuKaishu"."kofuYMD" DESC
+        ) AS dbt7037_最近交付順
+        FROM  rgdb."DbT7037ShoKofuKaishu" AS "DbT7037ShoKofuKaishu"
+        INNER JOIN
+        処理対象 as "受給者台帳"
+        ON "受給者台帳"."hihokenshaNo" = "DbT7037ShoKofuKaishu"."hihokenshaNo"
+        WHERE
+        "DbT7037ShoKofuKaishu"."hihokenshaNo" = "受給者台帳"."hihokenshaNo"
+        AND "DbT7037ShoKofuKaishu"."kofuShoShurui" = '002'
+        AND "受給者台帳"."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> "DbT7037ShoKofuKaishu"."kofuYMD"
+        AND "DbT7037ShoKofuKaishu"."kofuYMD"<![CDATA[<=]]> "受給者台帳"."ninteiYukoKikanShuryoYMD"
+        ) AS "認定期間内資格者証交付実績"
+        WHERE
+        "認定期間内資格者証交付実績".dbt7037_最近交付順 = 1
+        ) AS "資格者証交付情報"
+        ON "資格者証交付情報".dbt7037_被保険者番号  =  "DbT4001JukyushaDaicho"."hihokenshaNo"
+    </select>
+
+    <select resultOrdered="true" id="get利用者負担割合" resultType="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3114RiyoshaFutanWariaiMeisaiEntity" fetchSize="500">
+        SELECT
+        A."nendo" AS "nendo",
+        A."futanWariaiKubun" AS "futanWariaiKubun",
+        A."yukoKaishiYMD" AS "yukoKaishiYMD",
+        A."yukoShuryoYMD" AS "yukoShuryoYMD"
+        FROM
+        rgdb."DbT3114RiyoshaFutanWariaiMeisai" AS A
+        INNER JOIN
+        (
+        SELECT
+        B."hihokenshaNo" AS "hihokenshaNo",
+        MAX(B.nendo || B."rirekiNo" || B."edaNo") AS key
+        FROM
+        rgdb."DbT3114RiyoshaFutanWariaiMeisai" AS B
+        WHERE
+        B."logicalDeletedFlag" = false
+        GROUP BY
+        B."hihokenshaNo"
+        ) AS C
+        ON A."hihokenshaNo" = C."hihokenshaNo"
+        AND (A.nendo || A."rirekiNo" || A."edaNo") = C.key
+        INNER JOIN
+        rgdb."DbT3113RiyoshaFutanWariai" AS D
+        ON
+        A."hihokenshaNo" = D."hihokenshaNo"
+        WHERE
+        A."hihokenshaNo" = #{被保険者番号}
+        AND D."logicalDeletedFlag" = false
+    </select>
+
+    <select resultOrdered="true" id ="findサービス受給状況"
+            resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.jukyushokai.ServiceJukyuJokyoEntity" fetchSize="500">
+        WITH key AS(
+        SELECT "shikibetsuCode" FROM rgdb."DbV1001HihokenshaDaicho" WHERE "hihokenshaNo" = #{被保険者番号}
+        )
+        SELECT
+        EXISTS ( SELECT 1 FROM rgdb."DbT4018KaigoHokenFutanGendogakuNintei" AS A WHERE A."hihokenshaNo" = #{被保険者番号})  AS had負担限度額認定 ,
+        EXISTS ( SELECT 1 FROM rgdb."DbT4014RiyoshaFutangakuGengaku" AS B WHERE B."hihokenshaNo" = #{被保険者番号} )  AS had利用者負担減免 ,
+        EXISTS ( SELECT 1 FROM rgdb."DbT4016HomonKaigoRiyoshaFutangakuGengaku" AS C WHERE C."hihokenshaNo" = #{被保険者番号} )  AS had訪問介護減免 ,
+        EXISTS ( SELECT 1 FROM rgdb."DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen" AS D WHERE D."hihokenshaNo" = #{被保険者番号} )  AS had社福軽減 ,
+        EXISTS ( SELECT 1 FROM rgdb."DbT4020TokubetsuchiikiKasanGemmen" AS E WHERE E."hihokenshaNo" = #{被保険者番号} )  AS had特地減免 ,
+        EXISTS ( SELECT 1 FROM rgdb."DbT1004ShisetsuNyutaisho" AS F INNER JOIN key ON key."shikibetsuCode" = F."shikibetsuCode" )  AS had施設入退所 ,
+        EXISTS ( SELECT 1 FROM rgdb."DbT7006RoreiFukushiNenkinJukyusha" AS G INNER JOIN key ON key."shikibetsuCode" = G."shikibetsuCode" )  AS had老齢受給 ,
+        EXISTS ( SELECT 1 FROM rgur."UrV0508SeikatsuHogoJukyusha" AS H INNER JOIN key ON key."shikibetsuCode" = H."shikibetsuCode" )  AS had生保受給 ,
+        EXISTS ( SELECT 1 FROM rgdb."DbT1008IryohokenKanyuJokyo" AS I INNER JOIN key ON key."shikibetsuCode" = I."shikibetsuCode" )  AS had医療保険加入 ,
+        EXISTS ( SELECT 1 FROM rgdb."DbT3005KyotakuKeikakuTodokede" AS J WHERE J."hihokenshaNo" = #{被保険者番号} )  AS had居宅届出 ,
+        EXISTS ( SELECT 1 FROM rgdb."DbT3105SogoJigyoTaishosha" AS K WHERE K."hihokenshaNo" = #{被保険者番号} )  AS hadBeen総合事業対象 ,
+        EXISTS ( SELECT 1 FROM rgdb."DbT4037HikazeNenkinTaishosha" AS L WHERE L."hihokenshano" = #{被保険者番号} )  AS had非課税年金受給
+    </select>
+
+</mapper>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-3560-120 wangjie2 -->
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.shisetsuidojoho.IShisetsuIdoJohoMapper">
+    <select id="get介護施設入退所情報" resultMap="resultMap_ShisetsuIdoJohoEntity"
+            parameterType="jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode"  fetchSize="500" resultOrdered="true">
+        SELECT A."nyushoYMD" AS 入所年月日,
+               A."taishoYMD" AS 退所年月日,
+               A."nyushoShisetsuShurui" AS 入所施設種類,
+               A."nyushoShisetsuCode" AS 入所施設コード,
+               CASE A."nyushoShisetsuShurui"
+               WHEN '11' THEN B."jigyoshaName"
+               ELSE C."jigyoshaMeisho"
+               END AS 事業者名称,
+               '' AS 転出先保険者番号
+        FROM rgdb."DbV1004HihokenshaShisetsuNyutaisho" AS A
+        LEFT JOIN (SELECT 介護事業者."jigyoshaNo",介護事業者."jigyoshaName"
+                   FROM rgdb."DbT7060KaigoJigyosha" AS 介護事業者
+                   WHERE NOT EXISTS(SELECT 1 FROM rgdb."DbT7060KaigoJigyosha" AS 介護事業者2
+                                    WHERE 介護事業者."jigyoshaNo" = 介護事業者2."jigyoshaNo"
+                                          AND 介護事業者."yukoKaishiYMD" <![CDATA[<]]> 介護事業者2."yukoKaishiYMD")
+                   ) AS B
+              ON B."jigyoshaNo" = A."nyushoShisetsuCode"
+        LEFT JOIN rgdb."DbV1005KaigoJogaiTokureiTaishoShisetsu" AS C
+              ON C."jigyoshaNo" = A."nyushoShisetsuCode"
+              AND C."jigyoshaShubetsu" = (CASE A."nyushoShisetsuShurui" WHEN '12' THEN '01' WHEN '21' THEN '02' ELSE NULL END)
+        WHERE A."shikibetsuCode" = #{識別コード}
+        ORDER BY A."nyushoYMD" DESC
+    </select>
+    <resultMap id="resultMap_ShisetsuIdoJohoEntity"
+               type="jp.co.ndensan.reams.db.dbd.entity.db.relate.shisetsuidojoho.ShisetsuIdoJohoEntity" autoMapping="true">
+        <result property="入所年月日" column="入所年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="退所年月日" column="退所年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+        <result property="入所施設種類" column="入所施設種類" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="入所施設コード" column="入所施設コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="事業者名称" column="事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="転出先保険者番号" column="転出先保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+    </resultMap>
+</mapper>

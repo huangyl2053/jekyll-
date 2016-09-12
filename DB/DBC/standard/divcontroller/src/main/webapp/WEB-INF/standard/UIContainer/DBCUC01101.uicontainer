@@ -1,11 +1,11 @@
 ﻿{
  "uiContainerName": "DBCUC01101",
  "displayWizard": false,
- "subGyomuCode": "DBC",
+ "subGyomuCode": "DBD",
  "steps": [
   {
    "id": 1,
-   "name": "居宅サービス計画作成依頼届出情報登録",
+   "name": "居宅サービス追加・計画作成依頼届出情報登録",
    "transitionList": [
     {
      "id": "1",

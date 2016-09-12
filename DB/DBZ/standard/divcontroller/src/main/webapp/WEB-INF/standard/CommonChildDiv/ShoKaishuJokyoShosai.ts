@@ -15,7 +15,7 @@ module DBZ
 
             public priorities(): Array {
                 return [
-                    "表示方法"
+                    "HyojiHoho"
                 ];
             }
 
@@ -28,14 +28,14 @@ module DBZ
             }
 
 
-            public 表示方法() {
-                return new Modes.表示方法(this.controls);
+            public HyojiHoho() {
+                return new Modes.HyojiHoho(this.controls);
             }
         }
 
         export module Modes {
 
-            export class 表示方法 {
+            export class HyojiHoho {
                 private controls: Controls;
 
                 constructor(controls: Controls) {

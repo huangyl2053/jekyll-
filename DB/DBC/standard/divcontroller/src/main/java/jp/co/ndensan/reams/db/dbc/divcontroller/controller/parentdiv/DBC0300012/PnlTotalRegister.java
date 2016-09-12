@@ -1,18 +1,23 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0300012;
 
+import jp.co.ndensan.reams.db.dbc.business.core.basic.JuryoininKeiyakuJigyosha;
+import jp.co.ndensan.reams.db.dbc.business.core.hokenjuryoininharaitoriatsukai.HokenJuryoIninHaraiToriatsukaiResult;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300012.DBC0300012StateName.deleted;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300012.DBC0300012StateName.saved;
 import static jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300012.DBC0300012TransitionEventName.検索に戻る;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0300012.PnlTotalRegisterDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0300012.PnlTotalRegisterHandler;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbc.service.report.jyuryoitakuatukaijigyoshatorokutsuchisho.JyuryoItakuAtukaiJigyoshaTorokuTsuchishoPrintService;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -33,12 +38,24 @@ public class PnlTotalRegister {
      * @return ResponseData
      */
     public ResponseData<PnlTotalRegisterDiv> onLoad(PnlTotalRegisterDiv div) {
-        ResponseData<PnlTotalRegisterDiv> responseData = new ResponseData<>();
         PnlTotalRegisterHandler handler = getHandler(div);
-        handler.set初期データ();
+        RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        if (処理モード == null) {
+            処理モード = 登録;
+            ViewStateHolder.put(ViewStateKeys.処理モード, 処理モード);
+        }
+        if (登録.equals(処理モード)) {
+            handler.set登録初期データ();
+            return ResponseData.of(div).respond();
+        }
+        JuryoininKeiyakuJigyosha data = ViewStateHolder
+                .get(ViewStateKeys.詳細データ, JuryoininKeiyakuJigyosha.class);
+        JuryoininKeiyakuJigyosha record = handler.getRecord(data);
+        ViewStateHolder.put(ViewStateKeys.詳細データ, record);
 
-        responseData.data = div;
-        return responseData;
+        handler.set初期データ(処理モード, record);
+
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -49,18 +66,22 @@ public class PnlTotalRegister {
      */
     public ResponseData<PnlTotalRegisterDiv> onClick_btnSave(PnlTotalRegisterDiv div) {
         PnlTotalRegisterHandler handler = getHandler(div);
-        RString states = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
-        if (削除.equals(states) || 登録.equals(states)) {
-            int result = handler.save画面データ();
-            handler.set保存完了(result);
-            if (削除.equals(states)) {
+        RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        JuryoininKeiyakuJigyosha data = ViewStateHolder
+                .get(ViewStateKeys.詳細データ, JuryoininKeiyakuJigyosha.class);
+        if (削除.equals(処理モード) || 登録.equals(処理モード)) {
+            int result = handler.save画面データ(処理モード, data);
+            handler.set保存完了(処理モード, result);
+            if (削除.equals(処理モード)) {
                 return ResponseData.of(div).setState(deleted);
             }
+            RString 契約事業者番号 = div.getPnlKeyakuJigyosya().getTxtJigyosyakeiyakuNo().getValue();
+            ViewStateHolder.put(ViewStateKeys.契約事業者番号, 契約事業者番号);
             return ResponseData.of(div).setState(saved);
         }
         boolean changeFlg = false;
         if (!ResponseHolder.isReRequest()) {
-            changeFlg = handler.has画面変更有無();
+            changeFlg = handler.has画面変更有無(処理モード, data);
         }
         if (!changeFlg) {
             if (!ResponseHolder.isReRequest()) {
@@ -71,8 +92,8 @@ public class PnlTotalRegister {
             }
             return ResponseData.of(div).respond();
         } else {
-            int result = handler.save画面データ();
-            handler.set保存完了(result);
+            int result = handler.save画面データ(処理モード, data);
+            handler.set保存完了(処理モード, result);
             return ResponseData.of(div).setState(saved);
         }
     }
@@ -85,7 +106,10 @@ public class PnlTotalRegister {
      */
     public ResponseData<PnlTotalRegisterDiv> onClick_btnCancel(PnlTotalRegisterDiv div) {
         PnlTotalRegisterHandler handler = getHandler(div);
-        boolean changeFlg = handler.has画面変更有無();
+        RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        JuryoininKeiyakuJigyosha data = ViewStateHolder
+                .get(ViewStateKeys.詳細データ, JuryoininKeiyakuJigyosha.class);
+        boolean changeFlg = handler.has画面変更有無(処理モード, data);
         if (changeFlg) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
@@ -114,6 +138,27 @@ public class PnlTotalRegister {
         PnlTotalRegisterHandler handler = getHandler(div);
         handler.copy画面データ();
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「発行する」ボタン
+     *
+     * @param div PnlTotalRegisterDiv
+     * @return ResponseData
+     */
+    public ResponseData<SourceDataCollection> onClick_btnReportPublish(PnlTotalRegisterDiv div) {
+        RString 処理モード = ViewStateHolder.get(ViewStateKeys.処理モード, RString.class);
+        RString 契約事業者番号;
+        if (登録.equals(処理モード)) {
+            契約事業者番号 = ViewStateHolder.get(ViewStateKeys.契約事業者番号, RString.class);
+        } else {
+            JuryoininKeiyakuJigyosha data = ViewStateHolder
+                    .get(ViewStateKeys.詳細データ, JuryoininKeiyakuJigyosha.class);
+            契約事業者番号 = data.get契約事業者番号();
+        }
+        HokenJuryoIninHaraiToriatsukaiResult result = getHandler(div).get発行データ(契約事業者番号);
+        FlexibleDate 発行日 = new FlexibleDate(div.getPnlHakoubi().getTxtHakoubi().getValue().toDateString());
+        return ResponseData.of(new JyuryoItakuAtukaiJigyoshaTorokuTsuchishoPrintService().print(result.getEntity(), 発行日)).respond();
     }
 
     /**

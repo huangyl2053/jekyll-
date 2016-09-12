@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxFlexibleYear;
 /**
  * TokutyoKariSanteiShoriNaiyo のクラスファイル
  *
- *  * @reamsid_L DBB-0790-010 yangchenbing
+ * @reamsid_L DBB-0790-010 yangchenbing
  *
  */
 public class TokutyoKariSanteiShoriNaiyoDiv extends Panel {

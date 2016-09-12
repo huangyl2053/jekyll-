@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengaku;
+import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuBuilder;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuViewState;
+import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinsei;
 import jp.co.ndensan.reams.db.dbd.definition.core.kanri.SampleBunshoGroupCodes;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdInformationMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1020001.DBD1020001StateName;
@@ -17,11 +19,12 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1020001.DBD1
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1020001.RiyoshaFutangakuGengakuPanelDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1020001.ddlShinseiIchiran_Row;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1020001.RiyoshaFutangakuGengakuHandler;
-import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1020001.RiyoshaFutangakuGengakuHandler.Dbd1020001Keys;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1020001.RiyoshaFutangakuGengakuHandler.RiyoshaFutangakuGengakuComparator;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1020001.RiyoshaFutangakuGengakuValidationHandler;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuService;
+import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
@@ -38,6 +41,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -53,6 +57,7 @@ public class RiyoshaFutangakuGengakuPanel {
     private static final RString 承認メニュー = new RString("DBDMN22002");
     private static final RString 承認する_KEY = new RString("key0");
     private static final RString 追加 = new RString("追加");
+    private static final RString BTNUPDATE_FIELDNAME = new RString("btnUpdate");
     private final RString 文字列_申請一覧を表示する = new RString("申請一覧を表示する");
     private final RString 文字列_申請入力を表示する = new RString("申請入力を表示する");
     private final RString 文字列_承認入力を表示する = new RString("承認入力を表示する");
@@ -64,8 +69,37 @@ public class RiyoshaFutangakuGengakuPanel {
      * @return レスポンスデータ
      */
     public ResponseData<RiyoshaFutangakuGengakuPanelDiv> onLoad(RiyoshaFutangakuGengakuPanelDiv div) {
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
 
-        return getHandler(div).initialize();
+        getHandler(div).initialize(taishoshaKey);
+
+        if (!ResponseHolder.isReRequest()
+                && (被保険者番号 == null || 被保険者番号.getColumnValue().isEmpty())) {
+            div.getBtnShowSetaiJoho().setDisabled(true);
+            div.getBtnShowGemmenJoho().setDisabled(true);
+            div.getBtnInputNew().setDisabled(true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNUPDATE_FIELDNAME, true);
+            div.getDdlShinseiIchiran().setDisabled(true);
+            InformationMessage message = new InformationMessage(DbdInformationMessages.受給共通_被保データなし.getMessage().getCode(),
+                    DbdInformationMessages.受給共通_被保データなし.getMessage().evaluate());
+            return ResponseData.of(div).addMessage(message).respond();
+        } else if (new RString(DbdInformationMessages.受給共通_被保データなし.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())) {
+            return ResponseData.of(div).respond();
+        }
+
+        List<RiyoshaFutangakuGengaku> 利用者負担額減額の情報List = getHandler(div).get利用者負担額減額の情報List(被保険者番号);
+        if (利用者負担額減額の情報List != null) {
+            ViewStateHolder.put(ViewStateKeys.利用者負担額減額情報のDBList, new ArrayList<>(利用者負担額減額の情報List));
+            ArrayList<RiyoshaFutangakuGengakuViewState> viewStateList = new ArrayList<>();
+            getHandler(div).一覧エリアの初期設定(利用者負担額減額の情報List, viewStateList);
+            ViewStateHolder.put(ViewStateKeys.利用者負担額減額情報ListのViewState, viewStateList);
+        }
+        getHandler(div).初期処理(taishoshaKey);
+        ViewStateHolder.put(ViewStateKeys.新規申請の履歴番号, 0);
+
+        return ResponseData.of(div).setState(DBD1020001StateName.一覧);
     }
 
     /**
@@ -75,9 +109,8 @@ public class RiyoshaFutangakuGengakuPanel {
      * @return レスポンスデータ
      */
     public ResponseData<RiyoshaFutangakuGengakuPanelDiv> onActive(RiyoshaFutangakuGengakuPanelDiv div) {
-
-        getHandler(div).viewState破棄();
-        return getHandler(div).initialize();
+        viewState破棄(div);
+        return onLoad(div);
     }
 
     /**
@@ -88,9 +121,11 @@ public class RiyoshaFutangakuGengakuPanel {
      */
     public ResponseData<RiyoshaFutangakuGengakuPanelDiv> onClick_btnShowSetaiJoho(RiyoshaFutangakuGengakuPanelDiv div) {
 
-        Boolean 世帯所得一覧初期化済み = ViewStateHolder.get(Dbd1020001Keys.世帯所得一覧初期化済み, Boolean.class);
+        Boolean 世帯所得一覧初期化済み = ViewStateHolder.get(ViewStateKeys.世帯所得一覧初期化済み, Boolean.class);
         if (世帯所得一覧初期化済み == null || !世帯所得一覧初期化済み) {
-            getHandler(div).世帯所得一覧の初期化();
+            TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+            getHandler(div).世帯所得一覧の初期化(taishoshaKey);
+            ViewStateHolder.put(ViewStateKeys.世帯所得一覧初期化済み, true);
         }
 
         div.getBtnShowSetaiJoho().setDisplayNone(true);
@@ -130,8 +165,10 @@ public class RiyoshaFutangakuGengakuPanel {
      * @return レスポンスデータ
      */
     public ResponseData<RiyoshaFutangakuGengakuPanelDiv> onClick_btnInputNew(RiyoshaFutangakuGengakuPanelDiv div) {
-
-        getHandler(div).追加するボタン押下();
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        ViewStateHolder.put(ViewStateKeys.該当DB申請, null);
+        ViewStateHolder.put(ViewStateKeys.該当申請のViewState, null);
+        getHandler(div).追加するボタン押下(taishoshaKey);
         return ResponseData.of(div).setState(DBD1020001StateName.入力);
     }
 
@@ -142,7 +179,25 @@ public class RiyoshaFutangakuGengakuPanel {
      * @return レスポンスデータ
      */
     public ResponseData<RiyoshaFutangakuGengakuPanelDiv> onClick_btnModify(RiyoshaFutangakuGengakuPanelDiv div) {
-        getHandler(div).申請一覧の修正ボタンをクリック();
+        ViewStateHolder.put(ViewStateKeys.該当DB申請, null);
+        ViewStateHolder.put(ViewStateKeys.該当申請のViewState, null);
+
+        ddlShinseiIchiran_Row row = div.getDdlShinseiIchiran().getActiveRow();
+
+        List<RiyoshaFutangakuGengaku> dbDatalist = ViewStateHolder.get(ViewStateKeys.利用者負担額減額情報のDBList, ArrayList.class);
+        RiyoshaFutangakuGengaku 該当DB申請 = getHandler(div).get該当DB申請(row, dbDatalist);
+        if (該当DB申請 != null) {
+            ViewStateHolder.put(ViewStateKeys.該当DB申請, 該当DB申請);
+        }
+        List<RiyoshaFutangakuGengakuViewState> existsViewStateList = ViewStateHolder.get(ViewStateKeys.利用者負担額減額情報ListのViewState, List.class);
+        RiyoshaFutangakuGengakuViewState 該当申請のViewState = getHandler(div).get該当申請のViewState(row, existsViewStateList);
+        if (該当申請のViewState != null) {
+            ViewStateHolder.put(ViewStateKeys.該当申請のViewState, 該当申請のViewState);
+        }
+
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        RiyoshaFutangakuGengakuViewState joho = ViewStateHolder.get(ViewStateKeys.該当申請のViewState, RiyoshaFutangakuGengakuViewState.class);
+        getHandler(div).申請一覧の修正ボタンをクリック(row, taishoshaKey, joho);
         return ResponseData.of(div).setState(DBD1020001StateName.入力);
     }
 
@@ -156,7 +211,8 @@ public class RiyoshaFutangakuGengakuPanel {
         ddlShinseiIchiran_Row row = div.getDdlShinseiIchiran().getActiveRow();
 
         RString 元の決定区分 = RString.EMPTY;
-        RiyoshaFutangakuGengaku 該当DB申請 = getHandler(div).get該当DB申請(row);
+        List<RiyoshaFutangakuGengaku> dbDatalist = ViewStateHolder.get(ViewStateKeys.利用者負担額減額情報のDBList, ArrayList.class);
+        RiyoshaFutangakuGengaku 該当DB申請 = getHandler(div).get該当DB申請(row, dbDatalist);
         if (該当DB申請 != null && 該当DB申請.get決定区分() != null) {
             元の決定区分 = 該当DB申請.get決定区分();
         }
@@ -169,7 +225,15 @@ public class RiyoshaFutangakuGengakuPanel {
                 .equals(ResponseHolder.getMessageCode())) {
             return ResponseData.of(div).respond();
         }
-        getHandler(div).申請一覧の削除ボタンをクリック();
+
+        ArrayList<RiyoshaFutangakuGengakuViewState> list = ViewStateHolder.get(ViewStateKeys.利用者負担額減額情報ListのViewState, ArrayList.class);
+        ArrayList<RiyoshaFutangakuGengakuViewState> newList = new ArrayList<>();
+        getHandler(div).申請一覧の削除ボタンをクリック(row, list, newList);
+        if (追加.equals(row.getJotai())) {
+            ViewStateHolder.put(ViewStateKeys.利用者負担額減額情報ListのViewState, list);
+        } else {
+            ViewStateHolder.put(ViewStateKeys.利用者負担額減額情報ListのViewState, newList);
+        }
         return ResponseData.of(div).setState(DBD1020001StateName.一覧);
     }
 
@@ -180,10 +244,12 @@ public class RiyoshaFutangakuGengakuPanel {
      * @return レスポンスデータ
      */
     public ResponseData<RiyoshaFutangakuGengakuPanelDiv> onClick_btnBackShinseiIchirai(RiyoshaFutangakuGengakuPanelDiv div) {
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+
         div.getBtnInputNew().setDisabled(false);
         div.getDdlShinseiIchiran().setDisabled(false);
         div.getRiyoshaFutangakuGengakuShinseiDetail().setDisabled(true);
-        getHandler(div).入力情報をクリア();
+        getHandler(div).入力情報をクリア(taishoshaKey);
         return ResponseData.of(div).setState(DBD1020001StateName.一覧);
     }
 
@@ -211,7 +277,7 @@ public class RiyoshaFutangakuGengakuPanel {
         }
 
         if (!承認する_KEY.equals(決定区分)) {
-            getHandler(div).承認情報を確定するボタン押下();
+            承認情報を確定する処理(div);
             return ResponseData.of(div).setState(DBD1020001StateName.一覧);
         }
 
@@ -224,8 +290,65 @@ public class RiyoshaFutangakuGengakuPanel {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
 
-        getHandler(div).承認情報を確定するボタン押下();
+        承認情報を確定する処理(div);
         return ResponseData.of(div).setState(DBD1020001StateName.一覧);
+    }
+
+    private void 承認情報を確定する処理(RiyoshaFutangakuGengakuPanelDiv div) {
+        ArrayList<RiyoshaFutangakuGengakuViewState> existsViewStateList = ViewStateHolder.get(ViewStateKeys.利用者負担額減額情報ListのViewState, ArrayList.class);
+        if (existsViewStateList == null) {
+            existsViewStateList = new ArrayList<>();
+        }
+        RiyoshaFutangakuGengaku 該当DB申請 = ViewStateHolder.get(ViewStateKeys.該当DB申請, RiyoshaFutangakuGengaku.class);
+        RiyoshaFutangakuGengakuViewState 該当申請のViewState = ViewStateHolder.get(ViewStateKeys.該当申請のViewState, RiyoshaFutangakuGengakuViewState.class);
+
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
+        ShoKisaiHokenshaNo 証記載保険者番号;
+        int 履歴番号;
+        EntityDataState state;
+        GemmenGengakuShinsei gemmenGengakuShinsei;
+        RiyoshaFutangakuGengakuBuilder builder;
+        if (該当DB申請 != null) {
+            証記載保険者番号 = 該当DB申請.get証記載保険者番号();
+            履歴番号 = 該当DB申請.get履歴番号();
+            boolean 変更あり = getHandler(div).申請情報_変更あり(該当DB申請);
+            if (変更あり) {
+                state = EntityDataState.Modified;
+            } else {
+                state = EntityDataState.Unchanged;
+            }
+            if (該当DB申請.getGemmenGengakuShinseiList().size() > 0) {
+                gemmenGengakuShinsei = 該当DB申請.getGemmenGengakuShinseiList().get(0);
+            } else {
+                ViewStateHolder.put(ViewStateKeys.新規申請の履歴番号, 履歴番号);
+                gemmenGengakuShinsei = new GemmenGengakuShinsei(
+                        証記載保険者番号, 被保険者番号, GemmenGengakuShurui.利用者負担額減額.getコード(), 履歴番号);
+            }
+            builder = 該当DB申請.createBuilderForEdit();
+        } else {
+            state = EntityDataState.Added;
+            証記載保険者番号 = getHandler(div).get証記載保険者番号(div.getTxtShinseiYmd().getValue());
+
+            if (該当申請のViewState != null) {
+                履歴番号 = 該当申請のViewState.getRiyoshaFutangakuGengaku().get履歴番号();
+                gemmenGengakuShinsei = 該当申請のViewState.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0);
+                builder = 該当申請のViewState.getRiyoshaFutangakuGengaku().createBuilderForEdit();
+            } else {
+                Integer 新規申請の履歴番号 = ViewStateHolder.get(ViewStateKeys.新規申請の履歴番号, Integer.class);
+                履歴番号 = 新規申請の履歴番号 - 1;
+                ViewStateHolder.put(ViewStateKeys.新規申請の履歴番号, 履歴番号);
+                gemmenGengakuShinsei = new GemmenGengakuShinsei(
+                        証記載保険者番号, 被保険者番号, GemmenGengakuShurui.利用者負担額減額.getコード(), 履歴番号);
+                builder = new RiyoshaFutangakuGengaku(証記載保険者番号, 被保険者番号, 履歴番号).createBuilderForEdit();
+            }
+        }
+
+        ArrayList<RiyoshaFutangakuGengakuViewState> newViewStateList = new ArrayList<>();
+        getHandler(div).承認情報を確定するボタン押下(existsViewStateList, newViewStateList,
+                state, gemmenGengakuShinsei, builder, 証記載保険者番号, 履歴番号, taishoshaKey);
+
+        ViewStateHolder.put(ViewStateKeys.利用者負担額減額情報ListのViewState, newViewStateList);
     }
 
     /**
@@ -240,8 +363,67 @@ public class RiyoshaFutangakuGengakuPanel {
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-        getHandler(div).申請情報を確定するボタン押下();
+        申請情報を確定す処理(div);
         return ResponseData.of(div).setState(DBD1020001StateName.一覧);
+    }
+
+    private void 申請情報を確定す処理(RiyoshaFutangakuGengakuPanelDiv div) {
+        ArrayList<RiyoshaFutangakuGengakuViewState> existsViewStateList = ViewStateHolder.get(ViewStateKeys.利用者負担額減額情報ListのViewState, ArrayList.class);
+        if (existsViewStateList == null) {
+            existsViewStateList = new ArrayList<>();
+        }
+        RiyoshaFutangakuGengaku 該当DB申請 = ViewStateHolder.get(ViewStateKeys.該当DB申請, RiyoshaFutangakuGengaku.class);
+        RiyoshaFutangakuGengakuViewState 該当申請のViewState = ViewStateHolder.get(ViewStateKeys.該当申請のViewState, RiyoshaFutangakuGengakuViewState.class);
+
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
+        ShoKisaiHokenshaNo 証記載保険者番号;
+        int 履歴番号;
+        EntityDataState state;
+        GemmenGengakuShinsei gemmenGengakuShinsei;
+        RiyoshaFutangakuGengakuBuilder builder;
+
+        if (該当DB申請 != null) {
+            証記載保険者番号 = 該当DB申請.get証記載保険者番号();
+            履歴番号 = 該当DB申請.get履歴番号();
+
+            boolean 変更あり = getHandler(div).申請情報_変更あり(該当DB申請);
+            if (変更あり) {
+                state = EntityDataState.Modified;
+            } else {
+                state = EntityDataState.Unchanged;
+            }
+            if (該当DB申請.getGemmenGengakuShinseiList().size() > 0) {
+                gemmenGengakuShinsei = 該当DB申請.getGemmenGengakuShinseiList().get(0);
+            } else {
+                ViewStateHolder.put(ViewStateKeys.新規申請の履歴番号, 履歴番号);
+                gemmenGengakuShinsei = new GemmenGengakuShinsei(
+                        証記載保険者番号, 被保険者番号, GemmenGengakuShurui.利用者負担額減額.getコード(), 履歴番号);
+            }
+            builder = 該当DB申請.createBuilderForEdit();
+        } else {
+            state = EntityDataState.Added;
+            証記載保険者番号 = getHandler(div).get証記載保険者番号(div.getTxtShinseiYmd().getValue());
+
+            if (該当申請のViewState != null) {
+                履歴番号 = 該当申請のViewState.getRiyoshaFutangakuGengaku().get履歴番号();
+                gemmenGengakuShinsei = 該当申請のViewState.getRiyoshaFutangakuGengaku().getGemmenGengakuShinseiList().get(0);
+                builder = 該当申請のViewState.getRiyoshaFutangakuGengaku().createBuilderForEdit();
+            } else {
+                Integer 新規申請の履歴番号 = ViewStateHolder.get(ViewStateKeys.新規申請の履歴番号, Integer.class);
+                履歴番号 = 新規申請の履歴番号 - 1;
+                ViewStateHolder.put(ViewStateKeys.新規申請の履歴番号, 履歴番号);
+                gemmenGengakuShinsei = new GemmenGengakuShinsei(
+                        証記載保険者番号, 被保険者番号, GemmenGengakuShurui.利用者負担額減額.getコード(), 履歴番号);
+                builder = new RiyoshaFutangakuGengaku(証記載保険者番号, 被保険者番号, 履歴番号).createBuilderForEdit();
+            }
+        }
+
+        ArrayList<RiyoshaFutangakuGengakuViewState> newViewStateList = new ArrayList<>();
+        getHandler(div).申請情報を確定するボタン押下(existsViewStateList, newViewStateList,
+                state, gemmenGengakuShinsei, builder, 証記載保険者番号, 履歴番号, taishoshaKey);
+
+        ViewStateHolder.put(ViewStateKeys.利用者負担額減額情報ListのViewState, newViewStateList);
     }
 
     /**
@@ -325,7 +507,9 @@ public class RiyoshaFutangakuGengakuPanel {
                 .equals(ResponseHolder.getMessageCode())) {
             return ResponseData.of(div).respond();
         }
-        boolean 変更あり = getHandler(div).申請一覧_変更あり();
+
+        ArrayList<RiyoshaFutangakuGengakuViewState> list = ViewStateHolder.get(ViewStateKeys.利用者負担額減額情報ListのViewState, ArrayList.class);
+        boolean 変更あり = getHandler(div).申請一覧_変更あり(list);
         if (!変更あり) {
             InformationMessage message = new InformationMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage().getCode(),
                     DbzInformationMessages.内容変更なしで保存不可.getMessage().evaluate());
@@ -349,7 +533,8 @@ public class RiyoshaFutangakuGengakuPanel {
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
-            PersonalData personalData = getHandler(div).toPersonalData();
+            TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+            PersonalData personalData = getHandler(div).toPersonalData(taishoshaKey);
             AccessLogger.log(AccessLogType.更新, personalData);
 
             保存処理();
@@ -371,7 +556,7 @@ public class RiyoshaFutangakuGengakuPanel {
      */
     public ResponseData<RiyoshaFutangakuGengakuPanelDiv> onClick_btnReSearch(RiyoshaFutangakuGengakuPanelDiv div) {
 
-        getHandler(div).viewState破棄();
+        viewState破棄(div);
         前排他キーの解除();
         return ResponseData.of(div).forwardWithEventName(DBD1020001TransitionEventName.検索処理へ).respond();
     }
@@ -383,7 +568,7 @@ public class RiyoshaFutangakuGengakuPanel {
      * @return レスポンスデータ
      */
     public ResponseData<RiyoshaFutangakuGengakuPanelDiv> onClick_btnToSearchResult(RiyoshaFutangakuGengakuPanelDiv div) {
-        getHandler(div).viewState破棄();
+        viewState破棄(div);
         前排他キーの解除();
         return ResponseData.of(div).forwardWithEventName(DBD1020001TransitionEventName.検索結果一覧へ).respond();
     }
@@ -415,7 +600,7 @@ public class RiyoshaFutangakuGengakuPanel {
     private void 履歴番号の修正(List<RiyoshaFutangakuGengakuViewState> orderViewStateList, List<RiyoshaFutangakuGengakuViewState> 削除List) {
 
         ArrayList<RiyoshaFutangakuGengakuViewState> viewStateList
-                = ViewStateHolder.get(RiyoshaFutangakuGengakuHandler.Dbd1020001Keys.利用者負担額減額情報ListのViewState, ArrayList.class);
+                = ViewStateHolder.get(ViewStateKeys.利用者負担額減額情報ListのViewState, ArrayList.class);
         Collections.sort(viewStateList, new RiyoshaFutangakuGengakuComparator());
 
         int size = viewStateList.size();
@@ -482,6 +667,14 @@ public class RiyoshaFutangakuGengakuPanel {
         LockingKey 排他キー = new LockingKey(GyomuCode.DB介護保険.getColumnValue()
                 .concat(被保険者番号.getColumnValue()).concat(new RString("RiyoshaFutanGengaku")));
         RealInitialLocker.release(排他キー);
+    }
+
+    private void viewState破棄(RiyoshaFutangakuGengakuPanelDiv div) {
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        ViewStateHolder.put(ViewStateKeys.利用者負担額減額情報ListのViewState, null);
+        ViewStateHolder.put(ViewStateKeys.利用者負担額減額情報のDBList, null);
+        ViewStateHolder.put(ViewStateKeys.世帯所得一覧初期化済み, null);
+        getHandler(div).入力情報をクリア(taishoshaKey);
     }
 
     private RiyoshaFutangakuGengakuHandler getHandler(RiyoshaFutangakuGengakuPanelDiv div) {

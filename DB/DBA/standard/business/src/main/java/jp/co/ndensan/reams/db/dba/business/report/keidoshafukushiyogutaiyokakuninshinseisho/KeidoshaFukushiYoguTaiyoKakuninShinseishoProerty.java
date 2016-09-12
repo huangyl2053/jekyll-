@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 /**
  * KeidoshaFukushiYoguTaiyoKakuninShinseishoProertyのプロパティです。
  *
- * @reamsid_L DBA-0540-704  lijia
- * 
+ * @reamsid_L DBA-0540-704 lijia
+ *
  */
 public class KeidoshaFukushiYoguTaiyoKakuninShinseishoProerty extends ReportPropertyBase<KeidoshaFukushiYoguTaiyoKakuninShinseishoReportSource> {
 
@@ -22,6 +22,6 @@ public class KeidoshaFukushiYoguTaiyoKakuninShinseishoProerty extends ReportProp
      * コンストラクタです。
      */
     public KeidoshaFukushiYoguTaiyoKakuninShinseishoProerty() {
-        super(SubGyomuCode.DBA介護資格, ReportIdDBA.DBC800014.getReportId());
+        super(SubGyomuCode.DBC介護給付, ReportIdDBA.DBC800014.getReportId());
     }
 }

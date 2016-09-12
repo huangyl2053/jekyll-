@@ -21,13 +21,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 介護住民票個別事項連携情報作成【他社住基】のバッチ処理のDB更新のプロセスクラスです。
  *
- * @reamsid_L DBU-0350-020  lijia
- * 
+ * @reamsid_L DBU-0350-020 lijia
+ *
  */
 public class KaigoJuminhyoDBUpdateProcess extends BatchProcessBase<DbT7022ShoriDateKanriEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.getEntity");
+            "jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7022ShoriDateKanriMapper.getTaishoShuryoYMD");
     private boolean isEmpty = true;
     private KaigoJuminhyoProcessParameter parameter;
 

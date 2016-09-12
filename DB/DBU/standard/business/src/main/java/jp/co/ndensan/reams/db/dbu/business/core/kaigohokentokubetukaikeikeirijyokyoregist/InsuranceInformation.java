@@ -41,10 +41,12 @@ public class InsuranceInformation implements Serializable {
      * コンストラクタです。<br/>
      *
      * @param 処理フラグ 処理フラグ
+     * @param 市町村コード 市町村コード
+     * @param 市町村名称 市町村名称
      */
-    public InsuranceInformation(RString 処理フラグ) {
-        this.insuranceInformationEntity = new InsuranceInformationEntity(FlexibleYear.EMPTY, FlexibleYear.EMPTY, RString.EMPTY, LasdecCode.EMPTY,
-                Code.EMPTY, 処理フラグ, ShoKisaiHokenshaNo.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);
+    public InsuranceInformation(RString 処理フラグ, LasdecCode 市町村コード, RString 市町村名称) {
+        this.insuranceInformationEntity = new InsuranceInformationEntity(FlexibleYear.EMPTY, FlexibleYear.EMPTY, RString.EMPTY, 市町村コード,
+                Code.EMPTY, 処理フラグ, ShoKisaiHokenshaNo.EMPTY, 市町村名称, RString.EMPTY, RString.EMPTY, RString.EMPTY);
     }
 
     /**

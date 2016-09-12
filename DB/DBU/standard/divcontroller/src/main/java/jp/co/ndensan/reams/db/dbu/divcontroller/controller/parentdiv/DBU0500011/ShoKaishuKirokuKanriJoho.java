@@ -11,13 +11,13 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0500011.DBU0
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0500011.ShoKaishuKirokuKanriJohoDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0500011.ShoKaishuKirokuKanriJohoHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.shokaishukirokukanrijoho.ShoKaishuKirokuKanriJohoManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishu;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishuBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishuIdentifier;
-import jp.co.ndensan.reams.db.dbz.divcontroller.util.viewstate.ViewStateKey;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
@@ -75,7 +74,7 @@ public class ShoKaishuKirokuKanriJoho {
      * @return ResponseData<ShoKaishuKirokuKanriJohoDiv>
      */
     public ResponseData<ShoKaishuKirokuKanriJohoDiv> onLoad(ShoKaishuKirokuKanriJohoDiv div) {
-        TaishoshaKey key = ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class);
+        TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         getHandler(div).onLoad(key.get識別コード(), key.get被保険者番号());
         アクセスログ(key.get識別コード());
         if (!RealInitialLocker.tryGetLock(LOCKINGKEY)) {
@@ -84,7 +83,6 @@ public class ShoKaishuKirokuKanriJoho {
             validationMessages.add(new ValidationMessageControlPair(TekiyoJogaiTotalErrorMessage.排他_他のユーザが使用中));
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }
-
         return ResponseData.of(div).respond();
     }
 
@@ -95,19 +93,16 @@ public class ShoKaishuKirokuKanriJoho {
      * @return ResponseData<ShoKaishuKirokuKanriJohoDiv>
      */
     public ResponseData<ShoKaishuKirokuKanriJohoDiv> onClick_Hozon(ShoKaishuKirokuKanriJohoDiv div) {
-
-        if (!RealInitialLocker.tryGetLock(LOCKINGKEY)) {
-            throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
-        }
-        if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(HOZONMESSAGE).respond();
-        }
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             setHozon(div);
             RealInitialLocker.release(LOCKINGKEY);
-            アクセスログ(ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get識別コード());
+            div.getKanryoMessage().getCcdKaigoKanryoMessage().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
+            アクセスログ(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード());
             return ResponseData.of(div).setState(DBU0500011StateName.完了状態);
+        }
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(HOZONMESSAGE).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -151,16 +146,16 @@ public class ShoKaishuKirokuKanriJoho {
         List<dgKoufuKaishu_Row> dgkoufuKaishuList = div.getShoKaishuList().getCcdShokaishuKirokuKanri().get証交付回収情報一覧();
         for (dgKoufuKaishu_Row dgKoufuKaishu : dgkoufuKaishuList) {
             ShoKofuKaishuIdentifier key = new ShoKofuKaishuIdentifier(
-                    ViewStateHolder.get(ViewStateKey.資格対象者, TaishoshaKey.class).get被保険者番号(),
+                    ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号(),
                     dgKoufuKaishu.getKoufuTypeNo(), Integer.valueOf(dgKoufuKaishu.getRirekiNo().toString()));
             ShoKofuKaishu shoKofuKaishu = models.get(key);
             ShoKofuKaishuBuilder builder = shoKofuKaishu.createBuilderForEdit();
             if (状態_修正.equals(dgKoufuKaishu.getStatus())) {
-                builder.set交付年月日(getDate(dgKoufuKaishu.getKoufuDate()));
-                builder.set有効期限(getDate(dgKoufuKaishu.getYukoKigen()));
+                builder.set交付年月日(getDate(dgKoufuKaishu.getKoufuDate().getText()));
+                builder.set有効期限(getDate(dgKoufuKaishu.getYukoKigen().getText()));
                 builder.set交付事由(dgKoufuKaishu.getKoufuJiyuNo());
                 builder.set交付理由(dgKoufuKaishu.getKofuRiyu());
-                builder.set回収年月日(getDate(dgKoufuKaishu.getKaishuDate()));
+                builder.set回収年月日(getDate(dgKoufuKaishu.getKaishuDate().getText()));
                 builder.set回収事由(dgKoufuKaishu.getKaishuJiyuNo());
                 builder.set回収理由(dgKoufuKaishu.getKaishuRiyu());
                 builder.set発行処理日時(YMDHMS.now());

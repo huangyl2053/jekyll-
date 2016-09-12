@@ -5,19 +5,47 @@
  "steps": [
   {
    "id": 1,
-   "name": "要介護認定申請書発行",
+   "name": "介護認定申請書発行",
    "transitionList": [
     {
      "id": "1",
      "type": "start",
      "condition": "",
-     "toLayoutSubGyomuCode": "DBD",
-     "toLayoutName": "DBD5130001",
-     "toLayoutTitle": "介護認定申請書発行",
-     "toState": "初期状態"
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0200001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "検索条件"
     },
     {
      "id": "2",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBZ",
+     "layoutName": "DBZ0200001",
+     "layoutTitle": "対象者検索",
+     "eventName": "対象者特定",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBD5130001",
+     "toLayoutTitle": "介護認定申請書発行",
+     "toState": "介護認定申請書発行"
+    },
+    {
+     "id": "3",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD5130001",
+     "layoutTitle": "介護認定申請書発行",
+     "eventName": "戻る",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBZ",
+     "toLayoutName": "DBZ0200001",
+     "toLayoutTitle": "対象者検索",
+     "toState": "検索条件"
+    },
+    {
+     "id": "4",
      "type": "end",
      "layoutSubGyomuCode": "DBD",
      "layoutName": "DBD5130001",

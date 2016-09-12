@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
  <!-- 概要： 介護認定宛名情報のマッピング用XMLです。 -->
- <!-- @reamsid_L DBE-1300-050 lizhuoxuan -->
+ <!-- @reamsid_L DBZ-1300-050 lizhuoxuan -->
 
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.kaigoninteiatenainfo.IKaigoNinteiAtenaInfoMapper">
@@ -10,16 +10,18 @@
         <result property="seinengappiYMD" column="DbT5101_seinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="age" column="DbT5101_age" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="seibetsu" column="DbT5101_seibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shikibetsuCode" column="DbT5101_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <association property="ft200Entity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
     </resultMap>
 
-    <select id="getKaigoNinteiAtenaInfoList" resultMap="kaigoninteiatenainfoResult"
+    <select resultOrdered="true" id="getKaigoNinteiAtenaInfoList" resultMap="kaigoninteiatenainfoResult"
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.kaigoninteiatenainfo.KaigoNinteiAtenaInfoParameter">
         SELECT
         DbT5101."hihokenshaName" AS "DbT5101_hihokenshaName",
         DbT5101."seinengappiYMD" AS "DbT5101_seinengappiYMD",
         DbT5101."age" AS "DbT5101_age",
         DbT5101."seibetsu" AS "DbT5101_seibetsu",
+        DbT5101."shikibetsuCode"AS "DbT5101_shikibetsuCode",
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
         FROM
         rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
@@ -35,7 +37,7 @@
         </if>
         <if test="申請書管理番号フラグ">
             AND
-            DbT5101."shinseishoKanriNo" = #{申請管理番号}
+            DbT5101."shinseishoKanriNo" = #{申請書管理番号}
         </if>
     </select>
 </mapper>

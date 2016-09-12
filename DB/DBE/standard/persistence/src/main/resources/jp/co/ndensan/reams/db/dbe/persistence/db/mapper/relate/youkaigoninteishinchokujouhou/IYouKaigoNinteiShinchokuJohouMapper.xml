@@ -1,0 +1,857 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBE-1500-010 wanghui -->
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.youkaigoninteishinchokujouhou.IYouKaigoNinteiShinchokuJohouMapper">
+
+    <resultMap id="ResultMap_YouKaigoNinteiShinchokuJohouRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.youkaigoninteishinchokujouhou.YouKaigoNinteiShinchokuJohouRelateEntity" autoMapping="true">
+        <result property="hihokenshaNo" column="A_hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hihokenshaName" column="A_hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="seibetsu" column="A_seibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="seinengappiYMD" column="A_seinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteiShinseiYMD" column="A_ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteiShinseiShinseijiKubunCode" column="A_ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteiShinseiHoreiKubunCode" column="A_ninteiShinseiHoreiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="koroshoIfShikibetsuCode" column="A_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinseishoKanriNo" column="A_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteichosaIraiYMD" column="C_ninteichosaIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jigyoshaMeisho" column="D_jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chosainShimei" column="E_chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteichosaJisshiYMD" column="F_ninteichosaJisshiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ikenshoJuryoYMD" column="M_ikenshoJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nijiHanteiYokaigoJotaiKubunCode" column="H_nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ichijiHanteiYMD" column="I_ichijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ichijiHanteiKekkaCode" column="I_ichijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinsakaiShiryoSakuseiYMD" column="K_shinsakaiShiryoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinsakaiKaisaiYoteiYMD" column="K_shinsakaiKaisaiYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shinsakaiKaisaiYMD" column="L_shinsakaiKaisaiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+    <select resultOrdered="true" id="get結果情報"
+            resultMap="ResultMap_YouKaigoNinteiShinchokuJohouRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.youkaigoninteishinchokujouhou.YouKaigoNinteiShinchokuJohouParameter" fetchSize="500" >
+          SELECT 
+            A."hihokenshaNo" as "A_hihokenshaNo",  
+            A."hihokenshaName" as "A_hihokenshaName",  
+            A.seibetsu as "A_seibetsu",  
+            A."seinengappiYMD" as "A_seinengappiYMD",  
+            A."ninteiShinseiYMD" as "A_ninteiShinseiYMD",  
+            A."ninteiShinseiShinseijiKubunCode" as "A_ninteiShinseiShinseijiKubunCode",  
+            A."ninteiShinseiHoreiKubunCode" as "A_ninteiShinseiHoreiKubunCode",  
+            A."koroshoIfShikibetsuCode" as "A_koroshoIfShikibetsuCode",  
+            A."shinseishoKanriNo" as "A_shinseishoKanriNo",  
+            C."ninteichosaIraiYMD" as "C_ninteichosaIraiYMD",  
+            D."jigyoshaMeisho" as "D_jigyoshaMeisho",  
+            E."chosainShimei" as "E_chosainShimei",  
+            F."ninteichosaJisshiYMD" as "F_ninteichosaJisshiYMD",  
+            M."ikenshoJuryoYMD" as "M_ikenshoJuryoYMD",  
+            H."nijiHanteiYokaigoJotaiKubunCode" as "H_nijiHanteiYokaigoJotaiKubunCode",  
+            I."ichijiHanteiYMD" as "I_ichijiHanteiYMD",  
+            I."ichijiHanteiKekkaCode" as "I_ichijiHanteiKekkaCode",  
+            K."shinsakaiShiryoSakuseiYMD" as "K_shinsakaiShiryoSakuseiYMD",  
+            K."shinsakaiKaisaiYoteiYMD" as "K_shinsakaiKaisaiYoteiYMD",  
+            L."shinsakaiKaisaiYMD" as "L_shinsakaiKaisaiYMD"  
+        FROM  
+            rgdb."DbT5101NinteiShinseiJoho" AS A
+        INNER  JOIN rgdb."DbT7051KoseiShichosonMaster" AS  A1  
+          ON  A."shoKisaiHokenshaNo" = A1."shoKisaiHokenshaNo" 
+        LEFT JOIN  rgdb."DbT5201NinteichosaIraiJoho"  AS C 
+          ON A."shinseishoKanriNo" = C ."shinseishoKanriNo"  
+          AND C ."logicalDeletedFlag" = False  
+          AND NOT EXISTS (  SELECT  'X' 
+            FROM  rgdb."DbT5201NinteichosaIraiJoho" AS C1  
+            WHERE C."shinseishoKanriNo" = C1."shinseishoKanriNo"  
+          AND  C."logicalDeletedFlag" = False  
+          AND  C."ninteichosaIraiRirekiNo" <![CDATA[<]]> C1."ninteichosaIraiRirekiNo")  
+        LEFT JOIN  rgdb."DbT5910NinteichosaItakusakiJoho" AS D 
+            ON   C."ninteichosaItakusakiCode" = D."ninteichosaItakusakiCode" 
+            AND  D."shichosonCode" = A1."shichosonCode" 
+            AND  D."jokyoFlag" = True 
+        LEFT JOIN  rgdb."DbT5913ChosainJoho" AS  E 
+            ON   C."ninteichosaItakusakiCode" = E."ninteiChosaItakusakiCode"  
+            AND  C."ninteiChosainCode" = E."ninteiChosainCode" 
+            AND  E."shichosonCode" =  A1."shichosonCode" 
+            AND  E."jokyoFlag" = True 
+       LEFT JOIN  rgdb."DbT5202NinteichosahyoGaikyoChosa"  AS F 
+            ON A."shinseishoKanriNo" = F."shinseishoKanriNo"  
+            AND NOT EXISTS (  SELECT  'X' 
+            FROM  rgdb."DbT5202NinteichosahyoGaikyoChosa" AS F1  
+            WHERE F."shinseishoKanriNo" = F1."shinseishoKanriNo"  
+            AND  F."ninteichosaRirekiNo" <![CDATA[<]]> F1."ninteichosaRirekiNo"  
+        )  
+        LEFT JOIN  rgdb."DbT5301ShujiiIkenshoIraiJoho"  AS G 
+            ON A."shinseishoKanriNo" = G."shinseishoKanriNo"  
+            AND G."logicalDeletedFlag" = False  
+            AND NOT EXISTS (  SELECT  'X' 
+                FROM  rgdb."DbT5301ShujiiIkenshoIraiJoho" AS G1  
+                WHERE G."shinseishoKanriNo" = G1."shinseishoKanriNo"  
+            AND  G1."logicalDeletedFlag" = False  
+            AND  G."ikenshoIraiRirekiNo" <![CDATA[<]]> G1."ikenshoIraiRirekiNo"  
+        )  
+        LEFT JOIN  rgdb."DbT5302ShujiiIkenshoJoho"  AS M 
+            ON A."shinseishoKanriNo" = M."shinseishoKanriNo"  
+            AND NOT EXISTS (  SELECT  'X' 
+                FROM  rgdb."DbT5302ShujiiIkenshoJoho" AS M1  
+                WHERE M."shinseishoKanriNo" =M1."shinseishoKanriNo"  
+                    AND  M."ikenshoIraiRirekiNo" <![CDATA[<]]> M1."ikenshoIraiRirekiNo"  
+         )  
+        INNER JOIN rgdb."DbT5102NinteiKekkaJoho" AS  H 
+            ON A."shinseishoKanriNo" = H."shinseishoKanriNo"  
+            AND H."nijiHanteiYMD" <![CDATA[>=]]>  #{抽出期間開始日}
+            AND H."nijiHanteiYMD" <![CDATA[<=]]>  #{抽出期間終了日}
+        LEFT JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS  I 
+            ON A."shinseishoKanriNo" = I."shinseishoKanriNo"  
+        LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho"  AS J 
+            ON A."shinseishoKanriNo" = J."shinseishoKanriNo"
+        LEFT JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho"  AS K 
+            ON J."shinsakaiKaisaiNo" = K."shinsakaiKaisaiNo"  
+        LEFT JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho"  AS L 
+            ON K."shinsakaiKaisaiNo" = L."shinsakaiKaisaiNo"  
+        WHERE  
+            A."logicalDeletedFlag" = False 
+             <if test="証記載保険者番号フラグ">
+              AND  A."shoKisaiHokenshaNo" = #{証記載保険者番号}
+            </if>
+            <if test="被保険者番号フラグ">
+              AND  A."hihokenshaNo" = #{被保険者番号}
+            </if>
+        ORDER BY
+          A."hihokenshaNo" desc
+        <if test="usesSaidaiHyojiKensu">
+            LIMIT #{saidaiHyojiKensu}
+        </if>       
+    </select>
+    <select resultOrdered="true" id="get進捗情報"
+            resultMap="ResultMap_YouKaigoNinteiShinchokuJohouRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.youkaigoninteishinchokujouhou.YouKaigoNinteiShinchokuJohouParameter" fetchSize="500" >
+         SELECT
+             A."hihokenshaNo" as "A_hihokenshaNo",  
+                A."hihokenshaName" as "A_hihokenshaName",  
+                A.seibetsu as "A_seibetsu",  
+                A."seinengappiYMD" as "A_seinengappiYMD",  
+                A."ninteiShinseiYMD" as "A_ninteiShinseiYMD",  
+                A."ninteiShinseiShinseijiKubunCode" as "A_ninteiShinseiShinseijiKubunCode",  
+                A."ninteiShinseiHoreiKubunCode" as "A_ninteiShinseiHoreiKubunCode",  
+                A."koroshoIfShikibetsuCode" as "A_koroshoIfShikibetsuCode",  
+                A."shinseishoKanriNo" as "A_shinseishoKanriNo",  
+                A."ninteichosaIraiYMD" as "C_ninteichosaIraiYMD",  
+                A."jigyoshaMeisho" as "D_jigyoshaMeisho",  
+                A."chosainShimei" as "E_chosainShimei",  
+                A."ninteichosaJisshiYMD" as "F_ninteichosaJisshiYMD",  
+                A."ikenshoJuryoYMD" as "M_ikenshoJuryoYMD",  
+                A."nijiHanteiYokaigoJotaiKubunCode" as "H_nijiHanteiYokaigoJotaiKubunCode",  
+                A."ichijiHanteiYMD" as "I_ichijiHanteiYMD",  
+                A."ichijiHanteiKekkaCode" as "I_ichijiHanteiKekkaCode",  
+                A."shinsakaiShiryoSakuseiYMD" as "K_shinsakaiShiryoSakuseiYMD",  
+                A."shinsakaiKaisaiYoteiYMD" as "K_shinsakaiKaisaiYoteiYMD",  
+                A."shinsakaiKaisaiYMD" as "L_shinsakaiKaisaiYMD"
+        FROM
+            (SELECT 
+                A."hihokenshaNo",  
+                A."hihokenshaName",  
+                A.seibetsu,  
+                A."seinengappiYMD",  
+                A."ninteiShinseiYMD",  
+                A."ninteiShinseiShinseijiKubunCode",  
+                A."ninteiShinseiHoreiKubunCode",  
+                A."koroshoIfShikibetsuCode",  
+                A."shinseishoKanriNo",  
+                C."ninteichosaIraiYMD",  
+                D."jigyoshaMeisho",  
+                E."chosainShimei",  
+                F."ninteichosaJisshiYMD",  
+                M."ikenshoJuryoYMD",  
+                H."nijiHanteiYokaigoJotaiKubunCode",  
+                I."ichijiHanteiYMD",  
+                I."ichijiHanteiKekkaCode",  
+                K."shinsakaiShiryoSakuseiYMD",  
+                K."shinsakaiKaisaiYoteiYMD",  
+                L."shinsakaiKaisaiYMD"  
+            FROM  
+                rgdb."DbT5101NinteiShinseiJoho" AS A
+            INNER  JOIN rgdb."DbT7051KoseiShichosonMaster" AS  A1  
+                ON  A."shoKisaiHokenshaNo" = A1."shoKisaiHokenshaNo"
+            INNER JOIN rgdb."DbT5105NinteiKanryoJoho" as B
+                ON A."shinseishoKanriNo"=B."shinseishoKanriNo"
+            LEFT JOIN  rgdb."DbT5201NinteichosaIraiJoho"  AS C 
+                ON A."shinseishoKanriNo" = C ."shinseishoKanriNo"  
+                AND C ."logicalDeletedFlag" = False  
+                AND NOT EXISTS (  SELECT  'X' 
+                    FROM  rgdb."DbT5201NinteichosaIraiJoho" AS C1  
+                    WHERE C."shinseishoKanriNo" = C1."shinseishoKanriNo"  
+                    AND  C."logicalDeletedFlag" = False  
+                    AND  C."ninteichosaIraiRirekiNo" <![CDATA[<]]> C1."ninteichosaIraiRirekiNo")  
+            LEFT JOIN  rgdb."DbT5910NinteichosaItakusakiJoho" AS D 
+                ON   C."ninteichosaItakusakiCode" = D."ninteichosaItakusakiCode" 
+                AND  D."shichosonCode" = A1."shichosonCode" 
+                AND  D."jokyoFlag" = True 
+            LEFT JOIN  rgdb."DbT5913ChosainJoho" AS  E 
+                ON   C."ninteichosaItakusakiCode" = E."ninteiChosaItakusakiCode"  
+                AND  C."ninteiChosainCode" = E."ninteiChosainCode" 
+                AND  E."shichosonCode" =  A1."shichosonCode" 
+                AND  E."jokyoFlag" = True 
+            LEFT JOIN  rgdb."DbT5202NinteichosahyoGaikyoChosa"  AS F 
+                ON A."shinseishoKanriNo" = F."shinseishoKanriNo"  
+                AND NOT EXISTS (  SELECT  'X' 
+                    FROM  rgdb."DbT5202NinteichosahyoGaikyoChosa" AS F1  
+                    WHERE F."shinseishoKanriNo" = F1."shinseishoKanriNo"  
+                    AND  F."ninteichosaRirekiNo" <![CDATA[<]]> F1."ninteichosaRirekiNo"  
+            )  
+            LEFT JOIN  rgdb."DbT5301ShujiiIkenshoIraiJoho"  AS G 
+                ON A."shinseishoKanriNo" = G."shinseishoKanriNo"  
+                AND G."logicalDeletedFlag" = False  
+                AND NOT EXISTS (  SELECT  'X' 
+                    FROM  rgdb."DbT5301ShujiiIkenshoIraiJoho" AS G1  
+                    WHERE G."shinseishoKanriNo" = G1."shinseishoKanriNo"  
+                    AND  G1."logicalDeletedFlag" = False  
+                    AND  G."ikenshoIraiRirekiNo" <![CDATA[<]]> G1."ikenshoIraiRirekiNo"  
+             )  
+            LEFT JOIN  rgdb."DbT5302ShujiiIkenshoJoho"  AS M 
+                ON A."shinseishoKanriNo" = M."shinseishoKanriNo"  
+                AND NOT EXISTS (  SELECT  'X' 
+                    FROM  rgdb."DbT5302ShujiiIkenshoJoho" AS M1  
+                    WHERE M."shinseishoKanriNo" =M1."shinseishoKanriNo"  
+                    AND  M."ikenshoIraiRirekiNo"<![CDATA[<]]> M1."ikenshoIraiRirekiNo"  
+            )  
+            LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS  H 
+                ON A."shinseishoKanriNo" = H."shinseishoKanriNo"  
+            LEFT JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS  I 
+                ON A."shinseishoKanriNo" = I."shinseishoKanriNo"  
+            LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho"  AS J 
+                ON A."shinseishoKanriNo" = J."shinseishoKanriNo"
+            LEFT JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho"  AS K 
+                ON J."shinsakaiKaisaiNo" = K."shinsakaiKaisaiNo"  
+            LEFT JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho"  AS L 
+                ON K."shinsakaiKaisaiNo" = L."shinsakaiKaisaiNo"  
+            WHERE  
+               A."logicalDeletedFlag" = False 
+                <if test="証記載保険者番号フラグ">
+                    AND  A."shoKisaiHokenshaNo" = #{証記載保険者番号}
+                </if>
+                <if test="被保険者番号フラグ">
+                    AND  A."hihokenshaNo" = #{被保険者番号}
+                </if>
+            UNION 
+                SELECT
+                    A."hihokenshaNo",  
+                    A."hihokenshaName",  
+                    A.seibetsu,  
+                    A."seinengappiYMD",  
+                    A."ninteiShinseiYMD",  
+                    A."ninteiShinseiShinseijiKubunCode",  
+                    A."ninteiShinseiHoreiKubunCode",  
+                    A."koroshoIfShikibetsuCode",  
+                    A."shinseishoKanriNo",  
+                    C."ninteichosaIraiYMD",  
+                    D."jigyoshaMeisho",  
+                    E."chosainShimei",  
+                    F."ninteichosaJisshiYMD",  
+                    M."ikenshoJuryoYMD",  
+                    H."nijiHanteiYokaigoJotaiKubunCode",  
+                    I."ichijiHanteiYMD",  
+                    I."ichijiHanteiKekkaCode",  
+                    K."shinsakaiShiryoSakuseiYMD",  
+                    K."shinsakaiKaisaiYoteiYMD",  
+                    L."shinsakaiKaisaiYMD"  
+                FROM  
+                    rgdb."DbT5101NinteiShinseiJoho" AS A
+                INNER  JOIN rgdb."DbT7051KoseiShichosonMaster" AS  A1  
+                    ON  A."shoKisaiHokenshaNo" = A1."shoKisaiHokenshaNo"
+                LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" as C
+                    ON A."shinseishoKanriNo" = C."shinseishoKanriNo"
+                    AND C."logicalDeletedFlag" = False
+                    AND C."ninteichosaIraiYMD"<![CDATA[>=]]> #{抽出期間開始日}
+                    AND C."ninteichosaIraiYMD"<![CDATA[<=]]> #{抽出期間終了日}
+                    AND NOT EXISTS( SELECT 'X'
+                        FROM  rgdb."DbT5201NinteichosaIraiJoho" as C1
+                        WHERE C."shinseishoKanriNo" = C1."shinseishoKanriNo"
+                        AND C1."logicalDeletedFlag" = False
+                        AND C1."ninteichosaIraiYMD"<![CDATA[>=]]> #{抽出期間開始日}
+                        AND C1."ninteichosaIraiYMD"<![CDATA[<=]]> #{抽出期間終了日}
+                        AND C."ninteichosaIraiRirekiNo" = C1."ninteichosaIraiRirekiNo"
+                )
+                LEFT JOIN  rgdb."DbT5910NinteichosaItakusakiJoho" AS D 
+                    ON   C."ninteichosaItakusakiCode" = D."ninteichosaItakusakiCode" 
+                    AND  D."shichosonCode" = A1."shichosonCode" 
+                    AND  D."jokyoFlag" = True 
+                LEFT JOIN  rgdb."DbT5913ChosainJoho" AS  E 
+                    ON   C."ninteichosaItakusakiCode" = E."ninteiChosaItakusakiCode"  
+                    AND  C."ninteiChosainCode" = E."ninteiChosainCode" 
+                    AND  E."shichosonCode" =  A1."shichosonCode" 
+                    AND  E."jokyoFlag" = True 
+                LEFT JOIN  rgdb."DbT5202NinteichosahyoGaikyoChosa"  AS F 
+                    ON A."shinseishoKanriNo" = F."shinseishoKanriNo"  
+                    AND NOT EXISTS (  SELECT  'X' 
+                        FROM  rgdb."DbT5202NinteichosahyoGaikyoChosa" AS F1  
+                        WHERE F."shinseishoKanriNo" = F1."shinseishoKanriNo"  
+                        AND  F."ninteichosaRirekiNo" <![CDATA[<]]> F1."ninteichosaRirekiNo"  
+                )
+                LEFT JOIN  rgdb."DbT5301ShujiiIkenshoIraiJoho"  AS G 
+                    ON A."shinseishoKanriNo" = G."shinseishoKanriNo"  
+                    AND G."logicalDeletedFlag" = False  
+                    AND NOT EXISTS (  SELECT  'X' 
+                        FROM  rgdb."DbT5301ShujiiIkenshoIraiJoho" AS G1  
+                        WHERE G."shinseishoKanriNo" = G1."shinseishoKanriNo"  
+                        AND  G1."logicalDeletedFlag" = False  
+                        AND  G."ikenshoIraiRirekiNo" <![CDATA[<]]> G1."ikenshoIraiRirekiNo"  
+                )  
+                LEFT JOIN  rgdb."DbT5302ShujiiIkenshoJoho"  AS M 
+                    ON A."shinseishoKanriNo" = M."shinseishoKanriNo"  
+                    AND NOT EXISTS (  SELECT  'X' 
+                        FROM  rgdb."DbT5302ShujiiIkenshoJoho" AS M1  
+                        WHERE M."shinseishoKanriNo" =M1."shinseishoKanriNo"  
+                        AND  M."ikenshoIraiRirekiNo" <![CDATA[<]]> M1."ikenshoIraiRirekiNo"  
+                )  
+                LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS  H 
+                    ON A."shinseishoKanriNo" = H."shinseishoKanriNo"  
+                LEFT JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS  I 
+                    ON A."shinseishoKanriNo" = I."shinseishoKanriNo"  
+                LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho"  AS J 
+                    ON A."shinseishoKanriNo" = J."shinseishoKanriNo"
+                LEFT JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho"  AS K 
+                    ON J."shinsakaiKaisaiNo" = K."shinsakaiKaisaiNo"  
+                LEFT JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho"  AS L 
+                    ON K."shinsakaiKaisaiNo" = L."shinsakaiKaisaiNo"  
+                WHERE  
+                 A."logicalDeletedFlag" = False 
+                <if test="証記載保険者番号フラグ">
+                    AND  A."shoKisaiHokenshaNo" = #{証記載保険者番号}
+                </if>
+                <if test="被保険者番号フラグ">
+                    AND  A."hihokenshaNo" = #{被保険者番号}
+                </if>
+                UNION
+                    SELECT
+                        A."hihokenshaNo",  
+                        A."hihokenshaName",  
+                        A.seibetsu,  
+                        A."seinengappiYMD",  
+                        A."ninteiShinseiYMD",  
+                        A."ninteiShinseiShinseijiKubunCode",  
+                        A."ninteiShinseiHoreiKubunCode",  
+                        A."koroshoIfShikibetsuCode",  
+                        A."shinseishoKanriNo",  
+                        C."ninteichosaIraiYMD",  
+                        D."jigyoshaMeisho",  
+                        E."chosainShimei",  
+                        F."ninteichosaJisshiYMD",  
+                        M."ikenshoJuryoYMD",  
+                        H."nijiHanteiYokaigoJotaiKubunCode",  
+                        I."ichijiHanteiYMD",  
+                        I."ichijiHanteiKekkaCode",  
+                        K."shinsakaiShiryoSakuseiYMD",  
+                        K."shinsakaiKaisaiYoteiYMD",  
+                        L."shinsakaiKaisaiYMD"  
+                    FROM  
+                        rgdb."DbT5101NinteiShinseiJoho" AS A
+                    INNER  JOIN rgdb."DbT7051KoseiShichosonMaster" AS  A1  
+                        ON  A."shoKisaiHokenshaNo" = A1."shoKisaiHokenshaNo"
+                    LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" AS C
+                        ON A."shinseishoKanriNo" = C."shinseishoKanriNo"
+                        AND C."logicalDeletedFlag" = False
+                        AND NOT EXISTS( SELECT 'X'
+                            FROM rgdb."DbT5201NinteichosaIraiJoho" AS C1
+                            WHERE C."shinseishoKanriNo" = C1."shinseishoKanriNo"
+                            AND C1."logicalDeletedFlag"= False
+                            AND C."ninteichosaIraiRirekiNo"<![CDATA[<]]> C1."ninteichosaIraiRirekiNo"
+                    )
+                    LEFT JOIN  rgdb."DbT5910NinteichosaItakusakiJoho" AS D 
+                        ON   C."ninteichosaItakusakiCode" = D."ninteichosaItakusakiCode" 
+                        AND  D."shichosonCode" = A1."shichosonCode" 
+                        AND  D."jokyoFlag" = True 
+                    LEFT JOIN  rgdb."DbT5913ChosainJoho" AS  E 
+                        ON   C."ninteichosaItakusakiCode" = E."ninteiChosaItakusakiCode"  
+                        AND  C."ninteiChosainCode" = E."ninteiChosainCode" 
+                        AND  E."shichosonCode" =  A1."shichosonCode" 
+                        AND  E."jokyoFlag" = True 
+                    LEFT JOIN  rgdb."DbT5202NinteichosahyoGaikyoChosa"  AS F 
+                        ON A."shinseishoKanriNo" = F."shinseishoKanriNo"
+                        AND  F."ninteichosaJuryoYMD" <![CDATA[>=]]> #{抽出期間開始日}
+                        AND  F."ninteichosaJuryoYMD" <![CDATA[<=]]> #{抽出期間終了日}
+                        AND NOT EXISTS (  SELECT  'X' 
+                            FROM  rgdb."DbT5202NinteichosahyoGaikyoChosa" AS F1  
+                            WHERE F."shinseishoKanriNo" = F1."shinseishoKanriNo"
+                            AND  F1."ninteichosaJuryoYMD" <![CDATA[>=]]> #{抽出期間開始日}
+                            AND  F1."ninteichosaJuryoYMD" <![CDATA[<=]]> #{抽出期間終了日}  
+                            AND  F."ninteichosaRirekiNo" <![CDATA[<]]> F1."ninteichosaRirekiNo"  
+                    )
+                    LEFT JOIN  rgdb."DbT5301ShujiiIkenshoIraiJoho"  AS G 
+                         ON A."shinseishoKanriNo" = G."shinseishoKanriNo"  
+                        AND G."logicalDeletedFlag" = False  
+                        AND NOT EXISTS (  SELECT  'X' 
+                            FROM  rgdb."DbT5301ShujiiIkenshoIraiJoho" AS G1  
+                            WHERE G."shinseishoKanriNo" = G1."shinseishoKanriNo"  
+                            AND  G1."logicalDeletedFlag" = False  
+                            AND  G."ikenshoIraiRirekiNo" <![CDATA[<]]> G1."ikenshoIraiRirekiNo"  
+                    )  
+                    LEFT JOIN  rgdb."DbT5302ShujiiIkenshoJoho"  AS M 
+                            ON A."shinseishoKanriNo" = M."shinseishoKanriNo"  
+                            AND NOT EXISTS (  SELECT  'X' 
+                                FROM  rgdb."DbT5302ShujiiIkenshoJoho" AS M1  
+                                WHERE M."shinseishoKanriNo" =M1."shinseishoKanriNo"  
+                                AND  M."ikenshoIraiRirekiNo" <![CDATA[<]]> M1."ikenshoIraiRirekiNo"  
+                    )  
+                    LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS  H 
+                        ON A."shinseishoKanriNo" = H."shinseishoKanriNo"  
+                    LEFT JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS  I 
+                        ON A."shinseishoKanriNo" = I."shinseishoKanriNo"  
+                    LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho"  AS J 
+                        ON A."shinseishoKanriNo" = J."shinseishoKanriNo"
+                    LEFT JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho"  AS K 
+                        ON J."shinsakaiKaisaiNo" = K."shinsakaiKaisaiNo"  
+                    LEFT JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho"  AS L 
+                        ON K."shinsakaiKaisaiNo" = L."shinsakaiKaisaiNo"  
+                    WHERE  
+                        A."logicalDeletedFlag" = False 
+                        <if test="証記載保険者番号フラグ">
+                            AND  A."shoKisaiHokenshaNo" = #{証記載保険者番号}
+                        </if>
+                        <if test="被保険者番号フラグ">
+                            AND  A."hihokenshaNo" = #{被保険者番号}
+                        </if> 
+                    UNION
+                        SELECT
+                            A."hihokenshaNo",
+                            A."hihokenshaName",
+                            A.seibetsu,
+                            A."seinengappiYMD",
+                            A."ninteiShinseiYMD",
+                            A."ninteiShinseiShinseijiKubunCode",
+                            A."ninteiShinseiHoreiKubunCode",
+                            A."koroshoIfShikibetsuCode",
+                            A."shinseishoKanriNo",
+                            C."ninteichosaIraiYMD",
+                            D."jigyoshaMeisho",
+                            E."chosainShimei",
+                            F."ninteichosaJisshiYMD",
+                            M."ikenshoJuryoYMD",
+                            H."nijiHanteiYokaigoJotaiKubunCode",
+                            I."ichijiHanteiYMD",
+                            I."ichijiHanteiKekkaCode",
+                            K."shinsakaiShiryoSakuseiYMD",
+                            K."shinsakaiKaisaiYoteiYMD",
+                            L."shinsakaiKaisaiYMD"
+                        FROM  
+                            rgdb."DbT5101NinteiShinseiJoho" AS A
+                        INNER  JOIN rgdb."DbT7051KoseiShichosonMaster" AS  A1  
+                            ON  A."shoKisaiHokenshaNo" = A1."shoKisaiHokenshaNo"
+                        LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" AS C
+                            ON A."shinseishoKanriNo" = C."shinseishoKanriNo"
+                            AND C."logicalDeletedFlag" = False
+                            AND NOT EXISTS( SELECT 'X'
+                                FROM rgdb."DbT5201NinteichosaIraiJoho" AS C1
+                                WHERE C."shinseishoKanriNo" = C1."shinseishoKanriNo"
+                                AND C1."logicalDeletedFlag"= False
+                                AND C."ninteichosaIraiRirekiNo"<![CDATA[<]]>C1."ninteichosaIraiRirekiNo"
+                        )
+                        LEFT JOIN  rgdb."DbT5910NinteichosaItakusakiJoho" AS D 
+                            ON C."ninteichosaItakusakiCode" = D."ninteichosaItakusakiCode" 
+                            AND D."shichosonCode" = A1."shichosonCode" 
+                            AND D."jokyoFlag" = True 
+                        LEFT JOIN  rgdb."DbT5913ChosainJoho" AS  E 
+                            ON   C."ninteichosaItakusakiCode" = E."ninteiChosaItakusakiCode"  
+                            AND  C."ninteiChosainCode" = E."ninteiChosainCode" 
+                            AND  E."shichosonCode" =  A1."shichosonCode" 
+                            AND  E."jokyoFlag" = True 
+                        LEFT JOIN  rgdb."DbT5202NinteichosahyoGaikyoChosa"  AS F 
+                            ON A."shinseishoKanriNo" = F."shinseishoKanriNo"  
+                            AND NOT EXISTS (  SELECT  'X' 
+                                FROM  rgdb."DbT5202NinteichosahyoGaikyoChosa" AS F1  
+                            WHERE F."shinseishoKanriNo" = F1."shinseishoKanriNo"  
+                            AND  F."ninteichosaRirekiNo" <![CDATA[<]]> F1."ninteichosaRirekiNo"  
+                        )
+                        LEFT JOIN  rgdb."DbT5301ShujiiIkenshoIraiJoho"  AS G 
+                            ON A."shinseishoKanriNo" = G."shinseishoKanriNo"  
+                            AND G."logicalDeletedFlag" = False 
+                            AND G."ikenshoSakuseiIraiYMD" <![CDATA[>=]]> #{抽出期間開始日}
+                            AND G."ikenshoSakuseiIraiYMD" <![CDATA[<=]]> #{抽出期間終了日}
+                            AND NOT EXISTS (  SELECT  'X' 
+                                FROM  rgdb."DbT5301ShujiiIkenshoIraiJoho" AS G1  
+                                WHERE G."shinseishoKanriNo" = G1."shinseishoKanriNo"  
+                                AND G1."logicalDeletedFlag" = False
+                                AND G1."ikenshoSakuseiIraiYMD" <![CDATA[>=]]> #{抽出期間開始日}
+                                AND G1."ikenshoSakuseiIraiYMD" <![CDATA[<=]]> #{抽出期間終了日}  
+                                AND G."ikenshoIraiRirekiNo" <![CDATA[<]]> G1."ikenshoIraiRirekiNo"  
+                        )  
+                        LEFT JOIN  rgdb."DbT5302ShujiiIkenshoJoho"  AS M 
+                            ON A."shinseishoKanriNo" = M."shinseishoKanriNo"  
+                                AND NOT EXISTS (  SELECT  'X' 
+                                FROM  rgdb."DbT5302ShujiiIkenshoJoho" AS M1  
+                                WHERE M."shinseishoKanriNo" =M1."shinseishoKanriNo"  
+                                AND  M."ikenshoIraiRirekiNo" <![CDATA[<]]> M1."ikenshoIraiRirekiNo"  
+                        )  
+                        LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS  H 
+                            ON A."shinseishoKanriNo" = H."shinseishoKanriNo"  
+                        LEFT JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS  I 
+                            ON A."shinseishoKanriNo" = I."shinseishoKanriNo"  
+                        LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho"  AS J 
+                            ON A."shinseishoKanriNo" = J."shinseishoKanriNo"
+                        LEFT JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho"  AS K 
+                            ON J."shinsakaiKaisaiNo" = K."shinsakaiKaisaiNo"  
+                        LEFT JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho"  AS L 
+                            ON K."shinsakaiKaisaiNo" = L."shinsakaiKaisaiNo"  
+                        WHERE  
+                            A."logicalDeletedFlag" = False 
+                        <if test="証記載保険者番号フラグ">
+                            AND  A."shoKisaiHokenshaNo" = #{証記載保険者番号}
+                        </if>
+                        <if test="被保険者番号フラグ">
+                            AND  A."hihokenshaNo" = #{被保険者番号}
+                        </if>  
+                        UNION
+                            SELECT
+                                A."hihokenshaNo",
+                                A."hihokenshaName",
+                                A.seibetsu,
+                                A."seinengappiYMD",
+                                A."ninteiShinseiYMD",
+                                A."ninteiShinseiShinseijiKubunCode",
+                                A."ninteiShinseiHoreiKubunCode",
+                                A."koroshoIfShikibetsuCode",
+                                A."shinseishoKanriNo",
+                                C."ninteichosaIraiYMD",
+                                D."jigyoshaMeisho",
+                                E."chosainShimei",
+                                F."ninteichosaJisshiYMD",
+                                M."ikenshoJuryoYMD",
+                                H."nijiHanteiYokaigoJotaiKubunCode",
+                                I."ichijiHanteiYMD",
+                                I."ichijiHanteiKekkaCode",
+                                K."shinsakaiShiryoSakuseiYMD",
+                                K."shinsakaiKaisaiYoteiYMD",
+                                L."shinsakaiKaisaiYMD"
+                            FROM  
+                                rgdb."DbT5101NinteiShinseiJoho" AS A
+                            INNER  JOIN rgdb."DbT7051KoseiShichosonMaster" AS  A1  
+                                ON  A."shoKisaiHokenshaNo" = A1."shoKisaiHokenshaNo"
+                            LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" AS C
+                                ON A."shinseishoKanriNo" = C."shinseishoKanriNo"
+                                AND C."logicalDeletedFlag" = False
+                                AND NOT EXISTS( SELECT  'X'
+                                    FROM rgdb."DbT5201NinteichosaIraiJoho" AS C1
+                                    WHERE C."shinseishoKanriNo" = C1."shinseishoKanriNo"
+                                    AND C1."logicalDeletedFlag"= False
+                                    AND C."ninteichosaIraiRirekiNo"<![CDATA[<]]> C1."ninteichosaIraiRirekiNo"
+                            )
+                            LEFT JOIN  rgdb."DbT5910NinteichosaItakusakiJoho" AS D 
+                                ON   C."ninteichosaItakusakiCode" = D."ninteichosaItakusakiCode" 
+                                AND  D."shichosonCode" = A1."shichosonCode" 
+                                AND  D."jokyoFlag" = True 
+                           LEFT JOIN  rgdb."DbT5913ChosainJoho" AS  E 
+                                ON   C."ninteichosaItakusakiCode" = E."ninteiChosaItakusakiCode"  
+                                AND  C."ninteiChosainCode" = E."ninteiChosainCode" 
+                                AND  E."shichosonCode" =  A1."shichosonCode" 
+                                AND  E."jokyoFlag" = True 
+                          LEFT JOIN  rgdb."DbT5202NinteichosahyoGaikyoChosa"  AS F 
+                                ON A."shinseishoKanriNo" = F."shinseishoKanriNo"  
+                                AND NOT EXISTS (  SELECT  'X' 
+                                    FROM  rgdb."DbT5202NinteichosahyoGaikyoChosa" AS F1  
+                                    WHERE F."shinseishoKanriNo" = F1."shinseishoKanriNo"  
+                                    AND  F."ninteichosaRirekiNo" <![CDATA[<]]> F1."ninteichosaRirekiNo"  
+                        )
+                        LEFT JOIN  rgdb."DbT5301ShujiiIkenshoIraiJoho"  AS G 
+                            ON A."shinseishoKanriNo" = G."shinseishoKanriNo"  
+                            AND G."logicalDeletedFlag" = False  
+                            AND NOT EXISTS (  SELECT  'X' 
+                                FROM  rgdb."DbT5301ShujiiIkenshoIraiJoho" AS G1  
+                                WHERE G."shinseishoKanriNo" = G1."shinseishoKanriNo"  
+                                AND  G1."logicalDeletedFlag" = False  
+                            AND  G."ikenshoIraiRirekiNo" <![CDATA[<]]> G1."ikenshoIraiRirekiNo"  
+                        )  
+                        LEFT JOIN  rgdb."DbT5302ShujiiIkenshoJoho"  AS M 
+                            ON A."shinseishoKanriNo" = M."shinseishoKanriNo" 
+                            AND M."ikenshoJuryoYMD" <![CDATA[>=]]> #{抽出期間開始日}
+                            AND M."ikenshoJuryoYMD" <![CDATA[<=]]> #{抽出期間終了日} 
+                            AND NOT EXISTS (  SELECT  'X' 
+                                FROM  rgdb."DbT5302ShujiiIkenshoJoho" AS M1  
+                                WHERE M."shinseishoKanriNo" =M1."shinseishoKanriNo"
+                                AND M1."ikenshoJuryoYMD" <![CDATA[>=]]> #{抽出期間開始日}
+                                AND M1."ikenshoJuryoYMD" <![CDATA[<=]]> #{抽出期間終了日}   
+                                AND M."ikenshoIraiRirekiNo" <![CDATA[<]]> M1."ikenshoIraiRirekiNo"  
+                      )  
+                    LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS  H 
+                        ON A."shinseishoKanriNo" = H."shinseishoKanriNo"  
+                    LEFT JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS  I 
+                        ON A."shinseishoKanriNo" = I."shinseishoKanriNo"  
+                    LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho"  AS J 
+                        ON A."shinseishoKanriNo" = J."shinseishoKanriNo"
+                    LEFT JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho"  AS K 
+                        ON J."shinsakaiKaisaiNo" = K."shinsakaiKaisaiNo"  
+                    LEFT JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho"  AS L 
+                        ON K."shinsakaiKaisaiNo" = L."shinsakaiKaisaiNo"
+                    WHERE
+                       A."logicalDeletedFlag" = False 
+                        <if test="証記載保険者番号フラグ">
+                            AND  A."shoKisaiHokenshaNo" = #{証記載保険者番号}
+                        </if>
+                        <if test="被保険者番号フラグ">
+                            AND  A."hihokenshaNo" = #{被保険者番号}
+                        </if>   
+                    UNION
+                        SELECT
+                            A."hihokenshaNo",
+                            A."hihokenshaName",
+                            A.seibetsu,
+                            A."seinengappiYMD",
+                            A."ninteiShinseiYMD",
+                            A."ninteiShinseiShinseijiKubunCode",
+                            A."ninteiShinseiHoreiKubunCode",
+                            A."koroshoIfShikibetsuCode",
+                            A."shinseishoKanriNo",
+                            C."ninteichosaIraiYMD",
+                            D."jigyoshaMeisho",
+                            E."chosainShimei",
+                            F."ninteichosaJisshiYMD",
+                            M."ikenshoJuryoYMD",
+                            H."nijiHanteiYokaigoJotaiKubunCode",
+                            I."ichijiHanteiYMD",
+                            I."ichijiHanteiKekkaCode",
+                            K."shinsakaiShiryoSakuseiYMD",
+                            K."shinsakaiKaisaiYoteiYMD",
+                            L."shinsakaiKaisaiYMD"
+                        FROM  
+                            rgdb."DbT5101NinteiShinseiJoho" AS A
+                        INNER  JOIN rgdb."DbT7051KoseiShichosonMaster" AS  A1  
+                            ON  A."shoKisaiHokenshaNo" = A1."shoKisaiHokenshaNo"
+                        LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" AS C
+                            ON A."shinseishoKanriNo" = C."shinseishoKanriNo"
+                        AND C."logicalDeletedFlag" = False
+                        AND NOT EXISTS( SELECT  'X'
+                            FROM rgdb."DbT5201NinteichosaIraiJoho" AS C1
+                            WHERE C."shinseishoKanriNo" = C1."shinseishoKanriNo"
+                            AND C1."logicalDeletedFlag"= False
+                            AND C."ninteichosaIraiRirekiNo"<![CDATA[<]]> C1."ninteichosaIraiRirekiNo"
+                      )
+                       LEFT JOIN  rgdb."DbT5910NinteichosaItakusakiJoho" AS D 
+                            ON   C."ninteichosaItakusakiCode" = D."ninteichosaItakusakiCode" 
+                            AND  D."shichosonCode" = A1."shichosonCode" 
+                            AND  D."jokyoFlag" = True 
+                      LEFT JOIN  rgdb."DbT5913ChosainJoho" AS  E 
+                        ON   C."ninteichosaItakusakiCode" = E."ninteiChosaItakusakiCode"  
+                        AND  C."ninteiChosainCode" = E."ninteiChosainCode" 
+                        AND  E."shichosonCode" =  A1."shichosonCode" 
+                        AND  E."jokyoFlag" = True 
+                      LEFT JOIN  rgdb."DbT5202NinteichosahyoGaikyoChosa"  AS F 
+                        ON A."shinseishoKanriNo" = F."shinseishoKanriNo"  
+                        AND NOT EXISTS (  SELECT  'X' 
+                            FROM  rgdb."DbT5202NinteichosahyoGaikyoChosa" AS F1  
+                            WHERE F."shinseishoKanriNo" = F1."shinseishoKanriNo"  
+                            AND  F."ninteichosaRirekiNo" <![CDATA[<]]> F1."ninteichosaRirekiNo"  
+                    )
+                     LEFT JOIN  rgdb."DbT5301ShujiiIkenshoIraiJoho"  AS G 
+                        ON A."shinseishoKanriNo" = G."shinseishoKanriNo"  
+                        AND G."logicalDeletedFlag" = False  
+                        AND NOT EXISTS (  SELECT  'X' 
+                            FROM  rgdb."DbT5301ShujiiIkenshoIraiJoho" AS G1  
+                        WHERE G."shinseishoKanriNo" = G1."shinseishoKanriNo"  
+                        AND  G1."logicalDeletedFlag" = False  
+                        AND  G."ikenshoIraiRirekiNo" <![CDATA[<]]> G1."ikenshoIraiRirekiNo"  
+                    )
+                    LEFT JOIN  rgdb."DbT5302ShujiiIkenshoJoho"  AS M 
+                        ON A."shinseishoKanriNo" = M."shinseishoKanriNo"  
+                        AND NOT EXISTS (  SELECT  'X' 
+                            FROM  rgdb."DbT5302ShujiiIkenshoJoho" AS M1  
+                            WHERE M."shinseishoKanriNo" =M1."shinseishoKanriNo"  
+                            AND  M."ikenshoIraiRirekiNo" <![CDATA[<]]> M1."ikenshoIraiRirekiNo"  
+                    )  
+                    LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS  H 
+                        ON A."shinseishoKanriNo" = H."shinseishoKanriNo"  
+                    LEFT JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS  I 
+                        ON A."shinseishoKanriNo" = I."shinseishoKanriNo"
+                        AND I."ichijiHanteiYMD" <![CDATA[>=]]> #{抽出期間開始日}
+                        AND I."ichijiHanteiYMD" <![CDATA[<=]]> #{抽出期間終了日} 
+                    LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho"  AS J 
+                        ON A."shinseishoKanriNo" = J."shinseishoKanriNo"
+                    LEFT JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho"  AS K 
+                        ON J."shinsakaiKaisaiNo" = K."shinsakaiKaisaiNo"  
+                    LEFT JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho"  AS L 
+                        ON K."shinsakaiKaisaiNo" = L."shinsakaiKaisaiNo"  
+                    WHERE  
+                       A."logicalDeletedFlag" = False 
+                        <if test="証記載保険者番号フラグ">
+                            AND  A."shoKisaiHokenshaNo" = #{証記載保険者番号}
+                        </if>
+                        <if test="被保険者番号フラグ">
+                            AND  A."hihokenshaNo" = #{被保険者番号}
+                        </if> 
+                    UNION
+                        SELECT
+                            A."hihokenshaNo",
+                            A."hihokenshaName",
+                            A.seibetsu,
+                            A."seinengappiYMD",
+                            A."ninteiShinseiYMD",
+                            A."ninteiShinseiShinseijiKubunCode",
+                            A."ninteiShinseiHoreiKubunCode",
+                            A."koroshoIfShikibetsuCode",
+                            A."shinseishoKanriNo",
+                            C."ninteichosaIraiYMD",
+                            D."jigyoshaMeisho",
+                            E."chosainShimei",
+                            F."ninteichosaJisshiYMD",
+                            M."ikenshoJuryoYMD",
+                            H."nijiHanteiYokaigoJotaiKubunCode",
+                            I."ichijiHanteiYMD",
+                            I."ichijiHanteiKekkaCode",
+                            K."shinsakaiShiryoSakuseiYMD",
+                            K."shinsakaiKaisaiYoteiYMD",
+                            L."shinsakaiKaisaiYMD" 
+                        FROM  
+                            rgdb."DbT5101NinteiShinseiJoho" AS A
+                        INNER  JOIN rgdb."DbT7051KoseiShichosonMaster" AS  A1  
+                            ON  A."shoKisaiHokenshaNo" = A1."shoKisaiHokenshaNo"
+                        LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" AS C
+                            ON A."shinseishoKanriNo" = C."shinseishoKanriNo"
+                            AND C."logicalDeletedFlag" = False
+                            AND NOT EXISTS( SELECT 'X'
+                                FROM rgdb."DbT5201NinteichosaIraiJoho" AS C1
+                                WHERE C."shinseishoKanriNo" = C1."shinseishoKanriNo"
+                                AND C1."logicalDeletedFlag"= False
+                                AND C."ninteichosaIraiRirekiNo"<![CDATA[<]]> C1."ninteichosaIraiRirekiNo"
+                        )
+                        LEFT JOIN  rgdb."DbT5910NinteichosaItakusakiJoho" AS D 
+                            ON   C."ninteichosaItakusakiCode" = D."ninteichosaItakusakiCode" 
+                            AND  D."shichosonCode" = A1."shichosonCode" 
+                            AND  D."jokyoFlag" = True 
+                        LEFT JOIN  rgdb."DbT5913ChosainJoho" AS  E 
+                            ON   C."ninteichosaItakusakiCode" = E."ninteiChosaItakusakiCode"  
+                            AND  C."ninteiChosainCode" = E."ninteiChosainCode" 
+                            AND  E."shichosonCode" =  A1."shichosonCode" 
+                            AND  E."jokyoFlag" = True 
+                        LEFT JOIN  rgdb."DbT5202NinteichosahyoGaikyoChosa"  AS F 
+                            ON A."shinseishoKanriNo" = F."shinseishoKanriNo"  
+                            AND NOT EXISTS (  SELECT  'X' 
+                                FROM  rgdb."DbT5202NinteichosahyoGaikyoChosa" AS F1  
+                                WHERE F."shinseishoKanriNo" = F1."shinseishoKanriNo"  
+                                AND  F."ninteichosaRirekiNo" <![CDATA[<]]> F1."ninteichosaRirekiNo"  
+                        )
+                        LEFT JOIN  rgdb."DbT5301ShujiiIkenshoIraiJoho"  AS G 
+                            ON A."shinseishoKanriNo" = G."shinseishoKanriNo"  
+                            AND G."logicalDeletedFlag" = False  
+                                AND NOT EXISTS (  SELECT  'X' 
+                                FROM  rgdb."DbT5301ShujiiIkenshoIraiJoho" AS G1  
+                                WHERE G."shinseishoKanriNo" = G1."shinseishoKanriNo"  
+                                AND  G1."logicalDeletedFlag" = False  
+                                AND  G."ikenshoIraiRirekiNo" <![CDATA[<]]> G1."ikenshoIraiRirekiNo"  
+                        )
+                        LEFT JOIN  rgdb."DbT5302ShujiiIkenshoJoho"  AS M 
+                            ON A."shinseishoKanriNo" = M."shinseishoKanriNo"  
+                            AND NOT EXISTS (  SELECT  'X' 
+                                FROM  rgdb."DbT5302ShujiiIkenshoJoho" AS M1  
+                                WHERE M."shinseishoKanriNo" =M1."shinseishoKanriNo"  
+                                AND  M."ikenshoIraiRirekiNo" <![CDATA[<]]> M1."ikenshoIraiRirekiNo"  
+                        )  
+                        LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS  H 
+                            ON A."shinseishoKanriNo" = H."shinseishoKanriNo"
+                        LEFT JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS  I 
+                            ON A."shinseishoKanriNo" = I."shinseishoKanriNo"  
+                        LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho"  AS J 
+                            ON A."shinseishoKanriNo" = J."shinseishoKanriNo"
+                            AND J."shinsakaiWariateYMD" <![CDATA[>=]]> #{抽出期間開始日}
+                            AND J."shinsakaiWariateYMD" <![CDATA[<=]]> #{抽出期間終了日}
+                        LEFT JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho"  AS K 
+                            ON J."shinsakaiKaisaiNo" = K."shinsakaiKaisaiNo"  
+                        LEFT JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho"  AS L 
+                            ON K."shinsakaiKaisaiNo" = L."shinsakaiKaisaiNo"
+                        WHERE  
+                            A."logicalDeletedFlag" = False 
+                        <if test="証記載保険者番号フラグ">
+                            AND  A."shoKisaiHokenshaNo" = #{証記載保険者番号}
+                        </if>
+                        <if test="被保険者番号フラグ">
+                            AND  A."hihokenshaNo" = #{被保険者番号}
+                        </if> 
+                        UNION
+                            SELECT
+                                A."hihokenshaNo",
+                                A."hihokenshaName",
+                                A.seibetsu,
+                                A."seinengappiYMD",
+                                A."ninteiShinseiYMD",
+                                A."ninteiShinseiShinseijiKubunCode",
+                                A."ninteiShinseiHoreiKubunCode",
+                                A."koroshoIfShikibetsuCode",
+                                A."shinseishoKanriNo",
+                                C."ninteichosaIraiYMD",
+                                D."jigyoshaMeisho",
+                                E."chosainShimei",
+                                F."ninteichosaJisshiYMD",
+                                M."ikenshoJuryoYMD",
+                                H."nijiHanteiYokaigoJotaiKubunCode",
+                                I."ichijiHanteiYMD",
+                                I."ichijiHanteiKekkaCode",
+                                K."shinsakaiShiryoSakuseiYMD",
+                                K."shinsakaiKaisaiYoteiYMD",
+                                L."shinsakaiKaisaiYMD" 
+                            FROM  
+                                rgdb."DbT5101NinteiShinseiJoho" AS A
+                            INNER  JOIN rgdb."DbT7051KoseiShichosonMaster" AS  A1  
+                                ON  A."shoKisaiHokenshaNo" = A1."shoKisaiHokenshaNo"
+                            LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" AS C
+                                ON A."shinseishoKanriNo" = C."shinseishoKanriNo"
+                                AND C."logicalDeletedFlag" = False
+                                AND NOT EXISTS( SELECT 'X'
+                                    FROM rgdb."DbT5201NinteichosaIraiJoho" AS C1
+                                    WHERE C."shinseishoKanriNo" = C1."shinseishoKanriNo"
+                                    AND C1."logicalDeletedFlag"= False
+                                    AND C."ninteichosaIraiRirekiNo"<![CDATA[<]]> C1."ninteichosaIraiRirekiNo"
+                                )
+                            LEFT JOIN  rgdb."DbT5910NinteichosaItakusakiJoho" AS D 
+                                ON   C."ninteichosaItakusakiCode" = D."ninteichosaItakusakiCode" 
+                                AND  D."shichosonCode" = A1."shichosonCode" 
+                                AND  D."jokyoFlag" = True 
+                            LEFT JOIN  rgdb."DbT5913ChosainJoho" AS  E 
+                                ON   C."ninteichosaItakusakiCode" = E."ninteiChosaItakusakiCode"  
+                                AND  C."ninteiChosainCode" = E."ninteiChosainCode" 
+                                AND  E."shichosonCode" =  A1."shichosonCode" 
+                                AND  E."jokyoFlag" = True 
+                            LEFT JOIN  rgdb."DbT5202NinteichosahyoGaikyoChosa"  AS F 
+                                ON A."shinseishoKanriNo" = F."shinseishoKanriNo"  
+                                AND NOT EXISTS (  SELECT  'X' 
+                                    FROM  rgdb."DbT5202NinteichosahyoGaikyoChosa" AS F1  
+                                    WHERE F."shinseishoKanriNo" = F1."shinseishoKanriNo"  
+                                    AND  F."ninteichosaRirekiNo" <![CDATA[<]]> F1."ninteichosaRirekiNo"  
+                        )
+                        LEFT JOIN  rgdb."DbT5301ShujiiIkenshoIraiJoho"  AS G 
+                            ON A."shinseishoKanriNo" = G."shinseishoKanriNo"  
+                            AND G."logicalDeletedFlag" = False  
+                            AND NOT EXISTS (  SELECT  'X' 
+                                FROM  rgdb."DbT5301ShujiiIkenshoIraiJoho" AS G1  
+                                WHERE G."shinseishoKanriNo" = G1."shinseishoKanriNo"  
+                                AND  G1."logicalDeletedFlag" = False  
+                                AND  G."ikenshoIraiRirekiNo" <![CDATA[<]]> G1."ikenshoIraiRirekiNo"  
+                        )
+                        LEFT JOIN  rgdb."DbT5302ShujiiIkenshoJoho"  AS M 
+                            ON A."shinseishoKanriNo" = M."shinseishoKanriNo"  
+                            AND NOT EXISTS (  SELECT  'X' 
+                                FROM  rgdb."DbT5302ShujiiIkenshoJoho" AS M1  
+                                WHERE M."shinseishoKanriNo" =M1."shinseishoKanriNo"  
+                                AND  M."ikenshoIraiRirekiNo" <![CDATA[<]]> M1."ikenshoIraiRirekiNo"  
+                        )
+                        LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS  H 
+                            ON A."shinseishoKanriNo" = H."shinseishoKanriNo" 
+                            AND H."nijiHanteiYMD" <![CDATA[>=]]> #{抽出期間開始日}
+                            AND H."nijiHanteiYMD" <![CDATA[<=]]> #{抽出期間終了日} 
+                            LEFT JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS  I 
+                            ON A."shinseishoKanriNo" = I."shinseishoKanriNo"  
+                        LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho"  AS J 
+                            ON A."shinseishoKanriNo" = J."shinseishoKanriNo"
+                        LEFT JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho"  AS K 
+                            ON J."shinsakaiKaisaiNo" = K."shinsakaiKaisaiNo"  
+                        LEFT JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho"  AS L 
+                            ON K."shinsakaiKaisaiNo" = L."shinsakaiKaisaiNo"
+                        WHERE
+                            A."logicalDeletedFlag" = False 
+                        <if test="証記載保険者番号フラグ">
+                            AND  A."shoKisaiHokenshaNo" = #{証記載保険者番号}
+                        </if>
+                        <if test="被保険者番号フラグ">
+                            AND  A."hihokenshaNo" = #{被保険者番号}
+                        </if>) AS A 
+                   ORDER BY
+                        A."hihokenshaNo" desc
+                    <if test="usesSaidaiHyojiKensu">
+                         LIMIT #{saidaiHyojiKensu}
+                    </if>                
+    </select>
+</mapper>

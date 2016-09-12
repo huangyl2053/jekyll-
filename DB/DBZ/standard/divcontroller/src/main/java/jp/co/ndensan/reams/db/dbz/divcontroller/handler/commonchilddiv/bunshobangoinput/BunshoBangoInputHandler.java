@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.bunshobangoinput;
 
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.SaibanHanyokeyName;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.BunshoBangoInputDiv;
 import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNo;
 import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNoHatsubanHoho;
@@ -50,6 +50,10 @@ public class BunshoBangoInputHandler {
         div.getTxtBunshoHeader().clearValue();
         div.getTxtBunshoNo().clearValue();
         div.getTxtBunshoFooter().clearValue();
+
+        if (null == 帳票ID || 帳票ID.isEmpty()) {
+            return;
+        }
 
         IBunshoNoFinder finder = BunshoNoFinderFactory.createInstance();
 

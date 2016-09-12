@@ -21,6 +21,6 @@ public class KyufugengakuMenjyoShinseishoProerty extends ReportPropertyBase<Kyuf
      * コンストラクタです。
      */
     public KyufugengakuMenjyoShinseishoProerty() {
-        super(SubGyomuCode.DBA介護資格, ReportIdDBA.DBD800008.getReportId());
+        super(SubGyomuCode.DBD介護受給, ReportIdDBA.DBD800008.getReportId());
     }
 }

@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.Hokensha;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.business.core.hokensha.Hokensha;
-import jp.co.ndensan.reams.db.dbz.business.core.hokensha.KenCodeJigyoshaInputGuide;
+import jp.co.ndensan.reams.db.dbz.business.core.hokenshainputguide.Hokensha;
+import jp.co.ndensan.reams.db.dbz.business.core.hokenshainputguide.KenCodeJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.HokenshaInputGuide.HokenshaInputGuideDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.HokenshaInputGuide.HokenshaInputGuideHandler;
 import jp.co.ndensan.reams.db.dbz.service.core.hokensha.HokenshaNyuryokuHojoFinder;

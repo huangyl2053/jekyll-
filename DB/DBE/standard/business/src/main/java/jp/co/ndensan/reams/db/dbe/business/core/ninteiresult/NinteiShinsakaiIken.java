@@ -4,8 +4,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ninteiresult;
 
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.ShinsakaiIkenType;
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.shinsakaikaisaino.ShinsakaiKaisaiNo;
+import jp.co.ndensan.reams.db.dbe.definition.core.ShinsakaiIkenType;
+import jp.co.ndensan.reams.db.dbe.definition.core.shinsakaikaisaino.ShinsakaiKaisaiNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**

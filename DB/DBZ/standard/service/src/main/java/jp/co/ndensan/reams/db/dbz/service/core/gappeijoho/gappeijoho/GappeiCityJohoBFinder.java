@@ -8,13 +8,18 @@ package jp.co.ndensan.reams.db.dbz.service.core.gappeijoho.gappeijoho;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7055GappeiJohoDac;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeijoho.GappeiCityJyoho;
 import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeijoho.KouikiGappeiJyoho;
-import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.gappeijoho.GappeiJyohoSpecificParameter;
+import jp.co.ndensan.reams.db.dbz.definition.core.sortjun.GappeiJohoSortOrder;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.gappeijoho.GappeiJyohoSpecificParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.gappeijoho.GappeiCityJyohoRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.gappeijoho.KouikiGappeiJyohoRelateEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.gappeicityjoho.IGappeiCityJyohoMapper;
@@ -40,8 +45,14 @@ public class GappeiCityJohoBFinder {
 
     private static final RString 広域 = new RString("1");
     private static final RString 単一 = new RString("2");
+    private static final RString 合併区分_なし = new RString("0");
     private static final RString 合併区分_あり = new RString("1");
-    private static final RString 表示有無区分 = new RString("表示有無区分");
+    private static final RString メッセージ_表示有無区分 = new RString("表示有無区分");
+    private static final RString メッセージ_合併情報ソート順 = new RString("合併情報ソート順");
+    private static final RString RS_合併市町村情報検索キー = new RString("合併市町村情報検索キー");
+    private static final RString 業務分類 = new RString("業務分類");
+    private static final RString 導入形態コード = new RString("導入形態コード");
+    private static final RString 表示有無区分_有 = new RString("1");
     private final MapperProvider mapperProvider;
     private final DbT7055GappeiJohoDac dac;
 
@@ -107,7 +118,7 @@ public class GappeiCityJohoBFinder {
      */
     @Transaction
     public SearchResult<GappeiCityJyoho> getTannitsugappeijoho(RString hyoujiUmu) {
-        requireNonNull(hyoujiUmu, UrSystemErrorMessages.値がnull.getReplacedMessage(表示有無区分.toString()));
+        requireNonNull(hyoujiUmu, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_表示有無区分.toString()));
         IGappeiCityJyohoMapper gappeiJyohoMapper = this.mapperProvider.create(IGappeiCityJyohoMapper.class);
         GappeiJyohoSpecificParameter params = GappeiJyohoSpecificParameter.createParamForTannitsugappeijoho(hyoujiUmu);
         List<GappeiCityJyohoRelateEntity> 合併情報検索結果Entityリスト = gappeiJyohoMapper.getTannitsugappeijoho(params);
@@ -129,7 +140,7 @@ public class GappeiCityJohoBFinder {
     @Transaction
     public SearchResult<GappeiCityJyoho> getTannitsugappeijohokensaku(RString hyoujiUmu,
             LasdecCode 旧市町村コード, HokenshaNo 旧保険者番号) {
-        requireNonNull(hyoujiUmu, UrSystemErrorMessages.値がnull.getReplacedMessage(表示有無区分.toString()));
+        requireNonNull(hyoujiUmu, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_表示有無区分.toString()));
         if ((旧市町村コード == null || 旧市町村コード.isEmpty()) && (旧保険者番号 == null || 旧保険者番号.isEmpty())) {
             throw new ApplicationException(UrErrorMessages.検索キーの誤り.getMessage());
         }
@@ -152,7 +163,7 @@ public class GappeiCityJohoBFinder {
      */
     @Transaction
     public SearchResult<GappeiCityJyoho> getKouikigappeijoho(RString hyoujiUmu) {
-        requireNonNull(hyoujiUmu, UrSystemErrorMessages.値がnull.getReplacedMessage(表示有無区分.toString()));
+        requireNonNull(hyoujiUmu, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_表示有無区分.toString()));
         IGappeiCityJyohoMapper gappeiJyohoMapper = this.mapperProvider.create(IGappeiCityJyohoMapper.class);
         GappeiJyohoSpecificParameter params = GappeiJyohoSpecificParameter.createParamForKouikigappeijoho(hyoujiUmu);
         List<GappeiCityJyohoRelateEntity> 合併情報検索結果Entityリスト = gappeiJyohoMapper.getKouikigappeijoho(params);
@@ -174,7 +185,7 @@ public class GappeiCityJohoBFinder {
     @Transaction
     public SearchResult<GappeiCityJyoho> getKouikigappeijohokensaku(RString hyoujiUmu,
             LasdecCode 旧市町村コード, HokenshaNo 旧保険者番号) {
-        requireNonNull(hyoujiUmu, UrSystemErrorMessages.値がnull.getReplacedMessage(表示有無区分.toString()));
+        requireNonNull(hyoujiUmu, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_表示有無区分.toString()));
         if ((旧市町村コード == null || 旧市町村コード.isEmpty()) && (旧保険者番号 == null || 旧保険者番号.isEmpty())) {
             throw new ApplicationException(UrErrorMessages.検索キーの誤り.getMessage());
         }
@@ -198,7 +209,7 @@ public class GappeiCityJohoBFinder {
      */
     @Transaction
     public SearchResult<GappeiCityJyoho> getSennyoukouikigappeijohokensaku(RString hyoujiUmu, RString 導入形態コード) {
-        requireNonNull(hyoujiUmu, UrSystemErrorMessages.値がnull.getReplacedMessage(表示有無区分.toString()));
+        requireNonNull(hyoujiUmu, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_表示有無区分.toString()));
         requireNonNull(導入形態コード, UrSystemErrorMessages.値がnull.getReplacedMessage("導入形態コード"));
         IGappeiCityJyohoMapper gappeiJyohoMapper = this.mapperProvider.create(IGappeiCityJyohoMapper.class);
         GappeiJyohoSpecificParameter params = GappeiJyohoSpecificParameter.createParamForTannitsugappeijoho(hyoujiUmu);
@@ -225,7 +236,7 @@ public class GappeiCityJohoBFinder {
      */
     @Transaction
     public SearchResult<GappeiCityJyoho> getSaishintannitsugappeijoho(RString hyoujiUmu) {
-        requireNonNull(hyoujiUmu, UrSystemErrorMessages.値がnull.getReplacedMessage(表示有無区分.toString()));
+        requireNonNull(hyoujiUmu, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_表示有無区分.toString()));
         IGappeiCityJyohoMapper gappeiJyohoMapper = this.mapperProvider.create(IGappeiCityJyohoMapper.class);
         GappeiJyohoSpecificParameter params = GappeiJyohoSpecificParameter.createParamForSaishintannitsugappeijoho(hyoujiUmu);
         List<GappeiCityJyohoRelateEntity> 合併情報検索結果Entityリスト = gappeiJyohoMapper.getSaishintannitsugappeijoho(params);
@@ -244,7 +255,7 @@ public class GappeiCityJohoBFinder {
      */
     @Transaction
     public SearchResult<GappeiCityJyoho> getKouikigappeijohokennsaku(RString hyoujium) {
-        requireNonNull(hyoujium, UrSystemErrorMessages.値がnull.getReplacedMessage(表示有無区分.toString()));
+        requireNonNull(hyoujium, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_表示有無区分.toString()));
         IGappeiCityJyohoMapper gappeiJyohoMapper = this.mapperProvider.create(IGappeiCityJyohoMapper.class);
         GappeiJyohoSpecificParameter params = GappeiJyohoSpecificParameter.createParamForKouikigappeijohokennsaku(hyoujium);
         List<GappeiCityJyohoRelateEntity> 合併情報検索結果Entityリスト = gappeiJyohoMapper.getKouikigappeijohokennsaku(params);
@@ -312,5 +323,126 @@ public class GappeiCityJohoBFinder {
             kouikiGappeiJyohoList.add(new KouikiGappeiJyoho(entity));
         }
         return SearchResult.of(kouikiGappeiJyohoList, 0, false);
+    }
+
+    /**
+     * start被保険者番号の変換対象を特定するための基準日を取得します。
+     *
+     * @param gyomubunrui GyomuBunrui
+     * @return FlexibleDate
+     */
+    public FlexibleDate getHihokenshaBangoHenkanKijunbi(GyomuBunrui gyomubunrui) {
+        requireNonNull(gyomubunrui, UrSystemErrorMessages.値がnull.getReplacedMessage(業務分類.toString()));
+        ShichosonSecurityJoho shichosonsecurityjoho = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(gyomubunrui);
+        if (shichosonsecurityjoho == null) {
+            return null;
+        }
+        DonyuKeitaiCode donyukeitaicode = shichosonsecurityjoho.get導入形態コード();
+        RDate nowDate = RDate.getNowDate();
+        if (donyukeitaicode.is単一()) {
+            if (合併区分_なし.equals(DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, nowDate, SubGyomuCode.DBU介護統計報告))) {
+                return FlexibleDate.EMPTY;
+            } else if (合併区分_あり.equals(DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, nowDate, SubGyomuCode.DBU介護統計報告))) {
+                GappeiCityJohoBFinder finder = new GappeiCityJohoBFinder();
+                SearchResult<GappeiCityJyoho> result = finder.getSaishintannitsugappeijoho(表示有無区分_有);
+                return result == null || result.records() == null || result.records().isEmpty() ? null : result.records().get(0).get国保連データ連携開始年月日();
+            }
+        } else {
+            return new FlexibleDate(DbBusinessConfig.get(ConfigNameDBU.保険者発足情報_広域保険者_合併保険者_発足日, nowDate, SubGyomuCode.DBU介護統計報告));
+        }
+        return FlexibleDate.EMPTY;
+    }
+
+    /**
+     * 導入形態コード渡して、被保険者番号の変換対象を特定するための基準日を取得します。
+     *
+     * @param gyomubunrui GyomuBunrui
+     * @param donyukeitaicode DonyukeitaiCode
+     * @return FlexibleDate
+     */
+    public FlexibleDate getHihokenshaBangoHenkanKijunbi(GyomuBunrui gyomubunrui, DonyuKeitaiCode donyukeitaicode) {
+        requireNonNull(gyomubunrui, UrSystemErrorMessages.値がnull.getReplacedMessage(業務分類.toString()));
+        requireNonNull(donyukeitaicode, UrSystemErrorMessages.値がnull.getReplacedMessage(導入形態コード.toString()));
+        RDate nowDate = RDate.getNowDate();
+        if (donyukeitaicode.is単一()) {
+            if (合併区分_なし.equals(DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, nowDate, SubGyomuCode.DBU介護統計報告))) {
+                return FlexibleDate.EMPTY;
+            } else if (合併区分_あり.equals(DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分, nowDate, SubGyomuCode.DBU介護統計報告))) {
+                GappeiCityJohoBFinder finder = new GappeiCityJohoBFinder();
+                SearchResult<GappeiCityJyoho> result = finder.getSaishintannitsugappeijoho(表示有無区分_有);
+                return result == null || result.records() == null || result.records().isEmpty() ? null : result.records().get(0).get国保連データ連携開始年月日();
+            }
+        } else {
+            return new FlexibleDate(DbBusinessConfig.get(ConfigNameDBU.保険者発足情報_広域保険者_合併保険者_発足日, nowDate, SubGyomuCode.DBU介護統計報告));
+        }
+        return FlexibleDate.EMPTY;
+    }
+
+    /**
+     * 合併市町村情報検索キーより合併市町村情報を検索して、全合併市町村情報を取得します。
+     *
+     * @param 表示有無区分 RString
+     * @param 合併市町村情報検索キー GappeiJyohoSpecificParameter
+     * @param gyomubunrui GyomuBunrui
+     * @return SearchResult<GappeiCityJyoho>
+     */
+    public SearchResult<GappeiCityJyoho> getGappeijohokensaku(RString 表示有無区分, GappeiJyohoSpecificParameter 合併市町村情報検索キー, GyomuBunrui gyomubunrui) {
+        requireNonNull(合併市町村情報検索キー, UrSystemErrorMessages.値がnull.getReplacedMessage(RS_合併市町村情報検索キー.toString()));
+        requireNonNull(gyomubunrui, UrSystemErrorMessages.値がnull.getReplacedMessage(業務分類.toString()));
+        ShichosonSecurityJoho shichosonsecurityjoho = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(gyomubunrui);
+        if (shichosonsecurityjoho == null) {
+            return null;
+        }
+        DonyuKeitaiCode donyukeitaicode = shichosonsecurityjoho.get導入形態コード();
+        GappeiCityJohoBFinder finder = new GappeiCityJohoBFinder();
+        if (donyukeitaicode.is単一()) {
+            return finder.getTannitsugappeijohokensaku(表示有無区分, 合併市町村情報検索キー.getShichosonCode(), 合併市町村情報検索キー.getHokenshaNo());
+        } else {
+            return finder.getKouikigappeijohokensaku(表示有無区分, 合併市町村情報検索キー.getShichosonCode(), 合併市町村情報検索キー.getHokenshaNo());
+        }
+    }
+
+    /**
+     * 最新の合併市町村情報を取得します。
+     *
+     * @param 表示有無区分 RString
+     * @param gyomubunrui GyomuBunrui
+     * @return SearchResult<GappeiCityJyoho>
+     */
+    public SearchResult<GappeiCityJyoho> getSaishingappeijoho(RString 表示有無区分, GyomuBunrui gyomubunrui) {
+        requireNonNull(gyomubunrui, UrSystemErrorMessages.値がnull.getReplacedMessage(業務分類.toString()));
+        ShichosonSecurityJoho shichosonsecurityjoho = ShichosonSecurityJohoFinder.createInstance().getShichosonSecurityJoho(gyomubunrui);
+        if (shichosonsecurityjoho == null) {
+            return null;
+        }
+        DonyuKeitaiCode donyukeitaicode = shichosonsecurityjoho.get導入形態コード();
+        GappeiCityJohoBFinder finder = new GappeiCityJohoBFinder();
+        if (donyukeitaicode.is単一()) {
+            return finder.getSaishintannitsugappeijoho(表示有無区分);
+        } else {
+            return finder.getKouikigappeijohokennsaku(表示有無区分);
+        }
+    }
+
+    /**
+     * ソート順を指定して全合併旧市町村情報を取得します（広域内合併に対応する）。
+     *
+     * @param 表示有無区分 RString
+     * @param 合併情報ソート順 GappeiJohoSortOrder
+     * @return SearchResult<GappeiCityJyoho> 合併市町村情報
+     */
+    @Transaction
+    public SearchResult<GappeiCityJyoho> getKouikigappeijoho(RString 表示有無区分, GappeiJohoSortOrder 合併情報ソート順) {
+        requireNonNull(表示有無区分, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_表示有無区分.toString()));
+        requireNonNull(合併情報ソート順, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_合併情報ソート順.toString()));
+        IGappeiCityJyohoMapper gappeiJyohoMapper = this.mapperProvider.create(IGappeiCityJyohoMapper.class);
+        GappeiJyohoSpecificParameter params = GappeiJyohoSpecificParameter
+                .createParamForKouikigappeijohoWithSort(表示有無区分, 合併情報ソート順);
+        List<GappeiCityJyohoRelateEntity> 合併情報検索結果Entityリスト = gappeiJyohoMapper.getKouikigappeijohoWithSort(params);
+        List<GappeiCityJyoho> gappeiCityJyohoList = new ArrayList<>();
+        for (GappeiCityJyohoRelateEntity entity : 合併情報検索結果Entityリスト) {
+            gappeiCityJyohoList.add(new GappeiCityJyoho(entity));
+        }
+        return SearchResult.of(gappeiCityJyohoList, 0, false);
     }
 }

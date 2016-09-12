@@ -3,21 +3,17 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB8120001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Sep 23 16:02:27 CST 2015 
+ * Wed Sep 23 16:02:27 CST 2015
  */
 
-
-
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 
 /**
- * dgSokujiFukaKouseiRireki_Row のクラスファイル 
- * 
- * @author 自動生成
+ * dgSokujiFukaKouseiRireki_Row のクラスファイル
+ *
+ * @reamsid_L DBB-0660-010 tianshuai
  */
-
 public class dgSokujiFukaKouseiRireki_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
 

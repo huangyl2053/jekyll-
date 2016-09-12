@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.tekiyojogaishaidoteisei;
 
-import jp.co.ndensan.reams.db.dbz.entity.information.InformationEntity;
+import jp.co.ndensan.reams.db.dbz.business.core.tekiyojogaishaidoteisei.param.InformationEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 

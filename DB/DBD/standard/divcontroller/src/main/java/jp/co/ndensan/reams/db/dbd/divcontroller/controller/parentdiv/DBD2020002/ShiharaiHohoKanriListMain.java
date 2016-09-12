@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD2020002;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd207010.Dbd207010BatchFlowParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.shiharaihohohenkolist.ShiharaiHohoHenkoListFlowParameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD2020002.ShiharaiHohoKanriListMainDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD2020002.ShiharaiHohoKanriListMainHandler;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -17,9 +16,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 支払方法変更管理リストのイベントを定義したDivControllerです。
- * 
- * @reamsid_L DBD-3630-010  zhulx
- * 
+ *
+ * @reamsid_L DBD-3630-010 zhulx
+ *
  */
 public class ShiharaiHohoKanriListMain {
 
@@ -56,9 +55,9 @@ public class ShiharaiHohoKanriListMain {
      * @param div ShiharaiHohoKanriListMainDiv のクラスファイル
      * @return ResponseData<ShiharaiHohoKanriListMainDiv>
      */
-    public ResponseData<Dbd207010BatchFlowParameter> onClick_batchParameter(ShiharaiHohoKanriListMainDiv div) {
-        ResponseData<Dbd207010BatchFlowParameter> responseData = new ResponseData<>();
-        responseData.data = createHandler(div).batchParameter();
+    public ResponseData<ShiharaiHohoHenkoListFlowParameter> onClick_batchParameter(ShiharaiHohoKanriListMainDiv div) {
+        ResponseData<ShiharaiHohoHenkoListFlowParameter> responseData = new ResponseData<>();
+        responseData.data = createBusiness(div).createShiharaiHohoHenkoKanriIchiranParameter();
         return responseData;
     }
 
@@ -85,5 +84,9 @@ public class ShiharaiHohoKanriListMain {
         ResponseData<ShiharaiHohoKanriListMainDiv> response = new ResponseData<>();
         response.data = div;
         return response;
+    }
+
+    private ShiharaiHohoHenkoKanriIchiran createBusiness(ShiharaiHohoKanriListMainDiv div) {
+        return new ShiharaiHohoHenkoKanriIchiran(div);
     }
 }

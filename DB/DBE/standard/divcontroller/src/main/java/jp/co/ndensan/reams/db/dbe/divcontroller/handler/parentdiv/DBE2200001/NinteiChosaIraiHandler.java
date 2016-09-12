@@ -7,38 +7,47 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.NinnteiChousairaiBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.SaiChekkuhyoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairai.WaritsukeBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyotokkijiko.ChosahyoTokkijikoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.report.chosahyokihonchosakatamen.ChosahyoKihonchosaKatamenItem;
 import jp.co.ndensan.reams.db.dbe.business.report.chosairaisho.ChosaIraishoHeadItem;
 import jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaItem;
-import jp.co.ndensan.reams.db.dbe.business.report.ninteichosahyotokkijiko.ChosahyoTokkijikoItem;
 import jp.co.ndensan.reams.db.dbe.business.report.saichekkuhyo.SaiChekkuhyoItem;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosa.ChohyoAtesakiKeisho;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.shinsei.ChosaKubun;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.ninnteichousairai.SaiChekkuhyoParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninnteichousairai.SaiChekkuhyoParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.NinteiChosaIraiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.dgChosaItakusakiIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.dgMiwaritsukeShinseishaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.dgWaritsukeZumiShinseishaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2200001.dgchosainIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ninnteichousairai.NinnteiChousairaiFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.NinteiShinseiKubunShinsei;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.NinteiShinseiKubunShinsei;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
-import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChosainJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping09B;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode99;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.RensakusakiTsuzukigara;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
-import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChosainJohoManager;
+import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -48,11 +57,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCode;
+import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCodeResult;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
-import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 
 /**
  * 認定調査員マスタ画面のハンドラークラスです。
@@ -62,7 +72,6 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 public class NinteiChosaIraiHandler {
 
     private static final RString 設定方法 = new RString("1");
-    private static final CodeShubetsu CHIKU_CODE_SHUBETSU = new CodeShubetsu("5001");
     private static final RString WARITSUKE_ZUMI = new RString("割付済み");
     private static final RString MIWARITSUKE = new RString("未割付");
     private static final RString 元号_明治 = new RString("明治");
@@ -110,9 +119,13 @@ public class NinteiChosaIraiHandler {
 
     /**
      * 画面初期化処理です。
+     *
+     * @param flg 初期化判断
      */
-    public void load() {
-        div.getCcdHokenshaList().loadHokenshaList();
+    public void load(boolean flg) {
+        if (flg) {
+            div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
+        }
         div.getTxtChosaItakusakiCode().clearValue();
         div.getTxtChosaItakusakiMeisho().clearValue();
         div.getTxtChosaItakusakiChiku().clearValue();
@@ -138,28 +151,31 @@ public class NinteiChosaIraiHandler {
      * 認定調査委託先一覧に検索結果を設定します。
      *
      * @param 認定調査委託先List 認定調査委託先List
+     * @return コード取得結果
      */
-    public void set認定調査委託先一覧(List<NinnteiChousairaiBusiness> 認定調査委託先List) {
+    public boolean set認定調査委託先一覧(List<NinnteiChousairaiBusiness> 認定調査委託先List) {
         List<dgChosaItakusakiIchiran_Row> dataSource = new ArrayList<>();
         RString 市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード().value();
         RString 市町村名称 = div.getCcdHokenshaList().getSelectedItem().get市町村名称();
+        FlexibleDate 基準日 = FlexibleDate.getNowDate();
         for (NinnteiChousairaiBusiness business : 認定調査委託先List) {
             dgChosaItakusakiIchiran_Row row = new dgChosaItakusakiIchiran_Row();
             TextBoxCode chosaItakusakiCode = new TextBoxCode();
             chosaItakusakiCode.setValue(nullToEmpty(business.getNinteichosaItakusakiCode()));
             row.setChosaItakusakiCode(chosaItakusakiCode);
             row.setChosaItakusakiMeisho(nullToEmpty(business.getJigyoshaMeisho()));
-            UzT0007CodeEntity codeEntity = null;
             if (business.getWaritsukeChiku() != null) {
-                codeEntity = CodeMaster.getCode(
+                RString codeName = CodeMaster.getCodeMeisho(
                         SubGyomuCode.DBE認定支援,
-                        CHIKU_CODE_SHUBETSU,
-                        new Code(business.getWaritsukeChiku().value()));
+                        DBECodeShubetsu.調査地区コード.getコード(),
+                        new Code(business.getWaritsukeChiku().value()), 基準日);
+                if (codeName != null) {
+                    row.setChosaChiku(codeName);
+                } else {
+                    return false;
+                }
             }
 
-            if (codeEntity != null) {
-                row.setChosaChiku(nullToEmpty(codeEntity.getコード名称()));
-            }
             TextBoxNum waritsukeTeiin = new TextBoxNum();
             waritsukeTeiin.setValue(new Decimal(business.getWaritsukeTeiin()));
             row.setWaritsukeTeiin(waritsukeTeiin);
@@ -181,6 +197,7 @@ public class NinteiChosaIraiHandler {
         }
         div.getDgChosaItakusakiIchiran().getFilterList().clear();
         div.getDgChosaItakusakiIchiran().setDataSource(dataSource);
+        return true;
     }
 
     /**
@@ -470,6 +487,7 @@ public class NinteiChosaIraiHandler {
         row.setNinteiChosainCode(nullToEmpty(business.getNinteiChosainCode()));
         row.setHokenshaNo(nullToEmpty(business.getHokenshaNo()));
         row.setNinteiChosaItakusakiCode(nullToEmpty(business.getNinteiChosaItakusakiCode()));
+        row.setShichosonCode(nullToEmpty(business.getShichosonCode()));
         row.setRenrakusakiYubinNo(business.getRenrakusakiYubinNo() == null ? RString.EMPTY : business.getRenrakusakiYubinNo().value());
         row.setRenrakusakiTelNo(business.getRenrakusakiTelNo() == null ? RString.EMPTY : business.getRenrakusakiTelNo().value());
         row.setRenrakusakiKeitaiTelNo(business.getRenrakusakiKeitaiTelNo() == null ? RString.EMPTY : business.getRenrakusakiKeitaiTelNo().value());
@@ -708,10 +726,14 @@ public class NinteiChosaIraiHandler {
             } else {
                 性別男 = HOUSI;
             }
-
+            ChosainJoho 調査員情報 = new ChosainJohoManager().get調査員情報(new LasdecCode(row.getShichosonCode()),
+                    new ChosaItakusakiCode(row.getNinteiChosaItakusakiCode()),
+                    new ChosainCode(row.getNinteiChosainCode()));
             Map<Integer, RString> 通知文
                     = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBE.DBE220001.getReportId(), KamokuCode.EMPTY, 1);
             RString homonChosasakiJusho = row.getHomonChosasakiJusho();
+            YubinNo 郵便番号 = 調査員情報.get郵便番号();
+            AtenaJusho 住所 = 調査員情報.get住所();
             ChosaIraishoHeadItem item = new ChosaIraishoHeadItem(
                     div.getTxthokkoymd().getValue().toDateString(),
                     RString.EMPTY,
@@ -723,15 +745,14 @@ public class NinteiChosaIraiHandler {
                     RString.EMPTY,
                     RString.EMPTY,
                     RString.EMPTY,
-                    new RString(""), // TODO QA:789 宛先情報の取得
-                    new RString(""),
-                    new RString(""),
-                    new RString(""),
-                    new RString(""),
-                    new RString(""),
-                    new RString(""),
-                    new RString(""),
-                    new RString("要介護認定調査依頼書"),
+                    郵便番号 == null ? RString.EMPTY : 郵便番号.value(),
+                    住所 == null ? RString.EMPTY : 住所.value(),
+                    調査員情報.get所属機関名称(),
+                    調査員情報.get調査員氏名(),
+                    get名称付与(),
+                    getカスタマーバーコード(調査員情報),
+                    RString.EMPTY,
+                    ConfigNameDBE.認定調査依頼書.get名称(),
                     通知文.get(1),
                     被保険者番号リスト.get(0),
                     被保険者番号リスト.get(1),
@@ -767,6 +788,33 @@ public class NinteiChosaIraiHandler {
         return chosaIraishoHeadItemList;
     }
 
+    private RString getカスタマーバーコード(ChosainJoho 調査員情報) {
+        RString カスタマーバーコード = RString.EMPTY;
+        CustomerBarCode barCode = new CustomerBarCode();
+        YubinNo 郵便番号 = 調査員情報.get郵便番号();
+        AtenaJusho 住所 = 調査員情報.get住所();
+        if (郵便番号 != null && 住所 != null) {
+            CustomerBarCodeResult result = barCode.convertCustomerBarCode(郵便番号.value(), 住所.value());
+            if (result != null) {
+                カスタマーバーコード = result.getCustomerBarCode();
+            }
+        }
+        return カスタマーバーコード;
+    }
+
+    private RString get名称付与() {
+        RString key = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼書_宛先敬称, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        RString meishoFuyo = RString.EMPTY;
+        if (ChohyoAtesakiKeisho.なし.getコード().equals(key)) {
+            meishoFuyo = RString.EMPTY;
+        } else if (ChohyoAtesakiKeisho.様.getコード().equals(key)) {
+            meishoFuyo = ChohyoAtesakiKeisho.様.get名称();
+        } else if (ChohyoAtesakiKeisho.殿.getコード().equals(key)) {
+            meishoFuyo = ChohyoAtesakiKeisho.殿.get名称();
+        }
+        return meishoFuyo;
+    }
+
     /**
      * 認定調査票_概況調査印刷用パラメータを作成します。
      *
@@ -778,12 +826,12 @@ public class NinteiChosaIraiHandler {
         for (dgWaritsukeZumiShinseishaIchiran_Row row : selectedItems) {
             RString ninteiShinseiDay = row.getNinteiShinseiDay().getValue().wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.ICHI_NEN)
                     .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
-            List<RString> 保険者番号リスト = get被保険者番号(row.getHokensha());
+            List<RString> 保険者番号リスト = get被保険者番号(row.getHokenshaNo());
             List<RString> 被保険者番号リスト = get被保険者番号(row.getHihokenshaNo());
             List<RString> 認定調査員コードリスト = get認定調査員コード(row.getNinteiChosainCode());
             List<RString> 認定調査委託先コードリスト = get認定調査委託先コード(row.getNinteiChosaItakusakiCode());
             RString 生年月日 = row.getSeinengappiYMD();
-            RString 年号 = new FlexibleDate(生年月日).wareki().toDateString();
+            RString 年号 = new FlexibleDate(生年月日).wareki().eraType(EraType.KANJI).toDateString();
             RString 前回認定年月日 = row.getZenkaiNinteiYMD();
             RString 前回要介護状態区分コード = row.getZenYokaigoKubunCode();
             RString 要支援 = RString.EMPTY;
@@ -838,29 +886,30 @@ public class NinteiChosaIraiHandler {
                     row.getZenkaiChosaItakusaki(),
                     row.getHihokenshaKana(),
                     row.getHihokenshaShimei(),
-                    Seibetsu.男.getコード().equals(row.getSeibetsu()) ? 記号 : RString.EMPTY,
-                    Seibetsu.女.getコード().equals(row.getSeibetsu()) ? 記号 : RString.EMPTY,
+                    Seibetsu.男.get名称().equals(row.getSeibetsu()) ? 記号 : RString.EMPTY,
+                    Seibetsu.女.get名称().equals(row.getSeibetsu()) ? 記号 : RString.EMPTY,
                     row.getJusho(),
                     row.getYubinNo(),
                     row.getTelNo(),
                     年号.startsWith(元号_明治) ? 記号 : RString.EMPTY,
                     年号.startsWith(元号_大正) ? 記号 : RString.EMPTY,
                     年号.startsWith(元号_昭和) ? 記号 : RString.EMPTY,
-                    !RString.isNullOrEmpty(生年月日) ? 生年月日.substring(0, INDEX_3) : RString.EMPTY,
-                    !RString.isNullOrEmpty(生年月日) ? 生年月日.substring(INDEX_3, INDEX_4) : RString.EMPTY,
-                    !RString.isNullOrEmpty(生年月日) ? 生年月日.substring(INDEX_4, INDEX_5) : RString.EMPTY,
+                    年号.substring(2, INDEX_4),
+                    年号.substring(INDEX_5, INDEX_7),
+                    年号.substring(INDEX_8),
                     row.getAge(),
                     row.getRenrakusakiJusho(),
                     row.getRenrakusakiYubinNo(),
                     row.getRenrakusakiTelNo(),
                     row.getRenrakusakiKeitaiTelNo(),
                     row.getRenrakusakiShimei(),
-                    row.getRenrakusakiTuzukigara(),
+                    !RString.isNullOrEmpty(row.getRenrakusakiTuzukigara())
+                    ? RensakusakiTsuzukigara.toValue(row.getRenrakusakiTuzukigara()).get名称() : RString.EMPTY,
                     RString.isNullOrEmpty(前回認定年月日) ? 記号 : RString.EMPTY,
                     !RString.isNullOrEmpty(前回認定年月日) ? 記号 : RString.EMPTY,
-                    !RString.isNullOrEmpty(前回認定年月日) ? 前回認定年月日.substring(0, INDEX_3) : RString.EMPTY,
-                    !RString.isNullOrEmpty(前回認定年月日) ? 前回認定年月日.substring(INDEX_3, INDEX_4) : RString.EMPTY,
-                    !RString.isNullOrEmpty(前回認定年月日) ? 前回認定年月日.substring(INDEX_4, INDEX_5) : RString.EMPTY,
+                    !RString.isNullOrEmpty(前回認定年月日) ? 前回認定年月日.substring(0, INDEX_4) : RString.EMPTY,
+                    !RString.isNullOrEmpty(前回認定年月日) ? 前回認定年月日.substring(INDEX_4, INDEX_6) : RString.EMPTY,
+                    !RString.isNullOrEmpty(前回認定年月日) ? 前回認定年月日.substring(INDEX_6, INDEX_8) : RString.EMPTY,
                     YOKAIGOJOTAIKUBUN01.equals(前回要介護状態区分コード) ? 記号 : RString.EMPTY,
                     要支援,
                     get要支援詳細(前回要介護状態区分コード),
@@ -924,18 +973,18 @@ public class NinteiChosaIraiHandler {
             List<RString> 証記載保険者番号リスト = get被保険者番号(row.getHokenshaNo());
             List<RString> 被保険者番号リスト = get被保険者番号(row.getHihokenshaNo());
             ChosahyoKihonchosaKatamenItem item = new ChosahyoKihonchosaKatamenItem(
-                    証記載保険者番号リスト.get(0),
-                    証記載保険者番号リスト.get(1),
-                    証記載保険者番号リスト.get(2),
-                    証記載保険者番号リスト.get(INDEX_3),
-                    証記載保険者番号リスト.get(INDEX_4),
-                    証記載保険者番号リスト.get(INDEX_5),
                     ninteiShinseiDay.substring(1, 2),
                     ninteiShinseiDay.substring(2, INDEX_3),
                     ninteiShinseiDay.substring(INDEX_4, INDEX_5),
                     ninteiShinseiDay.substring(INDEX_5, INDEX_6),
                     ninteiShinseiDay.substring(INDEX_7, INDEX_8),
                     ninteiShinseiDay.substring(INDEX_8),
+                    証記載保険者番号リスト.get(0),
+                    証記載保険者番号リスト.get(1),
+                    証記載保険者番号リスト.get(2),
+                    証記載保険者番号リスト.get(INDEX_3),
+                    証記載保険者番号リスト.get(INDEX_4),
+                    証記載保険者番号リスト.get(INDEX_5),
                     被保険者番号リスト.get(0),
                     被保険者番号リスト.get(1),
                     被保険者番号リスト.get(2),
@@ -956,8 +1005,8 @@ public class NinteiChosaIraiHandler {
      *
      * @return 認定調査票_特記事項パラメータ
      */
-    public List<ChosahyoTokkijikoItem> create認定調査票_特記事項パラメータ() {
-        List<ChosahyoTokkijikoItem> itemList = new ArrayList<>();
+    public List<ChosahyoTokkijikoBusiness> create認定調査票_特記事項パラメータ() {
+        List<ChosahyoTokkijikoBusiness> itemList = new ArrayList<>();
         List<dgWaritsukeZumiShinseishaIchiran_Row> selectedItems = div.getDgWaritsukeZumiShinseishaIchiran().getSelectedItems();
 
         for (dgWaritsukeZumiShinseishaIchiran_Row row : selectedItems) {
@@ -965,7 +1014,7 @@ public class NinteiChosaIraiHandler {
                     .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
             List<RString> 証記載保険者番号リスト = get被保険者番号(row.getHokenshaNo());
             List<RString> 被保険者番号リスト = get被保険者番号(row.getHihokenshaNo());
-            ChosahyoTokkijikoItem item = new ChosahyoTokkijikoItem(
+            ChosahyoTokkijikoBusiness item = new ChosahyoTokkijikoBusiness(
                     証記載保険者番号リスト.get(INDEX_3),
                     ninteiShinseiDay.substring(1, 2),
                     ninteiShinseiDay.substring(2, INDEX_3),
@@ -999,15 +1048,15 @@ public class NinteiChosaIraiHandler {
      *
      * @return 認定調査票_特記事項_フリー様式パラメータ
      */
-    public List<ChosahyoTokkijikoItem> create認定調査票_特記事項_フリー様式パラメータ() {
-        List<ChosahyoTokkijikoItem> itemList = new ArrayList<>();
+    public List<ChosahyoTokkijikoBusiness> create認定調査票_特記事項_フリー様式パラメータ() {
+        List<ChosahyoTokkijikoBusiness> itemList = new ArrayList<>();
         List<dgWaritsukeZumiShinseishaIchiran_Row> selectedItems = div.getDgWaritsukeZumiShinseishaIchiran().getSelectedItems();
         for (dgWaritsukeZumiShinseishaIchiran_Row row : selectedItems) {
             List<RString> 保険者番号リスト = get被保険者番号(row.getHokensha());
             List<RString> 被保険者番号リスト = get被保険者番号(row.getHihokenshaNo());
             RString ninteiShinseiDay = row.getNinteiShinseiDay().getValue().wareki().eraType(EraType.ALPHABET).firstYear(FirstYear.ICHI_NEN)
                     .separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
-            ChosahyoTokkijikoItem item = new ChosahyoTokkijikoItem(
+            ChosahyoTokkijikoBusiness item = new ChosahyoTokkijikoBusiness(
                     保険者番号リスト.get(INDEX_3),
                     ninteiShinseiDay.substring(1, 2),
                     ninteiShinseiDay.substring(2, INDEX_3),
@@ -1094,7 +1143,7 @@ public class NinteiChosaIraiHandler {
                     前回連番Map.get(NinteichosaKomokuMapping09B.聴力.getコード()),
                     前回連番Map.get(NinteichosaKomokuMapping09B.移乗.getコード()),
                     前回連番Map.get(NinteichosaKomokuMapping09B.移動.getコード()),
-                    前回連番Map.get(NinteichosaKomokuMapping09B.嚥下.getコード()),
+                    前回連番Map.get(NinteichosaKomokuMapping09B.えん下.getコード()),
                     前回連番Map.get(NinteichosaKomokuMapping09B.食事摂取.getコード()),
                     前回連番Map.get(NinteichosaKomokuMapping09B.排尿.getコード()),
                     前回連番Map.get(NinteichosaKomokuMapping09B.排便.getコード()),
@@ -1158,232 +1207,6 @@ public class NinteiChosaIraiHandler {
      *
      * @return 要介護認定調査票差異チェック票パラメータ
      */
-    public List<SaiChekkuhyoItem> create調査票差異チェック票_DBE292002パラメータ() {
-        List<SaiChekkuhyoItem> itemList = new ArrayList<>();
-        List<dgWaritsukeZumiShinseishaIchiran_Row> selectedItems = div.getDgWaritsukeZumiShinseishaIchiran().getSelectedItems();
-        NinnteiChousairaiFinder ninnteiChousairaiFinder = NinnteiChousairaiFinder.createInstance();
-        for (dgWaritsukeZumiShinseishaIchiran_Row row : selectedItems) {
-            List<SaiChekkuhyoBusiness> businessList = ninnteiChousairaiFinder.get認定調査票差異チェック票情報(SaiChekkuhyoParameter.createParam(
-                    ShoriJotaiKubun.通常.getコード(),
-                    ShoriJotaiKubun.延期.getコード(),
-                    row.getShinseishoKanriNo())).records();
-            Map<RString, RString> 前回連番Map = new HashMap();
-            editSaiChekkuhyoBusiness(businessList, 前回連番Map);
-            RString 前回一次判定結果 = RString.EMPTY;
-            RString 前回二次判定結果 = RString.EMPTY;
-            RString 二次判定年月日 = RString.EMPTY;
-            if (!businessList.isEmpty()) {
-                前回一次判定結果 = get判定結果(row.getKoroshoIfShikibetsuCode(), businessList.get(0).getIchijiHanteiKekkaCode());
-                前回二次判定結果 = get判定結果(row.getKoroshoIfShikibetsuCode(), businessList.get(0).getNijiHanteiYokaigoJotaiKubun());
-                二次判定年月日 = new RString(businessList.get(0).getNijiHanteiYMD().toString());
-            }
-            itemList.add(new SaiChekkuhyoItem(
-                    前回一次判定結果,
-                    row.getHihokenshaNo(),
-                    row.getHihokenshaShimei(),
-                    row.getAge(),
-                    前回二次判定結果,
-                    二次判定年月日,
-                    row.getSeinengappiYMD(),
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY
-            ));
-        }
-        return itemList;
-    }
-
-    /**
-     * 要介護認定調査票差異チェック票印刷用パラメータを作成します。
-     *
-     * @return 要介護認定調査票差異チェック票パラメータ
-     */
-    public List<SaiChekkuhyoItem> create調査票差異チェック票_DBE292003パラメータ() {
-        List<SaiChekkuhyoItem> itemList = new ArrayList<>();
-        List<dgWaritsukeZumiShinseishaIchiran_Row> selectedItems = div.getDgWaritsukeZumiShinseishaIchiran().getSelectedItems();
-        NinnteiChousairaiFinder ninnteiChousairaiFinder = NinnteiChousairaiFinder.createInstance();
-        for (dgWaritsukeZumiShinseishaIchiran_Row row : selectedItems) {
-            List<SaiChekkuhyoBusiness> businessList = ninnteiChousairaiFinder.get認定調査票差異チェック票情報(SaiChekkuhyoParameter.createParam(
-                    ShoriJotaiKubun.通常.getコード(),
-                    ShoriJotaiKubun.延期.getコード(),
-                    row.getShinseishoKanriNo())).records();
-            Map<RString, RString> 前回連番Map = new HashMap();
-            editSaiChekkuhyoBusiness(businessList, 前回連番Map);
-            RString 前回一次判定結果 = RString.EMPTY;
-            RString 前回二次判定結果 = RString.EMPTY;
-            RString 二次判定年月日 = RString.EMPTY;
-            if (!businessList.isEmpty()) {
-                前回一次判定結果 = get判定結果(row.getKoroshoIfShikibetsuCode(), businessList.get(0).getIchijiHanteiKekkaCode());
-                前回二次判定結果 = get判定結果(row.getKoroshoIfShikibetsuCode(), businessList.get(0).getNijiHanteiYokaigoJotaiKubun());
-                二次判定年月日 = new RString(businessList.get(0).getNijiHanteiYMD().toString());
-            }
-            itemList.add(new SaiChekkuhyoItem(
-                    前回一次判定結果,
-                    row.getHihokenshaNo(),
-                    row.getHihokenshaShimei(),
-                    row.getAge(),
-                    前回二次判定結果,
-                    二次判定年月日,
-                    row.getSeinengappiYMD(),
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY
-            ));
-        }
-        return itemList;
-    }
-
-    /**
-     * 要介護認定調査票差異チェック票印刷用パラメータを作成します。
-     *
-     * @return 要介護認定調査票差異チェック票パラメータ
-     */
     public List<SaiChekkuhyoItem> create調査票差異チェック票_DBE292004パラメータ() {
         List<SaiChekkuhyoItem> itemList = new ArrayList<>();
         List<dgWaritsukeZumiShinseishaIchiran_Row> selectedItems = div.getDgWaritsukeZumiShinseishaIchiran().getSelectedItems();
@@ -1401,14 +1224,22 @@ public class NinteiChosaIraiHandler {
                 前回認知症高齢者自立度 = businessList.get(0).getNinchishoSeikatsuJiritsudo();
                 前回障害高齢者自立度 = businessList.get(0).getShogaiSeikatsuJiritsudo();
             }
+            RString 前回一次判定結果 = RString.EMPTY;
+            RString 前回二次判定結果 = RString.EMPTY;
+            RString 二次判定年月日 = RString.EMPTY;
+            if (!businessList.isEmpty()) {
+                前回一次判定結果 = get判定結果(row.getKoroshoIfShikibetsuCode(), businessList.get(0).getIchijiHanteiKekkaCode());
+                前回二次判定結果 = get判定結果(row.getKoroshoIfShikibetsuCode(), businessList.get(0).getNijiHanteiYokaigoJotaiKubun());
+                二次判定年月日 = new RString(businessList.get(0).getNijiHanteiYMD().toString());
+            }
             itemList.add(new SaiChekkuhyoItem(
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
-                    RString.EMPTY,
+                    前回一次判定結果,
+                    row.getHihokenshaNo(),
+                    row.getHihokenshaShimei(),
+                    row.getAge(),
+                    前回二次判定結果,
+                    二次判定年月日,
+                    row.getSeinengappiYMD(),
                     前回連番Map.get(NinteichosaKomokuMapping09B.麻痺等_左上肢.getコード()),
                     前回連番Map.get(NinteichosaKomokuMapping09B.麻痺等_右上肢.getコード()),
                     前回連番Map.get(NinteichosaKomokuMapping09B.麻痺等_左下肢.getコード()),
@@ -1431,7 +1262,7 @@ public class NinteiChosaIraiHandler {
                     前回連番Map.get(NinteichosaKomokuMapping09B.聴力.getコード()),
                     前回連番Map.get(NinteichosaKomokuMapping09B.移乗.getコード()),
                     前回連番Map.get(NinteichosaKomokuMapping09B.移動.getコード()),
-                    前回連番Map.get(NinteichosaKomokuMapping09B.嚥下.getコード()),
+                    前回連番Map.get(NinteichosaKomokuMapping09B.えん下.getコード()),
                     前回連番Map.get(NinteichosaKomokuMapping09B.食事摂取.getコード()),
                     前回連番Map.get(NinteichosaKomokuMapping09B.排尿.getコード()),
                     前回連番Map.get(NinteichosaKomokuMapping09B.排便.getコード()),

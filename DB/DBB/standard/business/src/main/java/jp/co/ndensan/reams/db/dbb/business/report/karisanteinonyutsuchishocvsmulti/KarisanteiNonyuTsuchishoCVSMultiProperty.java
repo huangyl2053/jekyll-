@@ -25,7 +25,8 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
  */
 public class KarisanteiNonyuTsuchishoCVSMultiProperty extends ReportPropertyBase<KarisanteiNonyuTsuchishoCVSMultiSource> {
 
-    private static final List<RString> LAYOUT_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("layout")));
+    private static final List<RString> LAYOUT_BREAK_KEYS = Collections.
+            unmodifiableList(Arrays.asList(KarisanteiNonyuTsuchishoCVSMultiSource.LAYOUTBREAKITEM));
 
     /**
      * インスタンスを生成します。
@@ -39,10 +40,7 @@ public class KarisanteiNonyuTsuchishoCVSMultiProperty extends ReportPropertyBase
             Breakers<KarisanteiNonyuTsuchishoCVSMultiSource> breakers,
             BreakerCatalog<KarisanteiNonyuTsuchishoCVSMultiSource> catalog) {
 
-        return breakers.add(catalog.new SimplePageBreaker(
-
-
-
+        return breakers.add(catalog.new SimpleLayoutBreaker(
 
 
             LAYOUT_BREAK_KEYS) {
@@ -51,11 +49,12 @@ public class KarisanteiNonyuTsuchishoCVSMultiProperty extends ReportPropertyBase
                     ReportLineRecord<KarisanteiNonyuTsuchishoCVSMultiSource> currentRecord,
                     ReportLineRecord<KarisanteiNonyuTsuchishoCVSMultiSource> nextRecord,
                     ReportDynamicChart dynamicChart) {
-                if (nextRecord.equals(ReportLineRecord.LAST_RECORD)) {
-                    return currentRecord;
+                int layout = currentRecord.getSource().layoutBreakItem;
+                currentRecord.setFormGroupIndex(layout);
+                if (nextRecord != null && nextRecord.getSource() != null) {
+                    layout = nextRecord.getSource().layoutBreakItem;
+                    nextRecord.setFormGroupIndex(layout);
                 }
-                KarisanteiNonyuTsuchishoCVSMultiSource.Layouts layout = nextRecord.getSource().layout;
-                nextRecord.setFormGroupIndex(layout.index());
                 return currentRecord;
             }
         }).fixed();

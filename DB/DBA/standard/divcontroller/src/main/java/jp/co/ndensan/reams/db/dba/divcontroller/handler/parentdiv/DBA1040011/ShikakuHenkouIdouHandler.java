@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaicho.HihokenshaShuto
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1040011.ShikakuHenkouIdouDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
-import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -65,5 +65,9 @@ public class ShikakuHenkouIdouHandler {
         if (MENUID_DBAMN23003.equals(menuId)) {
             div.getCcdHihosyosai().setDdlHenkoJiyu(ShikakuHenkoJiyu.その他.getコード(), false);
         }
+    }
+
+    public boolean isSavable() {
+        return div.getCcdHihosyosai().is資格変更情報追加済み();
     }
 }

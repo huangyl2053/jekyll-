@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-1951-050 chenaoqi -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyodojukyushataishosha.IKyodoJukyushaTaishoshaFinderMapper">
+    <select resultOrdered="true" id="get基本送付情報" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyodojukyushataishosha.KyodoJukyushaTaishoshaParameter"
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity"
+            fetchSize="500">
+        <include refid="selectDbT3002" />
+    </select>
+    
+    <sql id="selectDbT3002">
+      SELECT DbT3002.*
+            FROM rgdb."DbT3002KyodoShoriyoJukyushaIdoKihonSofu" as DbT3002
+            INNER  JOIN (select "hiHokenshaNo","idoYMD",max("rirekiNo") as max from rgdb."DbT3002KyodoShoriyoJukyushaIdoKihonSofu" group by "hiHokenshaNo","idoYMD")AS A
+            ON  DbT3002."rirekiNo" = A.max
+            and DbT3002."hiHokenshaNo" = A."hiHokenshaNo" 
+            and DbT3002."idoYMD" = A."idoYMD"
+        WHERE 1=1
+            <if test="異動日From != null and !異動日From.isEmpty()">
+            AND #{異動日From}<![CDATA[<=]]> DbT3002."idoYMD"
+            </if>
+            <if test="異動日To != null and !異動日To.isEmpty()">
+            AND DbT3002."idoYMD"<![CDATA[<=]]> #{異動日To}
+            </if>
+            <if test="被保険者番号 != null and !被保険者番号.isEmpty()">
+            AND DbT3002."hiHokenshaNo"= #{被保険者番号}
+            </if>
+            <if test="削除データ検索 == false">
+            AND DbT3002."logicalDeletedFlag"= false
+            </if>
+            order by DbT3002."idoYMD" DESC
+    </sql>
+    
+    <select resultOrdered="true" id="get被保険者氏名" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyodojukyushataishosha.KyodoJukyushaTaishoshaParameter"
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity" fetchSize="500">
+        <include refid="select被保険者氏名" />
+    </select>
+    
+    <sql id="select被保険者氏名">
+      SELECT DbT3002.*
+            FROM rgdb."DbT3002KyodoShoriyoJukyushaIdoKihonSofu" as DbT3002
+            INNER  JOIN (select "hiHokenshaNo","idoYMD",max("rirekiNo") as max from rgdb."DbT3002KyodoShoriyoJukyushaIdoKihonSofu" group by "hiHokenshaNo","idoYMD")AS A
+            ON  DbT3002."rirekiNo" = A.max
+            and DbT3002."hiHokenshaNo" = A."hiHokenshaNo" 
+            and DbT3002."idoYMD" = A."idoYMD"
+            WHERE DbT3002."hiHokenshaNo" = #{被保険者番号}
+            and  DbT3002."idoYMD"<![CDATA[<=]]> #{異動日To}
+            and  DbT3002."logicalDeletedFlag"= false
+            order by DbT3002."idoYMD" DESC
+    </sql>
+    
+    <select resultOrdered="true" id="get償還送付情報" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyodojukyushataishosha.KyodoJukyushaTaishoshaParameter"
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3003KyodoShoriyoJukyushaIdoShokanSofuEntity" fetchSize="500">
+        <include refid="selectDbT3003" />
+    </select>
+    
+    <sql id="selectDbT3003">
+        SELECT DbT3003.*
+            FROM rgdb."DbT3003KyodoShoriyoJukyushaIdoShokanSofu" as DbT3003
+            INNER  JOIN (select "hiHokenshaNo","idoYMD",max("rirekiNo") as max from rgdb."DbT3003KyodoShoriyoJukyushaIdoShokanSofu" group by "hiHokenshaNo","idoYMD")AS A
+            ON  DbT3003."rirekiNo" = A.max
+            and DbT3003."hiHokenshaNo" = A."hiHokenshaNo" 
+            and DbT3003."idoYMD" = A."idoYMD"
+        WHERE 1=1
+            <if test="異動日From != null and !異動日From.isEmpty()">
+            AND #{異動日From}<![CDATA[<=]]> DbT3003."idoYMD"
+            </if>
+            <if test="異動日To != null and !異動日To.isEmpty()">
+            AND DbT3003."idoYMD"<![CDATA[<=]]> #{異動日To}
+            </if>
+            <if test="被保険者番号 != null and !被保険者番号.isEmpty()">
+            AND DbT3003."hiHokenshaNo"= #{被保険者番号}
+            </if>
+            <if test="削除データ検索 == false">
+            AND DbT3003."logicalDeletedFlag"= false
+            </if>
+            order by DbT3003."idoYMD" DESC
+    </sql>
+    
+    <select id="get高額送付情報" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyodojukyushataishosha.KyodoJukyushaTaishoshaParameter"
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity" fetchSize="500" resultOrdered="true">
+        <include refid="selectDbT3004" />
+    </select>
+    
+    <sql id="selectDbT3004">
+         SELECT DbT3004.*
+            FROM rgdb."DbT3004KyodoShoriyoJukyushaIdoKogakuSofu" as DbT3004
+            INNER  JOIN (select "hiHokenshaNo","idoYMD",max("rirekiNo") as max from rgdb."DbT3004KyodoShoriyoJukyushaIdoKogakuSofu" group by "hiHokenshaNo","idoYMD")AS A
+            ON  DbT3004."rirekiNo" = A.max
+            and DbT3004."hiHokenshaNo" = A."hiHokenshaNo" 
+            and DbT3004."idoYMD" = A."idoYMD"
+        WHERE 1=1
+            <if test="異動日From != null and !異動日From.isEmpty()">
+            AND #{異動日From}<![CDATA[<=]]> DbT3004."idoYMD"
+            </if>
+            <if test="異動日To != null and !異動日To.isEmpty()">
+            AND DbT3004."idoYMD"<![CDATA[<=]]> #{異動日To}
+            </if>
+            <if test="被保険者番号 != null and !被保険者番号.isEmpty()">
+            AND DbT3004."hiHokenshaNo"= #{被保険者番号}
+            </if>
+            <if test="削除データ検索 == false">
+            AND DbT3004."logicalDeletedFlag"= false
+            </if>
+            order by DbT3004."idoYMD" DESC
+    </sql>
+    
+    <select id="get被保険者情報" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyodojukyushataishosha.KyodoIdoRenrakuhyoTaishoshaKensakuParameter"
+            resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"
+            fetchSize="500" resultOrdered="true">
+            WITH hihokenshaDaicho AS (
+                SELECT
+                    DbV1001."shikibetsuCode"
+                FROM   rgdb."DbV1001HihokenshaDaicho" as DbV1001
+                WHERE DbV1001."hihokenshaNo" = #{被保険者番号}
+            )
+            SELECT
+                <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
+            FROM
+                hihokenshaDaicho
+            LEFT OUTER JOIN
+                <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
+                (
+                    SELECT
+                        ARRAY_AGG(CAST ("shikibetsuCode" AS TEXT))
+                    FROM
+                        hihokenshaDaicho
+                 )
+              <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" /> AS "ShikibetsuTaisho"
+               ON hihokenshaDaicho."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode";
+    </select>
+</mapper>

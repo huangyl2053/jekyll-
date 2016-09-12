@@ -9,12 +9,12 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.kaigoninteishikakuinfo.KaigoNinteiShikakuInfoBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonCodeYoriShichoson;
+import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuShutokuJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuSoshitsuJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.YokaigoJotaiKubunSupport;
-import jp.co.ndensan.reams.db.dbz.definition.core.jyushochitokureisha.JushochitokureishaKubun;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.kaigoninteishikakuinfo.KaigoNinteiShikakuInfoFinder;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.jushochitokureisha.JushochitokureishaKubun;
+import jp.co.ndensan.reams.db.dbz.service.core.kaigoninteishikakuinfo.KaigoNinteiShikakuInfoFinder;
+import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 介護認定資格情報の取得するクラスです。
  *
- * @reamsid_L DBE-1300-060 lizhuoxuan
+ * @reamsid_L DBZ-1300-060 lizhuoxuan
  */
 public class KaigoNinteiShikakuInfoHandler {
 
@@ -42,11 +42,9 @@ public class KaigoNinteiShikakuInfoHandler {
      * 介護認定資格情報初期処理です。
      *
      * @param hdnShinchsonCode RString
-     * @param hdnShikibetsuCode RString
-     * @param hdnSetaikodo RString
      * @param hdnHihokenShaNo RString
      */
-    public void initialize(RString hdnShinchsonCode, RString hdnShikibetsuCode, RString hdnSetaikodo, RString hdnHihokenShaNo) {
+    public void initialize(RString hdnShinchsonCode, RString hdnHihokenShaNo) {
         div.getTxtHihokenshaNo().clearValue();
         div.getTxtShutokuYmd().clearValue();
         div.getTxtShutokuJiyu().clearValue();
@@ -59,13 +57,11 @@ public class KaigoNinteiShikakuInfoHandler {
         div.getTxtHookenshaCode().clearValue();
         div.getTxtHokensha().clearValue();
         div.getHdnHihokenShaNo();
-        div.getHdnSetaikodo();
-        div.getHdnShikibetsuCode();
         div.getHdnShinchsonCode();
-        set介護認定宛名情報(hdnShinchsonCode, hdnShikibetsuCode, hdnSetaikodo, hdnHihokenShaNo);
+        set介護認定宛名情報(hdnShinchsonCode, hdnHihokenShaNo);
     }
 
-    private void set介護認定宛名情報(RString hdnShinchsonCode, RString hdnShikibetsuCode, RString hdnSetaikodo, RString hdnHihokenShaNo) {
+    private void set介護認定宛名情報(RString hdnShinchsonCode, RString hdnHihokenShaNo) {
         KaigoNinteiShikakuInfoBusiness ninteiShikakuInfoBusiness = KaigoNinteiShikakuInfoFinder.createInstance()
                 .getKaigoNinteiShikakuInfo(new HihokenshaNo(hdnHihokenShaNo), new LasdecCode(hdnShinchsonCode));
         List<ShichosonCodeYoriShichoson> codeYoriShichoson = KoikiShichosonJohoFinder.createInstance()
@@ -80,8 +76,15 @@ public class KaigoNinteiShikakuInfoHandler {
         if (ninteiShikakuInfoBusiness.get資格喪失年月日() != null) {
             div.getTxtSoshitsuYmd().setValue(new FlexibleDate(ninteiShikakuInfoBusiness.get資格喪失年月日().toString()));
         }
-        div.getTxtSoshitsuJiyu().setValue(ShikakuSoshitsuJiyu.toValue(ninteiShikakuInfoBusiness.get資格喪失事由コード()).getName());
+//<<<<<<< HEAD
+        div.getTxtSoshitsuJiyu().setValue(ShikakuSoshitsuJiyu.toValue(ninteiShikakuInfoBusiness.get資格喪失事由コード()).get名称());
         if (ninteiShikakuInfoBusiness.get住所地特例フラグ().equals(new RString("1"))) {
+//=======
+//        if (!RString.isNullOrEmpty(ninteiShikakuInfoBusiness.get資格喪失事由コード())) {
+//            div.getTxtSoshitsuJiyu().setValue(ShikakuSoshitsuJiyu.toValue(ninteiShikakuInfoBusiness.get資格喪失事由コード()).getName());
+//        }
+//        if (new RString("1").equals(ninteiShikakuInfoBusiness.get住所地特例フラグ())) {
+//>>>>>>> origin/sync
             div.getTxtJutokuKubun().setValue(JushochitokureishaKubun.toValue(ninteiShikakuInfoBusiness.get住所地特例フラグ()).get名称());
         } else {
             div.getTxtJutokuKubun().setValue(RString.EMPTY);
@@ -90,14 +93,15 @@ public class KaigoNinteiShikakuInfoHandler {
             div.getTxtYokaigoJotaiKubun().setValue(YokaigoJotaiKubunSupport.toValue(FlexibleDate.getNowDate(),
                     new RString(ninteiShikakuInfoBusiness.get要介護認定状態区分コード().toString())).getName());
         }
-
-        div.getTxtNinteiKaishiYmd().setValue(new RDate(ninteiShikakuInfoBusiness.get認定有効期間開始年月日().toString()));
-        div.getTxtNinteiShuryoYmd().setValue(new RDate(ninteiShikakuInfoBusiness.get認定有効期間終了年月日().toString()));
+        if (ninteiShikakuInfoBusiness.get認定有効期間開始年月日() != null) {
+            div.getTxtNinteiKaishiYmd().setValue(new RDate(ninteiShikakuInfoBusiness.get認定有効期間開始年月日().toString()));
+        }
+        if (ninteiShikakuInfoBusiness.get認定有効期間終了年月日() != null) {
+            div.getTxtNinteiShuryoYmd().setValue(new RDate(ninteiShikakuInfoBusiness.get認定有効期間終了年月日().toString()));
+        }
         div.getTxtHookenshaCode().setValue(codeYoriShichoson.get(0).get証記載保険者番号().getColumnValue());
         div.getTxtHokensha().setValue(new RString(codeYoriShichoson.get(0).get市町村名称().toString()));
         div.setHdnShinchsonCode(hdnShinchsonCode);
-        div.setHdnShikibetsuCode(hdnShikibetsuCode);
-        div.setHdnSetaikodo(hdnSetaikodo);
         div.setHdnHihokenShaNo(hdnHihokenShaNo);
     }
 }

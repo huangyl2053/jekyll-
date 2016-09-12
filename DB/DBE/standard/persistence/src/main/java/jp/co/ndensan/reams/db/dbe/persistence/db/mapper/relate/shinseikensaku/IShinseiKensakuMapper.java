@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinseikensaku;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinseikensaku.ShinseiKensakuMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinseikensaku.ShinseiKensakuMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinseikensaku.ShinseiKensakuRelateEntity;
 
 /**
@@ -23,4 +23,12 @@ public interface IShinseiKensakuMapper {
      * @return 認定申請情報
      */
     List<ShinseiKensakuRelateEntity> selectShinseiJoho(ShinseiKensakuMapperParameter parameter);
+
+    /**
+     * 指定条件による認定申請情報の該当件数を返します。
+     *
+     * @param parameter パラメータ
+     * @return 認定申請情報の件数
+     */
+    int countShinseiJoho(ShinseiKensakuMapperParameter parameter);
 }

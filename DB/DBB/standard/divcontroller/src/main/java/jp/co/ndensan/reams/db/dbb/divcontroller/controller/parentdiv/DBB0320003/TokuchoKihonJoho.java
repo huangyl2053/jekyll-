@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320003
 
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320003.TokuchoKihonJohoDiv;
-import jp.co.ndensan.reams.db.dbz.business.searchkey.KaigoFukaKihonSearchKey;
+import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -54,7 +54,7 @@ public class TokuchoKihonJoho {
                 taishoshaKey.get通知書番号(), taishoshaKey.get賦課年度(),
                 new LasdecCode(taishoshaKey.get市町村コード().value()), taishoshaKey.get識別コード()).build();
         // 宛名情報の設定
-        div.getCcdKaigoAtenaInfo().onLoad(taishoshaKey.get識別コード());
+        div.getCcdKaigoAtenaInfo().initialize(taishoshaKey.get識別コード());
         // 賦課基本情報の設定
         div.getCcdKaigoFukaKihon().load(searchKey);
         return createResponseData(div);
@@ -62,5 +62,26 @@ public class TokuchoKihonJoho {
 
     private ResponseData<TokuchoKihonJohoDiv> createResponseData(TokuchoKihonJohoDiv div) {
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * @param div {@link TokuchoKihonJohoDiv}
+     * @return {@link ResponseData}
+     */
+    public ResponseData<TokuchoKihonJohoDiv> onClick_btnZenkairesultHyoji(TokuchoKihonJohoDiv div) {
+        return clearViewStateKeys(div);
+    }
+
+    private ResponseData<TokuchoKihonJohoDiv> clearViewStateKeys(TokuchoKihonJohoDiv div) {
+        FukaShokaiController.clearFukaTaishoshaKeyAndFukaShokaiKey();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * @param div {@link TokuchoKihonJohoDiv}
+     * @return {@link ResponseData}
+     */
+    public ResponseData<TokuchoKihonJohoDiv> onClick_btnResearch(TokuchoKihonJohoDiv div) {
+        return clearViewStateKeys(div);
     }
 }

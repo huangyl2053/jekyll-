@@ -4,9 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ikensho;
 
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.ShujiiIkenshoItemGroupOf2009;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ikensho.ShujiiIkenshoItemKubun;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.KoroshoIFKubun;
+import java.util.Arrays;
+import jp.co.ndensan.reams.db.dbe.definition.core.ikensho.ShujiiIkenshoItemGroupOf2009;
+import jp.co.ndensan.reams.db.dbe.definition.core.ikensho.ShujiiIkenshoItemKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.KoroshoIFKubun;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import org.junit.experimental.runners.Enclosed;
@@ -28,7 +29,7 @@ public class ShujiiIkenshoTest extends DbeTestBase {
 
         @Test(expected = NullPointerException.class)
         public void 意見書定義がNULLの時_コンストラクタは_NullPointerExceptionを投げる() {
-            new ShujiiIkensho(null, ShujiiIkenshoItemGroupOf2009.values());
+            new ShujiiIkensho(null, Arrays.asList(ShujiiIkenshoItemGroupOf2009.values()));
         }
 
         @Test(expected = NullPointerException.class)
@@ -83,7 +84,7 @@ public class ShujiiIkenshoTest extends DbeTestBase {
 
         @Test
         public void 意見書項目グループの設定がある時_get意見書項目グループは_全意見書項目グループを返す() {
-            assertThat(ShujiiIkenshoFactory.create主治医意見書Instance(KoroshoIFKubun.V09A).get意見書項目グループ().length, is(5));
+            assertThat(ShujiiIkenshoFactory.create主治医意見書Instance(KoroshoIFKubun.V09A).get意見書項目グループ().size(), is(5));
         }
     }
 }

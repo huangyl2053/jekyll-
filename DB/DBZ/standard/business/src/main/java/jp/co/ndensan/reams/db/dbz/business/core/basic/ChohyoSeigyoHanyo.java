@@ -7,21 +7,22 @@ package jp.co.ndensan.reams.db.dbz.business.core.basic;
 
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.ModelBase;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.ParentModelBase;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 帳票制御汎用を管理するクラスです。
  */
 public class ChohyoSeigyoHanyo extends
-        ModelBase<ChohyoSeigyoHanyoIdentifier, DbT7067ChohyoSeigyoHanyoEntity, ChohyoSeigyoHanyo>
+        ParentModelBase<ChohyoSeigyoHanyoIdentifier, DbT7067ChohyoSeigyoHanyoEntity, ChohyoSeigyoHanyo>
         implements Serializable {
 
     private final DbT7067ChohyoSeigyoHanyoEntity entity;
@@ -34,10 +35,12 @@ public class ChohyoSeigyoHanyo extends
      * @param サブ業務コード サブ業務コード
      * @param 帳票分類ID 帳票分類ID
      * @param 項目名 項目名
+     * @param 管理年度 管理年度
      */
     public ChohyoSeigyoHanyo(SubGyomuCode サブ業務コード,
             ReportId 帳票分類ID,
-            RString 項目名) {
+            RString 項目名,
+            FlexibleYear 管理年度) {
         requireNonNull(サブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage("サブ業務コード"));
         requireNonNull(帳票分類ID, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票分類ID"));
         requireNonNull(項目名, UrSystemErrorMessages.値がnull.getReplacedMessage("項目名"));
@@ -45,10 +48,12 @@ public class ChohyoSeigyoHanyo extends
         this.entity.setSubGyomuCode(サブ業務コード);
         this.entity.setChohyoBunruiID(帳票分類ID);
         this.entity.setKomokuName(項目名);
+        this.entity.setKanriNendo(管理年度);
         this.id = new ChohyoSeigyoHanyoIdentifier(
                 サブ業務コード,
                 帳票分類ID,
-                項目名
+                項目名,
+                管理年度
         );
     }
 
@@ -63,7 +68,8 @@ public class ChohyoSeigyoHanyo extends
         this.id = new ChohyoSeigyoHanyoIdentifier(
                 entity.getSubGyomuCode(),
                 entity.getChohyoBunruiID(),
-                entity.getKomokuName());
+                entity.getKomokuName(),
+                entity.getKanriNendo());
     }
 
     /**
@@ -136,6 +142,15 @@ public class ChohyoSeigyoHanyo extends
     }
 
     /**
+     * 管理年度を返します。
+     *
+     * @return 管理年度
+     */
+    public FlexibleYear get管理年度() {
+        return entity.getKanriNendo();
+    }
+
+    /**
      * コードマスタサブ業務コードを返します。
      *
      * @return コードマスタサブ業務コード
@@ -174,8 +189,22 @@ public class ChohyoSeigyoHanyo extends
     }
 
     /**
-     * 保持する帳票制御汎用を削除対象とします。<br/>
-     * {@link DbT7067ChohyoSeigyoHanyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 帳票制御汎用のみを変更対象とします。<br/> {@link DbT7067ChohyoSeigyoHanyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     *
+     * @return 変更対象処理実施後の{@link ShinsakaiKaisaiYoteiJoho}
+     */
+    @Override
+    public ChohyoSeigyoHanyo modifiedModel() {
+        DbT7067ChohyoSeigyoHanyoEntity modifiedEntity = entity.clone();
+        if (modifiedEntity.getState().equals(EntityDataState.Unchanged)) {
+            modifiedEntity.setState(EntityDataState.Modified);
+        }
+        return new ChohyoSeigyoHanyo(
+                modifiedEntity, id);
+    }
+
+    /**
+     * 保持する帳票制御汎用を削除対象とします。<br/> {@link DbT7067ChohyoSeigyoHanyoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ChohyoSeigyoHanyo}
      */
@@ -203,7 +232,7 @@ public class ChohyoSeigyoHanyo extends
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {

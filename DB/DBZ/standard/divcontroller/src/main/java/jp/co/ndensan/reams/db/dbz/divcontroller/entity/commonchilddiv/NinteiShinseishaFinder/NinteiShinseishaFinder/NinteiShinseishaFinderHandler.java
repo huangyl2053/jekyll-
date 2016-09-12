@@ -6,11 +6,15 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
+import java.util.Objects;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbz.definition.core.IYokaigoJotaiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
+import jp.co.ndensan.reams.db.dbz.definition.core.dokuji.KanryoInfoPhase;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaJisshiBashoCode;
@@ -22,10 +26,10 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.Hihokens
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.dokuji.KanryoInfoPhase;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
@@ -37,7 +41,6 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
  */
 public class NinteiShinseishaFinderHandler {
 
-    private static final CodeShubetsu CHIKU_CODE_SHUBETSU = new CodeShubetsu("5002");
     private final NinteiShinseishaFinderDiv div;
 
     /**
@@ -53,12 +56,12 @@ public class NinteiShinseishaFinderHandler {
      * 条件検索画面初期化処理です。
      */
     public void initialize() {
-
-        div.getDdlHokenshaNumber().loadHokenshaList();
+        div.getDdlHokenshaNumber().loadHokenshaList(GyomuBunrui.介護認定);
         // TODO  内部QA：88 Redmine：#70702 支所情報取得につきましては、現在設計を追加で行っています。実装におかれましては、TODOとして進めてください。
         List<KeyValueDataSource> ddlShichosonCode = new ArrayList<>();
         ddlShichosonCode.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         div.getDdlShichosonCode().setDataSource(ddlShichosonCode);
+        div.getDdlShichosonCode().setDisplayNone(true); // 暫定対応
         List<KeyValueDataSource> ddlShinseijiShinseiKubun = new ArrayList<>();
         ddlShinseijiShinseiKubun.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         for (NinteiShinseiShinseijiKubunCode code : NinteiShinseiShinseijiKubunCode.values()) {
@@ -92,6 +95,7 @@ public class NinteiShinseishaFinderHandler {
         }
         div.getDdlShujiIkubun().setDataSource(ddlShujiIkubun);
         div.getShosaiJoken().setIsOpen(false);
+        init二次判定結果DDL();
         initKihonJoho();
         initNinteiChosa();
         initShujiiJoho();
@@ -100,6 +104,76 @@ public class NinteiShinseishaFinderHandler {
         initKaigoNinteiShinsakaiJoho();
         initZenkaiJoho();
         initKanryoJoho();
+    }
+
+    private void init二次判定結果DDL() {
+        div.getDdlNijiHanteiKekka().setDataSource(dataSourceOf二次判定結果From厚労省IFコード(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3));
+        div.getDdlNijiHanteiKekka().setSelectedIndex(0);
+        div.getDdlZenkaiNijiHanteiKekka().setDataSource(dataSourceOf二次判定結果From厚労省IFコード(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3));
+        div.getDdlZenkaiNijiHanteiKekka().setSelectedIndex(0);
+    }
+
+    private KoroshoIfShikibetsuCode get厚労省IF識別コードOrNull() {
+        RString key = div.getDdlKoroshoShikibetsuCode().getSelectedKey();
+        try {
+            return key.isEmpty() ? null : KoroshoIfShikibetsuCode.toValue(key);
+        } catch (IllegalArgumentException | NullPointerException e) {
+            return null;
+        }
+    }
+
+    /**
+     * 指定の厚労省IF識別コードから、二次判定結果DDLを初期化します。
+     *
+     * @param koroshoIFCode 厚労省IF識別コード
+     */
+    public void set二次判定結果DDL() {
+        KoroshoIfShikibetsuCode koroshoIFCode = get厚労省IF識別コードOrNull();
+        if (koroshoIFCode == null) {
+            _set二次判定結果DDL(dataSourceOf二次判定結果From厚労省IFコード(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3));
+            _set前回二次判定結果DDL(dataSourceOf二次判定結果From厚労省IFコード(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3));
+        } else {
+            _set二次判定結果DDL(dataSourceOf二次判定結果From厚労省IFコード(koroshoIFCode));
+            _set前回二次判定結果DDL(dataSourceOf二次判定結果From厚労省IFコード(koroshoIFCode));
+        }
+    }
+
+    private void _set二次判定結果DDL(List<KeyValueDataSource> dataSource) {
+        RString key1 = findKey(div.getDdlNijiHanteiKekka().getSelectedKey(), dataSource);
+        div.getDdlNijiHanteiKekka().setDataSource(dataSource);
+        if (key1.isEmpty()) {
+            div.getDdlNijiHanteiKekka().setSelectedIndex(0);
+        } else {
+            div.getDdlNijiHanteiKekka().setSelectedKey(key1);
+        }
+    }
+
+    private void _set前回二次判定結果DDL(List<KeyValueDataSource> dataSource) {
+        RString key2 = findKey(div.getDdlZenkaiNijiHanteiKekka().getSelectedKey(), dataSource);
+        div.getDdlZenkaiNijiHanteiKekka().setDataSource(new ArrayList<>(dataSource));
+        if (key2.isEmpty()) {
+            div.getDdlZenkaiNijiHanteiKekka().setSelectedIndex(0);
+        } else {
+            div.getDdlZenkaiNijiHanteiKekka().setSelectedKey(key2);
+        }
+    }
+
+    private static RString findKey(RString nowSelected, List<KeyValueDataSource> dataSource) {
+        for (KeyValueDataSource kvs : dataSource) {
+            if (Objects.equals(nowSelected, kvs.getKey())) {
+                return nowSelected;
+            }
+        }
+        return RString.EMPTY;
+    }
+
+    private static List<KeyValueDataSource> dataSourceOf二次判定結果From厚労省IFコード(KoroshoIfShikibetsuCode koroshoIFCode) {
+        List<KeyValueDataSource> list = new ArrayList<>();
+        list.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
+        for (IYokaigoJotaiKubun value : YokaigoJotaiKubunSupport.values(koroshoIFCode)) {
+            list.add(new KeyValueDataSource(value.getCode(), value.getName()));
+        }
+        return list;
     }
 
     /**
@@ -156,7 +230,7 @@ public class NinteiShinseishaFinderHandler {
     public void openKaigoNinteiShinsakaiJoho() {
         div.getShosaiJoken().setIsOpen(true);
         div.getKaigoNinteiShinsakaiJoho().setIsOpen(true);
-        div.getDdlNijiHanteiKekka().setDataSource(getNijiHanteiKekkaDataSource());
+        set二次判定結果DDL();
     }
 
     /**
@@ -165,7 +239,7 @@ public class NinteiShinseishaFinderHandler {
     public void openZenkaiJoho() {
         div.getShosaiJoken().setIsOpen(true);
         div.getZenkaiJoho().setIsOpen(true);
-        div.getDdlZenkaiNijiHanteiKekka().setDataSource(getNijiHanteiKekkaDataSource());
+        set二次判定結果DDL();
     }
 
     /**
@@ -174,10 +248,9 @@ public class NinteiShinseishaFinderHandler {
     public void openSonotaJoho() {
         div.getShosaiJoken().setIsOpen(true);
         div.getSonotaJoho().setIsOpen(true);
-        div.getTxtGeninShikkanCode().clearValue();
-        div.getTxtGeninShikkanName().clearValue();
         div.getTxtShinseiKeikaNissu().clearFromValue();
         div.getTxtShinseiKeikaNissu().clearToValue();
+        div.getCcdGeninShikkan().load(SubGyomuCode.DBE認定支援, DBECodeShubetsu.原因疾患コード.getコード());
     }
 
     /**
@@ -217,7 +290,8 @@ public class NinteiShinseishaFinderHandler {
         }
         div.getDdlKoroshoShikibetsuCode().setDataSource(ddlKoroshoShikibetsuCode);
 
-        List<UzT0007CodeEntity> codeList = CodeMaster.getCodeRireki(SubGyomuCode.DBE認定支援, CHIKU_CODE_SHUBETSU);
+        List<UzT0007CodeEntity> codeList = CodeMaster.getCode(SubGyomuCode.DBE認定支援, DBECodeShubetsu.調査地区コード.getコード(),
+                FlexibleDate.getNowDate());
         List<KeyValueDataSource> chikuDataSource = new ArrayList<>();
         chikuDataSource.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         for (UzT0007CodeEntity codeEntity : codeList) {
@@ -316,8 +390,6 @@ public class NinteiShinseishaFinderHandler {
     }
 
     private void initKaigoNinteiShinsakaiJoho() {
-        div.getDdlNijiHanteiKekka().setDataSource(getNijiHanteiKekkaDataSource());
-        div.getDdlNijiHanteiKekka().setSelectedIndex(0);
         div.getTxtNinteiYukoKikan().clearValue();
         div.getTxtCheckDay().clearValue();
         div.getTxtNinteiYukoKaishiDateFrom().clearValue();
@@ -333,10 +405,8 @@ public class NinteiShinseishaFinderHandler {
     }
 
     private void initZenkaiJoho() {
-        div.getDdlZenkaiNijiHanteiKekka().setDataSource(getNijiHanteiKekkaDataSource());
         div.getTxtZenkaiNinteiChosaItakusakiName().clearValue();
         div.getTxtZenkaiShujiiIryokikanName().clearValue();
-        div.getDdlZenkaiNijiHanteiKekka().setSelectedIndex(0);
         div.getTxtZenkaiNinteiYukoKikan().clearValue();
         div.getTxtZenkaiYukoKaishiDateFrom().clearValue();
         div.getTxtZenkaiYukoKaishiDateTo().clearValue();
@@ -360,36 +430,16 @@ public class NinteiShinseishaFinderHandler {
         div.getChkChosaIrai().setSelectedItemsByKey(keys);
         div.getChkShinsakaiToroku().setSelectedItemsByKey(keys);
         div.getChkIkenshoIrai().setSelectedItemsByKey(keys);
-        div.getChkNijiHantei().setSelectedItemsByKey(keys);
+        div.getChkNijiHantei().setSelectedItemsByKey(getKeySelectingLastOnly(div.getChkNijiHantei()));
         div.getChkChosaNyushu().setSelectedItemsByKey(keys);
         div.getChkTsuchiShori().setSelectedItemsByKey(keys);
         div.getChkIkenshoNyushu().setSelectedItemsByKey(keys);
         div.getChkGetsureiShori().setSelectedItemsByKey(keys);
-
     }
 
-    private List<KeyValueDataSource> getNijiHanteiKekkaDataSource() {
-        List<KeyValueDataSource> ddlNijiHanteiKekka = new ArrayList<>();
-        ddlNijiHanteiKekka.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
-        RString koroshoShikibetsuCode = div.getDdlKoroshoShikibetsuCode().getSelectedKey();
-        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(koroshoShikibetsuCode)) {
-            for (YokaigoJotaiKubun99 code : YokaigoJotaiKubun99.values()) {
-                ddlNijiHanteiKekka.add(new KeyValueDataSource(code.getコード(), code.get名称()));
-            }
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(koroshoShikibetsuCode)) {
-            for (YokaigoJotaiKubun02 code : YokaigoJotaiKubun02.values()) {
-                ddlNijiHanteiKekka.add(new KeyValueDataSource(code.getコード(), code.get名称()));
-            }
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(koroshoShikibetsuCode)) {
-            for (YokaigoJotaiKubun06 code : YokaigoJotaiKubun06.values()) {
-                ddlNijiHanteiKekka.add(new KeyValueDataSource(code.getコード(), code.get名称()));
-            }
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(koroshoShikibetsuCode)
-                || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(koroshoShikibetsuCode)) {
-            for (YokaigoJotaiKubun09 code : YokaigoJotaiKubun09.values()) {
-                ddlNijiHanteiKekka.add(new KeyValueDataSource(code.getコード(), code.get名称()));
-            }
-        }
-        return ddlNijiHanteiKekka;
+    private List<RString> getKeySelectingLastOnly(CheckBoxList cbl) {
+        List<KeyValueDataSource> list = cbl.getDataSource();
+        return list.isEmpty() ? Collections.<RString>emptyList()
+               : Arrays.asList(list.get(list.size() - 1).getKey());
     }
 }

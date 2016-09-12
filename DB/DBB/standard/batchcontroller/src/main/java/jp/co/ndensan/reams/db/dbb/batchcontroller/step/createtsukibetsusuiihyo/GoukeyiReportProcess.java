@@ -8,16 +8,15 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.createtsukibetsusuiihyo;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.createtsukibetsusuiihyo.ReportDateHensyu;
-import jp.co.ndensan.reams.db.dbb.business.report.tsukibetsusuiihyo.TsukibetsuSuiihyoBodyItem;
-import jp.co.ndensan.reams.db.dbb.business.report.tsukibetsusuiihyo.TsukibetsuSuiihyoBodyTitleItem;
-import jp.co.ndensan.reams.db.dbb.business.report.tsukibetsusuiihyo.TsukibetsuSuiihyoHeaderItem;
+import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.business.report.tsukibetsusuiihyo.TsukibetsuSuiihyoReport;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.KoumokuGoukey;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.ReportDate;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.tsukibetsusuiihyo.TsukibetsuSuiihyoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.source.tsukibetsusuiihyo.TsukibetsuSuiihyoReportSource;
+import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -38,10 +37,11 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class GoukeyiReportProcess extends BatchProcessBase<KoumokuGoukey> {
 
-    private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.createtsukibetsusuiihyo.ICreateTsukibetsuSuiihyoMapper.get合計帳票データの取得");
+    private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper."
+            + "relate.createtsukibetsusuiihyo.ICreateTsukibetsuSuiihyoMapper.get合計帳票データの取得");
     private static final ReportId 帳票ID = ReportIdDBB.DBB300002.getReportId();
     private List<KoumokuGoukey> koumokuGoukeyList;
+    private List<RString> 表記List;
     private CreateTsukibetsuSuiihyoProcessParameter processPrm;
     private CreateTsukibetsuSuiihyoMyBatisParameter mybatisPrm;
     @BatchWriter
@@ -51,6 +51,9 @@ public class GoukeyiReportProcess extends BatchProcessBase<KoumokuGoukey> {
     @Override
     protected void initialize() {
         mybatisPrm = processPrm.toCreateTsukibetsuSuiihyoMyBatisParameter();
+        HokenryoDankaiSettings hokenryoDankaiSettings = new HokenryoDankaiSettings();
+        HokenryoDankaiList hokenryoDankaiList = hokenryoDankaiSettings.get保険料段階ListIn(processPrm.getChoteiNendo());
+        表記List = hokenryoDankaiList.to表記List();
         koumokuGoukeyList = new ArrayList<>();
     }
 
@@ -73,45 +76,17 @@ public class GoukeyiReportProcess extends BatchProcessBase<KoumokuGoukey> {
 
     @Override
     protected void afterExecute() {
-        List<ReportDate> reportDateList = getReportDate(koumokuGoukeyList);
-
-        TsukibetsuSuiihyoReport report2 = TsukibetsuSuiihyoReport.createFrom(setHeadItem(new RString("合計")),
-                setBodyTitleItem(reportDateList), setbodyItemList(reportDateList));
-        report2.writeBy(reportSourceWriter);
+        TsukibetsuSuiihyoReport report = new TsukibetsuSuiihyoReport(getTsukibetsuSuiihyoEntity(koumokuGoukeyList));
+        report.writeBy(reportSourceWriter);
     }
 
-    private List<ReportDate> getReportDate(List<KoumokuGoukey> list) {
+    private TsukibetsuSuiihyoEntity getTsukibetsuSuiihyoEntity(List<KoumokuGoukey> list) {
         ReportDateHensyu reportDateHensyu = new ReportDateHensyu();
-        return reportDateHensyu.getReportDateList(list);
-    }
-
-    private TsukibetsuSuiihyoHeaderItem setHeadItem(RString choshuHouhouTitle) {
-        return new TsukibetsuSuiihyoHeaderItem(
+        return reportDateHensyu.getTsukibetsuSuiihyoEntity(list,
                 mybatisPrm.getChoteiNendo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).getEra(),
                 mybatisPrm.getChoteiNendo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString().substring(2),
-                AssociationFinderFactory.createInstance().getAssociation().getLasdecCode_().getColumnValue(),
+                new RString("合計"),
                 AssociationFinderFactory.createInstance().getAssociation().get市町村名(),
-                choshuHouhouTitle);
-    }
-
-    private List<TsukibetsuSuiihyoBodyTitleItem> setBodyTitleItem(List<ReportDate> reportDateList) {
-        List<TsukibetsuSuiihyoBodyTitleItem> list = new ArrayList<>();
-        for (ReportDate reportDate : reportDateList) {
-            TsukibetsuSuiihyoBodyTitleItem bodyTitleItem = new TsukibetsuSuiihyoBodyTitleItem(reportDate.getListTitle_1());
-            list.add(bodyTitleItem);
-        }
-        return list;
-    }
-
-    private List<TsukibetsuSuiihyoBodyItem> setbodyItemList(List<ReportDate> reportDateList) {
-        List<TsukibetsuSuiihyoBodyItem> list = new ArrayList<>();
-        for (ReportDate reportDate : reportDateList) {
-            TsukibetsuSuiihyoBodyItem bodyItem = new TsukibetsuSuiihyoBodyItem(reportDate.getList_1(),
-                    reportDate.getList_2(), reportDate.getList_3(), reportDate.getList_4(), reportDate.getList_5(), reportDate.getList_6(),
-                    reportDate.getList_7(), reportDate.getList_8(), reportDate.getList_9(), reportDate.getList_10(), reportDate.getList_11(),
-                    reportDate.getList_12(), reportDate.getList_13(), reportDate.getList_14(), reportDate.getList_15(), reportDate.getList_16());
-            list.add(bodyItem);
-        }
-        return list;
+                AssociationFinderFactory.createInstance().getAssociation().getLasdecCode_().getColumnValue(), 表記List);
     }
 }

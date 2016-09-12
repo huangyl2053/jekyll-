@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dba.business.report.hihokenshashob4;
 
 import java.util.List;
@@ -15,18 +14,20 @@ import lombok.NonNull;
 /**
  *
  * 介護保険被保険者証（B4版）帳票作成します。
+ *
  * @reamsid_L DBU-0490-060 dongyabin
  */
 public final class HihokenshashoB4Report extends Report<HihokenshashoB4ReportSource> {
-    
+
     private final List<HihokenshashoB4BodyItem> items;
-    
+
     private HihokenshashoB4Report(List<HihokenshashoB4BodyItem> items) {
         this.items = items;
     }
-    
+
     /**
      * インスタンスを生成します。
+     *
      * @param items 介護保険被保険者証（B4版）のEntityリスト
      * @return HihokenshashoHakkoIchiranHyoReport
      */
@@ -35,7 +36,7 @@ public final class HihokenshashoB4Report extends Report<HihokenshashoB4ReportSou
     }
 
     @Override
-    protected void writeBy(ReportSourceWriter<HihokenshashoB4ReportSource> writer) {
+    public void writeBy(ReportSourceWriter<HihokenshashoB4ReportSource> writer) {
         for (HihokenshashoB4BodyItem item : items) {
             IHihokenshashoB4Editor joho = new HihokenshashoB4Editor(item);
             IHihokenshashoB4Builder builder = new HihokenshashoB4BuilderImpl(joho);

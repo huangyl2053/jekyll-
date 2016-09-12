@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJoho2;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijohosakusei.GogitaiJohoSakuseiRsult;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikaisaikekka.ShinsakaiKaisaiYoteiJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikaisaikekka.ShinsakaiWariateIinJohoBusiness;
@@ -137,8 +137,8 @@ public class ShinsakaiKaisaiKekkaFinder {
      * @return 審査会委員一覧
      */
     @Transaction
-    public SearchResult<ShinsakaiKaisaiYoteiJoho> get審査会委員(RString 開催番号) {
-        List<ShinsakaiKaisaiYoteiJoho> resultList = new ArrayList<>();
+    public SearchResult<ShinsakaiKaisaiYoteiJoho2> get審査会委員(RString 開催番号) {
+        List<ShinsakaiKaisaiYoteiJoho2> resultList = new ArrayList<>();
         List<ShinsakaiKaisaiYoteiJohoRelateEntity> entityList
                 = mapperProvider.create(IShinsakaiKaisaiKekkaMapper.class).get開催予定情報更新(開催番号);
         if (entityList.isEmpty()) {
@@ -146,7 +146,7 @@ public class ShinsakaiKaisaiKekkaFinder {
         }
         for (ShinsakaiKaisaiYoteiJohoRelateEntity entity : entityList) {
             entity.initializeMd5ToEntities();
-            resultList.add(new ShinsakaiKaisaiYoteiJoho(entity));
+            resultList.add(new ShinsakaiKaisaiYoteiJoho2(entity));
         }
         return SearchResult.of(resultList, 0, false);
     }

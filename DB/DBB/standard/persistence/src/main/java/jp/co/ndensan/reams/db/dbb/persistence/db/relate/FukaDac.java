@@ -7,18 +7,18 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.relate;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.FukaMapperParameter;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002Fuka;
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2006ChoshuYuyo.choteiNendo;
 import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2006ChoshuYuyo.rirekiNo;
 import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2010FukaErrorList.fukaNendo;
 import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2010FukaErrorList.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2010FukaErrorList.tsuchishoNo;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka.IFukaMapper;
-import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2002FukaDac;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.fuka.FukaMapperParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002Fuka;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2002FukaDac;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
@@ -51,7 +51,7 @@ public class FukaDac implements IModifiable<DbT2002FukaEntity> {
     private static final RString 賦課年度RSTRING = new RString("賦課年度");
     private static final RString 通知書番号RSTRING = new RString("通知書番号");
     private static final RString 調定年度_KEY = new RString("調定年度");
-    private static final RString 賦課年度_KEY = new RString("賦課年度");
+//    private static final RString 賦課年度_KEY = new RString("賦課年度");
     private static final RString 通知書番号_KEY = new RString("通知書番号");
     private static final RString 履歴番号_KEY = new RString("履歴番号");
     private final DbT2002FukaDac 介護賦課Dac = InstanceProvider.create(DbT2002FukaDac.class);
@@ -71,7 +71,7 @@ public class FukaDac implements IModifiable<DbT2002FukaEntity> {
             TsuchishoNo 通知書番号,
             int 履歴番号) {
 
-        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
+        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage(調定年度_KEY.toString()));
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(賦課年度RSTRING.toString()));
         requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage(通知書番号RSTRING.toString()));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
@@ -162,7 +162,7 @@ public class FukaDac implements IModifiable<DbT2002FukaEntity> {
     @Transaction
     public IItemList<DbT2002FukaEntity> select介護賦課一覧(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号) {
 
-        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
+        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage(調定年度_KEY.toString()));
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(賦課年度RSTRING.toString()));
         requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage(通知書番号RSTRING.toString()));
 
@@ -275,7 +275,7 @@ public class FukaDac implements IModifiable<DbT2002FukaEntity> {
     public IItemList<DbT2002FukaEntity> selectRecently賦課(FlexibleYear 調定年度, FlexibleYear 賦課年度,
             TsuchishoNo 通知書番号) {
 
-        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage("調定年度"));
+        requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage(調定年度_KEY.toString()));
         requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(賦課年度RSTRING.toString()));
         requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage(通知書番号RSTRING.toString()));
 
@@ -343,7 +343,7 @@ public class FukaDac implements IModifiable<DbT2002FukaEntity> {
             TsuchishoNo 通知書番号,
             int 履歴番号) throws NullPointerException {
         requireNonNull(調定年度, UrSystemErrorMessages.値がnull.getReplacedMessage(調定年度_KEY.toString()));
-        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(賦課年度_KEY.toString()));
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(賦課年度RSTRING.toString()));
         requireNonNull(通知書番号, UrSystemErrorMessages.値がnull.getReplacedMessage(通知書番号_KEY.toString()));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage(履歴番号_KEY.toString()));
 

@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ichijihanteiresult;
 
-import jp.co.ndensan.reams.db.dbe.definition.core.valueobject.ichijihanteikekkacode.IchijiHanteiKekkaCode;
+import jp.co.ndensan.reams.db.dbe.definition.core.ichijihanteikekkacode.IchijiHanteiKekkaCode;
 import jp.co.ndensan.reams.db.dbz.business.core.KaigoCodeAssignedItem;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

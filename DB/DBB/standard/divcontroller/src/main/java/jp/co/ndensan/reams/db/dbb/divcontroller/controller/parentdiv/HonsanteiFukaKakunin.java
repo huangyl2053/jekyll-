@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0310001.HonsanteiFukaKakuninDiv;
+import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0310001.HonsanteiFukaKeisanTotalDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0310001.HonsanteiKanrijohoDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0310001.HonsanteiShoriKakuninDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0310001.dgHonsanteiShoriKakunin_Row;
@@ -21,8 +21,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 
 /**
+ * 初期ロードクラスです。
  *
- * @author n8211
+ * @reamsid_L DBB-0780-010 xicongwang
  */
 public class HonsanteiFukaKakunin {
 
@@ -31,18 +32,18 @@ public class HonsanteiFukaKakunin {
     /**
      * 初期ロード時に実行。
      *
-     * @param honsanteiFukaKakuninDiv HonsanteiFukaKakuninDiv
+     * @param honsanteiFukaKakuninDiv HonsanteiFukaKeisanTotalDiv
      *
      * @return 画面の初期化メソッドです。
      */
-    public ResponseData<HonsanteiFukaKakuninDiv> onLoad(HonsanteiFukaKakuninDiv honsanteiFukaKakuninDiv) {
-        ResponseData<HonsanteiFukaKakuninDiv> response = new ResponseData<>();
+    public ResponseData<HonsanteiFukaKeisanTotalDiv> onLoad(HonsanteiFukaKeisanTotalDiv honsanteiFukaKakuninDiv) {
+        ResponseData<HonsanteiFukaKeisanTotalDiv> response = new ResponseData<>();
         setParam(honsanteiFukaKakuninDiv);
         response.data = honsanteiFukaKakuninDiv;
         return response;
     }
 
-    private void setParam(HonsanteiFukaKakuninDiv honsanteiFukaKakuninDiv) {
+    private void setParam(HonsanteiFukaKeisanTotalDiv honsanteiFukaKakuninDiv) {
         List<HashMap> demoData = YamlLoader.DBB.loadAsList(SHORINAIYO);
         ControlGenerator cg = new ControlGenerator(demoData.get(0));
 
@@ -54,7 +55,7 @@ public class HonsanteiFukaKakunin {
         setKanriJoho2(honsanteiFukaKakuninDiv);
     }
 
-    private void setShoriJokyo(HonsanteiFukaKakuninDiv honsanteiFukaKakuninDiv) {
+    private void setShoriJokyo(HonsanteiFukaKeisanTotalDiv honsanteiFukaKakuninDiv) {
         HonsanteiShoriKakuninDiv honsanteiShoriKakuninDiv = honsanteiFukaKakuninDiv.getShoriJokyo().getHonsanteiShoriKakunin();
         List<HashMap> demoDataList = YamlLoader.DBB.loadAsList(new RString("DBB0310001/ShoriJokyo.yml"));
         List<dgHonsanteiShoriKakunin_Row> arrayData = new ArrayList<>();
@@ -70,8 +71,8 @@ public class HonsanteiFukaKakunin {
         grid.setDataSource(arrayData);
     }
 
-    private void setKanriJoho1(HonsanteiFukaKakuninDiv honsanteiFukaKakuninDiv) {
-        HonsanteiKanrijohoDiv honsanteiKanrijohoDiv = honsanteiFukaKakuninDiv.getHonsanteiKanrijoho();
+    private void setKanriJoho1(HonsanteiFukaKeisanTotalDiv honsanteiFukaKakuninDiv) {
+        HonsanteiKanrijohoDiv honsanteiKanrijohoDiv = honsanteiFukaKakuninDiv.getHonsanteiFukaKakunin().getHonsanteiKanrijoho();
         List<HashMap> demoDataList = YamlLoader.DBB.loadAsList(new RString("DBB0310001/KanriJoho1.yml"));
         List<dgKanrijoho1_Row> arrayData = new ArrayList<>();
         for (HashMap demoData : demoDataList) {
@@ -85,9 +86,9 @@ public class HonsanteiFukaKakunin {
         grid.setDataSource(arrayData);
     }
 
-    private void setKanriJoho2(HonsanteiFukaKakuninDiv honsanteiFukaKakuninDiv) {
+    private void setKanriJoho2(HonsanteiFukaKeisanTotalDiv honsanteiFukaKakuninDiv) {
 
-        HonsanteiKanrijohoDiv honsanteiKanrijohoDiv = honsanteiFukaKakuninDiv.getHonsanteiKanrijoho();
+        HonsanteiKanrijohoDiv honsanteiKanrijohoDiv = honsanteiFukaKakuninDiv.getHonsanteiFukaKakunin().getHonsanteiKanrijoho();
 
         List<HashMap> demoDataList = YamlLoader.DBB.loadAsList(new RString("DBB0310001/KanriJoho2.yml"));
         List<dgKanrijoho2_Row> arrayData = new ArrayList<>();

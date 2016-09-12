@@ -12,6 +12,22 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 public class TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
+    public static final RString 改頁_郵便;
+    public static final RString 改頁_行政区コード;
+    public static final RString 改頁_世帯コード;
+    public static final RString 改頁_生年月日;
+    public static final RString 改頁_性別;
+    public static final RString 改頁_市町村コード;
+
+    static {
+        改頁_郵便 = new RString("listLower_2");
+        改頁_行政区コード = new RString("listUpper_4");
+        改頁_世帯コード = new RString("listLower_2");
+        改頁_生年月日 = new RString("listUpper_6");
+        改頁_性別 = new RString("listUpper_5");
+        改頁_市町村コード = new RString("hokenshaNo");
+    }
+
     @ReportItem(name = "printTimeStamp", length = 34, order = 1)
     public RString printTimeStamp;
     @ReportItem(name = "nendo", length = 4, order = 2)

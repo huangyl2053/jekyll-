@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2020004;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.enumeratedtype.importance.Importance;
+import jp.co.ndensan.reams.db.dbe.definition.core.importance.Importance;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020004.DBE2020004StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020004.DBE2020004TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020004.NinteiChosaScheduleMemoInformationDiv;
@@ -14,13 +14,17 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020004.dgLi
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020004.dgListOfJichikuMemo_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020004.NinteiChosaScheduleMemoInformationHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020004.NinteiChosaScheduleMemoInformationValidationHandler;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiChosaScheduleMemo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiChosaScheduleMemoIdentifier;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteiChosaScheduleMemoManager;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -33,11 +37,12 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 /**
  * 認定調査スケジュール登録4のコントローラです。
  *
- * @reamsid_L DBE-0020-040 houtp
+ * @reamsid_L DBE-0020-040 houtianpeng
  */
 public class NinteiChosaScheduleMemoInformation {
 
     private final NinteiChosaScheduleMemoManager ninteiChosaScheduleMemoManager;
+    private static final RString LOCKINGKEY = new RString("DBEChosaMemo");
     private static final RString 追加 = new RString("追加");
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
@@ -57,17 +62,22 @@ public class NinteiChosaScheduleMemoInformation {
      */
     public ResponseData<NinteiChosaScheduleMemoInformationDiv> onLoad(NinteiChosaScheduleMemoInformationDiv div) {
 
-        FlexibleDate メモ年月日 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_設定日, FlexibleDate.class);
-        Code 地区コード = new Code(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class));
+        FlexibleDate メモ年月日 = ViewStateHolder.get(ViewStateKeys.設定日, FlexibleDate.class);
+        Code 地区コード = new Code(ViewStateHolder.get(ViewStateKeys.地区コード, RString.class));
         List<NinteiChosaScheduleMemo> ninteiChosaScheduleMemo = ninteiChosaScheduleMemoManager.
                 get認定調査スケジュールメモ文本情報(メモ年月日, 地区コード).records();
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録_認定調査スケジュールメモ情報,
+        ViewStateHolder.put(ViewStateKeys.認定調査スケジュールメモ情報,
                 Models.create(ninteiChosaScheduleMemo));
         int 通常件数 = getメモ情報件数(メモ年月日, 地区コード, Importance.通常.get名称());
         int 重要件数 = getメモ情報件数(メモ年月日, 地区コード, Importance.重要.get名称());
         int maxNo = ninteiChosaScheduleMemoManager.getMax連番();
         div.setMax連番(new RString(String.valueOf(maxNo)));
         getHandler(div).onLoad(ninteiChosaScheduleMemo, メモ年月日, 地区コード, 通常件数, 重要件数);
+        if (!RealInitialLocker.tryGetLock(new LockingKey(LOCKINGKEY.
+                concat(メモ年月日.toString()).concat(地区コード.value())))) {
+            div.setReadOnly(true);
+            throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
+        }
         return ResponseData.of(div).setState(DBE2020004StateName.スケジュールメモ);
     }
 
@@ -89,7 +99,8 @@ public class NinteiChosaScheduleMemoInformation {
      * @return ResponseData
      */
     public ResponseData onClick_EditCommon(NinteiChosaScheduleMemoInformationDiv div) {
-        getHandler(div).getEditCommon();
+        Code 地区コード = new Code(ViewStateHolder.get(ViewStateKeys.地区コード, RString.class));
+        getHandler(div).getEditCommon(地区コード);
         return ResponseData.of(div).setState(DBE2020004StateName.スケジュールメモ);
     }
 
@@ -111,7 +122,8 @@ public class NinteiChosaScheduleMemoInformation {
      * @return ResponseData
      */
     public ResponseData onClick_EditAuto(NinteiChosaScheduleMemoInformationDiv div) {
-        getHandler(div).getEditAuto();
+        Code 地区コード = new Code(ViewStateHolder.get(ViewStateKeys.地区コード, RString.class));
+        getHandler(div).getEditAuto(地区コード);
         return ResponseData.of(div).setState(DBE2020004StateName.スケジュールメモ);
     }
 
@@ -171,6 +183,10 @@ public class NinteiChosaScheduleMemoInformation {
      */
     public ResponseData onClick_MoDoRu(NinteiChosaScheduleMemoInformationDiv div) {
 
+        FlexibleDate メモ年月日 = ViewStateHolder.get(ViewStateKeys.設定日, FlexibleDate.class);
+        Code 地区コード = new Code(ViewStateHolder.get(ViewStateKeys.地区コード, RString.class));
+        RealInitialLocker.release(new LockingKey(LOCKINGKEY.
+                concat(メモ年月日.toString()).concat(地区コード.value())));
         return ResponseData.of(div).forwardWithEventName(DBE2020004TransitionEventName.戻る).parameter(new RString("未定へ遷移"));
     }
 
@@ -182,6 +198,10 @@ public class NinteiChosaScheduleMemoInformation {
      */
     public ResponseData onClick_kanrRou(NinteiChosaScheduleMemoInformationDiv div) {
 
+        FlexibleDate メモ年月日 = ViewStateHolder.get(ViewStateKeys.設定日, FlexibleDate.class);
+        Code 地区コード = new Code(ViewStateHolder.get(ViewStateKeys.地区コード, RString.class));
+        RealInitialLocker.release(new LockingKey(LOCKINGKEY.
+                concat(メモ年月日.toString()).concat(地区コード.value())));
         return ResponseData.of(div).forwardWithEventName(DBE2020004TransitionEventName.戻る).parameter(new RString("更新へ遷移"));
     }
 
@@ -207,11 +227,11 @@ public class NinteiChosaScheduleMemoInformation {
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
-            FlexibleDate メモ年月日 = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_設定日, FlexibleDate.class);
-            Code 地区コード = new Code(ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録_地区コード, RString.class));
+            FlexibleDate メモ年月日 = ViewStateHolder.get(ViewStateKeys.設定日, FlexibleDate.class);
+            Code 地区コード = new Code(ViewStateHolder.get(ViewStateKeys.地区コード, RString.class));
 
             Models<NinteiChosaScheduleMemoIdentifier, NinteiChosaScheduleMemo> models = ViewStateHolder
-                    .get(ViewStateKeys.認定調査スケジュール登録_認定調査スケジュールメモ情報, Models.class);
+                    .get(ViewStateKeys.認定調査スケジュールメモ情報, Models.class);
             for (dgListOfCommonMemo_Row dg_Row : div.getDgListOfCommonMemo().getDataSource()) {
 
                 if (追加.equals(dg_Row.getJotai())) {
@@ -283,7 +303,6 @@ public class NinteiChosaScheduleMemoInformation {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             return ResponseData.of(div).setState(DBE2020004StateName.スケジュールメモ);
         }
-        // TODO 画面の戻るボタンを実装しない、前排他を実装しない、遷移を実装しない。内部番号：612
         getHandler(div).完了状態();
         return ResponseData.of(div).setState(DBE2020004StateName.完了);
     }

@@ -43,6 +43,7 @@ public class TekiyoJogaiTotal {
 
     private static final LockingKey 前排他ロックキー = new LockingKey("TekiyoJogaiIdoKanri");
     private static final RString 遷移元メニューID_適用 = new RString("DBAMN32001");
+    private static final RString 遷移元メニューID_適用_転入転出保留対象者管理 = new RString("DBAMN61002");
     private static final RString 遷移元メニューID_解除 = new RString("DBAMN32002");
     private static final RString 遷移元メニューID_変更 = new RString("DBAMN32003");
 
@@ -52,9 +53,10 @@ public class TekiyoJogaiTotal {
      * @param requestDiv 適用除外者管理Div
      * @return レスポンス
      */
-    public ResponseData onLoad(TekiyoJogaiTotalDiv requestDiv) {
+    public ResponseData<TekiyoJogaiTotalDiv> onLoad(TekiyoJogaiTotalDiv requestDiv) {
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード();
         RString menuId = ResponseHolder.getMenuID();
+        //XXX メニューIDによる分岐は保守性が低いので是正するべき。
         getHandler(requestDiv).initialize(識別コード, menuId);
         if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
             requestDiv.setReadOnly(true);
@@ -62,7 +64,7 @@ public class TekiyoJogaiTotal {
             validationMessages.add(new ValidationMessageControlPair(TekiyoJogaiTotal.TekiyoJogaiTotalErrorMessage.排他_他のユーザが使用中));
             return ResponseData.of(requestDiv).addValidationMessages(validationMessages).respond();
         }
-        if (遷移元メニューID_適用.equals(menuId)) {
+        if (遷移元メニューID_適用.equals(menuId) || 遷移元メニューID_適用_転入転出保留対象者管理.equals(menuId)) {
             return ResponseData.of(requestDiv).setState(DBA2050011StateName.適用状態);
         } else if (遷移元メニューID_解除.equals(menuId)) {
             return ResponseData.of(requestDiv).setState(DBA2050011StateName.解除状態);
@@ -78,7 +80,7 @@ public class TekiyoJogaiTotal {
      * @param requestDiv 適用除外者管理Div
      * @return レスポンス
      */
-    public ResponseData onClick_btnBack(TekiyoJogaiTotalDiv requestDiv) {
+    public ResponseData<TekiyoJogaiTotalDiv> onClick_btnBack(TekiyoJogaiTotalDiv requestDiv) {
         RealInitialLocker.release(前排他ロックキー);
         return ResponseData.of(requestDiv).forwardWithEventName(DBA2050011TransitionEventName.検索に戻る).respond();
     }
@@ -89,7 +91,7 @@ public class TekiyoJogaiTotal {
      * @param requestDiv 適用除外者管理Div
      * @return レスポンス
      */
-    public ResponseData onClick_btnUpdate(TekiyoJogaiTotalDiv requestDiv) {
+    public ResponseData<TekiyoJogaiTotalDiv> onClick_btnUpdate(TekiyoJogaiTotalDiv requestDiv) {
         if (!isデータ変更(requestDiv)) {
             if (!ResponseHolder.isReRequest()) {
                 return ResponseData.of(requestDiv).addMessage(
@@ -103,7 +105,7 @@ public class TekiyoJogaiTotal {
             }
             if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 一覧データの保存(requestDiv);
                 RealInitialLocker.release(前排他ロックキー);
                 requestDiv.getKanryoMessage().getCcdKaigoKanryoMessage().setSuccessMessage(
@@ -120,7 +122,7 @@ public class TekiyoJogaiTotal {
      * @param requestDiv 適用除外者管理Div
      * @return レスポンス
      */
-    public ResponseData onClick_btnComplete(TekiyoJogaiTotalDiv requestDiv) {
+    public ResponseData<TekiyoJogaiTotalDiv> onClick_btnComplete(TekiyoJogaiTotalDiv requestDiv) {
         RealInitialLocker.release(前排他ロックキー);
         return ResponseData.of(requestDiv).forwardWithEventName(DBA2050011TransitionEventName.完了).respond();
     }

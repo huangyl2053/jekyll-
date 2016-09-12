@@ -3,7 +3,7 @@
 <!-- @reamsid_L DBA-1120-010 zhangyajing -->
 <mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.rorenfukushinenkinjohokanri.IRorenFukushiNenkinJohoKanriMapper">
 
-    <select id="jukyuKikanJufukuCheck" parameterType="jp.co.ndensan.reams.db.dbu.definition.core.rorenfukushinenkinjohokanri.RorenFukushiNenkinJohoKanriParameter"
+    <select resultOrdered="true" id="jukyuKikanJufukuCheck" parameterType="jp.co.ndensan.reams.db.dbu.definition.core.rorenfukushinenkinjohokanri.RorenFukushiNenkinJohoKanriParameter"
             resultType="int" fetchSize="500">
         SELECT
         COUNT(*)

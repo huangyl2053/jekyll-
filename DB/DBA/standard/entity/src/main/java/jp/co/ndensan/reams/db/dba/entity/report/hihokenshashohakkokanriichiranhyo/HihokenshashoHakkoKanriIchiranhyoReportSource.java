@@ -19,7 +19,7 @@ public class HihokenshashoHakkoKanriIchiranhyoReportSource implements IReportSou
 
     @ReportItem(name = "printTimeStamp", length = 34, order = 1)
     public RString printTimeStamp;
-    @ReportItem(name = "title", length = 50, order = 2)
+    @ReportItem(name = "title", length = 30, order = 2)
     public RString title;
     @ReportItem(name = "shichosonCode", length = 6, order = 3)
     public RString shichosonCode;

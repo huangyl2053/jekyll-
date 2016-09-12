@@ -8,64 +8,53 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-9999-023 liangbc
  */
-public enum ConfigKeysKagoKetteiTuchi {
+public enum ConfigKeysKagoKetteiTuchi implements IConfigKeysKokuhorenTorikomi {
 
     /**
      * コード:無し 名称:国保連取込_介護給付費過誤決定通知書情報 略称:定義なし
      */
-    国保連取込_介護給付費過誤決定通知書情報("無し", "国保連取込_介護給付費過誤決定通知書情報"),
+    国保連取込_介護給付費過誤決定通知書情報("国保連取込_介護給付費過誤決定通知書情報"),
     /**
      * コード:無し 名称:国保連取込_介護給付費過誤決定通知書情報_バッチID 略称:定義なし
      */
-    国保連取込_介護給付費過誤決定通知書情報_バッチID("無し", "国保連取込_介護給付費過誤決定通知書情報_バッチID"),
+    国保連取込_介護給付費過誤決定通知書情報_バッチID("国保連取込_介護給付費過誤決定通知書情報_バッチID"),
     /**
      * コード:無し 名称:国保連取込_介護給付費過誤決定通知書情報_一覧表示順 略称:定義なし
      */
-    国保連取込_介護給付費過誤決定通知書情報_一覧表示順("無し", "国保連取込_介護給付費過誤決定通知書情報_一覧表示順"),
+    国保連取込_介護給付費過誤決定通知書情報_一覧表示順("国保連取込_介護給付費過誤決定通知書情報_一覧表示順"),
     /**
      * コード:無し 名称:国保連取込_介護給付費過誤決定通知書情報_交換情報識別番号 略称:定義なし
      */
-    国保連取込_介護給付費過誤決定通知書情報_交換情報識別番号("無し", "国保連取込_介護給付費過誤決定通知書情報_交換情報識別番号"),
+    国保連取込_介護給付費過誤決定通知書情報_交換情報識別番号("国保連取込_介護給付費過誤決定通知書情報_交換情報識別番号"),
     /**
      * コード:無し 名称:国保連取込_介護給付費過誤決定通知書情報_再処理不可区分 略称:定義なし
      */
-    国保連取込_介護給付費過誤決定通知書情報_再処理不可区分("無し", "国保連取込_介護給付費過誤決定通知書情報_再処理不可区分"),
+    国保連取込_介護給付費過誤決定通知書情報_再処理不可区分("国保連取込_介護給付費過誤決定通知書情報_再処理不可区分"),
     /**
      * コード:無し 名称:国保連取込_介護給付費過誤決定通知書情報_処理サイクル区分 略称:定義なし
      */
-    国保連取込_介護給付費過誤決定通知書情報_処理サイクル区分("無し", "国保連取込_介護給付費過誤決定通知書情報_処理サイクル区分"),
+    国保連取込_介護給付費過誤決定通知書情報_処理サイクル区分("国保連取込_介護給付費過誤決定通知書情報_処理サイクル区分"),
     /**
      * コード:無し 名称:国保連取込_介護給付費過誤決定通知書情報_処理月 略称:定義なし
      */
-    国保連取込_介護給付費過誤決定通知書情報_処理月("無し", "国保連取込_介護給付費過誤決定通知書情報_処理月"),
+    国保連取込_介護給付費過誤決定通知書情報_処理月("国保連取込_介護給付費過誤決定通知書情報_処理月"),
     /**
      * コード:無し 名称:国保連取込_介護給付費過誤決定通知書情報_処理名称 略称:定義なし
      */
-    国保連取込_介護給付費過誤決定通知書情報_処理名称("無し", "国保連取込_介護給付費過誤決定通知書情報_処理名称"),
+    国保連取込_介護給付費過誤決定通知書情報_処理名称("国保連取込_介護給付費過誤決定通知書情報_処理名称"),
     /**
      * コード:無し 名称:国保連取込_介護給付費過誤決定通知書情報_排他チェック有り区分 略称:定義なし
      */
-    国保連取込_介護給付費過誤決定通知書情報_排他チェック有り区分("無し", "国保連取込_介護給付費過誤決定通知書情報_排他チェック有り区分"),
+    国保連取込_介護給付費過誤決定通知書情報_排他チェック有り区分("国保連取込_介護給付費過誤決定通知書情報_排他チェック有り区分"),
     /**
      * コード:無し 名称:国保連取込_介護給付費過誤決定通知書情報_有効区分 略称:定義なし
      */
-    国保連取込_介護給付費過誤決定通知書情報_有効区分("無し", "国保連取込_介護給付費過誤決定通知書情報_有効区分");
+    国保連取込_介護給付費過誤決定通知書情報_有効区分("国保連取込_介護給付費過誤決定通知書情報_有効区分");
 
-    private final RString code;
     private final RString fullName;
 
-    private ConfigKeysKagoKetteiTuchi(String code, String fullname) {
-        this.code = new RString(code);
+    private ConfigKeysKagoKetteiTuchi(String fullname) {
         this.fullName = new RString(fullname);
-    }
-
-    /**
-     * 介護給付費過誤決定通知書情報コンフィグキーのコードを返します。
-     *
-     * @return 介護給付費過誤決定通知書情報コンフィグキーのコード
-     */
-    public RString getコード() {
-        return code;
     }
 
     /**
@@ -77,16 +66,70 @@ public enum ConfigKeysKagoKetteiTuchi {
         return fullName;
     }
 
+    @Override
+    public Enum getバッチID() {
+        return 国保連取込_介護給付費過誤決定通知書情報_バッチID;
+    }
+
+    @Override
+    public Enum get一覧表示順() {
+        return 国保連取込_介護給付費過誤決定通知書情報_一覧表示順;
+    }
+
+    @Override
+    public Enum get交換情報識別番号() {
+        return 国保連取込_介護給付費過誤決定通知書情報_交換情報識別番号;
+    }
+
+    @Override
+    public Enum get再処理不可区分() {
+        return 国保連取込_介護給付費過誤決定通知書情報_再処理不可区分;
+    }
+
+    @Override
+    public Enum get処理サイクル区分() {
+        return 国保連取込_介護給付費過誤決定通知書情報_処理サイクル区分;
+    }
+
+    @Override
+    public Enum get処理月() {
+        return 国保連取込_介護給付費過誤決定通知書情報_処理月;
+    }
+
+    @Override
+    public Enum get処理名称() {
+        return 国保連取込_介護給付費過誤決定通知書情報_処理名称;
+    }
+
+    @Override
+    public Enum get排他チェック有り区分() {
+        return 国保連取込_介護給付費過誤決定通知書情報_排他チェック有り区分;
+    }
+
+    @Override
+    public Enum get有効区分() {
+        return 国保連取込_介護給付費過誤決定通知書情報_有効区分;
+    }
+
     /**
-     * 介護給付費過誤決定通知書情報コンフィグキーのコードと一致する内容を探します。
+     * 国保連取込_介護給付費過誤決定通知書情報
      *
-     * @param code 介護給付費過誤決定通知書情報コンフィグキーのコード
+     * @return 国保連取込_介護給付費過誤決定通知書情報
+     */
+    public static IConfigKeysKokuhorenTorikomi getEnum() {
+        return 国保連取込_介護給付費過誤決定通知書情報;
+    }
+
+    /**
+     * 介護給付費過誤決定通知書情報コンフィグキーの名称と一致する内容を探します。
+     *
+     * @param fullname 介護給付費過誤決定通知書情報コンフィグキーの名称
      * @return {@code code} に対応する介護給付費過誤決定通知書情報コンフィグキー
      */
-    public static ConfigKeysKagoKetteiTuchi toValue(RString code) {
+    public static ConfigKeysKagoKetteiTuchi toValue(RString fullname) {
 
         for (ConfigKeysKagoKetteiTuchi configKeysKagoKetteiTuchi : ConfigKeysKagoKetteiTuchi.values()) {
-            if (configKeysKagoKetteiTuchi.code.equals(code)) {
+            if (configKeysKagoKetteiTuchi.get名称().equals(fullname)) {
                 return configKeysKagoKetteiTuchi;
             }
         }

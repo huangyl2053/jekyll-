@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 /**
  * 償還払不支給決定者一覧表 償還払不支給決定者Entity
  *
- * @reamsid_L DBC-2590-020 xuhao
+ * @reamsid_L DBC-2590-010 xuhao
  */
 @lombok.Getter
 @lombok.Setter

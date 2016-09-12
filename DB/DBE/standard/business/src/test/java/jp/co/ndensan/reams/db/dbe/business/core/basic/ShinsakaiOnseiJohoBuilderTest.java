@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaionseijoho.ShinsakaiOnseiJohoBuilder;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaionseijoho.ShinsakaiOnseiJoho2Builder;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5512ShinsakaiOnseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.helper.DbT5512ShinsakaiOnseiJohoEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
@@ -15,7 +15,7 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 /**
- * {@link ShinsakaiOnseiJohoBuilder}のテストクラスです。
+ * {@link ShinsakaiOnseiJoho2Builder}のテストクラスです。
  */
 @RunWith(Enclosed.class)
 @Ignore
@@ -36,7 +36,7 @@ public class ShinsakaiOnseiJohoBuilderTest extends DbeTestBase {
 
 //    public static class getterSetterTest extends DbeTestBase {
 //
-//        private static ShinsakaiOnseiJohoBuilder sut;
+//        private static ShinsakaiOnseiJoho2Builder sut;
 //        private static ShinsakaiOnseiJoho business;
 //
 //        @Before

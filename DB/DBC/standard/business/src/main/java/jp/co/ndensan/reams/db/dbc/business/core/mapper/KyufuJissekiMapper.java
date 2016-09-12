@@ -36,9 +36,9 @@ import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiTokuteiNyushohiColle
 import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiYoguHanbaihi;
 import jp.co.ndensan.reams.db.dbc.business.core.KyufuJissekiYoguHanbaihiCollection;
 import jp.co.ndensan.reams.db.dbc.business.core.ServiceTeikyoYMListOfServiceShurui;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.KeikokuKubun;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.KyufuJissekiKubun;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.KyufuSakuseiKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.keikoku.KeikokuKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.kyufujissekikubun.KyufuJissekiKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.kyufusakuseikubun.KyufuSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3017KyufujissekiKihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3018KyufujissekiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3025KyufujissekiKyotakuServiceEntity;

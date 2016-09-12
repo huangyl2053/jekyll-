@@ -5,11 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbb.entity.db.relate.relate;
 
-
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2003KibetsuEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity;
-
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003KibetsuEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 
 /**
  * 介護期別調定共通RelateEntityクラスです。
@@ -17,7 +15,6 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 @lombok.Getter
 @lombok.Setter
 public class KibetsuChoteiKyotsuEntity implements Cloneable, Serializable {
-
 
     /**
      * -- GETTER -- 介護期別Entityを返します。
@@ -36,7 +33,6 @@ public class KibetsuChoteiKyotsuEntity implements Cloneable, Serializable {
      */
     private UrT0705ChoteiKyotsuEntity 調定共通Entity;
 
-
     /**
      * コンストラクタです。
      */
@@ -44,7 +40,6 @@ public class KibetsuChoteiKyotsuEntity implements Cloneable, Serializable {
         介護期別Entity = new DbT2003KibetsuEntity();
         調定共通Entity = new UrT0705ChoteiKyotsuEntity();
     }
-
 
     /**
      * コンストラクタです。
@@ -57,16 +52,13 @@ public class KibetsuChoteiKyotsuEntity implements Cloneable, Serializable {
         this.調定共通Entity = 調定共通Entity;
     }
 
-
     /**
      * MyBatisで取得された場合に使用して下さい。<br/>
      * MyBatisで当クラス取得時は、新規追加(Added)となるため、変更無し(Unchanged)に設定します。<br/>
-     * ChoshuYuyoEntityが持つ{@link xxxxxxEntity}と{@link xxxxxxEntity}と<br/>
-     * {@link xxxxxxEntity}のMD5値を計算し、設定します。
+     * ChoshuYuyoEntityが持つ{@link xxxxxxEntity}と{@link xxxxxxEntity}と<br/> {@link xxxxxxEntity}のMD5値を計算し、設定します。
      */
     public void initializeMd5ToEntities() {
         this.介護期別Entity.initializeMd5();
         this.調定共通Entity.initializeMd5();
     }
 }
-

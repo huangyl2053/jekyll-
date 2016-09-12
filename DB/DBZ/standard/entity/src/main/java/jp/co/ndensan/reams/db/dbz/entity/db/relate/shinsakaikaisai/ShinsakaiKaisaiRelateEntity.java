@@ -40,5 +40,6 @@ public class ShinsakaiKaisaiRelateEntity implements Serializable {
     private boolean shiryoSakuseiZumiFlag;
     private RString shinsakaiShinchokuJokyo;
     private boolean gogitaiDummyFlag;
+    private int 合議体番号;
 
 }

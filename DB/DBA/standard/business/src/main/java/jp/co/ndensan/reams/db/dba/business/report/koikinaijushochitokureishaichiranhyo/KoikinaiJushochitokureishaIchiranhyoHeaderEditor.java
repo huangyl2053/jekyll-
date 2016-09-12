@@ -14,14 +14,14 @@ import jp.co.ndensan.reams.db.dba.entity.report.koikinaijushochitokureishaichira
  */
 class KoikinaiJushochitokureishaIchiranhyoHeaderEditor implements IKoikinaiJushochitokureishaIchiranhyoEditor {
 
-    private final KoikinaiJushochitokureishaIchiranhyoHeadItem item;
+    private final KoikinaiJushochitokureishaIchiranhyoHead item;
 
     /**
      * インスタンスを生成します。
      *
      * @param item {@link KoikinaiJushochitokureishaIchiranhyoItem}
      */
-    protected KoikinaiJushochitokureishaIchiranhyoHeaderEditor(KoikinaiJushochitokureishaIchiranhyoHeadItem item) {
+    protected KoikinaiJushochitokureishaIchiranhyoHeaderEditor(KoikinaiJushochitokureishaIchiranhyoHead item) {
         this.item = item;
     }
 
@@ -33,8 +33,6 @@ class KoikinaiJushochitokureishaIchiranhyoHeaderEditor implements IKoikinaiJusho
     private KoikinaiJushochitokureishaIchiranhyoReportSource editHeader(KoikinaiJushochitokureishaIchiranhyoReportSource source) {
 
         source.printTimeStamp = item.get印刷日時();
-        // TODO 袁献輝 rseファイルにninshoshaShimeiを存在しない　2016/02/26。
-//        source.pageCount = item.getページ数();
         source.shichosonCode = item.get市町村コード();
         source.shichosonName = item.get市町村名();
         source.shutsuryokujun1 = item.get並び順１();

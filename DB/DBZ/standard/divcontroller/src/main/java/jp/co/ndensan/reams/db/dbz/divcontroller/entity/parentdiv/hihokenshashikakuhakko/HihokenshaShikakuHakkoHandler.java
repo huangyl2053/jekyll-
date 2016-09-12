@@ -7,28 +7,21 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hihokenshashik
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakkoModel;
-import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakkoValidationMessage;
-import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakkoValidator;
-//import jp.co.ndensan.reams.db.dbz.business.hokensha.IKoikiKoseiShichoson;
-//import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hihokenshashikakuhakko.HihokenshaShikakuHakkoDiv.発行証タイプ.被保険者証;
-import jp.co.ndensan.reams.ur.urz.divcontroller.validations.ValidationMessageControlDictionary;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshashikakuhakko.HihokenshaShikakuHakkoModel;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshashikakuhakko.HihokenshaShikakuHakkoValidationMessage;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshashikakuhakko.HihokenshaShikakuHakkoValidator;
+import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hihokenshashikakuhakko.HihokenshaShikakuHakkoDiv.HakkoshoType.被保険者証;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionary;
+import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.session.PanelSessionAccessor;
-//// TODO N8187 久保田 以下のimportはURF.IKaigoJigyoshaDaichoManager 等が使用可能になったら有効にする。
-////import jp.co.ndensan.reams.ur.urf.model.relate.KaigoJigyoshaRelateModel;
-////import jp.co.ndensan.reams.ur.urf.realservice.IKaigoJigyoshaDaichoManager;
-////import jp.co.ndensan.reams.ur.urf.realservice.KaigoJigyoshaDaichoManagerFactory;
-////import jp.co.ndensan.reams.uz.uza.biz.KaigoJigyoshaNo;
 
 /**
  * 共有子Div「被保険者証資格者証発行」のHandlerクラスです。
@@ -92,9 +85,9 @@ public class HihokenshaShikakuHakkoHandler {
 
         div.getTxtKofuDate().setValue(FlexibleDate.getNowDate());
 
-        List<KeyValueDataSource> kofuJiyuList = HakkoShoTypeBehaviors.createBy(div.getMode_発行証タイプ()).create交付事由List(is直前履歴);
+        List<KeyValueDataSource> kofuJiyuList = HakkoShoTypeBehaviors.createBy(div.getMode_HakkoshoType()).create交付事由List(is直前履歴);
         div.getDdlKofuJiyu().setDataSource(kofuJiyuList);
-        if ((div.getMode_発行証タイプ() == 被保険者証) && is直前履歴) {
+        if ((div.getMode_HakkoshoType() == 被保険者証) && is直前履歴) {
             div.getDdlKofuJiyu().setSelectedKey(KOFUJIYU_CHOKUZEN.getKey());
             div.getDdlKofuJiyu().setReadOnly(true);
         }
@@ -138,7 +131,7 @@ public class HihokenshaShikakuHakkoHandler {
 //        div.getTxtHokensha().setValue(hokenshaHyoji);
 //    }
 //    private void set有効期限(NinteiShinseiKekkaModel 認定申請結果) {
-//        if (div.getMode_発行証タイプ() == 資格者証) {
+//        if (div.getMode_HakkoshoType() == 資格者証) {
 //            FlexibleDate 有効期限 = new HihokenshaShikakuHakko().get有効期限初期値(
 //                    認定申請結果.get要介護認定申請情報モデル().getNinteiShinseiShinseijiKubunCode(),
 //                    認定申請結果.get要介護認定申請情報モデル().getNinteiShinseiYMD(),
@@ -228,7 +221,7 @@ public class HihokenshaShikakuHakkoHandler {
     //}
 /*    private void set審査会意見(NinteiShinseiKekkaModel 認定申請結果) {
 
-     int 最大長 = HakkoShoTypeBehaviors.createBy(div.getMode_発行証タイプ()).get審査会意見最大長();
+     int 最大長 = HakkoShoTypeBehaviors.createBy(div.getMode_HakkoshoType()).get審査会意見最大長();
      List<IKaigoService> serviceList = new ArrayList<>();
      IKaigoServiceManager manager = KaigoServiceManagerFactory.createInstance();
      FlexibleYearMonth ServiceYM = 認定申請結果.get要介護認定結果情報モデル().getNijiHanteiYMD().getYearMonth();
@@ -263,8 +256,8 @@ public class HihokenshaShikakuHakkoHandler {
         private final FlexibleDate 制限期間終了日;
 
         KyufuSeigenShutsuryoku(RString 制限内容,
-                               FlexibleDate 制限期間開始日,
-                               FlexibleDate 制限期間終了日) {
+                FlexibleDate 制限期間開始日,
+                FlexibleDate 制限期間終了日) {
             this.制限内容 = 制限内容;
             this.制限期間開始日 = 制限期間開始日 == null ? FlexibleDate.EMPTY : 制限期間開始日;
             this.制限期間終了日 = 制限期間終了日 == null ? FlexibleDate.EMPTY : 制限期間終了日;
@@ -297,7 +290,7 @@ public class HihokenshaShikakuHakkoHandler {
 //        List<KyufuSeigenShutsuryoku> 給付制限 = new ArrayList<>();
 //        List<KyufuSeigenShutsuryoku> 優先的 = new ArrayList<>();
 //        List<KyufuSeigenShutsuryoku> 優先外 = new ArrayList<>();
-//        IHakkoShoTypeBehavior behaviorByMode = HakkoShoTypeBehaviors.createBy(div.getMode_発行証タイプ());
+//        IHakkoShoTypeBehavior behaviorByMode = HakkoShoTypeBehaviors.createBy(div.getMode_HakkoshoType());
 //        ShiharaiHohoHenkoManager manager = new ShiharaiHohoHenkoManager();
 //        ShiharaiHohoHenkoShuryobunKisaiKubun 支払方法終了分記載区分 = behaviorByMode.load支払方法終了分記載区分();
 //        RString 支払方法記載文言 = behaviorByMode.load支払方法記載文言();
@@ -339,8 +332,8 @@ public class HihokenshaShikakuHakkoHandler {
 //    private List<KyufuSeigenShutsuryoku> create２号被保険者給付制限(
 //            HihokenshaNo 被保険者番号) {
 //        List<KyufuSeigenShutsuryoku> 給付制限 = new ArrayList<>();
-//        ShiharaiHohoHenkoShuryobunKisaiKubun 差止終了分記載区分 = HakkoShoTypeBehaviors.createBy(div.getMode_発行証タイプ()).load差止終了分記載区分();
-//        RString 差止記載文言 = HakkoShoTypeBehaviors.createBy(div.getMode_発行証タイプ()).load差止記載文言();
+//        ShiharaiHohoHenkoShuryobunKisaiKubun 差止終了分記載区分 = HakkoShoTypeBehaviors.createBy(div.getMode_HakkoshoType()).load差止終了分記載区分();
+//        RString 差止記載文言 = HakkoShoTypeBehaviors.createBy(div.getMode_HakkoshoType()).load差止記載文言();
     //       IItemList<ShiharaiHohoHenkoModel> history = new ShiharaiHohoHenkoManager().get2号差止履歴(被保険者番号);
 //
 //        if (差止終了分記載区分 == ShiharaiHohoHenkoShuryobunKisaiKubun.終了後も記載する) {
@@ -424,9 +417,9 @@ public class HihokenshaShikakuHakkoHandler {
         private final FlexibleDate 適用終了日;
 
         ShienJigyosha(RString 名称,
-                      FlexibleDate 届出日,
-                      FlexibleDate 適用開始日,
-                      FlexibleDate 適用終了日) {
+                FlexibleDate 届出日,
+                FlexibleDate 適用開始日,
+                FlexibleDate 適用終了日) {
             this.名称 = 名称;
             this.届出日 = 届出日;
             this.適用開始日 = 適用開始日 == null ? FlexibleDate.EMPTY : 適用開始日;
@@ -482,7 +475,7 @@ public class HihokenshaShikakuHakkoHandler {
 //                        }
 //                    }
 //
-//                    支援事業者名称 = HakkoShoTypeBehaviors.createBy(div.getMode_発行証タイプ()).load支援事業者名称(計画事業者名称, 委託先事業者名称);
+//                    支援事業者名称 = HakkoShoTypeBehaviors.createBy(div.getMode_HakkoshoType()).load支援事業者名称(計画事業者名称, 委託先事業者名称);
 //    適用開始日  = model.get居宅給付計画事業者作成モデル().get().getTekiyoKaishiYMD();
 //    適用終了日  = model.get居宅給付計画事業者作成モデル().get().getTekiyoShuryoYMD();
 //}
@@ -855,9 +848,9 @@ public class HihokenshaShikakuHakkoHandler {
 
         IValidationMessages messages = new HihokenshaShikakuHakkoValidator(div.getYukoKigenInfo().getDdlKofuJiyu().getSelectedValue()).validate();
 
-        ValidationMessageControlDictionary dictionay = new ValidationMessageControlDictionary(
-                new ValidationMessageControlPair(HihokenshaShikakuHakkoValidationMessage.交付事由が未選択, div.getYukoKigenInfo().getDdlKofuJiyu())
-        );
+        ValidationMessageControlDictionary dictionay = new ValidationMessageControlDictionaryBuilder()
+                .add(HihokenshaShikakuHakkoValidationMessage.交付事由が未選択, div.getYukoKigenInfo().getDdlKofuJiyu())
+                .build();
         return dictionay.check(messages);
     }
 

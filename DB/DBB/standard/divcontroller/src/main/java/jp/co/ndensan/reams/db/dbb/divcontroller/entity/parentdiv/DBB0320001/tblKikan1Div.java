@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  * @author 自動生成
  */
 public class tblKikan1Div extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -33,8 +33,6 @@ public class tblKikan1Div extends TablePanel {
     private cellFukaShokaiData10AttblKikan1 cellFukaShokaiData10;
     @JsonProperty("cellFukaShokaiData11")
     private cellFukaShokaiData11AttblKikan1 cellFukaShokaiData11;
-    @JsonProperty("cellFukaShokaiData12")
-    private cellFukaShokaiData12AttblKikan1 cellFukaShokaiData12;
     @JsonProperty("cellFukaShokaiData4")
     private cellFukaShokaiData4AttblKikan1 cellFukaShokaiData4;
     @JsonProperty("cellFukaShokaiData5")
@@ -45,8 +43,6 @@ public class tblKikan1Div extends TablePanel {
     private cellFukaShokaiData13AttblKikan1 cellFukaShokaiData13;
     @JsonProperty("cellFukaShokaiData14")
     private cellFukaShokaiData14AttblKikan1 cellFukaShokaiData14;
-    @JsonProperty("cellFukaShokaiData15")
-    private cellFukaShokaiData15AttblKikan1 cellFukaShokaiData15;
 
     /*
      * [ Helperの作成 ]
@@ -78,11 +74,6 @@ public class tblKikan1Div extends TablePanel {
     }
 
     @JsonIgnore
-    public Label getLblHokenryo() {
-        return this.cellFukaShokaiData12.getLblHokenryo();
-    }
-
-    @JsonIgnore
     public Label getLblKikan1() {
         return this.cellFukaShokaiData4.getLblKikan1();
     }
@@ -105,11 +96,6 @@ public class tblKikan1Div extends TablePanel {
     @JsonIgnore
     public Label getLblHokenryoSansyutsu1() {
         return this.cellFukaShokaiData14.getLblHokenryoSansyutsu1();
-    }
-
-    @JsonIgnore
-    public Label getLblHokenryo1() {
-        return this.cellFukaShokaiData15.getLblHokenryo1();
     }
 
     /*
@@ -209,24 +195,6 @@ public class tblKikan1Div extends TablePanel {
     }
 
     /*
-     * getcellFukaShokaiData12
-     * @return cellFukaShokaiData12
-     */
-    @JsonProperty("cellFukaShokaiData12")
-    private cellFukaShokaiData12AttblKikan1 getCellFukaShokaiData12() {
-        return cellFukaShokaiData12;
-    }
-
-    /*
-     * setcellFukaShokaiData12
-     * @param cellFukaShokaiData12 cellFukaShokaiData12
-     */
-    @JsonProperty("cellFukaShokaiData12")
-    private void setCellFukaShokaiData12(cellFukaShokaiData12AttblKikan1 cellFukaShokaiData12) {
-        this.cellFukaShokaiData12 = cellFukaShokaiData12;
-    }
-
-    /*
      * getcellFukaShokaiData4
      * @return cellFukaShokaiData4
      */
@@ -316,24 +284,6 @@ public class tblKikan1Div extends TablePanel {
         this.cellFukaShokaiData14 = cellFukaShokaiData14;
     }
 
-    /*
-     * getcellFukaShokaiData15
-     * @return cellFukaShokaiData15
-     */
-    @JsonProperty("cellFukaShokaiData15")
-    private cellFukaShokaiData15AttblKikan1 getCellFukaShokaiData15() {
-        return cellFukaShokaiData15;
-    }
-
-    /*
-     * setcellFukaShokaiData15
-     * @param cellFukaShokaiData15 cellFukaShokaiData15
-     */
-    @JsonProperty("cellFukaShokaiData15")
-    private void setCellFukaShokaiData15(cellFukaShokaiData15AttblKikan1 cellFukaShokaiData15) {
-        this.cellFukaShokaiData15 = cellFukaShokaiData15;
-    }
-
     // </editor-fold>
 }
 /**
@@ -342,7 +292,7 @@ public class tblKikan1Div extends TablePanel {
  * @author 自動生成
  */
 class cellFukaShokaiData1AttblKikan1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblKikan")
     private Label lblKikan;
 
@@ -372,7 +322,7 @@ class cellFukaShokaiData1AttblKikan1 extends TableCell {
  * @author 自動生成
  */
 class cellFukaShokaiData2AttblKikan1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTsukiSu")
     private Label lblTsukiSu;
 
@@ -402,7 +352,7 @@ class cellFukaShokaiData2AttblKikan1 extends TableCell {
  * @author 自動生成
  */
 class cellFukaShokaiData3AttblKikan1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblShotokuDankai")
     private Label lblShotokuDankai;
 
@@ -432,7 +382,7 @@ class cellFukaShokaiData3AttblKikan1 extends TableCell {
  * @author 自動生成
  */
 class cellFukaShokaiData10AttblKikan1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblHokenryoritsu")
     private Label lblHokenryoritsu;
 
@@ -462,7 +412,7 @@ class cellFukaShokaiData10AttblKikan1 extends TableCell {
  * @author 自動生成
  */
 class cellFukaShokaiData11AttblKikan1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblHokenryoSansyutsu")
     private Label lblHokenryoSansyutsu;
 
@@ -487,42 +437,12 @@ class cellFukaShokaiData11AttblKikan1 extends TableCell {
     // </editor-fold>
 }
 /**
- * cellFukaShokaiData12 のクラスファイル 
- * 
- * @author 自動生成
- */
-class cellFukaShokaiData12AttblKikan1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
-    @JsonProperty("lblHokenryo")
-    private Label lblHokenryo;
-
-    /*
-     * getlblHokenryo
-     * @return lblHokenryo
-     */
-    @JsonProperty("lblHokenryo")
-    public Label getLblHokenryo() {
-        return lblHokenryo;
-    }
-
-    /*
-     * setlblHokenryo
-     * @param lblHokenryo lblHokenryo
-     */
-    @JsonProperty("lblHokenryo")
-    public void setLblHokenryo(Label lblHokenryo) {
-        this.lblHokenryo = lblHokenryo;
-    }
-
-    // </editor-fold>
-}
-/**
  * cellFukaShokaiData4 のクラスファイル 
  * 
  * @author 自動生成
  */
 class cellFukaShokaiData4AttblKikan1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblKikan1")
     private Label lblKikan1;
 
@@ -552,7 +472,7 @@ class cellFukaShokaiData4AttblKikan1 extends TableCell {
  * @author 自動生成
  */
 class cellFukaShokaiData5AttblKikan1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTsukiSu1")
     private Label lblTsukiSu1;
 
@@ -582,7 +502,7 @@ class cellFukaShokaiData5AttblKikan1 extends TableCell {
  * @author 自動生成
  */
 class cellFukaShokaiData6AttblKikan1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblHokenryoDankai1")
     private Label lblHokenryoDankai1;
 
@@ -612,7 +532,7 @@ class cellFukaShokaiData6AttblKikan1 extends TableCell {
  * @author 自動生成
  */
 class cellFukaShokaiData13AttblKikan1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblHokenryoritsu1")
     private Label lblHokenryoritsu1;
 
@@ -642,7 +562,7 @@ class cellFukaShokaiData13AttblKikan1 extends TableCell {
  * @author 自動生成
  */
 class cellFukaShokaiData14AttblKikan1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblHokenryoSansyutsu1")
     private Label lblHokenryoSansyutsu1;
 
@@ -662,36 +582,6 @@ class cellFukaShokaiData14AttblKikan1 extends TableCell {
     @JsonProperty("lblHokenryoSansyutsu1")
     public void setLblHokenryoSansyutsu1(Label lblHokenryoSansyutsu1) {
         this.lblHokenryoSansyutsu1 = lblHokenryoSansyutsu1;
-    }
-
-    // </editor-fold>
-}
-/**
- * cellFukaShokaiData15 のクラスファイル 
- * 
- * @author 自動生成
- */
-class cellFukaShokaiData15AttblKikan1 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
-    @JsonProperty("lblHokenryo1")
-    private Label lblHokenryo1;
-
-    /*
-     * getlblHokenryo1
-     * @return lblHokenryo1
-     */
-    @JsonProperty("lblHokenryo1")
-    public Label getLblHokenryo1() {
-        return lblHokenryo1;
-    }
-
-    /*
-     * setlblHokenryo1
-     * @param lblHokenryo1 lblHokenryo1
-     */
-    @JsonProperty("lblHokenryo1")
-    public void setLblHokenryo1(Label lblHokenryo1) {
-        this.lblHokenryo1 = lblHokenryo1;
     }
 
     // </editor-fold>

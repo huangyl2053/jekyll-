@@ -50,7 +50,7 @@
         <result property="shisetsuRiyoFlag" column="dbT4210NinteichosahyoShisetsuRiyo_shisetsuRiyoFlag" />
     </resultMap>
     
-    <select id="getEntity" resultMap="ResultMap_DbT4210NinteichosahyoShisetsuRiyoEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT4210NinteichosahyoShisetsuRiyoEntity">
         SELECT
         <include refid="allColumns_DbT4210NinteichosahyoShisetsuRiyo"/>
         FROM

@@ -20,30 +20,30 @@ module DBZ {
 
             public priorities(): Array { 
                 return [
-                    "表示モード",
-                    "保険者" 
+                    "HyojiMode",
+                    "Hokensha" 
                 ]; 
             } 
 
-            public 表示モード() {
-                return new Modes.表示モード(this.controls);
+            public HyojiMode() {
+                return new Modes.HyojiMode(this.controls);
             }
 
-            public 保険者() {
-                return new Modes.保険者(this.controls);
+            public Hokensha() {
+                return new Modes.Hokensha(this.controls);
             }
         }
 
         export module Modes {
 
-            export class 表示モード {
+            export class HyojiMode {
                 private controls: Controls;
 
                 constructor(controls: Controls) {
                     this.controls = controls;
                 }
 
-                public 資格系(): void {
+                public Shikakukei(): void {
                     this.controls.txtTuchishoNo().visible = false;
                     this.controls.txtTuchishoNo().displayNone = true;
                     this.controls.ddlFukaNendo().visible = false;
@@ -54,7 +54,7 @@ module DBZ {
                     this.controls.chkJushochiTokureisha().displayNone = false;
                 }
 
-                public 賦課系(): void {
+                public Fukakei(): void {
                     this.controls.txtTuchishoNo().visible = true;
                     this.controls.txtTuchishoNo().displayNone = false;
                     this.controls.ddlFukaNendo().visible = true;
@@ -66,19 +66,19 @@ module DBZ {
                 }
             }
 
-            export class 保険者 {
+            export class Hokensha {
                 private controls: Controls;
 
                 constructor(controls: Controls) {
                     this.controls = controls;
                 }
 
-                public 表示する(): void {
+                public HyojiSuru(): void {
                     this.controls.ddlHokensha().visible = true;
                     this.controls.ddlHokensha().displayNone = false;
                 }
 
-                public 表示しない(): void {
+                public HyojiShinai(): void {
                     this.controls.ddlHokensha().visible = false;
                     this.controls.ddlHokensha().displayNone = true;
                 }

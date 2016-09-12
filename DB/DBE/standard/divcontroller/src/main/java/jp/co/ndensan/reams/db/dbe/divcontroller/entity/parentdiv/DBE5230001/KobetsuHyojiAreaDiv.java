@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5230001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KobetsuHyojiAreaDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -76,7 +77,9 @@ public class KobetsuHyojiAreaDiv extends Panel {
     @JsonProperty("btnToroku")
     private Button btnToroku;
     @JsonProperty("btnIchigoHantei")
-    private Button btnIchigoHantei;
+    private ButtonDialog btnIchigoHantei;
+    @JsonProperty("hasData")
+    private RString hasData;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -575,7 +578,7 @@ public class KobetsuHyojiAreaDiv extends Panel {
      * @return btnIchigoHantei
      */
     @JsonProperty("btnIchigoHantei")
-    public Button getBtnIchigoHantei() {
+    public ButtonDialog getBtnIchigoHantei() {
         return btnIchigoHantei;
     }
 
@@ -584,8 +587,26 @@ public class KobetsuHyojiAreaDiv extends Panel {
      * @param btnIchigoHantei btnIchigoHantei
      */
     @JsonProperty("btnIchigoHantei")
-    public void setBtnIchigoHantei(Button btnIchigoHantei) {
+    public void setBtnIchigoHantei(ButtonDialog btnIchigoHantei) {
         this.btnIchigoHantei = btnIchigoHantei;
+    }
+
+    /*
+     * gethasData
+     * @return hasData
+     */
+    @JsonProperty("hasData")
+    public RString getHasData() {
+        return hasData;
+    }
+
+    /*
+     * sethasData
+     * @param hasData hasData
+     */
+    @JsonProperty("hasData")
+    public void setHasData(RString hasData) {
+        this.hasData = hasData;
     }
 
     // </editor-fold>

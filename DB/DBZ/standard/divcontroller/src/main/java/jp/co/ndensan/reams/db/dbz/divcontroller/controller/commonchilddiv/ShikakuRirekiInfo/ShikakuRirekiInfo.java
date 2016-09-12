@@ -7,13 +7,13 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.Shika
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
-import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.shikakutokusojouho.ShikakuRirekiInfoDataPassModel;
 import jp.co.ndensan.reams.db.dbz.business.core.shikakutokusojouho.ShikakuTokusoJouho;
-import jp.co.ndensan.reams.db.dbz.definition.shikakutokusojouho.ShikakuTokusoJouhoParameter;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shikakutokusojouho.ShikakuTokusoJouhoParameter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuRirekiInfo.ShikakuRirekiInfo.ShikakuRirekiInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuRirekiInfo.ShikakuRirekiInfo.ShikakuRirekiInfoHandler;
-import jp.co.ndensan.reams.db.dbz.service.shikakutokusojouho.ShikakuTokusoJouhoFinder;
+import jp.co.ndensan.reams.db.dbz.service.core.shikakutokusojouho.ShikakuTokusoJouhoFinder;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 

@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbb.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.KetteiHenkoTsuchishoUchiwakeShoriKubun;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2014TsuchishoUchiwakeJoken;
 import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2014TsuchishoUchiwakeJoken.fukaShoriKubun;
 import static jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2014TsuchishoUchiwakeJoken.hozonDateTime;
@@ -17,7 +18,9 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -25,6 +28,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 通知書打ち分け条件のデータアクセスクラスです。
+ *
+ * @reamsid_L DBB-9999-012 xicongwang
  */
 public class DbT2014TsuchishoUchiwakeJokenDac implements ISaveable<DbT2014TsuchishoUchiwakeJokenEntity> {
 
@@ -87,5 +92,28 @@ public class DbT2014TsuchishoUchiwakeJokenDac implements ISaveable<DbT2014Tsuchi
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessors.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * 主キーで通知書打ち分け条件を取得します。
+     *
+     * @param 打ち分け条件 RString
+     * @return DbT2014TsuchishoUchiwakeJokenEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbT2014TsuchishoUchiwakeJokenEntity select通知書打ち分け条件情報(
+            RString 打ち分け条件) throws NullPointerException {
+        requireNonNull(打ち分け条件, UrSystemErrorMessages.値がnull.getReplacedMessage("打ち分け条件"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT2014TsuchishoUchiwakeJoken.class).
+                where(and(
+                                eq(uchiwakeJoken, 打ち分け条件),
+                                eq(fukaShoriKubun, KetteiHenkoTsuchishoUchiwakeShoriKubun.本算定賦課.getコード()))).
+                order(by(hozonDateTime, Order.DESC)).limit(1).
+                toObject(DbT2014TsuchishoUchiwakeJokenEntity.class);
     }
 }

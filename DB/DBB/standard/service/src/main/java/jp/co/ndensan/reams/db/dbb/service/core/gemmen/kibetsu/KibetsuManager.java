@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.gemmen.choteikyotsu.ChoteiKyotsu
 import jp.co.ndensan.reams.db.dbb.business.core.gemmen.kibetsu.Kibetsu;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.gemmen.KibetsuMapperParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.gemmen.KibetsuEntity;
-import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2003KibetsuDac;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2003KibetsuDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.gemmen.IKibetsuMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbb.service.core.gemmen.choteikyotsu.ChoteiKyotsuManager;

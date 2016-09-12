@@ -14,6 +14,9 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020005.dgCh
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020005.dgNinteiChosainList_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020005.MainPanelHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.chosachiku.ChosaChikuManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuNinteiChosain;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuNinteiChosainIdentifier;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -21,6 +24,8 @@ import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * 地区認定調査員情報のコントローラです。
@@ -61,7 +66,8 @@ public class NinteiChosaSchedule5Main {
      * @return ResponseData<NinteiChosaSchedule5MainDiv>
      */
     public ResponseData<NinteiChosaSchedule5MainDiv> onClik_btnSelect(NinteiChosaSchedule5MainDiv div) {
-        getHandler(div).onClik_btnSelect();
+        Models<ChikuNinteiChosainIdentifier, ChikuNinteiChosain> chikuNinteiChosain = getHandler(div).onClik_btnSelect();
+        ViewStateHolder.put(ViewStateKeys.地区認定調査員情報, chikuNinteiChosain);
         if (div.getNinteiChosainPanel().getDgNinteiChosainList().getDataSource() == null
                 || div.getNinteiChosainPanel().getDgNinteiChosainList().getDataSource().isEmpty()) {
             ValidationMessageControlPairs validationMessageControlPairs = getHandler(div).detaCheck();
@@ -285,7 +291,9 @@ public class NinteiChosaSchedule5Main {
             if (validationMessageControlPairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validationMessageControlPairs).respond();
             }
-            getHandler(div).btnUpdate();
+            Models<ChikuNinteiChosainIdentifier, ChikuNinteiChosain> models
+                    = ViewStateHolder.get(ViewStateKeys.地区認定調査員情報, Models.class);
+            getHandler(div).btnUpdate(models);
             div.getCcdKanryoMessage().setMessage(ROOTTITLE, RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE2020005StateName.完了);
         }

@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 import java.util.HashSet;
-import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakko;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshashikakuhakko.HihokenshaShikakuHakko;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -78,21 +78,21 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
     @JsonProperty("modes")
     private HashSet<Mode> modes;
 
-    public static enum 発行証タイプ implements ICommonChildDivMode {
+    public static enum HakkoshoType implements ICommonChildDivMode {
 
         被保険者証("被保険者証"),
         資格者証("資格者証");
 
         private final String name;
 
-        private 発行証タイプ(final String name) {
+        private HakkoshoType(final String name) {
             this.name = name;
         }
 
-        public static 発行証タイプ getEnum(String str) {
-            発行証タイプ[] enumArray = 発行証タイプ.values();
+        public static HakkoshoType getEnum(String str) {
+            HakkoshoType[] enumArray = HakkoshoType.values();
 
-            for (発行証タイプ enumStr : enumArray) {
+            for (HakkoshoType enumStr : enumArray) {
                 if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
@@ -107,12 +107,12 @@ public class HihokenshaShikakuHakkoDiv extends Panel implements IHihokenshaShika
 
     }
 
-    public 発行証タイプ getMode_発行証タイプ() {
-        return (発行証タイプ) _CommonChildDivModeUtil.getMode(this.modes, 発行証タイプ.class);
+    public HakkoshoType getMode_HakkoshoType() {
+        return (HakkoshoType) _CommonChildDivModeUtil.getMode(this.modes, HakkoshoType.class);
     }
 
-    public void setMode_発行証タイプ(発行証タイプ value) {
-        _CommonChildDivModeUtil.setMode(this.modes, 発行証タイプ.class, value);
+    public void setMode_HakkoshoType(HakkoshoType value) {
+        _CommonChildDivModeUtil.setMode(this.modes, HakkoshoType.class, value);
     }
 
     /*

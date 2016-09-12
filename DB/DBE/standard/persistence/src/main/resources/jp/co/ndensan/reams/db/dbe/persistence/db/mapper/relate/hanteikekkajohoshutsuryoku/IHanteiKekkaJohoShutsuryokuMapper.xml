@@ -18,7 +18,7 @@
 	   <result property="nijiHanteiKekka"  column="nijiHanteiYokaigoJotaiKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
     
-    <select id="get出力対象者明細一覧" resultMap="resultMap_getHanteiKekkaJohoShutsuryoku" 
+    <select resultOrdered="true" id="get出力対象者明細一覧" resultMap="resultMap_getHanteiKekkaJohoShutsuryoku" 
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hanteikekkajohoshutsuryoku.HanteiKekkaJohoShutsuryokuMybitisParamter" fetchSize="500">
         SELECT
             '第' || dbT5102."shinsakaiKaisaiNo" || '回' AS "shinsakaiKaisaiNo",

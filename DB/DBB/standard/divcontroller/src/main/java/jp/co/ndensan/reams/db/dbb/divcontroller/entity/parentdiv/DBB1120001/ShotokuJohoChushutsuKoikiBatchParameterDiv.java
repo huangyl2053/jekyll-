@@ -7,18 +7,20 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
- * ShotokuJohoChushutsuKoikiBatchParameter のクラスファイル 
- * 
- * @author 自動生成
+ * ShotokuJohoChushutsuKoikiBatchParameter のクラスファイル
+ *
+ * @reamsid_L DBB-1690-010 sunhui
  */
 public class ShotokuJohoChushutsuKoikiBatchParameterDiv extends PanelBatchParameter {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -61,7 +63,7 @@ public class ShotokuJohoChushutsuKoikiBatchParameterDiv extends PanelBatchParame
     }
 
     @JsonIgnore
-    public void  setTxtShoriNendoKoiki(TextBoxDate txtShoriNendoKoiki) {
+    public void setTxtShoriNendoKoiki(TextBoxDate txtShoriNendoKoiki) {
         this.getShotokuJohoChushutsuKoikiPanel().setTxtShoriNendoKoiki(txtShoriNendoKoiki);
     }
 
@@ -71,7 +73,7 @@ public class ShotokuJohoChushutsuKoikiBatchParameterDiv extends PanelBatchParame
     }
 
     @JsonIgnore
-    public void  setLin1(HorizontalLine lin1) {
+    public void setLin1(HorizontalLine lin1) {
         this.getShotokuJohoChushutsuKoikiPanel().setLin1(lin1);
     }
 
@@ -81,7 +83,7 @@ public class ShotokuJohoChushutsuKoikiBatchParameterDiv extends PanelBatchParame
     }
 
     @JsonIgnore
-    public void  setDgShichosonIchiran(DataGrid<dgShichosonIchiran_Row> dgShichosonIchiran) {
+    public void setDgShichosonIchiran(DataGrid<dgShichosonIchiran_Row> dgShichosonIchiran) {
         this.getShotokuJohoChushutsuKoikiPanel().setDgShichosonIchiran(dgShichosonIchiran);
     }
 
@@ -91,7 +93,7 @@ public class ShotokuJohoChushutsuKoikiBatchParameterDiv extends PanelBatchParame
     }
 
     @JsonIgnore
-    public void  setShotokuJohoIchiranKoiki(ShotokuJohoIchiranKoikiDiv ShotokuJohoIchiranKoiki) {
+    public void setShotokuJohoIchiranKoiki(ShotokuJohoIchiranKoikiDiv ShotokuJohoIchiranKoiki) {
         this.getShotokuJohoChushutsuKoikiPanel().setShotokuJohoIchiranKoiki(ShotokuJohoIchiranKoiki);
     }
 

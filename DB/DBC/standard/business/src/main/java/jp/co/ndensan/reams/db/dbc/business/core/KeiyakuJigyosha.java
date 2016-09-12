@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.core;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.definition.core.enumeratedtype.EigyoKeitai;
+import jp.co.ndensan.reams.db.dbc.definition.core.eigyokeitai.EigyoKeitai;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.hojin.IHojin;

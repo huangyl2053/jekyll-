@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1070011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon May 09 14:22:44 CST 2016 
+ * Sat Jul 02 14:15:35 CST 2016 
  */
 
 
@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  */
 
 public class dgTenshutsu_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     private DropDownList nextTask;
     private TextBoxCode shichosonCode;
@@ -38,6 +38,8 @@ public class dgTenshutsu_Row extends DataRow {
     private RString idoJiyu;
     private RString tennyuTenshutsuYoteiJusho;
     private RString rirekiNo;
+    private TextBoxFlexibleDate hihokenshaIdoYMD;
+    private RString hihokenshaEdaNo;
 
     public dgTenshutsu_Row() {
         super();
@@ -54,6 +56,8 @@ public class dgTenshutsu_Row extends DataRow {
         this.idoJiyu = RString.EMPTY;
         this.tennyuTenshutsuYoteiJusho = RString.EMPTY;
         this.rirekiNo = RString.EMPTY;
+        this.hihokenshaIdoYMD = new TextBoxFlexibleDate();
+        this.hihokenshaEdaNo = RString.EMPTY;
         this.setOriginalData("nextTask", nextTask);
         this.setOriginalData("shichosonCode", shichosonCode);
         this.setOriginalData("hihokenshaNo", hihokenshaNo);
@@ -67,9 +71,11 @@ public class dgTenshutsu_Row extends DataRow {
         this.setOriginalData("idoJiyu", idoJiyu);
         this.setOriginalData("tennyuTenshutsuYoteiJusho", tennyuTenshutsuYoteiJusho);
         this.setOriginalData("rirekiNo", rirekiNo);
+        this.setOriginalData("hihokenshaIdoYMD", hihokenshaIdoYMD);
+        this.setOriginalData("hihokenshaEdaNo", hihokenshaEdaNo);
     }
 
-    public dgTenshutsu_Row(DropDownList nextTask, TextBoxCode shichosonCode, TextBoxCode hihokenshaNo, TextBoxCode shikibetsuCode, RString shimei, RString shimeiKana, RString sex, RString juminShubetsu, TextBoxFlexibleDate birthYMD, TextBoxFlexibleDate idoYMD, RString idoJiyu, RString tennyuTenshutsuYoteiJusho, RString rirekiNo) {
+    public dgTenshutsu_Row(DropDownList nextTask, TextBoxCode shichosonCode, TextBoxCode hihokenshaNo, TextBoxCode shikibetsuCode, RString shimei, RString shimeiKana, RString sex, RString juminShubetsu, TextBoxFlexibleDate birthYMD, TextBoxFlexibleDate idoYMD, RString idoJiyu, RString tennyuTenshutsuYoteiJusho, RString rirekiNo, TextBoxFlexibleDate hihokenshaIdoYMD, RString hihokenshaEdaNo) {
         super();
         this.setOriginalData("nextTask", nextTask);
         this.setOriginalData("shichosonCode", shichosonCode);
@@ -84,6 +90,8 @@ public class dgTenshutsu_Row extends DataRow {
         this.setOriginalData("idoJiyu", idoJiyu);
         this.setOriginalData("tennyuTenshutsuYoteiJusho", tennyuTenshutsuYoteiJusho);
         this.setOriginalData("rirekiNo", rirekiNo);
+        this.setOriginalData("hihokenshaIdoYMD", hihokenshaIdoYMD);
+        this.setOriginalData("hihokenshaEdaNo", hihokenshaEdaNo);
         this.nextTask = nextTask;
         this.shichosonCode = shichosonCode;
         this.hihokenshaNo = hihokenshaNo;
@@ -97,6 +105,8 @@ public class dgTenshutsu_Row extends DataRow {
         this.idoJiyu = idoJiyu;
         this.tennyuTenshutsuYoteiJusho = tennyuTenshutsuYoteiJusho;
         this.rirekiNo = rirekiNo;
+        this.hihokenshaIdoYMD = hihokenshaIdoYMD;
+        this.hihokenshaEdaNo = hihokenshaEdaNo;
     }
 
     public dgTenshutsu_Row(DataGridSetting gridSetting) {
@@ -114,6 +124,8 @@ public class dgTenshutsu_Row extends DataRow {
         this.idoJiyu = RString.EMPTY;
         this.tennyuTenshutsuYoteiJusho = RString.EMPTY;
         this.rirekiNo = RString.EMPTY;
+        this.hihokenshaIdoYMD = new TextBoxFlexibleDate();
+        this.hihokenshaEdaNo = RString.EMPTY;
         this.setOriginalData("nextTask", nextTask);
         this.setOriginalData("shichosonCode", shichosonCode);
         this.setOriginalData("hihokenshaNo", hihokenshaNo);
@@ -127,6 +139,8 @@ public class dgTenshutsu_Row extends DataRow {
         this.setOriginalData("idoJiyu", idoJiyu);
         this.setOriginalData("tennyuTenshutsuYoteiJusho", tennyuTenshutsuYoteiJusho);
         this.setOriginalData("rirekiNo", rirekiNo);
+        this.setOriginalData("hihokenshaIdoYMD", hihokenshaIdoYMD);
+        this.setOriginalData("hihokenshaEdaNo", hihokenshaEdaNo);
     }
 
     public DropDownList getNextTask() {
@@ -179,6 +193,14 @@ public class dgTenshutsu_Row extends DataRow {
 
     public RString getRirekiNo() {
         return rirekiNo;
+    }
+
+    public TextBoxFlexibleDate getHihokenshaIdoYMD() {
+        return hihokenshaIdoYMD;
+    }
+
+    public RString getHihokenshaEdaNo() {
+        return hihokenshaEdaNo;
     }
 
     public void setNextTask(DropDownList nextTask) {
@@ -244,6 +266,16 @@ public class dgTenshutsu_Row extends DataRow {
     public void setRirekiNo(RString rirekiNo) {
         this.setOriginalData("rirekiNo", rirekiNo);
         this.rirekiNo = rirekiNo;
+    }
+
+    public void setHihokenshaIdoYMD(TextBoxFlexibleDate hihokenshaIdoYMD) {
+        this.setOriginalData("hihokenshaIdoYMD", hihokenshaIdoYMD);
+        this.hihokenshaIdoYMD = hihokenshaIdoYMD;
+    }
+
+    public void setHihokenshaEdaNo(RString hihokenshaEdaNo) {
+        this.setOriginalData("hihokenshaEdaNo", hihokenshaEdaNo);
+        this.hihokenshaEdaNo = hihokenshaEdaNo;
     }
 
     // </editor-fold>

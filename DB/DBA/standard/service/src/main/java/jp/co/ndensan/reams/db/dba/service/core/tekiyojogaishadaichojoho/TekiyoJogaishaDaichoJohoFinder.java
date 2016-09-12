@@ -15,14 +15,15 @@ import jp.co.ndensan.reams.db.dba.entity.db.relate.tekiyojogaishadaichojoho.Teki
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tekiyojogaishadaichojoho.TekiyoJogaishaDaichoJohoRelateEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tekiyojogaishadaichojoho.ITekiyoJogaiShisetuJyohoMapper;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurityjoho.KoseiShichosonJoho;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
-import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
+import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.koikishichosonjoho.KoikiShichosonJohoFinder;
-import jp.co.ndensan.reams.db.dbz.service.core.kanri.JushoHenshu;
+import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -32,11 +33,11 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -199,14 +200,17 @@ public class TekiyoJogaishaDaichoJohoFinder {
     }
 
     private SearchResult<TekiyoJogaiShisetuJyohoRelateEntity> set事由コードより名称(List<TekiyoJogaiShisetuJyohoRelateEntity> shisetuJyohoList) {
+        FlexibleDate 基准日 = new FlexibleDate(RDate.getNowDate().toDateString());
         List<TekiyoJogaiShisetuJyohoRelateEntity> relateEntityList = new ArrayList<>();
         for (int i = 0; i < shisetuJyohoList.size(); i++) {
             TekiyoJogaiShisetuJyohoRelateEntity entity = shisetuJyohoList.get(i);
             entity.set連番(i + 1);
-            RString 適用除外適用事由名称 = CodeMaster.getCodeRyakusho(new CodeShubetsu("0009"), new Code(entity.get適用除外適用事由コード()));
+            RString 適用除外適用事由名称 = CodeMaster.getCodeRyakusho(DBACodeShubetsu.介護資格適用事由_除外者.getコード(),
+                    new Code(entity.get適用除外適用事由コード()), 基准日);
             RString 適用除外解除事由名称 = RString.EMPTY;
             if (!RString.isNullOrEmpty(entity.get適用除外解除事由コード())) {
-                適用除外解除事由名称 = CodeMaster.getCodeRyakusho(new CodeShubetsu("0012"), new Code(entity.get適用除外解除事由コード()));
+                適用除外解除事由名称 = CodeMaster.getCodeRyakusho(DBACodeShubetsu.介護資格解除事由_除外者.getコード(),
+                        new Code(entity.get適用除外解除事由コード()), 基准日);
             }
             entity.set適用除外適用事由名称(RString.EMPTY);
             entity.set適用除外解除事由名称(RString.EMPTY);
@@ -246,12 +250,12 @@ public class TekiyoJogaishaDaichoJohoFinder {
         IShikibetsuTaisho 宛名情報 = ShikibetsuTaishoFactory.createShikibetsuTaisho(宛名情報PSM);
         ChohyoSeigyoKyotsu 帳票共通情報
                 = new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA100010.getReportId());
-        適用除外者台帳情報Entity.set住所1(JushoHenshu.createInstance().editJusho(帳票共通情報, 宛名情報));
+        適用除外者台帳情報Entity.set住所1(JushoHenshu.editJusho(帳票共通情報, 宛名情報, AssociationFinderFactory.createInstance().getAssociation()));
         適用除外者台帳情報Entity.set住所タイトル1(住所);
-        適用除外者台帳情報Entity.set住所コード(JushoHenshu.createInstance().get住所コード(宛名情報PSM));
+        適用除外者台帳情報Entity.set住所コード(JushoHenshu.get住所コード(宛名情報PSM));
         適用除外者台帳情報Entity.set行政区タイトル(行政区);
         適用除外者台帳情報Entity.set行政区コード(nullToEmpty(宛名情報PSM.getGyoseikuCode()));
-        適用除外者台帳情報Entity.set住所2(JushoHenshu.createInstance().editJusho2(
+        適用除外者台帳情報Entity.set住所2(JushoHenshu.editJusho2(
                 宛名情報PSM.getTennyumaeJusho(), 宛名情報PSM.getTennyumaeBanchi(), 宛名情報PSM.getTennyumaeKatagaki()));
         適用除外者台帳情報Entity.set住所タイトル2(転入前住所);
         適用除外者台帳情報Entity.set住所コード2(nullToEmpty(宛名情報PSM.getTennyumaeZenkokuJushoCode()));

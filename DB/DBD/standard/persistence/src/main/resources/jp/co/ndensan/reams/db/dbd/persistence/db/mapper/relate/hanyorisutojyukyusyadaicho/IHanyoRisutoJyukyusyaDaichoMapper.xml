@@ -229,7 +229,7 @@
         <association property="psmEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
         <association property="atesakiEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
     </resultMap>
-     <select id="get汎用リスト"
+     <select resultOrdered="true" id="get汎用リスト"
             resultMap="resultMap_HanyoRisutoJyukyusyaDaichoEntity"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.hanyorisutojyukyusyadaicho.HanyoRisutoJyukyusyaDaichoMybatisParameter"
             fetchSize="500">

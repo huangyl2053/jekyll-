@@ -37,7 +37,7 @@
                      resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
     </resultMap>
 
-    <select id="get直近広住特適用情報" resultMap="getKoikinaiJushochiTokureiListResultMap"
+    <select resultOrdered="true" id="get直近広住特適用情報" resultMap="getKoikinaiJushochiTokureiListResultMap"
             parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.koikinaijushochitokurei.KoikinaiJushochiTokureiMybatisparamter" fetchSize="500">
         SELECT
         A."hihokenshaNo" as "dbT1001HihokenshaDaicho_hihokenshaNo",
@@ -68,16 +68,7 @@
         A."koikinaiTokureiSochimotoShichosonCode" as "dbT1001HihokenshaDaicho_koikinaiTokureiSochimotoShichosonCode",
         A."kyuShichosonCode" as "dbT1001HihokenshaDaicho_kyuShichosonCode",
         A."logicalDeletedFlag" as "dbT1001HihokenshaDaicho_logicalDeletedFlag",
-        "ShikibetsuTaisho"."meisho"                             as "ShikibetsuTaisho_meisho",
-        "ShikibetsuTaisho"."kanaMeisho"                         as "ShikibetsuTaisho_kanaMeisho",
-        "ShikibetsuTaisho"."zenkokuJushoCode"                   as "ShikibetsuTaisho_zenkokuJushoCode",
-        "ShikibetsuTaisho"."gyoseikuCode"                       as "ShikibetsuTaisho_gyoseikuCode",
-        "ShikibetsuTaisho"."gyoseikuName"                       as "ShikibetsuTaisho_gyoseikuName",
-        "ShikibetsuTaisho"."meisho"                             as "ShikibetsuTaisho_meisho",
-        "ShikibetsuTaisho"."seibetsuCode"                       as "ShikibetsuTaisho_seibetsuCode",
-        "ShikibetsuTaisho"."setaiCode"                          as "ShikibetsuTaisho_setaiCode",
-        "ShikibetsuTaisho"."jusho"                              as "ShikibetsuTaisho_jusho",
-        "ShikibetsuTaisho"."juminShubetsuCode"                  as "ShikibetsuTaisho_juminShubetsuCode"
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
         FROM
         rgdb."DbT1001HihokenshaDaicho" AS A
         INNER JOIN
@@ -127,7 +118,7 @@
         </if>
     </select>
 
-    <select id="get基準日広住特適用情報" resultMap="getKoikinaiJushochiTokureiListResultMap"
+    <select resultOrdered="true" id="get基準日広住特適用情報" resultMap="getKoikinaiJushochiTokureiListResultMap"
             parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.koikinaijushochitokurei.KoikinaiJushochiTokureiMybatisparamter" fetchSize="500">
         SELECT
         DbT1001."hihokenshaNo" as "dbT1001HihokenshaDaicho_hihokenshaNo",
@@ -158,16 +149,7 @@
         DbT1001."koikinaiTokureiSochimotoShichosonCode" as "dbT1001HihokenshaDaicho_koikinaiTokureiSochimotoShichosonCode",
         DbT1001."kyuShichosonCode" as "dbT1001HihokenshaDaicho_kyuShichosonCode",
         DbT1001."logicalDeletedFlag" as "dbT1001HihokenshaDaicho_logicalDeletedFlag",
-        "ShikibetsuTaisho"."meisho"                             as "ShikibetsuTaisho_meisho",
-        "ShikibetsuTaisho"."kanaMeisho"                         as "ShikibetsuTaisho_kanaMeisho",
-        "ShikibetsuTaisho"."zenkokuJushoCode"                   as "ShikibetsuTaisho_zenkokuJushoCode",
-        "ShikibetsuTaisho"."gyoseikuCode"                       as "ShikibetsuTaisho_gyoseikuCode",
-        "ShikibetsuTaisho"."gyoseikuName"                       as "ShikibetsuTaisho_gyoseikuName",
-        "ShikibetsuTaisho"."meisho"                             as "ShikibetsuTaisho_meisho",
-        "ShikibetsuTaisho"."seibetsuCode"                       as "ShikibetsuTaisho_seibetsuCode",
-        "ShikibetsuTaisho"."setaiCode"                          as "ShikibetsuTaisho_setaiCode",
-        "ShikibetsuTaisho"."jusho"                              as "ShikibetsuTaisho_jusho",
-        "ShikibetsuTaisho"."juminShubetsuCode"                  as "ShikibetsuTaisho_juminShubetsuCode"
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
         FROM(
         SELECT
         "hihokenshaNo",
@@ -222,7 +204,7 @@
         rank_number = 1
     </select>
 
-    <select id="get範囲広住特適用情報" resultMap="getKoikinaiJushochiTokureiListResultMap"
+    <select resultOrdered="true" id="get範囲広住特適用情報" resultMap="getKoikinaiJushochiTokureiListResultMap"
             parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.koikinaijushochitokurei.KoikinaiJushochiTokureiMybatisparamter" fetchSize="500">
         SELECT
         DbT1001."hihokenshaNo" as "dbT1001HihokenshaDaicho_hihokenshaNo",
@@ -253,16 +235,7 @@
         DbT1001."koikinaiTokureiSochimotoShichosonCode" as "dbT1001HihokenshaDaicho_koikinaiTokureiSochimotoShichosonCode",
         DbT1001."kyuShichosonCode" as "dbT1001HihokenshaDaicho_kyuShichosonCode",
         DbT1001."logicalDeletedFlag" as "dbT1001HihokenshaDaicho_logicalDeletedFlag",
-        "ShikibetsuTaisho"."meisho"                             as "ShikibetsuTaisho_meisho",
-        "ShikibetsuTaisho"."kanaMeisho"                         as "ShikibetsuTaisho_kanaMeisho",
-        "ShikibetsuTaisho"."zenkokuJushoCode"                   as "ShikibetsuTaisho_zenkokuJushoCode",
-        "ShikibetsuTaisho"."gyoseikuCode"                       as "ShikibetsuTaisho_gyoseikuCode",
-        "ShikibetsuTaisho"."gyoseikuName"                       as "ShikibetsuTaisho_gyoseikuName",
-        "ShikibetsuTaisho"."meisho"                             as "ShikibetsuTaisho_meisho",
-        "ShikibetsuTaisho"."seibetsuCode"                       as "ShikibetsuTaisho_seibetsuCode",
-        "ShikibetsuTaisho"."setaiCode"                          as "ShikibetsuTaisho_setaiCode",
-        "ShikibetsuTaisho"."jusho"                              as "ShikibetsuTaisho_jusho",
-        "ShikibetsuTaisho"."juminShubetsuCode"                  as "ShikibetsuTaisho_juminShubetsuCode"
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
         FROM(
         SELECT
         "hihokenshaNo",
@@ -318,7 +291,7 @@
         rank_number = 1
     </select>
 
-    <select id="get広域特解除情報" resultMap="getKoikinaiJushochiTokureiListResultMap"
+    <select resultOrdered="true" id="get広域特解除情報" resultMap="getKoikinaiJushochiTokureiListResultMap"
             parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.koikinaijushochitokurei.KoikinaiKaijoParamter" fetchSize="500">
         SELECT
         DbT1001."hihokenshaNo" as "dbT1001HihokenshaDaicho_hihokenshaNo",

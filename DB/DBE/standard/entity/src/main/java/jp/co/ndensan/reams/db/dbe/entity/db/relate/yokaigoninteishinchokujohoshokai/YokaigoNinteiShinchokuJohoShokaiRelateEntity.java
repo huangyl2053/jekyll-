@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteishinchokujohoshokai;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -15,12 +14,14 @@ import lombok.Setter;
 /**
  *
  * 申請者一覧内容検索情報RelateEntityクラスです。
+ *
  * @reamsid_L DBE-0210-010 dongyabin
  */
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class YokaigoNinteiShinchokuJohoShokaiRelateEntity {
+
     private RString shichosonMeisho;
     private ShinseishoKanriNo hihokenshaNo;
     private RString hihokenshaName;
@@ -56,6 +57,7 @@ public class YokaigoNinteiShinchokuJohoShokaiRelateEntity {
     private FlexibleDate shinsakaiKaisaiYMD;
     private RString shinsakaiKaisaiNo;
     private int gogitaiNo;
+    private RString gogitaiMei;
     private RString nijiHanYokaigoJotaiKubunCode;
     private RString shinseishoKanriNo;
 }

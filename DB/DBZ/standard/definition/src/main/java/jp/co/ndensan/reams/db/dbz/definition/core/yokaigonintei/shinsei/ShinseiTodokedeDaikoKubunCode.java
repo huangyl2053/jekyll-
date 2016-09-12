@@ -8,43 +8,46 @@ package jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei;
 import static jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiTodokedeDaikoKubunCode.values;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.strings.IRStringConvertable;
 
 /**
  * 申請届出代行区分の列挙型クラスです。
  *
  * @reamsid_L DBZ-9999-023 wangchao
  */
-public enum ShinseiTodokedeDaikoKubunCode {
+public enum ShinseiTodokedeDaikoKubunCode implements IRStringConvertable {
 
     /**
      * 本人 <br/>
      * 本人 : 1。
      */
-    本人("1"),
+    本人("1", "本人"),
     /**
      * 家族 <br/>
      * 家族 : 2。
      */
-    家族("2"),
+    家族("2", "家族"),
     /**
      * 委任 <br/>
      * 委任 : 3。
      */
-    委任("3"),
+    委任("3", "委任"),
     /**
      * 代行 <br/>
      * 代行 : 4。
      */
-    代行("4"),
+    代行("4", "代行"),
     /**
      * その他 <br/>
      * その他 : 9。
      */
-    その他("9");
+    その他("9", "その他");
     private final RString code;
+    private final RString fullName;
 
-    private ShinseiTodokedeDaikoKubunCode(String code) {
+    private ShinseiTodokedeDaikoKubunCode(String code, String fullName) {
         this.code = new RString(code);
+        this.fullName = new RString(fullName);
     }
 
     /**
@@ -54,6 +57,15 @@ public enum ShinseiTodokedeDaikoKubunCode {
      */
     public RString getCode() {
         return this.code;
+    }
+
+    /**
+     * 申請届出代行区分コードの名称を返します。
+     *
+     * @return 申請届出代行区分コードの名称
+     */
+    public RString get名称() {
+        return fullName;
     }
 
     /**
@@ -71,5 +83,10 @@ public enum ShinseiTodokedeDaikoKubunCode {
         }
         throw new IllegalArgumentException(UrErrorMessages.存在しない
                 .getMessage().replace("コードに対応する申請届出代行区分").evaluate());
+    }
+
+    @Override
+    public RString toRString() {
+        return new RString(this.toString());
     }
 }

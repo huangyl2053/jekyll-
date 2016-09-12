@@ -8,9 +8,7 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320003
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.ChoshuHoho;
-import jp.co.ndensan.reams.db.dbb.business.viewstate.FukaShokaiKey;
-import jp.co.ndensan.reams.db.dbb.definition.enumeratedtype.DbbViewStateKey;
+import jp.co.ndensan.reams.db.dbb.business.core.viewstate.FukaShokaiKey;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaMapper;
 import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320003.TokuChoIdoAndIraiDiv;
@@ -18,16 +16,18 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320003.Toku
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320003.TokuchoDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320003.dgTokuChoIdoAndIrai_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320003.dgTokuchoKekka_Row;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.ConfigKeysTokuchoHosoku;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.TokuchoHosokuConfig;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.fuka.SanteiState;
+import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.core.config.ConfigKeysTokuchoHosoku;
+import jp.co.ndensan.reams.db.dbz.definition.core.config.TokuchoHosokuConfig;
+import jp.co.ndensan.reams.db.dbz.definition.core.fuka.SanteiState;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
 import jp.co.ndensan.reams.ue.uex.business.core.NenkinTokuchoKaifuJoho;
 import jp.co.ndensan.reams.ue.uex.definition.core.KakushuKubun;
 import jp.co.ndensan.reams.ue.uex.definition.core.ShoriKekka;
 import jp.co.ndensan.reams.ue.uex.service.core.NenkinTokuchoKaifuJohoManager;
-import jp.co.ndensan.reams.ur.urz.definition.core.codemaster.CodeShubetsus;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -86,9 +86,13 @@ public class Tokucho {
         ChoshuHoho model = FukaShokaiController.getChoshuHohoModelByFukaShokaiKeyWithoutRirekiNo();
         // 賦課照会コントロールキー.データ状態（仮徴収/本徴収）に応じて徴収ラジオボタンを設定しその内容を表示する。
         if (key.get算定状態() == SanteiState.仮算定) {
-            setDivFor仮算定(div, model);
+            if (model.get仮徴収_基礎年金番号() != null && !model.get仮徴収_基礎年金番号().isEmpty()) {
+                setDivFor仮算定(div, model);
+            }
         } else {
-            setDivFor本算定(div, model);
+            if (model.get本徴収_基礎年金番号() != null && !model.get本徴収_基礎年金番号().isEmpty()) {
+                setDivFor本算定(div, model);
+            }
         }
         return createResponseData(div);
     }
@@ -102,15 +106,21 @@ public class Tokucho {
     public ResponseData<TokuchoDiv> onChange_radChoshu(TokuchoDiv div) {
 
         FukaShokaiKey key = FukaShokaiController.getFukaShokaiKeyInViewState();
-        ViewStateHolder.put(DbbViewStateKey.FukaShokaiKey, key);
+        ViewStateHolder.put(ViewStateKeys.賦課照会キー, key);
         // 年金保険者突合情報について、仮徴収/本徴収/翌年度のいずれかの情報を再表示する
         ChoshuHoho model = FukaShokaiController.getChoshuHohoModelByFukaShokaiKeyWithoutRirekiNo();
         if (div.getRadChoshu().getSelectedKey().equals(SanteiState.仮算定.getKey())) {
-            setDivFor仮算定(div, model);
+            if (model.get仮徴収_基礎年金番号() != null && !model.get仮徴収_基礎年金番号().isEmpty()) {
+                setDivFor仮算定(div, model);
+            }
         } else if (div.getRadChoshu().getSelectedKey().equals(SanteiState.本算定.getKey())) {
-            setDivFor本算定(div, model);
+            if (model.get本徴収_基礎年金番号() != null && !model.get本徴収_基礎年金番号().isEmpty()) {
+                setDivFor本算定(div, model);
+            }
         } else {
-            setDivFor翌年度(div, model);
+            if (model.get翌年度仮徴収_基礎年金番号() != null && !model.get翌年度仮徴収_基礎年金番号().isEmpty()) {
+                setDivFor翌年度(div, model);
+            }
         }
         return createResponseData(div);
     }
@@ -121,7 +131,7 @@ public class Tokucho {
         div.getTxtNenkinCode2().setValue(model.get仮徴収_年金コード());
         div.getTxtKaishiYM().setValue(new FlexibleDate(build開始年月(model.get仮徴収_捕捉月(), model.get賦課年度().minusYear(1))));
         RString nenkinCode = createNenkinCode(model.get仮徴収_年金コード());
-        RString nenkinCodeMeisho = CodeMasterNoOption.getCodeMeisho(SubGyomuCode.UEX分配集約公開, CodeShubetsus.年金コード, new Code(nenkinCode));
+        RString nenkinCodeMeisho = CodeMasterNoOption.getCodeMeisho(SubGyomuCode.UEX分配集約公開, new CodeShubetsu("0046"), new Code(nenkinCode));
         div.getTxtTokubetsuChoshuTaishoNenkin().setValue(nenkinCode.concat(nenkinCodeMeisho));
         set年金保険者突合Div(div,
                 new FukaNendo(model.get賦課年度().minusYear(1)), model.get仮徴収_基礎年金番号(), model.get仮徴収_年金コード(), model.get仮徴収_捕捉月());
@@ -135,7 +145,7 @@ public class Tokucho {
         div.getTxtNenkinCode2().setValue(model.get本徴収_年金コード());
         div.getTxtKaishiYM().setValue(new FlexibleDate(build開始年月(model.get本徴収_捕捉月(), model.get賦課年度())));
         RString nenkinCode = createNenkinCode(model.get本徴収_年金コード());
-        RString nenkinCodeMeisho = CodeMasterNoOption.getCodeMeisho(SubGyomuCode.UEX分配集約公開, CodeShubetsus.年金コード, new Code(nenkinCode));
+        RString nenkinCodeMeisho = CodeMasterNoOption.getCodeMeisho(SubGyomuCode.UEX分配集約公開, new CodeShubetsu("0046"), new Code(nenkinCode));
         div.getTxtTokubetsuChoshuTaishoNenkin().setValue(nenkinCode.concat(nenkinCodeMeisho));
         set年金保険者突合Div(div,
                 new FukaNendo(model.get賦課年度()), model.get本徴収_基礎年金番号(), model.get本徴収_年金コード(), model.get本徴収_捕捉月());
@@ -157,7 +167,7 @@ public class Tokucho {
             div.getTxtNenkinCode2().setValue(model.get翌年度仮徴収_年金コード());
             div.getTxtKaishiYM().setValue(new FlexibleDate(build開始年月(model.get翌年度仮徴収_捕捉月(), model.get賦課年度())));
             RString nenkinCode = createNenkinCode(model.get翌年度仮徴収_年金コード());
-            RString nenkinCodeMeisho = CodeMasterNoOption.getCodeMeisho(SubGyomuCode.UEX分配集約公開, CodeShubetsus.年金コード, new Code(nenkinCode));
+            RString nenkinCodeMeisho = CodeMasterNoOption.getCodeMeisho(SubGyomuCode.UEX分配集約公開, new CodeShubetsu("0046"), new Code(nenkinCode));
             div.getTxtTokubetsuChoshuTaishoNenkin().setValue(nenkinCode.concat(nenkinCodeMeisho));
             set年金保険者突合Div(div,
                     new FukaNendo(model.get賦課年度()), model.get翌年度仮徴収_基礎年金番号(), model.get翌年度仮徴収_年金コード(), model.get翌年度仮徴収_捕捉月());
@@ -207,7 +217,7 @@ public class Tokucho {
             return;
         }
         div.getTxtHosokuYM().setValue(new FlexibleDate(kaifuJoho.get処理年度().toDateString().concat(捕捉月)));
-        RString tokubetsuChoshuCodeMeisho = CodeMasterNoOption.getCodeMeisho(SubGyomuCode.UEX分配集約公開, CodeShubetsus.特別徴収義務者コード, kaifuJoho.getDT特別徴収義務者コード().value());
+        RString tokubetsuChoshuCodeMeisho = CodeMasterNoOption.getCodeMeisho(SubGyomuCode.UEX分配集約公開, new CodeShubetsu("0047"), kaifuJoho.getDT特別徴収義務者コード().value());
         div.getTxtTokuChoGimusha().setValue(kaifuJoho.getDT特別徴収義務者コード().value().value().concat(tokubetsuChoshuCodeMeisho));
 
         div.getNenkinHokenshaTotsugoJoho().getTxtShimeiKana().setValue(kaifuJoho.getDTカナ氏名());
@@ -269,9 +279,9 @@ public class Tokucho {
                 ? kaifuJoho.get通知内容コード().value().get通知内容コード().concat(kaifuJoho.get通知内容コード().value().get通知内容名称()) : RString.EMPTY,
                 kaifuJoho.get通知内容コード() != null && kaifuJoho.getDT各種区分() != null
                 ? (各種区分 != null ? 各種区分.get各種区分名称() : RString.EMPTY) : RString.EMPTY,
-                kaifuJoho.getDT各種金額欄１() != null ? FukaMapper.addComma(new Decimal(kaifuJoho.getDT各種金額欄１().toString())) : RString.EMPTY,
-                kaifuJoho.getDT各種金額欄２() != null ? FukaMapper.addComma(new Decimal(kaifuJoho.getDT各種金額欄２().toString())) : RString.EMPTY,
-                kaifuJoho.getDT各種金額欄３() != null ? FukaMapper.addComma(new Decimal(kaifuJoho.getDT各種金額欄３().toString())) : RString.EMPTY,
+                kaifuJoho.getDT各種金額欄１() != null && !kaifuJoho.getDT各種金額欄１().isEmpty() ? FukaMapper.addComma(new Decimal(kaifuJoho.getDT各種金額欄１().toString())) : RString.EMPTY,
+                kaifuJoho.getDT各種金額欄２() != null && !kaifuJoho.getDT各種金額欄２().isEmpty() ? FukaMapper.addComma(new Decimal(kaifuJoho.getDT各種金額欄２().toString())) : RString.EMPTY,
+                kaifuJoho.getDT各種金額欄３() != null && !kaifuJoho.getDT各種金額欄３().isEmpty() ? FukaMapper.addComma(new Decimal(kaifuJoho.getDT各種金額欄３().toString())) : RString.EMPTY,
                 kaifuJoho.get通知内容コード() != null && kaifuJoho.getDT処理結果() != null
                 ? (処理結果 != null ? 処理結果.get処理結果名称() : RString.EMPTY) : RString.EMPTY);
     }

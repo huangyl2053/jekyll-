@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1090011.Mis
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1090011.MishorishaIchiranSakuseiValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
-import jp.co.ndensan.reams.db.dbx.service.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;

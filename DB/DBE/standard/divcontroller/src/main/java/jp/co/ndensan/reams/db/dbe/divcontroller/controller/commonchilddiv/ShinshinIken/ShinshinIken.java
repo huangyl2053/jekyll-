@@ -5,10 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.commonchilddiv.ShinshinIken;
 
+import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ninteishinseijoho.NinteiShinseiJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshojoho.ShujiiIkenshoJoho;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.ShinshinIken.ShinshinIken.ShinshinIkenDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.ShinshinIken.ShinshinIkenBakHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.ShinshinIken.ShinshinIkenHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.ShinshinIken.ShinshinIkenValidationHandler;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -16,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  *
@@ -32,7 +36,7 @@ public class ShinshinIken {
      * @return ResponseData<ShinshinIkenDiv>
      */
     public ResponseData<ShinshinIkenDiv> onLoad(ShinshinIkenDiv div) {
-        getHandler(div).onLoad();
+        ViewStateHolder.put(ViewStateKeys.要介護認定主治医意見書情報, getHandler(div).onLoad());
         getHandler(div).setSelectKey();
         return ResponseData.of(div).respond();
     }
@@ -246,7 +250,7 @@ public class ShinshinIken {
         if (new RString(UrQuestionMessages.確定の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
-            getHandlerBak(div).onClickBtnKakutei();
+            ViewStateHolder.put(ViewStateKeys.意見書情報, getHandlerBak(div).onClickBtnKakutei());
             return ResponseData.of(div).dialogOKClose();
         }
         return ResponseData.of(div).respond();
@@ -276,7 +280,11 @@ public class ShinshinIken {
     }
 
     private ShinshinIkenHandler getHandler(ShinshinIkenDiv div) {
-        return new ShinshinIkenHandler(div);
+        return new ShinshinIkenHandler(div,
+                ViewStateHolder.get(ViewStateKeys.意見書情報, NinteiShinseiJoho.class),
+                ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class),
+                ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, RString.class),
+                ViewStateHolder.get(ViewStateKeys.要介護認定主治医意見書情報, ShujiiIkenshoJoho.class));
     }
 
     private ShinshinIkenValidationHandler getValidationHandler(ShinshinIkenDiv div) {
@@ -284,6 +292,10 @@ public class ShinshinIken {
     }
 
     private ShinshinIkenBakHandler getHandlerBak(ShinshinIkenDiv div) {
-        return new ShinshinIkenBakHandler(div);
+        return new ShinshinIkenBakHandler(div,
+                ViewStateHolder.get(ViewStateKeys.意見書情報, NinteiShinseiJoho.class),
+                ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class),
+                ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, RString.class),
+                ViewStateHolder.get(ViewStateKeys.要介護認定主治医意見書情報, ShujiiIkenshoJoho.class));
     }
 }

@@ -46,7 +46,7 @@
         <result property="rankName" column="dbT2011RankJoho_rankName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
-        <select id="getEntity" resultMap="ResultMap_DbT2011RankJohoEntity">
+        <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT2011RankJohoEntity">
 	SELECT
 	<include refid="allColumns_DbT2011RankJoho"/>
 	FROM

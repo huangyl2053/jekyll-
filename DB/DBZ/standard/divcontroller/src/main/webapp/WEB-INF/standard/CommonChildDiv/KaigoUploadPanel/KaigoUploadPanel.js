@@ -14,36 +14,38 @@ var DBZ;
                 return new KaigoUploadPanel.PublicProperties(this.fieldName);
             };
 
-            ModeController.prototype.priorities = function () {
-                return [
-                    "isSimpleMode"
-                ];
-            };
-
-            ModeController.prototype.isSimpleMode = function () {
-                return new Modes.isSimpleMode(this.controls);
+            ModeController.prototype.IsSimpleMode = function () {
+                return new Modes.IsSimpleMode(this.controls);
             };
             return ModeController;
         })();
         KaigoUploadPanel.ModeController = ModeController;
 
         (function (Modes) {
-            var isSimpleMode = (function () {
-                function isSimpleMode(controls) {
+            var IsSimpleMode = (function () {
+                function IsSimpleMode(controls) {
                     this.controls = controls;
                 }
-                isSimpleMode.prototype.TRUE = function () {
+                IsSimpleMode.prototype.TRUE = function () {
+                    this.controls.uplUploadFile().displayNone = false;
+                    this.controls.uplUploadFile1().displayNone = true;
+                    this.controls.btnUpload().displayNone = false;
+                    this.controls.btnUpload1().displayNone = true;
                     this.controls.lblFileName().visible = true;
                     this.controls.lblUploadFileName().visible = true;
                 };
 
-                isSimpleMode.prototype.FALSE = function () {
+                IsSimpleMode.prototype.FALSE = function () {
+                    this.controls.uplUploadFile().displayNone = true;
+                    this.controls.uplUploadFile1().displayNone = false;
+                    this.controls.btnUpload().displayNone = true;
+                    this.controls.btnUpload1().displayNone = false;
                     this.controls.lblFileName().visible = false;
                     this.controls.lblUploadFileName().visible = false;
                 };
-                return isSimpleMode;
+                return IsSimpleMode;
             })();
-            Modes.isSimpleMode = isSimpleMode;
+            Modes.IsSimpleMode = IsSimpleMode;
         })(KaigoUploadPanel.Modes || (KaigoUploadPanel.Modes = {}));
         var Modes = KaigoUploadPanel.Modes;
     })(DBZ.KaigoUploadPanel || (DBZ.KaigoUploadPanel = {}));

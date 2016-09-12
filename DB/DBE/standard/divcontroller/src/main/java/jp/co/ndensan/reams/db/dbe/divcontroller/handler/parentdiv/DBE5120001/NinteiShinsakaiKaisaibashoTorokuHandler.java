@@ -8,21 +8,19 @@ import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.shinsakaikaisaibasho
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5120001.NinteiShinsakaiKaisaibashoTorokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5120001.dgKaisaibashoIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.gogitaijoho.shinsakaikaisaibashojoho.ShinsakaiKaisaiBashoJohoManager;
-import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.CodeInput.ICodeInputDiv;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * 介護認定審査会開催場所登録画面でのバリデーションを管理するハンドラークラスです。
  *
- * @reamsid_L DBE-0100-010  wangkun
+ * @reamsid_L DBE-0100-010 wangkun
  */
 public class NinteiShinsakaiKaisaibashoTorokuHandler {
 
@@ -31,7 +29,6 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
     private static final RString 削除モード = new RString("削除");
     private static final RString 通常 = new RString("通常");
     private static final RString 削除 = new RString("削除");
-    private static final CodeShubetsu コード種別 = new CodeShubetsu("5001");
     private static final boolean 有効 = true;
     private static final boolean 全て = false;
 
@@ -82,7 +79,7 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
         set開催場所編集エリア活性();
         div.getBtnTsuika().setDisabled(true);
         ICodeInputDiv codeInput = div.getShinakaiKaisaIbashoShosai().getCcdKaisaiChikuCode();
-        codeInput.applyNoOptionCodeMaster().load(SubGyomuCode.DBE認定支援, コード種別);
+        codeInput.applyNoOptionCodeMaster().load(SubGyomuCode.DBE認定支援, DBECodeShubetsu.審査会地区コード.getコード());
         div.getShinakaiKaisaIbashoShosai().setJyotai(追加モード);
     }
 
@@ -175,10 +172,9 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
     /**
      * 介護認定審査会開催場所登録の「保存する」ボタンが押下の場合、状態によってinsert/update/delete処理に振り分けられます。
      *
+     * @param shinsakaiKaisaiBashoJohoList shinsakaiKaisaiBashoJohoList
      */
-    public void save() {
-        Models<ShinsakaiKaisaiBashoJohoIdentifier, ShinsakaiKaisaiBashoJoho> shinsakaiKaisaiBashoJohoList
-                = ViewStateHolder.get(ViewStateKeys.開催場所情報一覧, Models.class);
+    public void save(Models<ShinsakaiKaisaiBashoJohoIdentifier, ShinsakaiKaisaiBashoJoho> shinsakaiKaisaiBashoJohoList) {
         List<dgKaisaibashoIchiran_Row> rowList = div.getDgKaisaibashoIchiran().getDataSource();
         ShinsakaiKaisaiBashoJohoManager manager = ShinsakaiKaisaiBashoJohoManager.createInstance();
         for (dgKaisaibashoIchiran_Row row : rowList) {
@@ -277,12 +273,12 @@ public class NinteiShinsakaiKaisaibashoTorokuHandler {
         div.getTxtTelNumber().clearDomain();
         div.getDdlKaisaiBashoJokyo().setSelectedIndex(0);
         div.getCcdKaisaiChikuCode().clearDisplayedValues();
-        div.getCcdKaisaiChikuCode().applyNoOptionCodeMaster().load(コード種別);
+        div.getCcdKaisaiChikuCode().applyNoOptionCodeMaster().load(DBECodeShubetsu.審査会地区コード.getコード());
     }
 
     private void get開催地区内容(dgKaisaibashoIchiran_Row clickedItem) {
         ICodeInputDiv codeInput = div.getShinakaiKaisaIbashoShosai().getCcdKaisaiChikuCode();
         codeInput.applyNoOptionCodeMaster()
-                .load(SubGyomuCode.DBE認定支援, コード種別, new Code(clickedItem.getKaisaiChikuCode()));
+                .load(SubGyomuCode.DBE認定支援, DBECodeShubetsu.審査会地区コード.getコード(), new Code(clickedItem.getKaisaiChikuCode()));
     }
 }

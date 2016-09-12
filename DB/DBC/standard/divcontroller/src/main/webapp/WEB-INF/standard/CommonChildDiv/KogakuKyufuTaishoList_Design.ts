@@ -8,8 +8,44 @@ module DBC {
 
         export class Events {
 
+            public static onClick_btnTsuika(): string {
+                return "onClick_btnTsuika";
+            }
+
+            public static onClick_modify(): string {
+                return "onClick_modify";
+            }
+
+            public static onClick_delete(): string {
+                return "onClick_delete";
+            }
+
             public static onMulti_dgKyufuJissekiMeisaiList(): string {
                 return "onMulti_dgKyufuJissekiMeisaiList";
+            }
+
+            public static onOkClose_btnJgyosha(): string {
+                return "onOkClose_btnJgyosha";
+            }
+
+            public static onBeforeOpenDialog_btnJgyosha(): string {
+                return "onBeforeOpenDialog_btnJgyosha";
+            }
+
+            public static onOkClose_btnServiceSyurui(): string {
+                return "onOkClose_btnServiceSyurui";
+            }
+
+            public static onBeforeOpenDialog_btnServiceSyurui(): string {
+                return "onBeforeOpenDialog_btnServiceSyurui";
+            }
+
+            public static onClick_btnTorikeshi(): string {
+                return "onClick_btnTorikeshi";
+            }
+
+            public static onClick_btnkakutei(): string {
+                return "onClick_btnkakutei";
             }
 
         }
@@ -85,6 +121,10 @@ module DBC {
                 return new UZA.TextBoxNum(this.convFiledName("txtRiyoshafutanGokei"));
             }
 
+            public GokeiPanel(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("GokeiPanel"));
+            }
+
             public txtSanteiKijunGaku(): UZA.TextBoxNum {
                 return new UZA.TextBoxNum(this.convFiledName("txtSanteiKijunGaku"));
             }
@@ -93,8 +133,16 @@ module DBC {
                 return new UZA.TextBoxNum(this.convFiledName("txtSiharaiZumiGaku"));
             }
 
+            public txtKogakuShikyuGaku(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("txtKogakuShikyuGaku"));
+            }
+
             public lin1(): UZA.HorizontalLine {
                 return new UZA.HorizontalLine(this.convFiledName("lin1"));
+            }
+
+            public KogakuKyufuKonkyoPanel(): UZA.Panel {
+                return new UZA.Panel(this.convFiledName("KogakuKyufuKonkyoPanel"));
             }
 
             public rdbTsukiOkure(): UZA.RadioButton {
@@ -131,6 +179,10 @@ module DBC {
 
             public btnkakutei(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnkakutei"));
+            }
+
+            public rowId(): UZA.TextBoxNum {
+                return new UZA.TextBoxNum(this.convFiledName("rowId"));
             }
 
         }

@@ -386,6 +386,15 @@ public class WaritsukeBusiness {
     }
 
     /**
+     * 市町村コードを返します。
+     *
+     * @return 市町村コード
+     */
+    public RString getShichosonCode() {
+        return entity.getShichosonCode();
+    }
+
+    /**
      * 連絡先続柄を返します。
      *
      * @return 連絡先続柄

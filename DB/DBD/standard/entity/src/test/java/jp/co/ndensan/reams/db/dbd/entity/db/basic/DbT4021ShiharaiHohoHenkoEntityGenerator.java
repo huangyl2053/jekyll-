@@ -5,16 +5,16 @@
 package jp.co.ndensan.reams.db.dbd.entity.db.basic;
 
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4021ShiharaiHohoHenkoEntity;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.core.ShiharaiHenkoMukoKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoMukoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.jukyu.shiharaihohohenko.BemmeiRiyu;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.jukyu.shiharaihohohenko.BemmeiShinsaKekkaKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.jukyu.shiharaihohohenko.ShuryoKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.jukyu.shiharaihohohenko.ShuryoShinseiRiyu;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.jukyu.shiharaihohohenko.ShuryoShinseiShinsaKekkaKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.jukyu.shiharaihohohenko.TorokuKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.jukyu.shiharaihohohenko.BemmeiRiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.jukyu.shiharaihohohenko.BemmeiShinsaKekkaKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.jukyu.shiharaihohohenko.ShuryoKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.jukyu.shiharaihohohenko.ShuryoShinseiRiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.jukyu.shiharaihohohenko.ShuryoShinseiShinsaKekkaKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.jukyu.shiharaihohohenko.TorokuKubun;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;

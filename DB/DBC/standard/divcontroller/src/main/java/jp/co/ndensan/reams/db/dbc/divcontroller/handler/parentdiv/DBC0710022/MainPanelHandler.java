@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0710022;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShinsei;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.ShokanShukei;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShinsei;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanShukei;
 import jp.co.ndensan.reams.db.dbc.business.core.jutakukaishusikyushinsei.UpdSyokanbaraiketeJoho;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyushinseishinsa.ShikyushinseiShinsaKubun;
@@ -17,14 +17,13 @@ import jp.co.ndensan.reams.db.dbc.definition.core.shinnsanaiyo.ShinsaNaiyoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shinsahoho.ShinsaHohoKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ShokanbaraiketteiJoho.ShokanbaraiketteiJoho.ShokanbaraiketteiJohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0710022.MainPanelDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0710021.ShokanharaKeteiJyohoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0710022.ShoukanFutsuKetteiJouhouTourokuParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.jutakukaishusikyushinsei.JutakukaishuSikyuShinseiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -33,7 +32,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 画面設計_DBCMN52002_住宅改修費支給申請_償還払決定情報登録
@@ -86,11 +84,10 @@ public final class MainPanelHandler {
     /**
      * 内容変更状態
      *
+     * @param parameter ShoukanFutsuKetteiJouhouTourokuParameter
      * @return boolean
      */
-    public boolean is内容変更状態() {
-        ShoukanFutsuKetteiJouhouTourokuParameter parameter = ViewStateHolder.get(
-                ViewStateKeys.住宅改修費支給申請_償還払決定情報登録画面データ, ShoukanFutsuKetteiJouhouTourokuParameter.class);
+    public boolean is内容変更状態(ShoukanFutsuKetteiJouhouTourokuParameter parameter) {
         ShokanbaraiketteiJohoDiv shokanbaraiketteiJohoDiv = (ShokanbaraiketteiJohoDiv) div.getJutakuKaishuShinseiInfoPanel()
                 .getShokanbaraiKetteiJyohoPanel().getCcdShokanbaraiketteiJoho();
         RDate 決定日New = shokanbaraiketteiJohoDiv.getTxtKetebi().getValue();
@@ -167,11 +164,10 @@ public final class MainPanelHandler {
     /**
      * 申請内容の保存
      *
+     * @param 検索情報キー ShokanharaKeteiJyohoParameter
      * @return 保存処理結果
      */
-    public boolean 保存処理() {
-        ShokanharaKeteiJyohoParameter 検索情報キー = ViewStateHolder.get(ViewStateKeys.検索情報キー,
-                ShokanharaKeteiJyohoParameter.class);
+    public boolean 保存処理(ShokanharaKeteiJyohoParameter 検索情報キー) {
         HihokenshaNo 被保険者番号 = 検索情報キー.get被保険者番号();
         RString 整理番号 = 検索情報キー.get整理番号();
         FlexibleYearMonth サービス年月 = 検索情報キー.getサービス提供年月();

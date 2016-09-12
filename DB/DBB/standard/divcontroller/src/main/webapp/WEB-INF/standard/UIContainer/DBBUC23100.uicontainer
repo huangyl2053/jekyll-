@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBBUC23100",
+ "displayWizard": false,
+ "subGyomuCode": "DBB",
+ "steps": [
+  {
+   "id": 1,
+   "name": "特徴制度間Ｉ／Ｆ作成",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBB",
+     "toLayoutName": "DBB2310001",
+     "toLayoutTitle": "特別徴収制度間Ｉ／Ｆ作成",
+     "toState": "単一他社"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBB",
+     "layoutName": "DBB2310001",
+     "layoutTitle": "特別徴収制度間Ｉ／Ｆ作成",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

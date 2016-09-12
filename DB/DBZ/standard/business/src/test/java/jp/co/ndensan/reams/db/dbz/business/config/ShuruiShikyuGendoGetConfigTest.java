@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbz.business.config;
 
 import javax.persistence.Id;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configkeys.ConfigKeysShuruiShikyuGendoGet;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configvalues.ShuruiShikyuGendoGet;
+import jp.co.ndensan.reams.db.dbz.definition.core.config.ConfigKeysShuruiShikyuGendoGet;
+import jp.co.ndensan.reams.db.dbz.definition.core.configvalues.ShuruiShikyuGendoGet;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;

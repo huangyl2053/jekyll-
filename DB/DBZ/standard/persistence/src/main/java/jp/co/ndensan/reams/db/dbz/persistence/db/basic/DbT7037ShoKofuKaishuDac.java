@@ -16,7 +16,6 @@ import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishu.lo
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishu.rirekiNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishu.shikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7037ShoKofuKaishuEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7037ShoKofuKaishuMapper;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -28,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.NullsOrder;
 import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import jp.co.ndensan.reams.uz.uza.util.db.OrderBy;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -35,8 +35,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 証交付回収のデータアクセスクラスです。
- * 
- * @reamsid_L DBZ-9999-020  suguangjun 
+ *
+ * @reamsid_L DBZ-9999-020 suguangjun
  */
 public class DbT7037ShoKofuKaishuDac implements ISaveable<DbT7037ShoKofuKaishuEntity> {
 
@@ -242,22 +242,30 @@ public class DbT7037ShoKofuKaishuDac implements ISaveable<DbT7037ShoKofuKaishuEn
     }
 
     /**
-     * DbT7037ShoKofuKaishuEntityを更新します。状態によってinsert/update/delete処理に振り分けられます。
+     * 主キーで証交付回収を取得します。
      *
-     * @param entity entity
-     * @return 更新件数
+     * @param 被保険者番号 HihokenshaNo
+     * @param 交付証種類 KofuShoShurui
+     * @return DbT7037ShoKofuKaishuEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
      */
-    public int updateShoKaishuKanri(DbT7037ShoKofuKaishuEntity entity) {
-        return session.getMapper(IDbT7037ShoKofuKaishuMapper.class).updateShoKaishuKanri(entity);
-    }
+    @Transaction
+    public DbT7037ShoKofuKaishuEntity selectByKey(
+            HihokenshaNo 被保険者番号,
+            RString 交付証種類) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(引数_被保険者番号.toString()));
+        requireNonNull(交付証種類, UrSystemErrorMessages.値がnull.getReplacedMessage("交付証種類"));
 
-    /**
-     * DbT7037ShoKofuKaishuEntityを更新します。
-     *
-     * @param entity 証交付回収テーブルのエンティティクラスです
-     * @return 更新件数
-     */
-    public int updateShokaishuKanriRnlisakuju(DbT7037ShoKofuKaishuEntity entity) {
-        return session.getMapper(IDbT7037ShoKofuKaishuMapper.class).updateShokaishuKanriRnlisakuju(entity);
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7037ShoKofuKaishu.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(kofuShoShurui, 交付証種類)
+                        )).
+                order(by(DbT7037ShoKofuKaishu.rirekiNo, Order.DESC)).
+                limit(1).
+                toObject(DbT7037ShoKofuKaishuEntity.class);
     }
 }

@@ -1,83 +1,112 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 package jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu;
 
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.strings.IRStringConvertable;
 
 /**
- * 事業者区分を表す列挙型です。
- *
- * @reamsid_L DBZ-9999-023 liangbc
+ * 事業者区分の列挙型クラスです。
+ * 
+ * @author n8371
  */
-public enum JigyoshaKubun {
+public enum JigyoshaKubun implements IRStringConvertable {
 
     /**
-     * コード:1 名称:医科 略称:定義なし
+     * 地域包括支援センター <br/>
+     * 地域包括支援センター : 0。
+     */
+    地域包括支援センター("0", "地域包括支援センター"),
+    /**
+     * 医科 <br/>
+     * 医科 : 1。
      */
     医科("1", "医科"),
     /**
-     * コード:3 名称:歯科 略称:定義なし
+     * 歯科 <br/>
+     * 歯科 : 3。
      */
     歯科("3", "歯科"),
     /**
-     * コード:4 名称:薬局 略称:定義なし
+     * 薬局 <br/>
+     * 薬局 : 4。
      */
     薬局("4", "薬局"),
     /**
-     * コード:5 名称:老人保健施設 略称:定義なし
+     * 老人保健施設 <br/>
+     * 老人保健施設 : 5。
      */
     老人保健施設("5", "老人保健施設"),
     /**
-     * コード:6 名称:訪問看護ステーション 略称:定義なし
+     * 訪問看護ステーション <br/>
+     * 訪問看護ステーション : 6。
      */
     訪問看護ステーション("6", "訪問看護ステーション"),
     /**
-     * コード:7 名称:介護保険事業所 略称:定義なし
+     * 介護保険事業所 <br/>
+     * 介護保険事業所 : 7。
      */
     介護保険事業所("7", "介護保険事業所"),
     /**
-     * コード:8 名称:基準該当事業所 略称:定義なし
+     * 基準該当事業所 <br/>
+     * 基準該当事業所 : 8。
      */
-    基準該当事業所("8", "基準該当事業所");
-
+    基準該当事業所("8", "基準該当事業所"),
+    /**
+     * 地域密着型事業者 <br/>
+     * 地域密着型事業者 : 9。
+     */
+    地域密着型事業者("9", "地域密着型事業者");
     private final RString code;
     private final RString fullName;
 
-    private JigyoshaKubun(String code, String fullname) {
+    private JigyoshaKubun(String code, String fullName) {
         this.code = new RString(code);
-        this.fullName = new RString(fullname);
+        this.fullName = new RString(fullName);
     }
 
     /**
-     * 事業者区分のコードを返します。
+     * コードを返します。
      *
-     * @return 事業者区分のコード
+     * @return コード
      */
-    public RString getコード() {
-        return code;
+    public RString getCode() {
+        return this.code;
     }
 
     /**
-     * 事業者区分の名称を返します。
+     * 事業者区分コードの名称を返します。
      *
-     * @return 事業者区分の名称
+     * @return 事業者区分コードの名称
      */
     public RString get名称() {
         return fullName;
     }
 
     /**
-     * 事業者区分のコードと一致する内容を探します。
+     * 指定のコードに対応するJigyoshaKubunを返します。
      *
-     * @param code 事業者区分のコード
-     * @return {@code code} に対応する事業者区分
+     * @param code コード
+     * @return 指定のコードに対応するJigyoshaKubun
+     * @throws IllegalArgumentException 指定のコードに対応するJigyoshaKubunがないとき
      */
-    public static JigyoshaKubun toValue(RString code) {
-
-        for (JigyoshaKubun jigyoshaKubun : JigyoshaKubun.values()) {
-            if (jigyoshaKubun.code.equals(code)) {
-                return jigyoshaKubun;
+    public static JigyoshaKubun toValue(RString code) throws IllegalArgumentException {
+        for (JigyoshaKubun target : values()) {
+            if (target.getCode().equals(code)) {
+                return target;
             }
         }
-        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("事業者区分"));
+        throw new IllegalArgumentException(UrErrorMessages.存在しない
+                .getMessage().replace("コードに対応する事業者区分").evaluate());
+    }
+
+    @Override
+    public RString toRString() {
+        return new RString(this.toString());
     }
 }

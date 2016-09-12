@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshukaishitsuchishokarihakkoichiran;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6.ShuturyokuChohuoEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigohokenryogaku.KaigoHokenryogakuEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -21,6 +21,6 @@ public class TokubetsuChoshuKaishiParameter {
 
     private RString 賦課年度;
     private RString 調定年度;
-    private List<ShuturyokuChohuoEntity> 出力帳票entity;
+    private List<KaigoHokenryogakuEntity> 出力帳票entity;
     private RString 出力期;
 }

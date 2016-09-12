@@ -90,7 +90,7 @@
         <result property="chikuhyojiShiyoKubun" column="dbT7066ChohyoSeigyoKyotsuControl_chikuhyojiShiyoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
-    <select id="getEntity" resultMap="ResultMap_DbT7066ChohyoSeigyoKyotsuControlEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT7066ChohyoSeigyoKyotsuControlEntity">
         SELECT
         <include refid="allColumns_DbT7066ChohyoSeigyoKyotsuControl"/>
         FROM

@@ -5,7 +5,15 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.tsukibetsusuiihyo;
 
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.tsukibetsusuiihyo.TsukibetsuSuiihyoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.source.tsukibetsusuiihyo.TsukibetsuSuiihyoReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 月別推移表ヘッダのEditorです。
@@ -14,14 +22,17 @@ import jp.co.ndensan.reams.db.dbb.entity.report.source.tsukibetsusuiihyo.Tsukibe
  */
 public class TsukibetsuSuiihyoHeaderEditorImpl implements ITsukibetsuSuiihyoEditor {
 
-    private final TsukibetsuSuiihyoHeaderItem item;
+    private static final RString DATE_時 = new RString("時");
+    private static final RString DATE_分 = new RString("分");
+    private static final RString DATE_秒 = new RString("秒");
+    private final TsukibetsuSuiihyoEntity item;
 
     /**
      * コンストラクタです。
      *
      * @param item 月別推移表ヘッダのITEM
      */
-    public TsukibetsuSuiihyoHeaderEditorImpl(TsukibetsuSuiihyoHeaderItem item) {
+    public TsukibetsuSuiihyoHeaderEditorImpl(TsukibetsuSuiihyoEntity item) {
         this.item = item;
     }
 
@@ -37,16 +48,28 @@ public class TsukibetsuSuiihyoHeaderEditorImpl implements ITsukibetsuSuiihyoEdit
     }
 
     private TsukibetsuSuiihyoReportSource editHeader(TsukibetsuSuiihyoReportSource source) {
-
-        source.printTimeStamp = item.getPrintTimeStamp();
-        source.gengo = item.getGengo();
-        source.nendo = item.getNendo();
-        source.hokenshaNo = item.getHokenshaNo();
-        source.hokenshaName = item.getHokenshaName();
-        source.choshuHouhouTitle = item.getChoshuHouhouTitle();
-        source.ninsuGokeiTitle = item.getNinsuGokeiTitle();
-        source.kingakuGokeiTitle = item.getKingakuGokeiTitle();
-
+        source.printTimeStamp = get作成日時();
+        source.gengo = item.get元号();
+        source.nendo = item.get年度();
+        source.hokenshaNo = item.get保険者番号();
+        source.hokenshaName = item.get保険者名();
+        source.choshuHouhouTitle = item.get徴収方法Title();
         return source;
+    }
+
+    private RString get作成日時() {
+        RDateTime printdate = item.get発行日時();
+        RStringBuilder 作成日時 = new RStringBuilder();
+        作成日時.append(printdate.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.JAPANESE).
+                fillType(FillType.BLANK).toDateString());
+        作成日時.append(RString.HALF_SPACE);
+        作成日時.append(String.format("%02d", printdate.getHour()));
+        作成日時.append(DATE_時);
+        作成日時.append(String.format("%02d", printdate.getMinute()));
+        作成日時.append(DATE_分);
+        作成日時.append(String.format("%02d", printdate.getSecond()));
+        作成日時.append(DATE_秒);
+        return 作成日時.toRString();
     }
 }

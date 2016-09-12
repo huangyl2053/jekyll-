@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE4020001;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichigojihanteikekkajoho.IchiGojiHanteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteikekkajoho.NinteiKekkaJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteikekkajoho.NinteiKekkaJohoBuilder;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4020001.ShinsaKaiKekkaInputCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4020001.ShinsaKaiKekkaTorokuDiv;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakaitoroku.ShinsakaiTorokuManager;
@@ -17,7 +18,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.dgNinteiTaskList_Row;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
@@ -60,10 +59,9 @@ public class ShinsaKaiKekkaTorokuHandler {
     /**
      * 要介護認定完了情報の更新処理する。
      *
+     * @param models models
      */
-    public void 要介護認定完了更新() {
-        Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> models
-                = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
+    public void 要介護認定完了更新(Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> models) {
         FlexibleDate 割当完了年月日 = new FlexibleDate(RDate.getNowDate().toDateString());
         List<dgNinteiTaskList_Row> 選択データ = div.getCcdTaskList().getCheckbox();
         for (dgNinteiTaskList_Row データ : 選択データ) {
@@ -94,7 +92,13 @@ public class ShinsaKaiKekkaTorokuHandler {
 
     private NinteiKekkaJoho set要介護認定結果情報(ShinsaKaiKekkaInputCsvEntity csvEntity) {
         NinteiKekkaJoho 要介護認定結果情報 = new NinteiKekkaJoho(new ShinseishoKanriNo(csvEntity.getShinseishoKanriNo()));
-        return 要介護認定結果情報.createBuilderForEdit().
+        NinteiKekkaJohoBuilder 認定結果情報 = 要介護認定結果情報.createBuilderForEdit();
+        FlexibleDate 審査会資料作成年月日 = ShinsakaiTorokuManager.createInstance().
+                get審査会資料作成年月日(csvEntity.getShinsakaiKaisaiNo(), new ShinseishoKanriNo(csvEntity.getShinseishoKanriNo()));
+        if (審査会資料作成年月日 != null && !審査会資料作成年月日.isEmpty()) {
+            認定結果情報.set介護認定審査会資料作成年月日(審査会資料作成年月日);
+        }
+        return 認定結果情報.
                 set二次判定年月日(new FlexibleDate(new RDate(csvEntity.getNijiHanteiYMD().toString()).toDateString()))
                 .set二次判定要介護状態区分コード(new Code(csvEntity.getNijiHanteiYokaigoJotaiKubunCode()))
                 .set二次判定認定有効期間(Integer.parseInt(csvEntity.getNijiHanteiNinteiYukoKikan().toString()))

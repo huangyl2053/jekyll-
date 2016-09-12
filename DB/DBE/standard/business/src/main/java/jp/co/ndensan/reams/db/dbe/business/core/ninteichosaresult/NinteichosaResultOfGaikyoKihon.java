@@ -5,8 +5,8 @@
 package jp.co.ndensan.reams.db.dbe.business.core.ninteichosaresult;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.NinteichosaIraiKubun;
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.NinteichosaKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.NinteichosaIraiKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.NinteichosaKubun;
 import jp.co.ndensan.reams.db.dbx.business.core.INinteiChosain;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;

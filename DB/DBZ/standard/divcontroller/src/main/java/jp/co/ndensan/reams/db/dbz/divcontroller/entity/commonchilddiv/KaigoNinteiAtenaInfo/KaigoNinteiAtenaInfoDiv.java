@@ -8,7 +8,10 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNint
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.HashSet;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.business.core.kaigoninteiatenainfo.KaigoNinteiAtenaInfoBusiness;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
@@ -26,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 /**
  * KaigoNinteiAtenaInfo のクラスファイル
  *
- * @reamsid_L DBE-1300-050 lizhuoxuan
+ * @reamsid_L DBZ-1300-050 lizhuoxuan
  */
 public class KaigoNinteiAtenaInfoDiv extends Panel implements IKaigoNinteiAtenaInfoDiv {
 
@@ -591,6 +594,51 @@ public class KaigoNinteiAtenaInfoDiv extends Panel implements IKaigoNinteiAtenaI
     @Override
     public void setKaigoDonyuKeitai(RString hdnKaigoDonyuKeitai) {
         this.setHdnKaigoDonyuKeitai(hdnKaigoDonyuKeitai);
+    }
+
+    @Override
+    public void set介護認定宛名情報(KaigoNinteiAtenaInfoBusiness business) {
+        getHandler().set介護認定宛名情報(business);
+    }
+
+    @Override
+    public RDate get生年月日() {
+        return this.getTxtBirthYMD().getValue();
+    }
+
+    @Override
+    public RString get年齢() {
+        return this.getTxtNenrei().getValue();
+    }
+
+    @Override
+    public RString get性別() {
+        return this.getTxtSeibetsu().getValue();
+    }
+
+    @Override
+    public RString get被保険者氏名() {
+        return this.getTxtShimei().getValue();
+    }
+
+    @Override
+    public YubinNo get郵便番号() {
+        return this.getTxtYubinNo().getValue();
+    }
+
+    @Override
+    public RString get住所() {
+        return this.getTxtJusho().getDomain().value();
+    }
+
+    @Override
+    public RString get電話番号() {
+        return this.getTxtTelNo().getDomain().value();
+    }
+
+    @Override
+    public RString get識別コード() {
+        return this.getTxtShikiBetsuCode().getValue();
     }
 
 }

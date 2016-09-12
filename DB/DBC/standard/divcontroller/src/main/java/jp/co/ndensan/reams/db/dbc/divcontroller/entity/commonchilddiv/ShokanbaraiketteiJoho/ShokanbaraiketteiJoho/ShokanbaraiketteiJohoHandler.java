@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.syokanbaraikettejoho.Syokanbarai
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufujissekiyoshikikubun.KyufuJissekiYoshikiKubun;
 import jp.co.ndensan.reams.db.dbc.service.core.syokanbaraikettejoho.SyokanbaraiketteJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -167,7 +167,7 @@ public class ShokanbaraiketteiJohoHandler {
             }
         }
         div.getTxtSagakuGoke().setValue(差額支払金額合計);
-        ViewStateHolder.put(ViewStateKeys.償還払決定一覧_支払金額合計, 支払金額合計);
+        ViewStateHolder.put(ViewStateKeys.支払金額合計, 支払金額合計);
         return dataRowList;
     }
 
@@ -176,7 +176,7 @@ public class ShokanbaraiketteiJohoHandler {
             if (支給区分_不支給.equals(支給区分)) {
                 div.getTxtShiharaikingakugoke().setValue(Decimal.ZERO);
             } else {
-                div.getTxtShiharaikingakugoke().setValue(ViewStateHolder.get(ViewStateKeys.償還払決定一覧_支払金額合計, Decimal.class));
+                div.getTxtShiharaikingakugoke().setValue(ViewStateHolder.get(ViewStateKeys.支払金額合計, Decimal.class));
             }
         } else if (決定情報 != null && 決定情報.getShiharaiKingaku() != null) {
             div.getTxtShiharaikingakugoke().setValue(new Decimal(決定情報.getShiharaiKingaku()));

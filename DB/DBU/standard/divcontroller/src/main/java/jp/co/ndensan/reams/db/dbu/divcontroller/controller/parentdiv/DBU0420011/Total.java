@@ -22,12 +22,14 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0420011.DBU0
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0420011.TotalDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0420011.TotalHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.hihokenshashikakusho.HihokenshaShikakuShoFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -61,7 +63,9 @@ public class Total {
      * @return ResponseData<TotalDiv>
      */
     public ResponseData<TotalDiv> onLoad(TotalDiv div) {
-        createHandler(div).onLoad();
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード();
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号();
+        createHandler(div).onLoad(識別コード, 被保険者番号);
         if (MENUID_DBUMN12001.equals(ResponseHolder.getMenuID())) {
             return ResponseData.of(div).setState(DBU0420011StateName.被保険者証);
         }
@@ -105,6 +109,8 @@ public class Total {
      * @return ResponseData<SourceDataCollection>
      */
     public ResponseData<SourceDataCollection> onClick_btnPublish(TotalDiv div) {
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード();
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号();
         if (MENUID_DBUMN12001.equals(ResponseHolder.getMenuID())) {
             if (!テスト.equals(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getYukoKigenInfo().getDdlKofuJiyu().getSelectedValue())) {
                 insertShoKofuKaishu(div);
@@ -113,12 +119,12 @@ public class Total {
             ChohyoSeigyoHanyo chohyoSeigyoHanyo = 帳票制御汎用Manager.get帳票制御汎用(SubGyomuCode.DBA介護資格, 帳票分類ID,
                     FlexibleDate.getNowDate().getYear(), 帳票制御汎用_証表示タイプ);
             if (証表示タイプ_01.equals(chohyoSeigyoHanyo.get設定値())) {
-                List<HihokenshashoA4BodyItem> bodyItemlist = createHandler(div).hihokenshashoA4();
+                List<HihokenshashoA4BodyItem> bodyItemlist = createHandler(div).hihokenshashoA4(識別コード, 被保険者番号);
                 HihokenshashoA4Joho hihokenshashoA4 = new HihokenshashoA4Joho(bodyItemlist);
                 return ResponseData.of(new HihokenshashoA4PrintService().print(hihokenshashoA4)).respond();
             }
             if (証表示タイプ_21.equals(chohyoSeigyoHanyo.get設定値())) {
-                List<HihokenshashoB4Item> items = createHandler(div).hihokenshashoB4();
+                List<HihokenshashoB4Item> items = createHandler(div).hihokenshashoB4(識別コード, 被保険者番号);
                 return ResponseData.of(new HihokenshashoB4PrintService().print(items)).respond();
             }
         }
@@ -126,12 +132,12 @@ public class Total {
             if (!テスト.equals(div.getShikakuShaShoHakko().getCcdHihokenshaShikakuHakko().getYukoKigenInfo().getDdlKofuJiyu().getSelectedValue())) {
                 insertShoKofuKaishu(div);
             }
-            List<ShikakushashoBodyItem> bodyItemList = createHandler(div).shikakushasho();
+            List<ShikakushashoBodyItem> bodyItemList = createHandler(div).shikakushasho(識別コード, 被保険者番号);
             ShikakushashoJoho reportJoho = new ShikakushashoJoho(bodyItemList);
             return ResponseData.of(new ShikakushashoPrintService().print(reportJoho)).respond();
         }
         if (MENUID_DBUMN12003.equals(ResponseHolder.getMenuID())) {
-            List<JukyuShikakuShomeishoBodyItem> bodyItemList = createHandler(div).jukyuShikakuShomeisho();
+            List<JukyuShikakuShomeishoBodyItem> bodyItemList = createHandler(div).jukyuShikakuShomeisho(識別コード, 被保険者番号);
             return ResponseData.of(new JukyuShikakuShomeishoPrintService().print(bodyItemList)).respond();
         }
         return null;
@@ -155,6 +161,4 @@ public class Total {
     private TotalHandler createHandler(TotalDiv div) {
         return new TotalHandler(div);
     }
-    // TODO 「滞納状況」ボタン処理　共有子Div　dbz.TainoInfo未実装 QA1059
-    // TODO 「減額情報」ボタン処理　共有子Div  dbz.GenGakuInfo未実装 QA1059
 }

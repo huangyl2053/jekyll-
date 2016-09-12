@@ -11,14 +11,22 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshosakuseitokusokujo.ShujiiIkenshoSakuseiTokusokujoItem;
 import jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshosakuseitokusokujo.ShujiiIkenshoSakuseiTokusokujoReport;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe233001.ShuturyokuJyoukenProcessParamter;
+import jp.co.ndensan.reams.db.dbe.definition.core.chosa.ChohyoAtesakiKeisho;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.dbe233001.ShujiiIkenTokusokujoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshosakuseitokusokujo.ShujiiIkenshoSakuseiTokusokujoReportSource;
+import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.dbe233001.IDbe233001RelateMapper;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.db.dbz.service.util.report.ReportUtil;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
+import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
@@ -31,12 +39,16 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.api.ReportInfo;
+import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCode;
+import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCodeResult;
 
 /**
  * 主治医意見書督促状発行_バッチフ処理クラスです。
@@ -58,7 +70,6 @@ public class ShujiiIkenTokusokujoReportProcess extends BatchProcessBase<ShujiiIk
     private ReportSourceWriter<ShujiiIkenshoSakuseiTokusokujoReportSource> reportSourceWriter;
     private ShuturyokuJyoukenProcessParamter processPrm;
     ShujiiIkenshoSakuseiTokusokujoItem bodyItem;
-    private List<ShujiiIkenshoSakuseiTokusokujoItem> bodyItemList;
 
     private static final RString 星アイコン = new RString("＊");
     private static final RString 明 = new RString("明");
@@ -68,6 +79,7 @@ public class ShujiiIkenTokusokujoReportProcess extends BatchProcessBase<ShujiiIk
     private static final int 一桁 = 1;
     private static final RString CSV出力有無 = new RString("なし");
     private static final RString CSVファイル名 = new RString("-");
+    IDbe233001RelateMapper mapper;
 
     static {
         OUT_SHINSEISHO_KANRINO_LIST = new RString("outShinseishoKanriNoList");
@@ -77,10 +89,14 @@ public class ShujiiIkenTokusokujoReportProcess extends BatchProcessBase<ShujiiIk
 
     @Override
     protected void initialize() {
-        bodyItemList = new ArrayList();
         shinseishoKanriNoList = new ArrayList<>();
         outShinseishoKanriNoList = new OutputParameter<>();
         super.initialize();
+    }
+
+    @Override
+    protected void beforeExecute() {
+        mapper = getMapper(IDbe233001RelateMapper.class);
     }
 
     @Override
@@ -98,16 +114,13 @@ public class ShujiiIkenTokusokujoReportProcess extends BatchProcessBase<ShujiiIk
     protected void process(ShujiiIkenTokusokujoRelateEntity entity) {
         shinseishoKanriNoList.add(entity.getTemp_申請書管理番号().getColumnValue());
         bodyItem = setBodyItem(entity);
-        bodyItemList.add(bodyItem);
+        ShujiiIkenshoSakuseiTokusokujoReport report = new ShujiiIkenshoSakuseiTokusokujoReport(bodyItem);
+        report.writeBy(reportSourceWriter);
     }
 
     @Override
     protected void afterExecute() {
         set出力条件表();
-        if (bodyItemList != null) {
-            ShujiiIkenshoSakuseiTokusokujoReport report = ShujiiIkenshoSakuseiTokusokujoReport.createFrom(bodyItemList);
-            report.writeBy(reportSourceWriter);
-        }
         outShinseishoKanriNoList.setValue(shinseishoKanriNoList);
     }
 
@@ -169,12 +182,32 @@ public class ShujiiIkenTokusokujoReportProcess extends BatchProcessBase<ShujiiIk
             tempP_誕生日明治 = 星アイコン;
             tempP_誕生日大正 = 星アイコン;
         }
-        NinshoshaSource source = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, REPORT_DBE233001, processPrm.getTemp_基準日(), reportSourceWriter);
+        NinshoshaSource source = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, REPORT_DBE233001, processPrm.getTemp_基準日(),
+                NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter);
         Map<Integer, RString> 通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, REPORT_DBE233001, KamokuCode.EMPTY, パターン番号_1);
+        DbT7051KoseiShichosonMasterEntity shichoson = mapper.select市町村コード(processPrm.getTemp_保険者コード());
+        RString temp_市町村コード = RString.EMPTY;
+        if (shichoson != null) {
+            temp_市町村コード = shichoson.getShichosonCode().getColumnValue();
+        }
+        DbT5912ShujiiJohoEntity shujii = mapper.select宛名機関(processPrm.toShujiiIkenTokusokujoMybitisParamter(new LasdecCode(temp_市町村コード)));
+        if (shujii == null) {
+            shujii = new DbT5912ShujiiJohoEntity();
+        }
+        YubinNo yubinNo = shujii.getYubinNo();
+        RString 宛名郵便番号 = RString.EMPTY;
+        if (yubinNo != null) {
+            宛名郵便番号 = yubinNo.getColumnValue();
+        }
+        CustomerBarCode barcode = new CustomerBarCode();
+        RString 宛名名称付与 = RString.EMPTY;
+        if (!RString.isNullOrEmpty(宛名郵便番号)) {
+            CustomerBarCodeResult result = barcode.convertCustomerBarCode(宛名郵便番号, shujii.getJusho());
+            宛名名称付与 = result.getCustomerBarCode();
+        }
         int 保険者番号の桁 = 0;
         int 被保険者番号の桁 = 0;
         return new ShujiiIkenshoSakuseiTokusokujoItem(
-                // TODO 文書番号の取得 QA858
                 ReportUtil.get文書番号(SubGyomuCode.DBE認定支援, REPORT_DBE233001, processPrm.getTemp_基準日()),
                 source.denshiKoin,
                 source.hakkoYMD,
@@ -185,14 +218,14 @@ public class ShujiiIkenTokusokujoReportProcess extends BatchProcessBase<ShujiiIk
                 source.ninshoshaShimeiKakenai,
                 source.ninshoshaYakushokuMei1,
                 source.ninshoshaYakushokuMei2,
-                // TODO 宛先情報の取得 QA858
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
-                RString.EMPTY,
+                new RString("1"),
+                宛名名称付与,
+                宛名郵便番号,
+                shujii.getJusho(),
+                shujii.getShinryokaName(),
+                shujii.getShujiiName(),
+                ChohyoAtesakiKeisho.toValue(DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼書_宛先敬称,
+                                RDate.getNowDate(), SubGyomuCode.DBE認定支援)).get名称(),
                 RString.EMPTY,
                 通知文.get(1),
                 通知文.get(2),

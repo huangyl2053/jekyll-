@@ -182,4 +182,13 @@ public class ShinSaKaiToRoKuBusiness {
     public int get合議体番号() {
         return entity.getGogitaiNo();
     }
+
+    /**
+     * 介護認定審査会割当年月日を返します。
+     *
+     * @return 介護認定審査会割当年月日
+     */
+    public FlexibleDate get介護認定審査会割当年月日() {
+        return entity.getShinsakaiWariateYMD();
+    }
 }

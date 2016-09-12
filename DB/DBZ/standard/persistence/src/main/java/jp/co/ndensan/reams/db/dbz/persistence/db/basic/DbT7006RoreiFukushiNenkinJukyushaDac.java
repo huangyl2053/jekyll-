@@ -6,7 +6,9 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyusha;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyusha.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyusha.jukyuHaishiYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyusha.jukyuKaishiYMD;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyusha.shikibetsuCode;
@@ -17,7 +19,9 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
@@ -32,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class DbT7006RoreiFukushiNenkinJukyushaDac implements ISaveable<DbT7006RoreiFukushiNenkinJukyushaEntity> {
 
     private static final RString MSG_識別コード = new RString("識別コード");
+    private static final RString MSG_被保険者番号 = new RString("被保険者番号");
     @InjectSession
     private SqlSession session;
 
@@ -164,6 +169,25 @@ public class DbT7006RoreiFukushiNenkinJukyushaDac implements ISaveable<DbT7006Ro
     }
 
     /**
+     * 入力被保険者番号で老齢福祉年金履歴情報を取得します。
+     *
+     * @param 被保険者番号 hihokenshaNo
+     * @return List<DbT7006RoreiFukushiNenkinJukyushaEntity>
+     *
+     */
+    @Transaction
+    public DbT7006RoreiFukushiNenkinJukyushaEntity select老齢福祉年金受給者(
+            HihokenshaNo 被保険者番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_被保険者番号.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7006RoreiFukushiNenkinJukyusha.class).
+                where(eq(hihokenshaNo, 被保険者番号)).order(by(jukyuKaishiYMD, Order.DESC)).
+                limit(1).toObject(DbT7006RoreiFukushiNenkinJukyushaEntity.class);
+    }
+
+    /**
      * 入力識別コード、適用日で老齢福祉年金受給者の判定します。
      *
      * @param 識別コード 識別コード
@@ -184,5 +208,30 @@ public class DbT7006RoreiFukushiNenkinJukyushaDac implements ISaveable<DbT7006Ro
                                 leq(jukyuKaishiYMD, 適用日),
                                 leq(適用日, jukyuHaishiYMD))).
                 toList(DbT7006RoreiFukushiNenkinJukyushaEntity.class);
+    }
+
+    /**
+     * 老齢福祉年金受給者判定。
+     *
+     * @param 識別コード 識別コード
+     * @param 被保険者番号 被保険者番号
+     * @param 所得基準年月日 所得基準年月日
+     * @return List<DbT7006RoreiFukushiNenkinJukyushaEntity>
+     *
+     */
+    @Transaction
+    public int count老齢福祉年金受給者(
+            ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号, FlexibleDate 所得基準年月日) {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(MSG_識別コード.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT7006RoreiFukushiNenkinJukyusha.class).
+                where(and(
+                                eq(shikibetsuCode, 識別コード),
+                                eq(hihokenshaNo, 被保険者番号),
+                                leq(jukyuKaishiYMD, 所得基準年月日),
+                                leq(所得基準年月日, jukyuHaishiYMD))).
+                getCount();
     }
 }

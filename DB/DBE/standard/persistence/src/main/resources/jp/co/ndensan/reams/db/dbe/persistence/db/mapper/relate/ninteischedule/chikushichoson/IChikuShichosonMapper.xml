@@ -6,7 +6,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteischedule.chikushichoson.IChikuShichosonMapper">
 
     <select id="select地区市町村ByKey" resultMap="resultMap_ChikuShichosonEntity" 
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteischedule.chikushichoson.ChikuShichosonMapperParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteischedule.chikushichoson.ChikuShichosonMapperParameter" fetchSize="500" resultOrdered="true">
         <include refid="selectChikuShichosonEntity" />
     </select>
 

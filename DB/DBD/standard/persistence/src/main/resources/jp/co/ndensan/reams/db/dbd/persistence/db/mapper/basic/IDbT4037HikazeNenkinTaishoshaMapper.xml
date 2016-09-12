@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： DbT4037HikazeNenkinTaishoshaマスタとエンティティのマッピング用XMLです。 -->
+<!-- 作者： n1070 久保裕是 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4037HikazeNenkinTaishoshaMapper">
+
+    <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
+    <sql id="noDeleted_DbT4037HikazeNenkinTaishosha">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4037HikazeNenkinTaishoshaMapper.allColumns_DbT4037HikazeNenkinTaishosha" />
+        FROM
+        rgdb."DbT4037HikazeNenkinTaishosha"
+        WHERE
+        rgdb."DbT4037HikazeNenkinTaishosha"."isDeleted" = FALSE
+    </sql>
+
+    <sql id="allColumns_DbT4037HikazeNenkinTaishosha">
+        "DbT4037HikazeNenkinTaishosha"."insertDantaiCd" as "dbT4037HikazeNenkinTaishosha_insertDantaiCd",
+        "DbT4037HikazeNenkinTaishosha"."insertTimestamp" as "dbT4037HikazeNenkinTaishosha_insertTimestamp",
+        "DbT4037HikazeNenkinTaishosha"."insertReamsLoginId" as "dbT4037HikazeNenkinTaishosha_insertReamsLoginId",
+        "DbT4037HikazeNenkinTaishosha"."insertContextId" as "dbT4037HikazeNenkinTaishosha_insertContextId",
+        "DbT4037HikazeNenkinTaishosha"."isDeleted" as "dbT4037HikazeNenkinTaishosha_isDeleted",
+        "DbT4037HikazeNenkinTaishosha"."updateCount" as "dbT4037HikazeNenkinTaishosha_updateCount",
+        "DbT4037HikazeNenkinTaishosha"."lastUpdateTimestamp" as "dbT4037HikazeNenkinTaishosha_lastUpdateTimestamp",
+        "DbT4037HikazeNenkinTaishosha"."lastUpdateReamsLoginId" as "dbT4037HikazeNenkinTaishosha_lastUpdateReamsLoginId",
+        "DbT4037HikazeNenkinTaishosha"."nendo" as "dbT4037HikazeNenkinTaishosha_nendo",
+        "DbT4037HikazeNenkinTaishosha"."shorikubun" as "dbT4037HikazeNenkinTaishosha_shorikubun",
+        "DbT4037HikazeNenkinTaishosha"."taishom" as "dbT4037HikazeNenkinTaishosha_taishom",
+        "DbT4037HikazeNenkinTaishosha"."kisonenkinno" as "dbT4037HikazeNenkinTaishosha_kisonenkinno",
+        "DbT4037HikazeNenkinTaishosha"."genkisonenkinno" as "dbT4037HikazeNenkinTaishosha_genkisonenkinno",
+        "DbT4037HikazeNenkinTaishosha"."nenkincode" as "dbT4037HikazeNenkinTaishosha_nenkincode",
+        "DbT4037HikazeNenkinTaishosha"."hihokenshano" as "dbT4037HikazeNenkinTaishosha_hihokenshano",
+        "DbT4037HikazeNenkinTaishosha"."torokukubun" as "dbT4037HikazeNenkinTaishosha_torokukubun",
+        "DbT4037HikazeNenkinTaishosha"."dtrecordkubun" as "dbT4037HikazeNenkinTaishosha_dtrecordkubun",
+        "DbT4037HikazeNenkinTaishosha"."dtcitycode" as "dbT4037HikazeNenkinTaishosha_dtcitycode",
+        "DbT4037HikazeNenkinTaishosha"."dtnenkinhokenshacode" as "dbT4037HikazeNenkinTaishosha_dtnenkinhokenshacode",
+        "DbT4037HikazeNenkinTaishosha"."dttsuchinaiyocode" as "dbT4037HikazeNenkinTaishosha_dttsuchinaiyocode",
+        "DbT4037HikazeNenkinTaishosha"."dtyobi1" as "dbT4037HikazeNenkinTaishosha_dtyobi1",
+        "DbT4037HikazeNenkinTaishosha"."dtseidocode" as "dbT4037HikazeNenkinTaishosha_dtseidocode",
+        "DbT4037HikazeNenkinTaishosha"."dtsakuseiymd" as "dbT4037HikazeNenkinTaishosha_dtsakuseiymd",
+        "DbT4037HikazeNenkinTaishosha"."dtkisonenkinno" as "dbT4037HikazeNenkinTaishosha_dtkisonenkinno",
+        "DbT4037HikazeNenkinTaishosha"."dtnenkincode" as "dbT4037HikazeNenkinTaishosha_dtnenkincode",
+        "DbT4037HikazeNenkinTaishosha"."dtyobi2" as "dbT4037HikazeNenkinTaishosha_dtyobi2",
+        "DbT4037HikazeNenkinTaishosha"."dtbirthday" as "dbT4037HikazeNenkinTaishosha_dtbirthday",
+        "DbT4037HikazeNenkinTaishosha"."dtseibetsu" as "dbT4037HikazeNenkinTaishosha_dtseibetsu",
+        "DbT4037HikazeNenkinTaishosha"."dtkanashimei" as "dbT4037HikazeNenkinTaishosha_dtkanashimei",
+        "DbT4037HikazeNenkinTaishosha"."dtshiftcode1" as "dbT4037HikazeNenkinTaishosha_dtshiftcode1",
+        "DbT4037HikazeNenkinTaishosha"."dtkanjishimei" as "dbT4037HikazeNenkinTaishosha_dtkanjishimei",
+        "DbT4037HikazeNenkinTaishosha"."dtshiftcode2" as "dbT4037HikazeNenkinTaishosha_dtshiftcode2",
+        "DbT4037HikazeNenkinTaishosha"."dtyubinno" as "dbT4037HikazeNenkinTaishosha_dtyubinno",
+        "DbT4037HikazeNenkinTaishosha"."dtkanajusho" as "dbT4037HikazeNenkinTaishosha_dtkanajusho",
+        "DbT4037HikazeNenkinTaishosha"."dtshiftcode3" as "dbT4037HikazeNenkinTaishosha_dtshiftcode3",
+        "DbT4037HikazeNenkinTaishosha"."dtkanjijusho" as "dbT4037HikazeNenkinTaishosha_dtkanjijusho",
+        "DbT4037HikazeNenkinTaishosha"."dtshiftcode4" as "dbT4037HikazeNenkinTaishosha_dtshiftcode4",
+        "DbT4037HikazeNenkinTaishosha"."dttaishoy" as "dbT4037HikazeNenkinTaishosha_dttaishoy",
+        "DbT4037HikazeNenkinTaishosha"."dtteiseihyoji" as "dbT4037HikazeNenkinTaishosha_dtteiseihyoji",
+        "DbT4037HikazeNenkinTaishosha"."dtkakushukubun" as "dbT4037HikazeNenkinTaishosha_dtkakushukubun",
+        "DbT4037HikazeNenkinTaishosha"."dtshorikekka" as "dbT4037HikazeNenkinTaishosha_dtshorikekka",
+        "DbT4037HikazeNenkinTaishosha"."dtyobi3" as "dbT4037HikazeNenkinTaishosha_dtyobi3",
+        "DbT4037HikazeNenkinTaishosha"."dtyobi4" as "dbT4037HikazeNenkinTaishosha_dtyobi4",
+        "DbT4037HikazeNenkinTaishosha"."dtkingaku1" as "dbT4037HikazeNenkinTaishosha_dtkingaku1",
+        "DbT4037HikazeNenkinTaishosha"."dtkingakuyobi1" as "dbT4037HikazeNenkinTaishosha_dtkingakuyobi1",
+        "DbT4037HikazeNenkinTaishosha"."dtkingakuyobi2" as "dbT4037HikazeNenkinTaishosha_dtkingakuyobi2",
+        "DbT4037HikazeNenkinTaishosha"."dtyobi5" as "dbT4037HikazeNenkinTaishosha_dtyobi5",
+        "DbT4037HikazeNenkinTaishosha"."dtkyosainenkinshoshokigono" as "dbT4037HikazeNenkinTaishosha_dtkyosainenkinshoshokigono"
+    </sql>
+
+
+    <!--テーブルDbT4037HikazeNenkinTaishoshaの項目をDbT4037HikazeNenkinTaishoshaEntityの項目にマッピングします。-->
+    <resultMap id="ResultMap_DbT4037HikazeNenkinTaishoshaEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4037HikazeNenkinTaishoshaEntity" autoMapping="true">
+        <result property="insertDantaiCd" column="dbT4037HikazeNenkinTaishosha_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT4037HikazeNenkinTaishosha_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT4037HikazeNenkinTaishosha_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT4037HikazeNenkinTaishosha_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT4037HikazeNenkinTaishosha_isDeleted" />
+        <result property="updateCount" column="dbT4037HikazeNenkinTaishosha_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT4037HikazeNenkinTaishosha_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT4037HikazeNenkinTaishosha_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nendo" column="dbT4037HikazeNenkinTaishosha_nendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="shorikubun" column="dbT4037HikazeNenkinTaishosha_shorikubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="taishom" column="dbT4037HikazeNenkinTaishosha_taishom" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kisonenkinno" column="dbT4037HikazeNenkinTaishosha_kisonenkinno" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="genkisonenkinno" column="dbT4037HikazeNenkinTaishosha_genkisonenkinno" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nenkincode" column="dbT4037HikazeNenkinTaishosha_nenkincode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hihokenshano" column="dbT4037HikazeNenkinTaishosha_hihokenshano" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="torokukubun" column="dbT4037HikazeNenkinTaishosha_torokukubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="dtrecordkubun" column="dbT4037HikazeNenkinTaishosha_dtrecordkubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="dtcitycode" column="dbT4037HikazeNenkinTaishosha_dtcitycode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="dtnenkinhokenshacode" column="dbT4037HikazeNenkinTaishosha_dtnenkinhokenshacode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="dttsuchinaiyocode" column="dbT4037HikazeNenkinTaishosha_dttsuchinaiyocode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="dtyobi1" column="dbT4037HikazeNenkinTaishosha_dtyobi1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="dtseidocode" column="dbT4037HikazeNenkinTaishosha_dtseidocode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="dtsakuseiymd" column="dbT4037HikazeNenkinTaishosha_dtsakuseiymd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="dtkisonenkinno" column="dbT4037HikazeNenkinTaishosha_dtkisonenkinno" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="dtnenkincode" column="dbT4037HikazeNenkinTaishosha_dtnenkincode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="dtyobi2" column="dbT4037HikazeNenkinTaishosha_dtyobi2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="dtbirthday" column="dbT4037HikazeNenkinTaishosha_dtbirthday" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="dtseibetsu" column="dbT4037HikazeNenkinTaishosha_dtseibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="dtkanashimei" column="dbT4037HikazeNenkinTaishosha_dtkanashimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="dtshiftcode1" column="dbT4037HikazeNenkinTaishosha_dtshiftcode1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="dtkanjishimei" column="dbT4037HikazeNenkinTaishosha_dtkanjishimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="dtshiftcode2" column="dbT4037HikazeNenkinTaishosha_dtshiftcode2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="dtyubinno" column="dbT4037HikazeNenkinTaishosha_dtyubinno" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="dtkanajusho" column="dbT4037HikazeNenkinTaishosha_dtkanajusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="dtshiftcode3" column="dbT4037HikazeNenkinTaishosha_dtshiftcode3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="dtkanjijusho" column="dbT4037HikazeNenkinTaishosha_dtkanjijusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="dtshiftcode4" column="dbT4037HikazeNenkinTaishosha_dtshiftcode4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="dttaishoy" column="dbT4037HikazeNenkinTaishosha_dttaishoy" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="dtteiseihyoji" column="dbT4037HikazeNenkinTaishosha_dtteiseihyoji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="dtkakushukubun" column="dbT4037HikazeNenkinTaishosha_dtkakushukubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="dtshorikekka" column="dbT4037HikazeNenkinTaishosha_dtshorikekka" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="dtyobi3" column="dbT4037HikazeNenkinTaishosha_dtyobi3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="dtyobi4" column="dbT4037HikazeNenkinTaishosha_dtyobi4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="dtkingaku1" column="dbT4037HikazeNenkinTaishosha_dtkingaku1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="dtkingakuyobi1" column="dbT4037HikazeNenkinTaishosha_dtkingakuyobi1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="dtkingakuyobi2" column="dbT4037HikazeNenkinTaishosha_dtkingakuyobi2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="dtyobi5" column="dbT4037HikazeNenkinTaishosha_dtyobi5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="dtkyosainenkinshoshokigono" column="dbT4037HikazeNenkinTaishosha_dtkyosainenkinshoshokigono" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    <select id = "select同一年金単位最新履歴" resultMap = "ResultMap_DbT4037HikazeNenkinTaishoshaEntity" fetchSize="500" resultOrdered = "true">
+        SELECT
+        <include refid="allColumns_DbT4037HikazeNenkinTaishosha"/>
+        FROM
+        rgdb."DbT4037HikazeNenkinTaishosha"
+        WHERE
+        (dtnenkinhokenshacode,genkisonenkinno,SUBSTR(nenkincode,1,3),dtsakuseiymd)
+        IN(
+        SELECT
+        dtnenkinhokenshacode,
+        genkisonenkinno,
+        SUBSTR(nenkincode,1,3),
+        MAX(dtsakuseiymd)
+        FROM
+        rgdb."DbT4037HikazeNenkinTaishosha"
+        WHERE
+        hihokenshano = #{HihokenshaNo}
+        AND dttaishoy = #{rendo}
+        AND "isDeleted" = FALSE
+        GROUP BY
+        dtnenkinhokenshacode,genkisonenkinno,SUBSTR(nenkincode,1,3)
+        )
+        AND "isDeleted" = FALSE
+        ORDER BY
+        dtsakuseiymd DESC
+    </select>
+</mapper>

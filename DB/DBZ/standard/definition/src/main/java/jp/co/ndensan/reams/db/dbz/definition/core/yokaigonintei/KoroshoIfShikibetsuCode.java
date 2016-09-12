@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei;
 
+import java.util.Objects;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -76,5 +77,20 @@ public enum KoroshoIfShikibetsuCode {
             }
         }
         throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("厚労省認定ソフトのバージョン"));
+    }
+
+    /**
+     * 指定のコードに対応するオブジェクトが存在する場合{@code true}を返却します。
+     *
+     * @param code コード
+     * @return 指定のコードに対応するオブジェクトが存在する場合{@code true}. しない場合、{@code false}.
+     */
+    public static boolean existsCode(RString code) {
+        for (KoroshoIfShikibetsuCode value : values()) {
+            if (Objects.equals(value.code, code)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

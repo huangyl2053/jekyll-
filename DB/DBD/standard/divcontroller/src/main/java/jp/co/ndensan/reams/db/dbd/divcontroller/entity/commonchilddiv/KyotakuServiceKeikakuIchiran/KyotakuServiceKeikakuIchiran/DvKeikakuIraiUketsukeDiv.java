@@ -15,21 +15,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class DvKeikakuIraiUketsukeDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtIraiShinkiShinsei")
-    private TextBox txtIraiShinkiShinsei;
-    @JsonProperty("txtIraiSaishinsei")
-    private TextBox txtIraiSaishinsei;
-    @JsonProperty("txtIraiHenkoShinsei")
-    private TextBox txtIraiHenkoShinsei;
-    @JsonProperty("txtIraiServiceHenko")
-    private TextBox txtIraiServiceHenko;
+    @JsonProperty("txtIraiNinteiShinseiJokyo")
+    private TextBox txtIraiNinteiShinseiJokyo;
     @JsonProperty("txtTodokedeKubun")
     private TextBox txtTodokedeKubun;
     @JsonProperty("txtIraiShinseiDate")
@@ -46,16 +40,8 @@ public class DvKeikakuIraiUketsukeDiv extends Panel {
     private TextBoxCode txtJigyoshaNo;
     @JsonProperty("txtJigyoshaName")
     private TextBox txtJigyoshaName;
-    @JsonProperty("txtKyotakuKaigo")
-    private TextBox txtKyotakuKaigo;
-    @JsonProperty("txtKyotakuYobo")
-    private TextBox txtKyotakuYobo;
-    @JsonProperty("txtShokiboKaigo")
-    private TextBox txtShokiboKaigo;
-    @JsonProperty("txtShokiboYobo")
-    private TextBox txtShokiboYobo;
-    @JsonProperty("txtCare")
-    private TextBox txtCare;
+    @JsonProperty("txtServiceShurui")
+    private TextBox txtServiceShurui;
     @JsonProperty("txtYubinNo")
     private TextBoxYubinNo txtYubinNo;
     @JsonProperty("txtJusho")
@@ -82,75 +68,21 @@ public class DvKeikakuIraiUketsukeDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * gettxtIraiShinkiShinsei
-     * @return txtIraiShinkiShinsei
+     * gettxtIraiNinteiShinseiJokyo
+     * @return txtIraiNinteiShinseiJokyo
      */
-    @JsonProperty("txtIraiShinkiShinsei")
-    public TextBox getTxtIraiShinkiShinsei() {
-        return txtIraiShinkiShinsei;
+    @JsonProperty("txtIraiNinteiShinseiJokyo")
+    public TextBox getTxtIraiNinteiShinseiJokyo() {
+        return txtIraiNinteiShinseiJokyo;
     }
 
     /*
-     * settxtIraiShinkiShinsei
-     * @param txtIraiShinkiShinsei txtIraiShinkiShinsei
+     * settxtIraiNinteiShinseiJokyo
+     * @param txtIraiNinteiShinseiJokyo txtIraiNinteiShinseiJokyo
      */
-    @JsonProperty("txtIraiShinkiShinsei")
-    public void setTxtIraiShinkiShinsei(TextBox txtIraiShinkiShinsei) {
-        this.txtIraiShinkiShinsei = txtIraiShinkiShinsei;
-    }
-
-    /*
-     * gettxtIraiSaishinsei
-     * @return txtIraiSaishinsei
-     */
-    @JsonProperty("txtIraiSaishinsei")
-    public TextBox getTxtIraiSaishinsei() {
-        return txtIraiSaishinsei;
-    }
-
-    /*
-     * settxtIraiSaishinsei
-     * @param txtIraiSaishinsei txtIraiSaishinsei
-     */
-    @JsonProperty("txtIraiSaishinsei")
-    public void setTxtIraiSaishinsei(TextBox txtIraiSaishinsei) {
-        this.txtIraiSaishinsei = txtIraiSaishinsei;
-    }
-
-    /*
-     * gettxtIraiHenkoShinsei
-     * @return txtIraiHenkoShinsei
-     */
-    @JsonProperty("txtIraiHenkoShinsei")
-    public TextBox getTxtIraiHenkoShinsei() {
-        return txtIraiHenkoShinsei;
-    }
-
-    /*
-     * settxtIraiHenkoShinsei
-     * @param txtIraiHenkoShinsei txtIraiHenkoShinsei
-     */
-    @JsonProperty("txtIraiHenkoShinsei")
-    public void setTxtIraiHenkoShinsei(TextBox txtIraiHenkoShinsei) {
-        this.txtIraiHenkoShinsei = txtIraiHenkoShinsei;
-    }
-
-    /*
-     * gettxtIraiServiceHenko
-     * @return txtIraiServiceHenko
-     */
-    @JsonProperty("txtIraiServiceHenko")
-    public TextBox getTxtIraiServiceHenko() {
-        return txtIraiServiceHenko;
-    }
-
-    /*
-     * settxtIraiServiceHenko
-     * @param txtIraiServiceHenko txtIraiServiceHenko
-     */
-    @JsonProperty("txtIraiServiceHenko")
-    public void setTxtIraiServiceHenko(TextBox txtIraiServiceHenko) {
-        this.txtIraiServiceHenko = txtIraiServiceHenko;
+    @JsonProperty("txtIraiNinteiShinseiJokyo")
+    public void setTxtIraiNinteiShinseiJokyo(TextBox txtIraiNinteiShinseiJokyo) {
+        this.txtIraiNinteiShinseiJokyo = txtIraiNinteiShinseiJokyo;
     }
 
     /*
@@ -298,93 +230,21 @@ public class DvKeikakuIraiUketsukeDiv extends Panel {
     }
 
     /*
-     * gettxtKyotakuKaigo
-     * @return txtKyotakuKaigo
+     * gettxtServiceShurui
+     * @return txtServiceShurui
      */
-    @JsonProperty("txtKyotakuKaigo")
-    public TextBox getTxtKyotakuKaigo() {
-        return txtKyotakuKaigo;
+    @JsonProperty("txtServiceShurui")
+    public TextBox getTxtServiceShurui() {
+        return txtServiceShurui;
     }
 
     /*
-     * settxtKyotakuKaigo
-     * @param txtKyotakuKaigo txtKyotakuKaigo
+     * settxtServiceShurui
+     * @param txtServiceShurui txtServiceShurui
      */
-    @JsonProperty("txtKyotakuKaigo")
-    public void setTxtKyotakuKaigo(TextBox txtKyotakuKaigo) {
-        this.txtKyotakuKaigo = txtKyotakuKaigo;
-    }
-
-    /*
-     * gettxtKyotakuYobo
-     * @return txtKyotakuYobo
-     */
-    @JsonProperty("txtKyotakuYobo")
-    public TextBox getTxtKyotakuYobo() {
-        return txtKyotakuYobo;
-    }
-
-    /*
-     * settxtKyotakuYobo
-     * @param txtKyotakuYobo txtKyotakuYobo
-     */
-    @JsonProperty("txtKyotakuYobo")
-    public void setTxtKyotakuYobo(TextBox txtKyotakuYobo) {
-        this.txtKyotakuYobo = txtKyotakuYobo;
-    }
-
-    /*
-     * gettxtShokiboKaigo
-     * @return txtShokiboKaigo
-     */
-    @JsonProperty("txtShokiboKaigo")
-    public TextBox getTxtShokiboKaigo() {
-        return txtShokiboKaigo;
-    }
-
-    /*
-     * settxtShokiboKaigo
-     * @param txtShokiboKaigo txtShokiboKaigo
-     */
-    @JsonProperty("txtShokiboKaigo")
-    public void setTxtShokiboKaigo(TextBox txtShokiboKaigo) {
-        this.txtShokiboKaigo = txtShokiboKaigo;
-    }
-
-    /*
-     * gettxtShokiboYobo
-     * @return txtShokiboYobo
-     */
-    @JsonProperty("txtShokiboYobo")
-    public TextBox getTxtShokiboYobo() {
-        return txtShokiboYobo;
-    }
-
-    /*
-     * settxtShokiboYobo
-     * @param txtShokiboYobo txtShokiboYobo
-     */
-    @JsonProperty("txtShokiboYobo")
-    public void setTxtShokiboYobo(TextBox txtShokiboYobo) {
-        this.txtShokiboYobo = txtShokiboYobo;
-    }
-
-    /*
-     * gettxtCare
-     * @return txtCare
-     */
-    @JsonProperty("txtCare")
-    public TextBox getTxtCare() {
-        return txtCare;
-    }
-
-    /*
-     * settxtCare
-     * @param txtCare txtCare
-     */
-    @JsonProperty("txtCare")
-    public void setTxtCare(TextBox txtCare) {
-        this.txtCare = txtCare;
+    @JsonProperty("txtServiceShurui")
+    public void setTxtServiceShurui(TextBox txtServiceShurui) {
+        this.txtServiceShurui = txtServiceShurui;
     }
 
     /*

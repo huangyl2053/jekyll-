@@ -91,7 +91,7 @@ public class HihokenshaDaichoIchiranHyoFinder {
      */
     @Transaction
     public List<HihokenshaDaichoIchiranHyoRelateEntity> getChohyoIchiran(
-            RString shutsuryokujunId, List<HihokenshaDaichoSakusei> hihokenshaList) {
+            Long shutsuryokujunId, List<HihokenshaDaichoSakusei> hihokenshaList) {
         int リストNO = 0;
         List<HihokenshaDaichoIchiranHyoRelateEntity> 被保険者台帳一覧表List = new ArrayList<>();
 
@@ -156,22 +156,25 @@ public class HihokenshaDaichoIchiranHyoFinder {
         iIkkatsuSakuseiMapper = mapperProvider.create(IIkkatsuSakuseiMapper.class);
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
-        //TODO  段站立　QA553　住民種別が設定必要の確認
         List<JuminShubetsu> juminShubetsu = new ArrayList<>();
         juminShubetsu.add(JuminShubetsu.外国人);
+        juminShubetsu.add(JuminShubetsu.日本人);
+        juminShubetsu.add(JuminShubetsu.住登外個人_日本人);
+        juminShubetsu.add(JuminShubetsu.住登外個人_外国人);
         key.set住民種別(juminShubetsu);
         key.set識別コード(entity.get識別コード());
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         IkkatsuSakuseiMybatisParameter pram = IkkatsuSakuseiMybatisParameter.
                 createSelectByKeyParam(false, LasdecCode.EMPTY, ShikibetsuCode.EMPTY,
-                        new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()));
+                        new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()),
+                        RString.EMPTY);
         return iIkkatsuSakuseiMapper.get識別対象(pram);
     }
 
     private RString get年齢(HihokenshaDaichoSakusei entity, IShikibetsuTaisho 識別対象) {
         RString seinengappiYMD = entity.get生年月日();
         FlexibleDate 生年月日;
-        if (seinengappiYMD != null) {
+        if (!RString.isNullOrEmpty(seinengappiYMD)) {
             生年月日 = new FlexibleDate(entity.get生年月日());
         } else {
             生年月日 = FlexibleDate.EMPTY;
@@ -192,9 +195,11 @@ public class HihokenshaDaichoIchiranHyoFinder {
         List<RString> 受給開始日List = entity.get生活保護情報().get受給開始日();
         List<RString> 受給廃止日List = entity.get生活保護情報().get受給廃止日();
         RString 生保 = RString.EMPTY;
-        int index = 受給開始日List.size() - 1;
-        if (受給開始日List.isEmpty() && 受給廃止日List.get(index) == null) {
-            生保 = MARU;
+        if (受給開始日List != null && !受給開始日List.isEmpty()) {
+            int index = 受給開始日List.size() - 1;
+            if (受給廃止日List != null && !受給廃止日List.isEmpty() && RString.isNullOrEmpty(受給廃止日List.get(index))) {
+                生保 = MARU;
+            }
         }
         return 生保;
     }
@@ -203,9 +208,11 @@ public class HihokenshaDaichoIchiranHyoFinder {
         List<RString> 受給開始日List = entity.get老齢福祉情報().get老齢福祉受給開始日();
         List<RString> 受給終了日List = entity.get老齢福祉情報().get老齢福祉受給終了日();
         RString 老福 = RString.EMPTY;
-        int index = 受給開始日List.size() - 1;
-        if (受給開始日List.isEmpty() && 受給終了日List.get(index) == null) {
-            老福 = MARU;
+        if (受給開始日List != null && !受給開始日List.isEmpty()) {
+            int index = 受給開始日List.size() - 1;
+            if (受給終了日List != null && !受給終了日List.isEmpty() && RString.isNullOrEmpty(受給終了日List.get(index))) {
+                老福 = MARU;
+            }
         }
         return 老福;
     }

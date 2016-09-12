@@ -13,16 +13,10 @@
         <id property="shichosonCode" column="shichosonCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
         <id property="hyoNo" column="hyoNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <id property="shukeiNo" column="shukeiNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
-        <id property="shukeiTani" column="shukeiTani"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
-        <id property="tateNo" column="tateNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
-        <id property="yokoNo" column="yokoNo"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
-        <result property="shukeiKekkaAtai" column="shukeiKekkaAtai"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
-        <result property="tateKomokuCode" column="tateKomokuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
-        <result property="yokoKomokuCode" column="yokoKomokuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
-    </resultMap>
+   </resultMap>
 
-    <select id="getJigyoHokokuNenpoList" resultMap="getJigyoHokokuNenpoListResultMap"
-            parameterType="jp.co.ndensan.reams.db.dbu.definition.jigyohokokunenpo.JigyoHokokuNenpoParameter" fetchSize="500">
+    <select resultOrdered="true" id="getJigyoHokokuNenpoList" resultMap="getJigyoHokokuNenpoListResultMap"
+            parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokunenpo.JigyoHokokuNenpoParameter" fetchSize="500">
         SELECT
         DISTINCT
         jigyoHokokuTokeiData."hokokuYSeireki" AS "hokokuYSeireki",
@@ -32,13 +26,7 @@
         jigyoHokokuTokeiData."toukeiTaishoKubun" AS "toukeiTaishoKubun",
         jigyoHokokuTokeiData."shichosonCode" AS "shichosonCode",
         jigyoHokokuTokeiData."hyoNo" AS "hyoNo",
-        jigyoHokokuTokeiData."shukeiNo" AS "shukeiNo",
-        jigyoHokokuTokeiData."shukeiTani" AS "shukeiTani",
-        jigyoHokokuTokeiData."tateNo" AS "tateNo",
-        jigyoHokokuTokeiData."yokoNo" AS "yokoNo",
-        jigyoHokokuTokeiData."shukeiKekkaAtai" AS "shukeiKekkaAtai",
-        jigyoHokokuTokeiData."tateKomokuCode" AS "tateKomokuCode",
-        jigyoHokokuTokeiData."yokoKomokuCode" AS "yokoKomokuCode"
+        jigyoHokokuTokeiData."shukeiNo" AS "shukeiNo"
         FROM
         rgdb."DbT7021JigyoHokokuTokeiData" AS jigyoHokokuTokeiData
         WHERE

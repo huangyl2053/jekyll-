@@ -10,17 +10,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.definition.core.jutakukaishu.JutakukaishuShinseiKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.kyufujissekiyoshikikubun.KyufuJissekiYoshikiKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shinseisha.ShinseishaKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.HanyoListShokanbaraiJokyoNoRenbanCSVEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3038ShokanKihonEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3038ShokanKihonEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistshokanbaraijokyo.HanyoListShokanbaraiJokyoEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
+import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikan;
@@ -39,7 +44,6 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Katagaki;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
@@ -71,15 +75,22 @@ public class HanyoListCsvNoRenbanDataCreate {
     private static final RString 入所施設種類_11 = new RString("11");
     private static final RString 入所施設種類_12 = new RString("12");
     private static final RString 入所施設種類_21 = new RString("21");
-    private static final CodeShubetsu 申請取消事由コード種別 = new CodeShubetsu("0028");
-    private static final CodeShubetsu 資格取得事由コード種別 = new CodeShubetsu("0007");
-    private static final CodeShubetsu 資格喪失事由コード種別 = new CodeShubetsu("0010");
     private static final RString INDEX_1 = new RString("1");
     private static final RString INDEX_2 = new RString("2");
     private static final RString 住特 = new RString("住特");
     private static final RString 他 = new RString("他");
     private static final int INDEX_13 = 13;
     private static final int INDEX_15 = 15;
+    private final FlexibleDate システム日付;
+
+    /**
+     * コンストラクタ
+     *
+     * @param システム日付
+     */
+    public HanyoListCsvNoRenbanDataCreate(FlexibleDate システム日付) {
+        this.システム日付 = システム日付;
+    }
 
     /**
      * createCsvData
@@ -413,7 +424,7 @@ public class HanyoListCsvNoRenbanDataCreate {
             RString 申請取消事由 = RString.EMPTY;
             RString 申請取消事由Code = entity.get支給申請Entity().getKaishuShinseiTorikeshijiyuCode();
             if (申請取消事由Code != null && !申請取消事由Code.isEmpty()) {
-                申請取消事由 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付, 申請取消事由コード種別,
+                申請取消事由 = CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付, DBCCodeShubetsu.住宅改修費申請取消事由コード.getコード(),
                         new Code(申請取消事由Code), FlexibleDate.getNowDate());
             }
             csvEntity.set申請取消事由(申請取消事由);
@@ -443,7 +454,7 @@ public class HanyoListCsvNoRenbanDataCreate {
             HanyoListShokanbaraiJokyoProcessParameter parameter) {
         if (entity.get判定結果情報Entity() != null) {
             csvEntity.set決定日(dataToRString(entity.get判定結果情報Entity().getKetteiYMD(), parameter));
-            csvEntity.set支給不支給区分(entity.get判定結果情報Entity().getShikyuHushikyuKetteiKubun());
+            csvEntity.set支給不支給区分(ShikyuFushikyuKubun.to名称OrDefault(entity.get判定結果情報Entity().getShikyuHushikyuKetteiKubun(), RString.EMPTY));
             csvEntity.set支払金額(numToRString(entity.get判定結果情報Entity().getShiharaiKingaku()));
             csvEntity.set通知書作成日(dataToRString(entity.get判定結果情報Entity().getKetteiTsuchishoSakuseiYMD(), parameter));
             csvEntity.set通知書Ｎo(entity.get判定結果情報Entity().getKetteiTsuchiNo());
@@ -466,7 +477,7 @@ public class HanyoListCsvNoRenbanDataCreate {
                 ? entity.get被保険者番号().getColumnValue() : RString.EMPTY);
         RString 資格取得事由 = RString.EMPTY;
         if (entity.get資格取得事由コード() != null && !entity.get資格取得事由コード().isEmpty()) {
-            資格取得事由 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, 資格取得事由コード種別,
+            資格取得事由 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, DBACodeShubetsu.介護資格取得事由_被保険者.getCodeShubetsu(),
                     new Code(entity.get資格取得事由コード()), FlexibleDate.getNowDate());
         }
         csvEntity.set資格取得事由(資格取得事由);
@@ -474,7 +485,7 @@ public class HanyoListCsvNoRenbanDataCreate {
         csvEntity.set資格取得届出日(dataToRString(entity.get資格取得届出年月日(), parameter));
         RString 資格喪失事由 = RString.EMPTY;
         if (entity.get資格喪失事由コード() != null && !entity.get資格喪失事由コード().isEmpty()) {
-            資格喪失事由 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, 資格喪失事由コード種別,
+            資格喪失事由 = CodeMaster.getCodeRyakusho(SubGyomuCode.DBA介護資格, DBACodeShubetsu.介護資格喪失事由_被保険者.getCodeShubetsu(),
                     new Code(entity.get資格喪失事由コード()), FlexibleDate.getNowDate());
         }
         csvEntity.set喪失事由(資格喪失事由);
@@ -488,7 +499,11 @@ public class HanyoListCsvNoRenbanDataCreate {
         csvEntity.set資格証記載保険者番号(get証記載保険者番号(entity));
         csvEntity.set受給申請事由(codeToRString(entity.get受給申請事由()));
         csvEntity.set受給申請日(dataToRString(entity.get受給申請年月日(), parameter));
-        csvEntity.set受給要介護度(codeToRString(entity.get要介護認定状態区分コード()));
+        if (entity.get要介護認定状態区分コード() == null || entity.get要介護認定状態区分コード().isEmpty()) {
+            csvEntity.set受給要介護度(RString.EMPTY);
+        } else {
+            csvEntity.set受給要介護度(YokaigoJotaiKubunSupport.toValue(システム日付, codeToRString(entity.get要介護認定状態区分コード())).getName());
+        }
         csvEntity.set受給認定開始日(dataToRString(entity.get認定有効期間開始日(), parameter));
         csvEntity.set受給認定終了日(dataToRString(entity.get認定有効期間終了日(), parameter));
         csvEntity.set受給認定日(dataToRString(entity.get受給認定日(), parameter));
@@ -575,7 +590,7 @@ public class HanyoListCsvNoRenbanDataCreate {
                 continue;
             }
             map様式番号.put(請求基本List.get(i).getYoshikiNo(), true);
-            lst様式番号.add(請求基本List.get(i).getYoshikiNo());
+            lst様式番号.add(KyufuJissekiYoshikiKubun.toValue(請求基本List.get(i).getYoshikiNo()).get様式番号());
         }
         if (lst様式番号.size() == 1) {
             return lst様式番号.get(0);

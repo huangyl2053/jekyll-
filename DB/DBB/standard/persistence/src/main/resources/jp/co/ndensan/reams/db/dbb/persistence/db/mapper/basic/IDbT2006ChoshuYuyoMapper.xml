@@ -68,7 +68,7 @@
         <result property="yuyoTorikeshiJiyu" column="dbT2006ChoshuYuyo_yuyoTorikeshiJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
-    <select id="getEntity" resultMap="ResultMap_DbT2006ChoshuYuyoEntity">
+    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT2006ChoshuYuyoEntity">
         SELECT
         <include refid="allColumns_DbT2006ChoshuYuyo" />
         FROM

@@ -50,7 +50,7 @@
         <result property="rojinHokenJukyushaNo" column="dbT7005RojinHokenJukyushaJoho_rojinHokenJukyushaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
-<select id="getEntity" resultMap="ResultMap_DbT7005RojinHokenJukyushaJohoEntity">
+<select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT7005RojinHokenJukyushaJohoEntity">
     SELECT
     <include refid="allColumns_DbT7005RojinHokenJukyushaJoho" />
     FROM

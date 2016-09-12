@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -76,13 +77,24 @@ public class ChohyoSeigyoHanyoBuilder {
     }
 
     /**
+     * 管理年度を設定します。
+     *
+     * @param 管理年度 管理年度
+     * @return {@link ChohyoSeigyoHanyoBuilder}
+     */
+    public ChohyoSeigyoHanyoBuilder set管理年度(FlexibleYear 管理年度) {
+        requireNonNull(管理年度, UrSystemErrorMessages.値がnull.getReplacedMessage("管理年度"));
+        entity.setKanriNendo(管理年度);
+        return this;
+    }
+
+    /**
      * 設定値を設定します。
      *
      * @param 設定値 設定値
      * @return {@link ChohyoSeigyoHanyoBuilder}
      */
     public ChohyoSeigyoHanyoBuilder set設定値(RString 設定値) {
-        requireNonNull(設定値, UrSystemErrorMessages.値がnull.getReplacedMessage("設定値"));
         entity.setKomokuValue(設定値);
         return this;
     }
@@ -94,7 +106,6 @@ public class ChohyoSeigyoHanyoBuilder {
      * @return {@link ChohyoSeigyoHanyoBuilder}
      */
     public ChohyoSeigyoHanyoBuilder set説明(RString 説明) {
-        requireNonNull(説明, UrSystemErrorMessages.値がnull.getReplacedMessage("説明"));
         entity.setKomokuSetsumei(説明);
         return this;
     }
@@ -118,7 +129,6 @@ public class ChohyoSeigyoHanyoBuilder {
      * @return {@link ChohyoSeigyoHanyoBuilder}
      */
     public ChohyoSeigyoHanyoBuilder setコードマスタサブ業務コード(SubGyomuCode コードマスタサブ業務コード) {
-        requireNonNull(コードマスタサブ業務コード, UrSystemErrorMessages.値がnull.getReplacedMessage("コードマスタサブ業務コード"));
         entity.setCodeMasterSubGyomuCode(コードマスタサブ業務コード);
         return this;
     }
@@ -130,7 +140,6 @@ public class ChohyoSeigyoHanyoBuilder {
      * @return {@link ChohyoSeigyoHanyoBuilder}
      */
     public ChohyoSeigyoHanyoBuilder setコードマスタコード種別(CodeShubetsu コードマスタコード種別) {
-        requireNonNull(コードマスタコード種別, UrSystemErrorMessages.値がnull.getReplacedMessage("コードマスタコード種別"));
         entity.setCodeMasterCodeShubetsu(コードマスタコード種別);
         return this;
     }

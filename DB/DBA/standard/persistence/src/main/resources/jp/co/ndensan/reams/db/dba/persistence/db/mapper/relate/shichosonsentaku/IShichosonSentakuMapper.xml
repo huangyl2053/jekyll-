@@ -8,7 +8,7 @@
         <result property="gappeiKyuShichosonKubun" column="DbT7051Kosei_gappeiKyuShichosonKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
 
-    <select id="getEntity" parameterType="jp.co.ndensan.reams.uz.uza.lang.FlexibleDate" resultMap = "shichosonResultMap" fetchSize="500">
+    <select resultOrdered="true" id="getEntity" parameterType="jp.co.ndensan.reams.uz.uza.lang.FlexibleDate" resultMap = "shichosonResultMap" fetchSize="500">
         (SELECT
         DbT7051Kosei."shichosonCode" AS DbT7051Kosei_shichosonCode,
         DbT7051Kosei."shichosonMeisho" AS DbT7051Kosei_shichosonMeisho,

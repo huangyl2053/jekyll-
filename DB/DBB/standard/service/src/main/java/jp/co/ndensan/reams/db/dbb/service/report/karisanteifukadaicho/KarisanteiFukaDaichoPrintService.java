@@ -13,8 +13,16 @@ import jp.co.ndensan.reams.db.dbb.business.report.karisanteifukadaicho.Karisante
 import jp.co.ndensan.reams.db.dbb.business.report.karisanteifukadaicho.KarisanteiFukaDaichoReport;
 import jp.co.ndensan.reams.db.dbb.entity.report.karisanteifukadaicho.KarisanteiFukaDaichoSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
+import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Printer;
+import jp.co.ndensan.reams.uz.uza.report.Report;
+import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
+import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
+import jp.co.ndensan.reams.uz.uza.report.ReportManager;
+import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
+import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 
 /**
  * 帳票設計_DBBRP00006_2_賦課台帳（仮算定）
@@ -37,11 +45,38 @@ public class KarisanteiFukaDaichoPrintService {
      * printメソッド
      *
      * @param entities EditedKariSanteiFukaDaichoJoho
+     * @param reportManager ReportManager
+     */
+    public void printSingle(EditedKariSanteiFukaDaichoJoho entities, ReportManager reportManager) {
+        KarisanteiFukaDaichoProperty property = new KarisanteiFukaDaichoProperty();
+        try (ReportAssembler<KarisanteiFukaDaichoSource> assembler = createAssembler(property, reportManager)) {
+            ReportSourceWriter<KarisanteiFukaDaichoSource> reportSourceWriter
+                    = new ReportSourceWriter(assembler);
+            List<KarisanteiFukaDaichoItem> targets = setItems(entities);
+            new KarisanteiFukaDaichoReport(targets).writeBy(reportSourceWriter);
+        }
+    }
+
+    private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(
+            IReportProperty<T> property, ReportManager manager) {
+        ReportAssemblerBuilder builder = manager.reportAssembler(property.reportId().value(), property.subGyomuCode());
+        for (BreakAggregator<? super T, ?> breaker : property.breakers()) {
+            builder.addBreak(breaker);
+        }
+        builder.isHojinNo(property.containsHojinNo());
+        builder.isKojinNo(property.containsKojinNo());
+        return builder.<T>create();
+    }
+
+    /**
+     * printメソッド
+     *
+     * @param entities EditedKariSanteiFukaDaichoJoho
      * @return SourceDataCollection
      */
     public SourceDataCollection print(EditedKariSanteiFukaDaichoJoho entities) {
         KarisanteiFukaDaichoProperty property = new KarisanteiFukaDaichoProperty();
-        List<KarisanteiFukaDaichoItem> targets = setitens(entities);
+        List<KarisanteiFukaDaichoItem> targets = setItems(entities);
         return new Printer<KarisanteiFukaDaichoSource>().spool(property, toReports(targets));
     }
 
@@ -52,9 +87,9 @@ public class KarisanteiFukaDaichoPrintService {
      * @return List<KarisanteiFukaDaichoReport>
      */
     private static List<KarisanteiFukaDaichoReport> toReports(List<KarisanteiFukaDaichoItem> targets) {
-        List<KarisanteiFukaDaichoReport> list = new ArrayList<>();
-        list.add(KarisanteiFukaDaichoReport.createFrom(targets));
-        return list;
+        List<KarisanteiFukaDaichoReport> reportList = new ArrayList<>();
+        reportList.add(KarisanteiFukaDaichoReport.createFrom(targets));
+        return reportList;
     }
 
     /**
@@ -63,88 +98,88 @@ public class KarisanteiFukaDaichoPrintService {
      * @param entity EditedKariSanteiFukaDaichoJoho
      * @return List<KarisanteiFukaDaichoItem>
      */
-    private List<KarisanteiFukaDaichoItem> setitens(EditedKariSanteiFukaDaichoJoho entity) {
+    private List<KarisanteiFukaDaichoItem> setItems(EditedKariSanteiFukaDaichoJoho entity) {
 
         List<KarisanteiFukaDaichoItem> targets = new ArrayList<>();
         Integer pageAll = 1;
         if (entity == null) {
-            KarisanteiFukaDaichoItem item = new KarisanteiFukaDaichoItem();
-            targets.add(item);
+            KarisanteiFukaDaichoItem itemTemp = new KarisanteiFukaDaichoItem();
+            targets.add(itemTemp);
             return targets;
         }
-        KarisanteiFukaDaichoItem iten1 = new KarisanteiFukaDaichoItem();
+        KarisanteiFukaDaichoItem item1 = new KarisanteiFukaDaichoItem();
         if (entity.get世帯員情報リスト() != null) {
             pageAll = (entity.get世帯員情報リスト().size() - 1) / PAGEBYNUM + 1;
         }
         for (int pageNow = 1; pageNow <= pageAll; pageNow++) {
             if (pageNow <= 1) {
-                listFutsuChoshu普通徴収更正前(iten1, entity);
-                listHonin1本人更正前(iten1, entity);
-                listUchiwakei仮算定内訳更正前(iten1, entity);
-                listTokuChoshu特別徴収更正前(iten1, entity);
-                KarisanteiFukaDaichoItem iten2 = new KarisanteiFukaDaichoItem();
-                listUchiwakei仮算定内訳更正後(iten2, entity);
-                listFutsuChoshu普通徴収更正後(iten2, entity);
-                listHonin1本人更正後(iten2, entity);
-                listTokuChoshu特別徴収更正後(iten2, entity);
-                KarisanteiFukaDaichoItem iten3 = new KarisanteiFukaDaichoItem();
-                listFutsuChoshu普通徴収増減額(iten3, entity);
-                listTokuChoshu特別徴収増減額(iten3, entity);
-                KarisanteiFukaDaichoItem iten4 = new KarisanteiFukaDaichoItem();
-                parttoentity(iten4, entity);
-                listFutsuChoshu普通徴収収入額(iten4, entity);
-                listFuchoKi普徴期(iten1, entity);
-                listFuchoTsuki普徴月(iten1, entity);
-                listFuchoZuiji普徴随時(iten4, entity);
-                listTokuChoshu特別徴収収入額(iten4, entity);
-                listTokuchoKi特徴期(iten1, entity);
-                listTokuchoTsuki特徴月(iten1, entity);
-                iten4.setPrintTimeStamp(entity.get印刷日時());
-                iten4.setSetaiCode(entity.get世帯コード());
-                iten4.setTitle(entity.getタイトル());
-                iten4.setTsuchishoNo(entity.get通知書NO());
-                iten4.setZenNendoFuchoSaishukiHokenryo(entity.get前年度普通徴収最終期保険料());
-                iten4.setZenNendoTochoSaishukiHokenryo(entity.get前年度特別徴収最終期保険料());
-                iten4.setZenNendoHokenryoNengaku(entity.get前年度年額保険料());
-                iten4.setZenNendoHokenryoRitsu(entity.get前年度保険料率());
-                iten4.setZenNendoShotokuDankai(entity.get前年度取得段階());
-                iten4.setPageNo(new RString(Integer.valueOf(pageNow).toString()));
-                iten4.setPageNoAll(new RString(pageAll.toString()));
+                listFutsuChoshu普通徴収更正前(item1, entity);
+                listHonin1本人更正前(item1, entity);
+                listUchiwakei仮算定内訳更正前(item1, entity);
+                listTokuChoshu特別徴収更正前(item1, entity);
+                KarisanteiFukaDaichoItem item2 = new KarisanteiFukaDaichoItem();
+                listUchiwakei仮算定内訳更正後(item2, entity);
+                listFutsuChoshu普通徴収更正後(item2, entity);
+                listHonin1本人更正後(item2, entity);
+                listTokuChoshu特別徴収更正後(item2, entity);
+                KarisanteiFukaDaichoItem item3 = new KarisanteiFukaDaichoItem();
+                listFutsuChoshu普通徴収増減額(item3, entity);
+                listTokuChoshu特別徴収増減額(item3, entity);
+                KarisanteiFukaDaichoItem item4 = new KarisanteiFukaDaichoItem();
+                parttoentity(item4, entity);
+                listFutsuChoshu普通徴収収入額(item4, entity);
+                listFuchoKi普徴期(item1, entity);
+                listFuchoTsuki普徴月(item1, entity);
+                listFuchoZuiji普徴随時(item4, entity);
+                listTokuChoshu特別徴収収入額(item4, entity);
+                listTokuchoKi特徴期(item1, entity);
+                listTokuchoTsuki特徴月(item1, entity);
+                item4.setPrintTimeStamp(entity.get印刷日時());
+                item4.setSetaiCode(entity.get世帯コード());
+                item4.setTitle(entity.getタイトル());
+                item4.setTsuchishoNo(entity.get通知書NO());
+                item4.setZenNendoFuchoSaishukiHokenryo(entity.get前年度普通徴収最終期保険料());
+                item4.setZenNendoTochoSaishukiHokenryo(entity.get前年度特別徴収最終期保険料());
+                item4.setZenNendoHokenryoNengaku(entity.get前年度年額保険料());
+                item4.setZenNendoHokenryoRitsu(entity.get前年度保険料率());
+                item4.setZenNendoShotokuDankai(entity.get前年度取得段階());
+                item4.setPageNo(new RString(Integer.valueOf(pageNow).toString()));
+                item4.setPageNoAll(new RString(pageAll.toString()));
                 if (entity.get世帯員情報リスト() != null && !(entity.get世帯員情報リスト().isEmpty())) {
-                    set世帯員情報リストPart1(iten1, entity, NUM0);
-                    set世帯員情報リストPart2(iten1, entity, NUM1);
-                    set世帯員情報リストPart1(iten2, entity, NUM2);
-                    set世帯員情報リストPart2(iten2, entity, NUM3);
-                    set世帯員情報リストPart1(iten3, entity, NUM4);
-                    set世帯員情報リストPart2(iten3, entity, NUM5);
-                    set世帯員情報リストPart1(iten4, entity, NUM6);
-                    set世帯員情報リストPart2(iten4, entity, NUM7);
+                    set世帯員情報リストPart1(item1, entity, NUM0);
+                    set世帯員情報リストPart2(item1, entity, NUM1);
+                    set世帯員情報リストPart1(item2, entity, NUM2);
+                    set世帯員情報リストPart2(item2, entity, NUM3);
+                    set世帯員情報リストPart1(item3, entity, NUM4);
+                    set世帯員情報リストPart2(item3, entity, NUM5);
+                    set世帯員情報リストPart1(item4, entity, NUM6);
+                    set世帯員情報リストPart2(item4, entity, NUM7);
                 }
-                targets.add(iten1);
-                targets.add(iten2);
-                targets.add(iten3);
-                targets.add(iten4);
+                targets.add(item1);
+                targets.add(item2);
+                targets.add(item3);
+                targets.add(item4);
             } else {
                 int start = (pageNow - 1) * PAGEBYNUM;
                 int end = Math.min(entity.get世帯員情報リスト().size(), pageNow * PAGEBYNUM - 1);
                 for (int i = start; i < end; i++) {
-                    KarisanteiFukaDaichoItem ite = new KarisanteiFukaDaichoItem();
-                    ite.setTitle(entity.getタイトル());
-                    ite.setChoteiNendo(entity.get調定年度());
-                    ite.setFukaNendo(entity.get賦課年度());
-                    ite.setPrintTimeStamp(entity.get印刷日時());
-                    ite.setPageNo(new RString(Integer.valueOf(pageNow).toString()));
-                    ite.setPageNoAll(new RString(pageAll.toString()));
-                    ite.setHokenshaNo(entity.get保険者番号());
-                    ite.setHokenshaName(entity.get保険者名称());
-                    ite.setTsuchishoNo(entity.get通知書NO());
-                    ite.setHihokenshaNo(entity.get被保険者番号());
-                    ite.setSetaiCode(entity.get世帯コード());
-                    listSetaiin世帯員情報リスト(ite, entity, i);
+                    KarisanteiFukaDaichoItem itemTemp = new KarisanteiFukaDaichoItem();
+                    itemTemp.setTitle(entity.getタイトル());
+                    itemTemp.setChoteiNendo(entity.get調定年度());
+                    itemTemp.setFukaNendo(entity.get賦課年度());
+                    itemTemp.setPrintTimeStamp(entity.get印刷日時());
+                    itemTemp.setPageNo(new RString(Integer.valueOf(pageNow).toString()));
+                    itemTemp.setPageNoAll(new RString(pageAll.toString()));
+                    itemTemp.setHokenshaNo(entity.get保険者番号());
+                    itemTemp.setHokenshaName(entity.get保険者名称());
+                    itemTemp.setTsuchishoNo(entity.get通知書NO());
+                    itemTemp.setHihokenshaNo(entity.get被保険者番号());
+                    itemTemp.setSetaiCode(entity.get世帯コード());
+                    listSetaiin世帯員情報リスト(itemTemp, entity, i);
                     if (entity.get世帯員情報リスト().size() > ++i) {
-                        listSetaiin1世帯員情報リスト(ite, entity, i);
+                        listSetaiin1世帯員情報リスト(itemTemp, entity, i);
                     }
-                    targets.add(ite);
+                    targets.add(itemTemp);
                 }
             }
         }

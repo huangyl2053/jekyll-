@@ -65,7 +65,7 @@
     </resultMap>
 
     <select id="getEntity"
-            resultMap="ResultMap_DbT2008ShotokuKanriEntity">
+            resultMap="ResultMap_DbT2008ShotokuKanriEntity" resultOrdered="true">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT2008ShotokuKanriMapper.allColumns_DbT2008ShotokuKanri" />
         FROM

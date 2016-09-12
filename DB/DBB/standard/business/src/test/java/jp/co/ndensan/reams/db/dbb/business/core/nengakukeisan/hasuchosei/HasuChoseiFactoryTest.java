@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core.HokenryoDank
 import jp.co.ndensan.reams.db.dbb.business.core.hokenryodankai.core.HokenryoDankaiTest;
 import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.NengakuFukaKonkyoTest;
 import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.NengakuSeigyoJohoTest;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import static org.hamcrest.CoreMatchers.is;
 import org.junit.After;
@@ -63,7 +63,7 @@ public class HasuChoseiFactoryTest {
 
         nengakuHokenryoKeisanParameter.set年額賦課根拠(NengakuFukaKonkyoTest.set端数調整不要の場合は金額に変更なし(hokenryoDankaiList));
         nengakuHokenryoKeisanParameter.set年額制御情報(NengakuSeigyoJohoTest.set端数調整不要の場合は金額に変更なし(hokenryoDankaiList));
-        nengakuHokenryoKeisanParameter.set賦課年度(new FlexibleDate("2014"));
+        nengakuHokenryoKeisanParameter.set賦課年度(new FlexibleYear("2014"));
 
         assertThat(factory.getIncetance(nengakuHokenryoKeisanParameter).calc端数(new Decimal("9999")), is(new Decimal("9999")));
 
@@ -80,7 +80,7 @@ public class HasuChoseiFactoryTest {
 
         nengakuHokenryoKeisanParameter.set年額賦課根拠(NengakuFukaKonkyoTest.set端数調整不要の場合は金額に変更なし(hokenryoDankaiList));
         nengakuHokenryoKeisanParameter.set年額制御情報(NengakuSeigyoJohoTest.set端数調整不要の場合は金額に変更なし(hokenryoDankaiList));
-        nengakuHokenryoKeisanParameter.set賦課年度(new FlexibleDate("2014"));
+        nengakuHokenryoKeisanParameter.set賦課年度(new FlexibleYear("2014"));
 
         assertThat(factory.getIncetance(nengakuHokenryoKeisanParameter).calc端数(new Decimal("9999")), is(new Decimal("10000")));
 
@@ -97,7 +97,7 @@ public class HasuChoseiFactoryTest {
 
         nengakuHokenryoKeisanParameter.set年額賦課根拠(NengakuFukaKonkyoTest.setランクに変更あった場合は端数調整必要(hokenryoDankaiList));
         nengakuHokenryoKeisanParameter.set年額制御情報(NengakuSeigyoJohoTest.set端数調整不要の場合は金額に変更なし(hokenryoDankaiList));
-        nengakuHokenryoKeisanParameter.set賦課年度(new FlexibleDate("2014"));
+        nengakuHokenryoKeisanParameter.set賦課年度(new FlexibleYear("2014"));
 
         assertThat(factory.getIncetance(nengakuHokenryoKeisanParameter).calc端数(new Decimal("9999")), is(new Decimal("9900")));
 
@@ -114,7 +114,7 @@ public class HasuChoseiFactoryTest {
 
         nengakuHokenryoKeisanParameter.set年額賦課根拠(NengakuFukaKonkyoTest.set資格取得日が年度途中の場合は端数調整必要(hokenryoDankaiList));
         nengakuHokenryoKeisanParameter.set年額制御情報(NengakuSeigyoJohoTest.set端数調整不要の場合は金額に変更なし(hokenryoDankaiList));
-        nengakuHokenryoKeisanParameter.set賦課年度(new FlexibleDate("2014"));
+        nengakuHokenryoKeisanParameter.set賦課年度(new FlexibleYear("2014"));
 
         assertThat(factory.getIncetance(nengakuHokenryoKeisanParameter).calc端数(new Decimal("9999")), is(new Decimal("10000")));
 

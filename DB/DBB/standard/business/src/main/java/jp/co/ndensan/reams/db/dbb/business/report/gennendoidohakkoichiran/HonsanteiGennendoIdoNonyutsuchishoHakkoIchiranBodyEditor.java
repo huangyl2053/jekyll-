@@ -146,21 +146,21 @@ public class HonsanteiGennendoIdoNonyutsuchishoHakkoIchiranBodyEditor implements
         EditedKoza 編集後口座 = 共通情報.get編集後口座();
         if (null != 編集後口座 && 編集後口座.isゆうちょ銀行()) {
             builder.append(編集後口座.get金融機関コード().substringReturnAsPossible(NUM_0, NUM_4));
-            builder.append(RString.FULL_SPACE);
-            builder.append(編集後口座.get通帳記号().substringReturnAsPossible(NUM_0, NUM_5));
+            builder.append(RString.HALF_SPACE);
+            builder.append(編集後口座.getEdited通帳記号().substringReturnAsPossible(NUM_0, NUM_5));
             builder.append(半角ハイフン);
-            builder.append(編集後口座.get通帳番号().substringReturnAsPossible(NUM_0, NUM_8));
-            builder.append(RString.FULL_SPACE);
+            builder.append(編集後口座.getEdited通帳番号().substringReturnAsPossible(NUM_0, NUM_8));
+            builder.append(RString.HALF_SPACE);
             builder.append(編集後口座.get口座名義人漢字());
         } else if (null != 編集後口座 && !編集後口座.isゆうちょ銀行()) {
             builder.append(編集後口座.get金融機関コード().substringReturnAsPossible(NUM_0, NUM_4));
             builder.append(半角ハイフン);
             builder.append(編集後口座.get支店コード().substringReturnAsPossible(NUM_0, NUM_3));
-            builder.append(RString.FULL_SPACE);
+            builder.append(RString.HALF_SPACE);
             builder.append(編集後口座.get口座種別略称().substringReturnAsPossible(NUM_0, NUM_2));
             builder.append(半角ハイフン);
             builder.append(編集後口座.get口座番号().substringReturnAsPossible(NUM_0, NUM_7));
-            builder.append(RString.FULL_SPACE);
+            builder.append(RString.HALF_SPACE);
             builder.append(編集後口座.get口座名義人漢字());
         }
         source.listLower_8 = builder.toRString();

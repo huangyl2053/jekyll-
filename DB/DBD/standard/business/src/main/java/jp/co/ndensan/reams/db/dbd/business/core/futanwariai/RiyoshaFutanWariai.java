@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 利用者負担割合を管理するクラスです。
+ *
+ * @reamsid_L DBC-9999-012 zhaowei
  */
 public class RiyoshaFutanWariai
         extends ModelBase<RiyoshaFutanWariaiIdentifier, DbT3113RiyoshaFutanWariaiEntity, RiyoshaFutanWariai> implements Serializable {
@@ -182,6 +184,15 @@ public class RiyoshaFutanWariai
     }
 
     /**
+     * 論理削除フラグを返します。
+     *
+     * @return 論理削除フラグ
+     */
+    public boolean is論理削除フラグ() {
+        return entity.getLogicalDeletedFlag();
+    }
+
+    /**
      * {@link DbT3113RiyoshaFutanWariaiEntity}のクローンを返します。
      *
      * @return {@link DbT3113RiyoshaFutanWariaiEntity}のクローン
@@ -220,6 +231,30 @@ public class RiyoshaFutanWariai
     }
 
     /**
+     * 保持する利用者負担割合を追加対象とします。
+     * <br/> {@link DbT3113RiyoshaFutanWariaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば追加状態にします。
+     *
+     * @return 追加対象処理実施後の{@link RiyoshaFutanWariai}
+     */
+    public RiyoshaFutanWariai added() {
+        DbT3113RiyoshaFutanWariaiEntity addedEntity = this.toEntity();
+        addedEntity.setState(EntityDataState.Added);
+        return new RiyoshaFutanWariai(addedEntity, id);
+    }
+
+    /**
+     * 保持する利用者負担割合を追加対象とします。
+     * <br/> {@link DbT3113RiyoshaFutanWariaiEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば修正状態にします。
+     *
+     * @return 修正対象処理実施後の{@link RiyoshaFutanWariai}
+     */
+    public RiyoshaFutanWariai modified() {
+        DbT3113RiyoshaFutanWariaiEntity modifiedEntity = this.toEntity();
+        modifiedEntity.setState(EntityDataState.Modified);
+        return new RiyoshaFutanWariai(modifiedEntity, id);
+    }
+
+    /**
      * {@link RiyoshaFutanWariai}のシリアライズ形式を提供します。
      *
      * @return {@link RiyoshaFutanWariai}のシリアライズ形式
@@ -231,7 +266,7 @@ public class RiyoshaFutanWariai
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     /**

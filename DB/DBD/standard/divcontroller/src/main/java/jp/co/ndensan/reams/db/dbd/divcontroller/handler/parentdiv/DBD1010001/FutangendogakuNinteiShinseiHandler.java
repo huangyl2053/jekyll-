@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunint
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinsei;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinseiBuilder;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinseiIdentifier;
-import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KyoshitsuShubetsu;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.RiyoshaFutanDankai;
@@ -29,16 +28,16 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1010001.dgSh
 import jp.co.ndensan.reams.db.dbd.service.core.futangendogakunintei.futangendogakuninteishinsei.FutangendogakuNinteiShinseiManager;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.futangendogakunintei.FutangendogakuNinteiService;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
+import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.db.dbz.business.config.HizukeConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.JigyoshaKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShinseiTodokedeDaikoKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.JigyoshaKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiTodokedeDaikoKubunCode;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -64,7 +63,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
@@ -100,25 +98,16 @@ public class FutangendogakuNinteiShinseiHandler {
     /**
      * 画面初期化処理です。
      *
-     * @return 初期化完フラグ
+     * @param 識別コード ShikibetsuCode
+     * @param 被保険者番号 HihokenshaNo
+     * @param 申請一覧情報ArrayList ArrayList<FutanGendogakuNintei>
+     * @return ArrayList<FutanGendogakuNinteiViewState>
      */
-    public boolean onLoad() {
+    public ArrayList<FutanGendogakuNinteiViewState> onLoad(
+            ShikibetsuCode 識別コード,
+            HihokenshaNo 被保険者番号,
+            ArrayList<FutanGendogakuNintei> 申請一覧情報ArrayList) {
 
-        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        ShikibetsuCode 識別コード = null;
-        HihokenshaNo 被保険者番号 = null;
-        if (taishoshaKey != null) {
-            識別コード = taishoshaKey.get識別コード();
-            被保険者番号 = taishoshaKey.get被保険者番号();
-        }
-        if (null == 被保険者番号 || 被保険者番号.isEmpty()) {
-            div.getBtnDispGemmenJoho().setDisabled(true);
-            div.getBtnAddShinsei().setDisabled(true);
-            div.getBtnDispSetaiJoho().setDisabled(true);
-            div.getBtnDispShisetsuJoho().setDisabled(true);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(共通エリア_保存する, true);
-            return false;
-        }
         if (null == 識別コード) {
             識別コード = ShikibetsuCode.EMPTY;
         }
@@ -133,11 +122,10 @@ public class FutangendogakuNinteiShinseiHandler {
         }
         div.setLockKey(new RString("DB").concat(被保険者番号.value()).concat(new RString("FutanGendoGaku")));
         RealInitialLocker.lock(new LockingKey(div.getLockKey()));
-        div.getCcdAtenaInfo().onLoad(識別コード);
-        div.getCcdKaigoShikakuKihon().onLoad(被保険者番号);
+        div.getCcdAtenaInfo().initialize(識別コード);
+        div.getCcdKaigoShikakuKihon().initialize(被保険者番号);
         div.getCcdShisetsuNyushoInfo().onLoad(識別コード);
-        List<FutanGendogakuNintei> 申請一覧情報 = get申請一覧情報(被保険者番号);
-        ArrayList<FutanGendogakuNintei> 申請一覧情報ArrayList = new ArrayList<>(申請一覧情報);
+
         ArrayList<FutanGendogakuNinteiViewState> new負担限度額認定申請の情報 = new ArrayList<>();
         for (FutanGendogakuNintei futanGendogakuNintei : 申請一覧情報ArrayList) {
             FutanGendogakuNintei fgn = new FutanGendogakuNintei(
@@ -146,8 +134,7 @@ public class FutangendogakuNinteiShinseiHandler {
             new負担限度額認定申請の情報.add(new FutanGendogakuNinteiViewState(fgn,
                     futanGendogakuNintei.getState(), futanGendogakuNintei.get履歴番号()));
         }
-        ViewStateHolder.put(ViewStateKeys.負担限度額認定申請の情報, 申請一覧情報ArrayList);
-        ViewStateHolder.put(ViewStateKeys.new負担限度額認定申請の情報, new負担限度額認定申請の情報);
+
         set申請一覧(new負担限度額認定申請の情報);
 
         get利用者負担段階(申請一覧情報ArrayList);
@@ -155,16 +142,17 @@ public class FutangendogakuNinteiShinseiHandler {
         div.getCcdGemmenGengakuShinsei().initialize(識別コード);
         AccessLogger.log(AccessLogType.照会,
                 PersonalData.of(識別コード, new ExpandedInformation(new Code("0003"), 拡張情報NAME, 被保険者番号.value())));
-        return true;
+        return new負担限度額認定申請の情報;
     }
 
     /**
      * 世帯所得一覧の初期化処理です。
      *
+     * @param 資格対象者 TaishoshaKey
      */
-    public void 世帯所得一覧の初期化() {
+    public void 世帯所得一覧の初期化(TaishoshaKey 資格対象者) {
         YMDHMS 現在年月日日時時分秒 = YMDHMS.now();
-        ShikibetsuCode 識別コード = get識別コードFromViewState();
+        ShikibetsuCode 識別コード = get識別コードFromViewState(資格対象者);
         div.getCcdSetaiShotokuIchiran().initialize(識別コード,
                 new FlexibleDate(現在年月日日時時分秒.getDate().toDateString()),
                 new HizukeConfig().get所得年度(),
@@ -173,44 +161,50 @@ public class FutangendogakuNinteiShinseiHandler {
 
     /**
      * 「減免情報を表示する」ボタンをクリック
+     *
+     * @param taishoshaKey TaishoshaKey
      */
-    public void onBeforeOpenDialog_btnDispGemmenJoho() {
-        div.setHihokenshaNo(get被保険者番号FromViewState().getColumnValue());
+    public void onBeforeOpenDialog_btnDispGemmenJoho(TaishoshaKey taishoshaKey) {
+        div.setHihokenshaNo(get被保険者番号FromViewState(taishoshaKey).getColumnValue());
     }
 
     /**
      * 「申請情報を追加する」ボタンを押下
+     *
+     * @param 資格対象者 TaishoshaKey
      */
-    public void onClick_btnAddShinsei() {
+    public void onClick_btnAddShinsei(TaishoshaKey 資格対象者) {
         div.setJotai(追加状態);
         div.getShinseiList().setDisabled(true);
         init申請理由DDL();
         init負担段階DDL();
         init居室種別DDL();
-        clear申請情報エリア();
-        onChange_radKetteiKubun(true);
+        clear申請情報エリア(資格対象者);
+        onChange_radKetteiKubun(true, 資格対象者);
         set申請情報エリア表示制御();
     }
 
     /**
      * 申請一覧の修正ボタンの処理
+     *
+     * @param 申請一覧情報ArrayList ArrayList<FutanGendogakuNinteiViewState>
+     * @param 資格対象者 TaishoshaKey
      */
-    public void onSelectByModifyButton() {
+    public void onSelectByModifyButton(ArrayList<FutanGendogakuNinteiViewState> 申請一覧情報ArrayList,
+            TaishoshaKey 資格対象者) {
         div.getShinseiList().setDisabled(true);
         div.setJotai(修正状態);
-        ArrayList<FutanGendogakuNinteiViewState> 申請一覧情報ArrayList
-                = ViewStateHolder.get(ViewStateKeys.new負担限度額認定申請の情報, ArrayList.class);
-        set申請情報エリア(申請一覧情報ArrayList.get(div.getDgShinseiList().getClickedRowId()).getFutanGendogakuNintei());
+        set申請情報エリア(申請一覧情報ArrayList.get(div.getDgShinseiList().getClickedRowId()).getFutanGendogakuNintei(), 資格対象者);
         set申請情報エリア表示制御();
     }
 
     /**
      * 申請一覧の削除ボタンの処理
      *
-     * @return is削除可
+     * @param list ArrayList<FutanGendogakuNinteiViewState>
+     * @return ArrayList<FutanGendogakuNinteiViewState>
      */
-    public boolean onSelectByDeleteButton() {
-        ArrayList<FutanGendogakuNinteiViewState> list = ViewStateHolder.get(ViewStateKeys.new負担限度額認定申請の情報, ArrayList.class);
+    public ArrayList<FutanGendogakuNinteiViewState> onSelectByDeleteButton(ArrayList<FutanGendogakuNinteiViewState> list) {
         int index = div.getDgShinseiList().getClickedRowId();
         FutanGendogakuNinteiViewState ninteiViewState = list.get(index);
         if (!EntityDataState.Added.equals(ninteiViewState.getState())) {
@@ -220,17 +214,16 @@ public class FutangendogakuNinteiShinseiHandler {
             list.remove(index);
         }
         set申請一覧(list);
-        ViewStateHolder.put(ViewStateKeys.new負担限度額認定申請の情報, list);
-        return true;
+        return list;
     }
 
     /**
      * 決定区分ラジオボタンの処理
      *
      * @param is負担段階を設定 true:負担段階を再設定する false:負担段階を再設定しない
+     * @param 資格対象者 TaishoshaKey
      */
-    public void onChange_radKetteiKubun(boolean is負担段階を設定) {
-        TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+    public void onChange_radKetteiKubun(boolean is負担段階を設定, TaishoshaKey 資格対象者) {
         FutangendogakuNinteiService service = FutangendogakuNinteiService.createInstance();
         if (SELECT_KEY0.equals(div.getRadKetteiKubun().getSelectedKey())) {
             div.getTxtTekiyoYMD().setDisabled(false);
@@ -249,6 +242,8 @@ public class FutangendogakuNinteiShinseiHandler {
             div.getBtnHiShoninRiyu().setDisabled(true);
             div.getTxtHiShoninRiyu().setDisabled(true);
             div.getTxtHiShoninRiyu().clearValue();
+            init旧措置DDL();
+            init居室種別DDL();
             if (is負担段階を設定) {
                 init負担段階DDL();
                 div.getDdlRiyoshaFutanDankai().setSelectedKey(
@@ -292,34 +287,52 @@ public class FutangendogakuNinteiShinseiHandler {
 
     /**
      * 「申請情報を確定する」ボタンの処理
+     *
+     * @param list ArrayList<FutanGendogakuNinteiViewState>
+     * @param 資格対象者 TaishoshaKey
+     * @return ArrayList<FutanGendogakuNinteiViewState>
      */
-    public void onClick_btnShinseiKakutei() {
-        putEdited申請情報ToViewState(true);
+    public ArrayList<FutanGendogakuNinteiViewState> onClick_btnShinseiKakutei(
+            ArrayList<FutanGendogakuNinteiViewState> list,
+            TaishoshaKey 資格対象者) {
+        ArrayList<FutanGendogakuNinteiViewState> resultList = putEdited申請情報ToViewState(true, list, 資格対象者);
         div.setJotai(RString.EMPTY);
         div.getShinseiList().setDisabled(false);
+        return resultList;
     }
 
     /**
      * 「検索結果一覧へ」ボタンの処理
+     *
+     * @param list ArrayList<FutanGendogakuNinteiViewState>
+     * @param 資格対象者 TaishoshaKey
+     * @return ArrayList<FutanGendogakuNinteiViewState>
      */
-    public void onClick_btnToSearchResult() {
-        putEdited申請情報ToViewState(false);
+    public ArrayList<FutanGendogakuNinteiViewState> onClick_btnToSearchResult(
+            ArrayList<FutanGendogakuNinteiViewState> list,
+            TaishoshaKey 資格対象者) {
+        ArrayList<FutanGendogakuNinteiViewState> resultList = putEdited申請情報ToViewState(false, list, 資格対象者);
         div.setJotai(RString.EMPTY);
+        return resultList;
     }
 
     /**
      * 申請情報を保存する
+     *
+     * @param 申請一覧情報ArrayList ArrayList<FutanGendogakuNintei>
+     * @param new認定申請情報List ArrayList<FutanGendogakuNinteiViewState>
+     * @param 資格対象者 TaishoshaKey
      */
-    public void 申請情報を保存する() {
-        HihokenshaNo 被保険者番号 = get被保険者番号FromViewState();
+    public void 申請情報を保存する(
+            ArrayList<FutanGendogakuNintei> 申請一覧情報ArrayList,
+            ArrayList<FutanGendogakuNinteiViewState> new認定申請情報List,
+            TaishoshaKey 資格対象者) {
+        HihokenshaNo 被保険者番号 = get被保険者番号FromViewState(資格対象者);
         AccessLogger.log(
                 AccessLogType.更新,
                 PersonalData.of(
-                        get識別コードFromViewState(),
+                        get識別コードFromViewState(資格対象者),
                         new ExpandedInformation(new Code("003"), 拡張情報NAME, 被保険者番号.value())));
-        ArrayList<FutanGendogakuNintei> 申請一覧情報ArrayList = ViewStateHolder.get(ViewStateKeys.負担限度額認定申請の情報, ArrayList.class);
-        ArrayList<FutanGendogakuNinteiViewState> new認定申請情報List
-                = ViewStateHolder.get(ViewStateKeys.new負担限度額認定申請の情報, ArrayList.class);
         FutangendogakuNinteiShinseiManager.createInstance().save(申請一覧情報ArrayList, new認定申請情報List, 被保険者番号);
         RealInitialLocker.release(new LockingKey(div.getLockKey()));
     }
@@ -440,11 +453,11 @@ public class FutangendogakuNinteiShinseiHandler {
         }
     }
 
-    private void set申請情報エリア(FutanGendogakuNintei futanGendogakuNintei) {
+    private void set申請情報エリア(FutanGendogakuNintei futanGendogakuNintei, TaishoshaKey 資格対象者) {
         div.getTxtShinseiYMD().setValue(futanGendogakuNintei.get申請年月日());
         init申請理由DDL();
         div.getDdlShinseiRiyu().setSelectedKey(futanGendogakuNintei.get申請理由区分());
-        div.getCcdGemmenGengakuShinsei().initialize(get識別コードFromViewState());
+        div.getCcdGemmenGengakuShinsei().initialize(get識別コードFromViewState(資格対象者));
         GemmenGengakuShinsei gemmenGengakuShinsei;
         if (!futanGendogakuNintei.getGemmenGengakuShinseiList().isEmpty()) {
             gemmenGengakuShinsei = futanGendogakuNintei.getGemmenGengakuShinseiList().get(0);
@@ -485,7 +498,7 @@ public class FutangendogakuNinteiShinseiHandler {
         div.getTxtSonota().setValue(futanGendogakuNintei.getその他金額());
         div.getRadKetteiKubun().setSelectedKey(
                 KetteiKubun.承認する.getコード().equals(futanGendogakuNintei.get決定区分()) ? SELECT_KEY0 : SELECT_KEY1);
-        onChange_radKetteiKubun(false);
+        onChange_radKetteiKubun(false, 資格対象者);
         div.getTxtKetteiYMD().setValue(futanGendogakuNintei.get決定年月日());
         div.getTxtTekiyoYMD().setValue(futanGendogakuNintei.get適用開始年月日());
         div.getTxtYukoKigenYMD().setValue(futanGendogakuNintei.get適用終了年月日());
@@ -802,7 +815,7 @@ public class FutangendogakuNinteiShinseiHandler {
                     SELECT_EMPTYKEY.equals(futanGendogakuNintei.get利用者負担段階())
                     ? RString.EMPTY : RiyoshaFutanDankai.toValue(futanGendogakuNintei.get利用者負担段階()).get略称(),
                     SELECT_EMPTYKEY.equals(futanGendogakuNintei.get居室種別())
-                    ? RString.EMPTY : KyoshitsuShubetsu.toValue(futanGendogakuNintei.get居室種別()).get略称(),
+                    ? RString.EMPTY : KyoshitsuShubetsu.toValue(futanGendogakuNintei.get居室種別()).get名称(),
                     futanGendogakuNintei.is境界層該当者区分(),
                     futanGendogakuNintei.is激変緩和措置対象者区分(),
                     食費負担限度額,
@@ -837,8 +850,7 @@ public class FutangendogakuNinteiShinseiHandler {
         }
     }
 
-    private ShikibetsuCode get識別コードFromViewState() {
-        TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+    private ShikibetsuCode get識別コードFromViewState(TaishoshaKey 資格対象者) {
         ShikibetsuCode 識別コード = 資格対象者.get識別コード();
         if (null == 識別コード) {
             識別コード = ShikibetsuCode.EMPTY;
@@ -846,8 +858,7 @@ public class FutangendogakuNinteiShinseiHandler {
         return 識別コード;
     }
 
-    private HihokenshaNo get被保険者番号FromViewState() {
-        TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+    private HihokenshaNo get被保険者番号FromViewState(TaishoshaKey 資格対象者) {
         HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
         if (null == 被保険者番号) {
             被保険者番号 = HihokenshaNo.EMPTY;
@@ -856,7 +867,13 @@ public class FutangendogakuNinteiShinseiHandler {
         return 被保険者番号;
     }
 
-    private List<FutanGendogakuNintei> get申請一覧情報(HihokenshaNo 被保険者番号) {
+    /**
+     * 申請一覧情報を取得する
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return List<FutanGendogakuNintei>
+     */
+    public List<FutanGendogakuNintei> get申請一覧情報(HihokenshaNo 被保険者番号) {
         return FutangendogakuNinteiService.createInstance().load負担限度額認定申請All(被保険者番号);
     }
 
@@ -890,8 +907,8 @@ public class FutangendogakuNinteiShinseiHandler {
         }
     }
 
-    private void putEdited申請情報ToViewState(boolean is申請一覧表示) {
-        ArrayList<FutanGendogakuNinteiViewState> list = ViewStateHolder.get(ViewStateKeys.new負担限度額認定申請の情報, ArrayList.class);
+    private ArrayList<FutanGendogakuNinteiViewState> putEdited申請情報ToViewState(boolean is申請一覧表示,
+            ArrayList<FutanGendogakuNinteiViewState> list, TaishoshaKey 資格対象者) {
         if (修正状態.equals(div.getJotai())) {
             int index = div.getDgShinseiList().getClickedRowId();
             FutanGendogakuNinteiViewState ninteiViewState = list.get(index);
@@ -909,7 +926,8 @@ public class FutangendogakuNinteiShinseiHandler {
                 履歴番号 = 1;
             }
             FutanGendogakuNintei futanGendogakuNintei
-                    = new FutanGendogakuNintei(get証記載保険者番号(div.getTxtShinseiYMD().getValue()), get被保険者番号FromViewState(), 履歴番号);
+                    = new FutanGendogakuNintei(get証記載保険者番号(
+                                    div.getTxtShinseiYMD().getValue()), get被保険者番号FromViewState(資格対象者), 履歴番号);
             FutanGendogakuNintei 申請情報 = 申請情報Builder(futanGendogakuNintei);
             if (list.isEmpty()) {
                 list.add(new FutanGendogakuNinteiViewState(申請情報, EntityDataState.Added, 履歴番号));
@@ -920,7 +938,7 @@ public class FutangendogakuNinteiShinseiHandler {
         if (is申請一覧表示) {
             set申請一覧(list);
         }
-        ViewStateHolder.put(ViewStateKeys.new負担限度額認定申請の情報, list);
+        return list;
     }
 
     private ArrayList<FutanGendogakuNinteiViewState> sort申請情報ListBy申請日(
@@ -1042,7 +1060,7 @@ public class FutangendogakuNinteiShinseiHandler {
         return builder.build();
     }
 
-    private void clear申請情報エリア() {
+    private void clear申請情報エリア(TaishoshaKey 資格対象者) {
         div.getTxtShinseiYMD().clearValue();
         div.getDdlShinseiRiyu().setIsBlankLine(true);
         div.getDdlShinseiRiyu().setSelectedKey(SELECT_EMPTYKEY);
@@ -1070,13 +1088,13 @@ public class FutangendogakuNinteiShinseiHandler {
         init旧措置DDL();
         FutangendogakuNinteiService ninteiService = FutangendogakuNinteiService.createInstance();
         if (!申請メニューID.equals(ResponseHolder.getMenuID())
-                && ninteiService.is旧措置者(get被保険者番号FromViewState())) {
+                && ninteiService.is旧措置者(get被保険者番号FromViewState(資格対象者))) {
             div.getDdlKyusochisha().setSelectedKey(KyuSochishaKubun.旧措置者.getコード());
         } else {
             div.getDdlKyusochisha().setSelectedKey(KyuSochishaKubun.非該当.getコード());
         }
         List<RString> dataSource = new ArrayList<>();
-        if (ninteiService.is境界層該当者(get被保険者番号FromViewState(), FlexibleDate.getNowDate())) {
+        if (ninteiService.is境界層該当者(get被保険者番号FromViewState(資格対象者), FlexibleDate.getNowDate())) {
             dataSource.add(SELECT_KEY0);
         }
         if (!申請メニューID.equals(ResponseHolder.getMenuID())) {

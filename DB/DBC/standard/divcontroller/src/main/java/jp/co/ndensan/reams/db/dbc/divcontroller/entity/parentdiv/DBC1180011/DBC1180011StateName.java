@@ -16,8 +16,7 @@ public enum DBC1180011StateName implements IStateEnumerations {
 
     NoChange(""),
     計算結果一覧("計算結果一覧"),
-    計算結果入力("計算結果入力"),
-    切替用_計算結果入力内訳情報("切替用_計算結果入力内訳情報");
+    計算結果入力("計算結果入力");
 
     private final RString name;
 

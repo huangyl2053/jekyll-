@@ -5,46 +5,32 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.johoteikyoshiryo;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.report.johoteikyoshiryo.JohoTeikyoShiryoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import lombok.NonNull;
 
 /**
  * 要介護認定結果情報提供票（主治医）のReportです。
- * 
+ *
  * @reamsid_L DBE-0220-020 wangkun
  */
 public class JohoTeikyoShiryoReport extends Report<JohoTeikyoShiryoReportSource> {
 
-    private final List<JohoTeikyoShiryoItem> itemList;
+    private final JohoTeikyoShiryo item;
 
     /**
      * インスタンスを生成します。
      *
-     * @param itemlist 要介護認定結果情報提供票（主治医）のitemlist
-     * @return 要介護認定結果情報提供票（主治医）のReport
+     * @param item 要介護認定結果情報提供票（主治医）のitem
      */
-    public static JohoTeikyoShiryoReport createFrom(@NonNull List<JohoTeikyoShiryoItem>  itemlist) {
-        return new JohoTeikyoShiryoReport(itemlist);
-    }
-
-    /**
-     * インスタンスを生成します。
-     *
-     * @param itemlist 要介護認定結果情報提供票（主治医）のitemlist
-     */
-    protected JohoTeikyoShiryoReport(List<JohoTeikyoShiryoItem> itemlist) {
-        this.itemList = itemlist;
+    public JohoTeikyoShiryoReport(JohoTeikyoShiryo item) {
+        this.item = item;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<JohoTeikyoShiryoReportSource> reportSourceWriter) {
-        for (JohoTeikyoShiryoItem item : itemList) {
-            IJohoTeikyoShiryoEditor editor = new JohoTeikyoShiryoEditor(item);
-            IJohoTeikyoShiryoBuilder builder = new JohoTeikyoShiryoBuilder(editor);
-            reportSourceWriter.writeLine(builder);
-        }
+        IJohoTeikyoShiryoEditor editor = new JohoTeikyoShiryoEditor(item);
+        IJohoTeikyoShiryoBuilder builder = new JohoTeikyoShiryoBuilder(editor);
+        reportSourceWriter.writeLine(builder);
     }
 }

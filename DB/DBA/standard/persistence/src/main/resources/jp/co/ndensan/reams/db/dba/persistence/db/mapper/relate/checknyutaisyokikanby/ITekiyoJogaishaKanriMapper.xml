@@ -3,7 +3,7 @@
 <!-- @reamsid_L DBA-0410-010 zhangzhiming -->
 <mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.checknyutaisyokikanby.ITekiyoJogaishaKanriMapper">
 
-    <select id="get被保険者資格不整合一覧" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.checknyutaisyokikanby.ShisetsuJouHouParamer" resultType="int">
+    <select resultOrdered="true" id="get被保険者資格不整合一覧" parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.checknyutaisyokikanby.ShisetsuJouHouParamer" resultType="int">
         SELECT
         COUNT(*)
         FROM

@@ -11,16 +11,13 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteichosainjikan.NinteiChosain
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020006.NinteiChosainJikanMasterDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020006.dgTimeScheduleList_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.ninteichosainjikan.NinteiChosainJikanMasterManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuShichoson;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaSchedule;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaScheduleIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteichosaikkatsuinput.NinteiChosaIkkatsuInputModel;
-import jp.co.ndensan.reams.db.dbz.divcontroller.viewbox.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.DayOfWeek;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -31,8 +28,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Seireki;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
@@ -67,7 +62,6 @@ public class NinteiChosainJikanMasterHandler {
     private final RString 予約状況_未定 = new RString("0");
     private final RString ボタン_登録 = new RString("登録");
     private final RString ボタン_削除 = new RString("削除");
-    private static final CodeShubetsu コード種別 = new CodeShubetsu("5002");
     private final NinteiChosainJikanMasterDiv div;
 
     /**
@@ -250,28 +244,27 @@ public class NinteiChosainJikanMasterHandler {
                     Integer.parseInt(date2.getYear().toString()),
                     Integer.parseInt(date2.getMonth().toString()), i);
             if (設定予定日.compareTo(予定日) == 0) {
-                rowList.set(i - 1, 一括設定データ(予定日, is上書きするフラグ, 時間枠, rowList.get(i - 1), 認定調査予定開始時間, 認定調査予定終了時間));
+                rowList.set(i - 1, 一括設定データ(is上書きするフラグ, 時間枠, rowList.get(i - 1), 認定調査予定開始時間, 認定調査予定終了時間));
             }
         }
         div.getDgTimeScheduleList().setDataSource(rowList);
     }
 
     private dgTimeScheduleList_Row 一括設定データ(
-            FlexibleDate 予定日,
             boolean is上書きするフラグ,
             RString 時間枠,
             dgTimeScheduleList_Row row,
             RString 認定調査予定開始時間,
             RString 認定調査予定終了時間) {
-        一括設定時間枠一と一括設定時間枠二(予定日, is上書きするフラグ, 時間枠, row, 認定調査予定開始時間, 認定調査予定終了時間);
-        一括設定時間枠三と一括設定時間枠四(予定日, is上書きするフラグ, 時間枠, row, 認定調査予定開始時間, 認定調査予定終了時間);
-        一括設定時間枠五と一括設定時間枠六(予定日, is上書きするフラグ, 時間枠, row, 認定調査予定開始時間, 認定調査予定終了時間);
-        一括設定時間枠七と一括設定時間枠八(予定日, is上書きするフラグ, 時間枠, row, 認定調査予定開始時間, 認定調査予定終了時間);
-        一括設定時間枠九と一括設定時間枠十(予定日, is上書きするフラグ, 時間枠, row, 認定調査予定開始時間, 認定調査予定終了時間);
+        一括設定時間枠一と一括設定時間枠二(is上書きするフラグ, 時間枠, row, 認定調査予定開始時間, 認定調査予定終了時間);
+        一括設定時間枠三と一括設定時間枠四(is上書きするフラグ, 時間枠, row, 認定調査予定開始時間, 認定調査予定終了時間);
+        一括設定時間枠五と一括設定時間枠六(is上書きするフラグ, 時間枠, row, 認定調査予定開始時間, 認定調査予定終了時間);
+        一括設定時間枠七と一括設定時間枠八(is上書きするフラグ, 時間枠, row, 認定調査予定開始時間, 認定調査予定終了時間);
+        一括設定時間枠九と一括設定時間枠十(is上書きするフラグ, 時間枠, row, 認定調査予定開始時間, 認定調査予定終了時間);
         return row;
     }
 
-    private void 一括設定時間枠一と一括設定時間枠二(FlexibleDate 予定日,
+    private void 一括設定時間枠一と一括設定時間枠二(
             boolean is上書きするフラグ,
             RString 時間枠,
             dgTimeScheduleList_Row row,
@@ -289,7 +282,6 @@ public class NinteiChosainJikanMasterHandler {
                     }
                 }
                 一括設定時間枠一と一括設定時間枠二(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間, row.getSyoriKben01());
-                set一括設定Model(予定日, 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
                 break;
             case 時間枠_2:
                 if (RString.isNullOrEmpty(row.getChosaJikanwaku02())) {
@@ -302,14 +294,13 @@ public class NinteiChosainJikanMasterHandler {
                     }
                 }
                 一括設定時間枠一と一括設定時間枠二(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間, row.getSyoriKben02());
-                set一括設定Model(予定日, 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
                 break;
             default:
                 break;
         }
     }
 
-    private void 一括設定時間枠三と一括設定時間枠四(FlexibleDate 予定日,
+    private void 一括設定時間枠三と一括設定時間枠四(
             boolean is上書きするフラグ,
             RString 時間枠,
             dgTimeScheduleList_Row row,
@@ -327,7 +318,6 @@ public class NinteiChosainJikanMasterHandler {
                     }
                 }
                 一括設定時間枠三と一括設定時間枠四(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間, row.getSyoriKben03());
-                set一括設定Model(予定日, 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
                 break;
             case 時間枠_4:
                 if (RString.isNullOrEmpty(row.getChosaJikanwaku04())) {
@@ -340,14 +330,13 @@ public class NinteiChosainJikanMasterHandler {
                     }
                 }
                 一括設定時間枠三と一括設定時間枠四(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間, row.getSyoriKben04());
-                set一括設定Model(予定日, 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
                 break;
             default:
                 break;
         }
     }
 
-    private void 一括設定時間枠五と一括設定時間枠六(FlexibleDate 予定日,
+    private void 一括設定時間枠五と一括設定時間枠六(
             boolean is上書きするフラグ,
             RString 時間枠,
             dgTimeScheduleList_Row row,
@@ -365,7 +354,6 @@ public class NinteiChosainJikanMasterHandler {
                     }
                 }
                 一括設定時間枠五と一括設定時間枠六(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間, row.getSyoriKben05());
-                set一括設定Model(予定日, 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
                 break;
             case 時間枠_6:
                 if (RString.isNullOrEmpty(row.getChosaJikanwaku06())) {
@@ -378,14 +366,13 @@ public class NinteiChosainJikanMasterHandler {
                     }
                 }
                 一括設定時間枠五と一括設定時間枠六(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間, row.getSyoriKben06());
-                set一括設定Model(予定日, 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
                 break;
             default:
                 break;
         }
     }
 
-    private void 一括設定時間枠七と一括設定時間枠八(FlexibleDate 予定日,
+    private void 一括設定時間枠七と一括設定時間枠八(
             boolean is上書きするフラグ,
             RString 時間枠,
             dgTimeScheduleList_Row row,
@@ -403,7 +390,6 @@ public class NinteiChosainJikanMasterHandler {
                     }
                 }
                 一括設定時間枠七と一括設定時間枠八(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間, row.getSyoriKben07());
-                set一括設定Model(予定日, 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
                 break;
             case 時間枠_8:
                 if (RString.isNullOrEmpty(row.getChosaJikanwaku08())) {
@@ -416,14 +402,13 @@ public class NinteiChosainJikanMasterHandler {
                     }
                 }
                 一括設定時間枠七と一括設定時間枠八(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間, row.getSyoriKben08());
-                set一括設定Model(予定日, 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
                 break;
             default:
                 break;
         }
     }
 
-    private void 一括設定時間枠九と一括設定時間枠十(FlexibleDate 予定日,
+    private void 一括設定時間枠九と一括設定時間枠十(
             boolean is上書きするフラグ,
             RString 時間枠,
             dgTimeScheduleList_Row row,
@@ -441,7 +426,6 @@ public class NinteiChosainJikanMasterHandler {
                     }
                 }
                 一括設定時間枠九と一括設定時間枠十(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間, row.getSyoriKben09());
-                set一括設定Model(予定日, 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
                 break;
             case 時間枠_10:
                 if (RString.isNullOrEmpty(row.getChosaJikanwaku10())) {
@@ -454,7 +438,6 @@ public class NinteiChosainJikanMasterHandler {
                     }
                 }
                 一括設定時間枠九と一括設定時間枠十(row, 時間枠, 認定調査予定開始時間, 認定調査予定終了時間, row.getSyoriKben10());
-                set一括設定Model(予定日, 認定調査予定開始時間, 認定調査予定終了時間, 時間枠);
                 break;
             default:
                 break;
@@ -600,28 +583,6 @@ public class NinteiChosainJikanMasterHandler {
             default:
                 break;
         }
-    }
-
-    private void set一括設定Model(FlexibleDate 予定年月日, RString 認定調査予定開始時間, RString 認定調査予定終了時間, RString 時間枠) {
-
-        Code 調査地区コード = new Code(div.getDdlTaishoChiku().getSelectedKey());
-        RString 認定調査委託先コード = div.getTxtNinteiChosaItakusakiCode().getValue();
-        RString 認定調査員コード = div.getTxtNinteiChosainCode().getValue();
-        LasdecCode 市町村コード = new LasdecCode(div.getMainPanel().getSearchConditionPanel().getHiddenShichosonCode());
-        Models<NinteichosaScheduleIdentifier, NinteichosaSchedule> ninteichosaModels
-                = ViewStateHolder.get(ViewStateKeys.認定調査スケジュール登録6_認定調査スケジュール情報, Models.class);
-        NinteichosaSchedule 情報PK = new NinteichosaSchedule(
-                予定年月日,
-                認定調査予定開始時間,
-                認定調査予定終了時間,
-                new Code(時間枠),
-                調査地区コード,
-                認定調査委託先コード,
-                認定調査員コード,
-                市町村コード);
-        ninteichosaModels.add(情報PK.createBuilderForEdit().set予約可能フラグ(true).build());
-        ViewStateHolder.put(ViewStateKeys.認定調査スケジュール登録6_認定調査スケジュール情報, Models.create(ninteichosaModels));
-
     }
 
     /**
@@ -1308,13 +1269,13 @@ public class NinteiChosainJikanMasterHandler {
 
     private void set背景色の編集(FlexibleDate システム年月, dgTimeScheduleList_Row row) {
         if (システム年月.getDayOfWeek() == DayOfWeek.SATURDAY) {
-            row.setRowBgColor(DataGridCellBgColor.bgColorGreen);
+            row.setRowBgColor(DataGridCellBgColor.bgColorLightGreen);
         }
         if (システム年月.getDayOfWeek() == DayOfWeek.SUNDAY) {
-            row.setRowBgColor(DataGridCellBgColor.bgColorRed);
+            row.setRowBgColor(DataGridCellBgColor.bgColorLightRed);
         }
         if (new RDate(システム年月.toString()).isNationalHoliday()) {
-            row.setRowBgColor(DataGridCellBgColor.bgColorRed);
+            row.setRowBgColor(DataGridCellBgColor.bgColorLightRed);
         }
     }
 
@@ -1413,7 +1374,9 @@ public class NinteiChosainJikanMasterHandler {
     }
 
     private KeyValueDataSource 調査地区ドロップダウンリスト(Code 調査地区コード) {
-        UzT0007CodeEntity 指定調査地区 = CodeMaster.getCode(SubGyomuCode.DBE認定支援, コード種別, 調査地区コード);
+        FlexibleDate 基准日 = new FlexibleDate(RDate.getNowDate().toDateString());
+        UzT0007CodeEntity 指定調査地区 = CodeMaster.getCode(SubGyomuCode.DBE認定支援,
+                DBECodeShubetsu.調査地区コード.getコード(), 調査地区コード, 基准日);
         KeyValueDataSource keyValue = new KeyValueDataSource();
         keyValue.setKey(指定調査地区.getコード().value());
         keyValue.setValue(指定調査地区.getコード名称());

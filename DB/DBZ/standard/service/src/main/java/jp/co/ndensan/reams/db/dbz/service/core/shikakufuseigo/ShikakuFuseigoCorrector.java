@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokurei;
 import jp.co.ndensan.reams.db.dbz.business.core.TashichosonJushochiTokureiBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.TekiyoJogaisha;
 import jp.co.ndensan.reams.db.dbz.business.core.TekiyoJogaishaBuilder;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ConfigKeysNenreiTotatsuKijunJoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.config.ConfigKeysNenreiTotatsuKijunJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.fuseigoriyu.FuseigoRiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.jogaiidojiyu.JogaiKaijoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.jogaiidojiyu.JogaiTekiyoJiyu;
@@ -44,6 +44,7 @@ public class ShikakuFuseigoCorrector {
     private static final int FLAG_2 = 2;
     private static final int FLAG_3 = 3;
 
+    private static final int NUMBER_4 = 4;
     private final int 第１号被保険者到達基準年齢;
 
     /**
@@ -163,7 +164,6 @@ public class ShikakuFuseigoCorrector {
             資格の情報修正後Builder.set異動事由コード(ShikakuHenkoJiyu._１号到達.getコード());
             return 資格の情報修正後Builder.build();
         }
-
         return 資格の情報修正前;
     }
 
@@ -407,6 +407,6 @@ public class ShikakuFuseigoCorrector {
     }
 
     private RString add枝番(RString 枝番) {
-        return new RString(Integer.parseInt(枝番.toString()) + 1);
+        return new RString(Integer.parseInt(枝番.toString()) + 1).padZeroToLeft(NUMBER_4);
     }
 }

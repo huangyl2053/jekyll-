@@ -15,10 +15,10 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsuControl;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsuControlBuilder;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.relate.ChohyoSeigyoKyotsuMapperParameter;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7065ChohyoSeigyoKyotsuEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7066ChohyoSeigyoKyotsuControlEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT7065ChohyoSeigyoKyotsuEntityGenerator;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.chohyoseigyokyotsu.IChohyoSeigyoKyotsuMapper;
@@ -28,9 +28,10 @@ import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuControlMa
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
@@ -300,7 +301,7 @@ public class ChohyoSeigyoKyotsuManagerTest {
 // 帳票制御汎用
 
         private static ChohyoSeigyoHanyo createChohyoSeigyoHanyo(SubGyomuCode 主キー1, ReportId 主キー2) {
-            return new ChohyoSeigyoHanyo(主キー1, 主キー2, RString.EMPTY);
+            return new ChohyoSeigyoHanyo(主キー1, 主キー2, RString.EMPTY, FlexibleYear.EMPTY);
         }
 
         public static ChohyoSeigyoKyotsu initializeChohyoSeigyoKyotsu(ChohyoSeigyoKyotsu 帳票制御共通) {

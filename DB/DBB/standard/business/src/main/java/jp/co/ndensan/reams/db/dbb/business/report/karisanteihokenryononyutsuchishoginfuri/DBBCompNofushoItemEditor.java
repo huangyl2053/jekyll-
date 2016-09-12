@@ -143,9 +143,10 @@ public class DBBCompNofushoItemEditor implements IKarisanteiHokenryoNonyuTsuchis
     private void editMRenban(KarisanteiHokenryoNonyuTsuchishoGinfuriSource source) {
         RString 連番 = new RString(String.valueOf(this.連番));
         if (ShoriKubun.バッチ.equals(処理区分)) {
-            連番.padLeft(連番, INT6);
+            source.mRenban = 連番.padLeft("0", INT6);
+        } else {
+            source.mRenban = RString.EMPTY;
         }
-        source.mRenban = 連番;
     }
 
     private boolean is銀振印字位置の納入通知書期情報がある(int 銀振印字位置) {

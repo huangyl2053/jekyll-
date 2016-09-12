@@ -17,7 +17,7 @@ public enum TaishoKubun {
     /**
      * コード:※ 名称:申請日 略称:定義なし
      */
-    申請日("※", "申請日");
+    申請日("0", "申請日");
 
     private final RString code;
     private final RString fullName;

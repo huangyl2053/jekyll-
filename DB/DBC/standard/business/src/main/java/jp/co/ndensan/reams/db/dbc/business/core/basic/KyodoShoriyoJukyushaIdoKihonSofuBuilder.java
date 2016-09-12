@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link KyodoShoriyoJukyushaIdoKihonSofu}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBC-9999-012 xupeng
  */
 public class KyodoShoriyoJukyushaIdoKihonSofuBuilder {
 
@@ -121,7 +123,6 @@ public class KyodoShoriyoJukyushaIdoKihonSofuBuilder {
      * @return {@link KyodoShoriyoJukyushaIdoKihonSofuBuilder}
      */
     public KyodoShoriyoJukyushaIdoKihonSofuBuilder set被保険者氏名(RString 被保険者氏名) {
-        requireNonNull(被保険者氏名, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者氏名"));
         entity.setHiHokenshaName(被保険者氏名);
         return this;
     }
@@ -133,7 +134,6 @@ public class KyodoShoriyoJukyushaIdoKihonSofuBuilder {
      * @return {@link KyodoShoriyoJukyushaIdoKihonSofuBuilder}
      */
     public KyodoShoriyoJukyushaIdoKihonSofuBuilder set郵便番号(YubinNo 郵便番号) {
-        requireNonNull(郵便番号, UrSystemErrorMessages.値がnull.getReplacedMessage("郵便番号"));
         entity.setYubinNo(郵便番号);
         return this;
     }
@@ -145,7 +145,6 @@ public class KyodoShoriyoJukyushaIdoKihonSofuBuilder {
      * @return {@link KyodoShoriyoJukyushaIdoKihonSofuBuilder}
      */
     public KyodoShoriyoJukyushaIdoKihonSofuBuilder set住所カナ(RString 住所カナ) {
-        requireNonNull(住所カナ, UrSystemErrorMessages.値がnull.getReplacedMessage("住所カナ"));
         entity.setDdressKana(住所カナ);
         return this;
     }
@@ -157,7 +156,6 @@ public class KyodoShoriyoJukyushaIdoKihonSofuBuilder {
      * @return {@link KyodoShoriyoJukyushaIdoKihonSofuBuilder}
      */
     public KyodoShoriyoJukyushaIdoKihonSofuBuilder set住所(RString 住所) {
-        requireNonNull(住所, UrSystemErrorMessages.値がnull.getReplacedMessage("住所"));
         entity.setAddress(住所);
         return this;
     }
@@ -169,7 +167,6 @@ public class KyodoShoriyoJukyushaIdoKihonSofuBuilder {
      * @return {@link KyodoShoriyoJukyushaIdoKihonSofuBuilder}
      */
     public KyodoShoriyoJukyushaIdoKihonSofuBuilder set電話番号(TelNo 電話番号) {
-        requireNonNull(電話番号, UrSystemErrorMessages.値がnull.getReplacedMessage("電話番号"));
         entity.setTelNo(電話番号);
         return this;
     }
@@ -181,7 +178,6 @@ public class KyodoShoriyoJukyushaIdoKihonSofuBuilder {
      * @return {@link KyodoShoriyoJukyushaIdoKihonSofuBuilder}
      */
     public KyodoShoriyoJukyushaIdoKihonSofuBuilder set帳票出力順序コード(RString 帳票出力順序コード) {
-        requireNonNull(帳票出力順序コード, UrSystemErrorMessages.値がnull.getReplacedMessage("帳票出力順序コード"));
         entity.setChohyoOutputJunjyoCode(帳票出力順序コード);
         return this;
     }
@@ -205,8 +201,40 @@ public class KyodoShoriyoJukyushaIdoKihonSofuBuilder {
      * @return {@link KyodoShoriyoJukyushaIdoKihonSofuBuilder}
      */
     public KyodoShoriyoJukyushaIdoKihonSofuBuilder set送付年月(FlexibleYearMonth 送付年月) {
-        requireNonNull(送付年月, UrSystemErrorMessages.値がnull.getReplacedMessage("送付年月"));
         entity.setSofuYM(送付年月);
+        return this;
+    }
+
+    /**
+     * 訂正区分コードを設定します。
+     *
+     * @param 訂正区分コード 訂正区分コード
+     * @return {@link KyodoShoriyoJukyushaIdoKihonSofuBuilder}
+     */
+    public KyodoShoriyoJukyushaIdoKihonSofuBuilder set訂正区分コード(RString 訂正区分コード) {
+        entity.setTeiseiKubunCode(訂正区分コード);
+        return this;
+    }
+
+    /**
+     * 訂正年月日を設定します。
+     *
+     * @param 訂正年月日 訂正年月日
+     * @return {@link KyodoShoriyoJukyushaIdoKihonSofuBuilder}
+     */
+    public KyodoShoriyoJukyushaIdoKihonSofuBuilder set訂正年月日(FlexibleDate 訂正年月日) {
+        entity.setTeiseiYMD(訂正年月日);
+        return this;
+    }
+
+    /**
+     * 論理削除フラグを設定します。
+     *
+     * @param 論理削除フラグ 論理削除フラグ
+     * @return {@link KyodoShoriyoJukyushaIdoKihonSofuBuilder}
+     */
+    public KyodoShoriyoJukyushaIdoKihonSofuBuilder set論理削除フラグ(boolean 論理削除フラグ) {
+        entity.setLogicalDeletedFlag(論理削除フラグ);
         return this;
     }
 

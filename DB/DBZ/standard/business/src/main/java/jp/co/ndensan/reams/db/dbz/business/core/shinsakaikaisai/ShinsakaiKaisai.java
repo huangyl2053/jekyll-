@@ -199,6 +199,15 @@ public class ShinsakaiKaisai implements Serializable {
     }
 
     /**
+     * 合議体番号を取得します。
+     *
+     * @return 合議体番号
+     */
+    public RString get合議体番号() {
+        return new RString(entity.get合議体番号());
+    }
+
+    /**
      * このクラスの編集を行うBuilderを取得します。
      *
      * @return Builder

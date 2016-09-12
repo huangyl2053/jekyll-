@@ -51,25 +51,6 @@ public class ShujiiIkenshoHoshuTankaBuilderTest extends DbeTestBase {
 
             sut = business.createBuilderForEdit();
         }
-//TODO Key項目のテストメソッドは削除して下さい。
-
-        @Test
-        public void 戻り値の在宅施設区分は_設定した値と同じ在宅施設区分を返す() {
-            business = sut.set在宅施設区分(DbT5032ShujiiIkenshoHoshuTankaEntityGenerator.DEFAULT_在宅施設区分).build();
-            assertThat(business.get在宅施設区分(), is(DbT5032ShujiiIkenshoHoshuTankaEntityGenerator.DEFAULT_在宅施設区分));
-        }
-
-        @Test
-        public void 戻り値の意見書作成回数区分は_設定した値と同じ意見書作成回数区分を返す() {
-            business = sut.set意見書作成回数区分(DbT5032ShujiiIkenshoHoshuTankaEntityGenerator.DEFAULT_意見書作成回数区分).build();
-            assertThat(business.get意見書作成回数区分(), is(DbT5032ShujiiIkenshoHoshuTankaEntityGenerator.DEFAULT_意見書作成回数区分));
-        }
-
-        @Test
-        public void 戻り値の開始年月は_設定した値と同じ開始年月を返す() {
-            business = sut.set開始年月(DbT5032ShujiiIkenshoHoshuTankaEntityGenerator.DEFAULT_開始年月).build();
-            assertThat(business.get開始年月(), is(DbT5032ShujiiIkenshoHoshuTankaEntityGenerator.DEFAULT_開始年月));
-        }
 
         @Test
         public void 戻り値の終了年月は_設定した値と同じ終了年月を返す() {

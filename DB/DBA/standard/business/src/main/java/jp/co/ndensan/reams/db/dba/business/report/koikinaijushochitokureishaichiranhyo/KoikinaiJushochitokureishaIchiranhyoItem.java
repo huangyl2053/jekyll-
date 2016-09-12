@@ -16,8 +16,8 @@ import lombok.Getter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KoikinaiJushochitokureishaIchiranhyoItem {
 
-    private final KoikinaiJushochitokureishaIchiranhyoHeadItem headItem;
-    private final KoikinaiJushochitokureishaIchiranhyoBodyItem bodyItem;
+    private final KoikinaiJushochitokureishaIchiranhyoHead headItem;
+    private final KoikinaiJushochitokureishaIchiranhyoBody bodyItem;
 
     /**
      * インスタンスを生成します。
@@ -26,8 +26,8 @@ public class KoikinaiJushochitokureishaIchiranhyoItem {
      * @param bodyItem 広域内住所地特例者一覧表
      */
     public KoikinaiJushochitokureishaIchiranhyoItem(
-            KoikinaiJushochitokureishaIchiranhyoHeadItem headItem,
-            KoikinaiJushochitokureishaIchiranhyoBodyItem bodyItem) {
+            KoikinaiJushochitokureishaIchiranhyoHead headItem,
+            KoikinaiJushochitokureishaIchiranhyoBody bodyItem) {
         this.headItem = headItem;
         this.bodyItem = bodyItem;
     }

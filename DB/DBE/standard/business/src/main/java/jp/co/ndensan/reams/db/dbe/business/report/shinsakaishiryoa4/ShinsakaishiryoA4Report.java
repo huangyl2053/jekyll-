@@ -5,51 +5,36 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.shinsakaishiryoa4;
 
-import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaishiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsakaishiryoa4.ShinsakaishiryoA4ReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 事務局用介護認定審査対象者一覧表のReportです。
+ * 介護認定審査対象者一覧表A4のReportです。
  *
- * @reamsid_L DBE-0150-020 lishengli
+ * @reamsid_L DBE-0150-260 lishengli
  */
 public class ShinsakaishiryoA4Report extends Report<ShinsakaishiryoA4ReportSource> {
 
-    private final List<ShinsakaishiryoA4Item> itemList;
+    private final JimuShinsakaishiryoBusiness business;
 
     /**
      * インスタンスを生成します。
      *
-     * @param itemList 事務局用介護認定審査対象者一覧表のITEMLIST
-     * @return 事務局用介護認定審査対象者一覧表のReport
+     * @param business 介護認定審査対象者一覧表
      */
-    public static ShinsakaishiryoA4Report createFrom(List<ShinsakaishiryoA4Item> itemList) {
-
-        return new ShinsakaishiryoA4Report(itemList);
+    public ShinsakaishiryoA4Report(JimuShinsakaishiryoBusiness business) {
+        this.business = business;
     }
 
     /**
-     * インスタンスを生成します。
-     *
-     * @param itemList 事務局用介護認定審査対象者一覧表のITEMLIST
-     */
-    protected ShinsakaishiryoA4Report(List<ShinsakaishiryoA4Item> itemList) {
-
-        this.itemList = itemList;
-    }
-
-    /**
-     *
-     * @param reportSourceWriter 事務局用介護認定審査対象者一覧表Sourceクラス
+     * @param reportSourceWriter 介護認定審査対象者一覧表A4Sourceクラス
      */
     @Override
     public void writeBy(ReportSourceWriter<ShinsakaishiryoA4ReportSource> reportSourceWriter) {
-        for (ShinsakaishiryoA4Item headItem : itemList) {
-            IShinsakaishiryoA4Editor headerEditor = new ShinsakaishiryoA4Editor(headItem);
-            IShinsakaishiryoA4Builder builder = new ShinsakaishiryoA4BuilderImpl(headerEditor);
-            reportSourceWriter.writeLine(builder);
-        }
+        IShinsakaishiryoA4Editor headerEditor = new ShinsakaishiryoA4Editor(business);
+        IShinsakaishiryoA4Builder builder = new ShinsakaishiryoA4BuilderImpl(headerEditor);
+        reportSourceWriter.writeLine(builder);
     }
 }

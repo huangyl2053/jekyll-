@@ -8,15 +8,17 @@ package jp.co.ndensan.reams.db.dbz.service.core.seikatsuhogorireki;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.seikatsuhogorireki.SeikaatsuhogoBusiness;
-import jp.co.ndensan.reams.db.dbz.definition.mybatis.param.seikatsuhogorireki.SeikatsuhogoParameter;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.seikatsuhogorireki.SeikatsuhogoParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.seikatsuhogorireki.SeikatsuhogoRelateEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.seikatsuhogorireki.ISeikatsuhogoRirekiMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urd.definition.core.seikatsuhogo.KaigoRyoDairiNofuKubunType;
+import jp.co.ndensan.reams.ur.urz.definition.core.codemaster.URZCodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
@@ -32,7 +34,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class SeikatsuhogoRirekiFinder {
 
     private final MapperProvider mapperProvider;
-    private final CodeShubetsu コード種別 = new CodeShubetsu("0017");
     private final RString 連結 = new RString("／");
 
     /**
@@ -112,8 +113,10 @@ public class SeikatsuhogoRirekiFinder {
                     teishiShuryo.append(連結);
                 }
                 if (!RString.isNullOrEmpty(entity.getFujoShuruiCode())
-                        && !RString.isNullOrEmpty(CodeMaster.getCodeRyakusho(コード種別, new Code(entity.getFujoShuruiCode())))) {
-                    codeRyakusho.append(CodeMaster.getCodeRyakusho(コード種別, new Code(entity.getFujoShuruiCode())));
+                        && !RString.isNullOrEmpty(CodeMaster.getCodeRyakusho(SubGyomuCode.URZ業務共通_共通系, URZCodeShubetsu.扶助種類コード
+                                        .getCodeShubetsu(), new Code(entity.getFujoShuruiCode()), FlexibleDate.getNowDate()))) {
+                    codeRyakusho.append(CodeMaster.getCodeRyakusho(SubGyomuCode.URZ業務共通_共通系, URZCodeShubetsu.扶助種類コード
+                            .getCodeShubetsu(), new Code(entity.getFujoShuruiCode()), FlexibleDate.getNowDate()));
                     codeRyakusho.append(連結);
                 }
                 relateEntity.setFujoShuruiCode(shuruiCode.toRString());

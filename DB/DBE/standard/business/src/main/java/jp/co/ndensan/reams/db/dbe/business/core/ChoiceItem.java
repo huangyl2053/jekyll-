@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.IAnswerResultItem;
@@ -18,15 +18,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class ChoiceItem implements IAnswerItem {
 
-    private final IAnswerResultItem[] 選択肢;
+    private final List<IAnswerResultItem> 選択肢;
 
     /**
      * インスタンスを生成します。
      *
      * @param 選択肢 選択肢
      */
-    public ChoiceItem(IAnswerResultItem[] 選択肢) {
-        this.選択肢 = requireNonNull(選択肢, UrSystemErrorMessages.値がnull.getReplacedMessage("選択肢"));
+    public ChoiceItem(List<? extends IAnswerResultItem> 選択肢) {
+        this.選択肢 = new ArrayList<>(requireNonNull(選択肢, UrSystemErrorMessages.値がnull.getReplacedMessage("選択肢")));
     }
 
     @Override
@@ -55,6 +55,7 @@ public class ChoiceItem implements IAnswerItem {
      * @return 回答結果項目（選択結果項目）のリスト
      */
     public List<IAnswerResultItem> asList() {
-        return Arrays.asList(選択肢);
+//        return Arrays.asList(選択肢);
+        return 選択肢;
     }
 }

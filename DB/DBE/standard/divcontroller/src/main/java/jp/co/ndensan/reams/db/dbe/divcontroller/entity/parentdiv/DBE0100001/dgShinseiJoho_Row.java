@@ -3,19 +3,24 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0100001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Mar 10 20:31:14 CST 2016
+ * Thu Sep 08 14:05:35 JST 2016 
  */
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+
+
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
+
 /**
- * dgShinseiJoho_Row のクラスファイル
- *
+ * dgShinseiJoho_Row のクラスファイル 
+ * 
+ * @author 自動生成
  */
+
 public class dgShinseiJoho_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
 
     private RString hokensha;
     private RString hihokenshaNo;
@@ -31,6 +36,7 @@ public class dgShinseiJoho_Row extends DataRow {
     private RString shinseishoKanriNo;
     private RString shoKisaiHokenshaNo;
     private RString ikenshoIraiRirekiNo;
+    private RString ninteichosaIraiRirekiNo;
 
     public dgShinseiJoho_Row() {
         super();
@@ -48,6 +54,7 @@ public class dgShinseiJoho_Row extends DataRow {
         this.shinseishoKanriNo = RString.EMPTY;
         this.shoKisaiHokenshaNo = RString.EMPTY;
         this.ikenshoIraiRirekiNo = RString.EMPTY;
+        this.ninteichosaIraiRirekiNo = RString.EMPTY;
         this.setOriginalData("hokensha", hokensha);
         this.setOriginalData("hihokenshaNo", hihokenshaNo);
         this.setOriginalData("shimei", shimei);
@@ -62,9 +69,10 @@ public class dgShinseiJoho_Row extends DataRow {
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
         this.setOriginalData("shoKisaiHokenshaNo", shoKisaiHokenshaNo);
         this.setOriginalData("ikenshoIraiRirekiNo", ikenshoIraiRirekiNo);
+        this.setOriginalData("ninteichosaIraiRirekiNo", ninteichosaIraiRirekiNo);
     }
 
-    public dgShinseiJoho_Row(RString hokensha, RString hihokenshaNo, RString shimei, TextBoxDate hihokenshaBirthDay, RString hihokenshaNenrei, RString hihokenshaSeibetsu, TextBoxDate shinseiDay, RString shinseikubunshinseiji, RString yubinno, RString telno, RString jyusho, RString shinseishoKanriNo, RString shoKisaiHokenshaNo, RString ikenshoIraiRirekiNo) {
+    public dgShinseiJoho_Row(RString hokensha, RString hihokenshaNo, RString shimei, TextBoxDate hihokenshaBirthDay, RString hihokenshaNenrei, RString hihokenshaSeibetsu, TextBoxDate shinseiDay, RString shinseikubunshinseiji, RString yubinno, RString telno, RString jyusho, RString shinseishoKanriNo, RString shoKisaiHokenshaNo, RString ikenshoIraiRirekiNo, RString ninteichosaIraiRirekiNo) {
         super();
         this.setOriginalData("hokensha", hokensha);
         this.setOriginalData("hihokenshaNo", hihokenshaNo);
@@ -80,6 +88,7 @@ public class dgShinseiJoho_Row extends DataRow {
         this.setOriginalData("shinseishoKanriNo", shinseishoKanriNo);
         this.setOriginalData("shoKisaiHokenshaNo", shoKisaiHokenshaNo);
         this.setOriginalData("ikenshoIraiRirekiNo", ikenshoIraiRirekiNo);
+        this.setOriginalData("ninteichosaIraiRirekiNo", ninteichosaIraiRirekiNo);
         this.hokensha = hokensha;
         this.hihokenshaNo = hihokenshaNo;
         this.shimei = shimei;
@@ -94,6 +103,7 @@ public class dgShinseiJoho_Row extends DataRow {
         this.shinseishoKanriNo = shinseishoKanriNo;
         this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
         this.ikenshoIraiRirekiNo = ikenshoIraiRirekiNo;
+        this.ninteichosaIraiRirekiNo = ninteichosaIraiRirekiNo;
     }
 
     public RString getHokensha() {
@@ -150,6 +160,10 @@ public class dgShinseiJoho_Row extends DataRow {
 
     public RString getIkenshoIraiRirekiNo() {
         return ikenshoIraiRirekiNo;
+    }
+
+    public RString getNinteichosaIraiRirekiNo() {
+        return ninteichosaIraiRirekiNo;
     }
 
     public void setHokensha(RString hokensha) {
@@ -220,6 +234,11 @@ public class dgShinseiJoho_Row extends DataRow {
     public void setIkenshoIraiRirekiNo(RString ikenshoIraiRirekiNo) {
         this.setOriginalData("ikenshoIraiRirekiNo", ikenshoIraiRirekiNo);
         this.ikenshoIraiRirekiNo = ikenshoIraiRirekiNo;
+    }
+
+    public void setNinteichosaIraiRirekiNo(RString ninteichosaIraiRirekiNo) {
+        this.setOriginalData("ninteichosaIraiRirekiNo", ninteichosaIraiRirekiNo);
+        this.ninteichosaIraiRirekiNo = ninteichosaIraiRirekiNo;
     }
 
     // </editor-fold>

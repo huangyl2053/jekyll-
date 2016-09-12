@@ -8,15 +8,15 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0100001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinseikensaku.ShinseiKensakuBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.mybatis.param.shinseikensaku.ShinseiKensakuMapperParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinseikensaku.ShinseiKensakuMapperParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0100001.ShinseiKensakuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0100001.dgShinseiJoho_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.dokuji.KanryoInfoPhase;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.dokuji.KanryoInfoPhase;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.NinteiShinseishaFinderDiv;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 要介護認定申請検索のハンドラークラスです。
@@ -72,7 +73,7 @@ public class ShinseiKensakuHandler {
      */
     public ShinseiKensakuMapperParameter createParameter() {
         ShinseiKensakuMapperParameter parameter = new ShinseiKensakuMapperParameter();
-        parameter.setLimitCount(Integer.parseInt(div.getTxtMaxDisp().getValue().toString()));
+        parameter.setLimitCount(get最大表示件数());
         NinteiShinseishaFinderDiv finderDiv = div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv();
         editShosaiJokenForParameter(finderDiv, parameter);
         editNinteiChosaForParameter(finderDiv, parameter);
@@ -82,6 +83,10 @@ public class ShinseiKensakuHandler {
         editNowPhaseForParameter(finderDiv, parameter);
         editChkForParameter(finderDiv, parameter);
         return parameter;
+    }
+
+    private int get最大表示件数() {
+        return Integer.parseInt(div.getTxtMaxDisp().getValue().toString());
     }
 
     private void editShinsakaiJohoForParameter(NinteiShinseishaFinderDiv finderDiv, ShinseiKensakuMapperParameter parameter) {
@@ -98,12 +103,13 @@ public class ShinseiKensakuHandler {
             parameter.setUseNijiHanteiNinteiYukoKikan(true);
             useNinteiKekkaJoho = true;
         }
-        RString 認定有効な申請時点 = finderDiv.getTxtCheckDay().getValue();
-        if (!RString.isNullOrEmpty(認定有効な申請時点)) {
-            parameter.setYokaiYMD(認定有効期間);
-            parameter.setUseYokaiYMD(true);
-            useNinteiKekkaJoho = true;
-        }
+//TODO syncとマージ時、暫定対応（コメントアウト）
+//        RDate 認定有効な申請時点 = finderDiv.getTxtCheckDay().getValue();
+//        if (認定有効な申請時点 != null) {
+//            parameter.setYokaiYMD(認定有効な申請時点.toDateString());
+//            parameter.setUseYokaiYMD(true);
+//            useNinteiKekkaJoho = true;
+//        }
         FlexibleDate 認定有効開始日FROM = finderDiv.getTxtNinteiYukoKaishiDateFrom().getValue();
         if (認定有効開始日FROM != null && !FlexibleDate.EMPTY.equals(認定有効開始日FROM)) {
             parameter.setNinteiYukoKaishiYMDFrom(認定有効開始日FROM);
@@ -175,50 +181,48 @@ public class ShinseiKensakuHandler {
     }
 
     private void editZenkaiJohoForParameter(NinteiShinseishaFinderDiv finderDiv, ShinseiKensakuMapperParameter parameter) {
-        boolean useZenkaiNinteiShinseiJoho = false;
         RString 前回認定調査委託先 = finderDiv.getTxtZenkaiNinteiChosaItakusakiName().getValue();
         if (!RString.isNullOrEmpty(前回認定調査委託先)) {
             parameter.setZenkaiNinteiChosaItakusaki(finderDiv.getHdnZenkaiChosaItakusakiCode());
             parameter.setUseZenkaiNinteiChosaItakusaki(true);
-            useZenkaiNinteiShinseiJoho = true;
         }
         RString 前回主治医医療機関 = finderDiv.getTxtZenkaiShujiiIryokikanName().getValue();
         if (!RString.isNullOrEmpty(前回主治医医療機関)) {
             parameter.setZenkaiShujiiIryokikanCode(finderDiv.getHdnZenkaiShujiiIryokikanCode());
             parameter.setUseZenkaiShujiiIryokikanCode(true);
-            useZenkaiNinteiShinseiJoho = true;
         }
 
         RString 前回二次判定結果コード = finderDiv.getDdlZenkaiNijiHanteiKekka().getSelectedKey();
         if (!RString.isNullOrEmpty(前回二次判定結果コード)) {
             parameter.setZenkaiJotaiKubunCode(前回二次判定結果コード);
             parameter.setUseZenkaiJotaiKubunCode(true);
-            useZenkaiNinteiShinseiJoho = true;
         }
 
         RString 前回認定有効期間 = finderDiv.getTxtZenkaiNinteiYukoKikan().getValue();
         if (!RString.isNullOrEmpty(前回認定有効期間)) {
             parameter.setZenkaiYukoKikan(Integer.parseInt(前回認定有効期間.toString()));
             parameter.setUseZenkaiYukoKikan(true);
-            useZenkaiNinteiShinseiJoho = true;
         }
 
         FlexibleDate 設定有効開始日FROM = finderDiv.getTxtZenkaiYukoKaishiDateFrom().getValue();
         if (設定有効開始日FROM != null && !FlexibleDate.EMPTY.equals(設定有効開始日FROM)) {
             parameter.setZenkaiYukoKikanStartFrom(設定有効開始日FROM);
             parameter.setUseZenkaiYukoKikanStartFrom(true);
-            useZenkaiNinteiShinseiJoho = true;
         }
         FlexibleDate 設定有効開始日To = finderDiv.getTxtZenkaiYukoKaishiDateTo().getValue();
         if (設定有効開始日To != null && !FlexibleDate.EMPTY.equals(設定有効開始日To)) {
             parameter.setZenkaiYukoKikanStartTo(設定有効開始日To);
             parameter.setUseZenkaiYukoKikanStartTo(true);
-            useZenkaiNinteiShinseiJoho = true;
         }
-        parameter.setUseZenkaiNinteiShinseiJoho(useZenkaiNinteiShinseiJoho);
-        RString 原因疾患 = finderDiv.getTxtGeninShikkanCode().getValue();
+// <<<<<<< HEAD
+        RString 原因疾患 = finderDiv.getCcdGeninShikkan().getCode().value();
         if (!RString.isNullOrEmpty(原因疾患)) {
             parameter.setGeninShikkanCode(原因疾患);
+// =======
+//      Code 原因疾患 = finderDiv.getCdlGeninShikkanCode().getCode();
+//      if (原因疾患 != null && !RString.isNullOrEmpty(原因疾患.value())) {
+//          parameter.setGeninShikkanCode(原因疾患.value());
+// >>>>>>> origin/sync
             parameter.setUseGeninShikkanCode(true);
             parameter.setUseGeninShikkan(true);
         }
@@ -448,8 +452,7 @@ public class ShinseiKensakuHandler {
             } else if (KEY3.equals(hihokenshaNameMatchType)) {
                 parameter.set後方一致(true);
             }
-            parameter.setHihokenshaName(被保険者氏名);
-            parameter.setUseHihokenshaName(true);
+            parameter.set被保険者名(被保険者氏名);
         }
         List<KeyValueDataSource> みなし２号申請 = finderDiv.getChkMinashiFlag().getSelectedItems();
         if (みなし２号申請.isEmpty()) {
@@ -650,9 +653,9 @@ public class ShinseiKensakuHandler {
      *
      * @param list 検索結果
      */
-    public void setShinseiJohoIchiran(List<ShinseiKensakuBusiness> list) {
+    public void setShinseiJohoIchiran(SearchResult<ShinseiKensakuBusiness> searchResult) {
         List<dgShinseiJoho_Row> dataSource = new ArrayList<>();
-        for (ShinseiKensakuBusiness business : list) {
+        for (ShinseiKensakuBusiness business : searchResult.records()) {
             dgShinseiJoho_Row row = new dgShinseiJoho_Row();
             row.setHokensha(nullToEmpty(business.get市町村名称()));
             row.setHihokenshaNo(nullToEmpty(business.get被保険者番号()));
@@ -661,7 +664,7 @@ public class ShinseiKensakuHandler {
                 row.setShimei(nullToEmpty(被保険者氏名.getColumnValue()));
             }
             FlexibleDate 生年月日 = business.get生年月日();
-            if (生年月日 != null) {
+            if (生年月日 != null && !生年月日.isEmpty()) {
                 TextBoxDate hihokenshaBirthDay = new TextBoxDate();
                 hihokenshaBirthDay.setValue(new RDate(生年月日.toString()));
                 row.setHihokenshaBirthDay(hihokenshaBirthDay);
@@ -684,7 +687,7 @@ public class ShinseiKensakuHandler {
             }
             YubinNo 郵便番号 = business.get郵便番号();
             if (郵便番号 != null) {
-                row.setYubinno(郵便番号.value());
+                row.setYubinno(郵便番号.getEditedYubinNo());
             }
             TelNo 電話番号 = business.get電話番号();
             if (電話番号 != null) {
@@ -700,9 +703,12 @@ public class ShinseiKensakuHandler {
             }
             row.setShoKisaiHokenshaNo(nullToEmpty(business.get証記載保険者番号()));
             row.setIkenshoIraiRirekiNo(new RString(String.valueOf(business.get主治医意見書作成依頼履歴番号())));
+            row.setNinteichosaIraiRirekiNo(new RString(String.valueOf(business.get認定調査依頼履歴番号())));
             dataSource.add(row);
         }
-        div.getShinseiJohoIchiran().getDgShinseiJoho().setDataSource(dataSource);
+        div.getDgShinseiJoho().setDataSource(dataSource);
+        div.getDgShinseiJoho().getGridSetting().setLimitRowCount(get最大表示件数());
+        div.getDgShinseiJoho().getGridSetting().setSelectedRowCount(searchResult.totalCount());
     }
 
     private RString nullToEmpty(RString obj) {

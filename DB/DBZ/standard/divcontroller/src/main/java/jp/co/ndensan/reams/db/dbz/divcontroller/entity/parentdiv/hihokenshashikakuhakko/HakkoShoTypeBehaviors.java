@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.hihokenshashik
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.config.ShiharaiHohoHenkoConfig;
-import jp.co.ndensan.reams.db.dbz.business.hihokenshashikakuhakko.HihokenshaShikakuHakko;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.configvalues.ShiharaiHohoHenkoShuryobunKisaiKubun;
+import jp.co.ndensan.reams.db.dbz.business.core.hihokenshashikakuhakko.HihokenshaShikakuHakko;
+import jp.co.ndensan.reams.db.dbz.definition.core.configvalues.ShiharaiHohoHenkoShuryobunKisaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.HihokenshashoKofuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.ShikakushashoKofuJiyu;
@@ -51,7 +51,7 @@ final class HakkoShoTypeBehaviors {
      * @param type {@link HihokenshaShikakuHakkoDiv.発行証タイプ}
      * @return 指定のmodeに対応する振る舞いを定義したインスタンス
      */
-    static IHakkoShoTypeBehavior createBy(HihokenshaShikakuHakkoDiv.発行証タイプ type) {
+    static IHakkoShoTypeBehavior createBy(HihokenshaShikakuHakkoDiv.HakkoshoType type) {
         switch (type) {
             case 被保険者証:
                 return new HihokenshaSho();

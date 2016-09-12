@@ -4,14 +4,9 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShi
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
  * KaigoNinteiShinsakaiJoho のクラスファイル
@@ -19,8 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  * @reamsid_L DBE-3000-010 sunhaidi
  */
 public class KaigoNinteiShinsakaiJohoDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -32,7 +26,7 @@ public class KaigoNinteiShinsakaiJohoDiv extends Panel {
     @JsonProperty("txtNinteiYukoKikan")
     private TextBox txtNinteiYukoKikan;
     @JsonProperty("txtCheckDay")
-    private TextBox txtCheckDay;
+    private TextBoxDate txtCheckDay;
     @JsonProperty("txtNinteiYukoKaishiDateFrom")
     private TextBoxFlexibleDate txtNinteiYukoKaishiDateFrom;
     @JsonProperty("lblNinteiYukoKaishiDate")
@@ -59,14 +53,10 @@ public class KaigoNinteiShinsakaiJohoDiv extends Panel {
     private TextBoxFlexibleDate txtKaisaiDateTo;
     @JsonProperty("lblKaisaiNumber")
     private Label lblKaisaiNumber;
-    @JsonProperty("btnKaisaiNumberStart")
-    private Button btnKaisaiNumberStart;
     @JsonProperty("txtKaisaiNumberStart")
     private TextBox txtKaisaiNumberStart;
     @JsonProperty("lblKaisaiNoFor")
     private Label lblKaisaiNoFor;
-    @JsonProperty("btnKaisaiNumberEnd")
-    private Button btnKaisaiNumberEnd;
     @JsonProperty("txtKaisaiNumberEnd")
     private TextBox txtKaisaiNumberEnd;
 
@@ -117,7 +107,7 @@ public class KaigoNinteiShinsakaiJohoDiv extends Panel {
      * @return txtCheckDay
      */
     @JsonProperty("txtCheckDay")
-    public TextBox getTxtCheckDay() {
+    public TextBoxDate getTxtCheckDay() {
         return txtCheckDay;
     }
 
@@ -126,7 +116,7 @@ public class KaigoNinteiShinsakaiJohoDiv extends Panel {
      * @param txtCheckDay txtCheckDay
      */
     @JsonProperty("txtCheckDay")
-    public void setTxtCheckDay(TextBox txtCheckDay) {
+    public void setTxtCheckDay(TextBoxDate txtCheckDay) {
         this.txtCheckDay = txtCheckDay;
     }
 
@@ -365,24 +355,6 @@ public class KaigoNinteiShinsakaiJohoDiv extends Panel {
     }
 
     /*
-     * getbtnKaisaiNumberStart
-     * @return btnKaisaiNumberStart
-     */
-    @JsonProperty("btnKaisaiNumberStart")
-    public Button getBtnKaisaiNumberStart() {
-        return btnKaisaiNumberStart;
-    }
-
-    /*
-     * setbtnKaisaiNumberStart
-     * @param btnKaisaiNumberStart btnKaisaiNumberStart
-     */
-    @JsonProperty("btnKaisaiNumberStart")
-    public void setBtnKaisaiNumberStart(Button btnKaisaiNumberStart) {
-        this.btnKaisaiNumberStart = btnKaisaiNumberStart;
-    }
-
-    /*
      * gettxtKaisaiNumberStart
      * @return txtKaisaiNumberStart
      */
@@ -416,24 +388,6 @@ public class KaigoNinteiShinsakaiJohoDiv extends Panel {
     @JsonProperty("lblKaisaiNoFor")
     public void setLblKaisaiNoFor(Label lblKaisaiNoFor) {
         this.lblKaisaiNoFor = lblKaisaiNoFor;
-    }
-
-    /*
-     * getbtnKaisaiNumberEnd
-     * @return btnKaisaiNumberEnd
-     */
-    @JsonProperty("btnKaisaiNumberEnd")
-    public Button getBtnKaisaiNumberEnd() {
-        return btnKaisaiNumberEnd;
-    }
-
-    /*
-     * setbtnKaisaiNumberEnd
-     * @param btnKaisaiNumberEnd btnKaisaiNumberEnd
-     */
-    @JsonProperty("btnKaisaiNumberEnd")
-    public void setBtnKaisaiNumberEnd(Button btnKaisaiNumberEnd) {
-        this.btnKaisaiNumberEnd = btnKaisaiNumberEnd;
     }
 
     /*
