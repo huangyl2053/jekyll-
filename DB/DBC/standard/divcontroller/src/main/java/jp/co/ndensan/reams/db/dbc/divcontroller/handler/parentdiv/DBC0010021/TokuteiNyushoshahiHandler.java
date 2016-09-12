@@ -129,7 +129,8 @@ public class TokuteiNyushoshahiHandler {
             後_合計row.setTxtKohi3Futangaku(get金額(new Decimal(後_公費３_負担額合計)));
             rowList.add(後_合計row);
             div.getDgTokuteiNyushoshaKaigoServicehi().setDataSource(rowList);
-            setGetsuBtn(dataToRepeat, new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().toDateString()));
+            setGetsuBtn(dataToRepeat, new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月()
+                    .getYearMonth().toDateString()));
         }
     }
 
