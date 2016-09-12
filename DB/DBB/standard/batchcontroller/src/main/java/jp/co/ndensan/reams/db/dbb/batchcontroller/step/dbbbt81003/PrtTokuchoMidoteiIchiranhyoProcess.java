@@ -63,7 +63,6 @@ public class PrtTokuchoMidoteiIchiranhyoProcess extends BatchProcessBase<Tokubet
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private RString eucFilePath;
     private FileSpoolManager manager;
-    private final RString rseId = new RString("DBB200018_TokubetsuChoshuDoteiMiDoteiIchiran");
     private final RString csvファイル名 = new RString("TokubetsuChoshuMidoteiIchiran.csv");
     private final RString csvOutFlag = new RString("有り");
 
@@ -76,12 +75,12 @@ public class PrtTokuchoMidoteiIchiranhyoProcess extends BatchProcessBase<Tokubet
     private BatchReportWriter<TokubetsuChoshuMidoteiIchiranSource> batchReportWriter;
     private ReportSourceWriter<TokubetsuChoshuMidoteiIchiranSource> reportSourceWriter;
 
-    private final RString 定数_厚労省 = new RString("厚労省");
-    private final RString 定数_地共済 = new RString("地共済");
-    private final RString TITLE_処理年度 = new RString("【処理年度】");
-    private final RString TITLE_捕捉月 = new RString("【捕捉月】");
-    private final RString TITLE_特別徴収開始月 = new RString("【開始月】");
-    private final RString TITLE_出力対象 = new RString("【出力対象】");
+    private static final RString 定数_厚労省 = new RString("厚労省");
+    private static final RString 定数_地共済 = new RString("地共済");
+    private static final RString TITLE_処理年度 = new RString("【処理年度】");
+    private static final RString TITLE_捕捉月 = new RString("【捕捉月】");
+    private static final RString TITLE_特別徴収開始月 = new RString("【特別徴収開始月】");
+    private static final RString TITLE_出力対象 = new RString("【出力対象】");
     private static final RString STOP = new RString("、");
     private static final RString 定数_0 = new RString("0");
     private static final RString 定数_1 = new RString("1");
@@ -138,11 +137,11 @@ public class PrtTokuchoMidoteiIchiranhyoProcess extends BatchProcessBase<Tokubet
         eucCsvWriter.close();
         manager.spool(eucFilePath);
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
-                rseId,
+                ReportIdDBB.DBB200018.getReportId().value(),
                 導入団体クラス.getLasdecCode_().value(),
                 導入団体クラス.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
-                ReportIdDBB.DBB200032.getReportName(),
+                ReportIdDBB.DBB200018.getReportName(),
                 reportSourceWriter.pageCount().value() == 0 ? 定数_1 : new RString(reportSourceWriter.pageCount().value()),
                 csvOutFlag,
                 csvファイル名,
@@ -197,7 +196,7 @@ public class PrtTokuchoMidoteiIchiranhyoProcess extends BatchProcessBase<Tokubet
                 entity.getFuichiRiyuCode()
         );
         TokubetsuChoshuMidoteiIchiranReport report = new TokubetsuChoshuMidoteiIchiranReport(
-                導入団体クラス, null, null, target, null);
+                導入団体クラス, null, null, target, parameter.get特別徴収開始月());
         report.writeBy(reportSourceWriter);
     }
 

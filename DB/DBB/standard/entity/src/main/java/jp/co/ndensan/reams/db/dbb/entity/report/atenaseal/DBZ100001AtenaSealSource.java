@@ -9,6 +9,9 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
  *
  * @reamsid_L DBB-5660-040 liuyang
  */
+@SuppressWarnings("PMD.UnusedPrivateField")
+@lombok.Getter
+@lombok.Setter
 public class DBZ100001AtenaSealSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 

@@ -615,6 +615,10 @@ public class ServiceRiyohyoInfoDivHandler {
      */
     public void setパネルにデータ反映() {
         dgServiceRiyohyoBeppyoList_Row row = div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getClickedItem();
+        RString 表示モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
+        if (削除.equals(表示モード)) {
+            row.setRowState(RowState.Deleted);
+        }
         if (合計なし.equals(row.getHdnGokeiGyoFlag())) {
             div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdJigyoshaInput().setNyuryokuShisetsuKodo(row.getHdnJigyoshaCode());
             div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setサービス種類コード(row.getHdnServiceShuruiCode());
@@ -1622,7 +1626,7 @@ public class ServiceRiyohyoInfoDivHandler {
     }
 
     private boolean isFlexibleYearMonthNullOrEmpty(FlexibleYearMonth data) {
-        return data == null || RString.isNullOrEmpty(data.toDateString());
+        return data == null || data.isEmpty();
     }
 
     /**

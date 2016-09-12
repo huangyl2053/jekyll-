@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishogaiIchiran;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishoshaIchiran;
 import jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TokuChoHeijunkaKeisanJuneKekkaIchiranSource;
@@ -26,8 +25,8 @@ import lombok.NonNull;
  */
 public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport extends Report<TokuChoHeijunkaKeisanJuneKekkaIchiranSource> {
 
-    private final List<TokuchoHeijunkaRokuBatchTaishoshaIchiran> 特徴平準化結果対象者一覧表リスト;
-    private final List<TokuchoHeijunkaRokuBatchTaishogaiIchiran> 特徴平準化結果対象外一覧表リスト;
+    private final TokuchoHeijunkaRokuBatchTaishoshaIchiran taishosha;
+    private final TokuchoHeijunkaRokuBatchTaishogaiIchiran taishogai;
     private final YMDHMS 調定日時;
     private final FlexibleYear 賦課年度;
     private final IOutputOrder outputOrder;
@@ -38,19 +37,19 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport extends Report<
     /**
      * コンストラクタです。
      *
-     * @param 特徴平準化結果対象者一覧表リスト List<TokuchoHeijyunkaTaishoshaEntity>
-     * @param 特徴平準化結果対象外一覧表リスト List<TokuchoHeijyunkaTaishogaiEntity>
+     * @param taishosha TokuchoHeijunkaRokuBatchTaishoshaIchiran
+     * @param taishogai TokuchoHeijunkaRokuBatchTaishogaiIchiran
      * @param 調定日時 YMDHMS
      * @param 賦課年度 FlexibleYear
      * @param association Association
      * @param outputOrder IOutputOrder
      */
     public TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport(
-            List<TokuchoHeijunkaRokuBatchTaishoshaIchiran> 特徴平準化結果対象者一覧表リスト,
-            List<TokuchoHeijunkaRokuBatchTaishogaiIchiran> 特徴平準化結果対象外一覧表リスト,
+            TokuchoHeijunkaRokuBatchTaishoshaIchiran taishosha,
+            TokuchoHeijunkaRokuBatchTaishogaiIchiran taishogai,
             YMDHMS 調定日時, FlexibleYear 賦課年度, Association association, IOutputOrder outputOrder) {
-        this.特徴平準化結果対象者一覧表リスト = 特徴平準化結果対象者一覧表リスト;
-        this.特徴平準化結果対象外一覧表リスト = 特徴平準化結果対象外一覧表リスト;
+        this.taishosha = taishosha;
+        this.taishogai = taishogai;
         this.調定日時 = 調定日時;
         this.賦課年度 = 賦課年度;
         this.association = association;
@@ -60,8 +59,8 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport extends Report<
     /**
      * createFormメソッド
      *
-     * @param 特徴平準化結果対象者一覧表リスト List<TokuchoHeijyunkaTaishoshaEntity>
-     * @param 特徴平準化結果対象外一覧表リスト List<TokuchoHeijyunkaTaishogaiEntity>
+     * @param taishosha TokuchoHeijunkaRokuBatchTaishoshaIchiran
+     * @param taishogai TokuchoHeijunkaRokuBatchTaishogaiIchiran
      * @param 調定日時 YMDHMS
      * @param 賦課年度 FlexibleYear
      * @param association Association
@@ -69,33 +68,32 @@ public class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport extends Report<
      * @return TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport
      */
     public static TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport createForm(
-            @NonNull List<TokuchoHeijunkaRokuBatchTaishoshaIchiran> 特徴平準化結果対象者一覧表リスト,
-            @NonNull List<TokuchoHeijunkaRokuBatchTaishogaiIchiran> 特徴平準化結果対象外一覧表リスト,
+            @NonNull TokuchoHeijunkaRokuBatchTaishoshaIchiran taishosha,
+            @NonNull TokuchoHeijunkaRokuBatchTaishogaiIchiran taishogai,
             YMDHMS 調定日時, FlexibleYear 賦課年度, Association association, IOutputOrder outputOrder) {
-        return new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport(特徴平準化結果対象者一覧表リスト,
-                特徴平準化結果対象外一覧表リスト, 調定日時, 賦課年度, association, outputOrder);
+        return new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport(taishosha,
+                taishogai, 調定日時, 賦課年度, association, outputOrder);
     }
 
     @Override
     public void writeBy(ReportSourceWriter<TokuChoHeijunkaKeisanJuneKekkaIchiranSource> writer) {
         RString title = タイトル_特徴平準化対象外一覧表;
-        if (特徴平準化結果対象外一覧表リスト.isEmpty()) {
+        if (taishogai == null) {
             title = タイトル_特徴平準化対象者一覧表;
         }
         ITokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranEditor headerEditor
                 = new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranHeaderEditor(調定日時, 賦課年度, title, outputOrder);
-        for (TokuchoHeijunkaRokuBatchTaishoshaIchiran 対象者 : 特徴平準化結果対象者一覧表リスト) {
-            ITokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranEditor bodyEditor
-                    = new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor(対象者,
+        if (taishosha != null) {
+            ITokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranEditor taishoshaBodyEditor
+                    = new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor(taishosha,
                             null, association);
-            ITokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBuilder builder = new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBuilder(
-                    headerEditor, bodyEditor);
-            writer.writeLine(builder);
-        }
-        for (TokuchoHeijunkaRokuBatchTaishogaiIchiran 対象外 : 特徴平準化結果対象外一覧表リスト) {
+            ITokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBuilder taishoshaBuilder = new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBuilder(
+                    headerEditor, taishoshaBodyEditor);
+            writer.writeLine(taishoshaBuilder);
+        } else {
             ITokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranEditor bodyEditor
                     = new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor(null,
-                            対象外, association);
+                            taishogai, association);
             ITokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBuilder builder = new TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBuilder(
                     headerEditor, bodyEditor);
             writer.writeLine(builder);

@@ -48,7 +48,9 @@ public class ShoriKekkaKakuninListProcess extends BatchProcessBase<DbWT1801Shori
     private static final RString 時 = new RString("時");
     private static final RString 分 = new RString("分");
     private static final RString 秒 = new RString("秒");
-    private static final RString HALFMONTH = new RString("#0");
+    private static final RString EMPTY = new RString("　");
+    private static final RString 作成 = new RString("作成");
+    private static final RString HALFMONTH = new RString("00");
     private int count = 1;
     private RString eucFilePath;
     private FileSpoolManager manager;
@@ -142,7 +144,8 @@ public class ShoriKekkaKakuninListProcess extends BatchProcessBase<DbWT1801Shori
                             .fillType(FillType.BLANK).getMonthDay())
                     .concat(new RString(new Decimal(dateTime.getHour()).toString(HALFMONTH.toString()))).concat(時)
                     .concat(new RString(new Decimal(dateTime.getMinute()).toString(HALFMONTH.toString()))).concat(分)
-                    .concat(new RString(new Decimal(dateTime.getSecond()).toString(HALFMONTH.toString()))).concat(秒);
+                    .concat(new RString(new Decimal(dateTime.getSecond()).toString(HALFMONTH.toString()))).concat(秒)
+                    .concat(EMPTY).concat(作成);
         }
         return wareki;
     }
