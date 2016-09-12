@@ -213,15 +213,10 @@ public class FutanGendogakuNinteiShinseishoHakko extends BatchProcessBase<FutanG
 
     @Override
     protected void afterExecute() {
-        if (is旧措置者) {
-            バッチ出力条件リストの出力(is旧措置者);
-        }
-        if (isNot旧措置者) {
-            バッチ出力条件リストの出力(isNot旧措置者);
-        }
+        バッチ出力条件リストの出力();
     }
 
-    private void バッチ出力条件リストの出力(boolean is旧措置者) {
+    private void バッチ出力条件リストの出力() {
         RStringBuilder builder = new RStringBuilder();
         builder.append(RString.HALF_SPACE);
         builder.append(JobContextHolder.getJobId());
@@ -238,11 +233,13 @@ public class FutanGendogakuNinteiShinseishoHakko extends BatchProcessBase<FutanG
         builder.append(SHUTSURYOKUJUN);
         builder.append(出力順);
         出力条件.add(builder.toRString());
-        ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
-                processParamter.get帳票ID().value(), 導入団体コード, 市町村名, ジョブ番号,
-                get帳票名(is旧措置者), 出力ページ数, csv出力有無, csvファイル名, 出力条件);
-        IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(item);
-        printer.print();
+        for (RString 帳票名 : get帳票名()) {
+            ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
+                    processParamter.get帳票ID().value(), 導入団体コード, 市町村名, ジョブ番号,
+                    帳票名, 出力ページ数, csv出力有無, csvファイル名, 出力条件);
+            IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(item);
+            printer.print();
+        }
     }
 
     private RString get被保険者生年月日(IKojin kojin) {
@@ -269,12 +266,11 @@ public class FutanGendogakuNinteiShinseishoHakko extends BatchProcessBase<FutanG
                 .buildSource().ninshoshaYakushokuMei;
     }
 
-    private RString get帳票名(boolean is旧措置者) {
-        if (is旧措置者) {
-            return ReportIdDBD.DBD800004.getReportName();
-        } else {
-            return ReportIdDBD.DBD800001.getReportName();
-        }
+    private List<RString> get帳票名() {
+        List<RString> 帳票名List = new ArrayList<>();
+        帳票名List.add(ReportIdDBD.DBD800001.getReportName());
+        帳票名List.add(ReportIdDBD.DBD800004.getReportName());
+        return 帳票名List;
     }
 
     private RString get保険者番号(FutanGendogakuNinteiShinseishoHakkoEntity entity) {
