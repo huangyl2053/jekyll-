@@ -28,7 +28,6 @@ import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -152,7 +151,11 @@ public class PostMainPanelHandler {
                     div.getTxtZenkaiTime().setValue(new RTime(new RString(resultList.get(0).get(NUM_2).
                             toString().substring(NUM_8, NUM_13))));
                 } else {
-                    get最大値の格納処理日時(市町村識別ID);
+                    List<List> resultList = 市町村識別ID処理(市町村識別ID);
+                    一覧エリア(resultList);
+                    RString 格納処理日時 = new RString(resultList.get(0).get(NUM_2).toString());
+                    div.getTxtZenkaiYMD().setValue(new RDate(格納処理日時.toString()));
+                    div.getTxtZenkaiTime().setValue(new RTime(格納処理日時.substring(NUM_8, NUM_13)));
                 }
                 場合 = 広域の場合;
             }
@@ -279,23 +282,6 @@ public class PostMainPanelHandler {
             }
         }
         return resultList;
-    }
-
-    private void get最大値の格納処理日時(RString 市町村識別ID) {
-        List<List> resultList = 市町村識別ID処理(市町村識別ID);
-        List<dgShichoson_Row> listDataSource = 一覧エリア(resultList);
-        RString 最大値の格納処理日時 = new RString(resultList.get(0).get(NUM_2).toString());
-        int i = 0;
-        for (List row : resultList) {
-            if (0 < new RString(row.get(NUM_2).toString()).compareTo(最大値の格納処理日時)) {
-                listDataSource.get(i).setSelectButtonState(DataGridButtonState.Disabled);
-                i = i + 1;
-                最大値の格納処理日時 = new RString(row.get(NUM_2).toString());
-            }
-        }
-        //TODO div.getDgShichoson().setSelectedItems(listDataSource);
-        div.getTxtZenkaiYMD().setValue(new RDate(最大値の格納処理日時.toString()));
-        div.getTxtZenkaiTime().setValue(new RTime(最大値の格納処理日時.substring(NUM_8, NUM_13)));
     }
 
     private Map<String, Object> createParameter(boolean 国保情報取り込み, boolean 後期高齢者情報取り込み) {
