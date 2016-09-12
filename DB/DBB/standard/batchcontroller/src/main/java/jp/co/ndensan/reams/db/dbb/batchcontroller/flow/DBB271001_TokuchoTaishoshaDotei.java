@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.dbb271001;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb271001.CeateTkMidoteiJohoProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb271001.CreateChoshuHohoJohoProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb271001.CreateGyomuHokenshaJohoGetsujiProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb271001.CreateGyomuHokenshaJohoNenjiProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb271001.GetDoteiJohoProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb271001.GetMiDoteiJohoProcess;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchotaishoshadotei.TokuchoTaishoshaDoteiIkatsuBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB271001.DBB271001_TokuchoTaishoshaDoteiParameter;
 import jp.co.ndensan.reams.ue.uex.definition.batchprm.tokuchodotei.UEXT02010_TokuchoDoteiParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBB-1850-040 zhangrui
  */
-public class TokuchoTaishoshaDoteiIkatsuFlow extends BatchFlowBase<TokuchoTaishoshaDoteiIkatsuBatchParameter> {
+public class DBB271001_TokuchoTaishoshaDotei extends BatchFlowBase<DBB271001_TokuchoTaishoshaDoteiParameter> {
 
     private static final RString 処理区分_月次 = new RString("1");
     private static final RString 処理区分_年次 = new RString("2");
@@ -45,7 +45,7 @@ public class TokuchoTaishoshaDoteiIkatsuFlow extends BatchFlowBase<TokuchoTaisho
         } else if (処理区分_年次.equals(getParameter().get処理区分())) {
             executeStep(業務被保険者情報作成_年次);
         }
-        executeStep(バッチ特徴同定を呼び出し);
+//        executeStep(バッチ特徴同定を呼び出し);
         executeStep(同定情報を取得する);
         executeStep(未同定情報を取得する);
     }
@@ -107,7 +107,7 @@ public class TokuchoTaishoshaDoteiIkatsuFlow extends BatchFlowBase<TokuchoTaisho
      */
     @Step(同定情報を取得する)
     protected IBatchFlowCommand callGetDoteiJohoProcess() {
-        return loopBatch(GetDoteiJohoProcess.class).
+        return loopBatch(CreateChoshuHohoJohoProcess.class).
                 arguments(getParameter().toGetDoteiJohoProcessParameter()).define();
     }
 
@@ -118,7 +118,7 @@ public class TokuchoTaishoshaDoteiIkatsuFlow extends BatchFlowBase<TokuchoTaisho
      */
     @Step(未同定情報を取得する)
     protected IBatchFlowCommand callGetMiDoteiJohoProcess() {
-        return loopBatch(GetMiDoteiJohoProcess.class).
+        return loopBatch(CeateTkMidoteiJohoProcess.class).
                 arguments(getParameter().toGetMiDoteiJohoProcessParameter()).define();
     }
 
