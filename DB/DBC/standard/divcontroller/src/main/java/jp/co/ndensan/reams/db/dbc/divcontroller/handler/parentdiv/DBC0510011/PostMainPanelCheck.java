@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0510011;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
@@ -73,9 +72,8 @@ public class PostMainPanelCheck {
     /**
      * validateCheckチェック
      *
-     * @throws java.io.IOException
      */
-    public void validateCheck() throws IOException {
+    public void validateCheck() {
         Code 導入形態コード = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務).get導入形態コード();
         List<UzT0885SharedFileEntryEntity> 国保情報List;
         RString 国保ＩＦ種類 = DbBusinessConfig.get(ConfigNameDBC.国保_後期高齢ＩＦ_国保ＩＦ種類, RDate.getNowDate(),
@@ -85,38 +83,17 @@ public class PostMainPanelCheck {
         if (ResponseHolder.getState().equals(国保)) {
             if (導入形態コード.toString().equals(NUM_120.toString())) {
                 国保情報List = SharedFile.searchSharedFile(単一国保情報);
-                BufferedReader bufferedReader = null;
                 単一messeges(国保情報List);
-                if (国保ＩＦ種類.equals(NUM_1)) {
-                    bufferedReader = 長さ判定(単一国保情報, NUM_91);
-                }
-                if (国保ＩＦ種類.equals(NUM_2)) {
-                    bufferedReader = 長さ判定(単一国保情報, NUM_342);
-                }
-                if (!bufferedReader.readLine().substring(0, NUM_5).equals(div.getHdnShichosonCD().getValue())) {
-                    messeges();
-                }
+                if種類(国保ＩＦ種類, 導入形態コード, 単一国保情報, null);
             }
 
             if (導入形態コード.toString().equals(NUM_111.toString())
                     || 導入形態コード.toString().equals(NUM_112.toString())) {
-                BufferedReader bufferedReader = null;
                 for (dgShichoson_Row row : div.getDgShichoson().getSelectedItems()) {
                     国保情報List = SharedFile.searchSharedFile(
                             国保情報.replace(定値_処理枝番, NUM_00.concat(row.getShichosonShikibetuID())));
                     単一messeges(国保情報List);
-                    if (国保ＩＦ種類.equals(NUM_1)) {
-                        bufferedReader = 長さ判定(国保情報.replace(定値_処理枝番, NUM_00.concat(row.
-                                getShichosonShikibetuID())), NUM_91);
-                    }
-                    if (国保ＩＦ種類.equals(NUM_2)) {
-                        bufferedReader = 長さ判定(国保情報.replace(定値_処理枝番, NUM_00.concat(row.
-                                getShichosonShikibetuID())), NUM_342);
-                    }
-                    if (!bufferedReader.readLine().substring(NUM_38, NUM_43).equals(row.getShichosonMei().
-                            substring(0, NUM_5))) {
-                        messeges();
-                    }
+                    if種類(国保ＩＦ種類, 導入形態コード, 国保情報, row);
                 }
             }
         }
@@ -125,38 +102,61 @@ public class PostMainPanelCheck {
             if (導入形態コード.toString().equals(NUM_120.toString())) {
                 List<UzT0885SharedFileEntryEntity> 後期情報List = SharedFile.searchSharedFile(後期情報);
                 単一messeges(後期情報List);
-                BufferedReader bufferedReader = null;
-                if (後期ＩＦ種類.equals(NUM_1)) {
-                    bufferedReader = 長さ判定(広域後期情報, NUM_63);
-                }
-                if (後期ＩＦ種類.equals(NUM_2)) {
-                    bufferedReader = 長さ判定(広域後期情報, NUM_493);
-                }
-                if (!bufferedReader.readLine().substring(0, NUM_5).equals(div.getHdnShichosonCD().getValue())) {
-                    messeges();
-                }
+                if種類(後期ＩＦ種類, 導入形態コード, 広域後期情報, null);
             }
             if (導入形態コード.toString().equals(NUM_111.toString())
                     || 導入形態コード.toString().equals(NUM_112.toString())) {
-                BufferedReader bufferedReader = null;
                 for (dgShichoson_Row row : div.getDgShichoson().getSelectedItems()) {
                     List<UzT0885SharedFileEntryEntity> 後期情報List = SharedFile.searchSharedFile(
                             後期情報.replace(定値_処理枝番, NUM_00.concat(row.getShichosonShikibetuID())));
                     単一messeges(後期情報List);
-                    if (後期ＩＦ種類.equals(NUM_1)) {
-                        bufferedReader = 長さ判定(国保情報.replace(定値_処理枝番, NUM_00.concat(row.
-                                getShichosonShikibetuID())), NUM_63);
-                    }
-                    if (後期ＩＦ種類.equals(NUM_2)) {
-                        bufferedReader = 長さ判定(国保情報.replace(定値_処理枝番, NUM_00.concat(row.
-                                getShichosonShikibetuID())), NUM_493);
-                    }
-                    if (!bufferedReader.readLine().substring(NUM_322, NUM_327).equals(row.getShichosonMei().
-                            substring(0, NUM_5))) {
-                        messeges();
-                    }
+                    if種類(後期ＩＦ種類, 導入形態コード, 後期情報, row);
+
                 }
             }
+        }
+    }
+
+    private void if種類(RString 種類, Code 導入形態コード, RString fileName, dgShichoson_Row row) {
+        if (種類.equals(NUM_1)) {
+            getNum1長さ判定(fileName, 導入形態コード, row);
+        }
+        if (種類.equals(NUM_2)) {
+            getNum2長さ判定(fileName, 導入形態コード, row);
+        }
+    }
+
+    private void getNum1長さ判定(RString fileName, Code 導入形態コード, dgShichoson_Row row) {
+        if (fileName.equals(単一国保情報)) {
+            長さ判定(単一国保情報, NUM_91, 0, NUM_5, 導入形態コード, null);
+        }
+        if (fileName.equals(国保情報)) {
+            長さ判定(国保情報.replace(定値_処理枝番, NUM_00.concat(row.
+                    getShichosonShikibetuID())), NUM_91, NUM_38, NUM_43, 導入形態コード, row);
+        }
+        if (fileName.equals(広域後期情報)) {
+            長さ判定(広域後期情報, NUM_63, 0, NUM_5, 導入形態コード, null);
+        }
+        if (fileName.equals(後期情報)) {
+            長さ判定(後期情報.replace(定値_処理枝番, NUM_00.concat(row.
+                    getShichosonShikibetuID())), NUM_63, NUM_322, NUM_327, 導入形態コード, row);
+        }
+    }
+
+    private void getNum2長さ判定(RString fileName, Code 導入形態コード, dgShichoson_Row row) {
+        if (fileName.equals(単一国保情報)) {
+            長さ判定(単一国保情報, NUM_342, 0, NUM_5, 導入形態コード, null);
+        }
+        if (fileName.equals(国保情報)) {
+            長さ判定(国保情報.replace(定値_処理枝番, NUM_00.concat(row.
+                    getShichosonShikibetuID())), NUM_342, NUM_38, NUM_43, 導入形態コード, row);
+        }
+        if (fileName.equals(広域後期情報)) {
+            長さ判定(広域後期情報, NUM_493, 0, NUM_5, 導入形態コード, null);
+        }
+        if (fileName.equals(後期情報)) {
+            長さ判定(後期情報.replace(定値_処理枝番, NUM_00.concat(row.
+                    getShichosonShikibetuID())), NUM_493, NUM_322, NUM_327, 導入形態コード, row);
         }
     }
 
@@ -165,29 +165,43 @@ public class PostMainPanelCheck {
      *
      * @param fileName RString
      * @param num int
-     * @return bufferedReader BufferedReader
-     * @throws java.io.FileNotFoundException
+     * @param from int
+     * @param to int
+     * @param 導入形態コード int
+     * @param row int
      */
-    public BufferedReader 長さ判定(RString fileName, int num) throws FileNotFoundException, IOException {
+    public void 長さ判定(RString fileName, int num, int from, int to, Code 導入形態コード, dgShichoson_Row row) {
+        try {
+            File file = new File(SharedFile.getBasePath().concat(IDENTIFICATION.toString()).concat(fileName.toString()));
+            InputStreamReader read = new InputStreamReader(new FileInputStream(file));
+            BufferedReader bufferedReader = new BufferedReader(read);
+            if (bufferedReader.readLine().length() != num) {
+                throw new ApplicationException(UrErrorMessages.存在しない.getMessage()
+                        .replace(対象のファイル.toString()).evaluate());
+            }
+            if (導入形態コード.toString().equals(NUM_120.toString())) {
+                if (!bufferedReader.readLine().substring(from, to).equals(div.getHdnShichosonCD().getValue())) {
+                    messeges();
+                }
+            } else {
+                if (!bufferedReader.readLine().substring(from, to).equals(row.getShichosonMei().
+                        substring(0, NUM_5))) {
+                    messeges();
+                }
+            }
+        } catch (IOException | ApplicationException e) {
+            e.getMessage();
 
-        File file = new File(SharedFile.getBasePath().concat(IDENTIFICATION.toString()).concat(fileName.toString()));
-        InputStreamReader read = new InputStreamReader(new FileInputStream(file));
-        BufferedReader bufferedReader = new BufferedReader(read);
-        if (bufferedReader.readLine().length() != num) {
-            throw new ApplicationException(UrErrorMessages.存在しない.getMessage()
-                    .replace(対象のファイル.toString()).evaluate());
         }
-        return bufferedReader;
-
     }
 
     /**
      * ファイルは無検査
      *
-     * @param ListResult List<UzT0885SharedFileEntryEntity>
+     * @param listResult List<UzT0885SharedFileEntryEntity>
      */
-    public void 単一messeges(List<UzT0885SharedFileEntryEntity> ListResult) {
-        if (ListResult.isEmpty() || ListResult == null) {
+    public void 単一messeges(List<UzT0885SharedFileEntryEntity> listResult) {
+        if (listResult.isEmpty() || listResult == null) {
             throw new ApplicationException(UrErrorMessages.存在しない.getMessage()
                     .replace(対象のファイル.toString()).evaluate());
         }
