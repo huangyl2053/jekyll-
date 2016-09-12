@@ -2,7 +2,6 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.fukajohotoroku;
 
 import jp.co.ndensan.reams.db.dbb.business.core.fukajohotoroku.FukaJohoInsertResult;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.DbT2002FukaJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.FukaJohoTorokuRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
@@ -48,7 +47,7 @@ public class FukaJohoInsertProcess extends BatchProcessBase<FukaJohoTorokuRelate
 
     @Override
     protected void process(FukaJohoTorokuRelateEntity entity) {
-        insert介護賦課(entity.get賦課情報一時Entity());
+        insert介護賦課(entity);
         insert介護期別(entity);
 
     }
@@ -73,7 +72,7 @@ public class FukaJohoInsertProcess extends BatchProcessBase<FukaJohoTorokuRelate
         return 徴収方法;
     }
 
-    private void insert介護賦課(DbT2002FukaJohoTempTableEntity entity) {
+    private void insert介護賦課(FukaJohoTorokuRelateEntity entity) {
         if (fukaNendo.equals(entity.getFukaNendo()) && tsuchishoNo.equals(entity.getTsuchishoNo())
                 && choteiNendo.equals(entity.getChoteiNendo())) {
             return;
