@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 /**
  * 賦課の情報テーブルパラメータ
  *
- * @reamsid_L DBB-0810-020 yebangqiang
+ * @reamsid_L DBB-0810-010 yebangqiang
  */
 @lombok.Getter
 @lombok.Setter

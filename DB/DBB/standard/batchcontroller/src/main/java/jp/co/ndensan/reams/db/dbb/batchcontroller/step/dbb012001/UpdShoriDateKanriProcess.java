@@ -6,9 +6,11 @@
 package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012001;
 
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt35001.TokuchoHeinjunka6GatsuProcessParameter;
-import jp.co.ndensan.reams.db.dbb.service.core.kaigofukatokuchoheijunka6batch.KaigoFukaTokuchoHeijunka6Batch;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -16,17 +18,17 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 「処理日付管理テーブル更新」処理クラスです。
  *
- * @reamsid_L DBB-0810-010 yuanzhenxia
+ * @reamsid_L DBB-0810-010 yebangqiang
  */
-public class SystemTimeUpdateProcess extends SimpleBatchProcessBase {
+public class UpdShoriDateKanriProcess extends SimpleBatchProcessBase {
 
-    private KaigoFukaTokuchoHeijunka6Batch business;
     private TokuchoHeinjunka6GatsuProcessParameter processParameter;
     private final RString 枝番 = new RString("0001");
+    private ShoriDateKanriManager 処理日付管理Mgr;
 
     @Override
     protected void beforeExecute() {
-        business = KaigoFukaTokuchoHeijunka6Batch.createInstance();
+        処理日付管理Mgr = ShoriDateKanriManager.createInstance();
     }
 
     @Override
@@ -36,7 +38,16 @@ public class SystemTimeUpdateProcess extends SimpleBatchProcessBase {
         RString 年度内連番 = 枝番;
         FlexibleYear 年度 = processParameter.get調定年度();
         YMDHMS システム日時 = processParameter.get調定日時();
-        business.update処理日付管理(処理名, 処理枝番, 年度, 年度内連番, システム日時);
+        update処理日付管理(処理名, 処理枝番, 年度, 年度内連番, システム日時);
     }
 
+    private void update処理日付管理(RString 処理名, RString 処理枝番, FlexibleYear 年度, RString 年度内連番, YMDHMS システム日時) {
+        ShoriDateKanri entity = 処理日付管理Mgr.get処理日付管理マスタ(SubGyomuCode.DBB介護賦課,
+                処理名, 処理枝番, 年度, 年度内連番);
+        if (entity != null) {
+            entity = entity.createBuilderForEdit().set基準日時(システム日時).build();
+            entity = entity.modifiedModel();
+            処理日付管理Mgr.save処理日付管理マスタ(entity);
+        }
+    }
 }

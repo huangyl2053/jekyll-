@@ -9,6 +9,7 @@ import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJohoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 対象者データTempEntity
@@ -23,5 +24,11 @@ public final class TokuchoHeijunkaRokuBatchTaishoshaEntity implements Cloneable,
     private RString 特別徴収義務者コード;
     private DbT2015KeisangoJohoEntity 計算後情報;
     private UaFt200FindShikibetsuTaishoEntity 宛名;
+    private Decimal tkKibetsuGaku01;
+    private Decimal tkKibetsuGaku02;
+    private Decimal tkKibetsuGaku03;
+    private Decimal tkKibetsuGaku04;
+    private Decimal tkKibetsuGaku05;
+    private Decimal tkKibetsuGaku06;
 
 }
