@@ -19,22 +19,4 @@
         A.rowNo = 1
         AND A."hihokenshaNo" = #{被保険者番号}
     </select>
-
-    <!-- 受給の取得 -->
-    <select  resultOrdered="true" id="get受給" 
-             resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity" 
-             parameterType="java.util.Map" 
-             fetchSize="500">
-        SELECT 
-            A.*
-        FROM rgdb."DbT4001JukyushaDaicho" AS A
-        INNER JOIN rgdb."DbT5002NinteiKekkaJoho" AS B
-            ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
-            AND A."rirekiNo" = B."rirekiNo"
-        WHERE
-        A."hihokenshaNo" = #{被保険者番号}
-        AND ((B."nijiHanteiNinteiYukoKaishiYMD" <![CDATA[<=]]> #{世帯基準日} 
-            AND #{世帯基準日} <![CDATA[<]]> B."nijiHanteiNinteiYukoShuryoYMD")
-            OR A."rirekiNo" = '0000')
-    </select>
 </mapper>

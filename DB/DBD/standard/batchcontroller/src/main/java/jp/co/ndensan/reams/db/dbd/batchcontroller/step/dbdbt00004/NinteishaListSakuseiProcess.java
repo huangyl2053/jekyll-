@@ -6,11 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbdbt00004;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shafukukeigen.ShakaifukuRiyoshaFutanKeigen;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200004.ShakaiFukushiHojinKeigenReport;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.HihokenshaKeizaiJokyo;
@@ -26,6 +22,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd200004.ShakaiFukushiHojinK
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd200004.ShakaiFukushiHojinKeigenGaitoshaIchiranEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd200004.ShakaiFukushiHojinKeigenNoRennbannCsvEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200004.ShakaiFukushiHojinReportSourse;
+import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
 import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
@@ -37,10 +34,9 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
@@ -96,6 +92,7 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
     private RString eucFilePath;
     private RString filePath;
     private IOutputOrder outputOrder;
+    private IOutputOrder breakoutputOrder;
     private int 連番 = 0;
     private boolean 日付スラッシュ編集_flag = false;
     private boolean 連番_flag = false;
@@ -139,10 +136,7 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
     private static final int NO_2 = 2;
     private static final int NO_3 = 3;
     private static final int NO_4 = 4;
-    private static RStringBuilder orderByClause;
-    private static RString space;
-    private static RString comma;
-    private static int commaCount;
+    private static final int NUM5 = 5;
 
     @BatchWriter
     private CsvWriter<ShakaiFukushiHojinKeigenCsvEntity> eucCsvWriter;
@@ -168,14 +162,20 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
                 タイトル_flag = true;
             }
         }
-        if (processParameter.get改頁出力順ID() != 0) {
-            IChohyoShutsuryokujunFinder chohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
-            long 帳票出力順ID = processParameter.get改頁出力順ID();
-            outputOrder = chohyoShutsuryokujunFinder.get出力順(
-                    SubGyomuCode.DBD介護受給, ReportIdDBD.DBD200004.getReportId(), 帳票出力順ID);
-            if (null != outputOrder) {
-                orderBy = createOrderSqlStr(NinteishaListSakuseiOrderKey.class, outputOrder);
+
+        if (processParameter.get出力順ID() != 0) {
+            IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
+            long 帳票出力順ID = processParameter.get出力順ID();
+            outputOrder = finder.get出力順(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD200004.getReportId(), 帳票出力順ID);
+            if (outputOrder != null) {
+                orderBy = ChohyoUtil.get出力順OrderBy(MyBatisOrderByClauseCreator.
+                        create(NinteishaListSakuseiOrderKey.class, outputOrder), NUM5);
             }
+        }
+        if (processParameter.get改頁出力順ID() != 0) {
+            IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
+            long 帳票改頁出力順ID = processParameter.get改頁出力順ID();
+            breakoutputOrder = finder.get出力順(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD200004.getReportId(), 帳票改頁出力順ID);
         }
 
     }
@@ -312,7 +312,7 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
         }
 
         List pageBreakKeys = new ArrayList<>();
-        set改頁Key(outputOrder, pageBreakKeys);
+        set改頁Key(breakoutputOrder, pageBreakKeys);
 
         if (!pageBreakKeys.isEmpty()) {
             batchReportWriterIchiran = BatchReportFactory.
@@ -952,26 +952,6 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
             出力条件.add(builder.toRString());
             builder.delete(NO_0, builder.length());
         }
-//        builder.append(対象年度);
-//        if (null != processParameter.get対象年度の開始年月日()) {
-//            builder.append(new RString(processParameter.get対象年度の開始年月日().toString()));
-//        }
-//        builder.append(カラ);
-//        if (null != processParameter.get対象年度の終了年月日()) {
-//            builder.append(new RString(processParameter.get対象年度の終了年月日().toString()));
-//        }
-//        出力条件.add(builder.toRString());
-//        builder.delete(NO_0, builder.length());
-//        builder.append(課税判定等基準日);
-//        builder.append(new RString(processParameter.get課税判定等基準日().toString()));
-//        出力条件.add(builder.toRString());
-//        builder.delete(NO_0, builder.length());
-//        if (processParameter.get対象期間指定().equals(new RString("2"))) {
-//            builder.append(基準日);
-//            builder.append(new RString(processParameter.get基準日().toString()));
-//            出力条件.add(builder.toRString());
-//            builder.delete(NO_0, builder.length());
-//        }
         builder.append(所得年度);
         builder.append(new RString(processParameter.get所得年度().toString()));
         出力条件.add(builder.toRString());
@@ -984,55 +964,6 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<ShakaiFukushiH
         builder.append(SetaiHyoji.toValue(processParameter.get世帯表示()));
         出力条件.add(builder.toRString());
         builder.delete(NO_0, builder.length());
-    }
-
-    private static <T extends Enum<T> & IReportItems> RString createOrderSqlStr(Class<T> clazz, IOutputOrder outputOrder) {
-        ReportItemsMap reportItems = new ReportItemsMap(Arrays.<IReportItems>asList(clazz.getEnumConstants()));
-        orderByClause = new RStringBuilder("order by");
-        space = new RString(" ");
-        comma = new RString(",");
-        commaCount = 0;
-        if (outputOrder.get設定項目リスト().isEmpty()) {
-            return RString.EMPTY;
-        }
-        for (ISetSortItem setSortItem : outputOrder.get設定項目リスト()) {
-
-            if (commaCount != 0) {
-                orderByClause = orderByClause.append(space).append(comma).append(space)
-                        .append(reportItems.getMyBatis項目名(setSortItem.get項目ID())).append(space).append(setSortItem.get昇降順().getOrder());
-
-            } else {
-                setSortItem.get項目名();
-                setSortItem.getDB項目名();
-                setSortItem.get帳票フィールド名();
-                orderByClause = orderByClause.append(space)
-                        .append(reportItems.getMyBatis項目名(setSortItem.get項目ID())).append(space).append(setSortItem.get昇降順().getOrder());
-            }
-            commaCount++;
-        }
-
-        return orderByClause.toRString();
-    }
-
-    private static class ReportItemsMap {
-
-        private Map<RString, IReportItems> map;
-
-        public ReportItemsMap(List<IReportItems> items) {
-            this.map = new HashMap<>();
-            for (IReportItems item : items) {
-                this.map.put(item.get項目ID(), item);
-            }
-            this.map = Collections.unmodifiableMap(map);
-        }
-
-        RString getMyBatis項目名(RString 項目ID) throws IllegalArgumentException {
-            if (this.map.containsKey(項目ID)) {
-                return this.map.get(項目ID).getMyBatis項目名();
-            } else {
-                throw new IllegalArgumentException(UrErrorMessages.データが存在しない.toString());
-            }
-        }
     }
 
     private void set改頁Key(IOutputOrder outputOrder, List pageBreakKeys) {

@@ -25,6 +25,7 @@ public class KogakuGassanRirekiNoKakuninProcess extends BatchProcessBase<DbWTKog
     private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "kogakugassan.IKogakuGassanShikyugakuKeisanKekkaInMapper.select高額合算支給額計算結果");
     private static final RString 高額合算支給額計算結果_TABLE_NAME = new RString("DbWT3861KogakuGassanShikyugakuKeisanKekka");
+    private static final RString データ区分 = new RString("1");
     private static final RString データ区分_保険者作成 = new RString("2");
     private static final RString データ区分_国保連作成 = new RString("3");
     private static final RString 再送フラグ_再送要 = new RString("1");
@@ -92,6 +93,8 @@ public class KogakuGassanRirekiNoKakuninProcess extends BatchProcessBase<DbWTKog
             dbWT3861entity.setShikyugakuGokei(entity.getShikyugakuGokei());
             if (データ区分_保険者作成.equals(entity.getDataKubun())) {
                 dbWT3861entity.setDataKubun(データ区分_国保連作成);
+            } else {
+                dbWT3861entity.setDataKubun(データ区分);
             }
             if (データ区分_保険者作成.equals(entity.getDataKubun())
                     && (再送フラグ_再送要.equals(entity.getSaisoFG()) || entity.getSofuYM() == null || entity.getSofuYM().isEmpty())) {
