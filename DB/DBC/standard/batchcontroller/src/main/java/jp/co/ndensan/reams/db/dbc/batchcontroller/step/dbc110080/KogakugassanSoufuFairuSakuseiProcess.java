@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.kogakugassan.KogakugassanSoufuFairu
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3071KogakuGassanJikoFutanGakuMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassan.SyuturyokuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangaku.DbWT37K1KogakuGassanJikoFutanGakuTempEntity;
+import jp.co.ndensan.reams.db.dbc.service.core.kogakugassanhoseisumijikofutangaku.KogakugassanFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -88,15 +89,16 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
     private KogakugassanProcessParameter processParameter;
     private int 総出力件数;
     private int レコード番号;
-    private BatchDbReader reader;
     private Encode 文字コード;
     private RString eucFilePath;
     private RString 出力ファイル名;
+    private int レコード件数;
     @BatchWriter
     private CsvWriter eucCsvWriter;
 
     @Override
     protected void initialize() {
+        レコード件数 = KogakugassanFinder.createInstance().get出力対象データ().size();
         outputCount = new OutputParameter<>();
         outputEntry = new OutputParameter<>();
         entryList = new ArrayList<>();
@@ -113,8 +115,7 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
 
     @Override
     protected IBatchReader createReader() {
-        reader = new BatchDbReader(READ_DATA_ID);
-        return reader;
+        return new BatchDbReader(READ_DATA_ID);
     }
 
     @Override
@@ -567,7 +568,7 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         controlEntity.setレコード種別(RecordShubetsu.コントロールレコード.getコード());
         controlEntity.setレコード番号_連番(new RString(レコード番号));
         controlEntity.setボリュ_ム通番(RSTRING_0);
-        controlEntity.setレコード件数(new RString(reader.getCount()));
+        controlEntity.setレコード件数(new RString(レコード件数));
         controlEntity.setデータ種別(ConfigKeysKokuhorenSofu.高額合算補正済自己負担額情報.getコード());
         controlEntity.set福祉事務所特定番号(RSTRING_0);
         controlEntity.set保険者番号(processParameter.get保険者情報_保険者番号());
