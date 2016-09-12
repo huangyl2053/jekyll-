@@ -62,6 +62,7 @@ public class GassanShikyuFushikyuKetteishaIchiranBodyEditor
     @Override
     public GassanShikyuFushikyuKetteishaIchiranSource edit(
             GassanShikyuFushikyuKetteishaIchiranSource source) {
+        source.listCerter_2 = RString.EMPTY;
         if (null == entity || entity.get帳票通番() == 0) {
             if (!集計Flag) {
                 editEmpty(source);
