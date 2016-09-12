@@ -36,6 +36,7 @@ public class DBB021051ProcessParameter implements IBatchProcessParameter {
     private RString 出力順ID;
     private RString 業務コード;
     private RString 市町村指定に市町村コード;
+    private RString 市町村指定に市町村名称;
     private RString 市町村名称;
     private RString 都道府県名称;
     private RString 郡名称;
