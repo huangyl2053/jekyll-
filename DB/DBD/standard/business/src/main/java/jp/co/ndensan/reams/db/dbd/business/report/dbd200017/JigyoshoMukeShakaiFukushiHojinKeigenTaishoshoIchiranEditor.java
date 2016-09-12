@@ -186,16 +186,16 @@ public class JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranEditor implemen
             source.kaiPege1 = 改頁Map.get(LISTINDEX_0).get項目名();
         }
         if (改頁Map.get(LISTINDEX_1) != null) {
-            source.kaiPege1 = 改頁Map.get(LISTINDEX_1).get項目名();
+            source.kaiPege2 = 改頁Map.get(LISTINDEX_1).get項目名();
         }
         if (改頁Map.get(LISTINDEX_2) != null) {
-            source.kaiPege1 = 改頁Map.get(LISTINDEX_2).get項目名();
+            source.kaiPege3 = 改頁Map.get(LISTINDEX_2).get項目名();
         }
         if (改頁Map.get(LISTINDEX_3) != null) {
-            source.kaiPege1 = 改頁Map.get(LISTINDEX_3).get項目名();
+            source.kaiPege4 = 改頁Map.get(LISTINDEX_3).get項目名();
         }
         if (改頁Map.get(LISTINDEX_4) != null) {
-            source.kaiPege1 = 改頁Map.get(LISTINDEX_4).get項目名();
+            source.kaiPege5 = 改頁Map.get(LISTINDEX_4).get項目名();
         }
 
     }
