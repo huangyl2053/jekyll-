@@ -39,6 +39,8 @@ public class HanyoListParamForKougakuHandler {
     private static final RString 日付 = new RString("3");
     private static final int 調定年度を含めて8年分 = 8;
     private static final int INDEX_ゼロ = 0;
+    private static final RString KEY1 = new RString("key1");
+    private static final RString ONE = new RString("1");
 
     /**
      * コンストラクタです。
@@ -105,8 +107,8 @@ public class HanyoListParamForKougakuHandler {
         DBC710140_HanyoListKogakuGassanShinseishoJohoParameter batchparam = new DBC710140_HanyoListKogakuGassanShinseishoJohoParameter();
         if (すべて.equals(div.getRadChushutsuKubun().getSelectedValue())) {
             batchparam.setChushutsuKubun(RString.EMPTY);
-        } else {
-            batchparam.setChushutsuKubun(div.getRadChushutsuKubun().getSelectedKey());
+        } else if (KEY1.equals(div.getRadChushutsuKubun().getSelectedKey())) {
+            batchparam.setChushutsuKubun(ONE);
         }
         if (すべて.equals(div.getDdlSinseiJokyoKubun().getSelectedValue())) {
             batchparam.setKaigoGassanShinseiJokyoKubun(RString.EMPTY);
