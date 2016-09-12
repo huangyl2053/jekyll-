@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 対象者データTempEntity
  *
- * @reamsid_L DBB-0810-020 yebangqiang
+ * @reamsid_L DBB-0810-010 yebangqiang
  */
 @lombok.Getter
 @lombok.Setter

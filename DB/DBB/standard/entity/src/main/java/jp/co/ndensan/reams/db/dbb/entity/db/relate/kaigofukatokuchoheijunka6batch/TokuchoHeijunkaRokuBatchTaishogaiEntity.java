@@ -6,14 +6,14 @@
 package jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka6gatsu.FukaJohoTmpEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 対象者データTempEntity
  *
- * @reamsid_L DBB-0810-020 yebangqiang
+ * @reamsid_L DBB-0810-010 yebangqiang
  */
 @lombok.Getter
 @lombok.Setter
@@ -23,7 +23,7 @@ public final class TokuchoHeijunkaRokuBatchTaishogaiEntity implements Cloneable,
     private RString 特別徴収義務者コード;
     private RString 徴収方法Newest_仮徴収_年金コード;
     private RString 備考コード;
-    private FukaJohoRelateEntity 対象外データTemp;
+    private FukaJohoTmpEntity 対象外データTemp;
     private UaFt200FindShikibetsuTaishoEntity 宛名;
 
     /**
@@ -41,12 +41,12 @@ public final class TokuchoHeijunkaRokuBatchTaishogaiEntity implements Cloneable,
      * コンストラクタです。
      *
      * @param 特別徴収義務者コード RString
-     * @param 対象外データTemp FukaJohoRelateEntity
+     * @param 対象外データTemp FukaJohoTmpEntity
      * @param 宛名 UaFt200FindShikibetsuTaishoEntity
      * @param 徴収方法Newest_仮徴収_年金コード RString
      * @param 備考コード RString
      */
-    public TokuchoHeijunkaRokuBatchTaishogaiEntity(RString 特別徴収義務者コード, FukaJohoRelateEntity 対象外データTemp,
+    public TokuchoHeijunkaRokuBatchTaishogaiEntity(RString 特別徴収義務者コード, FukaJohoTmpEntity 対象外データTemp,
             UaFt200FindShikibetsuTaishoEntity 宛名, RString 徴収方法Newest_仮徴収_年金コード, RString 備考コード) {
         this.特別徴収義務者コード = 特別徴収義務者コード;
         this.対象外データTemp = 対象外データTemp;
