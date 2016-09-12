@@ -84,7 +84,7 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         setDataGrid総計(get給付実績集計情報(集計情報リスト, 整理番号, 事業者番号, 様式番号, checkDate(サービス提供年月)),
                 get給付実績明細情報(明細情報リスト, 整理番号, 事業者番号, 様式番号, checkDate(サービス提供年月)),
                 get給付実績明細情報特例(明細情報特例リスト, 整理番号, 事業者番号, 様式番号, checkDate(サービス提供年月)));
-        check前次月Btn(getサービス提供年月リスト(集計情報リスト), サービス提供年月);
+        check前次月Btn(getサービス提供年月リスト(集計情報リスト, 明細情報リスト), サービス提供年月);
     }
 
     /**
@@ -266,13 +266,19 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
             NyuryokuShikibetsuNo 識別番号) {
 
         List<KyufujissekiShukei> 集計情報取得リスト = new ArrayList<>();
+        List<KyufujissekiMeisaiBusiness> 明細情報取得リスト = new ArrayList<>();
         for (KyufujissekiShukei 集計情報取得 : 集計情報リスト) {
             if (div.getCcdKyufuJissekiHeader().get事業者番号().equals(集計情報取得.get事業所番号().value())) {
                 集計情報取得リスト.add(集計情報取得);
             }
         }
+        for (KyufujissekiMeisaiBusiness 明細情報取得 : 明細情報取得リスト) {
+            if (div.getCcdKyufuJissekiHeader().get事業者番号().equals(明細情報取得.get給付実績明細().get事業所番号().value())) {
+                明細情報取得リスト.add(明細情報取得);
+            }
+        }
         int index = INT_ZERO;
-        List<FlexibleYearMonth> サービス提供年月リスト = getサービス提供年月リスト(集計情報取得リスト);
+        List<FlexibleYearMonth> サービス提供年月リスト = getサービス提供年月リスト(集計情報取得リスト, 明細情報取得リスト);
         Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
         for (int i = 0; i < サービス提供年月リスト.size(); i++) {
             if (サービス提供年月.equals(サービス提供年月リスト.get(i))) {
@@ -346,10 +352,17 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         }
     }
 
-    private List<FlexibleYearMonth> getサービス提供年月リスト(List<KyufujissekiShukei> 集計情報リスト) {
+    private List<FlexibleYearMonth> getサービス提供年月リスト(List<KyufujissekiShukei> 集計情報リスト,
+            List<KyufujissekiMeisaiBusiness> 明細情報リスト) {
         List<FlexibleYearMonth> 提供年月リスト = new ArrayList<>();
         for (KyufujissekiShukei 集計情報 : 集計情報リスト) {
             FlexibleYearMonth 提供年月 = 集計情報.getサービス提供年月();
+            if (!提供年月リスト.contains(提供年月)) {
+                提供年月リスト.add(提供年月);
+            }
+        }
+        for (KyufujissekiMeisaiBusiness 明細情報 : 明細情報リスト) {
+            FlexibleYearMonth 提供年月 = 明細情報.get給付実績明細().getサービス提供年月();
             if (!提供年月リスト.contains(提供年月)) {
                 提供年月リスト.add(提供年月);
             }
