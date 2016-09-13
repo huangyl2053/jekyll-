@@ -3,22 +3,21 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1100011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Sep 05 10:24:44 CST 2016
+ * Fri Sep 09 16:40:57 CST 2016
  */
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 
 /**
- * dgShinseiJoho_Row のクラスファイル
+ * dgShinseiIchiran_Row のクラスファイル
  *
  * @reamsid_L DBC-2040-030 huzongcheng
  */
-public class dgShinseiJoho_Row extends DataRow {
+public class dgShinseiIchiran_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
 
-    private RString txtShokisaiHokenshaNo;
-    private RString txtHihoNo;
+    private RString txtHihokenshaNo;
     private RString txtHihokenshaName;
     private RString txtKokuhoHihokenshashoNo;
     private RString txtKokiHihokenshaNo;
@@ -27,10 +26,9 @@ public class dgShinseiJoho_Row extends DataRow {
     private RString txtJikoFutanKeisanYM;
     private RString txtSaiKeisanKubun;
 
-    public dgShinseiJoho_Row() {
+    public dgShinseiIchiran_Row() {
         super();
-        this.txtShokisaiHokenshaNo = RString.EMPTY;
-        this.txtHihoNo = RString.EMPTY;
+        this.txtHihokenshaNo = RString.EMPTY;
         this.txtHihokenshaName = RString.EMPTY;
         this.txtKokuhoHihokenshashoNo = RString.EMPTY;
         this.txtKokiHihokenshaNo = RString.EMPTY;
@@ -38,8 +36,7 @@ public class dgShinseiJoho_Row extends DataRow {
         this.txtSaiSofuFlag = RString.EMPTY;
         this.txtJikoFutanKeisanYM = RString.EMPTY;
         this.txtSaiKeisanKubun = RString.EMPTY;
-        this.setOriginalData("txtShokisaiHokenshaNo", txtShokisaiHokenshaNo);
-        this.setOriginalData("txtHihoNo", txtHihoNo);
+        this.setOriginalData("txtHihokenshaNo", txtHihokenshaNo);
         this.setOriginalData("txtHihokenshaName", txtHihokenshaName);
         this.setOriginalData("txtKokuhoHihokenshashoNo", txtKokuhoHihokenshashoNo);
         this.setOriginalData("txtKokiHihokenshaNo", txtKokiHihokenshaNo);
@@ -49,10 +46,9 @@ public class dgShinseiJoho_Row extends DataRow {
         this.setOriginalData("txtSaiKeisanKubun", txtSaiKeisanKubun);
     }
 
-    public dgShinseiJoho_Row(RString txtShokisaiHokenshaNo, RString txtHihoNo, RString txtHihokenshaName, RString txtKokuhoHihokenshashoNo, RString txtKokiHihokenshaNo, RString txtShikyuShinseishoSofuYM, RString txtSaiSofuFlag, RString txtJikoFutanKeisanYM, RString txtSaiKeisanKubun) {
+    public dgShinseiIchiran_Row(RString txtHihokenshaNo, RString txtHihokenshaName, RString txtKokuhoHihokenshashoNo, RString txtKokiHihokenshaNo, RString txtShikyuShinseishoSofuYM, RString txtSaiSofuFlag, RString txtJikoFutanKeisanYM, RString txtSaiKeisanKubun) {
         super();
-        this.setOriginalData("txtShokisaiHokenshaNo", txtShokisaiHokenshaNo);
-        this.setOriginalData("txtHihoNo", txtHihoNo);
+        this.setOriginalData("txtHihokenshaNo", txtHihokenshaNo);
         this.setOriginalData("txtHihokenshaName", txtHihokenshaName);
         this.setOriginalData("txtKokuhoHihokenshashoNo", txtKokuhoHihokenshashoNo);
         this.setOriginalData("txtKokiHihokenshaNo", txtKokiHihokenshaNo);
@@ -60,8 +56,7 @@ public class dgShinseiJoho_Row extends DataRow {
         this.setOriginalData("txtSaiSofuFlag", txtSaiSofuFlag);
         this.setOriginalData("txtJikoFutanKeisanYM", txtJikoFutanKeisanYM);
         this.setOriginalData("txtSaiKeisanKubun", txtSaiKeisanKubun);
-        this.txtShokisaiHokenshaNo = txtShokisaiHokenshaNo;
-        this.txtHihoNo = txtHihoNo;
+        this.txtHihokenshaNo = txtHihokenshaNo;
         this.txtHihokenshaName = txtHihokenshaName;
         this.txtKokuhoHihokenshashoNo = txtKokuhoHihokenshashoNo;
         this.txtKokiHihokenshaNo = txtKokiHihokenshaNo;
@@ -71,12 +66,8 @@ public class dgShinseiJoho_Row extends DataRow {
         this.txtSaiKeisanKubun = txtSaiKeisanKubun;
     }
 
-    public RString getTxtShokisaiHokenshaNo() {
-        return txtShokisaiHokenshaNo;
-    }
-
-    public RString getTxtHihoNo() {
-        return txtHihoNo;
+    public RString getTxtHihokenshaNo() {
+        return txtHihokenshaNo;
     }
 
     public RString getTxtHihokenshaName() {
@@ -107,14 +98,9 @@ public class dgShinseiJoho_Row extends DataRow {
         return txtSaiKeisanKubun;
     }
 
-    public void setTxtShokisaiHokenshaNo(RString txtShokisaiHokenshaNo) {
-        this.setOriginalData("txtShokisaiHokenshaNo", txtShokisaiHokenshaNo);
-        this.txtShokisaiHokenshaNo = txtShokisaiHokenshaNo;
-    }
-
-    public void setTxtHihoNo(RString txtHihoNo) {
-        this.setOriginalData("txtHihoNo", txtHihoNo);
-        this.txtHihoNo = txtHihoNo;
+    public void setTxtHihokenshaNo(RString txtHihokenshaNo) {
+        this.setOriginalData("txtHihokenshaNo", txtHihokenshaNo);
+        this.txtHihokenshaNo = txtHihokenshaNo;
     }
 
     public void setTxtHihokenshaName(RString txtHihokenshaName) {

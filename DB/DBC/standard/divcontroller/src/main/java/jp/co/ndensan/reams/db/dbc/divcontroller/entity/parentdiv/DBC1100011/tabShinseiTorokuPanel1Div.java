@@ -8,12 +8,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1100011;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
 
 /**
@@ -30,10 +27,10 @@ public class tabShinseiTorokuPanel1Div extends TabPanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("KaigoShikakuJohoPanel")
-    private KaigoShikakuJohoPanelDiv KaigoShikakuJohoPanel;
-    @JsonProperty("HihokenshaJohoPanel")
-    private HihokenshaJohoPanelDiv HihokenshaJohoPanel;
+    @JsonProperty("KaigoShikaku")
+    private KaigoShikakuDiv KaigoShikaku;
+    @JsonProperty("KaigoHihokensha")
+    private KaigoHihokenshaDiv KaigoHihokensha;
     @JsonProperty("txtBiko")
     private TextBoxMultiLine txtBiko;
 
@@ -44,39 +41,39 @@ public class tabShinseiTorokuPanel1Div extends TabPanel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getKaigoShikakuJohoPanel
-     * @return KaigoShikakuJohoPanel
+     * getKaigoShikaku
+     * @return KaigoShikaku
      */
-    @JsonProperty("KaigoShikakuJohoPanel")
-    public KaigoShikakuJohoPanelDiv getKaigoShikakuJohoPanel() {
-        return KaigoShikakuJohoPanel;
+    @JsonProperty("KaigoShikaku")
+    public KaigoShikakuDiv getKaigoShikaku() {
+        return KaigoShikaku;
     }
 
     /*
-     * setKaigoShikakuJohoPanel
-     * @param KaigoShikakuJohoPanel KaigoShikakuJohoPanel
+     * setKaigoShikaku
+     * @param KaigoShikaku KaigoShikaku
      */
-    @JsonProperty("KaigoShikakuJohoPanel")
-    public void setKaigoShikakuJohoPanel(KaigoShikakuJohoPanelDiv KaigoShikakuJohoPanel) {
-        this.KaigoShikakuJohoPanel = KaigoShikakuJohoPanel;
+    @JsonProperty("KaigoShikaku")
+    public void setKaigoShikaku(KaigoShikakuDiv KaigoShikaku) {
+        this.KaigoShikaku = KaigoShikaku;
     }
 
     /*
-     * getHihokenshaJohoPanel
-     * @return HihokenshaJohoPanel
+     * getKaigoHihokensha
+     * @return KaigoHihokensha
      */
-    @JsonProperty("HihokenshaJohoPanel")
-    public HihokenshaJohoPanelDiv getHihokenshaJohoPanel() {
-        return HihokenshaJohoPanel;
+    @JsonProperty("KaigoHihokensha")
+    public KaigoHihokenshaDiv getKaigoHihokensha() {
+        return KaigoHihokensha;
     }
 
     /*
-     * setHihokenshaJohoPanel
-     * @param HihokenshaJohoPanel HihokenshaJohoPanel
+     * setKaigoHihokensha
+     * @param KaigoHihokensha KaigoHihokensha
      */
-    @JsonProperty("HihokenshaJohoPanel")
-    public void setHihokenshaJohoPanel(HihokenshaJohoPanelDiv HihokenshaJohoPanel) {
-        this.HihokenshaJohoPanel = HihokenshaJohoPanel;
+    @JsonProperty("KaigoHihokensha")
+    public void setKaigoHihokensha(KaigoHihokenshaDiv KaigoHihokensha) {
+        this.KaigoHihokensha = KaigoHihokensha;
     }
 
     /*
@@ -101,103 +98,63 @@ public class tabShinseiTorokuPanel1Div extends TabPanel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public DropDownList getDdlKaigoShikakuJoho() {
-        return this.getKaigoShikakuJohoPanel().getDdlKaigoShikakuJoho();
+    public TextBoxDateRange getTxtKanyuKikanYMD() {
+        return this.getKaigoShikaku().getTxtKanyuKikanYMD();
     }
 
     @JsonIgnore
-    public void setDdlKaigoShikakuJoho(DropDownList ddlKaigoShikakuJoho) {
-        this.getKaigoShikakuJohoPanel().setDdlKaigoShikakuJoho(ddlKaigoShikakuJoho);
+    public void setTxtKanyuKikanYMD(TextBoxDateRange txtKanyuKikanYMD) {
+        this.getKaigoShikaku().setTxtKanyuKikanYMD(txtKanyuKikanYMD);
     }
 
     @JsonIgnore
-    public TextBox getTxtKaigoShikakuJoho1() {
-        return this.getKaigoShikakuJohoPanel().getTxtKaigoShikakuJoho1();
+    public DropDownList getDdlShotokuKubun() {
+        return this.getKaigoHihokensha().getDdlShotokuKubun();
     }
 
     @JsonIgnore
-    public void setTxtKaigoShikakuJoho1(TextBox txtKaigoShikakuJoho1) {
-        this.getKaigoShikakuJohoPanel().setTxtKaigoShikakuJoho1(txtKaigoShikakuJoho1);
+    public void setDdlShotokuKubun(DropDownList ddlShotokuKubun) {
+        this.getKaigoHihokensha().setDdlShotokuKubun(ddlShotokuKubun);
     }
 
     @JsonIgnore
-    public TextBoxDateRange getTxtKaigoShikakuJohoKanyuYMD() {
-        return this.getKaigoShikakuJohoPanel().getTxtKaigoShikakuJohoKanyuYMD();
+    public DropDownList getDdlOver70ShotokuKubun() {
+        return this.getKaigoHihokensha().getDdlOver70ShotokuKubun();
     }
 
     @JsonIgnore
-    public void setTxtKaigoShikakuJohoKanyuYMD(TextBoxDateRange txtKaigoShikakuJohoKanyuYMD) {
-        this.getKaigoShikakuJohoPanel().setTxtKaigoShikakuJohoKanyuYMD(txtKaigoShikakuJohoKanyuYMD);
+    public void setDdlOver70ShotokuKubun(DropDownList ddlOver70ShotokuKubun) {
+        this.getKaigoHihokensha().setDdlOver70ShotokuKubun(ddlOver70ShotokuKubun);
     }
 
     @JsonIgnore
-    public DropDownList getDdlHihokenshaJoho1() {
-        return this.getHihokenshaJohoPanel().getDdlHihokenshaJoho1();
+    public TextBoxDate getTxtShikakuSoshitsuYMD() {
+        return this.getKaigoHihokensha().getTxtShikakuSoshitsuYMD();
     }
 
     @JsonIgnore
-    public void setDdlHihokenshaJoho1(DropDownList ddlHihokenshaJoho1) {
-        this.getHihokenshaJohoPanel().setDdlHihokenshaJoho1(ddlHihokenshaJoho1);
+    public void setTxtShikakuSoshitsuYMD(TextBoxDate txtShikakuSoshitsuYMD) {
+        this.getKaigoHihokensha().setTxtShikakuSoshitsuYMD(txtShikakuSoshitsuYMD);
     }
 
     @JsonIgnore
-    public DropDownList getDdlHihokenshaJoho2() {
-        return this.getHihokenshaJohoPanel().getDdlHihokenshaJoho2();
+    public DropDownList getDdlShikakuSoshitsuJiyu() {
+        return this.getKaigoHihokensha().getDdlShikakuSoshitsuJiyu();
     }
 
     @JsonIgnore
-    public void setDdlHihokenshaJoho2(DropDownList ddlHihokenshaJoho2) {
-        this.getHihokenshaJohoPanel().setDdlHihokenshaJoho2(ddlHihokenshaJoho2);
+    public void setDdlShikakuSoshitsuJiyu(DropDownList ddlShikakuSoshitsuJiyu) {
+        this.getKaigoHihokensha().setDdlShikakuSoshitsuJiyu(ddlShikakuSoshitsuJiyu);
     }
 
     @JsonIgnore
-    public TextBoxDate getTxtHihokenshaJohoShikakuSoshitsuYMD() {
-        return this.getHihokenshaJohoPanel().getTxtHihokenshaJohoShikakuSoshitsuYMD();
+    public TextBoxDateRange getTxtTaishoKeisanKikanYMD() {
+        return this.getKaigoHihokensha().getTxtTaishoKeisanKikanYMD();
     }
 
     @JsonIgnore
-    public void setTxtHihokenshaJohoShikakuSoshitsuYMD(TextBoxDate txtHihokenshaJohoShikakuSoshitsuYMD) {
-        this.getHihokenshaJohoPanel().setTxtHihokenshaJohoShikakuSoshitsuYMD(txtHihokenshaJohoShikakuSoshitsuYMD);
-    }
-
-    @JsonIgnore
-    public DropDownList getDdlHihokenshaJoho3() {
-        return this.getHihokenshaJohoPanel().getDdlHihokenshaJoho3();
-    }
-
-    @JsonIgnore
-    public void setDdlHihokenshaJoho3(DropDownList ddlHihokenshaJoho3) {
-        this.getHihokenshaJohoPanel().setDdlHihokenshaJoho3(ddlHihokenshaJoho3);
-    }
-
-    @JsonIgnore
-    public TextBoxFlexibleDate getTxtHihokenshaJohoKeisanKikanSikiYMD() {
-        return this.getHihokenshaJohoPanel().getTxtHihokenshaJohoKeisanKikanSikiYMD();
-    }
-
-    @JsonIgnore
-    public void setTxtHihokenshaJohoKeisanKikanSikiYMD(TextBoxFlexibleDate txtHihokenshaJohoKeisanKikanSikiYMD) {
-        this.getHihokenshaJohoPanel().setTxtHihokenshaJohoKeisanKikanSikiYMD(txtHihokenshaJohoKeisanKikanSikiYMD);
-    }
-
-    @JsonIgnore
-    public Label getLblHihokenshaJohoKeisanKikan() {
-        return this.getHihokenshaJohoPanel().getLblHihokenshaJohoKeisanKikan();
-    }
-
-    @JsonIgnore
-    public void setLblHihokenshaJohoKeisanKikan(Label lblHihokenshaJohoKeisanKikan) {
-        this.getHihokenshaJohoPanel().setLblHihokenshaJohoKeisanKikan(lblHihokenshaJohoKeisanKikan);
-    }
-
-    @JsonIgnore
-    public TextBoxFlexibleDate getTxtHihokenshaJohoKeisanKikanSyukiYMD() {
-        return this.getHihokenshaJohoPanel().getTxtHihokenshaJohoKeisanKikanSyukiYMD();
-    }
-
-    @JsonIgnore
-    public void setTxtHihokenshaJohoKeisanKikanSyukiYMD(TextBoxFlexibleDate txtHihokenshaJohoKeisanKikanSyukiYMD) {
-        this.getHihokenshaJohoPanel().setTxtHihokenshaJohoKeisanKikanSyukiYMD(txtHihokenshaJohoKeisanKikanSyukiYMD);
+    public void setTxtTaishoKeisanKikanYMD(TextBoxDateRange txtTaishoKeisanKikanYMD) {
+        this.getKaigoHihokensha().setTxtTaishoKeisanKikanYMD(txtTaishoKeisanKikanYMD);
     }
 
     // </editor-fold>

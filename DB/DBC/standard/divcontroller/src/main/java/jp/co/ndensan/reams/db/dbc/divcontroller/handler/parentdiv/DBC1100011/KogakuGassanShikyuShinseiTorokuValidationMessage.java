@@ -136,7 +136,11 @@ public enum KogakuGassanShikyuShinseiTorokuValidationMessage implements IValidat
     /**
      * 証明書整理番号既に存在
      */
-    証明書整理番号既に存在(UrErrorMessages.既に存在, "自己負担額証明書整理番号");
+    証明書整理番号既に存在(UrErrorMessages.既に存在, "自己負担額証明書整理番号"),
+    /**
+     * 医療支給申請書整理番号入力桁不足
+     */
+    医療支給申請書整理番号入力桁不足(UrErrorMessages.入力値が不正_追加メッセージあり, "入力桁不足");
 
     private final Message message;
 

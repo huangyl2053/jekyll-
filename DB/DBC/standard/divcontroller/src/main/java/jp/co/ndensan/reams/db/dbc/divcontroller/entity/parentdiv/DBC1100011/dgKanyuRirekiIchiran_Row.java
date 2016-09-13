@@ -3,18 +3,18 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1100011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Mon Sep 05 10:24:45 CST 2016
+ * Fri Sep 09 16:40:57 CST 2016
  */
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 
 /**
- * dgTorokuKanyRirekiuList_Row のクラスファイル
+ * dgKanyuRirekiIchiran_Row のクラスファイル
  *
  * @reamsid_L DBC-2040-030 huzongcheng
  */
-public class dgTorokuKanyRirekiuList_Row extends DataRow {
+public class dgKanyuRirekiIchiran_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
 
     private RString txtHokenshaName;
@@ -27,7 +27,7 @@ public class dgTorokuKanyRirekiuList_Row extends DataRow {
     private RString txtKanyuKaishiYMDStr;
     private RString txtKanyuShuryoYMDStr;
 
-    public dgTorokuKanyRirekiuList_Row() {
+    public dgKanyuRirekiIchiran_Row() {
         super();
         this.txtHokenshaName = RString.EMPTY;
         this.txtKanyuKaishiYMD = RString.EMPTY;
@@ -49,7 +49,7 @@ public class dgTorokuKanyRirekiuList_Row extends DataRow {
         this.setOriginalData("txtKanyuShuryoYMDStr", txtKanyuShuryoYMDStr);
     }
 
-    public dgTorokuKanyRirekiuList_Row(RString txtHokenshaName, RString txtKanyuKaishiYMD, RString txtKanyuShuryoYMD, RString txtJikofutanSeiriNo, RString txtHihokenshaNo, RString txtRirekiNo, RString txtKanyurekiNo, RString txtKanyuKaishiYMDStr, RString txtKanyuShuryoYMDStr) {
+    public dgKanyuRirekiIchiran_Row(RString txtHokenshaName, RString txtKanyuKaishiYMD, RString txtKanyuShuryoYMD, RString txtJikofutanSeiriNo, RString txtHihokenshaNo, RString txtRirekiNo, RString txtKanyurekiNo, RString txtKanyuKaishiYMDStr, RString txtKanyuShuryoYMDStr) {
         super();
         this.setOriginalData("txtHokenshaName", txtHokenshaName);
         this.setOriginalData("txtKanyuKaishiYMD", txtKanyuKaishiYMD);

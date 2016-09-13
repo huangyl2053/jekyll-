@@ -26,10 +26,10 @@ public class tabShinseiTorokuPanel2Div extends TabPanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("KokuhoShikakuJohoPanel")
-    private KokuhoShikakuJohoPanelDiv KokuhoShikakuJohoPanel;
-    @JsonProperty("KokiShikakuJohoPanel")
-    private KokiShikakuJohoPanelDiv KokiShikakuJohoPanel;
+    @JsonProperty("KokuhoShikaku")
+    private KokuhoShikakuDiv KokuhoShikaku;
+    @JsonProperty("KokiShikaku")
+    private KokiShikakuDiv KokiShikaku;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -38,152 +38,152 @@ public class tabShinseiTorokuPanel2Div extends TabPanel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getKokuhoShikakuJohoPanel
-     * @return KokuhoShikakuJohoPanel
+     * getKokuhoShikaku
+     * @return KokuhoShikaku
      */
-    @JsonProperty("KokuhoShikakuJohoPanel")
-    public KokuhoShikakuJohoPanelDiv getKokuhoShikakuJohoPanel() {
-        return KokuhoShikakuJohoPanel;
+    @JsonProperty("KokuhoShikaku")
+    public KokuhoShikakuDiv getKokuhoShikaku() {
+        return KokuhoShikaku;
     }
 
     /*
-     * setKokuhoShikakuJohoPanel
-     * @param KokuhoShikakuJohoPanel KokuhoShikakuJohoPanel
+     * setKokuhoShikaku
+     * @param KokuhoShikaku KokuhoShikaku
      */
-    @JsonProperty("KokuhoShikakuJohoPanel")
-    public void setKokuhoShikakuJohoPanel(KokuhoShikakuJohoPanelDiv KokuhoShikakuJohoPanel) {
-        this.KokuhoShikakuJohoPanel = KokuhoShikakuJohoPanel;
+    @JsonProperty("KokuhoShikaku")
+    public void setKokuhoShikaku(KokuhoShikakuDiv KokuhoShikaku) {
+        this.KokuhoShikaku = KokuhoShikaku;
     }
 
     /*
-     * getKokiShikakuJohoPanel
-     * @return KokiShikakuJohoPanel
+     * getKokiShikaku
+     * @return KokiShikaku
      */
-    @JsonProperty("KokiShikakuJohoPanel")
-    public KokiShikakuJohoPanelDiv getKokiShikakuJohoPanel() {
-        return KokiShikakuJohoPanel;
+    @JsonProperty("KokiShikaku")
+    public KokiShikakuDiv getKokiShikaku() {
+        return KokiShikaku;
     }
 
     /*
-     * setKokiShikakuJohoPanel
-     * @param KokiShikakuJohoPanel KokiShikakuJohoPanel
+     * setKokiShikaku
+     * @param KokiShikaku KokiShikaku
      */
-    @JsonProperty("KokiShikakuJohoPanel")
-    public void setKokiShikakuJohoPanel(KokiShikakuJohoPanelDiv KokiShikakuJohoPanel) {
-        this.KokiShikakuJohoPanel = KokiShikakuJohoPanel;
+    @JsonProperty("KokiShikaku")
+    public void setKokiShikaku(KokiShikakuDiv KokiShikaku) {
+        this.KokiShikaku = KokiShikaku;
     }
 
     /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public TextBox getTxtKokuhoShikakuHokensyaBango() {
-        return this.getKokuhoShikakuJohoPanel().getTxtKokuhoShikakuHokensyaBango();
+    public TextBox getTxtKokuhoHokenshaNo() {
+        return this.getKokuhoShikaku().getTxtKokuhoHokenshaNo();
     }
 
     @JsonIgnore
-    public void setTxtKokuhoShikakuHokensyaBango(TextBox txtKokuhoShikakuHokensyaBango) {
-        this.getKokuhoShikakuJohoPanel().setTxtKokuhoShikakuHokensyaBango(txtKokuhoShikakuHokensyaBango);
+    public void setTxtKokuhoHokenshaNo(TextBox txtKokuhoHokenshaNo) {
+        this.getKokuhoShikaku().setTxtKokuhoHokenshaNo(txtKokuhoHokenshaNo);
     }
 
     @JsonIgnore
-    public TextBox getTxtKokuhoShikakuHikonensyaSyoKigo() {
-        return this.getKokuhoShikakuJohoPanel().getTxtKokuhoShikakuHikonensyaSyoKigo();
+    public TextBox getTxtKokuhoHokenshaMeisho() {
+        return this.getKokuhoShikaku().getTxtKokuhoHokenshaMeisho();
     }
 
     @JsonIgnore
-    public void setTxtKokuhoShikakuHikonensyaSyoKigo(TextBox txtKokuhoShikakuHikonensyaSyoKigo) {
-        this.getKokuhoShikakuJohoPanel().setTxtKokuhoShikakuHikonensyaSyoKigo(txtKokuhoShikakuHikonensyaSyoKigo);
+    public void setTxtKokuhoHokenshaMeisho(TextBox txtKokuhoHokenshaMeisho) {
+        this.getKokuhoShikaku().setTxtKokuhoHokenshaMeisho(txtKokuhoHokenshaMeisho);
     }
 
     @JsonIgnore
-    public TextBox getTxtKokuhoShikakuHikonensyaSyoBango() {
-        return this.getKokuhoShikakuJohoPanel().getTxtKokuhoShikakuHikonensyaSyoBango();
+    public TextBox getTxtKokuhoHikonenshaShoKigo() {
+        return this.getKokuhoShikaku().getTxtKokuhoHikonenshaShoKigo();
     }
 
     @JsonIgnore
-    public void setTxtKokuhoShikakuHikonensyaSyoBango(TextBox txtKokuhoShikakuHikonensyaSyoBango) {
-        this.getKokuhoShikakuJohoPanel().setTxtKokuhoShikakuHikonensyaSyoBango(txtKokuhoShikakuHikonensyaSyoBango);
+    public void setTxtKokuhoHikonenshaShoKigo(TextBox txtKokuhoHikonenshaShoKigo) {
+        this.getKokuhoShikaku().setTxtKokuhoHikonenshaShoKigo(txtKokuhoHikonenshaShoKigo);
     }
 
     @JsonIgnore
-    public TextBox getTxtKokuhoShikaku1() {
-        return this.getKokuhoShikakuJohoPanel().getTxtKokuhoShikaku1();
+    public TextBox getTxtKokuhoHikonenshaShoNo() {
+        return this.getKokuhoShikaku().getTxtKokuhoHikonenshaShoNo();
     }
 
     @JsonIgnore
-    public void setTxtKokuhoShikaku1(TextBox txtKokuhoShikaku1) {
-        this.getKokuhoShikakuJohoPanel().setTxtKokuhoShikaku1(txtKokuhoShikaku1);
+    public void setTxtKokuhoHikonenshaShoNo(TextBox txtKokuhoHikonenshaShoNo) {
+        this.getKokuhoShikaku().setTxtKokuhoHikonenshaShoNo(txtKokuhoHikonenshaShoNo);
     }
 
     @JsonIgnore
-    public DropDownList getTxtKokuhoShikaku2() {
-        return this.getKokuhoShikakuJohoPanel().getTxtKokuhoShikaku2();
+    public TextBox getTxtKokuhoSetaiNo() {
+        return this.getKokuhoShikaku().getTxtKokuhoSetaiNo();
     }
 
     @JsonIgnore
-    public void setTxtKokuhoShikaku2(DropDownList txtKokuhoShikaku2) {
-        this.getKokuhoShikakuJohoPanel().setTxtKokuhoShikaku2(txtKokuhoShikaku2);
+    public void setTxtKokuhoSetaiNo(TextBox txtKokuhoSetaiNo) {
+        this.getKokuhoShikaku().setTxtKokuhoSetaiNo(txtKokuhoSetaiNo);
     }
 
     @JsonIgnore
-    public TextBox getTxtKokuhoShikaku3() {
-        return this.getKokuhoShikakuJohoPanel().getTxtKokuhoShikaku3();
+    public DropDownList getTxtKokuhoZokugara() {
+        return this.getKokuhoShikaku().getTxtKokuhoZokugara();
     }
 
     @JsonIgnore
-    public void setTxtKokuhoShikaku3(TextBox txtKokuhoShikaku3) {
-        this.getKokuhoShikakuJohoPanel().setTxtKokuhoShikaku3(txtKokuhoShikaku3);
+    public void setTxtKokuhoZokugara(DropDownList txtKokuhoZokugara) {
+        this.getKokuhoShikaku().setTxtKokuhoZokugara(txtKokuhoZokugara);
     }
 
     @JsonIgnore
-    public TextBoxDateRange getTxtKokuhoShikakuKanyuYMD() {
-        return this.getKokuhoShikakuJohoPanel().getTxtKokuhoShikakuKanyuYMD();
+    public TextBoxDateRange getTxtKokuhoKanyuKikanYMD() {
+        return this.getKokuhoShikaku().getTxtKokuhoKanyuKikanYMD();
     }
 
     @JsonIgnore
-    public void setTxtKokuhoShikakuKanyuYMD(TextBoxDateRange txtKokuhoShikakuKanyuYMD) {
-        this.getKokuhoShikakuJohoPanel().setTxtKokuhoShikakuKanyuYMD(txtKokuhoShikakuKanyuYMD);
+    public void setTxtKokuhoKanyuKikanYMD(TextBoxDateRange txtKokuhoKanyuKikanYMD) {
+        this.getKokuhoShikaku().setTxtKokuhoKanyuKikanYMD(txtKokuhoKanyuKikanYMD);
     }
 
     @JsonIgnore
-    public TextBox getTxtKokiShikaku() {
-        return this.getKokiShikakuJohoPanel().getTxtKokiShikaku();
+    public TextBox getTxtKokiHokenshaNo() {
+        return this.getKokiShikaku().getTxtKokiHokenshaNo();
     }
 
     @JsonIgnore
-    public void setTxtKokiShikaku(TextBox txtKokiShikaku) {
-        this.getKokiShikakuJohoPanel().setTxtKokiShikaku(txtKokiShikaku);
+    public void setTxtKokiHokenshaNo(TextBox txtKokiHokenshaNo) {
+        this.getKokiShikaku().setTxtKokiHokenshaNo(txtKokiHokenshaNo);
     }
 
     @JsonIgnore
-    public TextBox getTxtKokiShikaku2() {
-        return this.getKokiShikakuJohoPanel().getTxtKokiShikaku2();
+    public TextBox getTxtKokiKoikiRengoMeisho() {
+        return this.getKokiShikaku().getTxtKokiKoikiRengoMeisho();
     }
 
     @JsonIgnore
-    public void setTxtKokiShikaku2(TextBox txtKokiShikaku2) {
-        this.getKokiShikakuJohoPanel().setTxtKokiShikaku2(txtKokiShikaku2);
+    public void setTxtKokiKoikiRengoMeisho(TextBox txtKokiKoikiRengoMeisho) {
+        this.getKokiShikaku().setTxtKokiKoikiRengoMeisho(txtKokiKoikiRengoMeisho);
     }
 
     @JsonIgnore
-    public TextBox getTxtKokiShikaku3() {
-        return this.getKokiShikakuJohoPanel().getTxtKokiShikaku3();
+    public TextBox getTxtKokiHihokenshaNo() {
+        return this.getKokiShikaku().getTxtKokiHihokenshaNo();
     }
 
     @JsonIgnore
-    public void setTxtKokiShikaku3(TextBox txtKokiShikaku3) {
-        this.getKokiShikakuJohoPanel().setTxtKokiShikaku3(txtKokiShikaku3);
+    public void setTxtKokiHihokenshaNo(TextBox txtKokiHihokenshaNo) {
+        this.getKokiShikaku().setTxtKokiHihokenshaNo(txtKokiHihokenshaNo);
     }
 
     @JsonIgnore
-    public TextBoxDateRange getTxtKokiShikakuKanyuKikan() {
-        return this.getKokiShikakuJohoPanel().getTxtKokiShikakuKanyuKikan();
+    public TextBoxDateRange getTxtKokiKanyuKikanYMD() {
+        return this.getKokiShikaku().getTxtKokiKanyuKikanYMD();
     }
 
     @JsonIgnore
-    public void setTxtKokiShikakuKanyuKikan(TextBoxDateRange txtKokiShikakuKanyuKikan) {
-        this.getKokiShikakuJohoPanel().setTxtKokiShikakuKanyuKikan(txtKokiShikakuKanyuKikan);
+    public void setTxtKokiKanyuKikanYMD(TextBoxDateRange txtKokiKanyuKikanYMD) {
+        this.getKokiShikaku().setTxtKokiKanyuKikanYMD(txtKokiKanyuKikanYMD);
     }
 
     // </editor-fold>
