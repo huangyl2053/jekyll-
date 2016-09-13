@@ -70,6 +70,7 @@ public class SaishinsaMoshitate {
     private static final RString 国保連送付年月 = new RString("国保連送付年月：");
     private static final RString サービス提供年月 = new RString("サービス提供年月：");
     private static final RString 事業者番号 = new RString("事業者番号：");
+    private static final RString みなし = new RString("みなし");
 
     /**
      * HanyoListSaishinsaMoshitateAriEUCEntityの設定クラスです。
@@ -554,7 +555,7 @@ public class SaishinsaMoshitate {
             return RString.EMPTY;
         }
         if (!MinashiCode.通常の認定.getコード().equals(MinashiCode.toValue(要介護区分).getコード())) {
-            return 要介護区分;
+            return みなし;
         } else {
             return RString.EMPTY;
         }
@@ -606,13 +607,13 @@ public class SaishinsaMoshitate {
 
     private RString get証記載保険者番号(SaishinsaMoshitateRelateEntity entity, Map<RString, KoseiShichosonMaster> 市町村名MasterMap) {
         RString 証記載保険者番号 = null;
-        if (entity.is住所地特例フラグ() && 市町村名MasterMap != null && !市町村名MasterMap.isEmpty()) {
+        if (entity.is広域内住所地特例フラグ() && 市町村名MasterMap != null && !市町村名MasterMap.isEmpty()) {
             if (!isNullCheck(entity.get広住特措置元市町村コード())) {
                 証記載保険者番号 = get保険者番号(市町村名MasterMap.get(entity.get広住特措置元市町村コード()));
             }
         } else {
-            if (市町村名MasterMap != null && !市町村名MasterMap.isEmpty()) {
-                証記載保険者番号 = get保険者番号(市町村名MasterMap.get(entity.get広住特措置元市町村コード()));
+            if (市町村名MasterMap != null && !市町村名MasterMap.isEmpty() && entity.get市町村コード() != null && !entity.get市町村コード().isEmpty()) {
+                証記載保険者番号 = get保険者番号(市町村名MasterMap.get(entity.get市町村コード().value()));
             }
         }
         return 証記載保険者番号;

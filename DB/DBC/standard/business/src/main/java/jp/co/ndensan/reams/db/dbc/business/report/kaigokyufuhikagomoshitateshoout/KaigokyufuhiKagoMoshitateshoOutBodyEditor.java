@@ -61,7 +61,7 @@ public class KaigokyufuhiKagoMoshitateshoOutBodyEditor implements IKaigokyufuhiK
         source.listUpper_4 = 帳票出力対象データ.getDbWT1731Entity().getHiHokenshaNo().getColumnValue();
         source.listUpper_5 = 帳票出力対象データ.getDbWT1001Entity().getKanaMeisho();
 
-        source.listLower_1 = 帳票出力対象データ.getDbWT1001Entity().getKanaMeisho();
+        source.listLower_1 = 帳票出力対象データ.getDbWT1001Entity().getMeisho();
         source.listUpper_6 = doパターン54(帳票出力対象データ.getDbWT1731Entity().getServiceTeikyoYM());
         source.listUpper_7 = 帳票出力対象データ.getDbWT1731Entity().getMoshitateYMD().wareki()
                 .eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
@@ -84,8 +84,8 @@ public class KaigokyufuhiKagoMoshitateshoOutBodyEditor implements IKaigokyufuhiK
         source.listUpper_14 = 帳票出力対象データ.getDbWT1001Entity().getShimei50onKana();
         source.listUpper_15 = getColumnValue(帳票出力対象データ.getDbWT1001Entity().getShichosonCode());
         if (合計出力flag) {
-            source.gokeiKensuTitle = doカンマ編集(new Decimal(合計件数.toString()));
-            source.gokeiKensu = new RString(件数).concat(漢字_件);
+            source.gokeiKensuTitle = 合計件数;
+            source.gokeiKensu = doカンマ編集(new Decimal(件数)).concat(漢字_件);
         }
         連番++;
         return source;

@@ -251,9 +251,9 @@
                     ON
                         サービス種類."serviceShuruiCd" = "DbT3062SaishinsaMoshitate"."serviceTeikyoShuruiCode"
                     AND
-                        "DbT3062SaishinsaMoshitate"."serviceTeikyoYM" <![CDATA[<=]]> サービス種類."teikyoKaishiYM"
+                        "DbT3062SaishinsaMoshitate"."serviceTeikyoYM" <![CDATA[<=]]> サービス種類."teikyoshuryoYM"
                     AND 
-                        サービス種類."teikyoshuryoYM" <![CDATA[<=]]> "DbT3062SaishinsaMoshitate"."serviceTeikyoYM"
+                        サービス種類."teikyoKaishiYM" <![CDATA[<=]]> "DbT3062SaishinsaMoshitate"."serviceTeikyoYM"
               LEFT JOIN(
                 SELECT
                     dbT7060."jigyoshaNo" AS "jigyoshaNo",
@@ -268,7 +268,7 @@
                         WHERE
                             dbT7060."jigyoshaNo" = dbT7060_2."jigyoshaNo"
                         AND
-                            dbT7060."yukoShuryoYMD" <![CDATA[<=]]> dbT7060_2."yukoShuryoYMD"
+                            dbT7060."yukoShuryoYMD" <![CDATA[<]]> dbT7060_2."yukoKaishiYMD"
                         )
                 )AS  再審査申立事業者
                 ON 

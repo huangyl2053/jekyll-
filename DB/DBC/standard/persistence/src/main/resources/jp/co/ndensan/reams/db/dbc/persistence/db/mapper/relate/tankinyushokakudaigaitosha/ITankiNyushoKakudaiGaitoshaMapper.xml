@@ -186,7 +186,7 @@
         rgdb."DbT1001HihokenshaDaicho" AS DbT1001
         ON DbT1001."hihokenshaNo" = 抽出対象."hihokenshaNo"
         AND DbT1001."logicalDeletedFlag" = false
-        AND DbT1001."shikakuShutokuYMD" <![CDATA[<=]]> 抽出対象."yukoKaishiYM"||'31'
+        AND (抽出対象."yukoKaishiYM"||'31') <![CDATA[<=]]> DbT1001."shikakuShutokuYMD"
         AND(
         DbT1001."shikakuSoshitsuYMD" = ''
         OR DbT1001."shikakuSoshitsuYMD" IS NULL
@@ -226,7 +226,7 @@
         ON DbT4001."hihokenshaNo" = 抽出対象."hihokenshaNo"
         AND DbT4001."logicalDeletedFlag" = false
         AND DbT4001."yukoMukoKubun" = '1'
-        AND 抽出対象."yukoKaishiYM"||'31' <![CDATA[=>]]> DbT4001."ninteiYukoKikanKaishiYMD"
+        AND (抽出対象."yukoKaishiYM"||'31') <![CDATA[>=]]> DbT4001."ninteiYukoKikanKaishiYMD"
         AND DbT4001."ninteiYukoKikanShuryoYMD" <![CDATA[>=]]> (抽出対象."yukoKaishiYM" || '01')
         ) AS 有効履歴
         WHERE

@@ -39,6 +39,8 @@ public class HanyoListParamForKougakuHandler {
     private static final RString 日付 = new RString("3");
     private static final int 調定年度を含めて8年分 = 8;
     private static final int INDEX_ゼロ = 0;
+    private static final RString KEY1 = new RString("key1");
+    private static final RString ONE = new RString("1");
 
     /**
      * コンストラクタです。
@@ -105,15 +107,19 @@ public class HanyoListParamForKougakuHandler {
         DBC710140_HanyoListKogakuGassanShinseishoJohoParameter batchparam = new DBC710140_HanyoListKogakuGassanShinseishoJohoParameter();
         if (すべて.equals(div.getRadChushutsuKubun().getSelectedValue())) {
             batchparam.setChushutsuKubun(RString.EMPTY);
-        } else {
-            batchparam.setChushutsuKubun(div.getRadChushutsuKubun().getSelectedKey());
+        } else if (KEY1.equals(div.getRadChushutsuKubun().getSelectedKey())) {
+            batchparam.setChushutsuKubun(ONE);
         }
         if (すべて.equals(div.getDdlSinseiJokyoKubun().getSelectedValue())) {
             batchparam.setKaigoGassanShinseiJokyoKubun(RString.EMPTY);
         } else {
             batchparam.setKaigoGassanShinseiJokyoKubun(div.getDdlSinseiJokyoKubun().getSelectedKey());
         }
-        batchparam.setFlexibleYear(div.getDdlTaishoNendo().getSelectedKey());
+        if (!BLANK.equals(div.getDdlTaishoNendo().getSelectedKey())) {
+            batchparam.setFlexibleYear(div.getDdlTaishoNendo().getSelectedKey());
+        } else {
+            batchparam.setFlexibleYear(null);
+        }
         if (null != div.getTxtSinseibi().getFromValue()) {
             batchparam.setFlexibleDateFrom(new FlexibleDate(div.getTxtSinseibi().getFromValue().toString()));
         }
@@ -134,14 +140,14 @@ public class HanyoListParamForKougakuHandler {
         }
         List<RString> selectKey = div.getChkCsvHenshuHoho().getSelectedKeys();
         if (selectKey.contains(項目名付加)) {
-            batchparam.setRebanFuka(true);
-        } else {
-            batchparam.setRebanFuka(false);
-        }
-        if (selectKey.contains(連番付加)) {
             batchparam.setTomokumeFuka(true);
         } else {
             batchparam.setTomokumeFuka(false);
+        }
+        if (selectKey.contains(連番付加)) {
+            batchparam.setRebanFuka(true);
+        } else {
+            batchparam.setRebanFuka(false);
         }
         if (selectKey.contains(日付)) {
             batchparam.setSlashDate(true);

@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120110.DbT3071KogakuGassanJikoFu
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120110.KogakuGassanJikoFutanGakuCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc120110.KogakuGassanJikofutangakuKakunEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc120110.KogakuGassanJikofutangakuMasterTorokuEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc120110.KogakuGassanJikofutangakuMeisaiMasterTorokuEntity;
 
 /**
  * 37J_高額合算自己負担額確認情報取込のMapperです。
@@ -49,7 +48,7 @@ public interface IKogakuGassanJikofutangakuMapper {
      *
      * @return List<KogakuGassanJikofutangakuMeisaiMasterTorokuEntity>
      */
-    List<KogakuGassanJikofutangakuMeisaiMasterTorokuEntity> select高額合算自己負担額明細と一時データ();
+    List<DbT3071KogakuGassanJikoFutanGakuMeisaiCsvEntity> select高額合算自己負担額明細と一時データ();
 
     /**
      * 帳票出力対象データを取得する。

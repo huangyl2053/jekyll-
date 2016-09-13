@@ -22,6 +22,9 @@ public class TokuchoHeijyunkaRokuBatchFukaGakuEntity {
     private Decimal 特徴期期別金額01;
     private Decimal 特徴期期別金額02;
     private Decimal 特徴期期別金額03;
+    private Decimal 特徴期期別金額04;
+    private Decimal 特徴期期別金額05;
+    private Decimal 特徴期期別金額06;
     private Decimal 普徴期期別金額01;
     private Decimal 普徴期期別金額02;
     private Decimal 普徴期期別金額03;
@@ -34,4 +37,6 @@ public class TokuchoHeijyunkaRokuBatchFukaGakuEntity {
     private Decimal 普徴期期別金額10;
     private Decimal 普徴期期別金額11;
     private Decimal 普徴期期別金額12;
+    private Decimal 普徴期期別金額13;
+    private Decimal 普徴期期別金額14;
 }

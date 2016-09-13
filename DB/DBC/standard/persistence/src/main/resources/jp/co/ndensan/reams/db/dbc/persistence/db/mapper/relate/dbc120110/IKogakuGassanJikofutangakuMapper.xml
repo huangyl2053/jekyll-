@@ -68,7 +68,7 @@
     </select>
     
     <select id="select高額合算自己負担額明細と一時データ" 
-            resultMap="ResultMap_KogakuGassanJikofutangakuMeisaiMasterTorokuEntity"  fetchSize="500" resultOrdered="true">
+            resultMap="ResultMap_DbT3071KogakuGassanJikoFutanGakuMeisaiCsvEntity2"  fetchSize="500" resultOrdered="true">
         SELECT
         <include refid="allColumns_DbWT37H2"/>,
         <include refid="allColumns_DbT3071"/>
@@ -93,6 +93,7 @@
         AND DbWT37H2."shoKisaiHokenshaNo" = DbT3071."hokenshaNo"
         AND DbWT37H2."shikyuShinseishoSeiriNo" = DbT3071."shikyuShinseishoSeiriNo"
         AND DbWT37H2.dbWT37H1_rirekiNo = DbT3071."rirekiNo"
+        AND DbWT37H2."taishoM" = DbT3071."taishoM"
     </select>
     
     <select id="get帳票出力対象データ"
@@ -212,11 +213,6 @@
         <result property="補正済_摘要" column="dbWT37H2_sumi_Tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
-    <resultMap id="ResultMap_KogakuGassanJikofutangakuMeisaiMasterTorokuEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc120110.KogakuGassanJikofutangakuMeisaiMasterTorokuEntity" autoMapping="true">
-        <association property="高額合算自己負担額明細entity" resultMap="ResultMap_DbT3071KogakuGassanJikoFutanGakuMeisaiCsvEntity"/>
-        <association property="高額合算自己負担額一時明細entity" resultMap="ResultMap_DbWT37H2KogakuGassanaJikofutangakuMeisaiCsvEntity"/>
-    </resultMap>
-    
     <resultMap id="ResultMap_DbT3070KogakuGassanJikoFutanGakuCsvEntity" type="jp.co.ndensan.reams.db.dbc.entity.csv.dbc120110.DbT3070KogakuGassanJikoFutanGakuCsvEntity" autoMapping="true">
         <id property="被保険者番号" column="dbT3070_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="対象年度" column="dbT3070_taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
@@ -278,18 +274,18 @@
         <result property="リアル補正実施年月日" column="dbT3070_realHoseiJissiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
     
-    <resultMap id="ResultMap_DbT3071KogakuGassanJikoFutanGakuMeisaiCsvEntity" type="jp.co.ndensan.reams.db.dbc.entity.csv.dbc120110.DbT3071KogakuGassanJikoFutanGakuMeisaiCsvEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT3071KogakuGassanJikoFutanGakuMeisaiCsvEntity2" type="jp.co.ndensan.reams.db.dbc.entity.csv.dbc120110.DbT3071KogakuGassanJikoFutanGakuMeisaiCsvEntity" autoMapping="true">
         <id property="被保険者番号" column="dbT3071_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="対象年度" column="dbT3071_taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <id property="保険者番号" column="dbT3071_hokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
         <id property="支給申請書整理番号" column="dbT3071_shikyuShinseishoSeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="履歴番号" column="dbT3071_rirekiNo"/>
         <id property="対象月" column="dbT3071_taishoM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="自己負担額" column="dbT3071_jikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="自己負担額_内数70_74" column="dbT3071_uchisu_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="未満70高額支給額" column="dbT3071_under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額支給額70_74" column="dbT3071_over_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="摘要" column="dbT3071_tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="自己負担額" column="dbWT37H2_jikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="自己負担額_内数70_74" column="dbWT37H2_uchisu_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="未満70高額支給額" column="dbWT37H2_under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額支給額70_74" column="dbWT37H2_over_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="摘要" column="dbWT37H2_tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="補正済_自己負担額" column="dbT3071_sumi_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="補正済_70_74自己負担額_内数_" column="dbT3071_sumi_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="補正済_70未満高額支給額" column="dbT3071_sumi_under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
@@ -359,27 +355,6 @@
         <result property="リアル補正実施年月日" column="dbWT37H1_realHoseiJissiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="更新フラグ" column="dbWT37H1_koshinFlag"/>
         <result property="自己負担額差異フラグ" column="dbWT37H1_jikoFutangakuSaiFlag"/>
-    </resultMap>
-    
-    <resultMap id="ResultMap_DbWT37H2KogakuGassanaJikofutangakuMeisaiCsvEntity" type="jp.co.ndensan.reams.db.dbc.entity.csv.dbc120110.DbWT37H2KogakuGassanaJikofutangakuMeisaiCsvEntity" autoMapping="true">
-        <id property="連番" column="dbWT37H2_renban"/>
-        <id property="被保険者番号" column="dbWT37H2_hokenshaNoIn" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <id property="対象年度" column="dbWT37H2_taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
-        <id property="保険者番号" column="dbWT37H2_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
-        <id property="支給申請書整理番号" column="dbWT37H2_shikyuShinseishoSeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="履歴番号" column="dbWT37H2_rirekiNo"/>
-        <id property="対象月" column="dbWT37H2_taishoM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="自己負担額" column="dbWT37H2_jikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="自己負担額_内数70_74" column="dbWT37H2_uchisu_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="未満70高額支給額" column="dbWT37H2_under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額支給額70_74" column="dbWT37H2_over_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="摘要" column="dbWT37H2_tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="補正済_自己負担額" column="dbWT37H2_sumi_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="補正済_70_74自己負担額_内数" column="dbWT37H2_sumi_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="補正済_70未満高額支給額" column="dbWT37H2_sumi_under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="補正済_70_74高額支給額" column="dbWT37H2_sumi_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="補正済_摘要" column="dbWT37H2_sumi_Tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="自己負担額差異フラグ" column="dbWT37H2_jikoFutangakuSaiFlag"/>
     </resultMap>
     
     <resultMap id ="resultMap_KogakuGassanJikofutangakuKakunEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc120110.KogakuGassanJikofutangakuKakunEntity" autoMapping="true">
