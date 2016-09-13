@@ -167,6 +167,7 @@ public class HanyoListKogakuGassanJikoFutangakuProcess extends BatchProcessBase<
     private static final RString 出力ファイル名 = new RString("HanyoListKogakuGassanJikoFutangaku.csv");
     private static final RString CSV出力有無_なし = new RString("なし");
     private static final RString CSV出力有無_あり = new RString("あり");
+    private static final RString 斜線 = new RString("/");
     private RString 出力有無;
     private HanyoListKogakuGassanJikoFutangakuProcessParameter parameter;
     private List<KoseiShichosonMaster> 構成市町村マスタlist;
@@ -243,8 +244,8 @@ public class HanyoListKogakuGassanJikoFutangakuProcess extends BatchProcessBase<
     protected void process(HanyoListKogakuGassanJikoFutangakuEntity entity) {
         出力有無 = CSV出力有無_あり;
         HanyoListKogakuGassanJikoFutangakuCsvEntity eucCsvEntity = new HanyoListKogakuGassanJikoFutangakuCsvEntity();
-        連番 = 連番.add(Decimal.ONE);
         eucCsvEntity.set連番(DecimalFormatter.toRString(連番, NUMZERO));
+        連番 = 連番.add(Decimal.ONE);
         edit高額合算自己負担額情報ファイル作成(entity, eucCsvEntity);
         eucCsvWriter.writeLine(eucCsvEntity);
         personalDataList.add(toPersonalData(entity));
@@ -675,8 +676,12 @@ public class HanyoListKogakuGassanJikoFutangakuProcess extends BatchProcessBase<
         List jukyuShinseiJiyuList = new ArrayList();
         RString 受給申請事由 = RString.EMPTY;
         RString 受給申請事由コード = entity.get受給申請事由();
+        RString 受給申請事由名称 = RString.EMPTY;
+        if (受給申請事由コード != null) {
+            受給申請事由名称 = JukyuShinseiJiyu.toValue(受給申請事由コード).get名称();
+        }
         jukyuShinseiJiyuList.addAll(Arrays.asList(JukyuShinseiJiyu.values()));
-        if (jukyuShinseiJiyuList.contains(受給申請事由コード)) {
+        if (jukyuShinseiJiyuList.contains(受給申請事由名称)) {
             getJukyuShinseiJiyu(受給申請事由コード, 受給申請事由, entity.get要支援者認定申請区分());
         }
         return 受給申請事由;
@@ -706,25 +711,33 @@ public class HanyoListKogakuGassanJikoFutangakuProcess extends BatchProcessBase<
     }
 
     private RString dataToRString(FlexibleDate 日付) {
-        if (日付 == null || 日付.isEmpty()) {
-            return RString.EMPTY;
+        RString temp = getパターン32(日付);
+        if (!parameter.is日付スラッシュ付加() && !RString.isNullOrEmpty(temp)) {
+            temp = temp.replace(斜線, RString.EMPTY);
         }
-        if (!parameter.is日付スラッシュ付加()) {
-            return 日付.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString();
-        } else {
-            return 日付.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
+        return temp;
+    }
+
+    private RString getパターン32(FlexibleDate date) {
+        if (date != null) {
+            return date.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
         }
+        return RString.EMPTY;
+    }
+
+    private RString getパターン32(FlexibleYearMonth date) {
+        if (date != null) {
+            return date.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
+        }
+        return RString.EMPTY;
     }
 
     private RString monthToRString(FlexibleYearMonth 日付) {
-        if (日付 == null || 日付.isEmpty()) {
-            return RString.EMPTY;
+        RString temp = getパターン32(日付);
+        if (!parameter.is日付スラッシュ付加() && !RString.isNullOrEmpty(temp)) {
+            temp = temp.replace(斜線, RString.EMPTY);
         }
-        if (!parameter.is日付スラッシュ付加()) {
-            return 日付.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString();
-        } else {
-            return 日付.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
-        }
+        return temp;
     }
 
     @Override
