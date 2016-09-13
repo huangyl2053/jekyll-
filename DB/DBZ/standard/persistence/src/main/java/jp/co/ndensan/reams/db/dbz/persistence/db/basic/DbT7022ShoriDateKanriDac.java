@@ -136,7 +136,8 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
     }
 
     /**
-     * requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage(処理日付管理マスタエンティティ.toString()));
+     * requireNonNull(entity,
+     * UrSystemErrorMessages.値がnull.getReplacedMessage(処理日付管理マスタエンティティ.toString()));
      *
      * DbT7022ShoriDateKanriEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
      *
@@ -1851,7 +1852,7 @@ public class DbT7022ShoriDateKanriDac implements ISaveable<DbT7022ShoriDateKanri
             RString 処理枝番, List<RString> 処理名List) throws NullPointerException {
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-        return accessor.selectSpecific(max(kijunTimestamp)).
+        return accessor.select().
                 table(DbT7022ShoriDateKanri.class).
                 where(and(
                                 eq(subGyomuCode, SubGyomuCode.DBB介護賦課),
