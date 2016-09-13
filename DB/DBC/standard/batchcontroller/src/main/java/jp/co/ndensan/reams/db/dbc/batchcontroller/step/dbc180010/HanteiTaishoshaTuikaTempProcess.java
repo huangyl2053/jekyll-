@@ -49,7 +49,7 @@ public class HanteiTaishoshaTuikaTempProcess extends BatchProcessBase<SogoJigyoT
         hanteiTaishoshaTempEntity.setTaishoNendo(processParameter.get対象年度());
         hanteiTaishoshaTempEntity.setTaishoKubun(対象区分2);
         hanteiTaishoshaTempEntity.setHihokenshaNo(entity.getDbT3105SogoJigyoTaishosha_hihokenshaNo());
-        hanteiTaishoshaTempEntity.setShikibetsuCode(entity.getUaFt200FindShikibetsuTaisho_shikibetsuCode());
+        hanteiTaishoshaTempEntity.setShikibetsuCode(entity.getShikibetsuCode());
         hanteiTaishoshaTempEntity.setSetaiCode(entity.getSetaiCode());
         hanteiTaishoshaTempEntity.setIdobi(entity.getIdoYMD());
         hanteiTaishoshaTempEntity.setIdoJiyuCode(entity.getIdoJiyuCode());
