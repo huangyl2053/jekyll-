@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc710160;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -467,6 +466,7 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
         output.set負担額合計_70歳未満(doカンマ編集(高額合算支給額計算結果.getUnder70_FutangakuGokei()));
         output.set未満支給額合計_70歳(doカンマ編集(高額合算支給額計算結果.getUnder70_ShikyugakuGokei()));
         output.set負担額の合計額(doカンマ編集(高額合算支給額計算結果.getFutangakuGokei()));
+        output.set支給額合計額(doカンマ編集(高額合算支給額計算結果.getShikyugakuGokei()));
         if (高額合算支給額計算結果.getDataKubun() != null) {
             Kaigogassan_DataKubun データ区分名称 = Kaigogassan_DataKubun.toValue(高額合算支給額計算結果.getDataKubun());
             output.setデータ区分(データ区分名称 != null ? データ区分名称.get名称() : RString.EMPTY);
@@ -568,13 +568,9 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
     }
 
     private RString get受給申請事由(DbT4001JukyushaDaichoEntity 受給者台帳) {
-        List jukyuShinseiJiyuList = new ArrayList();
         RString 受給申請事由 = RString.EMPTY;
         RString 受給申請事由コード = getColumnValue(受給者台帳.getJukyuShinseiJiyu());
-        jukyuShinseiJiyuList.addAll(Arrays.asList(JukyuShinseiJiyu.values()));
-        if (jukyuShinseiJiyuList.contains(受給申請事由コード)) {
-            getJukyuShinseiJiyu(受給申請事由コード, 受給申請事由, 受給者台帳.getYoshienshaNinteiShinseiFlag() ? 定値RSTRING_1 : 定値RSTRING_0);
-        }
+        getJukyuShinseiJiyu(受給申請事由コード, 受給申請事由, 受給者台帳.getYoshienshaNinteiShinseiFlag() ? 定値RSTRING_1 : 定値RSTRING_0);
         return 受給申請事由;
     }
 
