@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJ
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -18,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * ShisetsuJohoCommonChildDiv のクラスファイル
@@ -25,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
  * @reamsid_L DBA-0190-010 houtianpeng
  */
 public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJohoCommonChildDiv {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     /*
      * [ private の作成 ]
@@ -224,7 +227,7 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
             State[] enumArray = State.values();
 
             for (State enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -239,11 +242,11 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
     }
 
     public State getMode_State() {
-        return (State) _CommonChildDivModeUtil.getMode( this.modes, State.class );
+        return (State) _CommonChildDivModeUtil.getMode(this.modes, State.class);
     }
 
-    public void setMode_State( State value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, State.class , value );
+    public void setMode_State(State value) {
+        _CommonChildDivModeUtil.setMode(this.modes, State.class, value);
     }
 
     // </editor-fold>
@@ -321,6 +324,11 @@ public class ShisetsuJohoCommonChildDivDiv extends Panel implements IShisetsuJoh
     @Override
     public RString get施設種類() {
         return getHandler().get施設種類();
+    }
+
+    @Override
+    public ValidationMessageControlPairs validate施設種類() {
+        return getHandler().validate施設種類();
     }
 
     /**
