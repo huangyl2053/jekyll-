@@ -25,6 +25,7 @@ public class KogakugassanMybatisParameter implements IMyBatisParameter {
     private FlexibleYearMonth shoriYM;
     private RString saishoriKubun;
     private RString shutsuryokujunId;
+    private RString shoriKunbun;
     private RString 出力順;
     private RString データ区分_1;
     private RString データ区分_3;
@@ -37,13 +38,16 @@ public class KogakugassanMybatisParameter implements IMyBatisParameter {
      * @param shoriYM 処理年月
      * @param saishoriKubun 再処理区分
      * @param shutsuryokujunId 出力順ID
+     * @param shoriKunbun 処理区分
      */
     public KogakugassanMybatisParameter(FlexibleYearMonth shoriYM,
             RString saishoriKubun,
-            RString shutsuryokujunId) {
+            RString shutsuryokujunId,
+            RString shoriKunbun) {
         this.shoriYM = shoriYM;
         this.saishoriKubun = saishoriKubun;
         this.shutsuryokujunId = shutsuryokujunId;
+        this.shoriKunbun = shoriKunbun;
         this.データ区分_1 = Kaigogassan_DataSakuseiKubun.国保連取込情報.getコード();
         this.データ区分_3 = Kaigogassan_DataSakuseiKubun.計算処理時_全受給者.getコード();
         this.介護合算_送付対象外 = Kaigogassan_SofuTaishogaiKubun.送付対象外.getコード();

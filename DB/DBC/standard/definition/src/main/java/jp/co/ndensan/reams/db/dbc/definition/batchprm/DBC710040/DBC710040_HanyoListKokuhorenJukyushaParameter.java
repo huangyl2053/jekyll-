@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710040;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistkokuhorenjukyusha.HanyoListKokuhorenJukyushaProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -84,4 +85,31 @@ public class DBC710040_HanyoListKokuhorenJukyushaParameter extends BatchParamete
     @BatchParameter(key = SAKUJYOMERU, name = "削除含める")
     private boolean sakujyoMeru;
 
+    /**
+     * プロセスパラメータを作成します。
+     *
+     * @return プロセスパラメータ
+     */
+    public HanyoListKokuhorenJukyushaProcessParameter toProcessParameter() {
+        return new HanyoListKokuhorenJukyushaProcessParameter(chohyoId,
+                shutsuryokujunId,
+                shutsuryokukomokuId,
+                komokumeFuka,
+                renbanFuka,
+                hitsukeHenshu,
+                hokenshaKodo,
+                hitsukeChushutsuKubun,
+                shoriTaishoNengetsuFrom,
+                shoriTaishoNengetsuTo,
+                idoNengetsuFrom,
+                idoNengetsuTo,
+                kakuidozukinoSaishinNomi,
+                idoKubun,
+                minashiYokaigoKubun,
+                jigyoshaBanggo,
+                kohiFutanJyogengakuGengaku,
+                riyoshaFutanKubun,
+                tokuteiNyushoshaSabisuKubun,
+                sakujyoMeru);
+    }
 }

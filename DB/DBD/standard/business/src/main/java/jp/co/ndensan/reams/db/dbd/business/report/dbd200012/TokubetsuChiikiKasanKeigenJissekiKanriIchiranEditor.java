@@ -162,7 +162,9 @@ public class TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor implements ITok
                 source.list_12 = new RString(String.valueOf(給付実績明細Entity.getサービス単位数()));
             }
         } else if (該当給付実績被保険者情報Index + 1 == 給付実績被保険者リスト.size()
-                && (行数Index == 給付実績被保険者リスト.get(該当給付実績被保険者情報Index).get給付実績明細リスト().size() + 1)) {
+                && ((行数Index == 給付実績被保険者リスト.get(該当給付実績被保険者情報Index).get給付実績明細リスト().size() + 1
+                && 給付実績被保険者リスト.get(該当給付実績被保険者情報Index).get給付実績明細リスト().size() >= 2)
+                || (行数Index == 3 && 給付実績被保険者リスト.get(該当給付実績被保険者情報Index).get給付実績明細リスト().size() < 2))) {
             source.list_9 = new RString("事業所計");
             source.list_13 = RString.EMPTY;
             source.list_14 = new RString("該当");
@@ -184,8 +186,9 @@ public class TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor implements ITok
         }
         if (給付実績被保険者リスト != null) {
             List<KyuhuJissekiMeisai> 給付実績明細リスト = 給付実績被保険者リスト.get(該当給付実績被保険者情報Index).get給付実績明細リスト();
-            if (is行計(source) && (行数Index == this.帳票情報.get給付実績被保険者リスト().size()
-                    || 行数Index == 給付実績明細リスト.size())) {
+            if (is行計(source)
+                    && ((行数Index == 給付実績明細リスト.size() && 給付実績明細リスト.size() >= 2)
+                    || (行数Index == 2 && 給付実績明細リスト.size() < 2))) {
                 KyuhuJissekiHihokensha 給付実績被保険者Entity = 給付実績被保険者リスト.get(該当給付実績被保険者情報Index);
                 source.list_9 = new RString("計");
                 get給付実績被保険者(source, 給付実績被保険者Entity);

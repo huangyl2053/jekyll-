@@ -10,8 +10,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuShikyuHanteiKekka;
 import jp.co.ndensan.reams.db.dbc.business.core.servicenokanribangourendou.JigyouKetteiTutisyoResult;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0500011.KougakuKetteiTuutisyoDiv;
-import jp.co.ndensan.reams.db.dbc.service.core.kougakuketteituutisyo.KougakuKetteiTuutisyoManager;
 import jp.co.ndensan.reams.db.dbc.service.core.kogakuservicehiketteitsuchishotan.KogakuServicehiKetteiTsuchishoTan;
+import jp.co.ndensan.reams.db.dbc.service.core.kougakuketteituutisyo.KougakuKetteiTuutisyoManager;
 import jp.co.ndensan.reams.db.dbc.service.report.dbc100107.KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiPrintService;
 import jp.co.ndensan.reams.db.dbc.service.report.dbc100108.KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriPrintService;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -141,7 +141,7 @@ public class KougakuKetteiTuutisyoHandler {
                 証記載保険者番号,
                 div.getKyoTuuKaigoAtena().get氏名漢字()
         );
-        if (!div.getTxtSiharaiYoteibi().isVisible()) {
+        if (div.getTxtSiharaiYoteibi().isVisible()) {
             KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriPrintService printAri = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriPrintService();
             return printAri.printSingle(帳票情報Result, 被保険者番号, 識別コード, new FlexibleDate(div.getTxtHakkoubi().getValue().toDateString()));
         } else {

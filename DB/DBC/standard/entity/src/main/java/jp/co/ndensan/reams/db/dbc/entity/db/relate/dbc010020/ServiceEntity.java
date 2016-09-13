@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc200013.JuryoIninShoninKaku
 /**
  * 高額サービス費受領委任契約承認（不承認）確認書作成サービス用entityクラスです。
  *
- * @reamsid_L DBC-1970-030 zhouchuanlin
+ * @reamsid_L DBC-1970-060 zhouchuanlin
  */
 @lombok.Getter
 @lombok.Setter

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.business.core.saishinsaketteihokenshain;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.saishinsaketteihokenshain.SaishinsaKetteiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.saishinsaketteihokenshain.SaishinsaKetteitsuchishoCSVEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsaketteihokenshain.SaishinsaKetteiResultEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -15,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -93,7 +95,9 @@ public class SaishinsaKetteiCSVDataCreate {
         resultEntity.set申立事由コード(getColumnValue(entity.get申立事由コード()));
         resultEntity.set申立事由(entity.get申立事由());
         resultEntity.set再審査結果コード(getColumnValue(entity.get再審査結果コード()));
-        resultEntity.set再審査結果(getColumnValue(entity.get再審査結果コード()));
+        RString 再審査結果 = CodeMaster.getCodeMeisho(DBCCodeShubetsu.再審査結果コード.getコード(),
+                entity.get再審査結果コード());
+        resultEntity.set再審査結果(再審査結果);
         resultEntity.set当初請求単位数(doカンマ編集(entity.get当初請求単位数()));
         resultEntity.set原審単位数(doカンマ編集(entity.get原審単位数()));
         resultEntity.set申立単位数(doカンマ編集(entity.get申立単位数()));

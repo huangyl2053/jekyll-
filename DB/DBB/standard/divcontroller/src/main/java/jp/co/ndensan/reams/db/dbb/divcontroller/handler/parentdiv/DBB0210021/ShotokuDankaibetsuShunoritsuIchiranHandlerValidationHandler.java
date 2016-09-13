@@ -29,7 +29,7 @@ public class ShotokuDankaibetsuShunoritsuIchiranHandlerValidationHandler {
     private final ShotokuDankaibetsuShunoritsuIchiranDiv div;
     private static final RString 年齢基準日必須項目チェック = new RString("年齢基準日");
     private static final RString 基準年月必須項目チェック = new RString("基準年月");
-    private static final RString 生年月日年齢必須項目チェック = new RString("年齢もしくは生年月日を");
+    private static final RString 生年月日年齢必須項目チェック = new RString("年齢もしくは生年月日");
 
     /**
      * コンストラクタです。
@@ -105,7 +105,7 @@ public class ShotokuDankaibetsuShunoritsuIchiranHandlerValidationHandler {
 
         年齢基準日必須項目(UrErrorMessages.必須, 年齢基準日必須項目チェック.toString()),
         基準年月必須項目(UrErrorMessages.必須, 基準年月必須項目チェック.toString()),
-        生年月日年齢必須項目(UrErrorMessages.未入力, 生年月日年齢必須項目チェック.toString());
+        生年月日年齢必須項目(UrErrorMessages.未指定, 生年月日年齢必須項目チェック.toString());
 
         private final Message message;
 

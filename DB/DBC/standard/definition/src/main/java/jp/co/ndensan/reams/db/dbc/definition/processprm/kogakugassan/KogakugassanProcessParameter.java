@@ -25,6 +25,7 @@ public class KogakugassanProcessParameter implements IBatchProcessParameter {
     private RString saishoriKubun;
     private RString shutsuryokujunId;
     private YMDHMS now;
+    private RString shoriKunbun;
     private RString 保険者情報_保険者番号;
     private RString 保険者情報_保険者名称;
 
@@ -35,15 +36,18 @@ public class KogakugassanProcessParameter implements IBatchProcessParameter {
      * @param saishoriKubun 再処理区分
      * @param shutsuryokujunId 出力順ID
      * @param now YMDHMS
+     * @param shoriKunbun 処理区分
      */
     public KogakugassanProcessParameter(FlexibleYearMonth shoriYM,
             RString saishoriKubun,
             RString shutsuryokujunId,
-            YMDHMS now) {
+            YMDHMS now,
+            RString shoriKunbun) {
         this.shoriYM = shoriYM;
         this.saishoriKubun = saishoriKubun;
         this.shutsuryokujunId = shutsuryokujunId;
         this.now = now;
+        this.shoriKunbun = shoriKunbun;
     }
 
     /**
@@ -52,7 +56,7 @@ public class KogakugassanProcessParameter implements IBatchProcessParameter {
      * @return KogakugassanMybatisParameter
      */
     public KogakugassanMybatisParameter toKogakugassanMybatisParameter() {
-        return new KogakugassanMybatisParameter(shoriYM, saishoriKubun, shutsuryokujunId);
+        return new KogakugassanMybatisParameter(shoriYM, saishoriKubun, shutsuryokujunId, shoriKunbun);
     }
 
 }

@@ -37,6 +37,7 @@ public class GassanJikofutangakuHakkoIchiranEditor implements
     private static final int INDEX_2 = 2;
     private static final int INDEX_3 = 3;
     private static final int INDEX_4 = 4;
+    private static final RString 年度 = new RString("年度");
     private static final RString 接続文字 = new RString("～");
 
     private final int 連番;
@@ -67,8 +68,14 @@ public class GassanJikofutangakuHakkoIchiranEditor implements
         setHeader(source);
 
         source.list_1 = new RString(連番);
-        source.list_2 = entity.get保険者番号().value();
-        source.list_3 = entity.get被保険者氏名().value();
+
+        if (entity.get被保険者番号() != null && !entity.get被保険者番号().isEmpty()) {
+            source.list_2 = entity.get被保険者番号().value();
+        }
+        if (entity.get被保険者氏名() != null && !entity.get被保険者氏名().isEmpty()) {
+            source.list_3 = entity.get被保険者氏名().value();
+        }
+
         source.list_4 = entity.get生年月日().wareki().
                 eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).fillType(FillType.BLANK).
@@ -77,10 +84,10 @@ public class GassanJikofutangakuHakkoIchiranEditor implements
 
         source.list_6 = entity.get支給申請書整理番号();
         source.list_7 = entity.get対象年度().wareki().
-                eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                fillType(FillType.BLANK).toDateString();
+                eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).
+                fillType(FillType.BLANK).toDateString().concat(年度);
 
-        source.list_8 = getprintTime(entity.get被保険者期間開始年月日(), entity.get被保険者期間終了年月日());
+        source.list_8 = getPrintTime(entity.get被保険者期間開始年月日(), entity.get被保険者期間終了年月日());
         source.list_9 = entity.get自己負担額証明書整理番号();
         if (entity.get補正済_合計_自己負担額() != null) {
             source.list_10 = DecimalFormatter.toコンマ区切りRString(entity.get補正済_合計_自己負担額(), 0);
@@ -107,7 +114,7 @@ public class GassanJikofutangakuHakkoIchiranEditor implements
         return sakuseiYMD.toRString();
     }
 
-    private RString getprintTime(FlexibleDate kaishiYMD, FlexibleDate shuryoYMD) {
+    private RString getPrintTime(FlexibleDate kaishiYMD, FlexibleDate shuryoYMD) {
 
         RStringBuilder sakuseiYMD = new RStringBuilder();
 

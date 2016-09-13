@@ -33,14 +33,10 @@ public class SikakuSaisinnsikiRelateEntity implements Serializable {
     private Decimal 合計所得金額;
     private Decimal 公的年金収入額;
     private FukaJohoTempEntity 賦課情報一時Entity;
-//    private DbT2003KibetsuEntity 介護期別Entity;
-//    private UrT0705ChoteiKyotsuEntity 調定共通Entity;
-//    private FukaJohoRelateEntity 賦課の情報;
     private DbT2001ChoshuHohoEntity 徴収方法の情報;
     private DbT1001HihokenshaDaichoEntity 資格の情報;
     private UrT0508SeikatsuHogoJukyushaEntity 生活保護受給者Entity;
     private UrT0526SeikatsuHogoFujoShuruiEntity 生活保護扶助種類Entity;
-//    private List<SeikatsuHogoJukyushaRelateEntity> 生保の情報;
     private DbT7006RoreiFukushiNenkinJukyushaEntity 老齢の情報;
 
 }

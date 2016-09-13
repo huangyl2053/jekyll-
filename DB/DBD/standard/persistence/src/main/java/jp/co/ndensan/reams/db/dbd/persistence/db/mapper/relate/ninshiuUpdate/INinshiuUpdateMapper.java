@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.ninshiuUpdate;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd511002.NinshiuUpdateMyBatisParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd511002.NinshiuUpdateMyBatisParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd511002.NinshiuUpdateEntity;
 
 /**

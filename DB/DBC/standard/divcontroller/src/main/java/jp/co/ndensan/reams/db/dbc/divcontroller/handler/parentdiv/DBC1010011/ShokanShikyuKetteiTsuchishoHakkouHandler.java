@@ -126,7 +126,10 @@ public class ShokanShikyuKetteiTsuchishoHakkouHandler {
     public void onChange_ServiceTeikyo(HihokenshaNo 被保険者番号, List<ShokanShikyuKetteiTsuchishoHakkouBusiness> 償還払支給判定結果List) {
         RString サービス提供年月 = div.getDdlServiceTeikyoYM().getSelectedKey();
         List<RString> 整理番号List = get整理番号(new FlexibleYearMonth(サービス提供年月), 償還払支給判定結果List);
-        div.getDdlSeiriNO().setSelectedValue(整理番号List.get(0));
+        div.getDdlSeiriNO().setDataSource(get整理番号DataSource(整理番号List));
+        if (!整理番号List.isEmpty()) {
+            div.getDdlSeiriNO().setSelectedValue(整理番号List.get(0));
+        }
         RString 整理番号 = div.getDdlSeiriNO().getSelectedValue();
         FlexibleDate 決定通知書作成年月日 = null;
         for (ShokanShikyuKetteiTsuchishoHakkouBusiness shakan : 償還払支給判定結果List) {
@@ -309,15 +312,36 @@ public class ShokanShikyuKetteiTsuchishoHakkouHandler {
         item.setHihokenshaNo8(償還払支給決定通知書.get償還払支給決定通知書().get被保険者番号8());
         item.setHihokenshaNo9(償還払支給決定通知書.get償還払支給決定通知書().get被保険者番号9());
         item.setHihokenshaNo10(償還払支給決定通知書.get償還払支給決定通知書().get被保険者番号10());
-        item.setUketsukeYMD(new RString(償還払支給決定通知書.get償還払支給決定通知書().getUketsukeYMD().toString()));
-        item.setKetteiYMD(new RString(償還払支給決定通知書.get償還払支給決定通知書().getKetteiYMD().toString()));
-        item.setHonninShiharaiGaku(new RString(償還払支給決定通知書.get償還払支給決定通知書().getShiharaiKingakuUchiwakeRiyoshabun().toString()));
-        item.setTaishoYM(償還払支給決定通知書.get償還払支給決定通知書().getServiceTeikyoYM().toDateString());
+        if (償還払支給決定通知書.get償還払支給決定通知書().getUketsukeYMD() != null) {
+            item.setUketsukeYMD(new RString(償還払支給決定通知書.get償還払支給決定通知書().getUketsukeYMD().toString()));
+        } else {
+            item.setUketsukeYMD(RString.EMPTY);
+        }
+        if (償還払支給決定通知書.get償還払支給決定通知書().getKetteiYMD() != null) {
+            item.setKetteiYMD(new RString(償還払支給決定通知書.get償還払支給決定通知書().getKetteiYMD().toString()));
+        } else {
+            item.setKetteiYMD(RString.EMPTY);
+        }
+        if (償還払支給決定通知書.get償還払支給決定通知書().getShiharaiKingakuUchiwakeRiyoshabun() != null) {
+            item.setHonninShiharaiGaku(new RString(償還払支給決定通知書.get償還払支給決定通知書().
+                    getShiharaiKingakuUchiwakeRiyoshabun().toString()));
+        } else {
+            item.setHonninShiharaiGaku(RString.EMPTY);
+        }
+        if (償還払支給決定通知書.get償還払支給決定通知書().getServiceTeikyoYM() != null) {
+            item.setTaishoYM(償還払支給決定通知書.get償還払支給決定通知書().getServiceTeikyoYM().toDateString());
+        } else {
+            item.setTaishoYM(RString.EMPTY);
+        }
         item.setKyufuShu1(償還払支給決定通知書.get償還払支給決定通知書().get給付の種類1());
         item.setKyufuShu2(償還払支給決定通知書.get償還払支給決定通知書().get給付の種類2());
         item.setKyufuShu3(償還払支給決定通知書.get償還払支給決定通知書().get給付の種類3());
         item.setKekka(償還払支給決定通知書.get償還払支給決定通知書().getShikyuHushikyuKetteiKubun());
-        item.setShikyuGaku(new RString(償還払支給決定通知書.get償還払支給決定通知書().getShiharaiKingaku().toString()));
+        if (償還払支給決定通知書.get償還払支給決定通知書().getShiharaiKingaku() != null) {
+            item.setShikyuGaku(new RString(償還払支給決定通知書.get償還払支給決定通知書().getShiharaiKingaku().toString()));
+        } else {
+            item.setShikyuGaku(RString.EMPTY);
+        }
         item.setRiyu1(償還払支給決定通知書.get償還払支給決定通知書().get増減の理由1());
         item.setRiyuTitle(償還払支給決定通知書.get償還払支給決定通知書().get増減の理由Title());
         item.setRiyu2(償還払支給決定通知書.get償還払支給決定通知書().get増減の理由2());
@@ -412,15 +436,35 @@ public class ShokanShikyuKetteiTsuchishoHakkouHandler {
         item.setHihokenshaNo8(償還払支給決定通知書.get償還払支給決定通知書().get被保険者番号8());
         item.setHihokenshaNo9(償還払支給決定通知書.get償還払支給決定通知書().get被保険者番号9());
         item.setHihokenshaNo10(償還払支給決定通知書.get償還払支給決定通知書().get被保険者番号10());
-        item.setUketsukeYMD(new RString(償還払支給決定通知書.get償還払支給決定通知書().getUketsukeYMD().toString()));
-        item.setKetteiYMD(new RString(償還払支給決定通知書.get償還払支給決定通知書().getKetteiYMD().toString()));
-        item.setHonninShiharaiGaku(new RString(償還払支給決定通知書.get償還払支給決定通知書().getShiharaiKingakuUchiwakeRiyoshabun().toString()));
-        item.setTaishoYM(償還払支給決定通知書.get償還払支給決定通知書().getServiceTeikyoYM().toDateString());
+        if (償還払支給決定通知書.get償還払支給決定通知書().getUketsukeYMD() != null) {
+            item.setUketsukeYMD(new RString(償還払支給決定通知書.get償還払支給決定通知書().getUketsukeYMD().toString()));
+        } else {
+            item.setUketsukeYMD(RString.EMPTY);
+        }
+        if (償還払支給決定通知書.get償還払支給決定通知書().getKetteiYMD() != null) {
+            item.setKetteiYMD(new RString(償還払支給決定通知書.get償還払支給決定通知書().getKetteiYMD().toString()));
+        } else {
+            item.setKetteiYMD(RString.EMPTY);
+        }
+        if (償還払支給決定通知書.get償還払支給決定通知書().getShiharaiKingakuUchiwakeRiyoshabun() != null) {
+            item.setHonninShiharaiGaku(new RString(償還払支給決定通知書.get償還払支給決定通知書().getShiharaiKingakuUchiwakeRiyoshabun().toString()));
+        } else {
+            item.setHonninShiharaiGaku(RString.EMPTY);
+        }
+        if (償還払支給決定通知書.get償還払支給決定通知書().getServiceTeikyoYM() != null) {
+            item.setTaishoYM(償還払支給決定通知書.get償還払支給決定通知書().getServiceTeikyoYM().toDateString());
+        } else {
+            item.setTaishoYM(RString.EMPTY);
+        }
         item.setKyufuShu1(償還払支給決定通知書.get償還払支給決定通知書().get給付の種類1());
         item.setKyufuShu2(償還払支給決定通知書.get償還払支給決定通知書().get給付の種類2());
         item.setKyufuShu3(償還払支給決定通知書.get償還払支給決定通知書().get給付の種類3());
         item.setKekka(償還払支給決定通知書.get償還払支給決定通知書().getShikyuHushikyuKetteiKubun());
-        item.setShikyuGaku(new RString(償還払支給決定通知書.get償還払支給決定通知書().getShiharaiKingaku().toString()));
+        if (償還払支給決定通知書.get償還払支給決定通知書().getShiharaiKingaku() != null) {
+            item.setShikyuGaku(new RString(償還払支給決定通知書.get償還払支給決定通知書().getShiharaiKingaku().toString()));
+        } else {
+            item.setShikyuGaku(RString.EMPTY);
+        }
         item.setRiyu1(償還払支給決定通知書.get償還払支給決定通知書().get増減の理由1());
         item.setRiyuTitle(償還払支給決定通知書.get償還払支給決定通知書().get増減の理由Title());
         item.setRiyu2(償還払支給決定通知書.get償還払支給決定通知書().get増減の理由2());
@@ -447,7 +491,11 @@ public class ShokanShikyuKetteiTsuchishoHakkouHandler {
         item.setKaraFugo(償還払支給決定通知書.get償還払支給決定通知書().getKaraFugo());
         item.setShiharaiStartHMS(償還払支給決定通知書.get償還払支給決定通知書().getShiharaiStart());
         item.setShiharaiEndHMS(償還払支給決定通知書.get償還払支給決定通知書().getShiharaiEnd());
-        item.setSihaYoYmd(new RString(償還払支給決定通知書.get償還払支給決定通知書().get支払予定日().toString()));
+        if (償還払支給決定通知書.get償還払支給決定通知書().get支払予定日() != null) {
+            item.setSihaYoYmd(new RString(償還払支給決定通知書.get償還払支給決定通知書().get支払予定日().toString()));
+        } else {
+            item.setSihaYoYmd(RString.EMPTY);
+        }
         item.setTsuchibun２(償還払支給決定通知書.get償還払支給決定通知書().get通知文2());
         item.setSeirino(償還払支給決定通知書.get償還払支給決定通知書().getSeirino());
         item.setTsuchino(償還払支給決定通知書.get償還払支給決定通知書().getTsuchino());

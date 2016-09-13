@@ -39,7 +39,7 @@
             <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3002KyodoShoriyoJukyushaIdoKihonSofuMapper.allColumns_DbT3002KyodoShoriyoJukyushaIdoKihonSofu" />,
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>                
         FROM
-            rgdb."DbT3002KyodoShoriyoJukyushaIdoKihonSofu"  AS "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"
+            "KyodoJukyushaNewest"  AS "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"
         INNER JOIN 
             rgdb."DbV1001HihokenshaDaicho"  AS "DbT1001HihokenshaDaicho"
         ON 
@@ -74,6 +74,9 @@
     
     <resultMap id="resultMap_HanyoListKyodoJukyusha" autoMapping="true"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc710050.KyodoJukyushaKihonEntity">
+        <id column="dbT3002KyodoShoriyoJukyushaIdoKihonSofu_hiHokenshaNo" />
+        <id column="dbT3002KyodoShoriyoJukyushaIdoKihonSofu_idoYMD" />
+        <id column="dbT3002KyodoShoriyoJukyushaIdoKihonSofu_rirekiNo" />
         <association property="共同処理用受給者異動基本送付" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3002KyodoShoriyoJukyushaIdoKihonSofuMapper.ResultMap_DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity"/>
         <association property="被保険者台帳管理" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>
         <association property="宛名" resultMap = "jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>

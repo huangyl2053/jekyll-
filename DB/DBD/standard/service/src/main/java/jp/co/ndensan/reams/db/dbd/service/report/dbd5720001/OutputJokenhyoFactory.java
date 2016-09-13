@@ -42,7 +42,7 @@ public class OutputJokenhyoFactory {
                 new RString(String.valueOf(JobContextHolder.getJobId())),
                 ReportIdDBD.DBD200037.getReportName(),
                 ページ数,
-                new RString("無し"),
+                new RString("なし"),
                 RString.EMPTY,
                 contribute(parameter));
         jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory.createInstance(item).print();

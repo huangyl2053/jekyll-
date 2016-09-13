@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.sogojigyohikagomoshitateshojo
 import jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.DbWT1001HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110090.DbWT1731KagoMoshitateTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikagomoshitateshojohosofuichiran.SogojigyohiKagoMoshitateshojohoSofuIchiranEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikagomoshitateshojohosofuichiran.SogojigyohiKagoMoshitateshojohoSofuIchiranSource;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikagomoshitateshojohosofuichiran.SogojigyohiKagoMoshitateshojohoSofuSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
  * 帳票設計_DBC200079_総合事業費過誤申立書情報送付一覧表 のeditorクラスです。
@@ -28,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
  */
 public class SogojigyohiKagoMoshitateshojohoSofuBodyEditor implements ISogojigyohiKagoMoshitateshojohoSofuEditor {
 
-    private SogojigyohiKagoMoshitateshojohoSofuIchiranEntity 送付一覧表データ;
+    private final SogojigyohiKagoMoshitateshojohoSofuIchiranEntity 送付一覧表データ;
     private final int 連番;
     private final int 合計;
     private final boolean flag;
@@ -55,7 +56,7 @@ public class SogojigyohiKagoMoshitateshojohoSofuBodyEditor implements ISogojigyo
     }
 
     @Override
-    public SogojigyohiKagoMoshitateshojohoSofuIchiranSource edit(SogojigyohiKagoMoshitateshojohoSofuIchiranSource source) {
+    public SogojigyohiKagoMoshitateshojohoSofuSource edit(SogojigyohiKagoMoshitateshojohoSofuSource source) {
         DbWT1731KagoMoshitateTempEntity 過誤申立一時TBL = 送付一覧表データ.get過誤申立一時TBL();
         DbWT1001HihokenshaTempEntity 被保険者一時TBL = 送付一覧表データ.get被保険者一時TBL();
         source.listUpper_1 = new RString(連番);
@@ -79,6 +80,11 @@ public class SogojigyohiKagoMoshitateshojohoSofuBodyEditor implements ISogojigyo
             source.gokeiKensuTitle = 合計件数タイトル;
             source.gokeiKensu = new RString(合計).concat(件);
         }
+        source.listUpper_11 = 被保険者一時TBL.getYubinNo();
+        source.listUpper_12 = 被保険者一時TBL.getChoikiCode();
+        source.listUpper_13 = 被保険者一時TBL.getGyoseikuCode();
+        source.listUpper_14 = 被保険者一時TBL.getShimei50onKana();
+        source.listUpper_15 = getColumnValue(被保険者一時TBL.getShichosonCode());
         return source;
     }
 
@@ -94,6 +100,13 @@ public class SogojigyohiKagoMoshitateshojohoSofuBodyEditor implements ISogojigyo
         if (送付一覧表データ.get過誤申立一時TBL().getMoshitateJiyuCode() != null) {
             return CodeMaster.getCodeMeisho(SubGyomuCode.DBC介護給付, code,
                     new Code(送付一覧表データ.get過誤申立一時TBL().getMoshitateJiyuCode()));
+        }
+        return RString.EMPTY;
+    }
+
+    private RString getColumnValue(IDbColumnMappable entity) {
+        if (null != entity) {
+            return entity.getColumnValue();
         }
         return RString.EMPTY;
     }

@@ -50,7 +50,7 @@ public class KogakuKetteiTsuchiShoEntity {
     private RString 不支給理由;
     private RString 窓口払;
     private RString 口座払;
-    private RString 金融機関名称;
+    private RString 金融機関;
     private RString 支給不支給区分;
     private RString 持ちもの;
     private RString 支払場所;

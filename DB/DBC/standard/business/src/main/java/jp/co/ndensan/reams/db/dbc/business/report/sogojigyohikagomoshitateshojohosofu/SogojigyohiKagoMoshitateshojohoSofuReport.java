@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.report.sogojigyohikagomoshitateshojohosofu;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikagomoshitateshojohosofuichiran.SogojigyohiKagoMoshitateshojohoSofuIchiranEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikagomoshitateshojohosofuichiran.SogojigyohiKagoMoshitateshojohoSofuIchiranSource;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikagomoshitateshojohosofuichiran.SogojigyohiKagoMoshitateshojohoSofuSource;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @author DBC-2045-042 zhengshenlei
  */
-public class SogojigyohiKagoMoshitateshojohoSofuReport extends Report<SogojigyohiKagoMoshitateshojohoSofuIchiranSource> {
+public class SogojigyohiKagoMoshitateshojohoSofuReport extends Report<SogojigyohiKagoMoshitateshojohoSofuSource> {
 
     private final SogojigyohiKagoMoshitateshojohoSofuIchiranEntity 送付一覧表データ;
     private final IOutputOrder 出力順情報;
@@ -57,7 +57,7 @@ public class SogojigyohiKagoMoshitateshojohoSofuReport extends Report<Sogojigyoh
     }
 
     @Override
-    public void writeBy(ReportSourceWriter<SogojigyohiKagoMoshitateshojohoSofuIchiranSource> writer) {
+    public void writeBy(ReportSourceWriter<SogojigyohiKagoMoshitateshojohoSofuSource> writer) {
         ISogojigyohiKagoMoshitateshojohoSofuEditor headEditor
                 = new SogojigyohiKagoMoshitateshojohoSofuHeadEditor(送付一覧表データ, 出力順情報, 処理年月, 作成日時);
         ISogojigyohiKagoMoshitateshojohoSofuEditor bodyEditor

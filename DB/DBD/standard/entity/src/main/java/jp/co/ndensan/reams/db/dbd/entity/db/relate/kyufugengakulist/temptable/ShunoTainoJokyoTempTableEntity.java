@@ -117,11 +117,11 @@ public class ShunoTainoJokyoTempTableEntity extends DbTableEntityBase<ShunoTaino
     @TempTableColumnOrder(34)
     private FlexibleDate jikoKisanYMD;
     @TempTableColumnOrder(35)
-    private JikoKisanbiKubun jikoKisanJiyu;
+    private RString jikoKisanJiyu;
     @TempTableColumnOrder(36)
-    private MinoKannoKubun minoKannoKubun;
+    private RString minoKannoKubun;
     @TempTableColumnOrder(37)
-    private JikoKubun jikoKubun;
+    private RString jikoKubun;
     @TempTableColumnOrder(38)
     private RString tainoKubun;
 }

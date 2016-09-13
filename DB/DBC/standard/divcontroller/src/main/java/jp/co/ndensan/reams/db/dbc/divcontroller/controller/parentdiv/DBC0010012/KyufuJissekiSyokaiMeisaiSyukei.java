@@ -68,6 +68,8 @@ public class KyufuJissekiSyokaiMeisaiSyukei {
                 new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString()),
                 ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
                 ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class));
+        FlexibleYearMonth 今提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
+        ViewStateHolder.put(ViewStateKeys.サービス提供年月, 今提供年月);
         return ResponseData.of(div).respond();
     }
 
@@ -85,6 +87,8 @@ public class KyufuJissekiSyokaiMeisaiSyukei {
                 new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString()),
                 ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
                 ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class));
+        FlexibleYearMonth 今提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
+        ViewStateHolder.put(ViewStateKeys.サービス提供年月, 今提供年月);
         return ResponseData.of(div).respond();
     }
 

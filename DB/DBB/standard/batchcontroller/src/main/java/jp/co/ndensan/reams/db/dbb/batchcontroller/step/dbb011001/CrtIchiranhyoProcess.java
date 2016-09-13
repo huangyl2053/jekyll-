@@ -373,12 +373,12 @@ public class CrtIchiranhyoProcess extends BatchKeyBreakBase<TokuchoKariKeisangoF
 
     private boolean set開始月_6月(Decimal 特徴期期別金額01, Decimal 特徴期期別金額02, Decimal 特徴期期別金額03) {
         return 特徴期期別金額01 != null && 特徴期期別金額02 != null && 特徴期期別金額03 != null && 特徴期期別金額01.equals(Decimal.ZERO)
-                && 特徴期期別金額02.intValue() > INT_0 && 特徴期期別金額03.intValue() > INT_0;
+                && INT_0 < 特徴期期別金額02.intValue() && INT_0 < 特徴期期別金額03.intValue();
     }
 
     private boolean set開始月_継続(Decimal 特徴期期別金額01, Decimal 特徴期期別金額02, Decimal 特徴期期別金額03) {
-        return 特徴期期別金額01 != null && 特徴期期別金額02 != null && 特徴期期別金額03 != null && 特徴期期別金額01.intValue() > INT_0
-                && 特徴期期別金額02.intValue() > INT_0 && 特徴期期別金額03.intValue() > INT_0;
+        return 特徴期期別金額01 != null && 特徴期期別金額02 != null && 特徴期期別金額03 != null && INT_0 < 特徴期期別金額01.intValue()
+                && INT_0 < 特徴期期別金額02.intValue() && INT_0 < 特徴期期別金額03.intValue();
     }
 
     private RString get通知書番号(TsuchishoNo 通知書番号) {

@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 /**
  * 帳票設計_DBC200034_高額合算自己負担額証明書情報取込一覧表 Property
  *
- * @reamsid_L DBC-2640-010 zhengshenlei
+ * @reamsid_L DBC-2640-030 zhengshenlei
  */
 public class KogakuGassanJikofutangakuShomeiProperty extends ReportPropertyBase<GassanJikofutangakuShomeishoTorikomiIchiranSource> {
 
@@ -113,6 +113,7 @@ public class KogakuGassanJikofutangakuShomeiProperty extends ReportPropertyBase<
             Breakers<GassanJikofutangakuShomeishoTorikomiIchiranSource> breakers,
             BreakerCatalog<GassanJikofutangakuShomeishoTorikomiIchiranSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
+
 
             pageBreakKeys) {
             @Override

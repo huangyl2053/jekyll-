@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.sogojigyohikagomoshitateshojo
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikagomoshitateshojohosofuichiran.SogojigyohiKagoMoshitateshojohoSofuIchiranEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikagomoshitateshojohosofuichiran.SogojigyohiKagoMoshitateshojohoSofuIchiranSource;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikagomoshitateshojohosofuichiran.SogojigyohiKagoMoshitateshojohoSofuSource;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -60,7 +60,7 @@ public class SogojigyohiKagoMoshitateshojohoSofuHeadEditor implements ISogojigyo
     }
 
     @Override
-    public SogojigyohiKagoMoshitateshojohoSofuIchiranSource edit(SogojigyohiKagoMoshitateshojohoSofuIchiranSource source) {
+    public SogojigyohiKagoMoshitateshojohoSofuSource edit(SogojigyohiKagoMoshitateshojohoSofuSource source) {
         source.printTimeStamp = get印刷日時(作成日時);
         if (処理年月 != null) {
             source.sofuYM = 処理年月.wareki().eraType(EraType.KANJI_RYAKU).
@@ -92,7 +92,7 @@ public class SogojigyohiKagoMoshitateshojohoSofuHeadEditor implements ISogojigyo
         return sakuseiYMD.toRString();
     }
 
-    private void setHeader(SogojigyohiKagoMoshitateshojohoSofuIchiranSource source) {
+    private void setHeader(SogojigyohiKagoMoshitateshojohoSofuSource source) {
         RString 改頁１ = RString.EMPTY;
         RString 改頁２ = RString.EMPTY;
         RString 改頁３ = RString.EMPTY;

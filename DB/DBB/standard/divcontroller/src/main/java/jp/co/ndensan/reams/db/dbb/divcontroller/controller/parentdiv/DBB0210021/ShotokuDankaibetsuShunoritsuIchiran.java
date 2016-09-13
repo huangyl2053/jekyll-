@@ -45,8 +45,8 @@ public class ShotokuDankaibetsuShunoritsuIchiran {
     public ResponseData<ShotokuDankaibetsuShunoritsuIchiranDiv> onChange_radChushutsuJoken(ShotokuDankaibetsuShunoritsuIchiranDiv div) {
         RDate 基準日 = RDate.getNowDate();
         RString 日付関連_調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, 基準日, SubGyomuCode.DBB介護賦課);
-        RDate 調定年度 = new RDate(日付関連_調定年度.toString());
-        getHandler(div).onChange_radChushutsuJoken(調定年度);
+        RString 日付関連_当初年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_当初年度, 基準日, SubGyomuCode.DBB介護賦課);
+        getHandler(div).onChange_radChushutsuJoken(日付関連_調定年度, 日付関連_当初年度);
         return ResponseData.of(div).respond();
     }
 

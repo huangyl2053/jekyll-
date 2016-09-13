@@ -295,4 +295,38 @@ public class EditedKoza {
             return 口座.get支店コード().value();
         }
     }
+
+    /**
+     * 振込支店名取得。
+     *
+     * @return 振込支店名
+     */
+    public RString get振込支店名() {
+        if (null == 口座) {
+            return RString.EMPTY;
+        } else {
+            if (口座.isゆうちょ銀行()) {
+                return RString.EMPTY;
+            } else {
+                return 口座.get支店().get支店名称();
+            }
+        }
+    }
+
+    /**
+     * 振込支店カナ名取得。
+     *
+     * @return 支店カナ名称
+     */
+    public RString get振込支店カナ名() {
+        if (null == 口座) {
+            return RString.EMPTY;
+        } else {
+            if (口座.isゆうちょ銀行()) {
+                return RString.EMPTY;
+            } else {
+                return 口座.get支店().get支店カナ名称();
+            }
+        }
+    }
 }

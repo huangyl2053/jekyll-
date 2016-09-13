@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180070.KenkoKaruteRenkeiKoikiTempTableSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180070.KenkouKaruteRenkeiDataKoikiProcess;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180070.DBC180070_KenkoKaruteRenkeiDataSakuseiKoikiParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -16,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBC-5020-011 wangxiaodong
  */
-public class DBC180070_KenkoKaruteRenkeiDataSakuseiKoiki extends BatchFlowBase {
+public class DBC180070_KenkoKaruteRenkeiDataSakuseiKoiki extends BatchFlowBase<DBC180070_KenkoKaruteRenkeiDataSakuseiKoikiParameter> {
 
     private static final String 広域介護被保険者配信用一時テーブル作成 = "KenkoKaruteRenkeiDataKoikiTempTableSakusei";
     private static final String 健康かるて連携データ作成_広域用 = "KenkoKaruteRenkeiDataSakuseiKoiki";
