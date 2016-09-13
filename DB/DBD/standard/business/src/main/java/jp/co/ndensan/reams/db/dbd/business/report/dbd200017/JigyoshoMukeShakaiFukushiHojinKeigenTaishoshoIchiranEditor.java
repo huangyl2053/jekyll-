@@ -39,11 +39,11 @@ public class JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranEditor implemen
     private final IOutputOrder iOutputOrder;
     private final IOutputOrder breakIOutputOrder;
     private final int index;
-    private static final int LISTINDEX_0 = 0;
     private static final int LISTINDEX_1 = 1;
     private static final int LISTINDEX_2 = 2;
     private static final int LISTINDEX_3 = 3;
     private static final int LISTINDEX_4 = 4;
+    private static final int LISTINDEX_5 = 5;
 
     /**
      * インスタンスを生成します。
@@ -165,37 +165,37 @@ public class JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranEditor implemen
     private void setiOutputOrder(JigyoshoMukeShakaiFukushiHojinKeigenReportSource source) {
 
         Map<Integer, ISetSortItem> 出力順Map = ChohyoUtil.get出力順項目Map(iOutputOrder);
-        if (出力順Map.get(LISTINDEX_0) != null) {
-            source.shutsuryokujun1 = 出力順Map.get(LISTINDEX_0).get項目名();
-        }
         if (出力順Map.get(LISTINDEX_1) != null) {
-            source.shutsuryokujun2 = 出力順Map.get(LISTINDEX_1).get項目名();
+            source.shutsuryokujun1 = 出力順Map.get(LISTINDEX_1).get項目名();
         }
         if (出力順Map.get(LISTINDEX_2) != null) {
-            source.shutsuryokujun3 = 出力順Map.get(LISTINDEX_2).get項目名();
+            source.shutsuryokujun2 = 出力順Map.get(LISTINDEX_2).get項目名();
         }
         if (出力順Map.get(LISTINDEX_3) != null) {
-            source.shutsuryokujun4 = 出力順Map.get(LISTINDEX_3).get項目名();
+            source.shutsuryokujun3 = 出力順Map.get(LISTINDEX_3).get項目名();
         }
         if (出力順Map.get(LISTINDEX_4) != null) {
-            source.shutsuryokujun5 = 出力順Map.get(LISTINDEX_4).get項目名();
+            source.shutsuryokujun4 = 出力順Map.get(LISTINDEX_4).get項目名();
+        }
+        if (出力順Map.get(LISTINDEX_5) != null) {
+            source.shutsuryokujun5 = 出力順Map.get(LISTINDEX_5).get項目名();
         }
 
         Map<Integer, ISetSortItem> 改頁Map = ChohyoUtil.get改頁項目Map(breakIOutputOrder);
-        if (改頁Map.get(LISTINDEX_0) != null) {
-            source.kaiPege1 = 改頁Map.get(LISTINDEX_0).get項目名();
-        }
         if (改頁Map.get(LISTINDEX_1) != null) {
-            source.kaiPege2 = 改頁Map.get(LISTINDEX_1).get項目名();
+            source.kaiPege1 = 改頁Map.get(LISTINDEX_1).get項目名();
         }
         if (改頁Map.get(LISTINDEX_2) != null) {
-            source.kaiPege3 = 改頁Map.get(LISTINDEX_2).get項目名();
+            source.kaiPege2 = 改頁Map.get(LISTINDEX_2).get項目名();
         }
         if (改頁Map.get(LISTINDEX_3) != null) {
-            source.kaiPege4 = 改頁Map.get(LISTINDEX_3).get項目名();
+            source.kaiPege3 = 改頁Map.get(LISTINDEX_3).get項目名();
         }
         if (改頁Map.get(LISTINDEX_4) != null) {
-            source.kaiPege5 = 改頁Map.get(LISTINDEX_4).get項目名();
+            source.kaiPege4 = 改頁Map.get(LISTINDEX_4).get項目名();
+        }
+        if (改頁Map.get(LISTINDEX_5) != null) {
+            source.kaiPege5 = 改頁Map.get(LISTINDEX_5).get項目名();
         }
 
     }
