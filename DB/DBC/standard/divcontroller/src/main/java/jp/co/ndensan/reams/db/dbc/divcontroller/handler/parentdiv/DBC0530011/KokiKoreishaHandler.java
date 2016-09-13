@@ -80,7 +80,7 @@ public class KokiKoreishaHandler {
         ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         IHokenjaManager iHokenjaManager = HokenjaManagerFactory.createInstance();
         INewSearchCondition 検索条件 = SearchConditionFactory.condition(
-                HokenjaSearchItem.保険者種別, StringOperator.完全一致, HokenjaShubetsuType.国民健康保険.code());
+                HokenjaSearchItem.保険者種別, StringOperator.完全一致, HokenjaShubetsuType.後期高齢.code());
         List<Hokenja> hokenja = iHokenjaManager.get保険者一覧(検索条件);
         RString 介護導入形態 = shichosonSecurityJoho.get導入形態コード().value();
         if (介護導入形態.equals(コード111)) {
