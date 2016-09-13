@@ -127,6 +127,7 @@ public class SaishinsaKetteiReportProcess extends BatchKeyBreakBase<SaishinsaKet
                 }
             }
         }
+        改頁項目リスト.add(SaishinsaKetteiHokenshaInOutPutOrder.証記載保険者番号.get項目ID());
         int index = 0;
         for (ISetSortItem item : 並び順.get設定項目リスト()) {
             if (item.is改頁項目()) {
