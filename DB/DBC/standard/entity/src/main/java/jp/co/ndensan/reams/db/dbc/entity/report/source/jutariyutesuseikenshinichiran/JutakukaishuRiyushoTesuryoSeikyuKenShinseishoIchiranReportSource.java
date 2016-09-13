@@ -1,8 +1,12 @@
 package jp.co.ndensan.reams.db.dbc.entity.report.source.jutariyutesuseikenshinichiran;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 住宅改修理由書作成手数料請求書兼申請書作成 のReportSourceです。
@@ -38,6 +42,12 @@ public class JutakukaishuRiyushoTesuryoSeikyuKenShinseishoIchiranReportSource im
     public RString list1_7;
     @ReportItem(name = "list1_8", length = 35, order = 13)
     public RString list1_8;
+    @ReportPerson(id = "X")
+    public ShikibetsuCode shikibetuCode;
+    @ReportExpandedInfo(id = "X")
+    public ExpandedInformation hihokenshaNo;
+    @ReportExpandedInfo(id = "X")
+    public ExpandedInformation hihokenshaName;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
