@@ -37,12 +37,22 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranPageBreak extends PageBreaker<
     @Override
     public boolean isBreak(ReportLineRecord<TokubetsuChoshuKarisanteiKekkaIchiranSource> currentSource,
             ReportLineRecord<TokubetsuChoshuKarisanteiKekkaIchiranSource> nextSource) {
-        boolean flag = false;
+        boolean flag;
+        // TODO QA971
         if (this.breakKeysList.contains(TokubetsuChoshuKarisanteiKekkaIchiranOutPutOrder.郵便番号.getフォームフィールド名())
                 && !currentSource.getSource().listUpper_2.equals(nextSource.getSource().listUpper_2)) {
             flag = true;
+        } else if (this.breakKeysList.contains(TokubetsuChoshuKarisanteiKekkaIchiranOutPutOrder.町域コード.getフォームフィールド名())
+                && !currentSource.getSource().choikiCode.equals(nextSource.getSource().choikiCode)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(TokubetsuChoshuKarisanteiKekkaIchiranOutPutOrder.行政区コード.getフォームフィールド名())
+                && !currentSource.getSource().gyoseikuCode.equals(nextSource.getSource().gyoseikuCode)) {
+            flag = true;
         } else if (this.breakKeysList.contains(TokubetsuChoshuKarisanteiKekkaIchiranOutPutOrder.世帯コード.getフォームフィールド名())
                 && !currentSource.getSource().listLower_2.equals(nextSource.getSource().listLower_2)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(TokubetsuChoshuKarisanteiKekkaIchiranOutPutOrder.識別コード.getフォームフィールド名())
+                && !currentSource.getSource().shikibetsuCode.equals(nextSource.getSource().shikibetsuCode)) {
             flag = true;
         } else if (this.breakKeysList.contains(TokubetsuChoshuKarisanteiKekkaIchiranOutPutOrder.生年月日.getフォームフィールド名())
                 && !currentSource.getSource().listUpper_5.equals(nextSource.getSource().listUpper_5)) {
@@ -50,14 +60,26 @@ public class TokubetsuChoshuKarisanteiKekkaIchiranPageBreak extends PageBreaker<
         } else if (this.breakKeysList.contains(TokubetsuChoshuKarisanteiKekkaIchiranOutPutOrder.性別.getフォームフィールド名())
                 && !currentSource.getSource().listUpper_6.equals(nextSource.getSource().listUpper_6)) {
             flag = true;
-        } else if (this.breakKeysList.contains(TokubetsuChoshuKarisanteiKekkaIchiranOutPutOrder.市町村コード.getフォームフィールド名())
-                && !currentSource.getSource().hokenshaNo.equals(nextSource.getSource().hokenshaNo)) {
-            flag = true;
-        } else if (this.breakKeysList.contains(TokubetsuChoshuKarisanteiKekkaIchiranOutPutOrder.通知書番号.getフォームフィールド名())
-                && !currentSource.getSource().listLower_1.equals(nextSource.getSource().listLower_1)) {
-            flag = true;
+        } else {
+            flag = getBreakFlag(currentSource, nextSource);
         }
         return flag;
+    }
+
+    private boolean getBreakFlag(ReportLineRecord<TokubetsuChoshuKarisanteiKekkaIchiranSource> currentSource,
+            ReportLineRecord<TokubetsuChoshuKarisanteiKekkaIchiranSource> nextSource) {
+        boolean breakFlag = false;
+        if (this.breakKeysList.contains(TokubetsuChoshuKarisanteiKekkaIchiranOutPutOrder.市町村コード.getフォームフィールド名())
+                && !currentSource.getSource().hokenshaNo.equals(nextSource.getSource().hokenshaNo)) {
+            breakFlag = true;
+        } else if (this.breakKeysList.contains(TokubetsuChoshuKarisanteiKekkaIchiranOutPutOrder.通知書番号.getフォームフィールド名())
+                && !currentSource.getSource().listLower_1.equals(nextSource.getSource().listLower_1)) {
+            breakFlag = true;
+        } else if (this.breakKeysList.contains(TokubetsuChoshuKarisanteiKekkaIchiranOutPutOrder.被保険者番号.getフォームフィールド名())
+                && !currentSource.getSource().hihokenshaNo.equals(nextSource.getSource().hihokenshaNo)) {
+            breakFlag = true;
+        }
+        return breakFlag;
     }
 
 }

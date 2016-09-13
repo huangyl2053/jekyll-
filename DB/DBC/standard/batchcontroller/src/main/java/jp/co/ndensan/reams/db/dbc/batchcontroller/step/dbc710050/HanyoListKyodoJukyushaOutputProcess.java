@@ -57,7 +57,7 @@ public class HanyoListKyodoJukyushaOutputProcess extends BatchProcessBase<KyodoJ
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc710050."
                     + "IHanyoListKyodoJukyushaMapper.select共同処理用受給者情報");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC710005");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC701005");
     private final RString csvFileName = new RString("HanyoList_KyodoJukyushaKihon.csv");
     private static final RString 日本語ファイル名 = new RString("汎用リスト　共同受給者基本情報");
     private static final RString 定数_なし = new RString("なし");

@@ -21,18 +21,18 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class NinshiuUpdateParameter extends BatchParameterBase {
+public class NinshiuUpdateMyBatisParameter extends BatchParameterBase {
 
     private final List<RString> 申請書管理番号リスト;
     private final RString 出力対象区分;
     private final FlexibleDate 抽出対象期間_開始;
     private final FlexibleDate 抽出対象期間_終了;
     private final FlexibleDate 通知書発行日;
-    private final List<RString> 出力順;
+    private final RString 出力順;
 
-    public NinshiuUpdateParameter(List<RString> 申請書管理番号リスト, RString 出力対象区分,
+    public NinshiuUpdateMyBatisParameter(List<RString> 申請書管理番号リスト, RString 出力対象区分,
             FlexibleDate 抽出対象期間_開始, FlexibleDate 抽出対象期間_終了,
-            FlexibleDate 通知書発行日, List<RString> 出力順) {
+            FlexibleDate 通知書発行日, RString 出力順) {
         this.申請書管理番号リスト = 申請書管理番号リスト;
         this.出力対象区分 = 出力対象区分;
         this.抽出対象期間_開始 = 抽出対象期間_開始;

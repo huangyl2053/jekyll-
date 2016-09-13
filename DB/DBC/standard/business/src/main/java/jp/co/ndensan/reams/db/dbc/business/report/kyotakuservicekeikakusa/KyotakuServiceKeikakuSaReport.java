@@ -17,20 +17,26 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class KyotakuServiceKeikakuSaReport extends
         Report<KyotakuServiceKeikakuSakuseiSource> {
 
-    private final KyotakuServiceKeikakuSaParam parameter;
+    private final KyotakuServiceKeikakuSaParam 帳票出力パラメータ;
 
     /**
      * インスタンスを生成します。
      *
-     * @param parameter KyotakuServiceKeikakuSaParam
+     * @param 帳票出力パラメータ KyotakuServiceKeikakuSaParam
      */
-    public KyotakuServiceKeikakuSaReport(KyotakuServiceKeikakuSaParam parameter) {
-        this.parameter = parameter;
+    public KyotakuServiceKeikakuSaReport(KyotakuServiceKeikakuSaParam 帳票出力パラメータ) {
+        this.帳票出力パラメータ = 帳票出力パラメータ;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<KyotakuServiceKeikakuSakuseiSource> writer) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (null == 帳票出力パラメータ) {
+            return;
+        }
+        IKyotakuServiceKeikakuSaEditor headerEditor = new KyotakuServiceKeikakuSaHeaderEditor(帳票出力パラメータ);
+        IKyotakuServiceKeikakuSaEditor bodyEditor = new KyotakuServiceKeikakuSaBodyEditor(帳票出力パラメータ);
+        IKyotakuServiceKeikakuSaBuilder builder = new KyotakuServiceKeikakuSaBuilder(headerEditor, bodyEditor);
+        writer.writeLine(builder);
     }
 
 }

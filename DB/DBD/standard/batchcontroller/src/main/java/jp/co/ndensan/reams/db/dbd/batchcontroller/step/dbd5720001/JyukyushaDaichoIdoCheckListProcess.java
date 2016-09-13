@@ -65,10 +65,10 @@ public class JyukyushaDaichoIdoCheckListProcess extends BatchKeyBreakBase<Jyukyu
             "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.jukyushaidochecklist."
             + "IJukyushaIdoCheckListMapper.get帳票出力対象データ");
     private IOutputOrder order = null;
-    private IOutputOrder breakoutputOrder = null;
     private RString 出力順 = RString.EMPTY;
     private static final int NUM5 = 5;
     private static final RString 申請書管理番号 = new RString("申請書管理番号");
+    private static final RString 帳票出力順の取得 = new RString("帳票出力順の取得");
     private static final int NO_0 = 0;
     private static final int NO_1 = 1;
     private static final int NO_2 = 2;
@@ -87,10 +87,7 @@ public class JyukyushaDaichoIdoCheckListProcess extends BatchKeyBreakBase<Jyukyu
             出力順 = get出力順(order);
         } else {
             throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
-                    .replace(new RString("帳票出力順の取得").toString()).toString());
-        }
-        if (parameter.get改頁出力順ID() != null) {
-            breakoutputOrder = finder.get出力順(SubGyomuCode.DBD介護受給, REPORT_DBD200037, parameter.get改頁出力順ID());
+                    .replace(帳票出力順の取得.toString()).toString());
         }
     }
 
@@ -108,7 +105,7 @@ public class JyukyushaDaichoIdoCheckListProcess extends BatchKeyBreakBase<Jyukyu
     @Override
     protected void createWriter() {
         List pageBreakKeys = new ArrayList<>();
-        set改頁Key(breakoutputOrder, pageBreakKeys);
+        set改頁Key(order, pageBreakKeys);
         batchReportWriter = BatchReportFactory.createBatchReportWriter(REPORT_DBD200037.value()).addBreak(
                 new BreakerCatalog<JukyushaIdoCheckListReportSource>().simplePageBreaker(pageBreakKeys)).create();
         reportSourceWriter = new ReportSourceWriter(batchReportWriter);
@@ -125,7 +122,7 @@ public class JyukyushaDaichoIdoCheckListProcess extends BatchKeyBreakBase<Jyukyu
         JyukyushaDaichoIdoCheckListOutputResult business = new JyukyushaDaichoIdoCheckListOutputResult();
         UpperEntity upperEntity = business.getUpperEntity(entity);
         LowerEntity lowerEntity = business.getLowerEntity(entity);
-        JukyushaIdoCheckListReport report = new JukyushaIdoCheckListReport(upperEntity, lowerEntity, order, breakoutputOrder);
+        JukyushaIdoCheckListReport report = new JukyushaIdoCheckListReport(upperEntity, lowerEntity, order);
         report.writeBy(reportSourceWriter);
     }
 
@@ -141,7 +138,7 @@ public class JyukyushaDaichoIdoCheckListProcess extends BatchKeyBreakBase<Jyukyu
     private RString get出力順(IOutputOrder order) {
         if (null == order) {
             throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
-                    .replace(new RString("帳票出力順の取得").toString()).toString());
+                    .replace(帳票出力順の取得.toString()).toString());
         } else {
             出力順 = ChohyoUtil.get出力順OrderBy(MyBatisOrderByClauseCreator.
                     create(DBD200037_JukyushaIdoCheckListEnum.class, order), NUM5);

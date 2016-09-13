@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -72,6 +73,7 @@ public class KogakugassanShikyushinseishoOutShinseishoReportProcess
     private static final RString ダブル引用符 = new RString("\"");
     private static final RString 出力ファイル名 = new RString("DBC200027_GassanShikyuShinseishoJohoSofuIchiran.csv");
     private static final int INT_1 = 1;
+    private static final int INT_30 = 30;
     private static final RString 作成R = new RString("作成");
     private static final RString 再送要 = new RString("※");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC200027");
@@ -87,6 +89,7 @@ public class KogakugassanShikyushinseishoOutShinseishoReportProcess
     private List<PersonalData> personalDataList;
     private Set<ShikibetsuCode> 識別コードset;
     private RDateTime システム日付;
+    private int count;
     @BatchWriter
     private CsvWriter<KogakugassanShikyushinseishoOutCsvEntity> eucCsvWriter;
     @BatchWriter
@@ -100,6 +103,7 @@ public class KogakugassanShikyushinseishoOutShinseishoReportProcess
         index = INT_1;
         pageBreakKeys = new ArrayList<>();
         システム日付 = RDateTime.now();
+        count = INT_1;
     }
 
     @Override
@@ -129,13 +133,22 @@ public class KogakugassanShikyushinseishoOutShinseishoReportProcess
 
     @Override
     protected void usualProcess(KogakugassanShikyushinseishoOutFileEntity entity) {
+        KogakugassanShikyushinseishoOutFileEntity beforeEntity = getBefore();
+        if (!entity.get高額合算申請書一時Entity().isJufukuKubun()) {
+            count = INT_1;
+        }
+        boolean flag = false;
+        if (beforeEntity != null) {
+            flag = is同一申請情報(beforeEntity.get高額合算申請書一時Entity(), entity.get高額合算申請書一時Entity(), count);
+        }
         GassanShikyuShinseishoJohoSofuIchiranReport report
-                = new GassanShikyuShinseishoJohoSofuIchiranReport(entity, YMDHMS.now(), processParameter.get処理年月(), index);
+                = new GassanShikyuShinseishoJohoSofuIchiranReport(setEntity(entity, flag), YMDHMS.now(), processParameter.get処理年月(), index);
         report.writeBy(reportSourceWriter);
         KogakugassanShikyushinseishoOutCsvEntity csvEntity = getCsvEntity(index, entity);
         eucCsvWriter.writeLine(csvEntity);
         アクセスログ対象追加(entity);
         index = index + INT_1;
+        count = count + INT_1;
     }
 
     @Override
@@ -151,6 +164,38 @@ public class KogakugassanShikyushinseishoOutShinseishoReportProcess
         } else {
             eucManager.spool(eucFilePath);
         }
+    }
+
+    private KogakugassanShikyushinseishoOutFileEntity setEntity(KogakugassanShikyushinseishoOutFileEntity entity, boolean flag) {
+
+        KogakugassanShikyushinseishoOutFileEntity returnEntity = new KogakugassanShikyushinseishoOutFileEntity();
+        DbWT3711KogakuGassanShinseishoTempEntity tempEntity = entity.get高額合算申請書一時Entity();
+        if (flag) {
+            tempEntity.setTaishoNendo(FlexibleYear.EMPTY);
+            tempEntity.setShinseiJokyoKubun(null);
+            tempEntity.setShinseiYMD(FlexibleDate.EMPTY);
+            tempEntity.setShikyuShinseishoSeiriNo(RString.EMPTY);
+            tempEntity.setShinseiDaihyoshaShimei(AtenaMeisho.EMPTY);
+            tempEntity.setJikoFutanKofuUmu(null);
+            tempEntity.setShikyuShinseiKeitai(null);
+        }
+        returnEntity.set被保険者一時Entity(entity.get被保険者一時Entity());
+        returnEntity.set高額合算申請書一時Entity(tempEntity);
+        return returnEntity;
+    }
+
+    private boolean is同一申請情報(DbWT3711KogakuGassanShinseishoTempEntity beforeEntity,
+            DbWT3711KogakuGassanShinseishoTempEntity entity, int count) {
+        boolean flg = false;
+        if (beforeEntity.getShikyuShinseishoSeiriNo().equals(entity.getShikyuShinseishoSeiriNo())
+                && beforeEntity.getRirekiNo().equals(entity.getRirekiNo())) {
+            if (count > INT_30 && count % INT_30 == INT_1) {
+                flg = false;
+            } else if (entity.isJufukuKubun()) {
+                flg = true;
+            }
+        }
+        return flg;
     }
 
     private void アクセスログ対象追加(KogakugassanShikyushinseishoOutFileEntity entity) {
@@ -210,7 +255,7 @@ public class KogakugassanShikyushinseishoOutShinseishoReportProcess
         }
         csvEntity.set所得区分_70歳以上分(一時Entity.getOver70_ShotokuKubun());
         if (一時Entity.getOver70_ShotokuKubun() != null) {
-            csvEntity.set所得区分名_70歳以上分(KaigoGassan_Over70_ShotokuKbn.toValue(一時Entity.getShotokuKubun()).get名称());
+            csvEntity.set所得区分名_70歳以上分(KaigoGassan_Over70_ShotokuKbn.toValue(一時Entity.getOver70_ShotokuKubun()).get名称());
         }
         csvEntity.set支給方法区分(一時Entity.getShiharaiHohoKubun());
         if (一時Entity.getShiharaiHohoKubun() != null) {

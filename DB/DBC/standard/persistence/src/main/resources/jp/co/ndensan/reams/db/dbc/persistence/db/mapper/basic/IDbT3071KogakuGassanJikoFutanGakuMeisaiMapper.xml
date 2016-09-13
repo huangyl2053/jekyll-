@@ -32,14 +32,14 @@
          "DbT3071KogakuGassanJikoFutanGakuMeisai"."lastUpdateTimestamp" as "dbT3071KogakuGassanJikoFutanGakuMeisai_lastUpdateTimestamp",
          "DbT3071KogakuGassanJikoFutanGakuMeisai"."lastUpdateReamsLoginId" as "dbT3071KogakuGassanJikoFutanGakuMeisai_lastUpdateReamsLoginId",
          "DbT3071KogakuGassanJikoFutanGakuMeisai"."jikoFutanGaku" as "dbT3071KogakuGassanJikoFutanGakuMeisai_jikoFutanGaku",
-         "DbT3071KogakuGassanJikoFutanGakuMeisai"."uchisu_70_74JikoFutanGaku" as "dbT3071KogakuGassanJikoFutanGakuMeisai_uchisu_70_74JikoFutanGaku",
+         "DbT3071KogakuGassanJikoFutanGakuMeisai"."uchisu_70_74JikoFutanGaku" as "uchisu_70_74JikoFutanGaku",
          "DbT3071KogakuGassanJikoFutanGakuMeisai"."under_70KogakuShikyuGaku" as "dbT3071KogakuGassanJikoFutanGakuMeisai_under_70KogakuShikyuGaku",
-         "DbT3071KogakuGassanJikoFutanGakuMeisai"."over_70_74KogakuShikyuGaku" as "dbT3071KogakuGassanJikoFutanGakuMeisai_over_70_74KogakuShikyuGaku",
+         "DbT3071KogakuGassanJikoFutanGakuMeisai"."over_70_74KogakuShikyuGaku" as "dbT3071_over_70_74KogakuShikyuGaku",
          "DbT3071KogakuGassanJikoFutanGakuMeisai"."tekiyo" as "dbT3071KogakuGassanJikoFutanGakuMeisai_tekiyo",
          "DbT3071KogakuGassanJikoFutanGakuMeisai"."sumi_JikoFutanGaku" as "dbT3071KogakuGassanJikoFutanGakuMeisai_sumi_JikoFutanGaku",
          "DbT3071KogakuGassanJikoFutanGakuMeisai"."sumi_70_74JikoFutanGaku" as "dbT3071KogakuGassanJikoFutanGakuMeisai_sumi_70_74JikoFutanGaku",
-         "DbT3071KogakuGassanJikoFutanGakuMeisai"."sumi_under_70KogakuShikyuGaku" as "dbT3071KogakuGassanJikoFutanGakuMeisai_sumi_under_70KogakuShikyuGaku",
-         "DbT3071KogakuGassanJikoFutanGakuMeisai"."sumi_70_74KogakuShikyuGaku" as "dbT3071KogakuGassanJikoFutanGakuMeisai_sumi_70_74KogakuShikyuGaku",
+         "DbT3071KogakuGassanJikoFutanGakuMeisai"."sumi_under_70KogakuShikyuGaku" as "dbT3071_sumi_under_70KogakuShikyuGaku",
+         "DbT3071KogakuGassanJikoFutanGakuMeisai"."sumi_70_74KogakuShikyuGaku" as "dbT3071_sumi_70_74KogakuShikyuGaku",
          "DbT3071KogakuGassanJikoFutanGakuMeisai"."sumi_Tekiyo" as "dbT3071KogakuGassanJikoFutanGakuMeisai_sumi_Tekiyo"
     </sql>
 
@@ -61,14 +61,14 @@
         <result property="lastUpdateTimestamp" column="dbT3071KogakuGassanJikoFutanGakuMeisai_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="lastUpdateReamsLoginId" column="dbT3071KogakuGassanJikoFutanGakuMeisai_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jikoFutanGaku" column="dbT3071KogakuGassanJikoFutanGakuMeisai_jikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="uchisu_70_74JikoFutanGaku" column="dbT3071KogakuGassanJikoFutanGakuMeisai_uchisu_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="uchisu_70_74JikoFutanGaku" column="dbT3071_uchisu_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="under_70KogakuShikyuGaku" column="dbT3071KogakuGassanJikoFutanGakuMeisai_under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="over_70_74KogakuShikyuGaku" column="dbT3071KogakuGassanJikoFutanGakuMeisai_over_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="over_70_74KogakuShikyuGaku" column="dbT3071_over_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="tekiyo" column="dbT3071KogakuGassanJikoFutanGakuMeisai_tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="sumi_JikoFutanGaku" column="dbT3071KogakuGassanJikoFutanGakuMeisai_sumi_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="sumi_70_74JikoFutanGaku" column="dbT3071KogakuGassanJikoFutanGakuMeisai_sumi_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="sumi_under_70KogakuShikyuGaku" column="dbT3071KogakuGassanJikoFutanGakuMeisai_sumi_under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="sumi_70_74KogakuShikyuGaku" column="dbT3071KogakuGassanJikoFutanGakuMeisai_sumi_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="sumi_under_70KogakuShikyuGaku" column="dbT3071_sumi_under_70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="sumi_70_74KogakuShikyuGaku" column="dbT3071_sumi_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="sumi_Tekiyo" column="dbT3071KogakuGassanJikoFutanGakuMeisai_sumi_Tekiyo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 

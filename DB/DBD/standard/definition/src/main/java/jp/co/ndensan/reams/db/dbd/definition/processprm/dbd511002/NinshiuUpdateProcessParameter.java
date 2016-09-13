@@ -26,7 +26,7 @@ public class NinshiuUpdateProcessParameter implements IBatchProcessParameter {
     private FlexibleDate 抽出対象期間_開始;
     private FlexibleDate 抽出対象期間_終了;
     private FlexibleDate 通知書発行日;
-    private List<RString> 出力順;
+    private RString 出力順;
 
     /**
      *
@@ -40,7 +40,7 @@ public class NinshiuUpdateProcessParameter implements IBatchProcessParameter {
     public NinshiuUpdateProcessParameter(
             List<RString> 申請書管理番号リスト, RString 出力対象区分,
             FlexibleDate 抽出対象期間_開始, FlexibleDate 抽出対象期間_終了,
-            FlexibleDate 通知書発行日, List<RString> 出力順) {
+            FlexibleDate 通知書発行日, RString 出力順) {
         this.申請書管理番号リスト = 申請書管理番号リスト;
         this.出力対象区分 = 出力対象区分;
         this.抽出対象期間_開始 = 抽出対象期間_開始;
@@ -50,12 +50,12 @@ public class NinshiuUpdateProcessParameter implements IBatchProcessParameter {
 
     }
 
-    /**
-     * バッチMybatisパラメターを取得します．
-     *
-     * @return バッチMybatis
-     */
-    public NinshiuUpdateMyBatisParameter toNinshiuUpdateMyBatisParameter() {
+   /**
+    * バッチMybatisパラメターを取得します．
+    * @param 出力順 出力順
+    * @return  NinshiuUpdateMyBatisParameter
+    */
+    public NinshiuUpdateMyBatisParameter toNinshiuUpdateMyBatisParameter(RString 出力順) {
         return new NinshiuUpdateMyBatisParameter(
                 申請書管理番号リスト,
                 出力対象区分,

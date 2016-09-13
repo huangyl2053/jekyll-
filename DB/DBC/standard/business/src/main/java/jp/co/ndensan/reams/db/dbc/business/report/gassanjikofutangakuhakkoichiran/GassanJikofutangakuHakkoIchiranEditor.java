@@ -37,6 +37,7 @@ public class GassanJikofutangakuHakkoIchiranEditor implements
     private static final int INDEX_2 = 2;
     private static final int INDEX_3 = 3;
     private static final int INDEX_4 = 4;
+    private static final RString 年度 = new RString("年度");
     private static final RString 接続文字 = new RString("～");
 
     private final int 連番;
@@ -83,8 +84,8 @@ public class GassanJikofutangakuHakkoIchiranEditor implements
 
         source.list_6 = entity.get支給申請書整理番号();
         source.list_7 = entity.get対象年度().wareki().
-                eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                fillType(FillType.BLANK).toDateString();
+                eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).
+                fillType(FillType.BLANK).toDateString().concat(年度);
 
         source.list_8 = getPrintTime(entity.get被保険者期間開始年月日(), entity.get被保険者期間終了年月日());
         source.list_9 = entity.get自己負担額証明書整理番号();

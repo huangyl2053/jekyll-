@@ -85,7 +85,7 @@ public class JukyushaIdoRenrakuhyoErrorTeisei {
                         訂正情報の訂正内容List.add(data.get(k));
                     }
 
-                    RString 項目 = new RString("");
+                    RString 項目 = RString.EMPTY;
                     for (Integer i = INDEX_ZERO; i < NUM_TEN; i++) {
                         項目 = 項目.concat(訂正情報の項目List.get(i)).concat(スラッシュ)
                                 .concat(訂正情報の送付済内容List.get(i)).concat(スラッシュ).concat(訂正情報の訂正内容List.get(i));

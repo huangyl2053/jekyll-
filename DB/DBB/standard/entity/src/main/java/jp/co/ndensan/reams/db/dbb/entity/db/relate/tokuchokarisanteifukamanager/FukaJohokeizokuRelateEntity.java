@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7006RoreiFukushiNenkinJukyu
 import jp.co.ndensan.reams.ur.urd.entity.db.basic.seikatsuhogo.UrT0508SeikatsuHogoJukyushaEntity;
 import jp.co.ndensan.reams.ur.urd.entity.db.basic.seikatsuhogo.UrT0526SeikatsuHogoFujoShuruiEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -25,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class FukaJohokeizokuRelateEntity {
 
     private HihokenshaNo hihokenshaNo;
+    private FlexibleYear fukaNendo;
     private Decimal choteigaku;
     private RString hokenryoDankai;
     private FlexibleDate seihoKaishiYMD;

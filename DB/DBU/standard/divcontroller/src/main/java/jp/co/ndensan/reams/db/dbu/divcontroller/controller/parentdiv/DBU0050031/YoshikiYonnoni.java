@@ -359,7 +359,7 @@ public class YoshikiYonnoni {
             if (!is編集あり(div)) {
                 return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.検索に戻る).respond();
             } else {
-                this.messageAndGoto(DBU0050031TransitionEventName.検索に戻る, div);
+                return this.messageAndGoto(DBU0050031TransitionEventName.検索に戻る, div);
             }
         } else if (内部処理モード_修正追加.equals(div.getShoriMode())
                 && this.入力項目いずれか空白ではない(div)) {

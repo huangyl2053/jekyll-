@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.definition.batchprm.shomeishosakusei;
+package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC040040;
 
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_DataSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_JikoFutanShomeisho_Insho;
@@ -23,7 +23,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class JikofutanShomeishoParameter extends BatchParameterBase {
+public class DBC040040_JikofutanShomeishoParameter extends BatchParameterBase {
 
     @BatchParameter(key = "開始申請年月日", name = "申請年月日（開始）")
     private FlexibleDate 開始申請年月日;

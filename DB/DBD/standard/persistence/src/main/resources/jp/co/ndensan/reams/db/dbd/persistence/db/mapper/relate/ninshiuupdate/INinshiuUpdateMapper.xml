@@ -31,7 +31,7 @@
     </resultMap>
     <select resultOrdered="true" id="get帳票出力用情報取得"  
             resultMap="resultMap_get帳票出力用情報取得" 
-            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd511002.NinshiuUpdateMyBatisParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd511002.NinshiuUpdateMyBatisParameter" fetchSize="500">
         SELECT
         要介護認定申請情報."koroshoIfShikibetsuCode" AS 厚労省IF識別コード,
         要介護認定申請情報."hihokenshaNo" AS 被保険者番号,

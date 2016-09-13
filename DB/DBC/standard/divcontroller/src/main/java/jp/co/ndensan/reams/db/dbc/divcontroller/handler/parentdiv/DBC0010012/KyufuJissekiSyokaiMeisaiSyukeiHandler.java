@@ -151,21 +151,11 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
             div.getBtnKihon().setDisabled(false);
         }
         div.getBtnMeisaiShukei().setDisabled(true);
-        if (任意設定可.equals(識別番号管理.get所定疾患施設療養設定区分())
-                && 平成24年4月.isBeforeOrEquals(サービス提供年月)) {
-            div.getBtnShoteiShikkanShisetsuRyoyo().setDisplayNone(false);
-            div.getBtnShoteiShikkanShisetsuRyoyo().setDisabled(false);
-            div.getBtnKinkyujiShisetsuRyoyo().setDisplayNone(true);
+        if (非活性.equals(識別番号管理.get緊急時施設療養設定区分())) {
+            div.getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
         } else {
-            div.getBtnShoteiShikkanShisetsuRyoyo().setDisplayNone(true);
-            div.getBtnKinkyujiShisetsuRyoyo().setDisplayNone(false);
-            if (非活性.equals(識別番号管理.get緊急時施設療養設定区分())) {
-                div.getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
-            } else {
-                div.getBtnKinkyujiShisetsuRyoyo().setDisabled(false);
-            }
+            div.getBtnKinkyujiShisetsuRyoyo().setDisabled(false);
         }
-        div.getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
         if (非活性.equals(識別番号管理.get所定疾患施設療養設定区分())) {
             div.getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
         } else {
@@ -322,6 +312,9 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
         RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();
         RString サービス提供年月 = div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString();
+        List<FlexibleYearMonth> サービス提供年月リスト = new ArrayList<>();
+        List<KyufujissekiShukei> 集計情報取得リスト = new ArrayList<>();
+        List<KyufujissekiMeisaiBusiness> 明細情報取得リスト = new ArrayList<>();
         set明細情報の表示制御(様式番号, new FlexibleYearMonth(サービス提供年月));
         set明細情報特例の表示制御(様式番号, new FlexibleYearMonth(サービス提供年月));
         int index = get事業者番号index(事業者番号リスト, 整理番号, 事業者番号, 様式番号, サービス提供年月, 実績区分コード);
@@ -338,10 +331,22 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
             div.getCcdKyufuJissekiHeader().set整理番号(事業者番号リスト.get(index + i).get整理番号());
             div.getCcdKyufuJissekiHeader().set識別番号名称(事業者番号リスト.get(index + i).get識別番号名称());
             div.getCcdKyufuJissekiHeader().set様式番号(事業者番号リスト.get(index + i).get識別番号());
+            for (KyufujissekiShukei 集計情報取得 : 集計情報リスト) {
+                if (事業者番号リスト.get(index + i).get事業所番号().value().equals(集計情報取得.get事業所番号().value())) {
+                    集計情報取得リスト.add(集計情報取得);
+                }
+            }
+            for (KyufujissekiMeisaiBusiness 明細情報取得 : 明細情報取得リスト) {
+                if (事業者番号リスト.get(index + i).get事業所番号().value().equals(明細情報取得.get給付実績明細().get事業所番号().value())) {
+                    明細情報取得リスト.add(明細情報取得);
+                }
+            }
             setDataGrid総計(get給付実績集計情報(集計情報リスト, 整理番号, 事業者番号リスト.get(index + i).get事業所番号().value(), 様式番号, サービス提供年月),
                     get給付実績明細情報(明細情報リスト, 整理番号, 事業者番号リスト.get(index + i).get事業所番号().value(), 様式番号, サービス提供年月),
                     get給付実績明細情報特例(明細情報特例リスト, 整理番号, 事業者番号リスト.get(index + i).get事業所番号().value(), 様式番号, サービス提供年月));
+            サービス提供年月リスト = getサービス提供年月リスト(集計情報取得リスト, 明細情報取得リスト);
         }
+        Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
         div.getBtnMaeJigyosha().setDisabled(true);
         div.getBtnAtoJigyosha().setDisabled(true);
         if (0 < index + i) {
@@ -350,6 +355,7 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         if (index + i + 1 < 事業者番号リスト.size()) {
             div.getBtnAtoJigyosha().setDisabled(false);
         }
+        check前次月Btn(サービス提供年月リスト, new FlexibleYearMonth(サービス提供年月));
     }
 
     private List<FlexibleYearMonth> getサービス提供年月リスト(List<KyufujissekiShukei> 集計情報リスト,

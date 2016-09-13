@@ -93,6 +93,8 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
     private RString eucFilePath;
     private RString 出力ファイル名;
     private int レコード件数;
+    private int renben;
+    private KogakugassanSoufuFairuSakuseiMeisaiEntity meisEntity;
     @BatchWriter
     private CsvWriter eucCsvWriter;
 
@@ -102,6 +104,7 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         outputCount = new OutputParameter<>();
         outputEntry = new OutputParameter<>();
         entryList = new ArrayList<>();
+        meisEntity = new KogakugassanSoufuFairuSakuseiMeisaiEntity();
         総出力件数 = INT_0;
         レコード番号 = INT_0;
         RString 国保連送付外字_変換区分 = DbBusinessConfig.get(ConfigNameDBC.国保連送付外字_変換区分, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
@@ -121,7 +124,7 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
     @Override
     protected void createWriter() {
         RString spoolWorkPath = Path.getTmpDirectoryPath();
-        出力ファイル名 = ファイル名_前
+        出力ファイル名 = ファイル名_前.concat(processParameter.getShoriKunbun())
                 .concat(processParameter.get保険者情報_保険者番号()).concat(processParameter.getShoriYM().toDateString()).concat(ファイル名_後);
         eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
@@ -136,27 +139,37 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
     @Override
     protected void process(SyuturyokuEntity entity) {
         if (レコード番号 == INT_0) {
+            renben = entity.get高額合算自己負担額一時Entity().getRenban();
             レコード番号 = レコード番号 + 1;
             KogakugassanSoufuFairuSakuseiControlEntity controlEntity = getControlEntity();
             eucCsvWriter.writeLine(controlEntity);
+            レコード番号 = レコード番号 + 1;
         }
-        レコード番号 = レコード番号 + 1;
-        KogakugassanSoufuFairuSakuseiMeisaiEntity meisaiEntity = getMeisaiEntity(entity);
-        eucCsvWriter.writeLine(meisaiEntity);
         総出力件数 = 総出力件数 + 1;
+        if (renben != entity.get高額合算自己負担額一時Entity().getRenban()) {
+            レコード番号 = レコード番号 + 1;
+            eucCsvWriter.writeLine(meisEntity);
+            renben = entity.get高額合算自己負担額一時Entity().getRenban();
+            meisEntity = getMeisaiEntity(entity);
+        } else {
+            meisEntity = getMeisaiEntity(entity);
+        }
     }
 
     @Override
     protected void afterExecute() {
-        レコード番号 = レコード番号 + 1;
-        KogakugassanSoufuFairuSakuseiEndEntity endEntity = getEndEntity();
-        eucCsvWriter.writeLine(endEntity);
-        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(出力ファイル名));
-        sfd = SharedFile.defineSharedFile(sfd, 1, SharedFile.GROUP_ALL, null, true, null);
-        CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
-        SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(eucFilePath), opts);
+        if (レコード番号 != INT_0) {
+            eucCsvWriter.writeLine(meisEntity);
+            レコード番号 = レコード番号 + 1;
+            KogakugassanSoufuFairuSakuseiEndEntity endEntity = getEndEntity();
+            eucCsvWriter.writeLine(endEntity);
+            SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(出力ファイル名));
+            sfd = SharedFile.defineSharedFile(sfd, 1, SharedFile.GROUP_ALL, null, true, null);
+            CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
+            SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(eucFilePath), opts);
+            entryList.add(sfd);
+        }
         outputCount.setValue(総出力件数);
-        entryList.add(sfd);
         outputEntry.setValue(entryList);
         eucCsvWriter.close();
     }
@@ -258,8 +271,9 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
 
     private KogakugassanSoufuFairuSakuseiMeisaiEntity getMeisaiEntity2(
             KogakugassanSoufuFairuSakuseiMeisaiEntity meisaiEntity, SyuturyokuEntity entity) {
+        DbT3071KogakuGassanJikoFutanGakuMeisaiEntity meisai = entity.get高額合算自己負担額明細();
         DbT3071KogakuGassanJikoFutanGakuMeisaiEntity 明細_4月分
-                = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度4月.getコード(), entity);
+                = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度4月.getコード(), meisai);
         if (明細_4月分 != null) {
             meisaiEntity.set月分4_自己負担額(trimDecimal(明細_4月分.getSumi_JikoFutanGaku()));
             meisaiEntity.set月分4_うち70_74歳の者に係る負担額(trimDecimal(明細_4月分.getSumi_70_74JikoFutanGaku()));
@@ -275,7 +289,7 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         }
 
         DbT3071KogakuGassanJikoFutanGakuMeisaiEntity 明細_5月分
-                = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度5月.getコード(), entity);
+                = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度5月.getコード(), meisai);
         if (明細_5月分 != null) {
             meisaiEntity.set月分5_自己負担額(trimDecimal(明細_5月分.getSumi_JikoFutanGaku()));
             meisaiEntity.set月分5_うち70_74歳の者に係る負担額(trimDecimal(明細_5月分.getSumi_70_74JikoFutanGaku()));
@@ -291,7 +305,7 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         }
 
         DbT3071KogakuGassanJikoFutanGakuMeisaiEntity 明細_6月分
-                = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度6月.getコード(), entity);
+                = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度6月.getコード(), meisai);
         if (明細_6月分 != null) {
             meisaiEntity.set月分6_自己負担額(trimDecimal(明細_6月分.getSumi_JikoFutanGaku()));
             meisaiEntity.set月分6_うち70_74歳の者に係る負担額(trimDecimal(明細_6月分.getSumi_70_74JikoFutanGaku()));
@@ -307,7 +321,7 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         }
 
         DbT3071KogakuGassanJikoFutanGakuMeisaiEntity 明細_7月分
-                = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度7月.getコード(), entity);
+                = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度7月.getコード(), meisai);
         if (明細_7月分 != null) {
             meisaiEntity.set月分7_自己負担額(trimDecimal(明細_7月分.getSumi_JikoFutanGaku()));
             meisaiEntity.set月分7_うち70_74歳の者に係る負担額(trimDecimal(明細_7月分.getSumi_70_74JikoFutanGaku()));
@@ -323,7 +337,7 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         }
 
         DbT3071KogakuGassanJikoFutanGakuMeisaiEntity 明細_8月分
-                = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度8月.getコード(), entity);
+                = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度8月.getコード(), meisai);
         if (明細_8月分 != null) {
             meisaiEntity.set月分8_自己負担額(trimDecimal(明細_8月分.getSumi_JikoFutanGaku()));
             meisaiEntity.set月分8_うち70_74歳の者に係る負担額(trimDecimal(明細_8月分.getSumi_70_74JikoFutanGaku()));
@@ -339,7 +353,7 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         }
 
         DbT3071KogakuGassanJikoFutanGakuMeisaiEntity 明細_9月分
-                = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度9月.getコード(), entity);
+                = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度9月.getコード(), meisai);
         if (明細_9月分 != null) {
             meisaiEntity.set月分9_自己負担額(trimDecimal(明細_9月分.getSumi_JikoFutanGaku()));
             meisaiEntity.set月分9_うち70_74歳の者に係る負担額(trimDecimal(明細_9月分.getSumi_70_74JikoFutanGaku()));
@@ -355,7 +369,7 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         }
 
         DbT3071KogakuGassanJikoFutanGakuMeisaiEntity 明細_10月分
-                = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度10月.getコード(), entity);
+                = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度10月.getコード(), meisai);
         if (明細_10月分 != null) {
             meisaiEntity.set月分10_自己負担額(trimDecimal(明細_10月分.getSumi_JikoFutanGaku()));
             meisaiEntity.set月分10_うち70_74歳の者に係る負担額(trimDecimal(明細_10月分.getSumi_70_74JikoFutanGaku()));
@@ -371,7 +385,7 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         }
 
         DbT3071KogakuGassanJikoFutanGakuMeisaiEntity 明細_11月分
-                = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度11月.getコード(), entity);
+                = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度11月.getコード(), meisai);
         if (明細_11月分 != null) {
             meisaiEntity.set月分11_自己負担額(trimDecimal(明細_11月分.getSumi_JikoFutanGaku()));
             meisaiEntity.set月分11_うち70_74歳の者に係る負担額(trimDecimal(明細_11月分.getSumi_70_74JikoFutanGaku()));
@@ -387,7 +401,7 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         }
 
         DbT3071KogakuGassanJikoFutanGakuMeisaiEntity 明細_12月分
-                = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度12月.getコード(), entity);
+                = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度12月.getコード(), meisai);
         if (明細_12月分 != null) {
             meisaiEntity.set月分12_自己負担額(trimDecimal(明細_12月分.getSumi_JikoFutanGaku()));
             meisaiEntity.set月分12_うち70_74歳の者に係る負担額(trimDecimal(明細_12月分.getSumi_70_74JikoFutanGaku()));
@@ -406,8 +420,9 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
 
     private KogakugassanSoufuFairuSakuseiMeisaiEntity getMeisaiEntity3(
             KogakugassanSoufuFairuSakuseiMeisaiEntity meisaiEntity, SyuturyokuEntity entity) {
+        DbT3071KogakuGassanJikoFutanGakuMeisaiEntity meisai = entity.get高額合算自己負担額明細();
         DbT3071KogakuGassanJikoFutanGakuMeisaiEntity 明細_翌年1月分
-                = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度翌年1月.getコード(), entity);
+                = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度翌年1月.getコード(), meisai);
         if (明細_翌年1月分 != null) {
             meisaiEntity.set月分翌年1_自己負担額(trimDecimal(明細_翌年1月分.getSumi_JikoFutanGaku()));
             meisaiEntity.set月分翌年1_うち70_74歳の者に係る負担額(trimDecimal(明細_翌年1月分.getSumi_70_74JikoFutanGaku()));
@@ -423,7 +438,7 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         }
 
         DbT3071KogakuGassanJikoFutanGakuMeisaiEntity 明細_翌年2月分
-                = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度翌年2月.getコード(), entity);
+                = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度翌年2月.getコード(), meisai);
         if (明細_翌年2月分 != null) {
             meisaiEntity.set月分翌年2_自己負担額(trimDecimal(明細_翌年2月分.getSumi_JikoFutanGaku()));
             meisaiEntity.set月分翌年2_うち70_74歳の者に係る負担額(trimDecimal(明細_翌年2月分.getSumi_70_74JikoFutanGaku()));
@@ -439,7 +454,7 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         }
 
         DbT3071KogakuGassanJikoFutanGakuMeisaiEntity 明細_翌年3月分
-                = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度翌年3月.getコード(), entity);
+                = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度翌年3月.getコード(), meisai);
         if (明細_翌年3月分 != null) {
             meisaiEntity.set月分翌年3_自己負担額(trimDecimal(明細_翌年3月分.getSumi_JikoFutanGaku()));
             meisaiEntity.set月分翌年3_うち70_74歳の者に係る負担額(trimDecimal(明細_翌年3月分.getSumi_70_74JikoFutanGaku()));
@@ -455,7 +470,7 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         }
 
         DbT3071KogakuGassanJikoFutanGakuMeisaiEntity 明細_翌年4月分
-                = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度翌年4月.getコード(), entity);
+                = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度翌年4月.getコード(), meisai);
         if (明細_翌年4月分 != null) {
             meisaiEntity.set月分翌年4_自己負担額(trimDecimal(明細_翌年4月分.getSumi_JikoFutanGaku()));
             meisaiEntity.set月分翌年4_うち70_74歳の者に係る負担額(trimDecimal(明細_翌年4月分.getSumi_70_74JikoFutanGaku()));
@@ -471,7 +486,7 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         }
 
         DbT3071KogakuGassanJikoFutanGakuMeisaiEntity 明細_翌年5月分
-                = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度翌年5月.getコード(), entity);
+                = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度翌年5月.getコード(), meisai);
         if (明細_翌年5月分 != null) {
             meisaiEntity.set月分翌年5_自己負担額(trimDecimal(明細_翌年5月分.getSumi_JikoFutanGaku()));
             meisaiEntity.set月分翌年5_うち70_74歳の者に係る負担額(trimDecimal(明細_翌年5月分.getSumi_70_74JikoFutanGaku()));
@@ -487,7 +502,7 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         }
 
         DbT3071KogakuGassanJikoFutanGakuMeisaiEntity 明細_翌年6月分
-                = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度翌年6月.getコード(), entity);
+                = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度翌年6月.getコード(), meisai);
         if (明細_翌年6月分 != null) {
             meisaiEntity.set月分翌年6_自己負担額(trimDecimal(明細_翌年6月分.getSumi_JikoFutanGaku()));
             meisaiEntity.set月分翌年6_うち70_74歳の者に係る負担額(trimDecimal(明細_翌年6月分.getSumi_70_74JikoFutanGaku()));
@@ -503,7 +518,7 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         }
 
         DbT3071KogakuGassanJikoFutanGakuMeisaiEntity 明細_翌年7月分
-                = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度翌年7月.getコード(), entity);
+                = get高額合算自己負担額明細(KaigoGassan_JikofutangakuMeisaiTaishoTsuki.対象年度翌年7月.getコード(), meisai);
         if (明細_翌年7月分 != null) {
             meisaiEntity.set月分翌年7_自己負担額(trimDecimal(明細_翌年7月分.getSumi_JikoFutanGaku()));
             meisaiEntity.set月分翌年7_うち70_74歳の者に係る負担額(trimDecimal(明細_翌年7月分.getSumi_70_74JikoFutanGaku()));
@@ -520,15 +535,12 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         return meisaiEntity;
     }
 
-    private DbT3071KogakuGassanJikoFutanGakuMeisaiEntity get高額合算自己負担額明細(RString 対象月, SyuturyokuEntity entity) {
-        List<DbT3071KogakuGassanJikoFutanGakuMeisaiEntity> list = entity.get高額合算自己負担額明細List();
-        if (list == null || list.isEmpty()) {
+    private DbT3071KogakuGassanJikoFutanGakuMeisaiEntity get高額合算自己負担額明細(RString 対象月, DbT3071KogakuGassanJikoFutanGakuMeisaiEntity meisaiEntity) {
+        if (meisaiEntity == null) {
             return null;
         }
-        for (DbT3071KogakuGassanJikoFutanGakuMeisaiEntity meisaiEntity : list) {
-            if (対象月.equals(meisaiEntity.getTaishoM())) {
-                return meisaiEntity;
-            }
+        if (対象月.equals(meisaiEntity.getTaishoM())) {
+            return meisaiEntity;
         }
         return null;
     }

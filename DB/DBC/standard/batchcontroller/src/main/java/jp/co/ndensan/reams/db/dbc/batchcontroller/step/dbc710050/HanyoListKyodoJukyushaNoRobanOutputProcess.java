@@ -93,6 +93,7 @@ public class HanyoListKyodoJukyushaNoRobanOutputProcess extends BatchProcessBase
 
     @Override
     protected void initialize() {
+        連番 = 0;
         構成市町村マスタ = new HashMap<>();
         csv出力Flag = 定数_なし;
         地方公共団体情報 = AssociationFinderFactory.createInstance().getAssociation();
