@@ -39,17 +39,18 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 public class PostMainPanelHandler {
 
     private final PostMainPanelDiv div;
+    private static final RString DBCMN82001 = new RString("DBCMN82001");
+    private static final RString DBCMN82002 = new RString("DBCMN82002");
     private static final RString 国保 = new RString("国保");
     private static final RString 後期 = new RString("後期");
     private static final RString NUM_120 = new RString("120");
     private static final RString NUM_111 = new RString("111");
     private static final RString NUM_1 = new RString("1");
     private static final int NUM_8 = 8;
-    private static final int NUM_13 = 13;
+    private static final int NUM_14 = 14;
     private static final int NUM_3 = 3;
     private static final int NUM_2 = 2;
     private static final int NUM_4 = 4;
-    private static final int NUM_7 = 7;
     private static final RString NUM_112 = new RString("112");
     private static final RString 処理枝番 = new RString("0000");
     private static final RString 国保情報取り込み = new RString("国保情報取り込み");
@@ -147,15 +148,15 @@ public class PostMainPanelHandler {
                 if (市町村識別ID.equals(NUM_00)) {
                     List<List> resultList = 市町村識別ID00処理();
                     一覧エリア(resultList);
-                    div.getTxtZenkaiYMD().setValue(new RDate(resultList.get(0).get(NUM_2).toString()));
+                    div.getTxtZenkaiYMD().setValue(new RDate(resultList.get(0).get(NUM_2).toString().substring(0, NUM_8)));
                     div.getTxtZenkaiTime().setValue(new RTime(new RString(resultList.get(0).get(NUM_2).
-                            toString().substring(NUM_8, NUM_13))));
+                            toString().substring(NUM_8, NUM_14))));
                 } else {
                     List<List> resultList = 市町村識別ID処理(市町村識別ID);
                     一覧エリア(resultList);
                     RString 格納処理日時 = new RString(resultList.get(0).get(NUM_2).toString());
-                    div.getTxtZenkaiYMD().setValue(new RDate(格納処理日時.toString()));
-                    div.getTxtZenkaiTime().setValue(new RTime(格納処理日時.substring(NUM_8, NUM_13)));
+                    div.getTxtZenkaiYMD().setValue(new RDate(格納処理日時.toString().substring(0, NUM_8)));
+                    div.getTxtZenkaiTime().setValue(new RTime(格納処理日時.substring(NUM_8, NUM_14)));
                 }
                 場合 = 広域の場合;
             }
@@ -193,17 +194,17 @@ public class PostMainPanelHandler {
             }
             if (item.get(NUM_2) != null && !item.get(NUM_2).toString().isEmpty()) {
                 items.setFileKakunoShoriNitiji(new RString(DateConverter.toWarekiHalf_Zero(new RDate(item.get(NUM_2).
-                        toString().substring(0, NUM_7))).toString().concat(RString.HALF_SPACE.toString()).
+                        toString().substring(0, NUM_8))).toString().concat(RString.HALF_SPACE.toString()).
                         concat(DateConverter.getTime141(new RTime(new RString(item.get(NUM_2).toString().
-                                                        substring(NUM_8, NUM_13)))).toString())));
+                                                        substring(NUM_8, NUM_14)))).toString())));
             } else {
                 items.setFileKakunoShoriNitiji(RString.EMPTY);
             }
             if (item.get(NUM_3) != null && !item.get(NUM_3).toString().isEmpty()) {
                 items.setKoikiTorikomiNitiji(new RString(DateConverter.toWarekiHalf_Zero(new RDate(item.get(NUM_3).
-                        toString().substring(0, NUM_7))).toString().concat(RString.HALF_SPACE.toString()).
+                        toString().substring(0, NUM_8))).toString().concat(RString.HALF_SPACE.toString()).
                         concat(DateConverter.getTime141(new RTime(new RString(item.get(NUM_3).toString().
-                                                        substring(NUM_8, NUM_13)))).toString())));
+                                                        substring(NUM_8, NUM_14)))).toString())));
             } else {
                 items.setKoikiTorikomiNitiji(RString.EMPTY);
             }
@@ -239,7 +240,7 @@ public class PostMainPanelHandler {
     private List<List> 市町村識別ID00処理() {
         List<List> resultList = null;
         PostMainPanelFinder finder = PostMainPanelFinder.createInstance();
-        if (ResponseHolder.getState().equals(国保)) {
+        if (ResponseHolder.getMenuID().equals(DBCMN82001)) {
             Map<String, Object> parameter = createParameter(true, false);
             resultList = finder.getPostMainPanel(parameter);
             if (resultList == null) {
@@ -247,7 +248,7 @@ public class PostMainPanelHandler {
                         .replace(処理日付管理マスタに国保の情報.toString()).evaluate());
             }
         } else {
-            if (ResponseHolder.getState().equals(後期)) {
+            if (ResponseHolder.getMenuID().equals(DBCMN82002)) {
                 Map<String, Object> parameter = createParameter(false, true);
                 resultList = finder.getPostMainPanel(parameter);
                 if (resultList == null) {
@@ -262,7 +263,7 @@ public class PostMainPanelHandler {
     private List<List> 市町村識別ID処理(RString 市町村識別ID) {
         List<List> resultList = null;
         PostMainPanelFinder finder = PostMainPanelFinder.createInstance();
-        if (ResponseHolder.getState().equals(国保)) {
+        if (ResponseHolder.getMenuID().equals(DBCMN82001)) {
             PostMainPanelMybatisParameter parameter = PostMainPanelMybatisParameter.
                     creatParameter(国保情報取り込み, new RString(市町村識別ID.toString()));
             resultList = finder.getPostMainPanel(parameter);
@@ -271,7 +272,7 @@ public class PostMainPanelHandler {
                         .replace(処理日付管理マスタに国保の情報.toString()).evaluate());
             }
         } else {
-            if (ResponseHolder.getState().equals(後期)) {
+            if (ResponseHolder.getMenuID().equals(DBCMN82002)) {
                 PostMainPanelMybatisParameter parameter = PostMainPanelMybatisParameter.
                         creatParameter(後期高齢者情報取り込み, new RString(市町村識別ID.toString()));
                 resultList = finder.getPostMainPanel(parameter);

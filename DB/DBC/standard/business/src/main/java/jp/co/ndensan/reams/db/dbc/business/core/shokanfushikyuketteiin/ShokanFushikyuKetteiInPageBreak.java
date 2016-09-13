@@ -37,7 +37,7 @@ public class ShokanFushikyuKetteiInPageBreak extends PageBreaker<ShokanbaraiFush
     @Override
     public boolean isBreak(ReportLineRecord<ShokanbaraiFushikyuKetteishaIchiranSource> currentSource,
             ReportLineRecord<ShokanbaraiFushikyuKetteishaIchiranSource> nextSource) {
-        boolean flag = !currentSource.getSource().hokenshaNo.equals(nextSource.getSource().hokenshaNo);
+        boolean flag = !currentSource.getSource().shoKisaiHokenshaNo.equals(nextSource.getSource().shoKisaiHokenshaNo);
         if (!flag && this.breakKeysList.contains(ShokanFushikyuKetteiInOutPutOrder.被保険者番号.get項目ID())) {
             flag = !currentSource.getSource().listUpper_2.equals(nextSource.getSource().listUpper_2);
         }

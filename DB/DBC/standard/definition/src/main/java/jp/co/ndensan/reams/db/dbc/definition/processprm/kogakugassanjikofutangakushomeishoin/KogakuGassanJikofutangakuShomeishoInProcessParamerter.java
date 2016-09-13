@@ -22,6 +22,7 @@ public class KogakuGassanJikofutangakuShomeishoInProcessParamerter implements IB
     private RString path;
     private RString fileName;
     private FlexibleYearMonth 処理年月;
+    private int レコード件数合算;
     private int 連番;
     private boolean さいごファイルフラグ;
 }

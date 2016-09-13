@@ -61,7 +61,7 @@ public class KaigokyufuhiKagoMoshitateshoOutBodyEditor implements IKaigokyufuhiK
         source.listUpper_4 = 帳票出力対象データ.getDbWT1731Entity().getHiHokenshaNo().getColumnValue();
         source.listUpper_5 = 帳票出力対象データ.getDbWT1001Entity().getKanaMeisho();
 
-        source.listLower_1 = 帳票出力対象データ.getDbWT1001Entity().getKanaMeisho();
+        source.listLower_1 = 帳票出力対象データ.getDbWT1001Entity().getMeisho();
         source.listUpper_6 = doパターン54(帳票出力対象データ.getDbWT1731Entity().getServiceTeikyoYM());
         source.listUpper_7 = 帳票出力対象データ.getDbWT1731Entity().getMoshitateYMD().wareki()
                 .eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();

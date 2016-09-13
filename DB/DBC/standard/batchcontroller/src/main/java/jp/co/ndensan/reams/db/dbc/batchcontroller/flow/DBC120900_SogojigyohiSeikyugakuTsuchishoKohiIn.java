@@ -68,10 +68,12 @@ public class DBC120900_SogojigyohiSeikyugakuTsuchishoKohiIn
             returnEntity
                     = getResult(KokuhorenKyoutsuuFileGetReturnEntity.class, new RString(ファイル取得),
                             KokuhorenkyoutsuGetFileProcess.PARAMETER_OUT_RETURNENTITY);
+            一時TBL登録件数 = NO_NUM;
             for (int i = NO_NUM; i < returnEntity.getFileNameList().size(); i++) {
                 csvParameter = new SeikyugakuTsuchishoFutanshaInProcessParameter();
                 csvParameter.setPath(returnEntity.get保存先フォルダのパス().toRString());
                 csvParameter.setFileName(returnEntity.getFileNameList().get(i));
+                csvParameter.setRenban(一時TBL登録件数);
                 executeStep(CSVファイル取込);
                 flowEntity = getResult(FlowEntity.class, new RString(CSVファイル取込),
                         SeikyugakuTsuchishoFutanshaInProcess.PARAMETER_OUT_FLOWENTITY);
@@ -80,7 +82,7 @@ public class DBC120900_SogojigyohiSeikyugakuTsuchishoKohiIn
                         処理対象年月 = flowEntity.getShoriYM();
                     }
                     レコード件数の合計 = レコード件数の合計 + flowEntity.getCodeNum();
-                    一時TBL登録件数 = 一時TBL登録件数 + flowEntity.get明細データ登録件数();
+                    一時TBL登録件数 = flowEntity.get明細データ登録件数();
                 }
             }
             executeStep(処理結果リスト一時登録);

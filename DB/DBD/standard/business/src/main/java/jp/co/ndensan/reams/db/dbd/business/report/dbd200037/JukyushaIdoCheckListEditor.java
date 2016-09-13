@@ -5,9 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd200037;
 
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5720001.LowerEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5720001.UpperEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200037.JukyushaIdoCheckListReportSource;
+import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -25,21 +29,30 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
  */
 public class JukyushaIdoCheckListEditor implements IJukyushaIdoCheckListEditor {
 
-    private final JukyushaIdoCheckListItem item;
     private final UpperEntity upperEntity;
     private final LowerEntity lowerEntity;
+    private final IOutputOrder iOutputOrder;
+    private final IOutputOrder breakoutputOrder;
+    private static final int LISTINDEX_0 = 0;
+    private static final int LISTINDEX_1 = 1;
+    private static final int LISTINDEX_2 = 2;
+    private static final int LISTINDEX_3 = 3;
+    private static final int LISTINDEX_4 = 4;
 
     /**
      * インスタンスを生成します。
      *
-     * @param item {@link JukyushaIdoCheckListItem}
      * @param upperEntity {@link UpperEntity}
      * @param lowerEntity {@link LowerEntity}
+     * @param iOutputOrder {@link IOutputOrder}
+     * @param breakoutputOrder {@link IOutputOrder}
      */
-    public JukyushaIdoCheckListEditor(JukyushaIdoCheckListItem item, UpperEntity upperEntity, LowerEntity lowerEntity) {
-        this.item = item;
+    public JukyushaIdoCheckListEditor(UpperEntity upperEntity, LowerEntity lowerEntity,
+            IOutputOrder iOutputOrder, IOutputOrder breakoutputOrder) {
         this.upperEntity = upperEntity;
         this.lowerEntity = lowerEntity;
+        this.iOutputOrder = iOutputOrder;
+        this.breakoutputOrder = breakoutputOrder;
     }
 
     /**
@@ -57,8 +70,7 @@ public class JukyushaIdoCheckListEditor implements IJukyushaIdoCheckListEditor {
         edit印刷日時(source);
         edit保険者番号(source);
         edit保険者名称(source);
-        edit出力順(source);
-        edit改頁(source);
+        edit出力順改頁(source);
         edit被保険者番号(source);
         edit識別コード(source);
         edit住所(source);
@@ -98,26 +110,13 @@ public class JukyushaIdoCheckListEditor implements IJukyushaIdoCheckListEditor {
         source.hokenshaName = upperEntity.get保険者名称();
     }
 
-    private void edit出力順(JukyushaIdoCheckListReportSource source) {
-        if (item != null) {
-            source.shutsuryokujun1 = item.getShutsuryokujun1();
-            source.shutsuryokujun2 = item.getShutsuryokujun2();
-            source.shutsuryokujun3 = item.getShutsuryokujun3();
-            source.shutsuryokujun4 = item.getShutsuryokujun4();
-            source.shutsuryokujun5 = item.getShutsuryokujun5();
+    private void edit出力順改頁(JukyushaIdoCheckListReportSource source) {
+        if (iOutputOrder != null) {
+            setiOutputOrder(source);
         }
-
-    }
-
-    private void edit改頁(JukyushaIdoCheckListReportSource source) {
-        if (item != null) {
-            source.kaipage1 = item.getKaipage1();
-            source.kaipage2 = item.getKaipage2();
-            source.kaipage3 = item.getKaipage3();
-            source.kaipage4 = item.getKaipage4();
-            source.kaipage5 = item.getKaipage5();
+        if (breakoutputOrder != null) {
+            setBreakIoutputOrder(source);
         }
-
     }
 
     private void edit被保険者番号(JukyushaIdoCheckListReportSource source) {
@@ -228,6 +227,47 @@ public class JukyushaIdoCheckListEditor implements IJukyushaIdoCheckListEditor {
         systemDateTime.append(RString.HALF_SPACE);
         systemDateTime.append(new RString("作成"));
         return systemDateTime.toRString();
+    }
+
+    private void setiOutputOrder(JukyushaIdoCheckListReportSource source) {
+
+        Map<Integer, ISetSortItem> 出力順Map = ChohyoUtil.get出力順項目Map(iOutputOrder);
+        if (出力順Map.get(LISTINDEX_0) != null) {
+            source.shutsuryokujun1 = 出力順Map.get(LISTINDEX_0).get項目名();
+        }
+        if (出力順Map.get(LISTINDEX_1) != null) {
+            source.shutsuryokujun2 = 出力順Map.get(LISTINDEX_1).get項目名();
+        }
+        if (出力順Map.get(LISTINDEX_2) != null) {
+            source.shutsuryokujun3 = 出力順Map.get(LISTINDEX_2).get項目名();
+        }
+        if (出力順Map.get(LISTINDEX_3) != null) {
+            source.shutsuryokujun4 = 出力順Map.get(LISTINDEX_3).get項目名();
+        }
+        if (出力順Map.get(LISTINDEX_4) != null) {
+            source.shutsuryokujun5 = 出力順Map.get(LISTINDEX_4).get項目名();
+        }
+    }
+
+    private void setBreakIoutputOrder(JukyushaIdoCheckListReportSource source) {
+
+        Map<Integer, ISetSortItem> 改頁Map = ChohyoUtil.get改頁項目Map(iOutputOrder);
+        if (改頁Map.get(LISTINDEX_0) != null) {
+            source.kaipage1 = 改頁Map.get(LISTINDEX_0).get項目名();
+        }
+        if (改頁Map.get(LISTINDEX_1) != null) {
+            source.kaipage2 = 改頁Map.get(LISTINDEX_1).get項目名();
+        }
+        if (改頁Map.get(LISTINDEX_2) != null) {
+            source.kaipage3 = 改頁Map.get(LISTINDEX_2).get項目名();
+        }
+        if (改頁Map.get(LISTINDEX_3) != null) {
+            source.kaipage4 = 改頁Map.get(LISTINDEX_3).get項目名();
+        }
+        if (改頁Map.get(LISTINDEX_4) != null) {
+            source.kaipage5 = 改頁Map.get(LISTINDEX_4).get項目名();
+        }
+
     }
 
 }

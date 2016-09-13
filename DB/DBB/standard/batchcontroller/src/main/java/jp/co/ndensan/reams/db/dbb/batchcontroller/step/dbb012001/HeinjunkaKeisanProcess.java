@@ -45,9 +45,6 @@ public class HeinjunkaKeisanProcess extends BatchProcessBase<TokuchoHeijunkaRoku
     private static final int NUM_0 = 0;
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
-    private static final int NUM_3 = 3;
-    private static final int NUM_4 = 4;
-    private static final int NUM_5 = 5;
     private static final int NUM_11 = 11;
     private static final RString 平準化対象外理由区分_最小値未満 = new RString("1");
     private static final RString 平準化対象外理由区分_計算方法より = new RString("2");
@@ -83,13 +80,10 @@ public class HeinjunkaKeisanProcess extends BatchProcessBase<TokuchoHeijunkaRoku
                 parameter.get減額平準化方法(), effectiveDate);
         HeijunkaOutput 平準化結果 = heijunka.calculateHeijunka(heijunkaInput);
         if (平準化結果.is平準化済フラグ()) {
-//        if (true) {
             TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity tmpEntity = new TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity(
                     平準化結果.get変更後特徴期別額().get(NUM_0), 平準化結果.get変更後特徴期別額().get(NUM_1),
                     平準化結果.get変更後特徴期別額().get(NUM_2), taishogaiTempEntity.getTsuchishoNo());
             平準化計算結果一時tableWriter.insert(tmpEntity);
-//            taishogaiTempEntity.set備考コード(get備考コード(平準化結果));
-//            対象外データ一時tableWriter.insert(taishogaiTempEntity);
         } else {
             taishogaiTempEntity.set備考コード(get備考コード(平準化結果));
             対象外データ一時tableWriter.insert(taishogaiTempEntity);
@@ -161,32 +155,6 @@ public class HeinjunkaKeisanProcess extends BatchProcessBase<TokuchoHeijunkaRoku
             今年度保険料率 = 保険料段階.get().get保険料率();
         }
         return 今年度保険料率;
-    }
-
-    private int 一行目のレコード変換(RString 特徴期情報_月処理区分) {
-        int 月処理区分 = NUM_0;
-        int i = Integer.parseInt(特徴期情報_月処理区分.toString());
-        switch (i) {
-            case NUM_0:
-                break;
-            case NUM_1:
-                月処理区分 = NUM_1;
-                break;
-            case NUM_2:
-                月処理区分 = NUM_2;
-                break;
-            case NUM_3:
-                break;
-            case NUM_4:
-                月処理区分 = NUM_3;
-                break;
-            case NUM_5:
-                月処理区分 = NUM_4;
-                break;
-            default:
-                break;
-        }
-        return 月処理区分;
     }
 
     private RString get備考コード(HeijunkaOutput 平準化結果) {

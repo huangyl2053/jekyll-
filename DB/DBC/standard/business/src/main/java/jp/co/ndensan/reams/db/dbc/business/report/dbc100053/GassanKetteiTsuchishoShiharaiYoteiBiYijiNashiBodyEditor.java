@@ -228,7 +228,7 @@ public class GassanKetteiTsuchishoShiharaiYoteiBiYijiNashiBodyEditor
         source.taisyoEdYm = 計算対象期間終了年月;
         source.shinseiYmd = getパターン12(entity.get申請年月日());
         source.ketteiYmd = getパターン12(entity.get決定年月日());
-        source.shiharaiGaku = get共通ポリシー金額1(entity.get自己負担総額());
+        source.shiharaiGaku = get共通ポリシー金額1(entity.get計算対象期間中の自己負担額合計額());
         source.shikyuGakuTitle = 支給額;
         source.shikyuGaku = get共通ポリシー金額1(entity.get支給額());
         if (entity.get支給区分コード() != null && 区分_1.equals(entity.get支給区分コード())) {

@@ -310,6 +310,7 @@ public class JukoKisambiTokushuToroku {
         div.getDgShunoJokyo().setDisabled(false);
         div.getJikoKisambi().setIsOpen(false);
         div.getJikoKisambi().setDisabled(true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(共通エリア_保存する, false);
 
         return ResponseData.of(div).respond();
     }
@@ -323,7 +324,10 @@ public class JukoKisambiTokushuToroku {
     public ResponseData<JukoKisambiTokushuTorokuDiv> onClick_btnSave(JukoKisambiTokushuTorokuDiv div) {
 
         List<JikoKisambiKanri> 時効起算日管理List = ViewStateHolder.get(ViewStateKeys.時効起算日管理, new ArrayList<>().getClass());
-        if (!getHandler(div).is変更判定for時効起算日登録(時効起算日管理List)) {
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
+        ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
+        if (!getHandler(div).is変更判定for保存(被保険者番号)) {
 
             throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
         }
@@ -341,10 +345,6 @@ public class JukoKisambiTokushuToroku {
         }
 
         getHandler(div).onClick_btnSave(時効起算日管理List);
-
-        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
-        ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
 
         PersonalData personalData = PersonalData.of(識別コード, new ExpandedInformation(new Code("0003"),
                 new RString("被保険者番号"), 被保険者番号.getColumnValue()));

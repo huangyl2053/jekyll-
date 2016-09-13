@@ -48,7 +48,7 @@ public class ShoriKekkaKakuninListProcess extends BatchProcessBase<DbWT1801Shori
     private static final RString 時 = new RString("時");
     private static final RString 分 = new RString("分");
     private static final RString 秒 = new RString("秒");
-    private static final RString EMPTY = new RString("　");
+    private static final RString EMPTY = new RString(" ");
     private static final RString 作成 = new RString("作成");
     private static final RString HALFMONTH = new RString("00");
     private int count = 1;

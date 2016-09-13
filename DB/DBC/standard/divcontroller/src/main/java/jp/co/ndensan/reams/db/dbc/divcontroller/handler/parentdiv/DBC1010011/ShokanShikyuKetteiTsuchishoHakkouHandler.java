@@ -93,18 +93,21 @@ public class ShokanShikyuKetteiTsuchishoHakkouHandler {
         }
         List<FlexibleYearMonth> サービス提供年月List = getサービス提供年月(償還払支給判定結果List);
         div.getDdlServiceTeikyoYM().setDataSource(getサービス提供年月DataSource(サービス提供年月List));
+        List<RString> 整理番号List = new ArrayList<>();
         if (!サービス提供年月List.isEmpty()) {
             div.getDdlServiceTeikyoYM().setSelectedValue(サービス提供年月List.get(0).wareki().toDateString());
+            整理番号List = get整理番号(サービス提供年月List.get(0), 償還払支給判定結果List);
         }
-        List<RString> 整理番号List = get整理番号(サービス提供年月List.get(0), 償還払支給判定結果List);
         div.getDdlSeiriNO().setDataSource(get整理番号DataSource(整理番号List));
         if (!整理番号List.isEmpty()) {
             div.getDdlSeiriNO().setSelectedValue(整理番号List.get(0));
         }
-        if (償還払支給判定結果List.get(0).get償還払支給判定結果().get決定通知書作成年月日() != null && !償還払支給判定結果List.get(0).
-                get償還払支給判定結果().get決定通知書作成年月日().isEmpty()) {
-            div.getShokanShikyuKetteiTsuchishoHakkouPrint().getTxtZenkaiHakkoYMD().setValue(new RDate(償還払支給判定結果List.get(0).
-                    get償還払支給判定結果().get決定通知書作成年月日().toString()));
+        if (!償還払支給判定結果List.isEmpty()) {
+            if (償還払支給判定結果List.get(0).get償還払支給判定結果().get決定通知書作成年月日() != null && !償還払支給判定結果List.get(0).
+                    get償還払支給判定結果().get決定通知書作成年月日().isEmpty()) {
+                div.getShokanShikyuKetteiTsuchishoHakkouPrint().getTxtZenkaiHakkoYMD().setValue(new RDate(償還払支給判定結果List.get(0).
+                        get償還払支給判定結果().get決定通知書作成年月日().toString()));
+            }
         }
         ChohyoSeigyoHanyoManager manager = new ChohyoSeigyoHanyoManager();
         ChohyoSeigyoHanyo 帳票制御 = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.
@@ -267,8 +270,8 @@ public class ShokanShikyuKetteiTsuchishoHakkouHandler {
 
     private List<KeyValueDataSource> get整理番号DataSource(List<RString> 整理番号List) {
         List<KeyValueDataSource> dataSources = new ArrayList<>();
-        for (int i = 0; i < 整理番号List.size(); i++) {
-            KeyValueDataSource data = new KeyValueDataSource(new RString("key" + i), 整理番号List.get(i));
+        for (RString 整理番号 : 整理番号List) {
+            KeyValueDataSource data = new KeyValueDataSource(整理番号, 整理番号);
             dataSources.add(data);
         }
         return dataSources;

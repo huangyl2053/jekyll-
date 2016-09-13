@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -50,11 +51,15 @@ public class ShuruiShikyuGendogakuMain {
      * @return ResponseData
      */
     public ResponseData<ShuruiShikyuGendogakuMainDiv> onLoand(ShuruiShikyuGendogakuMainDiv div) {
-        List<ServiceShuruiShikyuGendoGaku> shikyuGendoGakuList = getHandler(div).initialize();
-        ViewStateHolder.put(ViewStateKeys.サービス種類支給限度額,
-                new ServiceShuruiShikyuGendoGakuHolder(shikyuGendoGakuList));
-        state = 標準;
-        return ResponseData.of(div).setState(DBC4210011StateName.標準);
+        if (!RealInitialLocker.tryGetLock(排他キー)) {
+            throw new PessimisticLockingException();
+        } else {
+            List<ServiceShuruiShikyuGendoGaku> shikyuGendoGakuList = getHandler(div).initialize();
+            ViewStateHolder.put(ViewStateKeys.サービス種類支給限度額,
+                    new ServiceShuruiShikyuGendoGakuHolder(shikyuGendoGakuList));
+            state = 標準;
+            return ResponseData.of(div).setState(DBC4210011StateName.標準);
+        }
     }
 
     /**

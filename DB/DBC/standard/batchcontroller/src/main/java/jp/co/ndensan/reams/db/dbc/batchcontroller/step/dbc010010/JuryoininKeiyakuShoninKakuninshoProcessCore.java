@@ -111,7 +111,7 @@ public class JuryoininKeiyakuShoninKakuninshoProcessCore {
         JyuryoItakuKeiyakuKakuninShoEntity 利用者向けEntity = businessEntity.get利用者向けEntity();
         利用者向けEntity.setページ(new RString(page));
         利用者向けEntity.set文書番号(proParameter.get文書番号());
-        利用者向けEntity.set発行日(getWarekiYmd(new FlexibleDate(利用者向け認証者情報.hakkoYMD)));
+        利用者向けEntity.set発行日(利用者向け認証者情報.hakkoYMD);
         利用者向けEntity.set電子公印(利用者向け認証者情報.denshiKoin);
         利用者向けEntity.set認証者役職名(利用者向け認証者情報.ninshoshaYakushokuMei);
         利用者向けEntity.set認証者役職名1(利用者向け認証者情報.ninshoshaYakushokuMei1);
@@ -153,7 +153,7 @@ public class JuryoininKeiyakuShoninKakuninshoProcessCore {
         JyuryoItakuKeiyakuKakuninShoKeiyakuJigyoshayoEntity 事業者用Entity = businessEntity.get事業者用Entity();
         事業者用Entity.setページ(new RString(page));
         事業者用Entity.set文書番号(proParameter.get文書番号());
-        事業者用Entity.set発行日(getWarekiYmd(new FlexibleDate(事業者用認証者情報.hakkoYMD)));
+        事業者用Entity.set発行日(事業者用認証者情報.hakkoYMD);
         事業者用Entity.set電子公印(事業者用認証者情報.denshiKoin);
         事業者用Entity.set認証者役職名(事業者用認証者情報.ninshoshaYakushokuMei);
         事業者用Entity.set認証者役職名1(事業者用認証者情報.ninshoshaYakushokuMei1);
