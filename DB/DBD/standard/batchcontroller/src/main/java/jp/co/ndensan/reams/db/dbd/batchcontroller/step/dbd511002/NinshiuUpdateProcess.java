@@ -127,7 +127,7 @@ public class NinshiuUpdateProcess extends BatchProcessBase<NinshiuUpdateEntity> 
     private static final RString ゼロ = new RString("0");
     private static final RString 一 = new RString("1");
     private static final RString 二 = new RString("2");
-     private static final int LISTINDEX_0 = 0;
+    private static final int LISTINDEX_0 = 0;
     private static final int LISTINDEX_1 = 1;
     private static final int LISTINDEX_2 = 2;
     private static final int LISTINDEX_3 = 3;
@@ -189,8 +189,8 @@ public class NinshiuUpdateProcess extends BatchProcessBase<NinshiuUpdateEntity> 
             出力順 = ChohyoUtil.get出力順OrderBy(MyBatisOrderByClauseCreator.
                     create(NinshiuUpdateProperty.DBD511002_ResultListEnum.class, outputOrder), NUM5);
         }
-        return new BatchDbReader(MYBATIS_SELECT_ID);
-        
+        return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toNinshiuUpdateMyBatisParameter(出力順));
+
     }
     @BatchWriter
     private BatchPermanentTableWriter<DbT4101NinteiShinseiJohoEntity> dbT4101EntityWriter;
@@ -377,7 +377,7 @@ public class NinshiuUpdateProcess extends BatchProcessBase<NinshiuUpdateEntity> 
         twonin.set抽出対象期間(builder.toRString());
         twonin.set市町村コード(ninshi.getShichosonCode().getColumnValue());
         twonin.set市町村名称(ninshi.getShichosonMeisho());
-         Map<Integer, ISetSortItem> 出力順Map = ChohyoUtil.get出力順項目Map(outputOrder);
+        Map<Integer, ISetSortItem> 出力順Map = ChohyoUtil.get出力順項目Map(outputOrder);
         if (出力順Map.get(LISTINDEX_0) != null) {
             twonin.set並び順1(出力順Map.get(LISTINDEX_0).get項目名());
         }
@@ -400,7 +400,7 @@ public class NinshiuUpdateProcess extends BatchProcessBase<NinshiuUpdateEntity> 
         RString timeFormat = hour.concat("時").concat(min).concat("分").concat(sec).concat("秒");
         twonin.set印刷時間(new RString(RDate.getNowDate().wareki().eraType(EraType.KANJI).
                 firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).
-                fillType(FillType.ZERO).toDateString().toString() + timeFormat + (new RString("")) + (new RString("作成"))));
+                fillType(FillType.ZERO).toDateString().toString() + timeFormat + (RString.HALF_SPACE) + (new RString("作成"))));
         index++;
         set通知書発行一覧(twonin, ninshi, index);
 
@@ -483,14 +483,14 @@ public class NinshiuUpdateProcess extends BatchProcessBase<NinshiuUpdateEntity> 
                 KamokuCode.EMPTY, 1);
         entity.set通知文(map.get(1));
         if (ninshi.getKoroshoIfShikibetsuCode().equals(new Code("99A"))) {
-            entity = oneZifang(entity, eCode);
+            entity = shichoson(entity, eCode);
         } else if (ninshi.getKoroshoIfShikibetsuCode().equals(new Code("02A"))) {
-            entity = twoZifang(entity, eCode);
+            entity = prtKaigo(entity, eCode);
         } else if (ninshi.getKoroshoIfShikibetsuCode().equals(new Code("06A"))) {
-            entity = therrZifang(entity, eCode);
+            entity = Kanri(entity, eCode);
         } else if (ninshi.getKoroshoIfShikibetsuCode().equals(new Code("09B"))
                 || ninshi.getKoroshoIfShikibetsuCode().equals(new Code("09A"))) {
-            entity = fourZifang(entity, eCode);
+            entity = sakusei(entity, eCode);
         }
 
         entity.set有効開始年YYYY(ninshi.getNinteiYukoKikanKaishiYMD().wareki().getYear());
@@ -524,142 +524,108 @@ public class NinshiuUpdateProcess extends BatchProcessBase<NinshiuUpdateEntity> 
 
     }
 
-    private ShinseiShoEntity oneZifang(ShinseiShoEntity entity, Code eCode) {
+    private ShinseiShoEntity shichoson(ShinseiShoEntity entity, Code eCode) {
         if (eCode.getColumnValue().equals(YokaigoJotaiKubun99.要介護1.getコード())) {
-            set要介護1(entity);
+            set要介護(entity, まる, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                    RString.EMPTY, RString.EMPTY, RString.EMPTY);
         } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun99.要介護2.getコード())) {
-            set要介護2(entity);
+            set要介護(entity, RString.EMPTY, まる, RString.EMPTY, RString.EMPTY,
+                    RString.EMPTY, RString.EMPTY, RString.EMPTY);
         } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun99.要介護3.getコード())) {
-            set要介護3(entity);
+            set要介護(entity, RString.EMPTY, RString.EMPTY, まる, RString.EMPTY,
+                    RString.EMPTY, RString.EMPTY, RString.EMPTY);
         } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun99.要介護4.getコード())) {
-            set要介護4(entity);
+            set要介護(entity, RString.EMPTY, RString.EMPTY, RString.EMPTY, まる,
+                    RString.EMPTY, RString.EMPTY, RString.EMPTY);
         } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun99.要介護5.getコード())) {
-            set要介護5(entity);
+            set要介護(entity, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                    まる, RString.EMPTY, RString.EMPTY);
         }
         return entity;
     }
 
-    private ShinseiShoEntity twoZifang(ShinseiShoEntity entity, Code eCode) {
+    private ShinseiShoEntity prtKaigo(ShinseiShoEntity entity, Code eCode) {
         if (eCode.getColumnValue().equals(YokaigoJotaiKubun02.要介護1.getコード())) {
-            set要介護1(entity);
+            set要介護(entity, まる, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                    RString.EMPTY, RString.EMPTY, RString.EMPTY);
         } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun02.要介護2.getコード())) {
-            set要介護2(entity);
+            set要介護(entity, RString.EMPTY, まる, RString.EMPTY, RString.EMPTY,
+                    RString.EMPTY, RString.EMPTY, RString.EMPTY);
         } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun02.要介護3.getコード())) {
-            set要介護3(entity);
+            set要介護(entity, RString.EMPTY, RString.EMPTY, まる, RString.EMPTY,
+                    RString.EMPTY, RString.EMPTY, RString.EMPTY);
         } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun02.要介護4.getコード())) {
-            set要介護4(entity);
+            set要介護(entity, RString.EMPTY, RString.EMPTY, RString.EMPTY, まる,
+                    RString.EMPTY, RString.EMPTY, RString.EMPTY);
         } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun02.要介護5.getコード())) {
-            set要介護5(entity);
+            set要介護(entity, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                    まる, RString.EMPTY, RString.EMPTY);
         }
         return entity;
     }
 
-    private ShinseiShoEntity therrZifang(ShinseiShoEntity entity, Code eCode) {
+    private ShinseiShoEntity Kanri(ShinseiShoEntity entity, Code eCode) {
         if (eCode.getColumnValue().equals(YokaigoJotaiKubun06.要介護1.getコード())) {
-            set要介護1(entity);
+            set要介護(entity, まる, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                    RString.EMPTY, RString.EMPTY, RString.EMPTY);
         } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun06.要介護2.getコード())) {
-            set要介護2(entity);
+            set要介護(entity, RString.EMPTY, まる, RString.EMPTY, RString.EMPTY,
+                    RString.EMPTY, RString.EMPTY, RString.EMPTY);
         } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun06.要介護3.getコード())) {
-            set要介護3(entity);
+            set要介護(entity, RString.EMPTY, RString.EMPTY, まる, RString.EMPTY,
+                    RString.EMPTY, RString.EMPTY, RString.EMPTY);
         } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun06.要介護4.getコード())) {
-            set要介護4(entity);
+            set要介護(entity, RString.EMPTY, RString.EMPTY, RString.EMPTY, まる,
+                    RString.EMPTY, RString.EMPTY, RString.EMPTY);
         } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun06.要介護5.getコード())) {
-            set要介護5(entity);
+            set要介護(entity, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                    まる, RString.EMPTY, RString.EMPTY);
         } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun06.要支援1.getコード())) {
-            set要支援1(entity);
+            set要介護(entity, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                    RString.EMPTY, まる, RString.EMPTY);
         } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun06.要支援2.getコード())) {
-            set要支援2(entity);
+            set要介護(entity, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                    RString.EMPTY, RString.EMPTY, まる);
         }
         return entity;
     }
 
-    private ShinseiShoEntity fourZifang(ShinseiShoEntity entity, Code eCode) {
+    private ShinseiShoEntity sakusei(ShinseiShoEntity entity, Code eCode) {
         if (eCode.getColumnValue().equals(YokaigoJotaiKubun09.要介護1.getコード())) {
-            set要介護1(entity);
+            set要介護(entity, まる, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                    RString.EMPTY, RString.EMPTY, RString.EMPTY);
         } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun09.要介護2.getコード())) {
-            set要介護2(entity);
+            set要介護(entity, RString.EMPTY, まる, RString.EMPTY, RString.EMPTY,
+                    RString.EMPTY, RString.EMPTY, RString.EMPTY);
         } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun09.要介護3.getコード())) {
-            set要介護3(entity);
+            set要介護(entity, RString.EMPTY, RString.EMPTY, まる, RString.EMPTY,
+                    RString.EMPTY, RString.EMPTY, RString.EMPTY);
         } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun09.要介護4.getコード())) {
-            set要介護4(entity);
+            set要介護(entity, RString.EMPTY, RString.EMPTY, RString.EMPTY, まる,
+                    RString.EMPTY, RString.EMPTY, RString.EMPTY);
         } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun09.要介護5.getコード())) {
-            set要介護5(entity);
+            set要介護(entity, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                    まる, RString.EMPTY, RString.EMPTY);
         } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun09.要支援1.getコード())) {
-            set要支援1(entity);
+            set要介護(entity, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                    RString.EMPTY, まる, RString.EMPTY);
         } else if (eCode.getColumnValue().equals(YokaigoJotaiKubun09.要支援2.getコード())) {
-            set要支援2(entity);
+            set要介護(entity, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
+                    RString.EMPTY, RString.EMPTY, まる);
         }
         return entity;
     }
 
-    private void set要介護1(ShinseiShoEntity entity) {
-        entity.set要介護状態区分1(まる);
-        entity.set要介護状態区分2(RString.EMPTY);
-        entity.set要介護状態区分3(RString.EMPTY);
-        entity.set要介護状態区分4(RString.EMPTY);
-        entity.set要介護状態区分5(RString.EMPTY);
-        entity.set要支援状態区分1(RString.EMPTY);
-        entity.set要支援状態区分2(RString.EMPTY);
-    }
-
-    private void set要介護2(ShinseiShoEntity entity) {
-        entity.set要介護状態区分1(RString.EMPTY);
-        entity.set要介護状態区分2(まる);
-        entity.set要介護状態区分3(RString.EMPTY);
-        entity.set要介護状態区分4(RString.EMPTY);
-        entity.set要介護状態区分5(RString.EMPTY);
-        entity.set要支援状態区分1(RString.EMPTY);
-        entity.set要支援状態区分2(RString.EMPTY);
-    }
-
-    private void set要介護3(ShinseiShoEntity entity) {
-        entity.set要介護状態区分1(RString.EMPTY);
-        entity.set要介護状態区分2(RString.EMPTY);
-        entity.set要介護状態区分3(まる);
-        entity.set要介護状態区分4(RString.EMPTY);
-        entity.set要介護状態区分5(RString.EMPTY);
-        entity.set要支援状態区分1(RString.EMPTY);
-        entity.set要支援状態区分2(RString.EMPTY);
-    }
-
-    private void set要介護4(ShinseiShoEntity entity) {
-        entity.set要介護状態区分1(RString.EMPTY);
-        entity.set要介護状態区分2(RString.EMPTY);
-        entity.set要介護状態区分3(RString.EMPTY);
-        entity.set要介護状態区分4(まる);
-        entity.set要介護状態区分5(RString.EMPTY);
-        entity.set要支援状態区分1(RString.EMPTY);
-        entity.set要支援状態区分2(RString.EMPTY);
-    }
-
-    private void set要介護5(ShinseiShoEntity entity) {
-        entity.set要介護状態区分1(RString.EMPTY);
-        entity.set要介護状態区分2(RString.EMPTY);
-        entity.set要介護状態区分3(RString.EMPTY);
-        entity.set要介護状態区分4(RString.EMPTY);
-        entity.set要介護状態区分5(まる);
-        entity.set要支援状態区分1(RString.EMPTY);
-        entity.set要支援状態区分2(RString.EMPTY);
-    }
-
-    private void set要支援1(ShinseiShoEntity entity) {
-        entity.set要介護状態区分1(RString.EMPTY);
-        entity.set要介護状態区分2(RString.EMPTY);
-        entity.set要介護状態区分3(RString.EMPTY);
-        entity.set要介護状態区分4(RString.EMPTY);
-        entity.set要介護状態区分5(RString.EMPTY);
-        entity.set要支援状態区分1(まる);
-        entity.set要支援状態区分2(RString.EMPTY);
-    }
-
-    private void set要支援2(ShinseiShoEntity entity) {
-        entity.set要介護状態区分1(RString.EMPTY);
-        entity.set要介護状態区分2(RString.EMPTY);
-        entity.set要介護状態区分3(RString.EMPTY);
-        entity.set要介護状態区分4(RString.EMPTY);
-        entity.set要介護状態区分5(RString.EMPTY);
-        entity.set要支援状態区分1(RString.EMPTY);
-        entity.set要支援状態区分2(まる);
+    private void set要介護(ShinseiShoEntity entity, RString 要介護状態区分1, RString 要介護状態区分2,
+            RString 要介護状態区分3, RString 要介護状態区分4, RString 要介護状態区分5, RString 要支援状態区分1,
+            RString 要支援状態区分2) {
+        entity.set要介護状態区分1(要介護状態区分1);
+        entity.set要介護状態区分2(要介護状態区分2);
+        entity.set要介護状態区分3(要介護状態区分3);
+        entity.set要介護状態区分4(要介護状態区分4);
+        entity.set要介護状態区分5(要介護状態区分5);
+        entity.set要支援状態区分1(要支援状態区分1);
+        entity.set要支援状態区分2(要支援状態区分2);
     }
 
 }
