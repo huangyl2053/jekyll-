@@ -165,14 +165,23 @@ public class AtenaSealEditor
     }
 
     private String getMethodName(int index) {
-        return SET.concat(MethodName.getName(index)).concat(String.valueOf(getIndex2(index))).toString();
+        return SET.concat(MethodName.getName(index)).concat(getValueOfIndex(getIndex2(index))).toString();
     }
 
     private int getIndex2(int index) {
         if (index <= NUM_5) {
-            return this.posIndex;
+
+            return this.posIndex - 1;
         }
         return this.posIndex * 2 - index % NUM_2;
+    }
+
+    private String getValueOfIndex(int index) {
+        if (index == NUM_0) {
+
+            return String.valueOf("");
+        }
+        return String.valueOf("index");
     }
 
     private static enum MethodName {
