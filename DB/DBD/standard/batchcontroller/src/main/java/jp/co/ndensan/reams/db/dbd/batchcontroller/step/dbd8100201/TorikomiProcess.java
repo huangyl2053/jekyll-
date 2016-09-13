@@ -110,7 +110,7 @@ public class TorikomiProcess extends BatchProcessBase<RString> {
                     .setNewLine(NewLine.LF)
                     .build();
         }
-        return new BatchSimpleReader(batFileName, Encode.UTF_8);
+        return new BatchSimpleReader(batFileName, Encode.JIS);
     }
 
     @Override
@@ -121,7 +121,7 @@ public class TorikomiProcess extends BatchProcessBase<RString> {
 
     @Override
     protected void process(RString data) {
-        //        
+        //
     }
 
     @Override
