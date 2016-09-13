@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc710170;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -626,13 +625,9 @@ public class HanyoListKogakuGassanShikyugakuKetteiNoProcess
     }
 
     private RString get受給申請事由(DbT4001JukyushaDaichoEntity 受給者台帳) {
-        List jukyuShinseiJiyuList = new ArrayList();
         RString 受給申請事由 = RString.EMPTY;
         RString 受給申請事由コード = getColumnValue(受給者台帳.getJukyuShinseiJiyu());
-        jukyuShinseiJiyuList.addAll(Arrays.asList(JukyuShinseiJiyu.values()));
-        if (jukyuShinseiJiyuList.contains(受給申請事由コード)) {
-            getJukyuShinseiJiyu(受給申請事由コード, 受給申請事由, 受給者台帳.getYoshienshaNinteiShinseiFlag() ? 定値RSTRING_1 : 定値RSTRING_0);
-        }
+        getJukyuShinseiJiyu(受給申請事由コード, 受給申請事由, 受給者台帳.getYoshienshaNinteiShinseiFlag() ? 定値RSTRING_1 : 定値RSTRING_0);
         return 受給申請事由;
     }
 
