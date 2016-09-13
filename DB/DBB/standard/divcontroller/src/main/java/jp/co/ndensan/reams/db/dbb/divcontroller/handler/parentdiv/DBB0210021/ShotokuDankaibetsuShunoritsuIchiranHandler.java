@@ -34,7 +34,6 @@ public class ShotokuDankaibetsuShunoritsuIchiranHandler {
 
     private final ShotokuDankaibetsuShunoritsuIchiranDiv div;
     private RDate 調定年度;
-    private RDate 当初年度;
     private RDate 基準日;
     private static final RString NUM_0 = new RString("0");
     private static final RString NUM_1 = new RString("1");
@@ -77,7 +76,6 @@ public class ShotokuDankaibetsuShunoritsuIchiranHandler {
         RString 日付関連_調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, 基準日, SubGyomuCode.DBB介護賦課);
         調定年度 = new RDate(日付関連_調定年度.toString());
         RString 日付関連_当初年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_当初年度, 基準日, SubGyomuCode.DBB介護賦課);
-        当初年度 = new RDate(日付関連_当初年度.toString());
         div.getTxtChoteiNendoRange().setMaxDateString(日付関連_調定年度);
         div.getTxtChoteiNendoRange().setMinDateString(日付関連_当初年度);
         div.getTxtFukaNendoRange().setMaxDateString(日付関連_調定年度);
@@ -277,14 +275,14 @@ public class ShotokuDankaibetsuShunoritsuIchiranHandler {
         return dataSourceList;
     }
 
-    private List<KeyValueDataSource> setdataSourceY(RYear MaxYear, RYear MinYear) {
+    private List<KeyValueDataSource> setdataSourceY(RYear maxYear, RYear minYear) {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
-        while (MinYear.isBeforeOrEquals(MaxYear)) {
-            RString key = MaxYear.toDateString();
-            RString value = MaxYear.toDateString();
+        while (minYear.isBeforeOrEquals(maxYear)) {
+            RString key = maxYear.toDateString();
+            RString value = maxYear.toDateString();
             KeyValueDataSource dateSource = new KeyValueDataSource(key, value);
             dataSourceList.add(dateSource);
-            MaxYear = MaxYear.minusYear(1);
+            maxYear = maxYear.minusYear(1);
         }
         return dataSourceList;
     }
