@@ -40,8 +40,9 @@ public class ShotokuDankaibetsuShunoritsuIchiranHandler {
     private static final RString NUM_2 = new RString("2");
     private static final RString NUM_3 = new RString("3");
     private static final RString NUM_4 = new RString("4");
-    private static final RString NUM_9 = new RString("9");
-    private static final int NUM_13 = 13;
+    private static final int 定数_13 = 13;
+    private static final int 定数_1 = 1;
+    private static final int 定数_2 = 2;
     private static final RString KEY_0 = new RString("key0");
     private static final RString 年齢 = new RString("nenrei");
     private static final RString 生年月日 = new RString("umareYMD");
@@ -180,44 +181,40 @@ public class ShotokuDankaibetsuShunoritsuIchiranHandler {
         RString 日付関連_調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, 基準日, SubGyomuCode.DBB介護賦課);
         RString 調定基準年 = div.getDdlChoteiKijunY().getSelectedValue();
         RString 調定基準月 = div.getDdlChoteiKijunM().getSelectedValue();
-        RString 調定基準年月;
-        if (調定基準月.compareTo(NUM_9) <= 0) {
-            調定基準年月 = 調定基準年.concat(NUM_0).concat(調定基準月);
-        } else {
-            調定基準年月 = 調定基準年.concat(調定基準月);
-        }
+        RString 調定基準年月 = null;
         RString 基準年 = div.getDdlJukyuKijunY().getSelectedValue();
         RString 基準月 = div.getDdlJukyuKijunM().getSelectedValue();
-        RString 基準年月;
-        if (基準月.compareTo(NUM_9) <= 0) {
-            基準年月 = 基準年.concat(NUM_0).concat(基準月);
-        } else {
-            基準年月 = 基準年.concat(基準月);
-        }
+        RString 基準年月 = null;
         List<RString> 完納出力区分 = div.getChkKanno().getSelectedKeys();
         RDate 生年月日_開始 = div.getTxtBirthRange().getFromValue();
         RDate 生年月日_終了 = div.getTxtBirthRange().getToValue();
         Decimal 年齢_開始 = div.getTxtAgeRange().getFromValue();
         Decimal 年齢_終了 = div.getTxtAgeRange().getToValue();
         RDate 年齢基準日 = div.getTxtNenreiKijunYMD().getValue();
-        if (調定年度_開始 != null) {
-            parameter.set調定年度_開始(new FlexibleYear(調定年度_開始.getYear().toDateString()));
-        }
-        if (調定年度_終了 != null) {
-            parameter.set調定年度_終了(new FlexibleYear(調定年度_終了.getYear().toDateString()));
-        }
-        if (賦課年度_開始 != null) {
-            parameter.set賦課年度_開始(new FlexibleYear(賦課年度_開始.getYear().toDateString()));
-        }
-        if (賦課年度_終了 != null) {
-            parameter.set賦課年度_終了(new FlexibleYear(賦課年度_終了.getYear().toDateString()));
-        }
-        if (!(日付関連_調定年度 == null || 日付関連_調定年度.isEmpty())) {
+        parameter.set調定年度_開始(new FlexibleYear(調定年度_開始.getYear().toDateString()));
+        parameter.set調定年度_終了(new FlexibleYear(調定年度_終了.getYear().toDateString()));
+        parameter.set賦課年度_開始(new FlexibleYear(賦課年度_開始.getYear().toDateString()));
+        parameter.set賦課年度_終了(new FlexibleYear(賦課年度_終了.getYear().toDateString()));
+        if (!(日付関連_調定年度.isNullOrEmpty())) {
             parameter.set会計年度(new FlexibleYear(日付関連_調定年度));
+        }
+        if (!(調定基準月.isNullOrEmpty())) {
+            if (調定基準月.length() == 定数_1) {
+                調定基準年月 = 調定基準年.concat(NUM_0).concat(調定基準月);
+            }
+            if (調定基準月.length() == 定数_2) {
+                調定基準年月 = 調定基準年.concat(調定基準月);
+            }
         }
         parameter.set調定基準年月(new FlexibleYearMonth(調定基準年月));
         parameter.set抽出条件(div.getRadChushutsuJoken().getSelectedKey());
-        if (!基準年月.equals(NUM_0)) {
+        if (!(基準月.isNullOrEmpty())) {
+            if (基準月.length() == 定数_1) {
+                基準年月 = 基準年.concat(NUM_0).concat(基準月);
+            }
+            if (基準月.length() == 定数_2) {
+                基準年月 = 基準年.concat(基準月);
+            }
             parameter.set基準年月(new FlexibleYearMonth(基準年月));
         }
         if (div.getRadNenrei().getSelectedKey().equals(年齢)) {
@@ -266,7 +263,7 @@ public class ShotokuDankaibetsuShunoritsuIchiranHandler {
 
     private List<KeyValueDataSource> setdataSourceM() {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
-        for (int i = 1; i < NUM_13; i++) {
+        for (int i = 1; i < 定数_13; i++) {
             RString key = new RString(i);
             RString value = new RString(i);
             KeyValueDataSource dateSource = new KeyValueDataSource(key, value);
