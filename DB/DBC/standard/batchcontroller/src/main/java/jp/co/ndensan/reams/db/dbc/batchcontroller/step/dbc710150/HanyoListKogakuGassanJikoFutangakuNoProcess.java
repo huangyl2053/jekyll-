@@ -225,6 +225,8 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
     @Override
     protected void beforeExecute() {
 
+        personalDataList = new ArrayList<>();
+
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         構成市町村マスタlist = KoseiShichosonJohoFinder.createInstance().get現市町村情報();
         構成市町村Map = new HashMap<>();
