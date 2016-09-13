@@ -212,7 +212,7 @@ public class ShotokuDankaibetsuShunoritsuIchiranHandler {
         if (賦課年度_終了 != null) {
             parameter.set賦課年度_終了(new FlexibleYear(賦課年度_終了.getYear().toDateString()));
         }
-        if (日付関連_調定年度 == null || 日付関連_調定年度.isEmpty()) {
+        if (!(日付関連_調定年度 == null || 日付関連_調定年度.isEmpty())) {
             parameter.set会計年度(new FlexibleYear(日付関連_調定年度));
         }
         parameter.set調定基準年月(new FlexibleYearMonth(調定基準年月));
