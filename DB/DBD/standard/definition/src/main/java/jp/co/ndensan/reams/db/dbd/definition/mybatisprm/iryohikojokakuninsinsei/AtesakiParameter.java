@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 /**
  * 宛先情報PSM_DB検索用のパラメータです。
  *
- * @reamsid_L DBD_5770_030 tz_chengpeng
+ * @reamsid_L DBD-5770-030 tz_chengpeng
  */
 @lombok.Getter
 @lombok.Setter
