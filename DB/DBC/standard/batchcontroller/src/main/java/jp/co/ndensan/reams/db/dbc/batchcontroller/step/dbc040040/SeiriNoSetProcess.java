@@ -59,6 +59,7 @@ public class SeiriNoSetProcess extends BatchProcessBase<KogakuGassanNendoSizeEnt
         CountedItem countedItem = Saiban.get(SubGyomuCode.DBC介護給付, 汎用キー, entity.get高額合算一時().getTaishoNendo(),
                 Integer.parseInt(entity.get採番件数().toString()));
         countedItem.nextString();
+        //QA 99954
         RString 自己負担額証明書整理番号 = entity.get高額合算一時().getTaishoNendo().toDateString().concat(定数_99).
                 concat(entity.get高額合算一時().getHokenshaNo().getColumnValue()).concat(定数_12345);
         KogakuGassanTempEntity tempEntity = entity.get高額合算一時();

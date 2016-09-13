@@ -37,7 +37,7 @@ public class JikoFutangakushomeishoPageBreak extends PageBreaker<GassanJikofutan
     @Override
     public boolean isBreak(ReportLineRecord<GassanJikofutangakuHakkoIchiranSource> currentSource,
             ReportLineRecord<GassanJikofutangakuHakkoIchiranSource> nextSource) {
-
+        //QA 1527
         if (this.breakKeysList.contains(JikoFutangakushomeishoShutsuryokujunEnum.郵便番号.get項目ID())
                 && !currentSource.getSource().郵便番号.equals(nextSource.getSource().郵便番号)) {
             return true;
