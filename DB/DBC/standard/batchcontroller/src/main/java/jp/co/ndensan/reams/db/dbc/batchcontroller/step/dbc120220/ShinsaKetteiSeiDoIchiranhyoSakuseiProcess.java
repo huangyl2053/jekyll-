@@ -100,10 +100,12 @@ public class ShinsaKetteiSeiDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase
     private static final RString KEY_並び順の５件目 = new RString("KEY_並び順の５件目");
     private static final RString KEY_並び順の６件目 = new RString("KEY_並び順の６件目");
     private KyufuhiShinsaKetteiSeikyuMeisaihyoEntity currentRecord;
+    private int ヘッダー出力;
 
     @Override
     protected void initialize() {
         super.initialize();
+        ヘッダー出力 = INT_1;
         改頁リスト = new ArrayList<>();
         改頁項目名リスト = new ArrayList<>();
         出力順Map = new HashMap<>();
@@ -182,6 +184,7 @@ public class ShinsaKetteiSeiDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase
     @Override
     protected void usualProcess(KyufuhiShinsaKetteiSeikyuMeisaihyoEntity entity
     ) {
+        ヘッダー出力 = ヘッダー出力 + INT_1;
         currentRecord = entity;
         KyufuhiShinsaKetteiSeikyuMeisaihyoEntity beforeEntity = getBefore();
         KyufuhiShinsaKetteiSeikyuMeisaihyoReport kyufuhiShinsaKetteiInReport;
@@ -243,14 +246,16 @@ public class ShinsaKetteiSeiDoIchiranhyoSakuseiProcess extends BatchKeyBreakBase
                 output.set公費負担額(doカンマ編集(entity.get合計テータ().get合計_公費負担額()));
             }
         } else {
-            output.set審査年月(パターン56(entity.get合計テータ().get審査年月()));
-            RString 作成日 = RDateTime.now().getDate().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                    .fillType(FillType.BLANK).toDateString();
-            RString 作成時 = RDateTime.now().getTime()
-                    .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE).concat(SAKUSEI);
-            output.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時));
-            output.set国保連合会名(entity.get合計テータ().get国保連合会名());
+            if (ヘッダー出力 == INT_3) {
+                output.set審査年月(パターン56(entity.get合計テータ().get審査年月()));
+                RString 作成日 = RDateTime.now().getDate().wareki().eraType(EraType.KANJI)
+                        .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                        .fillType(FillType.BLANK).toDateString();
+                RString 作成時 = RDateTime.now().getTime()
+                        .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE).concat(SAKUSEI);
+                output.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時));
+                output.set国保連合会名(entity.get合計テータ().get国保連合会名());
+            }
             output.set事業者番号(getColumnValue(entity.get明細テータ().get事業所番号()));
             output.set事業者名(entity.get明細テータ().get事業所名());
             output.setサービス提供年月(doパターン54(entity.get明細テータ().getサービス提供年月()));

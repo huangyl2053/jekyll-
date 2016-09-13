@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc010020;
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,7 +28,7 @@ public class KogakuServicehiJuryoininKeiyakuShoninKakuninshoMybatisParameter imp
     private FlexibleDate 契約決定日終了;
     private RString 発行済;
     private RString 改頁出力順;
-    private RDateTime 処理年月日;
+    private RString 処理年月日;
 
     /**
      * コンストラクタです。
@@ -42,13 +42,13 @@ public class KogakuServicehiJuryoininKeiyakuShoninKakuninshoMybatisParameter imp
      * @param 処理年月日 RDate
      */
     public KogakuServicehiJuryoininKeiyakuShoninKakuninshoMybatisParameter(FlexibleDate 契約申請日開始, FlexibleDate 契約申請日終了, FlexibleDate 契約決定日開始,
-            FlexibleDate 契約決定日終了, RString 発行済, RString 改頁出力順, RDateTime 処理年月日) {
+            FlexibleDate 契約決定日終了, RString 発行済, RString 改頁出力順, RDate 処理年月日) {
         this.契約申請日開始 = 契約申請日開始;
         this.契約申請日終了 = 契約申請日終了;
         this.契約決定日開始 = 契約決定日開始;
         this.契約決定日終了 = 契約決定日終了;
         this.発行済 = 発行済;
         this.改頁出力順 = 改頁出力順;
-        this.処理年月日 = 処理年月日;
+        this.処理年月日 = 処理年月日.toDateString();
     }
 }

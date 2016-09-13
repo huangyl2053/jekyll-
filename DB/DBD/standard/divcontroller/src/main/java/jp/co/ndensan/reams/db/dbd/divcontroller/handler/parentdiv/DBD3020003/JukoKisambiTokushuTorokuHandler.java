@@ -406,6 +406,7 @@ public class JukoKisambiTokushuTorokuHandler {
                     if (!時効起算日管理.isUnchanged()) {
                         div.getDgShunoJokyo().getActiveRow().setJotai(修正);
                     }
+                    break;
                 }
             }
         }
@@ -422,6 +423,12 @@ public class JukoKisambiTokushuTorokuHandler {
 
         for (JikoKisambiKanri jikoKisambiKanri : 時効起算日管理List) {
             JikoKisambiKanriManager manager = new JikoKisambiKanriManager();
+            if (jikoKisambiKanri.isDeleted()) {
+                manager.save時効起算日管理ForDeletePhysical(jikoKisambiKanri);
+            }
+            if (jikoKisambiKanri.isUnchanged()) {
+                continue;
+            }
             manager.save時効起算日管理(jikoKisambiKanri);
         }
     }
@@ -457,6 +464,7 @@ public class JukoKisambiTokushuTorokuHandler {
                 row.getTokushuJikoKisaibi().setValue(時効起算日管理.get時効起算年月日());
                 row.getTokushuJikoKisaibiJiyu().setSelectedKey(時効起算日管理.get時効起算日区分());
 
+                時効起算日管理 = 時効起算日管理.unChanged();
                 時効起算日管理 = 時効起算日管理.modifiedModel();
 
                 保存用時効起算日管理リスト.add(時効起算日管理);

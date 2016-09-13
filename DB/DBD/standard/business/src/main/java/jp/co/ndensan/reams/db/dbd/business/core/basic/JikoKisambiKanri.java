@@ -267,7 +267,7 @@ public class JikoKisambiKanri extends ModelBase<JikoKisambiKanriIdentifier, DbT4
      */
     public JikoKisambiKanri unChanged() {
         DbT4023JikoKisambiKanriEntity unChangedEntity = entity.clone();
-        unChangedEntity.setState(EntityDataState.Added);
+        unChangedEntity.setState(EntityDataState.Unchanged);
         return new JikoKisambiKanri(
                 unChangedEntity, id);
     }

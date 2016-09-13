@@ -14,7 +14,7 @@ import lombok.Setter;
 /**
  * 国保連保有共同処理用受給者情報一覧取込のバッチパラメータです
  *
- * @reamsid_L DBC-4920-010 liuxiaoyu
+ * @reamsid_L DBC-2920-010 liuxiaoyu
  */
 @Getter
 @Setter

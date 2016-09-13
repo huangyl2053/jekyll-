@@ -519,4 +519,17 @@ public final class DateConverter {
         return date.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
     }
+
+    /**
+     * 共通ポリシー　パターン53を取得します。
+     *
+     * @param date RYearMonth
+     * @return RString
+     */
+    public static RString getDate53(RYearMonth date) {
+        if (date == null || RString.EMPTY.equals(date.toDateString())) {
+            return RString.EMPTY;
+        }
+        return date.wareki().separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+    }
 }

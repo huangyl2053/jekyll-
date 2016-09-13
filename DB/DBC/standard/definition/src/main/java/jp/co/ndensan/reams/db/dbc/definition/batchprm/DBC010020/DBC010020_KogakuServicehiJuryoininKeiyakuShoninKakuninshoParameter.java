@@ -65,18 +65,18 @@ public class DBC010020_KogakuServicehiJuryoininKeiyakuShoninKakuninshoParameter 
         FlexibleDate 契約決定開始日 = FlexibleDate.MIN;
         FlexibleDate 契約決定終了日 = FlexibleDate.MAX;
         if (契約申請開始 != null && !契約申請開始.isEmpty()) {
-            契約申請開始 = 契約申請開始日;
+            契約申請開始日 = 契約申請開始;
         }
         if (契約申請終了 != null && !契約申請終了.isEmpty()) {
-            契約申請終了 = 契約申請終了日;
+            契約申請終了日 = 契約申請終了;
         }
         if (契約決定開始 != null && !契約決定開始.isEmpty()) {
-            契約決定開始 = 契約決定開始日;
+            契約決定開始日 = 契約決定開始;
         }
         if (契約決定終了 != null && !契約決定終了.isEmpty()) {
-            契約決定終了 = 契約決定終了日;
+            契約決定終了日 = 契約決定終了;
         }
-        return new KogakuServicehiJuryoininProcessParameter(契約申請開始, 契約申請終了, 契約決定開始, 契約決定終了,
+        return new KogakuServicehiJuryoininProcessParameter(契約申請開始日, 契約申請終了日, 契約決定開始日, 契約決定終了日,
                 発行済, 通知日, 文書番号, 改頁出力順ID, 市町村コード, 処理日時);
     }
 }
