@@ -41,8 +41,6 @@ public class PostMainPanelHandler {
     private final PostMainPanelDiv div;
     private static final RString DBCMN82001 = new RString("DBCMN82001");
     private static final RString DBCMN82002 = new RString("DBCMN82002");
-    private static final RString 国保 = new RString("国保");
-    private static final RString 後期 = new RString("後期");
     private static final RString NUM_120 = new RString("120");
     private static final RString NUM_111 = new RString("111");
     private static final RString NUM_1 = new RString("1");
@@ -95,11 +93,11 @@ public class PostMainPanelHandler {
                     getShichosonSecurityJoho(GyomuBunrui.介護事務).get市町村情報().get市町村コード().toString()));
             ShoriDateKanri 処理日付管理マスタ = null;
             ShoriDateKanriManager manager = new ShoriDateKanriManager();
-            if (ResponseHolder.getState().equals(国保)) {
+            if (ResponseHolder.getMenuID().equals(DBCMN82001)) {
                 処理日付管理マスタ = manager.get処理日付管理マスタ(国保情報取り込み, 処理枝番);
                 処理日付管理マスタnull処理(処理日付管理マスタ, 処理日付管理マスタに国保の情報);
             } else {
-                if (ResponseHolder.getState().equals(後期)) {
+                if (ResponseHolder.getMenuID().equals(DBCMN82002)) {
                     処理日付管理マスタ = manager.get処理日付管理マスタ(後期高齢者情報取り込み, 処理枝番);
                     処理日付管理マスタnull処理(処理日付管理マスタ, 処理日付管理マスタに後期高齢の情報);
                 }
