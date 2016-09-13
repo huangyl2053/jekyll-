@@ -3,6 +3,7 @@ package jp.co.ndensan.reams.db.dbc.entity.jigyokogakuketteitsuchishoyijiari;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 帳票設計_DBCMN43002_事業高額決定通知書(支払予定日あり）Sourceするクラスです。
@@ -240,6 +241,9 @@ public class JigyoKogakuKetteiTsuchishoYijiAriSource implements IReportSource {
     public RString ninshoshaShimeiKakenai;
     @ReportItem(name = "koinShoryaku", length = 15, order = 114)
     public RString koinShoryaku;
+    @ReportPerson(id = "A")
+    @ReportItem(name = "shikibetsuCode", length = 15)
+    public RString shikibetsuCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

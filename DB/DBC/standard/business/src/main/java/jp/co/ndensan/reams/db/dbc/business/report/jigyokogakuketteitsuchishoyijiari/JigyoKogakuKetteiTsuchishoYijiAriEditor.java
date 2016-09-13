@@ -85,6 +85,10 @@ public class JigyoKogakuKetteiTsuchishoYijiAriEditor implements IJigyoKogakuKett
     @Override
     public JigyoKogakuKetteiTsuchishoYijiAriSource edit(JigyoKogakuKetteiTsuchishoYijiAriSource source) {
 
+        if (帳票情報.get識別コード() != null) {
+            source.shikibetsuCode = 帳票情報.get識別コード().value();
+        }
+
         source.bunshoNo = 文書番号;
 
         if (帳票情報.isテスト出力フラグ()) {
