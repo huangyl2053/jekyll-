@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
@@ -73,7 +72,6 @@ public class GemmenProcess extends BatchProcessBase<GemmenEntity> {
     protected IBatchReader createReader() {
         ShikibetsuTaishoPSMSearchKeyBuilder builder = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険,
                 KensakuYusenKubun.住登外優先);
-        builder.setデータ取得区分(DataShutokuKubun.直近レコード);
         IShikibetsuTaishoPSMSearchKey searchKey = builder.build();
         processParameter.set宛名検索条件(searchKey);
         return new BatchDbReader(READ_DATA_ID, processParameter.toMybatisParameter());
