@@ -85,7 +85,7 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<RStri
     protected void initialize() {
         合計 = false;
         累計 = false;
-        renban = INDEX_0;
+        renban = parameter.getRenban();
         flowEntity = new FlowEntity();
         outFlowEntity = new OutputParameter<>();
         csvReaderPath = parameter.getPath().concat(File.separator).concat(parameter.getFileName());
