@@ -21,6 +21,6 @@ public class FurikomiMeisaiIchiranGokeiProerty extends ReportPropertyBase<Furiko
      * コンストラクタです。
      */
     public FurikomiMeisaiIchiranGokeiProerty() {
-        super(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200101.getReportId());
+        super(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200101_合計.getReportId());
     }
 }
