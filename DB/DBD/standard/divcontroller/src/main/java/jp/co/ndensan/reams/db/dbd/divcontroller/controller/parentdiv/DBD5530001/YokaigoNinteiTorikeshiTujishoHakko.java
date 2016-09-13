@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD5530001;
 
 import java.util.HashMap;
-import jp.co.ndensan.reams.db.dbd.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.jukyushajaicho.JukyushaDaichoParameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5530001.DBD5530001StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5530001.DBD5530001TransitionEventName;
@@ -20,6 +19,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.report.hakkorireki.GyomuKoyuJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
@@ -178,7 +178,10 @@ public class YokaigoNinteiTorikeshiTujishoHakko {
         }
         JukyushaDaichoParameter parameter = new JukyushaDaichoParameter(市町村コード, div.getTujishoHakkoJoken().
                 getCcdKaigoninteiShikakuInfo().getTxtHihokenshaNo().getValue(), 証記載保険者番号.value());
-        insert(parameter, div);
+        JukyushaDaicho jukyushaDaicho = JukyushaDaichoService.createJukyushaDaichoService().get受給者台帳(parameter);
+        if (jukyushaDaicho != null) {
+            insert(jukyushaDaicho, div);
+        }
         creatYokaigoNinteiTorikeshiTujishoHakkoHandler(div).排他制御の解除(div.getCcdKaigoninteiShikakuInfo()
                 .getTxtHihokenshaNo().getValue());
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(div.getCcdKaigoninteiShikakuInfo().
@@ -207,7 +210,7 @@ public class YokaigoNinteiTorikeshiTujishoHakko {
 
     }
 
-    private void insert(JukyushaDaichoParameter parameter, YokaigoNinteiTorikeshiTujishoHakkoDiv div) {
+    private void insert(JukyushaDaicho jukyushaDaicho, YokaigoNinteiTorikeshiTujishoHakkoDiv div) {
         FlexibleDate 認定有効期間開始年月日;
         FlexibleDate 認定有効期間終了年月日;
         FlexibleDate 認定取消通知書発行年月日;
@@ -239,10 +242,7 @@ public class YokaigoNinteiTorikeshiTujishoHakko {
         } else {
             要介護度 = RString.EMPTY;
         }
-        JukyushaDaicho jukyushaDaicho = JukyushaDaichoService.createJukyushaDaichoService().get受給者台帳(parameter);
-        if (jukyushaDaicho != null) {
-            JukyushaDaichoService.createJukyushaDaichoService().insert(jukyushaDaicho, 異動理由, 要介護度, 認定有効期間開始年月日,
-                    認定有効期間終了年月日, 認定取消通知書発行年月日);
-        }
+        creatYokaigoNinteiTorikeshiTujishoHakkoHandler(div).insert(jukyushaDaicho, 異動理由, 要介護度, 認定有効期間開始年月日,
+                認定有効期間終了年月日, 認定取消通知書発行年月日);
     }
 }

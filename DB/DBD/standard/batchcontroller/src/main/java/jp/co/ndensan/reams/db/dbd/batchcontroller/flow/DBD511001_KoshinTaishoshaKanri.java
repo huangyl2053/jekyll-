@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.dbd5610001;
+package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd5610001.KoshinTaishoshaKanriSelectTableProcess;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd5610001.KoshinTaishoshaKanriParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD511001.DBD511001_KoshinTaishoshaKanriParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd5610001.KoshinTaishoshaKanriProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBD-1460-020 liuyl
  */
-public class KoshinTaishoshaKanriFlow extends BatchFlowBase<KoshinTaishoshaKanriParameter> {
+public class DBD511001_KoshinTaishoshaKanri extends BatchFlowBase<DBD511001_KoshinTaishoshaKanriParameter> {
 
     private static final String SELECT_TABLE = "slect_table";
 
@@ -39,7 +39,7 @@ public class KoshinTaishoshaKanriFlow extends BatchFlowBase<KoshinTaishoshaKanri
     }
 
     private KoshinTaishoshaKanriProcessParameter createProcessParameter() {
-        KoshinTaishoshaKanriParameter parameter = getParameter();
+        DBD511001_KoshinTaishoshaKanriParameter parameter = getParameter();
         KoshinTaishoshaKanriProcessParameter processParameter = parameter.toKoshinTaishoshaKanriProcessParameter();
         processParameter.set対象月(parameter.get対象月());
         processParameter.set市町村コード(parameter.get市町村コード());

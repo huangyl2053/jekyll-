@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd5610001;
+package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD511001;
 
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd5610001.KoshinTaishoshaKanriProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -24,7 +24,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KoshinTaishoshaKanriParameter extends BatchParameterBase {
+public class DBD511001_KoshinTaishoshaKanriParameter extends BatchParameterBase {
 
     @BatchParameter(key = "条件指定", name = "条件指定")
     private RString 条件指定;
