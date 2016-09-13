@@ -78,17 +78,10 @@ public class ShotokuDankaibetsuShunoritsuIchiranHandler {
         調定年度 = new RDate(日付関連_調定年度.toString());
         RString 日付関連_当初年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_当初年度, 基準日, SubGyomuCode.DBB介護賦課);
         当初年度 = new RDate(日付関連_当初年度.toString());
-        if (当初年度.isBeforeOrEquals(調定年度)) {
-            div.getTxtChoteiNendoRange().setMaxDateString(日付関連_調定年度);
-            div.getTxtChoteiNendoRange().setMinDateString(日付関連_当初年度);
-            div.getTxtFukaNendoRange().setMaxDateString(日付関連_調定年度);
-            div.getTxtFukaNendoRange().setMinDateString(日付関連_当初年度);
-        } else {
-            div.getTxtChoteiNendoRange().setMaxDateString(日付関連_当初年度);
-            div.getTxtChoteiNendoRange().setMinDateString(日付関連_調定年度);
-            div.getTxtFukaNendoRange().setMaxDateString(日付関連_当初年度);
-            div.getTxtFukaNendoRange().setMinDateString(日付関連_調定年度);
-        }
+        div.getTxtChoteiNendoRange().setMaxDateString(日付関連_調定年度);
+        div.getTxtChoteiNendoRange().setMinDateString(日付関連_当初年度);
+        div.getTxtFukaNendoRange().setMaxDateString(日付関連_調定年度);
+        div.getTxtFukaNendoRange().setMinDateString(日付関連_当初年度);
         div.getTxtChoteiNendoRange().setFromValue(調定年度);
         div.getTxtChoteiNendoRange().setToValue(調定年度);
         div.getTxtFukaNendoRange().setFromValue(調定年度);
@@ -178,7 +171,7 @@ public class ShotokuDankaibetsuShunoritsuIchiranHandler {
      *
      * @return DBB021021_DankaibetsuShunoritsuIchiranhyoSakuseiParameter
      */
-    public DBB021021_DankaibetsuShunoritsuIchiranhyoSakuseiParameter setバッチ() {
+    public DBB021021_DankaibetsuShunoritsuIchiranhyoSakuseiParameter createDankaibetsuShunoritsuIchiranBatchParameter() {
         DBB021021_DankaibetsuShunoritsuIchiranhyoSakuseiParameter parameter = new DBB021021_DankaibetsuShunoritsuIchiranhyoSakuseiParameter();
         RDate 調定年度_開始 = div.getTxtChoteiNendoRange().getFromValue();
         RDate 調定年度_終了 = div.getTxtChoteiNendoRange().getToValue();
