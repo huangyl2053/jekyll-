@@ -41,14 +41,14 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
     private static final FlexibleYearMonth 平成27年4月 = new FlexibleYearMonth("201504");
     private static final RString 任意設定可 = new RString("2");
     private static final RString 非活性 = new RString("0");
-    private static final RString 後 = new RString("後");
-    private static final RString 前月 = new RString("前月");
-    private static final RString 次月 = new RString("次月");
-    private static final RString 前事業者 = new RString("前事業者");
-    private static final RString 保険 = new RString("保険");
-    private static final RString 公費１ = new RString("公費１");
-    private static final RString 公費２ = new RString("公費２");
-    private static final RString 公費３ = new RString("公費３");
+    private static final RString TEXT_後 = new RString("後");
+    private static final RString TEXT_前月 = new RString("前月");
+    private static final RString TEXT_次月 = new RString("次月");
+    private static final RString TEXT_前事業者 = new RString("前事業者");
+    private static final RString TEXT_保険 = new RString("保険");
+    private static final RString TEXT_公費１ = new RString("公費１");
+    private static final RString TEXT_公費２ = new RString("公費２");
+    private static final RString TEXT_公費３ = new RString("公費３");
     private static final int INT_ZERO = 0;
 
     private final KyufuJissekiSyokaiMeisaiSyukeiDiv div;
@@ -288,9 +288,9 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         }
         FlexibleYearMonth 今提供年月 = サービス提供年月;
         if (INT_ZERO <= index && index <= サービス提供年月リスト.size() - 1) {
-            if (前月.equals(data) && index != サービス提供年月リスト.size() - 1) {
+            if (TEXT_前月.equals(data) && index != サービス提供年月リスト.size() - 1) {
                 今提供年月 = サービス提供年月リスト.get(index + 1);
-            } else if (次月.equals(data) && INT_ZERO != index) {
+            } else if (TEXT_次月.equals(data) && INT_ZERO != index) {
                 今提供年月 = サービス提供年月リスト.get(index - 1);
             }
         }
@@ -326,7 +326,7 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         set明細情報特例の表示制御(様式番号, new FlexibleYearMonth(サービス提供年月));
         int index = get事業者番号index(事業者番号リスト, 整理番号, 事業者番号, 様式番号, サービス提供年月, 実績区分コード);
         int i;
-        if (前事業者.equals(date)) {
+        if (TEXT_前事業者.equals(date)) {
             i = -1;
         } else {
             i = 1;
@@ -542,7 +542,7 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         row_保険.setTxtTaishoTani(checkDecimal(集計情報.get限度額管理対象単位数()));
         row_保険.setTxtTaishogaiTani(checkDecimal(集計情報.get限度額管理対象外単位数()));
         row_保険.setTxtTankiKeikakuNissu(new RString(集計情報.get短期入所計画日数()));
-        row_保険.setTxtHokenKohi(保険);
+        row_保険.setTxtHokenKohi(TEXT_保険);
         row_保険.setTxtKettei(RString.EMPTY);
         row_保険.setTxtTankiJitsuNissu(new RString(集計情報.get短期入所実日数()));
         row_保険.setTxtTaniGokei(kinngakuFormat(集計情報.get保険_単位数合計()));
@@ -565,7 +565,7 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         row_後_保険.setTxtTaishogaiTani(RString.EMPTY);
         row_後_保険.setTxtTankiKeikakuNissu(RString.EMPTY);
         row_後_保険.setTxtHokenKohi(RString.EMPTY);
-        row_後_保険.setTxtKettei(後);
+        row_後_保険.setTxtKettei(TEXT_後);
         row_後_保険.setTxtTankiJitsuNissu(new RString(集計情報.get後_短期入所実日数()));
         row_後_保険.setTxtTaniGokei(kinngakuFormat(集計情報.get後_単位数合計()));
         row_後_保険.setTxtTanisuTanka(kinngakuFormat(集計情報.get保険_単位数単価()));
@@ -586,7 +586,7 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         row_公費１.setTxtTaishoTani(RString.EMPTY);
         row_公費１.setTxtTaishogaiTani(RString.EMPTY);
         row_公費１.setTxtTankiKeikakuNissu(RString.EMPTY);
-        row_公費１.setTxtHokenKohi(公費１);
+        row_公費１.setTxtHokenKohi(TEXT_公費１);
         row_公費１.setTxtKettei(RString.EMPTY);
         row_公費１.setTxtTankiJitsuNissu(new RString(集計情報.get短期入所実日数()));
         row_公費１.setTxtTaniGokei(kinngakuFormat(集計情報.get公費１_単位数合計()));
@@ -609,7 +609,7 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         row_後_公費１.setTxtTaishogaiTani(RString.EMPTY);
         row_後_公費１.setTxtTankiKeikakuNissu(RString.EMPTY);
         row_後_公費１.setTxtHokenKohi(RString.EMPTY);
-        row_後_公費１.setTxtKettei(後);
+        row_後_公費１.setTxtKettei(TEXT_後);
         row_後_公費１.setTxtTankiJitsuNissu(new RString(集計情報.get後_短期入所実日数()));
         row_後_公費１.setTxtTaniGokei(kinngakuFormat(集計情報.get後_公費１_単位数合計()));
         row_後_公費１.setTxtTanisuTanka(RString.EMPTY);
@@ -636,7 +636,7 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         row_公費２.setTxtTaishoTani(RString.EMPTY);
         row_公費２.setTxtTaishogaiTani(RString.EMPTY);
         row_公費２.setTxtTankiKeikakuNissu(RString.EMPTY);
-        row_公費２.setTxtHokenKohi(公費２);
+        row_公費２.setTxtHokenKohi(TEXT_公費２);
         row_公費２.setTxtKettei(RString.EMPTY);
         row_公費２.setTxtTankiJitsuNissu(new RString(集計情報.get短期入所実日数()));
         row_公費２.setTxtTaniGokei(kinngakuFormat(集計情報.get公費２_単位数合計()));
@@ -659,7 +659,7 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         row_後_公費２.setTxtTaishogaiTani(RString.EMPTY);
         row_後_公費２.setTxtTankiKeikakuNissu(RString.EMPTY);
         row_後_公費２.setTxtHokenKohi(RString.EMPTY);
-        row_後_公費２.setTxtKettei(後);
+        row_後_公費２.setTxtKettei(TEXT_後);
         row_後_公費２.setTxtTankiJitsuNissu(new RString(集計情報.get後_短期入所実日数()));
         row_後_公費２.setTxtTaniGokei(kinngakuFormat(集計情報.get後_公費２_単位数合計()));
         row_後_公費２.setTxtTanisuTanka(RString.EMPTY);
@@ -680,7 +680,7 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         row_公費３.setTxtTaishoTani(RString.EMPTY);
         row_公費３.setTxtTaishogaiTani(RString.EMPTY);
         row_公費３.setTxtTankiKeikakuNissu(RString.EMPTY);
-        row_公費３.setTxtHokenKohi(公費３);
+        row_公費３.setTxtHokenKohi(TEXT_公費３);
         row_公費３.setTxtKettei(RString.EMPTY);
         row_公費３.setTxtTankiJitsuNissu(new RString(集計情報.get短期入所実日数()));
         row_公費３.setTxtTaniGokei(kinngakuFormat(集計情報.get公費３_単位数合計()));
@@ -703,7 +703,7 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         row_後_公費３.setTxtTaishogaiTani(RString.EMPTY);
         row_後_公費３.setTxtTankiKeikakuNissu(RString.EMPTY);
         row_後_公費３.setTxtHokenKohi(RString.EMPTY);
-        row_後_公費３.setTxtKettei(後);
+        row_後_公費３.setTxtKettei(TEXT_後);
         row_後_公費３.setTxtTankiJitsuNissu(new RString(集計情報.get後_短期入所実日数()));
         row_後_公費３.setTxtTaniGokei(kinngakuFormat(集計情報.get後_公費３_単位数合計()));
         row_後_公費３.setTxtTanisuTanka(RString.EMPTY);
@@ -742,7 +742,7 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
     private dgKyufuJissekiMeisai_Row set明細情報_後(KyufujissekiMeisaiBusiness 明細情報) {
         dgKyufuJissekiMeisai_Row row_後 = new dgKyufuJissekiMeisai_Row();
         row_後.setTxtService(setサービス種類(明細情報.get給付実績明細().getサービス種類コード()));
-        row_後.setTxtKettei(後);
+        row_後.setTxtKettei(TEXT_後);
         row_後.setTxtTani(checkDecimal(明細情報.get給付実績明細().get後_単位数()));
         row_後.setTxtKaisu(new RString(明細情報.get給付実績明細().get後_日数_回数()));
         row_後.setTxtKohi1Nissu(new RString(明細情報.get給付実績明細().get後_公費１対象日数_回数()));
@@ -784,7 +784,7 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
     private dgKyufuJissekiMeisaiJustoku_Row set明細情報特例_後(KyufujissekiMeisaiJushochiTokurei 明細情報特例) {
         dgKyufuJissekiMeisaiJustoku_Row row_後 = new dgKyufuJissekiMeisaiJustoku_Row();
         row_後.setTxtService(setサービス種類(明細情報特例.getサービス種類コード()));
-        row_後.setTxtKettei(後);
+        row_後.setTxtKettei(TEXT_後);
         row_後.setTxtTani(checkDecimal(明細情報特例.get後_単位数()));
         row_後.setTxtKaisu(checkDecimal(明細情報特例.get後_日数_回数()));
         row_後.setTxtKohi1Nissu(checkDecimal(明細情報特例.get後_公費１対象日数_回数()));
