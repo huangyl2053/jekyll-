@@ -214,7 +214,8 @@ public class KaigokyufuhiKagoMoshitateshoOutDoBillOutProcess extends BatchKeyBre
             batchReportWriter = BatchReportFactory.createBatchReportWriter(parameter.get帳票ID().value()).addBreak(breaker).create();
             reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         } else if (コード_176.equals(parameter.getコード())) {
-            PageBreaker<SogojigyohiKagoMoshitateshojohoSofuIchiranSource> breaker176 = new SogojigyohiKagoMoshitateshojohoSofuIchiranPageBreak(改頁項目リスト);
+            PageBreaker<SogojigyohiKagoMoshitateshojohoSofuIchiranSource> breaker176
+                    = new SogojigyohiKagoMoshitateshojohoSofuIchiranPageBreak(改頁項目リスト);
             sogojigyohiKagoReportWriter = BatchReportFactory.createBatchReportWriter(parameter.get帳票ID().value()).addBreak(breaker176).create();
             sogojigyohiKagoSourceWriter = new ReportSourceWriter<>(sogojigyohiKagoReportWriter);
         } else if (コード_179.equals(parameter.getコード())) {
