@@ -20,9 +20,9 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc120120.TempDbWT0002Kokuhor
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchCsvListReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchSimpleReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
@@ -30,6 +30,8 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
+import jp.co.ndensan.reams.uz.uza.io.NewLine;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvListReader;
 import jp.co.ndensan.reams.uz.uza.io.csv.ListToObjectMappingHelper;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -44,7 +46,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  *
  * @reamsid_L DBC-2680-010 xicongwang
  */
-public class KogakuGassanShikyugakuKeisanKekkaInProcess extends BatchProcessBase<RString> {
+public class KogakuGassanShikyugakuKeisanKekkaInProcess extends BatchProcessBase<List<RString>> {
 
     /**
      * CSVファイル取込後の返したエンティティ
@@ -116,13 +118,13 @@ public class KogakuGassanShikyugakuKeisanKekkaInProcess extends BatchProcessBase
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchSimpleReader(parameter.get保存先パース(), Encode.SJIS);
+        return new BatchCsvListReader(new CsvListReader.InstanceBuilder(parameter.get保存先パース())
+                .setDelimiter(区切り文字).setEncode(Encode.SJIS).hasHeader(false).setNewLine(NewLine.CRLF).build());
     }
 
     @Override
-    protected void process(RString line) {
+    protected void process(List<RString> data) {
 
-        List<RString> data = line.split(区切り文字.toString());
         if (エンドレコード種別.equals(data.get(INT_0))) {
             return;
         }
