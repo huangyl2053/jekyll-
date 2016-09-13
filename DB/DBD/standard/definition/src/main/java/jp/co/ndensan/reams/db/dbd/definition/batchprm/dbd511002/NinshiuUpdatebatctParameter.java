@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd511002;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd511002.NinshiuUpdateProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -28,4 +29,18 @@ public class NinshiuUpdatebatctParameter extends BatchParameterBase {
     private FlexibleDate 抽出対象期間_終了;
     private FlexibleDate 通知書発行日;
     private List<RString> 出力順;
+
+    /**
+     * 引数作成
+     *
+     * @return NinshiuUpdateProcessParameter
+     */
+    public NinshiuUpdateProcessParameter toNinshiuUpdateProcessParameter() {
+        return new NinshiuUpdateProcessParameter(申請書管理番号リスト,
+                出力対象区分,
+                抽出対象期間_開始,
+                抽出対象期間_終了,
+                通知書発行日,
+                出力順);
+    }
 }
