@@ -49,8 +49,8 @@ public class ShisetsuNyutaishoRirekiKanriValidationHandler {
         validPairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(div.getShisetsuNyutaishoInput().getTxtTaishoDate()));
         if (!div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().isEmpty()) {
             if (div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue() != null
-                && !div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue().isEmpty()
-                && !div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().
+                    && !div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue().isEmpty()
+                    && !div.getShisetsuNyutaishoInput().getTxtNyushoDate().getValue().
                     isBeforeOrEquals(div.getShisetsuNyutaishoInput().getTxtTaishoDate().getValue())) {
                 validPairs.add(new ValidationMessageControlPair(
                         RRVMessages.前後関係逆転,
@@ -62,6 +62,7 @@ public class ShisetsuNyutaishoRirekiKanriValidationHandler {
         if (RString.isNullOrEmpty(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().get施設種類())) {
             validPairs.add(new ValidationMessageControlPair(RRVMessages.施設種類));
         }
+        validPairs.add(div.getShisetsuNyutaishoInput().getCcdShisetsuJoho().validate施設種類());
 
         List<dgShisetsuNyutaishoRireki_Row> rowList = div.getDgShisetsuNyutaishoRireki().getDataSource();
         Collections.sort(rowList, new Comparator<dgShisetsuNyutaishoRireki_Row>() {

@@ -132,6 +132,9 @@ public class IryohokenRirekiHandler {
             div.getPlIryohokenRireki().getBtnCancel().setDisplayNone(true);
             div.getPlIryohokenRireki().getBtnIryohokenKakute().setDisplayNone(true);
             div.getPlIryohokenRireki().getBtnIryohokenTsuika().setDisplayNone(true);
+            div.getPlIryohokenRireki().getPnlIryohokenJoho().setDisplayNone(true);
+
+            div.getDgIryohokenIchiran().getGridSetting().setIsShowSelectButtonColumn(false);
         } else if (状態_登録.equals(状態)) {
             div.getPnlIryohokenJoho().getTbdKanyubi().setReadOnly(true);
             div.getPnlIryohokenJoho().getTbdDattabi().setReadOnly(true);
@@ -147,6 +150,7 @@ public class IryohokenRirekiHandler {
             div.getDgIryohokenIchiran().getGridSetting().setIsShowDeleteButtonColumn(true);
             div.getDgIryohokenIchiran().getGridSetting().setIsShowModifyButtonColumn(true);
             div.getPlIryohokenRireki().getBtnIryohokenTsuika().setDisplayNone(false);
+            div.getPlIryohokenRireki().getPnlIryohokenJoho().setDisplayNone(false);
 
             div.getDgIryohokenIchiran().getGridSetting().setIsShowSelectButtonColumn(false);
         }

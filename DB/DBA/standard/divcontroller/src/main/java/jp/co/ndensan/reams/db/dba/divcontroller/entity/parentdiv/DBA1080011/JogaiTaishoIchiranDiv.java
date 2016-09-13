@@ -4,22 +4,19 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1080011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * JogaiTaishoIchiran のクラスファイル
- *
+ * JogaiTaishoIchiran のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class JogaiTaishoIchiranDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-06_01-12-04">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い

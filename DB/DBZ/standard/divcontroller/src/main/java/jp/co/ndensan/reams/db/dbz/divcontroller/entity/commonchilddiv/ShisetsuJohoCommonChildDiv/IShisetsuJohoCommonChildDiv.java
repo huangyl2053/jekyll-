@@ -3,6 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJ
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /*
  * このコードはツールによって生成されました。
@@ -31,4 +32,12 @@ public interface IShisetsuJohoCommonChildDiv extends ICommonChildDivBaseProperti
     public abstract void get入所施設名称(JigyoshaNo 入所施設コード);
 
     public abstract void clear();
+
+    /**
+     * 入力した施設コード・名称が、施設種類にあっているかを検査します。
+     *
+     * @return 入力した施設コード・名称が選択されている施設種類と矛盾している場合、エラーメッセージを返す。
+     * 矛盾していない場合は、空のエラーメッセージが返る。
+     */
+    ValidationMessageControlPairs validate施設種類();
 }

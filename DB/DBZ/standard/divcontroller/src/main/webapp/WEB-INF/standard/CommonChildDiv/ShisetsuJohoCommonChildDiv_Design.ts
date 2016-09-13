@@ -69,8 +69,8 @@ module DBZ {
                 return new UZA.RadioButton(this.convFiledName("radTekiyoJyogaiShisetsu"));
             }
 
-            public txtNyuryokuShisetsuKodo(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtNyuryokuShisetsuKodo"));
+            public txtNyuryokuShisetsuKodo(): UZA.TextBoxCode {
+                return new UZA.TextBoxCode(this.convFiledName("txtNyuryokuShisetsuKodo"));
             }
 
             public btnJigyoshaKensaku(): UZA.ButtonDialog {

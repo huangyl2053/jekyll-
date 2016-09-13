@@ -65,4 +65,14 @@
         )
         )
     </select>
+
+    <select resultOrdered="true" id="select最新履歴番号" resultMap="resultMap_ShikakuShutokuJogaishaKanriEntity"
+            parameterType="jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode" >
+        SELECT
+        DbT1009ShikakuShutokuJogaisha."rirekiNo"
+        FROM    rgdb."DbT1009ShikakuShutokuJogaisha" DbT1009ShikakuShutokuJogaisha
+        WHERE   DbT1009ShikakuShutokuJogaisha."shikibetsuCode" = #{code}
+        ORDER BY DbT1009ShikakuShutokuJogaisha."rirekiNo" DESC
+        LIMIT 1
+    </select>
 </mapper>
