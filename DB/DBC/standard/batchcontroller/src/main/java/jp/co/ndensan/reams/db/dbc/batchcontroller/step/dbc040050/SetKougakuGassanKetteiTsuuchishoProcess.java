@@ -118,6 +118,7 @@ public class SetKougakuGassanKetteiTsuuchishoProcess extends BatchKeyBreakBase<K
     private Decimal 支給額の合計金額;
     FileSpoolManager eucmanager;
     RString eucFilePath;
+    private KogakugassanShikyuKetteitsuchishoEntity nowentity;
     private boolean key_1flag = false;
     private boolean key_2flag = false;
     private boolean key_3flag = false;
@@ -220,6 +221,7 @@ public class SetKougakuGassanKetteiTsuuchishoProcess extends BatchKeyBreakBase<K
                 EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = eucmanager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
+        nowentity = null;
     }
 
     @Override
@@ -318,6 +320,7 @@ public class SetKougakuGassanKetteiTsuuchishoProcess extends BatchKeyBreakBase<K
 
     @Override
     protected void usualProcess(KogakugassanShikyuKetteitsuchishoEntity entity) {
+        nowentity = entity;
         if (getBefore() != null && new GassanShikyuFushikyuKetteishaIchiranPageBreak(改頁項目リスト).is改頁(entity, getBefore())) {
             連番 = INT_1;
         }
@@ -341,7 +344,18 @@ public class SetKougakuGassanKetteiTsuuchishoProcess extends BatchKeyBreakBase<K
         }
         if (getBefore() != null && !entity.getShikyuKubun().equals(getBefore().getShikyuKubun())) {
             KogakugassanShikyuKetteiTsuchiIchiran 高額合算支給決定者一覧表Entity = new KogakugassanShikyuKetteiTsuchiIchiran();
+            高額合算支給決定者一覧表Entity.set出力順1(entity.getShutsuryokujunMei1());
+            高額合算支給決定者一覧表Entity.set出力順2(entity.getShutsuryokujunMei2());
+            高額合算支給決定者一覧表Entity.set出力順3(entity.getShutsuryokujunMei3());
+            高額合算支給決定者一覧表Entity.set出力順4(entity.getShutsuryokujunMei4());
+            高額合算支給決定者一覧表Entity.set出力順5(entity.getShutsuryokujunMei5());
+            高額合算支給決定者一覧表Entity.set改頁1(entity.getKaiPeiji1());
+            高額合算支給決定者一覧表Entity.set改頁2(entity.getKaiPeiji2());
+            高額合算支給決定者一覧表Entity.set改頁3(entity.getKaiPeiji3());
+            高額合算支給決定者一覧表Entity.set改頁4(entity.getKaiPeiji4());
+            高額合算支給決定者一覧表Entity.set改頁5(entity.getKaiPeiji5());
             高額合算支給決定者一覧表Entity.set支給不支給区分(支給不支給区分);
+            高額合算支給決定者一覧表Entity.set帳票通番(対象件数);
             GassanShikyuFushikyuKetteishaIchiranReport 一覧表合計report = new GassanShikyuFushikyuKetteishaIchiranReport(高額合算支給決定者一覧表Entity,
                     processParameter.get処理日時(), true, getGassanShikyuFushikyuKetteishaIchiranParameter(), 帳票タイトル_内部帳票文字切れ制御);
             一覧表合計report.writeBy(reportSourceWriter_一覧表);
@@ -367,11 +381,24 @@ public class SetKougakuGassanKetteiTsuuchishoProcess extends BatchKeyBreakBase<K
 
     @Override
     protected void afterExecute() {
-        KogakugassanShikyuKetteiTsuchiIchiran 高額合算支給決定者一覧表Entity = new KogakugassanShikyuKetteiTsuchiIchiran();
-        高額合算支給決定者一覧表Entity.set支給不支給区分(支給不支給区分);
-        GassanShikyuFushikyuKetteishaIchiranReport 一覧表合計report = new GassanShikyuFushikyuKetteishaIchiranReport(高額合算支給決定者一覧表Entity,
-                processParameter.get処理日時(), true, getGassanShikyuFushikyuKetteishaIchiranParameter(), 帳票タイトル_内部帳票文字切れ制御);
-        一覧表合計report.writeBy(reportSourceWriter_一覧表);
+        if (nowentity != null) {
+            KogakugassanShikyuKetteiTsuchiIchiran 高額合算支給決定者一覧表Entity = new KogakugassanShikyuKetteiTsuchiIchiran();
+            高額合算支給決定者一覧表Entity.set出力順1(nowentity.getShutsuryokujunMei1());
+            高額合算支給決定者一覧表Entity.set出力順2(nowentity.getShutsuryokujunMei2());
+            高額合算支給決定者一覧表Entity.set出力順3(nowentity.getShutsuryokujunMei3());
+            高額合算支給決定者一覧表Entity.set出力順4(nowentity.getShutsuryokujunMei4());
+            高額合算支給決定者一覧表Entity.set出力順5(nowentity.getShutsuryokujunMei5());
+            高額合算支給決定者一覧表Entity.set改頁1(nowentity.getKaiPeiji1());
+            高額合算支給決定者一覧表Entity.set改頁2(nowentity.getKaiPeiji2());
+            高額合算支給決定者一覧表Entity.set改頁3(nowentity.getKaiPeiji3());
+            高額合算支給決定者一覧表Entity.set改頁4(nowentity.getKaiPeiji4());
+            高額合算支給決定者一覧表Entity.set改頁5(nowentity.getKaiPeiji5());
+            高額合算支給決定者一覧表Entity.set支給不支給区分(支給不支給区分);
+            高額合算支給決定者一覧表Entity.set帳票通番(対象件数);
+            GassanShikyuFushikyuKetteishaIchiranReport 一覧表合計report = new GassanShikyuFushikyuKetteishaIchiranReport(高額合算支給決定者一覧表Entity,
+                    processParameter.get処理日時(), true, getGassanShikyuFushikyuKetteishaIchiranParameter(), 帳票タイトル_内部帳票文字切れ制御);
+            一覧表合計report.writeBy(reportSourceWriter_一覧表);
+        }
         csvListWriter.close();
         eucmanager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
         batchReportWriter_通知書_DBC100053.close();
@@ -561,7 +588,7 @@ public class SetKougakuGassanKetteiTsuuchishoProcess extends BatchKeyBreakBase<K
         高額合算支給決定者一覧表Entity.set改頁3(高額合算支給決定通知書データ.getKaiPeiji3());
         高額合算支給決定者一覧表Entity.set改頁4(高額合算支給決定通知書データ.getKaiPeiji4());
         高額合算支給決定者一覧表Entity.set改頁5(高額合算支給決定通知書データ.getKaiPeiji5());
-        高額合算支給決定者一覧表Entity.set帳票通番(連番);
+        高額合算支給決定者一覧表Entity.set帳票通番(対象件数);
         高額合算支給決定者一覧表Entity.set被保険者番号(高額合算支給決定通知書データ.getHihokenshaNo());
         if (高額合算支給決定通知書データ.get被保検者情報() != null && 高額合算支給決定通知書データ.get被保検者情報().getMeisho() != null) {
             高額合算支給決定者一覧表Entity.set被保険者氏名(高額合算支給決定通知書データ.get被保検者情報().getMeisho().value());
