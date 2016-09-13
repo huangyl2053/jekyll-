@@ -21,6 +21,14 @@ public class GemmenEntity {
 
     private FukaJohoRelateEntity 賦課の情報;
     private DbT2004GemmenEntity 介護賦課減免;
+
+    /**
+     * -- GETTER -- 宛名Entity。
+     *
+     * @return 宛名Entity -- SETTER -- 宛名Entity。
+     *
+     * @param 宛名Entity 宛名Entity
+     */
     private UaFt200FindShikibetsuTaishoEntity 宛名Entity;
 
 }
