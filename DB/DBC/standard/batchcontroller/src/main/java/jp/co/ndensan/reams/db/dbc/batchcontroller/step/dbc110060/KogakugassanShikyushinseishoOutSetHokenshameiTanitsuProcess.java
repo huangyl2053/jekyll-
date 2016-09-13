@@ -30,10 +30,6 @@ public class KogakugassanShikyushinseishoOutSetHokenshameiTanitsuProcess
     BatchEntityCreatedTempTableWriter 高額合算申請書一時tableWriter;
 
     @Override
-    protected void initialize() {
-    }
-
-    @Override
     protected IBatchReader createReader() {
         return new BatchDbReader(MAPPERPATH);
     }

@@ -30,10 +30,6 @@ public class KogakugassanShikyushinseishoOutUpdateShinseishoSofuProcess extends 
     BatchPermanentTableWriter 高額合算申請書tableWriter;
 
     @Override
-    protected void initialize() {
-    }
-
-    @Override
     protected IBatchReader createReader() {
         return new BatchDbReader(MAPPERPATH);
     }

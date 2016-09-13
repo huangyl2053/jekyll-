@@ -89,6 +89,7 @@ public class KogakugassanShikyushinseishoOutShinseishoReportProcess
     private List<PersonalData> personalDataList;
     private Set<ShikibetsuCode> 識別コードset;
     private RDateTime システム日付;
+    private int count;
     @BatchWriter
     private CsvWriter<KogakugassanShikyushinseishoOutCsvEntity> eucCsvWriter;
     @BatchWriter
@@ -102,6 +103,7 @@ public class KogakugassanShikyushinseishoOutShinseishoReportProcess
         index = INT_1;
         pageBreakKeys = new ArrayList<>();
         システム日付 = RDateTime.now();
+        count = INT_1;
     }
 
     @Override
@@ -132,9 +134,12 @@ public class KogakugassanShikyushinseishoOutShinseishoReportProcess
     @Override
     protected void usualProcess(KogakugassanShikyushinseishoOutFileEntity entity) {
         KogakugassanShikyushinseishoOutFileEntity beforeEntity = getBefore();
+        if (!entity.get高額合算申請書一時Entity().isJufukuKubun()) {
+            count = INT_1;
+        }
         boolean flag = false;
         if (beforeEntity != null) {
-            flag = is同一申請情報(beforeEntity.get高額合算申請書一時Entity(), entity.get高額合算申請書一時Entity(), index);
+            flag = is同一申請情報(beforeEntity.get高額合算申請書一時Entity(), entity.get高額合算申請書一時Entity(), count);
         }
         GassanShikyuShinseishoJohoSofuIchiranReport report
                 = new GassanShikyuShinseishoJohoSofuIchiranReport(setEntity(entity, flag), YMDHMS.now(), processParameter.get処理年月(), index);
@@ -143,6 +148,7 @@ public class KogakugassanShikyushinseishoOutShinseishoReportProcess
         eucCsvWriter.writeLine(csvEntity);
         アクセスログ対象追加(entity);
         index = index + INT_1;
+        count = count + INT_1;
     }
 
     @Override
@@ -185,9 +191,7 @@ public class KogakugassanShikyushinseishoOutShinseishoReportProcess
                 && beforeEntity.getRirekiNo().equals(entity.getRirekiNo())) {
             if (count > INT_30 && count % INT_30 == INT_1) {
                 flg = false;
-            } else if (beforeEntity.isJufukuKubun() && entity.isJufukuKubun()) {
-                flg = true;
-            } else if (!beforeEntity.isJufukuKubun() && !entity.isJufukuKubun()) {
+            } else if (entity.isJufukuKubun()) {
                 flg = true;
             }
         }
