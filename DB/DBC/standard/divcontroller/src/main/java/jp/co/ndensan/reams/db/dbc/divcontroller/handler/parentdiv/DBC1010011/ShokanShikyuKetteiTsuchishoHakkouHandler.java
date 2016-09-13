@@ -126,7 +126,10 @@ public class ShokanShikyuKetteiTsuchishoHakkouHandler {
     public void onChange_ServiceTeikyo(HihokenshaNo 被保険者番号, List<ShokanShikyuKetteiTsuchishoHakkouBusiness> 償還払支給判定結果List) {
         RString サービス提供年月 = div.getDdlServiceTeikyoYM().getSelectedKey();
         List<RString> 整理番号List = get整理番号(new FlexibleYearMonth(サービス提供年月), 償還払支給判定結果List);
-        div.getDdlSeiriNO().setSelectedValue(整理番号List.get(0));
+        div.getDdlSeiriNO().setDataSource(get整理番号DataSource(整理番号List));
+        if (!整理番号List.isEmpty()) {
+            div.getDdlSeiriNO().setSelectedValue(整理番号List.get(0));
+        }
         RString 整理番号 = div.getDdlSeiriNO().getSelectedValue();
         FlexibleDate 決定通知書作成年月日 = null;
         for (ShokanShikyuKetteiTsuchishoHakkouBusiness shakan : 償還払支給判定結果List) {
