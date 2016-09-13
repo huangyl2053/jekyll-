@@ -163,6 +163,7 @@ public class JukoKisambiTokushuTorokuHandler {
         div.getJikoKisambi().setTitle(div.getDgShunoJokyo().getActiveRow().getChoteiNendo().
                 getText().concat(保険料));
         RString 調定年度 = div.getDgShunoJokyo().getActiveRow().getSeirekiChoteiNendo();
+        div.setHdnChoteiNendo(調定年度 == null ? RString.EMPTY : 調定年度);
 
         List<JikoKisambiKanri> dbから時効起算日管理List = this.get時効起算日管理リスト(被保険者番号, new RYear(調定年度));
         List<dgJikoKisambi_Row> 時効起算日登録List = new ArrayList<>();
@@ -236,7 +237,7 @@ public class JukoKisambiTokushuTorokuHandler {
     public boolean is変更判定for時効起算日登録(List<JikoKisambiKanri> 時効起算日管理List) {
 
         List<dgJikoKisambi_Row> rowList = div.getDgJikoKisambi().getDataSource();
-        RString 調定年度 = div.getDgShunoJokyo().getActiveRow().getSeirekiChoteiNendo();
+        RString 調定年度 = div.getHdnChoteiNendo();
         for (dgJikoKisambi_Row row : rowList) {
             for (JikoKisambiKanri 時効起算日管理 : 時効起算日管理List) {
                 if (new RString(時効起算日管理.get調定年度().getYearValue()).equals(調定年度)
@@ -263,7 +264,7 @@ public class JukoKisambiTokushuTorokuHandler {
     public boolean is変更判定for保存(HihokenshaNo 被保険者番号) {
 
         List<dgJikoKisambi_Row> rowList = div.getDgJikoKisambi().getDataSource();
-        RString 調定年度 = div.getDgShunoJokyo().getActiveRow().getSeirekiChoteiNendo();
+        RString 調定年度 = div.getHdnChoteiNendo();
         List<JikoKisambiKanri> 時効起算日管理List = this.get時効起算日管理リスト(被保険者番号, new RYear(調定年度));
         for (dgJikoKisambi_Row row : rowList) {
             for (JikoKisambiKanri 時効起算日管理 : 時効起算日管理List) {
