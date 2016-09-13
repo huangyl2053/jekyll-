@@ -42,9 +42,9 @@ public class SogojigyohiSeikyugakuTsuchishoKohiPageBreak
         boolean flag = false;
         if (!currentSource.getSource().kohiFutanshaNo.equals(nextSource.getSource().kohiFutanshaNo)) {
             flag = true;
-        } else if (currentSource.getSource().kanCode != null && !currentSource.getSource().kanCode.equals(nextSource.getSource().kanCode)) {
+        } else if (!currentSource.getSource().kanCode.equals(nextSource.getSource().kanCode)) {
             flag = true;
-        } else if (currentSource.getSource().kanCode != null && !currentSource.getSource().kouCode.equals(nextSource.getSource().kouCode)) {
+        } else if (!currentSource.getSource().kouCode.equals(nextSource.getSource().kouCode)) {
             flag = true;
         }
         return flag;
