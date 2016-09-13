@@ -4,18 +4,20 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8030001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.ux.uxx.divcontroller.entity.commonchilddiv.FurikomiBaitaiSakusei.FurikomiBaitaiSakuseiDiv;
-import jp.co.ndensan.reams.ux.uxx.divcontroller.entity.commonchilddiv.FurikomiBaitaiSakusei.IFurikomiBaitaiSakuseiDiv;
+//import jp.co.ndensan.reams.ux.uxx.divcontroller.entity.commonchilddiv.FurikomiBaitaiSakusei.FurikomiBaitaiSakuseiDiv;
+//import jp.co.ndensan.reams.ux.uxx.divcontroller.entity.commonchilddiv.FurikomiBaitaiSakusei.IFurikomiBaitaiSakuseiDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * DBC8030001Main のクラスファイル 
- * 
+ * DBC8030001Main のクラスファイル
+ *
  * @author 自動生成
  */
 public class DBC8030001MainDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
@@ -25,8 +27,9 @@ public class DBC8030001MainDiv extends Panel {
      */
     @JsonProperty("txtShoriTaisho")
     private TextBox txtShoriTaisho;
+
     @JsonProperty("ccdFurikomiBaitaiSakusei")
-    private FurikomiBaitaiSakuseiDiv ccdFurikomiBaitaiSakusei;
+    //private FurikomiBaitaiSakuseiDiv ccdFurikomiBaitaiSakusei;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -38,7 +41,7 @@ public class DBC8030001MainDiv extends Panel {
      * gettxtShoriTaisho
      * @return txtShoriTaisho
      */
-    @JsonProperty("txtShoriTaisho")
+    //   @JsonProperty("txtShoriTaisho")
     public TextBox getTxtShoriTaisho() {
         return txtShoriTaisho;
     }
@@ -56,10 +59,9 @@ public class DBC8030001MainDiv extends Panel {
      * getccdFurikomiBaitaiSakusei
      * @return ccdFurikomiBaitaiSakusei
      */
-    @JsonProperty("ccdFurikomiBaitaiSakusei")
-    public IFurikomiBaitaiSakuseiDiv getCcdFurikomiBaitaiSakusei() {
-        return ccdFurikomiBaitaiSakusei;
-    }
-
+   // @JsonProperty("ccdFurikomiBaitaiSakusei")
+    // public IFurikomiBaitaiSakuseiDiv getCcdFurikomiBaitaiSakusei() {
+    //    return ccdFurikomiBaitaiSakusei;
+    //}
     // </editor-fold>
 }
