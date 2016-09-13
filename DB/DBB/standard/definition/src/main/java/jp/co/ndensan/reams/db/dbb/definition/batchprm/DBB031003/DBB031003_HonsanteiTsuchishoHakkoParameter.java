@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteifuka;
+package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB031003;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteifuka.HonsanteifukaBatchTyouhyou;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -17,15 +18,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * 本算定通知書一括発行バッチ用のパラメータです。
  *
- * 本算定賦課計算バッチ用のパラメータです。
- *
- * @reamsid_L DBB-0780-030 xicongwang
+ * @reamsid_L DBB-0780-050 xicongwang
  */
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class HonsanteifukaBatchParameter extends BatchParameterBase {
+public class DBB031003_HonsanteiTsuchishoHakkoParameter extends BatchParameterBase {
 
     private static final String KEY_調定年度 = "調定年度";
     private static final String KEY_賦課年度 = "賦課年度";
