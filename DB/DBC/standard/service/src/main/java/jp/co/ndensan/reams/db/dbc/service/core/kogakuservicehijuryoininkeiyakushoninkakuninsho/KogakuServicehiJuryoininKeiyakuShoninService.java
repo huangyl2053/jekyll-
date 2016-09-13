@@ -84,7 +84,7 @@ public class KogakuServicehiJuryoininKeiyakuShoninService {
         一覧表Entity.set承認終了日(do日付編集パターン_4(entity.get高額介護事業者().getJuryoininShuryoYMD()));
         一覧表Entity.set承認終区分(ShoninKubun.toValue(entity.get高額介護事業者().getShoninKekkaKubun()).get名称());
         一覧表Entity.set被保険者氏名2(subString(entity.get名称().value(), SIXTEEN, THIRTY));
-        一覧表Entity.set事業者名称(subString(entity.get介護事業者().getJigyoshaName().value(), ONE, THIRTY_SIX));
+        一覧表Entity.set事業者名称(subString(介護事業者.getJigyoshaName().value(), ONE, THIRTY_SIX));
         一覧表Entity.set承認日(do日付編集パターン_4(entity.get高額介護事業者().getKetteiYMD()));
         一覧表Entity.set利用サービス内容(利用サービス内容);
         return 一覧表Entity;
