@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Space;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
@@ -20,11 +21,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
 
 /**
- * KogakuGassanShikyuShinseiTorokuNewPanel のクラスファイル
+ * KogakuGassanShikyuShinseiInfo のクラスファイル
  *
  * @reamsid_L DBC-2040-030 huzongcheng
  */
-public class KogakuGassanShikyuShinseiTorokuNewPanelDiv extends Panel {
+public class KogakuGassanShikyuShinseiInfoDiv extends Panel {
 
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
@@ -33,8 +34,10 @@ public class KogakuGassanShikyuShinseiTorokuNewPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ddlTeishutsuHokenshaBango")
-    private DropDownList ddlTeishutsuHokenshaBango;
+    @JsonProperty("txtTeishutsuHokenshaNo")
+    private TextBox txtTeishutsuHokenshaNo;
+    @JsonProperty("ddlShokisaiHokenshaNo")
+    private DropDownList ddlShokisaiHokenshaNo;
     @JsonProperty("txtKaigoShikyuShinseishoSeiriBango1")
     private TextBox txtKaigoShikyuShinseishoSeiriBango1;
     @JsonProperty("txtKaigoShikyuShinseishoSeiriBango2")
@@ -45,8 +48,10 @@ public class KogakuGassanShikyuShinseiTorokuNewPanelDiv extends Panel {
     private TextBox txtKaigoShikyuShinseishoSeiriBango4;
     @JsonProperty("txtRirekiBango")
     private TextBoxNum txtRirekiBango;
-    @JsonProperty("ddlShinseiTaisyoNendo")
-    private DropDownList ddlShinseiTaisyoNendo;
+    @JsonProperty("ddlShinseiTaishoNendo")
+    private DropDownList ddlShinseiTaishoNendo;
+    @JsonProperty("spc01")
+    private Space spc01;
     @JsonProperty("txtIryoShikyuShinseishoSeiriBango1")
     private TextBox txtIryoShikyuShinseishoSeiriBango1;
     @JsonProperty("txtIryoShikyuShinseishoSeiriBango2")
@@ -59,18 +64,18 @@ public class KogakuGassanShikyuShinseiTorokuNewPanelDiv extends Panel {
     private TextBox txtShikyuShinseiKubun;
     @JsonProperty("ddlShikyuShinseiKeitai")
     private DropDownList ddlShikyuShinseiKeitai;
-    @JsonProperty("DaihyoshaPanel")
-    private DaihyoshaPanelDiv DaihyoshaPanel;
+    @JsonProperty("ShinseiDaihyosha")
+    private ShinseiDaihyoshaDiv ShinseiDaihyosha;
     @JsonProperty("txtShinseiYMD")
     private TextBoxDate txtShinseiYMD;
     @JsonProperty("chkKofuShinseiUmu")
     private CheckBoxList chkKofuShinseiUmu;
     @JsonProperty("lin1")
     private HorizontalLine lin1;
-    @JsonProperty("btnShinseiJohoTsuika")
-    private Button btnShinseiJohoTsuika;
-    @JsonProperty("dgShinseiJoho")
-    private DataGrid<dgShinseiJoho_Row> dgShinseiJoho;
+    @JsonProperty("btnAddShinsei")
+    private Button btnAddShinsei;
+    @JsonProperty("dgShinseiIchiran")
+    private DataGrid<dgShinseiIchiran_Row> dgShinseiIchiran;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -79,21 +84,39 @@ public class KogakuGassanShikyuShinseiTorokuNewPanelDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getddlTeishutsuHokenshaBango
-     * @return ddlTeishutsuHokenshaBango
+     * gettxtTeishutsuHokenshaNo
+     * @return txtTeishutsuHokenshaNo
      */
-    @JsonProperty("ddlTeishutsuHokenshaBango")
-    public DropDownList getDdlTeishutsuHokenshaBango() {
-        return ddlTeishutsuHokenshaBango;
+    @JsonProperty("txtTeishutsuHokenshaNo")
+    public TextBox getTxtTeishutsuHokenshaNo() {
+        return txtTeishutsuHokenshaNo;
     }
 
     /*
-     * setddlTeishutsuHokenshaBango
-     * @param ddlTeishutsuHokenshaBango ddlTeishutsuHokenshaBango
+     * settxtTeishutsuHokenshaNo
+     * @param txtTeishutsuHokenshaNo txtTeishutsuHokenshaNo
      */
-    @JsonProperty("ddlTeishutsuHokenshaBango")
-    public void setDdlTeishutsuHokenshaBango(DropDownList ddlTeishutsuHokenshaBango) {
-        this.ddlTeishutsuHokenshaBango = ddlTeishutsuHokenshaBango;
+    @JsonProperty("txtTeishutsuHokenshaNo")
+    public void setTxtTeishutsuHokenshaNo(TextBox txtTeishutsuHokenshaNo) {
+        this.txtTeishutsuHokenshaNo = txtTeishutsuHokenshaNo;
+    }
+
+    /*
+     * getddlShokisaiHokenshaNo
+     * @return ddlShokisaiHokenshaNo
+     */
+    @JsonProperty("ddlShokisaiHokenshaNo")
+    public DropDownList getDdlShokisaiHokenshaNo() {
+        return ddlShokisaiHokenshaNo;
+    }
+
+    /*
+     * setddlShokisaiHokenshaNo
+     * @param ddlShokisaiHokenshaNo ddlShokisaiHokenshaNo
+     */
+    @JsonProperty("ddlShokisaiHokenshaNo")
+    public void setDdlShokisaiHokenshaNo(DropDownList ddlShokisaiHokenshaNo) {
+        this.ddlShokisaiHokenshaNo = ddlShokisaiHokenshaNo;
     }
 
     /*
@@ -187,21 +210,39 @@ public class KogakuGassanShikyuShinseiTorokuNewPanelDiv extends Panel {
     }
 
     /*
-     * getddlShinseiTaisyoNendo
-     * @return ddlShinseiTaisyoNendo
+     * getddlShinseiTaishoNendo
+     * @return ddlShinseiTaishoNendo
      */
-    @JsonProperty("ddlShinseiTaisyoNendo")
-    public DropDownList getDdlShinseiTaisyoNendo() {
-        return ddlShinseiTaisyoNendo;
+    @JsonProperty("ddlShinseiTaishoNendo")
+    public DropDownList getDdlShinseiTaishoNendo() {
+        return ddlShinseiTaishoNendo;
     }
 
     /*
-     * setddlShinseiTaisyoNendo
-     * @param ddlShinseiTaisyoNendo ddlShinseiTaisyoNendo
+     * setddlShinseiTaishoNendo
+     * @param ddlShinseiTaishoNendo ddlShinseiTaishoNendo
      */
-    @JsonProperty("ddlShinseiTaisyoNendo")
-    public void setDdlShinseiTaisyoNendo(DropDownList ddlShinseiTaisyoNendo) {
-        this.ddlShinseiTaisyoNendo = ddlShinseiTaisyoNendo;
+    @JsonProperty("ddlShinseiTaishoNendo")
+    public void setDdlShinseiTaishoNendo(DropDownList ddlShinseiTaishoNendo) {
+        this.ddlShinseiTaishoNendo = ddlShinseiTaishoNendo;
+    }
+
+    /*
+     * getspc01
+     * @return spc01
+     */
+    @JsonProperty("spc01")
+    public Space getSpc01() {
+        return spc01;
+    }
+
+    /*
+     * setspc01
+     * @param spc01 spc01
+     */
+    @JsonProperty("spc01")
+    public void setSpc01(Space spc01) {
+        this.spc01 = spc01;
     }
 
     /*
@@ -313,21 +354,21 @@ public class KogakuGassanShikyuShinseiTorokuNewPanelDiv extends Panel {
     }
 
     /*
-     * getDaihyoshaPanel
-     * @return DaihyoshaPanel
+     * getShinseiDaihyosha
+     * @return ShinseiDaihyosha
      */
-    @JsonProperty("DaihyoshaPanel")
-    public DaihyoshaPanelDiv getDaihyoshaPanel() {
-        return DaihyoshaPanel;
+    @JsonProperty("ShinseiDaihyosha")
+    public ShinseiDaihyoshaDiv getShinseiDaihyosha() {
+        return ShinseiDaihyosha;
     }
 
     /*
-     * setDaihyoshaPanel
-     * @param DaihyoshaPanel DaihyoshaPanel
+     * setShinseiDaihyosha
+     * @param ShinseiDaihyosha ShinseiDaihyosha
      */
-    @JsonProperty("DaihyoshaPanel")
-    public void setDaihyoshaPanel(DaihyoshaPanelDiv DaihyoshaPanel) {
-        this.DaihyoshaPanel = DaihyoshaPanel;
+    @JsonProperty("ShinseiDaihyosha")
+    public void setShinseiDaihyosha(ShinseiDaihyoshaDiv ShinseiDaihyosha) {
+        this.ShinseiDaihyosha = ShinseiDaihyosha;
     }
 
     /*
@@ -385,39 +426,39 @@ public class KogakuGassanShikyuShinseiTorokuNewPanelDiv extends Panel {
     }
 
     /*
-     * getbtnShinseiJohoTsuika
-     * @return btnShinseiJohoTsuika
+     * getbtnAddShinsei
+     * @return btnAddShinsei
      */
-    @JsonProperty("btnShinseiJohoTsuika")
-    public Button getBtnShinseiJohoTsuika() {
-        return btnShinseiJohoTsuika;
+    @JsonProperty("btnAddShinsei")
+    public Button getBtnAddShinsei() {
+        return btnAddShinsei;
     }
 
     /*
-     * setbtnShinseiJohoTsuika
-     * @param btnShinseiJohoTsuika btnShinseiJohoTsuika
+     * setbtnAddShinsei
+     * @param btnAddShinsei btnAddShinsei
      */
-    @JsonProperty("btnShinseiJohoTsuika")
-    public void setBtnShinseiJohoTsuika(Button btnShinseiJohoTsuika) {
-        this.btnShinseiJohoTsuika = btnShinseiJohoTsuika;
+    @JsonProperty("btnAddShinsei")
+    public void setBtnAddShinsei(Button btnAddShinsei) {
+        this.btnAddShinsei = btnAddShinsei;
     }
 
     /*
-     * getdgShinseiJoho
-     * @return dgShinseiJoho
+     * getdgShinseiIchiran
+     * @return dgShinseiIchiran
      */
-    @JsonProperty("dgShinseiJoho")
-    public DataGrid<dgShinseiJoho_Row> getDgShinseiJoho() {
-        return dgShinseiJoho;
+    @JsonProperty("dgShinseiIchiran")
+    public DataGrid<dgShinseiIchiran_Row> getDgShinseiIchiran() {
+        return dgShinseiIchiran;
     }
 
     /*
-     * setdgShinseiJoho
-     * @param dgShinseiJoho dgShinseiJoho
+     * setdgShinseiIchiran
+     * @param dgShinseiIchiran dgShinseiIchiran
      */
-    @JsonProperty("dgShinseiJoho")
-    public void setDgShinseiJoho(DataGrid<dgShinseiJoho_Row> dgShinseiJoho) {
-        this.dgShinseiJoho = dgShinseiJoho;
+    @JsonProperty("dgShinseiIchiran")
+    public void setDgShinseiIchiran(DataGrid<dgShinseiIchiran_Row> dgShinseiIchiran) {
+        this.dgShinseiIchiran = dgShinseiIchiran;
     }
 
     /*
@@ -425,42 +466,42 @@ public class KogakuGassanShikyuShinseiTorokuNewPanelDiv extends Panel {
      */
     @JsonIgnore
     public TextBox getTxtDaihyoshaShimei() {
-        return this.getDaihyoshaPanel().getTxtDaihyoshaShimei();
+        return this.getShinseiDaihyosha().getTxtDaihyoshaShimei();
     }
 
     @JsonIgnore
     public void setTxtDaihyoshaShimei(TextBox txtDaihyoshaShimei) {
-        this.getDaihyoshaPanel().setTxtDaihyoshaShimei(txtDaihyoshaShimei);
+        this.getShinseiDaihyosha().setTxtDaihyoshaShimei(txtDaihyoshaShimei);
     }
 
     @JsonIgnore
     public TextBoxTelNo getTxtDaihyoshaTelNo() {
-        return this.getDaihyoshaPanel().getTxtDaihyoshaTelNo();
+        return this.getShinseiDaihyosha().getTxtDaihyoshaTelNo();
     }
 
     @JsonIgnore
     public void setTxtDaihyoshaTelNo(TextBoxTelNo txtDaihyoshaTelNo) {
-        this.getDaihyoshaPanel().setTxtDaihyoshaTelNo(txtDaihyoshaTelNo);
+        this.getShinseiDaihyosha().setTxtDaihyoshaTelNo(txtDaihyoshaTelNo);
     }
 
     @JsonIgnore
     public TextBoxYubinNo getTxtDaihyoshaYubinNo() {
-        return this.getDaihyoshaPanel().getTxtDaihyoshaYubinNo();
+        return this.getShinseiDaihyosha().getTxtDaihyoshaYubinNo();
     }
 
     @JsonIgnore
     public void setTxtDaihyoshaYubinNo(TextBoxYubinNo txtDaihyoshaYubinNo) {
-        this.getDaihyoshaPanel().setTxtDaihyoshaYubinNo(txtDaihyoshaYubinNo);
+        this.getShinseiDaihyosha().setTxtDaihyoshaYubinNo(txtDaihyoshaYubinNo);
     }
 
     @JsonIgnore
-    public TextBox getTxtDaihyoshaJusyo() {
-        return this.getDaihyoshaPanel().getTxtDaihyoshaJusyo();
+    public TextBox getTxtDaihyoshaJusho() {
+        return this.getShinseiDaihyosha().getTxtDaihyoshaJusho();
     }
 
     @JsonIgnore
-    public void setTxtDaihyoshaJusyo(TextBox txtDaihyoshaJusyo) {
-        this.getDaihyoshaPanel().setTxtDaihyoshaJusyo(txtDaihyoshaJusyo);
+    public void setTxtDaihyoshaJusho(TextBox txtDaihyoshaJusho) {
+        this.getShinseiDaihyosha().setTxtDaihyoshaJusho(txtDaihyoshaJusho);
     }
 
     // </editor-fold>

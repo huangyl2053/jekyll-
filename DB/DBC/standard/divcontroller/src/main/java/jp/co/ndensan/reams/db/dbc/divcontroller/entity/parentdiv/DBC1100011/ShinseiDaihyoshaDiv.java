@@ -12,11 +12,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
 
 /**
- * DaihyoshaPanel のクラスファイル
+ * ShinseiDaihyosha のクラスファイル
  *
  * @reamsid_L DBC-2040-030 huzongcheng
  */
-public class DaihyoshaPanelDiv extends Panel {
+public class ShinseiDaihyoshaDiv extends Panel {
 
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
@@ -31,8 +31,8 @@ public class DaihyoshaPanelDiv extends Panel {
     private TextBoxTelNo txtDaihyoshaTelNo;
     @JsonProperty("txtDaihyoshaYubinNo")
     private TextBoxYubinNo txtDaihyoshaYubinNo;
-    @JsonProperty("txtDaihyoshaJusyo")
-    private TextBox txtDaihyoshaJusyo;
+    @JsonProperty("txtDaihyoshaJusho")
+    private TextBox txtDaihyoshaJusho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -95,21 +95,21 @@ public class DaihyoshaPanelDiv extends Panel {
     }
 
     /*
-     * gettxtDaihyoshaJusyo
-     * @return txtDaihyoshaJusyo
+     * gettxtDaihyoshaJusho
+     * @return txtDaihyoshaJusho
      */
-    @JsonProperty("txtDaihyoshaJusyo")
-    public TextBox getTxtDaihyoshaJusyo() {
-        return txtDaihyoshaJusyo;
+    @JsonProperty("txtDaihyoshaJusho")
+    public TextBox getTxtDaihyoshaJusho() {
+        return txtDaihyoshaJusho;
     }
 
     /*
-     * settxtDaihyoshaJusyo
-     * @param txtDaihyoshaJusyo txtDaihyoshaJusyo
+     * settxtDaihyoshaJusho
+     * @param txtDaihyoshaJusho txtDaihyoshaJusho
      */
-    @JsonProperty("txtDaihyoshaJusyo")
-    public void setTxtDaihyoshaJusyo(TextBox txtDaihyoshaJusyo) {
-        this.txtDaihyoshaJusyo = txtDaihyoshaJusyo;
+    @JsonProperty("txtDaihyoshaJusho")
+    public void setTxtDaihyoshaJusho(TextBox txtDaihyoshaJusho) {
+        this.txtDaihyoshaJusho = txtDaihyoshaJusho;
     }
 
     // </editor-fold>

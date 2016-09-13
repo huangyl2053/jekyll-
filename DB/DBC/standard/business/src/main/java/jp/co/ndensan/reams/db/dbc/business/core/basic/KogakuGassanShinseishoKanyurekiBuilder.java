@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * {@link KogakuGassanShinseishoKanyureki}の編集を行うビルダークラスです。
+ *
+ * @reamsid_L DBC-9999-012 huzongcheng
  */
 public class KogakuGassanShinseishoKanyurekiBuilder {
 
@@ -119,7 +121,6 @@ public class KogakuGassanShinseishoKanyurekiBuilder {
      * @return {@link KogakuGassanShinseishoKanyurekiBuilder}
      */
     public KogakuGassanShinseishoKanyurekiBuilder set保険者名(RString 保険者名) {
-        requireNonNull(保険者名, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者名"));
         entity.setHokenshaMei(保険者名);
         return this;
     }
@@ -131,7 +132,6 @@ public class KogakuGassanShinseishoKanyurekiBuilder {
      * @return {@link KogakuGassanShinseishoKanyurekiBuilder}
      */
     public KogakuGassanShinseishoKanyurekiBuilder set加入期間開始年月日(FlexibleDate 加入期間開始年月日) {
-        requireNonNull(加入期間開始年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("加入期間開始年月日"));
         entity.setKanyuKaishiYMD(加入期間開始年月日);
         return this;
     }
@@ -143,7 +143,6 @@ public class KogakuGassanShinseishoKanyurekiBuilder {
      * @return {@link KogakuGassanShinseishoKanyurekiBuilder}
      */
     public KogakuGassanShinseishoKanyurekiBuilder set加入期間終了年月日(FlexibleDate 加入期間終了年月日) {
-        requireNonNull(加入期間終了年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("加入期間終了年月日"));
         entity.setKanyuShuryoYMD(加入期間終了年月日);
         return this;
     }
@@ -155,7 +154,6 @@ public class KogakuGassanShinseishoKanyurekiBuilder {
      * @return {@link KogakuGassanShinseishoKanyurekiBuilder}
      */
     public KogakuGassanShinseishoKanyurekiBuilder set自己負担額証明書整理番号(RString 自己負担額証明書整理番号) {
-        requireNonNull(自己負担額証明書整理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("自己負担額証明書整理番号"));
         entity.setJikoFutanShomeisho_SeiriNo(自己負担額証明書整理番号);
         return this;
     }
