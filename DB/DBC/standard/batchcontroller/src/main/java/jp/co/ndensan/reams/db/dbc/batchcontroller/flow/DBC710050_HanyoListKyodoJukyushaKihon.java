@@ -60,13 +60,23 @@ public class DBC710050_HanyoListKyodoJukyushaKihon extends BatchFlowBase<DBC7100
     private HanyoListKyodoJukyushaProcessParameter getProcessParameter() {
         HanyoListKyodoJukyushaProcessParameter param = new HanyoListKyodoJukyushaProcessParameter();
         param.set帳票ID(getParameter().getChohyoId());
-        param.set出力順ID(new RString(getParameter().getShutsuryokujunId()));
+        if (getParameter().getShutsuryokujunId() != null) {
+            param.set出力順ID(new RString(getParameter().getShutsuryokujunId()));
+        }
         param.set出力項目ID(getParameter().getShutsuryokukomokuId());
         param.set保険者コード(new LasdecCode(getParameter().getHokenshaKodo()));
-        param.set処理対象年月FROM(new FlexibleYearMonth(getParameter().getShoriTaishoNengetsuFrom()));
-        param.set処理対象年月TO(new FlexibleYearMonth(getParameter().getShoriTaishoNengetsuTo()));
-        param.set異動年月FROM(new FlexibleYearMonth(getParameter().getIdoNengetsuFrom()));
-        param.set異動年月TO(new FlexibleYearMonth(getParameter().getIdoNengetsuTo()));
+        if (getParameter().getShoriTaishoNengetsuFrom() != null) {
+            param.set処理対象年月FROM(new FlexibleYearMonth(getParameter().getShoriTaishoNengetsuFrom()));
+        }
+        if (getParameter().getShoriTaishoNengetsuTo() != null) {
+            param.set処理対象年月TO(new FlexibleYearMonth(getParameter().getShoriTaishoNengetsuTo()));
+        }
+        if (getParameter().getIdoNengetsuFrom() != null) {
+            param.set異動年月FROM(new FlexibleYearMonth(getParameter().getIdoNengetsuFrom()));
+        }
+        if (getParameter().getIdoNengetsuTo() != null) {
+            param.set異動年月TO(new FlexibleYearMonth(getParameter().getIdoNengetsuTo()));
+        }
         param.set各異動月の最新のみ(getParameter().isKakuidozukinoSaishinNomi());
         param.set日付抽出区分(getParameter().getHitsukeChushutsuKubun());
         param.set日付編集(getParameter().isHitsukeHenshu());
