@@ -142,10 +142,10 @@ public class KogakuJigyoShinseishoHakkoIchiranEditor implements IKogakuJigyoShin
             list = new ArrayList<>();
         }
         if (list.size() > INDEX_0 && list.get(INDEX_0).is改頁項目()) {
-            source.kaipage1 = list.get(INDEX_0).get項目名();
+            source.kaipage1 = list.get(INDEX_0).get項目ID();
         }
         if (list.size() > INDEX_1 && list.get(INDEX_1).is改頁項目()) {
-            source.kaipage2 = list.get(INDEX_1).get項目名();
+            source.kaipage2 = list.get(INDEX_1).getDB項目名();
         }
         if (list.size() > INDEX_2 && list.get(INDEX_2).is改頁項目()) {
             source.kaipage3 = list.get(INDEX_2).get項目名();
