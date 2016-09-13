@@ -340,8 +340,8 @@ public class SetKougakuGassanKetteiTsuuchishoProcess extends BatchKeyBreakBase<K
             通知書report_DBC100054.writeBy(reportSourceWriter_通知書_DBC100054);
         }
         if (getBefore() != null && !entity.getShikyuKubun().equals(getBefore().getShikyuKubun())) {
-            KogakugassanShikyuKetteiTsuchiIchiran 高額合算支給決定者一覧表Entity
-                    = get高額合算支給決定者一覧表Entity(entity, 口座情報Entity);
+            KogakugassanShikyuKetteiTsuchiIchiran 高額合算支給決定者一覧表Entity = new KogakugassanShikyuKetteiTsuchiIchiran();
+            高額合算支給決定者一覧表Entity.set支給不支給区分(支給不支給区分);
             GassanShikyuFushikyuKetteishaIchiranReport 一覧表合計report = new GassanShikyuFushikyuKetteishaIchiranReport(高額合算支給決定者一覧表Entity,
                     processParameter.get処理日時(), true, getGassanShikyuFushikyuKetteishaIchiranParameter(), 帳票タイトル_内部帳票文字切れ制御);
             一覧表合計report.writeBy(reportSourceWriter_一覧表);
