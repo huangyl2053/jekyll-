@@ -397,7 +397,10 @@ public class HihokenshashoChohyoFinder {
             business.set施設名1(dbt1005Dac.select事業者名称(new JigyoshaNo(parameter.get入退所年月日().get(桁数_0).get入所施設コード()))
                     .get(桁数_0).getJigyoshaMeisho().getColumnValue());
         }
-        RString 入所施設コード0 = parameter.get入退所年月日().get(桁数_0).get入所施設コード().padRight(RString.HALF_SPACE, 桁数_3);
+        RString 入所施設コード0 = RString.EMPTY;
+        if (parameter.get入退所年月日() != null && !parameter.get入退所年月日().isEmpty()) {
+            入所施設コード0 = parameter.get入退所年月日().get(桁数_0).get入所施設コード().padRight(RString.HALF_SPACE, 桁数_3);
+        }
         if (文字_11.equals(get入所施設種類(parameter, 桁数_0))
                 && (文字_1.equals(入所施設コード0.substring(桁数_2))
                 || 文字_3.equals(入所施設コード0.substring(桁数_2))
@@ -409,7 +412,10 @@ public class HihokenshashoChohyoFinder {
             business.set入院チェック1(星アイコン);
             business.set退院チェック1(星アイコン);
         }
-        RString 入所施設コード1 = parameter.get入退所年月日().get(桁数_1).get入所施設コード().padRight(RString.HALF_SPACE, 桁数_3);
+        RString 入所施設コード1 = RString.EMPTY;
+        if (桁数_1 < parameter.get入退所年月日().size()) {
+            入所施設コード1 = parameter.get入退所年月日().get(桁数_1).get入所施設コード().padRight(RString.HALF_SPACE, 桁数_3);
+        }
         if (文字_11.equals(get入所施設種類(parameter, 桁数_1))
                 && (文字_1.equals(入所施設コード1.substring(桁数_2))
                 || 文字_3.equals(入所施設コード1.substring(桁数_2))
