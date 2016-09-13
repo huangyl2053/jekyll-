@@ -33,11 +33,11 @@ public class JukyushaIdoCheckListEditor implements IJukyushaIdoCheckListEditor {
     private final LowerEntity lowerEntity;
     private final IOutputOrder iOutputOrder;
     private final IOutputOrder breakoutputOrder;
-    private static final int LISTINDEX_0 = 0;
     private static final int LISTINDEX_1 = 1;
     private static final int LISTINDEX_2 = 2;
     private static final int LISTINDEX_3 = 3;
     private static final int LISTINDEX_4 = 4;
+    private static final int LISTINDEX_5 = 5;
 
     /**
      * インスタンスを生成します。
@@ -67,47 +67,36 @@ public class JukyushaIdoCheckListEditor implements IJukyushaIdoCheckListEditor {
     }
 
     private JukyushaIdoCheckListReportSource edit項目(JukyushaIdoCheckListReportSource source) {
-        edit印刷日時(source);
-        edit保険者番号(source);
-        edit保険者名称(source);
+        editHead(source);
+        editリスト一覧表上(source);
         edit出力順改頁(source);
-        edit被保険者番号(source);
-        edit識別コード(source);
-        edit住所(source);
-        editフリガナ(source);
-        edit生年月日(source);
-        edit異動区分(source);
-        edit処理種別(source);
-        edit受給申請日(source);
-        edit認定日(source);
-        edit認定有効開始日(source);
-        edit喪失年月日(source);
-        edit異動事由(source);
-        edit有効無効(source);
-        edit住所コード(source);
-        edit行政区コード(source);
-        edit行政区(source);
-        edit氏名(source);
-        edit年齢(source);
-        edit受給申請事由(source);
-        edit要介護度(source);
-        edit認定有効終了日(source);
-        edit旧措置者(source);
-        edit処理内容(source);
-        edit備考(source);
+        editリスト一覧表下(source);
         return source;
     }
 
-    private void edit印刷日時(JukyushaIdoCheckListReportSource source) {
+    private void editHead(JukyushaIdoCheckListReportSource source) {
         source.printTimeStamp = get印刷日時();
     }
 
-    private void edit保険者番号(JukyushaIdoCheckListReportSource source) {
-        source.hokenshaNo = upperEntity.get保険者番号() == null ? RString.EMPTY : upperEntity.get保険者番号().value();
-    }
+    private void editリスト一覧表上(JukyushaIdoCheckListReportSource source) {
+        if (upperEntity != null) {
+            source.hokenshaNo = upperEntity.get保険者番号() == null ? RString.EMPTY : upperEntity.get保険者番号().value();
+            source.hokenshaName = upperEntity.get保険者名称();
+            source.listUpper_1 = upperEntity.get被保険者番号() == null ? RString.EMPTY : upperEntity.get被保険者番号().value();
+            source.listUpper_2 = upperEntity.get識別コード() == null ? RString.EMPTY : upperEntity.get識別コード().value();
+            source.listUpper_3 = upperEntity.get住所() == null ? RString.EMPTY : upperEntity.get住所().value();
+            source.listUpper_4 = upperEntity.getフリガナ() == null ? RString.EMPTY : upperEntity.getフリガナ().value();
+            source.listUpper_5 = upperEntity.get生年月日() == null ? RString.EMPTY : new RString(upperEntity.get生年月日().toString());
+            source.listUpper_6 = upperEntity.get異動区分();
+            source.listUpper_7 = upperEntity.get処理種別();
+            source.listUpper_8 = upperEntity.get受給申請日() == null ? RString.EMPTY : new RString(upperEntity.get受給申請日().toString());
+            source.listUpper_9 = upperEntity.get認定日() == null ? RString.EMPTY : new RString(upperEntity.get認定日().toString());
+            source.listUpper_10 = upperEntity.get認定有効開始日() == null ? RString.EMPTY : new RString(upperEntity.get認定有効開始日().toString());
+            source.listUpper_11 = upperEntity.get喪失年月日() == null ? RString.EMPTY : new RString(upperEntity.get喪失年月日().toString());
+            source.listUpper_12 = upperEntity.get異動事由();
+            source.listUpper_13 = upperEntity.get有効無効();
 
-    private void edit保険者名称(JukyushaIdoCheckListReportSource source) {
-        source.hokenshaName = upperEntity.get保険者名称();
+        }
     }
 
     private void edit出力順改頁(JukyushaIdoCheckListReportSource source) {
@@ -119,101 +108,21 @@ public class JukyushaIdoCheckListEditor implements IJukyushaIdoCheckListEditor {
         }
     }
 
-    private void edit被保険者番号(JukyushaIdoCheckListReportSource source) {
-        source.listUpper_1 = upperEntity.get被保険者番号() == null ? RString.EMPTY : upperEntity.get被保険者番号().value();
-    }
+    private void editリスト一覧表下(JukyushaIdoCheckListReportSource source) {
+        if (lowerEntity != null) {
+            source.listLower_1 = lowerEntity.get住所コード() == null ? RString.EMPTY : lowerEntity.get住所コード().value();
+            source.listLower_2 = lowerEntity.get行政区コード() == null ? RString.EMPTY : lowerEntity.get行政区コード().value();
+            source.listLower_3 = lowerEntity.get行政区();
+            source.listLower_4 = lowerEntity.get氏名() == null ? RString.EMPTY : lowerEntity.get氏名().value();
+            source.listLower_5 = new RString(lowerEntity.get年齢());
+            source.listLower_6 = lowerEntity.get受給申請事由();
+            source.listLower_7 = lowerEntity.get要介護度();
+            source.listLower_8 = lowerEntity.get認定有効終了日() == null ? RString.EMPTY : new RString(lowerEntity.get認定有効終了日().toString());
+            source.listLower_9 = lowerEntity.get旧措置者();
+            source.listLower_10 = lowerEntity.get処理内容();
+            source.listLower_11 = lowerEntity.get備考();
 
-    private void edit識別コード(JukyushaIdoCheckListReportSource source) {
-        source.listUpper_2 = upperEntity.get識別コード() == null ? RString.EMPTY : upperEntity.get識別コード().value();
-
-    }
-
-    private void edit住所(JukyushaIdoCheckListReportSource source) {
-        source.listUpper_3 = upperEntity.get住所() == null ? RString.EMPTY : upperEntity.get住所().value();
-    }
-
-    private void editフリガナ(JukyushaIdoCheckListReportSource source) {
-        source.listUpper_4 = upperEntity.getフリガナ() == null ? RString.EMPTY : upperEntity.getフリガナ().value();
-    }
-
-    private void edit生年月日(JukyushaIdoCheckListReportSource source) {
-        source.listUpper_5 = upperEntity.get生年月日() == null ? RString.EMPTY : new RString(upperEntity.get生年月日().toString());
-    }
-
-    private void edit異動区分(JukyushaIdoCheckListReportSource source) {
-        source.listUpper_6 = upperEntity.get異動区分();
-    }
-
-    private void edit処理種別(JukyushaIdoCheckListReportSource source) {
-        source.listUpper_7 = upperEntity.get処理種別();
-    }
-
-    private void edit受給申請日(JukyushaIdoCheckListReportSource source) {
-        source.listUpper_8 = upperEntity.get受給申請日() == null ? RString.EMPTY : new RString(upperEntity.get受給申請日().toString());
-    }
-
-    private void edit認定日(JukyushaIdoCheckListReportSource source) {
-        source.listUpper_9 = upperEntity.get認定日() == null ? RString.EMPTY : new RString(upperEntity.get認定日().toString());
-    }
-
-    private void edit認定有効開始日(JukyushaIdoCheckListReportSource source) {
-        source.listUpper_10 = upperEntity.get認定有効開始日() == null ? RString.EMPTY : new RString(upperEntity.get認定有効開始日().toString());
-    }
-
-    private void edit喪失年月日(JukyushaIdoCheckListReportSource source) {
-        source.listUpper_11 = upperEntity.get喪失年月日() == null ? RString.EMPTY : new RString(upperEntity.get喪失年月日().toString());
-    }
-
-    private void edit異動事由(JukyushaIdoCheckListReportSource source) {
-        source.listUpper_12 = upperEntity.get異動事由();
-    }
-
-    private void edit有効無効(JukyushaIdoCheckListReportSource source) {
-        source.listUpper_13 = upperEntity.get有効無効();
-    }
-
-    private void edit住所コード(JukyushaIdoCheckListReportSource source) {
-        source.listLower_1 = lowerEntity.get住所コード() == null ? RString.EMPTY : lowerEntity.get住所コード().value();
-    }
-
-    private void edit行政区コード(JukyushaIdoCheckListReportSource source) {
-        source.listLower_2 = lowerEntity.get行政区コード() == null ? RString.EMPTY : lowerEntity.get行政区コード().value();
-    }
-
-    private void edit行政区(JukyushaIdoCheckListReportSource source) {
-        source.listLower_3 = lowerEntity.get行政区();
-    }
-
-    private void edit氏名(JukyushaIdoCheckListReportSource source) {
-        source.listLower_4 = lowerEntity.get氏名() == null ? RString.EMPTY : lowerEntity.get氏名().value();
-    }
-
-    private void edit年齢(JukyushaIdoCheckListReportSource source) {
-        source.listLower_5 = new RString(lowerEntity.get年齢());
-    }
-
-    private void edit受給申請事由(JukyushaIdoCheckListReportSource source) {
-        source.listLower_6 = lowerEntity.get受給申請事由();
-    }
-
-    private void edit要介護度(JukyushaIdoCheckListReportSource source) {
-        source.listLower_7 = lowerEntity.get要介護度();
-    }
-
-    private void edit認定有効終了日(JukyushaIdoCheckListReportSource source) {
-        source.listLower_8 = new RString(lowerEntity.get認定有効終了日().toString());
-    }
-
-    private void edit旧措置者(JukyushaIdoCheckListReportSource source) {
-        source.listLower_9 = lowerEntity.get旧措置者();
-    }
-
-    private void edit処理内容(JukyushaIdoCheckListReportSource source) {
-        source.listLower_10 = lowerEntity.get処理内容();
-    }
-
-    private void edit備考(JukyushaIdoCheckListReportSource source) {
-        source.listLower_11 = lowerEntity.get備考();
+        }
     }
 
     private RString get印刷日時() {
@@ -232,40 +141,40 @@ public class JukyushaIdoCheckListEditor implements IJukyushaIdoCheckListEditor {
     private void setiOutputOrder(JukyushaIdoCheckListReportSource source) {
 
         Map<Integer, ISetSortItem> 出力順Map = ChohyoUtil.get出力順項目Map(iOutputOrder);
-        if (出力順Map.get(LISTINDEX_0) != null) {
-            source.shutsuryokujun1 = 出力順Map.get(LISTINDEX_0).get項目名();
-        }
         if (出力順Map.get(LISTINDEX_1) != null) {
-            source.shutsuryokujun2 = 出力順Map.get(LISTINDEX_1).get項目名();
+            source.shutsuryokujun1 = 出力順Map.get(LISTINDEX_1).get項目名();
         }
         if (出力順Map.get(LISTINDEX_2) != null) {
-            source.shutsuryokujun3 = 出力順Map.get(LISTINDEX_2).get項目名();
+            source.shutsuryokujun2 = 出力順Map.get(LISTINDEX_2).get項目名();
         }
         if (出力順Map.get(LISTINDEX_3) != null) {
-            source.shutsuryokujun4 = 出力順Map.get(LISTINDEX_3).get項目名();
+            source.shutsuryokujun3 = 出力順Map.get(LISTINDEX_3).get項目名();
         }
         if (出力順Map.get(LISTINDEX_4) != null) {
-            source.shutsuryokujun5 = 出力順Map.get(LISTINDEX_4).get項目名();
+            source.shutsuryokujun4 = 出力順Map.get(LISTINDEX_4).get項目名();
+        }
+        if (出力順Map.get(LISTINDEX_5) != null) {
+            source.shutsuryokujun5 = 出力順Map.get(LISTINDEX_5).get項目名();
         }
     }
 
     private void setBreakIoutputOrder(JukyushaIdoCheckListReportSource source) {
 
-        Map<Integer, ISetSortItem> 改頁Map = ChohyoUtil.get改頁項目Map(iOutputOrder);
-        if (改頁Map.get(LISTINDEX_0) != null) {
-            source.kaipage1 = 改頁Map.get(LISTINDEX_0).get項目名();
-        }
+        Map<Integer, ISetSortItem> 改頁Map = ChohyoUtil.get改頁項目Map(breakoutputOrder);
         if (改頁Map.get(LISTINDEX_1) != null) {
-            source.kaipage2 = 改頁Map.get(LISTINDEX_1).get項目名();
+            source.kaipage1 = 改頁Map.get(LISTINDEX_1).get項目名();
         }
         if (改頁Map.get(LISTINDEX_2) != null) {
-            source.kaipage3 = 改頁Map.get(LISTINDEX_2).get項目名();
+            source.kaipage2 = 改頁Map.get(LISTINDEX_2).get項目名();
         }
         if (改頁Map.get(LISTINDEX_3) != null) {
-            source.kaipage4 = 改頁Map.get(LISTINDEX_3).get項目名();
+            source.kaipage3 = 改頁Map.get(LISTINDEX_3).get項目名();
         }
         if (改頁Map.get(LISTINDEX_4) != null) {
-            source.kaipage5 = 改頁Map.get(LISTINDEX_4).get項目名();
+            source.kaipage4 = 改頁Map.get(LISTINDEX_4).get項目名();
+        }
+        if (改頁Map.get(LISTINDEX_5) != null) {
+            source.kaipage5 = 改頁Map.get(LISTINDEX_5).get項目名();
         }
 
     }
