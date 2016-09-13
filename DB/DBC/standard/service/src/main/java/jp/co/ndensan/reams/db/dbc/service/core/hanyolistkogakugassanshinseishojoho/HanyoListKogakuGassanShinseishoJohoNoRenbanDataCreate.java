@@ -12,6 +12,7 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Kokuho_Zokugara;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Over70_ShotokuKbn;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ShinseiJokyoKbn;
+import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ShinseiKbn;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ShinseiKeitai;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ShotokuKbn;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_SoshitsuJiyu;
@@ -20,6 +21,7 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistkogakugassanshi
 import jp.co.ndensan.reams.db.dbc.entity.csv.hanyolistkogakugassanshinseishojoho.HanyoListKogakuGassanShinseishoJohoNoRenbanCSVEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkogakugassanshinseishojoho.HanyoListKogakuGassanShinseishoJohoEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ChokkinIdoJiyuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.NinteiShienShinseiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
@@ -111,6 +113,7 @@ public class HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate {
     private static final RString 受給申請事由_サ変更申請 = new RString("サ変更申請　");
     private static final RString 受給申請事由_施行前申請 = new RString("施行前申請　");
     private static final RString 受給申請事由_追加 = new RString("追加　　　　");
+    private static final RString 斜線 = new RString("/");
     private static final int INT_7 = 7;
     private static final int INT_8 = 8;
     private static final int INT_9 = 9;
@@ -165,7 +168,9 @@ public class HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate {
         csvEntity.set申請年月日(dataToRString(entity.get高額合算申請書_申請年月日(), parameter));
         csvEntity.set支給申請書整理番号(entity.get高額合算申請書_支給申請書整理番号());
         csvEntity.set国保支給申請書整理番号(entity.get高額合算申請書_国保支給申請書整理番号());
-        csvEntity.set支給申請区分(entity.get高額合算申請書_支給申請区分());
+        if (entity.get高額合算申請書_支給申請区分() != null) {
+            csvEntity.set支給申請区分(KaigoGassan_ShinseiKbn.toValue(entity.get高額合算申請書_支給申請区分()).get名称());
+        }
         csvEntity.set対象計算期間開始(dataToRString(entity.get高額合算申請書_対象計算期間開始年月日(), parameter));
         csvEntity.set対象計算期間終了(dataToRString(entity.get高額合算申請書_対象計算期間終了年月日(), parameter));
         if (entity.get高額合算申請書_支給申請形態() != null) {
@@ -204,7 +209,7 @@ public class HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate {
         csvEntity.set支払方法区分(entity.get高額合算申請書_支払方法区分());
         csvEntity.set支払場所(entity.get高額合算申請書_支払場所());
         if (entity.get高額合算申請書_支払場所() != null && entity.get高額合算申請書_支払場所().length() > INT_10) {
-            csvEntity.set支払場所短(entity.get高額合算申請書_支払場所().substring(0, INT_9));
+            csvEntity.set支払場所短(entity.get高額合算申請書_支払場所().substring(0, INT_10));
         } else {
             csvEntity.set支払場所短(entity.get高額合算申請書_支払場所());
         }
@@ -225,7 +230,7 @@ public class HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate {
         csvEntity.set口座履歴番号(entity.get高額合算申請書_口座ID());
         csvEntity.set加入０１保険者名(entity.get高額合算申請書加入歴01_保険者名());
         csvEntity.set加入０１加入開始日(dataToRString(entity.get高額合算申請書加入歴01_加入期間開始年月日(), parameter));
-        csvEntity.set加入０１加入終了日(dataToRString(entity.get高額合算申請書加入歴10_加入期間終了年月日(), parameter));
+        csvEntity.set加入０１加入終了日(dataToRString(entity.get高額合算申請書加入歴01_加入期間終了年月日(), parameter));
         csvEntity.set加入０１証明書番号(entity.get高額合算申請書加入歴01_自己負担額証明書整理番号());
         csvEntity.set加入０２保険者名(entity.get高額合算申請書加入歴02_保険者名());
         csvEntity.set加入０２加入開始日(dataToRString(entity.get高額合算申請書加入歴02_加入期間開始年月日(), parameter));
@@ -341,13 +346,13 @@ public class HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate {
             RString 地区2 = RString.EMPTY;
             RString 地区3 = RString.EMPTY;
             if (宛名.get行政区画() != null && 宛名.get行政区画().getChiku1() != null) {
-                地区1 = 宛名.get行政区画().getChiku1().get名称();
+                地区1 = 宛名.get行政区画().getChiku1().getコード().getColumnValue();
             }
             if (宛名.get行政区画() != null && 宛名.get行政区画().getChiku2() != null) {
-                地区2 = 宛名.get行政区画().getChiku2().get名称();
+                地区2 = 宛名.get行政区画().getChiku2().getコード().getColumnValue();
             }
             if (宛名.get行政区画() != null && 宛名.get行政区画().getChiku3() != null) {
-                地区3 = 宛名.get行政区画().getChiku3().get名称();
+                地区3 = 宛名.get行政区画().getChiku3().getコード().getColumnValue();
             }
             TelNo 連絡先1 = 宛名.get連絡先１();
             TelNo 連絡先2 = 宛名.get連絡先２();
@@ -433,8 +438,7 @@ public class HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate {
 
             csvEntity.set送付先行政区コード(送付先行政区コード != null
                     ? 送付先行政区コード.value() : RString.EMPTY);
-            csvEntity.set送付先行政区名(送付先行政区コード != null
-                    ? 送付先行政区コード.getColumnValue() : RString.EMPTY);
+            csvEntity.set送付先行政区名(宛先.get宛先行政区().get名称());
             set送付先住所番地方書(entity, csvEntity);
         }
     }
@@ -444,8 +448,8 @@ public class HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate {
         if (entity.get宛先Entity() != null) {
             IAtesaki 宛先 = AtesakiFactory.createInstance(entity.get宛先Entity());
             IJusho 送付先住所 = 宛先.get宛先住所();
-            if (送付先住所 != null && 送付先住所.get番地() != null
-                    && 送付先住所.get番地().getBanchi() != null && 送付先住所.get方書() != null) {
+            if (送付先住所 != null && 送付先住所.get番地() != null && 送付先住所.get番地().getBanchi() != null
+                    && 送付先住所.get方書() != null) {
                 Banchi 送付先番地 = 送付先住所.get番地();
                 Katagaki 送付先方書 = 送付先住所.get方書();
                 csvEntity.set送付先住所番地方書(送付先住所.get住所()
@@ -519,7 +523,8 @@ public class HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate {
             csvEntity.set受給みなし更新認定(みなし);
         }
         if (entity.get受給者台帳_直近異動事由コード() != null) {
-            csvEntity.set受給直近事由(get受給直近事由(entity.get受給者台帳_直近異動事由コード()));
+            csvEntity.set受給直近事由(get受給直近事由(ChokkinIdoJiyuCode.toValue(
+                    entity.get受給者台帳_直近異動事由コード()).get名称()));
         }
     }
 
@@ -528,7 +533,11 @@ public class HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate {
         RString 受給申請事由 = RString.EMPTY;
         RString 受給申請事由コード = entity.get受給者台帳_受給申請事由();
         jukyuShinseiJiyuList.addAll(Arrays.asList(JukyuShinseiJiyu.values()));
-        if (jukyuShinseiJiyuList.contains(受給申請事由コード)) {
+        RString 受給申請事由名称 = RString.EMPTY;
+        if (受給申請事由コード != null) {
+            受給申請事由名称 = JukyuShinseiJiyu.toValue(受給申請事由コード).get名称();
+        }
+        if (jukyuShinseiJiyuList.contains(受給申請事由名称)) {
             getJukyuShinseiJiyu(受給申請事由コード, 受給申請事由, entity.get受給者台帳_要支援者認定申請区分());
         }
         return 受給申請事由;
@@ -635,24 +644,32 @@ public class HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate {
     }
 
     private RString dataToRString(FlexibleDate 日付, HanyoListKogakuGassanShinseishoJohoProcessParameter parameter) {
-        if (日付 == null || 日付.isEmpty()) {
-            return RString.EMPTY;
+        RString temp = getパターン32(日付);
+        if (!parameter.is日付スラッシュ付加() && !RString.isNullOrEmpty(temp)) {
+            temp = temp.replace(斜線, RString.EMPTY);
         }
-        if (!parameter.is日付スラッシュ付加()) {
-            return 日付.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString();
-        } else {
-            return 日付.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
+        return temp;
+    }
+
+    private RString getパターン32(FlexibleDate date) {
+        if (date != null) {
+            return date.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
         }
+        return RString.EMPTY;
+    }
+
+    private RString getパターン32(FlexibleYearMonth date) {
+        if (date != null) {
+            return date.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
+        }
+        return RString.EMPTY;
     }
 
     private RString monthToRString(FlexibleYearMonth 日付, HanyoListKogakuGassanShinseishoJohoProcessParameter parameter) {
-        if (日付 == null || 日付.isEmpty()) {
-            return RString.EMPTY;
+        RString temp = getパターン32(日付);
+        if (!parameter.is日付スラッシュ付加() && !RString.isNullOrEmpty(temp)) {
+            temp = temp.replace(斜線, RString.EMPTY);
         }
-        if (!parameter.is日付スラッシュ付加()) {
-            return 日付.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString();
-        } else {
-            return 日付.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
-        }
+        return temp;
     }
 }

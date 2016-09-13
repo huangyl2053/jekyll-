@@ -363,6 +363,8 @@ public class ShuruiShikyuGendogakuMainHandler {
                 new FlexibleYearMonth(row.getTekiyoKaishiYM().getValue().getYearMonth().toDateString()),
                 new ServiceShuruiCode(row.getServiceShuruiCode()),
                 KubunShikyuGendogakuYokaigoJotaiKubun.要介護5.getコード(), 1);
+        delete修正(shikyuGendoGakuList, new ServiceShuruiCode(div.getShuruiShikyuGendogakuShosai().getDdlServiceShurui()
+                .getSelectedKey()));
     }
 
     private void deleteEntity(List<ServiceShuruiShikyuGendoGaku> shikyuGendoGakuList,
@@ -506,9 +508,22 @@ public class ShuruiShikyuGendogakuMainHandler {
         for (ServiceShuruiShikyuGendoGaku gendoGaku : shikyuGendoGakuList) {
             ServiceShuruiCode サービス種類コード2 = gendoGaku.getサービス種類コード();
             if (サービス種類コード2 != null && サービス種類コード2.equals(サービス種類コード)
-                    && gendoGaku.get適用終了年月() != null && gendoGaku.get適用終了年月().isEmpty()) {
+                    && (gendoGaku.get適用終了年月() == null || gendoGaku.get適用終了年月().isEmpty())) {
                 gendoGaku = gendoGaku.createBuilderForEdit().set適用終了年月(new FlexibleYearMonth(div.getShuruiShikyuGendogakuShosai()
                         .getTxtTekiyoKikanRange().getFromValue().minusMonth(1).getYearMonth().toDateString())).build();
+                ShuruiShikyuGendogakuMainFinder.createInstance().saveEntity(gendoGaku.toEntity());
+            }
+        }
+    }
+
+    private void delete修正(List<ServiceShuruiShikyuGendoGaku> shikyuGendoGakuList, ServiceShuruiCode サービス種類コード) {
+        for (ServiceShuruiShikyuGendoGaku gendoGaku : shikyuGendoGakuList) {
+            ServiceShuruiCode サービス種類コード2 = gendoGaku.getサービス種類コード();
+            if (サービス種類コード2 != null && サービス種類コード2.equals(サービス種類コード)
+                    && gendoGaku.get適用終了年月() != null && gendoGaku.get適用終了年月().equals(
+                            new FlexibleYearMonth(div.getShuruiShikyuGendogakuShosai()
+                                    .getTxtTekiyoKikanRange().getFromValue().minusMonth(1).getYearMonth().toDateString()))) {
+                gendoGaku = gendoGaku.createBuilderForEdit().set適用終了年月(FlexibleYearMonth.EMPTY).build();
                 ShuruiShikyuGendogakuMainFinder.createInstance().saveEntity(gendoGaku.toEntity());
             }
         }

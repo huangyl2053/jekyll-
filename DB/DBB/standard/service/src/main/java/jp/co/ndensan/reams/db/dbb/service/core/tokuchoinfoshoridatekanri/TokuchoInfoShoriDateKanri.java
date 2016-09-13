@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -30,9 +31,12 @@ public class TokuchoInfoShoriDateKanri {
 
     private final DbT7022ShoriDateKanriDac dbt7022Dac;
     private final MapperProvider mapperProvider;
-    private static final RString FILTER = new RString("Z1A_TEST_03.DTA");
+    private static final RString FILTER_Z1A = new RString("Z1A%.DTA");
+    private static final RString FILTER_Z12 = new RString("Z12%.DTA");
+    private static final RString FILTER_Z1A_市町村 = new RString("Z1A%_市町村.DTA");
+    private static final RString FILTER_Z12_市町村 = new RString("Z12%_市町村.DTA");
+    private static final RString 市町村 = new RString("市町村");
     private static final RString Z1A = new RString("Z1A");
-    private static final RString Z12 = new RString("Z12");
     private static final RString 特別徴収異動情報 = new RString("特別徴収異動情報");
     private static final RString 特別徴収依頼情報 = new RString("特別徴収依頼情報");
 
@@ -212,18 +216,49 @@ public class TokuchoInfoShoriDateKanri {
     /**
      * ダウンロード情報Entityリスト作成のメソッドです。
      *
+     * @param 市町村識別ID RString
+     * @return List<TokuchoInfoFDownloadInfo>
+     *
+     */
+    public List<TokuchoInfoFDownloadInfo> getファイル対象By市町村(RString 市町村識別ID) {
+        List<TokuchoInfoFDownloadInfo> ファイル対象List = new ArrayList<>();
+        RString 市町村_Z1A_Key = FILTER_Z1A_市町村.replace(市町村, 市町村識別ID);
+        RString 市町村_Z12_Key = FILTER_Z12_市町村.replace(市町村, 市町村識別ID);
+        List<UzT0885SharedFileEntryEntity> 市町村Z1AList = SharedFile.searchSharedFile(市町村_Z1A_Key);
+        if (市町村Z1AList != null && !市町村Z1AList.isEmpty()) {
+            ファイル対象List.addAll(changeToTokuchoInfoFDownloadInfo(市町村Z1AList));
+        }
+        List<UzT0885SharedFileEntryEntity> 市町村Z12List = SharedFile.searchSharedFile(市町村_Z12_Key);
+        if (市町村Z12List != null && !市町村Z12List.isEmpty()) {
+            ファイル対象List.addAll(changeToTokuchoInfoFDownloadInfo(市町村Z12List));
+        }
+        return ファイル対象List;
+    }
+
+    /**
+     * ダウンロード情報Entityリスト作成のメソッドです。
+     *
      * @return List<TokuchoInfoFDownloadInfo>
      *
      */
     public List<TokuchoInfoFDownloadInfo> getファイル対象() {
         List<TokuchoInfoFDownloadInfo> ファイル対象List = new ArrayList<>();
-        //TODO QA
-        List<UzT0885SharedFileEntryEntity> entityList = SharedFile.searchSharedFile(FILTER);
+        List<UzT0885SharedFileEntryEntity> 単一Z1AList = SharedFile.searchSharedFile(FILTER_Z1A);
+        if (単一Z1AList != null && !単一Z1AList.isEmpty()) {
+            ファイル対象List.addAll(changeToTokuchoInfoFDownloadInfo(単一Z1AList));
+        }
+        List<UzT0885SharedFileEntryEntity> 単一Z12List = SharedFile.searchSharedFile(FILTER_Z12);
+        if (単一Z12List != null && !単一Z12List.isEmpty()) {
+            ファイル対象List.addAll(changeToTokuchoInfoFDownloadInfo(単一Z12List));
+        }
+        return ファイル対象List;
+    }
+
+    private List<TokuchoInfoFDownloadInfo> changeToTokuchoInfoFDownloadInfo(
+            List<UzT0885SharedFileEntryEntity> entityList) {
+        List<TokuchoInfoFDownloadInfo> ファイル対象List = new ArrayList<>();
         for (UzT0885SharedFileEntryEntity ファイル対象 : entityList) {
             RString ファイル名 = ファイル対象.getLocalFileName();
-            if (!ファイル名.startsWith(Z1A) && !ファイル名.startsWith(Z12)) {
-                continue;
-            }
             TokuchoInfoFDownloadInfo entity = new TokuchoInfoFDownloadInfo();
             entity.setファイル名(ファイル名);
             if (ファイル名.startsWith(Z1A)) {
@@ -235,5 +270,23 @@ public class TokuchoInfoShoriDateKanri {
             ファイル対象List.add(entity);
         }
         return ファイル対象List;
+    }
+
+    /**
+     * ダウンロード情報Entityリスト作成のメソッドです。
+     *
+     * @param sharedFileName RString
+     * @param dateTime RString
+     * @return RDateTime
+     *
+     */
+    public RDateTime getダウンロードDateTime(RString sharedFileName, RString dateTime) {
+        List<UzT0885SharedFileEntryEntity> fileList = SharedFile.searchSharedFile(sharedFileName);
+        for (UzT0885SharedFileEntryEntity entity : fileList) {
+            if (dateTime.equals(new RString(entity.getSharedFileId().toString()))) {
+                return entity.getSharedFileId();
+            }
+        }
+        return null;
     }
 }

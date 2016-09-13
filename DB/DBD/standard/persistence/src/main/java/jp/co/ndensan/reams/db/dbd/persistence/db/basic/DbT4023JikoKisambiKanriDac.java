@@ -77,14 +77,14 @@ public class DbT4023JikoKisambiKanriDac implements ISaveable<DbT4023JikoKisambiK
         return accessor.select().
                 table(DbT4023JikoKisambiKanri.class).
                 where(and(
-                                eq(shoKisaiHokenshaNo, 証記載保険者番号),
-                                eq(hihokenshaNo, 被保険者番号),
-                                eq(choteiNendo, 調定年度),
-                                eq(fukaNendo, 賦課年度),
-                                eq(tokucho_FuchoKubun, 特徴_普徴区分),
-                                eq(tsuchishoNo, 通知書番号),
-                                eq(shuno_Ki_Tsuki, 収納期_月),
-                                eq(rirekiNo, 履歴番号))).
+                        eq(shoKisaiHokenshaNo, 証記載保険者番号),
+                        eq(hihokenshaNo, 被保険者番号),
+                        eq(choteiNendo, 調定年度),
+                        eq(fukaNendo, 賦課年度),
+                        eq(tokucho_FuchoKubun, 特徴_普徴区分),
+                        eq(tsuchishoNo, 通知書番号),
+                        eq(shuno_Ki_Tsuki, 収納期_月),
+                        eq(rirekiNo, 履歴番号))).
                 toObject(DbT4023JikoKisambiKanriEntity.class);
     }
 
@@ -115,5 +115,19 @@ public class DbT4023JikoKisambiKanriDac implements ISaveable<DbT4023JikoKisambiK
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage(処理日付管理マスタエンティティ.toString()));
+     *
+     * DbT4023JikoKisambiKanriEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 登録件数
+     */
+    @Transaction
+    public int saveOrDeletePhysicalBy(DbT4023JikoKisambiKanriEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("時効起算日管理エンティティ"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
     }
 }

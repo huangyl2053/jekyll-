@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 給付額減額管理リスト（画面）クラスです．
  *
- * @reamsid_L DBD-3800-040 x_lilh
+ * @reamsid_L DBD-3610-040 x_lilh
  */
 public class KyufugakuGengakuHaakuIchiran {
 

@@ -43,6 +43,10 @@ public class GassanShikyuShinseishoJohoSofuIchiranEditor implements IGassanShiky
     private final YMDHMS システム日時;
     private final FlexibleYearMonth 処理年月;
     private final int 連番;
+    private static final RDate NOWDATE = RDate.getNowDate();
+    private static final SubGyomuCode DBU介護統計報告 = SubGyomuCode.DBU介護統計報告;
+    private static final RString 保険者情報_保険者番号 = DbBusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_保険者番号, NOWDATE, DBU介護統計報告);
+    private static final RString 保険者情報_保険者名称 = DbBusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_保険者名称, NOWDATE, DBU介護統計報告);
 
     /**
      * コンストラクタです。
@@ -82,28 +86,26 @@ public class GassanShikyuShinseishoJohoSofuIchiranEditor implements IGassanShiky
             source.sofuYM = 処理年月.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         }
-        source.hokenshaNo = DbBusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-        source.hokenshaName = DbBusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_保険者名称, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        source.hokenshaNo = 保険者情報_保険者番号;
+        source.hokenshaName = 保険者情報_保険者名称;
         source.list_1 = new RString(連番);
-        if (!高額合算申請書一時Entity.getShikyuShinseishoSeiriNo().equals(new RString(高額合算申請書一時Entity.getRirekiNo().toString()))) {
-            source.list_2 = 高額合算申請書一時Entity.getTaishoNendo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-            if (高額合算申請書一時Entity.getShikyuShinseiKubun() != null) {
-                source.list_3 = KaigoGassan_ShinseiKbn.toValue(高額合算申請書一時Entity.getShikyuShinseiKubun()).get名称();
-            }
-            if (高額合算申請書一時Entity.getShinseiYMD() != null) {
-                source.list_4 = new RString(高額合算申請書一時Entity.getShinseiYMD().toString());
-            }
-            source.list_5 = 高額合算申請書一時Entity.getShikyuShinseishoSeiriNo();
-            if (高額合算申請書一時Entity.getShinseiDaihyoshaShimei() != null) {
-                source.list_6 = 高額合算申請書一時Entity.getShinseiDaihyoshaShimei().value();
-            }
-            if (高額合算申請書一時Entity.getJikoFutanKofuUmu() != null) {
-                source.list_7 = KaigoGassan_JikoFutanKofuUmu.toValue(高額合算申請書一時Entity.getJikoFutanKofuUmu()).get名称();
-            }
-            if (高額合算申請書一時Entity.getShikyuShinseiKeitai() != null) {
-                source.list_8 = KaigoGassan_ShinseiKeitai.toValue(高額合算申請書一時Entity.getShikyuShinseiKeitai()).get名称();
-            }
+        source.list_2 = 高額合算申請書一時Entity.getTaishoNendo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        if (高額合算申請書一時Entity.getShikyuShinseiKubun() != null) {
+            source.list_3 = KaigoGassan_ShinseiKbn.toValue(高額合算申請書一時Entity.getShikyuShinseiKubun()).get名称();
+        }
+        if (高額合算申請書一時Entity.getShinseiYMD() != null) {
+            source.list_4 = new RString(高額合算申請書一時Entity.getShinseiYMD().toString());
+        }
+        source.list_5 = 高額合算申請書一時Entity.getShikyuShinseishoSeiriNo();
+        if (高額合算申請書一時Entity.getShinseiDaihyoshaShimei() != null) {
+            source.list_6 = 高額合算申請書一時Entity.getShinseiDaihyoshaShimei().value();
+        }
+        if (高額合算申請書一時Entity.getJikoFutanKofuUmu() != null) {
+            source.list_7 = KaigoGassan_JikoFutanKofuUmu.toValue(高額合算申請書一時Entity.getJikoFutanKofuUmu()).get名称();
+        }
+        if (高額合算申請書一時Entity.getShikyuShinseiKeitai() != null) {
+            source.list_8 = KaigoGassan_ShinseiKeitai.toValue(高額合算申請書一時Entity.getShikyuShinseiKeitai()).get名称();
         }
         if (高額合算申請書一時Entity.getHihokenshaNo() != null) {
             source.list_9 = 高額合算申請書一時Entity.getHihokenshaNo().value();

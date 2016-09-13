@@ -669,7 +669,15 @@ public enum ReportIdDBC {
     /**
      * 振込明細一覧表（合計）帳票ＩＤです。
      */
-    DBC200101(new ReportId("DBC200101_FurikomiMeisaiIchiranGokei"), new RString("振込明細一覧表（合計）")),
+    DBC200101_合計(new ReportId("DBC200101_FurikomiMeisaiIchiranGokei"), new RString("振込明細一覧表（合計）")),
+    /**
+     * 振込明細一覧表（明細）帳票ＩＤです。
+     */
+    DBC200101_明細(new ReportId("DBC200101_FurikomiMeisaiIchiranDetail"), new RString("振込明細一覧表（明細）")),
+    /**
+     * 帳票設計_DBC200039_高額合算支給不支給決定通知書情報取込一覧表 ＩＤです。
+     */
+    DBC200040(new ReportId("DBC200040_GassanShikyuFushikyuKetteishaIchiran"), new RString("高額合算支給不支給決定通知書情報取込一覧表 ")),
     /**
      * 自己負担証明書_2009年以降 帳票ＩＤです。
      */

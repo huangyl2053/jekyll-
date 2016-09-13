@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.dbd511002;
 
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd511002.NinshiuUpdateProcess;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd511002.NinshiuUpdateParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd511002.NinshiuUpdatebatctParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBD-1420-020 wangjie2
  */
-public class NinshiuUpdateFlow extends BatchFlowBase<NinshiuUpdateParameter> {
+public class NinshiuUpdateFlow extends BatchFlowBase<NinshiuUpdatebatctParameter> {
 
     private static final String 認定更新お知らせ通知書発行 = "NinshiuUpdate";
 

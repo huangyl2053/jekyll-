@@ -166,6 +166,7 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
     private static final RString 出力ファイル名 = new RString("HanyoListKogakuGassanJikoFutangaku.csv");
     private static final RString CSV出力有無_なし = new RString("なし");
     private static final RString CSV出力有無_あり = new RString("あり");
+    private static final RString 斜線 = new RString("/");
     private RString 出力有無;
     private HanyoListKogakuGassanJikoFutangakuProcessParameter parameter;
     private List<KoseiShichosonMaster> 構成市町村マスタlist;
@@ -224,6 +225,8 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
 
     @Override
     protected void beforeExecute() {
+
+        personalDataList = new ArrayList<>();
 
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         構成市町村マスタlist = KoseiShichosonJohoFinder.createInstance().get現市町村情報();
@@ -703,25 +706,33 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
     }
 
     private RString dataToRString(FlexibleDate 日付) {
-        if (日付 == null || 日付.isEmpty()) {
-            return RString.EMPTY;
+        RString temp = getパターン32(日付);
+        if (!parameter.is日付スラッシュ付加() && !RString.isNullOrEmpty(temp)) {
+            temp = temp.replace(斜線, RString.EMPTY);
         }
-        if (!parameter.is日付スラッシュ付加()) {
-            return 日付.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString();
-        } else {
-            return 日付.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
+        return temp;
+    }
+
+    private RString getパターン32(FlexibleDate date) {
+        if (date != null) {
+            return date.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
         }
+        return RString.EMPTY;
+    }
+
+    private RString getパターン32(FlexibleYearMonth date) {
+        if (date != null) {
+            return date.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
+        }
+        return RString.EMPTY;
     }
 
     private RString monthToRString(FlexibleYearMonth 日付) {
-        if (日付 == null || 日付.isEmpty()) {
-            return RString.EMPTY;
+        RString temp = getパターン32(日付);
+        if (!parameter.is日付スラッシュ付加() && !RString.isNullOrEmpty(temp)) {
+            temp = temp.replace(斜線, RString.EMPTY);
         }
-        if (!parameter.is日付スラッシュ付加()) {
-            return 日付.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString();
-        } else {
-            return 日付.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
-        }
+        return temp;
     }
 
     @Override

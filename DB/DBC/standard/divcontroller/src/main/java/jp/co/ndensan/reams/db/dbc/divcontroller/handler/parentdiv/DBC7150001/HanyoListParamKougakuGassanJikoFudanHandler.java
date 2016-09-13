@@ -213,19 +213,19 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
         if (null != div.getTxtJikoFutanngakuShoumeisho().getFromValue()) {
             batchparam.setJikoFutanngakuShoumeishoFrom(new FlexibleYearMonth(div.getTxtJikoFutanngakuShoumeisho().getFromValue().getYearMonth().toString()));
         }
-        if (null != div.getTxtJikoFutangakuKakunin().getToValue()) {
+        if (null != div.getTxtJikoFutanngakuShoumeisho().getToValue()) {
             batchparam.setJikoFutanngakuShoumeishoTo(new FlexibleYearMonth(div.getTxtJikoFutanngakuShoumeisho().getToValue().getYearMonth().toString()));
         }
         List<RString> selectKey = div.getChkCsvHenshuHoho().getSelectedKeys();
         if (selectKey.contains(項目名付加)) {
-            batchparam.setRebanFuka(true);
-        } else {
-            batchparam.setRebanFuka(false);
-        }
-        if (selectKey.contains(連番付加)) {
             batchparam.setTomokumeFuka(true);
         } else {
             batchparam.setTomokumeFuka(false);
+        }
+        if (selectKey.contains(連番付加)) {
+            batchparam.setRebanFuka(true);
+        } else {
+            batchparam.setRebanFuka(false);
         }
         if (selectKey.contains(日付)) {
             batchparam.setSlashDate(true);

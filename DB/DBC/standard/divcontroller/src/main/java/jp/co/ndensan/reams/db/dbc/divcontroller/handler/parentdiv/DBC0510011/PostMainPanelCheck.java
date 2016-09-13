@@ -41,8 +41,8 @@ public class PostMainPanelCheck {
     private static final RString 広域後期情報 = new RString("22_DBU_KOUKI_0000.txt");
     private static final RString 定値_処理枝番 = new RString("処理枝番");
     private static final RString 対象のファイル = new RString("対象のファイル");
-    private static final RString 国保 = new RString("国保");
-    private static final RString 後期 = new RString("後期");
+    private static final RString DBCMN82001 = new RString("DBCMN82001");
+    private static final RString DBCMN82002 = new RString("DBCMN82002");
     private static final RString NUM_00 = new RString("00");
     private static final RString NUM_1 = new RString("1");
     private static final RString NUM_2 = new RString("2");
@@ -80,7 +80,7 @@ public class PostMainPanelCheck {
                 SubGyomuCode.DBC介護給付);
         RString 後期ＩＦ種類 = DbBusinessConfig.get(ConfigNameDBC.国保_後期高齢ＩＦ_後期ＩＦ種類, RDate.getNowDate(),
                 SubGyomuCode.DBC介護給付);
-        if (ResponseHolder.getState().equals(国保)) {
+        if (ResponseHolder.getMenuID().equals(DBCMN82001)) {
             if (導入形態コード.toString().equals(NUM_120.toString())) {
                 国保情報List = SharedFile.searchSharedFile(単一国保情報);
                 単一messeges(国保情報List);
@@ -98,7 +98,7 @@ public class PostMainPanelCheck {
             }
         }
 
-        if (ResponseHolder.getState().equals(後期)) {
+        if (ResponseHolder.getMenuID().equals(DBCMN82002)) {
             if (導入形態コード.toString().equals(NUM_120.toString())) {
                 List<UzT0885SharedFileEntryEntity> 後期情報List = SharedFile.searchSharedFile(後期情報);
                 単一messeges(後期情報List);

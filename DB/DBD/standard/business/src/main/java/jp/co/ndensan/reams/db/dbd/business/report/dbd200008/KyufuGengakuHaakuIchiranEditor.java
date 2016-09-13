@@ -235,11 +235,11 @@ public class KyufuGengakuHaakuIchiranEditor implements IKyufuGengakuHaakuIchiran
         List<ShunoJohoEntity> 収納情報リスト = this.給付額減額把握リストEntity.get収納情報リスト();
         for (int shunoIndex = 0; shunoIndex < 収納情報リスト.size(); shunoIndex++) {
             //TODO QA
-//            TokuchoFuchoKubun 特徴普徴区分 = 収納情報リスト.get(ShunoIndex).get特徴普徴区分();
-//            if (TokuchoFuchoKubun.特別徴収.getコード().equals(特徴普徴区分.getコード())) {
+//            RString 特徴普徴区分 = 収納情報リスト.get(shunoIndex).get特徴普徴区分();
+//            if (TokuchoFuchoKubun.特別徴収.get名称().equals(特徴普徴区分)) {
 //
 //            }
-//            if (TokuchoFuchoKubun.普通徴収.getコード().equals(特徴普徴区分.getコード())) {
+//            if (TokuchoFuchoKubun.普通徴収.get名称().equals(特徴普徴区分)) {
 //
 //            }
             if (!収納情報リスト.isEmpty()) {
@@ -342,7 +342,7 @@ public class KyufuGengakuHaakuIchiranEditor implements IKyufuGengakuHaakuIchiran
                 source.listNendoBun1_5 = 年度1の期.get時効起算日().wareki().toDateString();
             }
             if (年度1の期.get時効起算事由() != null) {
-                RString 年度1時効起算事由 = 年度1の期.get時効起算事由().getコード();
+                RString 年度1時効起算事由 = 年度1の期.get時効起算事由();
                 RString 年度1時効起算事由名称 = RString.EMPTY;
                 年度1時効起算事由名称 = JikoKisanbiKubun.toValue(年度1時効起算事由).get記号();
                 source.listNendoBun1_6 = 年度1時効起算事由名称;
@@ -372,7 +372,7 @@ public class KyufuGengakuHaakuIchiranEditor implements IKyufuGengakuHaakuIchiran
                         firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
             }
             if (年度2の期.get時効起算事由() != null) {
-                RString 年度2時効起算事由 = 年度2の期.get時効起算事由().getコード();
+                RString 年度2時効起算事由 = 年度2の期.get時効起算事由();
                 RString 年度2時効起算事由名称 = RString.EMPTY;
                 年度2時効起算事由名称 = JikoKisanbiKubun.toValue(年度2時効起算事由).get記号();
                 source.listNendoBun2_6 = 年度2時効起算事由名称;
@@ -402,7 +402,7 @@ public class KyufuGengakuHaakuIchiranEditor implements IKyufuGengakuHaakuIchiran
                         firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
             }
             if (年度3の期.get時効起算事由() != null) {
-                RString 年度3時効起算事由 = 年度3の期.get時効起算事由().getコード();
+                RString 年度3時効起算事由 = 年度3の期.get時効起算事由();
                 RString 年度3時効起算事由名称 = RString.EMPTY;
                 年度3時効起算事由名称 = JikoKisanbiKubun.toValue(年度3時効起算事由).get記号();
                 source.listNendoBun3_6 = 年度3時効起算事由名称;
@@ -432,7 +432,7 @@ public class KyufuGengakuHaakuIchiranEditor implements IKyufuGengakuHaakuIchiran
                         firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
             }
             if (年度4の期.get時効起算事由() != null) {
-                RString 年度4時効起算事由 = 年度4の期.get時効起算事由().getコード();
+                RString 年度4時効起算事由 = 年度4の期.get時効起算事由();
                 RString 年度4時効起算事由名称 = RString.EMPTY;
                 年度4時効起算事由名称 = JikoKisanbiKubun.toValue(年度4時効起算事由).get記号();
                 source.listNendoBun4_6 = 年度4時効起算事由名称;
@@ -462,7 +462,7 @@ public class KyufuGengakuHaakuIchiranEditor implements IKyufuGengakuHaakuIchiran
                         firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
             }
             if (年度5の期.get時効起算事由() != null) {
-                RString 年度5時効起算事由 = 年度5の期.get時効起算事由().getコード();
+                RString 年度5時効起算事由 = 年度5の期.get時効起算事由();
                 RString 年度5時効起算事由名称 = RString.EMPTY;
                 年度5時効起算事由名称 = JikoKisanbiKubun.toValue(年度5時効起算事由).get記号();
                 source.listNendoBun5_6 = 年度5時効起算事由名称;
@@ -492,7 +492,7 @@ public class KyufuGengakuHaakuIchiranEditor implements IKyufuGengakuHaakuIchiran
                         firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
             }
             if (年度6の期.get時効起算事由() != null) {
-                RString 年度6時効起算事由 = 年度6の期.get時効起算事由().getコード();
+                RString 年度6時効起算事由 = 年度6の期.get時効起算事由();
                 RString 年度6時効起算事由名称 = RString.EMPTY;
                 年度6時効起算事由名称 = JikoKisanbiKubun.toValue(年度6時効起算事由).get記号();
                 source.listNendoBun6_6 = 年度6時効起算事由名称;
@@ -522,7 +522,7 @@ public class KyufuGengakuHaakuIchiranEditor implements IKyufuGengakuHaakuIchiran
                         firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
             }
             if (年度7の期.get時効起算事由() != null) {
-                RString 年度7時効起算事由 = 年度7の期.get時効起算事由().getコード();
+                RString 年度7時効起算事由 = 年度7の期.get時効起算事由();
                 RString 年度7時効起算事由名称 = RString.EMPTY;
                 年度7時効起算事由名称 = JikoKisanbiKubun.toValue(年度7時効起算事由).get記号();
                 source.listNendoBun7_6 = 年度7時効起算事由名称;
@@ -552,7 +552,7 @@ public class KyufuGengakuHaakuIchiranEditor implements IKyufuGengakuHaakuIchiran
                         firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
             }
             if (年度8の期.get時効起算事由() != null) {
-                RString 年度8時効起算事由 = 年度8の期.get時効起算事由().getコード();
+                RString 年度8時効起算事由 = 年度8の期.get時効起算事由();
                 RString 年度8時効起算事由名称 = RString.EMPTY;
                 年度8時効起算事由名称 = JikoKisanbiKubun.toValue(年度8時効起算事由).get記号();
                 source.listNendoBun8_6 = 年度8時効起算事由名称;
@@ -582,7 +582,7 @@ public class KyufuGengakuHaakuIchiranEditor implements IKyufuGengakuHaakuIchiran
                         firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
             }
             if (年度9の期.get時効起算事由() != null) {
-                RString 年度9時効起算事由 = 年度9の期.get時効起算事由().getコード();
+                RString 年度9時効起算事由 = 年度9の期.get時効起算事由();
                 RString 年度9時効起算事由名称 = RString.EMPTY;
                 年度9時効起算事由名称 = JikoKisanbiKubun.toValue(年度9時効起算事由).get記号();
                 source.listNendoBun9_6 = 年度9時効起算事由名称;
@@ -612,7 +612,7 @@ public class KyufuGengakuHaakuIchiranEditor implements IKyufuGengakuHaakuIchiran
                         firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
             }
             if (年度10の期.get時効起算事由() != null) {
-                RString 年度10時効起算事由 = 年度10の期.get時効起算事由().getコード();
+                RString 年度10時効起算事由 = 年度10の期.get時効起算事由();
                 RString 年度10時効起算事由名称 = RString.EMPTY;
                 年度10時効起算事由名称 = JikoKisanbiKubun.toValue(年度10時効起算事由).get記号();
                 source.listNendoBun10_6 = 年度10時効起算事由名称;

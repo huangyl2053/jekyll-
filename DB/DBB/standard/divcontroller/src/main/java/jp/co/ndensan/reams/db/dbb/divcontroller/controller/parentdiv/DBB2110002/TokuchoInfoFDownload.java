@@ -33,11 +33,8 @@ public class TokuchoInfoFDownload {
      * @return ResponseData
      */
     public ResponseData<TokuchoInfoFDownloadDiv> onLoad(TokuchoInfoFDownloadDiv div) {
-        RString 初期状態 = getHandler(div).initialize();
-        if (単一.equals(初期状態)) {
-            return ResponseData.of(div).setState(DBB2110002StateName.単一状態);
-        }
-        return ResponseData.of(div).setState(DBB2110002StateName.広域状態);
+        getHandler(div).initialize();
+        return ResponseData.of(div).setState(DBB2110002StateName.単一状態);
     }
 
     /**
@@ -48,7 +45,7 @@ public class TokuchoInfoFDownload {
      */
     public ResponseData<TokuchoInfoFDownloadDiv> onClick_radShichosonSelect(TokuchoInfoFDownloadDiv div) {
         getHandler(div).処理対象市町村切替();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBB2110002StateName.単一状態);
     }
 
     /**
@@ -59,7 +56,7 @@ public class TokuchoInfoFDownload {
      */
     public ResponseData<TokuchoInfoFDownloadDiv> onClick_radTsukiSelect(TokuchoInfoFDownloadDiv div) {
         getHandler(div).処理対象月切替();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBB2110002StateName.広域状態);
     }
 
     /**
@@ -93,12 +90,11 @@ public class TokuchoInfoFDownload {
      */
     public IDownLoadServletResponse onClick_DownLoad(TokuchoInfoFDownloadDiv div,
             IDownLoadServletResponse response) {
-        //TODO
-        FilesystemName shareFileName = new FilesystemName(new RString("Z1A_TEST_03.DTA"));
-        TokuchoInfoFDownloadInfo fileInfo = getHandler(div).getFile();
+        TokuchoInfoFDownloadInfo fileInfo = getHandler(div).getダウンロードFile();
+        FilesystemName shareFileName = new FilesystemName(fileInfo.getファイル名());
         SharedFileEntryDescriptor entry = new SharedFileEntryDescriptor(shareFileName, fileInfo.get作成日時());
         return SharedFileDirectAccessDownload.directAccessDownload(
-                new SharedFileDirectAccessDescriptor(entry, new RString("__AutoCompressed__.zip")), response);
+                new SharedFileDirectAccessDescriptor(entry, fileInfo.getファイル名()), response);
     }
 
     private TokuchoInfoFDownloadHandler getHandler(TokuchoInfoFDownloadDiv div) {

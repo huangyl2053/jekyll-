@@ -311,7 +311,6 @@ public class JukoKisambiTokushuToroku {
         div.getJikoKisambi().setIsOpen(false);
         div.getJikoKisambi().setDisabled(true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(共通エリア_保存する, false);
-
         return ResponseData.of(div).respond();
     }
 
@@ -327,7 +326,7 @@ public class JukoKisambiTokushuToroku {
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
-        if (!getHandler(div).is変更判定for保存(被保険者番号)) {
+        if (!getHandler(div).is変更判定for収納状況()) {
 
             throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
         }

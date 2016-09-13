@@ -29,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 public class GassanShikyuShinseishoJohoSofuIchiranPrintService {
 
     /**
-     * 帳票設計_DBC200037_高額合算支給額計算結果連絡票情報取込一覧表(単一帳票出力用)
+     * 帳票設計_DBC200027_高額合算支給申請書情報送付一覧表(単一帳票出力用)
      *
      * @param 送付一覧表データ KogakugassanShikyushinseishoOutFileEntity
      * @param システム日時 YMDHMS

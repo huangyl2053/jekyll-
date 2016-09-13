@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * DB出力(申請書発行対象) 。
  *
- * @reamsid_L DBD-3530-060 liuyl
+ * @reamsid_L DBD-9999-013 liuyl
  */
 public class DbT4033ShinseishoHakkoTaishoDac implements ISaveable<DbT4033ShinseishoHakkoTaishoshasEntity> {
 

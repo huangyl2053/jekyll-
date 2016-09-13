@@ -1,10 +1,16 @@
 /*
  * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * To change this tmplate file, choose Tools | Templates
+ * and open the tmplate in the editor.
  */
 package jp.co.ndensan.reams.db.dbb.business.report.dbz100001;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import jp.co.ndensan.reams.db.dbb.business.report.dbb021051.DBZ100001AtenaSealEntity;
 import jp.co.ndensan.reams.db.dbb.business.report.dbb021051.DBZ100001AtenaSealParameterEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.atenaseal.DBZ100001AtenaSealSource;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -24,8 +30,53 @@ public class AtenaSealEditor
         implements IAtenaSealEditor {
 
     private final DBZ100001AtenaSealParameterEntity entity;
+    private List<DBZ100001AtenaSealEntity> entityList;
     private static final RString 宛名シール = new RString("宛名シール");
     private static final RString SAKUSEI = new RString("作成");
+    private static final RString SET = new RString("set");
+    private static final int NUM_14 = 14;
+    private static final int NUM_15 = 15;
+    private static final int NUM_16 = 16;
+    private static final int NUM_17 = 17;
+    private static final int NUM_18 = 18;
+    private static final int NUM_19 = 17;
+    private static final int NUM_13 = 13;
+    private static final int NUM_12 = 12;
+    private static final int NUM_11 = 11;
+    private static final int NUM_10 = 10;
+    private static final int NUM_9 = 9;
+    private static final int NUM_8 = 8;
+    private static final int NUM_7 = 7;
+    private static final int NUM_6 = 6;
+    private static final int NUM_5 = 5;
+    private static final int NUM_4 = 4;
+    private static final int NUM_3 = 3;
+    private static final int NUM_2 = 2;
+    private static final int NUM_1 = 1;
+    private static final int NUM_0 = 0;
+    private static final RString EMPTY = RString.EMPTY;
+    private final Class cls = DBZ100001AtenaSealSource.class;
+    private RString tmp1;
+    private RString tmp2;
+    private RString tmp3;
+    private RString tmp4;
+    private RString tmp5;
+    private RString tmp6;
+    private RString tmp7;
+    private RString tmp8;
+    private RString tmp9;
+    private RString tmp10;
+    private RString tmp11;
+    private RString tmp12;
+    private RString tmp13;
+    private RString tmp14;
+    private RString tmp15;
+    private RString tmp16;
+    private RString tmp17;
+    private RString tmp18;
+    private RString tmp19;
+    private Method method;
+    private int posIndex;
 
     /**
      * コンストラクタです
@@ -58,26 +109,135 @@ public class AtenaSealEditor
         source.shichosonCode = entity.get市町村コード();
         source.shichosonName = entity.get市町村名称();
         source.title = 宛名シール;
-//        source.yubinNo = entity.get郵便番号();
-//        source.gyoseiku = entity.get行政区();
-//        source.jushoText = entity.get住所TXT();
-//        source.katagakiSmall2 = entity.get方書2();
-//        source.katagakiSmall1 = entity.get方書1();
-//        source.dainoKubunMei = entity.get代納区分名称();
-//        source.shimeiSmall2 = entity.get氏名2();
-//        source.shimeiSmall1 = entity.get氏名1();
-//        source.samabunShimeiSmall2 = entity.get様分氏名2();
-//        source.samabunShimeiSmall1 = entity.get様分氏名1();
-//        source.kakkoLeft2 = entity.get左括号2();
-//        source.kakkoLeft1 = entity.get左括号1();
-//        source.meishoFuyo2 = entity.get名称付与2();
-//        source.meishoFuyo1 = entity.get名称付与1();
-//        source.samaBun2 = entity.get様分2();
-//        source.samaBun1 = entity.get様分1();
-//        source.kakkoRight2 = entity.get右括号2();
-//        source.kakkoRight1 = entity.get右括号1();
-//        source.customerBarCode = entity.getバーコード住所();
+        this.posIndex = 1;
+        for (DBZ100001AtenaSealEntity e : this.entityList) {
+            setTemp(e);
+            editBody(source);
+            this.posIndex += 1;
+        }
 
+    }
+
+    private void editBody(DBZ100001AtenaSealSource source) {
+        try {
+            this.method = this.cls.getMethod(getMethodName(NUM_1), RString.class);
+            this.method.invoke(source, this.tmp1);
+            this.method = this.cls.getMethod(getMethodName(NUM_2), RString.class);
+            this.method.invoke(source, this.tmp2);
+            this.method = this.cls.getMethod(getMethodName(NUM_3), RString.class);
+            this.method.invoke(source, this.tmp3);
+            this.method = this.cls.getMethod(getMethodName(NUM_4), RString.class);
+            this.method.invoke(source, this.tmp4);
+            this.method = this.cls.getMethod(getMethodName(NUM_5), RString.class);
+            this.method.invoke(source, this.tmp5);
+            this.method = this.cls.getMethod(getMethodName(NUM_6), RString.class);
+            this.method.invoke(source, this.tmp6);
+            this.method = this.cls.getMethod(getMethodName(NUM_7), RString.class);
+            this.method.invoke(source, this.tmp7);
+            this.method = this.cls.getMethod(getMethodName(NUM_8), RString.class);
+            this.method.invoke(source, this.tmp8);
+            this.method = this.cls.getMethod(getMethodName(NUM_9), RString.class);
+            this.method.invoke(source, this.tmp9);
+            this.method = this.cls.getMethod(getMethodName(NUM_10), RString.class);
+            this.method.invoke(source, this.tmp10);
+            this.method = this.cls.getMethod(getMethodName(NUM_11), RString.class);
+            this.method.invoke(source, this.tmp11);
+            this.method = this.cls.getMethod(getMethodName(NUM_12), RString.class);
+            this.method.invoke(source, this.tmp12);
+            this.method = this.cls.getMethod(getMethodName(NUM_13), RString.class);
+            this.method.invoke(source, this.tmp13);
+            this.method = this.cls.getMethod(getMethodName(NUM_14), RString.class);
+            this.method.invoke(source, this.tmp14);
+            this.method = this.cls.getMethod(getMethodName(NUM_15), RString.class);
+            this.method.invoke(source, this.tmp15);
+            this.method = this.cls.getMethod(getMethodName(NUM_16), RString.class);
+            this.method.invoke(source, this.tmp16);
+            this.method = this.cls.getMethod(getMethodName(NUM_17), RString.class);
+            this.method.invoke(source, this.tmp17);
+            this.method = this.cls.getMethod(getMethodName(NUM_18), RString.class);
+            this.method.invoke(source, this.tmp18);
+            this.method = this.cls.getMethod(getMethodName(NUM_19), RString.class);
+            this.method.invoke(source, this.tmp19);
+        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+            Logger.getLogger(AtenaSealEditor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        source.setIndex(source.getIndex() + 1);
+    }
+
+    private String getMethodName(int index) {
+        return SET.concat(MethodName.getName(index)).concat(String.valueOf(getIndex2(index))).toString();
+    }
+
+    private int getIndex2(int index) {
+        if (index <= NUM_5) {
+            return this.posIndex;
+        }
+        return this.posIndex * 2 - index % NUM_2;
+    }
+
+    private static enum MethodName {
+
+        未定義(AtenaSealEditor.EMPTY, Integer.valueOf(0)), yubinNo(new RString("YubinNo"), Integer.valueOf(1)),
+        gyoseiku(new RString("Gyoseiku"), Integer.valueOf(2)), jushoText(new RString("JushoText"), Integer.valueOf(3)),
+        customerBarCode(new RString("CustomerBarCode"), Integer.valueOf(5)), katagakiSmall(new RString("KatagakiSmall"), Integer.valueOf(6)),
+        katagakiSmall1(new RString("KatagakiSmall"), Integer.valueOf(7)), dainoKubunMei(new RString("DainoKubunMei"), Integer.valueOf(4)),
+        shimeiSmall(new RString("ShimeiSmall"), Integer.valueOf(8)), shimeiSmall1(new RString("ShimeiSmall"), Integer.valueOf(9)),
+        samabunShimeiSmall(new RString("SamabunShimeiSmall"), Integer.valueOf(10)),
+        samabunShimeiSmall1(new RString("SamabunShimeiSmall"), Integer.valueOf(11)), kakkoLeft(new RString("KakkoLeft"), Integer.valueOf(12)),
+        kakkoLeft1(new RString("KakkoLeft"), Integer.valueOf(13)), meishoFuyo(new RString("MeishoFuyo"), Integer.valueOf(14)),
+        meishoFuyo1(new RString("MeishoFuyo"), Integer.valueOf(15)), samaBun(new RString("SamaBun"), Integer.valueOf(16)),
+        samaBun1(new RString("SamaBun"), Integer.valueOf(17)), kakkoRigh(new RString("KakkoRigh"), Integer.valueOf(18)),
+        kakkoRigh1(new RString("KakkoRigh"), Integer.valueOf(19));
+
+        private final RString name;
+        private final Integer index;
+
+        private MethodName(RString name, Integer index) {
+            this.name = name;
+            this.index = index;
+        }
+
+        Integer code() {
+            return this.index;
+        }
+
+        static RString getName(int index) {
+            return toValue(Integer.valueOf(index)).name;
+        }
+
+        static MethodName toValue(Integer index) {
+            if (index == null) {
+                return 未定義;
+            }
+            for (MethodName target : values()) {
+                if (target.code().equals(index)) {
+                    return target;
+                }
+            }
+            return 未定義;
+        }
+    }
+
+    private void setTemp(DBZ100001AtenaSealEntity entity) {
+        this.tmp1 = entity.get郵便番号();
+        this.tmp2 = entity.get行政区();
+        this.tmp3 = entity.get住所TXT();
+        this.tmp6 = entity.get方書2();
+        this.tmp7 = entity.get方書1();
+        this.tmp4 = entity.get代納区分名称();
+        this.tmp8 = entity.get氏名2();
+        this.tmp9 = entity.get氏名1();
+        this.tmp10 = entity.get様分氏名2();
+        this.tmp11 = entity.get様分氏名1();
+        this.tmp12 = entity.get左括号2();
+        this.tmp13 = entity.get左括号1();
+        this.tmp14 = entity.get名称付与2();
+        this.tmp15 = entity.get名称付与1();
+        this.tmp16 = entity.get様分2();
+        this.tmp17 = entity.get様分1();
+        this.tmp18 = entity.get右括号2();
+        this.tmp19 = entity.get右括号1();
+        this.tmp5 = entity.getバーコード住所();
     }
 
 }
