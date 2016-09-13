@@ -88,30 +88,32 @@ public class ShotokuDankaibetsuShunoritsuIchiranHandler {
         div.getTxtFukaNendoRange().setToValue(調定年度);
         RYear システム日付の年 = 基準日.getYear();
         RString システム日付の月 = new RString(基準日.getMonthValue());
-        RYear 当初年度の年 = 当初年度.getYear();
+        RYear 調定年度の年 = new RYear(日付関連_調定年度);
+        RYear 当初年度の年 = new RYear(日付関連_当初年度);
         List<KeyValueDataSource> ddlChoteiKijunY = setdataSourceY(システム日付の年, 当初年度の年);
         div.getDdlChoteiKijunY().setDataSource(ddlChoteiKijunY);
         div.getDdlChoteiKijunY().setSelectedValue(システム日付の年.toDateString());
         List<KeyValueDataSource> ddlChoteiKijunM = setdataSourceM();
         div.getDdlChoteiKijunM().setDataSource(ddlChoteiKijunM);
         div.getDdlChoteiKijunM().setSelectedValue(システム日付の月);
-        List<KeyValueDataSource> ddlJukyuKijunY = setdataSourceY(システム日付の年, 当初年度の年);
+        List<KeyValueDataSource> ddlJukyuKijunY = setdataSourceY(調定年度の年, 当初年度の年);
         div.getDdlJukyuKijunY().setDataSource(ddlJukyuKijunY);
         List<KeyValueDataSource> ddlJukyuKijunM = setdataSourceM();
         div.getDdlJukyuKijunM().setDataSource(ddlJukyuKijunM);
         div.getDdlJukyuKijunM().setSelectedValue(システム日付の月);
         div.getRadChushutsuJoken().setSelectedKey(NUM_1);
-        onChange_radChushutsuJoken(調定年度);
+        onChange_radChushutsuJoken(日付関連_調定年度, 日付関連_当初年度);
         年齢_生年月日の選択状態();
     }
 
     /**
      * onChange_radChushutsuJokenのメソッドます。
      *
-     * @param 調定年度 RDate
+     * @param 日付関連_調定年度 RString
+     * @param 日付関連_当初年度 RString
      * @return ResponseData ShotokuDankaibetsuShunoritsuIchiranDiv
      */
-    public ResponseData<ShotokuDankaibetsuShunoritsuIchiranDiv> onChange_radChushutsuJoken(RDate 調定年度) {
+    public ResponseData<ShotokuDankaibetsuShunoritsuIchiranDiv> onChange_radChushutsuJoken(RString 日付関連_調定年度, RString 日付関連_当初年度) {
         if (div.getRadChushutsuJoken().getSelectedKey().equals(NUM_1)) {
             div.getDdlJukyuKijunY().setDisabled(true);
             div.getDdlJukyuKijunM().setDisabled(true);
@@ -120,16 +122,15 @@ public class ShotokuDankaibetsuShunoritsuIchiranHandler {
             div.getDdlJukyuKijunM().setLabelRText(RString.EMPTY);
             return ResponseData.of(div).respond();
         }
-        RYear システム日付の年 = RDate.getNowDate().getYear();
-        RString 日付関連_当初年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_当初年度, 基準日, SubGyomuCode.DBB介護賦課);
-        RYear 当初年度の年 = new RDate(日付関連_当初年度.toString()).getYear();
+        RYear 調定年度の年 = new RYear(日付関連_調定年度);
+        RYear 当初年度の年 = new RYear(日付関連_当初年度);
         div.getDdlJukyuKijunY().setDisabled(false);
         div.getDdlJukyuKijunM().setDisabled(false);
-        List<KeyValueDataSource> ddlJukyuKijunY = setdataSourceY(システム日付の年, 当初年度の年);
+        List<KeyValueDataSource> ddlJukyuKijunY = setdataSourceY(調定年度の年, 当初年度の年);
         div.getDdlJukyuKijunY().setDataSource(ddlJukyuKijunY);
         List<KeyValueDataSource> ddlJukyuKijunM = setdataSourceM();
         div.getDdlJukyuKijunM().setDataSource(ddlJukyuKijunM);
-        div.getDdlJukyuKijunY().setSelectedValue(調定年度.getYear().toDateString());
+        div.getDdlJukyuKijunY().setSelectedValue(調定年度の年.toDateString());
         if (div.getRadChushutsuJoken().getSelectedKey().equals(NUM_2)) {
             div.getDdlJukyuKijunM().setLabelRText(月時点の認定者);
             return ResponseData.of(div).respond();
@@ -276,14 +277,14 @@ public class ShotokuDankaibetsuShunoritsuIchiranHandler {
         return dataSourceList;
     }
 
-    private List<KeyValueDataSource> setdataSourceY(RYear システム日付の年, RYear 当初年度の年) {
+    private List<KeyValueDataSource> setdataSourceY(RYear MaxYear, RYear MinYear) {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
-        while (当初年度の年.isBeforeOrEquals(システム日付の年)) {
-            RString key = システム日付の年.toDateString();
-            RString value = システム日付の年.toDateString();
+        while (MinYear.isBeforeOrEquals(MaxYear)) {
+            RString key = MaxYear.toDateString();
+            RString value = MaxYear.toDateString();
             KeyValueDataSource dateSource = new KeyValueDataSource(key, value);
             dataSourceList.add(dateSource);
-            システム日付の年 = システム日付の年.minusYear(1);
+            MaxYear = MaxYear.minusYear(1);
         }
         return dataSourceList;
     }
