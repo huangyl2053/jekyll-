@@ -126,7 +126,7 @@ public class JigyoKogakuKetteiTsuchishoYijiAriEditor implements IJigyoKogakuKett
         source.uketsukeYMD = new RString(帳票情報.get受付年月日().toString());
         source.ketteiYMD = new RString(帳票情報.get決定年月日().toString());
         source.honninShiharaiGaku = new RString(帳票情報.get本人支払額().toString());
-        source.taishoYM = new RString(帳票情報.get対象年月().toString());
+        source.taishoYM = 帳票情報.get対象年月().toDateString();
         source.kyufuShu1 = 帳票情報.get給付の種類();
         source.kyufuShu2 = 帳票情報.get給付の種類();
         source.kyufuShu3 = 帳票情報.get給付の種類();
