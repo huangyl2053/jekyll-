@@ -9,6 +9,9 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
  *
  * @reamsid_L DBB-5660-040 liuyang
  */
+@SuppressWarnings("PMD.UnusedPrivateField")
+@lombok.Getter
+@lombok.Setter
 public class DBZ100001AtenaSealSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
@@ -769,5 +772,6 @@ public class DBZ100001AtenaSealSource implements IReportSource {
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
+    public int index;
 // </editor-fold>
 }

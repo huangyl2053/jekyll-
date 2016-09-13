@@ -23,14 +23,15 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 public class JuryoIninJigyoshaIchiranBodyEditor implements IJuryoIninJigyoshaIchiranEditor {
 
     private final KaigoJuryoininKeiyakuJigyoshaIchirahyoEntity 帳票出力対象データ;
-    private static final int DATA_20 = new Integer("20");
-    private static final int DATA_39 = new Integer("39");
+    private static final int DATA_20 = 20;
+    private static final int DATA_39 = 39;
 
     /**
      * コンストラクタです
      *
      * @param 帳票出力対象データ KaigoJuryoininKeiyakuJigyoshaIchirahyoEntity
      */
+
     public JuryoIninJigyoshaIchiranBodyEditor(
             KaigoJuryoininKeiyakuJigyoshaIchirahyoEntity 帳票出力対象データ) {
         this.帳票出力対象データ = 帳票出力対象データ;

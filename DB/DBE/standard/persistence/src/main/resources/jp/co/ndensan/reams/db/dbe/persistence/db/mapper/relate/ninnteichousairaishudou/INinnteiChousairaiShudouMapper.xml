@@ -286,7 +286,7 @@
         
     </select>
     <select resultOrdered="true" id="select認定調査票_概況調査" resultMap="resultMap_select認定調査依頼情報"
-              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
+              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninnteichousairaishudou.NinnteiChousairaiShudouParameter"            fetchSize="500">
             SELECT 
                   DISTINCT
                   A."shinseishoKanriNo"
@@ -358,7 +358,7 @@
              AND A."logicalDeletedFlag" = FALSE
       </select>
        <select resultOrdered="true" id="select認定調査票差異チェック票" resultMap="resultMap_select認定調査依頼情報"
-              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
+              parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninnteichousairaishudou.NinnteiChousairaiShudouParameter"            fetchSize="500">
             SELECT 
                   DISTINCT
                   A."hihokenshaNo"

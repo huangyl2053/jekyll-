@@ -62,7 +62,6 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class FutanGendogakuNinteiShinseishoHakko extends BatchProcessBase<FutanGendogakuNinteiShinseishoHakkoEntity> {
 
-    private static final RString JOBNO_NAME = new RString("【ジョブ番号】");
     private static final RString HAKKONICHI = new RString("【発行日】");
     private static final RString SHUTSURYOKUJUN = new RString("【出力順】");
     private static final RString なし = new RString("なし");
@@ -90,6 +89,8 @@ public class FutanGendogakuNinteiShinseishoHakko extends BatchProcessBase<FutanG
     private RString 出力順;
     private List<RString> 通知書定型文;
     private HokenshaList hokenshaList;
+    private boolean is旧措置者;
+    private boolean isNot旧措置者;
     private int i = 0;
 
     @Override
@@ -182,29 +183,31 @@ public class FutanGendogakuNinteiShinseishoHakko extends BatchProcessBase<FutanG
                     kojin.get住所().get住所(),
                     kojin.get連絡先１().value(),
                     郵便番号,
-                    電話番号,
                     事業者住所,
                     事業者名称,
+                    電話番号,
                     new RString(i++)
             );
             TokuteiFutangendogakuShinseishoReport report = TokuteiFutangendogakuShinseishoReport.createFrom(item);
             report.writeBy(sourceWriter);
+            is旧措置者 = true;
         } else {
             FutangendogakuNinteiShinseishoBodyItem bodyItem = new FutangendogakuNinteiShinseishoBodyItem(
-                    get認証者(),
+                    通知書定型文.get(1),
                     kojin.get名称().getKana().value(),
                     entity.get被保険者番号().value(),
                     kojin.get名称().getName().value(),
-                    get被保険者生年月日(kojin),
                     kojin.get性別().getName().getShortJapanese(),
+                    get被保険者生年月日(kojin),
+                    kojin.get連絡先１().value(),
                     kojin.get住所().get郵便番号().getEditedYubinNo(),
                     kojin.get住所().get住所(),
-                    kojin.get連絡先１().value(),
-                    通知書定型文.get(1),
-                    通知書定型文.get(2)
+                    通知書定型文.get(2),
+                    get認証者()
             );
             FutangendogakuNinteiShinseishoReport report = FutangendogakuNinteiShinseishoReport.createReport(bodyItem);
             report.writeBy(reportSourceWriter);
+            isNot旧措置者 = true;
         }
     }
 
@@ -215,7 +218,6 @@ public class FutanGendogakuNinteiShinseishoHakko extends BatchProcessBase<FutanG
 
     private void バッチ出力条件リストの出力() {
         RStringBuilder builder = new RStringBuilder();
-        builder.append(JOBNO_NAME);
         builder.append(RString.HALF_SPACE);
         builder.append(JobContextHolder.getJobId());
         RString ジョブ番号 = builder.toRString();
@@ -231,11 +233,13 @@ public class FutanGendogakuNinteiShinseishoHakko extends BatchProcessBase<FutanG
         builder.append(SHUTSURYOKUJUN);
         builder.append(出力順);
         出力条件.add(builder.toRString());
-        ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
-                processParamter.get帳票ID().value(), 導入団体コード, 市町村名, ジョブ番号,
-                get帳票名(), 出力ページ数, csv出力有無, csvファイル名, 出力条件);
-        IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(item);
-        printer.print();
+        for (RString 帳票名 : get帳票名()) {
+            ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
+                    processParamter.get帳票ID().value(), 導入団体コード, 市町村名, ジョブ番号,
+                    帳票名, 出力ページ数, csv出力有無, csvファイル名, 出力条件);
+            IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(item);
+            printer.print();
+        }
     }
 
     private RString get被保険者生年月日(IKojin kojin) {
@@ -247,23 +251,26 @@ public class FutanGendogakuNinteiShinseishoHakko extends BatchProcessBase<FutanG
     }
 
     private RString get認証者() {
+        RDate 発行日 = RDate.getNowDate();
+        if (!processParamter.get発行日().isEmpty()) {
+            発行日 = new RDate(
+                    processParamter.get発行日().getYearValue(),
+                    processParamter.get発行日().getMonthValue(),
+                    processParamter.get発行日().getDayValue());
+        }
         return NinshoshaSourceBuilderFactory.createInstance(
                 ninshosha,
                 association,
                 reportSourceWriter.getImageFolderPath(),
-                new RDate(
-                        processParamter.get発行日().getYearValue(),
-                        processParamter.get発行日().getMonthValue(),
-                        processParamter.get発行日().getDayValue()))
+                発行日)
                 .buildSource().ninshoshaYakushokuMei;
     }
 
-    private RString get帳票名() {
-        if (processParamter.get帳票ID().equals(ID)) {
-            return ReportIdDBD.DBD800001.getReportName();
-        } else {
-            return ReportIdDBD.DBD800004.getReportName();
-        }
+    private List<RString> get帳票名() {
+        List<RString> 帳票名List = new ArrayList<>();
+        帳票名List.add(ReportIdDBD.DBD800001.getReportName());
+        帳票名List.add(ReportIdDBD.DBD800004.getReportName());
+        return 帳票名List;
     }
 
     private RString get保険者番号(FutanGendogakuNinteiShinseishoHakkoEntity entity) {

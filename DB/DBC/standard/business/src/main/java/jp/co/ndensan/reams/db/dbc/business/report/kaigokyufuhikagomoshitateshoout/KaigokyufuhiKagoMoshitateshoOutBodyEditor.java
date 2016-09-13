@@ -16,8 +16,10 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  *
@@ -59,7 +61,7 @@ public class KaigokyufuhiKagoMoshitateshoOutBodyEditor implements IKaigokyufuhiK
         source.listUpper_4 = 帳票出力対象データ.getDbWT1731Entity().getHiHokenshaNo().getColumnValue();
         source.listUpper_5 = 帳票出力対象データ.getDbWT1001Entity().getKanaMeisho();
 
-        source.listLower_1 = 帳票出力対象データ.getDbWT1001Entity().getKanaMeisho();
+        source.listLower_1 = 帳票出力対象データ.getDbWT1001Entity().getMeisho();
         source.listUpper_6 = doパターン54(帳票出力対象データ.getDbWT1731Entity().getServiceTeikyoYM());
         source.listUpper_7 = 帳票出力対象データ.getDbWT1731Entity().getMoshitateYMD().wareki()
                 .eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
@@ -83,7 +85,7 @@ public class KaigokyufuhiKagoMoshitateshoOutBodyEditor implements IKaigokyufuhiK
         source.listUpper_15 = getColumnValue(帳票出力対象データ.getDbWT1001Entity().getShichosonCode());
         if (合計出力flag) {
             source.gokeiKensuTitle = 合計件数;
-            source.gokeiKensu = new RString(件数).concat(漢字_件);
+            source.gokeiKensu = doカンマ編集(new Decimal(件数)).concat(漢字_件);
         }
         連番++;
         return source;
@@ -99,6 +101,13 @@ public class KaigokyufuhiKagoMoshitateshoOutBodyEditor implements IKaigokyufuhiK
     private RString getColumnValue(IDbColumnMappable entity) {
         if (null != entity) {
             return entity.getColumnValue();
+        }
+        return RString.EMPTY;
+    }
+
+    private RString doカンマ編集(Decimal decimal) {
+        if (null != decimal) {
+            return DecimalFormatter.toコンマ区切りRString(decimal, 0);
         }
         return RString.EMPTY;
     }

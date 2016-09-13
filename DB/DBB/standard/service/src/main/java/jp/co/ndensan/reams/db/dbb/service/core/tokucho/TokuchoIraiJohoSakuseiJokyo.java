@@ -39,6 +39,7 @@ public class TokuchoIraiJohoSakuseiJokyo {
     private static final RString 連番_前年度2月捕捉 = new RString("0002");
     private static final RString 連番_前年度12月捕捉 = new RString("0001");
     private static final RString 連番 = new RString("0006");
+    private static final RString 処理枝番 = new RString("0001");
 
     /**
      * コンストラクタです
@@ -94,7 +95,7 @@ public class TokuchoIraiJohoSakuseiJokyo {
         FlexibleYear 調定年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
                 RDate.getNowDate(), SubGyomuCode.DBB介護賦課).toString());
         List<ShoriDateKanri> 処理状況 = new ArrayList<>();
-        List<DbT7022ShoriDateKanriEntity> 処理状況の情報 = dac.select処理状況の情報(調定年度, 処理名, 年度内連番);
+        List<DbT7022ShoriDateKanriEntity> 処理状況の情報 = dac.selectBySomeKeys(SubGyomuCode.DBB介護賦課, 処理名, 処理枝番, 調定年度, 年度内連番);
         for (DbT7022ShoriDateKanriEntity entity : 処理状況の情報) {
             処理状況.add(new ShoriDateKanri(entity));
         }
@@ -109,7 +110,10 @@ public class TokuchoIraiJohoSakuseiJokyo {
     public RString get最新処理の捕捉月() {
         FlexibleYear 調定年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
                 RDate.getNowDate(), SubGyomuCode.DBB介護賦課).toString());
-        DbT7022ShoriDateKanriEntity entity = dac.get特徴捕捉月(調定年度);
+        List<RString> 処理名リスト = new ArrayList<>();
+        処理名リスト.add(ShoriName.特徴依頼情報作成.get名称());
+        処理名リスト.add(ShoriName.特徴異動情報作成.get名称());
+        DbT7022ShoriDateKanriEntity entity = dac.select最新の基準日(調定年度, 処理名リスト);
         if (entity == null) {
             throw new ApplicationException(UrErrorMessages.対象データなし.getMessage().evaluate());
         }
@@ -158,7 +162,7 @@ public class TokuchoIraiJohoSakuseiJokyo {
         FlexibleYear 調定年度 = FlexibleDate.getNowDate().getYear();
         List<ShoriDateKanri> 処理状況 = new ArrayList<>();
         List<DbT7022ShoriDateKanriEntity> 処理状況の情報
-                = dac.select処理状況の情報(調定年度, ShoriName.依頼金額計算.get名称(), 連番);
+                = dac.selectBySomeKeys(SubGyomuCode.DBB介護賦課, ShoriName.依頼金額計算.get名称(), 処理枝番, 調定年度, 連番);
         for (DbT7022ShoriDateKanriEntity entity : 処理状況の情報) {
             処理状況.add(new ShoriDateKanri(entity));
         }
@@ -173,7 +177,9 @@ public class TokuchoIraiJohoSakuseiJokyo {
      */
     public List<ShoriDateKanri> find依頼金額計算処理状況リスト(FlexibleYear 調定年度) {
         List<ShoriDateKanri> 処理状況 = new ArrayList<>();
-        List<DbT7022ShoriDateKanriEntity> 処理状況の情報 = dac.get依頼金額計算状況(調定年度);
+        List<RString> 処理名リスト = new ArrayList<>();
+        処理名リスト.add(ShoriName.依頼金額計算.get名称());
+        List<DbT7022ShoriDateKanriEntity> 処理状況の情報 = dac.select処理状況(調定年度, 処理名リスト, SubGyomuCode.DBB介護賦課);
         for (DbT7022ShoriDateKanriEntity entity : 処理状況の情報) {
             処理状況.add(new ShoriDateKanri(entity));
         }

@@ -61,12 +61,11 @@ public class PrtTokuchoDoteiIchiranhyoProcess extends BatchProcessBase<Tokubetsu
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private RString eucFilePath;
     private FileSpoolManager manager;
-    private final RString rseId = new RString("DBB200018_TokubetsuChoshuDoteiMiDoteiIchiran");
     private final RString csvファイル名 = new RString("TokubetsuChoshuDoteiIchiran.csv");
     private final RString csvOutFlag = new RString("有り");
     private static final RString TITLE_処理年度 = new RString("【処理年度】");
     private static final RString TITLE_捕捉月 = new RString("【捕捉月】");
-    private static final RString TITLE_特別徴収開始月 = new RString("【開始月】");
+    private static final RString TITLE_特別徴収開始月 = new RString("【特別徴収開始月】");
     private static final RString TITLE_出力対象 = new RString("【出力対象】");
     private static final RString STOP = new RString("、");
     private static final RString 定数_0 = new RString("0");
@@ -132,11 +131,11 @@ public class PrtTokuchoDoteiIchiranhyoProcess extends BatchProcessBase<Tokubetsu
         eucCsvWriter.close();
         manager.spool(eucFilePath);
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
-                rseId,
+                ReportIdDBB.DBB200018.getReportId().value(),
                 導入団体クラス.getLasdecCode_().value(),
                 導入団体クラス.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
-                ReportIdDBB.DBB200031.getReportName(),
+                ReportIdDBB.DBB200018.getReportName(),
                 reportSourceWriter.pageCount().value() == 0 ? 定数_1 : new RString(reportSourceWriter.pageCount().value()),
                 csvOutFlag,
                 csvファイル名,
@@ -193,7 +192,7 @@ public class PrtTokuchoDoteiIchiranhyoProcess extends BatchProcessBase<Tokubetsu
                 entity.getKanjiJusho()
         );
         TokubetsuChoshuDoteiIchiranReport report = new TokubetsuChoshuDoteiIchiranReport(
-                導入団体クラス, null, null, target, null);
+                導入団体クラス, null, null, target, parameter.get特別徴収開始月());
         report.writeBy(reportSourceWriter);
     }
 

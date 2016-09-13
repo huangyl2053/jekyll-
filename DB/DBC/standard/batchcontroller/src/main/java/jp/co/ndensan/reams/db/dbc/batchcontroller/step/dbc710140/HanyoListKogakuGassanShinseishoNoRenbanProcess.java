@@ -236,17 +236,29 @@ public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcess
         builder.append(抽出対象者);
         出力条件.add(builder.toRString());
         builder = get保険者名();
-        出力条件.add(builder.toRString());
+        if (builder != null) {
+            出力条件.add(builder.toRString());
+        }
         builder = get抽出区分();
-        出力条件.add(builder.toRString());
+        if (builder != null) {
+            出力条件.add(builder.toRString());
+        }
         builder = get対象年度();
-        出力条件.add(builder.toRString());
+        if (builder != null) {
+            出力条件.add(builder.toRString());
+        }
         builder = get申請年月日();
-        出力条件.add(builder.toRString());
+        if (builder != null) {
+            出力条件.add(builder.toRString());
+        }
         builder = get支給申請書整理番号();
-        出力条件.add(builder.toRString());
+        if (builder != null) {
+            出力条件.add(builder.toRString());
+        }
         builder = get送付年月();
-        出力条件.add(builder.toRString());
+        if (builder != null) {
+            出力条件.add(builder.toRString());
+        }
 
         return 出力条件;
     }
@@ -255,9 +267,9 @@ public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcess
         RStringBuilder builder = new RStringBuilder();
         builder.append(抽出区分);
         if (parameter.get抽出区分() == null || parameter.get抽出区分().isEmpty()) {
-            return builder;
+            return null;
         }
-        builder.append(Kaigogassan_ChushutsuKubun.toValue(parameter.get抽出区分()));
+        builder.append(Kaigogassan_ChushutsuKubun.toValue(parameter.get抽出区分()).get名称());
         return builder;
     }
 
@@ -266,7 +278,7 @@ public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcess
         builder.append(保険者);
         if (parameter.get保険者コード() == null || parameter.get保険者コード().isEmpty()
                 || すべて.equals(parameter.get保険者コード())) {
-            return builder;
+            return null;
         }
         builder.append(AssociationFinderFactory.createInstance().getAssociation(new LasdecCode(parameter.get保険者コード())));
         return builder;
@@ -285,7 +297,7 @@ public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcess
             return builder.append(ITEM).append(dataToRString(parameter.get申請年月日To()));
         }
 
-        return builder;
+        return null;
     }
 
     private RStringBuilder get支給申請書整理番号() {
@@ -293,14 +305,14 @@ public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcess
         builder.append(支給申請書整理番号);
         if (parameter.get支給申請書整理番号From() != null && !parameter.get支給申請書整理番号From().isEmpty()
                 && parameter.get支給申請書整理番号To() != null && !parameter.get支給申請書整理番号To().isEmpty()) {
-            builder.append(parameter.get支給申請書整理番号From()).append(ITEM)
+            return builder.append(parameter.get支給申請書整理番号From()).append(ITEM)
                     .append(parameter.get支給申請書整理番号To());
         } else if (parameter.get支給申請書整理番号To() == null || parameter.get支給申請書整理番号To().isEmpty()) {
-            builder.append(parameter.get支給申請書整理番号From()).append(ITEM);
+            return builder.append(parameter.get支給申請書整理番号From()).append(ITEM);
         } else if (parameter.get支給申請書整理番号From() == null || parameter.get支給申請書整理番号From().isEmpty()) {
-            builder.append(ITEM).append(parameter.get支給申請書整理番号To());
+            return builder.append(ITEM).append(parameter.get支給申請書整理番号To());
         }
-        return builder;
+        return null;
     }
 
     private RStringBuilder get送付年月() {
@@ -308,22 +320,22 @@ public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcess
         builder.append(送付年月);
         if (parameter.get送付年月From() != null && !parameter.get送付年月From().isEmpty()
                 && parameter.get送付年月To() != null && !parameter.get送付年月To().isEmpty()) {
-            builder.append(monthToRString(parameter.get送付年月From())).append(ITEM)
+            return builder.append(monthToRString(parameter.get送付年月From())).append(ITEM)
                     .append(monthToRString(parameter.get送付年月To()));
         } else if (parameter.get送付年月To() == null || parameter.get送付年月To().isEmpty()) {
-            builder.append(monthToRString(parameter.get送付年月From())).append(ITEM);
-        } else if (parameter.get送付年月To() == null || parameter.get送付年月To().isEmpty()) {
-            builder.append(ITEM).append(monthToRString(parameter.get送付年月To()));
+            return builder.append(monthToRString(parameter.get送付年月From())).append(ITEM);
+        } else if (parameter.get送付年月From() == null || parameter.get送付年月From().isEmpty()) {
+            return builder.append(ITEM).append(monthToRString(parameter.get送付年月To()));
         }
-        return builder;
+        return null;
     }
 
     private RStringBuilder get対象年度() {
         RStringBuilder builder = new RStringBuilder();
         builder.append(対象年度);
         if (parameter.get対象年度() != null && !parameter.get対象年度().isEmpty()) {
-            builder.append(DateConverter.getWarekiYear(new RYear(parameter.get対象年度().toString())));
+            return builder.append(DateConverter.getWarekiYear(new RYear(parameter.get対象年度().toString())));
         }
-        return builder;
+        return null;
     }
 }

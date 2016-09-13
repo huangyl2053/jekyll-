@@ -5,10 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.fukajohotoroku;
 
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003KibetsuEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.DbT2002FukaJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.FukaJohoTorokuRelateEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003KibetsuEntity;
 
 /**
  * 賦課の情報登録ビジネスクラスです。
@@ -25,11 +24,10 @@ public class FukaJohoInsertResult {
      */
     public DbT2003KibetsuEntity getDbT2003Entity(FukaJohoTorokuRelateEntity entity) {
         DbT2003KibetsuEntity dbt2003 = new DbT2003KibetsuEntity();
-        DbT2002FukaJohoTempTableEntity 賦課情報一時Entity = entity.get賦課情報一時Entity();
-        dbt2003.setChoteiNendo(賦課情報一時Entity.getChoteiNendo());
-        dbt2003.setFukaNendo(賦課情報一時Entity.getFukaNendo());
-        dbt2003.setTsuchishoNo(賦課情報一時Entity.getTsuchishoNo());
-        dbt2003.setRirekiNo(賦課情報一時Entity.getRirekiNo());
+        dbt2003.setChoteiNendo(entity.getChoteiNendo());
+        dbt2003.setFukaNendo(entity.getFukaNendo());
+        dbt2003.setTsuchishoNo(entity.getTsuchishoNo());
+        dbt2003.setRirekiNo(entity.getRirekiNo());
         dbt2003.setKi(entity.get期());
         dbt2003.setChoteiId(entity.get調定ID());
         return dbt2003;
@@ -38,10 +36,10 @@ public class FukaJohoInsertResult {
     /**
      * 介護賦課テーブルのエンティティの設定メッソドです。
      *
-     * @param entity DbT2002FukaJohoTempTableEntity
+     * @param entity FukaJohoTorokuRelateEntity
      * @return DbT2002FukaEntity
      */
-    public DbT2002FukaEntity getDbT2002Entity(DbT2002FukaJohoTempTableEntity entity) {
+    public DbT2002FukaEntity getDbT2002Entity(FukaJohoTorokuRelateEntity entity) {
         DbT2002FukaEntity dbT2002 = new DbT2002FukaEntity();
         dbT2002.setChoteiNendo(entity.getChoteiNendo());
         dbT2002.setFukaNendo(entity.getFukaNendo());

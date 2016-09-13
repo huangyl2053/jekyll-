@@ -70,6 +70,7 @@ public class JuryoininKeiyakuShoninKakuninshoProcessParameter implements IBatchP
         this.文書番号 = 文書番号;
         this.改頁出力順 = 改頁出力順;
         this.市町村コード = 市町村コード;
+        this.市町村名称 = 市町村名称;
         this.処理日時 = 処理日時;
     }
 

@@ -333,7 +333,7 @@ public class HanyoListParamHandler {
 
     private RString nullToEmpty(RDate obj) {
         if (obj != null) {
-            return obj.toDateString();
+            return obj.getYearMonth().toDateString();
         }
         return RString.EMPTY;
     }

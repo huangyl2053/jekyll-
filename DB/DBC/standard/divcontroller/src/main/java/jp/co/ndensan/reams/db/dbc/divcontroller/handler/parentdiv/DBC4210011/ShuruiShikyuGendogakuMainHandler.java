@@ -16,9 +16,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC4210011.dgSh
 import jp.co.ndensan.reams.db.dbc.service.core.shuruishikyugendogakumain.ShuruiShikyuGendogakuMainFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.serviceshurui.ServiceCategoryShurui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
-import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -34,7 +31,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 public class ShuruiShikyuGendogakuMainHandler {
 
     private final ShuruiShikyuGendogakuMainDiv div;
-    private static final LockingKey 前排他ロックキー = new LockingKey("DBCShikyuGendoGakuTableDbT7111");
     private static final RString 種類支給限度額登録完了 = new RString("種類支給限度額の登録が完了しました。");
     private static final RString 更新 = new RString("btnUpdate");
     private static final RString 一 = new RString("1");
@@ -57,16 +53,13 @@ public class ShuruiShikyuGendogakuMainHandler {
      */
     public List<ServiceShuruiShikyuGendoGaku> initialize() {
         Map<Object, List> map = ShuruiShikyuGendogakuMainFinder.createInstance().get種類支給限度額();
-        if (!get前排他(前排他ロックキー)) {
-            throw new PessimisticLockingException();
-        } else {
-            div.getShuruiShikyuGendogakuIchiran().setDisabled(false);
-            if (map.get(ShuruiShikyuGendogakuMainResult.class) != null
-                    && !map.get(ShuruiShikyuGendogakuMainResult.class).isEmpty()) {
-                set初期化状態(map.get(ShuruiShikyuGendogakuMainResult.class));
-            }
-            return map.get(ServiceShuruiShikyuGendoGaku.class);
+
+        div.getShuruiShikyuGendogakuIchiran().setDisabled(false);
+        if (map.get(ShuruiShikyuGendogakuMainResult.class) != null
+                && !map.get(ShuruiShikyuGendogakuMainResult.class).isEmpty()) {
+            set初期化状態(map.get(ShuruiShikyuGendogakuMainResult.class));
         }
+        return map.get(ServiceShuruiShikyuGendoGaku.class);
     }
 
     /**
@@ -292,10 +285,22 @@ public class ShuruiShikyuGendogakuMainHandler {
         if (div.getShuruiShikyuGendogakuShosai().getTxtYoshien1ShikyuGendogaku().getValue() != null) {
             update修正する(shikyuGendoGakuList, KubunShikyuGendogakuYokaigoJotaiKubun.要支援1.getコード(),
                     div.getShuruiShikyuGendogakuShosai().getTxtYoshien1ShikyuGendogaku().getValue());
+        } else {
+            dgShikyuGendogaku_Row row = div.getShuruiShikyuGendogakuIchiran().getDgShikyuGendogaku().getClickedItem();
+            deleteEntity(shikyuGendoGakuList,
+                    new FlexibleYearMonth(row.getTekiyoKaishiYM().getValue().getYearMonth().toDateString()),
+                    new ServiceShuruiCode(row.getServiceShuruiCode()),
+                    KubunShikyuGendogakuYokaigoJotaiKubun.要支援1.getコード(), 1);
         }
         if (div.getShuruiShikyuGendogakuShosai().getTxtYoshien2ShikyuGendogaku().getValue() != null) {
             update修正する(shikyuGendoGakuList, KubunShikyuGendogakuYokaigoJotaiKubun.要支援2.getコード(),
                     div.getShuruiShikyuGendogakuShosai().getTxtYoshien2ShikyuGendogaku().getValue());
+        } else {
+            dgShikyuGendogaku_Row row = div.getShuruiShikyuGendogakuIchiran().getDgShikyuGendogaku().getClickedItem();
+            deleteEntity(shikyuGendoGakuList,
+                    new FlexibleYearMonth(row.getTekiyoKaishiYM().getValue().getYearMonth().toDateString()),
+                    new ServiceShuruiCode(row.getServiceShuruiCode()),
+                    KubunShikyuGendogakuYokaigoJotaiKubun.要支援2.getコード(), 1);
         }
         if (div.getShuruiShikyuGendogakuShosai().getTxtYokaigo1ShikyuGendogaku().getValue() != null) {
             update修正する(shikyuGendoGakuList, KubunShikyuGendogakuYokaigoJotaiKubun.要介護1.getコード(),
@@ -462,7 +467,7 @@ public class ShuruiShikyuGendogakuMainHandler {
         div.getShuruiShikyuGendogakuShosai().setDisabled(true);
         div.getShuruiShikyuGendogakuShosai().setVisible(true);
         div.getShuruiShikyuGendogakuShosai().getDdlServiceShurui().setDisabled(true);
-        div.getShuruiShikyuGendogakuShosai().getDdlServiceShurui().setSelectedKey(new RString(Integer.toString(ゼロ)));
+        div.getShuruiShikyuGendogakuShosai().getDdlServiceShurui().setSelectedIndex(ゼロ);
         div.getShuruiShikyuGendogakuShosai().getTxtTekiyoKikanRange().setFromDisabled(true);
         div.getShuruiShikyuGendogakuShosai().getTxtTekiyoKikanRange().clearFromValue();
         div.getShuruiShikyuGendogakuShosai().getTxtTekiyoKikanRange().setToDisabled(true);
@@ -532,9 +537,5 @@ public class ShuruiShikyuGendogakuMainHandler {
                             div.getShuruiShikyuGendogakuShosai().getTxtTekiyoKikanRange().getFromValue().getYearMonth().toDateString()),
                     支給限度単位数);
         }
-    }
-
-    private boolean get前排他(LockingKey 前排他ロックキー) {
-        return RealInitialLocker.tryGetLock(前排他ロックキー);
     }
 }

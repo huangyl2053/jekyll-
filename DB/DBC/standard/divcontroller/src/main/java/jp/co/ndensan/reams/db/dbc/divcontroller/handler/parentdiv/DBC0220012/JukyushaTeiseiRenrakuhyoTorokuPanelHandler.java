@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
@@ -41,6 +42,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
     private static final RString 修正モード_ONE = new RString("修正モード1");
     private static final RString 修正モード_TWO = new RString("修正モード2");
     private static final RString 修正モード_THREE = new RString("修正モード3");
+    private static final RString 照会モード = new RString("照会モード");
     private static final RString 被保番号 = new RString("被保険者番号");
 
     /**
@@ -109,6 +111,12 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
             } else if (処理モード.equals(修正モード_THREE)) {
                 //TODO QA1429
                 受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.added();
+            } else if (処理モード.equals(照会モード)) {
+                受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.createBuilderForEdit().
+                        set送付年月(new FlexibleYearMonth(RDate.getNowDate().toDateString())).build();
+                受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.createBuilderForEdit().
+                        set訂正年月日(FlexibleDate.getNowDate()).build();
+                受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.modified();
             }
             return JukyushaTeiseiRenrakuhyoTorokuManager.createInstance().
                     insert受給者異動送付(受給者訂正連絡票登録画面Div);

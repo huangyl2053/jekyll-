@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5130011.Heik
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC5130011.HeikinRiyoGakuTokeihyoHandler;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 平均利用額統計表のDivControllerクラスです。
@@ -27,20 +26,6 @@ public class HeikinRiyoGakuTokeihyo {
      */
     public ResponseData<HeikinRiyoGakuTokeihyoDiv> onLoad(HeikinRiyoGakuTokeihyoDiv div) {
         div.getChikuShitei().getCcdChikuShichosonSelect().initialize();
-        return ResponseData.of(div).respond();
-    }
-
-    /**
-     * 対象年月Change時のイベントメソッドです。
-     *
-     * @param div HeikinRiyoGakuTokeihyoDiv
-     * @return ResponseData<HeikinRiyoGakuTokeihyoDiv>
-     */
-    public ResponseData<HeikinRiyoGakuTokeihyoDiv> onChange_radTaishoYM(HeikinRiyoGakuTokeihyoDiv div) {
-        if (new RString("1").equals(div.getRadTaishoYM().getSelectedKey())) {
-            div.getTxtTaishoYmRange().clearFromValue();
-            div.getTxtTaishoYmRange().clearToValue();
-        }
         return ResponseData.of(div).respond();
     }
 

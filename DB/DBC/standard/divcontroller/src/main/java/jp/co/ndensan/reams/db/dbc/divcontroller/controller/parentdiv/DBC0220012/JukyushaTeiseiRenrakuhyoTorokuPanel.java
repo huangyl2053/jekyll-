@@ -54,7 +54,6 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
     private static final RString THREE = new RString("3");
     private static final RString T_O_Z = new RString("E00210");
     private static final RString T_S_Z = new RString("E00360");
-    private static final RString 既存の異動日 = new RString("既存の異動日");
     private static final RString 履歴番号 = new RString("履歴番号");
     private static final RString 起動 = new RString("1");
     private static final RString 停止 = new RString("0");
@@ -289,7 +288,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
                         DbzErrorMessages.理由付き登録不可.getMessage().replace(修正済.toString()));
             } else {
                 登録件数 = getHandler(div).save受給者訂正連絡票(
-                        受給者訂正連絡票登録画面Div, 修正モード_TWO);
+                        受給者訂正連絡票登録画面Div, 照会モード);
             }
         }
         return 登録件数;

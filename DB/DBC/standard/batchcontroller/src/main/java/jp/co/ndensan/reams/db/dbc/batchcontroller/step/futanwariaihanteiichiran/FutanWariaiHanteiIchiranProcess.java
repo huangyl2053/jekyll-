@@ -86,6 +86,8 @@ public class FutanWariaiHanteiIchiranProcess extends BatchKeyBreakBase<Futanwari
     private static final RString RSTRING = new RString("0003");
     private static final RString RSTRING_TWO = new RString("2");
     private static final RString RSTRING_THREE = new RString("3");
+    private static final RString 年度STRING = new RString("年度");
+    private static final RString 以前 = new RString("以前");
     private RString eucFilePath;
     private FileSpoolManager manager;
     private RString 共通_文字コード;
@@ -151,6 +153,8 @@ public class FutanWariaiHanteiIchiranProcess extends BatchKeyBreakBase<Futanwari
             resultListEntity.setErrorKubun(RiyoshaFutanWaritaiHantei_ErrorKubun.負担割合判定一覧作成.getコード());
             if (!RSTRING_THREE.equals(processParameter.get処理区分())) {
                 resultListEntity.setBiko(パターン107(processParameter.get対象年度()));
+            } else {
+                resultListEntity.setBiko(パターン107(processParameter.get対象年度()).concat(以前));
             }
             tempResultListDbWriter.insert(resultListEntity);
         }
@@ -184,7 +188,7 @@ public class FutanWariaiHanteiIchiranProcess extends BatchKeyBreakBase<Futanwari
     private RString パターン107(FlexibleYear year) {
         RString wareki = RString.EMPTY;
         if (year != null) {
-            wareki = year.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
+            wareki = year.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(年度STRING);
         }
         return wareki;
     }
@@ -222,7 +226,9 @@ public class FutanWariaiHanteiIchiranProcess extends BatchKeyBreakBase<Futanwari
         FutanWariaiHanteiIchiranReport report = new FutanWariaiHanteiIchiranReport(processParameter, entity);
         report.writeBy(reportSourceWriter);
         eucCsvWriter.writeLine(new FutanWariaiHanteiIchiranCsvEntityEditor(entity, processParameter).edit());
-        PersonalData personalData = getPersonalData(entity);
-        personalDataList.add(personalData);
+        if (entity.get判定対象者識別コード() != null) {
+            PersonalData personalData = getPersonalData(entity);
+            personalDataList.add(personalData);
+        }
     }
 }

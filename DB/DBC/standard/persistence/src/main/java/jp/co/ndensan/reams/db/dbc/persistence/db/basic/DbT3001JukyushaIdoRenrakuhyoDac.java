@@ -294,6 +294,7 @@ public class DbT3001JukyushaIdoRenrakuhyoDac implements ISaveable<DbT3001Jukyush
                                 lt(異動年月日, idoYMD),
                                 eq(logicalDeletedFlag, false))).
                 groupBy(idoYMD).
+                order(by(DbT3001JukyushaIdoRenrakuhyo.idoYMD, Order.DESC)).
                 toObject(DbT3001JukyushaIdoRenrakuhyoEntity.class);
     }
 

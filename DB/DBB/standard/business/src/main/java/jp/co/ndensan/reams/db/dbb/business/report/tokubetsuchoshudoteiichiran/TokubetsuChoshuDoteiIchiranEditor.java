@@ -134,7 +134,7 @@ public class TokubetsuChoshuDoteiIchiranEditor implements ITokubetsuChoshuDoteiI
     }
 
     private void set年金番号と年金コード(TokubetsuChoshuDoteiIchiranSource source) {
-        if (RString.isNullOrEmpty(特徴開始月)) {
+        if (特徴対象一覧.isFlag()) {
             source.listList1_2 = this.特徴対象一覧.getKisoNenkinNo();
             source.listList2_1 = this.特徴対象一覧.getNenkinCode();
             return;

@@ -41,6 +41,7 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.or;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.substr;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -61,6 +62,7 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
     private static final RString メッセージ_被保険者番号 = new RString("被保険者番号");
     private static final RString メッセージ_市町村コード = new RString("市町村コード");
     private static final RString メッセージ_申請書管理番号 = new RString("申請書管理番号");
+    private static final RString メッセージ_世帯基準日 = new RString("世帯基準日");
     @InjectSession
     private SqlSession session;
 
@@ -759,25 +761,41 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
     /**
      * 受給者台帳を取得します。
      *
-     * @param 被保険者番号 被保険者番号
-     * @param 適用日 適用日
-     * @param 有効無効区分 有効無効区分
+     * @param 被保険者番号 HihokenshaNo
+     * @param 世帯基準日 FlexibleDate
+     * @param 有効無効区分 RString
+     * @param 履歴番号 RString
+     * @param 被保険者番号Flag boolean
      * @return List<DbT4001JukyushaDaichoEntity>
      * @throws NullPointerException 引数被保険者番号がnullの場合
      */
     @Transaction
-    public List<DbT4001JukyushaDaichoEntity> select受給者台帳By受給者の判定(HihokenshaNo 被保険者番号, FlexibleDate 適用日,
-            RString 有効無効区分) throws NullPointerException {
+    public List<DbT4001JukyushaDaichoEntity> get受給(HihokenshaNo 被保険者番号,
+            FlexibleDate 世帯基準日,
+            RString 有効無効区分,
+            RString 履歴番号,
+            boolean 被保険者番号Flag) throws NullPointerException {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
+        requireNonNull(世帯基準日, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_世帯基準日.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        if (被保険者番号Flag) {
+            return accessor.select().
+                    table(DbT4001JukyushaDaicho.class).
+                    where(and(eq(hihokenshaNo, 被保険者番号),
+                                    or(and(
+                                                    leq(ninteiYukoKikanKaishiYMD, 世帯基準日),
+                                                    leq(世帯基準日, ninteiYukoKikanShuryoYMD),
+                                                    eq(yukoMukoKubun, 有効無効区分)),
+                                            eq(rirekiNo, 履歴番号)))).
+                    toList(DbT4001JukyushaDaichoEntity.class);
+        }
         return accessor.select().
                 table(DbT4001JukyushaDaicho.class).
-                where(and(
-                                eq(hihokenshaNo, 被保険者番号),
-                                leq(ninteiYukoKikanKaishiYMD, 適用日),
-                                leq(適用日, ninteiYukoKikanShuryoYMD),
-                                eq(logicalDeletedFlag, false),
-                                eq(yukoMukoKubun, 有効無効区分))).
+                where(or(and(
+                                        leq(ninteiYukoKikanKaishiYMD, 世帯基準日),
+                                        leq(世帯基準日, ninteiYukoKikanShuryoYMD),
+                                        eq(yukoMukoKubun, 有効無効区分)),
+                                eq(rirekiNo, 履歴番号))).
                 toList(DbT4001JukyushaDaichoEntity.class);
     }
 }

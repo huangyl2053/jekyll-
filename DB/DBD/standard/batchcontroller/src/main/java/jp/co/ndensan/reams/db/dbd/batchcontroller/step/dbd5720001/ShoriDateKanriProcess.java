@@ -8,15 +8,14 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd5720001;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd5720001.JyukyushaDaichoIdoCheckListProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5720001.KoseiShichosonMasterEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5720001.ShoriDateKanriEntity;
+import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.shoridatekanri.IShoriDateKanriMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.auth.valueobject.AuthorityItem;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -34,9 +33,13 @@ public class ShoriDateKanriProcess extends BatchProcessBase<KoseiShichosonMaster
     private JyukyushaDaichoIdoCheckListProcessParameter parameter;
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate."
             + "koseishichosonmaster.IKoseiShichosonMasterMapper.get市町村識別ID");
+    private IShoriDateKanriMapper mapper;
+    private int index = 0;
 
-    @BatchWriter
-    private BatchPermanentTableWriter<DbT7022ShoriDateKanriEntity> dbT7022EntityWriter;
+    @Override
+    protected void initialize() {
+        mapper = getMapper(IShoriDateKanriMapper.class);
+    }
 
     @Override
     protected IBatchReader createReader() {
@@ -45,16 +48,16 @@ public class ShoriDateKanriProcess extends BatchProcessBase<KoseiShichosonMaster
 
     @Override
     protected void createWriter() {
-        dbT7022EntityWriter = new BatchPermanentTableWriter(DbT7022ShoriDateKanriEntity.class);
     }
 
     @Override
     protected void process(KoseiShichosonMasterEntity enity) {
-        dbT7022EntityWriter.update(update処理日付管理マスタ(enity));
+        index++;
+        mapper.updDbt7022ShoriDateKanri(update処理日付管理マスタ(enity, index));
     }
 
-    private DbT7022ShoriDateKanriEntity update処理日付管理マスタ(KoseiShichosonMasterEntity entity) {
-        DbT7022ShoriDateKanriEntity dbT7022entity = new DbT7022ShoriDateKanriEntity();
+    private ShoriDateKanriEntity update処理日付管理マスタ(KoseiShichosonMasterEntity entity, int index) {
+        ShoriDateKanriEntity dbT7022entity = new ShoriDateKanriEntity();
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         if (市町村セキュリティ情報 != null) {
             RString 導入形態コード = 市町村セキュリティ情報.get導入形態コード().getColumnValue();
@@ -86,10 +89,15 @@ public class ShoriDateKanriProcess extends BatchProcessBase<KoseiShichosonMaster
         } else {
             dbT7022entity.setTaishoKaishiTimestamp(new YMDHMS(RDate.getNowDate(), parameter.get今回抽出開始時分秒()));
         }
+
+        dbT7022entity.setUpdateCount(index);
+        dbT7022entity.setLastUpdateTimestamp(RDate.getNowDateTime());
+        dbT7022entity.setLastUpdateReamsLoginId(ControlDataHolder.getUserId());
+
         return dbT7022entity;
     }
 
-    private void setShoriEdaban(DbT7022ShoriDateKanriEntity dbT7022entity,
+    private void setShoriEdaban(ShoriDateKanriEntity dbT7022entity,
             KoseiShichosonMasterEntity entity,
             RString 導入形態コード) {
         if (導入形態コード.equals(new RString("120"))) {

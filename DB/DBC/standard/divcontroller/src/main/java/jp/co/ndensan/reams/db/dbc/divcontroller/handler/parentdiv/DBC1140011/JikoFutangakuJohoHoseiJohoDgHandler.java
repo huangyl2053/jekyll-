@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.kogaku.KogakuGassanJikofutangaku
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Idokubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Over70_ShotokuKbn;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ShotokuKbn;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1140011.DBC1140011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1140011.JikoFutangakuHoseiDetailDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1140011.JikoFutangakuJohoHoseiJohoDgDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1140011.dgJohoIchiran_Row;
@@ -37,6 +38,8 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  * 高額合算自己負担額情報補正(単)_情報一覧のHandlerクラスです。
@@ -69,6 +72,7 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
     private static final RString CODE_003 = new RString("003");
     private static final RString 名称_被保険者番号 = new RString("被保険者番号");
     private static final RString KEY_ZERO = new RString("key0");
+    private static final RString 入力前の状態に戻る = new RString("btnReturn");
 
     /**
      * コンストラクタです。
@@ -286,8 +290,13 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
     private RString set時間(RString 時, RString 分) {
         RString jikan = 時 == null ? RString.EMPTY : 時;
         RString fun = 分 == null ? RString.EMPTY : 分;
-        RString 時間 = jikan.concat(fun);
-        return RString.isNullOrEmpty(時間) ? null : 時間;
+        if (jikan.isEmpty() || fun.isEmpty()) {
+            RString 時間 = jikan.concat(fun);
+            return RString.isNullOrEmpty(時間) ? null : 時間;
+        } else {
+            RString 時間 = jikan.padZeroToLeft(2).concat(fun.padZeroToLeft(2));
+            return RString.isNullOrEmpty(時間) ? null : 時間;
+        }
     }
 
     /**
@@ -713,6 +722,16 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
             }
         } else {
             div.getJikoFutangakuHoseiDetail().getChkSoufuTaishougai().setDisabled(true);
+            div.getChkSaisouKBN().setDisabled(true);
+        }
+    }
+
+    /**
+     * 保存する設定です。
+     */
+    public void set履歴Dgdの選択ボタンする() {
+        if (DBC1140011StateName.自己負担額管理情報入力.getName().equals(ResponseHolder.getState())) {
+            CommonButtonHolder.setVisibleByCommonButtonFieldName(入力前の状態に戻る, false);
         }
     }
 }

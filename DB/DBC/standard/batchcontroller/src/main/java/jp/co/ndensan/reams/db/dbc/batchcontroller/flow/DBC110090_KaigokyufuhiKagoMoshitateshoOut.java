@@ -65,7 +65,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class DBC110090_KaigokyufuhiKagoMoshitateshoOut extends BatchFlowBase<DBC110090_KaigokyufuhiKagoMoshitateshoOutParameter> {
 
     private static final String 送付対象データ取得 = "getKagoMoshitateList";
-    private static final String 旧被保険者番号への変換 = "changeHihokenshaNo";
     private static final String 保険者番号取込 = "getHihokenshaNo";
     private static final String 被保険者_宛名情報取得 = "getHihokenshaAtena";
     private static final String エラー登録 = "doError";
@@ -82,8 +81,6 @@ public class DBC110090_KaigokyufuhiKagoMoshitateshoOut extends BatchFlowBase<DBC
 
     private static final String 国保連インタフェース管理更新 = "doInterfaceKanriKousin";
     private static final String 処理結果リスト作成 = "doShoriKekkaListSakusei";
-    private static final RString 旧被保険者番号への変換_ID = new RString("HokenshaKyufujissekiOutChangeHihokenshaNoFlow");
-    private static final RString 宛名情報取得_ID = new RString("HokenshaKyufujissekiOutHihokenshaAtenaFlow");
     private static final RString MSG_導入形態コード = new RString("導入形態コード");
 
     private static final String 被保険者番号変換対象データの取得 = "getHihokenshaNoDataInformation";

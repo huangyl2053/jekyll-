@@ -28,7 +28,7 @@ public class KogakugassanSoufuFairuSakuseiCsvEntity {
     private RString 保険者番号;
     @CsvField(order = 40, name = "保険者名")
     private RString 保険者名;
-    @CsvField(order = 50, name = "No")
+    @CsvField(order = 50, name = "№")
     private RString no;
     @CsvField(order = 60, name = "対象年度")
     private RString 対象年度;

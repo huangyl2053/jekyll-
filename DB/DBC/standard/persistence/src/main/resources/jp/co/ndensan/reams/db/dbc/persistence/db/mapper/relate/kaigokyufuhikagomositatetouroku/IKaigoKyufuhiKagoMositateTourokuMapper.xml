@@ -87,7 +87,7 @@
             AND substring(介護事業者A."yukoKaishiYMD", 0, 7) <![CDATA[<=]]> 給付実績情報.サービス提供年月 
             AND CASE 
               WHEN 介護事業者A."yukoShuryoYMD" IS NOT NULL 
-              THEN 給付実績情報.サービス提供年月 <![CDATA[<=]]> substring(介護事業者A."yukoKaishiYMD", 0, 7) 
+              THEN 給付実績情報.サービス提供年月 <![CDATA[<=]]> substring(介護事業者A."yukoShuryoYMD", 0, 7) 
               END 
             AND NOT EXISTS ( 
               SELECT

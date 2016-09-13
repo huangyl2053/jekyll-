@@ -14,9 +14,11 @@ import jp.co.ndensan.reams.db.dbb.business.core.shichosonkado.ShichosonJohoResul
 import jp.co.ndensan.reams.db.dbb.business.core.shichosonkado.ShichosonJoho;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.shichoson.ShoriHizukeKanriMaster;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -95,8 +97,8 @@ public class ShotokuJohoChushutsuRenkeiKoiki {
             DbT7022ShoriDateKanriEntity 処理日付管理異動情報Entity;
             kanriMasterEntity = new ShoriHizukeKanriMaster();
             if (遷移区分_0.equals(遷移区分)) {
-                処理日付管理異動情報Entity = 処理日付管理Dac.select処理日付管理マスタ_所得情報抽出連携当初(
-                        年度, entity.get市町村コード(), entity.get市町村識別ID());
+                処理日付管理異動情報Entity = 処理日付管理Dac.selectByKey(SubGyomuCode.DBB介護賦課, entity.get市町村コード(),
+                        ShoriName.当初所得引出.get名称(), new RString("00").concat(entity.get市町村識別ID()), 年度, new RString("0001"));
                 if (処理日付管理異動情報Entity == null) {
                     kanriMasterEntity.set処理状態(処理済);
                     kanriMasterEntity.set表示用処理状態(正常終了);

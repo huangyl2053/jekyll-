@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbb.business.report.dbbmn35003.dbb200004;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.business.report.tsuchisho.notsu.EditedKariSanteiTsuchiShoKyotsu;
 import jp.co.ndensan.reams.db.dbb.entity.report.dbbmn35003.dbb200004.TokuChoHeijunkaKariSanteigakuHakkoIchiranReportSource;
-import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
+import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.kingaku.IKingakuFormatter;
 import jp.co.ndensan.reams.ur.urz.business.core.kingaku.KingakuFormatter;
@@ -88,7 +88,7 @@ public class TokuChoHeijunkaKariSanteigakuHakkoIchiranForBatchReport
         RString 改頁４ = RString.EMPTY;
         RString 改頁５ = RString.EMPTY;
 
-        Map<Integer, ISetSortItem> 改頁Map = ReportUtil.get改頁項目Map(outputOrder);
+        Map<Integer, ISetSortItem> 改頁Map = ChohyoUtil.get改頁項目Map(outputOrder);
         if (改頁Map.get(INDEX_1) != null) {
             改頁１ = 改頁Map.get(INDEX_1).get項目名();
         }
@@ -105,7 +105,7 @@ public class TokuChoHeijunkaKariSanteigakuHakkoIchiranForBatchReport
             改頁５ = 改頁Map.get(INDEX_5).get項目名();
         }
 
-        Map<Integer, ISetSortItem> 出力順Map = ReportUtil.get出力順項目Map(outputOrder);
+        Map<Integer, ISetSortItem> 出力順Map = ChohyoUtil.get出力順項目Map(outputOrder);
         if (出力順Map.get(INDEX_1) != null) {
             出力順１ = 出力順Map.get(INDEX_1).get項目名();
         }

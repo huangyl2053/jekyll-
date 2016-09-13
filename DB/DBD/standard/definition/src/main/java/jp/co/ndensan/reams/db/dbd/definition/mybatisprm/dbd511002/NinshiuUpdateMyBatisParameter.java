@@ -26,6 +26,8 @@ public class NinshiuUpdateMyBatisParameter implements IMyBatisParameter {
     private final FlexibleDate 抽出対象期間_終了;
     private final FlexibleDate 通知書発行日;
     private final List<RString> 出力順;
+    private RString 出力順FLAG = new RString("");
+    private static final RString コンマ = new RString(",");
 
     /**
      *
@@ -39,6 +41,17 @@ public class NinshiuUpdateMyBatisParameter implements IMyBatisParameter {
     public NinshiuUpdateMyBatisParameter(List<RString> 申請書管理番号リスト, RString 出力対象区分,
             FlexibleDate 抽出対象期間_開始, FlexibleDate 抽出対象期間_終了,
             FlexibleDate 通知書発行日, List<RString> 出力順) {
+        if (null != 出力順 && 出力順.size() > 0) {
+            int count = 0;
+            for (RString str : 申請書管理番号リスト) {
+                if (count == 0) {
+                    出力順FLAG = str;
+                    count++;
+                } else {
+                    出力順FLAG = 出力順FLAG.concat(コンマ).concat(str);
+                }
+            }
+        }
         this.申請書管理番号リスト = 申請書管理番号リスト;
         this.出力対象区分 = 出力対象区分;
         this.抽出対象期間_開始 = 抽出対象期間_開始;

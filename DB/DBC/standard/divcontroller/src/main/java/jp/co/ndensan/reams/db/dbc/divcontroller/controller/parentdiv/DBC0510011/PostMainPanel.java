@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0510011;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc130010.DBC130010_KokuhoShikakuIdoInParameter;
@@ -34,13 +33,13 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class PostMainPanel {
 
-    RString メニューID;
+    private RString メニューID;
     private static final RString DBCMN82001 = new RString("DBCMN82001");
     private static final RString DBCMN82002 = new RString("DBCMN82002");
     private static final RString 国保資格異動情報取込 = new RString("国保資格異動情報取込");
     private static final RString 後期資格異動情報取込 = new RString("後期資格異動情報取込");
-    private static final RString string_1 = new RString("1");
-    private static final RString string_2 = new RString("2");
+    private static final RString STRING_1 = new RString("1");
+    private static final RString STRING_2 = new RString("2");
 
     /**
      * 画面初期化のメソッドます。
@@ -50,7 +49,7 @@ public class PostMainPanel {
      */
     public ResponseData<PostMainPanelDiv> onLoad(PostMainPanelDiv div) {
         メニューID = ResponseHolder.getMenuID();
-        DBC0510011StateName stateName = DBC0510011StateName.NoChange;;
+        DBC0510011StateName stateName = DBC0510011StateName.NoChange;
         if (メニューID.equals(DBCMN82001)) {
             div.setTitle(国保資格異動情報取込);
             stateName = DBC0510011StateName.国保;
@@ -62,6 +61,17 @@ public class PostMainPanel {
         RString 場合 = getHandler(div).initialize();
         ViewStateHolder.put(ViewStateKeys.場合, 場合);
         return ResponseData.of(div).setState(stateName);
+    }
+
+    /**
+     * onOkClose_bth事件です。
+     *
+     * @param div JikoFutangakuJohoHoseiDiv
+     * @return ResponseData
+     */
+    public ResponseData<PostMainPanelDiv> onOkClose_bth(PostMainPanelDiv div) {
+        getHandler(div).onOkClosebth();
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -85,10 +95,9 @@ public class PostMainPanel {
      *
      * @param div PostMainPanelDiv
      * @return ResponseData
-     * @throws java.io.IOException
      */
     public ResponseData<DBC130020_KokikoreishaShikakuIdoInParameter> onClick_btnLast(
-            PostMainPanelDiv div) throws IOException {
+            PostMainPanelDiv div) {
         getCheck(div).validateCheck();
         DBC130020_KokikoreishaShikakuIdoInParameter param = setBatchParameter(div);
         return ResponseData.of(param).respond();
@@ -98,10 +107,10 @@ public class PostMainPanel {
         DBC130020_KokikoreishaShikakuIdoInParameter parameter = new DBC130020_KokikoreishaShikakuIdoInParameter();
         if (div.getTxtRenkekeishiki().isVisible() && !div.getTxtRenkekeishiki().getValue().isEmpty()
                 && !div.getTxtRenkekeishiki().getValue().isNull()) {
-            parameter.setInsurerDistinction(string_1);
+            parameter.setInsurerDistinction(STRING_1);
             parameter.setShoriShichoson(null);
         } else {
-            parameter.setInsurerDistinction(string_2);
+            parameter.setInsurerDistinction(STRING_2);
             List<RString> listresult = new ArrayList();
             for (dgShichoson_Row row : div.getDgShichoson().getSelectedItems()) {
                 listresult.add(row.getShichosonShikibetuID());
@@ -125,10 +134,9 @@ public class PostMainPanel {
      *
      * @param div PostMainPanelDiv
      * @return ResponseData
-     * @throws java.io.IOException
      */
     public ResponseData<DBC130010_KokuhoShikakuIdoInParameter> onClick_btnKoku(
-            PostMainPanelDiv div) throws IOException {
+            PostMainPanelDiv div) {
         getCheck(div).validateCheck();
         DBC130010_KokuhoShikakuIdoInParameter param = setBatchParameters(div);
         return ResponseData.of(param).respond();
@@ -138,10 +146,10 @@ public class PostMainPanel {
         DBC130010_KokuhoShikakuIdoInParameter parameter = new DBC130010_KokuhoShikakuIdoInParameter();
         if (div.getTxtRenkekeishiki().isVisible() && !div.getTxtRenkekeishiki().getValue().isEmpty()
                 && !div.getTxtRenkekeishiki().getValue().isNull()) {
-            parameter.setInsurerDistinction(string_1);
+            parameter.setInsurerDistinction(STRING_1);
             parameter.setShoriShichoson(null);
         } else {
-            parameter.setInsurerDistinction(string_2);
+            parameter.setInsurerDistinction(STRING_2);
             List<RString> listresult = new ArrayList();
             for (dgShichoson_Row row : div.getDgShichoson().getSelectedItems()) {
                 listresult.add(row.getShichosonShikibetuID());

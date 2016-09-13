@@ -41,14 +41,16 @@ public class ShoriKekkaKakuninListProcess extends BatchProcessBase<DbWT1801Shori
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString CSVMEISHO = new RString("DBU900002_ShoriKekkaKakuninList.csv");
-    private static final RString 被保険者台帳データがありません = new RString("被保険者台帳データがありません");
-    private static final RString 宛名データがありません = new RString("宛名データがありません");
-    private static final RString 対象データがありません = new RString("対象データがありません");
+    private static final RString 被保険者台帳データがありません = new RString("被保険者台帳データがありません。");
+    private static final RString 宛名データがありません = new RString("宛名データがありません。");
+    private static final RString 対象データがありません = new RString("対象データがありません。");
     private static final RString 年 = new RString("年");
     private static final RString 時 = new RString("時");
     private static final RString 分 = new RString("分");
     private static final RString 秒 = new RString("秒");
-    private static final RString HALFMONTH = new RString("#0");
+    private static final RString EMPTY = new RString(" ");
+    private static final RString 作成 = new RString("作成");
+    private static final RString HALFMONTH = new RString("00");
     private int count = 1;
     private RString eucFilePath;
     private FileSpoolManager manager;
@@ -76,7 +78,6 @@ public class ShoriKekkaKakuninListProcess extends BatchProcessBase<DbWT1801Shori
 
     @Override
     protected void process(DbWT1801ShoriKekkaKakuninListEntity entity) {
-        count++;
         if (count == 1) {
             eucCsvWriter.writeLine(new ShoriKekkaKakuninListEntity(
                     edit処理日(RDateTime.now()),
@@ -94,6 +95,7 @@ public class ShoriKekkaKakuninListProcess extends BatchProcessBase<DbWT1801Shori
                     entity.getBiko()
             ));
         }
+        count++;
 
     }
 
@@ -142,7 +144,8 @@ public class ShoriKekkaKakuninListProcess extends BatchProcessBase<DbWT1801Shori
                             .fillType(FillType.BLANK).getMonthDay())
                     .concat(new RString(new Decimal(dateTime.getHour()).toString(HALFMONTH.toString()))).concat(時)
                     .concat(new RString(new Decimal(dateTime.getMinute()).toString(HALFMONTH.toString()))).concat(分)
-                    .concat(new RString(new Decimal(dateTime.getSecond()).toString(HALFMONTH.toString()))).concat(秒);
+                    .concat(new RString(new Decimal(dateTime.getSecond()).toString(HALFMONTH.toString()))).concat(秒)
+                    .concat(EMPTY).concat(作成);
         }
         return wareki;
     }

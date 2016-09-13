@@ -70,12 +70,16 @@ public class HeikinRiyoGakuTokeihyoHandler {
         RString 開始年月 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("kaishiYM"));
         if (!RString.isNullOrEmpty(開始年月)) {
             div.getTxtTaishoYmRange().setFromValue(new RDate(開始年月.toString()));
+        } else {
+            div.getTxtTaishoYmRange().clearFromValue();
         }
 
         RString 終了年月 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("shuryoYM"));
 
         if (!RString.isNullOrEmpty(終了年月)) {
             div.getTxtTaishoYmRange().setToValue(new RDate(終了年月.toString()));
+        } else {
+            div.getTxtTaishoYmRange().clearToValue();
         }
 
         RString 地区指定 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("chikuShitei"));

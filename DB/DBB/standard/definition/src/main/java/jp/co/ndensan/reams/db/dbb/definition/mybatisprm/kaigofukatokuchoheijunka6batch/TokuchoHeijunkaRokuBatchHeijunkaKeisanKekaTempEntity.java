@@ -8,20 +8,29 @@ package jp.co.ndensan.reams.db.dbb.definition.mybatisprm.kaigofukatokuchoheijunk
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 
 /**
  * 平準化計算結果TempEntity
  *
- * @reamsid_L DBB-0810-020 yebangqiang
+ * @reamsid_L DBB-0810-010 yebangqiang
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public final class TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity implements IMyBatisParameter {
+public final class TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity
+        extends DbTableEntityBase<TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity>
+        implements IDbAccessable, IMyBatisParameter {
 
+    @TempTableColumnOrder(1)
     private Decimal 変更後特徴期別額_１期;
+    @TempTableColumnOrder(2)
     private Decimal 変更後特徴期別額_２期;
+    @TempTableColumnOrder(3)
     private Decimal 変更後特徴期別額_３期;
+    @TempTableColumnOrder(4)
     private TsuchishoNo 通知書番号;
 
     /**

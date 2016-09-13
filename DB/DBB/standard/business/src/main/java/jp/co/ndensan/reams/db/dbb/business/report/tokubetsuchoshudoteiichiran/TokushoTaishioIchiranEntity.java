@@ -101,6 +101,7 @@ public class TokushoTaishioIchiranEntity {
      * 住所
      */
     private RString jusho;
+    private boolean flag;
 
     /**
      * 特徴対象一覧エンティティクラスのコンストラクタです。
@@ -155,6 +156,7 @@ public class TokushoTaishioIchiranEntity {
         this.kanjiShimei = kanjiShimei;
         this.yubinNo = yubinNo;
         this.jusho = jusho;
+        flag = true;
     }
 
     /**
@@ -215,5 +217,6 @@ public class TokushoTaishioIchiranEntity {
         this.kanjiShimei = kanjiShimei;
         this.yubinNo = yubinNo;
         this.jusho = jusho;
+        flag = false;
     }
 }

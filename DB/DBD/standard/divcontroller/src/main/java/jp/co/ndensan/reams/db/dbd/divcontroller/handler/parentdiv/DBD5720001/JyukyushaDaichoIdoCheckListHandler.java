@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 public class JyukyushaDaichoIdoCheckListHandler {
 
     private final JyukyushaDaichoIdoCheckListDiv div;
+    private final RString rString = new RString("0:00:00");
 
     /**
      *
@@ -86,7 +87,7 @@ public class JyukyushaDaichoIdoCheckListHandler {
         parameter.set今回抽出開始年月日(div.getJhokenPancel().getTxtRangeKonkai().getFromDateValue());
         if (div.getJhokenPancel().getTxtRangeKonkai().getFromDateValue() != null
                 && div.getJhokenPancel().getTxtRangeKonkai().getFromTimeValue() == null) {
-            parameter.set今回抽出開始時分秒(new RTime(new RString("0:00:00")));
+            parameter.set今回抽出開始時分秒(new RTime(rString));
         } else {
             parameter.set今回抽出開始時分秒(div.getJhokenPancel().getTxtRangeKonkai().getFromTimeValue());
         }
@@ -94,13 +95,16 @@ public class JyukyushaDaichoIdoCheckListHandler {
 
         if (div.getJhokenPancel().getTxtRangeKonkai().getToDateValue() != null
                 && div.getJhokenPancel().getTxtRangeKonkai().getToTimeValue() == null) {
-            parameter.set今回抽出終了時分秒(new RTime(new RString("0:00:00")));
+            parameter.set今回抽出終了時分秒(new RTime(rString));
         } else {
             parameter.set今回抽出終了時分秒(div.getJhokenPancel().getTxtRangeKonkai().getToTimeValue());
         }
         parameter.set出力対象(div.getDdlShuturtokuTaisho().getSelectedValue());
+        if (div.getCcdShutsuryokujun().getSelected出力順() != null) {
+            parameter.set出力順ID(div.getCcdShutsuryokujun().getSelected出力順().get出力順ID());
+            parameter.set改頁出力順ID(Long.valueOf(div.getCcdShutsuryokujun().getSelected出力順().get改頁項目ID().toString()));
+        }
 
-        parameter.set出力順ID(div.getCcdShutsuryokujun().get出力順ID());
         return parameter;
     }
 

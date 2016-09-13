@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd710050;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.homon.HobetsuKubun;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.ChushutsuKomokuKubun;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.Kyakasha;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.SoshitsuKubun;
@@ -98,7 +99,6 @@ public class HanyoListHomonKaigoRiyoshaFutanGakuGengakuProcess extends BatchProc
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBD701005");
     private static final RString 住所地特例 = new RString("住特");
-    private static final RString 区分_0 = new RString("0");
     private static final RString 区分_1 = new RString("1");
     private static final RString 区分_2 = new RString("2");
     private static final RString 区分_3 = new RString("3");
@@ -107,8 +107,6 @@ public class HanyoListHomonKaigoRiyoshaFutanGakuGengakuProcess extends BatchProc
     private static final RString KIZYUNNICHI = new RString("基準日：");
     private static final RString NENLEIKIZYUNNICHI = new RString("年齢基準日:");
     private static final RString 直近のみ = new RString("対象データ：直近のみ");
-    private static final RString 申請者のみ = new RString("対象データ：申請者のみ");
-    private static final RString 直近_申請者のみ = new RString("対象データ：直近・申請者のみ");
     private static final RString CHIKI_1 = new RString("地区１");
     private static final RString CHIKI_2 = new RString("地区２");
     private static final RString CHIKI_3 = new RString("地区３");
@@ -146,15 +144,11 @@ public class HanyoListHomonKaigoRiyoshaFutanGakuGengakuProcess extends BatchProc
     private static final RString 履歴修正 = new RString("履歴修正　　　");
     private static final RString SHIKAKUSYUTOKU = new RString("資格取得前申請");
     private static final RString SHITEII = new RString("指定医");
-    private static final RString 介護保険施設 = new RString("11");
-    private static final RString 住所地特例対象施設 = new RString("12");
-    private static final RString 適用除外施設 = new RString("21");
     private static final RString SHINKI = new RString("新規");
     private static final RString HENKO = new RString("変更");
     private static final RString ZATEI = new RString("暫定");
-    private static final RString 却下 = new RString("却下");
-    private static final RString 承認 = new RString("承認");
     private static final RString 却下者 = new RString("却下者：");
+    private static final RString 法別区分 = new RString("法別区分：");
     private static final RString 喪失区分 = new RString("喪失区分：");
     private static final RString SAI = new RString("歳");
     private static final RString MYBATIS_SELECT_ID = new RString(
@@ -1050,6 +1044,9 @@ public class HanyoListHomonKaigoRiyoshaFutanGakuGengakuProcess extends BatchProc
                 }
             }
         }
+        if (!get対象データ().isNullOrEmpty()) {
+            出力条件.add(get対象データ());
+        }
         RString get特定対象データ = get特定対象データ(builder);
         if (!get特定対象データ.isNullOrEmpty()) {
             List<RString> builderList = get特定対象データ.substring(0, get特定対象データ.length() - 1).split(COMMA.toString());
@@ -1174,21 +1171,21 @@ public class HanyoListHomonKaigoRiyoshaFutanGakuGengakuProcess extends BatchProc
         return builder.toRString();
     }
 
-//    private RString get対象データ() {
-//        RStringBuilder builder = new RStringBuilder();
-//        if (processParamter.isChokindatacyusyutsu()) {
-//            if (processParamter.isShinseishadatacyushutsu()) {
-//                builder.append(直近_申請者のみ);
-//            } else {
-//                builder.append(直近のみ);
-//            }
-//        } else if (!processParamter.isChokindatacyusyutsu()
-//                && processParamter.isShinseishadatacyushutsu()) {
-//            builder.append(申請者のみ);
-//        }
-//        return builder.toRString();
-//    }
+    private RString get対象データ() {
+        RStringBuilder builder = new RStringBuilder();
+        if (processParamter.isChokindatacyusyutsu()) {
+            builder.append(直近のみ);
+        }
+        return builder.toRString();
+    }
+
     private RString get特定対象データ(RStringBuilder builder) {
+        if (!RString.isNullOrEmpty(processParamter.getHobetsukubun())
+                && !processParamter.getHobetsukubun().equals(HobetsuKubun.すべて.getコード())) {
+            builder.append(法別区分);
+            builder.append(HobetsuKubun.toValue(processParamter.getHobetsukubun()).get名称());
+            builder.append(COMMA);
+        }
         if (!RString.isNullOrEmpty(processParamter.getKyakasha())) {
             builder.append(却下者);
             builder.append(Kyakasha.toValue(processParamter.getKyakasha()).get名称());
@@ -1197,7 +1194,7 @@ public class HanyoListHomonKaigoRiyoshaFutanGakuGengakuProcess extends BatchProc
         if (!RString.isNullOrEmpty(processParamter.getSoshitsukubun())
                 && !SoshitsuKubun.資格判定なし.getコード().equals(processParamter.getSoshitsukubun())) {
             builder.append(喪失区分);
-            builder.append(SoshitsuKubun.toValue(processParamter.getKyakasha()).get名称());
+            builder.append(SoshitsuKubun.toValue(processParamter.getSoshitsukubun()).get名称());
             builder.append(COMMA);
         }
         return builder.toRString();

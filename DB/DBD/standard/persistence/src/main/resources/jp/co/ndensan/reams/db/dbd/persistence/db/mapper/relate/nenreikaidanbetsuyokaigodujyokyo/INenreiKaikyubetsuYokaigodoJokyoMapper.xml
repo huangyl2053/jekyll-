@@ -5,22 +5,8 @@
 
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.nenreikaidanbetsuyokaigodujyokyo.INenreiKaikyubetsuYokaigodoJokyoMapper">
     
-    <resultMap id="ResultMap_ToukeiNinzuEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd583001.ToukeiNinzuEntity" autoMapping="true">
-        <result property="取得条件" column="取得条件"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="自立人数" column="自立人数"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="経過介護人数" column="経過介護人数"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="要支援1人数" column="要支援1人数"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="要支援2人数" column="要支援2人数"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="要介護1人数" column="要介護1人数"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="要介護2人数" column="要介護2人数"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="要介護3人数" column="要介護3人数"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="要介護4人数" column="要介護4人数"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="要介護5人数" column="要介護5人数"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="合計" column="合計"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-    </resultMap>
     
-    
-    <select id="get人数" fetchSize="500" resultOrdered="true" resultMap="ResultMap_ToukeiNinzuEntity"
+    <select id="get人数" fetchSize="500" resultOrdered="true" resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd583001.ToukeiNinzuEntity"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd583001.NenreiKaikyubetsuYokaigodoJokyoMybatisParameter">
         (<include refid="select40歳To44歳人数の場合" />)
         UNION

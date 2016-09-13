@@ -76,7 +76,6 @@ public class FutanGendogakuOshiraseTsuchiHakko extends BatchProcessBase<FutanGen
     private ShinseishoHakkoProcessParameter processParamter;
     private static final ReportId ID = new ReportId("DBD100008_FutanGendogakuNinteiKoshinTsuchisho");
     private static final RString GENERICKEY = new RString("負担限度額認定更新のお知らせ通知書");
-    private static final RString JOBNO_NAME = new RString("【ジョブ番号】");
     private static final RString HAKKONICHI = new RString("【発行日】");
     private static final RString SHUTSURYOKUJUN = new RString("【出力順】");
     private static final RString なし = new RString("なし");
@@ -151,6 +150,13 @@ public class FutanGendogakuOshiraseTsuchiHakko extends BatchProcessBase<FutanGen
         IAtesaki atesaki = AtesakiFactory.createInstance(entity.get宛先());
         List<RString> 通知書定型文 = init通知書定型文(entity);
         set文書番号(entity);
+        RDate 発行日 = RDate.getNowDate();
+        if (!processParamter.get発行日().isEmpty()) {
+            発行日 = new RDate(
+                    processParamter.get発行日().getYearValue(),
+                    processParamter.get発行日().getMonthValue(),
+                    processParamter.get発行日().getDayValue());
+        }
         NinteiKoshinTsuchishoItem item = new NinteiKoshinTsuchishoItem(
                 null,
                 kojin,
@@ -158,10 +164,7 @@ public class FutanGendogakuOshiraseTsuchiHakko extends BatchProcessBase<FutanGen
                 new ChohyoSeigyoKyotsu(帳票制御共通),
                 帳票制御汎用,
                 association,
-                new RDate(
-                        processParamter.get発行日().getYearValue(),
-                        processParamter.get発行日().getMonthValue(),
-                        processParamter.get発行日().getDayValue()),
+                発行日,
                 文書番号,
                 通知書定型文,
                 processParamter.get帳票ID(),
@@ -179,7 +182,6 @@ public class FutanGendogakuOshiraseTsuchiHakko extends BatchProcessBase<FutanGen
 
     private void バッチ出力条件リストの出力() {
         RStringBuilder builder = new RStringBuilder();
-        builder.append(JOBNO_NAME);
         builder.append(RString.HALF_SPACE);
         builder.append(JobContextHolder.getJobId());
         RString ジョブ番号 = builder.toRString();

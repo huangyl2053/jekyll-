@@ -48,7 +48,7 @@ public class JikoFutangakushomeishoHeaderEditor implements IJikoFutangakushomeis
         }
 
         if (高額合算データ.get性別() != null) {
-            source.title = 高額合算データ.get性別().getName().getShortJapanese();
+            source.seibetsu = 高額合算データ.get性別().getName().getShortJapanese();
         }
         if (高額合算データ.get生年月日() != null) {
             source.birthYMD = getDate1(高額合算データ.get生年月日());

@@ -456,7 +456,15 @@ public enum ReportIdDBB {
     /**
      * 保険料納入通知書（仮算定）発行一覧表の帳票ID
      */
-    DBB200007(new ReportId("DBB200007_KariNonyuTsuchishoHakkoIchiran"), new RString("保険料納入通知書（仮算定）発行一覧表"));
+    DBB200007(new ReportId("DBB200007_KariNonyuTsuchishoHakkoIchiran"), new RString("保険料納入通知書（仮算定）発行一覧表")),
+    /**
+     * 宛名シール
+     */
+    DBZ100001(new ReportId("DBZ100001_AtenaSeal"), new RString("宛名シール")),
+    /**
+     * 特別徴収同定・未同定一覧
+     */
+    DBB200018(new ReportId("DBB200018_TokubetsuChoshuDoteiMiDoteiIchiran"), new RString("特別徴収同定・未同定一覧"));
 
     private final ReportId reportId;
     private final RString reportName;

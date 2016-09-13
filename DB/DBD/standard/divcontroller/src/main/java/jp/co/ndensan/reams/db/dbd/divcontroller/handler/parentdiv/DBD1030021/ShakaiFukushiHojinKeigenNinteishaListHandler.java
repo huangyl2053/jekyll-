@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1030021;
 
 import java.util.ArrayList;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBDBT00004.DBD200004_ShakaiFukushiHojinKeigenNinteishaBatchParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD203010.DBD203010_ShakaiFukushiHojinKeigenNinteishaListParameter;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.common.KyusochishaJukyushaKubun;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.HihokenshaKeizaiJokyo;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.JukyushaKubun2;
@@ -176,8 +176,8 @@ public class ShakaiFukushiHojinKeigenNinteishaListHandler {
      *
      * @return DBD200004_ShakaiFukushiHojinKeigenNinteishaBatchParameter
      */
-    public DBD200004_ShakaiFukushiHojinKeigenNinteishaBatchParameter createParameter() {
-        DBD200004_ShakaiFukushiHojinKeigenNinteishaBatchParameter batchParameter = new DBD200004_ShakaiFukushiHojinKeigenNinteishaBatchParameter();
+    public DBD203010_ShakaiFukushiHojinKeigenNinteishaListParameter createParameter() {
+        DBD203010_ShakaiFukushiHojinKeigenNinteishaListParameter batchParameter = new DBD203010_ShakaiFukushiHojinKeigenNinteishaListParameter();
         RString 対象リスト;
         RString 対象期間指定;
         FlexibleDate 対象年度の開始年月日 = new FlexibleDate("");
@@ -190,6 +190,7 @@ public class ShakaiFukushiHojinKeigenNinteishaListHandler {
         ArrayList<RString> 世帯非課税等 = new ArrayList<>();
         RString 抽出対象;
         ArrayList<RString> 出力設定 = new ArrayList<>();
+        long 出力順ID;
         long 改頁出力順ID;
         RString 帳票ID;
         FlexibleDate 課税判定等基準日;
@@ -240,7 +241,8 @@ public class ShakaiFukushiHojinKeigenNinteishaListHandler {
         } else {
             抽出対象 = ChushutsuTaisho.認定者のみ.getコード();
         }
-        改頁出力順ID = div.getCcdChohyoShuturyokujun().get出力順ID();
+        出力順ID = div.getCcdChohyoShuturyokujun().get出力順ID();
+        改頁出力順ID = div.getCcdChohyoShuturyokujun().getSelected出力順().get出力順ID();
         for (int i = 0; i < div.getChkShoriTaisho().getSelectedValues().size(); i++) {
             if (div.getChkShoriTaisho().getSelectedValues().get(i).equals(new RString("市町村民税非課税世帯"))) {
                 世帯非課税等.add(HihokenshaKeizaiJokyo.市町村民税非課税世帯.getコード());
@@ -283,6 +285,7 @@ public class ShakaiFukushiHojinKeigenNinteishaListHandler {
         batchParameter.set所得年度(所得年度);
         batchParameter.set抽出対象(抽出対象);
         batchParameter.set改頁出力順ID(改頁出力順ID);
+        batchParameter.set出力順ID(出力順ID);
         batchParameter.set旧措置者区分(旧措置者区分);
         batchParameter.set課税判定等基準日(課税判定等基準日);
         return batchParameter;

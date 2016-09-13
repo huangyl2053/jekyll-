@@ -482,7 +482,7 @@ public class JigoSakuseiMeisaiTouroku {
         if (予防管理情報 != null) {
             DbT3120YoboKeikakuJikoSakuseiKanriEntity entity = 予防管理情報.toEntity();
             entity.setState(EntityDataState.Deleted);
-            予防給付計画自己作成管理Dac.save(entity);
+            予防給付計画自己作成管理Dac.delete(entity);
         }
     }
 
@@ -547,7 +547,7 @@ public class JigoSakuseiMeisaiTouroku {
         if (居宅管理情報 != null) {
             DbT3119KyotakuKeikakuJikosakuseiKanriEntity entity = 居宅管理情報.toEntity();
             entity.setState(EntityDataState.Deleted);
-            居宅給付計画自己作成管理Dac.save(entity);
+            居宅給付計画自己作成管理Dac.delete(entity);
         }
     }
 

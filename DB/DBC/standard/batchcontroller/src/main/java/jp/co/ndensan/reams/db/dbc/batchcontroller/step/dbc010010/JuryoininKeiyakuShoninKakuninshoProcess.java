@@ -12,7 +12,6 @@ import jp.co.ndensan.reams.db.dbc.business.report.dbc100030.JyuryoItakuKeiyakuKa
 import jp.co.ndensan.reams.db.dbc.business.report.dbc200013.JuryoIninShoninKakuninshoIchiranReport;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc010010.JuryoininKeiyakuShoninKakuninshoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3078ShokanJuryoininKeiyakusha;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3078ShokanJuryoininKeiyakushaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc010010.BusinessEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc010010.JuryoininKeiyakuShoninKakuninshoEntity;
@@ -117,7 +116,7 @@ public class JuryoininKeiyakuShoninKakuninshoProcess extends BatchKeyBreakBase<J
         } else {
             proParameter.set改頁出力順(null);
         }
-        償還受領委任契約者 = new BatchPermanentTableWriter(DbT3078ShokanJuryoininKeiyakusha.class);
+        償還受領委任契約者 = new BatchPermanentTableWriter(DbT3078ShokanJuryoininKeiyakushaEntity.class);
         breakProcessCore = new JuryoininKeiyakuShoninKakuninshoProcessCore(出力順);
         ChohyoSeigyoHanyoManager 帳票制御汎用Manager = new ChohyoSeigyoHanyoManager();
         利用者向け帳票タイトル = get帳票制御汎用(帳票制御汎用Manager, 帳票制御汎用キー_帳票タイトル, 利用者向け帳票ID);

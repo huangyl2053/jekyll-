@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC150030;
 import java.util.List;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -33,9 +34,9 @@ public class DBC150030_ServicecodeRiyojokyoParameter extends BatchParameterBase 
     @BatchParameter(key = KEY_対象年月指定, name = "対象年月指定")
     private RString 対象年月指定;
     @BatchParameter(key = KEY_年月範囲開始, name = "年月範囲開始")
-    private RString 年月範囲開始;
+    private FlexibleYearMonth 年月範囲開始;
     @BatchParameter(key = KEY_年月範囲終了, name = "年月範囲終了")
-    private RString 年月範囲終了;
+    private FlexibleYearMonth 年月範囲終了;
     @BatchParameter(key = KEY_対象サービス種類, name = "対象サービス種類")
     private RString 対象サービス種類;
     @BatchParameter(key = KEY_サービス項目コードのまとめ方, name = "サービス項目コードのまとめ方")
@@ -45,8 +46,8 @@ public class DBC150030_ServicecodeRiyojokyoParameter extends BatchParameterBase 
     @BatchParameter(key = KEY_対象コードリスト, name = "対象コードリスト")
     private List<RString> 対象コードリスト;
     @BatchParameter(key = KEY_市町村情報, name = "市町村情報")
-    private List<RString> 市町村情報;
+    private KoseiShichosonInfo 市町村情報;
     @BatchParameter(key = KEY_旧市町村情報, name = "旧市町村情報")
-    private List<RString> 旧市町村情報;
+    private KoseiShichosonInfo 旧市町村情報;
 
 }

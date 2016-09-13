@@ -51,7 +51,6 @@ public class FutanGengaokuNinteiShinseishoHakkoIchiranSakusei extends BatchProce
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmen.shinseisho.hakko."
             + "IFutanGengaokuNinteiShinseishoHakkoIchiranSakuseiMapper.get出力対象者情報");
-    private static final RString JOBNO_NAME = new RString("【ジョブ番号】");
     private static final RString HAKKONICHI = new RString("【発行日】");
     private static final RString JIKOSAKUSEI = new RString("自己作成");
     private static final RString SHUTSURYOKUJUN = new RString("【出力順】");
@@ -116,7 +115,6 @@ public class FutanGengaokuNinteiShinseishoHakkoIchiranSakusei extends BatchProce
 
     private void バッチ出力条件リストの出力() {
         RStringBuilder builder = new RStringBuilder();
-        builder.append(JOBNO_NAME);
         builder.append(RString.HALF_SPACE);
         builder.append(JobContextHolder.getJobId());
         RString ジョブ番号 = builder.toRString();

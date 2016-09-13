@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.ServiceJigyoshaInputGui
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.ServiceShuruiJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dbz.definition.core.jigyoshashubetsu.JigyosyaType;
 import jp.co.ndensan.reams.db.dbz.definition.core.kaigojigyoshano.KaigoJigyoshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.servicechushutsukbn.ServiceChushutsuKbn;
 import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.JigyoshaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.jigyosha.JigyoshaInputGuideParameter;
@@ -294,7 +295,12 @@ public class JiGyoSyaHandler {
                     get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
             div.getTaishoJigyoshaKensaku().getDdlKennCode().setDataSource(get県コード());
             div.getTaishoJigyoshaKensaku().getDdlGunshiCode().setDataSource(get郡市コード(mode));
-            div.getTaishoJigyoshaKensaku().getDdlServiceShurui().setDataSource(getサービス種類());
+            if (ServiceChushutsuKbn.使用しない.getコード().equals(mode.getサービス種類抽出区分())) {
+                div.getTaishoJigyoshaKensaku().setReadOnly(true);
+            } else {
+                div.getTaishoJigyoshaKensaku().setReadOnly(false);
+                div.getTaishoJigyoshaKensaku().getDdlServiceShurui().setDataSource(getサービス種類(mode));
+            }
             div.getTaishoJigyoshaKensaku().getDdlJigyoshaKubun().setDataSource(get事業者区分());
             div.getTaishoJigyoshaKensaku().getKennsakuJyokenn().getDdlKennsakuKubun().setDataSource(get検索条件区分());
             div.getTaishoJigyoshaKensaku().getKennsakuJyokenn().getDdlKennsakuKubun().setSelectedKey(前方一致_コード);
@@ -507,12 +513,14 @@ public class JiGyoSyaHandler {
         return dataSource;
     }
 
-    private List<KeyValueDataSource> getサービス種類() {
+    private List<KeyValueDataSource> getサービス種類(JigyoshaMode mode) {
 
         JigyoshaInputGuideFinder jigyosha = new JigyoshaInputGuideFinder();
         List<KeyValueDataSource> dataSource = new ArrayList();
         List<RString> list = new ArrayList<>();
-        SearchResult<ServiceShuruiJigyoshaInputGuide> jigyoshaInputGuide = jigyosha.getServiceShuruiJigyoshaInputGuide(RDate.getNowDate().getYearMonth());
+        SearchResult<ServiceShuruiJigyoshaInputGuide> jigyoshaInputGuide = jigyosha.
+                getServiceShuruiJigyoshaInputGuide(RDate.getNowDate().getYearMonth(),
+                        mode.getサービス種類抽出区分(), mode.getサービス種類());
 
         if (!jigyoshaInputGuide.records().isEmpty()) {
 
@@ -520,7 +528,8 @@ public class JiGyoSyaHandler {
 
                 KeyValueDataSource KeyValue = new KeyValueDataSource();
                 KeyValue.setKey(entity.getサービス種類コード().value());
-                KeyValue.setValue(entity.getサービス種類略称());
+                KeyValue.setValue(entity.getサービス種類コード().value().
+                        concat(new RString("　")).concat(entity.getサービス種類略称()));
                 if (!list.contains(entity.getサービス種類コード().value())) {
                     dataSource.add(KeyValue);
                 }

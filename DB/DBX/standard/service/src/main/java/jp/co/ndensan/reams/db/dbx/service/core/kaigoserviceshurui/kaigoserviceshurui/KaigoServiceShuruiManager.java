@@ -37,6 +37,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class KaigoServiceShuruiManager {
 
     private static final RString 符号 = new RString(":");
+    private static final RString ZERO = new RString("00");
+    private static final RString すべて = new RString("すべて");
 
     private final MapperProvider mapperProvider;
     private final DbT7130KaigoServiceShuruiDac 介護サービス種類Dac;
@@ -71,8 +73,7 @@ public class KaigoServiceShuruiManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link KaigoServiceShuruiManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link KaigoServiceShuruiManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link KaigoServiceShuruiManager}のインスタンス
      */
     public static KaigoServiceShuruiManager createInstance() {
         return InstanceProvider.create(KaigoServiceShuruiManager.class);
@@ -207,4 +208,20 @@ public class KaigoServiceShuruiManager {
         return dataSource;
     }
 
+    /**
+     * サービス種類DDLを返します。
+     *
+     * @param list List<ServiceShuruiCode>
+     * @return List<KeyValueDataSource>
+     */
+    @Transaction
+    public List<KeyValueDataSource> getサービス種類DDL(List<ServiceShuruiCode> list) {
+
+        DbT7130KaigoServiceShuruiEntity サービス種類情報リスト = 介護サービス種類Dac.select介護サービス(list);
+        List<KeyValueDataSource> dataSource = new ArrayList<>();
+        dataSource.add(new KeyValueDataSource(サービス種類情報リスト.getServiceShuruiMeisho(),
+                サービス種類情報リスト.getServiceShuruiMeisho()));
+        dataSource.add(new KeyValueDataSource(ZERO, すべて));
+        return dataSource;
+    }
 }

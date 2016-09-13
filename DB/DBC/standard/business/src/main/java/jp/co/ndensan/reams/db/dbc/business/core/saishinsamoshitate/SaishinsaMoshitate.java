@@ -70,6 +70,7 @@ public class SaishinsaMoshitate {
     private static final RString 国保連送付年月 = new RString("国保連送付年月：");
     private static final RString サービス提供年月 = new RString("サービス提供年月：");
     private static final RString 事業者番号 = new RString("事業者番号：");
+    private static final RString みなし = new RString("みなし");
 
     /**
      * HanyoListSaishinsaMoshitateAriEUCEntityの設定クラスです。
@@ -87,7 +88,7 @@ public class SaishinsaMoshitate {
             Map<RString, KoseiShichosonMaster> 市町村名MasterMap,
             Association association) {
         HanyoListSaishinsaMoshitateAriEUCEntity eucEntity = new HanyoListSaishinsaMoshitateAriEUCEntity();
-        eucEntity.set連番(連番);
+        eucEntity.set連番(new RString(String.valueOf(連番)));
         UaFt200FindShikibetsuTaishoEntity 宛名Entity = entity.getPsmEntity();
         if (宛名Entity == null) {
             return eucEntity;
@@ -194,7 +195,7 @@ public class SaishinsaMoshitate {
      * @param association association
      * @return HanyoListSaishinsaMoshitateNashiEUCEntity
      */
-    public HanyoListSaishinsaMoshitateNashiEUCEntity setRenbanariEUCEntity(SaishinsaMoshitateRelateEntity entity,
+    public HanyoListSaishinsaMoshitateNashiEUCEntity setRenbanashiEUCEntity(SaishinsaMoshitateRelateEntity entity,
             SaishinsamoshitateProcessParameter processParameter,
             Map<RString, KoseiShichosonMaster> 市町村名MasterMap,
             Association association) {
@@ -339,6 +340,177 @@ public class SaishinsaMoshitate {
         return 出力条件List;
     }
 
+    /**
+     * HanyoListSaishinsaMoshitateAriEUCEntityの設定クラスです。
+     *
+     * @return HanyoListSaishinsaMoshitateAriEUCEntity
+     */
+    public HanyoListSaishinsaMoshitateAriEUCEntity setRenbanariEUCEntity() {
+        HanyoListSaishinsaMoshitateAriEUCEntity eucEntity = new HanyoListSaishinsaMoshitateAriEUCEntity();
+        eucEntity.set連番(null);
+        eucEntity.set識別コード(null);
+        eucEntity.set住民種別(null);
+        eucEntity.set氏名(null);
+        eucEntity.set氏名カナ(null);
+        eucEntity.set生年月日(null);
+        eucEntity.set年齢(null);
+        eucEntity.set性別(null);
+        eucEntity.set続柄コード(null);
+        eucEntity.set世帯コード(null);
+        eucEntity.set世帯主名(null);
+        eucEntity.set住所コード(null);
+        eucEntity.set郵便番号(null);
+        eucEntity.set住所_番地_方書(null);
+        eucEntity.set住所(null);
+        eucEntity.set番地(null);
+        eucEntity.set方書(null);
+        eucEntity.set行政区コード(null);
+        eucEntity.set行政区名(null);
+        eucEntity.set地区１(null);
+        eucEntity.set地区２(null);
+        eucEntity.set地区３(null);
+        eucEntity.set連絡先１(null);
+        eucEntity.set連絡先２(null);
+        eucEntity.set登録異動日(null);
+        eucEntity.set登録事由(null);
+        eucEntity.set登録届出日(null);
+        eucEntity.set住定異動日(null);
+        eucEntity.set住定事由(null);
+        eucEntity.set住定届出日(null);
+        eucEntity.set消除異動日(null);
+        eucEntity.set消除事由(null);
+        eucEntity.set消除届出日(null);
+        eucEntity.set転出入理由(null);
+        eucEntity.set前住所郵便番号(null);
+        eucEntity.set前住所_番地_方書(null);
+        eucEntity.set前住所(null);
+        eucEntity.set前住所番地(null);
+        eucEntity.set前住所方書(null);
+        eucEntity.set市町村コード(null);
+        eucEntity.set市町村名(null);
+        eucEntity.set保険者コード(null);
+        eucEntity.set保険者名(null);
+        eucEntity.set空白(null);
+        eucEntity.set被保険者番号(null);
+        eucEntity.set資格取得事由(null);
+        eucEntity.set資格取得日(null);
+        eucEntity.set資格取得届出日(null);
+        eucEntity.set喪失事由(null);
+        eucEntity.set資格喪失日(null);
+        eucEntity.set資格喪失届日(null);
+        eucEntity.set資格区分(null);
+        eucEntity.set住所地特例状態(null);
+        eucEntity.set資格_証記載保険者番号(null);
+        eucEntity.set再審査事業者番号(null);
+        eucEntity.set再審査事業者名(null);
+        eucEntity.setサービス提供年月(null);
+        eucEntity.setサービス種類(null);
+        eucEntity.setサービス種類名(null);
+        eucEntity.setサービス項目(null);
+        eucEntity.set給付_証記載保険者番号(null);
+        eucEntity.set申立年月日(null);
+        eucEntity.set申立者区分(null);
+        eucEntity.set申立単位数(null);
+        eucEntity.set申立事由コード(null);
+        eucEntity.set申立事由(null);
+        eucEntity.set国保連送付年月(null);
+        eucEntity.set受給申請事由(null);
+        eucEntity.set受給申請日(null);
+        eucEntity.set受給要介護度(null);
+        eucEntity.set受給認定開始日(null);
+        eucEntity.set受給認定終了日(null);
+        eucEntity.set受給認定日(null);
+        eucEntity.set受給旧措置(null);
+        eucEntity.set受給みなし更新認定(null);
+        eucEntity.set受給直近事由(null);
+        return eucEntity;
+    }
+
+    /**
+     * HanyoListSaishinsaMoshitateNashiEUCEntityの設定クラスです。
+     *
+     * @return HanyoListSaishinsaMoshitateNashiEUCEntity
+     */
+    public HanyoListSaishinsaMoshitateNashiEUCEntity setRenbanashiEUCEntity() {
+        HanyoListSaishinsaMoshitateNashiEUCEntity eucEntity = new HanyoListSaishinsaMoshitateNashiEUCEntity();
+        eucEntity.set識別コード(null);
+        eucEntity.set住民種別(null);
+        eucEntity.set氏名(null);
+        eucEntity.set氏名カナ(null);
+        eucEntity.set生年月日(null);
+        eucEntity.set年齢(null);
+        eucEntity.set性別(null);
+        eucEntity.set続柄コード(null);
+        eucEntity.set世帯コード(null);
+        eucEntity.set世帯主名(null);
+        eucEntity.set住所コード(null);
+        eucEntity.set郵便番号(null);
+        eucEntity.set住所_番地_方書(null);
+        eucEntity.set住所(null);
+        eucEntity.set番地(null);
+        eucEntity.set方書(null);
+        eucEntity.set行政区コード(null);
+        eucEntity.set行政区名(null);
+        eucEntity.set地区１(null);
+        eucEntity.set地区２(null);
+        eucEntity.set地区３(null);
+        eucEntity.set連絡先１(null);
+        eucEntity.set連絡先２(null);
+        eucEntity.set登録異動日(null);
+        eucEntity.set登録事由(null);
+        eucEntity.set登録届出日(null);
+        eucEntity.set住定異動日(null);
+        eucEntity.set住定事由(null);
+        eucEntity.set住定届出日(null);
+        eucEntity.set消除異動日(null);
+        eucEntity.set消除事由(null);
+        eucEntity.set消除届出日(null);
+        eucEntity.set転出入理由(null);
+        eucEntity.set前住所郵便番号(null);
+        eucEntity.set前住所_番地_方書(null);
+        eucEntity.set前住所(null);
+        eucEntity.set前住所番地(null);
+        eucEntity.set前住所方書(null);
+        eucEntity.set市町村コード(null);
+        eucEntity.set市町村名(null);
+        eucEntity.set保険者コード(null);
+        eucEntity.set保険者名(null);
+        eucEntity.set空白(null);
+        eucEntity.set被保険者番号(null);
+        eucEntity.set資格取得事由(null);
+        eucEntity.set資格取得日(null);
+        eucEntity.set資格取得届出日(null);
+        eucEntity.set喪失事由(null);
+        eucEntity.set資格喪失日(null);
+        eucEntity.set資格喪失届日(null);
+        eucEntity.set資格区分(null);
+        eucEntity.set住所地特例状態(null);
+        eucEntity.set資格_証記載保険者番号(null);
+        eucEntity.set再審査事業者番号(null);
+        eucEntity.set再審査事業者名(null);
+        eucEntity.setサービス提供年月(null);
+        eucEntity.setサービス種類(null);
+        eucEntity.setサービス種類名(null);
+        eucEntity.setサービス項目(null);
+        eucEntity.set給付_証記載保険者番号(null);
+        eucEntity.set申立年月日(null);
+        eucEntity.set申立者区分(null);
+        eucEntity.set申立単位数(null);
+        eucEntity.set申立事由コード(null);
+        eucEntity.set申立事由(null);
+        eucEntity.set国保連送付年月(null);
+        eucEntity.set受給申請事由(null);
+        eucEntity.set受給申請日(null);
+        eucEntity.set受給要介護度(null);
+        eucEntity.set受給認定開始日(null);
+        eucEntity.set受給認定終了日(null);
+        eucEntity.set受給認定日(null);
+        eucEntity.set受給旧措置(null);
+        eucEntity.set受給みなし更新認定(null);
+        eucEntity.set受給直近事由(null);
+        return eucEntity;
+    }
+
     private RString set受給申請事由(RString 申請事由, SaishinsaMoshitateRelateEntity entity) {
         RString 受給申請事由;
         if (申請事由.isNullOrEmpty()) {
@@ -383,7 +555,7 @@ public class SaishinsaMoshitate {
             return RString.EMPTY;
         }
         if (!MinashiCode.通常の認定.getコード().equals(MinashiCode.toValue(要介護区分).getコード())) {
-            return 要介護区分;
+            return みなし;
         } else {
             return RString.EMPTY;
         }
@@ -399,13 +571,13 @@ public class SaishinsaMoshitate {
 
     private RString get期間(RStringBuilder jokenBuilder, RString fromYMD, RString toYMD) {
         if (!RString.isNullOrEmpty(fromYMD)) {
-            jokenBuilder.append(new FlexibleDate(fromYMD).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+            jokenBuilder.append(new FlexibleDate(fromYMD).wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).
+                    separator(Separator.JAPANESE).fillType(FillType.BLANK).getYearMonth());
         }
         jokenBuilder.append(new RString("　～　"));
         if (!RString.isNullOrEmpty(toYMD)) {
-            jokenBuilder.append(new FlexibleDate(toYMD).wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+            jokenBuilder.append(new FlexibleDate(toYMD).wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).
+                    separator(Separator.JAPANESE).fillType(FillType.BLANK).getYearMonth());
         }
         return jokenBuilder.toRString();
     }
@@ -435,13 +607,13 @@ public class SaishinsaMoshitate {
 
     private RString get証記載保険者番号(SaishinsaMoshitateRelateEntity entity, Map<RString, KoseiShichosonMaster> 市町村名MasterMap) {
         RString 証記載保険者番号 = null;
-        if (entity.is住所地特例フラグ() && 市町村名MasterMap != null && !市町村名MasterMap.isEmpty()) {
+        if (entity.is広域内住所地特例フラグ() && 市町村名MasterMap != null && !市町村名MasterMap.isEmpty()) {
             if (!isNullCheck(entity.get広住特措置元市町村コード())) {
                 証記載保険者番号 = get保険者番号(市町村名MasterMap.get(entity.get広住特措置元市町村コード()));
             }
         } else {
-            if (市町村名MasterMap != null && !市町村名MasterMap.isEmpty()) {
-                証記載保険者番号 = get保険者番号(市町村名MasterMap.get(entity.get広住特措置元市町村コード()));
+            if (市町村名MasterMap != null && !市町村名MasterMap.isEmpty() && entity.get市町村コード() != null && !entity.get市町村コード().isEmpty()) {
+                証記載保険者番号 = get保険者番号(市町村名MasterMap.get(entity.get市町村コード().value()));
             }
         }
         return 証記載保険者番号;

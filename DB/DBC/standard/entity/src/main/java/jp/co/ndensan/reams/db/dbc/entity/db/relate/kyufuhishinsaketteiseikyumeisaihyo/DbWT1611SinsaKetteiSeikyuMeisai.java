@@ -23,6 +23,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DbWT1611SinsaKetteiSeikyuMeisai {
 
+    private int row;
     private int 履歴番号;
     private JigyoshaNo 事業所番号;
     private RString 事業所名;
