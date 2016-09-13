@@ -189,7 +189,7 @@ public class ShotokuDankaibetsuShunoritsuIchiranHandler {
         RString 基準年 = div.getDdlJukyuKijunY().getSelectedValue();
         RString 基準月 = div.getDdlJukyuKijunM().getSelectedValue();
         RString 基準年月;
-        if (調定基準月.compareTo(NUM_9) <= 0) {
+        if (基準月.compareTo(NUM_9) <= 0) {
             基準年月 = 基準年.concat(NUM_0).concat(基準月);
         } else {
             基準年月 = 基準年.concat(基準月);
