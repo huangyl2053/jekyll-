@@ -7,9 +7,11 @@ and open the template in the editor.-->
 <!-- @reamsid_L DBD-3810-030 liuwei2 -->
 
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.jigyoshomukeshakai.IKeikakuJigyoshaJohoMapper">
-    <select id="get計画事業者情報"
-            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd206010.DBD206010MybatisParameter"
-            resultMap="ResultMap_KeikakuJigyoshaJohoEntity" fetchSize="500">
+    <select
+        resultOrdered="true"
+        id="get計画事業者情報"
+        parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd206010.DBD206010MybatisParameter"
+        resultMap="ResultMap_KeikakuJigyoshaJohoEntity" fetchSize="500">
         SELECT
         社福軽減."shoKisaiHokenshaNo",
         社福軽減."hihokenshaNo",
@@ -65,11 +67,11 @@ and open the template in the editor.-->
         (
         被保."shikakuShutokuYMD" <![CDATA[<=]]> #{基準日}  AND
         (#{基準日}  <![CDATA[<=]]> 被保."shikakuSoshitsuYMD"
-        OR   被保."shikakuSoshitsuYMD" IS NULL)
+        OR   被保."shikakuSoshitsuYMD" = '')
         )
         AND 被保."logicalDeletedFlag" = FALSE
         <if test="is出力しない" >
-            AND 被保."shikakuSoshitsuYMD" IS NULL
+            AND 被保."shikakuSoshitsuYMD" = ''
         </if>
         AND NOT EXISTS(
         SELECT 1
@@ -92,7 +94,7 @@ and open the template in the editor.-->
         WHERE (
         受給."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> #{基準日} AND
         ( #{基準日} <![CDATA[<=]]> 受給."ninteiYukoKikanShuryoYMD" OR
-        受給."ninteiYukoKikanShuryoYMD" IS NULL)) AND
+        受給."ninteiYukoKikanShuryoYMD" = '')) AND
         受給."logicalDeletedFlag"  = FALSE
         AND NOT EXISTS(
         SELECT 1
@@ -111,7 +113,7 @@ and open the template in the editor.-->
         居宅給付計画."keikakuJigyoshaNo"
         FROM rgdb."DbT3006KyotakuKeikakuJigyoshaSakusei" AS 居宅給付計画
         WHERE (居宅給付計画."tekiyoKaishiYMD"<![CDATA[<=]]> #{基準日} AND
-        (#{基準日} <![CDATA[<=]]> 居宅給付計画."tekiyoShuryoYMD" OR 居宅給付計画."tekiyoShuryoYMD"  IS NULL))
+        (#{基準日} <![CDATA[<=]]> 居宅給付計画."tekiyoShuryoYMD" OR 居宅給付計画."tekiyoShuryoYMD"  = ''))
         <if test="事業者番号isNotEmpty" >
             AND 居宅給付計画."keikakuJigyoshaNo" = #{事業者番号}
         </if>
@@ -148,7 +150,7 @@ and open the template in the editor.-->
         社福軽減."ketteiKubun" = '1' AND
         社福軽減."tekiyoKaishiYMD" <![CDATA[<=]]> #{基準日} AND
         ( #{基準日}  <![CDATA[<=]]> 社福軽減."tekiyoShuryoYMD" OR
-        社福軽減."tekiyoShuryoYMD" IS NULL)
+        社福軽減."tekiyoShuryoYMD" = '')
         ${出力順}
     </select>
 

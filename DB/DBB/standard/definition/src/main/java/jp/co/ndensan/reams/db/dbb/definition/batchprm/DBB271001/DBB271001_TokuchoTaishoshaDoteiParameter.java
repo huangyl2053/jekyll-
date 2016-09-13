@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchotaishoshadotei;
+package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB271001;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchotaishoshadotei.CreateGyomuHokenshaJohoGetsujiProcessParameter;
@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TokuchoTaishoshaDoteiIkatsuBatchParameter extends BatchParameterBase {
+public class DBB271001_TokuchoTaishoshaDoteiParameter extends BatchParameterBase {
 
     private static final long serialVersionUID = 1L;
     private FlexibleYear 処理年度;

@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010000;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -35,6 +36,8 @@ public class KyufuJissekiListPanelDiv extends Panel {
     private TextBox txtKyufuJissekiListSeibetsu;
     @JsonProperty("txtKyufuJissekiListSeinengappi")
     private TextBox txtKyufuJissekiListSeinengappi;
+    @JsonProperty("DataIdoPanel")
+    private DataIdoPanelDiv DataIdoPanel;
     @JsonProperty("dgKyufuJissekiMeisaiList")
     private DataGrid<dgKyufuJissekiMeisaiList_Row> dgKyufuJissekiMeisaiList;
     @JsonProperty("dgKyufuJissekiGokeiList")
@@ -175,6 +178,24 @@ public class KyufuJissekiListPanelDiv extends Panel {
     }
 
     /*
+     * getDataIdoPanel
+     * @return DataIdoPanel
+     */
+    @JsonProperty("DataIdoPanel")
+    public DataIdoPanelDiv getDataIdoPanel() {
+        return DataIdoPanel;
+    }
+
+    /*
+     * setDataIdoPanel
+     * @param DataIdoPanel DataIdoPanel
+     */
+    @JsonProperty("DataIdoPanel")
+    public void setDataIdoPanel(DataIdoPanelDiv DataIdoPanel) {
+        this.DataIdoPanel = DataIdoPanel;
+    }
+
+    /*
      * getdgKyufuJissekiMeisaiList
      * @return dgKyufuJissekiMeisaiList
      */
@@ -226,6 +247,49 @@ public class KyufuJissekiListPanelDiv extends Panel {
     @JsonProperty("btnKyufuJissekiResearch")
     public void setBtnKyufuJissekiResearch(Button btnKyufuJissekiResearch) {
         this.btnKyufuJissekiResearch = btnKyufuJissekiResearch;
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public Button getBtnSento() {
+        return this.getDataIdoPanel().getBtnSento();
+    }
+
+    @JsonIgnore
+    public void  setBtnSento(Button btnSento) {
+        this.getDataIdoPanel().setBtnSento(btnSento);
+    }
+
+    @JsonIgnore
+    public Button getBtnMae() {
+        return this.getDataIdoPanel().getBtnMae();
+    }
+
+    @JsonIgnore
+    public void  setBtnMae(Button btnMae) {
+        this.getDataIdoPanel().setBtnMae(btnMae);
+    }
+
+    @JsonIgnore
+    public Button getBtnTsugi() {
+        return this.getDataIdoPanel().getBtnTsugi();
+    }
+
+    @JsonIgnore
+    public void  setBtnTsugi(Button btnTsugi) {
+        this.getDataIdoPanel().setBtnTsugi(btnTsugi);
+    }
+
+    @JsonIgnore
+    public Button getBtnSaigo() {
+        return this.getDataIdoPanel().getBtnSaigo();
+    }
+
+    @JsonIgnore
+    public void  setBtnSaigo(Button btnSaigo) {
+        this.getDataIdoPanel().setBtnSaigo(btnSaigo);
     }
 
     // </editor-fold>

@@ -8,9 +8,11 @@ and open the template in the editor.-->
 
 
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.jigyoshomukeshakai.IShafukugemmenTaishoshaJohoMapper">
-    <select id="get社福減免対象者情報"
-            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd206010.DBD206010MybatisParameter"
-            resultMap="ResultMap_ShafukugemmenTaishoshaJohoEntity" fetchSize="500">
+    <select
+        resultOrdered="true"
+        id="get社福減免対象者情報"
+        parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd206010.DBD206010MybatisParameter"
+        resultMap="ResultMap_ShafukugemmenTaishoshaJohoEntity" fetchSize="500">
         SELECT
         A."jigyoshaNo",
         A."jigyoshaName",

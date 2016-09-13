@@ -75,14 +75,14 @@ public class KanendoIdouKekkaIchiranPrintService {
      */
     public void printFukusu(List<KeisangojohoAtenaKozaKouseizengoEntity> 更正前後EntityList,
             RString 出力順ID, YMDHMS 調定日時, ReportManager reportManager) {
-        KanendoIdouKekkaIchiranProperty property = new KanendoIdouKekkaIchiranProperty();
+        IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
+                .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200027.getReportId(),
+                        Long.valueOf(出力順ID.toString()));
+        KanendoIdouKekkaIchiranProperty property = new KanendoIdouKekkaIchiranProperty(並び順);
         IAssociationFinder associationFinder = AssociationFinderFactory.createInstance();
         Association association = associationFinder.getAssociation();
         try (ReportAssembler<KanendoIdouKekkaIchiranSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<KanendoIdouKekkaIchiranSource> reportSourceWriter = new ReportSourceWriter(assembler);
-            IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
-                    .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200027.getReportId(),
-                            Long.valueOf(出力順ID.toString()));
             int i = 0;
             List<RString> 改頁項目List = new ArrayList<>();
             RString 並び順の１件目 = RString.EMPTY;

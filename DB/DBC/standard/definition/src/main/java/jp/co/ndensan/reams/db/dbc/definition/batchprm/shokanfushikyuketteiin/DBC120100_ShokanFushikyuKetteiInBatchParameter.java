@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.shokanfushikyuketteiin;
 
+import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 償還払不支給決定情報取込 のバッチパラメータです。
@@ -20,15 +20,18 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DBC120100_ShokanFushikyuKetteiInBatchParameter extends BatchParameterBase {
 
-    private static final String KEY_SHORI_YEARMONTH = "shoriYearMonth";
-    private static final String KEY_SAISHORI_KUBUN = "saishoriKubun";
-    private static final String KEY_SHUTSURYO_KUJUN = "shutsuryokujun";
+    private static final String KEY_SHORIYM = "shoriYM";
+    private static final String NAME_SHORIYM = "処理年月";
+    private static final String KEY_SAISHORIKUBUN = "saishoriKubun";
+    private static final String NAME_SAISHORIKUBUN = "再処理区分";
+    private static final String KEY_SHUTSURYOKUJUNID = "shutsuryokujunId";
+    private static final String NAME_SHUTSURYOKUJUNID = "出力順ID";
 
-    @BatchParameter(key = KEY_SHORI_YEARMONTH, name = "処理年月")
-    private FlexibleYearMonth shoriYearMonth;
-    @BatchParameter(key = KEY_SAISHORI_KUBUN, name = "再処理区分")
-    private RString saishoriKubun;
-    @BatchParameter(key = KEY_SHUTSURYO_KUJUN, name = "出力順")
-    private Long shutsuryokujun;
+    @BatchParameter(key = KEY_SHORIYM, name = NAME_SHORIYM)
+    private FlexibleYearMonth shoriYM;
+    @BatchParameter(key = KEY_SAISHORIKUBUN, name = NAME_SAISHORIKUBUN)
+    private SaiShoriKubun saishoriKubun;
+    @BatchParameter(key = KEY_SHUTSURYOKUJUNID, name = NAME_SHUTSURYOKUJUNID)
+    private Long shutsuryokujunId;
 
 }
