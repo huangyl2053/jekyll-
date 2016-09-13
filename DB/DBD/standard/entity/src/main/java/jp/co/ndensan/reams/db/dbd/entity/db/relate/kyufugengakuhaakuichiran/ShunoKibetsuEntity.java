@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakuhaakuichiran;
 
-import jp.co.ndensan.reams.db.dbd.definition.core.jikokisanbikanri.JikoKisanbiKubun;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -26,6 +25,6 @@ public class ShunoKibetsuEntity {
     private Decimal 滞納額;
     private RString 滞納区分;
     private FlexibleDate 時効起算日;
-    private JikoKisanbiKubun 時効起算事由;
+    private RString 時効起算事由;
 
 }

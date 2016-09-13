@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -123,5 +124,19 @@ public class JikoKisambiKanriManager {
             return false;
         }
         return 1 == dac.save(時効起算日管理.toEntity());
+    }
+
+    /**
+     * 時効起算日管理{@link JikoKisambiKanri}を保存します。
+     *
+     * @param 時効起算日管理 {@link JikoKisambiKanri}
+     * @return 更新件数 更新結果の件数を返します。
+     */
+    @Transaction
+    public boolean save時効起算日管理ForDeletePhysical(JikoKisambiKanri 時効起算日管理) {
+        requireNonNull(時効起算日管理, UrSystemErrorMessages.値がnull.getReplacedMessage("時効起算日管理"));
+        DbT4023JikoKisambiKanriEntity entity = 時効起算日管理.toEntity();
+        entity.setState(EntityDataState.Deleted);
+        return 1 == dac.saveOrDeletePhysicalBy(entity);
     }
 }

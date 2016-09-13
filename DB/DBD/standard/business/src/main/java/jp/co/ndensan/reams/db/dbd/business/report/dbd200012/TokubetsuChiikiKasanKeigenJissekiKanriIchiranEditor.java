@@ -45,7 +45,6 @@ public class TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor implements ITok
     private final IKojin 宛名;
     private final int 行数Index;
     private final int 該当給付実績被保険者情報Index;
-    private final boolean 最大明細Flag;
 
     /**
      * インスタンスを生成します。
@@ -56,18 +55,17 @@ public class TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor implements ITok
      * @param 宛名 IKojin
      * @param 行数Index int
      * @param 該当給付実績被保険者情報Index int
-     * @param 最大明細Flag boolean
      */
     public TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor(TokubetsuChiikiKasanKeigenJissekiKanri 帳票情報,
             Association association, IOutputOrder iOutputOrder, IKojin 宛名, int 行数Index,
-            int 該当給付実績被保険者情報Index, boolean 最大明細Flag) {
+            int 該当給付実績被保険者情報Index) {
         this.帳票情報 = 帳票情報;
         this.association = association;
         this.iOutputOrder = iOutputOrder;
         this.宛名 = 宛名;
         this.行数Index = 行数Index;
         this.該当給付実績被保険者情報Index = 該当給付実績被保険者情報Index;
-        this.最大明細Flag = 最大明細Flag;
+
     }
 
     @Override
@@ -163,17 +161,8 @@ public class TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor implements ITok
                 source.list_11 = new RString(String.valueOf(給付実績明細Entity.get日数回数()));
                 source.list_12 = new RString(String.valueOf(給付実績明細Entity.getサービス単位数()));
             }
-        } else if (最大明細Flag && 該当給付実績被保険者情報Index + 1 == 給付実績被保険者リスト.size()
+        } else if (該当給付実績被保険者情報Index + 1 == 給付実績被保険者リスト.size()
                 && (行数Index == 給付実績被保険者リスト.get(該当給付実績被保険者情報Index).get給付実績明細リスト().size() + 1)) {
-            source.list_9 = new RString("事業所計");
-            source.list_13 = RString.EMPTY;
-            source.list_14 = new RString("該当");
-            source.list_15 = RString.EMPTY;
-            source.list_16 = new RString(String.valueOf(給付実績被保険者リスト.size())).concat(new RString("件"));
-            source.list_17 = DecimalFormatter.toコンマ区切りRString(get助成額合計(), 0);
-            source.list_18 = DecimalFormatter.toコンマ区切りRString(get保険者助成額合計(), 0);
-        } else if ((!最大明細Flag) && 該当給付実績被保険者情報Index + 1 == 給付実績被保険者リスト.size()
-                && (行数Index == 給付実績被保険者リスト.size() + 1)) {
             source.list_9 = new RString("事業所計");
             source.list_13 = RString.EMPTY;
             source.list_14 = new RString("該当");

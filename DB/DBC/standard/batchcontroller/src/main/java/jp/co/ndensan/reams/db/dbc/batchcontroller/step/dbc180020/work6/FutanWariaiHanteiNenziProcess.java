@@ -213,6 +213,9 @@ public class FutanWariaiHanteiNenziProcess extends BatchKeyBreakBase<FutanWariai
             if (所得管理 != null) {
                 insert3115Entity.setSetaiinShotokuRirekiNo(new Decimal(所得管理.getMotoRirekiNo()));
             }
+            if (insert3115Entity.getSetaiinHihokenshaNo() == null || insert3115Entity.getSetaiinShotokuRirekiNo() == null) {
+                return;
+            }
             利用者負担割合根拠.insert(insert3115Entity);
         }
     }

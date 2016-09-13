@@ -38,7 +38,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 利用者負担額減額のデータアクセスクラスです。
  *
- * @reamsid_L DBC-9999-012 xicongwang
+ * @reamsid_L DBD-9999-012 xicongwang
  */
 public class DbT4014RiyoshaFutangakuGengakuDac {
 

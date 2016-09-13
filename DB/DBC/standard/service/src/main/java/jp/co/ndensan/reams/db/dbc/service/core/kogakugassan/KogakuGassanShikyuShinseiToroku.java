@@ -293,7 +293,7 @@ public class KogakuGassanShikyuShinseiToroku {
             if (serchList != null && !serchList.isEmpty()) {
                 map.put(モード, serchList);
             }
-        } else if (モード.equals(単一市町村モード)) {
+        } else if (モード.equals(広域市町村モード)) {
             List<KoikiZenShichosonJoho> serchList
                     = KoikiShichosonJohoFinder.createInstance().getZenShichosonJoho().records();
             if (serchList != null && !serchList.isEmpty()) {

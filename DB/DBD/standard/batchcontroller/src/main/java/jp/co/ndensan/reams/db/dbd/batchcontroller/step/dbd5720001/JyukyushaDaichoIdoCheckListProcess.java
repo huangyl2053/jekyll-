@@ -85,6 +85,9 @@ public class JyukyushaDaichoIdoCheckListProcess extends BatchKeyBreakBase<Jyukyu
         if (parameter.get出力順ID() != null) {
             order = finder.get出力順(SubGyomuCode.DBD介護受給, REPORT_DBD200037, parameter.get出力順ID());
             出力順 = get出力順(order);
+        } else {
+            throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
+                    .replace(new RString("帳票出力順の取得").toString()).toString());
         }
         if (parameter.get改頁出力順ID() != null) {
             breakoutputOrder = finder.get出力順(SubGyomuCode.DBD介護受給, REPORT_DBD200037, parameter.get改頁出力順ID());

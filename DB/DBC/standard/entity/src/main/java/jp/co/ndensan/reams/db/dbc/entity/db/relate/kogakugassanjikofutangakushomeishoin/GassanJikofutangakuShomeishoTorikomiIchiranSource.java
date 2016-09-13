@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 /**
  * 帳票設計_DBC200034_高額合算自己負担額証明書情報取込一覧表のReportSourceクラスです。
  *
- * @reamsid_L DBC_2640_010 zhengshenlei
+ * @reamsid_L DBC-2640-010 zhengshenlei
  */
 public class GassanJikofutangakuShomeishoTorikomiIchiranSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

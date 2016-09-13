@@ -35,7 +35,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 償還払支給判定結果のデータアクセスクラスです。
  *
- * @reamsid_L DBC-9999-012 xicongwang
+ * @reamsid_L DBD-9999-012 xicongwang
  */
 public class DbT3036ShokanHanteiKekkaDac implements ISaveable<DbT3036ShokanHanteiKekkaEntity> {
 
@@ -65,9 +65,9 @@ public class DbT3036ShokanHanteiKekkaDac implements ISaveable<DbT3036ShokanHante
         return accessor.select().
                 table(DbT3036ShokanHanteiKekka.class).
                 where(and(
-                        eq(hiHokenshaNo, 被保険者番号),
-                        eq(serviceTeikyoYM, サービス提供年月),
-                        eq(seiriNo, 整理番号))).
+                                eq(hiHokenshaNo, 被保険者番号),
+                                eq(serviceTeikyoYM, サービス提供年月),
+                                eq(seiriNo, 整理番号))).
                 toObject(DbT3036ShokanHanteiKekkaEntity.class);
     }
 
@@ -135,9 +135,9 @@ public class DbT3036ShokanHanteiKekkaDac implements ISaveable<DbT3036ShokanHante
         return accessor.select().
                 table(DbT3036ShokanHanteiKekka.class).
                 where(and(
-                        eq(hiHokenshaNo, 被保険者番号),
-                        eq(serviceTeikyoYM, サービス提供年月),
-                        eq(seiriNo, 整理番号))).
+                                eq(hiHokenshaNo, 被保険者番号),
+                                eq(serviceTeikyoYM, サービス提供年月),
+                                eq(seiriNo, 整理番号))).
                 getCount();
     }
 
@@ -160,9 +160,9 @@ public class DbT3036ShokanHanteiKekkaDac implements ISaveable<DbT3036ShokanHante
         return accessor.select().
                 table(DbT3036ShokanHanteiKekka.class).
                 where(and(
-                        eq(hiHokenshaNo, 被保険者番号),
-                        eq(serviceTeikyoYM, サービス提供年月),
-                        eq(seiriNo, 整理番号))).
+                                eq(hiHokenshaNo, 被保険者番号),
+                                eq(serviceTeikyoYM, サービス提供年月),
+                                eq(seiriNo, 整理番号))).
                 order(by(serviceTeikyoYM, Order.DESC)).
                 toList(DbT3036ShokanHanteiKekkaEntity.class);
     }

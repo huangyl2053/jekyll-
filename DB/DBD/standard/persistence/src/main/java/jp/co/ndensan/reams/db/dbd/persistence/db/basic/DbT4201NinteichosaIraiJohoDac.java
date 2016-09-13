@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 画面設計_DBD5010001_完了処理・更新管理のデータアクセスクラスです。
  *
- * @author_L DBD-2030-010 x_youyj
+ * @reamsid_L DBD-9999-013 x_youyj
  */
 public class DbT4201NinteichosaIraiJohoDac {
 

@@ -464,7 +464,11 @@ public enum ReportIdDBB {
     /**
      * 特別徴収同定・未同定一覧
      */
-    DBB200018(new ReportId("DBB200018_TokubetsuChoshuDoteiMiDoteiIchiran"), new RString("特別徴収同定・未同定一覧"));
+    DBB200018(new ReportId("DBB200018_TokubetsuChoshuDoteiMiDoteiIchiran"), new RString("特別徴収同定・未同定一覧")),
+    /**
+     * 所得段階別収納率一覧表
+     */
+    DBB300003(new ReportId("DBB300003_ShotokuDankaiBetsuShunoritsuIchiran"), new RString("所得段階別収納率一覧表"));
 
     private final ReportId reportId;
     private final RString reportName;

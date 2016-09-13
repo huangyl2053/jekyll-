@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD5610001;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd5610001.KoshinTaishoshaKanriParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD511001.DBD511001_KoshinTaishoshaKanriParameter;
 import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5610001.DBD5610001StateName.初期表示;
 import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5610001.DBD5610001StateName.範囲指定;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5610001.KoshinTaishoshaKanriDiv;
@@ -81,8 +81,8 @@ public class KoshinTaishoshaKanri {
      * @param div KoshinTaishoshaKanriDiv
      * @return ResponseData<KoshinTaishoshaKanriParameter>
      */
-    public ResponseData<KoshinTaishoshaKanriParameter> onClick_btnprint(KoshinTaishoshaKanriDiv div) {
-        KoshinTaishoshaKanriParameter parameter = creatKoshinTaishoshaKanriHandler(div).getParameter();
+    public ResponseData<DBD511001_KoshinTaishoshaKanriParameter> onClick_btnprint(KoshinTaishoshaKanriDiv div) {
+        DBD511001_KoshinTaishoshaKanriParameter parameter = creatKoshinTaishoshaKanriHandler(div).getParameter();
         return ResponseData.of(parameter).respond();
     }
 
