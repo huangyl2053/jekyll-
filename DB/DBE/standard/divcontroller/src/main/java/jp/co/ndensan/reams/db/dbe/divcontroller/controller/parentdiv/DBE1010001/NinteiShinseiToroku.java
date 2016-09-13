@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseitoroku.NinteiShinsei
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.KaigoHokensha;
@@ -127,6 +128,7 @@ public class NinteiShinseiToroku {
                 ViewStateHolder.put(ViewStateKeys.台帳種別表示, new RString("台帳種別表示有り"));
 
                 getHandler(div).loadUpdate(result, 管理番号, 被保険者番号, 介護導入形態);
+                // TODO 介護認定宛名情報のIFが有りません、対応しない
                 NinteiShinseiTodokedeshaDataPassModel dataPass = getHandler(div).set届出情報(manager.get宛名情報(result.get識別コード()));
                 dataPass.set申請書管理番号(管理番号.value());
                 div.getCcdShinseiTodokedesha().initialize(dataPass);
@@ -322,7 +324,7 @@ public class NinteiShinseiToroku {
             if (validationMessages.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
-            ShinseishoKanriNo 申請書管理番号 = get申請書管理番号();
+            ShinseishoKanriNo 申請書管理番号 = get申請書管理番号(div);
             manager.save要介護認定申請情報(get要介護認定申請情報(div, 申請書管理番号));
             manager.save申請届出情報(get認定申請届出者情報(div, true, 申請書管理番号));
             manager.save申請履歴情報(get申請履歴情報(申請書管理番号));
@@ -611,17 +613,13 @@ public class NinteiShinseiToroku {
         return FlexibleDate.EMPTY;
     }
 
-    private ShinseishoKanriNo get申請書管理番号() {
-        Minashi2shisaiJoho business = ViewStateHolder.get(ViewStateKeys.みなし2号登録情報, Minashi2shisaiJoho.class);
-        if (business != null) {
-            KaigoHokensha hokensha = dbt7050Manager.get介護保険者By広域保険者番号(business.get保険者().get証記載保険者番号());
-            RString 連番 = Saiban.get(SubGyomuCode.DBZ介護共通, SaibanHanyokeyName.市町村コード_西暦_月.getコード()).nextString();
-            RStringBuilder rsb = new RStringBuilder();
-            rsb.append(hokensha.get広域保険者市町村コード().value());
-            rsb.append(RDate.getNowDate().getYearMonth().toDateString());
-            rsb.append(連番.padZeroToLeft(ZERO_5));
-            return new ShinseishoKanriNo(rsb.toRString());
-        }
-        return ShinseishoKanriNo.EMPTY;
+    private ShinseishoKanriNo get申請書管理番号(NinteiShinseiTorokuDiv div) {
+        KaigoHokensha hokensha = dbt7050Manager.get介護保険者By広域保険者番号(new ShoKisaiHokenshaNo(div.getCcdShikakuInfo().getHookenshaCode()));
+        RString 連番 = Saiban.get(SubGyomuCode.DBZ介護共通, SaibanHanyokeyName.市町村コード_西暦_月.getコード()).nextString();
+        RStringBuilder rsb = new RStringBuilder();
+        rsb.append(hokensha.get広域保険者市町村コード().value());
+        rsb.append(RDate.getNowDate().getYearMonth().toDateString());
+        rsb.append(連番.padZeroToLeft(ZERO_5));
+        return new ShinseishoKanriNo(rsb.toRString());
     }
 }
