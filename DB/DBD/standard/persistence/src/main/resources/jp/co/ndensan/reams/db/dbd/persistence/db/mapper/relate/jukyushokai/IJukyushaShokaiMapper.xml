@@ -33,6 +33,8 @@
         ("DbT4001JukyushaDaicho"."sakujoJiyuCode" != '' OR "DbT4001JukyushaDaicho"."sakujoJiyuCode" != #{削除事由コード})
         )
         )
+        ORDER BY
+        "DbT4001JukyushaDaicho"."jukyuShinseiYMD" ASC
     </select>
 
     <select resultOrdered="true" id="find申請認定情報"
