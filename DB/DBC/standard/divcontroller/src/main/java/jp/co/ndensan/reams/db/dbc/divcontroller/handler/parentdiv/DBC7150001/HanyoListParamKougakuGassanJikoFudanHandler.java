@@ -218,14 +218,14 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
         }
         List<RString> selectKey = div.getChkCsvHenshuHoho().getSelectedKeys();
         if (selectKey.contains(項目名付加)) {
-            batchparam.setRebanFuka(true);
-        } else {
-            batchparam.setRebanFuka(false);
-        }
-        if (selectKey.contains(連番付加)) {
             batchparam.setTomokumeFuka(true);
         } else {
             batchparam.setTomokumeFuka(false);
+        }
+        if (selectKey.contains(連番付加)) {
+            batchparam.setRebanFuka(true);
+        } else {
+            batchparam.setRebanFuka(false);
         }
         if (selectKey.contains(日付)) {
             batchparam.setSlashDate(true);
