@@ -18,6 +18,9 @@ import jp.co.ndensan.reams.ua.uax.business.report.parts.util.atesaki.ReportAtesa
 import jp.co.ndensan.reams.ua.uax.business.report.parts.util.atesaki.ReportAtesakiEditorBuilder;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -133,14 +136,17 @@ public class KogakuServicehiJuryoininKeiyakuShoninService {
         }
         介護保険高額Entity.set事業所名(介護事業者.getJigyoshaName().value());
         介護保険高額Entity.set代表者名(entity.get介護事業者代表者().getDaihyoshaShimei().value());
-        if (null != 介護事業者.getYubinNo()) {
-            介護保険高額Entity.set事業所郵便番号(介護事業者.getYubinNo().value());
+        YubinNo yubinNo = 介護事業者.getYubinNo();
+        AtenaJusho jigyoshaAddress = 介護事業者.getJigyoshaAddress();
+        TelNo telNo = 介護事業者.getTelNo();
+        if (null != yubinNo) {
+            介護保険高額Entity.set事業所郵便番号(yubinNo.value());
         }
-        if (null != 介護事業者.getJigyoshaAddress()) {
-            介護保険高額Entity.set事業所所在地(介護事業者.getJigyoshaAddress().value());
+        if (null != jigyoshaAddress) {
+            介護保険高額Entity.set事業所所在地(jigyoshaAddress.value());
         }
-        if (null != 介護事業者.getTelNo()) {
-            介護保険高額Entity.set事業所電話番号(介護事業者.getTelNo().value());
+        if (null != telNo) {
+            介護保険高額Entity.set事業所電話番号(telNo.value());
         }
         介護保険高額Entity.set利用者負担上限額(
                 doカンマ編集(entity.get高額介護事業者().getRiyoshaFutanJogenGaku()));
