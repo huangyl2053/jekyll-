@@ -45,6 +45,8 @@ public class IdoCheckListBatch {
                 IdoCheckListItem item = new IdoCheckListItem(
                         getNowDate(),
                         new RString(String.valueOf(k)),
+                        flexToRstr(idoCheckListEntity.get抽出期間F()),
+                        flexToRstr(idoCheckListEntity.get抽出期間T()),
                         entity.get対象情報タイトル(),
                         idoCheckListEntity.get市町村コード().value(),
                         idoCheckListEntity.get市町村名(),
@@ -84,7 +86,8 @@ public class IdoCheckListBatch {
                         entity.get異動情報データ2(),
                         entity.get異動情報データ3(),
                         entity.get被保険者番号(),
-                        entity.get識別コード().value(),
+//                        entity.get識別コード().value(),
+                        RString.EMPTY,
                         DATA_NAI,
                         entity.get取得情報_後_事由(),
                         flexToRstr(entity.get取得情報_後_異動年月日()),
@@ -105,6 +108,8 @@ public class IdoCheckListBatch {
                 IdoCheckListItem item = new IdoCheckListItem(
                         getNowDate(),
                         new RString(String.valueOf(k)),
+                        flexToRstr(idoCheckListEntity.get抽出期間F()),
+                        flexToRstr(idoCheckListEntity.get抽出期間T()),
                         entity.get対象情報タイトル(),
                         idoCheckListEntity.get市町村コード().value(),
                         idoCheckListEntity.get市町村名(),
