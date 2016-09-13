@@ -9,60 +9,64 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 振込単位を表す列挙型です。
+ * 振込データ作成_エラー区分を表す列挙型です。
  *
  * @reamsid_L DBC-9999-023 x_lilh
  */
-public enum FurikomiTani {
+public enum FurikomiDataSakusei_ErrorKubun {
 
     /**
-     * コード:1 名称:償還高額同時 略称:定義なし
+     * コード:1 名称:振込データなし 略称:定義なし
      */
-    償還高額同時("1", "償還高額同時"),
+    振込データなし("1", "振込データなし"),
     /**
-     * コード:2 名称:償還高額個別 略称:定義なし
+     * コード:2 名称:被保険者宛名情報取得 略称:定義なし
      */
-    償還高額個別("2", "償還高額個別");
+    被保険者宛名情報取得("2", "被保険者宛名情報取得"),
+    /**
+     * コード:2 名称:一覧表データなし 略称:定義なし
+     */
+    一覧表データなし("2", "一覧表データなし");
 
     private final RString code;
     private final RString fullName;
 
-    private FurikomiTani(String code, String fullname) {
+    private FurikomiDataSakusei_ErrorKubun(String code, String fullname) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
     }
 
     /**
-     * 振込単位のコードを返します。
+     * 振込データ作成_エラー区分のコードを返します。
      *
-     * @return 振込単位のコード
+     * @return 振込データ作成_エラー区分のコード
      */
     public RString getコード() {
         return code;
     }
 
     /**
-     * 振込単位の名称を返します。
+     * 振込データ作成_エラー区分の名称を返します。
      *
-     * @return 振込単位の名称
+     * @return 振込データ作成_エラー区分の名称
      */
     public RString get名称() {
         return fullName;
     }
 
     /**
-     * 振込単位のコードと一致する内容を探します。
+     * 振込データ作成_エラー区分のコードと一致する内容を探します。
      *
-     * @param code 振込単位のコード
-     * @return {@code code} に対応する振込単位名称
+     * @param code 振込データ作成_エラー区分のコード
+     * @return {@code code} に対応する振込データ作成_エラー区分名称
      */
-    public static FurikomiTani toValue(RString code) {
+    public static FurikomiDataSakusei_ErrorKubun toValue(RString code) {
 
-        for (FurikomiTani furikomiTani : FurikomiTani.values()) {
+        for (FurikomiDataSakusei_ErrorKubun furikomiTani : FurikomiDataSakusei_ErrorKubun.values()) {
             if (furikomiTani.code.equals(code)) {
                 return furikomiTani;
             }
         }
-        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("振込単位"));
+        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("振込データ作成_エラー区分"));
     }
 }
