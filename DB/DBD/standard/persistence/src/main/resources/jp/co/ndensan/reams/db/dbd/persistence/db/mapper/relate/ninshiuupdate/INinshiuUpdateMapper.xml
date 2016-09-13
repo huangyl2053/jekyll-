@@ -76,15 +76,20 @@
         AND 介護事業者."yukoKaishiYMD" &lt; A."yukoKaishiYMD"
         )
         LEFT JOIN
-        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
-        ON <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />."shikibetsuCode" = 要介護認定申請情報."shikibetsuCode"
+        rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+      '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+      true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho" 
+    ON "ShikibetsuTaisho"."shikibetsuCode" = 要介護認定申請情報."shikibetsuCode"
         WHERE
-        要介護認定申請情報."shinseishoKanriNo" IN (#{申請書管理番号リスト})
+        要介護認定申請情報."shinseishoKanriNo" IN
+                            <foreach item="申請書管理番号リスト" index="index" collection="申請書管理番号リスト" open="(" separator="," close=")">
+                                #{申請書管理番号リスト}
+                            </foreach>
         AND 受給者台帳Newest."ninteiYukoKikanShuryoYMD" <![CDATA[>=]]> #{抽出対象期間_開始}
         AND 受給者台帳Newest."ninteiYukoKikanShuryoYMD" <![CDATA[<=]]> #{抽出対象期間_終了}
         AND 要介護認定申請情報."logicalDeletedFlag" = False
         ORDER BY
-        #{出力順}
+        #{出力順FLAG}
     </select>
 </mapper>
              
