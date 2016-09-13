@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Idokub
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Over70_ShotokuKbn;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ShotokuKbn;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_ChushutsuKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_DataSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_DataShubetsu;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_HoseiJokyo;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_HoseizumiJikofutangakuSofuKubun;
@@ -857,7 +858,7 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
         RStringBuilder builder = new RStringBuilder();
         builder.append(データ作成区分);
         if (!RString.isNullOrEmpty(parameter.getデータ作成区分())) {
-            return builder.append(KaigoGassan_DataSakuseiKubun.toValue(parameter.getデータ作成区分()).get名称());
+            return builder.append(Kaigogassan_DataSakuseiKubun.toValue(parameter.getデータ作成区分()).get名称());
         }
         return null;
     }
