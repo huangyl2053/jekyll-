@@ -8,7 +8,7 @@ and open the template in the editor.
 -->
 
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmengengakutaishoshahanteiyoukonsakusei.ITaishouJohoMapper">
-    <select id="get対象情報"
+    <select resultOrdered="true" id="get対象情報"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.hanteiyoukonsakusei.GemmenGengakuTaishoShaHanteiYoukonSakuseiMyBatisParameter"
             resultMap="ResultMap_TaishouJohoEntity" fetchSize="500">
         SELECT
