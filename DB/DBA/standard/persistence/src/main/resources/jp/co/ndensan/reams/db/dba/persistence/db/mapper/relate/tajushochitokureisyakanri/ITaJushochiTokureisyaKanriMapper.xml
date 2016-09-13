@@ -83,30 +83,30 @@
         dbT1003Tashichoson."shisetsuTaishoTsuchiHakkoYMD" AS "shisetsuTaishoTsuchiHakkoYMD",
         dbT1003Tashichoson."shisetsuHenkoTsuchiHakkoYMD"  AS "shisetsuHenkoTsuchiHakkoYMD"
         FROM
-                    (SELECT
-                    *,
-                    ROW_NUMBER() OVER (PARTITION BY T1."shikibetsuCode", T1."tekiyoYMD" ORDER BY 
-                    T1."shikibetsuCode" ASC,
-                    T1."tekiyoYMD" ASC,
-                    T1."idoYMD" DESC,
-                    T1."edaNo" DESC) AS rrkno
-             FROM
-                    rgdb."DbT1003TashichosonJushochiTokurei" AS T1
-             WHERE
-                    T1."shikibetsuCode" = #{shikibetsuCode}
-                    AND T1."logicalDeletedFlag" = FALSE) AS dbT1003Tashichoson
+        (SELECT
+        *,
+        ROW_NUMBER() OVER (PARTITION BY T1."shikibetsuCode", T1."tekiyoYMD" ORDER BY
+        T1."shikibetsuCode" ASC,
+        T1."tekiyoYMD" ASC,
+        T1."idoYMD" DESC,
+        T1."edaNo" DESC) AS rrkno
+        FROM
+        rgdb."DbT1003TashichosonJushochiTokurei" AS T1
         WHERE
-            dbT1003Tashichoson."rrkno" = 1
+        T1."shikibetsuCode" = #{shikibetsuCode}
+        AND T1."logicalDeletedFlag" = FALSE) AS dbT1003Tashichoson
+        WHERE
+        dbT1003Tashichoson."rrkno" = 1
         ) AS dbT1003
         LEFT JOIN rgdb."DbT1004ShisetsuNyutaisho" AS dbT1004
         ON
         dbT1004."shikibetsuCode" = dbT1003."shikibetsuCode"
-        AND 
+        AND
         dbT1004."daichoShubetsu" = #{psmShikibetsuTaisho}
         AND
-        ((dbT1003."kaijoYMD" IS NULL AND (dbT1004."taishoYMD" IS NULL OR dbT1003."tekiyoYMD" <![CDATA[<=]]> dbT1004."taishoYMD"))
-        OR ((dbT1003."kaijoYMD" IS NOT NULL
-        AND ((dbT1004."taishoYMD" IS NULL AND dbT1004."nyushoYMD" <![CDATA[<]]> dbT1003."kaijoYMD")
+        (( (dbT1003."kaijoYMD" IS NULL OR dbT1003."kaijoYMD" = '')  AND ( (dbT1004."taishoYMD" IS NULL OR dbT1004."taishoYMD" = '') OR dbT1003."tekiyoYMD" <![CDATA[<=]]> dbT1004."taishoYMD"))
+        OR (( (dbT1003."kaijoYMD" IS NOT NULL AND dbT1003."kaijoYMD" != '')
+        AND (( ( dbT1004."taishoYMD" IS NULL OR dbT1004."taishoYMD" = '' ) AND dbT1004."nyushoYMD" <![CDATA[<]]> dbT1003."kaijoYMD")
         OR (dbT1004."nyushoYMD" <![CDATA[<]]> dbT1003."kaijoYMD" AND dbT1004."taishoYMD" <![CDATA[>]]> dbT1003."tekiyoYMD")))))
         LEFT JOIN rgur."UrT0507Hokenja" AS urT0507
         ON
@@ -115,7 +115,7 @@
         ORDER BY
         dbT1003."tekiyoYMD" DESC, dbT1003."idoYMD" DESC,dbT1003."edaNo" DESC, dbT1004."nyushoYMD" DESC, dbT1004."taishoYMD" DESC
     </select>
-
+    
     <resultMap id="result_get事業者名称_介護保険施設" type="jp.co.ndensan.reams.db.dba.entity.db.relate.tajushochitokureisyakan.TaJushochiTokureisyaKanriRelateEntity">
         <result property="jigyoshaName" column="jigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
     </resultMap>
@@ -160,6 +160,69 @@
         )
 
     </select>
+
+    <resultMap id="result_get事業者_介護保険施設" type="jp.co.ndensan.reams.db.dba.entity.db.relate.otheraddressledger.OtherAddressInfFromDBEntity">
+        <result property="事業者番号" column="事業者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="事業者名称" column="事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
+        <result property="事業者住所" column="事業者住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="郵便番号" column="郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler" />
+        <result property="電話番号" column="電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
+    </resultMap>
+    <select resultOrdered="true" id="get事業者_介護保険施設" resultMap="result_get事業者_介護保険施設"
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tajushochitokureisyakanri.TaJushochiTokureisyaKanriParameter" fetchSize="500">
+        SELECT
+            dbT7060."jigyoshaNo" AS "事業者番号",
+            dbT7060."jigyoshaName" AS "事業者名称",
+            dbT7060."jigyoshaAddress" AS "事業者住所",
+            dbT7060."yubinNo" AS "郵便番号",
+            dbT7060."telNo" AS "電話番号"
+        FROM
+        rgdb."DbT7060KaigoJigyosha" AS dbT7060
+        WHERE
+        dbT7060."jigyoshaNo" = #{nyushoShisetsuCode}
+        AND dbT7060."yukoKaishiYMD" = (
+        SELECT
+        MAX(dbT7060Kaigo."yukoKaishiYMD") AS "yukoKaishiYMD"
+        FROM
+        rgdb."DbT7060KaigoJigyosha" AS dbT7060Kaigo
+        WHERE
+        dbT7060Kaigo."jigyoshaNo" = #{nyushoShisetsuCode}
+        )
+    </select>
+
+    <resultMap id="result_get事業者_住所地特例対象施設" type="jp.co.ndensan.reams.db.dba.entity.db.relate.otheraddressledger.OtherAddressInfFromDBEntity">
+        <result property="事業者種別" column="事業者種別" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="事業者番号" column="事業者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="事業者名称" column="事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
+        <result property="事業者住所" column="事業者住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="郵便番号" column="郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler" />
+        <result property="電話番号" column="電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
+    </resultMap>
+    <select resultOrdered="true" id="get事業者_住所地特例対象施設" resultMap="result_get事業者_住所地特例対象施設"
+            parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tajushochitokureisyakanri.TaJushochiTokureisyaKanriParameter" fetchSize="500">
+        SELECT
+            dbT1005."jigyoshaShubetsu" AS "事業者種別",
+            dbT1005."jigyoshaNo" AS "事業者番号",
+            dbT1005."jigyoshaMeisho" AS "事業者名称",
+            dbT1005."jigyoshaJusho" AS "事業者住所",
+            dbT1005."yubinNo" AS "郵便番号",
+            dbT1005."telNo" AS "電話番号"
+        FROM
+        rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" AS dbT1005
+        WHERE
+        dbT1005."jigyoshaShubetsu" = #{juushotiTokureitaishouShisetu}
+        AND dbT1005."jigyoshaNo" = #{nyushoShisetsuCode}
+        AND dbT1005."yukoKaishiYMD" = (
+        SELECT
+        MAX(dbT1005Kaigo."yukoKaishiYMD") AS "yukoKaishiYMD"
+        FROM
+        rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" AS dbT1005Kaigo
+        WHERE
+        dbT1005Kaigo."jigyoshaShubetsu" = #{juushotiTokureitaishouShisetu}
+        AND	dbT1005Kaigo."jigyoshaNo" = #{nyushoShisetsuCode}
+        )
+    </select>
+    
     <select resultOrdered="true" id="select宛名情報" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tajushochitokureisyakanri.TaJushochiTokureisyaKanriParameter" fetchSize="500">
         SELECT
@@ -185,52 +248,52 @@
         (#{tayishoYMD} <![CDATA[<=]]> tokurei."tekiyoYMD" AND #{tayishoYMD} <![CDATA[<]]> tokurei."kaijoYMD")
         )
     </select>
-    
-    
+
+
     <select resultOrdered="true" id="get他市町村住所地特例" resultMap="ResultMap_TashichosonRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.tajushochitokureisyakanri.TaJushochiTokureisyaKanriParameter" fetchSize="500">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1003TashichosonJushochiTokureiMapper.allColumns_DbT1003TashichosonJushochiTokurei"/>,
-           <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1004ShisetsuNyutaishoMapper.allColumns_DbT1004ShisetsuNyutaisho"/> 
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1004ShisetsuNyutaishoMapper.allColumns_DbT1004ShisetsuNyutaisho"/>
         FROM
         (
         SELECT
-        dbT1003Tashichoson.* 
+        dbT1003Tashichoson.*
         FROM
-                 (SELECT
-                    *,
-                    ROW_NUMBER() OVER (PARTITION BY T1."shikibetsuCode", T1."tekiyoYMD" ORDER BY 
-                    T1."shikibetsuCode" ASC,
-                    T1."tekiyoYMD" ASC,
-                    T1."idoYMD" DESC,
-                    T1."edaNo" DESC) AS rrkno
-             FROM
-                    rgdb."DbT1003TashichosonJushochiTokurei" AS T1
-             WHERE
-                    T1."shikibetsuCode" = #{shikibetsuCode}
-                    AND T1."logicalDeletedFlag" = FALSE) AS dbT1003Tashichoson
+        (SELECT
+        *,
+        ROW_NUMBER() OVER (PARTITION BY T1."shikibetsuCode", T1."tekiyoYMD" ORDER BY
+        T1."shikibetsuCode" ASC,
+        T1."tekiyoYMD" ASC,
+        T1."idoYMD" DESC,
+        T1."edaNo" DESC) AS rrkno
+        FROM
+        rgdb."DbT1003TashichosonJushochiTokurei" AS T1
         WHERE
-            dbT1003Tashichoson."rrkno" = 1
+        T1."shikibetsuCode" = #{shikibetsuCode}
+        AND T1."logicalDeletedFlag" = FALSE) AS dbT1003Tashichoson
+        WHERE
+        dbT1003Tashichoson."rrkno" = 1
         ) AS "DbT1003TashichosonJushochiTokurei"
         LEFT JOIN rgdb."DbT1004ShisetsuNyutaisho" AS "DbT1004ShisetsuNyutaisho"
         ON
         "DbT1004ShisetsuNyutaisho"."shikibetsuCode" = "DbT1003TashichosonJushochiTokurei"."shikibetsuCode"
-         AND         "DbT1004ShisetsuNyutaisho"."daichoShubetsu" = #{psmShikibetsuTaisho}
-           AND
-           (("DbT1003TashichosonJushochiTokurei"."kaijoYMD" IS NULL AND ("DbT1004ShisetsuNyutaisho"."taishoYMD" IS NULL OR "DbT1003TashichosonJushochiTokurei"."tekiyoYMD" <![CDATA[<=]]> "DbT1004ShisetsuNyutaisho"."taishoYMD"))
+        AND         "DbT1004ShisetsuNyutaisho"."daichoShubetsu" = #{psmShikibetsuTaisho}
+        AND
+        (("DbT1003TashichosonJushochiTokurei"."kaijoYMD" IS NULL AND ("DbT1004ShisetsuNyutaisho"."taishoYMD" IS NULL OR "DbT1003TashichosonJushochiTokurei"."tekiyoYMD" <![CDATA[<=]]> "DbT1004ShisetsuNyutaisho"."taishoYMD"))
         OR (("DbT1003TashichosonJushochiTokurei"."kaijoYMD" IS NOT NULL
         AND (("DbT1004ShisetsuNyutaisho"."taishoYMD" IS NULL AND "DbT1004ShisetsuNyutaisho"."nyushoYMD" <![CDATA[<]]> "DbT1003TashichosonJushochiTokurei"."kaijoYMD")
         OR ("DbT1004ShisetsuNyutaisho"."nyushoYMD" <![CDATA[<]]> "DbT1003TashichosonJushochiTokurei"."kaijoYMD" AND "DbT1004ShisetsuNyutaisho"."taishoYMD" <![CDATA[>]]> "DbT1003TashichosonJushochiTokurei"."tekiyoYMD")))))
         LEFT JOIN rgur."UrT0507Hokenja" AS urT0507
         ON
         urT0507."hokenjaNo" = "DbT1003TashichosonJushochiTokurei"."sochiHokenshaNo"
-                   AND urT0507."hokenjaShubetsu" = '08'
+        AND urT0507."hokenjaShubetsu" = '08'
         ORDER BY
         "DbT1003TashichosonJushochiTokurei"."tekiyoYMD" DESC
         , "DbT1003TashichosonJushochiTokurei"."idoYMD" DESC,
-           "DbT1003TashichosonJushochiTokurei"."edaNo" DESC
-           , "DbT1004ShisetsuNyutaisho"."nyushoYMD" DESC, 
-           "DbT1004ShisetsuNyutaisho"."taishoYMD" DESC
+        "DbT1003TashichosonJushochiTokurei"."edaNo" DESC
+        , "DbT1004ShisetsuNyutaisho"."nyushoYMD" DESC,
+        "DbT1004ShisetsuNyutaisho"."taishoYMD" DESC
     </select>
     <resultMap id="ResultMap_TashichosonRelateEntity" type="jp.co.ndensan.reams.db.dba.entity.db.relate.tajushochitokureisyakan.TashichosonRelateEntity" autoMapping="true">
         <association property="住所地特例EntityList" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1003TashichosonJushochiTokureiMapper.ResultMap_DbT1003TashichosonJushochiTokureiEntity"/>

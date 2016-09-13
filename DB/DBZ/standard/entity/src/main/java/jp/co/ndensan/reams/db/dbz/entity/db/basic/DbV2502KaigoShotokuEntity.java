@@ -21,7 +21,7 @@ public class DbV2502KaigoShotokuEntity extends DbTableEntityBase<DbV2502KaigoSho
 
     private FlexibleYear shotokuNendo;
     private ShikibetsuCode shikibetsuCode;
-    private long rirekiNo;
+    private long rirekino;
     private RString kazeiKubun;
     private RString kazeiKubunGemmenGo;
     private Decimal gokeiShotokuGaku;
@@ -78,8 +78,8 @@ public class DbV2502KaigoShotokuEntity extends DbTableEntityBase<DbV2502KaigoSho
      * @return rirekino
      */
     @CheckForNull
-    public long getRirekiNo() {
-        return rirekiNo;
+    public long getRirekino() {
+        return rirekino;
     }
 
     /**
@@ -87,8 +87,8 @@ public class DbV2502KaigoShotokuEntity extends DbTableEntityBase<DbV2502KaigoSho
      *
      * @param rirekino rirekino
      */
-    public void setRirekiNo(long rirekino) {
-        this.rirekiNo = rirekino;
+    public void setRirekino(long rirekino) {
+        this.rirekino = rirekino;
     }
 
     /**
@@ -321,7 +321,7 @@ public class DbV2502KaigoShotokuEntity extends DbTableEntityBase<DbV2502KaigoSho
     public void shallowCopy(DbV2502KaigoShotokuEntity entity) {
         this.shotokuNendo = entity.shotokuNendo;
         this.shikibetsuCode = entity.shikibetsuCode;
-        this.rirekiNo = entity.rirekiNo;
+        this.rirekino = entity.rirekino;
         this.kazeiKubun = entity.kazeiKubun;
         this.kazeiKubunGemmenGo = entity.kazeiKubunGemmenGo;
         this.gokeiShotokuGaku = entity.gokeiShotokuGaku;
@@ -342,7 +342,7 @@ public class DbV2502KaigoShotokuEntity extends DbTableEntityBase<DbV2502KaigoSho
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shotokuNendo, shikibetsuCode, rirekiNo, kazeiKubun, kazeiKubunGemmenGo, gokeiShotokuGaku, nenkiniShunyuGaku, nenkiniShotokuGaku, kazeiShotokuGaku, gekihenKanwaKubun, yusenKubun, shoriTimeStamp, motoRirekiNo, torokuGyomu);
+        return super.toMd5(shotokuNendo, shikibetsuCode, rirekino, kazeiKubun, kazeiKubunGemmenGo, gokeiShotokuGaku, nenkiniShunyuGaku, nenkiniShotokuGaku, kazeiShotokuGaku, gekihenKanwaKubun, yusenKubun, shoriTimeStamp, motoRirekiNo, torokuGyomu);
     }
 
 // </editor-fold>

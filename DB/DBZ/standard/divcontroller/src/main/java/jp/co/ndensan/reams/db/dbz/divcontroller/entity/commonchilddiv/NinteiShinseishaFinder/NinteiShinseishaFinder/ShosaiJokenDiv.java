@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @reamsid_L DBE-3000-010 sunhaidi
  */
 public class ShosaiJokenDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -262,16 +262,6 @@ public class ShosaiJokenDiv extends Panel {
     @JsonIgnore
     public void  setLblYubinNo(Label lblYubinNo) {
         this.getKihonJoho().setLblYubinNo(lblYubinNo);
-    }
-
-    @JsonIgnore
-    public ButtonDialog getBtnYubinNoGuide() {
-        return this.getKihonJoho().getBtnYubinNoGuide();
-    }
-
-    @JsonIgnore
-    public void  setBtnYubinNoGuide(ButtonDialog btnYubinNoGuide) {
-        this.getKihonJoho().setBtnYubinNoGuide(btnYubinNoGuide);
     }
 
     @JsonIgnore
@@ -795,16 +785,6 @@ public class ShosaiJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnKaisaiNumberStart() {
-        return this.getKaigoNinteiShinsakaiJoho().getBtnKaisaiNumberStart();
-    }
-
-    @JsonIgnore
-    public void  setBtnKaisaiNumberStart(Button btnKaisaiNumberStart) {
-        this.getKaigoNinteiShinsakaiJoho().setBtnKaisaiNumberStart(btnKaisaiNumberStart);
-    }
-
-    @JsonIgnore
     public TextBox getTxtKaisaiNumberStart() {
         return this.getKaigoNinteiShinsakaiJoho().getTxtKaisaiNumberStart();
     }
@@ -822,16 +802,6 @@ public class ShosaiJokenDiv extends Panel {
     @JsonIgnore
     public void  setLblKaisaiNoFor(Label lblKaisaiNoFor) {
         this.getKaigoNinteiShinsakaiJoho().setLblKaisaiNoFor(lblKaisaiNoFor);
-    }
-
-    @JsonIgnore
-    public Button getBtnKaisaiNumberEnd() {
-        return this.getKaigoNinteiShinsakaiJoho().getBtnKaisaiNumberEnd();
-    }
-
-    @JsonIgnore
-    public void  setBtnKaisaiNumberEnd(Button btnKaisaiNumberEnd) {
-        this.getKaigoNinteiShinsakaiJoho().setBtnKaisaiNumberEnd(btnKaisaiNumberEnd);
     }
 
     @JsonIgnore
@@ -955,8 +925,8 @@ public class ShosaiJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public ICodeInputDiv getCdlGeninShikkanCode() {
-        return this.getSonotaJoho().getCdlGeninShikkanCode();
+    public ICodeInputDiv getCcdGeninShikkan() {
+        return this.getSonotaJoho().getCcdGeninShikkan();
     }
 
     @JsonIgnore

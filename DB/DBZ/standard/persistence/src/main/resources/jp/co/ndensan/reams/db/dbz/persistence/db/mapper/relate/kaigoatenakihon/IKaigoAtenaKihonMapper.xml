@@ -44,97 +44,161 @@ and open the template in the editor.
         <result column="ninteiYMD" property="ninteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"></result>
     </resultMap>
 
-    <select id="selectKaigoShikakuKihonByShikibetsuCode" parameterType="jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode" resultMap="kaigoAtenaKihon"  fetchSize="500" resultOrdered="true">
+    <select id="selectKaigoShikakuKihonByShikibetsuCode" parameterType="jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode"
+            resultMap="kaigoAtenaKihon"  fetchSize="500" resultOrdered="true">
         SELECT
-        DbT1001."hihokenshaNo",
-        DbT1001."idoYMD",
-        DbT1001."edaNo",
-        DbT1001."idoJiyuCode",
-        DbT1001."shichosonCode",
-        DbT1001."shikibetsuCode",
-        DbT1001."shikakuShutokuJiyuCode",
-        DbT1001."shikakuShutokuYMD",
-        DbT1001."shikakuShutokuTodokedeYMD",
-        DbT1001."ichigoShikakuShutokuYMD",
-        DbT1001."hihokennshaKubunCode",
-        DbT1001."shikakuSoshitsuJiyuCode",
-        DbT1001."shikakuSoshitsuYMD",
-        DbT1001."shikakuSoshitsuTodokedeYMD",
-        DbT1001."shikakuHenkoJiyuCode",
-        DbT1001."shikakuHenkoYMD",
-        DbT1001."shikakuHenkoTodokedeYMD",
-        DbT1001."jushochitokureiTekiyoJiyuCode",
-        DbT1001."jushochitokureiTekiyoYMD",
-        DbT1001."jushochitokureiTekiyoTodokedeYMD",
-        DbT1001."jushochitokureiKaijoJiyuCode",
-        DbT1001."jushochitokureiKaijoYMD",
-        DbT1001."jushochitokureiKaijoTodokedeYMD",
-        DbT1001."jushochiTokureiFlag",
-        DbT1001."koikinaiJushochiTokureiFlag",
-        DbT1001."koikinaiTokureiSochimotoShichosonCode",
-        DbT1001."kyuShichosonCode",
-        DbT1001."logicalDeletedFlag",
-        DbT4001."yokaigoJotaiKubunCode",
-        DbT4001."ninteiYukoKikanKaishiYMD",
-        DbT4001."ninteiYukoKikanShuryoYMD",
-        DbT4001."ninteiYMD"
-        FROM
-        rgdb."DbT1001HihokenshaDaicho" DbT1001
-        LEFT JOIN rgdb."DbT4001JukyushaDaicho" DbT4001
-        ON  DbT4001."hihokenshaNo" = DbT1001."hihokenshaNo"
-        AND DbT4001."rirekiNo" = (SELECT MAX("rirekiNo") FROM rgdb."DbT4001JukyushaDaicho" WHERE "hihokenshaNo" = DbT1001."hihokenshaNo" AND "ninteiYMD" IS NOT NULL)
-        AND DbT4001."edaban" = (SELECT MAX("edaban") FROM rgdb."DbT4001JukyushaDaicho" WHERE "hihokenshaNo" = DbT1001."hihokenshaNo" AND DbT4001."rirekiNo"=(SELECT MAX("rirekiNo") FROM rgdb."DbT4001JukyushaDaicho" WHERE "hihokenshaNo" = DbT1001."hihokenshaNo" AND "ninteiYMD" IS NOT NULL)
-        AND DbT4001."ninteiYMD" IS NOT NULL)
-        WHERE DbT1001."shikibetsuCode" = #{shikibetsuCode}
-        ORDER BY
-        DbT1001."idoYMD" DESC,
-        DbT1001."edaNo" DESC
+             DbT1001."hihokenshaNo",
+             DbT1001."idoYMD",
+             DbT1001."edaNo",
+             DbT1001."idoJiyuCode",
+             DbT1001."shichosonCode",
+             DbT1001."shikibetsuCode",
+             DbT1001."shikakuShutokuJiyuCode",
+             DbT1001."shikakuShutokuYMD",
+             DbT1001."shikakuShutokuTodokedeYMD",
+             DbT1001."ichigoShikakuShutokuYMD",
+             DbT1001."hihokennshaKubunCode",
+             DbT1001."shikakuSoshitsuJiyuCode",
+             DbT1001."shikakuSoshitsuYMD",
+             DbT1001."shikakuSoshitsuTodokedeYMD",
+             DbT1001."shikakuHenkoJiyuCode",
+             DbT1001."shikakuHenkoYMD",
+             DbT1001."shikakuHenkoTodokedeYMD",
+             DbT1001."jushochitokureiTekiyoJiyuCode",
+             DbT1001."jushochitokureiTekiyoYMD",
+             DbT1001."jushochitokureiTekiyoTodokedeYMD",
+             DbT1001."jushochitokureiKaijoJiyuCode",
+             DbT1001."jushochitokureiKaijoYMD",
+             DbT1001."jushochitokureiKaijoTodokedeYMD",
+             DbT1001."jushochiTokureiFlag",
+             DbT1001."koikinaiJushochiTokureiFlag",
+             DbT1001."koikinaiTokureiSochimotoShichosonCode",
+             DbT1001."kyuShichosonCode",
+             DbT1001."logicalDeletedFlag",
+             DbT4001."yokaigoJotaiKubunCode",
+             DbT4001."ninteiYukoKikanKaishiYMD",
+             DbT4001."ninteiYukoKikanShuryoYMD",
+             DbT4001."ninteiYMD"
+         FROM
+             rgdb."DbT1001HihokenshaDaicho" DbT1001
+             LEFT JOIN
+             rgdb."DbT4001JukyushaDaicho" DbT4001 ON
+             DbT4001."hihokenshaNo" = DbT1001."hihokenshaNo" AND
+             DbT4001."rirekiNo" =
+                 (
+                 SELECT
+                     MAX("rirekiNo")
+                 FROM
+                     rgdb."DbT4001JukyushaDaicho"
+                 WHERE
+                     "hihokenshaNo" = DbT1001."hihokenshaNo" AND
+                     "ninteiYMD" IS NOT NULL
+                 ) AND
+             DbT4001."edaban" =
+                 (
+                 SELECT
+                     MAX("edaban")
+                 FROM
+                     rgdb."DbT4001JukyushaDaicho"
+                 WHERE
+                     "hihokenshaNo" = DbT1001."hihokenshaNo" AND
+                     DbT4001."rirekiNo"=
+                         (
+                         SELECT
+                             MAX("rirekiNo")
+                         FROM
+                             rgdb."DbT4001JukyushaDaicho"
+                         WHERE
+                             "hihokenshaNo" = DbT1001."hihokenshaNo" AND
+                             "ninteiYMD" IS NOT NULL
+                         ) AND
+                     DbT4001."ninteiYMD" IS NOT NULL
+                 ) AND
+            DbT4001."yukoMukoKubun" = '1' AND
+            DbT4001."logicalDeletedFlag" = false
+         WHERE
+             DbT1001."shikibetsuCode" = #{shikibetsuCode}
+         ORDER BY
+             DbT1001."idoYMD" DESC,
+             DbT1001."edaNo" DESC
     </select>
 
-    <select id="selectKaigoShikakuKihonByHihokenshaNo" parameterType="jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo" resultMap="kaigoAtenaKihon"  fetchSize="500" resultOrdered="true">
+    <select id="selectKaigoShikakuKihonByHihokenshaNo" parameterType="jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo"
+            resultMap="kaigoAtenaKihon"  fetchSize="500" resultOrdered="true">
         SELECT
-        DbT1001."hihokenshaNo",
-        DbT1001."idoYMD",
-        DbT1001."edaNo",
-        DbT1001."idoJiyuCode",
-        DbT1001."shichosonCode",
-        DbT1001."shikibetsuCode",
-        DbT1001."shikakuShutokuJiyuCode",
-        DbT1001."shikakuShutokuYMD",
-        DbT1001."shikakuShutokuTodokedeYMD",
-        DbT1001."ichigoShikakuShutokuYMD",
-        DbT1001."hihokennshaKubunCode",
-        DbT1001."shikakuSoshitsuJiyuCode",
-        DbT1001."shikakuSoshitsuYMD",
-        DbT1001."shikakuSoshitsuTodokedeYMD",
-        DbT1001."shikakuHenkoJiyuCode",
-        DbT1001."shikakuHenkoYMD",
-        DbT1001."shikakuHenkoTodokedeYMD",
-        DbT1001."jushochitokureiTekiyoJiyuCode",
-        DbT1001."jushochitokureiTekiyoYMD",
-        DbT1001."jushochitokureiTekiyoTodokedeYMD",
-        DbT1001."jushochitokureiKaijoJiyuCode",
-        DbT1001."jushochitokureiKaijoYMD",
-        DbT1001."jushochitokureiKaijoTodokedeYMD",
-        DbT1001."jushochiTokureiFlag",
-        DbT1001."koikinaiJushochiTokureiFlag",
-        DbT1001."koikinaiTokureiSochimotoShichosonCode",
-        DbT1001."kyuShichosonCode",
-        DbT1001."logicalDeletedFlag",
-        DbT4001."yokaigoJotaiKubunCode",
-        DbT4001."ninteiYukoKikanKaishiYMD",
-        DbT4001."ninteiYukoKikanShuryoYMD",
-        DbT4001."ninteiYMD"
+            DbT1001."hihokenshaNo",
+            DbT1001."idoYMD",
+            DbT1001."edaNo",
+            DbT1001."idoJiyuCode",
+            DbT1001."shichosonCode",
+            DbT1001."shikibetsuCode",
+            DbT1001."shikakuShutokuJiyuCode",
+            DbT1001."shikakuShutokuYMD",
+            DbT1001."shikakuShutokuTodokedeYMD",
+            DbT1001."ichigoShikakuShutokuYMD",
+            DbT1001."hihokennshaKubunCode",
+            DbT1001."shikakuSoshitsuJiyuCode",
+            DbT1001."shikakuSoshitsuYMD",
+            DbT1001."shikakuSoshitsuTodokedeYMD",
+            DbT1001."shikakuHenkoJiyuCode",
+            DbT1001."shikakuHenkoYMD",
+            DbT1001."shikakuHenkoTodokedeYMD",
+            DbT1001."jushochitokureiTekiyoJiyuCode",
+            DbT1001."jushochitokureiTekiyoYMD",
+            DbT1001."jushochitokureiTekiyoTodokedeYMD",
+            DbT1001."jushochitokureiKaijoJiyuCode",
+            DbT1001."jushochitokureiKaijoYMD",
+            DbT1001."jushochitokureiKaijoTodokedeYMD",
+            DbT1001."jushochiTokureiFlag",
+            DbT1001."koikinaiJushochiTokureiFlag",
+            DbT1001."koikinaiTokureiSochimotoShichosonCode",
+            DbT1001."kyuShichosonCode",
+            DbT1001."logicalDeletedFlag",
+            DbT4001."yokaigoJotaiKubunCode",
+            DbT4001."ninteiYukoKikanKaishiYMD",
+            DbT4001."ninteiYukoKikanShuryoYMD",
+            DbT4001."ninteiYMD"
         FROM
-        rgdb."DbT1001HihokenshaDaicho" DbT1001
-        LEFT JOIN rgdb."DbT4001JukyushaDaicho" DbT4001
-        ON  DbT4001."hihokenshaNo" = DbT1001."hihokenshaNo"
-        AND DbT4001."rirekiNo" = (SELECT MAX("rirekiNo") FROM rgdb."DbT4001JukyushaDaicho" WHERE "hihokenshaNo" = DbT1001."hihokenshaNo" AND "ninteiYMD" IS NOT NULL)
-        AND DbT4001."edaban" = (SELECT MAX("edaban") FROM rgdb."DbT4001JukyushaDaicho" WHERE "hihokenshaNo" = DbT1001."hihokenshaNo" AND DbT4001."rirekiNo"=(SELECT MAX("rirekiNo") FROM rgdb."DbT4001JukyushaDaicho" WHERE "hihokenshaNo" = DbT1001."hihokenshaNo" AND "ninteiYMD" IS NOT NULL)
-        AND DbT4001."ninteiYMD" IS NOT NULL)
-        WHERE DbT1001."hihokenshaNo" = #{hihokenshaNo}
+            rgdb."DbT1001HihokenshaDaicho" DbT1001
+            LEFT JOIN
+            rgdb."DbT4001JukyushaDaicho" DbT4001 ON
+            DbT4001."hihokenshaNo" = DbT1001."hihokenshaNo" AND
+            DbT4001."rirekiNo" =
+                (
+                SELECT
+                    MAX("rirekiNo")
+                FROM
+                    rgdb."DbT4001JukyushaDaicho"
+                WHERE
+                    "hihokenshaNo" = DbT1001."hihokenshaNo" AND
+                    "ninteiYMD" IS NOT NULL
+                ) AND
+            DbT4001."edaban" =
+                (
+                SELECT
+                    MAX("edaban")
+                FROM
+                    rgdb."DbT4001JukyushaDaicho"
+                WHERE
+                    "hihokenshaNo" = DbT1001."hihokenshaNo" AND
+                    DbT4001."rirekiNo"=
+                        (
+                        SELECT
+                            MAX("rirekiNo")
+                        FROM
+                            rgdb."DbT4001JukyushaDaicho"
+                        WHERE
+                            "hihokenshaNo" = DbT1001."hihokenshaNo" AND
+                            "ninteiYMD" IS NOT NULL
+                        ) AND
+                    DbT4001."ninteiYMD" IS NOT NULL
+                ) AND
+            DbT4001."yukoMukoKubun" = '1' AND
+            DbT4001."logicalDeletedFlag" = false
+        WHERE
+            DbT1001."hihokenshaNo" = #{hihokenshaNo}
         ORDER BY
-        DbT1001."idoYMD" DESC,
-        DbT1001."edaNo" DESC
+            DbT1001."idoYMD" DESC,
+            DbT1001."edaNo" DESC
     </select>
 </mapper>

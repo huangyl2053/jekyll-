@@ -48,7 +48,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
  */
 public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirekiDiv {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -59,6 +59,8 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
     private Button btnAddShikakuShutoku;
     @JsonProperty("dgShikakuShutokuRireki")
     private DataGrid<dgShikakuShutokuRireki_Row> dgShikakuShutokuRireki;
+    @JsonProperty("btnClose")
+    private Button btnClose;
     @JsonProperty("mode")
     private RString mode;
     @JsonProperty("hdnHihokenshaNo")
@@ -106,6 +108,24 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
     @JsonProperty("dgShikakuShutokuRireki")
     public void setDgShikakuShutokuRireki(DataGrid<dgShikakuShutokuRireki_Row> dgShikakuShutokuRireki) {
         this.dgShikakuShutokuRireki = dgShikakuShutokuRireki;
+    }
+
+    /*
+     * getbtnClose
+     * @return btnClose
+     */
+    @JsonProperty("btnClose")
+    public Button getBtnClose() {
+        return btnClose;
+    }
+
+    /*
+     * setbtnClose
+     * @param btnClose btnClose
+     */
+    @JsonProperty("btnClose")
+    public void setBtnClose(Button btnClose) {
+        this.btnClose = btnClose;
     }
 
     /*
@@ -322,6 +342,43 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
         _CommonChildDivModeUtil.setMode(this.modes, BtnDisplayMode.class, value);
     }
 
+    public static enum DialogCloseBtnDisplayMode implements ICommonChildDivMode {
+
+        SetDisplay("SetDisplay"),
+        SetDisplayNone("SetDisplayNone");
+
+        private final String name;
+
+        private DialogCloseBtnDisplayMode(final String name) {
+            this.name = name;
+        }
+
+        public static DialogCloseBtnDisplayMode getEnum(String str) {
+            DialogCloseBtnDisplayMode[] enumArray = DialogCloseBtnDisplayMode.values();
+
+            for (DialogCloseBtnDisplayMode enumStr : enumArray) {
+                if (str.equals(enumStr.name.toString())) {
+                    return enumStr;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public String toString() {
+            return this.name;
+        }
+
+    }
+
+    public DialogCloseBtnDisplayMode getMode_DialogCloseBtnDisplayMode() {
+        return (DialogCloseBtnDisplayMode) _CommonChildDivModeUtil.getMode(this.modes, DialogCloseBtnDisplayMode.class);
+    }
+
+    public void setMode_DialogCloseBtnDisplayMode(DialogCloseBtnDisplayMode value) {
+        _CommonChildDivModeUtil.setMode(this.modes, DialogCloseBtnDisplayMode.class, value);
+    }
+
     public static enum DisplayType implements ICommonChildDivMode {
 
         shokai("shokai"),
@@ -372,7 +429,12 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
     @Override
     public void initialize(HihokenshaNo hihokenshaNo,
             ShikibetsuCode shikibetsuCode) {
+        initializeShichosonSecurity();
+        getShikakuShutokuRireki(hihokenshaNo, shikibetsuCode);
+    }
 
+    @Override
+    public void initializeShichosonSecurity() {
         // 「ビジネス設計_DBUMN00000_市町村情報セキュリティ情報取得」の「市町村セキュリティ情報を取得する」を参照する
         // １．０．１　導入形態の処理
         ShichosonSecurityJoho 市町村情報セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
@@ -419,11 +481,17 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
                 this.getDgShikakuShutokuRireki().getGridSetting().getColumn("shikibetsuCode").setVisible(true);
             }
         }
+    }
+
+    @Override
+    public void getShikakuShutokuRireki(HihokenshaNo hihokenshaNo, ShikibetsuCode shikibetsuCode) {
+
         ShikakuTokusoFinder shikakuTokusoFinder = ShikakuTokusoFinder.createInstance();
         ShikakuTokusoParameter parmeter = ShikakuTokusoParameter.createParam(hihokenshaNo, shikibetsuCode);
 
         // 「ビジネス設計_DBAMN00000_資格得喪履歴」の「一覧データ取得」を参照する
         SearchResult<ShikakuTokuso> result = shikakuTokusoFinder.getShikakuTokuso(parmeter);
+
         List<dgShikakuShutokuRireki_Row> dgShikakuShutokuRirekiList = new ArrayList<>();
         for (ShikakuTokuso shikakuTokuso : result.records()) {
             dgShikakuShutokuRireki_Row row = new dgShikakuShutokuRireki_Row();
@@ -466,6 +534,7 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
             } else {
                 row.setJutokuKubun(RString.EMPTY);
             }
+
             row.setShozaiHokensha(shikakuTokuso.get市町村名称());
             row.setShozaiHokenshaCode(codeToRString(shikakuTokuso.get市町村コード()));
             row.setSochimotoHokensha(shikakuTokuso.get措置元保険者());
@@ -489,6 +558,7 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
             row.setModifyButtonState(DataGridButtonState.Disabled);
             dgShikakuShutokuRirekiList.add(row);
         }
+
         this.getDgShikakuShutokuRireki().setDataSource(dgShikakuShutokuRirekiList);
         this.getBtnAddShikakuShutoku().setDisabled(true);
     }
@@ -536,4 +606,14 @@ public class ShikakuTokusoRirekiDiv extends Panel implements IShikakuTokusoRirek
     public void set追加するボタンの表示状態(boolean 表示モード) {
         this.getBtnAddShikakuShutoku().setDisplayNone(表示モード);
     }
+
+    @Override
+    public void setDialogDisplay() {
+        this.getBtnAddShikakuShutoku().setDisplayNone(true);
+        this.getDgShikakuShutokuRireki().getGridSetting().setIsShowModifyButtonColumn(false);
+        this.getDgShikakuShutokuRireki().getGridSetting().setIsShowDeleteButtonColumn(false);
+        this.getDgShikakuShutokuRireki().getGridSetting().getColumn(new RString("shosai")).setVisible(false);
+        this.getBtnClose().setDisplayNone(false);
+    }
+
 }

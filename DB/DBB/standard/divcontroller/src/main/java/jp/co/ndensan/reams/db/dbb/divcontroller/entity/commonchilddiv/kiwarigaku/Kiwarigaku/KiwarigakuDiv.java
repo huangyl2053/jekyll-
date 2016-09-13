@@ -7,11 +7,14 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kiwarigak
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbb.business.core.Kiwarigaku;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
  * Kiwarigaku のクラスファイル
@@ -20,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  */
 public class KiwarigakuDiv extends Panel implements IKiwarigakuDiv {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -775,13 +778,12 @@ public class KiwarigakuDiv extends Panel implements IKiwarigakuDiv {
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
     @Override
-    public void load(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号, Decimal 履歴番号) {
-        getHandler().load(調定年度, 賦課年度, 通知書番号, 履歴番号.intValue());
+    public Optional<Kiwarigaku> load(FlexibleYear 調定年度, FlexibleYear 賦課年度, TsuchishoNo 通知書番号, Decimal 履歴番号) {
+        return getHandler().load(調定年度, 賦課年度, 通知書番号, 履歴番号.intValue());
     }
 
     @JsonIgnore
     public KiwarigakuHandler getHandler() {
         return new KiwarigakuHandler(this);
     }
-
 }

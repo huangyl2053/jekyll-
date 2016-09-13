@@ -54,9 +54,9 @@ public class RoreiFukushiNenkinJukyushaManager {
     }
 
     /**
-     * 老齢福祉年金受給者{@link RoreiFukushiNenkinJukyusha}を保存します。
+     * {@link RoreiFukushiNenkinJukyusha 老齢福祉年金受給者}を保存します。
      *
-     * @param 老齢福祉年金受給者 {@link RoreiFukushiNenkinJukyusha}
+     * @param 老齢福祉年金受給者 {@link RoreiFukushiNenkinJukyusha 老齢福祉年金受給者}
      * @return 更新件数 更新結果の件数を返します。
      */
     @Transaction
@@ -66,6 +66,22 @@ public class RoreiFukushiNenkinJukyushaManager {
             return false;
         }
         return 1 == dac.saveOrDeletePhysicalBy(老齢福祉年金受給者.toEntity());
+    }
+
+    /**
+     * 指定の{@link RoreiFukushiNenkinJukyusha 老齢福祉年金受給者}複数件を保存します。
+     *
+     * @param 老齢福祉年金受給者s {@link RoreiFukushiNenkinJukyusha 老齢福祉年金受給者}複数件
+     * @return 更新件数
+     */
+    @Transaction
+    public int save老齢福祉年金受給者All(Iterable<? extends RoreiFukushiNenkinJukyusha> 老齢福祉年金受給者s) {
+        requireNonNull(老齢福祉年金受給者s, UrSystemErrorMessages.値がnull.getReplacedMessage("老齢福祉年金受給者"));
+        int result = 0;
+        for (RoreiFukushiNenkinJukyusha t : 老齢福祉年金受給者s) {
+            result += save老齢福祉年金受給者(t) ? 1 : 0;
+        }
+        return result;
     }
 
     /**

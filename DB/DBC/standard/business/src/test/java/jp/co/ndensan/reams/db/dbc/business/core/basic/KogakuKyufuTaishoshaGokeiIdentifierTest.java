@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
-import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3055KogakuKyufuTaishoshaGokeiEntityGenerator;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3055KogakuKyufuTaishoshaGokeiEntityGenerator;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import static jp.co.ndensan.reams.db.dbx.testhelper.matcher.IsSerializable.serializable;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;

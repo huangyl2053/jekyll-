@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuShutokuJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.ShikakuFuseigoIchiranDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.ShikakuFuseigoShuseiMainDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.dgShikakuFuseigoIchiranForDemo_Row;
@@ -435,18 +435,18 @@ public class ShikakuFuseigoShuseiMain {
         public static void onLoad(DropDownList ddl) {
             List<KeyValueDataSource> dataSource = new ArrayList<>();
             for (ShikakuSoshitsuJiyu jiyu : ShikakuSoshitsuJiyu.values()) {
-                dataSource.add(new KeyValueDataSource(jiyu.getCode(), jiyu.getName()));
+                dataSource.add(new KeyValueDataSource(jiyu.getコード(), jiyu.get名称()));
             }
             ddl.setDataSource(dataSource);
         }
 
         public static void select(DropDownList ddl, ShikakuSoshitsuJiyu jiyu) {
-            ddl.setSelectedItem(jiyu.getCode());
+            ddl.setSelectedKey(jiyu.getコード());
         }
 
         public static ShikakuSoshitsuJiyu getShikakuSoshitsuJiyuCode(RString shikakuSoshitsuJiyu) {
             for (ShikakuSoshitsuJiyu jiyu : ShikakuSoshitsuJiyu.values()) {
-                if (jiyu.getName().equals(shikakuSoshitsuJiyu)) {
+                if (jiyu.get名称().equals(shikakuSoshitsuJiyu)) {
                     return jiyu;
                 }
             }

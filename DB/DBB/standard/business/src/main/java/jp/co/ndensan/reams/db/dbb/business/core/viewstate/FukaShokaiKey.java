@@ -6,6 +6,9 @@
 package jp.co.ndensan.reams.db.dbb.business.core.viewstate;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.core.fuka.SanteiState;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
@@ -21,7 +24,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @author n3317 塚田萌
  */
-public class FukaShokaiKey implements Serializable {
+public final class FukaShokaiKey implements Serializable {
+
+    public static final FukaShokaiKey EMPTY;
+
+    static {
+        EMPTY = new FukaShokaiKey(FlexibleYear.EMPTY, FlexibleYear.EMPTY, TsuchishoNo.EMPTY, -1,
+                HihokenshaNo.EMPTY, FlexibleDate.MAX, RString.EMPTY, new YMDHMS("99991231235959"),
+                null, false, false, AtenaMeisho.EMPTY
+        );
+    }
 
     private final FlexibleYear 調定年度;
     private final FlexibleYear 賦課年度;
@@ -176,5 +188,90 @@ public class FukaShokaiKey implements Serializable {
      */
     public AtenaMeisho get氏名() {
         return 氏名;
+    }
+
+    /**
+     * 指定の全要素({@link Items})を検索に用いることができる値として保持する場合、{@code true}を返します。
+     *
+     * @param e1 要素1(必須)
+     * @param any 要素2～n(任意)
+     * @return 指定の要素が全て存在する場合、{@code true}.以外、{@code false}
+     */
+    public boolean hasAll(Items e1, Items... any) {
+        if (this == EMPTY) {
+            return false;
+        }
+        List<Items> items = new ArrayList<>();
+        items.add(e1);
+        items.addAll(Arrays.asList(any));
+        for (Items item : items) {
+            if (!has(item)) {
+                return false;
+            }
+        }
+        if (items.contains(Items.調定年度) && items.contains(Items.賦課年度)) {
+            return get賦課年度().isBeforeOrEquals(get調定年度());
+        }
+        return true;
+    }
+
+    private boolean has(Items item) {
+        switch (item) {
+            case 調定年度:
+                return isValid(this.get調定年度());
+            case 賦課年度:
+                return isValid(this.get賦課年度());
+            case 通知書番号:
+                return isValid(this.get通知書番号());
+            case 履歴番号:
+                return isValid履歴番号(this.get履歴番号());
+            case 被保険者番号:
+                return isValid(this.get被保険者番号());
+            default:
+                return false;
+        }
+    }
+
+    private static boolean isValid(FlexibleYear year) {
+        return year != null && year.isValid();
+    }
+
+    private static boolean isValid(TsuchishoNo value) {
+        return value != null && !value.isEmpty();
+    }
+
+    private static boolean isValid(HihokenshaNo value) {
+        return value != null && !value.isEmpty();
+    }
+
+    private static boolean isValid履歴番号(int value) {
+        return 0 <= value;
+    }
+
+    /**
+     * {@link FukaShokaiKey}が保持する値です。
+     */
+    public static enum Items {
+
+        /**
+         * 賦課年度
+         */
+        賦課年度,
+        /**
+         * 調定年度
+         */
+        調定年度,
+        /**
+         * 通知書番号
+         */
+        通知書番号,
+        /**
+         * 履歴番号
+         */
+        履歴番号,
+        /**
+         * 被保険者番号
+         */
+        被保険者番号;
     }
 }

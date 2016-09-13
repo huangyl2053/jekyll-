@@ -16,7 +16,7 @@ import java.util.UUID;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.util.Comparators;
-import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
+import jp.co.ndensan.reams.db.dbz.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;

@@ -7,16 +7,18 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JigyoshaN
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.HashSet;
-import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
+
+import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
  * JigyoshaNyuryokuGudieCommonChildDiv のクラスファイル
@@ -24,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  * @reamsid_L DBA-0140-010 houtianpeng
  */
 public class JigyoshaNyuryokuGudieCommonChildDivDiv extends Panel implements IJigyoshaNyuryokuGudieCommonChildDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い

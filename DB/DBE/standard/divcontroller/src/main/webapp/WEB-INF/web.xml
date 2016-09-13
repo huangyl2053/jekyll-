@@ -64,7 +64,8 @@
         <url-pattern>*.exe</url-pattern>
         <url-pattern>*.dll</url-pattern>
         <url-pattern>*.pdb</url-pattern>
-        <url-pattern>*.deploy</url-pattern>		
+        <url-pattern>*.deploy</url-pattern>
+        <url-pattern>*.pdf</url-pattern>
     </servlet-mapping>
 
     <jsp-config>

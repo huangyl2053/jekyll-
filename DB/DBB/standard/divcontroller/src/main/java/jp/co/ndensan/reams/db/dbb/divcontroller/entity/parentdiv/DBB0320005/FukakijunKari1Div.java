@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class FukakijunKari1Div extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -32,24 +32,40 @@ public class FukakijunKari1Div extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * gettxtShikakuShutokuYMDKari1
+     * @return txtShikakuShutokuYMDKari1
+     */
     @JsonProperty("txtShikakuShutokuYMDKari1")
     public TextBoxDate getTxtShikakuShutokuYMDKari1() {
         return txtShikakuShutokuYMDKari1;
     }
 
+    /*
+     * settxtShikakuShutokuYMDKari1
+     * @param txtShikakuShutokuYMDKari1 txtShikakuShutokuYMDKari1
+     */
     @JsonProperty("txtShikakuShutokuYMDKari1")
     public void setTxtShikakuShutokuYMDKari1(TextBoxDate txtShikakuShutokuYMDKari1) {
-        this.txtShikakuShutokuYMDKari1=txtShikakuShutokuYMDKari1;
+        this.txtShikakuShutokuYMDKari1 = txtShikakuShutokuYMDKari1;
     }
 
+    /*
+     * gettxtShikakuSoshitsuYMDKari1
+     * @return txtShikakuSoshitsuYMDKari1
+     */
     @JsonProperty("txtShikakuSoshitsuYMDKari1")
     public TextBoxDate getTxtShikakuSoshitsuYMDKari1() {
         return txtShikakuSoshitsuYMDKari1;
     }
 
+    /*
+     * settxtShikakuSoshitsuYMDKari1
+     * @param txtShikakuSoshitsuYMDKari1 txtShikakuSoshitsuYMDKari1
+     */
     @JsonProperty("txtShikakuSoshitsuYMDKari1")
     public void setTxtShikakuSoshitsuYMDKari1(TextBoxDate txtShikakuSoshitsuYMDKari1) {
-        this.txtShikakuSoshitsuYMDKari1=txtShikakuSoshitsuYMDKari1;
+        this.txtShikakuSoshitsuYMDKari1 = txtShikakuSoshitsuYMDKari1;
     }
 
     // </editor-fold>

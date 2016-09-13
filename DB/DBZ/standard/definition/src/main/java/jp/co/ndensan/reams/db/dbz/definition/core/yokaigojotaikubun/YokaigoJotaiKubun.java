@@ -1,12 +1,19 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun;
 
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 要介護状態区分コード02を表す列挙型です。
- *
- * @reamsid_L DBZ-9999-023 liangbc
+ * すべての要介護状態区分を管理します。
+ * <p/>
+ * 要介護状態区分については、これまでの法改正で何度も見直されていますが、
+ * コードとそれに対応する状態の関係については変わっていません。
+ * このenumでは、歴代の要介護状態区分コードと対応する状態について、全般的に管理します。
  */
 public enum YokaigoJotaiKubun {
 
@@ -90,7 +97,16 @@ public enum YokaigoJotaiKubun {
     }
 
     /**
-     * 要介護状態区分コード02のコードを返します。
+     * コードを返却します。
+     *
+     * @return コード
+     */
+    public RString getCode() {
+        return this.code;
+    }
+
+    /**
+     * コードを返します。
      *
      * @return 要介護状態区分コード02のコード
      */
@@ -99,28 +115,28 @@ public enum YokaigoJotaiKubun {
     }
 
     /**
-     * 要介護状態区分コード02の略称を返します。
+     * 略称を返します。
      *
-     * @return 要介護状態区分コード02の略称
+     * @return 略称
      */
     public RString get略称() {
         return shortName;
     }
 
     /**
-     * 要介護状態区分コード02の名称を返します。
+     * 名称を返します。
      *
-     * @return 要介護状態区分コード02の名称
+     * @return 名称
      */
     public RString get名称() {
         return fullName;
     }
 
     /**
-     * 要介護状態区分コード02のコードと一致する内容を探します。
+     * コードと一致する内容を探します。
      *
-     * @param code 要介護状態区分コード02のコード
-     * @return {@code code} に対応する要介護状態区分コード02
+     * @param code コード
+     * @return {@code code} に対応する要介護状態区分
      */
     public static YokaigoJotaiKubun toValue(RString code) {
 
@@ -129,6 +145,6 @@ public enum YokaigoJotaiKubun {
                 return yokaigoJotaiKubun02;
             }
         }
-        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("要介護状態区分コード02"));
+        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("要介護状態区分コード"));
     }
 }

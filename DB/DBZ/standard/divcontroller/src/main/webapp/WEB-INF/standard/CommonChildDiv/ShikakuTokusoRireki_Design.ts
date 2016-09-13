@@ -28,6 +28,10 @@ module DBZ {
                 return "onSelectByDeleteButton";
             }
 
+            public static onClick_btnClose(): string {
+                return "onClick_btnClose";
+            }
+
         }
 
         export class Controls {
@@ -59,6 +63,10 @@ module DBZ {
 
             public dgShikakuShutokuRireki(): UZA.DataGrid {
                 return new UZA.DataGrid(this.convFiledName("dgShikakuShutokuRireki"));
+            }
+
+            public btnClose(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnClose"));
             }
 
         }

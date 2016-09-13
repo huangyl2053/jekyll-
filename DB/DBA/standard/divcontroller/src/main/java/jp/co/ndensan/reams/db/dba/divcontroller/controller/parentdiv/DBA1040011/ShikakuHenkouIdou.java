@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA1040011;
 
+import jp.co.ndensan.reams.db.dba.business.core.exclusivekey.DbaExclusiveKey;
 import jp.co.ndensan.reams.db.dba.business.core.hihokenshadaicho.HihokenshaShutokuJyoho;
 import jp.co.ndensan.reams.db.dba.definition.message.DbaErrorMessages;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1040011.DBA1040011StateName;
@@ -13,6 +14,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1040011.Shik
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1040011.ShikakuHenkouIdouHandler;
 import jp.co.ndensan.reams.db.dba.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
 import jp.co.ndensan.reams.db.dba.service.core.shikakuhenkouidou.HihokenshaShikakuHenkoManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuHenkoJiyu;
@@ -41,7 +43,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class ShikakuHenkouIdou {
 
-    private static final LockingKey 前排他ロックキー = new LockingKey("ShikakuHenkoIdo");
     private final HihokenshaShikakuHenkoManager henkoManager;
     private final HihokenshaShikakuShutokuManager shutokuManager;
 
@@ -71,7 +72,7 @@ public class ShikakuHenkouIdou {
         HihokenshaShutokuJyoho hihokensha = shutokuManager.getSaishinDeta(
                 key.get識別コード(), key.get被保険者番号());
         getHandler(div).load(hihokensha);
-        if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
+        if (!RealInitialLocker.tryGetLock(create排他キー())) {
             div.setReadOnly(true);
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
             validationMessages.add(new ValidationMessageControlPair(ShikakuHenkouValidationMessages.排他_他のユーザが使用中));
@@ -81,6 +82,12 @@ public class ShikakuHenkouIdou {
         return ResponseData.of(div).respond();
     }
 
+    private LockingKey create排他キー() {
+        TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo hihokenshaNo = key.get被保険者番号();
+        return new LockingKey(DbaExclusiveKey.create被保険者番号排他キー(hihokenshaNo));
+    }
+
     /**
      * 保存するボタン押下の場合、各タブのデータの登録、修正、削除など処理を実行する。
      *
@@ -88,19 +95,36 @@ public class ShikakuHenkouIdou {
      * @return ResponseData<ShikakuHenkouIdouDiv>
      */
     public ResponseData<ShikakuHenkouIdouDiv> onClick_btnUpdate(ShikakuHenkouIdouDiv div) {
+
         if (!ResponseHolder.isReRequest()) {
+
+            if (!isSavable(div)) {
+                throw new ApplicationException(UrErrorMessages.保存データなし.getMessage());
+            }
+
             return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
+            && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.Yes)) {
             saveGamenData(div);
+            RealInitialLocker.release(create排他キー());
+            div.getCcdKaigoKanryoMessage().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
+            return ResponseData.of(div).setState(DBA1040011StateName.完了状態);
         }
-        if (ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.No)) {
-            return ResponseData.of(div).respond();
-        }
-        RealInitialLocker.release(前排他ロックキー);
-        div.getCcdKaigoKanryoMessage().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
-        return ResponseData.of(div).setState(DBA1040011StateName.完了状態);
+//<<<<<<< HEAD
+        return ResponseData.of(div).respond();
+    }
+
+    private boolean isSavable(ShikakuHenkouIdouDiv div) {
+        return getHandler(div).isSavable();
+//=======
+//        if (ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.No)) {
+//            return ResponseData.of(div).respond();
+//        }
+//        RealInitialLocker.release(前排他ロックキー);
+//        div.getCcdKaigoKanryoMessage().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
+//        return ResponseData.of(div).setState(DBA1040011StateName.完了状態);
+//>>>>>>> origin/sync
     }
 
     /**
@@ -110,11 +134,26 @@ public class ShikakuHenkouIdou {
      * @return ResponseData<ShikakuHenkouIdouDiv>
      */
     public ResponseData<ShikakuHenkouIdouDiv> onClick_btnReSearch(ShikakuHenkouIdouDiv div) {
-        RealInitialLocker.release(前排他ロックキー);
-        if (new RString("DBAMN61002").equals(ResponseHolder.getMenuID())) {
-            return ResponseData.of(div).forwardWithEventName(DBA1040011TransitionEventName.再検索).parameter(new RString("広域内転居"));
-        }
+//<<<<<<< HEAD
+        RealInitialLocker.release(create排他キー());
+//=======
+//        RealInitialLocker.release(前排他ロックキー);
+//        if (new RString("DBAMN61002").equals(ResponseHolder.getMenuID())) {
+//            return ResponseData.of(div).forwardWithEventName(DBA1040011TransitionEventName.再検索).parameter(new RString("広域内転居"));
+//        }
+//>>>>>>> origin/sync
         return ResponseData.of(div).forwardWithEventName(DBA1040011TransitionEventName.再検索).respond();
+    }
+
+    /**
+     * 対象者検索に戻るボタン押下の場合、対象者検索画面に戻る
+     *
+     * @param div 資格変更異動DIV
+     * @return ResponseData<ShikakuHenkouIdouDiv>
+     */
+    public ResponseData<ShikakuHenkouIdouDiv> onClick_btnSearchResult(ShikakuHenkouIdouDiv div) {
+        RealInitialLocker.release(create排他キー());
+        return ResponseData.of(div).forwardWithEventName(DBA1040011TransitionEventName.検索結果一覧へ).respond();
     }
 
     private ShikakuHenkouIdouHandler getHandler(ShikakuHenkouIdouDiv div) {

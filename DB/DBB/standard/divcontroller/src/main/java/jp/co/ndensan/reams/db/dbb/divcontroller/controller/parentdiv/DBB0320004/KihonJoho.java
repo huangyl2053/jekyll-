@@ -48,4 +48,25 @@ public class KihonJoho {
         response.data = div;
         return response;
     }
+
+    /**
+     * @param div {@link KihonJohoDiv}
+     * @return {@link ResponseData}
+     */
+    public ResponseData<KihonJohoDiv> onClick_btnZenkairesultHyoji(KihonJohoDiv div) {
+        return clearViewStateKeys(div);
+    }
+
+    private ResponseData<KihonJohoDiv> clearViewStateKeys(KihonJohoDiv div) {
+        FukaShokaiController.clearFukaTaishoshaKeyAndFukaShokaiKey();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * @param div {@link KihonJohoDiv}
+     * @return {@link ResponseData}
+     */
+    public ResponseData<KihonJohoDiv> onClick_btnResearch(KihonJohoDiv div) {
+        return clearViewStateKeys(div);
+    }
 }

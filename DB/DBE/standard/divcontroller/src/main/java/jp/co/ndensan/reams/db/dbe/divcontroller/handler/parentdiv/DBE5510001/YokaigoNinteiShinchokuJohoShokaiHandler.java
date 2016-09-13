@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5510001;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteishinchokujohoshokai.YokaigoNinteiShinchokuJoho;
 import jp.co.ndensan.reams.db.dbe.business.report.dbe521002.NiteiGyomuShinchokuJokyoIchiranhyoBodyItem;
@@ -14,13 +15,14 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5510001.dgSh
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbz.definition.core.IYokaigoJotaiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -39,9 +41,23 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
  */
 public class YokaigoNinteiShinchokuJohoShokaiHandler {
 
+    private static final List<RString> CHK_BOX_NASI = Collections.emptyList();
     private static final RString DATE_SOURCE_KEY0 = new RString("key0");
     private static final RString DATE_SOURCE_KEY1 = new RString("key1");
-    private static final List<RString> CHK_BOX_NASI = new ArrayList<>();
+
+    private enum KensakuHoho {
+
+        被保険者から検索する場合(DATE_SOURCE_KEY0, "330px"),
+        進捗状況から検索する場合(DATE_SOURCE_KEY1, "330px");
+
+        private final RString key;
+        private final RString dgShinseiJohoHeigh;
+
+        private KensakuHoho(RString key, String dgShinseiJohoHeight) {
+            this.key = key;
+            this.dgShinseiJohoHeigh = new RString(dgShinseiJohoHeight);
+        }
+    }
     private final YokaigoNinteiShinchokuJohoShokaiDiv div;
 
     /**
@@ -58,29 +74,50 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
      */
     public void onload() {
         div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
-        div.getRadKensakuHoho().setSelectedKey(DATE_SOURCE_KEY0);
-        div.getRadMatchType().setSelectedKey(DATE_SOURCE_KEY0);
+        div.getRadKensakuHoho().setSelectedKey(KensakuHoho.被保険者から検索する場合.key);
+        div.getShinseiJohoIchiran().setIsOpen(false);
+        div.getDgShinseiJoho().setHeight(KensakuHoho.被保険者から検索する場合.dgShinseiJohoHeigh);
+        div.getDdlNameMatchType().setSelectedKey(DATE_SOURCE_KEY0);
         div.getRadHizukeHani().setSelectedKey(DATE_SOURCE_KEY0);
-        div.getTxtShiteiHizukeForm().setDisabled(true);
-        div.getTxtShiteiHizukeTo().setDisabled(true);
+        div.getTxtShiteiHizukeRange().setDisabled(true);
         div.getSerchFromHohokensha().setDisplayNone(false);
         div.getSerchFromShinchokuJokyo().setDisplayNone(true);
+        init最大表示件数();
+        setDisable();
+    }
+
+    /**
+     * 最大表示件数を初期化します。業務コンフィグからデフォルト値を取得して設定します。
+     */
+    public void init最大表示件数() {
         div.getTxtMaximumDisplayNumber().setValue(DbBusinessConfig.get(ConfigNameDBE.データ出力件数閾値, new RDate("20000401"),
                 SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("データ出力件数閾値")));
-        setDisable();
     }
 
     /**
      * 検索する場合、選択変更します。
      */
     public void radKensakuHohoChange() {
-        if (DATE_SOURCE_KEY0.equals(div.getRadKensakuHoho().getSelectedKey())) {
-            div.getSerchFromHohokensha().setDisplayNone(false);
-            div.getSerchFromShinchokuJokyo().setDisplayNone(true);
-        } else if (DATE_SOURCE_KEY1.equals(div.getRadKensakuHoho().getSelectedKey())) {
-            div.getSerchFromHohokensha().setDisplayNone(true);
-            div.getSerchFromShinchokuJokyo().setDisplayNone(false);
+        switch (get検索方法()) {
+            case 進捗状況から検索する場合:
+                div.getSerchFromHohokensha().setDisplayNone(true);
+                div.getSerchFromShinchokuJokyo().setDisplayNone(false);
+                div.getSerchFromShinchokuJokyo().setIsOpen(true);
+                div.getDgShinseiJoho().setHeight(KensakuHoho.進捗状況から検索する場合.dgShinseiJohoHeigh);
+                return;
+            case 被保険者から検索する場合:
+                div.getSerchFromHohokensha().setDisplayNone(false);
+                div.getSerchFromHohokensha().setIsOpen(true);
+                div.getSerchFromShinchokuJokyo().setDisplayNone(true);
+                div.getDgShinseiJoho().setHeight(KensakuHoho.被保険者から検索する場合.dgShinseiJohoHeigh);
         }
+    }
+
+    public KensakuHoho get検索方法() {
+        if (KensakuHoho.進捗状況から検索する場合.key.equals(div.getRadKensakuHoho().getSelectedKey())) {
+            return KensakuHoho.進捗状況から検索する場合;
+        }
+        return KensakuHoho.被保険者から検索する場合;
     }
 
     /**
@@ -88,13 +125,11 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
      */
     public void radHizukeHaniChange() {
         if (DATE_SOURCE_KEY0.equals(div.getRadHizukeHani().getSelectedKey())) {
-            div.getTxtShiteiHizukeForm().setDisabled(true);
-            div.getTxtShiteiHizukeTo().setDisabled(true);
-            div.getTxtShiteiHizukeForm().clearValue();
-            div.getTxtShiteiHizukeTo().clearValue();
+            div.getTxtShiteiHizukeRange().setDisabled(true);
+            div.getTxtShiteiHizukeRange().clearFromValue();
+            div.getTxtShiteiHizukeRange().clearToValue();
         } else {
-            div.getTxtShiteiHizukeForm().setDisabled(false);
-            div.getTxtShiteiHizukeTo().setDisabled(false);
+            div.getTxtShiteiHizukeRange().setDisabled(false);
         }
     }
 
@@ -110,16 +145,23 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
      *
      * @param serchResult 要介護認定進捗状況照会情報
      */
-    public void btnKensaku(SearchResult<YokaigoNinteiShinchokuJoho> serchResult) {
+    public void btnKensaku(SearchResult<YokaigoNinteiShinchokuJoho> searchResult) {
         div.getDgShinseiJoho().getDataSource().clear();
         List<dgShinseiJoho_Row> dg_row = new ArrayList<>();
-        if (serchResult.records().isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
+        if (searchResult.records().isEmpty()) {
+            return;
         }
-        for (YokaigoNinteiShinchokuJoho joho : serchResult.records()) {
+        for (YokaigoNinteiShinchokuJoho joho : searchResult.records()) {
             dg_row.add(setRow(joho));
         }
         div.getDgShinseiJoho().setDataSource(dg_row);
+        div.getDgShinseiJoho().getGridSetting().setLimitRowCount(get最大取得件数());
+        div.getDgShinseiJoho().getGridSetting().setSelectedRowCount(searchResult.totalCount());
+    }
+
+    private int get最大取得件数() {
+        RString value = div.getTxtMaximumDisplayNumber().getValue();
+        return value == null || value.isEmpty() ? -1 : Integer.parseInt(value.toString());
     }
 
     /**
@@ -166,13 +208,13 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         row.setHokensha(nullToEmpty(joho.get市町村名称()));
         row.setHihokenshaNo(joho.get被保険者番号() == null ? RString.EMPTY : joho.get被保険者番号().getColumnValue());
         row.setShimei(nullToEmpty(joho.get被保険者氏名()));
-        row.setHihoKubun(nullToEmpty(joho.get被保険者区分コード()));
+        row.setHihoKubun(HihokenshaKubunCode.to名称OrDefault(joho.get被保険者区分コード(), RString.EMPTY));
         if (joho.get認定申請年月日() == null || joho.get認定申請年月日().isEmpty()) {
             row.setShinseiDay(new TextBoxDate());
         } else {
             row.getShinseiDay().setValue(new RDate(joho.get認定申請年月日().toString()));
         }
-        row.setShinseiKubun(nullToEmpty(joho.get認定申請区分申請時コード()));
+        row.setShinseiKubun(NinteiShinseiShinseijiKubunCode.to名称OrDefault(joho.get認定申請区分申請時コード(), RString.EMPTY));
         row.setChosaIrai(flexibleDateToRString(joho.get認定調査依頼完了年月日()));
         row.setChosaJisshi(flexibleDateToRString(joho.get認定調査完了年月日()));
         row.setChosaTokki(nullToEmpty(joho.get認定調査特記()));
@@ -216,7 +258,7 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         } else {
             row.getIchijiHanteiKanryouDay().setValue(flexibleDateToRDate(joho.get要介護認定一次判定完了年月日()));
         }
-        row.setIchijiHanteiKekka(joho.get要介護認定一次判定結果コード() == null ? RString.EMPTY : IchijiHanteiKekkaCode09.toValue(nullToEmpty(joho.get要介護認定一次判定結果コード())).get名称());
+        row.setIchijiHanteiKekka(joho.get一次判定結果名称());
         if (joho.get認定審査会割当完了年月日() == null || joho.get認定審査会割当完了年月日().isEmpty()) {
             row.setKaigoNinteiShinsakaiWaritsukeDay(new TextBoxDate());
         } else {
@@ -243,11 +285,9 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
             row.getKaigoNinteiShinsakaiKaisaiDay().setValue(flexibleDateToRDate(joho.get介護認定審査会開催年月日()));
         }
         row.setKaigoNinteiShinsakaiKaisaiNo(nullToEmpty(joho.get介護認定審査会開催番号()));
-        row.setKaigoNinteiShinsakaiGogitai(new RString(String.valueOf(joho.get合議体番号())));
-        row.setKaigoNinteiShinsakaiYokaigodo((joho.get二次判定要介護状態区分コード() == null || new RString("99")
-                .equals(joho.get二次判定要介護状態区分コード())) ? RString.EMPTY : YokaigoJotaiKubun09
-                .toValue(joho.get二次判定要介護状態区分コード()).get名称());
-        row.setHihokenshaYubinNo(nullToEmpty(joho.get郵便番号()));
+        row.setKaigoNinteiShinsakaiGogitai(new RString(String.valueOf(joho.get合議体名())));
+        row.setKaigoNinteiShinsakaiYokaigodo(joho.get二次判定結果名称());
+        row.setHihokenshaYubinNo(new YubinNo(nullToEmpty(joho.get郵便番号())).getEditedYubinNo());
         row.setHihokenshaJusho(nullToEmpty(joho.get住所()));
         row.setHihokenshaSeibetsu(Seibetsu.toValue(joho.get性別()).get名称());
         if (joho.get生年月日() == null || joho.get生年月日().isEmpty()) {
@@ -294,8 +334,8 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         div.getTxtHihokenshaNo().clearValue();
         div.getTxtShikibetsuCode().clearValue();
         div.getTxtShimei().clearValue();
-        div.getTxtShiteiHizukeForm().clearValue();
-        div.getTxtShiteiHizukeTo().clearValue();
+        div.getTxtShiteiHizukeRange().clearFromValue();
+        div.getTxtShiteiHizukeRange().clearToValue();
         div.getChkNinteiChosaIrai().setSelectedItemsByKey(CHK_BOX_NASI);
         div.getChkNinteiChosaJisshi().setSelectedItemsByKey(CHK_BOX_NASI);
         div.getChkNinteiChosaTokki().setSelectedItemsByKey(CHK_BOX_NASI);
@@ -306,6 +346,11 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         div.getChkShinsakaiWaritsuke().setSelectedItemsByKey(CHK_BOX_NASI);
         div.getChkShinsakaiJisshi().setSelectedItemsByKey(CHK_BOX_NASI);
         div.getChkKensakuOption().setSelectedItemsByKey(CHK_BOX_NASI);
-        div.getTxtMaximumDisplayNumber().clearValue();
+        init最大表示件数();
+
+        boolean is被保険者から検索 = (get検索方法() == KensakuHoho.被保険者から検索する場合);
+        div.getSerchFromHohokensha().setDisplayNone(is被保険者から検索);
+        div.getSerchFromShinchokuJokyo().setDisplayNone(!is被保険者から検索);
+        div.getShinseiJohoIchiran().setIsOpen(false);
     }
 }

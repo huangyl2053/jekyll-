@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.entity.db.relate.choteibo;
 
+import jp.co.ndensan.reams.db.dbz.definition.core.util.ConversionUtil;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -58,8 +59,8 @@ public class KibetsuShokeiEntity implements IDbAccessable {
      * @param 期別 期別
      * @return Decimal 期の調定額の小計
      */
-    public Decimal get調定額の小計By期別(int 期別) {
-        switch (期別) {
+    public Decimal get調定額の小計By期別(RString 期別) {
+        switch (ConversionUtil.toIntOrDefualt(期別, -1)) {
             case 第1期:
                 return dai1kiChoteigakuCount;
             case 第2期:
@@ -92,5 +93,4 @@ public class KibetsuShokeiEntity implements IDbAccessable {
                 return null;
         }
     }
-
 }

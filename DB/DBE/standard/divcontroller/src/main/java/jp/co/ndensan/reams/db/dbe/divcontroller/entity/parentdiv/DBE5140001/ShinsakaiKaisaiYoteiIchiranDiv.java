@@ -4,18 +4,17 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ShinsakaiKaisaiYoteiIchiran のクラスファイル。
- *
+ * ShinsakaiKaisaiYoteiIchiran のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class ShinsakaiKaisaiYoteiIchiranDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -26,10 +25,12 @@ public class ShinsakaiKaisaiYoteiIchiranDiv extends Panel {
     private Label lblHyojiMonth;
     @JsonProperty("btnMonthBefore")
     private Button btnMonthBefore;
-    @JsonProperty("lblMonth")
-    private Label lblMonth;
+    @JsonProperty("lblMonth2")
+    private Label lblMonth2;
     @JsonProperty("btnRight")
     private Button btnRight;
+    @JsonProperty("lblMonth")
+    private Label lblMonth;
     @JsonProperty("dgShinsakaiKaisaiYoteiIchiran")
     private DataGrid<dgShinsakaiKaisaiYoteiIchiran_Row> dgShinsakaiKaisaiYoteiIchiran;
     @JsonProperty("txtCopyFrom")
@@ -88,21 +89,21 @@ public class ShinsakaiKaisaiYoteiIchiranDiv extends Panel {
     }
 
     /*
-     * getlblMonth
-     * @return lblMonth
+     * getlblMonth2
+     * @return lblMonth2
      */
-    @JsonProperty("lblMonth")
-    public Label getLblMonth() {
-        return lblMonth;
+    @JsonProperty("lblMonth2")
+    public Label getLblMonth2() {
+        return lblMonth2;
     }
 
     /*
-     * setlblMonth
-     * @param lblMonth lblMonth
+     * setlblMonth2
+     * @param lblMonth2 lblMonth2
      */
-    @JsonProperty("lblMonth")
-    public void setLblMonth(Label lblMonth) {
-        this.lblMonth = lblMonth;
+    @JsonProperty("lblMonth2")
+    public void setLblMonth2(Label lblMonth2) {
+        this.lblMonth2 = lblMonth2;
     }
 
     /*
@@ -121,6 +122,24 @@ public class ShinsakaiKaisaiYoteiIchiranDiv extends Panel {
     @JsonProperty("btnRight")
     public void setBtnRight(Button btnRight) {
         this.btnRight = btnRight;
+    }
+
+    /*
+     * getlblMonth
+     * @return lblMonth
+     */
+    @JsonProperty("lblMonth")
+    public Label getLblMonth() {
+        return lblMonth;
+    }
+
+    /*
+     * setlblMonth
+     * @param lblMonth lblMonth
+     */
+    @JsonProperty("lblMonth")
+    public void setLblMonth(Label lblMonth) {
+        this.lblMonth = lblMonth;
     }
 
     /*

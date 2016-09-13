@@ -13,6 +13,8 @@
         <relativePath>../../</relativePath>
     </parent>
     <properties>
+        <jp.co.ndensan.reams.dbz.version>1.0-SNAPSHOT</jp.co.ndensan.reams.dbz.version>
+        <jp.co.ndensan.reams.dbzVersion>${jp.co.ndensan.reams.dbz.version}</jp.co.ndensan.reams.dbzVersion>
         <jp.co.ndensan.reams.dbzVersion>1.0-SNAPSHOT</jp.co.ndensan.reams.dbzVersion>
     </properties>
     <modules>
@@ -23,6 +25,7 @@
         <module>divcontroller</module>
         <module>service</module>
         <module>batchcontroller</module>
+        <module>workflowcontroller</module>
     </modules>
     <dependencyManagement>
         <dependencies>
@@ -164,6 +167,11 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>DbaBatchController</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>DbaWorkflowcontroller</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

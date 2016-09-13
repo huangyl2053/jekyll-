@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @reamsid_L DBE-3000-010 sunhaidi
  */
 public class KihonJohoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -31,8 +31,6 @@ public class KihonJohoDiv extends Panel {
     private DropDownList ddlKoroshoShikibetsuCode;
     @JsonProperty("lblYubinNo")
     private Label lblYubinNo;
-    @JsonProperty("btnYubinNoGuide")
-    private ButtonDialog btnYubinNoGuide;
     @JsonProperty("txtYubinNo")
     private TextBoxYubinNo txtYubinNo;
     @JsonProperty("ddlChiku")
@@ -134,24 +132,6 @@ public class KihonJohoDiv extends Panel {
     @JsonProperty("lblYubinNo")
     public void setLblYubinNo(Label lblYubinNo) {
         this.lblYubinNo = lblYubinNo;
-    }
-
-    /*
-     * getbtnYubinNoGuide
-     * @return btnYubinNoGuide
-     */
-    @JsonProperty("btnYubinNoGuide")
-    public ButtonDialog getBtnYubinNoGuide() {
-        return btnYubinNoGuide;
-    }
-
-    /*
-     * setbtnYubinNoGuide
-     * @param btnYubinNoGuide btnYubinNoGuide
-     */
-    @JsonProperty("btnYubinNoGuide")
-    public void setBtnYubinNoGuide(ButtonDialog btnYubinNoGuide) {
-        this.btnYubinNoGuide = btnYubinNoGuide;
     }
 
     /*

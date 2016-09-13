@@ -303,7 +303,7 @@ public class TokuchoKariSanteiFukaManager {
 
     private boolean set開始月_6月(Decimal 特徴期期別金額01, Decimal 特徴期期別金額02, Decimal 特徴期期別金額03) {
         if (特徴期期別金額01 != null && 特徴期期別金額02 != null && 特徴期期別金額03 != null && 特徴期期別金額01.equals(Decimal.ZERO)
-                && 特徴期期別金額02.intValue() > 整数_0 && 特徴期期別金額03.intValue() > 整数_0) {
+            && 特徴期期別金額02.intValue() > 整数_0 && 特徴期期別金額03.intValue() > 整数_0) {
             return true;
         }
         return false;
@@ -311,7 +311,7 @@ public class TokuchoKariSanteiFukaManager {
 
     private boolean set開始月_継続(Decimal 特徴期期別金額01, Decimal 特徴期期別金額02, Decimal 特徴期期別金額03) {
         if (特徴期期別金額01 != null && 特徴期期別金額02 != null && 特徴期期別金額03 != null && 特徴期期別金額01.intValue() > 整数_0
-                && 特徴期期別金額02.intValue() > 整数_0 && 特徴期期別金額03.intValue() > 整数_0) {
+            && 特徴期期別金額02.intValue() > 整数_0 && 特徴期期別金額03.intValue() > 整数_0) {
             return true;
         }
         return false;

@@ -575,7 +575,7 @@ public class TokuchoKariSanteiFukaManagerBatch {
         if (徴収方法の情報_徴収方法4月 != 特別徴収_厚生労働省 && 徴収方法の情報_徴収方法4月 != 特別徴収_地共済) {
             賦課の情報一時Entity.setChoteiJiyu1(徴収方法の情報_４月開始.get特別徴収停止事由コード());
             if (徴収方法の情報_４月開始.get特別徴収停止事由コード() != null
-                    && !徴収方法の情報_４月開始.get特別徴収停止事由コード().equals(賦課の情報_更正前.get調定事由1())) {
+                && !徴収方法の情報_４月開始.get特別徴収停止事由コード().equals(賦課の情報_更正前.get調定事由1())) {
                 賦課の情報一時Entity.setFalg(true);
             }
             賦課の情報一時Entity.setChoteiJiyu2(RString.EMPTY);
@@ -1815,7 +1815,7 @@ public class TokuchoKariSanteiFukaManagerBatch {
                 return 昇降順_性別(昇降順, 性別1, 性別2);
             }
         } else if (TokubetsuChoshuKarisanteiKekkaIchiranProperty.TokuchoKarisanteiFukaEnum.通知書番号.getフォームフィールド名().equals(項目名)
-                && SortOrder.ASCENDING.equals(昇降順)) {
+                   && SortOrder.ASCENDING.equals(昇降順)) {
             return o1.get通知書番号().compareTo(o2.get通知書番号());
         }
         return o2.get通知書番号().compareTo(o1.get通知書番号());

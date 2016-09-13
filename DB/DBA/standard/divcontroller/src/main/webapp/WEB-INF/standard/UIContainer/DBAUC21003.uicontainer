@@ -23,7 +23,7 @@
      "layoutName": "DBA2010011",
      "layoutTitle": "検索条件・事業者一覧",
      "eventName": "修正",
-     "destroy": true,
+     "destroy": false,
      "condition": "サービス事業者",
      "toLayoutSubGyomuCode": "DBA",
      "toLayoutName": "DBA2010013",
@@ -37,7 +37,7 @@
      "layoutName": "DBA2010011",
      "layoutTitle": "検索条件・事業者一覧",
      "eventName": "削除",
-     "destroy": true,
+     "destroy": false,
      "condition": "サービス事業者",
      "toLayoutSubGyomuCode": "DBA",
      "toLayoutName": "DBA2010013",
@@ -51,7 +51,7 @@
      "layoutName": "DBA2010013",
      "layoutTitle": "事業者登録",
      "eventName": "検索に戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBA",
      "toLayoutName": "DBA2010011",
@@ -191,60 +191,17 @@
      "layoutName": "DBA2010011",
      "layoutTitle": "検索条件・事業者一覧",
      "eventName": "終了",
-     "destroy": false,
+     "destroy": true,
      "condition": ""
-    }
-   ]
-  },
-  {
-   "id": 2,
-   "name": "介護事業者選択",
-   "transitionList": [
-    {
-     "id": "1",
-     "type": "start",
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBA",
-     "toLayoutName": "DBA2010011",
-     "toLayoutTitle": "検索条件・事業者一覧",
-     "toState": "事業者選択"
     },
     {
-     "id": "2",
-     "type": "ordinal",
-     "layoutSubGyomuCode": "DBA",
-     "layoutName": "DBA2010011",
-     "layoutTitle": "検索条件・事業者一覧",
-     "eventName": "選択",
-     "destroy": false,
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBA",
-     "toLayoutName": "DBA2010013",
-     "toLayoutTitle": "事業者登録",
-     "toState": "照会状態"
-    },
-    {
-     "id": "3",
-     "type": "ordinal",
+     "id": "15",
+     "type": "end",
      "layoutSubGyomuCode": "DBA",
      "layoutName": "DBA2010013",
      "layoutTitle": "事業者登録",
-     "eventName": "検索に戻る",
-     "destroy": false,
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBA",
-     "toLayoutName": "DBA2010011",
-     "toLayoutTitle": "検索条件・事業者一覧",
-     "toState": "事業者選択"
-    },
-    {
-     "id": "4",
-     "type": "end",
-     "layoutSubGyomuCode": "DBA",
-     "layoutName": "DBA2010011",
-     "layoutTitle": "検索条件・事業者一覧",
-     "eventName": "終了",
-     "destroy": false,
+     "eventName": "完了",
+     "destroy": true,
      "condition": ""
     }
    ]

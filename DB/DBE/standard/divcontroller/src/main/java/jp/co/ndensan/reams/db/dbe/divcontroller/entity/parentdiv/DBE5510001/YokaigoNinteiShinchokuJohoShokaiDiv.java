@@ -7,23 +7,18 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5510001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Space;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
  * YokaigoNinteiShinchokuJohoShokai のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class YokaigoNinteiShinchokuJohoShokaiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -131,13 +126,13 @@ public class YokaigoNinteiShinchokuJohoShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public RadioButton getRadMatchType() {
-        return this.getKensakuJoken().getSerchFromHohokensha().getRadMatchType();
+    public DropDownList getDdlNameMatchType() {
+        return this.getKensakuJoken().getSerchFromHohokensha().getDdlNameMatchType();
     }
 
     @JsonIgnore
-    public void  setRadMatchType(RadioButton radMatchType) {
-        this.getKensakuJoken().getSerchFromHohokensha().setRadMatchType(radMatchType);
+    public void  setDdlNameMatchType(DropDownList ddlNameMatchType) {
+        this.getKensakuJoken().getSerchFromHohokensha().setDdlNameMatchType(ddlNameMatchType);
     }
 
     @JsonIgnore
@@ -171,23 +166,13 @@ public class YokaigoNinteiShinchokuJohoShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxDate getTxtShiteiHizukeForm() {
-        return this.getKensakuJoken().getSerchFromShinchokuJokyo().getHizukeRange().getTxtShiteiHizukeForm();
+    public TextBoxDateRange getTxtShiteiHizukeRange() {
+        return this.getKensakuJoken().getSerchFromShinchokuJokyo().getHizukeRange().getTxtShiteiHizukeRange();
     }
 
     @JsonIgnore
-    public void  setTxtShiteiHizukeForm(TextBoxDate txtShiteiHizukeForm) {
-        this.getKensakuJoken().getSerchFromShinchokuJokyo().getHizukeRange().setTxtShiteiHizukeForm(txtShiteiHizukeForm);
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtShiteiHizukeTo() {
-        return this.getKensakuJoken().getSerchFromShinchokuJokyo().getHizukeRange().getTxtShiteiHizukeTo();
-    }
-
-    @JsonIgnore
-    public void  setTxtShiteiHizukeTo(TextBoxDate txtShiteiHizukeTo) {
-        this.getKensakuJoken().getSerchFromShinchokuJokyo().getHizukeRange().setTxtShiteiHizukeTo(txtShiteiHizukeTo);
+    public void  setTxtShiteiHizukeRange(TextBoxDateRange txtShiteiHizukeRange) {
+        this.getKensakuJoken().getSerchFromShinchokuJokyo().getHizukeRange().setTxtShiteiHizukeRange(txtShiteiHizukeRange);
     }
 
     @JsonIgnore

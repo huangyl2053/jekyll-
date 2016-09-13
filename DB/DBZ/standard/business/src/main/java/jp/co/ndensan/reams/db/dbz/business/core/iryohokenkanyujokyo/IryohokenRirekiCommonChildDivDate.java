@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.iryohokenkanyujokyo;
 
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -16,9 +17,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class IryohokenRirekiCommonChildDivDate {
 
-    private RString defaultDataName2;
-    private RString defaultDataName3;
-    private RString defaultDataName4;
+    private RString state;
+    private FlexibleDate kanyuDate;
+    private FlexibleDate dattaiDate;
 
     /**
      * コンストラクタです.
@@ -27,22 +28,22 @@ public class IryohokenRirekiCommonChildDivDate {
     public IryohokenRirekiCommonChildDivDate() {
         super();
 
-        this.defaultDataName2 = RString.EMPTY;
-        this.defaultDataName3 = RString.EMPTY;
-        this.defaultDataName4 = RString.EMPTY;
+        this.state = RString.EMPTY;
+        this.kanyuDate = FlexibleDate.EMPTY;
+        this.dattaiDate = FlexibleDate.EMPTY;
     }
 
     /**
      * コンストラクタです。
      *
-     * @param defaultDataName2 コード
-     * @param defaultDataName3 医療保険加入年月日
-     * @param defaultDataName4 医療保険脱退年月日
+     * @param state コード
+     * @param kanyuDate 医療保険加入年月日
+     * @param dattaiDate 医療保険脱退年月日
      */
-    public IryohokenRirekiCommonChildDivDate(RString defaultDataName2, RString defaultDataName3, RString defaultDataName4) {
-        this.defaultDataName2 = defaultDataName2;
-        this.defaultDataName3 = defaultDataName3;
-        this.defaultDataName4 = defaultDataName4;
+    public IryohokenRirekiCommonChildDivDate(RString state, FlexibleDate kanyuDate, FlexibleDate dattaiDate) {
+        this.state = state;
+        this.kanyuDate = kanyuDate;
+        this.dattaiDate = dattaiDate;
 
     }
 
@@ -51,8 +52,8 @@ public class IryohokenRirekiCommonChildDivDate {
      *
      * @return コード
      */
-    public RString getDefaultDataName2() {
-        return defaultDataName2;
+    public RString getState() {
+        return state;
     }
 
     /**
@@ -60,8 +61,8 @@ public class IryohokenRirekiCommonChildDivDate {
      *
      * @return 療保険加入年月日
      */
-    public RString getDefaultDataName3() {
-        return defaultDataName3;
+    public FlexibleDate getKanyuDate() {
+        return kanyuDate;
     }
 
     /**
@@ -69,35 +70,35 @@ public class IryohokenRirekiCommonChildDivDate {
      *
      * @return 療医療保険脱退年月日
      */
-    public RString getDefaultDataName4() {
-        return defaultDataName4;
+    public FlexibleDate getDattaiDate() {
+        return dattaiDate;
     }
 
     /**
      * コードのsetメソッドです
      *
-     * @param defaultDataName2 コード
+     * @param state コード
      */
-    public void setDefaultDataName2(RString defaultDataName2) {
-        this.defaultDataName2 = defaultDataName2;
+    public void setState(RString state) {
+        this.state = state;
     }
 
     /**
      * 医療保険加入年月日をsetメソッドです。
      *
-     * @param defaultDataName3 医療保険加入年月日
+     * @param kanyuDate 医療保険加入年月日
      */
-    public void setDefaultDataName3(RString defaultDataName3) {
-        this.defaultDataName3 = defaultDataName3;
+    public void setKanyuDate(FlexibleDate kanyuDate) {
+        this.kanyuDate = kanyuDate;
     }
 
     /**
      * 医療保険脱退年月日をsetメソッドです。
      *
-     * @param defaultDataName4 医療保険脱退年月日
+     * @param dattaiDate 医療保険脱退年月日
      */
-    public void setDefaultDataName4(RString defaultDataName4) {
-        this.defaultDataName4 = defaultDataName4;
+    public void setDattaiDate(FlexibleDate dattaiDate) {
+        this.dattaiDate = dattaiDate;
     }
 
 }

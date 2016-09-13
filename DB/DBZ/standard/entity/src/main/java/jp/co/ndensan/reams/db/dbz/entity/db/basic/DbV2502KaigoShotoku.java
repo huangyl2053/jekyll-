@@ -17,9 +17,9 @@ public enum DbV2502KaigoShotoku implements IColumnDefinition {
      */
     shikibetsuCode(2147483647, 0),
     /**
-     * rirekiNo
+     * rirekino
      */
-    rirekiNo(19, 0),
+    rirekino(19, 0),
     /**
      * kazeiKubun
      */

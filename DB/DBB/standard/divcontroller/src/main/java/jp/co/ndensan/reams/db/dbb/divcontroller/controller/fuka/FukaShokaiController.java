@@ -66,6 +66,11 @@ public final class FukaShokaiController {
         return ViewStateHolder.get(ViewStateKeys.賦課照会キー, FukaShokaiKey.class);
     }
 
+    public static void clearFukaTaishoshaKeyAndFukaShokaiKey() {
+        ViewStateHolder.remove(ViewStateKeys.賦課対象者.toString());
+        ViewStateHolder.remove(ViewStateKeys.賦課照会キー.toString());
+    }
+
     /**
      * 履歴比較を行うときの前履歴のキーを取得します。<br/>
      * 前履歴キーがないときは前年度の直近データのキーをセットし、返します。
@@ -110,9 +115,9 @@ public final class FukaShokaiController {
         FukaShokaiKey key = getFukaShokaiKeyInViewState();
 
         if (key == null
-                || key.get賦課年度() == null || key.get賦課年度().isEmpty()
-                || key.get調定年度() == null || key.get調定年度().isEmpty()
-                || key.get通知書番号() == null || key.get通知書番号().isEmpty()) {
+            || key.get賦課年度() == null || key.get賦課年度().isEmpty()
+            || key.get調定年度() == null || key.get調定年度().isEmpty()
+            || key.get通知書番号() == null || key.get通知書番号().isEmpty()) {
             FukaTaishoshaKey taishoshaKey = getFukaTaishoshaKeyInViewState();
             調定年度 = taishoshaKey.get調定年度();
             賦課年度 = taishoshaKey.get賦課年度();
@@ -130,11 +135,13 @@ public final class FukaShokaiController {
 
 //        Optional<Fuka> modeloid = Optional.of(new FukaManager().get介護賦課(
 //                key.get調定年度(), key.get賦課年度(), key.get通知書番号(), key.get履歴番号()));
-        if (!modeloid.isPresent()) {
-            throw new SystemException(UrErrorMessages.対象データなし.getMessage().evaluate());
-        }
-
-        return modeloid.get();
+//        if (!modeloid.isPresent()) {
+//            throw new SystemException(UrErrorMessages.対象データなし.getMessage().evaluate());
+//        }
+//        return modeloid.get();
+        return modeloid.orElseThrow(ExceptionSuppliers
+                .applicationException(UrErrorMessages.対象データなし.getMessage().evaluate())
+        );
     }
 
     /**
@@ -282,7 +289,8 @@ public final class FukaShokaiController {
                 SERIAL_NUMBER1, fuka.get賦課年度(), SERIAL_NUMBER1));
 
         if (!modeloid.isPresent()) {
-            throw new SystemException(UrErrorMessages.対象データなし.getMessage().evaluate());
+//            throw new SystemException(UrErrorMessages.対象データなし.getMessage().evaluate());
+            return SanteiState.仮算定;
         }
 
         RDateTime 基準日時;
@@ -299,7 +307,7 @@ public final class FukaShokaiController {
             調定日時 = fuka.get調定日時().getRDateTime();
         }
 
-        if (調定日時.isAfter(基準日時)) {
+        if (調定日時.isAfter(基準日時) || 調定日時.isEqual(基準日時)) {
             return SanteiState.本算定;
         }
 

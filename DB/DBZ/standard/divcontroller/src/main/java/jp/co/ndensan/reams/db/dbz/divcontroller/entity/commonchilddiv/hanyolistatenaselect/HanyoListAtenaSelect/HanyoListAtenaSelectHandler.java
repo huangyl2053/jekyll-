@@ -49,14 +49,22 @@ public class HanyoListAtenaSelectHandler {
      */
     public void initialize(HokenshaKosei 保険者構成) {
         if (HokenshaKosei.単一市町村.getコード().equals(保険者構成.getコード())) {
-            div.getCcdHokenshaList().setVisible(false);
-            div.getDvChiku().setVisible(true);
+            setPanelVisibilityAt単一(div);
         } else if (HokenshaKosei.広域市町村.getコード().equals(保険者構成.getコード())) {
-            div.getCcdHokenshaList().setVisible(true);
-            div.getDvChiku().setVisible(false);
+            setPanelVisibilityAt広域(div);
         }
         set初期項目状態();
         set初期項目内容();
+    }
+
+    private static void setPanelVisibilityAt広域(HanyoListAtenaSelectDiv div) {
+        div.getCcdHokenshaList().setVisible(true);
+        div.getDvChiku().setDisplayNone(true);
+    }
+
+    private static void setPanelVisibilityAt単一(HanyoListAtenaSelectDiv div) {
+        div.getCcdHokenshaList().setDisplayNone(true);
+        div.getDvChiku().setVisible(true);
     }
 
     /**
@@ -65,12 +73,10 @@ public class HanyoListAtenaSelectHandler {
     public void initialize() {
         ShichosonSecurityJoho 市町村情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         if (市町村情報 != null && 市町村情報.get導入形態コード() != null
-                && DonyuKeitaiCode.toValue(市町村情報.get導入形態コード().getColumnValue()).is広域()) {
-            div.getCcdHokenshaList().setVisible(true);
-            div.getDvChiku().setVisible(false);
+            && DonyuKeitaiCode.toValue(市町村情報.get導入形態コード().getColumnValue()).is広域()) {
+            setPanelVisibilityAt広域(div);
         } else {
-            div.getCcdHokenshaList().setVisible(false);
-            div.getDvChiku().setVisible(true);
+            setPanelVisibilityAt単一(div);
         }
         set初期項目状態();
         set初期項目内容();
@@ -111,74 +117,87 @@ public class HanyoListAtenaSelectHandler {
         RString 地区 = div.getDdlChikuSelect().getSelectedKey();
         div.getDdlChikuSelect().setDisabled(false);
         if (Chiku.全て.getコード().equals(地区)) {
-            div.getCcdJushoFrom().setVisible(true);
             div.getCcdJushoFrom().setDisabled(true);
-            div.getCcdJushoFrom().clear();
-            div.getCcdGyoseikuFrom().setVisible(false);
-            div.getCcdChiku1From().setVisible(false);
-            div.getCcdChiku2From().setVisible(false);
-            div.getCcdChiku3From().setVisible(false);
-            div.getCcdJushoTo().setVisible(true);
-            div.getCcdJushoTo().setDisabled(true);
-            div.getCcdJushoTo().clear();
-            div.getCcdGyoseikuTo().setVisible(false);
-            div.getCcdChiku1To().setVisible(false);
-            div.getCcdChiku2To().setVisible(false);
-            div.getCcdChiku3To().setVisible(false);
-        } else if (Chiku.住所.getコード().equals(地区)) {
+            div.getCcdJushoFrom().setDisplayNone(false);
             div.getCcdJushoFrom().setVisible(true);
-            div.getCcdJushoFrom().setDisabled(false);
             div.getCcdJushoFrom().clear();
-            div.getCcdGyoseikuFrom().setVisible(false);
-            div.getCcdChiku1From().setVisible(false);
-            div.getCcdChiku2From().setVisible(false);
-            div.getCcdChiku3From().setVisible(false);
+            div.getCcdJushoTo().setDisabled(true);
+            div.getCcdJushoTo().setDisplayNone(false);
             div.getCcdJushoTo().setVisible(true);
-            div.getCcdJushoTo().setDisabled(false);
             div.getCcdJushoTo().clear();
-            div.getCcdGyoseikuTo().setVisible(false);
-            div.getCcdChiku1To().setVisible(false);
-            div.getCcdChiku2To().setVisible(false);
-            div.getCcdChiku3To().setVisible(false);
+            set行政区CanBeInput(false);
+            set地区sCanBeInput(false);
+        } else if (Chiku.住所.getコード().equals(地区)) {
+            set住所CanBeInput(true);
+            set行政区CanBeInput(false);
+            set地区sCanBeInput(false);
         } else if (Chiku.行政区.getコード().equals(地区)) {
-            div.getCcdJushoFrom().setVisible(false);
-            div.getCcdGyoseikuFrom().setVisible(true);
-            div.getCcdGyoseikuFrom().setDisabled(false);
-            div.getCcdGyoseikuFrom().clear();
-            div.getCcdChiku1From().setVisible(false);
-            div.getCcdChiku2From().setVisible(false);
-            div.getCcdChiku3From().setVisible(false);
-            div.getCcdJushoTo().setVisible(false);
-            div.getCcdGyoseikuTo().setVisible(true);
-            div.getCcdGyoseikuTo().setDisabled(false);
-            div.getCcdGyoseikuTo().clear();
-            div.getCcdChiku1To().setVisible(false);
-            div.getCcdChiku2To().setVisible(false);
-            div.getCcdChiku3To().setVisible(false);
+            set住所CanBeInput(false);
+            set行政区CanBeInput(true);
+            set地区sCanBeInput(false);
         } else if (Chiku.地区.getコード().equals(地区)) {
-            div.getCcdJushoFrom().setVisible(false);
-            div.getCcdGyoseikuFrom().setVisible(false);
-            div.getCcdChiku1From().setVisible(true);
-            div.getCcdChiku1From().setDisabled(false);
-            div.getCcdChiku1From().clear();
-            div.getCcdChiku2From().setVisible(true);
-            div.getCcdChiku2From().setDisabled(false);
-            div.getCcdChiku2From().clear();
-            div.getCcdChiku3From().setVisible(true);
-            div.getCcdChiku3From().setDisabled(false);
-            div.getCcdChiku3From().clear();
-            div.getCcdJushoTo().setVisible(false);
-            div.getCcdGyoseikuTo().setVisible(false);
-            div.getCcdChiku1To().setVisible(true);
-            div.getCcdChiku1To().setDisabled(false);
-            div.getCcdChiku1To().clear();
-            div.getCcdChiku2To().setVisible(true);
-            div.getCcdChiku2To().setDisabled(false);
-            div.getCcdChiku2To().clear();
-            div.getCcdChiku3To().setVisible(true);
-            div.getCcdChiku3To().setDisabled(false);
-            div.getCcdChiku3To().clear();
+            set住所CanBeInput(false);
+            set行政区CanBeInput(false);
+            set地区sCanBeInput(true);
         }
+    }
+
+    void set住所CanBeInput(boolean canBenInput) {
+        div.getCcdJushoFrom().setDisplayNone(!canBenInput);
+        div.getCcdJushoTo().setDisplayNone(!canBenInput);
+        if (!canBenInput) {
+            return;
+        }
+        div.getCcdJushoFrom().setDisabled(false);
+        div.getCcdJushoFrom().setVisible(true);
+        div.getCcdJushoFrom().clear();
+        div.getCcdJushoTo().setDisabled(false);
+        div.getCcdJushoTo().setVisible(true);
+        div.getCcdJushoTo().clear();
+    }
+
+    void set行政区CanBeInput(boolean canBenInput) {
+        div.getCcdGyoseikuFrom().setDisplayNone(!canBenInput);
+        div.getCcdGyoseikuTo().setDisplayNone(!canBenInput);
+        if (!canBenInput) {
+            return;
+        }
+        div.getCcdGyoseikuFrom().setDisabled(false);
+        div.getCcdGyoseikuFrom().setVisible(true);
+        div.getCcdGyoseikuFrom().clear();
+        div.getCcdGyoseikuTo().setDisabled(false);
+        div.getCcdGyoseikuTo().setVisible(true);
+        div.getCcdGyoseikuTo().clear();
+    }
+
+    void set地区sCanBeInput(boolean canBenInput) {
+        div.getCcdChiku1From().setDisplayNone(!canBenInput);
+        div.getCcdChiku2From().setDisplayNone(!canBenInput);
+        div.getCcdChiku3From().setDisplayNone(!canBenInput);
+        div.getCcdChiku1To().setDisplayNone(!canBenInput);
+        div.getCcdChiku2To().setDisplayNone(!canBenInput);
+        div.getCcdChiku3To().setDisplayNone(!canBenInput);
+        if (!canBenInput) {
+            return;
+        }
+        div.getCcdChiku1From().setDisabled(false);
+        div.getCcdChiku1From().setVisible(true);
+        div.getCcdChiku1From().clear();
+        div.getCcdChiku2From().setDisabled(false);
+        div.getCcdChiku2From().setVisible(true);
+        div.getCcdChiku2From().clear();
+        div.getCcdChiku3From().setDisabled(false);
+        div.getCcdChiku3From().setVisible(true);
+        div.getCcdChiku3From().clear();
+        div.getCcdChiku1To().setDisabled(false);
+        div.getCcdChiku1To().setVisible(true);
+        div.getCcdChiku1To().clear();
+        div.getCcdChiku2To().setDisabled(false);
+        div.getCcdChiku2To().setVisible(true);
+        div.getCcdChiku2To().clear();
+        div.getCcdChiku3To().setDisabled(false);
+        div.getCcdChiku3To().setVisible(true);
+        div.getCcdChiku3To().clear();
     }
 
     /**
@@ -513,10 +532,10 @@ public class HanyoListAtenaSelectHandler {
         AtenaSelectBatchParameter atenaSelect = new AtenaSelectBatchParameter();
 
         atenaSelect.setAgeSelectKijun(this.get年齢層抽出方法());
-        Range<Decimal> 年齢範囲 = new Range(this.get年齢開始(), this.get年齢終了());
+        Range<Decimal> 年齢範囲 = new Range<>(this.get年齢開始(), this.get年齢終了());
         atenaSelect.setNenreiRange(年齢範囲);
         atenaSelect.setNenreiKijunbi(this.get年齢基準日());
-        Range<RDate> 生年月日範囲 = new Range(this.get生年月日開始(), this.get生年月日終了());
+        Range<RDate> 生年月日範囲 = new Range<>(this.get生年月日開始(), this.get生年月日終了());
         atenaSelect.setSeinengappiRange(生年月日範囲);
         atenaSelect.setShichoson_Code(this.get保険者().get市町村コード());
         atenaSelect.setShichoson_Mesho(this.get保険者().get市町村名称());
@@ -573,15 +592,15 @@ public class HanyoListAtenaSelectHandler {
         div.getTxtNenreiKijunbi().setDisabled(false);
         div.getDdlChikuSelect().setDisabled(false);
         div.getCcdJushoFrom().setDisabled(true);
-        div.getCcdGyoseikuFrom().setVisible(false);
-        div.getCcdChiku1From().setVisible(false);
-        div.getCcdChiku2From().setVisible(false);
-        div.getCcdChiku3From().setVisible(false);
+        div.getCcdGyoseikuFrom().setDisplayNone(true);
+        div.getCcdChiku1From().setDisplayNone(true);
+        div.getCcdChiku2From().setDisplayNone(true);
+        div.getCcdChiku3From().setDisplayNone(true);
         div.getCcdJushoTo().setDisabled(true);
-        div.getCcdGyoseikuTo().setVisible(false);
-        div.getCcdChiku1To().setVisible(false);
-        div.getCcdChiku2To().setVisible(false);
-        div.getCcdChiku3To().setVisible(false);
+        div.getCcdGyoseikuTo().setDisplayNone(true);
+        div.getCcdChiku1To().setDisplayNone(true);
+        div.getCcdChiku2To().setDisplayNone(true);
+        div.getCcdChiku3To().setDisplayNone(true);
     }
 
     private void set初期項目内容() {

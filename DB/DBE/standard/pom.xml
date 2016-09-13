@@ -13,7 +13,9 @@
         <relativePath>../../</relativePath>
     </parent>
     <properties>
-        <jp.co.ndensan.reams.dbzVersion>1.0-SNAPSHOT</jp.co.ndensan.reams.dbzVersion>
+        <jp.co.ndensan.reams.dbz.version>1.0-SNAPSHOT</jp.co.ndensan.reams.dbz.version>
+        <jp.co.ndensan.reams.dbzVersion>${jp.co.ndensan.reams.dbz.version}</jp.co.ndensan.reams.dbzVersion>
+
     </properties>
     <modules>
         <module>entity</module>
@@ -52,7 +54,7 @@
             <dependency>
                 <groupId>jp.co.ndensan.reams.db.dbx</groupId>
                 <artifactId>DbxBusiness</artifactId>
-                <version>1.12.0</version>
+                <version>${jp.co.ndensan.reams.dbxVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.db.dbx</groupId>

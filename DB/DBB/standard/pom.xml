@@ -13,7 +13,8 @@
         <relativePath>../../</relativePath>
     </parent>
     <properties>
-        <jp.co.ndensan.reams.dbzVersion>1.0-SNAPSHOT</jp.co.ndensan.reams.dbzVersion>
+        <jp.co.ndensan.reams.dbz.version>1.0-SNAPSHOT</jp.co.ndensan.reams.dbz.version>
+        <jp.co.ndensan.reams.dbzVersion>${jp.co.ndensan.reams.dbz.version}</jp.co.ndensan.reams.dbzVersion>
     </properties>
     <modules>
         <module>entity</module>
@@ -44,6 +45,13 @@
                 <artifactId>DbxEntity</artifactId>
                 <version>${jp.co.ndensan.reams.dbxVersion}</version>
             </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxEntity</artifactId>
+            <scope>test</scope>
+            <type>test-jar</type>
+            <version>${jp.co.ndensan.reams.dbxVersion}</version>
+        </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.db.dbx</groupId>
                 <artifactId>DbxPersistence</artifactId>

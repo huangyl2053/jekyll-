@@ -7,11 +7,16 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.shujiiir
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujii;
 import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiinput.ShujiiIryokikanandshujiiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuideDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuide.dgKensakuKekkaIchiran_Row;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
@@ -37,6 +42,8 @@ public class ShujiiIryokikanAndShujiiGuideHandler {
      * 画面初期化処理です。
      */
     public void intialize() {
+        div.getTxtMaxKensu().setValue(new Decimal(DbBusinessConfig.
+                get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         ShujiiIryokikanandshujiiDataPassModel dataPassModel = DataPassingConverter.deserialize(
                 div.getHdnDataPass(), ShujiiIryokikanandshujiiDataPassModel.class);
         if (dataPassModel != null) {
@@ -69,12 +76,12 @@ public class ShujiiIryokikanAndShujiiGuideHandler {
                 kensakuKekkaIchiran_Row.setIryoKikanjusho(nullToEmpty(business.get主治医医療機関情報_住所()));
                 kensakuKekkaIchiran_Row.setIryoKikantelNo(nullToEmpty(business.get主治医医療機関情報_電話番号()));
                 kensakuKekkaIchiran_Row.setIryoKikanJokyo(business.is主治医医療機関情報_状況フラグ()
-                        ? new RString("有効") : new RString("無効"));
+                                                          ? new RString("有効") : new RString("無効"));
                 kensakuKekkaIchiran_Row.getShujiiCode().setValue(nullToEmpty(business.get主治医コード()));
                 kensakuKekkaIchiran_Row.setShujiiShimei(nullToEmpty(business.get主治医氏名()));
                 kensakuKekkaIchiran_Row.setShujiiKanaMeisho(nullToEmpty(business.get主治医カナ()));
                 kensakuKekkaIchiran_Row.setShujiiJoukyo(business.is主治医情報_状況フラグ()
-                        ? new RString("有効") : new RString("無効"));
+                                                        ? new RString("有効") : new RString("無効"));
                 if (!business.is主治医医療機関情報_状況フラグ() || !business.is主治医情報_状況フラグ()) {
                     kensakuKekkaIchiran_Row.setRowBgColor(DataGridCellBgColor.bgColorGray);
                 }

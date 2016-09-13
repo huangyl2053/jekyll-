@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBZ-9999-023 huangh
  */
-public enum IchijiHanteiKekkaCode02 {
+public enum IchijiHanteiKekkaCode02 implements IIchijiHanteiKekkaCode {
 
     /**
      * コード:01 名称:非該 略称:無
@@ -46,10 +46,12 @@ public enum IchijiHanteiKekkaCode02 {
 
     private final RString code;
     private final RString fullName;
+    private final RString shortName;
 
-    private IchijiHanteiKekkaCode02(String code, String fullname) {
+    private IchijiHanteiKekkaCode02(String code, String shortName) {
         this.code = new RString(code);
-        this.fullName = new RString(fullname);
+        this.fullName = new RString(name());
+        this.shortName = new RString(shortName);
     }
 
     /**
@@ -57,6 +59,7 @@ public enum IchijiHanteiKekkaCode02 {
      *
      * @return 要介護認定一次判定結果コード02のコード
      */
+    @Override
     public RString getコード() {
         return code;
     }
@@ -66,8 +69,19 @@ public enum IchijiHanteiKekkaCode02 {
      *
      * @return 要介護認定一次判定結果コード02の名称
      */
+    @Override
     public RString get名称() {
         return fullName;
+    }
+
+    /**
+     * 要介護認定一次判定結果コード02の略称を返します。
+     *
+     * @return 要介護認定一次判定結果コード02の略称
+     */
+    @Override
+    public RString get略称() {
+        return shortName;
     }
 
     /**
@@ -77,11 +91,19 @@ public enum IchijiHanteiKekkaCode02 {
      * @return {@code code} に対応する要介護認定一次判定結果コード02
      */
     public static IchijiHanteiKekkaCode02 toValue(RString code) {
+        IchijiHanteiKekkaCode02 value = toValueOrNull(code);
+        if (value == null) {
+            throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("要介護認定一次判定結果コード02"));
+        }
+        return value;
+    }
+
+    static IchijiHanteiKekkaCode02 toValueOrNull(RString code) {
         for (IchijiHanteiKekkaCode02 ichijiHanteiKekkaCode02 : IchijiHanteiKekkaCode02.values()) {
             if (ichijiHanteiKekkaCode02.code.equals(code)) {
                 return ichijiHanteiKekkaCode02;
             }
         }
-        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("要介護認定一次判定結果コード02"));
+        return null;
     }
 }
