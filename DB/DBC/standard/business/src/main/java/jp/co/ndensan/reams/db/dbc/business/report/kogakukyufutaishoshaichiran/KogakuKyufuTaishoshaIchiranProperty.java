@@ -46,7 +46,7 @@ public class KogakuKyufuTaishoshaIchiranProperty extends ReportPropertyBase<Koga
         super(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200014.getReportId());
 
         pageBreakKeys = new ArrayList<>();
-        pageBreakKeys.add(new RString(KogakuKyufuTaishoshaIchiranSource.ReportSourceFields.hokenshaNo.name()));
+        pageBreakKeys.add(new RString(KogakuKyufuTaishoshaIchiranSource.ReportSourceFields.shoKisaiHokenshaNo.name()));
         RString 改頁２ = RString.EMPTY;
         RString 改頁３ = RString.EMPTY;
         RString 改頁４ = RString.EMPTY;
@@ -114,6 +114,7 @@ public class KogakuKyufuTaishoshaIchiranProperty extends ReportPropertyBase<Koga
             BreakerCatalog<KogakuKyufuTaishoshaIchiranSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
 
+
             pageBreakKeys) {
             @Override
             public ReportLineRecord<KogakuKyufuTaishoshaIchiranSource> occuredBreak(
@@ -136,7 +137,7 @@ public class KogakuKyufuTaishoshaIchiranProperty extends ReportPropertyBase<Koga
         /**
          * 証記載保険者番号
          */
-        証記載保険者番号(new RString("0103"), new RString("hokenshaNo"), new RString("対象者TBL.\"shokisaiHokenshaNo\"")),
+        証記載保険者番号(new RString("0103"), new RString("shoKisaiHokenshaNo"), new RString("対象者TBL.\"shokisaiHokenshaNo\"")),
         /**
          * 被保険者番号
          */

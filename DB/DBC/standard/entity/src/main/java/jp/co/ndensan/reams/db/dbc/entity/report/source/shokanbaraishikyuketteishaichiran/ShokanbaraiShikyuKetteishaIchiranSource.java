@@ -95,8 +95,8 @@ public class ShokanbaraiShikyuKetteishaIchiranSource implements IReportSource {
 
         printTimeStamp,
         kokuhorenName,
-        shoHokenshaNo,
-        shoHokenshaName,
+        shoKisaiHokenshaNo,
+        shoKisaiHokenshaName,
         shutsuryokujun1,
         shutsuryokujun2,
         shutsuryokujun3,
