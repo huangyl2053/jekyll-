@@ -137,7 +137,6 @@ public class TennyuHoryuTokuteiJusho {
     }
 
     private void clearValue(TennyuHoryuTokuteiJushoDiv div) {
-        //div.getCcdShichousonInputGuide().clear();
         div.getCcdJushoInputGuide().clear();
         div.getCcdBunchiInput().clear();
         ViewStateHolder.put(ViewStateKeys.台帳種別表示, 台帳種別表示無し);

@@ -53,7 +53,8 @@ public class TennyuHoryuTokuteiManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link TennyuHoryuTokuteiManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link TennyuHoryuTokuteiManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link TennyuHoryuTokuteiManager}のインスタンス
      */
     public static TennyuHoryuTokuteiManager createInstance() {
         return InstanceProvider.create(TennyuHoryuTokuteiManager.class);
@@ -115,6 +116,21 @@ public class TennyuHoryuTokuteiManager {
 
     /**
      * 転入保留特定住所の登録、更新、削除処理します。
+     *
+     * @param rendoHoryu RendoHoryuTokuteiJusho
+     * @return count 件数
+     */
+    @Transaction
+    public int insertOrUpdateOrDel(RendoHoryuTokuteiJusho rendoHoryu) {
+        DbT7023RendoHoryuTokuteiJushoEntity entity = rendoHoryu.toEntity();
+        if (entity.getState() == EntityDataState.Deleted) {
+            entity.setIsDeleted(true);
+        }
+        return dac.save(entity);
+    }
+
+    /**
+     * 転入保留特定住所の登録、更新、削除処理します。Entityの持つ条件ではなく、外部から引数で渡される条件を使用します。
      *
      * @param rendoHoryu RendoHoryuTokuteiJusho
      * @param state EntityDataState

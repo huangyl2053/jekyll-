@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -46,6 +47,7 @@ public class TekiyoJogaiTotal {
     private static final RString 遷移元メニューID_適用_転入転出保留対象者管理 = new RString("DBAMN61002");
     private static final RString 遷移元メニューID_解除 = new RString("DBAMN32002");
     private static final RString 遷移元メニューID_変更 = new RString("DBAMN32003");
+    private static final RString COMMON_BUTTON_UPDATE = new RString("btnUpdate");
 
     /**
      * 適用除外者管理に初期化を設定します。
@@ -54,24 +56,46 @@ public class TekiyoJogaiTotal {
      * @return レスポンス
      */
     public ResponseData<TekiyoJogaiTotalDiv> onLoad(TekiyoJogaiTotalDiv requestDiv) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(requestDiv).respond();
+        }
+
         ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード();
         RString menuId = ResponseHolder.getMenuID();
+        TekiyoJogaiTotalHandler handler = getHandler(requestDiv);
         //XXX メニューIDによる分岐は保守性が低いので是正するべき。
-        getHandler(requestDiv).initialize(識別コード, menuId);
+        handler.initialize(識別コード, menuId);
         if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
             requestDiv.setReadOnly(true);
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
             validationMessages.add(new ValidationMessageControlPair(TekiyoJogaiTotal.TekiyoJogaiTotalErrorMessage.排他_他のユーザが使用中));
             return ResponseData.of(requestDiv).addValidationMessages(validationMessages).respond();
         }
+
         if (遷移元メニューID_適用.equals(menuId) || 遷移元メニューID_適用_転入転出保留対象者管理.equals(menuId)) {
+            if (handler.is適用除外者(識別コード)) {
+                return setNotExecutableAndReturnMessage(requestDiv, DbzInformationMessages.適用除外者登録済み.getMessage());
+            }
             return ResponseData.of(requestDiv).setState(DBA2050011StateName.適用状態);
         } else if (遷移元メニューID_解除.equals(menuId)) {
+            if (!handler.is適用除外者(識別コード)) {
+                return setNotExecutableAndReturnMessage(requestDiv, DbzInformationMessages.適用除外者未登録.getMessage());
+            }
             return ResponseData.of(requestDiv).setState(DBA2050011StateName.解除状態);
         } else if (遷移元メニューID_変更.equals(menuId)) {
+            if (!handler.is適用除外者(識別コード)) {
+                return setNotExecutableAndReturnMessage(requestDiv, DbzInformationMessages.適用除外者未登録.getMessage());
+            }
             return ResponseData.of(requestDiv).setState(DBA2050011StateName.変更状態);
         }
         return ResponseData.of(requestDiv).respond();
+    }
+
+    private ResponseData<TekiyoJogaiTotalDiv> setNotExecutableAndReturnMessage(TekiyoJogaiTotalDiv div, Message message) {
+        div.setDisabled(true);
+        RealInitialLocker.release(前排他ロックキー);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_UPDATE, true);
+        return ResponseData.of(div).addMessage(message).respond();
     }
 
     /**
@@ -105,7 +129,7 @@ public class TekiyoJogaiTotal {
             }
             if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 一覧データの保存(requestDiv);
                 RealInitialLocker.release(前排他ロックキー);
                 requestDiv.getKanryoMessage().getCcdKaigoKanryoMessage().setSuccessMessage(
