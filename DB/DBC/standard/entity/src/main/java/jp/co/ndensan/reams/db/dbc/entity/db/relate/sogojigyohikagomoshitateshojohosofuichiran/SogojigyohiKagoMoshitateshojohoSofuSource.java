@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
  *
  * @author DBC-2045-042 zhengshenlei
  */
-public class SogojigyohiKagoMoshitateshojohoSofuIchiranSource implements IReportSource {
+public class SogojigyohiKagoMoshitateshojohoSofuSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 
     @ReportItem(name = "printTimeStamp", length = 34, order = 1)

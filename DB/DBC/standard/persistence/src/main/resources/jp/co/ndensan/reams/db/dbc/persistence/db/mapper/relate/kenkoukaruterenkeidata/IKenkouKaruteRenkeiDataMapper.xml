@@ -33,34 +33,35 @@
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kenkoukaruterenkeidata.KenkouKaruteRenkeiDataMybatisParameter"
             resultMap="resultMap_KenkouKaruteRenkeiDataEntity">
         SELECT
-            Dbv1001."hihokenshaNo" AS "Dbv1001hihokenshaNo",
-            Dbv1001."idoYMD" AS "Dbv1001idoYMD",
-            Dbv1001."shichosonCode" AS "Dbv1001shichosonCode",
-            Dbv1001."shikibetsuCode" AS "Dbv1001shikibetsuCode",
-            Dbv1001."shikakuShutokuYMD" AS "Dbv1001shikakuShutokuYMD",
-            Dbv1001."shikakuSoshitsuYMD" AS "Dbv1001shikakuSoshitsuYMD",
-            Dbv1001."logicalDeletedFlag" AS "Dbv1001logicalDeletedFlag",
-            PSM."gyomuCode" AS "PSMgyomucode",
-            PSM."juminShubetsuCode" AS "PSMjuminShubetsuCode",
-            PSM."juminJotaiCode" AS "PSMjuminJotaiCode",
-            PSM."meisho" AS "PSMmeisho",
-            PSM."kanaMeisho" AS "PSMkanaMeisho",
-            PSM."kojinNo" AS "PSMkojinNo",
-            PSM."seinengappiYMD" AS "PSMseinengappiYMD",
-            PSM."seibetsuCode" AS "PSMseibetsuCode",
-            Dbv4001."rirekiNo" AS "Dbv4001rirekiNo",
-            Dbv4001."edaban" AS "Dbv4001edaban",
-            Dbv4001."yokaigoJotaiKubunCode" AS "Dbv4001yokaigoJotaiKubunCode",
-            Dbv4001."ninteiYMD" AS "Dbv4001ninteiYMD",
-            Dbv4001."soshitsuYMD" AS "Dbv4001soshitsuYMD",
-            Dbv4001."ninteiYukoKikanKaishiYMD" AS "Dbv4001ninteiYukoKikanKaishiYMD",
-            Dbv4001."ninteiYukoKikanShuryoYMD" AS "Dbv4001ninteiYukoKikanShuryoYMD"
+        PSM."gyomuCode" AS "PSMgyomucode",
+        PSM."juminShubetsuCode" AS "PSMjuminShubetsuCode",
+        PSM."juminJotaiCode" AS "PSMjuminJotaiCode",
+        PSM."meisho" AS "PSMmeisho",
+        PSM."kanaMeisho" AS "PSMkanaMeisho",
+        PSM."kojinNo" AS "PSMkojinNo",
+        PSM."seinengappiYMD" AS "PSMseinengappiYMD",
+        PSM."seibetsuCode" AS "PSMseibetsuCode",
+        Dbv.*
+        FROM (Dbv1001."hihokenshaNo" AS "Dbv1001hihokenshaNo",
+        Dbv1001."idoYMD" AS "Dbv1001idoYMD",
+        Dbv1001."shichosonCode" AS "Dbv1001shichosonCode",
+        Dbv1001."shikibetsuCode" AS "Dbv1001shikibetsuCode",
+        Dbv1001."shikakuShutokuYMD" AS "Dbv1001shikakuShutokuYMD",
+        Dbv1001."shikakuSoshitsuYMD" AS "Dbv1001shikakuSoshitsuYMD",
+        Dbv1001."logicalDeletedFlag" AS "Dbv1001logicalDeletedFlag",
+        Dbv4001."rirekiNo" AS "Dbv4001rirekiNo",
+        Dbv4001."edaban" AS "Dbv4001edaban",
+        Dbv4001."yokaigoJotaiKubunCode" AS "Dbv4001yokaigoJotaiKubunCode",
+        Dbv4001."ninteiYMD" AS "Dbv4001ninteiYMD",
+        Dbv4001."soshitsuYMD" AS "Dbv4001soshitsuYMD",
+        Dbv4001."ninteiYukoKikanKaishiYMD" AS "Dbv4001ninteiYukoKikanKaishiYMD",
+        Dbv4001."ninteiYukoKikanShuryoYMD" AS "Dbv4001ninteiYukoKikanShuryoYMD"
         FROM rgdb."DbV1001HihokenshaDaicho" AS Dbv1001
-        INNER JOIN
-            rgua.${psmShikibetsuTaisho} AS PSM
-        ON Dbv1001."shikibetsuCode" = PSM."shikibetsuCode"
         LEFT JOIN rgdb."DbV4001JukyushaDaicho" AS Dbv4001
-        ON Dbv1001."hihokenshaNo" = Dbv4001."hihokenshaNo"
-        ORDER BY Dbv1001."shikibetsuCode"
+        ON Dbv1001."hihokenshaNo" = Dbv4001."hihokenshaNo") AS Dbv
+        INNER JOIN
+        rgua.${psmShikibetsuTaisho} AS PSM
+        ON Dbv."shikibetsuCode" = PSM."shikibetsuCode"
+        ORDER BY Dbv."shikibetsuCode"
     </select>
 </mapper>

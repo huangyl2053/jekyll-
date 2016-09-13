@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<!--@reamsid_L DBB-3020-010 chenyadong-->
+<!--@reamsid_L DBC-3020-010 chenyadong-->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.postmainpanel.IPostMainPanelMapper">
     <select resultOrdered="true" 
             id = "get広域保険者for00" 

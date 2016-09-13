@@ -10,11 +10,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_DataSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Idokubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Over70_ShotokuKbn;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ShotokuKbn;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_ChushutsuKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_DataSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_DataShubetsu;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_HoseiJokyo;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_HoseizumiJikofutangakuSofuKubun;
@@ -607,7 +607,7 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
             csvEntity.set補合計_高額支給額(DecimalFormatter.toコンマ区切りRString(entity.get高額合算自己負担額_補正済_合計_70_74高額支給額(), 0));
         }
         if (entity.get高額合算自己負担額_データ作成区分() != null) {
-            csvEntity.setデータ作成区分(KaigoGassan_DataSakuseiKubun.toValue(entity.get高額合算自己負担額_データ作成区分()).get名称());
+            csvEntity.setデータ作成区分(Kaigogassan_DataSakuseiKubun.toValue(entity.get高額合算自己負担額_データ作成区分()).get名称());
         }
         csvEntity.set自己負担額確認情報受取年月(monthToRString(entity.get高額合算自己負担額_自己負担額確認情報受取年月()));
         csvEntity.set補正済自己負担額情報送付年月(monthToRString(entity.get高額合算自己負担額_補正済自己負担額情報送付年月()));
@@ -857,7 +857,7 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
         RStringBuilder builder = new RStringBuilder();
         builder.append(データ作成区分);
         if (!RString.isNullOrEmpty(parameter.getデータ作成区分())) {
-            return builder.append(KaigoGassan_DataSakuseiKubun.toValue(parameter.getデータ作成区分()).get名称());
+            return builder.append(Kaigogassan_DataSakuseiKubun.toValue(parameter.getデータ作成区分()).get名称());
         }
         return null;
     }

@@ -50,6 +50,7 @@ public class ServicecodeIchiranProcessParameter implements IBatchProcessParamete
         param.setサービス種類コード(サービス種類コード);
         param.setサービス分類s(サービス分類s);
         param.setサービス項目コード桁目(サービス項目コード桁目);
+        param.set抽出条件区分(抽出条件区分);
         return param;
     }
 }

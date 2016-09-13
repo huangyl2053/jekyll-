@@ -130,7 +130,7 @@ public enum HikazeiNenkinTaishoshaJohoDivSpec implements IPredicate<HikazeiNenki
     アップロード済みファイル名チェック {
         @Override
         public boolean apply(HikazeiNenkinTaishoshaJohoDiv div) {
-            return !RString.EMPTY.equals(div.getTanitsuTaishoShoriIchiran().getHdnFileName())
+            return !RString.EMPTY.equals(div.getTanitsuTaishoShoriIchiran().getTxtFuairuMei().getValue())
                     && !SharedFile.searchSharedFile(div.getTanitsuTaishoShoriIchiran().getHdnFileName()).isEmpty();
         }
     },;

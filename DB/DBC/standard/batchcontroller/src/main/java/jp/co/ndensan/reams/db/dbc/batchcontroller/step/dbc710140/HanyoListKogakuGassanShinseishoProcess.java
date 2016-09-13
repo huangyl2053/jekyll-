@@ -214,7 +214,7 @@ public class HanyoListKogakuGassanShinseishoProcess extends BatchProcessBase<Han
     }
 
     private RString monthToRString(FlexibleYearMonth 日付) {
-        if (日付.isEmpty()) {
+        if (日付 == null || 日付.isEmpty()) {
             return RString.EMPTY;
         }
         return 日付.wareki().eraType(EraType.KANJI)
@@ -224,7 +224,7 @@ public class HanyoListKogakuGassanShinseishoProcess extends BatchProcessBase<Han
     }
 
     private RString dataToRString(FlexibleDate 日付) {
-        if (日付.isEmpty()) {
+        if (日付 == null || 日付.isEmpty()) {
             return RString.EMPTY;
         }
         return 日付.wareki().eraType(EraType.KANJI)

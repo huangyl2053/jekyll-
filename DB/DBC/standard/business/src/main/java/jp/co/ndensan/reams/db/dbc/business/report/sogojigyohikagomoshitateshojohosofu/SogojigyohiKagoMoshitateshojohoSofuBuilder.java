@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.sogojigyohikagomoshitateshojohosofu;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikagomoshitateshojohosofuichiran.SogojigyohiKagoMoshitateshojohoSofuIchiranSource;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikagomoshitateshojohosofuichiran.SogojigyohiKagoMoshitateshojohoSofuSource;
 import jp.co.ndensan.reams.uz.uza.report.ReportEditorJoiner;
 
 /**
@@ -32,8 +32,8 @@ public class SogojigyohiKagoMoshitateshojohoSofuBuilder implements ISogojigyohiK
     }
 
     @Override
-    public SogojigyohiKagoMoshitateshojohoSofuIchiranSource build() {
-        return ReportEditorJoiner.from(new SogojigyohiKagoMoshitateshojohoSofuIchiranSource()).join(headEditor).join(bodyEditor).buildSource();
+    public SogojigyohiKagoMoshitateshojohoSofuSource build() {
+        return ReportEditorJoiner.from(new SogojigyohiKagoMoshitateshojohoSofuSource()).join(headEditor).join(bodyEditor).buildSource();
     }
 
 }

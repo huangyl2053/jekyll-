@@ -58,22 +58,6 @@ public class KoshinShinseiTsuchishoHakkoIchiranhyoEditor implements IKoshinShins
             source.listHakkoIchiranhyo_13 = entity.getTongzhiShu().get居宅支援事業者名称();
             source.listHakkoIchiranhyo_14 = entity.getTongzhiShu().get入所施設事業者コード();
             source.listHakkoIchiranhyo_15 = entity.getTongzhiShu().get入所施設事業者名称();
-        } else {
-            source.listHakkoIchiranhyo_1 = RString.EMPTY;
-            source.listHakkoIchiranhyo_2 = RString.EMPTY;
-            source.listHakkoIchiranhyo_3 = RString.EMPTY;
-            source.listHakkoIchiranhyo_4 = RString.EMPTY;
-            source.listHakkoIchiranhyo_5 = RString.EMPTY;
-            source.listHakkoIchiranhyo_6 = RString.EMPTY;
-            source.listHakkoIchiranhyo_7 = RString.EMPTY;
-            source.listHakkoIchiranhyo_8 = RString.EMPTY;
-            source.listHakkoIchiranhyo_9 = RString.EMPTY;
-            source.listHakkoIchiranhyo_10 = RString.EMPTY;
-            source.listHakkoIchiranhyo_11 = RString.EMPTY;
-            source.listHakkoIchiranhyo_12 = RString.EMPTY;
-            source.listHakkoIchiranhyo_13 = RString.EMPTY;
-            source.listHakkoIchiranhyo_14 = RString.EMPTY;
-            source.listHakkoIchiranhyo_15 = RString.EMPTY;
         }
 
         return source;

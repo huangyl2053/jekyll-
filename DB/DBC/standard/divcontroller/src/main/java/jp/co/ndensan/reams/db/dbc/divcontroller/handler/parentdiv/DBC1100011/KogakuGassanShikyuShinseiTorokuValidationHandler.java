@@ -72,7 +72,7 @@ public class KogakuGassanShikyuShinseiTorokuValidationHandler {
     }
 
     /**
-     * 負担額情報入力の明細月のチェックです。
+     * 「加入情報を確定する」ボタン押下時のチェックです。
      *
      * @return {@link ValidationMessageControlPairs}
      */
@@ -86,5 +86,20 @@ public class KogakuGassanShikyuShinseiTorokuValidationHandler {
                 .add(KogakuGassanShikyuShinseiTorokuValidationMessage.保険加入期間が不正)
                 .add(KogakuGassanShikyuShinseiTorokuValidationMessage.証明書整理番号桁数が不正)
                 .add(KogakuGassanShikyuShinseiTorokuValidationMessage.証明書整理番号既に存在).build();
+    }
+
+    /**
+     * 「申請情報を保存する」ボタン押下時のチェックです。
+     *
+     * @return {@link ValidationMessageControlPairs}
+     */
+    public ValidationMessageControlPairs validate申請情報を保存する() {
+        IValidationMessages message = new KogakuGassanShikyuShinseiTorokuValidator(div).validate申請情報を保存する();
+        return create申請情報を保存するDictionary().check(message);
+    }
+
+    private ValidationDictionary create申請情報を保存するDictionary() {
+        return new ValidationDictionaryBuilder()
+                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.医療支給申請書整理番号入力桁不足).build();
     }
 }

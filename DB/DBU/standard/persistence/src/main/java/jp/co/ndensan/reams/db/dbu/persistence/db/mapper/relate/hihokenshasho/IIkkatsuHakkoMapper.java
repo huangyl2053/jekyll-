@@ -379,6 +379,14 @@ public interface IIkkatsuHakkoMapper {
     int insertShoKofuKaishu(DbT7037ShoKofuKaishuEntity entity);
 
     /**
+     * 処理日付管理マスタテーブルを件作します。
+     *
+     * @param 検索条件 検索条件
+     * @return List<DbT7022ShoriDateKanriEntity>
+     */
+    List<DbT7022ShoriDateKanriEntity> getDbT7022ShoriDateKanri(IkkatsuHakkoMybatisParameter 検索条件);
+
+    /**
      * 処理日付管理マスタテーブルを更新します。
      *
      * @param entity entity

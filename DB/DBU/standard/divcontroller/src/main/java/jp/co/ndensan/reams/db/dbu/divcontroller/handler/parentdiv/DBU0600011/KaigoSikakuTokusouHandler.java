@@ -129,7 +129,7 @@ public class KaigoSikakuTokusouHandler {
                 div.getNyusyoSisetuCode().setValue(shisetsunyutaisho.get入所施設コード().value());
             }
             if (shisetsunyutaisho.get入所施設コード() != null) {
-                div.getHokaSityosonSisetuMesyo().setValue(set事業者名称(shisetsunyutaisho.get入所施設コード().value(),
+                div.getNyusyoSisetuMesyo().setValue(set事業者名称(shisetsunyutaisho.get入所施設コード().value(),
                         shisetsunyutaisho.get入所施設種類()));
             }
         }
@@ -174,7 +174,7 @@ public class KaigoSikakuTokusouHandler {
                 div.getHokaSityosonSisetuCode().setValue(shisetsunyutaisho.get入所施設コード().value());
             }
             if (shisetsunyutaisho.get入所施設コード() != null) {
-                div.getNyusyoSisetuMesyo().setValue(set事業者名称(shisetsunyutaisho.get入所施設コード().value(),
+                div.getHokaSityosonSisetuMesyo().setValue(set事業者名称(shisetsunyutaisho.get入所施設コード().value(),
                         shisetsunyutaisho.get入所施設種類()));
             }
         }

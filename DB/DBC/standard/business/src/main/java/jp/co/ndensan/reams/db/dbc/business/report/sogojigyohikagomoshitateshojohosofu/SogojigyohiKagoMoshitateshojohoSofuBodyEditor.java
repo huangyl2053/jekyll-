@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.sogojigyohikagomoshitateshojo
 import jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.DbWT1001HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110090.DbWT1731KagoMoshitateTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikagomoshitateshojohosofuichiran.SogojigyohiKagoMoshitateshojohoSofuIchiranEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikagomoshitateshojohosofuichiran.SogojigyohiKagoMoshitateshojohoSofuIchiranSource;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikagomoshitateshojohosofuichiran.SogojigyohiKagoMoshitateshojohoSofuSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
@@ -55,7 +55,7 @@ public class SogojigyohiKagoMoshitateshojohoSofuBodyEditor implements ISogojigyo
     }
 
     @Override
-    public SogojigyohiKagoMoshitateshojohoSofuIchiranSource edit(SogojigyohiKagoMoshitateshojohoSofuIchiranSource source) {
+    public SogojigyohiKagoMoshitateshojohoSofuSource edit(SogojigyohiKagoMoshitateshojohoSofuSource source) {
         DbWT1731KagoMoshitateTempEntity 過誤申立一時TBL = 送付一覧表データ.get過誤申立一時TBL();
         DbWT1001HihokenshaTempEntity 被保険者一時TBL = 送付一覧表データ.get被保険者一時TBL();
         source.listUpper_1 = new RString(連番);
