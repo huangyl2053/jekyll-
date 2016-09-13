@@ -262,9 +262,9 @@ public class TyohyoShutuyukuProcess extends BatchKeyBreakBase<ShafukugemmenTaish
             出力条件.add(new RString("事業者選択：計画事業者＋サービス事業者"));
         }
         if (processParameter.get事業者番号() != null && !processParameter.get事業者番号().isEmpty()) {
-            出力条件.add(new RString("事業者：").concat(processParameter.get事業者名()));
+            出力条件.add(new RString("事業者：").concat(processParameter.get事業者番号()).concat(processParameter.get事業者名()));
         }
-
+        
         return 出力条件;
     }
 
