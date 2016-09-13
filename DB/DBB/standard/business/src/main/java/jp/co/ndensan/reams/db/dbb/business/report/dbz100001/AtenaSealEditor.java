@@ -173,15 +173,15 @@ public class AtenaSealEditor
 
             return this.posIndex - 1;
         }
-        return this.posIndex * 2 - index % NUM_2;
+        return this.posIndex * NUM_2 - index % NUM_2;
     }
 
     private String getValueOfIndex(int index) {
         if (index == NUM_0) {
 
-            return String.valueOf("");
+            return RString.EMPTY.toString();
         }
-        return String.valueOf("index");
+        return String.valueOf(index);
     }
 
     private static enum MethodName {
