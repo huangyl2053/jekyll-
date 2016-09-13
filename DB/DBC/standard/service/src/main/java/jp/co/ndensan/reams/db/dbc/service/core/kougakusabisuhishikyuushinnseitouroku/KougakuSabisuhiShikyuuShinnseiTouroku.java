@@ -315,6 +315,29 @@ public class KougakuSabisuhiShikyuuShinnseiTouroku {
     }
 
     /**
+     * 給付実績データ比較処理を行う。
+     *
+     * @param 給付実績データ KyufujissekiKogakuKaigoServicehi
+     * @param 高額サービス費詳細内容Entity KougakuSabisuhiShousaiNaiyouResult
+     * @return KyufujissekiKogakuKaigoServicehi
+     */
+    public KyufujissekiKogakuKaigoServicehi dealKyufujissekiDataHikaku(
+            KyufujissekiKogakuKaigoServicehi 給付実績データ,
+            KougakuSabisuhiShousaiNaiyouResult 高額サービス費詳細内容Entity) {
+        boolean flag_one = 高額サービス費詳細内容Entity != null
+                && 高額サービス費詳細内容Entity.get高額介護サービス費支給審査決定Entity() != null
+                && TWO.equals(高額サービス費詳細内容Entity.get高額介護サービス費支給審査決定Entity().get支給区分コード());
+        boolean flag_two = 高額サービス費詳細内容Entity != null
+                && 高額サービス費詳細内容Entity.get高額介護サービス費支給判定結果Entity() != null
+                && TWO.equals(高額サービス費詳細内容Entity.get高額介護サービス費支給判定結果Entity().get支給区分コード());
+        boolean flag_three = 給付実績データ != null && THREE.equals(給付実績データ.get作成区分());
+        if (給付実績データ == null || flag_one || flag_two || flag_three) {
+            return null;
+        }
+        return 給付実績データ;
+    }
+
+    /**
      * 高額介護支給申請履歴番号取得
      *
      * @param 被保険者番号 HihokenshaNo
