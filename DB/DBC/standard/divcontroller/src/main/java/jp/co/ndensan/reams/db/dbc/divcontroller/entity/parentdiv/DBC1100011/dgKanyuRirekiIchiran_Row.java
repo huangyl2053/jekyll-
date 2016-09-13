@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1100011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Sep 09 16:40:57 CST 2016
+ * Tue Sep 13 20:22:58 CST 2016
  */
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -26,6 +26,9 @@ public class dgKanyuRirekiIchiran_Row extends DataRow {
     private RString txtKanyurekiNo;
     private RString txtKanyuKaishiYMDStr;
     private RString txtKanyuShuryoYMDStr;
+    private RString txtTaishoNendo;
+    private RString txtSeiriNo;
+    private RString txtHokenshaNo;
 
     public dgKanyuRirekiIchiran_Row() {
         super();
@@ -38,6 +41,9 @@ public class dgKanyuRirekiIchiran_Row extends DataRow {
         this.txtKanyurekiNo = RString.EMPTY;
         this.txtKanyuKaishiYMDStr = RString.EMPTY;
         this.txtKanyuShuryoYMDStr = RString.EMPTY;
+        this.txtTaishoNendo = RString.EMPTY;
+        this.txtSeiriNo = RString.EMPTY;
+        this.txtHokenshaNo = RString.EMPTY;
         this.setOriginalData("txtHokenshaName", txtHokenshaName);
         this.setOriginalData("txtKanyuKaishiYMD", txtKanyuKaishiYMD);
         this.setOriginalData("txtKanyuShuryoYMD", txtKanyuShuryoYMD);
@@ -47,9 +53,12 @@ public class dgKanyuRirekiIchiran_Row extends DataRow {
         this.setOriginalData("txtKanyurekiNo", txtKanyurekiNo);
         this.setOriginalData("txtKanyuKaishiYMDStr", txtKanyuKaishiYMDStr);
         this.setOriginalData("txtKanyuShuryoYMDStr", txtKanyuShuryoYMDStr);
+        this.setOriginalData("txtTaishoNendo", txtTaishoNendo);
+        this.setOriginalData("txtSeiriNo", txtSeiriNo);
+        this.setOriginalData("txtHokenshaNo", txtHokenshaNo);
     }
 
-    public dgKanyuRirekiIchiran_Row(RString txtHokenshaName, RString txtKanyuKaishiYMD, RString txtKanyuShuryoYMD, RString txtJikofutanSeiriNo, RString txtHihokenshaNo, RString txtRirekiNo, RString txtKanyurekiNo, RString txtKanyuKaishiYMDStr, RString txtKanyuShuryoYMDStr) {
+    public dgKanyuRirekiIchiran_Row(RString txtHokenshaName, RString txtKanyuKaishiYMD, RString txtKanyuShuryoYMD, RString txtJikofutanSeiriNo, RString txtHihokenshaNo, RString txtRirekiNo, RString txtKanyurekiNo, RString txtKanyuKaishiYMDStr, RString txtKanyuShuryoYMDStr, RString txtTaishoNendo, RString txtSeiriNo, RString txtHokenshaNo) {
         super();
         this.setOriginalData("txtHokenshaName", txtHokenshaName);
         this.setOriginalData("txtKanyuKaishiYMD", txtKanyuKaishiYMD);
@@ -60,6 +69,9 @@ public class dgKanyuRirekiIchiran_Row extends DataRow {
         this.setOriginalData("txtKanyurekiNo", txtKanyurekiNo);
         this.setOriginalData("txtKanyuKaishiYMDStr", txtKanyuKaishiYMDStr);
         this.setOriginalData("txtKanyuShuryoYMDStr", txtKanyuShuryoYMDStr);
+        this.setOriginalData("txtTaishoNendo", txtTaishoNendo);
+        this.setOriginalData("txtSeiriNo", txtSeiriNo);
+        this.setOriginalData("txtHokenshaNo", txtHokenshaNo);
         this.txtHokenshaName = txtHokenshaName;
         this.txtKanyuKaishiYMD = txtKanyuKaishiYMD;
         this.txtKanyuShuryoYMD = txtKanyuShuryoYMD;
@@ -69,6 +81,9 @@ public class dgKanyuRirekiIchiran_Row extends DataRow {
         this.txtKanyurekiNo = txtKanyurekiNo;
         this.txtKanyuKaishiYMDStr = txtKanyuKaishiYMDStr;
         this.txtKanyuShuryoYMDStr = txtKanyuShuryoYMDStr;
+        this.txtTaishoNendo = txtTaishoNendo;
+        this.txtSeiriNo = txtSeiriNo;
+        this.txtHokenshaNo = txtHokenshaNo;
     }
 
     public RString getTxtHokenshaName() {
@@ -105,6 +120,18 @@ public class dgKanyuRirekiIchiran_Row extends DataRow {
 
     public RString getTxtKanyuShuryoYMDStr() {
         return txtKanyuShuryoYMDStr;
+    }
+
+    public RString getTxtTaishoNendo() {
+        return txtTaishoNendo;
+    }
+
+    public RString getTxtSeiriNo() {
+        return txtSeiriNo;
+    }
+
+    public RString getTxtHokenshaNo() {
+        return txtHokenshaNo;
     }
 
     public void setTxtHokenshaName(RString txtHokenshaName) {
@@ -150,6 +177,21 @@ public class dgKanyuRirekiIchiran_Row extends DataRow {
     public void setTxtKanyuShuryoYMDStr(RString txtKanyuShuryoYMDStr) {
         this.setOriginalData("txtKanyuShuryoYMDStr", txtKanyuShuryoYMDStr);
         this.txtKanyuShuryoYMDStr = txtKanyuShuryoYMDStr;
+    }
+
+    public void setTxtTaishoNendo(RString txtTaishoNendo) {
+        this.setOriginalData("txtTaishoNendo", txtTaishoNendo);
+        this.txtTaishoNendo = txtTaishoNendo;
+    }
+
+    public void setTxtSeiriNo(RString txtSeiriNo) {
+        this.setOriginalData("txtSeiriNo", txtSeiriNo);
+        this.txtSeiriNo = txtSeiriNo;
+    }
+
+    public void setTxtHokenshaNo(RString txtHokenshaNo) {
+        this.setOriginalData("txtHokenshaNo", txtHokenshaNo);
+        this.txtHokenshaNo = txtHokenshaNo;
     }
 
     // </editor-fold>
