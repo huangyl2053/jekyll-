@@ -26,7 +26,7 @@ public enum KogakuJigyoShinseishoHakkoIchiranOrder implements IReportItems {
     /**
      * 住所コードです。
      */
-    町域コード(new RString("0002"), new RString(""), new RString("\"ShinseiJohoChohyoTemp\".\"choikiCode\"")),
+    町域コード(new RString("0002"), new RString(""), new RString("\"ShinseiJohoChohyoTemp\".\"jushoChohyo\"")),
     /**
      * 行政区コードです。
      */

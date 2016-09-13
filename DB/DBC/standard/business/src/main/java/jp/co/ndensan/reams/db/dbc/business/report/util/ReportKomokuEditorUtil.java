@@ -9,10 +9,13 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -26,6 +29,8 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  */
 public final class ReportKomokuEditorUtil {
 
+    private static final RString 年度 = new RString("年度");
+
     private ReportKomokuEditorUtil() {
     }
 
@@ -36,10 +41,7 @@ public final class ReportKomokuEditorUtil {
      * @return 氏名
      */
     public static RString get氏名カナ(AtenaKanaMeisho 氏名) {
-        if (氏名 == null) {
-            return RString.EMPTY;
-        }
-        return 氏名.getColumnValue();
+        return 氏名 == null ? RString.EMPTY : 氏名.getColumnValue();
     }
 
     /**
@@ -49,10 +51,7 @@ public final class ReportKomokuEditorUtil {
      * @return 氏名
      */
     public static RString get氏名(AtenaMeisho 氏名) {
-        if (氏名 == null) {
-            return RString.EMPTY;
-        }
-        return 氏名.getColumnValue();
+        return 氏名 == null ? RString.EMPTY : 氏名.getColumnValue();
     }
 
     /**
@@ -62,10 +61,8 @@ public final class ReportKomokuEditorUtil {
      * @return 日付
      */
     public static RString パターン12(FlexibleDate ymd) {
-        if (ymd == null) {
-            return RString.EMPTY;
-        }
-        return ymd.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        return ymd == null ? RString.EMPTY : ymd.wareki().eraType(EraType.KANJI).
+                firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 
     /**
@@ -75,10 +72,7 @@ public final class ReportKomokuEditorUtil {
      * @return 証記載保険者番号
      */
     public static RString get証記載保険者番号(HokenshaNo hokenshaNo) {
-        if (hokenshaNo == null) {
-            return RString.EMPTY;
-        }
-        return hokenshaNo.getColumnValue();
+        return hokenshaNo == null ? RString.EMPTY : hokenshaNo.getColumnValue();
     }
 
     /**
@@ -88,10 +82,7 @@ public final class ReportKomokuEditorUtil {
      * @return 被保険者番号
      */
     public static RString get被保険者番号(HihokenshaNo hokenshaNo) {
-        if (hokenshaNo == null) {
-            return RString.EMPTY;
-        }
-        return hokenshaNo.getColumnValue();
+        return hokenshaNo == null ? RString.EMPTY : hokenshaNo.getColumnValue();
     }
 
     /**
@@ -101,10 +92,8 @@ public final class ReportKomokuEditorUtil {
      * @return 日付
      */
     public static RString パターン62(FlexibleYearMonth ym) {
-        if (ym == null) {
-            return RString.EMPTY;
-        }
-        return ym.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        return ym == null ? RString.EMPTY : ym.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 
     /**
@@ -114,9 +103,37 @@ public final class ReportKomokuEditorUtil {
      * @return 金額
      */
     public static RString 金額1(Decimal decimal) {
-        if (decimal == null) {
-            return RString.EMPTY;
-        }
-        return DecimalFormatter.toコンマ区切りRString(decimal, 0);
+        return decimal == null ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(decimal, 0);
+    }
+
+    /**
+     * 日付の変換のメソッドです。
+     *
+     * @param year 年度
+     * @return 年度
+     */
+    public static RString パターン107(FlexibleYear year) {
+        return year == null ? RString.EMPTY : year.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                fillType(FillType.BLANK).toDateString().concat(年度);
+    }
+
+    /**
+     * 金融機関コードを取得します。
+     *
+     * @param code 金融機関コード
+     * @return 金融機関コード
+     */
+    public static RString get金融機関コード(KinyuKikanCode code) {
+        return code == null ? RString.EMPTY : code.getColumnValue();
+    }
+
+    /**
+     * 金融機関支店コードを取得します。
+     *
+     * @param code 金融機関支店コード
+     * @return 金融機関支店コード
+     */
+    public static RString get金融機関支店コード(KinyuKikanShitenCode code) {
+        return code == null ? RString.EMPTY : code.getColumnValue();
     }
 }
