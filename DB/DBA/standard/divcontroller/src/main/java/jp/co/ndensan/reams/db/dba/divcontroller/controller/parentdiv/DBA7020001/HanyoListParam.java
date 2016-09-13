@@ -45,7 +45,7 @@ public class HanyoListParam {
         RString モード = ResponseHolder.getState();
         ViewStateHolder.put(ViewStateKeys.モード, モード);
         getHandler(div).onLoad(モード);
-        ResponseData<HanyoListParamDiv> data = null;
+        ResponseData<HanyoListParamDiv> data = ResponseData.of(div).rootTitle(タイトル.concat("　").concat(モード)).respond();
 
         if (モード2.equals(モード)) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA701003.getReportId());
@@ -59,13 +59,11 @@ public class HanyoListParam {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA701004.getReportId());
             div.getCcdShutsuryokuKomoku().load(ReportIdDBA.DBA701004.getReportId().value(), SubGyomuCode.DBA介護資格);
             ResponseData.of(div).setState(DBA7020001StateName.老齢福祉年金受給者);
-            
         } else if (モード5.equals(モード)) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA701006.getReportId());
             div.getCcdShutsuryokuKomoku().load(ReportIdDBA.DBA701006.getReportId().value(), SubGyomuCode.DBA介護資格);
             ResponseData.of(div).setState(DBA7020001StateName.生活保護受給者);
         }
-        data = ResponseData.of(div).rootTitle(タイトル.concat("　").concat(モード)).respond();
         return data;
     }
 
