@@ -213,7 +213,7 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
         if (null != div.getTxtJikoFutanngakuShoumeisho().getFromValue()) {
             batchparam.setJikoFutanngakuShoumeishoFrom(new FlexibleYearMonth(div.getTxtJikoFutanngakuShoumeisho().getFromValue().getYearMonth().toString()));
         }
-        if (null != div.getTxtJikoFutangakuKakunin().getToValue()) {
+        if (null != div.getTxtJikoFutanngakuShoumeisho().getToValue()) {
             batchparam.setJikoFutanngakuShoumeishoTo(new FlexibleYearMonth(div.getTxtJikoFutanngakuShoumeisho().getToValue().getYearMonth().toString()));
         }
         List<RString> selectKey = div.getChkCsvHenshuHoho().getSelectedKeys();
