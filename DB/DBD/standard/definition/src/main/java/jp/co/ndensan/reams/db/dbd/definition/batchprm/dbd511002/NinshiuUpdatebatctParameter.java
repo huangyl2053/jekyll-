@@ -28,7 +28,7 @@ public class NinshiuUpdatebatctParameter extends BatchParameterBase {
     private FlexibleDate 抽出対象期間_開始;
     private FlexibleDate 抽出対象期間_終了;
     private FlexibleDate 通知書発行日;
-    private List<RString> 出力順;
+    private RString 出力順;
 
     /**
      * 引数作成

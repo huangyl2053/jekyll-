@@ -16,7 +16,7 @@ import lombok.Setter;
 /**
  * 帳票設計_DBCMN62002_高額合算自己負担額補正結果一覧表のEntityクラスです
  *
- * @reamsid_L DBC_2320_040 jiangxiaolong
+ * @reamsid_L DBC-2320-040 jiangxiaolong
  */
 @Getter
 @Setter
