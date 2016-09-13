@@ -56,8 +56,11 @@ public enum ShuruiShikyuGendogakuMainSpec implements IPredicate<ShuruiShikyuGend
                             div.getShuruiShikyuGendogakuShosai().getTxtTekiyoKikanRange().getFromValue().getYearMonth().toDateString());
                     List<ShuruiShikyuGendogakuMainResult> result = ShuruiShikyuGendogakuMainFinder.createInstance().select介護サービス種類データ(
                             new ServiceShuruiCode(div.getShuruiShikyuGendogakuShosai().getDdlServiceShurui().getSelectedKey()), 適用期間From);
-                    return (!result.isEmpty() && result.get(0).getDbT7130entity() != null
-                    && 適用期間From.isBefore(result.get(0).getDbT7130entity().getTeikyoshuryoYM()));
+                    if (result.get(0).getDbT7130entity().getTeikyoshuryoYM() != null) {
+                        return (!result.isEmpty() && result.get(0).getDbT7130entity() != null
+                        && 適用期間From.isBefore(result.get(0).getDbT7130entity().getTeikyoshuryoYM()));
+                    }
+                    return true;
                 }
             },
     /**

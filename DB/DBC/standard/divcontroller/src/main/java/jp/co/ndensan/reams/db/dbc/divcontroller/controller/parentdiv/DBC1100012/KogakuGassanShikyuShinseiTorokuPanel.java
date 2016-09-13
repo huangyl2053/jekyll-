@@ -88,8 +88,10 @@ public class KogakuGassanShikyuShinseiTorokuPanel {
         申請状態 = 0;
         申請状況 = 0;
         RString メニューID = UrControlDataFactory.createInstance().getMenuID();
-        getHandler(div).initialize(メニューID);
-        return ResponseData.of(div).respond();
+//        getHandler(div).initialize(メニューID);
+        getHandler(div).initialize();
+        RString タイトル = getHandler(div).switchFor(new RString("DBCMN61002"));
+        return ResponseData.of(div).rootTitle(タイトル).respond();
     }
 
     /**

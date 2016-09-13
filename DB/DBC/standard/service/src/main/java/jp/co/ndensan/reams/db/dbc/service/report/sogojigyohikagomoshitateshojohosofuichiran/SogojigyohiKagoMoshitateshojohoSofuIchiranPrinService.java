@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.service.report.sogojigyohikagomoshitateshojoh
 import jp.co.ndensan.reams.db.dbc.business.report.sogojigyohikagomoshitateshojohosofu.SogojigyohiKagoMoshitateshojohoSofuProperty;
 import jp.co.ndensan.reams.db.dbc.business.report.sogojigyohikagomoshitateshojohosofu.SogojigyohiKagoMoshitateshojohoSofuReport;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikagomoshitateshojohosofuichiran.SogojigyohiKagoMoshitateshojohoSofuIchiranEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikagomoshitateshojohosofuichiran.SogojigyohiKagoMoshitateshojohoSofuIchiranSource;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikagomoshitateshojohosofuichiran.SogojigyohiKagoMoshitateshojohoSofuSource;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
@@ -81,8 +81,8 @@ public class SogojigyohiKagoMoshitateshojohoSofuIchiranPrinService {
             boolean flag,
             ReportManager reportManager) {
         SogojigyohiKagoMoshitateshojohoSofuProperty property = new SogojigyohiKagoMoshitateshojohoSofuProperty();
-        try (ReportAssembler<SogojigyohiKagoMoshitateshojohoSofuIchiranSource> assembler = createAssembler(property, reportManager)) {
-            ReportSourceWriter<SogojigyohiKagoMoshitateshojohoSofuIchiranSource> reportSourceWriter
+        try (ReportAssembler<SogojigyohiKagoMoshitateshojohoSofuSource> assembler = createAssembler(property, reportManager)) {
+            ReportSourceWriter<SogojigyohiKagoMoshitateshojohoSofuSource> reportSourceWriter
                     = new ReportSourceWriter(assembler);
             new SogojigyohiKagoMoshitateshojohoSofuReport(送付一覧表データ, 出力順情報, 処理年月, 作成日時, 連番, 合計, flag).writeBy(reportSourceWriter);
         }

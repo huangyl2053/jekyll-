@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 /**
  * 帳票設計_DBCMNF1001_1_受給者異動連絡票情報送付対象者リストのsource
  *
- * @reamsid_L DBC-DBC-2720-040 jiangxiaolong
+ * @reamsid_L DBC-2720-040 jiangxiaolong
  */
 public class JukyushaIdorenrakuhyoSofuTaishoshachiranSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.sogojigyohikagomoshitateshojohosofu;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikagomoshitateshojohosofuichiran.SogojigyohiKagoMoshitateshojohoSofuIchiranSource;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikagomoshitateshojohosofuichiran.SogojigyohiKagoMoshitateshojohoSofuSource;
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
@@ -13,6 +13,6 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
  *
  * @author DBC-2045-042 zhengshenlei
  */
-public interface ISogojigyohiKagoMoshitateshojohoSofuEditor extends IReportEditor<SogojigyohiKagoMoshitateshojohoSofuIchiranSource> {
+public interface ISogojigyohiKagoMoshitateshojohoSofuEditor extends IReportEditor<SogojigyohiKagoMoshitateshojohoSofuSource> {
 
 }
