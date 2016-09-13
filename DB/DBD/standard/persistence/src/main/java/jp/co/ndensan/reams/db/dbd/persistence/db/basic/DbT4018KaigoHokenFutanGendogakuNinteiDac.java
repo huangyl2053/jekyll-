@@ -34,7 +34,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 介護保険負担限度額認定のデータアクセスクラスです。
  *
- * @reamsid_L DBC-9999-013 wangchao
+ * @reamsid_L DBD-9999-013 wangchao
  */
 public class DbT4018KaigoHokenFutanGendogakuNinteiDac {
 

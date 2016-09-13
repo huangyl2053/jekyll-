@@ -31,7 +31,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 総合事業対象者のデータアクセスクラスです。
  *
- * @reamsid_L DBD-3560-130 wangjie2
+ * @reamsid_L DBD-9999-013 wangjie2
  */
 public class DbT3105SogoJigyoTaishoshaDac implements ISaveable<DbT3105SogoJigyoTaishoshaEntity> {
 
