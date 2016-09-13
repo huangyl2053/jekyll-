@@ -105,8 +105,11 @@ public class KogakuGassanRirekiNoKakuninProcess extends BatchProcessBase<DbWTKog
             dbWT3861entity.setSaisoFG(entity.getSaisoFG());
             dbWT3861entity.setSikyugakuKeisanKekkaRenrakuhyoSakuseiYMD(entity.getSikyugakuKeisanKekkaRenrakuhyoSakuseiYMD());
 
-            dbWT3861entity.setState(EntityDataState.Modified);
-            高額合算支給額計算結果一時tableWriter.update(dbWT3861entity);
+            dbWT3861entity.setState(EntityDataState.Added);
+            高額合算支給額計算結果一時tableWriter.insert(dbWT3861entity);
+            dbWT3861entity.setRirekiNo(entity.getRirekiNo());
+            dbWT3861entity.setState(EntityDataState.Deleted);
+            高額合算支給額計算結果一時tableWriter.delete(dbWT3861entity);
         }
     }
 
