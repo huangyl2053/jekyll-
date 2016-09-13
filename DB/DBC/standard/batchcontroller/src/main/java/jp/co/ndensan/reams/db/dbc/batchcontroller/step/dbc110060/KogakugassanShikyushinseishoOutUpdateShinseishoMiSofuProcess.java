@@ -49,7 +49,4 @@ public class KogakugassanShikyushinseishoOutUpdateShinseishoMiSofuProcess extend
         高額合算申請書tableWriter.update(entity);
     }
 
-    @Override
-    protected void afterExecute() {
-    }
 }

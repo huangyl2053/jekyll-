@@ -51,7 +51,4 @@ public class KogakugassanShikyushinseishoOutSetHokenshameiKoikiProcess
         高額合算申請書一時tableWriter.update(tempEntity);
     }
 
-    @Override
-    protected void afterExecute() {
-    }
 }

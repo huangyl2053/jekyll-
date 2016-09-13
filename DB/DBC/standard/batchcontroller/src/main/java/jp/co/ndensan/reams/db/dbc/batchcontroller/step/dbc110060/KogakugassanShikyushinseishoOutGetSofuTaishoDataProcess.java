@@ -42,8 +42,8 @@ public class KogakugassanShikyushinseishoOutGetSofuTaishoDataProcess extends Bat
     private static final RString 処理結果リスト一時TABLE_NAME = new RString("DbWT1002KokuhorenSakuseiError");
     private static final int INDEX_0 = 0;
     private static final int INDEX_1 = 1;
-    private static final int INDEX_5 = 1;
-    private static final int INDEX_11 = 1;
+    private static final int INDEX_5 = 5;
+    private static final int INDEX_11 = 11;
 
     private KogakugassanShikyushinseishoOutProcessParameter processParameter;
     private KogakugassanShikyushinseishoOutMybatisParameter mybatisParameter;

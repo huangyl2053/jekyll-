@@ -124,6 +124,8 @@ public class DBC110060_KogakugassanShikyushinseishoOut extends BatchFlowBase<DBC
             processParameter.set保険者情報_保険者番号(保険者情報_保険者番号);
             processParameter.set保険者情報_保険者名称(保険者情報_保険者名称);
             executeStep(帳票出力);
+            executeStep(DB更新_送付済);
+            executeStep(DB更新_未送付);
         }
         executeStep(国保連インタフェース管理更新);
         executeStep(処理結果リスト作成);
