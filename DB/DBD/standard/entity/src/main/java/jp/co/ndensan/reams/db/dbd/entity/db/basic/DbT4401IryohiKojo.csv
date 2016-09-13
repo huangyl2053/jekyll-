@@ -1,0 +1,12 @@
+﻿hihokenshaNo,DbUDD002HihokenshaNo,HihokenshaNo,,,,,被保険者番号,A
+kojoTaishoNen,UDD012YSeireki,FlexibleYear,,,,,控除対象年,A
+dataKubun,varchar,RString,,,,,データ区分,A
+torokuYMD,UDD015YMD,FlexibleDate,,,,,登録年月日,A
+shinseiYMD,UDD015YMD,FlexibleDate,,,,,申請年月日,A
+ninteiYukoKikanKaishiYMD,UDD015YMD,FlexibleDate,,,,,認定有効期間開始年月日,A
+ninteiYukoKikanShuryoYMD,UDD015YMD,FlexibleDate,,,,,認定有効期間終了年月日,A
+shujiiIkenshoJuryoYMD,UDD015YMD,FlexibleDate,,,,,主治医意見書受領年月日,A
+nichijoSeikatsuJiritsudo,varchar,RString,,,,,日常生活自立度,A
+nyoshikkinHassei,bool,boolean,,,,,尿失禁の発生,A
+hakkoYMD,UDD015YMD,FlexibleDate,,,,,発行年月日,A
+logicalDeletedFlag,bool,boolean,,,,,論理削除フラグ,A

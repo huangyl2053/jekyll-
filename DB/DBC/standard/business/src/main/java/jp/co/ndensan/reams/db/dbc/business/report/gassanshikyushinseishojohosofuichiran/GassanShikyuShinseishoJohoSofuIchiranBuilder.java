@@ -17,6 +17,11 @@ public class GassanShikyuShinseishoJohoSofuIchiranBuilder implements IGassanShik
 
     private final IGassanShikyuShinseishoJohoSofuIchiranEditor editor;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param editor IGassanShikyuShinseishoJohoSofuIchiranEditor
+     */
     public GassanShikyuShinseishoJohoSofuIchiranBuilder(IGassanShikyuShinseishoJohoSofuIchiranEditor editor) {
         this.editor = editor;
     }

@@ -171,7 +171,7 @@ public class ShotokuDankaibetsuShunoritsuIchiranHandler {
      *
      * @return DBB021021_DankaibetsuShunoritsuIchiranhyoSakuseiParameter
      */
-    public DBB021021_DankaibetsuShunoritsuIchiranhyoSakuseiParameter setバッチ() {
+    public DBB021021_DankaibetsuShunoritsuIchiranhyoSakuseiParameter createDankaibetsuShunoritsuIchiranBatchParameter() {
         DBB021021_DankaibetsuShunoritsuIchiranhyoSakuseiParameter parameter = new DBB021021_DankaibetsuShunoritsuIchiranhyoSakuseiParameter();
         RDate 調定年度_開始 = div.getTxtChoteiNendoRange().getFromValue();
         RDate 調定年度_終了 = div.getTxtChoteiNendoRange().getToValue();

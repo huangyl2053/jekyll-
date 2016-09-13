@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 /**
  * 利用者負担額減免認定者リスト発行です。
  *
- * @reamsid_L DBD-3980-050 x_youyj
+ * @reamsid_L DBD-3980-060 x_youyj
  */
 public class RiyoshaFutangakuGemmenGaitoshaIchiranReport extends Report<RiyoshaFutangakuGemmenGaitoshaIchiranReportSource> {
 

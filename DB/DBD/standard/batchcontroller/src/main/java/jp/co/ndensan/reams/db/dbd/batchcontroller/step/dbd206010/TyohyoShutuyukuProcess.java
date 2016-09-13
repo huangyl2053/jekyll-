@@ -93,7 +93,7 @@ public class TyohyoShutuyukuProcess extends BatchKeyBreakBase<ShafukugemmenTaish
         if (null != outputOrder) {
             if (processParameter.get改頁出力順ID() != null) {
                 orderBy = ChohyoUtil.get出力順OrderBy(MyBatisOrderByClauseCreator.create(TyohyoShutuyukuOrderKey.class,
-                        outputOrder).substring(NUM8).concat(new RString(",")), NUM5);
+                        outputOrder).replace("order by", ","), NUM5);
             } else {
                 orderBy = ChohyoUtil.get出力順OrderBy(MyBatisOrderByClauseCreator.create(TyohyoShutuyukuOrderKey.class,
                         outputOrder).substring(NUM8), NUM5);

@@ -3,11 +3,12 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB2110002;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Sep 02 14:46:38 CST 2016
+ * Mon Sep 12 16:15:01 CST 2016
  */
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 /**
@@ -26,6 +27,8 @@ public class dgTsukiShoriSelect_Row extends DataRow {
     private TextBox txtFileMei;
     private TextBoxNum txtKensu;
     private TextBox txtZenSakuseiNichiji;
+    private TextBox txtSakuseiTime;
+    private TextBoxDate txtSakuseiDate;
 
     public dgTsukiShoriSelect_Row() {
         super();
@@ -37,6 +40,8 @@ public class dgTsukiShoriSelect_Row extends DataRow {
         this.txtFileMei = new TextBox();
         this.txtKensu = new TextBoxNum();
         this.txtZenSakuseiNichiji = new TextBox();
+        this.txtSakuseiTime = new TextBox();
+        this.txtSakuseiDate = new TextBoxDate();
         this.setOriginalData("txtCityCode", txtCityCode);
         this.setOriginalData("txtCityName", txtCityName);
         this.setOriginalData("txtMonth", txtMonth);
@@ -45,9 +50,11 @@ public class dgTsukiShoriSelect_Row extends DataRow {
         this.setOriginalData("txtFileMei", txtFileMei);
         this.setOriginalData("txtKensu", txtKensu);
         this.setOriginalData("txtZenSakuseiNichiji", txtZenSakuseiNichiji);
+        this.setOriginalData("txtSakuseiTime", txtSakuseiTime);
+        this.setOriginalData("txtSakuseiDate", txtSakuseiDate);
     }
 
-    public dgTsukiShoriSelect_Row(TextBox txtCityCode, TextBox txtCityName, TextBox txtMonth, TextBox txtDownLoadNichiji, TextBox txtSakuseiInfoName, TextBox txtFileMei, TextBoxNum txtKensu, TextBox txtZenSakuseiNichiji) {
+    public dgTsukiShoriSelect_Row(TextBox txtCityCode, TextBox txtCityName, TextBox txtMonth, TextBox txtDownLoadNichiji, TextBox txtSakuseiInfoName, TextBox txtFileMei, TextBoxNum txtKensu, TextBox txtZenSakuseiNichiji, TextBox txtSakuseiTime, TextBoxDate txtSakuseiDate) {
         super();
         this.setOriginalData("txtCityCode", txtCityCode);
         this.setOriginalData("txtCityName", txtCityName);
@@ -57,6 +64,8 @@ public class dgTsukiShoriSelect_Row extends DataRow {
         this.setOriginalData("txtFileMei", txtFileMei);
         this.setOriginalData("txtKensu", txtKensu);
         this.setOriginalData("txtZenSakuseiNichiji", txtZenSakuseiNichiji);
+        this.setOriginalData("txtSakuseiTime", txtSakuseiTime);
+        this.setOriginalData("txtSakuseiDate", txtSakuseiDate);
         this.txtCityCode = txtCityCode;
         this.txtCityName = txtCityName;
         this.txtMonth = txtMonth;
@@ -65,6 +74,8 @@ public class dgTsukiShoriSelect_Row extends DataRow {
         this.txtFileMei = txtFileMei;
         this.txtKensu = txtKensu;
         this.txtZenSakuseiNichiji = txtZenSakuseiNichiji;
+        this.txtSakuseiTime = txtSakuseiTime;
+        this.txtSakuseiDate = txtSakuseiDate;
     }
 
     public TextBox getTxtCityCode() {
@@ -97,6 +108,14 @@ public class dgTsukiShoriSelect_Row extends DataRow {
 
     public TextBox getTxtZenSakuseiNichiji() {
         return txtZenSakuseiNichiji;
+    }
+
+    public TextBox getTxtSakuseiTime() {
+        return txtSakuseiTime;
+    }
+
+    public TextBoxDate getTxtSakuseiDate() {
+        return txtSakuseiDate;
     }
 
     public void setTxtCityCode(TextBox txtCityCode) {
@@ -137,6 +156,16 @@ public class dgTsukiShoriSelect_Row extends DataRow {
     public void setTxtZenSakuseiNichiji(TextBox txtZenSakuseiNichiji) {
         this.setOriginalData("txtZenSakuseiNichiji", txtZenSakuseiNichiji);
         this.txtZenSakuseiNichiji = txtZenSakuseiNichiji;
+    }
+
+    public void setTxtSakuseiTime(TextBox txtSakuseiTime) {
+        this.setOriginalData("txtSakuseiTime", txtSakuseiTime);
+        this.txtSakuseiTime = txtSakuseiTime;
+    }
+
+    public void setTxtSakuseiDate(TextBoxDate txtSakuseiDate) {
+        this.setOriginalData("txtSakuseiDate", txtSakuseiDate);
+        this.txtSakuseiDate = txtSakuseiDate;
     }
 
     // </editor-fold>

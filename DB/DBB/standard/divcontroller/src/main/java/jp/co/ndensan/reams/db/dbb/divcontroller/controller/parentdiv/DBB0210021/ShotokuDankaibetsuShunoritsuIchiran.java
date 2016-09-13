@@ -84,7 +84,7 @@ public class ShotokuDankaibetsuShunoritsuIchiran {
      * DBB021021_DankaibetsuShunoritsuIchiranhyoSakuseiParameter
      */
     public ResponseData<DBB021021_DankaibetsuShunoritsuIchiranhyoSakuseiParameter> onClick_btnBatchRegister(ShotokuDankaibetsuShunoritsuIchiranDiv div) {
-        DBB021021_DankaibetsuShunoritsuIchiranhyoSakuseiParameter parameter = getHandler(div).setバッチ();
+        DBB021021_DankaibetsuShunoritsuIchiranhyoSakuseiParameter parameter = getHandler(div).createDankaibetsuShunoritsuIchiranBatchParameter();
         return ResponseData.of(parameter).respond();
     }
 
@@ -96,7 +96,7 @@ public class ShotokuDankaibetsuShunoritsuIchiran {
      * DBB021021_DankaibetsuShunoritsuIchiranhyoSakuseiParameter
      */
     public ResponseData<DBB021021_DankaibetsuShunoritsuIchiranhyoSakuseiParameter> onClick_btnBatchReserve(ShotokuDankaibetsuShunoritsuIchiranDiv div) {
-        DBB021021_DankaibetsuShunoritsuIchiranhyoSakuseiParameter parameter = getHandler(div).setバッチ();
+        DBB021021_DankaibetsuShunoritsuIchiranhyoSakuseiParameter parameter = getHandler(div).createDankaibetsuShunoritsuIchiranBatchParameter();
         return ResponseData.of(parameter).respond();
     }
 

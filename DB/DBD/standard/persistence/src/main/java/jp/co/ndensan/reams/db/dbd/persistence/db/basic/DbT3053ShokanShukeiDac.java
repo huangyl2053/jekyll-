@@ -38,7 +38,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 償還払請求集計のデータアクセスクラスです。
  *
- * @reamsid_L DBC-0950-010 zuotao
+ * @reamsid_L DBD-9999-011 zuotao
  */
 public class DbT3053ShokanShukeiDac implements ISaveable<DbT3053ShokanShukeiEntity> {
 

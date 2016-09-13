@@ -177,8 +177,7 @@ public class SokujiFukaKouseiMainHandler {
         set減免額(更正後賦課リスト);
         set現年度の特別徴収情報上段(更正前賦課リスト, 更正後賦課リスト);
         set現年度の特別徴収情報下段(更正前賦課リスト, 更正後賦課リスト);
-        set現年度の普通徴収情報上段(更正前賦課リスト, 更正後賦課リスト);
-        set現年度の普通徴収情報下段(更正前賦課リスト, 更正後賦課リスト);
+        set現年度の普通徴収情報(更正前賦課リスト, 更正後賦課リスト);
         if (!is特殊処理) {
             set現年度の特別徴収情報の入力制御(更正前後徴収方法, is本算定処理済フラグ);
             set現年度の普通徴収情報の入力制御(更正後賦課リスト);
@@ -745,19 +744,25 @@ public class SokujiFukaKouseiMainHandler {
         }
     }
 
-    private void set現年度の普通徴収情報上段(NendobunFukaList 更正前賦課リスト, NendobunFukaList 更正後賦課リスト) {
-        SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
+    private void set現年度の普通徴収情報(NendobunFukaList 更正前賦課リスト, NendobunFukaList 更正後賦課リスト) {
         FuchoKiUtil 月期対応取得_普徴クラス = new FuchoKiUtil();
         FukaNokiResearcher researcher = FukaNokiResearcher.createInstance();
         KitsukiList 期月リスト = 月期対応取得_普徴クラス.get期月リスト();
         FukaJoho 更正前現年度賦課 = null;
-        int 期;
         if (更正前賦課リスト != null) {
             更正前現年度賦課 = 更正前賦課リスト.get現年度();
         }
         FukaJoho 更正後現年度賦課 = 更正後賦課リスト.get現年度();
+        set現年度の普通徴収情報上段(期月リスト, 更正前現年度賦課, 更正後現年度賦課, researcher);
+        set現年度の普通徴収情報中段(期月リスト, 更正前現年度賦課, 更正後現年度賦課, researcher);
+        set現年度の普通徴収情報下段(期月リスト, 更正前現年度賦課, 更正後現年度賦課, researcher);
+    }
+
+    private void set現年度の普通徴収情報上段(KitsukiList 期月リスト, FukaJoho 更正前現年度賦課,
+            FukaJoho 更正後現年度賦課, FukaNokiResearcher researcher) {
+        SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
         RString 月の期_4月 = 期月リスト.get月の期(Tsuki._4月).get期();
-        期 = Integer.valueOf(月の期_4月.toString());
+        int 期 = Integer.valueOf(月の期_4月.toString());
         if (期 != NUM_0) {
             tablePanel.getLblFuchoKi04().setText(getFormat期(月の期_4月));
             tablePanel.getLblFuchoKoseiMaeValue04().setText(更正前現年度賦課 == null ? RString.EMPTY
@@ -847,9 +852,13 @@ public class SokujiFukaKouseiMainHandler {
             tablePanel.getTxtFuchoKoseiGo07().setReadOnly(true);
             tablePanel.getTxtFuchoNokigen07().setReadOnly(true);
         }
+    }
 
+    private void set現年度の普通徴収情報中段(KitsukiList 期月リスト, FukaJoho 更正前現年度賦課,
+            FukaJoho 更正後現年度賦課, FukaNokiResearcher researcher) {
+        SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
         RString 月の期_8月 = 期月リスト.get月の期(Tsuki._8月).get期();
-        期 = Integer.valueOf(月の期_8月.toString());
+        int 期 = Integer.valueOf(月の期_8月.toString());
         if (期 != NUM_0) {
             tablePanel.getLblFuchoKi08().setText(getFormat期(月の期_8月));
             tablePanel.getLblFuchoKoseiMaeValue08().setText(更正前現年度賦課 == null ? RString.EMPTY
@@ -939,19 +948,7 @@ public class SokujiFukaKouseiMainHandler {
             tablePanel.getTxtFuchoKoseiGo11().setReadOnly(true);
             tablePanel.getTxtFuchoNokigen11().setReadOnly(true);
         }
-    }
 
-    private void set現年度の普通徴収情報下段(NendobunFukaList 更正前賦課リスト, NendobunFukaList 更正後賦課リスト) {
-        SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
-        FuchoKiUtil 月期対応取得_普徴クラス = new FuchoKiUtil();
-        FukaNokiResearcher researcher = FukaNokiResearcher.createInstance();
-        KitsukiList 期月リスト = 月期対応取得_普徴クラス.get期月リスト();
-        FukaJoho 更正前現年度賦課 = null;
-        int 期;
-        if (更正前賦課リスト != null) {
-            更正前現年度賦課 = 更正前賦課リスト.get現年度();
-        }
-        FukaJoho 更正後現年度賦課 = 更正後賦課リスト.get現年度();
         RString 月の期_12月 = 期月リスト.get月の期(Tsuki._12月).get期();
         期 = Integer.valueOf(月の期_12月.toString());
         if (期 != NUM_0) {
@@ -973,9 +970,13 @@ public class SokujiFukaKouseiMainHandler {
             tablePanel.getTxtFuchoKoseiGo12().setReadOnly(true);
             tablePanel.getTxtFuchoNokigen12().setReadOnly(true);
         }
+    }
 
+    private void set現年度の普通徴収情報下段(KitsukiList 期月リスト, FukaJoho 更正前現年度賦課,
+            FukaJoho 更正後現年度賦課, FukaNokiResearcher researcher) {
+        SokujikouseiKiwarigakuDiv tablePanel = div.getSokujikouseiKiwarigaku();
         RString 月の期_1月 = 期月リスト.get月の期(Tsuki._1月).get期();
-        期 = Integer.valueOf(月の期_1月.toString());
+        int 期 = Integer.valueOf(月の期_1月.toString());
         if (期 != NUM_0) {
             tablePanel.getLblFuchoKi01().setText(getFormat期(月の期_1月));
             tablePanel.getLblFuchoKoseiMaeValue01().setText(更正前現年度賦課 == null ? RString.EMPTY

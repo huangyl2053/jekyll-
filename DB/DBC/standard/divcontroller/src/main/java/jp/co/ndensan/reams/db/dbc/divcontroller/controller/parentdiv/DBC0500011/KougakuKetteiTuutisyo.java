@@ -11,8 +11,8 @@ import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0500011.DBC0500011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0500011.KougakuKetteiTuutisyoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0500011.KougakuKetteiTuutisyoHandler;
-import jp.co.ndensan.reams.db.dbc.service.core.kougakuketteituutisyo.KougakuKetteiTuutisyoManager;
 import jp.co.ndensan.reams.db.dbc.service.core.kogakuservicehiketteitsuchishotan.KogakuServicehiKetteiTsuchishoTan;
+import jp.co.ndensan.reams.db.dbc.service.core.kougakuketteituutisyo.KougakuKetteiTuutisyoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
@@ -39,6 +39,7 @@ import jp.co.ndensan.reams.uz.uza.message.ButtonSelectPattern;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -51,6 +52,7 @@ public class KougakuKetteiTuutisyo {
 
     private TaishoshaKey key;
     private LockingKey 排他キー;
+    private final RString BUTTON_NAME = new RString("btnHakkou");
 
     /**
      * 画面初期化のメソッドです。
@@ -61,6 +63,7 @@ public class KougakuKetteiTuutisyo {
     public ResponseData<KougakuKetteiTuutisyoDiv> onLoad(KougakuKetteiTuutisyoDiv div) {
         key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         if (key.get被保険者番号().isEmpty()) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_NAME, true);
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
         KougakuKetteiTuutisyoManager manager = KougakuKetteiTuutisyoManager.createInstance();
@@ -74,15 +77,17 @@ public class KougakuKetteiTuutisyo {
             div.getKyoTuuKaigoNinnteiSikaku().initialize(市町村コード.value(), key.get被保険者番号().value());
             div.getKougakuKetteiTuutisyoBunsho().initialize(ReportIdDBC.DBC100007.getReportId(), FlexibleDate.getNowDate());
             div.getDdlServiceYearMonth().setDataSource(getHandler().onLoad_ddlServiceYearMonth(サービス提供年月リスト));
+            div.getDdlServiceYearMonth().setSelectedIndex(0);
+            div.getDdlKanliBanngou().setDataSource(getHandler().onLoad_ddlKanliBanngou(div, key.get被保険者番号()));
+            div.getDdlKanliBanngou().setSelectedIndex(0);
+            getHandler().onLoad_txtZennkaiHakkoubi(div, key.get被保険者番号());
         }
         div.getTxtHakkoubi().setValue(RDate.getNowDate());
         KogakuServicehiKetteiTsuchishoTan manager2 = KogakuServicehiKetteiTsuchishoTan.createInstance();
         ReportId 帳票分類ID = new ReportId("DBC100007_KogakuKetteiTsuchiSho");
         ChohyoSeigyoHanyo 支払予定日印字有無 = manager2.load帳票制御汎用(帳票分類ID, new RString("支払予定日印字有無"));
-        if (支払予定日印字有無.get設定値().equals(new RString("0"))) {
+        if (支払予定日印字有無.get設定値().equals(new RString("1"))) {
             div.getTxtSiharaiYoteibi().setVisible(true);
-        } else {
-            div.getTxtSiharaiYoteibi().setVisible(false);
         }
         PersonalData personalData = PersonalData.of(key.get識別コード(),
                 new ExpandedInformation(new Code("003"),
@@ -101,6 +106,7 @@ public class KougakuKetteiTuutisyo {
     public ResponseData<KougakuKetteiTuutisyoDiv> onChange_ddlServiceYearMonth(KougakuKetteiTuutisyoDiv div) {
         key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         div.getDdlKanliBanngou().setDataSource(getHandler().onLoad_ddlKanliBanngou(div, key.get被保険者番号()));
+        div.getDdlKanliBanngou().setSelectedIndex(0);
         return ResponseData.of(div).respond();
     }
 
@@ -123,17 +129,12 @@ public class KougakuKetteiTuutisyo {
      * @return ResponseData<KougakuKetteiTuutisyoDiv>
      */
     public ResponseData<KougakuKetteiTuutisyoDiv> onClick_btnHakkouBefore(KougakuKetteiTuutisyoDiv div) {
-        if (!ResponseHolder.isReRequest() && div.getTxtHakkoubi().getValue() != null) {
+        if (!ResponseHolder.isReRequest() && null != div.getTxtZennkaiHakkoubi().getValue()) {
             WarningMessage message = new WarningMessage(
                     DbcWarningMessages.発行済み負担額証明書.getMessage().getCode(),
                     DbcWarningMessages.発行済み負担額証明書.getMessage().evaluate(),
                     ButtonSelectPattern.OKCancel);
             return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(DbcWarningMessages.発行済み負担額証明書.getMessage().getCode()).equals(
-                ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return ResponseData.of(div).respond();
         }
         return ResponseData.of(div).respond();
     }

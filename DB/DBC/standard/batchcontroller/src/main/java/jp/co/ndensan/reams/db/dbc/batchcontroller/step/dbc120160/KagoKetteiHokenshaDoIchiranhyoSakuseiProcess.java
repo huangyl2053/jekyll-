@@ -145,14 +145,14 @@ public class KagoKetteiHokenshaDoIchiranhyoSakuseiProcess extends BatchKeyBreakB
 
         publish一覧表(entityTemp, true);
 
+        csvWriter.close();
+        reportWriter.close();
         if (!personalDataList.isEmpty()) {
             AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
             manager.spool(path, accessLogUUID);
         } else {
             manager.spool(path);
         }
-        csvWriter.close();
-        reportWriter.close();
 
     }
 

@@ -68,18 +68,20 @@ public class DBC120240_SeikyugakuTsuchishoKohiIn
             returnEntity
                     = getResult(KokuhorenKyoutsuuFileGetReturnEntity.class, new RString(ファイル取得),
                             KokuhorenkyoutsuGetFileProcess.PARAMETER_OUT_RETURNENTITY);
+            一時TBL登録件数 = NO_NUM;
             if (returnEntity != null && returnEntity.getFileNameList() != null && returnEntity.getFileNameList().size() > NO_NUM) {
                 for (int i = NO_NUM; i < returnEntity.getFileNameList().size(); i++) {
                     parameter = new SeikyugakuTsuchishoFutanshaInProcessParameter();
                     parameter.setPath(returnEntity.get保存先フォルダのパス().toRString());
                     parameter.setFileName(returnEntity.getFileNameList().get(i));
+                    parameter.setRenban(一時TBL登録件数);
                     executeStep(CSVファイル取込);
                     flowEntity = getResult(FlowEntity.class, new RString(CSVファイル取込),
                             SeikyugakuTsuchishoFutanshaInProcess.PARAMETER_OUT_FLOWENTITY);
                     if (flowEntity != null) {
                         処理対象年月 = flowEntity.getShoriYM();
                         レコード件数の合計 = レコード件数の合計 + flowEntity.getCodeNum();
-                        一時TBL登録件数 = 一時TBL登録件数 + flowEntity.get明細データ登録件数();
+                        一時TBL登録件数 = flowEntity.get明細データ登録件数();
                     }
                 }
             }

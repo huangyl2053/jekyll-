@@ -58,9 +58,9 @@ public enum JukoKisambiTokushuTorokuSpec implements IPredicate<JukoKisambiTokush
                         && !row.getTokushuJikoKisaibi().getValue().isEmpty()
                         && row.getTokushuJikoKisaibi().isValid()
                         && !RString.isNullOrEmpty(row.getTokushuJikoKisaibiJiyu().getSelectedValue()))
-                        || (row.getTokushuJikoKisaibi().getValue() == null
-                        && row.getTokushuJikoKisaibi().getValue().isEmpty()
-                        && !row.getTokushuJikoKisaibi().isValid()
+                        || ((row.getTokushuJikoKisaibi().getValue() == null
+                        || row.getTokushuJikoKisaibi().getValue().isEmpty()
+                        || !row.getTokushuJikoKisaibi().isValid())
                         && RString.isNullOrEmpty(row.getTokushuJikoKisaibiJiyu().getSelectedValue()));
 
             }
