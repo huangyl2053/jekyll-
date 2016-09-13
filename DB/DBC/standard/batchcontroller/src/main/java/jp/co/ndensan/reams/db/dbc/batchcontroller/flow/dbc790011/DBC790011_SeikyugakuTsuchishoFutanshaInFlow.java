@@ -39,11 +39,12 @@ public class DBC790011_SeikyugakuTsuchishoFutanshaInFlow extends BatchFlowBase<S
         if (fileNameList != null && !fileNameList.isEmpty()) {
             for (int i = INDEX_0; i < fileNameList.size(); i++) {
                 parameter.setFileName(fileNameList.get(i));
+                parameter.setRenban(明細データ登録件数合算);
                 executeStep(CSVファイル取込);
                 flowEntity = getResult(FlowEntity.class, new RString(CSVファイル取込),
                         SeikyugakuTsuchishoFutanshaInProcess.PARAMETER_OUT_FLOWENTITY);
                 レコード件数合算 = レコード件数合算 + flowEntity.getCodeNum();
-                明細データ登録件数合算 = 明細データ登録件数合算 + flowEntity.get明細データ登録件数();
+                明細データ登録件数合算 = flowEntity.get明細データ登録件数();
             }
         }
         executeStep(処理結果リスト一時登録);
