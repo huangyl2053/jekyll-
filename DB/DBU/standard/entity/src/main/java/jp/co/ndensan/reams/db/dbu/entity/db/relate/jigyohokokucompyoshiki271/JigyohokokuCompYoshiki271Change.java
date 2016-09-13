@@ -25,6 +25,11 @@ public class JigyohokokuCompYoshiki271Change {
     private RString listLower_1;
     private RString listLower_2;
     private RString listLower_3;
+    private RString 作成日時;
+    private RString 集計範囲;
+    private RString 集計区分;
+    private RString 保険者番号;
+    private RString 保険者名;
 
     /**
      * コンストラクタです。
@@ -35,18 +40,33 @@ public class JigyohokokuCompYoshiki271Change {
      * @param listLower_1 給付額（世帯合算）
      * @param listLower_2 給付額（その他）
      * @param listLower_3 給付額（計）
+     * @param 作成日時 RString
+     * @param 集計範囲 RString
+     * @param 集計区分 RString
+     * @param 保険者番号 RString
+     * @param 保険者名 RString
      */
     public JigyohokokuCompYoshiki271Change(RString listUpper_1,
             RString listUpper_2,
             RString listUpper_3,
             RString listLower_1,
             RString listLower_2,
-            RString listLower_3) {
+            RString listLower_3,
+            RString 作成日時,
+            RString 集計範囲,
+            RString 集計区分,
+            RString 保険者番号,
+            RString 保険者名) {
         this.listUpper_1 = listUpper_1;
         this.listUpper_2 = listUpper_2;
         this.listUpper_3 = listUpper_3;
         this.listLower_1 = listLower_1;
         this.listLower_2 = listLower_2;
         this.listLower_3 = listLower_3;
+        this.作成日時 = 作成日時;
+        this.集計範囲 = 集計範囲;
+        this.集計区分 = 集計区分;
+        this.保険者番号 = 保険者番号;
+        this.保険者名 = 保険者名;
     }
 }

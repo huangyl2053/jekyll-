@@ -24,8 +24,7 @@ public class JigyohokokuCompYoshiki271Data {
     private RString 年報月報区分;
     private RString 作成日時;
     private RString 集計年月;
-    private RString 保険者番号;
-    private RString 保険者名;
+    private RString 過去集計分旧市町村区分;
     private List<DbT7021JigyoHokokuTokeiDataEntity> 事業報告統計データ;
 
 }
