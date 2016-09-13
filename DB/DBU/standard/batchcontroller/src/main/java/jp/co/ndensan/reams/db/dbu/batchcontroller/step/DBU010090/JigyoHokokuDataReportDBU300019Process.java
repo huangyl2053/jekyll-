@@ -43,7 +43,7 @@ public class JigyoHokokuDataReportDBU300019Process extends BatchProcessBase<Jigy
     private JigyoHokokuGeppoHokenkyufuKogakuProcessParamter processParameter;
     private static final ReportId REPORT_DBU300019 = ReportIdDBU.DBU300019.getReportId();
     private static final List<RString> PAGE_BREAK_KEYS = Collections
-            .unmodifiableList(Arrays.asList(new RString(JigyohokokuCompYoshiki271ReportSource.ReportSourceFields.hokenshaNo.name())));
+            .unmodifiableList(Arrays.asList(new RString(JigyohokokuCompYoshiki271ReportSource.ReportsSourceFields.hokenshaNo.name())));
     private static final RString 年報月報区分 = new RString("月報");
     private static final RString 過去集計分旧市町村区分 = new RString("1");
     private static final RString 固定文字列_旧 = new RString("旧");
