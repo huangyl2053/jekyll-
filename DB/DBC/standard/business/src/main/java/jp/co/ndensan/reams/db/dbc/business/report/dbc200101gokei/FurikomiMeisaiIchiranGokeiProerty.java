@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.business.report.dbc200003gokei;
+package jp.co.ndensan.reams.db.dbc.business.report.dbc200101gokei;
 
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc200101gokei.FurikomiMeisaiIchiranGokeiReportSource;
@@ -21,6 +21,6 @@ public class FurikomiMeisaiIchiranGokeiProerty extends ReportPropertyBase<Furiko
      * コンストラクタです。
      */
     public FurikomiMeisaiIchiranGokeiProerty() {
-        super(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200101.getReportId());
+        super(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200101_合計.getReportId());
     }
 }

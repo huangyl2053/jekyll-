@@ -40,7 +40,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 社会福祉法人等利用者負担軽減のデータアクセスクラスです。
  *
- * @reamsid_L DBC-9999-012 xicongwang
+ * @reamsid_L DBD-9999-012 xicongwang
  */
 public class DbT4017ShakaiFukushiHojinRiyoshaFutanKeigenDac {
 

@@ -33,7 +33,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 通知書発行情報のデータアクセスクラスです。
  *
- * @reamsid_L DBD-9999-010 chenxin
+ * @reamsid_L DBD-9999-013 chenxin
  */
 public class DbT4122TsuchishoHakkoJohoDac implements ISaveable<DbT4122TsuchishoHakkoJohoEntity> {
 

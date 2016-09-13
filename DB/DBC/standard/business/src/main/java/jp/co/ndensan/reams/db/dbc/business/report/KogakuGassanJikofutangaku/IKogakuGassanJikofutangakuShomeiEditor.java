@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 /**
  * 帳票設計_DBC200034_高額合算自己負担額証明書情報取込一覧表のEntity
  *
- * @reamsid_L DBC_2640_010 zhengshenlei
+ * @reamsid_L DBC-2640-010 zhengshenlei
  */
 interface IKogakuGassanJikofutangakuShomeiEditor extends IReportEditor<GassanJikofutangakuShomeishoTorikomiIchiranSource> {
 

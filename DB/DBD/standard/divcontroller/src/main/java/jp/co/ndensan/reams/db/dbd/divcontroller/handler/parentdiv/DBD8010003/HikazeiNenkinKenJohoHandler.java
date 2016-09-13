@@ -538,7 +538,7 @@ public class HikazeiNenkinKenJohoHandler {
      *
      */
     public void 新規_保存処理() {
-        RString 年度 = div.getTbYear().getValue();
+        RString 年度 = div.getShoSaiPanel().getHiddenTbNendon();
         RString 月 = div.getDdlTsuki().getSelectedKey();
         RString 基礎年金番号 = div.getTbKisoNenkinNo().getValue();
         RString 現基礎年金番号 = div.getTbGenkisoNenkinNo().getValue();

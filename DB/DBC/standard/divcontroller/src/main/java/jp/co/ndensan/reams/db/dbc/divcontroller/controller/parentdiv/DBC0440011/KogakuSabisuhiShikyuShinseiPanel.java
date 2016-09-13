@@ -18,9 +18,11 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0440011.KogakuService
 import jp.co.ndensan.reams.db.dbc.service.core.kougakusabisuhishikyuushinnseitouroku.KougakuSabisuhiShikyuuShinnseiTouroku;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
@@ -71,8 +73,8 @@ public class KogakuSabisuhiShikyuShinseiPanel {
         ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
         RString メニューID = ResponseHolder.getMenuID();
         ViewStateHolder.put(ViewStateKeys.メニューID, メニューID);
-        //TODO  QA988
-        RString 導入形態コード = new RString("111");
+        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        RString 導入形態コード = 市町村セキュリティ情報.get導入形態コード().value();
         if (null == 被保険者番号 || 被保険者番号.isEmpty()) {
             throw new ApplicationException(
                     DbzErrorMessages.理由付き登録不可.getMessage().replace(被保険者番号なし.toString()));

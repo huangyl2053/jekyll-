@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 償還払支給申請のデータアクセスクラスです。
  *
- * @reamsid_L DBC-9999-012 panhe
+ * @reamsid_L DBD-9999-012 panhe
  */
 public class DbT3034ShokanShinseiDac implements ISaveable<DbT3034ShokanShinseiEntity> {
 
