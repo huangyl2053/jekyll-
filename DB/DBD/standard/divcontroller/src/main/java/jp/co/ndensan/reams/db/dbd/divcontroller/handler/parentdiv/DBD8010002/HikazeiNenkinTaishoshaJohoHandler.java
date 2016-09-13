@@ -649,6 +649,7 @@ public class HikazeiNenkinTaishoshaJohoHandler {
         div.getDdlTuki().setDataSource(dataSource);
 
         SearchResult<ShoriDateKanri> 処理日付管理マスタList = get処理日付管理マスタ情報for広域();
+        boolean 存在フラグ = false;
         if (処理日付管理マスタList == null || 処理日付管理マスタList.totalCount() == 0) {
             div.getDdlTuki().setSelectedKey(dataSource.get(INT_0).getKey());
         } else {
@@ -656,11 +657,12 @@ public class HikazeiNenkinTaishoshaJohoHandler {
                 if (処理日付管理マスタList.records().get(INT_0).get年度内連番().equals(dataSource.get(i).getKey())
                         && (i <= dataSource.size() - 2)) {
                     div.getDdlTuki().setSelectedKey(dataSource.get(i + 1).getKey());
-                    break;
-                } else {
-                    div.getDdlTuki().setSelectedKey(dataSource.get(INT_0).getKey());
+                    存在フラグ = true;
                     break;
                 }
+            }
+            if (!存在フラグ) {
+                div.getDdlTuki().setSelectedKey(dataSource.get(INT_0).getKey());
             }
         }
 

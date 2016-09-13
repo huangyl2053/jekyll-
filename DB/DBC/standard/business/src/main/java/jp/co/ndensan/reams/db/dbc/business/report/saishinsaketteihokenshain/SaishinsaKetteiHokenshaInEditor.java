@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsaketteihokenshain.SaishinsaKetteiResultEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.saishinsaketteihokenshain.SaishinsaKetteitsuchishoTorikomiIchiranHokenshaBunSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -18,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
+import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -136,7 +138,9 @@ public class SaishinsaKetteiHokenshaInEditor implements ISaishinsaKetteiHokensha
         source.listLower_2 = 帳票出力対象データ.get被保険者氏名();
         source.listLower_3 = getColumnValue(帳票出力対象データ.get申立事由コード());
         source.listLower_4 = 帳票出力対象データ.get申立事由();
-        source.listLower_5 = getColumnValue(帳票出力対象データ.get再審査結果コード());
+        RString 再審査結果 = CodeMaster.getCodeMeisho(DBCCodeShubetsu.再審査結果コード.getコード(),
+                帳票出力対象データ.get再審査結果コード());
+        source.listLower_5 = 再審査結果;
         source.listLower_6 = doカンマ編集(帳票出力対象データ.get原審単位数());
         source.listLower_7 = doカンマ編集(帳票出力対象データ.get決定単位数());
         source.listLower_8 = doカンマ編集(帳票出力対象データ.get保険者負担額());

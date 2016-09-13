@@ -43,10 +43,10 @@ public class GassanShikyuShinseishoJohoSofuIchiranEditor implements IGassanShiky
     private final YMDHMS システム日時;
     private final FlexibleYearMonth 処理年月;
     private final int 連番;
-    private static final ConfigKeysHokenshaJoho 保険者情報_保険者番号 = ConfigKeysHokenshaJoho.保険者情報_保険者番号;
-    private static final ConfigKeysHokenshaJoho 保険者情報_保険者名称 = ConfigKeysHokenshaJoho.保険者情報_保険者名称;
     private static final RDate NOWDATE = RDate.getNowDate();
     private static final SubGyomuCode DBU介護統計報告 = SubGyomuCode.DBU介護統計報告;
+    private static final RString 保険者情報_保険者番号 = DbBusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_保険者番号, NOWDATE, DBU介護統計報告);
+    private static final RString 保険者情報_保険者名称 = DbBusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_保険者名称, NOWDATE, DBU介護統計報告);
 
     /**
      * コンストラクタです。
@@ -86,8 +86,8 @@ public class GassanShikyuShinseishoJohoSofuIchiranEditor implements IGassanShiky
             source.sofuYM = 処理年月.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         }
-        source.hokenshaNo = DbBusinessConfig.get(保険者情報_保険者番号, NOWDATE, DBU介護統計報告);
-        source.hokenshaName = DbBusinessConfig.get(保険者情報_保険者名称, NOWDATE, DBU介護統計報告);
+        source.hokenshaNo = 保険者情報_保険者番号;
+        source.hokenshaName = 保険者情報_保険者名称;
         source.list_1 = new RString(連番);
         source.list_2 = 高額合算申請書一時Entity.getTaishoNendo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
