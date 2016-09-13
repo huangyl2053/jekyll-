@@ -3,6 +3,7 @@ package jp.co.ndensan.reams.db.dbc.service.core.kagoketteihokenshaincsvfileread;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorKubun;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0002KokuhorenTorikomiErrorTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT3060KagoKetteiShukeiTempEntity;
@@ -61,7 +62,6 @@ public class KagoKetteiHokenshaInCsvFileRead {
     private static final RString カンマ = new RString(",");
     private static final Integer INDEX_0 = 0;
     private static final Integer INDEX_3 = 3;
-    private static final RString NUM = new RString("99");
 
     /**
      * コンストラクタです。
@@ -111,7 +111,7 @@ public class KagoKetteiHokenshaInCsvFileRead {
         List<KagoKetteiHokenshaInCsvEntity> csvlist = csvファイル読込(保存先フォルダ, エントリ情報List);
         IKagoKetteiHokenshaInCsvFileReadMapper mapper = this.mapperProvider.create(IKagoKetteiHokenshaInCsvFileReadMapper.class);
         DbWT0002KokuhorenTorikomiErrorTempEntity errorTempentity = new DbWT0002KokuhorenTorikomiErrorTempEntity();
-        errorTempentity.setエラー区分(NUM);
+        errorTempentity.setエラー区分(KokuhorenJoho_TorikomiErrorKubun.取込対象データなし.getコード());
         int 集計データ登録件数 = INDEX_0;
         int 明細データ登録件数 = INDEX_0;
         FlowEntity getEntity = バッチフロ(csvlist);
