@@ -24,13 +24,13 @@
             <if test="日付抽出区分 == 範囲指定 and 処理対象年月FROM !=null and 処理対象年月FROM.toString()!=''" >
             AND  #{処理対象年月FROM}  <![CDATA[<=]]> "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."sofuYM"
             </if>
-            <if test="処理対象年月TO !=null and 処理対象年月TO.toString()!=''" >
+            <if test="日付抽出区分 == 範囲指定 and 処理対象年月TO !=null and 処理対象年月TO.toString()!=''" >
             AND  "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."sofuYM"  <![CDATA[<=]]> #{処理対象年月TO}
             </if>
-            <if test="異動年月From !=null and 異動年月From.toString()!=''" >
+            <if test="日付抽出区分 == 範囲指定 and 異動年月From !=null and 異動年月From.toString()!=''" >
             AND  #{異動年月From}  <![CDATA[<=]]> SUBSTR("DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."idoYMD",1,6)
             </if>
-            <if test="異動年月To !=null and 異動年月To.toString()!=''" >
+            <if test="日付抽出区分 == 範囲指定 and 異動年月To !=null and 異動年月To.toString()!=''" >
             AND  SUBSTR("DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."idoYMD",1,6)  <![CDATA[<=]]> #{異動年月To}
             </if>
          )   
