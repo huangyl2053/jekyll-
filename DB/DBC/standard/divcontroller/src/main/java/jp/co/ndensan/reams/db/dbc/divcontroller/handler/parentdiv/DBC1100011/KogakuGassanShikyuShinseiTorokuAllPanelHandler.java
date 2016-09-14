@@ -698,7 +698,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
             row.setTxtRirekiNo(new RString(高額合算申請書.get履歴番号().intValue()));
             ExpandedInformation expandedInfo = new ExpandedInformation(new Code(CODE_003),
                     名称_被保険者番号, 高額合算申請書.get被保険者番号().getColumnValue());
-            PersonalData personalData = PersonalData.of(null, expandedInfo);
+            PersonalData personalData = PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
             personalDataList.add(personalData);
             rowList.add(row);
         }
@@ -1053,20 +1053,24 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
                 = bussiness.getKogakuKaigoShinseisho(対象年度, 保険者番号, 整理番号, 履歴番号);
         List<KogakuGassanShinseishoKanyureki> 高額合算申請書加入歴List
                 = bussiness.getKogakuGassanShinseishoKanyuRireki(対象年度, 保険者番号, 整理番号);
-        List<KogakuGassanShinseishoResult> 高額合算申請書ResultList = new ArrayList();
-        for (KogakuGassanShinseisho item : 高額合算申請書List) {
-            KogakuGassanShinseishoResult 高額合算申請書Result = new KogakuGassanShinseishoResult();
-            高額合算申請書Result.set高額合算申請書(item);
-            高額合算申請書ResultList.add(高額合算申請書Result);
+        if (高額合算申請書List != null) {
+            List<KogakuGassanShinseishoResult> 高額合算申請書ResultList = new ArrayList();
+            for (KogakuGassanShinseisho item : 高額合算申請書List) {
+                KogakuGassanShinseishoResult 高額合算申請書Result = new KogakuGassanShinseishoResult();
+                高額合算申請書Result.set高額合算申請書(item);
+                高額合算申請書ResultList.add(高額合算申請書Result);
+            }
+            高額合算申請書保持.set高額合算申請書(高額合算申請書ResultList);
         }
-        高額合算申請書保持.set高額合算申請書(高額合算申請書ResultList);
-        List<KogakuGassanShinseishoKanyurekiResult> 加入歴ResultList = new ArrayList();
-        for (KogakuGassanShinseishoKanyureki item : 高額合算申請書加入歴List) {
-            KogakuGassanShinseishoKanyurekiResult 加入歴Result = new KogakuGassanShinseishoKanyurekiResult();
-            加入歴Result.set高額合算申請書加入歴(item);
-            加入歴ResultList.add(加入歴Result);
+        if (高額合算申請書加入歴List != null) {
+            List<KogakuGassanShinseishoKanyurekiResult> 加入歴ResultList = new ArrayList();
+            for (KogakuGassanShinseishoKanyureki item : 高額合算申請書加入歴List) {
+                KogakuGassanShinseishoKanyurekiResult 加入歴Result = new KogakuGassanShinseishoKanyurekiResult();
+                加入歴Result.set高額合算申請書加入歴(item);
+                加入歴ResultList.add(加入歴Result);
+            }
+            高額合算申請書保持.set加入歴(加入歴ResultList);
         }
-        高額合算申請書保持.set加入歴(加入歴ResultList);
         return 高額合算申請書保持;
     }
 
