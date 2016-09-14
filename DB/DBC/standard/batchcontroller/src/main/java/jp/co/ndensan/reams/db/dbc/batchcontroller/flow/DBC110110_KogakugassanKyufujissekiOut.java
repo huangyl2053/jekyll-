@@ -216,7 +216,7 @@ public class DBC110110_KogakugassanKyufujissekiOut extends BatchFlowBase<DBC1101
                 = new KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter();
         returnParameter.set処理年月(new FlexibleYearMonth(getParameter().get処理年月().toDateString()));
         returnParameter.set交換情報識別番号(交換情報識別番号);
-        if (INT_0 == 合計) {
+        if (INT_0 == 合計 || returnEntity == null) {
             returnParameter.set処理対象年月(new FlexibleYearMonth(getParameter().get処理年月().toDateString()));
             returnParameter.setレコード件数合計(INT_0);
             returnParameter.setFileNameList(Collections.EMPTY_LIST);
