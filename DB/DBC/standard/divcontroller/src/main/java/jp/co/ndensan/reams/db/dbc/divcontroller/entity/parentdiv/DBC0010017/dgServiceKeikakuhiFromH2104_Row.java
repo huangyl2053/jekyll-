@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010017;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Aug 25 17:34:19 CST 2016 
+ * Tue Sep 13 17:58:02 CST 2016 
  */
 
 
@@ -35,7 +35,7 @@ public class dgServiceKeikakuhiFromH2104_Row extends DataRow {
     private RString txtSaishinsaKaisu;
     private RString txtKagoKaisu;
     private RString txtShinsaYM;
-    private RString txtTekiyo;
+    private RString btnTekiyo;
 
     public dgServiceKeikakuhiFromH2104_Row() {
         super();
@@ -53,7 +53,7 @@ public class dgServiceKeikakuhiFromH2104_Row extends DataRow {
         this.txtSaishinsaKaisu = RString.EMPTY;
         this.txtKagoKaisu = RString.EMPTY;
         this.txtShinsaYM = RString.EMPTY;
-        this.txtTekiyo = RString.EMPTY;
+        this.btnTekiyo = RString.EMPTY;
         this.setOriginalData("txtShiteiKijunGaitoJigyoshoKubun", txtShiteiKijunGaitoJigyoshoKubun);
         this.setOriginalData("txtIraiTodokedeYMD", txtIraiTodokedeYMD);
         this.setOriginalData("txtService", txtService);
@@ -68,10 +68,10 @@ public class dgServiceKeikakuhiFromH2104_Row extends DataRow {
         this.setOriginalData("txtSaishinsaKaisu", txtSaishinsaKaisu);
         this.setOriginalData("txtKagoKaisu", txtKagoKaisu);
         this.setOriginalData("txtShinsaYM", txtShinsaYM);
-        this.setOriginalData("txtTekiyo", txtTekiyo);
+        this.setOriginalData("btnTekiyo", btnTekiyo);
     }
 
-    public dgServiceKeikakuhiFromH2104_Row(RString txtShiteiKijunGaitoJigyoshoKubun, RString txtIraiTodokedeYMD, RString txtService, RString txtTanisuTanka, RString txtKettei, RString txtMeisaiGokei, RString txtTanisu, RString txtKaisu, RString txtServiceTanisu, RString txtSeikyuKingaku, RString txtTantoKaigoShienSenmoninNo, RString txtSaishinsaKaisu, RString txtKagoKaisu, RString txtShinsaYM, RString txtTekiyo) {
+    public dgServiceKeikakuhiFromH2104_Row(RString txtShiteiKijunGaitoJigyoshoKubun, RString txtIraiTodokedeYMD, RString txtService, RString txtTanisuTanka, RString txtKettei, RString txtMeisaiGokei, RString txtTanisu, RString txtKaisu, RString txtServiceTanisu, RString txtSeikyuKingaku, RString txtTantoKaigoShienSenmoninNo, RString txtSaishinsaKaisu, RString txtKagoKaisu, RString txtShinsaYM, RString btnTekiyo) {
         super();
         this.setOriginalData("txtShiteiKijunGaitoJigyoshoKubun", txtShiteiKijunGaitoJigyoshoKubun);
         this.setOriginalData("txtIraiTodokedeYMD", txtIraiTodokedeYMD);
@@ -87,7 +87,7 @@ public class dgServiceKeikakuhiFromH2104_Row extends DataRow {
         this.setOriginalData("txtSaishinsaKaisu", txtSaishinsaKaisu);
         this.setOriginalData("txtKagoKaisu", txtKagoKaisu);
         this.setOriginalData("txtShinsaYM", txtShinsaYM);
-        this.setOriginalData("txtTekiyo", txtTekiyo);
+        this.setOriginalData("btnTekiyo", btnTekiyo);
         this.txtShiteiKijunGaitoJigyoshoKubun = txtShiteiKijunGaitoJigyoshoKubun;
         this.txtIraiTodokedeYMD = txtIraiTodokedeYMD;
         this.txtService = txtService;
@@ -102,7 +102,7 @@ public class dgServiceKeikakuhiFromH2104_Row extends DataRow {
         this.txtSaishinsaKaisu = txtSaishinsaKaisu;
         this.txtKagoKaisu = txtKagoKaisu;
         this.txtShinsaYM = txtShinsaYM;
-        this.txtTekiyo = txtTekiyo;
+        this.btnTekiyo = btnTekiyo;
     }
 
     public RString getTxtShiteiKijunGaitoJigyoshoKubun() {
@@ -161,8 +161,8 @@ public class dgServiceKeikakuhiFromH2104_Row extends DataRow {
         return txtShinsaYM;
     }
 
-    public RString getTxtTekiyo() {
-        return txtTekiyo;
+    public RString getBtnTekiyo() {
+        return btnTekiyo;
     }
 
     public void setTxtShiteiKijunGaitoJigyoshoKubun(RString txtShiteiKijunGaitoJigyoshoKubun) {
@@ -235,9 +235,9 @@ public class dgServiceKeikakuhiFromH2104_Row extends DataRow {
         this.txtShinsaYM = txtShinsaYM;
     }
 
-    public void setTxtTekiyo(RString txtTekiyo) {
-        this.setOriginalData("txtTekiyo", txtTekiyo);
-        this.txtTekiyo = txtTekiyo;
+    public void setBtnTekiyo(RString btnTekiyo) {
+        this.setOriginalData("btnTekiyo", btnTekiyo);
+        this.btnTekiyo = btnTekiyo;
     }
 
     // </editor-fold>
