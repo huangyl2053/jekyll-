@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.kogakugassan.KogakugassanSoufuFairu
 import jp.co.ndensan.reams.db.dbc.entity.csv.kogakugassankyufujissekiout.KogakuGassanKyufuJissekiSofuDataEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassankyufujissekiout.KogakuGassanKyufuJissekiSofuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassankyufujissekiout.SofuTaishoEntity;
+import jp.co.ndensan.reams.db.dbc.service.core.kogakugassankyufujissekiout.KogakugassanKyufujissekiOutService;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -73,7 +74,7 @@ public class KogakugassanKyufujissekiCreateSofuFileProcess extends BatchProcessB
     private RString dbu保険者番号;
     private RString csvFileName;
     private RString csvFilePath;
-    private BatchDbReader reader;
+    private int レコード件数;
 
     @BatchWriter
     private BatchEntityCreatedTempTableWriter 処理結果リスト一時Writer;
@@ -90,6 +91,7 @@ public class KogakugassanKyufujissekiCreateSofuFileProcess extends BatchProcessB
 
     @Override
     protected void initialize() {
+        レコード件数 = KogakugassanKyufujissekiOutService.createInstance().get出力対象データ件数();
         総出力件数 = INT_0;
         レコード番号 = INT_0;
         returnEntity = new SofuTaishoEntity();
@@ -109,8 +111,7 @@ public class KogakugassanKyufujissekiCreateSofuFileProcess extends BatchProcessB
 
     @Override
     protected IBatchReader createReader() {
-        reader = new BatchDbReader(MAPPER_PATH);
-        return reader;
+        return new BatchDbReader(MAPPER_PATH);
     }
 
     @Override
@@ -134,8 +135,7 @@ public class KogakugassanKyufujissekiCreateSofuFileProcess extends BatchProcessB
     protected void process(KogakuGassanKyufuJissekiSofuEntity entity) {
 
         if (レコード番号 == INT_0) {
-            レコード番号 = レコード番号 + INT_1;
-            csvWriter.writeLine(getControlEntity(レコード番号));
+            csvWriter.writeLine(getControlEntity(INT_1));
         }
         レコード番号 = レコード番号 + INT_1;
         csvWriter.writeLine(setデータレコード(entity, レコード番号));
@@ -150,8 +150,7 @@ public class KogakugassanKyufujissekiCreateSofuFileProcess extends BatchProcessB
             処理結果リスト一時Writer.insert(set処理結果リスト());
 
         } else {
-            レコード番号 = レコード番号 + 1;
-            csvWriter.writeLine(getEndEntity(レコード番号));
+            csvWriter.writeLine(getEndEntity(INT_1));
             csvWriter.close();
             SharedFileDescriptor sdf = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(csvFileName));
             sdf = SharedFile.defineSharedFile(sdf, 1, SharedFile.GROUP_ALL, null, true, null);
@@ -173,6 +172,7 @@ public class KogakugassanKyufujissekiCreateSofuFileProcess extends BatchProcessB
             dataEntity.set交換情報識別番号(entity.get交換情報識別番号().getColumnValue().trim());
         }
         dataEntity.set支給申請書整理番号(trimRString(entity.get支給申請書整理番号()));
+        dataEntity.set自己負担額証明書整理番号(trimRString(entity.get自己負担額証明書整理番号()));
         dataEntity.set保険制度コード(trimRString(entity.get保険制度コード()));
         dataEntity.set給付実績作成区分コード(trimRString(entity.get給付実績作成区分コード()));
         if (null == entity.get給付実績_証記載保険者番号() || entity.get給付実績_証記載保険者番号().isEmpty()) {
@@ -208,7 +208,7 @@ public class KogakugassanKyufujissekiCreateSofuFileProcess extends BatchProcessB
         controlEntity.setレコード種別(RecordShubetsu.コントロールレコード.getコード());
         controlEntity.setレコード番号_連番(new RString(連番));
         controlEntity.setボリュ_ム通番(ボリュム通番);
-        controlEntity.setレコード件数(new RString(reader.getCount()));
+        controlEntity.setレコード件数(new RString(レコード件数));
         controlEntity.setデータ種別(ConfigKeysKokuhorenSofu.高額合算給付実績情報.getコード());
         controlEntity.set福祉事務所特定番号(固定番号_00);
         controlEntity.set保険者番号(dbu保険者番号);

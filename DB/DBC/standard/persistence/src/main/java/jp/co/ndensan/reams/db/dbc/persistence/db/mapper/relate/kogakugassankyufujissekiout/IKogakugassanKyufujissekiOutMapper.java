@@ -44,6 +44,13 @@ public interface IKogakugassanKyufujissekiOutMapper {
     DbT3075KogakuGassanKyufuJissekiEntity get高額合算給付実績更新対象(KogakugassanKyufujissekiUpdateDBMybatisParameter parameter);
 
     /**
+     * 送付ファイル作成データ件数を取得する。
+     *
+     * @return 件数
+     */
+    int get送付ファイル作成データ件数();
+
+    /**
      * 送付ファイル作成データを取得する。
      *
      * @return KogakuGassanKyufuJissekiSofuEntity
