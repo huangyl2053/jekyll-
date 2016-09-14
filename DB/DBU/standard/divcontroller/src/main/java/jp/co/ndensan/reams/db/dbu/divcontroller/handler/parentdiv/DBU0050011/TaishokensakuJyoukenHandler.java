@@ -390,20 +390,4 @@ public class TaishokensakuJyoukenHandler {
                         様式４入力状況, 様式４の２入力状況, 様式４の３入力状況);
         return insuranceInformation;
     }
-
-    /**
-     * 引数定義<br/>
-     *
-     */
-    public enum DBU0050011ViewStateKey {
-
-        /**
-         * 遷移の前画面です。
-         */
-        is詳細画面から,
-        /**
-         * 遷移前の選択市町村名称です。
-         */
-        選択市町村名称;
-    }
 }
