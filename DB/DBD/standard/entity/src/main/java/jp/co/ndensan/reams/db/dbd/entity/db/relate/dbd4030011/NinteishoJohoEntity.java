@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd4030011;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -37,4 +38,5 @@ public class NinteishoJohoEntity {
     private FlexibleYear 対象年度;
     private RString 文書番号;
     private UaFt200FindShikibetsuTaishoEntity psmEntity;
+    private UaFt250FindAtesakiEntity atesakiEntity;
 }
