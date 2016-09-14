@@ -176,7 +176,7 @@ public class HanyoListKyodoJukyushaOutputProcess extends BatchProcessBase<KyodoJ
     private List<RString> get抽出条件() {
         List<RString> 抽出条件 = new ArrayList<>();
         抽出条件.add(TITLE_抽出条件);
-        if (parameter.get保険者コード() == null && LasdecCode.EMPTY.equals(parameter.get保険者コード())) {
+        if (parameter.get保険者コード() == null || LasdecCode.EMPTY.equals(parameter.get保険者コード())) {
             抽出条件.add(RString.EMPTY);
         } else if (parameter.get保険者コード() != null && 全市町村_CODE.equals(parameter.get保険者コード())) {
             抽出条件.add(TITLE_保険者.concat(全市町村));
