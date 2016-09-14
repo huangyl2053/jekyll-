@@ -899,6 +899,9 @@ public class HanyoListKogakuGassanJikoFutangakuProcess extends BatchProcessBase<
         builder.append(申請年月日);
         RString serviceYmFrom = get年月日(parameter.get申請年月日From());
         RString serviceYmTo = get年月日(parameter.get申請年月日To());
+        if (RString.isNullOrEmpty(serviceYmFrom) && RString.isNullOrEmpty(serviceYmTo)) {
+            return null;
+        }
         if (!RString.isNullOrEmpty(serviceYmFrom) && !RString.isNullOrEmpty(serviceYmTo)) {
             return builder.append(serviceYmFrom).append(波線).append(serviceYmTo);
         } else if (!RString.isNullOrEmpty(serviceYmFrom)) {
@@ -914,6 +917,9 @@ public class HanyoListKogakuGassanJikoFutangakuProcess extends BatchProcessBase<
         builder.append(支給申請書整理番号);
         RString 支給申請書整理番号From = parameter.get支給申請書整理番号From();
         RString 支給申請書整理番号To = parameter.get支給申請書整理番号To();
+        if (RString.isNullOrEmpty(支給申請書整理番号From) && RString.isNullOrEmpty(支給申請書整理番号To)) {
+            return null;
+        }
         if (!RString.isNullOrEmpty(支給申請書整理番号From) && !RString.isNullOrEmpty(支給申請書整理番号To)) {
             return builder.append(支給申請書整理番号From).append(波線).append(支給申請書整理番号To);
         } else if (!RString.isNullOrEmpty(支給申請書整理番号From)) {
@@ -929,6 +935,9 @@ public class HanyoListKogakuGassanJikoFutangakuProcess extends BatchProcessBase<
         builder.append(自己負担額確認情報受取年月);
         RString 自己負担額確認情報受取年月From = get提供年月(parameter.get自己負担額確認情報受取年月From());
         RString 自己負担額確認情報受取年月To = get提供年月(parameter.get自己負担額確認情報受取年月To());
+        if (RString.isNullOrEmpty(自己負担額確認情報受取年月From) && RString.isNullOrEmpty(自己負担額確認情報受取年月To)) {
+            return null;
+        }
         if (!RString.isNullOrEmpty(自己負担額確認情報受取年月From) && !RString.isNullOrEmpty(自己負担額確認情報受取年月To)) {
             return builder.append(自己負担額確認情報受取年月From).append(波線).append(自己負担額確認情報受取年月To);
         } else if (!RString.isNullOrEmpty(自己負担額確認情報受取年月From)) {
@@ -944,6 +953,9 @@ public class HanyoListKogakuGassanJikoFutangakuProcess extends BatchProcessBase<
         builder.append(補正済自己負担額情報送付年月);
         RString 補正済自己負担額情報送付年月From = get提供年月(parameter.get補正済自己負担額情報送付年月From());
         RString 補正済自己負担額情報送付年月To = get提供年月(parameter.get補正済自己負担額情報送付年月To());
+        if (RString.isNullOrEmpty(補正済自己負担額情報送付年月From) && RString.isNullOrEmpty(補正済自己負担額情報送付年月To)) {
+            return null;
+        }
         if (!RString.isNullOrEmpty(補正済自己負担額情報送付年月From) && !RString.isNullOrEmpty(補正済自己負担額情報送付年月To)) {
             return builder.append(補正済自己負担額情報送付年月From).append(波線).append(補正済自己負担額情報送付年月To);
         } else if (!RString.isNullOrEmpty(補正済自己負担額情報送付年月From)) {
@@ -959,6 +971,9 @@ public class HanyoListKogakuGassanJikoFutangakuProcess extends BatchProcessBase<
         builder.append(自己負担額証明書情報受取年月);
         RString 自己負担額証明書情報受取年月From = get提供年月(parameter.get自己負担額証明書情報受取年月From());
         RString 自己負担額証明書情報受取年月To = get提供年月(parameter.get自己負担額証明書情報受取年月To());
+        if (RString.isNullOrEmpty(自己負担額証明書情報受取年月From) && RString.isNullOrEmpty(自己負担額証明書情報受取年月To)) {
+            return null;
+        }
         if (!RString.isNullOrEmpty(自己負担額証明書情報受取年月From) && !RString.isNullOrEmpty(自己負担額証明書情報受取年月To)) {
             return builder.append(自己負担額証明書情報受取年月From).append(波線).append(自己負担額証明書情報受取年月To);
         } else if (!RString.isNullOrEmpty(自己負担額証明書情報受取年月From)) {
