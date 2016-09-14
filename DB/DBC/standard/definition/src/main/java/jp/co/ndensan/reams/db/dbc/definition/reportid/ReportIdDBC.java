@@ -689,7 +689,11 @@ public enum ReportIdDBC {
     /**
      * 自己負担証明書_2009年以降 帳票ＩＤです。
      */
-    DBC100051(new ReportId("DBC100051_JikoFutangakushomeishoFrom2009"), new RString("自己負担額証明書（介護）(平成２１年度以降用）"));
+    DBC100051(new ReportId("DBC100051_JikoFutangakushomeishoFrom2009"), new RString("自己負担額証明書（介護）(平成２１年度以降用）")),
+    /**
+     * 給付管理票（居宅・介護予防サービス・総合事業） 帳票ＩＤです。
+     */
+    DBC100035(new ReportId("DBC100035_KyufuKanrihyoKyotakuYoboSogoJigyoService"), new RString("給付管理票（居宅・介護予防サービス・総合事業）"));
     private final ReportId reportId;
 
     private final RString reportName;
