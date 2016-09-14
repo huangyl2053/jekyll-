@@ -5,18 +5,18 @@
  */
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist;
 
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- * 対象者把握情報の取得結果処理クラスです．
  *
- * @reamsid_L DBD-3610-050 x_lilh
+ * @author x_miaocl
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KyufuGengakuHaakuListTaishoTokuteiEntity {
+public class TaisyoSaisiJoho {
 
-    private HihokenshaNo hihokenshaNo;
+    private Decimal 徴収権消滅期間;
+    private Decimal 納付済み期間;
 
 }

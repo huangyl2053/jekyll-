@@ -21,7 +21,7 @@ import lombok.Setter;
 /**
  * 給付額減額滞納者把握リストバッチパラメタークラスです．
  *
- * @reamsid_L DBD-3610-030 x_lilh
+ * @reamsid_L DBD-3610-030 x_miaocl
  */
 @Getter
 @Setter

@@ -5,19 +5,19 @@
  */
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist;
 
-import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- * 賦課NewestのRelateEntityクラスです。
+ * 給付額減額滞納者把握情報
  *
- * @reamsid_L DBD-3610-050 wangchao
+ * @author x_miaocl
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class FukaJohoEntity {
+public class GengakuTaishoSaishinJoho {
 
-    private DbT2002FukaEntity fukaEntity;
-    private KibetsuJohoEntity kibetsuJohoEntity;
-
+    private Decimal 徴収権消滅期間;
+    private Decimal 納付済み期間;
+    private Decimal 納付額減額期間;
 }
