@@ -81,6 +81,7 @@ public class KanendoFuka {
      * @return ResponseData
      */
     public ResponseData<KanendoFukaDiv> onClick_onBeforeCheck(KanendoFukaDiv div) {
+        getHandler(div).get帳票IDのチェック();
         ValidationMessageControlPairs pairs = getHandler(div).getCheckMessage();
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
