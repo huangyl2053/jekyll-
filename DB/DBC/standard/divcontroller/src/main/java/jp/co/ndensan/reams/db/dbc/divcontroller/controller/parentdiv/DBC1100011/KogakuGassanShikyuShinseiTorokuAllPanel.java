@@ -174,14 +174,12 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
     public ResponseData<KogakuGassanShikyuShinseiTorokuAllPanelDiv> onClick_dgShinseiJohoModify(
             KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
         KogakuGassanShikyuShinseiTorokuAllPanelHandler handler = getHandler(div);
-        KogakuGassanShinseishoDataResult 引き継ぎデータ
-                = ViewStateHolder.get(ViewStateKeys.高額介護申請書用データ, KogakuGassanShinseishoDataResult.class);
         dgShinseiIchiran_Row row = div.getDgShinseiIchiran().getClickedItem();
         HihokenshaNo 被保険者番号 = new HihokenshaNo(row.getTxtHihokenshaNo());
-        FlexibleYear 対象年度 = 引き継ぎデータ.get対象年度();
-        HokenshaNo 保険者番号 = 引き継ぎデータ.get保険者番号();
-        RString 整理番号 = 引き継ぎデータ.get整理番号();
-        Decimal 履歴番号 = 引き継ぎデータ.get履歴番号();
+        FlexibleYear 対象年度 = new FlexibleYear(row.getTxtTaishoNendo());
+        HokenshaNo 保険者番号 = new HokenshaNo(row.getTxtHokenshaNo());
+        RString 整理番号 = row.getTxtSeiriNo();
+        Decimal 履歴番号 = new Decimal(row.getTxtRirekiNo().toString());
         KogakuGassanShinseishoIdentifier identifier = new KogakuGassanShinseishoIdentifier(
                 被保険者番号, 対象年度, 保険者番号, 整理番号, 履歴番号);
         KogakuGassanShinseishoHoji 高額合算申請書保持
@@ -202,14 +200,12 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
     public ResponseData<KogakuGassanShikyuShinseiTorokuAllPanelDiv> onClick_dgShinseiJohoDelete(
             KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
         KogakuGassanShikyuShinseiTorokuAllPanelHandler handler = getHandler(div);
-        KogakuGassanShinseishoDataResult 引き継ぎデータ
-                = ViewStateHolder.get(ViewStateKeys.高額介護申請書用データ, KogakuGassanShinseishoDataResult.class);
         dgShinseiIchiran_Row row = div.getDgShinseiIchiran().getClickedItem();
         HihokenshaNo 被保険者番号 = new HihokenshaNo(row.getTxtHihokenshaNo());
-        FlexibleYear 対象年度 = 引き継ぎデータ.get対象年度();
-        HokenshaNo 保険者番号 = 引き継ぎデータ.get保険者番号();
-        RString 整理番号 = 引き継ぎデータ.get整理番号();
-        Decimal 履歴番号 = 引き継ぎデータ.get履歴番号();
+        FlexibleYear 対象年度 = new FlexibleYear(row.getTxtTaishoNendo());
+        HokenshaNo 保険者番号 = new HokenshaNo(row.getTxtHokenshaNo());
+        RString 整理番号 = row.getTxtSeiriNo();
+        Decimal 履歴番号 = new Decimal(row.getTxtRirekiNo().toString());
         KogakuGassanShinseishoIdentifier identifier = new KogakuGassanShinseishoIdentifier(
                 被保険者番号, 対象年度, 保険者番号, 整理番号, 履歴番号);
         KogakuGassanShinseishoHoji 高額合算申請書保持
@@ -230,14 +226,12 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
     public ResponseData<KogakuGassanShikyuShinseiTorokuAllPanelDiv> onClick_dgShinseiJohoSelect(
             KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
         KogakuGassanShikyuShinseiTorokuAllPanelHandler handler = getHandler(div);
-        KogakuGassanShinseishoDataResult 引き継ぎデータ
-                = ViewStateHolder.get(ViewStateKeys.高額介護申請書用データ, KogakuGassanShinseishoDataResult.class);
         dgShinseiIchiran_Row row = div.getDgShinseiIchiran().getClickedItem();
         HihokenshaNo 被保険者番号 = new HihokenshaNo(row.getTxtHihokenshaNo());
-        FlexibleYear 対象年度 = 引き継ぎデータ.get対象年度();
-        HokenshaNo 保険者番号 = 引き継ぎデータ.get保険者番号();
-        RString 整理番号 = 引き継ぎデータ.get整理番号();
-        Decimal 履歴番号 = 引き継ぎデータ.get履歴番号();
+        FlexibleYear 対象年度 = new FlexibleYear(row.getTxtTaishoNendo());
+        HokenshaNo 保険者番号 = new HokenshaNo(row.getTxtHokenshaNo());
+        RString 整理番号 = row.getTxtSeiriNo();
+        Decimal 履歴番号 = new Decimal(row.getTxtRirekiNo().toString());
         KogakuGassanShinseishoIdentifier identifier = new KogakuGassanShinseishoIdentifier(
                 被保険者番号, 対象年度, 保険者番号, 整理番号, 履歴番号);
         KogakuGassanShinseishoHoji 高額合算申請書保持
@@ -272,13 +266,11 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
     public ResponseData<KogakuGassanShikyuShinseiTorokuAllPanelDiv> onClick_dgKanyRirekiModify(
             KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
         KogakuGassanShikyuShinseiTorokuAllPanelHandler handler = getHandler(div);
-        KogakuGassanShinseishoDataResult 引き継ぎデータ
-                = ViewStateHolder.get(ViewStateKeys.高額介護申請書用データ, KogakuGassanShinseishoDataResult.class);
         dgKanyuRirekiIchiran_Row row = div.getDgKanyuRirekiIchiran().getClickedItem();
         HihokenshaNo 被保険者番号 = new HihokenshaNo(row.getTxtHihokenshaNo());
-        FlexibleYear 対象年度 = 引き継ぎデータ.get対象年度();
-        HokenshaNo 保険者番号 = 引き継ぎデータ.get保険者番号();
-        RString 整理番号 = 引き継ぎデータ.get整理番号();
+        FlexibleYear 対象年度 = new FlexibleYear(row.getTxtTaishoNendo());
+        HokenshaNo 保険者番号 = new HokenshaNo(row.getTxtHokenshaNo());
+        RString 整理番号 = row.getTxtSeiriNo();
         RString 加入歴番号 = row.getTxtKanyurekiNo();
         int 履歴番号 = Integer.parseInt(row.getTxtRirekiNo().toString());
         KogakuGassanShinseishoKanyurekiIdentifier identifier = new KogakuGassanShinseishoKanyurekiIdentifier(
@@ -315,13 +307,11 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
     public ResponseData<KogakuGassanShikyuShinseiTorokuAllPanelDiv> onClick_dgKanyRirekiDelete(
             KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
         KogakuGassanShikyuShinseiTorokuAllPanelHandler handler = getHandler(div);
-        KogakuGassanShinseishoDataResult 引き継ぎデータ
-                = ViewStateHolder.get(ViewStateKeys.高額介護申請書用データ, KogakuGassanShinseishoDataResult.class);
         dgKanyuRirekiIchiran_Row row = div.getDgKanyuRirekiIchiran().getClickedItem();
         HihokenshaNo 被保険者番号 = new HihokenshaNo(row.getTxtHihokenshaNo());
-        FlexibleYear 対象年度 = 引き継ぎデータ.get対象年度();
-        HokenshaNo 保険者番号 = 引き継ぎデータ.get保険者番号();
-        RString 整理番号 = 引き継ぎデータ.get整理番号();
+        FlexibleYear 対象年度 = new FlexibleYear(row.getTxtTaishoNendo());
+        HokenshaNo 保険者番号 = new HokenshaNo(row.getTxtHokenshaNo());
+        RString 整理番号 = row.getTxtSeiriNo();
         RString 加入歴番号 = row.getTxtKanyurekiNo();
         int 履歴番号 = Integer.parseInt(row.getTxtRirekiNo().toString());
         KogakuGassanShinseishoKanyurekiIdentifier identifier = new KogakuGassanShinseishoKanyurekiIdentifier(
@@ -345,7 +335,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
             KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
         KogakuGassanShikyuShinseiTorokuAllPanelHandler handler = getHandler(div);
         handler.onClick_btnKanyuRirekiModoru();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBC1100011StateName.申請登録加入履歴一覧);
     }
 
     /**
@@ -372,7 +362,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
         div.getKanyuRirekiIchiran().setIsOpen(true);
         div.getKanyuRirekiInput().setIsOpen(false);
         ViewStateHolder.put(ViewStateKeys.高額合算申請書保持Entity, 高額合算申請書保持New);
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBC1100011StateName.申請登録加入履歴一覧);
     }
 
     /**

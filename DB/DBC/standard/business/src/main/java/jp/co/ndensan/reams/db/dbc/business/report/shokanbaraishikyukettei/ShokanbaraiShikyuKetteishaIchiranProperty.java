@@ -48,7 +48,7 @@ public class ShokanbaraiShikyuKetteishaIchiranProperty
         super(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200021.getReportId());
 
         pageBreakKeys = new ArrayList<>();
-        pageBreakKeys.add(new RString(ShokanbaraiShikyuKetteishaIchiranSource.ReportSourceFields.shoHokenshaNo.name()));
+        pageBreakKeys.add(new RString(ShokanbaraiShikyuKetteishaIchiranSource.ReportSourceFields.shoKisaiHokenshaNo.name()));
         RString 改頁２ = RString.EMPTY;
         RString 改頁３ = RString.EMPTY;
         RString 改頁４ = RString.EMPTY;
@@ -102,6 +102,7 @@ public class ShokanbaraiShikyuKetteishaIchiranProperty
             BreakerCatalog<ShokanbaraiShikyuKetteishaIchiranSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
 
+
             pageBreakKeys) {
             @Override
             public ReportLineRecord<ShokanbaraiShikyuKetteishaIchiranSource> occuredBreak(
@@ -143,7 +144,7 @@ public class ShokanbaraiShikyuKetteishaIchiranProperty
         /**
          * 証記載保険者番号
          */
-        証記載保険者番号(new RString("0103"), new RString("shoHokenshaNo"), new RString("DbWT3036.\"shokisaiHokenshaNo\"")),
+        証記載保険者番号(new RString("0103"), new RString("shoKisaiHokenshaNo"), new RString("DbWT3036.\"shokisaiHokenshaNo\"")),
         /**
          * 町域コード
          */

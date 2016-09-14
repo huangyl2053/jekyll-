@@ -22,7 +22,6 @@ public class JukyushaIdoCheckListReport extends Report<JukyushaIdoCheckListRepor
     private final UpperEntity upperEntity;
     private final LowerEntity lowerEntity;
     private final IOutputOrder iOutputOrder;
-    private final IOutputOrder breakoutputOrder;
 
     /**
      * インスタンスを生成します。
@@ -30,19 +29,16 @@ public class JukyushaIdoCheckListReport extends Report<JukyushaIdoCheckListRepor
      * @param upperEntity UpperEntity
      * @param lowerEntity LowerEntity
      * @param iOutputOrder IOutputOrder
-     * @param breakoutputOrder IOutputOrder
      */
-    public JukyushaIdoCheckListReport(UpperEntity upperEntity, LowerEntity lowerEntity, IOutputOrder iOutputOrder,
-            IOutputOrder breakoutputOrder) {
+    public JukyushaIdoCheckListReport(UpperEntity upperEntity, LowerEntity lowerEntity, IOutputOrder iOutputOrder) {
         this.upperEntity = upperEntity;
         this.lowerEntity = lowerEntity;
         this.iOutputOrder = iOutputOrder;
-        this.breakoutputOrder = breakoutputOrder;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<JukyushaIdoCheckListReportSource> reportSourceWriter) {
-        IJukyushaIdoCheckListEditor editor = new JukyushaIdoCheckListEditor(upperEntity, lowerEntity, iOutputOrder, breakoutputOrder);
+        IJukyushaIdoCheckListEditor editor = new JukyushaIdoCheckListEditor(upperEntity, lowerEntity, iOutputOrder);
         IJukyushaIdoCheckListBuilder builder = new JukyushaIdoCheckListBuilder(editor);
         reportSourceWriter.writeLine(builder);
     }

@@ -102,9 +102,6 @@ public class JyukyushaDaichoIdoCheckListHandler {
         parameter.set出力対象(div.getDdlShuturtokuTaisho().getSelectedValue());
         if (div.getCcdShutsuryokujun().getSelected出力順() != null) {
             parameter.set出力順ID(div.getCcdShutsuryokujun().getSelected出力順().get出力順ID());
-            if (div.getCcdShutsuryokujun().getSelected出力順().get改頁項目ID() != null) {
-                parameter.set改頁出力順ID(Long.valueOf(div.getCcdShutsuryokujun().getSelected出力順().get改頁項目ID().toString()));
-            }
         }
 
         return parameter;

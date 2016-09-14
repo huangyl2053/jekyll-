@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.core.kogaku;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShinseishoIdentifier;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShinseishoKanyurekiIdentifier;
@@ -46,6 +47,9 @@ public class KogakuGassanShinseishoHoji implements Serializable {
      * @return KogakuGassanShinseishoResult
      */
     public KogakuGassanShinseishoResult get高額合算申請書(KogakuGassanShinseishoIdentifier identifier) {
+        if (this.高額合算申請書 == null) {
+            return null;
+        }
         for (KogakuGassanShinseishoResult item : this.高額合算申請書) {
             if (item.get高額合算申請書().identifier().toString().equals(identifier.toString())) {
                 return item;
@@ -61,6 +65,9 @@ public class KogakuGassanShinseishoHoji implements Serializable {
      * @return KogakuGassanShinseishoKanyurekiResult
      */
     public KogakuGassanShinseishoKanyurekiResult get加入歴(KogakuGassanShinseishoKanyurekiIdentifier identifier) {
+        if (this.加入歴 == null) {
+            return null;
+        }
         for (KogakuGassanShinseishoKanyurekiResult item : this.加入歴) {
             if (item.get高額合算申請書加入歴().identifier().toString().equals(identifier.toString())) {
                 return item;
@@ -75,6 +82,10 @@ public class KogakuGassanShinseishoHoji implements Serializable {
      * @param result 高額合算申請書
      */
     public void add高額合算申請書(KogakuGassanShinseishoResult result) {
+        if (this.高額合算申請書 == null) {
+            this.高額合算申請書 = new ArrayList();
+            this.高額合算申請書.add(result);
+        }
         boolean flg = true;
         for (KogakuGassanShinseishoResult item : this.高額合算申請書) {
             if (item.get高額合算申請書().identifier().toString().equals(
@@ -96,6 +107,10 @@ public class KogakuGassanShinseishoHoji implements Serializable {
      * @param result 高額合算申請書
      */
     public void add加入歴(KogakuGassanShinseishoKanyurekiResult result) {
+        if (this.加入歴 == null) {
+            加入歴 = new ArrayList();
+            加入歴.add(result);
+        }
         boolean flg = true;
         for (KogakuGassanShinseishoKanyurekiResult item : this.加入歴) {
             if (item.get高額合算申請書加入歴().identifier().toString().equals(
@@ -112,11 +127,14 @@ public class KogakuGassanShinseishoHoji implements Serializable {
     }
 
     /**
-     * 高額合算申請書追加のメソッドです。
+     * 高額合算申請書削除のメソッドです。
      *
      * @param result 高額合算申請書
      */
     public void delete高額合算申請書(KogakuGassanShinseishoResult result) {
+        if (this.高額合算申請書 == null) {
+            return;
+        }
         for (KogakuGassanShinseishoResult item : this.高額合算申請書) {
             if (item.get高額合算申請書().identifier().toString().equals(
                     result.get高額合算申請書().identifier().toString())) {
@@ -132,6 +150,9 @@ public class KogakuGassanShinseishoHoji implements Serializable {
      * @param result 高額合算申請書
      */
     public void delete加入歴(KogakuGassanShinseishoKanyurekiResult result) {
+        if (this.加入歴 == null) {
+            return;
+        }
         for (KogakuGassanShinseishoKanyurekiResult item : this.加入歴) {
             if (item.get高額合算申請書加入歴().identifier().toString().equals(
                     result.get高額合算申請書加入歴().identifier().toString())) {

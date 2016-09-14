@@ -26,7 +26,7 @@ public enum KogakuServicehiJuryoininKeiyakuShoninKakuninshoOutputOrder implement
     /**
      * 事業者番号です。
      */
-    事業者番号(new RString("0341"), new RString(""), new RString("\"高額介護事業者\".\"dbT3076KogakuJuryoininKeiyakuJigyosha_jigyoshaNo\"")),
+    契約事業者番号(new RString("0341"), new RString(""), new RString("\"高額介護事業者\".\"dbT3076KogakuJuryoininKeiyakuJigyosha_jigyoshaNo\"")),
     /**
      * 契約決定年月日です。
      */

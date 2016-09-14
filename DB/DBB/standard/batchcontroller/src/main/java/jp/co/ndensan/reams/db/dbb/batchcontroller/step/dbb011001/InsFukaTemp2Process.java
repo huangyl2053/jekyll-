@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -57,19 +58,20 @@ public class InsFukaTemp2Process extends BatchProcessBase<FukaJohokeizokuRelateE
     private ChoshuHoho 徴収方法の情報;
     private HihokenshaDaicho 資格の情報;
     private HihokenshaNo 被保険者番号;
-    Decimal 特徴期別金額06;
-    FlexibleDate 前年度生保開始日;
-    FlexibleDate 前年度生保廃止日;
-    FlexibleDate 前年度老年開始日;
-    FlexibleDate 前年度老年廃止日;
-    RString 前年度世帯課税区分;
-    RString 前年度課税区分;
-    Decimal 前年度合計所得金額;
-    Decimal 前年度公的年金収入額;
+    private FlexibleYear 賦課年度;
+    private Decimal 特徴期別金額06;
+    private FlexibleDate 前年度生保開始日;
+    private FlexibleDate 前年度生保廃止日;
+    private FlexibleDate 前年度老年開始日;
+    private FlexibleDate 前年度老年廃止日;
+    private RString 前年度世帯課税区分;
+    private RString 前年度課税区分;
+    private Decimal 前年度合計所得金額;
+    private Decimal 前年度公的年金収入額;
     private ShikibetsuCode 識別コード;
     private GyomuCode 業務コード;
     private FlexibleDate 受給開始日;
-    Map<HihokenshaNo, Integer> 被保険者番号Map;
+    private Map<HihokenshaNo, Integer> 被保険者番号Map;
 
     @BatchWriter
     private IBatchTableWriter tempDbWriter;
@@ -84,6 +86,7 @@ public class InsFukaTemp2Process extends BatchProcessBase<FukaJohokeizokuRelateE
         徴収方法の情報 = null;
         資格の情報 = null;
         被保険者番号 = null;
+        賦課年度 = null;
         特徴期別金額06 = null;
         前年度生保開始日 = null;
         前年度生保廃止日 = null;
@@ -119,7 +122,7 @@ public class InsFukaTemp2Process extends BatchProcessBase<FukaJohokeizokuRelateE
             set識別コード(entity);
             set生活保護受給者Entity(entity.get生活保護受給者Entity());
             set生活保護扶助種類EntityList(entity.get生活保護扶助種類Entity());
-        } else if (!被保険者番号.equals(entity.getHihokenshaNo())) {
+        } else if (!被保険者番号.equals(entity.getHihokenshaNo()) || !賦課年度.equals(entity.getFukaNendo())) {
             SeikatsuHogoJukyushaRelateEntity 生活保護受給者RelateEntity = new SeikatsuHogoJukyushaRelateEntity();
             生活保護受給者RelateEntity.set生活保護受給者Entity(生活保護受給者Entity);
             生活保護受給者RelateEntity.set生活保護扶助種類Entity(生活保護扶助種類EntityList);
@@ -130,7 +133,6 @@ public class InsFukaTemp2Process extends BatchProcessBase<FukaJohokeizokuRelateE
                     前年度世帯課税区分, 前年度課税区分, 前年度合計所得金額, 前年度公的年金収入額, null, 被保険者番号Map, 賦課情報一時Entity);
             set被保険者番号Map(被保険者番号Map, 賦課情報一時Entity);
             tempDbWriter.insert(賦課情報一時Entity);
-            // inset
             老齢の情報 = new ArrayList<>();
             set老齢の情報(entity.get老齢の情報());
             set徴収方法の情報(entity.get徴収方法の情報());
@@ -148,21 +150,25 @@ public class InsFukaTemp2Process extends BatchProcessBase<FukaJohokeizokuRelateE
 
     @Override
     protected void afterExecute() {
-        SeikatsuHogoJukyushaRelateEntity 生活保護受給者RelateEntity = new SeikatsuHogoJukyushaRelateEntity();
-        生活保護受給者RelateEntity.set生活保護受給者Entity(生活保護受給者Entity);
-        生活保護受給者RelateEntity.set生活保護扶助種類Entity(生活保護扶助種類EntityList);
-        set生保の情報(生活保護受給者RelateEntity);
-        FukaJohoTempEntity 賦課情報一時Entity = new FukaJohoTempEntity();
-        TokuchoKariSanteiFukaManagerBatch.createInstance().createFukaJohoKeizoku(processParameter.get調定年度(), processParameter.get調定日時(),
-                資格の情報, 徴収方法の情報, 生保の情報, 老齢の情報, 前年度生保開始日, 前年度生保廃止日, 前年度老年開始日, 前年度老年廃止日,
-                前年度世帯課税区分, 前年度課税区分, 前年度合計所得金額, 前年度公的年金収入額, null, 被保険者番号Map, 賦課情報一時Entity, 特徴期別金額06);
-        tempDbWriter.insert(賦課情報一時Entity);
+        if (被保険者番号 != null) {
+            SeikatsuHogoJukyushaRelateEntity 生活保護受給者RelateEntity = new SeikatsuHogoJukyushaRelateEntity();
+            生活保護受給者RelateEntity.set生活保護受給者Entity(生活保護受給者Entity);
+            生活保護受給者RelateEntity.set生活保護扶助種類Entity(生活保護扶助種類EntityList);
+            set生保の情報(生活保護受給者RelateEntity);
+            FukaJohoTempEntity 賦課情報一時Entity = new FukaJohoTempEntity();
+            TokuchoKariSanteiFukaManagerBatch.createInstance().createFukaJohoKeizoku(processParameter.get調定年度(), processParameter.get調定日時(),
+                    資格の情報, 徴収方法の情報, 生保の情報, 老齢の情報, 前年度生保開始日, 前年度生保廃止日, 前年度老年開始日, 前年度老年廃止日,
+                    前年度世帯課税区分, 前年度課税区分, 前年度合計所得金額, 前年度公的年金収入額, null, 被保険者番号Map, 賦課情報一時Entity, 特徴期別金額06);
+            tempDbWriter.insert(賦課情報一時Entity);
+        }
     }
 
     private void set老齢の情報(DbT7006RoreiFukushiNenkinJukyushaEntity entity) {
         if (entity != null) {
             entity.initializeMd5();
-            老齢の情報.add(new RoreiFukushiNenkinJukyusha(entity));
+            if (!老齢の情報.contains(new RoreiFukushiNenkinJukyusha(entity))) {
+                老齢の情報.add(new RoreiFukushiNenkinJukyusha(entity));
+            }
         }
     }
 
@@ -188,6 +194,7 @@ public class InsFukaTemp2Process extends BatchProcessBase<FukaJohokeizokuRelateE
     }
 
     private void set被保険者番号(FukaJohokeizokuRelateEntity entity) {
+        賦課年度 = entity.getFukaNendo();
         被保険者番号 = entity.getHihokenshaNo();
         特徴期別金額06 = entity.getChoteigaku();
         前年度生保開始日 = entity.getSeihoKaishiYMD();
@@ -215,7 +222,7 @@ public class InsFukaTemp2Process extends BatchProcessBase<FukaJohokeizokuRelateE
     }
 
     private void set生活保護扶助種類EntityList(UrT0526SeikatsuHogoFujoShuruiEntity entity) {
-        if (entity != null) {
+        if (entity != null && !生活保護扶助種類EntityList.contains(entity)) {
             生活保護扶助種類EntityList.add(entity);
         }
     }

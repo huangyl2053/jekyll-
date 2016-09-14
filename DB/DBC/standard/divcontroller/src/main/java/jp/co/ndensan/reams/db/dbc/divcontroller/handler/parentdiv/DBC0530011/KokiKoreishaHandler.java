@@ -17,6 +17,11 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuShutokuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.ur.urz.business.core.hokenja.Hokenja;
+import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaShubetsuType;
+import jp.co.ndensan.reams.ur.urz.service.core.hokenja.HokenjaManagerFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.hokenja.HokenjaSearchItem;
+import jp.co.ndensan.reams.ur.urz.service.core.hokenja.IHokenjaManager;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
@@ -24,6 +29,9 @@ import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.INewSearchCondition;
+import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.SearchConditionFactory;
+import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.StringOperator;
 
 /**
  * 後期資格情報登録Handler
@@ -70,6 +78,10 @@ public class KokiKoreishaHandler {
                 concat(履歴番号));
         RealInitialLocker.lock(key);
         ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        IHokenjaManager iHokenjaManager = HokenjaManagerFactory.createInstance();
+        INewSearchCondition 検索条件 = SearchConditionFactory.condition(
+                HokenjaSearchItem.保険者種別, StringOperator.完全一致, HokenjaShubetsuType.後期高齢.code());
+        List<Hokenja> hokenja = iHokenjaManager.get保険者一覧(検索条件);
         RString 介護導入形態 = shichosonSecurityJoho.get導入形態コード().value();
         if (介護導入形態.equals(コード111)) {
             介護導入形態 = 広域保険者;
@@ -87,6 +99,7 @@ public class KokiKoreishaHandler {
         div.getHeaderPanel().getCcdShikakuInfo().set被保険者番号(被保険者番号.value());
         set資格取得事由();
         set資格喪失事由();
+        set保険者番号(hokenja);
         if (後期高齢者情報 != null) {
             div.getMeisaiPanel().getTxtRirekiNo().setValue(後期高齢者情報.get履歴番号());
             if (後期高齢者情報.get後期高齢被保険者番号() != null) {
@@ -149,6 +162,16 @@ public class KokiKoreishaHandler {
             dataSources.add(get資格取得事由(code));
         }
         div.getMeisaiPanel().getDdlShikakuShutokuJiyu().setDataSource(dataSources);
+    }
+
+    private void set保険者番号(List<Hokenja> hokenja) {
+        List<KeyValueDataSource> dataSources = new ArrayList<>();
+        for (Hokenja 保険者番号 : hokenja) {
+            KeyValueDataSource keyValue = new KeyValueDataSource(保険者番号.get保険者番号().getColumnValue(),
+                    保険者番号.get保険者番号().value());
+            dataSources.add(keyValue);
+        }
+        div.getMeisaiPanel().getDdlHokenshaNo().setDataSource(dataSources);
     }
 
     private void set資格喪失事由() {

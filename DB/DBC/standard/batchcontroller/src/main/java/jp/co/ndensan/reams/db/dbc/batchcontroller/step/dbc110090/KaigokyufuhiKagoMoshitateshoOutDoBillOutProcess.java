@@ -15,6 +15,10 @@ import java.util.Set;
 import jp.co.ndensan.reams.db.dbc.business.report.kaigokyufuhikagomoshitateshoout.KaigokyufuhiKagoMoshitateshoOutOutPutOrder;
 import jp.co.ndensan.reams.db.dbc.business.report.kaigokyufuhikagomoshitateshoout.KaigokyufuhiKagoMoshitateshoOutPageBreak;
 import jp.co.ndensan.reams.db.dbc.business.report.kaigokyufuhikagomoshitateshoout.KaigokyufuhiKagoMoshitateshoOutReport;
+import jp.co.ndensan.reams.db.dbc.business.report.sogojigyohikagomoshitateshojohosofu.SogojigyohiKagoMoshitateshojohoSofuPageBreak;
+import jp.co.ndensan.reams.db.dbc.business.report.sogojigyohikagomoshitateshojohosofu.SogojigyohiKagoMoshitateshojohoSofuReport;
+import jp.co.ndensan.reams.db.dbc.business.report.sogojigyohikagomoshitateshojohosofuIchiran.SogojigyohiKagoMoshitateshojohoSofuIchiranPageBreak;
+import jp.co.ndensan.reams.db.dbc.business.report.sogojigyohikagomoshitateshojohosofuIchiran.SogojigyohiKagoMoshitateshojohoSofuIchiranReport;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110090.KaigokyufuhiKagoMoshitateshoOutDoBillOutProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kokuhorenkyoutsuu.KokuhorenIchiranhyoMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.DbWT1001HihokenshaTempEntity;
@@ -22,6 +26,9 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.kaigokyufuhikagomoshitateshoout.Kai
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110090.DbWT1731KagoMoshitateTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110090.KaigokyufuhiKagoMoshitateshoOutDoBillOutEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kaigokyufuhikagomoshitateshoout.KyufuKagoMoshitateshojohoSofuIchiranSource;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikagomoshitateshojohosofuichiran.SogojigyohiKagoMoshitateshojohoSofuIchiranEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikagomoshitateshojohosofuichiran.SogojigyohiKagoMoshitateshojohoSofuSource;
+import jp.co.ndensan.reams.db.dbc.entity.report.sogojigyohikagomoshitateshojohosofuIchiran.SogojigyohiKagoMoshitateshojohoSofuIchiranSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
@@ -36,13 +43,13 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -55,6 +62,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -120,10 +128,13 @@ public class KaigokyufuhiKagoMoshitateshoOutDoBillOutProcess extends BatchKeyBre
 
     private int 件数 = 0;
 
-    @BatchWriter
     private BatchReportWriter<KyufuKagoMoshitateshojohoSofuIchiranSource> batchReportWriter;
     private ReportSourceWriter<KyufuKagoMoshitateshojohoSofuIchiranSource> reportSourceWriter;
     private CsvWriter<KaigokyufuhiKagoMoshitateshoOutCsvEntity> seikyugakuTsuchishoInCsvWriter;
+    private BatchReportWriter<SogojigyohiKagoMoshitateshojohoSofuIchiranSource> sogojigyohiKagoReportWriter;
+    private ReportSourceWriter<SogojigyohiKagoMoshitateshojohoSofuIchiranSource> sogojigyohiKagoSourceWriter;
+    private BatchReportWriter<SogojigyohiKagoMoshitateshojohoSofuSource> sogojiReportWriter;
+    private ReportSourceWriter<SogojigyohiKagoMoshitateshojohoSofuSource> sogojiWriter;
 
     @Override
     protected void initialize() {
@@ -198,9 +209,21 @@ public class KaigokyufuhiKagoMoshitateshoOutDoBillOutProcess extends BatchKeyBre
 
     @Override
     protected void createWriter() {
-        PageBreaker<KyufuKagoMoshitateshojohoSofuIchiranSource> breaker = new KaigokyufuhiKagoMoshitateshoOutPageBreak(改頁項目リスト);
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(parameter.get帳票ID().value()).addBreak(breaker).create();
-        reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
+        if (コード_173.equals(parameter.getコード())) {
+            PageBreaker<KyufuKagoMoshitateshojohoSofuIchiranSource> breaker = new KaigokyufuhiKagoMoshitateshoOutPageBreak(改頁項目リスト);
+            batchReportWriter = BatchReportFactory.createBatchReportWriter(parameter.get帳票ID().value()).addBreak(breaker).create();
+            reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
+        } else if (コード_176.equals(parameter.getコード())) {
+            PageBreaker<SogojigyohiKagoMoshitateshojohoSofuIchiranSource> breaker176
+                    = new SogojigyohiKagoMoshitateshojohoSofuIchiranPageBreak(改頁項目リスト);
+            sogojigyohiKagoReportWriter = BatchReportFactory.createBatchReportWriter(parameter.get帳票ID().value()).addBreak(breaker176).create();
+            sogojigyohiKagoSourceWriter = new ReportSourceWriter<>(sogojigyohiKagoReportWriter);
+        } else if (コード_179.equals(parameter.getコード())) {
+            PageBreaker<SogojigyohiKagoMoshitateshojohoSofuSource> breaker179 = new SogojigyohiKagoMoshitateshojohoSofuPageBreak(改頁項目リスト);
+            sogojiReportWriter = BatchReportFactory.createBatchReportWriter(parameter.get帳票ID().value()).addBreak(breaker179).create();
+            sogojiWriter = new ReportSourceWriter<>(sogojiReportWriter);
+        }
+
         kaigoManager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, eUC_ENTITY_ID,
                 UzUDE0831EucAccesslogFileType.Csv);
         kaigoEucFilePath = Path.combinePath(kaigoManager.getEucOutputDirectry(),
@@ -232,10 +255,26 @@ public class KaigokyufuhiKagoMoshitateshoOutDoBillOutProcess extends BatchKeyBre
             index_1++;
         } else {
             boolean flag = this.get合計flag(this.exEtntity, entity);
-            KaigokyufuhiKagoMoshitateshoOutReport kaiReport
-                    = new KaigokyufuhiKagoMoshitateshoOutReport(this.exEtntity, 出力順Map,
-                            parameter.getシステム日付(), flag, 改頁項目名リスト, parameter.get処理年月(), 件数);
-            kaiReport.writeBy(reportSourceWriter);
+            if (コード_173.equals(parameter.getコード())) {
+                KaigokyufuhiKagoMoshitateshoOutReport kaiReport
+                        = new KaigokyufuhiKagoMoshitateshoOutReport(this.exEtntity, 出力順Map,
+                                parameter.getシステム日付(), flag, 改頁項目名リスト, parameter.get処理年月(), 件数);
+                kaiReport.writeBy(reportSourceWriter);
+            } else if (コード_176.equals(parameter.getコード())) {
+                SogojigyohiKagoMoshitateshojohoSofuIchiranReport sogoReport
+                        = new SogojigyohiKagoMoshitateshojohoSofuIchiranReport(this.exEtntity, 出力順Map,
+                                parameter.getシステム日付(), flag, 改頁項目名リスト, parameter.get処理年月(), 件数);
+                sogoReport.writeBy(sogojigyohiKagoSourceWriter);
+            } else if (コード_179.equals(parameter.getコード())) {
+                SogojigyohiKagoMoshitateshojohoSofuIchiranEntity sogoJiEntity = new SogojigyohiKagoMoshitateshojohoSofuIchiranEntity();
+                sogoJiEntity.set被保険者一時TBL(this.exEtntity.getDbWT1001Entity());
+                sogoJiEntity.set過誤申立一時TBL(this.exEtntity.getDbWT1731Entity());
+                SogojigyohiKagoMoshitateshojohoSofuReport sogojiReport
+                        = new SogojigyohiKagoMoshitateshojohoSofuReport(sogoJiEntity, 並び順, new RYearMonth(parameter.get処理年月().toDateString()),
+                                new YMDHMS(parameter.getシステム日付()), 件数, 件数, flag);
+                sogojiReport.writeBy(sogojiWriter);
+            }
+
             if (flag) {
                 KaigokyufuhiKagoMoshitateshoOutCsvEntity output = this.get帳票のCSVファイル作成(
                         this.exEtntity, parameter.get処理年月(), parameter.getシステム日付(), false, 件数);
@@ -257,11 +296,29 @@ public class KaigokyufuhiKagoMoshitateshoOutDoBillOutProcess extends BatchKeyBre
 
     @Override
     protected void afterExecute() {
-        KaigokyufuhiKagoMoshitateshoOutReport kaiReport
-                = new KaigokyufuhiKagoMoshitateshoOutReport(this.exEtntity, 出力順Map,
-                        parameter.getシステム日付(), true, 改頁項目名リスト, parameter.get処理年月(), 件数);
-        kaiReport.writeBy(reportSourceWriter);
 
+        if (コード_173.equals(parameter.getコード())) {
+            KaigokyufuhiKagoMoshitateshoOutReport kaiReport
+                    = new KaigokyufuhiKagoMoshitateshoOutReport(this.exEtntity, 出力順Map,
+                            parameter.getシステム日付(), true, 改頁項目名リスト, parameter.get処理年月(), 件数);
+            kaiReport.writeBy(reportSourceWriter);
+            batchReportWriter.close();
+        } else if (コード_176.equals(parameter.getコード())) {
+            SogojigyohiKagoMoshitateshojohoSofuIchiranReport sogoReport
+                    = new SogojigyohiKagoMoshitateshojohoSofuIchiranReport(this.exEtntity, 出力順Map,
+                            parameter.getシステム日付(), true, 改頁項目名リスト, parameter.get処理年月(), 件数);
+            sogoReport.writeBy(sogojigyohiKagoSourceWriter);
+            sogojigyohiKagoReportWriter.close();
+        } else if (コード_179.equals(parameter.getコード())) {
+            SogojigyohiKagoMoshitateshojohoSofuIchiranEntity sogoJiEntity = new SogojigyohiKagoMoshitateshojohoSofuIchiranEntity();
+            sogoJiEntity.set被保険者一時TBL(this.exEtntity.getDbWT1001Entity());
+            sogoJiEntity.set過誤申立一時TBL(this.exEtntity.getDbWT1731Entity());
+            SogojigyohiKagoMoshitateshojohoSofuReport sogojiReport
+                    = new SogojigyohiKagoMoshitateshojohoSofuReport(sogoJiEntity, 並び順, new RYearMonth(parameter.get処理年月().toDateString()),
+                            new YMDHMS(parameter.getシステム日付()), 件数, 件数, true);
+            sogojiReport.writeBy(sogojiWriter);
+            sogojiReportWriter.close();
+        }
         KaigokyufuhiKagoMoshitateshoOutCsvEntity output = this.get帳票のCSVファイル作成(
                 this.exEtntity, parameter.get処理年月(), parameter.getシステム日付(), false, 件数);
         seikyugakuTsuchishoInCsvWriter.writeLine(output);
@@ -365,4 +422,5 @@ public class KaigokyufuhiKagoMoshitateshoOutDoBillOutProcess extends BatchKeyBre
         ExpandedInformation expandedInformations = new ExpandedInformation(コード, 漢字_被保険者番号, 被保険者番号.getColumnValue());
         personalDataList.add(PersonalData.of(識別コード, expandedInformations));
     }
+
 }

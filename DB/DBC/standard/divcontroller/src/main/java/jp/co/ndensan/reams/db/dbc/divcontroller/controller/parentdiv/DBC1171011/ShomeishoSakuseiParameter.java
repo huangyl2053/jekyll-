@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC1171011;
 
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KokuhorenInterfaceKanri;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.shomeishosakusei.JikofutanShomeishoParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC040040.DBC040040_JikofutanShomeishoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_DataSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_JikoFutanShomeisho_Insho;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1171011.ShomeishoSakuseiParameterDiv;
@@ -76,8 +76,8 @@ public class ShomeishoSakuseiParameter {
      * @param div ShomeishoSakuseiParameterDiv
      * @return ResponseData<JikofutanShomeishoParameter>
      */
-    public ResponseData<JikofutanShomeishoParameter> onClick_batch(ShomeishoSakuseiParameterDiv div) {
-        JikofutanShomeishoParameter param = new JikofutanShomeishoParameter();
+    public ResponseData<DBC040040_JikofutanShomeishoParameter> onClick_batch(ShomeishoSakuseiParameterDiv div) {
+        DBC040040_JikofutanShomeishoParameter param = new DBC040040_JikofutanShomeishoParameter();
         boolean is自己負担 = KEY_自己負担額計算括からの情報を元に作成RAD.equals(div.getRadJikoFutangaku().getSelectedKey());
         boolean is国保連 = KEY_国保連からの情報を元に作成RAD.equals(div.getRadKokuhoren().getSelectedKey());
         param.set開始申請年月日((is国保連 || RString.isNullOrEmpty(div.getTxtShinseiDate().getFromValue().wareki().toDateString()))

@@ -84,8 +84,10 @@ public class GassanShikyuTsuchishoTorikomiIchiranEditor implements
         source.kaipage5 = get改頁(NUM_4);
 
         source.listCenter_1 = new RString(entity.get連番());
+        if (被保険者.get登録被保険者番号() != null) {
+            source.listUpper_1 = 被保険者.get登録被保険者番号().value();
+        }
 
-        source.listUpper_1 = 被保険者.get登録被保険者番号().value();
         source.listUpper_2 = 被保険者.get宛名名称();
 
         source.listUpper_3 = 計算結果entity.get支給申請書整理番号();
@@ -118,13 +120,10 @@ public class GassanShikyuTsuchishoTorikomiIchiranEditor implements
         }
 
         source.listLower_1 = new RString(計算結果entity.get履歴番号());
-        source.listLower_2 = listLower_2(被保険者.get住所(), 被保険者.get番地(),
-                被保険者.get方書());
+        source.listLower_2 = listLower_2(被保険者.get住所(), 被保険者.get番地(), 被保険者.get方書());
 
-        FlexibleDate kaishiYMD = new FlexibleDate(計算結果entity.get対象計算期間開始年月日());
-        FlexibleDate shuryoYMD = new FlexibleDate(計算結果entity.get対象計算期間終了年月日());
-
-        source.listLower_3 = getlistLower_3(kaishiYMD, shuryoYMD);
+        source.listLower_3 = getlistLower_3(new FlexibleDate(計算結果entity.get対象計算期間開始年月日()),
+                new FlexibleDate(計算結果entity.get対象計算期間終了年月日()));
 
         source.listLower_4 = new FlexibleDate(計算結果entity.get決定年月日()).wareki().
                 eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).

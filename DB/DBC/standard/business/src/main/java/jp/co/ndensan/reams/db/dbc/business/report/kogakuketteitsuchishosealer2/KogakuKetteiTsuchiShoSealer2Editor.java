@@ -108,7 +108,7 @@ public class KogakuKetteiTsuchiShoSealer2Editor implements IKogakuKetteiTsuchiSh
         source.uketsukeYMD = new RString(帳票情報.get受付年月日().toString());
         source.ketteiYMD = new RString(帳票情報.get決定年月日().toString());
         source.shiharaiGaku = new RString(帳票情報.get本人支払額().toString());
-        source.taishoYM = new RString(帳票情報.get対象年月().toString());
+        source.taishoYM = 帳票情報.get対象年月().toDateString();
         source.kyufuShurui1 = 帳票情報.get給付の種類();
         source.kyufuShurui2 = 帳票情報.get給付の種類();
         source.kyufuShurui3 = 帳票情報.get給付の種類();
@@ -182,7 +182,7 @@ public class KogakuKetteiTsuchiShoSealer2Editor implements IKogakuKetteiTsuchiSh
         if (帳票情報.get被保険者番号() != null) {
             source.hihokenshaNo21 = 帳票情報.get被保険者番号().value();
         }
-        source.serviceYM = new RString(帳票情報.get提供年月().toString());
+        source.serviceYM = 帳票情報.get提供年月().toDateString();
         source.tsuban2 = new RString(帳票情報.get通番());
 
         source.kouzaMeigi = 帳票情報.get口座名義人();

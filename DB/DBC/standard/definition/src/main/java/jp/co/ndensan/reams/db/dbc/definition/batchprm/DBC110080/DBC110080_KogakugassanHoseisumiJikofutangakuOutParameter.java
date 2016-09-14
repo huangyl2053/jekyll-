@@ -28,6 +28,8 @@ public class DBC110080_KogakugassanHoseisumiJikofutangakuOutParameter extends Ba
     private static final String NAME_SAISHORIKUBUN = "再処理区分";
     private static final String KEY_SHUTSURYOKUJUNID = "shutsuryokujunId";
     private static final String NAME_SHUTSURYOKUJUNID = "出力順ID";
+    private static final String KEY_SHORIKUNBUN = "shoriKunbun";
+    private static final String NAME_SHORIKUNBUN = "処理区分";
 
     @BatchParameter(key = KEY_SHORIYM, name = NAME_SHORIYM)
     private FlexibleYearMonth shoriYM;
@@ -35,6 +37,8 @@ public class DBC110080_KogakugassanHoseisumiJikofutangakuOutParameter extends Ba
     private RString saishoriKubun;
     @BatchParameter(key = KEY_SHUTSURYOKUJUNID, name = NAME_SHUTSURYOKUJUNID)
     private RString shutsuryokujunId;
+    @BatchParameter(key = KEY_SHORIKUNBUN, name = NAME_SHORIKUNBUN)
+    private RString shoriKunbun;
 
     /**
      * Processパラメータ作成メソッドです。
@@ -43,7 +47,7 @@ public class DBC110080_KogakugassanHoseisumiJikofutangakuOutParameter extends Ba
      * @return Processパラメータ
      */
     public KogakugassanProcessParameter toKogakugassanProcessParameter(YMDHMS now) {
-        return new KogakugassanProcessParameter(shoriYM, saishoriKubun, shutsuryokujunId, now);
+        return new KogakugassanProcessParameter(shoriYM, saishoriKubun, shutsuryokujunId, now, shoriKunbun);
     }
 
 }

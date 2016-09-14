@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd200037;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5720001.LowerEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5720001.UpperEntity;
@@ -32,12 +34,17 @@ public class JukyushaIdoCheckListEditor implements IJukyushaIdoCheckListEditor {
     private final UpperEntity upperEntity;
     private final LowerEntity lowerEntity;
     private final IOutputOrder iOutputOrder;
-    private final IOutputOrder breakoutputOrder;
+    private static final int LISTINDEX_0 = 0;
     private static final int LISTINDEX_1 = 1;
     private static final int LISTINDEX_2 = 2;
     private static final int LISTINDEX_3 = 3;
     private static final int LISTINDEX_4 = 4;
     private static final int LISTINDEX_5 = 5;
+    private RString 改頁１ = RString.EMPTY;
+    private RString 改頁２ = RString.EMPTY;
+    private RString 改頁３ = RString.EMPTY;
+    private RString 改頁４ = RString.EMPTY;
+    private RString 改頁５ = RString.EMPTY;
 
     /**
      * インスタンスを生成します。
@@ -45,14 +52,11 @@ public class JukyushaIdoCheckListEditor implements IJukyushaIdoCheckListEditor {
      * @param upperEntity {@link UpperEntity}
      * @param lowerEntity {@link LowerEntity}
      * @param iOutputOrder {@link IOutputOrder}
-     * @param breakoutputOrder {@link IOutputOrder}
      */
-    public JukyushaIdoCheckListEditor(UpperEntity upperEntity, LowerEntity lowerEntity,
-            IOutputOrder iOutputOrder, IOutputOrder breakoutputOrder) {
+    public JukyushaIdoCheckListEditor(UpperEntity upperEntity, LowerEntity lowerEntity, IOutputOrder iOutputOrder) {
         this.upperEntity = upperEntity;
         this.lowerEntity = lowerEntity;
         this.iOutputOrder = iOutputOrder;
-        this.breakoutputOrder = breakoutputOrder;
     }
 
     /**
@@ -102,8 +106,6 @@ public class JukyushaIdoCheckListEditor implements IJukyushaIdoCheckListEditor {
     private void edit出力順改頁(JukyushaIdoCheckListReportSource source) {
         if (iOutputOrder != null) {
             setiOutputOrder(source);
-        }
-        if (breakoutputOrder != null) {
             setBreakIoutputOrder(source);
         }
     }
@@ -159,24 +161,44 @@ public class JukyushaIdoCheckListEditor implements IJukyushaIdoCheckListEditor {
     }
 
     private void setBreakIoutputOrder(JukyushaIdoCheckListReportSource source) {
-
-        Map<Integer, ISetSortItem> 改頁Map = ChohyoUtil.get改頁項目Map(breakoutputOrder);
-        if (改頁Map.get(LISTINDEX_1) != null) {
-            source.kaipage1 = 改頁Map.get(LISTINDEX_1).get項目名();
+        int index = 0;
+        List<RString> 改頁list = new ArrayList<>();
+        List<ISetSortItem> list = iOutputOrder.get設定項目リスト();
+        if (list == null) {
+            list = new ArrayList<>();
         }
-        if (改頁Map.get(LISTINDEX_2) != null) {
-            source.kaipage2 = 改頁Map.get(LISTINDEX_2).get項目名();
+        if (list.size() > LISTINDEX_0 && list.get(LISTINDEX_0).is改頁項目()) {
+            改頁１ = list.get(0).get項目名();
+            改頁list.add(改頁１);
+            index++;
         }
-        if (改頁Map.get(LISTINDEX_3) != null) {
-            source.kaipage3 = 改頁Map.get(LISTINDEX_3).get項目名();
+        if (list.size() > LISTINDEX_1 && list.get(LISTINDEX_1).is改頁項目()) {
+            改頁２ = list.get(LISTINDEX_1).get項目名();
+            改頁list.add(改頁２);
+            index++;
         }
-        if (改頁Map.get(LISTINDEX_4) != null) {
-            source.kaipage4 = 改頁Map.get(LISTINDEX_4).get項目名();
+        if (list.size() > LISTINDEX_2 && list.get(LISTINDEX_2).is改頁項目()) {
+            改頁３ = list.get(LISTINDEX_2).get項目名();
+            改頁list.add(改頁３);
+            index++;
         }
-        if (改頁Map.get(LISTINDEX_5) != null) {
-            source.kaipage5 = 改頁Map.get(LISTINDEX_5).get項目名();
+        if (list.size() > LISTINDEX_3 && list.get(LISTINDEX_3).is改頁項目()) {
+            改頁４ = list.get(LISTINDEX_3).get項目名();
+            改頁list.add(改頁４);
+            index++;
         }
-
+        if (list.size() > LISTINDEX_4 && list.get(LISTINDEX_4).is改頁項目()) {
+            改頁５ = list.get(LISTINDEX_4).get項目名();
+            改頁list.add(改頁５);
+            index++;
+        }
+        for (int i = index; i < 5; i++) {
+            改頁list.add(RString.EMPTY);
+        }
+        source.kaipage1 = 改頁list.get(LISTINDEX_0);
+        source.kaipage2 = 改頁list.get(LISTINDEX_1);
+        source.kaipage3 = 改頁list.get(LISTINDEX_2);
+        source.kaipage4 = 改頁list.get(LISTINDEX_3);
+        source.kaipage5 = 改頁list.get(LISTINDEX_4);
     }
-
 }

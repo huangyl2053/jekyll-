@@ -70,18 +70,29 @@ public class GassanKyufujissekiSofuIchiranEditor implements
         source.kaipage5 = get改頁(NUM_4);
 
         source.list_1 = new RString(entity.get連番());
-        source.list_2 = entity.get帳票用データ().get給付実績_被保険者番号().value();
+        if (entity.get帳票用データ().get給付実績_被保険者番号() != null) {
+            source.list_2 = entity.get帳票用データ().get給付実績_被保険者番号().value();
+        }
+
         source.list_3 = entity.get帳票用データ().get宛名名称();
         source.list_4 = entity.get帳票用データ().get支給申請書整理番号();
         source.list_5 = entity.get帳票用データ().get自己負担額証明書整理番号();
         source.list_6 = KaigoGassan_KyufuJissekiSakuseiKubun.toValue(entity.get帳票用データ().get給付実績作成区分コード()).get名称();
-        source.list_7 = entity.get帳票用データ().get給付実績_証記載保険者番号().value();
+
+        if (entity.get帳票用データ().get給付実績_証記載保険者番号() != null) {
+            source.list_7 = entity.get帳票用データ().get給付実績_証記載保険者番号().value();
+        }
+
         source.list_8 = entity.get帳票用データ().get申請年月日().wareki().
                 eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
-        source.list_9 = entity.get帳票用データ().get決定年月日().wareki().
-                eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+
+        if (entity.get帳票用データ().get決定年月日() != null) {
+            source.list_9 = entity.get帳票用データ().get決定年月日().wareki().
+                    eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
+                    separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+        }
+
         if (entity.get帳票用データ().get自己負担総額() != null) {
             source.list_10 = DecimalFormatter.toコンマ区切りRString(entity.get帳票用データ().get自己負担総額(), 0);
         }

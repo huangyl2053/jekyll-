@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc160020;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.report.dbc200061.ServiceCodeIchiranParameter;
 import jp.co.ndensan.reams.db.dbc.business.report.dbc200061.ServiceCodeIchiranReport;
@@ -132,6 +134,15 @@ public class ServicecodeIchiranProcess extends BatchProcessBase<ServicecodeIchir
             taniEntity.set名称(単位数識別コード.getコード名称());
             taniList.add(taniEntity);
         }
+        if (!taniList.isEmpty()) {
+            Comparator<TaniSuShikibetsuEntity> comparator = new Comparator<TaniSuShikibetsuEntity>() {
+                @Override
+                public int compare(TaniSuShikibetsuEntity s1, TaniSuShikibetsuEntity s2) {
+                    return s1.getコード().compareTo(s2.getコード());
+                }
+            };
+            Collections.sort(taniList, comparator);
+        }
         List<UzT0007CodeEntity> サービス分類略称Entity = CodeMaster.getCode(SubGyomuCode.DBC介護給付,
                 DBCCodeShubetsu.サービス分類.getコード(), FlexibleDate.getNowDate());
         serviceList = new ArrayList<>();
@@ -144,6 +155,15 @@ public class ServicecodeIchiranProcess extends BatchProcessBase<ServicecodeIchir
             }
             serviceEntity.set略称(サービス分類略称.getコード略称());
             serviceList.add(serviceEntity);
+        }
+        if (!serviceList.isEmpty()) {
+            Comparator<ServiceBunruiEntity> comparator = new Comparator<ServiceBunruiEntity>() {
+                @Override
+                public int compare(ServiceBunruiEntity s1, ServiceBunruiEntity s2) {
+                    return s1.getコード().compareTo(s2.getコード());
+                }
+            };
+            Collections.sort(serviceList, comparator);
         }
         spoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID,
                 UzUDE0831EucAccesslogFileType.Csv);

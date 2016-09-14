@@ -318,6 +318,7 @@ public enum KogakuGassanShikyuShinseiTorokuSpec implements IPredicate<KogakuGass
         private static final RString DATE_0731 = new RString("0731");
         private static final RString DATE_0801 = new RString("0801");
         private static final RString RSTRING_39 = new RString("39");
+        private static final RString 追加 = new RString("追加");
 
         public static boolean is老人所得区分必須入力チェック(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
             KogakuGassanShinseishoHoji 高額合算申請書保持
@@ -554,6 +555,10 @@ public enum KogakuGassanShikyuShinseiTorokuSpec implements IPredicate<KogakuGass
         }
 
         public static boolean is自己負担額証明書整理番号既に存在チェック(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            RString 加入歴状態 = ViewStateHolder.get(ViewStateKeys.加入歴状態, RString.class);
+            if (!追加.equals(加入歴状態)) {
+                return true;
+            }
             RString 証明書整理番号 = div.getTxtJikoFutangakuShomeishoSeiriBango().getText();
             List<dgKanyuRirekiIchiran_Row> rowList = div.getDgKanyuRirekiIchiran().getDataSource();
             if (rowList == null || rowList.isEmpty()) {
