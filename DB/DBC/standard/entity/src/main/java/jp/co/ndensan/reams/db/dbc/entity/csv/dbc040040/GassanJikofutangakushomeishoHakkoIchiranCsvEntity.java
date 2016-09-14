@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 自己負担証明書作成（括）のCsvEntityクラスです。
  *
- * reamsid_L DBC-2380-030 pengxingyi
+ * @reamsid_L DBC-2380-030 pengxingyi
  */
 @lombok.Getter
 @lombok.Setter
