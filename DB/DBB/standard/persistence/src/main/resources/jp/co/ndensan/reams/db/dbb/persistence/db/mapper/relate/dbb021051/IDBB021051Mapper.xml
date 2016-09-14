@@ -42,14 +42,14 @@
 	AND		"ShikibetsuTaisho"."juminJotaiCode"　IN　
                         <if test="資格区分.toString()=='1' || 資格区分.toString()=='2' || 資格区分.toString()=='3'|| 資格区分.toString()=='4' || 資格区分.toString()=='5'  " >(1)</if>
                         <if test="資格区分.toString()=='6'|| 資格区分.toString()=='7' " >(1,2)</if>													
-                    <if test="抽出対象者.toString=='1' ">
+                    <if test="抽出対象者.toString()=='1' ">
                     AND		<include refid="WK_判定徴収方法" />　＝　3
                     </if>	
-                    <if test="抽出対象者.toString=='2' ">
+                    <if test="抽出対象者.toString()=='2' ">
                     AND		(<include refid="WK_判定徴収方法" />　＝　1
                     OR		<include refid="WK_判定徴収方法" />　 ＝　2)
                     </if>     				
-                    <if test="抽出対象者.toString=='3' ">																
+                    <if test="抽出対象者.toString()=='3' ">																
                     AND		(<include refid="WK_判定徴収方法" />  ＝    1
                     OR		<include refid="WK_判定徴収方法" />　＝　2
                     OR		<include refid="WK_判定徴収方法" />　＝　3)

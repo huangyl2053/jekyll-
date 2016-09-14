@@ -233,14 +233,17 @@ public class DBB021051DataUtil {
      * @param parameter DBB021051ProcessParameter
      */
     public void intProcessParameter(KoikiZenShichosonJoho koikiZenShichosonJoho, DBB021051ProcessParameter parameter) {
-        if (koikiZenShichosonJoho == null || parameter == null) {
+        if (parameter == null) {
+            return;
+        }
+        parameter.set市町村指定に市町村コード(get市町村指定に市町村コード(parameter.get市町村指定()));
+        parameter.set市町村指定に市町村名称(get市町村指定に市町村名称(parameter.get市町村指定()));
+        if (koikiZenShichosonJoho == null) {
             return;
         }
         parameter.set市町村名称(koikiZenShichosonJoho.get市町村名称());
         parameter.set都道府県名称(koikiZenShichosonJoho.get都道府県名称());
         parameter.set郡名称(koikiZenShichosonJoho.get郡名称());
-        parameter.set市町村指定に市町村コード(get市町村指定に市町村コード(parameter.get市町村指定()));
-        parameter.set市町村指定に市町村名称(get市町村指定に市町村名称(parameter.get市町村指定()));
     }
 
     /**
