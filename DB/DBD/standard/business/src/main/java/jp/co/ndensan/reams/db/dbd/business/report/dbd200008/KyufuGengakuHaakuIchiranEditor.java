@@ -667,10 +667,10 @@ public class KyufuGengakuHaakuIchiranEditor implements IKyufuGengakuHaakuIchiran
         }
         source.hokenryogakuGokei1 = DecimalFormatter.toコンマ区切りRString(保険料額合計1, 0);
         source.tainogakuGokei1 = DecimalFormatter.toコンマ区切りRString(滞納額合計1, 0);
-        source.SoGokei1 = DecimalFormatter.toコンマ区切りRString(総合計1, 0);
+        source.soGokei1 = DecimalFormatter.toコンマ区切りRString(総合計1, 0);
         source.hokenryogakuGokei2 = DecimalFormatter.toコンマ区切りRString(保険料額合計2, 0);
         source.tainogakuGokei2 = DecimalFormatter.toコンマ区切りRString(滞納額合計2, 0);
-        source.SoGokei2 = DecimalFormatter.toコンマ区切りRString(総合計2, 0);
+        source.soGokei2 = DecimalFormatter.toコンマ区切りRString(総合計2, 0);
     }
 
     private void get合計2(KyufuGengakuHaakuIchiranReportSource source) {
@@ -720,10 +720,10 @@ public class KyufuGengakuHaakuIchiranEditor implements IKyufuGengakuHaakuIchiran
         }
         source.hokenryogakuGokei3 = DecimalFormatter.toコンマ区切りRString(保険料額合計3, 0);
         source.tainogakuGokei3 = DecimalFormatter.toコンマ区切りRString(滞納額合計3, 0);
-        source.SoGokei3 = DecimalFormatter.toコンマ区切りRString(総合計3, 0);
+        source.soGokei3 = DecimalFormatter.toコンマ区切りRString(総合計3, 0);
         source.hokenryogakuGokei4 = DecimalFormatter.toコンマ区切りRString(保険料額合計4, 0);
         source.tainogakuGokei4 = DecimalFormatter.toコンマ区切りRString(滞納額合計4, 0);
-        source.SoGokei4 = DecimalFormatter.toコンマ区切りRString(総合計4, 0);
+        source.soGokei4 = DecimalFormatter.toコンマ区切りRString(総合計4, 0);
     }
 
     private void get合計3(KyufuGengakuHaakuIchiranReportSource source) {
@@ -773,10 +773,10 @@ public class KyufuGengakuHaakuIchiranEditor implements IKyufuGengakuHaakuIchiran
         }
         source.hokenryogakuGokei5 = DecimalFormatter.toコンマ区切りRString(保険料額合計5, 0);
         source.tainogakuGokei5 = DecimalFormatter.toコンマ区切りRString(滞納額合計5, 0);
-        source.SoGokei5 = DecimalFormatter.toコンマ区切りRString(総合計5, 0);
+        source.soGokei5 = DecimalFormatter.toコンマ区切りRString(総合計5, 0);
         source.hokenryogakuGokei6 = DecimalFormatter.toコンマ区切りRString(保険料額合計6, 0);
         source.tainogakuGokei6 = DecimalFormatter.toコンマ区切りRString(滞納額合計6, 0);
-        source.SoGokei6 = DecimalFormatter.toコンマ区切りRString(総合計6, 0);
+        source.soGokei6 = DecimalFormatter.toコンマ区切りRString(総合計6, 0);
     }
 
     private void get合計4(KyufuGengakuHaakuIchiranReportSource source) {
@@ -826,10 +826,10 @@ public class KyufuGengakuHaakuIchiranEditor implements IKyufuGengakuHaakuIchiran
         }
         source.hokenryogakuGokei7 = DecimalFormatter.toコンマ区切りRString(保険料額合計7, 0);
         source.tainogakuGokei7 = DecimalFormatter.toコンマ区切りRString(滞納額合計7, 0);
-        source.SoGokei7 = DecimalFormatter.toコンマ区切りRString(総合計7, 0);
+        source.soGokei7 = DecimalFormatter.toコンマ区切りRString(総合計7, 0);
         source.hokenryogakuGokei8 = DecimalFormatter.toコンマ区切りRString(保険料額合計8, 0);
         source.tainogakuGokei8 = DecimalFormatter.toコンマ区切りRString(滞納額合計8, 0);
-        source.SoGokei8 = DecimalFormatter.toコンマ区切りRString(総合計8, 0);
+        source.soGokei8 = DecimalFormatter.toコンマ区切りRString(総合計8, 0);
     }
 
     private void get合計5(KyufuGengakuHaakuIchiranReportSource source) {
@@ -879,10 +879,10 @@ public class KyufuGengakuHaakuIchiranEditor implements IKyufuGengakuHaakuIchiran
         }
         source.hokenryogakuGokei9 = DecimalFormatter.toコンマ区切りRString(保険料額合計9, 0);
         source.tainogakuGokei9 = DecimalFormatter.toコンマ区切りRString(滞納額合計9, 0);
-        source.SoGokei9 = DecimalFormatter.toコンマ区切りRString(総合計9, 0);
+        source.soGokei9 = DecimalFormatter.toコンマ区切りRString(総合計9, 0);
         source.hokenryogakuGokei10 = DecimalFormatter.toコンマ区切りRString(保険料額合計10, 0);
         source.tainogakuGokei10 = DecimalFormatter.toコンマ区切りRString(滞納額合計10, 0);
-        source.SoGokei10 = DecimalFormatter.toコンマ区切りRString(総合計10, 0);
+        source.soGokei10 = DecimalFormatter.toコンマ区切りRString(総合計10, 0);
     }
 
     private void get収納情報なし1(KyufuGengakuHaakuIchiranReportSource source, List<ShunoJohoEntity> 収納情報リスト) {
