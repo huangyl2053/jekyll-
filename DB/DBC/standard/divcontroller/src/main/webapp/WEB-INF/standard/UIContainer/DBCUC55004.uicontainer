@@ -1,27 +1,27 @@
 ﻿{
- "uiContainerName": "DBCUC55003",
+ "uiContainerName": "DBCUC55004",
  "displayWizard": false,
  "subGyomuCode": "DBC",
  "steps": [
   {
    "id": 1,
-   "name": "基準収入額適用申請書年次分",
+   "name": "基準収入額適用申請書異動分",
    "transitionList": [
     {
      "id": "1",
      "type": "start",
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",
-     "toLayoutName": "DBC1000064",
-     "toLayoutTitle": "基準収入額適用申請書発行（年次）",
+     "toLayoutName": "DBC1000065",
+     "toLayoutTitle": "基準収入額適用申請書発行（異動）",
      "toState": "shoki"
     },
     {
      "id": "2",
      "type": "end",
      "layoutSubGyomuCode": "DBC",
-     "layoutName": "DBC1000064",
-     "layoutTitle": "基準収入額適用申請書発行（年次）",
+     "layoutName": "DBC1000065",
+     "layoutTitle": "基準収入額適用申請書発行（異動）",
      "eventName": "完了",
      "destroy": false,
      "condition": ""
@@ -30,8 +30,8 @@
      "id": "3",
      "type": "ordinal",
      "layoutSubGyomuCode": "DBC",
-     "layoutName": "DBC1000064",
-     "layoutTitle": "基準収入額適用申請書発行（年次）",
+     "layoutName": "DBC1000065",
+     "layoutTitle": "基準収入額適用申請書発行（異動）",
      "eventName": "対象者検索",
      "destroy": false,
      "condition": "",
@@ -50,8 +50,8 @@
      "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",
-     "toLayoutName": "DBC1000064",
-     "toLayoutTitle": "基準収入額適用申請書発行（年次）",
+     "toLayoutName": "DBC1000065",
+     "toLayoutTitle": "基準収入額適用申請書発行（異動）",
      "toState": ""
     }
    ]
