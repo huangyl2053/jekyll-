@@ -80,7 +80,9 @@ public class JikoFutangakushomeishoTo2008OutputProcess extends BatchKeyBreakBase
     protected void initialize() {
         mapper = getMapper(IJikofutanShomeishoMapper.class);
         DbT7069KaigoToiawasesakiEntity toiawasesakiEntity = mapper.select問合せ先();
-        問合せ先情報 = get問合せ先情報(toiawasesakiEntity);
+        if (toiawasesakiEntity != null) {
+            問合せ先情報 = get問合せ先情報(toiawasesakiEntity);
+        }
         明細List = get明細List();
         INinshoshaManager ninshoshaManager = NinshoshaFinderFactory.createInstance();
         認証者情報 = ninshoshaManager.get帳票認証者(GyomuCode.DB介護保険, 保険者印_0001);
@@ -208,7 +210,7 @@ public class JikoFutangakushomeishoTo2008OutputProcess extends BatchKeyBreakBase
             source.yubinBango = yubinNo.getEditedYubinNo();
         }
         RString choshaName = toiawasesakiEntity.getChoshaName();
-        if (!RString.isNullOrEmpty(choshaName)) {
+        if (choshaName != null && !RString.isNullOrEmpty(choshaName)) {
             source.choshaBushoName = choshaName.concat(RString.FULL_SPACE).concat(toiawasesakiEntity.getBushoName());
         }
         source.shozaichi = toiawasesakiEntity.getShozaichi();
