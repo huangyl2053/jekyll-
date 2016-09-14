@@ -79,8 +79,7 @@ public class KyufuJohoFinder {
     @Transaction
     public DbT7063KaigoJigyoshaShiteiServiceEntity get事業者名称(RString 計画事業所番号, RString サービス種類コード) {
 
-        DbT7063KaigoJigyoshaShiteiServiceEntity kaigojigyoshashitei = dbt7063.get事業者名称(計画事業所番号, サービス種類コード);
-        return kaigojigyoshashitei;
+        return dbt7063.get事業者名称(計画事業所番号, サービス種類コード);
     }
 
     /**
