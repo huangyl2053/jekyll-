@@ -55,7 +55,6 @@ public class KogakugassanKyufujissekiCreateSofuFileProcess extends BatchProcessB
     private static final RString PREFIX = new RString("10_");
     private static final RString FILE_TYPE = new RString(".csv");
     private static final RString カンマ = new RString(",");
-    private static final RString ダブル引用符 = new RString("\"");
     private static final RString 変換区分_1 = new RString("1");
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;

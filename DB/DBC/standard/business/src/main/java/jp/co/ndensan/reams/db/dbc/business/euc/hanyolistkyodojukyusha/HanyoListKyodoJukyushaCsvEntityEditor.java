@@ -220,12 +220,12 @@ public class HanyoListKyodoJukyushaCsvEntityEditor {
         csvEntity.set異動年月日(format日付項目(entity.get共同処理用受給者異動基本送付().getIdoYMD()));
         if (entity.get共同処理用受給者異動基本送付() != null) {
             if (RString.isNullOrEmpty(entity.get共同処理用受給者異動基本送付().getIdoKubunCode())) {
-                csvEntity.set異動区分(entity.get共同処理用受給者異動基本送付().getIdoKubunCode());
+                csvEntity.set異動区分(JukyushaIF_IdoKubunCode.toValue(entity.get共同処理用受給者異動基本送付().getIdoKubunCode()).get名称());
             } else {
                 csvEntity.set異動区分(RString.EMPTY);
             }
         }
-        csvEntity.set異動事由(entity.get共同処理用受給者異動基本送付().getJukyushaIdoJiyu());
+        csvEntity.set異動事由(JukyushaIF_JukyushaIdoJiyu.toValue(entity.get共同処理用受給者異動基本送付().getJukyushaIdoJiyu()).get名称());
         csvEntity.set給付_証記載保険者番号(entity.get共同処理用受給者異動基本送付().getShoKisaiHokenshaNo().getColumnValue());
         csvEntity.set被保険者氏名漢字(entity.get共同処理用受給者異動基本送付().getHiHokenshaName());
         YubinNo 郵便番号 = entity.get共同処理用受給者異動基本送付().getYubinNo();
@@ -236,7 +236,7 @@ public class HanyoListKyodoJukyushaCsvEntityEditor {
         csvEntity.set送付住所(entity.get共同処理用受給者異動基本送付().getAddress());
         TelNo 電話番号 = entity.get共同処理用受給者異動基本送付().getTelNo();
         if (TelNo.EMPTY != 電話番号 && 電話番号 != null) {
-            csvEntity.set送付郵便番号(電話番号.getColumnValue());
+            csvEntity.set電話番号(電話番号.getColumnValue());
         }
         csvEntity.set帳票出力順序コード(entity.get共同処理用受給者異動基本送付().getChohyoOutputJunjyoCode());
         return csvEntity;
