@@ -54,35 +54,13 @@ public class ShinsaHanteiIraiIchiranhyoEditor implements IShinsaHanteiIraiIchira
         source.title = DbBusinessConfig.get(
                 ConfigNameDBD.要介護認定_要支援認定審査判定依頼一覧表, RDate.getNowDate(), SubGyomuCode.DBD介護受給);
         if (null != this.帳票出力用申請情報Entityリスト) {
-            if (null != this.帳票出力用申請情報Entityリスト.get保険者名称()) {
-                source.cityName = this.帳票出力用申請情報Entityリスト.get保険者名称();
-            }
-            if (null != this.帳票出力用申請情報Entityリスト.get証記載保険者番号()) {
-                source.hokenshaNo = this.帳票出力用申請情報Entityリスト.get証記載保険者番号().value();
-            }
-            source.listIraiichiranhyo1_1 = new RString(String.valueOf(this.帳票出力用申請情報Entityリスト.getIndex()));
-            if (null != this.帳票出力用申請情報Entityリスト.get被保険者番号()) {
-                source.listIraiichiranhyo1_2 = this.帳票出力用申請情報Entityリスト.get被保険者番号().value();
-            }
-            if (null != this.帳票出力用申請情報Entityリスト.get被保険者氏名()) {
-                source.listIraiichiranhyo3_1 = this.帳票出力用申請情報Entityリスト.get被保険者氏名().value();
-            }
-            if (null != this.帳票出力用申請情報Entityリスト.get被保険者氏名カナ()) {
-                source.listIraiichiranhyo3_2 = this.帳票出力用申請情報Entityリスト.get被保険者氏名カナ().value();
-            }
-            if (null != this.帳票出力用申請情報Entityリスト.get住所()) {
-                source.listIraiichiranhyo3_3 = this.帳票出力用申請情報Entityリスト.get住所().value();
-            }
-            if (null != this.帳票出力用申請情報Entityリスト.get生年月日()) {
-                source.listIraiichiranhyo2_1 = this.帳票出力用申請情報Entityリスト.get生年月日().wareki().toDateString();
-            }
+            get帳票出力用申請情報Entity(source);
             RString 性別 = this.帳票出力用申請情報Entityリスト.get性別();
             RString 性別名称 = RString.EMPTY;
             if (null != 性別 && !性別.isEmpty()) {
                 性別名称 = Seibetsu.toValue(性別).get名称();
             }
             source.listIraiichiranhyo2_2 = 性別名称;
-
             RString 認定申請区分_申請時コード = this.帳票出力用申請情報Entityリスト.get認定申請区分_申請時コード().value();
             RString 認定申請区分_申請時名称 = RString.EMPTY;
             if (null != 認定申請区分_申請時コード && !認定申請区分_申請時コード.isEmpty()) {
@@ -90,28 +68,12 @@ public class ShinsaHanteiIraiIchiranhyoEditor implements IShinsaHanteiIraiIchira
                         NinteiShinseiKubunShinsei.toValue(Integer.parseInt(認定申請区分_申請時コード.toString())).name());
             }
             source.listIraiichiranhyo2_3 = 認定申請区分_申請時名称;
-
             RString 被保険者区分コード = this.帳票出力用申請情報Entityリスト.get被保険者区分コード();
             RString 被保険者区分名称 = RString.EMPTY;
             if (null != 被保険者区分コード && !被保険者区分コード.isEmpty()) {
                 被保険者区分名称 = HihokenshaKubunCode.toValue(被保険者区分コード).get名称();
             }
             source.listIraiichiranhyo2_4 = 被保険者区分名称;
-            if (null != this.帳票出力用申請情報Entityリスト.get認定申請年月日()) {
-                source.listIraiichiranhyo2_5 = this.帳票出力用申請情報Entityリスト.get認定申請年月日().wareki().toDateString();
-            }
-            if (null != this.帳票出力用申請情報Entityリスト.get前回要介護状態区分コード()) {
-                source.listIraiichiranhyo2_6 = this.帳票出力用申請情報Entityリスト.get前回要介護状態区分コード().value();
-            }
-            if (null != this.帳票出力用申請情報Entityリスト.get前回認定有効期間開始()) {
-                source.listIraiichiranhyo2_7 = this.帳票出力用申請情報Entityリスト.get前回認定有効期間開始().wareki().toDateString();
-            }
-            if (null != this.帳票出力用申請情報Entityリスト.get前回認定有効期間終了()) {
-                source.listIraiichiranhyo2_8 = this.帳票出力用申請情報Entityリスト.get前回認定有効期間終了().wareki().toDateString();
-            }
-            if (null != this.帳票出力用申請情報Entityリスト.get出力CSV状況申請()) {
-                source.listIraiichiranhyo2_9 = this.帳票出力用申請情報Entityリスト.get出力CSV状況申請();
-            }
         }
         source.reportId = 帳票ID;
     }
@@ -123,6 +85,46 @@ public class ShinsaHanteiIraiIchiranhyoEditor implements IShinsaHanteiIraiIchira
                 separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
         RString 時分秒 = システム日時.toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
         return 年月日.concat(時分秒);
+    }
+
+    private void get帳票出力用申請情報Entity(ShinsaHanteiIraiIchiranhyoReportSource source) {
+        if (null != this.帳票出力用申請情報Entityリスト.get保険者名称()) {
+            source.cityName = this.帳票出力用申請情報Entityリスト.get保険者名称();
+        }
+        if (null != this.帳票出力用申請情報Entityリスト.get証記載保険者番号()) {
+            source.hokenshaNo = this.帳票出力用申請情報Entityリスト.get証記載保険者番号().value();
+        }
+        source.listIraiichiranhyo1_1 = new RString(String.valueOf(this.帳票出力用申請情報Entityリスト.getIndex()));
+        if (null != this.帳票出力用申請情報Entityリスト.get被保険者番号()) {
+            source.listIraiichiranhyo1_2 = this.帳票出力用申請情報Entityリスト.get被保険者番号().value();
+        }
+        if (null != this.帳票出力用申請情報Entityリスト.get被保険者氏名()) {
+            source.listIraiichiranhyo3_1 = this.帳票出力用申請情報Entityリスト.get被保険者氏名().value();
+        }
+        if (null != this.帳票出力用申請情報Entityリスト.get被保険者氏名カナ()) {
+            source.listIraiichiranhyo3_2 = this.帳票出力用申請情報Entityリスト.get被保険者氏名カナ().value();
+        }
+        if (null != this.帳票出力用申請情報Entityリスト.get住所()) {
+            source.listIraiichiranhyo3_3 = this.帳票出力用申請情報Entityリスト.get住所().value();
+        }
+        if (null != this.帳票出力用申請情報Entityリスト.get生年月日()) {
+            source.listIraiichiranhyo2_1 = this.帳票出力用申請情報Entityリスト.get生年月日().wareki().toDateString();
+        }
+        if (null != this.帳票出力用申請情報Entityリスト.get認定申請年月日()) {
+            source.listIraiichiranhyo2_5 = this.帳票出力用申請情報Entityリスト.get認定申請年月日().wareki().toDateString();
+        }
+        if (null != this.帳票出力用申請情報Entityリスト.get前回要介護状態区分コード()) {
+            source.listIraiichiranhyo2_6 = this.帳票出力用申請情報Entityリスト.get前回要介護状態区分コード().value();
+        }
+        if (null != this.帳票出力用申請情報Entityリスト.get前回認定有効期間開始()) {
+            source.listIraiichiranhyo2_7 = this.帳票出力用申請情報Entityリスト.get前回認定有効期間開始().wareki().toDateString();
+        }
+        if (null != this.帳票出力用申請情報Entityリスト.get前回認定有効期間終了()) {
+            source.listIraiichiranhyo2_8 = this.帳票出力用申請情報Entityリスト.get前回認定有効期間終了().wareki().toDateString();
+        }
+        if (null != this.帳票出力用申請情報Entityリスト.get出力CSV状況申請()) {
+            source.listIraiichiranhyo2_9 = this.帳票出力用申請情報Entityリスト.get出力CSV状況申請();
+        }
     }
 
 }

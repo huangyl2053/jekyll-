@@ -657,16 +657,15 @@ public class KogakuServicehiKetteiTsuchishoTan {
         } else if (定値_0.equals(マスクフラグ)) {
             口座 = iKozaManager.get口座(searchKey).isEmpty() ? null : iKozaManager.get口座(searchKey).get(0);
         }
+        決定通知書Entity.set種目ﾀｲﾄﾙ(定値_口座種別);
+        決定通知書Entity.set番号ﾀｲﾄﾙ(定値_口座番号);
         if (口座 != null) {
             決定通知書Entity.set金融機関名(口座.get金融機関() == null ? RString.EMPTY : 口座.get金融機関().get金融機関名称());
             決定通知書Entity.set金融機関支店名(口座.get支店() == null ? RString.EMPTY : 口座.get支店().get支店名称());
             if (口座.get金融機関コード() != null && RSTRING_9900.equals(口座.get金融機関コード().value().substring(1, NUM_4))) {
                 決定通知書Entity.set種目ﾀｲﾄﾙ(定値_店番);
-            } else {
-                決定通知書Entity.set種目ﾀｲﾄﾙ(定値_口座種別);
             }
             決定通知書Entity.set口座種別(口座.get預金種別() == null ? RString.EMPTY : 口座.get預金種別().get預金種別略称());
-            決定通知書Entity.set番号ﾀｲﾄﾙ(定値_口座番号);
             決定通知書Entity.set口座番号(口座.get口座番号());
             決定通知書Entity.set口座名義人(口座.get口座名義人() == null ? RString.EMPTY : 口座.get口座名義人().getColumnValue());
             ChohyoSeigyoHanyo 支払予定日印字有無 = load帳票制御汎用(帳票分類ID, new RString("支払予定日印字有無"));

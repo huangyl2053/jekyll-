@@ -2,7 +2,6 @@ package jp.co.ndensan.reams.db.dbb.entity.db.relate.dbb021051;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
@@ -34,7 +33,7 @@ public class DBB021051TableJohoTempEntity
     private AtenaMeisho 氏名;
     private RString wk管内管外区分;
     private YubinNo 郵便番号;
-    private AtenaJusho 住所;
+    private RString 住所;
     private RString バーコード住所;
     private AtenaBanchi 番地;
     private Katagaki 方書;
@@ -55,5 +54,6 @@ public class DBB021051TableJohoTempEntity
     private RString 住民状態コード;
     private RString 現全国地方公共団体コード;
     private FlexibleDate 生年月日;
-
+    private AtenaMeisho 宛名氏名;
+    private Katagaki 宛名方書;
 }

@@ -20,8 +20,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
 @lombok.Setter
-public class KaigoChoshuHohoJohoEntity
-        extends DbTableEntityBase<KaigoChoshuHohoJohoEntity> implements IDbAccessable {
+public class AtenaSealJohoEntity
+        extends DbTableEntityBase<AtenaSealJohoEntity> implements IDbAccessable {
 
     private HihokenshaNo 被保険者番号;
     private List<UaFt200FindShikibetsuTaishoEntity> 宛名識別対象PSM;

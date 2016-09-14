@@ -16,11 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
 @lombok.Setter
-public class ShoriKekkaKakuninListCSVEntity {
+public class DBB021051ShoriKekkaKakuninListCSVEntity {
 
-    private final RString eucエンティティID = new RString("DBZ000001");
-    private final RString eucファイル名 = new RString("ShoriKekkaKakuninList.csv");
-    private final RString eucファイル表示名称 = new RString("処理結果確認リスト");
     @CsvField(order = 1, name = "作成日時")
     private RString 作成日時;
     @CsvField(order = 2, name = "処理名")
@@ -33,19 +30,8 @@ public class ShoriKekkaKakuninListCSVEntity {
     private RString 被保険者カナ氏名;
     @CsvField(order = 6, name = "被保険者氏名")
     private RString 被保険者氏名;
-    @CsvField(order = 7, name = "キー1")
-    private RString キー1;
-    @CsvField(order = 8, name = "キー2")
-    private RString キー2;
-    @CsvField(order = 9, name = "キー3")
-    private RString キー3;
-    @CsvField(order = 10, name = "キー4")
-    private RString キー4;
-    @CsvField(order = 11, name = "キー5")
-    private RString キー5;
-    @CsvField(order = 12, name = "エラー内容")
+    @CsvField(order = 7, name = "エラー内容")
     private RString エラー内容;
-    @CsvField(order = 13, name = "備考")
+    @CsvField(order = 8, name = "備考")
     private RString 備考;
-
 }
