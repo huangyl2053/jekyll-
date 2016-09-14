@@ -433,8 +433,8 @@ public class JigyoJokyoHokokuNempoSakuei {
 
     private List<ShoriDateKanri> get処理日付管理情報(SubGyomuCode サブ業務コード, RString 処理名, FlexibleYear 年度, int 集計開始月, int 集計終了月) {
         List<ShoriDateKanri> 処理日付管理情報 = new ArrayList<>();
-        RStringBuilder builder = new RStringBuilder();
         for (int i = 集計開始月; i <= 集計終了月; i++) {
+            RStringBuilder builder = new RStringBuilder();
             builder.append(new RString("00"))
                     .append(new RString(i).padZeroToLeft(INT_NI));
             ShoriDateKanri 処理日付管理 = ShoriDateKanriManager.createInstance().get処理日付管理マスタ(サブ業務コード,

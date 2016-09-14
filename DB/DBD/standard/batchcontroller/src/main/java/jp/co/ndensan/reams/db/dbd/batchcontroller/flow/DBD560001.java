@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd560001.NinteidetaikkatsukousinKoukiProcess;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd560001.NinteidetaikkatsukousinTanitsuProcess;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd560001.DBD560001Parameter;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD560001.NinteidetaikkatsukousinKoukiProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD560001.NinteidetaikkatsukousinTanitsuProcess;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD560001.DBD560001Parameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;

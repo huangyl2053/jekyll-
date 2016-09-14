@@ -155,7 +155,7 @@
             LEFT JOIN
                 rgdb."DbT2015KeisangoJoho" AS 計算前情報
             ON 
-                計算後情報."shikibetsuCode" = 計算前情報."shikibetsuCode"
+                計算後情報."tsuchishoNo" = 計算前情報."tsuchishoNo"
             AND 計算前情報."koseiZengoKubun" = '1'
             WHERE
                 計算後情報."choteiNendo" = #{調定年度}

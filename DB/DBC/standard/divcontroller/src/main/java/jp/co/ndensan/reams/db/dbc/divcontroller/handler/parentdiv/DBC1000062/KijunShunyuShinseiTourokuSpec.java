@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1000062;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.core.santeikijungaku.SanteiKijungaku;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000062.KijunShunyuShinseiTourokuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000062.dgMeisai_Row;
 import jp.co.ndensan.reams.db.dbc.service.core.kijunshunyugaku.KijunShunyuShinseiTourokuManager;
@@ -21,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -127,7 +129,19 @@ public enum KijunShunyuShinseiTourokuSpec implements IPredicate<KijunShunyuShins
     算定基準額のチェック {
                 @Override
                 public boolean apply(KijunShunyuShinseiTourokuDiv div) {
-                    return SpecHelper.is算定基準額のチェック(div);
+                    List<dgMeisai_Row> rowList = div.getMeisai().getDgMeisai().getDataSource();
+                    Decimal 二人以上で総収入金額 = Decimal.ZERO;
+                    Decimal 公的年金;
+                    Decimal 給与;
+                    Decimal 以外の収入;
+                    for (dgMeisai_Row row : rowList) {
+                        公的年金 = row.getKotekiNenkin().getValue() == null ? Decimal.ZERO : row.getKotekiNenkin().getValue();
+                        給与 = row.getKyuyo().getValue() == null ? Decimal.ZERO : row.getKyuyo().getValue();
+                        以外の収入 = row.getOtherIncome().getValue() == null ? Decimal.ZERO : row.getOtherIncome().getValue();
+                        二人以上で総収入金額 = 二人以上で総収入金額.add(公的年金).add(給与).add(以外の収入);
+                    }
+
+                    return SpecHelper.is算定基準額のチェック(div, rowList, 二人以上で総収入金額);
                 }
             },
     /**
@@ -162,6 +176,10 @@ public enum KijunShunyuShinseiTourokuSpec implements IPredicate<KijunShunyuShins
         private static final RString 月_07 = new RString("07");
         private static final RString 世帯再算出フラグ_0 = new RString("0");
         private static final RString 世帯再算出フラグ_1 = new RString("1");
+        private static final RString 歳以上_65 = new RString("65");
+        private static final Decimal 円_145万 = new Decimal("1450000");
+        private static final Decimal 円_383万 = new Decimal("3830000");
+        private static final Decimal 円_520万 = new Decimal("5200000");
 
         public static boolean is適用データチェック(KijunShunyuShinseiTourokuDiv div) {
             FlexibleDate 適用開始 = div.getMeisai().getTxtTekiyoStartYM().getValue();
@@ -202,17 +220,15 @@ public enum KijunShunyuShinseiTourokuSpec implements IPredicate<KijunShunyuShins
         }
 
         public static boolean is適用開始チェック２(KijunShunyuShinseiTourokuDiv div) {
-            HihokenshaNo 被保険者番号 = null;
             FlexibleDate 開始年月 = div.getMeisai().getTxtTekiyoStartYM().getValue();
             for (dgMeisai_Row row : div.getMeisai().getDgMeisai().getDataSource()) {
-                被保険者番号 = new HihokenshaNo(row.getHihokenshaNo());
+                HihokenshaNo 被保険者番号 = new HihokenshaNo(row.getHihokenshaNo());
+                if (!RowState.Deleted.equals(row.getRowState()) && 開始年月 != null && !開始年月.isEmpty()) {
+                    FlexibleYearMonth 適用開始年月 = new FlexibleYearMonth(開始年月.toString().substring(NUM_0, NUM_6));
+                    return KijunShunyuShinseiTourokuManager.createInstance().is適用開始チェック(被保険者番号, 適用開始年月);
+                }
             }
-            if (被保険者番号 != null && 開始年月 != null && !開始年月.isEmpty()) {
-                FlexibleYearMonth 適用開始年月 = new FlexibleYearMonth(開始年月.toString().substring(NUM_0, NUM_6));
-                return KijunShunyuShinseiTourokuManager.createInstance().is適用開始チェック(被保険者番号, 適用開始年月);
-            } else {
-                return true;
-            }
+            return true;
         }
 
         public static boolean is世帯員が0人(KijunShunyuShinseiTourokuDiv div) {
@@ -251,14 +267,44 @@ public enum KijunShunyuShinseiTourokuSpec implements IPredicate<KijunShunyuShins
             return false;
         }
 
-        public static boolean is算定基準額のチェック(KijunShunyuShinseiTourokuDiv div) {
-            List<dgMeisai_Row> rowList = div.getMeisai().getDgMeisai().getDataSource();
+        public static boolean is算定基準額のチェック(KijunShunyuShinseiTourokuDiv div,
+                List<dgMeisai_Row> rowList,
+                Decimal 二人以上で総収入金額) {
+
+            RString 算定基準額 = div.getMeisai().getDdlSanteiKijunGaku().getSelectedValue();
+            Decimal 一人で総収入金額;
+            Decimal 公的年金;
+            Decimal 給与;
+            Decimal 以外の収入;
+            Decimal 課税所得;
+            RString 年齢;
             for (dgMeisai_Row row : rowList) {
-                if (row.getJyukyuJigyoTaisho() != null && !row.getJyukyuJigyoTaisho().isEmpty()) {
-                    return true;
+                年齢 = row.getAge();
+                課税所得 = row.getKazeiShotokuKojogo().getValue() == null ? Decimal.ZERO : row.getKazeiShotokuKojogo().getValue();
+                公的年金 = row.getKotekiNenkin().getValue() == null ? Decimal.ZERO : row.getKotekiNenkin().getValue();
+                給与 = row.getKyuyo().getValue() == null ? Decimal.ZERO : row.getKyuyo().getValue();
+                以外の収入 = row.getOtherIncome().getValue() == null ? Decimal.ZERO : row.getOtherIncome().getValue();
+                一人で総収入金額 = 公的年金.add(給与).add(以外の収入);
+                if (歳以上_65.compareTo(年齢) < NUM_1) {
+                    if (円_145万.compareTo(課税所得) < NUM_1
+                            && (円_383万.compareTo(一人で総収入金額) == NUM_1 || 円_520万.compareTo(二人以上で総収入金額) == NUM_1)
+                            && !SanteiKijungaku.算定基準額_44_400円.get略称().equals(算定基準額)) {
+                        return false;
+                    }
+
+                    if (円_145万.compareTo(課税所得) < NUM_1
+                            && (円_383万.compareTo(一人で総収入金額) < NUM_1 || 円_520万.compareTo(二人以上で総収入金額) < NUM_1)
+                            && !SanteiKijungaku.算定基準額_37_200円.get略称().equals(算定基準額)) {
+                        return false;
+                    }
+
+                    if (円_145万.compareTo(課税所得) == NUM_1
+                            && SanteiKijungaku.算定基準額_44_400円.get略称().equals(算定基準額)) {
+                        return false;
+                    }
                 }
             }
-            return false;
+            return true;
         }
 
         public static boolean is世帯再算出ボタン押下チェック(KijunShunyuShinseiTourokuDiv div) {
@@ -281,13 +327,13 @@ public enum KijunShunyuShinseiTourokuSpec implements IPredicate<KijunShunyuShins
 
         public static boolean is控除再算出チェック(KijunShunyuShinseiTourokuDiv div) {
             List<dgMeisai_Row> rowList = div.getMeisai().getDgMeisai().getDataSource();
-            int count = NUM_1;
+            int 世帯主Count = NUM_0;
             for (dgMeisai_Row row : rowList) {
                 if (row.getZennenSetainushi()) {
-                    count = count + NUM_1;
+                    世帯主Count = 世帯主Count + NUM_1;
                 }
             }
-            return NUM_1 == count;
+            return (世帯主Count <= NUM_1);
         }
     }
 }

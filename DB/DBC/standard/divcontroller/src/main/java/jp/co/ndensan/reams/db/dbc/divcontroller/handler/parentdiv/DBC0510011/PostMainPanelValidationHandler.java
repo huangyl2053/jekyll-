@@ -53,10 +53,15 @@ public class PostMainPanelValidationHandler {
 
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        if (場合.equals(広域の場合)) {
+        if (場合.equals(単一の場合)) {
             messages.add(ValidateChain.validateStart(div).
                     ifNot(KokuhorenTorikomiListSpec.ファイル日時が空白).
                     thenAdd(IdocheckMessages.ファイル日時が空白).
+                    messages());
+            validPairs.add(createDictionary().check(messages));
+        }
+        if (場合.equals(広域の場合)) {
+            messages.add(ValidateChain.validateStart(div).
                     ifNot(KokuhorenTorikomiListSpec.一覧対象未選択チェック).
                     thenAdd(IdocheckMessages.一覧対象未選択チェック).
                     ifNot(KokuhorenTorikomiListSpec.グリッドのファイル日時が空白).

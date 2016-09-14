@@ -60,7 +60,7 @@ public class TokuteiShinryohiMain {
         this.close摘要(div);
         KyufuJissekiPrmBusiness 給付実績情報照会情報 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
         getHandler(div).change年月(new RString("前月"), 給付実績情報照会情報);
-        FlexibleYearMonth 提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().toDateString());
+        FlexibleYearMonth 提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
         ViewStateHolder.put(ViewStateKeys.サービス提供年月, 提供年月);
         return createResponse(div);
     }
@@ -75,7 +75,7 @@ public class TokuteiShinryohiMain {
         this.close摘要(div);
         KyufuJissekiPrmBusiness 給付実績情報照会情報 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
         getHandler(div).change年月(new RString("次月"), 給付実績情報照会情報);
-        FlexibleYearMonth 提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().toDateString());
+        FlexibleYearMonth 提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
         ViewStateHolder.put(ViewStateKeys.サービス提供年月, 提供年月);
         return createResponse(div);
     }

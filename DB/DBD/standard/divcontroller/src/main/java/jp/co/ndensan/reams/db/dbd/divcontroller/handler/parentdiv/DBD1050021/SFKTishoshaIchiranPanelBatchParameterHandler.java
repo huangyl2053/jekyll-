@@ -77,10 +77,7 @@ public class SFKTishoshaIchiranPanelBatchParameterHandler {
         }
         parameter.set事業者番号(div.getChutsutsuJoken().getCcdShisetsuJohoCommonChildDiv().getNyuryokuShisetsuKodo());
         parameter.set事業者名(div.getChutsutsuJoken().getCcdShisetsuJohoCommonChildDiv().getNyuryokuShisetsuMeisho());
-        if (div.getChushutsuSetsumei().getCcdChohyoShutsuryokuJun().getSelected出力順() != null) {
-            parameter.set出力順ID(div.getChushutsuSetsumei().getCcdChohyoShutsuryokuJun().getSelected出力順().get出力順ID());
-            parameter.set改頁出力順ID(Long.valueOf(div.getChushutsuSetsumei().getCcdChohyoShutsuryokuJun().getSelected出力順().get改頁項目ID().toString()));
-        }
+        parameter.set出力順ID(div.getChushutsuSetsumei().getCcdChohyoShutsuryokuJun().get出力順ID());
         parameter.set処理日時(YMDHMS.now());
     }
 }

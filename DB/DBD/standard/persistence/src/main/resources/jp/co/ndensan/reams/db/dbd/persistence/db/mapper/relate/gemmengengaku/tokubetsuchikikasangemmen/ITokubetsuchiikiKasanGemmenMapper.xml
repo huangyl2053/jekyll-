@@ -88,7 +88,7 @@
                 AND A."dbT4020TokubetsuchiikiKasanGemmen_rirekiNo" = B."dbT4010GemmenGengakuShinsei_shinseiRirekiNo"
                 AND B."dbT4010GemmenGengakuShinsei_gemmenGengakuShurui" = #{減免減額種類}
             <where>
-                AND A."dbT4020TokubetsuchiikiKasanGemmen_shoKisaiHokenshaNo" = #{被保険者番号}
+                AND A."dbT4020TokubetsuchiikiKasanGemmen_hihokenshaNo" = #{被保険者番号}
             </where>
             ORDER BY  A."dbT4020TokubetsuchiikiKasanGemmen_shinseiYMD" DESC
     </select>

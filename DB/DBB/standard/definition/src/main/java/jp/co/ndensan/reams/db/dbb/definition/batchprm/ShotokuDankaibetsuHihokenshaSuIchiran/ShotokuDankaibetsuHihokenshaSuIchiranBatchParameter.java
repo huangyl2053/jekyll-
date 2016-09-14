@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.batchprm.ShotokuDankaibetsuHihokenshaSuIchiran;
 
+import java.util.List;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -36,7 +37,7 @@ public class ShotokuDankaibetsuHihokenshaSuIchiranBatchParameter extends BatchPa
     @BatchParameter(key = KEY_REGIONDIVISION, name = "広域分・市町村分区分")
     private RString regiondivision;
     @BatchParameter(key = KEY_DANTAICD, name = "市町村コード")
-    private RString dantaiCd;
+    private List<RString> dantaiCd;
     @BatchParameter(key = KEY_QKIJUND, name = "資格基準日")
     private RDate qkijund;
     @BatchParameter(key = KEY_ADJUSTEDKIJUND, name = "調定基準日")

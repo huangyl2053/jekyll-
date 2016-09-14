@@ -130,8 +130,8 @@
                FROM
                 "DbWT3711KogakuGassanShinseisho"
                WHERE
-                "DbWT3711KogakuGassanShinseisho"."shoKisaiHokenshaName" = ''
-                OR "DbWT3711KogakuGassanShinseisho"."shoKisaiHokenshaName" IS NULL
+                ("DbWT3711KogakuGassanShinseisho"."shoKisaiHokenshaName" = ''
+                OR "DbWT3711KogakuGassanShinseisho"."shoKisaiHokenshaName" IS NULL)
                 AND "DbWT3711KogakuGassanShinseisho"."sofuJogaiFlag" = false
         ) AS DbWT3711
         INNER JOIN
@@ -158,8 +158,8 @@
                FROM
                 "DbWT3711KogakuGassanShinseisho"
                WHERE
-                "DbWT3711KogakuGassanShinseisho"."shoKisaiHokenshaName" = ''
-                OR "DbWT3711KogakuGassanShinseisho"."shoKisaiHokenshaName" IS NULL
+                ("DbWT3711KogakuGassanShinseisho"."shoKisaiHokenshaName" = ''
+                OR "DbWT3711KogakuGassanShinseisho"."shoKisaiHokenshaName" IS NULL)
                 AND "DbWT3711KogakuGassanShinseisho"."sofuJogaiFlag" = false
         ) AS DbWT3711
         INNER JOIN

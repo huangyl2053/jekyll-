@@ -89,4 +89,44 @@ public class ServiceCodeBetsuRiyoJokyoSource implements IReportSource {
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
+
+    /**
+     * ServiceCodeBetsuRiyoJokyoSourceのENUM
+     */
+    public enum DBC300002ServiceCodeBetsuRiyoJokyoFields {
+
+        joken1,
+        joken2,
+        joken3,
+        PageCnt,
+        pageCount1,
+        printTimeStamp1,
+        hokenshaNo1,
+        hokenshaName1,
+        List1_1,
+        List1_2,
+        List1_3,
+        List1_4,
+        List1_5,
+        List1_6,
+        List1_7,
+        List1_8,
+        List1_9,
+        List1_10,
+        List1_11,
+        List1_12,
+        List1_13,
+        List2_1,
+        List2_2,
+        List2_3,
+        List2_4,
+        List2_5,
+        List2_6,
+        List2_7,
+        List2_8,
+        List2_9,
+        List2_10,
+        List2_11,
+        title
+    }
 }

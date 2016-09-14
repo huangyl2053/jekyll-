@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBB-5660-030 liuyang -->
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.dbb021051.IDBB021051Mapper">
+        <select resultOrdered="true" id="get一時表情報" 
+            resultMap="resultMap_AtenaSealJohoEntity" fetchSize="500" 
+                parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbb021051.DBB021051MyBatisParameter">
+            SELECT 
+                "V1001"."hihokenshaNo" AS "hihokenshaNo"
+                ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+            <if test="最優先住所.toString()=='2' " >
+                , <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />
+            </if>
+            FROM    
+                rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',false,
+                '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+                true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
+            INNER JOIN
+                    rgdb."DbV1001HihokenshaDaicho" AS "V1001"
+                ON		"V1001"."shikibetsuCode"　＝　PSM."shikibetsuCode"
+                AND		"V1001"."hihokennshaKubunCode"　IN　
+                        <if test="資格区分.toString()=='1' || 資格区分.toString()=='3' || 資格区分.toString()=='5'  " >(1)</if>
+                        <if test="資格区分.toString()=='2' || 資格区分.toString()=='4'|| 資格区分.toString()=='6' " >(2)</if>
+                        <if test="資格区分.toString()=='7' " >(1,2)</if>
+            INNER  JOIN		rgdb."DbV2001ChoshuHoho" AS "V2001"
+            ON		"V2001"."hihokenshaNo"　＝　"V1001"."hihokenshaNo"
+            <if test="最優先住所.toString()=='2' " >
+            INNER JOIN
+                rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','') AS "Atesaki"
+            ON
+                "Atesaki"."shikibetsuCode"="ShikibetsuTaisho"."shikibetsuCode"
+            AND
+                "Atesaki"."juminShubetsuCode"="ShikibetsuTaisho"."juminShubetsuCode"
+            AND
+                "Atesaki"."juminJotaiCode"="ShikibetsuTaisho"."juminJotaiCode"
+            </if>
+            WHERE	"V2001"."fukaNendo"     =   #{基準年月の年}								
+	AND		"ShikibetsuTaisho"."juminShubetsuCode"　IN　
+                        <if test="資格区分.toString()=='1' || 資格区分.toString()=='2' " >(1)</if>
+                        <if test="資格区分.toString()=='3' || 資格区分.toString()=='4' " >(2)</if>
+                        <if test="資格区分.toString()=='5'|| 資格区分.toString()=='6'||資格区分.toString()=='7' " >(1,2)</if>													
+	AND		"ShikibetsuTaisho"."juminJotaiCode"　IN　
+                        <if test="資格区分.toString()=='1' || 資格区分.toString()=='2' || 資格区分.toString()=='3'|| 資格区分.toString()=='4' || 資格区分.toString()=='5'  " >(1)</if>
+                        <if test="資格区分.toString()=='6'|| 資格区分.toString()=='7' " >(1,2)</if>													
+                    <if test="抽出対象者.toString()=='1' ">
+                    AND		<include refid="WK_判定徴収方法" />　＝　3
+                    </if>	
+                    <if test="抽出対象者.toString()=='2' ">
+                    AND		(<include refid="WK_判定徴収方法" />　＝　1
+                    OR		<include refid="WK_判定徴収方法" />　 ＝　2)
+                    </if>     				
+                    <if test="抽出対象者.toString()=='3' ">																
+                    AND		(<include refid="WK_判定徴収方法" />  ＝    1
+                    OR		<include refid="WK_判定徴収方法" />　＝　2
+                    OR		<include refid="WK_判定徴収方法" />　＝　3)
+                    </if>
+                    <if test="市町村指定の市町村コード.toString()!='000000' ">
+                    AND		"ShikibetsuTaisho"."genLasdecCode"　＝　#{市町村指定に市町村コード}　													
+                    </if>															
+        </select>
+<!--処理詳細3-->
+<!--    <select resultOrdered="true" id="get介護徴収方法情報" 
+            resultMap="resultMap_AtenaSealJohoEntity" fetchSize="500" 
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbb021051.DBB021051MyBatisParameter">
+        WITH "kaigoJoho" AS (
+            (SELECT 
+                    "T1001"."shikibetsuCode" AS "shikibetsuCode"
+                    ,"T1001"."shichosonCode" AS "shichosonCode"
+                    ,"A".*
+            FROM                
+                rgdb."DbT2001ChoshuHoho" AS "A"
+            INNER JOIN      
+                rgdb."DbT1001HihokenshaDaicho" AS "T1001"
+            ON                    
+                "A"."hihokenshaNo"＝　"T1001"."hihokenshaNo"
+            WHERE 
+                	    "A"."fukaNendo"　＝　#{基準年月の年}														
+                        <if test="抽出対象者.toString=='1' ">															
+                        AND		<include refid="WK_判定徴収方法" />　＝　3
+                        </if>	
+                        <if test="抽出対象者.toString=='2' ">
+                        AND		(<include refid="WK_判定徴収方法" />　＝　1
+                        OR		<include refid="WK_判定徴収方法" />　 ＝　2)
+                        </if>     				
+                        <if test="抽出対象者.toString=='3' ">																
+                        AND		(<include refid="WK_判定徴収方法" />  ＝    1
+                        OR		<include refid="WK_判定徴収方法" />　＝　2
+                        OR		<include refid="WK_判定徴収方法" />　＝　3)
+                        </if>
+                        <if test="市町村指定の市町村コード.toString()!='000000' ">
+                        AND		"A"."shichosonCode"　＝　#{市町村指定に市町村コード}
+                        </if>
+            )
+        )
+        SELECT 
+            "kaigoJoho"."hihokenshaNo" as "hihokenshaNo"
+            ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        <if test="最優先住所.toString()=='2' " >
+            , <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />
+        </if>
+        FROM 
+            "kaigoJoho"
+        LEFT JOIN
+        <include refid="tableName_PsmParamClassWithoutShikibetsuCodeList_First"/>    
+        (SELECT ARRAR_AGG(CAST ("shikibetsuCode" AS TEXT)) FROM "kaigoJoho")
+        <include refid="tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
+        AS "ShikibetsuTaisho"
+        ON
+            "ShikibetsuTaisho"."shikibetsuCode"="kaigoJoho"."shikibetsuCode"
+            AND
+            "ShikibetsuTaisho"."juminShubetsuCode"　 IN
+            <if test="資格区分.toString()=='1' || 資格区分.toString()=='2' || 資格区分.toString()=='5'  " >(1)</if>
+            <if test="資格区分.toString()=='3' || 資格区分.toString()=='4' " >(2)</if>
+            <if test="資格区分.toString()=='6' || 資格区分.toString()=='7' " >(1,2)</if>
+        <if test="市町村指定" >
+            AND     "ShikibetsuTaisho"."genLasdecCode"　＝　#{市町村指定に市町村コード}
+        </if>
+    <if test="最優先住所.toString()=='2' " >
+        INNER JOIN
+            rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','') AS "Atesaki"
+        ON
+                "Atesaki"."shikibetsuCode"="ShikibetsuTaisho"."shikibetsuCode"
+            AND
+                "Atesaki"."juminShubetsuCode"="ShikibetsuTaisho"."juminShubetsuCode"
+            AND
+                "Atesaki"."juminJotaiCode"="ShikibetsuTaisho"."juminJotaiCode"
+    </if>
+    </select>-->
+<!--処理詳細4-->
+<!--    <select resultOrdered="true" id="get被保険者台帳宛名情報マッチング" 
+            resultMap="resultMap_被保険者台帳宛名情報" fetchSize="500"
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbb021051.DBB021051MyBatisParameter">
+            SELECT  
+                    <include refid="allColumns_TempTable" />												
+                    ,"DbT1001HihokenshaDaicho".*
+                <if test="最優先住所.toString()=='2' " >
+                    , <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />
+                </if>
+            FROM		"DbWT1051KaigoCyousyu" AS "TempTable"
+            INNER　JOIN		rgdb."DbT1001HihokenshaDaicho" AS "DbT1001HihokenshaDaicho"
+            ON		"DbT1001HihokenshaDaicho"."hihokenshaNo"　＝"TempTable"."hihokenshaNo"
+                    TODO QA "DbT1001HihokenshaDaicho"."資格区分"
+                <if test="資格区分.toString()=='1' " >AND "DbT1001HihokenshaDaicho"."資格区分"　=1</if>
+                <if test="資格区分.toString()=='2' " >AND "DbT1001HihokenshaDaicho"."資格区分"　=2</if>
+                <if test="資格区分.toString()=='3' " >AND "DbT1001HihokenshaDaicho"."資格区分"　=3</if>
+                <if test="資格区分.toString()=='4' " >AND "DbT1001HihokenshaDaicho"."資格区分"　=4</if>
+                <if test="資格区分.toString()=='5' " >AND "DbT1001HihokenshaDaicho"."資格区分"　in (1,3)</if>
+                <if test="資格区分.toString()=='6' " >AND "DbT1001HihokenshaDaicho"."資格区分"　in (2,4)</if>
+                <if test="資格区分.toString()=='7' " ></if>
+                <if test="最優先住所.toString()=='2' " >
+            INNER JOIN
+                rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','') AS "Atesaki"
+            ON
+                    "Atesaki"."shikibetsuCode"="TempTable"."識別コード"
+                AND
+                    "Atesaki"."juminShubetsuCode"="TempTable"."住民種別コード"
+                AND
+                    "Atesaki"."juminJotaiCode"="TempTable"."住民状態コード"
+        </if>
+            WHERE
+                <if test="資格区分.toString()=='1'||資格区分.toString()=='2'||資格区分.toString()=='5' " >"TempTable"."住民種別コード"　=1</if>
+                <if test="資格区分.toString()=='3'||資格区分.toString()=='4' " >"TempTable"."住民種別コード"　=2</if>
+                <if test="資格区分.toString()=='6' || 資格区分.toString()=='7' " >"TempTable"."住民種別コード"　in (1,2)</if>
+            <if test="市町村指定" >
+                AND "TempTable"."現全国地方公共団体コード"＝　#{市町村指定に市町村コード}
+            </if>
+    </select>-->
+    
+<!--処理詳細5-->
+    <select resultOrdered="true" id="get宛名シール情報一時" 
+            resultMap="resultMap_DBB021051TableJohoTempEntity" fetchSize="500" 
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbb021051.DBB021051MyBatisParameter">
+            SELECT  
+                            <include refid="allColumns_TempTable" />												
+            FROM        "DbWT1051AtenaShirYoho" AS "TempTable"
+            #{出力順}
+    </select>
+    
+<!--処理詳細8-->
+    <select resultOrdered="true" id="get処理結果リスト一時" 
+            resultMap="resultMap_DBB021051ShoriKekkaListTempEntity" fetchSize="500" >
+            SELECT  
+                            <include refid="allColumns_DbWT1051SyorikekaRisuto" />												
+            FROM        "DbWT1051SyorikekaRisuto" 
+    </select>
+<!--    <resultMap id="resultMap_被保険者台帳宛名情報" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.dbb021051.HihokenshaAteanAtesakiJohoEntity" autoMapping="true">
+        <association property="介護情報一時テーブル" resultMap="resultMap_DBB021051TableJohoTempEntity"/>
+        <association property="被保険者台帳" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>
+        <collection property="宛先PSM"
+             resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity" 
+             ofType="jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity" />
+    </resultMap>-->
+    
+    <resultMap id="resultMap_AtenaSealJohoEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.dbb021051.AtenaSealJohoEntity" autoMapping="true">
+        <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <collection property="宛名識別対象PSM" 
+             resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity" 
+             ofType="jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity"/>
+        <collection property="宛先PSM"
+                     resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity" 
+                     ofType="jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity" />
+    </resultMap>
+
+
+    <resultMap id="resultMap_DBB021051TableJohoTempEntity" 
+               type="jp.co.ndensan.reams.db.dbb.entity.db.relate.dbb021051.DBB021051TableJohoTempEntity" autoMapping="true">
+        <result property="識別コード" column="TempTable_識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
+        <result property="氏名カナ" column="TempTable_氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler" />
+        <result property="市町村コード" column="TempTable_市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="氏名" column="TempTable_氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
+        <result property="wk管内管外区分" column="TempTable_wk管内管外区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="郵便番号" column="TempTable_郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler" />
+        <result property="住所" column="TempTable_住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="バーコード住所" column="TempTable_バーコード住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="番地" column="TempTable_番地" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaBanchiTypeHandler" />
+        <result property="方書" column="TempTable_方書" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KatagakiTypeHandler" />
+        <result property="行政区" column="TempTable_行政区" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="管内管外区分" column="TempTable_管内管外区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="世帯主名称" column="TempTable_世帯主名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
+        <result property="代納区分名称" column="TempTable_代納区分名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="番地コード" column="TempTable_番地コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="行政区コード" column="TempTable_行政区コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyoseikuCodeTypeHandler" />
+        <result property="地区コード1" column="TempTable_地区コード1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChikuCodeTypeHandler" />
+        <result property="地区コード2" column="TempTable_地区コード2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChikuCodeTypeHandler" />
+        <result property="地区コード3" column="TempTable_地区コード3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChikuCodeTypeHandler" />
+        <result property="世帯コード" column="TempTable_世帯コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler" />
+        <result property="住所コード" column="TempTable_住所コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ZenkokuJushoCodeTypeHandler" />
+        <result property="被保険者番号" column="TempTable_被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
+        <result property="性別" column="TempTable_性別" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="住民種別コード" column="TempTable_住民種別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="住民状態コード" column="TempTable_住民状態コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="現全国地方公共団体コード" column="TempTable_現全国地方公共団体コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="生年月日" column="TempTable_生年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />        
+        <result property="宛名氏名" column="TempTable_宛名氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />        
+        <result property="宛名方書" column="TempTable_宛名方書" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KatagakiTypeHandler" />        
+    </resultMap>
+
+    <resultMap id="resultMap_DBB021051ShoriKekkaListTempEntity" 
+               type="jp.co.ndensan.reams.db.dbb.entity.db.relate.dbb021051.DBB021051ShoriKekkaListTempEntity" autoMapping="true">
+        <result property="エラー区分" column="DbWT1051SyorikekaRisuto_エラー区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="証記載保険者番号" column="DbWT1051SyorikekaRisuto_証記載保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者番号" column="DbWT1051SyorikekaRisuto_被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="キー1" column="DbWT1051SyorikekaRisuto_キー1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="キー2" column="DbWT1051SyorikekaRisuto_キー2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="キー3" column="DbWT1051SyorikekaRisuto_キー3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="キー4" column="DbWT1051SyorikekaRisuto_キー4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="キー5" column="DbWT1051SyorikekaRisuto_キー5" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者カナ氏名" column="DbWT1051SyorikekaRisuto_被保険者カナ氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者氏名" column="DbWT1051SyorikekaRisuto_被保険者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="備考" column="DbWT1051SyorikekaRisuto_備考" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+
+    <sql id="allColumns_DbWT1051SyorikekaRisuto">
+        "DbWT1051SyorikekaRisuto"."エラー区分" as "DbWT1051SyorikekaRisuto_エラー区分"
+        ,"DbWT1051SyorikekaRisuto"."証記載保険者番号" as "DbWT1051SyorikekaRisuto_証記載保険者番号"
+        ,"DbWT1051SyorikekaRisuto"."被保険者番号" as "DbWT1051SyorikekaRisuto_被保険者番号"
+        ,"DbWT1051SyorikekaRisuto"."キー1" as "DbWT1051SyorikekaRisuto_キー1"
+        ,"DbWT1051SyorikekaRisuto"."キー2" as "DbWT1051SyorikekaRisuto_キー2"
+        ,"DbWT1051SyorikekaRisuto"."キー3" as "DbWT1051SyorikekaRisuto_キー3"
+        ,"DbWT1051SyorikekaRisuto"."キー4" as "DbWT1051SyorikekaRisuto_キー4"
+        ,"DbWT1051SyorikekaRisuto"."キー5" as "DbWT1051SyorikekaRisuto_キー5"
+        ,"DbWT1051SyorikekaRisuto"."被保険者カナ氏名" as "DbWT1051SyorikekaRisuto_被保険者カナ氏名"
+        ,"DbWT1051SyorikekaRisuto"."被保険者氏名" as "DbWT1051SyorikekaRisuto_被保険者氏名"
+        ,"DbWT1051SyorikekaRisuto"."備考" as "DbWT1051SyorikekaRisuto_備考"
+    </sql>
+<!--    <sql id="table_宛名識別対象PSM">
+        rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',false,
+        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
+    </sql>-->
+    
+<!--    <sql id="table_宛先PSM">
+         rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','') AS "Atesaki"
+    </sql>-->
+    
+    <sql id="WK_判定徴収方法">
+        <if test="基準年月の月.toString()=='01' ">"V2001"."choshuHoho1gatsu"</if>
+        <if test="基準年月の月.toString()=='02' ">"V2001"."choshuHoho2gatsu"</if>
+        <if test="基準年月の月.toString()=='03' ">"V2001"."choshuHoho3gatsu"</if>
+        <if test="基準年月の月.toString()=='04' ">"V2001"."choshuHoho4gatsu"</if>
+        <if test="基準年月の月.toString()=='05' ">"V2001"."choshuHoho5gatsu"</if>
+        <if test="基準年月の月.toString()=='06' ">"V2001"."choshuHoho6gatsu"</if>
+        <if test="基準年月の月.toString()=='07' ">"V2001"."choshuHoho7gatsu"</if>
+        <if test="基準年月の月.toString()=='08' ">"V2001"."choshuHoho8gatsu"</if>
+        <if test="基準年月の月.toString()=='09' ">"V2001"."choshuHoho9gatsu"</if>
+        <if test="基準年月の月.toString()=='10' ">"V2001"."choshuHoho10gatsu"</if>
+        <if test="基準年月の月.toString()=='11' ">"V2001"."choshuHoho11gatsu"</if>
+        <if test="基準年月の月.toString()=='12' ">"V2001"."choshuHoho12gatsu"</if>
+    </sql>
+
+    <sql id="allColumns_TempTable">
+        "TempTable"."識別コード" as "TempTable_識別コード",
+        "TempTable"."氏名カナ" as "TempTable_氏名カナ",
+        "TempTable"."市町村コード" as "TempTable_市町村コード",
+        "TempTable"."氏名" as "TempTable_氏名",
+        "TempTable"."wk管内管外区分" as "TempTable_wk管内管外区分",
+        "TempTable"."郵便番号" as "TempTable_郵便番号",
+        "TempTable"."住所" as "TempTable_住所",
+        "TempTable"."バーコード住所" as "TempTable_バーコード住所",
+        "TempTable"."番地" as "TempTable_番地",
+        "TempTable"."方書" as "TempTable_方書",
+        "TempTable"."行政区" as "TempTable_行政区",
+        "TempTable"."管内管外区分" as "TempTable_管内管外区分",
+        "TempTable"."世帯主名称" as "TempTable_世帯主名称",
+        "TempTable"."代納区分名称" as "TempTable_代納区分名称",
+        "TempTable"."番地コード" as "TempTable_番地コード",
+        "TempTable"."行政区コード" as "TempTable_行政区コード",
+        "TempTable"."地区コード1" as "TempTable_地区コード1",
+        "TempTable"."地区コード2" as "TempTable_地区コード2",
+        "TempTable"."地区コード3" as "TempTable_地区コード3",
+        "TempTable"."世帯コード" as "TempTable_世帯コード",
+        "TempTable"."住所コード" as "TempTable_住所コード",
+        "TempTable"."被保険者番号" as "TempTable_被保険者番号",
+        "TempTable"."性別" as "TempTable_性別",
+        "TempTable"."住民種別コード" as "TempTable_住民種別コード",
+        "TempTable"."住民状態コード" as "TempTable_住民状態コード",
+        "TempTable"."現全国地方公共団体コード" as "TempTable_現全国地方公共団体コード",
+        "TempTable"."生年月日" as "TempTable_生年月日",
+        "TempTable"."宛名氏名" as "TempTable_宛名氏名",
+        "TempTable"."宛名方書" as "TempTable_宛名方書"
+    </sql>
+<!--    <sql id ="tableName_PsmParamClassWithoutShikibetsuCodeList_First">
+        rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',false,
+            '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+            true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
+    </sql>
+    <sql id ="tableName_PsmParamClassWithoutShikibetsuCodeList_Second">
+        )
+    </sql>-->
+    
+
+</mapper>

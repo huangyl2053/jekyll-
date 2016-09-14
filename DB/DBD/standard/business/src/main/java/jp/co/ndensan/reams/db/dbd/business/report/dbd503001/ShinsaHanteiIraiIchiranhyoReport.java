@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd503001;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.chohyoshuchiryokuyoshiseijyoho.ChohyoShuchiryokuyoShiseiJyohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd503001.ShinsaHanteiIraiIchiranhyoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -18,21 +17,14 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public final class ShinsaHanteiIraiIchiranhyoReport extends Report<ShinsaHanteiIraiIchiranhyoReportSource> {
 
-    private final List<ChohyoShuchiryokuyoShiseiJyohoEntity> 帳票出力用申請情報Entityリスト;
+    private final ChohyoShuchiryokuyoShiseiJyohoEntity 帳票出力用申請情報Entityリスト;
 
     /**
      * インスタンスを生成します。
      *
-     * @param 帳票出力用申請情報Entityリスト List<ChohyoShuchiryokuyoShiseiJyohoEntity>
-     *
-     * @return 介護認定審査判定依頼一覧表
+     * @param 帳票出力用申請情報Entityリスト ChohyoShuchiryokuyoShiseiJyohoEntity
      */
-    public static ShinsaHanteiIraiIchiranhyoReport createReport(
-            List<ChohyoShuchiryokuyoShiseiJyohoEntity> 帳票出力用申請情報Entityリスト) {
-        return new ShinsaHanteiIraiIchiranhyoReport(帳票出力用申請情報Entityリスト);
-    }
-
-    private ShinsaHanteiIraiIchiranhyoReport(List<ChohyoShuchiryokuyoShiseiJyohoEntity> 帳票出力用申請情報Entityリスト) {
+    public ShinsaHanteiIraiIchiranhyoReport(ChohyoShuchiryokuyoShiseiJyohoEntity 帳票出力用申請情報Entityリスト) {
         this.帳票出力用申請情報Entityリスト = 帳票出力用申請情報Entityリスト;
     }
 
@@ -43,12 +35,8 @@ public final class ShinsaHanteiIraiIchiranhyoReport extends Report<ShinsaHanteiI
      */
     @Override
     public void writeBy(ReportSourceWriter<ShinsaHanteiIraiIchiranhyoReportSource> writer) {
-        for (int index = 0; index < 帳票出力用申請情報Entityリスト.size(); index++) {
-            IShinsaHanteiIraiIchiranhyoEditor bodyEditor = new ShinsaHanteiIraiIchiranhyoEditor(
-                    帳票出力用申請情報Entityリスト, index);
-            IShinsaHanteiIraiIchiranhyoBuilder builder = new ShinsaHanteiIraiIchiranhyoBuilder(bodyEditor);
-            writer.writeLine(builder);
-        }
-
+        IShinsaHanteiIraiIchiranhyoEditor bodyEditor = new ShinsaHanteiIraiIchiranhyoEditor(帳票出力用申請情報Entityリスト);
+        IShinsaHanteiIraiIchiranhyoBuilder builder = new ShinsaHanteiIraiIchiranhyoBuilder(bodyEditor);
+        writer.writeLine(builder);
     }
 }
