@@ -6,7 +6,8 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0310001;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteifuka.HonsanteifukaBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB031001.DBB031001_HonsanteiFukaParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB031003.DBB031003_HonsanteiTsuchishoHakkoParameter;
 import static jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0310001.DBB0310001TransitionEventName.打ち分け方法確認;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0310001.HonsanteiFukaKeisanTotalDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0310001.HonsanteiFukaKeisanTotalHandler;
@@ -107,11 +108,11 @@ public class HonsanteiFukaKeisanTotal {
      * 本算定賦課計算メニューからの場合、実行するの処理です
      *
      * @param div HonsanteiFukaKeisanTotalDiv
-     * @return ResponseData<HonsanteiFukaKeisanTotalDiv>
+     * @return ResponseData<DBB031001_HonsanteiFukaParameter>
      */
-    public ResponseData<HonsanteifukaBatchParameter> onClick_btnSantei(HonsanteiFukaKeisanTotalDiv div) {
-        HonsanteifukaBatchParameter parameter = getKanendoFukaKakuteiHandler(div)
-                .setバッチパラメータ(ViewStateHolder.get(ViewStateKeys.調定年度, RString.class),
+    public ResponseData<DBB031001_HonsanteiFukaParameter> onClick_btnSantei(HonsanteiFukaKeisanTotalDiv div) {
+        DBB031001_HonsanteiFukaParameter parameter = getKanendoFukaKakuteiHandler(div)
+                .setバッチパラメータ_本算定賦課(ViewStateHolder.get(ViewStateKeys.調定年度, RString.class),
                         ViewStateHolder.get(ViewStateKeys.算定期, RString.class),
                         ViewStateHolder.get(ViewStateKeys.遷移元区分, RString.class));
         if (parameter.get出力帳票一覧() != null && !parameter.get出力帳票一覧().isEmpty() && 1 < parameter.get出力帳票一覧().size()) {
@@ -126,11 +127,11 @@ public class HonsanteiFukaKeisanTotal {
      * 本算定通知書作成メニューからの場合、実行するの処理です
      *
      * @param div HonsanteiFukaKeisanTotalDiv
-     * @return ResponseData<HonsanteiFukaKeisanTotalDiv>
+     * @return ResponseData<DBB031003_HonsanteiTsuchishoHakkoParameter>
      */
-    public ResponseData<HonsanteifukaBatchParameter> onClick_btnTsuchishoSakusei(HonsanteiFukaKeisanTotalDiv div) {
-        HonsanteifukaBatchParameter parameter = getKanendoFukaKakuteiHandler(div)
-                .setバッチパラメータ(ViewStateHolder.get(ViewStateKeys.調定年度, RString.class),
+    public ResponseData<DBB031003_HonsanteiTsuchishoHakkoParameter> onClick_btnTsuchishoSakusei(HonsanteiFukaKeisanTotalDiv div) {
+        DBB031003_HonsanteiTsuchishoHakkoParameter parameter = getKanendoFukaKakuteiHandler(div)
+                .setバッチパラメータ_本算定通知書(ViewStateHolder.get(ViewStateKeys.調定年度, RString.class),
                         ViewStateHolder.get(ViewStateKeys.算定期, RString.class),
                         ViewStateHolder.get(ViewStateKeys.遷移元区分, RString.class));
         parameter.set画面移動フラグ(false);

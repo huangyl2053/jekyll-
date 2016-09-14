@@ -26,24 +26,25 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class HonsanteifukaProcessParameter implements IBatchProcessParameter {
 
-    private final FlexibleYear 調定年度;
-    private final FlexibleYear 賦課年度;
-    private final FlexibleDate 資格基準日;
-    private final HonsanteifukaBatchTyouhyou 出力帳票一覧;
-    private final RString 特徴_出力対象;
-    private final RDate 特徴_発行日;
-    private final RString 決定変更_文書番号;
-    private final RDate 決定変更_発行日;
-    private final RString 納入_出力方法;
-    private final RString 納入_出力期;
-    private final RString 納入_対象者;
-    private final RDate 納入_発行日;
-    private final RString 納入_ページごとに山分け;
-    private final RString 打分け条件情報;
-    private final RDateTime 処理日時;
-    private final boolean 一括発行起動フラグ;
-    private final YMDHMS 帳票作成日時;
+    private FlexibleYear 調定年度;
+    private FlexibleYear 賦課年度;
+    private FlexibleDate 資格基準日;
+    private HonsanteifukaBatchTyouhyou 出力帳票一覧;
+    private RString 特徴_出力対象;
+    private RDate 特徴_発行日;
+    private RString 決定変更_文書番号;
+    private RDate 決定変更_発行日;
+    private RString 納入_出力方法;
+    private RString 納入_出力期;
+    private RString 納入_対象者;
+    private RDate 納入_発行日;
+    private RString 納入_ページごとに山分け;
+    private RString 打分け条件情報;
+    private RDateTime 処理日時;
+    private boolean 一括発行起動フラグ;
+    private YMDHMS 帳票作成日時;
     private RString 納入_生活保護対象者をまとめて先頭に出力;
+    private YMDHMS 最新調定日時;
 
     /**
      * コンストラクタ
@@ -66,6 +67,7 @@ public class HonsanteifukaProcessParameter implements IBatchProcessParameter {
      * @param 一括発行起動フラグ boolean
      * @param 帳票作成日時 YMDHMS
      * @param 納入_生活保護対象者をまとめて先頭に出力 RString
+     * @param 最新調定日時 YMDHMS
      */
     public HonsanteifukaProcessParameter(FlexibleYear 調定年度,
             FlexibleYear 賦課年度,
@@ -84,7 +86,8 @@ public class HonsanteifukaProcessParameter implements IBatchProcessParameter {
             RDateTime 処理日時,
             boolean 一括発行起動フラグ,
             YMDHMS 帳票作成日時,
-            RString 納入_生活保護対象者をまとめて先頭に出力) {
+            RString 納入_生活保護対象者をまとめて先頭に出力,
+            YMDHMS 最新調定日時) {
         this.調定年度 = 調定年度;
         this.賦課年度 = 賦課年度;
         this.資格基準日 = 資格基準日;
@@ -103,5 +106,6 @@ public class HonsanteifukaProcessParameter implements IBatchProcessParameter {
         this.一括発行起動フラグ = 一括発行起動フラグ;
         this.帳票作成日時 = 帳票作成日時;
         this.納入_生活保護対象者をまとめて先頭に出力 = 納入_生活保護対象者をまとめて先頭に出力;
+        this.最新調定日時 = 最新調定日時;
     }
 }

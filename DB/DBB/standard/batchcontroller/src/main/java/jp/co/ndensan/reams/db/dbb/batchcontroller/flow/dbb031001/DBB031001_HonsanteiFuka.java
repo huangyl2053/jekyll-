@@ -12,8 +12,9 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb031001.KeisanTaishosha
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb031001.SetaiinProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb031001.SystemTimeHonsanteiFukaProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb031001.SystemTimeUpdateHonsanteiProcess;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB031001.DBB031001_HonsanteiFukaParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB031003.DBB031003_HonsanteiTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.fukajohotoroku.FukaJohoTorokuBatchParameter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteifuka.HonsanteifukaBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteifuka.HonsanteifukaBatchTyouhyou;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt4300.HonsanteiFukaProcessParameter;
@@ -33,7 +34,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBB-0730-010 yuanzhenxia
  */
-public class HonsanteiFukaFlow extends BatchFlowBase<HonsanteifukaBatchParameter> {
+public class DBB031001_HonsanteiFuka extends BatchFlowBase<DBB031001_HonsanteiFukaParameter> {
 
     private static final String システム日時の取得 = "getSystemDate";
     private static final String 本算定特徴中止者の追加 = "insertHonsanteiTokuchoChushisha";
@@ -47,12 +48,12 @@ public class HonsanteiFukaFlow extends BatchFlowBase<HonsanteifukaBatchParameter
     private static final String 本算定通知書一括発行フロー = "honsanteiTsuchishoIkkatsuHakkoFlow";
     private static final RString 計算後情報作成BATCH_ID = new RString("KeisangoJohoSakuseiFlow");
     private static final RString 世帯員把握BATCH_ID = new RString("SetaiShotokuKazeiHanteiFlow");
-    private static final RString 本算定通知書一括発行BATCH_ID = new RString("HonsanteiTsuchishoIkkatsuHakkoFlow");
+    private static final RString 本算定通知書一括発行BATCH_ID = new RString("DBB031003_HonsanteiTsuchishoHakko");
     private static final ReportId 帳票分類ID = new ReportId("DBB200009_HonsanteiKekkaIcihiran");
     private static final RString 賦課の情報登録フローBATCHID = new RString("FukaJohoTorokuFlow");
     private static final String 賦課情報登録 = "callChoteiToroku";
 
-    private HonsanteifukaBatchParameter parameter;
+    private DBB031001_HonsanteiFukaParameter parameter;
     private HonsanteiFukaProcessParameter processParameter;
 
     @Override
@@ -94,7 +95,7 @@ public class HonsanteiFukaFlow extends BatchFlowBase<HonsanteifukaBatchParameter
      *
      * @return バッチコマンド
      */
-    @Step (システム日時の取得)
+    @Step(システム日時の取得)
     protected IBatchFlowCommand getSystemDate() {
         return simpleBatch(SystemTimeHonsanteiFukaProcess.class).define();
     }
@@ -104,7 +105,7 @@ public class HonsanteiFukaFlow extends BatchFlowBase<HonsanteifukaBatchParameter
      *
      * @return バッチコマンド
      */
-    @Step (本算定特徴中止者の追加)
+    @Step(本算定特徴中止者の追加)
     protected IBatchFlowCommand insertHonsanteiTokuchoChushisha() {
         return simpleBatch(HonsanteiTokuchoChushishaTuikaProcess.class).arguments(processParameter).define();
     }
@@ -114,7 +115,7 @@ public class HonsanteiFukaFlow extends BatchFlowBase<HonsanteifukaBatchParameter
      *
      * @return バッチコマンド
      */
-    @Step (計算対象者抽出_通知書番号発番)
+    @Step(計算対象者抽出_通知書番号発番)
     protected IBatchFlowCommand selectKeisanTaishosha() {
         return simpleBatch(KeisanTaishoshaProcess.class).arguments(processParameter).define();
     }
@@ -124,7 +125,7 @@ public class HonsanteiFukaFlow extends BatchFlowBase<HonsanteifukaBatchParameter
      *
      * @return バッチコマンド
      */
-    @Step (世帯員把握)
+    @Step(世帯員把握)
     protected IBatchFlowCommand collectSetaiin() {
         return simpleBatch(SetaiinProcess.class).define();
     }
@@ -134,7 +135,7 @@ public class HonsanteiFukaFlow extends BatchFlowBase<HonsanteifukaBatchParameter
      *
      * @return バッチコマンド
      */
-    @Step (世帯員把握フロー)
+    @Step(世帯員把握フロー)
     protected IBatchFlowCommand setaiinBatchFlow() {
         return otherBatchFlow(世帯員把握BATCH_ID, SubGyomuCode.DBB介護賦課,
                 new SetaiShotokuKazeiHanteiBatchParameter(SetaiinHaakuKanriShikibetsuKubun.賦課.getコード())).define();
@@ -145,7 +146,7 @@ public class HonsanteiFukaFlow extends BatchFlowBase<HonsanteifukaBatchParameter
      *
      * @return バッチコマンド
      */
-    @Step (賦課計算)
+    @Step(賦課計算)
     protected IBatchFlowCommand caluculateFuka() {
         return simpleBatch(FukaKeisanProcess.class).arguments(processParameter).define();
     }
@@ -155,7 +156,7 @@ public class HonsanteiFukaFlow extends BatchFlowBase<HonsanteifukaBatchParameter
      *
      * @return バッチコマンド
      */
-    @Step (賦課情報登録)
+    @Step(賦課情報登録)
     protected IBatchFlowCommand callChoteiToroku() {
         return otherBatchFlow(賦課の情報登録フローBATCHID, SubGyomuCode.DBB介護賦課,
                 new FukaJohoTorokuBatchParameter(true)).define();
@@ -166,7 +167,7 @@ public class HonsanteiFukaFlow extends BatchFlowBase<HonsanteifukaBatchParameter
      *
      * @return バッチコマンド
      */
-    @Step (計算後情報作成)
+    @Step(計算後情報作成)
     protected IBatchFlowCommand keisangoJohoSakusei() {
         return otherBatchFlow(計算後情報作成BATCH_ID, SubGyomuCode.DBB介護賦課,
                 getKeisangoJohoSakuseiBatchParamter(RString.EMPTY)).define();
@@ -184,7 +185,7 @@ public class HonsanteiFukaFlow extends BatchFlowBase<HonsanteifukaBatchParameter
      *
      * @return バッチコマンド
      */
-    @Step (本算定結果一覧表出力)
+    @Step(本算定結果一覧表出力)
     protected IBatchFlowCommand spoolHonsanteiKekkaIchiran() {
         return simpleBatch(HonsanteiKekkaIchiranProcess.class).arguments(processParameter).define();
     }
@@ -194,7 +195,7 @@ public class HonsanteiFukaFlow extends BatchFlowBase<HonsanteifukaBatchParameter
      *
      * @return バッチコマンド
      */
-    @Step (処理日付管理テーブル更新)
+    @Step(処理日付管理テーブル更新)
     protected IBatchFlowCommand updateSystemTimeProcess() {
         return simpleBatch(SystemTimeUpdateHonsanteiProcess.class).arguments(processParameter).define();
     }
@@ -204,10 +205,32 @@ public class HonsanteiFukaFlow extends BatchFlowBase<HonsanteifukaBatchParameter
      *
      * @return バッチコマンド
      */
-    @Step (本算定通知書一括発行フロー)
+    @Step(本算定通知書一括発行フロー)
     protected IBatchFlowCommand honsanteiTsuchishoIkkatsuHakkoFlow() {
-        return otherBatchFlow(本算定通知書一括発行BATCH_ID, SubGyomuCode.DBB介護賦課,
-                getParameter()).define();
+        return otherBatchFlow(本算定通知書一括発行BATCH_ID, SubGyomuCode.DBB介護賦課, create本算定通知書パラメータ()).define();
+    }
+
+    private DBB031003_HonsanteiTsuchishoHakkoParameter create本算定通知書パラメータ() {
+        DBB031003_HonsanteiTsuchishoHakkoParameter para = new DBB031003_HonsanteiTsuchishoHakkoParameter();
+        para.set調定年度(parameter.get調定年度());
+        para.set賦課年度(parameter.get賦課年度());
+        para.set資格基準日(parameter.get資格基準日());
+        para.set出力帳票一覧(parameter.get出力帳票一覧());
+        para.set特徴_出力対象(parameter.get特徴_出力対象());
+        para.set特徴_発行日(parameter.get特徴_発行日());
+        para.set決定変更_文書番号(parameter.get決定変更_文書番号());
+        para.set決定変更_発行日(parameter.get決定変更_発行日());
+        para.set納入_出力方法(parameter.get納入_出力方法());
+        para.set納入_出力期(parameter.get納入_出力期());
+        para.set納入_対象者(parameter.get納入_対象者());
+        para.set納入_発行日(parameter.get納入_発行日());
+        para.set納入_生活保護対象者をまとめて先頭に出力(parameter.get納入_生活保護対象者をまとめて先頭に出力());
+        para.set納入_ページごとに山分け(parameter.get納入_ページごとに山分け());
+        para.set打分け条件情報(parameter.get打分け条件情報());
+        para.set処理日時(parameter.get処理日時());
+        para.set一括発行起動フラグ(parameter.is一括発行起動フラグ());
+        para.set画面移動フラグ(parameter.is画面移動フラグ());
+        return para;
     }
 
 }

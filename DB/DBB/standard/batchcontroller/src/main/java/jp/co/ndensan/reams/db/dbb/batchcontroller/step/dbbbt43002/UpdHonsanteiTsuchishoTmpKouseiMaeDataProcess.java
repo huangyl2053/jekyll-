@@ -5,22 +5,19 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt43002;
 
+import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt43002.HonsanteifukaProcessParameter;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.honsanteitsuchishoikkatsuhakko.IHonsanteiTsuchishoIkkatsuHakkoMapper;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 
 /**
- * 本算定通知書一時テーブル作成するクラスです。
+ * 「計算後情報「更正前」情報を更新」処理クラスです。
  *
  * @reamsid_L DBB-0780-050 xicongwang
  */
-public class HonsanteiTsuchishoTempTableCreatProcess extends SimpleBatchProcessBase {
+public class UpdHonsanteiTsuchishoTmpKouseiMaeDataProcess extends SimpleBatchProcessBase {
 
     private IHonsanteiTsuchishoIkkatsuHakkoMapper mapper;
-
-    @BatchWriter
-    BatchEntityCreatedTempTableWriter tempTableWriter;
+    private HonsanteifukaProcessParameter processParameter;
 
     @Override
     protected void beforeExecute() {
@@ -29,6 +26,14 @@ public class HonsanteiTsuchishoTempTableCreatProcess extends SimpleBatchProcessB
 
     @Override
     protected void process() {
-        mapper.creat本算定通知書一時();
+        if (processParameter.is一括発行起動フラグ()) {
+            mapper.update本算定通知書一時_計算後情報更正前_一時();
+        } else {
+            mapper.update本算定通知書一時_計算後情報更正前();
+        }
+    }
+
+    @Override
+    protected void afterExecute() {
     }
 }
