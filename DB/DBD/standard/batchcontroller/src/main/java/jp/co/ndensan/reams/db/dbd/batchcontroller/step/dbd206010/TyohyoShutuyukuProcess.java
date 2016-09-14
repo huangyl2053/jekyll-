@@ -48,7 +48,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -118,34 +117,41 @@ public class TyohyoShutuyukuProcess extends BatchKeyBreakBase<ShafukugemmenTaish
 
     @Override
     protected void createWriter() {
-        List pageBreakKeys = new ArrayList<>();
+        List<RString> pageBreakKeys = new ArrayList<>();
         set改頁Key(breakoutputOrder, pageBreakKeys);
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(REPORT_DBD200017.value()).addBreak(
-                new BreakerCatalog<JigyoshoMukeShakaiFukushiHojinKeigenReportSource>().simplePageBreaker(pageBreakKeys)).create();
+        if (!pageBreakKeys.isEmpty()) {
+            batchReportWriter = BatchReportFactory.createBatchReportWriter(REPORT_DBD200017.value())
+                    .addBreak(new TyohyoShutuyukuSourcePageBreak(pageBreakKeys)).create();
+        } else {
+            batchReportWriter = BatchReportFactory.createBatchReportWriter(REPORT_DBD200017.value(), SubGyomuCode.DBD介護受給).create();
+        }
         reportSourceWriter = new ReportSourceWriter(batchReportWriter);
     }
 
     @Override
     protected void keyBreakProcess(ShafukugemmenTaishoshaJohoEntity t) {
-        if (hasBrek(getBefore(), t)) {
-            outputMessage(t);
-        }
+//        if (hasBrek(getBefore(), t)) {
+//            outputMessageBreak(t);
+//            outputState = false;
+//        } else {
+//            outputState = true;
+//        }
     }
 
-    private boolean hasBrek(ShafukugemmenTaishoshaJohoEntity before, ShafukugemmenTaishoshaJohoEntity current) {
-        boolean state = false;
-        if (1 < 番号 && current.get証記載保険者番号() != null && before.get事業所番号() != null
-                && before.get事業所番号().compareTo(current.get証記載保険者番号().getColumnValue()) == 1) {
-            state = true;
-        }
-        return state;
-    }
-
+//    private boolean hasBrek(ShafukugemmenTaishoshaJohoEntity before, ShafukugemmenTaishoshaJohoEntity current) {
+//        boolean state = false;
+//        if (1 < 番号 && current.get証記載保険者番号() != null && before.get事業所番号() != null
+//                && before.get事業所番号().compareTo(current.get証記載保険者番号().getColumnValue()) == 1) {
+//            state = true;
+//        }
+//        return state;
+//    }
     @Override
     protected void usualProcess(ShafukugemmenTaishoshaJohoEntity t) {
-        if (!hasBrek(getBefore(), t)) {
-            outputMessage(t);
-        }
+//        if (outputState) {
+//            outputMessage(t);
+//        }
+        outputMessage(t);
     }
 
     private void outputMessage(ShafukugemmenTaishoshaJohoEntity t) {
@@ -156,6 +162,13 @@ public class TyohyoShutuyukuProcess extends BatchKeyBreakBase<ShafukugemmenTaish
         report.writeBy(reportSourceWriter);
     }
 
+//    private void outputMessageBreak(ShafukugemmenTaishoshaJohoEntity t) {
+//        Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation(
+//                new LasdecCode(t.get証記載保険者番号().value()));
+//        JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranReport report
+//                = new JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranReport(t, association, 地方公共団体, outputOrder, breakoutputOrder, 番号++);
+//        report.writeBy(reportSourceWriter);
+//    }
     @Override
     protected void afterExecute() {
         if (番号 == 1) {
@@ -166,7 +179,7 @@ public class TyohyoShutuyukuProcess extends BatchKeyBreakBase<ShafukugemmenTaish
         outputJokenhyoFactory();
     }
 
-    private void set改頁Key(IOutputOrder outputOrder, List pageBreakKeys) {
+    private void set改頁Key(IOutputOrder outputOrder, List<RString> pageBreakKeys) {
         RString 改頁１ = RString.EMPTY;
         RString 改頁２ = RString.EMPTY;
         RString 改頁３ = RString.EMPTY;
@@ -216,11 +229,11 @@ public class TyohyoShutuyukuProcess extends BatchKeyBreakBase<ShafukugemmenTaish
         RString 帳票物理名 = RString.EMPTY;
 
         if (TyohyoShutuyukuOrderKey.郵便番号.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("YubinNO");
+            帳票物理名 = new RString("yubinNo");
         } else if (TyohyoShutuyukuOrderKey.証記載保険者番号.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("HokenshaNO");
+            帳票物理名 = new RString("hokenshaNo");
         } else if (TyohyoShutuyukuOrderKey.被保険者番号.get項目ID().equals(項目ID)) {
-            帳票物理名 = new RString("HihokenshaNO");
+            帳票物理名 = new RString("listMeisai_2");
         }
         return 帳票物理名;
     }
@@ -264,7 +277,7 @@ public class TyohyoShutuyukuProcess extends BatchKeyBreakBase<ShafukugemmenTaish
         if (processParameter.get事業者番号() != null && !processParameter.get事業者番号().isEmpty()) {
             出力条件.add(new RString("事業者：").concat(processParameter.get事業者番号()).concat(processParameter.get事業者名()));
         }
-        
+
         return 出力条件;
     }
 
