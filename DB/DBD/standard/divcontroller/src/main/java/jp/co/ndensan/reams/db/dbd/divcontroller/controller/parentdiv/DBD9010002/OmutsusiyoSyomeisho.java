@@ -5,27 +5,24 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD9010002;
 
+import java.util.ArrayList;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbd.definition.core.iryohikojo.IryoHiKojoNaiyo;
+import jp.co.ndensan.reams.db.dbd.definition.message.DbdInformationMessages;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdQuestionMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD9010002.DBD9010002StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD9010002.OmutsusiyoSyomeishoDiv;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.iryohikojokakuninsinsei.OmutsusiyoSyomeishoEntity;
-import jp.co.ndensan.reams.db.dbd.service.core.iryohikojokakuninsinsei.IryoHiKojoKakuninSinsei;
-import jp.co.ndensan.reams.db.dbd.service.report.dbd100029.OmutsuShoumeishoPrintService;
+import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD9010002.OmutsusiyoSyomeishoHandler;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.iryohikojokakuninsinsei.IryohiKojoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -39,7 +36,6 @@ public class OmutsusiyoSyomeisho {
 
     private static final RString 医療費控除証明書 = new RString("IryohiKojyoSyomeisho");
     private static final RString DB = new RString("DB");
-    private static final RString 帳票分類ID = new RString("DBD100029_OmutsuShoumeisho");
 
     /**
      * 画面初期化
@@ -49,35 +45,11 @@ public class OmutsusiyoSyomeisho {
      */
     public ResponseData<OmutsusiyoSyomeishoDiv> onLoad(OmutsusiyoSyomeishoDiv div) {
         TaishoshaKey 引き継ぎEntity = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-//        if (引き継ぎEntity.get被保険者番号() == null || 引き継ぎEntity.get被保険者番号().isEmpty()) {
-//            return ResponseData.of(div).addMessage(DbcInformationMessage.被保険者でないデータ.getMessage());
-//        }
-//        RString メニューID = ResponseHolder.getMenuID();
-//        RString 被保険者番号 = 引き継ぎEntity.get被保険者番号().value();
-//        IryoHiKojoKakuninSinsei iryoHiKojoKakuninSinsei = IryoHiKojoKakuninSinsei.createIntance();
-//        if (!iryoHiKojoKakuninSinsei.checkuJukyusha(被保険者番号)) {
-//            throw new ApplicationException(DbdErrorMessages.受給共通_受給者登録なし.getMessage());
-//        }
-//        List<IryoHiKojo> 医療費控除リスト = iryoHiKojoKakuninSinsei.getIryohikojyo_Chohyo(被保険者番号, IryoHiKojoNaiyo.おむつ使用証明書);
-//        if (医療費控除リスト.isEmpty()) {
-//            throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace("おむつ使用証明書"));
-//        }
-//        ViewStateHolder.put(IryoHiKojoNaiyo.おむつ使用証明書, 医療費控除リスト);
-//        div.getPanelKakuninsho().getCcdKaigoAtenaInfo().initialize(引き継ぎEntity.get識別コード());
-//        div.getPanelKakuninsho().getCcdKaigoShikakuKihon().initialize(被保険者番号);
-        // TODO 1.7 「文書番号入力」共有子Div の初期化
-//        RealInitialLocker.lock(new LockingKey(DB.concat(被保険者番号).concat(医療費控除証明書)));
-//        AccessLogger.log(AccessLogType.照会, PersonalData.of(引き継ぎEntity.get識別コード(),
-//                ExpandedInformation.newBuilder().code(new Code("003")).name(new RString("被保険者番号")).value(被保険者番号).build()));
-//         TODO 1.10 年度DDLの選択肢編集
-//        List<KeyValueDataSource> 年度DDLデータ = new ArrayList<>();
-//        for(IryoHiKojo 医療費控除 : 医療費控除リスト){
-//            KeyValueDataSource data = new KeyValueDataSource();
-//            data.setKey(医療費控除.get控除対象年());
-//            data.setValue(医療費控除.get控除対象年().waki()); // 医療費控除.控除対象年を和暦変換
-//
-//        }
-//        div.getPanelShosaiEria().getDdlTaishonen().setDataSource(年度DDLデータ);
+        if (引き継ぎEntity.get被保険者番号() == null || 引き継ぎEntity.get被保険者番号().isEmpty()) {
+            return ResponseData.of(div).addMessage(DbdInformationMessages.被保険者でないデータ.getMessage()).respond();
+        }
+        List<IryohiKojoEntity> 医療費控除リスト = getHandler(div).onLoad(引き継ぎEntity);
+        ViewStateHolder.put(IryoHiKojoNaiyo.おむつ使用証明書, new ArrayList(医療費控除リスト));
         return ResponseData.of(div).setState(DBD9010002StateName.初期状態);
     }
 
@@ -88,6 +60,8 @@ public class OmutsusiyoSyomeisho {
      * @return ResponseData<OmutsusiyoSyomeishoDiv>
      */
     public ResponseData<OmutsusiyoSyomeishoDiv> onChange_ddlTaishonen(OmutsusiyoSyomeishoDiv div) {
+        List<IryohiKojoEntity> 医療費控除リスト = ViewStateHolder.get(IryoHiKojoNaiyo.おむつ使用証明書, ArrayList.class);
+        getHandler(div).onChange対象年(医療費控除リスト);
         return ResponseData.of(div).respond();
     }
 
@@ -121,16 +95,7 @@ public class OmutsusiyoSyomeisho {
      * @return ResponseData<OmutsusiyoSyomeishoDiv>
      */
     public ResponseData<OmutsusiyoSyomeishoDiv> onClick_btnReportPublish(OmutsusiyoSyomeishoDiv div) {
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード();
-        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号();
-        OmutsusiyoSyomeishoEntity おむつ使用証明書Entity = IryoHiKojoKakuninSinsei.createIntance().editomutsusiyoSyomeisho(識別コード, 帳票分類ID);
-        OmutsuShoumeishoPrintService printService = new OmutsuShoumeishoPrintService();
-        printService.printSingle(おむつ使用証明書Entity);
-        AccessLogger.log(AccessLogType.照会, PersonalData.of(識別コード,
-                ExpandedInformation.newBuilder().code(new Code("003")).name(new RString("被保険者番号"))
-                .value(被保険者番号).build()));
-        // TODO 4.4　医療費控除データの更新を行う
-        // TODO 4.5　更新完了メッセージ
+        getHandler(div).publishReport(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class));
         return ResponseData.of(div).setState(DBD9010002StateName.完了状態);
     }
 
@@ -144,5 +109,9 @@ public class OmutsusiyoSyomeisho {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号();
         RealInitialLocker.release(new LockingKey(DB.concat(被保険者番号.value()).concat(医療費控除証明書)));
         return ResponseData.of(div).respond();
+    }
+
+    private OmutsusiyoSyomeishoHandler getHandler(OmutsusiyoSyomeishoDiv div) {
+        return new OmutsusiyoSyomeishoHandler(div);
     }
 }
