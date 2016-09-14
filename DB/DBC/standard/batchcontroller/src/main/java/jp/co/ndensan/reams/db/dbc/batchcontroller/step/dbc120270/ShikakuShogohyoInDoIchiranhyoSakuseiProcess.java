@@ -90,7 +90,6 @@ public class ShikakuShogohyoInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBa
     private ShikakuShogohyoInDoIchiranhyoSakuseiProcessParameter parameter;
     private ShikakuShogohyoInCsvEntity csvEntity;
     private ShikakuShogohyoInCsvEntitySingle csvEntity1;
-    private List<ShikakuShogohyoInEntity> entityList;
     private List<RString> 改頁リスト;
     private final List<PersonalData> personalDataList = new ArrayList<>();
     private ShikakuShogohyoInEntity currentRecord;
@@ -114,10 +113,7 @@ public class ShikakuShogohyoInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBa
 
     @Override
     protected void initialize() {
-        super.initialize();
-
         改頁リスト = new ArrayList<>();
-        entityList = new ArrayList<>();
         ShichosonSecurityJohoFinder finder = ShichosonSecurityJohoFinder.createInstance();
         this.市町村セキュリティ情報 = finder.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         if (null == this.市町村セキュリティ情報) {
@@ -163,7 +159,6 @@ public class ShikakuShogohyoInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBa
 
         アクセスログ対象追加(entity);
         currentRecord = entity;
-        entityList.add(entity);
         ShikakuShogohyoInEntity beforeEntity = getBefore();
         if (null != beforeEntity) {
             if (null == csvEntity) {
@@ -190,8 +185,8 @@ public class ShikakuShogohyoInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBa
 
     @Override
     protected void afterExecute() {
-        if (!entityList.isEmpty() && currentRecord != null) {
-            if (1 == entityList.size()) {
+        if (連番 != 0) {
+            if (1 == 連番) {
                 csvEntity = new ShikakuShogohyoInCsvEntity();
                 csvEntity1 = new ShikakuShogohyoInCsvEntitySingle();
                 editヘッダー項目(currentRecord);
@@ -200,7 +195,7 @@ public class ShikakuShogohyoInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBa
             writeLine(currentRecord, true);
         }
         eucCsvWriter.close();
-
+        eucCsvWriter1.close();
         if (!personalDataList.isEmpty()) {
             AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
             manager.spool(eucFilePath, accessLogUUID);
@@ -267,14 +262,7 @@ public class ShikakuShogohyoInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBa
 
     }
 
-    /**
-     * 改頁判断のメソッドです。
-     *
-     * @param currentSource ShikakuShogohyoInEntity
-     * @param nextSource ShikakuShogohyoInEntity
-     * @return 改頁Flag
-     */
-    public boolean is改頁(ShikakuShogohyoInEntity currentSource,
+    private boolean is改頁(ShikakuShogohyoInEntity currentSource,
             ShikakuShogohyoInEntity nextSource) {
         boolean flag = false;
         if (!currentSource.get資格照合表一時().getHokenshaNo()
