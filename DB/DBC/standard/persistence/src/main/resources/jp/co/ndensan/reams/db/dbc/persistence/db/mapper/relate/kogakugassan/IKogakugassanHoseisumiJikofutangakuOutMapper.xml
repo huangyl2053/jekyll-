@@ -27,10 +27,10 @@
             <if test="saishoriKubun == 1">
                 OR "DbT3070KogakuGassanJikoFutanGaku"."hoseiZumi_SofuYM" = #{shoriYM}
             </if>)
-        <if test="shoriKunbun == ''">
+        <if test="shoriKunbun == null or shoriKunbun.isEmpty()">
             AND ("DbT3070KogakuGassanJikoFutanGaku"."koki_KokuhoShoriKubun" IS NULL OR "DbT3070KogakuGassanJikoFutanGaku"."koki_KokuhoShoriKubun" = '')
         </if>
-        <if test="shoriKunbun != ''">
+        <if test="shoriKunbun != null and !shoriKunbun.isEmpty()">
             AND "DbT3070KogakuGassanJikoFutanGaku"."koki_KokuhoShoriKubun" = #{shoriKunbun}
         </if>
         ORDER BY
