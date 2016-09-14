@@ -192,7 +192,6 @@ public class HanyoListKyodoJukyushaOutputProcess extends BatchProcessBase<KyodoJ
         if (!parameter.get日付抽出区分().isEmpty() && HizukeChushutsuKubun.直近のみ.getコード().equals(parameter.get日付抽出区分())) {
             抽出条件.add(TITLE_日付抽出区分.concat(HizukeChushutsuKubun.直近のみ.get名称()));
         }
-
         get抽出条件Part2(抽出条件);
         return 抽出条件;
     }
@@ -224,6 +223,7 @@ public class HanyoListKyodoJukyushaOutputProcess extends BatchProcessBase<KyodoJ
                 抽出条件.add(RString.EMPTY);
             }
         }
+        抽出条件.add(RString.EMPTY);
         RString 新規;
         if (parameter.get異動区分S() != null && !parameter.get異動区分S().isEmpty()) {
             if (parameter.get異動区分S().contains(INDEX_1)) {
@@ -247,12 +247,11 @@ public class HanyoListKyodoJukyushaOutputProcess extends BatchProcessBase<KyodoJ
         }
         RString 削除された情報を含める;
         if (parameter.is削除含める()) {
-            削除された情報を含める = new RString("■各異動月の最新情報のみ抽出する");
+            削除された情報を含める = new RString("■削除された情報を含める");
         } else {
-            削除された情報を含める = new RString("□各異動月の最新情報のみ抽出する");
+            削除された情報を含める = RString.EMPTY;
         }
         抽出条件.add(削除された情報を含める);
-
     }
 
     private RString dateFormat(FlexibleYearMonth date) {
