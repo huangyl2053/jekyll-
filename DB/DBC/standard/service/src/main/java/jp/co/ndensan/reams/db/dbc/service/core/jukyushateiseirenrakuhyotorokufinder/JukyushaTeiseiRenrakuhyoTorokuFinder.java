@@ -49,7 +49,6 @@ public class JukyushaTeiseiRenrakuhyoTorokuFinder {
      *
      * @param 被保険者番号 HihokenshaNo
      * @param 履歴番号 int
-     * @param 論理削除フラグ boolean
      * @param 異動年月日 FlexibleDate
      * @param 作成年月日 FlexibleDate
      * @param 氏名_性別_生年月日を印字す RString
@@ -59,14 +58,13 @@ public class JukyushaTeiseiRenrakuhyoTorokuFinder {
     public JukyushaTeiseiRenrakuhyoTorokuFinderResult editHenkomaeTeiseiJoho(
             HihokenshaNo 被保険者番号,
             int 履歴番号,
-            boolean 論理削除フラグ,
             FlexibleDate 異動年月日,
             FlexibleDate 作成年月日,
             RString 氏名_性別_生年月日を印字す) {
         JukyushaTeiseiRenrakuhyoTorokuFinderResult 変更前受給者訂正情報Entity
                 = new JukyushaTeiseiRenrakuhyoTorokuFinderResult();
-        DbT3001JukyushaIdoRenrakuhyoEntity entity = 受給者異動送付Dac.selectAllByKey(
-                被保険者番号, 異動年月日, 履歴番号, 論理削除フラグ);
+        DbT3001JukyushaIdoRenrakuhyoEntity entity = 受給者異動送付Dac.getAllByKey(
+                被保険者番号, 異動年月日, 履歴番号);
         if (entity != null) {
             entity.initializeMd5();
             変更前受給者訂正情報Entity.set作成年月日(作成年月日);
@@ -82,7 +80,6 @@ public class JukyushaTeiseiRenrakuhyoTorokuFinder {
      *
      * @param 被保険者番号 HihokenshaNo
      * @param 履歴番号 int
-     * @param 論理削除フラグ boolean
      * @param 異動年月日 FlexibleDate
      * @param 作成年月日 FlexibleDate
      * @param 氏名_性別_生年月日を印字する RString
@@ -92,14 +89,13 @@ public class JukyushaTeiseiRenrakuhyoTorokuFinder {
     public JukyushaTeiseiRenrakuhyoTorokuFinderResult editHenkoGoTeiseiJoho(
             HihokenshaNo 被保険者番号,
             int 履歴番号,
-            boolean 論理削除フラグ,
             FlexibleDate 異動年月日,
             FlexibleDate 作成年月日,
             RString 氏名_性別_生年月日を印字する) {
         JukyushaTeiseiRenrakuhyoTorokuFinderResult 変更後受給者訂正情報Entity
                 = new JukyushaTeiseiRenrakuhyoTorokuFinderResult();
-        DbT3001JukyushaIdoRenrakuhyoEntity entity = 受給者異動送付Dac.selectAllByKey(
-                被保険者番号, 異動年月日, 履歴番号, 論理削除フラグ);
+        DbT3001JukyushaIdoRenrakuhyoEntity entity = 受給者異動送付Dac.getAllByKey(
+                被保険者番号, 異動年月日, 履歴番号);
         if (entity != null) {
             entity.initializeMd5();
             変更後受給者訂正情報Entity.set作成年月日(作成年月日);
