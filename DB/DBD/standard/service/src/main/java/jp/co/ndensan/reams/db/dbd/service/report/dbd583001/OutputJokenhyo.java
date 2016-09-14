@@ -52,7 +52,7 @@ public class OutputJokenhyo {
             出力条件.add(new RString("【基準日】　").concat(parameter.get基準日().wareki().toDateString()));
         }
         if (parameter.get基準年月() != null) {
-            出力条件.add(new RString("【基準年月】　").concat(parameter.get基準年月().wareki().firstYear(FirstYear.ICHI_NEN).getYearMonth()));
+            出力条件.add(new RString("【基準年月】　").concat(parameter.get基準年月().wareki().firstYear(FirstYear.ICHI_NEN).toDateString()));
         }
         if (parameter.get地区区分() != null) {
             出力条件.add(new RString("【地区区分】　").concat(parameter.get地区区分()));
