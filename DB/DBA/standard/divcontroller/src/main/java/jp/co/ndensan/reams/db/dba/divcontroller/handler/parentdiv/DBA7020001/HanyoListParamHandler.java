@@ -588,6 +588,10 @@ public class HanyoListParamHandler {
                 外国人情報 = true;
             }
         }
+        if (日本人情報 == false && 外国人情報 == false) {
+            日本人情報 = true;
+            外国人情報 = true;
+        }
         parameter.setJukyushaJoho_Nihonjin(日本人情報);
         parameter.setJukyushaJoho_Gaikokujin(外国人情報);
         parameter.setJyuChusyutsuKubun(div.getRadTekiyoJogaisha().getSelectedKey());
@@ -627,6 +631,10 @@ public class HanyoListParamHandler {
             } else if (外国人.equals(key)) {
                 外国人情報 = true;
             }
+        }
+        if (日本人情報 == false && 外国人情報 == false) {
+            日本人情報 = true;
+            外国人情報 = true;
         }
         parameter.setJukyushaJoho_Nihonjin(日本人情報);
         parameter.setJukyushaJoho_Gaikokujin(外国人情報);
@@ -680,6 +688,10 @@ public class HanyoListParamHandler {
             } else if (外国人.equals(key)) {
                 外国人情報 = true;
             }
+        }
+        if (日本人情報 == false && 外国人情報 == false) {
+            日本人情報 = true;
+            外国人情報 = true;
         }
         parameter.setJukyushaJoho_Nihonjin(日本人情報);
         parameter.setJukyushaJoho_Gaikokujin(外国人情報);
