@@ -14,19 +14,19 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class HokenryoKari1Div extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtZanteiKeisanjoHokenryoKari1")
-    private TextBoxNum txtZanteiKeisanjoHokenryoKari1;
+    @JsonProperty("txtKariSanteiHokenryoGakuKari1")
+    private TextBoxNum txtKariSanteiHokenryoGakuKari1;
     @JsonProperty("txtGemmenGakuKari1")
     private TextBoxNum txtGemmenGakuKari1;
-    @JsonProperty("txtZanteiGoukeiGakuKari1")
-    private TextBoxNum txtZanteiGoukeiGakuKari1;
+    @JsonProperty("txtGemmenGoKariSanteiHokenryoGakuKari1")
+    private TextBoxNum txtGemmenGoKariSanteiHokenryoGakuKari1;
     @JsonProperty("zanteihokenryoHeightKari1")
     private zanteihokenryoHeightKari1Div zanteihokenryoHeightKari1;
 
@@ -36,44 +36,76 @@ public class HokenryoKari1Div extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("txtZanteiKeisanjoHokenryoKari1")
-    public TextBoxNum getTxtZanteiKeisanjoHokenryoKari1() {
-        return txtZanteiKeisanjoHokenryoKari1;
+    /*
+     * gettxtKariSanteiHokenryoGakuKari1
+     * @return txtKariSanteiHokenryoGakuKari1
+     */
+    @JsonProperty("txtKariSanteiHokenryoGakuKari1")
+    public TextBoxNum getTxtKariSanteiHokenryoGakuKari1() {
+        return txtKariSanteiHokenryoGakuKari1;
     }
 
-    @JsonProperty("txtZanteiKeisanjoHokenryoKari1")
-    public void setTxtZanteiKeisanjoHokenryoKari1(TextBoxNum txtZanteiKeisanjoHokenryoKari1) {
-        this.txtZanteiKeisanjoHokenryoKari1=txtZanteiKeisanjoHokenryoKari1;
+    /*
+     * settxtKariSanteiHokenryoGakuKari1
+     * @param txtKariSanteiHokenryoGakuKari1 txtKariSanteiHokenryoGakuKari1
+     */
+    @JsonProperty("txtKariSanteiHokenryoGakuKari1")
+    public void setTxtKariSanteiHokenryoGakuKari1(TextBoxNum txtKariSanteiHokenryoGakuKari1) {
+        this.txtKariSanteiHokenryoGakuKari1 = txtKariSanteiHokenryoGakuKari1;
     }
 
+    /*
+     * gettxtGemmenGakuKari1
+     * @return txtGemmenGakuKari1
+     */
     @JsonProperty("txtGemmenGakuKari1")
     public TextBoxNum getTxtGemmenGakuKari1() {
         return txtGemmenGakuKari1;
     }
 
+    /*
+     * settxtGemmenGakuKari1
+     * @param txtGemmenGakuKari1 txtGemmenGakuKari1
+     */
     @JsonProperty("txtGemmenGakuKari1")
     public void setTxtGemmenGakuKari1(TextBoxNum txtGemmenGakuKari1) {
-        this.txtGemmenGakuKari1=txtGemmenGakuKari1;
+        this.txtGemmenGakuKari1 = txtGemmenGakuKari1;
     }
 
-    @JsonProperty("txtZanteiGoukeiGakuKari1")
-    public TextBoxNum getTxtZanteiGoukeiGakuKari1() {
-        return txtZanteiGoukeiGakuKari1;
+    /*
+     * gettxtGemmenGoKariSanteiHokenryoGakuKari1
+     * @return txtGemmenGoKariSanteiHokenryoGakuKari1
+     */
+    @JsonProperty("txtGemmenGoKariSanteiHokenryoGakuKari1")
+    public TextBoxNum getTxtGemmenGoKariSanteiHokenryoGakuKari1() {
+        return txtGemmenGoKariSanteiHokenryoGakuKari1;
     }
 
-    @JsonProperty("txtZanteiGoukeiGakuKari1")
-    public void setTxtZanteiGoukeiGakuKari1(TextBoxNum txtZanteiGoukeiGakuKari1) {
-        this.txtZanteiGoukeiGakuKari1=txtZanteiGoukeiGakuKari1;
+    /*
+     * settxtGemmenGoKariSanteiHokenryoGakuKari1
+     * @param txtGemmenGoKariSanteiHokenryoGakuKari1 txtGemmenGoKariSanteiHokenryoGakuKari1
+     */
+    @JsonProperty("txtGemmenGoKariSanteiHokenryoGakuKari1")
+    public void setTxtGemmenGoKariSanteiHokenryoGakuKari1(TextBoxNum txtGemmenGoKariSanteiHokenryoGakuKari1) {
+        this.txtGemmenGoKariSanteiHokenryoGakuKari1 = txtGemmenGoKariSanteiHokenryoGakuKari1;
     }
 
+    /*
+     * getzanteihokenryoHeightKari1
+     * @return zanteihokenryoHeightKari1
+     */
     @JsonProperty("zanteihokenryoHeightKari1")
     public zanteihokenryoHeightKari1Div getZanteihokenryoHeightKari1() {
         return zanteihokenryoHeightKari1;
     }
 
+    /*
+     * setzanteihokenryoHeightKari1
+     * @param zanteihokenryoHeightKari1 zanteihokenryoHeightKari1
+     */
     @JsonProperty("zanteihokenryoHeightKari1")
     public void setZanteihokenryoHeightKari1(zanteihokenryoHeightKari1Div zanteihokenryoHeightKari1) {
-        this.zanteihokenryoHeightKari1=zanteihokenryoHeightKari1;
+        this.zanteihokenryoHeightKari1 = zanteihokenryoHeightKari1;
     }
 
     // </editor-fold>

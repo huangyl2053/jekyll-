@@ -10,9 +10,9 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.report.kogakukaigoservicehi.KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoItem;
 import jp.co.ndensan.reams.db.dbc.business.report.kogakukaigoservicehi.KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoProperty;
 import jp.co.ndensan.reams.db.dbc.business.report.kogakukaigoservicehi.KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoReport;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokeiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakukaigoservicehi.KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoReportSource;
-import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3055KogakuKyufuTaishoshaGokeiDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT3055KogakuKyufuTaishoshaGokeiDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -117,10 +117,10 @@ public class KogakuKaigoServicehiShikyuJuryoIninShinseisho {
             HihokenshaKihonBusiness business, RString ninshoshaYakushokuMei) {
         List<KogakuKaigoServicehiShikyuShinseiShoJuryoIninHaraiyoReport> list = new ArrayList<>();
         if (JuminShubetsu.日本人.getCode().equals(business.get住民種別コード())
-                || JuminShubetsu.住登外個人_日本人.getCode().equals(business.get住民種別コード())) {
+            || JuminShubetsu.住登外個人_日本人.getCode().equals(business.get住民種別コード())) {
             生年月日 = パターン12(business.get生年月日());
         } else if (JuminShubetsu.外国人.getCode().equals(business.get住民種別コード())
-                || JuminShubetsu.住登外個人_外国人.getCode().equals(business.get住民種別コード())) {
+                   || JuminShubetsu.住登外個人_外国人.getCode().equals(business.get住民種別コード())) {
             生年月日 = get生年月日_外国人(business);
         }
         RString 郵便番号 = business.get郵便番号();

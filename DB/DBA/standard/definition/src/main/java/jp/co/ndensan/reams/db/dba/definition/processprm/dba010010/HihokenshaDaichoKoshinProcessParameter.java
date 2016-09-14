@@ -13,7 +13,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 資格異動対象者情報取得_プロセス用のパラメータです。
+ * 資格異動対象者情報取得_バッチ用のパラメータです。
  *
  * @reamsid_L DBA-0330-010 xuyue
  */
@@ -25,14 +25,22 @@ public class HihokenshaDaichoKoshinProcessParameter implements IBatchProcessPara
     private FlexibleDate 開始日;
     private FlexibleDate 終了日;
     private boolean is通常運用時;
+    private IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey;
 
     /**
      * 抽出条件の生成のMybatisパラメータを作成します。
      *
      * @param shikibetsuTaishoPSMSearchKey 宛名識別対象PSM検索キー
+     * @param 開始日 FlexibleDate
+     * @param 終了日 FlexibleDate
      * @return 抽出条件の生成のMybatisパラメータ
      */
-    public AtenaMybatisParameter toAtenaMybatisParameter(IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey) {
-        return new AtenaMybatisParameter(shikibetsuTaishoPSMSearchKey);
+    public AtenaMybatisParameter toAtenaMybatisParameter(IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey,
+            FlexibleDate 開始日, FlexibleDate 終了日) {
+        this.開始日 = 開始日;
+        this.終了日 = 終了日;
+        this.shikibetsuTaishoPSMSearchKey = shikibetsuTaishoPSMSearchKey;
+
+        return new AtenaMybatisParameter(this.shikibetsuTaishoPSMSearchKey, this.開始日, this.終了日);
     }
 }

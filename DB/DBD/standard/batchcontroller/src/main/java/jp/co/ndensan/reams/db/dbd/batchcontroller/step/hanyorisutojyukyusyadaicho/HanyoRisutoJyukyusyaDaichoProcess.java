@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.Chushu
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.SoshitsuKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ChokkinIdoJiyuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.NinteiShienShinseiKubun;
-import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.SakujoJiyuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ShinseishaKankeiCode;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.hanyorisutojyukyusyadaicho.HanyoRisutoJyukyusyaDaichoProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyorisutojyukyusyadaicho.HanyoRisutoJyukyusyaDaichoEntity;
@@ -36,8 +35,10 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiC
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.SakujoJiyuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShienShinseiKubun;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
@@ -126,6 +127,8 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
     private static final RString 職権修正 = new RString("職権修正　　　");
     private static final RString 職権取消 = new RString("職権取消　　　");
     private static final RString 履歴修正 = new RString("履歴修正　　　");
+    private static final RString 情報区分_受給 = new RString("受給");
+    private static final RString 情報区分_申請 = new RString("申請");
     private static final RString SHIKAKUSYUTOKU = new RString("資格取得前申請");
     private static final RString SHITEII = new RString("指定医");
     private static final RString 介護保険施設 = new RString("11");
@@ -578,7 +581,8 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
         eucCsvEntity.set医療保険記号番号(entity.get医療保険加入状況_医療保険記号番号());
         eucCsvEntity.set特定疾病(RString.isNullOrEmpty(entity.get受給者台帳_2号特定疾病コード()) ? RString.EMPTY
                 : TokuteiShippei.toValue(entity.get受給者台帳_2号特定疾病コード()).get名称());
-        eucCsvEntity.set受給申請事由(set受給申請事由(entity.get受給者台帳_受給申請事由(), entity.get受給者台帳_要支援者認定申請区分()));
+        eucCsvEntity.set受給申請事由(set受給申請事由(
+                entity.get受給者台帳_受給申請事由(), entity.get受給者台帳_要支援者認定申請区分(), 情報区分_受給));
         eucCsvEntity.set申請理由(entity.get受給者台帳_申請理由());
         eucCsvEntity.set申請関係者(RString.isNullOrEmpty(entity.get受給者台帳_申請者関係コード()) ? RString.EMPTY
                 : ShinseishaKankeiCode.toValue(entity.get受給者台帳_申請者関係コード()).get名称());
@@ -608,7 +612,7 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
         eucCsvEntity.set調査員郵便(set郵便番号(entity.get今回調査員_郵便番号()));
         eucCsvEntity.set調査員住所(entity.get今回調査員_住所());
         eucCsvEntity.set調査員連絡先(entity.get今回調査員_電話番号());
-        eucCsvEntity.set調査員資格(RString.isNullOrEmpty(entity.get今回調査員_調査員資格()) ? RString.EMPTY
+        eucCsvEntity.set調査員資格((entity.get今回調査員_調査員資格() == null || entity.get今回調査員_調査員資格().trim().isEmpty()) ? RString.EMPTY
                 : Sikaku.toValue(entity.get今回調査員_調査員資格()).get名称());
         eucCsvEntity.set調査員所属機関名(entity.get今回調査員_所属機関名称());
         eucCsvEntity.set調査員状況(entity.is今回調査員_状況フラグ() ? ARI : MURI);
@@ -674,7 +678,8 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
                 entity.get初回受給情報_要介護認定状態区分コード()));
         eucCsvEntity.set初回認定開始日(set年月日(entity.get初回受給情報_認定有効期間開始年月日()));
         eucCsvEntity.set初回認定終了日(set年月日(entity.get初回受給情報_認定有効期間終了年月日()));
-        eucCsvEntity.set初回申請事由(set受給申請事由(entity.get初回受給情報_受給申請事由(), entity.get初回申請_要支援者認定申請区分()));
+        eucCsvEntity.set初回申請事由(set受給申請事由(
+                entity.get初回受給情報_受給申請事由(), entity.get初回申請_要支援者認定申請区分(), 情報区分_申請));
         eucCsvEntity.set初回みなし更新(setみなし更新認定(entity.get初回受給情報_みなし要介護区分コード()));
         eucCsvEntity.set初回当初認定有効開始日(set年月日(entity.get初回受給情報_当初認定有効開始年月日()));
         eucCsvEntity.set初回当初認定有効終了日(set年月日(entity.get初回受給情報_当初認定有効終了年月日()));
@@ -686,7 +691,7 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
         eucCsvEntity.set前回認定開始日(set年月日(entity.get前回受給情報_認定有効期間開始年月日()));
         eucCsvEntity.set前回認定終了日(set年月日(entity.get前回受給情報_認定有効期間終了年月日()));
         eucCsvEntity.set前回受給申請事由(set受給申請事由(entity.get前回受給情報_受給申請事由(),
-                entity.get前回申請_要支援者認定申請区分()));
+                entity.get前回申請_要支援者認定申請区分(), 情報区分_申請));
         eucCsvEntity.set前回みなし更新(setみなし更新認定(entity.get前回受給情報_みなし要介護区分コード()));
         eucCsvEntity.set前回当初認定有効開始日(set年月日(entity.get前回受給情報_当初認定有効開始年月日()));
         eucCsvEntity.set前回当初認定有効終了日(set年月日(entity.get前回受給情報_当初認定有効終了年月日()));
@@ -702,7 +707,7 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
         eucCsvEntity.set前々回認定開始日(set年月日(entity.get前々回受給情報_認定有効期間開始年月日()));
         eucCsvEntity.set前々回認定終了日(set年月日(entity.get前々回受給情報_認定有効期間終了年月日()));
         eucCsvEntity.set前々回受給申請事由(set受給申請事由(entity.get前々回受給情報_受給申請事由(),
-                entity.get前々回申請_要支援者認定申請区分()));
+                entity.get前々回申請_要支援者認定申請区分(), 情報区分_申請));
         eucCsvEntity.set前々回みなし更新(setみなし更新認定(entity.get前々回受給情報_みなし要介護区分コード()));
         eucCsvEntity.set前々回当初認定有効開始日(set年月日(entity.get前々回受給情報_当初認定有効開始年月日()));
         eucCsvEntity.set前々回当初認定有効終了日(set年月日(entity.get前々回受給情報_当初認定有効終了年月日()));
@@ -857,7 +862,7 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
         return RString.EMPTY;
     }
 
-    private RString set受給申請事由(RString 受給申請事由原, RString 要支援者認定申請区分) {
+    private RString set受給申請事由(RString 受給申請事由原, RString 要支援者認定申請区分, RString 情報区分) {
         if (RString.isNullOrEmpty(受給申請事由原) || RString.isNullOrEmpty(要支援者認定申請区分)) {
             return RString.EMPTY;
         }
@@ -874,11 +879,17 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
         } else if (JukyuShinseiJiyu.再申請_有効期限外.get名称().equals(受給申請事由)) {
             return 再申請外;
         } else if (JukyuShinseiJiyu.要介護度変更申請.get名称().equals(受給申請事由)) {
-            if (NinteiShienShinseiKubun.認定支援申請.get名称().equals(
-                    NinteiShienShinseiKubun.toValue(要支援者認定申請区分).get名称())) {
-                return 支援から申請;
-            } else {
-                return 区分変更申請;
+            if (要支援者認定申請区分 != null && !要支援者認定申請区分.trim().isEmpty()) {
+                if (情報区分.equals(情報区分_受給)) {
+                    if (NinteiShienShinseiKubun.認定支援申請.get名称().equals(
+                            NinteiShienShinseiKubun.toValue(要支援者認定申請区分).get名称())) {
+                        return 支援から申請;
+                    } else {
+                        return 区分変更申請;
+                    }
+                } else {
+                    return ShienShinseiKubun.toValue(要支援者認定申請区分).get名称();
+                }
             }
         } else if (JukyuShinseiJiyu.指定サービス種類変更申請.get名称().equals(受給申請事由)) {
             return サ変更申請;
@@ -1069,7 +1080,7 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
     }
 
     private RString set性別(RString 性別コード) {
-        if (RString.isNullOrEmpty(性別コード)) {
+        if (性別コード == null || 性別コード.trim().isEmpty()) {
             return RString.EMPTY;
         }
         return Seibetsu.toValue(性別コード).get名称();

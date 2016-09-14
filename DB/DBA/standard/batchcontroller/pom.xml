@@ -27,10 +27,19 @@
             <groupId>jp.co.ndensan.reams.db.dba</groupId>
             <artifactId>DbaService</artifactId>
         </dependency>
+        <!-- DBZ -->
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzService</artifactId>
+        </dependency>
         <!-- DBX -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxDefinition</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
+            <artifactId>DbxService</artifactId>
         </dependency>
         <!-- テスト -->
         <dependency>
@@ -46,6 +55,6 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzService</artifactId>
-        </dependency>    
+        </dependency>
     </dependencies>
 </project>

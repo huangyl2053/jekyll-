@@ -15,10 +15,10 @@
     <properties>
         <jp.co.ndensan.reams.dbzVersion>1.0-SNAPSHOT</jp.co.ndensan.reams.dbzVersion>
         <jp.co.ndensan.reams.dbaVersion>1.0-SNAPSHOT</jp.co.ndensan.reams.dbaVersion>
-        <jp.co.ndensan.reams.dbbVersion>1.0-SNAPSHOT</jp.co.ndensan.reams.dbbVersion>
-        <jp.co.ndensan.reams.dbcVersion>1.0-SNAPSHOT</jp.co.ndensan.reams.dbcVersion>
-        <jp.co.ndensan.reams.dbdVersion>1.0-SNAPSHOT</jp.co.ndensan.reams.dbdVersion>
-        <jp.co.ndensan.reams.dbeVersion>1.0-SNAPSHOT</jp.co.ndensan.reams.dbeVersion>
+		<jp.co.ndensan.reams.dbbVersion>1.0-SNAPSHOT</jp.co.ndensan.reams.dbbVersion>
+		<jp.co.ndensan.reams.dbcVersion>1.0-SNAPSHOT</jp.co.ndensan.reams.dbcVersion>
+		<jp.co.ndensan.reams.dbdVersion>1.0-SNAPSHOT</jp.co.ndensan.reams.dbdVersion>
+		<jp.co.ndensan.reams.dbeVersion>1.0-SNAPSHOT</jp.co.ndensan.reams.dbeVersion>
     </properties>
     <modules>
         <module>entity</module>

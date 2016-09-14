@@ -32,6 +32,6 @@ public class HanyoListHihokenshadaichoFlow extends BatchFlowBase<HanyoListHihoke
     @Step(REPORT_PROCESS)
     protected IBatchFlowCommand reportProcess() {
         return loopBatch(HanyoListHihokenshadaichoProcess.class)
-                .arguments(getParameter().toHanyoListHihokenshadaichoProcessParameter()).define();
+                .arguments(getParameter().toHanyoListHihokenshadaichoProcessParameter(getJobId())).define();
     }
 }

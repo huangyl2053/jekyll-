@@ -70,16 +70,18 @@ public class ShinsakaiJohoKojinHandler {
             div.getTxtShinsaShuryoTime().setValue(new RTime(kaisai.get介護認定審査会終了時刻()));
         }
         div.getTxtShinsaTime().setValue(new RString(String.valueOf(kaisai.get所要時間合計())));
-        div.getDgShinsakaiIin().setDataSource(get審査会委員一覧データグリッド());
-        div.getDgHoketsuShinsakai().setDataSource(get補欠審査会委員一覧データグリッド());
+        div.getDgShinsakaiIin().setDataSource(get審査会委員一覧データグリッド(kaisai));
+        div.getDgHoketsuShinsakai().setDataSource(get補欠審査会委員一覧データグリッド(kaisai));
     }
 
     private ShinseishoKanriNo get申請書管理番号() {
         return new ShinseishoKanriNo(div.getHdnShinseishoKanriNo());
     }
 
-    private List<dgShinsakaiIin_Row> get審査会委員一覧データグリッド() {
-        List<WariateIinAndIinJoho> shinsakaijlist = ShinsakaiJohoKojinFinder.createInstance().onLoad2(get申請書管理番号());
+    private List<dgShinsakaiIin_Row> get審査会委員一覧データグリッド(KaisaiKekkaAndBashoJoho 開催情報) {
+        List<WariateIinAndIinJoho> shinsakaijlist = ShinsakaiJohoKojinFinder.createInstance().onLoad2(
+                開催情報.get合議体番号(), 開催情報.get介護認定審査会開催番号(), 開催情報.get介護認定審査会開催年月日()
+        );
         dgShinsakaiIin_Row dgShin = new dgShinsakaiIin_Row();
         List<dgShinsakaiIin_Row> dgShinlist = new ArrayList<>();
         for (WariateIinAndIinJoho shinsakaij : shinsakaijlist) {
@@ -144,8 +146,10 @@ public class ShinsakaiJohoKojinHandler {
         return dgShin;
     }
 
-    private List<dgHoketsuShinsakai_Row> get補欠審査会委員一覧データグリッド() {
-        List<WariateIinAndIinJoho> kaijyouhoulist = ShinsakaiJohoKojinFinder.createInstance().onLoad3(get申請書管理番号());
+    private List<dgHoketsuShinsakai_Row> get補欠審査会委員一覧データグリッド(KaisaiKekkaAndBashoJoho 開催情報) {
+        List<WariateIinAndIinJoho> kaijyouhoulist = ShinsakaiJohoKojinFinder.createInstance().onLoad3(
+                開催情報.get合議体番号(), 開催情報.get介護認定審査会開催番号(), 開催情報.get介護認定審査会開催年月日()
+        );
         dgHoketsuShinsakai_Row dgHoketsu = new dgHoketsuShinsakai_Row();
         List<dgHoketsuShinsakai_Row> dgHoketsulist = new ArrayList<>();
         for (WariateIinAndIinJoho kaijyouhou : kaijyouhoulist) {

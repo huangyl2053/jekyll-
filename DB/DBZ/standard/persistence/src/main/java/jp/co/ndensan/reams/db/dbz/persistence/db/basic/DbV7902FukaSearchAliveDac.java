@@ -11,11 +11,16 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7902FukaSearch;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7902FukaSearch.choteiNendo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7902FukaSearch.fukaNendo;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7902FukaSearch.tsuchishoNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7902FukaSearch.shikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7902FukaSearchEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.NullsOrder;
+import jp.co.ndensan.reams.uz.uza.util.db.OrderBy;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
@@ -56,6 +61,27 @@ public class DbV7902FukaSearchAliveDac implements ISaveable<DbV7902FukaSearchEnt
                                 eq(choteiNendo, 調定年度),
                                 eq(fukaNendo, 賦課年度),
                                 eq(tsuchishoNo, 通知書番号))).
+                toObject(DbV7902FukaSearchEntity.class);
+    }
+
+    /**
+     * 識別コードで検索した結果を賦課年度順にソートし、その1件目を取得します。
+     *
+     * @param 識別コード 識別コード
+     * @return DbV7902FukaSearchEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbV7902FukaSearchEntity selectBy識別コードOrderBy賦課年度(ShikibetsuCode 識別コード) throws NullPointerException {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbV7902FukaSearch.class).
+                where(eq(shikibetsuCode, 識別コード)).
+                order(new OrderBy(fukaNendo, Order.DESC, NullsOrder.LAST)).
+                limit(1).
                 toObject(DbV7902FukaSearchEntity.class);
     }
 

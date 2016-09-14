@@ -96,7 +96,7 @@ public class ShikakuKihonJohoHandler {
         row.getTaishoDate().setValue(master.getTaishoYMD() == null ? FlexibleDate.EMPTY : master.getTaishoYMD());
         row.setShisetsuShurui(master.getNyushoShisetsuShurui() == null ? RString.EMPTY
                 : ShisetsuType.toValue(master.getNyushoShisetsuShurui()).get名称());
-        row.setNyushoShisetsu(master.getNyushoShisetsuCode() == null ? RString.EMPTY : master.getNyushoShisetsuCode().value());
+        row.setNyushoShisetsu(master.getNyushoShisetsuCode() == null ? RString.EMPTY : master.getJigyoshaName().value());
         row.getRenrakuhyoHakkoDate().setValue(master.getTatokuRenrakuhyoHakkoYMD() == null
                 ? FlexibleDate.EMPTY : master.getTatokuRenrakuhyoHakkoYMD());
         row.getShisetuTaishoTuchiHakkoDate().setValue(master.getShisetsuTaishoTsuchiHakkoYMD() == null
@@ -184,15 +184,15 @@ public class ShikakuKihonJohoHandler {
             RString 文書番号発番方法 = bushoNo.get文書番号発番方法();
             if (BunshoNoHatsubanHoho.固定.getCode().equals(文書番号発番方法)) {
                 div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo()
-                        .getTxtBunshoBango().setValue(bushoNo.edit文書番号());
+                        .getCcdBunshoBangoInput().setDecorationClass(bushoNo.edit文書番号());
                 div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getBtnJidoFuban().setDisplayNone(true);
             } else if (BunshoNoHatsubanHoho.手入力.getCode().equals(文書番号発番方法)) {
                 div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo()
-                        .getTxtBunshoBango().setValue(RString.EMPTY);
+                        .getCcdBunshoBangoInput().setDecorationClass(RString.EMPTY);
                 div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getBtnJidoFuban().setDisplayNone(true);
             } else if (BunshoNoHatsubanHoho.自動採番.getCode().equals(文書番号発番方法)) {
                 div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo()
-                        .getTxtBunshoBango().setValue(RString.EMPTY);
+                        .getCcdBunshoBangoInput().setDecorationClass(RString.EMPTY);
                 div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getBtnJidoFuban().setDisplayNone(false);
             }
         }

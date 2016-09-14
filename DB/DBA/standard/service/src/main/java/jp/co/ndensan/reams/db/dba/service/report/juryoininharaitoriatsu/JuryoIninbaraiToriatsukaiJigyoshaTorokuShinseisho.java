@@ -58,7 +58,7 @@ public class JuryoIninbaraiToriatsukaiJigyoshaTorokuShinseisho {
                 INinshoshaSourceBuilder ninshoshaSourceBuilder = NinshoshaSourceBuilderFactory.createInstance(
                         nishosha, association, reportSourceWriter.getImageFolderPath(), RDate.getNowDate());
                 for (JuryoIninharaiToriatsukaiJigyoshaTorokuShinseishReport report
-                        : toReports(ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei)) {
+                     : toReports(ninshoshaSourceBuilder.buildSource().ninshoshaYakushokuMei)) {
                     report.writeBy(reportSourceWriter);
                 }
             }

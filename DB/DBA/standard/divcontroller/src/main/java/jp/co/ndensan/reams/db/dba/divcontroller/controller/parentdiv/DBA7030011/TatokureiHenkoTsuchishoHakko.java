@@ -70,7 +70,8 @@ public class TatokureiHenkoTsuchishoHakko {
         }
         createHandler(div).適用情報Gridの設定(tekiyoJohoList == null ? new ArrayList() : tekiyoJohoList);
         createHandler(div).適用情報の名称編集(ReportIdDBA.DBA100006.getReportId());
-        createHandler(div).get初期文書番号取得(ReportIdDBA.DBA100007.getReportId());
+        createHandler(div).get初期文書番号取得(ReportIdDBA.DBA100006.getReportId());
+        div.getTajutokuTekiyoJohoIchiran().getReportPublish().setIsPublish(true);
         CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(発行ボタン, true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(発行チェックボタン, true);
         return ResponseData.of(div).respond();
@@ -100,8 +101,8 @@ public class TatokureiHenkoTsuchishoHakko {
         IBunshoNoFinder bushoFineder = BunshoNoFinderFactory.createInstance();
         BunshoNo bushoNo = bushoFineder.get文書番号管理(ReportIdDBA.DBA100006.getReportId(), FlexibleDate.getNowDate());
         if (bushoNo != null) {
-            div.getTajutokuTekiyoJohoIchiran().getReportPublish().
-                    getHenshuNaiyo().getTxtBunshoBango().setValue(bushoNo.edit文書番号(countedItem.nextString()));
+            div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().
+                    getCcdBunshoBangoInput().setDecorationClass(bushoNo.edit文書番号(countedItem.nextString()));
         }
         return ResponseData.of(div).respond();
     }
@@ -166,7 +167,7 @@ public class TatokureiHenkoTsuchishoHakko {
         return TashichosonJushochitokureishaRenrakuhyoFinder.createInstance().
                 setChohyoData(TatokuKanrenParameter.
                         createParam_TatokuKanren(div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtYubinNo().getValue(),
-                                div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtBunshoBango().getValue(),
+                                div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getCcdBunshoBangoInput().get文書番号(),
                                 div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getTxtJusho().getValue(),
                                 div.getTajutokuTekiyoJohoIchiran().getReportPublish().getHenshuNaiyo().getCcdPrintContentsSetting().getIssueDate() == null
                                 ? FlexibleDate.EMPTY : new FlexibleDate(div.getTajutokuTekiyoJohoIchiran().getReportPublish().
@@ -196,8 +197,8 @@ public class TatokureiHenkoTsuchishoHakko {
         item.setBunshoNo(business.get文書番号());
         item.setHokenshaJusho(business.get保険者住所());
         item.setHakkoYMD(business.get発行年月日());
-        item.setHokenshaName(business.get保険者名());
-        item.setTantoBushoName(business.get担当部署名());
+        item.setHokenshaName(business.get保険者名().concat(business.get保険者名敬称()));
+        item.setTantoBushoName(business.get担当部署名().concat(business.get担当部署名敬称()));
         item.setBarcode(business.getバーコード情報());
         item.setMidashi1(business.get見出し());
         item.setHihokenshaNo1(business.get被保険者番号１());

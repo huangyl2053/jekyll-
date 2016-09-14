@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.servicenokanriba
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.servicenokanribangourendou.JigyouKetteiTutisyoParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3054KogakuKyufuTaishoshaMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicenokanribangourendou.ServiceNoKanribangouRendouEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3054KogakuKyufuTaishoshaMeisaiEntity;
 
 /**
  * 高額サービス費支給決定通知書（単）用のマッパーインタフェースです。

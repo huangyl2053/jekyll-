@@ -168,6 +168,7 @@ public class ShoKaishuKirokuKanri {
                 list.set(rowcount, row);
                 shoKaishuDiv.getDgKoufuKaishu().setDataSource(list);
                 createResponseData(shoKaishuDiv).data = shoKaishuDiv;
+                shoKaishuDiv.getPanelInput().setDisabled(true);
             }
             if (状態_削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
                 shoKaishuDiv.getDgKoufuKaishu().getClickedItem().setStatus(状態_削除);
@@ -190,7 +191,9 @@ public class ShoKaishuKirokuKanri {
             shoKaishuDiv.getPanelInput().getTxtKoufuType().setDisabled(true);
             shoKaishuDiv.getPanelInput().getBtnConfirm().setDisabled(true);
             shoKaishuDiv.getPanelInput().getBtnCancel().setDisabled(true);
-        }
+    }
+            shoKaishuDiv.getPanelInput().setDisabled(true);
+
         ViewStateHolder.put(ViewStateKeys.状態, RString.EMPTY);
         return createResponseData(shoKaishuDiv);
 
@@ -215,6 +218,7 @@ public class ShoKaishuKirokuKanri {
         shoKaishuDiv.getPanelInput().getTxaKaishuRiyu().clearValue();
         shoKaishuDiv.getPanelInput().getBtnConfirm().setDisabled(true);
         shoKaishuDiv.getPanelInput().getBtnCancel().setDisabled(true);
+        shoKaishuDiv.getPanelInput().setDisabled(true);
         response.data = shoKaishuDiv;
         return response;
     }

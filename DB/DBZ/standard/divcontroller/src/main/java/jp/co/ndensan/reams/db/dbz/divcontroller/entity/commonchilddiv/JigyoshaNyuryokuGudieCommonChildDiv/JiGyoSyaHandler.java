@@ -11,9 +11,8 @@ import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.ServiceJigyoshaInputGui
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.ServiceShuruiJigyoshaInputGuide;
 import jp.co.ndensan.reams.db.dbz.definition.core.jigyoshashubetsu.JigyosyaType;
 import jp.co.ndensan.reams.db.dbz.definition.core.kaigojigyoshano.KaigoJigyoshaNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.servicechushutsukbn.ServiceChushutsuKbn;
 import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.JigyoshaKubun;
+import jp.co.ndensan.reams.db.dbz.definition.enumeratedtype.kyotsu.JigyoshaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.jigyosha.JigyoshaInputGuideParameter;
 import jp.co.ndensan.reams.db.dbz.service.core.jigyosha.JigyoshaInputGuideFinder;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -97,11 +96,11 @@ public class JiGyoSyaHandler {
 
             SearchResult<ServiceJigyoshaInputGuide> Jigyosha = JigyoshaInputGuideFinder.createInstance().getServiceJigyoshaInputGuide(
                     JigyoshaInputGuideParameter.createParam_ServiceJigyoshaInputGuide(new KaigoJigyoshaNo(
-                                    div.getKennsakuJyokenn().getTxtJIgyoshaNo().getValue()),
+                            div.getKennsakuJyokenn().getTxtJIgyoshaNo().getValue()),
                             div.getKennsakuJyokenn().getTxtYukouKaishibi().getFromValue() == null ? FlexibleDate.EMPTY
-                            : new FlexibleDate(div.getKennsakuJyokenn().getTxtYukouKaishibi().getFromValue().toString()),
+                                    : new FlexibleDate(div.getKennsakuJyokenn().getTxtYukouKaishibi().getFromValue().toString()),
                             div.getKennsakuJyokenn().getTxtYukouKaishibi().getToValue() == null ? FlexibleDate.EMPTY
-                            : new FlexibleDate(div.getKennsakuJyokenn().getTxtYukouKaishibi().getToValue().toString()),
+                                    : new FlexibleDate(div.getKennsakuJyokenn().getTxtYukouKaishibi().getToValue().toString()),
                             new AtenaMeisho(div.getKennsakuJyokenn().getTxtJigyoshamei().getValue()),
                             new YubinNo(div.getKennsakuJyokenn().getTxtYubinNo().getValue().toString()),
                             div.getKennsakuJyokenn().getTxtJusho().getDomain().value(),
@@ -112,7 +111,7 @@ public class JiGyoSyaHandler {
                             FlexibleDate.getNowDate(),
                             div.getKennsakuJyokenn().getServiceJigyosha().getDdlKennCode().getSelectedKey(),
                             div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().getValue() == null ? 0
-                            : div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().getValue().intValue()));
+                                    : div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().getValue().intValue()));
 
             List<dgJigyoshaItiran_Row> dgJigyoshaItiranList = new ArrayList();
             if (!Jigyosha.records().isEmpty()) {
@@ -165,11 +164,11 @@ public class JiGyoSyaHandler {
             }
             SearchResult<ServiceJigyoshaInputGuide> Jigyosha = JigyoshaInputGuideFinder.createInstance().getOtherTokureiInputGuide(
                     JigyoshaInputGuideParameter.createParam_OtherTokureiInputGuide(new KaigoJigyoshaNo(
-                                    div.getKennsakuJyokenn().getTxtJIgyoshaNo().getValue()),
+                            div.getKennsakuJyokenn().getTxtJIgyoshaNo().getValue()),
                             div.getKennsakuJyokenn().getTxtYukouKaishibi().getFromValue() == null ? FlexibleDate.EMPTY
-                            : new FlexibleDate(div.getKennsakuJyokenn().getTxtYukouKaishibi().getFromValue().toString()),
+                                    : new FlexibleDate(div.getKennsakuJyokenn().getTxtYukouKaishibi().getFromValue().toString()),
                             div.getKennsakuJyokenn().getTxtYukouKaishibi().getToValue() == null ? FlexibleDate.EMPTY
-                            : new FlexibleDate(div.getKennsakuJyokenn().getTxtYukouKaishibi().getToValue().toString()),
+                                    : new FlexibleDate(div.getKennsakuJyokenn().getTxtYukouKaishibi().getToValue().toString()),
                             new AtenaMeisho(div.getKennsakuJyokenn().getTxtJigyoshamei().getValue()),
                             new YubinNo(div.getKennsakuJyokenn().getTxtYubinNo().getValue().toString()),
                             div.getKennsakuJyokenn().getTxtJusho().getDomain().value(),
@@ -179,7 +178,7 @@ public class JiGyoSyaHandler {
                             管外,
                             JigyosyaType.住所地特例対象施設.getコード(),
                             div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().getValue() == null ? 0
-                            : div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().getValue().intValue()));
+                                    : div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().getValue().intValue()));
 
             List<dgJigyoshaItiran_Row> dgJigyoshaItiranList = new ArrayList();
 
@@ -222,11 +221,11 @@ public class JiGyoSyaHandler {
 
             SearchResult<ServiceJigyoshaInputGuide> Jigyosha = JigyoshaInputGuideFinder.createInstance().getTekiyoJogaiInputGuide(
                     JigyoshaInputGuideParameter.createParam_TekiyoJogaiInputGuide(new KaigoJigyoshaNo(
-                                    div.getKennsakuJyokenn().getTxtJIgyoshaNo().getValue()),
+                            div.getKennsakuJyokenn().getTxtJIgyoshaNo().getValue()),
                             div.getKennsakuJyokenn().getTxtYukouKaishibi().getFromValue() == null ? FlexibleDate.EMPTY
-                            : new FlexibleDate(div.getKennsakuJyokenn().getTxtYukouKaishibi().getFromValue().toString()),
+                                    : new FlexibleDate(div.getKennsakuJyokenn().getTxtYukouKaishibi().getFromValue().toString()),
                             div.getKennsakuJyokenn().getTxtYukouKaishibi().getToValue() == null ? FlexibleDate.EMPTY
-                            : new FlexibleDate(div.getKennsakuJyokenn().getTxtYukouKaishibi().getToValue().toString()),
+                                    : new FlexibleDate(div.getKennsakuJyokenn().getTxtYukouKaishibi().getToValue().toString()),
                             new AtenaMeisho(div.getKennsakuJyokenn().getTxtJigyoshamei().getValue()),
                             new YubinNo(div.getKennsakuJyokenn().getTxtYubinNo().getValue().toString()),
                             div.getKennsakuJyokenn().getTxtJusho().getDomain().value(),
@@ -234,7 +233,7 @@ public class JiGyoSyaHandler {
                             FlexibleDate.getNowDate(),
                             JigyosyaType.適用除外施設.getコード(),
                             div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().getValue() == null ? 0
-                            : div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().getValue().intValue()));
+                                    : div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().getValue().intValue()));
             List<dgJigyoshaItiran_Row> dgJigyoshaItiranList = new ArrayList();
 
             if (!Jigyosha.records().isEmpty()) {
@@ -293,21 +292,21 @@ public class JiGyoSyaHandler {
             div.getJigyoshaItirann().getDgJigyoshaItiran().getGridSetting().getColumns().get(4).setVisible(true);
             div.getTaishoJigyoshaKensaku().getTxtMaxHyojiKensu().setValue(new Decimal(DbBusinessConfig.
                     get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
+
             div.getTaishoJigyoshaKensaku().getDdlKennCode().setDataSource(get県コード());
-            div.getTaishoJigyoshaKensaku().getDdlGunshiCode().setDataSource(get郡市コード(mode));
-            if (ServiceChushutsuKbn.使用しない.getコード().equals(mode.getサービス種類抽出区分())) {
-                div.getTaishoJigyoshaKensaku().setReadOnly(true);
-            } else {
-                div.getTaishoJigyoshaKensaku().setReadOnly(false);
-                div.getTaishoJigyoshaKensaku().getDdlServiceShurui().setDataSource(getサービス種類(mode));
-            }
+
+            Association association = finder.getAssociation();
+            RString 都道府県コード = association.get地方公共団体コード().code都道府県RString();
+            div.getTaishoJigyoshaKensaku().getDdlKennCode().setSelectedKey(都道府県コード);
+            div.getTaishoJigyoshaKensaku().getDdlGunshiCode().setDataSource(get郡市コード(mode, 都道府県コード));
+
+            div.getTaishoJigyoshaKensaku().getDdlServiceShurui().setDataSource(getサービス種類(mode));
             div.getTaishoJigyoshaKensaku().getDdlJigyoshaKubun().setDataSource(get事業者区分());
             div.getTaishoJigyoshaKensaku().getKennsakuJyokenn().getDdlKennsakuKubun().setDataSource(get検索条件区分());
             div.getTaishoJigyoshaKensaku().getKennsakuJyokenn().getDdlKennsakuKubun().setSelectedKey(前方一致_コード);
             div.getKennsakuJyokenn().setVisible(true);
             div.getKennsakuJyokenn().getServiceJigyosha().setDisplayNone(false);
             div.getOtherTokureiShisetsu().setDisplayNone(true);
-            Association association = finder.getAssociation();
             div.getTaishoJigyoshaKensaku().getDdlKennCode().setSelectedKey(association.get地方公共団体コード() == null
                     ? RString.EMPTY : association.get地方公共団体コード().value().substring(0, 2));
             search_GunshiCode(mode);
@@ -487,7 +486,7 @@ public class JiGyoSyaHandler {
         return dataSource;
     }
 
-    private List<KeyValueDataSource> get郡市コード(JigyoshaMode mode) {
+    private List<KeyValueDataSource> get郡市コード(JigyoshaMode mode, RString 都道府県コード) {
 
         JigyoshaInputGuideFinder jigyosha = new JigyoshaInputGuideFinder();
         List<KeyValueDataSource> dataSource = new ArrayList();
@@ -501,13 +500,23 @@ public class JiGyoSyaHandler {
 
             for (GunshiCodeJigyoshaInputGuide entity : gunshiCodeJigyoshaInputGuide.records()) {
 
-                KeyValueDataSource KeyValue = new KeyValueDataSource();
-                KeyValue.setKey(entity.get郡市区コード());
-                KeyValue.setValue(entity.get郡市区名称());
-                if (!list.contains(entity.get郡市区コード())) {
+//<<<<<<< HEAD
+                if (entity.get都道府県コード().equals(都道府県コード)) {
+                    KeyValueDataSource KeyValue = new KeyValueDataSource();
+                    KeyValue.setKey(entity.get郡市区コード());
+                    KeyValue.setValue(entity.get郡市区名称());
+
                     dataSource.add(KeyValue);
                 }
-                list.add(entity.get郡市区コード());
+//=======
+//                KeyValueDataSource KeyValue = new KeyValueDataSource();
+//                KeyValue.setKey(entity.get郡市区コード());
+//                KeyValue.setValue(entity.get郡市区名称());
+//                if (!list.contains(entity.get郡市区コード())) {
+//                    dataSource.add(KeyValue);
+//                }
+//                list.add(entity.get郡市区コード());
+//>>>>>>> origin/sync
             }
         }
         return dataSource;

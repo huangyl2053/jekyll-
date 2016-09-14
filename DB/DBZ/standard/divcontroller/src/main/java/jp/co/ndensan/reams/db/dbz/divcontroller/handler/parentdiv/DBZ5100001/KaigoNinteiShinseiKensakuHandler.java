@@ -124,7 +124,7 @@ public class KaigoNinteiShinseiKensakuHandler {
                 }
                 dgJigyoshaItiran.setSeibetsu(性別);
                 if (shinseiJoho.get生年月日() != null
-                        && !shinseiJoho.get生年月日().isEmpty()) {
+                    && !shinseiJoho.get生年月日().isEmpty()) {
                     dgJigyoshaItiran.getBirthYMD().setValue(new RDate(介護認定申請情報受給.
                             records().get(i).get生年月日().toString()));
                 }
@@ -135,7 +135,7 @@ public class KaigoNinteiShinseiKensakuHandler {
                     dgJigyoshaItiran.setJusho(shinseiJoho.get住所().value());
                 }
                 if (shinseiJoho.get申請書管理番号() != null
-                        && !shinseiJoho.get申請書管理番号().isEmpty()) {
+                    && !shinseiJoho.get申請書管理番号().isEmpty()) {
                     dgJigyoshaItiran.setShinseishoKnriNo(shinseiJoho.get申請書管理番号().value());
                 }
                 dgKensakuKekkaIchiranList.add(dgJigyoshaItiran);
@@ -191,7 +191,7 @@ public class KaigoNinteiShinseiKensakuHandler {
                 }
                 dgJigyoshaItiran.setSeibetsu(性別);
                 if (shinseiJoho.get生年月日() != null
-                        && !shinseiJoho.get生年月日().isEmpty()) {
+                    && !shinseiJoho.get生年月日().isEmpty()) {
                     dgJigyoshaItiran.getBirthYMD().setValue(new RDate(介護認定申請情報認定.
                             records().get(i).get生年月日().toString()));
                 }
@@ -202,7 +202,7 @@ public class KaigoNinteiShinseiKensakuHandler {
                     dgJigyoshaItiran.setJusho(shinseiJoho.get住所().value());
                 }
                 if (shinseiJoho.get申請書管理番号() != null
-                        && !shinseiJoho.get申請書管理番号().isEmpty()) {
+                    && !shinseiJoho.get申請書管理番号().isEmpty()) {
                     dgJigyoshaItiran.setShinseishoKnriNo(shinseiJoho.get申請書管理番号().value());
                 }
                 dgKensakuKekkaIchiranList.add(dgJigyoshaItiran);
@@ -387,7 +387,7 @@ public class KaigoNinteiShinseiKensakuHandler {
                         前回認定有効期間,
                         finderDiv.getTxtZenkaiYukoKaishiDateFrom().getValue(),
                         finderDiv.getTxtZenkaiYukoKaishiDateTo().getValue(),
-                        finderDiv.getCdlGeninShikkanCode().getCode(),
+                        finderDiv.getCcdGeninShikkan().getCode(),
                         FlexibleDate.getNowDate().plusDay(経過日数Form),
                         FlexibleDate.getNowDate().plusDay(経過日数To),
                         !finderDiv.

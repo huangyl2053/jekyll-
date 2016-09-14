@@ -7,7 +7,14 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFuku
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
 import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -18,14 +25,10 @@ import jp.co.ndensan.reams.db.dbz.definition.core.roreifukushinenkinjoho.RoreiFu
 import jp.co.ndensan.reams.db.dbz.service.core.hihokensha.roreifukushinenkinjukyusha.RoreiFukushiNenkinJukyushaManager;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
@@ -36,7 +39,7 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
  */
 public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiNenkinShokaiDiv {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-06_01-12-04">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -138,7 +141,8 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
 
     public static enum ModeC implements ICommonChildDivMode {
 
-        init("init");
+        init("init"),
+        update("update");
 
         private final String name;
 
@@ -293,6 +297,13 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
         ViewStateHolder.put(ViewStateKeys.老齢福祉年金情報検索結果一覧, roreiFukushiNenkinJukyusha);
     }
 
+    @Override
+    public void initialize(Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> roreiFukushiNenkinJukyusha) {
+        List<RoreiFukushiNenkinJukyusha> rofukuList = new ArrayList<>(roreiFukushiNenkinJukyusha.values());
+        getHandler(this).set老齢福祉年金情報一覧表示グリッド(rofukuList);
+        ViewStateHolder.put(ViewStateKeys.老齢福祉年金情報検索結果一覧, roreiFukushiNenkinJukyusha);
+    }
+
     /**
      * 画面データをデータベースに格納します。
      */
@@ -300,12 +311,16 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
     public void click_Save() {
         Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> roreiFukushiNenkinJukyusha
                 = ViewStateHolder.get(ViewStateKeys.老齢福祉年金情報検索結果一覧, Models.class);
-        if (roreiFukushiNenkinJukyusha != null) {
-            Iterator<RoreiFukushiNenkinJukyusha> iterater = roreiFukushiNenkinJukyusha.iterator();
-            while (iterater.hasNext()) {
-                getService().save老齢福祉年金受給者(iterater.next());
-            }
+        if (roreiFukushiNenkinJukyusha == null) {
+            return;
         }
+        RoreiFukushiNenkinJukyushaManager manager = getService();
+        manager.save老齢福祉年金受給者All(roreiFukushiNenkinJukyusha);
+    }
+
+    @Override
+    public Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> getSaveData() {
+        return ViewStateHolder.get(ViewStateKeys.老齢福祉年金情報検索結果一覧, Models.class);
     }
 
     /**
@@ -318,6 +333,12 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
         return this.getDatagridRireki().getDataSource();
     }
 
+    @Override
+    public boolean hasChanged() {
+        Models<?, ?> models = ViewStateHolder.get(ViewStateKeys.老齢福祉年金情報検索結果一覧, Models.class);
+        return models == null ? false : models.hasAnyChanged();
+    }
+
     private RoreiFukushiNenkinShokaiHandler getHandler(RoreiFukushiNenkinShokaiDiv div) {
         return new RoreiFukushiNenkinShokaiHandler(div);
     }
@@ -326,4 +347,29 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
         return RoreiFukushiNenkinJukyushaManager.createInstance();
     }
 
+    @Override
+    public boolean isSavable() {
+
+        Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> roreiFukushiNenkinJukyusha
+                = ViewStateHolder.get(ViewStateKeys.老齢福祉年金情報検索結果一覧, Models.class);
+        if (roreiFukushiNenkinJukyusha != null) {
+            Iterator<RoreiFukushiNenkinJukyusha> iterater = roreiFukushiNenkinJukyusha.iterator();
+            while (iterater.hasNext()) {
+                if (iterater.next().hasChanged()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void setShokaiMode() {
+        this.setMode_ModeC(RoreiFukushiNenkinShokaiDiv.ModeC.init);
+    }
+
+    @Override
+    public void setTorokuMode() {
+        this.setMode_ModeC(RoreiFukushiNenkinShokaiDiv.ModeC.update);
+    }
 }

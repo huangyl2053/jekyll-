@@ -38,7 +38,8 @@
         </repository>
     </repositories>
     <properties>
-        <!--  自業務公開系 DBXのバージョンと一致させること -->
+        <!-- MyBatisプラグイン用 -->
+        <!-- 自業務公開系 DBXのバージョンと一致させること-->
         <jp.co.ndensan.reams.dbxVersion>1.12.0</jp.co.ndensan.reams.dbxVersion>
         <!-- UZ -->
         <jp.co.ndensan.reams.uzVersion>1.12.0</jp.co.ndensan.reams.uzVersion>
@@ -49,6 +50,7 @@
         <jp.co.ndensan.reams.uxxVersion>1.12.0</jp.co.ndensan.reams.uxxVersion>
         <jp.co.ndensan.reams.caxVersion>1.12.0</jp.co.ndensan.reams.caxVersion>
         <jp.co.ndensan.reams.aaxVersion>1.12.0</jp.co.ndensan.reams.aaxVersion>
+        <jp.co.ndensan.reams.dzxVersion>1.12.0</jp.co.ndensan.reams.dzxVersion>
         <!-- other -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -166,7 +168,17 @@
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ca.cax</groupId>
+                <artifactId>CaxEntity</artifactId>
+                <version>${jp.co.ndensan.reams.caxVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.ca.cax</groupId>
                 <artifactId>CaxBusiness</artifactId>
+                <version>${jp.co.ndensan.reams.caxVersion}</version>
+            </dependency>
+            <dependency>
+                <groupId>jp.co.ndensan.reams.ca.cax</groupId>
+                <artifactId>CaxBatchController</artifactId>
                 <version>${jp.co.ndensan.reams.caxVersion}</version>
             </dependency>
             <dependency>
@@ -176,23 +188,19 @@
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.ca.cax</groupId>
-                <artifactId>CaxEntity</artifactId>
-                <version>${jp.co.ndensan.reams.caxVersion}</version>
-            </dependency>
-            <dependency>
-                <groupId>jp.co.ndensan.reams.ca.cax</groupId>
                 <artifactId>CaxPersistence</artifactId>
-                <version>${jp.co.ndensan.reams.caxVersion}</version>
-            </dependency>
-            <dependency>
-                <groupId>jp.co.ndensan.reams.ca.cax</groupId>
-                <artifactId>CaxBatchController</artifactId>
                 <version>${jp.co.ndensan.reams.caxVersion}</version>
             </dependency>
             <dependency>
                 <groupId>jp.co.ndensan.reams.aa.aax</groupId>
                 <artifactId>AaxService</artifactId>
                 <version>${jp.co.ndensan.reams.aaxVersion}</version>
+            </dependency>
+            <!--DZX-->
+            <dependency>
+                <groupId>jp.co.ndensan.reams.dz.dzx</groupId>
+                <artifactId>DzxBusiness</artifactId>
+                <version>${jp.co.ndensan.reams.dzxVersion}</version>
             </dependency>
             <!-- ツール -->
             <dependency>
@@ -204,7 +212,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-    
+
     <build>
         <plugins>
             <plugin>
@@ -335,7 +343,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <checkmode>full</checkmode>  
+                    <checkmode>full</checkmode>
                 </configuration>
             </plugin>
             <plugin>

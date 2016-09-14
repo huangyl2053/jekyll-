@@ -80,7 +80,10 @@ public class FukaHikakuInput implements java.io.Serializable {
      * @return 画面遷移後にキー
      */
     protected FukaShokaiKey getFukaShokaiKey(int index) {
-        return this.fukaShokaiKeys.get(index);
+        if (index <= fukaShokaiKeys.size() - 1) {
+            return this.fukaShokaiKeys.get(index);
+        }
+        return FukaShokaiKey.EMPTY;
     }
 
     /**
@@ -111,6 +114,6 @@ public class FukaHikakuInput implements java.io.Serializable {
      */
     public boolean isBackTo賦課照会画面() {
         return this.mode == FukaHikakuMode.前年度最終
-                || this.mode == FukaHikakuMode.前履歴;
+               || this.mode == FukaHikakuMode.前履歴;
     }
 }

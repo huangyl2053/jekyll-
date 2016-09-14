@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.core;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -16,6 +17,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.basic.FukaComparators;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.IItemList;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.itemlist.ItemList;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ChoteiNendo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.FukaNendo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -29,6 +31,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
  */
 public class FukaRireki implements Iterable<Fuka> {
 
+    public static FukaRireki EMPTY;
+
+    static {
+        EMPTY = new FukaRireki(Collections.<Fuka>emptyList());
+    }
+
     private final List<Fuka> 賦課履歴明細;
 
     /**
@@ -38,7 +46,7 @@ public class FukaRireki implements Iterable<Fuka> {
      * @throws NullPointerException 引数がnullの場合
      */
     public FukaRireki(List<Fuka> 賦課履歴明細) throws NullPointerException {
-        this.賦課履歴明細 = requireNonNull(賦課履歴明細, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課履歴明細"));
+        this.賦課履歴明細 = new ArrayList<>(requireNonNull(賦課履歴明細, UrSystemErrorMessages.値がnull.getReplacedMessage("賦課履歴明細")));
     }
 
     /**
@@ -82,6 +90,15 @@ public class FukaRireki implements Iterable<Fuka> {
     }
 
     /**
+     * 保持する履歴が空の場合、{@code true}を返します。
+     *
+     * @return 履歴
+     */
+    public boolean isEmpty() {
+        return this.賦課履歴明細.isEmpty();
+    }
+
+    /**
      * 賦課年度、調定年度、通知書番号でグループ化する前の賦課履歴の中で、条件に該当する履歴を返します。
      *
      * @param 賦課年度 賦課年度
@@ -97,6 +114,27 @@ public class FukaRireki implements Iterable<Fuka> {
             }
         }
         return ItemList.of(list);
+    }
+
+    /**
+     * 賦課年度、調定年度、通知書番号、履歴番号に一致する履歴を返します。
+     *
+     * @param 賦課年度 賦課年度
+     * @param 調定年度 調定年度
+     * @param 通知書番号 通知書番号
+     * @param 履歴番号 履歴番号
+     * @return 賦課年度、調定年度、通知書番号、履歴番号に一致する賦課履歴
+     */
+    public Optional<Fuka> get賦課履歴(FukaNendo 賦課年度, ChoteiNendo 調定年度, TsuchishoNo 通知書番号, int 履歴番号) {
+        for (Fuka model : 賦課履歴明細) {
+            if (model.get賦課年度().equals(賦課年度.value())
+                && model.get調定年度().equals(調定年度.value())
+                && model.get通知書番号().equals(通知書番号)
+                && model.get履歴番号() == 履歴番号) {
+                return Optional.of(model);
+            }
+        }
+        return Optional.empty();
     }
 
     @Override

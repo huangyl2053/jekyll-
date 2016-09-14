@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.NinteiShinseiShichosonRenrakuJikoDiv;
 
+import java.util.Objects;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ninteishinsei.NinteiShinseiCodeModel;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseiShichosonRenrakuJiko.NinteiShinseiShichosonRenrakuJiko.NinteiShinseiShichosonHandler;
@@ -55,16 +56,20 @@ public class NinteiShinseiShichosonRenrakuJiko {
      */
     public ResponseData<NinteiShinseiShichosonRenrakuJikoDiv> onClick_btnTorikeshi(NinteiShinseiShichosonRenrakuJikoDiv requestDiv) {
         NinteiShinseiCodeModel shinseiCodeModel = ViewStateHolder.get(ViewStateKeys.モード, NinteiShinseiCodeModel.class);
-        if (!shinseiCodeModel.get連絡事項().equals(requestDiv.getTxtRenrakujiko().getValue()) && !ResponseHolder.isReRequest()) {
+        if (shinseiCodeModel == null || NinteiShinseiCodeModel.HyojiMode.ShokaiMode.equals(shinseiCodeModel.get表示モード())) {
+            return ResponseData.of(requestDiv).dialogNGClose();
+        }
+
+        if (!Objects.equals(shinseiCodeModel.get連絡事項(), requestDiv.getTxtRenrakujiko().getValue()) && !ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                     UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
             return ResponseData.of(requestDiv).addMessage(message).respond();
         }
         if ((new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
+             .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
             return ResponseData.of(requestDiv).dialogOKClose();
         } else if ((new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No)) {
+                    .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No)) {
             return ResponseData.of(requestDiv).respond();
         }
         return ResponseData.of(requestDiv).dialogOKClose();

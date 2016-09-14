@@ -1269,13 +1269,13 @@ public class NinteiChosainJikanMasterHandler {
 
     private void set背景色の編集(FlexibleDate システム年月, dgTimeScheduleList_Row row) {
         if (システム年月.getDayOfWeek() == DayOfWeek.SATURDAY) {
-            row.setRowBgColor(DataGridCellBgColor.bgColorGreen);
+            row.setRowBgColor(DataGridCellBgColor.bgColorLightGreen);
         }
         if (システム年月.getDayOfWeek() == DayOfWeek.SUNDAY) {
-            row.setRowBgColor(DataGridCellBgColor.bgColorRed);
+            row.setRowBgColor(DataGridCellBgColor.bgColorLightRed);
         }
         if (new RDate(システム年月.toString()).isNationalHoliday()) {
-            row.setRowBgColor(DataGridCellBgColor.bgColorRed);
+            row.setRowBgColor(DataGridCellBgColor.bgColorLightRed);
         }
     }
 

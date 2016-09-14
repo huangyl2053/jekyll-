@@ -1,9 +1,12 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
+import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoIdentifier;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * このコードはツールによって生成されました。
@@ -63,6 +66,14 @@ public interface IShisetsuNyutaishoRirekiKanriDiv extends ICommonChildDivBasePro
     public void initialize(ShikibetsuCode 識別コード, RString 台帳種別);
 
     /**
+     * 共通子DIVの初期化処理です。外部から保存対象データ・グリッドデータを受け取ります。
+     *
+     * @param データソース グリッドに設定するデータソース
+     * @param 施設入退所情報Model 施設入退所情報Model
+     */
+    public void initialize(List<dgShisetsuNyutaishoRireki_Row> データソース, Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 施設入退所情報Model);
+
+    /**
      * 施設入退所履歴の共有子DIVの画面内容から、施設入退所履歴情報をDBに反映します。
      */
     public void saveShisetsuNyutaisho();
@@ -73,4 +84,28 @@ public interface IShisetsuNyutaishoRirekiKanriDiv extends ICommonChildDivBasePro
      * @return List<dgShisetsuNyutaishoRireki_Row> 施設入退所履歴の一覧
      */
     public List<dgShisetsuNyutaishoRireki_Row> get施設入退所履歴一覧();
+
+    /**
+     * 保存対象が含まれる施設入退所履歴の一覧を取得する。
+     *
+     * @return
+     */
+    Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> getSaveData();
+
+    /**
+     * 保存可能な状態か確認します。
+     *
+     * @return return 保存可能ならtrue
+     */
+    public boolean isSavable();
+
+    /**
+     * 照会時のモードを設定します。
+     */
+    void setShokaiMode();
+
+    /**
+     * 登録時のモードを設定します。
+     */
+    void setTorokuMode();
 }

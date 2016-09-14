@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.controller.commonchilddiv.Tekiy
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TekiyoJogaiRireki.TekiyoJogaiRireki.TekiyoJogaiRirekiDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TekiyoJogaiRireki.TekiyoJogaiRireki.TekiyoJogaiRirekiHandler;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TekiyoJogaiRireki.TekiyoJogaiRireki.TekiyoJogaiRirekiValidationHandler;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TekiyoJogaiRireki.TekiyoJogaiRireki.datagridTekiyoJogai_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -74,13 +75,11 @@ public class TekiyoJogaiRireki {
      * @return ResponseData<TekiyoJogaiRirekiDiv>
      */
     public ResponseData<TekiyoJogaiRirekiDiv> onClick_BtnKakunin(TekiyoJogaiRirekiDiv requestDiv) {
-        RString 画面状態 = new RString(requestDiv.getMode_DisplayMode().toString());
-        ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).入力チェック(画面状態);
+        ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv).validate();
         if (vallidation.iterator().hasNext()) {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
-        } else {
-            getHandler(requestDiv).onClick_BtnKakunin(requestDiv.getDatagridTekiyoJogai().getActiveRow(), 画面状態);
         }
+        getHandler(requestDiv).onClick_BtnKakunin(requestDiv.getDatagridTekiyoJogai().getActiveRow());
         return ResponseData.of(requestDiv).respond();
     }
 
@@ -91,14 +90,20 @@ public class TekiyoJogaiRireki {
      * @return ResponseData<TekiyoJogaiRirekiDiv>
      */
     public ResponseData<TekiyoJogaiRirekiDiv> onClick_Torikeshi(TekiyoJogaiRirekiDiv requestDiv) {
-        if (!ResponseHolder.isReRequest()) {
+        datagridTekiyoJogai_Row row = new datagridTekiyoJogai_Row();
+        if(requestDiv.getDatagridTekiyoJogai().getActiveRow() != null){
+            row = requestDiv.getDatagridTekiyoJogai().getActiveRow();
+        }
+        if (!ResponseHolder.isReRequest() 
+                && getHandler(requestDiv).onClick_Torikeshi_ForChange(row)) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                     UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
             return ResponseData.of(requestDiv).addMessage(message).respond();
         }
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
+                || !getHandler(requestDiv).onClick_Torikeshi_ForChange(row)) {
             getHandler(requestDiv).onClick_Torikeshi();
         }
         return ResponseData.of(requestDiv).respond();

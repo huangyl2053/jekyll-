@@ -76,16 +76,15 @@
         INNER JOIN rgdb."DbT1004ShisetsuNyutaisho" B
         ON B."shikibetsuCode"=A."識別コード"
         AND B."daichoShubetsu"='2'
-        AND B."nyushoShisetsuShurui"='12'
         LEFT JOIN rgdb."DbT1005KaigoJogaiTokureiTaishoShisetsu" C
         ON B."nyushoShisetsuCode"=C."jigyoshaNo"
         AND B."nyushoShisetsuShurui"=C."jigyoshaShubetsu"
         AND B."nyushoYMD" <![CDATA[>=]]> C."yukoKaishiYMD"
         AND B."nyushoYMD" <![CDATA[<=]]> C."yukoShuryoYMD"
-        WHERE CASE WHEN A."解除年月日" IS NULL
-        THEN B."taishoYMD" IS NULL OR A."適用年月日" <![CDATA[<=]]> B."taishoYMD"
-        WHEN A."解除年月日" IS NOT NULL
-        THEN (B."taishoYMD" IS NULL AND B."nyushoYMD" <![CDATA[<]]> A."解除年月日")
+        WHERE CASE WHEN ( A."解除年月日" IS NULL OR A."解除年月日" = '' )
+        THEN ( B."taishoYMD" IS NULL OR B."taishoYMD" = '' ) OR A."適用年月日" <![CDATA[<=]]> B."taishoYMD"
+        WHEN ( A."解除年月日" IS NOT NULL AND A."解除年月日" != '' )
+        THEN ( ( B."taishoYMD" IS NULL OR B."taishoYMD" = '' ) AND B."nyushoYMD" <![CDATA[<]]> A."解除年月日")
         OR (B."nyushoYMD" <![CDATA[<]]> A."解除年月日" AND B."taishoYMD" <![CDATA[>]]> A."適用年月日")
         END
         ORDER BY B."nyushoYMD" DESC

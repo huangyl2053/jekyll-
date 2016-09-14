@@ -47,7 +47,7 @@ public class IryohokenKanyuJokyoHandler {
     public IryohokenKanyuJokyoBusiness onLoad(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード) {
         div.getKihonJoho().getCcdKaigoAtenaInfo().initialize(識別コード);
         div.getKihonJoho().getCcdKaigoShikakuKihon().initialize(被保険者番号);
-        div.getIryoHokenIchiran().getCcdIryoHokenRireki().initialize(状態_登録, 識別コード.value());
+        div.getIryoHokenIchiran().getCcdIryoHokenRireki().initialize(状態_登録, 識別コード.value(), 被保険者番号);//TODO 動作確認
         IryohokenKanyuJokyoBusiness joho = new IryohokenKanyuJokyoBusiness();
         joho.setIryoHokenJohoList(get初期化時の医療保険情報());
         return joho;
@@ -62,15 +62,15 @@ public class IryohokenKanyuJokyoHandler {
         List<IryoHokenJoho> oldList = new ArrayList<>();
         for (dgIryohokenIchiran_Row row : div.getIryoHokenIchiran().getCcdIryoHokenRireki().getDataGridList()) {
             IryoHokenJoho joho = new IryoHokenJoho();
-            joho.set医療保険加入年月日(stringToFlexibleDate(row.getDefaultDataName3()));
-            joho.set医療保険種別コード(row.getDefaultDataName5());
-            joho.set医療保険者名称(row.getDefaultDataName13());
-            joho.set医療保険者番号(row.getDefaultDataName12());
-            joho.set医療保険脱退年月日(stringToFlexibleDate(row.getDefaultDataName4()));
-            joho.set医療保険記号番号(row.getDefaultDataName7());
-            joho.set履歴番号(row.getDefaultDataName9().getValue().intValue());
-            joho.set市町村コード(new LasdecCode(row.getDefaultDataName1()));
-            joho.set識別コード(new ShikibetsuCode(row.getDefaultDataName0()));
+            joho.set医療保険加入年月日(row.getKanyuDate().getValue());
+            joho.set医療保険種別コード(row.getShubetsuCode());
+            joho.set医療保険者名称(row.getHokenshaName());
+            joho.set医療保険者番号(row.getHokenshaCode());
+            joho.set医療保険脱退年月日(row.getDattaiDate().getValue());
+            joho.set医療保険記号番号(row.getKigoNo());
+            joho.set履歴番号(row.getRirekiNo().getValue().intValue());
+            joho.set市町村コード(new LasdecCode(row.getShichosonCode()));
+            joho.set識別コード(new ShikibetsuCode(row.getShikibetsuCode()));
             oldList.add(joho);
         }
         return oldList;

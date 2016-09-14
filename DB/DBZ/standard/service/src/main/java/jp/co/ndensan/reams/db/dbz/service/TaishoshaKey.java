@@ -8,9 +8,11 @@ package jp.co.ndensan.reams.db.dbz.service;
 import java.io.Serializable;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.accesslog.ExpandedInfomations;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 
 /**
  * 対象者を特定するキー情報です。（資格系）
@@ -19,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
  */
 public class TaishoshaKey implements Serializable {
 
+    private static final long serialVersionUID = -1746488260086378529L;
     private final HihokenshaNo 被保険者番号;
     private final ShikibetsuCode 識別コード;
     private final SetaiCode 世帯コード;
@@ -62,5 +65,15 @@ public class TaishoshaKey implements Serializable {
      */
     public SetaiCode get世帯コード() {
         return 世帯コード;
+    }
+
+    /**
+     * 保持する情報から{@link PersonalData}を生成します。
+     * 生成された{@link PersonalData}は、拡張情報に被保険者番号を保持します。
+     *
+     * @return {@link PersonalData}
+     */
+    public PersonalData toPersonalDataWithHihokenshaNo() {
+        return PersonalData.of(get識別コード(), ExpandedInfomations.被保険者番号.fromValue(get被保険者番号().value()));
     }
 }

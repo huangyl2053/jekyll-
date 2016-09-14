@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 老齢福祉年金受給者を管理するクラスです。
+ *
  * @reamsid_L DBA-0220-020 dongyabin
  */
 public class RoreiFukushiNenkinJukyusha

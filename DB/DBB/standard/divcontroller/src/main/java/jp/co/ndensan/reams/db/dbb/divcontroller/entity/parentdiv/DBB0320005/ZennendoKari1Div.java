@@ -14,19 +14,19 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ZennendoKari1Div extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtHokenryoDankaiKari1")
-    private TextBox txtHokenryoDankaiKari1;
-    @JsonProperty("txtHokenryoRitsuKari1")
-    private TextBox txtHokenryoRitsuKari1;
-    @JsonProperty("txtNengakuHokenryoKari1")
-    private TextBoxNum txtNengakuHokenryoKari1;
+    @JsonProperty("txtZenNendoHokenryoDankaiKari1")
+    private TextBox txtZenNendoHokenryoDankaiKari1;
+    @JsonProperty("txtZenNendoHokenryoRitsuKari1")
+    private TextBox txtZenNendoHokenryoRitsuKari1;
+    @JsonProperty("txtZenNendoNengakuHokenryoKari1")
+    private TextBoxNum txtZenNendoNengakuHokenryoKari1;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -34,34 +34,58 @@ public class ZennendoKari1Div extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    @JsonProperty("txtHokenryoDankaiKari1")
-    public TextBox getTxtHokenryoDankaiKari1() {
-        return txtHokenryoDankaiKari1;
+    /*
+     * gettxtZenNendoHokenryoDankaiKari1
+     * @return txtZenNendoHokenryoDankaiKari1
+     */
+    @JsonProperty("txtZenNendoHokenryoDankaiKari1")
+    public TextBox getTxtZenNendoHokenryoDankaiKari1() {
+        return txtZenNendoHokenryoDankaiKari1;
     }
 
-    @JsonProperty("txtHokenryoDankaiKari1")
-    public void setTxtHokenryoDankaiKari1(TextBox txtHokenryoDankaiKari1) {
-        this.txtHokenryoDankaiKari1=txtHokenryoDankaiKari1;
+    /*
+     * settxtZenNendoHokenryoDankaiKari1
+     * @param txtZenNendoHokenryoDankaiKari1 txtZenNendoHokenryoDankaiKari1
+     */
+    @JsonProperty("txtZenNendoHokenryoDankaiKari1")
+    public void setTxtZenNendoHokenryoDankaiKari1(TextBox txtZenNendoHokenryoDankaiKari1) {
+        this.txtZenNendoHokenryoDankaiKari1 = txtZenNendoHokenryoDankaiKari1;
     }
 
-    @JsonProperty("txtHokenryoRitsuKari1")
-    public TextBox getTxtHokenryoRitsuKari1() {
-        return txtHokenryoRitsuKari1;
+    /*
+     * gettxtZenNendoHokenryoRitsuKari1
+     * @return txtZenNendoHokenryoRitsuKari1
+     */
+    @JsonProperty("txtZenNendoHokenryoRitsuKari1")
+    public TextBox getTxtZenNendoHokenryoRitsuKari1() {
+        return txtZenNendoHokenryoRitsuKari1;
     }
 
-    @JsonProperty("txtHokenryoRitsuKari1")
-    public void setTxtHokenryoRitsuKari1(TextBox txtHokenryoRitsuKari1) {
-        this.txtHokenryoRitsuKari1=txtHokenryoRitsuKari1;
+    /*
+     * settxtZenNendoHokenryoRitsuKari1
+     * @param txtZenNendoHokenryoRitsuKari1 txtZenNendoHokenryoRitsuKari1
+     */
+    @JsonProperty("txtZenNendoHokenryoRitsuKari1")
+    public void setTxtZenNendoHokenryoRitsuKari1(TextBox txtZenNendoHokenryoRitsuKari1) {
+        this.txtZenNendoHokenryoRitsuKari1 = txtZenNendoHokenryoRitsuKari1;
     }
 
-    @JsonProperty("txtNengakuHokenryoKari1")
-    public TextBoxNum getTxtNengakuHokenryoKari1() {
-        return txtNengakuHokenryoKari1;
+    /*
+     * gettxtZenNendoNengakuHokenryoKari1
+     * @return txtZenNendoNengakuHokenryoKari1
+     */
+    @JsonProperty("txtZenNendoNengakuHokenryoKari1")
+    public TextBoxNum getTxtZenNendoNengakuHokenryoKari1() {
+        return txtZenNendoNengakuHokenryoKari1;
     }
 
-    @JsonProperty("txtNengakuHokenryoKari1")
-    public void setTxtNengakuHokenryoKari1(TextBoxNum txtNengakuHokenryoKari1) {
-        this.txtNengakuHokenryoKari1=txtNengakuHokenryoKari1;
+    /*
+     * settxtZenNendoNengakuHokenryoKari1
+     * @param txtZenNendoNengakuHokenryoKari1 txtZenNendoNengakuHokenryoKari1
+     */
+    @JsonProperty("txtZenNendoNengakuHokenryoKari1")
+    public void setTxtZenNendoNengakuHokenryoKari1(TextBoxNum txtZenNendoNengakuHokenryoKari1) {
+        this.txtZenNendoNengakuHokenryoKari1 = txtZenNendoNengakuHokenryoKari1;
     }
 
     // </editor-fold>

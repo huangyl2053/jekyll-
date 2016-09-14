@@ -127,8 +127,9 @@ public class TekiyoJogaishaIdoTeisei {
         List<TekiyoJogaishaIdoTeiseiBusiness> entitylist = new ArrayList<>();
         for (datagridTekiyoJogai_Row row : div.getTekiyoJogaiJohoIchiran().getCcdTekiyoJogaiRireki().get適用情報一覧()) {
             TekiyoJogaishaIdoTeiseiBusiness entity = new TekiyoJogaishaIdoTeiseiBusiness(new RString(row.getRowState().toString()),
-                    row.getKayijoDate().getValue() == null ? FlexibleDate.EMPTY : new FlexibleDate(row.getKayijoDate().getValue().toDateString()),
-                    row.getTekiyoDate().getValue() == null ? FlexibleDate.EMPTY : new FlexibleDate(row.getTekiyoDate().getValue().toDateString()));
+                    row.getTekiyoDate().getValue() == null ? FlexibleDate.EMPTY : new FlexibleDate(row.getTekiyoDate().getValue().toDateString()),
+                    row.getKayijoDate().getValue() == null ? FlexibleDate.EMPTY : new FlexibleDate(row.getKayijoDate().getValue().toDateString())
+                    );
             entitylist.add(entity);
         }
         return finder.checkTekiyoJogaiKikanByTeiseiMode(entitylist);

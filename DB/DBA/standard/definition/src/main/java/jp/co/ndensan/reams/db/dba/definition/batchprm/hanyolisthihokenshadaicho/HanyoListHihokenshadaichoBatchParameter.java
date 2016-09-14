@@ -320,7 +320,7 @@ public class HanyoListHihokenshadaichoBatchParameter extends BatchParameterBase 
      *
      * @return 汎用リスト_被保険者台帳_バッチ用のパラメータラス
      */
-    public HanyoListHihokenshadaichoProcessParameter toHanyoListHihokenshadaichoProcessParameter() {
+    public HanyoListHihokenshadaichoProcessParameter toHanyoListHihokenshadaichoProcessParameter(long jobId) {
         return new HanyoListHihokenshadaichoProcessParameter(
                 this.komukuFukaMeyi,
                 this.rembanfuka,
@@ -367,7 +367,8 @@ public class HanyoListHihokenshadaichoBatchParameter extends BatchParameterBase 
                 this.psmChiku2_From_Name,
                 this.psmChiku2_To_Name,
                 this.psmChiku3_From_Name,
-                this.psmChiku3_To_Name
+                this.psmChiku3_To_Name,
+                jobId
         );
     }
 }

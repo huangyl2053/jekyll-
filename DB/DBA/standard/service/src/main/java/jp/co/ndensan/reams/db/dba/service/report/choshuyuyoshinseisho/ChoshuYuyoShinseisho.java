@@ -81,7 +81,7 @@ public class ChoshuYuyoShinseisho {
                 INinshoshaSourceBuilder builder = NinshoshaSourceBuilderFactory.createInstance(
                         nishosha, association, reportWriter.getImageFolderPath(), RDate.getNowDate());
                 for (HokenryoGenmenChoshuYoyuShinseishoReport report
-                        : toReports(get被保険者基本情報(識別コード, 被保険者番号), builder.buildSource())) {
+                     : toReports(get被保険者基本情報(識別コード, 被保険者番号), builder.buildSource())) {
 
                     report.writeBy(reportWriter);
                 }
@@ -98,11 +98,11 @@ public class ChoshuYuyoShinseisho {
         FlexibleDate 生年月日 = business.get生年月日();
         if (生年月日 != null && !生年月日.isEmpty()) {
             if (JuminShubetsu.日本人.getCode().equals(住民種別コード)
-                    || JuminShubetsu.住登外個人_日本人.getCode().equals(住民種別コード)) {
+                || JuminShubetsu.住登外個人_日本人.getCode().equals(住民種別コード)) {
                 birthYMD = set生年月日_日本人(生年月日);
             }
             if (JuminShubetsu.外国人.getCode().equals(住民種別コード)
-                    || JuminShubetsu.住登外個人_外国人.getCode().equals(住民種別コード)) {
+                || JuminShubetsu.住登外個人_外国人.getCode().equals(住民種別コード)) {
                 birthYMD = set生年月日(生年月日, business.get生年月日不詳区分());
             }
         }

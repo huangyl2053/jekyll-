@@ -10,16 +10,12 @@ module DBZ {
 
         export class Events {
 
-            public static onBlur_txtHihokenshaNumber(): string {
-                return "onBlur_txtHihokenshaNumber";
-            }
-
-            public static onBlur_txtShinseishaName(): string {
-                return "onBlur_txtShinseishaName";
-            }
-
             public static onClick_ShosaiJoken(): string {
                 return "onClick_ShosaiJoken";
+            }
+
+            public static onChange_ddlKoroshoShikibetsuCode(): string {
+                return "onChange_ddlKoroshoShikibetsuCode";
             }
 
             public static onClick_NinteiChosa(): string {
@@ -131,8 +127,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledNameSelf());
             }
 
-            public txtHihokenshaNumber(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtHihokenshaNumber"));
+            public txtHihokenshaNumber(): UZA.TextBoxCode {
+                return new UZA.TextBoxCode(this.convFiledName("txtHihokenshaNumber"));
             }
 
             //public ddlHokenshaNumber(): DBZ.HokenshaList.ModeController {
@@ -149,10 +145,6 @@ module DBZ {
 
             public txtHihokenshaName(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtHihokenshaName"));
-            }
-
-            public btnHihokenshaGuide(): UZA.ButtonDialog {
-                return new UZA.ButtonDialog(this.convFiledName("btnHihokenshaGuide"));
             }
 
             public ddlHihokenshaNameMatchType(): UZA.DropDownList {
@@ -221,10 +213,6 @@ module DBZ {
 
             public lblYubinNo(): UZA.Label {
                 return new UZA.Label(this.convFiledName("lblYubinNo"));
-            }
-
-            public btnYubinNoGuide(): UZA.ButtonDialog {
-                return new UZA.ButtonDialog(this.convFiledName("btnYubinNoGuide"));
             }
 
             public txtYubinNo(): UZA.TextBoxYubinNo {
@@ -455,20 +443,12 @@ module DBZ {
                 return new UZA.Label(this.convFiledName("lblKaisaiNumber"));
             }
 
-            public btnKaisaiNumberStart(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnKaisaiNumberStart"));
-            }
-
             public txtKaisaiNumberStart(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtKaisaiNumberStart"));
             }
 
             public lblKaisaiNoFor(): UZA.Label {
                 return new UZA.Label(this.convFiledName("lblKaisaiNoFor"));
-            }
-
-            public btnKaisaiNumberEnd(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnKaisaiNumberEnd"));
             }
 
             public txtKaisaiNumberEnd(): UZA.TextBox {
@@ -527,8 +507,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("SonotaJoho"));
             }
 
-            //public cdlGeninShikkanCode(): URZ.CodeInput.ModeController {
-            //    return new URZ.CodeInput.ModeController(this.convFiledName("cdlGeninShikkanCode"));
+            //public ccdGeninShikkan(): URZ.CodeInput.ModeController {
+            //    return new URZ.CodeInput.ModeController(this.convFiledName("ccdGeninShikkan"));
             //}
 
             public txtShinseiKeikaNissu(): UZA.TextBoxNumRange {

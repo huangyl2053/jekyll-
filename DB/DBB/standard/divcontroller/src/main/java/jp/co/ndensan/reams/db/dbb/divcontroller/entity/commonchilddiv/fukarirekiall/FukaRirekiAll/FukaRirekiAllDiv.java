@@ -90,6 +90,12 @@ public class FukaRirekiAllDiv extends Panel implements IFukaRirekiAllDiv {
     }
 
     @Override
+//<<<<<<< HEAD
+    public boolean hasLoaded() {
+        return getHandler().hasLoaded();
+    }
+//=======
+
     public TsuchishoNo getClicked通知書番号() {
         return getHandler().getClicked通知書番号();
     }
@@ -102,11 +108,11 @@ public class FukaRirekiAllDiv extends Panel implements IFukaRirekiAllDiv {
     @Override
     public FlexibleYear getClicked賦課年度() {
         return getHandler().getClicked賦課年度();
+//>>>>>>> origin/sync
     }
 
     @JsonIgnore
     public FukaRirekiAllHandler getHandler() {
         return new FukaRirekiAllHandler(this);
     }
-
 }

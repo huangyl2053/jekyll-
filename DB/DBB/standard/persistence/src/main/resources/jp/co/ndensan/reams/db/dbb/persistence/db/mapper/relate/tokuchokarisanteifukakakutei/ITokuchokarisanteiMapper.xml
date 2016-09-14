@@ -3,9 +3,9 @@
 <!-- 概要： 介護賦課徴収猶予のマッピング用XMLです。 -->
 <!-- @reamsid_L DBB-0800-020 wanghui    -->
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchokarisanteifukakakutei.ITokuchokarisanteiMapper">
-    <select resultOrdered="true" id="updShoKofuKaishuJoho" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity"
+    <select resultOrdered="true" id="updShoKofuKaishuJoho" resultType="jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.relate.tokuchokarisanteifukakakutei.TokuchoKarisanteiFukaKakuteiMapperParameter" >
-       SELECT
+        SELECT
         UrT0705Chote."choteiId"
         FROM
         rgdb."UrT0705ChoteiKyotsu" as UrT0705Chote

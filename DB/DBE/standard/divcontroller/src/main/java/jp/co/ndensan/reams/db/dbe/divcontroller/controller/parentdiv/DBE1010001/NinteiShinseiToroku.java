@@ -247,7 +247,7 @@ public class NinteiShinseiToroku {
     public ResponseData<NinteiShinseiTorokuDiv> onBefore_btnShichosonRenrakuJiko(NinteiShinseiTorokuDiv div) {
         NinteiShinseiCodeModel data = new NinteiShinseiCodeModel();
         data.set連絡事項(div.getHdnShichosonRenrakuJiko());
-        data.set表示モード(new RString("InputMode"));
+        data.set表示モード(NinteiShinseiCodeModel.HyojiMode.InputMode);
         ViewStateHolder.put(ViewStateKeys.モード, data);
         return ResponseData.of(div).respond();
     }
@@ -306,7 +306,7 @@ public class NinteiShinseiToroku {
      */
     public ResponseData<NinteiShinseiTorokuDiv> onClick_btnUpdate(NinteiShinseiTorokuDiv div) {
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
-                && new RString(UrInformationMessages.正常終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+            && new RString(UrInformationMessages.正常終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
             return ResponseData.of(div).forwardWithEventName(DBE1010001TransitionEventName.完了).respond();
         }
         RString menuID = ResponseHolder.getMenuID();
@@ -344,7 +344,7 @@ public class NinteiShinseiToroku {
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
             if (NinteiShinseiShinseijiKubunCode.新規申請.getコード().equals(kihonJohoInputDiv.getDdlShinseiKubunShinseiji().getSelectedKey())
-                    || NinteiShinseiShinseijiKubunCode.更新申請.getコード().equals(kihonJohoInputDiv.getDdlShinseiKubunShinseiji().getSelectedKey())) {
+                || NinteiShinseiShinseijiKubunCode.更新申請.getコード().equals(kihonJohoInputDiv.getDdlShinseiKubunShinseiji().getSelectedKey())) {
                 NinteiShinseiJohoBuilder shinseiJohoBuilder = get要介護認定申請情報Com(div, kihonJohoInputDiv, shinseiJoho);
                 shinseiJohoBuilder.set認定申請区分_申請時_コード(new Code(kihonJohoInputDiv
                         .getDdlShinseiKubunShinseiji().getSelectedKey()));

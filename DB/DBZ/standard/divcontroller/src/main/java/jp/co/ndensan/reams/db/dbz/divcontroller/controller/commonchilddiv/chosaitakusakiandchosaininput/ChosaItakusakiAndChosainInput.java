@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.chosa
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ninteishinsei.NinteiShinseiCodeModel;
+import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ninteishinsei.NinteiShinseiCodeModel.HyojiMode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuideDiv.TaishoMode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.ChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInputHandler;
@@ -141,7 +142,7 @@ public class ChosaItakusakiAndChosainInput {
         if (!RString.isNullOrEmpty(div.getHdnChosainRenrakuJiko())) {
             ninteiShinseiCodeModel.set連絡事項(div.getHdnChosainRenrakuJiko());
         }
-        ninteiShinseiCodeModel.set表示モード(new RString("InputMode"));
+        ninteiShinseiCodeModel.set表示モード(HyojiMode.InputMode);
         ViewStateHolder.put(ViewStateKeys.モード, ninteiShinseiCodeModel);
 
         return ResponseData.of(div).respond();

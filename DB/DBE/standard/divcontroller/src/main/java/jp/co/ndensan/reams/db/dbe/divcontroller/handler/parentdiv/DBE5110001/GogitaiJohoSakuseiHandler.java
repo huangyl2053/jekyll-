@@ -77,6 +77,13 @@ public class GogitaiJohoSakuseiHandler {
     }
 
     /**
+     * 最大表示件数の初期値を設定します。
+     */
+    public void init最大表示件数() {
+        div.getTxtDispMax().setValue(Decimal.TEN);
+    }
+
+    /**
      *
      * 合議体情報一覧の設定します。
      *
@@ -181,19 +188,19 @@ public class GogitaiJohoSakuseiHandler {
      */
     public boolean hasChangedByAdd() {
         return div.getTxtGogitaiNumber().getValue().isEmpty()
-                && div.getTxtGogitaiMeisho().getValue().isEmpty()
-                && div.getDdlkaisaibasho().getSelectedKey().equals(KAISAI_BASHO_CODE_EMPTY)
-                && div.getTxtYukoShuryoYMD().getValue() == null
-                && div.getTxtYukoKaishiYMD().getValue() == null
-                && div.getTxtShuryoYoteiTime().getValue() == null
-                && div.getTxtKaishiYoteiTime().getValue() == null
-                && div.getTxtYoteiTeiin().getValue() == null
-                && div.getTxtJidoWariateTeiin().getValue() == null
-                && div.getTxtIinTeiin().getValue() == null
-                && div.getRadSeishinkaiSonzai().getSelectedKey().equals(SEISHINKAI_SONZAI_SHINAI)
-                && div.getRadDummyFlag().getSelectedKey().equals(DUMMY_FLAG_TUUJOU)
-                && div.getDgHoketsuShinsainList().getDataSource().isEmpty()
-                && div.getDgShinsainList().getDataSource().isEmpty();
+               && div.getTxtGogitaiMeisho().getValue().isEmpty()
+               && div.getDdlkaisaibasho().getSelectedKey().equals(KAISAI_BASHO_CODE_EMPTY)
+               && div.getTxtYukoShuryoYMD().getValue() == null
+               && div.getTxtYukoKaishiYMD().getValue() == null
+               && div.getTxtShuryoYoteiTime().getValue() == null
+               && div.getTxtKaishiYoteiTime().getValue() == null
+               && div.getTxtYoteiTeiin().getValue() == null
+               && div.getTxtJidoWariateTeiin().getValue() == null
+               && div.getTxtIinTeiin().getValue() == null
+               && div.getRadSeishinkaiSonzai().getSelectedKey().equals(SEISHINKAI_SONZAI_SHINAI)
+               && div.getRadDummyFlag().getSelectedKey().equals(DUMMY_FLAG_TUUJOU)
+               && div.getDgHoketsuShinsainList().getDataSource().isEmpty()
+               && div.getDgShinsainList().getDataSource().isEmpty();
     }
 
     /**
@@ -206,17 +213,17 @@ public class GogitaiJohoSakuseiHandler {
     public boolean hasChangedByUpd(GogitaiJoho result) {
 
         boolean flg = result.get合議体番号() == Integer.parseInt(div.getTxtGogitaiNumber().getValue().toString())
-                && result.get合議体名称().equals(div.getTxtGogitaiMeisho().getValue())
-                && result.get介護認定審査会開催場所コード().equals(div.getDdlkaisaibasho().getSelectedKey())
-                && result.get合議体有効期間開始年月日().compareTo(new FlexibleDate(div.getTxtYukoKaishiYMD().getValue().toDateString())) == 0
-                && result.get合議体有効期間終了年月日().compareTo(new FlexibleDate(div.getTxtYukoShuryoYMD().getValue().toDateString())) == 0
-                && strToTime(result.get合議体開始予定時刻()).compareTo(div.getTxtKaishiYoteiTime().getValue()) == 0
-                && strToTime(result.get合議体終了予定時刻()).compareTo(div.getTxtShuryoYoteiTime().getValue()) == 0
-                && result.get介護認定審査会予定定員() == div.getTxtYoteiTeiin().getValue().intValue()
-                && result.get介護認定審査会自動割当定員() == div.getTxtJidoWariateTeiin().getValue().intValue()
-                && result.get介護認定審査会委員定員() == div.getTxtIinTeiin().getValue().intValue()
-                && result.is合議体精神科医存在フラグ() == div.getRadSeishinkaiSonzai().getSelectedKey().equals(SEISHINKAI_SONZAI_SURU)
-                && result.is合議体ダミーフラグ() == div.getRadDummyFlag().getSelectedKey().equals(DUMMY_FLAG_DAMI);
+                      && result.get合議体名称().equals(div.getTxtGogitaiMeisho().getValue())
+                      && result.get介護認定審査会開催場所コード().equals(div.getDdlkaisaibasho().getSelectedKey())
+                      && result.get合議体有効期間開始年月日().compareTo(new FlexibleDate(div.getTxtYukoKaishiYMD().getValue().toDateString())) == 0
+                      && result.get合議体有効期間終了年月日().compareTo(new FlexibleDate(div.getTxtYukoShuryoYMD().getValue().toDateString())) == 0
+                      && strToTime(result.get合議体開始予定時刻()).compareTo(div.getTxtKaishiYoteiTime().getValue()) == 0
+                      && strToTime(result.get合議体終了予定時刻()).compareTo(div.getTxtShuryoYoteiTime().getValue()) == 0
+                      && result.get介護認定審査会予定定員() == div.getTxtYoteiTeiin().getValue().intValue()
+                      && result.get介護認定審査会自動割当定員() == div.getTxtJidoWariateTeiin().getValue().intValue()
+                      && result.get介護認定審査会委員定員() == div.getTxtIinTeiin().getValue().intValue()
+                      && result.is合議体精神科医存在フラグ() == div.getRadSeishinkaiSonzai().getSelectedKey().equals(SEISHINKAI_SONZAI_SURU)
+                      && result.is合議体ダミーフラグ() == div.getRadDummyFlag().getSelectedKey().equals(DUMMY_FLAG_DAMI);
 
         if (!flg) {
             return flg;
@@ -259,7 +266,7 @@ public class GogitaiJohoSakuseiHandler {
                 return !flg;
             }
             if (!gogitaiWariateIinJoho.getShinsakaiIinJohoList().isEmpty()
-                    && !gogitaiWariateIinJoho.getShinsakaiIinJohoList().get(0).get介護認定審査会委員氏名().value().equals(dgHoketsuShinsain.getHoketsuShinsakaiIinShimei())) {
+                && !gogitaiWariateIinJoho.getShinsakaiIinJohoList().get(0).get介護認定審査会委員氏名().value().equals(dgHoketsuShinsain.getHoketsuShinsakaiIinShimei())) {
                 return !flg;
             }
             hoketsuCount = hoketsuCount + 1;
@@ -269,22 +276,22 @@ public class GogitaiJohoSakuseiHandler {
             }
 
             if (!gogitaiWariateIinJoho.getShinsakaiIinJohoList().isEmpty()
-                    && !gogitaiWariateIinJoho.getShinsakaiIinJohoList().get(0).get介護認定審査会委員氏名().value().equals(dgShinsain.getShinsakaiIinShimei())) {
+                && !gogitaiWariateIinJoho.getShinsakaiIinJohoList().get(0).get介護認定審査会委員氏名().value().equals(dgShinsain.getShinsakaiIinShimei())) {
                 return !flg;
             }
 
             if (GogitaichoKubunCode.副合議体長.getコード().equals(gogitaiWariateIinJoho.get合議体長区分コード().value())
-                    && !dgShinsain.getFukuGogitaicho()) {
+                && !dgShinsain.getFukuGogitaicho()) {
                 return !flg;
             }
 
             if (GogitaichoKubunCode.合議体長.getコード().equals(gogitaiWariateIinJoho.get合議体長区分コード().value())
-                    && !dgShinsain.getGogitaicho()) {
+                && !dgShinsain.getGogitaicho()) {
                 return !flg;
             }
 
             if (GogitaichoKubunCode.通常.getコード().equals(gogitaiWariateIinJoho.get合議体長区分コード().value())
-                    && (dgShinsain.getGogitaicho() || dgShinsain.getFukuGogitaicho())) {
+                && (dgShinsain.getGogitaicho() || dgShinsain.getFukuGogitaicho())) {
                 return !flg;
             }
             shinsainCount = shinsainCount + 1;
@@ -433,7 +440,7 @@ public class GogitaiJohoSakuseiHandler {
         gogitaiJohoBuilder.set介護認定審査会開催場所コード(div.getDdlkaisaibasho().getSelectedKey());
         gogitaiJohoBuilder.set介護認定審査会予定定員(div.getTxtYoteiTeiin().getValue().intValue());
         gogitaiJohoBuilder.set介護認定審査会自動割当定員(div.getTxtJidoWariateTeiin().getValue() == null
-                ? 0 : div.getTxtJidoWariateTeiin().getValue().intValue());
+                                            ? 0 : div.getTxtJidoWariateTeiin().getValue().intValue());
         gogitaiJohoBuilder.set介護認定審査会委員定員(div.getTxtIinTeiin().getValue().intValue());
         return gogitaiJohoBuilder;
     }

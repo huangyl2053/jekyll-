@@ -89,7 +89,7 @@
      "layoutName": "DBA1050021",
      "layoutTitle": "被保険者資格詳細異動",
      "eventName": "履歴一覧に戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBA",
      "toLayoutName": "DBA4010011",

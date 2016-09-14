@@ -17,7 +17,7 @@
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
         AS  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
     </select>
-    
+
     <select resultOrdered="true" id="selectバッチ内で抽出条件"
             resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity"
             fetchSize="500">
@@ -31,10 +31,10 @@
         AND "nendo" = '0000'
         AND "nendoNaiRenban" = '00'
     </select>
-    
+
     <select resultOrdered="true" id="select被保険者台帳管理By論理削除フラグAnd識別コード"
-                resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity"
-                fetchSize="500">
+            resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity"
+            fetchSize="500">
         SELECT *
         FROM rgdb."DbT1001HihokenshaDaicho"
         WHERE
@@ -45,7 +45,6 @@
         "edaNo" DESC
         LIMIT 1
     </select>
-
 
     <!-- ShikakuIdoTaishoshaEntityの項目にマッピングします。-->
     <resultMap id="resultMap_ShikakuIdoTaishoshaEntity" type="jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichokoshin.ShikakuIdoTaishoshaEntity" autoMapping="true">
@@ -70,16 +69,11 @@
         FROM
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
         WHERE
-        "shikibetsuCode" IN
-        (SELECT
-        "ShikibetsuTaisho"."shikibetsuCode"
-        FROM
-        rgua."UaFt200FindShikibetsuTaisho"('1', '', '0', 'DB', '0', '', '', '', '', '', '', '', '', '', '', '0', '0', '', '', '', '', 
-        '', '', '0', '0', '', '', '', '', '', '', '', '', '', '0', '', '1', '1', '0', '0', '0', '0', '1', '1', '1', '1', '0', '', '', 
-        '', '', '', '', '', '0', '0', '', '', '0', '0', '0', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '{  }') AS "ShikibetsuTaisho"
-        )
+        "seinengappiYMD" <![CDATA[>=]]> #{開始日}
+        AND
+        "seinengappiYMD" <![CDATA[<=]]> #{終了日}
     </select>
-    
+
     <!-- DbT1003TashichosonJushochiTokureiEntityの項目にマッピングします。-->
     <select id="select他市町村住所地特例" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1003TashichosonJushochiTokureiEntity"
             fetchSize="500">
@@ -94,7 +88,7 @@
         )
         OR
         ("tekiyoYMD" <![CDATA[<=]]> #{年齢到達日}
-        AND "kaijoYMD" IS NULL
+        AND ("kaijoYMD" IS NULL OR "kaijoYMD" = '')
         ))
         AND "logicalDeletedFlag" = FALSE
     </select>
@@ -114,7 +108,7 @@
         )
         OR
         ("tekiyoYMD" <![CDATA[<=]]> #{年齢到達日}
-        AND "kaijoYMD" IS NULL
+        AND ("kaijoYMD" IS NULL OR "kaijoYMD" ='')
         ))
         AND "logicalDeletedFlag" = FALSE
     </select>
@@ -141,6 +135,11 @@
         rgdb."DbT1010TennyushutsuHoryuTaishosha"
         WHERE
         "shikibetsuCode" = #{識別コード}
+        =======
+        "seinengappiYMD" <![CDATA[>=]]> #{開始日}
+        AND
+        "seinengappiYMD" <![CDATA[<=]]> #{終了日}
+        >>>>>>> c928c3a1057b3cf5a8d19fa7b41d2e54b99c0778
     </select>
 
 </mapper>

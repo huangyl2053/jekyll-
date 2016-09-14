@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.JushochitokureiKaijoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.JushochitokureiTekiyoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuHenkoJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuShutokuJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.jushochitokureisha.KoikinaiJushochitokureishaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.chohyokofurirekiid.ChohyoKofuRirekiID;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;

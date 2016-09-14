@@ -20,6 +20,10 @@
             <artifactId>DbbEntity</artifactId>
         </dependency>
         <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbb</groupId>
+            <artifactId>DbbBusiness</artifactId>
+        </dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbbDefinition</artifactId>
         </dependency>

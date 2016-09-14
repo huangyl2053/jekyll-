@@ -4,21 +4,20 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2300001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.IShujiiIryokikanAndShujiiInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ShujiiIkenshoIraiJohoInput のクラスファイル
- *
+ * ShujiiIkenshoIraiJohoInput のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class ShujiiIkenshoIraiJohoInputDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -27,10 +26,10 @@ public class ShujiiIkenshoIraiJohoInputDiv extends Panel {
      */
     @JsonProperty("ShujiiIryoKikanNyuryoku")
     private ShujiiIryoKikanNyuryokuDiv ShujiiIryoKikanNyuryoku;
+    @JsonProperty("lin1")
+    private HorizontalLine lin1;
     @JsonProperty("txtShujiiIkensahoSakuseiIraiDay")
     private TextBoxDate txtShujiiIkensahoSakuseiIraiDay;
-    @JsonProperty("btnHozon")
-    private Button btnHozon;
     @JsonProperty("btnIrai")
     private Button btnIrai;
 
@@ -59,6 +58,24 @@ public class ShujiiIkenshoIraiJohoInputDiv extends Panel {
     }
 
     /*
+     * getlin1
+     * @return lin1
+     */
+    @JsonProperty("lin1")
+    public HorizontalLine getLin1() {
+        return lin1;
+    }
+
+    /*
+     * setlin1
+     * @param lin1 lin1
+     */
+    @JsonProperty("lin1")
+    public void setLin1(HorizontalLine lin1) {
+        this.lin1 = lin1;
+    }
+
+    /*
      * gettxtShujiiIkensahoSakuseiIraiDay
      * @return txtShujiiIkensahoSakuseiIraiDay
      */
@@ -74,24 +91,6 @@ public class ShujiiIkenshoIraiJohoInputDiv extends Panel {
     @JsonProperty("txtShujiiIkensahoSakuseiIraiDay")
     public void setTxtShujiiIkensahoSakuseiIraiDay(TextBoxDate txtShujiiIkensahoSakuseiIraiDay) {
         this.txtShujiiIkensahoSakuseiIraiDay = txtShujiiIkensahoSakuseiIraiDay;
-    }
-
-    /*
-     * getbtnHozon
-     * @return btnHozon
-     */
-    @JsonProperty("btnHozon")
-    public Button getBtnHozon() {
-        return btnHozon;
-    }
-
-    /*
-     * setbtnHozon
-     * @param btnHozon btnHozon
-     */
-    @JsonProperty("btnHozon")
-    public void setBtnHozon(Button btnHozon) {
-        this.btnHozon = btnHozon;
     }
 
     /*

@@ -7,20 +7,26 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishu
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.ArrayList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+
 import java.util.HashSet;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishu;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoKofuKaishuIdentifier;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxMultiLine;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
-import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * ShoKaishuKirokuKanri のクラスファイル
@@ -29,7 +35,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  */
 public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKanriDiv {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-06_01-12-04">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -248,6 +254,12 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
         new ShoKaishuKirokuKanriHandler(this).initialize(状態, 被保険者番号);
     }
 
+    @Override
+    public void initialize(RString 状態, HihokenshaNo 被保険者番号,
+            ArrayList<dgKoufuKaishu_Row> dataSource, Models<ShoKofuKaishuIdentifier, ShoKofuKaishu> 証交付回収情報Model) {
+        new ShoKaishuKirokuKanriHandler(this).initialize(状態, 被保険者番号, dataSource, 証交付回収情報Model);
+    }
+
     /**
      * 適用情報一覧を取得します。
      *
@@ -265,5 +277,10 @@ public class ShoKaishuKirokuKanriDiv extends Panel implements IShoKaishuKirokuKa
     @Override
     public void saveShoKaishuKirokuKanri() {
         new ShoKaishuKirokuKanriHandler(this).saveShoKaishuKirokuKanri();
+    }
+
+    @Override
+    public Models<ShoKofuKaishuIdentifier, ShoKofuKaishu> getSaveData() {
+        return new ShoKaishuKirokuKanriHandler(this).getSaveData();
     }
 }

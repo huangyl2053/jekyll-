@@ -15,15 +15,23 @@ import jp.co.ndensan.reams.db.dba.service.report.hihokenshadaicho.HihokenshaDaic
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import static jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者;
+import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.IryoHokenRirekiState;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai.RofukuNenkinState;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.ShisetsuNyutaishoState;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShoKaishuKirokuKanri.ShoKaishuKirokuState;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -41,6 +49,8 @@ public class HihokenshaShokaiTotal {
     private static final RString 老福年金 = new RString("tplRofukuNenkin");
     private static final RString 施設入退所 = new RString("tplShisetsuNyutaisho");
     private static final RString 証交付回収 = new RString("tplShoKofuKaishu");
+    private static final RString COMMON_BTN_PUBLISH = new RString("btnPublish");
+    private static final RString COMMON_BTN_KAKUTEI = new RString("btnKakutei");
     private static final RString 照会 = new RString("照会");
     private static final RString LOAD済み = new RString("1");
 
@@ -51,14 +61,44 @@ public class HihokenshaShokaiTotal {
      * @return ResponseData<HihokenshaShokaiTotalDiv>
      */
     public ResponseData<HihokenshaShokaiTotalDiv> onLoad(HihokenshaShokaiTotalDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         TaishoshaKey key = ViewStateHolder.get(資格対象者, TaishoshaKey.class);
         ShikibetsuCode shikibetsuCode = key.get識別コード();
         HihokenshaNo hihokenshaNo = key.get被保険者番号();
+        if (validateShikibetsuCode(shikibetsuCode)) {
+            div.setDisabled(true);
+            div.getHihokenshaShokaiPanel().setDisplayNone(true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BTN_PUBLISH, true);
+            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
+        } else if (validateHihokenshaNo(hihokenshaNo)) {
+            div.setDisabled(true);
+            div.getHihokenshaShokaiPanel().setDisplayNone(true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BTN_PUBLISH, true);
+            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
+        }
+
+        div.getHihokenshaShokaiPanel().getCcdShisetsuTokusoRireki().initialize(hihokenshaNo, shikibetsuCode);
+
         div.getKihonJoho().getCcdKaigoAtenaInfo().initialize(shikibetsuCode);
         div.getKihonJoho().getCcdKaigoShikakuKihon().initialize(shikibetsuCode);
-        div.getHihokenshaShokaiPanel().getCcdShisetsuTokusoRireki().initialize(hihokenshaNo, shikibetsuCode);
-        div.setHihokenshaRirekiFlag(LOAD済み);
+        div.getHihokenshaShokaiPanel().getCcdIryoHokenButton().initialize(hihokenshaNo, shikibetsuCode, IryoHokenRirekiState.照会);
+        div.getHihokenshaShokaiPanel().getCcdRofukuNenkinButton().initialize(hihokenshaNo, shikibetsuCode, RofukuNenkinState.照会);
+        div.getHihokenshaShokaiPanel().getCcdShisetsuNyutaishoButton().initialize(
+                shikibetsuCode, DaichoType.被保険者.getコード(), ShisetsuNyutaishoState.照会);
+        div.getHihokenshaShokaiPanel().getCcdShoKofuKaishuButton().initialize(hihokenshaNo, ShoKaishuKirokuState.照会);
+        div.getHihokenshaShokaiPanel().getCcdSetaiShotokuButton().initialize(shikibetsuCode);
+
         return ResponseData.of(div).respond();
+    }
+
+    private boolean validateShikibetsuCode(ShikibetsuCode shikibetsuCode) {
+        return (shikibetsuCode == null || shikibetsuCode.isEmpty());
+    }
+
+    private boolean validateHihokenshaNo(HihokenshaNo hihokenshaNo) {
+        return ((hihokenshaNo == null || hihokenshaNo.getColumnValue() == null || hihokenshaNo.isEmpty()));
     }
 
     /**
@@ -144,44 +184,5 @@ public class HihokenshaShokaiTotal {
         ViewStateHolder.put(ViewStateKeys.識別コード, key.get識別コード());
         ViewStateHolder.put(ViewStateKeys.状態, 照会);
         return ResponseData.of(div).forwardWithEventName(DBA4010011TransitionEventName.被保険者詳細).respond();
-    }
-
-    /**
-     * タブ変更を処理します。
-     *
-     * @param div 被保険者照会DIV
-     * @return ResponseData<HihokenshaShokaiTotalDiv>
-     */
-    public ResponseData<HihokenshaShokaiTotalDiv> onChange_tabHihokenshaShokai(HihokenshaShokaiTotalDiv div) {
-        TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        ShikibetsuCode shikibetsuCode = key.get識別コード();
-        HihokenshaNo hihokenshaNo = key.get被保険者番号();
-        if (被保履歴.equals(div.getHihokenshaShokaiPanel().getTabHihokenshaShokai().getSelectControlID())
-                && RString.isNullOrEmpty(div.getHihokenshaRirekiFlag())) {
-            div.getHihokenshaShokaiPanel().getCcdShisetsuTokusoRireki().initialize(hihokenshaNo, shikibetsuCode);
-            div.setHihokenshaRirekiFlag(LOAD済み);
-        } else if (世帯照会.equals(div.getHihokenshaShokaiPanel().getTabHihokenshaShokai().getSelectedItem().getSelectControlID())
-                && RString.isNullOrEmpty(div.getSetaiShokaiFlag())) {
-            div.getHihokenshaShokaiPanel().getCcdSeitaiIchiran().initialize(shikibetsuCode, FlexibleDate.getNowDate(),
-                    FlexibleDate.getNowDate().getNendo(), YMDHMS.now());
-            div.setSetaiShokaiFlag(LOAD済み);
-        } else if (医療保険.equals(div.getHihokenshaShokaiPanel().getTabHihokenshaShokai().getSelectedItem().getSelectControlID())
-                && RString.isNullOrEmpty(div.getIryoHokenFlag())) {
-            div.getHihokenshaShokaiPanel().getCcdIryoHokenRireki().initialize(照会, shikibetsuCode.value());
-            div.setIryoHokenFlag(LOAD済み);
-        } else if (老福年金.equals(div.getHihokenshaShokaiPanel().getTabHihokenshaShokai().getSelectedItem().getSelectControlID())
-                && RString.isNullOrEmpty(div.getRofukuNenkinFlag())) {
-            div.getHihokenshaShokaiPanel().getCcdRoreiFukushiNenkinShokai().initialize(shikibetsuCode, hihokenshaNo);
-            div.setRofukuNenkinFlag(LOAD済み);
-        } else if (施設入退所.equals(div.getHihokenshaShokaiPanel().getTabHihokenshaShokai().getSelectedItem().getSelectControlID())
-                && RString.isNullOrEmpty(div.getShisetsuNyutaishoFlag())) {
-            div.getHihokenshaShokaiPanel().getCcdShisetsuNyutaishoRireki().initialize(shikibetsuCode, new RString("1"));
-            div.setShisetsuNyutaishoFlag(LOAD済み);
-        } else if (証交付回収.equals(div.getHihokenshaShokaiPanel().getTabHihokenshaShokai().getSelectedItem().getSelectControlID())
-                && RString.isNullOrEmpty(div.getShoKofuKaishuFlag())) {
-            div.getHihokenshaShokaiPanel().getCcdShoKaishuJokyoList().initialize(照会, hihokenshaNo);
-            div.setShoKofuKaishuFlag(LOAD済み);
-        }
-        return ResponseData.of(div).respond();
     }
 }

@@ -69,6 +69,7 @@ public class HanyoListHihokenshadaichoProcessParameter implements IBatchProcessP
     private final RString psmChiku3_To_Name;
     private RString psmShikibetsuTaisho;
     private RString psmAtesaki;
+    private final long jobId;
 
     /**
      * コンストラクタです。
@@ -166,7 +167,8 @@ public class HanyoListHihokenshadaichoProcessParameter implements IBatchProcessP
             RString psmChiku2_From_Name,
             RString psmChiku2_To_Name,
             RString psmChiku3_From_Name,
-            RString psmChiku3_To_Name) {
+            RString psmChiku3_To_Name,
+            long jobId) {
         this.komukuFukaMeyi = komukuFukaMeyi;
         this.rembanfuka = rembanfuka;
         this.hidukeHensyu = hidukeHensyu;
@@ -213,6 +215,7 @@ public class HanyoListHihokenshadaichoProcessParameter implements IBatchProcessP
         this.psmChiku2_To_Name = psmChiku2_To_Name;
         this.psmChiku3_From_Name = psmChiku3_From_Name;
         this.psmChiku3_To_Name = psmChiku3_To_Name;
+        this.jobId = jobId;
     }
 
     /**

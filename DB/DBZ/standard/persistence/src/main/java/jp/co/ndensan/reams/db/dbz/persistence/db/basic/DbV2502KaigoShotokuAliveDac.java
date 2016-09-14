@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.basic;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2502KaigoShotoku;
-import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2502KaigoShotoku.rirekiNo;
+import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2502KaigoShotoku.rirekino;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2502KaigoShotoku.shikibetsuCode;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2502KaigoShotoku.shoriTimeStamp;
 import static jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2502KaigoShotoku.shotokuNendo;
@@ -63,7 +63,7 @@ public class DbV2502KaigoShotokuAliveDac implements ISaveable<DbV2502KaigoShotok
                 where(and(
                                 eq(shotokuNendo, 所得年度),
                                 eq(shikibetsuCode, 識別コード),
-                                eq(rirekiNo, 履歴番号))).
+                                eq(rirekino, 履歴番号))).
                 toObject(DbV2502KaigoShotokuEntity.class);
     }
 
@@ -138,7 +138,7 @@ public class DbV2502KaigoShotokuAliveDac implements ISaveable<DbV2502KaigoShotok
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
-        return accessor.selectSpecific(max(rirekiNo)).
+        return accessor.selectSpecific(max(rirekino)).
                 table(DbV2502KaigoShotoku.class).
                 where(eq(shotokuNendo, 所得年度)).groupBy(shotokuNendo, shikibetsuCode)
                 .order(by(shotokuNendo, Order.ASC), by(shikibetsuCode, Order.ASC)).

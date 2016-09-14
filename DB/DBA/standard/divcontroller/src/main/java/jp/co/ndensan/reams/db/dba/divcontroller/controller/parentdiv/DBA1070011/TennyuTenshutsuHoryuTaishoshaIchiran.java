@@ -84,7 +84,7 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
     public ResponseData<TennyuTenshutsuHoryuTaishoshaIchiranDiv> onLoad(TennyuTenshutsuHoryuTaishoshaIchiranDiv div) {
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         if (市町村セキュリティ情報 == null) {
-            return ResponseData.of(div).respond();
+            return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.完了する).respond();
         }
         DonyuKeitaiCode 導入形態コード = DonyuKeitaiCode.toValue(市町村セキュリティ情報.get導入形態コード().value());
         if (導入形態コード.is広域()) {
@@ -93,12 +93,47 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
             div.getTabTennyuTenshutsuHoryuTaishosha().setSelectedItem(div.getTplKoiki());
         } else {
             div.getTplKoiki().setVisible(false);
+
         }
-        loadTplTenshutsu(div);
-        List<TennyuHoryuTaisho> 転入保留対象者情報 = manager.getTennyuHoryuTaishoshas().records();
-        save転入保留対象者情報ToViewState(転入保留対象者情報);
-        List<TennyuHoryuTaisho> 広域保留対象者情報 = manager.getKoikiHoryuTaishoshas().records();
-        save広域保留対象者情報ToViewState(広域保留対象者情報);
+//<<<<<<< HEAD
+//        save転入転出保留対象者情報ToViewState();
+        List<TenshutsuHoryuTaisho/*ITennyuTenshutsuHoryuTaishosha*/> 転出保留対象者情報 = manager.getTenshutsuHoryuTaishoshas/*getTenshutsuHoryuTaishoshaList*/().records();
+        List<TennyuHoryuTaisho/*ITennyuTenshutsuHoryuTaishosha*/> 転入保留対象者情報 = manager.getTennyuHoryuTaishoshas/*getTennyuHoryuTaishoshaList*/().records();
+        List<TennyuHoryuTaisho/*ITennyuTenshutsuHoryuTaishosha*/> 広域保留対象者情報 = manager.getKoikiHoryuTaishoshas/*getKoikiHoryuTaishoshaList*/().records();
+        boolean 比較結果 = false;
+        for (TenshutsuHoryuTaisho/*ITennyuTenshutsuHoryuTaishosha*/ 転出対象者情報 : 転出保留対象者情報) {
+            if ((転出対象者情報.get識別コード() != null) && (!転出対象者情報.get識別コード().isEmpty())) {
+                if (転出対象者情報.get識別コード().getColumnValue().equals(ViewStateHolder.get(ViewStateKeys.識別コード, RString.class))) {
+                    比較結果 = true;
+                }
+            }
+        }
+        for (TennyuHoryuTaisho/*ITennyuTenshutsuHoryuTaishosha*/ 転入対象者情報 : 転入保留対象者情報) {
+            if ((転入対象者情報.get識別コード() != null) && (!転入対象者情報.get識別コード().isEmpty())) {
+                if (転入対象者情報.get識別コード().getColumnValue().equals(ViewStateHolder.get(ViewStateKeys.識別コード, RString.class))) {
+                    比較結果 = true;
+                }
+            }
+        }
+        for (TennyuHoryuTaisho/*ITennyuTenshutsuHoryuTaishosha*/ 広域対象者情報 : 広域保留対象者情報) {
+            if ((広域対象者情報.get識別コード() != null) && (!広域対象者情報.get識別コード().isEmpty())) {
+                if (広域対象者情報.get識別コード().getColumnValue().equals(ViewStateHolder.get(ViewStateKeys.識別コード, RString.class))) {
+                    比較結果 = true;
+                }
+            }
+        }
+        if (!比較結果) {
+            return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.完了する).respond();
+
+        }
+
+//=======
+//        loadTplTenshutsu(div);
+//        List<TennyuHoryuTaisho> 転入保留対象者情報 = manager.getTennyuHoryuTaishoshas().records();
+//        save転入保留対象者情報ToViewState(転入保留対象者情報);
+//        List<TennyuHoryuTaisho> 広域保留対象者情報 = manager.getKoikiHoryuTaishoshas().records();
+//        save広域保留対象者情報ToViewState(広域保留対象者情報);
+//>>>>>>> origin/sync
         TennyuTenshutsuHoryuTaishoshaIchiranHandler handler = getHandler(div);
         handler.load_転入情報(転入保留対象者情報);
         handler.load_広域情報(広域保留対象者情報);
@@ -130,7 +165,7 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
             return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             Models<TennyushutsuHoryuTaishoshaIdentifier, TennyushutsuHoryuTaishosha> 転入保留対象者情報
                     = (Models<TennyushutsuHoryuTaishoshaIdentifier, TennyushutsuHoryuTaishosha>) ViewStateHolder
                     .get(ViewStateKeys.転入保留対象者, Models.class);
@@ -154,7 +189,7 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
                 new ShikibetsuCode(click転出保留対象者.getShikibetsuCode().getText()), SetaiCode.EMPTY);
         ViewStateHolder.put(ViewStateKeys.資格対象者, key);
         if (KEY_資格喪失.equals(click転出保留対象者.getNextTask().getSelectedKey())
-                || click転出保留対象者.getNextTask().getSelectedKey().isEmpty()) {
+            || click転出保留対象者.getNextTask().getSelectedKey().isEmpty()) {
             return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.転出).parameter(PARAMETER_資格喪失);
         }
         if (KEY_住所地特例適用.equals(click転出保留対象者.getNextTask().getSelectedKey())) {
@@ -164,7 +199,7 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
             return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             Models<TenshutsuHoryuTaishoshaIdentifier, TenshutsuHoryuTaishosha> 転出保留対象者情報
                     = (Models<TenshutsuHoryuTaishoshaIdentifier, TenshutsuHoryuTaishosha>) ViewStateHolder
                     .get(ViewStateKeys.転出保留対象者, Models.class);
@@ -188,7 +223,7 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
                 new ShikibetsuCode(click広域保留対象者.getShikibetsuCode().getText()), SetaiCode.EMPTY);
         ViewStateHolder.put(ViewStateKeys.資格対象者, key);
         if (KEY_資格取得異動.equals(click広域保留対象者.getNextTask().getSelectedKey())
-                || click広域保留対象者.getNextTask().getSelectedKey().isEmpty()) {
+            || click広域保留対象者.getNextTask().getSelectedKey().isEmpty()) {
             return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.広域).parameter(PARAMETER_資格取得異動);
         }
         if (KEY_住所地特例適用.equals(click広域保留対象者.getNextTask().getSelectedKey())) {
@@ -198,7 +233,7 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
             return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             Models<TennyushutsuHoryuTaishoshaIdentifier, TennyushutsuHoryuTaishosha> 広域保留対象者情報
                     = (Models<TennyushutsuHoryuTaishoshaIdentifier, TennyushutsuHoryuTaishosha>) ViewStateHolder
                     .get(ViewStateKeys.広域転入保留対象者, Models.class);
@@ -221,7 +256,7 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
             return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes && !div.getDgTenshutsu().getDataSource().isEmpty()) {
+            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes && !div.getDgTenshutsu().getDataSource().isEmpty()) {
             ValidationMessageControlPairs message = new TennyuTenshutsuHoryuTaishoshaIchiranValidationHandler(div).doCheck();
             if (message.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(message).respond();

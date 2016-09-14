@@ -538,14 +538,14 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
                 TokuchoKiUtil 月期対応取得_特徴 = new TokuchoKiUtil();
                 Kitsuki 特徴を停止する期 = null;
                 if ((!RSTRING_1.equals(徴収方法情報.get徴収方法6月())
-                        && !RSTRING_2.equals(徴収方法情報.get徴収方法6月()))
-                        || (!RSTRING_1.equals(徴収方法情報.get徴収方法7月())
+                     && !RSTRING_2.equals(徴収方法情報.get徴収方法6月()))
+                    || (!RSTRING_1.equals(徴収方法情報.get徴収方法7月())
                         && !RSTRING_2.equals(徴収方法情報.get徴収方法7月()))) {
                     特徴を停止する期 = 月期対応取得_特徴.get期月リスト().get月の期(Tsuki._6月);
                 } else if ((!RSTRING_1.equals(徴収方法情報.get徴収方法8月())
-                        && !RSTRING_2.equals(徴収方法情報.get徴収方法8月()))
-                        || (!RSTRING_1.equals(徴収方法情報.get徴収方法9月())
-                        && !RSTRING_2.equals(徴収方法情報.get徴収方法9月()))) {
+                            && !RSTRING_2.equals(徴収方法情報.get徴収方法8月()))
+                           || (!RSTRING_1.equals(徴収方法情報.get徴収方法9月())
+                               && !RSTRING_2.equals(徴収方法情報.get徴収方法9月()))) {
                     特徴を停止する期 = 月期対応取得_特徴.get期月リスト().get月の期(Tsuki._8月);
                 }
                 FukaJoho 賦課の情報_設定後 = 賦課根拠の反映(特別徴収停止Entity, 資格情報, 更正前賦課情報, 調定日時, 賦課年度);
@@ -1004,10 +1004,10 @@ public class KariSanteiIdoFukaBatch extends KariSanteiIdoFukaBatchFath {
             for (KeisanjohoAtenaKozaEntity 計算後情報_宛名_口座_更正前Entity : 更正前EntityList) {
                 if (計算後情報_宛名_口座_更正前Entity.get調定年度()
                         .compareTo(計算後情報_宛名_口座_更正後Entity.get調定年度()) == 0
-                        && 計算後情報_宛名_口座_更正前Entity.get賦課年度()
+                    && 計算後情報_宛名_口座_更正前Entity.get賦課年度()
                         .compareTo(計算後情報_宛名_口座_更正後Entity.get賦課年度()) == 0
-                        && 計算後情報_宛名_口座_更正前Entity.get通知書番号().equals(計算後情報_宛名_口座_更正後Entity.get通知書番号())
-                        && 計算後情報_宛名_口座_更正前Entity.get作成処理名().equals(計算後情報_宛名_口座_更正後Entity.get作成処理名())) {
+                    && 計算後情報_宛名_口座_更正前Entity.get通知書番号().equals(計算後情報_宛名_口座_更正後Entity.get通知書番号())
+                    && 計算後情報_宛名_口座_更正前Entity.get作成処理名().equals(計算後情報_宛名_口座_更正後Entity.get作成処理名())) {
                     entity.set計算後情報_宛名_口座_更正前Entity(計算後情報_宛名_口座_更正前Entity);
                     break;
                 }

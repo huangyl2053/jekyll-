@@ -45,7 +45,6 @@ var DBA;
                     gridSetting.isShowDeleteButtonColumn = false;
 
                     this.controls.dgJushochiTokureiRireki().gridSetting = gridSetting;
-                    this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
 
                     this.controls.TajushochiTokureiInput().title = "他市町村住所地特例情報";
                     this.controls.TajushochiTokureiInput().displayNone = false;
@@ -74,13 +73,12 @@ var DBA;
                     var gridSetting = this.controls.dgJushochiTokureiRireki().gridSetting;
                     var columns = gridSetting.columns;
 
-                    gridSetting.isShowRowState = true;
+                    gridSetting.isShowRowState = false;
                     gridSetting.isShowSelectButtonColumn = false;
                     gridSetting.isShowModifyButtonColumn = true;
                     gridSetting.isShowDeleteButtonColumn = true;
 
                     this.controls.dgJushochiTokureiRireki().gridSetting = gridSetting;
-                    this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
 
                     this.controls.TajushochiTokureiInput().title = "他市町村住所地特例情報入力";
                     this.controls.TajushochiTokureiInput().displayNone = false;
@@ -102,20 +100,19 @@ var DBA;
                 };
 
                 DisplayMode.prototype.Tekiyo = function () {
-                    this.controls.btnAdd().displayNone = true;
+                    this.controls.btnAdd().displayNone = false;
                     this.controls.btnKakunin().displayNone = false;
-                    this.controls.btnTorikeshi().displayNone = true;
+                    this.controls.btnTorikeshi().displayNone = false;
 
                     var gridSetting = this.controls.dgJushochiTokureiRireki().gridSetting;
                     var columns = gridSetting.columns;
 
                     gridSetting.isShowRowState = false;
                     gridSetting.isShowSelectButtonColumn = false;
-                    gridSetting.isShowModifyButtonColumn = false;
-                    gridSetting.isShowDeleteButtonColumn = false;
+                    gridSetting.isShowModifyButtonColumn = true;
+                    gridSetting.isShowDeleteButtonColumn = true;
 
                     this.controls.dgJushochiTokureiRireki().gridSetting = gridSetting;
-                    this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
 
                     this.controls.TajushochiTokureiInput().title = "他市町村住所地特例情報入力";
                     this.controls.TajushochiTokureiInput().displayNone = false;
@@ -130,7 +127,6 @@ var DBA;
                     this.controls.txtKaijyobi().displayNone = true;
                     this.controls.txtKaijyoTodokedebi().displayNone = true;
                     this.controls.ddlKaijyoJiyo().displayNone = true;
-
                     this.controls.panSotimotoJyoho().displayNone = false;
                     this.controls.panShisetsuJoho().displayNone = false;
                 };
@@ -138,18 +134,17 @@ var DBA;
                 DisplayMode.prototype.Kaijyo = function () {
                     this.controls.btnAdd().displayNone = true;
                     this.controls.btnKakunin().displayNone = false;
-                    this.controls.btnTorikeshi().displayNone = true;
+                    this.controls.btnTorikeshi().displayNone = false;
 
                     var gridSetting = this.controls.dgJushochiTokureiRireki().gridSetting;
                     var columns = gridSetting.columns;
 
                     gridSetting.isShowRowState = false;
                     gridSetting.isShowSelectButtonColumn = false;
-                    gridSetting.isShowModifyButtonColumn = false;
+                    gridSetting.isShowModifyButtonColumn = true;
                     gridSetting.isShowDeleteButtonColumn = false;
 
                     this.controls.dgJushochiTokureiRireki().gridSetting = gridSetting;
-                    this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
 
                     this.controls.TajushochiTokureiInput().title = "他市町村住所地特例情報入力";
                     this.controls.TajushochiTokureiInput().displayNone = false;
@@ -162,6 +157,7 @@ var DBA;
 
                     this.controls.txtTasyobi().displayNone = false;
                     this.controls.txtKaijyobi().displayNone = false;
+
                     this.controls.txtKaijyoTodokedebi().displayNone = false;
                     this.controls.ddlKaijyoJiyo().displayNone = false;
                     this.controls.txtKaijyobi().wrap = false;
@@ -184,7 +180,6 @@ var DBA;
                     gridSetting.isShowDeleteButtonColumn = false;
 
                     this.controls.dgJushochiTokureiRireki().gridSetting = gridSetting;
-                    this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();
 
                     this.controls.TajushochiTokureiInput().displayNone = true;
                 };

@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo
 import jp.co.ndensan.reams.db.dbz.business.core.hihokenshadaicho.HihokenshaDaichoModel;
 import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuShutokuJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbzTestBase;
@@ -101,7 +101,7 @@ public class KaigoFukaKihonHandlerTest extends DbzTestBase {
 
         @Test
         public void 資格喪失事由のデータがある時_loadは_データをDivに設定する() {
-            assertThat(result.getTxtSoshitsuJiyu().getValue(), is(資格喪失事由.getName()));
+            assertThat(result.getTxtSoshitsuJiyu().getValue(), is(資格喪失事由.get名称()));
         }
     }
 

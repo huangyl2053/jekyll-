@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2010013;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.business.core.kaigojigyoshashisetsukanrio.KaigoJogaiTokureiBusiness;
 import jp.co.ndensan.reams.db.dba.business.core.kaigojigyoshashisetsukanrio.ServiceItiranHyojiJohoBusiness;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010013.JigyoshaTourokuDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010013.dgServiceList_Row;
@@ -21,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
 /**
@@ -165,30 +165,48 @@ public class JigyoshaTourokuHandler {
                 指定基準該当等事業所区分 == null ? RString.EMPTY : 指定基準該当等事業所区分.getColumnValue());
         panelDiv.getServiceJigyoshaJoho().getTxtBiko().setValue(
                 business.get備考() == null ? RString.EMPTY : business.get備考());
-        panelDiv.getDaihyoshaJoho().getTxtDaihyoshaName().setValue(business.getKaigoJigyoshaDaihyoshaList().get(0).get代表者名().getColumnValue());
-        panelDiv.getDaihyoshaJoho().getTxtDaihyoshaNameKana().setValue(business.getKaigoJigyoshaDaihyoshaList().get(0).get代表者名カナ().getColumnValue());
-        RString 代表者役職名 = business.getKaigoJigyoshaDaihyoshaList().get(0).get代表者役職名();
-        panelDiv.getDaihyoshaJoho().getTxtDaihyoshaYakushokuMei().setValue(代表者役職名 == null ? RString.EMPTY : 代表者役職名);
-        YubinNo 代表者郵便番号 = business.getKaigoJigyoshaDaihyoshaList().get(0).get代表者郵便番号();
-        panelDiv.getDaihyoshaJoho().getTxtDaihyoshaYubinNo().setValue(代表者郵便番号 == null ? YubinNo.EMPTY : 代表者郵便番号);
-        AtenaJusho 代表者住所 = business.getKaigoJigyoshaDaihyoshaList().get(0).get代表者住所();
-        panelDiv.getDaihyoshaJoho().getTxtDaihyoshaJusho().setValue(代表者住所 == null ? RString.EMPTY : 代表者住所.getColumnValue());
-        RString 代表者住所カナ = business.getKaigoJigyoshaDaihyoshaList().get(0).get代表者住所カナ();
-        panelDiv.getDaihyoshaJoho().getTxtDaihyoshaJushoKana().setValue(代表者住所カナ == null ? RString.EMPTY : 代表者住所カナ);
-        AtenaMeisho 開設者名称 = business.getKaigoJigyoshaDaihyoshaList().get(0).get開設者名称();
-        panelDiv.getKaisetsushaJoho().getTxtKaisetsushaName().setValue(開設者名称 == null ? RString.EMPTY : 開設者名称.getColumnValue());
-        AtenaKanaMeisho 開設者名称カナ = business.getKaigoJigyoshaDaihyoshaList().get(0).get開設者名称カナ();
-        panelDiv.getKaisetsushaJoho().getTxtKaisetsushaNameKana().setValue(開設者名称カナ == null ? RString.EMPTY : 開設者名称カナ.getColumnValue());
-        YubinNo 開設者郵便番号 = business.getKaigoJigyoshaDaihyoshaList().get(0).get開設者郵便番号();
-        panelDiv.getKaisetsushaJoho().getTxtKaisetsushaYubinNo().setValue(開設者郵便番号 == null ? YubinNo.EMPTY : 開設者郵便番号);
-        TelNo 開設者電話番号 = business.getKaigoJigyoshaDaihyoshaList().get(0).get開設者電話番号();
-        panelDiv.getKaisetsushaJoho().getTxtKaisetsushaTelNo().setValue(開設者電話番号 == null ? RString.EMPTY : 開設者電話番号.getColumnValue());
-        TelNo 開設者ＦＡＸ番号 = business.getKaigoJigyoshaDaihyoshaList().get(0).get開設者ＦＡＸ番号();
-        panelDiv.getKaisetsushaJoho().getTxtKaisetsushaFaxNo().setValue(開設者ＦＡＸ番号 == null ? RString.EMPTY : 開設者ＦＡＸ番号.getColumnValue());
-        AtenaJusho 開設者住所 = business.getKaigoJigyoshaDaihyoshaList().get(0).get開設者住所();
-        panelDiv.getKaisetsushaJoho().getTxtKaisetsushaJusho().setValue(開設者住所 == null ? RString.EMPTY : 開設者住所.getColumnValue());
-        RString 開設者住所カナ = business.getKaigoJigyoshaDaihyoshaList().get(0).get開設者住所カナ();
-        panelDiv.getKaisetsushaJoho().getTxtKaisetsushaJushoKana().setValue(開設者住所カナ == null ? RString.EMPTY : 開設者住所カナ);
+        if(!business.getKaigoJigyoshaDaihyoshaList().isEmpty()){
+            AtenaMeisho 代表者名 = business.getKaigoJigyoshaDaihyoshaList().get(0).get代表者名();
+            panelDiv.getDaihyoshaJoho().getTxtDaihyoshaName().setValue(代表者名 == null ? RString.EMPTY : 代表者名.getColumnValue());
+            AtenaKanaMeisho 代表者名カナ = business.getKaigoJigyoshaDaihyoshaList().get(0).get代表者名カナ();
+            panelDiv.getDaihyoshaJoho().getTxtDaihyoshaNameKana().setValue(代表者名カナ == null ? RString.EMPTY : 代表者名カナ.getColumnValue());
+            RString 代表者役職名 = business.getKaigoJigyoshaDaihyoshaList().get(0).get代表者役職名();
+            panelDiv.getDaihyoshaJoho().getTxtDaihyoshaYakushokuMei().setValue(代表者役職名 == null ? RString.EMPTY : 代表者役職名);
+            YubinNo 代表者郵便番号 = business.getKaigoJigyoshaDaihyoshaList().get(0).get代表者郵便番号();
+            panelDiv.getDaihyoshaJoho().getTxtDaihyoshaYubinNo().setValue(代表者郵便番号 == null ? YubinNo.EMPTY : 代表者郵便番号);
+            AtenaJusho 代表者住所 = business.getKaigoJigyoshaDaihyoshaList().get(0).get代表者住所();
+            panelDiv.getDaihyoshaJoho().getTxtDaihyoshaJusho().setValue(代表者住所 == null ? RString.EMPTY : 代表者住所.getColumnValue());
+            RString 代表者住所カナ = business.getKaigoJigyoshaDaihyoshaList().get(0).get代表者住所カナ();
+            panelDiv.getDaihyoshaJoho().getTxtDaihyoshaJushoKana().setValue(代表者住所カナ == null ? RString.EMPTY : 代表者住所カナ);
+            AtenaMeisho 開設者名称 = business.getKaigoJigyoshaDaihyoshaList().get(0).get開設者名称();
+            panelDiv.getKaisetsushaJoho().getTxtKaisetsushaName().setValue(開設者名称 == null ? RString.EMPTY : 開設者名称.getColumnValue());
+            AtenaKanaMeisho 開設者名称カナ = business.getKaigoJigyoshaDaihyoshaList().get(0).get開設者名称カナ();
+            panelDiv.getKaisetsushaJoho().getTxtKaisetsushaNameKana().setValue(開設者名称カナ == null ? RString.EMPTY : 開設者名称カナ.getColumnValue());
+            YubinNo 開設者郵便番号 = business.getKaigoJigyoshaDaihyoshaList().get(0).get開設者郵便番号();
+            panelDiv.getKaisetsushaJoho().getTxtKaisetsushaYubinNo().setValue(開設者郵便番号 == null ? YubinNo.EMPTY : 開設者郵便番号);
+            TelNo 開設者電話番号 = business.getKaigoJigyoshaDaihyoshaList().get(0).get開設者電話番号();
+            panelDiv.getKaisetsushaJoho().getTxtKaisetsushaTelNo().setValue(開設者電話番号 == null ? RString.EMPTY : 開設者電話番号.getColumnValue());
+            TelNo 開設者ＦＡＸ番号 = business.getKaigoJigyoshaDaihyoshaList().get(0).get開設者ＦＡＸ番号();
+            panelDiv.getKaisetsushaJoho().getTxtKaisetsushaFaxNo().setValue(開設者ＦＡＸ番号 == null ? RString.EMPTY : 開設者ＦＡＸ番号.getColumnValue());
+            AtenaJusho 開設者住所 = business.getKaigoJigyoshaDaihyoshaList().get(0).get開設者住所();
+            panelDiv.getKaisetsushaJoho().getTxtKaisetsushaJusho().setValue(開設者住所 == null ? RString.EMPTY : 開設者住所.getColumnValue());
+            RString 開設者住所カナ = business.getKaigoJigyoshaDaihyoshaList().get(0).get開設者住所カナ();
+            panelDiv.getKaisetsushaJoho().getTxtKaisetsushaJushoKana().setValue(開設者住所カナ == null ? RString.EMPTY : 開設者住所カナ);
+        }else{
+            panelDiv.getDaihyoshaJoho().getTxtDaihyoshaName().setValue(RString.EMPTY);
+            panelDiv.getDaihyoshaJoho().getTxtDaihyoshaNameKana().setValue(RString.EMPTY);
+            panelDiv.getDaihyoshaJoho().getTxtDaihyoshaJushoKana().setValue(RString.EMPTY);
+            panelDiv.getDaihyoshaJoho().getTxtDaihyoshaYakushokuMei().setValue(RString.EMPTY);
+            panelDiv.getDaihyoshaJoho().getTxtDaihyoshaYubinNo().setValue(YubinNo.EMPTY);
+            panelDiv.getDaihyoshaJoho().getTxtDaihyoshaJusho().setValue(RString.EMPTY);
+            panelDiv.getKaisetsushaJoho().getTxtKaisetsushaNameKana().setValue(RString.EMPTY);
+            panelDiv.getKaisetsushaJoho().getTxtKaisetsushaName().setValue(RString.EMPTY);
+            panelDiv.getKaisetsushaJoho().getTxtKaisetsushaYubinNo().setValue(YubinNo.EMPTY);
+            panelDiv.getKaisetsushaJoho().getTxtKaisetsushaTelNo().setValue(RString.EMPTY);
+            panelDiv.getKaisetsushaJoho().getTxtKaisetsushaFaxNo().setValue(RString.EMPTY);
+            panelDiv.getKaisetsushaJoho().getTxtKaisetsushaJusho().setValue(RString.EMPTY);
+            panelDiv.getKaisetsushaJoho().getTxtKaisetsushaJushoKana().setValue(RString.EMPTY);
+        }
     }
 
     private void get事業者情報_代表者_開設者の情報できないの場合() {
@@ -223,7 +241,7 @@ public class JigyoshaTourokuHandler {
         panelDiv.getDaihyoshaJoho().getTxtDaihyoshaYakushokuMei().setValue(RString.EMPTY);
         panelDiv.getDaihyoshaJoho().getTxtDaihyoshaYubinNo().setValue(YubinNo.EMPTY);
         panelDiv.getDaihyoshaJoho().getTxtDaihyoshaJusho().setValue(RString.EMPTY);
-        panelDiv.getDaihyoshaJoho().getTxtDaihyoshaJushoKana().setValue(RString.EMPTY);
+        panelDiv.getKaisetsushaJoho().getTxtKaisetsushaNameKana().setValue(RString.EMPTY);
         panelDiv.getKaisetsushaJoho().getTxtKaisetsushaName().setValue(RString.EMPTY);
         panelDiv.getKaisetsushaJoho().getTxtKaisetsushaYubinNo().setValue(YubinNo.EMPTY);
         panelDiv.getKaisetsushaJoho().getTxtKaisetsushaTelNo().setValue(RString.EMPTY);
@@ -266,24 +284,54 @@ public class JigyoshaTourokuHandler {
      *
      * @param サービス一覧情報List サービス一覧情報List
      */
-    public void getサービス一覧情報再表示(List<KaigoJogaiTokureiBusiness> サービス一覧情報List) {
+    public void getサービス一覧情報再表示(List<ServiceItiranHyojiJohoBusiness> サービス一覧情報List,boolean chkFlg) {
         List<dgServiceList_Row> サービス一覧データ = new ArrayList<>();
-        for (KaigoJogaiTokureiBusiness result : サービス一覧情報List) {
+        for (ServiceItiranHyojiJohoBusiness result : サービス一覧情報List) {
             dgServiceList_Row row = new dgServiceList_Row();
-            if (!RString.isNullOrEmpty(result.getサービス種類コード())) {
-                row.setServiceType(result.getサービス種類コード());
-                TextBoxFlexibleDate 開始日 = new TextBoxFlexibleDate();
-                開始日.setValue(new FlexibleDate(result.get有効開始日()));
-                TextBoxFlexibleDate 終了日 = new TextBoxFlexibleDate();
-                終了日.setValue(
-                        result.get有効終了日() == null ? FlexibleDate.EMPTY : new FlexibleDate(result.get有効終了日()));
-                row.setKaishiDate(開始日);
-                row.setShuryoDate(終了日);
-                row.setJigyoshaMei(
-                        result.get事業者名称().isNullOrEmpty() ? RString.EMPTY : result.get事業者名称());
-                row.setKanrishaMei(
-                        result.get管理者氏名().isNullOrEmpty() ? RString.EMPTY : result.get管理者氏名());
-                サービス一覧データ.add(row);
+            if (!RString.isNullOrEmpty(result.getサービス種類コード().getColumnValue())) {
+                if(!chkFlg){
+                    if(result.get削除フラグ()){
+                        row.setModifyButtonState(DataGridButtonState.Disabled);
+                        row.setDeleteButtonState(DataGridButtonState.Disabled);
+                    }else{
+                        row.setModifyButtonState(DataGridButtonState.Enabled);
+                        row.setDeleteButtonState(DataGridButtonState.Enabled);
+                    }
+                    row.setServiceType(result.getサービス種類コード().getColumnValue());
+                    row.setServiceType(result.getサービス種類略称());
+                    TextBoxFlexibleDate 開始日 = new TextBoxFlexibleDate();
+                    開始日.setValue(new FlexibleDate(result.get有効開始日().toString()));
+                    TextBoxFlexibleDate 終了日 = new TextBoxFlexibleDate();
+                    終了日.setValue(
+                        result.get有効終了日() == null ? FlexibleDate.EMPTY : result.get有効終了日());
+                    row.setKaishiDate(開始日);
+                    row.setShuryoDate(終了日);
+                    row.setJigyoshaMei(                            
+                            result.get事業者名称() == null ? RString.EMPTY : result.get事業者名称().getColumnValue());
+                    row.setKanrishaMei(
+                            result.get管理者氏名() == null ? RString.EMPTY : result.get管理者氏名().getColumnValue());
+
+                    サービス一覧データ.add(row);
+                } else {                  
+                    if(!result.get削除フラグ()){
+                        row.setServiceType(result.getサービス種類コード().getColumnValue());
+                        row.setServiceType(result.getサービス種類略称());
+                        TextBoxFlexibleDate 開始日 = new TextBoxFlexibleDate();
+                        開始日.setValue(new FlexibleDate(result.get有効開始日().toString()));
+                        TextBoxFlexibleDate 終了日 = new TextBoxFlexibleDate();
+                        終了日.setValue(
+                            result.get有効終了日() == null ? FlexibleDate.EMPTY : result.get有効終了日());
+                        row.setKaishiDate(開始日);
+                        row.setShuryoDate(終了日);
+                        row.setJigyoshaMei(                            
+                                result.get事業者名称() == null ? RString.EMPTY : result.get事業者名称().getColumnValue());
+                        row.setKanrishaMei(
+                                result.get管理者氏名() == null ? RString.EMPTY : result.get管理者氏名().getColumnValue());
+                        row.setModifyButtonState(DataGridButtonState.Enabled);
+                        row.setDeleteButtonState(DataGridButtonState.Enabled);
+                        サービス一覧データ.add(row);
+                    }
+                }
             }
         }
         panelDiv.getServiceJoho().getDgServiceList().setDataSource(サービス一覧データ);

@@ -32,7 +32,7 @@ public class NenReiTotatsuSearchCondition {
      * @return ResponseData
      */
     public ResponseData<NenReiTotatsuSearchConditionDiv> onLoad(NenReiTotatsuSearchConditionDiv div) {
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("BatchRegister"), false);
+        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("BatchRegister"), true);
         createHandler(div).load(new NenreitotatsuJoken(new NenreitotatsuShikakuIdo().getNenreitotatsuJoken()));
         return createResponse(div);
     }
@@ -59,11 +59,6 @@ public class NenReiTotatsuSearchCondition {
         ValidationMessageControlPairs validPairs = createHandler(div).必須チェック();
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
-        }
-        if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
-            return ResponseData.of(div).addMessage(message).respond();
         }
         return createResponse(div);
     }

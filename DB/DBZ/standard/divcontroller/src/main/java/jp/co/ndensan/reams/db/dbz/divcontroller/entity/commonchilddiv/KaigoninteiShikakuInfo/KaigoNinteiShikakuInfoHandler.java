@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.kaigoninteishikakuinfo.KaigoNint
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonCodeYoriShichoson;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuShutokuJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.jushochitokureisha.JushochitokureishaKubun;
 import jp.co.ndensan.reams.db.dbz.service.core.kaigoninteishikakuinfo.KaigoNinteiShikakuInfoFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
@@ -76,10 +76,15 @@ public class KaigoNinteiShikakuInfoHandler {
         if (ninteiShikakuInfoBusiness.get資格喪失年月日() != null) {
             div.getTxtSoshitsuYmd().setValue(new FlexibleDate(ninteiShikakuInfoBusiness.get資格喪失年月日().toString()));
         }
-        if (!RString.isNullOrEmpty(ninteiShikakuInfoBusiness.get資格喪失事由コード())) {
-            div.getTxtSoshitsuJiyu().setValue(ShikakuSoshitsuJiyu.toValue(ninteiShikakuInfoBusiness.get資格喪失事由コード()).getName());
-        }
-        if (new RString("1").equals(ninteiShikakuInfoBusiness.get住所地特例フラグ())) {
+//<<<<<<< HEAD
+        div.getTxtSoshitsuJiyu().setValue(ShikakuSoshitsuJiyu.toValue(ninteiShikakuInfoBusiness.get資格喪失事由コード()).get名称());
+        if (ninteiShikakuInfoBusiness.get住所地特例フラグ().equals(new RString("1"))) {
+//=======
+//        if (!RString.isNullOrEmpty(ninteiShikakuInfoBusiness.get資格喪失事由コード())) {
+//            div.getTxtSoshitsuJiyu().setValue(ShikakuSoshitsuJiyu.toValue(ninteiShikakuInfoBusiness.get資格喪失事由コード()).getName());
+//        }
+//        if (new RString("1").equals(ninteiShikakuInfoBusiness.get住所地特例フラグ())) {
+//>>>>>>> origin/sync
             div.getTxtJutokuKubun().setValue(JushochitokureishaKubun.toValue(ninteiShikakuInfoBusiness.get住所地特例フラグ()).get名称());
         } else {
             div.getTxtJutokuKubun().setValue(RString.EMPTY);
