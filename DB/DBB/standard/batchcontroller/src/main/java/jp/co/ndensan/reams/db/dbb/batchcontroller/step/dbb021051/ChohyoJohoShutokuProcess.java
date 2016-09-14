@@ -92,6 +92,22 @@ public class ChohyoJohoShutokuProcess extends BatchKeyBreakBase<DBB021051TableJo
             throw new ApplicationException(UrErrorMessages.実行不可.getMessage().evaluate());
         }
         出力順 = MyBatisOrderByClauseCreator.create(DBB021051OutPutOrder.class, 出力順情報);
+        int i = 0;
+        for (ISetSortItem setSortItem : 出力順情報.get設定項目リスト()) {
+            if (i < INT_5) {
+                出力順項目List.add(setSortItem.get項目名());
+            }
+            i++;
+        }
+        List<KoikiZenShichosonJoho> koikiZenShichosonJohoList
+                = KoikiShichosonJohoFinder.createInstance().koseiShichosonJoho().records();
+        KoikiZenShichosonJoho koikiZenShichosonJoho;
+        if (koikiZenShichosonJohoList == null || koikiZenShichosonJohoList.isEmpty()) {
+            koikiZenShichosonJoho = null;
+        } else {
+            koikiZenShichosonJoho = koikiZenShichosonJohoList.get(0);
+        }
+        dataUtil.intProcessParameter(koikiZenShichosonJoho, parameter);
     }
 
     @Override
@@ -114,32 +130,6 @@ public class ChohyoJohoShutokuProcess extends BatchKeyBreakBase<DBB021051TableJo
     @Override
     protected IBatchReader createReader() {
         return new BatchDbReader(MAPPERPATH, parameter.toDBB021051MyBatisParameter(出力順));
-    }
-
-    @Override
-    protected void beforeProcess() {
-        List<KoikiZenShichosonJoho> koikiZenShichosonJohoList
-                = KoikiShichosonJohoFinder.createInstance().koseiShichosonJoho().records();
-        if (koikiZenShichosonJohoList == null || koikiZenShichosonJohoList.isEmpty()) {
-            市町村名称 = RString.EMPTY;
-            都道府県名称 = RString.EMPTY;
-            郡名称 = RString.EMPTY;
-        } else {
-            KoikiZenShichosonJoho koikiZenShichosonJoho = koikiZenShichosonJohoList.get(0);
-            市町村名称 = koikiZenShichosonJoho.get市町村名称();
-            都道府県名称 = koikiZenShichosonJoho.get都道府県名称();
-            郡名称 = koikiZenShichosonJoho.get郡名称();
-        }
-        parameter.set市町村名称(市町村名称);
-        parameter.set都道府県名称(都道府県名称);
-        parameter.set郡名称(郡名称);
-        int i = 0;
-        for (ISetSortItem setSortItem : 出力順情報.get設定項目リスト()) {
-            if (i < INT_5) {
-                出力順項目List.add(setSortItem.get項目名());
-            }
-            i++;
-        }
     }
 
     @Override
@@ -178,7 +168,6 @@ public class ChohyoJohoShutokuProcess extends BatchKeyBreakBase<DBB021051TableJo
 
     @Override
     protected void afterExecute() {
-        checkWriter.close();
         if (!entityList.isEmpty()) {
             int 補足エンティティ数 = 最大宛先数 - this.entityList.size();
             for (int i = 0; i < 補足エンティティ数; i++) {
@@ -186,6 +175,7 @@ public class ChohyoJohoShutokuProcess extends BatchKeyBreakBase<DBB021051TableJo
             }
             new AtenaSealReport(paramEntity).writeBy(reportSourceWriter);
         }
+        checkWriter.close();
         ReportOutputJokenhyoItem reportOutputJokenhyoItem
                 = dataUtil.getReportOutputJokenhyoItem(地方公共団体情報.getLasdecCode_().value(), 地方公共団体情報.get市町村名(),
                         new RString(JobContextHolder.getJobId()), reportSourceWriter.pageCount().value(), 出力順項目List, parameter);
