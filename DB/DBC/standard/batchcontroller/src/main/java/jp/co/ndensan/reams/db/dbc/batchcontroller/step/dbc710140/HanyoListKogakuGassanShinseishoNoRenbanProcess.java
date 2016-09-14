@@ -211,7 +211,7 @@ public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcess
     }
 
     private RString monthToRString(FlexibleYearMonth 日付) {
-        if (日付.isEmpty()) {
+        if (日付 == null || 日付.isEmpty()) {
             return RString.EMPTY;
         }
         return 日付.wareki().eraType(EraType.KANJI)
@@ -221,7 +221,7 @@ public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcess
     }
 
     private RString dataToRString(FlexibleDate 日付) {
-        if (日付.isEmpty()) {
+        if (日付 == null || 日付.isEmpty()) {
             return RString.EMPTY;
         }
         return 日付.wareki().eraType(EraType.KANJI)
@@ -287,6 +287,10 @@ public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcess
     private RStringBuilder get申請年月日() {
         RStringBuilder builder = new RStringBuilder();
         builder.append(申請年月日);
+        if ((parameter.get申請年月日From() == null || parameter.get申請年月日From().isEmpty())
+                && (parameter.get申請年月日To() == null || parameter.get申請年月日To().isEmpty())) {
+            return null;
+        }
         if (parameter.get申請年月日From() != null && !parameter.get申請年月日From().isEmpty()
                 && parameter.get申請年月日To() != null && !parameter.get申請年月日To().isEmpty()) {
             return builder.append(dataToRString(parameter.get申請年月日From()))
@@ -303,6 +307,10 @@ public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcess
     private RStringBuilder get支給申請書整理番号() {
         RStringBuilder builder = new RStringBuilder();
         builder.append(支給申請書整理番号);
+        if ((parameter.get支給申請書整理番号From() == null || parameter.get支給申請書整理番号From().isEmpty())
+                && (parameter.get支給申請書整理番号To() == null || parameter.get支給申請書整理番号To().isEmpty())) {
+            return null;
+        }
         if (parameter.get支給申請書整理番号From() != null && !parameter.get支給申請書整理番号From().isEmpty()
                 && parameter.get支給申請書整理番号To() != null && !parameter.get支給申請書整理番号To().isEmpty()) {
             return builder.append(parameter.get支給申請書整理番号From()).append(ITEM)
@@ -318,6 +326,10 @@ public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcess
     private RStringBuilder get送付年月() {
         RStringBuilder builder = new RStringBuilder();
         builder.append(送付年月);
+        if ((parameter.get送付年月From() == null || parameter.get送付年月From().isEmpty())
+                && (parameter.get送付年月To() == null || parameter.get送付年月To().isEmpty())) {
+            return null;
+        }
         if (parameter.get送付年月From() != null && !parameter.get送付年月From().isEmpty()
                 && parameter.get送付年月To() != null && !parameter.get送付年月To().isEmpty()) {
             return builder.append(monthToRString(parameter.get送付年月From())).append(ITEM)

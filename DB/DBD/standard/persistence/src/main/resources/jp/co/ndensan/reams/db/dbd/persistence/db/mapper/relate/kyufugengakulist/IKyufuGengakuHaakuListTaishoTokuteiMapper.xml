@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-3610-050 jinge -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.kyufugengakulist.IKyufuGengakuHaakuListTaishoTokuteiMapper">
+
+    <select id="get対象者把握情報" 
+            resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.KyufuGengakuHaakuListTaishoTokuteiEntity"
+            resultOrdered="true" fetchSize="500">
+<!--            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd200008.KyufuGengakuHaakuListMybatisParameter" -->
+    SELECT
+      DISTINCT 
+        "ShunoJokyoHaakuTemp"."hihokenshaNo",
+        "ShunoJokyoHaakuTemp"."jikoKisanYMD",
+        "ShunoJokyoHaakuTemp"."minoKannoKubun"
+    FROM
+      "ShunoJokyoHaakuTemp"
+    WHERE
+      #{基準日} <![CDATA[<]]> TO_DATE("ShunoJokyoHaakuTemp"."jikoKisanYMD", 'YYYYMMDD') + interval '2 year'
+    AND "ShunoJokyoHaakuTemp"."minoKannoKubun" = #{未納あり}
+    <if test="is時効起算日登録者のみ">
+    AND EXISTS(
+        SELECT 
+	    DISTINCT A."hihokenshaNo" AS 時効起算日登録者,
+            A."choteiNendo",
+            A."fukaNendo",
+            A."tsuchishoNo",
+            A."kibetsu",
+            A."tokucho_FuchoKubun"
+	  FROM
+	    "ShunoJokyoHaakuTemp" AS A
+	  INNER JOIN(
+        SELECT *
+        FROM rgdb."DbT4023JikoKisambiKanri" AS 時効起算日管理_明細
+        WHERE
+          NOT EXISTS(
+		  SELECT 1
+		  FROM
+		    rgdb."DbT4023JikoKisambiKanri" AS 時効起算日管理temp
+		  WHERE
+			時効起算日管理_明細."hihokenshaNo" = 時効起算日管理temp."hihokenshaNo" AND
+			時効起算日管理_明細."choteiNendo" = 時効起算日管理temp."choteiNendo" AND
+			時効起算日管理_明細."fukaNendo" = 時効起算日管理temp."fukaNendo" AND
+			時効起算日管理_明細."tokucho_FuchoKubun" = 時効起算日管理temp."tokucho_FuchoKubun" AND
+			時効起算日管理_明細."tsuchishoNo" = 時効起算日管理temp."tsuchishoNo" AND
+			時効起算日管理_明細."shuno_Ki_Tsuki" = 時効起算日管理temp."shuno_Ki_Tsuki" AND
+			時効起算日管理_明細."rirekiNo" <![CDATA[<]]> 時効起算日管理temp."rirekiNo" 
+		  )
+          AND 時効起算日管理_明細."logicalDeletedFlag" = false
+	  ) AS 時効起算日管理
+	  ON A."hihokenshaNo" = 時効起算日管理."hihokenshaNo"
+	  AND A."choteiNendo" = 時効起算日管理."choteiNendo"
+	  AND A."fukaNendo" = 時効起算日管理."fukaNendo"
+	  AND A."tsuchishoNo" = 時効起算日管理."tsuchishoNo"
+	  AND A."kibetsu" = 時効起算日管理."shuno_Ki_Tsuki"
+	  AND A."tokucho_FuchoKubun" = 時効起算日管理."tokucho_FuchoKubun"
+   )
+   </if>
+   <if test="is時効起算日登録者以外">
+   AND NOT EXISTS(
+      SELECT 
+	    DISTINCT A."hihokenshaNo" AS 時効起算日登録者
+            A."choteiNendo",
+            A."fukaNendo",
+            A."tsuchishoNo",
+            A."kibetsu",
+            A."tokucho_FuchoKubun"
+	  FROM
+	    "ShunoJokyoHaakuTemp" AS A
+	  INNER JOIN(
+        SELECT *
+        FROM rgdb."DbT4023JikoKisambiKanri" AS 時効起算日管理_明細
+        WHERE
+          NOT EXISTS(
+		  SELECT 1
+		  FROM
+		    rgdb."DbT4023JikoKisambiKanri" AS 時効起算日管理temp
+		  WHERE
+			時効起算日管理_明細."hihokenshaNo" = 時効起算日管理temp."hihokenshaNo" AND
+			時効起算日管理_明細."choteiNendo" = 時効起算日管理temp."choteiNendo" AND
+			時効起算日管理_明細."fukaNendo" = 時効起算日管理temp."fukaNendo" AND
+			時効起算日管理_明細."tokucho_FuchoKubun" = 時効起算日管理temp."tokucho_FuchoKubun" AND
+			時効起算日管理_明細."tsuchishoNo" = 時効起算日管理temp."tsuchishoNo" AND
+			時効起算日管理_明細."shuno_Ki_Tsuki" = 時効起算日管理temp."shuno_Ki_Tsuki" AND
+			時効起算日管理_明細."rirekiNo" <![CDATA[<]]> 時効起算日管理temp."rirekiNo" 
+		  )
+          AND 時効起算日管理_明細."logicalDeletedFlag" = false
+	  ) AS 時効起算日管理
+	  ON A."hihokenshaNo" = 時効起算日管理."hihokenshaNo"
+	  AND A."choteiNendo" = 時効起算日管理."choteiNendo"
+	  AND A."fukaNendo" = 時効起算日管理."fukaNendo"
+	  AND A."tsuchishoNo" = 時効起算日管理."tsuchishoNo"
+	  AND A."kibetsu" = 時効起算日管理."shuno_Ki_Tsuki"
+	  AND A."tokucho_FuchoKubun" = 時効起算日管理."tokucho_FuchoKubun"
+   )
+   </if>
+  <!-- QA
+     <if test="is被保険者全員以外">
+        <if test="is受給認定申請中者チェックオン">
+        AND #{未納あり} <![CDATA[<=]]> #{基準日}
+		AND 
+		</if>
+		<if test="is受給認定日抽出チェックオン">
+        AND  <![CDATA[<=]]> #{基準日}
+		AND #{受給認定日抽出の開始} <![CDATA[<=]]>
+		AND <![CDATA[<=]]> #{受給認定日抽出の終了}
+		</if>
+		<if test="is認定有効終了日抽出チェックオン">
+        AND  <![CDATA[<=]]> #{基準日}
+		AND #{認定有効終了日抽出の開始} <![CDATA[<=]]>
+        AND <![CDATA[<=]]> #{認定有効終日抽出の終了} 		
+		</if>
+   </if> -->
+   <if test="is保険料完納者も出力チェックオン">
+    UNION
+    SELECT
+       A."hihokenshaNo"
+    FROM
+       "ShunoJokyoHaakuTemp" AS A
+    WHERE NOT EXISTS(
+	  SELECT 1
+	  FROM "ShunoJokyoHaakuTemp" AS B
+	  WHERE B."hihokenshaNo" = A."hihokenshaNo"
+	  AND B."minoKannoKubun" = #{未納あり}
+	)	   
+   </if>
+    </select>
+</mapper>
