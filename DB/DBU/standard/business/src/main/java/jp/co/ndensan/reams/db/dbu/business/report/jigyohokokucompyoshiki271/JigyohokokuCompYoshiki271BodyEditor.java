@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbu.business.report.jigyohokokucompyoshiki271;
 
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshiki271.JigyohokokuCompYoshiki271Change;
-import jp.co.ndensan.reams.db.dbu.entity.report.ｊigyohokokucompyoshiki271.JigyohokokuCompYoshiki271ReportSource;
+import jp.co.ndensan.reams.db.dbu.entity.report.jigyohokokucompyoshiki271.JigyohokokuCompYoshiki271ReportSource;
 
 /**
  * 介護事業状況報告月報・保険給付決定状況（様式2-7-1）のEditorクラスです。
