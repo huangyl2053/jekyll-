@@ -179,7 +179,7 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
         if (null != div.getTxtSikyuSinseishoSeiriBangoShuryo()) {
             batchparam.setShikyuShinseishoSeiriNoTo(div.getTxtSikyuSinseishoSeiriBangoShuryo().getValue());
         }
-        if (送付対象外を含める.toString().equals(div.getChkSofuTaishogaiFukumu().getSelectedKeys().toString())) {
+        if (送付対象外を含める.toString().equals(div.getChkSofuTaishogaiFukumu().getSelectedKeys().get(INDEX_ゼロ).toString())) {
             batchparam.setSofuTaishogaiFukumu(true);
         }
         batchparam = setChkCsvHenshuHoho(batchparam);
