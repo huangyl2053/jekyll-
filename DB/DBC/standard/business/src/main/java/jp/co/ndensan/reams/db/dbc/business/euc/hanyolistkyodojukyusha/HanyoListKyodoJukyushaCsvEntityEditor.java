@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.business.euc.hanyolistkyodojukyusha;
 
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_IdoKubunCode;
+import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_JukyushaIdoJiyu;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc710050.HanyoListKyodoJukyushaProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc710050.HanyoListKyodoJukyushaCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc710050.HanyoListKyodoJukyushaNoRebanCsvEntity;
@@ -127,12 +129,12 @@ public class HanyoListKyodoJukyushaCsvEntityEditor {
         csvEntity.set異動年月日(format日付項目(entity.get共同処理用受給者異動基本送付().getIdoYMD()));
         if (entity.get共同処理用受給者異動基本送付() != null) {
             if (RString.isNullOrEmpty(entity.get共同処理用受給者異動基本送付().getIdoKubunCode())) {
-                csvEntity.set異動区分(entity.get共同処理用受給者異動基本送付().getIdoKubunCode());
+                csvEntity.set異動区分(JukyushaIF_IdoKubunCode.toValue(entity.get共同処理用受給者異動基本送付().getIdoKubunCode()).get名称());
             } else {
                 csvEntity.set異動区分(RString.EMPTY);
             }
         }
-        csvEntity.set異動事由(entity.get共同処理用受給者異動基本送付().getJukyushaIdoJiyu());
+        csvEntity.set異動事由(JukyushaIF_JukyushaIdoJiyu.toValue(entity.get共同処理用受給者異動基本送付().getJukyushaIdoJiyu()).get名称());
         csvEntity.set給付_証記載保険者番号(entity.get共同処理用受給者異動基本送付().getShoKisaiHokenshaNo().getColumnValue());
         csvEntity.set被保険者氏名漢字(entity.get共同処理用受給者異動基本送付().getHiHokenshaName());
         YubinNo 郵便番号 = entity.get共同処理用受給者異動基本送付().getYubinNo();
