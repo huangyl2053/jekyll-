@@ -322,7 +322,7 @@
         <if test=" hasValidKamoku ">
         LEFT JOIN 
        (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
-        ON 最新被保台帳_識別コード = koza."shikibetsuCode"
+        ON 最新被保台帳_識別コード = koza."uaT0310Koza_shikibetsuCode"
         </if> 
 <!--        TODO QA1490
         ${出力順}-->
