@@ -43,6 +43,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.RLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -86,6 +87,7 @@ public class JyukyushaDaichoIdoCheckListProcess extends BatchKeyBreakBase<Jyukyu
             order = finder.get出力順(SubGyomuCode.DBD介護受給, REPORT_DBD200037, parameter.get出力順ID());
             出力順 = get出力順(order);
         } else {
+            RLogger.info("uvwxyz");
             throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
                     .replace(帳票出力順の取得.toString()).toString());
         }
@@ -137,6 +139,7 @@ public class JyukyushaDaichoIdoCheckListProcess extends BatchKeyBreakBase<Jyukyu
 
     private RString get出力順(IOutputOrder order) {
         if (null == order) {
+            RLogger.info("abcdefg");
             throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
                     .replace(帳票出力順の取得.toString()).toString());
         } else {

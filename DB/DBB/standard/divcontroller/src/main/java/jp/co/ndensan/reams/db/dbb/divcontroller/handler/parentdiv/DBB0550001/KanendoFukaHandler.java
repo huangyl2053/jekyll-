@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
@@ -243,9 +242,7 @@ public class KanendoFukaHandler {
      * @param 月 RString
      */
     public void set帳票作成個別情報(RString 月) {
-        FuchoKiUtil util = new FuchoKiUtil();
-        KitsukiList 期月リスト = util.get期月リスト();
-        Kitsuki 月の期 = 期月リスト.get月の期(Tsuki.toValue(月));
+        Kitsuki 月の期 = get月の期();
         List<KeyValueDataSource> dataSource = new ArrayList<>();
         dataSource.add(new KeyValueDataSource(月の期.get期(), get期名(月, 月の期.get期())));
         div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getDdlNotsuShutsuryokuKi().setDataSource(dataSource);
@@ -253,6 +250,21 @@ public class KanendoFukaHandler {
                 getDdlNotsuShutsuryokuKi().setSelectedKey(月の期.get期());
         div.getHonSanteiKanendoIdoTsuchiKobetsuJoho().getDdlNotsuShutsuryokuKi().setDisabled(true);
 
+    }
+
+    private Kitsuki get月の期() {
+        FuchoKiUtil util = new FuchoKiUtil();
+        KitsukiList 期月リスト = util.get期月リスト();
+        Kitsuki 最終法定納期 = 期月リスト.get最終法定納期();
+        for (Kitsuki 期月 : 期月リスト.toList()) {
+            if (期月.get期().compareTo(最終法定納期.get期()) > 0
+                    && 期月.get月().getコード().indexOf(new RString(Integer.valueOf(
+                                            div.getKanendoShoriNaiyo().getDdlShoritsuki().
+                                            getSelectedKey().toString()).toString())) != -1) {
+                return 期月;
+            }
+        }
+        return null;
     }
 
     private RString get期名(RString 月, RString 期) {

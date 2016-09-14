@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： バッチ設計書_DBCMNF2002-5Cx_共同処理用受給者情報更新結果情報取込共通処理（CSVファイル取込）用XMLです。 -->
+<!-- @reamsid_L DBC-2780-011 lishengli -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyodojukyushainsub.IKyufuJissekiInMapper">
+    
+    <select resultOrdered="true" id="get三つ一時TBLを結合結果" 
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyodojukyushainsub.KyoudouShoriRelateEntity" fetchSize="500">
+       SELECT
+            COALESCE(dbWT5C31."hokenshaNo", dbWT5C32."hokenshaNo", dbWT5C33."hokenshaNo") AS "集約保険者番号",
+            COALESCE(dbWT5C31."hokenshaName", dbWT5C32."hokenshaName", dbWT5C33."hokenshaName") AS "集約保険者名",
+            COALESCE(dbWT5C31."hiHokenshaNo", dbWT5C32."hiHokenshaNo", dbWT5C33."hiHokenshaNo") AS "集約被保険者番号",
+            COALESCE(dbWT5C31."idoYMD", dbWT5C32."idoYMD", dbWT5C33."idoYMD") AS "集約異動年月日",
+            dbWT5C31."hokenshaNo" AS "基_保険者番号",
+            dbWT5C31."hokenshaName" AS "基_保険者名",
+            dbWT5C31."shikibetsuNo" AS "基_交換情報識別番号",
+            dbWT5C31."hiHokenshaNo" AS "基_被保険者番号",
+            dbWT5C31."idoYMD" AS "基_異動年月日",
+            dbWT5C31."idoKubunCode" AS "基_異動区分コード",
+            dbWT5C31."jukyushaIdoJiyu" AS "基_異動事由",
+            dbWT5C31."shoKisaiHokenshaNo" AS "基_証記載保険者番号",
+            dbWT5C31."hiHokenshaName" AS "基_被保険者氏名",
+            dbWT5C31."yubinNo" AS "基_郵便番号",
+            dbWT5C31."ddressKana" AS "基_住所カナ",
+            dbWT5C31."address" AS "基_住所",
+            dbWT5C31."telNo" AS "基_電話番号",
+            dbWT5C31."chohyoOutputJunjyoCode" AS "基_帳票出力順序コード",
+            dbWT5C31."teiseiKubunCode" AS "基_訂正区分コード",
+            dbWT5C31."teiseiYMD" AS "基_訂正年月日",
+            dbWT5C32."hokenshaNo" AS "償_保険者番号",
+            dbWT5C32."hokenshaName" AS "償_保険者名",
+            dbWT5C32."shikibetsuNo" AS "償_交換情報識別番号",
+            dbWT5C32."hiHokenshaNo" AS "償_被保険者番号",
+            dbWT5C32."idoYMD" AS "償_異動年月日",
+            dbWT5C32."idoKubunCode" AS "償_異動区分コード",
+            dbWT5C32."jukyushaIdoJiyu" AS "償_異動事由",
+            dbWT5C32."shoKisaiHokenshaNo" AS "償_証記載保険者番号",
+            dbWT5C32."hokenKyufuIchijiSashitomeKaishiYMD" AS "償_保険給付支払の一時差止の開始年月日",
+            dbWT5C32."hokenKyufuIchijiSashitomeShuryoYMD" AS "償_保険給付支払の一時差止の終了年月日",
+            dbWT5C32."hokenkyufuIchijiSashitomeKubunCode" AS "償_保険給付支払の一時差止区分",
+            dbWT5C32."hokenkyufuIchijiSashitomeKingaku" AS "償_保険給付支払の一時差止金額",
+            dbWT5C32."teiseiKubunCode" AS "償_訂正区分コード",
+            dbWT5C32."teiseiYMD" AS "償_訂正年月日",
+            dbWT5C33."hokenshaNo" AS "高_保険者番号",
+            dbWT5C33."hokenshaName" AS "高_保険者名",
+            dbWT5C33."shikibetsuNo" AS "高_交換情報識別番号",
+            dbWT5C33."hiHokenshaNo" AS "高_被保険者番号",
+            dbWT5C33."idoYMD" AS "高_異動年月日",
+            dbWT5C33."idoKubunCode" AS "高_異動区分コード",
+            dbWT5C33."jukyushaIdoJiyu" AS "高_異動事由",
+            dbWT5C33."shoKisaiHokenshaNo" AS "高_証記載保険者番号",
+            dbWT5C33."setaiShuyakuNo" AS "高_世帯主被保険者番号",
+            dbWT5C33."setaiShotokuKubunCode" AS "高_世帯所得区分コード",
+            dbWT5C33."shotokuKubunCode" AS "高_所得区分コード",
+            dbWT5C33."roureiFukushiNenkinJukyuAriFlag" AS "高_老齢福祉年金受給の有無",
+            dbWT5C33."riyoshaFutan2DankaiAriFlag" AS "高_利用者負担第２段階",
+            dbWT5C33."shikyuShinseishoOutputAriFlag" AS "高_支給申請書出力の有無",
+            dbWT5C33."teiseiKubunCode" AS "高_訂正区分コード",
+            dbWT5C33."teiseiYMD" AS "高_訂正年月日"
+        FROM
+            "DbWT5C31KihonKyoudouShori" AS dbWT5C31
+        FULL OUTER JOIN "DbWT5C32ShoukanKyoudouShori" AS dbWT5C32 
+            ON dbWT5C31."hiHokenshaNo" = dbWT5C32."hiHokenshaNo"
+            AND dbWT5C31."idoYMD" = dbWT5C32."idoYMD"
+        FULL OUTER JOIN "DbWT5C33KougakuKyoudouShori" AS dbWT5C33
+            ON dbWT5C31."hiHokenshaNo" = dbWT5C33."hiHokenshaNo"
+            AND dbWT5C31."idoYMD" = dbWT5C33."idoYMD"
+    </select>
+    
+</mapper>
