@@ -137,7 +137,7 @@ public class DBC120140_KogakuGassanShikyuFushikyuKetteiIn
                 レコード件数合算 = flowEntity38G.getレコード件数合算();
             }
 
-            if (0 == flowEntity38B.get明細件数合算() && 0 == flowEntity38G.get明細件数合算()) {
+            if (0 == flowEntity38B.get明細件数合算()) {
                 executeStep(国保連インタフェース管理更新38B);
                 executeStep(国保連インタフェース管理更新38G);
                 executeStep(処理結果リスト作成);
