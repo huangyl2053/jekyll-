@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbt21004;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.ca.cax.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.MonthShichoson;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbbbt21004.DankaibetuHihokensyasuIchiranhyoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt21004.DankaibetuHihokensyasuIchiranhyoProcessParameter;
@@ -43,8 +42,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class HihokenshaProcess extends BatchProcessBase<DbT1001HihokenshaDaichoEntity> {
 
     private DankaibetuHihokensyasuIchiranhyoProcessParameter processParameter;
-    private MapperProvider mapperProvider;
-    private HihokenshaTaihoTemp processEntity;
     private FlexibleDate 賦課基準日;
     private static final RString 合併情報区分_合併あり = new RString("1");
     private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.dankaibetsuhihokenshasuichiranhyosakusei"
@@ -58,10 +55,10 @@ public class HihokenshaProcess extends BatchProcessBase<DbT1001HihokenshaDaichoE
     @BatchWriter
     BatchEntityCreatedTempTableWriter 世帯員把握入力テーブルWriter;
     private static final RString 世帯員把握入力テーブル_TABLE_NAME = new RString("TmpSetaiHaaku");
-    private static final RString 事務広域 = new RString("111");
     private static final RString ONE = new RString("1");
     private static final RString APRIL = new RString("4");
     private static final RString 市町村コード = new RString("1");
+    private ShichosonSecurityJoho 市町村セキュリティ情報;
 
     @Override
     protected void createWriter() {
@@ -81,8 +78,7 @@ public class HihokenshaProcess extends BatchProcessBase<DbT1001HihokenshaDaichoE
     @Override
     protected void initialize() {
         super.initialize();
-        processEntity = new HihokenshaTaihoTemp();
-        mapperProvider = InstanceProvider.create(MapperProvider.class);
+        市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
     }
 
     private DankaibetuHihokensyasuIchiranhyoMyBatisParameter toMyBatisParameter() {
@@ -98,9 +94,9 @@ public class HihokenshaProcess extends BatchProcessBase<DbT1001HihokenshaDaichoE
 
     @Override
     protected void process(DbT1001HihokenshaDaichoEntity entity) {
-        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        processEntity = editHihokenshaDaichoEntity(entity);
-        if (事務広域.equals(市町村セキュリティ情報.get導入形態コード().getKey())) {
+        HihokenshaTaihoTemp processEntity = new HihokenshaTaihoTemp();
+        processEntity = editHihokenshaDaichoEntity(entity, processEntity);
+        if (DonyuKeitaiCode.事務広域.getCode().equals(市町村セキュリティ情報.get導入形態コード().getKey())) {
             if (ONE.equals(entity.getKoikinaiJushochiTokureiFlag())) {
                 processEntity.setOutPutShichosonCode(ONE);
             } else {
@@ -149,7 +145,7 @@ public class HihokenshaProcess extends BatchProcessBase<DbT1001HihokenshaDaichoE
         }
     }
 
-    private HihokenshaTaihoTemp editHihokenshaDaichoEntity(DbT1001HihokenshaDaichoEntity entity) {
+    private HihokenshaTaihoTemp editHihokenshaDaichoEntity(DbT1001HihokenshaDaichoEntity entity, HihokenshaTaihoTemp processEntity) {
         processEntity.setHihokenshaNo(entity.getHihokenshaNo());
         processEntity.setIdoYMD(entity.getIdoYMD());
         processEntity.setEdaNo(entity.getEdaNo());

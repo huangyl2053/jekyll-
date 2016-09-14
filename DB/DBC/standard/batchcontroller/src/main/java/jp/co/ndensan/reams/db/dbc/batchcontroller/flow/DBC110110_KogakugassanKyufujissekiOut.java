@@ -44,8 +44,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class DBC110110_KogakugassanKyufujissekiOut extends BatchFlowBase<DBC110110_KogakugassanKyufujissekiOutParameter> {
 
     private static final String 送付対象データ取得 = "getSofuTaishoData";
-    private static final String 宛名情報取得 = "getMeishoJyohyo";
-    private static final String エラー登録 = "callDoErrorrProcess";
+    private static final String 被保険者_宛名情報取得 = "getHihokenshaAtena";
+    private static final String エラー登録 = "doError";
     private static final String 送付除外区分設定 = "setSofuJogaiFlag";
     private static final String 送付ファイル作成 = "createSofuFile";
     private static final String 帳票出力 = "doSofuReport";
@@ -69,7 +69,7 @@ public class DBC110110_KogakugassanKyufujissekiOut extends BatchFlowBase<DBC1101
                 KogakugassanKyufujissekiGetSofuTaishoDataProcess.PARAMETER_OUT_FLOWENTITY);
         合計 = flowEntity.get合計();
         if (INT_0 != 合計) {
-            executeStep(宛名情報取得);
+            executeStep(被保険者_宛名情報取得);
             executeStep(エラー登録);
             executeStep(送付除外区分設定);
             executeStep(送付ファイル作成);
@@ -103,9 +103,10 @@ public class DBC110110_KogakugassanKyufujissekiOut extends BatchFlowBase<DBC1101
      *
      * @return HokenshaKyufujissekiOutGetHihokenshaAtenaProcess
      */
-    @Step(宛名情報取得)
-    protected IBatchFlowCommand getMeishoJyohyo() {
+    @Step(被保険者_宛名情報取得)
+    protected IBatchFlowCommand callGetHihokenshaAtenaProcess() {
         return loopBatch(HokenshaKyufujissekiOutGetHihokenshaAtenaProcess.class).define();
+
     }
 
     /**
@@ -116,6 +117,7 @@ public class DBC110110_KogakugassanKyufujissekiOut extends BatchFlowBase<DBC1101
     @Step(エラー登録)
     protected IBatchFlowCommand callDoErrorrProcess() {
         return loopBatch(HokenshaKyufujissekiOutDoErrorProcess.class).define();
+
     }
 
     /**

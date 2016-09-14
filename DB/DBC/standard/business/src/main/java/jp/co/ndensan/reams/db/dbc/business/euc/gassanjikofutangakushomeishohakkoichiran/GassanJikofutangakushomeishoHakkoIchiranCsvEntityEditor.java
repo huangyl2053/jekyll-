@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 /**
  * 自己負担証明書作成（括）のCsvEntityEditorクラスです。
  *
- * reamsid_L DBC-2380-030 pengxingyi
+ * @reamsid_L DBC-2380-030 pengxingyi
  */
 public class GassanJikofutangakushomeishoHakkoIchiranCsvEntityEditor {
 

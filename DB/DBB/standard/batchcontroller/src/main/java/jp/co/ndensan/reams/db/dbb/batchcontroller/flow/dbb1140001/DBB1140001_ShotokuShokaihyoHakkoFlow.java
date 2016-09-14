@@ -73,7 +73,7 @@ public class DBB1140001_ShotokuShokaihyoHakkoFlow extends BatchFlowBase<ShotokuS
      *
      * @return IBatchFlowCommand
      */
-    @Step (RINJICREAT_TABLE_PROCESS)
+    @Step(RINJICREAT_TABLE_PROCESS)
     protected IBatchFlowCommand rinjiCreatTableProcess() {
         return loopBatch(RinjiCreatTableProcess.class).arguments(getParameter().toProcessParameter()).define();
     }
@@ -83,7 +83,7 @@ public class DBB1140001_ShotokuShokaihyoHakkoFlow extends BatchFlowBase<ShotokuS
      *
      * @return 世帯員所得情報一時
      */
-    @Step (世帯員把握_TEMP_1)
+    @Step(世帯員把握_TEMP_1)
     protected IBatchFlowCommand setaiShotokuKazeiHanteiFuka() {
         RString 管理識別区分 = SetaiinHaakuKanriShikibetsuKubun.賦課.getコード();
         SetaiShotokuKazeiHanteiBatchParameter param = new SetaiShotokuKazeiHanteiBatchParameter(管理識別区分);
@@ -95,7 +95,7 @@ public class DBB1140001_ShotokuShokaihyoHakkoFlow extends BatchFlowBase<ShotokuS
      *
      * @return 世帯員所得情報一時
      */
-    @Step (世帯員把握_TEMP_2)
+    @Step(世帯員把握_TEMP_2)
     protected IBatchFlowCommand setaiShotokuKazeiHanteiKogakuKaiko() {
         RString 管理識別区分 = SetaiinHaakuKanriShikibetsuKubun.高額介護.getコード();
         SetaiShotokuKazeiHanteiBatchParameter param = new SetaiShotokuKazeiHanteiBatchParameter(管理識別区分);
@@ -107,7 +107,7 @@ public class DBB1140001_ShotokuShokaihyoHakkoFlow extends BatchFlowBase<ShotokuS
      *
      * @return IBatchFlowCommand
      */
-    @Step (GETJUMINJOUHOU_DATA_PROCESS)
+    @Step(GETJUMINJOUHOU_DATA_PROCESS)
     protected IBatchFlowCommand getJuminjouhouProcess() {
         ShotokuShokaihyoHakkoBatchParameter param = new ShotokuShokaihyoHakkoBatchParameter();
         param.set出力順(出力順);
@@ -120,7 +120,7 @@ public class DBB1140001_ShotokuShokaihyoHakkoFlow extends BatchFlowBase<ShotokuS
      *
      * @return 帳票出力パラメータ
      */
-    @Step (PRT_SHOTOKUSHOKAIHYO_PROCESS)
+    @Step(PRT_SHOTOKUSHOKAIHYO_PROCESS)
     protected IBatchFlowCommand printShotokuShokaihyoProcess() {
         ShotokuShokaihyoHakkoBatchParameter param = new ShotokuShokaihyoHakkoBatchParameter();
         param.set出力順(出力順);
