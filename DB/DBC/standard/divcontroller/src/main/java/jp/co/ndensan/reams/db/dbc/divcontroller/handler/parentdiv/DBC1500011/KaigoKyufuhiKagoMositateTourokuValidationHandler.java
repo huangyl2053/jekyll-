@@ -42,10 +42,10 @@ public class KaigoKyufuhiKagoMositateTourokuValidationHandler {
      */
     public ValidationMessageControlPairs check必須項目を入力(RString msg) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (new RString("被保番号、支援事業者番号").equals(msg)) {
+        if (!new RString("被保番号、支援事業者番号").equals(msg)) {
             validationMessages.add(new ValidationMessageControlPair(new KaigoKyufuhiKagoMositateTourokuValidationHandler.CheckMessages(
                     UrErrorMessages.必須項目_追加メッセージあり,
-                    msg.toString()), div.getTxtJigyoshaNo(), div.getTxtHihoNo()));
+                    msg.toString()), div.getTxtHihoNo()));
         } else {
             validationMessages.add(new ValidationMessageControlPair(new KaigoKyufuhiKagoMositateTourokuValidationHandler.CheckMessages(
                     UrErrorMessages.必須項目_追加メッセージあり,
