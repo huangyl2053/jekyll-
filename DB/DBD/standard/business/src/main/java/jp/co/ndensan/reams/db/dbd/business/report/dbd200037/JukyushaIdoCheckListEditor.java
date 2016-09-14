@@ -92,7 +92,7 @@ public class JukyushaIdoCheckListEditor implements IJukyushaIdoCheckListEditor {
             source.listUpper_4 = upperEntity.getフリガナ() == null ? RString.EMPTY : upperEntity.getフリガナ().value();
             source.listUpper_5 = upperEntity.get生年月日() == null ? RString.EMPTY : new RString(upperEntity.get生年月日().toString());
             source.listUpper_6 = upperEntity.get異動区分();
-            source.listUpper_7 = upperEntity.get処理種別();
+            source.listUpper_7 = RString.EMPTY;
             source.listUpper_8 = upperEntity.get受給申請日() == null ? RString.EMPTY : new RString(upperEntity.get受給申請日().toString());
             source.listUpper_9 = upperEntity.get認定日() == null ? RString.EMPTY : new RString(upperEntity.get認定日().toString());
             source.listUpper_10 = upperEntity.get認定有効開始日() == null ? RString.EMPTY : new RString(upperEntity.get認定有効開始日().toString());
@@ -122,7 +122,7 @@ public class JukyushaIdoCheckListEditor implements IJukyushaIdoCheckListEditor {
             source.listLower_8 = lowerEntity.get認定有効終了日() == null ? RString.EMPTY : new RString(lowerEntity.get認定有効終了日().toString());
             source.listLower_9 = lowerEntity.get旧措置者();
             source.listLower_10 = lowerEntity.get処理内容();
-            source.listLower_11 = lowerEntity.get備考();
+            source.listLower_11 = RString.EMPTY;
 
         }
     }
