@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dba.definition.message.DbaErrorMessages;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokentokubetukaikeikeirijyokyoregist.InsuranceInformation;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokentokubetukaikeikeirijyokyoregist.KaigoHokenJigyoHokokuNenpo;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigohokentokubetukaikeikeirijyokyoregist.Shichoson;
+import jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0050011.TaishokensakuJyouken;
 import jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0050011.TaishokensakuJyouken.ViewStateKey;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050021.DBU0050021StateName;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0050031.DBU0050031StateName;
@@ -344,6 +345,7 @@ public class YoshikiYonnoni {
         if (this.入力項目いずれか空白ではない(div)) {
             return this.messageAndGoto(DBU0050031TransitionEventName.検索に戻る, div);
         }
+        ViewStateHolder.put(TaishokensakuJyouken.ViewStateKey.is詳細画面から, Boolean.TRUE);
         return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.検索に戻る).respond();
     }
 
@@ -357,15 +359,17 @@ public class YoshikiYonnoni {
 
         if (内部処理モード_修正.equals(div.getShoriMode())) {
             if (!is編集あり(div)) {
+                ViewStateHolder.put(TaishokensakuJyouken.ViewStateKey.is詳細画面から, Boolean.TRUE);
                 return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.検索に戻る).respond();
             } else {
                 return this.messageAndGoto(DBU0050031TransitionEventName.検索に戻る, div);
             }
         } else if (内部処理モード_修正追加.equals(div.getShoriMode())
                 && this.入力項目いずれか空白ではない(div)) {
+            ViewStateHolder.put(TaishokensakuJyouken.ViewStateKey.is詳細画面から, Boolean.TRUE);
             return this.messageAndGoto(DBU0050031TransitionEventName.検索に戻る, div);
         }
-
+        ViewStateHolder.put(TaishokensakuJyouken.ViewStateKey.is詳細画面から, Boolean.TRUE);
         return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.検索に戻る).respond();
     }
 
@@ -377,6 +381,7 @@ public class YoshikiYonnoni {
      */
     public ResponseData<YoshikiYonnoniDiv> onClick_btnDelete(YoshikiYonnoniDiv div) {
 
+        ViewStateHolder.put(TaishokensakuJyouken.ViewStateKey.is詳細画面から, Boolean.TRUE);
         return ResponseData.of(div).forwardWithEventName(DBU0050031TransitionEventName.検索に戻る).respond();
     }
 
@@ -624,6 +629,7 @@ public class YoshikiYonnoni {
                 .equals(ResponseHolder.getMessageCode())
                 && MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
             if (DBU0050031TransitionEventName.検索に戻る.equals(events) || DBU0050031TransitionEventName.処理完了.equals(events)) {
+                ViewStateHolder.put(TaishokensakuJyouken.ViewStateKey.is詳細画面から, Boolean.TRUE);
                 return ResponseData.of(div).forwardWithEventName(events).respond();
             } else if (内部処理モード_修正追加.equals(div.getShoriMode()) || RString.isNullOrEmpty(div.getShoriMode())) {
                 return ResponseData.of(div).forwardWithEventName(events).parameter(内部処理モード_修正);
