@@ -77,6 +77,7 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
     private final RString 漢字承認しない = new RString("承認しない");
     private final RString 申請情報を追加する = new RString("申請情報を追加する");
     private final RString 承認情報を追加する = new RString("承認情報を追加する");
+    private final RString 承認情報を確定する = new RString("承認情報を確定する");
     private final RString 承認情報 = new RString("承認情報");
     private final RString 保存する = new RString("btnSave");
     private final RString 状態_追加 = new RString("追加");
@@ -119,6 +120,7 @@ public class HomonKaigoRiyoshaFutanGengakuHandler {
         } else {
             div.getBtnAddShinsei().setText(承認情報を追加する);
             div.getHomonKaigoGengakuShinseiDetail().setTitle(承認情報);
+            div.getBtnAddShinseiJoho().setText(承認情報を確定する);
             CommonButtonHolder.setAdditionalTextByCommonButtonFieldName(保存する, "承認情報を");
         }
         close情報エリア(true);

@@ -171,7 +171,7 @@ public class HomonKaigoRiryoshaFutangakuGengakuService {
         }
         RString 減免期限_特別減免 = RString.EMPTY;
         try {
-            DbBusinessConfig.get(ConfigNameDBD.減免期限_特別減免, RDate.MAX, SubGyomuCode.DBD介護受給);
+            DbBusinessConfig.get(ConfigNameDBD.減免期限_特別減免, new RDate(適用日.toString()), SubGyomuCode.DBD介護受給);
         } catch (Exception e) {
             return FlexibleDate.EMPTY;
         }

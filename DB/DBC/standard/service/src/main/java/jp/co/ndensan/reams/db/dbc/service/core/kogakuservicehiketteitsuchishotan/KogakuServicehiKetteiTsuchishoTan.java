@@ -615,11 +615,15 @@ public class KogakuServicehiKetteiTsuchishoTan {
         if (高額介護サービス費支給情報.get支払期間開始年月日() != null
                 && !高額介護サービス費支給情報.get支払期間開始年月日().isEmpty()) {
             決定通知書Entity.set支払期間開始年月日(formatDate(高額介護サービス費支給情報.get支払期間開始年月日()).concat(定値_曲線));
-        } else if (高額介護サービス費支給情報.get支払期間終了年月日() != null
+        } else if ((高額介護サービス費支給情報.get支払期間開始年月日() == null
+                || 高額介護サービス費支給情報.get支払期間開始年月日().isEmpty())
+                && 高額介護サービス費支給情報.get支払期間終了年月日() != null
                 && !高額介護サービス費支給情報.get支払期間終了年月日().isEmpty()) {
             決定通知書Entity.set支払期間開始年月日(formatDate(高額介護サービス費支給情報.get支払期間終了年月日()));
         }
-        if (高額介護サービス費支給情報.get支払期間終了年月日() != null
+        if (高額介護サービス費支給情報.get支払期間開始年月日() != null
+                && !高額介護サービス費支給情報.get支払期間開始年月日().isEmpty()
+                && 高額介護サービス費支給情報.get支払期間終了年月日() != null
                 && !高額介護サービス費支給情報.get支払期間終了年月日().isEmpty()) {
             決定通知書Entity.set支払期間終了年月日(formatDate(高額介護サービス費支給情報.get支払期間終了年月日()));
         }
