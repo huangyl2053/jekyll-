@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7069KaigoToiawasesakiEntity
 /**
  * 自己負担証明書作成（括）のマッパインタフェースクラスです。
  *
- * reamsid_L DBC-2380-030 pengxingyi
+ * @reamsid_L DBC-2380-030 pengxingyi
  */
 public interface IJikofutanShomeishoMapper {
 
