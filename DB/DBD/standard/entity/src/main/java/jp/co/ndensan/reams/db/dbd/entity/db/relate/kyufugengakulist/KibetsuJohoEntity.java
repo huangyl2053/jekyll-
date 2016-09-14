@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4023JikoKisambiKanriEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003KibetsuEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 
@@ -20,4 +22,5 @@ public class KibetsuJohoEntity {
 
     private DbT2003KibetsuEntity kibetsuEntity;
     private UrT0705ChoteiKyotsuEntity choteiKyotsuEntity;
+    private List<DbT4023JikoKisambiKanriEntity> jikoKisambiKanriEntity;
 }

@@ -15,8 +15,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010020.KogakuKaigoServiceMainDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -33,10 +31,8 @@ public class KogakuKaigoServiceHandler {
 
     private final KogakuKaigoServiceMainDiv div;
     private static final RString ZERO = new RString("0");
-    private static final RString NI = new RString("2");
     private static final int INT_ZERO = 0;
     private static final RString 前月 = new RString("前月");
-    private static final FlexibleYearMonth 平成24年4月 = new FlexibleYearMonth("201204");
 
     /**
      * コンストラクタです。
@@ -55,16 +51,17 @@ public class KogakuKaigoServiceHandler {
      */
     public void set給付実績高額介護サービス費データ(List<KyufujissekiKogakuKaigoServicehi> 高額介護サービス費等, FlexibleYearMonth サービス提供年月) {
         List<KyufujissekiKogakuKaigoServicehi> 高額介護サービス費リスト = new ArrayList<>();
-        for (KyufujissekiKogakuKaigoServicehi 高額介護サービス費 : 高額介護サービス費等) {
-            if (サービス提供年月 != null && サービス提供年月.compareTo(高額介護サービス費.getサービス提供年月()) == 0) {
-                高額介護サービス費リスト.add(高額介護サービス費);
+        if (高額介護サービス費等 != null && !高額介護サービス費等.isEmpty()) {
+            for (KyufujissekiKogakuKaigoServicehi 高額介護サービス費 : 高額介護サービス費等) {
+                if (サービス提供年月 != null && サービス提供年月.compareTo(高額介護サービス費.getサービス提供年月()) == 0) {
+                    高額介護サービス費リスト.add(高額介護サービス費);
+                }
             }
-        }
-        if (高額介護サービス費リスト.isEmpty()) {
-            throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
-        } else {
             div.getCcdKyufuJissekiHeader().setサービス提供年月(new RDate(to日期変換(サービス提供年月).toString()));
+
             this.setGetsuBtn(高額介護サービス費等, サービス提供年月);
+        }
+        if (!高額介護サービス費リスト.isEmpty()) {
             this.setData(高額介護サービス費リスト.get(INT_ZERO));
         }
     }
@@ -146,17 +143,15 @@ public class KogakuKaigoServiceHandler {
         } else {
             div.getBtnShafukuKeigen().setDisabled(false);
         }
-        if (NI.equals(識別番号管理データ.get所定疾患施設療養設定区分())
-                && 平成24年4月.isBeforeOrEquals(サービス提供年月)) {
-            div.getBtnShoteiShikkanShisetsuRyoyo().setDisplayNone(false);
-            div.getBtnKinkyujiShisetsuRyoyo().setDisplayNone(true);
+        if (ZERO.equals(識別番号管理データ.get所定疾患施設療養設定区分())) {
+            div.getBtnShoteiShikkanShisetsuRyoyo().setDisabled(true);
         } else {
-            div.getBtnShoteiShikkanShisetsuRyoyo().setDisplayNone(true);
-            if (ZERO.equals(識別番号管理データ.get緊急時施設療養設定区分())) {
-                div.getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
-            } else {
-                div.getBtnKinkyujiShisetsuRyoyo().setDisabled(false);
-            }
+            div.getBtnShoteiShikkanShisetsuRyoyo().setDisabled(false);
+        }
+        if (ZERO.equals(識別番号管理データ.get緊急時施設療養設定区分())) {
+            div.getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
+        } else {
+            div.getBtnKinkyujiShisetsuRyoyo().setDisabled(false);
         }
     }
 

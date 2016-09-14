@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4023JikoKisambiKanriEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 
 /**
  * 収納情報のRelateEntityクラスです。
@@ -18,6 +18,6 @@ import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4023JikoKisambiKanriEntity;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShunoJohoEntity {
 
-    private FukaJohoEntity fukaJohoEntity;
-    private List<DbT4023JikoKisambiKanriEntity> jikoKisambiKanri;
+    private DbT2002FukaEntity fukaEntity;
+    private List<KibetsuJohoEntity> kibetsuJohoEntity;
 }

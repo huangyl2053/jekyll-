@@ -174,7 +174,7 @@ public class HanyoListkougakugasSannKeiSuukekkaHandler {
             parameter.setデータ種類(Kaigogassan_DataShubetsu.仮算定.getコード());
         }
 
-        if (div.getChushutsuJokenPanel().getDdlTaishoNendo() != null) {
+        if (!div.getChushutsuJokenPanel().getDdlTaishoNendo().getSelectedValue().isEmpty()) {
             RString 年度 = div.getChushutsuJokenPanel().getDdlTaishoNendo().getSelectedValue();
             RString 対象年度
                     = new RString(Integer.parseInt(Pattern.compile(new RString("[^0-9]").toString()).matcher(年度).replaceAll("").trim()) + VALUE);

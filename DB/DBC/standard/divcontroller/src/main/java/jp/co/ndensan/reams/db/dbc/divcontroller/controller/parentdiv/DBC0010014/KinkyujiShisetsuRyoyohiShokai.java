@@ -126,6 +126,8 @@ public class KinkyujiShisetsuRyoyohiShokai {
                 給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号(),
                 ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class)
         );
+        FlexibleYearMonth 提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().toDateString());
+        ViewStateHolder.put(ViewStateKeys.サービス提供年月, 提供年月);
         return ResponseData.of(div).respond();
     }
 
@@ -146,6 +148,8 @@ public class KinkyujiShisetsuRyoyohiShokai {
                 給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号(),
                 ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class)
         );
+        FlexibleYearMonth 提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().toDateString());
+        ViewStateHolder.put(ViewStateKeys.サービス提供年月, 提供年月);
         return ResponseData.of(div).respond();
     }
 
