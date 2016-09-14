@@ -381,7 +381,7 @@
        <if test="支給申請書整理番号To!=null and !支給申請書整理番号To.isEmpty()">
         AND 高額合算自己負担額."shikyuShinseishoSeiriNo" <![CDATA[<=]]> #{支給申請書整理番号To}
        </if> 
-       <if test="送付対象外!=null">
+       <if test="送付対象外">
         AND 高額合算自己負担額."sofuTaishoGaiFlag" =  '1'
        </if> 
        <if test="自己負担額確認情報受取年月From!=null and !自己負担額確認情報受取年月From.isEmpty()">
