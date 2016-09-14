@@ -69,6 +69,7 @@ public class KougakuKetteiTuutisyo {
         KougakuKetteiTuutisyoManager manager = KougakuKetteiTuutisyoManager.createInstance();
         List<FlexibleYearMonth> サービス提供年月リスト = manager.getサービス提供年月(key.get被保険者番号());
         if (サービス提供年月リスト.isEmpty()) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_NAME, true);
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         } else {
             div.getKyoTuuKaigoAtena().initialize(key.get識別コード());

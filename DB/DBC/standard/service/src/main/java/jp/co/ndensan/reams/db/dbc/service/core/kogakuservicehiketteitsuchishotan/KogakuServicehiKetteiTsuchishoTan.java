@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.service.core.kogakuservicehiketteitsuchishota
 
 import java.util.List;
 import java.util.Map;
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.business.core.servicenokanribangourendou.JigyouKetteiTutisyoResult;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.jigyobunkogakugassanshikyukettei.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakukaigoservice.ShikyuKubun;
@@ -64,7 +65,6 @@ import jp.co.ndensan.reams.uz.uza.lang.Width;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
-import static java.util.Objects.requireNonNull;
 
 /**
  * 高額サービス費支給決定通知書（単）のビジネスクラスです。
@@ -762,6 +762,9 @@ public class KogakuServicehiKetteiTsuchishoTan {
     }
 
     private RString toDecimal(Decimal decimal) {
+        if (decimal == null) {
+            return RString.EMPTY;
+        }
         return DecimalFormatter.toコンマ区切りRString(decimal, 0);
     }
 
