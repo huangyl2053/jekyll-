@@ -40,10 +40,10 @@ public class DBU010050_JigyoHokokuGeppo_IppanShokan_KetteiYM extends BatchFlowBa
     private static final String DBU300006報告月報_一般状況 = "DBU300006報告月報_一般状況";
     private static final String DBU300007報告月報_一般状況 = "DBU300007報告月報_一般状況";
     private static final RString 集計番号_DBU011200 = new RString("DBU011200");
-    private static final RString 集計番号_DBU011400 = new RString("DBU011400");
-    private static final RString 集計番号_DBU011391 = new RString("DBU011391");
-    private static final RString 集計番号_DBU011392 = new RString("DBU011392");
-    private static final RString 集計番号_DBU011393 = new RString("DBU011393");
+//    private static final RString 集計番号_DBU011400 = new RString("DBU011400");
+//    private static final RString 集計番号_DBU011391 = new RString("DBU011391");
+//    private static final RString 集計番号_DBU011392 = new RString("DBU011392");
+//    private static final RString 集計番号_DBU011393 = new RString("DBU011393");
 
     @Override
     protected void defineFlow() {
