@@ -9,7 +9,9 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.JukyushaIdoRenrakuhyo;
 import jp.co.ndensan.reams.db.dbc.business.core.jukyushateiseirenrakuhyotorokumanager.JukyushaTeiseiRenrakuhyoTorokuManagerResult;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyoEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3001JukyushaIdoRenrakuhyoDac;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -95,6 +97,25 @@ public class JukyushaTeiseiRenrakuhyoTorokuManager {
         } else {
             return 0;
         }
+    }
+
+    /**
+     * 訂正対象データ
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @param 異動年月日 FlexibleDate
+     * @param 履歴番号 int
+     * @return JukyushaIdoRenrakuhyo
+     */
+    public JukyushaIdoRenrakuhyo get訂正対象データ(
+            HihokenshaNo 被保険者番号,
+            FlexibleDate 異動年月日,
+            int 履歴番号) {
+        DbT3001JukyushaIdoRenrakuhyoEntity entity = 受給者異動送付Dac.getAllByKey(被保険者番号, 異動年月日, 履歴番号);
+        if (entity == null) {
+            return null;
+        }
+        return new JukyushaIdoRenrakuhyo(entity);
     }
 
     private void get警告メッセージコード(
