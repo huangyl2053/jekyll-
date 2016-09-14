@@ -128,7 +128,7 @@ public class HanyoListKyodoJukyushaCsvEntityEditor {
         csvEntity.set履歴番号(new RString(entity.get共同処理用受給者異動基本送付().getRirekiNo()));
         csvEntity.set異動年月日(format日付項目(entity.get共同処理用受給者異動基本送付().getIdoYMD()));
         if (entity.get共同処理用受給者異動基本送付() != null) {
-            if (RString.isNullOrEmpty(entity.get共同処理用受給者異動基本送付().getIdoKubunCode())) {
+            if (!RString.isNullOrEmpty(entity.get共同処理用受給者異動基本送付().getIdoKubunCode())) {
                 csvEntity.set異動区分(JukyushaIF_IdoKubunCode.toValue(entity.get共同処理用受給者異動基本送付().getIdoKubunCode()).get名称());
             } else {
                 csvEntity.set異動区分(RString.EMPTY);
@@ -219,7 +219,7 @@ public class HanyoListKyodoJukyushaCsvEntityEditor {
         csvEntity.set履歴番号(new RString(entity.get共同処理用受給者異動基本送付().getRirekiNo()));
         csvEntity.set異動年月日(format日付項目(entity.get共同処理用受給者異動基本送付().getIdoYMD()));
         if (entity.get共同処理用受給者異動基本送付() != null) {
-            if (RString.isNullOrEmpty(entity.get共同処理用受給者異動基本送付().getIdoKubunCode())) {
+            if (!RString.isNullOrEmpty(entity.get共同処理用受給者異動基本送付().getIdoKubunCode())) {
                 csvEntity.set異動区分(JukyushaIF_IdoKubunCode.toValue(entity.get共同処理用受給者異動基本送付().getIdoKubunCode()).get名称());
             } else {
                 csvEntity.set異動区分(RString.EMPTY);
