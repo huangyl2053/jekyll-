@@ -121,6 +121,18 @@
         AND dbwt38Q1."sofuJogaiFlag" = #{送付除外フラグ}
     </select>
     
+    <select id="get送付ファイル作成データ件数" resultOrdered="true" fetchSize="500"
+            resultType="int" >
+        SELECT
+            count(*)
+        FROM
+            "DbWT38Q1KogakuGassanKyufuJisseki" AS DbWT38Q1
+        INNER JOIN "DbWT1001Hihokensha" AS DbWT1001
+        ON DbWT38Q1."renban" = DbWT1001."exRenban"
+        WHERE
+            DbWT38Q1."sofuJogaiFlag" = false
+    </select>
+    
     <select id="get送付ファイル作成データ" resultOrdered="true" fetchSize="500"
             resultMap="resultMap_KogakuGassanKyufuJissekiSofuEntity">
         SELECT
