@@ -116,16 +116,7 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
         set作成日時(システム日付, システム時刻);
         div.getDdlKakoHokokuNendo().setDisabled(true);
         div.setHiddenJikkoTaniZen(実行単位選択集計のみ);
-        List<RString> key = new ArrayList<>();
-        div.getCblShutsuryokuTaishoAll().setSelectedItemsByKey(key);
-        div.getCblShutsuryokuTaishoYoshiki1().setSelectedItemsByKey(key);
-        div.getCblShutsuryokuTaishoIppan1to11().setSelectedItemsByKey(key);
-        div.getCblShutsuryokuTaishoIppanGembutsu().setSelectedItemsByKey(key);
-        div.getCblShutsuryokuTaishoHokenGembutsu().setSelectedItemsByKey(key);
-        div.getCblShutsuryokuTaishoIppanShokan().setSelectedItemsByKey(key);
-        div.getCblShutsuryokuTaishoHokenShokan().setSelectedItemsByKey(key);
-        div.getCblShutsuryokuTaishoHokenKogaku().setSelectedItemsByKey(key);
-        div.getCblShutsuryokuTaishoHokenKogakuGassan().setSelectedItemsByKey(key);
+        setチェックボックスクリア();
         set集計と作成非活性();
     }
 
@@ -135,6 +126,8 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
      * @param 実行単位選択 実行単位選択
      */
     public void onClick_onChangeJikkoTani(RString 実行単位選択) {
+        RDate システム日付 = RDate.getNowDate();
+        RTime システム時刻 = RDate.getNowTime();
         RString 実行単位選択前 = div.getHiddenJikkoTaniZen();
         if ((実行単位選択集計のみ.equals(実行単位選択前) || 実行単位選択集計後に印刷.equals(実行単位選択前))
                 && 実行単位選択過去の集計.equals(実行単位選択)) {
@@ -167,9 +160,12 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
                 div.getRadKoikiRengo().setSelectedKey(new RString("koiki"));
                 div.getBtnShichosonSelect().setDisabled(true);
             }
+            set作成日時(システム日付, システム時刻);
             set集計エリア();
         }
         div.setHiddenJikkoTaniZen(実行単位選択);
+        setチェックボックスクリア();
+        set集計と作成非活性();
     }
 
     /**
@@ -448,15 +444,7 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
                 div.getCblShutsuryokuTaishoHokenKogakuGassan().setSelectedItemsByKey(年報報告様式);
             }
         } else {
-            List<RString> key = new ArrayList<>();
-            div.getCblShutsuryokuTaishoYoshiki1().setSelectedItemsByKey(key);
-            div.getCblShutsuryokuTaishoIppan1to11().setSelectedItemsByKey(key);
-            div.getCblShutsuryokuTaishoIppanGembutsu().setSelectedItemsByKey(key);
-            div.getCblShutsuryokuTaishoHokenGembutsu().setSelectedItemsByKey(key);
-            div.getCblShutsuryokuTaishoIppanShokan().setSelectedItemsByKey(key);
-            div.getCblShutsuryokuTaishoHokenShokan().setSelectedItemsByKey(key);
-            div.getCblShutsuryokuTaishoHokenKogaku().setSelectedItemsByKey(key);
-            div.getCblShutsuryokuTaishoHokenKogakuGassan().setSelectedItemsByKey(key);
+            setチェックボックスクリア();
         }
     }
 
@@ -1454,6 +1442,19 @@ public class JigyoJokyoHokokuNempoSakueiHandler {
             div.getTxtSakuseiYMD8().setDisabled(true);
             div.getTxtSakuseiTime8().setDisabled(true);
         }
+    }
+
+    private void setチェックボックスクリア() {
+        List<RString> key = new ArrayList<>();
+        div.getCblShutsuryokuTaishoAll().setSelectedItemsByKey(key);
+        div.getCblShutsuryokuTaishoYoshiki1().setSelectedItemsByKey(key);
+        div.getCblShutsuryokuTaishoIppan1to11().setSelectedItemsByKey(key);
+        div.getCblShutsuryokuTaishoIppanGembutsu().setSelectedItemsByKey(key);
+        div.getCblShutsuryokuTaishoHokenGembutsu().setSelectedItemsByKey(key);
+        div.getCblShutsuryokuTaishoIppanShokan().setSelectedItemsByKey(key);
+        div.getCblShutsuryokuTaishoHokenShokan().setSelectedItemsByKey(key);
+        div.getCblShutsuryokuTaishoHokenKogaku().setSelectedItemsByKey(key);
+        div.getCblShutsuryokuTaishoHokenKogakuGassan().setSelectedItemsByKey(key);
     }
 
     private static class DateComparator implements Comparator<KeyValueDataSource>, Serializable {
