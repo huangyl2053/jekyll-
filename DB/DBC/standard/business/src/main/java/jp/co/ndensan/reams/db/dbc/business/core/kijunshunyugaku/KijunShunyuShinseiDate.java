@@ -44,4 +44,5 @@ public class KijunShunyuShinseiDate implements Serializable {
     private Decimal 課税所得_控除前;
     private Decimal 課税所得_控除後;
     private Boolean 前年12月31日時点の世帯主;
+    private RString 状態;
 }

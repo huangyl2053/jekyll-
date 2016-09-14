@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.biz.BanchiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Katagaki;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -272,7 +272,7 @@ public class DBB021051DataUtil {
             DBB021051ShoriKekkaListTempEntity entity, boolean firstFlag) {
         DBB021051ShoriKekkaKakuninListCSVEntity result = new DBB021051ShoriKekkaKakuninListCSVEntity();
         if (firstFlag) {
-            result.set作成日時(DateConverter.getDate12Time142(RDateTime.now()));
+            result.set作成日時(DateConverter.getDate12Time142(RDate.getNowDateTime()));
         }
         result.set処理名(entity.getエラー区分());
         result.set証記載保険者番号(entity.get証記載保険者番号());
