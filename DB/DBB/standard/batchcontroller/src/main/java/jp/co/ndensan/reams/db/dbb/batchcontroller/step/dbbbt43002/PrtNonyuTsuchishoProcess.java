@@ -269,6 +269,8 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
 
         出力期リスト = manager.get出力期リスト(processParameter.get納入_出力期());
 
+        帳票タイプ = manager.get帳票タイプ(出力帳票一覧.get帳票ID());
+
         List<NokiJoho> 期月List = manager.get期月リスト(processParameter.get調定年度(), processParameter.get納入_出力方法(),
                 帳票タイプ, 期月リスト_普徴, 本算定期間, 出力期AsInt);
 
@@ -383,7 +385,7 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
 
     private void initializ納入通知書() {
         if (ReportIdDBB.DBB100045.getReportId().equals(出力帳票一覧.get帳票ID())) {
-            for (int idex = 0; idex <= 山分け用スプール数; idex++) {
+            for (int idex = 0; idex < 山分け用スプール数; idex++) {
                 dbb100045reportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB100045.getReportId().value()).create();
                 dbb100045ReportSourceWriter = new ReportSourceWriter<>(dbb100045reportWriter);
                 スプール.put(String.valueOf(idex), dbb100045ReportSourceWriter);
@@ -392,7 +394,7 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, dbb100045ReportSourceWriter);
             }
         } else if (ReportIdDBB.DBB100046.getReportId().equals(出力帳票一覧.get帳票ID())) {
-            for (int idex = 0; idex <= 山分け用スプール数; idex++) {
+            for (int idex = 0; idex < 山分け用スプール数; idex++) {
                 dbb100046reportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB100046.getReportId().value()).create();
                 dbb100046ReportSourceWriter = new ReportSourceWriter<>(dbb100046reportWriter);
                 スプール.put(String.valueOf(idex), dbb100046ReportSourceWriter);
@@ -401,7 +403,7 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, dbb100046ReportSourceWriter);
             }
         } else if (ReportIdDBB.DBB100051.getReportId().equals(出力帳票一覧.get帳票ID())) {
-            for (int idex = 0; idex <= 山分け用スプール数; idex++) {
+            for (int idex = 0; idex < 山分け用スプール数; idex++) {
                 dbb100051reportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB100051.getReportId().value()).create();
                 dbb100051ReportSourceWriter = new ReportSourceWriter<>(dbb100051reportWriter);
                 スプール.put(String.valueOf(idex), dbb100051ReportSourceWriter);
@@ -410,7 +412,7 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, dbb100051ReportSourceWriter);
             }
         } else if (ReportIdDBB.DBB100052.getReportId().equals(出力帳票一覧.get帳票ID())) {
-            for (int idex = 0; idex <= 山分け用スプール数; idex++) {
+            for (int idex = 0; idex < 山分け用スプール数; idex++) {
                 dbb100052reportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB100052.getReportId().value()).create();
                 dbb100052ReportSourceWriter = new ReportSourceWriter<>(dbb100052reportWriter);
                 スプール.put(String.valueOf(idex), dbb100052ReportSourceWriter);
@@ -419,7 +421,7 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, dbb100052ReportSourceWriter);
             }
         } else if (ReportIdDBB.DBB100053.getReportId().equals(出力帳票一覧.get帳票ID())) {
-            for (int idex = 0; idex <= 山分け用スプール数; idex++) {
+            for (int idex = 0; idex < 山分け用スプール数; idex++) {
                 dbb100053reportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB100053.getReportId().value()).create();
                 dbb100053ReportSourceWriter = new ReportSourceWriter<>(dbb100053reportWriter);
                 スプール.put(String.valueOf(idex), dbb100053ReportSourceWriter);
@@ -428,7 +430,7 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, dbb100053ReportSourceWriter);
             }
         } else if (ReportIdDBB.DBB100054.getReportId().equals(出力帳票一覧.get帳票ID())) {
-            for (int idex = 0; idex <= 山分け用スプール数; idex++) {
+            for (int idex = 0; idex < 山分け用スプール数; idex++) {
                 dbb100054reportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB100054.getReportId().value()).create();
                 dbb100054ReportSourceWriter = new ReportSourceWriter<>(dbb100054reportWriter);
                 スプール.put(String.valueOf(idex), dbb100054ReportSourceWriter);
@@ -437,7 +439,7 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, dbb100054ReportSourceWriter);
             }
         } else if (ReportIdDBB.DBB100055.getReportId().equals(出力帳票一覧.get帳票ID())) {
-            for (int idex = 0; idex <= 山分け用スプール数; idex++) {
+            for (int idex = 0; idex < 山分け用スプール数; idex++) {
                 dbb100055reportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB100055.getReportId().value()).create();
                 dbb100055ReportSourceWriter = new ReportSourceWriter<>(dbb100055reportWriter);
                 スプール.put(String.valueOf(idex), dbb100055ReportSourceWriter);
@@ -452,7 +454,7 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
 
     private void initializ納入通知書_部分() {
         if (ReportIdDBB.DBB100056.getReportId().equals(出力帳票一覧.get帳票ID())) {
-            for (int idex = 0; idex <= 山分け用スプール数; idex++) {
+            for (int idex = 0; idex < 山分け用スプール数; idex++) {
                 dbb100056reportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB100056.getReportId().value()).create();
                 dbb100056ReportSourceWriter = new ReportSourceWriter<>(dbb100056reportWriter);
                 スプール.put(String.valueOf(idex), dbb100056ReportSourceWriter);
@@ -461,7 +463,7 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, dbb100056ReportSourceWriter);
             }
         } else if (ReportIdDBB.DBB100057.getReportId().equals(出力帳票一覧.get帳票ID())) {
-            for (int idex = 0; idex <= 山分け用スプール数; idex++) {
+            for (int idex = 0; idex < 山分け用スプール数; idex++) {
                 dbb100057reportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB100057.getReportId().value()).create();
                 dbb100057ReportSourceWriter = new ReportSourceWriter<>(dbb100057reportWriter);
                 スプール.put(String.valueOf(idex), dbb100057ReportSourceWriter);
@@ -470,7 +472,7 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, dbb100057ReportSourceWriter);
             }
         } else if (ReportIdDBB.DBB100058.getReportId().equals(出力帳票一覧.get帳票ID())) {
-            for (int idex = 0; idex <= 山分け用スプール数; idex++) {
+            for (int idex = 0; idex < 山分け用スプール数; idex++) {
                 dbb100058reportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB100058.getReportId().value()).create();
                 dbb100058ReportSourceWriter = new ReportSourceWriter<>(dbb100058reportWriter);
                 スプール.put(String.valueOf(idex), dbb100058ReportSourceWriter);
@@ -479,7 +481,7 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, dbb100058ReportSourceWriter);
             }
         } else if (ReportIdDBB.DBB100059.getReportId().equals(出力帳票一覧.get帳票ID())) {
-            for (int idex = 0; idex <= 山分け用スプール数; idex++) {
+            for (int idex = 0; idex < 山分け用スプール数; idex++) {
                 dbb100059reportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB100059.getReportId().value()).create();
                 dbb100059ReportSourceWriter = new ReportSourceWriter<>(dbb100059reportWriter);
                 スプール.put(String.valueOf(idex), dbb100059ReportSourceWriter);
@@ -488,7 +490,7 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, dbb100059ReportSourceWriter);
             }
         } else if (ReportIdDBB.DBB100060.getReportId().equals(出力帳票一覧.get帳票ID())) {
-            for (int idex = 0; idex <= 山分け用スプール数; idex++) {
+            for (int idex = 0; idex < 山分け用スプール数; idex++) {
                 dbb100060reportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB100060.getReportId().value()).create();
                 dbb100060ReportSourceWriter = new ReportSourceWriter<>(dbb100060reportWriter);
                 スプール.put(String.valueOf(idex), dbb100060ReportSourceWriter);
@@ -497,7 +499,7 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, dbb100060ReportSourceWriter);
             }
         } else if (ReportIdDBB.DBB100061.getReportId().equals(出力帳票一覧.get帳票ID())) {
-            for (int idex = 0; idex <= 山分け用スプール数; idex++) {
+            for (int idex = 0; idex < 山分け用スプール数; idex++) {
                 dbb100061reportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB100061.getReportId().value()).create();
                 dbb100061ReportSourceWriter = new ReportSourceWriter<>(dbb100061reportWriter);
                 スプール.put(String.valueOf(idex), dbb100061ReportSourceWriter);
@@ -506,7 +508,7 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, dbb100061ReportSourceWriter);
             }
         } else if (ReportIdDBB.DBB100062.getReportId().equals(出力帳票一覧.get帳票ID())) {
-            for (int idex = 0; idex <= 山分け用スプール数; idex++) {
+            for (int idex = 0; idex < 山分け用スプール数; idex++) {
                 dbb100062reportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB100062.getReportId().value()).create();
                 dbb100062ReportSourceWriter = new ReportSourceWriter<>(dbb100062reportWriter);
                 スプール.put(String.valueOf(idex), dbb100062ReportSourceWriter);
@@ -515,7 +517,7 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, dbb100062ReportSourceWriter);
             }
         } else if (ReportIdDBB.DBB100063.getReportId().equals(出力帳票一覧.get帳票ID())) {
-            for (int idex = 0; idex <= 山分け用スプール数; idex++) {
+            for (int idex = 0; idex < 山分け用スプール数; idex++) {
                 dbb100063reportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB100063.getReportId().value()).create();
                 dbb100063ReportSourceWriter = new ReportSourceWriter<>(dbb100063reportWriter);
                 スプール.put(String.valueOf(idex), dbb100063ReportSourceWriter);
@@ -524,7 +526,7 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
                         NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, dbb100063ReportSourceWriter);
             }
         } else if (ReportIdDBB.DBB100064.getReportId().equals(出力帳票一覧.get帳票ID())) {
-            for (int idex = 0; idex <= 山分け用スプール数; idex++) {
+            for (int idex = 0; idex < 山分け用スプール数; idex++) {
                 dbb100064reportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB100064.getReportId().value()).create();
                 dbb100064ReportSourceWriter = new ReportSourceWriter<>(dbb100064reportWriter);
                 スプール.put(String.valueOf(idex), dbb100064ReportSourceWriter);
@@ -541,7 +543,7 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
             HokenryoNonyuTsuchishoKigotoReport report
                     = new HokenryoNonyuTsuchishoKigotoReport(編集後本算定通知書共通情報, dbb100045NinshoshaSource);
             List<NonyuTsuchisho<HokenryoNonyuTsuchishoKigotoSource>> nonyuTsuchishoList = report.devidedByPage();
-            for (int idex = 0; idex <= 山分け用スプール数; idex++) {
+            for (int idex = 0; idex < 山分け用スプール数; idex++) {
                 nonyuTsuchishoList.get(idex).writeBy(スプール.get(String.valueOf(idex)));
                 ページ数 = ページ数 + スプール.get(String.valueOf(idex)).pageCount().value();
             }
@@ -550,7 +552,7 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
             HokenryoNonyuTsuchishoKigotoRenchoReport report
                     = new HokenryoNonyuTsuchishoKigotoRenchoReport(編集後本算定通知書共通情報, dbb100046NinshoshaSource);
             List<NonyuTsuchisho<HokenryoNonyuTsuchishoKigotoRenchoSource>> nonyuTsuchishoList = report.devidedByPage();
-            for (int idex = 0; idex <= 山分け用スプール数; idex++) {
+            for (int idex = 0; idex < 山分け用スプール数; idex++) {
                 nonyuTsuchishoList.get(idex).writeBy(スプール.get(String.valueOf(idex)));
                 ページ数 = ページ数 + スプール.get(String.valueOf(idex)).pageCount().value();
             }
@@ -568,7 +570,7 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
         } else if (ReportIdDBB.DBB100063.getReportId().equals(出力帳票一覧.get帳票ID())) {
             NonyuTsuchishoCVSKigotoReport report = new NonyuTsuchishoCVSKigotoReport(編集後本算定通知書共通情報, dbb100063NinshoshaSource);
             List<NonyuTsuchisho<NonyuTsuchishoCVSKigotoSource>> nonyuTsuchishoList = report.devidedByPage();
-            for (int idex = 0; idex <= 山分け用スプール数; idex++) {
+            for (int idex = 0; idex < 山分け用スプール数; idex++) {
                 nonyuTsuchishoList.get(idex).writeBy(スプール.get(String.valueOf(idex)));
                 ページ数 = ページ数 + スプール.get(String.valueOf(idex)).pageCount().value();
             }
@@ -577,7 +579,7 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
             NonyuTsuchishoCVSKigotoRenchoReport report
                     = new NonyuTsuchishoCVSKigotoRenchoReport(編集後本算定通知書共通情報, dbb100064NinshoshaSource);
             List<NonyuTsuchisho<NonyuTsuchishoCVSKigotoRenchoSource>> nonyuTsuchishoList = report.devidedByPage();
-            for (int idex = 0; idex <= 山分け用スプール数; idex++) {
+            for (int idex = 0; idex < 山分け用スプール数; idex++) {
                 nonyuTsuchishoList.get(idex).writeBy(スプール.get(String.valueOf(idex)));
                 ページ数 = ページ数 + スプール.get(String.valueOf(idex)).pageCount().value();
             }
@@ -596,7 +598,7 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
             HokenryoNonyuTsuchishoGinfuriFourKiReport report = new HokenryoNonyuTsuchishoGinfuriFourKiReport(編集後本算定通知書共通情報,
                     dbb100051NinshoshaSource, 当初出力_中期開始期, 当初出力_後期開始期);
             List<NonyuTsuchisho<HokenryoNonyuTsuchishoGinfuriFourKiSource>> nonyuTsuchishoList = report.devidedByPage();
-            for (int idex = 0; idex <= 山分け用スプール数; idex++) {
+            for (int idex = 0; idex < 山分け用スプール数; idex++) {
                 nonyuTsuchishoList.get(idex).writeBy(スプール.get(String.valueOf(idex)));
                 ページ数 = ページ数 + スプール.get(String.valueOf(idex)).pageCount().value();
             }
@@ -605,7 +607,7 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
             HokenryoNonyuTsuchishoGinfuriFourKiRenchoReport report = new HokenryoNonyuTsuchishoGinfuriFourKiRenchoReport(編集後本算定通知書共通情報,
                     dbb100052NinshoshaSource, 当初出力_中期開始期, 当初出力_後期開始期);
             List<NonyuTsuchisho<HokenryoNonyuTsuchishoGinfuriFourKiRenchoSource>> nonyuTsuchishoList = report.devidedByPage();
-            for (int idex = 0; idex <= 山分け用スプール数; idex++) {
+            for (int idex = 0; idex < 山分け用スプール数; idex++) {
                 nonyuTsuchishoList.get(idex).writeBy(スプール.get(String.valueOf(idex)));
                 ページ数 = ページ数 + スプール.get(String.valueOf(idex)).pageCount().value();
             }
@@ -614,7 +616,7 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
             HokenryoNonyuTsuchishoGinfuriFiveKiReport report = new HokenryoNonyuTsuchishoGinfuriFiveKiReport(編集後本算定通知書共通情報,
                     dbb100053NinshoshaSource, 当初出力_中期開始期, 当初出力_後期開始期);
             List<NonyuTsuchisho<HokenryoNonyuTsuchishoGinfuriFiveKiSource>> nonyuTsuchishoList = report.devidedByPage();
-            for (int idex = 0; idex <= 山分け用スプール数; idex++) {
+            for (int idex = 0; idex < 山分け用スプール数; idex++) {
                 nonyuTsuchishoList.get(idex).writeBy(スプール.get(String.valueOf(idex)));
                 ページ数 = ページ数 + スプール.get(String.valueOf(idex)).pageCount().value();
             }
@@ -623,7 +625,7 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
             HokenryoNonyuTsuchishoGinfuriFiveKiRenchoReport report = new HokenryoNonyuTsuchishoGinfuriFiveKiRenchoReport(編集後本算定通知書共通情報,
                     dbb100054NinshoshaSource, 当初出力_中期開始期, 当初出力_後期開始期);
             List<NonyuTsuchisho<HokenryoNonyuTsuchishoGinfuriFiveKiRenchoSource>> nonyuTsuchishoList = report.devidedByPage();
-            for (int idex = 0; idex <= 山分け用スプール数; idex++) {
+            for (int idex = 0; idex < 山分け用スプール数; idex++) {
                 nonyuTsuchishoList.get(idex).writeBy(スプール.get(String.valueOf(idex)));
                 ページ数 = ページ数 + スプール.get(String.valueOf(idex)).pageCount().value();
             }
@@ -639,7 +641,7 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
             HokenryoNonyuTsuchishoBookFuriKaeAriCoverReport report = new HokenryoNonyuTsuchishoBookFuriKaeAriCoverReport(編集後本算定通知書共通情報,
                     dbb100055NinshoshaSource, new RString(当初出力_中期開始期), new RString(当初出力_後期開始期));
             List<NonyuTsuchisho<HokenryoNonyuNonyuTsuchishoBookFuriKaeAriCoverSource>> nonyuTsuchishoList = report.devidedByPage();
-            for (int idex = 0; idex <= 山分け用スプール数; idex++) {
+            for (int idex = 0; idex < 山分け用スプール数; idex++) {
                 nonyuTsuchishoList.get(idex).writeBy(スプール.get(String.valueOf(idex)));
                 ページ数 = ページ数 + スプール.get(String.valueOf(idex)).pageCount().value();
             }
@@ -648,7 +650,7 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
             HokenryoNonyuTsuchishoBookFuriKaeNashiReport report = new HokenryoNonyuTsuchishoBookFuriKaeNashiReport(編集後本算定通知書共通情報,
                     dbb100056NinshoshaSource, new RString(当初出力_中期開始期), new RString(当初出力_後期開始期));
             List<NonyuTsuchisho<HokenryoNonyuTsuchishoBookFuriKaeNashiCoverSource>> nonyuTsuchishoList = report.devidedByPage();
-            for (int idex = 0; idex <= 山分け用スプール数; idex++) {
+            for (int idex = 0; idex < 山分け用スプール数; idex++) {
                 nonyuTsuchishoList.get(idex).writeBy(スプール.get(String.valueOf(idex)));
                 ページ数 = ページ数 + スプール.get(String.valueOf(idex)).pageCount().value();
             }
@@ -658,7 +660,7 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
                     = new HokenryoNonyuTsuchishoBookFuriKaeAriRenchoCoverReport(編集後本算定通知書共通情報,
                             dbb100057NinshoshaSource, new RString(当初出力_中期開始期), new RString(当初出力_後期開始期));
             List<NonyuTsuchisho<HokenryoNonyuNonyuTsuchishoBookFuriKaeAriRenchoCoverSource>> nonyuTsuchishoList = report.devidedByPage();
-            for (int idex = 0; idex <= 山分け用スプール数; idex++) {
+            for (int idex = 0; idex < 山分け用スプール数; idex++) {
                 nonyuTsuchishoList.get(idex).writeBy(スプール.get(String.valueOf(idex)));
                 ページ数 = ページ数 + スプール.get(String.valueOf(idex)).pageCount().value();
             }
@@ -668,7 +670,7 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
                     = new HokenryoNonyuTsuchishoBookFuriKaeNashiRenchoCoverReport(編集後本算定通知書共通情報,
                             dbb100058NinshoshaSource, new RString(当初出力_中期開始期), new RString(当初出力_後期開始期));
             List<NonyuTsuchisho<HokenryoNonyuTsuchishoBookFuriKaeNashiRenchoCoverSource>> nonyuTsuchishoList = report.devidedByPage();
-            for (int idex = 0; idex <= 山分け用スプール数; idex++) {
+            for (int idex = 0; idex < 山分け用スプール数; idex++) {
                 nonyuTsuchishoList.get(idex).writeBy(スプール.get(String.valueOf(idex)));
                 ページ数 = ページ数 + スプール.get(String.valueOf(idex)).pageCount().value();
             }
@@ -682,7 +684,7 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
         if (ReportIdDBB.DBB100059.getReportId().equals(出力帳票一覧.get帳票ID())) {
             NonyuTsuchishoCVSKakukoReport report = new NonyuTsuchishoCVSKakukoReport(編集後本算定通知書共通情報, dbb100059NinshoshaSource);
             List<NonyuTsuchisho<NonyuTsuchishoCVSKakukoSource>> nonyuTsuchishoList = report.devidedByPage();
-            for (int idex = 0; idex <= 山分け用スプール数; idex++) {
+            for (int idex = 0; idex < 山分け用スプール数; idex++) {
                 nonyuTsuchishoList.get(idex).writeBy(スプール.get(String.valueOf(idex)));
                 ページ数 = ページ数 + スプール.get(String.valueOf(idex)).pageCount().value();
             }
@@ -691,7 +693,7 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
             NonyuTsuchishoCVSKakukoRenchoReport report
                     = new NonyuTsuchishoCVSKakukoRenchoReport(編集後本算定通知書共通情報, dbb100060NinshoshaSource);
             List<NonyuTsuchisho<NonyuTsuchishoCVSKakukoRenchoSource>> nonyuTsuchishoList = report.devidedByPage();
-            for (int idex = 0; idex <= 山分け用スプール数; idex++) {
+            for (int idex = 0; idex < 山分け用スプール数; idex++) {
                 nonyuTsuchishoList.get(idex).writeBy(スプール.get(String.valueOf(idex)));
                 ページ数 = ページ数 + スプール.get(String.valueOf(idex)).pageCount().value();
             }
@@ -699,7 +701,7 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
         } else if (ReportIdDBB.DBB100061.getReportId().equals(出力帳票一覧.get帳票ID())) {
             NonyuTsuchishoCVSMultiReport report = new NonyuTsuchishoCVSMultiReport(編集後本算定通知書共通情報, dbb100061NinshoshaSource);
             List<NonyuTsuchisho<NonyuTsuchishoCVSMultiSource>> nonyuTsuchishoList = report.devidedByPage();
-            for (int idex = 0; idex <= 山分け用スプール数; idex++) {
+            for (int idex = 0; idex < 山分け用スプール数; idex++) {
                 nonyuTsuchishoList.get(idex).writeBy(スプール.get(String.valueOf(idex)));
                 ページ数 = ページ数 + スプール.get(String.valueOf(idex)).pageCount().value();
             }
@@ -708,7 +710,7 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
             NonyuTsuchishoCVSMultiRenchoReport report
                     = new NonyuTsuchishoCVSMultiRenchoReport(編集後本算定通知書共通情報, dbb100062NinshoshaSource);
             List<NonyuTsuchisho<NonyuTsuchishoCVSMultiRenchoSource>> nonyuTsuchishoList = report.devidedByPage();
-            for (int idex = 0; idex <= 山分け用スプール数; idex++) {
+            for (int idex = 0; idex < 山分け用スプール数; idex++) {
                 nonyuTsuchishoList.get(idex).writeBy(スプール.get(String.valueOf(idex)));
                 ページ数 = ページ数 + スプール.get(String.valueOf(idex)).pageCount().value();
             }
@@ -753,11 +755,15 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
         } else if (定値区分_1.equals(processParameter.get納入_生活保護対象者をまとめて先頭に出力())) {
             orderByClause.append(RString.HALF_SPACE.concat(FORMAT).concat(口座区分).concat(FORMAT)
                     .concat(RString.HALF_SPACE).concat(ソート順_昇順));
+        } else {
+            orderByClause = new RStringBuilder(RString.EMPTY);
         }
-        if (!RString.isNullOrEmpty(出力順)) {
+        if (!RString.isNullOrEmpty(orderByClause.toRString()) && !RString.isNullOrEmpty(出力順)) {
             orderByClause.append(カンマ).append(RString.HALF_SPACE).append(出力順.replace(ソート, RString.EMPTY));
+            出力順 = orderByClause.toRString();
+        } else if (!RString.isNullOrEmpty(orderByClause.toRString()) && RString.isNullOrEmpty(出力順)) {
+            出力順 = orderByClause.toRString();
         }
-        出力順 = orderByClause.toRString();
     }
 
     private void set開始期(HonSanteiNonyuTsuchiShoJoho 本算定納入通知書情報) {
