@@ -82,7 +82,6 @@ public class KogakuServicehiKetteiTsuchishoTan {
     private static final RString 定値_未設定 = new RString("未設定");
     private static final RString 定値_0 = new RString("0");
     private static final RString 定値_1 = new RString("1");
-    private static final RString 定値_円 = new RString("円");
     private static final RString 全角のコンマ = new RString("，");
     private static final RString 定値_する = new RString("する");
     private static final RString 定値_しない = new RString("しない");
@@ -758,7 +757,7 @@ public class KogakuServicehiKetteiTsuchishoTan {
     }
 
     private RString formatDecimal(Decimal decimal) {
-        return toDecimal(decimal).concat(定値_円);
+        return toDecimal(decimal);
     }
 
     private RString toDecimal(Decimal decimal) {
