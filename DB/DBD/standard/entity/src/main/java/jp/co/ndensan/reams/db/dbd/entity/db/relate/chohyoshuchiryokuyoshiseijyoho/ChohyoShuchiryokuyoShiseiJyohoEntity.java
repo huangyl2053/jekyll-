@@ -6,6 +6,12 @@
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.chohyoshuchiryokuyoshiseijyoho;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -19,18 +25,22 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class ChohyoShuchiryokuyoShiseiJyohoEntity {
 
     private RString 保険者名称;
-    private RString 証記載保険者番号;
+    private ShoKisaiHokenshaNo 証記載保険者番号;
     private HihokenshaNo 被保険者番号;
-    private RString 被保険者氏名;
-    private RString 被保険者氏名カナ;
-    private RString 住所;
+    private AtenaMeisho 被保険者氏名;
+    private AtenaKanaMeisho 被保険者氏名カナ;
+    private AtenaJusho 住所;
     private FlexibleDate 生年月日;
     private RString 性別;
-    private RString 認定申請区分_申請時コード;
+    private Code 認定申請区分_申請時コード;
     private RString 被保険者区分コード;
     private FlexibleDate 認定申請年月日;
-    private RString 前回要介護状態区分コード;
+    private Code 前回要介護状態区分コード;
     private FlexibleDate 前回認定有効期間開始;
     private FlexibleDate 前回認定有効期間終了;
+    private RString 枝番;
+    private ShikibetsuCode 識別コード;
+    private Code 申請届出代行区分コード;
     private RString 出力CSV状況申請;
+    private int index;
 }
