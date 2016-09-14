@@ -34,7 +34,7 @@
         </if>
         <if test="再処理区分 == 0">
             dbt3075."kokanJohoShikibetsuNo" LIKE #{交換情報識別番号}
-            AND dbt3075."sofuYM" IS NULL OR dbt3075."sofuYM" = ''
+            AND (dbt3075."sofuYM" IS NULL OR dbt3075."sofuYM" = '')
             AND dbt3075."isDeleted" = false
         </if>
         ORDER BY
