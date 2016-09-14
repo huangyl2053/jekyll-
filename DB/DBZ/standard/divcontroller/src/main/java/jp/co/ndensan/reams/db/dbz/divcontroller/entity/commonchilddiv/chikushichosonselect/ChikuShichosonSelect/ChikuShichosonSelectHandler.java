@@ -180,6 +180,7 @@ public class ChikuShichosonSelectHandler {
             div.getDdlCodeList().getDataSource().clear();
             div.setHdnTxtChikuShubetsu(RString.EMPTY);
             div.setHdnMapMultiSelect(RString.EMPTY);
+            div.getHdnTxtIsMultiSelected();
             div.setHdnTxtTitle(RString.EMPTY);
         } else {
             div.getBtnChoikiGuide().setDisplayNone(true);
@@ -209,7 +210,7 @@ public class ChikuShichosonSelectHandler {
     public void onOkClose_町域選択ボタン() {
 
         Map<RString, RString> map = DataPassingConverter.deserialize(div.getHdnMapMultiSelect(), HashMap.class);
-        if (map != null && !map.isEmpty()) {
+        if (map != null && !map.isEmpty() && map.size() != 1) {
             List<ddlCodeList_Row> dataSource = new ArrayList<>();
             for (Map.Entry<RString, RString> entry : map.entrySet()) {
                 ddlCodeList_Row row = new ddlCodeList_Row();
@@ -219,6 +220,7 @@ public class ChikuShichosonSelectHandler {
             }
             div.getDdlCodeList().setDataSource(setDgDataSource昇順ByKey(dataSource));
         }
+        div.setHdnTxtIsMultiSelected(文字_TRUE);
     }
 
     /**
@@ -227,7 +229,7 @@ public class ChikuShichosonSelectHandler {
     public void onOkClose_地区選択ボタン() {
 
         Map<RString, RString> map = DataPassingConverter.deserialize(div.getHdnMapMultiSelect(), HashMap.class);
-        if (map != null && !map.isEmpty()) {
+        if (map != null && !map.isEmpty() && map.size() > 1) {
             List<ddlCodeList_Row> dataSource = new ArrayList<>();
             for (Map.Entry<RString, RString> entry : map.entrySet()) {
                 ddlCodeList_Row row = new ddlCodeList_Row();
@@ -237,6 +239,7 @@ public class ChikuShichosonSelectHandler {
             }
             div.getDdlCodeList().setDataSource(setDgDataSource昇順ByKey(dataSource));
         }
+        div.setHdnTxtIsMultiSelected(文字_TRUE);
     }
 
     /**
@@ -256,7 +259,8 @@ public class ChikuShichosonSelectHandler {
                 if (旧市町村コード情報List != null && !旧市町村コード情報List.isEmpty()) {
                     List<KeyValueDataSource> dataSource = new ArrayList<>();
                     for (KyuShichosonCode item : 旧市町村コード情報List) {
-                        dataSource.add(new KeyValueDataSource(item.get旧市町村コード().getColumnValue(), item.get旧市町村名称()));
+                        dataSource.add(new KeyValueDataSource(item.get旧市町村コード().getColumnValue(),
+                                item.get旧市町村名称()));
                     }
                     div.getDdlKyushichosonKoiki().setDataSource(setDdlDataSource昇順ByKey(dataSource));
                     if (dataSource.size() > 1) {
