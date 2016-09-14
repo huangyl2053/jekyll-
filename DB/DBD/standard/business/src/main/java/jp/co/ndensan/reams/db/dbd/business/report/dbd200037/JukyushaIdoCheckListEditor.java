@@ -40,11 +40,6 @@ public class JukyushaIdoCheckListEditor implements IJukyushaIdoCheckListEditor {
     private static final int LISTINDEX_3 = 3;
     private static final int LISTINDEX_4 = 4;
     private static final int LISTINDEX_5 = 5;
-    private RString 改頁１ = RString.EMPTY;
-    private RString 改頁２ = RString.EMPTY;
-    private RString 改頁３ = RString.EMPTY;
-    private RString 改頁４ = RString.EMPTY;
-    private RString 改頁５ = RString.EMPTY;
 
     /**
      * インスタンスを生成します。
@@ -167,32 +162,13 @@ public class JukyushaIdoCheckListEditor implements IJukyushaIdoCheckListEditor {
         if (list == null) {
             list = new ArrayList<>();
         }
-        if (list.size() > LISTINDEX_0 && list.get(LISTINDEX_0).is改頁項目()) {
-            改頁１ = list.get(0).get項目名();
-            改頁list.add(改頁１);
-            index++;
+        for (int i = 0; i < LISTINDEX_5; i++) {
+            if (list.size() > i && list.get(i).is改頁項目()) {
+                改頁list.add(list.get(i).get項目名());
+                index++;
+            }
         }
-        if (list.size() > LISTINDEX_1 && list.get(LISTINDEX_1).is改頁項目()) {
-            改頁２ = list.get(LISTINDEX_1).get項目名();
-            改頁list.add(改頁２);
-            index++;
-        }
-        if (list.size() > LISTINDEX_2 && list.get(LISTINDEX_2).is改頁項目()) {
-            改頁３ = list.get(LISTINDEX_2).get項目名();
-            改頁list.add(改頁３);
-            index++;
-        }
-        if (list.size() > LISTINDEX_3 && list.get(LISTINDEX_3).is改頁項目()) {
-            改頁４ = list.get(LISTINDEX_3).get項目名();
-            改頁list.add(改頁４);
-            index++;
-        }
-        if (list.size() > LISTINDEX_4 && list.get(LISTINDEX_4).is改頁項目()) {
-            改頁５ = list.get(LISTINDEX_4).get項目名();
-            改頁list.add(改頁５);
-            index++;
-        }
-        for (int i = index; i < 5; i++) {
+        for (int i = index; i < LISTINDEX_5; i++) {
             改頁list.add(RString.EMPTY);
         }
         source.kaipage1 = 改頁list.get(LISTINDEX_0);
