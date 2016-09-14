@@ -27,7 +27,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
 @Setter
-public class NinshiuUpdateEntity {
+public class KoshinOshiraseTsuchiUpdateEntity {
 
     private Code koroshoIfShikibetsuCode;
     private RString hihokenshaNo;

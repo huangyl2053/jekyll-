@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.db.dbd.business.report.dbd501001.YokaigoNinteiShinsei
 import jp.co.ndensan.reams.db.dbd.business.report.dbd501002.ShinseiShoEntity;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd511001.KoshinShinseiOshiraseTshuchishoReport;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd511002.KoshinShinseiTsuchishoHakkoIchiranhyoReport;
-import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd511002.NinshiuUpdateProcessParameter;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd511002.KoshinOshiraseTsuchiProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd511002.NinshiuUpdateEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd511002.KoshinOshiraseTsuchiUpdateEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd511002.RenZhengzheEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd511002.TongzhiShuEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd511002.TongzhiShufaxingEntity;
@@ -84,13 +84,13 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 更新未申請者把握リスト作成CSVファイル出力です。
+ * 認定更新お知らせ通知書発行作成の処理です。
  *
  * @reamsid_L DBD-2030-020 x_miaocl
  */
-public class NinshiuUpdateProcess extends BatchProcessBase<NinshiuUpdateEntity> {
+public class KoshinOshiraseTsuchiProcess extends BatchProcessBase<KoshinOshiraseTsuchiUpdateEntity> {
 
-    private NinshiuUpdateProcessParameter parameter;
+    private KoshinOshiraseTsuchiProcessParameter parameter;
     private static final ReportIdDBD 帳票11 = ReportIdDBD.DBD511001;
     private static final ReportIdDBD 帳票01 = ReportIdDBD.DBD501001;
     private static final ReportIdDBD 帳票12 = ReportIdDBD.DBD511002;
@@ -148,8 +148,8 @@ public class NinshiuUpdateProcess extends BatchProcessBase<NinshiuUpdateEntity> 
     private ReportSourceWriter<KoshinShinseiTsuchishoHakkoIchiranhyoReportSource> reportSourceWriter112;
 
     private static final RString MYBATIS_SELECT_ID
-            = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.ninshiuUpdate."
-                    + "INinshiuUpdateMapper.get帳票出力用情報取得");
+            = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.koshinoshirasetsuchi."
+                    + "IKoshinOshiraseTsuchiMapper.get帳票出力用情報取得");
 
     @Override
     protected void initialize() {
@@ -207,7 +207,7 @@ public class NinshiuUpdateProcess extends BatchProcessBase<NinshiuUpdateEntity> 
     }
 
     @Override
-    protected void process(NinshiuUpdateEntity ninshi) {
+    protected void process(KoshinOshiraseTsuchiUpdateEntity ninshi) {
         RenZhengzheEntity entity = new RenZhengzheEntity();
         TongzhiShufaxingEntity twonin = new TongzhiShufaxingEntity();
         ShinseiShoEntity entity2 = new ShinseiShoEntity();
@@ -333,7 +333,7 @@ public class NinshiuUpdateProcess extends BatchProcessBase<NinshiuUpdateEntity> 
 
     }
 
-    private RenZhengzheEntity shikonShinseNinshi(RenZhengzheEntity entity, NinshiuUpdateEntity ninshi) {
+    private RenZhengzheEntity shikonShinseNinshi(RenZhengzheEntity entity, KoshinOshiraseTsuchiUpdateEntity ninshi) {
         Map<Integer, RString> map = ReportUtil.get通知文(SubGyomuCode.DBD介護受給, 帳票11.getReportId(),
                 KamokuCode.EMPTY, 1);
         entity.set通知文1(map.get(1));
@@ -369,7 +369,7 @@ public class NinshiuUpdateProcess extends BatchProcessBase<NinshiuUpdateEntity> 
         return entity;
     }
 
-    private TongzhiShufaxingEntity oshiraseNinshi(TongzhiShufaxingEntity twonin, NinshiuUpdateEntity ninshi) {
+    private TongzhiShufaxingEntity oshiraseNinshi(TongzhiShufaxingEntity twonin, KoshinOshiraseTsuchiUpdateEntity ninshi) {
         RStringBuilder builder = new RStringBuilder();
         builder.append(parameter.get抽出対象期間_開始().wareki().separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
         builder.append(カラ);
@@ -407,7 +407,7 @@ public class NinshiuUpdateProcess extends BatchProcessBase<NinshiuUpdateEntity> 
         return twonin;
     }
 
-    private void set通知書発行一覧(TongzhiShufaxingEntity twonin, NinshiuUpdateEntity ninshi, int index) {
+    private void set通知書発行一覧(TongzhiShufaxingEntity twonin, KoshinOshiraseTsuchiUpdateEntity ninshi, int index) {
         TongzhiShuEntity entity = new TongzhiShuEntity();
         entity.set被保険者番号(ninshi.getHihokenshaNo());
         entity.set被保険者氏名(ninshi.getHihokenshaName().getColumnValue());
@@ -436,7 +436,7 @@ public class NinshiuUpdateProcess extends BatchProcessBase<NinshiuUpdateEntity> 
         twonin.setTongzhiShu(entity);
     }
 
-    private ShinseiShoEntity koshinShinseNinshi(ShinseiShoEntity entity, NinshiuUpdateEntity ninshi) {
+    private ShinseiShoEntity koshinShinseNinshi(ShinseiShoEntity entity, KoshinOshiraseTsuchiUpdateEntity ninshi) {
         entity.set市町村名称(ninshi.getShichosonMeisho());
         entity.set被保険者番号第1桁(ninshi.getHihokenshaNo().substring(ZERO, ONE));
         entity.set被保険者番号第2桁(ninshi.getHihokenshaNo().substring(ONE, TWO));

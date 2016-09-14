@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd511002;
+package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD511002;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd511002.NinshiuUpdateProcessParameter;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd511002.KoshinOshiraseTsuchiProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -21,7 +21,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class NinshiuUpdatebatctParameter extends BatchParameterBase {
+public class DBD511002_KoshinOshiraseTsuchiParameter extends BatchParameterBase {
 
     private List<RString> 申請書管理番号リスト;
     private RString 出力対象区分;
@@ -31,12 +31,12 @@ public class NinshiuUpdatebatctParameter extends BatchParameterBase {
     private RString 出力順;
 
     /**
-     * 引数作成
+     * プロセスパラメータを作成。
      *
-     * @return NinshiuUpdateProcessParameter
+     * @return KoshinOshiraseTsuchiProcessParameter
      */
-    public NinshiuUpdateProcessParameter toNinshiuUpdateProcessParameter() {
-        return new NinshiuUpdateProcessParameter(申請書管理番号リスト,
+    public KoshinOshiraseTsuchiProcessParameter toNinshiuUpdateProcessParameter() {
+        return new KoshinOshiraseTsuchiProcessParameter(申請書管理番号リスト,
                 出力対象区分,
                 抽出対象期間_開始,
                 抽出対象期間_終了,
