@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd1080001;
+package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD102010;
 
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd1080001.GemmenGengakuTaishoGaiShaListProcessParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShurui;
@@ -22,7 +22,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShinseishoHakkoTaishoshaHaakuParameter extends BatchParameterBase {
+public class DBD102010_GemmenGengakuShinseishoHakkoYoTaishoshaHaakuParameter extends BatchParameterBase {
 
     private RString 新規更新区分;
     private boolean 課税世帯の被保険者を含む;

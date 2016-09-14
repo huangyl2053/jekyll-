@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.gemmenGengakuTaishoShaHanteiYoukonSakusei;
+package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.gemmenGengakuTaishoShaHanteiYoukonSakusei.GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.gemmenGengakuTaishoShaHanteiYoukonSakusei.SetaiinHaakuInputSakusei;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmenGengakuTaishoShaHanteiYoukonSakusei.GemmenGengakuTaishoShaHanteiYoukonSakuseiParameter;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBDZ00001.GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBDZ00001.SetaiinHaakuInputSakusei;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBDZ00001.DBDZ00001_GemmenGengakuTaishoshaHanteiYoKonkyoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbz.business.config.HizukeConfig;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.fuka.SetaiShotokuKazeiHanteiBatchParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SetaiinHaakuKanriShikibetsuKubun;
@@ -22,7 +22,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBD-3710-090 liuwei2
  */
-public class GemmenGengakuTaishoShaHanteiYoukonSakuseiFlow extends BatchFlowBase<GemmenGengakuTaishoShaHanteiYoukonSakuseiParameter> {
+public class DBDZ00001_GemmenGengakuTaishoshaHanteiYoKonkyoSakusei
+        extends BatchFlowBase<DBDZ00001_GemmenGengakuTaishoshaHanteiYoKonkyoSakuseiParameter> {
 
     private static final String 世帯員把握入力 = "SetaiinHaakuInputSakusei";
     private static final String 世帯員把握 = "SetaiShotokuKazeiHanteiFlow";

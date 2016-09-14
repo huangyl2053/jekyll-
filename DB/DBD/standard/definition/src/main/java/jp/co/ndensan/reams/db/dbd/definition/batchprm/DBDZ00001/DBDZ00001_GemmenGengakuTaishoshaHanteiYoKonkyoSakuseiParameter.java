@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmenGengakuTaishoShaHanteiYoukonSakusei;
+package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBDZ00001;
 
 import jp.co.ndensan.reams.db.dbd.definition.processprm.hanteiyoukonsakusei.GemmenGengakuTaishoShaHanteiYoukonSakuseiProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -20,7 +20,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class GemmenGengakuTaishoShaHanteiYoukonSakuseiParameter extends BatchParameterBase {
+public class DBDZ00001_GemmenGengakuTaishoshaHanteiYoKonkyoSakuseiParameter extends BatchParameterBase {
 
     @BatchParameter(key = "所得年度", name = "所得年度")
     private FlexibleYear 所得年度;
@@ -30,7 +30,7 @@ public class GemmenGengakuTaishoShaHanteiYoukonSakuseiParameter extends BatchPar
      *
      * @param 所得年度 FlexibleYear
      */
-    public GemmenGengakuTaishoShaHanteiYoukonSakuseiParameter(FlexibleYear 所得年度) {
+    public DBDZ00001_GemmenGengakuTaishoshaHanteiYoKonkyoSakuseiParameter(FlexibleYear 所得年度) {
         this.所得年度 = 所得年度;
     }
 

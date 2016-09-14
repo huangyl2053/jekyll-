@@ -1,12 +1,12 @@
-package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.dbd1080001;
+package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
 import java.util.UUID;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd1080001.GemmenGengakuTaishoGaiShaListCsvProcess;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd1080001.GemmenShinseishoTaishohaakuProcess;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd1080001.KousinSinseiTaishougaishaJohoProcess;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd1080001.ShinseishoHakkoTaishoJohoSakuseiProcess;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd1080001.ShinseishoHakkoTaishoshaHaakuParameter;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmenGengakuTaishoShaHanteiYoukonSakusei.GemmenGengakuTaishoShaHanteiYoukonSakuseiParameter;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD102010.GemmenGengakuTaishoGaiShaListCsvProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD102010.GemmenShinseishoTaishohaakuProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD102010.KousinSinseiTaishougaishaJohoProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD102010.ShinseishoHakkoTaishoJohoSakuseiProcess;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD102010.DBD102010_GemmenGengakuShinseishoHakkoYoTaishoshaHaakuParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBDZ00001.DBDZ00001_GemmenGengakuTaishoshaHanteiYoKonkyoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd1080001.GemmenShinseishoTaishohaakuProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd1080001.KousinSinseiTaishougaishaJohoProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd1080001.ShinseishoHakkoTaishoJohoSakuseiProcessParameter;
@@ -26,11 +26,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBD-3530-030 liuwei2
  */
-public class GemmenShinseishoTaishohaakuFlow extends BatchFlowBase<ShinseishoHakkoTaishoshaHaakuParameter> {
+public class DBD102010_GemmenGengakuShinseishoHakkoYoTaishoshaHaaku
+        extends BatchFlowBase<DBD102010_GemmenGengakuShinseishoHakkoYoTaishoshaHaakuParameter> {
 
     private static final String 減免減額対象者判定用根拠作成対象者を作成 = "get減免減額対象者判定用根拠作成対象者";
-    private static final String 減免減額対象者判定用根拠を作成 = "GemmenGengakuTaishoShaHanteiYoukonSakuseiFlow";
-    private static final RString TAISSHAHANTYOUKSAKUSFLOW = new RString("GemmenGengakuTaishoShaHanteiYoukonSakuseiFlow");
+    private static final String 減免減額対象者判定用根拠を作成 = "DBDZ00001_GemmenGengakuTaishoshaHanteiYoKonkyoSakusei";
+    private static final RString TAISSHAHANTYOUKSAKUSFLOW = new RString("DBDZ00001_GemmenGengakuTaishoshaHanteiYoKonkyoSakusei");
     private static final String 申請書発行対象者情報を作成する = "get申請書発行対象者情報";
     private static final String 更新申請対象外者情報を取得する = "get更新申請対象外者情報";
     private static final String 減免減額更新申請対象外者一覧CSV = "CSV_PROCESS";
@@ -107,7 +108,7 @@ public class GemmenShinseishoTaishohaakuFlow extends BatchFlowBase<ShinseishoHak
     }
 
     private GemmenShinseishoTaishohaakuProcessParameter createGemmenShinseishoTaishohaakuProcessParameter() {
-        ShinseishoHakkoTaishoshaHaakuParameter parameter = getParameter();
+        DBD102010_GemmenGengakuShinseishoHakkoYoTaishoshaHaakuParameter parameter = getParameter();
         GemmenShinseishoTaishohaakuProcessParameter processParameter = new GemmenShinseishoTaishohaakuProcessParameter();
         processParameter.set基準日(parameter.get基準日());
         processParameter.set新規更新区分(parameter.get新規更新区分());
@@ -118,7 +119,7 @@ public class GemmenShinseishoTaishohaakuFlow extends BatchFlowBase<ShinseishoHak
     }
 
     private ShinseishoHakkoTaishoJohoSakuseiProcessParameter createShinseishoHakkoTaishoJohoSakuseiProcessParameter() {
-        ShinseishoHakkoTaishoshaHaakuParameter parameter = getParameter();
+        DBD102010_GemmenGengakuShinseishoHakkoYoTaishoshaHaakuParameter parameter = getParameter();
         ShinseishoHakkoTaishoJohoSakuseiProcessParameter processParameter = new ShinseishoHakkoTaishoJohoSakuseiProcessParameter();
         processParameter.set基準日(parameter.get基準日());
         processParameter.set減免減額種類(parameter.get減免減額種類());
@@ -132,13 +133,13 @@ public class GemmenShinseishoTaishohaakuFlow extends BatchFlowBase<ShinseishoHak
         return processParameter;
     }
 
-    private GemmenGengakuTaishoShaHanteiYoukonSakuseiParameter getGemmenGengakuTaishoShaHanteiYoukonSakuseiBatchParameter() {
-        ShinseishoHakkoTaishoshaHaakuParameter parameter = getParameter();
-        return new GemmenGengakuTaishoShaHanteiYoukonSakuseiParameter(parameter.get所得年度());
+    private DBDZ00001_GemmenGengakuTaishoshaHanteiYoKonkyoSakuseiParameter getGemmenGengakuTaishoShaHanteiYoukonSakuseiBatchParameter() {
+        DBD102010_GemmenGengakuShinseishoHakkoYoTaishoshaHaakuParameter parameter = getParameter();
+        return new DBDZ00001_GemmenGengakuTaishoshaHanteiYoKonkyoSakuseiParameter(parameter.get所得年度());
     }
 
     private KousinSinseiTaishougaishaJohoProcessParameter createKousinSinseiTaishougaishaJohoProcessParameter() {
-        ShinseishoHakkoTaishoshaHaakuParameter parameter = getParameter();
+        DBD102010_GemmenGengakuShinseishoHakkoYoTaishoshaHaakuParameter parameter = getParameter();
         KousinSinseiTaishougaishaJohoProcessParameter processParameter = new KousinSinseiTaishougaishaJohoProcessParameter();
         processParameter.set基準日(parameter.get基準日());
         processParameter.set減免減額種類(parameter.get減免減額種類());

@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1080001;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD102010.DBD102010_GemmenGengakuShinseishoHakkoYoTaishoshaHaakuParameter;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.common.RiyoshaFutanDankaiHanni;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd1080001.ShinseishoHakkoTaishoshaHaakuParameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1080001.ShinseishoHakkoTaishoshaHaakuParameterMainDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbz.business.config.HizukeConfig;
@@ -86,8 +86,8 @@ public class DBD1080001Handler {
      *
      * @return ShinseishoHakkoTaishoshaHaakuParameter parameter
      */
-    public ShinseishoHakkoTaishoshaHaakuParameter getParameter() {
-        ShinseishoHakkoTaishoshaHaakuParameter parameter = new ShinseishoHakkoTaishoshaHaakuParameter();
+    public DBD102010_GemmenGengakuShinseishoHakkoYoTaishoshaHaakuParameter getParameter() {
+        DBD102010_GemmenGengakuShinseishoHakkoYoTaishoshaHaakuParameter parameter = new DBD102010_GemmenGengakuShinseishoHakkoYoTaishoshaHaakuParameter();
         RString 新規更新区分 = taishoshaHaakuMainDiv.getParameters().getRadShinkiKoshiKubun().getSelectedValue();
         boolean 課税世帯の被保険者を含む = taishoshaHaakuMainDiv.getParameters().getChkContainsKazeiHihokensha().getSelectedValues().contains(new RString("課税世帯の被保険者を含む"));
 

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd1080001;
+package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD102010;
 
 import java.util.UUID;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd1080001.ShinseishoHakkoTaishoJohoSakuseiProcessParameter;
