@@ -67,6 +67,8 @@ public class KogakuServicehiJuryoininKeiyakuShoninService {
 
     private JuryoIninShoninKakuninshoIchiranEntity edit一覧表Entity(KogakuServicehiJuryoininKeiyakuShoninKakuninshoEntity entity, int ページ) {
         JuryoIninShoninKakuninshoIchiranEntity 一覧表Entity = new JuryoIninShoninKakuninshoIchiranEntity();
+        DbT7060KaigoJigyoshaEntity 介護事業者 = entity.get介護事業者();
+        AtenaJusho jigyoshaAddress = 介護事業者.getJigyoshaAddress();
         一覧表Entity.set連番(new RString(ページ));
         if (entity.get高額介護事業者().getHihokenshaNo() != null) {
             一覧表Entity.set被保険者番号(entity.get高額介護事業者().getHihokenshaNo().value());
@@ -74,15 +76,15 @@ public class KogakuServicehiJuryoininKeiyakuShoninService {
         if (entity.get名称() != null) {
             一覧表Entity.set被保険者氏名1(subString(entity.get名称().value(), ONE, FIFTEEN));
         }
-        if (entity.get名称() != null) {
-            一覧表Entity.set事業者所在地(subString(entity.get名称().value(), ONE, THIRTY_SIX));
+        if (jigyoshaAddress != null) {
+            一覧表Entity.set事業者所在地(subString(jigyoshaAddress.value(), ONE, THIRTY_SIX));
         }
         一覧表Entity.set受付日(do日付編集パターン_4(entity.get高額介護事業者().getUketsukeYMD()));
         一覧表Entity.set承認開始日(do日付編集パターン_4(entity.get高額介護事業者().getJuryoininKaishiYMD()));
         一覧表Entity.set承認終了日(do日付編集パターン_4(entity.get高額介護事業者().getJuryoininShuryoYMD()));
         一覧表Entity.set承認終区分(ShoninKubun.toValue(entity.get高額介護事業者().getShoninKekkaKubun()).get名称());
         一覧表Entity.set被保険者氏名2(subString(entity.get名称().value(), SIXTEEN, THIRTY));
-        一覧表Entity.set事業者名称(subString(entity.get介護事業者().getJigyoshaName().value(), ONE, THIRTY_SIX));
+        一覧表Entity.set事業者名称(subString(介護事業者.getJigyoshaName().value(), ONE, THIRTY_SIX));
         一覧表Entity.set承認日(do日付編集パターン_4(entity.get高額介護事業者().getKetteiYMD()));
         一覧表Entity.set利用サービス内容(利用サービス内容);
         return 一覧表Entity;

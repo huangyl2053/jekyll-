@@ -99,8 +99,8 @@ public class KogakuShikyuFushikyuKetteishaIchiranSource implements IReportSource
 
         printTimeStamp,
         kokuhorenName,
-        hokenshaName,
-        hokenshaNo,
+        shoKisaiHokenshaName,
+        shoKisaiHokenshaNo,
         shutsuryokujun1,
         shutsuryokujun2,
         shutsuryokujun3,

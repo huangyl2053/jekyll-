@@ -669,8 +669,6 @@
             事業者作成."keikakuJigyoshaNo" AS 事業者作成_計画事業者番号,
             計画事業者."jigyoshaNo" AS 計画事業者_事業者番号 ,
             計画事業者."yukoKaishiYMD" AS 計画事業者_有効開始日,
-            計画事業者."jigyoshaNo" AS 計画事業者_事業者番号 ,
-            計画事業者."jigyoshaName" AS 計画事業者_事業者名称,
             計画事業者."jigyoshaName" AS 計画事業者_事業者名称,
             計画事業者."jigyoshaNameKana" AS 計画事業者_事業者名称カナ,
             計画事業者代表者."daihyoshaShimei" AS 計画事業者代表者_代表者名,

@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
@@ -70,7 +69,6 @@ public class HokenshaKyufujissekiOutListSakuseiProcess extends BatchProcessBase<
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hokenshakyufujissekiout."
             + "IHokenshaKyufujissekiOutMapper.select処理結果リスト一時TBL");
 
-    @BatchWriter
     private CsvListWriter csvListWriter;
 
     @Override
@@ -124,21 +122,20 @@ public class HokenshaKyufujissekiOutListSakuseiProcess extends BatchProcessBase<
     }
 
     @Override
-    protected void createWriter() {
-        FileSpoolManager manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
-                EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        RString spoolWorkPath = manager.getEucOutputDirectry();
-        RString eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
-        csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).setNewLine(NewLine.CRLF)
-                .setDelimiter(コンマ)
-                .setEnclosure(ダブル引用符)
-                .setEncode(Encode.UTF_8withBOM)
-                .hasHeader(true).setHeader(headerList)
-                .build();
-    }
-
-    @Override
     protected void process(DbWT1002KokuhorenSakuseiErrorTempEntity entity) {
+        if (null == csvListWriter) {
+            FileSpoolManager manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
+                    EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+            RString spoolWorkPath = manager.getEucOutputDirectry();
+            RString eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
+            csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).setNewLine(NewLine.CRLF)
+                    .setDelimiter(コンマ)
+                    .setEnclosure(ダブル引用符)
+                    .setEncode(Encode.UTF_8withBOM)
+                    .hasHeader(true).setHeader(headerList)
+                    .build();
+        }
+
         List<RString> outputList = this.getCSVファイル(entity);
         csvListWriter.writeLine(this.toBodyList(outputList));
     }
@@ -191,7 +188,9 @@ public class HokenshaKyufujissekiOutListSakuseiProcess extends BatchProcessBase<
 
     @Override
     protected void afterExecute() {
-        csvListWriter.close();
+        if (null != csvListWriter) {
+            csvListWriter.close();
+        }
     }
 
     private RString getColumnValue(IDbColumnMappable column) {

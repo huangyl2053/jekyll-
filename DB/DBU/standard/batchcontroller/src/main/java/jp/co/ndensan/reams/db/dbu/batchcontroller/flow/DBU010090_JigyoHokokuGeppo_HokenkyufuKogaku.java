@@ -51,7 +51,7 @@ public class DBU010090_JigyoHokokuGeppo_HokenkyufuKogaku extends BatchFlowBase<D
 
     @Override
     protected void defineFlow() {
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc,
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
                 new EucEntityId("DBU060700"), UzUDE0831EucAccesslogFileType.Csv);
         parameter = getParameter();
         parameter.setCsvFilePath(manager.getEucOutputDirectry());

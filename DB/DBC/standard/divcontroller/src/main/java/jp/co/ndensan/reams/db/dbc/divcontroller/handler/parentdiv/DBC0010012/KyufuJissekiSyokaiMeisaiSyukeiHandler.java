@@ -37,9 +37,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  */
 public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
 
-    private static final FlexibleYearMonth 平成24年4月 = new FlexibleYearMonth("201204");
     private static final FlexibleYearMonth 平成27年4月 = new FlexibleYearMonth("201504");
-    private static final RString 任意設定可 = new RString("2");
     private static final RString 非活性 = new RString("0");
     private static final RString TEXT_後 = new RString("後");
     private static final RString TEXT_前月 = new RString("前月");
@@ -68,17 +66,14 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
      * @param 集計情報リスト List<KyufujissekiShukei>
      * @param 明細情報リスト List<KyufujissekiMeisaiBusiness>
      * @param 明細情報特例リスト List<KyufujissekiMeisaiJushochiTokurei>
-     * @param 被保険者番号 HihokenshaNo
      * @param 整理番号 RString
      * @param サービス提供年月 FlexibleYearMonth
      * @param 様式番号 RString
-     * @param 識別番号 NyuryokuShikibetsuNo
      * @param 事業者番号 RString
      */
     public void onLoad(List<KyufujissekiShukei> 集計情報リスト, List<KyufujissekiMeisaiBusiness> 明細情報リスト,
-            List<KyufujissekiMeisaiJushochiTokurei> 明細情報特例リスト, HihokenshaNo 被保険者番号, RString 整理番号,
-            FlexibleYearMonth サービス提供年月, RString 様式番号, NyuryokuShikibetsuNo 識別番号, RString 事業者番号) {
-        div.getCcdKyufuJissekiHeader().initialize(被保険者番号, サービス提供年月, 整理番号, 識別番号);
+            List<KyufujissekiMeisaiJushochiTokurei> 明細情報特例リスト, RString 整理番号,
+            FlexibleYearMonth サービス提供年月, RString 様式番号, RString 事業者番号) {
         set明細情報の表示制御(様式番号, サービス提供年月);
         set明細情報特例の表示制御(様式番号, サービス提供年月);
         setDataGrid総計(get給付実績集計情報(集計情報リスト, 整理番号, 事業者番号, 様式番号, checkDate(サービス提供年月)),
@@ -298,13 +293,13 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
     /**
      * change事業者です。
      *
-     * @param date RString
+     * @param data RString
      * @param 事業者番号リスト List<KyufuJissekiHedajyoho2>
      * @param 集計情報リスト List<KyufujissekiShukei>
      * @param 明細情報リスト List<KyufujissekiMeisaiBusiness>
      * @param 明細情報特例リスト List<KyufujissekiMeisaiJushochiTokurei>
      */
-    public void change事業者(RString date, List<KyufuJissekiHedajyoho2> 事業者番号リスト,
+    public void change事業者(RString data, List<KyufuJissekiHedajyoho2> 事業者番号リスト,
             List<KyufujissekiShukei> 集計情報リスト, List<KyufujissekiMeisaiBusiness> 明細情報リスト,
             List<KyufujissekiMeisaiJushochiTokurei> 明細情報特例リスト) {
         RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
@@ -319,7 +314,7 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         set明細情報特例の表示制御(様式番号, new FlexibleYearMonth(サービス提供年月));
         int index = get事業者番号index(事業者番号リスト, 整理番号, 事業者番号, 様式番号, サービス提供年月, 実績区分コード);
         int i;
-        if (TEXT_前事業者.equals(date)) {
+        if (TEXT_前事業者.equals(data)) {
             i = -1;
         } else {
             i = 1;
