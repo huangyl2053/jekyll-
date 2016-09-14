@@ -231,7 +231,7 @@ public class KogakuGassanShikyuShinseiTorokuPanel {
             ViewStateHolder.put(ViewStateKeys.照会モード, null);
             return ResponseData.of(div).forwardWithEventName(DBC1100012TransitionEventName.選択).respond();
         }
-        if (!new RString(DbcQuestionMessages.高額合算支給申請検索_訂正.getMessage().getCode())
+        if (!ResponseHolder.isReRequest() && !new RString(DbcQuestionMessages.高額合算支給申請検索_訂正.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())) {
             return ResponseData.of(div).addMessage(DbcQuestionMessages.高額合算支給申請検索_処理不可.getMessage()).respond();
         }
