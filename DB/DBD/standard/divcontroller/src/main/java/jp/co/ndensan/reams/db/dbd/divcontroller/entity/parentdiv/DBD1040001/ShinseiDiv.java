@@ -44,6 +44,12 @@ public class ShinseiDiv extends Panel {
     private RString subGyomuCode;
     @JsonProperty("sampleBunshoGroupCode")
     private RString sampleBunshoGroupCode;
+    @JsonProperty("txtShikibetsuCode")
+    private RString txtShikibetsuCode;
+    @JsonProperty("txtShotokuKijunYMDHMS")
+    private RString txtShotokuKijunYMDHMS;
+    @JsonProperty("subBunsho")
+    private RString subBunsho;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -211,6 +217,60 @@ public class ShinseiDiv extends Panel {
     @JsonProperty("sampleBunshoGroupCode")
     public void setSampleBunshoGroupCode(RString sampleBunshoGroupCode) {
         this.sampleBunshoGroupCode = sampleBunshoGroupCode;
+    }
+
+    /*
+     * gettxtShikibetsuCode
+     * @return txtShikibetsuCode
+     */
+    @JsonProperty("txtShikibetsuCode")
+    public RString getTxtShikibetsuCode() {
+        return txtShikibetsuCode;
+    }
+
+    /*
+     * settxtShikibetsuCode
+     * @param txtShikibetsuCode txtShikibetsuCode
+     */
+    @JsonProperty("txtShikibetsuCode")
+    public void setTxtShikibetsuCode(RString txtShikibetsuCode) {
+        this.txtShikibetsuCode = txtShikibetsuCode;
+    }
+
+    /*
+     * gettxtShotokuKijunYMDHMS
+     * @return txtShotokuKijunYMDHMS
+     */
+    @JsonProperty("txtShotokuKijunYMDHMS")
+    public RString getTxtShotokuKijunYMDHMS() {
+        return txtShotokuKijunYMDHMS;
+    }
+
+    /*
+     * settxtShotokuKijunYMDHMS
+     * @param txtShotokuKijunYMDHMS txtShotokuKijunYMDHMS
+     */
+    @JsonProperty("txtShotokuKijunYMDHMS")
+    public void setTxtShotokuKijunYMDHMS(RString txtShotokuKijunYMDHMS) {
+        this.txtShotokuKijunYMDHMS = txtShotokuKijunYMDHMS;
+    }
+
+    /*
+     * getsubBunsho
+     * @return subBunsho
+     */
+    @JsonProperty("subBunsho")
+    public RString getSubBunsho() {
+        return subBunsho;
+    }
+
+    /*
+     * setsubBunsho
+     * @param subBunsho subBunsho
+     */
+    @JsonProperty("subBunsho")
+    public void setSubBunsho(RString subBunsho) {
+        this.subBunsho = subBunsho;
     }
 
     /*
