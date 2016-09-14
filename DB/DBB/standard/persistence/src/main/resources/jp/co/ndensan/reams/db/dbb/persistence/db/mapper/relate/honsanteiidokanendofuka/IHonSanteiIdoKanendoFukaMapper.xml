@@ -62,8 +62,8 @@
         ON
         宛名."setaiCode" = T."setaiCode"
         WHERE
-        B."shikakuSoshitsuYMD" IS NULL
-        OR  B."shikakuSoshitsuYMD" = ''
+        (B."shikakuSoshitsuYMD" IS NOT NULL
+         AND  B."shikakuSoshitsuYMD" <![CDATA[<>]]> '')
         OR  #{ choteiNendoYMD } <![CDATA[<=]]> B."shikakuSoshitsuYMD" 
     </select>
     
