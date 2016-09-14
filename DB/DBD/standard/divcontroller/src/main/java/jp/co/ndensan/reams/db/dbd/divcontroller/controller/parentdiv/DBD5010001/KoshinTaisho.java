@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD5010001
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd511002.NinshiuUpdatebatctParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD511002.DBD511002_KoshinOshiraseTsuchiParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5010001.DBD5010001StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5010001.KoshinTaishoDiv;
@@ -191,9 +191,9 @@ public class KoshinTaisho {
      * @param div KoshinTaishoDiv
      * @return ResponseData<NinshiuUpdatebatctParameter>
      */
-    public ResponseData<NinshiuUpdatebatctParameter> onClick_cyoupuButton(KoshinTaishoDiv div) {
+    public ResponseData<DBD511002_KoshinOshiraseTsuchiParameter> onClick_cyoupuButton(KoshinTaishoDiv div) {
         KoshinTaishoValidationHandler validationHandler = new KoshinTaishoValidationHandler();
-        NinshiuUpdatebatctParameter parameter = new NinshiuUpdatebatctParameter();
+        DBD511002_KoshinOshiraseTsuchiParameter parameter = new DBD511002_KoshinOshiraseTsuchiParameter();
         validationHandler.onCilck_btnBatchRegister(parameter, div);
         return ResponseData.of(parameter).respond();
     }

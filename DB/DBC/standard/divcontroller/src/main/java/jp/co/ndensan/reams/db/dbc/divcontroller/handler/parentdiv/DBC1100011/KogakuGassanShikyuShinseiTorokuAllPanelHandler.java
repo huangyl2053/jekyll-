@@ -309,8 +309,21 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         }
         div.getTxtTaishoKeisanKikanYMD().setToValue(
                 new RDate(new RString(Integer.parseInt(申請対象年度.toString()) + INT_1).concat(DATE_0731).toString()));
-        //TODO QA1512
-//        RDate 計算期間FROM = div.getTxtTaishoKeisanKikanYMD().getFromValue();
+        RDate 計算期間FROM = div.getTxtTaishoKeisanKikanYMD().getFromValue();
+        RDate 資格取得年月日 = isNullOrEmptyFlexibleDate(div.getCcdKaigoShikakuKihon().get資格取得年月日());
+        if (資格取得年月日 != null && 資格取得年月日.compareTo(計算期間FROM) <= INT_0) {
+            div.getTxtKanyuKikanYMD().setFromValue(計算期間FROM);
+        } else {
+            div.getTxtKanyuKikanYMD().setFromValue(資格取得年月日);
+        }
+        RDate 計算期間TO = div.getTxtTaishoKeisanKikanYMD().getToValue();
+        RDate 資格喪失年月日 = isNullOrEmptyFlexibleDate(div.getCcdKaigoShikakuKihon().get資格喪失年月日());
+        if (資格喪失年月日 != null && 計算期間TO.compareTo(資格喪失年月日) <= 0) {
+            div.getTxtKanyuKikanYMD().setToValue(計算期間TO);
+        } else {
+            div.getTxtKanyuKikanYMD().setToValue(資格喪失年月日);
+        }
+        div.getTxtShikakuSoshitsuYMD().setValue(資格喪失年月日);
         申請情報パネル制御(false);
         申請登録パネル制御(false);
     }
@@ -547,8 +560,8 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
     public KogakuGassanShinseishoHoji 高額合算申請書編集(KogakuGassanShinseishoResult 高額合算申請書,
             KogakuGassanShinseishoHoji 高額合算申請書保持, RString 高額合算申請書状態,
             KogakuGassanShinseishoDataResult 引き継ぎデータ, TaishoshaKey 対象者) {
-        RString 整理番号Next = Saiban.get(SubGyomuCode.DBC介護給付,
-                SaibanHanyokeyName.支給申請書整理番号.getコード(), 高額合算申請書保持.get対象年度()).nextString();
+        RString 整理番号Next = Saiban.get(SubGyomuCode.DBC介護給付, SaibanHanyokeyName.支給申請書整理番号.getコード(),
+                new FlexibleYear(div.getDdlShinseiTaishoNendo().getSelectedKey())).nextString();
         if (高額合算申請書 == null) {
             KogakuGassanShinseishoResult 高額合算申請書New = new KogakuGassanShinseishoResult();
             高額合算申請書New.set状態(追加);

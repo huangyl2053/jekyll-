@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
 /**
  * 帳票設計_DBC200027_高額合算支給申請書情報送付一覧表 のBuilderクラスです。
  *
- * @author DBC-2630-040 zhengshenlei
+ * @reamsid_L DBC-2630-040 zhengshenlei
  */
 public interface IGassanShikyuShinseishoJohoSofuIchiranBuilder extends IReportBuilder<GassanShikyuShinseishoJohoSofuIchiranSource> {
 

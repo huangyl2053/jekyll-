@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--@reamsid_L DBD-2030-020 x_miaocl-->
-<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.ninshiuUpdate.INinshiuUpdateMapper">
-    <resultMap id="resultMap_get帳票出力用情報取得" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd511002.NinshiuUpdateEntity" autoMapping="true">
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.koshinoshirasetsuchi.IKoshinOshiraseTsuchiMapper">
+    <resultMap id="resultMap_get帳票出力用情報取得" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd511002.KoshinOshiraseTsuchiUpdateEntity" autoMapping="true">
         <result property="koroshoIfShikibetsuCode" column="厚労省IF識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="hihokenshaNo" column="被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="hihokenshaName" column="被保険者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
@@ -31,7 +31,7 @@
     </resultMap>
     <select resultOrdered="true" id="get帳票出力用情報取得"  
             resultMap="resultMap_get帳票出力用情報取得" 
-            parameterType="jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd511002.NinshiuUpdateMyBatisParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd511002.KoshinOshiraseTsuchiMyBatisParameter" fetchSize="500">
         SELECT
         要介護認定申請情報."koroshoIfShikibetsuCode" AS 厚労省IF識別コード,
         要介護認定申請情報."hihokenshaNo" AS 被保険者番号,

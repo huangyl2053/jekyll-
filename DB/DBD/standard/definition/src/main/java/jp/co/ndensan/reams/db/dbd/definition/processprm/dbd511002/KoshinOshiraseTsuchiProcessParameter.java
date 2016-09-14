@@ -6,20 +6,20 @@
 package jp.co.ndensan.reams.db.dbd.definition.processprm.dbd511002;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd511002.NinshiuUpdateMyBatisParameter;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd511002.KoshinOshiraseTsuchiMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 更新未申請者把握リスト作成_バッチ処理クラスパラメータクラスです。
+ * 認定更新お知らせ通知書発行_パラメータクラスです。
  *
  * @reamsid_L DBD-2030-020 x_miaocl
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class NinshiuUpdateProcessParameter implements IBatchProcessParameter {
+public class KoshinOshiraseTsuchiProcessParameter implements IBatchProcessParameter {
 
     private List<RString> 申請書管理番号リスト;
     private RString 出力対象区分;
@@ -37,7 +37,7 @@ public class NinshiuUpdateProcessParameter implements IBatchProcessParameter {
      * @param 通知書発行日 通知書発行日
      * @param 出力順 出力順
      */
-    public NinshiuUpdateProcessParameter(
+    public KoshinOshiraseTsuchiProcessParameter(
             List<RString> 申請書管理番号リスト, RString 出力対象区分,
             FlexibleDate 抽出対象期間_開始, FlexibleDate 抽出対象期間_終了,
             FlexibleDate 通知書発行日, RString 出力順) {
@@ -50,13 +50,14 @@ public class NinshiuUpdateProcessParameter implements IBatchProcessParameter {
 
     }
 
-   /**
-    * バッチMybatisパラメターを取得します．
-    * @param 出力順 出力順
-    * @return  NinshiuUpdateMyBatisParameter
-    */
-    public NinshiuUpdateMyBatisParameter toNinshiuUpdateMyBatisParameter(RString 出力順) {
-        return new NinshiuUpdateMyBatisParameter(
+    /**
+     * バッチMybatisパラメターを取得します．
+     *
+     * @param 出力順 出力順
+     * @return KoshinOshiraseTsuchiMyBatisParameter
+     */
+    public KoshinOshiraseTsuchiMyBatisParameter toNinshiuUpdateMyBatisParameter(RString 出力順) {
+        return new KoshinOshiraseTsuchiMyBatisParameter(
                 申請書管理番号リスト,
                 出力対象区分,
                 抽出対象期間_開始,
