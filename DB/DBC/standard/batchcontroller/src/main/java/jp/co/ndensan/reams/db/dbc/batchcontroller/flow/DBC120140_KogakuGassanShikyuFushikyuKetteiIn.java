@@ -156,6 +156,9 @@ public class DBC120140_KogakuGassanShikyuFushikyuKetteiIn
             if (null != returnEntity38B) {
                 executeStep(取込済ファイル削除38B);
             }
+            if (null != returnEntity38G) {
+                executeStep(取込済ファイル削除38G);
+            }
         }
 
     }
