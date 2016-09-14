@@ -87,7 +87,7 @@ public class KogakuServicehiSofuIchiranSource implements IReportSource {
     @ReportItem(name = "listLower_9", length = 20, order = 33)
     public RString listLower_9;
     @ReportPerson(id = "A")
-    @ReportItem(name = "shikibetsuCode", length = 15)
+    @ReportItem(name = "shikibetsuCode", length = 15, order = 34)
     public RString shikibetsuCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">

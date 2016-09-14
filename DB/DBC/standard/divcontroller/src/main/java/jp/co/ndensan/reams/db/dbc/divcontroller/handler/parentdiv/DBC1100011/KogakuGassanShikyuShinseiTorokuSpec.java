@@ -358,14 +358,14 @@ public enum KogakuGassanShikyuShinseiTorokuSpec implements IPredicate<KogakuGass
 
         public static boolean is資格喪失チェック1(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
             RDate 資格喪失日 = div.getTxtShikakuSoshitsuYMD().getValue();
-            boolean flg1 = 資格喪失日 == null || 資格喪失日.toDateString().isNullOrEmpty();
+            boolean flg1 = 資格喪失日 == null || RString.isNullOrEmpty(資格喪失日.toDateString());
             boolean flg2 = div.getDdlShikakuSoshitsuJiyu().getSelectedIndex() != INT_0;
             return !(flg1 && flg2);
         }
 
         public static boolean is資格喪失チェック2(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
             RDate 資格喪失日 = div.getTxtShikakuSoshitsuYMD().getValue();
-            boolean flg1 = 資格喪失日 != null && !資格喪失日.toDateString().isNullOrEmpty();
+            boolean flg1 = 資格喪失日 != null && !RString.isNullOrEmpty(資格喪失日.toDateString());
             boolean flg2 = div.getDdlShikakuSoshitsuJiyu().getSelectedIndex() == 0;
             return !(flg1 && flg2);
         }
