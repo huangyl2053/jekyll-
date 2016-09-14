@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.biz.BanchiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Katagaki;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -233,14 +233,17 @@ public class DBB021051DataUtil {
      * @param parameter DBB021051ProcessParameter
      */
     public void intProcessParameter(KoikiZenShichosonJoho koikiZenShichosonJoho, DBB021051ProcessParameter parameter) {
-        if (koikiZenShichosonJoho == null || parameter == null) {
+        if (parameter == null) {
+            return;
+        }
+        parameter.set市町村指定に市町村コード(get市町村指定に市町村コード(parameter.get市町村指定()));
+        parameter.set市町村指定に市町村名称(get市町村指定に市町村名称(parameter.get市町村指定()));
+        if (koikiZenShichosonJoho == null) {
             return;
         }
         parameter.set市町村名称(koikiZenShichosonJoho.get市町村名称());
         parameter.set都道府県名称(koikiZenShichosonJoho.get都道府県名称());
         parameter.set郡名称(koikiZenShichosonJoho.get郡名称());
-        parameter.set市町村指定に市町村コード(get市町村指定に市町村コード(parameter.get市町村指定()));
-        parameter.set市町村指定に市町村名称(get市町村指定に市町村名称(parameter.get市町村指定()));
     }
 
     /**
@@ -272,7 +275,7 @@ public class DBB021051DataUtil {
             DBB021051ShoriKekkaListTempEntity entity, boolean firstFlag) {
         DBB021051ShoriKekkaKakuninListCSVEntity result = new DBB021051ShoriKekkaKakuninListCSVEntity();
         if (firstFlag) {
-            result.set作成日時(DateConverter.getDate12Time142(RDateTime.now()));
+            result.set作成日時(DateConverter.getDate12Time142(RDate.getNowDateTime()));
         }
         result.set処理名(entity.getエラー区分());
         result.set証記載保険者番号(entity.get証記載保険者番号());

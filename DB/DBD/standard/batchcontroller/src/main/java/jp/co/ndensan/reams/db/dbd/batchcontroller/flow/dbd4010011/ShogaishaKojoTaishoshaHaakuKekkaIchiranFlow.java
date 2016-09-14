@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.dbd4010011;
 
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd4010011.ShogaishaKojoTaishoshaHaakuKekkaIchiranCsvProcess;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd4010011.ShogaishaKojoTaishoshaHaakuKekkaIchiranProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD4010011.ShogaishaKojoTaishoshaHaakuKekkaIchiranCsvProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD4010011.ShogaishaKojoTaishoshaHaakuKekkaIchiranProcess;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd4010011.ShogaishaKojoTaishoshaHaakuKekkaIchiranParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd4010011.ShogaishaKojoTaishoshaHaakuKekkaIchiranProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;

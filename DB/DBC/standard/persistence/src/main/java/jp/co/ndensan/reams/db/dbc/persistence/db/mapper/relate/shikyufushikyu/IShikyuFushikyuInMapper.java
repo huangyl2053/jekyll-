@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.shikyufushikyu.ShikyuFushikyu
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 高額合算支給（不支給）決定通知書情報取込のDB方法です。
  *
  * @reamsid_L DBC-2690-010 zhangrui
  */

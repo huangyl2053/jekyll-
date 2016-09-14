@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD1080001;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd1080001.ShinseishoHakkoTaishoshaHaakuParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD102010.DBD102010_GemmenGengakuShinseishoHakkoYoTaishoshaHaakuParameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1080001.DBD1080001StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1080001.ShinseishoHakkoTaishoshaHaakuParameterMainDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1080001.DBD1080001Handler;
@@ -68,8 +68,8 @@ public class ShinseishoHakkoTaishoshaHaakuParameterMain {
      * @param div コントロールdiv
      * @return ResponseData<ShinseishoHakkoTaishoshaHaakuParameter>
      */
-    public ResponseData<ShinseishoHakkoTaishoshaHaakuParameter> onClick_btnJiKou(ShinseishoHakkoTaishoshaHaakuParameterMainDiv div) {
-        ShinseishoHakkoTaishoshaHaakuParameter parameter = getHandler(div).getParameter();
+    public ResponseData<DBD102010_GemmenGengakuShinseishoHakkoYoTaishoshaHaakuParameter> onClick_btnJiKou(ShinseishoHakkoTaishoshaHaakuParameterMainDiv div) {
+        DBD102010_GemmenGengakuShinseishoHakkoYoTaishoshaHaakuParameter parameter = getHandler(div).getParameter();
         return ResponseData.of(parameter).respond();
     }
 

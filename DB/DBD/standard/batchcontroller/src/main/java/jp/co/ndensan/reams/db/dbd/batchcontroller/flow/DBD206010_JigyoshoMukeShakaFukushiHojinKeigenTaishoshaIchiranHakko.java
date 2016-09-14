@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd206010.KeikakuJigyoshaJohoProcess;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd206010.SabisuKeikakuJigyoshaJohoProcess;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd206010.TyohyoShutuyukuProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD206010.KeikakuJigyoshaJohoProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD206010.SabisuKeikakuJigyoshaJohoProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD206010.TyohyoShutuyukuProcess;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD206010.DBD206010_JigyoshoMukeShakaFukushiHojinKeigenTaishoshaIchiranHakkoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.core.shafugemmentaisyousyalist.JigyoshaSentaku;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd206010.DBD206010ProcessParameter;

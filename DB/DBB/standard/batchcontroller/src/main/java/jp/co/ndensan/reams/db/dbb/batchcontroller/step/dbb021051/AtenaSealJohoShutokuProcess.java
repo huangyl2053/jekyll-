@@ -56,6 +56,15 @@ public class AtenaSealJohoShutokuProcess extends BatchProcessBase<AtenaSealJohoE
         dataUtil = new DBB021051DataUtil();
         hasError = new OutputParameter<>();
         hasError.setValue(false);
+        List<KoikiZenShichosonJoho> koikiZenShichosonJohoList
+                = KoikiShichosonJohoFinder.createInstance().koseiShichosonJoho().records();
+        KoikiZenShichosonJoho koikiZenShichosonJoho;
+        if (koikiZenShichosonJohoList == null || koikiZenShichosonJohoList.isEmpty()) {
+            koikiZenShichosonJoho = null;
+        } else {
+            koikiZenShichosonJoho = koikiZenShichosonJohoList.get(0);
+        }
+        dataUtil.intProcessParameter(koikiZenShichosonJoho, parameter);
     }
 
     @Override
@@ -69,19 +78,6 @@ public class AtenaSealJohoShutokuProcess extends BatchProcessBase<AtenaSealJohoE
                 宛名シール情報TABLENAME, DBB021051TableJohoTempEntity.class);
         処理結果リストTemp = new BatchEntityCreatedTempTableWriter<>(
                 処理結果リストTABLENAME, DBB021051ShoriKekkaListTempEntity.class);
-    }
-
-    @Override
-    protected void beforeProcess() {
-        List<KoikiZenShichosonJoho> koikiZenShichosonJohoList
-                = KoikiShichosonJohoFinder.createInstance().koseiShichosonJoho().records();
-        KoikiZenShichosonJoho koikiZenShichosonJoho;
-        if (koikiZenShichosonJohoList == null || koikiZenShichosonJohoList.isEmpty()) {
-            koikiZenShichosonJoho = null;
-        } else {
-            koikiZenShichosonJoho = koikiZenShichosonJohoList.get(0);
-        }
-        dataUtil.intProcessParameter(koikiZenShichosonJoho, parameter);
     }
 
     @Override
