@@ -79,7 +79,7 @@ public class KogakuServicehiKetteiTsuchishoTan {
     private static final ReportId 帳票分類ID = new ReportId("DBC100007_KogakuKetteiTsuchiSho");
     private static final RString 取り消し線ない = new RString("0");
     private static final RString 取り消し線あり = new RString("1");
-    private static final RString 定値_未設定 = new RString("未設定");
+    private static final RString 定値_未設定 = RString.EMPTY;
     private static final RString 定値_0 = new RString("0");
     private static final RString 定値_1 = new RString("1");
     private static final RString 全角のコンマ = new RString("，");
