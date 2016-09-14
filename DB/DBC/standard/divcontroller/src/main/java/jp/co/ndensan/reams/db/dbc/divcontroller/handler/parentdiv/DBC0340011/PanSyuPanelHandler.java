@@ -79,7 +79,7 @@ public class PanSyuPanelHandler {
         RDate 契約終了申請日 = div.getPanJyoken().getTxtKeyakuSinseibi().getToValue();
         RDate 契約開始決定日 = div.getPanJyoken().getTxtKeiyakuKeteibi().getFromValue();
         RDate 契約終了決定日 = div.getPanJyoken().getTxtKeiyakuKeteibi().getToValue();
-        RString 発行済 = div.getPanJyoken().getRadHakkouZumi().getSelectedValue();
+        RString 発行済 = div.getPanJyoken().getRadHakkouZumi().getSelectedKey();
         RDate 通知日 = div.getPanJyoken().getTxtTuutibi().getValue();
         RString 文書番号 = div.getPanJyoken().getCcdBunshoBango().get文書番号();
         Long 出力順ID = div.getCcdChohyoShutsuryokujun().get出力順ID();

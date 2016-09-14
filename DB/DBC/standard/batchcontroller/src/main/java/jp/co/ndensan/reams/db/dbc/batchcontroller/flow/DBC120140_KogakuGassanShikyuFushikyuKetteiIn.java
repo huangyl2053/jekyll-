@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.kokuhorenkyoutsuu.KokuhorenKyout
 import jp.co.ndensan.reams.db.dbc.business.core.kyufukanrihyoin.KyufukanrihyoInCsvReadReturnEntity;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120140.DBC120140_KogakuGassanShikyuFushikyuKetteiInParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorListType;
+import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc120140.ShikyuFushikyuSaishoriJunbiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuCsvFileReadProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDeleteReveicedFileProcessParameter;
@@ -136,14 +137,17 @@ public class DBC120140_KogakuGassanShikyuFushikyuKetteiIn
                 レコード件数合算 = flowEntity38G.getレコード件数合算();
             }
 
-            if (0 == flowEntity38B.get明細件数合算() && 0 == flowEntity38G.get明細件数合算()) {
+            if (0 == flowEntity38B.get明細件数合算()) {
                 executeStep(国保連インタフェース管理更新38B);
+                executeStep(国保連インタフェース管理更新38G);
                 executeStep(処理結果リスト作成);
             } else {
                 executeStep(口座情報登録);
                 executeStep(一覧データのみ登録);
                 executeStep(被保険者関連処理);
-                executeStep(再処理準備);
+                if (SaiShoriKubun.再処理.equals(getParameter().get再処理区分())) {
+                    executeStep(再処理準備);
+                }
                 executeStep(口座確認登録);
                 executeStep(最大履歴番号取得);
                 executeStep(マスタ登録);
@@ -155,6 +159,9 @@ public class DBC120140_KogakuGassanShikyuFushikyuKetteiIn
         } finally {
             if (null != returnEntity38B) {
                 executeStep(取込済ファイル削除38B);
+            }
+            if (null != returnEntity38G) {
+                executeStep(取込済ファイル削除38G);
             }
         }
 

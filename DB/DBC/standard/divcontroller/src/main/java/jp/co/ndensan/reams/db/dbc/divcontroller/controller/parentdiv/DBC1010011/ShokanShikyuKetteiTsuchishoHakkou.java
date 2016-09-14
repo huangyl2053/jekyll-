@@ -179,7 +179,7 @@ public class ShokanShikyuKetteiTsuchishoHakkou {
                 getDdlServiceTeikyoYM().getSelectedKey()), div.getDdlSeiriNO().getSelectedValue());
         RString 差額支給対象者区分 = RString.EMPTY;
         if (支払方法変更差止 != null) {
-            if (!支払方法変更差止.get差止控除番号().isEmpty()) {
+            if (支払方法変更差止.get差止控除番号() != null && !支払方法変更差止.get差止控除番号().isEmpty()) {
                 throw new ApplicationException(DbcErrorMessages.支払方法差止エラー.getMessage());
             } else if (shokanHanteiKekka.get差額金額合計() == null || shokanHanteiKekka.get差額金額合計().compareTo(Decimal.ZERO) == 0) {
                 throw new ApplicationException(DbcErrorMessages.差額支給エラー.getMessage());

@@ -31,14 +31,14 @@ public class TokuteiNyushoServiceHiShinseiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdKanryoMessage")
-    private KaigoKanryoMessageDiv ccdKanryoMessage;
-    @JsonProperty("ccdAtenaInfo")
-    private KaigoAtenaInfoDiv ccdAtenaInfo;
-    @JsonProperty("ccdKaigoKihon")
-    private KaigoShikakuKihonDiv ccdKaigoKihon;
     @JsonProperty("Shinsei")
     private ShinseiDiv Shinsei;
+    @JsonProperty("ccdKanryoMessage")
+    private KaigoKanryoMessageDiv ccdKanryoMessage;
+    @JsonProperty("ccdKaigoKihon")
+    private KaigoShikakuKihonDiv ccdKaigoKihon;
+    @JsonProperty("ccdAtenaInfo")
+    private KaigoAtenaInfoDiv ccdAtenaInfo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -46,33 +46,6 @@ public class TokuteiNyushoServiceHiShinseiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getccdKanryoMessage
-     * @return ccdKanryoMessage
-     */
-    @JsonProperty("ccdKanryoMessage")
-    public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
-        return ccdKanryoMessage;
-    }
-
-    /*
-     * getccdAtenaInfo
-     * @return ccdAtenaInfo
-     */
-    @JsonProperty("ccdAtenaInfo")
-    public IKaigoAtenaInfoDiv getCcdAtenaInfo() {
-        return ccdAtenaInfo;
-    }
-
-    /*
-     * getccdKaigoKihon
-     * @return ccdKaigoKihon
-     */
-    @JsonProperty("ccdKaigoKihon")
-    public IKaigoShikakuKihonDiv getCcdKaigoKihon() {
-        return ccdKaigoKihon;
-    }
-
     /*
      * getShinsei
      * @return Shinsei
@@ -89,6 +62,33 @@ public class TokuteiNyushoServiceHiShinseiDiv extends Panel {
     @JsonProperty("Shinsei")
     public void setShinsei(ShinseiDiv Shinsei) {
         this.Shinsei = Shinsei;
+    }
+
+    /*
+     * getccdKanryoMessage
+     * @return ccdKanryoMessage
+     */
+    @JsonProperty("ccdKanryoMessage")
+    public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
+        return ccdKanryoMessage;
+    }
+
+    /*
+     * getccdKaigoKihon
+     * @return ccdKaigoKihon
+     */
+    @JsonProperty("ccdKaigoKihon")
+    public IKaigoShikakuKihonDiv getCcdKaigoKihon() {
+        return ccdKaigoKihon;
+    }
+
+    /*
+     * getccdAtenaInfo
+     * @return ccdAtenaInfo
+     */
+    @JsonProperty("ccdAtenaInfo")
+    public IKaigoAtenaInfoDiv getCcdAtenaInfo() {
+        return ccdAtenaInfo;
     }
 
     /*

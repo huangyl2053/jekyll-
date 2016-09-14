@@ -117,7 +117,6 @@ public class DBC110100_SogojigyohiKeikasochiKagoMoshitateshoOut extends BatchFlo
             this.getHihokenshaAtena();
             executeStep(送付除外区分設定);
             executeStep(事業者名称取得);
-            //           this.getCityVillagesInformation();
             if (導入形態コード.is単一()) {
                 executeStep(市町村セキュリティ情報取得_単一);
             } else if (導入形態コード.is広域()) {

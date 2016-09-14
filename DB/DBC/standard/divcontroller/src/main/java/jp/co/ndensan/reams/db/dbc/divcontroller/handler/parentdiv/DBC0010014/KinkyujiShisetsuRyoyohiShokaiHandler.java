@@ -32,8 +32,6 @@ public class KinkyujiShisetsuRyoyohiShokaiHandler {
     private final KinkyujiShisetsuRyoyohiShokaiDiv div;
     private static final RString 後 = new RString("後");
     private static final RString ZERO = new RString("0");
-    private static final RString NI = new RString("2");
-    private static final FlexibleYearMonth 平成24年4月 = new FlexibleYearMonth("201204");
     private static final RString 前事業者 = new RString("前事業者");
     private static final RString 前月 = new RString("前月");
     private static final int INT_ZERO = 0;
@@ -227,21 +225,12 @@ public class KinkyujiShisetsuRyoyohiShokaiHandler {
         } else {
             div.getBtnMeisaiShukei().setDisabled(false);
         }
-        if (NI.equals(識別番号管理.get所定疾患施設療養設定区分())
-                && 平成24年4月.isBeforeOrEquals(サービス提供年月)) {
-            div.getBtnShoteiShikkanShisetsuRyoyo().setDisplayNone(false);
-            div.getBtnShoteiShikkanShisetsuRyoyo().setDisabled(true);
-            div.getBtnKinkyujiShisetsuRyoyo().setDisplayNone(true);
+        div.getBtnShoteiShikkanShisetsuRyoyo().setDisplayNone(true);
+        if (ZERO.equals(識別番号管理.get緊急時施設療養設定区分())) {
+            div.getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
         } else {
-            div.getBtnShoteiShikkanShisetsuRyoyo().setDisplayNone(true);
-            div.getBtnKinkyujiShisetsuRyoyo().setDisplayNone(false);
-            if (ZERO.equals(識別番号管理.get緊急時施設療養設定区分())) {
-                div.getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
-            } else {
-                div.getBtnKinkyujiShisetsuRyoyo().setDisabled(false);
-            }
+            div.getBtnKinkyujiShisetsuRyoyo().setDisabled(false);
         }
-        div.getBtnShoteiShikkanShisetsuRyoyo().setDisabled(true);
         if (ZERO.equals(識別番号管理.get食事費用設定区分())) {
             div.getBtnShokuji().setDisabled(true);
         } else {

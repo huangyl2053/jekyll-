@@ -125,7 +125,7 @@ public class NenreiKaikyubetsuYokaigodoJokyoProcess extends BatchProcessBase<Tou
                     Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
         } else {
             基準日 = parameter.get基準年月().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(
-                    Separator.JAPANESE).fillType(FillType.ZERO).getYearMonth();
+                    Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
         }
         RString 地区開始コード = RString.EMPTY;
         RString 地区終了コード = RString.EMPTY;

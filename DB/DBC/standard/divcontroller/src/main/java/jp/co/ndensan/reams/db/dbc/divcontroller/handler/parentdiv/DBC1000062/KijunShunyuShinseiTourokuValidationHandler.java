@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1000062.Kiju
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzWarningMessages;
 import jp.co.ndensan.reams.ua.uax.divcontroller.controller.testdriver.TestJukiAtenaValidation.ValidationDictionary;
 import jp.co.ndensan.reams.ua.uax.divcontroller.controller.testdriver.TestJukiAtenaValidation.ValidationDictionaryBuilder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -49,10 +48,6 @@ public class KijunShunyuShinseiTourokuValidationHandler {
     private static final RString MESSAGE_世帯員 = new RString("世帯員が0人の");
     private static final RString MESSAGE_世帯課税 = new RString("世帯課税が非課税の");
     private static final RString MESSAGE_宛先印字者 = new RString("世帯員１人に宛先印字者のチェックを付けて、宛先印字者を");
-    private static final RString MESSAGE_受給者または事業対象者 = new RString("世帯員に受給者または事業対象者がいませんが、登録して");
-    private static final RString MESSAGE_算定基準額 = new RString("算定基準額が課税所得、総収入額の結果と異なりますが、登録して");
-    private static final RString MESSAGE_世帯再算出 = new RString("「世帯コード」、「処理年度」、「世帯員把握基準」"
-            + "が変更していますが、登録して");
 
     /**
      * コンストラクタです。
@@ -93,36 +88,6 @@ public class KijunShunyuShinseiTourokuValidationHandler {
         return create明細GridDictionary().check(messages);
     }
 
-    /**
-     * 算定基準額バリデーションチェックです。
-     *
-     * @return バリデーション突合結果
-     */
-    public ValidationMessageControlPairs 算定基準額Validate() {
-        IValidationMessages messages = new ControlValidator(div).算定基準額Validate();
-        return create算定基準額Dictionary().check(messages);
-    }
-
-    /**
-     * 世帯再算出ボタン押下バリデーションチェックです。
-     *
-     * @return バリデーション突合結果
-     */
-    public ValidationMessageControlPairs 世帯再算出Validate() {
-        IValidationMessages messages = new ControlValidator(div).世帯再算出ボタン押下Validate();
-        return create世帯再算出Dictionary().check(messages);
-    }
-
-    /**
-     * 受給者事業対象者バリデーションチェックです。
-     *
-     * @return バリデーション突合結果
-     */
-    public ValidationMessageControlPairs 受給者事業対象者Validate() {
-        IValidationMessages messages = new ControlValidator(div).受給者事業対象者Validate();
-        return create受給者事業対象者Dictionary().check(messages);
-    }
-
     private ValidationDictionary createDictionary() {
         return new ValidationDictionaryBuilder()
                 .add(KijunShunyuShinseiTourokuValidationMessages.控除再算出チェックMessage)
@@ -150,24 +115,6 @@ public class KijunShunyuShinseiTourokuValidationHandler {
     private ValidationDictionary create明細GridDictionary() {
         return new ValidationDictionaryBuilder()
                 .add(KijunShunyuShinseiTourokuValidationMessages.宛先印字者チェックMessage)
-                .build();
-    }
-
-    private ValidationDictionary create世帯再算出Dictionary() {
-        return new ValidationDictionaryBuilder()
-                .add(KijunShunyuShinseiTourokuValidationMessages.世帯再算出ボタン押下チェックMessage)
-                .build();
-    }
-
-    private ValidationDictionary create算定基準額Dictionary() {
-        return new ValidationDictionaryBuilder()
-                .add(KijunShunyuShinseiTourokuValidationMessages.算定基準額のチェックMessage)
-                .build();
-    }
-
-    private ValidationDictionary create受給者事業対象者Dictionary() {
-        return new ValidationDictionaryBuilder()
-                .add(KijunShunyuShinseiTourokuValidationMessages.受給者事業対象者チェックMessage)
                 .build();
     }
 
@@ -240,48 +187,6 @@ public class KijunShunyuShinseiTourokuValidationHandler {
                     .messages());
             return messages;
         }
-
-        /**
-         * 世帯再算出ボタン押下のバリデーションチェックです。
-         *
-         * @return バリデーション突合結果
-         */
-        public IValidationMessages 世帯再算出ボタン押下Validate() {
-            IValidationMessages messages = ValidationMessagesFactory.createInstance();
-            messages.add(ValidateChain.validateStart(div)
-                    .ifNot(KijunShunyuShinseiTourokuSpec.世帯再算出ボタン押下チェック)
-                    .thenAdd(KijunShunyuShinseiTourokuValidationMessages.世帯再算出ボタン押下チェックMessage)
-                    .messages());
-            return messages;
-        }
-
-        /**
-         * 受給者事業対象者のバリデーションチェックです。
-         *
-         * @return バリデーション突合結果
-         */
-        public IValidationMessages 受給者事業対象者Validate() {
-            IValidationMessages messages = ValidationMessagesFactory.createInstance();
-            messages.add(ValidateChain.validateStart(div)
-                    .ifNot(KijunShunyuShinseiTourokuSpec.受給者事業対象者のチェック)
-                    .thenAdd(KijunShunyuShinseiTourokuValidationMessages.受給者事業対象者チェックMessage)
-                    .messages());
-            return messages;
-        }
-
-        /**
-         * 算定基準額のバリデーションチェックです。
-         *
-         * @return バリデーション突合結果
-         */
-        public IValidationMessages 算定基準額Validate() {
-            IValidationMessages messages = ValidationMessagesFactory.createInstance();
-            messages.add(ValidateChain.validateStart(div)
-                    .ifNot(KijunShunyuShinseiTourokuSpec.算定基準額のチェック)
-                    .thenAdd(KijunShunyuShinseiTourokuValidationMessages.算定基準額のチェックMessage)
-                    .messages());
-            return messages;
-        }
     }
 
     private static IdocheckMessages get入力値が不正Message(RString message, RString 開始, RString 終了) {
@@ -297,10 +202,7 @@ public class KijunShunyuShinseiTourokuValidationHandler {
         総収入額チェックMessage(UrErrorMessages.必須項目_追加メッセージあり, MESSAGE_総収入額.toString()),
         世帯員チェックMessage(UrErrorMessages.更新不可_汎用, MESSAGE_世帯員.toString()),
         世帯課税チェックMessage(UrErrorMessages.更新不可_汎用, MESSAGE_世帯課税.toString()),
-        宛先印字者チェックMessage(UrErrorMessages.未指定, MESSAGE_宛先印字者.toString()),
-        受給者事業対象者チェックMessage(DbzWarningMessages.確認, MESSAGE_受給者または事業対象者.toString()),
-        算定基準額のチェックMessage(DbzWarningMessages.確認, MESSAGE_算定基準額.toString()),
-        世帯再算出ボタン押下チェックMessage(DbzWarningMessages.確認, MESSAGE_世帯再算出.toString());
+        宛先印字者チェックMessage(UrErrorMessages.未指定, MESSAGE_宛先印字者.toString());
 
         private final Message message;
 

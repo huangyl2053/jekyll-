@@ -227,7 +227,7 @@ public class JikoFutangakushomeishoFrom2009OutputProcess extends BatchKeyBreakBa
             source.yubinBango = yubinNo.getEditedYubinNo();
         }
         RString choshaName = toiawasesakiEntity.getChoshaName();
-        if (!RString.isNullOrEmpty(choshaName)) {
+        if (choshaName != null && !RString.isNullOrEmpty(choshaName)) {
             source.choshaBushoName = choshaName.concat(RString.FULL_SPACE).concat(toiawasesakiEntity.getBushoName());
         }
         source.shozaichi = toiawasesakiEntity.getShozaichi();

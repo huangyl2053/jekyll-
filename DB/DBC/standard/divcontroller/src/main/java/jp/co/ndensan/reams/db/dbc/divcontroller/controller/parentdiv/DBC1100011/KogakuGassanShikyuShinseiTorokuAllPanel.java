@@ -79,8 +79,14 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
         }
         if (RSTRING_ONE.equals(高額合算申請書保持.get申請状態())) {
             handler.申請登録状態初期表示に設定();
+            div.getTxtIryoShikyuShinseishoSeiriBango2().setReadOnly(false);
+            div.getTxtIryoShikyuShinseishoSeiriBango3().setReadOnly(false);
+            div.getTxtIryoShikyuShinseishoSeiriBango4().setReadOnly(false);
             return ResponseData.of(div).setState(DBC1100011StateName.申請登録);
         } else if (RSTRING_TWO.equals(高額合算申請書保持.get申請状態()) || RSTRING_THREE.equals(高額合算申請書保持.get申請状態())) {
+            div.getTxtIryoShikyuShinseishoSeiriBango2().setReadOnly(true);
+            div.getTxtIryoShikyuShinseishoSeiriBango3().setReadOnly(true);
+            div.getTxtIryoShikyuShinseishoSeiriBango4().setReadOnly(true);
             return ResponseData.of(div).setState(DBC1100011StateName.変更取下げ);
         } else {
             return ResponseData.of(div).respond();
@@ -520,9 +526,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
 
     private void 排他解除(RString 前排他キー) {
         LockingKey key = new LockingKey(前排他キー);
-        if (!RealInitialLocker.tryGetLock(key)) {
-            throw new PessimisticLockingException();
-        }
+        RealInitialLocker.release(key);
     }
 
     private KogakuGassanShikyuShinseiTorokuAllPanelHandler getHandler(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {

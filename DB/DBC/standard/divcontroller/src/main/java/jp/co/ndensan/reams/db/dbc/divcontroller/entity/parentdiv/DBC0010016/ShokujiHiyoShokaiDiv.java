@@ -4,18 +4,23 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010016;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KyufuJissekiHeader.KyufuJissekiHeaderDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * ShokujiHiyoShokai のクラスファイル 
- * 
+ * ShokujiHiyoShokai のクラスファイル
+ *
  * @author 自動生成
  */
 public class ShokujiHiyoShokaiDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
@@ -490,7 +495,7 @@ public class ShokujiHiyoShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblTitle1(Label lblTitle1) {
+    public void setLblTitle1(Label lblTitle1) {
         this.getShokujiHiyoGokeiFromH1504Panel().setLblTitle1(lblTitle1);
     }
 
@@ -500,7 +505,7 @@ public class ShokujiHiyoShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblGokei1(Label lblGokei1) {
+    public void setLblGokei1(Label lblGokei1) {
         this.getShokujiHiyoGokeiFromH1504Panel().setLblGokei1(lblGokei1);
     }
 
@@ -510,7 +515,7 @@ public class ShokujiHiyoShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgShokujiHiyoGokeiFromH1504(DataGrid<dgShokujiHiyoGokeiFromH1504_Row> dgShokujiHiyoGokeiFromH1504) {
+    public void setDgShokujiHiyoGokeiFromH1504(DataGrid<dgShokujiHiyoGokeiFromH1504_Row> dgShokujiHiyoGokeiFromH1504) {
         this.getShokujiHiyoGokeiFromH1504Panel().setDgShokujiHiyoGokeiFromH1504(dgShokujiHiyoGokeiFromH1504);
     }
 
@@ -520,7 +525,7 @@ public class ShokujiHiyoShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblMeisai(Label lblMeisai) {
+    public void setLblMeisai(Label lblMeisai) {
         this.getShokujiHiyoGokeiFromH1504Panel().setLblMeisai(lblMeisai);
     }
 
@@ -530,7 +535,7 @@ public class ShokujiHiyoShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgShokujiHiyoMeisaiFromH1504(DataGrid<dgShokujiHiyoMeisaiFromH1504_Row> dgShokujiHiyoMeisaiFromH1504) {
+    public void setDgShokujiHiyoMeisaiFromH1504(DataGrid<dgShokujiHiyoMeisaiFromH1504_Row> dgShokujiHiyoMeisaiFromH1504) {
         this.getShokujiHiyoGokeiFromH1504Panel().setDgShokujiHiyoMeisaiFromH1504(dgShokujiHiyoMeisaiFromH1504);
     }
 
@@ -540,7 +545,7 @@ public class ShokujiHiyoShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblTitle2(Label lblTitle2) {
+    public void setLblTitle2(Label lblTitle2) {
         this.getShokujiHiyoToH1503Panel().setLblTitle2(lblTitle2);
     }
 
@@ -550,7 +555,7 @@ public class ShokujiHiyoShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLblGokei2(Label lblGokei2) {
+    public void setLblGokei2(Label lblGokei2) {
         this.getShokujiHiyoToH1503Panel().setLblGokei2(lblGokei2);
     }
 
@@ -560,7 +565,7 @@ public class ShokujiHiyoShokaiDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgShokujiHiyoToH1503(DataGrid<dgShokujiHiyoToH1503_Row> dgShokujiHiyoToH1503) {
+    public void setDgShokujiHiyoToH1503(DataGrid<dgShokujiHiyoToH1503_Row> dgShokujiHiyoToH1503) {
         this.getShokujiHiyoToH1503Panel().setDgShokujiHiyoToH1503(dgShokujiHiyoToH1503);
     }
 

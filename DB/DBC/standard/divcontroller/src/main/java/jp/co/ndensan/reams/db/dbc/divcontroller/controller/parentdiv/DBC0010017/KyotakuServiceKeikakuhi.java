@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho2;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiPrmBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiKyotakuServiceBusiness;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010017.DBC0010017TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010017.KyotakuServiceKeikakuhiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0010017.KyotakuServiceKeikakuhiHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.kyufujissekishokai.KyufuJissekiShokaiFinder;
@@ -73,11 +72,14 @@ public class KyotakuServiceKeikakuhi {
         NyuryokuShikibetsuNo 識別番号検索キー = ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class);
         getHandler(div).change年月(new RString("前月"), 給付実績居宅サービス計画費list, サービス提供年月,
                 整理番号, 被保険者番号, 識別番号検索キー);
+        FlexibleYearMonth 提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
+        ViewStateHolder.put(ViewStateKeys.サービス提供年月, 提供年月);
         RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
         RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();
-        List<KyufuJissekiHedajyoho2> 事業者番号リスト = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class).getCommonHeader().get給付実績ヘッダ情報2();
+        List<KyufuJissekiHedajyoho2> 事業者番号リスト = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報,
+                KyufuJissekiPrmBusiness.class).getCommonHeader().get給付実績ヘッダ情報2();
         getHandler(div).check事業者btn(事業者番号リスト, 整理番号, 事業者番号, 識別番号検索キー.value(),
-                div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString(), 実績区分コード);
+                提供年月.toDateString(), 実績区分コード);
         return createResponse(div);
     }
 
@@ -96,11 +98,14 @@ public class KyotakuServiceKeikakuhi {
         FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
         getHandler(div).change年月(new RString("次月"), 給付実績居宅サービス計画費list, サービス提供年月, 整理番号,
                 被保険者番号, 識別番号検索キー);
+        FlexibleYearMonth 提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
+        ViewStateHolder.put(ViewStateKeys.サービス提供年月, 提供年月);
         RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
         RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();
-        List<KyufuJissekiHedajyoho2> 事業者番号リスト = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class).getCommonHeader().get給付実績ヘッダ情報2();
+        List<KyufuJissekiHedajyoho2> 事業者番号リスト = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報,
+                KyufuJissekiPrmBusiness.class).getCommonHeader().get給付実績ヘッダ情報2();
         getHandler(div).check事業者btn(事業者番号リスト, 整理番号, 事業者番号, 識別番号検索キー.value(),
-                div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString(), 実績区分コード);
+                提供年月.toDateString(), 実績区分コード);
         return createResponse(div);
     }
 
@@ -132,137 +137,6 @@ public class KyotakuServiceKeikakuhi {
                 .get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class).getCsData_F();
         getHandler(div).change事業者(new RString("後事業者"), 事業者番号リスト, 給付実績居宅サービス計画費list);
         return createResponse(div);
-    }
-
-    /**
-     * 「基本情報」ボタンを押下、画面遷移する。
-     *
-     * @param div KyotakuServiceKeikakuhiDiv
-     * @return div
-     */
-    public ResponseData<KyotakuServiceKeikakuhiDiv> onClick_btnKihon(KyotakuServiceKeikakuhiDiv div) {
-
-        return ResponseData.of(div).forwardWithEventName(DBC0010017TransitionEventName.基本情報).respond();
-    }
-
-    /**
-     * 「明細_集計」ボタンを押下、画面遷移する。
-     *
-     * @param div KyotakuServiceKeikakuhiDiv
-     * @return div
-     */
-    public ResponseData<KyotakuServiceKeikakuhiDiv> onClick_btnMeisaiShukei(KyotakuServiceKeikakuhiDiv div) {
-
-        return ResponseData.of(div).forwardWithEventName(DBC0010017TransitionEventName.明細_集計).respond();
-    }
-
-    /**
-     * 「所定疾患施設療養費」ボタンを押下、画面遷移する。
-     *
-     * @param div KyotakuServiceKeikakuhiDiv
-     * @return div
-     */
-    public ResponseData<KyotakuServiceKeikakuhiDiv> onClick_btnShoteiShikkanShisetsuRyoyo(KyotakuServiceKeikakuhiDiv div) {
-        return ResponseData.of(div).forwardWithEventName(DBC0010017TransitionEventName.所定疾患施設療養費).respond();
-    }
-
-    /**
-     * 「特定診療費」ボタンを押下、画面遷移する。
-     *
-     * @param div KyotakuServiceKeikakuhiDiv
-     * @return div
-     */
-    public ResponseData<KyotakuServiceKeikakuhiDiv> onClick_btnTokuteiShinryo(KyotakuServiceKeikakuhiDiv div) {
-
-        return ResponseData.of(div).forwardWithEventName(DBC0010017TransitionEventName.特定診療費).respond();
-    }
-
-    /**
-     * 「食事費用」ボタンを押下、画面遷移する。
-     *
-     * @param div KyotakuServiceKeikakuhiDiv
-     * @return div
-     */
-    public ResponseData<KyotakuServiceKeikakuhiDiv> onClick_btnShokuji(KyotakuServiceKeikakuhiDiv div) {
-
-        return ResponseData.of(div).forwardWithEventName(DBC0010017TransitionEventName.食事費用).respond();
-    }
-
-    /**
-     * 「緊急時施設療養費」ボタンを押下、画面遷移する。
-     *
-     * @param div KyotakuServiceKeikakuhiDiv
-     * @return div
-     */
-    public ResponseData<KyotakuServiceKeikakuhiDiv> onClick_btnKinkyujiShisetsuRyoyo(KyotakuServiceKeikakuhiDiv div) {
-
-        return ResponseData.of(div).forwardWithEventName(DBC0010017TransitionEventName.緊急時施設療養費).respond();
-    }
-
-    /**
-     * 「福祉用具購入費」ボタンを押下、画面遷移する。
-     *
-     * @param div KyotakuServiceKeikakuhiDiv
-     * @return div
-     */
-    public ResponseData<KyotakuServiceKeikakuhiDiv> onClick_btnFukushiYoguKonyu(KyotakuServiceKeikakuhiDiv div) {
-
-        return ResponseData.of(div).forwardWithEventName(DBC0010017TransitionEventName.福祉用具購入費).respond();
-    }
-
-    /**
-     * 「住宅改修費」ボタンを押下、画面遷移する。
-     *
-     * @param div KyotakuServiceKeikakuhiDiv
-     * @return div
-     */
-    public ResponseData<KyotakuServiceKeikakuhiDiv> onClick_btnJutakuKaishu(KyotakuServiceKeikakuhiDiv div) {
-
-        return ResponseData.of(div).forwardWithEventName(DBC0010017TransitionEventName.住宅改修費).respond();
-    }
-
-    /**
-     * 「高額介護サービス費」ボタンを押下、画面遷移する。
-     *
-     * @param div KyotakuServiceKeikakuhiDiv
-     * @return div
-     */
-    public ResponseData<KyotakuServiceKeikakuhiDiv> onClick_btnKogakuKaigoService(KyotakuServiceKeikakuhiDiv div) {
-
-        return ResponseData.of(div).forwardWithEventName(DBC0010017TransitionEventName.高額介護サービス費).respond();
-    }
-
-    /**
-     * 「特定入所者費用」ボタンを押下、画面遷移する。
-     *
-     * @param div KyotakuServiceKeikakuhiDiv
-     * @return div
-     */
-    public ResponseData<KyotakuServiceKeikakuhiDiv> onClick_btnTokuteiNyushosha(KyotakuServiceKeikakuhiDiv div) {
-
-        return ResponseData.of(div).forwardWithEventName(DBC0010017TransitionEventName.特定入所者費用).respond();
-    }
-
-    /**
-     * 「ケアマネジメント費」ボタンを押下、画面遷移する。
-     *
-     * @param div KyotakuServiceKeikakuhiDiv
-     * @return div
-     */
-    public ResponseData<KyotakuServiceKeikakuhiDiv> onClick_btnCareManagement(KyotakuServiceKeikakuhiDiv div) {
-
-        return ResponseData.of(div).forwardWithEventName(DBC0010017TransitionEventName.ケアマネジメント費).respond();
-    }
-
-    /**
-     * 「社福軽減費」ボタンを押下、画面遷移する。
-     *
-     * @param div KyotakuServiceKeikakuhiDiv
-     * @return div
-     */
-    public ResponseData<KyotakuServiceKeikakuhiDiv> onClick_btnShafukuKeigen(KyotakuServiceKeikakuhiDiv div) {
-
-        return ResponseData.of(div).forwardWithEventName(DBC0010017TransitionEventName.社福軽減費).respond();
     }
 
     private KyotakuServiceKeikakuhiHandler getHandler(KyotakuServiceKeikakuhiDiv div) {

@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @reamsid_L DBC-3340-030 jiangxiaolong -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.servicecoderiyojokyo.IServicecodeRiyojokyoMapper">
+    <select resultOrdered="true" id="get給付実績明細情報"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.servicecoderiyojokyo.KyufuJissekiMeisaiGetMybatisParameter"
+            resultMap="resultMap_KyufuJissekiMeisaiEntity" fetchSize="500">
+        SELECT
+            T1."hiHokenshaNo" AS T1_hiHokenshaNo,
+            T1."inputShikibetsuNo" AS T1_inputShikibetsuNo,
+            T1."serviceTeikyoYM" AS T1_serviceTeikyoYM,
+            T1."jigyoshoNo" AS T1_jigyoshoNo,
+            T1."toshiNo" AS T1_toshiNo,
+            T1."yoKaigoJotaiKubunCode" AS T1_yoKaigoJotaiKubunCode,
+            T2."atoTanisu" AS T2_atoTanisu,
+            T2."atoNissuKaisu" AS T2_atoNissuKaisu,
+            T2."atoServiceTanisu" AS T2_atoServiceTanisu,
+            T2."serviceShuruiCode" AS T2_serviceShuruiCode,
+            T2."serviceKomokuCode" AS T2_serviceKomokuCode
+            FROM
+            (SELECT
+            *
+            FROM rgdb."DbT3017KyufujissekiKihon" AS T9
+            INNER JOIN
+            (SELECT 
+            MAX("DbT3017KyufujissekiKihon"."shinsaYM") AS 最新審査年月
+            FROM
+            rgdb."DbT3017KyufujissekiKihon"
+            GROUP BY
+            "DbT3017KyufujissekiKihon"."inputShikibetsuNo",
+            "DbT3017KyufujissekiKihon"."hiHokenshaNo",
+            "DbT3017KyufujissekiKihon"."serviceTeikyoYM",
+            "DbT3017KyufujissekiKihon"."jigyoshoNo",
+            "DbT3017KyufujissekiKihon"."toshiNo") AS T0
+            ON T9."shinsaYM" = 最新審査年月) AS T1
+            LEFT OUTER JOIN
+            rgdb."DbT3018KyufujissekiMeisai" AS T2
+            ON T1."inputShikibetsuNo" = T2."inputShikibetsuNo"
+            AND T1."hiHokenshaNo" = T2."hiHokenshaNo"
+            AND T1."serviceTeikyoYM" = T2."serviceTeikyoYM"
+            AND T1."jigyoshoNo" = T2."jigyoshoNo"
+            AND T1."toshiNo" = T2."toshiNo"
+            WHERE 
+            T1."hiHokenshaNo" NOT LIKE 'H%'
+            AND (T1."kyufuSakuseiKubunCode" = '1'
+            OR T1."kyufuSakuseiKubunCode" = '2')
+            AND SUBSTR(T1."inputShikibetsuNo",1,3) IN ('71P','816','71R','817')
+        <if test="00==対象年月指定">
+        AND T1."serviceTeikyoYM" <![CDATA[>=]]> #{年月範囲開始}
+        AND T1."serviceTeikyoYM" <![CDATA[<=]]> #{年月範囲終了}
+        </if>
+        <if test="01==対象年月指定">
+        AND (T1."shinsaYM"  <![CDATA[>=]]> #{年月範囲開始}
+            OR T1."shinsaYM" IS NULL)
+        AND T2."shinsaYM" <![CDATA[>=]]> #{年月範囲開始}
+        AND T2."shinsaYM" <![CDATA[<=]]> #{年月範囲終了}
+        </if>
+        <if test="00==対象サービス種類">
+        AND T2."serviceShuruiCode" IN 
+             (11,12,13,14,15,16,17,21,22,23,24,25,26,27,28,31,32,33,34,35,36,37,38,39,43,46
+             ,51,52,53,54,59,61,62,63,64,65,66,67,68,69,71,72,73,74,75,76,77,78,79)
+        </if>
+        <if test="対象サービス種類 !=null and !(00==対象サービス種類)">
+        AND T2."serviceShuruiCode" = #{対象サービス種類}
+        </if>
+    </select>
+    
+    <select resultOrdered="true" id="get給付実績サービス計画費情報"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.servicecoderiyojokyo.KyufuJissekiMeisaiGetMybatisParameter"
+            resultMap="resultMap_KyufuJissekiKyotakuEntity" fetchSize="500">
+        SELECT
+            T1."hiHokenshaNo" AS T1_hiHokenshaNo,
+            T1."inputShikibetsuNo" AS T1_inputShikibetsuNo,
+            T1."serviceTeikyoYM" AS T1_serviceTeikyoYM,
+            T1."jigyoshoNo" AS T1_jigyoshoNo,
+            T1."toshiNo" AS T1_toshiNo,
+            T1."yoKaigoJotaiKubunCode" AS T1_yoKaigoJotaiKubunCode,
+            T2."atoTanisu" AS T2_atoTanisu,
+            T2."atoServiceTanisu" AS T2_atoServiceTanisu,
+            SUBSTR(T2."serviceCode",1,2) AS T2_serviceShuruiCode,
+            SUBSTR(T2."serviceCode",3,4) AS T2_serviceKomokuCode
+            FROM
+            (SELECT
+            *
+            FROM rgdb."DbT3017KyufujissekiKihon" AS T9
+            INNER JOIN
+            (SELECT 
+            MAX("DbT3017KyufujissekiKihon"."shinsaYM") AS 最新審査年月
+            FROM
+            rgdb."DbT3017KyufujissekiKihon"
+            GROUP BY
+            "DbT3017KyufujissekiKihon"."inputShikibetsuNo",
+            "DbT3017KyufujissekiKihon"."hiHokenshaNo",
+            "DbT3017KyufujissekiKihon"."serviceTeikyoYM",
+            "DbT3017KyufujissekiKihon"."jigyoshoNo",
+            "DbT3017KyufujissekiKihon"."toshiNo") AS T0
+            ON T9."shinsaYM" = 最新審査年月) AS T1
+            LEFT OUTER JOIN
+            rgdb."DbT3025KyufujissekiKyotakuService" AS T2
+            ON T1."inputShikibetsuNo" = T2."inputShikibetsuNo"
+            AND T1."hiHokenshaNo" = T2."hiHokenshaNo"
+            AND T1."serviceTeikyoYM" = T2."serviceTeikyoYM"
+            AND T1."jigyoshoNo" = T2."jigyoshoNo"
+            AND T1."toshiNo" = T2."toshiNo"
+            WHERE 
+            T1."hiHokenshaNo" NOT LIKE 'H%'
+            AND (T1."kyufuSakuseiKubunCode" = '1'
+            OR T1."kyufuSakuseiKubunCode" = '2')
+            AND SUBSTR(T1."inputShikibetsuNo",1,3) IN ('71P','816','71R','817')
+        <if test="00==対象年月指定">
+        AND T1."serviceTeikyoYM" <![CDATA[>=]]> #{年月範囲開始}
+        AND T1."serviceTeikyoYM" <![CDATA[<=]]> #{年月範囲終了}
+        </if>
+        <if test="01==対象年月指定">
+        AND (T1."shinsaYM"  <![CDATA[>=]]> #{年月範囲開始}
+            OR T1."shinsaYM" IS NULL)
+        AND T2."shinsaYM" <![CDATA[>=]]> #{年月範囲開始}
+        AND T2."shinsaYM" <![CDATA[<=]]> #{年月範囲終了}
+        </if>
+        <if test="00==対象サービス種類">
+        AND SUBSTR(T2."serviceCode",1,2) IN 
+             (11,12,13,14,15,16,17,21,22,23,24,25,26,27,28,31,32,33,34,35,36,37,38,39,43,46
+             ,51,52,53,54,59,61,62,63,64,65,66,67,68,69,71,72,73,74,75,76,77,78,79)
+        </if>
+        <if test="対象サービス種類!=null and !(00==対象サービス種類)">
+        AND SUBSTR(T2."serviceCode",1,2) = #{対象サービス種類}
+        </if>
+    </select>
+    
+    <select resultOrdered="true" id="get給付実績特定入所者介護サービス費用情報"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.servicecoderiyojokyo.KyufuJissekiMeisaiGetMybatisParameter"
+            resultMap="resultMap_KyufujissekiTokuteiNyushosyaKaigoEntity" fetchSize="500">
+        SELECT
+            T1."hiHokenshaNo" AS T1_hiHokenshaNo,
+            T1."inputShikibetsuNo" AS T1_inputShikibetsuNo,
+            T1."serviceTeikyoYM" AS T1_serviceTeikyoYM,
+            T1."jigyoshoNo" AS T1_jigyoshoNo,
+            T1."toshiNo" AS T1_toshiNo,
+            T1."yoKaigoJotaiKubunCode" AS T1_yoKaigoJotaiKubunCode,
+            T2."atoNissu" AS T2_atoNissu,
+            T2."atoHiyogaku" AS T2_atoHiyogaku,
+            T2."serviceSyuruiCode" AS T2_serviceShuruiCode,
+            T2."serviceKomokuCode" AS T2_serviceKomokuCode
+            FROM
+            (SELECT
+            *
+            FROM rgdb."DbT3017KyufujissekiKihon" AS T9
+            INNER JOIN
+            (SELECT 
+            MAX("DbT3017KyufujissekiKihon"."shinsaYM") AS 最新審査年月
+            FROM
+            rgdb."DbT3017KyufujissekiKihon"
+            GROUP BY
+            "DbT3017KyufujissekiKihon"."inputShikibetsuNo",
+            "DbT3017KyufujissekiKihon"."hiHokenshaNo",
+            "DbT3017KyufujissekiKihon"."serviceTeikyoYM",
+            "DbT3017KyufujissekiKihon"."jigyoshoNo",
+            "DbT3017KyufujissekiKihon"."toshiNo") AS T0
+            ON T9."shinsaYM" = 最新審査年月) AS T1
+            LEFT OUTER JOIN
+            rgdb."DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo" AS T2
+            ON T1."inputShikibetsuNo" = T2."inputShikibetsuNo"
+            AND T1."hiHokenshaNo" = T2."hiHokenshaNo"
+            AND T1."serviceTeikyoYM" = T2."serviceTeikyoYM"
+            AND T1."jigyoshoNo" = T2."jigyoshoNo"
+            AND T1."toshiNo" = T2."toshiNo"
+            WHERE 
+            T1."hiHokenshaNo" NOT LIKE 'H%'
+            AND (T1."kyufuSakuseiKubunCode" = '1'
+            OR T1."kyufuSakuseiKubunCode" = '2')
+            AND SUBSTR(T1."inputShikibetsuNo",1,3) IN ('71P','816','71R','817')
+        <if test="00==対象年月指定">
+        AND T1."serviceTeikyoYM" <![CDATA[>=]]> #{年月範囲開始}
+        AND T1."serviceTeikyoYM" <![CDATA[<=]]> #{年月範囲終了}
+        </if>
+        <if test="01==対象年月指定">
+        AND (T1."shinsaYM"  <![CDATA[>=]]> #{年月範囲開始}
+            OR T1."shinsaYM" IS NULL)
+        AND T2."shinsaYM" <![CDATA[>=]]> #{年月範囲開始}
+        AND T2."shinsaYM" <![CDATA[<=]]> #{年月範囲終了}
+        </if>
+        <if test="00==対象サービス種類">
+        AND T2."serviceSyuruiCode" IN 
+             (11,12,13,14,15,16,17,21,22,23,24,25,26,27,28,31,32,33,34,35,36,37,38,39,43,46
+             ,51,52,53,54,59,61,62,63,64,65,66,67,68,69,71,72,73,74,75,76,77,78,79)
+        </if>
+        <if test="対象サービス種類!=null and !(00==対象サービス種類)">
+        AND T2."serviceSyuruiCode" = #{対象サービス種類}
+        </if>
+    </select>
+    
+    <select resultOrdered="true" id="get被保険者宛名情報"
+            resultMap="resultMap_HihokenshaShikibetsuTaishoEntity" fetchSize="500">
+        SELECT
+            "DbWT3470ToukeihyoMeisai"."renban" AS DbWT3470ToukeihyoMeisai_renban,
+            "DbWT3470ToukeihyoMeisai"."hiHokenshaNo" AS T1_hiHokenshaNo,
+            "DbWT3470ToukeihyoMeisai"."inputShikibetsuNo" AS T1_inputShikibetsuNo,
+            "DbWT3470ToukeihyoMeisai"."serviceTeikyoYM" AS T1_serviceTeikyoYM,
+            "DbWT3470ToukeihyoMeisai"."jigyoshoNo" AS T1_jigyoshoNo,
+            "DbWT3470ToukeihyoMeisai"."toshiNo" AS T1_toshiNo,
+            "DbWT3470ToukeihyoMeisai"."yoKaigoJotaiKubunCode" AS T1_yoKaigoJotaiKubunCode,
+            "DbWT3470ToukeihyoMeisai"."taniSu" AS T2_atoTanisu,
+            "DbWT3470ToukeihyoMeisai"."nissuKaisu" AS T2_atoNissuKaisu,
+            "DbWT3470ToukeihyoMeisai"."serviceTanisu" AS T2_atoServiceTanisu,
+            "DbWT3470ToukeihyoMeisai"."serviceShuruiCode" AS T2_serviceShuruiCode,
+            "DbWT3470ToukeihyoMeisai"."serviceKomokuCode" AS T2_serviceKomokuCode,
+            <include refid="allColumns_DbT1001HihokenshaDaicho" />,
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        FROM "DbWT3470ToukeihyoMeisai"
+        INNER JOIN
+        rgdb."DbT1001HihokenshaDaicho" AS "DbT1001HihokenshaDaicho"
+        ON "DbWT3470ToukeihyoMeisai"."hiHokenshaNo" = "DbT1001HihokenshaDaicho"."hihokenshaNo"
+        INNER JOIN
+        rgua."UaFt200FindShikibetsuTaisho"('1','','1','DB','0','','','','','','','','','','','0','0','','','','',
+        '','','0','0','','','','','','','','','','0','','1','1','1','1','0','0', '1','1','1','1', '1','','',
+        '','','','','','0','0','','','0','0','0','','','','','','','','','','','','','','','','','','', '{  }')AS "ShikibetsuTaisho"    
+        ON "DbT1001HihokenshaDaicho"."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
+        WHERE "DbT1001HihokenshaDaicho"."shikibetsuCode" IS NOT NULL
+    </select>
+    
+    <select resultOrdered="true" id="get宛名情報抽出処理"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.servicecoderiyojokyo.KyufuJissekiMeisaiGetMybatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.DbWT3470ToukeihyoMeisaichukanTempEntity" fetchSize="500">
+        SELECT
+        "DbWT3470ToukeihyoMeisai".*
+        FROM
+        "DbWT3470ToukeihyoMeisai"
+        WHERE 1 = 1
+        <if test="市町村コード==null or 市町村コード.isEmpty()">
+            <if test="旧市町村コード==null or 旧市町村コード.isEmpty()">
+                <if test="'町域'==選択対象">
+                    AND DbWT3470ToukeihyoMeisai."machiikiCode" IN #{対象コード}
+                </if>
+                <if test="'地区１'==選択対象">
+                    AND DbWT3470ToukeihyoMeisai."chikuCode1" IN #{対象コード}
+                </if>
+                <if test="'地区２'==選択対象">
+                    AND DbWT3470ToukeihyoMeisai."chikuCode2" IN #{対象コード}
+                </if>
+                <if test="'地区３'==選択対象">
+                    AND DbWT3470ToukeihyoMeisai."chikuCode3" IN #{対象コード}
+                </if>
+                <if test="'行政区'==選択対象">
+                    AND DbWT3470ToukeihyoMeisai."gyoseikuCode" IN #{対象コード}
+                </if>
+            </if>
+            <if test="旧市町村コード!=null and !旧市町村コード.isEmpty()">
+                <if test="!(000000==旧市町村コード)">
+                AND DbWT3470ToukeihyoMeisai."kyuShichosonCode" = #{旧市町村コード}
+                </if>
+            </if> 
+        </if>
+        <if test="(市町村コード!=null and !市町村コード.isEmpty()) and !(000000==市町村コード)">
+            <if test="旧市町村コード==null or 旧市町村コード.isEmpty()">
+                AND DbWT3470ToukeihyoMeisai."koikinaiJushochiTokureiFlag" = '1'
+                AND DbWT3470ToukeihyoMeisai."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}
+            </if>
+            <if test="000000==旧市町村コード">
+                AND DbWT3470ToukeihyoMeisai."koikinaiJushochiTokureiFlag" = '1'
+                AND DbWT3470ToukeihyoMeisai."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}
+            </if>
+            <if test="(旧市町村コード!=null and !旧市町村コード.isEmpty()) and !(000000==旧市町村コード)">
+                AND DbWT3470ToukeihyoMeisai."kyuShichosonCode" = #{旧市町村コード}
+            </if>
+        </if>
+    </select>
+    
+    <select resultOrdered="true" id="get回数単位数"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.servicecoderiyojokyo.KyufuJissekiMeisaiGetMybatisParameter"
+            resultMap="resultMap_TaniSuNissuKaisuEntity" fetchSize="500">
+        <if test="00==サービス項目コードのまとめ方">
+            SELECT
+                "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode" AS DbWT3470ToukeihyoMeisaichukan_serviceShuruiCode,
+                SUBSTR("DbWT3470ToukeihyoMeisaichukan"."serviceKomokuCode",1,1) AS DbWT3470ToukeihyoMeisaichukan_serviceKomokuCode,
+                "DbWT3470ToukeihyoMeisaichukan"."yoKaigoJotaiKubunCode" AS DbWT3470ToukeihyoMeisaichukan_yoKaigoJotaiKubunCode,
+                SUM("DbWT3470ToukeihyoMeisaichukan"."nissuKaisu") AS DbWT3470ToukeihyoMeisaichukan_nissuKaisu,
+                SUM("DbWT3470ToukeihyoMeisaichukan"."taniSu") AS DbWT3470ToukeihyoMeisaichukan_taniSu
+            FROM "DbWT3470ToukeihyoMeisaichukan" AS "DbWT3470ToukeihyoMeisaichukan"
+            GROUP BY
+                "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode",
+                SUBSTR("DbWT3470ToukeihyoMeisaichukan"."serviceKomokuCode",1,1),
+                "DbWT3470ToukeihyoMeisaichukan"."yoKaigoJotaiKubunCode"
+        </if>
+        <if test="01==サービス項目コードのまとめ方">
+            SELECT
+                "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode" AS DbWT3470ToukeihyoMeisaichukan_serviceShuruiCode,
+                SUBSTR("DbWT3470ToukeihyoMeisaichukan"."serviceKomokuCode",2,1) AS DbWT3470ToukeihyoMeisaichukan_serviceKomokuCode,
+                "DbWT3470ToukeihyoMeisaichukan"."yoKaigoJotaiKubunCode" AS DbWT3470ToukeihyoMeisaichukan_yoKaigoJotaiKubunCode,
+                SUM("DbWT3470ToukeihyoMeisaichukan"."nissuKaisu") AS DbWT3470ToukeihyoMeisaichukan_nissuKaisu,
+                SUM("DbWT3470ToukeihyoMeisaichukan"."taniSu") AS DbWT3470ToukeihyoMeisaichukan_taniSu
+            FROM "DbWT3470ToukeihyoMeisaichukan" AS "DbWT3470ToukeihyoMeisaichukan"
+            WHERE
+                "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode" = #{対象サービス種類}
+            GROUP BY
+                "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode",
+                SUBSTR("DbWT3470ToukeihyoMeisaichukan"."serviceKomokuCode",2,1),
+                "DbWT3470ToukeihyoMeisaichukan"."yoKaigoJotaiKubunCode"
+        </if>
+        <if test="02==サービス項目コードのまとめ方">
+            SELECT
+                "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode" AS DbWT3470ToukeihyoMeisaichukan_serviceShuruiCode,
+                SUBSTR("DbWT3470ToukeihyoMeisaichukan"."serviceKomokuCode",1,2) AS DbWT3470ToukeihyoMeisaichukan_serviceKomokuCode,
+                "DbWT3470ToukeihyoMeisaichukan"."yoKaigoJotaiKubunCode" AS DbWT3470ToukeihyoMeisaichukan_yoKaigoJotaiKubunCode,
+                SUM("DbWT3470ToukeihyoMeisaichukan"."nissuKaisu") AS DbWT3470ToukeihyoMeisaichukan_nissuKaisu,
+                SUM("DbWT3470ToukeihyoMeisaichukan"."taniSu") AS DbWT3470ToukeihyoMeisaichukan_taniSu
+            FROM "DbWT3470ToukeihyoMeisaichukan" AS "DbWT3470ToukeihyoMeisaichukan"
+            WHERE
+                "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode" = #{対象サービス種類}
+            GROUP BY
+                "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode",
+                SUBSTR("DbWT3470ToukeihyoMeisaichukan"."serviceKomokuCode",1,2),
+                "DbWT3470ToukeihyoMeisaichukan"."yoKaigoJotaiKubunCode"
+        </if>
+        <if test="03==サービス項目コードのまとめ方">
+            SELECT
+                "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode" AS DbWT3470ToukeihyoMeisaichukan_serviceShuruiCode,
+                SUBSTR("DbWT3470ToukeihyoMeisaichukan"."serviceKomokuCode",1,3) AS DbWT3470ToukeihyoMeisaichukan_serviceKomokuCode,
+                "DbWT3470ToukeihyoMeisaichukan"."yoKaigoJotaiKubunCode" AS DbWT3470ToukeihyoMeisaichukan_yoKaigoJotaiKubunCode,
+                SUM("DbWT3470ToukeihyoMeisaichukan"."nissuKaisu") AS DbWT3470ToukeihyoMeisaichukan_nissuKaisu,
+                SUM("DbWT3470ToukeihyoMeisaichukan"."taniSu") AS DbWT3470ToukeihyoMeisaichukan_taniSu
+            FROM "DbWT3470ToukeihyoMeisaichukan" AS "DbWT3470ToukeihyoMeisaichukan"
+            WHERE
+                "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode" = #{対象サービス種類}
+            GROUP BY
+                "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode",
+                SUBSTR("DbWT3470ToukeihyoMeisaichukan"."serviceKomokuCode",1,3),
+                "DbWT3470ToukeihyoMeisaichukan"."yoKaigoJotaiKubunCode"
+        </if>
+        <if test="04==サービス項目コードのまとめ方">
+            SELECT
+                "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode" AS DbWT3470ToukeihyoMeisaichukan_serviceShuruiCode,
+                "DbWT3470ToukeihyoMeisaichukan"."serviceKomokuCode" AS DbWT3470ToukeihyoMeisaichukan_sortYouKomokuCode,
+                "DbWT3470ToukeihyoMeisaichukan"."yoKaigoJotaiKubunCode" AS DbWT3470ToukeihyoMeisaichukan_yoKaigoJotaiKubunCode,
+                SUM("DbWT3470ToukeihyoMeisaichukan"."nissuKaisu") AS DbWT3470ToukeihyoMeisaichukan_nissuKaisuSyukeichi,
+                SUM("DbWT3470ToukeihyoMeisaichukan"."taniSu") AS DbWT3470ToukeihyoMeisaichukan_taniSuSyukeichi
+            FROM "DbWT3470ToukeihyoMeisaichukan" AS "DbWT3470ToukeihyoMeisaichukan"
+            WHERE
+                "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode" = #{対象サービス種類}
+            GROUP BY
+                "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode",
+                "DbWT3470ToukeihyoMeisaichukan"."serviceKomokuCode",
+                "DbWT3470ToukeihyoMeisaichukan"."yoKaigoJotaiKubunCode"
+        </if>
+    </select>
+    
+    <select resultOrdered="true" id="get帳票出力用一時TBL"
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.DbWT3470chohyouShutsuryokuyouTempEntity" fetchSize="500">
+        SELECT
+        "DbWT3470chohyouShutsuryokuyou".*
+        FROM 
+        "DbWT3470chohyouShutsuryokuyou"
+    </select>
+    
+    <select resultOrdered="true" id="update帳票出力用一時TBL"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.servicecoderiyojokyo.KyufuJissekiMeisaiGetMybatisParameter"
+            resultMap="resultMap_UpdateDbWT3470chohyouShutsuryokuyou" fetchSize="500">
+        SELECT 
+        "DbT7119ServiceCode"."serviceMeisho" AS "DbT7119ServiceCode_serviceMeisho"
+        FROM 
+        rgdb."DbT7119ServiceCode" AS "DbT7119ServiceCode"
+        WHERE
+        "DbT7119ServiceCode"."serviceShuruiCode" = #{対象サービス種類}
+        "DbT7119ServiceCode"."serviceShuruiCode" <![CDATA[>=]]> #{サービス項目コード}
+        AND "DbT7119ServiceCode"."tekiyoKaishiYM" <![CDATA[<=]]> 
+        (SELECT
+        "DbWT3470ToukeihyoMeisaichukan"."serviceTeikyoYM" 
+        FROM 
+        "DbWT3470ToukeihyoMeisaichukan"
+        WHERE
+        "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode" = #{対象サービス種類}
+        AND "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode" <![CDATA[<=]]> #{サービス項目コード}
+        ORDER BY "DbWT3470ToukeihyoMeisaichukan"."serviceTeikyoYM" DESC
+        LIMIT 1)
+        AND "DbT7119ServiceCode"."tekiyoShuryoYM" <![CDATA[>=]]>
+        (SELECT
+        "DbWT3470ToukeihyoMeisaichukan"."serviceTeikyoYM" 
+        FROM 
+        "DbWT3470ToukeihyoMeisaichukan"
+        WHERE
+        "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode" = #{対象サービス種類}
+        AND "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode" <![CDATA[<=]]> #{サービス項目コード}
+        ORDER BY "DbWT3470ToukeihyoMeisaichukan"."serviceTeikyoYM" DESC
+        LIMIT 1)
+        ORDER BY "DbT7119ServiceCode"."serviceShuruiCode" ASC
+        LIMIT 1
+    </select>
+    
+    <select resultOrdered="true" id="get帳票出力用一時TBL出力順"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.servicecoderiyojokyo.KyufuJissekiMeisaiGetMybatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.DbWT3470chohyouShutsuryokuyouTempEntity" fetchSize="500">
+        SELECT
+        "DbWT3470chohyouShutsuryokuyou".*
+        FROM 
+        "DbWT3470chohyouShutsuryokuyou"
+        ${出力順}
+    </select>
+    
+    <select resultOrdered="true" id="get処理結果リスト"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.servicecoderiyojokyo.KyufuJissekiMeisaiGetMybatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.DbWT3470shoriKekkaListTempEntity" fetchSize="500">
+        SELECT
+        "DbWT3470shoriKekkaList".*
+        FROM 
+        "DbWT3470shoriKekkaList"
+        ${出力順}
+    </select>
+    
+    <sql id="allColumns_DbT1001HihokenshaDaicho">
+         "DbT1001HihokenshaDaicho"."hihokenshaNo" as "dbT1001HihokenshaDaicho_hihokenshaNo",
+         "DbT1001HihokenshaDaicho"."idoYMD" as "dbT1001HihokenshaDaicho_idoYMD",
+         "DbT1001HihokenshaDaicho"."edaNo" as "dbT1001HihokenshaDaicho_edaNo",
+         "DbT1001HihokenshaDaicho"."shichosonCode" as "dbT1001HihokenshaDaicho_shichosonCode",
+         "DbT1001HihokenshaDaicho"."shikibetsuCode" as "dbT1001HihokenshaDaicho_shikibetsuCode",
+         "DbT1001HihokenshaDaicho"."shikakuShutokuJiyuCode" as "dbT1001HihokenshaDaicho_shikakuShutokuJiyuCode",
+         "DbT1001HihokenshaDaicho"."shikakuShutokuYMD" as "dbT1001HihokenshaDaicho_shikakuShutokuYMD",
+         "DbT1001HihokenshaDaicho"."shikakuShutokuTodokedeYMD" as "dbT1001HihokenshaDaicho_shikakuShutokuTodokedeYMD",
+         "DbT1001HihokenshaDaicho"."ichigoShikakuShutokuYMD" as "dbT1001HihokenshaDaicho_ichigoShikakuShutokuYMD",
+         "DbT1001HihokenshaDaicho"."hihokennshaKubunCode" as "dbT1001HihokenshaDaicho_hihokennshaKubunCode",
+         "DbT1001HihokenshaDaicho"."shikakuSoshitsuJiyuCode" as "dbT1001HihokenshaDaicho_shikakuSoshitsuJiyuCode",
+         "DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD" as "dbT1001HihokenshaDaicho_shikakuSoshitsuYMD",
+         "DbT1001HihokenshaDaicho"."shikakuSoshitsuTodokedeYMD" as "dbT1001HihokenshaDaicho_shikakuSoshitsuTodokedeYMD",
+         "DbT1001HihokenshaDaicho"."shikakuHenkoJiyuCode" as "dbT1001HihokenshaDaicho_shikakuHenkoJiyuCode",
+         "DbT1001HihokenshaDaicho"."shikakuHenkoYMD" as "dbT1001HihokenshaDaicho_shikakuHenkoYMD",
+         "DbT1001HihokenshaDaicho"."shikakuHenkoTodokedeYMD" as "dbT1001HihokenshaDaicho_shikakuHenkoTodokedeYMD",
+         "DbT1001HihokenshaDaicho"."jushochitokureiTekiyoJiyuCode" as "dbT1001HihokenshaDaicho_jushochitokureiTekiyoJiyuCode",
+         "DbT1001HihokenshaDaicho"."jushochitokureiTekiyoYMD" as "dbT1001HihokenshaDaicho_jushochitokureiTekiyoYMD",
+         "DbT1001HihokenshaDaicho"."jushochitokureiTekiyoTodokedeYMD" as "dbT1001HihokenshaDaicho_jushochitokureiTekiyoTodokedeYMD",
+         "DbT1001HihokenshaDaicho"."jushochitokureiKaijoJiyuCode" as "dbT1001HihokenshaDaicho_jushochitokureiKaijoJiyuCode",
+         "DbT1001HihokenshaDaicho"."jushochitokureiKaijoYMD" as "dbT1001HihokenshaDaicho_jushochitokureiKaijoYMD",
+         "DbT1001HihokenshaDaicho"."jushochitokureiKaijoTodokedeYMD" as "dbT1001HihokenshaDaicho_jushochitokureiKaijoTodokedeYMD",
+         "DbT1001HihokenshaDaicho"."jushochiTokureiFlag" as "dbT1001HihokenshaDaicho_jushochiTokureiFlag",
+         "DbT1001HihokenshaDaicho"."koikinaiJushochiTokureiFlag" as "dbT1001HihokenshaDaicho_koikinaiJushochiTokureiFlag",
+         "DbT1001HihokenshaDaicho"."koikinaiTokureiSochimotoShichosonCode" as "dbT1001HihokenshaDaicho_koikinaiTokureiSochimotoShichosonCode",
+         "DbT1001HihokenshaDaicho"."kyuShichosonCode" as "dbT1001HihokenshaDaicho_kyuShichosonCode"
+    </sql>
+        
+    <resultMap id="resultMap_KyufuJissekiMeisaiEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.KyufuJissekiMeisaiEntity" autoMapping="true">
+        <result property="被保険者番号" column="T1_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="入力識別番号" column="T1_inputShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.NyuryokuShikibetsuNoTypeHandler"/>
+        <result property="サービス提供年月" column="T1_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="事業所番号" column="T1_jigyoshoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="通し番号" column="T1_toshiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="要介護状態区分コード" column="T1_yoKaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="後_単位数" column="T2_atoTanisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="後_日数_回数" column="T2_atoNissuKaisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="後_サービス単位数" column="T2_atoServiceTanisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="サービス種類コード" column="T2_serviceShuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="サービス項目コード" column="T2_serviceKomokuCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceKomokuCodeTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="resultMap_KyufuJissekiKyotakuEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.KyufuJissekiMeisaiEntity" autoMapping="true">
+        <result property="被保険者番号" column="T1_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="入力識別番号" column="T1_inputShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.NyuryokuShikibetsuNoTypeHandler"/>
+        <result property="サービス提供年月" column="T1_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="事業所番号" column="T1_jigyoshoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="通し番号" column="T1_toshiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="要介護状態区分コード" column="T1_yoKaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="後_単位数" column="T2_atoTanisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="後_サービス単位数" column="T2_atoServiceTanisu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="サービス種類コード" column="T2_serviceShuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="サービス項目コード" column="T2_serviceKomokuCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceKomokuCodeTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="resultMap_KyufujissekiTokuteiNyushosyaKaigoEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.KyufuJissekiMeisaiEntity" autoMapping="true">
+        <result property="被保険者番号" column="T1_hiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="入力識別番号" column="T1_inputShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.NyuryokuShikibetsuNoTypeHandler"/>
+        <result property="サービス提供年月" column="T1_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="事業所番号" column="T1_jigyoshoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="通し番号" column="T1_toshiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="要介護状態区分コード" column="T1_yoKaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="後_日数_回数" column="T2_atoNissu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="後_サービス単位数" column="T2_atoHiyogaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="サービス種類コード" column="T2_serviceShuruiCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="サービス項目コード" column="T2_serviceKomokuCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceKomokuCodeTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="resultMap_HihokenshaShikibetsuTaishoEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.HihokenshaShikibetsuTaishoEntity" autoMapping="true">
+        <id column="dbT1001HihokenshaDaicho_hihokenshaNo"/>
+        <id column="dbT1001HihokenshaDaicho_idoYMD"/>
+        <id column="dbT1001HihokenshaDaicho_edaNo"/>
+        <result property="連番" column="DbWT3470ToukeihyoMeisai_renban"/>
+        <association property="給付実績" resultMap="resultMap_KyufuJissekiMeisaiEntity"/>
+	<association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+        <association property="最新被保台帳" resultMap="NewResultMap_DbT1001HihokenshaDaichoEntity"/>
+    </resultMap>
+    
+    <resultMap id="NewResultMap_DbT1001HihokenshaDaichoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity" autoMapping="true">
+        <id property="hihokenshaNo" column="dbT1001HihokenshaDaicho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="idoYMD" column="dbT1001HihokenshaDaicho_idoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id property="edaNo" column="dbT1001HihokenshaDaicho_edaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shichosonCode" column="dbT1001HihokenshaDaicho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="shikibetsuCode" column="dbT1001HihokenshaDaicho_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="shikakuShutokuJiyuCode" column="dbT1001HihokenshaDaicho_shikakuShutokuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikakuShutokuYMD" column="dbT1001HihokenshaDaicho_shikakuShutokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikakuShutokuTodokedeYMD" column="dbT1001HihokenshaDaicho_shikakuShutokuTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ichigoShikakuShutokuYMD" column="dbT1001HihokenshaDaicho_ichigoShikakuShutokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="hihokennshaKubunCode" column="dbT1001HihokenshaDaicho_hihokennshaKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikakuSoshitsuJiyuCode" column="dbT1001HihokenshaDaicho_shikakuSoshitsuJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikakuSoshitsuYMD" column="dbT1001HihokenshaDaicho_shikakuSoshitsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikakuSoshitsuTodokedeYMD" column="dbT1001HihokenshaDaicho_shikakuSoshitsuTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikakuHenkoJiyuCode" column="dbT1001HihokenshaDaicho_shikakuHenkoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikakuHenkoYMD" column="dbT1001HihokenshaDaicho_shikakuHenkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikakuHenkoTodokedeYMD" column="dbT1001HihokenshaDaicho_shikakuHenkoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jushochitokureiTekiyoJiyuCode" column="dbT1001HihokenshaDaicho_jushochitokureiTekiyoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jushochitokureiTekiyoYMD" column="dbT1001HihokenshaDaicho_jushochitokureiTekiyoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jushochitokureiTekiyoTodokedeYMD" column="dbT1001HihokenshaDaicho_jushochitokureiTekiyoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jushochitokureiKaijoJiyuCode" column="dbT1001HihokenshaDaicho_jushochitokureiKaijoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jushochitokureiKaijoYMD" column="dbT1001HihokenshaDaicho_jushochitokureiKaijoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jushochitokureiKaijoTodokedeYMD" column="dbT1001HihokenshaDaicho_jushochitokureiKaijoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jushochiTokureiFlag" column="dbT1001HihokenshaDaicho_jushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="koikinaiJushochiTokureiFlag" column="dbT1001HihokenshaDaicho_koikinaiJushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyuShichosonCode" column="dbT1001HihokenshaDaicho_kyuShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="resultMap_TaniSuNissuKaisuEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.TaniSuNissuKaisuEntity" autoMapping="true">
+        <result property="サービス種類コード" column="DbWT3470ToukeihyoMeisaichukan_serviceShuruiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ソート用サービス項目コード" column="DbWT3470ToukeihyoMeisaichukan_sortYouKomokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="要介護状態区分コード" column="DbWT3470ToukeihyoMeisaichukan_yoKaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="日数_回数集計値" column="DbWT3470ToukeihyoMeisaichukan_nissuKaisuSyukeichi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="単位数集計値" column="DbWT3470ToukeihyoMeisaichukan_taniSuSyukeichi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+    </resultMap>
+    
+    <resultMap id="resultMap_UpdateDbWT3470chohyouShutsuryokuyou" type="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" autoMapping="true">
+        <result property="サービス名称" column="DbT7119ServiceCode_serviceMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
+</mapper>

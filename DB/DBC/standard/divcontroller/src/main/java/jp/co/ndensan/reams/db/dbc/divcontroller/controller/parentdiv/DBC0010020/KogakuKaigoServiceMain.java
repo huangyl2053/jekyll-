@@ -68,6 +68,8 @@ public class KogakuKaigoServiceMain {
         getHandler(div).change年月(new RString("前月"), 高額介護サービス費,
                 サービス提供年月, 整理番号,
                 被保険者番号, 識別番号検索キー);
+        FlexibleYearMonth 提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
+        ViewStateHolder.put(ViewStateKeys.サービス提供年月, 提供年月);
         return createResponse(div);
     }
 
@@ -86,6 +88,8 @@ public class KogakuKaigoServiceMain {
                 KyufuJissekiPrmBusiness.class).getKojinKakuteiKey().get被保険者番号();
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
         getHandler(div).change年月(new RString("次月"), 高額介護サービス費, サービス提供年月, 整理番号, 被保険者番号, 識別番号検索キー);
+        FlexibleYearMonth 提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
+        ViewStateHolder.put(ViewStateKeys.サービス提供年月, 提供年月);
         return createResponse(div);
     }
 

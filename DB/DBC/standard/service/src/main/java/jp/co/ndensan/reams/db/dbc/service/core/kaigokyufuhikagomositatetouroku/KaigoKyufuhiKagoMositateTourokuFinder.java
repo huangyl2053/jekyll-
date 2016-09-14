@@ -18,8 +18,11 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7056GappeiShichosonEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7056GappeiShichosonDac;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV1001HihokenshaDaichoAliveDac;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -36,6 +39,7 @@ public class KaigoKyufuhiKagoMositateTourokuFinder {
     private final DbT3059KagoMoshitateDac dbT3059dac;
     private final DbT7051KoseiShichosonMasterDac dbT7051dac;
     private final DbT7056GappeiShichosonDac dbT7056dac;
+    private final DbV1001HihokenshaDaichoAliveDac dbv1001dac;
 
     /**
      * コンストラクタです。
@@ -45,6 +49,7 @@ public class KaigoKyufuhiKagoMositateTourokuFinder {
         this.dbT3059dac = InstanceProvider.create(DbT3059KagoMoshitateDac.class);
         this.dbT7051dac = InstanceProvider.create(DbT7051KoseiShichosonMasterDac.class);
         this.dbT7056dac = InstanceProvider.create(DbT7056GappeiShichosonDac.class);
+        this.dbv1001dac = InstanceProvider.create(DbV1001HihokenshaDaichoAliveDac.class);
     }
 
     /**
@@ -54,15 +59,18 @@ public class KaigoKyufuhiKagoMositateTourokuFinder {
      * @param dbT3059dac dac
      * @param dbT7051dac dbT7051dac
      * @param dbT7056dac dbT7056dac
+     * @param dbv1001dac dbv1001dac
      */
     KaigoKyufuhiKagoMositateTourokuFinder(MapperProvider mapperProvide,
             DbT3059KagoMoshitateDac dbT3059dac,
             DbT7051KoseiShichosonMasterDac dbT7051dac,
-            DbT7056GappeiShichosonDac dbT7056dac) {
+            DbT7056GappeiShichosonDac dbT7056dac,
+            DbV1001HihokenshaDaichoAliveDac dbv1001dac) {
         this.mapperProvider = mapperProvide;
         this.dbT3059dac = dbT3059dac;
         this.dbT7051dac = dbT7051dac;
         this.dbT7056dac = dbT7056dac;
+        this.dbv1001dac = dbv1001dac;
     }
 
     /**
@@ -135,5 +143,19 @@ public class KaigoKyufuhiKagoMositateTourokuFinder {
             return entityList.get(0).getShichosonMeisho();
         }
         return RString.EMPTY;
+    }
+
+    /**
+     * 被保険者番号より、識別コードを取得します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return 識別コード
+     */
+    public ShikibetsuCode get識別コード(HihokenshaNo 被保険者番号) {
+        DbV1001HihokenshaDaichoEntity entity = dbv1001dac.get最新の被保険者台帳情報(被保険者番号);
+        if (entity == null) {
+            return ShikibetsuCode.EMPTY;
+        }
+        return entity.getShikibetsuCode();
     }
 }

@@ -28,6 +28,5 @@ public class JigyohokokuCompYoshiki272Entity {
     private RString 集計年度;
     private RString 集計期間FROM;
     private RString 集計期間TO;
-    private RString 保険者番号;
-    private RString 保険者名;
+    private RString 過去集計分旧市町村区分;
 }

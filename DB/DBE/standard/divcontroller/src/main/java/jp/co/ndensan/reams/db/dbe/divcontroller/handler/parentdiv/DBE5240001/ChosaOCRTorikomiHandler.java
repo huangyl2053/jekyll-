@@ -57,6 +57,7 @@ public class ChosaOCRTorikomiHandler {
     private final ChosaOCRTorikomiMainDiv div;
     private static final RString INDEX_1 = new RString("1");
     private static final int INDEX_4 = 4;
+    private static final RString 非該当 = new RString("非該当");
     private static final RString 要支援1 = new RString("要支援1");
     private static final RString 要支援2 = new RString("要支援2");
     private static final RString 要介護1 = new RString("要介護1");
@@ -262,7 +263,7 @@ public class ChosaOCRTorikomiHandler {
                 && (YokaigoJotaiKubun.要支援1.get名称().equals(get二次判定要介護状態区分(data.get二次判定要介護状態区分コード()))
                 || YokaigoJotaiKubun.要支援2.get名称().equals(get二次判定要介護状態区分(data.get二次判定要介護状態区分コード())))
                 && data.get申請日().isBefore(data.get二次判定認定有効終了年月日().minusDay(INDEX_61))
-                || (要支援1.equals(get二次判定結果(data)) || 要支援2.equals(get二次判定結果(data)))
+                && (要支援1.equals(get二次判定結果(data)) || 要支援2.equals(get二次判定結果(data)))
                 && get二次判定要介護状態区分(data.get二次判定要介護状態区分コード()).equals(get二次判定結果(data))) {
             認定有効期間開始日 = data.get二次判定年月日();
         }
@@ -383,7 +384,7 @@ public class ChosaOCRTorikomiHandler {
                 && data.get介護認定審査会開催予定年月日().isBeforeOrEquals(data.get二次判定認定有効終了年月日())
                 && (YokaigoJotaiKubun.要支援1.get名称().equals(get二次判定要介護状態区分(data.get二次判定要介護状態区分コード()))
                 || YokaigoJotaiKubun.要支援2.get名称().equals(get二次判定要介護状態区分(data.get二次判定要介護状態区分コード())))
-                || (要介護1.equals(get二次判定結果(data)) || 要介護2.equals(get二次判定結果(data)) || 要介護3.equals(get二次判定結果(data))
+                && (要介護1.equals(get二次判定結果(data)) || 要介護2.equals(get二次判定結果(data)) || 要介護3.equals(get二次判定結果(data))
                 || 要介護4.equals(get二次判定結果(data)) || 要介護5.equals(get二次判定結果(data)))) {
             認定有効期間開始日 = get認定有効終了年月日の次月１日(data.get二次判定認定有効終了年月日());
         }
@@ -519,12 +520,33 @@ public class ChosaOCRTorikomiHandler {
         RString 状態区分コード = RString.EMPTY;
         if (!RString.isNullOrEmpty(row.getSecondJudgmentResult())) {
             if (識別コード_99A.equals(data.get厚労省IF識別コード())) {
-                状態区分コード = get状態区分コード99(row.getSecondJudgmentResult());
+                状態区分コード = get状態区分コード99(get区分名称(row.getSecondJudgmentResult()));
             } else if (識別コード_09A.equals(data.get厚労省IF識別コード()) || 識別コード_09B.equals(data.get厚労省IF識別コード())) {
-                状態区分コード = get状態区分コード09(row.getSecondJudgmentResult());
+                状態区分コード = get状態区分コード09(get区分名称(row.getSecondJudgmentResult()));
             }
         }
         return new Code(状態区分コード);
+    }
+
+    private RString get区分名称(RString name) {
+        if (非該当.equals(name)) {
+            name = new RString("非該");
+        } else if (要支援1.equals(name)) {
+            name = new RString("支1");
+        } else if (要支援2.equals(name)) {
+            name = new RString("支2");
+        } else if (要介護1.equals(name)) {
+            name = new RString("介1");
+        } else if (要介護2.equals(name)) {
+            name = new RString("介2");
+        } else if (要介護3.equals(name)) {
+            name = new RString("介3");
+        } else if (要介護4.equals(name)) {
+            name = new RString("介4");
+        } else if (要介護5.equals(name)) {
+            name = new RString("介5");
+        }
+        return name;
     }
 
     private RString get状態区分コード99(RString name) {
@@ -589,7 +611,7 @@ public class ChosaOCRTorikomiHandler {
         return kekkaJoho.createBuilderForEdit().set合議体番号(data.get合議体番号())
                 .set介護認定審査会開催年月日(new FlexibleDate(get審査会開催日(data.get審査会開催日())))
                 .set介護認定審査会開始時刻(data.get開催開始時間())
-                .set介護認定審査会終了時刻(data.get開催開始時間())
+                .set介護認定審査会終了時刻(data.get開催終了時間())
                 .set介護認定審査会開催場所コード(data.get介護認定審査会開催予定場所コード())
                 .set所要時間合計(get所要時間合計(data))
                 .set介護認定審査会実施人数(rStringToInt(data.get実施人数()))

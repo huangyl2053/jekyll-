@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0010016;
 
 import java.util.List;
@@ -33,10 +32,10 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  * @reamsid_L DBC-2970-080 zhaoran
  */
 public class ShokujiHiyoShokai {
-   
+
     private static final int ZERO_INT = 0;
     private static final int SEX_INT = 6;
-    
+
     /**
      * 画面の初期化です。
      *
@@ -69,9 +68,9 @@ public class ShokujiHiyoShokai {
                 サービス提供年月, 識別番号検索キー).records().get(0);
         getHandler(div).setButton(識別番号管理データ取得, サービス提供年月);
         return ResponseData.of(div).respond();
-        
-   }
-    
+
+    }
+
     /**
      * 「前事業者」ボタン押下
      *
@@ -111,7 +110,7 @@ public class ShokujiHiyoShokai {
         getHandler(div).change事業者(new RString("後事業者"), 事業者番号リスト, 給付実績食事費用1504, 給付実績明細, 給付実績食事費用1503);
         return ResponseData.of(div).respond();
     }
-    
+
     /**
      * 「前月」ボタン押下
      *
@@ -132,21 +131,25 @@ public class ShokujiHiyoShokai {
         FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         if (提供年月.isBeforeOrEquals(サービス提供年月)) {
             getHandler(div).change食費1504年月(new RString("前月"), 給付実績食事費用1504,
-                new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString()),
-                ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
-                給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号(),
-                ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class));
+                    new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString()),
+                    ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
+                    給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号(),
+                    ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class));
             getHandler(div).change明細年月(new RString("前月"), 給付実績明細,
-                new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString()),
-                ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
-                給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号(),
-                ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class));
+                    new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString()),
+                    ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
+                    給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号(),
+                    ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class));
+            FlexibleYearMonth 画面提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
+            ViewStateHolder.put(ViewStateKeys.サービス提供年月, 画面提供年月);
         } else {
             getHandler(div).change食費1503年月(new RString("前月"), 給付実績食事費用1503,
-                new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString()),
-                ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
-                給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号(),
-                ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class));
+                    new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString()),
+                    ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
+                    給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号(),
+                    ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class));
+            FlexibleYearMonth 画面提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
+            ViewStateHolder.put(ViewStateKeys.サービス提供年月, 画面提供年月);
         }
         return ResponseData.of(div).respond();
     }
@@ -171,26 +174,30 @@ public class ShokujiHiyoShokai {
         FlexibleYearMonth サービス提供年月 = ViewStateHolder.get(ViewStateKeys.サービス提供年月, FlexibleYearMonth.class);
         if (提供年月.isBeforeOrEquals(サービス提供年月)) {
             getHandler(div).change食費1504年月(new RString("次月"), 給付実績食事費用1504,
-                new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString()),
-                ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
-                給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号(),
-                ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class));
+                    new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString()),
+                    ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
+                    給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号(),
+                    ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class));
             getHandler(div).change明細年月(new RString("次月"), 給付実績明細,
-                new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString()),
-                ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
-                給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号(),
-                ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class));
+                    new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString()),
+                    ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
+                    給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号(),
+                    ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class));
+            FlexibleYearMonth 画面提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
+            ViewStateHolder.put(ViewStateKeys.サービス提供年月, 画面提供年月);
         } else {
             getHandler(div).change食費1503年月(new RString("次月"), 給付実績食事費用1503,
-                new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString()),
-                ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
-                給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号(),
-                ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class));
+                    new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString()),
+                    ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
+                    給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号(),
+                    ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class));
+            FlexibleYearMonth 画面提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
+            ViewStateHolder.put(ViewStateKeys.サービス提供年月, 画面提供年月);
         }
         return ResponseData.of(div).respond();
     }
-    
-   /**
+
+    /**
      * 基本情報ボタンを押します。
      *
      * @param div 画面情報
@@ -229,7 +236,7 @@ public class ShokujiHiyoShokai {
     public ResponseData onClick_btnShoteiShikkanShisetsuRyoyo(ShokujiHiyoShokaiDiv div) {
         return ResponseData.of(div).forwardWithEventName(DBC0010016TransitionEventName.所定疾患施設療養費).respond();
     }
-    
+
     /**
      * 福祉用具購入費ボタンを押します。
      *
@@ -269,7 +276,7 @@ public class ShokujiHiyoShokai {
     public ResponseData onClick_btnTokuteiShinryo(ShokujiHiyoShokaiDiv div) {
         return ResponseData.of(div).forwardWithEventName(DBC0010016TransitionEventName.特定診療費).respond();
     }
-    
+
     /**
      * 居宅サービス計画費ボタンを押します。
      *
@@ -319,7 +326,7 @@ public class ShokujiHiyoShokai {
     public ResponseData onClick_btnReturn(ShokujiHiyoShokaiDiv div) {
         return ResponseData.of(div).forwardWithEventName(DBC0010016TransitionEventName.給付実績照会検索一覧).respond();
     }
-    
+
     private ShokujiHiyoShokaiHandler getHandler(ShokujiHiyoShokaiDiv div) {
         return new ShokujiHiyoShokaiHandler(div);
     }

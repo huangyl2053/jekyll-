@@ -42,7 +42,7 @@ public class SogojigyohiKohiJukyushaPageBreak extends PageBreaker<SogojigyohiKoh
                 && !currentSource.getSource().kohiFutanshaNo.equals(nextSource.getSource().kohiFutanshaNo)) {
             flag = true;
         } else if (this.breakKeysList.contains(SogojigyohiKohiJukyushaOutPutOrder.被保険者番号.get項目ID())
-                && !currentSource.getSource().listUpper_4.equals(nextSource.getSource().listUpper_4)) {
+                && !currentSource.getSource().listUpper_10.equals(nextSource.getSource().listUpper_10)) {
             flag = true;
         }
         return flag;

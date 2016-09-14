@@ -69,13 +69,13 @@ public class RenkeiDataSakuseiShinseiJohoHandler {
         RString 最大表示件数 = get最大表示件数();
         Decimal saidikensu = new Decimal(最大表示件数.toString());
         if (outPutHistory != null) {
-            if (outPutHistory.getDataOutputKaishiYMDHM() != null) {
-                zenkaikaishiday = outPutHistory.getDataOutputKaishiYMDHM().getDate();
-                zenkaikaishitime = outPutHistory.getDataOutputKaishiYMDHM().getTime();
+            if (outPutHistory.getDataOutputKaishiYMDHMS() != null) {
+                zenkaikaishiday = outPutHistory.getDataOutputKaishiYMDHMS().getDate();
+                zenkaikaishitime = outPutHistory.getDataOutputKaishiYMDHMS().getRDateTime().getTime();
             }
-            if (outPutHistory.getDataOutputShuryoYMDHM() != null) {
-                zenkaishuryoday = outPutHistory.getDataOutputShuryoYMDHM().getDate();
-                zenkaishuryotime = outPutHistory.getDataOutputShuryoYMDHM().getTime();
+            if (outPutHistory.getDataOutputShuryoYMDHMS() != null) {
+                zenkaishuryoday = outPutHistory.getDataOutputShuryoYMDHMS().getDate();
+                zenkaishuryotime = outPutHistory.getDataOutputShuryoYMDHMS().getRDateTime().getTime();
             }
             if (zenkaikaishiday != null) {
                 div.getTxtZenkaiKaishiDay().setValue(zenkaikaishiday);
@@ -316,5 +316,4 @@ public class RenkeiDataSakuseiShinseiJohoHandler {
     private RString get最大表示件数() {
         return DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
     }
-
 }

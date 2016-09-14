@@ -34,7 +34,7 @@
         </if>
         <if test="再処理区分 == 0">
             dbt3075."kokanJohoShikibetsuNo" LIKE #{交換情報識別番号}
-            AND dbt3075."sofuYM" IS NULL OR dbt3075."sofuYM" = ''
+            AND (dbt3075."sofuYM" IS NULL OR dbt3075."sofuYM" = '')
             AND dbt3075."isDeleted" = false
         </if>
         ORDER BY
@@ -119,6 +119,18 @@
         AND "DbT3075KogakuGassanKyufuJisseki"."shikyuShinseiSeiriNo" = dbwt38Q1."shikyuShinseiSeiriNo"
         AND "DbT3075KogakuGassanKyufuJisseki"."seiriNo" = dbwt38Q1."seiriNo"
         AND dbwt38Q1."sofuJogaiFlag" = #{送付除外フラグ}
+    </select>
+    
+    <select id="get送付ファイル作成データ件数" resultOrdered="true" fetchSize="500"
+            resultType="int" >
+        SELECT
+            count(*)
+        FROM
+            "DbWT38Q1KogakuGassanKyufuJisseki" AS DbWT38Q1
+        INNER JOIN "DbWT1001Hihokensha" AS DbWT1001
+        ON DbWT38Q1."renban" = DbWT1001."exRenban"
+        WHERE
+            DbWT38Q1."sofuJogaiFlag" = false
     </select>
     
     <select id="get送付ファイル作成データ" resultOrdered="true" fetchSize="500"

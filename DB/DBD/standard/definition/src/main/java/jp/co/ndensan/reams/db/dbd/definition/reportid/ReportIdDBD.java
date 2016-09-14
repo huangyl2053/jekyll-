@@ -168,6 +168,14 @@ public enum ReportIdDBD {
      */
     DBD550002(new ReportId("DBD550002_ServiceHenkoTshuchisho"), new RString("サービス変更通知書")),
     /**
+     * 受給者減免月別申請・認定状況表の帳票ＩＤです。
+     */
+    DBD300001(new ReportId("DBD300001_JukyushaGemmenTsukibetsuShinseiNinteiJokyohyo"), new RString("受給者減免月別申請・認定状況表")),
+    /**
+     * 受給者減免月別認定者数状況表の帳票ＩＤです。
+     */
+    DBD300002(new ReportId("DBD300002_JukyushaGemmenTsukibetsuNinteishaJokyohyo"), new RString("受給者減免月別認定者数状況表")),
+    /**
      * 要介護認定実施状況表（統計表）の帳票ＩＤです。
      */
     DBD300003(new ReportId("DBD300003_YokaigoNinteiJisshiJokyohyo"), new RString("要介護認定実施状況表（統計表）")),

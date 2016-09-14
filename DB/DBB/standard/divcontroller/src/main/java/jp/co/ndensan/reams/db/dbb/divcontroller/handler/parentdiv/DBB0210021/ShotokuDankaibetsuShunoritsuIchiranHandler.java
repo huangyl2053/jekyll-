@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -71,8 +70,9 @@ public class ShotokuDankaibetsuShunoritsuIchiranHandler {
     /**
      * 画面初期化のメソッドます。
      *
+     * @return RString
      */
-    public void onLoad() {
+    public RString onLoad() {
         基準日 = RDate.getNowDate();
         RString 日付関連_調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, 基準日, SubGyomuCode.DBB介護賦課);
         調定年度 = new RDate(日付関連_調定年度.toString());
@@ -101,8 +101,9 @@ public class ShotokuDankaibetsuShunoritsuIchiranHandler {
         div.getDdlJukyuKijunM().setDataSource(ddlJukyuKijunM);
         div.getDdlJukyuKijunM().setSelectedValue(システム日付の月);
         div.getRadChushutsuJoken().setSelectedKey(NUM_1);
-        onChange_radChushutsuJoken(日付関連_調定年度, 日付関連_当初年度);
+        RString 現在基準月 = onChange_radChushutsuJoken(日付関連_調定年度, 日付関連_当初年度, システム日付の月);
         年齢_生年月日の選択状態();
+        return 現在基準月;
     }
 
     /**
@@ -110,16 +111,21 @@ public class ShotokuDankaibetsuShunoritsuIchiranHandler {
      *
      * @param 日付関連_調定年度 RString
      * @param 日付関連_当初年度 RString
+     * @param 未来基準月 RString
      * @return ResponseData ShotokuDankaibetsuShunoritsuIchiranDiv
      */
-    public ResponseData<ShotokuDankaibetsuShunoritsuIchiranDiv> onChange_radChushutsuJoken(RString 日付関連_調定年度, RString 日付関連_当初年度) {
+    public RString onChange_radChushutsuJoken(RString 日付関連_調定年度, RString 日付関連_当初年度, RString 未来基準月) {
+        RString 現在基準月 = div.getDdlJukyuKijunM().getSelectedValue();
+        if (現在基準月 == null || 現在基準月.isEmpty()) {
+            現在基準月 = 未来基準月;
+        }
         if (div.getRadChushutsuJoken().getSelectedKey().equals(NUM_1)) {
             div.getDdlJukyuKijunY().setDisabled(true);
             div.getDdlJukyuKijunM().setDisabled(true);
             div.getDdlJukyuKijunY().getDataSource().clear();
             div.getDdlJukyuKijunM().getDataSource().clear();
             div.getDdlJukyuKijunM().setLabelRText(RString.EMPTY);
-            return ResponseData.of(div).respond();
+            return 現在基準月;
         }
         RYear 調定年度の年 = new RYear(日付関連_調定年度);
         RYear 当初年度の年 = new RYear(日付関連_当初年度);
@@ -130,19 +136,20 @@ public class ShotokuDankaibetsuShunoritsuIchiranHandler {
         List<KeyValueDataSource> ddlJukyuKijunM = setdataSourceM();
         div.getDdlJukyuKijunM().setDataSource(ddlJukyuKijunM);
         div.getDdlJukyuKijunY().setSelectedValue(調定年度の年.toDateString());
+        div.getDdlJukyuKijunM().setSelectedValue(現在基準月);
         if (div.getRadChushutsuJoken().getSelectedKey().equals(NUM_2)) {
             div.getDdlJukyuKijunM().setLabelRText(月時点の認定者);
-            return ResponseData.of(div).respond();
+            return 現在基準月;
         }
         if (div.getRadChushutsuJoken().getSelectedKey().equals(NUM_3)) {
             div.getDdlJukyuKijunM().setLabelRText(月時点の受給者);
-            return ResponseData.of(div).respond();
+            return 現在基準月;
         }
         if (div.getRadChushutsuJoken().getSelectedKey().equals(NUM_4)) {
             div.getDdlJukyuKijunM().setLabelRText(月時点の認定者);
-            return ResponseData.of(div).respond();
+            return 現在基準月;
         }
-        return ResponseData.of(div).respond();
+        return 現在基準月;
     }
 
     /**
@@ -195,10 +202,10 @@ public class ShotokuDankaibetsuShunoritsuIchiranHandler {
         parameter.set調定年度_終了(new FlexibleYear(調定年度_終了.getYear().toDateString()));
         parameter.set賦課年度_開始(new FlexibleYear(賦課年度_開始.getYear().toDateString()));
         parameter.set賦課年度_終了(new FlexibleYear(賦課年度_終了.getYear().toDateString()));
-        if (!(日付関連_調定年度.isNullOrEmpty())) {
+        if (!(日付関連_調定年度 == null || 日付関連_調定年度.isEmpty())) {
             parameter.set会計年度(new FlexibleYear(日付関連_調定年度));
         }
-        if (!(調定基準月.isNullOrEmpty())) {
+        if (!(調定基準月 == null || 調定基準月.isEmpty())) {
             if (調定基準月.length() == 定数_1) {
                 調定基準年月 = 調定基準年.concat(NUM_0).concat(調定基準月);
             }

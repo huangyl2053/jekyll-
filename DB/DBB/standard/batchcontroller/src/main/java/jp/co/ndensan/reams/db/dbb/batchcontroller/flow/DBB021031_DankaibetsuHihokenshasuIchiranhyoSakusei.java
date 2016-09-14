@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbt21004.DankaiProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbt21004.HihokenshaProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbt21004.ReportCSVProcess;
@@ -39,6 +40,9 @@ public class DBB021031_DankaibetsuHihokenshasuIchiranhyoSakusei extends BatchFlo
     private static final RString BATCH_ID = new RString("SetaiShotokuKazeiHanteiFlow");
     private ShotokuDankaibetsuHihokenshaSuIchiranBatchParameter parameter;
     private DankaibetuHihokensyasuIchiranhyoProcessParameter processParameter;
+    private static final RString DOUHAO = new RString(",");
+    private static final int ZERO = 0;
+    private static final int ONE = 1;
 
     @Override
     protected void defineFlow() {
@@ -49,7 +53,13 @@ public class DBB021031_DankaibetsuHihokenshasuIchiranhyoSakusei extends BatchFlo
         processParameter.set調定年度(new FlexibleYear(parameter.getSettingnendo()));
         processParameter.set本算定賦課処理日(new FlexibleDate(new RString(parameter.getTreatmentday().toString())));
         processParameter.set広域分市町村分区分(parameter.getRegiondivision());
-        processParameter.set市町村コード複数(parameter.getDantaiCd());
+        RString 市町村コード複数 = null;
+        if (parameter.getDantaiCd() != null) {
+            市町村コード複数 = get市町村コード複数(parameter.getDantaiCd(), 市町村コード複数);
+        }
+        if (市町村コード複数 != null) {
+            processParameter.set市町村コード複数(市町村コード複数.substringReturnAsPossible(ZERO, 市町村コード複数.length() - ONE));
+        }
         processParameter.set資格基準日(new FlexibleDate(new RString(parameter.getQkijund().toString())));
         processParameter.set調定基準日(new FlexibleDate(new RString(parameter.getAdjustedkijund().toString())));
         processParameter.setバッチ起動時処理日時(システム日時);
@@ -87,7 +97,8 @@ public class DBB021031_DankaibetsuHihokenshasuIchiranhyoSakusei extends BatchFlo
      */
     @Step(世帯員把握)
     protected IBatchFlowCommand collectSetaiin() {
-        return otherBatchFlow(BATCH_ID, SubGyomuCode.DBB介護賦課, new SetaiShotokuKazeiHanteiBatchParameter(SetaiinHaakuKanriShikibetsuKubun.賦課.getコード())).define();
+        return otherBatchFlow(BATCH_ID, SubGyomuCode.DBB介護賦課,
+                new SetaiShotokuKazeiHanteiBatchParameter(SetaiinHaakuKanriShikibetsuKubun.賦課.getコード())).define();
     }
 
     /**
@@ -120,4 +131,14 @@ public class DBB021031_DankaibetsuHihokenshasuIchiranhyoSakusei extends BatchFlo
         return loopBatch(ReportProcess.class).arguments(processParameter).define();
     }
 
+    private RString get市町村コード複数(
+            List<RString> dantaiCdLis,
+            RString 市町村コード複数) {
+        for (RString dantaiCd : dantaiCdLis) {
+            if (dantaiCd != null) {
+                市町村コード複数 = dantaiCd.concat(DOUHAO);
+            }
+        }
+        return 市町村コード複数;
+    }
 }

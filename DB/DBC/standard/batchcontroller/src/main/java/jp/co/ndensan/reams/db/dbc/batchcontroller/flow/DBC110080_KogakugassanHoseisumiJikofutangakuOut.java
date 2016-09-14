@@ -107,7 +107,7 @@ public class DBC110080_KogakugassanHoseisumiJikofutangakuOut extends BatchFlowBa
     }
 
     /**
-     * 送付対象データ取得操作です。
+     * 高額合算自己負担額明細データの存在確認操作です。
      *
      * @return IBatchFlowCommand
      */

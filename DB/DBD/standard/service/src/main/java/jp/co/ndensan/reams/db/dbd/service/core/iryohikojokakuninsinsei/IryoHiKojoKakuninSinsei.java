@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.iryohikojokakuninsinsei.AtesakiParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.iryohikojokakuninsinsei.ShikibetsuTaishoParameter;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.iryohikojokakuninsinsei.IryohiKojoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.iryohikojokakuninsinsei.OmutsusiyoSyomeishoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.iryohikojokakuninsinsei.SogoJigyouTaisyouSyaJyohoJoho;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.iryohikojokakuninsinsei.IIryoHiKojoKakuninSinseiMapper;
@@ -114,9 +115,19 @@ public class IryoHiKojoKakuninSinsei {
 
     /**
      * 単票用医療費控除取得
+     *
+     * @param 被保険者番号
+     * @param データ区分
+     * @return 医療費控除情報
      */
-    public void getIryohikojyo_Chohyo() {
-
+    public List<IryohiKojoEntity> getIryohikojyo_Chohyo(RString 被保険者番号, RString データ区分) {
+        IIryoHiKojoKakuninSinseiMapper mapper = mapperProvider.create(IIryoHiKojoKakuninSinseiMapper.class);
+        List<IryohiKojoEntity> 単票用医療費控除 = new ArrayList<>();
+        List<IryohiKojoEntity> result = mapper.select単票用医療費控除(被保険者番号, データ区分);
+        if (result != null) {
+            単票用医療費控除 = result;
+        }
+        return 単票用医療費控除;
     }
 
     /**
