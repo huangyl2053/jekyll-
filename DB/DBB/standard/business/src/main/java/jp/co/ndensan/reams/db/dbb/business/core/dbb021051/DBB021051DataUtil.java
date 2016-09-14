@@ -173,6 +173,7 @@ public class DBB021051DataUtil {
             DBB021051ProcessParameter parameter, DBB021051TableJohoTempEntity entity) {
         最優先住所がニ = TWO.equals(parameter.get最優先住所());
         DBZ100001AtenaSealEntity atena = new DBZ100001AtenaSealEntity();
+        atena.set識別コード(entity.get識別コード());
         atena.set郵便番号(nonullRStr(entity.get郵便番号()));
         atena.set行政区(entity.get行政区());
 //        TODO QA Redmine#100667
