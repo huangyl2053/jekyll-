@@ -24,8 +24,6 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0200001.Tais
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0200001.dgGaitoshaList_Row;
 import static jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ0300001.DBZ0300001TransitionEventName.対象者特定;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.ResponseDatas;
-//import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV7901ShikakuSearchEntity;
-//import jp.co.ndensan.reams.db.dbz.entity.db.relate.TaishoshaRelateEntity;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaFinder;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.core.search.ShikakuSearchItem;
@@ -59,6 +57,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.INewSearchCondition;
 import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.ISearchCondition;
 import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.SearchConditionFactory;
 import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.StringOperator;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 対象者検索のコントローラークラスです。（資格系）
@@ -227,7 +226,7 @@ public class TaishoshaSearch {
         IShikibetsuTaishoSearchKey 検索キー
                 = new ShikibetsuTaishoSearchKeyBuilder(業務判定キー, true).set識別コード(識別コード).build();
         TaishoshaFinder finder = new TaishoshaFinder();
-        SearchResult<TaishoshaRelateBusiness> 対象者 = finder.get資格対象者(条件無, 条件無, 検索キー, 最近処理者検索数);
+        SearchResult<TaishoshaRelateBusiness> 対象者 = finder.get資格対象者(条件無, 条件無, 検索キー, 最近処理者検索数, HihokenshaNo.EMPTY);
         if (!対象者.records().isEmpty()) {
             for (TaishoshaRelateBusiness entity : 対象者.records()) {
                 put対象者Key(create対象者Key(entity));
@@ -276,8 +275,13 @@ public class TaishoshaSearch {
     }
 
     private SearchResult<TaishoshaRelateBusiness> get対象者(IHihokenshaFinderDiv div) {
-        TaishoshaFinder finder = new TaishoshaFinder();
-        return finder.get資格対象者(get介護条件(div), get介護除外条件(div), div.get宛名条件(), 最大取得件数);
+        TaishoshaFinder finder = InstanceProvider.create(TaishoshaFinder.class);
+        HihokenshaNo hihokenshaNo = HihokenshaNo.EMPTY;
+        if (div.get被保険者番号() != null && !div.get被保険者番号().isEmpty()) {
+            hihokenshaNo = new HihokenshaNo(div.get被保険者番号());
+        }
+
+        return finder.get資格対象者(get介護条件(div), get介護除外条件(div), div.get宛名条件(), 最大取得件数, hihokenshaNo);
     }
 
     private ISearchCondition get介護条件(IHihokenshaFinderDiv div) {
