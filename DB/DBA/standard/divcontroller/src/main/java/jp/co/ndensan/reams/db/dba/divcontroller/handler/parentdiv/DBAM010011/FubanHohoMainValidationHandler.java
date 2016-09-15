@@ -57,6 +57,12 @@ public class FubanHohoMainValidationHandler {
         }
         return validPairs;
     }
+    
+    public ValidationMessageControlPairs validateForHenkouKakiKubun() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        validPairs.add(new ValidationMessageControlPair(new IdocheckMessages(UrErrorMessages.更新不可, "被保険者番号付番方法は変更不可の設定")));
+        return validPairs;
+    }
 
     private static class IdocheckMessages implements IValidationMessage {
 

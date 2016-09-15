@@ -34,7 +34,7 @@ public class HanyoListParam {
     private static final RString モード3 = new RString("他市町村住所地特例者");
     private static final RString モード4 = new RString("老齢福祉年金受給者");
     private static final RString モード5 = new RString("生活保護受給者");
-
+    private static final RString タイトル = new RString("汎用リスト");
     /**
      * 汎用リスト（資格）を初期化します。
      *
@@ -45,24 +45,26 @@ public class HanyoListParam {
         RString モード = ResponseHolder.getState();
         ViewStateHolder.put(ViewStateKeys.モード, モード);
         getHandler(div).onLoad(モード);
+        ResponseData<HanyoListParamDiv> data = ResponseData.of(div).rootTitle(タイトル.concat("　").concat(モード)).respond();
+
         if (モード2.equals(モード)) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA701003.getReportId());
             div.getCcdShutsuryokuKomoku().load(ReportIdDBA.DBA701003.getReportId().value(), SubGyomuCode.DBA介護資格);
-            return ResponseData.of(div).setState(DBA7020001StateName.適用除外者);
+            ResponseData.of(div).setState(DBA7020001StateName.適用除外者);
         } else if (モード3.equals(モード)) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA701002.getReportId());
             div.getCcdShutsuryokuKomoku().load(ReportIdDBA.DBA701002.getReportId().value(), SubGyomuCode.DBA介護資格);
-            return ResponseData.of(div).setState(DBA7020001StateName.他市町村住所地特例者);
+            ResponseData.of(div).setState(DBA7020001StateName.他市町村住所地特例者);
         } else if (モード4.equals(モード)) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA701004.getReportId());
             div.getCcdShutsuryokuKomoku().load(ReportIdDBA.DBA701004.getReportId().value(), SubGyomuCode.DBA介護資格);
-            return ResponseData.of(div).setState(DBA7020001StateName.老齢福祉年金受給者);
+            ResponseData.of(div).setState(DBA7020001StateName.老齢福祉年金受給者);
         } else if (モード5.equals(モード)) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA701006.getReportId());
             div.getCcdShutsuryokuKomoku().load(ReportIdDBA.DBA701006.getReportId().value(), SubGyomuCode.DBA介護資格);
-            return ResponseData.of(div).setState(DBA7020001StateName.生活保護受給者);
+            ResponseData.of(div).setState(DBA7020001StateName.生活保護受給者);
         }
-        return ResponseData.of(div).respond();
+        return data;
     }
 
     /**
