@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IShikibe
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.IPsmCriteria;
 import jp.co.ndensan.reams.uz.uza.util.db.ITrueFalseCriteria;
@@ -113,6 +114,23 @@ public class TaishoshaFinder {
     @Transaction
     public SearchResult<FukaTaishoshaRelateBusiness> get賦課対象者(ISearchCondition 条件, ISearchCondition 除外条件,
             IShikibetsuTaishoSearchKey 宛名キー, int 最大件数) {
+        return get賦課対象者(条件, 除外条件, 宛名キー, 最大件数, RString.EMPTY, HihokenshaNo.EMPTY);
+    }
+
+    /**
+     * 条件に該当する賦課対象者を取得します。
+     *
+     * @param 条件 介護の検索条件
+     * @param 除外条件 介護の検索除外条件
+     * @param 宛名キー 宛名の検索キー
+     * @param 最大件数 最大取得件数
+     * @param 通知書番号 通知書番号
+     * @param 被保険者番号 被保険者番号
+     * @return 賦課対象者
+     */
+    @Transaction
+    public SearchResult<FukaTaishoshaRelateBusiness> get賦課対象者(ISearchCondition 条件, ISearchCondition 除外条件,
+            IShikibetsuTaishoSearchKey 宛名キー, int 最大件数, RString 通知書番号, HihokenshaNo 被保険者番号) {
 
         FukaSearchMenu menu = FukaSearchMenu.toValue(ResponseHolder.getMenuID());
 //        FukaSearchMenu menu = FukaSearchMenu.toValue(new RString("DBBMN11001"));
@@ -120,7 +138,8 @@ public class TaishoshaFinder {
         ITrueFalseCriteria 介護条件 = getCriteria(条件, 除外条件);
         ShikibetsuTaishoSearchKeyBuilder builder = new ShikibetsuTaishoSearchKeyBuilder(宛名キー.getPSMSearchKey());
 
-        if (条件 != null && 条件.isEvaluatable() && builder.getPSM検索キー().get識別コード().isEmpty()) {
+        if ((!通知書番号.isEmpty() || !被保険者番号.isEmpty())
+                && 条件 != null && 条件.isEvaluatable() && builder.getPSM検索キー().get識別コード().isEmpty()) {
             IItemList<ShikibetsuCode> shikibetsuCodeList = dac.get賦課対象識別コードリスト(介護条件);
             builder.set識別コードリスト(shikibetsuCodeList.toList());
         }

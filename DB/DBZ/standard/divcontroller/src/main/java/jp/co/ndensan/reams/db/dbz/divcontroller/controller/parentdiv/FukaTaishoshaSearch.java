@@ -157,9 +157,9 @@ public class FukaTaishoshaSearch {
         // 検索条件未指定チェック
         HihokenshaFinderDiv 検索条件Div = div.getSearchCondition().getCcdSearchCondition();
         boolean 検索条件Flag = 検索条件Div.getKaigoFinder().getTxtHihokenshaNo().getValue().isEmpty()
-                           && 検索条件Div.getKaigoFinder().getTxtTuchishoNo().getValue().isEmpty()
-                           && 検索条件Div.getKaigoFinder().getDdlFukaNendo().getSelectedKey().isEmpty()
-                           && 検索条件Div.getKaigoFinder().getKaigoFinderDetail().getChkHihokenshaDaicho().getSelectedItems().isEmpty(); //&& !検索条件Div.getCcdAtenaFinder().hasChanged()
+                && 検索条件Div.getKaigoFinder().getTxtTuchishoNo().getValue().isEmpty()
+                && 検索条件Div.getKaigoFinder().getDdlFukaNendo().getSelectedKey().isEmpty()
+                && 検索条件Div.getKaigoFinder().getKaigoFinderDetail().getChkHihokenshaDaicho().getSelectedItems().isEmpty(); //&& !検索条件Div.getCcdAtenaFinder().hasChanged()
 
         boolean 宛名条件修正Flag = 検索条件Div.getCcdAtenaFinder().hasChanged();
         if (検索条件Flag && !宛名条件修正Flag) {
@@ -260,7 +260,7 @@ public class FukaTaishoshaSearch {
                     通知書番号_絞り込み前 = entity.get賦課検索エンティティ().getTsuchishoNo().value();
                 }
                 if (!(被保険者番号.equals(被保険者番号_絞り込み前) && 賦課年度.equals(賦課年度_絞り込み前)
-                      && 通知書番号.equals(通知書番号_絞り込み前))) {
+                        && 通知書番号.equals(通知書番号_絞り込み前))) {
                     list.add(entity);
                     被保険者番号 = 被保険者番号_絞り込み前;
                     賦課年度 = 賦課年度_絞り込み前;
@@ -370,7 +370,16 @@ public class FukaTaishoshaSearch {
 //        } else {
 //
 //        }
-        return finder.get賦課対象者(get介護条件(div), get介護除外条件(div, menu), div.get宛名条件(), 最大取得件数);
+        RString 通知書番号 = div.get通知書番号();
+        if (通知書番号 == null) {
+            通知書番号 = RString.EMPTY;
+        }
+        HihokenshaNo 被保険者番号 = HihokenshaNo.EMPTY;
+        if (div.get被保険者番号() != null || !div.get被保険者番号().isEmpty()) {
+            被保険者番号 = new HihokenshaNo(div.get被保険者番号());
+        }
+
+        return finder.get賦課対象者(get介護条件(div), get介護除外条件(div, menu), div.get宛名条件(), 最大取得件数, 通知書番号, 被保険者番号);
     }
 
     private ISearchCondition get介護条件(HihokenshaFinderDiv div) {
@@ -525,8 +534,8 @@ public class FukaTaishoshaSearch {
                     個人.get性別() != null ? (個人.get性別().getName() != null ? 個人.get性別().getName().getShortJapanese() : RString.EMPTY) : RString.EMPTY,
                     個人.get住民状態() != null ? 個人.get住民状態().住民状態略称() : RString.EMPTY,
                     識別対象.get住所() != null ? ((識別対象.get住所().get住所() != null && 識別対象.get住所().get番地() != null)
-                                            ? 識別対象.get住所().get住所().concat(識別対象.get住所().get番地().getBanchi().value())
-                                            : 識別対象.get住所().get住所()) : RString.EMPTY,
+                    ? 識別対象.get住所().get住所().concat(識別対象.get住所().get番地().getBanchi().value())
+                    : 識別対象.get住所().get住所()) : RString.EMPTY,
                     識別対象.get識別コード() != null ? 識別対象.get識別コード().value() : RString.EMPTY,
                     個人.get世帯コード() != null ? 個人.get世帯コード().value() : RString.EMPTY));
         }
