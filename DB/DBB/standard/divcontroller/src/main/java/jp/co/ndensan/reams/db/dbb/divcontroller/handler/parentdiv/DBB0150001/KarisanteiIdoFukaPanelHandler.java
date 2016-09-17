@@ -542,6 +542,12 @@ public class KarisanteiIdoFukaPanelHandler {
         YMDHMS 異動賦課の基準日時 = dbT7022Entity.get基準日時();
         dbT7022Entity = idoFuka.get基準日時(年度, 仮算定異動賦課確定_処理名);
         YMDHMS 異動賦課確定の基準日時 = dbT7022Entity.get基準日時();
+        if(異動賦課の基準日時 == null || 異動賦課の基準日時.isEmpty()){
+            異動賦課の基準日時 = new YMDHMS(RDateTime.MIN);
+        }
+        if(異動賦課確定の基準日時 == null || 異動賦課確定の基準日時.isEmpty()){
+            異動賦課確定の基準日時 = new YMDHMS(RDateTime.MIN);
+        }
         return 異動賦課確定の基準日時.isBefore(異動賦課の基準日時);
     }
 
