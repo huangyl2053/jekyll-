@@ -92,7 +92,6 @@ public class DBD206010_JigyoshoMukeShakaFukushiHojinKeigenTaishoshaIchiranHakko
         processParameter.set事業者名(parameter.get事業者名());
         processParameter.set事業者番号(parameter.get事業者番号());
         processParameter.set処理日時(parameter.get処理日時());
-        processParameter.set改頁出力順ID(parameter.get改頁出力順ID());
         processParameter.set出力順ID(parameter.get出力順ID());
         processParameter.set資格喪失者選択(parameter.get資格喪失者選択());
         return processParameter;
@@ -107,7 +106,6 @@ public class DBD206010_JigyoshoMukeShakaFukushiHojinKeigenTaishoshaIchiranHakko
         processParameter.set事業者選択(parameter.get事業者選択());
         processParameter.set資格喪失者選択(parameter.get資格喪失者選択());
         processParameter.set事業者番号(parameter.get事業者番号());
-        processParameter.set改頁出力順ID(parameter.get改頁出力順ID());
         processParameter.set出力順ID(parameter.get出力順ID());
 
         return processParameter;
