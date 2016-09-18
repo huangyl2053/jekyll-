@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC1100012;
 
+import java.util.Collections;
 import jp.co.ndensan.reams.db.dbc.business.core.kogaku.KogakuGassanShinseishoDataResult;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1100012.DBC1100012TransitionEventName;
@@ -178,8 +179,12 @@ public class KogakuGassanShikyuShinseiTorokuPanel {
 
         ValidationMessageControlPairs validPairs = getValidationHandler(div).validate();
         if (validPairs.iterator().hasNext()) {
+            div.getKogakuGassanShikyuShinseiTorokuSearch().setIsOpen(true);
+            div.getKogakuGassanShikyuShinseiTorokuSearchResult().setIsOpen(false);
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
+        div.getKogakuGassanShikyuShinseiTorokuSearch().setIsOpen(false);
+        div.getKogakuGassanShikyuShinseiTorokuSearchResult().setIsOpen(true);
         getHandler(div).btnKensaku(new RString(Integer.toString(申請状況)));
         return ResponseData.of(div).respond();
     }
@@ -192,7 +197,9 @@ public class KogakuGassanShikyuShinseiTorokuPanel {
      */
     public ResponseData<KogakuGassanShikyuShinseiTorokuPanelDiv> onClick_btnSaikensaku(KogakuGassanShikyuShinseiTorokuPanelDiv div) {
 
-        div.getKogakuGassanShikyuShinseiTorokuSearchResult().getDgTorokuSearchResult().setDataSource(null);
+        div.getKogakuGassanShikyuShinseiTorokuSearchResult().getDgTorokuSearchResult().setDataSource(Collections.EMPTY_LIST);
+        div.getKogakuGassanShikyuShinseiTorokuSearch().setIsOpen(true);
+        div.getKogakuGassanShikyuShinseiTorokuSearchResult().setIsOpen(false);
         return ResponseData.of(div).respond();
     }
 
@@ -224,6 +231,8 @@ public class KogakuGassanShikyuShinseiTorokuPanel {
                 .getClickedItem().getTxtShinseiKubun().equals(一)
                 || div.getKogakuGassanShikyuShinseiTorokuSearchResult().getDgTorokuSearchResult()
                 .getClickedItem().getTxtShinseiKubun().equals(二))
+                && div.getKogakuGassanShikyuShinseiTorokuSearchResult().getDgTorokuSearchResult()
+                .getClickedItem().getTxtSoshin().getValue() != null
                 && !div.getKogakuGassanShikyuShinseiTorokuSearchResult().getDgTorokuSearchResult()
                 .getClickedItem().getTxtSoshin().getValue().isEmpty()) {
             KogakuGassanShinseishoDataResult dataResult = session作成(div);
