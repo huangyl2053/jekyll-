@@ -709,6 +709,9 @@ public class TokubetsuChoshuJohoAppurodoHandler {
     }
 
     private void 市町村コードチェック(RString ファイルのデータレコード) {
+        if (RString.isNullOrEmpty(div.getShoriJokyoPanel().getDdlShichoson().getSelectedValue())) {
+            throw new ApplicationException(市町村コードチェック_MSG.toString());
+        }
         RString 管理市町村コード = ファイルのデータレコード.substring(INT_0, INT_5);
         RString 市町村コード;
         if (STR_0.equals(div.getShoriJokyoPanel().getGrpHyojikeishiki().getSelectedKey())) {
