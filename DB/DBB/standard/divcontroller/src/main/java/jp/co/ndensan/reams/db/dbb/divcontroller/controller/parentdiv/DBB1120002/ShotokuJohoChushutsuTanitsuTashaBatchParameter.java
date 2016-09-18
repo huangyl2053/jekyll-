@@ -6,7 +6,8 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB1120002;
 
 import java.io.File;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.shutokujohochushutsurenkei.ShutokuJohoChushutsuRenkeiBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB112001.DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB112003.DBB112003_ShotokuJohoChushutsuRenkeiTanitsuParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120002.ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1120002.ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
@@ -132,15 +133,28 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameter {
     }
 
     /**
-     * 「実行する」を押下場合、バリデーション、バッチパラメータの設定とバッチを起動します。
+     * 「実行する」を押下場合、DBB112001 バリデーション、バッチパラメータの設定とバッチを起動します。
      *
      * @param div ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv
-     * @return ResponseData<ShotokuJohoBatchresultTanituParameter>
+     * @return
+     * ResponseData<DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuParameter>
      */
-    public ResponseData<ShutokuJohoChushutsuRenkeiBatchParameter> onclick_batchRegister(
+    public ResponseData<DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuParameter> onclick_batchRegister_DBB112001(
             ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv div) {
-        ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler handler = getHandler(div);
-        ShutokuJohoChushutsuRenkeiBatchParameter parameter = handler.getBatchParamter();
+        DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuParameter parameter = getHandler(div).getBatchParamter_DBB112001();
+        return ResponseData.of(parameter).respond();
+    }
+
+    /**
+     * 「実行する」を押下場合、DBB112003 バリデーション、バッチパラメータの設定とバッチを起動します。
+     *
+     * @param div ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv
+     * @return
+     * ResponseData<DBB112003_ShotokuJohoChushutsuRenkeiTanitsuParameter>
+     */
+    public ResponseData<DBB112003_ShotokuJohoChushutsuRenkeiTanitsuParameter> onclick_batchRegister__DBB112003(
+            ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv div) {
+        DBB112003_ShotokuJohoChushutsuRenkeiTanitsuParameter parameter = getHandler(div).getBatchParameter_DBB112003();
         return ResponseData.of(parameter).respond();
     }
 
