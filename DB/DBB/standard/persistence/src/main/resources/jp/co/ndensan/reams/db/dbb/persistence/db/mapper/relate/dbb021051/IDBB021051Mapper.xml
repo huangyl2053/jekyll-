@@ -8,23 +8,21 @@
             SELECT 
                 "V1001"."hihokenshaNo" AS "hihokenshaNo"
                 ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
-            <if test="最優先住所.toString()=='2' " >
+            <if test="最優先住所 ==2 " >
                 , <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />
             </if>
             FROM    
                 rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',false,
                 '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
                 true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
-            INNER JOIN
-                    rgdb."DbV1001HihokenshaDaicho" AS "V1001"
-                ON		"V1001"."shikibetsuCode"　＝　PSM."shikibetsuCode"
-                AND		"V1001"."hihokennshaKubunCode"　IN　
-                        <if test="資格区分.toString()=='1' || 資格区分.toString()=='3' || 資格区分.toString()=='5'  " >(1)</if>
-                        <if test="資格区分.toString()=='2' || 資格区分.toString()=='4'|| 資格区分.toString()=='6' " >(2)</if>
-                        <if test="資格区分.toString()=='7' " >(1,2)</if>
-            INNER  JOIN		rgdb."DbV2001ChoshuHoho" AS "V2001"
-            ON		"V2001"."hihokenshaNo"　＝　"V1001"."hihokenshaNo"
-            <if test="最優先住所.toString()=='2' " >
+            INNER JOIN rgdb."DbV1001HihokenshaDaicho" AS "V1001" 
+                ON "V1001"."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
+                        <if test="資格区分 ==1  ||  資格区分 ==3 ||  資格区分 ==5 " >AND "V1001"."hihokennshaKubunCode" IN ('1')</if>
+                        <if test="資格区分 ==2  ||  資格区分 ==4 ||  資格区分 ==6 " >AND "V1001"."hihokennshaKubunCode" IN ('2')</if>
+                        <if test="資格区分==7" >AND "V1001"."hihokennshaKubunCode" IN ('1','2')</if>
+            INNER  JOIN rgdb."DbV2001ChoshuHoho" AS "V2001"
+                ON "V2001"."hihokenshaNo" = "V1001"."hihokenshaNo"
+            <if test="最優先住所 ==2 " >
             INNER JOIN
                 rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','') AS "Atesaki"
             ON
@@ -34,162 +32,48 @@
             AND
                 "Atesaki"."juminJotaiCode"="ShikibetsuTaisho"."juminJotaiCode"
             </if>
-            WHERE	"V2001"."fukaNendo"     =   #{基準年月の年}								
-	AND		"ShikibetsuTaisho"."juminShubetsuCode"　IN　
-                        <if test="資格区分.toString()=='1' || 資格区分.toString()=='2' " >(1)</if>
-                        <if test="資格区分.toString()=='3' || 資格区分.toString()=='4' " >(2)</if>
-                        <if test="資格区分.toString()=='5'|| 資格区分.toString()=='6'||資格区分.toString()=='7' " >(1,2)</if>													
-	AND		"ShikibetsuTaisho"."juminJotaiCode"　IN　
-                        <if test="資格区分.toString()=='1' || 資格区分.toString()=='2' || 資格区分.toString()=='3'|| 資格区分.toString()=='4' || 資格区分.toString()=='5'  " >(1)</if>
-                        <if test="資格区分.toString()=='6'|| 資格区分.toString()=='7' " >(1,2)</if>													
-                    <if test="抽出対象者.toString()=='1' ">
-                    AND		<include refid="WK_判定徴収方法" />　＝　3
-                    </if>	
-                    <if test="抽出対象者.toString()=='2' ">
-                    AND		(<include refid="WK_判定徴収方法" />　＝　1
-                    OR		<include refid="WK_判定徴収方法" />　 ＝　2)
-                    </if>     				
-                    <if test="抽出対象者.toString()=='3' ">																
-                    AND		(<include refid="WK_判定徴収方法" />  ＝    1
-                    OR		<include refid="WK_判定徴収方法" />　＝　2
-                    OR		<include refid="WK_判定徴収方法" />　＝　3)
+            WHERE "V2001"."fukaNendo" = #{基準年月の年}
+                    <if test="資格区分 ==1 || 資格区分 ==2 " >AND  "ShikibetsuTaisho"."juminShubetsuCode" IN ('1')</if>
+                    <if test="資格区分 ==3 || 資格区分 ==4 " >AND  "ShikibetsuTaisho"."juminShubetsuCode" IN ('2')</if>
+                    <if test="資格区分 ==5 || 資格区分 ==6 || 資格区分 ==7 " >AND  "ShikibetsuTaisho"."juminShubetsuCode" IN ('1','2')</if>
+                    <if test="資格区分 ==1 || 資格区分 ==2 || 資格区分 ==3 ||  資格区分 ==4  ||  資格区分 ==5  " >
+                        AND "ShikibetsuTaisho"."juminJotaiCode" IN ('1')
                     </if>
-                    <if test="市町村指定の市町村コード.toString()!='000000' ">
-                    AND		"ShikibetsuTaisho"."genLasdecCode"　＝　#{市町村指定に市町村コード}　													
-                    </if>															
+                    <if test="資格区分 ==6 ||  資格区分 ==7 " >AND  "ShikibetsuTaisho"."juminJotaiCode" IN ('1','2')</if>
+                    <if test="抽出対象者 ==1 ">
+                    AND  <include refid="WK_判定徴収方法" /> = '3'
+                    </if>
+                    <if test="抽出対象者 ==2 ">
+                    AND (<include refid="WK_判定徴収方法" /> = '1'
+                    OR <include refid="WK_判定徴収方法" />  = '2')
+                    </if>
+                    <if test="抽出対象者 ==3 ">
+                    AND (<include refid="WK_判定徴収方法" /> = '1'
+                    OR <include refid="WK_判定徴収方法" /> = '2'
+                    OR <include refid="WK_判定徴収方法" /> ='3')
+                    </if>
+                    <if test="市町村指定に市町村コード!=null ">
+                    AND "ShikibetsuTaisho"."genLasdecCode" = #{市町村指定に市町村コード}
+                    </if>
         </select>
-<!--処理詳細3-->
-<!--    <select resultOrdered="true" id="get介護徴収方法情報" 
-            resultMap="resultMap_AtenaSealJohoEntity" fetchSize="500" 
-            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbb021051.DBB021051MyBatisParameter">
-        WITH "kaigoJoho" AS (
-            (SELECT 
-                    "T1001"."shikibetsuCode" AS "shikibetsuCode"
-                    ,"T1001"."shichosonCode" AS "shichosonCode"
-                    ,"A".*
-            FROM                
-                rgdb."DbT2001ChoshuHoho" AS "A"
-            INNER JOIN      
-                rgdb."DbT1001HihokenshaDaicho" AS "T1001"
-            ON                    
-                "A"."hihokenshaNo"＝　"T1001"."hihokenshaNo"
-            WHERE 
-                	    "A"."fukaNendo"　＝　#{基準年月の年}														
-                        <if test="抽出対象者.toString=='1' ">															
-                        AND		<include refid="WK_判定徴収方法" />　＝　3
-                        </if>	
-                        <if test="抽出対象者.toString=='2' ">
-                        AND		(<include refid="WK_判定徴収方法" />　＝　1
-                        OR		<include refid="WK_判定徴収方法" />　 ＝　2)
-                        </if>     				
-                        <if test="抽出対象者.toString=='3' ">																
-                        AND		(<include refid="WK_判定徴収方法" />  ＝    1
-                        OR		<include refid="WK_判定徴収方法" />　＝　2
-                        OR		<include refid="WK_判定徴収方法" />　＝　3)
-                        </if>
-                        <if test="市町村指定の市町村コード.toString()!='000000' ">
-                        AND		"A"."shichosonCode"　＝　#{市町村指定に市町村コード}
-                        </if>
-            )
-        )
-        SELECT 
-            "kaigoJoho"."hihokenshaNo" as "hihokenshaNo"
-            ,<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
-        <if test="最優先住所.toString()=='2' " >
-            , <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />
-        </if>
-        FROM 
-            "kaigoJoho"
-        LEFT JOIN
-        <include refid="tableName_PsmParamClassWithoutShikibetsuCodeList_First"/>    
-        (SELECT ARRAR_AGG(CAST ("shikibetsuCode" AS TEXT)) FROM "kaigoJoho")
-        <include refid="tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
-        AS "ShikibetsuTaisho"
-        ON
-            "ShikibetsuTaisho"."shikibetsuCode"="kaigoJoho"."shikibetsuCode"
-            AND
-            "ShikibetsuTaisho"."juminShubetsuCode"　 IN
-            <if test="資格区分.toString()=='1' || 資格区分.toString()=='2' || 資格区分.toString()=='5'  " >(1)</if>
-            <if test="資格区分.toString()=='3' || 資格区分.toString()=='4' " >(2)</if>
-            <if test="資格区分.toString()=='6' || 資格区分.toString()=='7' " >(1,2)</if>
-        <if test="市町村指定" >
-            AND     "ShikibetsuTaisho"."genLasdecCode"　＝　#{市町村指定に市町村コード}
-        </if>
-    <if test="最優先住所.toString()=='2' " >
-        INNER JOIN
-            rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','') AS "Atesaki"
-        ON
-                "Atesaki"."shikibetsuCode"="ShikibetsuTaisho"."shikibetsuCode"
-            AND
-                "Atesaki"."juminShubetsuCode"="ShikibetsuTaisho"."juminShubetsuCode"
-            AND
-                "Atesaki"."juminJotaiCode"="ShikibetsuTaisho"."juminJotaiCode"
-    </if>
-    </select>-->
-<!--処理詳細4-->
-<!--    <select resultOrdered="true" id="get被保険者台帳宛名情報マッチング" 
-            resultMap="resultMap_被保険者台帳宛名情報" fetchSize="500"
-            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbb021051.DBB021051MyBatisParameter">
-            SELECT  
-                    <include refid="allColumns_TempTable" />												
-                    ,"DbT1001HihokenshaDaicho".*
-                <if test="最優先住所.toString()=='2' " >
-                    , <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />
-                </if>
-            FROM		"DbWT1051KaigoCyousyu" AS "TempTable"
-            INNER　JOIN		rgdb."DbT1001HihokenshaDaicho" AS "DbT1001HihokenshaDaicho"
-            ON		"DbT1001HihokenshaDaicho"."hihokenshaNo"　＝"TempTable"."hihokenshaNo"
-                    TODO QA "DbT1001HihokenshaDaicho"."資格区分"
-                <if test="資格区分.toString()=='1' " >AND "DbT1001HihokenshaDaicho"."資格区分"　=1</if>
-                <if test="資格区分.toString()=='2' " >AND "DbT1001HihokenshaDaicho"."資格区分"　=2</if>
-                <if test="資格区分.toString()=='3' " >AND "DbT1001HihokenshaDaicho"."資格区分"　=3</if>
-                <if test="資格区分.toString()=='4' " >AND "DbT1001HihokenshaDaicho"."資格区分"　=4</if>
-                <if test="資格区分.toString()=='5' " >AND "DbT1001HihokenshaDaicho"."資格区分"　in (1,3)</if>
-                <if test="資格区分.toString()=='6' " >AND "DbT1001HihokenshaDaicho"."資格区分"　in (2,4)</if>
-                <if test="資格区分.toString()=='7' " ></if>
-                <if test="最優先住所.toString()=='2' " >
-            INNER JOIN
-                rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','') AS "Atesaki"
-            ON
-                    "Atesaki"."shikibetsuCode"="TempTable"."識別コード"
-                AND
-                    "Atesaki"."juminShubetsuCode"="TempTable"."住民種別コード"
-                AND
-                    "Atesaki"."juminJotaiCode"="TempTable"."住民状態コード"
-        </if>
-            WHERE
-                <if test="資格区分.toString()=='1'||資格区分.toString()=='2'||資格区分.toString()=='5' " >"TempTable"."住民種別コード"　=1</if>
-                <if test="資格区分.toString()=='3'||資格区分.toString()=='4' " >"TempTable"."住民種別コード"　=2</if>
-                <if test="資格区分.toString()=='6' || 資格区分.toString()=='7' " >"TempTable"."住民種別コード"　in (1,2)</if>
-            <if test="市町村指定" >
-                AND "TempTable"."現全国地方公共団体コード"＝　#{市町村指定に市町村コード}
-            </if>
-    </select>-->
-    
+        
 <!--処理詳細5-->
-    <select resultOrdered="true" id="get宛名シール情報一時" 
+    <select resultOrdered="true" id="get宛名シール情報一時"
             resultMap="resultMap_DBB021051TableJohoTempEntity" fetchSize="500" 
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbb021051.DBB021051MyBatisParameter">
-            SELECT  
-                            <include refid="allColumns_TempTable" />												
+            SELECT
+                            <include refid="allColumns_TempTable" />
             FROM        "DbWT1051AtenaShirYoho" AS "TempTable"
-            #{出力順}
+            <!--#{出力順}-->
     </select>
     
 <!--処理詳細8-->
-    <select resultOrdered="true" id="get処理結果リスト一時" 
+    <select resultOrdered="true" id="get処理結果リスト一時"
             resultMap="resultMap_DBB021051ShoriKekkaListTempEntity" fetchSize="500" >
-            SELECT  
-                            <include refid="allColumns_DbWT1051SyorikekaRisuto" />												
-            FROM        "DbWT1051SyorikekaRisuto" 
+            SELECT
+                            <include refid="allColumns_DbWT1051SyorikekaRisuto" />
+            FROM        "DbWT1051SyorikekaRisuto"
     </select>
-<!--    <resultMap id="resultMap_被保険者台帳宛名情報" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.dbb021051.HihokenshaAteanAtesakiJohoEntity" autoMapping="true">
-        <association property="介護情報一時テーブル" resultMap="resultMap_DBB021051TableJohoTempEntity"/>
-        <association property="被保険者台帳" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>
-        <collection property="宛先PSM"
-             resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity" 
-             ofType="jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity" />
-    </resultMap>-->
     
     <resultMap id="resultMap_AtenaSealJohoEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.dbb021051.AtenaSealJohoEntity" autoMapping="true">
         <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
@@ -263,15 +147,6 @@
         ,"DbWT1051SyorikekaRisuto"."被保険者氏名" as "DbWT1051SyorikekaRisuto_被保険者氏名"
         ,"DbWT1051SyorikekaRisuto"."備考" as "DbWT1051SyorikekaRisuto_備考"
     </sql>
-<!--    <sql id="table_宛名識別対象PSM">
-        rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',false,
-        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
-    </sql>-->
-    
-<!--    <sql id="table_宛先PSM">
-         rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','') AS "Atesaki"
-    </sql>-->
     
     <sql id="WK_判定徴収方法">
         <if test="基準年月の月.toString()=='01' ">"V2001"."choshuHoho1gatsu"</if>
@@ -319,14 +194,4 @@
         "TempTable"."宛名氏名" as "TempTable_宛名氏名",
         "TempTable"."宛名方書" as "TempTable_宛名方書"
     </sql>
-<!--    <sql id ="tableName_PsmParamClassWithoutShikibetsuCodeList_First">
-        rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',false,
-            '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-            true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
-    </sql>
-    <sql id ="tableName_PsmParamClassWithoutShikibetsuCodeList_Second">
-        )
-    </sql>-->
-    
-
 </mapper>
