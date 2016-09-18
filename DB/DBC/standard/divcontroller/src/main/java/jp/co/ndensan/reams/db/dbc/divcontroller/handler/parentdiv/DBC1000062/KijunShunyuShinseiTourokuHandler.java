@@ -42,6 +42,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTais
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.IShikibetsuTaishoFinder;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
+import jp.co.ndensan.reams.ur.urz.definition.core.memo.MemoShikibetsuTaisho;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -587,7 +588,7 @@ public class KijunShunyuShinseiTourokuHandler {
                     基準収入額データ.get被保険者番号().getColumnValue()));
         }
         MemoNyuryokuHandler.dataGridupdateImage(GyomuCode.DB介護保険, SubGyomuCode.DBC介護給付, div.getMeisai().getDgMeisai(),
-                識別対象区分, 識別対象コード, RString.EMPTY, RString.EMPTY, メモ);
+                MemoShikibetsuTaisho.識別コード.get識別対象(), 識別対象コード, RString.EMPTY, RString.EMPTY, メモ);
         div.getMeisai().getDgMeisai().setDataSource(rowList);
     }
 
@@ -623,6 +624,7 @@ public class KijunShunyuShinseiTourokuHandler {
         div.getMeisai().setHdnHenkomaeShoriNendo(DataPassingConverter.serialize(処理年度));
         div.getMeisai().setHdnHenkomaeSetaiinHaakuKijunYMD(DataPassingConverter.serialize(基準日));
         div.getMeisai().setHdnGyomuCode(DataPassingConverter.serialize(GyomuCode.DB介護保険));
+        div.getMeisai().setHdnShikibetsuTaishoKubun(MemoShikibetsuTaisho.識別コード.get識別対象());
     }
 
     private List<KijunShunyuShinseiDate> get明細Gird(ShikibetsuCode 識別コード) {
