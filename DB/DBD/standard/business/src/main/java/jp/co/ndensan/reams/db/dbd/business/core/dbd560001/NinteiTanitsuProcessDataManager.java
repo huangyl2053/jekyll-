@@ -72,7 +72,8 @@ public class NinteiTanitsuProcessDataManager {
         entity.get受給者台帳Entity().setNinteiYukoKikanShuryoYMD(entity.get二次判定認定有効終了年月日());
         entity.get受給者台帳Entity().setNinteiYMD(認定日);
 
-        if (one.equals(entity.get認定申請区分法令コード()) && two.equals(entity.get認定申請区分申請時コード())) {
+        if (one.equals(entity.get要介護認定申請情報Entity().getNinteiShinseiHoreiKubunCode())
+                && two.equals(entity.get要介護認定申請情報Entity().getNinteiShinseiShinseijiKubunCode())) {
             entity.get受給者台帳Entity().setMinashiCode(new Code(one));
         } else {
             entity.get受給者台帳Entity().setMinashiCode(new Code("0"));
