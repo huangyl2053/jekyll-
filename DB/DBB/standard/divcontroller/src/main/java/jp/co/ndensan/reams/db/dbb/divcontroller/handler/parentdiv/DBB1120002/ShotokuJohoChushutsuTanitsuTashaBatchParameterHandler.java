@@ -6,8 +6,11 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1120002;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.shutokujohochushutsurenkei.ShutokuJohoChushutsuRenkeiBatchParameter;
+import jp.co.ndensan.reams.db.dbb.business.core.shotokujohochushutsu.ShotokuJohoChushutsuGamenParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB112001.DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB112003.DBB112003_ShotokuJohoChushutsuRenkeiTanitsuParameter;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120002.ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv;
 import jp.co.ndensan.reams.db.dbb.service.core.shotokujohotyushuturenkeitanitu.ShotokuJohoChushutsuRenkeitanitu;
@@ -136,13 +139,29 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
     /**
      * 「実行する」ボタンを押下バッチ実行、バッチパラメータの設定します。
      *
-     * @return ShotokuJohoTyushutuRenkeiTanituParameter 所得情報抽出・連携_バッチパラメータクラスです
+     * @return DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuParameter
+     * 所得情報抽出・連携_バッチパラメータクラスです
      */
-    public ShutokuJohoChushutsuRenkeiBatchParameter getBatchParamter() {
-        ShutokuJohoChushutsuRenkeiBatchParameter batchparam = new ShutokuJohoChushutsuRenkeiBatchParameter();
-        batchparam.set処理年度(new FlexibleYear(div.getTxtShoriNendoTanitsuTasha().getValue().getYear().toDateString()));
-        batchparam.set出力順ID(div.getCcdChohyoShutsuryokujunTanitsuTasha().get出力順ID());
-        return ShotokuJohoChushutsuRenkeitanitu.createInstance().createShotokuJohoParameter(batchparam);
+    public DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuParameter getBatchParamter_DBB112001() {
+        ShotokuJohoChushutsuGamenParameter param = new ShotokuJohoChushutsuGamenParameter();
+        param.set処理年度(new FlexibleYear(div.getTxtShoriNendoTanitsuTasha().getValue().getYear().toDateString()));
+        param.set出力順ID(new RString(div.getCcdChohyoShutsuryokujunTanitsuTasha().get出力順ID()));
+        param.set市町村情報List(Collections.EMPTY_LIST);
+        return ShotokuJohoChushutsuRenkeitanitu.createInstance().createShotokuJohoDBB112001Parameter(param);
+    }
+
+    /**
+     * 「実行する」ボタンを押下バッチ実行、バッチパラメータの設定します。
+     *
+     * @return DBB112003_ShotokuJohoChushutsuRenkeiTanitsuParameter
+     * 所得情報抽出・連携_バッチパラメータクラスです
+     */
+    public DBB112003_ShotokuJohoChushutsuRenkeiTanitsuParameter getBatchParameter_DBB112003() {
+        ShotokuJohoChushutsuGamenParameter param = new ShotokuJohoChushutsuGamenParameter();
+        param.set処理年度(new FlexibleYear(div.getTxtShoriNendoTanitsuTasha().getValue().getYear().toDateString()));
+        param.set出力順ID(new RString(div.getCcdChohyoShutsuryokujunTanitsuTasha().get出力順ID()));
+        param.set市町村情報List(Collections.EMPTY_LIST);
+        return ShotokuJohoChushutsuRenkeitanitu.createInstance().createShotokuJohoDBB112003Parameter(param);
     }
 
     private void 処理区分Handler(RString メニューID, RString 処理区分) {
