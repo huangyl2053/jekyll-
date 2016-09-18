@@ -43,9 +43,9 @@ public class SabisuKeikakuJigyoshaJohoProcess extends BatchProcessBase<SabisuKei
 
     @Override
     protected void initialize() {
-        if (processParameter.get改頁出力順ID() != 0) {
+        if (processParameter.get出力順ID() != 0) {
             IChohyoShutsuryokujunFinder chohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
-            long 帳票出力順ID = processParameter.get改頁出力順ID();
+            long 帳票出力順ID = processParameter.get出力順ID();
             outputOrder = chohyoShutsuryokujunFinder.get出力順(
                     SubGyomuCode.DBD介護受給, ReportIdDBD.DBD200017.getReportId(), 帳票出力順ID);
             if (null != outputOrder) {
