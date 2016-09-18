@@ -45,8 +45,8 @@ public class GassanShikyuTsuchishoTorikomiIchiranEditor implements
     private static final RString 口座払 = new RString("2");
     private static final RString 日時作成 = new RString("作成");
     private static final RString 接続文字 = new RString("～");
-    private static final RString 左カッコ = new RString("(");
-    private static final RString 右カッコ = new RString(")");
+    private static final RString 左カッコ = new RString("（");
+    private static final RString 右カッコ = new RString("）");
     private final ShikyuFushikyuChohyoParameter entity;
 
     /**
