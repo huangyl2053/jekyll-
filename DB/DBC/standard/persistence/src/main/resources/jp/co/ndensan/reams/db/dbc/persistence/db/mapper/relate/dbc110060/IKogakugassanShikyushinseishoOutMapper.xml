@@ -186,7 +186,8 @@
             resultMap="resultMap_KogakuGassanShinseishoHokenshaShutokuEntity" fetchSize="500" >
         SELECT
             dbwt3711."hokenshaNo" AS dbwt3711_hokenshaNo,
-            COUNT(DISTINCT(dbwt3711."shikyuShinseishoSeiriNo" || dbwt3711."rirekiNo")) AS dbwt3711_count
+            COUNT(DISTINCT(dbwt3711."shikyuShinseishoSeiriNo" || dbwt3711."rirekiNo")) AS dbwt3711_count,
+            COUNT(DISTINCT(dbwt3711."hihokenshaNo" || dbwt3711."taishoNendo" || dbwt3711."seiriNo" || dbwt3711."rirekiNo")) AS hihokenshaNo_count
         FROM
             "DbWT3711KogakuGassanShinseisho" AS dbwt3711
         WHERE
@@ -199,6 +200,7 @@
                 type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110060.KogakuGassanShinseishoHokenshaShutokuEntity">
         <id property="保険者番号" column="dbwt3711_hokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler" />
         <result property="件数" column="dbwt3711_count" />
+        <result property="レコード件数" column="hihokenshaNo_count" />
     </resultMap>
     
     <select resultOrdered="true" id="get送付ファイル作成データ"
