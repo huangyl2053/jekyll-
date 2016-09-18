@@ -114,6 +114,7 @@ public class DBC110060_KogakugassanShikyushinseishoOut extends BatchFlowBase<DBC
                     KogakugassanShikyushinseishoOutHokenshaShutokuProcess.PARAMETER_OUT_RETURNENTITY);
             int size = returnEntity.get保険者番号List().size();
             for (int i = 0; i < size; i++) {
+                processParameter.setレコード件数(returnEntity.getレコード件数List().get(i));
                 processParameter.set件数(returnEntity.get件数List().get(i));
                 processParameter.set保険者番号(returnEntity.get保険者番号List().get(i));
                 executeStep(送付ファイル作成);

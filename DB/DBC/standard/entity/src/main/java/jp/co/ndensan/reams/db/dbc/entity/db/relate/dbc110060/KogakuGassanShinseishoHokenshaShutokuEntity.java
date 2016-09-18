@@ -19,5 +19,6 @@ public class KogakuGassanShinseishoHokenshaShutokuEntity {
 
     private int 件数;
     private HokenshaNo 保険者番号;
+    private int レコード件数;
 
 }
