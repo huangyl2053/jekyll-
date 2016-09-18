@@ -59,8 +59,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
@@ -119,8 +121,7 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
     private static final int INDEX_5 = 5;
     private static final int INDEX_6 = 6;
     private static final int INDEX_8 = 8;
-    // TODO EUCエンティティID:※TODO
-    private static final RString 一覧EUCエンティティID = new RString("");
+    private static final RString 一覧EUCエンティティID = new RString("DBU900002");
     private static final RString CSVFILENAME = new RString("ShakaiFukushiHojinKeigenGaitoshaIchiran.csv");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
@@ -306,13 +307,12 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
     @Override
     protected void afterExecute() {
         csvWriter.close();
-        // TODO EUCエンティティID:※TODO
-//        if (null != personalDataList && !personalDataList.isEmpty()) {
-//            AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
-//            manager.spool(Path.combinePath(manager.getEucOutputDirectry(), CSVFILENAME), log);
-//        } else {
-//            manager.spool(Path.combinePath(manager.getEucOutputDirectry(), CSVFILENAME));
-//        }
+        if (null != personalDataList && !personalDataList.isEmpty()) {
+            AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
+            manager.spool(Path.combinePath(manager.getEucOutputDirectry(), CSVFILENAME), log);
+        } else {
+            manager.spool(Path.combinePath(manager.getEucOutputDirectry(), CSVFILENAME));
+        }
     }
 
     private void アクセスログ対象追加(KeikakuTodokedeJokyoIchiranEntity entity) {
