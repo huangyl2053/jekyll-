@@ -40,6 +40,7 @@ public class ShoriKekkaListProcess extends BatchProcessBase<DBB021051ShoriKekkaL
 
     private DBB021051DataUtil dataUtil;
     private FileSpoolManager spoolManager;
+    private RString eucFilePath;
     @BatchWriter
     private CsvWriter<DBB021051ShoriKekkaKakuninListCSVEntity> csvWriter;
 
@@ -51,15 +52,15 @@ public class ShoriKekkaListProcess extends BatchProcessBase<DBB021051ShoriKekkaL
 
     @Override
     protected void createWriter() {
-        spoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc,
+        spoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
                 eucエンティティID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = spoolManager.getEucOutputDirectry();
-        RString eucFilePath = Path.combinePath(spoolWorkPath, eucファイル名);
+        eucFilePath = Path.combinePath(spoolWorkPath, eucファイル名);
         csvWriter = BatchWriters.csvWriter(DBB021051ShoriKekkaKakuninListCSVEntity.class)
                 .filePath(eucFilePath)
                 .setEnclosure(EUC_WRITER_ENCLOSURE)
                 .setDelimiter(カンマ)
-                .setEncode(Encode.SJIS)
+                .setEncode(Encode.UTF_8withBOM)
                 .setNewLine(NewLine.CRLF)
                 .hasHeader(true)
                 .build();
@@ -71,14 +72,16 @@ public class ShoriKekkaListProcess extends BatchProcessBase<DBB021051ShoriKekkaL
     }
 
     @Override
-    protected void beforeProcess() {
-    }
-
-    @Override
     protected void process(DBB021051ShoriKekkaListTempEntity entity) {
         DBB021051ShoriKekkaKakuninListCSVEntity csvEntity = dataUtil.toShoriKekkaKakuninListCSVEntity(entity, firstFlag);
         csvWriter.writeLine(csvEntity);
         firstFlag = false;
+    }
+
+    @Override
+    protected void afterExecute() {
+        csvWriter.close();
+        spoolManager.spool(eucFilePath);
     }
 
 }
