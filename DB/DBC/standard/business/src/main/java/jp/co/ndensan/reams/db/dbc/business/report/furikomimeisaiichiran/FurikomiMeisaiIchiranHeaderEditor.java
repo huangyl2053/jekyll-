@@ -32,12 +32,20 @@ public class FurikomiMeisaiIchiranHeaderEditor implements IFurikomiMeisaiIchiran
 
         source.shiharaihoho = 振込明細一覧Entity.get支払方法();
         source.kikan = 振込明細一覧Entity.get抽出範囲();
-        source.hyouzi_ymd1 = new RString(振込明細一覧Entity.get作成日().toString());
-        source.hyouzi_ymd2 = new RString(振込明細一覧Entity.get依頼日().toString());
-        source.hyouzi_ymd3 = new RString(振込明細一覧Entity.get振込指定日().toString());
+        if (振込明細一覧Entity.get作成日() != null) {
+            source.hyouzi_ymd1 = new RString(振込明細一覧Entity.get作成日().toString());
+        }
+        if (振込明細一覧Entity.get依頼日() != null) {
+            source.hyouzi_ymd2 = new RString(振込明細一覧Entity.get依頼日().toString());
+        }
+        if (振込明細一覧Entity.get振込指定日() != null) {
+            source.hyouzi_ymd3 = new RString(振込明細一覧Entity.get振込指定日().toString());
+        }
 
         source.pageCnt = new RString(振込明細一覧Entity.get頁());
-        source.shori_ymd_hms = new RString(振込明細一覧Entity.get作成年月日と時間().toString());
+        if (振込明細一覧Entity.get作成年月日と時間() != null) {
+            source.shori_ymd_hms = new RString(振込明細一覧Entity.get作成年月日と時間().toString());
+        }
 
         if (振込明細一覧Entity.get市町村コード() != null) {
             source.hokensha_cd = 振込明細一覧Entity.get市町村コード().value();
