@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyosofuichiran.Kyuf
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kyufukanrihyosofuichiran.KyufuKanrihyoSofuIchiranReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -111,7 +112,8 @@ public class KyufuKanrihyoSofuIchiranEditor implements IKyufuKanrihyoSofuIchiran
         source.shinkiGokeiKensu = toRString(entity.get合計件数_新規());
         source.shuseiGokeiKensu = toRString(entity.get合計件数_修正());
         source.torikeshiGokeiKensu = toRString(entity.get合計件数_取消());
-        source.hihokennshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), source.listUpper_2);
+        source.shikibetuCode = ShikibetsuCode.EMPTY;
+        source.hihokennshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), entity.get被保険者番号());
         return source;
     }
 
