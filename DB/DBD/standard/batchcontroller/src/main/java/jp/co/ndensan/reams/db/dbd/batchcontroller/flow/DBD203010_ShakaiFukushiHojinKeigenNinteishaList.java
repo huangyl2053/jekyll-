@@ -9,7 +9,7 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD203010.NinteishaListSakuseiProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD203010.TaishoshaIchijiTokuteiProcess;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD203010.DBD203010_ShakaiFukushiHojinKeigenNinteishaListParameter;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmenGengakuTaishoShaHanteiYoukonSakusei.GemmenGengakuTaishoShaHanteiYoukonSakuseiParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBDZ00001.DBDZ00001_GemmenGengakuTaishoshaHanteiYoKonkyoSakuseiParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -26,7 +26,7 @@ public class DBD203010_ShakaiFukushiHojinKeigenNinteishaList extends BatchFlowBa
 
     private static final String 対象者一次特定 = "TaishoshaIchijiTokuteiProcess";
     private static final String 減免減額対象者判定用根拠作成 = "減免減額対象者判定用根拠作成";
-    private static final RString バッチID_DBDBZZ0001 = new RString("GemmenGengakuTaishoShaHanteiYoukonSakuseiFlow");
+    private static final RString バッチID_DBDBZZ0001 = new RString("DBDZ00001_GemmenGengakuTaishoshaHanteiYoKonkyoSakusei");
     private static final String 社会福祉法人軽減認定者リスト作成 = "社会福祉法人軽減認定者リスト作成";
     private YMDHMS systemTime;
 
@@ -61,8 +61,8 @@ public class DBD203010_ShakaiFukushiHojinKeigenNinteishaList extends BatchFlowBa
      */
     @Step(減免減額対象者判定用根拠作成)
     protected IBatchFlowCommand youkonSakusei() {
-        GemmenGengakuTaishoShaHanteiYoukonSakuseiParameter youkonsakuseiparameter
-                = new GemmenGengakuTaishoShaHanteiYoukonSakuseiParameter(getParameter().get所得年度());
+        DBDZ00001_GemmenGengakuTaishoshaHanteiYoKonkyoSakuseiParameter youkonsakuseiparameter
+                = new DBDZ00001_GemmenGengakuTaishoshaHanteiYoKonkyoSakuseiParameter(getParameter().get所得年度());
         return otherBatchFlow(バッチID_DBDBZZ0001, SubGyomuCode.DBD介護受給, youkonsakuseiparameter).define();
     }
 

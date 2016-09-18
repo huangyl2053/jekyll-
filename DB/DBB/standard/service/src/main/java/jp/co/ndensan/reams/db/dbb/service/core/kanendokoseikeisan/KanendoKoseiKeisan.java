@@ -46,6 +46,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  *
  * @reamsid_L DBB-9050-010 xicongwang
  */
+//TODO DZX利用可能後、コメント解除
 public class KanendoKoseiKeisan {
 
     private static final RString 算定日時_空白メッセージ = new RString("算定日時（年月日時分秒）");
@@ -484,7 +485,7 @@ public class KanendoKoseiKeisan {
 
     private RString get現在月(Kitsuki 過年度期月) {
         if (Tsuki._1月.equals(過年度期月.get月()) || Tsuki._2月.equals(過年度期月.get月())
-                || Tsuki._3月.equals(過年度期月.get月())) {
+            || Tsuki._3月.equals(過年度期月.get月())) {
             return 定数_1.concat(new RString(過年度期月.get月AsInt()).padZeroToLeft(INT_2));
         } else if (Tsuki.翌年度4月.equals(過年度期月.get月())) {
             return 定数_翌年度4月;

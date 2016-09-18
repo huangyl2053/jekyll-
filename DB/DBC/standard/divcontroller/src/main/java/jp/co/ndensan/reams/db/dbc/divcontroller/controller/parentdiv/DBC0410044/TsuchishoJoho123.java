@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0410044;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.kokuhorendatatorikomi.KokuhorenDataTorikomiBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120880.DBC120880_SogojigyohiShikakuShogohyoInParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410044.TsuchishoJoho123Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
@@ -41,22 +41,22 @@ public class TsuchishoJoho123 {
      * 「実行する」ボタンを押下。
      *
      * @param div TsuchishoJoho123Div
-     * @return KokuhorenDataTorikomiBatchParameter
+     * @return DBC120880_SogojigyohiShikakuShogohyoInParameter
      */
-    public ResponseData<KokuhorenDataTorikomiBatchParameter> onClick_btnExcute(TsuchishoJoho123Div div) {
+    public ResponseData<DBC120880_SogojigyohiShikakuShogohyoInParameter> onClick_btnExcute(TsuchishoJoho123Div div) {
 
-        KokuhorenDataTorikomiBatchParameter parameter = new KokuhorenDataTorikomiBatchParameter();
+        DBC120880_SogojigyohiShikakuShogohyoInParameter parameter = new DBC120880_SogojigyohiShikakuShogohyoInParameter();
         RDate 処理年月 = div.getCcdKokurenJohoTorikomi().get処理年月();
         if (処理年月 != null) {
             parameter.setShoriYM(new FlexibleYearMonth(処理年月.getYearMonth().toString()));
         }
         RString 再処理区分 = div.getCcdKokurenJohoTorikomi().get再処理区分();
         if (SaiShoriKubun.再処理.get名称().equals(再処理区分)) {
-            parameter.setSaishoriKubun(SaiShoriKubun.再処理);
+            parameter.setSaishorikubun(SaiShoriKubun.再処理);
         } else if (SaiShoriKubun.空白.get名称().equals(再処理区分)) {
-            parameter.setSaishoriKubun(SaiShoriKubun.空白);
+            parameter.setSaishorikubun(SaiShoriKubun.空白);
         }
-        parameter.setShutsuryokujunId(null);
+        parameter.setShutsuryokujunID(null);
         return ResponseData.of(parameter).respond();
     }
 }

@@ -381,7 +381,7 @@
        <if test="支給申請書整理番号To!=null and !支給申請書整理番号To.isEmpty()">
         AND 高額合算自己負担額."shikyuShinseishoSeiriNo" <![CDATA[<=]]> #{支給申請書整理番号To}
        </if> 
-       <if test="送付対象外!=null">
+       <if test="送付対象外">
         AND 高額合算自己負担額."sofuTaishoGaiFlag" =  '1'
        </if> 
        <if test="自己負担額確認情報受取年月From!=null and !自己負担額確認情報受取年月From.isEmpty()">
@@ -396,10 +396,10 @@
        <if test="補正済自己負担額情報送付年月To!=null and !補正済自己負担額情報送付年月To.isEmpty()">
         AND 高額合算自己負担額."hoseiZumi_SofuYM" <![CDATA[<=]]> #{補正済自己負担額情報送付年月To}
        </if> 
-       <if test="自己負担額確認情報受取年月From!=null and !自己負担額確認情報受取年月From.isEmpty()">
+       <if test="自己負担額証明書情報受取年月From!=null and !自己負担額証明書情報受取年月From.isEmpty()">
         AND 高額合算自己負担額."shomeisho_UketoriYM" <![CDATA[>=]]> #{自己負担額証明書情報受取年月From}
        </if> 
-       <if test="自己負担額確認情報受取年月To!=null and !自己負担額確認情報受取年月To.isEmpty()">
+       <if test="自己負担額証明書情報受取年月To!=null and !自己負担額証明書情報受取年月To.isEmpty()">
         AND 高額合算自己負担額."shomeisho_UketoriYM" <![CDATA[<=]]> #{自己負担額証明書情報受取年月To}
        </if> 
        )

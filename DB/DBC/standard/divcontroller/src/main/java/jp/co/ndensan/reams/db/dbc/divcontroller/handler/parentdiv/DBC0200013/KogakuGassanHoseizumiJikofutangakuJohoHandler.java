@@ -73,6 +73,8 @@ public class KogakuGassanHoseizumiJikofutangakuJohoHandler {
             parameter.setSaishoriKubun(再処理区分);
             FlexibleYearMonth 処理年月Fle = 処理年月 == null ? FlexibleYearMonth.EMPTY : new FlexibleYearMonth(処理年月.toDateString());
             parameter.setShoriYM(処理年月Fle);
+            // TODO QA1520  処理区分がなし。
+            parameter.setShoriKunbun(RString.EMPTY);
             parameter.setShutsuryokujunId(new RString(出力順ID.toString()));
             return ResponseData.of(parameter).respond();
         }

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.business.core.kanri;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
  * 保険料段階リストクラスです。
@@ -41,7 +42,11 @@ public class HokenryoDankaiList {
                 return hokenryoDankai;
             }
         }
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException(new RStringBuilder()
+                .append("段階区分:")
+                .append(段階区分 == null ? "null" : 段階区分.isEmpty() ? "''" : 段階区分)
+                .append(" に該当する保険料段階は存在しません。")
+                .toString());
     }
 
     /**

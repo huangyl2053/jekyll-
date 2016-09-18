@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd200017;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd206010.ShafukugemmenTaishoshaJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200017.JigyoshoMukeShakaiFukushiHojinKeigenReportSource;
@@ -37,8 +39,8 @@ public class JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranEditor implemen
     private final Association 地方公共団体;
     private final Association association;
     private final IOutputOrder iOutputOrder;
-    private final IOutputOrder breakIOutputOrder;
     private final int index;
+    private static final int LISTINDEX_0 = 0;
     private static final int LISTINDEX_1 = 1;
     private static final int LISTINDEX_2 = 2;
     private static final int LISTINDEX_3 = 3;
@@ -52,16 +54,14 @@ public class JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranEditor implemen
      * @param 地方公共団体 Association
      * @param association Association
      * @param iOutputOrder IOutputOrder
-     * @param breakIOutputOrder IOutputOrder
      * @param index int
      */
     public JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranEditor(ShafukugemmenTaishoshaJohoEntity 社福減免対象者情報,
-            Association 地方公共団体, Association association, IOutputOrder iOutputOrder, IOutputOrder breakIOutputOrder, int index) {
+            Association 地方公共団体, Association association, IOutputOrder iOutputOrder, int index) {
         this.社福減免対象者情報 = 社福減免対象者情報;
         this.地方公共団体 = 地方公共団体;
         this.association = association;
         this.iOutputOrder = iOutputOrder;
-        this.breakIOutputOrder = breakIOutputOrder;
         this.index = index;
     }
 
@@ -80,6 +80,7 @@ public class JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranEditor implemen
         }
         if (null != iOutputOrder) {
             setiOutputOrder(source);
+            setBreakIoutputOrder(source);
         }
         if (association != null) {
             source.listShohokenshaName_1 = association.get市町村名();
@@ -181,23 +182,29 @@ public class JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranEditor implemen
             source.shutsuryokujun5 = 出力順Map.get(LISTINDEX_5).get項目名();
         }
 
-        Map<Integer, ISetSortItem> 改頁Map = ChohyoUtil.get改頁項目Map(breakIOutputOrder);
-        if (改頁Map.get(LISTINDEX_1) != null) {
-            source.kaiPege1 = 改頁Map.get(LISTINDEX_1).get項目名();
-        }
-        if (改頁Map.get(LISTINDEX_2) != null) {
-            source.kaiPege2 = 改頁Map.get(LISTINDEX_2).get項目名();
-        }
-        if (改頁Map.get(LISTINDEX_3) != null) {
-            source.kaiPege3 = 改頁Map.get(LISTINDEX_3).get項目名();
-        }
-        if (改頁Map.get(LISTINDEX_4) != null) {
-            source.kaiPege4 = 改頁Map.get(LISTINDEX_4).get項目名();
-        }
-        if (改頁Map.get(LISTINDEX_5) != null) {
-            source.kaiPege5 = 改頁Map.get(LISTINDEX_5).get項目名();
-        }
+    }
 
+    private void setBreakIoutputOrder(JigyoshoMukeShakaiFukushiHojinKeigenReportSource source) {
+        int index2 = 0;
+        List<RString> 改頁list = new ArrayList<>();
+        List<ISetSortItem> list = iOutputOrder.get設定項目リスト();
+        if (list == null) {
+            list = new ArrayList<>();
+        }
+        for (int i = 0; i < LISTINDEX_5; i++) {
+            if (list.size() > i && list.get(i).is改頁項目()) {
+                改頁list.add(list.get(i).get項目名());
+                index2++;
+            }
+        }
+        for (int i = index2; i < LISTINDEX_5; i++) {
+            改頁list.add(RString.EMPTY);
+        }
+        source.kaiPege1 = 改頁list.get(LISTINDEX_0);
+        source.kaiPege2 = 改頁list.get(LISTINDEX_1);
+        source.kaiPege3 = 改頁list.get(LISTINDEX_2);
+        source.kaiPege4 = 改頁list.get(LISTINDEX_3);
+        source.kaiPege5 = 改頁list.get(LISTINDEX_4);
     }
 
 }

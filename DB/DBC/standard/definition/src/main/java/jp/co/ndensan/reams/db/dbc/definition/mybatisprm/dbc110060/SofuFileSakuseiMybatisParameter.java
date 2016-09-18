@@ -27,7 +27,7 @@ public class SofuFileSakuseiMybatisParameter extends KozaSearchParameter impleme
     /**
      * コンストラクタです。
      *
-     * @param 保険者番号
+     * @param 保険者番号 HokenshaNo
      * @param key 口座検索用の検索キークラス
      * @param list 科目コードリスト
      */

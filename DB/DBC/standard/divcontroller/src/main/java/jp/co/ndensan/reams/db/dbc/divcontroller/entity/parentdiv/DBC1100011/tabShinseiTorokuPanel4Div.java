@@ -27,10 +27,10 @@ public class tabShinseiTorokuPanel4Div extends TabPanel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("TorokuKanyRirekiuListPanel")
-    private TorokuKanyRirekiuListPanelDiv TorokuKanyRirekiuListPanel;
-    @JsonProperty("KanyuInfoPanel")
-    private KanyuInfoPanelDiv KanyuInfoPanel;
+    @JsonProperty("KanyuRirekiIchiran")
+    private KanyuRirekiIchiranDiv KanyuRirekiIchiran;
+    @JsonProperty("KanyuRirekiInput")
+    private KanyuRirekiInputDiv KanyuRirekiInput;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -39,112 +39,112 @@ public class tabShinseiTorokuPanel4Div extends TabPanel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getTorokuKanyRirekiuListPanel
-     * @return TorokuKanyRirekiuListPanel
+     * getKanyuRirekiIchiran
+     * @return KanyuRirekiIchiran
      */
-    @JsonProperty("TorokuKanyRirekiuListPanel")
-    public TorokuKanyRirekiuListPanelDiv getTorokuKanyRirekiuListPanel() {
-        return TorokuKanyRirekiuListPanel;
+    @JsonProperty("KanyuRirekiIchiran")
+    public KanyuRirekiIchiranDiv getKanyuRirekiIchiran() {
+        return KanyuRirekiIchiran;
     }
 
     /*
-     * setTorokuKanyRirekiuListPanel
-     * @param TorokuKanyRirekiuListPanel TorokuKanyRirekiuListPanel
+     * setKanyuRirekiIchiran
+     * @param KanyuRirekiIchiran KanyuRirekiIchiran
      */
-    @JsonProperty("TorokuKanyRirekiuListPanel")
-    public void setTorokuKanyRirekiuListPanel(TorokuKanyRirekiuListPanelDiv TorokuKanyRirekiuListPanel) {
-        this.TorokuKanyRirekiuListPanel = TorokuKanyRirekiuListPanel;
+    @JsonProperty("KanyuRirekiIchiran")
+    public void setKanyuRirekiIchiran(KanyuRirekiIchiranDiv KanyuRirekiIchiran) {
+        this.KanyuRirekiIchiran = KanyuRirekiIchiran;
     }
 
     /*
-     * getKanyuInfoPanel
-     * @return KanyuInfoPanel
+     * getKanyuRirekiInput
+     * @return KanyuRirekiInput
      */
-    @JsonProperty("KanyuInfoPanel")
-    public KanyuInfoPanelDiv getKanyuInfoPanel() {
-        return KanyuInfoPanel;
+    @JsonProperty("KanyuRirekiInput")
+    public KanyuRirekiInputDiv getKanyuRirekiInput() {
+        return KanyuRirekiInput;
     }
 
     /*
-     * setKanyuInfoPanel
-     * @param KanyuInfoPanel KanyuInfoPanel
+     * setKanyuRirekiInput
+     * @param KanyuRirekiInput KanyuRirekiInput
      */
-    @JsonProperty("KanyuInfoPanel")
-    public void setKanyuInfoPanel(KanyuInfoPanelDiv KanyuInfoPanel) {
-        this.KanyuInfoPanel = KanyuInfoPanel;
+    @JsonProperty("KanyuRirekiInput")
+    public void setKanyuRirekiInput(KanyuRirekiInputDiv KanyuRirekiInput) {
+        this.KanyuRirekiInput = KanyuRirekiInput;
     }
 
     /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public Button getBtnKanyuJohoTsuika() {
-        return this.getTorokuKanyRirekiuListPanel().getBtnKanyuJohoTsuika();
+    public Button getBtnAddKanyuRireki() {
+        return this.getKanyuRirekiIchiran().getBtnAddKanyuRireki();
     }
 
     @JsonIgnore
-    public void setBtnKanyuJohoTsuika(Button btnKanyuJohoTsuika) {
-        this.getTorokuKanyRirekiuListPanel().setBtnKanyuJohoTsuika(btnKanyuJohoTsuika);
+    public void setBtnAddKanyuRireki(Button btnAddKanyuRireki) {
+        this.getKanyuRirekiIchiran().setBtnAddKanyuRireki(btnAddKanyuRireki);
     }
 
     @JsonIgnore
-    public DataGrid<dgTorokuKanyRirekiuList_Row> getDgTorokuKanyRirekiuList() {
-        return this.getTorokuKanyRirekiuListPanel().getDgTorokuKanyRirekiuList();
+    public DataGrid<dgKanyuRirekiIchiran_Row> getDgKanyuRirekiIchiran() {
+        return this.getKanyuRirekiIchiran().getDgKanyuRirekiIchiran();
     }
 
     @JsonIgnore
-    public void setDgTorokuKanyRirekiuList(DataGrid<dgTorokuKanyRirekiuList_Row> dgTorokuKanyRirekiuList) {
-        this.getTorokuKanyRirekiuListPanel().setDgTorokuKanyRirekiuList(dgTorokuKanyRirekiuList);
+    public void setDgKanyuRirekiIchiran(DataGrid<dgKanyuRirekiIchiran_Row> dgKanyuRirekiIchiran) {
+        this.getKanyuRirekiIchiran().setDgKanyuRirekiIchiran(dgKanyuRirekiIchiran);
     }
 
     @JsonIgnore
-    public TextBox getTxtKanyuInfoHokensyaMei() {
-        return this.getKanyuInfoPanel().getTxtKanyuInfoHokensyaMei();
+    public TextBox getTxtKanyuRirekiHokenshaMei() {
+        return this.getKanyuRirekiInput().getTxtKanyuRirekiHokenshaMei();
     }
 
     @JsonIgnore
-    public void setTxtKanyuInfoHokensyaMei(TextBox txtKanyuInfoHokensyaMei) {
-        this.getKanyuInfoPanel().setTxtKanyuInfoHokensyaMei(txtKanyuInfoHokensyaMei);
+    public void setTxtKanyuRirekiHokenshaMei(TextBox txtKanyuRirekiHokenshaMei) {
+        this.getKanyuRirekiInput().setTxtKanyuRirekiHokenshaMei(txtKanyuRirekiHokenshaMei);
     }
 
     @JsonIgnore
-    public TextBoxDateRange getTxtKanyuInfoKanyuKikanYMD() {
-        return this.getKanyuInfoPanel().getTxtKanyuInfoKanyuKikanYMD();
+    public TextBoxDateRange getTxtKanyuRirekiKanyuKikanYMD() {
+        return this.getKanyuRirekiInput().getTxtKanyuRirekiKanyuKikanYMD();
     }
 
     @JsonIgnore
-    public void setTxtKanyuInfoKanyuKikanYMD(TextBoxDateRange txtKanyuInfoKanyuKikanYMD) {
-        this.getKanyuInfoPanel().setTxtKanyuInfoKanyuKikanYMD(txtKanyuInfoKanyuKikanYMD);
+    public void setTxtKanyuRirekiKanyuKikanYMD(TextBoxDateRange txtKanyuRirekiKanyuKikanYMD) {
+        this.getKanyuRirekiInput().setTxtKanyuRirekiKanyuKikanYMD(txtKanyuRirekiKanyuKikanYMD);
     }
 
     @JsonIgnore
     public TextBox getTxtJikoFutangakuShomeishoSeiriBango() {
-        return this.getKanyuInfoPanel().getTxtJikoFutangakuShomeishoSeiriBango();
+        return this.getKanyuRirekiInput().getTxtJikoFutangakuShomeishoSeiriBango();
     }
 
     @JsonIgnore
     public void setTxtJikoFutangakuShomeishoSeiriBango(TextBox txtJikoFutangakuShomeishoSeiriBango) {
-        this.getKanyuInfoPanel().setTxtJikoFutangakuShomeishoSeiriBango(txtJikoFutangakuShomeishoSeiriBango);
+        this.getKanyuRirekiInput().setTxtJikoFutangakuShomeishoSeiriBango(txtJikoFutangakuShomeishoSeiriBango);
     }
 
     @JsonIgnore
-    public Button getBtnKanyuRirekKakutei() {
-        return this.getKanyuInfoPanel().getBtnKanyuRirekKakutei();
+    public Button getBtnKakuteiKanyuRireki() {
+        return this.getKanyuRirekiInput().getBtnKakuteiKanyuRireki();
     }
 
     @JsonIgnore
-    public void setBtnKanyuRirekKakutei(Button btnKanyuRirekKakutei) {
-        this.getKanyuInfoPanel().setBtnKanyuRirekKakutei(btnKanyuRirekKakutei);
+    public void setBtnKakuteiKanyuRireki(Button btnKakuteiKanyuRireki) {
+        this.getKanyuRirekiInput().setBtnKakuteiKanyuRireki(btnKakuteiKanyuRireki);
     }
 
     @JsonIgnore
-    public Button getBtnKanyuRirekiModoru() {
-        return this.getKanyuInfoPanel().getBtnKanyuRirekiModoru();
+    public Button getBtnBackKanyuRirekiIchiran() {
+        return this.getKanyuRirekiInput().getBtnBackKanyuRirekiIchiran();
     }
 
     @JsonIgnore
-    public void setBtnKanyuRirekiModoru(Button btnKanyuRirekiModoru) {
-        this.getKanyuInfoPanel().setBtnKanyuRirekiModoru(btnKanyuRirekiModoru);
+    public void setBtnBackKanyuRirekiIchiran(Button btnBackKanyuRirekiIchiran) {
+        this.getKanyuRirekiInput().setBtnBackKanyuRirekiIchiran(btnBackKanyuRirekiIchiran);
     }
 
     // </editor-fold>

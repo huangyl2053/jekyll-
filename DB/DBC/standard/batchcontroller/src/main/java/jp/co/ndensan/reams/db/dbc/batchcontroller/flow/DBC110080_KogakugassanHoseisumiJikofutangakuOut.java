@@ -71,6 +71,7 @@ public class DBC110080_KogakugassanHoseisumiJikofutangakuOut extends BatchFlowBa
         RString 保険者情報_保険者名称 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, date, SubGyomuCode.DBU介護統計報告);
         processParameter.set保険者情報_保険者番号(保険者情報_保険者番号);
         processParameter.set保険者情報_保険者名称(保険者情報_保険者名称);
+        processParameter.setShoriKunbun(getParameter().getShoriKunbun().trim());
     }
 
     @Override
@@ -106,7 +107,7 @@ public class DBC110080_KogakugassanHoseisumiJikofutangakuOut extends BatchFlowBa
     }
 
     /**
-     * 送付対象データ取得操作です。
+     * 高額合算自己負担額明細データの存在確認操作です。
      *
      * @return IBatchFlowCommand
      */
@@ -222,7 +223,8 @@ public class DBC110080_KogakugassanHoseisumiJikofutangakuOut extends BatchFlowBa
     private KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter getParam() {
         KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter param = new KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter();
         param.set処理年月(getParameter().getShoriYM());
-        param.set交換情報識別番号(ConfigKeysKokuhorenSofu.高額合算補正済自己負担額情報.getコード());
+        RString 処理区分 = getParameter().getShoriKunbun().trim();
+        param.set交換情報識別番号(ConfigKeysKokuhorenSofu.高額合算補正済自己負担額情報.getコード().concat(処理区分));
         param.set処理対象年月(getParameter().getShoriYM());
         param.setレコード件数合計(レコード件数合計);
         List<RString> list = new ArrayList<>();

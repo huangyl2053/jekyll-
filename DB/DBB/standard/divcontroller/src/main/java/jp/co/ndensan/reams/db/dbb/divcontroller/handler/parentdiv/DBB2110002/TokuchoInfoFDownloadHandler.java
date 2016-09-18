@@ -227,11 +227,11 @@ public class TokuchoInfoFDownloadHandler {
     private void 市町村制御(RString 市町村識別ID) {
         List<KeyValueDataSource> 市町村DataSourceList = new ArrayList<>();
         if (!STR_00.equals(市町村識別ID)) {
-            KoseiShichosonJoho 市町村 = ShichosonSecurityJoho.getKouseiShichosonJoho(市町村識別ID);
-            if (市町村 != null) {
-                RString 市町村ID = 市町村.get市町村識別ID();
-                RString コード名称 = new RString(市町村.get市町村コード().getColumnValue().toString()
-                        + SPACE.toString() + 市町村.get市町村名称().toString());
+            ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+            if (市町村セキュリティ情報 != null) {
+                RString 市町村ID = 市町村セキュリティ情報.get市町村情報().get市町村識別ID();
+                RString コード名称 = new RString(市町村セキュリティ情報.get市町村情報().get市町村コード().getColumnValue().toString()
+                        + SPACE.toString() + 市町村セキュリティ情報.get市町村情報().get市町村名称().toString());
                 市町村DataSourceList.add(new KeyValueDataSource(市町村ID, コード名称));
             }
         } else {

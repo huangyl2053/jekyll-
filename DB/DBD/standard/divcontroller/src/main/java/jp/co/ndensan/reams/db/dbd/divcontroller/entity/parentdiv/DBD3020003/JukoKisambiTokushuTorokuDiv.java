@@ -34,14 +34,16 @@ public class JukoKisambiTokushuTorokuDiv extends Panel {
     private ShunoJokyoDiv ShunoJokyo;
     @JsonProperty("JikoKisambi")
     private JikoKisambiDiv JikoKisambi;
-    @JsonProperty("ccdKanryoMessage")
-    private KaigoKanryoMessageDiv ccdKanryoMessage;
     @JsonProperty("ccdShikakuKihon")
     private KaigoShikakuKihonDiv ccdShikakuKihon;
+    @JsonProperty("ccdKanryoMessage")
+    private KaigoKanryoMessageDiv ccdKanryoMessage;
     @JsonProperty("ccdAtenaInfo")
     private KaigoAtenaInfoDiv ccdAtenaInfo;
     @JsonProperty("hdnShoKisaiHokenshaNo")
     private RString hdnShoKisaiHokenshaNo;
+    @JsonProperty("hdnChoteiNendo")
+    private RString hdnChoteiNendo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -86,21 +88,21 @@ public class JukoKisambiTokushuTorokuDiv extends Panel {
     }
 
     /*
-     * getccdKanryoMessage
-     * @return ccdKanryoMessage
-     */
-    @JsonProperty("ccdKanryoMessage")
-    public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
-        return ccdKanryoMessage;
-    }
-
-    /*
      * getccdShikakuKihon
      * @return ccdShikakuKihon
      */
     @JsonProperty("ccdShikakuKihon")
     public IKaigoShikakuKihonDiv getCcdShikakuKihon() {
         return ccdShikakuKihon;
+    }
+
+    /*
+     * getccdKanryoMessage
+     * @return ccdKanryoMessage
+     */
+    @JsonProperty("ccdKanryoMessage")
+    public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
+        return ccdKanryoMessage;
     }
 
     /*
@@ -128,6 +130,24 @@ public class JukoKisambiTokushuTorokuDiv extends Panel {
     @JsonProperty("hdnShoKisaiHokenshaNo")
     public void setHdnShoKisaiHokenshaNo(RString hdnShoKisaiHokenshaNo) {
         this.hdnShoKisaiHokenshaNo = hdnShoKisaiHokenshaNo;
+    }
+
+    /*
+     * gethdnChoteiNendo
+     * @return hdnChoteiNendo
+     */
+    @JsonProperty("hdnChoteiNendo")
+    public RString getHdnChoteiNendo() {
+        return hdnChoteiNendo;
+    }
+
+    /*
+     * sethdnChoteiNendo
+     * @param hdnChoteiNendo hdnChoteiNendo
+     */
+    @JsonProperty("hdnChoteiNendo")
+    public void setHdnChoteiNendo(RString hdnChoteiNendo) {
+        this.hdnChoteiNendo = hdnChoteiNendo;
     }
 
     /*

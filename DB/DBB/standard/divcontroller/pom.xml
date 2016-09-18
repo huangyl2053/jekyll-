@@ -90,6 +90,7 @@
             <artifactId>UexService</artifactId>
             <type>jar</type>
         </dependency>
+        <!-- 規約違反 -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxEntity</artifactId>

@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,7 +28,7 @@ public class NenreiKaikyubetsuYokaigodoJokyoParameter extends BatchParameterBase
     @BatchParameter(key = "基準日", name = "基準日")
     private RDate 基準日;
     @BatchParameter(key = "基準年月", name = "基準年月")
-    private RDate 基準年月;
+    private RYearMonth 基準年月;
     @BatchParameter(key = "地区区分", name = "地区区分")
     private RString 地区区分;
     @BatchParameter(key = "開始地区コード", name = "開始地区コード")

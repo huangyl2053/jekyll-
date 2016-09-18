@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-3310-030 chenyadong -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc160022.IServicecodeIchiranMapper">
+    <select id="select介護サービス内容" resultOrdered="true"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.servicecodeichiran.ServicecodeIchiranMybatisParameter"
+            resultMap="resultMap_ServicecodeIchiranEntity" fetchSize="500">
+        WITH "TempKaigoServiceShurui" AS
+        (SELECT 
+            DISTINCT  "DbT7130KaigoServiceShurui"."serviceShuruiCd" as "serviceShuruiCd"          
+        FROM
+            rgdb."DbT7130KaigoServiceShurui" AS "DbT7130KaigoServiceShurui"
+        WHERE
+            "DbT7130KaigoServiceShurui"."serviceBunrruicode" IN 
+            <foreach item="サービス分類" index="index" collection="サービス分類s" 
+                         open="(" separator="," close=")">
+                        #{サービス分類}
+            </foreach>
+        <if test="基準年月!=null and !基準年月.isEmpty()">
+            AND ("DbT7130KaigoServiceShurui"."teikyoKaishiYM" <![CDATA[<=]]> #{基準年月}
+            AND #{基準年月} <![CDATA[<=]]> "DbT7130KaigoServiceShurui"."teikyoshuryoYM")
+        </if>
+        )
+        SELECT  
+            <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7131KaigoServiceNaiyouMapper.allColumns_DbT7131KaigoServiceNaiyou" />
+        FROM 
+            rgdb."DbT7131KaigoServiceNaiyou" AS "DbT7131KaigoServiceNaiyou"
+        <if test="抽出条件区分=='サービス分類を指定'">
+        INNER JOIN 
+            "TempKaigoServiceShurui" AS "KaigoServiceShurui"
+        ON 
+            "DbT7131KaigoServiceNaiyou"."serviceShuruiCd"="KaigoServiceShurui"."serviceShuruiCd"
+        </if>
+        WHERE 1=1
+        <if test="基準年月!=null and !基準年月.isEmpty()">
+            AND ("DbT7131KaigoServiceNaiyou"."teikyoKaishiYM" <![CDATA[<=]]> #{基準年月}
+            AND #{基準年月} <![CDATA[<=]]> "DbT7131KaigoServiceNaiyou"."teikyoShuryoYM")
+        </if>
+        <if test="サービス種類コード!=null and !サービス種類コード.isEmpty()">
+            AND "DbT7131KaigoServiceNaiyou"."serviceShuruiCd" = #{サービス種類コード}
+        </if>
+        <if test="サービス項目コード桁目==4">
+            AND "DbT7131KaigoServiceNaiyou"."serviceKoumokuCd" = #{サービス項目コード}
+        </if>
+        <if test="サービス項目コード桁目!=0 and サービス項目コード桁目!=4">
+            AND "DbT7131KaigoServiceNaiyou"."serviceKoumokuCd" LIKE #{サービス項目コード} || '%'
+        </if>
+        ORDER BY
+            "DbT7131KaigoServiceNaiyou"."serviceShuruiCd",
+            "DbT7131KaigoServiceNaiyou"."serviceKoumokuCd",
+            "DbT7131KaigoServiceNaiyou"."teikyoKaishiYM"
+                      
+    </select>
+    
+    <resultMap id="resultMap_ServicecodeIchiranEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.servicecodeichiran.ServicecodeIchiranEntity" autoMapping="true">
+        <id column="DbT7131KaigoServiceNaiyou_serviceShuruiCd"/>
+        <id column="DbT7131KaigoServiceNaiyou_serviceKoumokuCd"/>
+        <id column="DbT7131KaigoServiceNaiyou_teikyoKaishiYM"/>
+        <id column="DbT7131KaigoServiceNaiyou_rirekiNo"/>
+        <association property="介護サービス内容" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7131KaigoServiceNaiyouMapper.ResultMap_DbT7131KaigoServiceNaiyouEntity"/>   
+    </resultMap>
+</mapper>

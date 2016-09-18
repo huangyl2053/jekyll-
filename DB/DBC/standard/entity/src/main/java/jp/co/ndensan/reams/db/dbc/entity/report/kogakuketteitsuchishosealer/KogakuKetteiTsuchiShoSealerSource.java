@@ -6,6 +6,11 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
+/**
+ * 高額介護（予防）サービス費支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ）Sourceするクラスです。
+ *
+ * @reamsid_L DBC-2000-060 lijian
+ */
 public class KogakuKetteiTsuchiShoSealerSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
 

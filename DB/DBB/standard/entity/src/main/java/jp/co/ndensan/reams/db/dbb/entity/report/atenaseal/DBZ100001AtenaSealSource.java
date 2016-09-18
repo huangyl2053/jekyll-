@@ -1,8 +1,10 @@
 package jp.co.ndensan.reams.db.dbb.entity.report.atenaseal;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 帳票設計_DBZ100001_宛名シールのエンティティクラスです。
@@ -773,5 +775,29 @@ public class DBZ100001AtenaSealSource implements IReportSource {
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
     public int index;
+    @ReportPerson(id = "1", order = 1)
+    public ShikibetsuCode shikibetsuCode;
+    @ReportPerson(id = "2", order = 2)
+    public ShikibetsuCode shikibetsuCode1;
+    @ReportPerson(id = "3", order = 3)
+    public ShikibetsuCode shikibetsuCode2;
+    @ReportPerson(id = "4", order = 4)
+    public ShikibetsuCode shikibetsuCode3;
+    @ReportPerson(id = "5", order = 5)
+    public ShikibetsuCode shikibetsuCode4;
+    @ReportPerson(id = "6", order = 6)
+    public ShikibetsuCode shikibetsuCode5;
+    @ReportPerson(id = "7", order = 7)
+    public ShikibetsuCode shikibetsuCode6;
+    @ReportPerson(id = "8", order = 8)
+    public ShikibetsuCode shikibetsuCode7;
+    @ReportPerson(id = "9", order = 9)
+    public ShikibetsuCode shikibetsuCode8;
+    @ReportPerson(id = "10", order = 10)
+    public ShikibetsuCode shikibetsuCode9;
+    @ReportPerson(id = "11", order = 11)
+    public ShikibetsuCode shikibetsuCode10;
+    @ReportPerson(id = "12", order = 12)
+    public ShikibetsuCode shikibetsuCode11;
 // </editor-fold>
 }

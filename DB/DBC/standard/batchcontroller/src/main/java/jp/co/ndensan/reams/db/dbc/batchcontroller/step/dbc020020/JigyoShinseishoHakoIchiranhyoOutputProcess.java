@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbc.business.report.kogakuservicetsuchisho.KogakuJ
 import jp.co.ndensan.reams.db.dbc.business.report.kogakuservicetsuchisho.KogakuJigyoShinseishoHakkoIchiranPageBreak;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehikyufuoshirasetsuchisho.KogakuKaigoServicehiOshiraseHakkoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufuoshirasetsuchisho.ShinseiJohoChohyoTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukaigoservicehikyufuoshirasetsuchisho.ShinseiJohoChohyoTempRelateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakujigyoshinseishohakkoichiransource.KogakuJigyoShinseishoHakkoIchiranSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -53,7 +53,7 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
  *
  * @reamsid_L DBC-4770-030 zhujun
  */
-public class JigyoShinseishoHakoIchiranhyoOutputProcess extends BatchProcessBase<ShinseiJohoChohyoTempEntity> {
+public class JigyoShinseishoHakoIchiranhyoOutputProcess extends BatchProcessBase<ShinseiJohoChohyoTempRelateEntity> {
 
     private static final RString MYBATIS_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "kogakukaigoservicehikyufuoshirasetsuchisho.IKogakuKaigoServicehiOshiraseHakkoMapper.get申請書発行一覧表");
@@ -71,7 +71,6 @@ public class JigyoShinseishoHakoIchiranhyoOutputProcess extends BatchProcessBase
     private List<RString> breakItemIds;
     private FileSpoolManager manager;
     private IOutputOrder 出力順;
-    private RString 市町村名;
     private RDateTime システム日付;
 
     private int count;
@@ -86,7 +85,6 @@ public class JigyoShinseishoHakoIchiranhyoOutputProcess extends BatchProcessBase
         count = 1;
         システム日付 = RDateTime.now();
         Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
-        市町村名 = 導入団体クラス.get市町村名();
 
         csvFileName = CSV_FILE_NAME.concat(UNDER_LINE).
                 concat(導入団体クラス.get地方公共団体コード().value()).concat(UNDER_LINE).
@@ -95,7 +93,6 @@ public class JigyoShinseishoHakoIchiranhyoOutputProcess extends BatchProcessBase
         出力順 = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBC介護給付,
                 ReportIdDBC.DBC200091.getReportId(), parameter.getShutsuryokujunId());
         if (出力順 != null) {
-            // TODO QA.1160 出力順の項目に、町域コードと氏名５０音カナはありません
             parameter.setOrderBy(MyBatisOrderByClauseCreator.create(
                     KogakuJigyoShinseishoHakkoIchiranOrder.class, 出力順).replace(ORDER_BY, RString.EMPTY));
             for (ISetSortItem item : 出力順.get設定項目リスト()) {
@@ -128,35 +125,35 @@ public class JigyoShinseishoHakoIchiranhyoOutputProcess extends BatchProcessBase
     }
 
     @Override
-    protected void process(ShinseiJohoChohyoTempEntity entity) {
+    protected void process(ShinseiJohoChohyoTempRelateEntity entity) {
         KogakuJigyoShinseishoHakkoIchiranParamter param = new KogakuJigyoShinseishoHakkoIchiranParamter();
-        param.set帳票出力対象データ(entity);
+        param.set帳票出力対象データ(entity.get申請情報());
         param.set出力順(出力順);
         param.set連番(new RString(count));
         param.setシステム日付(システム日付);
-        param.set市町村名(市町村名);
+        param.set市町村名(entity.get市町村名称());
         KogakuJigyoShinseishoHakkoIchiranReport report = new KogakuJigyoShinseishoHakkoIchiranReport(param);
         report.writeBy(reportSourceWriter);
 
         csvWriter.writeLine(new JigyoShinseishoHakkoIchiranhyoCsvEntity(
                 RDate.getNowDate().toDateString(),
                 new RString(count),
-                entity.getHihokenshaNoChohyo().value(),
-                entity.getServiceTeikyoYMChohyo().toDateString(),
-                get名称(entity.getMeishoChohyo()),
-                get郵便番号(entity.getYubinNoChohyo()),
-                get住所(entity.getJushoChohyo()),
-                get行政区コード(entity.getGyoseikuCodeChohyo()),
-                entity.getGyoseikuNameChohyo(),
-                new RString(String.valueOf(entity.isKyuSochishaFlagChohyo())),
-                get要介護状態区分(entity.getYokaigoJotaiKubunCodeChohyo()),
-                getYMD(entity.getNinteiYukoKikanKaishiYMDChohyo()),
-                getYMD(entity.getNinteiYukoKikanShuryoYMDChohyo()),
-                get金額(entity.getHonninShiharaiGakuChohyo()),
-                get金額(entity.getShikyuKingakuChohyo()),
-                new RString(String.valueOf(entity.isHojinKeigenTaishoFlagChohyo())),
-                new RString(String.valueOf(entity.isJidoShokanTaishoFlagChohyo())),
-                entity.getShikakuSoshitsuJiyuCodeChohyo())
+                entity.get申請情報().getHihokenshaNoChohyo().value(),
+                entity.get申請情報().getServiceTeikyoYMChohyo().toDateString(),
+                get名称(entity.get申請情報().getMeishoChohyo()),
+                get郵便番号(entity.get申請情報().getYubinNoChohyo()),
+                get住所(entity.get申請情報().getJushoChohyo()),
+                get行政区コード(entity.get申請情報().getGyoseikuCodeChohyo()),
+                entity.get申請情報().getGyoseikuNameChohyo(),
+                new RString(String.valueOf(entity.get申請情報().isKyuSochishaFlagChohyo())),
+                get要介護状態区分(entity.get申請情報().getYokaigoJotaiKubunCodeChohyo()),
+                getYMD(entity.get申請情報().getNinteiYukoKikanKaishiYMDChohyo()),
+                getYMD(entity.get申請情報().getNinteiYukoKikanShuryoYMDChohyo()),
+                get金額(entity.get申請情報().getHonninShiharaiGakuChohyo()),
+                get金額(entity.get申請情報().getShikyuKingakuChohyo()),
+                new RString(String.valueOf(entity.get申請情報().isHojinKeigenTaishoFlagChohyo())),
+                new RString(String.valueOf(entity.get申請情報().isJidoShokanTaishoFlagChohyo())),
+                entity.get申請情報().getShikakuSoshitsuJiyuCodeChohyo())
         );
 
         count = count + 1;

@@ -56,9 +56,12 @@ public enum ShuruiShikyuGendogakuMainSpec implements IPredicate<ShuruiShikyuGend
                             div.getShuruiShikyuGendogakuShosai().getTxtTekiyoKikanRange().getFromValue().getYearMonth().toDateString());
                     List<ShuruiShikyuGendogakuMainResult> result = ShuruiShikyuGendogakuMainFinder.createInstance().select介護サービス種類データ(
                             new ServiceShuruiCode(div.getShuruiShikyuGendogakuShosai().getDdlServiceShurui().getSelectedKey()), 適用期間From);
-                    if (result.get(0).getDbT7130entity().getTeikyoshuryoYM() != null) {
+                    if (!result.isEmpty() && result.get(0).getDbT7130entity().getTeikyoshuryoYM() != null) {
                         return (!result.isEmpty() && result.get(0).getDbT7130entity() != null
                         && 適用期間From.isBefore(result.get(0).getDbT7130entity().getTeikyoshuryoYM()));
+                    }
+                    if (result.isEmpty()) {
+                        return false;
                     }
                     return true;
                 }
@@ -76,8 +79,12 @@ public enum ShuruiShikyuGendogakuMainSpec implements IPredicate<ShuruiShikyuGend
                             div.getShuruiShikyuGendogakuShosai().getTxtTekiyoKikanRange().getFromValue().getYearMonth().toDateString());
                     List<ShuruiShikyuGendogakuMainResult> result = ShuruiShikyuGendogakuMainFinder.createInstance().select介護サービス種類データ(
                             new ServiceShuruiCode(div.getShuruiShikyuGendogakuShosai().getDdlServiceShurui().getSelectedKey()), 適用期間From);
-                    return (!result.isEmpty() && result.get(0).getDbT7130entity() != null
-                    && result.get(0).getDbT7130entity().getGendogakuKubun().equals(new RString("1")));
+                    if (result.isEmpty()) {
+                        return true;
+                    } else {
+                        return (result.get(0).getDbT7130entity() != null
+                        && result.get(0).getDbT7130entity().getGendogakuKubun().equals(new RString("1")));
+                    }
                 }
             },
     /**
@@ -110,7 +117,7 @@ public enum ShuruiShikyuGendogakuMainSpec implements IPredicate<ShuruiShikyuGend
                         && (div.getShuruiShikyuGendogakuShosai().getTxtYoshien1ShikyuGendogaku().getValue() == null
                         || (div.getShuruiShikyuGendogakuShosai().getTxtYoshien1ShikyuGendogaku().getValue().compareTo(Decimal.ZERO) == 0)));
                     } else if (result.isEmpty()) {
-                        return false;
+                        return true;
                     }
                     return true;
                 }
@@ -133,7 +140,7 @@ public enum ShuruiShikyuGendogakuMainSpec implements IPredicate<ShuruiShikyuGend
                         && !(div.getShuruiShikyuGendogakuShosai().getTxtYoshien2ShikyuGendogaku().getValue() == null
                         || (div.getShuruiShikyuGendogakuShosai().getTxtYoshien2ShikyuGendogaku().getValue().compareTo(Decimal.ZERO) == 0)));
                     } else if (result.isEmpty()) {
-                        return false;
+                        return true;
                     }
                     return true;
                 }
@@ -157,7 +164,7 @@ public enum ShuruiShikyuGendogakuMainSpec implements IPredicate<ShuruiShikyuGend
                         && (div.getShuruiShikyuGendogakuShosai().getTxtYoshien1ShikyuGendogaku().getValue() == null
                         || (div.getShuruiShikyuGendogakuShosai().getTxtYoshien1ShikyuGendogaku().getValue().compareTo(Decimal.ZERO) == 0)));
                     } else if (result.isEmpty()) {
-                        return false;
+                        return true;
                     }
                     return true;
                 }
@@ -175,7 +182,7 @@ public enum ShuruiShikyuGendogakuMainSpec implements IPredicate<ShuruiShikyuGend
                         && !(div.getShuruiShikyuGendogakuShosai().getTxtYoshien1ShikyuGendogaku().getValue() == null
                         || (div.getShuruiShikyuGendogakuShosai().getTxtYoshien1ShikyuGendogaku().getValue().compareTo(Decimal.ZERO) == 0)));
             } else if (result.isEmpty()) {
-                return false;
+                return true;
             }
             return true;
         }

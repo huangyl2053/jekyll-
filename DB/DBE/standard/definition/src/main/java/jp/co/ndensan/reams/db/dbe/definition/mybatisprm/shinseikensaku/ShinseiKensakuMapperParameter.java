@@ -5,8 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinseikensaku;
 
+import jp.co.ndensan.reams.db.dbe.definition.core.util.RStrings;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 
 /**
  * 要介護認定申請検索のMyBatis用パラメータクラスです。
@@ -24,7 +26,7 @@ public class ShinseiKensakuMapperParameter {
     private RString shoKisaiHokenshaNo;
     // 支所コード
     private RString shishoCode;
-    // 被保険者氏名
+    // 被保険者氏名（カナ検索でも用いる）
     private RString hihokenshaName;
     // 認定申請日FROM
     private FlexibleDate ninteiShinseiYMDFrom;
@@ -190,6 +192,7 @@ public class ShinseiKensakuMapperParameter {
     private boolean useShoKisaiHokenshaNo;
     private boolean useShishoCode;
     private boolean useHihokenshaName;
+    private boolean useHihokenshaKana;
     private boolean is前方一致;
     private boolean is後方一致;
     private boolean is部分一致;
@@ -274,4 +277,44 @@ public class ShinseiKensakuMapperParameter {
     private boolean useGeninShikkan;
     // 画面詳細条件の完了情報を入力する場合
     private boolean useNinteiKanryoJoho;
+
+    /**
+     * 検索に用いる被保険者氏名を設定します。
+     * 指定された被保険者氏名がカタカナのみの場合は、カナ検索を行います。
+     * 検索用の文字列からはスペース(半角/全角 どちらも)を取り除きます。
+     *
+     * @param hihokenshaName 検索に用いる被保険者氏名
+     */
+    public void set被保険者名(RString hihokenshaName) {
+        if (RString.isNullOrEmpty(hihokenshaName)) {
+            this.hihokenshaName = RString.EMPTY;
+            this.useHihokenshaKana = false;
+            this.useHihokenshaName = false;
+            return;
+        }
+        RString converted = RStrings.to半角カナOnlyOrRawTryToConvertかなto半角カナ(
+                RStrings.removedSpaces(RStringUtil.removeSqlSpecialChars(hihokenshaName))
+        );
+        this.hihokenshaName = converted;
+        this.useHihokenshaKana = RStringUtil.is半角カナOnly(converted);
+        this.useHihokenshaName = !this.useHihokenshaKana;
+    }
+
+    /**
+     * 被保険者名カナ検索の有無を返却します。
+     *
+     * @return 被保険者名カナ検索の有無
+     */
+    boolean usesHihokenshaKana() {
+        return this.useHihokenshaKana;
+    }
+
+    /**
+     * 被保険者名漢字・平仮名検索の有無を返却します。
+     *
+     * @return 被保険者名漢字・平仮名検索の有無
+     */
+    boolean usesHihokenshaName() {
+        return this.useHihokenshaName;
+    }
 }

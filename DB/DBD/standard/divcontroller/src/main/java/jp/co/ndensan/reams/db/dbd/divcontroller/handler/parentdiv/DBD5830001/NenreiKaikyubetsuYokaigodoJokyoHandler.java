@@ -122,7 +122,7 @@ public class NenreiKaikyubetsuYokaigodoJokyoHandler {
         if (キー0.equals(div.getRdoKijyun().getSelectedKey())) {
             parameter.set基準日(div.getTxtKijyunD().getValue());
         } else {
-            parameter.set基準年月(div.getTxtKijyunYM().getValue());
+            parameter.set基準年月(div.getTxtKijyunYM().getValue().getYearMonth());
         }
         for (ChikuKubun chikuKubun : ChikuKubun.values()) {
             if (chikuKubun.get漢字名称().equals(div.getDdlChiku().getSelectedValue())) {

@@ -17,32 +17,32 @@ public final class ShinsakaiJohoKojinMapperParameter {
 
     private final int 合議体番号;
     private final RString 介護認定審査会開催番号;
-    private final FlexibleDate システム日付;
+    private final FlexibleDate 介護認定審査会開催日;
 
     /**
      * コンストラクタです。
      *
      * @param 合議体番号 int
-     * @param 介護認定審査会開催番号 RString
-     * @param システム日付 FlexibleDate
+     * @param 介護認定審査会開催番号 介護認定審査会開催番号
+     * @param 介護認定審査会開催日 介護認定審査会開催日
      */
-    private ShinsakaiJohoKojinMapperParameter(int 合議体番号, RString 介護認定審査会開催番号, FlexibleDate システム日付) {
+    private ShinsakaiJohoKojinMapperParameter(int 合議体番号, RString 介護認定審査会開催番号, FlexibleDate 介護認定審査会開催日) {
         this.合議体番号 = 合議体番号;
         this.介護認定審査会開催番号 = 介護認定審査会開催番号;
-        this.システム日付 = システム日付;
+        this.介護認定審査会開催日 = 介護認定審査会開催日;
     }
 
     /**
      * キー検索用のパラメータを生成します。
      *
-     * @param 合議体番号 int
-     * @param 介護認定審査会開催番号 RString
-     * @param システム日付 FlexibleDate
+     * @param 合議体番号 合議体番号
+     * @param 介護認定審査会開催番号 介護認定審査会開催番号
+     * @param 介護認定審査会開催日 介護認定審査会開催日
      * @return 委員情報検索パラメータ
      */
-    public static ShinsakaiJohoKojinMapperParameter createParam(int 合議体番号, RString 介護認定審査会開催番号, FlexibleDate システム日付) {
+    public static ShinsakaiJohoKojinMapperParameter createParam(int 合議体番号, RString 介護認定審査会開催番号, FlexibleDate 介護認定審査会開催日) {
 
-        return new ShinsakaiJohoKojinMapperParameter(合議体番号, 介護認定審査会開催番号, システム日付);
+        return new ShinsakaiJohoKojinMapperParameter(合議体番号, 介護認定審査会開催番号, 介護認定審査会開催日);
     }
 
     /**
@@ -64,11 +64,11 @@ public final class ShinsakaiJohoKojinMapperParameter {
     }
 
     /**
-     * システム日付を返します。
+     * 介護認定審査会開催日を返します。
      *
-     * @return システム日付
+     * @return 介護認定審査会開催日
      */
-    public FlexibleDate getシステム日付() {
-        return システム日付;
+    public FlexibleDate get介護認定審査会開催日() {
+        return 介護認定審査会開催日;
     }
 }

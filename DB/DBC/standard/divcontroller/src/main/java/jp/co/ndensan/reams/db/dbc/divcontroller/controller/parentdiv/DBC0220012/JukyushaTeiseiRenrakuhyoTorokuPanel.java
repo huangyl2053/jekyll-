@@ -49,7 +49,6 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
     private static final RString 照会モード = new RString("照会モード");
     private static final RString 修正モード_TWO = new RString("修正モード2");
     private static final RString 修正モード_THREE = new RString("修正モード3");
-    private static final RString 修正済 = new RString("修正済");
     private static final RString TWO = new RString("2");
     private static final RString THREE = new RString("3");
     private static final RString T_O_Z = new RString("E00210");
@@ -238,10 +237,10 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
         try {
             int 登録件数 = 0;
             if (!引き継ぎ情報.is論理削除フラグ()) {
-                登録件数 = get登録件数(受給者訂正連絡票登録画面Div, div);
+                登録件数 = get登録件数(受給者訂正連絡票登録画面Div, div, 引き継ぎ情報);
             } else {
                 登録件数 = getHandler(div).save受給者訂正連絡票(
-                        受給者訂正連絡票登録画面Div, 修正モード_TWO);
+                        受給者訂正連絡票登録画面Div, null, null, 修正モード_TWO);
             }
             ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
             AccessLogger.log(AccessLogType.更新,
@@ -267,29 +266,32 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
     }
 
     private int get登録件数(JukyushaIdoRenrakuhyo 受給者訂正連絡票登録画面Div,
-            JukyushaTeiseiRenrakuhyoTorokuPanelDiv div) {
+            JukyushaTeiseiRenrakuhyoTorokuPanelDiv div,
+            KyodoJukyushaTaishoshaEntity 引き継ぎ情報) {
         int 登録件数 = 0;
         JukyushaIdoRenrakuhyo 初期化データ = ViewStateHolder.get(
                 ViewStateKeys.受給者異動送付, JukyushaIdoRenrakuhyo.class);
+        JukyushaIdoRenrakuhyo 訂正対象データ = null;
+        if (div.getChkJukyushaTeiseiRearakuhyoHakkou().isAllSelected()) {
+            訂正対象データ = JukyushaTeiseiRenrakuhyoTorokuManager.createInstance().
+                    get訂正対象データ(引き継ぎ情報.get被保番号(), 引き継ぎ情報.get異動日(), 1);
+        } else {
+            訂正対象データ = JukyushaTeiseiRenrakuhyoTorokuManager.createInstance().
+                    get訂正対象データ(引き継ぎ情報.get被保番号(), 引き継ぎ情報.get異動日(), 引き継ぎ情報.get履歴番号());
+        }
         boolean flag = getHandler(div).is受給者異動連絡票内容変更状態(
-                初期化データ, 受給者訂正連絡票登録画面Div);
+                初期化データ, 訂正対象データ);
         if (TWO.equals(受給者訂正連絡票登録画面Div.get訂正区分コード())) {
             if (!flag) {
                 //TODO QA1429
                 throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
             } else {
                 登録件数 = getHandler(div).save受給者訂正連絡票(
-                        受給者訂正連絡票登録画面Div, 修正モード_THREE);
+                        受給者訂正連絡票登録画面Div, 訂正対象データ, null, 修正モード_THREE);
             }
         } else if (THREE.equals(受給者訂正連絡票登録画面Div.get訂正区分コード())) {
-            if (flag) {
-                //TODO QA1429
-                throw new ApplicationException(
-                        DbzErrorMessages.理由付き登録不可.getMessage().replace(修正済.toString()));
-            } else {
-                登録件数 = getHandler(div).save受給者訂正連絡票(
-                        受給者訂正連絡票登録画面Div, 照会モード);
-            }
+            登録件数 = getHandler(div).save受給者訂正連絡票(
+                    受給者訂正連絡票登録画面Div, null, 初期化データ, 照会モード);
         }
         return 登録件数;
     }

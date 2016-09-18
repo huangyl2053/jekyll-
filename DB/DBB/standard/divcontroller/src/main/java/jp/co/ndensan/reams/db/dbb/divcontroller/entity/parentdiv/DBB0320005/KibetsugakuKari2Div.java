@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  */
 public class KibetsugakuKari2Div extends Panel {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-49">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -32,6 +32,10 @@ public class KibetsugakuKari2Div extends Panel {
      * クライアント側から取得した情報を元に検索を行い
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
+     */
+    /*
+     * getccdKiwarigakuKari2
+     * @return ccdKiwarigakuKari2
      */
     @JsonProperty("ccdKiwarigakuKari2")
     public IKiwarigakuDiv getCcdKiwarigakuKari2() {

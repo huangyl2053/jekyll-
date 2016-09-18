@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 /**
  * 帳票設計_DBC200079_総合事業費過誤申立書情報送付一覧表 のSourceクラスです。
  *
- * @author DBC-2045-042 zhengshenlei
+ * @reamsid_L DBC-2530-042 zhengshenlei
  */
 public class SogojigyohiKagoMoshitateshojohoSofuSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="Generated Code">
@@ -76,6 +76,16 @@ public class SogojigyohiKagoMoshitateshojohoSofuSource implements IReportSource 
     @ReportPerson(id = "A")
     @ReportItem(name = "shikibetsuCode", length = 15)
     public RString shikibetsuCode;
+    @ReportItem(name = "listUpper_11", length = 20, order = 30)
+    public RString listUpper_11;
+    @ReportItem(name = "listUpper_12", length = 20, order = 31)
+    public RString listUpper_12;
+    @ReportItem(name = "listUpper_13", length = 20, order = 32)
+    public RString listUpper_13;
+    @ReportItem(name = "listUpper_14", length = 20, order = 33)
+    public RString listUpper_14;
+    @ReportItem(name = "listUpper_15", length = 20, order = 34)
+    public RString listUpper_15;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
@@ -116,6 +126,12 @@ public class SogojigyohiKagoMoshitateshojohoSofuSource implements IReportSource 
         listLower_1,
         listLower_2,
         gokeiKensuTitle,
-        gokeiKensu
+        gokeiKensu,
+        listUpper_11,
+        listUpper_12,
+        listUpper_13,
+        listUpper_14,
+        listUpper_15
+
     }
 }

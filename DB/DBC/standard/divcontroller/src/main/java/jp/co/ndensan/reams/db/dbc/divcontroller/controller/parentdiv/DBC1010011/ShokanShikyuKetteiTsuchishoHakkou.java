@@ -137,17 +137,6 @@ public class ShokanShikyuKetteiTsuchishoHakkou {
         ChohyoSeigyoHanyo 帳票制御汎用 = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.
                 getReportId(), new RString("支払予定日印字有無"));
         ViewStateHolder.put(ViewStateKeys.帳票制御汎用メンテナンスGrid, 帳票制御汎用);
-        if (div.getShokanShikyuKetteiTsuchishoHakkouPrint().getTxtZenkaiHakkoYMD().getValue() == null && !ResponseHolder.isReRequest()) {
-            WarningMessage message = new WarningMessage(
-                    DbcWarningMessages.高額合算支給決定通知書発行済.getMessage().getCode(),
-                    DbcWarningMessages.高額合算支給決定通知書発行済.getMessage().evaluate(),
-                    ButtonSelectPattern.OKCancel);
-            return ResponseData.of(div).addMessage(message).respond();
-        }
-        if (new RString(DbcWarningMessages.高額合算支給決定通知書発行済.getMessage().getCode()).equals(
-                ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-            return ResponseData.of(div).respond();
-        }
         if (帳票制御汎用.get設定値().equals(new RString("1")) && div.getShokanShikyuKetteiTsuchishoHakkouPrint().
                 getTxtShiharaiYoteiYMD().getValue() == null && !ResponseHolder.isReRequest()) {
             WarningMessage message = new WarningMessage(
@@ -156,7 +145,19 @@ public class ShokanShikyuKetteiTsuchishoHakkou {
                     ButtonSelectPattern.OKCancel);
             return ResponseData.of(div).addMessage(message).respond();
         }
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+        if (new RString(UrWarningMessages.未入力.getMessage().getCode()).equals(
+                ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            return ResponseData.of(div).respond();
+        }
+        if (div.getShokanShikyuKetteiTsuchishoHakkouPrint().getTxtZenkaiHakkoYMD().getValue() != null && !ResponseHolder.isReRequest()) {
+            WarningMessage message = new WarningMessage(
+                    DbcWarningMessages.高額合算支給決定通知書発行済.getMessage().getCode(),
+                    DbcWarningMessages.高額合算支給決定通知書発行済.getMessage().evaluate(),
+                    ButtonSelectPattern.OKCancel);
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (new RString(DbcWarningMessages.高額合算支給決定通知書発行済.getMessage().getCode()).equals(
+                ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             return ResponseData.of(div).respond();
         }
         ShoukanbaraiShikyuKetteiTsuchisho shoukanFinder = ShoukanbaraiShikyuKetteiTsuchisho.createInstance();
@@ -177,10 +178,10 @@ public class ShokanShikyuKetteiTsuchishoHakkou {
         ShiharaiHohoHenkoSashitome 支払方法変更差止 = shoukanFinder.getSashitome(被保険者番号, new FlexibleYearMonth(div.
                 getDdlServiceTeikyoYM().getSelectedKey()), div.getDdlSeiriNO().getSelectedValue());
         RString 差額支給対象者区分 = RString.EMPTY;
-        if (支払方法変更差止 != null && 支払方法変更差止.get差止控除番号() != null) {
-            if (!支払方法変更差止.get差止控除番号().isEmpty()) {
+        if (支払方法変更差止 != null) {
+            if (支払方法変更差止.get差止控除番号() != null && !支払方法変更差止.get差止控除番号().isEmpty()) {
                 throw new ApplicationException(DbcErrorMessages.支払方法差止エラー.getMessage());
-            } else if (shokanHanteiKekka.get差額金額合計() == null || shokanHanteiKekka.get差額金額合計().equals(new Decimal(0))) {
+            } else if (shokanHanteiKekka.get差額金額合計() == null || shokanHanteiKekka.get差額金額合計().compareTo(Decimal.ZERO) == 0) {
                 throw new ApplicationException(DbcErrorMessages.差額支給エラー.getMessage());
             } else {
                 差額支給対象者区分 = new RString("1");

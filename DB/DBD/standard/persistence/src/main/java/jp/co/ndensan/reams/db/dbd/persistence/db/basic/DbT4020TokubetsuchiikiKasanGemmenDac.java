@@ -8,15 +8,19 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4020TokubetsuchiikiKasanGemmen;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4020TokubetsuchiikiKasanGemmen.hihokenshaNo;
+import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4020TokubetsuchiikiKasanGemmen.kakuninNo;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4020TokubetsuchiikiKasanGemmen.ketteiKubun;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4020TokubetsuchiikiKasanGemmen.rirekiNo;
 import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4020TokubetsuchiikiKasanGemmen.shoKisaiHokenshaNo;
+import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4020TokubetsuchiikiKasanGemmen.tekiyoKaishiYMD;
+import static jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4020TokubetsuchiikiKasanGemmen.tekiyoShuryoYMD;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4020TokubetsuchiikiKasanGemmenEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Order.DESC;
@@ -24,6 +28,7 @@ import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.isNULL;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.not;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -62,9 +67,9 @@ public class DbT4020TokubetsuchiikiKasanGemmenDac implements ISaveable<DbT4020To
         return accessor.select().
                 table(DbT4020TokubetsuchiikiKasanGemmen.class).
                 where(and(
-                                eq(shoKisaiHokenshaNo, 証記載保険者番号),
-                                eq(hihokenshaNo, 被保険者番号),
-                                eq(rirekiNo, 履歴番号))).
+                        eq(shoKisaiHokenshaNo, 証記載保険者番号),
+                        eq(hihokenshaNo, 被保険者番号),
+                        eq(rirekiNo, 履歴番号))).
                 toObject(DbT4020TokubetsuchiikiKasanGemmenEntity.class);
     }
 
@@ -113,9 +118,9 @@ public class DbT4020TokubetsuchiikiKasanGemmenDac implements ISaveable<DbT4020To
         return accessor.select().
                 table(DbT4020TokubetsuchiikiKasanGemmen.class).
                 where(and(
-                                eq(hihokenshaNo, 被保険者番号),
-                                not(isNULL(ketteiKubun)),
-                                not(eq(ketteiKubun, RString.EMPTY)))).
+                        eq(hihokenshaNo, 被保険者番号),
+                        not(isNULL(ketteiKubun)),
+                        not(eq(ketteiKubun, RString.EMPTY)))).
                 getCount();
     }
 
@@ -138,5 +143,27 @@ public class DbT4020TokubetsuchiikiKasanGemmenDac implements ISaveable<DbT4020To
                 order(by(rirekiNo, DESC)).
                 limit(1).
                 toObject(DbT4020TokubetsuchiikiKasanGemmenEntity.class);
+    }
+
+    /**
+     * キーで支払方法変更を取得します。
+     *
+     * @param 年度開始日 年度開始日
+     * @param 年度終了日 年度終了日
+     * @param 確認番号 確認番号
+     * @return DbT4020TokubetsuchiikiKasanGemmenEntity{@code list}
+     */
+    @Transaction
+    public List<DbT4020TokubetsuchiikiKasanGemmenEntity> selectFor確認番号の重複判定(
+            FlexibleDate 年度開始日, FlexibleDate 年度終了日, RString 確認番号) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT4020TokubetsuchiikiKasanGemmen.class).
+                where(and(
+                        leq(年度開始日, tekiyoKaishiYMD),
+                        leq(tekiyoShuryoYMD, 年度終了日),
+                        eq(kakuninNo, 確認番号))).
+                toList(DbT4020TokubetsuchiikiKasanGemmenEntity.class);
     }
 }

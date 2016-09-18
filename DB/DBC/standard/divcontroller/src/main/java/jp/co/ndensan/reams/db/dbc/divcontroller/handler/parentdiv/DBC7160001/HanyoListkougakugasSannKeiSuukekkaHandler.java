@@ -174,24 +174,25 @@ public class HanyoListkougakugasSannKeiSuukekkaHandler {
             parameter.setデータ種類(Kaigogassan_DataShubetsu.仮算定.getコード());
         }
 
-        RString 年度 = div.getChushutsuJokenPanel().getDdlTaishoNendo().getSelectedValue();
-        RString 対象年度 = new RString(Integer.parseInt(Pattern.compile(new RString("[^0-9]").toString()).matcher(年度).replaceAll("").trim()) + VALUE);
-        parameter.set対象年度(new FlexibleYear(対象年度));
+        if (!div.getChushutsuJokenPanel().getDdlTaishoNendo().getSelectedValue().isEmpty()) {
+            RString 年度 = div.getChushutsuJokenPanel().getDdlTaishoNendo().getSelectedValue();
+            RString 対象年度
+                    = new RString(Integer.parseInt(Pattern.compile(new RString("[^0-9]").toString()).matcher(年度).replaceAll("").trim()) + VALUE);
+            parameter.set対象年度(new FlexibleYear(対象年度));
+        }
         TextBoxDateRange 受取年月 = div.getChushutsuJokenPanel().getTxtUketoriNengetsu();
         if (受取年月.isDisabled()) {
             parameter.set受取年月From(FlexibleYearMonth.EMPTY);
             parameter.set受取年月To(FlexibleYearMonth.EMPTY);
         } else {
-            RString 年月From = RString.EMPTY;
-            RString 年月To = RString.EMPTY;
             if (受取年月.getFromValue() != null) {
-                年月From = 受取年月.getFromValue().getYearMonth().toDateString();
+                RString 年月From = 受取年月.getFromValue().getYearMonth().toDateString();
+                parameter.set受取年月From(new FlexibleYearMonth(年月From));
             }
             if (受取年月.getToValue() != null) {
-                年月To = 受取年月.getToValue().getYearMonth().toDateString();
+                RString 年月To = 受取年月.getToValue().getYearMonth().toDateString();
+                parameter.set受取年月To(new FlexibleYearMonth(年月To));
             }
-            parameter.set受取年月From(new FlexibleYearMonth(年月From));
-            parameter.set受取年月To(new FlexibleYearMonth(年月To));
         }
 
         TextBoxDateRange 送付年月 = div.getChushutsuJokenPanel().getTxtSofuNengetsu();
@@ -199,16 +200,14 @@ public class HanyoListkougakugasSannKeiSuukekkaHandler {
             parameter.set送付年月From(FlexibleYearMonth.EMPTY);
             parameter.set送付年月To(FlexibleYearMonth.EMPTY);
         } else {
-            RString 送付From = RString.EMPTY;
-            RString 送付To = RString.EMPTY;
             if (送付年月.getFromValue() != null) {
-                送付From = 送付年月.getFromValue().getYearMonth().toDateString();
+                RString 送付From = 送付年月.getFromValue().getYearMonth().toDateString();
+                parameter.set送付年月From(new FlexibleYearMonth(送付From));
             }
             if (送付年月.getToValue() != null) {
-                送付To = 送付年月.getToValue().getYearMonth().toDateString();
+                RString 送付To = 送付年月.getToValue().getYearMonth().toDateString();
+                parameter.set送付年月To(new FlexibleYearMonth(送付To));
             }
-            parameter.set送付年月From(new FlexibleYearMonth(送付From));
-            parameter.set送付年月To(new FlexibleYearMonth(送付To));
         }
 
         List<RString> keyList = div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().getSelectedKeys();

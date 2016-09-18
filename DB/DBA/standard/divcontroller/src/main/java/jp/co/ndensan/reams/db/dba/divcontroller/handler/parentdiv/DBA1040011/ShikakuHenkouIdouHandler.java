@@ -66,4 +66,8 @@ public class ShikakuHenkouIdouHandler {
             div.getCcdHihosyosai().setDdlHenkoJiyu(ShikakuHenkoJiyu.その他.getコード(), false);
         }
     }
+
+    public boolean isSavable() {
+        return div.getCcdHihosyosai().is資格変更情報追加済み();
+    }
 }

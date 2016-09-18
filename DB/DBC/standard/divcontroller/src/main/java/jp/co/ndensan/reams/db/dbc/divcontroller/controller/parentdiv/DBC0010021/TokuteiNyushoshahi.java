@@ -74,12 +74,14 @@ public class TokuteiNyushoshahi {
         RString 整理番号 = ViewStateHolder.get(ViewStateKeys.整理番号, RString.class);
         NyuryokuShikibetsuNo 識別番号検索キー = ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class);
         getHandler(div).change年月(new RString("前月"), 給付実績居宅サービス計画費list, サービス提供年月, 整理番号, 被保険者番号, 識別番号検索キー);
+        FlexibleYearMonth 提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
+        ViewStateHolder.put(ViewStateKeys.サービス提供年月, 提供年月);
         RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
         RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();
         List<KyufuJissekiHedajyoho2> 事業者番号リスト = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報,
                 KyufuJissekiPrmBusiness.class).getCommonHeader().get給付実績ヘッダ情報2();
         getHandler(div).check事業者btn(事業者番号リスト, 整理番号, 事業者番号, 識別番号検索キー.value(),
-                div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString(), 実績区分コード);
+                提供年月.toDateString(), 実績区分コード);
         return createResponse(div);
     }
 
@@ -98,12 +100,14 @@ public class TokuteiNyushoshahi {
         NyuryokuShikibetsuNo 識別番号検索キー = ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class);
         getHandler(div).change年月(new RString("次月"), 給付実績居宅サービス計画費list, サービス提供年月,
                 整理番号, 被保険者番号, 識別番号検索キー);
+        FlexibleYearMonth 提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
+        ViewStateHolder.put(ViewStateKeys.サービス提供年月, 提供年月);
         RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
         RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();
         List<KyufuJissekiHedajyoho2> 事業者番号リスト = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報,
                 KyufuJissekiPrmBusiness.class).getCommonHeader().get給付実績ヘッダ情報2();
         getHandler(div).check事業者btn(事業者番号リスト, 整理番号, 事業者番号, 識別番号検索キー.value(),
-                div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString(), 実績区分コード);
+                提供年月.toDateString(), 実績区分コード);
         return createResponse(div);
     }
 

@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 
 /**
- * 37J_高額合算自己負担額確認情報取込のマスタ登録(マスタ更新1)。
+ * 37J_高額合算自己負担額確認情報取込のマスタ登録(マスタ更新)。
  *
  * @reamsid_L DBC-2650-010 chenjie
  */
@@ -72,7 +72,7 @@ public class KogakuGassanJikofutangakuDoMasterTorokuProcess
     private void マッチング1(DbWT37H1KogakuGassanaJikofutangakuCsvEntity 高額合算自己負担額一時entity,
             DbT3070KogakuGassanJikoFutanGakuCsvEntity 高額合算自己負担額entity) {
         this.マスタ追加(高額合算自己負担額一時entity,
-                高額合算自己負担額entity.get履歴番号());
+                高額合算自己負担額entity.get履歴番号() + 1);
         this.履歴番号登録(高額合算自己負担額一時entity,
                 高額合算自己負担額entity.get履歴番号() + 1,
                 高額合算自己負担額一時entity.get更新フラグ());
@@ -80,7 +80,7 @@ public class KogakuGassanJikofutangakuDoMasterTorokuProcess
 
     private void マッチング2(DbWT37H1KogakuGassanaJikofutangakuCsvEntity 高額合算自己負担額一時entity,
             DbT3070KogakuGassanJikoFutanGakuCsvEntity 高額合算自己負担額entity) {
-        if (高額合算自己負担額一時entity.get自己負担額確認情報受取年月().isEmpty()) {
+        if (高額合算自己負担額entity.get自己負担額確認情報受取年月().isEmpty()) {
             this.マスタ更新(高額合算自己負担額一時entity,
                     高額合算自己負担額entity);
             this.履歴番号登録(高額合算自己負担額一時entity,

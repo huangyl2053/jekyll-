@@ -18,10 +18,9 @@ and open the template in the editor.
         <result property="介護認定審査会開催場所名称" column="shinsakaiKaisaiBashoName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="介護認定審査会開催地区コード" column="shinsakaiKaisaiChikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
     </resultMap>
-    
-    
-    <select resultOrdered="true" id="getKaisaikekkaandbashojoho"  
-            parameterType="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" 
+
+    <select resultOrdered="true" id="getKaisaikekkaandbashojoho"
+            parameterType="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"
             resultMap="KaisaiKekkaAndBashoJohoEntity">
         SELECT
             A."shinsakaiKaisaiNo" AS shinsakaiKaisaiNo,
@@ -53,9 +52,9 @@ and open the template in the editor.
         <result property="介護認定審査会委員氏名" column="shinsakaiIinShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <result property="介護認定審査員資格コード" column="shinsakaiIinShikakuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
     </resultMap>
-    
-    <select resultOrdered="true" id="getShinsakaijyouhou" 
-            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shinsakaijohokojin.ShinsakaiJohoKojinMapperParameter" 
+
+    <select resultOrdered="true" id="getShinsakaijyouhou"
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shinsakaijohokojin.ShinsakaiJohoKojinMapperParameter"
             resultMap="WariateIinAndIinJohoEntity">
         SELECT
             A."kaigoninteiShinsakaiGichoKubunCode" AS kaigoninteiShinsakaiGichoKubunCode,
@@ -68,8 +67,8 @@ and open the template in the editor.
             ON A."shinsakaiIinCode" = B."shinsakaiIinCode"
         INNER JOIN rgdb."DbT5591GogitaiJoho" AS C
             ON C."gogitaiNo" = #{合議体番号}
-            AND C."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> #{システム日付} 
-            AND #{システム日付} <![CDATA[<=]]> C."gogitaiYukoKikanShuryoYMD"   
+            AND C."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> #{介護認定審査会開催日}
+            AND #{介護認定審査会開催日} <![CDATA[<=]]> C."gogitaiYukoKikanShuryoYMD"
         INNER JOIN rgdb."DbT5593GogitaiWariateIinJoho" AS D
             ON C."gogitaiNo" = D."gogitaiNo"
             AND C."gogitaiYukoKikanKaishiYMD" = D."gogitaiYukoKikanKaishiYMD"
@@ -79,13 +78,11 @@ and open the template in the editor.
         WHERE
             A."shinsakaiKaisaiNo" = #{介護認定審査会開催番号}
             AND A."shussekiFlag" = True
-        ORDER BY A."shinsakaiIinCode" 
+        ORDER BY A."shinsakaiIinCode"
     </select>
-    
-   
-    
+
     <select resultOrdered="true" id="getHoketsukaijyouhou"
-            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shinsakaijohokojin.ShinsakaiJohoKojinMapperParameter" 
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shinsakaijohokojin.ShinsakaiJohoKojinMapperParameter"
             resultMap="WariateIinAndIinJohoEntity">
         SELECT
             A."kaigoninteiShinsakaiGichoKubunCode" AS kaigoninteiShinsakaiGichoKubunCode,
@@ -98,8 +95,8 @@ and open the template in the editor.
             ON A."shinsakaiIinCode" = B."shinsakaiIinCode"
         INNER JOIN rgdb."DbT5591GogitaiJoho" AS C
             ON C."gogitaiNo" = #{合議体番号}
-            AND C."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> #{システム日付} 
-            AND #{システム日付} <![CDATA[<=]]> C."gogitaiYukoKikanShuryoYMD"
+            AND C."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> #{介護認定審査会開催日}
+            AND #{介護認定審査会開催日} <![CDATA[<=]]> C."gogitaiYukoKikanShuryoYMD"
         INNER JOIN rgdb."DbT5593GogitaiWariateIinJoho" AS D
             ON C."gogitaiNo" = D."gogitaiNo"
             AND C."gogitaiYukoKikanKaishiYMD" = D."gogitaiYukoKikanKaishiYMD"
@@ -109,7 +106,7 @@ and open the template in the editor.
         WHERE
             A."shinsakaiKaisaiNo" = #{介護認定審査会開催番号}
             AND A."shussekiFlag" = True
-        ORDER BY A."shinsakaiIinCode" 
+        ORDER BY A."shinsakaiIinCode"
     </select>
-    
+
 </mapper>

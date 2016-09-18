@@ -2,6 +2,7 @@ package jp.co.ndensan.reams.db.dbc.entity.report.source.shokanbaraishikyuketteis
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
 
 /**
@@ -44,6 +45,7 @@ public class ShokanbaraiShikyuKetteishaIchiranSource implements IReportSource {
     public RString listDBKoshinUmu_1;
     @ReportItem(name = "listUpper_1", length = 6, order = 16)
     public RString listUpper_1;
+    @ReportExpandedInfo(id = "X", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listUpper_2", length = 10, order = 17)
     public RString listUpper_2;
     @ReportItem(name = "listUpper_3", length = 20, order = 18)
@@ -93,8 +95,8 @@ public class ShokanbaraiShikyuKetteishaIchiranSource implements IReportSource {
 
         printTimeStamp,
         kokuhorenName,
-        shoHokenshaNo,
-        shoHokenshaName,
+        shoKisaiHokenshaNo,
+        shoKisaiHokenshaName,
         shutsuryokujun1,
         shutsuryokujun2,
         shutsuryokujun3,

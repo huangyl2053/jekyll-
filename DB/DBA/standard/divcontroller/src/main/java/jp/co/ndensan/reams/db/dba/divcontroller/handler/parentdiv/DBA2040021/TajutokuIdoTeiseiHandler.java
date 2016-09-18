@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2040021;
 
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2040021.TajutokuIdoTeiseiDiv;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 他市町村住所地特例者異動の訂正の抽象Handlerクラスです。
@@ -32,9 +33,9 @@ public class TajutokuIdoTeiseiHandler {
      *
      * @param 識別コード 識別コード
      */
-    public void load(ShikibetsuCode 識別コード) {
+    public void load(ShikibetsuCode 識別コード, RString 台帳種別) {
         div.getTajutokuIdoTeiseiKihonJoho().getCcdKaigoAtenaJoho().initialize(識別コード);
         div.getTajutokuIdoTeiseiIdoJoho().getCcdTaJushochiTokureishaKanri().initialize(識別コード);
-        div.getTajutokuIdoTeiseiIdoJoho().getShisetsuIdoJoho().getCcdShisetsuNyutaishoRirekiKanri().initialize(識別コード);
+        div.getTajutokuIdoTeiseiIdoJoho().getShisetsuIdoJoho().getCcdShisetsuNyutaishoRirekiKanri().initialize(識別コード, 台帳種別);
     }
 }

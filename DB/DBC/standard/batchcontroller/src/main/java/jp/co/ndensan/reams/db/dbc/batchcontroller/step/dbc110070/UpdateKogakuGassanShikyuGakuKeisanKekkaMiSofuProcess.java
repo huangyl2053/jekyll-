@@ -100,8 +100,10 @@ public class UpdateKogakuGassanShikyuGakuKeisanKekkaMiSofuProcess extends BatchK
                 && !高額合算支給額計算結果.get高額合算支給額計算結果明細リスト().isEmpty()) {
             for (DbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiEntity 明細
                     : 高額合算支給額計算結果.get高額合算支給額計算結果明細リスト()) {
-                明細.setSofuYM(FlexibleYearMonth.EMPTY);
-                dbT3073TableWriter.update(明細);
+                if (明細 != null) {
+                    明細.setSofuYM(FlexibleYearMonth.EMPTY);
+                    dbT3073TableWriter.update(明細);
+                }
             }
         }
     }

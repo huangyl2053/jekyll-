@@ -39,10 +39,7 @@ public class KyotakuServiceKeikakuhiHandler {
     private static final RString 前事業者 = new RString("前事業者");
     private final KyotakuServiceKeikakuhiDiv div;
     private static final RString DISABLED = new RString("0");
-    private static final RString NI = new RString("2");
-    private static final FlexibleYearMonth 平成24年4月 = new FlexibleYearMonth("201204");
     private static final FlexibleYearMonth 平成21年3月 = new FlexibleYearMonth("200903");
-    private static final FlexibleYearMonth 平成18年4月 = new FlexibleYearMonth("200604");
 
     /**
      * 画面の初期化です。
@@ -80,7 +77,7 @@ public class KyotakuServiceKeikakuhiHandler {
         List<KyufujissekiKyotakuServiceBusiness> 特定入所者介護サービス費用list = get給付実績データ(business,
                 整理番号, 事業者番号, 様式番号, サービス提供年月.toDateString());
         List<KyufujissekiKyotakuServiceBusiness> dataToRepeat = getサービス提供年月list(business);
-        if (サービス提供年月.isBeforeOrEquals(平成21年3月) && (平成18年4月.isBeforeOrEquals(サービス提供年月))) {
+        if (サービス提供年月.isBeforeOrEquals(平成21年3月)) {
             List<dgServiceKeikakuhiToH2103_Row> to2013rowList = new ArrayList<>();
             for (KyufujissekiKyotakuServiceBusiness 居宅サービス計画費 : 特定入所者介護サービス費用list) {
 
@@ -181,9 +178,9 @@ public class KyotakuServiceKeikakuhiHandler {
             row.setTxtShinsaYM(RString.EMPTY);
         }
         if (!RString.isNullOrEmpty(居宅サービス計画費.get摘要())) {
-            row.setTxtTekiyo(居宅サービス計画費.get摘要());
+            row.setBtnTekiyo(居宅サービス計画費.get摘要());
         } else {
-            row.setTxtTekiyo(RString.EMPTY);
+            row.setBtnTekiyo(RString.EMPTY);
         }
         return row;
     }
@@ -235,18 +232,16 @@ public class KyotakuServiceKeikakuhiHandler {
         } else {
             div.getBtnMeisaiShukei().setDisabled(false);
         }
-        if (NI.equals(識別番号管理.get所定疾患施設療養設定区分())
-                && 平成24年4月.isBeforeOrEquals(サービス提供年月)) {
-            div.getBtnShoteiShikkanShisetsuRyoyo().setDisplayNone(false);
-            div.getBtnKinkyujiShisetsuRyoyo().setDisplayNone(true);
+        if (DISABLED.equals(識別番号管理.get所定疾患施設療養設定区分())) {
+
+            div.getBtnShoteiShikkanShisetsuRyoyo().setDisabled(true);
         } else {
-            div.getBtnShoteiShikkanShisetsuRyoyo().setDisplayNone(true);
-            div.getBtnKinkyujiShisetsuRyoyo().setDisplayNone(false);
-            if (DISABLED.equals(識別番号管理.get緊急時施設療養設定区分())) {
-                div.getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
-            } else {
-                div.getBtnKinkyujiShisetsuRyoyo().setDisabled(false);
-            }
+            div.getBtnShoteiShikkanShisetsuRyoyo().setDisabled(false);
+        }
+        if (DISABLED.equals(識別番号管理.get緊急時施設療養設定区分())) {
+            div.getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
+        } else {
+            div.getBtnKinkyujiShisetsuRyoyo().setDisabled(false);
         }
         if (DISABLED.equals(識別番号管理.get食事費用設定区分())) {
             div.getBtnShokuji().setDisabled(true);
@@ -296,7 +291,6 @@ public class KyotakuServiceKeikakuhiHandler {
             div.getBtnShafukuKeigen().setDisabled(true);
         } else {
             div.getBtnShafukuKeigen().setDisabled(false);
-
         }
     }
 

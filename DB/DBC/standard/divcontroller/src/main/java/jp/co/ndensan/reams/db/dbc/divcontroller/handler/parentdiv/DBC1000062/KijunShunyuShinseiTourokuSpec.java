@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 
 /**
  * 基準収入額適用申請登録の入力チェックSpecです。
@@ -112,35 +112,6 @@ public enum KijunShunyuShinseiTourokuSpec implements IPredicate<KijunShunyuShins
                 }
             },
     /**
-     * 受給者事業対象者のチェックです。
-     */
-    受給者事業対象者のチェック {
-                @Override
-                public boolean apply(KijunShunyuShinseiTourokuDiv div) {
-                    return SpecHelper.is受給者事業対象者のチェック(div);
-                }
-            },
-    /**
-     * /**
-     * 算定基準額のチェックです。
-     */
-    算定基準額のチェック {
-                @Override
-                public boolean apply(KijunShunyuShinseiTourokuDiv div) {
-                    return SpecHelper.is算定基準額のチェック(div);
-                }
-            },
-    /**
-     * /**
-     * 世帯再算出ボタン押下チェックです。
-     */
-    世帯再算出ボタン押下チェック {
-                @Override
-                public boolean apply(KijunShunyuShinseiTourokuDiv div) {
-                    return SpecHelper.is世帯再算出ボタン押下チェック(div);
-                }
-            },
-    /**
      * 控除再算出ボタンの実行時チェックです。
      */
     控除再算出チェック {
@@ -160,8 +131,6 @@ public enum KijunShunyuShinseiTourokuSpec implements IPredicate<KijunShunyuShins
         private static final RString 月日_0731 = new RString("0731");
         private static final RString 月_08 = new RString("08");
         private static final RString 月_07 = new RString("07");
-        private static final RString 世帯再算出フラグ_0 = new RString("0");
-        private static final RString 世帯再算出フラグ_1 = new RString("1");
 
         public static boolean is適用データチェック(KijunShunyuShinseiTourokuDiv div) {
             FlexibleDate 適用開始 = div.getMeisai().getTxtTekiyoStartYM().getValue();
@@ -202,17 +171,15 @@ public enum KijunShunyuShinseiTourokuSpec implements IPredicate<KijunShunyuShins
         }
 
         public static boolean is適用開始チェック２(KijunShunyuShinseiTourokuDiv div) {
-            HihokenshaNo 被保険者番号 = null;
             FlexibleDate 開始年月 = div.getMeisai().getTxtTekiyoStartYM().getValue();
             for (dgMeisai_Row row : div.getMeisai().getDgMeisai().getDataSource()) {
-                被保険者番号 = new HihokenshaNo(row.getHihokenshaNo());
+                HihokenshaNo 被保険者番号 = new HihokenshaNo(row.getHihokenshaNo());
+                if (!RowState.Deleted.equals(row.getRowState()) && 開始年月 != null && !開始年月.isEmpty()) {
+                    FlexibleYearMonth 適用開始年月 = new FlexibleYearMonth(開始年月.toString().substring(NUM_0, NUM_6));
+                    return KijunShunyuShinseiTourokuManager.createInstance().is適用開始チェック(被保険者番号, 適用開始年月);
+                }
             }
-            if (被保険者番号 != null && 開始年月 != null && !開始年月.isEmpty()) {
-                FlexibleYearMonth 適用開始年月 = new FlexibleYearMonth(開始年月.toString().substring(NUM_0, NUM_6));
-                return KijunShunyuShinseiTourokuManager.createInstance().is適用開始チェック(被保険者番号, 適用開始年月);
-            } else {
-                return true;
-            }
+            return true;
         }
 
         public static boolean is世帯員が0人(KijunShunyuShinseiTourokuDiv div) {
@@ -241,53 +208,15 @@ public enum KijunShunyuShinseiTourokuSpec implements IPredicate<KijunShunyuShins
             return !(count == NUM_0 || NUM_1 < count);
         }
 
-        public static boolean is受給者事業対象者のチェック(KijunShunyuShinseiTourokuDiv div) {
-            List<dgMeisai_Row> rowList = div.getMeisai().getDgMeisai().getDataSource();
-            for (dgMeisai_Row row : rowList) {
-                if (row.getJyukyuJigyoTaisho() != null && !row.getJyukyuJigyoTaisho().isEmpty()) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public static boolean is算定基準額のチェック(KijunShunyuShinseiTourokuDiv div) {
-            List<dgMeisai_Row> rowList = div.getMeisai().getDgMeisai().getDataSource();
-            for (dgMeisai_Row row : rowList) {
-                if (row.getJyukyuJigyoTaisho() != null && !row.getJyukyuJigyoTaisho().isEmpty()) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        public static boolean is世帯再算出ボタン押下チェック(KijunShunyuShinseiTourokuDiv div) {
-            RString 世帯再算フラグ = DataPassingConverter.deserialize(
-                    div.getMeisai().getHdnButtonSaiSanshutsuFlag(), RString.class);
-            if (世帯再算出フラグ_0.equals(世帯再算フラグ) || 世帯再算出フラグ_1.equals(世帯再算フラグ)) {
-                RString 変更前世帯コード = DataPassingConverter.deserialize(
-                        div.getMeisai().getHdnHenkomaeStaiCode(), RString.class);
-                FlexibleDate 変更前処理年度 = DataPassingConverter.deserialize(
-                        div.getMeisai().getHdnHenkomaeShoriNendo(), FlexibleDate.class);
-                FlexibleDate 変更前基準日 = DataPassingConverter.deserialize(
-                        div.getMeisai().getHdnHenkomaeSetaiinHaakuKijunYMD(), FlexibleDate.class);
-                RString 世帯コード = div.getMeisai().getTxtSetaiCode().getValue();
-                FlexibleDate 処理年度 = div.getMeisai().getTxtShoriNendo().getValue();
-                FlexibleDate 基準日 = div.getMeisai().getTxtSetaiinHaakuKijunYMD().getValue();
-                return !(変更前世帯コード.equals(世帯コード) && 変更前処理年度.equals(処理年度) && 変更前基準日.equals(基準日));
-            }
-            return true;
-        }
-
         public static boolean is控除再算出チェック(KijunShunyuShinseiTourokuDiv div) {
             List<dgMeisai_Row> rowList = div.getMeisai().getDgMeisai().getDataSource();
-            int count = NUM_1;
+            int 世帯主Count = NUM_0;
             for (dgMeisai_Row row : rowList) {
                 if (row.getZennenSetainushi()) {
-                    count = count + NUM_1;
+                    世帯主Count = 世帯主Count + NUM_1;
                 }
             }
-            return NUM_1 == count;
+            return (世帯主Count <= NUM_1);
         }
     }
 }

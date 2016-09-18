@@ -275,12 +275,30 @@ public class Fuka extends ParentModelBase<FukaIdentifier, DbT2002FukaEntity, Fuk
     }
 
     /**
+     * 課税区分の名称を返します。
+     *
+     * @return 課税区分の名称
+     */
+    public RString get課税区分名称() {
+        return KazeiKubun.to名称OrDefault(entity.getKazeiKubun(), RString.EMPTY);
+    }
+
+    /**
      * 世帯課税区分を返します。
      *
      * @return 世帯課税区分
      */
     public KazeiKubun get世帯課税区分() {
         return KazeiKubun.toValue(entity.getSetaikazeiKubun());
+    }
+
+    /**
+     * 世帯課税区分の名称を返します。
+     *
+     * @return 世帯課税区分の名称
+     */
+    public RString get世帯課税区分名称() {
+        return KazeiKubun.to名称OrDefault(entity.getSetaikazeiKubun(), RString.EMPTY);
     }
 
     /**
@@ -353,6 +371,19 @@ public class Fuka extends ParentModelBase<FukaIdentifier, DbT2002FukaEntity, Fuk
      */
     public RString get保険料算定段階2() {
         return entity.getHokenryoDankai2();
+    }
+
+    /**
+     * 「保険料算定段階2」が存在すれば「保険料算定段階2」、しなければ「保険料算定段階1」を返します。
+     *
+     * @return 「保険料算定段階2」が存在すれば「保険料算定段階2」、しなければ「保険料算定段階1」
+     */
+    public RString get保険料算定段階() {
+        if (!RString.isNullOrEmpty(get保険料算定段階2())) {
+            return get保険料算定段階2();
+        } else {
+            return get保険料算定段階1();
+        }
     }
 
     /**

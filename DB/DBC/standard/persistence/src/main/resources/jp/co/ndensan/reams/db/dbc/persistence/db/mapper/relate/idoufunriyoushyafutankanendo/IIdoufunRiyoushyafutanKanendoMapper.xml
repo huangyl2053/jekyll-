@@ -14,7 +14,6 @@
     WHERE		
         dbT7022."subGyomuCode" = 'DBC'	AND
         dbT7022."shoriName"=#{処理名}	AND
-	dbT7022."kijunTimestamp" IS NOT NULL AND
         dbT7022."kijunTimestamp" <![CDATA[<>]]> ''
     ORDER BY 
         dbT7022."nendo" DESC,

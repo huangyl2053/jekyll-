@@ -5,14 +5,17 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0410037;
 
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.sogojigyohikagoketteiin.DBC120180_SogojigyohiKagoKetteiInParameter;
+import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410037.TsuchishoJoho175Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoBunruiKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.viewstatename.ViewStateHolderName;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoBunruiKanriManager;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -32,7 +35,7 @@ public class TsuchishoJoho175 {
      */
     public ResponseData<TsuchishoJoho175Div> onLoad(TsuchishoJoho175Div div) {
         ChohyoBunruiKanri code = ChohyoBunruiKanriManager.createInstance().get帳票分類管理(SubGyomuCode.DBC介護給付,
-                new ReportId(new RString("DBC200085_SogojigyohiKagoKetteitsuchishoTorikomiIchiran")));
+                ReportIdDBC.DBC200075.getReportId());
         KokuhorenDataTorikomiViewStateClass parmater = ViewStateHolder.get(ViewStateHolderName.国保連取込情報,
                 KokuhorenDataTorikomiViewStateClass.class);
         div.getCcdKokurenJohoTorikomi().initialize(SubGyomuCode.DBC介護給付, code.get帳票分類ID(), parmater);
@@ -45,13 +48,22 @@ public class TsuchishoJoho175 {
      * @param div TsuchishoJoho152Div
      * @return ResponseData
      */
-    public ResponseData<TsuchishoJoho175Div> onImplement(TsuchishoJoho175Div div) {
-        // TODO QA471 パラメータ作成ビジネスを呼び出して、バッチを起動する
-        div.getCcdKokurenJohoTorikomi().get再処理区分();
-        div.getCcdKokurenJohoTorikomi().get処理対象情報();
-        div.getCcdKokurenJohoTorikomi().get処理年月();
-        div.getCcdKokurenJohoTorikomi().get出力順ID();
-        return ResponseData.of(div).respond();
+    public ResponseData<DBC120180_SogojigyohiKagoKetteiInParameter> onImplement(TsuchishoJoho175Div div) {
+        DBC120180_SogojigyohiKagoKetteiInParameter parameter = new DBC120180_SogojigyohiKagoKetteiInParameter();
+        if (div.getCcdKokurenJohoTorikomi().get処理年月() != null) {
+            parameter.set処理年月(new FlexibleYearMonth(
+                    div.getCcdKokurenJohoTorikomi().get処理年月().getYearMonth().toDateString()));
+        }
+        if (div.getCcdKokurenJohoTorikomi().get出力順ID() != null) {
+            parameter.set出力順ID(div.getCcdKokurenJohoTorikomi().get出力順ID());
+        }
+        RString 再処理区分 = div.getCcdKokurenJohoTorikomi().get再処理区分();
+        if (SaiShoriKubun.再処理.get名称().equals(再処理区分)) {
+            parameter.set再処理区分(SaiShoriKubun.再処理.getコード());
+        } else {
+            parameter.set再処理区分(SaiShoriKubun.空白.getコード());
+        }
+        return ResponseData.of(parameter).respond();
 
     }
 

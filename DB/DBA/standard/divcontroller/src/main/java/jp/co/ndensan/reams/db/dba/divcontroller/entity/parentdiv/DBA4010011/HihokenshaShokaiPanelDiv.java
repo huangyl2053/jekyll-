@@ -4,21 +4,19 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA4010011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishuKirokuKanri.IShoKaishuKirokuKanriDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishuKirokuKanri.ShoKaishuKirokuKanriDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.IIryohokenRirekiCommonChildDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.IryohokenRirekiCommonChildDiv.IryohokenRirekiCommonChildDivDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai.IRoreiFukushiNenkinShokaiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.RoreiFukushiNenkinShokai.RoreiFukushiNenkinShokaiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShotokuIchiran.SetaiShotokuIchiran.ISetaiShotokuIchiranDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShotokuIchiran.SetaiShotokuIchiran.SetaiShotokuIchiranDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.IryoHokenRirekiDialogButton.IIryoHokenRirekiDialogButtonDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.IryoHokenRirekiDialogButton.IryoHokenRirekiDialogButtonDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.RofukuNenkinDialogButton.IRofukuNenkinDialogButtonDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.RofukuNenkinDialogButton.RofukuNenkinDialogButtonDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoDialogButton.IShisetsuNyutaishoDialogButtonDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoDialogButton.ShisetsuNyutaishoDialogButtonDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishuKirokuDialogButton.IShoKaishuKirokuDialogButtonDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishuKirokuDialogButton.ShoKaishuKirokuDialogButtonDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShotokuShokaiDialogButton.IShotokuShokaiDialogButtonDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShotokuShokaiDialogButton.ShotokuShokaiDialogButtonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.IShikakuTokusoRirekiDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.ShikakuTokusoRirekiDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.IShisetsuNyutaishoRirekiKanriDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.ShisetsuNyutaishoRirekiKanriDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -27,15 +25,25 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class HihokenshaShokaiPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-06_01-12-04">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("tabHihokenshaShokai")
-    private tabHihokenshaShokaiDiv tabHihokenshaShokai;
+    @JsonProperty("ccdSetaiShotokuButton")
+    private ShotokuShokaiDialogButtonDiv ccdSetaiShotokuButton;
+    @JsonProperty("ccdIryoHokenButton")
+    private IryoHokenRirekiDialogButtonDiv ccdIryoHokenButton;
+    @JsonProperty("ccdRofukuNenkinButton")
+    private RofukuNenkinDialogButtonDiv ccdRofukuNenkinButton;
+    @JsonProperty("ccdShisetsuNyutaishoButton")
+    private ShisetsuNyutaishoDialogButtonDiv ccdShisetsuNyutaishoButton;
+    @JsonProperty("ccdShoKofuKaishuButton")
+    private ShoKaishuKirokuDialogButtonDiv ccdShoKofuKaishuButton;
+    @JsonProperty("ccdShisetsuTokusoRireki")
+    private ShikakuTokusoRirekiDiv ccdShisetsuTokusoRireki;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -44,114 +52,57 @@ public class HihokenshaShokaiPanelDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * gettabHihokenshaShokai
-     * @return tabHihokenshaShokai
+     * getccdSetaiShotokuButton
+     * @return ccdSetaiShotokuButton
      */
-    @JsonProperty("tabHihokenshaShokai")
-    public tabHihokenshaShokaiDiv getTabHihokenshaShokai() {
-        return tabHihokenshaShokai;
+    @JsonProperty("ccdSetaiShotokuButton")
+    public IShotokuShokaiDialogButtonDiv getCcdSetaiShotokuButton() {
+        return ccdSetaiShotokuButton;
     }
 
     /*
-     * settabHihokenshaShokai
-     * @param tabHihokenshaShokai tabHihokenshaShokai
+     * getccdIryoHokenButton
+     * @return ccdIryoHokenButton
      */
-    @JsonProperty("tabHihokenshaShokai")
-    public void setTabHihokenshaShokai(tabHihokenshaShokaiDiv tabHihokenshaShokai) {
-        this.tabHihokenshaShokai = tabHihokenshaShokai;
+    @JsonProperty("ccdIryoHokenButton")
+    public IIryoHokenRirekiDialogButtonDiv getCcdIryoHokenButton() {
+        return ccdIryoHokenButton;
     }
 
     /*
-     * [ ショートカットの作成 ]
+     * getccdRofukuNenkinButton
+     * @return ccdRofukuNenkinButton
      */
-    @JsonIgnore
-    public tplHihokenshaRirekiDiv getTplHihokenshaRireki() {
-        return this.getTabHihokenshaShokai().getTplHihokenshaRireki();
+    @JsonProperty("ccdRofukuNenkinButton")
+    public IRofukuNenkinDialogButtonDiv getCcdRofukuNenkinButton() {
+        return ccdRofukuNenkinButton;
     }
 
-    @JsonIgnore
-    public void  setTplHihokenshaRireki(tplHihokenshaRirekiDiv tplHihokenshaRireki) {
-        this.getTabHihokenshaShokai().setTplHihokenshaRireki(tplHihokenshaRireki);
+    /*
+     * getccdShisetsuNyutaishoButton
+     * @return ccdShisetsuNyutaishoButton
+     */
+    @JsonProperty("ccdShisetsuNyutaishoButton")
+    public IShisetsuNyutaishoDialogButtonDiv getCcdShisetsuNyutaishoButton() {
+        return ccdShisetsuNyutaishoButton;
     }
 
-    @JsonIgnore
+    /*
+     * getccdShoKofuKaishuButton
+     * @return ccdShoKofuKaishuButton
+     */
+    @JsonProperty("ccdShoKofuKaishuButton")
+    public IShoKaishuKirokuDialogButtonDiv getCcdShoKofuKaishuButton() {
+        return ccdShoKofuKaishuButton;
+    }
+
+    /*
+     * getccdShisetsuTokusoRireki
+     * @return ccdShisetsuTokusoRireki
+     */
+    @JsonProperty("ccdShisetsuTokusoRireki")
     public IShikakuTokusoRirekiDiv getCcdShisetsuTokusoRireki() {
-        return this.getTabHihokenshaShokai().getTplHihokenshaRireki().getCcdShisetsuTokusoRireki();
-    }
-
-    @JsonIgnore
-    public tplSetaiShokaiDiv getTplSetaiShokai() {
-        return this.getTabHihokenshaShokai().getTplSetaiShokai();
-    }
-
-    @JsonIgnore
-    public void  setTplSetaiShokai(tplSetaiShokaiDiv tplSetaiShokai) {
-        this.getTabHihokenshaShokai().setTplSetaiShokai(tplSetaiShokai);
-    }
-
-    @JsonIgnore
-    public ISetaiShotokuIchiranDiv getCcdSeitaiIchiran() {
-        return this.getTabHihokenshaShokai().getTplSetaiShokai().getCcdSeitaiIchiran();
-    }
-
-    @JsonIgnore
-    public tplIryoHokenDiv getTplIryoHoken() {
-        return this.getTabHihokenshaShokai().getTplIryoHoken();
-    }
-
-    @JsonIgnore
-    public void  setTplIryoHoken(tplIryoHokenDiv tplIryoHoken) {
-        this.getTabHihokenshaShokai().setTplIryoHoken(tplIryoHoken);
-    }
-
-    @JsonIgnore
-    public IIryohokenRirekiCommonChildDiv getCcdIryoHokenRireki() {
-        return this.getTabHihokenshaShokai().getTplIryoHoken().getCcdIryoHokenRireki();
-    }
-
-    @JsonIgnore
-    public tplRofukuNenkinDiv getTplRofukuNenkin() {
-        return this.getTabHihokenshaShokai().getTplRofukuNenkin();
-    }
-
-    @JsonIgnore
-    public void  setTplRofukuNenkin(tplRofukuNenkinDiv tplRofukuNenkin) {
-        this.getTabHihokenshaShokai().setTplRofukuNenkin(tplRofukuNenkin);
-    }
-
-    @JsonIgnore
-    public IRoreiFukushiNenkinShokaiDiv getCcdRoreiFukushiNenkinShokai() {
-        return this.getTabHihokenshaShokai().getTplRofukuNenkin().getCcdRoreiFukushiNenkinShokai();
-    }
-
-    @JsonIgnore
-    public tplShisetsuNyutaishoDiv getTplShisetsuNyutaisho() {
-        return this.getTabHihokenshaShokai().getTplShisetsuNyutaisho();
-    }
-
-    @JsonIgnore
-    public void  setTplShisetsuNyutaisho(tplShisetsuNyutaishoDiv tplShisetsuNyutaisho) {
-        this.getTabHihokenshaShokai().setTplShisetsuNyutaisho(tplShisetsuNyutaisho);
-    }
-
-    @JsonIgnore
-    public IShisetsuNyutaishoRirekiKanriDiv getCcdShisetsuNyutaishoRireki() {
-        return this.getTabHihokenshaShokai().getTplShisetsuNyutaisho().getCcdShisetsuNyutaishoRireki();
-    }
-
-    @JsonIgnore
-    public tplShoKofuKaishuDiv getTplShoKofuKaishu() {
-        return this.getTabHihokenshaShokai().getTplShoKofuKaishu();
-    }
-
-    @JsonIgnore
-    public void  setTplShoKofuKaishu(tplShoKofuKaishuDiv tplShoKofuKaishu) {
-        this.getTabHihokenshaShokai().setTplShoKofuKaishu(tplShoKofuKaishu);
-    }
-
-    @JsonIgnore
-    public IShoKaishuKirokuKanriDiv getCcdShoKaishuJokyoList() {
-        return this.getTabHihokenshaShokai().getTplShoKofuKaishu().getCcdShoKaishuJokyoList();
+        return ccdShisetsuTokusoRireki;
     }
 
     // </editor-fold>

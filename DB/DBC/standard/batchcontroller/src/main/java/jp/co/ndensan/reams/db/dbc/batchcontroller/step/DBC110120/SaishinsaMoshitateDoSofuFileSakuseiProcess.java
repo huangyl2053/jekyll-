@@ -136,17 +136,19 @@ public class SaishinsaMoshitateDoSofuFileSakuseiProcess extends BatchProcessBase
     @Override
     protected void process(SaishinsaMoshitateAndHihokenshaKanrenEntity entity) {
         if (レコード番号 == INT_0) {
+            レコード番号 = レコード番号 + 1;
             SaishinsaMoshitateSofuFairuControlEntity controlEntity = getControlEntity();
             eucCsvWriter.writeLine(controlEntity);
         }
+        レコード番号 = レコード番号 + 1;
         SaishinsaMoshitateSofuFairuMeisaiEntity meisaiEntity = getMeisaiEntity(entity);
         eucCsvWriter.writeLine(meisaiEntity);
         総出力件数 = 総出力件数 + 1;
-        レコード番号 = レコード番号 + 1;
     }
 
     @Override
     protected void afterExecute() {
+        レコード番号 = レコード番号 + 1;
         SaishinsaMoshitateSofuFairuEndEntity endEntity = getEndEntity();
         eucCsvWriter.writeLine(endEntity);
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(出力ファイル名));

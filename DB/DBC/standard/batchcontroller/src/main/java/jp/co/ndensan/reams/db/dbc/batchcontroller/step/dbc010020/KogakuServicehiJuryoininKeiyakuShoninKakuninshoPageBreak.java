@@ -16,8 +16,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 
 /**
+ * 改頁クラスです。
  *
- * @author clzhou
+ * @reamsid_L DBC-1970-030 zhouchuanlin
  */
 public class KogakuServicehiJuryoininKeiyakuShoninKakuninshoPageBreak extends PageBreaker<JuryoIninShoninKakuninshoIchiranSource> {
 

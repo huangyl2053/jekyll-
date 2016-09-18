@@ -3,19 +3,24 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShujiiIry
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Mar 10 19:18:37 CST 2016
+ * Thu Jul 21 13:34:30 JST 2016 
  */
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+
+
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+
 
 /**
- * dgKensakuKekkaIchiran_Row のクラスファイル
- *
+ * dgKensakuKekkaIchiran_Row のクラスファイル 
+ * 
+ * @author 自動生成
  */
+
 public class dgKensakuKekkaIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：バージョン情報無し">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
 
     private TextBoxCode iryoKikancode;
     private RString iryoKikanMeisho;

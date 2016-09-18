@@ -5,9 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.core.hanyolistkogakugassanshinseishojoho;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Kokuho_Zokugara;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Over70_ShotokuKbn;
@@ -116,7 +113,6 @@ public class HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate {
     private static final RString 斜線 = new RString("/");
     private static final int INT_7 = 7;
     private static final int INT_8 = 8;
-    private static final int INT_9 = 9;
     private static final int INT_10 = 10;
     private static final int INT_19 = 19;
     private static final int INT_20 = 20;
@@ -529,17 +525,12 @@ public class HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate {
     }
 
     private RString get受給申請事由(HanyoListKogakuGassanShinseishoJohoEntity entity) {
-        List jukyuShinseiJiyuList = new ArrayList();
         RString 受給申請事由 = RString.EMPTY;
-        RString 受給申請事由コード = entity.get受給者台帳_受給申請事由();
-        jukyuShinseiJiyuList.addAll(Arrays.asList(JukyuShinseiJiyu.values()));
-        RString 受給申請事由名称 = RString.EMPTY;
-        if (受給申請事由コード != null) {
-            受給申請事由名称 = JukyuShinseiJiyu.toValue(受給申請事由コード).get名称();
+        RString 受給申請事由コード = RString.EMPTY;
+        if (entity.get受給者台帳_受給申請事由() != null) {
+            受給申請事由コード = entity.get受給者台帳_受給申請事由();
         }
-        if (jukyuShinseiJiyuList.contains(受給申請事由名称)) {
-            getJukyuShinseiJiyu(受給申請事由コード, 受給申請事由, entity.get受給者台帳_要支援者認定申請区分());
-        }
+        getJukyuShinseiJiyu(受給申請事由コード, 受給申請事由, entity.get受給者台帳_要支援者認定申請区分());
         return 受給申請事由;
     }
 

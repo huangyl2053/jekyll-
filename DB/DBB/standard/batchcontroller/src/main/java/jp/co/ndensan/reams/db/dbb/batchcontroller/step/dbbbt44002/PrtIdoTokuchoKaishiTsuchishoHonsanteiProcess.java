@@ -54,6 +54,7 @@ import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
+import jp.co.ndensan.reams.uz.uza.batch.journal.JournalWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -61,6 +62,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -258,6 +260,7 @@ public class PrtIdoTokuchoKaishiTsuchishoHonsanteiProcess extends SimpleBatchPro
     private int print特徴開始通知書(ChohyoResult 出力帳票一覧, EditedHonSanteiTsuchiShoKyotsu 編集後本算定通知書共通情報,
             PrtTokuchoKaishiTsuchishoHonsanteiResult result, HonSanteiTsuchiShoKyotsu 本算定通知書情報,
             Ninshosha 認証者, boolean is公印に掛ける, boolean is公印を省略, ICheckListInfo info) {
+        new JournalWriter().writeInfoJournal(RDateTime.MAX, new RString("帳票:特別徴収開始通知書（本算定） A4縦・オーバレイタイプ帳票0"));
         if (ReportIdDBB.DBB100036.getReportId().getColumnValue().equals(出力帳票一覧.get帳票ID())) {
             CheckListLineItemSet pairs = CheckListLineItemSet.of(特定項目5.class, チェック項目5.class);
             reportWriter5 = BatchWriters
@@ -301,6 +304,7 @@ public class PrtIdoTokuchoKaishiTsuchishoHonsanteiProcess extends SimpleBatchPro
             reportWriter6.close();
             return dbb100032ReportSourceWriter6.pageCount().value();
         } else if (ReportIdDBB.DBB100038.getReportId().getColumnValue().equals(出力帳票一覧.get帳票ID())) {
+            new JournalWriter().writeInfoJournal(RDateTime.MAX, new RString("帳票:特別徴収開始通知書（本算定） A4縦・オーバレイタイプ帳票11"));
             CheckListLineItemSet pairs = CheckListLineItemSet.of(特定項目7.class, チェック項目7.class);
             reportWriter7 = BatchWriters
                     .batchReportWriterWithCheckList(TokubetsuChoshuKaishiTsuchishoOverlayA4TateSource.class)
@@ -322,6 +326,7 @@ public class PrtIdoTokuchoKaishiTsuchishoHonsanteiProcess extends SimpleBatchPro
             CompKaigoToiawasesakiSource toiawasesakiSource = 介護問合せ先ソースビルダー.buildSource();
             new TokubetsuChoshuKaishiTsuchishoOverlayA4TateReport(編集後本算定通知書共通情報, result.get通知書定型文(),
                     toiawasesakiSource, sourceBuilder).writeBy(dbb100032ReportSourceWriter7);
+            new JournalWriter().writeInfoJournal(RDateTime.MAX, new RString("帳票:特別徴収開始通知書（本算定） A4縦・オーバレイタイプ帳票1"));
             reportWriter7.close();
             return dbb100032ReportSourceWriter7.pageCount().value();
         }

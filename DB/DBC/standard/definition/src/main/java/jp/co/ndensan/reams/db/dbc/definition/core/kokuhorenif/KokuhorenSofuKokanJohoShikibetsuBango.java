@@ -66,7 +66,11 @@ public enum KokuhorenSofuKokanJohoShikibetsuBango {
     /**
      * コード:5361 名称:受給者突合依頼情報 略称:受給者突合依頼情報
      */
-    受給者突合依頼情報("5361", "受給者突合依頼情報", "受給者突合依頼情報");
+    受給者突合依頼情報("5361", "受給者突合依頼情報", "受給者突合依頼情報"),
+    /**
+     * コード:3411 名称:高額介護サービス費給付判定結果情報 略称:高額介護サービス費給付判定結果情報
+     */
+    高額介護サービス費給付判定結果情報("3411", "高額介護サービス費給付判定結果情報", "高額介護サービス費給付判定結果情報");
     private final RString code;
     private final RString shortName;
     private final RString fullName;

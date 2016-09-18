@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.db.dbz.divcontroller.validations.TextBoxFlexibleDateValidator;
 
 /**
  * 共有子Div「住所地特例履歴List」のイベントを定義したDivControllerクラスです。
@@ -132,6 +134,15 @@ public class JushochiTokureiRirekiList {
      *
      */
     public ResponseData<JushochiTokureiRirekiListDiv> onClick_btnJutokuKakutei(JushochiTokureiRirekiListDiv jutokuRirekiDiv) {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(jutokuRirekiDiv.getJutokuInput().getTxtTekiyoDate()));
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(jutokuRirekiDiv.getJutokuInput().getTxtTekiyoTodokedeDate()));
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(jutokuRirekiDiv.getJutokuInput().getTxtKaijoDate()));
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(jutokuRirekiDiv.getJutokuInput().getTxtKaijoTodokedeDate()));
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(jutokuRirekiDiv).addValidationMessages(validPairs).respond();
+        }
+        
         JushochiTokureiRirekiListHandler handler = new JushochiTokureiRirekiListHandler(jutokuRirekiDiv);
         handler.updateEntryData();
         handler.clearInputData();

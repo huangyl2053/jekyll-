@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  * @author 自動生成
  */
 public class tblKiwariGaku3Div extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -192,7 +192,7 @@ public class tblKiwariGaku3Div extends TablePanel {
  * @author 自動生成
  */
 class celTokuchoKi14AttblKiwariGaku3 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTokuchoKi14")
     private Label lblTokuchoKi14;
 
@@ -222,7 +222,7 @@ class celTokuchoKi14AttblKiwariGaku3 extends TableCell {
  * @author 自動生成
  */
 class celTokuchoKibetsuGaku14AttblKiwariGaku3 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTokuKibetsuGaku14")
     private Label lblTokuKibetsuGaku14;
 
@@ -252,7 +252,7 @@ class celTokuchoKibetsuGaku14AttblKiwariGaku3 extends TableCell {
  * @author 自動生成
  */
 class celTokuchoNofuGaku14AttblKiwariGaku3 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblTokuNofuGaku14")
     private Label lblTokuNofuGaku14;
 
@@ -282,7 +282,7 @@ class celTokuchoNofuGaku14AttblKiwariGaku3 extends TableCell {
  * @author 自動生成
  */
 class celFuchoKi14AttblKiwariGaku3 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoKi14")
     private Label lblFuchoKi14;
 
@@ -312,7 +312,7 @@ class celFuchoKi14AttblKiwariGaku3 extends TableCell {
  * @author 自動生成
  */
 class celFuchoKibetsuGaku14AttblKiwariGaku3 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoKibetsuGaku14")
     private Label lblFuchoKibetsuGaku14;
 
@@ -342,7 +342,7 @@ class celFuchoKibetsuGaku14AttblKiwariGaku3 extends TableCell {
  * @author 自動生成
  */
 class celFuchoNofuGaku14AttblKiwariGaku3 extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     @JsonProperty("lblFuchoNofuGaku14")
     private Label lblFuchoNofuGaku14;
 

@@ -16,6 +16,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -88,9 +91,8 @@ public class KogakuGassanShikyuShinseiTorokuPanel {
         申請状態 = 0;
         申請状況 = 0;
         RString メニューID = UrControlDataFactory.createInstance().getMenuID();
-//        getHandler(div).initialize(メニューID);
+        RString タイトル = getHandler(div).switchFor(メニューID);
         getHandler(div).initialize();
-        RString タイトル = getHandler(div).switchFor(new RString("DBCMN61002"));
         return ResponseData.of(div).rootTitle(タイトル).respond();
     }
 
@@ -191,8 +193,6 @@ public class KogakuGassanShikyuShinseiTorokuPanel {
     public ResponseData<KogakuGassanShikyuShinseiTorokuPanelDiv> onClick_btnSaikensaku(KogakuGassanShikyuShinseiTorokuPanelDiv div) {
 
         div.getKogakuGassanShikyuShinseiTorokuSearchResult().getDgTorokuSearchResult().setDataSource(null);
-        div.getKogakuGassanShikyuShinseiTorokuSearch().setVisible(true);
-        div.getKogakuGassanShikyuShinseiTorokuSearchResult().setVisible(false);
         return ResponseData.of(div).respond();
     }
 
@@ -215,7 +215,10 @@ public class KogakuGassanShikyuShinseiTorokuPanel {
         if (new RString(DbcQuestionMessages.高額合算支給申請検索_訂正.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            return ResponseData.of(div).forwardWithEventName(DBC1100012TransitionEventName.支給申請登録へ).respond();
+            KogakuGassanShinseishoDataResult dataResult = session作成(div);
+            ViewStateHolder.put(ViewStateKeys.高額介護申請書用データ, dataResult);
+            ViewStateHolder.put(ViewStateKeys.照会モード, null);
+            return ResponseData.of(div).forwardWithEventName(DBC1100012TransitionEventName.選択).respond();
         }
         if ((div.getKogakuGassanShikyuShinseiTorokuSearchResult().getDgTorokuSearchResult()
                 .getClickedItem().getTxtShinseiKubun().equals(一)
@@ -223,28 +226,40 @@ public class KogakuGassanShikyuShinseiTorokuPanel {
                 .getClickedItem().getTxtShinseiKubun().equals(二))
                 && !div.getKogakuGassanShikyuShinseiTorokuSearchResult().getDgTorokuSearchResult()
                 .getClickedItem().getTxtSoshin().getValue().isEmpty()) {
-            return ResponseData.of(div).forwardWithEventName(DBC1100012TransitionEventName.支給申請登録へ).respond();
+            KogakuGassanShinseishoDataResult dataResult = session作成(div);
+            ViewStateHolder.put(ViewStateKeys.高額介護申請書用データ, dataResult);
+            ViewStateHolder.put(ViewStateKeys.照会モード, null);
+            return ResponseData.of(div).forwardWithEventName(DBC1100012TransitionEventName.選択).respond();
         }
-        if (!new RString(DbcQuestionMessages.高額合算支給申請検索_訂正.getMessage().getCode())
+        if (!ResponseHolder.isReRequest() && !new RString(DbcQuestionMessages.高額合算支給申請検索_訂正.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())) {
             return ResponseData.of(div).addMessage(DbcQuestionMessages.高額合算支給申請検索_処理不可.getMessage()).respond();
         }
         if (new RString(DbcQuestionMessages.高額合算支給申請検索_処理不可.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            dgTorokuSearchResult_Row row = div.getKogakuGassanShikyuShinseiTorokuSearchResult().getDgTorokuSearchResult().getClickedItem();
-            KogakuGassanShinseishoDataResult dataResult = new KogakuGassanShinseishoDataResult();
-            dataResult.set被保険者番号(new HihokenshaNo(row.getTxtHihokenshaNo()));
-            dataResult.set対象年度(new FlexibleYear(row.getTxtTaishoNendo()));
-            dataResult.set保険者番号(new HokenshaNo(row.getTxtHokenshaNo()));
-            if (row.getTxtShikyuShinseishoNo() != null) {
-                dataResult.set整理番号(row.getTxtShikyuShinseishoNo().substring(十一, 十七));
-            }
-            dataResult.set履歴番号(new Decimal(row.getTxtRirekiNo().toString()));
+            KogakuGassanShinseishoDataResult dataResult = session作成(div);
             ViewStateHolder.put(ViewStateKeys.高額介護申請書用データ, dataResult);
             ViewStateHolder.put(ViewStateKeys.照会モード, 照会);
-            return ResponseData.of(div).forwardWithEventName(DBC1100012TransitionEventName.支給申請登録へ).respond();
+            return ResponseData.of(div).forwardWithEventName(DBC1100012TransitionEventName.選択).respond();
         }
         return ResponseData.of(div).respond();
+    }
+
+    private KogakuGassanShinseishoDataResult session作成(KogakuGassanShikyuShinseiTorokuPanelDiv div) {
+        dgTorokuSearchResult_Row row = div.getKogakuGassanShikyuShinseiTorokuSearchResult().getDgTorokuSearchResult().getClickedItem();
+        KogakuGassanShinseishoDataResult dataResult = new KogakuGassanShinseishoDataResult();
+        dataResult.set被保険者番号(new HihokenshaNo(row.getTxtHihokenshaNo()));
+        dataResult.set対象年度(new FlexibleYear(row.getTxtTaishoNendo()));
+        dataResult.set保険者番号(new HokenshaNo(row.getTxtHokenshaNo()));
+        if (row.getTxtShikyuShinseishoNo() != null) {
+            dataResult.set整理番号(row.getTxtShikyuShinseishoNo().substring(十一, 十七));
+        }
+        dataResult.set申請代表者氏名(new AtenaMeisho(row.getTxtShiseishimei()));
+        dataResult.set申請代表者郵便番号(new YubinNo(row.getTxtBango()));
+        dataResult.set申請代表者住所(row.getTxtSyusyou());
+        dataResult.set申請代表者電話番号(new TelNo(row.getTxtTelbanngo()));
+        dataResult.set履歴番号(new Decimal(row.getTxtRirekiNo().toString()));
+        return dataResult;
     }
 
     private KogakuGassanShikyuShinseiTorokuPanelHandler getHandler(KogakuGassanShikyuShinseiTorokuPanelDiv div) {

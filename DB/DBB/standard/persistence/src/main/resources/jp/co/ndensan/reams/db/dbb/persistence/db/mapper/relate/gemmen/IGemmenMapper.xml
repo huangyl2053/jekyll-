@@ -12,7 +12,7 @@
             <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka" />,
             <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.allColumns_DbT2003Kibetsu" />,
             <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.allColumns_UrT0705ChoteiKyotsu" />,
-            <include refid="allColumns_DbT2004Gemmen" />,
+            <include refid="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2004GemmenMapper.allColumns_DbT2004Gemmen" />,
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
         FROM
             rgdb."DbV2002Fuka"  AS "DbT2002Fuka"
@@ -23,7 +23,7 @@
             AND "DbT2003Kibetsu"."rirekiNo" = "DbT2002Fuka"."rirekiNo"
             INNER JOIN rgdb."UrT0705ChoteiKyotsu" AS "UrT0705ChoteiKyotsu"
             ON  "UrT0705ChoteiKyotsu"."choteiId" = "DbT2003Kibetsu"."choteiId"
-            LEFT JOIN rgdb."DbV2004Gemmen"  AS "DbT2004Gemmen"
+            LEFT JOIN rgdb."DbT2004Gemmen"  AS "DbT2004Gemmen"
             ON  "DbT2004Gemmen"."choteiNendo" = "DbT2002Fuka"."choteiNendo"
             AND "DbT2004Gemmen"."fukaNendo"  = "DbT2002Fuka"."fukaNendo"
             AND "DbT2004Gemmen"."tsuchishoNo" = "DbT2002Fuka"."tsuchishoNo"
@@ -70,35 +70,9 @@
             "DbT2002Fuka"."choteiNendo",
             "DbT2002Fuka"."fukaNendo",
             "DbT2002Fuka"."tsuchishoNo",
-            "DbT2002Fuka"."rirekiNo"
-    </sql>
-    
-    <sql id="allColumns_DbT2004Gemmen">
-        "DbT2004Gemmen"."insertDantaiCd"              as dbT2004Gemmen_insertDantaiCd,
-        "DbT2004Gemmen"."insertTimestamp"             as dbT2004Gemmen_insertTimestamp,
-        "DbT2004Gemmen"."insertReamsLoginId"          as dbT2004Gemmen_insertReamsLoginId,
-        "DbT2004Gemmen"."insertContextId"             as dbT2004Gemmen_insertContextId,
-        "DbT2004Gemmen"."isDeleted"                   as dbT2004Gemmen_isDeleted,
-        "DbT2004Gemmen"."updateCount"                 as dbT2004Gemmen_updateCount,
-        "DbT2004Gemmen"."lastUpdateTimestamp"         as dbT2004Gemmen_lastUpdateTimestamp,
-        "DbT2004Gemmen"."lastUpdateReamsLoginId"      as dbT2004Gemmen_lastUpdateReamsLoginId,
-        "DbT2004Gemmen"."choteiNendo"                 as dbT2004Gemmen_choteiNendo,
-        "DbT2004Gemmen"."fukaNendo"                   as dbT2004Gemmen_fukaNendo,
-        "DbT2004Gemmen"."tsuchishoNo"                 as dbT2004Gemmen_tsuchishoNo,
-        "DbT2004Gemmen"."rirekiNo"                    as dbT2004Gemmen_rirekiNo,
-        "DbT2004Gemmen"."shinseiYMD"                  as dbT2004Gemmen_shinseiYMD,
-        "DbT2004Gemmen"."ketteiYMD"                   as dbT2004Gemmen_ketteiYMD,
-        "DbT2004Gemmen"."torikeshiYMD"                as dbT2004Gemmen_torikeshiYMD,
-        "DbT2004Gemmen"."jotaiKubun"                  as dbT2004Gemmen_jotaiKubun,
-        "DbT2004Gemmen"."sakuseiKubun"                as dbT2004Gemmen_sakuseiKubun,
-        "DbT2004Gemmen"."shinseiJiyu"                 as dbT2004Gemmen_shinseiJiyu,
-        "DbT2004Gemmen"."gemmenJiyuCode"              as dbT2004Gemmen_gemmenJiyuCode,
-        "DbT2004Gemmen"."gemmenJiyu"                  as dbT2004Gemmen_gemmenJiyu,
-        "DbT2004Gemmen"."gemmenTorikeshiJiyuCode"     as dbT2004Gemmen_gemmenTorikeshiJiyuCode,
-        "DbT2004Gemmen"."gemmenTorikeshiJiyu"         as dbT2004Gemmen_gemmenTorikeshiJiyu,
-        "DbT2004Gemmen"."shinseiGemmenGaku"           as dbT2004Gemmen_shinseiGemmenGaku,
-        "DbT2004Gemmen"."ketteiGemmenGaku"            as dbT2004Gemmen_ketteiGemmenGaku,
-        "DbT2004Gemmen"."torikeshiGemmenGaku"         as dbT2004Gemmen_torikeshiGemmenGaku
+            "DbT2002Fuka"."rirekiNo",
+            "DbT2003Kibetsu"."choshuHouhou",
+            "DbT2003Kibetsu"."ki"
     </sql>
     
     <resultMap id="resultMapGemmenEntity" autoMapping="true" 
@@ -107,39 +81,15 @@
         <id column="dbT2002Fuka_fukaNendo"/>
         <id column="dbT2002Fuka_tsuchishoNo"/>
         <id column="dbT2002Fuka_rirekiNo"/>
-        <association property="賦課の情報" resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.fuka.IFukaJohoRelateMapper.resultMap_FukaInfo"/>
+        <id column="dbT2003Kibetsu_choshuHouhou"/>
+        <id column="dbT2003Kibetsu_ki"/>
+        <association property="介護賦課" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.ResultMap_DbT2002FukaEntity" />
+        <association property="介護期別" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2003KibetsuMapper.ResultMap_DbT2003KibetsuEntity" />
+        <association property="調定共通" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IUrT0705ChoteiKyotsuMapper.ResultMap_UrT0705ChoteiKyotsuEntity" />
         <association property="介護賦課減免" 
-                    resultMap="ResultMap_DbT2004GemmenEntity"/>
+                    resultMap="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.basic.IDbT2004GemmenMapper.ResultMap_DbT2004GemmenEntity"/>
         <association property="宛名Entity"
                      resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
     </resultMap>
-    
-    <resultMap id="ResultMap_DbT2004GemmenEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2004GemmenEntity" autoMapping="true">
-        <id property="choteiNendo" column="dbT2004Gemmen_choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
-        <id property="fukaNendo" column="dbT2004Gemmen_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
-        <id property="tsuchishoNo" column="dbT2004Gemmen_tsuchishoNo" typeHandler="jp.co.ndensan.reams.ur.urc.entity.typehandlers.TsuchishoNoTypeHandler"/>
-        <id property="rirekiNo" column="dbT2004Gemmen_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="insertDantaiCd" column="dbT2004Gemmen_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="insertTimestamp" column="dbT2004Gemmen_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
-        <result property="insertReamsLoginId" column="dbT2004Gemmen_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="insertContextId" column="dbT2004Gemmen_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
-        <result property="isDeleted" column="dbT2004Gemmen_isDeleted" />
-        <result property="updateCount" column="dbT2004Gemmen_updateCount" />
-        <result property="lastUpdateTimestamp" column="dbT2004Gemmen_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
-        <result property="lastUpdateReamsLoginId" column="dbT2004Gemmen_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shinseiYMD" column="dbT2004Gemmen_shinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="ketteiYMD" column="dbT2004Gemmen_ketteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="torikeshiYMD" column="dbT2004Gemmen_torikeshiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="jotaiKubun" column="dbT2004Gemmen_jotaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="sakuseiKubun" column="dbT2004Gemmen_sakuseiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shinseiJiyu" column="dbT2004Gemmen_shinseiJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="gemmenJiyuCode" column="dbT2004Gemmen_gemmenJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="gemmenJiyu" column="dbT2004Gemmen_gemmenJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="gemmenTorikeshiJiyuCode" column="dbT2004Gemmen_gemmenTorikeshiJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="gemmenTorikeshiJiyu" column="dbT2004Gemmen_gemmenTorikeshiJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shinseiGemmenGaku" column="dbT2004Gemmen_shinseiGemmenGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="ketteiGemmenGaku" column="dbT2004Gemmen_ketteiGemmenGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="torikeshiGemmenGaku" column="dbT2004Gemmen_torikeshiGemmenGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>        
-    </resultMap>
-    
+        
 </mapper>

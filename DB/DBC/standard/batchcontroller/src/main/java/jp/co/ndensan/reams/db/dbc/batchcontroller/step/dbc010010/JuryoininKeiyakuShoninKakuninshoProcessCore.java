@@ -16,12 +16,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc200013.JuryoIninShoninKaku
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * キーブレイク判定及び処理ロジッククラスです。
@@ -36,7 +31,6 @@ public class JuryoininKeiyakuShoninKakuninshoProcessCore {
     private static final int NUMBER_FOUR = 4;
     private static final int NUMBER_FIVE = 5;
     private final IOutputOrder 出力順;
-    private static final RString 年 = new RString("年");
     private RString 出力順1;
     private RString 出力順2;
     private RString 出力順3;
@@ -48,7 +42,8 @@ public class JuryoininKeiyakuShoninKakuninshoProcessCore {
     private RString 改頁4;
     private RString 改頁5;
     private boolean 改頁;
-    private int page;
+    private int 利用者向けPAGE;
+    private int 事業者用PAGE;
     private List<RString> breakPage;
     private List<RString> breakItemIds;
 
@@ -82,7 +77,8 @@ public class JuryoininKeiyakuShoninKakuninshoProcessCore {
 
     private void initialize() {
         改頁 = false;
-        page = 1;
+        利用者向けPAGE = 0;
+        事業者用PAGE = 0;
         breakItemIds = new ArrayList<>();
         出力順1 = RString.EMPTY;
         出力順2 = RString.EMPTY;
@@ -107,9 +103,9 @@ public class JuryoininKeiyakuShoninKakuninshoProcessCore {
      */
     public JyuryoItakuKeiyakuKakuninShoEntity edit利用者向けEntity(BusinessEntity businessEntity, NinshoshaSource 利用者向け認証者情報,
             JuryoininKeiyakuShoninKakuninshoProcessParameter proParameter) {
-        page++;
+        利用者向けPAGE++;
         JyuryoItakuKeiyakuKakuninShoEntity 利用者向けEntity = businessEntity.get利用者向けEntity();
-        利用者向けEntity.setページ(new RString(page));
+        利用者向けEntity.setページ(new RString(利用者向けPAGE));
         利用者向けEntity.set文書番号(proParameter.get文書番号());
         利用者向けEntity.set発行日(利用者向け認証者情報.hakkoYMD);
         利用者向けEntity.set電子公印(利用者向け認証者情報.denshiKoin);
@@ -149,9 +145,9 @@ public class JuryoininKeiyakuShoninKakuninshoProcessCore {
      */
     public JyuryoItakuKeiyakuKakuninShoKeiyakuJigyoshayoEntity edit事業者用Entity(BusinessEntity businessEntity, NinshoshaSource 事業者用認証者情報,
             JuryoininKeiyakuShoninKakuninshoProcessParameter proParameter) {
-        page++;
+        事業者用PAGE++;
         JyuryoItakuKeiyakuKakuninShoKeiyakuJigyoshayoEntity 事業者用Entity = businessEntity.get事業者用Entity();
-        事業者用Entity.setページ(new RString(page));
+        事業者用Entity.setページ(new RString(事業者用PAGE));
         事業者用Entity.set文書番号(proParameter.get文書番号());
         事業者用Entity.set発行日(事業者用認証者情報.hakkoYMD);
         事業者用Entity.set電子公印(事業者用認証者情報.denshiKoin);
@@ -162,9 +158,9 @@ public class JuryoininKeiyakuShoninKakuninshoProcessCore {
         事業者用Entity.set認証者氏名掛けない(事業者用認証者情報.ninshoshaShimeiKakenai);
         事業者用Entity.set認証者氏名掛ける(事業者用認証者情報.ninshoshaShimeiKakeru);
         事業者用Entity.set公印省略(事業者用認証者情報.koinShoryaku);
-        事業者用Entity.setタイトル(proParameter.get利用者向けタイトル());
-        事業者用Entity.set通知文1(proParameter.get利用者向け通知文1());
-        事業者用Entity.set通知文2(proParameter.get利用者向け通知文2());
+        事業者用Entity.setタイトル(proParameter.get事業者用タイトル());
+        事業者用Entity.set通知文1(proParameter.get事業者用通知文1());
+        事業者用Entity.set通知文2(proParameter.get事業者用通知文2());
         事業者用Entity.set改頁1(改頁1);
         事業者用Entity.set改頁2(改頁2);
         事業者用Entity.set改頁3(改頁3);
@@ -248,15 +244,6 @@ public class JuryoininKeiyakuShoninKakuninshoProcessCore {
                 list.add(RString.EMPTY);
             }
         }
-    }
-
-    private RString getWarekiYmd(FlexibleDate date) {
-        RString wareki = RString.EMPTY;
-        if (date != null) {
-            wareki = date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getYear()
-                    .concat(年).concat(date.wareki().separator(Separator.JAPANESE).fillType(FillType.BLANK).getMonthDay());
-        }
-        return wareki;
     }
 
 }

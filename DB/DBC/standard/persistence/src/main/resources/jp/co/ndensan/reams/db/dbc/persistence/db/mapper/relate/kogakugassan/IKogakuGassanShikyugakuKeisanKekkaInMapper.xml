@@ -5,8 +5,7 @@
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassan.IKogakuGassanShikyugakuKeisanKekkaInMapper">
     <select id="select高額合算支給額計算結果"
-     resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc120120.DbWTKogakuGassanShikyugakuKeisanKekkaEntity"  
-            fetchSize="500"  resultOrdered="true">
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc120120.DbWTKogakuGassanShikyugakuKeisanKekkaEntity" fetchSize="500"  resultOrdered="true">
          SELECT 
             "DbWT3861".*,
              最新データ."rirekiNo" as "rirekiNoMax"
@@ -39,7 +38,7 @@
          FROM
              "DbWT3861KogakuGassanShikyugakuKeisanKekka" as "DbWT3861"
     </select>
-    
+
      <select id="select高額合算支給額計算結果明細_マスタ"
      resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc120120.DbWTKogakuGassanShikyugakuKeisanKekkaMeisaiEntity"  
             fetchSize="500"  resultOrdered="true">
@@ -196,17 +195,23 @@
              "DbT3072".*
          FROM
              rgdb."DbT3072KogakuGassanShikyuGakuKeisanKekka" as "DbT3072"
-         INNER JOIN rgdb."DbT3070KogakuGassanJikoFutanGaku" as "DbT3070"
-              ON "DbT3072"."hihokenshaNo" = "DbT3070"."hihokenshaNo"
-              AND "DbT3072"."taishoNendo" = "DbT3070"."taishoNendo"
-              AND "DbT3072"."shoKisaiHokenshaNo" = "DbT3070"."hokenshaNo"
-              AND "DbT3072"."shikyuShinseishoSeiriNo" = "DbT3070"."shikyuShinseishoSeiriNo"
-              AND "DbT3072"."rirekiNo" = "DbT3070"."rirekiNo"
               <if test="処理区分 == 1">              
-                AND "DbT3070"."koki_KokuhoShoriKubun" = '1'   
+                 INNER JOIN rgdb."DbT3070KogakuGassanJikoFutanGaku" as "DbT3070"
+                    ON "DbT3072"."hihokenshaNo" = "DbT3070"."hihokenshaNo"
+                    AND "DbT3072"."taishoNendo" = "DbT3070"."taishoNendo"
+                    AND "DbT3072"."shoKisaiHokenshaNo" = "DbT3070"."hokenshaNo"
+                    AND "DbT3072"."shikyuShinseishoSeiriNo" = "DbT3070"."shikyuShinseishoSeiriNo"
+                    AND "DbT3072"."rirekiNo" = "DbT3070"."rirekiNo"
+                    AND "DbT3070"."koki_KokuhoShoriKubun" = '1'   
               </if>
-              <if test="処理区分 == 2">              
-                AND "DbT3070"."koki_KokuhoShoriKubun" = '2'   
+              <if test="処理区分 == 2">  
+                 INNER JOIN rgdb."DbT3070KogakuGassanJikoFutanGaku" as "DbT3070"
+                    ON "DbT3072"."hihokenshaNo" = "DbT3070"."hihokenshaNo"
+                    AND "DbT3072"."taishoNendo" = "DbT3070"."taishoNendo"
+                    AND "DbT3072"."shoKisaiHokenshaNo" = "DbT3070"."hokenshaNo"
+                    AND "DbT3072"."shikyuShinseishoSeiriNo" = "DbT3070"."shikyuShinseishoSeiriNo"
+                    AND "DbT3072"."rirekiNo" = "DbT3070"."rirekiNo"          
+                    AND "DbT3070"."koki_KokuhoShoriKubun" = '2'   
               </if>
          WHERE
              "DbT3072"."uketoriYM" = #{処理年月}
@@ -220,17 +225,23 @@
              "DbT3073".*
          FROM
              rgdb."DbT3073KogakuGassanShikyugakuKeisanKekkaMeisai" as "DbT3073"
-         INNER JOIN rgdb."DbT3070KogakuGassanJikoFutanGaku" as "DbT3070"
-              ON "DbT3073"."hihokenshaNo" = "DbT3070"."hihokenshaNo"
-              AND "DbT3073"."taishoNendo" = "DbT3070"."taishoNendo"
-              AND "DbT3073"."shoKisaiHokenshaNo" = "DbT3070"."hokenshaNo"
-              AND "DbT3073"."shikyuShinseishoSeiriNo" = "DbT3070"."shikyuShinseishoSeiriNo"
-              AND "DbT3073"."rirekiNo" = "DbT3070"."rirekiNo"
               <if test="処理区分 == 1">              
-                AND "DbT3070"."koki_KokuhoShoriKubun" = '1'   
+                   INNER JOIN rgdb."DbT3070KogakuGassanJikoFutanGaku" as "DbT3070"
+                       ON "DbT3073"."hihokenshaNo" = "DbT3070"."hihokenshaNo"
+                       AND "DbT3073"."taishoNendo" = "DbT3070"."taishoNendo"
+                       AND "DbT3073"."shoKisaiHokenshaNo" = "DbT3070"."hokenshaNo"
+                       AND "DbT3073"."shikyuShinseishoSeiriNo" = "DbT3070"."shikyuShinseishoSeiriNo"
+                       AND "DbT3073"."rirekiNo" = "DbT3070"."rirekiNo"
+                       AND "DbT3070"."koki_KokuhoShoriKubun" = '1'   
               </if>
-              <if test="処理区分 == 2">              
-                AND "DbT3070"."koki_KokuhoShoriKubun" = '2'   
+              <if test="処理区分 == 2"> 
+                   INNER JOIN rgdb."DbT3070KogakuGassanJikoFutanGaku" as "DbT3070"
+                       ON "DbT3073"."hihokenshaNo" = "DbT3070"."hihokenshaNo"
+                       AND "DbT3073"."taishoNendo" = "DbT3070"."taishoNendo"
+                       AND "DbT3073"."shoKisaiHokenshaNo" = "DbT3070"."hokenshaNo"
+                       AND "DbT3073"."shikyuShinseishoSeiriNo" = "DbT3070"."shikyuShinseishoSeiriNo"
+                       AND "DbT3073"."rirekiNo" = "DbT3070"."rirekiNo"       
+                       AND "DbT3070"."koki_KokuhoShoriKubun" = '2'   
               </if>
          WHERE
              "DbT3073"."uketoriYM" = #{処理年月}

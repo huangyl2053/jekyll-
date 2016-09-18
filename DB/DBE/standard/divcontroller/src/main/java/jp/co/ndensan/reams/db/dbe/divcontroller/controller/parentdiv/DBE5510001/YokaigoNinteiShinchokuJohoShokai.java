@@ -13,13 +13,12 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5510001.Yok
 import jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteishinchokujohoshokai.YokaigoNinteiShinchokuJohoShokaiFinder;
 import jp.co.ndensan.reams.db.dbe.service.report.dbe521002.NiteiGyomuShinchokuJokyoIchiranhyoPrintService;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzNotificationMessage;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
@@ -79,13 +78,18 @@ public class YokaigoNinteiShinchokuJohoShokai {
      * 「検索する」ボタン押下します。
      *
      * @param div 画面情報
-     * @return ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv>
+     * @return {@code ResponseData}
      */
     public ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv> btnKensaku(YokaigoNinteiShinchokuJohoShokaiDiv div) {
-
-        SearchResult<YokaigoNinteiShinchokuJoho> serchResult = YokaigoNinteiShinchokuJohoShokaiFinder
+        SearchResult<YokaigoNinteiShinchokuJoho> searchResult = YokaigoNinteiShinchokuJohoShokaiFinder
                 .createInstance().selectItirannJoho(get検索パラメータ(div));
-        getHandler(div).btnKensaku(serchResult);
+        getHandler(div).btnKensaku(searchResult);
+        if (searchResult.records().isEmpty()) {
+            return ResponseData.of(div).addMessage(DbzNotificationMessage.該当データなし.getMessage()).respond();
+        }
+        div.getSerchFromHohokensha().setIsOpen(false);
+        div.getSerchFromShinchokuJokyo().setIsOpen(false);
+        div.getShinseiJohoIchiran().setIsOpen(true);
         return ResponseData.of(div).respond();
     }
 
@@ -97,7 +101,7 @@ public class YokaigoNinteiShinchokuJohoShokai {
      */
     public ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv> btnShokai(YokaigoNinteiShinchokuJohoShokaiDiv div) {
         ViewStateHolder.put(ViewStateKeys.申請書管理番号, div.getDgShinseiJoho().
-                getActiveRow().getShinseishoKanriNo());
+                getClickedItem().getShinseishoKanriNo());
         return ResponseData.of(div).respond();
     }
 
@@ -131,20 +135,16 @@ public class YokaigoNinteiShinchokuJohoShokai {
      * @return ResponseData<SourceDataCollection>
      */
     public ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv> btnPrintAfter(YokaigoNinteiShinchokuJohoShokaiDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(
-                    UrInformationMessages.正常終了.getMessage().replace("進捗状況一覧印刷")).respond();
-        }
         return ResponseData.of(div).respond();
     }
 
     private YokaigoNinteiParamter get検索パラメータ(YokaigoNinteiShinchokuJohoShokaiDiv div) {
         return YokaigoNinteiParamter.createParamter(
                 div.getCcdHokenshaList().getSelectedItem().get市町村コード().getColumnValue(),
-                div.getRadMatchType().getSelectedKey(),
+                div.getDdlNameMatchType().getSelectedKey(),
                 div.getRadKensakuHoho().getSelectedKey(),
-                div.getTxtShiteiHizukeForm().getValue() == null ? RString.EMPTY : div.getTxtShiteiHizukeForm().getValue().toDateString(),
-                div.getTxtShiteiHizukeTo().getValue() == null ? RString.EMPTY : div.getTxtShiteiHizukeTo().getValue().toDateString(),
+                div.getTxtShiteiHizukeRange().getFromValue() == null ? RString.EMPTY : div.getTxtShiteiHizukeRange().getFromValue().toDateString(),
+                div.getTxtShiteiHizukeRange().getToValue() == null ? RString.EMPTY : div.getTxtShiteiHizukeRange().getToValue().toDateString(),
                 div.getTxtHihokenshaNo().getValue() == null ? RString.EMPTY : div.getTxtHihokenshaNo().getValue(),
                 div.getTxtShikibetsuCode().getValue() == null ? RString.EMPTY : div.getTxtShikibetsuCode().getValue(),
                 div.getTxtShimei().getValue() == null ? RString.EMPTY : div.getTxtShimei().getValue(),

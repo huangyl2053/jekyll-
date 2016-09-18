@@ -158,11 +158,15 @@ public class ShuruiShikyuGendogakuMain {
      * @return ResponseData
      */
     public ResponseData<ShuruiShikyuGendogakuMainDiv> onClick_btnContinue(ShuruiShikyuGendogakuMainDiv div) {
-        List<ServiceShuruiShikyuGendoGaku> shikyuGendoGakuList = getHandler(div).btnContinue();
-        ViewStateHolder.put(ViewStateKeys.サービス種類支給限度額,
-                new ServiceShuruiShikyuGendoGakuHolder(shikyuGendoGakuList));
-        state = 標準;
-        return ResponseData.of(div).setState(DBC4210011StateName.標準);
+        if (!RealInitialLocker.tryGetLock(排他キー)) {
+            throw new PessimisticLockingException();
+        } else {
+            List<ServiceShuruiShikyuGendoGaku> shikyuGendoGakuList = getHandler(div).btnContinue();
+            ViewStateHolder.put(ViewStateKeys.サービス種類支給限度額,
+                    new ServiceShuruiShikyuGendoGakuHolder(shikyuGendoGakuList));
+            state = 標準;
+            return ResponseData.of(div).setState(DBC4210011StateName.標準);
+        }
     }
 
     /**

@@ -8,10 +8,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1100011;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.kogaku.KogakuGassanShinseishoHoji;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1100011.KogakuGassanShikyuShinseiTorokuAllPanelDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1100011.dgTorokuKanyRirekiuList_Row;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1100011.dgKanyuRirekiIchiran_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -292,6 +291,15 @@ public enum KogakuGassanShikyuShinseiTorokuSpec implements IPredicate<KogakuGass
                 public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
                     return SpecHelper.is自己負担額証明書整理番号既に存在チェック(div);
                 }
+            },
+    /**
+     * 医療支給申請書整理番号入力チェックです。
+     */
+    医療支給申請書整理番号入力チェック {
+                @Override
+                public boolean apply(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+                    return SpecHelper.is医療支給申請書整理番号入力チェック(div);
+                }
             };
 
     /**
@@ -310,235 +318,235 @@ public enum KogakuGassanShikyuShinseiTorokuSpec implements IPredicate<KogakuGass
         private static final RString DATE_0731 = new RString("0731");
         private static final RString DATE_0801 = new RString("0801");
         private static final RString RSTRING_39 = new RString("39");
+        private static final RString 追加 = new RString("追加");
 
         public static boolean is老人所得区分必須入力チェック(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
             KogakuGassanShinseishoHoji 高額合算申請書保持
                     = ViewStateHolder.get(ViewStateKeys.高額合算申請書保持Entity, KogakuGassanShinseishoHoji.class);
-            return !(div.getDdlHihokenshaJoho2().getSelectedIndex() == INT_0 && !RSTRING_3.equals(高額合算申請書保持.get申請状況()));
+            return !(div.getDdlOver70ShotokuKubun().getSelectedIndex() == INT_0 && !RSTRING_3.equals(高額合算申請書保持.get申請状況()));
         }
 
         public static boolean is年度内範囲チェック(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            FlexibleDate 開始計算期間 = div.getTxtHihokenshaJohoKeisanKikanSikiYMD().getValue();
-            FlexibleDate 終了計算期間 = div.getTxtHihokenshaJohoKeisanKikanSyukiYMD().getValue();
-            if (開始計算期間 == null || 終了計算期間 == null || 開始計算期間.isEmpty() || 終了計算期間.isEmpty()) {
+            RDate 開始計算期間 = div.getTxtTaishoKeisanKikanYMD().getFromValue();
+            RDate 終了計算期間 = div.getTxtTaishoKeisanKikanYMD().getToValue();
+            if (開始計算期間 == null || 終了計算期間 == null) {
                 return true;
             }
-            int 申請対象年度 = Integer.parseInt(div.getDdlShinseiTaisyoNendo().getSelectedKey().toString());
+            int 申請対象年度 = Integer.parseInt(div.getDdlShinseiTaishoNendo().getSelectedKey().toString());
             if (申請対象年度 == INT_2008) {
-                FlexibleDate 計算期間FROM = new FlexibleDate(new RString(INT_2008).concat(DATE_0401));
-                FlexibleDate 計算期間TO = new FlexibleDate(new RString(INT_2008 + INT_1).concat(DATE_0731));
+                RDate 計算期間FROM = new RDate(new RString(INT_2008).concat(DATE_0401).toString());
+                RDate 計算期間TO = new RDate(new RString(INT_2008 + INT_1).concat(DATE_0731).toString());
                 return 計算期間FROM.compareTo(開始計算期間) <= INT_0 && 計算期間TO.compareTo(終了計算期間) <= INT_0;
             } else if (INT_2008 < 申請対象年度) {
-                FlexibleDate 計算期間FROM = new FlexibleDate(new RString(申請対象年度).concat(DATE_0801));
-                FlexibleDate 計算期間TO = new FlexibleDate(new RString(申請対象年度 + INT_1).concat(DATE_0731));
+                RDate 計算期間FROM = new RDate(new RString(申請対象年度).concat(DATE_0801).toString());
+                RDate 計算期間TO = new RDate(new RString(申請対象年度 + INT_1).concat(DATE_0731).toString());
                 return 計算期間FROM.compareTo(開始計算期間) <= INT_0 && 計算期間TO.compareTo(終了計算期間) <= INT_0;
             }
             return true;
         }
 
         public static boolean is加入期間範囲チェック(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            FlexibleDate 開始計算期間 = div.getTxtHihokenshaJohoKeisanKikanSikiYMD().getValue();
-            FlexibleDate 終了計算期間 = div.getTxtHihokenshaJohoKeisanKikanSyukiYMD().getValue();
-            FlexibleDate 開始加入期間 = rDateToFixibleDate(div.getTxtKaigoShikakuJohoKanyuYMD().getFromValue());
-            FlexibleDate 終了加入期間 = rDateToFixibleDate(div.getTxtKaigoShikakuJohoKanyuYMD().getToValue());
-            if (開始計算期間 == null || 終了計算期間 == null || 開始加入期間 == null || 終了加入期間 == null
-                    || 開始計算期間.isEmpty() || 終了計算期間.isEmpty() || 開始加入期間.isEmpty() || 終了加入期間.isEmpty()) {
+            RDate 開始計算期間 = div.getTxtTaishoKeisanKikanYMD().getFromValue();
+            RDate 終了計算期間 = div.getTxtTaishoKeisanKikanYMD().getToValue();
+            RDate 開始加入期間 = div.getTxtKanyuKikanYMD().getFromValue();
+            RDate 終了加入期間 = div.getTxtKanyuKikanYMD().getToValue();
+            if (開始計算期間 == null || 終了計算期間 == null || 開始加入期間 == null || 終了加入期間 == null) {
                 return true;
             }
             return 開始加入期間.compareTo(開始計算期間) <= INT_0 && 終了計算期間.compareTo(終了加入期間) <= INT_0;
         }
 
         public static boolean is資格喪失チェック1(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            RDate 資格喪失日 = div.getTxtHihokenshaJohoShikakuSoshitsuYMD().getValue();
-            boolean flg1 = 資格喪失日 == null || 資格喪失日.toDateString().isNullOrEmpty();
-            boolean flg2 = div.getDdlHihokenshaJoho3().getSelectedIndex() != INT_0;
+            RDate 資格喪失日 = div.getTxtShikakuSoshitsuYMD().getValue();
+            boolean flg1 = 資格喪失日 == null || RString.isNullOrEmpty(資格喪失日.toDateString());
+            boolean flg2 = div.getDdlShikakuSoshitsuJiyu().getSelectedIndex() != INT_0;
             return !(flg1 && flg2);
         }
 
         public static boolean is資格喪失チェック2(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            RDate 資格喪失日 = div.getTxtHihokenshaJohoShikakuSoshitsuYMD().getValue();
-            boolean flg1 = 資格喪失日 != null && !資格喪失日.toDateString().isNullOrEmpty();
-            boolean flg2 = div.getDdlHihokenshaJoho3().getSelectedIndex() == 0;
+            RDate 資格喪失日 = div.getTxtShikakuSoshitsuYMD().getValue();
+            boolean flg1 = 資格喪失日 != null && !RString.isNullOrEmpty(資格喪失日.toDateString());
+            boolean flg2 = div.getDdlShikakuSoshitsuJiyu().getSelectedIndex() == 0;
             return !(flg1 && flg2);
         }
 
         public static boolean is後期資格情報保険者番号(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            RString 後期保険者番号 = div.getTxtKokiShikaku().getText();
+            RString 後期保険者番号 = div.getTxtKokiHokenshaNo().getText();
             return !(!RString.isNullOrEmpty(後期保険者番号) && !RSTRING_39.equals(後期保険者番号.substring(INT_0, INT_2)));
         }
 
         public static boolean is国保保険者番号桁数チェック(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            RString 国保保険者番号 = div.getTxtKokuhoShikakuHokensyaBango().getText();
+            RString 国保保険者番号 = div.getTxtKokuhoHokenshaNo().getText();
             return !(!RString.isNullOrEmpty(国保保険者番号) && INT_8 != 国保保険者番号.length());
         }
 
         public static boolean is後期保険者番号桁数チェック(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            RString 後期保険者番号 = div.getTxtKokiShikaku().getText();
+            RString 後期保険者番号 = div.getTxtKokiHokenshaNo().getText();
             return !(!RString.isNullOrEmpty(後期保険者番号) && INT_8 != 後期保険者番号.length());
         }
 
         public static boolean is後期被保険者番号桁数チェック(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            RString 後期被保険者番号 = div.getTxtKokiShikaku2().getText();
+            RString 後期被保険者番号 = div.getTxtKokiHihokenshaNo().getText();
             return !(!RString.isNullOrEmpty(後期被保険者番号) && INT_8 != 後期被保険者番号.length());
         }
 
         public static boolean is被保険者証記号桁数チェック(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            RString 被保険者証記号 = div.getTxtKokuhoShikakuHikonensyaSyoKigo().getText();
+            RString 被保険者証記号 = div.getTxtKokuhoHikonenshaShoKigo().getText();
             return !(!RString.isNullOrEmpty(被保険者証記号) && INT_20 != 被保険者証記号.length());
         }
 
         public static boolean is被保険者証番号桁数チェック(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            RString 被保険者証番号 = div.getTxtKokuhoShikakuHikonensyaSyoBango().getText();
+            RString 被保険者証番号 = div.getTxtKokuhoHikonenshaShoNo().getText();
             return !(!RString.isNullOrEmpty(被保険者証番号) && INT_20 != 被保険者証番号.length());
         }
 
         public static boolean is介護日付チェック(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            if (RString.isNullOrEmpty(div.getTxtKaigoShikakuJohoKanyuYMD().getFromText())
-                    || RString.isNullOrEmpty(div.getTxtKaigoShikakuJohoKanyuYMD().getToText())) {
+            if (RString.isNullOrEmpty(div.getTxtKanyuKikanYMD().getFromText())
+                    || RString.isNullOrEmpty(div.getTxtKanyuKikanYMD().getToText())) {
                 return true;
             }
-            return div.getTxtKaigoShikakuJohoKanyuYMD().getFromValue().compareTo(
-                    div.getTxtKaigoShikakuJohoKanyuYMD().getToValue()) <= INT_0;
+            return div.getTxtKanyuKikanYMD().getFromValue().compareTo(
+                    div.getTxtKanyuKikanYMD().getToValue()) <= INT_0;
         }
 
         public static boolean is被保日付チェック(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            if (RString.isNullOrEmpty(div.getTxtHihokenshaJohoKeisanKikanSikiYMD().getText())
-                    || RString.isNullOrEmpty(div.getTxtHihokenshaJohoKeisanKikanSyukiYMD().getText())) {
+            if (RString.isNullOrEmpty(div.getTxtTaishoKeisanKikanYMD().getFromText())
+                    || RString.isNullOrEmpty(div.getTxtTaishoKeisanKikanYMD().getToText())) {
                 return true;
             }
-            return div.getTxtHihokenshaJohoKeisanKikanSikiYMD().getValue().compareTo(
-                    div.getTxtHihokenshaJohoKeisanKikanSyukiYMD().getValue()) <= INT_0;
+            return div.getTxtTaishoKeisanKikanYMD().getFromValue().compareTo(
+                    div.getTxtTaishoKeisanKikanYMD().getToValue()) <= INT_0;
         }
 
         public static boolean is国保日付チェック(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            if (RString.isNullOrEmpty(div.getTxtKokuhoShikakuKanyuYMD().getFromText())
-                    || RString.isNullOrEmpty(div.getTxtKokuhoShikakuKanyuYMD().getToText())) {
+            if (RString.isNullOrEmpty(div.getTxtKokuhoKanyuKikanYMD().getFromText())
+                    || RString.isNullOrEmpty(div.getTxtKokuhoKanyuKikanYMD().getToText())) {
                 return true;
             }
-            return div.getTxtKokuhoShikakuKanyuYMD().getFromValue().compareTo(
-                    div.getTxtKokuhoShikakuKanyuYMD().getFromValue()) <= INT_0;
+            return div.getTxtKokuhoKanyuKikanYMD().getFromValue().compareTo(
+                    div.getTxtKokuhoKanyuKikanYMD().getFromValue()) <= INT_0;
         }
 
         public static boolean is後期日付チェック(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            if (RString.isNullOrEmpty(div.getTxtKokiShikakuKanyuKikan().getFromText())
-                    || RString.isNullOrEmpty(div.getTxtKokiShikakuKanyuKikan().getToText())) {
+            if (RString.isNullOrEmpty(div.getTxtKokiKanyuKikanYMD().getFromText())
+                    || RString.isNullOrEmpty(div.getTxtKokiKanyuKikanYMD().getToText())) {
                 return true;
             }
-            return div.getTxtKokiShikakuKanyuKikan().getFromValue().compareTo(
-                    div.getTxtKokiShikakuKanyuKikan().getToValue()) <= INT_0;
+            return div.getTxtKokiKanyuKikanYMD().getFromValue().compareTo(
+                    div.getTxtKokiKanyuKikanYMD().getToValue()) <= INT_0;
         }
 
         public static boolean is開始計算期間チェック1(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            if (RString.isNullOrEmpty(div.getTxtHihokenshaJohoKeisanKikanSikiYMD().getText())
-                    || RString.isNullOrEmpty(div.getTxtKaigoShikakuJohoKanyuYMD().getFromText())) {
+            if (RString.isNullOrEmpty(div.getTxtTaishoKeisanKikanYMD().getFromText())
+                    || RString.isNullOrEmpty(div.getTxtKanyuKikanYMD().getFromText())) {
                 return true;
             }
-            return div.getTxtHihokenshaJohoKeisanKikanSikiYMD().getValue().compareTo(
-                    rDateToFixibleDate(div.getTxtKaigoShikakuJohoKanyuYMD().getFromValue())) <= INT_0;
+            return div.getTxtTaishoKeisanKikanYMD().getFromValue().compareTo(
+                    div.getTxtKanyuKikanYMD().getFromValue()) <= INT_0;
         }
 
         public static boolean is開始計算期間チェック2(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            if (RString.isNullOrEmpty(div.getTxtHihokenshaJohoKeisanKikanSikiYMD().getText())
-                    || RString.isNullOrEmpty(div.getTxtKaigoShikakuJohoKanyuYMD().getToText())) {
+            if (RString.isNullOrEmpty(div.getTxtTaishoKeisanKikanYMD().getFromText())
+                    || RString.isNullOrEmpty(div.getTxtKanyuKikanYMD().getToText())) {
                 return true;
             }
-            return div.getTxtHihokenshaJohoKeisanKikanSikiYMD().getValue().compareTo(
-                    rDateToFixibleDate(div.getTxtKaigoShikakuJohoKanyuYMD().getToValue())) <= INT_0;
+            return div.getTxtTaishoKeisanKikanYMD().getFromValue().compareTo(
+                    div.getTxtKanyuKikanYMD().getToValue()) <= INT_0;
         }
 
         public static boolean is開始計算期間チェック3(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            if (RString.isNullOrEmpty(div.getTxtHihokenshaJohoKeisanKikanSikiYMD().getText())
-                    || RString.isNullOrEmpty(div.getTxtKokuhoShikakuKanyuYMD().getFromText())) {
+            if (RString.isNullOrEmpty(div.getTxtTaishoKeisanKikanYMD().getFromText())
+                    || RString.isNullOrEmpty(div.getTxtKokuhoKanyuKikanYMD().getFromText())) {
                 return true;
             }
-            return div.getTxtHihokenshaJohoKeisanKikanSikiYMD().getValue().compareTo(
-                    rDateToFixibleDate(div.getTxtKokuhoShikakuKanyuYMD().getFromValue())) <= INT_0;
+            return div.getTxtTaishoKeisanKikanYMD().getFromValue().compareTo(
+                    div.getTxtKokuhoKanyuKikanYMD().getFromValue()) <= INT_0;
         }
 
         public static boolean is開始計算期間チェック4(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            if (RString.isNullOrEmpty(div.getTxtHihokenshaJohoKeisanKikanSikiYMD().getText())
-                    || RString.isNullOrEmpty(div.getTxtKokuhoShikakuKanyuYMD().getToText())) {
+            if (RString.isNullOrEmpty(div.getTxtTaishoKeisanKikanYMD().getFromText())
+                    || RString.isNullOrEmpty(div.getTxtKokuhoKanyuKikanYMD().getToText())) {
                 return true;
             }
-            return div.getTxtHihokenshaJohoKeisanKikanSikiYMD().getValue().compareTo(
-                    rDateToFixibleDate(div.getTxtKokuhoShikakuKanyuYMD().getToValue())) <= INT_0;
+            return div.getTxtTaishoKeisanKikanYMD().getFromValue().compareTo(
+                    div.getTxtKokuhoKanyuKikanYMD().getToValue()) <= INT_0;
         }
 
         public static boolean is開始計算期間チェック5(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            if (RString.isNullOrEmpty(div.getTxtHihokenshaJohoKeisanKikanSikiYMD().getText())
-                    || RString.isNullOrEmpty(div.getTxtKokiShikakuKanyuKikan().getFromText())) {
+            if (RString.isNullOrEmpty(div.getTxtTaishoKeisanKikanYMD().getFromText())
+                    || RString.isNullOrEmpty(div.getTxtKokiKanyuKikanYMD().getFromText())) {
                 return true;
             }
-            return div.getTxtHihokenshaJohoKeisanKikanSikiYMD().getValue().compareTo(
-                    rDateToFixibleDate(div.getTxtKokiShikakuKanyuKikan().getFromValue())) <= INT_0;
+            return div.getTxtTaishoKeisanKikanYMD().getFromValue().compareTo(
+                    div.getTxtKokiKanyuKikanYMD().getFromValue()) <= INT_0;
         }
 
         public static boolean is開始計算期間チェック6(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            if (RString.isNullOrEmpty(div.getTxtHihokenshaJohoKeisanKikanSikiYMD().getText())
-                    || RString.isNullOrEmpty(div.getTxtKokiShikakuKanyuKikan().getToText())) {
+            if (RString.isNullOrEmpty(div.getTxtTaishoKeisanKikanYMD().getFromText())
+                    || RString.isNullOrEmpty(div.getTxtKokiKanyuKikanYMD().getToText())) {
                 return true;
             }
-            return div.getTxtHihokenshaJohoKeisanKikanSikiYMD().getValue().compareTo(
-                    rDateToFixibleDate(div.getTxtKokiShikakuKanyuKikan().getToValue())) <= INT_0;
+            return div.getTxtTaishoKeisanKikanYMD().getFromValue().compareTo(
+                    div.getTxtKokiKanyuKikanYMD().getToValue()) <= INT_0;
         }
 
         public static boolean is終了計算期間チェック1(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            if (RString.isNullOrEmpty(div.getTxtHihokenshaJohoKeisanKikanSyukiYMD().getText())
-                    || RString.isNullOrEmpty(div.getTxtKaigoShikakuJohoKanyuYMD().getFromText())) {
+            if (RString.isNullOrEmpty(div.getTxtTaishoKeisanKikanYMD().getToText())
+                    || RString.isNullOrEmpty(div.getTxtKanyuKikanYMD().getFromText())) {
                 return true;
             }
-            return rDateToFixibleDate(div.getTxtKaigoShikakuJohoKanyuYMD().getFromValue()).compareTo(
-                    div.getTxtHihokenshaJohoKeisanKikanSyukiYMD().getValue()) <= INT_0;
+            return div.getTxtTaishoKeisanKikanYMD().getToValue().compareTo(
+                    div.getTxtKokuhoKanyuKikanYMD().getFromValue()) <= INT_0;
         }
 
         public static boolean is終了計算期間チェック2(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            if (RString.isNullOrEmpty(div.getTxtHihokenshaJohoKeisanKikanSyukiYMD().getText())
-                    || RString.isNullOrEmpty(div.getTxtKaigoShikakuJohoKanyuYMD().getToText())) {
+            if (RString.isNullOrEmpty(div.getTxtTaishoKeisanKikanYMD().getToText())
+                    || RString.isNullOrEmpty(div.getTxtKanyuKikanYMD().getToText())) {
                 return true;
             }
-            return rDateToFixibleDate(div.getTxtKaigoShikakuJohoKanyuYMD().getToValue()).compareTo(
-                    div.getTxtHihokenshaJohoKeisanKikanSyukiYMD().getValue()) <= INT_0;
+            return div.getTxtTaishoKeisanKikanYMD().getToValue().compareTo(
+                    div.getTxtKanyuKikanYMD().getToValue()) <= INT_0;
         }
 
         public static boolean is終了計算期間チェック3(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            if (RString.isNullOrEmpty(div.getTxtHihokenshaJohoKeisanKikanSyukiYMD().getText())
-                    || RString.isNullOrEmpty(div.getTxtKokuhoShikakuKanyuYMD().getFromText())) {
+            if (RString.isNullOrEmpty(div.getTxtTaishoKeisanKikanYMD().getToText())
+                    || RString.isNullOrEmpty(div.getTxtKokuhoKanyuKikanYMD().getFromText())) {
                 return true;
             }
-            return rDateToFixibleDate(div.getTxtKokuhoShikakuKanyuYMD().getFromValue()).compareTo(
-                    div.getTxtHihokenshaJohoKeisanKikanSyukiYMD().getValue()) <= INT_0;
+            return div.getTxtTaishoKeisanKikanYMD().getToValue().compareTo(
+                    div.getTxtKokuhoKanyuKikanYMD().getFromValue()) <= INT_0;
         }
 
         public static boolean is終了計算期間チェック4(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            if (RString.isNullOrEmpty(div.getTxtHihokenshaJohoKeisanKikanSyukiYMD().getText())
-                    || RString.isNullOrEmpty(div.getTxtKokuhoShikakuKanyuYMD().getToText())) {
+            if (RString.isNullOrEmpty(div.getTxtTaishoKeisanKikanYMD().getToText())
+                    || RString.isNullOrEmpty(div.getTxtKokuhoKanyuKikanYMD().getToText())) {
                 return true;
             }
-            return rDateToFixibleDate(div.getTxtKokuhoShikakuKanyuYMD().getToValue()).compareTo(
-                    div.getTxtHihokenshaJohoKeisanKikanSyukiYMD().getValue()) <= INT_0;
+            return div.getTxtTaishoKeisanKikanYMD().getToValue().compareTo(
+                    div.getTxtKokuhoKanyuKikanYMD().getToValue()) <= INT_0;
         }
 
         public static boolean is終了計算期間チェック5(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            if (RString.isNullOrEmpty(div.getTxtHihokenshaJohoKeisanKikanSyukiYMD().getText())
-                    || RString.isNullOrEmpty(div.getTxtKokiShikakuKanyuKikan().getFromText())) {
+            if (RString.isNullOrEmpty(div.getTxtTaishoKeisanKikanYMD().getToText())
+                    || RString.isNullOrEmpty(div.getTxtKokuhoKanyuKikanYMD().getFromText())) {
                 return true;
             }
-            return rDateToFixibleDate(div.getTxtKokiShikakuKanyuKikan().getFromValue()).compareTo(
-                    div.getTxtHihokenshaJohoKeisanKikanSyukiYMD().getValue()) <= INT_0;
+            return div.getTxtTaishoKeisanKikanYMD().getToValue().compareTo(
+                    div.getTxtKokuhoKanyuKikanYMD().getFromValue()) <= INT_0;
         }
 
         public static boolean is終了計算期間チェック6(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            if (RString.isNullOrEmpty(div.getTxtHihokenshaJohoKeisanKikanSyukiYMD().getText())
-                    || RString.isNullOrEmpty(div.getTxtKokiShikakuKanyuKikan().getToText())) {
+            if (RString.isNullOrEmpty(div.getTxtTaishoKeisanKikanYMD().getFromText())
+                    || RString.isNullOrEmpty(div.getTxtKokiKanyuKikanYMD().getToText())) {
                 return true;
             }
-            return rDateToFixibleDate(div.getTxtKokiShikakuKanyuKikan().getToValue()).compareTo(
-                    div.getTxtHihokenshaJohoKeisanKikanSyukiYMD().getValue()) <= INT_0;
+            return div.getTxtTaishoKeisanKikanYMD().getToValue().compareTo(
+                    div.getTxtKokiKanyuKikanYMD().getToValue()) <= INT_0;
         }
 
         public static boolean is保険加入期間が不正チェック(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            return div.getTxtKanyuInfoKanyuKikanYMD().getFromValue().compareTo(
-                    div.getTxtKanyuInfoKanyuKikanYMD().getToValue()) <= INT_0;
+            return div.getTxtKanyuRirekiKanyuKikanYMD().getFromValue().compareTo(
+                    div.getTxtKanyuRirekiKanyuKikanYMD().getToValue()) <= INT_0;
         }
 
         public static boolean is自己負担額証明書整理番号桁数チェック(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
@@ -547,12 +555,16 @@ public enum KogakuGassanShikyuShinseiTorokuSpec implements IPredicate<KogakuGass
         }
 
         public static boolean is自己負担額証明書整理番号既に存在チェック(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            RString 加入歴状態 = ViewStateHolder.get(ViewStateKeys.加入歴状態, RString.class);
+            if (!追加.equals(加入歴状態)) {
+                return true;
+            }
             RString 証明書整理番号 = div.getTxtJikoFutangakuShomeishoSeiriBango().getText();
-            List<dgTorokuKanyRirekiuList_Row> rowList = div.getDgTorokuKanyRirekiuList().getDataSource();
+            List<dgKanyuRirekiIchiran_Row> rowList = div.getDgKanyuRirekiIchiran().getDataSource();
             if (rowList == null || rowList.isEmpty()) {
                 return true;
             }
-            for (dgTorokuKanyRirekiuList_Row row : rowList) {
+            for (dgKanyuRirekiIchiran_Row row : rowList) {
                 if (証明書整理番号.equals(row.getTxtJikofutanSeiriNo())) {
                     return false;
                 }
@@ -560,11 +572,12 @@ public enum KogakuGassanShikyuShinseiTorokuSpec implements IPredicate<KogakuGass
             return true;
         }
 
-        private static FlexibleDate rDateToFixibleDate(RDate date) {
-            if (date == null || new RString(date.toString()).isEmpty()) {
-                return null;
-            }
-            return new FlexibleDate(date.toString());
+        public static boolean is医療支給申請書整理番号入力チェック(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+            RString 整理番号2 = div.getTxtIryoShikyuShinseishoSeiriBango2().getText();
+            RString 整理番号3 = div.getTxtIryoShikyuShinseishoSeiriBango3().getText();
+            RString 整理番号4 = div.getTxtIryoShikyuShinseishoSeiriBango4().getText();
+            return (RString.isNullOrEmpty(整理番号2) && RString.isNullOrEmpty(整理番号3) && RString.isNullOrEmpty(整理番号4))
+                    || (!RString.isNullOrEmpty(整理番号2) && !RString.isNullOrEmpty(整理番号3) && !RString.isNullOrEmpty(整理番号4));
         }
     }
 }

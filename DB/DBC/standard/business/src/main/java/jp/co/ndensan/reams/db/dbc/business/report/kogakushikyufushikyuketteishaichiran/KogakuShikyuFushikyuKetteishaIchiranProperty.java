@@ -41,7 +41,7 @@ public class KogakuShikyuFushikyuKetteishaIchiranProperty
         super(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200015.getReportId());
 
         pageBreakKeys = new ArrayList<>();
-        pageBreakKeys.add(new RString(ReportSourceFields.hokenshaNo.name()));
+        pageBreakKeys.add(new RString(ReportSourceFields.shoKisaiHokenshaNo.name()));
     }
 
     @Override
@@ -49,6 +49,7 @@ public class KogakuShikyuFushikyuKetteishaIchiranProperty
             Breakers<KogakuShikyuFushikyuKetteishaIchiranSource> breakers,
             BreakerCatalog<KogakuShikyuFushikyuKetteishaIchiranSource> catalog) {
         return breakers.add(catalog.new SimplePageBreaker(
+
 
 
 
@@ -74,7 +75,7 @@ public class KogakuShikyuFushikyuKetteishaIchiranProperty
         /**
          * 証記載保険者番号
          */
-        証記載保険者番号(new RString("0103"), new RString("hokenshaNo"), new RString("SHINSAKETTEITEMP.\"shokisaiHokenshaNo\"")),
+        証記載保険者番号(new RString("0103"), new RString("shoKisaiHokenshaNo"), new RString("SHINSAKETTEITEMP.\"shokisaiHokenshaNo\"")),
         /**
          * 郵便番号
          */

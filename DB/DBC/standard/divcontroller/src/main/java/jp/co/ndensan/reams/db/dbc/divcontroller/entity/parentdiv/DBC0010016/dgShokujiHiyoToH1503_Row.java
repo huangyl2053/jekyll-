@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010016;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Sep 02 13:03:16 JST 2016 
+ * Tue Sep 13 19:27:50 CST 2016 
  */
 
 
@@ -21,11 +21,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class dgShokujiHiyoToH1503_Row extends DataRow {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
 
-    private RString txtKihon;
     private RString txtZengo;
     private RString txtTeikyoNissu;
+    private RString txtTokubetsuTeikyoNissu;
     private RString txtTeikyoTanka;
+    private RString txtTokubetsuTeikyoTanka;
     private RString txtTeikyoKingaku;
+    private RString txtTokubetsuTeikyoKingaku;
     private RString txtShokujiTeikyohiGokei;
     private RString txtHyojunFutangakuTsuki;
     private RString txtHyojunFutangakuHi;
@@ -33,18 +35,19 @@ public class dgShokujiHiyoToH1503_Row extends DataRow {
     private RString txtShokujiTeikyoNobeNissu;
     private RString txtSeikyugakuZengo;
     private RString txtKohiSeikyu;
-    private RString txtShokujiTeikyohiSeikyugaku;
     private RString txtSaishinsaKaisu;
     private RString txtKagoKaisu;
     private RString txtShinsaYM;
 
     public dgShokujiHiyoToH1503_Row() {
         super();
-        this.txtKihon = RString.EMPTY;
         this.txtZengo = RString.EMPTY;
         this.txtTeikyoNissu = RString.EMPTY;
+        this.txtTokubetsuTeikyoNissu = RString.EMPTY;
         this.txtTeikyoTanka = RString.EMPTY;
+        this.txtTokubetsuTeikyoTanka = RString.EMPTY;
         this.txtTeikyoKingaku = RString.EMPTY;
+        this.txtTokubetsuTeikyoKingaku = RString.EMPTY;
         this.txtShokujiTeikyohiGokei = RString.EMPTY;
         this.txtHyojunFutangakuTsuki = RString.EMPTY;
         this.txtHyojunFutangakuHi = RString.EMPTY;
@@ -52,15 +55,16 @@ public class dgShokujiHiyoToH1503_Row extends DataRow {
         this.txtShokujiTeikyoNobeNissu = RString.EMPTY;
         this.txtSeikyugakuZengo = RString.EMPTY;
         this.txtKohiSeikyu = RString.EMPTY;
-        this.txtShokujiTeikyohiSeikyugaku = RString.EMPTY;
         this.txtSaishinsaKaisu = RString.EMPTY;
         this.txtKagoKaisu = RString.EMPTY;
         this.txtShinsaYM = RString.EMPTY;
-        this.setOriginalData("txtKihon", txtKihon);
         this.setOriginalData("txtZengo", txtZengo);
         this.setOriginalData("txtTeikyoNissu", txtTeikyoNissu);
+        this.setOriginalData("txtTokubetsuTeikyoNissu", txtTokubetsuTeikyoNissu);
         this.setOriginalData("txtTeikyoTanka", txtTeikyoTanka);
+        this.setOriginalData("txtTokubetsuTeikyoTanka", txtTokubetsuTeikyoTanka);
         this.setOriginalData("txtTeikyoKingaku", txtTeikyoKingaku);
+        this.setOriginalData("txtTokubetsuTeikyoKingaku", txtTokubetsuTeikyoKingaku);
         this.setOriginalData("txtShokujiTeikyohiGokei", txtShokujiTeikyohiGokei);
         this.setOriginalData("txtHyojunFutangakuTsuki", txtHyojunFutangakuTsuki);
         this.setOriginalData("txtHyojunFutangakuHi", txtHyojunFutangakuHi);
@@ -68,19 +72,20 @@ public class dgShokujiHiyoToH1503_Row extends DataRow {
         this.setOriginalData("txtShokujiTeikyoNobeNissu", txtShokujiTeikyoNobeNissu);
         this.setOriginalData("txtSeikyugakuZengo", txtSeikyugakuZengo);
         this.setOriginalData("txtKohiSeikyu", txtKohiSeikyu);
-        this.setOriginalData("txtShokujiTeikyohiSeikyugaku", txtShokujiTeikyohiSeikyugaku);
         this.setOriginalData("txtSaishinsaKaisu", txtSaishinsaKaisu);
         this.setOriginalData("txtKagoKaisu", txtKagoKaisu);
         this.setOriginalData("txtShinsaYM", txtShinsaYM);
     }
 
-    public dgShokujiHiyoToH1503_Row(RString txtKihon, RString txtZengo, RString txtTeikyoNissu, RString txtTeikyoTanka, RString txtTeikyoKingaku, RString txtShokujiTeikyohiGokei, RString txtHyojunFutangakuTsuki, RString txtHyojunFutangakuHi, RString txtKohi, RString txtShokujiTeikyoNobeNissu, RString txtSeikyugakuZengo, RString txtKohiSeikyu, RString txtShokujiTeikyohiSeikyugaku, RString txtSaishinsaKaisu, RString txtKagoKaisu, RString txtShinsaYM) {
+    public dgShokujiHiyoToH1503_Row(RString txtZengo, RString txtTeikyoNissu, RString txtTokubetsuTeikyoNissu, RString txtTeikyoTanka, RString txtTokubetsuTeikyoTanka, RString txtTeikyoKingaku, RString txtTokubetsuTeikyoKingaku, RString txtShokujiTeikyohiGokei, RString txtHyojunFutangakuTsuki, RString txtHyojunFutangakuHi, RString txtKohi, RString txtShokujiTeikyoNobeNissu, RString txtSeikyugakuZengo, RString txtKohiSeikyu, RString txtSaishinsaKaisu, RString txtKagoKaisu, RString txtShinsaYM) {
         super();
-        this.setOriginalData("txtKihon", txtKihon);
         this.setOriginalData("txtZengo", txtZengo);
         this.setOriginalData("txtTeikyoNissu", txtTeikyoNissu);
+        this.setOriginalData("txtTokubetsuTeikyoNissu", txtTokubetsuTeikyoNissu);
         this.setOriginalData("txtTeikyoTanka", txtTeikyoTanka);
+        this.setOriginalData("txtTokubetsuTeikyoTanka", txtTokubetsuTeikyoTanka);
         this.setOriginalData("txtTeikyoKingaku", txtTeikyoKingaku);
+        this.setOriginalData("txtTokubetsuTeikyoKingaku", txtTokubetsuTeikyoKingaku);
         this.setOriginalData("txtShokujiTeikyohiGokei", txtShokujiTeikyohiGokei);
         this.setOriginalData("txtHyojunFutangakuTsuki", txtHyojunFutangakuTsuki);
         this.setOriginalData("txtHyojunFutangakuHi", txtHyojunFutangakuHi);
@@ -88,15 +93,16 @@ public class dgShokujiHiyoToH1503_Row extends DataRow {
         this.setOriginalData("txtShokujiTeikyoNobeNissu", txtShokujiTeikyoNobeNissu);
         this.setOriginalData("txtSeikyugakuZengo", txtSeikyugakuZengo);
         this.setOriginalData("txtKohiSeikyu", txtKohiSeikyu);
-        this.setOriginalData("txtShokujiTeikyohiSeikyugaku", txtShokujiTeikyohiSeikyugaku);
         this.setOriginalData("txtSaishinsaKaisu", txtSaishinsaKaisu);
         this.setOriginalData("txtKagoKaisu", txtKagoKaisu);
         this.setOriginalData("txtShinsaYM", txtShinsaYM);
-        this.txtKihon = txtKihon;
         this.txtZengo = txtZengo;
         this.txtTeikyoNissu = txtTeikyoNissu;
+        this.txtTokubetsuTeikyoNissu = txtTokubetsuTeikyoNissu;
         this.txtTeikyoTanka = txtTeikyoTanka;
+        this.txtTokubetsuTeikyoTanka = txtTokubetsuTeikyoTanka;
         this.txtTeikyoKingaku = txtTeikyoKingaku;
+        this.txtTokubetsuTeikyoKingaku = txtTokubetsuTeikyoKingaku;
         this.txtShokujiTeikyohiGokei = txtShokujiTeikyohiGokei;
         this.txtHyojunFutangakuTsuki = txtHyojunFutangakuTsuki;
         this.txtHyojunFutangakuHi = txtHyojunFutangakuHi;
@@ -104,14 +110,9 @@ public class dgShokujiHiyoToH1503_Row extends DataRow {
         this.txtShokujiTeikyoNobeNissu = txtShokujiTeikyoNobeNissu;
         this.txtSeikyugakuZengo = txtSeikyugakuZengo;
         this.txtKohiSeikyu = txtKohiSeikyu;
-        this.txtShokujiTeikyohiSeikyugaku = txtShokujiTeikyohiSeikyugaku;
         this.txtSaishinsaKaisu = txtSaishinsaKaisu;
         this.txtKagoKaisu = txtKagoKaisu;
         this.txtShinsaYM = txtShinsaYM;
-    }
-
-    public RString getTxtKihon() {
-        return txtKihon;
     }
 
     public RString getTxtZengo() {
@@ -122,12 +123,24 @@ public class dgShokujiHiyoToH1503_Row extends DataRow {
         return txtTeikyoNissu;
     }
 
+    public RString getTxtTokubetsuTeikyoNissu() {
+        return txtTokubetsuTeikyoNissu;
+    }
+
     public RString getTxtTeikyoTanka() {
         return txtTeikyoTanka;
     }
 
+    public RString getTxtTokubetsuTeikyoTanka() {
+        return txtTokubetsuTeikyoTanka;
+    }
+
     public RString getTxtTeikyoKingaku() {
         return txtTeikyoKingaku;
+    }
+
+    public RString getTxtTokubetsuTeikyoKingaku() {
+        return txtTokubetsuTeikyoKingaku;
     }
 
     public RString getTxtShokujiTeikyohiGokei() {
@@ -158,10 +171,6 @@ public class dgShokujiHiyoToH1503_Row extends DataRow {
         return txtKohiSeikyu;
     }
 
-    public RString getTxtShokujiTeikyohiSeikyugaku() {
-        return txtShokujiTeikyohiSeikyugaku;
-    }
-
     public RString getTxtSaishinsaKaisu() {
         return txtSaishinsaKaisu;
     }
@@ -174,11 +183,6 @@ public class dgShokujiHiyoToH1503_Row extends DataRow {
         return txtShinsaYM;
     }
 
-    public void setTxtKihon(RString txtKihon) {
-        this.setOriginalData("txtKihon", txtKihon);
-        this.txtKihon = txtKihon;
-    }
-
     public void setTxtZengo(RString txtZengo) {
         this.setOriginalData("txtZengo", txtZengo);
         this.txtZengo = txtZengo;
@@ -189,14 +193,29 @@ public class dgShokujiHiyoToH1503_Row extends DataRow {
         this.txtTeikyoNissu = txtTeikyoNissu;
     }
 
+    public void setTxtTokubetsuTeikyoNissu(RString txtTokubetsuTeikyoNissu) {
+        this.setOriginalData("txtTokubetsuTeikyoNissu", txtTokubetsuTeikyoNissu);
+        this.txtTokubetsuTeikyoNissu = txtTokubetsuTeikyoNissu;
+    }
+
     public void setTxtTeikyoTanka(RString txtTeikyoTanka) {
         this.setOriginalData("txtTeikyoTanka", txtTeikyoTanka);
         this.txtTeikyoTanka = txtTeikyoTanka;
     }
 
+    public void setTxtTokubetsuTeikyoTanka(RString txtTokubetsuTeikyoTanka) {
+        this.setOriginalData("txtTokubetsuTeikyoTanka", txtTokubetsuTeikyoTanka);
+        this.txtTokubetsuTeikyoTanka = txtTokubetsuTeikyoTanka;
+    }
+
     public void setTxtTeikyoKingaku(RString txtTeikyoKingaku) {
         this.setOriginalData("txtTeikyoKingaku", txtTeikyoKingaku);
         this.txtTeikyoKingaku = txtTeikyoKingaku;
+    }
+
+    public void setTxtTokubetsuTeikyoKingaku(RString txtTokubetsuTeikyoKingaku) {
+        this.setOriginalData("txtTokubetsuTeikyoKingaku", txtTokubetsuTeikyoKingaku);
+        this.txtTokubetsuTeikyoKingaku = txtTokubetsuTeikyoKingaku;
     }
 
     public void setTxtShokujiTeikyohiGokei(RString txtShokujiTeikyohiGokei) {
@@ -232,11 +251,6 @@ public class dgShokujiHiyoToH1503_Row extends DataRow {
     public void setTxtKohiSeikyu(RString txtKohiSeikyu) {
         this.setOriginalData("txtKohiSeikyu", txtKohiSeikyu);
         this.txtKohiSeikyu = txtKohiSeikyu;
-    }
-
-    public void setTxtShokujiTeikyohiSeikyugaku(RString txtShokujiTeikyohiSeikyugaku) {
-        this.setOriginalData("txtShokujiTeikyohiSeikyugaku", txtShokujiTeikyohiSeikyugaku);
-        this.txtShokujiTeikyohiSeikyugaku = txtShokujiTeikyohiSeikyugaku;
     }
 
     public void setTxtSaishinsaKaisu(RString txtSaishinsaKaisu) {

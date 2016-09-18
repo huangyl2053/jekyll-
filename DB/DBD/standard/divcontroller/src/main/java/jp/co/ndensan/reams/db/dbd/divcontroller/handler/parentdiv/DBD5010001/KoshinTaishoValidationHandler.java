@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5010001;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd511002.NinshiuUpdatebatctParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD511002.DBD511002_KoshinOshiraseTsuchiParameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5010001.KoshinTaishoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5010001.KoshinTaishoDivSpec;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.koshinTaisho.SelectSyuuShadeTaEntity;
@@ -165,9 +165,9 @@ public class KoshinTaishoValidationHandler {
      * バッチパラメータを設定、バッチ起動を起動します。
      *
      * @param div KoshinTaishoDiv
-     * @param parameter NinshiuUpdatebatctParameter
+     * @param parameter DBD511002_KoshinOshiraseTsuchiParameter
      */
-    public void onCilck_btnBatchRegister(NinshiuUpdatebatctParameter parameter, KoshinTaishoDiv div) {
+    public void onCilck_btnBatchRegister(DBD511002_KoshinOshiraseTsuchiParameter parameter, KoshinTaishoDiv div) {
         List<RString> 申請書管理番号リスト = new ArrayList<>();
         for (dgNinteiTaskList_Row row : div.getCcdKoshinTaisho().getCheckbox()) {
             申請書管理番号リスト.add(row.getShinseishoKanriNo());
@@ -185,12 +185,10 @@ public class KoshinTaishoValidationHandler {
         FlexibleDate 抽出対象期間_開始 = div.getTxtKikan().getMinDate().toFlexibleDate();
         FlexibleDate 抽出対象期間_終了 = div.getTxtKikan().getMaxDate().toFlexibleDate();
         FlexibleDate 通知書発行日 = div.getTxtHakobi().getValue();
-        List<RString> 出力順 = new ArrayList<>();
         if (div.getCcdChohyoShutsuryokuJun().getSelected出力順() != null) {
-            出力順.add(new RString(div.getCcdChohyoShutsuryokuJun().getSelected出力順().toString()));
+            parameter.set出力順(new RString(div.getCcdChohyoShutsuryokuJun().getSelected出力順().toString()));
         }
         parameter.set出力対象区分(出力対象区分);
-        parameter.set出力順(出力順);
         parameter.set抽出対象期間_終了(抽出対象期間_終了);
         parameter.set抽出対象期間_開始(抽出対象期間_開始);
         parameter.set申請書管理番号リスト(申請書管理番号リスト);

@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2015KeisangoJohoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.relate.KozaRelateEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.relate.TokuteiKozaRelateEntity;
 import jp.co.ndensan.reams.ue.uex.entity.db.basic.UeT0511NenkinTokuchoKaifuJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -31,6 +32,7 @@ public class HonsanteiTsuchishoTempEntity implements Serializable {
     private UaFt200FindShikibetsuTaishoEntity 宛名;
     private UaFt250FindAtesakiEntity 宛先;
     private CaFt703FindNokumiEntity 納組;
+    private TokuteiKozaRelateEntity 特定口座;
     private KozaRelateEntity 口座;
     private UaFt250FindAtesakiEntity 宛先代納;
     private RString 更正前情報有無区分;

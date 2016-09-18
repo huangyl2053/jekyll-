@@ -29,6 +29,8 @@ public class DBC5150011MainHandler {
 
     private final DBC5150011MainDiv div;
     private static final int INT_0 = 0;
+    private static final int INT_1 = 0;
+    private static final RString RSTRING_0 = new RString("0");
     private static final RString KEY_1 = new RString("1");
     private static final RString KEY_3 = new RString("3");
     private static final RString サービスコード一覧表 = new RString("サービスコード一覧表");
@@ -184,7 +186,8 @@ public class DBC5150011MainHandler {
     private void setサービス分類List(List<Code> サービス分類List, dgServiceShuruiList_Row row) {
         for (ServiceBunrui サービス分類 : ServiceBunrui.values()) {
             if (row.getHdnServiceBunrui().equals(new RString(サービス分類.toString()))) {
-                サービス分類List.add(new Code(サービス分類.getコード()));
+                サービス分類List.add(new Code(サービス分類.getコード().length() == INT_1
+                        ? RSTRING_0.concat(サービス分類.getコード()) : サービス分類.getコード()));
             }
         }
     }

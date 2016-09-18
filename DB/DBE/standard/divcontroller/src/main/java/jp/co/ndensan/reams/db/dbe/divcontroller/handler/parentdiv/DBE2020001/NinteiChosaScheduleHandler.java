@@ -105,10 +105,10 @@ public class NinteiChosaScheduleHandler {
             if (data_map.containsKey(dateIndex.seireki().fillType(FillType.ZERO).toDateString())) {
                 NinteichosaScheduleBusiness jigyoshaInput = data_map.get(dateIndex.seireki().fillType(FillType.ZERO).toDateString());
                 if (jigyoshaInput.getメモ年月日().getDayOfWeek() == DayOfWeek.SATURDAY) {
-                    dgJigyoshaItiran.setRowBgColor(DataGridCellBgColor.bgColorGreen);
+                    dgJigyoshaItiran.setRowBgColor(DataGridCellBgColor.bgColorLightGreen);
                 } else if (jigyoshaInput.getメモ年月日().getDayOfWeek() == DayOfWeek.SUNDAY
-                        && (new RDate(jigyoshaInput.getメモ年月日().toString()).isNationalHoliday())) {
-                    dgJigyoshaItiran.setRowBgColor(DataGridCellBgColor.bgColorRed);
+                           && (new RDate(jigyoshaInput.getメモ年月日().toString()).isNationalHoliday())) {
+                    dgJigyoshaItiran.setRowBgColor(DataGridCellBgColor.bgColorLightRed);
                 }
                 if (jigyoshaInput.getメモ年月日() != null) {
                     dgJigyoshaItiran.getDate().setValue(new RDate(jigyoshaInput.getメモ年月日().toString()));
@@ -118,12 +118,12 @@ public class NinteiChosaScheduleHandler {
                     dgJigyoshaItiran.setAkiAM(new RString("○"));
                 }
                 dgJigyoshaItiran.setAkiAMCount(new RString(String.valueOf(jigyoshaInput.get全午前件数() - jigyoshaInput.get午前の仮予約件数()
-                        - jigyoshaInput.get午前の確定件数())));
+                                                                          - jigyoshaInput.get午前の確定件数())));
                 if (jigyoshaInput.get全午後件数() != 0) {
                     dgJigyoshaItiran.setAkiPM(new RString("●"));
                 }
                 dgJigyoshaItiran.setAkiPMCount(new RString(String.valueOf(jigyoshaInput.get全午後件数() - jigyoshaInput.get午後の仮予約件数()
-                        - jigyoshaInput.get午後の確定件数())));
+                                                                          - jigyoshaInput.get午後の確定件数())));
                 if (jigyoshaInput.get午前の仮予約件数() != 0) {
                     dgJigyoshaItiran.setKariYoyakuAM(new RString("△"));
                 }
@@ -161,13 +161,13 @@ public class NinteiChosaScheduleHandler {
 
     private void hiduke(dgNinteiChosaSchedule_Row dgJigyoshaItiran, FlexibleDate dateIndex) {
         if (dateIndex.getDayOfWeek() == DayOfWeek.SATURDAY) {
-            dgJigyoshaItiran.setRowBgColor(DataGridCellBgColor.bgColorGreen);
+            dgJigyoshaItiran.setRowBgColor(DataGridCellBgColor.bgColorLightGreen);
         }
         if (dateIndex.getDayOfWeek() == DayOfWeek.SUNDAY) {
-            dgJigyoshaItiran.setRowBgColor(DataGridCellBgColor.bgColorRed);
+            dgJigyoshaItiran.setRowBgColor(DataGridCellBgColor.bgColorLightRed);
         }
         if (new RDate(dateIndex.toString()).isNationalHoliday()) {
-            dgJigyoshaItiran.setRowBgColor(DataGridCellBgColor.bgColorRed);
+            dgJigyoshaItiran.setRowBgColor(DataGridCellBgColor.bgColorLightRed);
         }
     }
 

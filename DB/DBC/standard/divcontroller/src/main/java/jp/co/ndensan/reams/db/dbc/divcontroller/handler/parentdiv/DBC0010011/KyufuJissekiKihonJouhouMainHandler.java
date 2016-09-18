@@ -10,7 +10,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho2;
-import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiPrmBusiness;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_KeikakuSakuseiKubunCode;
 import jp.co.ndensan.reams.db.dbc.definition.core.keikoku.KeikokuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufusakuseikubun.KyufuSakuseiKubun;
@@ -42,7 +41,7 @@ public class KyufuJissekiKihonJouhouMainHandler {
     private static final int INT_ITI = 1;
     private static final int INT_NI = 2;
     private static final RString 設定不可 = new RString("0");
-    private static final RString 設定可_任意 = new RString("2");
+    private static final RString 総合事業 = new RString("5");
     private static final FlexibleYearMonth 平成２４年４月 = new FlexibleYearMonth("201204");
     private static final FlexibleYearMonth 平成２０年４月 = new FlexibleYearMonth("200804");
     private static final FlexibleYearMonth 平成２０年５月 = new FlexibleYearMonth("200805");
@@ -62,32 +61,30 @@ public class KyufuJissekiKihonJouhouMainHandler {
     /**
      * 画面の初期化メソッドです。
      *
-     * @param 給付実績情報照会情報 給付実績情報照会情報
+     * @param 被保険者番号 被保険者番号
      * @param サービス提供年月 サービス提供年月
      * @param 整理番号 整理番号
      * @param 識別番号検索キー 識別番号検索キー
      * @param 識別番号管理データ 識別番号管理データ
-     * @param サービス種類コード サービス種類コード
+     * @param 給付実績基本情報 給付実績基本情報
+     * @param 事業者番号リスト 事業者番号リスト
+     * @param 給付実績基本 給付実績基本
+     * @param 事業所名称 事業所名称
+     * @param 給付分類区分 給付分類区分
      */
-    public void onLoad(KyufuJissekiPrmBusiness 給付実績情報照会情報, FlexibleYearMonth サービス提供年月,
+    public void onLoad(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月,
             RString 整理番号, NyuryokuShikibetsuNo 識別番号検索キー, List<ShikibetsuNoKanri> 識別番号管理データ,
-            RString サービス種類コード) {
-        set給付実績基本情報(給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号(),
+            List<KyufujissekiKihon> 給付実績基本情報, List<KyufuJissekiHedajyoho2> 事業者番号リスト,
+            KyufujissekiKihon 給付実績基本, RString 事業所名称, RString 給付分類区分) {
+        set給付実績基本情報(被保険者番号,
                 サービス提供年月, 整理番号, 識別番号検索キー);
         if (識別番号管理データ != null && !識別番号管理データ.isEmpty()) {
             set各ボタン活性非活性設定(識別番号管理データ.get(0), サービス提供年月, 識別番号検索キー);
         }
-        List<KyufujissekiKihon> 給付実績基本情報 = 給付実績情報照会情報.getCsData_A();
-        List<KyufuJissekiHedajyoho2> 事業者番号リスト = 給付実績情報照会情報.getCommonHeader().get給付実績ヘッダ情報2();
-        KyufujissekiKihon 給付実績基本 = get給付実績基本情報(給付実績基本情報, サービス提供年月,
-                new JigyoshaNo(div.getCcdKyufuJissekiHeader().get事業者番号()), 整理番号,
-                div.getCcdKyufuJissekiHeader().get様式番号(), div.getCcdKyufuJissekiHeader().get実績区分コード());
         if (給付実績基本 != null) {
-            set申請内容エリア(給付実績基本, サービス提供年月);
+            set申請内容エリア(給付実績基本, サービス提供年月, 事業所名称, 給付分類区分);
+            set合計内容エリア(給付実績基本);
         }
-        // TODO QA回答待ち、
-//        set合計内容エリア();
-//        RString データタイプ = 給付実績情報照会情報.getDataType();
         setボタン非活性(事業者番号リスト, 給付実績基本情報, サービス提供年月);
     }
 
@@ -95,132 +92,130 @@ public class KyufuJissekiKihonJouhouMainHandler {
      * 「前事業者」ボタンを押下する場合、画面を表示する。
      *
      * @param 給付実績ヘッダ情報2 給付実績ヘッダ情報2
+     * @param サービス提供年月 サービス提供年月
+     * @param 事業所番号 事業所番号
+     * @param 後整理番号 後整理番号
+     * @param 識別番号 識別番号
+     * @param 給付実績区分コード 給付実績区分コード
+     * @param 事業者名称 事業者名称
+     * @param 識別番号名称 識別番号名称
+     * @param 給付実績基本 給付実績基本
+     * @param 事業所名称 事業所名称
+     * @param 給付分類区分 給付分類区分
      * @param 給付実績基本情報 給付実績基本情報
+     * @param 給付実績ヘッダ情報２ 給付実績ヘッダ情報２
      */
-    public void onClick_MaeJigyosha(List<KyufuJissekiHedajyoho2> 給付実績ヘッダ情報2, List<KyufujissekiKihon> 給付実績基本情報) {
+    public void onClick_MaeJigyosha(KyufuJissekiHedajyoho2 給付実績ヘッダ情報2, FlexibleYearMonth サービス提供年月,
+            JigyoshaNo 事業所番号, RString 後整理番号, RString 識別番号, RString 給付実績区分コード,
+            RString 事業者名称, RString 識別番号名称, KyufujissekiKihon 給付実績基本,
+            RString 事業所名称, RString 給付分類区分,
+            List<KyufujissekiKihon> 給付実績基本情報, List<KyufuJissekiHedajyoho2> 給付実績ヘッダ情報２) {
         div.getBtnMaeJigyosha().setDisabled(true);
         div.getBtnAtoJigyosha().setDisabled(false);
-        FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().
-                getサービス提供年月().getYearMonth().toDateString());
-        int index = get事業者番号index(給付実績ヘッダ情報2);
-        if (index != 0) {
-            RString 給付実績区分コード = 給付実績ヘッダ情報2.get(index - INT_ITI).get給付実績区分コード();
-            RString 後整理番号 = 給付実績ヘッダ情報2.get(index - INT_ITI).get整理番号();
-            JigyoshaNo 事業所番号 = 給付実績ヘッダ情報2.get(index - INT_ITI).get事業所番号();
-            RString 識別番号 = 給付実績ヘッダ情報2.get(index - INT_ITI).get識別番号();
-            div.getCcdKyufuJissekiHeader().set事業者名称(給付実績ヘッダ情報2.get(index - INT_ITI).get事業者名称());
-            div.getCcdKyufuJissekiHeader().set実績区分(給付実績区分コード);
-            div.getCcdKyufuJissekiHeader().set整理番号(後整理番号);
-            div.getCcdKyufuJissekiHeader().set識別番号名称(給付実績ヘッダ情報2.get(index - INT_ITI).get識別番号名称());
-            div.getCcdKyufuJissekiHeader().set事業者番号(事業所番号.value());
-            div.getCcdKyufuJissekiHeader().set様式番号(給付実績ヘッダ情報2.get(index - INT_ITI).get識別番号());
-            KyufujissekiKihon 給付実績基本 = get給付実績基本情報(給付実績基本情報, サービス提供年月,
-                    事業所番号, 後整理番号, 識別番号, 給付実績区分コード);
-            if (給付実績基本 != null) {
-                set申請内容エリア(給付実績基本, サービス提供年月);
-                //        set合計内容エリア();
-            }
-        }
-        if (0 < index - INT_NI && index - INT_NI < 給付実績ヘッダ情報2.size()) {
-            div.getBtnMaeJigyosha().setDisabled(false);
+        div.getCcdKyufuJissekiHeader().set事業者名称(事業者名称);
+        div.getCcdKyufuJissekiHeader().set実績区分(給付実績区分コード);
+        div.getCcdKyufuJissekiHeader().set整理番号(後整理番号);
+        div.getCcdKyufuJissekiHeader().set識別番号名称(識別番号名称);
+        div.getCcdKyufuJissekiHeader().set事業者番号(事業所番号.value());
+        div.getCcdKyufuJissekiHeader().set様式番号(識別番号);
+        if (給付実績基本 != null) {
+            set申請内容エリア(給付実績基本, サービス提供年月, 事業所名称, 給付分類区分);
+            set合計内容エリア(給付実績基本);
         }
         set合計エリア閉();
+        setボタン非活性(給付実績ヘッダ情報２, 給付実績基本情報, サービス提供年月);
     }
 
     /**
      * 「後事業者」ボタンを押下する場合、画面を表示する。
      *
      * @param 給付実績ヘッダ情報2 給付実績ヘッダ情報2
+     * @param サービス提供年月 サービス提供年月
+     * @param 事業所番号 事業所番号
+     * @param 後整理番号 後整理番号
+     * @param 識別番号 識別番号
+     * @param 給付実績区分コード 給付実績区分コード
+     * @param 事業者名称 事業者名称
+     * @param 識別番号名称 識別番号名称
+     * @param 給付実績基本 給付実績基本
+     * @param 事業所名称 事業所名称
+     * @param 給付分類区分 給付分類区分
      * @param 給付実績基本情報 給付実績基本情報
+     * @param 給付実績ヘッダ情報２ 給付実績ヘッダ情報２
      */
-    public void onClick_AtoJigyosha(List<KyufuJissekiHedajyoho2> 給付実績ヘッダ情報2, List<KyufujissekiKihon> 給付実績基本情報) {
+    public void onClick_Jigyosha(KyufuJissekiHedajyoho2 給付実績ヘッダ情報2, FlexibleYearMonth サービス提供年月,
+            JigyoshaNo 事業所番号, RString 後整理番号, RString 識別番号, RString 給付実績区分コード,
+            RString 事業者名称, RString 識別番号名称, KyufujissekiKihon 給付実績基本,
+            RString 事業所名称, RString 給付分類区分,
+            List<KyufujissekiKihon> 給付実績基本情報, List<KyufuJissekiHedajyoho2> 給付実績ヘッダ情報２) {
         div.getBtnAtoJigyosha().setDisabled(true);
         div.getBtnMaeJigyosha().setDisabled(false);
-        FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().
-                getサービス提供年月().getYearMonth().toDateString());
-        int index = get事業者番号index(給付実績ヘッダ情報2);
-        if (index + INT_ITI < 給付実績ヘッダ情報2.size()) {
-            RString 給付実績区分コード = 給付実績ヘッダ情報2.get(index + INT_ITI).get給付実績区分コード();
-            RString 後整理番号 = 給付実績ヘッダ情報2.get(index + INT_ITI).get整理番号();
-            JigyoshaNo 事業所番号 = 給付実績ヘッダ情報2.get(index + INT_ITI).get事業所番号();
-            RString 識別番号 = 給付実績ヘッダ情報2.get(index + INT_ITI).get識別番号();
-            div.getCcdKyufuJissekiHeader().set事業者名称(給付実績ヘッダ情報2.get(index + INT_ITI).get事業者名称());
-            div.getCcdKyufuJissekiHeader().set実績区分(給付実績区分コード);
-            div.getCcdKyufuJissekiHeader().set整理番号(後整理番号);
-            div.getCcdKyufuJissekiHeader().set識別番号名称(給付実績ヘッダ情報2.get(index + INT_ITI).get識別番号名称());
-            div.getCcdKyufuJissekiHeader().set事業者番号(事業所番号.value());
-            div.getCcdKyufuJissekiHeader().set様式番号(給付実績ヘッダ情報2.get(index + INT_ITI).get識別番号());
-            KyufujissekiKihon 給付実績基本 = get給付実績基本情報(給付実績基本情報, サービス提供年月,
-                    事業所番号, 後整理番号, 識別番号, 給付実績区分コード);
-            if (給付実績基本 != null) {
-                set申請内容エリア(給付実績基本, サービス提供年月);
-                //        set合計内容エリア();
-            }
-        }
-        if (index + INT_NI < 給付実績ヘッダ情報2.size()) {
-            div.getBtnAtoJigyosha().setDisabled(false);
+        div.getCcdKyufuJissekiHeader().set事業者名称(事業者名称);
+        div.getCcdKyufuJissekiHeader().set実績区分(給付実績区分コード);
+        div.getCcdKyufuJissekiHeader().set整理番号(後整理番号);
+        div.getCcdKyufuJissekiHeader().set識別番号名称(識別番号名称);
+        div.getCcdKyufuJissekiHeader().set事業者番号(事業所番号.value());
+        div.getCcdKyufuJissekiHeader().set様式番号(識別番号);
+        if (給付実績基本 != null) {
+            set申請内容エリア(給付実績基本, サービス提供年月, 事業所名称, 給付分類区分);
+            set合計内容エリア(給付実績基本);
         }
         set合計エリア閉();
+        setボタン非活性(給付実績ヘッダ情報２, 給付実績基本情報, サービス提供年月);
     }
 
     /**
      * 「前月」ボタンを押下する場合、画面を表示します。
      *
      * @param サービス提供年月 サービス提供年月
-     * @param 給付実績基本情報 給付実績基本情報
+     * @param 給付実績基本 給付実績基本
      * @param 被保険者番号 被保険者番号
-     * @param 整理番号 整理番号
      * @param 識別番号検索キー 識別番号検索キー
+     * @param 整理番号 整理番号
+     * @param 事業所名称 事業所名称
+     * @param 給付分類区分 給付分類区分
+     * @param 給付実績基本情報 給付実績基本情報
+     * @param 給付実績ヘッダ情報２ 給付実績ヘッダ情報２
      */
-    public void onClick_Zengetsu(FlexibleYearMonth サービス提供年月, List<KyufujissekiKihon> 給付実績基本情報,
-            HihokenshaNo 被保険者番号, RString 整理番号, NyuryokuShikibetsuNo 識別番号検索キー) {
-        FlexibleYearMonth 提供年月;
+    public void onClick_Zengetsu(FlexibleYearMonth サービス提供年月, KyufujissekiKihon 給付実績基本,
+            HihokenshaNo 被保険者番号, RString 整理番号, NyuryokuShikibetsuNo 識別番号検索キー, RString 事業所名称,
+            RString 給付分類区分, List<KyufujissekiKihon> 給付実績基本情報, List<KyufuJissekiHedajyoho2> 給付実績ヘッダ情報２) {
         div.getBtnZengetsu().setDisabled(true);
         div.getBtnJigetsu().setDisabled(false);
-        for (KyufujissekiKihon 給付実績基本 : 給付実績基本情報) {
-            提供年月 = 給付実績基本.getサービス提供年月();
-            if (提供年月.equals(サービス提供年月.minusMonth(INT_ITI))) {
-                set給付実績基本情報(被保険者番号, サービス提供年月, 整理番号, 識別番号検索キー);
-                set申請内容エリア(給付実績基本, 提供年月);
-                //        set合計内容エリア();
-                continue;
-            }
-            if (提供年月.equals(サービス提供年月.minusMonth(INT_NI))) {
-                div.getBtnZengetsu().setDisabled(false);
-                break;
-            }
+        if (給付実績基本 != null) {
+            set給付実績基本情報(被保険者番号, サービス提供年月, 整理番号, 識別番号検索キー);
+            set申請内容エリア(給付実績基本, サービス提供年月, 事業所名称, 給付分類区分);
+            set合計内容エリア(給付実績基本);
         }
         set合計エリア閉();
+        setボタン非活性(給付実績ヘッダ情報２, 給付実績基本情報, サービス提供年月);
     }
 
     /**
-     * 「次月」ボタンを押下する場合、画面を表示します。
+     * 次月ボタンを押下する場合、画面を表示します。
      *
      * @param サービス提供年月 サービス提供年月
-     * @param 給付実績基本情報 給付実績基本情報
+     * @param 給付実績基本 給付実績基本
      * @param 被保険者番号 被保険者番号
      * @param 識別番号検索キー 識別番号検索キー
      * @param 整理番号 整理番号
+     * @param 事業所名称 事業所名称
+     * @param 給付分類区分 給付分類区分
+     * @param 給付実績基本情報 給付実績基本情報
+     * @param 給付実績ヘッダ情報２ 給付実績ヘッダ情報２
      */
-    public void onClick_Jigetsu(FlexibleYearMonth サービス提供年月, List<KyufujissekiKihon> 給付実績基本情報,
-            HihokenshaNo 被保険者番号, RString 整理番号, NyuryokuShikibetsuNo 識別番号検索キー) {
-        FlexibleYearMonth 提供年月;
+    public void onClick_Jigetsu(FlexibleYearMonth サービス提供年月, KyufujissekiKihon 給付実績基本,
+            HihokenshaNo 被保険者番号, RString 整理番号, NyuryokuShikibetsuNo 識別番号検索キー, RString 事業所名称,
+            RString 給付分類区分, List<KyufujissekiKihon> 給付実績基本情報, List<KyufuJissekiHedajyoho2> 給付実績ヘッダ情報２) {
         div.getBtnJigetsu().setDisabled(true);
         div.getBtnZengetsu().setDisabled(false);
-        for (KyufujissekiKihon 給付実績基本 : 給付実績基本情報) {
-            提供年月 = 給付実績基本.getサービス提供年月();
-            if (提供年月.equals(サービス提供年月.plusMonth(INT_ITI))) {
-                set給付実績基本情報(被保険者番号, サービス提供年月, 整理番号, 識別番号検索キー);
-                set申請内容エリア(給付実績基本, 提供年月);
-                //        set合計内容エリア();
-                continue;
-            }
-            if (提供年月.equals(サービス提供年月.plusMonth(INT_NI))) {
-                div.getBtnJigetsu().setDisabled(false);
-                break;
-            }
+        if (給付実績基本 != null) {
+            set給付実績基本情報(被保険者番号, サービス提供年月, 整理番号, 識別番号検索キー);
+            set申請内容エリア(給付実績基本, サービス提供年月, 事業所名称, 給付分類区分);
+            set合計内容エリア(給付実績基本);
         }
         set合計エリア閉();
+        setボタン非活性(給付実績ヘッダ情報２, 給付実績基本情報, サービス提供年月);
     }
 
     private void set各ボタン活性非活性設定(ShikibetsuNoKanri 識別番号管理データ,
@@ -270,15 +265,8 @@ public class KyufuJissekiKihonJouhouMainHandler {
         if (設定不可.equals(識別番号管理データ.get社会福祉法人軽減設定区分())) {
             div.getBtnShafukuKeigen().setDisabled(true);
         }
-        if (設定可_任意.equals(識別番号管理データ.get所定疾患施設療養設定区分())
-                && 平成２４年４月.isBeforeOrEquals(サービス提供年月)) {
-            // TODO QA回答待ち、「所定疾患施設療養費」ボタンを活性に表示するの処理を実装なし。
-//            div.getBtnShoteiShikkanShisetsuRyoyo().setDisabled(true);
-            div.getBtnKinkyujiShisetsuRyoyo().setDisplayNone(true);
-        } else {
-            if (設定不可.equals(識別番号管理データ.get緊急時施設療養設定区分())) {
-                div.getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
-            }
+        if (設定不可.equals(識別番号管理データ.get緊急時施設療養設定区分())) {
+            div.getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
         }
         set表示制御(サービス提供年月, 識別番号検索キー);
     }
@@ -315,7 +303,8 @@ public class KyufuJissekiKihonJouhouMainHandler {
         return 識別番号リスト;
     }
 
-    private void set申請内容エリア(KyufujissekiKihon 給付実績基本情報, FlexibleYearMonth サービス提供年月) {
+    private void set申請内容エリア(KyufujissekiKihon 給付実績基本情報, FlexibleYearMonth サービス提供年月,
+            RString 事業所名称, RString 給付分類区分) {
         div.getTxtKyufuJissekiKihonSakuseiKubun().setValue(get作成区分(給付実績基本情報.get給付実績情報作成区分コード()));
         div.getTxtKyufuJissekiKihonYokaigodo().setValue(div.getCcdKyufuJissekiHeader().get要介護度());
         if (給付実績基本情報.get認定有効期間_開始年月日() != null && !給付実績基本情報.get認定有効期間_開始年月日().isEmpty()) {
@@ -341,10 +330,61 @@ public class KyufuJissekiKihonJouhouMainHandler {
         }
         set被保険者エリア(給付実績基本情報);
         set後期高齢と国保エリア(給付実績基本情報, サービス提供年月);
-        set居宅サービス計画エリア(給付実績基本情報);
+        set居宅サービス計画エリア(給付実績基本情報, 事業所名称);
         setサービス期間エリア(給付実績基本情報);
         set施設入退所_院エリア(給付実績基本情報);
-        set給付率と公費エリア(給付実績基本情報);
+        set給付率と公費エリア(給付実績基本情報, 給付分類区分);
+    }
+
+    private void set合計内容エリア(KyufujissekiKihon 給付実績基本情報) {
+        div.getTxtMaeHokenServiceTanisu().setValue(new Decimal(給付実績基本情報.get前_保険_サービス単位数()));
+        div.getTxtGoHokenServiceTanisu().setValue(new Decimal(給付実績基本情報.get後_保険_サービス単位数()));
+        div.getTxtMaeKohi1ServiceTanisu().setValue(new Decimal(給付実績基本情報.get前_公費１_サービス単位数()));
+        div.getTxtGoKohi1ServiceTanisu().setValue(new Decimal(給付実績基本情報.get後_公費１_サービス単位数()));
+        div.getTxtMaeKohi2ServiceTanisu().setValue(new Decimal(給付実績基本情報.get前_公費２_サービス単位数()));
+        div.getTxtGoKohi2ServiceTanisu().setValue(new Decimal(給付実績基本情報.get後_公費２_サービス単位数()));
+        div.getTxtMaeKohi3ServiceTanisu().setValue(new Decimal(給付実績基本情報.get前_公費３_サービス単位数()));
+        div.getTxtGoKohi3ServiceTanisu().setValue(new Decimal(給付実績基本情報.get後_公費３_サービス単位数()));
+        div.getTxtMaeHokenHokenSeikyugaku().setValue(給付実績基本情報.get前_保険_請求額());
+        div.getTxtGoHokenHokenSeikyugaku().setValue(給付実績基本情報.get後_保険_請求額());
+        div.getTxtMaeKohi1HokenSeikyugaku().setValue(new Decimal(給付実績基本情報.get前_公費１_請求額()));
+        div.getTxtGoKohi1HokenSeikyugaku().setValue(new Decimal(給付実績基本情報.get後_公費１_請求額()));
+        div.getTxtMaeKohi2HokenSeikyugaku().setValue(new Decimal(給付実績基本情報.get前_公費２_請求額()));
+        div.getTxtGoKohi2HokenSeikyugaku().setValue(new Decimal(給付実績基本情報.get後_公費２_請求額()));
+        div.getTxtMaeKohi3HokenSeikyugaku().setValue(new Decimal(給付実績基本情報.get前_公費３_請求額()));
+        div.getTxtGoKohi3HokenSeikyugaku().setValue(new Decimal(給付実績基本情報.get後_公費３_請求額()));
+        div.getTxtMaeHokenRiyoshaFutangaku().setValue(new Decimal(給付実績基本情報.get前_保険_利用者負担額()));
+        div.getTxtGoHokenRiyoshaFutangaku().setValue(new Decimal(給付実績基本情報.get後_保険_利用者負担額()));
+        div.getTxtMaeKohi1RiyoshaFutangaku().setValue(new Decimal(給付実績基本情報.get前_公費１_本人負担額()));
+        div.getTxtGoKohi1RiyoshaFutangaku().setValue(new Decimal(給付実績基本情報.get後_公費１_本人負担額()));
+        div.getTxtMaeKohi2RiyoshaFutangaku().setValue(new Decimal(給付実績基本情報.get前_公費２_本人負担額()));
+        div.getTxtGoKohi2RiyoshaFutangaku().setValue(new Decimal(給付実績基本情報.get後_公費２_利用者負担額()));
+        div.getTxtMaeKohi3RiyoshaFutangaku().setValue(new Decimal(給付実績基本情報.get前_公費３_本人負担額()));
+        div.getTxtGoKohi3RiyoshaFutangaku().setValue(new Decimal(給付実績基本情報.get後_公費３_利用者負担額()));
+        div.getTxtMaeHokenKinkyujiShisetsuRyoyohi().setValue(給付実績基本情報.get前_保険_緊急時施設療養費請求額());
+        div.getTxtGoHokenKinkyujiShisetsuRyoyohi().setValue(給付実績基本情報.get後_緊急時施設療養費請求額());
+        div.getTxtMaeKohi1KinkyujiShisetsuRyoyohi().setValue(new Decimal(給付実績基本情報.get前_公費１_緊急時施設療養費請求額()));
+        div.getTxtGoKohi1KinkyujiShisetsuRyoyohi().setValue(new Decimal(給付実績基本情報.get後_公費１_緊急時施設療養費請求額()));
+        div.getTxtMaeKohi2KinkyujiShisetsuRyoyohi().setValue(new Decimal(給付実績基本情報.get前_公費２_緊急時施設療養費請求額()));
+        div.getTxtGoKohi2KinkyujiShisetsuRyoyohi().setValue(new Decimal(給付実績基本情報.get後_公費２_緊急時施設療養費請求額()));
+        div.getTxtMaeKohi3KinkyujiShisetsuRyoyohi().setValue(new Decimal(給付実績基本情報.get前_公費３_緊急時施設療養費請求額()));
+        div.getTxtGoKohi3KinkyujiShisetsuRyoyohi().setValue(new Decimal(給付実績基本情報.get後_公費３_緊急時施設療養費請求額()));
+        div.getTxtMaeHokenTokuteiShinryohi().setValue(給付実績基本情報.get前_保険_特定診療費請求額());
+        div.getTxtGoHokenTokuteiShinryohi().setValue(給付実績基本情報.get後_保険_特定診療費請求額());
+        div.getTxtMaeKohi1TokuteiShinryohi().setValue(new Decimal(給付実績基本情報.get前_公費１_特定診療費請求額()));
+        div.getTxtGoKohi1TokuteiShinryohi().setValue(new Decimal(給付実績基本情報.get後_公費１_特定診療費請求額()));
+        div.getTxtMaeKohi2TokuteiShinryohi().setValue(new Decimal(給付実績基本情報.get前_公費２_特定診療費請求額()));
+        div.getTxtGoKohi2TokuteiShinryohi().setValue(new Decimal(給付実績基本情報.get後_公費２_特定診療費請求額()));
+        div.getTxtMaeKohi3TokuteiShinryohi().setValue(new Decimal(給付実績基本情報.get前_公費３_特定診療費請求額()));
+        div.getTxtGoKohi3TokuteiShinryohi().setValue(new Decimal(給付実績基本情報.get後_公費３_緊急時施設療養費請求額()));
+        div.getTxtMaeHokenTokuteiNyushosha().setValue(new Decimal(給付実績基本情報.get前_保険_特定入所者介護サービス費等請求額()));
+        div.getTxtGoHokenTokuteiNyushosha().setValue(new Decimal(給付実績基本情報.get後_保険_特定入所者介護サービス費等請求額()));
+        div.getTxtMaeKohi1TokuteiNyushosha().setValue(new Decimal(給付実績基本情報.get前_公費１_特定入所者介護サービス費等請求額()));
+        div.getTxtGoKohi1TokuteiNyushosha().setValue(new Decimal(給付実績基本情報.get後_公費１_特定入所者介護サービス費等請求額()));
+        div.getTxtMaeKohi2TokuteiNyushosha().setValue(new Decimal(給付実績基本情報.get前_公費２_特定入所者介護サービス費等請求額()));
+        div.getTxtGoKohi2TokuteiNyushosha().setValue(new Decimal(給付実績基本情報.get後_公費２_特定入所者介護サービス費等請求額()));
+        div.getTxtMaeKohi3TokuteiNyushosha().setValue(new Decimal(給付実績基本情報.get前_公費３_特定入所者介護サービス費等請求額()));
+        div.getTxtGoKohi3TokuteiNyushosha().setValue(new Decimal(給付実績基本情報.get後_公費３_特定入所者介護サービス費等請求額()));
     }
 
     private void set被保険者エリア(KyufujissekiKihon 給付実績基本情報) {
@@ -370,13 +410,12 @@ public class KyufuJissekiKihonJouhouMainHandler {
         }
     }
 
-    private void set居宅サービス計画エリア(KyufujissekiKihon 給付実績基本情報) {
+    private void set居宅サービス計画エリア(KyufujissekiKihon 給付実績基本情報, RString 事業所名称) {
         div.getTxtKyufuJissekiKihonKyotakuServiceKeikakuSakuseiKubun().setValue(
                 get計画作成区分(給付実績基本情報.get居宅サービス計画作成区分コード()));
         div.getTxtKyufuJissekiKihonJigyoshoNo().setValue(
                 get居宅介護支援事業所番号(給付実績基本情報.get居宅介護支援事業所番号()));
-        // TODO 居宅サービス計画　事業所名称の取得方法が不明です、
-//        div.getTxtKyufuJissekiKihonJigyoshoName().setValue(設定不可);
+        div.getTxtKyufuJissekiKihonJigyoshoName().setValue(事業所名称);
     }
 
     private void setサービス期間エリア(KyufujissekiKihon 給付実績基本情報) {
@@ -406,19 +445,20 @@ public class KyufuJissekiKihonJouhouMainHandler {
                 給付実績基本情報.get退所_院_後の状態コード()));
     }
 
-    private void set給付率と公費エリア(KyufujissekiKihon 給付実績基本情報) {
-        // TODO 給付率　保険の補足で意味が不明です。
-//        div.getTxtKyufuJissekiKihonHokenKyufuRitsu().setValue(設定不可);
+    private void set給付率と公費エリア(KyufujissekiKihon 給付実績基本情報, RString 給付分類区分) {
+        div.getTxtKyufuJissekiKihonHokenKyufuRitsu().setValue(get給付率(給付実績基本情報.get保険給付率()));
         div.getTxtKyufuJissekiKihonKohi1KyufuRitsu().setValue(get給付率(給付実績基本情報.get公費１給付率()));
         div.getTxtKyufuJissekiKihonKohi2KyufuRitsu().setValue(get給付率(給付実績基本情報.get公費２給付率()));
         div.getTxtKyufuJissekiKihonKohi3KyufuRitsu().setValue(get給付率(給付実績基本情報.get公費３給付率()));
-
         div.getTxtKyufuJissekiKihonKohiFutanshaNo1().setValue(給付実績基本情報.get公費１_負担者番号());
         div.getTxtKyufuJissekiKihonKohiJukyushaNo1().setValue(給付実績基本情報.get公費１_受給者番号());
         div.getTxtKyufuJissekiKihonKohiFutanshaNo2().setValue(給付実績基本情報.get公費２_負担者番号());
         div.getTxtKyufuJissekiKihonKohiJukyushaNo2().setValue(給付実績基本情報.get公費２_受給者番号());
         div.getTxtKyufuJissekiKihonKohiFutanshaNo3().setValue(給付実績基本情報.get公費３_負担者番号());
         div.getTxtKyufuJissekiKihonKohiJukyushaNo3().setValue(給付実績基本情報.get公費３_受給者番号());
+        if (!RString.isNullOrEmpty(給付分類区分) && 総合事業.equals(給付分類区分)) {
+            div.getTxtKyufuJissekiKihonHokenKyufuRitsu().setLabelLText(new RString("事業"));
+        }
     }
 
     private RString get作成区分(RString 給付実績情報作成区分コード) {
@@ -485,7 +525,7 @@ public class KyufuJissekiKihonJouhouMainHandler {
                 識別番号検索キー);
     }
 
-    private int get事業者番号index(List<KyufuJissekiHedajyoho2> 事業者番号リスト) {
+    private int get事業者番号の位置(List<KyufuJissekiHedajyoho2> 事業者番号リスト) {
         RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
         RString 整理番号 = div.getCcdKyufuJissekiHeader().get整理番号();
         FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().
@@ -504,30 +544,16 @@ public class KyufuJissekiKihonJouhouMainHandler {
         return INT_ZERO;
     }
 
-    private KyufujissekiKihon get給付実績基本情報(List<KyufujissekiKihon> 給付実績基本情報,
-            FlexibleYearMonth サービス提供年月, JigyoshaNo 事業者番号, RString 整理番号, RString 様式番号, RString 実績区分コード) {
-        for (KyufujissekiKihon 給付実績基本 : 給付実績基本情報) {
-            if (サービス提供年月.equals(給付実績基本.getサービス提供年月())
-                    && 事業者番号.equals(給付実績基本.get事業者番号())
-                    && 整理番号.equals(給付実績基本.get整理番号())
-                    && 様式番号.equals(給付実績基本.get入力識別番号().value())
-                    && 実績区分コード.equals(給付実績基本.get給付実績区分コード())) {
-                return 給付実績基本;
-            }
-        }
-        return null;
-    }
-
     private void setボタン非活性(List<KyufuJissekiHedajyoho2> 事業者番号リスト,
             List<KyufujissekiKihon> 給付実績基本情報, FlexibleYearMonth サービス提供年月) {
         div.getBtnMaeJigyosha().setDisabled(false);
         div.getBtnAtoJigyosha().setDisabled(false);
         div.getBtnZengetsu().setDisabled(false);
         div.getBtnJigetsu().setDisabled(false);
-        if (get事業者番号index(事業者番号リスト) == INT_ZERO) {
+        if (get事業者番号の位置(事業者番号リスト) == INT_ZERO) {
             div.getBtnMaeJigyosha().setDisabled(true);
             div.getBtnAtoJigyosha().setDisabled(false);
-        } else if (get事業者番号index(事業者番号リスト) == 事業者番号リスト.size() - INT_ITI) {
+        } else if (get事業者番号の位置(事業者番号リスト) == 事業者番号リスト.size() - INT_ITI) {
             div.getBtnMaeJigyosha().setDisabled(false);
             div.getBtnAtoJigyosha().setDisabled(true);
         }
@@ -548,4 +574,5 @@ public class KyufuJissekiKihonJouhouMainHandler {
             div.getBtnJigetsu().setDisabled(true);
         }
     }
+
 }

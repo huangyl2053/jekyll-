@@ -81,6 +81,7 @@ public class KanendoFuka {
      * @return ResponseData
      */
     public ResponseData<KanendoFukaDiv> onClick_onBeforeCheck(KanendoFukaDiv div) {
+        getHandler(div).get帳票IDのチェック();
         ValidationMessageControlPairs pairs = getHandler(div).getCheckMessage();
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
@@ -148,7 +149,7 @@ public class KanendoFuka {
      * @return ResponseData
      */
     public ResponseData<KanendoFukaDiv> onChange_ddlShoritsuki(KanendoFukaDiv div) {
-        getHandler(div).set帳票作成個別情報();
+        getHandler(div).set帳票作成個別情報(div.getKanendoShoriNaiyo().getDdlShoritsuki().getSelectedKey());
         return ResponseData.of(div).respond();
     }
 

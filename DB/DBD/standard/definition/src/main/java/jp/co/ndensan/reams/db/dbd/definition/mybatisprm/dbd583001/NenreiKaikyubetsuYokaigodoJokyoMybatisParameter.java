@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikib
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -21,8 +21,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class NenreiKaikyubetsuYokaigodoJokyoMybatisParameter extends UaFt200FindShikibetsuTaishoParam implements IMyBatisParameter {
 
-    private final RDate 基準日;
-    private final RDate 基準年月;
+    private final FlexibleDate 基準日;
+    private final FlexibleDate 基準年月;
     private final RString 地区区分;
     private final Code 開始地区コード;
     private final Code 終了地区コード;
@@ -49,7 +49,7 @@ public class NenreiKaikyubetsuYokaigodoJokyoMybatisParameter extends UaFt200Find
      * @param 旧市町村コード 旧市町村コード
      * @param shikibetsuTaishoPSMSearchKey 宛名識別対象PSM検索キー
      */
-    public NenreiKaikyubetsuYokaigodoJokyoMybatisParameter(RDate 基準日, RDate 基準年月,
+    public NenreiKaikyubetsuYokaigodoJokyoMybatisParameter(FlexibleDate 基準日, FlexibleDate 基準年月,
             RString 地区区分, Code 開始地区コード, Code 終了地区コード, RString 旧市町村コード,
             IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey) {
         super(shikibetsuTaishoPSMSearchKey);
@@ -72,10 +72,10 @@ public class NenreiKaikyubetsuYokaigodoJokyoMybatisParameter extends UaFt200Find
         if (開始地区コード != null && !開始地区コード.isEmpty()) {
             this.has開始地区コード = true;
         }
-        if (終了地区コード != null && 終了地区コード.isEmpty()) {
+        if (終了地区コード != null && !終了地区コード.isEmpty()) {
             this.has終了地区コード = true;
         }
-        if (旧市町村コード != null && 旧市町村コード.isEmpty()) {
+        if (旧市町村コード != null && !旧市町村コード.isEmpty()) {
             this.has旧市町村コード = true;
         }
 

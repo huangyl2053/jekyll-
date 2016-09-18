@@ -86,7 +86,9 @@ public class ShikyuFushikyuKozaKakuninTorokuProcess extends BatchProcessBase<Shi
     protected void process(ShikyuFushikyuKetteiKozaEntity entity) {
         DbWT38B1KogakuGassanShikyuFushikyuKetteiTempEntity 支給不支給決定 = entity.get支給不支給決定();
         TokuteiKozaRelateEntity 口座 = entity.get口座();
-        支給不支給決定.set口座ID(口座.getUaT0310KozaEntity().getKozaId());
-        高額合算支給不支給決定一時tableWriter.update(支給不支給決定.toEntity());
+        if (null != 口座) {
+            支給不支給決定.set口座ID(口座.getUaT0310KozaEntity().getKozaId());
+            高額合算支給不支給決定一時tableWriter.update(支給不支給決定.toEntity());
+        }
     }
 }

@@ -1248,8 +1248,88 @@ public class KyufuJissekiKihonJouhouMainDiv extends Panel {
     }
 
     @JsonIgnore
+    public TextBoxNum getTxtMaeHokenServiceTanisu() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtMaeHokenServiceTanisu();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoHokenServiceTanisu() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtGoHokenServiceTanisu();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeKohi1ServiceTanisu() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtMaeKohi1ServiceTanisu();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoKohi1ServiceTanisu() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtGoKohi1ServiceTanisu();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeKohi2ServiceTanisu() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtMaeKohi2ServiceTanisu();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoKohi2ServiceTanisu() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtGoKohi2ServiceTanisu();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeKohi3ServiceTanisu() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtMaeKohi3ServiceTanisu();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoKohi3ServiceTanisu() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtGoKohi3ServiceTanisu();
+    }
+
+    @JsonIgnore
     public Label getLblHokenryoSeikyuGaku() {
         return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getLblHokenryoSeikyuGaku();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeHokenHokenSeikyugaku() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtMaeHokenHokenSeikyugaku();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoHokenHokenSeikyugaku() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtGoHokenHokenSeikyugaku();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeKohi1HokenSeikyugaku() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtMaeKohi1HokenSeikyugaku();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoKohi1HokenSeikyugaku() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtGoKohi1HokenSeikyugaku();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeKohi2HokenSeikyugaku() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtMaeKohi2HokenSeikyugaku();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoKohi2HokenSeikyugaku() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtGoKohi2HokenSeikyugaku();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeKohi3HokenSeikyugaku() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtMaeKohi3HokenSeikyugaku();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoKohi3HokenSeikyugaku() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtGoKohi3HokenSeikyugaku();
     }
 
     @JsonIgnore
@@ -1258,8 +1338,88 @@ public class KyufuJissekiKihonJouhouMainDiv extends Panel {
     }
 
     @JsonIgnore
+    public TextBoxNum getTxtMaeHokenRiyoshaFutangaku() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtMaeHokenRiyoshaFutangaku();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoHokenRiyoshaFutangaku() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtGoHokenRiyoshaFutangaku();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeKohi1RiyoshaFutangaku() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtMaeKohi1RiyoshaFutangaku();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoKohi1RiyoshaFutangaku() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtGoKohi1RiyoshaFutangaku();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeKohi2RiyoshaFutangaku() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtMaeKohi2RiyoshaFutangaku();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoKohi2RiyoshaFutangaku() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtGoKohi2RiyoshaFutangaku();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeKohi3RiyoshaFutangaku() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtMaeKohi3RiyoshaFutangaku();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoKohi3RiyoshaFutangaku() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtGoKohi3RiyoshaFutangaku();
+    }
+
+    @JsonIgnore
     public Label getLblKinkyujiShisetsuRyoyohiHokenSeikyubunGokei() {
         return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getLblKinkyujiShisetsuRyoyohiHokenSeikyubunGokei();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeHokenKinkyujiShisetsuRyoyohi() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtMaeHokenKinkyujiShisetsuRyoyohi();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoHokenKinkyujiShisetsuRyoyohi() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtGoHokenKinkyujiShisetsuRyoyohi();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeKohi1KinkyujiShisetsuRyoyohi() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtMaeKohi1KinkyujiShisetsuRyoyohi();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoKohi1KinkyujiShisetsuRyoyohi() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtGoKohi1KinkyujiShisetsuRyoyohi();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeKohi2KinkyujiShisetsuRyoyohi() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtMaeKohi2KinkyujiShisetsuRyoyohi();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoKohi2KinkyujiShisetsuRyoyohi() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtGoKohi2KinkyujiShisetsuRyoyohi();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeKohi3KinkyujiShisetsuRyoyohi() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtMaeKohi3KinkyujiShisetsuRyoyohi();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoKohi3KinkyujiShisetsuRyoyohi() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtGoKohi3KinkyujiShisetsuRyoyohi();
     }
 
     @JsonIgnore
@@ -1268,8 +1428,88 @@ public class KyufuJissekiKihonJouhouMainDiv extends Panel {
     }
 
     @JsonIgnore
+    public TextBoxNum getTxtMaeHokenTokuteiShinryohi() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtMaeHokenTokuteiShinryohi();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoHokenTokuteiShinryohi() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtGoHokenTokuteiShinryohi();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeKohi1TokuteiShinryohi() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtMaeKohi1TokuteiShinryohi();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoKohi1TokuteiShinryohi() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtGoKohi1TokuteiShinryohi();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeKohi2TokuteiShinryohi() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtMaeKohi2TokuteiShinryohi();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoKohi2TokuteiShinryohi() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtGoKohi2TokuteiShinryohi();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeKohi3TokuteiShinryohi() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtMaeKohi3TokuteiShinryohi();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoKohi3TokuteiShinryohi() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtGoKohi3TokuteiShinryohi();
+    }
+
+    @JsonIgnore
     public Label getLblTokuteiNyushoshaKaigoto() {
         return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getLblTokuteiNyushoshaKaigoto();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeHokenTokuteiNyushosha() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtMaeHokenTokuteiNyushosha();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoHokenTokuteiNyushosha() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtGoHokenTokuteiNyushosha();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeKohi1TokuteiNyushosha() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtMaeKohi1TokuteiNyushosha();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoKohi1TokuteiNyushosha() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtGoKohi1TokuteiNyushosha();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeKohi2TokuteiNyushosha() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtMaeKohi2TokuteiNyushosha();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoKohi2TokuteiNyushosha() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtGoKohi2TokuteiNyushosha();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeKohi3TokuteiNyushosha() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtMaeKohi3TokuteiNyushosha();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoKohi3TokuteiNyushosha() {
+        return this.getKyufuJissekiKihonGokeiPanel().getTblKihonGokei().getTxtGoKohi3TokuteiNyushosha();
     }
 
     @JsonIgnore

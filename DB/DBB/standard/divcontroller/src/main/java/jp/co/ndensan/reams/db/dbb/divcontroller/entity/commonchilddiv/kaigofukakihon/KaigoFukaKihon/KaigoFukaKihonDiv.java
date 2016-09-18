@@ -4,15 +4,15 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kaigofuka
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 
@@ -22,8 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  * @author 自動生成
  */
 public class KaigoFukaKihonDiv extends Panel implements IKaigoFukaKihonDiv {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -46,6 +45,8 @@ public class KaigoFukaKihonDiv extends Panel implements IKaigoFukaKihonDiv {
     private TextBox txtSoshitsuJiyu;
     @JsonProperty("btnHihoRireki")
     private ButtonDialog btnHihoRireki;
+    @JsonProperty("mode")
+    private RString mode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -195,6 +196,24 @@ public class KaigoFukaKihonDiv extends Panel implements IKaigoFukaKihonDiv {
     @JsonProperty("btnHihoRireki")
     public void setBtnHihoRireki(ButtonDialog btnHihoRireki) {
         this.btnHihoRireki = btnHihoRireki;
+    }
+
+    /*
+     * getmode
+     * @return mode
+     */
+    @JsonProperty("mode")
+    public RString getMode() {
+        return mode;
+    }
+
+    /*
+     * setmode
+     * @param mode mode
+     */
+    @JsonProperty("mode")
+    public void setMode(RString mode) {
+        this.mode = mode;
     }
 
     // </editor-fold>

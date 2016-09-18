@@ -49,9 +49,13 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -258,7 +262,7 @@ public class SofuFileSakuseiProcess extends BatchKeyBreakBase<KogakuGassanKeisan
         headEntity.setレコード種別２(DataRecordShubetsu.ヘッダーレコード.getコード());
         headEntity.set連絡票整理番号(trimRString(entity.get高額合算支給額計算結果一時().getShikyuShinseishoSeiriNo()));
         headEntity.set保険制度コード(trimRString(entity.get高額合算支給額計算結果一時().getHokenSeidoCode()));
-        headEntity.set対象年度(trimRString((entity.get高額合算支給額計算結果一時().getTaishoNendo().toDateString())));
+        headEntity.set対象年度(trimYear((entity.get高額合算支給額計算結果一時().getTaishoNendo())));
         headEntity.set自己負担額証明書整理番号(trimRString(entity.get高額合算支給額計算結果一時().getJikoFutanSeiriNo()));
         RString 支給対象者氏名 = entity.get被保険者一時().getKanaMeisho();
         headEntity.set支給対象者氏名_カナ(
@@ -465,10 +469,16 @@ public class SofuFileSakuseiProcess extends BatchKeyBreakBase<KogakuGassanKeisan
     }
 
     private RString trimDate(FlexibleDate date) {
-        return date == null || date.isEmpty() ? RString.EMPTY : new RString(date.toString()).trim();
+        return date == null || date.isEmpty() ? RString.EMPTY
+                : date.wareki().eraType(EraType.NUMBER).firstYear(FirstYear.GAN_NEN).separator(Separator.NONE).toDateString();
     }
 
     private RString 囲み文字(RString str) {
         return 囲み文字.concat(str).concat(囲み文字);
+    }
+
+    private RString trimYear(FlexibleYear year) {
+        return year == null || year.isEmpty() ? RString.EMPTY
+                : year.wareki().eraType(EraType.NUMBER).firstYear(FirstYear.GAN_NEN).toDateString();
     }
 }

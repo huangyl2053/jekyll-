@@ -119,7 +119,8 @@ public class KokiKoreisha {
             }
             kokiKoreishaInfo.createBuilderForEdit().set個人区分コード(div.getMeisaiPanel().getDdlKojinKubunCode().getSelectedKey())
                     .set資格取得事由コード(div.getMeisaiPanel().getDdlShikakuShutokuJiyu().getSelectedKey())
-                    .set資格喪失事由コード(div.getMeisaiPanel().getDdlShikakuSoshitsuJiyu().getSelectedKey());
+                    .set資格喪失事由コード(div.getMeisaiPanel().getDdlShikakuSoshitsuJiyu().getSelectedKey())
+                    .set後期高齢保険者番号_市町村(div.getMeisaiPanel().getDdlHokenshaNo().getSelectedValue());
             if (div.getMeisaiPanel().getChkTorokuKubun().isAllSelected()) {
                 kokiKoreishaInfo.createBuilderForEdit().set登録区分(new RString("1"));
             } else {
@@ -159,7 +160,8 @@ public class KokiKoreisha {
             }
             後期高齢者情報.createBuilderForEdit().set個人区分コード(div.getMeisaiPanel().getDdlKojinKubunCode().getSelectedKey())
                     .set資格取得事由コード(div.getMeisaiPanel().getDdlShikakuShutokuJiyu().getSelectedKey())
-                    .set資格喪失事由コード(div.getMeisaiPanel().getDdlShikakuSoshitsuJiyu().getSelectedKey());
+                    .set資格喪失事由コード(div.getMeisaiPanel().getDdlShikakuSoshitsuJiyu().getSelectedKey())
+                    .set後期高齢保険者番号_市町村(div.getMeisaiPanel().getDdlHokenshaNo().getSelectedValue());
             if (div.getMeisaiPanel().getChkTorokuKubun().isAllSelected()) {
                 後期高齢者情報.createBuilderForEdit().set登録区分(new RString("1"));
             } else {

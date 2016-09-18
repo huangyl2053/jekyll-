@@ -186,6 +186,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
         div.setHdnShinseishoKanriNo(申請書管理番号 != null ? 申請書管理番号.getColumnValue() : null);
         div.setHdnShikibetsuCode(識別コード != null ? 識別コード.getColumnValue() : null);
         div.setHdnHihokenshaNo(被保険者番号 != null ? 被保険者番号.getColumnValue() : null);
+        div.setHdnShichosonRenrakuJiko(RString.EMPTY);
 
     }
 

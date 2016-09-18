@@ -90,6 +90,7 @@ public class ShotokuDankaibetsuHihokenshaSuIchiran {
         parameter.setSettingnendo(div.getDdlChoteiNendo().getSelectedKey());
         parameter.setTreatmentday(div.getTxtHonsanteiShoriYMD().getValue());
         parameter.setRegiondivision(div.getRadShichoson().getSelectedValue());
+        //TODO 1203
         parameter.setDantaiCd(null);
         parameter.setQkijund(div.getTxtShikakuKijunYMD().getValue());
         parameter.setAdjustedkijund(div.getTxtChoteiKijunYMD().getValue());

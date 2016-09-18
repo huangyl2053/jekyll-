@@ -36,8 +36,6 @@ public class JyukyushaDaichoIdoCheckListParameter extends BatchParameterBase {
     private RString 出力対象;
     @BatchParameter(key = "出力順ID", name = "出力順ID")
     private Long 出力順ID;
-    @BatchParameter(key = "改頁出力順ID", name = "改頁出力順ID")
-    private Long 改頁出力順ID;
 
     /**
      *
@@ -45,7 +43,7 @@ public class JyukyushaDaichoIdoCheckListParameter extends BatchParameterBase {
      */
     public JyukyushaDaichoIdoCheckListProcessParameter toJyukyushaDaichoIdoCheckListProcessParameter() {
         return new JyukyushaDaichoIdoCheckListProcessParameter(今回抽出開始年月日, 今回抽出開始時分秒,
-                今回抽出終了年月日, 今回抽出終了時分秒, 出力対象, 出力順ID, 改頁出力順ID);
+                今回抽出終了年月日, 今回抽出終了時分秒, 出力対象, 出力順ID);
     }
 
 }

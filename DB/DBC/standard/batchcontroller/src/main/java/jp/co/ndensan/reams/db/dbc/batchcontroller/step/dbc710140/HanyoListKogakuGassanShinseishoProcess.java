@@ -214,7 +214,7 @@ public class HanyoListKogakuGassanShinseishoProcess extends BatchProcessBase<Han
     }
 
     private RString monthToRString(FlexibleYearMonth 日付) {
-        if (日付.isEmpty()) {
+        if (日付 == null || 日付.isEmpty()) {
             return RString.EMPTY;
         }
         return 日付.wareki().eraType(EraType.KANJI)
@@ -224,7 +224,7 @@ public class HanyoListKogakuGassanShinseishoProcess extends BatchProcessBase<Han
     }
 
     private RString dataToRString(FlexibleDate 日付) {
-        if (日付.isEmpty()) {
+        if (日付 == null || 日付.isEmpty()) {
             return RString.EMPTY;
         }
         return 日付.wareki().eraType(EraType.KANJI)
@@ -278,18 +278,24 @@ public class HanyoListKogakuGassanShinseishoProcess extends BatchProcessBase<Han
 
     private RStringBuilder get保険者名() {
         RStringBuilder builder = new RStringBuilder();
-        builder.append(保険者);
         if (parameter.get保険者コード() == null || parameter.get保険者コード().isEmpty()
                 || すべて.equals(parameter.get保険者コード())) {
             return null;
         }
-        builder.append(AssociationFinderFactory.createInstance().getAssociation(new LasdecCode(parameter.get保険者コード())));
+        builder.append(保険者);
+        Association 地方公共団体コード = AssociationFinderFactory.createInstance().getAssociation(
+                new LasdecCode(parameter.get保険者コード()));
+        builder.append(地方公共団体コード.get市町村名());
         return builder;
     }
 
     private RStringBuilder get申請年月日() {
         RStringBuilder builder = new RStringBuilder();
         builder.append(申請年月日);
+        if ((parameter.get申請年月日From() == null || parameter.get申請年月日From().isEmpty())
+                && (parameter.get申請年月日To() == null || parameter.get申請年月日To().isEmpty())) {
+            return null;
+        }
         if (parameter.get申請年月日From() != null && !parameter.get申請年月日From().isEmpty()
                 && parameter.get申請年月日To() != null && !parameter.get申請年月日To().isEmpty()) {
             return builder.append(dataToRString(parameter.get申請年月日From())).append(ITEM)
@@ -306,6 +312,10 @@ public class HanyoListKogakuGassanShinseishoProcess extends BatchProcessBase<Han
     private RStringBuilder get支給申請書整理番号() {
         RStringBuilder builder = new RStringBuilder();
         builder.append(支給申請書整理番号);
+        if ((parameter.get支給申請書整理番号From() == null || parameter.get支給申請書整理番号From().isEmpty())
+                && (parameter.get支給申請書整理番号To() == null || parameter.get支給申請書整理番号To().isEmpty())) {
+            return null;
+        }
         if (parameter.get支給申請書整理番号From() != null && !parameter.get支給申請書整理番号From().isEmpty()
                 && parameter.get支給申請書整理番号To() != null && !parameter.get支給申請書整理番号To().isEmpty()) {
             return builder.append(parameter.get支給申請書整理番号From()).append(ITEM)
@@ -321,6 +331,10 @@ public class HanyoListKogakuGassanShinseishoProcess extends BatchProcessBase<Han
     private RStringBuilder get送付年月() {
         RStringBuilder builder = new RStringBuilder();
         builder.append(送付年月);
+        if ((parameter.get送付年月From() == null || parameter.get送付年月From().isEmpty())
+                && (parameter.get送付年月To() == null || parameter.get送付年月To().isEmpty())) {
+            return null;
+        }
         if (parameter.get送付年月From() != null && !parameter.get送付年月From().isEmpty()
                 && parameter.get送付年月To() != null && !parameter.get送付年月To().isEmpty()) {
             return builder.append(monthToRString(parameter.get送付年月From())).append(ITEM)

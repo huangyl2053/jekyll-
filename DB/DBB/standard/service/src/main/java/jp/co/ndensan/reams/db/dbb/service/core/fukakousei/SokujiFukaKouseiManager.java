@@ -154,11 +154,9 @@ public class SokujiFukaKouseiManager {
         ChoteiKyotsu choteiKyotsu = 介護期別.getChoteiKyotsu(identifier);
         IShunoKamoku 科目 = shunoKamokuManager.get科目(介護期別.get徴収方法().equals(ChoshuHohoKibetsu.普通徴収.getコード())
                 ? ShunoKamokuShubetsu.介護保険料_普通徴収 : ShunoKamokuShubetsu.介護保険料_特別徴収);
-        get収納管理(収納ID, 介護賦課, 科目, 介護期別.get期());
-        get調定クラス(調定ID, 収納ID, choteiKyotsu);
-        // QA確認中
-//        収納Manager.save調定(get収納管理(収納ID, 介護賦課, 科目, 介護期別.get期()),
-//                get調定クラス(調定ID, 収納ID, choteiKyotsu));
+        ShunoKanri 収納管理 = get収納管理(収納ID, 介護賦課, 科目, 介護期別.get期());
+//        収納Manager.save収納管理(収納管理);
+        収納Manager.save調定(収納管理, get調定クラス(調定ID, 収納ID, choteiKyotsu));
         return 1 == 介護期別Dac.save(介護期別.createBuilderForEdit().set調定ID(new Decimal(調定ID)).build().toEntity());
     }
 

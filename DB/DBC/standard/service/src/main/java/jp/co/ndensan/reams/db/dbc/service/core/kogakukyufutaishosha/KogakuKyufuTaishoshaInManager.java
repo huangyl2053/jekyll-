@@ -23,13 +23,9 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufutaishosha.KogakuKyufuTai
 import jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufutaishosha.KogakuKyufuTaishoshaGroupCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufutaishosha.KogakuKyufuTaishoshaHeadCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kogakukyufutaishosha.KogakuKyufuTaishoshaMeisaiCsvEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3054KogakuKyufuTaishoshaMeisaiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufutaishosha.KyuufuTaishoshaHihokenshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufutaishosha.RirikiNoKanrenEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakukyufutaishosha.SaishoriFukaEntity;
-import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3054KogakuKyufuTaishoshaMeisaiDac;
-import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3055KogakuKyufuTaishoshaGokeiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakukyufutaishosha.IKogakuKyufuTaishoshaMapper;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuMapper;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kokuhorenkyoutsuu.IKokuhorenKyoutsuuTempTableMapper;
@@ -38,6 +34,10 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3054KogakuKyufuTaishoshaMeisaiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokeiEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT3054KogakuKyufuTaishoshaMeisaiDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT3055KogakuKyufuTaishoshaGokeiDac;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
@@ -174,7 +174,7 @@ public class KogakuKyufuTaishoshaInManager {
         for (KogakuKyufuTaishoshaCsvEntity csvEntity : csvlist) {
             KagoKetteiHokenshaInControlCsvEntity コントロールレコード = csvEntity.getControlCsvEntity();
             コントロールレコードのレコード件数の合計 = コントロールレコードのレコード件数の合計
-                    + Integer.valueOf(コントロールレコード.getCodeNum().toString());
+                                   + Integer.valueOf(コントロールレコード.getCodeNum().toString());
             if (FlexibleYearMonth.EMPTY.equals(処理対象年月)) {
                 処理対象年月 = new FlexibleYearMonth(コントロールレコード.getShoriYM());
             }

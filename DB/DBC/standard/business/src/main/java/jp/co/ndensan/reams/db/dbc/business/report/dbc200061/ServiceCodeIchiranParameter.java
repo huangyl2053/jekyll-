@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.dbc200061;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.servicecodeichiran.ServicecodeIchiranProcessParameter;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicecodeichiran.ServiceBunruiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicecodeichiran.ServicecodeIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicecodeichiran.TaniSuShikibetsuEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
@@ -27,5 +28,6 @@ public class ServiceCodeIchiranParameter {
     private ServicecodeIchiranEntity サービスコード一覧表;
     private ServicecodeIchiranProcessParameter バッチパラメータ;
     private RDateTime 作成日時;
+    private List<ServiceBunruiEntity> サービス分類略称;
 
 }

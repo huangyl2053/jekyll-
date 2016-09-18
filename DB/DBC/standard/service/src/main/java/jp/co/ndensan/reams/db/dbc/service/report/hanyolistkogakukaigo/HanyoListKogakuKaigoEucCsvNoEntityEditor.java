@@ -223,7 +223,12 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
                 ? entity.get受給申請事由().getColumnValue()
                 : RString.EMPTY);
         csvEntity.set受給申請日(get日付項目(entity.get受給申請年月日(), parameter));
-        csvEntity.set受給要介護度(YokaigoJotaiKubunSupport.toValue(システム日付, entity.get要介護認定状態区分コード().getColumnValue()).getName());
+        if (entity.get要介護認定状態区分コード() == null) {
+            csvEntity.set受給要介護度(RString.EMPTY);
+        } else {
+            csvEntity.set受給要介護度(YokaigoJotaiKubunSupport.toValue(システム日付, entity.get要介護認定状態区分コード().getColumnValue()).getName());
+        }
+        
         csvEntity.set受給認定開始日(get日付項目(entity.get認定有効期間開始日(), parameter));
         csvEntity.set受給認定終了日(get日付項目(entity.get認定有効期間終了日(), parameter));
         csvEntity.set受給認定日(get日付項目(entity.get受給認定日(), parameter));
@@ -708,9 +713,13 @@ public class HanyoListKogakuKaigoEucCsvNoEntityEditor {
             csvEntity.set国決定通知書ＮＯ(entity.get通知書番号());
             Decimal 国決定利用負担額 = entity.get利用者負担額();
             csvEntity.set国決定利用負担額(numToRString(国決定利用負担額));
-            csvEntity.set国決定支給区分(entity.get決定_支給区分コード().toString().equals("1")
-                    ? ShikyuKubun.支給.get名称()
-                    : RString.EMPTY);
+            if (entity.get決定_支給区分コード() == null) {
+                csvEntity.set国決定支給区分(RString.EMPTY);
+            } else {
+                csvEntity.set国決定支給区分(entity.get決定_支給区分コード().toString().equals("1")
+                        ? ShikyuKubun.支給.get名称()
+                        : RString.EMPTY);
+            }
             Decimal 国決定高額支給額 = entity.get決定_高額支給額();
             csvEntity.set国決定高額支給額(numToRString(国決定高額支給額));
             FlexibleYearMonth 国決定受取年月 = entity.get決定者受取年月();

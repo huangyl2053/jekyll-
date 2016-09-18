@@ -493,7 +493,6 @@ public class DBC110120_SaishinsaMoshitateshoOut extends BatchFlowBase<DBC110120_
             param.setFileNameList(Collections.EMPTY_LIST);
         } else {
             for (SharedFileDescriptor entry : 送付ファイルエントリ情報List) {
-                // TODO QA1449
                 list.add(entry.getSharedFileName().toRString());
             }
             param.setFileNameList(list);

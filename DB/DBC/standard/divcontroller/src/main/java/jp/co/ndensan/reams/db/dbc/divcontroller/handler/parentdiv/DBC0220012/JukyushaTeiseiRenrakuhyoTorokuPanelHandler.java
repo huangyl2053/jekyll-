@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JukyushaIdoRenrakuhyo;
 import jp.co.ndensan.reams.db.dbc.business.core.jukyushaidorenrakuhyotoroku.JukyushaIdoRenrakuhyoTorokuEntity;
 import jp.co.ndensan.reams.db.dbc.business.core.jukyushateiseirenrakuhyotorokufinder.JukyushaTeiseiRenrakuhyoTorokuFinderResult;
+import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_TeiseiKubunCode;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0220012.JukyushaTeiseiRenrakuhyoTorokuPanelDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.jukyushateiseirenrakuhyotorokufinder.JukyushaTeiseiRenrakuhyoTorokuFinder;
 import jp.co.ndensan.reams.db.dbc.service.core.jukyushateiseirenrakuhyotorokumanager.JukyushaTeiseiRenrakuhyoTorokuManager;
@@ -37,9 +38,10 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
 
     private final JukyushaTeiseiRenrakuhyoTorokuPanelDiv div;
     private static final RString CODE_ミ = new RString("0003");
+    private static final RString 半角アスタリスク = new RString("*");
     private static final RString ZERO = new RString("0");
     private static final RString ONE = new RString("1");
-    private static final RString 修正モード_ONE = new RString("修正モード1");
+    private static final Decimal NUM_ZERO = new Decimal(0);
     private static final RString 修正モード_TWO = new RString("修正モード2");
     private static final RString 修正モード_THREE = new RString("修正モード3");
     private static final RString 照会モード = new RString("照会モード");
@@ -91,10 +93,16 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
      * 受給者訂正連絡票保存です。
      *
      * @param 受給者訂正連絡票登録画面Div JukyushaIdoRenrakuhyo
+     * @param 訂正対象データ JukyushaIdoRenrakuhyo
+     * @param 初期化データ JukyushaIdoRenrakuhyo
      * @param 処理モード RString
      * @return int
      */
-    public int save受給者訂正連絡票(JukyushaIdoRenrakuhyo 受給者訂正連絡票登録画面Div, RString 処理モード) {
+    public int save受給者訂正連絡票(
+            JukyushaIdoRenrakuhyo 受給者訂正連絡票登録画面Div,
+            JukyushaIdoRenrakuhyo 訂正対象データ,
+            JukyushaIdoRenrakuhyo 初期化データ,
+            RString 処理モード) {
         if (受給者訂正連絡票登録画面Div != null) {
             if (div.getOutputJukyushaIdoRenrakuhyo().getChkJukyushaTeiseiRearakuhyoHakkou().isAllSelected()) {
                 受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
@@ -103,20 +111,26 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
                 受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
                         createBuilderForEdit().set訂正連絡票フラグ(false).build();
             }
-            if (処理モード.equals(修正モード_ONE)) {
-                受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.added();
-            } else if (処理モード.equals(修正モード_TWO)) {
-                //TODO QA1429
-                受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.added();
-            } else if (処理モード.equals(修正モード_THREE)) {
-                //TODO QA1429
-                受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.added();
-            } else if (処理モード.equals(照会モード)) {
-                受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.createBuilderForEdit().
-                        set送付年月(new FlexibleYearMonth(RDate.getNowDate().toDateString())).build();
+            if (処理モード.equals(修正モード_TWO)) {
+                RString 訂正区分コード = JukyushaIF_TeiseiKubunCode.修正.getコード();
                 受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.createBuilderForEdit().
                         set訂正年月日(FlexibleDate.getNowDate()).build();
-                受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.modified();
+                受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.createBuilderForEdit().
+                        set訂正区分コード(訂正区分コード).build();
+                受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.added();
+            } else if (処理モード.equals(修正モード_THREE)) {
+                受給者訂正連絡票登録画面Div = get登録用Entity(受給者訂正連絡票登録画面Div, 訂正対象データ);
+                受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.added();
+            } else if (処理モード.equals(照会モード)) {
+                RString 訂正区分コード = 受給者訂正連絡票登録画面Div.get訂正区分コード();
+                FlexibleDate 訂正年月日 = 受給者訂正連絡票登録画面Div.get訂正年月日();
+                初期化データ = 初期化データ.createBuilderForEdit().
+                        set送付年月(new FlexibleYearMonth(RDate.getNowDate().toDateString()))
+                        .set訂正区分コード(訂正区分コード)
+                        .set訂正年月日(訂正年月日).build();
+                初期化データ = 初期化データ.modified();
+                return JukyushaTeiseiRenrakuhyoTorokuManager.createInstance().
+                        insert受給者異動送付(初期化データ);
             }
             return JukyushaTeiseiRenrakuhyoTorokuManager.createInstance().
                     insert受給者異動送付(受給者訂正連絡票登録画面Div);
@@ -148,10 +162,10 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
         FlexibleDate 作成年月日 = new FlexibleDate(div.getOutputJukyushaIdoRenrakuhyo().
                 getJukyushaIdoRenrakuhyoHenkoPrintSetting().getIssueDate().toDateString());
         JukyushaTeiseiRenrakuhyoTorokuFinderResult 変更前の訂正情報 = JukyushaTeiseiRenrakuhyoTorokuFinder.
-                createInstance().editHenkomaeTeiseiJoho(被保険者番号, 履歴番号, 論理削除フラグ,
+                createInstance().editHenkomaeTeiseiJoho(被保険者番号, 履歴番号,
                         異動年月日, 作成年月日, 氏名_性別_生年月日を印字す);
         JukyushaTeiseiRenrakuhyoTorokuFinderResult 変更後の訂正情報 = JukyushaTeiseiRenrakuhyoTorokuFinder.
-                createInstance().editHenkoGoTeiseiJoho(被保険者番号, 履歴番号 + 1, 論理削除フラグ,
+                createInstance().editHenkoGoTeiseiJoho(被保険者番号, 履歴番号 + 1,
                         異動年月日, 作成年月日, 氏名_性別_生年月日を印字す);
         JukyushaTeiseiRenrakuhyoTorokuFinderResult 受給者訂正情報 = JukyushaTeiseiRenrakuhyoTorokuFinder.
                 createInstance().judgeHenkokasho(論理削除フラグ, 受給者子Div, 変更前の訂正情報, 変更後の訂正情報);
@@ -245,6 +259,272 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
         }
         JukyushaTeiseiRenrakuhyoPrintService printService = new JukyushaTeiseiRenrakuhyoPrintService();
         return printService.printSingle(受給者訂正連絡票Entity);
+    }
+
+    private JukyushaIdoRenrakuhyo get登録用Entity(
+            JukyushaIdoRenrakuhyo 受給者訂正連絡票登録画面Div,
+            JukyushaIdoRenrakuhyo 訂正対象データ) {
+        受給者訂正連絡票登録画面Div = get登録用Entity_one(受給者訂正連絡票登録画面Div, 訂正対象データ);
+        if (!RString.isNullOrEmpty(訂正対象データ.get特定入所者介護サービス区分コード())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get特定入所者介護サービス区分コード())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set特定入所者介護サービス区分コード(半角アスタリスク).build();
+        }
+        if (!RString.isNullOrEmpty(訂正対象データ.get住所地特例対象者区分コード())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get住所地特例対象者区分コード())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set住所地特例対象者区分コード(半角アスタリスク).build();
+        }
+        if (!RString.isNullOrEmpty(訂正対象データ.get施設所在保険者番号())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get施設所在保険者番号())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set施設所在保険者番号(半角アスタリスク).build();
+        }
+        if (!RString.isNullOrEmpty(訂正対象データ.get住所地特例適用開始日())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get住所地特例適用開始日())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set住所地特例適用開始日(半角アスタリスク).build();
+        }
+        if (!RString.isNullOrEmpty(訂正対象データ.get住所地特例適用終了日())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get住所地特例適用終了日())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set住所地特例適用終了日(半角アスタリスク).build();
+        }
+        if (!RString.isNullOrEmpty(訂正対象データ.get居宅費_新１_負担限度額())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get居宅費_新１_負担限度額())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set居宅費_新１_負担限度額(半角アスタリスク).build();
+        }
+        if (!RString.isNullOrEmpty(訂正対象データ.get居宅費_新２_負担限度額())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get居宅費_新２_負担限度額())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set居宅費_新２_負担限度額(半角アスタリスク).build();
+        }
+        if (!RString.isNullOrEmpty(訂正対象データ.get居宅費_新３_負担限度額())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get居宅費_新３_負担限度額())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set居宅費_新３_負担限度額(半角アスタリスク).build();
+        }
+        if (!RString.isNullOrEmpty(訂正対象データ.get利用者負担割合有効開始日())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get利用者負担割合有効開始日())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set利用者負担割合有効開始日(半角アスタリスク).build();
+        }
+        return 受給者訂正連絡票登録画面Div;
+    }
+
+    private JukyushaIdoRenrakuhyo get登録用Entity_one(
+            JukyushaIdoRenrakuhyo 受給者訂正連絡票登録画面Div,
+            JukyushaIdoRenrakuhyo 訂正対象データ) {
+        if (!RString.isNullOrEmpty(訂正対象データ.get償還払化開始年月日())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get償還払化開始年月日())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set償還払化開始年月日(半角アスタリスク).build();
+        }
+        if (!RString.isNullOrEmpty(訂正対象データ.get償還払化終了年月日())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get償還払化終了年月日())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set償還払化終了年月日(半角アスタリスク).build();
+        }
+        if (!RString.isNullOrEmpty(訂正対象データ.get給付率引下げ開始年月日())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get給付率引下げ開始年月日())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set給付率引下げ開始年月日(半角アスタリスク).build();
+        }
+        if (!RString.isNullOrEmpty(訂正対象データ.get償還払化終了年月日())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get償還払化終了年月日())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set償還払化終了年月日(半角アスタリスク).build();
+        }
+        if (!RString.isNullOrEmpty(訂正対象データ.get利用者負担区分コード())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get利用者負担区分コード())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set利用者負担区分コード(半角アスタリスク).build();
+        }
+        if (訂正対象データ.get給付率() != null && 受給者訂正連絡票登録画面Div.get給付率() == null) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set給付率(NUM_ZERO).build();
+        }
+        if (!RString.isNullOrEmpty(訂正対象データ.get適用開始年月日())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get適用開始年月日())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set適用開始年月日(半角アスタリスク).build();
+        }
+        if (!RString.isNullOrEmpty(訂正対象データ.get適用終了年月日())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get適用終了年月日())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set適用終了年月日(半角アスタリスク).build();
+        }
+        if (!RString.isNullOrEmpty(訂正対象データ.get標準負担区分コード())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get標準負担区分コード())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set標準負担区分コード(半角アスタリスク).build();
+        }
+        return get登録用Entity_two(受給者訂正連絡票登録画面Div, 訂正対象データ);
+    }
+
+    private JukyushaIdoRenrakuhyo get登録用Entity_two(
+            JukyushaIdoRenrakuhyo 受給者訂正連絡票登録画面Div,
+            JukyushaIdoRenrakuhyo 訂正対象データ) {
+        if (!RString.isNullOrEmpty(訂正対象データ.get訪問通所サービス上限管理適用期間終了年月日())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get訪問通所サービス上限管理適用期間終了年月日())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set訪問通所サービス上限管理適用期間終了年月日(半角アスタリスク).build();
+        }
+        if (!RString.isNullOrEmpty(訂正対象データ.get認定有効期間終了年月日())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get認定有効期間終了年月日())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set認定有効期間終了年月日(半角アスタリスク).build();
+        }
+        if (!RString.isNullOrEmpty(訂正対象データ.get居宅サービス計画作成区分コード())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get居宅サービス計画作成区分コード())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set居宅サービス計画作成区分コード(半角アスタリスク).build();
+        }
+        if (!RString.isNullOrEmpty(訂正対象データ.get居宅介護支援事業所番号())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get居宅介護支援事業所番号())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set居宅介護支援事業所番号(半角アスタリスク).build();
+        }
+        if (!RString.isNullOrEmpty(訂正対象データ.get居宅サービス計画適用開始年月日())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get居宅サービス計画適用開始年月日())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set居宅サービス計画適用開始年月日(半角アスタリスク).build();
+        }
+        if (!RString.isNullOrEmpty(訂正対象データ.get居宅サービス計画適用終了年月日())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get居宅サービス計画適用終了年月日())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set居宅サービス計画適用終了年月日(半角アスタリスク).build();
+        }
+        if (訂正対象データ.get負担額() != null && 受給者訂正連絡票登録画面Div.get負担額() == null) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set負担額(NUM_ZERO).build();
+        }
+        if (!RString.isNullOrEmpty(訂正対象データ.get負担額適用開始年月日())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get負担額適用開始年月日())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set負担額適用開始年月日(半角アスタリスク).build();
+        }
+        if (!RString.isNullOrEmpty(訂正対象データ.get負担限度額適用終了年月日())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get負担限度額適用終了年月日())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set負担限度額適用終了年月日(半角アスタリスク).build();
+        }
+
+        return get登録用Entity_three(受給者訂正連絡票登録画面Div, 訂正対象データ);
+    }
+
+    private JukyushaIdoRenrakuhyo get登録用Entity_three(
+            JukyushaIdoRenrakuhyo 受給者訂正連絡票登録画面Div,
+            JukyushaIdoRenrakuhyo 訂正対象データ) {
+        if (!RString.isNullOrEmpty(訂正対象データ.is課税層の特例減額措置対象フラグ())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.is課税層の特例減額措置対象フラグ())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set課税層の特例減額措置対象フラグ(半角アスタリスク).build();
+        }
+        if (!RString.isNullOrEmpty(訂正対象データ.is課税層の特例減額措置対象フラグ())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.is課税層の特例減額措置対象フラグ())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set課税層の特例減額措置対象フラグ(半角アスタリスク).build();
+        }
+        if (!RString.isNullOrEmpty(訂正対象データ.get食費負担限度額())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get食費負担限度額())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set食費負担限度額(半角アスタリスク).build();
+        }
+        if (!RString.isNullOrEmpty(訂正対象データ.get居住費ユニット型個室負担限度額())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get居住費ユニット型個室負担限度額())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set居住費ユニット型個室負担限度額(半角アスタリスク).build();
+        }
+        if (!RString.isNullOrEmpty(訂正対象データ.get居住費ユニット型準個室負担限度額())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get居住費ユニット型準個室負担限度額())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set居住費ユニット型準個室負担限度額(半角アスタリスク).build();
+        }
+        if (!RString.isNullOrEmpty(訂正対象データ.get居住費従来型個室老健療養等負担限度額())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get居住費従来型個室老健療養等負担限度額())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set居住費従来型個室老健療養等負担限度額(半角アスタリスク).build();
+        }
+        if (!RString.isNullOrEmpty(訂正対象データ.get居住費従来型個室特養等負担限度額())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get居住費従来型個室特養等負担限度額())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set居住費従来型個室特養等負担限度額(半角アスタリスク).build();
+        }
+        if (!RString.isNullOrEmpty(訂正対象データ.get居住費多床室負担限度額())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get居住費多床室負担限度額())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set居住費多床室負担限度額(半角アスタリスク).build();
+        }
+        if (!RString.isNullOrEmpty(訂正対象データ.get負担限度額適用開始年月日())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get負担限度額適用開始年月日())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set負担限度額適用開始年月日(半角アスタリスク).build();
+        }
+        return get登録用Entity_four(受給者訂正連絡票登録画面Div, 訂正対象データ);
+    }
+
+    private JukyushaIdoRenrakuhyo get登録用Entity_four(
+            JukyushaIdoRenrakuhyo 受給者訂正連絡票登録画面Div,
+            JukyushaIdoRenrakuhyo 訂正対象データ) {
+        if (!RString.isNullOrEmpty(訂正対象データ.get負担額適用終了年月日())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get負担額適用終了年月日())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set負担額適用終了年月日(半角アスタリスク).build();
+        }
+        if (!RString.isNullOrEmpty(訂正対象データ.get軽減率())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get軽減率())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set軽減率(半角アスタリスク).build();
+        }
+        if (!RString.isNullOrEmpty(訂正対象データ.get軽減率適用開始年月日())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get軽減率適用開始年月日())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set軽減率適用開始年月日(半角アスタリスク).build();
+        }
+        if (!RString.isNullOrEmpty(訂正対象データ.get軽減率適用終了年月日())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get軽減率適用終了年月日())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set軽減率適用終了年月日(半角アスタリスク).build();
+        }
+        return get登録用Entity_five(受給者訂正連絡票登録画面Div, 訂正対象データ);
+    }
+
+    private JukyushaIdoRenrakuhyo get登録用Entity_five(
+            JukyushaIdoRenrakuhyo 受給者訂正連絡票登録画面Div,
+            JukyushaIdoRenrakuhyo 訂正対象データ) {
+        if (!RString.isNullOrEmpty(訂正対象データ.get後期高齢者医療保険者番号())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get後期高齢者医療保険者番号())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set後期高齢者医療保険者番号(半角アスタリスク).build();
+        }
+        if (!RString.isNullOrEmpty(訂正対象データ.get後期高齢者医療被保険者番号())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get後期高齢者医療被保険者番号())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set後期高齢者医療被保険者番号(半角アスタリスク).build();
+        }
+        if (!RString.isNullOrEmpty(訂正対象データ.get国民健康保険保険者番号())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get国民健康保険保険者番号())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set国民健康保険保険者番号(半角アスタリスク).build();
+        }
+        if (!RString.isNullOrEmpty(訂正対象データ.get国民健康保険個人番号())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get国民健康保険個人番号())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set国民健康保険個人番号(半角アスタリスク).build();
+        }
+        if (!RString.isNullOrEmpty(訂正対象データ.get国民健康保険被保険者証番号())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get国民健康保険被保険者証番号())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set国民健康保険被保険者証番号(半角アスタリスク).build();
+        }
+        if (!RString.isNullOrEmpty(訂正対象データ.get利用者負担割合有効終了日())
+                && RString.isNullOrEmpty(受給者訂正連絡票登録画面Div.get利用者負担割合有効終了日())) {
+            受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
+                    createBuilderForEdit().set利用者負担割合有効終了日(半角アスタリスク).build();
+        }
+        return 受給者訂正連絡票登録画面Div;
     }
 
     private void get受給者訂正連絡票Entity(
@@ -530,7 +810,8 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
                         変更後entity.get特定入所者認定申請中区分コード())
                 || is比較変更文字列(変更前entity.get特定入所者介護サービス区分コード(),
                         変更後entity.get特定入所者介護サービス区分コード())
-                || 変更前entity.is課税層の特例減額措置対象フラグ() != 変更後entity.is課税層の特例減額措置対象フラグ()
+                || is比較変更文字列(変更前entity.is課税層の特例減額措置対象フラグ(),
+                        変更後entity.is課税層の特例減額措置対象フラグ())
                 || is減額エリア(変更前entity, 変更後entity);
     }
 
@@ -547,7 +828,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
                 || is比較変更文字列(変更前entity.get居住費多床室負担限度額(), 変更後entity.get居住費多床室負担限度額())
                 || is比較変更文字列(変更前entity.get居住費ユニット型個室負担限度額(),
                         変更後entity.get居住費ユニット型個室負担限度額())
-                || is比較変更文字列(変更前entity.get居住費ユニット型個室負担限度額(),
+                || is比較変更文字列(変更前entity.get居住費ユニット型準個室負担限度額(),
                         変更後entity.get居住費ユニット型準個室負担限度額())
                 || is比較変更文字列(変更前entity.get居宅費_新１_負担限度額(),
                         変更後entity.get居宅費_新１_負担限度額())

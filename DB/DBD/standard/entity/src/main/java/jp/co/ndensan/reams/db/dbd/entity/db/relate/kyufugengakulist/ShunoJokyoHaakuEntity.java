@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist;
 
+import java.util.List;
 import jp.co.ndensan.reams.ca.cax.entity.db.basic.CaT1018TokusokuHakkoRirekiEntity;
 import jp.co.ndensan.reams.ca.cax.entity.db.relate.TotalShunyuRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
@@ -24,7 +25,7 @@ public class ShunoJokyoHaakuEntity {
     private DbT1001HihokenshaDaichoEntity hihokenshaDaichoEntity;
     private UrT0508SeikatsuHogoJukyushaEntity seikatsuHogoJukyushaEntity;
     private NinteiJohoEntity ninteiJohoEntity;
-    private ShunoJohoEntity shunoJohoEntity;
+    private List<ShunoJohoEntity> shunoJohoEntity;
     private UaFt200FindShikibetsuTaishoEntity findShikibetsuTaishoEntity;
     private TotalShunyuRelateEntity totalShunyuRelateEntity;
     private CaT1018TokusokuHakkoRirekiEntity tokusokuHakkoRirekiEntity;

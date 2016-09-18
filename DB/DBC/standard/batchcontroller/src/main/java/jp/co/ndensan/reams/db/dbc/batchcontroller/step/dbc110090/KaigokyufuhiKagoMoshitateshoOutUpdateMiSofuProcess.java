@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class KaigokyufuhiKagoMoshitateshoOutUpdateMiSofuProcess extends BatchProcessBase<DbT3059KagoMoshitateEntity> {
 
-    private static final RString TABLE_NAME = new RString("DbT3059KagoMoshitate");
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kaigokyufuhikagomoshitateshoout."
             + "IKaigokyufuhiKagoMoshitateshoOutMapper.updatetDB_未送付");
     @BatchWriter

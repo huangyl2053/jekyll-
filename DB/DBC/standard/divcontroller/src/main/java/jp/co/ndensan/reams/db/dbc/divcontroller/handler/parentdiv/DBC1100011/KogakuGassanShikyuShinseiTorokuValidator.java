@@ -111,4 +111,18 @@ public class KogakuGassanShikyuShinseiTorokuValidator {
                 .messages());
         return messages;
     }
+
+    /**
+     * 「申請情報を保存する」ボタン押下時のチェックです。
+     *
+     * @return エラーメッセージ
+     */
+    public IValidationMessages validate申請情報を保存する() {
+        IValidationMessages messages = ValidationMessagesFactory.createInstance();
+        messages.add(ValidateChain.validateStart(div)
+                .ifNot(KogakuGassanShikyuShinseiTorokuSpec.医療支給申請書整理番号入力チェック)
+                .thenAdd(KogakuGassanShikyuShinseiTorokuValidationMessage.医療支給申請書整理番号入力桁不足)
+                .messages());
+        return messages;
+    }
 }

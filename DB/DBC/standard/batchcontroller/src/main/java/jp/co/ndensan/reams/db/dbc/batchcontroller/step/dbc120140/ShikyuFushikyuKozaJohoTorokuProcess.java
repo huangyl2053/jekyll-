@@ -52,15 +52,10 @@ public class ShikyuFushikyuKozaJohoTorokuProcess extends BatchProcessBase<Shikyu
     }
 
     @Override
-    protected void beforeExecute() {
-
-    }
-
-    @Override
     protected void process(ShikyuFushikyuTsuchishoIchiranEntity entity) {
-        if (null != entity.get通知書データ() && null != entity.get一覧データ()) {
+        if (null != entity.get一覧データ()) {
             do口座情報登録(entity.get通知書データ(), entity.get一覧データ());
-        } else if (null != entity.get通知書データ()) {
+        } else {
             do通知書データのみ登録(entity.get通知書データ());
         }
 

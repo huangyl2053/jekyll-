@@ -12,7 +12,7 @@ import java.util.Set;
 import jp.co.ndensan.reams.db.dbc.business.report.gassanshikyutsuchishotorikomiichiran.GassanShikyuTsuchishoTorikomiIchiranOutputOrder;
 import jp.co.ndensan.reams.db.dbc.business.report.gassanshikyutsuchishotorikomiichiran.GassanShikyuTsuchishoTorikomiIchiranPageBreak;
 import jp.co.ndensan.reams.db.dbc.business.report.gassanshikyutsuchishotorikomiichiran.GassanShikyuTsuchishoTorikomiIchiranReport;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.jigyobunkogakugassanshikyukettei.ShiharaiHohoKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kokuhorenkyoutsuu.KokuhorenIchiranhyoMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kyufukanrihyoin.KyufukanrihyoDoIchiranhyoSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -88,8 +88,8 @@ public class ShikyuFushikyuDoIchiranhyoSakuseiProcess extends BatchProcessBase<S
     private RString 保険者番号 = RString.EMPTY;
     private RString 保険者名 = RString.EMPTY;
     private static final int INT_0 = 0;
-    private static final RString 支給 = new RString("0");
-    private static final RString 不支給 = new RString("1");
+    private static final RString 支給 = new RString("1");
+    private static final RString 不支給 = new RString("0");
     private static final RString 窓口払 = new RString("1");
     private static final RString 口座払 = new RString("2");
     private static final RString 名称_支給 = new RString("支給");
@@ -123,7 +123,8 @@ public class ShikyuFushikyuDoIchiranhyoSakuseiProcess extends BatchProcessBase<S
         personalDataList = new ArrayList<>();
         保険者番号 = DbBusinessConfig
                 .get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-        保険者名 = ConfigNameDBU.保険者情報_保険者番号.get名称();
+        保険者名 = DbBusinessConfig
+                .get(ConfigNameDBU.保険者情報_保険者名称, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
     }
 
     @Override

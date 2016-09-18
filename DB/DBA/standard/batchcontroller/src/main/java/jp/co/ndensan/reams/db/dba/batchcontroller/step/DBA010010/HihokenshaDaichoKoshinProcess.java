@@ -97,7 +97,10 @@ public class HihokenshaDaichoKoshinProcess extends BatchProcessBase<ShikakuIdoTa
         juminJotaiList.add(JuminJotai.転出者);
         key.set住民状態(juminJotaiList);
         IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey = key.build();
-        return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toAtenaMybatisParameter(shikibetsuTaishoPSMSearchKey));
+
+        FlexibleDate 年齢到達期間開始日 = 開始日.minusYear(AGE_65).plusDay(1);
+        FlexibleDate 年齢到達期間終了日 = 終了日.minusYear(AGE_65).plusDay(1);
+        return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toAtenaMybatisParameter(shikibetsuTaishoPSMSearchKey, 年齢到達期間開始日, 年齢到達期間終了日));
     }
 
     @Override

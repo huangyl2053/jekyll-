@@ -24,7 +24,6 @@ public final class JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranReport ex
     private final Association 地方公共団体;
     private final Association association;
     private final IOutputOrder iOutputOrder;
-    private final IOutputOrder breakIOutputOrder;
     private final int index;
 
     /**
@@ -34,7 +33,6 @@ public final class JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranReport ex
      * @param 地方公共団体 Association
      * @param association Association
      * @param iOutputOrder IOutputOrder
-     * @param breakIOutputOrder IOutputOrder
      * @param index int
      */
     public JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranReport(
@@ -42,13 +40,11 @@ public final class JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranReport ex
             Association 地方公共団体,
             Association association,
             IOutputOrder iOutputOrder,
-            IOutputOrder breakIOutputOrder,
             int index) {
         this.社福減免対象者情報 = 社福減免対象者情報;
         this.地方公共団体 = 地方公共団体;
         this.association = association;
         this.iOutputOrder = iOutputOrder;
-        this.breakIOutputOrder = breakIOutputOrder;
         this.index = index;
     }
 
@@ -56,7 +52,7 @@ public final class JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranReport ex
     public void writeBy(ReportSourceWriter<JigyoshoMukeShakaiFukushiHojinKeigenReportSource> writer) {
         IJigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranEditor editor
                 = new JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranEditor(
-                        社福減免対象者情報, 地方公共団体, association, iOutputOrder, breakIOutputOrder, index);
+                        社福減免対象者情報, 地方公共団体, association, iOutputOrder, index);
         IJigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranBuilder builder
                 = new JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranBuilder(editor);
         writer.writeLine(builder);

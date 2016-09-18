@@ -5,75 +5,75 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper">
-    
+
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT2002Fuka">
-     SELECT
-         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka" />
-     FROM
-         rgdb."DbT2002Fuka"
-     WHERE
-         rgdb."DbT2002Fuka"."isDeleted" = FALSE
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka" />
+        FROM
+        rgdb."DbT2002Fuka"
+        WHERE
+        rgdb."DbT2002Fuka"."isDeleted" = FALSE
     </sql>
 
     <sql id="allColumns_DbT2002Fuka">
-         "DbT2002Fuka"."choteiNendo" as "dbT2002Fuka_choteiNendo",
-         "DbT2002Fuka"."fukaNendo" as "dbT2002Fuka_fukaNendo",
-         "DbT2002Fuka"."tsuchishoNo" as "dbT2002Fuka_tsuchishoNo",
-         "DbT2002Fuka"."rirekiNo" as "dbT2002Fuka_rirekiNo",
-         "DbT2002Fuka"."insertDantaiCd" as "dbT2002Fuka_insertDantaiCd",
-         "DbT2002Fuka"."insertTimestamp" as "dbT2002Fuka_insertTimestamp",
-         "DbT2002Fuka"."insertReamsLoginId" as "dbT2002Fuka_insertReamsLoginId",
-         "DbT2002Fuka"."insertContextId" as "dbT2002Fuka_insertContextId",
-         "DbT2002Fuka"."isDeleted" as "dbT2002Fuka_isDeleted",
-         "DbT2002Fuka"."updateCount" as "dbT2002Fuka_updateCount",
-         "DbT2002Fuka"."lastUpdateTimestamp" as "dbT2002Fuka_lastUpdateTimestamp",
-         "DbT2002Fuka"."lastUpdateReamsLoginId" as "dbT2002Fuka_lastUpdateReamsLoginId",
-         "DbT2002Fuka"."hihokenshaNo" as "dbT2002Fuka_hihokenshaNo",
-         "DbT2002Fuka"."shikibetsuCode" as "dbT2002Fuka_shikibetsuCode",
-         "DbT2002Fuka"."setaiCode" as "dbT2002Fuka_setaiCode",
-         "DbT2002Fuka"."setaiInsu" as "dbT2002Fuka_setaiInsu",
-         "DbT2002Fuka"."shikakuShutokuYMD" as "dbT2002Fuka_shikakuShutokuYMD",
-         "DbT2002Fuka"."shikakuShutokuJiyu" as "dbT2002Fuka_shikakuShutokuJiyu",
-         "DbT2002Fuka"."shikakuSoshitsuYMD" as "dbT2002Fuka_shikakuSoshitsuYMD",
-         "DbT2002Fuka"."shikakuSoshitsuJiyu" as "dbT2002Fuka_shikakuSoshitsuJiyu",
-         "DbT2002Fuka"."seihofujoShurui" as "dbT2002Fuka_seihofujoShurui",
-         "DbT2002Fuka"."seihoKaishiYMD" as "dbT2002Fuka_seihoKaishiYMD",
-         "DbT2002Fuka"."seihoHaishiYMD" as "dbT2002Fuka_seihoHaishiYMD",
-         "DbT2002Fuka"."ronenKaishiYMD" as "dbT2002Fuka_ronenKaishiYMD",
-         "DbT2002Fuka"."ronenHaishiYMD" as "dbT2002Fuka_ronenHaishiYMD",
-         "DbT2002Fuka"."fukaYMD" as "dbT2002Fuka_fukaYMD",
-         "DbT2002Fuka"."kazeiKubun" as "dbT2002Fuka_kazeiKubun",
-         "DbT2002Fuka"."setaikazeiKubun" as "dbT2002Fuka_setaikazeiKubun",
-         "DbT2002Fuka"."gokeiShotokuGaku" as "dbT2002Fuka_gokeiShotokuGaku",
-         "DbT2002Fuka"."nenkinShunyuGaku" as "dbT2002Fuka_nenkinShunyuGaku",
-         "DbT2002Fuka"."hokenryoDankai" as "dbT2002Fuka_hokenryoDankai",
-         "DbT2002Fuka"."hokenryoDankai1" as "dbT2002Fuka_hokenryoDankai1",
-         "DbT2002Fuka"."nengakuHokenryo1" as "dbT2002Fuka_nengakuHokenryo1",
-         "DbT2002Fuka"."tsukiwariStartYM1" as "dbT2002Fuka_tsukiwariStartYM1",
-         "DbT2002Fuka"."tsukiwariEndYM1" as "dbT2002Fuka_tsukiwariEndYM1",
-         "DbT2002Fuka"."hokenryoDankai2" as "dbT2002Fuka_hokenryoDankai2",
-         "DbT2002Fuka"."nengakuHokenryo2" as "dbT2002Fuka_nengakuHokenryo2",
-         "DbT2002Fuka"."tsukiwariStartYM2" as "dbT2002Fuka_tsukiwariStartYM2",
-         "DbT2002Fuka"."tsukiwariEndYM2" as "dbT2002Fuka_tsukiwariEndYM2",
-         "DbT2002Fuka"."choteiNichiji" as "dbT2002Fuka_choteiNichiji",
-         "DbT2002Fuka"."choteiJiyu1" as "dbT2002Fuka_choteiJiyu1",
-         "DbT2002Fuka"."choteiJiyu2" as "dbT2002Fuka_choteiJiyu2",
-         "DbT2002Fuka"."choteiJiyu3" as "dbT2002Fuka_choteiJiyu3",
-         "DbT2002Fuka"."choteiJiyu4" as "dbT2002Fuka_choteiJiyu4",
-         "DbT2002Fuka"."koseiM" as "dbT2002Fuka_koseiM",
-         "DbT2002Fuka"."gemmenMaeHokenryo" as "dbT2002Fuka_gemmenMaeHokenryo",
-         "DbT2002Fuka"."gemmenGaku" as "dbT2002Fuka_gemmenGaku",
-         "DbT2002Fuka"."kakuteiHokenryo" as "dbT2002Fuka_kakuteiHokenryo",
-         "DbT2002Fuka"."hokenryoDankaiKarisanntei" as "dbT2002Fuka_hokenryoDankaiKarisanntei",
-         "DbT2002Fuka"."choshuHohoRirekiNo" as "dbT2002Fuka_choshuHohoRirekiNo",
-         "DbT2002Fuka"."idoKijunNichiji" as "dbT2002Fuka_idoKijunNichiji",
-         "DbT2002Fuka"."kozaKubun" as "dbT2002Fuka_kozaKubun",
-         "DbT2002Fuka"."kyokaisoKubun" as "dbT2002Fuka_kyokaisoKubun",
-         "DbT2002Fuka"."shokkenKubun" as "dbT2002Fuka_shokkenKubun",
-         "DbT2002Fuka"."fukaShichosonCode" as "dbT2002Fuka_fukaShichosonCode",
-         "DbT2002Fuka"."tkSaishutsuKampuGaku" as "dbT2002Fuka_tkSaishutsuKampuGaku",
-         "DbT2002Fuka"."fuSaishutsuKampuGaku" as "dbT2002Fuka_fuSaishutsuKampuGaku"
+        "DbT2002Fuka"."choteiNendo" as "dbT2002Fuka_choteiNendo",
+        "DbT2002Fuka"."fukaNendo" as "dbT2002Fuka_fukaNendo",
+        "DbT2002Fuka"."tsuchishoNo" as "dbT2002Fuka_tsuchishoNo",
+        "DbT2002Fuka"."rirekiNo" as "dbT2002Fuka_rirekiNo",
+        "DbT2002Fuka"."insertDantaiCd" as "dbT2002Fuka_insertDantaiCd",
+        "DbT2002Fuka"."insertTimestamp" as "dbT2002Fuka_insertTimestamp",
+        "DbT2002Fuka"."insertReamsLoginId" as "dbT2002Fuka_insertReamsLoginId",
+        "DbT2002Fuka"."insertContextId" as "dbT2002Fuka_insertContextId",
+        "DbT2002Fuka"."isDeleted" as "dbT2002Fuka_isDeleted",
+        "DbT2002Fuka"."updateCount" as "dbT2002Fuka_updateCount",
+        "DbT2002Fuka"."lastUpdateTimestamp" as "dbT2002Fuka_lastUpdateTimestamp",
+        "DbT2002Fuka"."lastUpdateReamsLoginId" as "dbT2002Fuka_lastUpdateReamsLoginId",
+        "DbT2002Fuka"."hihokenshaNo" as "dbT2002Fuka_hihokenshaNo",
+        "DbT2002Fuka"."shikibetsuCode" as "dbT2002Fuka_shikibetsuCode",
+        "DbT2002Fuka"."setaiCode" as "dbT2002Fuka_setaiCode",
+        "DbT2002Fuka"."setaiInsu" as "dbT2002Fuka_setaiInsu",
+        "DbT2002Fuka"."shikakuShutokuYMD" as "dbT2002Fuka_shikakuShutokuYMD",
+        "DbT2002Fuka"."shikakuShutokuJiyu" as "dbT2002Fuka_shikakuShutokuJiyu",
+        "DbT2002Fuka"."shikakuSoshitsuYMD" as "dbT2002Fuka_shikakuSoshitsuYMD",
+        "DbT2002Fuka"."shikakuSoshitsuJiyu" as "dbT2002Fuka_shikakuSoshitsuJiyu",
+        "DbT2002Fuka"."seihofujoShurui" as "dbT2002Fuka_seihofujoShurui",
+        "DbT2002Fuka"."seihoKaishiYMD" as "dbT2002Fuka_seihoKaishiYMD",
+        "DbT2002Fuka"."seihoHaishiYMD" as "dbT2002Fuka_seihoHaishiYMD",
+        "DbT2002Fuka"."ronenKaishiYMD" as "dbT2002Fuka_ronenKaishiYMD",
+        "DbT2002Fuka"."ronenHaishiYMD" as "dbT2002Fuka_ronenHaishiYMD",
+        "DbT2002Fuka"."fukaYMD" as "dbT2002Fuka_fukaYMD",
+        "DbT2002Fuka"."kazeiKubun" as "dbT2002Fuka_kazeiKubun",
+        "DbT2002Fuka"."setaikazeiKubun" as "dbT2002Fuka_setaikazeiKubun",
+        "DbT2002Fuka"."gokeiShotokuGaku" as "dbT2002Fuka_gokeiShotokuGaku",
+        "DbT2002Fuka"."nenkinShunyuGaku" as "dbT2002Fuka_nenkinShunyuGaku",
+        "DbT2002Fuka"."hokenryoDankai" as "dbT2002Fuka_hokenryoDankai",
+        "DbT2002Fuka"."hokenryoDankai1" as "dbT2002Fuka_hokenryoDankai1",
+        "DbT2002Fuka"."nengakuHokenryo1" as "dbT2002Fuka_nengakuHokenryo1",
+        "DbT2002Fuka"."tsukiwariStartYM1" as "dbT2002Fuka_tsukiwariStartYM1",
+        "DbT2002Fuka"."tsukiwariEndYM1" as "dbT2002Fuka_tsukiwariEndYM1",
+        "DbT2002Fuka"."hokenryoDankai2" as "dbT2002Fuka_hokenryoDankai2",
+        "DbT2002Fuka"."nengakuHokenryo2" as "dbT2002Fuka_nengakuHokenryo2",
+        "DbT2002Fuka"."tsukiwariStartYM2" as "dbT2002Fuka_tsukiwariStartYM2",
+        "DbT2002Fuka"."tsukiwariEndYM2" as "dbT2002Fuka_tsukiwariEndYM2",
+        "DbT2002Fuka"."choteiNichiji" as "dbT2002Fuka_choteiNichiji",
+        "DbT2002Fuka"."choteiJiyu1" as "dbT2002Fuka_choteiJiyu1",
+        "DbT2002Fuka"."choteiJiyu2" as "dbT2002Fuka_choteiJiyu2",
+        "DbT2002Fuka"."choteiJiyu3" as "dbT2002Fuka_choteiJiyu3",
+        "DbT2002Fuka"."choteiJiyu4" as "dbT2002Fuka_choteiJiyu4",
+        "DbT2002Fuka"."koseiM" as "dbT2002Fuka_koseiM",
+        "DbT2002Fuka"."gemmenMaeHokenryo" as "dbT2002Fuka_gemmenMaeHokenryo",
+        "DbT2002Fuka"."gemmenGaku" as "dbT2002Fuka_gemmenGaku",
+        "DbT2002Fuka"."kakuteiHokenryo" as "dbT2002Fuka_kakuteiHokenryo",
+        "DbT2002Fuka"."hokenryoDankaiKarisanntei" as "dbT2002Fuka_hokenryoDankaiKarisanntei",
+        "DbT2002Fuka"."choshuHohoRirekiNo" as "dbT2002Fuka_choshuHohoRirekiNo",
+        "DbT2002Fuka"."idoKijunNichiji" as "dbT2002Fuka_idoKijunNichiji",
+        "DbT2002Fuka"."kozaKubun" as "dbT2002Fuka_kozaKubun",
+        "DbT2002Fuka"."kyokaisoKubun" as "dbT2002Fuka_kyokaisoKubun",
+        "DbT2002Fuka"."shokkenKubun" as "dbT2002Fuka_shokkenKubun",
+        "DbT2002Fuka"."fukaShichosonCode" as "dbT2002Fuka_fukaShichosonCode",
+        "DbT2002Fuka"."tkSaishutsuKampuGaku" as "dbT2002Fuka_tkSaishutsuKampuGaku",
+        "DbT2002Fuka"."fuSaishutsuKampuGaku" as "dbT2002Fuka_fuSaishutsuKampuGaku"
     </sql>
 
 
@@ -144,5 +144,5 @@
         FROM
         rgdb."DbT2002Fuka"
     </select>
-       
+
 </mapper>

@@ -76,12 +76,32 @@ public enum HihokenshaKubunCode {
      * @return {@code code} に対応する被保険者区分コード
      */
     public static HihokenshaKubunCode toValue(RString code) {
+        HihokenshaKubunCode value = toValueOrNull(code);
+        if (value == null) {
+            throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("被保険者区分コード"));
+        }
+        return value;
+    }
 
+    private static HihokenshaKubunCode toValueOrNull(RString code) {
         for (HihokenshaKubunCode hihokenshaKubunCode : HihokenshaKubunCode.values()) {
             if (hihokenshaKubunCode.code.equals(code)) {
                 return hihokenshaKubunCode;
             }
         }
-        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("被保険者区分コード"));
+        return null;
+    }
+
+    /**
+     * 第1引数のコードから名称を取得して返却します。
+     * コードに対応する要素が無い場合は、第2引数の値を返します。
+     *
+     * @param code コード
+     * @param defaultValue コードに該当する要素が存在しなかった場合のデフォルト値
+     * @return コードに該当する要素の名称.もしくは、デフォルト値.
+     */
+    public static RString to名称OrDefault(RString code, RString defaultValue) {
+        HihokenshaKubunCode value = toValueOrNull(code);
+        return value == null ? defaultValue : value.get名称();
     }
 }

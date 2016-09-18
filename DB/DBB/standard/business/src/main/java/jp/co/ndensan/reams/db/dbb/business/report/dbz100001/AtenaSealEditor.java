@@ -56,6 +56,7 @@ public class AtenaSealEditor
     private static final int NUM_0 = 0;
     private static final RString EMPTY = RString.EMPTY;
     private final Class cls = DBZ100001AtenaSealSource.class;
+    private RString tmp0;
     private RString tmp1;
     private RString tmp2;
     private RString tmp3;
@@ -120,6 +121,8 @@ public class AtenaSealEditor
 
     private void editBody(DBZ100001AtenaSealSource source) {
         try {
+            this.method = this.cls.getMethod(getMethodName(0), RString.class);
+            this.method.invoke(source, this.tmp0);
             this.method = this.cls.getMethod(getMethodName(NUM_1), RString.class);
             this.method.invoke(source, this.tmp1);
             this.method = this.cls.getMethod(getMethodName(NUM_2), RString.class);
@@ -165,28 +168,47 @@ public class AtenaSealEditor
     }
 
     private String getMethodName(int index) {
-        return SET.concat(MethodName.getName(index)).concat(String.valueOf(getIndex2(index))).toString();
+        return SET.concat(MethodName.getName(index)).concat(getValueOfIndex(getIndex2(index))).toString();
     }
 
     private int getIndex2(int index) {
         if (index <= NUM_5) {
-            return this.posIndex;
+
+            return this.posIndex - 1;
         }
-        return this.posIndex * 2 - index % NUM_2;
+        return this.posIndex * NUM_2 - index % NUM_2;
+    }
+
+    private String getValueOfIndex(int index) {
+        if (index == NUM_0) {
+
+            return RString.EMPTY.toString();
+        }
+        return String.valueOf(index);
     }
 
     private static enum MethodName {
 
-        未定義(AtenaSealEditor.EMPTY, Integer.valueOf(0)), yubinNo(new RString("YubinNo"), Integer.valueOf(1)),
-        gyoseiku(new RString("Gyoseiku"), Integer.valueOf(2)), jushoText(new RString("JushoText"), Integer.valueOf(3)),
-        customerBarCode(new RString("CustomerBarCode"), Integer.valueOf(5)), katagakiSmall(new RString("KatagakiSmall"), Integer.valueOf(6)),
-        katagakiSmall1(new RString("KatagakiSmall"), Integer.valueOf(7)), dainoKubunMei(new RString("DainoKubunMei"), Integer.valueOf(4)),
-        shimeiSmall(new RString("ShimeiSmall"), Integer.valueOf(8)), shimeiSmall1(new RString("ShimeiSmall"), Integer.valueOf(9)),
+        未定義(AtenaSealEditor.EMPTY, Integer.valueOf(-1)),
+        shikibetsuCode(new RString("shikibetsuCode"), Integer.valueOf(0)),
+        yubinNo(new RString("YubinNo"), Integer.valueOf(1)),
+        gyoseiku(new RString("Gyoseiku"), Integer.valueOf(2)),
+        jushoText(new RString("JushoText"), Integer.valueOf(3)),
+        customerBarCode(new RString("CustomerBarCode"), Integer.valueOf(5)),
+        katagakiSmall(new RString("KatagakiSmall"), Integer.valueOf(6)),
+        katagakiSmall1(new RString("KatagakiSmall"), Integer.valueOf(7)),
+        dainoKubunMei(new RString("DainoKubunMei"), Integer.valueOf(4)),
+        shimeiSmall(new RString("ShimeiSmall"), Integer.valueOf(8)),
+        shimeiSmall1(new RString("ShimeiSmall"), Integer.valueOf(9)),
         samabunShimeiSmall(new RString("SamabunShimeiSmall"), Integer.valueOf(10)),
-        samabunShimeiSmall1(new RString("SamabunShimeiSmall"), Integer.valueOf(11)), kakkoLeft(new RString("KakkoLeft"), Integer.valueOf(12)),
-        kakkoLeft1(new RString("KakkoLeft"), Integer.valueOf(13)), meishoFuyo(new RString("MeishoFuyo"), Integer.valueOf(14)),
-        meishoFuyo1(new RString("MeishoFuyo"), Integer.valueOf(15)), samaBun(new RString("SamaBun"), Integer.valueOf(16)),
-        samaBun1(new RString("SamaBun"), Integer.valueOf(17)), kakkoRigh(new RString("KakkoRigh"), Integer.valueOf(18)),
+        samabunShimeiSmall1(new RString("SamabunShimeiSmall"), Integer.valueOf(11)),
+        kakkoLeft(new RString("KakkoLeft"), Integer.valueOf(12)),
+        kakkoLeft1(new RString("KakkoLeft"), Integer.valueOf(13)),
+        meishoFuyo(new RString("MeishoFuyo"), Integer.valueOf(14)),
+        meishoFuyo1(new RString("MeishoFuyo"), Integer.valueOf(15)),
+        samaBun(new RString("SamaBun"), Integer.valueOf(16)),
+        samaBun1(new RString("SamaBun"), Integer.valueOf(17)),
+        kakkoRigh(new RString("KakkoRigh"), Integer.valueOf(18)),
         kakkoRigh1(new RString("KakkoRigh"), Integer.valueOf(19));
 
         private final RString name;
@@ -219,6 +241,7 @@ public class AtenaSealEditor
     }
 
     private void setTemp(DBZ100001AtenaSealEntity entity) {
+        this.tmp0 = entity.get識別コード().value();
         this.tmp1 = entity.get郵便番号();
         this.tmp2 = entity.get行政区();
         this.tmp3 = entity.get住所TXT();

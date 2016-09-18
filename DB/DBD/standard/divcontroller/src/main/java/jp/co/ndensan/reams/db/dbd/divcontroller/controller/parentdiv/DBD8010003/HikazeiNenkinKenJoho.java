@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.ButtonSelectPattern;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -308,7 +309,8 @@ public class HikazeiNenkinKenJoho {
     private Message get新規モードMessage(HikazeiNenkinKenJohoDiv div, int 重複チェック) {
         if (重複チェック >= 1) {
             throw new ApplicationException(DbdErrorMessages.データ重複チェック
-                    .getMessage().replace(div.getTbTaishoNen().getValue().toString()));
+                    .getMessage().replace(div.getTbTaishoNen().getValue().getYear()
+                            .wareki().eraType(EraType.KANJI).toDateString().concat("年").toString()));
         }
         return UrQuestionMessages.保存の確認.getMessage();
     }
@@ -316,7 +318,8 @@ public class HikazeiNenkinKenJoho {
     private Message get修正モードMessage(HikazeiNenkinKenJohoDiv div, int 重複チェック, int pk変更) {
         if (重複チェック - pk変更 >= 1) {
             throw new ApplicationException(DbdErrorMessages.データ重複チェック
-                    .getMessage().replace(div.getTbTaishoNen().getValue().toString()));
+                    .getMessage().replace(div.getTbTaishoNen().getValue().getYear().wareki()
+                            .eraType(EraType.KANJI).toDateString().concat("年").toString()));
         }
         return UrQuestionMessages.保存の確認.getMessage();
     }

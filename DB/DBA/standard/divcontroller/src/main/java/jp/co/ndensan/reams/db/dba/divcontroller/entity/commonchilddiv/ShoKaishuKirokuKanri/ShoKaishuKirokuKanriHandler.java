@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishuKirokuKanri;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.service.core.shokofukaishujoho.ShoKofuKaishuJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -103,6 +105,7 @@ public class ShoKaishuKirokuKanriHandler {
                     dgJigyoshaItiran.setKaishuRiyu(jigyoshaInput.get回収理由());
                     dgKoufuKaishuList.add(dgJigyoshaItiran);
                 }
+                Collections.sort(dgKoufuKaishuList, new GridComparator());
                 div.getDgKoufuKaishu().setDataSource(dgKoufuKaishuList);
             }
             div.getPanelInput().setVisible(false);
@@ -153,12 +156,51 @@ public class ShoKaishuKirokuKanriHandler {
                     dgJigyoshaItiran.setKoufuTypeNo(jigyoshaInput.get交付証種類());
                     dgKoufuKaishuList.add(dgJigyoshaItiran);
                 }
+                Collections.sort(dgKoufuKaishuList, new GridComparator());
                 div.getDgKoufuKaishu().setDataSource(dgKoufuKaishuList);
             }
             div.getDgKoufuKaishu().getGridSetting().setIsShowSelectButtonColumn(false);
             div.getPanelInput().getBtnCancel().setDisabled(true);
             div.getPanelInput().getBtnConfirm().setDisabled(true);
+            
+            div.getPanelInput().setDisabled(true);
         }
+    }
+
+    public void initialize(RString 状態, HihokenshaNo 被保険者番号,
+            ArrayList<dgKoufuKaishu_Row> dataSource, Models<ShoKofuKaishuIdentifier, ShoKofuKaishu> 証交付回収情報Model) {
+        ViewStateHolder.put(ViewStateKeys.証交付回収情報_被保番号, 被保険者番号);
+        Models<ShoKofuKaishuIdentifier, ShoKofuKaishu> shoKofuKaishu = 証交付回収情報Model;
+        ViewStateHolder.put(ViewStateKeys.証交付回収情報, shoKofuKaishu);
+        div.getDgKoufuKaishu().setDataSource(dataSource);
+
+        if (状態_照会.equals(状態)) {
+
+            div.getPanelInput().setDisplayNone(false);
+            div.getDgKoufuKaishu().getGridSetting().getColumn(new RString("status")).setVisible(false);
+            div.getDgKoufuKaishu().getGridSetting().setIsShowSelectButtonColumn(true);
+            div.getDgKoufuKaishu().getGridSetting().setIsShowDeleteButtonColumn(false);
+            div.getDgKoufuKaishu().getGridSetting().setIsShowModifyButtonColumn(false);
+        }
+        if (状態_更新.equals(状態)) {
+
+            div.getPanelInput().setDisplayNone(true);
+            div.getDgKoufuKaishu().getGridSetting().getColumn(new RString("status")).setVisible(true);
+            div.getDgKoufuKaishu().getGridSetting().setIsShowSelectButtonColumn(false);
+            div.getDgKoufuKaishu().getGridSetting().setIsShowDeleteButtonColumn(true);
+            div.getDgKoufuKaishu().getGridSetting().setIsShowModifyButtonColumn(true);
+            div.getPanelInput().getBtnCancel().setDisabled(true);
+            div.getPanelInput().getBtnConfirm().setDisabled(true);
+        }
+    }
+
+    private class GridComparator implements Comparator<dgKoufuKaishu_Row> {
+
+        @Override
+        public int compare(dgKoufuKaishu_Row o1, dgKoufuKaishu_Row o2) {
+            return -1 * o1.getKoufuDate().getValue().compareTo(o2.getKoufuDate().getValue());
+        }
+
     }
 
     /**
@@ -195,22 +237,34 @@ public class ShoKaishuKirokuKanriHandler {
             ShoKofuKaishuBuilder builder = shoKofuKaishu.createBuilderForEdit();
 
             if (追加.equals(dgKoufuKaishu.getStatus())) {
-                builder.set交付年月日(new FlexibleDate(new RDate(dgKoufuKaishu.getKoufuDate().toString()).toDateString()));
-                builder.set有効期限(new FlexibleDate(new RDate(dgKoufuKaishu.getYukoKigen().toString()).toDateString()));
+                builder.set交付年月日(dgKoufuKaishu.getKoufuDate().getValue() != null
+                        ? new FlexibleDate(dgKoufuKaishu.getKoufuDate().getValue().toDateString())
+                        : FlexibleDate.EMPTY);
+                builder.set有効期限(dgKoufuKaishu.getYukoKigen().getValue() != null
+                        ? new FlexibleDate(dgKoufuKaishu.getYukoKigen().getValue().toDateString())
+                        : FlexibleDate.EMPTY);
                 builder.set交付事由(dgKoufuKaishu.getKoufuJiyuNo());
                 builder.set交付理由(dgKoufuKaishu.getKofuRiyu());
-                builder.set回収年月日(new FlexibleDate(new RDate(dgKoufuKaishu.getKaishuDate().toString()).toDateString()));
+                builder.set回収年月日(dgKoufuKaishu.getKaishuDate().getValue() != null
+                        ? new FlexibleDate(dgKoufuKaishu.getKaishuDate().getValue().toDateString())
+                        : FlexibleDate.EMPTY);
                 builder.set回収事由(dgKoufuKaishu.getKaishuJiyuNo());
                 builder.set回収理由(dgKoufuKaishu.getKaishuRiyu());
                 builder.set発行処理日時(YMDHMS.now());
                 ShoKofuKaishuJohoManager.createInstance().証交付回収情報の追加(builder.build());
             }
             if (更新.equals(dgKoufuKaishu.getStatus())) {
-                builder.set交付年月日(new FlexibleDate(new RDate(dgKoufuKaishu.getKoufuDate().toString()).toDateString()));
-                builder.set有効期限(new FlexibleDate(new RDate(dgKoufuKaishu.getYukoKigen().toString()).toDateString()));
+                builder.set交付年月日(dgKoufuKaishu.getKoufuDate().getValue() != null
+                        ? new FlexibleDate(dgKoufuKaishu.getKoufuDate().getValue().toDateString())
+                        : FlexibleDate.EMPTY);
+                builder.set有効期限(dgKoufuKaishu.getYukoKigen().getValue() != null
+                        ? new FlexibleDate(dgKoufuKaishu.getYukoKigen().getValue().toDateString())
+                        : FlexibleDate.EMPTY);
                 builder.set交付事由(dgKoufuKaishu.getKoufuJiyuNo());
                 builder.set交付理由(dgKoufuKaishu.getKofuRiyu());
-                builder.set回収年月日(new FlexibleDate(new RDate(dgKoufuKaishu.getKaishuDate().toString()).toDateString()));
+                builder.set回収年月日(dgKoufuKaishu.getKaishuDate().getValue() != null
+                        ? new FlexibleDate(dgKoufuKaishu.getKaishuDate().getValue().toDateString())
+                        : FlexibleDate.EMPTY);
                 builder.set回収事由(dgKoufuKaishu.getKaishuJiyuNo());
                 builder.set回収理由(dgKoufuKaishu.getKaishuRiyu());
                 builder.set発行処理日時(YMDHMS.now());
@@ -221,6 +275,10 @@ public class ShoKaishuKirokuKanriHandler {
                 ShoKofuKaishuJohoManager.createInstance().証交付回収情報の削除(builder.build());
             }
         }
+    }
+
+    public Models<ShoKofuKaishuIdentifier, ShoKofuKaishu> getSaveData() {
+        return ViewStateHolder.get(ViewStateKeys.証交付回収情報, Models.class);
     }
 
     /**
@@ -250,6 +308,8 @@ public class ShoKaishuKirokuKanriHandler {
         div.getPanelInput().getTxaKaishuRiyu().setValue(dgKoufuKaishuRow.getKaishuRiyu());
         div.getPanelInput().getBtnConfirm().setDisabled(false);
         div.getPanelInput().getBtnCancel().setDisabled(false);
+        
+        div.getPanelInput().setDisabled(false);
 
         if (状態_削除.equals(状態)) {
 

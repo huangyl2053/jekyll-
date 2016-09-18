@@ -36,7 +36,7 @@ public class TsuchishoJoho162 {
      */
     public ResponseData<TsuchishoJoho162Div> onLoad(TsuchishoJoho162Div div) {
         ChohyoBunruiKanri code = ChohyoBunruiKanriManager.createInstance().get帳票分類管理(SubGyomuCode.DBC介護給付,
-                ReportIdDBC.DBC200084.getReportId());
+                ReportIdDBC.DBC200070.getReportId());
         KokuhorenDataTorikomiViewStateClass parmater = ViewStateHolder.get(ViewStateHolderName.国保連取込情報,
                 KokuhorenDataTorikomiViewStateClass.class);
         div.getCcdKokurenJohoTorikomi().initialize(SubGyomuCode.DBC介護給付, code.get帳票分類ID(), parmater);

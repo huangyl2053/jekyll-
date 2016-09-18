@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -34,15 +33,15 @@ public class ShotokuDankaibetsuShunoritsuIchiranHandler {
 
     private final ShotokuDankaibetsuShunoritsuIchiranDiv div;
     private RDate 調定年度;
-    private RDate 当初年度;
     private RDate 基準日;
     private static final RString NUM_0 = new RString("0");
     private static final RString NUM_1 = new RString("1");
     private static final RString NUM_2 = new RString("2");
     private static final RString NUM_3 = new RString("3");
     private static final RString NUM_4 = new RString("4");
-    private static final RString NUM_9 = new RString("9");
-    private static final int NUM_13 = 13;
+    private static final int 定数_13 = 13;
+    private static final int 定数_1 = 1;
+    private static final int 定数_2 = 2;
     private static final RString KEY_0 = new RString("key0");
     private static final RString 年齢 = new RString("nenrei");
     private static final RString 生年月日 = new RString("umareYMD");
@@ -71,13 +70,13 @@ public class ShotokuDankaibetsuShunoritsuIchiranHandler {
     /**
      * 画面初期化のメソッドます。
      *
+     * @return RString
      */
-    public void onLoad() {
+    public RString onLoad() {
         基準日 = RDate.getNowDate();
         RString 日付関連_調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, 基準日, SubGyomuCode.DBB介護賦課);
         調定年度 = new RDate(日付関連_調定年度.toString());
         RString 日付関連_当初年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_当初年度, 基準日, SubGyomuCode.DBB介護賦課);
-        当初年度 = new RDate(日付関連_当初年度.toString());
         div.getTxtChoteiNendoRange().setMaxDateString(日付関連_調定年度);
         div.getTxtChoteiNendoRange().setMinDateString(日付関連_当初年度);
         div.getTxtFukaNendoRange().setMaxDateString(日付関連_調定年度);
@@ -88,61 +87,69 @@ public class ShotokuDankaibetsuShunoritsuIchiranHandler {
         div.getTxtFukaNendoRange().setToValue(調定年度);
         RYear システム日付の年 = 基準日.getYear();
         RString システム日付の月 = new RString(基準日.getMonthValue());
-        RYear 当初年度の年 = 当初年度.getYear();
+        RYear 調定年度の年 = new RYear(日付関連_調定年度);
+        RYear 当初年度の年 = new RYear(日付関連_当初年度);
         List<KeyValueDataSource> ddlChoteiKijunY = setdataSourceY(システム日付の年, 当初年度の年);
         div.getDdlChoteiKijunY().setDataSource(ddlChoteiKijunY);
         div.getDdlChoteiKijunY().setSelectedValue(システム日付の年.toDateString());
         List<KeyValueDataSource> ddlChoteiKijunM = setdataSourceM();
         div.getDdlChoteiKijunM().setDataSource(ddlChoteiKijunM);
         div.getDdlChoteiKijunM().setSelectedValue(システム日付の月);
-        List<KeyValueDataSource> ddlJukyuKijunY = setdataSourceY(システム日付の年, 当初年度の年);
+        List<KeyValueDataSource> ddlJukyuKijunY = setdataSourceY(調定年度の年, 当初年度の年);
         div.getDdlJukyuKijunY().setDataSource(ddlJukyuKijunY);
         List<KeyValueDataSource> ddlJukyuKijunM = setdataSourceM();
         div.getDdlJukyuKijunM().setDataSource(ddlJukyuKijunM);
         div.getDdlJukyuKijunM().setSelectedValue(システム日付の月);
         div.getRadChushutsuJoken().setSelectedKey(NUM_1);
-        onChange_radChushutsuJoken(調定年度);
+        RString 現在基準月 = onChange_radChushutsuJoken(日付関連_調定年度, 日付関連_当初年度, システム日付の月);
         年齢_生年月日の選択状態();
+        return 現在基準月;
     }
 
     /**
      * onChange_radChushutsuJokenのメソッドます。
      *
-     * @param 調定年度 RDate
+     * @param 日付関連_調定年度 RString
+     * @param 日付関連_当初年度 RString
+     * @param 未来基準月 RString
      * @return ResponseData ShotokuDankaibetsuShunoritsuIchiranDiv
      */
-    public ResponseData<ShotokuDankaibetsuShunoritsuIchiranDiv> onChange_radChushutsuJoken(RDate 調定年度) {
+    public RString onChange_radChushutsuJoken(RString 日付関連_調定年度, RString 日付関連_当初年度, RString 未来基準月) {
+        RString 現在基準月 = div.getDdlJukyuKijunM().getSelectedValue();
+        if (現在基準月 == null || 現在基準月.isEmpty()) {
+            現在基準月 = 未来基準月;
+        }
         if (div.getRadChushutsuJoken().getSelectedKey().equals(NUM_1)) {
             div.getDdlJukyuKijunY().setDisabled(true);
             div.getDdlJukyuKijunM().setDisabled(true);
             div.getDdlJukyuKijunY().getDataSource().clear();
             div.getDdlJukyuKijunM().getDataSource().clear();
             div.getDdlJukyuKijunM().setLabelRText(RString.EMPTY);
-            return ResponseData.of(div).respond();
+            return 現在基準月;
         }
-        RYear システム日付の年 = RDate.getNowDate().getYear();
-        RString 日付関連_当初年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_当初年度, 基準日, SubGyomuCode.DBB介護賦課);
-        RYear 当初年度の年 = new RDate(日付関連_当初年度.toString()).getYear();
+        RYear 調定年度の年 = new RYear(日付関連_調定年度);
+        RYear 当初年度の年 = new RYear(日付関連_当初年度);
         div.getDdlJukyuKijunY().setDisabled(false);
         div.getDdlJukyuKijunM().setDisabled(false);
-        List<KeyValueDataSource> ddlJukyuKijunY = setdataSourceY(システム日付の年, 当初年度の年);
+        List<KeyValueDataSource> ddlJukyuKijunY = setdataSourceY(調定年度の年, 当初年度の年);
         div.getDdlJukyuKijunY().setDataSource(ddlJukyuKijunY);
         List<KeyValueDataSource> ddlJukyuKijunM = setdataSourceM();
         div.getDdlJukyuKijunM().setDataSource(ddlJukyuKijunM);
-        div.getDdlJukyuKijunY().setSelectedValue(調定年度.getYear().toDateString());
+        div.getDdlJukyuKijunY().setSelectedValue(調定年度の年.toDateString());
+        div.getDdlJukyuKijunM().setSelectedValue(現在基準月);
         if (div.getRadChushutsuJoken().getSelectedKey().equals(NUM_2)) {
             div.getDdlJukyuKijunM().setLabelRText(月時点の認定者);
-            return ResponseData.of(div).respond();
+            return 現在基準月;
         }
         if (div.getRadChushutsuJoken().getSelectedKey().equals(NUM_3)) {
             div.getDdlJukyuKijunM().setLabelRText(月時点の受給者);
-            return ResponseData.of(div).respond();
+            return 現在基準月;
         }
         if (div.getRadChushutsuJoken().getSelectedKey().equals(NUM_4)) {
             div.getDdlJukyuKijunM().setLabelRText(月時点の認定者);
-            return ResponseData.of(div).respond();
+            return 現在基準月;
         }
-        return ResponseData.of(div).respond();
+        return 現在基準月;
     }
 
     /**
@@ -181,44 +188,40 @@ public class ShotokuDankaibetsuShunoritsuIchiranHandler {
         RString 日付関連_調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, 基準日, SubGyomuCode.DBB介護賦課);
         RString 調定基準年 = div.getDdlChoteiKijunY().getSelectedValue();
         RString 調定基準月 = div.getDdlChoteiKijunM().getSelectedValue();
-        RString 調定基準年月;
-        if (調定基準月.compareTo(NUM_9) <= 0) {
-            調定基準年月 = 調定基準年.concat(NUM_0).concat(調定基準月);
-        } else {
-            調定基準年月 = 調定基準年.concat(調定基準月);
-        }
+        RString 調定基準年月 = null;
         RString 基準年 = div.getDdlJukyuKijunY().getSelectedValue();
         RString 基準月 = div.getDdlJukyuKijunM().getSelectedValue();
-        RString 基準年月;
-        if (調定基準月.compareTo(NUM_9) <= 0) {
-            基準年月 = 基準年.concat(NUM_0).concat(基準月);
-        } else {
-            基準年月 = 基準年.concat(基準月);
-        }
+        RString 基準年月 = null;
         List<RString> 完納出力区分 = div.getChkKanno().getSelectedKeys();
         RDate 生年月日_開始 = div.getTxtBirthRange().getFromValue();
         RDate 生年月日_終了 = div.getTxtBirthRange().getToValue();
         Decimal 年齢_開始 = div.getTxtAgeRange().getFromValue();
         Decimal 年齢_終了 = div.getTxtAgeRange().getToValue();
         RDate 年齢基準日 = div.getTxtNenreiKijunYMD().getValue();
-        if (調定年度_開始 != null) {
-            parameter.set調定年度_開始(new FlexibleYear(調定年度_開始.getYear().toDateString()));
-        }
-        if (調定年度_終了 != null) {
-            parameter.set調定年度_終了(new FlexibleYear(調定年度_終了.getYear().toDateString()));
-        }
-        if (賦課年度_開始 != null) {
-            parameter.set賦課年度_開始(new FlexibleYear(賦課年度_開始.getYear().toDateString()));
-        }
-        if (賦課年度_終了 != null) {
-            parameter.set賦課年度_終了(new FlexibleYear(賦課年度_終了.getYear().toDateString()));
-        }
-        if (日付関連_調定年度 == null || 日付関連_調定年度.isEmpty()) {
+        parameter.set調定年度_開始(new FlexibleYear(調定年度_開始.getYear().toDateString()));
+        parameter.set調定年度_終了(new FlexibleYear(調定年度_終了.getYear().toDateString()));
+        parameter.set賦課年度_開始(new FlexibleYear(賦課年度_開始.getYear().toDateString()));
+        parameter.set賦課年度_終了(new FlexibleYear(賦課年度_終了.getYear().toDateString()));
+        if (!(日付関連_調定年度 == null || 日付関連_調定年度.isEmpty())) {
             parameter.set会計年度(new FlexibleYear(日付関連_調定年度));
+        }
+        if (!(調定基準月 == null || 調定基準月.isEmpty())) {
+            if (調定基準月.length() == 定数_1) {
+                調定基準年月 = 調定基準年.concat(NUM_0).concat(調定基準月);
+            }
+            if (調定基準月.length() == 定数_2) {
+                調定基準年月 = 調定基準年.concat(調定基準月);
+            }
         }
         parameter.set調定基準年月(new FlexibleYearMonth(調定基準年月));
         parameter.set抽出条件(div.getRadChushutsuJoken().getSelectedKey());
-        if (!基準年月.equals(NUM_0)) {
+        if (!(基準月.isNullOrEmpty())) {
+            if (基準月.length() == 定数_1) {
+                基準年月 = 基準年.concat(NUM_0).concat(基準月);
+            }
+            if (基準月.length() == 定数_2) {
+                基準年月 = 基準年.concat(基準月);
+            }
             parameter.set基準年月(new FlexibleYearMonth(基準年月));
         }
         if (div.getRadNenrei().getSelectedKey().equals(年齢)) {
@@ -267,7 +270,7 @@ public class ShotokuDankaibetsuShunoritsuIchiranHandler {
 
     private List<KeyValueDataSource> setdataSourceM() {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
-        for (int i = 1; i < NUM_13; i++) {
+        for (int i = 1; i < 定数_13; i++) {
             RString key = new RString(i);
             RString value = new RString(i);
             KeyValueDataSource dateSource = new KeyValueDataSource(key, value);
@@ -276,14 +279,14 @@ public class ShotokuDankaibetsuShunoritsuIchiranHandler {
         return dataSourceList;
     }
 
-    private List<KeyValueDataSource> setdataSourceY(RYear システム日付の年, RYear 当初年度の年) {
+    private List<KeyValueDataSource> setdataSourceY(RYear maxYear, RYear minYear) {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
-        while (当初年度の年.isBeforeOrEquals(システム日付の年)) {
-            RString key = システム日付の年.toDateString();
-            RString value = システム日付の年.toDateString();
+        while (minYear.isBeforeOrEquals(maxYear)) {
+            RString key = maxYear.toDateString();
+            RString value = maxYear.toDateString();
             KeyValueDataSource dateSource = new KeyValueDataSource(key, value);
             dataSourceList.add(dateSource);
-            システム日付の年 = システム日付の年.minusYear(1);
+            maxYear = maxYear.minusYear(1);
         }
         return dataSourceList;
     }

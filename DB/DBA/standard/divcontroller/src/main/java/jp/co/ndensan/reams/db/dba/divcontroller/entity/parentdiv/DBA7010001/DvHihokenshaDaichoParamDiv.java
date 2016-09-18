@@ -4,7 +4,6 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7010001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hanyolistatenaselect.HanyoListAtenaSelect.HanyoListAtenaSelectDiv;
@@ -22,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
  * @author 自動生成
  */
 public class DvHihokenshaDaichoParamDiv extends PanelBatchParameter {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -33,14 +32,14 @@ public class DvHihokenshaDaichoParamDiv extends PanelBatchParameter {
     private DvJikenFukugenHozonDiv DvJikenFukugenHozon;
     @JsonProperty("DvChushutsuJoken")
     private DvChushutsuJokenDiv DvChushutsuJoken;
+    @JsonProperty("AtenaChushutsuJoken")
+    private AtenaChushutsuJokenDiv AtenaChushutsuJoken;
     @JsonProperty("DvCsvHenshuHoho")
     private DvCsvHenshuHohoDiv DvCsvHenshuHoho;
-    @JsonProperty("ccdKogakuShutsuryokuKomoku")
-    private ChohyoShutsuryokuKomokuDiv ccdKogakuShutsuryokuKomoku;
     @JsonProperty("ccdKogakuShutsuryokujun")
     private ChohyoShutsuryokujunDiv ccdKogakuShutsuryokujun;
-    @JsonProperty("ccdHanyoListAtenaSelect")
-    private HanyoListAtenaSelectDiv ccdHanyoListAtenaSelect;
+    @JsonProperty("ccdKogakuShutsuryokuKomoku")
+    private ChohyoShutsuryokuKomokuDiv ccdKogakuShutsuryokuKomoku;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -85,6 +84,24 @@ public class DvHihokenshaDaichoParamDiv extends PanelBatchParameter {
     }
 
     /*
+     * getAtenaChushutsuJoken
+     * @return AtenaChushutsuJoken
+     */
+    @JsonProperty("AtenaChushutsuJoken")
+    public AtenaChushutsuJokenDiv getAtenaChushutsuJoken() {
+        return AtenaChushutsuJoken;
+    }
+
+    /*
+     * setAtenaChushutsuJoken
+     * @param AtenaChushutsuJoken AtenaChushutsuJoken
+     */
+    @JsonProperty("AtenaChushutsuJoken")
+    public void setAtenaChushutsuJoken(AtenaChushutsuJokenDiv AtenaChushutsuJoken) {
+        this.AtenaChushutsuJoken = AtenaChushutsuJoken;
+    }
+
+    /*
      * getDvCsvHenshuHoho
      * @return DvCsvHenshuHoho
      */
@@ -103,15 +120,6 @@ public class DvHihokenshaDaichoParamDiv extends PanelBatchParameter {
     }
 
     /*
-     * getccdKogakuShutsuryokuKomoku
-     * @return ccdKogakuShutsuryokuKomoku
-     */
-    @JsonProperty("ccdKogakuShutsuryokuKomoku")
-    public IChohyoShutsuryokuKomokuDiv getCcdKogakuShutsuryokuKomoku() {
-        return ccdKogakuShutsuryokuKomoku;
-    }
-
-    /*
      * getccdKogakuShutsuryokujun
      * @return ccdKogakuShutsuryokujun
      */
@@ -121,135 +129,115 @@ public class DvHihokenshaDaichoParamDiv extends PanelBatchParameter {
     }
 
     /*
-     * getccdHanyoListAtenaSelect
-     * @return ccdHanyoListAtenaSelect
+     * getccdKogakuShutsuryokuKomoku
+     * @return ccdKogakuShutsuryokuKomoku
      */
-    @JsonProperty("ccdHanyoListAtenaSelect")
-    public IHanyoListAtenaSelectDiv getCcdHanyoListAtenaSelect() {
-        return ccdHanyoListAtenaSelect;
+    @JsonProperty("ccdKogakuShutsuryokuKomoku")
+    public IChohyoShutsuryokuKomokuDiv getCcdKogakuShutsuryokuKomoku() {
+        return ccdKogakuShutsuryokuKomoku;
     }
 
     /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public ButtonBatchParameterSave getBtnKogakuParamSave() {
-        return this.getDvJikenFukugenHozon().getBtnKogakuParamSave();
+    public ButtonBatchParameterSave getBtnParamSave() {
+        return this.getDvJikenFukugenHozon().getBtnParamSave();
     }
 
     @JsonIgnore
-    public void  setBtnKogakuParamSave(ButtonBatchParameterSave btnKogakuParamSave) {
-        this.getDvJikenFukugenHozon().setBtnKogakuParamSave(btnKogakuParamSave);
+    public void  setBtnParamSave(ButtonBatchParameterSave btnParamSave) {
+        this.getDvJikenFukugenHozon().setBtnParamSave(btnParamSave);
     }
 
     @JsonIgnore
-    public ButtonBatchParameterRestore getBtnKogakuParamRestore() {
-        return this.getDvJikenFukugenHozon().getBtnKogakuParamRestore();
+    public ButtonBatchParameterRestore getBtnParamRestore() {
+        return this.getDvJikenFukugenHozon().getBtnParamRestore();
     }
 
     @JsonIgnore
-    public void  setBtnKogakuParamRestore(ButtonBatchParameterRestore btnKogakuParamRestore) {
-        this.getDvJikenFukugenHozon().setBtnKogakuParamRestore(btnKogakuParamRestore);
+    public void  setBtnParamRestore(ButtonBatchParameterRestore btnParamRestore) {
+        this.getDvJikenFukugenHozon().setBtnParamRestore(btnParamRestore);
     }
 
     @JsonIgnore
-    public DvChushutsuDiv getDvChushutsu() {
-        return this.getDvChushutsuJoken().getDvChushutsu();
+    public RadioButton getRadChushutsuChokkin() {
+        return this.getDvChushutsuJoken().getRadChushutsuChokkin();
     }
 
     @JsonIgnore
-    public void  setDvChushutsu(DvChushutsuDiv DvChushutsu) {
-        this.getDvChushutsuJoken().setDvChushutsu(DvChushutsu);
+    public void  setRadChushutsuChokkin(RadioButton radChushutsuChokkin) {
+        this.getDvChushutsuJoken().setRadChushutsuChokkin(radChushutsuChokkin);
     }
 
     @JsonIgnore
-    public RadioButton getRadChushutsu() {
-        return this.getDvChushutsuJoken().getDvChushutsu().getRadChushutsu();
+    public RadioButton getRadChushutsuKijunBi() {
+        return this.getDvChushutsuJoken().getRadChushutsuKijunBi();
     }
 
     @JsonIgnore
-    public void  setRadChushutsu(RadioButton radChushutsu) {
-        this.getDvChushutsuJoken().getDvChushutsu().setRadChushutsu(radChushutsu);
+    public void  setRadChushutsuKijunBi(RadioButton radChushutsuKijunBi) {
+        this.getDvChushutsuJoken().setRadChushutsuKijunBi(radChushutsuKijunBi);
     }
 
     @JsonIgnore
-    public DvChushutsuShosaiDiv getDvChushutsuShosai() {
-        return this.getDvChushutsuJoken().getDvChushutsuShosai();
+    public RadioButton getRadKijunbiDateKind() {
+        return this.getDvChushutsuJoken().getRadKijunbiDateKind();
     }
 
     @JsonIgnore
-    public void  setDvChushutsuShosai(DvChushutsuShosaiDiv DvChushutsuShosai) {
-        this.getDvChushutsuJoken().setDvChushutsuShosai(DvChushutsuShosai);
-    }
-
-    @JsonIgnore
-    public Label getLblKuhaku() {
-        return this.getDvChushutsuJoken().getDvChushutsuShosai().getLblKuhaku();
-    }
-
-    @JsonIgnore
-    public void  setLblKuhaku(Label lblKuhaku) {
-        this.getDvChushutsuJoken().getDvChushutsuShosai().setLblKuhaku(lblKuhaku);
-    }
-
-    @JsonIgnore
-    public RadioButton getRadKijunbiDate() {
-        return this.getDvChushutsuJoken().getDvChushutsuShosai().getRadKijunbiDate();
-    }
-
-    @JsonIgnore
-    public void  setRadKijunbiDate(RadioButton radKijunbiDate) {
-        this.getDvChushutsuJoken().getDvChushutsuShosai().setRadKijunbiDate(radKijunbiDate);
-    }
-
-    @JsonIgnore
-    public TextBoxDateRange getTxtIryokikan() {
-        return this.getDvChushutsuJoken().getDvChushutsuShosai().getTxtIryokikan();
-    }
-
-    @JsonIgnore
-    public void  setTxtIryokikan(TextBoxDateRange txtIryokikan) {
-        this.getDvChushutsuJoken().getDvChushutsuShosai().setTxtIryokikan(txtIryokikan);
+    public void  setRadKijunbiDateKind(RadioButton radKijunbiDateKind) {
+        this.getDvChushutsuJoken().setRadKijunbiDateKind(radKijunbiDateKind);
     }
 
     @JsonIgnore
     public TextBoxDate getTxtKijunDate() {
-        return this.getDvChushutsuJoken().getDvChushutsuShosai().getTxtKijunDate();
+        return this.getDvChushutsuJoken().getTxtKijunDate();
     }
 
     @JsonIgnore
     public void  setTxtKijunDate(TextBoxDate txtKijunDate) {
-        this.getDvChushutsuJoken().getDvChushutsuShosai().setTxtKijunDate(txtKijunDate);
+        this.getDvChushutsuJoken().setTxtKijunDate(txtKijunDate);
     }
 
     @JsonIgnore
     public CheckBoxList getChkKijunDateNozoku() {
-        return this.getDvChushutsuJoken().getDvChushutsuShosai().getChkKijunDateNozoku();
+        return this.getDvChushutsuJoken().getChkKijunDateNozoku();
     }
 
     @JsonIgnore
     public void  setChkKijunDateNozoku(CheckBoxList chkKijunDateNozoku) {
-        this.getDvChushutsuJoken().getDvChushutsuShosai().setChkKijunDateNozoku(chkKijunDateNozoku);
+        this.getDvChushutsuJoken().setChkKijunDateNozoku(chkKijunDateNozoku);
+    }
+
+    @JsonIgnore
+    public RadioButton getRadChushutsuHani() {
+        return this.getDvChushutsuJoken().getRadChushutsuHani();
+    }
+
+    @JsonIgnore
+    public void  setRadChushutsuHani(RadioButton radChushutsuHani) {
+        this.getDvChushutsuJoken().setRadChushutsuHani(radChushutsuHani);
     }
 
     @JsonIgnore
     public RadioButton getRadHani() {
-        return this.getDvChushutsuJoken().getDvChushutsuShosai().getRadHani();
+        return this.getDvChushutsuJoken().getRadHani();
     }
 
     @JsonIgnore
     public void  setRadHani(RadioButton radHani) {
-        this.getDvChushutsuJoken().getDvChushutsuShosai().setRadHani(radHani);
+        this.getDvChushutsuJoken().setRadHani(radHani);
     }
 
     @JsonIgnore
     public TextBoxDateRange getTxtChushutsuHani() {
-        return this.getDvChushutsuJoken().getDvChushutsuShosai().getTxtChushutsuHani();
+        return this.getDvChushutsuJoken().getTxtChushutsuHani();
     }
 
     @JsonIgnore
     public void  setTxtChushutsuHani(TextBoxDateRange txtChushutsuHani) {
-        this.getDvChushutsuJoken().getDvChushutsuShosai().setTxtChushutsuHani(txtChushutsuHani);
+        this.getDvChushutsuJoken().setTxtChushutsuHani(txtChushutsuHani);
     }
 
     @JsonIgnore
@@ -283,13 +271,13 @@ public class DvHihokenshaDaichoParamDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public RadioButton getRadChushutsuKijun() {
-        return this.getDvChushutsuJoken().getRadChushutsuKijun();
+    public RadioButton getRadShikakuJokyo() {
+        return this.getDvChushutsuJoken().getRadShikakuJokyo();
     }
 
     @JsonIgnore
-    public void  setRadChushutsuKijun(RadioButton radChushutsuKijun) {
-        this.getDvChushutsuJoken().setRadChushutsuKijun(radChushutsuKijun);
+    public void  setRadShikakuJokyo(RadioButton radShikakuJokyo) {
+        this.getDvChushutsuJoken().setRadShikakuJokyo(radShikakuJokyo);
     }
 
     @JsonIgnore
@@ -310,6 +298,11 @@ public class DvHihokenshaDaichoParamDiv extends PanelBatchParameter {
     @JsonIgnore
     public void  setChkSoshitsuJiyu(CheckBoxList chkSoshitsuJiyu) {
         this.getDvChushutsuJoken().setChkSoshitsuJiyu(chkSoshitsuJiyu);
+    }
+
+    @JsonIgnore
+    public IHanyoListAtenaSelectDiv getCcdHanyoListAtenaSelect() {
+        return this.getAtenaChushutsuJoken().getCcdHanyoListAtenaSelect();
     }
 
     @JsonIgnore

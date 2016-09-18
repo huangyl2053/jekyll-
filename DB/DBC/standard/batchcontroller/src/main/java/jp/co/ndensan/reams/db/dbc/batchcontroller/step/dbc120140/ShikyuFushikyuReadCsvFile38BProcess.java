@@ -88,10 +88,6 @@ public class ShikyuFushikyuReadCsvFile38BProcess extends BatchProcessBase<RStrin
     }
 
     @Override
-    protected void beforeExecute() {
-    }
-
-    @Override
     protected IBatchReader createReader() {
         return new BatchSimpleReader(parameter.get保存先パース());
     }

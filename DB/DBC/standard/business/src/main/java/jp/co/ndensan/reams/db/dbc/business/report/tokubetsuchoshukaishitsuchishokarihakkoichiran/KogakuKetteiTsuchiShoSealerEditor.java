@@ -125,11 +125,11 @@ public class KogakuKetteiTsuchiShoSealerEditor implements
         source.ketteiYMD = new RString(帳票情報.get決定年月日().toString());
         source.shiharaiGaku = new RString(帳票情報.get本人支払額().toString());
         source.shiharaiYoteiYMD = new RString(帳票情報.get支払予定日().toString());
-        source.taishoYM1 = new RString(帳票情報.get提供年月IDX1().toString());
+        source.taishoYM1 = 帳票情報.get提供年月IDX1().toDateString();
 
-        source.taishoYM2 = new RString(帳票情報.get提供年月IDX2().toString());
-        source.taishoYM3 = new RString(帳票情報.get提供年月IDX3().toString());
-        source.taishoYM4 = new RString(帳票情報.get提供年月IDX4().toString());
+        source.taishoYM2 = 帳票情報.get提供年月IDX2().toDateString();
+        source.taishoYM3 = 帳票情報.get提供年月IDX3().toDateString();
+        source.taishoYM4 = 帳票情報.get提供年月IDX4().toDateString();
 
         if (審査依頼.equals(帳票情報.get審査方法区分())) {
             source.shikyuGaku1 = new RString(帳票情報.get支給額IDX1().toString());

@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassan;
 
 import java.io.Serializable;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.DbWT1001HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3071KogakuGassanJikoFutanGakuMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangaku.DbWT37K1KogakuGassanJikoFutanGakuTempEntity;
@@ -23,5 +22,5 @@ public class SyuturyokuEntity implements Serializable {
 
     private DbWT37K1KogakuGassanJikoFutanGakuTempEntity 高額合算自己負担額一時Entity;
     private DbWT1001HihokenshaTempEntity 被保険者一時Entity;
-    private List<DbT3071KogakuGassanJikoFutanGakuMeisaiEntity> 高額合算自己負担額明細List;
+    private DbT3071KogakuGassanJikoFutanGakuMeisaiEntity 高額合算自己負担額明細;
 }

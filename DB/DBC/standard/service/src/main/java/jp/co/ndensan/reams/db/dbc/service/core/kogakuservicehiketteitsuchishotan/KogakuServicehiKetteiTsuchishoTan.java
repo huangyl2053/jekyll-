@@ -7,17 +7,16 @@ package jp.co.ndensan.reams.db.dbc.service.core.kogakuservicehiketteitsuchishota
 
 import java.util.List;
 import java.util.Map;
+import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbc.business.core.servicenokanribangourendou.JigyouKetteiTutisyoResult;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.jigyobunkogakugassanshikyukettei.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kogakukaigoservice.ShikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shinsahoho.ShinsaHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.servicenokanribangourendou.JigyouKetteiTutisyoParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3054KogakuKyufuTaishoshaMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicenokanribangourendou.JigyouKetteiTutisyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicenokanribangourendou.ServiceNoKanribangouRendouEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.servicenokanribangourendou.IServiceNoKanribangouRendou2Mapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
-import jp.co.ndensan.reams.db.dbx.business.util.DateConverter;
 import jp.co.ndensan.reams.db.dbx.definition.core.serviceshurui.ServiceCategoryShurui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
@@ -25,6 +24,8 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.editedatesaki.EditedAtesakiBuilder;
 import jp.co.ndensan.reams.db.dbz.business.report.util.EditedAtesaki;
+import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3054KogakuKyufuTaishoshaMeisaiEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7065ChohyoSeigyoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7065ChohyoSeigyoKyotsuDac;
@@ -64,7 +65,6 @@ import jp.co.ndensan.reams.uz.uza.lang.Width;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
-import static java.util.Objects.requireNonNull;
 
 /**
  * 高額サービス費支給決定通知書（単）のビジネスクラスです。
@@ -79,10 +79,9 @@ public class KogakuServicehiKetteiTsuchishoTan {
     private static final ReportId 帳票分類ID = new ReportId("DBC100007_KogakuKetteiTsuchiSho");
     private static final RString 取り消し線ない = new RString("0");
     private static final RString 取り消し線あり = new RString("1");
-    private static final RString 定値_未設定 = new RString("未設定");
+    private static final RString 定値_未設定 = RString.EMPTY;
     private static final RString 定値_0 = new RString("0");
     private static final RString 定値_1 = new RString("1");
-    private static final RString 定値_円 = new RString("円");
     private static final RString 全角のコンマ = new RString("，");
     private static final RString 定値_する = new RString("する");
     private static final RString 定値_しない = new RString("しない");
@@ -616,11 +615,15 @@ public class KogakuServicehiKetteiTsuchishoTan {
         if (高額介護サービス費支給情報.get支払期間開始年月日() != null
                 && !高額介護サービス費支給情報.get支払期間開始年月日().isEmpty()) {
             決定通知書Entity.set支払期間開始年月日(formatDate(高額介護サービス費支給情報.get支払期間開始年月日()).concat(定値_曲線));
-        } else if (高額介護サービス費支給情報.get支払期間終了年月日() != null
+        } else if ((高額介護サービス費支給情報.get支払期間開始年月日() == null
+                || 高額介護サービス費支給情報.get支払期間開始年月日().isEmpty())
+                && 高額介護サービス費支給情報.get支払期間終了年月日() != null
                 && !高額介護サービス費支給情報.get支払期間終了年月日().isEmpty()) {
             決定通知書Entity.set支払期間開始年月日(formatDate(高額介護サービス費支給情報.get支払期間終了年月日()));
         }
-        if (高額介護サービス費支給情報.get支払期間終了年月日() != null
+        if (高額介護サービス費支給情報.get支払期間開始年月日() != null
+                && !高額介護サービス費支給情報.get支払期間開始年月日().isEmpty()
+                && 高額介護サービス費支給情報.get支払期間終了年月日() != null
                 && !高額介護サービス費支給情報.get支払期間終了年月日().isEmpty()) {
             決定通知書Entity.set支払期間終了年月日(formatDate(高額介護サービス費支給情報.get支払期間終了年月日()));
         }
@@ -654,16 +657,15 @@ public class KogakuServicehiKetteiTsuchishoTan {
         } else if (定値_0.equals(マスクフラグ)) {
             口座 = iKozaManager.get口座(searchKey).isEmpty() ? null : iKozaManager.get口座(searchKey).get(0);
         }
+        決定通知書Entity.set種目ﾀｲﾄﾙ(定値_口座種別);
+        決定通知書Entity.set番号ﾀｲﾄﾙ(定値_口座番号);
         if (口座 != null) {
             決定通知書Entity.set金融機関名(口座.get金融機関() == null ? RString.EMPTY : 口座.get金融機関().get金融機関名称());
             決定通知書Entity.set金融機関支店名(口座.get支店() == null ? RString.EMPTY : 口座.get支店().get支店名称());
             if (口座.get金融機関コード() != null && RSTRING_9900.equals(口座.get金融機関コード().value().substring(1, NUM_4))) {
                 決定通知書Entity.set種目ﾀｲﾄﾙ(定値_店番);
-            } else {
-                決定通知書Entity.set種目ﾀｲﾄﾙ(定値_口座種別);
             }
             決定通知書Entity.set口座種別(口座.get預金種別() == null ? RString.EMPTY : 口座.get預金種別().get預金種別略称());
-            決定通知書Entity.set番号ﾀｲﾄﾙ(定値_口座番号);
             決定通知書Entity.set口座番号(口座.get口座番号());
             決定通知書Entity.set口座名義人(口座.get口座名義人() == null ? RString.EMPTY : 口座.get口座名義人().getColumnValue());
             ChohyoSeigyoHanyo 支払予定日印字有無 = load帳票制御汎用(帳票分類ID, new RString("支払予定日印字有無"));
@@ -758,10 +760,13 @@ public class KogakuServicehiKetteiTsuchishoTan {
     }
 
     private RString formatDecimal(Decimal decimal) {
-        return toDecimal(decimal).concat(定値_円);
+        return toDecimal(decimal);
     }
 
     private RString toDecimal(Decimal decimal) {
+        if (decimal == null) {
+            return RString.EMPTY;
+        }
         return DecimalFormatter.toコンマ区切りRString(decimal, 0);
     }
 

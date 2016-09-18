@@ -52,4 +52,11 @@ public interface IShikakuHenkoRirekiDiv extends ICommonChildDivBaseProperties {
      * @param mode モードキー
      */
     void setDisplayTypeBykey(RString mode);
+
+    /**
+     * グリッド上に、状態が「追加」となっているデータが存在するかをチェックします。
+     *
+     * @return 状態が「追加」になっているデータが存在する場合、{@code true}
+     */
+    boolean is追加済み();
 }

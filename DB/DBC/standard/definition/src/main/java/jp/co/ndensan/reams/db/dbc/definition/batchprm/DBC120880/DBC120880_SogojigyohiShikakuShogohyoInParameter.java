@@ -27,7 +27,7 @@ public class DBC120880_SogojigyohiShikakuShogohyoInParameter extends BatchParame
     @BatchParameter(key = KEY_SHORIYM, name = "処理年月")
     private FlexibleYearMonth shoriYM;
     @BatchParameter(key = KEY_SAISHORIKUBUN, name = "再処理区分")
-    private SaiShoriKubun saisyorikubun;
+    private SaiShoriKubun saishorikubun;
     @BatchParameter(key = KEY_SHUTSURYOKUJUNID, name = "出力順ID")
     private Long shutsuryokujunID;
 

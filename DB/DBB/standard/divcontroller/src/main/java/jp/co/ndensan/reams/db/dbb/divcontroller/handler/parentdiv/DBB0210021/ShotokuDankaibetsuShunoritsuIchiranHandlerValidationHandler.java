@@ -105,7 +105,7 @@ public class ShotokuDankaibetsuShunoritsuIchiranHandlerValidationHandler {
 
         年齢基準日必須項目(UrErrorMessages.必須, 年齢基準日必須項目チェック.toString()),
         基準年月必須項目(UrErrorMessages.必須, 基準年月必須項目チェック.toString()),
-        生年月日年齢必須項目(UrErrorMessages.未入力, 生年月日年齢必須項目チェック.toString());
+        生年月日年齢必須項目(UrErrorMessages.未指定, 生年月日年齢必須項目チェック.toString());
 
         private final Message message;
 

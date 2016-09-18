@@ -679,9 +679,21 @@ public enum ReportIdDBC {
      */
     DBC200040(new ReportId("DBC200040_GassanShikyuFushikyuKetteishaIchiran"), new RString("高額合算支給不支給決定通知書情報取込一覧表 ")),
     /**
+     * 帳票設計_DBCMN43002_高額介護サービス費支給（不支給）決定通知一覧表 ＩＤです。
+     */
+    DBC200020(new ReportId("DBC200020_KogakuShikyuFushikyuKetteiTsuchiHakkoIchiran"), new RString("高額介護サービス費支給（不支給）決定通知一覧表")),
+    /**
+     * 帳票設計_DBCMN43002_事業高額支給不支給決定通知一覧表 ＩＤです。
+     */
+    DBC200078(new ReportId("DBC200078_JigyoKogakuShikyuFushikyuKetteTsuchiIchiran"), new RString("事業高額支給不支給決定通知一覧表")),
+    /**
      * 自己負担証明書_2009年以降 帳票ＩＤです。
      */
-    DBC100051(new ReportId("DBC100051_JikoFutangakushomeishoFrom2009"), new RString("自己負担額証明書（介護）(平成２１年度以降用）"));
+    DBC100051(new ReportId("DBC100051_JikoFutangakushomeishoFrom2009"), new RString("自己負担額証明書（介護）(平成２１年度以降用）")),
+    /**
+     * 給付管理票（居宅・介護予防サービス・総合事業） 帳票ＩＤです。
+     */
+    DBC100035(new ReportId("DBC100035_KyufuKanrihyoKyotakuYoboSogoJigyoService"), new RString("給付管理票（居宅・介護予防サービス・総合事業）"));
     private final ReportId reportId;
 
     private final RString reportName;

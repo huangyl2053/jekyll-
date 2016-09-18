@@ -89,7 +89,7 @@ public class JigyouHoukokuTokeiProcess extends BatchProcessBase<IppanJokyoJigyou
         tokeiEntity.setTateNo(entity.getTateNo());
         tokeiEntity.setYokoNo(entity.getYokoNo());
         tokeiEntity.setTateKomokuCode(Code.EMPTY);
-        // QA-1624 DBに「処理日時」がありません
+        tokeiEntity.setShukeiKomokuMeisho(RString.EMPTY);
         tokeiEntity.setYokoKomokuCode(Code.EMPTY);
         tableWriter.insert(tokeiEntity);
     }

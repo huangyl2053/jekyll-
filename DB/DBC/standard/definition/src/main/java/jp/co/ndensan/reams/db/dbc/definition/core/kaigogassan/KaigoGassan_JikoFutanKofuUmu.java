@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 介護合算_自己負担額証明書交付申請の有無列挙型です
  *
- * @author DBC-2630-040 zhengshenlei
+ * @reamsid_L DBC-9999-022 zhengshenlei
  */
 public enum KaigoGassan_JikoFutanKofuUmu {
 

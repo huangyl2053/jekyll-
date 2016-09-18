@@ -5,10 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0410016;
 
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.kokuhorenkyoutsu.KokuhorenKyoutsuBatchParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410016.TsuchishoJoho121Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
 import jp.co.ndensan.reams.db.dbz.definition.core.viewstatename.ViewStateHolderName;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -38,12 +41,12 @@ public class TsuchishoJoho121 {
      * @param div TsuchishoJoho121Div
      * @return TsuchishoJoho121Div
      */
-    public ResponseData<TsuchishoJoho121Div> onClick_btnExcute(TsuchishoJoho121Div div) {
-
-        // TODO QA471 パラメータ作成ビジネスを呼び出して、バッチを起動する
-        div.getCcdKokurenJohoTorikomi().get再処理区分();
-        div.getCcdKokurenJohoTorikomi().get処理年月();
-        return ResponseData.of(div).respond();
+    public ResponseData<KokuhorenKyoutsuBatchParameter> onClick_btnExcute(TsuchishoJoho121Div div) {
+        KokuhorenKyoutsuBatchParameter parameter = new KokuhorenKyoutsuBatchParameter();
+        RDate date = div.getCcdKokurenJohoTorikomi().get処理年月();
+        FlexibleYearMonth 処理年月 = date == null ? FlexibleYearMonth.EMPTY : new FlexibleYearMonth(date.getYearMonth().toDateString());
+        parameter.setShoriYM(処理年月);
+        return ResponseData.of(parameter).respond();
     }
 
 }

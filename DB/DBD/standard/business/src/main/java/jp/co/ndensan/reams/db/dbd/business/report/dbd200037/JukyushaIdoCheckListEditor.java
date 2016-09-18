@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd200037;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5720001.LowerEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5720001.UpperEntity;
@@ -32,7 +34,7 @@ public class JukyushaIdoCheckListEditor implements IJukyushaIdoCheckListEditor {
     private final UpperEntity upperEntity;
     private final LowerEntity lowerEntity;
     private final IOutputOrder iOutputOrder;
-    private final IOutputOrder breakoutputOrder;
+    private static final int LISTINDEX_0 = 0;
     private static final int LISTINDEX_1 = 1;
     private static final int LISTINDEX_2 = 2;
     private static final int LISTINDEX_3 = 3;
@@ -45,14 +47,11 @@ public class JukyushaIdoCheckListEditor implements IJukyushaIdoCheckListEditor {
      * @param upperEntity {@link UpperEntity}
      * @param lowerEntity {@link LowerEntity}
      * @param iOutputOrder {@link IOutputOrder}
-     * @param breakoutputOrder {@link IOutputOrder}
      */
-    public JukyushaIdoCheckListEditor(UpperEntity upperEntity, LowerEntity lowerEntity,
-            IOutputOrder iOutputOrder, IOutputOrder breakoutputOrder) {
+    public JukyushaIdoCheckListEditor(UpperEntity upperEntity, LowerEntity lowerEntity, IOutputOrder iOutputOrder) {
         this.upperEntity = upperEntity;
         this.lowerEntity = lowerEntity;
         this.iOutputOrder = iOutputOrder;
-        this.breakoutputOrder = breakoutputOrder;
     }
 
     /**
@@ -88,7 +87,7 @@ public class JukyushaIdoCheckListEditor implements IJukyushaIdoCheckListEditor {
             source.listUpper_4 = upperEntity.getフリガナ() == null ? RString.EMPTY : upperEntity.getフリガナ().value();
             source.listUpper_5 = upperEntity.get生年月日() == null ? RString.EMPTY : new RString(upperEntity.get生年月日().toString());
             source.listUpper_6 = upperEntity.get異動区分();
-            source.listUpper_7 = upperEntity.get処理種別();
+            source.listUpper_7 = RString.EMPTY;
             source.listUpper_8 = upperEntity.get受給申請日() == null ? RString.EMPTY : new RString(upperEntity.get受給申請日().toString());
             source.listUpper_9 = upperEntity.get認定日() == null ? RString.EMPTY : new RString(upperEntity.get認定日().toString());
             source.listUpper_10 = upperEntity.get認定有効開始日() == null ? RString.EMPTY : new RString(upperEntity.get認定有効開始日().toString());
@@ -102,8 +101,6 @@ public class JukyushaIdoCheckListEditor implements IJukyushaIdoCheckListEditor {
     private void edit出力順改頁(JukyushaIdoCheckListReportSource source) {
         if (iOutputOrder != null) {
             setiOutputOrder(source);
-        }
-        if (breakoutputOrder != null) {
             setBreakIoutputOrder(source);
         }
     }
@@ -120,7 +117,7 @@ public class JukyushaIdoCheckListEditor implements IJukyushaIdoCheckListEditor {
             source.listLower_8 = lowerEntity.get認定有効終了日() == null ? RString.EMPTY : new RString(lowerEntity.get認定有効終了日().toString());
             source.listLower_9 = lowerEntity.get旧措置者();
             source.listLower_10 = lowerEntity.get処理内容();
-            source.listLower_11 = lowerEntity.get備考();
+            source.listLower_11 = RString.EMPTY;
 
         }
     }
@@ -159,24 +156,25 @@ public class JukyushaIdoCheckListEditor implements IJukyushaIdoCheckListEditor {
     }
 
     private void setBreakIoutputOrder(JukyushaIdoCheckListReportSource source) {
-
-        Map<Integer, ISetSortItem> 改頁Map = ChohyoUtil.get改頁項目Map(breakoutputOrder);
-        if (改頁Map.get(LISTINDEX_1) != null) {
-            source.kaipage1 = 改頁Map.get(LISTINDEX_1).get項目名();
+        int index = 0;
+        List<RString> 改頁list = new ArrayList<>();
+        List<ISetSortItem> list = iOutputOrder.get設定項目リスト();
+        if (list == null) {
+            list = new ArrayList<>();
         }
-        if (改頁Map.get(LISTINDEX_2) != null) {
-            source.kaipage2 = 改頁Map.get(LISTINDEX_2).get項目名();
+        for (int i = 0; i < LISTINDEX_5; i++) {
+            if (list.size() > i && list.get(i).is改頁項目()) {
+                改頁list.add(list.get(i).get項目名());
+                index++;
+            }
         }
-        if (改頁Map.get(LISTINDEX_3) != null) {
-            source.kaipage3 = 改頁Map.get(LISTINDEX_3).get項目名();
+        for (int i = index; i < LISTINDEX_5; i++) {
+            改頁list.add(RString.EMPTY);
         }
-        if (改頁Map.get(LISTINDEX_4) != null) {
-            source.kaipage4 = 改頁Map.get(LISTINDEX_4).get項目名();
-        }
-        if (改頁Map.get(LISTINDEX_5) != null) {
-            source.kaipage5 = 改頁Map.get(LISTINDEX_5).get項目名();
-        }
-
+        source.kaipage1 = 改頁list.get(LISTINDEX_0);
+        source.kaipage2 = 改頁list.get(LISTINDEX_1);
+        source.kaipage3 = 改頁list.get(LISTINDEX_2);
+        source.kaipage4 = 改頁list.get(LISTINDEX_3);
+        source.kaipage5 = 改頁list.get(LISTINDEX_4);
     }
-
 }

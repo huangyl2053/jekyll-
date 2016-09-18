@@ -14,12 +14,8 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuKyufuTaishoshaGokei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuKyufuTaishoshaMeisai;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakukyuufutaishoulist.JigyouKogakuKyuufuTaishouResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakukyuufutaishoulist.KogakuKyuufuTaishouListEntityResult;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3054KogakuKyufuTaishoshaMeisaiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokeiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity;
-import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3054KogakuKyufuTaishoshaMeisaiDac;
-import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3055KogakuKyufuTaishoshaGokeiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3108JigyoKogakuKyufuTaishoshaMeisaiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3109JigyoKogakuKyufuTaishoshaGokeiDac;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -29,6 +25,10 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntit
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7060KaigoJigyoshaDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7063KaigoJigyoshaShiteiServiceDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7130KaigoServiceShuruiDac;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3054KogakuKyufuTaishoshaMeisaiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokeiEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT3054KogakuKyufuTaishoshaMeisaiDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT3055KogakuKyufuTaishoshaGokeiDac;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -91,7 +91,7 @@ public class KogakuKyuufuTaishouList {
         List<DbT3055KogakuKyufuTaishoshaGokeiEntity> 給付対象者合計list
                 = 高額給付対象者合計Dac.selectAllByKey(被保険者番号, サービス提供年月);
         if ((給付対象者明細list == null || 給付対象者明細list.isEmpty())
-                && (給付対象者合計list == null || 給付対象者合計list.isEmpty())) {
+            && (給付対象者合計list == null || 給付対象者合計list.isEmpty())) {
             return new ArrayList<>();
         } else {
             for (DbT3054KogakuKyufuTaishoshaMeisaiEntity entity : 給付対象者明細list) {
@@ -128,7 +128,7 @@ public class KogakuKyuufuTaishouList {
                 = 事業高額給付対象者合計Dac.selectAllByKey(被保険者番号, サービス提供年月);
         JigyouKogakuKyuufuTaishouResult 高額給付対象一覧情報 = new JigyouKogakuKyuufuTaishouResult();
         if ((給付対象者明細list == null || 給付対象者明細list.isEmpty())
-                && (給付対象者合計list == null || 給付対象者合計list.isEmpty())) {
+            && (給付対象者合計list == null || 給付対象者合計list.isEmpty())) {
             return new ArrayList<>();
         } else {
             for (DbT3108JigyoKogakuKyufuTaishoshaMeisaiEntity entity : 給付対象者明細list) {

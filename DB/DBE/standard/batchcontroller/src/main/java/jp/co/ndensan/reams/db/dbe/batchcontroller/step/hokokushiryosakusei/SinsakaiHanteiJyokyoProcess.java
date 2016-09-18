@@ -39,7 +39,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHanteiJyokyoHeaderEntity> {
 
     private static final RString SELECT_HEADER = new RString("jp.co.ndensan.reams.db.dbe.persistence"
-            + ".db.mapper.relate.hokokushiryosakusei.IHokokuShiryoSakuSeiMapper.getSinsakaiHanteiJyokyoHeader");
+                                                             + ".db.mapper.relate.hokokushiryosakusei.IHokokuShiryoSakuSeiMapper.getSinsakaiHanteiJyokyoHeader");
     private static final RString 帳票タイトル = new RString("介護認定審査会判定状況表");
     private static final RString JIGYOJYOKYOHOKOKU = new RString("【事業状況報告出力区分】");
     private static final RString JISSIJYOKYOTOKEI = new RString("【実施状況統計出力区分】");
@@ -81,7 +81,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
     private static final RString 割合なし = new RString("0.0%");
     private static final int 割合 = 100;
     private static final RString パーセント = new RString("%");
-    private static final RString 全合議体 = new RString("全て合議体");
+    private static final RString 全合議体 = new RString("全合議体");
     private static final RString 全市町村コード = new RString("000000");
     private static final RString 全市町村 = new RString("全市町村");
     List<ShinsaHanteiJokyoItem> itemList;
@@ -215,7 +215,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
         条件 = new RStringBuilder();
         条件.append(TAISHOYM);
         条件.append(!paramter.isTaishoTsukiKubun() ? RString.EMPTY
-                : new RYearMonth(paramter.getTaishoNendoYM()).wareki().toDateString());
+                  : new RYearMonth(paramter.getTaishoNendoYM()).wareki().toDateString());
         出力条件.add(条件.toRString());
         条件 = new RStringBuilder();
         条件.append(KIJYUNYMD);
@@ -228,12 +228,12 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
         条件 = new RStringBuilder();
         条件.append(TAISHOGEPPIFROM);
         条件.append(paramter.isEmptyTaishoGeppiFrom() ? RString.EMPTY
-                : new RDate(paramter.getTaishoGeppiFrom().toString()).toDateString());
+                  : new RDate(paramter.getTaishoGeppiFrom().toString()).toDateString());
         出力条件.add(条件.toRString());
         条件 = new RStringBuilder();
         条件.append(TAISHOGEPPITO);
         条件.append(paramter.isEmptyTaishoGeppiTo() ? RString.EMPTY
-                : new RDate(paramter.getTaishoGeppiTo().toString()).toDateString());
+                  : new RDate(paramter.getTaishoGeppiTo().toString()).toDateString());
         出力条件.add(条件.toRString());
         条件 = new RStringBuilder();
         条件.append(SINSEIKUBUNSINSEITOKI);
@@ -257,14 +257,14 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
         int 非該当要介護4被保険者数 = get被保険者数(審査判定状況, コード_非該当, コード_要介護4);
         int 非該当要介護5被保険者数 = get被保険者数(審査判定状況, コード_非該当, コード_要介護5);
         int 非該当計 = 非該当非該当被保険者数 + 非該当要支援1被保険者数 + 非該当要支援2被保険者数 + 非該当要介護1被保険者数
-                + 非該当要介護2被保険者数 + 非該当要介護3被保険者数 + 非該当要介護4被保険者数 + 非該当要介護5被保険者数;
+                   + 非該当要介護2被保険者数 + 非該当要介護3被保険者数 + 非該当要介護4被保険者数 + 非該当要介護5被保険者数;
         ShinsaHanteiJokyoItem item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
                 paramter.isEmptyGogitaiNo() ? 全合議体 : paramter.getGogitaiName(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
-                RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村コード : paramter.getShichosonCode().value(),
+                to五桁(RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村コード : paramter.getHokensyaNo()),
                 RDate.getNowDate().toDateString(),
                 RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村 : paramter.getShichosonName(),
                 非該当,
@@ -298,6 +298,10 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
         return item;
     }
 
+    private static RString to五桁(RString rstr) {
+        return rstr.substringReturnAsPossible(0, 5);
+    }
+
     private ShinsaHanteiJokyoItem get一次判定要支援1(List<SinsakaiHanteiJyokyoEntity> 審査判定状況,
             SinsakaiHanteiJyokyoHeaderEntity current) {
         int 要支援1非該当被保険者数 = get被保険者数(審査判定状況, コード_要支援1, コード_非該当);
@@ -309,14 +313,14 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
         int 要支援1要介護4被保険者数 = get被保険者数(審査判定状況, コード_要支援1, コード_要介護4);
         int 要支援1要介護5被保険者数 = get被保険者数(審査判定状況, コード_要支援1, コード_要介護5);
         int 要支援1計 = 要支援1非該当被保険者数 + 要支援1要支援1被保険者数 + 要支援1要支援2被保険者数 + 要支援1要介護1被保険者数
-                + 要支援1要介護2被保険者数 + 要支援1要介護3被保険者数 + 要支援1要介護4被保険者数 + 要支援1要介護5被保険者数;
+                    + 要支援1要介護2被保険者数 + 要支援1要介護3被保険者数 + 要支援1要介護4被保険者数 + 要支援1要介護5被保険者数;
         ShinsaHanteiJokyoItem item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
                 paramter.isEmptyGogitaiNo() ? 全合議体 : paramter.getGogitaiName(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
-                RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村コード : paramter.getShichosonCode().value(),
+                to五桁(RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村コード : paramter.getHokensyaNo()),
                 RDate.getNowDate().toDateString(),
                 RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村 : paramter.getShichosonName(),
                 非該当,
@@ -361,14 +365,14 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
         int 要支援2要介護4被保険者数 = get被保険者数(審査判定状況, コード_要支援2, コード_要介護4);
         int 要支援2要介護5被保険者数 = get被保険者数(審査判定状況, コード_要支援2, コード_要介護5);
         int 要支援2計 = 要支援2非該当被保険者数 + 要支援2要支援1被保険者数 + 要支援2要支援2被保険者数 + 要支援2要介護1被保険者数
-                + 要支援2要介護2被保険者数 + 要支援2要介護3被保険者数 + 要支援2要介護4被保険者数 + 要支援2要介護5被保険者数;
+                    + 要支援2要介護2被保険者数 + 要支援2要介護3被保険者数 + 要支援2要介護4被保険者数 + 要支援2要介護5被保険者数;
         ShinsaHanteiJokyoItem item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
                 paramter.isEmptyGogitaiNo() ? 全合議体 : paramter.getGogitaiName(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
-                RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村コード : paramter.getShichosonCode().value(),
+                to五桁(RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村コード : paramter.getHokensyaNo()),
                 RDate.getNowDate().toDateString(),
                 RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村 : paramter.getShichosonName(),
                 非該当,
@@ -413,14 +417,14 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
         int 要介護1要介護4被保険者数 = get被保険者数(審査判定状況, コード_要介護1, コード_要介護4);
         int 要介護1要介護5被保険者数 = get被保険者数(審査判定状況, コード_要介護1, コード_要介護5);
         int 要介護1計 = 要介護1非該当被保険者数 + 要介護1要支援1被保険者数 + 要介護1要支援2被保険者数 + 要介護1要介護1被保険者数
-                + 要介護1要介護2被保険者数 + 要介護1要介護3被保険者数 + 要介護1要介護4被保険者数 + 要介護1要介護5被保険者数;
+                    + 要介護1要介護2被保険者数 + 要介護1要介護3被保険者数 + 要介護1要介護4被保険者数 + 要介護1要介護5被保険者数;
         ShinsaHanteiJokyoItem item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
                 paramter.isEmptyGogitaiNo() ? 全合議体 : paramter.getGogitaiName(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
-                RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村コード : paramter.getShichosonCode().value(),
+                to五桁(RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村コード : paramter.getHokensyaNo()),
                 RDate.getNowDate().toDateString(),
                 RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村 : paramter.getShichosonName(),
                 非該当,
@@ -465,14 +469,14 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
         int 要介護2要介護4被保険者数 = get被保険者数(審査判定状況, コード_要介護2, コード_要介護4);
         int 要介護2要介護5被保険者数 = get被保険者数(審査判定状況, コード_要介護2, コード_要介護5);
         int 要介護2計 = 要介護2非該当被保険者数 + 要介護2要支援1被保険者数 + 要介護2要支援2被保険者数 + 要介護2要介護1被保険者数
-                + 要介護2要介護2被保険者数 + 要介護2要介護3被保険者数 + 要介護2要介護4被保険者数 + 要介護2要介護5被保険者数;
+                    + 要介護2要介護2被保険者数 + 要介護2要介護3被保険者数 + 要介護2要介護4被保険者数 + 要介護2要介護5被保険者数;
         ShinsaHanteiJokyoItem item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
                 paramter.isEmptyGogitaiNo() ? 全合議体 : paramter.getGogitaiName(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
-                RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村コード : paramter.getShichosonCode().value(),
+                to五桁(RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村コード : paramter.getHokensyaNo()),
                 RDate.getNowDate().toDateString(),
                 RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村 : paramter.getShichosonName(),
                 非該当,
@@ -517,14 +521,14 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
         int 要介護3要介護4被保険者数 = get被保険者数(審査判定状況, コード_要介護3, コード_要介護4);
         int 要介護3要介護5被保険者数 = get被保険者数(審査判定状況, コード_要介護3, コード_要介護5);
         int 要介護3計 = 要介護3非該当被保険者数 + 要介護3要支援1被保険者数 + 要介護3要支援2被保険者数 + 要介護3要介護1被保険者数
-                + 要介護3要介護2被保険者数 + 要介護3要介護3被保険者数 + 要介護3要介護4被保険者数 + 要介護3要介護5被保険者数;
+                    + 要介護3要介護2被保険者数 + 要介護3要介護3被保険者数 + 要介護3要介護4被保険者数 + 要介護3要介護5被保険者数;
         ShinsaHanteiJokyoItem item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
                 paramter.isEmptyGogitaiNo() ? 全合議体 : paramter.getGogitaiName(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
-                RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村コード : paramter.getShichosonCode().value(),
+                to五桁(RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村コード : paramter.getHokensyaNo()),
                 RDate.getNowDate().toDateString(),
                 RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村 : paramter.getShichosonName(),
                 非該当,
@@ -549,7 +553,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
                 toRString(get被保険者数(審査判定状況, コード_要介護3, コード_再調査)),
                 toRString(要介護3計 - 要介護3要介護3被保険者数),
                 toRString(要介護3非該当被保険者数 + 要介護3要支援1被保険者数
-                        + 要介護3要支援2被保険者数 + 要介護3要介護1被保険者数 + 要介護3要介護2被保険者数),
+                          + 要介護3要支援2被保険者数 + 要介護3要介護1被保険者数 + 要介護3要介護2被保険者数),
                 toRString(要介護3要介護4被保険者数 + 要介護3要介護5被保険者数),
                 要介護3計 == 0 || 要介護3計 == 要介護3要介護3被保険者数 ? 割合なし : new RString(
                         FORMAT.format(new Decimal(要介護3計 - 要介護3要介護3被保険者数).divide(要介護3計).multiply(割合).roundHalfUpTo(1)) + パーセント),
@@ -570,14 +574,14 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
         int 要介護4要介護4被保険者数 = get被保険者数(審査判定状況, コード_要介護4, コード_要介護4);
         int 要介護4要介護5被保険者数 = get被保険者数(審査判定状況, コード_要介護4, コード_要介護5);
         int 要介護4計 = 要介護4非該当被保険者数 + 要介護4要支援1被保険者数 + 要介護4要支援2被保険者数 + 要介護4要介護1被保険者数
-                + 要介護4要介護2被保険者数 + 要介護4要介護3被保険者数 + 要介護4要介護4被保険者数 + 要介護4要介護5被保険者数;
+                    + 要介護4要介護2被保険者数 + 要介護4要介護3被保険者数 + 要介護4要介護4被保険者数 + 要介護4要介護5被保険者数;
         ShinsaHanteiJokyoItem item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
                 paramter.isEmptyGogitaiNo() ? 全合議体 : paramter.getGogitaiName(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
-                RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村コード : paramter.getShichosonCode().value(),
+                to五桁(RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村コード : paramter.getHokensyaNo()),
                 RDate.getNowDate().toDateString(),
                 RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村 : paramter.getShichosonName(),
                 非該当,
@@ -622,14 +626,14 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
         int 要介護5要介護4被保険者数 = get被保険者数(審査判定状況, コード_要介護5, コード_要介護4);
         int 要介護5要介護5被保険者数 = get被保険者数(審査判定状況, コード_要介護5, コード_要介護5);
         int 要介護5計 = 要介護5非該当被保険者数 + 要介護5要支援1被保険者数 + 要介護5要支援2被保険者数 + 要介護5要介護1被保険者数
-                + 要介護5要介護2被保険者数 + 要介護5要介護3被保険者数 + 要介護5要介護4被保険者数 + 要介護5要介護5被保険者数;
+                    + 要介護5要介護2被保険者数 + 要介護5要介護3被保険者数 + 要介護5要介護4被保険者数 + 要介護5要介護5被保険者数;
         ShinsaHanteiJokyoItem item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
                 paramter.isEmptyGogitaiNo() ? 全合議体 : paramter.getGogitaiName(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
-                RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村コード : paramter.getShichosonCode().value(),
+                to五桁(RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村コード : paramter.getHokensyaNo()),
                 RDate.getNowDate().toDateString(),
                 RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村 : paramter.getShichosonName(),
                 非該当,
@@ -673,64 +677,64 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
             ShinsaHanteiJokyoItem 一次判定要介護4,
             ShinsaHanteiJokyoItem 一次判定要介護5) {
         int 計非該当 = toInt(一次判定非該当.getListHantei_2()) + toInt(一次判定要支援1.getListHantei_2())
-                + toInt(一次判定要支援2.getListHantei_2()) + toInt(一次判定要介護1.getListHantei_2())
-                + toInt(一次判定要介護2.getListHantei_2()) + toInt(一次判定要介護3.getListHantei_2())
-                + toInt(一次判定要介護4.getListHantei_2()) + toInt(一次判定要介護5.getListHantei_2());
+                   + toInt(一次判定要支援2.getListHantei_2()) + toInt(一次判定要介護1.getListHantei_2())
+                   + toInt(一次判定要介護2.getListHantei_2()) + toInt(一次判定要介護3.getListHantei_2())
+                   + toInt(一次判定要介護4.getListHantei_2()) + toInt(一次判定要介護5.getListHantei_2());
         int 計要支援1 = toInt(一次判定非該当.getListHantei_3()) + toInt(一次判定要支援1.getListHantei_3())
-                + toInt(一次判定要支援2.getListHantei_3()) + toInt(一次判定要介護1.getListHantei_3())
-                + toInt(一次判定要介護2.getListHantei_3()) + toInt(一次判定要介護3.getListHantei_3())
-                + toInt(一次判定要介護4.getListHantei_3()) + toInt(一次判定要介護5.getListHantei_3());
+                    + toInt(一次判定要支援2.getListHantei_3()) + toInt(一次判定要介護1.getListHantei_3())
+                    + toInt(一次判定要介護2.getListHantei_3()) + toInt(一次判定要介護3.getListHantei_3())
+                    + toInt(一次判定要介護4.getListHantei_3()) + toInt(一次判定要介護5.getListHantei_3());
         int 計要支援2 = toInt(一次判定非該当.getListHantei_4()) + toInt(一次判定要支援1.getListHantei_4())
-                + toInt(一次判定要支援2.getListHantei_4()) + toInt(一次判定要介護1.getListHantei_4())
-                + toInt(一次判定要介護2.getListHantei_4()) + toInt(一次判定要介護3.getListHantei_4())
-                + toInt(一次判定要介護4.getListHantei_4()) + toInt(一次判定要介護5.getListHantei_4());
+                    + toInt(一次判定要支援2.getListHantei_4()) + toInt(一次判定要介護1.getListHantei_4())
+                    + toInt(一次判定要介護2.getListHantei_4()) + toInt(一次判定要介護3.getListHantei_4())
+                    + toInt(一次判定要介護4.getListHantei_4()) + toInt(一次判定要介護5.getListHantei_4());
         int 計要介護1 = toInt(一次判定非該当.getListHantei_5()) + toInt(一次判定要支援1.getListHantei_5())
-                + toInt(一次判定要支援2.getListHantei_5()) + toInt(一次判定要介護1.getListHantei_5())
-                + toInt(一次判定要介護2.getListHantei_5()) + toInt(一次判定要介護3.getListHantei_5())
-                + toInt(一次判定要介護4.getListHantei_5()) + toInt(一次判定要介護5.getListHantei_5());
+                    + toInt(一次判定要支援2.getListHantei_5()) + toInt(一次判定要介護1.getListHantei_5())
+                    + toInt(一次判定要介護2.getListHantei_5()) + toInt(一次判定要介護3.getListHantei_5())
+                    + toInt(一次判定要介護4.getListHantei_5()) + toInt(一次判定要介護5.getListHantei_5());
         int 計要介護2 = toInt(一次判定非該当.getListHantei_6()) + toInt(一次判定要支援1.getListHantei_6())
-                + toInt(一次判定要支援2.getListHantei_6()) + toInt(一次判定要介護1.getListHantei_6())
-                + toInt(一次判定要介護2.getListHantei_6()) + toInt(一次判定要介護3.getListHantei_6())
-                + toInt(一次判定要介護4.getListHantei_6()) + toInt(一次判定要介護5.getListHantei_6());
+                    + toInt(一次判定要支援2.getListHantei_6()) + toInt(一次判定要介護1.getListHantei_6())
+                    + toInt(一次判定要介護2.getListHantei_6()) + toInt(一次判定要介護3.getListHantei_6())
+                    + toInt(一次判定要介護4.getListHantei_6()) + toInt(一次判定要介護5.getListHantei_6());
         int 計要介護3 = toInt(一次判定非該当.getListHantei_7()) + toInt(一次判定要支援1.getListHantei_7())
-                + toInt(一次判定要支援2.getListHantei_7()) + toInt(一次判定要介護1.getListHantei_7())
-                + toInt(一次判定要介護2.getListHantei_7()) + toInt(一次判定要介護3.getListHantei_7())
-                + toInt(一次判定要介護4.getListHantei_7()) + toInt(一次判定要介護5.getListHantei_7());
+                    + toInt(一次判定要支援2.getListHantei_7()) + toInt(一次判定要介護1.getListHantei_7())
+                    + toInt(一次判定要介護2.getListHantei_7()) + toInt(一次判定要介護3.getListHantei_7())
+                    + toInt(一次判定要介護4.getListHantei_7()) + toInt(一次判定要介護5.getListHantei_7());
         int 計要介護4 = toInt(一次判定非該当.getListHantei_8()) + toInt(一次判定要支援1.getListHantei_8())
-                + toInt(一次判定要支援2.getListHantei_8()) + toInt(一次判定要介護1.getListHantei_8())
-                + toInt(一次判定要介護2.getListHantei_8()) + toInt(一次判定要介護3.getListHantei_8())
-                + toInt(一次判定要介護4.getListHantei_8()) + toInt(一次判定要介護5.getListHantei_8());
+                    + toInt(一次判定要支援2.getListHantei_8()) + toInt(一次判定要介護1.getListHantei_8())
+                    + toInt(一次判定要介護2.getListHantei_8()) + toInt(一次判定要介護3.getListHantei_8())
+                    + toInt(一次判定要介護4.getListHantei_8()) + toInt(一次判定要介護5.getListHantei_8());
         int 計要介護5 = toInt(一次判定非該当.getListHantei_9()) + toInt(一次判定要支援1.getListHantei_9())
-                + toInt(一次判定要支援2.getListHantei_9()) + toInt(一次判定要介護1.getListHantei_9())
-                + toInt(一次判定要介護2.getListHantei_9()) + toInt(一次判定要介護3.getListHantei_9())
-                + toInt(一次判定要介護4.getListHantei_9()) + toInt(一次判定要介護5.getListHantei_9());
+                    + toInt(一次判定要支援2.getListHantei_9()) + toInt(一次判定要介護1.getListHantei_9())
+                    + toInt(一次判定要介護2.getListHantei_9()) + toInt(一次判定要介護3.getListHantei_9())
+                    + toInt(一次判定要介護4.getListHantei_9()) + toInt(一次判定要介護5.getListHantei_9());
         int 計計 = toInt(一次判定非該当.getListHantei_10()) + toInt(一次判定要支援1.getListHantei_10())
-                + toInt(一次判定要支援2.getListHantei_10()) + toInt(一次判定要介護1.getListHantei_10())
-                + toInt(一次判定要介護2.getListHantei_10()) + toInt(一次判定要介護3.getListHantei_10())
-                + toInt(一次判定要介護4.getListHantei_10()) + toInt(一次判定要介護5.getListHantei_10());
+                 + toInt(一次判定要支援2.getListHantei_10()) + toInt(一次判定要介護1.getListHantei_10())
+                 + toInt(一次判定要介護2.getListHantei_10()) + toInt(一次判定要介護3.getListHantei_10())
+                 + toInt(一次判定要介護4.getListHantei_10()) + toInt(一次判定要介護5.getListHantei_10());
         int 計再調査二次保留分 = toInt(一次判定非該当.getListHantei_11()) + toInt(一次判定要支援1.getListHantei_11())
-                + toInt(一次判定要支援2.getListHantei_11()) + toInt(一次判定要介護1.getListHantei_11())
-                + toInt(一次判定要介護2.getListHantei_11()) + toInt(一次判定要介護3.getListHantei_11())
-                + toInt(一次判定要介護4.getListHantei_11()) + toInt(一次判定要介護5.getListHantei_11());
+                        + toInt(一次判定要支援2.getListHantei_11()) + toInt(一次判定要介護1.getListHantei_11())
+                        + toInt(一次判定要介護2.getListHantei_11()) + toInt(一次判定要介護3.getListHantei_11())
+                        + toInt(一次判定要介護4.getListHantei_11()) + toInt(一次判定要介護5.getListHantei_11());
         int 計判定変更者数 = toInt(一次判定非該当.getListHantei_12()) + toInt(一次判定要支援1.getListHantei_12())
-                + toInt(一次判定要支援2.getListHantei_12()) + toInt(一次判定要介護1.getListHantei_12())
-                + toInt(一次判定要介護2.getListHantei_12()) + toInt(一次判定要介護3.getListHantei_12())
-                + toInt(一次判定要介護4.getListHantei_12()) + toInt(一次判定要介護5.getListHantei_12());
+                      + toInt(一次判定要支援2.getListHantei_12()) + toInt(一次判定要介護1.getListHantei_12())
+                      + toInt(一次判定要介護2.getListHantei_12()) + toInt(一次判定要介護3.getListHantei_12())
+                      + toInt(一次判定要介護4.getListHantei_12()) + toInt(一次判定要介護5.getListHantei_12());
         int 計軽度変更者数 = toInt(一次判定非該当.getListHantei_13()) + toInt(一次判定要支援1.getListHantei_13())
-                + toInt(一次判定要支援2.getListHantei_13()) + toInt(一次判定要介護1.getListHantei_13())
-                + toInt(一次判定要介護2.getListHantei_13()) + toInt(一次判定要介護3.getListHantei_13())
-                + toInt(一次判定要介護4.getListHantei_13()) + toInt(一次判定要介護5.getListHantei_13());
+                      + toInt(一次判定要支援2.getListHantei_13()) + toInt(一次判定要介護1.getListHantei_13())
+                      + toInt(一次判定要介護2.getListHantei_13()) + toInt(一次判定要介護3.getListHantei_13())
+                      + toInt(一次判定要介護4.getListHantei_13()) + toInt(一次判定要介護5.getListHantei_13());
         int 計重度変更者数 = toInt(一次判定非該当.getListHantei_14()) + toInt(一次判定要支援1.getListHantei_14())
-                + toInt(一次判定要支援2.getListHantei_14()) + toInt(一次判定要介護1.getListHantei_14())
-                + toInt(一次判定要介護2.getListHantei_14()) + toInt(一次判定要介護3.getListHantei_14())
-                + toInt(一次判定要介護4.getListHantei_14()) + toInt(一次判定要介護5.getListHantei_14());
+                      + toInt(一次判定要支援2.getListHantei_14()) + toInt(一次判定要介護1.getListHantei_14())
+                      + toInt(一次判定要介護2.getListHantei_14()) + toInt(一次判定要介護3.getListHantei_14())
+                      + toInt(一次判定要介護4.getListHantei_14()) + toInt(一次判定要介護5.getListHantei_14());
         ShinsaHanteiJokyoItem 合計 = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
                 paramter.isEmptyGogitaiNo() ? 全合議体 : paramter.getGogitaiName(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
-                RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村コード : paramter.getShichosonCode().value(),
+                to五桁(RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村コード : paramter.getHokensyaNo()),
                 RDate.getNowDate().toDateString(),
                 RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村 : paramter.getShichosonName(),
                 非該当,
@@ -774,44 +778,44 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
             ShinsaHanteiJokyoItem 一次判定要介護4,
             ShinsaHanteiJokyoItem 一次判定要介護5) {
         int 変更者非該当 = toInt(一次判定要支援1.getListHantei_2())
-                + toInt(一次判定要支援2.getListHantei_2()) + toInt(一次判定要介護1.getListHantei_2())
-                + toInt(一次判定要介護2.getListHantei_2()) + toInt(一次判定要介護3.getListHantei_2())
-                + toInt(一次判定要介護4.getListHantei_2()) + toInt(一次判定要介護5.getListHantei_2());
+                     + toInt(一次判定要支援2.getListHantei_2()) + toInt(一次判定要介護1.getListHantei_2())
+                     + toInt(一次判定要介護2.getListHantei_2()) + toInt(一次判定要介護3.getListHantei_2())
+                     + toInt(一次判定要介護4.getListHantei_2()) + toInt(一次判定要介護5.getListHantei_2());
         int 変更者要支援1 = toInt(一次判定非該当.getListHantei_3())
-                + toInt(一次判定要支援2.getListHantei_3()) + toInt(一次判定要介護1.getListHantei_3())
-                + toInt(一次判定要介護2.getListHantei_3()) + toInt(一次判定要介護3.getListHantei_3())
-                + toInt(一次判定要介護4.getListHantei_3()) + toInt(一次判定要介護5.getListHantei_3());
+                      + toInt(一次判定要支援2.getListHantei_3()) + toInt(一次判定要介護1.getListHantei_3())
+                      + toInt(一次判定要介護2.getListHantei_3()) + toInt(一次判定要介護3.getListHantei_3())
+                      + toInt(一次判定要介護4.getListHantei_3()) + toInt(一次判定要介護5.getListHantei_3());
         int 変更者要支援2 = toInt(一次判定非該当.getListHantei_4()) + toInt(一次判定要支援1.getListHantei_4())
-                //                + toInt(一次判定要介護1.getListHantei_4())
-                + toInt(一次判定要介護2.getListHantei_4()) + toInt(一次判定要介護3.getListHantei_4())
-                + toInt(一次判定要介護4.getListHantei_4()) + toInt(一次判定要介護5.getListHantei_4());
+                      //                + toInt(一次判定要介護1.getListHantei_4())
+                      + toInt(一次判定要介護2.getListHantei_4()) + toInt(一次判定要介護3.getListHantei_4())
+                      + toInt(一次判定要介護4.getListHantei_4()) + toInt(一次判定要介護5.getListHantei_4());
         int 変更者要介護1 = toInt(一次判定非該当.getListHantei_5()) + toInt(一次判定要支援1.getListHantei_5())
-                //                + toInt(一次判定要支援2.getListHantei_5())
-                + toInt(一次判定要介護2.getListHantei_5()) + toInt(一次判定要介護3.getListHantei_5())
-                + toInt(一次判定要介護4.getListHantei_5()) + toInt(一次判定要介護5.getListHantei_5());
+                      //                + toInt(一次判定要支援2.getListHantei_5())
+                      + toInt(一次判定要介護2.getListHantei_5()) + toInt(一次判定要介護3.getListHantei_5())
+                      + toInt(一次判定要介護4.getListHantei_5()) + toInt(一次判定要介護5.getListHantei_5());
         int 変更者要介護2 = toInt(一次判定非該当.getListHantei_6()) + toInt(一次判定要支援1.getListHantei_6())
-                + toInt(一次判定要支援2.getListHantei_6()) + toInt(一次判定要介護1.getListHantei_6())
-                + toInt(一次判定要介護3.getListHantei_6())
-                + toInt(一次判定要介護4.getListHantei_6()) + toInt(一次判定要介護5.getListHantei_6());
+                      + toInt(一次判定要支援2.getListHantei_6()) + toInt(一次判定要介護1.getListHantei_6())
+                      + toInt(一次判定要介護3.getListHantei_6())
+                      + toInt(一次判定要介護4.getListHantei_6()) + toInt(一次判定要介護5.getListHantei_6());
         int 変更者要介護3 = toInt(一次判定非該当.getListHantei_7()) + toInt(一次判定要支援1.getListHantei_7())
-                + toInt(一次判定要支援2.getListHantei_7()) + toInt(一次判定要介護1.getListHantei_7())
-                + toInt(一次判定要介護2.getListHantei_7())
-                + toInt(一次判定要介護4.getListHantei_7()) + toInt(一次判定要介護5.getListHantei_7());
+                      + toInt(一次判定要支援2.getListHantei_7()) + toInt(一次判定要介護1.getListHantei_7())
+                      + toInt(一次判定要介護2.getListHantei_7())
+                      + toInt(一次判定要介護4.getListHantei_7()) + toInt(一次判定要介護5.getListHantei_7());
         int 変更者要介護4 = toInt(一次判定非該当.getListHantei_8()) + toInt(一次判定要支援1.getListHantei_8())
-                + toInt(一次判定要支援2.getListHantei_8()) + toInt(一次判定要介護1.getListHantei_8())
-                + toInt(一次判定要介護2.getListHantei_8()) + toInt(一次判定要介護3.getListHantei_8())
-                + toInt(一次判定要介護5.getListHantei_8());
+                      + toInt(一次判定要支援2.getListHantei_8()) + toInt(一次判定要介護1.getListHantei_8())
+                      + toInt(一次判定要介護2.getListHantei_8()) + toInt(一次判定要介護3.getListHantei_8())
+                      + toInt(一次判定要介護5.getListHantei_8());
         int 変更者要介護5 = toInt(一次判定非該当.getListHantei_9()) + toInt(一次判定要支援1.getListHantei_9())
-                + toInt(一次判定要支援2.getListHantei_9()) + toInt(一次判定要介護1.getListHantei_9())
-                + toInt(一次判定要介護2.getListHantei_9()) + toInt(一次判定要介護3.getListHantei_9())
-                + toInt(一次判定要介護4.getListHantei_9());
+                      + toInt(一次判定要支援2.getListHantei_9()) + toInt(一次判定要介護1.getListHantei_9())
+                      + toInt(一次判定要介護2.getListHantei_9()) + toInt(一次判定要介護3.getListHantei_9())
+                      + toInt(一次判定要介護4.getListHantei_9());
         ShinsaHanteiJokyoItem 変更者Item = new ShinsaHanteiJokyoItem(
                 帳票タイトル,
                 paramter.isEmptyGogitaiNo() ? 全合議体 : paramter.getGogitaiName(),
                 current.getShinsakaiKaisaiYMDMin(),
                 current.getShinsakaiKaisaiYMDMax(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
-                RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村コード : paramter.getShichosonCode().value(),
+                to五桁(RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村コード : paramter.getHokensyaNo()),
                 RDate.getNowDate().toDateString(),
                 RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村 : paramter.getShichosonName(),
                 非該当,
@@ -870,7 +874,11 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
                 get対象開始年月日(),
                 get対象終了年月日(),
                 new RString(current.getShinsakaiKaisaiNoCount()),
-                shichosonCode,
+                //<<<<<<< HEAD
+                to五桁(RString.isNullOrEmpty(paramter.getShichosonCode().value()) ? 全市町村コード : paramter.getHokensyaNo()),
+                //=======
+                //                shichosonCode,
+                //>>>>>>> origin/sync
                 RDate.getNowDate().toDateString(),
                 shichosonName,
                 非該当,
@@ -978,7 +986,7 @@ public class SinsakaiHanteiJyokyoProcess extends BatchProcessBase<SinsakaiHantei
             RString 二次判定要介護状態区分コード) {
         for (SinsakaiHanteiJyokyoEntity sinsakaiHanteiJyokyoEntity : 審査判定状況) {
             if (sinsakaiHanteiJyokyoEntity.getIchijiHanteiKekkaNinchishoKasanCode().value().equals(要介護認定一次判定結果コード認知症加算)
-                    && sinsakaiHanteiJyokyoEntity.getNijiHanteiYokaigoJotaiKubunCode().value().equals(二次判定要介護状態区分コード)) {
+                && sinsakaiHanteiJyokyoEntity.getNijiHanteiYokaigoJotaiKubunCode().value().equals(二次判定要介護状態区分コード)) {
                 return sinsakaiHanteiJyokyoEntity.getHihokenshaCount();
             }
         }

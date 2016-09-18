@@ -9,8 +9,10 @@ import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd583001.NenreiKaikyube
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,7 +27,7 @@ import lombok.Setter;
 public class NenreiKaikyubetsuYokaigodoJokyoProcessParameter implements IBatchProcessParameter {
 
     private RDate 基準日;
-    private RDate 基準年月;
+    private RYearMonth 基準年月;
     private RString 地区区分;
     private Code 開始地区コード;
     private Code 終了地区コード;
@@ -43,7 +45,7 @@ public class NenreiKaikyubetsuYokaigodoJokyoProcessParameter implements IBatchPr
      * @param 旧市町村コード 旧市町村名称
      * @param 旧市町村名称 旧市町村名称
      */
-    public NenreiKaikyubetsuYokaigodoJokyoProcessParameter(RDate 基準日, RDate 基準年月, RString 地区区分,
+    public NenreiKaikyubetsuYokaigodoJokyoProcessParameter(RDate 基準日, RYearMonth 基準年月, RString 地区区分,
             Code 開始地区コード, Code 終了地区コード, RString 旧市町村コード, RString 旧市町村名称) {
         this.基準日 = 基準日;
         this.基準年月 = 基準年月;
@@ -62,7 +64,15 @@ public class NenreiKaikyubetsuYokaigodoJokyoProcessParameter implements IBatchPr
      */
     public NenreiKaikyubetsuYokaigodoJokyoMybatisParameter toNenreiKaikyubetsuYokaigodoJokyoMybatisParameter(
             IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey) {
-        return new NenreiKaikyubetsuYokaigodoJokyoMybatisParameter(基準日, 基準年月,
+        FlexibleDate 基準日1 = null;
+        FlexibleDate 基準年月1 = null;
+        if (基準日 != null) {
+            基準日1 = new FlexibleDate(基準日.toDateString());
+        }
+        if (基準年月 != null) {
+            基準年月1 = new FlexibleDate(基準年月.toDateString());
+        }
+        return new NenreiKaikyubetsuYokaigodoJokyoMybatisParameter(基準日1, 基準年月1,
                 地区区分, 開始地区コード, 終了地区コード,
                 旧市町村コード, shikibetsuTaishoPSMSearchKey);
     }

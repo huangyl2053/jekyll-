@@ -36,8 +36,6 @@ public class JyutakuKayisyuHiHandler {
     private static final RString ZERO = new RString("0");
     private static final RString 前事業者 = new RString("0");
     private static final RString 前月 = new RString("1");
-    private static final RString NI = new RString("2");
-    private static final FlexibleYearMonth 平成24年4月 = new FlexibleYearMonth("201204");
     private final JyutakuKayisyuHiDiv div;
 
     /**
@@ -115,18 +113,12 @@ public class JyutakuKayisyuHiHandler {
             if (ZERO.equals(識別番号管理.get社会福祉法人軽減設定区分())) {
                 div.getBtnShafukuKeigen().setDisabled(true);
             }
-            set所定疾患施設療養費_緊急時施設療養費ボタン(識別番号管理, サービス提供年月);
-        }
-    }
+            if (ZERO.equals(識別番号管理.get所定疾患施設療養設定区分())) {
 
-    private void set所定疾患施設療養費_緊急時施設療養費ボタン(ShikibetsuNoKanri 識別番号管理, FlexibleYearMonth サービス提供年月) {
-        if (NI.equals(識別番号管理.get所定疾患施設療養設定区分())
-                && 平成24年4月.isBeforeOrEquals(サービス提供年月)) {
-            div.getBtnShoteiShikkanShisetsuRyoyo().setDisplayNone(false);
-            div.getBtnKinkyujiShisetsuRyoyo().setDisplayNone(true);
-        } else {
-            div.getBtnShoteiShikkanShisetsuRyoyo().setDisplayNone(true);
-            div.getBtnKinkyujiShisetsuRyoyo().setDisplayNone(false);
+                div.getBtnShoteiShikkanShisetsuRyoyo().setDisabled(true);
+            } else {
+                div.getBtnShoteiShikkanShisetsuRyoyo().setDisabled(false);
+            }
             if (ZERO.equals(識別番号管理.get緊急時施設療養設定区分())) {
                 div.getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
             } else {

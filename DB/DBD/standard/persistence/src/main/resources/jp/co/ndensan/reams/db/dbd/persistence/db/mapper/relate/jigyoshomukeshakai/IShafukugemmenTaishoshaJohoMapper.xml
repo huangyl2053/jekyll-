@@ -24,6 +24,7 @@ and open the template in the editor.-->
         A."kyotakuServiceGentei",
         A."kyojuhiShokuhiNomi",
         A."kyusochishaUnitTypeKoshitsuNomi",
+        A."yokaigoJotaiKubunCode",
         A."kakuninNo",
         A."tekiyoKaishiYMD",
         A."tekiyoShuryoYMD",
@@ -59,6 +60,7 @@ and open the template in the editor.-->
         <result property="居住費食費のみ" column="kyojuhiShokuhiNomi" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" />
         <result property="旧措置者ユニット型個室のみ" column="kyusochishaUnitTypeKoshitsuNomi" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" />
         <result property="確認番号" column="kakuninNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="要介護認定状態区分コード" column="yokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="適用開始年月日" column="tekiyoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="適用終了年月日" column="tekiyoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="住民種別コード" column="juminShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />

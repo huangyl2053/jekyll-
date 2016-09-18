@@ -52,6 +52,8 @@ public class JigyoJokyoHokokuNempoSakueiDiv extends Panel {
     private RString hiddenGappeiKoseiKubun;
     @JsonProperty("hiddenDonyuKeitaiCode")
     private RString hiddenDonyuKeitaiCode;
+    @JsonProperty("hiddenTanitsu")
+    private RString hiddenTanitsu;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -309,6 +311,24 @@ public class JigyoJokyoHokokuNempoSakueiDiv extends Panel {
     @JsonProperty("hiddenDonyuKeitaiCode")
     public void setHiddenDonyuKeitaiCode(RString hiddenDonyuKeitaiCode) {
         this.hiddenDonyuKeitaiCode = hiddenDonyuKeitaiCode;
+    }
+
+    /*
+     * gethiddenTanitsu
+     * @return hiddenTanitsu
+     */
+    @JsonProperty("hiddenTanitsu")
+    public RString getHiddenTanitsu() {
+        return hiddenTanitsu;
+    }
+
+    /*
+     * sethiddenTanitsu
+     * @param hiddenTanitsu hiddenTanitsu
+     */
+    @JsonProperty("hiddenTanitsu")
+    public void setHiddenTanitsu(RString hiddenTanitsu) {
+        this.hiddenTanitsu = hiddenTanitsu;
     }
 
     /*

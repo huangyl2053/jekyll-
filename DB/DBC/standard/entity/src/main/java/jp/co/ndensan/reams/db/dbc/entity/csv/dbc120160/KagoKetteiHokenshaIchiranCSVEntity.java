@@ -50,24 +50,24 @@ public class KagoKetteiHokenshaIchiranCSVEntity {
     private RString 過誤申立事由;
     @CsvField(order = 170, name = "単位数")
     private RString 単位数;
-    @CsvField(order = 180, name = "負担額")
+    @CsvField(order = 180, name = "保険者負担額")
     private RString 負担額;
     @CsvField(order = 190, name = "介護給付費・件数")
     private RString 介護給付費_件数;
     @CsvField(order = 200, name = "介護給付費・単位数")
     private RString 介護給付費_単位数;
-    @CsvField(order = 210, name = "介護給付費・負担額")
+    @CsvField(order = 210, name = "介護給付費・保険者負担額")
     private RString 介護給付費_負担額;
     @CsvField(order = 220, name = "高額介護サービス費・件数")
     private RString 高額介護サービス費_件数;
     @CsvField(order = 230, name = "高額介護サービス費・単位数")
     private RString 高額介護サービス費_単位数;
-    @CsvField(order = 240, name = "高額介護サービス費・負担額")
+    @CsvField(order = 240, name = "高額介護サービス費・保険者負担額")
     private RString 高額介護サービス費_負担額;
     @CsvField(order = 250, name = "特定入所者介護サービス費等・件数")
     private RString 特定入所者介護サービス費等_件数;
     @CsvField(order = 260, name = "特定入所者介護サービス費等・単位数")
     private RString 特定入所者介護サービス費等_単位数;
-    @CsvField(order = 270, name = "特定入所者介護サービス費等・負担額")
+    @CsvField(order = 270, name = "特定入所者介護サービス費等・保険者負担額")
     private RString 特定入所者介護サービス費等_負担額;
 }

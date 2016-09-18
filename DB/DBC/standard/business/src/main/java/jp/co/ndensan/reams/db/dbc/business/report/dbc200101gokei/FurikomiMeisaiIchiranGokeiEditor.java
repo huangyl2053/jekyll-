@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.report.dbc200101gokei;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.gokeidata.GokeiDataEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.hurikomiitiran.gokeidata.GokeiDataEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc200101gokei.FurikomiMeisaiIchiranGokeiReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;

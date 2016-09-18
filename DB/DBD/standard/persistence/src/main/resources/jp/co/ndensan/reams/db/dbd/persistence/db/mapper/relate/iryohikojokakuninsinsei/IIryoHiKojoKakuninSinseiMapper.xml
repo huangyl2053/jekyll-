@@ -66,6 +66,42 @@
         ORDER BY Jukyu."hihokenshaNo", Jukyu."ninteiYukoKikanKaishiYMD" DESC
     </select>
 
+    <resultMap id="resultmap_getIryohikojyoChohyo" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.iryohikojokakuninsinsei.IryohiKojoEntity" autoMapping="true">
+        <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="控除対象年" column="kojoTaishoNen" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="データ区分" column="dataKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="登録年月日" column="torokuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="申請年月日" column="shinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定有効期間開始年月日" column="ninteiYukoKikanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定有効期間終了年月日" column="ninteiYukoKikanShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="主治医意見書受領年月日" column="shujiiIkenshoJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="日常生活自立度" column="nichijoSeikatsuJiritsudo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="尿失禁の有無" column="nyoshikkinHassei" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+        <result property="発行年月日" column="hakkoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+
+    <select resultOrdered="true" id="select単票用医療費控除"
+            resultMap="resultmap_getIryohikojyoChohyo"
+            parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
+        SELECT
+        "hihokenshaNo" ,
+        "kojoTaishoNen" ,
+        "dataKubun",
+        "torokuYMD" ,
+        "shinseiYMD" ,
+        "ninteiYukoKikanKaishiYMD" ,
+        "ninteiYukoKikanShuryoYMD" ,
+        "shujiiIkenshoJuryoYMD" ,
+        "nichijoSeikatsuJiritsudo" ,
+        "nyoshikkinHassei" ,
+        "hakkoYMD"
+        FROM		rgdb."DbT4401IryohiKojo"
+        WHERE	"hihokenshaNo" = #{被保険者番号}
+        AND		"dataKubun" = #{データ区分}
+        AND		"logicalDeletedFlag" = FALSE
+        ORDER BY "kojoTaishoNen" DESC
+    </select>
+
     <select resultOrdered="true" id="select宛名情報"
             resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.iryohikojokakuninsinsei.ShikibetsuTaishoParameter"
@@ -89,9 +125,16 @@
     </select>
 
     <resultMap id="resultmap_getSogoJigyouTaisyouSyaJyohoJoho" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.iryohikojokakuninsinsei.SogoJigyouTaisyouSyaJyohoJoho" autoMapping="true">
-        <id property="認定有効期間開始年月日" column="ninteiYukoKikanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <id property="認定有効期間終了年月日" column="ninteiYukoKikanShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <id property="主治医意見書受領年月日" column="ikenshoJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定有効期間開始年月日" column="ninteiYukoKikanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定有効期間終了年月日" column="ninteiYukoKikanShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="主治医意見書受領年月日" column="ikenshoJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
 
+    <update id="update医療費控除"  parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.iryohikojokakuninsinsei.IryohiKojoUpdParameter">
+        UPDATE rgdb."DbT4401IryohiKojo"
+        SET "hakkoYMD" = #{発行年月日}
+        WHERE "hihokenshaNo" = #{被保険者番号}
+        AND "kojoTaishoNen" = #{控除対象年}
+        AND "dataKubun" = #{データ区分}
+    </update>
 </mapper>

@@ -90,10 +90,10 @@ public class DainigoHihokenshashoKofuShinseisho {
         List<HihokenshashokoufuShinseishoReport> list = new ArrayList<>();
         RString 生年月日 = RString.EMPTY;
         if (JuminShubetsu.日本人.getCode().equals(entity.get住民種別コード())
-                || JuminShubetsu.住登外個人_日本人.getCode().equals(entity.get住民種別コード())) {
+            || JuminShubetsu.住登外個人_日本人.getCode().equals(entity.get住民種別コード())) {
             生年月日 = set生年月日_日本人(entity);
         } else if (JuminShubetsu.外国人.getCode().equals(entity.get住民種別コード())
-                || JuminShubetsu.住登外個人_外国人.getCode().equals(entity.get住民種別コード())) {
+                   || JuminShubetsu.住登外個人_外国人.getCode().equals(entity.get住民種別コード())) {
             生年月日 = set生年月日(entity);
         }
         HihokenshashokoufuShinseishoItem item = new HihokenshashokoufuShinseishoItem(

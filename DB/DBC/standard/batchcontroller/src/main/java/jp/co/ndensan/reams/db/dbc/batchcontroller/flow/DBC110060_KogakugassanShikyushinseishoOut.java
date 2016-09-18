@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110060.KogakugassanShi
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110060.KogakugassanShikyushinseishoOutSoufuSetteiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110060.KogakugassanShikyushinseishoOutUpdateShinseishoMiSofuProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110060.KogakugassanShikyushinseishoOutUpdateShinseishoSofuProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110130.HokenshaKyufujissekiOutDoErrorProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110130.HokenshaKyufujissekiOutGetHihokenshaAtenaProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110130.HokenshaKyufujissekiOutListSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoInterfaceKanriKousinProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110060.DBC110060_KogakugassanShikyushinseishoOutParameter;
@@ -53,7 +55,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class DBC110060_KogakugassanShikyushinseishoOut extends BatchFlowBase<DBC110060_KogakugassanShikyushinseishoOutParameter> {
 
     private static final String 送付対象データ取得 = "getSofuTaishoData";
-    private static final String 宛名情報取得 = "getAtena";
+    private static final String 被保険者_宛名情報取得 = "getHihokenshaAtena";
+    private static final String エラー登録 = "doError";
     private static final String 送付除外区分設定 = "soufuSettei";
     private static final String 口座情報登録確認 = "insertKozaJyoho";
     private static final String 証記載保険者名取得_単一 = "setHokenshameiTanitsu";
@@ -66,7 +69,6 @@ public class DBC110060_KogakugassanShikyushinseishoOut extends BatchFlowBase<DBC
     private static final String 国保連インタフェース管理更新 = "kokuhorenkyoutsuDoInterfaceKanriKousinProcess";
     private static final String 処理結果リスト作成 = "kokuhorenkyoutsuDoShoriKekkaListSakuseiProcess";
 
-    private static final RString 被保険者_宛名情報取得BATCHID = new RString("HokenshaKyufujissekiOutHihokenshaAtenaFlow");
     private static final RString MSG_導入形態コード = new RString("導入形態コード");
 
     private static final int INDEX_0 = 0;
@@ -92,7 +94,8 @@ public class DBC110060_KogakugassanShikyushinseishoOut extends BatchFlowBase<DBC
         int 合計 = getResult(Integer.class, new RString(送付対象データ取得),
                 KogakugassanShikyushinseishoOutGetSofuTaishoDataProcess.PARAMETER_OUT_OUTCOUNT);
         if (INDEX_0 != 合計) {
-            executeStep(宛名情報取得);
+            executeStep(被保険者_宛名情報取得);
+            executeStep(エラー登録);
             executeStep(送付除外区分設定);
             executeStep(口座情報登録確認);
             ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
@@ -111,6 +114,7 @@ public class DBC110060_KogakugassanShikyushinseishoOut extends BatchFlowBase<DBC
                     KogakugassanShikyushinseishoOutHokenshaShutokuProcess.PARAMETER_OUT_RETURNENTITY);
             int size = returnEntity.get保険者番号List().size();
             for (int i = 0; i < size; i++) {
+                processParameter.setレコード件数(returnEntity.getレコード件数List().get(i));
                 processParameter.set件数(returnEntity.get件数List().get(i));
                 processParameter.set保険者番号(returnEntity.get保険者番号List().get(i));
                 executeStep(送付ファイル作成);
@@ -124,6 +128,8 @@ public class DBC110060_KogakugassanShikyushinseishoOut extends BatchFlowBase<DBC
             processParameter.set保険者情報_保険者番号(保険者情報_保険者番号);
             processParameter.set保険者情報_保険者名称(保険者情報_保険者名称);
             executeStep(帳票出力);
+            executeStep(DB更新_送付済);
+            executeStep(DB更新_未送付);
         }
         executeStep(国保連インタフェース管理更新);
         executeStep(処理結果リスト作成);
@@ -140,13 +146,25 @@ public class DBC110060_KogakugassanShikyushinseishoOut extends BatchFlowBase<DBC
     }
 
     /**
-     * 宛名情報取得操作です。
+     * 被保険者_宛名情報取得です。
      *
-     * @return IBatchFlowCommand
+     * @return HokenshaKyufujissekiOutGetHihokenshaAtenaProcess
      */
-    @Step(宛名情報取得)
-    protected IBatchFlowCommand callGetAtenaProcess() {
-        return otherBatchFlow(被保険者_宛名情報取得BATCHID, SubGyomuCode.DBC介護給付, null).define();
+    @Step(被保険者_宛名情報取得)
+    protected IBatchFlowCommand callGetHihokenshaAtenaProcess() {
+        return loopBatch(HokenshaKyufujissekiOutGetHihokenshaAtenaProcess.class).define();
+
+    }
+
+    /**
+     * エラー登録です。
+     *
+     * @return HokenshaKyufujissekiOutDoErrorProcess
+     */
+    @Step(エラー登録)
+    protected IBatchFlowCommand callDoErrorrProcess() {
+        return loopBatch(HokenshaKyufujissekiOutDoErrorProcess.class).define();
+
     }
 
     /**

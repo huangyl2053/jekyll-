@@ -24,7 +24,7 @@ public class GassanShikyuFushikyuKetteiTsuchishoTorikomiIchiranCSVEntity {
     private RString 取込年月;
     @CsvField(order = 20, name = "作成日時")
     private RString 作成日時;
-    @CsvField(order = 30, name = "no")
+    @CsvField(order = 30, name = "№")
     private RString no;
     @CsvField(order = 40, name = "保険者番号")
     private RString 保険者番号;
@@ -38,11 +38,11 @@ public class GassanShikyuFushikyuKetteiTsuchishoTorikomiIchiranCSVEntity {
     private RString 被保険者氏名;
     @CsvField(order = 90, name = "住所")
     private RString 住所;
-    @CsvField(order = 100, name = "支給申請書整理番号")
+    @CsvField(order = 100, name = "連絡票整理番号(支給申請書整理番号)")
     private RString 支給申請書整理番号;
-    @CsvField(order = 110, name = "計算対象期間_開始")
+    @CsvField(order = 110, name = "計算対象期間（開始）")
     private RString 計算対象期間_開始;
-    @CsvField(order = 120, name = "計算対象期間_終了")
+    @CsvField(order = 120, name = "計算対象期間（終了）")
     private RString 計算対象期間_終了;
     @CsvField(order = 130, name = "申請年月日")
     private RString 申請年月日;
@@ -60,17 +60,17 @@ public class GassanShikyuFushikyuKetteiTsuchishoTorikomiIchiranCSVEntity {
     private RString 支払方法;
     @CsvField(order = 200, name = "支払方法名称")
     private RString 支払方法名称;
-    @CsvField(order = 210, name = "窓口払い_支払場所")
+    @CsvField(order = 210, name = "窓口払い：支払場所")
     private RString 窓口払い_支払場所;
-    @CsvField(order = 220, name = "窓口払_支払期間")
+    @CsvField(order = 220, name = "窓口払：支払期間")
     private RString 窓口払_支払期間;
-    @CsvField(order = 230, name = "口座払_金融機関・支店名")
+    @CsvField(order = 230, name = "口座払：金融機関・支店名")
     private RString 口座払_金融機関_支店名;
-    @CsvField(order = 240, name = "口座払_種目")
+    @CsvField(order = 240, name = "口座払：種目")
     private RString 口座払_種目;
-    @CsvField(order = 250, name = "口座払_口座番号")
+    @CsvField(order = 250, name = "口座払：口座番号")
     private RString 口座払_口座番号;
-    @CsvField(order = 260, name = "口座払_口座名義人")
+    @CsvField(order = 260, name = "口座払：口座名義人")
     private RString 口座払_口座名義人;
 
 }

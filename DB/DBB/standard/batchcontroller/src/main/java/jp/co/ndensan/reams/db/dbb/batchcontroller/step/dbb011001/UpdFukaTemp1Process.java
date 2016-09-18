@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukamanager.
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukamanager.SikakuSaisinnsikiRelateEntity;
 import jp.co.ndensan.reams.db.dbb.service.core.tokuchokarisanteifuka.TokuchoKariSanteiFukaManagerBatch;
 import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.RoreiFukushiNenkinJukyusha;
@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -51,19 +52,20 @@ public class UpdFukaTemp1Process extends BatchProcessBase<SikakuSaisinnsikiRelat
     private List<RoreiFukushiNenkinJukyusha> 老齢の情報;
     private FukaJohoTempEntity 賦課情報一時Entity;
     private UrT0508SeikatsuHogoJukyushaEntity 生活保護受給者Entity;
-//    private UrT0526SeikatsuHogoFujoShuruiEntity 生活保護扶助種類Entity;
     private List<UrT0526SeikatsuHogoFujoShuruiEntity> 生活保護扶助種類EntityList;
     private ChoshuHoho 徴収方法の情報;
     private HihokenshaDaicho 資格の情報;
-    FlexibleDate 前年度生保開始日;
-    FlexibleDate 前年度生保廃止日;
-    FlexibleDate 前年度老年開始日;
-    FlexibleDate 前年度老年廃止日;
-    RString 前年度世帯課税区分;
-    RString 前年度課税区分;
-    Decimal 前年度合計所得金額;
-    Decimal 前年度公的年金収入額;
-    private HihokenshaNo 被保険者番号;
+    private FlexibleDate 前年度生保開始日;
+    private FlexibleDate 前年度生保廃止日;
+    private FlexibleDate 前年度老年開始日;
+    private FlexibleDate 前年度老年廃止日;
+    private RString 前年度世帯課税区分;
+    private RString 前年度課税区分;
+    private Decimal 前年度合計所得金額;
+    private Decimal 前年度公的年金収入額;
+    private FlexibleYear 調定年度;
+    private FlexibleYear 賦課年度;
+    private TsuchishoNo 通知書番号;
     private ShikibetsuCode 識別コード;
     private GyomuCode 業務コード;
     private FlexibleDate 受給開始日;
@@ -89,7 +91,9 @@ public class UpdFukaTemp1Process extends BatchProcessBase<SikakuSaisinnsikiRelat
         前年度課税区分 = null;
         前年度合計所得金額 = null;
         前年度公的年金収入額 = null;
-        被保険者番号 = null;
+        調定年度 = null;
+        賦課年度 = null;
+        通知書番号 = null;
         識別コード = null;
         業務コード = null;
         受給開始日 = null;
@@ -119,7 +123,9 @@ public class UpdFukaTemp1Process extends BatchProcessBase<SikakuSaisinnsikiRelat
             set識別コード(entity);
             set生活保護受給者Entity(entity.get生活保護受給者Entity());
             set生活保護扶助種類EntityList(entity.get生活保護扶助種類Entity());
-        } else if (!被保険者番号.equals(entity.get賦課情報一時Entity().getHihokenshaNo())) {
+        } else if (!調定年度.equals(entity.get賦課情報一時Entity().getChoteiNendo())
+                || !賦課年度.equals(entity.get賦課情報一時Entity().getFukaNendo())
+                || !通知書番号.equals(entity.get賦課情報一時Entity().getTsuchishoNo())) {
             SeikatsuHogoJukyushaRelateEntity 生活保護受給者RelateEntity = new SeikatsuHogoJukyushaRelateEntity();
             生活保護受給者RelateEntity.set生活保護受給者Entity(生活保護受給者Entity);
             生活保護受給者RelateEntity.set生活保護扶助種類Entity(生活保護扶助種類EntityList);
@@ -147,21 +153,25 @@ public class UpdFukaTemp1Process extends BatchProcessBase<SikakuSaisinnsikiRelat
 
     @Override
     protected void afterExecute() {
-        SeikatsuHogoJukyushaRelateEntity 生活保護受給者RelateEntity = new SeikatsuHogoJukyushaRelateEntity();
-        生活保護受給者RelateEntity.set生活保護受給者Entity(生活保護受給者Entity);
-        生活保護受給者RelateEntity.set生活保護扶助種類Entity(生活保護扶助種類EntityList);
-        set生保の情報(生活保護受給者RelateEntity);
-        賦課情報一時Entity = TokuchoKariSanteiFukaManagerBatch.createInstance().reflectShikakuToSaishinApril(
-                processParameter.get調定年度(), processParameter.get調定日時(), 資格の情報, 徴収方法の情報, 生保の情報, 老齢の情報, 前年度生保開始日,
-                前年度生保廃止日, 前年度老年開始日, 前年度老年廃止日, 前年度世帯課税区分, 前年度課税区分, 前年度合計所得金額,
-                前年度公的年金収入額, 賦課情報一時Entity);
-        tempDbWriter.update(賦課情報一時Entity);
+        if (通知書番号 != null) {
+            SeikatsuHogoJukyushaRelateEntity 生活保護受給者RelateEntity = new SeikatsuHogoJukyushaRelateEntity();
+            生活保護受給者RelateEntity.set生活保護受給者Entity(生活保護受給者Entity);
+            生活保護受給者RelateEntity.set生活保護扶助種類Entity(生活保護扶助種類EntityList);
+            set生保の情報(生活保護受給者RelateEntity);
+            賦課情報一時Entity = TokuchoKariSanteiFukaManagerBatch.createInstance().reflectShikakuToSaishinApril(
+                    processParameter.get調定年度(), processParameter.get調定日時(), 資格の情報, 徴収方法の情報, 生保の情報, 老齢の情報, 前年度生保開始日,
+                    前年度生保廃止日, 前年度老年開始日, 前年度老年廃止日, 前年度世帯課税区分, 前年度課税区分, 前年度合計所得金額,
+                    前年度公的年金収入額, 賦課情報一時Entity);
+            tempDbWriter.update(賦課情報一時Entity);
+        }
     }
 
     private void set老齢の情報(DbT7006RoreiFukushiNenkinJukyushaEntity entity) {
         if (entity != null) {
             entity.initializeMd5();
-            老齢の情報.add(new RoreiFukushiNenkinJukyusha(entity));
+            if (!老齢の情報.contains(new RoreiFukushiNenkinJukyusha(entity))) {
+                老齢の情報.add(new RoreiFukushiNenkinJukyusha(entity));
+            }
         }
     }
 
@@ -187,7 +197,9 @@ public class UpdFukaTemp1Process extends BatchProcessBase<SikakuSaisinnsikiRelat
     }
 
     private void set被保険者番号(SikakuSaisinnsikiRelateEntity entity) {
-        被保険者番号 = entity.get賦課情報一時Entity().getHihokenshaNo();
+        調定年度 = entity.get賦課情報一時Entity().getChoteiNendo();
+        賦課年度 = entity.get賦課情報一時Entity().getFukaNendo();
+        通知書番号 = entity.get賦課情報一時Entity().getTsuchishoNo();
     }
 
     private void set識別コード(SikakuSaisinnsikiRelateEntity entity) {
@@ -205,7 +217,7 @@ public class UpdFukaTemp1Process extends BatchProcessBase<SikakuSaisinnsikiRelat
     }
 
     private void set生活保護扶助種類EntityList(UrT0526SeikatsuHogoFujoShuruiEntity entity) {
-        if (entity != null) {
+        if (entity != null && !生活保護扶助種類EntityList.contains(entity)) {
             生活保護扶助種類EntityList.add(entity);
         }
     }

@@ -59,6 +59,8 @@ public class JyutakuKayisyuHi {
         FlexibleYearMonth 直近サービス提供年月 = getHandler(div).get直近サービス提供年月(new RString("1"), サービス提供年月, 引き継ぎ情報);
         getHandler(div).load共有子Div(引き継ぎ情報, 整理番号, 直近サービス提供年月, new NyuryokuShikibetsuNo(様式番号));
         getHandler(div).setデータグリッド(引き継ぎ情報);
+        FlexibleYearMonth 提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
+        ViewStateHolder.put(ViewStateKeys.サービス提供年月, 提供年月);
         return ResponseData.of(div).respond();
     }
 
@@ -76,6 +78,8 @@ public class JyutakuKayisyuHi {
         FlexibleYearMonth 直近サービス提供年月 = getHandler(div).get直近サービス提供年月(new RString("0"), サービス提供年月, 引き継ぎ情報);
         getHandler(div).load共有子Div(引き継ぎ情報, 整理番号, 直近サービス提供年月, new NyuryokuShikibetsuNo(様式番号));
         getHandler(div).setデータグリッド(引き継ぎ情報);
+        FlexibleYearMonth 提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
+        ViewStateHolder.put(ViewStateKeys.サービス提供年月, 提供年月);
         return ResponseData.of(div).respond();
     }
 

@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiH
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kyufujissekishokai.KyufuJissekiHeaderJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekishokai.KyufuJissekiJyohoRelateEntity;
+import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3118ShikibetsuNoKanriDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyufujissekishokai.IKyufuJissekiShokaiMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -50,6 +51,7 @@ public class KyufuJissekiShokaiFinder {
     private final MapperProvider mapperProvider;
     private final DbV1001HihokenshaDaichoAliveDac dbV1001;
     private final DbV4001JukyushaDaichoAliveDac dbV4001;
+    private final DbT3118ShikibetsuNoKanriDac dbT3118;
     private static final RString 準拠する = new RString("1");
     private static final RString 準拠しない = new RString("0");
 
@@ -60,7 +62,7 @@ public class KyufuJissekiShokaiFinder {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.dbV1001 = InstanceProvider.create(DbV1001HihokenshaDaichoAliveDac.class);
         this.dbV4001 = InstanceProvider.create(DbV4001JukyushaDaichoAliveDac.class);
-
+        this.dbT3118 = InstanceProvider.create(DbT3118ShikibetsuNoKanriDac.class);
     }
 
     /**
@@ -69,12 +71,14 @@ public class KyufuJissekiShokaiFinder {
      * @param mapperProvider MapperProvider
      * @param dbV1001 dbV1001
      * @param dbV4001 dbV4001
+     * @param dbT3118 dbT3118
      */
     KyufuJissekiShokaiFinder(MapperProvider mapperProvider, DbV1001HihokenshaDaichoAliveDac dbV1001,
-            DbV4001JukyushaDaichoAliveDac dbV4001) {
+            DbV4001JukyushaDaichoAliveDac dbV4001, DbT3118ShikibetsuNoKanriDac dbT3118) {
         this.mapperProvider = mapperProvider;
         this.dbV1001 = dbV1001;
         this.dbV4001 = dbV4001;
+        this.dbT3118 = dbT3118;
     }
 
     /**
@@ -222,4 +226,22 @@ public class KyufuJissekiShokaiFinder {
         return SearchResult.of(識別番号管理データリスト, 0, false);
     }
 
+    /**
+     * 給付分類区分を取得します。
+     *
+     * @param 識別番号 識別番号
+     * @param サービス提供年月 サービス提供年月
+     * @return 給付分類区分
+     */
+    public RString get給付分類区分(NyuryokuShikibetsuNo 識別番号, FlexibleYearMonth サービス提供年月) {
+        requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
+        requireNonNull(識別番号, UrSystemErrorMessages.値がnull.getReplacedMessage("識別番号"));
+        DbT3118ShikibetsuNoKanriEntity 識別番号管理データ = dbT3118.selectByKey(識別番号.value(), サービス提供年月);
+        if (識別番号管理データ != null) {
+            if (!RString.isNullOrEmpty(識別番号管理データ.getKyufuBunruiKubun())) {
+                return 識別番号管理データ.getKyufuBunruiKubun();
+            }
+        }
+        return RString.EMPTY;
+    }
 }

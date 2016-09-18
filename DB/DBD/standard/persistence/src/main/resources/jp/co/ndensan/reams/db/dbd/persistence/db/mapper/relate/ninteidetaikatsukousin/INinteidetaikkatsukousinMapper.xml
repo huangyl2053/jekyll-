@@ -22,6 +22,10 @@
         T4003."shinsakaiIken",
         T4003."nijiHanteiKekkaCode",
         T4003."yobiKubun4",
+        T4003."shinseiShubetsuCode",
+        "DbT4101NinteiShinseiJoho"."minashiNigoEtcTaishoFlag",
+        "DbT4101NinteiShinseiJoho"."zenYokaigoKubunCode",
+        A.*,
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.allColumns_DbT4101NinteiShinseiJoho" />,
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4102NinteiKekkaJohoMapper.allColumns_DbT4102NinteiKekkaJoho" />,
         row_number() over(PARTITION BY T4003."hihokenshaNo" ORDER BY T4003."rirekiNo" DESC )as rank_number
@@ -30,7 +34,22 @@
         ON "DbT4101NinteiShinseiJoho"."shinseishoKanriNo" =  T4003."shinseishoKanriNo"
         LEFT JOIN rgdb."DbT4102NinteiKekkaJoho"
         ON "DbT4102NinteiKekkaJoho"."shinseishoKanriNo" =  T4003."shinseishoKanriNo"
-        WHERE T4003."keshikomiFlag" = '0'
+        INNER JOIN (
+        SELECT
+        temp.*
+        FROM(
+        SELECT
+        受給者台帳.*,
+        row_number() over(PARTITION BY 受給者台帳."hihokenshaNo" ORDER BY 受給者台帳."rirekiNo" DESC )as rank_number1
+        FROM  rgdb."DbT4001JukyushaDaicho" AS 受給者台帳
+        WHERE 受給者台帳."shinseiJokyoKubun" = '0'
+        AND 受給者台帳."logicalDeletedFlag" = FALSE
+        )AS temp
+        WHERE temp.rank_number1 = 1
+        )AS A
+        ON A."hihokenshaNo" =  T4003."hihokenshaNo"
+        AND A."shinseishoKanriNo" = T4003."shinseishoKanriNo"
+        AND T4003."keshikomiFlag" = '0'
         )AS TEMP
         WHERE TEMP.rank_number = 1
     </select>
@@ -40,23 +59,40 @@
         SELECT
 
         X4101.*,
-
+        A.*,
         T4102."shinseishoKanriNo",
         T4102."shinsakaiShiryoSakuseiYMD",
         T4102."nijiHanteiYMD",
         T4102."nijiHanteiNinteiYukoKaishiYMD",
         T4102."nijiHanteiNinteiYukoShuryoYMD",
-        T4102."nijiHanteiYokaigoJotaiKubunCode"
+        T4102."nijiHanteiYokaigoJotaiKubunCode",
+        T4101."ninteiShinseiHoreiKubunCode",
+        T4101."ninteiShinseiShinseijiKubunCode"
         FROM rgdb."DbT4102NinteiKekkaJoho" AS T4102
         INNER JOIN (
         SELECT
-        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.allColumns_DbT4101NinteiShinseiJoho" />
+        *
         FROM rgdb."DbT4101NinteiShinseiJoho"
         WHERE "DbT4101NinteiShinseiJoho"."ninteiShinseiShinseijiKubunCode" = '2'
         AND "DbT4101NinteiShinseiJoho"."shienShinseiKubun" = '1'
         AND "DbT4101NinteiShinseiJoho"."logicalDeletedFlag" = FALSE
         )X4101
-        ON T4102."shinseishoKanriNo" = X4101."dbT4101NinteiShinseiJoho_shinseishoKanriNo"
+        ON T4102."shinseishoKanriNo" = X4101."shinseishoKanriNo"
+        INNER JOIN (
+        SELECT
+        temp.*
+        FROM(
+        SELECT
+        受給者台帳.*,
+        row_number() over(PARTITION BY 受給者台帳."hihokenshaNo" ORDER BY 受給者台帳."rirekiNo" DESC )as rank_number
+        FROM  rgdb."DbT4001JukyushaDaicho" AS 受給者台帳
+        WHERE 受給者台帳."shinseiJokyoKubun" = '0'
+        AND 受給者台帳."logicalDeletedFlag" = FALSE
+        )AS temp
+        WHERE temp.rank_number = 1
+        )AS A
+        ON A."hihokenshaNo" =  X4101."hihokenshaNo"
+        AND A."shinseishoKanriNo" = T4102."shinseishoKanriNo"
         WHERE T4102."nijiHanteiYMD" IS NOT NULL
 
     </select>
@@ -89,8 +125,11 @@
         <result property="審査会意見" column="shinsakaiIken" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="二次判定結果" column="nijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="予備区分4" column="yobiKubun4" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="申請種別コード" column="shinseiShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="みなし２号等対象フラグ" column="minashiNigoEtcTaishoFlag" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+        <result property="前回要介護状態区分コード" column="zenYokaigoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
 
-        
+        <association property="受給者台帳Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.ResultMap_DbT4001JukyushaDaichoEntity"/>
         <association property="要介護認定申請情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.ResultMap_DbT4101NinteiShinseiJohoEntity"/>
         <association property="要介護認定結果情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4102NinteiKekkaJohoMapper.ResultMap_DbT4102NinteiKekkaJohoEntity"/>
     </resultMap>
@@ -102,6 +141,10 @@
         <result property="二次判定認定有効開始年月日" column="nijiHanteiNinteiYukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="二次判定認定有効終了年月日" column="nijiHanteiNinteiYukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="二次判定要介護状態区分コード" column="nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定申請区分法令コード" column="ninteiShinseiHoreiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="認定申請区分申請時コード" column="ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+
+        <association property="受給者台帳Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.ResultMap_DbT4001JukyushaDaichoEntity"/>
         <association property="要介護認定申請情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.ResultMap_DbT4101NinteiShinseiJohoEntity"/>
     </resultMap>
 

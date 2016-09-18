@@ -69,10 +69,6 @@ public class ShikakuTokusoFinder {
      * @return 一覧データ取得取得リスト
      */
     public SearchResult<ShikakuTokuso> getShikakuTokuso(ShikakuTokusoParameter params) {
-        if ((params.getHihokenshaNo() == null || params.getHihokenshaNo().isEmpty())
-                && (params.getShikibetsuCode() == null || params.getShikibetsuCode().isEmpty())) {
-            throw new ApplicationException(UrErrorMessages.検索キーの誤り.getMessage());
-        }
         IShikakuTokusoMapper shikakuTokusoMapper = this.mapperProvider.create(IShikakuTokusoMapper.class);
         List<ServiceShikakuRelateEntity> 一覧データ取得リスト = shikakuTokusoMapper.getShikakuJoho(params);
         List<ShikakuTokuso> serviceShuruiList = new ArrayList<>();

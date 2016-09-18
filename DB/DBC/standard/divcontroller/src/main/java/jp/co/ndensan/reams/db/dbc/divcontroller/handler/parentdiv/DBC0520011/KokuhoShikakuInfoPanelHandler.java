@@ -45,7 +45,6 @@ import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.StringOperator;
 public class KokuhoShikakuInfoPanelHandler {
 
     private final KokuhoShikakuInfoPanelDiv div;
-    private KokuhoShikakuInfo 国保資格詳細情報;
     private static final RString コード = new RString("2");
 
     /**
@@ -62,8 +61,9 @@ public class KokuhoShikakuInfoPanelHandler {
      *
      * @param shikibetsuCode ShikibetsuCode
      * @param 被保険者番号 HihokenshaNo
+     * @return KokuhoShikakuInfo 国保資格詳細情報
      */
-    public void initialize(ShikibetsuCode shikibetsuCode, HihokenshaNo 被保険者番号) {
+    public KokuhoShikakuInfo initialize(ShikibetsuCode shikibetsuCode, HihokenshaNo 被保険者番号) {
         IHokenjaManager iHokenjaManager = HokenjaManagerFactory.createInstance();
         INewSearchCondition 検索条件 = SearchConditionFactory.condition(
                 HokenjaSearchItem.保険者種別, StringOperator.完全一致, HokenjaShubetsuType.国民健康保険.code());
@@ -86,7 +86,7 @@ public class KokuhoShikakuInfoPanelHandler {
         div.getHeaderPanel().getCcdAtenaInfo().initialize();
         div.getHeaderPanel().getCcdShikakuInfo().initialize(shichosonSecurityJoho.get市町村情報().get市町村コード().value(), 被保険者番号.value());
         KokuhoShikakuInfoManager kokuhoShikakuInfoManager = KokuhoShikakuInfoManager.createInstance();
-        国保資格詳細情報 = kokuhoShikakuInfoManager.get国保資格詳細情報(shikibetsuCode);
+        KokuhoShikakuInfo 国保資格詳細情報 = kokuhoShikakuInfoManager.get国保資格詳細情報(shikibetsuCode);
         if (国保資格詳細情報 != null) {
             if (国保資格詳細情報.get国保保険証番号() != null && !国保資格詳細情報.get国保保険証番号().isEmpty()) {
                 div.getMeisaiPanel().getTxtKokuhoHokenshoNo().setValue(new Decimal(国保資格詳細情報.get国保保険証番号().toString()));
@@ -108,11 +108,12 @@ public class KokuhoShikakuInfoPanelHandler {
                 keys.add(new RString("key0"));
             }
             div.getMeisaiPanel().getChkTorokuKubun().setSelectedItemsByKey(keys);
-            set文字コード();
+            set文字コード(国保資格詳細情報);
             前排他の設定(shikibetsuCode, 国保資格詳細情報.get履歴番号());
         } else {
             前排他の設定(shikibetsuCode, RString.EMPTY);
         }
+        return 国保資格詳細情報;
     }
 
     /**
@@ -121,7 +122,7 @@ public class KokuhoShikakuInfoPanelHandler {
      * @param shikibetsuCode ShikibetsuCode
      * @return boolean
      */
-    public boolean updateorinsert(ShikibetsuCode shikibetsuCode) {
+    public boolean updateorinsert(ShikibetsuCode shikibetsuCode, KokuhoShikakuInfo 国保資格詳細情報) {
         boolean flag = false;
         KokuhoShikakuInfoManager kokuhoShikakuInfoManager = KokuhoShikakuInfoManager.createInstance();
         KokuhoShikakuInfoBuilder builder;
@@ -221,7 +222,7 @@ public class KokuhoShikakuInfoPanelHandler {
      * @param shikibetsuCode shikibetsuCode
      * @param div FutangendogakuShinseiDiv
      */
-    public void onClick_btnBack(ShikibetsuCode shikibetsuCode, KokuhoShikakuInfoPanelDiv div) {
+    public void onClick_btnBack(ShikibetsuCode shikibetsuCode, KokuhoShikakuInfoPanelDiv div, KokuhoShikakuInfo 国保資格詳細情報) {
         if (国保資格詳細情報 != null) {
             前排他制御の解除(shikibetsuCode, 国保資格詳細情報.get履歴番号());
         } else {
@@ -229,7 +230,7 @@ public class KokuhoShikakuInfoPanelHandler {
         }
     }
 
-    private void set文字コード() {
+    private void set文字コード(KokuhoShikakuInfo 国保資格詳細情報) {
         RString 文字コード = DbBusinessConfig.get(ConfigNameDBC.国保_後期高齢ＩＦ_国保ＩＦ種類, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
         if (new RString("2").equals(文字コード)) {
             if (国保資格詳細情報.get退職該当日() != null) {
@@ -272,7 +273,7 @@ public class KokuhoShikakuInfoPanelHandler {
     }
 
     private KeyValueDataSource get国保保険者番号(Hokenja hokenja) {
-        return new KeyValueDataSource(hokenja.get保険者名(), hokenja.get保険者番号().getColumnValue());
+        return new KeyValueDataSource(hokenja.get保険者番号().getColumnValue(), hokenja.get保険者名());
     }
 
 }

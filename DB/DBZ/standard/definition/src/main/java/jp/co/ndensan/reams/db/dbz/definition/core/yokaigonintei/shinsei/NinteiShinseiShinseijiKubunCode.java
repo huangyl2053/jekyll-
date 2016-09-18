@@ -92,12 +92,32 @@ public enum NinteiShinseiShinseijiKubunCode {
      * @return {@code code} に対応する申請区分（申請時）コード
      */
     public static NinteiShinseiShinseijiKubunCode toValue(RString code) {
+        NinteiShinseiShinseijiKubunCode value = toValueOrNull(code);
+        if (value == null) {
+            throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("申請区分（申請時）コード"));
+        }
+        return value;
+    }
 
+    private static NinteiShinseiShinseijiKubunCode toValueOrNull(RString code) {
         for (NinteiShinseiShinseijiKubunCode kubunCode : NinteiShinseiShinseijiKubunCode.values()) {
             if (kubunCode.code.equals(code)) {
                 return kubunCode;
             }
         }
-        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("申請区分（申請時）コード"));
+        return null;
+    }
+
+    /**
+     * 第1引数のコードから名称を取得して返却します。
+     * コードに対応する要素が無い場合は、第2引数の値を返します。
+     *
+     * @param code コード
+     * @param defaultValue コードに該当する要素が存在しなかった場合のデフォルト値
+     * @return コードに該当する要素の名称.もしくは、デフォルト値.
+     */
+    public static RString to名称OrDefault(RString code, RString defaultValue) {
+        NinteiShinseiShinseijiKubunCode value = toValueOrNull(code);
+        return value == null ? defaultValue : value.get名称();
     }
 }

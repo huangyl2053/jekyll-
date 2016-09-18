@@ -27,4 +27,5 @@ public class JigyoshaShiteiServiceEntity {
     private AtenaMeisho kanrishaName;
     private ServiceShuruiCode serviceShuruiCode;
     private RString serviceShuruiRyakusho;
+    private boolean isDeleted = false;
 }

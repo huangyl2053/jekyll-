@@ -3,7 +3,6 @@
  <!--@reamsid_L DBB-0700-020 xuhao--> 
 
 <mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchokarisanteifuka.ITokuchoKariSanteiFukaMapper">
-    <!--select特徴継続者-->
     <select resultOrdered="true" id="select特徴継続者" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchokarisanteifuka.TokuchoKarisanteiFukaMyBatisParameter" 
             resultMap="resultMap_DbV2001ChoshuHoho" fetchSize="500">
         <include refid="selectDbV2001ChoshuHoho" />
@@ -210,7 +209,6 @@
         <result property="nenkinShunyuGaku" column="nenkinShunyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap> 
     
-    <!--select前年度賦課-->
     <select resultOrdered="true" id="select前年度賦課" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchokarisanteifuka.TokuchoKarisanteiFukaMyBatisParameter" 
             resultMap="resultMap_ZennNenndoFukaTempEntity" fetchSize="500">
         
@@ -265,7 +263,6 @@
         <result property="choteigaku6" column="choteigaku6" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap> 
     
-    <!--最新履歴以外のデータを削除する。-->
     <delete id="delete最新履歴以外のデータ">
         DELETE
         FROM "ZennNenndoFukaTemp" AS "ZennNenndoFukaTemp"
@@ -291,7 +288,6 @@
                           AND B."rirekiNo" = "ZennNenndoFukaTemp"."rirekiNo")
     </delete>
     
-    <!--特徴仮算定抽出Tempの前年度特徴期別金額06を更新する。-->
     <update id="update特徴仮算定抽出Temp">
         UPDATE  "TokutyoukariSannteiTyuushutuTemp" AS A
         SET "choteigaku" = B."choteigaku6"
@@ -302,7 +298,6 @@
         AND A."choteigaku" = 0
     </update>
     
-    <!--不整合データ抽出する。-->
     <select resultOrdered="true" id="select不整合データ" resultMap="resultMap_FuseigouData" fetchSize="500">
         
         SELECT TEMP.*
@@ -542,12 +537,21 @@
         AND "DbV2002FukaBrfore"."fukaNendo" = #{調定年度BeforeYear}
         AND "DbV2002FukaBrfore"."tsuchishoNo" = B."通知書番号"
         AND "DbV2002FukaBrfore"."hihokenshaNo" = B."hihokenshaNo"
+        ORDER BY "DbT2002FukaJohoTemp"."choteiNendo",
+                 "DbT2002FukaJohoTemp"."fukaNendo",
+                 "DbT2002FukaJohoTemp"."tsuchishoNo",
+                 "DbT2002FukaJohoTemp"."rirekiNo",
+                 "DbT2002FukaJohoTemp"."hihokenshaNo"
     </select>
     <resultMap id="resultMap_SikakuSaisinnsiki"
                type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukamanager.SikakuSaisinnsikiRelateEntity" autoMapping="true">
         <id column="choteiNendo"/>
         <id column="fukaNendo"/>
         <id column="tsuchishoNo"/>
+        <id column="UrT0508SeikatsuHogoJukyusha_shikibetsuCode"/>
+        <id column="UrT0508SeikatsuHogoJukyusha_gyomuCode"/>
+        <id column="UrT0508SeikatsuHogoJukyusha_jukyuKaishiYMD"/>
+        <id column="UrT0526SeikatsuHogoFujoShurui_fujoShuruiCode"/>
         <result property="生保開始日" column="seihoKaishiYMDBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="生保廃止日" column="seihoHaishiYMDBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="老年開始日" column="ronenKaishiYMDBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
@@ -734,10 +738,10 @@
         <result property="lastUpdateReamsLoginId" column="UrT0526SeikatsuHogoFujoShurui_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
-    <!--select賦課情報_継続-->
     <select resultOrdered="true" id="select賦課情報_継続" resultMap="resultMap_FukaJohokeizokuRelateEntity" fetchSize="500">
         
         SELECT 特徴仮算定抽出Temp."hihokenshaNo",
+        特徴仮算定抽出Temp."fukaNendo",
         特徴仮算定抽出Temp."hokenryoDankai",
         特徴仮算定抽出Temp."choteigaku",
         特徴仮算定抽出Temp."seihoKaishiYMD",
@@ -821,10 +825,13 @@
         LEFT JOIN rgdb."DbT7006RoreiFukushiNenkinJukyusha" AS "DbT7006RoreiFukushiNenkinJukyusha"
         ON "DbT7006RoreiFukushiNenkinJukyusha"."shikibetsuCode" = 被保険者台帳管理Newest."shikibetsuCode"
         WHERE 特徴仮算定抽出Temp."choshuHoho4gatsu" IN ('1', '2')
+        ORDER BY 特徴仮算定抽出Temp."fukaNendo",
+                 特徴仮算定抽出Temp."hihokenshaNo"
     </select>
     <resultMap id="resultMap_FukaJohokeizokuRelateEntity" autoMapping="true"
                type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukamanager.FukaJohokeizokuRelateEntity">
-        <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="fukaNendo" column="fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="hokenryoDankai" column="hokenryoDankai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="choteigaku" column="choteigaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="seihoKaishiYMD" column="seihoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
@@ -842,10 +849,10 @@
         <association property="老齢の情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT7006RoreiFukushiNenkinJukyushaMapper.ResultMap_DbT7006RoreiFukushiNenkinJukyushaEntity"/>
     </resultMap>
     
-    <!--select賦課情報_6月開始-->
     <select resultOrdered="true" id="select賦課情報_6月開始" resultMap="resultMap_FukaJohokeizokuRelateEntity" fetchSize="500">
         
         SELECT 特徴仮算定抽出Temp."hihokenshaNo",
+        特徴仮算定抽出Temp."fukaNendo",
         特徴仮算定抽出Temp."hokenryoDankai",
         特徴仮算定抽出Temp."choteigaku",
         特徴仮算定抽出Temp."hokenryoDankai",
@@ -930,6 +937,8 @@
         LEFT JOIN rgdb."DbT7006RoreiFukushiNenkinJukyusha" AS "DbT7006RoreiFukushiNenkinJukyusha"
         ON "DbT7006RoreiFukushiNenkinJukyusha"."shikibetsuCode" = 被保険者台帳管理Newest."shikibetsuCode"
         WHERE 特徴仮算定抽出Temp."choshuHoho4gatsu" NOT IN ('1', '2')
+        ORDER BY 特徴仮算定抽出Temp."fukaNendo",
+                 特徴仮算定抽出Temp."hihokenshaNo"
     </select>
     
      <select resultOrdered="true" id="select特徴仮算定結果情報" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchokarisanteifuka.TokuchoKarisanteiFukaMyBatisParameter" 

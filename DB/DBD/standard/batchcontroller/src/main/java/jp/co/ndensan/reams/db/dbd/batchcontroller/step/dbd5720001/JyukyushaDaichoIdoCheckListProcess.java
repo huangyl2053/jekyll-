@@ -43,6 +43,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.RLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -65,15 +66,12 @@ public class JyukyushaDaichoIdoCheckListProcess extends BatchKeyBreakBase<Jyukyu
             "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.jukyushaidochecklist."
             + "IJukyushaIdoCheckListMapper.get帳票出力対象データ");
     private IOutputOrder order = null;
-    private IOutputOrder breakoutputOrder = null;
     private RString 出力順 = RString.EMPTY;
     private static final int NUM5 = 5;
     private static final RString 申請書管理番号 = new RString("申請書管理番号");
+    private static final RString 帳票出力順の取得 = new RString("帳票出力順の取得");
     private static final int NO_0 = 0;
-    private static final int NO_1 = 1;
-    private static final int NO_2 = 2;
-    private static final int NO_3 = 3;
-    private static final int NO_4 = 4;
+    private static final int NO_5 = 5;
 
     @BatchWriter
     private BatchReportWriter<JukyushaIdoCheckListReportSource> batchReportWriter;
@@ -86,11 +84,9 @@ public class JyukyushaDaichoIdoCheckListProcess extends BatchKeyBreakBase<Jyukyu
             order = finder.get出力順(SubGyomuCode.DBD介護受給, REPORT_DBD200037, parameter.get出力順ID());
             出力順 = get出力順(order);
         } else {
+            RLogger.info("uvwxyz");
             throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
-                    .replace(new RString("帳票出力順の取得").toString()).toString());
-        }
-        if (parameter.get改頁出力順ID() != null) {
-            breakoutputOrder = finder.get出力順(SubGyomuCode.DBD介護受給, REPORT_DBD200037, parameter.get改頁出力順ID());
+                    .replace(帳票出力順の取得.toString()).toString());
         }
     }
 
@@ -107,8 +103,8 @@ public class JyukyushaDaichoIdoCheckListProcess extends BatchKeyBreakBase<Jyukyu
 
     @Override
     protected void createWriter() {
-        List pageBreakKeys = new ArrayList<>();
-        set改頁Key(breakoutputOrder, pageBreakKeys);
+        List<RString> pageBreakKeys = new ArrayList<>();
+        set改頁Key(order, pageBreakKeys);
         batchReportWriter = BatchReportFactory.createBatchReportWriter(REPORT_DBD200037.value()).addBreak(
                 new BreakerCatalog<JukyushaIdoCheckListReportSource>().simplePageBreaker(pageBreakKeys)).create();
         reportSourceWriter = new ReportSourceWriter(batchReportWriter);
@@ -125,7 +121,7 @@ public class JyukyushaDaichoIdoCheckListProcess extends BatchKeyBreakBase<Jyukyu
         JyukyushaDaichoIdoCheckListOutputResult business = new JyukyushaDaichoIdoCheckListOutputResult();
         UpperEntity upperEntity = business.getUpperEntity(entity);
         LowerEntity lowerEntity = business.getLowerEntity(entity);
-        JukyushaIdoCheckListReport report = new JukyushaIdoCheckListReport(upperEntity, lowerEntity, order, breakoutputOrder);
+        JukyushaIdoCheckListReport report = new JukyushaIdoCheckListReport(upperEntity, lowerEntity, order);
         report.writeBy(reportSourceWriter);
     }
 
@@ -140,8 +136,9 @@ public class JyukyushaDaichoIdoCheckListProcess extends BatchKeyBreakBase<Jyukyu
 
     private RString get出力順(IOutputOrder order) {
         if (null == order) {
+            RLogger.info("abcdefg");
             throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
-                    .replace(new RString("帳票出力順の取得").toString()).toString());
+                    .replace(帳票出力順の取得.toString()).toString());
         } else {
             出力順 = ChohyoUtil.get出力順OrderBy(MyBatisOrderByClauseCreator.
                     create(DBD200037_JukyushaIdoCheckListEnum.class, order), NUM5);
@@ -149,49 +146,27 @@ public class JyukyushaDaichoIdoCheckListProcess extends BatchKeyBreakBase<Jyukyu
         return 出力順;
     }
 
-    private void set改頁Key(IOutputOrder outputOrder, List pageBreakKeys) {
-        RString 改頁１ = RString.EMPTY;
-        RString 改頁２ = RString.EMPTY;
-        RString 改頁３ = RString.EMPTY;
-        RString 改頁４ = RString.EMPTY;
-        RString 改頁５ = RString.EMPTY;
+    private void set改頁Key(IOutputOrder outputOrder, List<RString> pageBreakKeys) {
+        pageBreakKeys.addAll(PAGE_BREAK_KEYS);
         if (outputOrder != null) {
             List<ISetSortItem> list = outputOrder.get設定項目リスト();
             if (list == null) {
                 list = new ArrayList<>();
             }
-            if (list.size() > NO_0 && list.get(NO_0).is改頁項目()) {
-                改頁１ = list.get(0).get項目名();
-            }
-            if (list.size() > NO_1 && list.get(NO_1).is改頁項目()) {
-                改頁２ = list.get(NO_1).get項目名();
-            }
-            if (list.size() > NO_2 && list.get(NO_2).is改頁項目()) {
-                改頁３ = list.get(NO_2).get項目名();
-            }
-            if (list.size() > NO_3 && list.get(NO_3).is改頁項目()) {
-                改頁４ = list.get(NO_3).get項目名();
-            }
-            if (list.size() > NO_4 && list.get(NO_4).is改頁項目()) {
-                改頁５ = list.get(NO_4).get項目名();
-            }
-            pageBreakKeys.add(PAGE_BREAK_KEYS);
-            if (!改頁１.isEmpty()) {
-                pageBreakKeys.add(改頁１);
-            }
-            if (!改頁２.isEmpty()) {
-                pageBreakKeys.add(改頁２);
-            }
-            if (!改頁３.isEmpty()) {
-                pageBreakKeys.add(改頁３);
-            }
-            if (!改頁４.isEmpty()) {
-                pageBreakKeys.add(改頁４);
-            }
-            if (!改頁５.isEmpty()) {
-                pageBreakKeys.add(改頁５);
+            for (int index = 0; index < NO_5; index++) {
+                setList(index, pageBreakKeys, list);
             }
         }
+    }
+
+    private void setList(int index, List<RString> pageBreakKeys, List<ISetSortItem> list) {
+
+        if (list.size() > index && list.get(index).is改頁項目()) {
+            if (!list.get(index).get項目名().isEmpty()) {
+                pageBreakKeys.add(list.get(index).get項目名());
+            }
+        }
+
     }
 
 }

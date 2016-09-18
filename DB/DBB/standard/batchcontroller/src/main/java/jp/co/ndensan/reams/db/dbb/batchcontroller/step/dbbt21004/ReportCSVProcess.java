@@ -130,10 +130,11 @@ public class ReportCSVProcess extends BatchKeyBreakBase<DankaibeHihokensixyaEnti
     }
 
     /**
+     *
      * 年月日ForCsv(共通ポリシーパターン36（1989/ 1/ 8 ）)を返します。
      *
-     * @param flexibleDate　年月日ForCsv
-     * @return RString　年月日ForCsv
+     * @param flexibleDate 年月日ForCsv
+     * @return RString 年月日ForCsv
      */
     public RString get年月日Csv(FlexibleDate flexibleDate) {
         if (null != flexibleDate) {

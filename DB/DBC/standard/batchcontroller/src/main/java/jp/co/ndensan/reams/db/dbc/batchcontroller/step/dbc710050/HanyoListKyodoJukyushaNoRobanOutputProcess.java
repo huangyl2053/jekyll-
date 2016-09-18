@@ -57,23 +57,23 @@ public class HanyoListKyodoJukyushaNoRobanOutputProcess extends BatchProcessBase
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc710050."
                     + "IHanyoListKyodoJukyushaMapper.select共同処理用受給者情報");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC710005");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC701005");
     private final RString csvFileName = new RString("HanyoList_KyodoJukyushaKihon.csv");
     private static final RString 日本語ファイル名 = new RString("汎用リスト　共同受給者基本情報");
     private static final RString 定数_なし = new RString("なし");
     private static final RString 定数_あり = new RString("あり");
     private static final RString TITLE_抽出条件 = new RString("【抽出条件】");
-    private static final RString TITLE_保険者 = new RString("　保険者：");
+    private static final RString TITLE_保険者 = new RString("　　保険者：");
     private static final RString INDEX_1 = new RString("1");
     private static final RString INDEX_2 = new RString("2");
     private static final RString INDEX_3 = new RString("3");
-    private static final RString TITLE_日付抽出区分 = new RString("　日付抽出区分：");
-    private static final RString TITLE_異動区分 = new RString("　異動区分：");
-    private static final RString TITLE_処理対象年月 = new RString("　　　処理対象年月：");
-    private static final RString TITLE_異動年月 = new RString("　　　異動年月　　：");
-    private static final RString 各異動月の最新のみ = new RString("　　　■各異動月の最新情報のみ抽出する");
+    private static final RString TITLE_日付抽出区分 = new RString("　　日付抽出区分：");
+    private static final RString TITLE_異動区分 = new RString("　　異動区分：");
+    private static final RString TITLE_処理対象年月 = new RString("　　　　　処理対象年月：");
+    private static final RString TITLE_異動年月 = new RString("　　　　　異動年月　　：");
+    private static final RString 各異動月の最新のみ = new RString("　　　　　■各異動月の最新情報のみ抽出する");
     private static final RString TILDE = new RString("～");
-    private static final LasdecCode 全市町村_CODE = new LasdecCode("00000");
+    private static final LasdecCode 全市町村_CODE = new LasdecCode("000000");
     private static final RString 全市町村 = new RString("00000 全市町村");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
@@ -93,6 +93,7 @@ public class HanyoListKyodoJukyushaNoRobanOutputProcess extends BatchProcessBase
 
     @Override
     protected void initialize() {
+        連番 = 0;
         構成市町村マスタ = new HashMap<>();
         csv出力Flag = 定数_なし;
         地方公共団体情報 = AssociationFinderFactory.createInstance().getAssociation();
@@ -175,7 +176,7 @@ public class HanyoListKyodoJukyushaNoRobanOutputProcess extends BatchProcessBase
     private List<RString> get抽出条件() {
         List<RString> 抽出条件 = new ArrayList<>();
         抽出条件.add(TITLE_抽出条件);
-        if (parameter.get保険者コード() != null && LasdecCode.EMPTY.equals(parameter.get保険者コード())) {
+        if (parameter.get保険者コード() == null || LasdecCode.EMPTY.equals(parameter.get保険者コード())) {
             抽出条件.add(RString.EMPTY);
         } else if (parameter.get保険者コード() != null && 全市町村_CODE.equals(parameter.get保険者コード())) {
             抽出条件.add(TITLE_保険者.concat(全市町村));
@@ -223,6 +224,7 @@ public class HanyoListKyodoJukyushaNoRobanOutputProcess extends BatchProcessBase
                 抽出条件.add(RString.EMPTY);
             }
         }
+        抽出条件.add(RString.EMPTY);
         RString 新規;
         if (parameter.get異動区分S() != null && !parameter.get異動区分S().isEmpty()) {
             if (parameter.get異動区分S().contains(INDEX_1)) {
@@ -246,9 +248,9 @@ public class HanyoListKyodoJukyushaNoRobanOutputProcess extends BatchProcessBase
         }
         RString 削除された情報を含める;
         if (parameter.is削除含める()) {
-            削除された情報を含める = new RString("■各異動月の最新情報のみ抽出する");
+            削除された情報を含める = new RString("　　■削除された情報を含める");
         } else {
-            削除された情報を含める = new RString("□各異動月の最新情報のみ抽出する");
+            削除された情報を含める = RString.EMPTY;
         }
         抽出条件.add(削除された情報を含める);
     }

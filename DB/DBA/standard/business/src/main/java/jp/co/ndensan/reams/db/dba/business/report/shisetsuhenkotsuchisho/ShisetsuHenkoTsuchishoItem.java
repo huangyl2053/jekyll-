@@ -56,7 +56,11 @@ public class ShisetsuHenkoTsuchishoItem {
     private RString henkogoShisetsuJusho;
     private RString denshiKoin;
     private RString shomeiHakkoYMD;
-    private RString shuchoMei;
-    private RString shichosonMei;
+    private RString ninshoshaYakushokuMei;
+    private RString ninshoshaYakushokuMei2;
     private RString koinShoryaku;
+    private RString koinMojiretsu;
+    private RString ninshoshaShimeiKakenai;
+    private RString ninshoshaShimeiKakeru;
+    private RString ninshoshaYakushokuMei1;
 }

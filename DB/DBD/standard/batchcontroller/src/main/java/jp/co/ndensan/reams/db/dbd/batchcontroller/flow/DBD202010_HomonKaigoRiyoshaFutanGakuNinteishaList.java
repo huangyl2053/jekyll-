@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbdbt00003.NinteishaListSakuseiProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbdbt00003.TaishoshaIchijiTokuteiProcess;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD202010.DBD202010_HomonKaigoRiyoshaFutanGakuNinteishaListParameter;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmenGengakuTaishoShaHanteiYoukonSakusei.GemmenGengakuTaishoShaHanteiYoukonSakuseiParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBDZ00001.DBDZ00001_GemmenGengakuTaishoshaHanteiYoKonkyoSakuseiParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -22,7 +22,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBD-3970-030 x_xuliang
  */
-public class DBD202010_HomonKaigoRiyoshaFutanGakuNinteishaList extends BatchFlowBase<DBD202010_HomonKaigoRiyoshaFutanGakuNinteishaListParameter> {
+public class DBD202010_HomonKaigoRiyoshaFutanGakuNinteishaList
+        extends BatchFlowBase<DBD202010_HomonKaigoRiyoshaFutanGakuNinteishaListParameter> {
 
     private static final String 対象者一次特定一時テーブル登録 = "TaishoshaIchijiTokutei";
     private static final String 減免減額対象者判定用根拠作成バッチ = "GemmenGengakuTaishoshaHanteiYoKonkyoSakusei";
@@ -75,7 +76,7 @@ public class DBD202010_HomonKaigoRiyoshaFutanGakuNinteishaList extends BatchFlow
                 .define();
     }
 
-    private GemmenGengakuTaishoShaHanteiYoukonSakuseiParameter createGemmenGengakuTaishoShaHanteiYoukonSakuseiParameter() {
-        return new GemmenGengakuTaishoShaHanteiYoukonSakuseiParameter(getParameter().get所得年度());
+    private DBDZ00001_GemmenGengakuTaishoshaHanteiYoKonkyoSakuseiParameter createGemmenGengakuTaishoShaHanteiYoukonSakuseiParameter() {
+        return new DBDZ00001_GemmenGengakuTaishoshaHanteiYoKonkyoSakuseiParameter(getParameter().get所得年度());
     }
 }

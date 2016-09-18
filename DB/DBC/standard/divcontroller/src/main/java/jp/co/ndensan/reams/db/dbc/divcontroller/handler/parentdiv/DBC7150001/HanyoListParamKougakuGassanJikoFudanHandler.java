@@ -44,7 +44,6 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
     private static final RString 項目名付加 = new RString("1");
     private static final RString 連番付加 = new RString("2");
     private static final RString 日付 = new RString("3");
-    private static final RString 送付対象外を含める = new RString("key0");
     private static final int 調定年度を含めて8年分 = 8;
     private static final int INDEX_ゼロ = 0;
     private static final RString ONE = new RString("1");
@@ -179,7 +178,7 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
         if (null != div.getTxtSikyuSinseishoSeiriBangoShuryo()) {
             batchparam.setShikyuShinseishoSeiriNoTo(div.getTxtSikyuSinseishoSeiriBangoShuryo().getValue());
         }
-        if (送付対象外を含める.toString().equals(div.getChkSofuTaishogaiFukumu().getSelectedKeys().toString())) {
+        if (div.getChkSofuTaishogaiFukumu().getSelectedKeys() != null && !div.getChkSofuTaishogaiFukumu().getSelectedKeys().isEmpty()) {
             batchparam.setSofuTaishogaiFukumu(true);
         }
         batchparam = setChkCsvHenshuHoho(batchparam);

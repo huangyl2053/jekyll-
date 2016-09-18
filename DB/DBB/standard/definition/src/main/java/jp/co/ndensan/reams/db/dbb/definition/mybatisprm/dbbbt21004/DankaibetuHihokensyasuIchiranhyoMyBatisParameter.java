@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DankaibetuHihokensyasuIchiranhyoMyBatisParameter implements IMyBatisParameter {
 
-    private boolean is市町村コード;
+    private boolean 市町村コード;
     private RString 市町村コード複数;
     private FlexibleDate 資格基準日;
     private FlexibleDate 調定年月日;

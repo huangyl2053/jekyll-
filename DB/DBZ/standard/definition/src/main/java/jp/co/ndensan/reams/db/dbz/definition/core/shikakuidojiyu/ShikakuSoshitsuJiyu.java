@@ -1,6 +1,5 @@
 package jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu;
 
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -41,7 +40,11 @@ public enum ShikakuSoshitsuJiyu {
     /**
      * コード:99 名称:その他 備考:その他の理由により資格を喪失【資格喪失】
      */
-    その他("99", "その他", "その他の理由により資格を喪失【資格喪失】");
+    その他("99", "その他", "その他の理由により資格を喪失【資格喪失】"),
+    /**
+     * 空の場合に設定される項目
+     */
+    EMPTY("", "", "");
 
     private final RString code;
     private final RString fullName;
@@ -92,6 +95,6 @@ public enum ShikakuSoshitsuJiyu {
                 return shikakuSoshitsuJiyu;
             }
         }
-        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("資格喪失事由"));
+        return EMPTY;
     }
 }

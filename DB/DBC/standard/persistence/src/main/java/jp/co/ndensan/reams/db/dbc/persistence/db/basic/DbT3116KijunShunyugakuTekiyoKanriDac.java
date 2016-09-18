@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.leq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.lt;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.or;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
@@ -247,7 +247,7 @@ public class DbT3116KijunShunyugakuTekiyoKanriDac implements ISaveable<DbT3116Ki
                 table(DbT3116KijunShunyugakuTekiyoKanri.class).
                 where(and(
                                 eq(hihokenshaNo, 被保険者番号),
-                                leq(適用開始年月, tekiyoKaishiYMD)
+                                lt(適用開始年月, tekiyoKaishiYMD)
                         )).
                 toList(DbT3116KijunShunyugakuTekiyoKanriEntity.class);
     }

@@ -204,4 +204,202 @@ public class HanyoListKyufuKanriHyoNoRenbanCsvEntity {
     private RString 受給みなし更新認定;
     @CsvField(order = 93, name = "受給直近事由")
     private RString 受給直近事由;
+
+    /**
+     * コンストラクタです。
+     */
+    public HanyoListKyufuKanriHyoNoRenbanCsvEntity() {
+    }
+
+    /**
+     * コンストラクタです。
+     *
+     * @param 識別コード 識別コード
+     * @param 住民種別 住民種別
+     * @param 氏名 氏名
+     * @param 氏名カナ 氏名カナ
+     * @param 生年月日 生年月日
+     * @param 年齢 年齢
+     * @param 性別 性別
+     * @param 続柄コード 続柄コード
+     * @param 世帯コード 世帯コード
+     * @param 世帯主名 世帯主名
+     * @param 住所コード 住所コード
+     * @param 郵便番号 郵便番号
+     * @param 住所番地方書 住所＋番地＋方書
+     * @param 住所 住所
+     * @param 番地 番地
+     * @param 方書 方書
+     * @param 行政区コード 行政区コード
+     * @param 行政区名 行政区名
+     * @param 地区１ 地区１
+     * @param 地区２ 地区２
+     * @param 地区３ 地区３
+     * @param 連絡先１ 連絡先１
+     * @param 連絡先２ 連絡先２
+     * @param 登録異動日 登録異動日
+     * @param 登録事由 登録事由
+     * @param 登録届出日 登録届出日
+     * @param 住定異動日 住定異動日
+     * @param 住定事由 住定事由
+     * @param 住定届出日 住定届出日
+     * @param 消除異動日 消除異動日
+     * @param 消除事由 消除事由
+     * @param 消除届出日 消除届出日
+     * @param 転出入理由 転出入理由
+     * @param 前住所郵便番号 前住所郵便番号
+     * @param 前住所番地方書 前住所＋番地＋方書
+     * @param 前住所 前住所
+     * @param 前住所番地 前住所番地
+     * @param 前住所方書 前住所方書
+     * @param 市町村コード 市町村コード
+     * @param 市町村名 市町村名
+     * @param 保険者コード 保険者コード
+     * @param 保険者名 保険者名
+     * @param 空白 空白
+     * @param 被保険者番号 被保険者番号
+     * @param 資格取得事由 資格取得事由
+     * @param 資格取得日 資格取得日
+     * @param 資格取得届出日 資格取得届出日
+     * @param 喪失事由 喪失事由
+     * @param 資格喪失日 資格喪失日
+     * @param 資格喪失届日 資格喪失届日
+     * @param 資格区分 資格区分
+     * @param 住所地特例状態 住所地特例状態
+     * @param 資格証記載保険者番号 （資格）証記載保険者番号
+     * @param 審査年月 審査年月
+     * @param サービス年月 サービス年月
+     * @param 明細行番号 明細行番号
+     * @param 計画事業者番号 計画事業者番号
+     * @param 計画事業者名 計画事業者名
+     * @param 保険者番号 保険者番号
+     * @param 管理票作成日 管理票作成日
+     * @param 管理票作成区分 管理票作成区分
+     * @param 管理票種別区分 管理票種別区分
+     * @param 管理票生年月日 管理票生年月日
+     * @param 管理票性別 管理票性別
+     * @param 管理票要介護度 管理票要介護度
+     * @param 限度額適用開始 限度額適用開始
+     * @param 限度額適用終了 限度額適用終了
+     * @param 支給限度額 支給限度額
+     * @param 計画作成区分 計画作成区分
+     * @param サービス事業者番号 サービス事業者番号
+     * @param サービス事業者名 サービス事業者名
+     * @param 事業者区分 事業者区分
+     * @param サービス種類 サービス種類
+     * @param サービス種類名 サービス種類名
+     * @param 給付計画単位日数 給付計画単位日数
+     * @param 前月まで計画日数 前月まで計画日数
+     * @param 指定サービス小計 指定サービス小計
+     * @param 基準該当サービス小計 基準該当サービス小計
+     * @param 合計単位日数 合計単位日数
+     * @param 担当介護支援専門員番号 担当介護支援専門員番号
+     * @param 委託先の居宅介護支援事業者番号 委託先の居宅介護支援事業者番号
+     * @param 委託先の居宅介護支援事業者名 委託先の居宅介護支援事業者名
+     * @param 委託先の担当介護支援専門員番号 委託先の担当介護支援専門員番号
+     * @param 受給申請事由 受給申請事由
+     * @param 受給申請日 受給申請日
+     * @param 受給要介護度 受給要介護度
+     * @param 受給認定開始日 受給認定開始日
+     * @param 受給認定終了日 受給認定終了日
+     * @param 受給認定日 受給認定日
+     * @param 受給旧措置 受給旧措置
+     * @param 受給みなし更新認定 受給みなし更新認定
+     * @param 受給直近事由 受給直近事由
+     */
+    public HanyoListKyufuKanriHyoNoRenbanCsvEntity(RString 識別コード, RString 住民種別, RString 氏名, RString 氏名カナ, RString 生年月日, RString 年齢, RString 性別, RString 続柄コード, RString 世帯コード, RString 世帯主名, RString 住所コード, RString 郵便番号, RString 住所番地方書, RString 住所, RString 番地, RString 方書, RString 行政区コード, RString 行政区名, RString 地区１, RString 地区２, RString 地区３, RString 連絡先１, RString 連絡先２, RString 登録異動日, RString 登録事由, RString 登録届出日, RString 住定異動日, RString 住定事由, RString 住定届出日, RString 消除異動日, RString 消除事由, RString 消除届出日, RString 転出入理由, RString 前住所郵便番号, RString 前住所番地方書, RString 前住所, RString 前住所番地, RString 前住所方書, RString 市町村コード, RString 市町村名, RString 保険者コード, RString 保険者名, RString 空白, RString 被保険者番号, RString 資格取得事由, RString 資格取得日, RString 資格取得届出日, RString 喪失事由, RString 資格喪失日, RString 資格喪失届日, RString 資格区分, RString 住所地特例状態, RString 資格証記載保険者番号, RString 審査年月, RString サービス年月, RString 明細行番号, RString 計画事業者番号, RString 計画事業者名, RString 保険者番号, RString 管理票作成日, RString 管理票作成区分, RString 管理票種別区分, RString 管理票生年月日, RString 管理票性別, RString 管理票要介護度, RString 限度額適用開始, RString 限度額適用終了, RString 支給限度額, RString 計画作成区分, RString サービス事業者番号, RString サービス事業者名, RString 事業者区分, RString サービス種類, RString サービス種類名, RString 給付計画単位日数, RString 前月まで計画日数, RString 指定サービス小計, RString 基準該当サービス小計, RString 合計単位日数, RString 担当介護支援専門員番号, RString 委託先の居宅介護支援事業者番号, RString 委託先の居宅介護支援事業者名, RString 委託先の担当介護支援専門員番号, RString 受給申請事由, RString 受給申請日, RString 受給要介護度, RString 受給認定開始日, RString 受給認定終了日, RString 受給認定日, RString 受給旧措置, RString 受給みなし更新認定, RString 受給直近事由) {
+        this.識別コード = 識別コード;
+        this.住民種別 = 住民種別;
+        this.氏名 = 氏名;
+        this.氏名カナ = 氏名カナ;
+        this.生年月日 = 生年月日;
+        this.年齢 = 年齢;
+        this.性別 = 性別;
+        this.続柄コード = 続柄コード;
+        this.世帯コード = 世帯コード;
+        this.世帯主名 = 世帯主名;
+        this.住所コード = 住所コード;
+        this.郵便番号 = 郵便番号;
+        this.住所番地方書 = 住所番地方書;
+        this.住所 = 住所;
+        this.番地 = 番地;
+        this.方書 = 方書;
+        this.行政区コード = 行政区コード;
+        this.行政区名 = 行政区名;
+        this.地区１ = 地区１;
+        this.地区２ = 地区２;
+        this.地区３ = 地区３;
+        this.連絡先１ = 連絡先１;
+        this.連絡先２ = 連絡先２;
+        this.登録異動日 = 登録異動日;
+        this.登録事由 = 登録事由;
+        this.登録届出日 = 登録届出日;
+        this.住定異動日 = 住定異動日;
+        this.住定事由 = 住定事由;
+        this.住定届出日 = 住定届出日;
+        this.消除異動日 = 消除異動日;
+        this.消除事由 = 消除事由;
+        this.消除届出日 = 消除届出日;
+        this.転出入理由 = 転出入理由;
+        this.前住所郵便番号 = 前住所郵便番号;
+        this.前住所番地方書 = 前住所番地方書;
+        this.前住所 = 前住所;
+        this.前住所番地 = 前住所番地;
+        this.前住所方書 = 前住所方書;
+        this.市町村コード = 市町村コード;
+        this.市町村名 = 市町村名;
+        this.保険者コード = 保険者コード;
+        this.保険者名 = 保険者名;
+        this.空白 = 空白;
+        this.被保険者番号 = 被保険者番号;
+        this.資格取得事由 = 資格取得事由;
+        this.資格取得日 = 資格取得日;
+        this.資格取得届出日 = 資格取得届出日;
+        this.喪失事由 = 喪失事由;
+        this.資格喪失日 = 資格喪失日;
+        this.資格喪失届日 = 資格喪失届日;
+        this.資格区分 = 資格区分;
+        this.住所地特例状態 = 住所地特例状態;
+        this.資格証記載保険者番号 = 資格証記載保険者番号;
+        this.審査年月 = 審査年月;
+        this.サービス年月 = サービス年月;
+        this.明細行番号 = 明細行番号;
+        this.計画事業者番号 = 計画事業者番号;
+        this.計画事業者名 = 計画事業者名;
+        this.保険者番号 = 保険者番号;
+        this.管理票作成日 = 管理票作成日;
+        this.管理票作成区分 = 管理票作成区分;
+        this.管理票種別区分 = 管理票種別区分;
+        this.管理票生年月日 = 管理票生年月日;
+        this.管理票性別 = 管理票性別;
+        this.管理票要介護度 = 管理票要介護度;
+        this.限度額適用開始 = 限度額適用開始;
+        this.限度額適用終了 = 限度額適用終了;
+        this.支給限度額 = 支給限度額;
+        this.計画作成区分 = 計画作成区分;
+        this.サービス事業者番号 = サービス事業者番号;
+        this.サービス事業者名 = サービス事業者名;
+        this.事業者区分 = 事業者区分;
+        this.サービス種類 = サービス種類;
+        this.サービス種類名 = サービス種類名;
+        this.給付計画単位日数 = 給付計画単位日数;
+        this.前月まで計画日数 = 前月まで計画日数;
+        this.指定サービス小計 = 指定サービス小計;
+        this.基準該当サービス小計 = 基準該当サービス小計;
+        this.合計単位日数 = 合計単位日数;
+        this.担当介護支援専門員番号 = 担当介護支援専門員番号;
+        this.委託先の居宅介護支援事業者番号 = 委託先の居宅介護支援事業者番号;
+        this.委託先の居宅介護支援事業者名 = 委託先の居宅介護支援事業者名;
+        this.委託先の担当介護支援専門員番号 = 委託先の担当介護支援専門員番号;
+        this.受給申請事由 = 受給申請事由;
+        this.受給申請日 = 受給申請日;
+        this.受給要介護度 = 受給要介護度;
+        this.受給認定開始日 = 受給認定開始日;
+        this.受給認定終了日 = 受給認定終了日;
+        this.受給認定日 = 受給認定日;
+        this.受給旧措置 = 受給旧措置;
+        this.受給みなし更新認定 = 受給みなし更新認定;
+        this.受給直近事由 = 受給直近事由;
+    }
+
 }

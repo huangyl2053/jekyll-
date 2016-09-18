@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.gassanshikyutsuchishotorikomiichiran;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.jigyobunkogakugassanshikyukettei.ShiharaiHohoKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyotsu.DbWT38B1KogakuGassanShikyuFushikyuKetteiTempEntity;
@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.lang.Width;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -85,9 +86,17 @@ public class GassanShikyuTsuchishoTorikomiIchiranEditor implements
 
         source.listCenter_1 = new RString(entity.get連番());
 
-        source.listUpper_1 = 被保険者.get登録被保険者番号().value();
-        source.listUpper_2 = 被保険者.get宛名名称();
+        if (被保険者 != null) {
 
+            if (被保険者.get登録被保険者番号() != null) {
+                source.listUpper_1 = 被保険者.get登録被保険者番号().value();
+            }
+
+            source.listUpper_2 = 被保険者.get宛名名称();
+            source.listLower_2 = listLower_2(被保険者.get住所(), 被保険者.get番地(), 被保険者.get方書());
+
+            set規定外項目(source, 被保険者, 計算結果entity);
+        }
         source.listUpper_3 = 計算結果entity.get支給申請書整理番号();
         source.listUpper_4 = new FlexibleDate(計算結果entity.get申請年月日()).wareki().
                 eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
@@ -96,7 +105,7 @@ public class GassanShikyuTsuchishoTorikomiIchiranEditor implements
             source.listCenter_2 = ShikyuFushikyuKubun.toValue(計算結果entity.get支給区分コード()).get名称();
         }
 
-        if (計算結果entity.get自己負担総額() != null) {
+        if (計算結果entity.get自己負担総額() != null && NUM_0 <= 計算結果entity.get自己負担総額().compareTo(Decimal.ZERO)) {
             source.listUpper_5 = DecimalFormatter.toコンマ区切りRString(計算結果entity.get自己負担総額(), 0);
         }
         if (計算結果entity.get支給区分コード().equals(支給)) {
@@ -112,30 +121,22 @@ public class GassanShikyuTsuchishoTorikomiIchiranEditor implements
                 source.listLower_6 = getlistlower_6(計算結果entity.get口座種目名(), 計算結果entity.get口座番号(),
                         計算結果entity.get口座名義人_カナ());
             }
-        } else {
-            source.listUpper_6 = RString.EMPTY;
-            source.listLower_6 = RString.EMPTY;
         }
 
         source.listLower_1 = new RString(計算結果entity.get履歴番号());
-        source.listLower_2 = listLower_2(被保険者.get住所(), 被保険者.get番地(),
-                被保険者.get方書());
 
-        FlexibleDate kaishiYMD = new FlexibleDate(計算結果entity.get対象計算期間開始年月日());
-        FlexibleDate shuryoYMD = new FlexibleDate(計算結果entity.get対象計算期間終了年月日());
-
-        source.listLower_3 = getlistLower_3(kaishiYMD, shuryoYMD);
+        source.listLower_3 = getlistLower_3(new FlexibleDate(計算結果entity.get対象計算期間開始年月日()),
+                new FlexibleDate(計算結果entity.get対象計算期間終了年月日()));
 
         source.listLower_4 = new FlexibleDate(計算結果entity.get決定年月日()).wareki().
                 eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.PERIOD).fillType(FillType.BLANK).
                 toDateString();
 
-        if (計算結果entity.get支給額() != null) {
+        if (計算結果entity.get支給額() != null && NUM_0 <= 計算結果entity.get支給額().compareTo(Decimal.ZERO)) {
             source.listLower_5 = DecimalFormatter.toコンマ区切りRString(計算結果entity.get支給額(), 0);
         }
 
-        set規定外項目(source, 被保険者, 計算結果entity);
         return source;
 
     }

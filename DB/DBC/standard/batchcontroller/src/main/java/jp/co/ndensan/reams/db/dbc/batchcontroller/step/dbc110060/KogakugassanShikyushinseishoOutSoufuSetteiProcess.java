@@ -44,7 +44,4 @@ public class KogakugassanShikyushinseishoOutSoufuSetteiProcess extends BatchProc
         高額合算申請書一時tableWriter.update(entity);
     }
 
-    @Override
-    protected void afterExecute() {
-    }
 }

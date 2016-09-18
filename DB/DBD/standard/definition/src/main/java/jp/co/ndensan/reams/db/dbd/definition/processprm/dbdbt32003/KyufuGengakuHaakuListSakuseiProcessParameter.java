@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt32003;
 
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbdbt32003.KyufuGengakuHaakuListSakuseiMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -86,5 +87,15 @@ public class KyufuGengakuHaakuListSakuseiProcessParameter implements IBatchProce
         this.改頁出力順ID = 改頁出力順ID;
         this.帳票ID = 帳票ID;
         this.帳票作成日時 = 帳票作成日時;
+    }
+
+    /**
+     * ＳＱＬ使用された情報を作成します．
+     *
+     * @param 改頁出力順ID 改頁出力順ID
+     * @return ＳＱＬ使用されたパラメター
+     */
+    public KyufuGengakuHaakuListSakuseiMybatisParameter toKyufuGengakuHaakuListSakuseiMybatisParameter(Long 改頁出力順ID) {
+        return new KyufuGengakuHaakuListSakuseiMybatisParameter(改頁出力順ID);
     }
 }

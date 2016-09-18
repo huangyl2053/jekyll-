@@ -40,6 +40,8 @@ public class PostMainPanel {
     private static final RString 後期資格異動情報取込 = new RString("後期資格異動情報取込");
     private static final RString STRING_1 = new RString("1");
     private static final RString STRING_2 = new RString("2");
+    private static final RDate DATE = RDate.getNowDate();
+    private static RString 場合;
 
     /**
      * 画面初期化のメソッドます。
@@ -58,7 +60,7 @@ public class PostMainPanel {
             div.setTitle(後期資格異動情報取込);
             stateName = DBC0510011StateName.後期;
         }
-        RString 場合 = getHandler(div).initialize();
+        場合 = getHandler(div).initialize();
         ViewStateHolder.put(ViewStateKeys.場合, 場合);
         return ResponseData.of(div).setState(stateName);
     }
@@ -82,7 +84,7 @@ public class PostMainPanel {
      */
     public ResponseData<PostMainPanelDiv> onBeforeOpenCheck(PostMainPanelDiv div) {
 
-        ValidationMessageControlPairs validPairs = getValidationHandler(div).validate();
+        ValidationMessageControlPairs validPairs = getValidationHandler(div).validate(場合);
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
@@ -118,12 +120,12 @@ public class PostMainPanel {
             parameter.setShoriShichoson(listresult);
         }
 
-        parameter.setTableName(DbBusinessConfig.get(ConfigNameDBC.国保_後期高齢ＩＦ_後期Ｆ, RDate.getNowDate(),
+        parameter.setTableName(DbBusinessConfig.get(ConfigNameDBC.国保_後期高齢ＩＦ_後期Ｆ, DATE,
                 SubGyomuCode.DBC介護給付));
 
         parameter.setIfType(DbBusinessConfig.get(ConfigNameDBC.国保_後期高齢ＩＦ_後期ＩＦ種類,
-                RDate.getNowDate(), SubGyomuCode.DBC介護給付));
-        parameter.setTorikomiKeishiki(DbBusinessConfig.get(ConfigNameDBC.国保_後期高齢ＩＦ_後期全件差分区分, RDate.getNowDate(),
+                DATE, SubGyomuCode.DBC介護給付));
+        parameter.setTorikomiKeishiki(DbBusinessConfig.get(ConfigNameDBC.国保_後期高齢ＩＦ_後期全件差分区分, DATE,
                 SubGyomuCode.DBC介護給付));
         parameter.setShoriTimestamp(new RString(RDate.getNowDateTime().toString()));
         return parameter;
@@ -157,13 +159,13 @@ public class PostMainPanel {
             parameter.setShoriShichoson(listresult);
         }
 
-        parameter.setTableName(DbBusinessConfig.get(ConfigNameDBC.国保_後期高齢ＩＦ_国保Ｆ, RDate.getNowDate(),
+        parameter.setTableName(DbBusinessConfig.get(ConfigNameDBC.国保_後期高齢ＩＦ_国保Ｆ, DATE,
                 SubGyomuCode.DBC介護給付));
 
         parameter.setIfType(DbBusinessConfig.get(ConfigNameDBC.国保_後期高齢ＩＦ_国保ＩＦ種類,
-                RDate.getNowDate(), SubGyomuCode.DBC介護給付));
+                DATE, SubGyomuCode.DBC介護給付));
         parameter.setTorikomiKeishiki(DbBusinessConfig.get(ConfigNameDBC.国保_後期高齢ＩＦ_国保全件差分区分,
-                RDate.getNowDate(), SubGyomuCode.DBC介護給付));
+                DATE, SubGyomuCode.DBC介護給付));
 
         parameter.setShoriTimestamp(new RString(RDate.getNowDateTime().toString()));
         return parameter;

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.gassankyufujissekisofuichiran
 
 import jp.co.ndensan.reams.db.dbc.business.report.kogakugassan.KogakugassanKyufujissekiDoSofuReportEntity;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_KyufuJissekiSakuseiKubun;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassankyufujissekiout.KogakuGassanKyufuJissekiSofuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.gassankyufujissekisofuichiran.GassanKyufujissekiSofuIchiranSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -49,6 +50,7 @@ public class GassanKyufujissekiSofuIchiranEditor implements
 
     @Override
     public GassanKyufujissekiSofuIchiranSource edit(GassanKyufujissekiSofuIchiranSource source) {
+        KogakuGassanKyufuJissekiSofuEntity 帳票用データ = entity.get帳票用データ();
 
         source.printTimeStamp = getSakuseiYmhm(entity.get作成日時());
         source.sofuYM = entity.get処理年月().wareki().eraType(EraType.KANJI).
@@ -70,25 +72,38 @@ public class GassanKyufujissekiSofuIchiranEditor implements
         source.kaipage5 = get改頁(NUM_4);
 
         source.list_1 = new RString(entity.get連番());
-        source.list_2 = entity.get帳票用データ().get給付実績_被保険者番号().value();
-        source.list_3 = entity.get帳票用データ().get宛名名称();
-        source.list_4 = entity.get帳票用データ().get支給申請書整理番号();
-        source.list_5 = entity.get帳票用データ().get自己負担額証明書整理番号();
-        source.list_6 = KaigoGassan_KyufuJissekiSakuseiKubun.toValue(entity.get帳票用データ().get給付実績作成区分コード()).get名称();
-        source.list_7 = entity.get帳票用データ().get給付実績_証記載保険者番号().value();
-        source.list_8 = entity.get帳票用データ().get申請年月日().wareki().
-                eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
-        source.list_9 = entity.get帳票用データ().get決定年月日().wareki().
-                eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
-        if (entity.get帳票用データ().get自己負担総額() != null) {
-            source.list_10 = DecimalFormatter.toコンマ区切りRString(entity.get帳票用データ().get自己負担総額(), 0);
-        }
-        if (entity.get帳票用データ().get支給額() != null) {
-            source.list_11 = DecimalFormatter.toコンマ区切りRString(entity.get帳票用データ().get支給額(), 0);
-        }
 
+        if (帳票用データ != null) {
+            if (帳票用データ.get給付実績_被保険者番号() != null) {
+                source.list_2 = 帳票用データ.get給付実績_被保険者番号().value();
+            }
+
+            source.list_3 = 帳票用データ.get宛名名称();
+            source.list_4 = 帳票用データ.get支給申請書整理番号();
+            source.list_5 = 帳票用データ.get自己負担額証明書整理番号();
+            source.list_6 = KaigoGassan_KyufuJissekiSakuseiKubun.toValue(帳票用データ.get給付実績作成区分コード()).get名称();
+
+            if (帳票用データ.get給付実績_証記載保険者番号() != null) {
+                source.list_7 = 帳票用データ.get給付実績_証記載保険者番号().value();
+            }
+
+            source.list_8 = 帳票用データ.get申請年月日().wareki().
+                    eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
+                    separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+
+            if (帳票用データ.get決定年月日() != null) {
+                source.list_9 = 帳票用データ.get決定年月日().wareki().
+                        eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
+                        separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+            }
+
+            if (帳票用データ.get自己負担総額() != null) {
+                source.list_10 = DecimalFormatter.toコンマ区切りRString(帳票用データ.get自己負担総額(), 0);
+            }
+            if (帳票用データ.get支給額() != null) {
+                source.list_11 = DecimalFormatter.toコンマ区切りRString(帳票用データ.get支給額(), 0);
+            }
+        }
         return source;
 
     }

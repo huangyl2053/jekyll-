@@ -86,11 +86,25 @@ public enum KoroshoInterfaceShikibetsuCode {
      * @return 列挙型
      */
     public static KoroshoInterfaceShikibetsuCode toValue(RString code) {
+        KoroshoInterfaceShikibetsuCode value = toValueOrDefault(code, null);
+        if (value == null) {
+            throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("厚労省インターフェース識別コード"));
+        }
+        return value;
+    }
+
+    /**
+     * コードに対応する要素を返します。存在しない場合は、{@code defaultValue}を返します。
+     *
+     * @param code コード
+     * @return 指定のコードに対応する要素. 存在しない場合は、{@code defaultValue}を返します。
+     */
+    public static KoroshoInterfaceShikibetsuCode toValueOrDefault(RString code, KoroshoInterfaceShikibetsuCode defaultValue) {
         for (KoroshoInterfaceShikibetsuCode data : values()) {
             if (data.getCode().equals(code)) {
                 return data;
             }
         }
-        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("厚労省インターフェース識別コード"));
+        return defaultValue;
     }
 }

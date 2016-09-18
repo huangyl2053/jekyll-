@@ -68,9 +68,15 @@ class ShisetsuTaishoTsuchishoEditor implements IShisetsuTaishoTsuchishoEditor {
         source.shisetsuJusho = item.getShisetsuJusho();
         source.denshiKoin = item.getDenshiKoin();
         source.shomeiHakkoYMD = item.getShomeiHakkoYMD();
-        source.shuchoMei = item.getShuchoMei();
-        source.shichosonMei2 = item.getShichosonMei2();
+        //source.shuchoMei = item.getShuchoMei();
+        //source.shichosonMei2 = item.getShichosonMei2();
         source.koinShoryaku = item.getKoinShoryaku();
+        source.koinMojiretsu = item.getKoinMojiretsu();
+        source.ninshoshaShimeiKakenai= item.getNinshoshaShimeiKakenai();
+        source.ninshoshaShimeiKakeru= item.getNinshoshaShimeiKakeru();
+        source.ninshoshaYakushokuMei= item.getNinshoshaYakushokuMei();
+        source.ninshoshaYakushokuMei1= item.getNinshoshaYakushokuMei1();
+        source.ninshoshaYakushokuMei2= item.getNinshoshaYakushokuMei2();
         return source;
     }
 }

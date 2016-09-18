@@ -22,12 +22,16 @@ import jp.co.ndensan.reams.db.dbu.batchcontroller.step.jigyohokokurenkei.JigyoHo
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.jigyohokokurenkei.JigyoHokokuRenkeiShokanYousikiNi_IchiToYonProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.jigyohokokurenkei.JigyoHokokuRenkeiShokanYousikiNi_SitiProcess;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.jigyohokokurenkei.JigyoHokokuRenkeiBatchParameter;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.ZipUtil;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -93,7 +97,11 @@ public class JigyoHokokuRenkeiFlow extends BatchFlowBase<JigyoHokokuRenkeiBatchP
             executeStep(GASSANYOUSIKINI_ICHIPROCESS);
             executeStep(GASSANYOUSIKINI_SITIPROCESS);
         }
-        RString zipPath = Path.combinePath(spoolWorkPath, new RString("spoolWorkPath.zip"));
+        RString csvFileName = new RString("jigyoJokyoHokoku_"
+                + getParameter().get過去集計年月()
+                + "_"
+                + DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告) + ".zip");
+        RString zipPath = Path.combinePath(spoolWorkPath, csvFileName);
         ZipUtil.createFromFolder(zipPath, spoolWorkPath);
     }
 

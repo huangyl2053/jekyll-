@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-3800-050 x_xuliang -->
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.kyufugakugengakukanririsutosakusei.IKyufuGakuGengakuKanriRisutoSakuseiMapper">
+        
+    <select id="get対象者管理情報の取得" 
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbdbt32004.TaishoShaKanriJohoMybatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt32004.TaishoShaKanriJohoEntity" 
+            fetchSize="500" resultOrdered="true">
+        <!-- 有QA -->
+        SELECT DISTINCT
+        収納滞納状況一時テーブル."hihokenshaNo"
+        FROM
+        "ShunoTainoJokyoTemp" AS 収納滞納状況一時テーブル
+        <if test="is対象区分_全登録者以外">
+            INNER JOIN rgdb."DbT4021ShiharaiHohoHenko" AS 支払方法変更
+            ON 収納滞納状況一時テーブル."hihokenshaNo" = 支払方法変更."hihokenshaNo" AND
+            支払方法変更."kanriKubun" = '3' AND
+            支払方法変更."tekiyoKaishiYMD" <![CDATA[<=]]> #{システム日付} AND
+            支払方法変更."tekiyoShuryoYMD" <![CDATA[>=]]> #{システム日付} AND
+            支払方法変更."logicalDeletedFlag" = 'false'
+            
+            <if test="is減額適用中者抽出">
+                INNER JOIN rgdb."DbT4021ShiharaiHohoHenko" AS 支払方法変更
+                ON 支払方法変更."shoKisaiHokenshaNo" = rgdb."DbT4025ShiharaiHohoHenkoGengaku"."shoKisaiHokenshaNo" AND
+                支払方法変更."hihokenshaNo" = rgdb."DbT4025ShiharaiHohoHenkoGengaku"."hihokenshaNo" AND
+                支払方法変更."kanriKubun" = rgdb."DbT4025ShiharaiHohoHenkoGengaku"."kanriKubun" AND
+                支払方法変更."rirekiNo" = rgdb."DbT4025ShiharaiHohoHenkoGengaku"."rirekiNo" AND
+                rgdb."DbT4025ShiharaiHohoHenkoGengaku"."kakutei_GengakuKaishiYMD" <![CDATA[<=]]> #{減額適用中者抽出基準日}  AND
+                rgdb."DbT4025ShiharaiHohoHenkoGengaku"."kakutei_GengakuShuryoYMD" <![CDATA[>=]]> #{減額適用中者抽出基準日}
+            </if>
+            
+            <if test="is減額終了日抽出">
+                INNER JOIN rgdb."DbT4021ShiharaiHohoHenko" AS 支払方法変更
+                ON 支払方法変更."shoKisaiHokenshaNo" = rgdb."DbT4025ShiharaiHohoHenkoGengaku"."shoKisaiHokenshaNo" AND
+                支払方法変更."hihokenshaNo" = rgdb."DbT4025ShiharaiHohoHenkoGengaku"."hihokenshaNo" AND
+                支払方法変更."kanriKubun" = rgdb."DbT4025ShiharaiHohoHenkoGengaku"."kanriKubun" AND
+                支払方法変更."rirekiNo" = rgdb."DbT4025ShiharaiHohoHenkoGengaku"."rirekiNo" AND
+                rgdb."DbT4025ShiharaiHohoHenkoGengaku"."kakutei_GengakuKaishiYMD" <![CDATA[>=]]> #{減額終了日範囲From}  AND
+                rgdb."DbT4025ShiharaiHohoHenkoGengaku"."kakutei_GengakuShuryoYMD" <![CDATA[<=]]> #{減額終了日範囲To}
+            </if>
+        </if>
+        WHERE
+        収納滞納状況一時テーブル."jikoKisanYMD"(sysdate,24) > #{基準日} 
+        AND 収納滞納状況一時テーブル."minoKannoKubun" = #{未納完納区分_未納あり}
+        <if test="is対象区分_全登録者以外">
+            AND 収納滞納状況一時テーブル."minogaku" > 0  
+        </if>
+
+        <if test="is対象区分_全登録者以外">
+            <if test="is通知書未発行者抽出">
+                AND (支払方法変更."gemmen_TsuchiHakkoYMD" is null or rgdb.支払方法変更."gemmen_TsuchiHakkoYMD"='')
+            </if>
+            <if test="is保険料完納者出力">
+                UNION SELECT
+                A."hihokenshaNo"
+                FROM 収納滞納状況一時テーブル A
+                WHERE NOT EXISTS (
+                SELECT 1
+                FROM 収納滞納状況一時テーブル B
+                WHERE B."hihokenshaNo" = A."hihokenshaNo"
+                AND B."minoKannoKubun" = #{未納完納区分_未納あり}
+                )
+            </if>
+        </if>
+    </select>
+
+    <resultMap id="resultMap_ShunoTainoJokyoTempTableEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.temptable.ShunoTainoJokyoTempTableEntity" autoMapping="true">
+        <result property="hihokenshaNo" column="収納滞納状況一時_被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="shikibetsuCode" column="収納滞納状況一時_識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="hihokenshaShimeiKana" column="収納滞納状況一時_被保険者氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="hihokenshaShimei" column="収納滞納状況一時_被保険者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
+        <result property="setaiCode" column="収納滞納状況一時_世帯番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
+        <result property="gyoseikuCode" column="収納滞納状況一時_行政区ｺｰﾄﾞ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyoseikuCodeTypeHandler"/>
+        <result property="gyoseikuName" column="収納滞納状況一時_行政区" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jushoCode" column="収納滞納状況一時_住所コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ZenkokuJushoCodeTypeHandler"/>
+        <result property="yubinNo" column="収納滞納状況一時_郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="jusho" column="収納滞納状況一時_住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shikakuShutokuYMD" column="収納滞納状況一時_資格取得日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikakuSoshitsuYMD" column="収納滞納状況一時_資格喪失日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shikakuSoshitsuJiyuCode" column="収納滞納状況一時_喪失事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="資格区分" column="収納滞納状況一時_資格区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="koikinaiJushochiTokureiFlag" column="収納滞納状況一時_住特フラグ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="seihoFlag" column="収納滞納状況一時_生保フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+        <result property="koroshoIfShikibetsuCode" column="収納滞納状況一時_厚労省IF識別" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="yokaigoJotaiKubunCode" column="収納滞納状況一時_要介護状態区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="ninteiYukoKikanKaishiYMD" column="収納滞納状況一時_認定有効期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ninteiYukoKikanShuryoYMD" column="収納滞納状況一時_認定有効期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="ninteiYMD" column="収納滞納状況一時_認定日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shiseityuFlag" column="収納滞納状況一時_申請中フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+        <result property="jukyuShinseiYMD" column="収納滞納状況一時_申請日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="choteiNendo" column="収納滞納状況一時_調定年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RYearTypeHandler"/>
+        <result property="fukaNendo" column="収納滞納状況一時_賦課年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RYearTypeHandler"/>
+        <result property="tokucho_FuchoKubun" column="収納滞納状況一時_普徴区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tsuchishoNo" column="収納滞納状況一時_通知書番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
+        <result property="kibetsu" column="収納滞納状況一時_期別" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="choteigaku" column="収納滞納状況一時_調定額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="shunyugaku" column="収納滞納状況一時_収入額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="minogaku" column="収納滞納状況一時_未納額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="shunyuYMD" column="収納滞納状況一時_収入日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTypeHandler"/>
+        <result property="tokusokujoHakkoYMD" column="収納滞納状況一時_督促状発行日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTypeHandler"/>
+        <result property="jikoKisanYMD" column="収納滞納状況一時_時効起算日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="jikoKisanJiyu" column="収納滞納状況一時_時効起算事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="minoKannoKubun" column="収納滞納状況一時_未納完納区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jikoKubun" column="収納滞納状況一時_時効区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tainoKubun" column="収納滞納状況一時_滞納区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+ 
+    <resultMap id="resultMap_TaishoShaKanriJohoTableEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt32004.TaishoShaKanriJohoTableEntity" autoMapping="true">
+        <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+    </resultMap>
+    <resultMap id="resultMap_KyufuGakuGengakuTainoShaEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt32004.KyufuGakuGengakuTainoShaEntity" autoMapping="true">
+        <id property="対象者情報一時Entity.hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <association property="対象者情報一時Entity"  resultMap="resultMap_TaishoShaKanriJohoTableEntity" />
+        <collection property="収納滞納状況一時Entity" resultMap="resultMap_ShunoTainoJokyoTempTableEntity"/>
+        <collection property="支払方法変更減額Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4025ShiharaiHohoHenkoGengakuMapper.ResultMap_DbT4025ShiharaiHohoHenkoGengakuEntity"/>
+    </resultMap>
+    
+    
+    <select resultOrdered="true" id="get給付額減額滞納者把握情報取得"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbdbt32004.KyufuGakuGengakuTainoShaMybatisParameter"
+            resultMap="resultMap_KyufuGakuGengakuTainoShaEntity"
+            fetchSize="500">
+        SELECT
+        収納滞納状況一時テーブル."hihokenshaNo" AS 収納滞納状況一時_被保険者番号,
+        収納滞納状況一時テーブル."shikibetsuCode" AS 収納滞納状況一時_識別コード,
+        収納滞納状況一時テーブル."hihokenshaShimeiKana" AS 収納滞納状況一時_被保険者氏名カナ,
+        収納滞納状況一時テーブル."hihokenshaShimei" AS 収納滞納状況一時_被保険者氏名,
+        収納滞納状況一時テーブル."setaiCode" AS 収納滞納状況一時_世帯番号,
+        収納滞納状況一時テーブル."gyoseikuCode" AS 収納滞納状況一時_行政区ｺｰﾄﾞ,
+        収納滞納状況一時テーブル."gyoseikuName" AS 収納滞納状況一時_行政区,
+        収納滞納状況一時テーブル."jushoCode" AS 収納滞納状況一時_住所コード,
+        収納滞納状況一時テーブル."yubinNo" AS 収納滞納状況一時_郵便番号,
+        収納滞納状況一時テーブル."jusho" AS 収納滞納状況一時_住所,
+        収納滞納状況一時テーブル."shikakuShutokuYMD" AS 収納滞納状況一時_資格取得日,
+        収納滞納状況一時テーブル."shikakuSoshitsuYMD" AS 収納滞納状況一時_資格喪失日,
+        収納滞納状況一時テーブル."shikakuSoshitsuJiyuCode" AS 収納滞納状況一時_喪失事由,
+        収納滞納状況一時テーブル."資格区分" AS 収納滞納状況一時_資格区分,
+        収納滞納状況一時テーブル."koikinaiJushochiTokureiFlag" AS 収納滞納状況一時_住特フラグ,
+        収納滞納状況一時テーブル."seihoFlag" AS 収納滞納状況一時_生保フラグ,
+        収納滞納状況一時テーブル."koroshoIfShikibetsuCode" AS 収納滞納状況一時_厚労省IF識別,
+        収納滞納状況一時テーブル."yokaigoJotaiKubunCode" AS 収納滞納状況一時_要介護状態区分,
+        収納滞納状況一時テーブル."ninteiYukoKikanKaishiYMD" AS 収納滞納状況一時_認定有効期間開始年月日,
+        収納滞納状況一時テーブル."ninteiYukoKikanShuryoYMD" AS 収納滞納状況一時_認定有効期間終了年月日,
+        収納滞納状況一時テーブル."ninteiYMD" AS 収納滞納状況一時_認定日,
+        収納滞納状況一時テーブル."shiseityuFlag" AS 収納滞納状況一時_申請中フラグ,
+        収納滞納状況一時テーブル."jukyuShinseiYMD" AS 収納滞納状況一時_申請日,
+        収納滞納状況一時テーブル."choteiNendo" AS 収納滞納状況一時_調定年度,
+        収納滞納状況一時テーブル."fukaNendo" AS 収納滞納状況一時_賦課年度,
+        収納滞納状況一時テーブル."tokucho_FuchoKubun" AS 収納滞納状況一時_普徴区分,
+        収納滞納状況一時テーブル."tsuchishoNo" AS 収納滞納状況一時_通知書番号,
+        収納滞納状況一時テーブル."kibetsu" AS 収納滞納状況一時_期別,
+        収納滞納状況一時テーブル."choteigaku" AS 収納滞納状況一時_調定額,
+        収納滞納状況一時テーブル."shunyugaku" AS 収納滞納状況一時_収入額,
+        収納滞納状況一時テーブル."minogaku" AS 収納滞納状況一時_未納額,
+        収納滞納状況一時テーブル."shunyuYMD" AS 収納滞納状況一時_収入日,
+        収納滞納状況一時テーブル."tokusokujoHakkoYMD" AS 収納滞納状況一時_督促状発行日,
+        収納滞納状況一時テーブル."jikoKisanYMD" AS 収納滞納状況一時_時効起算日,
+        収納滞納状況一時テーブル."jikoKisanJiyu" AS 収納滞納状況一時_時効起算事由,
+        収納滞納状況一時テーブル."minoKannoKubun" AS 収納滞納状況一時_未納完納区分,
+        収納滞納状況一時テーブル."jikoKubun" AS 収納滞納状況一時_時効区分,
+        収納滞納状況一時テーブル."tainoKubun" AS 収納滞納状況一時_滞納区分,
+        
+        対象者情報一時テーブル."hihokenshaNo",
+        <!--  QA： 支払方法変更減額表字段有问题-->
+        <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4025ShiharaiHohoHenkoGengakuMapper.allColumns_DbT4025ShiharaiHohoHenkoGengaku" />
+        FROM "ShunoTainoJokyoTemp" AS 収納滞納状況一時テーブル
+        INNER JOIN "KyufuGengakuKanriListTaishoTokutei" AS 対象者情報一時テーブル
+        ON 
+        収納滞納状況一時テーブル."hihokenshaNo" = 対象者情報一時テーブル."hihokenshaNo"
+        <!--  QA： 支払方法変更減額表字段有问题-->
+        LEFT JOIN rgdb."DbT4025ShiharaiHohoHenkoGengaku"
+        ON  収納滞納状況一時テーブル."hihokenshaNo" = rgdb."DbT4025ShiharaiHohoHenkoGengaku"."hihokenshaNo" <!--AND
+        収納滞納状況一時_調定年度 = 支払方法変更減額.調定年度 AND
+        収納滞納状況一時_賦課年度 = 支払方法変更減額.賦課年度 AND
+        収納滞納状況一時_期別 = 支払方法変更減額.収納期月
+        ORDER BY
+        #{出力順}-->
+    </select>    
+</mapper>

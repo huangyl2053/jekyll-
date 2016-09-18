@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbb.entity.db.relate.gemmen;
 
 import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2004GemmenEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2003KibetsuEntity;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.UrT0705ChoteiKyotsuEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 
 /**
@@ -19,16 +21,10 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEnt
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class GemmenEntity {
 
-    private FukaJohoRelateEntity 賦課の情報;
+    private DbT2002FukaEntity 介護賦課;
+    private DbT2003KibetsuEntity 介護期別;
+    private UrT0705ChoteiKyotsuEntity 調定共通;
     private DbT2004GemmenEntity 介護賦課減免;
-
-    /**
-     * -- GETTER -- 宛名Entity。
-     *
-     * @return 宛名Entity -- SETTER -- 宛名Entity。
-     *
-     * @param 宛名Entity 宛名Entity
-     */
     private UaFt200FindShikibetsuTaishoEntity 宛名Entity;
 
 }

@@ -40,6 +40,7 @@ public final class JigyoshaInputGuideParameter {
     private final boolean isGunshiCode;
     private final FlexibleDate systemdate;
     private final RString kenCode;
+    private final boolean isKenCode;
     private final RString jigyoshaShubetsu;
     private final RString kannaiKangaiKubun1;
     private final RString kannaiKangaiKubun2;
@@ -70,6 +71,7 @@ public final class JigyoshaInputGuideParameter {
             boolean isGunshiCode,
             FlexibleDate systemdate,
             RString kenCode,
+            boolean isKenCode,
             RString jigyoshaShubetsu,
             RString kannaiKangaiKubun1,
             RString kannaiKangaiKubun2,
@@ -98,6 +100,7 @@ public final class JigyoshaInputGuideParameter {
         this.isGunshiCode = isGunshiCode;
         this.systemdate = systemdate;
         this.kenCode = kenCode;
+        this.isKenCode = isKenCode;
         this.jigyoshaShubetsu = jigyoshaShubetsu;
         this.kannaiKangaiKubun1 = kannaiKangaiKubun1;
         this.kannaiKangaiKubun2 = kannaiKangaiKubun2;
@@ -151,6 +154,7 @@ public final class JigyoshaInputGuideParameter {
         boolean isYubinNo = false;
         boolean isAddress = false;
         boolean isServiceShuRui = false;
+        boolean isKenCode = false;
         boolean isJigyoshaKbn = false;
         boolean isZennpouitti = false;
         boolean isGunshiCode = false;
@@ -177,6 +181,9 @@ public final class JigyoshaInputGuideParameter {
         }
         if (!RString.isNullOrEmpty(serviceShuRui)) {
             isServiceShuRui = true;
+        }
+        if (!RString.isNullOrEmpty(kenCode)) {
+            isKenCode = true;
         }
         if (new RString("key0").equals(zennpouitti)) {
             isZennpouitti = false;
@@ -214,6 +221,7 @@ public final class JigyoshaInputGuideParameter {
                 isGunshiCode,
                 systemdate,
                 kenCode,
+                isKenCode,
                 jigyoshaShubetsu,
                 kannaiKangaiKubun1,
                 kannaiKangaiKubun2,
@@ -588,6 +596,15 @@ public final class JigyoshaInputGuideParameter {
      */
     public RString getKenCode() {
         return kenCode;
+    }
+    
+    /**
+     * 県コードフラグを返します。
+     *
+     * @return サービス種類フラグ
+     */
+    public boolean isIsKenCode() {
+        return isKenCode;
     }
 
     /**

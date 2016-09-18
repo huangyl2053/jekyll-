@@ -5,8 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.iryohikojokakuninsinsei;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.iryohikojokakuninsinsei.AtesakiParameter;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.iryohikojokakuninsinsei.IryohiKojoUpdParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.iryohikojokakuninsinsei.ShikibetsuTaishoParameter;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.iryohikojokakuninsinsei.IryohiKojoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.iryohikojokakuninsinsei.SogoJigyouTaisyouSyaJyohoJoho;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
@@ -36,6 +39,15 @@ public interface IIryoHiKojoKakuninSinseiMapper {
     SogoJigyouTaisyouSyaJyohoJoho select受給者台帳情報(RString 被保険者番号, RString 対象年);
 
     /**
+     * 単票用医療費控除取得
+     *
+     * @param 被保険者番号 RString
+     * @param データ区分 RString
+     * @return 単票用医療費控除
+     */
+    List<IryohiKojoEntity> select単票用医療費控除(RString 被保険者番号, RString データ区分);
+
+    /**
      * おむつ使用証明書、主治医意見書確認書の編集に用いる宛名情報を取得する。
      *
      * @param param パラメータ
@@ -50,5 +62,12 @@ public interface IIryoHiKojoKakuninSinseiMapper {
      * @return 宛先情報
      */
     UaFt250FindAtesakiEntity select宛先情報(AtesakiParameter param);
+
+    /**
+     * 医療費控除データの更新
+     *
+     * @param param
+     */
+    void update医療費控除(IryohiKojoUpdParameter param);
 
 }

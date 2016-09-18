@@ -627,7 +627,7 @@ public class HanyoListKogakuGassanShikyugakuKetteiNoProcess
     private RString get受給申請事由(DbT4001JukyushaDaichoEntity 受給者台帳) {
         RString 受給申請事由 = RString.EMPTY;
         RString 受給申請事由コード = getColumnValue(受給者台帳.getJukyuShinseiJiyu());
-        getJukyuShinseiJiyu(受給申請事由コード, 受給申請事由, 受給者台帳.getYoshienshaNinteiShinseiFlag() ? 定値RSTRING_1 : 定値RSTRING_0);
+        受給申請事由 = getJukyuShinseiJiyu(受給申請事由コード, 受給申請事由, 受給者台帳.getYoshienshaNinteiShinseiFlag() ? 定値RSTRING_1 : 定値RSTRING_0);
         return 受給申請事由;
     }
 

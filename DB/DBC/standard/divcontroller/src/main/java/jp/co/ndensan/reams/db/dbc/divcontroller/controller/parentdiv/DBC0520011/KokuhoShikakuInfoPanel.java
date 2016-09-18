@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0520011;
 
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KokuhoShikakuInfo;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0520011.DBC0520011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0520011.DBC0520011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0520011.KokuhoShikakuInfoPanelDiv;
@@ -47,7 +48,8 @@ public class KokuhoShikakuInfoPanel {
         ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
 //        HihokenshaNo 被保険者番号 = new HihokenshaNo(new RString("6000000010"));
 //        ShikibetsuCode 識別コード = new ShikibetsuCode(new RString("000000000000010"));
-        getHandler(mainPanelDiv).initialize(識別コード, 被保険者番号);
+        KokuhoShikakuInfo 国保資格詳細情報 = getHandler(mainPanelDiv).initialize(識別コード, 被保険者番号);
+        ViewStateHolder.put(ViewStateKeys.国保資格詳細情報, 国保資格詳細情報);
         return ResponseData.of(mainPanelDiv).respond();
     }
 
@@ -58,6 +60,7 @@ public class KokuhoShikakuInfoPanel {
      * @return ResponseData
      */
     public ResponseData<KokuhoShikakuInfoPanelDiv> onClick_btnSave(KokuhoShikakuInfoPanelDiv mainPanelDiv) {
+        KokuhoShikakuInfo 国保資格詳細情報 = ViewStateHolder.get(ViewStateKeys.国保資格詳細情報, KokuhoShikakuInfo.class);
         MainPanelValidationHandler validation = new MainPanelValidationHandler();
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         validation.資格期間大小関係チェック(pairs, mainPanelDiv);
@@ -70,7 +73,8 @@ public class KokuhoShikakuInfoPanel {
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             return ResponseData.of(mainPanelDiv).respond();
         }
-        if (getHandler(mainPanelDiv).updateorinsert(new ShikibetsuCode(mainPanelDiv.getHeaderPanel().getCcdAtenaInfo().get識別コード()))) {
+        if (getHandler(mainPanelDiv).updateorinsert(
+                new ShikibetsuCode(mainPanelDiv.getHeaderPanel().getCcdAtenaInfo().get識別コード()), 国保資格詳細情報)) {
             mainPanelDiv.getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()),
                     RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(mainPanelDiv).setState(DBC0520011StateName.完了);
@@ -85,7 +89,8 @@ public class KokuhoShikakuInfoPanel {
      * @return ResponseData<FutangendogakuShinseiDiv>
      */
     public ResponseData<KokuhoShikakuInfoPanelDiv> onClick_btnBack(KokuhoShikakuInfoPanelDiv div) {
-        getHandler(div).onClick_btnBack(new ShikibetsuCode(div.getHeaderPanel().getCcdAtenaInfo().get識別コード()), div);
+        KokuhoShikakuInfo 国保資格詳細情報 = ViewStateHolder.get(ViewStateKeys.国保資格詳細情報, KokuhoShikakuInfo.class);
+        getHandler(div).onClick_btnBack(new ShikibetsuCode(div.getHeaderPanel().getCcdAtenaInfo().get識別コード()), div, 国保資格詳細情報);
         return ResponseData.of(div).forwardWithEventName(DBC0520011TransitionEventName.対象者検索へ戻る).respond();
     }
 

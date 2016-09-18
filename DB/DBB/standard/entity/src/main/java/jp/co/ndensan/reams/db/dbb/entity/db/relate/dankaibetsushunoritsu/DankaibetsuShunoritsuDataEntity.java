@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEnt
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DankaibetsuShunoritsuDataEntity implements Serializable {
 
-//    private long shunoId;
     private TotalShunyuRelateEntity 収入情報取得PSM;
     private UaFt200FindShikibetsuTaishoEntity 宛名;
     private DbT2002FukaEntity 介護賦課;

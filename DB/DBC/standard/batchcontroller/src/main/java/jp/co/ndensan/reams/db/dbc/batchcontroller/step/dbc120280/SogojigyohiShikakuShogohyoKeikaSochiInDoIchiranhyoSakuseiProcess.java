@@ -108,11 +108,8 @@ public class SogojigyohiShikakuShogohyoKeikaSochiInDoIchiranhyoSakuseiProcess ex
 
     @Override
     protected void initialize() {
-
-        super.initialize();
         連番 = NUM_0;
         改頁リスト = new ArrayList<>();
-
         ShichosonSecurityJohoFinder finder = ShichosonSecurityJohoFinder.createInstance();
         this.市町村セキュリティ情報 = finder.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         if (null == this.市町村セキュリティ情報) {
@@ -194,6 +191,7 @@ public class SogojigyohiShikakuShogohyoKeikaSochiInDoIchiranhyoSakuseiProcess ex
             writeLine(currentRecord, true);
         }
         eucCsvWriter.close();
+        eucCsvWriter1.close();
         if (!personalDataList.isEmpty()) {
             AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
             manager.spool(eucFilePath, accessLogUUID);

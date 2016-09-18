@@ -5,8 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.kojinjokyoshokai;
 
+import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.kojinjokyoshokai.KojinJokyoShokaiRelateEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IIchijiHanteiKekkaCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaSupport;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -14,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
  * 要介護認定個人状況を管理するクラスです。
@@ -220,7 +225,18 @@ public class KojinJokyoShokai {
      * @return 二次判定要介護状態区分コード
      */
     public Code get二次判定要介護状態区分コード() {
-        return entity.getNijiHanteiYokaigoJotaiKubunCode();
+        return entity.getNijiHanteiYokaigoJotaiKubunCode() == null ? Code.EMPTY : entity.getNijiHanteiYokaigoJotaiKubunCode();
+    }
+
+    /**
+     * 二次判定結果の名称(要介護度)を返却します。
+     *
+     * @return 二次判定結果の名称
+     */
+    public RString get二次判定結果名称() {
+        return YokaigoJotaiKubunSupport.toValueOrEmpty(
+                get厚労省IF識別コード().value(), get二次判定要介護状態区分コード().value()
+        ).getName();
     }
 
     /**
@@ -283,7 +299,7 @@ public class KojinJokyoShokai {
      * @return 厚労省IF識別コード
      */
     public Code get厚労省IF識別コード() {
-        return entity.getKoroshoIfShikibetsuCode();
+        return entity.getKoroshoIfShikibetsuCode() == null ? Code.EMPTY : entity.getKoroshoIfShikibetsuCode();
     }
 
     /**
@@ -292,7 +308,25 @@ public class KojinJokyoShokai {
      * @return 要介護認定一次判定結果コード
      */
     public Code get要介護認定一次判定結果コード() {
-        return entity.getIchijiHanteiKekkaCode();
+        return entity.getIchijiHanteiKekkaCode() == null ? Code.EMPTY : entity.getIchijiHanteiKekkaCode();
+    }
+
+    /**
+     * 一次判定結果コードと認知症加算後のコードから、一次判定結果の名称を返却します。
+     *
+     * @return 一次判定結果
+     */
+    public RString get一次判定結果名称() {
+        final RString koroshoIFCode = this.get厚労省IF識別コード().value();
+        final RString kekkaCode = this.get要介護認定一次判定結果コード().value();
+        final RString kasanCode = this.get要介護認定一次判定結果コード認知症加算().value();
+
+        IIchijiHanteiKekkaCode kekkaName = IchijiHanteiKekkaSupport.toValueOrEmpty(koroshoIFCode, kekkaCode);
+        if (Objects.equals(kekkaCode, kasanCode) || RString.isNullOrEmpty(kasanCode)) {
+            return kekkaName.get名称();
+        }
+        IIchijiHanteiKekkaCode kasanName = IchijiHanteiKekkaSupport.toValueOrEmpty(koroshoIFCode, kasanCode);
+        return new RStringBuilder().append(kekkaName.get略称()).append("→").append(kasanName.get略称()).toRString();
     }
 
     /**
@@ -301,7 +335,7 @@ public class KojinJokyoShokai {
      * @return 要介護認定一次判定結果コード認知症加算
      */
     public Code get要介護認定一次判定結果コード認知症加算() {
-        return entity.getIchijiHanteiKekkaNinchishoKasanCode();
+        return entity.getIchijiHanteiKekkaNinchishoKasanCode() == null ? Code.EMPTY : entity.getIchijiHanteiKekkaNinchishoKasanCode();
     }
 
     /**

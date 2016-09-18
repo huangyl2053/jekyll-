@@ -22,15 +22,15 @@
             AND "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."logicalDeletedFlag" = FALSE
             </if>
             <if test="日付抽出区分 == 範囲指定 and 処理対象年月FROM !=null and 処理対象年月FROM.toString()!=''" >
-            AND  #{処理対象年月From}  <![CDATA[<=]]> "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."sofuYM"
+            AND  #{処理対象年月FROM}  <![CDATA[<=]]> "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."sofuYM"
             </if>
-            <if test="処理対象年月TO !=null and 処理対象年月TO.toString()!=''" >
+            <if test="日付抽出区分 == 範囲指定 and 処理対象年月TO !=null and 処理対象年月TO.toString()!=''" >
             AND  "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."sofuYM"  <![CDATA[<=]]> #{処理対象年月TO}
             </if>
-            <if test="異動年月From !=null and 異動年月From.toString()!=''" >
+            <if test="日付抽出区分 == 範囲指定 and 異動年月From !=null and 異動年月From.toString()!=''" >
             AND  #{異動年月From}  <![CDATA[<=]]> SUBSTR("DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."idoYMD",1,6)
             </if>
-            <if test="異動年月To !=null and 異動年月To.toString()!=''" >
+            <if test="日付抽出区分 == 範囲指定 and 異動年月To !=null and 異動年月To.toString()!=''" >
             AND  SUBSTR("DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."idoYMD",1,6)  <![CDATA[<=]]> #{異動年月To}
             </if>
          )   
@@ -39,7 +39,7 @@
             <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3002KyodoShoriyoJukyushaIdoKihonSofuMapper.allColumns_DbT3002KyodoShoriyoJukyushaIdoKihonSofu" />,
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>                
         FROM
-            rgdb."DbT3002KyodoShoriyoJukyushaIdoKihonSofu"  AS "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"
+            "KyodoJukyushaNewest"  AS "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"
         INNER JOIN 
             rgdb."DbV1001HihokenshaDaicho"  AS "DbT1001HihokenshaDaicho"
         ON 
@@ -55,7 +55,7 @@
                 FROM "KyodoJukyushaNewest"  AS KyodoJukyushaNewest2
                 WHERE
                 "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."hiHokenshaNo" = KyodoJukyushaNewest2."hiHokenshaNo"
-                AND "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."idoYMD" <![CDATA[<=]]> KyodoJukyushaNewest2."idoYMD"
+                AND "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."idoYMD" <![CDATA[<]]> KyodoJukyushaNewest2."idoYMD"
                 )
             </if> 
             <if test="日付抽出区分 == 範囲指定 and 各異動月の最新のみ == true" >  
@@ -65,7 +65,7 @@
                 WHERE
                 "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."hiHokenshaNo" = KyodoJukyushaNewest2."hiHokenshaNo"
                  AND "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."sofuYM" = KyodoJukyushaNewest2."sofuYM"
-                 AND "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."idoYMD" <![CDATA[<=]]> KyodoJukyushaNewest2."idoYMD" 
+                 AND "DbT3002KyodoShoriyoJukyushaIdoKihonSofu"."idoYMD" <![CDATA[<]]> KyodoJukyushaNewest2."idoYMD" 
                  )
             </if>
     </sql>
@@ -74,6 +74,9 @@
     
     <resultMap id="resultMap_HanyoListKyodoJukyusha" autoMapping="true"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc710050.KyodoJukyushaKihonEntity">
+        <id column="dbT3002KyodoShoriyoJukyushaIdoKihonSofu_hiHokenshaNo" />
+        <id column="dbT3002KyodoShoriyoJukyushaIdoKihonSofu_idoYMD" />
+        <id column="dbT3002KyodoShoriyoJukyushaIdoKihonSofu_rirekiNo" />
         <association property="共同処理用受給者異動基本送付" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3002KyodoShoriyoJukyushaIdoKihonSofuMapper.ResultMap_DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity"/>
         <association property="被保険者台帳管理" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>
         <association property="宛名" resultMap = "jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>

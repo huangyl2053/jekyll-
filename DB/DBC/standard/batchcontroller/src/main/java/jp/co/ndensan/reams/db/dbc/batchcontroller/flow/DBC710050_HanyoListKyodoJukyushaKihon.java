@@ -84,6 +84,7 @@ public class DBC710050_HanyoListKyodoJukyushaKihon extends BatchFlowBase<DBC7100
         param.set項目名付加(getParameter().isKomokumeFuka());
         param.setシステム日付(new FlexibleDate(システム日時.getDate().toDateString()));
         param.setシステム日時(システム日時);
+        param.set削除含める(getParameter().isSakujyoMeru());
         param.setSearchKey(new ShikibetsuTaishoPSMSearchKeyBuilder(
                 GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先).setデータ取得区分(DataShutokuKubun.直近レコード).build());
         return param;

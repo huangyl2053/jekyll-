@@ -734,12 +734,12 @@ public class JikoFutangakuHosei2Handler4 {
         Decimal 自己負担額_7月分 = div.getTbl20Nendo().getTxt20NendoJikofutangakuYoku7GatsuGo().getValue();
         Decimal うち70_74歳に係る負担額_7月分 = div.getTbl20Nendo().getTxt20Nendo70Kara74FutangakuYoku7GatsuGo().getValue();
         return (Decimal.ZERO.equals(自己負担額_1月分) && !Decimal.ZERO.equals(うち70_74歳に係る負担額_1月分))
-                || (!Decimal.ZERO.equals(自己負担額_2月分) && !Decimal.ZERO.equals(うち70_74歳に係る負担額_2月分))
-                || (!Decimal.ZERO.equals(自己負担額_3月分) && !Decimal.ZERO.equals(うち70_74歳に係る負担額_3月分))
-                || (!Decimal.ZERO.equals(自己負担額_4月分) && !Decimal.ZERO.equals(うち70_74歳に係る負担額_4月分))
-                || (!Decimal.ZERO.equals(自己負担額_5月分) && !Decimal.ZERO.equals(うち70_74歳に係る負担額_5月分))
-                || (!Decimal.ZERO.equals(自己負担額_6月分) && !Decimal.ZERO.equals(うち70_74歳に係る負担額_6月分))
-                || (!Decimal.ZERO.equals(自己負担額_7月分) && !Decimal.ZERO.equals(うち70_74歳に係る負担額_7月分));
+                || (Decimal.ZERO.equals(自己負担額_2月分) && !Decimal.ZERO.equals(うち70_74歳に係る負担額_2月分))
+                || (Decimal.ZERO.equals(自己負担額_3月分) && !Decimal.ZERO.equals(うち70_74歳に係る負担額_3月分))
+                || (Decimal.ZERO.equals(自己負担額_4月分) && !Decimal.ZERO.equals(うち70_74歳に係る負担額_4月分))
+                || (Decimal.ZERO.equals(自己負担額_5月分) && !Decimal.ZERO.equals(うち70_74歳に係る負担額_5月分))
+                || (Decimal.ZERO.equals(自己負担額_6月分) && !Decimal.ZERO.equals(うち70_74歳に係る負担額_6月分))
+                || (Decimal.ZERO.equals(自己負担額_7月分) && !Decimal.ZERO.equals(うち70_74歳に係る負担額_7月分));
     }
 
     /**

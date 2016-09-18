@@ -29,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  * @reamsid_L DBA-0210-010 dingyi
  */
 public class TekiyoJogaiRirekiDiv extends Panel implements ITekiyoJogaiRirekiDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -369,13 +369,18 @@ public class TekiyoJogaiRirekiDiv extends Panel implements ITekiyoJogaiRirekiDiv
     }
 
     @Override
+    public void setDiplayMode(DisplayMode mode) {
+        setMode_DisplayMode(mode);
+    }
+
+    @Override
     public void initialize(ShikibetsuCode 識別コード) {
         getHandler().initialize(識別コード);
     }
 
     @Override
     public void saveTekiyoJogaisha(ShikibetsuCode 識別コード) {
-        getHandler().saveTekiyoJogaisha(識別コード);
+        TekiyoJogaiRirekiPersistor.createInstance().save適用除外者(this, 識別コード);
     }
 
     @Override

@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0510011;
 
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0510011.PostMainPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0510011.dgShichoson_Row;
-import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ua.uax.divcontroller.controller.testdriver.TestJukiAtenaValidation.ValidationDictionary;
 import jp.co.ndensan.reams.ua.uax.divcontroller.controller.testdriver.TestJukiAtenaValidation.ValidationDictionaryBuilder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -20,7 +19,6 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 画面設計_DBC0510011_国保・後期高齢資格異動情報取込
@@ -48,21 +46,29 @@ public class PostMainPanelValidationHandler {
     /**
      * validateチェック
      *
+     * @param 場合 RString
      * @return validPairs ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs validate() {
+    public ValidationMessageControlPairs validate(RString 場合) {
 
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        messages.add(ValidateChain.validateStart(div).
-                ifNot(KokuhorenTorikomiListSpec.ファイル日時が空白).
-                thenAdd(IdocheckMessages.ファイル日時が空白).
-                ifNot(KokuhorenTorikomiListSpec.一覧対象未選択チェック).
-                thenAdd(IdocheckMessages.一覧対象未選択チェック).
-                ifNot(KokuhorenTorikomiListSpec.グリッドのファイル日時が空白).
-                thenAdd(IdocheckMessages.グリッドのファイル日時が空白).
-                messages());
-        validPairs.add(createDictionary().check(messages));
+        if (場合.equals(単一の場合)) {
+            messages.add(ValidateChain.validateStart(div).
+                    ifNot(KokuhorenTorikomiListSpec.ファイル日時が空白).
+                    thenAdd(IdocheckMessages.ファイル日時が空白).
+                    messages());
+            validPairs.add(createDictionary().check(messages));
+        }
+        if (場合.equals(広域の場合)) {
+            messages.add(ValidateChain.validateStart(div).
+                    ifNot(KokuhorenTorikomiListSpec.一覧対象未選択チェック).
+                    thenAdd(IdocheckMessages.一覧対象未選択チェック).
+                    ifNot(KokuhorenTorikomiListSpec.グリッドのファイル日時が空白).
+                    thenAdd(IdocheckMessages.グリッドのファイル日時が空白).
+                    messages());
+            validPairs.add(createDictionary().check(messages));
+        }
         return validPairs;
     }
 
@@ -80,30 +86,23 @@ public class PostMainPanelValidationHandler {
         ファイル日時が空白 {
                     @Override
                     public boolean apply(PostMainPanelDiv div) {
-                        if (ViewStateHolder.get(ViewStateKeys.場合, RString.class).equals(単一の場合)) {
-                            return div.getTxtFileYMD().getValue() != null
-                            && !div.getTxtFileYMD().getValue().toString().isEmpty();
-                        } else {
-                            return true;
-                        }
+
+                        return div.getTxtFileYMD().getValue() != null
+                        && !div.getTxtFileYMD().getValue().toString().isEmpty();
                     }
                 },
         一覧対象未選択チェック {
                     @Override
                     public boolean apply(PostMainPanelDiv div) {
-                        if (ViewStateHolder.get(ViewStateKeys.場合, RString.class).equals(広域の場合)) {
-                            return !div.getDgShichoson().getSelectedItems().isEmpty()
-                            && div.getDgShichoson().getSelectedItems() != null;
-                        } else {
-                            return true;
-                        }
+
+                        return !div.getDgShichoson().getSelectedItems().isEmpty()
+                        && div.getDgShichoson().getSelectedItems() != null;
                     }
                 },
         グリッドのファイル日時が空白 {
                     @Override
                     public boolean apply(PostMainPanelDiv div) {
-                        if (ViewStateHolder.get(ViewStateKeys.場合, RString.class).equals(広域の場合)
-                        && !div.getDgShichoson().getSelectedItems().isEmpty()
+                        if (!div.getDgShichoson().getSelectedItems().isEmpty()
                         && div.getDgShichoson().getSelectedItems() != null) {
                             int i = 0;
                             for (dgShichoson_Row row : div.getDgShichoson().getSelectedItems()) {
@@ -111,11 +110,7 @@ public class PostMainPanelValidationHandler {
                                     i = i + 1;
                                 }
                             }
-                            if (0 < i) {
-                                return false;
-                            } else {
-                                return true;
-                            }
+                            return 0 < i;
 
                         } else {
                             return true;

@@ -228,8 +228,88 @@ public class tblKihonGokeiDiv extends TablePanel {
     }
 
     @JsonIgnore
+    public TextBoxNum getTxtMaeHokenServiceTanisu() {
+        return this.tblCel32.getTxtMaeHokenServiceTanisu();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoHokenServiceTanisu() {
+        return this.tblCel33.getTxtGoHokenServiceTanisu();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeKohi1ServiceTanisu() {
+        return this.tblCel34.getTxtMaeKohi1ServiceTanisu();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoKohi1ServiceTanisu() {
+        return this.tblCel35.getTxtGoKohi1ServiceTanisu();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeKohi2ServiceTanisu() {
+        return this.tblCel36.getTxtMaeKohi2ServiceTanisu();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoKohi2ServiceTanisu() {
+        return this.tblCel37.getTxtGoKohi2ServiceTanisu();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeKohi3ServiceTanisu() {
+        return this.tblCel38.getTxtMaeKohi3ServiceTanisu();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoKohi3ServiceTanisu() {
+        return this.tblCel39.getTxtGoKohi3ServiceTanisu();
+    }
+
+    @JsonIgnore
     public Label getLblHokenryoSeikyuGaku() {
         return this.tblCel41.getLblHokenryoSeikyuGaku();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeHokenHokenSeikyugaku() {
+        return this.tblCel42.getTxtMaeHokenHokenSeikyugaku();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoHokenHokenSeikyugaku() {
+        return this.tblCel43.getTxtGoHokenHokenSeikyugaku();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeKohi1HokenSeikyugaku() {
+        return this.tblCel44.getTxtMaeKohi1HokenSeikyugaku();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoKohi1HokenSeikyugaku() {
+        return this.tblCel45.getTxtGoKohi1HokenSeikyugaku();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeKohi2HokenSeikyugaku() {
+        return this.tblCel46.getTxtMaeKohi2HokenSeikyugaku();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoKohi2HokenSeikyugaku() {
+        return this.tblCel47.getTxtGoKohi2HokenSeikyugaku();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeKohi3HokenSeikyugaku() {
+        return this.tblCel48.getTxtMaeKohi3HokenSeikyugaku();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoKohi3HokenSeikyugaku() {
+        return this.tblCel49.getTxtGoKohi3HokenSeikyugaku();
     }
 
     @JsonIgnore
@@ -238,8 +318,88 @@ public class tblKihonGokeiDiv extends TablePanel {
     }
 
     @JsonIgnore
+    public TextBoxNum getTxtMaeHokenRiyoshaFutangaku() {
+        return this.tblCel52.getTxtMaeHokenRiyoshaFutangaku();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoHokenRiyoshaFutangaku() {
+        return this.tblCel53.getTxtGoHokenRiyoshaFutangaku();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeKohi1RiyoshaFutangaku() {
+        return this.tblCel54.getTxtMaeKohi1RiyoshaFutangaku();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoKohi1RiyoshaFutangaku() {
+        return this.tblCel55.getTxtGoKohi1RiyoshaFutangaku();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeKohi2RiyoshaFutangaku() {
+        return this.tblCel56.getTxtMaeKohi2RiyoshaFutangaku();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoKohi2RiyoshaFutangaku() {
+        return this.tblCel57.getTxtGoKohi2RiyoshaFutangaku();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeKohi3RiyoshaFutangaku() {
+        return this.tblCel58.getTxtMaeKohi3RiyoshaFutangaku();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoKohi3RiyoshaFutangaku() {
+        return this.tblCel59.getTxtGoKohi3RiyoshaFutangaku();
+    }
+
+    @JsonIgnore
     public Label getLblKinkyujiShisetsuRyoyohiHokenSeikyubunGokei() {
         return this.tblCel61.getLblKinkyujiShisetsuRyoyohiHokenSeikyubunGokei();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeHokenKinkyujiShisetsuRyoyohi() {
+        return this.tblCel62.getTxtMaeHokenKinkyujiShisetsuRyoyohi();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoHokenKinkyujiShisetsuRyoyohi() {
+        return this.tblCel63.getTxtGoHokenKinkyujiShisetsuRyoyohi();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeKohi1KinkyujiShisetsuRyoyohi() {
+        return this.tblCel64.getTxtMaeKohi1KinkyujiShisetsuRyoyohi();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoKohi1KinkyujiShisetsuRyoyohi() {
+        return this.tblCel65.getTxtGoKohi1KinkyujiShisetsuRyoyohi();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeKohi2KinkyujiShisetsuRyoyohi() {
+        return this.tblCel66.getTxtMaeKohi2KinkyujiShisetsuRyoyohi();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoKohi2KinkyujiShisetsuRyoyohi() {
+        return this.tblCel67.getTxtGoKohi2KinkyujiShisetsuRyoyohi();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeKohi3KinkyujiShisetsuRyoyohi() {
+        return this.tblCel68.getTxtMaeKohi3KinkyujiShisetsuRyoyohi();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoKohi3KinkyujiShisetsuRyoyohi() {
+        return this.tblCel69.getTxtGoKohi3KinkyujiShisetsuRyoyohi();
     }
 
     @JsonIgnore
@@ -248,8 +408,88 @@ public class tblKihonGokeiDiv extends TablePanel {
     }
 
     @JsonIgnore
+    public TextBoxNum getTxtMaeHokenTokuteiShinryohi() {
+        return this.tblCel72.getTxtMaeHokenTokuteiShinryohi();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoHokenTokuteiShinryohi() {
+        return this.tblCel73.getTxtGoHokenTokuteiShinryohi();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeKohi1TokuteiShinryohi() {
+        return this.tblCel74.getTxtMaeKohi1TokuteiShinryohi();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoKohi1TokuteiShinryohi() {
+        return this.tblCel75.getTxtGoKohi1TokuteiShinryohi();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeKohi2TokuteiShinryohi() {
+        return this.tblCel76.getTxtMaeKohi2TokuteiShinryohi();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoKohi2TokuteiShinryohi() {
+        return this.tblCel77.getTxtGoKohi2TokuteiShinryohi();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeKohi3TokuteiShinryohi() {
+        return this.tblCel78.getTxtMaeKohi3TokuteiShinryohi();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoKohi3TokuteiShinryohi() {
+        return this.tblCel79.getTxtGoKohi3TokuteiShinryohi();
+    }
+
+    @JsonIgnore
     public Label getLblTokuteiNyushoshaKaigoto() {
         return this.tblCel81.getLblTokuteiNyushoshaKaigoto();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeHokenTokuteiNyushosha() {
+        return this.tblCel82.getTxtMaeHokenTokuteiNyushosha();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoHokenTokuteiNyushosha() {
+        return this.tblCel83.getTxtGoHokenTokuteiNyushosha();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeKohi1TokuteiNyushosha() {
+        return this.tblCel84.getTxtMaeKohi1TokuteiNyushosha();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoKohi1TokuteiNyushosha() {
+        return this.tblCel85.getTxtGoKohi1TokuteiNyushosha();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeKohi2TokuteiNyushosha() {
+        return this.tblCel86.getTxtMaeKohi2TokuteiNyushosha();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoKohi2TokuteiNyushosha() {
+        return this.tblCel87.getTxtGoKohi2TokuteiNyushosha();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtMaeKohi3TokuteiNyushosha() {
+        return this.tblCel88.getTxtMaeKohi3TokuteiNyushosha();
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtGoKohi3TokuteiNyushosha() {
+        return this.tblCel89.getTxtGoKohi3TokuteiNyushosha();
     }
 
     /*
@@ -1873,6 +2113,26 @@ class tblCel31AttblKihonGokei extends TableCell {
  */
 class tblCel32AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtMaeHokenServiceTanisu")
+    private TextBoxNum txtMaeHokenServiceTanisu;
+
+    /*
+     * gettxtMaeHokenServiceTanisu
+     * @return txtMaeHokenServiceTanisu
+     */
+    @JsonProperty("txtMaeHokenServiceTanisu")
+    public TextBoxNum getTxtMaeHokenServiceTanisu() {
+        return txtMaeHokenServiceTanisu;
+    }
+
+    /*
+     * settxtMaeHokenServiceTanisu
+     * @param txtMaeHokenServiceTanisu txtMaeHokenServiceTanisu
+     */
+    @JsonProperty("txtMaeHokenServiceTanisu")
+    public void setTxtMaeHokenServiceTanisu(TextBoxNum txtMaeHokenServiceTanisu) {
+        this.txtMaeHokenServiceTanisu = txtMaeHokenServiceTanisu;
+    }
 
     // </editor-fold>
 }
@@ -1883,6 +2143,26 @@ class tblCel32AttblKihonGokei extends TableCell {
  */
 class tblCel33AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtGoHokenServiceTanisu")
+    private TextBoxNum txtGoHokenServiceTanisu;
+
+    /*
+     * gettxtGoHokenServiceTanisu
+     * @return txtGoHokenServiceTanisu
+     */
+    @JsonProperty("txtGoHokenServiceTanisu")
+    public TextBoxNum getTxtGoHokenServiceTanisu() {
+        return txtGoHokenServiceTanisu;
+    }
+
+    /*
+     * settxtGoHokenServiceTanisu
+     * @param txtGoHokenServiceTanisu txtGoHokenServiceTanisu
+     */
+    @JsonProperty("txtGoHokenServiceTanisu")
+    public void setTxtGoHokenServiceTanisu(TextBoxNum txtGoHokenServiceTanisu) {
+        this.txtGoHokenServiceTanisu = txtGoHokenServiceTanisu;
+    }
 
     // </editor-fold>
 }
@@ -1893,6 +2173,26 @@ class tblCel33AttblKihonGokei extends TableCell {
  */
 class tblCel34AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtMaeKohi1ServiceTanisu")
+    private TextBoxNum txtMaeKohi1ServiceTanisu;
+
+    /*
+     * gettxtMaeKohi1ServiceTanisu
+     * @return txtMaeKohi1ServiceTanisu
+     */
+    @JsonProperty("txtMaeKohi1ServiceTanisu")
+    public TextBoxNum getTxtMaeKohi1ServiceTanisu() {
+        return txtMaeKohi1ServiceTanisu;
+    }
+
+    /*
+     * settxtMaeKohi1ServiceTanisu
+     * @param txtMaeKohi1ServiceTanisu txtMaeKohi1ServiceTanisu
+     */
+    @JsonProperty("txtMaeKohi1ServiceTanisu")
+    public void setTxtMaeKohi1ServiceTanisu(TextBoxNum txtMaeKohi1ServiceTanisu) {
+        this.txtMaeKohi1ServiceTanisu = txtMaeKohi1ServiceTanisu;
+    }
 
     // </editor-fold>
 }
@@ -1903,6 +2203,26 @@ class tblCel34AttblKihonGokei extends TableCell {
  */
 class tblCel35AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtGoKohi1ServiceTanisu")
+    private TextBoxNum txtGoKohi1ServiceTanisu;
+
+    /*
+     * gettxtGoKohi1ServiceTanisu
+     * @return txtGoKohi1ServiceTanisu
+     */
+    @JsonProperty("txtGoKohi1ServiceTanisu")
+    public TextBoxNum getTxtGoKohi1ServiceTanisu() {
+        return txtGoKohi1ServiceTanisu;
+    }
+
+    /*
+     * settxtGoKohi1ServiceTanisu
+     * @param txtGoKohi1ServiceTanisu txtGoKohi1ServiceTanisu
+     */
+    @JsonProperty("txtGoKohi1ServiceTanisu")
+    public void setTxtGoKohi1ServiceTanisu(TextBoxNum txtGoKohi1ServiceTanisu) {
+        this.txtGoKohi1ServiceTanisu = txtGoKohi1ServiceTanisu;
+    }
 
     // </editor-fold>
 }
@@ -1913,6 +2233,26 @@ class tblCel35AttblKihonGokei extends TableCell {
  */
 class tblCel36AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtMaeKohi2ServiceTanisu")
+    private TextBoxNum txtMaeKohi2ServiceTanisu;
+
+    /*
+     * gettxtMaeKohi2ServiceTanisu
+     * @return txtMaeKohi2ServiceTanisu
+     */
+    @JsonProperty("txtMaeKohi2ServiceTanisu")
+    public TextBoxNum getTxtMaeKohi2ServiceTanisu() {
+        return txtMaeKohi2ServiceTanisu;
+    }
+
+    /*
+     * settxtMaeKohi2ServiceTanisu
+     * @param txtMaeKohi2ServiceTanisu txtMaeKohi2ServiceTanisu
+     */
+    @JsonProperty("txtMaeKohi2ServiceTanisu")
+    public void setTxtMaeKohi2ServiceTanisu(TextBoxNum txtMaeKohi2ServiceTanisu) {
+        this.txtMaeKohi2ServiceTanisu = txtMaeKohi2ServiceTanisu;
+    }
 
     // </editor-fold>
 }
@@ -1923,6 +2263,26 @@ class tblCel36AttblKihonGokei extends TableCell {
  */
 class tblCel37AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtGoKohi2ServiceTanisu")
+    private TextBoxNum txtGoKohi2ServiceTanisu;
+
+    /*
+     * gettxtGoKohi2ServiceTanisu
+     * @return txtGoKohi2ServiceTanisu
+     */
+    @JsonProperty("txtGoKohi2ServiceTanisu")
+    public TextBoxNum getTxtGoKohi2ServiceTanisu() {
+        return txtGoKohi2ServiceTanisu;
+    }
+
+    /*
+     * settxtGoKohi2ServiceTanisu
+     * @param txtGoKohi2ServiceTanisu txtGoKohi2ServiceTanisu
+     */
+    @JsonProperty("txtGoKohi2ServiceTanisu")
+    public void setTxtGoKohi2ServiceTanisu(TextBoxNum txtGoKohi2ServiceTanisu) {
+        this.txtGoKohi2ServiceTanisu = txtGoKohi2ServiceTanisu;
+    }
 
     // </editor-fold>
 }
@@ -1933,6 +2293,26 @@ class tblCel37AttblKihonGokei extends TableCell {
  */
 class tblCel38AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtMaeKohi3ServiceTanisu")
+    private TextBoxNum txtMaeKohi3ServiceTanisu;
+
+    /*
+     * gettxtMaeKohi3ServiceTanisu
+     * @return txtMaeKohi3ServiceTanisu
+     */
+    @JsonProperty("txtMaeKohi3ServiceTanisu")
+    public TextBoxNum getTxtMaeKohi3ServiceTanisu() {
+        return txtMaeKohi3ServiceTanisu;
+    }
+
+    /*
+     * settxtMaeKohi3ServiceTanisu
+     * @param txtMaeKohi3ServiceTanisu txtMaeKohi3ServiceTanisu
+     */
+    @JsonProperty("txtMaeKohi3ServiceTanisu")
+    public void setTxtMaeKohi3ServiceTanisu(TextBoxNum txtMaeKohi3ServiceTanisu) {
+        this.txtMaeKohi3ServiceTanisu = txtMaeKohi3ServiceTanisu;
+    }
 
     // </editor-fold>
 }
@@ -1943,6 +2323,26 @@ class tblCel38AttblKihonGokei extends TableCell {
  */
 class tblCel39AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtGoKohi3ServiceTanisu")
+    private TextBoxNum txtGoKohi3ServiceTanisu;
+
+    /*
+     * gettxtGoKohi3ServiceTanisu
+     * @return txtGoKohi3ServiceTanisu
+     */
+    @JsonProperty("txtGoKohi3ServiceTanisu")
+    public TextBoxNum getTxtGoKohi3ServiceTanisu() {
+        return txtGoKohi3ServiceTanisu;
+    }
+
+    /*
+     * settxtGoKohi3ServiceTanisu
+     * @param txtGoKohi3ServiceTanisu txtGoKohi3ServiceTanisu
+     */
+    @JsonProperty("txtGoKohi3ServiceTanisu")
+    public void setTxtGoKohi3ServiceTanisu(TextBoxNum txtGoKohi3ServiceTanisu) {
+        this.txtGoKohi3ServiceTanisu = txtGoKohi3ServiceTanisu;
+    }
 
     // </editor-fold>
 }
@@ -1983,6 +2383,26 @@ class tblCel41AttblKihonGokei extends TableCell {
  */
 class tblCel42AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtMaeHokenHokenSeikyugaku")
+    private TextBoxNum txtMaeHokenHokenSeikyugaku;
+
+    /*
+     * gettxtMaeHokenHokenSeikyugaku
+     * @return txtMaeHokenHokenSeikyugaku
+     */
+    @JsonProperty("txtMaeHokenHokenSeikyugaku")
+    public TextBoxNum getTxtMaeHokenHokenSeikyugaku() {
+        return txtMaeHokenHokenSeikyugaku;
+    }
+
+    /*
+     * settxtMaeHokenHokenSeikyugaku
+     * @param txtMaeHokenHokenSeikyugaku txtMaeHokenHokenSeikyugaku
+     */
+    @JsonProperty("txtMaeHokenHokenSeikyugaku")
+    public void setTxtMaeHokenHokenSeikyugaku(TextBoxNum txtMaeHokenHokenSeikyugaku) {
+        this.txtMaeHokenHokenSeikyugaku = txtMaeHokenHokenSeikyugaku;
+    }
 
     // </editor-fold>
 }
@@ -1993,6 +2413,26 @@ class tblCel42AttblKihonGokei extends TableCell {
  */
 class tblCel43AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtGoHokenHokenSeikyugaku")
+    private TextBoxNum txtGoHokenHokenSeikyugaku;
+
+    /*
+     * gettxtGoHokenHokenSeikyugaku
+     * @return txtGoHokenHokenSeikyugaku
+     */
+    @JsonProperty("txtGoHokenHokenSeikyugaku")
+    public TextBoxNum getTxtGoHokenHokenSeikyugaku() {
+        return txtGoHokenHokenSeikyugaku;
+    }
+
+    /*
+     * settxtGoHokenHokenSeikyugaku
+     * @param txtGoHokenHokenSeikyugaku txtGoHokenHokenSeikyugaku
+     */
+    @JsonProperty("txtGoHokenHokenSeikyugaku")
+    public void setTxtGoHokenHokenSeikyugaku(TextBoxNum txtGoHokenHokenSeikyugaku) {
+        this.txtGoHokenHokenSeikyugaku = txtGoHokenHokenSeikyugaku;
+    }
 
     // </editor-fold>
 }
@@ -2003,6 +2443,26 @@ class tblCel43AttblKihonGokei extends TableCell {
  */
 class tblCel44AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtMaeKohi1HokenSeikyugaku")
+    private TextBoxNum txtMaeKohi1HokenSeikyugaku;
+
+    /*
+     * gettxtMaeKohi1HokenSeikyugaku
+     * @return txtMaeKohi1HokenSeikyugaku
+     */
+    @JsonProperty("txtMaeKohi1HokenSeikyugaku")
+    public TextBoxNum getTxtMaeKohi1HokenSeikyugaku() {
+        return txtMaeKohi1HokenSeikyugaku;
+    }
+
+    /*
+     * settxtMaeKohi1HokenSeikyugaku
+     * @param txtMaeKohi1HokenSeikyugaku txtMaeKohi1HokenSeikyugaku
+     */
+    @JsonProperty("txtMaeKohi1HokenSeikyugaku")
+    public void setTxtMaeKohi1HokenSeikyugaku(TextBoxNum txtMaeKohi1HokenSeikyugaku) {
+        this.txtMaeKohi1HokenSeikyugaku = txtMaeKohi1HokenSeikyugaku;
+    }
 
     // </editor-fold>
 }
@@ -2013,6 +2473,26 @@ class tblCel44AttblKihonGokei extends TableCell {
  */
 class tblCel45AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtGoKohi1HokenSeikyugaku")
+    private TextBoxNum txtGoKohi1HokenSeikyugaku;
+
+    /*
+     * gettxtGoKohi1HokenSeikyugaku
+     * @return txtGoKohi1HokenSeikyugaku
+     */
+    @JsonProperty("txtGoKohi1HokenSeikyugaku")
+    public TextBoxNum getTxtGoKohi1HokenSeikyugaku() {
+        return txtGoKohi1HokenSeikyugaku;
+    }
+
+    /*
+     * settxtGoKohi1HokenSeikyugaku
+     * @param txtGoKohi1HokenSeikyugaku txtGoKohi1HokenSeikyugaku
+     */
+    @JsonProperty("txtGoKohi1HokenSeikyugaku")
+    public void setTxtGoKohi1HokenSeikyugaku(TextBoxNum txtGoKohi1HokenSeikyugaku) {
+        this.txtGoKohi1HokenSeikyugaku = txtGoKohi1HokenSeikyugaku;
+    }
 
     // </editor-fold>
 }
@@ -2023,6 +2503,26 @@ class tblCel45AttblKihonGokei extends TableCell {
  */
 class tblCel46AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtMaeKohi2HokenSeikyugaku")
+    private TextBoxNum txtMaeKohi2HokenSeikyugaku;
+
+    /*
+     * gettxtMaeKohi2HokenSeikyugaku
+     * @return txtMaeKohi2HokenSeikyugaku
+     */
+    @JsonProperty("txtMaeKohi2HokenSeikyugaku")
+    public TextBoxNum getTxtMaeKohi2HokenSeikyugaku() {
+        return txtMaeKohi2HokenSeikyugaku;
+    }
+
+    /*
+     * settxtMaeKohi2HokenSeikyugaku
+     * @param txtMaeKohi2HokenSeikyugaku txtMaeKohi2HokenSeikyugaku
+     */
+    @JsonProperty("txtMaeKohi2HokenSeikyugaku")
+    public void setTxtMaeKohi2HokenSeikyugaku(TextBoxNum txtMaeKohi2HokenSeikyugaku) {
+        this.txtMaeKohi2HokenSeikyugaku = txtMaeKohi2HokenSeikyugaku;
+    }
 
     // </editor-fold>
 }
@@ -2033,6 +2533,26 @@ class tblCel46AttblKihonGokei extends TableCell {
  */
 class tblCel47AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtGoKohi2HokenSeikyugaku")
+    private TextBoxNum txtGoKohi2HokenSeikyugaku;
+
+    /*
+     * gettxtGoKohi2HokenSeikyugaku
+     * @return txtGoKohi2HokenSeikyugaku
+     */
+    @JsonProperty("txtGoKohi2HokenSeikyugaku")
+    public TextBoxNum getTxtGoKohi2HokenSeikyugaku() {
+        return txtGoKohi2HokenSeikyugaku;
+    }
+
+    /*
+     * settxtGoKohi2HokenSeikyugaku
+     * @param txtGoKohi2HokenSeikyugaku txtGoKohi2HokenSeikyugaku
+     */
+    @JsonProperty("txtGoKohi2HokenSeikyugaku")
+    public void setTxtGoKohi2HokenSeikyugaku(TextBoxNum txtGoKohi2HokenSeikyugaku) {
+        this.txtGoKohi2HokenSeikyugaku = txtGoKohi2HokenSeikyugaku;
+    }
 
     // </editor-fold>
 }
@@ -2043,6 +2563,26 @@ class tblCel47AttblKihonGokei extends TableCell {
  */
 class tblCel48AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtMaeKohi3HokenSeikyugaku")
+    private TextBoxNum txtMaeKohi3HokenSeikyugaku;
+
+    /*
+     * gettxtMaeKohi3HokenSeikyugaku
+     * @return txtMaeKohi3HokenSeikyugaku
+     */
+    @JsonProperty("txtMaeKohi3HokenSeikyugaku")
+    public TextBoxNum getTxtMaeKohi3HokenSeikyugaku() {
+        return txtMaeKohi3HokenSeikyugaku;
+    }
+
+    /*
+     * settxtMaeKohi3HokenSeikyugaku
+     * @param txtMaeKohi3HokenSeikyugaku txtMaeKohi3HokenSeikyugaku
+     */
+    @JsonProperty("txtMaeKohi3HokenSeikyugaku")
+    public void setTxtMaeKohi3HokenSeikyugaku(TextBoxNum txtMaeKohi3HokenSeikyugaku) {
+        this.txtMaeKohi3HokenSeikyugaku = txtMaeKohi3HokenSeikyugaku;
+    }
 
     // </editor-fold>
 }
@@ -2053,6 +2593,26 @@ class tblCel48AttblKihonGokei extends TableCell {
  */
 class tblCel49AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtGoKohi3HokenSeikyugaku")
+    private TextBoxNum txtGoKohi3HokenSeikyugaku;
+
+    /*
+     * gettxtGoKohi3HokenSeikyugaku
+     * @return txtGoKohi3HokenSeikyugaku
+     */
+    @JsonProperty("txtGoKohi3HokenSeikyugaku")
+    public TextBoxNum getTxtGoKohi3HokenSeikyugaku() {
+        return txtGoKohi3HokenSeikyugaku;
+    }
+
+    /*
+     * settxtGoKohi3HokenSeikyugaku
+     * @param txtGoKohi3HokenSeikyugaku txtGoKohi3HokenSeikyugaku
+     */
+    @JsonProperty("txtGoKohi3HokenSeikyugaku")
+    public void setTxtGoKohi3HokenSeikyugaku(TextBoxNum txtGoKohi3HokenSeikyugaku) {
+        this.txtGoKohi3HokenSeikyugaku = txtGoKohi3HokenSeikyugaku;
+    }
 
     // </editor-fold>
 }
@@ -2093,6 +2653,26 @@ class tblCel51AttblKihonGokei extends TableCell {
  */
 class tblCel52AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtMaeHokenRiyoshaFutangaku")
+    private TextBoxNum txtMaeHokenRiyoshaFutangaku;
+
+    /*
+     * gettxtMaeHokenRiyoshaFutangaku
+     * @return txtMaeHokenRiyoshaFutangaku
+     */
+    @JsonProperty("txtMaeHokenRiyoshaFutangaku")
+    public TextBoxNum getTxtMaeHokenRiyoshaFutangaku() {
+        return txtMaeHokenRiyoshaFutangaku;
+    }
+
+    /*
+     * settxtMaeHokenRiyoshaFutangaku
+     * @param txtMaeHokenRiyoshaFutangaku txtMaeHokenRiyoshaFutangaku
+     */
+    @JsonProperty("txtMaeHokenRiyoshaFutangaku")
+    public void setTxtMaeHokenRiyoshaFutangaku(TextBoxNum txtMaeHokenRiyoshaFutangaku) {
+        this.txtMaeHokenRiyoshaFutangaku = txtMaeHokenRiyoshaFutangaku;
+    }
 
     // </editor-fold>
 }
@@ -2103,6 +2683,26 @@ class tblCel52AttblKihonGokei extends TableCell {
  */
 class tblCel53AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtGoHokenRiyoshaFutangaku")
+    private TextBoxNum txtGoHokenRiyoshaFutangaku;
+
+    /*
+     * gettxtGoHokenRiyoshaFutangaku
+     * @return txtGoHokenRiyoshaFutangaku
+     */
+    @JsonProperty("txtGoHokenRiyoshaFutangaku")
+    public TextBoxNum getTxtGoHokenRiyoshaFutangaku() {
+        return txtGoHokenRiyoshaFutangaku;
+    }
+
+    /*
+     * settxtGoHokenRiyoshaFutangaku
+     * @param txtGoHokenRiyoshaFutangaku txtGoHokenRiyoshaFutangaku
+     */
+    @JsonProperty("txtGoHokenRiyoshaFutangaku")
+    public void setTxtGoHokenRiyoshaFutangaku(TextBoxNum txtGoHokenRiyoshaFutangaku) {
+        this.txtGoHokenRiyoshaFutangaku = txtGoHokenRiyoshaFutangaku;
+    }
 
     // </editor-fold>
 }
@@ -2113,6 +2713,26 @@ class tblCel53AttblKihonGokei extends TableCell {
  */
 class tblCel54AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtMaeKohi1RiyoshaFutangaku")
+    private TextBoxNum txtMaeKohi1RiyoshaFutangaku;
+
+    /*
+     * gettxtMaeKohi1RiyoshaFutangaku
+     * @return txtMaeKohi1RiyoshaFutangaku
+     */
+    @JsonProperty("txtMaeKohi1RiyoshaFutangaku")
+    public TextBoxNum getTxtMaeKohi1RiyoshaFutangaku() {
+        return txtMaeKohi1RiyoshaFutangaku;
+    }
+
+    /*
+     * settxtMaeKohi1RiyoshaFutangaku
+     * @param txtMaeKohi1RiyoshaFutangaku txtMaeKohi1RiyoshaFutangaku
+     */
+    @JsonProperty("txtMaeKohi1RiyoshaFutangaku")
+    public void setTxtMaeKohi1RiyoshaFutangaku(TextBoxNum txtMaeKohi1RiyoshaFutangaku) {
+        this.txtMaeKohi1RiyoshaFutangaku = txtMaeKohi1RiyoshaFutangaku;
+    }
 
     // </editor-fold>
 }
@@ -2123,6 +2743,26 @@ class tblCel54AttblKihonGokei extends TableCell {
  */
 class tblCel55AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtGoKohi1RiyoshaFutangaku")
+    private TextBoxNum txtGoKohi1RiyoshaFutangaku;
+
+    /*
+     * gettxtGoKohi1RiyoshaFutangaku
+     * @return txtGoKohi1RiyoshaFutangaku
+     */
+    @JsonProperty("txtGoKohi1RiyoshaFutangaku")
+    public TextBoxNum getTxtGoKohi1RiyoshaFutangaku() {
+        return txtGoKohi1RiyoshaFutangaku;
+    }
+
+    /*
+     * settxtGoKohi1RiyoshaFutangaku
+     * @param txtGoKohi1RiyoshaFutangaku txtGoKohi1RiyoshaFutangaku
+     */
+    @JsonProperty("txtGoKohi1RiyoshaFutangaku")
+    public void setTxtGoKohi1RiyoshaFutangaku(TextBoxNum txtGoKohi1RiyoshaFutangaku) {
+        this.txtGoKohi1RiyoshaFutangaku = txtGoKohi1RiyoshaFutangaku;
+    }
 
     // </editor-fold>
 }
@@ -2133,6 +2773,26 @@ class tblCel55AttblKihonGokei extends TableCell {
  */
 class tblCel56AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtMaeKohi2RiyoshaFutangaku")
+    private TextBoxNum txtMaeKohi2RiyoshaFutangaku;
+
+    /*
+     * gettxtMaeKohi2RiyoshaFutangaku
+     * @return txtMaeKohi2RiyoshaFutangaku
+     */
+    @JsonProperty("txtMaeKohi2RiyoshaFutangaku")
+    public TextBoxNum getTxtMaeKohi2RiyoshaFutangaku() {
+        return txtMaeKohi2RiyoshaFutangaku;
+    }
+
+    /*
+     * settxtMaeKohi2RiyoshaFutangaku
+     * @param txtMaeKohi2RiyoshaFutangaku txtMaeKohi2RiyoshaFutangaku
+     */
+    @JsonProperty("txtMaeKohi2RiyoshaFutangaku")
+    public void setTxtMaeKohi2RiyoshaFutangaku(TextBoxNum txtMaeKohi2RiyoshaFutangaku) {
+        this.txtMaeKohi2RiyoshaFutangaku = txtMaeKohi2RiyoshaFutangaku;
+    }
 
     // </editor-fold>
 }
@@ -2143,6 +2803,26 @@ class tblCel56AttblKihonGokei extends TableCell {
  */
 class tblCel57AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtGoKohi2RiyoshaFutangaku")
+    private TextBoxNum txtGoKohi2RiyoshaFutangaku;
+
+    /*
+     * gettxtGoKohi2RiyoshaFutangaku
+     * @return txtGoKohi2RiyoshaFutangaku
+     */
+    @JsonProperty("txtGoKohi2RiyoshaFutangaku")
+    public TextBoxNum getTxtGoKohi2RiyoshaFutangaku() {
+        return txtGoKohi2RiyoshaFutangaku;
+    }
+
+    /*
+     * settxtGoKohi2RiyoshaFutangaku
+     * @param txtGoKohi2RiyoshaFutangaku txtGoKohi2RiyoshaFutangaku
+     */
+    @JsonProperty("txtGoKohi2RiyoshaFutangaku")
+    public void setTxtGoKohi2RiyoshaFutangaku(TextBoxNum txtGoKohi2RiyoshaFutangaku) {
+        this.txtGoKohi2RiyoshaFutangaku = txtGoKohi2RiyoshaFutangaku;
+    }
 
     // </editor-fold>
 }
@@ -2153,6 +2833,26 @@ class tblCel57AttblKihonGokei extends TableCell {
  */
 class tblCel58AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtMaeKohi3RiyoshaFutangaku")
+    private TextBoxNum txtMaeKohi3RiyoshaFutangaku;
+
+    /*
+     * gettxtMaeKohi3RiyoshaFutangaku
+     * @return txtMaeKohi3RiyoshaFutangaku
+     */
+    @JsonProperty("txtMaeKohi3RiyoshaFutangaku")
+    public TextBoxNum getTxtMaeKohi3RiyoshaFutangaku() {
+        return txtMaeKohi3RiyoshaFutangaku;
+    }
+
+    /*
+     * settxtMaeKohi3RiyoshaFutangaku
+     * @param txtMaeKohi3RiyoshaFutangaku txtMaeKohi3RiyoshaFutangaku
+     */
+    @JsonProperty("txtMaeKohi3RiyoshaFutangaku")
+    public void setTxtMaeKohi3RiyoshaFutangaku(TextBoxNum txtMaeKohi3RiyoshaFutangaku) {
+        this.txtMaeKohi3RiyoshaFutangaku = txtMaeKohi3RiyoshaFutangaku;
+    }
 
     // </editor-fold>
 }
@@ -2163,6 +2863,26 @@ class tblCel58AttblKihonGokei extends TableCell {
  */
 class tblCel59AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtGoKohi3RiyoshaFutangaku")
+    private TextBoxNum txtGoKohi3RiyoshaFutangaku;
+
+    /*
+     * gettxtGoKohi3RiyoshaFutangaku
+     * @return txtGoKohi3RiyoshaFutangaku
+     */
+    @JsonProperty("txtGoKohi3RiyoshaFutangaku")
+    public TextBoxNum getTxtGoKohi3RiyoshaFutangaku() {
+        return txtGoKohi3RiyoshaFutangaku;
+    }
+
+    /*
+     * settxtGoKohi3RiyoshaFutangaku
+     * @param txtGoKohi3RiyoshaFutangaku txtGoKohi3RiyoshaFutangaku
+     */
+    @JsonProperty("txtGoKohi3RiyoshaFutangaku")
+    public void setTxtGoKohi3RiyoshaFutangaku(TextBoxNum txtGoKohi3RiyoshaFutangaku) {
+        this.txtGoKohi3RiyoshaFutangaku = txtGoKohi3RiyoshaFutangaku;
+    }
 
     // </editor-fold>
 }
@@ -2203,6 +2923,26 @@ class tblCel61AttblKihonGokei extends TableCell {
  */
 class tblCel62AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtMaeHokenKinkyujiShisetsuRyoyohi")
+    private TextBoxNum txtMaeHokenKinkyujiShisetsuRyoyohi;
+
+    /*
+     * gettxtMaeHokenKinkyujiShisetsuRyoyohi
+     * @return txtMaeHokenKinkyujiShisetsuRyoyohi
+     */
+    @JsonProperty("txtMaeHokenKinkyujiShisetsuRyoyohi")
+    public TextBoxNum getTxtMaeHokenKinkyujiShisetsuRyoyohi() {
+        return txtMaeHokenKinkyujiShisetsuRyoyohi;
+    }
+
+    /*
+     * settxtMaeHokenKinkyujiShisetsuRyoyohi
+     * @param txtMaeHokenKinkyujiShisetsuRyoyohi txtMaeHokenKinkyujiShisetsuRyoyohi
+     */
+    @JsonProperty("txtMaeHokenKinkyujiShisetsuRyoyohi")
+    public void setTxtMaeHokenKinkyujiShisetsuRyoyohi(TextBoxNum txtMaeHokenKinkyujiShisetsuRyoyohi) {
+        this.txtMaeHokenKinkyujiShisetsuRyoyohi = txtMaeHokenKinkyujiShisetsuRyoyohi;
+    }
 
     // </editor-fold>
 }
@@ -2213,6 +2953,26 @@ class tblCel62AttblKihonGokei extends TableCell {
  */
 class tblCel63AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtGoHokenKinkyujiShisetsuRyoyohi")
+    private TextBoxNum txtGoHokenKinkyujiShisetsuRyoyohi;
+
+    /*
+     * gettxtGoHokenKinkyujiShisetsuRyoyohi
+     * @return txtGoHokenKinkyujiShisetsuRyoyohi
+     */
+    @JsonProperty("txtGoHokenKinkyujiShisetsuRyoyohi")
+    public TextBoxNum getTxtGoHokenKinkyujiShisetsuRyoyohi() {
+        return txtGoHokenKinkyujiShisetsuRyoyohi;
+    }
+
+    /*
+     * settxtGoHokenKinkyujiShisetsuRyoyohi
+     * @param txtGoHokenKinkyujiShisetsuRyoyohi txtGoHokenKinkyujiShisetsuRyoyohi
+     */
+    @JsonProperty("txtGoHokenKinkyujiShisetsuRyoyohi")
+    public void setTxtGoHokenKinkyujiShisetsuRyoyohi(TextBoxNum txtGoHokenKinkyujiShisetsuRyoyohi) {
+        this.txtGoHokenKinkyujiShisetsuRyoyohi = txtGoHokenKinkyujiShisetsuRyoyohi;
+    }
 
     // </editor-fold>
 }
@@ -2223,6 +2983,26 @@ class tblCel63AttblKihonGokei extends TableCell {
  */
 class tblCel64AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtMaeKohi1KinkyujiShisetsuRyoyohi")
+    private TextBoxNum txtMaeKohi1KinkyujiShisetsuRyoyohi;
+
+    /*
+     * gettxtMaeKohi1KinkyujiShisetsuRyoyohi
+     * @return txtMaeKohi1KinkyujiShisetsuRyoyohi
+     */
+    @JsonProperty("txtMaeKohi1KinkyujiShisetsuRyoyohi")
+    public TextBoxNum getTxtMaeKohi1KinkyujiShisetsuRyoyohi() {
+        return txtMaeKohi1KinkyujiShisetsuRyoyohi;
+    }
+
+    /*
+     * settxtMaeKohi1KinkyujiShisetsuRyoyohi
+     * @param txtMaeKohi1KinkyujiShisetsuRyoyohi txtMaeKohi1KinkyujiShisetsuRyoyohi
+     */
+    @JsonProperty("txtMaeKohi1KinkyujiShisetsuRyoyohi")
+    public void setTxtMaeKohi1KinkyujiShisetsuRyoyohi(TextBoxNum txtMaeKohi1KinkyujiShisetsuRyoyohi) {
+        this.txtMaeKohi1KinkyujiShisetsuRyoyohi = txtMaeKohi1KinkyujiShisetsuRyoyohi;
+    }
 
     // </editor-fold>
 }
@@ -2233,6 +3013,26 @@ class tblCel64AttblKihonGokei extends TableCell {
  */
 class tblCel65AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtGoKohi1KinkyujiShisetsuRyoyohi")
+    private TextBoxNum txtGoKohi1KinkyujiShisetsuRyoyohi;
+
+    /*
+     * gettxtGoKohi1KinkyujiShisetsuRyoyohi
+     * @return txtGoKohi1KinkyujiShisetsuRyoyohi
+     */
+    @JsonProperty("txtGoKohi1KinkyujiShisetsuRyoyohi")
+    public TextBoxNum getTxtGoKohi1KinkyujiShisetsuRyoyohi() {
+        return txtGoKohi1KinkyujiShisetsuRyoyohi;
+    }
+
+    /*
+     * settxtGoKohi1KinkyujiShisetsuRyoyohi
+     * @param txtGoKohi1KinkyujiShisetsuRyoyohi txtGoKohi1KinkyujiShisetsuRyoyohi
+     */
+    @JsonProperty("txtGoKohi1KinkyujiShisetsuRyoyohi")
+    public void setTxtGoKohi1KinkyujiShisetsuRyoyohi(TextBoxNum txtGoKohi1KinkyujiShisetsuRyoyohi) {
+        this.txtGoKohi1KinkyujiShisetsuRyoyohi = txtGoKohi1KinkyujiShisetsuRyoyohi;
+    }
 
     // </editor-fold>
 }
@@ -2243,6 +3043,26 @@ class tblCel65AttblKihonGokei extends TableCell {
  */
 class tblCel66AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtMaeKohi2KinkyujiShisetsuRyoyohi")
+    private TextBoxNum txtMaeKohi2KinkyujiShisetsuRyoyohi;
+
+    /*
+     * gettxtMaeKohi2KinkyujiShisetsuRyoyohi
+     * @return txtMaeKohi2KinkyujiShisetsuRyoyohi
+     */
+    @JsonProperty("txtMaeKohi2KinkyujiShisetsuRyoyohi")
+    public TextBoxNum getTxtMaeKohi2KinkyujiShisetsuRyoyohi() {
+        return txtMaeKohi2KinkyujiShisetsuRyoyohi;
+    }
+
+    /*
+     * settxtMaeKohi2KinkyujiShisetsuRyoyohi
+     * @param txtMaeKohi2KinkyujiShisetsuRyoyohi txtMaeKohi2KinkyujiShisetsuRyoyohi
+     */
+    @JsonProperty("txtMaeKohi2KinkyujiShisetsuRyoyohi")
+    public void setTxtMaeKohi2KinkyujiShisetsuRyoyohi(TextBoxNum txtMaeKohi2KinkyujiShisetsuRyoyohi) {
+        this.txtMaeKohi2KinkyujiShisetsuRyoyohi = txtMaeKohi2KinkyujiShisetsuRyoyohi;
+    }
 
     // </editor-fold>
 }
@@ -2253,6 +3073,26 @@ class tblCel66AttblKihonGokei extends TableCell {
  */
 class tblCel67AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtGoKohi2KinkyujiShisetsuRyoyohi")
+    private TextBoxNum txtGoKohi2KinkyujiShisetsuRyoyohi;
+
+    /*
+     * gettxtGoKohi2KinkyujiShisetsuRyoyohi
+     * @return txtGoKohi2KinkyujiShisetsuRyoyohi
+     */
+    @JsonProperty("txtGoKohi2KinkyujiShisetsuRyoyohi")
+    public TextBoxNum getTxtGoKohi2KinkyujiShisetsuRyoyohi() {
+        return txtGoKohi2KinkyujiShisetsuRyoyohi;
+    }
+
+    /*
+     * settxtGoKohi2KinkyujiShisetsuRyoyohi
+     * @param txtGoKohi2KinkyujiShisetsuRyoyohi txtGoKohi2KinkyujiShisetsuRyoyohi
+     */
+    @JsonProperty("txtGoKohi2KinkyujiShisetsuRyoyohi")
+    public void setTxtGoKohi2KinkyujiShisetsuRyoyohi(TextBoxNum txtGoKohi2KinkyujiShisetsuRyoyohi) {
+        this.txtGoKohi2KinkyujiShisetsuRyoyohi = txtGoKohi2KinkyujiShisetsuRyoyohi;
+    }
 
     // </editor-fold>
 }
@@ -2263,6 +3103,26 @@ class tblCel67AttblKihonGokei extends TableCell {
  */
 class tblCel68AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtMaeKohi3KinkyujiShisetsuRyoyohi")
+    private TextBoxNum txtMaeKohi3KinkyujiShisetsuRyoyohi;
+
+    /*
+     * gettxtMaeKohi3KinkyujiShisetsuRyoyohi
+     * @return txtMaeKohi3KinkyujiShisetsuRyoyohi
+     */
+    @JsonProperty("txtMaeKohi3KinkyujiShisetsuRyoyohi")
+    public TextBoxNum getTxtMaeKohi3KinkyujiShisetsuRyoyohi() {
+        return txtMaeKohi3KinkyujiShisetsuRyoyohi;
+    }
+
+    /*
+     * settxtMaeKohi3KinkyujiShisetsuRyoyohi
+     * @param txtMaeKohi3KinkyujiShisetsuRyoyohi txtMaeKohi3KinkyujiShisetsuRyoyohi
+     */
+    @JsonProperty("txtMaeKohi3KinkyujiShisetsuRyoyohi")
+    public void setTxtMaeKohi3KinkyujiShisetsuRyoyohi(TextBoxNum txtMaeKohi3KinkyujiShisetsuRyoyohi) {
+        this.txtMaeKohi3KinkyujiShisetsuRyoyohi = txtMaeKohi3KinkyujiShisetsuRyoyohi;
+    }
 
     // </editor-fold>
 }
@@ -2273,6 +3133,26 @@ class tblCel68AttblKihonGokei extends TableCell {
  */
 class tblCel69AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtGoKohi3KinkyujiShisetsuRyoyohi")
+    private TextBoxNum txtGoKohi3KinkyujiShisetsuRyoyohi;
+
+    /*
+     * gettxtGoKohi3KinkyujiShisetsuRyoyohi
+     * @return txtGoKohi3KinkyujiShisetsuRyoyohi
+     */
+    @JsonProperty("txtGoKohi3KinkyujiShisetsuRyoyohi")
+    public TextBoxNum getTxtGoKohi3KinkyujiShisetsuRyoyohi() {
+        return txtGoKohi3KinkyujiShisetsuRyoyohi;
+    }
+
+    /*
+     * settxtGoKohi3KinkyujiShisetsuRyoyohi
+     * @param txtGoKohi3KinkyujiShisetsuRyoyohi txtGoKohi3KinkyujiShisetsuRyoyohi
+     */
+    @JsonProperty("txtGoKohi3KinkyujiShisetsuRyoyohi")
+    public void setTxtGoKohi3KinkyujiShisetsuRyoyohi(TextBoxNum txtGoKohi3KinkyujiShisetsuRyoyohi) {
+        this.txtGoKohi3KinkyujiShisetsuRyoyohi = txtGoKohi3KinkyujiShisetsuRyoyohi;
+    }
 
     // </editor-fold>
 }
@@ -2313,6 +3193,26 @@ class tblCel71AttblKihonGokei extends TableCell {
  */
 class tblCel72AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtMaeHokenTokuteiShinryohi")
+    private TextBoxNum txtMaeHokenTokuteiShinryohi;
+
+    /*
+     * gettxtMaeHokenTokuteiShinryohi
+     * @return txtMaeHokenTokuteiShinryohi
+     */
+    @JsonProperty("txtMaeHokenTokuteiShinryohi")
+    public TextBoxNum getTxtMaeHokenTokuteiShinryohi() {
+        return txtMaeHokenTokuteiShinryohi;
+    }
+
+    /*
+     * settxtMaeHokenTokuteiShinryohi
+     * @param txtMaeHokenTokuteiShinryohi txtMaeHokenTokuteiShinryohi
+     */
+    @JsonProperty("txtMaeHokenTokuteiShinryohi")
+    public void setTxtMaeHokenTokuteiShinryohi(TextBoxNum txtMaeHokenTokuteiShinryohi) {
+        this.txtMaeHokenTokuteiShinryohi = txtMaeHokenTokuteiShinryohi;
+    }
 
     // </editor-fold>
 }
@@ -2323,6 +3223,26 @@ class tblCel72AttblKihonGokei extends TableCell {
  */
 class tblCel73AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtGoHokenTokuteiShinryohi")
+    private TextBoxNum txtGoHokenTokuteiShinryohi;
+
+    /*
+     * gettxtGoHokenTokuteiShinryohi
+     * @return txtGoHokenTokuteiShinryohi
+     */
+    @JsonProperty("txtGoHokenTokuteiShinryohi")
+    public TextBoxNum getTxtGoHokenTokuteiShinryohi() {
+        return txtGoHokenTokuteiShinryohi;
+    }
+
+    /*
+     * settxtGoHokenTokuteiShinryohi
+     * @param txtGoHokenTokuteiShinryohi txtGoHokenTokuteiShinryohi
+     */
+    @JsonProperty("txtGoHokenTokuteiShinryohi")
+    public void setTxtGoHokenTokuteiShinryohi(TextBoxNum txtGoHokenTokuteiShinryohi) {
+        this.txtGoHokenTokuteiShinryohi = txtGoHokenTokuteiShinryohi;
+    }
 
     // </editor-fold>
 }
@@ -2333,6 +3253,26 @@ class tblCel73AttblKihonGokei extends TableCell {
  */
 class tblCel74AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtMaeKohi1TokuteiShinryohi")
+    private TextBoxNum txtMaeKohi1TokuteiShinryohi;
+
+    /*
+     * gettxtMaeKohi1TokuteiShinryohi
+     * @return txtMaeKohi1TokuteiShinryohi
+     */
+    @JsonProperty("txtMaeKohi1TokuteiShinryohi")
+    public TextBoxNum getTxtMaeKohi1TokuteiShinryohi() {
+        return txtMaeKohi1TokuteiShinryohi;
+    }
+
+    /*
+     * settxtMaeKohi1TokuteiShinryohi
+     * @param txtMaeKohi1TokuteiShinryohi txtMaeKohi1TokuteiShinryohi
+     */
+    @JsonProperty("txtMaeKohi1TokuteiShinryohi")
+    public void setTxtMaeKohi1TokuteiShinryohi(TextBoxNum txtMaeKohi1TokuteiShinryohi) {
+        this.txtMaeKohi1TokuteiShinryohi = txtMaeKohi1TokuteiShinryohi;
+    }
 
     // </editor-fold>
 }
@@ -2343,6 +3283,26 @@ class tblCel74AttblKihonGokei extends TableCell {
  */
 class tblCel75AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtGoKohi1TokuteiShinryohi")
+    private TextBoxNum txtGoKohi1TokuteiShinryohi;
+
+    /*
+     * gettxtGoKohi1TokuteiShinryohi
+     * @return txtGoKohi1TokuteiShinryohi
+     */
+    @JsonProperty("txtGoKohi1TokuteiShinryohi")
+    public TextBoxNum getTxtGoKohi1TokuteiShinryohi() {
+        return txtGoKohi1TokuteiShinryohi;
+    }
+
+    /*
+     * settxtGoKohi1TokuteiShinryohi
+     * @param txtGoKohi1TokuteiShinryohi txtGoKohi1TokuteiShinryohi
+     */
+    @JsonProperty("txtGoKohi1TokuteiShinryohi")
+    public void setTxtGoKohi1TokuteiShinryohi(TextBoxNum txtGoKohi1TokuteiShinryohi) {
+        this.txtGoKohi1TokuteiShinryohi = txtGoKohi1TokuteiShinryohi;
+    }
 
     // </editor-fold>
 }
@@ -2353,6 +3313,26 @@ class tblCel75AttblKihonGokei extends TableCell {
  */
 class tblCel76AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtMaeKohi2TokuteiShinryohi")
+    private TextBoxNum txtMaeKohi2TokuteiShinryohi;
+
+    /*
+     * gettxtMaeKohi2TokuteiShinryohi
+     * @return txtMaeKohi2TokuteiShinryohi
+     */
+    @JsonProperty("txtMaeKohi2TokuteiShinryohi")
+    public TextBoxNum getTxtMaeKohi2TokuteiShinryohi() {
+        return txtMaeKohi2TokuteiShinryohi;
+    }
+
+    /*
+     * settxtMaeKohi2TokuteiShinryohi
+     * @param txtMaeKohi2TokuteiShinryohi txtMaeKohi2TokuteiShinryohi
+     */
+    @JsonProperty("txtMaeKohi2TokuteiShinryohi")
+    public void setTxtMaeKohi2TokuteiShinryohi(TextBoxNum txtMaeKohi2TokuteiShinryohi) {
+        this.txtMaeKohi2TokuteiShinryohi = txtMaeKohi2TokuteiShinryohi;
+    }
 
     // </editor-fold>
 }
@@ -2363,6 +3343,26 @@ class tblCel76AttblKihonGokei extends TableCell {
  */
 class tblCel77AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtGoKohi2TokuteiShinryohi")
+    private TextBoxNum txtGoKohi2TokuteiShinryohi;
+
+    /*
+     * gettxtGoKohi2TokuteiShinryohi
+     * @return txtGoKohi2TokuteiShinryohi
+     */
+    @JsonProperty("txtGoKohi2TokuteiShinryohi")
+    public TextBoxNum getTxtGoKohi2TokuteiShinryohi() {
+        return txtGoKohi2TokuteiShinryohi;
+    }
+
+    /*
+     * settxtGoKohi2TokuteiShinryohi
+     * @param txtGoKohi2TokuteiShinryohi txtGoKohi2TokuteiShinryohi
+     */
+    @JsonProperty("txtGoKohi2TokuteiShinryohi")
+    public void setTxtGoKohi2TokuteiShinryohi(TextBoxNum txtGoKohi2TokuteiShinryohi) {
+        this.txtGoKohi2TokuteiShinryohi = txtGoKohi2TokuteiShinryohi;
+    }
 
     // </editor-fold>
 }
@@ -2373,6 +3373,26 @@ class tblCel77AttblKihonGokei extends TableCell {
  */
 class tblCel78AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtMaeKohi3TokuteiShinryohi")
+    private TextBoxNum txtMaeKohi3TokuteiShinryohi;
+
+    /*
+     * gettxtMaeKohi3TokuteiShinryohi
+     * @return txtMaeKohi3TokuteiShinryohi
+     */
+    @JsonProperty("txtMaeKohi3TokuteiShinryohi")
+    public TextBoxNum getTxtMaeKohi3TokuteiShinryohi() {
+        return txtMaeKohi3TokuteiShinryohi;
+    }
+
+    /*
+     * settxtMaeKohi3TokuteiShinryohi
+     * @param txtMaeKohi3TokuteiShinryohi txtMaeKohi3TokuteiShinryohi
+     */
+    @JsonProperty("txtMaeKohi3TokuteiShinryohi")
+    public void setTxtMaeKohi3TokuteiShinryohi(TextBoxNum txtMaeKohi3TokuteiShinryohi) {
+        this.txtMaeKohi3TokuteiShinryohi = txtMaeKohi3TokuteiShinryohi;
+    }
 
     // </editor-fold>
 }
@@ -2383,6 +3403,26 @@ class tblCel78AttblKihonGokei extends TableCell {
  */
 class tblCel79AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtGoKohi3TokuteiShinryohi")
+    private TextBoxNum txtGoKohi3TokuteiShinryohi;
+
+    /*
+     * gettxtGoKohi3TokuteiShinryohi
+     * @return txtGoKohi3TokuteiShinryohi
+     */
+    @JsonProperty("txtGoKohi3TokuteiShinryohi")
+    public TextBoxNum getTxtGoKohi3TokuteiShinryohi() {
+        return txtGoKohi3TokuteiShinryohi;
+    }
+
+    /*
+     * settxtGoKohi3TokuteiShinryohi
+     * @param txtGoKohi3TokuteiShinryohi txtGoKohi3TokuteiShinryohi
+     */
+    @JsonProperty("txtGoKohi3TokuteiShinryohi")
+    public void setTxtGoKohi3TokuteiShinryohi(TextBoxNum txtGoKohi3TokuteiShinryohi) {
+        this.txtGoKohi3TokuteiShinryohi = txtGoKohi3TokuteiShinryohi;
+    }
 
     // </editor-fold>
 }
@@ -2423,6 +3463,26 @@ class tblCel81AttblKihonGokei extends TableCell {
  */
 class tblCel82AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtMaeHokenTokuteiNyushosha")
+    private TextBoxNum txtMaeHokenTokuteiNyushosha;
+
+    /*
+     * gettxtMaeHokenTokuteiNyushosha
+     * @return txtMaeHokenTokuteiNyushosha
+     */
+    @JsonProperty("txtMaeHokenTokuteiNyushosha")
+    public TextBoxNum getTxtMaeHokenTokuteiNyushosha() {
+        return txtMaeHokenTokuteiNyushosha;
+    }
+
+    /*
+     * settxtMaeHokenTokuteiNyushosha
+     * @param txtMaeHokenTokuteiNyushosha txtMaeHokenTokuteiNyushosha
+     */
+    @JsonProperty("txtMaeHokenTokuteiNyushosha")
+    public void setTxtMaeHokenTokuteiNyushosha(TextBoxNum txtMaeHokenTokuteiNyushosha) {
+        this.txtMaeHokenTokuteiNyushosha = txtMaeHokenTokuteiNyushosha;
+    }
 
     // </editor-fold>
 }
@@ -2433,6 +3493,26 @@ class tblCel82AttblKihonGokei extends TableCell {
  */
 class tblCel83AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtGoHokenTokuteiNyushosha")
+    private TextBoxNum txtGoHokenTokuteiNyushosha;
+
+    /*
+     * gettxtGoHokenTokuteiNyushosha
+     * @return txtGoHokenTokuteiNyushosha
+     */
+    @JsonProperty("txtGoHokenTokuteiNyushosha")
+    public TextBoxNum getTxtGoHokenTokuteiNyushosha() {
+        return txtGoHokenTokuteiNyushosha;
+    }
+
+    /*
+     * settxtGoHokenTokuteiNyushosha
+     * @param txtGoHokenTokuteiNyushosha txtGoHokenTokuteiNyushosha
+     */
+    @JsonProperty("txtGoHokenTokuteiNyushosha")
+    public void setTxtGoHokenTokuteiNyushosha(TextBoxNum txtGoHokenTokuteiNyushosha) {
+        this.txtGoHokenTokuteiNyushosha = txtGoHokenTokuteiNyushosha;
+    }
 
     // </editor-fold>
 }
@@ -2443,6 +3523,26 @@ class tblCel83AttblKihonGokei extends TableCell {
  */
 class tblCel84AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtMaeKohi1TokuteiNyushosha")
+    private TextBoxNum txtMaeKohi1TokuteiNyushosha;
+
+    /*
+     * gettxtMaeKohi1TokuteiNyushosha
+     * @return txtMaeKohi1TokuteiNyushosha
+     */
+    @JsonProperty("txtMaeKohi1TokuteiNyushosha")
+    public TextBoxNum getTxtMaeKohi1TokuteiNyushosha() {
+        return txtMaeKohi1TokuteiNyushosha;
+    }
+
+    /*
+     * settxtMaeKohi1TokuteiNyushosha
+     * @param txtMaeKohi1TokuteiNyushosha txtMaeKohi1TokuteiNyushosha
+     */
+    @JsonProperty("txtMaeKohi1TokuteiNyushosha")
+    public void setTxtMaeKohi1TokuteiNyushosha(TextBoxNum txtMaeKohi1TokuteiNyushosha) {
+        this.txtMaeKohi1TokuteiNyushosha = txtMaeKohi1TokuteiNyushosha;
+    }
 
     // </editor-fold>
 }
@@ -2453,6 +3553,26 @@ class tblCel84AttblKihonGokei extends TableCell {
  */
 class tblCel85AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtGoKohi1TokuteiNyushosha")
+    private TextBoxNum txtGoKohi1TokuteiNyushosha;
+
+    /*
+     * gettxtGoKohi1TokuteiNyushosha
+     * @return txtGoKohi1TokuteiNyushosha
+     */
+    @JsonProperty("txtGoKohi1TokuteiNyushosha")
+    public TextBoxNum getTxtGoKohi1TokuteiNyushosha() {
+        return txtGoKohi1TokuteiNyushosha;
+    }
+
+    /*
+     * settxtGoKohi1TokuteiNyushosha
+     * @param txtGoKohi1TokuteiNyushosha txtGoKohi1TokuteiNyushosha
+     */
+    @JsonProperty("txtGoKohi1TokuteiNyushosha")
+    public void setTxtGoKohi1TokuteiNyushosha(TextBoxNum txtGoKohi1TokuteiNyushosha) {
+        this.txtGoKohi1TokuteiNyushosha = txtGoKohi1TokuteiNyushosha;
+    }
 
     // </editor-fold>
 }
@@ -2463,6 +3583,26 @@ class tblCel85AttblKihonGokei extends TableCell {
  */
 class tblCel86AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtMaeKohi2TokuteiNyushosha")
+    private TextBoxNum txtMaeKohi2TokuteiNyushosha;
+
+    /*
+     * gettxtMaeKohi2TokuteiNyushosha
+     * @return txtMaeKohi2TokuteiNyushosha
+     */
+    @JsonProperty("txtMaeKohi2TokuteiNyushosha")
+    public TextBoxNum getTxtMaeKohi2TokuteiNyushosha() {
+        return txtMaeKohi2TokuteiNyushosha;
+    }
+
+    /*
+     * settxtMaeKohi2TokuteiNyushosha
+     * @param txtMaeKohi2TokuteiNyushosha txtMaeKohi2TokuteiNyushosha
+     */
+    @JsonProperty("txtMaeKohi2TokuteiNyushosha")
+    public void setTxtMaeKohi2TokuteiNyushosha(TextBoxNum txtMaeKohi2TokuteiNyushosha) {
+        this.txtMaeKohi2TokuteiNyushosha = txtMaeKohi2TokuteiNyushosha;
+    }
 
     // </editor-fold>
 }
@@ -2473,6 +3613,26 @@ class tblCel86AttblKihonGokei extends TableCell {
  */
 class tblCel87AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtGoKohi2TokuteiNyushosha")
+    private TextBoxNum txtGoKohi2TokuteiNyushosha;
+
+    /*
+     * gettxtGoKohi2TokuteiNyushosha
+     * @return txtGoKohi2TokuteiNyushosha
+     */
+    @JsonProperty("txtGoKohi2TokuteiNyushosha")
+    public TextBoxNum getTxtGoKohi2TokuteiNyushosha() {
+        return txtGoKohi2TokuteiNyushosha;
+    }
+
+    /*
+     * settxtGoKohi2TokuteiNyushosha
+     * @param txtGoKohi2TokuteiNyushosha txtGoKohi2TokuteiNyushosha
+     */
+    @JsonProperty("txtGoKohi2TokuteiNyushosha")
+    public void setTxtGoKohi2TokuteiNyushosha(TextBoxNum txtGoKohi2TokuteiNyushosha) {
+        this.txtGoKohi2TokuteiNyushosha = txtGoKohi2TokuteiNyushosha;
+    }
 
     // </editor-fold>
 }
@@ -2483,6 +3643,26 @@ class tblCel87AttblKihonGokei extends TableCell {
  */
 class tblCel88AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtMaeKohi3TokuteiNyushosha")
+    private TextBoxNum txtMaeKohi3TokuteiNyushosha;
+
+    /*
+     * gettxtMaeKohi3TokuteiNyushosha
+     * @return txtMaeKohi3TokuteiNyushosha
+     */
+    @JsonProperty("txtMaeKohi3TokuteiNyushosha")
+    public TextBoxNum getTxtMaeKohi3TokuteiNyushosha() {
+        return txtMaeKohi3TokuteiNyushosha;
+    }
+
+    /*
+     * settxtMaeKohi3TokuteiNyushosha
+     * @param txtMaeKohi3TokuteiNyushosha txtMaeKohi3TokuteiNyushosha
+     */
+    @JsonProperty("txtMaeKohi3TokuteiNyushosha")
+    public void setTxtMaeKohi3TokuteiNyushosha(TextBoxNum txtMaeKohi3TokuteiNyushosha) {
+        this.txtMaeKohi3TokuteiNyushosha = txtMaeKohi3TokuteiNyushosha;
+    }
 
     // </editor-fold>
 }
@@ -2493,6 +3673,26 @@ class tblCel88AttblKihonGokei extends TableCell {
  */
 class tblCel89AttblKihonGokei extends TableCell {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    @JsonProperty("txtGoKohi3TokuteiNyushosha")
+    private TextBoxNum txtGoKohi3TokuteiNyushosha;
+
+    /*
+     * gettxtGoKohi3TokuteiNyushosha
+     * @return txtGoKohi3TokuteiNyushosha
+     */
+    @JsonProperty("txtGoKohi3TokuteiNyushosha")
+    public TextBoxNum getTxtGoKohi3TokuteiNyushosha() {
+        return txtGoKohi3TokuteiNyushosha;
+    }
+
+    /*
+     * settxtGoKohi3TokuteiNyushosha
+     * @param txtGoKohi3TokuteiNyushosha txtGoKohi3TokuteiNyushosha
+     */
+    @JsonProperty("txtGoKohi3TokuteiNyushosha")
+    public void setTxtGoKohi3TokuteiNyushosha(TextBoxNum txtGoKohi3TokuteiNyushosha) {
+        this.txtGoKohi3TokuteiNyushosha = txtGoKohi3TokuteiNyushosha;
+    }
 
     // </editor-fold>
 }

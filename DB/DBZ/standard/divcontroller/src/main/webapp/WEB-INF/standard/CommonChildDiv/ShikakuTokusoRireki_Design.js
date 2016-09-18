@@ -23,6 +23,10 @@ var DBZ;
             Events.onSelectByDeleteButton = function () {
                 return "onSelectByDeleteButton";
             };
+
+            Events.onClick_btnClose = function () {
+                return "onClick_btnClose";
+            };
             return Events;
         })();
         ShikakuTokusoRireki.Events = Events;
@@ -53,6 +57,10 @@ var DBZ;
 
             Controls.prototype.dgShikakuShutokuRireki = function () {
                 return new UZA.DataGrid(this.convFiledName("dgShikakuShutokuRireki"));
+            };
+
+            Controls.prototype.btnClose = function () {
+                return new UZA.Button(this.convFiledName("btnClose"));
             };
             return Controls;
         })();

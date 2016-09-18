@@ -62,14 +62,7 @@ public final class TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport extends
                     給付実績明細リストCount = 給付実績明細Data.size();
                 }
                 if (i + 1 == 帳票情報.get給付実績被保険者リスト().size()) {
-                    for (int j = 0; j <= 給付実績明細リストCount + 1; j++) {
-                        ITokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor bodyEditor
-                                = new TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor(
-                                        帳票情報, association, iOutputOrder, 宛名, j, i);
-                        ITokubetsuChiikiKasanKeigenJissekiKanriIchiranBuilder builder
-                                = new TokubetsuChiikiKasanKeigenJissekiKanriIchiranBuilder(bodyEditor);
-                        writer.writeLine(builder);
-                    }
+                    get明細(i, 給付実績明細リストCount, writer);
                 } else {
                     for (int j = 0; j < 給付実績明細リストCount + 1; j++) {
                         ITokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor bodyEditor
@@ -89,4 +82,26 @@ public final class TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport extends
         }
     }
 
+    private void get明細(int i, int 給付実績明細リストCount,
+            ReportSourceWriter<TokubetsuChiikiKasanKeigenJissekiKanriIchiranReportSource> writer) {
+        if (1 == 給付実績明細リストCount) {
+            for (int j = 0; j <= 給付実績明細リストCount + 2; j++) {
+                ITokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor bodyEditor
+                        = new TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor(
+                                帳票情報, association, iOutputOrder, 宛名, j, i);
+                ITokubetsuChiikiKasanKeigenJissekiKanriIchiranBuilder builder
+                        = new TokubetsuChiikiKasanKeigenJissekiKanriIchiranBuilder(bodyEditor);
+                writer.writeLine(builder);
+            }
+        } else {
+            for (int j = 0; j <= 給付実績明細リストCount + 1; j++) {
+                ITokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor bodyEditor
+                        = new TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor(
+                                帳票情報, association, iOutputOrder, 宛名, j, i);
+                ITokubetsuChiikiKasanKeigenJissekiKanriIchiranBuilder builder
+                        = new TokubetsuChiikiKasanKeigenJissekiKanriIchiranBuilder(bodyEditor);
+                writer.writeLine(builder);
+            }
+        }
+    }
 }

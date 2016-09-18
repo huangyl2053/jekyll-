@@ -79,6 +79,42 @@ public class JikoFutangakuHosei2Panel {
     }
 
     /**
+     * 画面初期化のonActiveメソッドです。
+     *
+     * @param div JikoFutangakuHosei2PanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<JikoFutangakuHosei2PanelDiv> onActive(JikoFutangakuHosei2PanelDiv div) {
+
+        KogakuGassanJikofutangakuHosei 高額合算自己負担額補正保持Entity = ViewStateHolder
+                .get(ViewStateKeys.高額合算自己負担額補正保持Entity, KogakuGassanJikofutangakuHosei.class);
+
+        if (高額合算自己負担額補正保持Entity == null) {
+            高額合算自己負担額補正保持Entity = new KogakuGassanJikofutangakuHosei();
+        }
+        FlexibleYear 対象年度 = 高額合算自己負担額補正保持Entity.get対象年度();
+
+        if (文字列_0.equals(高額合算自己負担額補正保持Entity.get呼び出しフラグ())) {
+            if (平成20年度.equals(対象年度)) {
+                getJikoFutangakuHosei2Handler2(div).initilize_初回(高額合算自己負担額補正保持Entity);
+                getJikoFutangakuHosei2Handler4(div).変更前補正後金額の設定(高額合算自己負担額補正保持Entity);
+                ViewStateHolder.put(ViewStateKeys.高額合算自己負担額補正保持Entity, 高額合算自己負担額補正保持Entity);
+            } else {
+                getJikoFutangakuHosei2Handler1(div).initilize_初回(高額合算自己負担額補正保持Entity);
+                getJikoFutangakuHosei2Handler3(div).変更前補正後金額の設定(高額合算自己負担額補正保持Entity);
+                ViewStateHolder.put(ViewStateKeys.高額合算自己負担額補正保持Entity, 高額合算自己負担額補正保持Entity);
+            }
+        } else if (文字列_1.equals(高額合算自己負担額補正保持Entity.get呼び出しフラグ())) {
+            if (平成20年度.equals(対象年度)) {
+                getJikoFutangakuHosei2Handler4(div).initialize_２回目以降(高額合算自己負担額補正保持Entity);
+            } else {
+                getJikoFutangakuHosei2Handler3(div).initialize_２回目以降(高額合算自己負担額補正保持Entity);
+            }
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 補正前の金額をコピーするのメソッドです。
      *
      * @param div JikoFutangakuHosei2PanelPanelDiv
@@ -869,7 +905,7 @@ public class JikoFutangakuHosei2Panel {
         if (MessageDialogSelectedResult.No.equals(ResponseHolder.getButtonType())) {
             return ResponseData.of(div).respond();
         }
-        return ResponseData.of(div).forwardWithEventName(DBC1140012TransitionEventName.一覧へ).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC1140012TransitionEventName.戻る).respond();
     }
 
     /**
@@ -897,7 +933,7 @@ public class JikoFutangakuHosei2Panel {
             getJikoFutangakuHosei2Handler3(div).高額合算自己負担額保持Entity設定(高額合算自己負担額補正保持Entity);
             ViewStateHolder.put(ViewStateKeys.高額合算自己負担額補正保持Entity, 高額合算自己負担額補正保持Entity);
         }
-        return ResponseData.of(div).forwardWithEventName(DBC1140012TransitionEventName.一覧へ).respond();
+        return ResponseData.of(div).forwardWithEventName(DBC1140012TransitionEventName.戻る).respond();
     }
 
     private void check_20年度(JikoFutangakuHosei2PanelDiv div, KogakuGassanJikofutangakuHosei 高額合算自己負担額補正保持Entity) {

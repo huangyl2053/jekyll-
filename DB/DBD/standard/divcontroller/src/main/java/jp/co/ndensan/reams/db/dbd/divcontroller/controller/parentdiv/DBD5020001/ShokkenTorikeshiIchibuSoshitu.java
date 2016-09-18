@@ -68,7 +68,7 @@ public class ShokkenTorikeshiIchibuSoshitu {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnSave"), true);
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-
+        //TODO sync-24 マージ 暫定
         return ResponseData.of(div).setState(DBD5020001StateName.要介護認定);
     }
 
@@ -131,7 +131,7 @@ public class ShokkenTorikeshiIchibuSoshitu {
     public ResponseData<ShokkenTorikeshiIchibuSoshituDiv> onBeforeOpenDialog_btnShichosonRenrakuJiko(ShokkenTorikeshiIchibuSoshituDiv div) {
 
         NinteiShinseiCodeModel model = new NinteiShinseiCodeModel();
-        model.set表示モード(new RString("InputMode"));
+        model.set表示モード(NinteiShinseiCodeModel.HyojiMode.InputMode);
         model.set連絡事項(div.getHdnRenrakuJiko());
         ViewStateHolder.put(ViewStateKeys.モード, model);
         return ResponseData.of(div).respond();
@@ -251,7 +251,6 @@ public class ShokkenTorikeshiIchibuSoshitu {
         } else {
             return ResponseData.of(div).respond();
         }
-
         if (div.getTitle().contains("却下")) {
             div.getCcdKaigoKanryoMessage().setSuccessMessage(new RString("却下処理が正常に終了しました。"));
             div.setTitle(new RString("要介護認定却下完了"));

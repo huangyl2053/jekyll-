@@ -153,6 +153,108 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
     private static final RString 波線 = new RString("～");
     private static final RString 斜線 = new RString("/");
     private static final RString 年度作成 = new RString("年度");
+    private static final RString HEAD_連番 = new RString("連番");
+    private static final RString HEAD_識別コード = new RString("識別コード");
+    private static final RString HEAD_住民種別 = new RString("住民種別");
+    private static final RString HEAD_氏名 = new RString("氏名");
+    private static final RString HEAD_氏名カナ = new RString("氏名カナ");
+    private static final RString HEAD_生年月日 = new RString("生年月日");
+    private static final RString HEAD_年齢 = new RString("年齢");
+    private static final RString HEAD_性別 = new RString("性別");
+    private static final RString HEAD_続柄コード = new RString("続柄コード");
+    private static final RString HEAD_世帯コード = new RString("世帯コード");
+    private static final RString HEAD_世帯主名 = new RString("世帯主名");
+    private static final RString HEAD_住所コード = new RString("住所コード");
+    private static final RString HEAD_郵便番号 = new RString("郵便番号");
+    private static final RString HEAD_住所番地方書 = new RString("住所番地方書");
+    private static final RString HEAD_住所 = new RString("住所");
+    private static final RString HEAD_番地 = new RString("番地");
+    private static final RString HEAD_方書 = new RString("方書");
+    private static final RString HEAD_行政区コード = new RString("行政区コード");
+    private static final RString HEAD_行政区名 = new RString("行政区名");
+    private static final RString HEAD_地区１ = new RString("地区１");
+    private static final RString HEAD_地区２ = new RString("地区２");
+    private static final RString HEAD_地区３ = new RString("地区３");
+    private static final RString HEAD_連絡先１ = new RString("連絡先１");
+    private static final RString HEAD_連絡先２ = new RString("連絡先２");
+    private static final RString HEAD_登録異動日 = new RString("登録異動日");
+    private static final RString HEAD_登録事由 = new RString("登録事由");
+    private static final RString HEAD_登録届出日 = new RString("登録届出日");
+    private static final RString HEAD_住定異動日 = new RString("住定異動日");
+    private static final RString HEAD_住定事由 = new RString("住定事由");
+    private static final RString HEAD_住定届出日 = new RString("住定届出日");
+    private static final RString HEAD_消除異動日 = new RString("消除異動日");
+    private static final RString HEAD_消除事由 = new RString("消除事由");
+    private static final RString HEAD_消除届出日 = new RString("消除届出日");
+    private static final RString HEAD_転出入理由 = new RString("転出入理由");
+    private static final RString HEAD_前住所郵便番号 = new RString("前住所郵便番号");
+    private static final RString HEAD_前住所番地方書 = new RString("前住所番地方書");
+    private static final RString HEAD_前住所 = new RString("前住所");
+    private static final RString HEAD_前住所番地 = new RString("前住所番地");
+    private static final RString HEAD_前住所方書 = new RString("前住所方書");
+    private static final RString HEAD_市町村コード = new RString("市町村コード");
+    private static final RString HEAD_市町村名 = new RString("市町村名");
+    private static final RString HEAD_保険者コード = new RString("保険者コード");
+    private static final RString HEAD_保険者名 = new RString("保険者名");
+    private static final RString HEAD_空白 = new RString("空白");
+    private static final RString HEAD_送付先氏名 = new RString("送付先氏名");
+    private static final RString HEAD_送付先氏名カナ = new RString("送付先氏名カナ");
+    private static final RString HEAD_送付先住所コード = new RString("送付先住所コード");
+    private static final RString HEAD_送付先郵便番号 = new RString("送付先郵便番号");
+    private static final RString HEAD_送付先住所番地方書 = new RString("送付先住所番地方書");
+    private static final RString HEAD_送付先住所 = new RString("送付先住所");
+    private static final RString HEAD_送付先番地 = new RString("送付先番地");
+    private static final RString HEAD_送付先方書 = new RString("送付先方書");
+    private static final RString HEAD_送付先行政区コード = new RString("送付先行政区コード");
+    private static final RString HEAD_送付先行政区名 = new RString("送付先行政区名");
+    private static final RString HEAD_被保険者番号 = new RString("被保険者番号");
+    private static final RString HEAD_資格取得事由 = new RString("資格取得事由");
+    private static final RString HEAD_資格取得日 = new RString("資格取得日");
+    private static final RString HEAD_資格取得届出日 = new RString("資格取得届出日");
+    private static final RString HEAD_喪失事由 = new RString("喪失事由");
+    private static final RString HEAD_資格喪失日 = new RString("資格喪失日");
+    private static final RString HEAD_資格喪失届出日 = new RString("資格喪失届出日");
+    private static final RString HEAD_資格区分 = new RString("資格区分");
+    private static final RString HEAD_住所地特例状態 = new RString("住所地特例状態");
+    private static final RString HEAD_受給申請事由 = new RString("受給申請事由");
+    private static final RString HEAD_受給申請日 = new RString("受給申請日");
+    private static final RString HEAD_受給要介護度 = new RString("受給要介護度");
+    private static final RString HEAD_受給認定開始日 = new RString("受給認定開始日");
+    private static final RString HEAD_受給認定終了日 = new RString("受給認定終了日");
+    private static final RString HEAD_受給認定日 = new RString("受給認定日");
+    private static final RString HEAD_受給旧措置 = new RString("受給旧措置");
+    private static final RString HEAD_受給みなし更新認定 = new RString("受給みなし更新認定");
+    private static final RString HEAD_受給直近事由 = new RString("受給直近事由");
+    private static final RString HEAD_対象年度 = new RString("対象年度");
+    private static final RString HEAD_保険者番号 = new RString("保険者番号");
+    private static final RString HEAD_連絡票整理番号 = new RString("連絡票整理番号");
+    private static final RString HEAD_履歴番号 = new RString("履歴番号");
+    private static final RString HEAD_自己負担額証明書整理番号 = new RString("自己負担額証明書整理番号");
+    private static final RString HEAD_対象計算期間_開始 = new RString("対象計算期間（開始）");
+    private static final RString HEAD_対象計算期間_終了 = new RString("対象計算期間（終了）");
+    private static final RString HEAD_世帯負担総額 = new RString("世帯負担総額");
+    private static final RString HEAD_介護一部世帯負担 = new RString("介護一部世帯負担");
+    private static final RString HEAD_介護一部世帯負担_７０ = new RString("７０介護一部世帯負担");
+    private static final RString HEAD_所得区分 = new RString("所得区分");
+    private static final RString HEAD_係る所得区分_70歳以上の者に = new RString("70歳以上の者に係る所得区分");
+    private static final RString HEAD_介護等合算算定基準額 = new RString("介護等合算算定基準額");
+    private static final RString HEAD_合算算定基準額_70歳以上介護等 = new RString("70歳以上介護等合算算定基準額");
+    private static final RString HEAD_世帯支給総額 = new RString("世帯支給総額");
+    private static final RString HEAD_うち70歳以上分世帯支給総額 = new RString("うち70歳以上分世帯支給総額");
+    private static final RString HEAD_按分後支給額 = new RString("按分後支給額");
+    private static final RString HEAD_うち70歳以上分按分後支給額 = new RString("うち70歳以上分按分後支給額");
+    private static final RString HEAD_介護低所得者Ⅰ再計算実施の有無 = new RString("介護低所得者Ⅰ再計算実施の有無");
+    private static final RString HEAD_負担額合計_70歳以上 = new RString("70歳以上負担額合計");
+    private static final RString HEAD_かかる支給額合計 = new RString("70歳以上負担額合計にかかる支給額合計");
+    private static final RString HEAD_負担額合計_70歳未満 = new RString("70歳未満負担額合計");
+    private static final RString HEAD_負担額の合計額 = new RString("負担額の合計額");
+    private static final RString HEAD_未満支給額合計_70歳 = new RString("70歳未満支給額合計");
+    private static final RString HEAD_支給額合計額 = new RString("支給額合計額");
+    private static final RString HEAD_データ区分 = new RString("データ区分");
+    private static final RString HEAD_受取年月 = new RString("受取年月");
+    private static final RString HEAD_送付年月 = new RString("送付年月");
+    private static final RString HEAD_支給額計算結果連絡票作成年月日 = new RString("支給額計算結果連絡票作成年月日");
+    private static final RString HEAD_データ種類 = new RString("データ種類");
 
     @Override
     protected void initialize() {
@@ -206,8 +308,11 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
                 setEnclosure(ダブル引用符).
                 setEncode(Encode.UTF_8withBOM).
                 setNewLine(NewLine.CRLF).
-                hasHeader(parameter.is項目名付加()).
+                hasHeader(false).
                 build();
+        if (parameter.is項目名付加()) {
+            hanyoListKogakuCSVWriter.writeLine(getHeader());
+        }
     }
 
     @Override
@@ -570,7 +675,7 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
     private RString get受給申請事由(DbT4001JukyushaDaichoEntity 受給者台帳) {
         RString 受給申請事由 = RString.EMPTY;
         RString 受給申請事由コード = getColumnValue(受給者台帳.getJukyuShinseiJiyu());
-        getJukyuShinseiJiyu(受給申請事由コード, 受給申請事由, 受給者台帳.getYoshienshaNinteiShinseiFlag() ? 定値RSTRING_1 : 定値RSTRING_0);
+        受給申請事由 = getJukyuShinseiJiyu(受給申請事由コード, 受給申請事由, 受給者台帳.getYoshienshaNinteiShinseiFlag() ? 定値RSTRING_1 : 定値RSTRING_0);
         return 受給申請事由;
     }
 
@@ -780,5 +885,112 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
         }
         return date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).
                 fillType(FillType.ZERO).toDateString();
+    }
+
+    private HanyoListKogakuGassanKeisanCSVEntity getHeader() {
+        HanyoListKogakuGassanKeisanCSVEntity csvEntity = new HanyoListKogakuGassanKeisanCSVEntity();
+        csvEntity.set連番(HEAD_連番);
+        csvEntity.set識別コード(HEAD_識別コード);
+        csvEntity.set住民種別(HEAD_住民種別);
+        csvEntity.set氏名(HEAD_氏名);
+        csvEntity.set氏名カナ(HEAD_氏名カナ);
+        csvEntity.set生年月日(HEAD_生年月日);
+        csvEntity.set年齢(HEAD_年齢);
+        csvEntity.set性別(HEAD_性別);
+        csvEntity.set続柄コード(HEAD_続柄コード);
+        csvEntity.set世帯コード(HEAD_世帯コード);
+        csvEntity.set世帯主名(HEAD_世帯主名);
+        csvEntity.set住所コード(HEAD_住所コード);
+        csvEntity.set郵便番号(HEAD_郵便番号);
+        csvEntity.set住所番地方書(HEAD_住所番地方書);
+        csvEntity.set住所(HEAD_住所);
+        csvEntity.set番地(HEAD_番地);
+        csvEntity.set方書(HEAD_方書);
+        csvEntity.set行政区コード(HEAD_行政区コード);
+        csvEntity.set行政区名(HEAD_行政区名);
+        csvEntity.set地区１(HEAD_地区１);
+        csvEntity.set地区２(HEAD_地区２);
+        csvEntity.set地区３(HEAD_地区３);
+        csvEntity.set連絡先１(HEAD_連絡先１);
+        csvEntity.set連絡先２(HEAD_連絡先２);
+        csvEntity.set登録異動日(HEAD_登録異動日);
+        csvEntity.set登録事由(HEAD_登録事由);
+        csvEntity.set登録届出日(HEAD_登録届出日);
+        csvEntity.set住定異動日(HEAD_住定異動日);
+        csvEntity.set住定事由(HEAD_住定事由);
+        csvEntity.set住定届出日(HEAD_住定届出日);
+        csvEntity.set消除異動日(HEAD_消除異動日);
+        csvEntity.set消除事由(HEAD_消除事由);
+        csvEntity.set消除届出日(HEAD_消除届出日);
+        csvEntity.set転出入理由(HEAD_転出入理由);
+        csvEntity.set前住所郵便番号(HEAD_前住所郵便番号);
+        csvEntity.set前住所番地方書(HEAD_前住所番地方書);
+        csvEntity.set前住所(HEAD_前住所);
+        csvEntity.set前住所番地(HEAD_前住所番地);
+        csvEntity.set前住所方書(HEAD_前住所方書);
+        csvEntity.set市町村コード(HEAD_市町村コード);
+        csvEntity.set市町村名(HEAD_市町村名);
+        csvEntity.set保険者コード(HEAD_保険者コード);
+        csvEntity.set保険者名(HEAD_保険者名);
+        csvEntity.set空白(HEAD_空白);
+        csvEntity.set送付先氏名(HEAD_送付先氏名);
+        csvEntity.set送付先氏名カナ(HEAD_送付先氏名カナ);
+        csvEntity.set送付先住所コード(HEAD_送付先住所コード);
+        csvEntity.set送付先郵便番号(HEAD_送付先郵便番号);
+        csvEntity.set送付先住所番地方書(HEAD_送付先住所番地方書);
+        csvEntity.set送付先住所(HEAD_送付先住所);
+        csvEntity.set送付先番地(HEAD_送付先番地);
+        csvEntity.set送付先方書(HEAD_送付先方書);
+        csvEntity.set送付先行政区コード(HEAD_送付先行政区コード);
+        csvEntity.set送付先行政区名(HEAD_送付先行政区名);
+        csvEntity.set被保険者番号(HEAD_被保険者番号);
+        csvEntity.set資格取得事由(HEAD_資格取得事由);
+        csvEntity.set資格取得日(HEAD_資格取得日);
+        csvEntity.set資格取得届出日(HEAD_資格取得届出日);
+        csvEntity.set喪失事由(HEAD_喪失事由);
+        csvEntity.set資格喪失日(HEAD_資格喪失日);
+        csvEntity.set資格喪失届出日(HEAD_資格喪失届出日);
+        csvEntity.set資格区分(HEAD_資格区分);
+        csvEntity.set住所地特例状態(HEAD_住所地特例状態);
+        csvEntity.set受給申請事由(HEAD_受給申請事由);
+        csvEntity.set受給申請日(HEAD_受給申請日);
+        csvEntity.set受給要介護度(HEAD_受給要介護度);
+        csvEntity.set受給認定開始日(HEAD_受給認定開始日);
+        csvEntity.set受給認定終了日(HEAD_受給認定終了日);
+        csvEntity.set受給認定日(HEAD_受給認定日);
+        csvEntity.set受給旧措置(HEAD_受給旧措置);
+        csvEntity.set受給みなし更新認定(HEAD_受給みなし更新認定);
+        csvEntity.set受給直近事由(HEAD_受給直近事由);
+        csvEntity.set対象年度(HEAD_対象年度);
+        csvEntity.set保険者番号(HEAD_保険者番号);
+        csvEntity.set連絡票整理番号(HEAD_連絡票整理番号);
+        csvEntity.set履歴番号(HEAD_履歴番号);
+        csvEntity.set自己負担額証明書整理番号(HEAD_自己負担額証明書整理番号);
+        csvEntity.set対象計算期間_開始(HEAD_対象計算期間_開始);
+        csvEntity.set対象計算期間_終了(HEAD_対象計算期間_終了);
+        csvEntity.set世帯負担総額(HEAD_世帯負担総額);
+        csvEntity.set介護一部世帯負担(HEAD_介護一部世帯負担);
+        csvEntity.set介護一部世帯負担_７０(HEAD_介護一部世帯負担_７０);
+        csvEntity.set所得区分(HEAD_所得区分);
+        csvEntity.set係る所得区分_70歳以上の者に(HEAD_係る所得区分_70歳以上の者に);
+        csvEntity.set介護等合算算定基準額(HEAD_介護等合算算定基準額);
+        csvEntity.set合算算定基準額_70歳以上介護等(HEAD_合算算定基準額_70歳以上介護等);
+        csvEntity.set世帯支給総額(HEAD_世帯支給総額);
+        csvEntity.setうち70歳以上分世帯支給総額(HEAD_うち70歳以上分世帯支給総額);
+        csvEntity.set按分後支給額(HEAD_按分後支給額);
+        csvEntity.setうち70歳以上分按分後支給額(HEAD_うち70歳以上分按分後支給額);
+        csvEntity.set介護低所得者Ⅰ再計算実施の有無(HEAD_介護低所得者Ⅰ再計算実施の有無);
+        csvEntity.set負担額合計_70歳以上(HEAD_負担額合計_70歳以上);
+        csvEntity.setかかる支給額合計(HEAD_かかる支給額合計);
+        csvEntity.set負担額合計_70歳未満(HEAD_負担額合計_70歳未満);
+        csvEntity.set負担額の合計額(HEAD_負担額の合計額);
+        csvEntity.set未満支給額合計_70歳(HEAD_未満支給額合計_70歳);
+        csvEntity.set支給額合計額(HEAD_支給額合計額);
+        csvEntity.setデータ区分(HEAD_データ区分);
+        csvEntity.set受取年月(HEAD_受取年月);
+        csvEntity.set送付年月(HEAD_送付年月);
+        csvEntity.set支給額計算結果連絡票作成年月日(HEAD_支給額計算結果連絡票作成年月日);
+        csvEntity.setデータ種類(HEAD_データ種類);
+        return csvEntity;
     }
 }

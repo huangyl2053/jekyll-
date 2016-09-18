@@ -69,6 +69,6 @@ public class KogakuServicehiJuryoininProcessParameter implements IBatchProcessPa
      */
     public KogakuServicehiJuryoininKeiyakuShoninKakuninshoMybatisParameter toKogakuServicehiJuryoininKeiyakuShoninKakuninshoMybatisParameter() {
         return new KogakuServicehiJuryoininKeiyakuShoninKakuninshoMybatisParameter(契約申請開始, 契約申請終了, 契約決定開始,
-                契約決定終了, 発行済, 改頁出力順ID, 処理日時.getDate());
+                契約決定終了, 発行済, 出力順, 処理日時.getDate());
     }
 }

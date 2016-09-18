@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbt21004;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.ca.cax.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.MonthShichoson;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbbbt21004.DankaibetuHihokensyasuIchiranhyoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt21004.DankaibetuHihokensyasuIchiranhyoProcessParameter;
@@ -43,8 +42,6 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class HihokenshaProcess extends BatchProcessBase<DbT1001HihokenshaDaichoEntity> {
 
     private DankaibetuHihokensyasuIchiranhyoProcessParameter processParameter;
-    private MapperProvider mapperProvider;
-    private HihokenshaTaihoTemp processEntity;
     private FlexibleDate 賦課基準日;
     private static final RString 合併情報区分_合併あり = new RString("1");
     private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.dankaibetsuhihokenshasuichiranhyosakusei"
@@ -53,22 +50,23 @@ public class HihokenshaProcess extends BatchProcessBase<DbT1001HihokenshaDaichoE
     BatchEntityCreatedTempTableWriter 被保険者対象Temp一時tableWriter;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 月別ランクTemp一時tableWriter;
-    private static final RString 被保険者対象Temp一時_TABLE_NAME = new RString("HihokenshaTaihoTemp");
+    private static final RString 被保険者対象一時_TABLE_NAME = new RString("HihokenshaTaihoTemp");
     private static final RString 月別ランク一時_TABLE_NAME = new RString("TsukibetsuRankTemp");
     @BatchWriter
     BatchEntityCreatedTempTableWriter 世帯員把握入力テーブルWriter;
     private static final RString 世帯員把握入力テーブル_TABLE_NAME = new RString("TmpSetaiHaaku");
-    private static final RString 事務広域 = new RString("111");
     private static final RString ONE = new RString("1");
-    private static final RString APRIL = new RString("4");
+    private static final int ONE_INT = 1;
+    private static final int APRIL = 4;
     private static final RString 市町村コード = new RString("1");
+    private ShichosonSecurityJoho 市町村セキュリティ情報;
 
     @Override
     protected void createWriter() {
         世帯員把握入力テーブルWriter = new BatchEntityCreatedTempTableWriter(
                 世帯員把握入力テーブル_TABLE_NAME, TmpSetaiHaaku.class);
         被保険者対象Temp一時tableWriter = new BatchEntityCreatedTempTableWriter(
-                被保険者対象Temp一時_TABLE_NAME, HihokenshaTaihoTemp.class);
+                被保険者対象一時_TABLE_NAME, HihokenshaTaihoTemp.class);
         月別ランクTemp一時tableWriter = new BatchEntityCreatedTempTableWriter(
                 月別ランク一時_TABLE_NAME, TsukibetsuRankTemp.class);
     }
@@ -81,8 +79,7 @@ public class HihokenshaProcess extends BatchProcessBase<DbT1001HihokenshaDaichoE
     @Override
     protected void initialize() {
         super.initialize();
-        processEntity = new HihokenshaTaihoTemp();
-        mapperProvider = InstanceProvider.create(MapperProvider.class);
+        市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
     }
 
     private DankaibetuHihokensyasuIchiranhyoMyBatisParameter toMyBatisParameter() {
@@ -98,31 +95,29 @@ public class HihokenshaProcess extends BatchProcessBase<DbT1001HihokenshaDaichoE
 
     @Override
     protected void process(DbT1001HihokenshaDaichoEntity entity) {
-        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        processEntity = editHihokenshaDaichoEntity(entity);
-        if (事務広域.equals(市町村セキュリティ情報.get導入形態コード().getKey())) {
+        HihokenshaTaihoTemp processEntity = new HihokenshaTaihoTemp();
+        editHihokenshaDaichoEntity(entity, processEntity);
+        if (null != 市町村セキュリティ情報 && null != 市町村セキュリティ情報.get導入形態コード()
+                && DonyuKeitaiCode.事務広域.getCode().equals(市町村セキュリティ情報.get導入形態コード().getKey())) {
             if (ONE.equals(entity.getKoikinaiJushochiTokureiFlag())) {
                 processEntity.setOutPutShichosonCode(ONE);
             } else {
                 processEntity.setOutPutShichosonCode(市町村セキュリティ情報.get市町村情報().get市町村コード().code市町村RString());
             }
-        } else {
+        } else if (null != 市町村セキュリティ情報 && null != 市町村セキュリティ情報.get導入形態コード()) {
             processEntity.setOutPutShichosonCode(市町村セキュリティ情報.get市町村情報().get市町村コード().code市町村RString());
         }
         賦課基準日 = FukaKeisan.createInstance().findOut賦課基準日(processParameter.get調定年度(), new HihokenshaDaicho(entity));
         processEntity.setHukaSystemDate(賦課基準日);
         processEntity.setHukaNando(processParameter.get調定年度());
-        FlexibleDate 資格喪失年月日;
-        if (null != entity.getShikakuSoshitsuYMD() && (APRIL.equals(entity.getShikakuSoshitsuYMD().getMonthValue()))) {
-            資格喪失年月日 = new FlexibleDate(processEntity.getShikakuSoshitsuYMD().getYearValue(),
-                    processEntity.getShikakuSoshitsuYMD().getMonthValue() + 1, 1);
-            processEntity.setShikakuSoshitsuYMD(資格喪失年月日);
+        if (entity != null && null != entity.getShikakuSoshitsuYMD() && APRIL == entity.getShikakuSoshitsuYMD().getMonthValue()) {
+            processEntity.setShikakuSoshitsuYMD(new FlexibleDate(processEntity.getShikakuSoshitsuYMD().getYearValue(),
+                    processEntity.getShikakuSoshitsuYMD().getMonthValue() + ONE_INT, ONE_INT));
         }
-        if (null != entity.getIchigoShikakuShutokuYMD() && null != entity.getShikakuSoshitsuYMD()
-                && !(entity.getShikakuSoshitsuYMD().getMonthValue() != entity.getIchigoShikakuShutokuYMD().getMonthValue())) {
-            資格喪失年月日 = new FlexibleDate(processEntity.getShikakuSoshitsuYMD().getYearValue(),
-                    processEntity.getShikakuSoshitsuYMD().getMonthValue() + 1, 1);
-            processEntity.setShikakuSoshitsuYMD(資格喪失年月日);
+        if (entity.getIchigoShikakuShutokuYMD() != null && entity.getShikakuSoshitsuYMD() != null
+                && entity.getIchigoShikakuShutokuYMD().getMonthValue() == entity.getShikakuSoshitsuYMD().getMonthValue()) {
+            processEntity.setShikakuSoshitsuYMD(new FlexibleDate(processEntity.getShikakuSoshitsuYMD().getYearValue(),
+                    processEntity.getShikakuSoshitsuYMD().getMonthValue() + ONE_INT, ONE_INT));
         }
         被保険者対象Temp一時tableWriter.insert(processEntity);
         TmpSetaiHaaku tmpSetaiHaaku = new TmpSetaiHaaku();
@@ -149,7 +144,7 @@ public class HihokenshaProcess extends BatchProcessBase<DbT1001HihokenshaDaichoE
         }
     }
 
-    private HihokenshaTaihoTemp editHihokenshaDaichoEntity(DbT1001HihokenshaDaichoEntity entity) {
+    private void editHihokenshaDaichoEntity(DbT1001HihokenshaDaichoEntity entity, HihokenshaTaihoTemp processEntity) {
         processEntity.setHihokenshaNo(entity.getHihokenshaNo());
         processEntity.setIdoYMD(entity.getIdoYMD());
         processEntity.setEdaNo(entity.getEdaNo());
@@ -178,8 +173,6 @@ public class HihokenshaProcess extends BatchProcessBase<DbT1001HihokenshaDaichoE
         processEntity.setKoikinaiTokureiSochimotoShichosonCode(entity.getKoikinaiTokureiSochimotoShichosonCode());
         processEntity.setKyuShichosonCode(entity.getKyuShichosonCode());
         processEntity.setLogicalDeletedFlag(entity.getLogicalDeletedFlag());
-        return processEntity;
-
     }
 
     private void set月別ランク(TsukibetsuRankTemp rankuEntity, List<MonthShichoson> 月別ランク情報リスト) {

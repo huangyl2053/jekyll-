@@ -11,13 +11,11 @@ import jp.co.ndensan.reams.db.dbz.definition.core.dokuji.KanryoInfoPhase;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuideDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.NinteiShinseishaFinderDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.NinteiShinseishaFinderHandler;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuideDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuideDiv.TaishoMode;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -49,6 +47,17 @@ public class NinteiShinseishaFinder {
      */
     public ResponseData<NinteiShinseishaFinderDiv> onClick_ShosaiJoken(NinteiShinseishaFinderDiv div) {
         getHandler(div).openShosaiJoken();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 厚労省IFコードDDLの変更時処理です。
+     *
+     * @param div NinteiShinseishaFinderDiv
+     * @return ResponseData
+     */
+    public ResponseData<NinteiShinseishaFinderDiv> onChange_ddlKoroshoShikibetsuCode(NinteiShinseishaFinderDiv div) {
+        getHandler(div).set二次判定結果DDL();
         return ResponseData.of(div).respond();
     }
 
@@ -155,25 +164,6 @@ public class NinteiShinseishaFinder {
     }
 
     /**
-     * 入力された番号を桁数10になるよう左側に0(ゼロ)を埋める。
-     *
-     * @param div NinteiShinseishaFinderDiv
-     * @return ResponseData
-     */
-    public ResponseData<NinteiShinseishaFinderDiv> onBlur_txtShinseishaName(NinteiShinseishaFinderDiv div) {
-        RString txtShinseishaName = div.getTxtHihokenshaName().getValue();
-        if (!RString.isNullOrEmpty(txtShinseishaName)) {
-            txtShinseishaName = RStringUtil.convertひらがなtoカタカナ(txtShinseishaName);
-            if (RStringUtil.isカタカナOnly(txtShinseishaName)) {
-                div.getTxtHihokenshaName().setValue(txtShinseishaName);
-            } else {
-                throw new ApplicationException(UrErrorMessages.使用不可文字.getMessage());
-            }
-        }
-        return ResponseData.of(div).respond();
-    }
-
-    /**
      * 現在のフェーズDDLのonChange場合、各処理状態を制御します。
      *
      * @param div NinteiShinseishaFinderDiv
@@ -181,7 +171,7 @@ public class NinteiShinseishaFinder {
      */
     public ResponseData<NinteiShinseishaFinderDiv> onChange_ddlNowPhase(NinteiShinseishaFinderDiv div) {
         RString nowPhase = div.getDdlNowPhase().getSelectedKey();
-        getHandler(div).clearChk();
+//        getHandler(div).clearChk();
         if (RString.isNullOrEmpty(nowPhase)) {
             div.getChkShoriJotai().setDisabled(true);
             div.getChkKoshinTaishoChushutsu().setDisabled(true);
@@ -376,6 +366,7 @@ public class NinteiShinseishaFinder {
         KijuntsukiShichosonjohoiDataPassModel dataPassModel = new KijuntsukiShichosonjohoiDataPassModel();
         dataPassModel.setサブ業務コード(SubGyomuCode.DBE認定支援.value());
         dataPassModel.set市町村コード(div.getDdlHokenshaNumber().getSelectedItem().get市町村コード().value());
+        dataPassModel.set対象モード(new RString(ChosaItakusakiAndChosainGuideDiv.TaishoMode.Itakusaki.toString()));
         div.setHdnDataPass(DataPassingConverter.serialize(dataPassModel));
         return ResponseData.of(div).respond();
     }
@@ -404,6 +395,7 @@ public class NinteiShinseishaFinder {
         ShujiiIryokikanandshujiiDataPassModel dataPassModel = new ShujiiIryokikanandshujiiDataPassModel();
         dataPassModel.setサブ業務コード(SubGyomuCode.DBE認定支援.value());
         dataPassModel.set市町村コード(div.getDdlHokenshaNumber().getSelectedItem().get市町村コード().value());
+        dataPassModel.set対象モード(new RString(ShujiiIryokikanAndShujiiGuideDiv.TaishoMode.IryoKikanMode.toString()));
         div.setHdnDataPass(DataPassingConverter.serialize(dataPassModel));
         return ResponseData.of(div).respond();
     }

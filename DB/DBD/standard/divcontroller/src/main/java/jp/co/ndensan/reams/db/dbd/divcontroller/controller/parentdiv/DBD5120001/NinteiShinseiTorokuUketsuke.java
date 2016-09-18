@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5120001.Nin
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ninteishinsei.NinteiShinseiCodeModel;
+import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ninteishinsei.NinteiShinseiCodeModel.HyojiMode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiTodokedeDaikoKubunCode;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -33,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class NinteiShinseiTorokuUketsuke {
 
     private final RString 表示パターン_新規 = new RString("0");
+    private final RString 照会 = new RString("照会");
 
     /**
      * 画面初期化
@@ -69,18 +72,8 @@ public class NinteiShinseiTorokuUketsuke {
      */
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onBeforeOpenDialog_btnIryoHokenGuide(NinteiShinseiTorokuUketsukeDiv div) {
 
-        return ResponseData.of(div).respond();
-    }
+        div.setHdnMode(照会);
 
-    /**
-     * 医療保険OkCloseの処理を行う
-     *
-     * @param div NinteiShinseiTorokuUketsukeDiv
-     * @return ResponseData<NinteiShinseiTorokuUketsukeDiv>
-     */
-    public ResponseData<NinteiShinseiTorokuUketsukeDiv> onOkClose_IryoHoken(NinteiShinseiTorokuUketsukeDiv div) {
-
-        div.getBtnIryohokenGuide().setIconNameEnum(IconName.Complete);
         return ResponseData.of(div).respond();
     }
 
@@ -115,6 +108,8 @@ public class NinteiShinseiTorokuUketsuke {
      */
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onBeforeOpenDialog_btnNyuinAndShisetsuNyusho(NinteiShinseiTorokuUketsukeDiv div) {
 
+        div.setHdnMode(照会);
+
         return ResponseData.of(div).respond();
     }
 
@@ -138,6 +133,10 @@ public class NinteiShinseiTorokuUketsuke {
      */
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onBeforeOpenDialog_btnShichosonRenrakuJiko(NinteiShinseiTorokuUketsukeDiv div) {
 
+        NinteiShinseiCodeModel model = new NinteiShinseiCodeModel();
+        model.set表示モード(HyojiMode.InputMode);
+        model.set連絡事項(div.getHdnShichosonRenrakuJiko());
+        ViewStateHolder.put(ViewStateKeys.モード, model);
         return ResponseData.of(div).respond();
     }
 
@@ -148,6 +147,9 @@ public class NinteiShinseiTorokuUketsuke {
      * @return ResponseData<NinteiShinseiTorokuUketsukeDiv>
      */
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onOkClose_ShichosonRenrakuJiko(NinteiShinseiTorokuUketsukeDiv div) {
+
+        NinteiShinseiCodeModel shinseiCodeModel = ViewStateHolder.get(ViewStateKeys.モード, NinteiShinseiCodeModel.class);
+        div.setHdnShichosonRenrakuJiko(shinseiCodeModel.get連絡事項());
 
         div.getBtnShichosonRenrakuJiko().setIconNameEnum(IconName.Complete);
         return ResponseData.of(div).respond();

@@ -152,7 +152,7 @@ public class ShokkenTorikeshiIchibuNintei {
     public ResponseData<ShokkenTorikeshiIchibuNinteiDiv> onBeforeOpenDialog_btnShichosonRenrakuJiko(ShokkenTorikeshiIchibuNinteiDiv div) {
 
         NinteiShinseiCodeModel model = new NinteiShinseiCodeModel();
-        model.set表示モード(new RString("ShokaiMode"));
+        model.set表示モード(NinteiShinseiCodeModel.HyojiMode.ShokaiMode);
         model.set連絡事項(div.getHdnRenrakuJiko());
         ViewStateHolder.put(ViewStateKeys.モード, model);
         return ResponseData.of(div).respond();

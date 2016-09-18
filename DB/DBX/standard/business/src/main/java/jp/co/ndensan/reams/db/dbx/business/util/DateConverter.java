@@ -542,4 +542,18 @@ public final class DateConverter {
         return new RString(format.format(number));
     }
 
+    /**
+     * パターン84 スラッシュ 1989/01 <br/>
+     * seireki() / Separator.SLASH/ fillType.NONE
+     *
+     * @param date 年月 {@link RYearMonth}
+     * @return パターン84 年月
+     */
+    public static RString getDate84(RYearMonth date) {
+        if (date != null) {
+            return date.seireki().separator(Separator.SLASH).fillType(FillType.NONE).width(Width.HALF).toDateString();
+        }
+        return RString.EMPTY;
+    }
+
 }

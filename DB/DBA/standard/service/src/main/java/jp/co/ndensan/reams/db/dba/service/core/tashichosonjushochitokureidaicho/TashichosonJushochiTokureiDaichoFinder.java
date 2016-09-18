@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.otheraddressledger.OtherAddressInfEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.otheraddressledger.OtherAddressInfFromDBEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.otheraddressledger.OtherAddressLedgerEntity;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.tajushochitokureisyakan.TaJushochiTokureisyaKanriRelateEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.otheraddressinformation.IOtherAddressInformationMapper;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tajushochitokureisyakanri.ITaJushochiTokureisyaKanriMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
@@ -259,17 +258,29 @@ public class TashichosonJushochiTokureiDaichoFinder {
                 TaJushochiTokureisyaKanriParameter iParameter
                         = TaJushochiTokureisyaKanriParameter.createParam_TaJushochi(
                                 ShikibetsuCode.EMPTY, RString.EMPTY, RString.EMPTY, 入所施設コード, RString.EMPTY);
-                TaJushochiTokureisyaKanriRelateEntity 事業者名称 = mapper.get事業者名称_介護保険施設(iParameter);
-                if (事業者名称 != null) {
-                    new事業者名称 = 事業者名称.getJigyoshaName();
+                OtherAddressInfFromDBEntity 事業者 = mapper.get事業者_介護保険施設(iParameter);
+                if (事業者 != null) {
+                    new事業者名称 = 事業者.get事業者名称();
+                    otherAddressInfFromDBEntity.set事業者名称(事業者.get事業者名称());
+                    otherAddressInfFromDBEntity.set事業者住所(事業者.get事業者住所());
+                    otherAddressInfFromDBEntity.set事業者番号(事業者.get事業者番号());
+                    otherAddressInfFromDBEntity.set事業者種別(事業者.get事業者種別());
+                    otherAddressInfFromDBEntity.set郵便番号(事業者.get郵便番号());
+                    otherAddressInfFromDBEntity.set電話番号(事業者.get電話番号());
                 }
             } else if (ShisetsuType.住所地特例対象施設.getコード().equals(otherAddressInfFromDBEntity.get入所施設種類())) {
                 TaJushochiTokureisyaKanriParameter iParameter = TaJushochiTokureisyaKanriParameter.createParam_TaJushochi(
                         ShikibetsuCode.EMPTY, RString.EMPTY, RString.EMPTY, 入所施設コード,
                         JigyosyaType.住所地特例対象施設.getコード());
-                TaJushochiTokureisyaKanriRelateEntity 事業者名称 = mapper.get事業者名称_住所地特例対象施設(iParameter);
-                if (事業者名称 != null) {
-                    new事業者名称 = 事業者名称.getJigyoshaMeisho();
+                OtherAddressInfFromDBEntity 事業者 = mapper.get事業者_住所地特例対象施設(iParameter);
+                if (事業者 != null) {
+                    new事業者名称 = 事業者.get事業者名称();
+                    otherAddressInfFromDBEntity.set事業者名称(事業者.get事業者名称());
+                    otherAddressInfFromDBEntity.set事業者住所(事業者.get事業者住所());
+                    otherAddressInfFromDBEntity.set事業者番号(事業者.get事業者番号());
+//                    otherAddressInfFromDBEntity.set事業者種別(事業者.get事業者種別());
+                    otherAddressInfFromDBEntity.set郵便番号(事業者.get郵便番号());
+                    otherAddressInfFromDBEntity.set電話番号(事業者.get電話番号());
                 }
             }
             RString 適用事由名称 = RString.EMPTY;

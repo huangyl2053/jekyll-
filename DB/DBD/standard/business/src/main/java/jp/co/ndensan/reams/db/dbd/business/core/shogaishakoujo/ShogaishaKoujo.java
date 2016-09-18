@@ -9,6 +9,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4038ShogaishaKoujoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -75,4 +76,12 @@ public class ShogaishaKoujo {
         return 障がい者控除.getShogaishaTechoUmu();
     }
 
+    /**
+     * 対象年度を返します。
+     *
+     * @return 対象年度
+     */
+    public FlexibleYear get対象年度() {
+        return 障がい者控除.getTaishoNendo();
+    }
 }

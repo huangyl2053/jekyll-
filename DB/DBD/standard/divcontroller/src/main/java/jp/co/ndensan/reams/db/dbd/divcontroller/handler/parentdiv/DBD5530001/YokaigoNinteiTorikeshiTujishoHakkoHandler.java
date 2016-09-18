@@ -211,7 +211,7 @@ public class YokaigoNinteiTorikeshiTujishoHakkoHandler {
                 .set資格取得前申請フラグ(daicho.is資格取得前申請フラグ())
                 .set旧措置者フラグ(daicho.is旧措置者フラグ())
                 .set論理削除フラグ(daicho.is論理削除フラグ());
-        manager.save受給者台帳(jukyushaDaicho);
+        manager.save受給者台帳(builder.build());
 
     }
 }

@@ -27,15 +27,10 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
@@ -164,7 +159,9 @@ public class YokaigoNinteiTorikeshiTujishoHakko {
      * @return ResponseData<YokaigoNinteiTorikeshiTujishoHakkoDiv>
      */
     public ResponseData<YokaigoNinteiTorikeshiTujishoHakkoDiv> afterPublish(YokaigoNinteiTorikeshiTujishoHakkoDiv div) {
-        creatYokaigoNinteiTorikeshiTujishoHakkoHandler(div).排他の設定(div.getCcdKaigoninteiShikakuInfo().getTxtHihokenshaNo().getValue());
+        RString 排他Key = new RString("YokaigoNinteiTorikeshiTujishoHakko")
+                .concat(div.getCcdKaigoninteiShikakuInfo().getTxtHihokenshaNo().getValue());
+        creatYokaigoNinteiTorikeshiTujishoHakkoHandler(div).排他の設定(排他Key);
         ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJohoFinder.createInstance().
                 getShichosonSecurityJoho(GyomuBunrui.介護事務);
         LasdecCode 市町村コード;
@@ -182,12 +179,7 @@ public class YokaigoNinteiTorikeshiTujishoHakko {
         if (jukyushaDaicho != null) {
             insert(jukyushaDaicho, div);
         }
-        creatYokaigoNinteiTorikeshiTujishoHakkoHandler(div).排他制御の解除(div.getCcdKaigoninteiShikakuInfo()
-                .getTxtHihokenshaNo().getValue());
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(div.getCcdKaigoninteiShikakuInfo().
-                getTxtHihokenshaNo().getValue()), new RString("0003"), div.getCcdKaigoninteiShikakuInfo().
-                getTxtHihokenshaNo().getValue());
-        AccessLogger.log(AccessLogType.照会, PersonalData.withHojinNo(new ShikibetsuCode(RString.EMPTY), expandedInfo));
+        creatYokaigoNinteiTorikeshiTujishoHakkoHandler(div).排他制御の解除(排他Key);
         div.getCcdKanryoMessage().setMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()), RString.EMPTY,
                 RString.EMPTY, true);
         return ResponseData.of(div).setState(DBD5530001StateName.完了);

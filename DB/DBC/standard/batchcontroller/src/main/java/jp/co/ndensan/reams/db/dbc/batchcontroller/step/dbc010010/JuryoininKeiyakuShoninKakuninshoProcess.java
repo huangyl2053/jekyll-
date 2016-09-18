@@ -94,6 +94,7 @@ public class JuryoininKeiyakuShoninKakuninshoProcess extends BatchKeyBreakBase<J
     private BatchReportWriter<JuryoIninShoninKakuninshoIchiranSource> 一覧表ReportWriter;
     private ReportSourceWriter<JuryoIninShoninKakuninshoIchiranSource> 一覧表SourceWriter;
     private boolean flag;
+    private int count;
     private NinshoshaSource 利用者向け認証者情報;
     private NinshoshaSource 事業者用認証者情報;
     private RString 利用者向け帳票タイトル;
@@ -104,6 +105,7 @@ public class JuryoininKeiyakuShoninKakuninshoProcess extends BatchKeyBreakBase<J
     @Override
     protected void initialize() {
         flag = true;
+        count = 1;
         if (!RString.isNullOrEmpty(proParameter.get改頁出力順()) && !ZERO.equals(proParameter.get改頁出力順())) {
             IChohyoShutsuryokujunFinder iChohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
             出力順 = iChohyoShutsuryokujunFinder.get出力順(SubGyomuCode.DBC介護給付,
@@ -141,6 +143,7 @@ public class JuryoininKeiyakuShoninKakuninshoProcess extends BatchKeyBreakBase<J
     @Override
     protected void usualProcess(JuryoininKeiyakuShoninKakuninshoEntity entity) {
         flag = false;
+        entity.setページ(count);
         JuryoininKeiyakuShoninKakuninshoService service = new JuryoininKeiyakuShoninKakuninshoService();
         DbT3078ShokanJuryoininKeiyakushaEntity 償還受領委任契約者Entity = entity.get償還受領委任契約者();
         BusinessEntity businessEntity = service.setJuryoininShouninkakuninshoChouhyouSakusei(entity);
@@ -161,7 +164,7 @@ public class JuryoininKeiyakuShoninKakuninshoProcess extends BatchKeyBreakBase<J
             償還受領委任契約者Entity.setShoninKekkaTsuchiSaiHakkoKubun(RString.EMPTY);
         }
         償還受領委任契約者.update(償還受領委任契約者Entity);
-
+        count++;
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(CODE), 被保険者番号,
                 entity.get償還受領委任契約者().getHihokenshaNo().value());
         AccessLogger.log(AccessLogType.照会, PersonalData.of(entity.get識別コード(), expandedInfo));

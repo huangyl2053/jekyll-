@@ -98,10 +98,10 @@ public class ShiharaiHohoHenkoShuryoShinseisho {
         FlexibleDate get生年月日 = business.get生年月日();
         if (get生年月日 != null && !get生年月日.isEmpty()) {
             if (JuminShubetsu.日本人.getCode().equals(business.get住民種別コード())
-                    || JuminShubetsu.住登外個人_日本人.getCode().equals(business.get住民種別コード())) {
+                || JuminShubetsu.住登外個人_日本人.getCode().equals(business.get住民種別コード())) {
                 生年月日 = set生年月日_日本人(get生年月日);
             } else if (JuminShubetsu.外国人.getCode().equals(business.get住民種別コード())
-                    || JuminShubetsu.住登外個人_外国人.getCode().equals(business.get住民種別コード())) {
+                       || JuminShubetsu.住登外個人_外国人.getCode().equals(business.get住民種別コード())) {
                 生年月日 = set生年月日(get生年月日, business.get生年月日不詳区分());
             }
         }

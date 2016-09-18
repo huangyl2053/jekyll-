@@ -5,13 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbb.service.core.gemmen.gemmen;
 
-import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.DbT2002FukaJohoTempTableEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.gemmen.GemmenCsvEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.gemmen.GemmenEntity;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaBanchi;
@@ -22,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Katagaki;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -36,91 +35,92 @@ public class GemmenCsvEditor {
     /**
      * editor
      *
-     * @param entity GemmenEntity
+     * @param entity DbT2002FukaJohoTempTableEntity
      * @param 賦課の情報一時Data DbT2002FukaJohoTempTableEntity
+     * @param 宛名Entity UaFt200FindShikibetsuTaishoEntity
      * @return GemmenCsvEntity
      */
-    public GemmenCsvEntity editor(GemmenEntity entity, DbT2002FukaJohoTempTableEntity 賦課の情報一時Data) {
+    public GemmenCsvEntity editor(DbT2002FukaJohoTempTableEntity entity, DbT2002FukaJohoTempTableEntity 賦課の情報一時Data,
+            UaFt200FindShikibetsuTaishoEntity 宛名Entity) {
         GemmenCsvEntity csvEntity = new GemmenCsvEntity();
-        FukaJohoRelateEntity 賦課の情報 = entity.get賦課の情報();
-        FukaJoho fukajoho = new FukaJoho(賦課の情報);
-        if (fukajoho.get調定年度() != null) {
-            csvEntity.set調定年度(fukajoho.get調定年度().toDateString());
+        if (entity.getChoteiNendo() != null) {
+            csvEntity.set調定年度(entity.getChoteiNendo().toDateString());
         }
-        if (fukajoho.get賦課年度() != null) {
-            csvEntity.set賦課年度(fukajoho.get賦課年度().toDateString());
+        if (entity.getFukaNendo() != null) {
+            csvEntity.set賦課年度(entity.getFukaNendo().toDateString());
         }
-        if (fukajoho.get通知書番号() != null) {
-            csvEntity.set通知書番号(fukajoho.get通知書番号().getColumnValue());
+        if (entity.getTsuchishoNo() != null) {
+            csvEntity.set通知書番号(entity.getTsuchishoNo().getColumnValue());
         }
-        csvEntity.set履歴番号(new RString(fukajoho.get履歴番号()));
-        if (fukajoho.get被保険者番号() != null) {
-            csvEntity.set被保険者番号(fukajoho.get被保険者番号().getColumnValue());
+        csvEntity.set履歴番号(new RString(entity.getRirekiNo()));
+        if (entity.getHihokenshaNo() != null) {
+            csvEntity.set被保険者番号(entity.getHihokenshaNo().getColumnValue());
         }
-        if (fukajoho.get識別コード() != null) {
-            csvEntity.set識別コード(fukajoho.get識別コード().getColumnValue());
+        ShikibetsuCode 識別コード = entity.getShikibetsuCode();
+        if (識別コード != null) {
+            csvEntity.set識別コード(識別コード.getColumnValue());
         }
-        if (fukajoho.get世帯コード() != null) {
-            csvEntity.set世帯コード(fukajoho.get世帯コード().getColumnValue());
+        SetaiCode 世帯コード = entity.getSetaiCode();
+        if (世帯コード != null) {
+            csvEntity.set世帯コード(世帯コード.getColumnValue());
         }
         HokenryoDankaiSettings hokenryoDankaiSettings = HokenryoDankaiSettings.createInstance();
-        HokenryoDankaiList 保険料段階リスト = hokenryoDankaiSettings.get保険料段階ListIn(fukajoho.get賦課年度());
-        HokenryoDankai 保険料段階 = 保険料段階リスト.getBy段階区分(fukajoho.get保険料段階());
+        HokenryoDankaiList 保険料段階リスト = hokenryoDankaiSettings.get保険料段階ListIn(entity.getFukaNendo());
+        HokenryoDankai 保険料段階 = 保険料段階リスト.getBy段階区分(entity.getHokenryoDankai());
         if (保険料段階 != null) {
             csvEntity.set保険料段階(保険料段階.get表記());
         }
-        csvEntity.set処理前減免前介護保険料年額(numToRString(fukajoho.get減免前介護保険料_年額()));
+        csvEntity.set処理前減免前介護保険料年額(numToRString(entity.getGemmenMaeHokenryo()));
         csvEntity.set処理後減免前介護保険料年額(numToRString(賦課の情報一時Data.getGemmenMaeHokenryo()));
-        csvEntity.set処理前減免額(numToRString(fukajoho.get減免額()));
+        csvEntity.set処理前減免額(numToRString(entity.getGemmenGaku()));
         csvEntity.set処理後減免額(numToRString(賦課の情報一時Data.getGemmenMaeHokenryo()));
-        csvEntity.set処理前確定介護保険料年額(numToRString(fukajoho.get確定介護保険料_年額()));
+        csvEntity.set処理前確定介護保険料年額(numToRString(entity.getKakuteiHokenryo()));
         csvEntity.set処理後確定介護保険料年額(numToRString(Decimal.ZERO));
-        csvEntity.set処理前特徴期別金額01(numToRString(fukajoho.get特徴期別金額01()));
+        csvEntity.set処理前特徴期別金額01(numToRString(entity.getTkKibetsuGaku01()));
         csvEntity.set処理後特徴期別金額01(numToRString(Decimal.ZERO));
-        csvEntity.set処理前特徴期別金額02(numToRString(fukajoho.get特徴期別金額02()));
+        csvEntity.set処理前特徴期別金額02(numToRString(entity.getTkKibetsuGaku02()));
         csvEntity.set処理後特徴期別金額02(numToRString(Decimal.ZERO));
-        csvEntity.set処理前特徴期別金額03(numToRString(fukajoho.get特徴期別金額03()));
+        csvEntity.set処理前特徴期別金額03(numToRString(entity.getTkKibetsuGaku03()));
         csvEntity.set処理後特徴期別金額03(numToRString(Decimal.ZERO));
-        csvEntity.set処理前特徴期別金額04(numToRString(fukajoho.get特徴期別金額04()));
+        csvEntity.set処理前特徴期別金額04(numToRString(entity.getTkKibetsuGaku04()));
         csvEntity.set処理後特徴期別金額04(numToRString(Decimal.ZERO));
-        csvEntity.set処理前特徴期別金額05(numToRString(fukajoho.get特徴期別金額05()));
+        csvEntity.set処理前特徴期別金額05(numToRString(entity.getTkKibetsuGaku05()));
         csvEntity.set処理後特徴期別金額05(numToRString(Decimal.ZERO));
-        csvEntity.set処理前特徴期別金額06(numToRString(fukajoho.get特徴期別金額06()));
+        csvEntity.set処理前特徴期別金額06(numToRString(entity.getTkKibetsuGaku06()));
         csvEntity.set処理後特徴期別金額06(numToRString(Decimal.ZERO));
-        csvEntity.set処理前普徴期別金額01(numToRString(fukajoho.get普徴期別金額01()));
+        csvEntity.set処理前普徴期別金額01(numToRString(entity.getFuKibetsuGaku01()));
         csvEntity.set処理後普徴期別金額01(numToRString(Decimal.ZERO));
-        csvEntity.set処理前普徴期別金額02(numToRString(fukajoho.get普徴期別金額02()));
+        csvEntity.set処理前普徴期別金額02(numToRString(entity.getFuKibetsuGaku02()));
         csvEntity.set処理後普徴期別金額02(numToRString(Decimal.ZERO));
-        csvEntity.set処理前普徴期別金額03(numToRString(fukajoho.get普徴期別金額03()));
+        csvEntity.set処理前普徴期別金額03(numToRString(entity.getFuKibetsuGaku03()));
         csvEntity.set処理後普徴期別金額03(numToRString(Decimal.ZERO));
-        csvEntity.set処理前普徴期別金額04(numToRString(fukajoho.get普徴期別金額04()));
+        csvEntity.set処理前普徴期別金額04(numToRString(entity.getFuKibetsuGaku04()));
         csvEntity.set処理後普徴期別金額04(numToRString(Decimal.ZERO));
-        csvEntity.set処理前普徴期別金額05(numToRString(fukajoho.get普徴期別金額05()));
+        csvEntity.set処理前普徴期別金額05(numToRString(entity.getFuKibetsuGaku05()));
         csvEntity.set処理後普徴期別金額05(numToRString(Decimal.ZERO));
-        csvEntity.set処理前普徴期別金額06(numToRString(fukajoho.get普徴期別金額06()));
+        csvEntity.set処理前普徴期別金額06(numToRString(entity.getFuKibetsuGaku06()));
         csvEntity.set処理後普徴期別金額06(numToRString(Decimal.ZERO));
-        csvEntity.set処理前普徴期別金額07(numToRString(fukajoho.get普徴期別金額07()));
+        csvEntity.set処理前普徴期別金額07(numToRString(entity.getFuKibetsuGaku07()));
         csvEntity.set処理後普徴期別金額07(numToRString(Decimal.ZERO));
-        csvEntity.set処理前普徴期別金額08(numToRString(fukajoho.get普徴期別金額08()));
+        csvEntity.set処理前普徴期別金額08(numToRString(entity.getFuKibetsuGaku08()));
         csvEntity.set処理後普徴期別金額08(numToRString(Decimal.ZERO));
-        csvEntity.set処理前普徴期別金額09(numToRString(fukajoho.get普徴期別金額09()));
+        csvEntity.set処理前普徴期別金額09(numToRString(entity.getFuKibetsuGaku09()));
         csvEntity.set処理後普徴期別金額09(numToRString(Decimal.ZERO));
-        csvEntity.set処理前普徴期別金額10(numToRString(fukajoho.get普徴期別金額10()));
+        csvEntity.set処理前普徴期別金額10(numToRString(entity.getFuKibetsuGaku10()));
         csvEntity.set処理後普徴期別金額10(numToRString(Decimal.ZERO));
-        csvEntity.set処理前普徴期別金額11(numToRString(fukajoho.get普徴期別金額11()));
+        csvEntity.set処理前普徴期別金額11(numToRString(entity.getFuKibetsuGaku11()));
         csvEntity.set処理後普徴期別金額11(numToRString(Decimal.ZERO));
-        csvEntity.set処理前普徴期別金額12(numToRString(fukajoho.get普徴期別金額12()));
+        csvEntity.set処理前普徴期別金額12(numToRString(entity.getFuKibetsuGaku12()));
         csvEntity.set処理後普徴期別金額12(numToRString(Decimal.ZERO));
-        csvEntity.set処理前普徴期別金額13(numToRString(fukajoho.get普徴期別金額13()));
+        csvEntity.set処理前普徴期別金額13(numToRString(entity.getFuKibetsuGaku13()));
         csvEntity.set処理後普徴期別金額13(numToRString(Decimal.ZERO));
-        csvEntity.set処理前普徴期別金額14(numToRString(fukajoho.get普徴期別金額14()));
+        csvEntity.set処理前普徴期別金額14(numToRString(entity.getFuKibetsuGaku14()));
         csvEntity.set処理後普徴期別金額14(numToRString(Decimal.ZERO));
-        set宛名(csvEntity, entity);
+        set宛名(csvEntity, 宛名Entity);
         return csvEntity;
     }
 
-    private void set宛名(GemmenCsvEntity csvEntity, GemmenEntity entity) {
-        UaFt200FindShikibetsuTaishoEntity 宛名Entity = entity.get宛名Entity();
+    private void set宛名(GemmenCsvEntity csvEntity, UaFt200FindShikibetsuTaishoEntity 宛名Entity) {
         if (宛名Entity != null) {
             ChoikiCode 町域コード = 宛名Entity.getChoikiCode();
             if (町域コード != null) {

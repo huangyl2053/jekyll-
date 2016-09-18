@@ -132,10 +132,10 @@ public class TokuteifutanGendogakuShinseisho {
         List<TokuteiFutangendogakuShinseishoReport> list = new ArrayList<>();
         RString 生年月日 = RString.EMPTY;
         if (JuminShubetsu.日本人.getCode().equals(entity.get住民種別コード())
-                || JuminShubetsu.住登外個人_日本人.getCode().equals(entity.get住民種別コード())) {
+            || JuminShubetsu.住登外個人_日本人.getCode().equals(entity.get住民種別コード())) {
             生年月日 = set生年月日_日本人(entity);
         } else if (JuminShubetsu.外国人.getCode().equals(entity.get住民種別コード())
-                || JuminShubetsu.住登外個人_外国人.getCode().equals(entity.get住民種別コード())) {
+                   || JuminShubetsu.住登外個人_外国人.getCode().equals(entity.get住民種別コード())) {
             生年月日 = set生年月日(entity);
         }
         List<RString> 施設情報 = get施設情報(get施設情報の取得(識別コード));
@@ -228,13 +228,13 @@ public class TokuteifutanGendogakuShinseisho {
                 DbT7060KaigoJigyoshaEntity dbT7060KaigoJigyoshaEntity = get介護事業者_事業者情報の取得(dbT1004ShisetsuNyutaishoEntity
                         .getNyushoShisetsuCode().value());
                 施設郵便番号 = dbT7060KaigoJigyoshaEntity == null
-                        ? RString.EMPTY : getYubinNoValue(dbT7060KaigoJigyoshaEntity.getYubinNo());
+                         ? RString.EMPTY : getYubinNoValue(dbT7060KaigoJigyoshaEntity.getYubinNo());
                 施設電話番号 = dbT7060KaigoJigyoshaEntity == null
-                        ? RString.EMPTY : getTelNoValue(dbT7060KaigoJigyoshaEntity.getTelNo());
+                         ? RString.EMPTY : getTelNoValue(dbT7060KaigoJigyoshaEntity.getTelNo());
                 施設住所 = dbT7060KaigoJigyoshaEntity == null
-                        ? RString.EMPTY : getAtenaJushoValue(dbT7060KaigoJigyoshaEntity.getJigyoshaAddress());
+                       ? RString.EMPTY : getAtenaJushoValue(dbT7060KaigoJigyoshaEntity.getJigyoshaAddress());
                 施設名称 = dbT7060KaigoJigyoshaEntity == null
-                        ? RString.EMPTY : getAtenaMeishoValue(dbT7060KaigoJigyoshaEntity.getJigyoshaName());
+                       ? RString.EMPTY : getAtenaMeishoValue(dbT7060KaigoJigyoshaEntity.getJigyoshaName());
             }
             if (ShisetsuType.住所地特例対象施設.getコード().equals(dbT1004ShisetsuNyutaishoEntity.getNyushoShisetsuShurui())) {
                 DbT1005KaigoJogaiTokureiTaishoShisetsuEntity dbT1005Entity

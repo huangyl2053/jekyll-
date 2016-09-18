@@ -7,8 +7,10 @@ package jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd560001;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4102NinteiKekkaJohoEntity;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -35,7 +37,11 @@ public class YokaigoNinteiInterfaceEntity {
     private RString 審査会意見;
     private RString 二次判定結果;
     private RString 予備区分4;
+    private RString 申請種別コード;
+    private boolean みなし２号等対象フラグ;
+    private Code 前回要介護状態区分コード;
 
+    private DbT4001JukyushaDaichoEntity 受給者台帳Entity;
     private DbT4102NinteiKekkaJohoEntity 要介護認定結果情報Entity;
     private DbT4101NinteiShinseiJohoEntity 要介護認定申請情報Entity;
 

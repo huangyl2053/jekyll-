@@ -100,10 +100,6 @@ public class KogakugassanShikyushinseishoOutInsertKozaProcess extends BatchProce
 
     }
 
-    @Override
-    protected void afterExecute() {
-    }
-
     private DbWT1002KokuhorenSakuseiErrorTempEntity setKokuhorenSakuseiError(DbWT3711KogakuGassanShinseishoTempEntity entity,
             DbWT1001HihokenshaTempEntity dbwt1001Entity) {
         DbWT1002KokuhorenSakuseiErrorTempEntity tempEntity = new DbWT1002KokuhorenSakuseiErrorTempEntity();

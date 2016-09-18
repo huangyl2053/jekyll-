@@ -7,15 +7,21 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0010011;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbb.definition.core.HyojiUmu;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0010011.JigyoJokyoHokokuGeppoSakuseiDiv;
+import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurityjoho.KoseiShichosonJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbz.business.core.gappeijoho.gappeijoho.GappeiCityJyoho;
+import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
 import jp.co.ndensan.reams.db.dbz.service.core.gappeijoho.gappeijoho.GappeiCityJohoBFinder;
+import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -228,6 +234,51 @@ public class JigyoJokyoHokokuGeppoSakuseiHandler {
         div.getTxtSakuseiTime5().clearValue();
         div.getTxtSakuseiTime6().clearValue();
         div.getTxtSakuseiTime7().clearValue();
+    }
+
+    /**
+     * 市町村コードを取得します。
+     *
+     * @return 市町村コード
+     */
+    public LasdecCode get市町村コード() {
+        return ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務).get市町村情報().get市町村コード();
+    }
+
+    /**
+     * 構成市町村コードListを取得します。
+     *
+     * @return 構成市町村コードList
+     */
+    public List<LasdecCode> get構成市町村コードList() {
+        List<LasdecCode> 構成市町村コードList = new ArrayList<>();
+        KoseiShichosonJoho 市町村情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務).get市町村情報();
+        RString 市町村識別ID = 市町村情報.get市町村識別ID();
+        if (new RString("00").equals(市町村識別ID)) {
+            List<KoikiZenShichosonJoho> 現市町村情報List = KoikiShichosonJohoFinder.createInstance().getGenShichosonJoho().records();
+            for (KoikiZenShichosonJoho 現市町村情報 : 現市町村情報List) {
+                構成市町村コードList.add(現市町村情報.get市町村コード());
+            }
+        } else {
+            構成市町村コードList.add(市町村情報.get市町村コード());
+        }
+        return 構成市町村コードList;
+    }
+
+    /**
+     * 旧市町村コードListを取得します。
+     *
+     * @return 旧市町村コードList
+     */
+    public List<LasdecCode> get旧市町村コードList() {
+        List<LasdecCode> 旧市町村コードList = new ArrayList<>();
+        List<GappeiCityJyoho> 合併市町村情List = GappeiCityJohoBFinder.createInstance().
+                getSennyoukouikigappeijohokensaku(HyojiUmu.表示する.getコード(),
+                        ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務).get導入形態コード().value()).records();
+        for (GappeiCityJyoho 合併市町村情 : 合併市町村情List) {
+            旧市町村コードList.add(合併市町村情.get旧市町村コード());
+        }
+        return 旧市町村コードList;
     }
 
     private boolean is合併あり() {

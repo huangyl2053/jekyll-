@@ -11,20 +11,22 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum KeikokuKubun {
 
     /**
-     * コード:1 名称:警告なし 略称:定義なし
+     * コード:1 名称:警告なし 略称:警告なし
      */
-    警告なし("1", "警告なし"),
+    警告なし("1", "警告なし", "警告なし"),
     /**
-     * コード:2 名称:警告あり 略称:定義なし
+     * コード:2 名称:警告あり 略称:警告
      */
-    警告あり("2", "警告あり");
+    警告あり("2", "警告あり", "警告");
 
     private final RString code;
     private final RString fullName;
+    private final RString shortName;
 
-    private KeikokuKubun(String code, String fullname) {
+    private KeikokuKubun(String code, String fullname, String shortName) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
+        this.shortName = new RString(shortName);
     }
 
     /**
@@ -43,6 +45,15 @@ public enum KeikokuKubun {
      */
     public RString get名称() {
         return fullName;
+    }
+
+    /**
+     * 警告区分の名称を返します。
+     *
+     * @return 警告区分の名称
+     */
+    public RString get略称() {
+        return shortName;
     }
 
     /**

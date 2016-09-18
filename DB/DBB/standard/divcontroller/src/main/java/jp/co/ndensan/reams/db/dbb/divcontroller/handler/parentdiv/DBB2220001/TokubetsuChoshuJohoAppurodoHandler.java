@@ -199,12 +199,12 @@ public class TokubetsuChoshuJohoAppurodoHandler {
                 ControlDataHolder.getUserId()).get(INT_0).getItemId();
         List<KeyValueDataSource> 市町村DataSourceList = new ArrayList<>();
         if (!STR_00.equals(市町村識別ID)) {
-            KoseiShichosonJoho 市町村 = ShichosonSecurityJoho.getKouseiShichosonJoho(市町村識別ID);
-            if (市町村 != null) {
-                RString 市町村コード = 市町村.get市町村コード().getColumnValue();
-                RString コード名称 = new RString(市町村コード.toString()
-                        + SPACE.toString() + 市町村.get市町村名称().toString());
-                市町村DataSourceList.add(new KeyValueDataSource(市町村コード, コード名称));
+            ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+            if (市町村セキュリティ情報 != null) {
+                RString 自分市町村ID = 市町村セキュリティ情報.get市町村情報().get市町村識別ID();
+                RString コード名称 = new RString(市町村セキュリティ情報.get市町村情報().get市町村コード().getColumnValue().toString()
+                        + SPACE.toString() + 市町村セキュリティ情報.get市町村情報().get市町村名称().toString());
+                市町村DataSourceList.add(new KeyValueDataSource(自分市町村ID, コード名称));
             }
         } else {
             List<KoikiZenShichosonJoho> 構成市町村List = KoikiShichosonJohoFinder.createInstance().getGenShichosonJoho().records();
@@ -603,7 +603,13 @@ public class TokubetsuChoshuJohoAppurodoHandler {
     public void 処理対象選択_市町村() {
         List<dgGetuShoriSelect_Row> 処理対象Rows = div.getShoriTaishoShichosonPanel().
                 getDgGetuShoriSelect().getSelectedItems();
-        RString 処理 = 処理対象Rows.get(INT_0).getData2();
+        if (処理対象Rows == null || 処理対象Rows.isEmpty()) {
+            div.getShoriJokyoPanel().getTxtTaisyoFile().setValue(RString.EMPTY);
+            return;
+        }
+        dgGetuShoriSelect_Row 選択Row = div.getShoriTaishoShichosonPanel().
+                getDgGetuShoriSelect().getActiveRow();
+        RString 処理 = 選択Row.getData2();
         if (処理.startsWith(異動処理結果情報)) {
             div.getShoriJokyoPanel().getTxtTaisyoFile().setValue(対象ファイル_異動処理結果情報);
         } else if (処理.startsWith(結果情報)) {
@@ -613,6 +619,10 @@ public class TokubetsuChoshuJohoAppurodoHandler {
         } else {
             div.getShoriJokyoPanel().getTxtTaisyoFile().setValue(対象ファイル_依頼処理結果情報);
         }
+        処理対象Rows.clear();
+        処理対象Rows.add(選択Row);
+        div.getShoriTaishoShichosonPanel().getDgGetuShoriSelect().isFiltered();
+        div.getShoriTaishoShichosonPanel().getDgGetuShoriSelect().setSelectedItems(処理対象Rows);
     }
 
     /**
@@ -622,7 +632,13 @@ public class TokubetsuChoshuJohoAppurodoHandler {
     public void 処理対象選択_月() {
         List<dgShichosonShoriSelect_Row> 処理対象Rows = div.getShoriTaishoGetuPanel().
                 getDgShichosonShoriSelect().getSelectedItems();
-        RString 処理 = 処理対象Rows.get(INT_0).getData2();
+        if (処理対象Rows == null || 処理対象Rows.isEmpty()) {
+            div.getShoriJokyoPanel().getTxtTaisyoFile().setValue(RString.EMPTY);
+            return;
+        }
+        dgShichosonShoriSelect_Row 選択Row = div.getShoriTaishoGetuPanel().
+                getDgShichosonShoriSelect().getActiveRow();
+        RString 処理 = 選択Row.getData2();
         if (処理.startsWith(異動処理結果情報)) {
             div.getShoriJokyoPanel().getTxtTaisyoFile().setValue(対象ファイル_異動処理結果情報);
         } else if (処理.startsWith(結果情報)) {
@@ -632,6 +648,9 @@ public class TokubetsuChoshuJohoAppurodoHandler {
         } else {
             div.getShoriJokyoPanel().getTxtTaisyoFile().setValue(対象ファイル_依頼処理結果情報);
         }
+        処理対象Rows.clear();
+        処理対象Rows.add(選択Row);
+        div.getShoriTaishoGetuPanel().getDgShichosonShoriSelect().setSelectedItems(処理対象Rows);
     }
 
     /**
@@ -670,15 +689,16 @@ public class TokubetsuChoshuJohoAppurodoHandler {
         if (!ファイル名.endsWith(拡張子)) {
             return false;
         }
+        RDate システム日付 = RDate.getNowDate();
         try (FileReader reader = new FileReader(選択ファイル.getFilePath(), Encode.UTF_8)) {
             RString ファイルのデータレコード = reader.readLine();
             reader.close();
             市町村コードチェック(ファイルのデータレコード);
-            取込日の差のチェック(ファイルのデータレコード);
+            取込日の差のチェック(ファイルのデータレコード, システム日付);
             取込済チェック();
             ファイル破損チェック(ファイルのデータレコード);
-            非対象ファイルの存在チェック(ファイル名);
-            対象ファイル業務種別の存在チェック(ファイル名);
+            非対象ファイルの存在チェック(ファイル名, システム日付);
+            対象ファイル業務種別の存在チェック(ファイル名, システム日付);
             対象ファイル情報種別の存在チェック(ファイル名);
             対象ファイルの重複チェック(ファイル名);
             通知内容コードのチェック(ファイルのデータレコード);
@@ -701,8 +721,7 @@ public class TokubetsuChoshuJohoAppurodoHandler {
         }
     }
 
-    private void 取込日の差のチェック(RString ファイルのデータレコード) {
-        RDate システム日付 = RDate.getNowDate();
+    private void 取込日の差のチェック(RString ファイルのデータレコード, RDate システム日付) {
         //TODO QA1479
         int チェック日数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBB.取込ファイルチェック期間,
                 システム日付, SubGyomuCode.DBB介護賦課).toString());
@@ -724,7 +743,7 @@ public class TokubetsuChoshuJohoAppurodoHandler {
         }
     }
 
-    private void 非対象ファイルの存在チェック(RString ファイル名) {
+    private void 非対象ファイルの存在チェック(RString ファイル名, RDate システム日付) {
         RString 連携業務種別 = ファイル名.substring(INT_0, INT_2);
         Enum 業務コンフィグ = null;
         if (Z1.equals(連携業務種別)) {
@@ -737,14 +756,14 @@ public class TokubetsuChoshuJohoAppurodoHandler {
         if (業務コンフィグ == null) {
             return;
         }
-        RString 業務有無 = DbBusinessConfig.get(業務コンフィグ, RDate.getNowDate(),
+        RString 業務有無 = DbBusinessConfig.get(業務コンフィグ, システム日付,
                 SubGyomuCode.DBB介護賦課);
         if (STR_0.equals(業務有無)) {
             throw new ApplicationException(非対象ファイルの存在チェック_MSG.toString());
         }
     }
 
-    private void 対象ファイル業務種別の存在チェック(RString ファイル名) {
+    private void 対象ファイル業務種別の存在チェック(RString ファイル名, RDate システム日付) {
         RString 連携業務種別 = ファイル名.substring(INT_0, INT_2);
         Enum 業務コンフィグ = null;
         if (Z1.equals(連携業務種別)) {
@@ -757,7 +776,7 @@ public class TokubetsuChoshuJohoAppurodoHandler {
         if (業務コンフィグ == null) {
             return;
         }
-        RString 業務有無 = DbBusinessConfig.get(業務コンフィグ, RDate.getNowDate(),
+        RString 業務有無 = DbBusinessConfig.get(業務コンフィグ, システム日付,
                 SubGyomuCode.DBB介護賦課);
         if (!STR_1.equals(業務有無)) {
             throw new ApplicationException(対象ファイル業務種別の存在チェック_MSG.toString());

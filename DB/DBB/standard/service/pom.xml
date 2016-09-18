@@ -16,6 +16,10 @@
     <dependencies>
         <!-- DBB -->
         <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbb</groupId>
+            <artifactId>DbbDefinition</artifactId>
+        </dependency>
+        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>DbbEntity</artifactId>
         </dependency>
@@ -56,6 +60,11 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzPersistence</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ur.urd</groupId>
+            <artifactId>UrdBusiness</artifactId>
+            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ca.cax</groupId>
@@ -109,9 +118,8 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxEntity</artifactId>
-            <version>${jp.co.ndensan.reams.dbxVersion}</version>
             <scope>test</scope>
-            <classifier>tests</classifier>
+            <type>test-jar</type>
         </dependency>
     </dependencies>
 </project>

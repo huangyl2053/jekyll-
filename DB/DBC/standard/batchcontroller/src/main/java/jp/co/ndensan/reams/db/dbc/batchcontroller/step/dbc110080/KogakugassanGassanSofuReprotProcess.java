@@ -147,7 +147,7 @@ public class KogakugassanGassanSofuReprotProcess extends BatchKeyBreakBase<Syutu
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
                 .setDelimiter(コンマ)
                 .setEnclosure(ダブル引用符)
-                .setEncode(Encode.SJIS)
+                .setEncode(Encode.UTF_8withBOM)
                 .setNewLine(NewLine.CRLF)
                 .hasHeader(true)
                 .build();
@@ -173,11 +173,13 @@ public class KogakugassanGassanSofuReprotProcess extends BatchKeyBreakBase<Syutu
     @Override
     protected void afterExecute() {
         eucCsvWriter.close();
-        if (!personalDataList.isEmpty()) {
-            AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
-            eucManager.spool(eucFilePath, accessLogUUID);
-        } else {
-            eucManager.spool(eucFilePath);
+        if (index != INT_1) {
+            if (!personalDataList.isEmpty()) {
+                AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
+                eucManager.spool(eucFilePath, accessLogUUID);
+            } else {
+                eucManager.spool(eucFilePath);
+            }
         }
     }
 

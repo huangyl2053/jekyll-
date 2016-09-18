@@ -30,6 +30,9 @@ public class IdoReanrakuhyoEraTeiseiHandler {
     private static final RString 履歴訂正リストファイル = new RString("JukyusyaIdouJohoRirekilist.csv");
     private static final RString 引数 = new RString("履歴訂正データなし");
     private static final RString DB = new RString("DB");
+    private static final RString コロン = new RString(":");
+    private static final RString 中黒 = new RString(".");
+    private static final RString ハイフン = new RString("-");
     private final IdoReanrakuhyoEraTeiseiDiv div;
     private final JukyushaIdoRenrakuhyoErrorTeisei service;
 
@@ -68,7 +71,8 @@ public class IdoReanrakuhyoEraTeiseiHandler {
                 file = new File(SharedFile.getBasePath().concat(File.separator)
                         .concat(DB.toString()).concat(File.separator)
                         .concat(entity.getSharedFileName().toString()).concat(File.separator)
-                        .concat((entity.getSharedFileId().toString().replace(':', '.').replace('-', '.'))).concat(File.separator)
+                        .concat((entity.getSharedFileId().toString().replace(コロン.toString(), 中黒.toString())
+                                .replace(ハイフン.toString(), 中黒.toString()))).concat(File.separator)
                         .concat(履歴訂正リストファイル.toString()));
                 if (file.exists()) {
                     tempList = service.getRirekiTeiseiJoho(file);

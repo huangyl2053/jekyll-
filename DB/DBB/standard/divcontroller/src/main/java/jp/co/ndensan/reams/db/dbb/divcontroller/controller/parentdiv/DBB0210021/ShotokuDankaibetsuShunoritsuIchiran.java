@@ -11,11 +11,13 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0210021.Sho
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0210021.ShotokuDankaibetsuShunoritsuIchiranHandlerValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 画面設計_DBB0210021_保険料段階別収納率一覧表作成のクラスです。
@@ -31,7 +33,10 @@ public class ShotokuDankaibetsuShunoritsuIchiran {
      * @return ResponseData ShotokuDankaibetsuShunoritsuIchiranDiv
      */
     public ResponseData<ShotokuDankaibetsuShunoritsuIchiranDiv> onload(ShotokuDankaibetsuShunoritsuIchiranDiv div) {
-        getHandler(div).onLoad();
+        RString 現在基準月 = getHandler(div).onLoad();
+        if (!(現在基準月 == null || 現在基準月.isEmpty())) {
+            ViewStateHolder.put(ViewStateKeys.現在基準月, 現在基準月);
+        }
         div.getCcdChikuShichosonSelect().initialize();
         return ResponseData.of(div).respond();
     }
@@ -44,9 +49,13 @@ public class ShotokuDankaibetsuShunoritsuIchiran {
      */
     public ResponseData<ShotokuDankaibetsuShunoritsuIchiranDiv> onChange_radChushutsuJoken(ShotokuDankaibetsuShunoritsuIchiranDiv div) {
         RDate 基準日 = RDate.getNowDate();
+        RString 未来基準月 = ViewStateHolder.get(ViewStateKeys.現在基準月, RString.class);
         RString 日付関連_調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, 基準日, SubGyomuCode.DBB介護賦課);
-        RDate 調定年度 = new RDate(日付関連_調定年度.toString());
-        getHandler(div).onChange_radChushutsuJoken(調定年度);
+        RString 日付関連_当初年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_当初年度, 基準日, SubGyomuCode.DBB介護賦課);
+        RString 現在基準月 = getHandler(div).onChange_radChushutsuJoken(日付関連_調定年度, 日付関連_当初年度, 未来基準月);
+        if (!(現在基準月 == null || 現在基準月.isEmpty())) {
+            ViewStateHolder.put(ViewStateKeys.現在基準月, 現在基準月);
+        }
         return ResponseData.of(div).respond();
     }
 

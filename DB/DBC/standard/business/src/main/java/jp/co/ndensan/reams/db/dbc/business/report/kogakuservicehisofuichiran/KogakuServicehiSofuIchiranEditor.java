@@ -95,7 +95,11 @@ public class KogakuServicehiSofuIchiranEditor implements
         source.kaipage5 = get改頁(INDEX_5);
 
         source.listCenter_1 = new RString(連番);
-        source.listCenter_2 = entity.get高額介護_被保険者番号().value();
+
+        if (entity.get高額介護_被保険者番号() != null) {
+            source.listCenter_2 = entity.get高額介護_被保険者番号().value();
+        }
+
         source.listUpper_1 = entity.get被保険者_宛名カナ名称();
         source.listLower_1 = entity.get被保険者_宛名名称();
         source.listUpper_2 = entity.get被保険者_町域コード();
@@ -107,9 +111,12 @@ public class KogakuServicehiSofuIchiranEditor implements
         source.listLower_4 = entity.get高額介護_サービス提供年月().wareki().separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
         source.listLower_5 = getlistLower_5(entity.get高額介護_支給区分コード());
         source.listLower_6 = getlistLower_6(entity.get高額介護_審査方法区分());
-        source.listUpper_5 = entity.get高額介護_受付年月日().wareki().eraType(EraType.KANJI_RYAKU).
-                firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).
-                toDateString();
+
+        if (entity.get高額介護_受付年月日() != null) {
+            source.listUpper_5 = entity.get高額介護_受付年月日().wareki().eraType(EraType.KANJI_RYAKU).
+                    firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).
+                    toDateString();
+        }
         source.listLower_7 = entity.get高額介護_決定年月日().wareki().eraType(EraType.KANJI_RYAKU).
                 firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).
                 toDateString();
@@ -132,6 +139,8 @@ public class KogakuServicehiSofuIchiranEditor implements
                 source.listLower_9 = entity.get高額介護_不支給理由().substring(INDEX_40, INDEX_60);
             }
         }
+
+        source.shikibetsuCode = entity.get被保険者_識別コード().value();
 
         return source;
 
