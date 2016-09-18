@@ -30,7 +30,6 @@ public class DBD206010_JigyoshoMukeShakaFukushiHojinKeigenTaishoshaIchiranHakkoP
     private static final String JIGYOSHANAME = "jigyoshaName";
     private static final String OUTPUTJUNNID = "outputJunnId";
     private static final String SHORIDATETIME = "shoriDateTime";
-    private static final String CHANGEID = "changeid";
     @BatchParameter(key = KIJUNRI, name = "基準日")
     private FlexibleDate 基準日;
     @BatchParameter(key = SHIKAKUSSIUSSENTAKU, name = "資格喪失者選択")

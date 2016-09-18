@@ -227,25 +227,25 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoNoProcess
     private static final RString HEAD_連絡票整理番号 = new RString("連絡票整理番号");
     private static final RString HEAD_履歴番号 = new RString("履歴番号");
     private static final RString HEAD_自己負担額証明書整理番号 = new RString("自己負担額証明書整理番号");
-    private static final RString HEAD_対象計算期間_開始 = new RString("対象計算期間_開始");
-    private static final RString HEAD_対象計算期間_終了 = new RString("対象計算期間_終了");
+    private static final RString HEAD_対象計算期間_開始 = new RString("対象計算期間（開始）");
+    private static final RString HEAD_対象計算期間_終了 = new RString("対象計算期間（終了）");
     private static final RString HEAD_世帯負担総額 = new RString("世帯負担総額");
     private static final RString HEAD_介護一部世帯負担 = new RString("介護一部世帯負担");
-    private static final RString HEAD_介護一部世帯負担_７０ = new RString("介護一部世帯負担_７０");
+    private static final RString HEAD_介護一部世帯負担_７０ = new RString("７０介護一部世帯負担");
     private static final RString HEAD_所得区分 = new RString("所得区分");
-    private static final RString HEAD_係る所得区分_70歳以上の者に = new RString("係る所得区分_70歳以上の者に");
+    private static final RString HEAD_係る所得区分_70歳以上の者に = new RString("70歳以上の者に係る所得区分");
     private static final RString HEAD_介護等合算算定基準額 = new RString("介護等合算算定基準額");
-    private static final RString HEAD_合算算定基準額_70歳以上介護等 = new RString("合算算定基準額_70歳以上介護等");
+    private static final RString HEAD_合算算定基準額_70歳以上介護等 = new RString("70歳以上介護等合算算定基準額");
     private static final RString HEAD_世帯支給総額 = new RString("世帯支給総額");
     private static final RString HEAD_うち70歳以上分世帯支給総額 = new RString("うち70歳以上分世帯支給総額");
     private static final RString HEAD_按分後支給額 = new RString("按分後支給額");
     private static final RString HEAD_うち70歳以上分按分後支給額 = new RString("うち70歳以上分按分後支給額");
     private static final RString HEAD_介護低所得者Ⅰ再計算実施の有無 = new RString("介護低所得者Ⅰ再計算実施の有無");
-    private static final RString HEAD_負担額合計_70歳以上 = new RString("負担額合計_70歳以上");
-    private static final RString HEAD_かかる支給額合計 = new RString("かかる支給額合計");
-    private static final RString HEAD_負担額合計_70歳未満 = new RString("負担額合計_70歳未満");
+    private static final RString HEAD_負担額合計_70歳以上 = new RString("70歳以上負担額合計");
+    private static final RString HEAD_かかる支給額合計 = new RString("70歳以上負担額合計にかかる支給額合計");
+    private static final RString HEAD_負担額合計_70歳未満 = new RString("70歳未満負担額合計");
     private static final RString HEAD_負担額の合計額 = new RString("負担額の合計額");
-    private static final RString HEAD_未満支給額合計_70歳 = new RString("未満支給額合計_70歳");
+    private static final RString HEAD_未満支給額合計_70歳 = new RString("70歳未満支給額合計");
     private static final RString HEAD_支給額合計額 = new RString("支給額合計額");
     private static final RString HEAD_データ区分 = new RString("データ区分");
     private static final RString HEAD_受取年月 = new RString("受取年月");
@@ -304,11 +304,12 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoNoProcess
                 setEnclosure(ダブル引用符).
                 setEncode(Encode.UTF_8withBOM).
                 setNewLine(NewLine.CRLF).
-                hasHeader(parameter.is項目名付加()).
+                hasHeader(false).
                 build();
         if (parameter.is項目名付加()) {
             hanyoListKogakuNoCSVWriter.writeLine(getHeader());
         }
+
     }
 
     @Override
