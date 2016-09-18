@@ -89,6 +89,9 @@ public class JukoKisambiTokushuToroku {
         List<TainoKiSummary> 滞納判定結果List = getHandler(div).initialize(被保険者番号, 識別コード);
 
         if (滞納判定結果List.isEmpty()) {
+            div.getShunoJokyo().setDisabled(true);
+            div.getJikoKisambi().setDisabled(true);
+            div.getJikoKisambi().setIsOpen(false);
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
 
@@ -348,7 +351,7 @@ public class JukoKisambiTokushuToroku {
 
         PersonalData personalData = PersonalData.of(識別コード, new ExpandedInformation(new Code("0003"),
                 new RString("被保険者番号"), 被保険者番号.getColumnValue()));
-        AccessLogger.log(AccessLogType.照会, personalData);
+        AccessLogger.log(AccessLogType.更新, personalData);
         前排他キーの解除();
         div.getCcdKanryoMessage().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
 
