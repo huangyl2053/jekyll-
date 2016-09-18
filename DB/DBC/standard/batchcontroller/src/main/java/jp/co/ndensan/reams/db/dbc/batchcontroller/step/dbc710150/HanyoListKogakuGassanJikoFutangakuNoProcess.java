@@ -161,7 +161,7 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
     private static final RString 波線 = new RString("　～　");
     private static final RString 左記号 = new RString("(");
     private static final RString 右記号 = new RString(")");
-    private static final RString 送付対象外データを含める = new RString("送付対象外データを含める：");
+    private static final RString 送付対象外データを含める = new RString("送付対象外データを含める");
     private static final RString 日本語ファイル名 = new RString("汎用リスト　高額合算自己負担額情報CSV");
     private static final RString 出力ファイル名 = new RString("HanyoListKogakuGassanJikoFutangaku.csv");
     private static final RString CSV出力有無_なし = new RString("なし");
