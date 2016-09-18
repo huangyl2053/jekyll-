@@ -43,8 +43,6 @@ public class DBD206010_JigyoshoMukeShakaFukushiHojinKeigenTaishoshaIchiranHakkoP
     private RString 事業者名;
     @BatchParameter(key = OUTPUTJUNNID, name = "出力順ID")
     private Long 出力順ID;
-    @BatchParameter(key = CHANGEID, name = "改頁出力順ID")
-    private Long 改頁出力順ID;
     @BatchParameter(key = SHORIDATETIME, name = "処理日時")
     private YMDHMS 処理日時;
 
