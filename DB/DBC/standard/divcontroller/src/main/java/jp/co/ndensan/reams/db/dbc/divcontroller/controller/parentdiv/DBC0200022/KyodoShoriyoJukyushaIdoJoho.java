@@ -66,6 +66,8 @@ public class KyodoShoriyoJukyushaIdoJoho {
      * @return ResponseData
      */
     public ResponseData<DBC110030_KyodoJukyushaIdoRenrakuhyoOutParameter> onClick_Execute(KyodoShoriyoJukyushaIdoJohoDiv div) {
+        再処理区分 = div.getCcdKokuhorenJohoSofu().get再処理区分のValue();
+        処理年月 = div.getCcdKokuhorenJohoSofu().get処理年月のValue().getYearMonth();
         DBC110030_KyodoJukyushaIdoRenrakuhyoOutParameter parameter = new DBC110030_KyodoJukyushaIdoRenrakuhyoOutParameter();
         parameter.set再処理区分(再処理区分);
         parameter.set処理年月(処理年月);
