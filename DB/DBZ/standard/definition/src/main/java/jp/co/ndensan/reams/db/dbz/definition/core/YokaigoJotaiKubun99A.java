@@ -5,8 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.core;
 
+import java.util.Objects;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
  * 要介護状態区分の列挙型です。（厚労省認定ソフト99版）
@@ -123,6 +125,9 @@ public enum YokaigoJotaiKubun99A implements IYokaigoJotaiKubun {
                 return data;
             }
         }
-        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("要介護状態区分"));
+        throw new IllegalArgumentException(new RStringBuilder()
+                .append(UrSystemErrorMessages.変換不可.getReplacedMessage("要介護状態区分"))
+                .append(" コード：").append(Objects.toString(code, "null"))
+                .toString());
     }
 }

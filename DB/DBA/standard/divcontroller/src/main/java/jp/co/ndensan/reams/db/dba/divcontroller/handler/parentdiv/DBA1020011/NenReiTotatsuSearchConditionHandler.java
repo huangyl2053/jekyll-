@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1020011.NenR
 import jp.co.ndensan.reams.db.dba.service.core.nenreitotatsushikakuido.NenreitotatsuShikakuIdo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.neiReiTotatsuSrchConInfo.NenReiTotatsuSrchConInfoDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.db.dbz.divcontroller.validations.TextBoxFlexibleDateValidator;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -70,6 +71,10 @@ public class NenReiTotatsuSearchConditionHandler {
                     div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo()));
             return validPairs;
         }
+
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanFrom()));
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo()));
+
         boolean checkFlag = new NenreitotatsuShikakuIdo()
                 .checkKaishibiShuryobiJunban(div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanFrom().getValue(),
                         div.getCcdNenReiTotatsuSearchCondition().getTxtNenreiTotatsuKikanTo().getValue());

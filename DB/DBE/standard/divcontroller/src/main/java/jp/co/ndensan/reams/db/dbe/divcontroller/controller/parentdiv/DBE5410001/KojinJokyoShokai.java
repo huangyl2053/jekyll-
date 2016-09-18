@@ -34,8 +34,6 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
  */
 public class KojinJokyoShokai {
 
-    private static final RString 照会モード = new RString("ShokaiMode");
-
     /**
      * 画面初期化処理です。
      *
@@ -88,7 +86,7 @@ public class KojinJokyoShokai {
         if (!kojinJokyoShokaiList.isEmpty()) {
             shinseiCodeModel.set連絡事項(kojinJokyoShokaiList.get(0).get市町村連絡事項());
         }
-        shinseiCodeModel.set表示モード(照会モード);
+        shinseiCodeModel.set表示モード(NinteiShinseiCodeModel.HyojiMode.ShokaiMode);
         ViewStateHolder.put(ViewStateKeys.モード, shinseiCodeModel);
         return ResponseData.of(div).respond();
     }

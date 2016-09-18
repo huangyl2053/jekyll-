@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.enumeratedtype.JushochiTokurei
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuShutokuJiyu;
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.db.dbz.definition.core.jushochitokureisha.KoikinaiJushochitokureishaKubun;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -161,7 +161,8 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
 
     /**
      * 資格異動区分を判定します。<br />
-     * 資格喪失、資格変更がないときは、それぞれの実行日が、{@link FlexibleDate#MAX FlexibleDate.MAX}であることを前提に判定します。 資格変更よりも資格喪失を優先して判定します。
+     * 資格喪失、資格変更がないときは、それぞれの実行日が、{@link FlexibleDate#MAX FlexibleDate.MAX}であることを前提に判定します。
+     * 資格変更よりも資格喪失を優先して判定します。
      *
      * @return 資格異動区分
      */
@@ -288,7 +289,8 @@ public final class HihokenshaShikaku implements IHihokenshaShikaku {
          * 生成したHihokenshaShikakuの{@link HihokenshaShikaku#toKaigoShikaku() toKaigoShikaku()}で得られるオブジェクトは、
          * もしBuilderの生成にIKaigoShikakuオブジェクトを渡していたとしても、そのオブジェクトと異なる結果を持つことがあります。
          * それは、Builderによる生成過程で{@link HihokenshaShikaku.Builder#soshitsu shikakuSoshitsu}等のメソッドにより、
-         * コンストラクタが受け取ったIKaigoShikakuが保持する物と異なる値が設定される可能性があるからです。 生整過程での設定内容と生成後のオブジェクトとの整合性をとるために、このメソッドで、IKaigoShikakuは再計算されます。
+         * コンストラクタが受け取ったIKaigoShikakuが保持する物と異なる値が設定される可能性があるからです。
+         * 生整過程での設定内容と生成後のオブジェクトとの整合性をとるために、このメソッドで、IKaigoShikakuは再計算されます。
          *
          * @return {@link HihokenshaShikaku HihokenshaShikaku}
          */

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dba.definition.mybatisprm.nenreitotatsushikakuido
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
  * 宛名識別対象PSM_DB検索用のパラメータです。
@@ -18,12 +19,19 @@ import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public final class AtenaMybatisParameter extends UaFt200FindShikibetsuTaishoParam implements IMyBatisParameter {
 
+    private final FlexibleDate 開始日;
+    private final FlexibleDate 終了日;
+
     /**
      * 宛名識別対象PSMの取得のパラメータ作成を行います。
      *
      * @param shikibetsuTaishoPSMSearchKey 宛名識別対象PSM検索キー
+     * @param 開始日 FlexibleDate
+     * @param 終了日 FlexibleDate
      */
-    public AtenaMybatisParameter(IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey) {
+    public AtenaMybatisParameter(IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey, FlexibleDate 開始日, FlexibleDate 終了日) {
         super(shikibetsuTaishoPSMSearchKey);
+        this.開始日 = 開始日;
+        this.終了日 = 終了日;
     }
 }

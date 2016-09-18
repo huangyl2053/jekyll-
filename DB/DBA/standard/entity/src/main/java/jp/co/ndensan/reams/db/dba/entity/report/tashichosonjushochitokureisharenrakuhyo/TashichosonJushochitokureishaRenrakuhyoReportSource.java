@@ -80,13 +80,21 @@ public class TashichosonJushochitokureishaRenrakuhyoReportSource implements IRep
     public RString shisetsuJusho;
     @ReportItem(name = "denshiKoin", order = 34)
     public RString denshiKoin;
-    @ReportItem(name = "shomeiHakkoYMD", length = 22, order = 35)
+    @ReportItem(name = "shomeiHakkoYMD", length = 12, order = 35)
     public RString shomeiHakkoYMD;
-    @ReportItem(name = "shuchoMei", length = 14, order = 36)
-    public RString shuchoMei;
-    @ReportItem(name = "shichosonMei", length = 40, order = 37)
-    public RString shichosonMei;
-    @ReportItem(name = "koinShoryaku", length = 15, order = 38)
+    @ReportItem(name = "ninshoshaYakushokuMei", length = 15, order = 36)
+    public RString ninshoshaYakushokuMei;
+    @ReportItem(name = "ninshoshaYakushokuMei1", order = 37)
+    public RString ninshoshaYakushokuMei1;
+    @ReportItem(name = "koinMojiretsu", length = 4, order = 38)
+    public RString koinMojiretsu;
+    @ReportItem(name = "ninshoshaYakushokuMei2", order = 39)
+    public RString ninshoshaYakushokuMei2;
+    @ReportItem(name = "ninshoshaShimeiKakenai", order = 40)
+    public RString ninshoshaShimeiKakenai;
+    @ReportItem(name = "ninshoshaShimeiKakeru", order = 41)
+    public RString ninshoshaShimeiKakeru;
+    @ReportItem(name = "koinShoryaku", length = 15, order = 42)
     public RString koinShoryaku;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">

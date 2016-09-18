@@ -39,7 +39,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  * @reamsid_L DBE-3000-010 sunhaidi
  */
 public class NinteiShinseishaFinderDiv extends Panel implements INinteiShinseishaFinderDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -47,7 +47,7 @@ public class NinteiShinseishaFinderDiv extends Panel implements INinteiShinseish
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("txtHihokenshaNumber")
-    private TextBox txtHihokenshaNumber;
+    private TextBoxCode txtHihokenshaNumber;
     @JsonProperty("ddlHokenshaNumber")
     private HokenshaListDiv ddlHokenshaNumber;
     @JsonProperty("ddlShichosonCode")
@@ -56,8 +56,6 @@ public class NinteiShinseishaFinderDiv extends Panel implements INinteiShinseish
     private HorizontalLine linHorizon;
     @JsonProperty("txtHihokenshaName")
     private TextBox txtHihokenshaName;
-    @JsonProperty("btnHihokenshaGuide")
-    private ButtonDialog btnHihokenshaGuide;
     @JsonProperty("ddlHihokenshaNameMatchType")
     private DropDownList ddlHihokenshaNameMatchType;
     @JsonProperty("chkMinashiFlag")
@@ -106,7 +104,7 @@ public class NinteiShinseishaFinderDiv extends Panel implements INinteiShinseish
      * @return txtHihokenshaNumber
      */
     @JsonProperty("txtHihokenshaNumber")
-    public TextBox getTxtHihokenshaNumber() {
+    public TextBoxCode getTxtHihokenshaNumber() {
         return txtHihokenshaNumber;
     }
 
@@ -115,7 +113,7 @@ public class NinteiShinseishaFinderDiv extends Panel implements INinteiShinseish
      * @param txtHihokenshaNumber txtHihokenshaNumber
      */
     @JsonProperty("txtHihokenshaNumber")
-    public void setTxtHihokenshaNumber(TextBox txtHihokenshaNumber) {
+    public void setTxtHihokenshaNumber(TextBoxCode txtHihokenshaNumber) {
         this.txtHihokenshaNumber = txtHihokenshaNumber;
     }
 
@@ -180,24 +178,6 @@ public class NinteiShinseishaFinderDiv extends Panel implements INinteiShinseish
     @JsonProperty("txtHihokenshaName")
     public void setTxtHihokenshaName(TextBox txtHihokenshaName) {
         this.txtHihokenshaName = txtHihokenshaName;
-    }
-
-    /*
-     * getbtnHihokenshaGuide
-     * @return btnHihokenshaGuide
-     */
-    @JsonProperty("btnHihokenshaGuide")
-    public ButtonDialog getBtnHihokenshaGuide() {
-        return btnHihokenshaGuide;
-    }
-
-    /*
-     * setbtnHihokenshaGuide
-     * @param btnHihokenshaGuide btnHihokenshaGuide
-     */
-    @JsonProperty("btnHihokenshaGuide")
-    public void setBtnHihokenshaGuide(ButtonDialog btnHihokenshaGuide) {
-        this.btnHihokenshaGuide = btnHihokenshaGuide;
     }
 
     /*
@@ -705,16 +685,6 @@ public class NinteiShinseishaFinderDiv extends Panel implements INinteiShinseish
     @JsonIgnore
     public void  setLblYubinNo(Label lblYubinNo) {
         this.getShosaiJoken().getKihonJoho().setLblYubinNo(lblYubinNo);
-    }
-
-    @JsonIgnore
-    public ButtonDialog getBtnYubinNoGuide() {
-        return this.getShosaiJoken().getKihonJoho().getBtnYubinNoGuide();
-    }
-
-    @JsonIgnore
-    public void  setBtnYubinNoGuide(ButtonDialog btnYubinNoGuide) {
-        this.getShosaiJoken().getKihonJoho().setBtnYubinNoGuide(btnYubinNoGuide);
     }
 
     @JsonIgnore
@@ -1288,16 +1258,6 @@ public class NinteiShinseishaFinderDiv extends Panel implements INinteiShinseish
     }
 
     @JsonIgnore
-    public Button getBtnKaisaiNumberStart() {
-        return this.getShosaiJoken().getKaigoNinteiShinsakaiJoho().getBtnKaisaiNumberStart();
-    }
-
-    @JsonIgnore
-    public void  setBtnKaisaiNumberStart(Button btnKaisaiNumberStart) {
-        this.getShosaiJoken().getKaigoNinteiShinsakaiJoho().setBtnKaisaiNumberStart(btnKaisaiNumberStart);
-    }
-
-    @JsonIgnore
     public TextBox getTxtKaisaiNumberStart() {
         return this.getShosaiJoken().getKaigoNinteiShinsakaiJoho().getTxtKaisaiNumberStart();
     }
@@ -1315,16 +1275,6 @@ public class NinteiShinseishaFinderDiv extends Panel implements INinteiShinseish
     @JsonIgnore
     public void  setLblKaisaiNoFor(Label lblKaisaiNoFor) {
         this.getShosaiJoken().getKaigoNinteiShinsakaiJoho().setLblKaisaiNoFor(lblKaisaiNoFor);
-    }
-
-    @JsonIgnore
-    public Button getBtnKaisaiNumberEnd() {
-        return this.getShosaiJoken().getKaigoNinteiShinsakaiJoho().getBtnKaisaiNumberEnd();
-    }
-
-    @JsonIgnore
-    public void  setBtnKaisaiNumberEnd(Button btnKaisaiNumberEnd) {
-        this.getShosaiJoken().getKaigoNinteiShinsakaiJoho().setBtnKaisaiNumberEnd(btnKaisaiNumberEnd);
     }
 
     @JsonIgnore
@@ -1468,8 +1418,8 @@ public class NinteiShinseishaFinderDiv extends Panel implements INinteiShinseish
     }
 
     @JsonIgnore
-    public ICodeInputDiv getCdlGeninShikkanCode() {
-        return this.getShosaiJoken().getSonotaJoho().getCdlGeninShikkanCode();
+    public ICodeInputDiv getCcdGeninShikkan() {
+        return this.getShosaiJoken().getSonotaJoho().getCcdGeninShikkan();
     }
 
     @JsonIgnore

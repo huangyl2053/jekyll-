@@ -8,7 +8,9 @@ package jp.co.ndensan.reams.db.dbb.service.core.basic;
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import javax.annotation.CheckForNull;
 import jp.co.ndensan.reams.db.dbb.business.core.FukaRireki;
+import jp.co.ndensan.reams.db.dbb.persistence.db.basic._DbT2002FukaDac;
 import jp.co.ndensan.reams.db.dbb.persistence.db.relate.FukaDac;
 import jp.co.ndensan.reams.db.dbx.business.core.fuka.Fuka;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -34,7 +36,9 @@ public class FukaManager {
     private final RString 賦課年度_メセージ = new RString("賦課年度");
     private final RString 通知書番号_メセージ = new RString("通知書番号");
     private final RString 履歴番号_メセージ = new RString("履歴番号");
+    private final RString 被保険者番号_メセージ = new RString("被保険者番号");
     private final DbT2002FukaDac dac;
+    private final _DbT2002FukaDac _fukaDac;
     private final FukaDac relateDac;
 
     /**
@@ -43,6 +47,7 @@ public class FukaManager {
     public FukaManager() {
         dac = InstanceProvider.create(DbT2002FukaDac.class);
         relateDac = InstanceProvider.create(FukaDac.class);
+        _fukaDac = InstanceProvider.create(_DbT2002FukaDac.class);
     }
 
     /**
@@ -53,6 +58,7 @@ public class FukaManager {
     FukaManager(DbT2002FukaDac dac, FukaDac relateDac) {
         this.dac = dac;
         this.relateDac = relateDac;
+        this._fukaDac = null; //暫定対応
     }
 
     /**
@@ -217,6 +223,7 @@ public class FukaManager {
      * @return Fuka
      */
     @Transaction
+    @CheckForNull
     public Fuka get介護賦課_賦課年度最新(
             FlexibleYear 賦課年度,
             TsuchishoNo 通知書番号) {
@@ -232,6 +239,28 @@ public class FukaManager {
         entity.initializeMd5();
         return new Fuka(entity);
     }
+
+    /**
+     * //<<<<<<< HEAD
+     * 指定の被保険者について、賦課年度に対する最新の介護賦課を返します。
+     *
+     * @param 賦課年度 賦課年度
+     * @param 被保険者番号 被保険者番号
+     * @return 指定の条件に該当する{@link Fuka}.取得できなかった場合、{@code null}.
+     */
+    @CheckForNull
+    public Fuka get賦課年度最新賦課From被保険者番号(FlexibleYear 賦課年度, HihokenshaNo 被保険者番号) {
+        requireNonNull(賦課年度, UrSystemErrorMessages.値がnull.getReplacedMessage(賦課年度_メセージ.toString()));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号_メセージ.toString()));
+
+        DbT2002FukaEntity entity = _fukaDac.selectByFukanendoSaishinPerHihokenshaNo(賦課年度, 被保険者番号);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new Fuka(entity);
+    }
+//=======
 
     /**
      * 介護賦課最新履歴の情報を取得します。
@@ -254,6 +283,7 @@ public class FukaManager {
                 調定年度,
                 賦課年度,
                 通知書番号);
+//>>>>>>> origin/sync
         if (entity == null) {
             return null;
         }
@@ -287,4 +317,23 @@ public class FukaManager {
         return find賦課履歴On(賦課年度.minusYear(1), 被保番号);
     }
 
+//<<<<<<< HEAD
+    /**
+     * 指定の被保険者について、最新の介護賦課を返します。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return DbT2002FukaEntity もしくは{@code null}
+     * @throws NullPointerException 引数のいずれかが{@code null}の場合
+     */
+    public Optional<Fuka> find最新賦課(HihokenshaNo 被保険者番号) {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号_メセージ.toString()));
+
+        DbT2002FukaEntity entity = _fukaDac.selectSaishinPerHihokenshaNo(被保険者番号);
+        if (entity == null) {
+            return Optional.empty();
+        }
+        return Optional.of(new Fuka(entity));
+    }
+//=======
+//>>>>>>> origin/sync
 }

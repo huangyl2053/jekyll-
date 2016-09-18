@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteishinchokujohoshokai;
 
 import java.util.ArrayList;
@@ -21,27 +20,29 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  *
  * 要介護認定進捗状況照会を管理するクラスです。
+ *
  * @reamsid_L DBE-0210-010 dongyabin
  */
 public class YokaigoNinteiShinchokuJohoShokaiFinder {
-    
+
     private final MapperProvider mapperProvider;
-    
+
     /**
      * コンストラクタです。
      */
     YokaigoNinteiShinchokuJohoShokaiFinder() {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
-    
+
     /**
      * 単体テスト用のコンストラクタです。
+     *
      * @param mapperProvider {@link MapperProvider}
      */
     YokaigoNinteiShinchokuJohoShokaiFinder(MapperProvider mapperProvider) {
         this.mapperProvider = mapperProvider;
     }
-    
+
     /**
      * {@link InstanceProvider#create}にて生成した{@link YokaigoNinteiShinchokuJohoShokaiFinder}のインスタンスを返します。
      *
@@ -50,22 +51,23 @@ public class YokaigoNinteiShinchokuJohoShokaiFinder {
     public static YokaigoNinteiShinchokuJohoShokaiFinder createInstance() {
         return InstanceProvider.create(YokaigoNinteiShinchokuJohoShokaiFinder.class);
     }
-    
+
     /**
      * 申請者一覧内容検索します。
+     *
      * @param paramter 申請者一覧内容検索のパラメータ
      * @return SearchResult<YokaigoNinteiShinchokuJoho>
      */
-    public SearchResult<YokaigoNinteiShinchokuJoho> selectItirannJoho(YokaigoNinteiParamter paramter) {
-        requireNonNull(paramter, UrSystemErrorMessages.値がnull.getReplacedMessage("parameter"));
+    public SearchResult<YokaigoNinteiShinchokuJoho> selectItirannJoho(YokaigoNinteiParamter parameter) {
+        requireNonNull(parameter, UrSystemErrorMessages.値がnull.getReplacedMessage("parameter"));
         List<YokaigoNinteiShinchokuJoho> yokaigoNinteiShinchokuJohoList = new ArrayList<>();
         IYokaigoNinteiShinchokuJohoShokaiMapper mapper = mapperProvider.create(IYokaigoNinteiShinchokuJohoShokaiMapper.class);
-        List<YokaigoNinteiShinchokuJohoShokaiRelateEntity> entityList = mapper.get申請者一覧内容(paramter);
+        List<YokaigoNinteiShinchokuJohoShokaiRelateEntity> entityList = mapper.get申請者一覧内容(parameter);
         for (YokaigoNinteiShinchokuJohoShokaiRelateEntity entity : entityList) {
             yokaigoNinteiShinchokuJohoList.add(new YokaigoNinteiShinchokuJoho(entity));
         }
-        return SearchResult.of(yokaigoNinteiShinchokuJohoList, 0, false);
+        int totalCount = mapper.count申請者(parameter);
+        boolean exceedsLimit = parameter.isMaximumDisplayNumberFlag() && parameter.getMaximumDisplayNumber() < totalCount;
+        return SearchResult.of(yokaigoNinteiShinchokuJohoList, mapper.count申請者(parameter), exceedsLimit);
     }
-    
-    
 }

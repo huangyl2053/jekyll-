@@ -133,7 +133,7 @@ public class KogakuServicehiJuryoininKeiyakuShoninService {
                 ShoninKubun.toValue(entity.get高額介護事業者().getShoninKekkaKubun()).get名称());
         介護保険高額Entity.set承認年月日(
                 do日付編集パターン_12(entity.get高額介護事業者().getKetteiYMD()));
-        if (ShoninKubun.承認する.getコード().equals(ShoninKubun.toValue(entity.get高額介護事業者().getShoninKekkaKubun()).getコード())) {
+        if (ShoninKubun.承認しない.getコード().equals(ShoninKubun.toValue(entity.get高額介護事業者().getShoninKekkaKubun()).getコード())) {
             介護保険高額Entity.set不承認理由(entity.get高額介護事業者().getFuShoninRiyu());
         }
         介護保険高額Entity.set事業所名(介護事業者.getJigyoshaName().value());

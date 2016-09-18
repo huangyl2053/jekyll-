@@ -55,7 +55,7 @@ public class CareManagementMain {
     }
 
     /**
-     * 前月ボタン押下
+     * 前月ボタン押下のメソッドです。
      *
      * @param div CareManagementMainDiv
      * @return ResponseData
@@ -66,11 +66,13 @@ public class CareManagementMain {
         List<KyufuJissekiHedajyoho2> 事業者番号リスト = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報,
                 KyufuJissekiPrmBusiness.class).getCommonHeader().get給付実績ヘッダ情報2();
         getHandler(div).change年月(new RString("前月"), ケアマネジメント費, 事業者番号リスト);
+        FlexibleYearMonth 提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
+        ViewStateHolder.put(ViewStateKeys.サービス提供年月, 提供年月);
         return createResponse(div);
     }
 
     /**
-     * 次月ボタン押下
+     * 次月ボタン押下のメソッドです。
      *
      * @param div CareManagementMainDiv
      * @return ResponseData
@@ -81,11 +83,13 @@ public class CareManagementMain {
         List<KyufuJissekiHedajyoho2> 事業者番号リスト = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報,
                 KyufuJissekiPrmBusiness.class).getCommonHeader().get給付実績ヘッダ情報2();
         getHandler(div).change年月(new RString("次月"), ケアマネジメント費, 事業者番号リスト);
+        FlexibleYearMonth 提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
+        ViewStateHolder.put(ViewStateKeys.サービス提供年月, 提供年月);
         return createResponse(div);
     }
 
     /**
-     * 「前事業者」ボタン押下
+     * 「前事業者」ボタン押下のメソッドです。
      *
      * @param div CareManagementMainDiv
      * @return ResponseData<CareManagementMainDiv>
@@ -100,7 +104,7 @@ public class CareManagementMain {
     }
 
     /**
-     * 「後事業者」ボタン押下
+     * 「後事業者」ボタン押下のメソッドです。
      *
      * @param div CareManagementMainDiv
      * @return ResponseData<CareManagementMainDiv>

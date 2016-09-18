@@ -4,30 +4,25 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.fukarirekiall.FukaRirekiAll.FukaRirekiAllDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.fukarirekiall.FukaRirekiAll.IFukaRirekiAllDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * FukaRirekiAllPanel のクラスファイル
- *
+ * FukaRirekiAllPanel のクラスファイル 
+ * 
  * @author 自動生成
  */
 public class FukaRirekiAllPanelDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：Uz-master-63">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("lblMode")
-    private Label lblMode;
     @JsonProperty("ccdFukaRirekiAll")
     private FukaRirekiAllDiv ccdFukaRirekiAll;
     @JsonProperty("mode")
@@ -41,24 +36,6 @@ public class FukaRirekiAllPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getlblMode
-     * @return lblMode
-     */
-    @JsonProperty("lblMode")
-    public Label getLblMode() {
-        return lblMode;
-    }
-
-    /*
-     * setlblMode
-     * @param lblMode lblMode
-     */
-    @JsonProperty("lblMode")
-    public void setLblMode(Label lblMode) {
-        this.lblMode = lblMode;
-    }
-
     /*
      * getccdFukaRirekiAll
      * @return ccdFukaRirekiAll

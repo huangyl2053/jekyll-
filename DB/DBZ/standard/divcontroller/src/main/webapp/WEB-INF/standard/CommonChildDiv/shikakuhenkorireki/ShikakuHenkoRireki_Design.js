@@ -24,6 +24,10 @@ var DBZ;
                 return "onSelectByDeleteButton_dgHenko";
             };
 
+            Events.onBlur_txtHenkoDate = function () {
+                return "onBlur_txtHenkoDate";
+            };
+
             Events.onClick_btnHenkoKakutei = function () {
                 return "onClick_btnHenkoKakutei";
             };

@@ -105,7 +105,8 @@ public class KogakuGassanShikyuShinseiToroku {
     /**
      * {@link InstanceProvider#create}にて生成した{@link SetaiShotokuKazeiHantei}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link SetaiShotokuKazeiHantei}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link SetaiShotokuKazeiHantei}のインスタンス
      */
     public static KogakuGassanShikyuShinseiToroku createInstance() {
         return InstanceProvider.create(KogakuGassanShikyuShinseiToroku.class);
@@ -213,7 +214,8 @@ public class KogakuGassanShikyuShinseiToroku {
     public boolean getKogakuGassanShikyuShinseishoTorokuKoshin(
             KogakuGassanShinseishoHoji 高額合算申請書保持, KogakuGassanShinseishoDataResult 画面項目) {
         RString 整理番号New = Saiban.get(SubGyomuCode.DBC介護給付,
-                SaibanHanyokeyName.支給申請書整理番号.getコード(), 高額合算申請書保持.get対象年度()).nextString();
+                SaibanHanyokeyName.支給申請書整理番号.getコード(), 高額合算申請書保持.get対象年度() == null
+                ? 画面項目.get対象年度() : 高額合算申請書保持.get対象年度()).nextString();
         if (高額合算申請書保持.get高額合算申請書() != null) {
             for (KogakuGassanShinseishoResult item : 高額合算申請書保持.get高額合算申請書()) {
                 if (追加.equals(item.get状態())) {

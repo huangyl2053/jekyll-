@@ -378,6 +378,8 @@ public class IchijiHanteiHandler {
             return IchijiHanteiKekkaCode09.要介護4.toString();
         } else if (IchijiHanteiKekkaCode09.要介護5.get名称().equals(一次判定結果名称)) {
             return IchijiHanteiKekkaCode09.要介護5.toString();
+//        } else if (IchijiHanteiKekkaCode09.送付済.get名称().equals(一次判定結果名称)) {
+//            return IchijiHanteiKekkaCode09.送付済.toString();
         } else if (IchijiHanteiKekkaCode09.要支援1.get名称().equals(一次判定結果名称)) {
             return IchijiHanteiKekkaCode09.要支援1.toString();
         } else if (IchijiHanteiKekkaCode09.非該当.get名称().equals(一次判定結果名称)) {

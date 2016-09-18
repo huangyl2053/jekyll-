@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2040021.Taju
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2040021.TajutokuIdoTeiseiHandler;
 import jp.co.ndensan.reams.db.dbz.service.core.tashichosonjushochitokureisyaidoteisei.TaShichosonJushochiTokureisyaIdoTeisei;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.dgShisetsuNyutaishoRireki_Row;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -55,7 +56,8 @@ public class TajutokuIdoTeisei {
      * @return ResponseData<TajutokuIdoTeiseiDiv>
      */
     public ResponseData<TajutokuIdoTeiseiDiv> onLoad(TajutokuIdoTeiseiDiv div) {
-        getHandler(div).load(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード());
+        RString 台帳種別 = new RString(DaichoType.他市町村住所地特例者.getコード().toString());
+        getHandler(div).load(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード(), 台帳種別);
         if (!RealInitialLocker.tryGetLock(LOCKINGKEY)) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
             validationMessages.add(new ValidationMessageControlPair(TajutokuIdoTeiseiErrorMessage.排他_他のユーザが使用中));

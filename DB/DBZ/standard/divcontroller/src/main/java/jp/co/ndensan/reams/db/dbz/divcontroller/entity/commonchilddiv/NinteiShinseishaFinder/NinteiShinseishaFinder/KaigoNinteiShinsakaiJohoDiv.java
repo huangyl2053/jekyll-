@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @reamsid_L DBE-3000-010 sunhaidi
  */
 public class KaigoNinteiShinsakaiJohoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -53,14 +53,10 @@ public class KaigoNinteiShinsakaiJohoDiv extends Panel {
     private TextBoxFlexibleDate txtKaisaiDateTo;
     @JsonProperty("lblKaisaiNumber")
     private Label lblKaisaiNumber;
-    @JsonProperty("btnKaisaiNumberStart")
-    private Button btnKaisaiNumberStart;
     @JsonProperty("txtKaisaiNumberStart")
     private TextBox txtKaisaiNumberStart;
     @JsonProperty("lblKaisaiNoFor")
     private Label lblKaisaiNoFor;
-    @JsonProperty("btnKaisaiNumberEnd")
-    private Button btnKaisaiNumberEnd;
     @JsonProperty("txtKaisaiNumberEnd")
     private TextBox txtKaisaiNumberEnd;
 
@@ -359,24 +355,6 @@ public class KaigoNinteiShinsakaiJohoDiv extends Panel {
     }
 
     /*
-     * getbtnKaisaiNumberStart
-     * @return btnKaisaiNumberStart
-     */
-    @JsonProperty("btnKaisaiNumberStart")
-    public Button getBtnKaisaiNumberStart() {
-        return btnKaisaiNumberStart;
-    }
-
-    /*
-     * setbtnKaisaiNumberStart
-     * @param btnKaisaiNumberStart btnKaisaiNumberStart
-     */
-    @JsonProperty("btnKaisaiNumberStart")
-    public void setBtnKaisaiNumberStart(Button btnKaisaiNumberStart) {
-        this.btnKaisaiNumberStart = btnKaisaiNumberStart;
-    }
-
-    /*
      * gettxtKaisaiNumberStart
      * @return txtKaisaiNumberStart
      */
@@ -410,24 +388,6 @@ public class KaigoNinteiShinsakaiJohoDiv extends Panel {
     @JsonProperty("lblKaisaiNoFor")
     public void setLblKaisaiNoFor(Label lblKaisaiNoFor) {
         this.lblKaisaiNoFor = lblKaisaiNoFor;
-    }
-
-    /*
-     * getbtnKaisaiNumberEnd
-     * @return btnKaisaiNumberEnd
-     */
-    @JsonProperty("btnKaisaiNumberEnd")
-    public Button getBtnKaisaiNumberEnd() {
-        return btnKaisaiNumberEnd;
-    }
-
-    /*
-     * setbtnKaisaiNumberEnd
-     * @param btnKaisaiNumberEnd btnKaisaiNumberEnd
-     */
-    @JsonProperty("btnKaisaiNumberEnd")
-    public void setBtnKaisaiNumberEnd(Button btnKaisaiNumberEnd) {
-        this.btnKaisaiNumberEnd = btnKaisaiNumberEnd;
     }
 
     /*

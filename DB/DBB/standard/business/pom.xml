@@ -33,7 +33,7 @@
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzBusiness</artifactId>
         </dependency>
-        <!-- 公開系 -->
+        <!-- ???J?n -->
         <dependency>
             <groupId>jp.co.ndensan.reams.ur.urd</groupId>
             <artifactId>UrdBusiness</artifactId>
@@ -42,7 +42,7 @@
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzBusiness</artifactId>
         </dependency>
-        <!-- テスト -->
+        <!-- ?e?X?g -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>
@@ -70,12 +70,11 @@
             <artifactId>DbzService</artifactId>
             <type>jar</type>
         </dependency>
-        <dependency>
+        <dependency> 
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxEntity</artifactId>
             <scope>test</scope>
-            <version>${jp.co.ndensan.reams.dbxVersion}</version>
-            <classifier>tests</classifier>
+            <type>test-jar</type>
         </dependency>
     </dependencies>
 </project>

@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2010011.Jigy
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.jigyosha.JigyoshaMode;
 import jp.co.ndensan.reams.db.dbz.definition.core.jigyoshashubetsu.JigyosyaType;
+import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -78,6 +79,13 @@ public class JigyoshaShisetsuKanri {
 
         JigyoshaMode mode = new JigyoshaMode();
         mode.setJigyoshaShubetsu(div.getJigyoshaShurui().getRadJigyoshaShurui().getSelectedKey());
+        if (ShisetsuType.住所地特例対象施設.getコード().toString().equals(mode.getJigyoshaShubetsu().toString())) {
+            div.getJigyoshaNyuryokuGuide().getCommonChildDiv1().getJigyoshaNyuryokuGudieCommonChildDiv()
+                    .getOtherTokureiShisetsu().setVisible(true);
+        } else {
+            div.getJigyoshaNyuryokuGuide().getCommonChildDiv1().getJigyoshaNyuryokuGudieCommonChildDiv()
+                    .getOtherTokureiShisetsu().setVisible(false);
+        }
         div.setJigyoshaMode(DataPassingConverter.serialize(mode));
         div.getJigyoshaNyuryokuGuide().getCommonChildDiv1().initialize(mode);
         div.getJigyoshaNyuryokuGuide().getCommonChildDiv1().getJigyoshaNyuryokuGudieCommonChildDiv()

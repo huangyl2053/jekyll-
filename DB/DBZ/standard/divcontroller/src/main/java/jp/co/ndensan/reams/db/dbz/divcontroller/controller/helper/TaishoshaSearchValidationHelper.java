@@ -21,13 +21,14 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  *
  * @author n8300 姜井図
  */
+//TODO syncブランチで1.12.0削除クラスに対応した物があるので、その修正を反映する（あくまでもこのクラスが必要な場合。）
 public final class TaishoshaSearchValidationHelper {
 
     private TaishoshaSearchValidationHelper() {
     }
 
     /**
-     * 最大表示件数バリデーションを行います。
+     * 画面上で設定された表示件数が、最大表示件数を超えていないかのバリデーションを行います。
      *
      * @param 最大表示件数 int
      * @param 最大表示件数入力値 TextBoxNum

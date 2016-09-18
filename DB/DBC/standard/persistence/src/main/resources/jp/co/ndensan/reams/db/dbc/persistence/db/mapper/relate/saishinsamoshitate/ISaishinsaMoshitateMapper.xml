@@ -268,7 +268,7 @@
                         WHERE
                             dbT7060."jigyoshaNo" = dbT7060_2."jigyoshaNo"
                         AND
-                            dbT7060."yukoShuryoYMD" <![CDATA[<]]> dbT7060_2."yukoKaishiYMD"
+                            dbT7060."yukoKaishiYMD" <![CDATA[<]]> dbT7060_2."yukoKaishiYMD"
                         )
                 )AS  再審査申立事業者
                 ON 

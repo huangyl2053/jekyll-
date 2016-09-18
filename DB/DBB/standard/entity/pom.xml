@@ -27,6 +27,10 @@
         <!-- DBZ -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
+            <artifactId>DbzDefinition</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzEntity</artifactId>
         </dependency>
         <dependency>

@@ -4,16 +4,12 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
-            Events.onBlur_txtHihokenshaNumber = function () {
-                return "onBlur_txtHihokenshaNumber";
-            };
-
-            Events.onBlur_txtShinseishaName = function () {
-                return "onBlur_txtShinseishaName";
-            };
-
             Events.onClick_ShosaiJoken = function () {
                 return "onClick_ShosaiJoken";
+            };
+
+            Events.onChange_ddlKoroshoShikibetsuCode = function () {
+                return "onChange_ddlKoroshoShikibetsuCode";
             };
 
             Events.onClick_NinteiChosa = function () {
@@ -124,7 +120,7 @@ var DBZ;
             };
 
             Controls.prototype.txtHihokenshaNumber = function () {
-                return new UZA.TextBox(this.convFiledName("txtHihokenshaNumber"));
+                return new UZA.TextBoxCode(this.convFiledName("txtHihokenshaNumber"));
             };
 
             Controls.prototype.ddlShichosonCode = function () {
@@ -137,10 +133,6 @@ var DBZ;
 
             Controls.prototype.txtHihokenshaName = function () {
                 return new UZA.TextBox(this.convFiledName("txtHihokenshaName"));
-            };
-
-            Controls.prototype.btnHihokenshaGuide = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnHihokenshaGuide"));
             };
 
             Controls.prototype.ddlHihokenshaNameMatchType = function () {
@@ -209,10 +201,6 @@ var DBZ;
 
             Controls.prototype.lblYubinNo = function () {
                 return new UZA.Label(this.convFiledName("lblYubinNo"));
-            };
-
-            Controls.prototype.btnYubinNoGuide = function () {
-                return new UZA.ButtonDialog(this.convFiledName("btnYubinNoGuide"));
             };
 
             Controls.prototype.txtYubinNo = function () {
@@ -443,20 +431,12 @@ var DBZ;
                 return new UZA.Label(this.convFiledName("lblKaisaiNumber"));
             };
 
-            Controls.prototype.btnKaisaiNumberStart = function () {
-                return new UZA.Button(this.convFiledName("btnKaisaiNumberStart"));
-            };
-
             Controls.prototype.txtKaisaiNumberStart = function () {
                 return new UZA.TextBox(this.convFiledName("txtKaisaiNumberStart"));
             };
 
             Controls.prototype.lblKaisaiNoFor = function () {
                 return new UZA.Label(this.convFiledName("lblKaisaiNoFor"));
-            };
-
-            Controls.prototype.btnKaisaiNumberEnd = function () {
-                return new UZA.Button(this.convFiledName("btnKaisaiNumberEnd"));
             };
 
             Controls.prototype.txtKaisaiNumberEnd = function () {

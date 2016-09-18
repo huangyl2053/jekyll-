@@ -4,6 +4,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hanyolistkokuhorenjukyusha.IHanyoListKokuhorenJukyushaMapper">
 
     <resultMap id="get国保連受給者情報Result" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkokuhorenjukyusha.HanyoListKokuhorenJukyushaRelateEntity">
+        <result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="二次予防事業対象者_適用開始年月日" column="二次予防事業対象者_適用開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="二次予防事業対象者_適用終了年月日" column="二次予防事業対象者_適用終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="調査実施日" column="調査実施日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -287,7 +288,7 @@ FROM
         受給者異動送付."shinseiYMD" AS 申請年月日,
         受給者異動送付."minashiYokaigoJotaiKubunCode" AS みなし要介護状態区分コード,
         受給者異動送付."yokaigoJotaiKubunCode" AS 要介護状態区分コード,
-        受給者異動送付."yokaigoJotaiKubunCode" AS 認定有効期間開始年月日,
+        受給者異動送付."ninteiYukoKikankaishiYMD" AS 認定有効期間開始年月日,
         受給者異動送付."ninteiYukoKikanShuryoYMD" AS 認定有効期間終了年月日,
         受給者異動送付."kyotakuServiceSakuseiKubunCode" AS 居宅サービス計画作成区分コード,
         受給者異動送付."kyotakuKaigoShienJigyoshoNo" AS 居宅介護支援事業所番号,
@@ -400,7 +401,7 @@ FROM
            AND  抽出対象.異動年月日 <![CDATA[<]]>抽出対象2.異動年月日
           )
         </if>
-        <if test="is直近のみ">
+        <if test="is範囲指定">
             <if test="is各異動月の最新のみ">
              AND NOT EXISTS (
                 SELECT 1
@@ -415,7 +416,7 @@ FROM
         <if test="has保険者コード">
             AND (
                 (被保険者台帳管理."koikinaiJushochiTokureiFlag"<![CDATA[<>]]> '1'
-                 AND 被保険者台帳管理."hihokenshaNo" = #{保険者コード}
+                 AND 被保険者台帳管理."shichosonCode" = #{保険者コード}
                 ) 
                 OR 
                 (  被保険者台帳管理."koikinaiJushochiTokureiFlag" = '1'

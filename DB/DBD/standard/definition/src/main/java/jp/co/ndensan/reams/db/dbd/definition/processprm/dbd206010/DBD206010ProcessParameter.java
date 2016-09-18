@@ -28,7 +28,6 @@ public class DBD206010ProcessParameter implements IBatchProcessParameter {
     private RString 事業者選択;
     private RString 事業者番号;
     private RString 事業者名;
-    private Long 改頁出力順ID;
     private Long 出力順ID;
     private YMDHMS 処理日時;
 

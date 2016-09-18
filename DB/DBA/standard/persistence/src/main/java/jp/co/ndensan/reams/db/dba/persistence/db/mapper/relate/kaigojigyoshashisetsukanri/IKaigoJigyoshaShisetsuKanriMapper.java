@@ -33,6 +33,14 @@ public interface IKaigoJigyoshaShisetsuKanriMapper {
      */
     List<JigyoshaShiteiServiceEntity> getServiceItiranHyojiJoho(KaigoJogaiTokureiParameter parameter);
     
+        /**
+     * 事業者情報を登録されてない場合、サービス一覧表示情報を取得します。
+     *
+     * @param parameter KaigoJigyoshaShisetsuKanriMapperParameter
+     * @return サービス一覧表示情報取得
+     */
+    List<JigyoshaShiteiServiceEntity> getServiceItiranHyojiJohoForEmpty(KaigoJogaiTokureiParameter parameter);
+    
     /**
      * サービス一覧情報を取得します。
      *

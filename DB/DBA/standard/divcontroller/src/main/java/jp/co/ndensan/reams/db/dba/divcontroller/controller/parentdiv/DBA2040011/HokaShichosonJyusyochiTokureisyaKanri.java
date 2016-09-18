@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2040011.Hoka
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2040011.HokaShichosonJyusyochiTokureisyaKanriHandler;
 import jp.co.ndensan.reams.db.dba.service.core.tajushochitokureisyakanri.TaJushochiTokureisyaKanriManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.dgShisetsuNyutaishoRireki_Row;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
@@ -85,18 +86,19 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
         }
         if (メニューID_施設入所により適用.equals(menuId) || メニューID_転入転出保留対象者管理.equals(menuId)) {
             if (!div.getCddTaJushochiTokureishaKanri().get適用情報一覧().isEmpty()
-                    && div.getCddTaJushochiTokureishaKanri().get適用情報一覧().get(0).getKaijoTodokedeYMD().getValue() == null) {
+                && div.getCddTaJushochiTokureishaKanri().get適用情報一覧().get(0).getKaijoTodokedeYMD().getValue() == null) {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnSave"), true);
             }
             return ResponseData.of(div).setState(DBA2040011StateName.追加適用);
         } else if (メニューID_施設退所により解除.equals(menuId)) {
             if (!div.getCddTaJushochiTokureishaKanri().get適用情報一覧().isEmpty()
-                    && div.getCddTaJushochiTokureishaKanri().get適用情報一覧().get(0).getKaijoTodokedeYMD().getValue() != null) {
+                && div.getCddTaJushochiTokureishaKanri().get適用情報一覧().get(0).getKaijoTodokedeYMD().getValue() != null) {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnSave"), true);
             }
             return ResponseData.of(div).setState(DBA2040011StateName.追加解除);
         } else if (メニューID_施設変更により変更.equals(menuId)) {
-            div.getCddShisetsuNyutaishoRirekiKanri().initialize(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード());
+            RString 台帳種別 = new RString(DaichoType.他市町村住所地特例者.getコード().toString());
+            div.getCddShisetsuNyutaishoRirekiKanri().initialize(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード(), 台帳種別);
             return ResponseData.of(div).setState(DBA2040011StateName.追加変更);
         }
         return ResponseData.of(div).respond();
@@ -124,7 +126,9 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
      * @return HokaShichosonJyusyochiTokureisyaKanriDiv
      */
     public ResponseData<HokaShichosonJyusyochiTokureisyaKanriDiv> onClick_Kanryo(HokaShichosonJyusyochiTokureisyaKanriDiv div) {
+        RString 識別コード = div.getCcdKaigoAtenaInfo().getAtenaInfoDiv().getHdnTxtShikibetsuCode();
         RealInitialLocker.release(LOCKINGKEY);
+        ViewStateHolder.put(ViewStateKeys.識別コード, 識別コード);
         return ResponseData.of(div).respond();
     }
 
@@ -141,10 +145,10 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
         }
         RString menuId = ResponseHolder.getMenuID();
         if (((メニューID_施設入所により適用.equals(menuId) || メニューID_転入転出保留対象者管理.equals(menuId)
-                || メニューID_施設退所により解除.equals(menuId))
-                && (div.getCddTaJushochiTokureishaKanri().get適用情報一覧().isEmpty()
-                || RowState.Unchanged.equals(div.getCddTaJushochiTokureishaKanri().get適用情報一覧().get(0).getRowState())))
-                || (メニューID_施設変更により変更.equals(menuId) && !get変更(div))) {
+              || メニューID_施設退所により解除.equals(menuId))
+             && (div.getCddTaJushochiTokureishaKanri().get適用情報一覧().isEmpty()
+                 || RowState.Unchanged.equals(div.getCddTaJushochiTokureishaKanri().get適用情報一覧().get(0).getRowState())))
+            || (メニューID_施設変更により変更.equals(menuId) && !get変更(div))) {
             InformationMessage message = new InformationMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage().getCode(),
                     DbzInformationMessages.内容変更なしで保存不可.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
@@ -154,7 +158,7 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
             set処理実行(div);
             RealInitialLocker.release(LOCKINGKEY);
@@ -219,7 +223,7 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
             manager.checkHenkoJotai(paramaterList);
         }
         if (メニューID_施設入所により適用.equals(menuId) || メニューID_転入転出保留対象者管理.equals(menuId)
-                || メニューID_施設退所により解除.equals(menuId)) {
+            || メニューID_施設退所により解除.equals(menuId)) {
             div.getShikakuKihonJoho().getCddTaJushochiTokureishaKanri().saveTaJushochiTokurei(
                     ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード());
         }
@@ -229,7 +233,7 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
     }
 
     private void set適用(List<TaJushochiTokureisyaKanriParameter> paramaterList) {
-        if (!paramaterList.isEmpty() && 新規.equals(paramaterList.get(0).get状態())) {
+        if (!paramaterList.isEmpty()) {
             TaJushochiTokureisyaKanriParameter parameter1 = paramaterList.get(0);
             TaJushochiTokureisyaKanriParameter parameter = TaJushochiTokureisyaKanriParameter.createParamBy他市町村住所地特例者管理(
                     parameter1.getNyuusyoYMD(), parameter1.getTayishoYMD(), parameter1.getKaijoYMD(), parameter1.getTekiyoYMD(), SHINKI
@@ -239,7 +243,7 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
     }
 
     private void set解除(List<TaJushochiTokureisyaKanriParameter> paramaterList) {
-        if (!paramaterList.isEmpty() && 修正.equals(paramaterList.get(0).get状態())) {
+        if (!paramaterList.isEmpty()) {
             TaJushochiTokureisyaKanriParameter parameter1 = paramaterList.get(0);
             TaJushochiTokureisyaKanriParameter parameter = TaJushochiTokureisyaKanriParameter.createParamBy他市町村住所地特例者管理(
                     parameter1.getNyuusyoYMD(), parameter1.getTayishoYMD(), parameter1.getKaijoYMD(), parameter1.getTekiyoYMD(), SYUSEI
@@ -252,7 +256,7 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
         boolean henko = false;
         for (dgShisetsuNyutaishoRireki_Row row : div.getCddShisetsuNyutaishoRirekiKanri().get施設入退所履歴一覧()) {
             if (TSUIKA.equals(row.getState()) || KOSHIN.equals(row.getState())
-                    || SAKUJYO.equals(row.getState())) {
+                || SAKUJYO.equals(row.getState())) {
                 henko = true;
                 break;
             }

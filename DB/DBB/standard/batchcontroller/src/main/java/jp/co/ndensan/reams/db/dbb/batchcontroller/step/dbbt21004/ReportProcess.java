@@ -38,8 +38,6 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
  */
 public class ReportProcess extends BatchKeyBreakBase<DankaibeHihokensixyaForReport> {
 
-    private HokenshaDankaibetsuHihokenshasuGroup hokenshaDankaibetsuHihokenshasuGroup;
-    private HyojunDankaibetsuHihokenshasuGroup hyojunDankaibetsuHihokenshasuGroup;
     private DankaibetuHihokensyasuIchiranhyoProcessParameter processParameter;
     private static final RString 保険者設定段階 = new RString("1");
     private static final RString 標準段階 = new RString("2");
@@ -57,8 +55,6 @@ public class ReportProcess extends BatchKeyBreakBase<DankaibeHihokensixyaForRepo
         super.initialize();
         改頁項目リスト = new ArrayList<>();
         改頁項目リスト.add(new RString(ShotokuDankaiBetsuHihokenshasuIchiranSource.DBB300004_ShotokuDankaiBetsuHihokenshasuIchiran.hokenshaNo.name()));
-        hokenshaDankaibetsuHihokenshasuGroup = new HokenshaDankaibetsuHihokenshasuGroup();
-        hyojunDankaibetsuHihokenshasuGroup = new HyojunDankaibetsuHihokenshasuGroup();
     }
 
     @Override
@@ -70,29 +66,31 @@ public class ReportProcess extends BatchKeyBreakBase<DankaibeHihokensixyaForRepo
 
     @Override
     protected void usualProcess(DankaibeHihokensixyaForReport entity) {
+        HokenshaDankaibetsuHihokenshasuGroup hokenshaDankaibetsu = new HokenshaDankaibetsuHihokenshasuGroup();
+        HyojunDankaibetsuHihokenshasuGroup hyojunDankaibetsu = new HyojunDankaibetsuHihokenshasuGroup();
         if (保険者設定段階.equals(entity.getFlag())) {
             if (null != entity.getShichosonCode()) {
-                hokenshaDankaibetsuHihokenshasuGroup.set市町村コード(new LasdecCode(entity.getShichosonCode().toString()));
+                hokenshaDankaibetsu.set市町村コード(new LasdecCode(entity.getShichosonCode().toString()));
                 Association 市町村 = AssociationFinderFactory.createInstance().getAssociation(entity.getShichosonCode());
-                hokenshaDankaibetsuHihokenshasuGroup.set市町村名称(市町村.get市町村名());
+                hokenshaDankaibetsu.set市町村名称(市町村.get市町村名());
             }
-            hokenshaDankaibetsuHihokenshasuGroup.set保険者設定段階(entity.get保険者設定段階());
-            hokenshaDankaibetsuHihokenshasuGroup.set保険者設定人数(entity.get保険者設定());
+            hokenshaDankaibetsu.set保険者設定段階(entity.get保険者設定段階());
+            hokenshaDankaibetsu.set保険者設定人数(entity.get保険者設定());
         } else if (標準段階.equals(entity.getFlag())) {
             if (null != entity.getShichosonCode()) {
-                hyojunDankaibetsuHihokenshasuGroup.set市町村コード(new LasdecCode(entity.getShichosonCode().toString()));
+                hyojunDankaibetsu.set市町村コード(new LasdecCode(entity.getShichosonCode().toString()));
                 Association 市町村 = AssociationFinderFactory.createInstance().getAssociation(entity.getShichosonCode());
-                hyojunDankaibetsuHihokenshasuGroup.set市町村名称(市町村.get市町村名());
+                hyojunDankaibetsu.set市町村名称(市町村.get市町村名());
             }
-            hyojunDankaibetsuHihokenshasuGroup.set保険者設定段階(entity.get保険者設定段階());
-            hyojunDankaibetsuHihokenshasuGroup.set保険者設定人数(entity.get保険者設定());
+            hyojunDankaibetsu.set保険者設定段階(entity.get保険者設定段階());
+            hyojunDankaibetsu.set保険者設定人数(entity.get保険者設定());
         }
         HokenryoDankaiSettings hokenryoDankaiSettings = new HokenryoDankaiSettings();
         HokenryoDankaiList hokenryoDankaiList = hokenryoDankaiSettings.get保険料段階ListIn(processParameter.get調定年度());
         ShotokuDankaiBetsuHihokenshasuIchiranReport report
                 = new ShotokuDankaiBetsuHihokenshasuIchiranReport(
-                        hokenshaDankaibetsuHihokenshasuGroup,
-                        hyojunDankaibetsuHihokenshasuGroup,
+                        hokenshaDankaibetsu,
+                        hyojunDankaibetsu,
                         processParameter.getバッチ起動時処理日時(),
                         new RDate(processParameter.get資格基準日().toString()),
                         new RDate(processParameter.get調定基準日().toString()),

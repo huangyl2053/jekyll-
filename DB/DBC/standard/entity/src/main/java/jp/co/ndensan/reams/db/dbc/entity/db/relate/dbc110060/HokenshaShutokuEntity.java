@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 public class HokenshaShutokuEntity {
 
     private List<Integer> 件数List;
+    private List<Integer> レコード件数List;
     private List<HokenshaNo> 保険者番号List;
 
 }

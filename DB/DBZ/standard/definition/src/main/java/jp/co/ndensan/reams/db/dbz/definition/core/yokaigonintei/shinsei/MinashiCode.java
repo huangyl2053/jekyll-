@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei;
 
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -15,6 +14,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public enum MinashiCode {
 
+    /**
+     * 未設定
+     */
+    未設定("0", ""),
     /**
      * コード:1 名称:通常の認定 略称:定義なし
      */
@@ -67,6 +70,6 @@ public enum MinashiCode {
                 return minashiCode;
             }
         }
-        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("みなし要介護区分コード"));
+        return MinashiCode.未設定;
     }
 }

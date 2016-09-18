@@ -14,7 +14,7 @@
      "toLayoutSubGyomuCode": "DBA",
      "toLayoutName": "DBA7010001",
      "toLayoutTitle": "汎用リスト",
-     "toState": "非保険者台帳"
+     "toState": "被保険者台帳"
     },
     {
      "id": "2",

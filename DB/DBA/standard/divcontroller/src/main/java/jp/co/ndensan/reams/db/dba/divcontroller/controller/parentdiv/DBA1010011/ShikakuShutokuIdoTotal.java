@@ -13,12 +13,19 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.DBA1
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.DBA1010011TransitionEventName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.ShikakuShutokuIdoTotalDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1010011.ShiKaKuSyuToKuIdouTotalHandler;
+import jp.co.ndensan.reams.db.dba.service.core.tajushochito.TaJushochiTokureiChecker;
+import jp.co.ndensan.reams.db.dba.service.core.tekiyojogaisha.TekiyoJogaishaChecker;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
+import jp.co.ndensan.reams.db.dbz.divcontroller.validations.TextBoxFlexibleDateValidator;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
@@ -29,7 +36,11 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -47,6 +58,8 @@ public class ShikakuShutokuIdoTotal {
     private static final RString 追加 = new RString("追加");
     private static final RString 状態_照会 = new RString("照会");
 
+    private static final RString COMMON_BUTTON_RESEARCH = new RString("btnUpdate");
+
     /**
      * 資格取得異動の初期化します。
      *
@@ -54,15 +67,71 @@ public class ShikakuShutokuIdoTotal {
      * @return レスポンス
      */
     public ResponseData<ShikakuShutokuIdoTotalDiv> onLoad(ShikakuShutokuIdoTotalDiv div) {
-        ResponseData<ShikakuShutokuIdoTotalDiv> response = new ResponseData<>();
-        createHandler(div).load(ViewStateHolder.get(ViewStateKeys.資格取得異動_状態_被保履歴タブ, RString.class));
-        前排他ロックキー = new LockingKey(createHandler(div).get前排他キー());
-        if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
-            div.setReadOnly(true);
-            throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
         }
-        response.data = div;
-        return response;
+
+        TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        ShikibetsuCode shikibetsuCode = key.get識別コード();
+        HihokenshaNo hihokenshaNo = key.get被保険者番号();
+
+        if (validateShikibetsuCode(shikibetsuCode)) {
+            div.setDisabled(true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_RESEARCH, true);
+            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
+        }
+
+        前排他ロックキー = new LockingKey(createHandler(div).get前排他キー());
+        if (hihokenshaNo == null || hihokenshaNo.isEmpty()) {
+        } else {
+            if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
+                div.setReadOnly(true);
+                throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
+            }
+        }
+
+        ShiKaKuSyuToKuIdouTotalHandler handler = createHandler(div);
+        handler.load(ViewStateHolder.get(ViewStateKeys.資格取得異動_状態_被保履歴タブ, RString.class));
+
+        if (!handler.is資格取得可能()) {
+            releaseLock(div);
+            return setNotExecutableAndReturnMessage(div, handler.get資格取得不可時エラーメッセージ());
+        }
+        if (handler.is資格取得中()) {
+            releaseLock(div);
+            return setNotExecutableAndReturnMessage(div, DbzInformationMessages.資格取得済み.getMessage());
+        }
+        if (TaJushochiTokureiChecker.createInstance().is他市町村住所地特例者(shikibetsuCode)) {
+            releaseLock(div);
+            return setNotExecutableAndReturnMessage(div, DbzInformationMessages.他特例者登録済み.getMessage());
+        }
+        if (TekiyoJogaishaChecker.createInstance().is適用除外者(shikibetsuCode)) {
+            releaseLock(div);
+            return setNotExecutableAndReturnMessage(div, DbzInformationMessages.適用除外者登録済み.getMessage());
+        }
+
+        return ResponseData.of(div).respond();
+    }
+
+    private boolean validateShikibetsuCode(ShikibetsuCode shikibetsuCode) {
+        return (shikibetsuCode == null || shikibetsuCode.isEmpty());
+    }
+
+    private void releaseLock(ShikakuShutokuIdoTotalDiv div) {
+        TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        HihokenshaNo hihokenshaNo = key.get被保険者番号();
+
+        if (hihokenshaNo == null || hihokenshaNo.isEmpty()) {
+            return;
+        }
+        前排他ロックキー = new LockingKey(createHandler(div).get前排他キー());
+        RealInitialLocker.release(前排他ロックキー);
+    }
+
+    private ResponseData<ShikakuShutokuIdoTotalDiv> setNotExecutableAndReturnMessage(ShikakuShutokuIdoTotalDiv div, Message message) {
+        div.setDisabled(true);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_RESEARCH, true);
+        return ResponseData.of(div).addMessage(message).respond();
     }
 
     /**
@@ -99,19 +168,26 @@ public class ShikakuShutokuIdoTotal {
      */
     public ResponseData<ShikakuShutokuIdoTotalDiv> onClick_btnUpdate(ShikakuShutokuIdoTotalDiv div) {
         if (!ResponseHolder.isReRequest()) {
+            if (!isSavable(div)) {
+                throw new ApplicationException(UrErrorMessages.保存データなし.getMessage());
+            }
+
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             createHandler(div).save();
-            前排他ロックキー = new LockingKey(createHandler(div).get前排他キー());
-            RealInitialLocker.release(前排他ロックキー);
+            releaseLock(div);
             div.getComplete().getCcdComplete().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
             return ResponseData.of(div).setState(DBA1010011StateName.完了状態);
         }
         return ResponseData.of(div).respond();
+    }
+
+    private boolean isSavable(ShikakuShutokuIdoTotalDiv div) {
+        return createHandler(div).isSavable();
     }
 
     /**
@@ -121,25 +197,38 @@ public class ShikakuShutokuIdoTotal {
      * @return レスポンス
      */
     public ResponseData onClick_commonButtonUpdateDone(ShikakuShutokuIdoTotalDiv div) {
-        前排他ロックキー = new LockingKey(createHandler(div).get前排他キー());
-        RealInitialLocker.release(前排他ロックキー);
+        releaseLock(div);
         return ResponseData.of(div).setState(DBA1010011StateName.初期状態);
     }
 
     /**
-     * 「戻る」ボタンを押下します。
+     * 「再検索する」ボタンを押下します。
      *
      * @param div 適用除外者異動の訂正Div
      * @return レスポンス
      */
     public ResponseData onClick_btnBack(ShikakuShutokuIdoTotalDiv div) {
-        前排他ロックキー = new LockingKey(createHandler(div).get前排他キー());
-        RealInitialLocker.release(前排他ロックキー);
+        releaseLock(div);
         ViewStateHolder.put(ViewStateKeys.資格取得異動_状態_被保履歴タブ, null);
         ViewStateHolder.put(ViewStateKeys.資格取得異動_状態_医療保険タブ, null);
         ViewStateHolder.put(ViewStateKeys.資格取得異動_状態_老福年金タブ, null);
         ViewStateHolder.put(ViewStateKeys.資格取得異動_状態_施設入退所タブ, null);
         return ResponseData.of(div).forwardWithEventName(DBA1010011TransitionEventName.再検索).respond();
+    }
+
+    /**
+     * 「検索結果一覧へ」ボタンを押下します。
+     *
+     * @param div 適用除外者異動の訂正Div
+     * @return レスポンス
+     */
+    public ResponseData<ShikakuShutokuIdoTotalDiv> onClick_btnSearchResult(ShikakuShutokuIdoTotalDiv div) {
+        releaseLock(div);
+        ViewStateHolder.put(ViewStateKeys.資格取得異動_状態_被保履歴タブ, null);
+        ViewStateHolder.put(ViewStateKeys.資格取得異動_状態_医療保険タブ, null);
+        ViewStateHolder.put(ViewStateKeys.資格取得異動_状態_老福年金タブ, null);
+        ViewStateHolder.put(ViewStateKeys.資格取得異動_状態_施設入退所タブ, null);
+        return ResponseData.of(div).forwardWithEventName(DBA1010011TransitionEventName.検索結果一覧).respond();
     }
 
     /**
@@ -149,13 +238,18 @@ public class ShikakuShutokuIdoTotal {
      * @return レスポンス
      */
     public ResponseData<ShikakuShutokuIdoTotalDiv> onClick_btnSyouHoSo(ShikakuShutokuIdoTotalDiv div) {
-        前排他ロックキー = new LockingKey(createHandler(div).get前排他キー());
-        RealInitialLocker.release(前排他ロックキー);
-        TaishoshaKey key = ViewStateHolder.get(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class);
-        ViewStateHolder.put(ViewStateKeys.識別コード, key.get識別コード());
-        ViewStateHolder.put(ViewStateKeys.被保険者番号, key.get被保険者番号());
-        ViewStateHolder.put(ViewStateKeys.状態, 状態_照会);
-        ViewStateHolder.put(ViewStateKeys.資格得喪情報, createHandler(div).setパラメータ());
+//<<<<<<< HEAD
+        releaseLock(div);
+        createHandler(div).setパラメータ();
+//=======
+//        前排他ロックキー = new LockingKey(createHandler(div).get前排他キー());
+//        RealInitialLocker.release(前排他ロックキー);
+//        TaishoshaKey key = ViewStateHolder.get(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class);
+//        ViewStateHolder.put(ViewStateKeys.識別コード, key.get識別コード());
+//        ViewStateHolder.put(ViewStateKeys.被保険者番号, key.get被保険者番号());
+//        ViewStateHolder.put(ViewStateKeys.状態, 状態_照会);
+//        ViewStateHolder.put(ViewStateKeys.資格得喪情報, createHandler(div).setパラメータ());
+//>>>>>>> origin/sync
         return ResponseData.of(div).forwardWithEventName(DBA1010011TransitionEventName.詳細へ).respond();
     }
 
@@ -215,6 +309,48 @@ public class ShikakuShutokuIdoTotal {
         dgShikakuShutokuRireki_Row row = div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().getDataGridSelectItem();
         List<dgShikakuShutokuRireki_Row> rowList = div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
                 .getCcdShikakuTokusoRireki().getDataGridDataSource();
+
+        // 入力チェック
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        // 必須チェック
+        if (div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
+                getShikakuShutokuInput().getTxtShutokuDate().getValue().isEmpty()) {
+            validPairs.add(new ValidationMessageControlPair(validationErrorMessage.取得日,
+                    div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuDate()));
+        }
+        if (div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
+                getShikakuShutokuInput().getTxtShutokuTodokedeDate().getValue().isEmpty()) {
+            validPairs.add(new ValidationMessageControlPair(validationErrorMessage.届出日,
+                    div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuTodokedeDate()));
+        }
+
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(
+                div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuDate()));
+        validPairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(
+                div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuTodokedeDate()));
+
+        if (!rowList.isEmpty()) {
+            TextBoxFlexibleDate compareToDate;
+            if (row == null) {
+                compareToDate = rowList.get(0).getSoshitsuDate();
+            } else {
+                compareToDate = row.getSoshitsuDate();
+            }
+            // 期間重複チェック
+            if (!div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
+                    getShikakuShutokuInput().getTxtShutokuDate().getValue().isEmpty()) {
+                if (div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
+                        getShikakuShutokuInput().getTxtShutokuDate().getValue().compareTo(compareToDate.getValue()) <= 0) {
+                    validPairs.add(new ValidationMessageControlPair(validationErrorMessage.期間が不正_過去日付不可,
+                            div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuDate()));
+                }
+            }
+        }
+
+        if (validPairs.existsError()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+
         if (row != null && !RString.isNullOrEmpty(row.getState())) {
             row.getShutokuDate().setValue(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
                     .getShikakuShutokuInput().getTxtShutokuDate().getValue());
@@ -294,6 +430,24 @@ public class ShikakuShutokuIdoTotal {
     }
 
     /**
+     * 「取得日」フォーカスアウト処理します。
+     *
+     * @param div ShikakuShutokuIdoTotalDiv
+     * @return レスポンス
+     */
+    public ResponseData<ShikakuShutokuIdoTotalDiv> onBlur_txtShutokuDate(ShikakuShutokuIdoTotalDiv div) {
+        if (div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
+                getShikakuShutokuInput().getTxtShutokuTodokedeDate().getValue().isEmpty()) {
+            if (!div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain()
+                    .getShikakuShutokuInput().getTxtShutokuDate().getValue().isEmpty()) {
+                div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuTodokedeDate().
+                        setValue(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().getShikakuShutokuInput().getTxtShutokuDate().getValue());
+            }
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 資格得喪履歴グリッドの枝番の降順処理です。
      */
     public static class ComparatorByDaNoSort implements Comparator, Serializable {
@@ -359,8 +513,27 @@ public class ShikakuShutokuIdoTotal {
         }
     }
 
-    private ShiKaKuSyuToKuIdouTotalHandler createHandler(ShikakuShutokuIdoTotalDiv div) {
+    private enum validationErrorMessage implements IValidationMessage {
+
+        取得日(UrErrorMessages.必須項目),
+        届出日(UrErrorMessages.必須項目),
+        期間が不正_過去日付不可(DbzErrorMessages.期間が不正_過去日付不可, "取得日", "履歴の喪失日");
+        private final Message message;
+
+        private validationErrorMessage(IMessageGettable message, String... replacements) {
+            this.message = message.getMessage().replace(replacements);
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
+        }
+    }
+
+    private ShiKaKuSyuToKuIdouTotalHandler
+            createHandler(ShikakuShutokuIdoTotalDiv div) {
         return new ShiKaKuSyuToKuIdouTotalHandler(div,
-                ViewStateHolder.get(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class));
+                ViewStateHolder.get(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class
+                ));
     }
 }

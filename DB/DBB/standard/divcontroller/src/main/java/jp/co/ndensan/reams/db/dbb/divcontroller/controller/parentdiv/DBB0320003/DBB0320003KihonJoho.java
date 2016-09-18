@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0320003;
 
+import jp.co.ndensan.reams.db.dbb.divcontroller.controller.fuka.FukaShokaiController;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001.DBB0320001KihonJohoDiv;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
@@ -40,5 +41,18 @@ public class DBB0320003KihonJoho {
         ResponseData<DBB0320001KihonJohoDiv> response = new ResponseData<>();
         response.data = div;
         return response;
+    }
+
+    public ResponseData<DBB0320001KihonJohoDiv> onClick_btnZenkairesultHyoji(DBB0320001KihonJohoDiv div) {
+        return clearViewStateKeys(div);
+    }
+
+    private ResponseData<DBB0320001KihonJohoDiv> clearViewStateKeys(DBB0320001KihonJohoDiv div) {
+        FukaShokaiController.clearFukaTaishoshaKeyAndFukaShokaiKey();
+        return ResponseData.of(div).respond();
+    }
+
+    public ResponseData<DBB0320001KihonJohoDiv> onClick_btnResearch(DBB0320001KihonJohoDiv div) {
+        return clearViewStateKeys(div);
     }
 }

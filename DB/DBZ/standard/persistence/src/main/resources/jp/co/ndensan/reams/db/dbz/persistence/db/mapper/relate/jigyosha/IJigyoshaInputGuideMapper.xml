@@ -80,7 +80,7 @@
         dbT7130Kaigo2."isDeleted"  <![CDATA[<>]]> TRUE
 
         <if test="isJigyoshaNoFlag" >
-            AND dbT7060Kaigo."jigyoshaNo" = #{jigyoshaNo}
+            AND dbT7060Kaigo."jigyoshaNo" like #{jigyoshaNo} || '%'
         </if>
         <if test = "!isJigyoshaNoFlag">
             <if test = "isYukoKaishiYMDFromFlag and !isYukoKaishiYMDToFlag">
@@ -136,6 +136,8 @@
             <if test = "isServiceShuRui">
                 AND
                 dbT7063Kaigo."serviceShuruiCode" = #{serviceShuRui}
+            </if>
+            <if test = "isKenCode">
                 AND
                 SUBSTRING(dbT7060Kaigo."jigyoshaNo",1,2) = #{kenCode}
             </if>

@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinseikensaku.ShinseiKe
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinseikensaku.ShinseiKensakuRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinseikensaku.IShinseiKensakuMapper;
 import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -54,7 +55,7 @@ public class ShinseiKensakuFinder {
      * @param parameter 検索条件
      * @return 要介護認定申請情報
      */
-    public List<ShinseiKensakuBusiness> getShinseiKensaku(ShinseiKensakuMapperParameter parameter) {
+    public SearchResult<ShinseiKensakuBusiness> getShinseiKensaku(ShinseiKensakuMapperParameter parameter) {
         List<ShinseiKensakuBusiness> shinseiKensakuList = new ArrayList<>();
         IShinseiKensakuMapper shinseiKensakuMapper = mapperProvider.create(IShinseiKensakuMapper.class);
         List<ShinseiKensakuRelateEntity> list = shinseiKensakuMapper.selectShinseiJoho(parameter);
@@ -62,6 +63,7 @@ public class ShinseiKensakuFinder {
             ShinseiKensakuBusiness business = new ShinseiKensakuBusiness(entity);
             shinseiKensakuList.add(business);
         }
-        return shinseiKensakuList;
+        int totalcount = shinseiKensakuMapper.countShinseiJoho(parameter);
+        return SearchResult.of(shinseiKensakuList, totalcount, parameter.getLimitCount() < totalcount);
     }
 }

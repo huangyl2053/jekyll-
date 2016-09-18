@@ -30,7 +30,6 @@ public class DBD206010_JigyoshoMukeShakaFukushiHojinKeigenTaishoshaIchiranHakkoP
     private static final String JIGYOSHANAME = "jigyoshaName";
     private static final String OUTPUTJUNNID = "outputJunnId";
     private static final String SHORIDATETIME = "shoriDateTime";
-    private static final String CHANGEID = "changeid";
     @BatchParameter(key = KIJUNRI, name = "基準日")
     private FlexibleDate 基準日;
     @BatchParameter(key = SHIKAKUSSIUSSENTAKU, name = "資格喪失者選択")
@@ -43,8 +42,6 @@ public class DBD206010_JigyoshoMukeShakaFukushiHojinKeigenTaishoshaIchiranHakkoP
     private RString 事業者名;
     @BatchParameter(key = OUTPUTJUNNID, name = "出力順ID")
     private Long 出力順ID;
-    @BatchParameter(key = CHANGEID, name = "改頁出力順ID")
-    private Long 改頁出力順ID;
     @BatchParameter(key = SHORIDATETIME, name = "処理日時")
     private YMDHMS 処理日時;
 

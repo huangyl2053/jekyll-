@@ -223,7 +223,7 @@ public class GemmenGengakuShoIkkatsuMainHandler {
         futanParameter.set旧措置者区分(KyusochishaKubun.旧措置者以外);
         Long 改頁ID = Long.valueOf("0");
         if (div.getFutanGendogaku().getCcdFutanGendogakuShutsuryokuJun().isSelected()) {
-            改頁出力順ID = div.getShafukuKeigen().getCcdShafukuKeigenShutsuryokuJun().getSelected出力順().get改頁項目ID();
+            改頁出力順ID = div.getFutanGendogaku().getCcdFutanGendogakuShutsuryokuJun().getSelected出力順().get改頁項目ID();
         }
         if (単票発行区分.equals(TanpyoHakkoKubun.出力する.get名称())) {
             futanParameter.set単票発行区分(TanpyoHakkoKubun.出力する);

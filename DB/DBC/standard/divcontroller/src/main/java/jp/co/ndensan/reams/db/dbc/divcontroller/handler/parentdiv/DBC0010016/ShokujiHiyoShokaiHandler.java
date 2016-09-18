@@ -91,45 +91,71 @@ public class ShokujiHiyoShokaiHandler {
                 row_前.setTxtKagoKaisu(new RString(給付実績食事費用1504.get過誤回数()));
                 row_前.setTxtShinsaYM(to日期(給付実績食事費用1504.get審査年月()));
                 dgShokujiHiyoGokeiFromH1504_Row row_後 = new dgShokujiHiyoGokeiFromH1504_Row();
-                row_後.setTxtShokujiTeikyohiGokei(get金額(給付実績食事費用1504.get基本_提供金額()));
-                row_後.setTxtHyojunFutangakuTsuki(get金額(給付実績食事費用1504.get標準負担額_月額()));
-                row_後.setTxtHyojunFutangakuHi(get金額(給付実績食事費用1504.get標準負担額_日額()));
+                row_後.setTxtShokujiTeikyohiGokei(RString.EMPTY);
+                row_後.setTxtHyojunFutangakuTsuki(RString.EMPTY);
+                row_後.setTxtHyojunFutangakuHi(RString.EMPTY);
                 row_後.setTxtKohi(RString.EMPTY);
-                row_後.setTxtShokujiTeikyoNobeNissu(new RString(給付実績食事費用1504.get食事提供延べ日数()));
+                row_後.setTxtShokujiTeikyoNobeNissu(RString.EMPTY);
                 row_後.setTxtSeikyugakuZengo(後);
                 row_後.setTxtKohiSeikyu(RString.EMPTY);
                 row_後.setTxtShokujiTeikyohiSeikyugaku(get金額(給付実績食事費用1504.get後_食事提供費請求額()));
-                row_後.setTxtSaishinsaKaisu(new RString(給付実績食事費用1504.get再審査回数()));
-                row_後.setTxtKagoKaisu(new RString(給付実績食事費用1504.get過誤回数()));
-                row_後.setTxtShinsaYM(to日期(給付実績食事費用1504.get審査年月()));
+                row_後.setTxtSaishinsaKaisu(RString.EMPTY);
+                row_後.setTxtKagoKaisu(RString.EMPTY);
+                row_後.setTxtShinsaYM(RString.EMPTY);
+                dgShokujiHiyoGokeiFromH1504_Row row = new dgShokujiHiyoGokeiFromH1504_Row();
+                row.setTxtShokujiTeikyohiGokei(RString.EMPTY);
+                row.setTxtHyojunFutangakuTsuki(RString.EMPTY);
+                row.setTxtHyojunFutangakuHi(RString.EMPTY);
+                row.setTxtKohi(RString.EMPTY);
+                row.setTxtShokujiTeikyoNobeNissu(RString.EMPTY);
+                row.setTxtSeikyugakuZengo(RString.EMPTY);
+                row.setTxtKohiSeikyu(RString.EMPTY);
+                row.setTxtShokujiTeikyohiSeikyugaku(RString.EMPTY);
+                row.setTxtSaishinsaKaisu(RString.EMPTY);
+                row.setTxtKagoKaisu(RString.EMPTY);
+                row.setTxtShinsaYM(RString.EMPTY);
                 dgShokujiHiyoGokeiFromH1504_Row row_前_公費１ = new dgShokujiHiyoGokeiFromH1504_Row();
-                row_前_公費１.setTxtShokujiTeikyohiGokei(get金額(給付実績食事費用1504.get基本_提供金額()));
-                row_前_公費１.setTxtHyojunFutangakuTsuki(get金額(給付実績食事費用1504.get標準負担額_月額()));
-                row_前_公費１.setTxtHyojunFutangakuHi(get金額(給付実績食事費用1504.get標準負担額_日額()));
+                row_前_公費１.setTxtShokujiTeikyohiGokei(RString.EMPTY);
+                row_前_公費１.setTxtHyojunFutangakuTsuki(RString.EMPTY);
+                row_前_公費１.setTxtHyojunFutangakuHi(RString.EMPTY);
                 row_前_公費１.setTxtKohi(公費１);
-                row_前_公費１.setTxtShokujiTeikyoNobeNissu(new RString(給付実績食事費用1504.get公費１対象食事提供延べ日数()));
+                row_前_公費１.setTxtShokujiTeikyoNobeNissu(RString.EMPTY);
                 row_前_公費１.setTxtSeikyugakuZengo(前);
-                row_前_公費１.setTxtKohiSeikyu(get金額(給付実績食事費用1504.get公費１食事提供費請求額()));
-                row_前_公費１.setTxtShokujiTeikyohiSeikyugaku(get金額(給付実績食事費用1504.get食事提供費請求額()));
-                row_前_公費１.setTxtSaishinsaKaisu(new RString(給付実績食事費用1504.get再審査回数()));
-                row_前_公費１.setTxtKagoKaisu(new RString(給付実績食事費用1504.get過誤回数()));
-                row_前_公費１.setTxtShinsaYM(to日期(給付実績食事費用1504.get審査年月()));
+                row_前_公費１.setTxtKohiSeikyu(RString.EMPTY);
+                row_前_公費１.setTxtShokujiTeikyohiSeikyugaku(RString.EMPTY);
+                row_前_公費１.setTxtSaishinsaKaisu(RString.EMPTY);
+                row_前_公費１.setTxtKagoKaisu(RString.EMPTY);
+                row_前_公費１.setTxtShinsaYM(RString.EMPTY);
                 dgShokujiHiyoGokeiFromH1504_Row row_後_公費１ = new dgShokujiHiyoGokeiFromH1504_Row();
-                row_後_公費１.setTxtShokujiTeikyohiGokei(get金額(給付実績食事費用1504.get基本_提供金額()));
-                row_後_公費１.setTxtHyojunFutangakuTsuki(get金額(給付実績食事費用1504.get標準負担額_月額()));
-                row_後_公費１.setTxtHyojunFutangakuHi(get金額(給付実績食事費用1504.get標準負担額_日額()));
+                row_後_公費１.setTxtShokujiTeikyohiGokei(RString.EMPTY);
+                row_後_公費１.setTxtHyojunFutangakuTsuki(RString.EMPTY);
+                row_後_公費１.setTxtHyojunFutangakuHi(RString.EMPTY);
                 row_後_公費１.setTxtKohi(公費１);
-                row_後_公費１.setTxtShokujiTeikyoNobeNissu(new RString(給付実績食事費用1504.get公費１対象食事提供延べ日数()));
+                row_後_公費１.setTxtShokujiTeikyoNobeNissu(RString.EMPTY);
                 row_後_公費１.setTxtSeikyugakuZengo(後);
-                row_後_公費１.setTxtKohiSeikyu(get金額(給付実績食事費用1504.get公費１食事提供費請求額()));
-                row_後_公費１.setTxtShokujiTeikyohiSeikyugaku(get金額(給付実績食事費用1504.get後_食事提供費請求額()));
-                row_後_公費１.setTxtSaishinsaKaisu(new RString(給付実績食事費用1504.get再審査回数()));
-                row_後_公費１.setTxtKagoKaisu(new RString(給付実績食事費用1504.get過誤回数()));
-                row_後_公費１.setTxtShinsaYM(to日期(給付実績食事費用1504.get審査年月()));
+                row_後_公費１.setTxtKohiSeikyu(RString.EMPTY);
+                row_後_公費１.setTxtShokujiTeikyohiSeikyugaku(RString.EMPTY);
+                row_後_公費１.setTxtSaishinsaKaisu(RString.EMPTY);
+                row_後_公費１.setTxtKagoKaisu(RString.EMPTY);
+                row_後_公費１.setTxtShinsaYM(RString.EMPTY);
+                dgShokujiHiyoGokeiFromH1504_Row row_公費１ = new dgShokujiHiyoGokeiFromH1504_Row();
+                row_公費１.setTxtShokujiTeikyohiGokei(RString.EMPTY);
+                row_公費１.setTxtHyojunFutangakuTsuki(RString.EMPTY);
+                row_公費１.setTxtHyojunFutangakuHi(RString.EMPTY);
+                row_公費１.setTxtKohi(公費１);
+                row_公費１.setTxtShokujiTeikyoNobeNissu(new RString(給付実績食事費用1504.get公費１対象食事提供延べ日数()));
+                row_公費１.setTxtSeikyugakuZengo(RString.EMPTY);
+                row_公費１.setTxtKohiSeikyu(new RString(給付実績食事費用1504.get公費１食事提供費請求額()));
+                row_公費１.setTxtShokujiTeikyohiSeikyugaku(RString.EMPTY);
+                row_公費１.setTxtSaishinsaKaisu(RString.EMPTY);
+                row_公費１.setTxtKagoKaisu(RString.EMPTY);
+                row_公費１.setTxtShinsaYM(RString.EMPTY);
                 dataSources.add(row_前);
                 dataSources.add(row_後);
+                dataSources.add(row);
                 dataSources.add(row_前_公費１);
                 dataSources.add(row_後_公費１);
+                dataSources.add(row_公費１);
             }
         }
         div.getDgShokujiHiyoGokeiFromH1504().setDataSource(dataSources);
@@ -144,57 +170,83 @@ public class ShokujiHiyoShokaiHandler {
                     && div.getCcdKyufuJissekiHeader().get事業者番号().toString()
                     .equals(給付実績食事費用1504.get事業所番号().toString())) {
                 dgShokujiHiyoGokeiFromH1504_Row row_前_公費２ = new dgShokujiHiyoGokeiFromH1504_Row();
-                row_前_公費２.setTxtShokujiTeikyohiGokei(get金額(給付実績食事費用1504.get基本_提供金額()));
-                row_前_公費２.setTxtHyojunFutangakuTsuki(get金額(給付実績食事費用1504.get標準負担額_月額()));
-                row_前_公費２.setTxtHyojunFutangakuHi(get金額(給付実績食事費用1504.get標準負担額_日額()));
+                row_前_公費２.setTxtShokujiTeikyohiGokei(RString.EMPTY);
+                row_前_公費２.setTxtHyojunFutangakuTsuki(RString.EMPTY);
+                row_前_公費２.setTxtHyojunFutangakuHi(RString.EMPTY);
                 row_前_公費２.setTxtKohi(公費２);
-                row_前_公費２.setTxtShokujiTeikyoNobeNissu(new RString(給付実績食事費用1504.get公費２対象食事提供延べ日数()));
+                row_前_公費２.setTxtShokujiTeikyoNobeNissu(RString.EMPTY);
                 row_前_公費２.setTxtSeikyugakuZengo(前);
-                row_前_公費２.setTxtKohiSeikyu(get金額(給付実績食事費用1504.get公費２食事提供費請求額()));
-                row_前_公費２.setTxtShokujiTeikyohiSeikyugaku(get金額(給付実績食事費用1504.get食事提供費請求額()));
-                row_前_公費２.setTxtSaishinsaKaisu(new RString(給付実績食事費用1504.get再審査回数()));
-                row_前_公費２.setTxtKagoKaisu(new RString(給付実績食事費用1504.get過誤回数()));
-                row_前_公費２.setTxtShinsaYM(to日期(給付実績食事費用1504.get審査年月()));
+                row_前_公費２.setTxtKohiSeikyu(RString.EMPTY);
+                row_前_公費２.setTxtShokujiTeikyohiSeikyugaku(RString.EMPTY);
+                row_前_公費２.setTxtSaishinsaKaisu(RString.EMPTY);
+                row_前_公費２.setTxtKagoKaisu(RString.EMPTY);
+                row_前_公費２.setTxtShinsaYM(RString.EMPTY);
                 dgShokujiHiyoGokeiFromH1504_Row row_後_公費２ = new dgShokujiHiyoGokeiFromH1504_Row();
-                row_後_公費２.setTxtShokujiTeikyohiGokei(get金額(給付実績食事費用1504.get基本_提供金額()));
-                row_後_公費２.setTxtHyojunFutangakuTsuki(get金額(給付実績食事費用1504.get標準負担額_月額()));
-                row_後_公費２.setTxtHyojunFutangakuHi(get金額(給付実績食事費用1504.get標準負担額_日額()));
+                row_後_公費２.setTxtShokujiTeikyohiGokei(RString.EMPTY);
+                row_後_公費２.setTxtHyojunFutangakuTsuki(RString.EMPTY);
+                row_後_公費２.setTxtHyojunFutangakuHi(RString.EMPTY);
                 row_後_公費２.setTxtKohi(公費２);
-                row_後_公費２.setTxtShokujiTeikyoNobeNissu(new RString(給付実績食事費用1504.get公費２対象食事提供延べ日数()));
+                row_後_公費２.setTxtShokujiTeikyoNobeNissu(RString.EMPTY);
                 row_後_公費２.setTxtSeikyugakuZengo(後);
-                row_後_公費２.setTxtKohiSeikyu(get金額(給付実績食事費用1504.get公費２食事提供費請求額()));
-                row_後_公費２.setTxtShokujiTeikyohiSeikyugaku(get金額(給付実績食事費用1504.get後_食事提供費請求額()));
-                row_後_公費２.setTxtSaishinsaKaisu(new RString(給付実績食事費用1504.get再審査回数()));
-                row_後_公費２.setTxtKagoKaisu(new RString(給付実績食事費用1504.get過誤回数()));
-                row_後_公費２.setTxtShinsaYM(to日期(給付実績食事費用1504.get審査年月()));
+                row_後_公費２.setTxtKohiSeikyu(RString.EMPTY);
+                row_後_公費２.setTxtShokujiTeikyohiSeikyugaku(RString.EMPTY);
+                row_後_公費２.setTxtSaishinsaKaisu(RString.EMPTY);
+                row_後_公費２.setTxtKagoKaisu(RString.EMPTY);
+                row_後_公費２.setTxtShinsaYM(RString.EMPTY);
+                dgShokujiHiyoGokeiFromH1504_Row row_公費２ = new dgShokujiHiyoGokeiFromH1504_Row();
+                row_公費２.setTxtShokujiTeikyohiGokei(RString.EMPTY);
+                row_公費２.setTxtHyojunFutangakuTsuki(RString.EMPTY);
+                row_公費２.setTxtHyojunFutangakuHi(RString.EMPTY);
+                row_公費２.setTxtKohi(公費２);
+                row_公費２.setTxtShokujiTeikyoNobeNissu(new RString(給付実績食事費用1504.get公費２対象食事提供延べ日数()));
+                row_公費２.setTxtSeikyugakuZengo(RString.EMPTY);
+                row_公費２.setTxtKohiSeikyu(get金額(給付実績食事費用1504.get公費２食事提供費請求額()));
+                row_公費２.setTxtShokujiTeikyohiSeikyugaku(RString.EMPTY);
+                row_公費２.setTxtSaishinsaKaisu(RString.EMPTY);
+                row_公費２.setTxtKagoKaisu(RString.EMPTY);
+                row_公費２.setTxtShinsaYM(RString.EMPTY);
                 dgShokujiHiyoGokeiFromH1504_Row row_前_公費３ = new dgShokujiHiyoGokeiFromH1504_Row();
-                row_前_公費３.setTxtShokujiTeikyohiGokei(get金額(給付実績食事費用1504.get基本_提供金額()));
-                row_前_公費３.setTxtHyojunFutangakuTsuki(get金額(給付実績食事費用1504.get標準負担額_月額()));
-                row_前_公費３.setTxtHyojunFutangakuHi(get金額(給付実績食事費用1504.get標準負担額_日額()));
+                row_前_公費３.setTxtShokujiTeikyohiGokei(RString.EMPTY);
+                row_前_公費３.setTxtHyojunFutangakuTsuki(RString.EMPTY);
+                row_前_公費３.setTxtHyojunFutangakuHi(RString.EMPTY);
                 row_前_公費３.setTxtKohi(公費３);
-                row_前_公費３.setTxtShokujiTeikyoNobeNissu(new RString(給付実績食事費用1504.get公費３対象食事提供延べ日数()));
+                row_前_公費３.setTxtShokujiTeikyoNobeNissu(RString.EMPTY);
                 row_前_公費３.setTxtSeikyugakuZengo(前);
-                row_前_公費３.setTxtKohiSeikyu(get金額(給付実績食事費用1504.get公費３食事提供費請求額()));
-                row_前_公費３.setTxtShokujiTeikyohiSeikyugaku(get金額(給付実績食事費用1504.get食事提供費請求額()));
-                row_前_公費３.setTxtSaishinsaKaisu(new RString(給付実績食事費用1504.get再審査回数()));
-                row_前_公費３.setTxtKagoKaisu(new RString(給付実績食事費用1504.get過誤回数()));
-                row_前_公費３.setTxtShinsaYM(to日期(給付実績食事費用1504.get審査年月()));
+                row_前_公費３.setTxtKohiSeikyu(RString.EMPTY);
+                row_前_公費３.setTxtShokujiTeikyohiSeikyugaku(RString.EMPTY);
+                row_前_公費３.setTxtSaishinsaKaisu(RString.EMPTY);
+                row_前_公費３.setTxtKagoKaisu(RString.EMPTY);
+                row_前_公費３.setTxtShinsaYM(RString.EMPTY);
                 dgShokujiHiyoGokeiFromH1504_Row row_後_公費３ = new dgShokujiHiyoGokeiFromH1504_Row();
-                row_後_公費３.setTxtShokujiTeikyohiGokei(get金額(給付実績食事費用1504.get基本_提供金額()));
-                row_後_公費３.setTxtHyojunFutangakuTsuki(get金額(給付実績食事費用1504.get標準負担額_月額()));
-                row_後_公費３.setTxtHyojunFutangakuHi(get金額(給付実績食事費用1504.get標準負担額_日額()));
+                row_後_公費３.setTxtShokujiTeikyohiGokei(RString.EMPTY);
+                row_後_公費３.setTxtHyojunFutangakuTsuki(RString.EMPTY);
+                row_後_公費３.setTxtHyojunFutangakuHi(RString.EMPTY);
                 row_後_公費３.setTxtKohi(公費３);
-                row_後_公費３.setTxtShokujiTeikyoNobeNissu(new RString(給付実績食事費用1504.get公費３対象食事提供延べ日数()));
+                row_後_公費３.setTxtShokujiTeikyoNobeNissu(RString.EMPTY);
                 row_後_公費３.setTxtSeikyugakuZengo(後);
-                row_後_公費３.setTxtKohiSeikyu(get金額(給付実績食事費用1504.get公費３食事提供費請求額()));
-                row_後_公費３.setTxtShokujiTeikyohiSeikyugaku(get金額(給付実績食事費用1504.get後_食事提供費請求額()));
-                row_後_公費３.setTxtSaishinsaKaisu(new RString(給付実績食事費用1504.get再審査回数()));
-                row_後_公費３.setTxtKagoKaisu(new RString(給付実績食事費用1504.get過誤回数()));
-                row_後_公費３.setTxtShinsaYM(to日期(給付実績食事費用1504.get審査年月()));
+                row_後_公費３.setTxtKohiSeikyu(RString.EMPTY);
+                row_後_公費３.setTxtShokujiTeikyohiSeikyugaku(RString.EMPTY);
+                row_後_公費３.setTxtSaishinsaKaisu(RString.EMPTY);
+                row_後_公費３.setTxtKagoKaisu(RString.EMPTY);
+                row_後_公費３.setTxtShinsaYM(RString.EMPTY);
+                dgShokujiHiyoGokeiFromH1504_Row row_公費３ = new dgShokujiHiyoGokeiFromH1504_Row();
+                row_公費３.setTxtShokujiTeikyohiGokei(RString.EMPTY);
+                row_公費３.setTxtHyojunFutangakuTsuki(RString.EMPTY);
+                row_公費３.setTxtHyojunFutangakuHi(RString.EMPTY);
+                row_公費３.setTxtKohi(公費３);
+                row_公費３.setTxtShokujiTeikyoNobeNissu(new RString(給付実績食事費用1504.get公費３対象食事提供延べ日数()));
+                row_公費３.setTxtSeikyugakuZengo(RString.EMPTY);
+                row_公費３.setTxtKohiSeikyu(get金額(給付実績食事費用1504.get公費３食事提供費請求額()));
+                row_公費３.setTxtShokujiTeikyohiSeikyugaku(RString.EMPTY);
+                row_公費３.setTxtSaishinsaKaisu(RString.EMPTY);
+                row_公費３.setTxtKagoKaisu(RString.EMPTY);
+                row_公費３.setTxtShinsaYM(RString.EMPTY);
                 dataSources.add(row_前_公費２);
                 dataSources.add(row_後_公費２);
+                dataSources.add(row_公費２);
                 dataSources.add(row_前_公費３);
                 dataSources.add(row_後_公費３);
+                dataSources.add(row_公費３);
             }
         }
         div.getDgShokujiHiyoGokeiFromH1504().setDataSource(dataSources);
@@ -244,7 +296,7 @@ public class ShokujiHiyoShokaiHandler {
     }
 
     /**
-     * 給付実績食事費用15031
+     * 給付実績食事費用1503等
      *
      * @param 給付実績食事費用1503等 List<KyufujissekiShokujiHiyo>
      */
@@ -256,11 +308,13 @@ public class ShokujiHiyoShokaiHandler {
                     && div.getCcdKyufuJissekiHeader().get事業者番号().toString()
                     .equals(給付実績食事費用1503.get事業所番号().toString())) {
                 dgShokujiHiyoToH1503_Row row = new dgShokujiHiyoToH1503_Row();
-                row.setTxtKihon(RString.EMPTY);
                 row.setTxtZengo(RString.EMPTY);
-                row.setTxtTeikyoNissu(RString.EMPTY);
-                row.setTxtTeikyoTanka(RString.EMPTY);
-                row.setTxtTeikyoKingaku(RString.EMPTY);
+                row.setTxtTeikyoNissu(new RString(給付実績食事費用1503.get基本_提供日数()));
+                row.setTxtTokubetsuTeikyoNissu(new RString(給付実績食事費用1503.get特別_提供日数()));
+                row.setTxtTeikyoTanka(new RString(給付実績食事費用1503.get基本_提供単価()));
+                row.setTxtTokubetsuTeikyoTanka(new RString(給付実績食事費用1503.get特別_提供単価()));
+                row.setTxtTeikyoKingaku(new RString(給付実績食事費用1503.get基本_提供金額()));
+                row.setTxtTokubetsuTeikyoKingaku(new RString(給付実績食事費用1503.get特別_提供金額()));
                 row.setTxtShokujiTeikyohiGokei(get金額(給付実績食事費用1503.get食事提供費合計()));
                 row.setTxtHyojunFutangakuTsuki(get金額(給付実績食事費用1503.get標準負担額_月額()));
                 row.setTxtHyojunFutangakuHi(get金額(給付実績食事費用1503.get標準負担額_日額()));
@@ -268,61 +322,63 @@ public class ShokujiHiyoShokaiHandler {
                 row.setTxtShokujiTeikyoNobeNissu(new RString(給付実績食事費用1503.get食事提供延べ日数()));
                 row.setTxtSeikyugakuZengo(new RString(給付実績食事費用1503.get食事提供費請求額()));
                 row.setTxtKohiSeikyu(RString.EMPTY);
-                row.setTxtShokujiTeikyohiSeikyugaku(new RString(給付実績食事費用1503.get食事提供費請求額()));
                 row.setTxtSaishinsaKaisu(new RString(給付実績食事費用1503.get再審査回数()));
                 row.setTxtKagoKaisu(new RString(給付実績食事費用1503.get過誤回数()));
                 row.setTxtShinsaYM(to日期(給付実績食事費用1503.get審査年月()));
                 dgShokujiHiyoToH1503_Row row_公費１ = new dgShokujiHiyoToH1503_Row();
-                row_公費１.setTxtKihon(RString.EMPTY);
                 row_公費１.setTxtZengo(RString.EMPTY);
                 row_公費１.setTxtTeikyoNissu(RString.EMPTY);
+                row_公費１.setTxtTokubetsuTeikyoNissu(RString.EMPTY);
                 row_公費１.setTxtTeikyoTanka(RString.EMPTY);
+                row_公費１.setTxtTokubetsuTeikyoTanka(RString.EMPTY);
                 row_公費１.setTxtTeikyoKingaku(RString.EMPTY);
-                row_公費１.setTxtShokujiTeikyohiGokei(get金額(給付実績食事費用1503.get食事提供費合計()));
-                row_公費１.setTxtHyojunFutangakuTsuki(get金額(給付実績食事費用1503.get標準負担額_月額()));
-                row_公費１.setTxtHyojunFutangakuHi(get金額(給付実績食事費用1503.get標準負担額_日額()));
+                row_公費１.setTxtTokubetsuTeikyoKingaku(RString.EMPTY);
+                row_公費１.setTxtShokujiTeikyohiGokei(RString.EMPTY);
+                row_公費１.setTxtHyojunFutangakuTsuki(RString.EMPTY);
+                row_公費１.setTxtHyojunFutangakuHi(RString.EMPTY);
                 row_公費１.setTxtKohi(公費１);
                 row_公費１.setTxtShokujiTeikyoNobeNissu(new RString(給付実績食事費用1503.get公費１対象食事提供延べ日数()));
-                row_公費１.setTxtSeikyugakuZengo(new RString(給付実績食事費用1503.get食事提供費請求額()));
+                row_公費１.setTxtSeikyugakuZengo(RString.EMPTY);
                 row_公費１.setTxtKohiSeikyu(new RString(給付実績食事費用1503.get公費１食事提供費請求額()));
-                row_公費１.setTxtShokujiTeikyohiSeikyugaku(new RString(給付実績食事費用1503.get公費１食事提供費請求額()));
-                row_公費１.setTxtSaishinsaKaisu(new RString(給付実績食事費用1503.get再審査回数()));
-                row_公費１.setTxtKagoKaisu(new RString(給付実績食事費用1503.get過誤回数()));
-                row_公費１.setTxtShinsaYM(to日期(給付実績食事費用1503.get審査年月()));
+                row_公費１.setTxtSaishinsaKaisu(RString.EMPTY);
+                row_公費１.setTxtKagoKaisu(RString.EMPTY);
+                row_公費１.setTxtShinsaYM(RString.EMPTY);
                 dgShokujiHiyoToH1503_Row row_公費２ = new dgShokujiHiyoToH1503_Row();
-                row_公費２.setTxtKihon(RString.EMPTY);
                 row_公費２.setTxtZengo(RString.EMPTY);
                 row_公費２.setTxtTeikyoNissu(RString.EMPTY);
+                row_公費２.setTxtTokubetsuTeikyoNissu(RString.EMPTY);
                 row_公費２.setTxtTeikyoTanka(RString.EMPTY);
+                row_公費２.setTxtTokubetsuTeikyoTanka(RString.EMPTY);
                 row_公費２.setTxtTeikyoKingaku(RString.EMPTY);
-                row_公費２.setTxtShokujiTeikyohiGokei(get金額(給付実績食事費用1503.get食事提供費合計()));
-                row_公費２.setTxtHyojunFutangakuTsuki(get金額(給付実績食事費用1503.get標準負担額_月額()));
-                row_公費２.setTxtHyojunFutangakuHi(get金額(給付実績食事費用1503.get標準負担額_日額()));
+                row_公費２.setTxtTokubetsuTeikyoKingaku(RString.EMPTY);
+                row_公費２.setTxtShokujiTeikyohiGokei(RString.EMPTY);
+                row_公費２.setTxtHyojunFutangakuTsuki(RString.EMPTY);
+                row_公費２.setTxtHyojunFutangakuHi(RString.EMPTY);
                 row_公費２.setTxtKohi(公費２);
                 row_公費２.setTxtShokujiTeikyoNobeNissu(new RString(給付実績食事費用1503.get公費２対象食事提供延べ日数()));
-                row_公費２.setTxtSeikyugakuZengo(new RString(給付実績食事費用1503.get食事提供費請求額()));
+                row_公費２.setTxtSeikyugakuZengo(RString.EMPTY);
                 row_公費２.setTxtKohiSeikyu(new RString(給付実績食事費用1503.get公費２食事提供費請求額()));
-                row_公費２.setTxtShokujiTeikyohiSeikyugaku(new RString(給付実績食事費用1503.get公費２食事提供費請求額()));
-                row_公費２.setTxtSaishinsaKaisu(new RString(給付実績食事費用1503.get再審査回数()));
-                row_公費２.setTxtKagoKaisu(new RString(給付実績食事費用1503.get過誤回数()));
-                row_公費２.setTxtShinsaYM(to日期(給付実績食事費用1503.get審査年月()));
+                row_公費２.setTxtSaishinsaKaisu(RString.EMPTY);
+                row_公費２.setTxtKagoKaisu(RString.EMPTY);
+                row_公費２.setTxtShinsaYM(RString.EMPTY);
                 dgShokujiHiyoToH1503_Row row_公費３ = new dgShokujiHiyoToH1503_Row();
-                row_公費３.setTxtKihon(RString.EMPTY);
                 row_公費３.setTxtZengo(RString.EMPTY);
                 row_公費３.setTxtTeikyoNissu(RString.EMPTY);
+                row_公費３.setTxtTokubetsuTeikyoNissu(RString.EMPTY);
                 row_公費３.setTxtTeikyoTanka(RString.EMPTY);
+                row_公費３.setTxtTokubetsuTeikyoTanka(RString.EMPTY);
                 row_公費３.setTxtTeikyoKingaku(RString.EMPTY);
-                row_公費３.setTxtShokujiTeikyohiGokei(get金額(給付実績食事費用1503.get食事提供費合計()));
-                row_公費３.setTxtHyojunFutangakuTsuki(get金額(給付実績食事費用1503.get標準負担額_月額()));
-                row_公費３.setTxtHyojunFutangakuHi(get金額(給付実績食事費用1503.get標準負担額_日額()));
+                row_公費３.setTxtTokubetsuTeikyoKingaku(RString.EMPTY);
+                row_公費３.setTxtShokujiTeikyohiGokei(RString.EMPTY);
+                row_公費３.setTxtHyojunFutangakuTsuki(RString.EMPTY);
+                row_公費３.setTxtHyojunFutangakuHi(RString.EMPTY);
                 row_公費３.setTxtKohi(公費３);
                 row_公費３.setTxtShokujiTeikyoNobeNissu(new RString(給付実績食事費用1503.get公費３対象食事提供延べ日数()));
-                row_公費３.setTxtSeikyugakuZengo(new RString(給付実績食事費用1503.get食事提供費請求額()));
+                row_公費３.setTxtSeikyugakuZengo(RString.EMPTY);
                 row_公費３.setTxtKohiSeikyu(new RString(給付実績食事費用1503.get公費３食事提供費請求額()));
-                row_公費３.setTxtShokujiTeikyohiSeikyugaku(new RString(給付実績食事費用1503.get公費３食事提供費請求額()));
-                row_公費３.setTxtSaishinsaKaisu(new RString(給付実績食事費用1503.get再審査回数()));
-                row_公費３.setTxtKagoKaisu(new RString(給付実績食事費用1503.get過誤回数()));
-                row_公費３.setTxtShinsaYM(to日期(給付実績食事費用1503.get審査年月()));
+                row_公費３.setTxtSaishinsaKaisu(RString.EMPTY);
+                row_公費３.setTxtKagoKaisu(RString.EMPTY);
+                row_公費３.setTxtShinsaYM(RString.EMPTY);
                 dataSources.add(row);
                 dataSources.add(row_公費１);
                 dataSources.add(row_公費２);
@@ -332,7 +388,7 @@ public class ShokujiHiyoShokaiHandler {
         div.getDgShokujiHiyoToH1503().setDataSource(dataSources);
         this.set給付実績食事費用15032(給付実績食事費用1503等);
     }
-    
+
     /**
      * 給付実績食事費用15032
      *
@@ -346,437 +402,78 @@ public class ShokujiHiyoShokaiHandler {
                     && div.getCcdKyufuJissekiHeader().get事業者番号().toString()
                     .equals(給付実績食事費用1503.get事業所番号().toString())) {
                 dgShokujiHiyoToH1503_Row row_後 = new dgShokujiHiyoToH1503_Row();
-                row_後.setTxtKihon(RString.EMPTY);
                 row_後.setTxtZengo(後);
                 row_後.setTxtTeikyoNissu(RString.EMPTY);
-                row_後.setTxtTeikyoTanka(RString.EMPTY);
+                row_後.setTxtTokubetsuTeikyoNissu(RString.EMPTY);
+                row_後.setTxtTeikyoTanka(new RString(給付実績食事費用1503.get後_基本食提供費用提供単価()));
+                row_後.setTxtTokubetsuTeikyoTanka(new RString(給付実績食事費用1503.get後_特別食提供費用提供単価()));
                 row_後.setTxtTeikyoKingaku(RString.EMPTY);
-                row_後.setTxtShokujiTeikyohiGokei(get金額(給付実績食事費用1503.get食事提供費合計()));
-                row_後.setTxtHyojunFutangakuTsuki(get金額(給付実績食事費用1503.get標準負担額_月額()));
-                row_後.setTxtHyojunFutangakuHi(get金額(給付実績食事費用1503.get標準負担額_日額()));
+                row_後.setTxtTokubetsuTeikyoKingaku(RString.EMPTY);
+                row_後.setTxtShokujiTeikyohiGokei(RString.EMPTY);
+                row_後.setTxtHyojunFutangakuTsuki(RString.EMPTY);
+                row_後.setTxtHyojunFutangakuHi(RString.EMPTY);
                 row_後.setTxtKohi(RString.EMPTY);
                 row_後.setTxtShokujiTeikyoNobeNissu(RString.EMPTY);
                 row_後.setTxtSeikyugakuZengo(new RString(給付実績食事費用1503.get後_食事提供費請求額()));
                 row_後.setTxtKohiSeikyu(RString.EMPTY);
-                row_後.setTxtShokujiTeikyohiSeikyugaku(RString.EMPTY);
-                row_後.setTxtSaishinsaKaisu(new RString(給付実績食事費用1503.get再審査回数()));
-                row_後.setTxtKagoKaisu(new RString(給付実績食事費用1503.get過誤回数()));
-                row_後.setTxtShinsaYM(to日期(給付実績食事費用1503.get審査年月()));
+                row_後.setTxtSaishinsaKaisu(RString.EMPTY);
+                row_後.setTxtKagoKaisu(RString.EMPTY);
+                row_後.setTxtShinsaYM(RString.EMPTY);
                 dgShokujiHiyoToH1503_Row row_後_公費１ = new dgShokujiHiyoToH1503_Row();
-                row_後_公費１.setTxtKihon(RString.EMPTY);
                 row_後_公費１.setTxtZengo(後);
                 row_後_公費１.setTxtTeikyoNissu(RString.EMPTY);
+                row_後_公費１.setTxtTokubetsuTeikyoNissu(RString.EMPTY);
                 row_後_公費１.setTxtTeikyoTanka(RString.EMPTY);
+                row_後_公費１.setTxtTokubetsuTeikyoTanka(RString.EMPTY);
                 row_後_公費１.setTxtTeikyoKingaku(RString.EMPTY);
-                row_後_公費１.setTxtShokujiTeikyohiGokei(get金額(給付実績食事費用1503.get食事提供費合計()));
-                row_後_公費１.setTxtHyojunFutangakuTsuki(get金額(給付実績食事費用1503.get標準負担額_月額()));
-                row_後_公費１.setTxtHyojunFutangakuHi(get金額(給付実績食事費用1503.get標準負担額_日額()));
+                row_後_公費１.setTxtTokubetsuTeikyoKingaku(RString.EMPTY);
+                row_後_公費１.setTxtShokujiTeikyohiGokei(RString.EMPTY);
+                row_後_公費１.setTxtHyojunFutangakuTsuki(RString.EMPTY);
+                row_後_公費１.setTxtHyojunFutangakuHi(RString.EMPTY);
                 row_後_公費１.setTxtKohi(公費１);
                 row_後_公費１.setTxtShokujiTeikyoNobeNissu(RString.EMPTY);
-                row_後_公費１.setTxtSeikyugakuZengo(new RString(給付実績食事費用1503.get後_食事提供費請求額()));
+                row_後_公費１.setTxtSeikyugakuZengo(RString.EMPTY);
                 row_後_公費１.setTxtKohiSeikyu(RString.EMPTY);
-                row_後_公費１.setTxtShokujiTeikyohiSeikyugaku(new RString(給付実績食事費用1503.get後_食事提供費請求額()));
-                row_後_公費１.setTxtSaishinsaKaisu(new RString(給付実績食事費用1503.get再審査回数()));
-                row_後_公費１.setTxtKagoKaisu(new RString(給付実績食事費用1503.get過誤回数()));
-                row_後_公費１.setTxtShinsaYM(to日期(給付実績食事費用1503.get審査年月()));
+                row_後_公費１.setTxtSaishinsaKaisu(RString.EMPTY);
+                row_後_公費１.setTxtKagoKaisu(RString.EMPTY);
+                row_後_公費１.setTxtShinsaYM(RString.EMPTY);
                 dgShokujiHiyoToH1503_Row row_後_公費２ = new dgShokujiHiyoToH1503_Row();
-                row_後_公費２.setTxtKihon(RString.EMPTY);
                 row_後_公費２.setTxtZengo(後);
                 row_後_公費２.setTxtTeikyoNissu(RString.EMPTY);
+                row_後_公費２.setTxtTokubetsuTeikyoNissu(RString.EMPTY);
                 row_後_公費２.setTxtTeikyoTanka(RString.EMPTY);
+                row_後_公費２.setTxtTokubetsuTeikyoTanka(RString.EMPTY);
                 row_後_公費２.setTxtTeikyoKingaku(RString.EMPTY);
-                row_後_公費２.setTxtShokujiTeikyohiGokei(get金額(給付実績食事費用1503.get食事提供費合計()));
-                row_後_公費２.setTxtHyojunFutangakuTsuki(get金額(給付実績食事費用1503.get標準負担額_月額()));
-                row_後_公費２.setTxtHyojunFutangakuHi(get金額(給付実績食事費用1503.get標準負担額_日額()));
+                row_後_公費２.setTxtTokubetsuTeikyoKingaku(RString.EMPTY);
+                row_後_公費２.setTxtShokujiTeikyohiGokei(RString.EMPTY);
+                row_後_公費２.setTxtHyojunFutangakuTsuki(RString.EMPTY);
+                row_後_公費２.setTxtHyojunFutangakuHi(RString.EMPTY);
                 row_後_公費２.setTxtKohi(公費２);
                 row_後_公費２.setTxtShokujiTeikyoNobeNissu(RString.EMPTY);
-                row_後_公費２.setTxtSeikyugakuZengo(new RString(給付実績食事費用1503.get後_食事提供費請求額()));
+                row_後_公費２.setTxtSeikyugakuZengo(RString.EMPTY);
                 row_後_公費２.setTxtKohiSeikyu(RString.EMPTY);
-                row_後_公費２.setTxtShokujiTeikyohiSeikyugaku(RString.EMPTY);
-                row_後_公費２.setTxtSaishinsaKaisu(new RString(給付実績食事費用1503.get再審査回数()));
-                row_後_公費２.setTxtKagoKaisu(new RString(給付実績食事費用1503.get過誤回数()));
-                row_後_公費２.setTxtShinsaYM(to日期(給付実績食事費用1503.get審査年月()));
+                row_後_公費２.setTxtSaishinsaKaisu(RString.EMPTY);
+                row_後_公費２.setTxtKagoKaisu(RString.EMPTY);
+                row_後_公費２.setTxtShinsaYM(RString.EMPTY);
                 dgShokujiHiyoToH1503_Row row_後_公費３ = new dgShokujiHiyoToH1503_Row();
-                row_後_公費３.setTxtKihon(RString.EMPTY);
                 row_後_公費３.setTxtZengo(後);
                 row_後_公費３.setTxtTeikyoNissu(RString.EMPTY);
                 row_後_公費３.setTxtTeikyoTanka(RString.EMPTY);
                 row_後_公費３.setTxtTeikyoKingaku(RString.EMPTY);
-                row_後_公費３.setTxtShokujiTeikyohiGokei(get金額(給付実績食事費用1503.get食事提供費合計()));
-                row_後_公費３.setTxtHyojunFutangakuTsuki(get金額(給付実績食事費用1503.get標準負担額_月額()));
-                row_後_公費３.setTxtHyojunFutangakuHi(get金額(給付実績食事費用1503.get標準負担額_日額()));
+                row_後_公費３.setTxtShokujiTeikyohiGokei(RString.EMPTY);
+                row_後_公費３.setTxtHyojunFutangakuTsuki(RString.EMPTY);
+                row_後_公費３.setTxtHyojunFutangakuHi(RString.EMPTY);
                 row_後_公費３.setTxtKohi(公費３);
                 row_後_公費３.setTxtShokujiTeikyoNobeNissu(RString.EMPTY);
-                row_後_公費３.setTxtSeikyugakuZengo(new RString(給付実績食事費用1503.get後_食事提供費請求額()));
+                row_後_公費３.setTxtSeikyugakuZengo(RString.EMPTY);
                 row_後_公費３.setTxtKohiSeikyu(RString.EMPTY);
-                row_後_公費３.setTxtShokujiTeikyohiSeikyugaku(RString.EMPTY);
-                row_後_公費３.setTxtSaishinsaKaisu(new RString(給付実績食事費用1503.get再審査回数()));
-                row_後_公費３.setTxtKagoKaisu(new RString(給付実績食事費用1503.get過誤回数()));
-                row_後_公費３.setTxtShinsaYM(to日期(給付実績食事費用1503.get審査年月()));
+                row_後_公費３.setTxtSaishinsaKaisu(RString.EMPTY);
+                row_後_公費３.setTxtKagoKaisu(RString.EMPTY);
+                row_後_公費３.setTxtShinsaYM(RString.EMPTY);
                 dataSources.add(row_後);
                 dataSources.add(row_後_公費１);
                 dataSources.add(row_後_公費２);
                 dataSources.add(row_後_公費３);
-            }
-        }
-        div.getDgShokujiHiyoToH1503().setDataSource(dataSources);
-        this.set給付実績食事費用15033(給付実績食事費用1503等);
-    }
-
-    /**
-     * 給付実績食事費用15033
-     *
-     * @param 給付実績食事費用1503等 List<KyufujissekiShokujiHiyo>
-     */
-    public void set給付実績食事費用15033(List<KyufujissekiShokujiHiyo> 給付実績食事費用1503等) {
-        List<dgShokujiHiyoToH1503_Row> dataSources = new ArrayList<>();
-        for (KyufujissekiShokujiHiyo 給付実績食事費用1503 : 給付実績食事費用1503等) {
-            if (div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toString()
-                    .equals(給付実績食事費用1503.getサービス提供年月().toString())
-                    && div.getCcdKyufuJissekiHeader().get事業者番号().toString()
-                    .equals(給付実績食事費用1503.get事業所番号().toString())) {
-                dgShokujiHiyoToH1503_Row row_基本 = new dgShokujiHiyoToH1503_Row();
-                row_基本.setTxtKihon(基本);
-                row_基本.setTxtZengo(RString.EMPTY);
-                row_基本.setTxtTeikyoNissu(new RString(給付実績食事費用1503.get基本_提供日数()));
-                row_基本.setTxtTeikyoTanka(new RString(給付実績食事費用1503.get基本_提供単価()));
-                row_基本.setTxtTeikyoKingaku(new RString(給付実績食事費用1503.get基本_提供金額()));
-                row_基本.setTxtShokujiTeikyohiGokei(get金額(給付実績食事費用1503.get食事提供費合計()));
-                row_基本.setTxtHyojunFutangakuTsuki(get金額(給付実績食事費用1503.get標準負担額_月額()));
-                row_基本.setTxtHyojunFutangakuHi(get金額(給付実績食事費用1503.get標準負担額_日額()));
-                row_基本.setTxtKohi(RString.EMPTY);
-                row_基本.setTxtShokujiTeikyoNobeNissu(new RString(給付実績食事費用1503.get食事提供延べ日数()));
-                row_基本.setTxtSeikyugakuZengo(new RString(給付実績食事費用1503.get食事提供費請求額()));
-                row_基本.setTxtKohiSeikyu(RString.EMPTY);
-                row_基本.setTxtShokujiTeikyohiSeikyugaku(new RString(給付実績食事費用1503.get食事提供費請求額()));
-                row_基本.setTxtSaishinsaKaisu(new RString(給付実績食事費用1503.get再審査回数()));
-                row_基本.setTxtKagoKaisu(new RString(給付実績食事費用1503.get過誤回数()));
-                row_基本.setTxtShinsaYM(to日期(給付実績食事費用1503.get審査年月()));
-                dgShokujiHiyoToH1503_Row row_基本_公費１ = new dgShokujiHiyoToH1503_Row();
-                row_基本_公費１.setTxtKihon(基本);
-                row_基本_公費１.setTxtZengo(RString.EMPTY);
-                row_基本_公費１.setTxtTeikyoNissu(new RString(給付実績食事費用1503.get基本_提供日数()));
-                row_基本_公費１.setTxtTeikyoTanka(new RString(給付実績食事費用1503.get基本_提供単価()));
-                row_基本_公費１.setTxtTeikyoKingaku(new RString(給付実績食事費用1503.get基本_提供金額()));
-                row_基本_公費１.setTxtShokujiTeikyohiGokei(get金額(給付実績食事費用1503.get食事提供費合計()));
-                row_基本_公費１.setTxtHyojunFutangakuTsuki(get金額(給付実績食事費用1503.get標準負担額_月額()));
-                row_基本_公費１.setTxtHyojunFutangakuHi(get金額(給付実績食事費用1503.get標準負担額_日額()));
-                row_基本_公費１.setTxtKohi(公費１);
-                row_基本_公費１.setTxtShokujiTeikyoNobeNissu(new RString(給付実績食事費用1503.get公費１対象食事提供延べ日数()));
-                row_基本_公費１.setTxtSeikyugakuZengo(new RString(給付実績食事費用1503.get食事提供費請求額()));
-                row_基本_公費１.setTxtKohiSeikyu(new RString(給付実績食事費用1503.get公費１食事提供費請求額()));
-                row_基本_公費１.setTxtShokujiTeikyohiSeikyugaku(new RString(給付実績食事費用1503.get公費１食事提供費請求額()));
-                row_基本_公費１.setTxtSaishinsaKaisu(new RString(給付実績食事費用1503.get再審査回数()));
-                row_基本_公費１.setTxtKagoKaisu(new RString(給付実績食事費用1503.get過誤回数()));
-                row_基本_公費１.setTxtShinsaYM(to日期(給付実績食事費用1503.get審査年月()));
-                dgShokujiHiyoToH1503_Row row_基本_公費２ = new dgShokujiHiyoToH1503_Row();
-                row_基本_公費２.setTxtKihon(基本);
-                row_基本_公費２.setTxtZengo(RString.EMPTY);
-                row_基本_公費２.setTxtTeikyoNissu(new RString(給付実績食事費用1503.get基本_提供日数()));
-                row_基本_公費２.setTxtTeikyoTanka(new RString(給付実績食事費用1503.get基本_提供単価()));
-                row_基本_公費２.setTxtTeikyoKingaku(new RString(給付実績食事費用1503.get基本_提供金額()));
-                row_基本_公費２.setTxtShokujiTeikyohiGokei(get金額(給付実績食事費用1503.get食事提供費合計()));
-                row_基本_公費２.setTxtHyojunFutangakuTsuki(get金額(給付実績食事費用1503.get標準負担額_月額()));
-                row_基本_公費２.setTxtHyojunFutangakuHi(get金額(給付実績食事費用1503.get標準負担額_日額()));
-                row_基本_公費２.setTxtKohi(公費２);
-                row_基本_公費２.setTxtShokujiTeikyoNobeNissu((new RString(給付実績食事費用1503.get公費２対象食事提供延べ日数())));
-                row_基本_公費２.setTxtSeikyugakuZengo(new RString(給付実績食事費用1503.get食事提供費請求額()));
-                row_基本_公費２.setTxtKohiSeikyu(new RString(給付実績食事費用1503.get公費２食事提供費請求額()));
-                row_基本_公費２.setTxtShokujiTeikyohiSeikyugaku(new RString(給付実績食事費用1503.get公費２食事提供費請求額()));
-                row_基本_公費２.setTxtSaishinsaKaisu(new RString(給付実績食事費用1503.get再審査回数()));
-                row_基本_公費２.setTxtKagoKaisu(new RString(給付実績食事費用1503.get過誤回数()));
-                row_基本_公費２.setTxtShinsaYM(to日期(給付実績食事費用1503.get審査年月()));
-                dgShokujiHiyoToH1503_Row row_基本_公費３ = new dgShokujiHiyoToH1503_Row();
-                row_基本_公費３.setTxtKihon(基本);
-                row_基本_公費３.setTxtZengo(RString.EMPTY);
-                row_基本_公費３.setTxtTeikyoNissu(new RString(給付実績食事費用1503.get基本_提供日数()));
-                row_基本_公費３.setTxtTeikyoTanka(new RString(給付実績食事費用1503.get基本_提供単価()));
-                row_基本_公費３.setTxtTeikyoKingaku(new RString(給付実績食事費用1503.get基本_提供金額()));
-                row_基本_公費３.setTxtShokujiTeikyohiGokei(get金額(給付実績食事費用1503.get食事提供費合計()));
-                row_基本_公費３.setTxtHyojunFutangakuTsuki(get金額(給付実績食事費用1503.get標準負担額_月額()));
-                row_基本_公費３.setTxtHyojunFutangakuHi(get金額(給付実績食事費用1503.get標準負担額_日額()));
-                row_基本_公費３.setTxtKohi(公費３);
-                row_基本_公費３.setTxtShokujiTeikyoNobeNissu(new RString(給付実績食事費用1503.get公費３対象食事提供延べ日数()));
-                row_基本_公費３.setTxtSeikyugakuZengo(new RString(給付実績食事費用1503.get食事提供費請求額()));
-                row_基本_公費３.setTxtKohiSeikyu(new RString(給付実績食事費用1503.get公費３食事提供費請求額()));
-                row_基本_公費３.setTxtShokujiTeikyohiSeikyugaku(new RString(給付実績食事費用1503.get公費３食事提供費請求額()));
-                row_基本_公費３.setTxtSaishinsaKaisu(new RString(給付実績食事費用1503.get再審査回数()));
-                row_基本_公費３.setTxtKagoKaisu(new RString(給付実績食事費用1503.get過誤回数()));
-                row_基本_公費３.setTxtShinsaYM(to日期(給付実績食事費用1503.get審査年月()));
-                dataSources.add(row_基本);
-                dataSources.add(row_基本_公費１);
-                dataSources.add(row_基本_公費２);
-                dataSources.add(row_基本_公費３);
-            }
-        }
-        div.getDgShokujiHiyoToH1503().setDataSource(dataSources);
-        this.set給付実績食事費用15034(給付実績食事費用1503等);
-    }
-
-    /**
-     * 給付実績食事費用15034
-     *
-     * @param 給付実績食事費用1503等 List<KyufujissekiShokujiHiyo>
-     */
-    public void set給付実績食事費用15034(List<KyufujissekiShokujiHiyo> 給付実績食事費用1503等) {
-        List<dgShokujiHiyoToH1503_Row> dataSources = new ArrayList<>();
-        for (KyufujissekiShokujiHiyo 給付実績食事費用1503 : 給付実績食事費用1503等) {
-            if (div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toString()
-                    .equals(給付実績食事費用1503.getサービス提供年月().toString())
-                    && div.getCcdKyufuJissekiHeader().get事業者番号().toString()
-                    .equals(給付実績食事費用1503.get事業所番号().toString())) {
-                dgShokujiHiyoToH1503_Row row_基本_後 = new dgShokujiHiyoToH1503_Row();
-                row_基本_後.setTxtKihon(基本);
-                row_基本_後.setTxtZengo(後);
-                row_基本_後.setTxtTeikyoNissu(RString.EMPTY);
-                row_基本_後.setTxtTeikyoTanka(new RString(給付実績食事費用1503.get後_基本食提供費用提供単価()));
-                row_基本_後.setTxtTeikyoKingaku(RString.EMPTY);
-                row_基本_後.setTxtShokujiTeikyohiGokei(get金額(給付実績食事費用1503.get食事提供費合計()));
-                row_基本_後.setTxtHyojunFutangakuTsuki(get金額(給付実績食事費用1503.get標準負担額_月額()));
-                row_基本_後.setTxtHyojunFutangakuHi(get金額(給付実績食事費用1503.get標準負担額_日額()));
-                row_基本_後.setTxtKohi(RString.EMPTY);
-                row_基本_後.setTxtShokujiTeikyoNobeNissu(RString.EMPTY);
-                row_基本_後.setTxtSeikyugakuZengo(new RString(給付実績食事費用1503.get後_食事提供費請求額()));
-                row_基本_後.setTxtKohiSeikyu(RString.EMPTY);
-                row_基本_後.setTxtShokujiTeikyohiSeikyugaku(new RString(給付実績食事費用1503.get後_食事提供費請求額()));
-                row_基本_後.setTxtSaishinsaKaisu(new RString(給付実績食事費用1503.get再審査回数()));
-                row_基本_後.setTxtKagoKaisu(new RString(給付実績食事費用1503.get過誤回数()));
-                row_基本_後.setTxtShinsaYM(to日期(給付実績食事費用1503.get審査年月()));
-                dgShokujiHiyoToH1503_Row row_基本_後_公費１ = new dgShokujiHiyoToH1503_Row();
-                row_基本_後_公費１.setTxtKihon(基本);
-                row_基本_後_公費１.setTxtZengo(後);
-                row_基本_後_公費１.setTxtTeikyoNissu(RString.EMPTY);
-                row_基本_後_公費１.setTxtTeikyoTanka(new RString(給付実績食事費用1503.get後_基本食提供費用提供単価()));
-                row_基本_後_公費１.setTxtTeikyoKingaku(RString.EMPTY);
-                row_基本_後_公費１.setTxtShokujiTeikyohiGokei(get金額(給付実績食事費用1503.get食事提供費合計()));
-                row_基本_後_公費１.setTxtHyojunFutangakuTsuki(get金額(給付実績食事費用1503.get標準負担額_月額()));
-                row_基本_後_公費１.setTxtHyojunFutangakuHi(get金額(給付実績食事費用1503.get標準負担額_日額()));
-                row_基本_後_公費１.setTxtKohi(公費１);
-                row_基本_後_公費１.setTxtShokujiTeikyoNobeNissu(RString.EMPTY);
-                row_基本_後_公費１.setTxtSeikyugakuZengo(new RString(給付実績食事費用1503.get後_食事提供費請求額()));
-                row_基本_後_公費１.setTxtKohiSeikyu(RString.EMPTY);
-                row_基本_後_公費１.setTxtShokujiTeikyohiSeikyugaku(RString.EMPTY);
-                row_基本_後_公費１.setTxtSaishinsaKaisu(new RString(給付実績食事費用1503.get再審査回数()));
-                row_基本_後_公費１.setTxtKagoKaisu(new RString(給付実績食事費用1503.get過誤回数()));
-                row_基本_後_公費１.setTxtShinsaYM(to日期(給付実績食事費用1503.get審査年月()));
-                dgShokujiHiyoToH1503_Row row_基本_後_公費２ = new dgShokujiHiyoToH1503_Row();
-                row_基本_後_公費２.setTxtKihon(基本);
-                row_基本_後_公費２.setTxtZengo(後);
-                row_基本_後_公費２.setTxtTeikyoNissu(RString.EMPTY);
-                row_基本_後_公費２.setTxtTeikyoTanka(new RString(給付実績食事費用1503.get後_基本食提供費用提供単価()));
-                row_基本_後_公費２.setTxtTeikyoKingaku(RString.EMPTY);
-                row_基本_後_公費２.setTxtShokujiTeikyohiGokei(get金額(給付実績食事費用1503.get食事提供費合計()));
-                row_基本_後_公費２.setTxtHyojunFutangakuTsuki(get金額(給付実績食事費用1503.get標準負担額_月額()));
-                row_基本_後_公費２.setTxtHyojunFutangakuHi(get金額(給付実績食事費用1503.get標準負担額_日額()));
-                row_基本_後_公費２.setTxtKohi(公費２);
-                row_基本_後_公費２.setTxtShokujiTeikyoNobeNissu(RString.EMPTY);
-                row_基本_後_公費２.setTxtSeikyugakuZengo(new RString(給付実績食事費用1503.get後_食事提供費請求額()));
-                row_基本_後_公費２.setTxtKohiSeikyu(RString.EMPTY);
-                row_基本_後_公費２.setTxtShokujiTeikyohiSeikyugaku(RString.EMPTY);
-                row_基本_後_公費２.setTxtSaishinsaKaisu(new RString(給付実績食事費用1503.get再審査回数()));
-                row_基本_後_公費２.setTxtKagoKaisu(new RString(給付実績食事費用1503.get過誤回数()));
-                row_基本_後_公費２.setTxtShinsaYM(to日期(給付実績食事費用1503.get審査年月()));
-                dgShokujiHiyoToH1503_Row row_基本_後_公費３ = new dgShokujiHiyoToH1503_Row();
-                row_基本_後_公費３.setTxtKihon(基本);
-                row_基本_後_公費３.setTxtZengo(後);
-                row_基本_後_公費３.setTxtTeikyoNissu(RString.EMPTY);
-                row_基本_後_公費３.setTxtTeikyoTanka(new RString(給付実績食事費用1503.get後_基本食提供費用提供単価()));
-                row_基本_後_公費３.setTxtTeikyoKingaku(RString.EMPTY);
-                row_基本_後_公費３.setTxtShokujiTeikyohiGokei(get金額(給付実績食事費用1503.get食事提供費合計()));
-                row_基本_後_公費３.setTxtHyojunFutangakuTsuki(get金額(給付実績食事費用1503.get標準負担額_月額()));
-                row_基本_後_公費３.setTxtHyojunFutangakuHi(get金額(給付実績食事費用1503.get標準負担額_日額()));
-                row_基本_後_公費３.setTxtKohi(公費３);
-                row_基本_後_公費３.setTxtShokujiTeikyoNobeNissu(RString.EMPTY);
-                row_基本_後_公費３.setTxtSeikyugakuZengo(new RString(給付実績食事費用1503.get後_食事提供費請求額()));
-                row_基本_後_公費３.setTxtKohiSeikyu(RString.EMPTY);
-                row_基本_後_公費３.setTxtShokujiTeikyohiSeikyugaku(RString.EMPTY);
-                row_基本_後_公費３.setTxtSaishinsaKaisu(new RString(給付実績食事費用1503.get再審査回数()));
-                row_基本_後_公費３.setTxtKagoKaisu(new RString(給付実績食事費用1503.get過誤回数()));
-                row_基本_後_公費３.setTxtShinsaYM(to日期(給付実績食事費用1503.get審査年月()));
-                dataSources.add(row_基本_後);
-                dataSources.add(row_基本_後_公費１);
-                dataSources.add(row_基本_後_公費２);
-                dataSources.add(row_基本_後_公費３);
-            }
-        }
-        div.getDgShokujiHiyoToH1503().setDataSource(dataSources);
-        this.set給付実績食事費用15035(給付実績食事費用1503等);
-    }
-
-    /**
-     * 給付実績食事費用15035
-     *
-     * @param 給付実績食事費用1503等 List<KyufujissekiShokujiHiyo>
-     */
-    public void set給付実績食事費用15035(List<KyufujissekiShokujiHiyo> 給付実績食事費用1503等) {
-        List<dgShokujiHiyoToH1503_Row> dataSources = new ArrayList<>();
-        for (KyufujissekiShokujiHiyo 給付実績食事費用1503 : 給付実績食事費用1503等) {
-            if (div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toString()
-                    .equals(給付実績食事費用1503.getサービス提供年月().toString())
-                    && div.getCcdKyufuJissekiHeader().get事業者番号().toString()
-                    .equals(給付実績食事費用1503.get事業所番号().toString())) {
-                dgShokujiHiyoToH1503_Row row_特別 = new dgShokujiHiyoToH1503_Row();
-                row_特別.setTxtKihon(特別);
-                row_特別.setTxtZengo(RString.EMPTY);
-                row_特別.setTxtTeikyoNissu(new RString(給付実績食事費用1503.get特別_提供日数()));
-                row_特別.setTxtTeikyoTanka(new RString(給付実績食事費用1503.get特別_提供単価()));
-                row_特別.setTxtTeikyoKingaku(new RString(給付実績食事費用1503.get特別_提供金額()));
-                row_特別.setTxtShokujiTeikyohiGokei(get金額(給付実績食事費用1503.get食事提供費合計()));
-                row_特別.setTxtHyojunFutangakuTsuki(get金額(給付実績食事費用1503.get標準負担額_月額()));
-                row_特別.setTxtHyojunFutangakuHi(get金額(給付実績食事費用1503.get標準負担額_日額()));
-                row_特別.setTxtKohi(RString.EMPTY);
-                row_特別.setTxtShokujiTeikyoNobeNissu(new RString(給付実績食事費用1503.get食事提供延べ日数()));
-                row_特別.setTxtSeikyugakuZengo(new RString(給付実績食事費用1503.get食事提供費請求額()));
-                row_特別.setTxtKohiSeikyu(RString.EMPTY);
-                row_特別.setTxtShokujiTeikyohiSeikyugaku(new RString(給付実績食事費用1503.get食事提供費請求額()));
-                row_特別.setTxtSaishinsaKaisu(new RString(給付実績食事費用1503.get再審査回数()));
-                row_特別.setTxtKagoKaisu(new RString(給付実績食事費用1503.get過誤回数()));
-                row_特別.setTxtShinsaYM(to日期(給付実績食事費用1503.get審査年月()));
-                dgShokujiHiyoToH1503_Row row_特別_公費１ = new dgShokujiHiyoToH1503_Row();
-                row_特別_公費１.setTxtKihon(特別);
-                row_特別_公費１.setTxtZengo(RString.EMPTY);
-                row_特別_公費１.setTxtTeikyoNissu(new RString(給付実績食事費用1503.get特別_提供日数()));
-                row_特別_公費１.setTxtTeikyoTanka(new RString(給付実績食事費用1503.get特別_提供単価()));
-                row_特別_公費１.setTxtTeikyoKingaku(new RString(給付実績食事費用1503.get特別_提供金額()));
-                row_特別_公費１.setTxtShokujiTeikyohiGokei(get金額(給付実績食事費用1503.get食事提供費合計()));
-                row_特別_公費１.setTxtHyojunFutangakuTsuki(get金額(給付実績食事費用1503.get標準負担額_月額()));
-                row_特別_公費１.setTxtHyojunFutangakuHi(get金額(給付実績食事費用1503.get標準負担額_日額()));
-                row_特別_公費１.setTxtKohi(公費１);
-                row_特別_公費１.setTxtShokujiTeikyoNobeNissu(new RString(給付実績食事費用1503.get公費１対象食事提供延べ日数()));
-                row_特別_公費１.setTxtSeikyugakuZengo(new RString(給付実績食事費用1503.get食事提供費請求額()));
-                row_特別_公費１.setTxtKohiSeikyu(new RString(給付実績食事費用1503.get公費１食事提供費請求額()));
-                row_特別_公費１.setTxtShokujiTeikyohiSeikyugaku(new RString(給付実績食事費用1503.get公費１食事提供費請求額()));
-                row_特別_公費１.setTxtSaishinsaKaisu(new RString(給付実績食事費用1503.get再審査回数()));
-                row_特別_公費１.setTxtKagoKaisu(new RString(給付実績食事費用1503.get過誤回数()));
-                row_特別_公費１.setTxtShinsaYM(to日期(給付実績食事費用1503.get審査年月()));
-                dgShokujiHiyoToH1503_Row row_特別_公費２ = new dgShokujiHiyoToH1503_Row();
-                row_特別_公費２.setTxtKihon(特別);
-                row_特別_公費２.setTxtZengo(RString.EMPTY);
-                row_特別_公費２.setTxtTeikyoNissu(new RString(給付実績食事費用1503.get特別_提供日数()));
-                row_特別_公費２.setTxtTeikyoTanka(new RString(給付実績食事費用1503.get特別_提供単価()));
-                row_特別_公費２.setTxtTeikyoKingaku(new RString(給付実績食事費用1503.get特別_提供金額()));
-                row_特別_公費２.setTxtShokujiTeikyohiGokei(get金額(給付実績食事費用1503.get食事提供費合計()));
-                row_特別_公費２.setTxtHyojunFutangakuTsuki(get金額(給付実績食事費用1503.get標準負担額_月額()));
-                row_特別_公費２.setTxtHyojunFutangakuHi(get金額(給付実績食事費用1503.get標準負担額_日額()));
-                row_特別_公費２.setTxtKohi(公費２);
-                row_特別_公費２.setTxtShokujiTeikyoNobeNissu(new RString(給付実績食事費用1503.get公費２対象食事提供延べ日数()));
-                row_特別_公費２.setTxtSeikyugakuZengo(new RString(給付実績食事費用1503.get食事提供費請求額()));
-                row_特別_公費２.setTxtKohiSeikyu(new RString(給付実績食事費用1503.get公費２食事提供費請求額()));
-                row_特別_公費２.setTxtShokujiTeikyohiSeikyugaku(new RString(給付実績食事費用1503.get公費２食事提供費請求額()));
-                row_特別_公費２.setTxtSaishinsaKaisu(new RString(給付実績食事費用1503.get再審査回数()));
-                row_特別_公費２.setTxtKagoKaisu(new RString(給付実績食事費用1503.get過誤回数()));
-                row_特別_公費２.setTxtShinsaYM(to日期(給付実績食事費用1503.get審査年月()));
-                dgShokujiHiyoToH1503_Row row_特別_公費３ = new dgShokujiHiyoToH1503_Row();
-                row_特別_公費３.setTxtKihon(特別);
-                row_特別_公費３.setTxtZengo(RString.EMPTY);
-                row_特別_公費３.setTxtTeikyoNissu(new RString(給付実績食事費用1503.get特別_提供日数()));
-                row_特別_公費３.setTxtTeikyoTanka(new RString(給付実績食事費用1503.get特別_提供単価()));
-                row_特別_公費３.setTxtTeikyoKingaku(new RString(給付実績食事費用1503.get特別_提供金額()));
-                row_特別_公費３.setTxtShokujiTeikyohiGokei(get金額(給付実績食事費用1503.get食事提供費合計()));
-                row_特別_公費３.setTxtHyojunFutangakuTsuki(get金額(給付実績食事費用1503.get標準負担額_月額()));
-                row_特別_公費３.setTxtHyojunFutangakuHi(get金額(給付実績食事費用1503.get標準負担額_日額()));
-                row_特別_公費３.setTxtKohi(公費３);
-                row_特別_公費３.setTxtShokujiTeikyoNobeNissu(new RString(給付実績食事費用1503.get公費３対象食事提供延べ日数()));
-                row_特別_公費３.setTxtSeikyugakuZengo(new RString(給付実績食事費用1503.get食事提供費請求額()));
-                row_特別_公費３.setTxtKohiSeikyu(new RString(給付実績食事費用1503.get公費３食事提供費請求額()));
-                row_特別_公費３.setTxtShokujiTeikyohiSeikyugaku(new RString(給付実績食事費用1503.get公費３食事提供費請求額()));
-                row_特別_公費３.setTxtSaishinsaKaisu(new RString(給付実績食事費用1503.get再審査回数()));
-                row_特別_公費３.setTxtKagoKaisu(new RString(給付実績食事費用1503.get過誤回数()));
-                row_特別_公費３.setTxtShinsaYM(to日期(給付実績食事費用1503.get審査年月()));
-                dataSources.add(row_特別);
-                dataSources.add(row_特別_公費１);
-                dataSources.add(row_特別_公費２);
-                dataSources.add(row_特別_公費３);
-            }
-        }
-        div.getDgShokujiHiyoToH1503().setDataSource(dataSources);
-        this.set給付実績食事費用15036(給付実績食事費用1503等);
-    }
-
-    /**
-     * 給付実績食事費用15036
-     *
-     * @param 給付実績食事費用1503等 List<KyufujissekiShokujiHiyo>
-     */
-    public void set給付実績食事費用15036(List<KyufujissekiShokujiHiyo> 給付実績食事費用1503等) {
-        List<dgShokujiHiyoToH1503_Row> dataSources = new ArrayList<>();
-        for (KyufujissekiShokujiHiyo 給付実績食事費用1503 : 給付実績食事費用1503等) {
-            if (div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toString()
-                    .equals(給付実績食事費用1503.getサービス提供年月().toString())
-                    && div.getCcdKyufuJissekiHeader().get事業者番号().toString()
-                    .equals(給付実績食事費用1503.get事業所番号().toString())) {
-                dgShokujiHiyoToH1503_Row row_特別_後 = new dgShokujiHiyoToH1503_Row();
-                row_特別_後.setTxtKihon(特別);
-                row_特別_後.setTxtZengo(後);
-                row_特別_後.setTxtTeikyoNissu(RString.EMPTY);
-                row_特別_後.setTxtTeikyoTanka(new RString(給付実績食事費用1503.get後_特別食提供費用提供単価()));
-                row_特別_後.setTxtTeikyoKingaku(RString.EMPTY);
-                row_特別_後.setTxtShokujiTeikyohiGokei(get金額(給付実績食事費用1503.get食事提供費合計()));
-                row_特別_後.setTxtHyojunFutangakuTsuki(get金額(給付実績食事費用1503.get標準負担額_月額()));
-                row_特別_後.setTxtHyojunFutangakuHi(get金額(給付実績食事費用1503.get標準負担額_日額()));
-                row_特別_後.setTxtKohi(RString.EMPTY);
-                row_特別_後.setTxtShokujiTeikyoNobeNissu(RString.EMPTY);
-                row_特別_後.setTxtSeikyugakuZengo(new RString(給付実績食事費用1503.get後_食事提供費請求額()));
-                row_特別_後.setTxtKohiSeikyu(RString.EMPTY);
-                row_特別_後.setTxtShokujiTeikyohiSeikyugaku(new RString(給付実績食事費用1503.get後_食事提供費請求額()));
-                row_特別_後.setTxtSaishinsaKaisu(new RString(給付実績食事費用1503.get再審査回数()));
-                row_特別_後.setTxtKagoKaisu(new RString(給付実績食事費用1503.get過誤回数()));
-                row_特別_後.setTxtShinsaYM(to日期(給付実績食事費用1503.get審査年月()));
-                dgShokujiHiyoToH1503_Row row_特別_後_公費１ = new dgShokujiHiyoToH1503_Row();
-                row_特別_後_公費１.setTxtKihon(特別);
-                row_特別_後_公費１.setTxtZengo(後);
-                row_特別_後_公費１.setTxtTeikyoNissu(RString.EMPTY);
-                row_特別_後_公費１.setTxtTeikyoTanka(new RString(給付実績食事費用1503.get後_特別食提供費用提供単価()));
-                row_特別_後_公費１.setTxtTeikyoKingaku(RString.EMPTY);
-                row_特別_後_公費１.setTxtShokujiTeikyohiGokei(get金額(給付実績食事費用1503.get食事提供費合計()));
-                row_特別_後_公費１.setTxtHyojunFutangakuTsuki(get金額(給付実績食事費用1503.get標準負担額_月額()));
-                row_特別_後_公費１.setTxtHyojunFutangakuHi(get金額(給付実績食事費用1503.get標準負担額_日額()));
-                row_特別_後_公費１.setTxtKohi(公費１);
-                row_特別_後_公費１.setTxtShokujiTeikyoNobeNissu(RString.EMPTY);
-                row_特別_後_公費１.setTxtSeikyugakuZengo(new RString(給付実績食事費用1503.get後_食事提供費請求額()));
-                row_特別_後_公費１.setTxtKohiSeikyu(RString.EMPTY);
-                row_特別_後_公費１.setTxtShokujiTeikyohiSeikyugaku(RString.EMPTY);
-                row_特別_後_公費１.setTxtSaishinsaKaisu(new RString(給付実績食事費用1503.get再審査回数()));
-                row_特別_後_公費１.setTxtKagoKaisu(new RString(給付実績食事費用1503.get過誤回数()));
-                row_特別_後_公費１.setTxtShinsaYM(to日期(給付実績食事費用1503.get審査年月()));
-                dgShokujiHiyoToH1503_Row row_特別_後_公費２ = new dgShokujiHiyoToH1503_Row();
-                row_特別_後_公費２.setTxtKihon(特別);
-                row_特別_後_公費２.setTxtZengo(後);
-                row_特別_後_公費２.setTxtTeikyoNissu(RString.EMPTY);
-                row_特別_後_公費２.setTxtTeikyoTanka(new RString(給付実績食事費用1503.get後_特別食提供費用提供単価()));
-                row_特別_後_公費２.setTxtTeikyoKingaku(RString.EMPTY);
-                row_特別_後_公費２.setTxtShokujiTeikyohiGokei(get金額(給付実績食事費用1503.get食事提供費合計()));
-                row_特別_後_公費２.setTxtHyojunFutangakuTsuki(get金額(給付実績食事費用1503.get標準負担額_月額()));
-                row_特別_後_公費２.setTxtHyojunFutangakuHi(get金額(給付実績食事費用1503.get標準負担額_日額()));
-                row_特別_後_公費２.setTxtKohi(公費２);
-                row_特別_後_公費２.setTxtShokujiTeikyoNobeNissu(RString.EMPTY);
-                row_特別_後_公費２.setTxtSeikyugakuZengo(new RString(給付実績食事費用1503.get後_食事提供費請求額()));
-                row_特別_後_公費２.setTxtKohiSeikyu(RString.EMPTY);
-                row_特別_後_公費２.setTxtShokujiTeikyohiSeikyugaku(RString.EMPTY);
-                row_特別_後_公費２.setTxtSaishinsaKaisu(new RString(給付実績食事費用1503.get再審査回数()));
-                row_特別_後_公費２.setTxtKagoKaisu(new RString(給付実績食事費用1503.get過誤回数()));
-                row_特別_後_公費２.setTxtShinsaYM(to日期(給付実績食事費用1503.get審査年月()));
-                dgShokujiHiyoToH1503_Row row_特別_後_公費３ = new dgShokujiHiyoToH1503_Row();
-                row_特別_後_公費３.setTxtKihon(特別);
-                row_特別_後_公費３.setTxtZengo(後);
-                row_特別_後_公費３.setTxtTeikyoNissu(RString.EMPTY);
-                row_特別_後_公費３.setTxtTeikyoTanka(new RString(給付実績食事費用1503.get後_特別食提供費用提供単価()));
-                row_特別_後_公費３.setTxtTeikyoKingaku(RString.EMPTY);
-                row_特別_後_公費３.setTxtShokujiTeikyohiGokei(get金額(給付実績食事費用1503.get食事提供費合計()));
-                row_特別_後_公費３.setTxtHyojunFutangakuTsuki(get金額(給付実績食事費用1503.get標準負担額_月額()));
-                row_特別_後_公費３.setTxtHyojunFutangakuHi(get金額(給付実績食事費用1503.get標準負担額_日額()));
-                row_特別_後_公費３.setTxtKohi(公費３);
-                row_特別_後_公費３.setTxtShokujiTeikyoNobeNissu(RString.EMPTY);
-                row_特別_後_公費３.setTxtSeikyugakuZengo(new RString(給付実績食事費用1503.get後_食事提供費請求額()));
-                row_特別_後_公費３.setTxtKohiSeikyu(RString.EMPTY);
-                row_特別_後_公費３.setTxtShokujiTeikyohiSeikyugaku(RString.EMPTY);
-                row_特別_後_公費３.setTxtSaishinsaKaisu(new RString(給付実績食事費用1503.get再審査回数()));
-                row_特別_後_公費３.setTxtKagoKaisu(new RString(給付実績食事費用1503.get過誤回数()));
-                row_特別_後_公費３.setTxtShinsaYM(to日期(給付実績食事費用1503.get審査年月()));
-                dataSources.add(row_特別_後);
-                dataSources.add(row_特別_後_公費１);
-                dataSources.add(row_特別_後_公費２);
-                dataSources.add(row_特別_後_公費３);
             }
         }
         div.getDgShokujiHiyoToH1503().setDataSource(dataSources);
@@ -800,18 +497,15 @@ public class ShokujiHiyoShokaiHandler {
         } else {
             div.getBtnMeisaiShukei().setDisabled(false);
         }
-        if (NI.equals(識別番号管理.get所定疾患施設療養設定区分())
-                && 平成24年4月.isBeforeOrEquals(サービス提供年月)) {
-            div.getBtnShoteiShikkanShisetsuRyoyo().setDisplayNone(false);
-            div.getBtnKinkyujiShisetsuRyoyo().setDisplayNone(true);
+        if (ZERO.equals(識別番号管理.get緊急時施設療養設定区分())) {
+            div.getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
         } else {
-            div.getBtnShoteiShikkanShisetsuRyoyo().setDisplayNone(true);
-            div.getBtnKinkyujiShisetsuRyoyo().setDisplayNone(false);
-            if (ZERO.equals(識別番号管理.get緊急時施設療養設定区分())) {
-                div.getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
-            } else {
-                div.getBtnKinkyujiShisetsuRyoyo().setDisabled(false);
-            }
+            div.getBtnKinkyujiShisetsuRyoyo().setDisabled(false);
+        }
+        if (ZERO.equals(識別番号管理.get所定疾患施設療養設定区分())) {
+            div.getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
+        } else {
+            div.getBtnKinkyujiShisetsuRyoyo().setDisabled(false);
         }
         if (ZERO.equals(識別番号管理.get福祉用具購入費設定区分())) {
             div.getBtnFukushiYoguKonyu().setDisabled(true);
@@ -1023,7 +717,7 @@ public class ShokujiHiyoShokaiHandler {
         div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 今提供年月, 整理番号, 識別番号);
         setGetsuBtn(サービス提供年月リスト, 今提供年月);
     }
-    
+
     /**
      * change明細年月です。
      *
@@ -1060,7 +754,7 @@ public class ShokujiHiyoShokaiHandler {
         div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 今提供年月, 整理番号, 識別番号);
         setGetsuBtn(サービス提供年月リスト, 今提供年月);
     }
-    
+
     /**
      * change食費1503年月です。
      *
@@ -1207,6 +901,7 @@ public class ShokujiHiyoShokaiHandler {
     }
 
     private static class DateComparatorServiceTeikyoYM implements Comparator<FlexibleYearMonth>, Serializable {
+
         @Override
         public int compare(FlexibleYearMonth o1, FlexibleYearMonth o2) {
             return o2.compareTo(o1);

@@ -346,8 +346,7 @@ public class ChikuShichosonSelectDiv extends Panel implements IChikuShichosonSel
         if (this.getKoikiShichoson().isDisplayNone() || this.getDdlKyushichosonKoiki().isDisplayNone()) {
             return RString.EMPTY;
         } else {
-            int length = this.getDdlKyushichosonKoiki().getSelectedValue().length();
-            return this.getDdlKyushichosonKoiki().getSelectedValue().substring(7, length);
+            return this.getDdlKyushichosonKoiki().getSelectedValue();
         }
     }
 

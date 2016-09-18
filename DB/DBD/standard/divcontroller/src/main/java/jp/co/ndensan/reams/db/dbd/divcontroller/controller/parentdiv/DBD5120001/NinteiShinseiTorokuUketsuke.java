@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ninteishinsei.NinteiShinseiCodeModel;
+import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ninteishinsei.NinteiShinseiCodeModel.HyojiMode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiTodokedeDaikoKubunCode;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -35,7 +36,6 @@ public class NinteiShinseiTorokuUketsuke {
 
     private final RString 表示パターン_新規 = new RString("0");
     private final RString 照会 = new RString("照会");
-    private final RString 入力モード = new RString("InputMode");
 
     /**
      * 画面初期化
@@ -134,7 +134,7 @@ public class NinteiShinseiTorokuUketsuke {
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onBeforeOpenDialog_btnShichosonRenrakuJiko(NinteiShinseiTorokuUketsukeDiv div) {
 
         NinteiShinseiCodeModel model = new NinteiShinseiCodeModel();
-        model.set表示モード(入力モード);
+        model.set表示モード(HyojiMode.InputMode);
         model.set連絡事項(div.getHdnShichosonRenrakuJiko());
         ViewStateHolder.put(ViewStateKeys.モード, model);
         return ResponseData.of(div).respond();

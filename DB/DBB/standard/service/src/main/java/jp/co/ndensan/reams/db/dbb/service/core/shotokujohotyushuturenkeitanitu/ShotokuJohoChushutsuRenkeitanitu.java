@@ -5,19 +5,18 @@
  */
 package jp.co.ndensan.reams.db.dbb.service.core.shotokujohotyushuturenkeitanitu;
 
-import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.shutokujohochushutsurenkei.ShichosonJohoShutoku;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.shutokujohochushutsurenkei.ShutokuJohoChushutsuRenkeiBatchParameter;
+import jp.co.ndensan.reams.db.dbb.business.core.shotokujohochushutsu.ShotokuJohoChushutsuGamenParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB112001.DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB112003.DBB112003_ShotokuJohoChushutsuRenkeiTanitsuParameter;
+import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -36,8 +35,6 @@ public class ShotokuJohoChushutsuRenkeitanitu {
     private static final RString 可 = new RString("1");
     private static final RString 共有ファイル名 = new RString("BBKAIGO");
     private static final RString 共有ファイルID = new RString("C:\\Users\\LDNS\\shared\\sharedFiles");
-    private static final RString 所得情報抽出_連携当初 = new RString("DBBMN51009");
-    private static final RString 所得情報抽出_連携異動 = new RString("DBBMN51010");
     private static final RString 当初_単一 = new RString("3");
     private static final RString 異動_単一 = new RString("4");
     private static final RString 枝番 = new RString("0001");
@@ -58,7 +55,8 @@ public class ShotokuJohoChushutsuRenkeitanitu {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShotokuJohoChushutsuRenkeitanitu}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link ShotokuJohoChushutsuRenkeitanitu}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link ShotokuJohoChushutsuRenkeitanitu}のインスタンス
      */
     public static ShotokuJohoChushutsuRenkeitanitu createInstance() {
         return InstanceProvider.create(ShotokuJohoChushutsuRenkeitanitu.class);
@@ -108,27 +106,40 @@ public class ShotokuJohoChushutsuRenkeitanitu {
     }
 
     /**
-     * バッチ用パラメータ作成します。
+     * 当初_単一バッチ用パラメータ作成します。
      *
-     * @param parameter ShotokuJohoTyushutuRenkeiKoikiParameter
-     * @return ShotokuJohoBatchresultParameter createShotokuJohoParameter
+     * @param parameter ShotokuJohoChushutsuGamenParameter
+     * @return DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuParameter
      */
-    public ShutokuJohoChushutsuRenkeiBatchParameter createShotokuJohoParameter(
-            ShutokuJohoChushutsuRenkeiBatchParameter parameter) {
-        ShutokuJohoChushutsuRenkeiBatchParameter result = new ShutokuJohoChushutsuRenkeiBatchParameter();
-        List<ShichosonJohoShutoku> 市町村情報List = new ArrayList<>();
+    public DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuParameter createShotokuJohoDBB112001Parameter(
+            ShotokuJohoChushutsuGamenParameter parameter) {
+        DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuParameter result = new DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuParameter();
         result.set処理年度(parameter.get処理年度());
-        result.set市町村情報List(市町村情報List);
+        result.set市町村情報List(parameter.get市町村情報List());
         result.set出力順ID(parameter.get出力順ID());
-        result.set帳票ID(new ReportId("DBB200008_KaigoHokenShotokuJohoIchiran"));
+        result.set帳票ID(ReportIdDBB.DBB200008.getReportId());
         result.set共有ファイル名(共有ファイル名);
         result.set共有ファイルID(共有ファイルID);
-        RString メニューID = ResponseHolder.getMenuID();
-        if (所得情報抽出_連携当初.equals(メニューID)) {
-            result.set処理区分(当初_単一);
-        } else if (所得情報抽出_連携異動.equals(メニューID)) {
-            result.set処理区分(異動_単一);
-        }
+        result.set処理区分(当初_単一);
+        return result;
+    }
+
+    /**
+     * バッチ用パラメータ作成します。
+     *
+     * @param parameter ShotokuJohoChushutsuGamenParameter
+     * @return DBB112003_ShotokuJohoChushutsuRenkeiTanitsuParameter
+     */
+    public DBB112003_ShotokuJohoChushutsuRenkeiTanitsuParameter createShotokuJohoDBB112003Parameter(
+            ShotokuJohoChushutsuGamenParameter parameter) {
+        DBB112003_ShotokuJohoChushutsuRenkeiTanitsuParameter result = new DBB112003_ShotokuJohoChushutsuRenkeiTanitsuParameter();
+        result.set処理年度(parameter.get処理年度());
+        result.set市町村情報List(parameter.get市町村情報List());
+        result.set出力順ID(parameter.get出力順ID());
+        result.set帳票ID(ReportIdDBB.DBB200008.getReportId());
+        result.set共有ファイル名(共有ファイル名);
+        result.set共有ファイルID(共有ファイルID);
+        result.set処理区分(異動_単一);
         return result;
     }
 

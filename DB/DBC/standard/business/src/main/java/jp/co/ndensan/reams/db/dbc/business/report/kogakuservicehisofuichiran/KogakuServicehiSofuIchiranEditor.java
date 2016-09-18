@@ -140,6 +140,8 @@ public class KogakuServicehiSofuIchiranEditor implements
             }
         }
 
+        source.shikibetsuCode = entity.get被保険者_識別コード().value();
+
         return source;
 
     }

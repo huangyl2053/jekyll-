@@ -67,7 +67,7 @@
         <dependency>
             <groupId>jp.co.ndensan.reams.ca.cax</groupId>
             <artifactId>CaxPersistence</artifactId>
-        </dependency>
+        </dependency> 
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxEntity</artifactId>

@@ -106,10 +106,10 @@ public class KaigoHokenJukyushikakuShomeishoKofuShinseisho {
         RString 生年月日 = RString.EMPTY;
         RString 住民種別コード = entity.get住民種別コード();
         if (JuminShubetsu.日本人.getCode().equals(住民種別コード)
-                || JuminShubetsu.住登外個人_日本人.getCode().equals(住民種別コード)) {
+            || JuminShubetsu.住登外個人_日本人.getCode().equals(住民種別コード)) {
             生年月日 = set生年月日_日本人(entity);
         } else if (JuminShubetsu.外国人.getCode().equals(住民種別コード)
-                || JuminShubetsu.住登外個人_外国人.getCode().equals(住民種別コード)) {
+                   || JuminShubetsu.住登外個人_外国人.getCode().equals(住民種別コード)) {
             生年月日 = set生年月日(entity);
         }
         RString 異動前郵便番号 = psmJoho.isEmpty() ? RString.EMPTY : ShikibetsuTaishoFactory.createKojin(psmJoho.get(0)).to個人()

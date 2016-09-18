@@ -53,9 +53,13 @@ public class TashichosonJushochitokureishaRenrakuhyoItem {
     private RString shisetsuYubinNo;
     private RString shisetsuJusho;
     private RString denshiKoin;
-    private RString shomeiHakkoYMD;
-    private RString shuchoMei;
-    private RString shichosonMei;
+    private RString koinMojiretsu;
     private RString koinShoryaku;
+    private RString ninshoshaShimeiKakenai;
+    private RString ninshoshaShimeiKakeru;
+    private RString ninshoshaYakushokuMei;
+    private RString ninshoshaYakushokuMei1;
+    private RString ninshoshaYakushokuMei2;
+    private RString shomeiHakkoYMD;
 
 }

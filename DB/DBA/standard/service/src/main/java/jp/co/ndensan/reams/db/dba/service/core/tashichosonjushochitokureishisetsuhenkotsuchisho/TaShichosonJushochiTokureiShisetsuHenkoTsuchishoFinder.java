@@ -104,13 +104,20 @@ public class TaShichosonJushochiTokureiShisetsuHenkoTsuchishoFinder {
         }
 
         TsuchishoTeikeibunManager tsuchishoTeikeibunManager = new TsuchishoTeikeibunManager();
+        // TODO n8372王イクカン （tsuchishoTeikeibunManagerの日付範囲の検索メソッドの追加が必要です。暫定対応として、最新の日付に対する通知文を設定する。） 2016/08/25
+        TsuchishoTeikeibunInfo kaishiYMDInfo = tsuchishoTeikeibunManager.get最新適用日(
+                SubGyomuCode.DBA介護資格,
+                new ReportId("DBA100006_JushochitokureiShisetsuHenkoTsuchisho"),
+                KamokuCode.EMPTY,
+                1,
+                1);
         TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = tsuchishoTeikeibunManager.get通知書定形文検索(
                 SubGyomuCode.DBA介護資格,
                 new ReportId("DBA100006_JushochitokureiShisetsuHenkoTsuchisho"),
                 KamokuCode.EMPTY,
                 1,
                 1,
-                new FlexibleDate(RDate.getNowDate().toDateString()));
+                kaishiYMDInfo.getチェック用最新適用日());
         if (tsuchishoTeikeibunInfo != null
                 && tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity() != null) {
             outEntity.set見出し(tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence());
@@ -210,13 +217,20 @@ public class TaShichosonJushochiTokureiShisetsuHenkoTsuchishoFinder {
         }
 
         TsuchishoTeikeibunManager tsuchishoTeikeibunManager = new TsuchishoTeikeibunManager();
+        // TODO n8373けい政 （tsuchishoTeikeibunManagerの日付範囲の検索メソッドの追加が必要です。暫定対応として、最新の日付に対する通知文を設定する。） 2016/08/25
+        TsuchishoTeikeibunInfo kaishiYMDInfo = tsuchishoTeikeibunManager.get最新適用日(
+                SubGyomuCode.DBA介護資格,
+                new ReportId("DBA100007_TashichosonJushochitokureishaRenrakuhyo"),
+                KamokuCode.EMPTY,
+                1,
+                1);
         TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = tsuchishoTeikeibunManager.get通知書定形文検索(
                 SubGyomuCode.DBA介護資格,
-                new ReportId("DBA100006_JushochitokureiShisetsuHenkoTsuchisho"),
+                new ReportId("DBA100007_TashichosonJushochitokureishaRenrakuhyo"),
                 KamokuCode.EMPTY,
                 1,
                 1,
-                new FlexibleDate(RDate.getNowDate().toDateString()));
+                kaishiYMDInfo.getチェック用最新適用日());
         if (tsuchishoTeikeibunInfo != null
                 && tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity() != null) {
             outEntity.set見出し(tsuchishoTeikeibunInfo.getUrT0126TsuchishoTeikeibunEntity().getSentence());

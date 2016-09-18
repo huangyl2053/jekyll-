@@ -7,18 +7,18 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0320001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kiwarigaku.Kiwarigaku.KiwarigakuDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kiwarigaku.Kiwarigaku.IKiwarigakuDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * FukakonkyoAndKiwari のクラスファイル 
- * 
+ * FukakonkyoAndKiwari のクラスファイル
+ *
  * @author 自動生成
  */
 public class FukakonkyoAndKiwariDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
@@ -277,7 +277,7 @@ public class FukakonkyoAndKiwariDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTblKikan1(tblKikan1Div tblKikan1) {
+    public void setTblKikan1(tblKikan1Div tblKikan1) {
         this.getTblFukaKonkyo().getKikan().setTblKikan1(tblKikan1);
     }
 
@@ -337,7 +337,7 @@ public class FukakonkyoAndKiwariDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTblKikan2(tblKikan2Div tblKikan2) {
+    public void setTblKikan2(tblKikan2Div tblKikan2) {
         this.getTblFukaKonkyo().getKikan().setTblKikan2(tblKikan2);
     }
 

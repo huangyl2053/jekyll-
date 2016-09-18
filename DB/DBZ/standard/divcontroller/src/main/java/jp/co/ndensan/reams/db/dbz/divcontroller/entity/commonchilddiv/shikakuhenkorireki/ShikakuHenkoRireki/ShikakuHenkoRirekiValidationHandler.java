@@ -72,18 +72,20 @@ public class ShikakuHenkoRirekiValidationHandler {
      */
     public ValidationMessageControlPairs henkoJiyuCheck(HihokenshaDaicho 資格関連異動) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (new RString("1").equals(資格関連異動.get広域内住所地特例フラグ())
+        if (!RString.isNullOrEmpty(資格関連異動.get広域内住所地特例フラグ())) {
+            if (資格関連異動.get広域内住所地特例フラグ().equals(new RString("1"))
                 && (div.getDdlHenkoJiyu().getSelectedKey().equals(new RString("11"))
-                || div.getDdlHenkoJiyu().getSelectedKey().equals(new RString("13")))) {
-            validationMessages.add(new ValidationMessageControlPair(
-                    new ShikakuHenkoRirekiMessages(UrErrorMessages.入力値が不正_追加メッセージあり, "広住特適用中にその事由は選択できません。")));
-        }
-        if (!new RString("1").equals(資格関連異動.get広域内住所地特例フラグ())
+                    || div.getDdlHenkoJiyu().getSelectedKey().equals(new RString("13")))) {
+                validationMessages.add(new ValidationMessageControlPair(
+                        new ShikakuHenkoRirekiMessages(UrErrorMessages.入力値が不正_追加メッセージあり, "広住特適用中にその事由は選択できません。")));
+            }
+            if (!資格関連異動.get広域内住所地特例フラグ().equals(new RString("1"))
                 && (div.getDdlHenkoJiyu().getSelectedKey().equals(new RString("14"))
-                || div.getDdlHenkoJiyu().getSelectedKey().equals(new RString("15"))
-                || div.getDdlHenkoJiyu().getSelectedKey().equals(new RString("17")))) {
-            validationMessages.add(new ValidationMessageControlPair(
-                    new ShikakuHenkoRirekiMessages(UrErrorMessages.入力値が不正_追加メッセージあり, "広住特適用中にその事由は選択できません。")));
+                    || div.getDdlHenkoJiyu().getSelectedKey().equals(new RString("15"))
+                    || div.getDdlHenkoJiyu().getSelectedKey().equals(new RString("17")))) {
+                validationMessages.add(new ValidationMessageControlPair(
+                        new ShikakuHenkoRirekiMessages(UrErrorMessages.入力値が不正_追加メッセージあり, "広住特適用中にその事由は選択できません。")));
+            }
         }
 
         return validationMessages;

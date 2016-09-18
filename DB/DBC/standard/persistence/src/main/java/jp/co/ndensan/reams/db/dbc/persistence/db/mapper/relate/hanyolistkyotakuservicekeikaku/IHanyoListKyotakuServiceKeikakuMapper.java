@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hanyolistkyotakuservicekeikaku;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuKijunYMDParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkyotakuservicekeikaku.HanyoListKyotakuServiceKeikakuEntity;
 
@@ -23,4 +24,12 @@ public interface IHanyoListKyotakuServiceKeikakuMapper {
      * @return List<HanyoList_KyotakuServiceKeikakuEntity>
      */
     List<HanyoListKyotakuServiceKeikakuEntity> getCSVData(HanyoListKyotakuServiceKeikakuMybatisParameter parameter);
+
+    /**
+     * selectbyKey
+     *
+     * @param parameter HanyoListKyotakuServiceKeikakuKijunYMDParameter
+     * @return List<HanyoList_KyotakuServiceKeikakuEntity>
+     */
+    int getKijunYMDData(HanyoListKyotakuServiceKeikakuKijunYMDParameter parameter);
 }

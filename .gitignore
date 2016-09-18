@@ -1,4 +1,4 @@
-
+# directory
 obj/
 bin/
 target/
@@ -8,6 +8,7 @@ build/
 d.ts/
 DB-jp/
 
+# extension
 *.map
 *.dll
 *.class
@@ -18,9 +19,16 @@ DB-jp/
 *.user
 *.iml
 *.log
+*.d.ts
+
+# file
+nb-configuration.xml
+myBatisSettings.properties
+db#db[abcdeuxz]_request\.data
+jarjar/
+warwar/
 nb-configuration.xml
 myBatisSettings.properties
 d.ts
 jarjar/
 warwar/
-DB/DBC/standard/service/src/main/java/jp/co/ndensan/reams/db/dbc/service/core/dbc120230/SeikyugakuTsuchishoCsvFileManager.java

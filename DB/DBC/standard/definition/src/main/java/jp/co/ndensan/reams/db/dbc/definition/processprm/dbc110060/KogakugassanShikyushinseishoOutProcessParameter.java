@@ -23,6 +23,7 @@ public class KogakugassanShikyushinseishoOutProcessParameter implements IBatchPr
     private RString 再処理区分;
     private FlexibleYearMonth 処理年月;
     private int 件数;
+    private int レコード件数;
     private HokenshaNo 保険者番号;
     private RString 保険者情報_保険者番号;
     private RString 保険者情報_保険者名称;

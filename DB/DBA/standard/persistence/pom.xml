@@ -39,7 +39,7 @@
             <groupId>jp.co.ndensan.reams.db.dbx</groupId>
             <artifactId>DbxEntity</artifactId>
         </dependency>
-        <!-- �ｽ?�ｽ�ｽ�ｽ?-->
+        <!-- DBZ -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>
@@ -48,11 +48,6 @@
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzEntity</artifactId>
             <type>test-jar</type>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbx</groupId>
-            <artifactId>DbxEntity</artifactId>
-            <type>jar</type>
         </dependency>
         <dependency>
             <groupId>jp.co.ndensan.reams.ua.uax</groupId>

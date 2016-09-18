@@ -43,7 +43,7 @@ public class KeikakuJigyoshaJohoProcess extends BatchProcessBase<KeikakuJigyosha
 
     @Override
     protected void initialize() {
-        if (processParameter.get改頁出力順ID() != 0) {
+        if (processParameter.get出力順ID() != 0) {
             IChohyoShutsuryokujunFinder chohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
             long 帳票出力順ID = processParameter.get出力順ID();
             outputOrder = chohyoShutsuryokujunFinder.get出力順(

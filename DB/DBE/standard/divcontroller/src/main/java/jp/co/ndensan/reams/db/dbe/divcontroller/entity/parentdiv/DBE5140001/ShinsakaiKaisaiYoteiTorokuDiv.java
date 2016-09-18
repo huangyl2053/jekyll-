@@ -8,18 +8,16 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.IKanryoMessageDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.KanryoMessage.KanryoMessageDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
- * ShinsakaiKaisaiYoteiToroku のクラスファイル。
+ * ShinsakaiKaisaiYoteiToroku のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class ShinsakaiKaisaiYoteiTorokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -128,13 +126,13 @@ public class ShinsakaiKaisaiYoteiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblMonth() {
-        return this.getShinsakaiKaisaiYoteiIchiran().getLblMonth();
+    public Label getLblMonth2() {
+        return this.getShinsakaiKaisaiYoteiIchiran().getLblMonth2();
     }
 
     @JsonIgnore
-    public void  setLblMonth(Label lblMonth) {
-        this.getShinsakaiKaisaiYoteiIchiran().setLblMonth(lblMonth);
+    public void  setLblMonth2(Label lblMonth2) {
+        this.getShinsakaiKaisaiYoteiIchiran().setLblMonth2(lblMonth2);
     }
 
     @JsonIgnore
@@ -145,6 +143,16 @@ public class ShinsakaiKaisaiYoteiTorokuDiv extends Panel {
     @JsonIgnore
     public void  setBtnRight(Button btnRight) {
         this.getShinsakaiKaisaiYoteiIchiran().setBtnRight(btnRight);
+    }
+
+    @JsonIgnore
+    public Label getLblMonth() {
+        return this.getShinsakaiKaisaiYoteiIchiran().getLblMonth();
+    }
+
+    @JsonIgnore
+    public void  setLblMonth(Label lblMonth) {
+        this.getShinsakaiKaisaiYoteiIchiran().setLblMonth(lblMonth);
     }
 
     @JsonIgnore

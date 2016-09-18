@@ -70,17 +70,6 @@ public class DBB021031_DankaibetsuHihokenshasuIchiranhyoSakusei extends BatchFlo
         executeStep(帳票の出力);
     }
 
-    private RString get市町村コード複数(
-            List<RString> dantaiCdLis,
-            RString 市町村コード複数) {
-        for (RString dantaiCd : dantaiCdLis) {
-            if (dantaiCd != null) {
-                市町村コード複数 = dantaiCd.concat(DOUHAO);
-            }
-        }
-        return 市町村コード複数;
-    }
-
     /**
      * システム日時の取得を行います。
      *
@@ -108,7 +97,8 @@ public class DBB021031_DankaibetsuHihokenshasuIchiranhyoSakusei extends BatchFlo
      */
     @Step(世帯員把握)
     protected IBatchFlowCommand collectSetaiin() {
-        return otherBatchFlow(BATCH_ID, SubGyomuCode.DBB介護賦課, new SetaiShotokuKazeiHanteiBatchParameter(SetaiinHaakuKanriShikibetsuKubun.賦課.getコード())).define();
+        return otherBatchFlow(BATCH_ID, SubGyomuCode.DBB介護賦課,
+                new SetaiShotokuKazeiHanteiBatchParameter(SetaiinHaakuKanriShikibetsuKubun.賦課.getコード())).define();
     }
 
     /**
@@ -141,4 +131,14 @@ public class DBB021031_DankaibetsuHihokenshasuIchiranhyoSakusei extends BatchFlo
         return loopBatch(ReportProcess.class).arguments(processParameter).define();
     }
 
+    private RString get市町村コード複数(
+            List<RString> dantaiCdLis,
+            RString 市町村コード複数) {
+        for (RString dantaiCd : dantaiCdLis) {
+            if (dantaiCd != null) {
+                市町村コード複数 = dantaiCd.concat(DOUHAO);
+            }
+        }
+        return 市町村コード複数;
+    }
 }

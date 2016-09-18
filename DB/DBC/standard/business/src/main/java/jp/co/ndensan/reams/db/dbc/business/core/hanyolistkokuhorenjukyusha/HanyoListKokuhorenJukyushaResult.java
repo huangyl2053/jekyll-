@@ -28,7 +28,6 @@ import jp.co.ndensan.reams.db.dbc.entity.euc.hanyolistkokuhorenjukyusha.HanyoLis
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiKoshinNintei;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
@@ -49,6 +48,7 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -65,6 +65,10 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
  */
 public class HanyoListKokuhorenJukyushaResult {
 
+    private static final int LENGTH = 6;
+    private static final RString 通常認定 = new RString("1");
+    private static final RString 旧措置入所者 = new RString("2");
+    private static final RString やむを得ない理由 = new RString("3");
     private final HanyoListKokuhorenJukyushaProcessParameter processParameter;
     private final List<PersonalData> personalDataList;
 
@@ -750,13 +754,16 @@ public class HanyoListKokuhorenJukyushaResult {
         if (RString.isNullOrEmpty(みなし更新認定コード)) {
             return RString.EMPTY;
         }
-        RString みなし更新認定;
-        try {
-            みなし更新認定 = MinashiKoshinNintei.toValue(みなし更新認定コード).get名称();
-        } catch (IllegalArgumentException e) {
-            return RString.EMPTY;
+        List<RString> minashiKoshinNintei = new ArrayList<>();
+        minashiKoshinNintei.add(通常認定);
+        minashiKoshinNintei.add(旧措置入所者);
+        minashiKoshinNintei.add(やむを得ない理由);
+        for (RString みなし : minashiKoshinNintei) {
+            if (みなし.equals(みなし更新認定コード)) {
+                return みなし;
+            }
         }
-        return みなし更新認定;
+        return RString.EMPTY;
     }
 
     private RString set変更申請中区分(RString 変更申請中区分コード) {
@@ -821,7 +828,11 @@ public class HanyoListKokuhorenJukyushaResult {
     private RString set日付編集(RString value) {
         RString 日付 = RString.EMPTY;
         if (processParameter.is日付編集() && !RString.isNullOrEmpty(value)) {
-            日付 = new FlexibleDate(value).seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
+            if (value.length() == LENGTH) {
+                日付 = new FlexibleYearMonth(value).seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
+            } else {
+                日付 = new FlexibleDate(value).seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
+            }
         }
         return 日付;
     }
@@ -923,6 +934,7 @@ public class HanyoListKokuhorenJukyushaResult {
                 出力条件List.add(RString.EMPTY);
             }
         }
+        出力条件List.add(RString.EMPTY);
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append("異動区分：　");
         出力条件List.add(get異動区分(jokenBuilder));
@@ -935,11 +947,9 @@ public class HanyoListKokuhorenJukyushaResult {
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append("公費負担上限額減額：　");
         出力条件List.add(get公費負担上限額減額(jokenBuilder));
-
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append("利用者負担区分：　");
         出力条件List.add(get利用者負担区分(jokenBuilder));
-
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append("特定入所者サービス区分：　");
         出力条件List.add(get特定入所者サービス区分(jokenBuilder));
@@ -1000,19 +1010,19 @@ public class HanyoListKokuhorenJukyushaResult {
     }
 
     private RString getみなし要介護区分(RStringBuilder jokenBuilder) {
-        RString 通常認定 = new RString("□通常認定　　");
-        RString 旧措置入所者 = new RString("□旧措置入所者　　");
-        RString やむを得ない理由 = new RString("□やむを得ない理由");
+        RString 通常認定値 = new RString("□通常認定　　");
+        RString 旧措置入所者値 = new RString("□旧措置入所者　　");
+        RString やむを得ない理由値 = new RString("□やむを得ない理由");
         for (RString みなし要介護区分 : processParameter.getみなし要介護区分s()) {
-            if (new RString("1").equals(みなし要介護区分)) {
-                通常認定 = new RString("■通常認定　　");
-            } else if (new RString("2").equals(みなし要介護区分)) {
-                旧措置入所者 = new RString("■旧措置入所者　　");
-            } else if (new RString("3").equals(みなし要介護区分)) {
-                やむを得ない理由 = new RString("■やむを得ない理由");
+            if (通常認定.equals(みなし要介護区分)) {
+                通常認定値 = new RString("■通常認定　　");
+            } else if (旧措置入所者.equals(みなし要介護区分)) {
+                旧措置入所者値 = new RString("■旧措置入所者　　");
+            } else if (やむを得ない理由.equals(みなし要介護区分)) {
+                やむを得ない理由値 = new RString("■やむを得ない理由");
             }
         }
-        return jokenBuilder.append(通常認定).append(旧措置入所者).append(やむを得ない理由).toRString();
+        return jokenBuilder.append(通常認定値).append(旧措置入所者値).append(やむを得ない理由値).toRString();
     }
 
     private RString get異動区分(RStringBuilder jokenBuilder) {

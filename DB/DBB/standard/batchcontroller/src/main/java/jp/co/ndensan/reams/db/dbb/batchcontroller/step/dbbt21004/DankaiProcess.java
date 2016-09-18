@@ -79,7 +79,6 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
     private FlexibleDate 受給開始日;
     private HihokenshaTaihoTemp 被保険者対象Entity;
     private TsukibetsuRankTemp 月別Entity;
-    private DankaiProcessEntityList dankaiProcessEntity;
     private List<DankaiProcessEntityList> dankaiProcessEntityList;
     private static final RString 使用する = new RString("1");
     private static final RString 使用しない = new RString("0");
@@ -116,8 +115,8 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
         識別コード = null;
         業務コード = null;
         受給開始日 = null;
+        月別Entity = null;
         被保険者対象Entity = null;
-        dankaiProcessEntity = new DankaiProcessEntityList();
         dankaiProcessEntityList = new ArrayList<>();
     }
 
@@ -128,26 +127,25 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
 
     private DankaibetuHihokensyasuIchiranhyoMyBatisParameter toMyBatisParameter() {
         DankaibetuHihokensyasuIchiranhyoMyBatisParameter parameter = new DankaibetuHihokensyasuIchiranhyoMyBatisParameter();
-        parameter.set調定年月日(new FlexibleDate(processParameter.get調定年度().getYearValue() + 1, 4, 1));
+        parameter.set調定年月日(new FlexibleDate(processParameter.get調定年度().getYearValue() + ONE, FOU, ONE));
         return parameter;
     }
 
     @Override
     protected void afterExecute() {
-        if (null != 被保険者対象Entity) {
-            if (被保険者番号.equals(被保険者対象Entity.getHihokenshaNo())) {
-                dankaiProcessEntity.set被保険者対象Temp(被保険者対象Entity);
-                dankaiProcessEntity.set月別Temp(月別Entity);
-                dankaiProcessEntity.set世帯員所得情報Temp(世帯員所得情報List);
-                SeikatsuHogoJukyushaRelateEntity 生活保護受給者RelateEntity = new SeikatsuHogoJukyushaRelateEntity();
-                生活保護受給者RelateEntity.set生活保護受給者Entity(生活保護受給者Entity);
-                生活保護受給者RelateEntity.set生活保護扶助種類Entity(生活保護扶助種類EntityList);
-                set生保の情報(生活保護受給者RelateEntity);
-                dankaiProcessEntity.set生保の情報(生保の情報);
-                dankaiProcessEntity.set老齢の情報(老齢の情報);
-                dankaiProcessEntityList.add(dankaiProcessEntity);
-                insetTable(dankaiProcessEntityList);
-            }
+        if (null != 被保険者対象Entity && 被保険者番号.equals(被保険者対象Entity.getHihokenshaNo())) {
+            DankaiProcessEntityList dankaiProcessEntity = new DankaiProcessEntityList();
+            dankaiProcessEntity.set被保険者対象Temp(被保険者対象Entity);
+            dankaiProcessEntity.set月別Temp(月別Entity);
+            dankaiProcessEntity.set世帯員所得情報Temp(世帯員所得情報List);
+            SeikatsuHogoJukyushaRelateEntity 生活保護受給者RelateEntity = new SeikatsuHogoJukyushaRelateEntity();
+            生活保護受給者RelateEntity.set生活保護受給者Entity(生活保護受給者Entity);
+            生活保護受給者RelateEntity.set生活保護扶助種類Entity(生活保護扶助種類EntityList);
+            set生保の情報(生活保護受給者RelateEntity);
+            dankaiProcessEntity.set生保の情報(生保の情報);
+            dankaiProcessEntity.set老齢の情報(老齢の情報);
+            dankaiProcessEntityList.add(dankaiProcessEntity);
+            insetTable(dankaiProcessEntityList);
         }
     }
 
@@ -163,6 +161,7 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
             set生活保護扶助種類EntityList(entity.get生活保護扶助種類());
             set世帯員所得情報List(entity.get世帯員所得情報Temp());
         } else if (!被保険者番号.equals(entity.get被保険者対象Temp().getHihokenshaNo())) {
+            DankaiProcessEntityList dankaiProcessEntity = new DankaiProcessEntityList();
             dankaiProcessEntity.set被保険者対象Temp(被保険者対象Entity);
             dankaiProcessEntity.set月別Temp(月別Entity);
             dankaiProcessEntity.set世帯員所得情報Temp(世帯員所得情報List);
@@ -170,26 +169,24 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
             dankaiProcessEntity.set老齢の情報(老齢の情報);
             dankaiProcessEntityList.add(dankaiProcessEntity);
             dankaiProcessEntity = new DankaiProcessEntityList();
-            被保険者対象Entity = new HihokenshaTaihoTemp();
+            dankaiProcessEntity.set被保険者対象Temp(entity.get被保険者対象Temp());
             被保険者対象Entity = entity.get被保険者対象Temp();
-            dankaiProcessEntity.set月別Temp(月別Entity);
-            月別Entity = new TsukibetsuRankTemp();
-            月別Entity = entity.get月別Temp();
-            dankaiProcessEntity.set世帯員所得情報Temp(世帯員所得情報List);
+            dankaiProcessEntity.set月別Temp(entity.get月別Temp());
             世帯員所得情報List = new ArrayList<>();
             set世帯員所得情報List(entity.get世帯員所得情報Temp());
+            dankaiProcessEntity.set世帯員所得情報Temp(世帯員所得情報List);
             SeikatsuHogoJukyushaRelateEntity 生活保護受給者RelateEntity = new SeikatsuHogoJukyushaRelateEntity();
             生活保護受給者RelateEntity.set生活保護受給者Entity(生活保護受給者Entity);
             生活保護受給者RelateEntity.set生活保護扶助種類Entity(生活保護扶助種類EntityList);
             set生保の情報(生活保護受給者RelateEntity);
-            dankaiProcessEntity.set生保の情報(生保の情報);
-            dankaiProcessEntity.set老齢の情報(老齢の情報);
             老齢の情報 = new ArrayList<>();
             set老齢の情報(entity.get老齢の情報());
             生保の情報 = new ArrayList<>();
             set生活保護受給者Entity(entity.get生活保護受給者());
             生活保護扶助種類EntityList = new ArrayList<>();
+            dankaiProcessEntity.set老齢の情報(老齢の情報);
             set生活保護扶助種類EntityList(entity.get生活保護扶助種類());
+            dankaiProcessEntity.set生保の情報(生保の情報);
             set被保険者番号(entity);
             insetTable(dankaiProcessEntityList);
         } else {
@@ -206,17 +203,12 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
     }
 
     private void insetIntoTable(DankaiProcessEntityList dankaiProcessEntityList) {
-        FukaKonkyo 賦課根拠 = get賦課根拠(dankaiProcessEntityList.get生保の情報(), dankaiProcessEntityList.get老齢の情報(), dankaiProcessEntityList.get被保険者対象Temp().getHukaSystemDate());
+        FukaKonkyo 賦課根拠 = get賦課根拠(
+                dankaiProcessEntityList.get生保の情報(),
+                dankaiProcessEntityList.get老齢の情報(),
+                dankaiProcessEntityList.get被保険者対象Temp().getHukaSystemDate());
         List<KazeiKubun> 課税区分リスト = new ArrayList<>();
-        for (SetaiShotokuEntity 世帯員 : dankaiProcessEntityList.get世帯員所得情報Temp()) {
-            if (世帯員.getKazeiKubun() != null && !世帯員.getKazeiKubun().isEmpty()) {
-                課税区分リスト.add(KazeiKubun.toValue(世帯員.getKazeiKubun()));
-            }
-            if (HonninKubun.本人.getCode().equals(世帯員.getHonninKubun())) {
-                賦課根拠.setGokeiShotoku(世帯員.getGokeiShotokuGaku());
-                賦課根拠.setKotekiNenkinShunyu(世帯員.getNenkiniShunyuGaku());
-            }
-        }
+        set課税区分リスト(dankaiProcessEntityList, 課税区分リスト, 賦課根拠);
         賦課根拠.setSetaiinKazeiKubunList(課税区分リスト);
         HokenshaDankaiTemp hokenshaDankaiTemp = new HokenshaDankaiTemp();
         hokenshaDankaiTemp.set被保険者番号(dankaiProcessEntityList.get被保険者対象Temp().getHihokenshaNo());
@@ -250,7 +242,7 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
         月別保険料制御情報Map.put(ELE, 月別保険料段階.get保険料段階02月());
         月別保険料制御情報Map.put(TWE, 月別保険料段階.get保険料段階03月());
         int i;
-        for (i = 1; i <= 12; i++) {
+        for (i = 1; i <= TWE; i++) {
             if (null != 月別保険料制御情報Map.get(i)
                     && null != 月別保険料制御情報Map.get(i).get段階区分()
                     && RString.EMPTY != 月別保険料制御情報Map.get(i).get段階区分()) {
@@ -258,7 +250,7 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
                 break;
             }
         }
-        for (int j = i; j <= 12; j++) {
+        for (int j = i; j <= TWE; j++) {
             if (null != 月別保険料制御情報Map.get(j)
                     && null != 月別保険料制御情報Map.get(j).get段階区分()
                     && RString.EMPTY != 月別保険料制御情報Map.get(j).get段階区分()) {
@@ -270,7 +262,7 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
         HyojunDankaiTemp hyojunDankaiTemp = new HyojunDankaiTemp();
         hyojunDankaiTemp.set被保険者番号(dankaiProcessEntityList.get被保険者対象Temp().getHihokenshaNo());
         int k;
-        for (k = 1; k <= 12; k++) {
+        for (k = 1; k <= TWE; k++) {
             if (null != 月別保険料制御情報Map.get(k)
                     && null != 月別保険料制御情報Map.get(k).get段階区分()
                     && RString.EMPTY != 月別保険料制御情報Map.get(k).get段階区分()) {
@@ -278,7 +270,7 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
                 break;
             }
         }
-        for (int l = k; l <= 12; l++) {
+        for (int l = k; l <= TWE; l++) {
             if (null != 月別保険料制御情報Map.get(l)
                     && null != 月別保険料制御情報Map.get(l).get段階区分()
                     && RString.EMPTY != 月別保険料制御情報Map.get(l).get段階区分()) {
@@ -287,6 +279,19 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
             }
         }
         標準設定段階Writer.insert(hyojunDankaiTemp);
+    }
+
+    private void set課税区分リスト(DankaiProcessEntityList dankaiProcessEntityList, List<KazeiKubun> 課税区分リスト, FukaKonkyo 賦課根拠) {
+        for (SetaiShotokuEntity 世帯員 : dankaiProcessEntityList.get世帯員所得情報Temp()) {
+            if (世帯員.getKazeiKubun() != null && !世帯員.getKazeiKubun().isEmpty()) {
+                課税区分リスト.add(KazeiKubun.toValue(世帯員.getKazeiKubun()));
+            }
+            if (HonninKubun.本人.getCode().equals(世帯員.getHonninKubun())) {
+                賦課根拠.setGokeiShotoku(世帯員.getGokeiShotokuGaku());
+                賦課根拠.setKotekiNenkinShunyu(世帯員.getNenkiniShunyuGaku());
+            }
+        }
+
     }
 
     private SeigyoJoho get月別保険料制御情報(HokenryoDankaiList 保険料段階リスト) {
@@ -386,33 +391,41 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
             賦課根拠.setSeihoStartYMD(FlexibleDate.EMPTY);
             賦課根拠.setSeihoEndYMD(FlexibleDate.EMPTY);
         } else {
-            for (SeikatsuHogoJukyusha 生保情報 : 生保の情報リスト) {
-                if (!生保情報.toEntity().getIsDeleted() && (生保情報.get受給開始日() == null
-                        || 生保情報.get受給開始日().isEmpty() || 生保情報.get受給開始日().isBeforeOrEquals(賦課基準日))
-                        && (生保情報.get受給廃止日() == null || 生保情報.get受給廃止日().isEmpty()
-                        || 賦課基準日.isBefore(生保情報.get受給廃止日()))) {
-                    賦課根拠.setSeihoStartYMD(生保情報.get受給開始日());
-                    賦課根拠.setSeihoEndYMD(生保情報.get受給廃止日());
-                    break;
-                }
-            }
+            set生保情報(生保の情報リスト, 賦課根拠, 賦課基準日);
         }
         if (老齢の情報のリスト == null || 老齢の情報のリスト.isEmpty()) {
             賦課根拠.setRoreiNenkinStartYMD(FlexibleDate.EMPTY);
             賦課根拠.setRoreiNenkinEndYMD(FlexibleDate.EMPTY);
         } else {
-            for (RoreiFukushiNenkinJukyusha 老齢情報 : 老齢の情報のリスト) {
-                if (!老齢情報.toEntity().getIsDeleted() && (老齢情報.get受給開始年月日() == null
-                        || 老齢情報.get受給開始年月日().isEmpty() || 老齢情報.get受給開始年月日().isBeforeOrEquals(賦課基準日))
-                        && (老齢情報.get受給終了年月日() == null || 老齢情報.get受給終了年月日().isEmpty()
-                        || 賦課基準日.isBefore(老齢情報.get受給終了年月日()))) {
-                    賦課根拠.setRoreiNenkinStartYMD(老齢情報.get受給開始年月日());
-                    賦課根拠.setRoreiNenkinEndYMD(老齢情報.get受給終了年月日());
-                    break;
-                }
-            }
+            set老齢情報(老齢の情報のリスト, 賦課根拠, 賦課基準日);
         }
         return 賦課根拠;
+    }
+
+    private void set生保情報(List<SeikatsuHogoJukyusha> 生保の情報リスト, FukaKonkyo 賦課根拠, FlexibleDate 賦課基準日) {
+        for (SeikatsuHogoJukyusha 生保情報 : 生保の情報リスト) {
+            if (!生保情報.toEntity().getIsDeleted() && (生保情報.get受給開始日() == null
+                    || 生保情報.get受給開始日().isEmpty() || 生保情報.get受給開始日().isBeforeOrEquals(賦課基準日))
+                    && (生保情報.get受給廃止日() == null || 生保情報.get受給廃止日().isEmpty()
+                    || 賦課基準日.isBefore(生保情報.get受給廃止日()))) {
+                賦課根拠.setSeihoStartYMD(生保情報.get受給開始日());
+                賦課根拠.setSeihoEndYMD(生保情報.get受給廃止日());
+                break;
+            }
+        }
+    }
+
+    private void set老齢情報(List<RoreiFukushiNenkinJukyusha> 老齢の情報のリスト, FukaKonkyo 賦課根拠, FlexibleDate 賦課基準日) {
+        for (RoreiFukushiNenkinJukyusha 老齢情報 : 老齢の情報のリスト) {
+            if (!老齢情報.toEntity().getIsDeleted() && (老齢情報.get受給開始年月日() == null
+                    || 老齢情報.get受給開始年月日().isEmpty() || 老齢情報.get受給開始年月日().isBeforeOrEquals(賦課基準日))
+                    && (老齢情報.get受給終了年月日() == null || 老齢情報.get受給終了年月日().isEmpty()
+                    || 賦課基準日.isBefore(老齢情報.get受給終了年月日()))) {
+                賦課根拠.setRoreiNenkinStartYMD(老齢情報.get受給開始年月日());
+                賦課根拠.setRoreiNenkinEndYMD(老齢情報.get受給終了年月日());
+                break;
+            }
+        }
     }
 
     private void set老齢の情報(DbT7006RoreiFukushiNenkinJukyushaEntity entity) {

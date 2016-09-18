@@ -4,7 +4,6 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7010001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -15,25 +14,37 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class DvChushutsuJokenDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("DvChushutsu")
-    private DvChushutsuDiv DvChushutsu;
-    @JsonProperty("DvChushutsuShosai")
-    private DvChushutsuShosaiDiv DvChushutsuShosai;
+    @JsonProperty("radChushutsuChokkin")
+    private RadioButton radChushutsuChokkin;
+    @JsonProperty("radChushutsuKijunBi")
+    private RadioButton radChushutsuKijunBi;
+    @JsonProperty("radKijunbiDateKind")
+    private RadioButton radKijunbiDateKind;
+    @JsonProperty("txtKijunDate")
+    private TextBoxDate txtKijunDate;
+    @JsonProperty("chkKijunDateNozoku")
+    private CheckBoxList chkKijunDateNozoku;
+    @JsonProperty("radChushutsuHani")
+    private RadioButton radChushutsuHani;
+    @JsonProperty("radHani")
+    private RadioButton radHani;
+    @JsonProperty("txtChushutsuHani")
+    private TextBoxDateRange txtChushutsuHani;
     @JsonProperty("linLine1")
     private HorizontalLine linLine1;
     @JsonProperty("chkHihokenshaJoho")
     private CheckBoxList chkHihokenshaJoho;
     @JsonProperty("linLine2")
     private HorizontalLine linLine2;
-    @JsonProperty("radChushutsuKijun")
-    private RadioButton radChushutsuKijun;
+    @JsonProperty("radShikakuJokyo")
+    private RadioButton radShikakuJokyo;
     @JsonProperty("chkShutokuJiyu")
     private CheckBoxList chkShutokuJiyu;
     @JsonProperty("chkSoshitsuJiyu")
@@ -46,39 +57,147 @@ public class DvChushutsuJokenDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getDvChushutsu
-     * @return DvChushutsu
+     * getradChushutsuChokkin
+     * @return radChushutsuChokkin
      */
-    @JsonProperty("DvChushutsu")
-    public DvChushutsuDiv getDvChushutsu() {
-        return DvChushutsu;
+    @JsonProperty("radChushutsuChokkin")
+    public RadioButton getRadChushutsuChokkin() {
+        return radChushutsuChokkin;
     }
 
     /*
-     * setDvChushutsu
-     * @param DvChushutsu DvChushutsu
+     * setradChushutsuChokkin
+     * @param radChushutsuChokkin radChushutsuChokkin
      */
-    @JsonProperty("DvChushutsu")
-    public void setDvChushutsu(DvChushutsuDiv DvChushutsu) {
-        this.DvChushutsu = DvChushutsu;
+    @JsonProperty("radChushutsuChokkin")
+    public void setRadChushutsuChokkin(RadioButton radChushutsuChokkin) {
+        this.radChushutsuChokkin = radChushutsuChokkin;
     }
 
     /*
-     * getDvChushutsuShosai
-     * @return DvChushutsuShosai
+     * getradChushutsuKijunBi
+     * @return radChushutsuKijunBi
      */
-    @JsonProperty("DvChushutsuShosai")
-    public DvChushutsuShosaiDiv getDvChushutsuShosai() {
-        return DvChushutsuShosai;
+    @JsonProperty("radChushutsuKijunBi")
+    public RadioButton getRadChushutsuKijunBi() {
+        return radChushutsuKijunBi;
     }
 
     /*
-     * setDvChushutsuShosai
-     * @param DvChushutsuShosai DvChushutsuShosai
+     * setradChushutsuKijunBi
+     * @param radChushutsuKijunBi radChushutsuKijunBi
      */
-    @JsonProperty("DvChushutsuShosai")
-    public void setDvChushutsuShosai(DvChushutsuShosaiDiv DvChushutsuShosai) {
-        this.DvChushutsuShosai = DvChushutsuShosai;
+    @JsonProperty("radChushutsuKijunBi")
+    public void setRadChushutsuKijunBi(RadioButton radChushutsuKijunBi) {
+        this.radChushutsuKijunBi = radChushutsuKijunBi;
+    }
+
+    /*
+     * getradKijunbiDateKind
+     * @return radKijunbiDateKind
+     */
+    @JsonProperty("radKijunbiDateKind")
+    public RadioButton getRadKijunbiDateKind() {
+        return radKijunbiDateKind;
+    }
+
+    /*
+     * setradKijunbiDateKind
+     * @param radKijunbiDateKind radKijunbiDateKind
+     */
+    @JsonProperty("radKijunbiDateKind")
+    public void setRadKijunbiDateKind(RadioButton radKijunbiDateKind) {
+        this.radKijunbiDateKind = radKijunbiDateKind;
+    }
+
+    /*
+     * gettxtKijunDate
+     * @return txtKijunDate
+     */
+    @JsonProperty("txtKijunDate")
+    public TextBoxDate getTxtKijunDate() {
+        return txtKijunDate;
+    }
+
+    /*
+     * settxtKijunDate
+     * @param txtKijunDate txtKijunDate
+     */
+    @JsonProperty("txtKijunDate")
+    public void setTxtKijunDate(TextBoxDate txtKijunDate) {
+        this.txtKijunDate = txtKijunDate;
+    }
+
+    /*
+     * getchkKijunDateNozoku
+     * @return chkKijunDateNozoku
+     */
+    @JsonProperty("chkKijunDateNozoku")
+    public CheckBoxList getChkKijunDateNozoku() {
+        return chkKijunDateNozoku;
+    }
+
+    /*
+     * setchkKijunDateNozoku
+     * @param chkKijunDateNozoku chkKijunDateNozoku
+     */
+    @JsonProperty("chkKijunDateNozoku")
+    public void setChkKijunDateNozoku(CheckBoxList chkKijunDateNozoku) {
+        this.chkKijunDateNozoku = chkKijunDateNozoku;
+    }
+
+    /*
+     * getradChushutsuHani
+     * @return radChushutsuHani
+     */
+    @JsonProperty("radChushutsuHani")
+    public RadioButton getRadChushutsuHani() {
+        return radChushutsuHani;
+    }
+
+    /*
+     * setradChushutsuHani
+     * @param radChushutsuHani radChushutsuHani
+     */
+    @JsonProperty("radChushutsuHani")
+    public void setRadChushutsuHani(RadioButton radChushutsuHani) {
+        this.radChushutsuHani = radChushutsuHani;
+    }
+
+    /*
+     * getradHani
+     * @return radHani
+     */
+    @JsonProperty("radHani")
+    public RadioButton getRadHani() {
+        return radHani;
+    }
+
+    /*
+     * setradHani
+     * @param radHani radHani
+     */
+    @JsonProperty("radHani")
+    public void setRadHani(RadioButton radHani) {
+        this.radHani = radHani;
+    }
+
+    /*
+     * gettxtChushutsuHani
+     * @return txtChushutsuHani
+     */
+    @JsonProperty("txtChushutsuHani")
+    public TextBoxDateRange getTxtChushutsuHani() {
+        return txtChushutsuHani;
+    }
+
+    /*
+     * settxtChushutsuHani
+     * @param txtChushutsuHani txtChushutsuHani
+     */
+    @JsonProperty("txtChushutsuHani")
+    public void setTxtChushutsuHani(TextBoxDateRange txtChushutsuHani) {
+        this.txtChushutsuHani = txtChushutsuHani;
     }
 
     /*
@@ -136,21 +255,21 @@ public class DvChushutsuJokenDiv extends Panel {
     }
 
     /*
-     * getradChushutsuKijun
-     * @return radChushutsuKijun
+     * getradShikakuJokyo
+     * @return radShikakuJokyo
      */
-    @JsonProperty("radChushutsuKijun")
-    public RadioButton getRadChushutsuKijun() {
-        return radChushutsuKijun;
+    @JsonProperty("radShikakuJokyo")
+    public RadioButton getRadShikakuJokyo() {
+        return radShikakuJokyo;
     }
 
     /*
-     * setradChushutsuKijun
-     * @param radChushutsuKijun radChushutsuKijun
+     * setradShikakuJokyo
+     * @param radShikakuJokyo radShikakuJokyo
      */
-    @JsonProperty("radChushutsuKijun")
-    public void setRadChushutsuKijun(RadioButton radChushutsuKijun) {
-        this.radChushutsuKijun = radChushutsuKijun;
+    @JsonProperty("radShikakuJokyo")
+    public void setRadShikakuJokyo(RadioButton radShikakuJokyo) {
+        this.radShikakuJokyo = radShikakuJokyo;
     }
 
     /*
@@ -187,89 +306,6 @@ public class DvChushutsuJokenDiv extends Panel {
     @JsonProperty("chkSoshitsuJiyu")
     public void setChkSoshitsuJiyu(CheckBoxList chkSoshitsuJiyu) {
         this.chkSoshitsuJiyu = chkSoshitsuJiyu;
-    }
-
-    /*
-     * [ ショートカットの作成 ]
-     */
-    @JsonIgnore
-    public RadioButton getRadChushutsu() {
-        return this.getDvChushutsu().getRadChushutsu();
-    }
-
-    @JsonIgnore
-    public void  setRadChushutsu(RadioButton radChushutsu) {
-        this.getDvChushutsu().setRadChushutsu(radChushutsu);
-    }
-
-    @JsonIgnore
-    public Label getLblKuhaku() {
-        return this.getDvChushutsuShosai().getLblKuhaku();
-    }
-
-    @JsonIgnore
-    public void  setLblKuhaku(Label lblKuhaku) {
-        this.getDvChushutsuShosai().setLblKuhaku(lblKuhaku);
-    }
-
-    @JsonIgnore
-    public RadioButton getRadKijunbiDate() {
-        return this.getDvChushutsuShosai().getRadKijunbiDate();
-    }
-
-    @JsonIgnore
-    public void  setRadKijunbiDate(RadioButton radKijunbiDate) {
-        this.getDvChushutsuShosai().setRadKijunbiDate(radKijunbiDate);
-    }
-
-    @JsonIgnore
-    public TextBoxDateRange getTxtIryokikan() {
-        return this.getDvChushutsuShosai().getTxtIryokikan();
-    }
-
-    @JsonIgnore
-    public void  setTxtIryokikan(TextBoxDateRange txtIryokikan) {
-        this.getDvChushutsuShosai().setTxtIryokikan(txtIryokikan);
-    }
-
-    @JsonIgnore
-    public TextBoxDate getTxtKijunDate() {
-        return this.getDvChushutsuShosai().getTxtKijunDate();
-    }
-
-    @JsonIgnore
-    public void  setTxtKijunDate(TextBoxDate txtKijunDate) {
-        this.getDvChushutsuShosai().setTxtKijunDate(txtKijunDate);
-    }
-
-    @JsonIgnore
-    public CheckBoxList getChkKijunDateNozoku() {
-        return this.getDvChushutsuShosai().getChkKijunDateNozoku();
-    }
-
-    @JsonIgnore
-    public void  setChkKijunDateNozoku(CheckBoxList chkKijunDateNozoku) {
-        this.getDvChushutsuShosai().setChkKijunDateNozoku(chkKijunDateNozoku);
-    }
-
-    @JsonIgnore
-    public RadioButton getRadHani() {
-        return this.getDvChushutsuShosai().getRadHani();
-    }
-
-    @JsonIgnore
-    public void  setRadHani(RadioButton radHani) {
-        this.getDvChushutsuShosai().setRadHani(radHani);
-    }
-
-    @JsonIgnore
-    public TextBoxDateRange getTxtChushutsuHani() {
-        return this.getDvChushutsuShosai().getTxtChushutsuHani();
-    }
-
-    @JsonIgnore
-    public void  setTxtChushutsuHani(TextBoxDateRange txtChushutsuHani) {
-        this.getDvChushutsuShosai().setTxtChushutsuHani(txtChushutsuHani);
     }
 
     // </editor-fold>

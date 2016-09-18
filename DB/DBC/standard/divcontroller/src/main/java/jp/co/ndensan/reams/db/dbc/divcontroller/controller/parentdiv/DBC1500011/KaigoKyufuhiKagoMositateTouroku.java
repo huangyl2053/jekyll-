@@ -8,10 +8,12 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC1500011
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KagoMoshitate;
 import jp.co.ndensan.reams.db.dbc.business.core.kaigokyufuhikagomositatetouroku.KagoMoshitateCollect;
+import jp.co.ndensan.reams.db.dbc.business.core.kaigokyufuhikagomositatetouroku.KagoMoshitateGamenData;
 import jp.co.ndensan.reams.db.dbc.business.core.kaigokyufuhikagomositatetouroku.KaigoKyufuhiKagoMositateTourokuResult;
 import jp.co.ndensan.reams.db.dbc.definition.core.kagomoshitate.KagoMoshitate_MoshitateshoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kaigokyufuhikagomositatetouroku.KaigoKyufuhiParamter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1500011.DBC1500011StateName;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1500011.DBC1500011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1500011.KaigoKyufuhiKagoMositateTourokuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1500011.KaigoKyufuhiKagoMositateTourokuHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1500011.KaigoKyufuhiKagoMositateTourokuValidationHandler;
@@ -25,12 +27,20 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.IShikibetsuTaishoFinder;
+import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -63,8 +73,6 @@ public class KaigoKyufuhiKagoMositateTouroku {
     public ResponseData<KaigoKyufuhiKagoMositateTourokuDiv> onLoad(KaigoKyufuhiKagoMositateTourokuDiv div) {
         IUrControlData controlData = UrControlDataFactory.createInstance();
         RString menuID = controlData.getMenuID();
-        RString loginUserId = controlData.getLoginInfo().getUserId();
-        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務, loginUserId);
         if (is単一()) {
             div.getHokenshalist().setVisible(false);
         } else {
@@ -72,7 +80,20 @@ public class KaigoKyufuhiKagoMositateTouroku {
             div.getHokenshalist().loadHokenshaList(GyomuBunrui.介護事務);
         }
         getHandler(div).onLoad();
-        get給付実績一覧(div, controlData, 市町村セキュリティ情報);
+        get給付実績一覧(div, controlData);
+        TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        KagoMoshitateGamenData 画面データ = ViewStateHolder.get(ViewStateKeys.介護給付費過誤申立登録, KagoMoshitateGamenData.class);
+        if (資格対象者 != null) {
+            div.getTxtHihoName().setValue(get被保名称(資格対象者.get識別コード()));
+            if (画面データ != null) {
+                div.getCcdJigyoshaSentaku().setNyuryokuShisetsuKodo(画面データ.get事業者());
+                div.getCcdJigyoshaSentaku().setShisetsuMeisho(画面データ.get事業者名());
+                div.getTxtHihoNo().setValue(画面データ.get被保番号());
+                div.getTxtTeikyoYMRange().setFromValue(画面データ.get提供年月From());
+                div.getTxtTeikyoYMRange().setToValue(画面データ.get提供年月To());
+                div.getMoshitateshoSakuseiZumi().setSelectedItemsByKey(画面データ.get申立書作成済());
+            }
+        }
         if (MENUID_DBCMN91001.equals(menuID)) {
             return ResponseData.of(div).rootTitle(KagoMoshitate_MoshitateshoKubun.過誤申立書.get名称()).respond();
         } else if (MENUID_DBCMN91002.equals(menuID)) {
@@ -84,13 +105,60 @@ public class KaigoKyufuhiKagoMositateTouroku {
     }
 
     /**
+     * 「被保番号検索」ボタンを押します。
+     *
+     * @param div 画面情報
+     * @return ResponseData<KaigoKyufuhiKagoMositateTourokuDiv>
+     */
+    public ResponseData<KaigoKyufuhiKagoMositateTourokuDiv> onClick_BtnSearchHihokensha(KaigoKyufuhiKagoMositateTourokuDiv div) {
+        KagoMoshitateGamenData 画面データ = new KagoMoshitateGamenData();
+        画面データ.set事業者(div.getCcdJigyoshaSentaku().getNyuryokuShisetsuKodo());
+        画面データ.set事業者名(div.getCcdJigyoshaSentaku().getNyuryokuShisetsuMeisho());
+        画面データ.set被保番号(div.getTxtHihoNo().getValue());
+        画面データ.set被保番名(div.getTxtHihoName().getValue());
+        画面データ.set提供年月From(div.getTxtTeikyoYMRange().getFromValue());
+        画面データ.set提供年月To(div.getTxtTeikyoYMRange().getToValue());
+        画面データ.set申立書作成済(div.getMoshitateshoSakuseiZumi().getSelectedKeys());
+        ViewStateHolder.put(ViewStateKeys.介護給付費過誤申立登録, 画面データ);
+        return ResponseData.of(div).forwardWithEventName(DBC1500011TransitionEventName.対象者検索).respond();
+    }
+
+    /**
+     * 被保番号をOnBlurです。
+     *
+     * @param div 画面情報
+     * @return ResponseData<KaigoKyufuhiKagoMositateTourokuDiv>
+     */
+    public ResponseData<KaigoKyufuhiKagoMositateTourokuDiv> onBlur_BtnSearchHihokensha(KaigoKyufuhiKagoMositateTourokuDiv div) {
+        RString 被保険者番号 = div.getTxtHihoNo().getValue();
+        if (!RString.isNullOrEmpty(被保険者番号)) {
+            if (getService().get識別コード(new HihokenshaNo(被保険者番号)).isEmpty()) {
+                throw new ApplicationException(
+                        UrErrorMessages.存在しない.getMessage().replace("被保険者台帳"));
+            }
+            div.getTxtHihoName().setValue(get被保名称(getService().get識別コード(new HihokenshaNo(被保険者番号))));
+
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    private RString get被保名称(ShikibetsuCode 識別コード) {
+        IShikibetsuTaishoFinder findler = ShikibetsuTaishoService.getShikibetsuTaishoFinder();
+        IShikibetsuTaisho iShikibe = findler.get識別対象(GyomuCode.DB介護保険, 識別コード, KensakuYusenKubun.住登外優先);
+        if (iShikibe != null) {
+            return iShikibe.get名称().getName().value();
+        }
+        return RString.EMPTY;
+    }
+
+    /**
      * 「給付実績を検索する」ボタンを押します。
      *
      * @param div 画面情報
      * @return ResponseData<KaigoKyufuhiKagoMositateTourokuDiv>
      */
     public ResponseData<KaigoKyufuhiKagoMositateTourokuDiv> onClick_BtnSearch(KaigoKyufuhiKagoMositateTourokuDiv div) {
-        if (RString.isNullOrEmpty(div.getTxtJigyoshaNo().getValue())
+        if (RString.isNullOrEmpty(div.getCcdJigyoshaSentaku().getNyuryokuShisetsuKodo())
                 && RString.isNullOrEmpty(div.getTxtHihoNo().getValue())) {
             return ResponseData.of(div).addValidationMessages(getValidation(div).check必須項目を入力(new RString("被保番号、支援事業者番号"))).respond();
         }
@@ -102,10 +170,8 @@ public class KaigoKyufuhiKagoMositateTouroku {
             return ResponseData.of(div).addValidationMessages(getValidation(div).check終了日が開始日以前()).respond();
         }
         IUrControlData controlData = UrControlDataFactory.createInstance();
-        RString loginUserId = controlData.getLoginInfo().getUserId();
-        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務, loginUserId);
         div.setHdnKensaku(再検索フラグ);
-        get給付実績一覧(div, controlData, 市町村セキュリティ情報);
+        get給付実績一覧(div, controlData);
         return ResponseData.of(div).setState(DBC1500011StateName.search);
     }
 
@@ -162,6 +228,7 @@ public class KaigoKyufuhiKagoMositateTouroku {
         KagoMoshitate data = getHandler(div).setDB出力データ(給付実績情報, 最大履歴番号);
         KagoMoshitateManager service = new KagoMoshitateManager();
         service.saveOrdelete過誤申立(data);
+        div.getCommonKiagoKanryoMessageChildDiv1().setSuccessMessage(new RString("保存は正常に終了しました。"));
         return ResponseData.of(div).setState(DBC1500011StateName.kanryoumessage);
     }
 
@@ -173,6 +240,8 @@ public class KaigoKyufuhiKagoMositateTouroku {
      */
     public ResponseData<KaigoKyufuhiKagoMositateTourokuDiv> onClick_BtnModuro(KaigoKyufuhiKagoMositateTourokuDiv div) {
         div.setHdnKensaku(再検索フラグ);
+        IUrControlData controlData = UrControlDataFactory.createInstance();
+        get給付実績一覧(div, controlData);
         return ResponseData.of(div).setState(DBC1500011StateName.search);
     }
 
@@ -226,7 +295,7 @@ public class KaigoKyufuhiKagoMositateTouroku {
                 || DonyuKeitaiCode.事務構成市町村.getCode().equals(市町村セキュリティ情報.get導入形態コード().value());
     }
 
-    private void get給付実績一覧(KaigoKyufuhiKagoMositateTourokuDiv div, IUrControlData controlData, ShichosonSecurityJoho 市町村セキュリティ情報) {
+    private void get給付実績一覧(KaigoKyufuhiKagoMositateTourokuDiv div, IUrControlData controlData) {
         LasdecCode 保険者番号 = null;
         if (!is単一()) {
             if (RString.isNullOrEmpty(div.getHokenshalist().getSelectedItem().get市町村コード().value())) {
@@ -243,7 +312,7 @@ public class KaigoKyufuhiKagoMositateTouroku {
             RString 提供年月終了 = div.getTxtTeikyoYMRange().getToValue().seireki().separator(Separator.NONE).fillType(FillType.NONE)
                     .toDateString().substring(0, 提供年月);
             KaigoKyufuhiParamter param = KaigoKyufuhiParamter.createParem(div.getTxtHihoNo().getValue(),
-                    div.getTxtJigyoshaNo().getValue(),
+                    div.getCcdJigyoshaSentaku().getNyuryokuShisetsuKodo(),
                     提供年月開始,
                     提供年月終了,
                     保険者番号,

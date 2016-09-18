@@ -66,6 +66,15 @@ public interface IFukaRirekiAllDiv extends ICommonChildDivBaseProperties {
      */
     FukaRireki get賦課履歴();
 
+//<<<<<<< HEAD
+    /**
+     * 賦課履歴を取得して保持している場合は{@code true}を返します。
+     *
+     * @return 賦課履歴を取得して保持している場合は{@code true}.
+     */
+    boolean hasLoaded();
+//=======
+
     /**
      * 選択されている行の通知書番号を返します。
      *
@@ -87,4 +96,5 @@ public interface IFukaRirekiAllDiv extends ICommonChildDivBaseProperties {
      */
     FlexibleYear getClicked賦課年度();
 
+//    >>>>>>> origin/sync
 }

@@ -63,4 +63,25 @@ public class TokuchoKihonJoho {
     private ResponseData<TokuchoKihonJohoDiv> createResponseData(TokuchoKihonJohoDiv div) {
         return ResponseData.of(div).respond();
     }
+
+    /**
+     * @param div {@link TokuchoKihonJohoDiv}
+     * @return {@link ResponseData}
+     */
+    public ResponseData<TokuchoKihonJohoDiv> onClick_btnZenkairesultHyoji(TokuchoKihonJohoDiv div) {
+        return clearViewStateKeys(div);
+    }
+
+    private ResponseData<TokuchoKihonJohoDiv> clearViewStateKeys(TokuchoKihonJohoDiv div) {
+        FukaShokaiController.clearFukaTaishoshaKeyAndFukaShokaiKey();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * @param div {@link TokuchoKihonJohoDiv}
+     * @return {@link ResponseData}
+     */
+    public ResponseData<TokuchoKihonJohoDiv> onClick_btnResearch(TokuchoKihonJohoDiv div) {
+        return clearViewStateKeys(div);
+    }
 }

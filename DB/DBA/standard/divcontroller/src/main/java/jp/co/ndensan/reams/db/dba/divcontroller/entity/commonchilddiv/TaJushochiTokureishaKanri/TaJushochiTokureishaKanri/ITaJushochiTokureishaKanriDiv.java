@@ -30,6 +30,7 @@ public interface ITaJushochiTokureishaKanriDiv extends ICommonChildDivBaseProper
      * 他住所地特例者の共有子DIVの画面内容から、他市町村住所地特例情報をDBに反映します。
      *
      * @param 識別コード 識別コード
+     * @return 
      */
     public void saveTaJushochiTokurei(ShikibetsuCode 識別コード);
 

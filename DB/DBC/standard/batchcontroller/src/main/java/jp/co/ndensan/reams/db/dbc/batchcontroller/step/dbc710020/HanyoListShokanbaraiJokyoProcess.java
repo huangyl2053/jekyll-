@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistshokanbaraijokyo.Han
 import jp.co.ndensan.reams.db.dbc.service.core.hanyolistshokanbaraijokyo.HanyoListCsvDataCreate;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
+import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaT0301YokinShubetsuPatternEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.relate.kinyukikan.KinyuKikanEntity;
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
@@ -62,7 +64,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoListShokanbaraiJokyoEntity> {
 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
-            + "hanyolistshokanbaraijokyo.IHanyoListShokanbaraiJokyoMapper.getCSVData");
+                                                            + "hanyolistshokanbaraijokyo.IHanyoListShokanbaraiJokyoMapper.getCSVData");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC701002");
     private static final RString CSV出力有無 = new RString("");
     private static final RString ITEM = new RString("～");
@@ -91,12 +93,15 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
     private static final RString すべて = new RString("すべて");
     private static final RString 左記号 = new RString("(");
     private static final RString 右記号 = new RString(")");
+    private RString preBreakKey;
     private HanyoListShokanbaraiJokyoProcessParameter parameter;
     private HanyoListCsvDataCreate dataCreate;
     private RString eucFilePath;
     private FileSpoolManager manager;
     private List<PersonalData> personalDataList;
     private Association 地方公共団体;
+    private HanyoListShokanbaraiJokyoEntity preEntity;
+    private List<KinyuKikanEntity> lstKinyuKikanEntity;
     private Decimal 連番;
     private FlexibleDate システム日付;
 //    private RString preBreakKey;
@@ -111,13 +116,13 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
     @Override
     protected void beforeExecute() {
         連番 = Decimal.ONE;
-//        preBreakKey = RString.EMPTY;
+        preBreakKey = RString.EMPTY;
         システム日付 = FlexibleDate.getNowDate();
         dataCreate = new HanyoListCsvDataCreate(システム日付);
         personalDataList = new ArrayList<>();
 //        mapFlag = new HashMap<>();
 //        lstDbt3038List = new ArrayList<>();
-//        lstKinyuKikanEntity = new ArrayList<>();
+        lstKinyuKikanEntity = new ArrayList<>();
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
 
     }
@@ -127,6 +132,7 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         KozaSearchKeyBuilder builder = new KozaSearchKeyBuilder();
         builder.setサブ業務コード(SubGyomuCode.DBC介護給付);
         builder.set業務コード(GyomuCode.DB介護保険);
+        builder.set基準日(FlexibleDate.getNowDate());
         IKozaSearchKey searchKey = builder.build();
         parameter.setSearchkey(searchKey);
         ShunoKamokuAuthority sut = InstanceProvider.create(ShunoKamokuAuthority.class);
@@ -151,17 +157,86 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
 
     @Override
     protected void process(HanyoListShokanbaraiJokyoEntity entity) {
-        eucCsvWriter.writeLine(dataCreate.createCsvData(entity, parameter, 連番));
-        連番 = 連番.add(Decimal.ONE);
-        personalDataList.add(toPersonalData(entity));
+//        RString nowBreakKey = new RString(entity.get口座情報Entity().getUaT0310KozaEntity().getKozaId());
+        RString nowBreakKey = entity.get被保険者番号().value()
+                .concat(entity.get請求基本List().get(0).getServiceTeikyoYM().toDateString())
+                .concat(entity.get請求基本List().get(0).getSeiriNo())
+                .concat(entity.get請求基本List().get(0).getJigyoshaNo().value())
+                .concat(entity.get請求基本List().get(0).getYoshikiNo())
+                .concat(entity.get請求基本List().get(0).getMeisaiNo());
+
+        if (RString.EMPTY.equals(preBreakKey) || preBreakKey.equals(nowBreakKey)) {
+            preBreakKey = nowBreakKey;
+            if (entity.get口座情報Entity() != null && entity.get口座情報Entity().getKinyuKikanEntity() != null) {
+                lstKinyuKikanEntity.addAll(entity.get口座情報Entity().getKinyuKikanEntity());
+            }
+            preEntity = entity;
+            return;
+        }
+        if (!preBreakKey.equals(nowBreakKey)) {
+            List<UaT0301YokinShubetsuPatternEntity> lstUat0301Entity = new ArrayList<>();
+
+            for (KinyuKikanEntity kinyuKikanEntity : lstKinyuKikanEntity) {
+                lstUat0301Entity.addAll(kinyuKikanEntity.get預金種別パターンEntity());
+            }
+            for (KinyuKikanEntity kinyuKikanEntity : lstKinyuKikanEntity) {
+                if (kinyuKikanEntity.get預金種別パターンEntity() != null
+                    && preEntity.get口座情報Entity() != null && preEntity.get口座情報Entity().getKinyuKikanEntity() != null) {
+                    kinyuKikanEntity.get預金種別パターンEntity().addAll(lstUat0301Entity);
+                    preEntity.get口座情報Entity().getKinyuKikanEntity().add(kinyuKikanEntity);
+                }
+            }
+            eucCsvWriter.writeLine(dataCreate.createCsvData(preEntity, parameter, 連番));
+            連番 = 連番.add(Decimal.ONE);
+            personalDataList.add(toPersonalData(preEntity));
+            lstKinyuKikanEntity.clear();
+            if (entity.get口座情報Entity() != null && entity.get口座情報Entity() != null) {
+                lstKinyuKikanEntity.addAll(entity.get口座情報Entity().getKinyuKikanEntity());
+            }
+        }
+        preBreakKey = nowBreakKey;
+        preEntity = entity;
+//        eucCsvWriter.writeLine(dataCreate.createCsvData(entity, parameter, 連番));
+//        連番 = 連番.add(Decimal.ONE);
+//        personalDataList.add(toPersonalData(entity));
     }
 
     @Override
     protected void afterExecute() {
+
+        if (preEntity == null && parameter.is項目名付加()) {
+            eucCsvWriter.writeLine(new HanyoListShokanbaraiJokyoCSVEntity());
+        }
+        List<UaT0301YokinShubetsuPatternEntity> lstUat0301Entity = new ArrayList<>();
+
+        for (KinyuKikanEntity kinyuKikanEntity : lstKinyuKikanEntity) {
+            lstUat0301Entity.addAll(kinyuKikanEntity.get預金種別パターンEntity());
+        }
+        for (KinyuKikanEntity kinyuKikanEntity : lstKinyuKikanEntity) {
+            if (kinyuKikanEntity.get預金種別パターンEntity() != null
+                && preEntity.get口座情報Entity() != null && preEntity.get口座情報Entity().getKinyuKikanEntity() != null) {
+                kinyuKikanEntity.get預金種別パターンEntity().addAll(lstUat0301Entity);
+                preEntity.get口座情報Entity().getKinyuKikanEntity().add(kinyuKikanEntity);
+            }
+        }
+        if (preEntity != null) {
+            eucCsvWriter.writeLine(dataCreate.createCsvData(preEntity, parameter, 連番));
+            連番 = 連番.add(Decimal.ONE);
+            personalDataList.add(toPersonalData(preEntity));
+        }
         eucCsvWriter.close();
-        AccessLogUUID accessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
-        manager.spool(SubGyomuCode.DBC介護給付, eucFilePath, accessLog);
+
+        if (personalDataList == null || personalDataList.isEmpty()) {
+            manager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
+        } else {
+            AccessLogUUID accessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
+            manager.spool(SubGyomuCode.DBC介護給付, eucFilePath, accessLog);
+        }
         バッチ出力条件リストの出力();
+//        eucCsvWriter.close();
+//        AccessLogUUID accessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
+//        manager.spool(SubGyomuCode.DBC介護給付, eucFilePath, accessLog);
+//        バッチ出力条件リストの出力();
     }
 
 //    @Override
@@ -337,7 +412,7 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
             return builder;
         }
         builder.append(parameter.get保険者コード() == null || parameter.get保険者コード().isEmpty()
-                ? RString.EMPTY : 左記号.concat(parameter.get保険者コード())
+                       ? RString.EMPTY : 左記号.concat(parameter.get保険者コード())
                 .concat(右記号).concat(parameter.get保険者名()));
         return builder;
     }
@@ -349,7 +424,7 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
             return builder;
         }
         builder.append(parameter.get金融機関コード() == null || parameter.get金融機関コード().isEmpty()
-                ? RString.EMPTY : 左記号.concat(parameter.get金融機関コード())
+                       ? RString.EMPTY : 左記号.concat(parameter.get金融機関コード())
                 .concat(右記号).concat(parameter.get金融機関名称()));
         return builder;
     }
@@ -410,7 +485,7 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         builder.append(サービス提供年月);
         RString serviceTeikyoYM = RString.EMPTY;
         if ((parameter.getサービス提供年月From() == null || parameter.getサービス提供年月From().isEmpty())
-                && (parameter.getサービス提供年月To() == null || parameter.getサービス提供年月To().isEmpty())) {
+            && (parameter.getサービス提供年月To() == null || parameter.getサービス提供年月To().isEmpty())) {
             return builder;
         }
         serviceTeikyoYM = monthToRString(parameter.getサービス提供年月From())
@@ -425,7 +500,7 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         builder.append(申請日);
         RString shinseiYMD = RString.EMPTY;
         if ((parameter.get申請日From() == null || parameter.get申請日From().isEmpty())
-                && (parameter.get申請日To() == null || parameter.get申請日To().isEmpty())) {
+            && (parameter.get申請日To() == null || parameter.get申請日To().isEmpty())) {
             return builder;
         }
         shinseiYMD = dataToRString(parameter.get申請日From())
@@ -440,7 +515,7 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         builder.append(住宅改修支給届出日);
         RString kaishuYM = RString.EMPTY;
         if ((parameter.get住宅改修支給届出日From() == null || parameter.get住宅改修支給届出日From().isEmpty())
-                && (parameter.get住宅改修支給届出日To() == null || parameter.get住宅改修支給届出日To().isEmpty())) {
+            && (parameter.get住宅改修支給届出日To() == null || parameter.get住宅改修支給届出日To().isEmpty())) {
             return builder;
         }
         kaishuYM = dataToRString(parameter.get住宅改修支給届出日From())
@@ -455,7 +530,7 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         builder.append(決定日);
         RString ketteiYMD = RString.EMPTY;
         if ((parameter.get決定日From() == null || parameter.get決定日From().isEmpty())
-                && (parameter.get決定日To() == null || parameter.get決定日To().isEmpty())) {
+            && (parameter.get決定日To() == null || parameter.get決定日To().isEmpty())) {
             return builder;
         }
 
@@ -471,7 +546,7 @@ public class HanyoListShokanbaraiJokyoProcess extends BatchProcessBase<HanyoList
         builder.append(国保連送付年月);
         RString kokuhorenYM = RString.EMPTY;
         if ((parameter.get国保連送付年月From() == null || parameter.get国保連送付年月From().isEmpty())
-                && (parameter.get国保連送付年月To() == null || parameter.get国保連送付年月To().isEmpty())) {
+            && (parameter.get国保連送付年月To() == null || parameter.get国保連送付年月To().isEmpty())) {
             return builder;
         }
         kokuhorenYM = monthToRString(parameter.get国保連送付年月From())

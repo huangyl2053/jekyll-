@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA7010001;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.CheckForNull;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho.HizukeChushutsuKubun;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolist.hihokenshadaicho.ShikakuChushutsuKubun;
 import jp.co.ndensan.reams.db.dba.definition.batchprm.hanyolisthihokenshadaicho.HanyoListHihokenshadaichoBatchParameter;
@@ -46,12 +47,15 @@ public class DvHihokenshaDaichoParamDivHandler {
     /**
      * 画面を初期化します。
      */
-    public void onLoad() {
+    public void initialize() {
         日付抽出区分が直近非活性();
         div.getCcdHanyoListAtenaSelect().initialize();
         div.getCcdKogakuShutsuryokujun().load(SubGyomuCode.DBA介護資格, ReportIdDBA.DBA701001.getReportId());
         // TODO QA #73393 出力順ID実装方式 回復待ち  2016/01/20まで
 //        div.getCcdKogakuShutsuryokuKomoku().load(帳票ID, SubGyomuCode.DBA介護資格);
+
+        // TODO n3327 三浦 出力順実装完了まで
+        div.getCcdKogakuShutsuryokujun().setDisplayNone(true);
     }
 
     /**
@@ -59,7 +63,7 @@ public class DvHihokenshaDaichoParamDivHandler {
      *
      * @param 日付抽出区分 日付抽出区分
      */
-    public void onClick_Chushutsu(RString 日付抽出区分) {
+    public void set日付抽出区分FromCode(RString 日付抽出区分) {
         if (HizukeChushutsuKubun.直近.getコード().equals(日付抽出区分)) {
             日付抽出区分が直近非活性();
         } else if (HizukeChushutsuKubun.基準日.getコード().equals(日付抽出区分)) {
@@ -70,11 +74,42 @@ public class DvHihokenshaDaichoParamDivHandler {
     }
 
     /**
+     * 現在選択中の日付抽出区分(直近・基準日・範囲)を返却します。
+     *
+     * @param div DvHihokenshaDaichoParamDiv
+     * @return 日付抽出区分. 未選択の場合は、{@code null}
+     */
+    @CheckForNull
+    public HizukeChushutsuKubun get日付抽出区分() {
+        if (!RString.isNullOrEmpty(this.div.getRadChushutsuChokkin().getSelectedKey())) {
+            return HizukeChushutsuKubun.直近;
+        }
+        if (!RString.isNullOrEmpty(this.div.getRadChushutsuKijunBi().getSelectedKey())) {
+            return HizukeChushutsuKubun.基準日;
+        }
+        if (!RString.isNullOrEmpty(this.div.getRadChushutsuHani().getSelectedKey())) {
+            return HizukeChushutsuKubun.範囲;
+        }
+        return null;
+    }
+
+    /**
+     * 現在選択中の日付抽出区分(直近・基準日・範囲)のコードを返します。
+     * 例外的に、選択されている項目が無い場合、{@link RString#EMPTY}を返却します。
+     *
+     * @return 日付抽出区分(直近・基準日・範囲)のコード. もしくは、 {@link RString#EMPTY}
+     */
+    RString get日付抽出区分AsCode() {
+        HizukeChushutsuKubun kubun = this.get日付抽出区分();
+        return kubun == null ? RString.EMPTY : kubun.getコード();
+    }
+
+    /**
      * 資格抽出エリア内の表示制御を設定します。
      *
      * @param 資格抽出区分 資格抽出区分
      */
-    public void onClick_ChushutsuKijun(RString 資格抽出区分) {
+    public void set抽出対象資格状況(RString 資格抽出区分) {
         if (ShikakuChushutsuKubun.両方.getコード().equals(資格抽出区分)) {
             資格抽出区分が両方活性();
         } else if (ShikakuChushutsuKubun.資格取得者のみ.getコード().equals(資格抽出区分)) {
@@ -87,8 +122,8 @@ public class DvHihokenshaDaichoParamDivHandler {
     /**
      * 条件を復元するボタンを押下する場合、バッチパラメータの設定値を画面に表示する。
      */
-    public void onClick_btnKogakuParamRestore() {
-        BatchParameterMap restoreBatchParameterMap = div.getBtnKogakuParamRestore().getRestoreBatchParameterMap();
+    public void restoreBatchParameter() {
+        BatchParameterMap restoreBatchParameterMap = div.getBtnParamRestore().getRestoreBatchParameterMap();
         List<RString> 編集方法 = new ArrayList<>();
         boolean is項目名付加 = restoreBatchParameterMap.getParameterValue(boolean.class, new RString("komukuFukaMeyi"));
         if (is項目名付加) {
@@ -104,9 +139,9 @@ public class DvHihokenshaDaichoParamDivHandler {
         }
         div.getChkCsvHenshuHoho().setSelectedItemsByKey(編集方法);
         RString 日付抽出区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("hidukeTyuushutuKubun"));
-        div.getRadChushutsu().setSelectedKey(日付抽出区分);
+        this.set日付抽出区分FromCode(日付抽出区分);
         RString 基準日区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("kijunniKubun"));
-        div.getRadKijunbiDate().setSelectedKey(基準日区分);
+        div.getRadKijunbiDateKind().setSelectedKey(基準日区分);
         FlexibleDate 基準日 = restoreBatchParameterMap.getParameterValue(FlexibleDate.class, new RString("kijunni"));
         if (基準日 != null && !基準日.isEmpty()) {
             div.getTxtKijunDate().setValue(new RDate(基準日.toString()));
@@ -130,7 +165,7 @@ public class DvHihokenshaDaichoParamDivHandler {
         List<String> 被保険者情報 = restoreBatchParameterMap.getParameterValue(List.class, new RString("hiHokenshaJyoho"));
         div.getChkHihokenshaJoho().setSelectedItemsByKey(転換(被保険者情報));
         RString 資格抽出区分 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("shikakuChushutsuKubun"));
-        div.getRadChushutsuKijun().setSelectedKey(資格抽出区分);
+        div.getRadShikakuJokyo().setSelectedKey(資格抽出区分);
         List<String> 取得事由 = restoreBatchParameterMap.getParameterValue(List.class, new RString("shutokujiyu"));
         div.getChkShutokuJiyu().setSelectedItemsByKey(転換(取得事由));
         List<String> 喪失事由 = restoreBatchParameterMap.getParameterValue(List.class, new RString("soshitsujiyu"));
@@ -150,7 +185,7 @@ public class DvHihokenshaDaichoParamDivHandler {
      *
      * @return parameter HanyoListHihokenshadaichoBatchParameter
      */
-    public HanyoListHihokenshadaichoBatchParameter onClick_btnKogakuParamSave() {
+    public HanyoListHihokenshadaichoBatchParameter createBatchParameter() {
         boolean 項目名付加 = false;
         boolean 連番付加 = false;
         boolean 日付編集 = false;
@@ -189,7 +224,7 @@ public class DvHihokenshaDaichoParamDivHandler {
         RString 市町村コード = RString.EMPTY;
         RString 市町村名称 = RString.EMPTY;
         if (div.getCcdHanyoListAtenaSelect().get保険者() != null && div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード() != null
-                && !div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().isEmpty()) {
+            && !div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().isEmpty()) {
             市町村コード = div.getCcdHanyoListAtenaSelect().get保険者().get市町村コード().getColumnValue();
             市町村名称 = div.getCcdHanyoListAtenaSelect().get保険者().get市町村名称();
         }
@@ -199,10 +234,10 @@ public class DvHihokenshaDaichoParamDivHandler {
         // TODO 出力項目ID
 //        batchParameter.setShutsuryokuKomuku_Id(div.getCcdKogakuShutsuryokuKomoku().get出力項目ID());
         return new HanyoListHihokenshadaichoBatchParameter(項目名付加, 連番付加, 日付編集,
-                div.getRadChushutsu().getSelectedKey(),
-                div.getRadKijunbiDate().getSelectedKey(), 基準日, 基準日時点の受給者を除く, div.getRadHani().getSelectedKey(),
+                this.get日付抽出区分AsCode(),
+                div.getRadKijunbiDateKind().getSelectedKey(), 基準日, 基準日時点の受給者を除く, div.getRadHani().getSelectedKey(),
                 範囲抽出日From, 範囲抽出日To, div.getChkHihokenshaJoho().getSelectedKeys(),
-                div.getRadChushutsuKijun().getSelectedKey(), div.getChkShutokuJiyu().getSelectedKeys(), div.getChkSoshitsuJiyu().getSelectedKeys(),
+                div.getRadShikakuJokyo().getSelectedKey(), div.getChkShutokuJiyu().getSelectedKeys(), div.getChkSoshitsuJiyu().getSelectedKeys(),
                 RString.EMPTY, RString.EMPTY, 帳票ID,
                 div.getCcdHanyoListAtenaSelect().get年齢層抽出方法().getコード(), nullToEmpty(div.getCcdHanyoListAtenaSelect().get年齢開始()),
                 nullToEmpty(div.getCcdHanyoListAtenaSelect().get年齢終了()), nullToEmpty(div.getCcdHanyoListAtenaSelect().get生年月日開始()),
@@ -227,8 +262,7 @@ public class DvHihokenshaDaichoParamDivHandler {
     }
 
     private void 日付抽出区分が直近非活性() {
-        div.getRadKijunbiDate().setDisabled(true);
-        div.getTxtIryokikan().setDisabled(true);
+        div.getRadKijunbiDateKind().setDisabled(true);
         div.getTxtKijunDate().setDisabled(true);
         div.getChkKijunDateNozoku().setDisabled(true);
         div.getRadHani().setDisabled(true);
@@ -236,8 +270,7 @@ public class DvHihokenshaDaichoParamDivHandler {
     }
 
     private void 日付抽出区分が基準日非活性() {
-        div.getRadKijunbiDate().setDisabled(false);
-        div.getTxtIryokikan().setDisabled(false);
+        div.getRadKijunbiDateKind().setDisabled(false);
         div.getTxtKijunDate().setDisabled(false);
         div.getChkKijunDateNozoku().setDisabled(false);
         div.getRadHani().setDisabled(true);
@@ -245,8 +278,7 @@ public class DvHihokenshaDaichoParamDivHandler {
     }
 
     private void 日付抽出区分が範囲非活性() {
-        div.getRadKijunbiDate().setDisabled(true);
-        div.getTxtIryokikan().setDisabled(true);
+        div.getRadKijunbiDateKind().setDisabled(true);
         div.getTxtKijunDate().setDisabled(true);
         div.getChkKijunDateNozoku().setDisabled(true);
         div.getRadHani().setDisabled(false);

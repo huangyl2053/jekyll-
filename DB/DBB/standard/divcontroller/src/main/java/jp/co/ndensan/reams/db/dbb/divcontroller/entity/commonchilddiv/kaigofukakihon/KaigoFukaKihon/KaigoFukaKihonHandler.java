@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACo
 import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMasterNoOption;
 
 /**
@@ -30,6 +31,7 @@ public class KaigoFukaKihonHandler {
     private final HihokenshaDaichoManager hihokenshaDaichoManager;
     private final FukaMiscManager fukaMiscManager;
     private final HokenryoDankaiManager hokenryoDankaiManager;
+    private static final RString 照会モード = new RString("shokai");
 
     /**
      * コンストラクタです。
@@ -65,9 +67,9 @@ public class KaigoFukaKihonHandler {
      * @param searchKey 検索キー
      */
     public void load(KaigoFukaKihonSearchKey searchKey) {
-
+        div.setMode(照会モード);
         if (searchKey.get賦課年度() == null || searchKey.get通知書番号() == null
-                || searchKey.get賦課年度().isEmpty() || searchKey.get通知書番号().isEmpty()) {
+            || searchKey.get賦課年度().isEmpty() || searchKey.get通知書番号().isEmpty()) {
             div.getBtnHihoRireki().setDisabled(true);
         } else {
             div.getTxtTsuchishoNo().setValue(searchKey.get通知書番号().value());
@@ -88,8 +90,10 @@ public class KaigoFukaKihonHandler {
                 div.getTxtShutokuJiyu().setValue(CodeMasterNoOption.getCodeRyakusho(
                         SubGyomuCode.DBA介護資格, DBACodeShubetsu.介護資格取得事由_被保険者.getCodeShubetsu(), new Code(daichoModel.get資格取得事由コード())));
                 div.getTxtSoshitsuYmd().setValue(daichoModel.get資格喪失年月日());
-                div.getTxtSoshitsuJiyu().setValue(CodeMasterNoOption.getCodeRyakusho(
-                        SubGyomuCode.DBA介護資格, DBACodeShubetsu.介護資格喪失事由_被保険者.getCodeShubetsu(), new Code(daichoModel.get資格喪失事由コード())));
+                if (daichoModel.get資格喪失事由コード() != null && !daichoModel.get資格喪失事由コード().isEmpty()) {
+                    div.getTxtSoshitsuJiyu().setValue(CodeMasterNoOption.getCodeRyakusho(
+                            SubGyomuCode.DBA介護資格, DBACodeShubetsu.介護資格喪失事由_被保険者.getCodeShubetsu(), new Code(daichoModel.get資格喪失事由コード())));
+                }
             }
         }
     }

@@ -327,8 +327,8 @@ public class ShujiiIryoKikanMaster {
      */
     public ResponseData<ShujiiIryoKikanMasterDiv> onClick_btnTorikeshi(ShujiiIryoKikanMasterDiv div) {
         if ((状態_追加.equals(div.getShujiiJohoInput().getState())
-                || 状態_修正.equals(div.getShujiiJohoInput().getState()))
-                && getValidationHandler(div).isUpdate()) {
+             || 状態_修正.equals(div.getShujiiJohoInput().getState()))
+            && getValidationHandler(div).isUpdate()) {
             if (!ResponseHolder.isReRequest()) {
                 QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
                         UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
@@ -336,7 +336,7 @@ public class ShujiiIryoKikanMaster {
             }
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 div.getShujiiIchiran().setDisabled(false);
                 return ResponseData.of(div).setState(DBE9010001StateName.医療機関一覧);
             }
@@ -423,7 +423,7 @@ public class ShujiiIryoKikanMaster {
             }
             if (new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.
                     getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 onLoad(div);
                 div.getShujiiSearch().setDisabled(false);
                 return ResponseData.of(div).setState(DBE9010001StateName.検索);
@@ -458,7 +458,7 @@ public class ShujiiIryoKikanMaster {
         }
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             validPairs = validateForDelete(div);
 
             if (validPairs.iterator().hasNext()) {
@@ -505,10 +505,10 @@ public class ShujiiIryoKikanMaster {
     public ResponseData<ShujiiIryoKikanMasterDiv> onClick_btnBackShujiiMasterToToroku(ShujiiIryoKikanMasterDiv div) {
         ViewStateHolder.put(SaibanHanyokeyName.医療機関コード, div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().getValue());
         if (状態_削除.equals(div.getShujiiJohoInput().getState())
-                || RString.EMPTY.equals(div.getShujiiJohoInput().getState())
-                || ((状態_修正.equals(div.getShujiiJohoInput().getState())
-                || 状態_追加.equals(div.getShujiiJohoInput().getState())
-                && !getValidationHandler(div).isUpdate()))) {
+            || RString.EMPTY.equals(div.getShujiiJohoInput().getState())
+            || ((状態_修正.equals(div.getShujiiJohoInput().getState())
+                 || 状態_追加.equals(div.getShujiiJohoInput().getState())
+                    && !getValidationHandler(div).isUpdate()))) {
             return ResponseData.of(div).forwardWithEventName(DBE9010001TransitionEventName.主治医マスタに遷移).respond();
         } else if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.画面遷移の確認.getMessage().getCode(),
@@ -517,7 +517,7 @@ public class ShujiiIryoKikanMaster {
         }
         if (new RString(UrQuestionMessages.画面遷移の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             return ResponseData.of(div).forwardWithEventName(DBE9010001TransitionEventName.主治医マスタに遷移).respond();
         }
         return ResponseData.of(div).respond();

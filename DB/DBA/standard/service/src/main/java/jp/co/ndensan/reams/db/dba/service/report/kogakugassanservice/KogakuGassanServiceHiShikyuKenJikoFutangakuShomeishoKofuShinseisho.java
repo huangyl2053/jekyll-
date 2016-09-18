@@ -91,10 +91,10 @@ public class KogakuGassanServiceHiShikyuKenJikoFutangakuShomeishoKofuShinseisho 
             HihokenshaKihonBusiness business, RString ninshoshaYakushokuMei) {
         List<KogakuGassanKaigoServicehiShikyuKofuShinseishoReport> list = new ArrayList<>();
         if (JuminShubetsu.日本人.getCode().equals(business.get住民種別コード())
-                || JuminShubetsu.住登外個人_日本人.getCode().equals(business.get住民種別コード())) {
+            || JuminShubetsu.住登外個人_日本人.getCode().equals(business.get住民種別コード())) {
             生年月日 = パターン12(business.get生年月日());
         } else if (JuminShubetsu.外国人.getCode().equals(business.get住民種別コード())
-                || JuminShubetsu.住登外個人_外国人.getCode().equals(business.get住民種別コード())) {
+                   || JuminShubetsu.住登外個人_外国人.getCode().equals(business.get住民種別コード())) {
             生年月日 = get生年月日_外国人(business);
         }
         KogakuGassanKaigoServicehiShikyuKofuShinseishoItem item = new KogakuGassanKaigoServicehiShikyuKofuShinseishoItem(

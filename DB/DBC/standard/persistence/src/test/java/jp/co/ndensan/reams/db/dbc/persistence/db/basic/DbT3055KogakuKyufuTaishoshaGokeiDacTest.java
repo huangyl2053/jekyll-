@@ -4,10 +4,11 @@
  */
 package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT3055KogakuKyufuTaishoshaGokeiDac;
 import java.util.Collections;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokeiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3055KogakuKyufuTaishoshaGokeiEntityGenerator;
-import static jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3055KogakuKyufuTaishoshaGokeiEntityGenerator.*;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT3055KogakuKyufuTaishoshaGokeiEntity;
+import jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3055KogakuKyufuTaishoshaGokeiEntityGenerator;
+import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT3055KogakuKyufuTaishoshaGokeiEntityGenerator.*;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestDacBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;

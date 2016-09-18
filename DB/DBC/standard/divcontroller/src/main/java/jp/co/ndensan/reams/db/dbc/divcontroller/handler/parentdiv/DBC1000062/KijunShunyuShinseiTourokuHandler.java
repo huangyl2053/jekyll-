@@ -42,6 +42,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTais
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.IShikibetsuTaishoFinder;
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.ShikibetsuTaishoService;
+import jp.co.ndensan.reams.ur.urz.definition.core.memo.MemoShikibetsuTaisho;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -138,6 +139,10 @@ public class KijunShunyuShinseiTourokuHandler {
     private static final RString コンマ = new RString(",");
     private static final RString メモ = new RString("memo");
     private static final RString 識別対象コード = new RString("shikibetsuCode");
+    private static final RString 歳以上_65 = new RString("65");
+    private static final Decimal 円_145万 = new Decimal("1450000");
+    private static final Decimal 円_383万 = new Decimal("3830000");
+    private static final Decimal 円_520万 = new Decimal("5200000");
 
     /**
      * コンストラクタです。
@@ -583,7 +588,7 @@ public class KijunShunyuShinseiTourokuHandler {
                     基準収入額データ.get被保険者番号().getColumnValue()));
         }
         MemoNyuryokuHandler.dataGridupdateImage(GyomuCode.DB介護保険, SubGyomuCode.DBC介護給付, div.getMeisai().getDgMeisai(),
-                識別対象区分, 識別対象コード, RString.EMPTY, RString.EMPTY, メモ);
+                MemoShikibetsuTaisho.識別コード.get識別対象(), 識別対象コード, RString.EMPTY, RString.EMPTY, メモ);
         div.getMeisai().getDgMeisai().setDataSource(rowList);
     }
 
@@ -619,6 +624,7 @@ public class KijunShunyuShinseiTourokuHandler {
         div.getMeisai().setHdnHenkomaeShoriNendo(DataPassingConverter.serialize(処理年度));
         div.getMeisai().setHdnHenkomaeSetaiinHaakuKijunYMD(DataPassingConverter.serialize(基準日));
         div.getMeisai().setHdnGyomuCode(DataPassingConverter.serialize(GyomuCode.DB介護保険));
+        div.getMeisai().setHdnShikibetsuTaishoKubun(MemoShikibetsuTaisho.識別コード.get識別対象());
     }
 
     private List<KijunShunyuShinseiDate> get明細Gird(ShikibetsuCode 識別コード) {
@@ -1342,5 +1348,103 @@ public class KijunShunyuShinseiTourokuHandler {
             return FlexibleYearMonth.EMPTY;
         }
         return new FlexibleYearMonth(new RDate(date.toString()).getYearMonth().toDateString());
+    }
+
+    /**
+     * 世帯再算出ボタン押下チェックのンメソッドです。
+     *
+     * @return boolean
+     */
+    public boolean is世帯再算出ボタン押下チェック() {
+        RString 世帯再算フラグ = DataPassingConverter.deserialize(
+                div.getMeisai().getHdnButtonSaiSanshutsuFlag(), RString.class);
+        if (世帯再算出フラグ_0.equals(世帯再算フラグ) || 世帯再算出フラグ_1.equals(世帯再算フラグ)) {
+            RString 変更前世帯コード = DataPassingConverter.deserialize(
+                    div.getMeisai().getHdnHenkomaeStaiCode(), RString.class);
+            FlexibleDate 変更前処理年度 = DataPassingConverter.deserialize(
+                    div.getMeisai().getHdnHenkomaeShoriNendo(), FlexibleDate.class);
+            FlexibleDate 変更前基準日 = DataPassingConverter.deserialize(
+                    div.getMeisai().getHdnHenkomaeSetaiinHaakuKijunYMD(), FlexibleDate.class);
+            RString 世帯コード = div.getMeisai().getTxtSetaiCode().getValue();
+            FlexibleDate 処理年度 = div.getMeisai().getTxtShoriNendo().getValue();
+            FlexibleDate 基準日 = div.getMeisai().getTxtSetaiinHaakuKijunYMD().getValue();
+            return (変更前世帯コード.equals(世帯コード) && 変更前処理年度.equals(処理年度) && 変更前基準日.equals(基準日));
+        }
+        return true;
+    }
+
+    /**
+     * 受給者・事業対象者のチェックのンメソッドです。
+     *
+     * @return boolean
+     */
+    public boolean is受給者事業対象者のチェック() {
+        List<dgMeisai_Row> rowList = div.getMeisai().getDgMeisai().getDataSource();
+        for (dgMeisai_Row row : rowList) {
+            if (row.getJyukyuJigyoTaisho() != null && !row.getJyukyuJigyoTaisho().isEmpty()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 算定基準額のチェックのンメソッドです。
+     *
+     * @return boolean
+     */
+    public boolean is算定基準額のチェック() {
+        List<dgMeisai_Row> rowList = div.getMeisai().getDgMeisai().getDataSource();
+        Decimal 二人以上で総収入金額 = Decimal.ZERO;
+        Decimal 公的年金;
+        Decimal 給与;
+        Decimal 以外の収入;
+        for (dgMeisai_Row row : rowList) {
+            公的年金 = row.getKotekiNenkin().getValue() == null ? Decimal.ZERO : row.getKotekiNenkin().getValue();
+            給与 = row.getKyuyo().getValue() == null ? Decimal.ZERO : row.getKyuyo().getValue();
+            以外の収入 = row.getOtherIncome().getValue() == null ? Decimal.ZERO : row.getOtherIncome().getValue();
+            二人以上で総収入金額 = 二人以上で総収入金額.add(公的年金).add(給与).add(以外の収入);
+        }
+
+        return getチェック(rowList, 二人以上で総収入金額);
+    }
+
+    private boolean getチェック(List<dgMeisai_Row> rowList,
+            Decimal 二人以上で総収入金額) {
+
+        RString 算定基準額 = div.getMeisai().getDdlSanteiKijunGaku().getSelectedValue();
+        Decimal 一人で総収入金額;
+        Decimal 公的年金;
+        Decimal 給与;
+        Decimal 以外の収入;
+        Decimal 課税所得;
+        RString 年齢;
+        for (dgMeisai_Row row : rowList) {
+            年齢 = row.getAge();
+            課税所得 = row.getKazeiShotokuKojogo().getValue() == null ? Decimal.ZERO : row.getKazeiShotokuKojogo().getValue();
+            公的年金 = row.getKotekiNenkin().getValue() == null ? Decimal.ZERO : row.getKotekiNenkin().getValue();
+            給与 = row.getKyuyo().getValue() == null ? Decimal.ZERO : row.getKyuyo().getValue();
+            以外の収入 = row.getOtherIncome().getValue() == null ? Decimal.ZERO : row.getOtherIncome().getValue();
+            一人で総収入金額 = 公的年金.add(給与).add(以外の収入);
+            if (歳以上_65.compareTo(年齢) < NUM_1) {
+                if (円_145万.compareTo(課税所得) < NUM_1
+                        && (円_383万.compareTo(一人で総収入金額) == NUM_1 || 円_520万.compareTo(二人以上で総収入金額) == NUM_1)
+                        && !SanteiKijungaku.算定基準額_44_400円.get略称().equals(算定基準額)) {
+                    return false;
+                }
+
+                if (円_145万.compareTo(課税所得) < NUM_1
+                        && (円_383万.compareTo(一人で総収入金額) < NUM_1 || 円_520万.compareTo(二人以上で総収入金額) < NUM_1)
+                        && !SanteiKijungaku.算定基準額_37_200円.get略称().equals(算定基準額)) {
+                    return false;
+                }
+
+                if (円_145万.compareTo(課税所得) == NUM_1
+                        && SanteiKijungaku.算定基準額_44_400円.get略称().equals(算定基準額)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

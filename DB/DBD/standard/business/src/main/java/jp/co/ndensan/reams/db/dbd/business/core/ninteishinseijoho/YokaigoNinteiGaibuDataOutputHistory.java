@@ -9,7 +9,7 @@ import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5190001.DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHM;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 
 /**
  * 介護認定外部データ出力履歴を管理するクラスです。
@@ -42,21 +42,21 @@ public class YokaigoNinteiGaibuDataOutputHistory {
     }
 
     /**
-     * データ出力開始年月日時分のgetメソッドです。
+     * データ出力開始年月日時分秒のgetメソッドです。
      *
-     * @return データ出力開始年月日時分
+     * @return データ出力開始年月日時分秒
      */
-    public YMDHM getDataOutputKaishiYMDHM() {
-        return entity.getDataOutputKaishiYMDHM();
+    public YMDHMS getDataOutputKaishiYMDHMS() {
+        return entity.getDataOutputKaishiYMDHMS();
     }
 
     /**
-     * データ出力終了年月日時分のgetメソッドです。
+     * データ出力終了年月日時分秒のgetメソッドです。
      *
-     * @return データ出力終了年月日時分
+     * @return データ出力終了年月日時分秒
      */
-    public YMDHM getDataOutputShuryoYMDHM() {
-        return entity.getDataOutputShuryoYMDHM();
+    public YMDHMS getDataOutputShuryoYMDHMS() {
+        return entity.getDataOutputShuryoYMDHMS();
     }
 
 }

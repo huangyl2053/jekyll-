@@ -101,7 +101,7 @@ public class ShotokuDankaiBetsuShunoritsuIchiranEditor implements IShotokuDankai
         sakuseiYMD.append(datetime.getDate().wareki().
                 eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).
-                fillType(FillType.BLANK).
+                fillType(FillType.ZERO).
                 width(Width.HALF).toDateString());
         sakuseiYMD.append(RString.HALF_SPACE);
         sakuseiYMD.append(new RString(new Decimal(datetime.getHour()).toString(FULLMONTH.toString())));

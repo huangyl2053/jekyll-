@@ -4,7 +4,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core;
 
-import jp.co.ndensan.reams.db.dbz.definition.core.enumeratedtype.ShikakuSoshitsuJiyu;
+import jp.co.ndensan.reams.db.dbz.definition.core.shikakuidojiyu.ShikakuSoshitsuJiyu;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
  * @author N3327 三浦 凌
  */
 @Deprecated
-public final class ShikakuSoshitsu extends ShikakuIdoBaseItem<ShikakuSoshitsuJiyu> {
+public final class ShikakuSoshitsu extends ShikakuIdoBaseItem {
 
     /**
      * 資格喪失がないことを表すオブジェクトです。

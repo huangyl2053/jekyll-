@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.SetaiShot
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -21,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
@@ -30,6 +32,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxFlexibleYear;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxSetaiCode;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * SetaiShotokuIchiran のクラスファイル
@@ -37,7 +41,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxSetaiCode;
  * @author 自動生成
  */
 public class SetaiShotokuIchiranDiv extends Panel implements ISetaiShotokuIchiranDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -60,6 +65,8 @@ public class SetaiShotokuIchiranDiv extends Panel implements ISetaiShotokuIchira
     private Label lblSetaiIchiranMsg;
     @JsonProperty("btnNarabeteHyoji")
     private Button btnNarabeteHyoji;
+    @JsonProperty("btnNarabeteHyojiKogaku")
+    private Button btnNarabeteHyojiKogaku;
     @JsonProperty("dgSetaiShotoku")
     private DataGrid<dgSetaiShotoku_Row> dgSetaiShotoku;
     @JsonProperty("dgShotokuRireki")
@@ -222,6 +229,24 @@ public class SetaiShotokuIchiranDiv extends Panel implements ISetaiShotokuIchira
     }
 
     /*
+     * getbtnNarabeteHyojiKogaku
+     * @return btnNarabeteHyojiKogaku
+     */
+    @JsonProperty("btnNarabeteHyojiKogaku")
+    public Button getBtnNarabeteHyojiKogaku() {
+        return btnNarabeteHyojiKogaku;
+    }
+
+    /*
+     * setbtnNarabeteHyojiKogaku
+     * @param btnNarabeteHyojiKogaku btnNarabeteHyojiKogaku
+     */
+    @JsonProperty("btnNarabeteHyojiKogaku")
+    public void setBtnNarabeteHyojiKogaku(Button btnNarabeteHyojiKogaku) {
+        this.btnNarabeteHyojiKogaku = btnNarabeteHyojiKogaku;
+    }
+
+    /*
      * getdgSetaiShotoku
      * @return dgSetaiShotoku
      */
@@ -334,7 +359,7 @@ public class SetaiShotokuIchiranDiv extends Panel implements ISetaiShotokuIchira
             DisplayMode[] enumArray = DisplayMode.values();
 
             for (DisplayMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -349,11 +374,11 @@ public class SetaiShotokuIchiranDiv extends Panel implements ISetaiShotokuIchira
     }
 
     public DisplayMode getMode_DisplayMode() {
-        return (DisplayMode) _CommonChildDivModeUtil.getMode( this.modes, DisplayMode.class );
+        return (DisplayMode) _CommonChildDivModeUtil.getMode(this.modes, DisplayMode.class);
     }
 
-    public void setMode_DisplayMode( DisplayMode value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, DisplayMode.class , value );
+    public void setMode_DisplayMode(DisplayMode value) {
+        _CommonChildDivModeUtil.setMode(this.modes, DisplayMode.class, value);
     }
 
     // </editor-fold>
@@ -366,6 +391,16 @@ public class SetaiShotokuIchiranDiv extends Panel implements ISetaiShotokuIchira
     @Override
     public List<SetaiinShotoku> get世帯員所得Selected() {
         return getHandler().get世帯員所得SelectedFor賦課();
+    }
+
+    @Override
+    public ValidationMessageControlPairs validate比較対象() {
+        return getHandler().validate比較対象();
+    }
+
+    @Override
+    public ValidationMessageControlPair createValidationMessageControlPairFor世帯員一覧(IValidationMessage message) {
+        return new ValidationMessageControlPair(message, this.getDgSetaiShotoku());
     }
 
     @JsonIgnore

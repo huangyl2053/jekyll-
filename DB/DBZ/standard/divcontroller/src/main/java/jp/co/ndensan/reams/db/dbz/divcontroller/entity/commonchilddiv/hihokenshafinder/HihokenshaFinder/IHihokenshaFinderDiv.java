@@ -1,6 +1,7 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hihokenshafinder.HihokenshaFinder;
 
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.IShikibetsuTaishoSearchKey;
+import jp.co.ndensan.reams.ua.uax.divcontroller.entity.commonchilddiv.AtenaFinder.IAtenaFinderDiv;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -101,5 +102,26 @@ public interface IHihokenshaFinderDiv extends ICommonChildDivBaseProperties {
      * 賦課年度ドロップダウンの値を設定します。
      */
     void set賦課年度ドロップダウン();
+
+    /**
+     * 宛名検索の共有子Divを取得する。
+     *
+     * @return 宛名検索の共有子Div
+     */
+    IAtenaFinderDiv getCcdAtenaFinder();
+
+    /**
+     * ボタンをまとめたDivを返します。
+     *
+     * @return ボタンをまとめたDiv
+     */
+    ButtonsForHihokenshaFinderDiv getButtonsForHihokenshaFinder();
+
+    /**
+     * 介護の検索条件をまとめたDivを返します。
+     *
+     * @return 介護検索条件をまとめたDiv
+     */
+    KaigoFinderDiv getKaigoFinder();
 
 }

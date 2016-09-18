@@ -16,7 +16,7 @@ and open the template in the editor.
         <result property="入所施設コード" column="nyushoShisetsuCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
         <result property="入所年月日" column="nyushoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="退所年月日" column="taishoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="退所事由" column="tekiyoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="退所事由" column="kaijoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="適用日" column="tekiyoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="事業者名称" column="jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="電話番号" column="telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -33,12 +33,14 @@ and open the template in the editor.
             dbT1004."nyushoShisetsuCode",
             dbT1004."nyushoYMD",
             dbT1004."taishoYMD",
+            dbT1003."kaijoJiyuCode",
             dbT1003."tekiyoJiyuCode",
             dbT1003."tekiyoYMD"
         FROM
             (SELECT
                   "sochiHokenshaNo"
                   , "kaijoYMD"
+                  , "kaijoJiyuCode"
                   , "shikibetsuCode"
                   , "tekiyoJiyuCode"
                   , "tekiyoYMD" 
