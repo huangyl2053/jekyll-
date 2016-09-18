@@ -47,6 +47,17 @@ public class GenmenPanel {
     }
 
     /**
+     * onOkClose_bth事件です。
+     *
+     * @param div GenmenPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<GenmenPanelDiv> onOkClose_bth(GenmenPanelDiv div) {
+        getHandler(div).onOkClosebth();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 「実行ボタン押下した時の早期処理」ボタンのメソッドです。
      *
      * @param div GenmenPanelDiv
