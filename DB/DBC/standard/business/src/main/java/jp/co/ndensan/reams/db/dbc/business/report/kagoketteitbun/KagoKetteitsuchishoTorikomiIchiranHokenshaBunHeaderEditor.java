@@ -27,11 +27,11 @@ public class KagoKetteitsuchishoTorikomiIchiranHokenshaBunHeaderEditor implement
 
     private final KagoKetteiHokenshaIchiranParameter 帳票用パラメター;
 
+    private static final int INDEX_1 = 1;
     private static final int INDEX_2 = 2;
     private static final int INDEX_3 = 3;
     private static final int INDEX_4 = 4;
     private static final int INDEX_5 = 5;
-    private static final int INDEX_6 = 6;
     private static final RString SAKUSEI = new RString("作成");
     private final List<RString> 並び順リスト;
 
@@ -61,11 +61,11 @@ public class KagoKetteitsuchishoTorikomiIchiranHokenshaBunHeaderEditor implement
         source.hokenshaName = 帳票出力対象.get保険者名();
         source.shoKisaiHokenshaNo = getColumnValue(帳票出力対象.get証記載保険者番号());
         source.shoKisaiHokenshaName = 帳票出力対象.get証記載保険者名();
-        source.shutsuryokujun1 = get並び順(INDEX_2);
-        source.shutsuryokujun2 = get並び順(INDEX_3);
-        source.shutsuryokujun3 = get並び順(INDEX_4);
-        source.shutsuryokujun4 = get並び順(INDEX_5);
-        source.shutsuryokujun5 = get並び順(INDEX_6);
+        source.shutsuryokujun1 = get並び順(INDEX_1);
+        source.shutsuryokujun2 = get並び順(INDEX_2);
+        source.shutsuryokujun3 = get並び順(INDEX_3);
+        source.shutsuryokujun4 = get並び順(INDEX_4);
+        source.shutsuryokujun5 = get並び順(INDEX_5);
         return source;
     }
 
