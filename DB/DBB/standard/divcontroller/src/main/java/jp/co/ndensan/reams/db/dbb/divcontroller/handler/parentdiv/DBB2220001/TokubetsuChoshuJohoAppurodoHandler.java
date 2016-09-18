@@ -45,7 +45,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 
 /**
- * 画面設計_DBB2110002_特徴送付情報ダウンロードのクラスです。
+ * 画面設計_DBB2110002_特別徴収情報をアップロードのクラスです。
  *
  * @reamsid_L DBB-5670-010 chenhui
  */
@@ -461,7 +461,7 @@ public class TokubetsuChoshuJohoAppurodoHandler {
             処理名 = ShoriName.特徴依頼処理結果情報取込.get名称();
         }
         List<ShoriDateKanri> 処理日付List = TokuchoInfoShoriDateKanri.createInstance().
-                get広域月処理日付(year, 処理名, 月と年度内連番Map.get(選択月), 市町村IDList);
+                get広域5月と9月処理日付(year, 処理名, 月と年度内連番Map.get(選択月), 市町村IDList);
         Map<RString, ShoriDateKanri> 処理日付Map = new HashMap<>();
         for (ShoriDateKanri 処理日付 : 処理日付List) {
             処理日付Map.put(処理日付.get処理枝番(), 処理日付);
