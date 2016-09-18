@@ -102,7 +102,6 @@ public class SpoolShotokuJohoIchiranProcess extends BatchKeyBreakBase<ShotokuJoh
     private static final RString CSVファイル名_あり = new RString("介護保険所得情報一覧表");
 
     private ShutokuJohoShuchutsuRenkeiProcessParameter processParameter;
-    private SpoolShotokuJohoIchiranMybatisParameter mybatisParam;
     private IOutputOrder 出力順情報;
     private List<RString> 改頁リスト;
     private List<RString> 並び順リスト;
@@ -146,8 +145,7 @@ public class SpoolShotokuJohoIchiranProcess extends BatchKeyBreakBase<ShotokuJoh
         ShunoKamokuAuthority sut = InstanceProvider.create(ShunoKamokuAuthority.class);
         List<KamokuCode> list = sut.get更新権限科目コード(ControlDataHolder.getUserId());
         RString 出力順 = MyBatisOrderByClauseCreator.create(ShotokuJohoIchiranOrder.class, 出力順情報);
-        mybatisParam.set出力順(出力順);
-        return new BatchDbReader(READ_DATA_ID, new SpoolShotokuJohoIchiranMybatisParameter(key, list));
+        return new BatchDbReader(READ_DATA_ID, new SpoolShotokuJohoIchiranMybatisParameter(key, list, 出力順));
     }
 
     @Override
@@ -372,7 +370,7 @@ public class SpoolShotokuJohoIchiranProcess extends BatchKeyBreakBase<ShotokuJoh
         if (RString.isNullOrEmpty(processParameter.get出力順ID())) {
             出力順情報 = null;
         } else {
-            出力順情報 = finder.get出力順(SubGyomuCode.DBC介護給付, 帳票ID, Long.parseLong(processParameter.get出力順ID().toString()));
+            出力順情報 = finder.get出力順(SubGyomuCode.DBB介護賦課, 帳票ID, Long.parseLong(processParameter.get出力順ID().toString()));
         }
         if (出力順情報 == null) {
             return;

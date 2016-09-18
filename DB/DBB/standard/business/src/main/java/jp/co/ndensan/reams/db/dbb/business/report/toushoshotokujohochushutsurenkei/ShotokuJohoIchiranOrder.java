@@ -26,11 +26,12 @@ public enum ShotokuJohoIchiranOrder implements IReportItems {
     /**
      * 氏名５０音カナ
      */
-    氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), new RString("\"ShikibetsuTaisho\".\"shimei50onKana\"")),
+    // TODO QA1538 氏名５０音カナ　がない、
+    氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), new RString("\"ShikibetsuTaisho\".\"kanaMeisho\"")),
     /**
      * 被保険者番号
      */
-    被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("\"ShikibetsuTaisho\".\"hihokenshaNo\""));
+    被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("\"DbT1001HihokenshaDaicho\".\"hihokenshaNo\""));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;
