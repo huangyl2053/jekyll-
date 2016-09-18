@@ -62,8 +62,7 @@ public class ChohyoJohoShutokuProcess extends BatchKeyBreakBase<DBB021051TableJo
             + "dbb021051.IDBB021051Mapper.get宛名シール情報一時");
     private static final int 最大宛先数 = 12;
     private static final int INT_5 = 5;
-    private static final RString ERROR_出力順 = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate."
-            + "dbb021051.IDBB021051Mapper.get宛名シール情報一時");
+    private static final RString ERROR_出力順 = new RString("出力順");
     private static final RString ERROR_市町村コード = new RString("000000");
     private DBB021051ProcessParameter parameter;
     private DBB021051DataUtil dataUtil;
