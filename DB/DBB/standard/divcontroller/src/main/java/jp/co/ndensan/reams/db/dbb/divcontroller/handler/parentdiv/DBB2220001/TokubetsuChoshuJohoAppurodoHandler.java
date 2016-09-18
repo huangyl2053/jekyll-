@@ -144,6 +144,8 @@ public class TokubetsuChoshuJohoAppurodoHandler {
     private static final RString 介護の制度コードのチェック_MSG = new RString("介護用のファイルではありません。");
     private static final RString 国保の制度コードのチェック_MSG = new RString("国保用のファイルではありません。");
     private static final RString 後期の制度コードのチェック_MSG = new RString("後期用のファイルではありません。");
+    private static final RString 拡張子のチェック_MSG = new RString("ファイル拡張子が不正です。");
+    private static final RString その他チェック_MSG = new RString("ファイルがアップロードできません。");
     private static final RString 共有ファイル名 = new RString("連携種別_500_市町村ID_対象月.DTA");
     private static final RString 連携種別 = new RString("連携種別");
     private static final RString 市町村ID = new RString("市町村ID");
@@ -664,7 +666,7 @@ public class TokubetsuChoshuJohoAppurodoHandler {
     public boolean ファイルチェック(FileData[] files) {
         if (div.getShoriTaishoShichosonPanel().getDgGetuShoriSelect().getSelectedItems().isEmpty()
                 && div.getShoriTaishoGetuPanel().getDgShichosonShoriSelect().getSelectedItems().isEmpty()) {
-            return false;
+            throw new ApplicationException(その他チェック_MSG.toString());
         }
         RString 選択Key = div.getShoriJokyoPanel().getGrpHyojikeishiki().getSelectedKey();
         if (STR_0.equals(選択Key)) {
@@ -680,14 +682,14 @@ public class TokubetsuChoshuJohoAppurodoHandler {
             dgGetuShoriSelect_Row 選択row = div.getShoriTaishoShichosonPanel().getDgGetuShoriSelect().getSelectedItems().get(INT_0);
             int 選択月 = Integer.parseInt(処理月と年度内連番.get(選択row.getData1()).toString());
             if (選択月 != (max + INT_1)) {
-                return false;
+                throw new ApplicationException(その他チェック_MSG.toString());
             }
 
         }
         FileData 選択ファイル = files[INT_0];
         RString ファイル名 = 選択ファイル.getFileName();
         if (!ファイル名.endsWith(拡張子)) {
-            return false;
+            throw new ApplicationException(拡張子のチェック_MSG.toString());
         }
         RDate システム日付 = RDate.getNowDate();
         try (FileReader reader = new FileReader(選択ファイル.getFilePath(), Encode.UTF_8)) {
