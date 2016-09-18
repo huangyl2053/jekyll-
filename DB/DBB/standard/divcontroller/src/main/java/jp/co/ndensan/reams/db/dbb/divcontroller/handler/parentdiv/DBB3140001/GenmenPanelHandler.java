@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 画面設計_DBBMN61002_介護保険料減免登録(一括)
@@ -44,4 +45,14 @@ public class GenmenPanelHandler {
         div.getChikuShichosonSelect().initialize();
     }
 
+    /**
+     * onOkClosebth。
+     */
+    public void onOkClosebth() {
+
+        div.getTextBoxGenmenSyurui().setValue(DataPassingConverter.
+                deserialize(div.getGemmenShuruiCode(), RString.class).
+                concat(RString.FULL_SPACE).
+                concat(DataPassingConverter.deserialize(div.getGemmenShuruiHyojiMongon(), RString.class)));
+    }
 }
