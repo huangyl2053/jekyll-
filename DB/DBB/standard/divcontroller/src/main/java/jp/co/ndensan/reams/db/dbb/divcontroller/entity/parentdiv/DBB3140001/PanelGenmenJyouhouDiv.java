@@ -26,7 +26,7 @@ public class PanelGenmenJyouhouDiv extends Panel {
     @JsonProperty("TextBoxSinsei")
     private TextBox TextBoxSinsei;
     @JsonProperty("ButtonGenmenSyurui")
-    private Button ButtonGenmenSyurui;
+    private ButtonDialog ButtonGenmenSyurui;
     @JsonProperty("TextBoxGenmenSyurui")
     private TextBox TextBoxGenmenSyurui;
     @JsonProperty("LabelSinseiRiryuu")
@@ -83,7 +83,7 @@ public class PanelGenmenJyouhouDiv extends Panel {
      * @return ButtonGenmenSyurui
      */
     @JsonProperty("ButtonGenmenSyurui")
-    public Button getButtonGenmenSyurui() {
+    public ButtonDialog getButtonGenmenSyurui() {
         return ButtonGenmenSyurui;
     }
 
@@ -92,7 +92,7 @@ public class PanelGenmenJyouhouDiv extends Panel {
      * @param ButtonGenmenSyurui ButtonGenmenSyurui
      */
     @JsonProperty("ButtonGenmenSyurui")
-    public void setButtonGenmenSyurui(Button ButtonGenmenSyurui) {
+    public void setButtonGenmenSyurui(ButtonDialog ButtonGenmenSyurui) {
         this.ButtonGenmenSyurui = ButtonGenmenSyurui;
     }
 
