@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.business.report.dbd511001;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd511002.RenZhengzheEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd511002.KoshinOshiraseCommonEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd511001.KoshinShinseiOshiraseTshuchishoReportSource;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
@@ -30,7 +30,7 @@ public class KoshinShinseiOshiraseTshuchishoEditor implements IKoshinShinseiOshi
     private final ChohyoSeigyoKyotsu 帳票制御共通;
     private final Association 地方公共団体;
     private final List<DbT7067ChohyoSeigyoHanyoEntity> 帳票制御汎用;
-    private final RenZhengzheEntity 認定更新お知らせ通知書Entity;
+    private final KoshinOshiraseCommonEntity 認定更新お知らせ通知書Entity;
 
     /**
      * インスタンスを生成します。
@@ -40,11 +40,11 @@ public class KoshinShinseiOshiraseTshuchishoEditor implements IKoshinShinseiOshi
      * @param 帳票制御共通 ChohyoSeigyoKyotsu
      * @param 地方公共団体 Association
      * @param 帳票制御汎用 List<DbT7067ChohyoSeigyoHanyoEntity>
-     * @param 認定更新お知らせ通知書Entity RenZhengzheEntity
+     * @param 認定更新お知らせ通知書Entity KoshinOshiraseCommonEntity
      */
     public KoshinShinseiOshiraseTshuchishoEditor(NinshoshaSource ninshoshaSource, IAtesaki 宛先,
             ChohyoSeigyoKyotsu 帳票制御共通, Association 地方公共団体, List<DbT7067ChohyoSeigyoHanyoEntity> 帳票制御汎用,
-            RenZhengzheEntity 認定更新お知らせ通知書Entity) {
+            KoshinOshiraseCommonEntity 認定更新お知らせ通知書Entity) {
         this.ninshoshaSource = ninshoshaSource;
         this.宛先 = 宛先;
         this.帳票制御共通 = 帳票制御共通;

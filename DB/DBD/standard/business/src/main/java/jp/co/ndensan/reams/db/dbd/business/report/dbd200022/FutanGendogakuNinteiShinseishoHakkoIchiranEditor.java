@@ -227,7 +227,7 @@ public class FutanGendogakuNinteiShinseishoHakkoIchiranEditor implements IFutanG
         RString 年月日 = システム日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         RString 時分秒 = システム日時.toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
-        return 年月日.concat("").concat(時分秒).concat("").concat("作成");
+        return 年月日.concat(" ").concat(時分秒).concat(" ").concat("作成");
     }
 
     private RString get要介護度() {
