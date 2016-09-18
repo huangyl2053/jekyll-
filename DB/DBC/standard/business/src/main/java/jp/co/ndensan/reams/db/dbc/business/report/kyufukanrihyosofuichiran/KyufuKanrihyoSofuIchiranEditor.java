@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.kyotakuservice.KyotakuServiceK
 import jp.co.ndensan.reams.db.dbc.definition.core.kyotakuservice.KyufukanrihyoSakuseiKubun;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyosofuichiran.KyufuKanrihyoSofuIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.kyufukanrihyosofuichiran.KyufuKanrihyoSofuIchiranReportSource;
+import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -91,12 +92,11 @@ public class KyufuKanrihyoSofuIchiranEditor implements IKyufuKanrihyoSofuIchiran
         source.listUpper_4 = KyufukanrihyoSakuseiKubun.toValue(entity.get更新区分()).get名称();
         source.listUpper_5 = entity.get帳票通番カウンター();
         source.listUpper_6 = KyotakuServiceKubun.toValue(entity.get居宅サービス区分()).get名称();
-        // TODO QA 
-//        RString 表示用要介護状態区分コード = entity.get表示用要介護状態区分コード();
-//        FlexibleYearMonth 利用年月 = entity.get対象年月();
-//
-//        source.listUpper_7
-//                = YokaigoJotaiKubunSupport.toValue(KoroshoInterfaceShikibetsuCode.toValue(表示用要介護状態区分コード), 利用年月).getName();
+        
+        RString 表示用要介護状態区分コード = entity.get表示用要介護状態区分コード();
+        FlexibleYearMonth 利用年月 = entity.get利用年月();
+        source.listUpper_7
+                = YokaigoJotaiKubunSupport.toValue(利用年月, 表示用要介護状態区分コード).getName();
         source.listUpper_8 = toRString(entity.get表示用支給限度単位数());
         source.listUpper_9 = パターン54(entity.get限度額管理開始年月日());
         source.listUpper_10 = パターン54(entity.get支給限度有効終了年月());
