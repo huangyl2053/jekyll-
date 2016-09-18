@@ -12,7 +12,7 @@ import java.util.Set;
 import jp.co.ndensan.reams.db.dbc.business.report.gassanshikyutsuchishotorikomiichiran.GassanShikyuTsuchishoTorikomiIchiranOutputOrder;
 import jp.co.ndensan.reams.db.dbc.business.report.gassanshikyutsuchishotorikomiichiran.GassanShikyuTsuchishoTorikomiIchiranPageBreak;
 import jp.co.ndensan.reams.db.dbc.business.report.gassanshikyutsuchishotorikomiichiran.GassanShikyuTsuchishoTorikomiIchiranReport;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.jigyobunkogakugassanshikyukettei.ShiharaiHohoKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kokuhorenkyoutsuu.KokuhorenIchiranhyoMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kyufukanrihyoin.KyufukanrihyoDoIchiranhyoSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
