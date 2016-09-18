@@ -48,7 +48,7 @@
          INNER JOIN "DbWT1001Hihokensha" AS DbWT1001
          ON DbWT3711."renban" = DbWT1001."exRenban"
          WHERE
-            DbWT1001."shikibetsuCode" = NULL
+            DbWT1001."shikibetsuCode" IS NULL
             OR DbWT1001."shikibetsuCode" = ''
     </select>
     
