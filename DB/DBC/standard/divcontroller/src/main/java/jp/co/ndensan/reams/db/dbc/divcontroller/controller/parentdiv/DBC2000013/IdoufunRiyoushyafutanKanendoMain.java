@@ -31,13 +31,13 @@ public class IdoufunRiyoushyafutanKanendoMain {
      * @return ResponseData
      */
     public ResponseData<IdoufunRiyoushyafutanKanendoDiv> onLoad(IdoufunRiyoushyafutanKanendoDiv div) {
-        ShoriDateKanri busi = get直近の年次負担割合判定処理();
-        getHandler(div).initControl(busi);
+        ShoriDateKanri データ = get直近の年次負担割合判定処理();
+        getHandler(div).initControl(データ);
         ShoriDateKanri business = get異動分利用者負担割合判定_過年度のデータ();
         if (business != null) {
             getHandler(div).set取得できたの抽出期間(business);
         } else {
-            RString 年次判定年度 = busi.get年度().toDateString();
+            RString 年次判定年度 = データ.get年度().toDateString();
             getHandler(div).set取得できないの抽出期間(get異動分利用者負担割合判定のデータ(年次判定年度));
         }
         return ResponseData.of(div).respond();

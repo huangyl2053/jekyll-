@@ -60,9 +60,7 @@ public class ShoriHizukeKanriTblUpdateProcess extends BatchProcessBase<DbT7022Sh
     protected void process(DbT7022ShoriDateKanriEntity entity) {
         isあり = true;
         entity.setSubGyomuCode(SubGyomuCode.DBC介護給付);
-        entity.setShichosonCode(association.get地方公共団体コード());
         entity.setShoriName(ShoriName.異動分利用者負担割合判定_過年度.get名称());
-        entity.setNendo(parameter.getTaishoNendo());
         entity.setKijunTimestamp(parameter.getChushutsuShuryoTime());
         entity.setTaishoKaishiTimestamp(parameter.getChushutsuKaishiTime());
         entity.setTaishoShuryoTimestamp(parameter.getChushutsuShuryoTime());

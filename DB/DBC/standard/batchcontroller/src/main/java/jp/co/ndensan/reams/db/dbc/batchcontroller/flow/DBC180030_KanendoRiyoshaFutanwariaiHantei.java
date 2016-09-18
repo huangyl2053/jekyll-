@@ -21,11 +21,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class DBC180030_KanendoRiyoshaFutanwariaiHantei extends BatchFlowBase<DBC180030_KanendoRiyoshaFutanwariaiHanteiParameter> {
 
-    private static final RString 異動データ抽出_ID = new RString("IdoDateTyuushutuKyoutsuu");
+    private static final RString 異動データ抽出_ID = new RString("DBC180021_RiyoshaFutanwariaiHanteiIdoDataSelectSub");
     private static final String 異動データ抽出 = "idodatetyuushutukyoutsuu";
-    private static final RString 利用者負担割合判定_ID = new RString("RiyoshaFutanwariaiHanteiCommonFlow");
+    private static final RString 利用者負担割合判定_ID = new RString("DBC180022_RiyoshaFutanwariaiHanteiSub");
     private static final String 利用者負担割合判定 = "riyoshafutanwariaihantei";
-    private static final RString 負担割合判定一覧出力_ID = new RString("FutanWariaiIchiranFlow");
+    private static final RString 負担割合判定一覧出力_ID = new RString("DBC180011_RiyoshaFutanwariaiHanteiIchiranSub");
     private static final String 負担割合判定一覧出力 = "futanwariaiichiran";
     private static final String DB_UPDATE = "db_update";
 
