@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -338,14 +339,16 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
         if (null != 振込明細一時TBL.getShiharaiKaishiYMD() && null != 振込明細一時TBL.getShiharaiKaishiTime()) {
             RString 支払期間開始年月日 = 振込明細一時TBL.getShiharaiKaishiYMD().wareki().eraType(EraType.KANJI_RYAKU).
                     firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
-            RString 支払窓口開始時間 = 振込明細一時TBL.getShiharaiKaishiTime();
-            source.listMadoguchiUpper_2 = 支払期間開始年月日.concat(半角スペース1桁).concat(支払窓口開始時間);
+            RTime 支払窓口開始時間 = new RTime(振込明細一時TBL.getShiharaiKaishiTime());
+            RString 支払窓口開始時間1 = 支払窓口開始時間.toFormattedTimeString(DisplayTimeFormat.HH_mm);
+            source.listMadoguchiUpper_2 = 支払期間開始年月日.concat(半角スペース1桁).concat(支払窓口開始時間1);
         }
         if (null != 振込明細一時TBL.getShiharaiShuryoYMD() && null != 振込明細一時TBL.getShiharaiShuryoTime()) {
             RString 支払期間終了年月日 = 振込明細一時TBL.getShiharaiShuryoYMD().wareki().eraType(EraType.KANJI_RYAKU).
                     firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
-            RString 支払窓口終了時間 = 振込明細一時TBL.getShiharaiShuryoTime();
-            source.listMadoguchiLower_1 = 支払期間終了年月日.concat(半角スペース1桁).concat(支払窓口終了時間);
+            RTime 支払窓口終了時間 = new RTime(振込明細一時TBL.getShiharaiShuryoTime());
+            RString 支払窓口終了時間1 = 支払窓口終了時間.toFormattedTimeString(DisplayTimeFormat.HH_mm);
+            source.listMadoguchiLower_1 = 支払期間終了年月日.concat(半角スペース1桁).concat(支払窓口終了時間1);
         }
     }
 
