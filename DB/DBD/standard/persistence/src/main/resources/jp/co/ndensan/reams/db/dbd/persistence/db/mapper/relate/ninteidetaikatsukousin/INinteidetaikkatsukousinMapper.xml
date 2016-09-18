@@ -65,9 +65,7 @@
         T4102."nijiHanteiYMD",
         T4102."nijiHanteiNinteiYukoKaishiYMD",
         T4102."nijiHanteiNinteiYukoShuryoYMD",
-        T4102."nijiHanteiYokaigoJotaiKubunCode",
-        T4101."ninteiShinseiHoreiKubunCode",
-        T4101."ninteiShinseiShinseijiKubunCode"
+        T4102."nijiHanteiYokaigoJotaiKubunCode"
         FROM rgdb."DbT4102NinteiKekkaJoho" AS T4102
         INNER JOIN (
         SELECT
@@ -141,8 +139,6 @@
         <result property="二次判定認定有効開始年月日" column="nijiHanteiNinteiYukoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="二次判定認定有効終了年月日" column="nijiHanteiNinteiYukoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="二次判定要介護状態区分コード" column="nijiHanteiYokaigoJotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="認定申請区分法令コード" column="ninteiShinseiHoreiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="認定申請区分申請時コード" column="ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
 
         <association property="受給者台帳Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.ResultMap_DbT4001JukyushaDaichoEntity"/>
         <association property="要介護認定申請情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.ResultMap_DbT4101NinteiShinseiJohoEntity"/>
