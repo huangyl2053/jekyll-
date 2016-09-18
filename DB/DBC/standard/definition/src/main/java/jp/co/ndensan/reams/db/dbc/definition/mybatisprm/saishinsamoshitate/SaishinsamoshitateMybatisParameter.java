@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public final class SaishinsamoshitateMybatisParameter implements IMyBatisParameter {
 
+    private static final RString 保険者コード = new RString("000000");
     private RString chohyoId;
     private Long shutsuryokujunId;
     private RString shutsuryokuKomokuId;
@@ -40,7 +41,6 @@ public final class SaishinsamoshitateMybatisParameter implements IMyBatisParamet
     private boolean has保険者コード;
     private RDate date;
     private final RString psmShikibetsuTaisho;
-    private static final RString 保険者コード = new RString("000000");
 
     /**
      *
