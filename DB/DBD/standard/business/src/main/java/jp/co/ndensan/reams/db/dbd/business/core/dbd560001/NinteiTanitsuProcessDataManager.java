@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbd.business.core.dbd560001;
 
 import static java.lang.String.format;
 import jp.co.ndensan.reams.db.dbd.definition.core.jukyunintei.yokaigointerface.YokaigoInterfaceIchoTorikomi;
-import jp.co.ndensan.reams.db.dbd.definition.core.jukyunintei.yokaigointerface.YokaigoInterfaceShurui;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd560001.NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd560001.YokaigoNinteiInterfaceEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ChokkinIdoJiyuCode;
@@ -24,8 +23,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 認定データ一括更新のDataのEditクラスです。
  *
- * @author LDNS liuwei2
+ * @reamsid_L DBD-2120-020 liuwei2
  */
 public class NinteiTanitsuProcessDataManager {
 
@@ -38,7 +38,9 @@ public class NinteiTanitsuProcessDataManager {
     private final RString 介3 = new RString("23");
     private final RString 介4 = new RString("24");
     private final RString 介5 = new RString("25");
-    private final RString 富士通2 = YokaigoInterfaceShurui.富士通２.getコード();
+    private final RString one = new RString("1");
+    private final RString two = new RString("2");
+    private final RString three = new RString("3");
     private final RString 主治医のみ = YokaigoInterfaceIchoTorikomi.主治医のみ.getコード();
     private final RString 調査員のみ = YokaigoInterfaceIchoTorikomi.調査員のみ.getコード();
     private final RString 両方取込む = YokaigoInterfaceIchoTorikomi.両方取込む.getコード();
@@ -70,8 +72,11 @@ public class NinteiTanitsuProcessDataManager {
         entity.get受給者台帳Entity().setNinteiYukoKikanShuryoYMD(entity.get二次判定認定有効終了年月日());
         entity.get受給者台帳Entity().setNinteiYMD(認定日);
 
-        // TODO QA
-        entity.get受給者台帳Entity().setMinashiCode(new Code(String.valueOf(entity.get要介護認定申請情報Entity().getMinashiNigoEtcTaishoFlag())));
+        if (one.equals(entity.get認定申請区分法令コード()) && two.equals(entity.get認定申請区分申請時コード())) {
+            entity.get受給者台帳Entity().setMinashiCode(new Code(one));
+        } else {
+            entity.get受給者台帳Entity().setMinashiCode(new Code("0"));
+        }
         entity.get受給者台帳Entity().setChokkinIdoYMD(FlexibleDate.getNowDate());
         entity.get受給者台帳Entity().setChokkinIdoJiyuCode(new Code(ChokkinIdoJiyuCode.追加_認定.getコード()));
         entity.get受給者台帳Entity().setYukoMukoKubun(new Code(YukoMukoKubun.有効.getコード()));
@@ -100,9 +105,12 @@ public class NinteiTanitsuProcessDataManager {
         entity.get受給者台帳Entity().setNinteiYukoKikanKaishiYMD(entity.get認定有効開始年月日());
         entity.get受給者台帳Entity().setNinteiYukoKikanShuryoYMD(entity.get認定有効終了年月日());
         entity.get受給者台帳Entity().setNinteiYMD(認定日);
-        // TODO QA
-//        if(entity.get予備区分4())
-        entity.get受給者台帳Entity().setMinashiCode(new Code(String.valueOf(entity.get要介護認定申請情報Entity().getMinashiNigoEtcTaishoFlag())));
+
+        if (three.equals(entity.get申請種別コード()) && two.equals(entity.get予備区分4())) {
+            entity.get受給者台帳Entity().setMinashiCode(new Code(one));
+        } else {
+            entity.get受給者台帳Entity().setMinashiCode(new Code("0"));
+        }
         entity.get受給者台帳Entity().setChokkinIdoYMD(FlexibleDate.getNowDate());
         entity.get受給者台帳Entity().setChokkinIdoJiyuCode(new Code(ChokkinIdoJiyuCode.追加_認定.getコード()));
         entity.get受給者台帳Entity().setYukoMukoKubun(new Code(YukoMukoKubun.有効.getコード()));
