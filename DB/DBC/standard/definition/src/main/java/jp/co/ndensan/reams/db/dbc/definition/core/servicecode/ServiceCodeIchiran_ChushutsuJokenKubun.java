@@ -9,63 +9,63 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 事業対象者実施区分を表す列挙型です。
+ * サービスコード一覧_抽出条件区分を表す列挙型です。
  *
- * @reamsid_L DBC-9999-022 zhaowei
+ * @reamsid_L DBC-9999-022 jiangxiaolong
  */
-public enum JigyoTaisyosyaJisiKubun {
+public enum ServiceCodeIchiran_ChushutsuJokenKubun {
 
     /**
-     * コード:0 名称:未使用 略称:定義なし
+     * コード:0 名称:すべて 略称:定義なし
      */
-    未使用("0", "未使用"),
+    すべて("0", "すべて"),
     /**
-     * コード:1 名称:実施不可 略称:定義なし
+     * コード:1 名称:サービスコードを指定 略称:定義なし
      */
-    実施不可("1", "実施不可"),
+    サービスコードを指定("1", "サービスコードを指定"),
     /**
-     * コード:2 名称:実施可 略称:定義なし
+     * コード:2 名称:サービス分類を指定 略称:定義なし
      */
-    実施可("2", "実施可");
+    サービス分類を指定("2", "サービス分類を指定");
     private final RString code;
     private final RString fullName;
 
-    private JigyoTaisyosyaJisiKubun(String code, String fullname) {
+    private ServiceCodeIchiran_ChushutsuJokenKubun(String code, String fullname) {
         this.code = new RString(code);
         this.fullName = new RString(fullname);
     }
 
     /**
-     * 事業対象者実施区分のコードを返します。
+     * サービスコード一覧_抽出条件区分のコードを返します。
      *
-     * @return 事業対象者実施区分のコード
+     * @return サービスコード一覧_抽出条件区分のコード
      */
     public RString getコード() {
         return code;
     }
 
     /**
-     * 事業対象者実施区分の名称を返します。
+     * サービスコード一覧_抽出条件区分の名称を返します。
      *
-     * @return 事業対象者実施区分の名称
+     * @return サービスコード一覧_抽出条件区分の名称
      */
     public RString get名称() {
         return fullName;
     }
 
     /**
-     * 事業対象者実施区分のコードと一致する内容を探します。
+     * サービスコード一覧_抽出条件区分のコードと一致する内容を探します。
      *
-     * @param code 事業対象者実施区分のコード
-     * @return {@code code} に対応する事業対象者実施区分
+     * @param code サービスコード一覧_抽出条件区分のコード
+     * @return {@code code} に対応するサービスコード一覧_抽出条件区分
      */
-    public static JigyoTaisyosyaJisiKubun toValue(RString code) {
+    public static ServiceCodeIchiran_ChushutsuJokenKubun toValue(RString code) {
 
-        for (JigyoTaisyosyaJisiKubun kubun : JigyoTaisyosyaJisiKubun.values()) {
+        for (ServiceCodeIchiran_ChushutsuJokenKubun kubun : ServiceCodeIchiran_ChushutsuJokenKubun.values()) {
             if (kubun.code.equals(code)) {
                 return kubun;
             }
         }
-        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("事業対象者実施区分"));
+        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("サービスコード一覧_抽出条件区分"));
     }
 }
