@@ -43,7 +43,7 @@ public class TokuteiShinryohiMain {
         List<ShikibetsuNoKanri> 識別番号管理データリスト = KyufuJissekiShokaiFinder.createInstance().getShikibetsuBangoKanri(
                 サービス提供年月, 識別番号検索キー).records();
         if (!識別番号管理データリスト.isEmpty()) {
-            getHandler(div).clear制御性(識別番号管理データリスト.get(0), サービス提供年月);
+            getHandler(div).clear制御性(識別番号管理データリスト.get(0));
         }
         div.getTekiyoPanelPanel().setIsOpen(false);
         return createResponse(div);

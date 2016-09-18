@@ -44,7 +44,7 @@ public class TokuteiNyushoshahi {
         List<ShikibetsuNoKanri> 識別番号管理 = KyufuJissekiShokaiFinder.createInstance().getShikibetsuBangoKanri(
                 サービス提供年月, 識別番号).records();
         if (!識別番号管理.isEmpty()) {
-            getHandler(div).setButton(サービス提供年月, 識別番号管理.get(0));
+            getHandler(div).setButton(識別番号管理.get(0));
         }
         List<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness> business = 引き継ぎ情報.getCsData_K();
         RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();

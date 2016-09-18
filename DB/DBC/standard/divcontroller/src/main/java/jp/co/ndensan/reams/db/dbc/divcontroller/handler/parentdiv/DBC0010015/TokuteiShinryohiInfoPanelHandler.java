@@ -392,9 +392,8 @@ public class TokuteiShinryohiInfoPanelHandler {
      * 制御性設定です。
      *
      * @param 識別番号管理データ 識別番号管理データ
-     * @param サービス提供年月 FlexibleYearMonth
      */
-    public void clear制御性(ShikibetsuNoKanri 識別番号管理データ, FlexibleYearMonth サービス提供年月) {
+    public void clear制御性(ShikibetsuNoKanri 識別番号管理データ) {
         div.getBtnTokuteiShinryo().setDisabled(true);
         if (ZERO.equals(識別番号管理データ.get基本設定区分())) {
             div.getBtnKihon().setDisabled(true);
@@ -497,9 +496,9 @@ public class TokuteiShinryohiInfoPanelHandler {
     }
 
     private void setJigyoshaBtn(List<KyufuJissekiHedajyoho2> 事業者番号リスト) {
+        div.getBtnMaeJigyosha().setDisabled(true);
+        div.getBtnAtoJigyosha().setDisabled(true);
         if (!事業者番号リスト.isEmpty()) {
-            div.getBtnMaeJigyosha().setDisabled(true);
-            div.getBtnAtoJigyosha().setDisabled(true);
             int index = get事業者番号index(事業者番号リスト);
             if (0 < index) {
                 div.getBtnMaeJigyosha().setDisabled(false);
@@ -582,9 +581,8 @@ public class TokuteiShinryohiInfoPanelHandler {
     private List<FlexibleYearMonth> get特別療養費サービス提供年月リスト(List<KyufujissekiTokuteiSinryoTokubetsuRyoyo> 特別療養費リスト) {
         List<FlexibleYearMonth> サービス提供年月リスト = new ArrayList<>();
         for (KyufujissekiTokuteiSinryoTokubetsuRyoyo 特別療養費 : 特別療養費リスト) {
-            FlexibleYearMonth 提供年月 = 特別療養費.getサービス提供年月();
-            if (!サービス提供年月リスト.contains(提供年月)) {
-                サービス提供年月リスト.add(提供年月);
+            if (!サービス提供年月リスト.contains(特別療養費.getサービス提供年月())) {
+                サービス提供年月リスト.add(特別療養費.getサービス提供年月());
             }
         }
         return サービス提供年月リスト;
@@ -593,9 +591,8 @@ public class TokuteiShinryohiInfoPanelHandler {
     private List<FlexibleYearMonth> get特定診療費サービス提供年月リスト(List<KyufujissekiTokuteiSinryohi> 特定診療費リスト) {
         List<FlexibleYearMonth> サービス提供年月リスト = new ArrayList<>();
         for (KyufujissekiTokuteiSinryohi 特定診療費 : 特定診療費リスト) {
-            FlexibleYearMonth 提供年月 = 特定診療費.getサービス提供年月();
-            if (!サービス提供年月リスト.contains(提供年月)) {
-                サービス提供年月リスト.add(提供年月);
+            if (!サービス提供年月リスト.contains(特定診療費.getサービス提供年月())) {
+                サービス提供年月リスト.add(特定診療費.getサービス提供年月());
             }
         }
         return サービス提供年月リスト;
@@ -604,11 +601,15 @@ public class TokuteiShinryohiInfoPanelHandler {
     private void set特定診療費前月と次月(List<KyufujissekiTokuteiSinryohi> 特定診療費リスト, FlexibleYearMonth サービス提供年月) {
         List<FlexibleYearMonth> サービス提供年月リスト = get特定診療費サービス提供年月リスト(特定診療費リスト);
         Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
-        if (サービス提供年月.isBeforeOrEquals(サービス提供年月リスト.get(サービス提供年月リスト.size() - 1))) {
-            div.getBtnZengetsu().setDisabled(true);
-        }
-        if (サービス提供年月リスト.get(INT_ZERO).isBeforeOrEquals(サービス提供年月)) {
-            div.getBtnJigetsu().setDisabled(true);
+        div.getBtnZengetsu().setDisabled(true);
+        div.getBtnJigetsu().setDisabled(true);
+        if (サービス提供年月リスト != null && !サービス提供年月リスト.isEmpty()) {
+            if (!サービス提供年月.isBeforeOrEquals(サービス提供年月リスト.get(サービス提供年月リスト.size() - 1))) {
+                div.getBtnZengetsu().setDisabled(false);
+            }
+            if (!サービス提供年月リスト.get(INT_ZERO).isBeforeOrEquals(サービス提供年月)) {
+                div.getBtnJigetsu().setDisabled(false);
+            }
         }
     }
 

@@ -87,12 +87,16 @@ public class KinnkyuujiShisetsuRyouyouhiHandler {
 
     private void setGetsuBtn(List<KyufujissekiKinkyuShisetsuRyoyo> 給付実績緊急時施設療養データ取得, FlexibleYearMonth サービス提供年月) {
         Collections.sort(給付実績緊急時施設療養データ取得, new KinnkyuujiShisetsuRyouyouhiHandler.DateComparatorServiceTeikyoYM());
-        if (サービス提供年月.isBeforeOrEquals(給付実績緊急時施設療養データ取得.get(給付実績緊急時施設療養データ取得.size() - 1).getサービス提供年月())) {
-            div.getBtnZengetsu().setDisabled(true);
-        }
-        if (給付実績緊急時施設療養データ取得.get(0).getサービス提供年月()
-                .isBeforeOrEquals(サービス提供年月)) {
-            div.getBtnJigetsu().setDisabled(true);
+        div.getBtnZengetsu().setDisabled(true);
+        div.getBtnJigetsu().setDisabled(true);
+        if (給付実績緊急時施設療養データ取得 != null && !給付実績緊急時施設療養データ取得.isEmpty()) {
+            if (!サービス提供年月.isBeforeOrEquals(給付実績緊急時施設療養データ取得.get(給付実績緊急時施設療養データ取得.size() - 1).getサービス提供年月())) {
+                div.getBtnZengetsu().setDisabled(false);
+            }
+            if (!給付実績緊急時施設療養データ取得.get(0).getサービス提供年月()
+                    .isBeforeOrEquals(サービス提供年月)) {
+                div.getBtnJigetsu().setDisabled(false);
+            }
         }
     }
 
@@ -187,10 +191,9 @@ public class KinnkyuujiShisetsuRyouyouhiHandler {
     /**
      * ボタン状態の設定です。
      *
-     * @param サービス提供年月 サービス提供年月
      * @param 識別番号管理 ShikibetsuNoKanri
      */
-    public void setButton(FlexibleYearMonth サービス提供年月, ShikibetsuNoKanri 識別番号管理) {
+    public void setButton(ShikibetsuNoKanri 識別番号管理) {
 
         if (DISABLED.equals(識別番号管理.get基本設定区分())) {
             div.getBtnKihon().setDisabled(true);
@@ -203,9 +206,9 @@ public class KinnkyuujiShisetsuRyouyouhiHandler {
             div.getBtnMeisaiShukei().setDisabled(false);
         }
         if (DISABLED.equals(識別番号管理.get所定疾患施設療養設定区分())) {
-            div.getBtnShoteiShikkanShisetsuRyoyo().setDisplayNone(true);
+            div.getBtnShoteiShikkanShisetsuRyoyo().setDisabled(true);
         } else {
-            div.getBtnShoteiShikkanShisetsuRyoyo().setDisplayNone(false);
+            div.getBtnShoteiShikkanShisetsuRyoyo().setDisabled(false);
         }
         div.getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
         if (DISABLED.equals(識別番号管理.get食事費用設定区分())) {
@@ -555,9 +558,9 @@ public class KinnkyuujiShisetsuRyouyouhiHandler {
      * @param 実績区分コード RString
      */
     public void check事業者btn(List<KyufuJissekiHedajyoho2> 事業者番号リスト, RString 整理番号, RString 事業者番号, RString 様式番号, RString サービス提供年月, RString 実績区分コード) {
+        div.getBtnMaeJigyosha().setDisabled(true);
+        div.getBtnAtoJigyosha().setDisabled(true);
         if (!事業者番号リスト.isEmpty()) {
-            div.getBtnMaeJigyosha().setDisabled(true);
-            div.getBtnAtoJigyosha().setDisabled(true);
             int index = get事業者番号index(事業者番号リスト, 整理番号, 事業者番号, 様式番号, サービス提供年月, 実績区分コード);
             if (0 < index) {
                 div.getBtnMaeJigyosha().setDisabled(false);
