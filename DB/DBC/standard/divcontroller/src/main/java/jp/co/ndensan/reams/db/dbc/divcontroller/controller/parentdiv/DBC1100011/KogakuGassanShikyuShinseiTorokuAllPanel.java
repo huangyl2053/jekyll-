@@ -79,6 +79,8 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
         }
         if (RSTRING_ONE.equals(高額合算申請書保持.get申請状態())) {
             handler.申請登録状態初期表示に設定();
+            handler.onChange_ddlShinseiTaisyoNendo();
+            handler.onChange_ddlShokisaiHokenshaNo();
             div.getTxtIryoShikyuShinseishoSeiriBango2().setReadOnly(false);
             div.getTxtIryoShikyuShinseishoSeiriBango3().setReadOnly(false);
             div.getTxtIryoShikyuShinseishoSeiriBango4().setReadOnly(false);

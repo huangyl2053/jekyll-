@@ -98,7 +98,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
     private static final int INT_4 = 4;
     private static final int INT_5 = 5;
     private static final int INT_7 = 7;
-    private static final int INT_12 = 12;
+    private static final int INT_11 = 11;
     private static final int INT_2008 = 2008;
     private static final RString 広域市町村モード = new RString("広域市町村モード");
     private static final int 年度_2013 = 2013;
@@ -107,6 +107,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
     private static final RString RSTRING_1 = new RString("1");
     private static final RString RSTRING_2 = new RString("2");
     private static final RString RSTRING_4 = new RString("4");
+    private static final RString 空白 = new RString("空白");
     private static final RString 所得区分_課税 = new RString("10");
     private static final RString 所得区分_非課税 = new RString("11");
     private static final RString 課税 = new RString("課税");
@@ -276,8 +277,8 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
             モード = resultMap.keySet().iterator().next();
         }
         if (広域市町村モード.equals(モード)) {
-            RString 整理番号２ = div.getDdlShokisaiHokenshaNo().getSelectedValue();
-            div.getTxtKaigoShikyuShinseishoSeiriBango2().setValue(整理番号２);
+            RString 整理番号3 = div.getDdlShokisaiHokenshaNo().getSelectedValue();
+            div.getTxtKaigoShikyuShinseishoSeiriBango3().setValue(整理番号3);
         }
     }
 
@@ -787,7 +788,8 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
                 .set支払期間終了時間(div.getCcdShiharaiHohoJoho().getEndHHMM() == null ? null
                         : new RString(div.getCcdShiharaiHohoJoho().getEndHHMM().toString()))
                 .set閉庁内容(null)
-                .set口座ID(Long.parseLong(div.getCcdShiharaiHohoJoho().getKozaID().toString()))
+                .set口座ID(RString.isNullOrEmpty(div.getCcdShiharaiHohoJoho().getKozaID()) ? 0L
+                        : Long.parseLong(div.getCcdShiharaiHohoJoho().getKozaID().toString()))
                 .set備考(div.getTxtBiko().getValue())
                 .set支給申請書情報送付年月(null)
                 .set再送フラグ(null)
@@ -986,12 +988,15 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         RString 申請対象年度 = div.getDdlShinseiTaishoNendo().getSelectedKey();
         int 年度 = Integer.parseInt(申請対象年度.toString());
         List<KeyValueDataSource> h25年度以前 = new ArrayList();
+        h25年度以前.add(new KeyValueDataSource(空白, RString.EMPTY));
         h25年度以前.add(new KeyValueDataSource(所得区分_課税, 課税));
         h25年度以前.add(new KeyValueDataSource(所得区分_非課税, 非課税));
         h25年度以前.add(new KeyValueDataSource(KaigoGassan_ShotokuKbn.上位所得者.getCode(),
                 KaigoGassan_ShotokuKbn.上位所得者.get名称()));
         List<KeyValueDataSource> h26年度以降 = new ArrayList();
+        h26年度以降.add(new KeyValueDataSource(空白, RString.EMPTY));
         List<KeyValueDataSource> h27年1月以降 = new ArrayList();
+        h27年1月以降.add(new KeyValueDataSource(空白, RString.EMPTY));
         for (KaigoGassan_ShotokuKbn type : KaigoGassan_ShotokuKbn.values()) {
             h27年1月以降.add(new KeyValueDataSource(type.getCode(), type.get名称()));
             if (KaigoGassan_ShotokuKbn.区分ア.get名称().equals(type.get名称())
@@ -1089,7 +1094,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
             div.getDdlShokisaiHokenshaNo().setSelectedIndex(INT_0);
         } else {
             boolean flg = false;
-            RString 証記載保険者番号 = 支給申請書整理番号.substring(INT_5, INT_12);
+            RString 証記載保険者番号 = 支給申請書整理番号.substring(INT_5, INT_11);
             List<KeyValueDataSource> dataSource = div.getDdlShokisaiHokenshaNo().getDataSource();
             for (KeyValueDataSource data : dataSource) {
                 if (証記載保険者番号.equals(data.getKey())) {
@@ -1102,7 +1107,6 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
             } else {
                 div.getDdlShokisaiHokenshaNo().setSelectedIndex(INT_0);
             }
-            支給申請書整理番号.substring(INT_5, INT_12);
         }
         if (RString.isNullOrEmpty(支給申請書整理番号)) {
             div.getTxtKaigoShikyuShinseishoSeiriBango1().clearValue();
@@ -1111,9 +1115,9 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
             div.getTxtKaigoShikyuShinseishoSeiriBango4().clearValue();
         } else {
             div.getTxtKaigoShikyuShinseishoSeiriBango1().setValue(支給申請書整理番号.substring(INT_0, INT_3));
-            div.getTxtKaigoShikyuShinseishoSeiriBango1().setValue(支給申請書整理番号.substring(INT_3, INT_5));
-            div.getTxtKaigoShikyuShinseishoSeiriBango1().setValue(支給申請書整理番号.substring(INT_5, INT_12));
-            div.getTxtKaigoShikyuShinseishoSeiriBango1().setValue(支給申請書整理番号.substring(INT_12));
+            div.getTxtKaigoShikyuShinseishoSeiriBango2().setValue(支給申請書整理番号.substring(INT_3, INT_5));
+            div.getTxtKaigoShikyuShinseishoSeiriBango3().setValue(支給申請書整理番号.substring(INT_5, INT_11));
+            div.getTxtKaigoShikyuShinseishoSeiriBango4().setValue(支給申請書整理番号.substring(INT_11));
         }
         div.getTxtRirekiBango().setValue(高額合算申請書.get履歴番号());
         div.getDdlShinseiTaishoNendo().setSelectedKey(高額合算申請書.get対象年度().toDateString());
@@ -1125,9 +1129,9 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
             div.getTxtIryoShikyuShinseishoSeiriBango4().clearValue();
         } else {
             div.getTxtIryoShikyuShinseishoSeiriBango1().setValue(国保支給申請書整理番号.substring(INT_0, INT_3));
-            div.getTxtIryoShikyuShinseishoSeiriBango1().setValue(国保支給申請書整理番号.substring(INT_3, INT_5));
-            div.getTxtIryoShikyuShinseishoSeiriBango1().setValue(国保支給申請書整理番号.substring(INT_5, INT_12));
-            div.getTxtIryoShikyuShinseishoSeiriBango1().setValue(国保支給申請書整理番号.substring(INT_12));
+            div.getTxtIryoShikyuShinseishoSeiriBango2().setValue(国保支給申請書整理番号.substring(INT_3, INT_5));
+            div.getTxtIryoShikyuShinseishoSeiriBango3().setValue(国保支給申請書整理番号.substring(INT_5, INT_11));
+            div.getTxtIryoShikyuShinseishoSeiriBango4().setValue(国保支給申請書整理番号.substring(INT_11));
         }
         if (RString.isNullOrEmpty(高額合算申請書.get支給申請区分())) {
             div.getTxtShikyuShinseiKubun().clearValue();
@@ -1437,7 +1441,8 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
                         : new RString(div.getCcdShiharaiHohoJoho().getStartHHMM().toString()))
                 .set支払期間終了時間(div.getCcdShiharaiHohoJoho().getEndHHMM() == null ? null
                         : new RString(div.getCcdShiharaiHohoJoho().getEndHHMM().toString()))
-                .set口座ID(Long.parseLong(div.getCcdShiharaiHohoJoho().getKozaID().toString()))
+                .set口座ID(RString.isNullOrEmpty(div.getCcdShiharaiHohoJoho().getKozaID()) ? 0L
+                        : Long.parseLong(div.getCcdShiharaiHohoJoho().getKozaID().toString()))
                 .set備考(div.getTxtBiko().getValue())
                 .build();
     }
