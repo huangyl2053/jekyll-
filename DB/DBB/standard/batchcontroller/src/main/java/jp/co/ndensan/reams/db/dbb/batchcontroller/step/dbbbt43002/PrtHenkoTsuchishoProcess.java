@@ -130,6 +130,8 @@ public class PrtHenkoTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
     private Decimal 連番;
     private ChohyoSeigyoKyotsu 帳票制御共通;
     private HonsanteiTsuchishoInfo 通知書共通情報entity;
+    private FileSpoolManager fileSpoolManager;
+    private RString eucFilePath;
 
     private BatchReportWriter<KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoReportSource> dbb100042reportWriter;
     private ReportSourceWriter<KaigoHokenryogakuHenkoKenChushiTsuchishoB5YokoReportSource> dbb100042ReportSourceWriter;
@@ -179,10 +181,10 @@ public class PrtHenkoTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
         一覧表reportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB200012.getReportId().value()).addBreak(breaker).create();
         一覧表ReportSourceWriter = new ReportSourceWriter<>(一覧表reportWriter);
 
-        FileSpoolManager fileSpoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
+        fileSpoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
                 変更_EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = fileSpoolManager.getEucOutputDirectry();
-        RString eucFilePath = Path.combinePath(spoolWorkPath, 変更_EUCファイル名);
+        eucFilePath = Path.combinePath(spoolWorkPath, 変更_EUCファイル名);
         csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).setNewLine(NewLine.CRLF)
                 .setDelimiter(カンマ)
                 .setEnclosure(EUC_WRITER_ENCLOSURE)
@@ -272,9 +274,10 @@ public class PrtHenkoTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
             manager.loadバッチ出力条件リスト(出力条件リスト, 出力帳票一覧.get帳票ID(), new RString(総ページ数),
                     CSV出力有無_あり, CSVファイル名_変更一覧表, 帳票名);
         }
-        close決定通知書();
+        close変更通知書();
         一覧表reportWriter.close();
         csvListWriter.close();
+        fileSpoolManager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
     }
 
     private int publish変更通知書(KaigoHokenryogakuHenkoKenChushiTsuchishoJoho 通知書情報) {
@@ -376,7 +379,7 @@ public class PrtHenkoTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
         }
     }
 
-    private void close決定通知書() {
+    private void close変更通知書() {
         if (ReportIdDBB.DBB100042.getReportId().equals(出力帳票一覧.get帳票ID())) {
             dbb100042reportWriter.close();
         } else if (ReportIdDBB.DBB100043.getReportId().equals(出力帳票一覧.get帳票ID())) {

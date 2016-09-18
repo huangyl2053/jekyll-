@@ -150,6 +150,8 @@ public class PrtTokuchoKaishiTsuchishoHonsanteiProcess extends BatchProcessBase<
     private List<RString> 改頁項目リスト;
     private RString 出力順;
     private List<RString> pageBreakKeys;
+    private FileSpoolManager fileSpoolManager;
+    private RString eucFilePath;
     private NinshoshaSource dbb100032NinshoshaSource;
     private NinshoshaSource dbb100033NinshoshaSource;
     private NinshoshaSource dbb100034NinshoshaSource;
@@ -220,10 +222,10 @@ public class PrtTokuchoKaishiTsuchishoHonsanteiProcess extends BatchProcessBase<
         一覧表reportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB200011.getReportId().value()).addBreak(breaker).create();
         一覧表ReportSourceWriter = new ReportSourceWriter<>(一覧表reportWriter);
 
-        FileSpoolManager fileSpoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
+        fileSpoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
                 EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = fileSpoolManager.getEucOutputDirectry();
-        RString eucFilePath = Path.combinePath(spoolWorkPath, 特別徴収_EUCファイル名);
+        eucFilePath = Path.combinePath(spoolWorkPath, 特別徴収_EUCファイル名);
         csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).setNewLine(NewLine.CRLF)
                 .setDelimiter(カンマ)
                 .setEnclosure(EUC_WRITER_ENCLOSURE)
@@ -297,6 +299,7 @@ public class PrtTokuchoKaishiTsuchishoHonsanteiProcess extends BatchProcessBase<
         close特徴開始通知書();
         一覧表reportWriter.close();
         csvListWriter.close();
+        fileSpoolManager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
     }
 
     private void get出力条件リスト() {
