@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.lang.Width;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
@@ -65,7 +64,7 @@ public class KyufuSaishinsaMoshitateshojohoSofuIchiranHeaderEditor implements IK
         source.printTimeStamp = get印刷日時(作成日時);
 
         if (処理年月 != null) {
-            source.sofuYM = 処理年月.wareki().eraType(EraType.KANJI_RYAKU).
+            source.sofuYM = 処理年月.wareki().eraType(EraType.KANJI).
                     firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         }
         if (送付一覧表データ.get再審査申立_保険者番号() != null) {
@@ -112,10 +111,9 @@ public class KyufuSaishinsaMoshitateshojohoSofuIchiranHeaderEditor implements IK
         RStringBuilder sakuseiYMD = new RStringBuilder();
 
         sakuseiYMD.append(datetime.getDate().wareki().
-                eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).
-                separator(Separator.JAPANESE).
-                fillType(FillType.NONE).
-                width(Width.HALF).toDateString());
+                eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).fillType(FillType.BLANK)
+                .toDateString());
         sakuseiYMD.append(RString.HALF_SPACE);
         sakuseiYMD.append(datetime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         sakuseiYMD.append(RString.HALF_SPACE);
