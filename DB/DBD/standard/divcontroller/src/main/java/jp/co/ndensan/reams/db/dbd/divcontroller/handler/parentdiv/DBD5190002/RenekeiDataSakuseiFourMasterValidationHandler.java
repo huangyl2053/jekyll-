@@ -29,7 +29,7 @@ public class RenekeiDataSakuseiFourMasterValidationHandler {
     }
 
     /**
-     * 要介護認定関連データ作成画面のバリデーション
+     * 要介護認定関連データ作成画面のバリデーション。
      *
      * @return ValidationMessageControlPairs
      */

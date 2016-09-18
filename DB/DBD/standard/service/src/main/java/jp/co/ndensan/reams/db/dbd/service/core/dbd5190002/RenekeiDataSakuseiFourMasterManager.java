@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- * 要介護認定関連データを管理するクラスです
+ * 要介護認定関連データを管理するクラスです。
  *
  * @reamsid_L DBD-2100-010 liwul
  */
@@ -34,7 +34,7 @@ public class RenekeiDataSakuseiFourMasterManager {
     }
 
     /**
-     * NinteiShinseiTorokuUketsukeManagerのインスタンス化
+     * NinteiShinseiTorokuUketsukeManagerのインスタンス化。
      *
      * @return NinteiShinseiTorokuUketsukeManager
      */
@@ -43,7 +43,7 @@ public class RenekeiDataSakuseiFourMasterManager {
     }
 
     /**
-     * 法改正施行年月日と厚労省IF識別コードの取得
+     * 法改正施行年月日と厚労省IF識別コードの取得。
      *
      * @return 法改正施行年月日と厚労省IF識別コード
      */

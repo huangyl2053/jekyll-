@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD5190002;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd5190002.RenekeiDataSakuseiFourMasterBatchParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD519002.DBD519002Parameter;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdQuestionMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5190002.RenekeiDataSakuseiFourMasterDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5190002.RenekeiDataSakuseiFourMasterHandler;
@@ -24,19 +24,19 @@ public class RenekeiDataSakuseiFourMaster {
     /**
      * 要介護認定関連データ作成画面の初期化。
      *
-     * @param div RenekeiDataSakuseiFourMasterDiv
+     * @param div ドメインオブジェクトを取り出したい {@link RenekeiDataSakuseiFourMasterDiv}
      *
      * @return ResponseData<RenekeiDataSakuseiFourMasterDiv>
      */
     public ResponseData<RenekeiDataSakuseiFourMasterDiv> onLoad(RenekeiDataSakuseiFourMasterDiv div) {
-        getHandler(div).init();
+        getHandler(div).onLoad();
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 抽出条件ラジオボタンのonClick事件
+     * 抽出条件ラジオボタンのonClick事件。
      *
-     * @param div RenekeiDataSakuseiFourMasterDiv
+     * @param div ドメインオブジェクトを取り出したい {@link RenekeiDataSakuseiFourMasterDiv}
      * @return ResponseData<RenekeiDataSakuseiFourMasterDiv>
      */
     public ResponseData<RenekeiDataSakuseiFourMasterDiv> onClick_radChushutsuJoken(RenekeiDataSakuseiFourMasterDiv div) {
@@ -45,10 +45,21 @@ public class RenekeiDataSakuseiFourMaster {
     }
 
     /**
-     * 入力チェック　と　操作実施確認ボタン
+     * IF種別　ラジオボタンのonClick事件。
      *
      * @param div ドメインオブジェクトを取り出したい {@link RenekeiDataSakuseiFourMasterDiv}
-     * @return ResponseData<FutsuKofuZeiShiryoParentPnlDiv>
+     * @return ResponseData<RenekeiDataSakuseiFourMasterDiv>
+     */
+    public ResponseData<RenekeiDataSakuseiFourMasterDiv> onClick_radIfShubetu(RenekeiDataSakuseiFourMasterDiv div) {
+        getHandler(div).radIfShubetu_onClick();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 入力チェック　と　操作実施確認ボタン。
+     *
+     * @param div ドメインオブジェクトを取り出したい {@link RenekeiDataSakuseiFourMasterDiv}
+     * @return ResponseData<RenekeiDataSakuseiFourMasterDiv>
      */
     public ResponseData<RenekeiDataSakuseiFourMasterDiv> onClick_onBeforeBatchRegister(RenekeiDataSakuseiFourMasterDiv div) {
         if (!ResponseHolder.isReRequest()) {
@@ -62,13 +73,13 @@ public class RenekeiDataSakuseiFourMaster {
     }
 
     /**
-     * バッチ処理実行
+     * バッチ処理実行。
      *
      * @param div ドメインオブジェクトを取り出したい {@link RenekeiDataSakuseiFourMasterDiv}
      * @return ResponseData<RenekeiDataSakuseiFourMasterBatchParameter>
      */
-    public ResponseData<RenekeiDataSakuseiFourMasterBatchParameter> onClick_btnBatchRegister(RenekeiDataSakuseiFourMasterDiv div) {
-        RenekeiDataSakuseiFourMasterBatchParameter parameter = getHandler(div).createParameter();
+    public ResponseData<DBD519002Parameter> onClick_btnBatchRegister(RenekeiDataSakuseiFourMasterDiv div) {
+        DBD519002Parameter parameter = getHandler(div).createParameter();
         return ResponseData.of(parameter).respond();
     }
 

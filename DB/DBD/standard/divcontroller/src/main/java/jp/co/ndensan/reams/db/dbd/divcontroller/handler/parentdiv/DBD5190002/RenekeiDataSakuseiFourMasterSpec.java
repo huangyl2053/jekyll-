@@ -17,19 +17,21 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum RenekeiDataSakuseiFourMasterSpec implements IPredicate<RenekeiDataSakuseiFourMasterDiv> {
 
     /**
-     * 今回処理日時_終了日時が開始日時以前チェック
+     * 今回処理日時_終了日時が開始日時以前チェック。
      */
     今回処理日時_終了日時が開始日時以前チェック {
                 @Override
                 public boolean apply(RenekeiDataSakuseiFourMasterDiv div) {
                     if (SpecHelper.抽出条件ラジオボタンが対象期間(div)) {
-                        return div.getTxtkonkaishoriymdtime().getFromValue().isBefore(div.getTxtkonkaishoriymdtime().getToValue());
+                        return div.getTxtkonkaishoriymdtime().getFromValue() == null
+                        || div.getTxtkonkaishoriymdtime().getToValue() == null
+                        || div.getTxtkonkaishoriymdtime().getFromValue().isBefore(div.getTxtkonkaishoriymdtime().getToValue());
                     }
                     return true;
                 }
             },
     /**
-     * 今回開始チェック（年月日）
+     * 今回開始チェック（年月日）。
      */
     今回開始チェック_年月日 {
                 @Override
@@ -41,7 +43,7 @@ public enum RenekeiDataSakuseiFourMasterSpec implements IPredicate<RenekeiDataSa
                 }
             },
     /**
-     * 今回開始チェック（時分秒）
+     * 今回開始チェック（時分秒）。
      */
     今回開始チェック_時分秒 {
                 @Override
@@ -53,7 +55,7 @@ public enum RenekeiDataSakuseiFourMasterSpec implements IPredicate<RenekeiDataSa
                 }
             },
     /**
-     * 今回終了チェック_年月日
+     * 今回終了チェック_年月日。
      */
     今回終了チェック_年月日 {
                 @Override
@@ -65,7 +67,7 @@ public enum RenekeiDataSakuseiFourMasterSpec implements IPredicate<RenekeiDataSa
                 }
             },
     /**
-     * 今回終了チェック（時分秒）
+     * 今回終了チェック（時分秒）。
      */
     今回終了チェック_時分秒 {
                 @Override
