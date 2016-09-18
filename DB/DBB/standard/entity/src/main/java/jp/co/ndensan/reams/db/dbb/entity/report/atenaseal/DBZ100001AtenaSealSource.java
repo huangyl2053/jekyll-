@@ -775,29 +775,29 @@ public class DBZ100001AtenaSealSource implements IReportSource {
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
     public int index;
-    @ReportPerson(id = "1", order = 1)
+    @ReportPerson(id = "1", order = 377)
     public ShikibetsuCode shikibetsuCode;
-    @ReportPerson(id = "2", order = 2)
+    @ReportPerson(id = "2", order = 378)
     public ShikibetsuCode shikibetsuCode1;
-    @ReportPerson(id = "3", order = 3)
+    @ReportPerson(id = "3", order = 379)
     public ShikibetsuCode shikibetsuCode2;
-    @ReportPerson(id = "4", order = 4)
+    @ReportPerson(id = "4", order = 380)
     public ShikibetsuCode shikibetsuCode3;
-    @ReportPerson(id = "5", order = 5)
+    @ReportPerson(id = "5", order = 381)
     public ShikibetsuCode shikibetsuCode4;
-    @ReportPerson(id = "6", order = 6)
+    @ReportPerson(id = "6", order = 382)
     public ShikibetsuCode shikibetsuCode5;
-    @ReportPerson(id = "7", order = 7)
+    @ReportPerson(id = "7", order = 383)
     public ShikibetsuCode shikibetsuCode6;
-    @ReportPerson(id = "8", order = 8)
+    @ReportPerson(id = "8", order = 384)
     public ShikibetsuCode shikibetsuCode7;
-    @ReportPerson(id = "9", order = 9)
+    @ReportPerson(id = "9", order = 385)
     public ShikibetsuCode shikibetsuCode8;
-    @ReportPerson(id = "10", order = 10)
+    @ReportPerson(id = "10", order = 386)
     public ShikibetsuCode shikibetsuCode9;
-    @ReportPerson(id = "11", order = 11)
+    @ReportPerson(id = "11", order = 387)
     public ShikibetsuCode shikibetsuCode10;
-    @ReportPerson(id = "12", order = 12)
+    @ReportPerson(id = "12", order = 388)
     public ShikibetsuCode shikibetsuCode11;
 // </editor-fold>
 }

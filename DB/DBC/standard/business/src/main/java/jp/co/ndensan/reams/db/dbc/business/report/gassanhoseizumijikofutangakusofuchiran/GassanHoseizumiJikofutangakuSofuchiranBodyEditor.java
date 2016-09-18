@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.gassanhoseizumijikofutangakusofuchiran;
 
-import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenDataSaisoFlag;
 import jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.DbWT1001HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassan.SyuturyokuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangaku.DbWT37K1KogakuGassanJikoFutanGakuTempEntity;
@@ -29,6 +28,7 @@ public class GassanHoseizumiJikofutangakuSofuchiranBodyEditor implements IGassan
     private static final RString 接続文字 = new RString("～");
     private static final RString 対象年度 = new RString("年度");
     private static final RString 再送フラグ = new RString("1");
+    private static final RString 再送要の場合 = new RString("※");
     private final SyuturyokuEntity 送付一覧表データ;
     private final int 連番;
 
@@ -78,15 +78,15 @@ public class GassanHoseizumiJikofutangakuSofuchiranBodyEditor implements IGassan
         source.list_10 = get期間(get年月日(entity.getHihokenshaKaishiYMD()), get年月日(entity.getHihokenshaShuryoYMD()));
         source.list_11 = get期間(get年月日(entity.getTaishoKeisanKaishiYMD()), get年月日(entity.getTaishoKeisanShuryoYMD()));
         source.list_12 = doカンマ編集(entity.getSumi_Gokei_JikoFutanGaku());
-        source.list_13 = doカンマ編集(entity.getGokei_70_74JikoFutanGaku());
-        source.list_14 = doカンマ編集(entity.getSumi_Gokei_70_74KogakuShikyuGaku());
+        source.list_13 = doカンマ編集(entity.getSumi_Gokei_70_74JikoFutanGaku());
+        source.list_14 = doカンマ編集(entity.getSumi_Gokei_Under70KogakuShikyuGaku());
 
         if (tempEntity.getShikibetsuCode() != null) {
             source.shikibetsuCode = tempEntity.getShikibetsuCode().value();
         }
 
         if (再送フラグ.equals(entity.getSaisoFlag())) {
-            source.list_15 = KokuhorenDataSaisoFlag.再送要.get名称();
+            source.list_15 = 再送要の場合;
         } else {
             source.list_15 = RString.EMPTY;
         }

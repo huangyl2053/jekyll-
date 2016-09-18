@@ -145,17 +145,6 @@ public class SofuFileSakuseiProcess extends BatchKeyBreakBase<KogakuGassanKeisan
     protected void createWriter() {
         dbWT1002TableWriter = new BatchEntityCreatedTempTableWriter(処理結果リスト一時,
                 DbWT1002KokuhorenSakuseiErrorTempEntity.class);
-        RString spoolWorkPath = Path.getTmpDirectoryPath();
-        出力ファイル名 = ファイル名_前.concat(保険者番号)
-                .concat(processParameter.get処理年月().toDateString()).concat(ファイル名_後);
-        eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
-        eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
-                .setDelimiter(コンマ)
-                .setEnclosure(ダブル引用符)
-                .setEncode(文字コード)
-                .setNewLine(NewLine.CRLF)
-                .hasHeader(false)
-                .build();
     }
 
     @Override
@@ -167,6 +156,17 @@ public class SofuFileSakuseiProcess extends BatchKeyBreakBase<KogakuGassanKeisan
     protected void usualProcess(KogakuGassanKeisanKekkaRenrakuJohoTmpEntity entity) {
         if (flag == 0) {
             flag = INT_1;
+            RString spoolWorkPath = Path.getTmpDirectoryPath();
+            出力ファイル名 = ファイル名_前.concat(保険者番号)
+                    .concat(processParameter.get処理年月().toDateString()).concat(ファイル名_後);
+            eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
+            eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
+                    .setDelimiter(コンマ)
+                    .setEnclosure(ダブル引用符)
+                    .setEncode(文字コード)
+                    .setNewLine(NewLine.CRLF)
+                    .hasHeader(false)
+                    .build();
         }
     }
 
@@ -205,7 +205,9 @@ public class SofuFileSakuseiProcess extends BatchKeyBreakBase<KogakuGassanKeisan
         outputCount.setValue(総出力件数);
         entryList.add(sfd);
         outputEntry.setValue(entryList);
-        eucCsvWriter.close();
+        if (null != eucCsvWriter) {
+            eucCsvWriter.close();
+        }
     }
 
     private void 処理結果リスト一時TBL出力() {

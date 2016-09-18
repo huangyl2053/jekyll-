@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.business.report.dbc200101detail;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_ShihraiHohoShitei;
 import jp.co.ndensan.reams.db.dbc.definition.core.nyuryokushikibetsuno.NyuryokuShikibetsuNoShokan3Keta;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.hurikomiitiran.meisaidata.ItijiTableEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.FurikomiDetailTempTableEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hurikomiitiran.meisaidata.MeisaiDataEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc200101detail.FurikomiMeisaiIchiranDetailReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
@@ -182,9 +182,9 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
             }
             source.listUpper_13 = 左カッコ;
             if (null != this.一覧表用データ.get振込明細一時TBL()) {
-                ItijiTableEntity 振込明細一時TBL = this.一覧表用データ.get振込明細一時TBL();
-                if (null != 振込明細一時TBL.get振込金額()) {
-                    source.listUpper_14 = DecimalFormatter.toコンマ区切りRString(振込明細一時TBL.get振込金額(), 0);
+                FurikomiDetailTempTableEntity 振込明細一時TBL = this.一覧表用データ.get振込明細一時TBL();
+                if (null != 振込明細一時TBL.getFurikomiKingaku()) {
+                    source.listUpper_14 = DecimalFormatter.toコンマ区切りRString(振込明細一時TBL.getFurikomiKingaku(), 0);
                 }
             }
             source.listUpper_15 = 右カッコ;
@@ -226,29 +226,29 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
 //    }
     private void get振込明細一時TBL(FurikomiMeisaiIchiranDetailReportSource source) {
         if (null != this.一覧表用データ.get振込明細一時TBL()) {
-            ItijiTableEntity 振込明細一時TBL = this.一覧表用データ.get振込明細一時TBL();
-            if (null != 振込明細一時TBL.get被保険者番号()) {
-                source.listUpper_1 = 振込明細一時TBL.get被保険者番号();
+            FurikomiDetailTempTableEntity 振込明細一時TBL = this.一覧表用データ.get振込明細一時TBL();
+            if (null != 振込明細一時TBL.getHihokenshaNo()) {
+                source.listUpper_1 = 振込明細一時TBL.getHihokenshaNo().value();
             }
             get氏名漢字(source, 振込明細一時TBL);
 
-            if (null != 振込明細一時TBL.get郵便番号()) {
-                RString 郵便番号1 = 振込明細一時TBL.get郵便番号().substring(0, LISTINDEX_3);
-                RString 郵便番号2 = 振込明細一時TBL.get郵便番号().substring(LISTINDEX_4);
+            if (null != 振込明細一時TBL.getYubinNo()) {
+                RString 郵便番号1 = 振込明細一時TBL.getYubinNo().getYubinNo().substring(0, LISTINDEX_3);
+                RString 郵便番号2 = 振込明細一時TBL.getYubinNo().getYubinNo().substring(LISTINDEX_4);
                 source.listUpper_3 = 郵便番号1.concat(半角ハイフン).concat(郵便番号2);
             }
-            if (null != 振込明細一時TBL.get支払方法区分コード()
-                    && !振込明細一時TBL.get支払方法区分コード().getコード().equals(ONE)) {
+            if (null != 振込明細一時TBL.getShiharaiHohoKubunCode()
+                    && !振込明細一時TBL.getShiharaiHohoKubunCode().equals(ONE)) {
                 get支払方法区分コードnotEqualsOne(source, 振込明細一時TBL);
             }
-            if (null != 振込明細一時TBL.get決定通知番号()) {
-                source.listUpper_8 = 振込明細一時TBL.get決定通知番号();
+            if (null != 振込明細一時TBL.getKetteiTsuchiNo()) {
+                source.listUpper_8 = 振込明細一時TBL.getKetteiTsuchiNo();
             }
-            if (null != 振込明細一時TBL.getサービス提供年月()) {
-                source.listUpper_9 = 振込明細一時TBL.getサービス提供年月().wareki().eraType(EraType.KANJI_RYAKU).
+            if (null != 振込明細一時TBL.getServiceTeikyoYM()) {
+                source.listUpper_9 = 振込明細一時TBL.getServiceTeikyoYM().wareki().eraType(EraType.KANJI_RYAKU).
                         firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
             }
-            RString 申請区分コード = 振込明細一時TBL.get申請区分コード();
+            RString 申請区分コード = 振込明細一時TBL.getShinseiKubunCode();
             RString 申請区分名称 = RString.EMPTY;
             if (null != 申請区分コード && !申請区分コード.isEmpty()) {
                 申請区分名称 = NinteiShinseiShinseijiKubunCode.toValue(申請区分コード).get名称();
@@ -258,125 +258,127 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
             } else {
                 source.listUpper_10 = 申請区分名称.substring(0, LISTINDEX_4);
             }
-            if (null != 振込明細一時TBL.get認定有効期間開始年月日()) {
-                source.listUpper_11 = 振込明細一時TBL.get認定有効期間開始年月日().wareki().eraType(EraType.KANJI_RYAKU).
+            if (null != 振込明細一時TBL.getNinteiYukoKikanKaishiYMD()) {
+                source.listUpper_11 = 振込明細一時TBL.getNinteiYukoKikanKaishiYMD().wareki().eraType(EraType.KANJI_RYAKU).
                         firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
             }
             source.listUpper_12 = RString.EMPTY;
             source.listUpper_13 = RString.EMPTY;
-            if (null != 振込明細一時TBL.get振込金額()) {
-                source.listUpper_14 = DecimalFormatter.toコンマ区切りRString(振込明細一時TBL.get振込金額(), 0);
+            if (null != 振込明細一時TBL.getFurikomiKingaku()) {
+                source.listUpper_14 = DecimalFormatter.toコンマ区切りRString(振込明細一時TBL.getFurikomiKingaku(), 0);
             }
             source.listUpper_15 = RString.EMPTY;
-            if (null != 振込明細一時TBL.get前回支払金額() && !振込明細一時TBL.get前回支払金額().equals(ZERO)) {
+            if (null != 振込明細一時TBL.getZenkaiShiharaiKingaku() && !振込明細一時TBL.getZenkaiShiharaiKingaku().equals(ZERO)) {
                 source.listUpper_16 = 丸;
             }
             get住所(source, 振込明細一時TBL);
-            if (振込明細一時TBL.is申請データフラグ()) {
+            if (振込明細一時TBL.isShinseiDataFlag()) {
                 source.listLower_4 = 申請中;
-            } else if (null != 振込明細一時TBL.get要介護認定状態区分コード()
-                    && 振込明細一時TBL.get要介護認定状態区分コード().isEmpty()) {
+            } else if (null != 振込明細一時TBL.getYokaigoJotaiKubunCode()
+                    && 振込明細一時TBL.getYokaigoJotaiKubunCode().isEmpty()) {
                 source.listLower_4 = 未申請;
             }
-            if (null != 振込明細一時TBL.getサービス提供年月() && null != 振込明細一時TBL.get要介護認定状態区分コード()) {
-                source.listLower_5 = YokaigoJotaiKubunSupport.toValue(振込明細一時TBL.getサービス提供年月(),
-                        振込明細一時TBL.get要介護認定状態区分コード()).getName();
+            if (null != 振込明細一時TBL.getServiceTeikyoYM() && null != 振込明細一時TBL.getYokaigoJotaiKubunCode()) {
+                source.listLower_5 = YokaigoJotaiKubunSupport.toValue(振込明細一時TBL.getServiceTeikyoYM(),
+                        振込明細一時TBL.getYokaigoJotaiKubunCode()).getName();
             }
-            if (null != 振込明細一時TBL.get認定有効期間終了年月日()) {
-                source.listLower_6 = 振込明細一時TBL.get認定有効期間終了年月日().wareki().eraType(EraType.KANJI_RYAKU).
+            if (null != 振込明細一時TBL.getNinteiYukoKikanShuryoYMD()) {
+                source.listLower_6 = 振込明細一時TBL.getNinteiYukoKikanShuryoYMD().wareki().eraType(EraType.KANJI_RYAKU).
                         firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
             }
             get集計様式番号(source, 振込明細一時TBL);
-            if (null != 振込明細一時TBL.get支払方法区分コード()
-                    && 振込明細一時TBL.get支払方法区分コード().getコード().equals(ONE)) {
+            if (null != 振込明細一時TBL.getShiharaiHohoKubunCode()
+                    && 振込明細一時TBL.getShiharaiHohoKubunCode().equals(ONE)) {
                 get支払方法区分コードequalsOne(source, 振込明細一時TBL);
 
             }
         }
     }
 
-    private void get支払方法区分コードnotEqualsOne(FurikomiMeisaiIchiranDetailReportSource source, ItijiTableEntity 振込明細一時TBL) {
-        if (null != 振込明細一時TBL.get金融機関コード() && null != 振込明細一時TBL.get支店コード()) {
-            source.listUpper_4 = 振込明細一時TBL.get金融機関コード().
-                    concat(半角ハイフン).concat(振込明細一時TBL.get支店コード());
+    private void get支払方法区分コードnotEqualsOne(FurikomiMeisaiIchiranDetailReportSource source,
+            FurikomiDetailTempTableEntity 振込明細一時TBL) {
+        if (null != 振込明細一時TBL.getKinyuKikanCode() && null != 振込明細一時TBL.getKinyuKikanShitenCode()) {
+            source.listUpper_4 = 振込明細一時TBL.getKinyuKikanCode().value().
+                    concat(半角ハイフン).concat(振込明細一時TBL.getKinyuKikanShitenCode());
         }
-        if (null != 振込明細一時TBL.get金融機関名称()) {
-            source.listUpper_5 = 振込明細一時TBL.get金融機関名称();
+        if (null != 振込明細一時TBL.getKinyuKikanCode()) {
+            source.listUpper_5 = 振込明細一時TBL.getKinyuKikanCode().value();
         }
-        if (null != 振込明細一時TBL.get預金種別名称()) {
-            source.listUpper_6 = 振込明細一時TBL.get預金種別名称();
+        if (null != 振込明細一時TBL.getYokinShubetsuName()) {
+            source.listUpper_6 = 振込明細一時TBL.getYokinShubetsuName();
         }
-        if (null != 振込明細一時TBL.get口座番号()) {
-            source.listUpper_7 = 振込明細一時TBL.get口座番号();
+        if (null != 振込明細一時TBL.getKozaNo()) {
+            source.listUpper_7 = 振込明細一時TBL.getKozaNo();
         }
-        if (null != 振込明細一時TBL.get支店名称()) {
-            source.listLower_2 = 振込明細一時TBL.get支店名称();
+        if (null != 振込明細一時TBL.getKinyuKikanShitenName()) {
+            source.listLower_2 = 振込明細一時TBL.getKinyuKikanShitenName();
         }
-        if (null != 振込明細一時TBL.get口座名義人()) {
-            if (振込明細一時TBL.get口座名義人().length() <= LISTINDEX_24) {
-                source.listLower_2 = 振込明細一時TBL.get口座名義人();
+        if (null != 振込明細一時TBL.getKozaMeiginin()) {
+            if (振込明細一時TBL.getKozaMeiginin().length() <= LISTINDEX_24) {
+                source.listLower_2 = 振込明細一時TBL.getKozaMeiginin();
             } else {
-                source.listLower_2 = 振込明細一時TBL.get口座名義人().substring(0, LISTINDEX_24);
+                source.listLower_2 = 振込明細一時TBL.getKozaMeiginin().substring(0, LISTINDEX_24);
             }
         }
     }
 
-    private void get支払方法区分コードequalsOne(FurikomiMeisaiIchiranDetailReportSource source, ItijiTableEntity 振込明細一時TBL) {
-        if (null != 振込明細一時TBL.get支払場所()) {
-            if (振込明細一時TBL.get支払場所().length() <= LISTINDEX_30) {
-                RString 支払場所1 = 振込明細一時TBL.get支払場所().substring(0, LISTINDEX_22);
-                RString 支払場所2 = 振込明細一時TBL.get支払場所().substring(LISTINDEX_22);
+    private void get支払方法区分コードequalsOne(FurikomiMeisaiIchiranDetailReportSource source,
+            FurikomiDetailTempTableEntity 振込明細一時TBL) {
+        if (null != 振込明細一時TBL.getShiharaiBasho()) {
+            if (振込明細一時TBL.getShiharaiBasho().length() <= LISTINDEX_30) {
+                RString 支払場所1 = 振込明細一時TBL.getShiharaiBasho().substring(0, LISTINDEX_22);
+                RString 支払場所2 = 振込明細一時TBL.getShiharaiBasho().substring(LISTINDEX_22);
                 source.listMadoguchiUpper_1 = 支払場所1.concat("\n\r").concat(支払場所2);
             } else {
-                RString 支払場所1 = 振込明細一時TBL.get支払場所().substring(0, LISTINDEX_22);
-                RString 支払場所2 = 振込明細一時TBL.get支払場所().substring(LISTINDEX_22, LISTINDEX_30);
+                RString 支払場所1 = 振込明細一時TBL.getShiharaiBasho().substring(0, LISTINDEX_22);
+                RString 支払場所2 = 振込明細一時TBL.getShiharaiBasho().substring(LISTINDEX_22, LISTINDEX_30);
                 source.listMadoguchiUpper_1 = 支払場所1.concat("\n\r").concat(支払場所2);
             }
         }
-        if (null != 振込明細一時TBL.get支払期間開始年月日() && null != 振込明細一時TBL.get支払窓口開始時間()) {
-            RString 支払期間開始年月日 = 振込明細一時TBL.get支払期間開始年月日().wareki().eraType(EraType.KANJI_RYAKU).
+        if (null != 振込明細一時TBL.getShiharaiKaishiYMD() && null != 振込明細一時TBL.getShiharaiKaishiTime()) {
+            RString 支払期間開始年月日 = 振込明細一時TBL.getShiharaiKaishiYMD().wareki().eraType(EraType.KANJI_RYAKU).
                     firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
-            RString 支払窓口開始時間 = 振込明細一時TBL.get支払窓口開始時間().toFormattedTimeString(DisplayTimeFormat.HH_mm);
+            RString 支払窓口開始時間 = 振込明細一時TBL.getShiharaiKaishiTime();
             source.listMadoguchiUpper_2 = 支払期間開始年月日.concat(半角スペース1桁).concat(支払窓口開始時間);
         }
-        if (null != 振込明細一時TBL.get支払期間終了年月日() && null != 振込明細一時TBL.get支払窓口終了時間()) {
-            RString 支払期間終了年月日 = 振込明細一時TBL.get支払期間終了年月日().wareki().eraType(EraType.KANJI_RYAKU).
+        if (null != 振込明細一時TBL.getShiharaiShuryoYMD() && null != 振込明細一時TBL.getShiharaiShuryoTime()) {
+            RString 支払期間終了年月日 = 振込明細一時TBL.getShiharaiShuryoYMD().wareki().eraType(EraType.KANJI_RYAKU).
                     firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
-            RString 支払窓口終了時間 = 振込明細一時TBL.get支払窓口終了時間().toFormattedTimeString(DisplayTimeFormat.HH_mm);
+            RString 支払窓口終了時間 = 振込明細一時TBL.getShiharaiShuryoTime();
             source.listMadoguchiLower_1 = 支払期間終了年月日.concat(半角スペース1桁).concat(支払窓口終了時間);
         }
     }
 
-    private void get住所(FurikomiMeisaiIchiranDetailReportSource source, ItijiTableEntity 振込明細一時TBL) {
-        if (null != 振込明細一時TBL.get住所()) {
-            if (振込明細一時TBL.get住所().length() <= LISTINDEX_20) {
-                source.listLower_1 = 振込明細一時TBL.get住所();
+    private void get住所(FurikomiMeisaiIchiranDetailReportSource source, FurikomiDetailTempTableEntity 振込明細一時TBL) {
+        if (null != 振込明細一時TBL.getJusho()) {
+            if (振込明細一時TBL.getJusho().value().length() <= LISTINDEX_20) {
+                source.listLower_1 = 振込明細一時TBL.getJusho().value();
             } else {
-                source.listLower_1 = 振込明細一時TBL.get住所().substring(0, LISTINDEX_20);
+                source.listLower_1 = 振込明細一時TBL.getJusho().value().substring(0, LISTINDEX_20);
             }
         }
     }
 
-    private void get氏名漢字(FurikomiMeisaiIchiranDetailReportSource source, ItijiTableEntity 振込明細一時TBL) {
-        if (null != 振込明細一時TBL.get氏名漢字()) {
-            if (振込明細一時TBL.get氏名漢字().length() <= 15) {
-                source.listUpper_2 = 振込明細一時TBL.get氏名漢字();
+    private void get氏名漢字(FurikomiMeisaiIchiranDetailReportSource source, FurikomiDetailTempTableEntity 振込明細一時TBL) {
+        if (null != 振込明細一時TBL.getShimei()) {
+            if (振込明細一時TBL.getShimei().value().length() <= 15) {
+                source.listUpper_2 = 振込明細一時TBL.getShimei().value();
             } else {
-                source.listUpper_2 = 振込明細一時TBL.get氏名漢字().substring(0, LISTINDEX_15);
+                source.listUpper_2 = 振込明細一時TBL.getShimei().value().substring(0, LISTINDEX_15);
             }
         }
     }
 
-    private void get集計様式番号(FurikomiMeisaiIchiranDetailReportSource source, ItijiTableEntity 振込明細一時TBL) {
+    private void get集計様式番号(FurikomiMeisaiIchiranDetailReportSource source, FurikomiDetailTempTableEntity 振込明細一時TBL) {
         if (null != this.一覧表用データ.get集計様式番号()) {
             RString 集計様式番号 = this.一覧表用データ.get集計様式番号();
             if (集計様式番号.equals(NyuryokuShikibetsuNoShokan3Keta.福祉用具販売費.getコード())) {
                 source.listLower_11 = 福祉用具;
             } else if (集計様式番号.equals(NyuryokuShikibetsuNoShokan3Keta.住宅改修費.getコード())) {
                 source.listLower_11 = 住宅改修;
-            } else if (null != 振込明細一時TBL.getデータ区分() && 振込明細一時TBL.getデータ区分().getコード().equals(ONE)) {
+            } else if (null != 振込明細一時TBL.getDataKubun() && 振込明細一時TBL.getDataKubun().equals(ONE)) {
                 source.listLower_11 = 償還;
-            } else if (null != 振込明細一時TBL.getデータ区分() && 振込明細一時TBL.getデータ区分().getコード().equals(TWO)) {
+            } else if (null != 振込明細一時TBL.getDataKubun() && 振込明細一時TBL.getDataKubun().equals(TWO)) {
                 source.listLower_11 = 高額;
             }
         }

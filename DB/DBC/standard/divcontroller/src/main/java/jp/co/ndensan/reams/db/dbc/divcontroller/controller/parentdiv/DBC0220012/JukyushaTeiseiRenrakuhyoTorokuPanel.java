@@ -280,7 +280,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
                     get訂正対象データ(引き継ぎ情報.get被保番号(), 引き継ぎ情報.get異動日(), 引き継ぎ情報.get履歴番号());
         }
         boolean flag = getHandler(div).is受給者異動連絡票内容変更状態(
-                初期化データ, 訂正対象データ);
+                受給者訂正連絡票登録画面Div, 訂正対象データ);
         if (TWO.equals(受給者訂正連絡票登録画面Div.get訂正区分コード())) {
             if (!flag) {
                 //TODO QA1429

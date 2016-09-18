@@ -5,9 +5,9 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.servicecoderiyojokyo.Kyu
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.DbWT3470ToukeihyoMeisaichukanTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.DbWT3470chohyouShutsuryokuyouTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.DbWT3470shoriKekkaListTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.HihokenshaShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.KyufuJissekiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.TaniSuNissuKaisuEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkogakugassan.HanyoListKogakuGassanKeisanEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -44,9 +44,9 @@ public interface IServicecodeRiyojokyoMapper {
     /**
      * 被保険者・宛名情報の取得
      *
-     * @return HanyoListKogakuGassanKeisanEntity
+     * @return HihokenshaShikibetsuTaishoEntity
      */
-    List<HanyoListKogakuGassanKeisanEntity> get被保険者宛名情報();
+    List<HihokenshaShikibetsuTaishoEntity> get被保険者宛名情報();
 
     /**
      * 宛名情報抽出処理

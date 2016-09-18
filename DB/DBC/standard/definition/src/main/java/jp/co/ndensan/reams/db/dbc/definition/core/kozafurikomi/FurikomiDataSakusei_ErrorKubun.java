@@ -55,6 +55,40 @@ public enum FurikomiDataSakusei_ErrorKubun {
     }
 
     /**
+     * 処理名を取ります
+     *
+     * @param code コード
+     * @return 処理名
+     */
+    public static RString get処理名(RString code) {
+        if (FurikomiDataSakusei_ErrorKubun.振込データなし.getコード().contains(code)) {
+            return new RString("振込データ作成");
+        } else if ((FurikomiDataSakusei_ErrorKubun.被保険者宛名情報取得.getコード().contains(code))) {
+            return new RString("被保険者・宛名情報取得");
+        } else if (FurikomiDataSakusei_ErrorKubun.一覧表データなし.getコード().contains(code)) {
+            return new RString("振込明細一覧表作成");
+        }
+        return null;
+    }
+
+    /**
+     * エラーメッセージを取ります
+     *
+     * @param code コード
+     * @return エラーメッセージ
+     */
+    public static RString getエラーメッセージ(RString code) {
+        if (FurikomiDataSakusei_ErrorKubun.振込データなし.getコード().contains(code)) {
+            return new RString("振込対象データがありません。");
+        } else if ((FurikomiDataSakusei_ErrorKubun.被保険者宛名情報取得.getコード().contains(code))) {
+            return new RString("該当データがありません。");
+        } else if (FurikomiDataSakusei_ErrorKubun.一覧表データなし.getコード().contains(code)) {
+            return new RString("条件に該当するデータがありません。");
+        }
+        return null;
+    }
+
+    /**
      * 振込データ作成_エラー区分のコードと一致する内容を探します。
      *
      * @param code 振込データ作成_エラー区分のコード

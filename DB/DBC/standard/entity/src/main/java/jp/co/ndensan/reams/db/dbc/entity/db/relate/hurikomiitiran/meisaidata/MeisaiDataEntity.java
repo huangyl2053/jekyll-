@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.hurikomiitiran.meisaidata;
 
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.FurikomiDetailTempTableEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -18,10 +19,11 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class MeisaiDataEntity {
 
-    private ItijiTableEntity 振込明細一時TBL;
+    private FurikomiDetailTempTableEntity 振込明細一時TBL;
     private RString 様式連番;
     private RString 名寄せ件数;
     private RString 印字様式名称;
+    private RString 印字様式番号;
     private Decimal 様式別集計金額;
     private RString 集計様式番号;
 }

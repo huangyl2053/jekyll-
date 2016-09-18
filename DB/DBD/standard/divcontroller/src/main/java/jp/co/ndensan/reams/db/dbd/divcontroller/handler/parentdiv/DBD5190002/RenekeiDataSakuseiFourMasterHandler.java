@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5190002;
 
 import jp.co.ndensan.reams.db.dbd.business.core.kaigoninteihokaiseikanri.HokaiseiShikoYMDToKoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbd.business.core.ninteishinseijoho.YokaigoNinteiGaibuDataOutputHistory;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd5190002.RenekeiDataSakuseiFourMasterBatchParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD519002.DBD519002Parameter;
 import jp.co.ndensan.reams.db.dbd.definition.core.jukyunintei.yokaigointerface.Datakubun;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5190002.RenekeiDataSakuseiFourMasterDiv;
 import jp.co.ndensan.reams.db.dbd.service.core.dbd5190001.RenkeiDataSakuseiShinseiJohoManager;
@@ -17,9 +17,11 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RTime;
 
 /**
  * 要介護認定関連データ作成のハンドラークラスです。
@@ -41,16 +43,16 @@ public class RenekeiDataSakuseiFourMasterHandler {
     /**
      * コンストラクタです。
      *
-     * @param div RenkeiDataSakuseiShinseiJohoDiv
+     * @param div ドメインオブジェクトを取り出したい {@link RenekeiDataSakuseiFourMasterDiv}
      */
     public RenekeiDataSakuseiFourMasterHandler(RenekeiDataSakuseiFourMasterDiv div) {
         this.div = div;
     }
 
     /**
-     * 要介護認定関連データ作成画面の初期化
+     * 要介護認定関連データ作成画面の初期化。
      */
-    public void init() {
+    public void onLoad() {
         div.getRadChushutsuJoken().setDisabled(false);
         div.getRadChushutsuJoken().setSelectedKey(対象期間キー);
         対象期間の場合表示制御(get要介護認定外部データ出力履歴());
@@ -58,7 +60,7 @@ public class RenekeiDataSakuseiFourMasterHandler {
     }
 
     /**
-     * 抽出条件ラジオボタンのonClick事件
+     * 抽出条件ラジオボタンのonClick事件。
      */
     public void radChushutsuJoken_onClick() {
         if (div.getRadChushutsuJoken().getSelectedKey().equals(対象期間キー)) {
@@ -69,15 +71,26 @@ public class RenekeiDataSakuseiFourMasterHandler {
     }
 
     /**
-     * バッチパラメータの作成
+     * IF種別　ラジオボタンのonClick事件。
+     */
+    public void radIfShubetu_onClick() {
+        if (新キー.equals(div.getRadIfShubetu().getSelectedKey())) {
+            iF種別ラジオボタン新表示();
+        } else {
+            iF種別ラジオボタン旧表示();
+        }
+    }
+
+    /**
+     * バッチパラメータの作成。
      *
      * @return バッチパラメータ
      */
-    public RenekeiDataSakuseiFourMasterBatchParameter createParameter() {
-        RenekeiDataSakuseiFourMasterBatchParameter paramter = new RenekeiDataSakuseiFourMasterBatchParameter();
+    public DBD519002Parameter createParameter() {
+        DBD519002Parameter paramter = new DBD519002Parameter();
         paramter.setKonkaishoriymdtime_from(div.getTxtkonkaishoriymdtime().getFromValue());
         paramter.setKonkaishoriymdtime_to(div.getTxtkonkaishoriymdtime().getToValue());
-        paramter.setShikibetsucode(div.getRadIfShubetu().getSelectedValue());
+        paramter.setShikibetsucode(get法改正施行年月日と厚労省IF識別コード().get厚労省IF識別コード());
         paramter.setChosaitakusakifilename(div.getDropDownListChosaItakusakiFileName().getSelectedValue());
         paramter.setChosainfilename(div.getDropDownListChosainFileName().getSelectedValue());
         paramter.setShujiiIryokikanfilename(div.getDropDownListShujiiIryoKikanFileName().getSelectedValue());
@@ -94,31 +107,36 @@ public class RenekeiDataSakuseiFourMasterHandler {
     }
 
     private void 対象期間の場合表示制御(YokaigoNinteiGaibuDataOutputHistory 要介護認定外部データ出力履歴) {
-//        div.getTxtkonkaishoriymdtime().setToDateValue(RDate.getNowDate());
-//        div.getTxtkonkaishoriymdtime().setToTimeValue(RDate.getNowTime());
-//        div.getTxtzenkaishoriymdtime().setReadOnly(true);
-//        div.getTxtkonkaishoriymdtime().setReadOnly(false);
-//        if (要介護認定外部データ出力履歴 == null) {
-//            return ;
-//        }
-//        YMDHM 開始年月日時分 = 要介護認定外部データ出力履歴.getDataOutputKaishiYMDHM();
-//        if (開始年月日時分 != null) {
-//            div.getTxtzenkaishoriymdtime().setFromDateValue(開始年月日時分.getDate());
-//            div.getTxtzenkaishoriymdtime().setFromTimeValue(開始年月日時分.getTime());
-//            div.getTxtkonkaishoriymdtime().setFromDateValue(開始年月日時分.getDate());
-//            div.getTxtkonkaishoriymdtime().setFromTimeValue(開始年月日時分.getTime().plusSeconds(ONE_SECOND));
-//        }
-//        if (要介護認定外部データ出力履歴.getDataOutputShuryoYMDHM() != null) {
-//            if (開始年月日時分.getTime().compareTo(RTime.of(HOUR_23, MINUTE_59, SECOND_59)) == 0) {
-//                div.getTxtzenkaishoriymdtime().setToDateValue(要介護認定外部データ出力履歴.getDataOutputShuryoYMDHM().getDate().plusDay(ONE_DAY));
-//                div.getTxtzenkaishoriymdtime().setToTimeValue(RTime.of(0, 0, 0));
-//            } else {
-//
-//            }
-//        }
+        div.getTxtkonkaishoriymdtime().setToDateValue(RDate.getNowDate());
+        div.getTxtkonkaishoriymdtime().setToTimeValue(RDate.getNowTime());
+        div.getTxtzenkaishoriymdtime().setReadOnly(true);
+        div.getTxtkonkaishoriymdtime().setReadOnly(false);
+        if (要介護認定外部データ出力履歴 == null) {
+            return;
+        }
+        YMDHMS 終了年月日時分秒 = 要介護認定外部データ出力履歴.getDataOutputShuryoYMDHMS();
+        if (終了年月日時分秒 != null) {
+            div.getTxtzenkaishoriymdtime().setToDateValue(終了年月日時分秒.getDate());
+            div.getTxtzenkaishoriymdtime().setToTimeValue(終了年月日時分秒.getRDateTime().getTime());
+            if (終了年月日時分秒.getRDateTime().getTime().compareTo(RTime.of(HOUR_23, MINUTE_59, SECOND_59)) == 0) {
+                div.getTxtkonkaishoriymdtime().setFromDateValue(終了年月日時分秒.getDate().plusDay(ONE_DAY));
+                div.getTxtkonkaishoriymdtime().setFromTimeValue(RTime.of(0, 0, 0));
+            } else {
+                div.getTxtkonkaishoriymdtime().setFromDateValue(終了年月日時分秒.getDate());
+                div.getTxtkonkaishoriymdtime().setFromTimeValue(終了年月日時分秒.getRDateTime().getTime().plusSeconds(ONE_SECOND));
+            }
+        }
+        if (要介護認定外部データ出力履歴.getDataOutputKaishiYMDHMS() != null) {
+            div.getTxtzenkaishoriymdtime().setFromDateValue(要介護認定外部データ出力履歴.getDataOutputKaishiYMDHMS().getDate());
+            div.getTxtzenkaishoriymdtime().setFromTimeValue(要介護認定外部データ出力履歴.getDataOutputKaishiYMDHMS().getRDateTime().getTime());
+        }
     }
 
     private void 全件の場合表示制御() {
+        div.getTxtkonkaishoriymdtime().clearFromValue();
+        div.getTxtkonkaishoriymdtime().clearToValue();
+        div.getTxtzenkaishoriymdtime().clearFromValue();
+        div.getTxtzenkaishoriymdtime().clearToValue();
         div.getTxtkonkaishoriymdtime().setDisplayNone(true);
         div.getTxtzenkaishoriymdtime().setDisplayNone(true);
     }
@@ -128,19 +146,34 @@ public class RenekeiDataSakuseiFourMasterHandler {
         if (法改正施行年月日と厚労省IF識別コード.get法改正施行年月日().isBefore(FlexibleDate.getNowDate())) {
             div.getRadIfShubetu().setSelectedKey(新キー);
             div.getRadIfShubetu().setDisabled(true);
-            div.getDropDownListChosaItakusakiFileName().setSelectedValue(getDBDConfigValue(ConfigNameDBD.認定調査委託先データ送信ファイル名));
-            div.getDropDownListChosainFileName().setSelectedValue(getDBDConfigValue(ConfigNameDBD.認定調査員データ送信ファイル名));
-            div.getDropDownListShujiiIryoKikanFileName().setSelectedValue(getDBDConfigValue(ConfigNameDBD.主治医医療機関データ送信ファイル名));
-            div.getDropDownListShujiiFileName().setSelectedValue(getDBDConfigValue(ConfigNameDBD.主治医データ送信ファイル名));
-
+            iF種別ラジオボタン新表示();
         } else {
             div.getRadIfShubetu().setDisabled(false);
             div.getRadIfShubetu().setSelectedKey(旧キー);
-            div.getDropDownListChosaItakusakiFileName().setSelectedValue(getDBEConfigValue(ConfigNameDBE.認定調査委託先データ送信ファイル名_新));
-            div.getDropDownListChosainFileName().setSelectedValue(getDBEConfigValue(ConfigNameDBE.認定調査員データ送信ファイル名_新));
-            div.getDropDownListShujiiIryoKikanFileName().setSelectedValue(getDBEConfigValue(ConfigNameDBE.主治医医療機関データ送信ファイル名_新));
-            div.getDropDownListShujiiFileName().setSelectedValue(getDBEConfigValue(ConfigNameDBE.主治医データ送信ファイル名_新));
+            iF種別ラジオボタン旧表示();
         }
+    }
+
+    private void iF種別ラジオボタン新表示() {
+        div.getDropDownListChosaItakusakiFileName().setSelectedValue(getDBDConfigValue(ConfigNameDBD.認定調査委託先データ送信ファイル名));
+        div.getDropDownListChosainFileName().setSelectedValue(getDBDConfigValue(ConfigNameDBD.認定調査員データ送信ファイル名));
+        div.getDropDownListShujiiIryoKikanFileName().setSelectedValue(getDBDConfigValue(ConfigNameDBD.主治医医療機関データ送信ファイル名));
+        div.getDropDownListShujiiFileName().setSelectedValue(getDBDConfigValue(ConfigNameDBD.主治医データ送信ファイル名));
+        div.getDropDownListChosaItakusakiFileName().setReadOnly(true);
+        div.getDropDownListChosainFileName().setReadOnly(true);
+        div.getDropDownListShujiiIryoKikanFileName().setReadOnly(true);
+        div.getDropDownListShujiiFileName().setReadOnly(true);
+    }
+
+    private void iF種別ラジオボタン旧表示() {
+        div.getDropDownListChosaItakusakiFileName().setSelectedValue(getDBEConfigValue(ConfigNameDBE.認定調査委託先データ送信ファイル名_新));
+        div.getDropDownListChosainFileName().setSelectedValue(getDBEConfigValue(ConfigNameDBE.認定調査員データ送信ファイル名_新));
+        div.getDropDownListShujiiIryoKikanFileName().setSelectedValue(getDBEConfigValue(ConfigNameDBE.主治医医療機関データ送信ファイル名_新));
+        div.getDropDownListShujiiFileName().setSelectedValue(getDBEConfigValue(ConfigNameDBE.主治医データ送信ファイル名_新));
+        div.getDropDownListChosaItakusakiFileName().setReadOnly(true);
+        div.getDropDownListChosainFileName().setReadOnly(true);
+        div.getDropDownListShujiiIryoKikanFileName().setReadOnly(true);
+        div.getDropDownListShujiiFileName().setReadOnly(true);
     }
 
     private RString getDBDConfigValue(ConfigNameDBD config) {

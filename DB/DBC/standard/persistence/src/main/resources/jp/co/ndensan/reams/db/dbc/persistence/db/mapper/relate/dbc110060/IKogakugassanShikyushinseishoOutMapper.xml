@@ -97,20 +97,25 @@
             DbWT3711."seibetsuCode" as "dbWT1001Hihokensha_seibetsuCode",
             DbWT3711."shichosonKanyuYmd" as "dbWT1001Hihokensha_shichosonKanyuYmd",
             DbWT3711."shichosonDattaiYmd" as "dbWT1001Hihokensha_shichosonDattaiYmd"
-        FROM
-            (SELECT
-                "DbWT3711KogakuGassanShinseisho".*,
-                "DbWT1001Hihokensha".*
+        FROM(SELECT
+                "koza"."uaT0310Koza_kozaId",
+                temp.*
             FROM
-                "DbWT3711KogakuGassanShinseisho"
-            INNER JOIN "DbWT1001Hihokensha"
-            ON "DbWT3711KogakuGassanShinseisho"."renban" = "DbWT1001Hihokensha"."exRenban"
-            WHERE
-                "DbWT3711KogakuGassanShinseisho"."shiharaiHohoKubun" <![CDATA[ <> ]]> '1'
-            ) AS DbWT3711
-       LEFT JOIN
-            (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS "koza"
-       ON "koza"."uaT0310Koza_kozaId" = DbWT3711."kozaID"
+                (SELECT
+                    "DbWT3711KogakuGassanShinseisho".*,
+                    "DbWT1001Hihokensha".*
+                FROM
+                    "DbWT3711KogakuGassanShinseisho"
+                INNER JOIN "DbWT1001Hihokensha"
+                ON "DbWT3711KogakuGassanShinseisho"."renban" = "DbWT1001Hihokensha"."exRenban"
+                WHERE
+                    "DbWT3711KogakuGassanShinseisho"."shiharaiHohoKubun" <![CDATA[ <> ]]> '1'
+                ) AS temp
+           LEFT JOIN
+                (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS "koza"
+           ON "koza"."uaT0310Koza_kozaId" = temp."kozaID") AS DbWT3711
+       WHERE
+          DbWT3711."uaT0310Koza_kozaId" IS NULL
     </select>
     
     <resultMap id="resultMap_KogakuGassanShinseishoInsertKozaEntity" autoMapping="true"

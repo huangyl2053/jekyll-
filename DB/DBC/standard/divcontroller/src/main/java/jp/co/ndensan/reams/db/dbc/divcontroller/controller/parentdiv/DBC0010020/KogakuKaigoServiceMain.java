@@ -44,7 +44,7 @@ public class KogakuKaigoServiceMain {
         List<ShikibetsuNoKanri> 識別番号管理データリスト = KyufuJissekiShokaiFinder.createInstance().getShikibetsuBangoKanri(
                 サービス提供年月, 識別番号検索キー).records();
         if (!識別番号管理データリスト.isEmpty()) {
-            getHandler(div).clear制御性(識別番号管理データリスト.get(0), サービス提供年月);
+            getHandler(div).clear制御性(識別番号管理データリスト.get(0));
         }
         List<KyufujissekiKogakuKaigoServicehi> 高額介護サービス費 = 給付実績情報照会情報.getCsData_I();
         getHandler(div).set給付実績高額介護サービス費データ(高額介護サービス費, サービス提供年月);

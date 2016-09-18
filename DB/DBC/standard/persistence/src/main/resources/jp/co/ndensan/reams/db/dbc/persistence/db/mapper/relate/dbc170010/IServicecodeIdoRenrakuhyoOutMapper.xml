@@ -30,7 +30,7 @@
             "DbT7122"."serviceShuruiCode" = "DbT7122SogoJigyoServiceCode"."serviceShuruiCode"
             AND "DbT7122"."serviceKomokuCode" = "DbT7122SogoJigyoServiceCode"."serviceKomokuCode"
         WHERE
-            1 = 1
+            "DbT7122SogoJigyoServiceCode"."isDeleted" = false
             <if test="出力対象区分 != null and 出力対象区分.toString() == '0'.toString()">
                 AND "DbT7122SogoJigyoServiceCode"."sofuKubun" = '2'
             </if>

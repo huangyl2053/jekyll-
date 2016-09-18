@@ -45,8 +45,8 @@ public class GassanShikyuTsuchishoTorikomiIchiranEditor implements
     private static final RString 口座払 = new RString("2");
     private static final RString 日時作成 = new RString("作成");
     private static final RString 接続文字 = new RString("～");
-    private static final RString 左カッコ = new RString("(");
-    private static final RString 右カッコ = new RString(")");
+    private static final RString 左カッコ = new RString("（");
+    private static final RString 右カッコ = new RString("）");
     private final ShikyuFushikyuChohyoParameter entity;
 
     /**
@@ -108,15 +108,17 @@ public class GassanShikyuTsuchishoTorikomiIchiranEditor implements
         if (計算結果entity.get自己負担総額() != null && NUM_0 <= 計算結果entity.get自己負担総額().compareTo(Decimal.ZERO)) {
             source.listUpper_5 = DecimalFormatter.toコンマ区切りRString(計算結果entity.get自己負担総額(), 0);
         }
-        if (計算結果entity.get支給区分コード().equals(支給)) {
-            source.listCenter_3 = ShiharaiHohoKubun.toValue(計算結果entity.get支払方法区分()).get名称();
-            if (計算結果entity.get支払方法区分().equals(窓口払)) {
+        if (支給.equals(計算結果entity.get支給区分コード())) {
+            if (!RString.isNullOrEmpty(計算結果entity.get支払方法区分())) {
+                source.listCenter_3 = ShiharaiHohoKubun.toValue(計算結果entity.get支払方法区分()).get名称();
+            }
+            if (窓口払.equals(計算結果entity.get支払方法区分())) {
                 source.listUpper_6 = 計算結果entity.get支払場所();
                 source.listLower_6 = getlistLower_6(new FlexibleDate(計算結果entity.get支払期間開始年月日()),
                         new RTime(計算結果entity.get支払期間開始時間()),
                         new FlexibleDate(計算結果entity.get支払期間終了年月日()),
                         new RTime(計算結果entity.get支払期間終了時間()));
-            } else if (計算結果entity.get支払方法区分().equals(口座払)) {
+            } else if (口座払.equals(計算結果entity.get支払方法区分())) {
                 source.listUpper_6 = getlistUpper_6(計算結果entity.get金融機関名(), 計算結果entity.get金融機関支店名());
                 source.listLower_6 = getlistlower_6(計算結果entity.get口座種目名(), 計算結果entity.get口座番号(),
                         計算結果entity.get口座名義人_カナ());

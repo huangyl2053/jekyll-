@@ -10,7 +10,10 @@ import jp.co.ndensan.reams.db.dbc.definition.core.kyotakuservice.KyufukanrihyoSa
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyokyotakuyobosogojigyo.KyufuKanrihyoKyotakuYoboSogoJigyoServiceEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.kyufukanrihyokyotakuyobosogojigyo.KyufuKanrihyoKyotakuYoboSogoJigyoServiceReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.serviceshurui.ServiceCategoryShurui;
+import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -18,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -93,12 +97,10 @@ public class KyufuKanrihyoKyotakuYoboSogoJigyoServiceEditor implements IKyufuKan
         if (!RString.isNullOrEmpty(帳票出力対象データ.get性別コード())) {
             source.seibetsu = Seibetsu.toValue(帳票出力対象データ.get性別コード()).get名称();
         }
-// TODO QA 
-//        RString 表示用要介護状態区分コード = 帳票出力対象データ.get表示用要介護状態区分コード();
-//        FlexibleYearMonth 利用年月 = 帳票出力対象データ.get利用年月();
-//
-//        source.yokaigoJotaiKubun
-//                = YokaigoJotaiKubunSupport.toValue(KoroshoInterfaceShikibetsuCode.toValue(表示用要介護状態区分コード), 利用年月).getName();
+        RString 表示用要介護状態区分コード = 帳票出力対象データ.get表示用要介護状態区分コード();
+        FlexibleYearMonth 利用年月 = 帳票出力対象データ.get利用年月();
+        source.yokaigoJotaiKubun
+                = YokaigoJotaiKubunSupport.toValue(利用年月, 表示用要介護状態区分コード).getName();
         source.yokaigoJotaiKubun = get金額のカンマ編集(帳票出力対象データ.get表示用支給限度単位数());
         RString 限度額適用期間_開始年月 = パターン62(帳票出力対象データ.get限度額適用期間_開始年月());
         if (!RString.isNullOrEmpty(限度額適用期間_開始年月)) {
@@ -144,6 +146,8 @@ public class KyufuKanrihyoKyotakuYoboSogoJigyoServiceEditor implements IKyufuKan
             source.listUpper_6 = new RString("(-)");
         }
         source.listLower_3 = new RString(帳票出力対象データ.get給付計画単位数().toString()).replace(new RString("-"), RString.HALF_SPACE);
+        source.shikibetuCode = ShikibetsuCode.EMPTY;
+        source.hishokenshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), 帳票出力対象データ.get被保険者番号());
         return source;
     }
 
