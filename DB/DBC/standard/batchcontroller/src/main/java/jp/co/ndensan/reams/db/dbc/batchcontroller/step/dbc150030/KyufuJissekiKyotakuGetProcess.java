@@ -73,6 +73,7 @@ public class KyufuJissekiKyotakuGetProcess
 
     @Override
     protected void process(KyufuJissekiMeisaiEntity entity) {
+        連番 = 連番 + INT_1;
         DbWT3470ToukeihyoMeisaiTempEntity toukeihyoMeisaiTempEntity = new DbWT3470ToukeihyoMeisaiTempEntity();
         toukeihyoMeisaiTempEntity.setRenban(連番);
         toukeihyoMeisaiTempEntity.setHiHokenshaNo(entity.get被保険者番号());
@@ -87,7 +88,6 @@ public class KyufuJissekiKyotakuGetProcess
         toukeihyoMeisaiTempEntity.setNissuKaisu(Decimal.ONE);
         toukeihyoMeisaiTempEntity.setServiceTanisu(getDecimalVaule(entity.get後_サービス単位数()));
         統計表明細一時tableWriter.insert(toukeihyoMeisaiTempEntity);
-        連番 = 連番 + INT_1;
     }
 
     @Override
