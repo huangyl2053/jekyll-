@@ -269,8 +269,7 @@ public class KyodoIdoRenrakuhyoHenkoMainHandler {
         }
         List<RString> チェック状態 = getチェックボックス状態();
         if (論理削除フラグ) {
-            save論理削除フラグ_TRUE(entity, 共通項目Entity, 被保険者番号, チェック状態, is基本送付_追加, is償還送付_追加,
-                    is高額送付_追加, 基本_履歴番号, 償還_履歴番号, 高額_履歴番号);
+            save論理削除フラグ_TRUE(初期受給者異動情報, チェック状態, 基本_履歴番号, 償還_履歴番号, 高額_履歴番号);
         } else {
             set論理削除フラグ_FALSE(初期受給者異動情報, entity, チェック状態, 共通項目Entity, 被保険者番号,
                     基本_履歴番号, 償還_履歴番号, 高額_履歴番号, is基本送付活性, is償還送付活性, is高額送付活性,
@@ -467,34 +466,30 @@ public class KyodoIdoRenrakuhyoHenkoMainHandler {
                 異動高額送付Entity);
     }
 
-    private void save論理削除フラグ_TRUE(KyodoshoriyoJukyushaIdoRenrakuhyoParam entity,
-            KyoutuuEntity 共通項目Entity,
-            HihokenshaNo 被保険者番号,
+    private void save論理削除フラグ_TRUE(KyodoshoriyoJukyushaIdoRenrakuhyoParam 初期受給者異動情報,
             List<RString> チェック状態,
-            boolean is基本送付情報,
-            boolean is償還送付情報,
-            boolean is高額送付情報,
             int 基本送付_履歴番号,
             int 償還送付_履歴番号,
             int 高額送付_履歴番号) {
 
         KyodoShoriyoJukyushaIdoKihonSofu 異動基本送付Entity = null;
-        if (is基本送付情報) {
+        KyodoShoriyoJukyushaIdoKihonSofu 基本送付Entity = 初期受給者異動情報.get基本情報Entity();
+        if (基本送付Entity != null) {
             異動基本送付Entity = new KyodoShoriyoJukyushaIdoKihonSofu(
-                    共通項目Entity.get異動年月日(),
-                    共通項目Entity.get異動区分(),
-                    共通項目Entity.get異動事由(),
-                    共通項目Entity.get証記載保険者番号(),
-                    被保険者番号,
+                    基本送付Entity.get異動年月日(),
+                    基本送付Entity.get異動区分コード(),
+                    基本送付Entity.get受給者異動事由(),
+                    基本送付Entity.get証記載保険者番号(),
+                    基本送付Entity.get被保険者番号(),
                     基本送付_履歴番号);
             異動基本送付Entity = 異動基本送付Entity.createBuilderForEdit()
-                    .set被保険者氏名(entity.get基本情報Entity().get被保険者氏名())
-                    .set郵便番号(entity.get基本情報Entity().get郵便番号())
-                    .set住所カナ(entity.get基本情報Entity().get住所カナ())
-                    .set住所(entity.get基本情報Entity().get住所())
-                    .set電話番号(entity.get基本情報Entity().get電話番号())
-                    .set帳票出力順序コード(entity.get基本情報Entity().get帳票出力順序コード())
-                    .set送付年月(entity.get基本情報Entity().get送付年月())
+                    .set被保険者氏名(基本送付Entity.get被保険者氏名())
+                    .set郵便番号(基本送付Entity.get郵便番号())
+                    .set住所カナ(基本送付Entity.get住所カナ())
+                    .set住所(基本送付Entity.get住所())
+                    .set電話番号(基本送付Entity.get電話番号())
+                    .set帳票出力順序コード(基本送付Entity.get帳票出力順序コード())
+                    .set送付年月(基本送付Entity.get送付年月())
                     .set訂正区分コード(JukyushaIF_TeiseiKubunCode.修正.getコード())
                     .set訂正年月日(FlexibleDate.getNowDate())
                     .set論理削除フラグ(false)
@@ -507,20 +502,21 @@ public class KyodoIdoRenrakuhyoHenkoMainHandler {
         }
 
         KyodoShoriyoJukyushaIdoShokanSofu 異動償還送付Entity = null;
-        if (is償還送付情報) {
+        KyodoShoriyoJukyushaIdoShokanSofu 償還送付Entity = 初期受給者異動情報.get償還情報Entity();
+        if (償還送付Entity != null) {
             異動償還送付Entity = new KyodoShoriyoJukyushaIdoShokanSofu(
-                    共通項目Entity.get異動年月日(),
-                    共通項目Entity.get異動区分(),
-                    共通項目Entity.get異動事由(),
-                    共通項目Entity.get証記載保険者番号(),
-                    被保険者番号,
+                    償還送付Entity.get異動年月日(),
+                    償還送付Entity.get異動区分コード(),
+                    償還送付Entity.get受給者異動事由(),
+                    償還送付Entity.get証記載保険者番号(),
+                    償還送付Entity.get被保険者番号(),
                     償還送付_履歴番号);
             異動償還送付Entity = 異動償還送付Entity.createBuilderForEdit()
-                    .set保険給付支払一時差止開始年月日(entity.get償還情報Entity().get保険給付支払一時差止開始年月日())
-                    .set保険給付支払一時差止終了年月日(entity.get償還情報Entity().get保険給付支払一時差止終了年月日())
-                    .set保険給付支払一時差止区分コード(entity.get償還情報Entity().get保険給付支払一時差止区分コード())
-                    .set保険給付支払一時差止金額(entity.get償還情報Entity().get保険給付支払一時差止金額())
-                    .set送付年月(entity.get償還情報Entity().get送付年月())
+                    .set保険給付支払一時差止開始年月日(償還送付Entity.get保険給付支払一時差止開始年月日())
+                    .set保険給付支払一時差止終了年月日(償還送付Entity.get保険給付支払一時差止終了年月日())
+                    .set保険給付支払一時差止区分コード(償還送付Entity.get保険給付支払一時差止区分コード())
+                    .set保険給付支払一時差止金額(償還送付Entity.get保険給付支払一時差止金額())
+                    .set送付年月(償還送付Entity.get送付年月())
                     .set訂正区分コード(JukyushaIF_TeiseiKubunCode.修正.getコード())
                     .set訂正年月日(FlexibleDate.getNowDate())
                     .set論理削除フラグ(false)
@@ -533,22 +529,23 @@ public class KyodoIdoRenrakuhyoHenkoMainHandler {
         }
 
         KyodoShoriyoJukyushaIdoKogakuSofu 異動高額送付 = null;
-        if (is高額送付情報) {
+        KyodoShoriyoJukyushaIdoKogakuSofu 高額送付 = 初期受給者異動情報.get高額情報Entity();
+        if (高額送付 != null) {
             異動高額送付 = new KyodoShoriyoJukyushaIdoKogakuSofu(
-                    共通項目Entity.get異動年月日(),
-                    共通項目Entity.get異動区分(),
-                    共通項目Entity.get異動事由(),
-                    共通項目Entity.get証記載保険者番号(),
-                    被保険者番号,
+                    高額送付.get異動年月日(),
+                    高額送付.get異動区分コード(),
+                    高額送付.get受給者異動事由(),
+                    高額送付.get証記載保険者番号(),
+                    高額送付.get被保険者番号(),
                     高額送付_履歴番号);
             異動高額送付 = 異動高額送付.createBuilderForEdit()
-                    .set世帯集約番号(entity.get高額情報Entity().get世帯集約番号())
-                    .set世帯所得区分コード(entity.get高額情報Entity().get世帯所得区分コード())
-                    .set所得区分コード(entity.get高額情報Entity().get所得区分コード())
-                    .set老齢福祉年金受給有フラグ(entity.get高額情報Entity().is老齢福祉年金受給有フラグ())
-                    .set利用者負担第２段階有フラグ(entity.get高額情報Entity().is利用者負担第２段階有フラグ())
-                    .set支給申請書出力有フラグ(entity.get高額情報Entity().is支給申請書出力有フラグ())
-                    .set送付年月(entity.get高額情報Entity().get送付年月())
+                    .set世帯集約番号(高額送付.get世帯集約番号())
+                    .set世帯所得区分コード(高額送付.get世帯所得区分コード())
+                    .set所得区分コード(高額送付.get所得区分コード())
+                    .set老齢福祉年金受給有フラグ(高額送付.is老齢福祉年金受給有フラグ())
+                    .set利用者負担第２段階有フラグ(高額送付.is利用者負担第２段階有フラグ())
+                    .set支給申請書出力有フラグ(高額送付.is支給申請書出力有フラグ())
+                    .set送付年月(高額送付.get送付年月())
                     .set訂正区分コード(JukyushaIF_TeiseiKubunCode.修正.getコード())
                     .set訂正年月日(FlexibleDate.getNowDate())
                     .set論理削除フラグ(false)
