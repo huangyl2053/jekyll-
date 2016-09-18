@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd200012;
 
-import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tokubetsuchiikikasankeigenjissekikanri.KyuhuJissekiHihokensha;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tokubetsuchiikikasankeigenjissekikanri.KyuhuJissekiMeisai;
@@ -89,39 +88,8 @@ public class TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor implements ITok
             source.hokenshaNo = this.association.get地方公共団体コード().value();
             source.hokenshaName = this.association.get市町村名();
         }
-        List<ISetSortItem> list = new ArrayList<>();
-        if (iOutputOrder != null && iOutputOrder.get設定項目リスト() == null) {
-            list = iOutputOrder.get設定項目リスト();
-        }
-        if (list.size() > LISTINDEX_0) {
-            source.shutsuryokujun1 = list.get(LISTINDEX_0).get項目名();
-        }
-        if (list.size() > LISTINDEX_1) {
-            source.shutsuryokujun2 = list.get(LISTINDEX_1).get項目名();
-        }
-        if (list.size() > LISTINDEX_2) {
-            source.shutsuryokujun3 = list.get(LISTINDEX_2).get項目名();
-        }
-        if (list.size() > LISTINDEX_3) {
-            source.shutsuryokujun4 = list.get(LISTINDEX_3).get項目名();
-        }
-        if (list.size() > LISTINDEX_4) {
-            source.shutsuryokujun5 = list.get(LISTINDEX_4).get項目名();
-        }
-        if (list.size() > LISTINDEX_0 && list.get(LISTINDEX_0).is改頁項目()) {
-            source.kaiPege1 = list.get(0).get項目名();
-        }
-        if (list.size() > LISTINDEX_1 && list.get(LISTINDEX_1).is改頁項目()) {
-            source.kaiPege2 = list.get(LISTINDEX_1).get項目名();
-        }
-        if (list.size() > LISTINDEX_2 && list.get(LISTINDEX_2).is改頁項目()) {
-            source.kaiPege3 = list.get(LISTINDEX_2).get項目名();
-        }
-        if (list.size() > LISTINDEX_3 && list.get(LISTINDEX_3).is改頁項目()) {
-            source.kaiPege4 = list.get(LISTINDEX_3).get項目名();
-        }
-        if (list.size() > LISTINDEX_4 && list.get(LISTINDEX_4).is改頁項目()) {
-            source.kaiPege5 = list.get(LISTINDEX_4).get項目名();
+        if (null != iOutputOrder) {
+            set出力順改頁(source);
         }
     }
 
@@ -202,7 +170,44 @@ public class TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor implements ITok
         RString 年月日 = システム日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         RString 時分秒 = システム日時.toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
-        return 年月日.concat("").concat(時分秒).concat("").concat("作成");
+        return 年月日.concat(" ").concat(時分秒).concat(" ").concat("作成");
+    }
+
+    private TokubetsuChiikiKasanKeigenJissekiKanriIchiranReportSource set出力順改頁(
+            TokubetsuChiikiKasanKeigenJissekiKanriIchiranReportSource source) {
+        List<ISetSortItem> list = this.iOutputOrder.get設定項目リスト();
+
+        if (list.size() > LISTINDEX_0) {
+            source.shutsuryokujun1 = list.get(LISTINDEX_0).get項目名();
+        }
+        if (list.size() > LISTINDEX_1) {
+            source.shutsuryokujun2 = list.get(LISTINDEX_1).get項目名();
+        }
+        if (list.size() > LISTINDEX_2) {
+            source.shutsuryokujun3 = list.get(LISTINDEX_2).get項目名();
+        }
+        if (list.size() > LISTINDEX_3) {
+            source.shutsuryokujun4 = list.get(LISTINDEX_3).get項目名();
+        }
+        if (list.size() > LISTINDEX_4) {
+            source.shutsuryokujun5 = list.get(LISTINDEX_4).get項目名();
+        }
+        if (list.size() > LISTINDEX_0 && list.get(LISTINDEX_0).is改頁項目()) {
+            source.kaiPege1 = list.get(0).get項目名();
+        }
+        if (list.size() > LISTINDEX_1 && list.get(LISTINDEX_1).is改頁項目()) {
+            source.kaiPege2 = list.get(LISTINDEX_1).get項目名();
+        }
+        if (list.size() > LISTINDEX_2 && list.get(LISTINDEX_2).is改頁項目()) {
+            source.kaiPege3 = list.get(LISTINDEX_2).get項目名();
+        }
+        if (list.size() > LISTINDEX_3 && list.get(LISTINDEX_3).is改頁項目()) {
+            source.kaiPege4 = list.get(LISTINDEX_3).get項目名();
+        }
+        if (list.size() > LISTINDEX_4 && list.get(LISTINDEX_4).is改頁項目()) {
+            source.kaiPege5 = list.get(LISTINDEX_4).get項目名();
+        }
+        return source;
     }
 
     private Decimal get助成額合計() {
@@ -255,9 +260,9 @@ public class TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor implements ITok
     private void get有効特地減免(TokubetsuChiikiKasanKeigenJissekiKanriIchiranReportSource source,
             KyuhuJissekiHihokensha 給付実績被保険者Entity) {
         if (給付実績被保険者Entity.isExists有効特地減免()) {
-            source.list_5 = new RString("*");
-        } else {
             source.list_5 = RString.EMPTY;
+        } else {
+            source.list_5 = new RString("*");
         }
     }
 
