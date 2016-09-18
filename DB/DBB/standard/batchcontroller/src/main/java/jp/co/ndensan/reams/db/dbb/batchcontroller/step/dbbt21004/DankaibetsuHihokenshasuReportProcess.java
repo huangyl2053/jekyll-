@@ -36,7 +36,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
  *
  * @reamsid_L DBB-1820-040 dingminghao
  */
-public class ReportProcess extends BatchKeyBreakBase<DankaibeHihokensixyaForReport> {
+public class DankaibetsuHihokenshasuReportProcess extends BatchKeyBreakBase<DankaibeHihokensixyaForReport> {
 
     private DankaibetuHihokensyasuIchiranhyoProcessParameter processParameter;
     private static final RString 保険者設定段階 = new RString("1");

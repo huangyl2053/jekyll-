@@ -38,7 +38,7 @@ public class AtenaSealEditor
     private static final int NUM_16 = 16;
     private static final int NUM_17 = 17;
     private static final int NUM_18 = 18;
-    private static final int NUM_19 = 17;
+    private static final int NUM_19 = 19;
     private static final int NUM_13 = 13;
     private static final int NUM_12 = 12;
     private static final int NUM_11 = 11;

@@ -59,8 +59,10 @@ public class KogakuGassanKyufuJissekiJoho {
      * @return ResponseData DBC110110_KogakugassanKyufujissekiOutParameter
      */
     public ResponseData<DBC110110_KogakugassanKyufujissekiOutParameter> onClick_Execute(KogakuGassanKyufuJissekiJohoDiv div) {
+        再処理区分 = div.getCcdKokuhorenJohoSofu().get再処理区分のValue();
+        処理年月 = div.getCcdKokuhorenJohoSofu().get処理年月のValue().getYearMonth();
         if (getHandler(div).setBatchParameter(再処理区分, 処理年月) != null) {
-            return getHandler(div).setBatchParameter(再処理区分, 処理年月);
+            return ResponseData.of(getHandler(div).setBatchParameter(再処理区分, 処理年月)).respond();
         }
         return ResponseData.of(new DBC110110_KogakugassanKyufujissekiOutParameter()).respond();
     }

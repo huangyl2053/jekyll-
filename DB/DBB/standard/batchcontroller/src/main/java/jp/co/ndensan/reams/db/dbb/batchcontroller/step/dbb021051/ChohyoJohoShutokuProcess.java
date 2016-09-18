@@ -42,13 +42,10 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -69,7 +66,6 @@ public class ChohyoJohoShutokuProcess extends BatchKeyBreakBase<DBB021051TableJo
     private DBZ100001AtenaSealParameterEntity paramEntity;
     private List<DBZ100001AtenaSealEntity> entityList;
     private RString システム日付;
-    private final List<PersonalData> personalDataList = new ArrayList();
     private List<RString> 出力順項目List;
     private Association 地方公共団体情報;
     private RString 出力順;
@@ -80,6 +76,7 @@ public class ChohyoJohoShutokuProcess extends BatchKeyBreakBase<DBB021051TableJo
 
     @Override
     protected void initialize() {
+        出力順項目List = new ArrayList<>();
         地方公共団体情報 = AssociationFinderFactory.createInstance().getAssociation();
         dataUtil = new DBB021051DataUtil();
         entityList = new ArrayList<>();
@@ -132,7 +129,6 @@ public class ChohyoJohoShutokuProcess extends BatchKeyBreakBase<DBB021051TableJo
 
     @Override
     protected void usualProcess(DBB021051TableJohoTempEntity entity) {
-        setAccessLog(entity.get識別コード());
         RString 市町村コード = entity.get市町村コード();
         RString 市町村名;
         市町村名 = ERROR_市町村コード.equals(市町村コード) ? RString.EMPTY
@@ -179,9 +175,6 @@ public class ChohyoJohoShutokuProcess extends BatchKeyBreakBase<DBB021051TableJo
                 = dataUtil.getReportOutputJokenhyoItem(地方公共団体情報.getLasdecCode_().value(), 地方公共団体情報.get市町村名(),
                         new RString(JobContextHolder.getJobId()), reportSourceWriter.pageCount().value(), 出力順項目List, parameter);
         OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem).print();
-        if (!personalDataList.isEmpty()) {
-            AccessLogger.logReport(this.personalDataList);
-        }
     }
 
     private enum 特定項目 implements ISpecificKey {
@@ -275,9 +268,4 @@ public class ChohyoJohoShutokuProcess extends BatchKeyBreakBase<DBB021051TableJo
     protected void keyBreakProcess(DBB021051TableJohoTempEntity t) {
     }
 
-    private void setAccessLog(ShikibetsuCode shikibetsuCode) {
-        if (shikibetsuCode != null) {
-            this.personalDataList.add(PersonalData.of(shikibetsuCode));
-        }
-    }
 }

@@ -26,21 +26,6 @@ public interface IDBB021051Mapper {
      */
     List<AtenaSealJohoEntity> get一時表情報(DBB021051MyBatisParameter parameter);
 
-//    /**
-//     * get介護徴収方法情報のメソッドです。
-//     *
-//     * @param parameter DBB021051MyBatisParameter
-//     * @return KaigoChoshuHohoJohoEntity
-//     */
-//    List<AtenaSealJohoEntity> get介護徴収方法情報(DBB021051MyBatisParameter parameter);
-//
-//    /**
-//     * get被保険者台帳宛名情報マッチングのメソッドです。
-//     *
-//     * @param parameter DBB021051MyBatisParameter
-//     * @return HihokenshaAteanAtesakiJohoEntity
-//     */
-//    List<HihokenshaAteanAtesakiJohoEntity> get被保険者台帳宛名情報マッチング(DBB021051MyBatisParameter parameter);
     /**
      * get宛名シール情報一時のメソッドです。
      *

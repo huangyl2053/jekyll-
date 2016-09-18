@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chikushichosonselect.ChikuShichosonSelect.ChikuShichosonSelectDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chikushichosonselect.ChikuShichosonSelect.IChikuShichosonSelectDiv;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -38,6 +39,10 @@ public class GenmenPanelDiv extends Panel {
     private PanelKetteiJyouhouDiv PanelKetteiJyouhou;
     @JsonProperty("ChikuShichosonSelect")
     private ChikuShichosonSelectDiv ChikuShichosonSelect;
+    @JsonProperty("GemmenShuruiCode")
+    private RString GemmenShuruiCode;
+    @JsonProperty("GemmenShuruiHyojiMongon")
+    private RString GemmenShuruiHyojiMongon;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -163,6 +168,42 @@ public class GenmenPanelDiv extends Panel {
     }
 
     /*
+     * getGemmenShuruiCode
+     * @return GemmenShuruiCode
+     */
+    @JsonProperty("GemmenShuruiCode")
+    public RString getGemmenShuruiCode() {
+        return GemmenShuruiCode;
+    }
+
+    /*
+     * setGemmenShuruiCode
+     * @param GemmenShuruiCode GemmenShuruiCode
+     */
+    @JsonProperty("GemmenShuruiCode")
+    public void setGemmenShuruiCode(RString GemmenShuruiCode) {
+        this.GemmenShuruiCode = GemmenShuruiCode;
+    }
+
+    /*
+     * getGemmenShuruiHyojiMongon
+     * @return GemmenShuruiHyojiMongon
+     */
+    @JsonProperty("GemmenShuruiHyojiMongon")
+    public RString getGemmenShuruiHyojiMongon() {
+        return GemmenShuruiHyojiMongon;
+    }
+
+    /*
+     * setGemmenShuruiHyojiMongon
+     * @param GemmenShuruiHyojiMongon GemmenShuruiHyojiMongon
+     */
+    @JsonProperty("GemmenShuruiHyojiMongon")
+    public void setGemmenShuruiHyojiMongon(RString GemmenShuruiHyojiMongon) {
+        this.GemmenShuruiHyojiMongon = GemmenShuruiHyojiMongon;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -186,12 +227,12 @@ public class GenmenPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getButtonGenmenSyurui() {
+    public ButtonDialog getButtonGenmenSyurui() {
         return this.getPanelGenmenJyouhou().getButtonGenmenSyurui();
     }
 
     @JsonIgnore
-    public void  setButtonGenmenSyurui(Button ButtonGenmenSyurui) {
+    public void  setButtonGenmenSyurui(ButtonDialog ButtonGenmenSyurui) {
         this.getPanelGenmenJyouhou().setButtonGenmenSyurui(ButtonGenmenSyurui);
     }
 

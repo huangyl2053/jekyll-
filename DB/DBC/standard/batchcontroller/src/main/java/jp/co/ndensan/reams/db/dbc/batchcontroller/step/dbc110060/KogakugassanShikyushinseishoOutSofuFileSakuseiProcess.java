@@ -124,7 +124,7 @@ public class KogakugassanShikyushinseishoOutSofuFileSakuseiProcess extends Batch
         レコード番号 = INDEX_0;
         口座管理番号の件数 = INDEX_0;
         RString 国保連送付外字_変換区分 = DbBusinessConfig.get(ConfigNameDBC.国保連送付外字_変換区分, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
-        if (変換区分_1.equals(国保連送付外字_変換区分)) {
+        if (!変換区分_1.equals(国保連送付外字_変換区分)) {
             文字コード = Encode.SJIS;
         } else {
             文字コード = Encode.UTF_8withBOM;

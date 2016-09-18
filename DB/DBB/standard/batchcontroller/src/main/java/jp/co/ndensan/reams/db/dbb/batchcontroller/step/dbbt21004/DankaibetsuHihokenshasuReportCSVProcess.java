@@ -34,7 +34,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  *
  * @reamsid_L DBB-1820-040 dingminghao
  */
-public class ReportCSVProcess extends BatchKeyBreakBase<DankaibeHihokensixyaEntity> {
+public class DankaibetsuHihokenshasuReportCSVProcess extends BatchKeyBreakBase<DankaibeHihokensixyaEntity> {
 
     private DankaibetuHihokensyasuIchiranhyoProcessParameter processParameter;
     private static final RString READ_DATA_ID

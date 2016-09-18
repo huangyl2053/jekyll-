@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @reamsid_L DBC-2970-040 zhaoyao -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kyufujissekisyokaimeisaisyukei.IKyufuJissekiSyokaiMeisaiSyukeiMapper">
+    <select resultOrdered="true" fetchSize="500" id="get保険者情報"
+    resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekisyokaimeisaisyukei.KyufuJissekiSyokaiMeisaiSyukeiEntity">
+        SELECT
+        URT0507."hokenjaShubetsu" AS hokenjaShubetsu,
+        URT0507."hokenjaNo" AS hokenjaNo,
+        URT0507."hokenjaName" AS hokenjaName
+        FROM
+        rgur."UrT0507Hokenja" AS URT0507
+    </select>
+</mapper>

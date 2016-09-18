@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiShukei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho2;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiMeisaiBusiness;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekisyokaimeisaisyukei.KyufuJissekiSyokaiMeisaiSyukeiBusiness;
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufujissekiyoshikikubun.KyufuJissekiYoshikiKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010012.KyufuJissekiSyokaiMeisaiSyukeiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010012.dgKyufuJissekiMeisaiJustoku_Row;
@@ -22,9 +23,9 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010012.dgKy
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010012.dgKyufuJissekiShukei_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.serviceshurui.ServiceCategoryShurui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -48,6 +49,7 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
     private static final RString TEXT_公費２ = new RString("公費２");
     private static final RString TEXT_公費３ = new RString("公費３");
     private static final int INT_ZERO = 0;
+    private static final RString 介護保険 = new RString("08");
 
     private final KyufuJissekiSyokaiMeisaiSyukeiDiv div;
 
@@ -70,15 +72,18 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
      * @param サービス提供年月 FlexibleYearMonth
      * @param 様式番号 RString
      * @param 事業者番号 RString
+     * @param 保険者情報 List<KyufuJissekiSyokaiMeisaiSyukeiBusiness>
      */
     public void onLoad(List<KyufujissekiShukei> 集計情報リスト, List<KyufujissekiMeisaiBusiness> 明細情報リスト,
             List<KyufujissekiMeisaiJushochiTokurei> 明細情報特例リスト, RString 整理番号,
-            FlexibleYearMonth サービス提供年月, RString 様式番号, RString 事業者番号) {
+            FlexibleYearMonth サービス提供年月, RString 様式番号, RString 事業者番号,
+            List<KyufuJissekiSyokaiMeisaiSyukeiBusiness> 保険者情報) {
         set明細情報の表示制御(様式番号, サービス提供年月);
         set明細情報特例の表示制御(様式番号, サービス提供年月);
         setDataGrid総計(get給付実績集計情報(集計情報リスト, 整理番号, 事業者番号, 様式番号, checkDate(サービス提供年月)),
                 get給付実績明細情報(明細情報リスト, 整理番号, 事業者番号, 様式番号, checkDate(サービス提供年月)),
-                get給付実績明細情報特例(明細情報特例リスト, 整理番号, 事業者番号, 様式番号, checkDate(サービス提供年月)));
+                get給付実績明細情報特例(明細情報特例リスト, 整理番号, 事業者番号, 様式番号, checkDate(サービス提供年月)),
+                保険者情報);
         check前次月Btn(getサービス提供年月リスト(集計情報リスト, 明細情報リスト), サービス提供年月);
     }
 
@@ -88,10 +93,12 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
      * @param 集計情報リスト List<KyufujissekiShukei>
      * @param 明細情報リスト List<KyufujissekiMeisai>
      * @param 明細情報特例リスト List<KyufujissekiMeisaiJushochiTokurei>
+     * @param 保険者情報 List<KyufuJissekiSyokaiMeisaiSyukeiBusiness>
      */
     public void setDataGrid総計(List<KyufujissekiShukei> 集計情報リスト,
             List<KyufujissekiMeisaiBusiness> 明細情報リスト,
-            List<KyufujissekiMeisaiJushochiTokurei> 明細情報特例リスト) {
+            List<KyufujissekiMeisaiJushochiTokurei> 明細情報特例リスト,
+            List<KyufuJissekiSyokaiMeisaiSyukeiBusiness> 保険者情報) {
         if (!div.getDgKyufuJissekiShukei().isDisplayNone() && !集計情報リスト.isEmpty()) {
             setDataGrid集計情報(集計情報リスト);
         }
@@ -99,7 +106,7 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
             setDataGrid明細情報(明細情報リスト);
         }
         if (!div.getDgKyufuJissekiMeisaiJustoku().isDisplayNone() && !明細情報特例リスト.isEmpty()) {
-            setDataGrid明細情報特例(明細情報特例リスト);
+            setDataGrid明細情報特例(明細情報特例リスト, 保険者情報);
         }
     }
 
@@ -113,23 +120,20 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
 
     private void setDataGrid明細情報(List<KyufujissekiMeisaiBusiness> 明細情報リスト) {
         List<dgKyufuJissekiMeisai_Row> rowList = new ArrayList<>();
-        List<dgKyufuJissekiMeisai_Row> rowList_後 = new ArrayList<>();
         for (KyufujissekiMeisaiBusiness 明細情報データ : 明細情報リスト) {
             rowList.add(set明細情報(明細情報データ));
-            rowList_後.add(set明細情報_後(明細情報データ));
+            rowList.add(set明細情報_後(明細情報データ));
         }
-        rowList.addAll(rowList_後);
         div.getDgKyufuJissekiMeisai().setDataSource(rowList);
     }
 
-    private void setDataGrid明細情報特例(List<KyufujissekiMeisaiJushochiTokurei> 明細情報特例リスト) {
+    private void setDataGrid明細情報特例(List<KyufujissekiMeisaiJushochiTokurei> 明細情報特例リスト,
+            List<KyufuJissekiSyokaiMeisaiSyukeiBusiness> 保険者情報) {
         List<dgKyufuJissekiMeisaiJustoku_Row> rowList = new ArrayList<>();
-        List<dgKyufuJissekiMeisaiJustoku_Row> rowList_後 = new ArrayList<>();
         for (KyufujissekiMeisaiJushochiTokurei 明細情報特例データ : 明細情報特例リスト) {
-            rowList.add(set明細情報特例(明細情報特例データ));
-            rowList_後.add(set明細情報特例_後(明細情報特例データ));
+            rowList.add(set明細情報特例(明細情報特例データ, 保険者情報));
+            rowList.add(set明細情報特例_後(明細情報特例データ));
         }
-        rowList.addAll(rowList_後);
         div.getDgKyufuJissekiMeisaiJustoku().setDataSource(rowList);
     }
 
@@ -244,26 +248,15 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
      * @param サービス提供年月 FlexibleYearMonth
      * @param 整理番号 RString
      * @param 識別番号 NyuryokuShikibetsuNo
+     * @param 保険者情報 List<KyufuJissekiSyokaiMeisaiSyukeiBusiness>
      */
     public void change年月(RString data, HihokenshaNo 被保険者番号, List<KyufujissekiShukei> 集計情報リスト,
             List<KyufujissekiMeisaiBusiness> 明細情報リスト, List<KyufujissekiMeisaiJushochiTokurei> 明細情報特例リスト,
             List<KyufuJissekiHedajyoho2> 事業者番号リスト, FlexibleYearMonth サービス提供年月, RString 整理番号,
-            NyuryokuShikibetsuNo 識別番号) {
+            NyuryokuShikibetsuNo 識別番号, List<KyufuJissekiSyokaiMeisaiSyukeiBusiness> 保険者情報) {
 
-        List<KyufujissekiShukei> 集計情報取得リスト = new ArrayList<>();
-        List<KyufujissekiMeisaiBusiness> 明細情報取得リスト = new ArrayList<>();
-        for (KyufujissekiShukei 集計情報取得 : 集計情報リスト) {
-            if (div.getCcdKyufuJissekiHeader().get事業者番号().equals(集計情報取得.get事業所番号().value())) {
-                集計情報取得リスト.add(集計情報取得);
-            }
-        }
-        for (KyufujissekiMeisaiBusiness 明細情報取得 : 明細情報取得リスト) {
-            if (div.getCcdKyufuJissekiHeader().get事業者番号().equals(明細情報取得.get給付実績明細().get事業所番号().value())) {
-                明細情報取得リスト.add(明細情報取得);
-            }
-        }
         int index = INT_ZERO;
-        List<FlexibleYearMonth> サービス提供年月リスト = getサービス提供年月リスト(集計情報取得リスト, 明細情報取得リスト);
+        List<FlexibleYearMonth> サービス提供年月リスト = getサービス提供年月リスト(集計情報リスト, 明細情報リスト);
         Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
         for (int i = 0; i < サービス提供年月リスト.size(); i++) {
             if (サービス提供年月.equals(サービス提供年月リスト.get(i))) {
@@ -279,15 +272,17 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
                 今提供年月 = サービス提供年月リスト.get(index - 1);
             }
         }
+        div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 今提供年月, 整理番号, 識別番号);
         RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
         RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
         RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();
-        div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 今提供年月, 整理番号, 識別番号);
-        setDataGrid総計(get給付実績集計情報(集計情報リスト, 整理番号, 事業者番号, 様式番号, サービス提供年月.toDateString()),
-                get給付実績明細情報(明細情報リスト, 整理番号, 事業者番号, 様式番号, サービス提供年月.toDateString()),
-                get給付実績明細情報特例(明細情報特例リスト, 整理番号, 事業者番号, 様式番号, サービス提供年月.toDateString()));
+        setDataGrid総計(get給付実績集計情報(集計情報リスト, 整理番号, 事業者番号, 様式番号, 今提供年月.toDateString()),
+                get給付実績明細情報(明細情報リスト, 整理番号, 事業者番号, 様式番号, 今提供年月.toDateString()),
+                get給付実績明細情報特例(明細情報特例リスト, 整理番号, 事業者番号, 様式番号, 今提供年月.toDateString()),
+                保険者情報
+        );
         check前次月Btn(サービス提供年月リスト, 今提供年月);
-        check事業者Btn(事業者番号リスト, 整理番号, 事業者番号, 様式番号, サービス提供年月.toDateString(), 実績区分コード);
+        check事業者Btn(事業者番号リスト, 整理番号, 事業者番号, 様式番号, 今提供年月.toDateString(), 実績区分コード);
     }
 
     /**
@@ -298,10 +293,12 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
      * @param 集計情報リスト List<KyufujissekiShukei>
      * @param 明細情報リスト List<KyufujissekiMeisaiBusiness>
      * @param 明細情報特例リスト List<KyufujissekiMeisaiJushochiTokurei>
+     * @param 保険者情報 List<KyufuJissekiSyokaiMeisaiSyukeiBusiness>
      */
     public void change事業者(RString data, List<KyufuJissekiHedajyoho2> 事業者番号リスト,
             List<KyufujissekiShukei> 集計情報リスト, List<KyufujissekiMeisaiBusiness> 明細情報リスト,
-            List<KyufujissekiMeisaiJushochiTokurei> 明細情報特例リスト) {
+            List<KyufujissekiMeisaiJushochiTokurei> 明細情報特例リスト,
+            List<KyufuJissekiSyokaiMeisaiSyukeiBusiness> 保険者情報) {
         RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
         RString 整理番号 = div.getCcdKyufuJissekiHeader().get整理番号();
         RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
@@ -338,7 +335,9 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
             }
             setDataGrid総計(get給付実績集計情報(集計情報リスト, 整理番号, 事業者番号リスト.get(index + i).get事業所番号().value(), 様式番号, サービス提供年月),
                     get給付実績明細情報(明細情報リスト, 整理番号, 事業者番号リスト.get(index + i).get事業所番号().value(), 様式番号, サービス提供年月),
-                    get給付実績明細情報特例(明細情報特例リスト, 整理番号, 事業者番号リスト.get(index + i).get事業所番号().value(), 様式番号, サービス提供年月));
+                    get給付実績明細情報特例(明細情報特例リスト, 整理番号, 事業者番号リスト.get(index + i).get事業所番号().value(), 様式番号, サービス提供年月),
+                    保険者情報
+            );
             サービス提供年月リスト = getサービス提供年月リスト(集計情報取得リスト, 明細情報取得リスト);
         }
         Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
@@ -565,19 +564,19 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         row_後_保険.setTxtTaishoTani(RString.EMPTY);
         row_後_保険.setTxtTaishogaiTani(RString.EMPTY);
         row_後_保険.setTxtTankiKeikakuNissu(RString.EMPTY);
-        row_後_保険.setTxtHokenKohi(RString.EMPTY);
+        row_後_保険.setTxtHokenKohi(TEXT_保険);
         row_後_保険.setTxtKettei(TEXT_後);
         row_後_保険.setTxtTankiJitsuNissu(new RString(集計情報.get後_短期入所実日数()));
         row_後_保険.setTxtTaniGokei(kinngakuFormat(集計情報.get後_単位数合計()));
-        row_後_保険.setTxtTanisuTanka(kinngakuFormat(集計情報.get保険_単位数単価()));
+        row_後_保険.setTxtTanisuTanka(RString.EMPTY);
         row_後_保険.setTxtSeikyugaku(kinngakuFormat(集計情報.get後_保険請求分請求額()));
-        row_後_保険.setTxtRiyoshaFutangaku(kinngakuFormat(集計情報.get保険_利用者負担額()));
+        row_後_保険.setTxtRiyoshaFutangaku(RString.EMPTY);
         row_後_保険.setTxtDekidakaTaniGokei(kinngakuFormat(集計情報.get後_保険_出来高単位数合計()));
         row_後_保険.setTxtDekidakaSeikyugaku(kinngakuFormat(集計情報.get後_保険_出来高請求額()));
         row_後_保険.setTxtDekidakaHonninFutangaku(RString.EMPTY);
-        row_後_保険.setTxtSaiShinsaKaisu(new RString(集計情報.get再審査回数()));
-        row_後_保険.setTxtKagoKaisu(new RString(集計情報.get過誤回数()));
-        row_後_保険.setTxtShinsaYM(checkDate(集計情報.get審査年月()));
+        row_後_保険.setTxtSaiShinsaKaisu(RString.EMPTY);
+        row_後_保険.setTxtKagoKaisu(RString.EMPTY);
+        row_後_保険.setTxtShinsaYM(RString.EMPTY);
         rowList.add(row_後_保険);
 
         dgKyufuJissekiShukei_Row row_公費１ = new dgKyufuJissekiShukei_Row();
@@ -589,7 +588,7 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         row_公費１.setTxtTankiKeikakuNissu(RString.EMPTY);
         row_公費１.setTxtHokenKohi(TEXT_公費１);
         row_公費１.setTxtKettei(RString.EMPTY);
-        row_公費１.setTxtTankiJitsuNissu(new RString(集計情報.get短期入所実日数()));
+        row_公費１.setTxtTankiJitsuNissu(RString.EMPTY);
         row_公費１.setTxtTaniGokei(kinngakuFormat(集計情報.get公費１_単位数合計()));
         row_公費１.setTxtTanisuTanka(RString.EMPTY);
         row_公費１.setTxtSeikyugaku(kinngakuFormat(集計情報.get公費１_請求額()));
@@ -597,9 +596,9 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         row_公費１.setTxtDekidakaTaniGokei(kinngakuFormat(集計情報.get公費１_出来高単位数合計()));
         row_公費１.setTxtDekidakaSeikyugaku(kinngakuFormat(集計情報.get公費１_出来高請求額()));
         row_公費１.setTxtDekidakaHonninFutangaku(kinngakuFormat(集計情報.get公費１_出来高医療費利用者負担額()));
-        row_公費１.setTxtSaiShinsaKaisu(new RString(集計情報.get再審査回数()));
-        row_公費１.setTxtKagoKaisu(new RString(集計情報.get過誤回数()));
-        row_公費１.setTxtShinsaYM(checkDate(集計情報.get審査年月()));
+        row_公費１.setTxtSaiShinsaKaisu(RString.EMPTY);
+        row_公費１.setTxtKagoKaisu(RString.EMPTY);
+        row_公費１.setTxtShinsaYM(RString.EMPTY);
         rowList.add(row_公費１);
 
         dgKyufuJissekiShukei_Row row_後_公費１ = new dgKyufuJissekiShukei_Row();
@@ -609,9 +608,9 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         row_後_公費１.setTxtTaishoTani(RString.EMPTY);
         row_後_公費１.setTxtTaishogaiTani(RString.EMPTY);
         row_後_公費１.setTxtTankiKeikakuNissu(RString.EMPTY);
-        row_後_公費１.setTxtHokenKohi(RString.EMPTY);
+        row_後_公費１.setTxtHokenKohi(TEXT_公費１);
         row_後_公費１.setTxtKettei(TEXT_後);
-        row_後_公費１.setTxtTankiJitsuNissu(new RString(集計情報.get後_短期入所実日数()));
+        row_後_公費１.setTxtTankiJitsuNissu(RString.EMPTY);
         row_後_公費１.setTxtTaniGokei(kinngakuFormat(集計情報.get後_公費１_単位数合計()));
         row_後_公費１.setTxtTanisuTanka(RString.EMPTY);
         row_後_公費１.setTxtSeikyugaku(kinngakuFormat(集計情報.get後_公費１_請求額()));
@@ -619,9 +618,9 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         row_後_公費１.setTxtDekidakaTaniGokei(kinngakuFormat(集計情報.get後_公費１_出来高単位数合計()));
         row_後_公費１.setTxtDekidakaSeikyugaku(kinngakuFormat(集計情報.get後_公費１_出来高請求額()));
         row_後_公費１.setTxtDekidakaHonninFutangaku(RString.EMPTY);
-        row_後_公費１.setTxtSaiShinsaKaisu(new RString(集計情報.get再審査回数()));
-        row_後_公費１.setTxtKagoKaisu(new RString(集計情報.get過誤回数()));
-        row_後_公費１.setTxtShinsaYM(checkDate(集計情報.get審査年月()));
+        row_後_公費１.setTxtSaiShinsaKaisu(RString.EMPTY);
+        row_後_公費１.setTxtKagoKaisu(RString.EMPTY);
+        row_後_公費１.setTxtShinsaYM(RString.EMPTY);
         rowList.add(row_後_公費１);
         rowList.addAll(addSet集計情報(集計情報));
         return rowList;
@@ -639,17 +638,17 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         row_公費２.setTxtTankiKeikakuNissu(RString.EMPTY);
         row_公費２.setTxtHokenKohi(TEXT_公費２);
         row_公費２.setTxtKettei(RString.EMPTY);
-        row_公費２.setTxtTankiJitsuNissu(new RString(集計情報.get短期入所実日数()));
+        row_公費２.setTxtTankiJitsuNissu(RString.EMPTY);
         row_公費２.setTxtTaniGokei(kinngakuFormat(集計情報.get公費２_単位数合計()));
         row_公費２.setTxtTanisuTanka(RString.EMPTY);
         row_公費２.setTxtSeikyugaku(kinngakuFormat(集計情報.get公費２_請求額()));
         row_公費２.setTxtRiyoshaFutangaku(RString.EMPTY);
         row_公費２.setTxtDekidakaTaniGokei(kinngakuFormat(集計情報.get公費２_出来高単位数合計()));
         row_公費２.setTxtDekidakaSeikyugaku(kinngakuFormat(集計情報.get公費２_出来高請求額()));
-        row_公費２.setTxtDekidakaHonninFutangaku(RString.EMPTY);
-        row_公費２.setTxtSaiShinsaKaisu(new RString(集計情報.get再審査回数()));
-        row_公費２.setTxtKagoKaisu(new RString(集計情報.get過誤回数()));
-        row_公費２.setTxtShinsaYM(checkDate(集計情報.get審査年月()));
+        row_公費２.setTxtDekidakaHonninFutangaku(kinngakuFormat(集計情報.get公費２_出来高医療費本人負担額()));
+        row_公費２.setTxtSaiShinsaKaisu(RString.EMPTY);
+        row_公費２.setTxtKagoKaisu(RString.EMPTY);
+        row_公費２.setTxtShinsaYM(RString.EMPTY);
         rowList.add(row_公費２);
 
         dgKyufuJissekiShukei_Row row_後_公費２ = new dgKyufuJissekiShukei_Row();
@@ -659,9 +658,9 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         row_後_公費２.setTxtTaishoTani(RString.EMPTY);
         row_後_公費２.setTxtTaishogaiTani(RString.EMPTY);
         row_後_公費２.setTxtTankiKeikakuNissu(RString.EMPTY);
-        row_後_公費２.setTxtHokenKohi(RString.EMPTY);
+        row_後_公費２.setTxtHokenKohi(TEXT_公費２);
         row_後_公費２.setTxtKettei(TEXT_後);
-        row_後_公費２.setTxtTankiJitsuNissu(new RString(集計情報.get後_短期入所実日数()));
+        row_後_公費２.setTxtTankiJitsuNissu(RString.EMPTY);
         row_後_公費２.setTxtTaniGokei(kinngakuFormat(集計情報.get後_公費２_単位数合計()));
         row_後_公費２.setTxtTanisuTanka(RString.EMPTY);
         row_後_公費２.setTxtSeikyugaku(kinngakuFormat(集計情報.get後_公費２_請求額()));
@@ -669,9 +668,9 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         row_後_公費２.setTxtDekidakaTaniGokei(kinngakuFormat(集計情報.get後_公費２_出来高単位数合計()));
         row_後_公費２.setTxtDekidakaSeikyugaku(kinngakuFormat(集計情報.get後_公費２_出来高請求額()));
         row_後_公費２.setTxtDekidakaHonninFutangaku(RString.EMPTY);
-        row_後_公費２.setTxtSaiShinsaKaisu(new RString(集計情報.get再審査回数()));
-        row_後_公費２.setTxtKagoKaisu(new RString(集計情報.get過誤回数()));
-        row_後_公費２.setTxtShinsaYM(checkDate(集計情報.get審査年月()));
+        row_後_公費２.setTxtSaiShinsaKaisu(RString.EMPTY);
+        row_後_公費２.setTxtKagoKaisu(RString.EMPTY);
+        row_後_公費２.setTxtShinsaYM(RString.EMPTY);
         rowList.add(row_後_公費２);
 
         dgKyufuJissekiShukei_Row row_公費３ = new dgKyufuJissekiShukei_Row();
@@ -683,17 +682,17 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         row_公費３.setTxtTankiKeikakuNissu(RString.EMPTY);
         row_公費３.setTxtHokenKohi(TEXT_公費３);
         row_公費３.setTxtKettei(RString.EMPTY);
-        row_公費３.setTxtTankiJitsuNissu(new RString(集計情報.get短期入所実日数()));
+        row_公費３.setTxtTankiJitsuNissu(RString.EMPTY);
         row_公費３.setTxtTaniGokei(kinngakuFormat(集計情報.get公費３_単位数合計()));
         row_公費３.setTxtTanisuTanka(RString.EMPTY);
         row_公費３.setTxtSeikyugaku(kinngakuFormat(集計情報.get公費３_請求額()));
         row_公費３.setTxtRiyoshaFutangaku(RString.EMPTY);
         row_公費３.setTxtDekidakaTaniGokei(kinngakuFormat(集計情報.get公費３_出来高単位数合計()));
         row_公費３.setTxtDekidakaSeikyugaku(kinngakuFormat(集計情報.get公費３_出来高請求額()));
-        row_公費３.setTxtDekidakaHonninFutangaku(RString.EMPTY);
-        row_公費３.setTxtSaiShinsaKaisu(new RString(集計情報.get再審査回数()));
-        row_公費３.setTxtKagoKaisu(new RString(集計情報.get過誤回数()));
-        row_公費３.setTxtShinsaYM(checkDate(集計情報.get審査年月()));
+        row_公費３.setTxtDekidakaHonninFutangaku(kinngakuFormat(集計情報.get公費３_出来高医療費本人負担額()));
+        row_公費３.setTxtSaiShinsaKaisu(RString.EMPTY);
+        row_公費３.setTxtKagoKaisu(RString.EMPTY);
+        row_公費３.setTxtShinsaYM(RString.EMPTY);
         rowList.add(row_公費３);
 
         dgKyufuJissekiShukei_Row row_後_公費３ = new dgKyufuJissekiShukei_Row();
@@ -703,9 +702,9 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         row_後_公費３.setTxtTaishoTani(RString.EMPTY);
         row_後_公費３.setTxtTaishogaiTani(RString.EMPTY);
         row_後_公費３.setTxtTankiKeikakuNissu(RString.EMPTY);
-        row_後_公費３.setTxtHokenKohi(RString.EMPTY);
+        row_後_公費３.setTxtHokenKohi(TEXT_公費３);
         row_後_公費３.setTxtKettei(TEXT_後);
-        row_後_公費３.setTxtTankiJitsuNissu(new RString(集計情報.get後_短期入所実日数()));
+        row_後_公費３.setTxtTankiJitsuNissu(RString.EMPTY);
         row_後_公費３.setTxtTaniGokei(kinngakuFormat(集計情報.get後_公費３_単位数合計()));
         row_後_公費３.setTxtTanisuTanka(RString.EMPTY);
         row_後_公費３.setTxtSeikyugaku(kinngakuFormat(集計情報.get後_公費３_請求額()));
@@ -713,9 +712,9 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         row_後_公費３.setTxtDekidakaTaniGokei(kinngakuFormat(集計情報.get後_公費３_出来高単位数合計()));
         row_後_公費３.setTxtDekidakaSeikyugaku(kinngakuFormat(集計情報.get後_公費３_出来高請求額()));
         row_後_公費３.setTxtDekidakaHonninFutangaku(RString.EMPTY);
-        row_後_公費３.setTxtSaiShinsaKaisu(new RString(集計情報.get再審査回数()));
-        row_後_公費３.setTxtKagoKaisu(new RString(集計情報.get過誤回数()));
-        row_後_公費３.setTxtShinsaYM(checkDate(集計情報.get審査年月()));
+        row_後_公費３.setTxtSaiShinsaKaisu(RString.EMPTY);
+        row_後_公費３.setTxtKagoKaisu(RString.EMPTY);
+        row_後_公費３.setTxtShinsaYM(RString.EMPTY);
         rowList.add(row_後_公費３);
         return rowList;
     }
@@ -742,7 +741,7 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
 
     private dgKyufuJissekiMeisai_Row set明細情報_後(KyufujissekiMeisaiBusiness 明細情報) {
         dgKyufuJissekiMeisai_Row row_後 = new dgKyufuJissekiMeisai_Row();
-        row_後.setTxtService(setサービス種類(明細情報.get給付実績明細().getサービス種類コード()));
+        row_後.setTxtService(RString.EMPTY);
         row_後.setTxtKettei(TEXT_後);
         row_後.setTxtTani(checkDecimal(明細情報.get給付実績明細().get後_単位数()));
         row_後.setTxtKaisu(new RString(明細情報.get給付実績明細().get後_日数_回数()));
@@ -753,14 +752,15 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         row_後.setTxtKohi1Tani(checkDecimal(明細情報.get給付実績明細().get後_公費１対象サービス単位数()));
         row_後.setTxtKohi2Tani(checkDecimal(明細情報.get給付実績明細().get後_公費２対象サービス単位数()));
         row_後.setTxtKohi3Tani(checkDecimal(明細情報.get給付実績明細().get後_公費３対象サービス単位数()));
-        row_後.setTxtSaiShinsaKaisu(new RString(明細情報.get給付実績明細().get再審査回数()));
-        row_後.setTxtKagoKaisu(new RString(明細情報.get給付実績明細().get過誤回数()));
-        row_後.setTxtShinsaYM(checkDate(明細情報.get給付実績明細().get審査年月()));
-        row_後.setTxtTekiyo(明細情報.get給付実績明細().get摘要());
+        row_後.setTxtSaiShinsaKaisu(RString.EMPTY);
+        row_後.setTxtKagoKaisu(RString.EMPTY);
+        row_後.setTxtShinsaYM(RString.EMPTY);
+        row_後.setTxtTekiyo(RString.EMPTY);
         return row_後;
     }
 
-    private dgKyufuJissekiMeisaiJustoku_Row set明細情報特例(KyufujissekiMeisaiJushochiTokurei 明細情報特例) {
+    private dgKyufuJissekiMeisaiJustoku_Row set明細情報特例(KyufujissekiMeisaiJushochiTokurei 明細情報特例,
+            List<KyufuJissekiSyokaiMeisaiSyukeiBusiness> 保険者情報) {
         dgKyufuJissekiMeisaiJustoku_Row row = new dgKyufuJissekiMeisaiJustoku_Row();
         row.setTxtService(setサービス種類(明細情報特例.getサービス種類コード()));
         row.setTxtKettei(RString.EMPTY);
@@ -776,15 +776,15 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         row.setTxtSaiShinsaKaisu(checkDecimal(明細情報特例.get再審査回数()));
         row.setTxtKagoKaisu(checkDecimal(明細情報特例.get過誤回数()));
         row.setTxtShinsaYM(checkDate(明細情報特例.get審査年月()));
-        row.setTxtShisetsuShozaiHokenshaNo(set証記載保険者番号(明細情報特例.get証記載保険者番号()));
-        row.setTxtShisetsuShozaiHokenshaName(明細情報特例.get被保険者番号().value());
+        row.setTxtShisetsuShozaiHokenshaNo(set施設所在保険者番号(明細情報特例.get施設所在保険者番号()));
+        row.setTxtShisetsuShozaiHokenshaName(set保険者情報(明細情報特例, 保険者情報));
         row.setTxtTekiyo(明細情報特例.get摘要());
         return row;
     }
 
     private dgKyufuJissekiMeisaiJustoku_Row set明細情報特例_後(KyufujissekiMeisaiJushochiTokurei 明細情報特例) {
         dgKyufuJissekiMeisaiJustoku_Row row_後 = new dgKyufuJissekiMeisaiJustoku_Row();
-        row_後.setTxtService(setサービス種類(明細情報特例.getサービス種類コード()));
+        row_後.setTxtService(RString.EMPTY);
         row_後.setTxtKettei(TEXT_後);
         row_後.setTxtTani(checkDecimal(明細情報特例.get後_単位数()));
         row_後.setTxtKaisu(checkDecimal(明細情報特例.get後_日数_回数()));
@@ -795,16 +795,26 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         row_後.setTxtKohi1Tani(new RString(明細情報特例.get後_公費１対象サービス単位数()));
         row_後.setTxtKohi2Tani(new RString(明細情報特例.get後_公費２対象サービス単位数()));
         row_後.setTxtKohi3Tani(new RString(明細情報特例.get後_公費３対象サービス単位数()));
-        row_後.setTxtSaiShinsaKaisu(checkDecimal(明細情報特例.get再審査回数()));
-        row_後.setTxtKagoKaisu(checkDecimal(明細情報特例.get過誤回数()));
-        row_後.setTxtShinsaYM(checkDate(明細情報特例.get審査年月()));
-        row_後.setTxtShisetsuShozaiHokenshaNo(set証記載保険者番号(明細情報特例.get証記載保険者番号()));
-        row_後.setTxtShisetsuShozaiHokenshaName(明細情報特例.get被保険者番号().value());
-        row_後.setTxtTekiyo(明細情報特例.get摘要());
+        row_後.setTxtSaiShinsaKaisu(RString.EMPTY);
+        row_後.setTxtKagoKaisu(RString.EMPTY);
+        row_後.setTxtShinsaYM(RString.EMPTY);
+        row_後.setTxtShisetsuShozaiHokenshaNo(RString.EMPTY);
+        row_後.setTxtShisetsuShozaiHokenshaName(RString.EMPTY);
+        row_後.setTxtTekiyo(RString.EMPTY);
         return row_後;
     }
 
-    private RString set証記載保険者番号(HokenshaNo data) {
+    private RString set保険者情報(KyufujissekiMeisaiJushochiTokurei 明細情報特例,
+            List<KyufuJissekiSyokaiMeisaiSyukeiBusiness> 保険者情報) {
+        for (KyufuJissekiSyokaiMeisaiSyukeiBusiness 保険者 : 保険者情報) {
+            if (保険者.get保険者種別().equals(介護保険) && 保険者.get保険者番号().equals(明細情報特例.get被保険者番号().value())) {
+                return 保険者.get保険者名();
+            }
+        }
+        return RString.EMPTY;
+    }
+
+    private RString set施設所在保険者番号(ShoKisaiHokenshaNo data) {
         if (data == null) {
             return RString.EMPTY;
         }
@@ -813,7 +823,7 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
 
     private RString setサービス種類(ServiceShuruiCode サービス種類コード) {
         if (サービス種類コード != null && !サービス種類コード.isEmpty()) {
-            return ServiceCategoryShurui.toValue(サービス種類コード.getColumnValue()).get名称();
+            return ServiceCategoryShurui.toValue(サービス種類コード.value()).get名称();
         }
         return RString.EMPTY;
     }

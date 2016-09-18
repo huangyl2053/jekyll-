@@ -50,9 +50,12 @@ public class KogakuGassanSikyuSinseishoJoho {
     /**
      * 「実行するボタンのメソッドです。
      *
+     * @param div KogakuGassanSikyuSinseishoJohoDiv
      * @return ResponseData DBC110060_KogakugassanShikyushinseishoOutParameter
      */
-    public ResponseData<DBC110060_KogakugassanShikyushinseishoOutParameter> onClick_Execute() {
+    public ResponseData<DBC110060_KogakugassanShikyushinseishoOutParameter> onClick_Execute(KogakuGassanSikyuSinseishoJohoDiv div) {
+        再処理区分 = div.getCcdKokuhorenJohoSofu().get再処理区分のValue();
+        処理年月 = div.getCcdKokuhorenJohoSofu().get処理年月のValue().getYearMonth();
         DBC110060_KogakugassanShikyushinseishoOutParameter parameter = new DBC110060_KogakugassanShikyushinseishoOutParameter();
         parameter.set再処理区分(再処理区分);
         parameter.set処理年月(処理年月);
