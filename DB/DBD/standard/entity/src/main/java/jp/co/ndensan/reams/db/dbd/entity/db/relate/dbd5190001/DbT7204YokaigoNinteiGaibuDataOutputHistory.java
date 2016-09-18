@@ -52,13 +52,13 @@ public enum DbT7204YokaigoNinteiGaibuDataOutputHistory implements IColumnDefinit
      */
     dataKubun(2147483647, 0),
     /**
-     * データ出力開始年月日時分
+     * データ出力開始年月日時分秒
      */
-    dataOutputKaishiYMDHM(2147483647, 0),
+    dataOutputKaishiYMDHMS(2147483647, 0),
     /**
-     * データ出力終了年月日時分
+     * データ出力終了年月日時分秒
      */
-    dataOutputShuryoYMDHM(2147483647, 0);
+    dataOutputShuryoYMDHMS(2147483647, 0);
 
     private final int maxLength;
     private final int scale;
