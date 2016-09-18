@@ -118,7 +118,11 @@ public class HanyoListKokuhorenJukyushaProcess extends BatchProcessBase<HanyoLis
             }
         }
         eucCsvWriter.close();
-        manager.spool(eucFilePath, business.getアクセスログ());
+        if (!flag) {
+            manager.spool(eucFilePath);
+        } else {
+            manager.spool(eucFilePath, business.getアクセスログ());
+        }
         outputJokenhyoFactory();
     }
 
@@ -136,6 +140,9 @@ public class HanyoListKokuhorenJukyushaProcess extends BatchProcessBase<HanyoLis
     }
 
     private RString get出力件数(Decimal 出力件数) {
+        if (!flag) {
+            return new RString("0");
+        }
         RStringBuilder builder = new RStringBuilder();
         builder.append(DecimalFormatter.toコンマ区切りRString(出力件数, 0));
         return builder.toRString();
