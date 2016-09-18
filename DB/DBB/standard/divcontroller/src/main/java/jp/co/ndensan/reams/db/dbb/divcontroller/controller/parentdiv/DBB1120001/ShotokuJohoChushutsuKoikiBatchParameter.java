@@ -7,8 +7,9 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB1120001
 
 import java.io.File;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.business.core.basic.shotokujohotyushuturenkeikoiki.ShotokuJohoBatchresultKoikiParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.shichosonkado.ShichosonJohoResult;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB112002.DBB112002_ToushoShotokuJohoChushutsuRenkeiKoikiParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB112004.DBB112004_ShotokuJohoChushutsuRenkeiKoikiParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120001.ShotokuJohoChushutsuKoikiBatchParameterDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120001.dgShichosonIchiran_Row;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1120001.ShotokuJohoChushutsuKoikiBatchParameterHandler;
@@ -108,15 +109,27 @@ public class ShotokuJohoChushutsuKoikiBatchParameter {
     }
 
     /**
-     * 「実行する」を押下場合、バッチを起動します。
+     * 「実行する」を押下場合、DBB112002 バッチを起動します。
+     *
+     * @param div ShotokuJohoChushutsuKoikiBatchParameterDiv
+     * @return
+     * ResponseData<DBB112002_ToushoShotokuJohoChushutsuRenkeiKoikiParameter>
+     */
+    public ResponseData<DBB112002_ToushoShotokuJohoChushutsuRenkeiKoikiParameter> onclick_batchRegister_DBB112002(
+            ShotokuJohoChushutsuKoikiBatchParameterDiv div) {
+        DBB112002_ToushoShotokuJohoChushutsuRenkeiKoikiParameter parameter = getHandler(div).getBatchParamter_DBB112002();
+        return ResponseData.of(parameter).respond();
+    }
+
+    /**
+     * 「実行する」を押下場合、DBB112004 バッチを起動します。
      *
      * @param div 異動チェックリストDIV
-     * @return ResponseData<ShotokuJohoBatchresultKoikiParameter>
+     * @return ResponseData<DBB112004_ShotokuJohoChushutsuRenkeiKoikiParameter>
      */
-    public ResponseData<ShotokuJohoBatchresultKoikiParameter> onclick_batchRegister(
+    public ResponseData<DBB112004_ShotokuJohoChushutsuRenkeiKoikiParameter> onclick_batchRegister_DBB112004(
             ShotokuJohoChushutsuKoikiBatchParameterDiv div) {
-        ShotokuJohoChushutsuKoikiBatchParameterHandler handler = getHandler(div);
-        ShotokuJohoBatchresultKoikiParameter parameter = handler.getBatchParamter();
+        DBB112004_ShotokuJohoChushutsuRenkeiKoikiParameter parameter = getHandler(div).getBatchParamter_DBB112004();
         return ResponseData.of(parameter).respond();
     }
 

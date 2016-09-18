@@ -51,6 +51,9 @@ public class JukyushaTotsugoIraiOutProcessParameter implements IBatchProcessPara
      * @return JukyushaTotsugoIraiOutMybatisParameter
      */
     public JukyushaTotsugoIraiOutMybatisParameter toJukyushaTotsugoIraiOutMybatisParameter() {
-        return JukyushaTotsugoIraiOutMybatisParameter.createParam();
+        return JukyushaTotsugoIraiOutMybatisParameter.createParam(chuushutuKubun,
+                ninteiNengetu,
+                taishouKaishiNengetu,
+                taishouShuuryouNengetu);
     }
 }

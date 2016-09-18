@@ -61,7 +61,8 @@ public class ShoriDateKanriManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShoriDateKanriManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link ShoriDateKanriManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link ShoriDateKanriManager}のインスタンス
      */
     public static ShoriDateKanriManager createInstance() {
         return InstanceProvider.create(ShoriDateKanriManager.class);
@@ -753,6 +754,20 @@ public class ShoriDateKanriManager {
         }
 
         return result;
+    }
+
+    /**
+     * 処理日付管理マスタテーブルから連携（異動）所得情報取得します。
+     *
+     * @param 年度 FlexibleYear
+     * @param 市町村コード LasdecCode
+     * @param 市町村識別ID RString
+     * @return DbT7022ShoriDateKanriEntity
+     */
+    @Transaction
+    public DbT7022ShoriDateKanriEntity select処理日付管理マスタ_所得情報抽出連携異動(
+            FlexibleYear 年度, LasdecCode 市町村コード, RString 市町村識別ID) {
+        return dac.select処理日付管理マスタ_所得情報抽出連携異動(年度, 市町村コード, 市町村識別ID);
     }
 
     /**
