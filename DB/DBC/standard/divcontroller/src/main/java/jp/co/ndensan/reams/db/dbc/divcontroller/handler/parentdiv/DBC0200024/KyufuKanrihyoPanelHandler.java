@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsury
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder._ChohyoShutsuryokujunManager;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 
@@ -53,9 +52,9 @@ public class KyufuKanrihyoPanelHandler {
      *
      * @param 再処理区分 RString
      * @param 処理年月 RYearMonth
-     * @return ResponseData
+     * @return DBC110010_KyufukanrihyoOutParameter
      */
-    public ResponseData<DBC110010_KyufukanrihyoOutParameter> setBatchParameter(RString 再処理区分,
+    public DBC110010_KyufukanrihyoOutParameter setBatchParameter(RString 再処理区分,
             RYearMonth 処理年月) {
         if (div.getCcdShutsuryokujun().get出力順ID() != null) {
             Long 出力順ID = div.getCcdShutsuryokujun().get出力順ID();
@@ -73,7 +72,7 @@ public class KyufuKanrihyoPanelHandler {
             parameter.set処理年月(処理年月);
             parameter.set出力順ID(new RString(出力順ID.toString()));
             parameter.set最終更新年月日(div.getTxtSaishuKoshinbi().getValue());
-            return ResponseData.of(parameter).respond();
+            return parameter;
         }
         return null;
     }
