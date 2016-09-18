@@ -31,8 +31,12 @@ public class FurikomiTsuchishoHeaderEditor implements IFurikomiTsuchishoEditor {
     public FurikomiTsuchishoSource edit(FurikomiTsuchishoSource source) {
 
         source.title = 振込Entity.get帳票タイトル();
-        source.Irai_YMD = new RString(振込Entity.get依頼日().toString());
-        source.Furikomi_YMD = new RString(振込Entity.get振込指定日().toString());
+        if (振込Entity.get依頼日() != null) {
+            source.Irai_YMD = new RString(振込Entity.get依頼日().toString());
+        }
+        if (振込Entity.get振込指定日() != null) {
+            source.Furikomi_YMD = new RString(振込Entity.get振込指定日().toString());
+        }
         source.so_page = new RString(振込Entity.get枚中());
         source.page = 振込Entity.get枚目();
         source.irai_mongon1 = 振込Entity.get依頼文言１();
@@ -40,8 +44,12 @@ public class FurikomiTsuchishoHeaderEditor implements IFurikomiTsuchishoEditor {
         source.irainin_1 = 振込Entity.get依頼人1();
         source.irainin_2 = 振込Entity.get依頼人2();
         source.sama = 振込Entity.get様();
-        source.furikomi_kuchisu = new RString(振込Entity.get振込口数().toString());
-        source.furikomi_kingaku = new RString(振込Entity.get振込金額().toString());
+        if (振込Entity.get振込口数() != null) {
+            source.furikomi_kuchisu = new RString(振込Entity.get振込口数().toString());
+        }
+        if (振込Entity.get振込金額() != null) {
+            source.furikomi_kingaku = new RString(振込Entity.get振込金額().toString());
+        }
         source.tsuchi_mongon = 振込Entity.get通知文言();
         source.shitei_kinyu_mei_1 = 振込Entity.get指定金融機関名称1();
         source.shitei_kinyu_mei_2 = 振込Entity.get指定金融機関名称2();

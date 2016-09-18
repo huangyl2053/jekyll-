@@ -45,7 +45,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 
 /**
- * 画面設計_DBB2110002_特徴送付情報ダウンロードのクラスです。
+ * 画面設計_DBB2110002_特別徴収情報をアップロードのクラスです。
  *
  * @reamsid_L DBB-5670-010 chenhui
  */
@@ -144,6 +144,8 @@ public class TokubetsuChoshuJohoAppurodoHandler {
     private static final RString 介護の制度コードのチェック_MSG = new RString("介護用のファイルではありません。");
     private static final RString 国保の制度コードのチェック_MSG = new RString("国保用のファイルではありません。");
     private static final RString 後期の制度コードのチェック_MSG = new RString("後期用のファイルではありません。");
+    private static final RString 拡張子のチェック_MSG = new RString("ファイル拡張子が不正です。");
+    private static final RString その他チェック_MSG = new RString("ファイルがアップロードできません。");
     private static final RString 共有ファイル名 = new RString("連携種別_500_市町村ID_対象月.DTA");
     private static final RString 連携種別 = new RString("連携種別");
     private static final RString 市町村ID = new RString("市町村ID");
@@ -461,7 +463,7 @@ public class TokubetsuChoshuJohoAppurodoHandler {
             処理名 = ShoriName.特徴依頼処理結果情報取込.get名称();
         }
         List<ShoriDateKanri> 処理日付List = TokuchoInfoShoriDateKanri.createInstance().
-                get広域月処理日付(year, 処理名, 月と年度内連番Map.get(選択月), 市町村IDList);
+                get広域5月と9月処理日付(year, 処理名, 月と年度内連番Map.get(選択月), 市町村IDList);
         Map<RString, ShoriDateKanri> 処理日付Map = new HashMap<>();
         for (ShoriDateKanri 処理日付 : 処理日付List) {
             処理日付Map.put(処理日付.get処理枝番(), 処理日付);
@@ -664,7 +666,7 @@ public class TokubetsuChoshuJohoAppurodoHandler {
     public boolean ファイルチェック(FileData[] files) {
         if (div.getShoriTaishoShichosonPanel().getDgGetuShoriSelect().getSelectedItems().isEmpty()
                 && div.getShoriTaishoGetuPanel().getDgShichosonShoriSelect().getSelectedItems().isEmpty()) {
-            return false;
+            throw new ApplicationException(その他チェック_MSG.toString());
         }
         RString 選択Key = div.getShoriJokyoPanel().getGrpHyojikeishiki().getSelectedKey();
         if (STR_0.equals(選択Key)) {
@@ -680,14 +682,14 @@ public class TokubetsuChoshuJohoAppurodoHandler {
             dgGetuShoriSelect_Row 選択row = div.getShoriTaishoShichosonPanel().getDgGetuShoriSelect().getSelectedItems().get(INT_0);
             int 選択月 = Integer.parseInt(処理月と年度内連番.get(選択row.getData1()).toString());
             if (選択月 != (max + INT_1)) {
-                return false;
+                throw new ApplicationException(その他チェック_MSG.toString());
             }
 
         }
         FileData 選択ファイル = files[INT_0];
         RString ファイル名 = 選択ファイル.getFileName();
         if (!ファイル名.endsWith(拡張子)) {
-            return false;
+            throw new ApplicationException(拡張子のチェック_MSG.toString());
         }
         RDate システム日付 = RDate.getNowDate();
         try (FileReader reader = new FileReader(選択ファイル.getFilePath(), Encode.UTF_8)) {
@@ -709,6 +711,9 @@ public class TokubetsuChoshuJohoAppurodoHandler {
     }
 
     private void 市町村コードチェック(RString ファイルのデータレコード) {
+        if (RString.isNullOrEmpty(div.getShoriJokyoPanel().getDdlShichoson().getSelectedValue())) {
+            throw new ApplicationException(市町村コードチェック_MSG.toString());
+        }
         RString 管理市町村コード = ファイルのデータレコード.substring(INT_0, INT_5);
         RString 市町村コード;
         if (STR_0.equals(div.getShoriJokyoPanel().getGrpHyojikeishiki().getSelectedKey())) {

@@ -56,7 +56,6 @@ public class DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuTest extends DbbTe
      */
     @Test
     public void 所得情報抽出_連携Test() {
-
         DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuParameter parameter = setParameter();
         BatchFlowTestHelper batchFlowTest = new BatchFlowTestHelper();
         batchFlowTest.executeFlow(RString.EMPTY, RString.EMPTY, DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsu.class, parameter);

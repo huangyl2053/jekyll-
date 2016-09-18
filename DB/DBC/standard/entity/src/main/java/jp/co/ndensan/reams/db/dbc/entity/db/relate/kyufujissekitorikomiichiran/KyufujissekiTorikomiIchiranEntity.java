@@ -25,6 +25,7 @@ public class KyufujissekiTorikomiIchiranEntity {
     private HihokenshaNo 被保険者_登録被保険者番号;
     private RString 被保険者_宛名カナ名称;
     private RString 被保険者_宛名名称;
+    private boolean コントロール;
 
     private HokenshaNo 給付実績_保険者番号;
     private RString 給付実績_保険者名;

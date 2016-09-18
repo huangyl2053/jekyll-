@@ -18,23 +18,23 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 public enum RenekeiDataSakuseiFourMasterValidationMessage implements IValidationMessage {
 
     /**
-     * 今回処理日時_終了日時が開始日時以前チェック
+     * 今回処理日時_終了日時が開始日時以前チェック。
      */
     今回処理日時_終了日時が開始日時以前チェック(UrErrorMessages.終了日が開始日以前),
     /**
-     * 今回開始チェック（年月日）
+     * 今回開始チェック（年月日）。
      */
     今回開始チェック_年月日(UrErrorMessages.必須項目_追加メッセージあり, "今回開始チェック_年月日"),
     /**
-     * 今回開始チェック（時分秒）
+     * 今回開始チェック（時分秒）。
      */
     今回開始チェック_時分秒(UrErrorMessages.必須項目_追加メッセージあり, "今回開始チェック_時分秒"),
     /**
-     * 今回終了チェック（年月日）
+     * 今回終了チェック（年月日）。
      */
     今回終了チェック_年月日(UrErrorMessages.必須項目_追加メッセージあり, "今回開始チェック_時分秒"),
     /**
-     * 今回終了チェック（時分秒）
+     * 今回終了チェック（時分秒）。
      */
     今回終了チェック_時分秒(UrErrorMessages.必須項目_追加メッセージあり, "今回開始チェック_時分秒");
     private final Message message;

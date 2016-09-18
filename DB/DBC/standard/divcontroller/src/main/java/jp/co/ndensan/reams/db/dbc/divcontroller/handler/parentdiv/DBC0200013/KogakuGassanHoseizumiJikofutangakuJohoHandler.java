@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsury
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder._ChohyoShutsuryokujunManager;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
@@ -54,9 +53,9 @@ public class KogakuGassanHoseizumiJikofutangakuJohoHandler {
      *
      * @param 再処理区分 RString
      * @param 処理年月 RYearMonth
-     * @return ResponseData
+     * @return DBC110080_KogakugassanHoseisumiJikofutangakuOutParameter
      */
-    public ResponseData<DBC110080_KogakugassanHoseisumiJikofutangakuOutParameter> setBatchParameter(RString 再処理区分,
+    public DBC110080_KogakugassanHoseisumiJikofutangakuOutParameter setBatchParameter(RString 再処理区分,
             RYearMonth 処理年月) {
         if (div.getCcdShutsuryokujun().get出力順ID() != null) {
             Long 出力順ID = div.getCcdShutsuryokujun().get出力順ID();
@@ -76,7 +75,7 @@ public class KogakuGassanHoseizumiJikofutangakuJohoHandler {
             // TODO QA1520  処理区分がなし。
             parameter.setShoriKunbun(RString.EMPTY);
             parameter.setShutsuryokujunId(new RString(出力順ID.toString()));
-            return ResponseData.of(parameter).respond();
+            return parameter;
         }
         return null;
     }

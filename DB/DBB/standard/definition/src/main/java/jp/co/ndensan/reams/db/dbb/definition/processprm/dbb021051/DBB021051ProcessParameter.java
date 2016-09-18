@@ -23,6 +23,7 @@ import lombok.Setter;
 @Setter
 public class DBB021051ProcessParameter implements IBatchProcessParameter {
 
+    private static final RString EMPTYCODE = new RString("000000");
     private static final RString FULLYEAR = new RString("0000");
     private static final RString FULLMONTH = new RString("00");
     private RString 抽出対象者;
@@ -53,7 +54,7 @@ public class DBB021051ProcessParameter implements IBatchProcessParameter {
         param.set抽出対象者(抽出対象者);
         param.set資格区分(資格区分);
         param.set市町村指定(市町村指定);
-        param.set市町村指定に市町村コード(市町村指定に市町村コード);
+        param.set市町村指定に市町村コード(EMPTYCODE.equals(市町村指定に市町村コード) ? null : 市町村指定に市町村コード);
         param.set基準年月の年(formatYearFull(基準年月.getYearValue()));
         param.set基準年月の月(formatMonthFull(基準年月.getMonthValue()));
         param.set最優先住所(最優先住所);

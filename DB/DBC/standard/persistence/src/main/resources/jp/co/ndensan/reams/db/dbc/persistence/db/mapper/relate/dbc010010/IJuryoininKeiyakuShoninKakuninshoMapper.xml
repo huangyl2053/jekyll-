@@ -61,6 +61,8 @@
            </if>
    </select>
    <resultMap id="受領委任データResultMap" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc010010.JuryoininKeiyakuShoninKakuninshoEntity" autoMapping="true">
+        <id column="dbT3078ShokanJuryoininKeiyakusha_keiyakuJigyoshaNo"/>
+        <id column="dbT3078ShokanJuryoininKeiyakusha_shinseiYMD"/>
         <result property="名称" column="meisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <result property="カナ名称" column="kanaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
         <result property="生年月日" column="seiengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>

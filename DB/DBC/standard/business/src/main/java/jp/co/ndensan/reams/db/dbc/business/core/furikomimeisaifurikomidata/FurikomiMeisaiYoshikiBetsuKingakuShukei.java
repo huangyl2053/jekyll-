@@ -23,8 +23,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  */
 public class FurikomiMeisaiYoshikiBetsuKingakuShukei {
 
-    public FurikomiMeisaiYoshikiBetsuKingakuShukei() {
-    }
     /**
      * 
      * @param inList

@@ -100,12 +100,16 @@ public class KyotakuServiceKeikakuhiHandler {
 
     private void setGetsuBtn(List<KyufujissekiKyotakuServiceBusiness> 居宅サービス計画費list, FlexibleYearMonth サービス提供年月) {
         Collections.sort(居宅サービス計画費list, new KyotakuServiceKeikakuhiHandler.DateComparatorServiceTeikyoYM());
-        if (サービス提供年月.isBeforeOrEquals(居宅サービス計画費list.get(居宅サービス計画費list.size() - 1).get居宅サービス計画費().getサービス提供年月())) {
-            div.getBtnZengetsu().setDisabled(true);
-        }
-        if (居宅サービス計画費list.get(0).get居宅サービス計画費().getサービス提供年月()
-                .isBeforeOrEquals(サービス提供年月)) {
-            div.getBtnJigetsu().setDisabled(true);
+        div.getBtnZengetsu().setDisabled(true);
+        div.getBtnJigetsu().setDisabled(true);
+        if (居宅サービス計画費list != null && !居宅サービス計画費list.isEmpty()) {
+            if (!サービス提供年月.isBeforeOrEquals(居宅サービス計画費list.get(居宅サービス計画費list.size() - 1).get居宅サービス計画費().getサービス提供年月())) {
+                div.getBtnZengetsu().setDisabled(false);
+            }
+            if (!居宅サービス計画費list.get(0).get居宅サービス計画費().getサービス提供年月()
+                    .isBeforeOrEquals(サービス提供年月)) {
+                div.getBtnJigetsu().setDisabled(false);
+            }
         }
     }
 
@@ -217,10 +221,9 @@ public class KyotakuServiceKeikakuhiHandler {
     /**
      * ボタン状態の設定です。
      *
-     * @param サービス提供年月 サービス提供年月
      * @param 識別番号管理 ShikibetsuNoKanri
      */
-    public void setButton(FlexibleYearMonth サービス提供年月, ShikibetsuNoKanri 識別番号管理) {
+    public void setButton(ShikibetsuNoKanri 識別番号管理) {
 
         if (DISABLED.equals(識別番号管理.get基本設定区分())) {
             div.getBtnKihon().setDisabled(true);
@@ -436,9 +439,9 @@ public class KyotakuServiceKeikakuhiHandler {
      * @param 実績区分コード RString
      */
     public void check事業者btn(List<KyufuJissekiHedajyoho2> 事業者番号リスト, RString 整理番号, RString 事業者番号, RString 様式番号, RString サービス提供年月, RString 実績区分コード) {
+        div.getBtnMaeJigyosha().setDisabled(true);
+        div.getBtnAtoJigyosha().setDisabled(true);
         if (!事業者番号リスト.isEmpty()) {
-            div.getBtnMaeJigyosha().setDisabled(true);
-            div.getBtnAtoJigyosha().setDisabled(true);
             int index = get事業者番号index(事業者番号リスト, 整理番号, 事業者番号, 様式番号, サービス提供年月, 実績区分コード);
             if (0 < index) {
                 div.getBtnMaeJigyosha().setDisabled(false);

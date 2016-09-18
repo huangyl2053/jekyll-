@@ -6,9 +6,12 @@
 package jp.co.ndensan.reams.db.dbc.business.report.dbc200061;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.core.servicecode.ServiceCodeIchiran_ChushutsuJokenKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.servicecodeichiran.ServicecodeIchiranProcessParameter;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicecodeichiran.ServiceBunruiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicecodeichiran.TaniSuShikibetsuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc200061.ServiceCodeIchiranSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.serviceshurui.ServiceCategoryShurui;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -34,6 +37,9 @@ public class ServiceCodeIchiranHeaderEditor
     private static final RString 単位数単位 = new RString("単位数単位");
     private static final RString コロン = new RString("：");
     private static final RString スペース = new RString(" ");
+    private static final RString 全角空白 = new RString("　");
+    private static final RString サービスコード = new RString("サービスコード");
+    private static final RString 中点 = new RString("・");
 
     /**
      * コンストラクタです
@@ -70,20 +76,47 @@ public class ServiceCodeIchiranHeaderEditor
                 if (null == source.taniSetsumei) {
                     source.taniSetsumei = 単位数単位;
                 }
-                source.taniSetsumei = source.taniSetsumei.concat(スペース).concat(getColumnValue(単位数識別.getコード())).concat(コロン).concat(単位数識別.get名称());
+                source.taniSetsumei = source.taniSetsumei.concat(スペース).concat(getColumnValue(単位数識別.getコード())).
+                        concat(コロン).concat(単位数識別.get名称());
             }
         }
-        //TODO
-        //source.chushutsuJoken = ;
+
+        if (バッチパラメータ.get抽出条件区分().equals(ServiceCodeIchiran_ChushutsuJokenKubun.サービスコードを指定.getコード())) {
+            source.chushutsuJoken = サービスコード.concat(全角空白).concat(getColumnValue(バッチパラメータ.getサービス種類コード())).
+                    concat(スペース).concat(バッチパラメータ.getサービス項目コード());
+        } else if (バッチパラメータ.get抽出条件区分().equals(ServiceCodeIchiran_ChushutsuJokenKubun.サービス分類を指定.getコード())) {
+            source.chushutsuJoken = getサービス分類();
+        }
+
         if (null != parameter.getサービスコード一覧表()) {
             kaigoServiceNaiyouEntity = parameter.getサービスコード一覧表().get介護サービス内容();
 
             if (null != kaigoServiceNaiyouEntity) {
+                RString 名称 = ServiceCategoryShurui.toValue(getColumnValue(kaigoServiceNaiyouEntity.getServiceShuruiCd())).get名称();
                 source.serviceShurui = getColumnValue(kaigoServiceNaiyouEntity.getServiceShuruiCd())
-                        .concat(スペース).concat(kaigoServiceNaiyouEntity.getServiceName());
+                        .concat(スペース).concat(名称);
             }
         }
         return source;
+    }
+
+    private RString getサービス分類() {
+        List<ServiceBunruiEntity> list = parameter.getサービス分類略称();
+        if (null != list) {
+            RString rs = null;
+            for (ServiceBunruiEntity e : list) {
+                if (null == e) {
+                    continue;
+                }
+                if (null != rs) {
+                    rs = rs.concat(中点).concat(e.get略称());
+                } else {
+                    rs = e.get略称();
+                }
+            }
+            return rs;
+        }
+        return RString.EMPTY;
     }
 
     private RString getColumnValue(IDbColumnMappable entity) {

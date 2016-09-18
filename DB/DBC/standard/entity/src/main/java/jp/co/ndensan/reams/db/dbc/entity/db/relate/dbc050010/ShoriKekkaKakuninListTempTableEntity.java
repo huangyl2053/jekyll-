@@ -27,7 +27,7 @@ public class ShoriKekkaKakuninListTempTableEntity extends DbTableEntityBase<Shor
     public static final RString TABLE_NAME;
 
     static {
-        TABLE_NAME = new RString("ShoriKekkaKakuninListTempTable");
+        TABLE_NAME = new RString("DbWT0512ShoriKekkaKakuninList");
     }
 
     @TempTableColumnOrder(1)

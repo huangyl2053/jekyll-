@@ -13,11 +13,11 @@ import jp.co.ndensan.reams.db.dbb.business.report.dbb021051.DBZ100001AtenaSealEn
 import jp.co.ndensan.reams.db.dbb.business.report.dbb021051.DBZ100001AtenaSealParameterEntity;
 import jp.co.ndensan.reams.db.dbb.business.report.dbz100001.AtenaSealReport;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbb021051.DBB021051ProcessParameter;
-import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.dbb021051.DBB021051TableJohoTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.atenaseal.DBZ100001AtenaSealSource;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.business.util.DateConverter;
+import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.IBatchReportWriterWithCheckList;
@@ -42,13 +42,10 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -62,16 +59,13 @@ public class ChohyoJohoShutokuProcess extends BatchKeyBreakBase<DBB021051TableJo
             + "dbb021051.IDBB021051Mapper.get宛名シール情報一時");
     private static final int 最大宛先数 = 12;
     private static final int INT_5 = 5;
-
-    private RString 市町村名称;
-    private RString 都道府県名称;
-    private RString 郡名称;
+    private static final RString ERROR_出力順 = new RString("出力順");
+    private static final RString ERROR_市町村コード = new RString("000000");
     private DBB021051ProcessParameter parameter;
     private DBB021051DataUtil dataUtil;
     private DBZ100001AtenaSealParameterEntity paramEntity;
     private List<DBZ100001AtenaSealEntity> entityList;
     private RString システム日付;
-    private final List<PersonalData> personalDataList = new ArrayList();
     private List<RString> 出力順項目List;
     private Association 地方公共団体情報;
     private RString 出力順;
@@ -82,14 +76,15 @@ public class ChohyoJohoShutokuProcess extends BatchKeyBreakBase<DBB021051TableJo
 
     @Override
     protected void initialize() {
+        出力順項目List = new ArrayList<>();
         地方公共団体情報 = AssociationFinderFactory.createInstance().getAssociation();
         dataUtil = new DBB021051DataUtil();
         entityList = new ArrayList<>();
         システム日付 = DateConverter.getDate4(RDate.getNowDate());
-        出力順情報 = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBB介護賦課,
-                ReportIdDBB.DBZ100001.getReportId(), Long.parseLong(parameter.get出力順ID().toString()));
+        出力順情報 = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBZ介護共通,
+                ReportIdDBZ.DBZ100001.getReportId(), Long.parseLong(parameter.get出力順ID().toString()));
         if (出力順情報 == null) {
-            throw new ApplicationException(UrErrorMessages.実行不可.getMessage().evaluate());
+            throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace(ERROR_出力順.toString()));
         }
         出力順 = MyBatisOrderByClauseCreator.create(DBB021051OutPutOrder.class, 出力順情報);
         int i = 0;
@@ -122,7 +117,7 @@ public class ChohyoJohoShutokuProcess extends BatchKeyBreakBase<DBB021051TableJo
                 .batchReportWriterWithCheckList(DBZ100001AtenaSealSource.class)
                 .checkListInfo(info)
                 .checkListLineItemSet(pairs)
-                .reportId(ReportIdDBB.DBZ100001.getReportId())
+                .reportId(ReportIdDBZ.DBZ100001.getReportId())
                 .build();
         this.reportSourceWriter = new ReportSourceWriter<>(this.checkWriter);
     }
@@ -134,9 +129,10 @@ public class ChohyoJohoShutokuProcess extends BatchKeyBreakBase<DBB021051TableJo
 
     @Override
     protected void usualProcess(DBB021051TableJohoTempEntity entity) {
-        setAccessLog(entity.get識別コード());
         RString 市町村コード = entity.get市町村コード();
-        RString 市町村名 = AssociationFinderFactory.createInstance().getAssociation(new LasdecCode(市町村コード)).get市町村名();
+        RString 市町村名;
+        市町村名 = ERROR_市町村コード.equals(市町村コード) ? RString.EMPTY
+                : AssociationFinderFactory.createInstance().getAssociation(new LasdecCode(市町村コード)).get市町村名();
         if (getBefore() == null) {
             paramEntity = dataUtil.getChohyoParameterEntity(市町村コード, 市町村名, システム日付);
             paramEntity.setEntityList(entityList);
@@ -175,14 +171,10 @@ public class ChohyoJohoShutokuProcess extends BatchKeyBreakBase<DBB021051TableJo
             }
             new AtenaSealReport(paramEntity).writeBy(reportSourceWriter);
         }
-        checkWriter.close();
         ReportOutputJokenhyoItem reportOutputJokenhyoItem
                 = dataUtil.getReportOutputJokenhyoItem(地方公共団体情報.getLasdecCode_().value(), 地方公共団体情報.get市町村名(),
                         new RString(JobContextHolder.getJobId()), reportSourceWriter.pageCount().value(), 出力順項目List, parameter);
         OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem).print();
-        if (!personalDataList.isEmpty()) {
-            AccessLogger.logReport(this.personalDataList);
-        }
     }
 
     private enum 特定項目 implements ISpecificKey {
@@ -276,9 +268,4 @@ public class ChohyoJohoShutokuProcess extends BatchKeyBreakBase<DBB021051TableJo
     protected void keyBreakProcess(DBB021051TableJohoTempEntity t) {
     }
 
-    private void setAccessLog(ShikibetsuCode shikibetsuCode) {
-        if (shikibetsuCode != null) {
-            this.personalDataList.add(PersonalData.of(shikibetsuCode));
-        }
-    }
 }

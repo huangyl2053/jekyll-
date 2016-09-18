@@ -35,8 +35,6 @@ import jp.co.ndensan.reams.ur.urc.entity.db.basic.shuno.shunokanri.UrT0700ShunoK
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.kamoku.ShunoKamokuFinder;
 import jp.co.ndensan.reams.ur.urz.definition.core.code.RyokinShubetsuCodeValue;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
-import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
-import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -155,7 +153,6 @@ public class SokujiFukaKouseiManager {
         IShunoKamoku 科目 = shunoKamokuManager.get科目(介護期別.get徴収方法().equals(ChoshuHohoKibetsu.普通徴収.getコード())
                 ? ShunoKamokuShubetsu.介護保険料_普通徴収 : ShunoKamokuShubetsu.介護保険料_特別徴収);
         ShunoKanri 収納管理 = get収納管理(収納ID, 介護賦課, 科目, 介護期別.get期());
-//        収納Manager.save収納管理(収納管理);
         収納Manager.save調定(収納管理, get調定クラス(調定ID, 収納ID, choteiKyotsu));
         return 1 == 介護期別Dac.save(介護期別.createBuilderForEdit().set調定ID(new Decimal(調定ID)).build().toEntity());
     }
@@ -184,8 +181,6 @@ public class SokujiFukaKouseiManager {
         entity.setShunoId(収納ID);
         entity.setKamokuCode(科目.getコード());
         entity.setKamokuEdabanCode(科目.get枝番コード());
-        entity.setKamokuCode(KamokuCode.EMPTY);
-        entity.setKamokuEdabanCode(EdabanCode.EMPTY);
         entity.setJigyoKubunCode(JigyoKubun.未使用.getJigyoKubunCd());
         entity.setChoteiNendo(new RYear(介護賦課.get調定年度().getYearValue()));
         entity.setKazeiNendo(new RYear(介護賦課.get賦課年度().getYearValue()));

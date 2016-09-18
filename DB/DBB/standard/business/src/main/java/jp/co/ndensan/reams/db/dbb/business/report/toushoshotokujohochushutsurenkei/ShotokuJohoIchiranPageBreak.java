@@ -37,7 +37,7 @@ public class ShotokuJohoIchiranPageBreak extends PageBreaker<KaigoHokenShotokuJo
     @Override
     public boolean isBreak(ReportLineRecord<KaigoHokenShotokuJohoIchiranSource> currentSource,
             ReportLineRecord<KaigoHokenShotokuJohoIchiranSource> nextSource) {
-        // TODO 改ページプロジェクト なし。
+        // TODO QA1538 改ページプロジェクト なし。
 //        if (this.breakKeysList.contains(ShotokuJohoIchiranOrder.世帯コード.get項目ID())
 //                && !currentSource.getSource().yubinNo.equals(nextSource.getSource().yubinNo)) {
 //            return true;

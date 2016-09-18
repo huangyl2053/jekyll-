@@ -127,13 +127,17 @@ public class TokuteiNyushoshahiHandler {
     }
 
     private void setGetsuBtn(List<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness> 特定入所者介護サービス費用list, FlexibleYearMonth サービス提供年月) {
-        Collections.sort(特定入所者介護サービス費用list, new TokuteiNyushoshahiHandler.DateComparatorServiceTeikyoYM());
-        if (サービス提供年月.isBeforeOrEquals(特定入所者介護サービス費用list.get(特定入所者介護サービス費用list.size() - 1).get特定入所者費用().getサービス提供年月())) {
-            div.getBtnZengetsu().setDisabled(true);
-        }
-        if (特定入所者介護サービス費用list.get(0).get特定入所者費用().getサービス提供年月()
-                .isBeforeOrEquals(サービス提供年月)) {
-            div.getBtnJigetsu().setDisabled(true);
+        div.getBtnZengetsu().setDisabled(true);
+        div.getBtnJigetsu().setDisabled(true);
+        if (特定入所者介護サービス費用list != null && !特定入所者介護サービス費用list.isEmpty()) {
+            Collections.sort(特定入所者介護サービス費用list, new TokuteiNyushoshahiHandler.DateComparatorServiceTeikyoYM());
+            if (!サービス提供年月.isBeforeOrEquals(特定入所者介護サービス費用list.get(特定入所者介護サービス費用list.size() - 1).get特定入所者費用().getサービス提供年月())) {
+                div.getBtnZengetsu().setDisabled(false);
+            }
+            if (!特定入所者介護サービス費用list.get(0).get特定入所者費用().getサービス提供年月()
+                    .isBeforeOrEquals(サービス提供年月)) {
+                div.getBtnJigetsu().setDisabled(false);
+            }
         }
     }
 
@@ -193,10 +197,9 @@ public class TokuteiNyushoshahiHandler {
     /**
      * ボタン状態の設定です。
      *
-     * @param サービス提供年月 サービス提供年月
      * @param 識別番号管理 ShikibetsuNoKanri
      */
-    public void setButton(FlexibleYearMonth サービス提供年月, ShikibetsuNoKanri 識別番号管理) {
+    public void setButton(ShikibetsuNoKanri 識別番号管理) {
         if (DISABLED.equals(識別番号管理.get基本設定区分())) {
             div.getBtnKihon().setDisabled(true);
         } else {
@@ -247,7 +250,6 @@ public class TokuteiNyushoshahiHandler {
         } else {
             div.getBtnTokuteiShinryo().setDisabled(false);
         }
-        div.getBtnKyotakuServiceKeikaku().setDisabled(true);
         if (DISABLED.equals(識別番号管理.get住宅改修費設定区分())) {
             div.getBtnJutakuKaishu().setDisabled(true);
         } else {
@@ -403,9 +405,9 @@ public class TokuteiNyushoshahiHandler {
      * @param 実績区分コード RString
      */
     public void check事業者btn(List<KyufuJissekiHedajyoho2> 事業者番号リスト, RString 整理番号, RString 事業者番号, RString 様式番号, RString サービス提供年月, RString 実績区分コード) {
+        div.getBtnMaeJigyosha().setDisabled(true);
+        div.getBtnAtoJigyosha().setDisabled(true);
         if (!事業者番号リスト.isEmpty()) {
-            div.getBtnMaeJigyosha().setDisabled(true);
-            div.getBtnAtoJigyosha().setDisabled(true);
             int index = get事業者番号index(事業者番号リスト, 整理番号, 事業者番号, 様式番号, サービス提供年月, 実績区分コード);
             if (0 < index) {
                 div.getBtnMaeJigyosha().setDisabled(false);
