@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TongzhiShufaxingEntity {
+public class KoshinOshiraseHeaderEntity {
 
     private RString 抽出対象期間;
     private RString 市町村コード;
@@ -26,6 +26,5 @@ public class TongzhiShufaxingEntity {
     private RString 並び順4;
     private RString 並び順5;
     private RString 印刷時間;
-
-    private TongzhiShuEntity tongzhiShu;
+    private KoshinOshiraseTsuchishoHakoEntity tsuchishoHakoEntity;
 }

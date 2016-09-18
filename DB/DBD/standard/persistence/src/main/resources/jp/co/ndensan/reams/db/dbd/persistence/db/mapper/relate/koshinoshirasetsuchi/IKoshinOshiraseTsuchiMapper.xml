@@ -3,93 +3,83 @@
 <!--@reamsid_L DBD-2030-020 x_miaocl-->
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.koshinoshirasetsuchi.IKoshinOshiraseTsuchiMapper">
     <resultMap id="resultMap_get帳票出力用情報取得" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd511002.KoshinOshiraseTsuchiUpdateEntity" autoMapping="true">
-        <result property="koroshoIfShikibetsuCode" column="厚労省IF識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="hihokenshaNo" column="被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="hihokenshaName" column="被保険者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
-        <result property="hihokenshaKana" column="被保険者氏名カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
-        <result property="ninteiShinseiYMD" column="認定申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="ninteiShinseiRiyu" column="認定申請理由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="ninteiShinseiShinseijiKubunCode" column="認定申請区分_申請時_コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="ninteiShinseiHoreiKubunCode" column="認定申請区分_法令_コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="nyushoShisetsuCode" column="入所施設コード" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
-        <result property="seinengappiYMD" column="生年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="seibetsu" column="性別" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="telNo" column="電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
-        <result property="yubinNo" column="郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
-        <result property="jusho" column="住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
-        <result property="shinseishoKanriNo" column="申請書管理番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
-        <result property="ninteiYMD" column="認定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="ninteiYukoKikanKaishiYMD" column="認定有効期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="ninteiYukoKikanShuryoYMD" column="認定有効期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="yokaigoJotaiKubunCode" column="要介護認定状態区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="shichosonCode" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
-        <result property="shichosonMeisho" column="市町村名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="jigyoshaNo" column="居宅支援事業者コード" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
-        <result property="jigyoshaMeisho" column="居宅支援事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="jigyoshaName" column="入所施設事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
-        <association property="psmEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+        <id column="dbT4101NinteiShinseiJoho_shinseishoKanriNo"/>
+        <id column="dbV4001JukyushaDaicho_shichosonCode" />
+        <id column="dbV4001JukyushaDaicho_hihokenshaNo"/>
+        <id column="dbV4001JukyushaDaicho_rirekiNo" />
+        <id column="dbV4001JukyushaDaicho_edaban" />
+        <id column="dbV4001JukyushaDaicho_jukyuShinseiJiyu" />
+        <id column="dbT7051KoseiShichosonMaster_shichosonShokibetsuID" />
+        <id column="dbT4910NinteichosaItakusakiJoho_shichosonCode" />
+        <id column="dbT4910NinteichosaItakusakiJoho_ninteichosaItakusakiCode" />
+        <id column="dbT7060KaigoJigyosha_jigyoshaNo" />
+        <id column="dbT7060KaigoJigyosha_yukoKaishiYMD" />
+        <id column="keisangoJohoTemp_choteiNendo" />
+        <id column="keisangoJohoTemp_fukaNendo" />
+        <id column="keisangoJohoTemp_tsuchishoNo" />
+        <id column="ShikibetsuTaisho_shikibetsuCode" />
+        <id column="ShikibetsuTaisho_rirekiNo" />
+        <association property="dbt4101Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.ResultMap_DbT4101NinteiShinseiJohoEntity" />
+        <association property="dbV4001JukyushaDaicho" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbV4001JukyushaDaichoMapper.ResultMap_DbV4001JukyushaDaichoEntity" />
+        <association property="dbT7051KoseiShichosonMaster" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.ResultMap_DbT7051KoseiShichosonMasterEntity" />
+        <association property="dbT4910NinteichosaItakusakiJoho" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4910NinteichosaItakusakiJohoMapper.ResultMap_DbT4910NinteichosaItakusakiJohoEntity" />
+        <association property="dbT7060KaigoJigyosha" resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.ResultMap_DbT7060KaigoJigyoshaEntity" />
+        <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
     </resultMap>
     <select resultOrdered="true" id="get帳票出力用情報取得"  
             resultMap="resultMap_get帳票出力用情報取得" 
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd511002.KoshinOshiraseTsuchiMyBatisParameter" fetchSize="500">
         SELECT
-        要介護認定申請情報."koroshoIfShikibetsuCode" AS 厚労省IF識別コード,
-        要介護認定申請情報."hihokenshaNo" AS 被保険者番号,
-        要介護認定申請情報."hihokenshaName" AS 被保険者氏名,
-        要介護認定申請情報."hihokenshaKana" AS 被保険者氏名カナ,
-        要介護認定申請情報."ninteiShinseiYMD" AS 認定申請年月日,
-        要介護認定申請情報."ninteiShinseiRiyu" AS 認定申請理由,
-        要介護認定申請情報."ninteiShinseiShinseijiKubunCode" AS 認定申請区分_申請時_コード,
-        要介護認定申請情報."ninteiShinseiHoreiKubunCode" AS 認定申請区分_法令_コード,
-        要介護認定申請情報."nyushoShisetsuCode" AS 入所施設コード,
-        要介護認定申請情報."seinengappiYMD" AS 生年月日,
-        要介護認定申請情報."seibetsu" AS 性別,
-        要介護認定申請情報."telNo" AS 電話番号,
-        要介護認定申請情報."yubinNo" AS 郵便番号,
-        要介護認定申請情報."jusho" AS 住所,
-        要介護認定申請情報."shinseishoKanriNo" AS 申請書管理番号,
-        受給者台帳Newest."ninteiYMD" AS 認定年月日,
-        受給者台帳Newest."ninteiYukoKikanKaishiYMD" AS 認定有効期間開始年月日,
-        受給者台帳Newest."ninteiYukoKikanShuryoYMD" AS 認定有効期間終了年月日,
-        受給者台帳Newest."yokaigoJotaiKubunCode" AS 要介護認定状態区分コード,
-        構成市町村マスタ."shichosonCode" AS 市町村コード,
-        構成市町村マスタ."shichosonMeisho" AS 市町村名称,
-        認定調査委託先情報 ."jigyoshaNo"AS 居宅支援事業者コード,
-        認定調査委託先情報 ."jigyoshaMeisho" AS 居宅支援事業者名称,
-        介護事業者."jigyoshaName" AS 入所施設事業者名称,
+        DbT4101NinteiShinseiJoho.*,
+        受給者台帳Newest.*,
+        構成市町村マスタ.*,
+        認定調査委託先情報.*,
+        介護事業者.*,
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
         FROM
-        rgdb."DbT4101NinteiShinseiJoho" AS 要介護認定申請情報
-        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS 構成市町村マスタ
-        ON 要介護認定申請情報."shoKisaiHokenshaNo" = 構成市町村マスタ."shoKisaiHokenshaNo"
-        INNER JOIN rgdb."DbV4001JukyushaDaicho" AS 受給者台帳Newest
-        ON 要介護認定申請情報."shinseishoKanriNo" = 受給者台帳Newest."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT4910NinteichosaItakusakiJoho" AS 認定調査委託先情報
-        ON 要介護認定申請情報."ninteiChosaItakusakiCode" = 認定調査委託先情報."ninteichosaItakusakiCode"
-        AND 構成市町村マスタ."shichosonCode" = 認定調査委託先情報."shichosonCode"
-        AND 認定調査委託先情報."jokyoFlag" = True
-        LEFT JOIN rgdb."DbT7060KaigoJigyosha" AS 介護事業者
-        ON 要介護認定申請情報."nyushoShisetsuCode" = 介護事業者."jigyoshaNo"
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.noDeleted_DbT4101NinteiShinseiJoho" />) AS DbT4101NinteiShinseiJoho
+        INNER JOIN 
+        (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.noDeleted_DbT7051KoseiShichosonMaster" />) AS 構成市町村マスタ
+        ON 
+        DbT4101NinteiShinseiJoho."dbT4101NinteiShinseiJoho_shoKisaiHokenshaNo" = 構成市町村マスタ."dbT7051KoseiShichosonMaster_shoKisaiHokenshaNo"
+        INNER JOIN 
+        (SELECT
+         <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbV4001JukyushaDaichoMapper.allColumns_DbV4001JukyushaDaicho" />
+         FROM
+         rgdb."DbV4001JukyushaDaicho") AS 受給者台帳Newest
+        ON 
+        DbT4101NinteiShinseiJoho."dbT4101NinteiShinseiJoho_shinseishoKanriNo" = 受給者台帳Newest."dbV4001JukyushaDaicho_shinseishoKanriNo"
+        LEFT JOIN 
+        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4910NinteichosaItakusakiJohoMapper.noDeleted_DbT4910NinteichosaItakusakiJoho" />) AS 認定調査委託先情報
+        ON 
+        DbT4101NinteiShinseiJoho."dbT4101NinteiShinseiJoho_ninteiChosaItakusakiCode" = 認定調査委託先情報."dbT4910NinteichosaItakusakiJoho_ninteichosaItakusakiCode"
+        AND 構成市町村マスタ."dbT7051KoseiShichosonMaster_shichosonCode" = 認定調査委託先情報."dbT4910NinteichosaItakusakiJoho_shichosonCode"
+        AND 認定調査委託先情報."dbT4910NinteichosaItakusakiJoho_jokyoFlag" = True
+        LEFT JOIN 
+        (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7060KaigoJigyoshaMapper.noDeleted_DbT7060KaigoJigyosha" />) AS 介護事業者
+        ON 
+        DbT4101NinteiShinseiJoho."dbT4101NinteiShinseiJoho_nyushoShisetsuCode" = 介護事業者."dbT7060KaigoJigyosha_jigyoshaNo"
         AND NOT EXISTS (SELECT 1
-        FROM rgdb."DbT7060KaigoJigyosha" AS A
-        WHERE 介護事業者."jigyoshaNo" = A."jigyoshaNo"
-        AND 介護事業者."yukoKaishiYMD" &lt; A."yukoKaishiYMD"
+            FROM rgdb."DbT7060KaigoJigyosha" AS A
+            WHERE 介護事業者."dbT7060KaigoJigyosha_jigyoshaNo" = A."jigyoshaNo"
+            AND 介護事業者."dbT7060KaigoJigyosha_yukoKaishiYMD" &lt; A."yukoKaishiYMD"
         )
         LEFT JOIN
         rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
-      '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-      true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho" 
-    ON "ShikibetsuTaisho"."shikibetsuCode" = 要介護認定申請情報."shikibetsuCode"
+        '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho" 
+        ON "ShikibetsuTaisho"."shikibetsuCode" = DbT4101NinteiShinseiJoho."dbT4101NinteiShinseiJoho_shikibetsuCode"
         WHERE
-        要介護認定申請情報."shinseishoKanriNo" IN
-                            <foreach item="申請書管理番号リスト" index="index" collection="申請書管理番号リスト" open="(" separator="," close=")">
-                                #{申請書管理番号リスト}
-                            </foreach>
-        AND 受給者台帳Newest."ninteiYukoKikanShuryoYMD" <![CDATA[>=]]> #{抽出対象期間_開始}
-        AND 受給者台帳Newest."ninteiYukoKikanShuryoYMD" <![CDATA[<=]]> #{抽出対象期間_終了}
-        AND 要介護認定申請情報."logicalDeletedFlag" = False
-        ORDER BY
-        #{出力順FLAG}
+        DbT4101NinteiShinseiJoho."dbT4101NinteiShinseiJoho_shinseishoKanriNo" IN
+        <foreach item="申請書管理番号リスト" index="index" collection="申請書管理番号リスト" open="(" separator="," close=")">
+            #{申請書管理番号リスト}
+        </foreach>
+        AND 受給者台帳Newest."dbV4001JukyushaDaicho_ninteiYukoKikanShuryoYMD" <![CDATA[>=]]> #{抽出対象期間_開始}
+        AND 受給者台帳Newest."dbV4001JukyushaDaicho_ninteiYukoKikanShuryoYMD" <![CDATA[<=]]> #{抽出対象期間_終了}
+        AND DbT4101NinteiShinseiJoho."dbT4101NinteiShinseiJoho_logicalDeletedFlag" = False
+        <if test="出力順 != null and !出力順.isEmpty()">
+            #{出力順}
+        </if>
     </select>
 </mapper>
              

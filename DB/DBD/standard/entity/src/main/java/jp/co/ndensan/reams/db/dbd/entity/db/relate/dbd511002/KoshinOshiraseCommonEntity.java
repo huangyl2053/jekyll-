@@ -8,14 +8,14 @@ package jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd511002;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 認証者・電子公印Entityです。
+ * 通知文、被保険者番号データのEntityです。
  *
  * @reamsid_L DBD-2030-020 x_miaocl
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class RenZhengzheEntity {
+public class KoshinOshiraseCommonEntity {
 
     private RString 文書番号;
     private RString タイトル;
