@@ -37,19 +37,35 @@ public class FurikomiMeisaiIchiranBodyEditor implements IFurikomiMeisaiIchiranEd
             source.List1_2 = 振込明細一覧Entity.get被保険者氏名().value();
         }
         source.List1_3 = 振込明細一覧Entity.get支給申請書整理番号();
-        source.List1_4 = new RString(振込明細一覧Entity.get申請年月日().toString());
+        if (振込明細一覧Entity.get申請年月日() != null) {
+            source.List1_4 = new RString(振込明細一覧Entity.get申請年月日().toString());
+        }
         source.List1_5 = 振込明細一覧Entity.get申請種類();
-        source.List1_6 = new RString(振込明細一覧Entity.get認定有効期間開始().toString());
-        source.List1_7 = new RString(振込明細一覧Entity.get自己負担総額円().toString());
+        if (振込明細一覧Entity.get認定有効期間開始() != null) {
+            source.List1_6 = new RString(振込明細一覧Entity.get認定有効期間開始().toString());
+        }
+        if (振込明細一覧Entity.get自己負担総額円() != null) {
+            source.List1_7 = new RString(振込明細一覧Entity.get自己負担総額円().toString());
+        }
         source.List1_8 = 振込明細一覧Entity.get上段();
 
-        source.List2_1 = 振込明細一覧Entity.get対象年度().toDateString();
+        if (振込明細一覧Entity.get対象年度() != null) {
+            source.List2_1 = 振込明細一覧Entity.get対象年度().toDateString();
+        }
         source.List2_2 = 振込明細一覧Entity.get住所();
-        source.List2_3 = new RString(振込明細一覧Entity.get計算対象期間().toString());
-        source.List2_4 = new RString(振込明細一覧Entity.get決定年月日().toString());
+        if (振込明細一覧Entity.get計算対象期間() != null) {
+            source.List2_3 = new RString(振込明細一覧Entity.get計算対象期間().toString());
+        }
+        if (振込明細一覧Entity.get決定年月日() != null) {
+            source.List2_4 = new RString(振込明細一覧Entity.get決定年月日().toString());
+        }
         source.List2_5 = 振込明細一覧Entity.get要介護度();
-        source.List2_6 = new RString(振込明細一覧Entity.get認定有効期間終了().toString());
-        source.List2_7 = new RString(振込明細一覧Entity.get支給額円().toString());
+        if (振込明細一覧Entity.get認定有効期間終了() != null) {
+            source.List2_6 = new RString(振込明細一覧Entity.get認定有効期間終了().toString());
+        }
+        if (振込明細一覧Entity.get支給額円() != null) {
+            source.List2_7 = new RString(振込明細一覧Entity.get支給額円().toString());
+        }
         source.List2_8 = 振込明細一覧Entity.get下段();
 
         source.List3_1 = 振込明細一覧Entity.get番号();
@@ -57,15 +73,25 @@ public class FurikomiMeisaiIchiranBodyEditor implements IFurikomiMeisaiIchiranEd
         source.List5_1 = 振込明細一覧Entity.get名寄せ();
 
         source.ninzu_shokei = new RString(振込明細一覧Entity.get頁計人数());
-        source.shikyu_shokei = new RString(振込明細一覧Entity.get頁計金額().toString());
+        if (振込明細一覧Entity.get頁計金額() != null) {
+            source.shikyu_shokei = new RString(振込明細一覧Entity.get頁計金額().toString());
+        }
         source.yoshien_ninzu_gokei = new RString(振込明細一覧Entity.get総合計要支援人数());
-        source.yoshien_kingaku_gokei = new RString(振込明細一覧Entity.get総合計要支援金額().toString());
+        if (振込明細一覧Entity.get総合計要支援金額() != null) {
+            source.yoshien_kingaku_gokei = new RString(振込明細一覧Entity.get総合計要支援金額().toString());
+        }
         source.jigyotaisho_ninzu_gokei = new RString(振込明細一覧Entity.get総合計事業対象人数());
-        source.jigyotaisho_kingaku_gokei = new RString(振込明細一覧Entity.get総合計事業対象金額().toString());
+        if (振込明細一覧Entity.get総合計事業対象金額() != null) {
+            source.jigyotaisho_kingaku_gokei = new RString(振込明細一覧Entity.get総合計事業対象金額().toString());
+        }
         source.fumei_ninzu_gokei = new RString(振込明細一覧Entity.get総合計不明人数());
-        source.fumei_kingaku_gokei = new RString(振込明細一覧Entity.get総合計不明金額().toString());
+        if (振込明細一覧Entity.get総合計不明金額() != null) {
+            source.fumei_kingaku_gokei = new RString(振込明細一覧Entity.get総合計不明金額().toString());
+        }
         source.ninzu_gokei = new RString(振込明細一覧Entity.get総合計人数());
-        source.shikyu_gokei = new RString(振込明細一覧Entity.get総合計金額().toString());
+        if (振込明細一覧Entity.get総合計金額() != null) {
+            source.shikyu_gokei = new RString(振込明細一覧Entity.get総合計金額().toString());
+        }
         return source;
     }
 
