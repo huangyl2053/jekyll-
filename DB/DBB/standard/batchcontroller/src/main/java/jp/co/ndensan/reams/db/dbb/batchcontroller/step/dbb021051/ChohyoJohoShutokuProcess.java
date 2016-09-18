@@ -76,6 +76,7 @@ public class ChohyoJohoShutokuProcess extends BatchKeyBreakBase<DBB021051TableJo
 
     @Override
     protected void initialize() {
+        出力順項目List = new ArrayList<>();
         地方公共団体情報 = AssociationFinderFactory.createInstance().getAssociation();
         dataUtil = new DBB021051DataUtil();
         entityList = new ArrayList<>();
