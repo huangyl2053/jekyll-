@@ -28,11 +28,11 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  */
 public class KohijukyushaBetsuIchiranEditor implements IKohijukyushaBetsuIchiranEditor {
 
-    private static final int 設定項目リスト_INDEX1 = 1;
-    private static final int 設定項目リスト_INDEX2 = 2;
-    private static final int 設定項目リスト_INDEX3 = 3;
-    private static final int 設定項目リスト_INDEX4 = 4;
-    private static final int 設定項目リスト_INDEX5 = 5;
+    private static final int 設定項目リスト_INDEX1 = 0;
+    private static final int 設定項目リスト_INDEX2 = 1;
+    private static final int 設定項目リスト_INDEX3 = 2;
+    private static final int 設定項目リスト_INDEX4 = 3;
+    private static final int 設定項目リスト_INDEX5 = 4;
     private static final int INDEX = 8;
     private final KohijukyushaBetsuIchiranBusiness business;
 
