@@ -82,6 +82,28 @@ public class TokuchoInfoFDownload {
     }
 
     /**
+     * 処理対象選択のonChangeメソッドです。
+     *
+     * @param div TokuchoInfoFDownloadDiv
+     * @return ResponseData
+     */
+    public ResponseData<TokuchoInfoFDownloadDiv> onChange_dgkoikiShoriSelect(TokuchoInfoFDownloadDiv div) {
+        getHandler(div).onChange_dgkoikiShoriSelect();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 処理対象選択のonChangeメソッドです。
+     *
+     * @param div TokuchoInfoFDownloadDiv
+     * @return ResponseData
+     */
+    public ResponseData<TokuchoInfoFDownloadDiv> onChange_dgTsukiShoriSelect(TokuchoInfoFDownloadDiv div) {
+        getHandler(div).onChange_dgTsukiShoriSelect();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * ダウンロードのメソッドです。
      *
      * @param div TokuchoInfoFDownloadDiv

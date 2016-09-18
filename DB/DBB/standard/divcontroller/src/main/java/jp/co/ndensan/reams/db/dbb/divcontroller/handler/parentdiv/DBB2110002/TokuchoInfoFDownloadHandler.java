@@ -36,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
  * 画面設計_DBB2110002_特徴送付情報ダウンロードのクラスです。
@@ -90,6 +91,7 @@ public class TokuchoInfoFDownloadHandler {
     private static final RString STR_0010 = new RString("0010");
     private static final RString STR_0011 = new RString("0011");
     private static final RString STR_0012 = new RString("0012");
+    private static final RString ダウンロードボタン = new RString("btnTsukiShiteiDownLoad");
 
     /**
      * コンストラクタです。
@@ -126,6 +128,7 @@ public class TokuchoInfoFDownloadHandler {
             単一処理対象グリッド設定();
         }
         市町村処理状況グリッド設定(市町村識別ID.getItemId(), year);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(ダウンロードボタン, true);
     }
 
     private void 市町村処理状況グリッド設定(RString 市町村ID, FlexibleYear year) {
@@ -449,6 +452,30 @@ public class TokuchoInfoFDownloadHandler {
             return ダウンロードInfo;
         }
         return null;
+    }
+
+    /**
+     * 処理対象選択のonChangeメソッドです。
+     *
+     */
+    public void onChange_dgkoikiShoriSelect() {
+        if (div.getKoikiShoriSelect().getDgkoikiShoriSelect().getSelectedItems().isEmpty()) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(ダウンロードボタン, true);
+        } else {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(ダウンロードボタン, false);
+        }
+    }
+
+    /**
+     * 処理対象選択のonChangeメソッドです。
+     *
+     */
+    public void onChange_dgTsukiShoriSelect() {
+        if (div.getTsukiShoriSelect().getDgTsukiShoriSelect().getSelectedItems().isEmpty()) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(ダウンロードボタン, true);
+        } else {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(ダウンロードボタン, false);
+        }
     }
 
 }
