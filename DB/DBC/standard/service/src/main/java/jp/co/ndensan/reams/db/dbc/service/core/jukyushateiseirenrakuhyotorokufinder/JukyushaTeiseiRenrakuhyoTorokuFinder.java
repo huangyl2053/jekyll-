@@ -152,6 +152,19 @@ public class JukyushaTeiseiRenrakuhyoTorokuFinder {
                         .set訂正年月日(FlexibleDate.getNowDate()).build();
                 出力用受給者訂正情報Entity.set受給者異動送付entity(get変更後受給者訂正情報修正Entity(
                         変更前受給者訂正情報Entity.get受給者異動送付entity(), 変更後Entity));
+                if (変更前受給者訂正情報Entity.get受給者異動送付entity().is公費負担上限額減額有フラグ()
+                        != 変更後Entity.is公費負担上限額減額有フラグ()) {
+                    出力用受給者訂正情報Entity.set公費負担上限額減額有フラグ(変更後Entity.is公費負担上限額減額有フラグ());
+                } else {
+                    出力用受給者訂正情報Entity.set公費負担上限額減額有フラグ(null);
+                }
+                if (変更前受給者訂正情報Entity.get受給者異動送付entity().is小多機能居宅介護利用開始月利用有フラグ()
+                        != 変更後Entity.is小多機能居宅介護利用開始月利用有フラグ()) {
+                    出力用受給者訂正情報Entity.set小多機能居宅介護利用開始月利用有フラグ(
+                            変更後Entity.is小多機能居宅介護利用開始月利用有フラグ());
+                } else {
+                    出力用受給者訂正情報Entity.set小多機能居宅介護利用開始月利用有フラグ(null);
+                }
                 出力用受給者訂正情報Entity.set氏名_性別_生年月日を印字する(
                         変更後受給者訂正情報Entity.get氏名_性別_生年月日を印字する());
                 出力用受給者訂正情報Entity.set作成年月日(変更後受給者訂正情報Entity.get作成年月日());
@@ -244,14 +257,11 @@ public class JukyushaTeiseiRenrakuhyoTorokuFinder {
 
     private JukyushaIdoRenrakuhyo get変更後受給者訂正情報修正Entity_One(JukyushaIdoRenrakuhyo 変更前entity,
             JukyushaIdoRenrakuhyo 変更後entity) {
-        if (!is比較変更文字列(変更前entity.get特定入所者介護サービス区分コード(),
-                変更後entity.get特定入所者介護サービス区分コード())) {
+        if (!is比較変更文字列(変更前entity.is課税層の特例減額措置対象フラグ(),
+                変更後entity.is課税層の特例減額措置対象フラグ())) {
             変更後entity = 変更後entity.createBuilderForEdit().
-                    set特定入所者介護サービス区分コード(RString.EMPTY).build();
+                    set課税層の特例減額措置対象フラグ(RString.EMPTY).build();
         }
-        //TODO QA1336
-        変更後entity = 変更後entity.createBuilderForEdit().
-                set課税層の特例減額措置対象フラグ(変更後entity.is課税層の特例減額措置対象フラグ()).build();
         if (!is比較変更文字列(変更前entity.get食費負担限度額(), 変更後entity.get食費負担限度額())) {
             変更後entity = 変更後entity.createBuilderForEdit().
                     set食費負担限度額(RString.EMPTY).build();
@@ -292,7 +302,6 @@ public class JukyushaTeiseiRenrakuhyoTorokuFinder {
             変更後entity = 変更後entity.createBuilderForEdit().
                     set居宅費_新３_負担限度額(RString.EMPTY).build();
         }
-        //TODO QA1336
         if (!is比較変更文字列(変更前entity.get負担限度額適用開始年月日(), 変更後entity.get負担限度額適用開始年月日())) {
             変更後entity = 変更後entity.createBuilderForEdit().
                     set負担限度額適用開始年月日(RString.EMPTY).build();
@@ -335,8 +344,6 @@ public class JukyushaTeiseiRenrakuhyoTorokuFinder {
             変更後entity = 変更後entity.createBuilderForEdit().
                     set軽減率適用終了年月日(RString.EMPTY).build();
         }
-        変更後entity = 変更後entity.createBuilderForEdit().set小多機能居宅介護利用開始月利用有フラグ(
-                変更後entity.is小多機能居宅介護利用開始月利用有フラグ()).build();
         if (!is比較変更文字列(変更前entity.get二次予防事業区分コード(), 変更後entity.get二次予防事業区分コード())) {
             変更後entity = 変更後entity.createBuilderForEdit().
                     set二次予防事業区分コード(RString.EMPTY).build();
@@ -422,9 +429,6 @@ public class JukyushaTeiseiRenrakuhyoTorokuFinder {
             変更後entity = 変更後entity.createBuilderForEdit().
                     set適用終了年月日(RString.EMPTY).build();
         }
-        //TODO QA1336
-        変更後entity = 変更後entity.createBuilderForEdit().set公費負担上限額減額有フラグ(
-                変更後entity.is公費負担上限額減額有フラグ()).build();
         if (!is比較変更文字列(変更前entity.get償還払化開始年月日(), 変更後entity.get償還払化開始年月日())) {
             変更後entity = 変更後entity.createBuilderForEdit().
                     set償還払化開始年月日(RString.EMPTY).build();
@@ -445,6 +449,11 @@ public class JukyushaTeiseiRenrakuhyoTorokuFinder {
                 変更後entity.get特定入所者認定申請中区分コード())) {
             変更後entity = 変更後entity.createBuilderForEdit().
                     set特定入所者認定申請中区分コード(RString.EMPTY).build();
+        }
+        if (!is比較変更文字列(変更前entity.get特定入所者介護サービス区分コード(),
+                変更後entity.get特定入所者介護サービス区分コード())) {
+            変更後entity = 変更後entity.createBuilderForEdit().
+                    set特定入所者介護サービス区分コード(RString.EMPTY).build();
         }
         return 変更後entity;
     }
