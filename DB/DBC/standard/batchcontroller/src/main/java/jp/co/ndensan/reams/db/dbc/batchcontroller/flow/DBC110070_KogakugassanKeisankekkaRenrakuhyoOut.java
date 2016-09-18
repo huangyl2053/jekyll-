@@ -189,7 +189,7 @@ public class DBC110070_KogakugassanKeisankekkaRenrakuhyoOut extends BatchFlowBas
         param.set処理対象年月(new FlexibleYearMonth(getParameter().get処理年月().toString()));
         param.setレコード件数合計(レコード件数);
         List<RString> list = new ArrayList<>();
-        if (エントリ情報List.isEmpty()) {
+        if (0 == レコード件数) {
             param.setFileNameList(Collections.EMPTY_LIST);
         } else {
             for (SharedFileDescriptor entry : エントリ情報List) {
