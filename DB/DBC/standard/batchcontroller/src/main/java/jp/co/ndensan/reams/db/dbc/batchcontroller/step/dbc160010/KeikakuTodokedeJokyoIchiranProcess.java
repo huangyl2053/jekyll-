@@ -88,6 +88,7 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
     private RString 作成日時;
     private Set<ShikibetsuCode> 識別コードset;
     private int count;
+    private boolean flag;
     private KeikakuTodokedeJokyoProcessParam processParameter;
     @BatchWriter
     private BatchReportWriter<KyotakuServiceKeikakuSakuseiSource> batchReportWriter;
@@ -133,6 +134,7 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
         outputReportMap = new HashMap<>();
         breakItemIds = new ArrayList<>();
         識別コードset = new HashSet<>();
+        flag = true;
         システム日付 = RDateTime.now();
 
         申請日 = new RString(processParameter.getJyukyuushinseibiFrom().toString())
@@ -185,11 +187,10 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
     @Override
     protected void process(KeikakuTodokedeJokyoIchiranEntity entity) {
         count = count + INDEX_1;
-        boolean flag = true;
         アクセスログ対象追加(entity);
         outputCsvList = new ArrayList<>();
         if (entity.get識別コード() == null) {
-            if (count == INDEX_1) {
+            if (flag) {
                 RTime time = システム日付.getTime();
                 RString hour = new RString(time.toString()).substringReturnAsPossible(INDEX_0, INDEX_2);
                 RString min = new RString(time.toString()).substringReturnAsPossible(INDEX_3, INDEX_5);
@@ -197,6 +198,7 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
                 RString timeFormat = hour.concat("時").concat(min).concat("分").concat(sec).concat("秒");
                 作成日時 = システム日付.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                         .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(RString.FULL_SPACE).concat(timeFormat);
+                flag = false;
             } else {
                 作成日時 = RString.EMPTY;
             }
@@ -206,10 +208,9 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
                     kyotakuTodokede_ErrorListType.リストタイプ0.get名称(),
                     RString.EMPTY);
             outputCsvList.add(csvEntity);
-            flag = false;
         }
-        if (entity.get宛名() == null && flag) {
-            if (count == INDEX_1) {
+        if (entity.get宛名() == null) {
+            if (flag) {
                 RTime time = システム日付.getTime();
                 RString hour = new RString(time.toString()).substringReturnAsPossible(INDEX_0, INDEX_2);
                 RString min = new RString(time.toString()).substringReturnAsPossible(INDEX_3, INDEX_5);
@@ -217,6 +218,7 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
                 RString timeFormat = hour.concat("時").concat(min).concat("分").concat(sec).concat("秒");
                 作成日時 = システム日付.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                         .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(RString.FULL_SPACE).concat(timeFormat);
+                flag = false;
             } else {
                 作成日時 = RString.EMPTY;
             }
@@ -234,7 +236,7 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
         }
 
         if (!entity.get被保険者番号().equals(被保険者番号_前) && 被保険者番号_前 != null) {
-            List<KyotakuServiceKeikakuSaList> list = outputReportMap.get(entity.get被保険者番号());
+            List<KyotakuServiceKeikakuSaList> list = outputReportMap.get(被保険者番号_前);
             for (KyotakuServiceKeikakuSaList result : list) {
                 KyotakuServiceKeikakuSaParam param = new KyotakuServiceKeikakuSaParam();
                 param.set計画届出状況情報リスト(result);
@@ -281,7 +283,7 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
         } else if (entity.get適用終了年月日().isBefore(processParameter.getKijyunbi())) {
             reportList.set備考1(定値_有効なし);
         }
-        if (entity.get作成区分コード().equals(RS_3)
+        if (!RS_3.equals(entity.get作成区分コード())
                 && entity.get事業者名称() == null) {
             reportList.set備考2(定値_事業者無効);
         }
@@ -340,27 +342,27 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
                 && processParameter.getJyukyuushinseibiTo().isBefore(entity.get受給申請年月日())) {
             return true;
         }
-        if (!(processParameter.getTaisyoushatyuusyutu().equals(MESSAGE_2)
-                && !entity.get履歴番号().equals(RS_0000))) {
+        if (MESSAGE_2.equals(processParameter.getTaisyoushatyuusyutu())
+                && !RS_0000.equals(entity.get履歴番号())) {
             return true;
         }
-        if (!(entity.get住所地特例フラグ().equals(RS_1)
-                && processParameter.getTaisyoushatyuusyutu().equals(MESSAGE_3)
+        if (!(RS_1.equals(entity.get住所地特例フラグ())
+                && MESSAGE_3.equals(processParameter.getTaisyoushatyuusyutu())
                 && (entity.get資格喪失年月日() == null
                 || !entity.get資格取得年月日().equals(entity.get資格喪失年月日())))) {
             return true;
         }
-        if (!(entity.get施設フラウ() != null
-                && processParameter.getTaisyoushatyuusyutu().equals(MESSAGE_3))) {
+        if (entity.get施設フラウ() != null
+                && !(MESSAGE_3.equals(processParameter.getTaisyoushatyuusyutu()))) {
             return true;
         }
-        if (processParameter.getTodokeidejyoukyou().equals(MESSAGE_4)
+        if (MESSAGE_4.equals(processParameter.getTodokeidejyoukyou())
                 && entity.get適用開始年月日().isBeforeOrEquals(processParameter.getKijyunbi())
                 && (processParameter.getKijyunbi().isBeforeOrEquals(entity.get適用終了年月日())
                 || entity.get適用終了年月日() == null)) {
             return true;
         }
-        return processParameter.getTodokeidejyoukyou().equals(MESSAGE_5)
+        return MESSAGE_5.equals(processParameter.getTodokeidejyoukyou())
                 && entity.get適用終了年月日() != null
                 && entity.get適用終了年月日().isBefore(processParameter.getKijyunbi());
 
