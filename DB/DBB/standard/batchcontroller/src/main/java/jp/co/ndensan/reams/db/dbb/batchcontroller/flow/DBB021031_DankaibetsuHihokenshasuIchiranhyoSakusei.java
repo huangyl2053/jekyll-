@@ -7,10 +7,9 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbt21004.DankaiProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbt21004.DankaibetsuHihokenshasuReportCSVProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbt21004.DankaibetsuHihokenshasuReportProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbt21004.HihokenshaProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbt21004.ReportCSVProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbt21004.ReportProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbt21004.SystemTimeDankaibetuHihokensyasuIchiranhyoFukaProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.ShotokuDankaibetsuHihokenshaSuIchiran.ShotokuDankaibetsuHihokenshaSuIchiranBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt21004.DankaibetuHihokensyasuIchiranhyoProcessParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.fuka.SetaiShotokuKazeiHanteiBatchParameter;
@@ -31,7 +30,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class DBB021031_DankaibetsuHihokenshasuIchiranhyoSakusei extends BatchFlowBase<ShotokuDankaibetsuHihokenshaSuIchiranBatchParameter> {
 
-    private static final String システム日時の取得 = "getSystemDate";
     private static final String 被保険者対象抽出 = "getHihokensha";
     private static final String 世帯員把握 = "collectSetaiin";
     private static final String 段階取得 = "getDankai";
@@ -40,15 +38,14 @@ public class DBB021031_DankaibetsuHihokenshasuIchiranhyoSakusei extends BatchFlo
     private static final RString BATCH_ID = new RString("SetaiShotokuKazeiHanteiFlow");
     private ShotokuDankaibetsuHihokenshaSuIchiranBatchParameter parameter;
     private DankaibetuHihokensyasuIchiranhyoProcessParameter processParameter;
-    private static final RString DOUHAO = new RString(",");
+    private static final RString コンマ = new RString(",");
     private static final int ZERO = 0;
     private static final int ONE = 1;
 
     @Override
     protected void defineFlow() {
         parameter = getParameter();
-        executeStep(システム日時の取得);
-        YMDHMS システム日時 = getResult(YMDHMS.class, new RString(システム日時の取得), SystemTimeDankaibetuHihokensyasuIchiranhyoFukaProcess.SYSTEM_TIME);
+        YMDHMS システム日時 = YMDHMS.now();
         processParameter = new DankaibetuHihokensyasuIchiranhyoProcessParameter();
         processParameter.set調定年度(new FlexibleYear(parameter.getSettingnendo()));
         processParameter.set本算定賦課処理日(new FlexibleDate(new RString(parameter.getTreatmentday().toString())));
@@ -68,16 +65,6 @@ public class DBB021031_DankaibetsuHihokenshasuIchiranhyoSakusei extends BatchFlo
         executeStep(段階取得);
         executeStep(CSVの出力);
         executeStep(帳票の出力);
-    }
-
-    /**
-     * システム日時の取得を行います。
-     *
-     * @return バッチコマンド
-     */
-    @Step(システム日時の取得)
-    protected IBatchFlowCommand getSystemDate() {
-        return simpleBatch(SystemTimeDankaibetuHihokensyasuIchiranhyoFukaProcess.class).define();
     }
 
     /**
@@ -118,7 +105,7 @@ public class DBB021031_DankaibetsuHihokenshasuIchiranhyoSakusei extends BatchFlo
      */
     @Step(CSVの出力)
     protected IBatchFlowCommand getDankaiCSV() {
-        return loopBatch(ReportCSVProcess.class).arguments(processParameter).define();
+        return loopBatch(DankaibetsuHihokenshasuReportCSVProcess.class).arguments(processParameter).define();
     }
 
     /**
@@ -128,15 +115,15 @@ public class DBB021031_DankaibetsuHihokenshasuIchiranhyoSakusei extends BatchFlo
      */
     @Step(帳票の出力)
     protected IBatchFlowCommand getReport() {
-        return loopBatch(ReportProcess.class).arguments(processParameter).define();
+        return loopBatch(DankaibetsuHihokenshasuReportProcess.class).arguments(processParameter).define();
     }
 
     private RString get市町村コード複数(
-            List<RString> dantaiCdLis,
+            List<RString> dantaiCdList,
             RString 市町村コード複数) {
-        for (RString dantaiCd : dantaiCdLis) {
+        for (RString dantaiCd : dantaiCdList) {
             if (dantaiCd != null) {
-                市町村コード複数 = dantaiCd.concat(DOUHAO);
+                市町村コード複数 = dantaiCd.concat(コンマ);
             }
         }
         return 市町村コード複数;
