@@ -34,6 +34,7 @@ public class KogakugassanShikyushinseishoOutHokenshaShutokuProcess extends Batch
     private static final RString 処理結果リスト一時TABLE_NAME = new RString("DbWT1002KokuhorenSakuseiError");
 
     private List<Integer> 件数List;
+    private List<Integer> レコード件数List;
     private List<HokenshaNo> 保険者番号List;
     private OutputParameter<HokenshaShutokuEntity> returnEntity;
     private HokenshaShutokuEntity outEntity;
@@ -56,6 +57,7 @@ public class KogakugassanShikyushinseishoOutHokenshaShutokuProcess extends Batch
         outEntity = new HokenshaShutokuEntity();
         returnEntity = new OutputParameter<>();
         件数List = new ArrayList<>();
+        レコード件数List = new ArrayList<>();
         保険者番号List = new ArrayList<>();
         取得件数flag = false;
     }
@@ -75,6 +77,7 @@ public class KogakugassanShikyushinseishoOutHokenshaShutokuProcess extends Batch
     protected void process(KogakuGassanShinseishoHokenshaShutokuEntity entity) {
         取得件数flag = true;
         件数List.add(entity.get件数());
+        レコード件数List.add(entity.getレコード件数());
         保険者番号List.add(entity.get保険者番号());
     }
 
@@ -84,6 +87,7 @@ public class KogakugassanShikyushinseishoOutHokenshaShutokuProcess extends Batch
             処理結果リスト一時tableWriter.insert(getKokuhorenSakuseiError());
         }
         outEntity.set件数List(件数List);
+        outEntity.setレコード件数List(レコード件数List);
         outEntity.set保険者番号List(保険者番号List);
         returnEntity.setValue(outEntity);
     }
