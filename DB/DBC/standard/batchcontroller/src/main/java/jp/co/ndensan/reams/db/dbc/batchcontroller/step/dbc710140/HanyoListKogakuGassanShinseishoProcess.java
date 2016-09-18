@@ -278,12 +278,14 @@ public class HanyoListKogakuGassanShinseishoProcess extends BatchProcessBase<Han
 
     private RStringBuilder get保険者名() {
         RStringBuilder builder = new RStringBuilder();
-        builder.append(保険者);
         if (parameter.get保険者コード() == null || parameter.get保険者コード().isEmpty()
                 || すべて.equals(parameter.get保険者コード())) {
             return null;
         }
-        builder.append(AssociationFinderFactory.createInstance().getAssociation(new LasdecCode(parameter.get保険者コード())));
+        builder.append(保険者);
+        Association 地方公共団体コード = AssociationFinderFactory.createInstance().getAssociation(
+                new LasdecCode(parameter.get保険者コード()));
+        builder.append(地方公共団体コード.get市町村名());
         return builder;
     }
 
