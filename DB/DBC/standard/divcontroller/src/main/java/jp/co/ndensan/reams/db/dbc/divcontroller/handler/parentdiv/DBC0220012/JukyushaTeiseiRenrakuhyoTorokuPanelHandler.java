@@ -147,6 +147,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
      * @param 論理削除フラグ boolean
      * @param 異動年月日 FlexibleDate
      * @param 受給者子Div JukyushaIdoRenrakuhyo
+     * @param 処理モード RString
      * @return SourceDataCollection
      */
     public SourceDataCollection to帳票発行処理(
@@ -154,7 +155,8 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
             int 履歴番号,
             boolean 論理削除フラグ,
             FlexibleDate 異動年月日,
-            JukyushaIdoRenrakuhyo 受給者子Div) {
+            JukyushaIdoRenrakuhyo 受給者子Div,
+            RString 処理モード) {
         RString 氏名_性別_生年月日を印字す = ZERO;
         if (div.getOutputJukyushaIdoRenrakuhyo().getChkJukyushaIdoRenrakuhyo().isAllSelected()) {
             氏名_性別_生年月日を印字す = ONE;
@@ -164,8 +166,9 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
         JukyushaTeiseiRenrakuhyoTorokuFinderResult 変更前の訂正情報 = JukyushaTeiseiRenrakuhyoTorokuFinder.
                 createInstance().editHenkomaeTeiseiJoho(被保険者番号, 履歴番号,
                         異動年月日, 作成年月日, 氏名_性別_生年月日を印字す);
+        履歴番号 = get履歴番号(処理モード, 履歴番号);
         JukyushaTeiseiRenrakuhyoTorokuFinderResult 変更後の訂正情報 = JukyushaTeiseiRenrakuhyoTorokuFinder.
-                createInstance().editHenkoGoTeiseiJoho(被保険者番号, 履歴番号 + 1,
+                createInstance().editHenkoGoTeiseiJoho(被保険者番号, 履歴番号,
                         異動年月日, 作成年月日, 氏名_性別_生年月日を印字す);
         JukyushaTeiseiRenrakuhyoTorokuFinderResult 受給者訂正情報 = JukyushaTeiseiRenrakuhyoTorokuFinder.
                 createInstance().judgeHenkokasho(論理削除フラグ, 受給者子Div, 変更前の訂正情報, 変更後の訂正情報);
@@ -259,6 +262,13 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
         }
         JukyushaTeiseiRenrakuhyoPrintService printService = new JukyushaTeiseiRenrakuhyoPrintService();
         return printService.printSingle(受給者訂正連絡票Entity);
+    }
+
+    private int get履歴番号(RString 処理モード, int 履歴番号) {
+        if (処理モード.equals(修正モード_TWO) || 処理モード.equals(修正モード_THREE)) {
+            履歴番号 = 履歴番号 + 1;
+        }
+        return 履歴番号;
     }
 
     private JukyushaIdoRenrakuhyo get登録用Entity(
