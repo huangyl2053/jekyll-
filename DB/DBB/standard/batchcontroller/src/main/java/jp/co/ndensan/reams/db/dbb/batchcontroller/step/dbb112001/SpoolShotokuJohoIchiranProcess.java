@@ -240,7 +240,7 @@ public class SpoolShotokuJohoIchiranProcess extends BatchKeyBreakBase<ShotokuJoh
                 出力条件リスト.add(出力条件);
             }
         }
-        RString 出力条件_出力順 = 出力_出力順.concat(RString.FULL_SPACE).concat(だいなり);
+        RString 出力条件_出力順 = 出力_出力順.concat(RString.FULL_SPACE);
         for (RString 出力順 : 並び順リスト) {
             出力条件_出力順 = 出力条件_出力順.concat(出力順).concat(だいなり);
         }
