@@ -54,6 +54,12 @@ public class NijiyoboJohoTaishoshaTorokuPanel {
     public ResponseData<NijiyoboJohoTaishoshaTorokuPanelDiv> onLoad(NijiyoboJohoTaishoshaTorokuPanelDiv div) {
         TaishoshaKey 資格対象者 = ViewStateHolder.get(
                 jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class);
+        if (!RString.isNullOrEmpty(資格対象者.get被保険者番号().getColumnValue())) {
+            LockingKey 前排他キー = new LockingKey(排他キー_前.concat(資格対象者.get被保険者番号().getColumnValue()));
+            if (!RealInitialLocker.tryGetLock(前排他キー)) {
+                throw new PessimisticLockingException();
+            }
+        }
         NijiYoboJigyoTaishoshaManager manager = new NijiYoboJigyoTaishoshaManager();
         List<NijiYoboJigyoTaishosha> 二次予防情報対象一覧List
                 = manager.get二次予防事業対象者By被保険者番号(資格対象者.get被保険者番号());
@@ -148,14 +154,13 @@ public class NijiyoboJohoTaishoshaTorokuPanel {
             return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            LockingKey 前排他キー = new LockingKey(排他キー_前.concat(div.get被保険者番号()));
-            if (!RealInitialLocker.tryGetLock(前排他キー)) {
-                throw new PessimisticLockingException();
-            }
             NijiYoboJigyoTaishoshaHolder holder = ViewStateHolder.get(ViewStateHolderName.二次予防情報対象情報, NijiYoboJigyoTaishoshaHolder.class);
             getHandler(div).二次予防情報対象一覧のデータを保存する(div.getKihonnInfo().getDgKihonInfo().getDataSource(),
                     new HihokenshaNo(div.get被保険者番号()), holder);
-            RealInitialLocker.release(前排他キー);
+            if (!RString.isNullOrEmpty(div.get被保険者番号())) {
+                LockingKey 前排他キー = new LockingKey(排他キー_前.concat(div.get被保険者番号()));
+                RealInitialLocker.release(前排他キー);
+            }
             onLoad(div);
         }
         return ResponseData.of(div).respond();
