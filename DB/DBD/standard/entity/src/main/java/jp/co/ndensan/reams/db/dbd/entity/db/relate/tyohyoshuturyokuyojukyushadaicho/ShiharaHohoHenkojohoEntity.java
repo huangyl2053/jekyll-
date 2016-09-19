@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushada
 import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoShuryoKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.shiharaihohohenko.ShiharaiHenkoTorokuKubun;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -27,7 +28,7 @@ public class ShiharaHohoHenkojohoEntity {
     private FlexibleDate 終了日;
     private ShiharaiHenkoShuryoKubun 終了事由;
     private RString 差止状況;
-    private FlexibleDate 提供年月;
+    private FlexibleYearMonth 提供年月;
     private RString 整理番号;
     private RString 控除;
 }
