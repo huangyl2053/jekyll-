@@ -273,7 +273,7 @@ public class SouhuFilesakuseiProcess extends BatchProcessBase<DbT3001JukyushaIdo
         if (null == shoKisaiHokenshaNo) {
             return RString.EMPTY;
         }
-        return new RString(shoKisaiHokenshaNo.toString());
+        return shoKisaiHokenshaNo.value();
     }
 
     private SouhuFilesakuseiEntity getEnd(SouhuFilesakuseiEntity record3Entity) {
