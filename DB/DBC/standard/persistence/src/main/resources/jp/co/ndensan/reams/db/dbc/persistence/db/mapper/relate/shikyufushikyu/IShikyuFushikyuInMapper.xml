@@ -37,7 +37,7 @@
              WHERE "DbT3070KogakuGassanJikoFutanGaku"."hihokenshaNo" = "DbT3074KogakuGassanShikyuFushikyuKettei"."hihokenshaNo" 
              AND "DbT3070KogakuGassanJikoFutanGaku"."taishoNendo" = "DbT3074KogakuGassanShikyuFushikyuKettei"."taishoNendo"
              AND "DbT3070KogakuGassanJikoFutanGaku"."hokenshaNo" = "DbT3074KogakuGassanShikyuFushikyuKettei"."hokenshaNo"
-             AND "DbT3070KogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo" = "DbT3074KogakuGassanShikyuFushikyuKettei"."shikyuShinseishoSeiriNo"
+             AND "DbT3070KogakuGassanJikoFutanGaku"."shikyuShinseishoSeiriNo" = "DbT3074KogakuGassanShikyuFushikyuKettei"."shikyuSeiriNo"
              AND "DbT3070KogakuGassanJikoFutanGaku"."rirekiNo" = "DbT3074KogakuGassanShikyuFushikyuKettei"."rirekiNo"
              AND "DbT3070KogakuGassanJikoFutanGaku"."koki_KokuhoShoriKubun" = #{処理区分}
              )
