@@ -88,7 +88,6 @@ public class ShokanShikyuKetteiTsuchishoHakkou {
         List<JukyushaDaicho> 受給者台帳List = finder.get受給者台帳(被保険者番号);
         List<SogoJigyoTaishosha> 総合事業対象者List = finder.get総合事業対象者(被保険者番号);
         List<ShokanHanteiKekka> 償還払支給判定結果 = finder.select償還払支給判定結果(被保険者番号);
-        div.getShokanShikyuKetteiTsuchishoHakkouPrint().getCcdBunshoNO().initialize(ReportIdDBC.DBC100002_2.getReportId());
         getHandler(div).onLoad(shikibetsuCode, 被保険者番号, 償還払支給判定結果List, 受給者台帳List, 総合事業対象者List, 償還払支給判定結果);
         return ResponseData.of(div).setState(DBC1010011StateName.支給決定通知書発行);
     }
@@ -229,6 +228,8 @@ public class ShokanShikyuKetteiTsuchishoHakkou {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         div.getCcdKanryoMessage().setMessage(new RString("償還払支給決定通知書の発行が完了しました。"),
                 被保険者番号.value(), div.getShokanShikyuKetteiTsuchishoHakkouKihon().get氏名漢字(), true);
+        div.getDdlSeiriNO().setVisible(false);
+        div.getDdlServiceTeikyoYM().setVisible(false);
         return ResponseData.of(div).setState(DBC1010011StateName.完了メッセージ);
     }
 
