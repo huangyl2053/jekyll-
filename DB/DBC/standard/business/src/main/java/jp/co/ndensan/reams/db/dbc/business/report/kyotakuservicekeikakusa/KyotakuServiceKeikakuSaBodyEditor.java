@@ -43,25 +43,52 @@ public class KyotakuServiceKeikakuSaBodyEditor implements IKyotakuServiceKeikaku
                 source.listList2_3 = 宛名.get住所().get住所();
                 source.listList3_2 = 宛名.get行政区画().getGyoseiku().get名称();
             }
-
-            source.listList1_1 = 帳票情報.get被保険者番号().getColumnValue();
-            source.listList2_1 = 帳票情報.get住民コード().getColumnValue();
-            source.listList1_5 = new RString(帳票情報.get資格取得日().toString());
-            source.listList2_4 = new RString(帳票情報.get資格喪失日().toString());
+            if (帳票情報.get被保険者番号() != null) {
+                source.listList1_1 = 帳票情報.get被保険者番号().getColumnValue();
+            }
+            if (帳票情報.get住民コード() != null) {
+                source.listList2_1 = 帳票情報.get住民コード().getColumnValue();
+            }
+            if (帳票情報.get資格取得日() != null) {
+                source.listList1_5 = new RString(帳票情報.get資格取得日().toString());
+            }
+            if (帳票情報.get資格喪失日() != null) {
+                source.listList2_4 = new RString(帳票情報.get資格喪失日().toString());
+            }
             source.listList3_3 = 帳票情報.get喪失事由();
-            source.listList1_6 = new RString(帳票情報.get受給申請日().toString());
+            if (帳票情報.get受給申請日() != null) {
+                source.listList1_6 = new RString(帳票情報.get受給申請日().toString());
+            }
             source.listList1_7 = 帳票情報.get申請事由();
             source.listList1_8 = 帳票情報.get要介護度();
-            source.listList2_5 = new RString(帳票情報.get認定有効開始日().toString());
-            source.listList2_6 = new RString(帳票情報.get認定有効終了日().toString());
-            source.listList2_7 = new RString(帳票情報.get認定日().toString());
+            if (帳票情報.get認定有効開始日() != null) {
+                source.listList2_5 = new RString(帳票情報.get認定有効開始日().toString());
+            }
+            if (帳票情報.get認定有効終了日() != null) {
+                source.listList2_6 = new RString(帳票情報.get認定有効終了日().toString());
+            }
+            if (帳票情報.get認定日().toString() != null) {
+                source.listList2_7 = new RString(帳票情報.get認定日().toString());
+            }
             source.listList3_4 = 帳票情報.get現在の申請状況();
-            source.listList1_9 = new RString(帳票情報.get計画届出日().toString());
-            source.listList1_10 = new RString(帳票情報.get計画適用開始日().toString());
-            source.listList1_11 = new RString(帳票情報.get計画適用終了日().toString());
-            source.listList2_8 = 帳票情報.get事業者番号().getColumnValue();
-            source.listList2_9 = 帳票情報.get電話番号().getColumnValue();
-            source.listList2_10 = new RString(帳票情報.get変更年月日().toString());
+            if (帳票情報.get計画届出日() != null) {
+                source.listList1_9 = new RString(帳票情報.get計画届出日().toString());
+            }
+            if (帳票情報.get計画適用開始日() != null) {
+                source.listList1_10 = new RString(帳票情報.get計画適用開始日().toString());
+            }
+            if (帳票情報.get計画適用終了日() != null) {
+                source.listList1_11 = new RString(帳票情報.get計画適用終了日().toString());
+            }
+            if (帳票情報.get事業者番号() != null) {
+                source.listList2_8 = 帳票情報.get事業者番号().getColumnValue();
+            }
+            if (帳票情報.get電話番号() != null) {
+                source.listList2_9 = 帳票情報.get電話番号().getColumnValue();
+            }
+            if (帳票情報.get変更年月日() != null) {
+                source.listList2_10 = new RString(帳票情報.get変更年月日().toString());
+            }
             source.listList3_5 = 帳票情報.get事業者名称();
             source.listList1_12 = 帳票情報.get備考1();
             source.listList3_6 = 帳票情報.get備考2();
