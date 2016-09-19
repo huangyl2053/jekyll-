@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.definition.batchprm.shinseijouhouinnsatu;
+package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE011001;
 
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shinseijouhouinnsatu.ShinseiJouhouInsatuProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -17,7 +17,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
 @Setter
-public class ShinseiJouhouInsatuBatchParameter extends BatchParameterBase {
+public class DBE011001_ShinseiInfoPrintParameter extends BatchParameterBase {
 
     private static final long serialVersionUID = -3010965675691712156L;
     private static final String SHINSEI_MONITORFLAG = "shinseimonitorflag";
@@ -49,7 +49,7 @@ public class ShinseiJouhouInsatuBatchParameter extends BatchParameterBase {
     /**
      * コンストラクタです。
      */
-    public ShinseiJouhouInsatuBatchParameter() {
+    public DBE011001_ShinseiInfoPrintParameter() {
 
     }
 
@@ -64,7 +64,7 @@ public class ShinseiJouhouInsatuBatchParameter extends BatchParameterBase {
      * @param shinnseikaFrom 申請日From
      * @param shinnseikaTo 申請日To
      */
-    public ShinseiJouhouInsatuBatchParameter(
+    public DBE011001_ShinseiInfoPrintParameter(
             boolean shinseimonitorflag,
             boolean yokaigoyoshienseiichiranflag,
             RString sakuseijyouken,

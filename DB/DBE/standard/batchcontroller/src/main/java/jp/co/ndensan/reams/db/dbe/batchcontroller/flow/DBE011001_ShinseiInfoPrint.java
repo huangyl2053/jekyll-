@@ -1,8 +1,8 @@
-package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.shinseijouhouinnsatu;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinseijouhouinnsatu.ShinseiJouhouInsatuProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE011001.ShinseiJouhouInsatuProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.yokaigoyoshienchiran.YokaigoyoShienchiranProcess;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.shinseijouhouinnsatu.ShinseiJouhouInsatuBatchParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE011001.DBE011001_ShinseiInfoPrintParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBE-1390-020 suguangjun
  */
-public class ShinseiJouhouInsatuFlow extends BatchFlowBase<ShinseiJouhouInsatuBatchParameter> {
+public class DBE011001_ShinseiInfoPrint extends BatchFlowBase<DBE011001_ShinseiInfoPrintParameter> {
 
     private static final String SHINSEIJOUHOUINSATU_PROCESS = "ShinseiJouhouInsatuProcess";
     private static final String YOKAIGOYOSHIENCHIRAN_PROCESS = "YokaigoyoShienchiranProcess";
