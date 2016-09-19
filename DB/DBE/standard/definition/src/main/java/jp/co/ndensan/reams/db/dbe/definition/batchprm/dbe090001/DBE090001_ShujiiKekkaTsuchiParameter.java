@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe090001;
+package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE090001;
 
 import jp.co.ndensan.reams.db.dbe.definition.processprm.dbe090001.YouKaiGoNinTeiKekTesuChiProcessParemeter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -20,7 +20,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
 @Setter
-public class YouKaiGoNinTeiKekTesuChiFlowParameter extends BatchParameterBase {
+public class DBE090001_ShujiiKekkaTsuchiParameter extends BatchParameterBase {
 
     private static final String NIJIHANTEIYMDFROM = "nijiHanteiYMDFrom";
     private static final String NIJIHANTEIYMDTO = "nijiHanteiYMDTo";
