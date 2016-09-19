@@ -25,6 +25,7 @@ public class HanyoListKogakuKaigoBatchParameter extends BatchParameterBase {
 
     private static final long serialVersionUID = 1L;
 
+    private static final String KEY_MODO = "modo";
     private static final String KEY_KOUSEI_SHICHOSON_CODE = "kouseiShichosonCode";
     private static final String KEY_SERVICE_YM_FROM = "serviceYmFrom";
     private static final String KEY_SERVICE_YM_TO = "serviceYmTo";
@@ -50,12 +51,15 @@ public class HanyoListKogakuKaigoBatchParameter extends BatchParameterBase {
     private static final String KEY_KETEIJOHO_UKETORIYM_FROM = "keteijohoUketoriymFrom";
     private static final String KEY_KETEIJOHO_UKETORIYM_TO = "keteijohoUketoriymTo";
     private static final String KEY_SHUTSURYOKUJU = "shutsuryokuju";
+    private static final String KEY_SHINSAYM = "shinsaYM";
     private static final String KEY_SHUTSURYOKU_TOMOKU = "shutsuryokuTomoku";
     private static final String KEY_TOMOKUME_FUKA = "tomokumeFuka";
     private static final String KEY_REBAN_FUKA = "rebanFuka";
     private static final String KEY_HIZUKE_HESHU = "hizukeHeshu";
     private static final String KEY_REAMS_LOGIN_ID = "reamsLoginId";
 
+    @BatchParameter(key = KEY_MODO, name = "モード")
+    private int modo;
     @BatchParameter(key = KEY_KOUSEI_SHICHOSON_CODE, name = "構成市町村コード")
     private LasdecCode kouseiShichosonCode;
     @BatchParameter(key = KEY_SERVICE_YM_FROM, name = "サービス提供年月From")
@@ -104,6 +108,8 @@ public class HanyoListKogakuKaigoBatchParameter extends BatchParameterBase {
     private FlexibleYearMonth keteijohoUketoriymFrom;
     @BatchParameter(key = KEY_KETEIJOHO_UKETORIYM_TO, name = "決定情報受取年月To")
     private FlexibleYearMonth keteijohoUketoriymTo;
+    @BatchParameter(key = KEY_SHINSAYM, name = "審査年月")
+    private FlexibleYearMonth shinsaYM;
     @BatchParameter(key = KEY_SHUTSURYOKUJU, name = "出力順")
     private Long shutsuryokuju;
     @BatchParameter(key = KEY_SHUTSURYOKU_TOMOKU, name = "出力項目")
@@ -124,6 +130,7 @@ public class HanyoListKogakuKaigoBatchParameter extends BatchParameterBase {
      */
     public HanyoListKogakuKaigoProcessParameter toProcessParamter() {
         return new HanyoListKogakuKaigoProcessParameter(
+                modo,
                 kouseiShichosonCode,
                 serviceYmFrom,
                 serviceYmTo,
@@ -148,6 +155,7 @@ public class HanyoListKogakuKaigoBatchParameter extends BatchParameterBase {
                 kokuhoreSofuYMTo,
                 keteijohoUketoriymFrom,
                 keteijohoUketoriymTo,
+                shinsaYM,
                 shutsuryokuju,
                 shutsuryokuTomoku,
                 tomokumeFuka,

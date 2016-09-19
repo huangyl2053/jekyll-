@@ -69,7 +69,11 @@ public class JyukyushaDaichoIdoCheckListProcess extends BatchKeyBreakBase<Jyukyu
     private static final int NUM5 = 5;
     private static final RString 申請書管理番号 = new RString("申請書管理番号");
     private static final RString 帳票出力順の取得 = new RString("帳票出力順の取得");
-    private static final int NO_5 = 5;
+    private static final int NO_0 = 0;
+    private static final int NO_1 = 1;
+    private static final int NO_2 = 2;
+    private static final int NO_3 = 3;
+    private static final int NO_4 = 4;
 
     @BatchWriter
     private BatchReportWriter<JukyushaIdoCheckListReportSource> batchReportWriter;
@@ -144,25 +148,61 @@ public class JyukyushaDaichoIdoCheckListProcess extends BatchKeyBreakBase<Jyukyu
 
     private void set改頁Key(IOutputOrder outputOrder, List<RString> pageBreakKeys) {
         pageBreakKeys.addAll(PAGE_BREAK_KEYS);
+        RString 改頁１ = RString.EMPTY;
+        RString 改頁２ = RString.EMPTY;
+        RString 改頁３ = RString.EMPTY;
+        RString 改頁４ = RString.EMPTY;
+        RString 改頁５ = RString.EMPTY;
         if (outputOrder != null) {
             List<ISetSortItem> list = outputOrder.get設定項目リスト();
             if (list == null) {
                 list = new ArrayList<>();
             }
-            for (int index = 0; index < NO_5; index++) {
-                setList(index, pageBreakKeys, list);
+            if (list.size() > NO_0 && list.get(NO_0).is改頁項目()) {
+                改頁１ = to帳票物理名(list.get(0).get項目ID());
+            }
+            if (list.size() > NO_1 && list.get(NO_1).is改頁項目()) {
+                改頁２ = to帳票物理名(list.get(NO_1).get項目ID());
+            }
+            if (list.size() > NO_2 && list.get(NO_2).is改頁項目()) {
+                改頁３ = to帳票物理名(list.get(NO_2).get項目ID());
+            }
+            if (list.size() > NO_3 && list.get(NO_3).is改頁項目()) {
+                改頁４ = to帳票物理名(list.get(NO_3).get項目ID());
+            }
+            if (list.size() > NO_4 && list.get(NO_4).is改頁項目()) {
+                改頁５ = to帳票物理名(list.get(NO_4).get項目ID());
+            }
+
+            if (!改頁１.isEmpty()) {
+                pageBreakKeys.add(改頁１);
+            }
+            if (!改頁２.isEmpty()) {
+                pageBreakKeys.add(改頁２);
+            }
+            if (!改頁３.isEmpty()) {
+                pageBreakKeys.add(改頁３);
+            }
+            if (!改頁４.isEmpty()) {
+                pageBreakKeys.add(改頁４);
+            }
+            if (!改頁５.isEmpty()) {
+                pageBreakKeys.add(改頁５);
             }
         }
     }
 
-    private void setList(int index, List<RString> pageBreakKeys, List<ISetSortItem> list) {
+    private RString to帳票物理名(RString 項目ID) {
 
-        if (list.size() > index && list.get(index).is改頁項目()) {
-            if (!list.get(index).get項目名().isEmpty()) {
-                pageBreakKeys.add(list.get(index).get項目名());
-            }
+        RString 帳票物理名 = RString.EMPTY;
+        if (DBD200037_JukyushaIdoCheckListEnum.行政区コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("listLower_2");
+        } else if (DBD200037_JukyushaIdoCheckListEnum.識別コード.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("listUpper_2");
+        } else if (DBD200037_JukyushaIdoCheckListEnum.生年月日.get項目ID().equals(項目ID)) {
+            帳票物理名 = new RString("listUpper_5");
         }
-
+        return 帳票物理名;
     }
 
 }
