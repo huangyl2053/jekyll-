@@ -1,15 +1,15 @@
-package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.tokuchoheijunka6tsuchishoikatsuhako;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.FukaJohoShutokuIkatsuHakoProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.FukaJohoShutokuProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.FukaZennendoTempTblCreateProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.HihokenshaKubunTo4gatsuKaishiProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.HihokenshaKubunTo6gatsuKaishiProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.KeizokuHihokenshaKubunUpdateProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.SystemTimeShutokuProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.TsuchishoHakoA4TypeProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.TsuchishoHakoB5TypeProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.TsuchishoIdoshaTorokuProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012003.FukaJohoShutokuIkatsuHakoProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012003.FukaJohoShutokuProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012003.FukaZennendoTempTblCreateProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012003.HihokenshaKubunTo4gatsuKaishiProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012003.HihokenshaKubunTo6gatsuKaishiProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012003.KeizokuHihokenshaKubunUpdateProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012003.SystemTimeShutokuProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012003.TsuchishoHakoA4TypeProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012003.TsuchishoHakoB5TypeProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012003.TsuchishoIdoshaTorokuProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012003.DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.OutputChohyoIchiran;
@@ -29,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBB-0820-030 xuyue
  */
-public class TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlow extends BatchFlowBase<DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakkoParameter> {
+public class DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakko extends BatchFlowBase<DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakkoParameter> {
 
     private static final String 基準日時とシステム日時の取得 = "getSystemDate";
     private static final String 計算後情報作成 = "keisangoJohoSakusei";

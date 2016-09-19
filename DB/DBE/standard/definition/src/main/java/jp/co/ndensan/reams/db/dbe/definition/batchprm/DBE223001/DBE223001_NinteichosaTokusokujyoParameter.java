@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.definition.batchprm.ninteichosatokusokujyo;
+package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE223001;
 
 import jp.co.ndensan.reams.db.dbe.definition.core.ninteichosatokusokujohakko.NinteiChosaTokusokujoHakkoTempData;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ninteichosatokusokujyo.NinteiChosaTokusokuTaishoshaIchiranhyoProcessParameter;
@@ -23,7 +23,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
 @Setter
-public class NinteichosaTokusokujyoFlowParameter extends BatchParameterBase {
+public class DBE223001_NinteichosaTokusokujyoParameter extends BatchParameterBase {
 
     private RString temp_保険者コード;
     private RString temp_保険者名称;
