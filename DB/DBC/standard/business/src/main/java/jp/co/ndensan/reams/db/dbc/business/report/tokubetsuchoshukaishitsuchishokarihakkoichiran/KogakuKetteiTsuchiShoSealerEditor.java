@@ -122,26 +122,8 @@ public class KogakuKetteiTsuchiShoSealerEditor implements
             source.hihokenshaNo = 帳票情報.get被保険者番号().value();
         }
 
-        source.ketteiYMD = new RString(帳票情報.get決定年月日().toString());
-        source.shiharaiGaku = new RString(帳票情報.get本人支払額().toString());
-        source.shiharaiYoteiYMD = new RString(帳票情報.get支払予定日().toString());
-        source.taishoYM1 = 帳票情報.get提供年月IDX1().toDateString();
-
-        source.taishoYM2 = 帳票情報.get提供年月IDX2().toDateString();
-        source.taishoYM3 = 帳票情報.get提供年月IDX3().toDateString();
-        source.taishoYM4 = 帳票情報.get提供年月IDX4().toDateString();
-
-        if (審査依頼.equals(帳票情報.get審査方法区分())) {
-            source.shikyuGaku1 = new RString(帳票情報.get支給額IDX1().toString());
-            source.shikyuGaku2 = new RString(帳票情報.get支給額IDX2().toString());
-            source.shikyuGaku3 = new RString(帳票情報.get支給額IDX3().toString());
-            source.shikyuGaku4 = new RString(帳票情報.get支給額IDX4().toString());
-        } else if (審査済み.equals(帳票情報.get審査方法区分())) {
-            source.shikyuGaku1 = new RString(帳票情報.get決定額IDX1().toString());
-            source.shikyuGaku2 = new RString(帳票情報.get決定額IDX2().toString());
-            source.shikyuGaku3 = new RString(帳票情報.get決定額IDX3().toString());
-            source.shikyuGaku4 = new RString(帳票情報.get決定額IDX4().toString());
-        }
+        set日付(source);
+        set金額(source);
 
         source.bankName = 帳票情報.get金融機関上段();
         source.branchBankName = 帳票情報.get金融機関下段();
@@ -173,6 +155,63 @@ public class KogakuKetteiTsuchiShoSealerEditor implements
             source.kouzaNo = 帳票情報.get通帳番号();
         }
         source.kouzaMeigi = 帳票情報.get口座名義人();
+
+    }
+
+    private void set日付(KogakuKetteiTsuchiShoSealerSource source) {
+
+        if (帳票情報.get決定年月日() != null) {
+            source.ketteiYMD = new RString(帳票情報.get決定年月日().toString());
+        }
+        if (帳票情報.get本人支払額() != null) {
+            source.shiharaiGaku = new RString(帳票情報.get本人支払額().toString());
+        }
+        if (帳票情報.get支払予定日() != null) {
+            source.shiharaiYoteiYMD = new RString(帳票情報.get支払予定日().toString());
+        }
+        if (帳票情報.get提供年月IDX1() != null) {
+            source.taishoYM1 = 帳票情報.get提供年月IDX1().toDateString();
+        }
+        if (帳票情報.get提供年月IDX2() != null) {
+            source.taishoYM2 = 帳票情報.get提供年月IDX2().toDateString();
+        }
+        if (帳票情報.get提供年月IDX3() != null) {
+            source.taishoYM3 = 帳票情報.get提供年月IDX3().toDateString();
+        }
+        if (帳票情報.get提供年月IDX4() != null) {
+            source.taishoYM4 = 帳票情報.get提供年月IDX4().toDateString();
+        }
+    }
+
+    private void set金額(KogakuKetteiTsuchiShoSealerSource source) {
+
+        if (審査依頼.equals(帳票情報.get審査方法区分())) {
+            if (帳票情報.get支給額IDX1() != null) {
+                source.shikyuGaku1 = new RString(帳票情報.get支給額IDX1().toString());
+            }
+            if (帳票情報.get支給額IDX2() != null) {
+                source.shikyuGaku2 = new RString(帳票情報.get支給額IDX2().toString());
+            }
+            if (帳票情報.get支給額IDX3() != null) {
+                source.shikyuGaku3 = new RString(帳票情報.get支給額IDX3().toString());
+            }
+            if (帳票情報.get支給額IDX4() != null) {
+                source.shikyuGaku4 = new RString(帳票情報.get支給額IDX4().toString());
+            }
+        } else if (審査済み.equals(帳票情報.get審査方法区分())) {
+            if (帳票情報.get決定額IDX1() != null) {
+                source.shikyuGaku1 = new RString(帳票情報.get決定額IDX1().toString());
+            }
+            if (帳票情報.get決定額IDX2() != null) {
+                source.shikyuGaku2 = new RString(帳票情報.get決定額IDX2().toString());
+            }
+            if (帳票情報.get決定額IDX3() != null) {
+                source.shikyuGaku3 = new RString(帳票情報.get決定額IDX3().toString());
+            }
+            if (帳票情報.get決定額IDX4() != null) {
+                source.shikyuGaku4 = new RString(帳票情報.get決定額IDX4().toString());
+            }
+        }
 
     }
 
