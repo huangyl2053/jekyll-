@@ -28,6 +28,10 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
+import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileDescriptor;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -58,6 +62,8 @@ public class SouhuFilesakuseiProcess extends BatchProcessBase<DbT3001JukyushaIdo
     private static final RString TABLE_処理結果リスト一時TBL = new RString("DbWT1002KokuhorenSakuseiError");
     private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jukyushatotsugoiraiout"
             + ".IJukyushaTotsugoIraiOutMapper.");
+    private static final int 世代管理する = 1;
+    private static final RString 国保連送付外字_変換区分_1 = new RString("1");
     private static int index = 1;
     private RString myBatisSelsectId;
     private RString eucFilePath;
@@ -72,6 +78,7 @@ public class SouhuFilesakuseiProcess extends BatchProcessBase<DbT3001JukyushaIdo
     private RString kubun;
     List<DbT3001JukyushaIdoRenrakuhyoEntity> entityList;
     private final RDate 基準日 = RDate.getNowDate();
+    private Encode 文字コード;
 
     /**
      * 取得データフラグです。
@@ -90,6 +97,14 @@ public class SouhuFilesakuseiProcess extends BatchProcessBase<DbT3001JukyushaIdo
         hasError = new OutputParameter<>();
         hasError.setValue(false);
         entityList = new ArrayList<>();
+
+        RString 国保連送付外字_変換区分 = DbBusinessConfig.get(ConfigNameDBC.国保連送付外字_変換区分, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        if (国保連送付外字_変換区分_1.equals(国保連送付外字_変換区分)) {
+            // TODO QA1736 文字コードがありません。
+            文字コード = Encode.UTF_8withBOM;
+        } else {
+            文字コード = Encode.SJIS;
+        }
 
         kubun = processParameter.getChuushutuKubun();
         if (KUBUN_1.equals(kubun)) {
@@ -126,7 +141,7 @@ public class SouhuFilesakuseiProcess extends BatchProcessBase<DbT3001JukyushaIdo
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
-                setEncode(Encode.SJIS).
+                setEncode(文字コード).
                 setNewLine(NewLine.CRLF).
                 hasHeader(false).
                 build();
@@ -153,6 +168,8 @@ public class SouhuFilesakuseiProcess extends BatchProcessBase<DbT3001JukyushaIdo
 
             record3Entity = getEnd(record3Entity);
             getEndCSV出力();
+            SharedFileDescriptor des = new ReadOnlySharedFileDescriptor(new FilesystemName(csvFileName));
+            SharedFile.defineSharedFile(des, 世代管理する, SharedFile.GROUP_ALL, null, true, null);
             eucCsvWriter.close();
         } else {
             処理結果リスト一時TBL.insert(getErrorEntity());
