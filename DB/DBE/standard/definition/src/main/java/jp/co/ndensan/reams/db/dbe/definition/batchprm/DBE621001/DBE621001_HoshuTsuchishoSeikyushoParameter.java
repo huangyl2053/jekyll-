@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.definition.batchprm.hoshushiharaijunbi;
+package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE621001;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hoshushiharaijunbi.HoshuShiharaiJunbiProcessParameter;
@@ -17,7 +17,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
 @Setter
-public class HoshuShiharaiJunbiBatchParameter extends BatchParameterBase {
+public class DBE621001_HoshuTsuchishoSeikyushoParameter extends BatchParameterBase {
 
     private static final long serialVersionUID = -3010965675691712156L;
     private static final String JISSEKIDATERANGE_FROM = "jissekidaterangefrom";
@@ -43,7 +43,7 @@ public class HoshuShiharaiJunbiBatchParameter extends BatchParameterBase {
     /**
      * コンストラクタです。
      */
-    public HoshuShiharaiJunbiBatchParameter() {
+    public DBE621001_HoshuTsuchishoSeikyushoParameter() {
 
     }
 
@@ -57,7 +57,7 @@ public class HoshuShiharaiJunbiBatchParameter extends BatchParameterBase {
      * @param chkshujii 主治医意見書作成報酬対象
      * @param chkshinsakai 審査会委員報酬対象
      */
-    public HoshuShiharaiJunbiBatchParameter(
+    public DBE621001_HoshuTsuchishoSeikyushoParameter(
             FlexibleDate jissekidaterangefrom,
             FlexibleDate jissekidaterangeto,
             FlexibleDate furikomishiteiday,
