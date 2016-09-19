@@ -109,22 +109,26 @@ public class JukyushaKyufuJissekiIchiranEditor implements IJukyushaKyufuJissekiI
 
     private RString set作成日時(RDateTime dateTime) {
         RStringBuilder hakkoYMD = new RStringBuilder();
-        hakkoYMD.append(dateTime.getDate().wareki().eraType(EraType.KANJI).
-                firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).
-                fillType(FillType.ZERO).toDateString());
-        hakkoYMD.append(三角);
-        hakkoYMD.append(RString.HALF_SPACE);
-        hakkoYMD.append(dateTime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
-        hakkoYMD.append(三角);
-        hakkoYMD.append("作成");
+        if (dateTime != null) {
+            hakkoYMD.append(dateTime.getDate().wareki().eraType(EraType.KANJI).
+                    firstYear(FirstYear.GAN_NEN).
+                    separator(Separator.JAPANESE).
+                    fillType(FillType.ZERO).toDateString());
+            hakkoYMD.append(三角);
+            hakkoYMD.append(RString.HALF_SPACE);
+            hakkoYMD.append(dateTime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
+            hakkoYMD.append(三角);
+            hakkoYMD.append("作成");
+        }
         return hakkoYMD.toRString();
     }
 
     private RString set年月(FlexibleYearMonth dateTime) {
         RStringBuilder hakkoYMD = new RStringBuilder();
-        hakkoYMD.append(dateTime.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).
-                separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString());
+        if (dateTime != null) {
+            hakkoYMD.append(dateTime.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).
+                    separator(Separator.PERIOD).fillType(FillType.ZERO).toDateString());
+        }
         return hakkoYMD.toRString();
     }
 }
