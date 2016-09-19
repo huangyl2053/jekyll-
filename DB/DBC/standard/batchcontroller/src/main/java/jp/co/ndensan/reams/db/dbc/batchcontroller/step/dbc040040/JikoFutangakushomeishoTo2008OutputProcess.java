@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.kogakugassan.KogakuGassanData;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassan.KogakuGassanMeisai;
 import jp.co.ndensan.reams.db.dbc.business.report.jikofutangakushomeisho.JikoFutangakushomeishoData;
 import jp.co.ndensan.reams.db.dbc.business.report.jikofutangakushomeisho.JikoFutangakushomeishoReport;
+import jp.co.ndensan.reams.db.dbc.business.report.jikofutangakushomeisho.JikoFutangakushomeishoShutsuryokujunEnum;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc040040.JikofutanShomeishoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040040.JikoFutangakushomeishoEntity;
@@ -24,13 +25,18 @@ import jp.co.ndensan.reams.ua.uax.business.report.parts.sofubutsuatesaki.Sofubut
 import jp.co.ndensan.reams.ua.uax.business.report.parts.util.atesaki.ReportAtesakiEditor;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
+import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.toiawasesaki.ToiawasesakiSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.INinshoshaManager;
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -39,6 +45,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -60,14 +67,17 @@ public class JikoFutangakushomeishoTo2008OutputProcess extends BatchKeyBreakBase
     private static final RString 対象年度区分_1 = new RString("1");
     private static final RString 定数_10 = new RString("10");
     private static final RString 定数_自己負担額証明書 = new RString("自己負担額証明書");
+    private static final RString 定数_ORDERBY = new RString("order by");
     private static final int NUM_1 = 1;
     private static final int NUM_3 = 3;
     private static final int NUM_4 = 4;
     private static final int NUM_7 = 7;
     private static final int NUM_12 = 12;
+    private IOutputOrder 出力順;
     private JikofutanShomeishoProcessParameter parameter;
     private IJikofutanShomeishoMapper mapper;
-    private Ninshosha 認証者情報;
+    private Ninshosha 認証者;
+    private NinshoshaSource 認証者情報;
     private Association 地方公共団体情報;
     private List<KogakuGassanMeisai> 明細List;
     private ToiawasesakiSource 問合せ先情報;
@@ -85,9 +95,20 @@ public class JikoFutangakushomeishoTo2008OutputProcess extends BatchKeyBreakBase
         }
         明細List = get明細List();
         INinshoshaManager ninshoshaManager = NinshoshaFinderFactory.createInstance();
-        認証者情報 = ninshoshaManager.get帳票認証者(GyomuCode.DB介護保険, 保険者印_0001);
+        認証者 = ninshoshaManager.get帳票認証者(GyomuCode.DB介護保険, 保険者印_0001);
         地方公共団体情報 = AssociationFinderFactory.createInstance().getAssociation();
         parameter.set対象年度区分(対象年度区分_1);
+        if (parameter.get出力順ID() != 0L) {
+            IChohyoShutsuryokujunFinder iChohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
+            出力順 = iChohyoShutsuryokujunFinder.get出力順(SubGyomuCode.DBC介護給付,
+                    ReportIdDBC.DBC200035.getReportId(), parameter.get出力順ID());
+            if (出力順 != null) {
+                parameter.set出力順(MyBatisOrderByClauseCreator.create(
+                        JikoFutangakushomeishoShutsuryokujunEnum.class, 出力順).replace(定数_ORDERBY, RString.EMPTY));
+            }
+        } else {
+            parameter.set出力順(null);
+        }
     }
 
     @Override
@@ -99,6 +120,8 @@ public class JikoFutangakushomeishoTo2008OutputProcess extends BatchKeyBreakBase
     protected void createWriter() {
         batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100050.getReportId().value()).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
+        認証者情報 = NinshoshaSourceBuilderFactory.createInstance(認証者, 地方公共団体情報,
+                reportSourceWriter.getImageFolderPath(), RDate.getNowDate()).buildSource();
     }
 
     @Override
@@ -112,8 +135,7 @@ public class JikoFutangakushomeishoTo2008OutputProcess extends BatchKeyBreakBase
             JikoFutangakushomeishoData data = new JikoFutangakushomeishoData();
             data.set問合せ先情報(問合せ先情報);
             data.set宛先情報(compSofubutsuAtesakiソース);
-            data.set認証者情報(NinshoshaSourceBuilderFactory.createInstance(認証者情報, 地方公共団体情報,
-                    reportSourceWriter.getImageFolderPath(), RDate.getNowDate()).buildSource());
+            data.set認証者情報(認証者情報);
             data.set文書番号(parameter.get文書情報());
             data.set高額合算データ(高額合算データ);
             data.setタイトル(定数_自己負担額証明書);
@@ -145,8 +167,7 @@ public class JikoFutangakushomeishoTo2008OutputProcess extends BatchKeyBreakBase
             JikoFutangakushomeishoData data = new JikoFutangakushomeishoData();
             data.set問合せ先情報(問合せ先情報);
             data.set宛先情報(compSofubutsuAtesakiソース);
-            data.set認証者情報(NinshoshaSourceBuilderFactory.createInstance(認証者情報, 地方公共団体情報,
-                    reportSourceWriter.getImageFolderPath(), RDate.getNowDate()).buildSource());
+            data.set認証者情報(認証者情報);
             data.set文書番号(parameter.get文書情報());
             data.set高額合算データ(高額合算データ);
             data.setタイトル(定数_自己負担額証明書);

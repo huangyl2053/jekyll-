@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC5110011;
 
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC150020.DBC150020_NenreikaikyuRiyojokyoParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5110011.RiyojokyoTokeihyoDiv;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -21,9 +22,6 @@ public class RiyojokyoTokeihyoHandler {
 
     private static final RString SELECT_KEY0 = new RString("key0");
     private static final RString SELECT_KEY1 = new RString("key1");
-    private static final RString コード_111 = new RString("111");
-    private static final RString コード_120 = new RString("120");
-    private static final RString コード_112 = new RString("112");
     private static final int 桁_0 = 0;
     private static final int 桁_6 = 6;
     private final RiyojokyoTokeihyoDiv div;
@@ -73,12 +71,12 @@ public class RiyojokyoTokeihyoHandler {
             batchParamter.setNenreiSansyutuKijyubi(new FlexibleDate(div.getTasyoNengetu().getValue().toString()));
         }
 
-        if (コード_120.equals(div.getChikushichosonSelect().get導入形態コード())) {
+        if (DonyuKeitaiCode.事務単一.equals(div.getChikushichosonSelect().get導入形態コード())) {
             batchParamter.setSentakuTaisyoKubun(div.getChikushichosonSelect().get選択対象());
             batchParamter.setSentakuTaisyoList(div.getChikushichosonSelect().get選択結果());
         }
-        if (コード_111.equals(div.getChikushichosonSelect().get導入形態コード())
-                || コード_112.equals(div.getChikushichosonSelect().get導入形態コード())) {
+        if (DonyuKeitaiCode.事務広域.equals(div.getChikushichosonSelect().get導入形態コード())
+                || DonyuKeitaiCode.事務構成市町村.equals(div.getChikushichosonSelect().get導入形態コード())) {
             batchParamter.setShichosonCode(new Code(div.getChikushichosonSelect().get市町村コード()));
             batchParamter.setShichosonMeisho(div.getChikushichosonSelect().get市町村名称());
             batchParamter.setKyoShichosonCode(new Code(div.getChikushichosonSelect().get旧市町村コード()));

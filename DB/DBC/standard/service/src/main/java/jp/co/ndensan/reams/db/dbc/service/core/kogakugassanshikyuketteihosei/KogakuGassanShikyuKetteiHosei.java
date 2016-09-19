@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.JigyoKogakuGassanShikyuFus
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanKyufuJisseki;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShikyuFushikyuKettei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShikyuGakuKeisanKekka;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.SogoJigyoTaishosha;
+import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.AuthorityItemResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.HihokenshaDaichoResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.KogakuGassanShikyuKetteiHoseiResult;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.KoshinShoriResult;
@@ -24,18 +26,25 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3074KogakuGassanShikyuFushi
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3075KogakuGassanKyufuJissekiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3174JigyoKogakuGassanShikyuFushikyuKetteiEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3074KogakuGassanShikyuFushikyuKetteiDac;
+import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3105SogoJigyoTaishoshaDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3174JigyoKogakuGassanShikyuFushikyuKetteiDac;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassanshikyuketteihosei.IKogakuGassanShikyuKetteiHoseiMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3105SogoJigyoTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbV1001HihokenshaDaichoAliveDac;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaicho;
+import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.ShichosonShikibetsuIDniYoruShichosonJoho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT4001JukyushaDaichoDac;
+import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.auth.valueobject.AuthorityItem;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -46,6 +55,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -58,6 +68,7 @@ public class KogakuGassanShikyuKetteiHosei {
     private final MapperProvider mapperProvider;
     private final DbV1001HihokenshaDaichoAliveDac 被保険者台帳管理dac;
     private final DbT4001JukyushaDaichoDac 受給者台帳dac;
+    private final DbT3105SogoJigyoTaishoshaDac 総合事業対象者dac;
     private final DbT3074KogakuGassanShikyuFushikyuKetteiDac 高額合算支給不支給決定dac;
     private final DbT3174JigyoKogakuGassanShikyuFushikyuKetteiDac 事業高額合算支給不支給決定dac;
     private static final Decimal ZERO = new Decimal(0);
@@ -97,6 +108,7 @@ public class KogakuGassanShikyuKetteiHosei {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.被保険者台帳管理dac = InstanceProvider.create(DbV1001HihokenshaDaichoAliveDac.class);
         this.受給者台帳dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
+        this.総合事業対象者dac = InstanceProvider.create(DbT3105SogoJigyoTaishoshaDac.class);
         this.高額合算支給不支給決定dac = InstanceProvider.create(DbT3074KogakuGassanShikyuFushikyuKetteiDac.class);
         this.事業高額合算支給不支給決定dac = InstanceProvider.create(DbT3174JigyoKogakuGassanShikyuFushikyuKetteiDac.class);
     }
@@ -282,18 +294,6 @@ public class KogakuGassanShikyuKetteiHosei {
         return true;
     }
 
-    private void get更新高額合算支給不支給決定(
-            KogakuGassanShikyuFushikyuKettei 高額合算Entity,
-            RString 処理モード) {
-        if (高額合算Entity != null && (ONE.equals(処理モード) || TWO.equals(処理モード))
-                && !EntityDataState.Unchanged.equals(高額合算Entity.toEntity().getState())) {
-            高額合算支給不支給決定dac.save(高額合算Entity.toEntity());
-        } else if (高額合算Entity != null && THREE.equals(処理モード)
-                && EntityDataState.Deleted.equals(高額合算Entity.toEntity().getState())) {
-            高額合算支給不支給決定dac.delete(高額合算Entity.toEntity());
-        }
-    }
-
     /**
      * 画面のデータをＤＢに追加する。　（事業高額合算支給不支給決定TBL）
      *
@@ -312,6 +312,83 @@ public class KogakuGassanShikyuKetteiHosei {
             事業高額合算支給不支給決定dac.delete(画面DIV.toEntity());
         }
         return true;
+    }
+
+    /**
+     * 受給者台帳データ取得です。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return JukyushaDaicho
+     */
+    public List<JukyushaDaicho> get受給者台帳データ(HihokenshaNo 被保険者番号) {
+        List<JukyushaDaicho> 受給者台帳list = new ArrayList<>();
+        List<DbT4001JukyushaDaichoEntity> 受給者台帳データ = 受給者台帳dac.get受給者台帳データ(被保険者番号);
+        if (受給者台帳データ == null || 受給者台帳データ.isEmpty()) {
+            return 受給者台帳list;
+        }
+        for (DbT4001JukyushaDaichoEntity entity : 受給者台帳データ) {
+            受給者台帳list.add(new JukyushaDaicho(entity));
+        }
+        return 受給者台帳list;
+    }
+
+    /**
+     * 受給者台帳データ取得です。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return JukyushaDaicho
+     */
+    public List<SogoJigyoTaishosha> get総合事業対象者データ(HihokenshaNo 被保険者番号) {
+        List<SogoJigyoTaishosha> 総合事業対象者list = new ArrayList<>();
+        List<DbT3105SogoJigyoTaishoshaEntity> 受給者台帳データ = 総合事業対象者dac.get総合事業対象者(被保険者番号);
+        if (受給者台帳データ == null || 受給者台帳データ.isEmpty()) {
+            return 総合事業対象者list;
+        }
+        for (DbT3105SogoJigyoTaishoshaEntity entity : 受給者台帳データ) {
+            総合事業対象者list.add(new SogoJigyoTaishosha(entity));
+        }
+        return 総合事業対象者list;
+    }
+
+    /**
+     * 市町村セキュリティ情報を取得し単一市町村と広域市町村の判断をするです。
+     *
+     * @param reamsLoginId RString
+     * @param 保険者構成 RString
+     * @return AuthorityItemResult
+     */
+    public AuthorityItemResult get市町村セキュリティ情報(RString reamsLoginId, RString 保険者構成) {
+        AuthorityItemResult result = new AuthorityItemResult();
+        if (TWO.equals(保険者構成)) {
+            List<AuthorityItem> 市町村識別list = ShichosonSecurityJoho.getShichosonShikibetsuId(reamsLoginId);
+            SearchResult<ShichosonShikibetsuIDniYoruShichosonJoho> 市町村情報取得 = KoikiShichosonJohoFinder.
+                    createInstance().loginUserShichosonJoho(市町村識別list.get(0).getItemId());
+            if (市町村情報取得.records() != null && !市町村情報取得.records().isEmpty()) {
+                result.setWk保険者番号(市町村情報取得.records().get(0).get証記載保険者番号());
+            }
+            result.setWk構成市町村情報(市町村情報取得.records());
+        } else if (ONE.equals(保険者構成)) {
+            List<AuthorityItem> 市町村識別list = ShichosonSecurityJoho.getShichosonShikibetsuId(reamsLoginId);
+            SearchResult<ShichosonShikibetsuIDniYoruShichosonJoho> 市町村情報取得 = KoikiShichosonJohoFinder.
+                    createInstance().loginUserShichosonJoho(市町村識別list.get(0).getItemId());
+            if (市町村情報取得.records() != null && !市町村情報取得.records().isEmpty()) {
+                result.setWk保険者番号(市町村情報取得.records().get(0).get証記載保険者番号());
+            }
+            result.setWk構成市町村情報(市町村情報取得.records());
+        }
+        return result;
+    }
+
+    private void get更新高額合算支給不支給決定(
+            KogakuGassanShikyuFushikyuKettei 高額合算Entity,
+            RString 処理モード) {
+        if (高額合算Entity != null && (ONE.equals(処理モード) || TWO.equals(処理モード))
+                && !EntityDataState.Unchanged.equals(高額合算Entity.toEntity().getState())) {
+            高額合算支給不支給決定dac.save(高額合算Entity.toEntity());
+        } else if (高額合算Entity != null && THREE.equals(処理モード)
+                && EntityDataState.Deleted.equals(高額合算Entity.toEntity().getState())) {
+            高額合算支給不支給決定dac.delete(高額合算Entity.toEntity());
+        }
     }
 
     private void get給付実績基本情報のデータが存在しない場合(

@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb314001.GemmenProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB314001.DBB314001_GemmenParameter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.fukajohotoroku.FukaJohoTorokuBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB004001.DBB004001_FukaJohoTorokuParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -50,6 +50,6 @@ public class DBB314001_Gemmen extends BatchFlowBase<DBB314001_GemmenParameter> {
     @Step(賦課の情報登録フロー)
     protected IBatchFlowCommand choteiToroku() {
         return otherBatchFlow(賦課の情報登録フローBATCHID, SubGyomuCode.DBB介護賦課,
-                new FukaJohoTorokuBatchParameter(true)).define();
+                new DBB004001_FukaJohoTorokuParameter(true)).define();
     }
 }

@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.core.hanyolistkokuhorenjukyusha;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kyodoshoriyojukyushajoho.HizukeChushutsuKubun;
@@ -754,14 +755,12 @@ public class HanyoListKokuhorenJukyushaResult {
         if (RString.isNullOrEmpty(みなし更新認定コード)) {
             return RString.EMPTY;
         }
-        List<RString> minashiKoshinNintei = new ArrayList<>();
-        minashiKoshinNintei.add(通常認定);
-        minashiKoshinNintei.add(旧措置入所者);
-        minashiKoshinNintei.add(やむを得ない理由);
-        for (RString みなし : minashiKoshinNintei) {
-            if (みなし.equals(みなし更新認定コード)) {
-                return みなし;
-            }
+        Map<RString, RString> minashikoshin = new HashMap<>();
+        minashikoshin.put(通常認定, new RString("通常認定"));
+        minashikoshin.put(旧措置入所者, new RString("旧措置入所者"));
+        minashikoshin.put(やむを得ない理由, new RString("やむを得ない理由"));
+        if (minashikoshin.containsKey(みなし更新認定コード)) {
+            return minashikoshin.get(みなし更新認定コード);
         }
         return RString.EMPTY;
     }

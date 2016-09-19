@@ -46,7 +46,26 @@ public class GassanShikyugakuKeisankekkaSofuIchiranPageBreak extends PageBreaker
         } else if (this.breakKeysList.contains(GassanShikyugakuKeisankekkaSofuIchiranOutputOrder.対象年度.get項目ID())
                 && !currentSource.getSource().listUpper_4.equals(nextSource.getSource().listUpper_4)) {
             return true;
+        } else if (this.breakKeysList.contains(GassanShikyugakuKeisankekkaSofuIchiranOutputOrder.郵便番号.get項目ID())
+                && !currentSource.getSource().yubinNo.equals(nextSource.getSource().yubinNo)) {
+            return true;
+        } else if (this.breakKeysList.contains(GassanShikyugakuKeisankekkaSofuIchiranOutputOrder.町域コード.get項目ID())
+                && !currentSource.getSource().choikiCode.equals(nextSource.getSource().choikiCode)) {
+            return true;
+        } else if (this.breakKeysList.contains(GassanShikyugakuKeisankekkaSofuIchiranOutputOrder.行政区コード.get項目ID())
+                && !currentSource.getSource().gyoseikuCode.equals(nextSource.getSource().gyoseikuCode)) {
+            return true;
+        } else if (this.breakKeysList.contains(GassanShikyugakuKeisankekkaSofuIchiranOutputOrder.氏名５０音カナ.get項目ID())
+                && !currentSource.getSource().shimei50onKana.equals(nextSource.getSource().shimei50onKana)) {
+            return true;
+        } else if (this.breakKeysList.contains(GassanShikyugakuKeisankekkaSofuIchiranOutputOrder.市町村コード.get項目ID())
+                && !currentSource.getSource().shichosonCode.equals(nextSource.getSource().shichosonCode)) {
+            return true;
+        } else if (this.breakKeysList.contains(GassanShikyugakuKeisankekkaSofuIchiranOutputOrder.証記載保険者番号.get項目ID())
+                && !currentSource.getSource().shoKisaiHokenshaNo.equals(nextSource.getSource().shoKisaiHokenshaNo)) {
+            return true;
         }
+
         return false;
     }
 }

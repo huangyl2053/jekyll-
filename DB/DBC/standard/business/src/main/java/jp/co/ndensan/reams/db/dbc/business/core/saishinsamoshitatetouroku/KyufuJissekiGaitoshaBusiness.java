@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.saishinsamoshitatetouroku;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsamoshitatetouroku.SaishinsaMoshitateTourokuRelateEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -13,14 +14,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-2230-030 chenxiangyu
  */
-public class KyufuJissekiGaitoshaBusiness {
+public class KyufuJissekiGaitoshaBusiness implements Serializable {
 
     private final SaishinsaMoshitateTourokuRelateEntity entity;
 
     /**
      * コンストラクタです。
      *
-     * @param entity 護給付費再審査申立書作成のRelateEntityです
+     * @param entity 護給付費再審査申立書作成のRelateEntity
      */
     public KyufuJissekiGaitoshaBusiness(SaishinsaMoshitateTourokuRelateEntity entity) {
         this.entity = entity;
@@ -1014,5 +1015,14 @@ public class KyufuJissekiGaitoshaBusiness {
      */
     public RString get保険者保有給付実績情報削除済フラグ() {
         return entity.get保険者保有給付実績情報削除済フラグ();
+    }
+
+    /**
+     * 識別コードを取得します。
+     *
+     * @return 識別コード
+     */
+    public RString get識別コード() {
+        return entity.get識別コード();
     }
 }

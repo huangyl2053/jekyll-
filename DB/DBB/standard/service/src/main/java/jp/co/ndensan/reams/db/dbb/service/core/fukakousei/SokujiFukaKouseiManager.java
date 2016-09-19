@@ -123,8 +123,7 @@ public class SokujiFukaKouseiManager {
         if (!介護賦課.hasChanged()) {
             return false;
         }
-        介護賦課 = 介護賦課.modifiedModel();
-        save介護期別リスト(shunoKamokuManager, 収納Manager, 介護賦課, 介護賦課.getKibetsuList());
+        save介護期別リスト(shunoKamokuManager, 収納Manager, 介護賦課.modifiedModel(), 介護賦課.getKibetsuList());
         return 1 == 介護賦課Dac.save(介護賦課.toEntity());
     }
 
@@ -145,7 +144,6 @@ public class SokujiFukaKouseiManager {
         if (!介護期別.hasChanged()) {
             return false;
         }
-        介護期別 = 介護期別.modifiedModel();
         long 調定ID = ChoteiSaiban.getNumbering調定ID();
         long 収納ID = ShunoSaiban.getNumbering収納ID();
         ChoteiKyotsuIdentifier identifier = new ChoteiKyotsuIdentifier(介護期別.get調定ID().longValue());
@@ -153,15 +151,23 @@ public class SokujiFukaKouseiManager {
         IShunoKamoku 科目 = shunoKamokuManager.get科目(介護期別.get徴収方法().equals(ChoshuHohoKibetsu.普通徴収.getコード())
                 ? ShunoKamokuShubetsu.介護保険料_普通徴収 : ShunoKamokuShubetsu.介護保険料_特別徴収);
         ShunoKanri 収納管理 = get収納管理(収納ID, 介護賦課, 科目, 介護期別.get期());
-        収納Manager.save調定(収納管理, get調定クラス(調定ID, 収納ID, choteiKyotsu));
+        収納Manager.save調定(収納管理, get調定クラス(調定ID, 収納ID, choteiKyotsu, 科目));
         return 1 == 介護期別Dac.save(介護期別.createBuilderForEdit().set調定ID(new Decimal(調定ID)).build().toEntity());
     }
 
-    private Chotei get調定クラス(long 調定ID, long 収納ID, ChoteiKyotsu choteiKyotsu) {
+    private Chotei get調定クラス(long 調定ID, long 収納ID, ChoteiKyotsu choteiKyotsu, IShunoKamoku 科目) {
         ChoteiKyotsuBuilder builder = new Chotei(調定ID, 調定ID).createBuilderForEdit();
         ChoteiJokyo choteiJokyo = new ChoteiJokyo(調定ID).createBuilderForEdit().
-                set処理年度(choteiKyotsu.get処理年度())
-                .set処理番号(0).build();
+                set処理年度(choteiKyotsu.get処理年度()).
+                set処理番号(0).
+                set科目コード(科目.getコード()).
+                set科目枝番コード(科目.get枝番コード()).
+                set料金種別コード(new RyokinShubetsuCodeValue(RString.EMPTY)).
+                set事業区分コード(RString.EMPTY).
+                set収納処理状況(false).
+                set合計件数(0).
+                set合計金額(Decimal.ZERO).
+                build();
         builder.set収納ID(収納ID);
         builder.set会計年度(choteiKyotsu.get会計年度());
         builder.set調定年月日(choteiKyotsu.get調定年月日());

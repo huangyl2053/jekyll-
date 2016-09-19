@@ -82,5 +82,8 @@ public class DbWTKogakuGassanShikyugakuKeisanKekkaEntity {
     private FlexibleDate sikyugakuKeisanKekkaRenrakuhyoSakuseiYMD;
     private boolean kakuninListFlag;
     private int rirekiNoMax;
+    private RString dbt3072DataKubun;
+    private RString dbt3072SaisoFG;
+    private FlexibleYearMonth dbt3072SofuYM;
 
 }

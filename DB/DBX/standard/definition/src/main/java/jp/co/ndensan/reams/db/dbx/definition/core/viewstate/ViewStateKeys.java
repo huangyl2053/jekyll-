@@ -13,6 +13,14 @@ package jp.co.ndensan.reams.db.dbx.definition.core.viewstate;
 public enum ViewStateKeys {
 
     /**
+     * 受給者給付
+     */
+    受給者給付,
+    /**
+     * 番号
+     */
+    番号,
+    /**
      * 場合
      */
     場合,

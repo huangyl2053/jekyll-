@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbt21004.DankaiProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbt21004.DankaibetsuHihokenshasuReportCSVProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbt21004.DankaibetsuHihokenshasuReportProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbt21004.HihokenshaProcess;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.ShotokuDankaibetsuHihokenshaSuIchiran.ShotokuDankaibetsuHihokenshaSuIchiranBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB021031.DBB021031_DankaibetsuHihokenshasuIchiranhyoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt21004.DankaibetuHihokensyasuIchiranhyoProcessParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.fuka.SetaiShotokuKazeiHanteiBatchParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SetaiinHaakuKanriShikibetsuKubun;
@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBB-1820-040 dingminghao
  */
-public class DBB021031_DankaibetsuHihokenshasuIchiranhyoSakusei extends BatchFlowBase<ShotokuDankaibetsuHihokenshaSuIchiranBatchParameter> {
+public class DBB021031_DankaibetsuHihokenshasuIchiranhyoSakusei extends BatchFlowBase<DBB021031_DankaibetsuHihokenshasuIchiranhyoSakuseiParameter> {
 
     private static final String 被保険者対象抽出 = "getHihokensha";
     private static final String 世帯員把握 = "collectSetaiin";
@@ -36,7 +36,7 @@ public class DBB021031_DankaibetsuHihokenshasuIchiranhyoSakusei extends BatchFlo
     private static final String 帳票の出力 = "getReport";
     private static final String CSVの出力 = "getDankaiCSV";
     private static final RString BATCH_ID = new RString("SetaiShotokuKazeiHanteiFlow");
-    private ShotokuDankaibetsuHihokenshaSuIchiranBatchParameter parameter;
+    private DBB021031_DankaibetsuHihokenshasuIchiranhyoSakuseiParameter parameter;
     private DankaibetuHihokensyasuIchiranhyoProcessParameter processParameter;
     private static final RString コンマ = new RString(",");
     private static final int ZERO = 0;

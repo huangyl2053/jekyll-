@@ -211,12 +211,12 @@ public class JukoKisambiTokushuTorokuHandler {
                 } else if (MinoKannoKubun.未納あり.equals(tainoKiSummary.get未納完納区分())
                         && JikoKubun.時効到来.equals(tainoKiSummary.get時効区分())
                         && new FlexibleDate(tainoKiSummary.get納期限().toDateString()).
-                        compareTo(div.getTxtTainoHanteiKijunDate().getValue().plusYear(INT_10)) > 0) {
+                        compareTo(div.getTxtTainoHanteiKijunDate().getValue().minusYear(INT_10)) > 0) {
                     row.setRowBgColor(DataGridCellBgColor.bgColorRed);
                 } else if (MinoKannoKubun.未納あり.equals(tainoKiSummary.get未納完納区分())
                         && JikoKubun.時効到来.equals(tainoKiSummary.get時効区分())
                         && new FlexibleDate(tainoKiSummary.get納期限().toDateString()).
-                        compareTo(div.getTxtTainoHanteiKijunDate().getValue().plusYear(INT_10)) <= 0) {
+                        compareTo(div.getTxtTainoHanteiKijunDate().getValue().minusYear(INT_10)) <= 0) {
                     row.setRowBgColor(DataGridCellBgColor.bgColorGray);
                 }
                 時効起算日登録List.add(row);

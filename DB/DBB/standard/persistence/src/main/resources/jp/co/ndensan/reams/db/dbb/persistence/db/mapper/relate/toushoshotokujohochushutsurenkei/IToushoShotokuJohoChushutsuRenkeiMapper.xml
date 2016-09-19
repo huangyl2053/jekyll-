@@ -11,34 +11,12 @@
             <include refid="allColumns_DbTShotokuJohoTempTableEntity" />,
             <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT2008ShotokuKanriMapper.allColumns_DbT2008ShotokuKanri" />
         FROM "DbTShotokuJoho"
-        LEFT OUTER JOIN rgdb."DbT2008ShotokuKanri" AS "DbT2008ShotokuKanri"
+        LEFT OUTER JOIN (SELECT A.* FROM rgdb."DbT2008ShotokuKanri" AS A 
+            WHERE NOT (EXISTS (
+            SELECT * FROM rgdb."DbT2008ShotokuKanri" B WHERE A."shotokuNendo" = B."shotokuNendo" AND A."shikibetsuCode" = B."shikibetsuCode" AND A."rirekiNo" <![CDATA[<]]> B."rirekiNo")))
+             AS "DbT2008ShotokuKanri"
             ON "DbT2008ShotokuKanri"."shotokuNendo" = "DbTShotokuJoho"."fukaNendo"
             AND   "DbT2008ShotokuKanri"."shikibetsuCode" = "DbTShotokuJoho"."jyuuminCode"
-        ORDER BY "DbTShotokuJoho"."shichosonCode",
-                "DbTShotokuJoho"."shikibetuId",
-            "DbTShotokuJoho"."timeStep",
-            "DbTShotokuJoho"."saisyuRecordKunbun",
-            "DbTShotokuJoho"."renben",
-            "DbTShotokuJoho"."filler",
-            "DbTShotokuJoho"."fukaNendo",
-            "DbTShotokuJoho"."jyuuminCode",
-            "DbTShotokuJoho"."shotoKunbun",
-            "DbTShotokuJoho"."hiKazeiKunbun",
-            "DbTShotokuJoho"."jyuuminseiKiru",
-            "DbTShotokuJoho"."jyuuminseiIziKiru",
-            "DbTShotokuJoho"."gokeiShotokuGaku",
-            "DbTShotokuJoho"."agiShunyuGaku",
-            "DbTShotokuJoho"."nenkiniShunyuGaku",
-            "DbTShotokuJoho"."nenkiniShotokuGaku",
-            "DbTShotokuJoho"."sonotaSyutoku1",
-            "DbTShotokuJoho"."sonotaSyutoku2",
-            "DbTShotokuJoho"."yobi",
-            "DbTShotokuJoho"."gekihenkanwaKubun",
-            "DbTShotokuJoho"."dataShubetsu",
-            "DbTShotokuJoho"."shotoZei",
-            "DbTShotokuJoho"."updateTimestamp",
-            "DbT2008ShotokuKanri"."rirekiNo" DESC
-        LIMIT 1
     </select>
 
     <select resultOrdered="true" id="get介護所得Temp"
@@ -51,7 +29,7 @@
 
     <select resultOrdered="true" id="get出力対象データ"
             resultMap="ResultMap_ShotokuJohoIchiranKozaEntity"
-            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.shutokujohochushutsurenkei.SpoolShotokuJohoIchiranMybatisParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.processprm.shutokujohoshuchutsurenkei.ShutokuJohoShuchutsuRenkeiProcessParameter" fetchSize="500">
         SELECT
             <include refid="allColumns_KaigoShotoTempTableEntity" />,
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,

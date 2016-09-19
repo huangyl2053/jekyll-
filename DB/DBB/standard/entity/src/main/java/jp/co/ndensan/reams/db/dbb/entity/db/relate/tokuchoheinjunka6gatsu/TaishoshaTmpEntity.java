@@ -153,7 +153,6 @@ public class TaishoshaTmpEntity extends DbTableEntityBase<TaishoshaTmpEntity> im
     @TempTableColumnOrder(58)
     private Decimal choteigaku;
     @TempTableColumnOrder(59)
-//    private int ki;
     private RString choshuHouhou;
     @TempTableColumnOrder(60)
     private RString 備考コード;

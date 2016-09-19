@@ -110,8 +110,8 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
         if (null != this.設定値) {
             source.title = this.設定値;
         }
-        source.hokenshaNo = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
-        source.hokenshaName = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        source.hokenshaNo = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        source.hokenshaName = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         if (null != this.出力順 && (null != this.出力順.get設定項目リスト() && !this.出力順.get設定項目リスト().isEmpty())) {
             List<ISetSortItem> 設定項目リスト = this.出力順.get設定項目リスト();
             if (!設定項目リスト.isEmpty()) {
@@ -269,7 +269,8 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
                 source.listUpper_14 = DecimalFormatter.toコンマ区切りRString(振込明細一時TBL.getFurikomiKingaku(), 0);
             }
             source.listUpper_15 = RString.EMPTY;
-            if (null != 振込明細一時TBL.getZenkaiShiharaiKingaku() && !振込明細一時TBL.getZenkaiShiharaiKingaku().equals(ZERO)) {
+            if (null != 振込明細一時TBL.getZenkaiShiharaiKingaku()
+                    && !new RString(振込明細一時TBL.getZenkaiShiharaiKingaku().toString()).equals(ZERO)) {
                 source.listUpper_16 = 丸;
             }
             get住所(source, 振込明細一時TBL);
@@ -300,7 +301,7 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
             FurikomiDetailTempTableEntity 振込明細一時TBL) {
         if (null != 振込明細一時TBL.getKinyuKikanCode() && null != 振込明細一時TBL.getKinyuKikanShitenCode()) {
             source.listUpper_4 = 振込明細一時TBL.getKinyuKikanCode().value().
-                    concat(半角ハイフン).concat(振込明細一時TBL.getKinyuKikanShitenCode());
+                    concat(半角ハイフン).concat(振込明細一時TBL.getKinyuKikanShitenCode().value());
         }
         if (null != 振込明細一時TBL.getKinyuKikanCode()) {
             source.listUpper_5 = 振込明細一時TBL.getKinyuKikanCode().value();
@@ -315,10 +316,10 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
             source.listLower_2 = 振込明細一時TBL.getKinyuKikanShitenName();
         }
         if (null != 振込明細一時TBL.getKozaMeiginin()) {
-            if (振込明細一時TBL.getKozaMeiginin().length() <= LISTINDEX_24) {
-                source.listLower_2 = 振込明細一時TBL.getKozaMeiginin();
+            if (振込明細一時TBL.getKozaMeiginin().value().length() <= LISTINDEX_24) {
+                source.listLower_2 = 振込明細一時TBL.getKozaMeiginin().value();
             } else {
-                source.listLower_2 = 振込明細一時TBL.getKozaMeiginin().substring(0, LISTINDEX_24);
+                source.listLower_2 = 振込明細一時TBL.getKozaMeiginin().value().substring(0, LISTINDEX_24);
             }
         }
     }

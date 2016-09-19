@@ -40,16 +40,14 @@
             AND ("DbT3068KogakuGassanShinseisho"."jikoFutan_KeisanYM" is not null and "DbT3068KogakuGassanShinseisho"."jikoFutan_KeisanYM" <![CDATA[<>]]> '')
             AND "DbT3068KogakuGassanShinseisho"."isDeleted" = false
             AND "DbT3070KogakuGassanJikoFutanGaku"."isDeleted" = false
-            <if test="対象年度区分!=null and !対象年度区分.isEmpty()">
-                AND "DbT3070KogakuGassanJikoFutanGaku"."dataSakuseiKubun" = #{対象年度区分}
-            </if>    
-            <if test="対象年度区分 == 1">
+            AND "DbT3070KogakuGassanJikoFutanGaku"."dataSakuseiKubun" = #{抽出対象}
+            <if test="抽出対象 == 1">
                 AND #{申請開始年月日} <![CDATA[<=]]> "DbT3068KogakuGassanShinseisho"."shinseiYMD"
                 AND "DbT3068KogakuGassanShinseisho"."shinseiYMD" <![CDATA[<=]]> #{申請終了年月日}
                 AND #{申請開始年月日} <![CDATA[<=]]> "DbT3070KogakuGassanJikoFutanGaku"."shinseiYMD"
                 AND "DbT3070KogakuGassanJikoFutanGaku"."shinseiYMD" <![CDATA[<=]]> #{申請終了年月日}
             </if>
-            <if test="対象年度区分 == 2">
+            <if test="抽出対象 == 2">
                 AND "DbT3070KogakuGassanJikoFutanGaku"."kakunin_UketoriYM" = #{受取年月}
             </if>
         ORDER BY
@@ -63,27 +61,40 @@
         <include refid="selectHihokenshaDaichoJoho" />
     </select>
     <sql id="selectHihokenshaDaichoJoho">
+        WITH master AS (
         SELECT
             <include refid="allColumns_KogakuGassanTemp" />, 
-            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.allColumns_DbT1001HihokenshaDaicho" />,
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.allColumns_DbT1001HihokenshaDaicho" />
         FROM
             (SELECT * FROM 
             (SELECT *,Row_Number() OVER (partition by "hihokenshaNo" ORDER BY "idoYMD" desc ,"edaNo"  DESC) AS "rrkno" 
             FROM rgdb."DbT1001HihokenshaDaicho") "A" 
             WHERE "A"."rrkno"='1')  AS "DbT1001HihokenshaDaicho"
-        INNER JOIN 
-            rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',true,
-            '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-            true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho" 
-        ON
-            "DbT1001HihokenshaDaicho"."shikibetsuCode" =  "ShikibetsuTaisho"."shikibetsuCode"
         INNER JOIN
             "KogakuGassanTemp" AS "KogakuGassanTemp"
         ON 
             "DbT1001HihokenshaDaicho"."hihokenshaNo" = "KogakuGassanTemp"."hihokenshaNo"
         ORDER BY
             "DbT1001HihokenshaDaicho"."hihokenshaNo" ASC
+        )
+        SELECT    
+             master.*,
+             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
+        FROM 
+             master     
+        INNER JOIN 
+            rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',true,
+            '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+            true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
+                (
+                    SELECT
+                        ARRAY_AGG(CAST (master."dbT1001HihokenshaDaicho_shikibetsuCode" AS TEXT))
+                    FROM
+                        master
+                )             
+             ) AS "ShikibetsuTaisho" 
+        ON
+            "master"."dbT1001HihokenshaDaicho_shikibetsuCode" =  "ShikibetsuTaisho"."shikibetsuCode"
     </sql> 
     
     <select resultOrdered="true" id="select高額合算一時"

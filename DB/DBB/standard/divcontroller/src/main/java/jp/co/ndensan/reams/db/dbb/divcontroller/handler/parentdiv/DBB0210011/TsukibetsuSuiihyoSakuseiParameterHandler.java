@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB021011.DBB021011_TsukibetsuSuiihyoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0210011.TsukibetsuSuiihyoSakuseiParameterDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -124,7 +124,7 @@ public class TsukibetsuSuiihyoSakuseiParameterHandler {
      *
      * @return CreateTsukibetsuSuiihyoBatchParameter 月別推移表作成_バッチ用のパラメータ
      */
-    public CreateTsukibetsuSuiihyoBatchParameter batchParameter() {
+    public DBB021011_TsukibetsuSuiihyoSakuseiParameter batchParameter() {
 
         FlexibleYear 調定年度 = new FlexibleYear(div.getDdlChoteiNendo().getSelectedValue());
         RStringBuilder 調定基準日 = new RStringBuilder();
@@ -139,7 +139,7 @@ public class TsukibetsuSuiihyoSakuseiParameterHandler {
             is生年月日 = true;
         }
         // TODO 介護地区・市町村選択共有子Divを呼び出す
-        return new CreateTsukibetsuSuiihyoBatchParameter(調定年度, 調定基準日.toRString(), div.getDdShikakuKijunD().getSelectedKey(), is年齢, nullToEmpty(div.getTxtNenreiSt().getValue()),
+        return new DBB021011_TsukibetsuSuiihyoSakuseiParameter(調定年度, 調定基準日.toRString(), div.getDdShikakuKijunD().getSelectedKey(), is年齢, nullToEmpty(div.getTxtNenreiSt().getValue()),
                 nullToEmpty(div.getTxtNenreiEd().getValue()), nullToEmpty(div.getTxtNenreiKijunYMD().getValue()), is生年月日,
                 nullToEmpt(div.getTxtUmareSt().getValue()), nullToEmpt(div.getTxtUmareEd().getValue()),
                 RString.EMPTY, null, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY);

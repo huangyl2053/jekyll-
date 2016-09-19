@@ -40,7 +40,7 @@ public class JigyoHokokuGeppoHokenkyufuKogakuProcessParamter implements IBatchPr
     private final RString 過去集計分旧市町村区分;
     private final RString バッチID;
     private final RString csvFilePath;
-    private List<RString> 過去集計分市町村コードリスト;
+    private final List<RString> 過去集計分市町村コードリスト;
     private final FileSpoolManager manager;
     private static final RString 区分 = new RString("1");
     private static final RString 区分_2 = new RString("2");
@@ -96,13 +96,15 @@ public class JigyoHokokuGeppoHokenkyufuKogakuProcessParamter implements IBatchPr
      * @return JigyoHokokuGeppoHokenkyufuKogakuMybatisParamter
      */
     public JigyoHokokuGeppoHokenkyufuKogakuMybatisParamter toJigyohokokuCompYoshikiMybitisParamter() {
+        List<RString> 過去集計分市町村コードList = new ArrayList<>();
         if (区分_2.equals(プリントコントロール区分)) {
-            過去集計分市町村コードリスト = new ArrayList<>();
-            過去集計分市町村コードリスト.add(市町村コード);
-        } else {
+            過去集計分市町村コードList.add(市町村コード);
+        }
+        if (区分_3.equals(プリントコントロール区分)) {
             if (過去集計分市町村コードリスト == null || 過去集計分市町村コードリスト.isEmpty()) {
-                過去集計分市町村コードリスト = new ArrayList<>();
-                過去集計分市町村コードリスト.add(市町村コード);
+                過去集計分市町村コードList.add(市町村コード);
+            } else {
+                過去集計分市町村コードList.addAll(過去集計分市町村コードリスト);
             }
         }
         List 集計番号List = new ArrayList<>();
@@ -117,7 +119,7 @@ public class JigyoHokokuGeppoHokenkyufuKogakuProcessParamter implements IBatchPr
         List 表番号List = new ArrayList<>();
         表番号List.add(HyoNo.償還_決定年月_保険給付決定状況.getコード());
         表番号List.add(HyoNo.高額サービス費_保険給付決定状況_旧市町村.getコード());
-        return JigyoHokokuGeppoHokenkyufuKogakuMybatisParamter.createJigyohokokuCompYoshikiDataParam(過去集計分市町村コードリスト,
+        return JigyoHokokuGeppoHokenkyufuKogakuMybatisParamter.createJigyohokokuCompYoshikiDataParam(過去集計分市町村コードList,
                 集計年月, 集計番号List, 表番号List);
     }
 

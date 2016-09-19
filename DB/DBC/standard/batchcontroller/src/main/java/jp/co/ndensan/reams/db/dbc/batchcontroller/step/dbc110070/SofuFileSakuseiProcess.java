@@ -110,7 +110,6 @@ public class SofuFileSakuseiProcess extends BatchKeyBreakBase<KogakuGassanKeisan
     private KogakugassanKeisankekkaRenrakuhyoOutProcessParameter processParameter;
     private SofuFileSakuseiProcessCore processCore;
     private KogakuGassanKeisanKekkaRenrakuJohoRelateEntity 高額合算支給額計算結果;
-    @BatchWriter
     private CsvWriter eucCsvWriter;
     @BatchWriter
     BatchEntityCreatedTempTableWriter dbWT1002TableWriter;

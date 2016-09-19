@@ -138,7 +138,8 @@ public class NinteidetaikkatsukousinKoukiProcess extends BatchProcessBase<Yokaig
     }
 
     private void upDate受給者台帳Detial(YokaigoNinteiInterfaceEntity entity, NinteiTanitsuProcessDataManager manager) {
-        dbt4001tableWriter.update(manager.upDate受給者台帳Detial(entity, 認定日));
+        dbt4001tableWriter.delete(entity.get受給者台帳Entity());
+        dbt4001tableWriter.insert(manager.upDate受給者台帳Detial(entity, 認定日));
     }
 
     private boolean get要介護認定更新比較結果(YokaigoNinteiInterfaceEntity entity, NinteiTanitsuProcessDataManager manager) {

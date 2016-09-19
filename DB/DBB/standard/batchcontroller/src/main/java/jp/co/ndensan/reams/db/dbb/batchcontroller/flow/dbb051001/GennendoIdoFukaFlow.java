@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb051001.SystemTimeUpdat
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb051001.TokuchoIraikinProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb051001.TokuchoKaishishaProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb051001.TsuchishoNoProcess;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.fukajohotoroku.FukaJohoTorokuBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB004001.DBB004001_FukaJohoTorokuParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidogennen.ChohyoResult;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidogennen.CreateHonsanteiIdoBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
@@ -214,7 +214,7 @@ public class GennendoIdoFukaFlow extends BatchFlowBase<CreateHonsanteiIdoBatchPa
     @Step (賦課の情報登録フロー)
     protected IBatchFlowCommand choteiToroku() {
         return otherBatchFlow(賦課の情報登録フローBATCHID, SubGyomuCode.DBB介護賦課,
-                new FukaJohoTorokuBatchParameter(true)).define();
+                new DBB004001_FukaJohoTorokuParameter(true)).define();
     }
 
     /**

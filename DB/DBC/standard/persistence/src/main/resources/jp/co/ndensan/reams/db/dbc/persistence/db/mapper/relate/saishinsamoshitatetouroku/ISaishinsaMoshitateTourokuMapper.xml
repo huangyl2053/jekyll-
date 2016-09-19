@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 概要： 介護給付費再審査申立書作成のマッピング用XMLです。 -->
-<!--@reamsid_L DBC-2230-030 chenxiangyu-->
+<!-- @reamsid_L DBC-2230-030 chenxiangyu -->
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.saishinsamoshitatetouroku.ISaishinsaMoshitateTourokuMapper">
@@ -117,6 +117,7 @@
         <result property="取込年月" column="torikomiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="独自作成区分" column="dokujiSakuseiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="保険者保有給付実績情報削除済フラグ" column="hokenshaHoyuKyufujissekiJohoSakujoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap> 
     <sql id="allColumns_DbT3017KyufujissekiKihon">
         実績基本."insertDantaiCd"
@@ -388,7 +389,7 @@
                       </if>
                       AND substr(介護事業者."yukoKaishiYMD", 1, 6) <![CDATA[<=]]> 実績基本A."serviceTeikyoYM" 
                       AND CASE 
-                        WHEN 介護事業者."yukoShuryoYMD" != NULL 
+                        WHEN 介護事業者."yukoShuryoYMD" IS NOT NULL 
                         THEN substr(介護事業者."yukoShuryoYMD", 1, 6) <![CDATA[>=]]> 実績基本A."serviceTeikyoYM" 
                         END 
                     GROUP BY
@@ -422,6 +423,7 @@
         SELECT
           Temp.*
           , 宛名."meisho" AS 氏名 
+          , 被保険者台帳."shikibetsuCode" AS 識別コード
         FROM
           Temp 
           LEFT JOIN rgdb."DbV1001HihokenshaDaicho" 被保険者台帳 
@@ -458,6 +460,7 @@
         <result property="国保連送付年月" column="kokuhorenSofuYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="国保連再送付有フラグ" column="kokuhirenSaiSofuAriFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="備考" column="biko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="識別コード" column="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap> 
     <sql id="allColumns_DbT3062SaishinsaMoshitate">
         再審査."insertDantaiCd"
@@ -516,12 +519,12 @@
                   <if test="被保険者番号フラグ">
                   AND 再審査A."hiHokenshaNo" = #{被保険者番号}      
                   </if>
-                  <if test="被保険者番号フラグ">
+                  <if test="保険者番号フラグ">
                   AND substr(再審査A."shokisaiHokenshaNo", 1, 5) = substr(#{保険者番号}, 1, 5) 
                   </if>
                   AND substr(介護事業者."yukoKaishiYMD", 1, 6) <![CDATA[<=]]> 再審査A."serviceTeikyoYM" 
                   AND CASE 
-                    WHEN 介護事業者."yukoShuryoYMD" != NULL 
+                    WHEN 介護事業者."yukoShuryoYMD" IS NOT NULL  
                     THEN substr(介護事業者."yukoShuryoYMD", 1, 6) <![CDATA[>=]]> 再審査A."serviceTeikyoYM" 
                     END 
                 GROUP BY
@@ -554,6 +557,7 @@
         SELECT
           Temp.*
           , 宛名."meisho" AS 氏名 
+          , 被保険者台帳."shikibetsuCode" AS 識別コード
         FROM
           Temp 
           LEFT JOIN rgdb."DbV1001HihokenshaDaicho" 被保険者台帳 

@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012001;
 
-import java.util.List;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.fukajohotoroku.FukaJohoTorokuBatchParameter;
+import java.util.ArrayList;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB004001.DBB004001_FukaJohoTorokuParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.OutputChohyoIchiran;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
@@ -43,6 +43,12 @@ public class DBB012001_TokuchoHeinjunka6GatsuParameter extends BatchParameterBas
     private static final String NAME_HAKOKI = "発行日";
     private static final String KEY_BUNSHUBANGO = "bunshubango";
     private static final String NAME_BUNSHUBANGO = "文書番号";
+    private static final String KEY_CHOHYOGROUP = "chohyogroup";
+    private static final String NAME_CHOHYOGROUP = "帳票グループ";
+    private static final String KEY_SHUTSURYOFLAG = "shutsuryoflag";
+    private static final String NAME_SHUTSURYOFLAG = "出力対象指示フラグ";
+    private static final String KEY_IKATSUFLAG = "ikatsuflag";
+    private static final String NAME_IKATSUFLAG = "一括発行フラグ";
 
     @BatchParameter(key = KEY_CHOTEINENDO, name = NAME_CHOTEINENDO)
     private FlexibleYear 調定年度;
@@ -53,13 +59,19 @@ public class DBB012001_TokuchoHeinjunka6GatsuParameter extends BatchParameterBas
     @BatchParameter(key = KEY_GENGAKUHENJUNKAHOHO, name = NAME_GENGAKUHENJUNKAHOHO)
     private RString 減額平準化方法;
     @BatchParameter(key = KEY_SHUTSURYOCHOHYO, name = NAME_SHUTSURYOCHOHYO)
-    private List<OutputChohyoIchiran> 出力帳票entity;
+    private ArrayList<OutputChohyoIchiran> 出力帳票entity;
     @BatchParameter(key = KEY_SHUTSURYOTAISHO, name = NAME_SHUTSURYOTAISHO)
     private RString 出力対象;
     @BatchParameter(key = KEY_HAKOKI, name = NAME_HAKOKI)
     private FlexibleDate 発行日;
     @BatchParameter(key = KEY_BUNSHUBANGO, name = NAME_BUNSHUBANGO)
     private RString 文書番号;
+    @BatchParameter(key = KEY_CHOHYOGROUP, name = NAME_CHOHYOGROUP)
+    private RString 帳票グループ;
+    @BatchParameter(key = KEY_SHUTSURYOFLAG, name = NAME_SHUTSURYOFLAG)
+    private RString 出力対象指示フラグ;
+    @BatchParameter(key = KEY_IKATSUFLAG, name = NAME_IKATSUFLAG)
+    private boolean 一括発行フラグ;
 
     /**
      * processのパラメータを生成します。
@@ -77,7 +89,7 @@ public class DBB012001_TokuchoHeinjunka6GatsuParameter extends BatchParameterBas
      *
      * @return FukaJohoTorokuBatchParameter
      */
-    public FukaJohoTorokuBatchParameter toFukaJohoTorokuBatchParameter() {
-        return new FukaJohoTorokuBatchParameter(true);
+    public DBB004001_FukaJohoTorokuParameter toFukaJohoTorokuBatchParameter() {
+        return new DBB004001_FukaJohoTorokuParameter(true);
     }
 }

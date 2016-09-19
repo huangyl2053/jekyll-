@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5220001;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.ninteishinsakaikekkadatatorikomi.ShinsakaiKekkaDataTorikomiBatchParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE518002.DBE518002_NinteiShinsaIraiIfTorikomiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5220001.NinteiShinsakaiKekkaDataTorikomiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5220001.dgTorikomiTaiasho_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
@@ -75,10 +75,10 @@ public class NinteiShinsakaiKekkaDataTorikomiHandler {
     /**
      * バッチ用パラメータクラスを作成します。
      *
-     * @return ShinsakaiKekkaDataTorikomiBatchParameter
+     * @return DBE518002_NinteiShinsaIraiIfTorikomiParameter
      */
-    public ShinsakaiKekkaDataTorikomiBatchParameter setBatchParameter() {
-        ShinsakaiKekkaDataTorikomiBatchParameter batchParameter = new ShinsakaiKekkaDataTorikomiBatchParameter();
+    public DBE518002_NinteiShinsaIraiIfTorikomiParameter setBatchParameter() {
+        DBE518002_NinteiShinsaIraiIfTorikomiParameter batchParameter = new DBE518002_NinteiShinsaIraiIfTorikomiParameter();
         List<RString> fileList = new ArrayList<>();
         for (dgTorikomiTaiasho_Row row : div.getDgTorikomiTaiasho().getSelectedItems()) {
             fileList.add(row.getFileName());

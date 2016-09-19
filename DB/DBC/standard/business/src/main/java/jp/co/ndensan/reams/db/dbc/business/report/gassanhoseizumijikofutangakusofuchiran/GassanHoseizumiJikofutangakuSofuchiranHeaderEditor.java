@@ -37,6 +37,8 @@ public class GassanHoseizumiJikofutangakuSofuchiranHeaderEditor implements IGass
     private static final int INDEX_2 = 2;
     private static final int INDEX_3 = 3;
     private static final int INDEX_4 = 4;
+    private static final RString 被保険者番号R = new RString("被保険者番号");
+    private static final RString 支給申請書整理番号R = new RString("支給申請書整理番号");
     private final IOutputOrder 出力順情報;
     private final FlexibleYearMonth 処理年月;
     private final RDateTime 作成日時;
@@ -114,19 +116,40 @@ public class GassanHoseizumiJikofutangakuSofuchiranHeaderEditor implements IGass
             改頁５ = list.get(INDEX_4).get項目名();
         }
 
-        if (list.size() > INDEX_0) {
+        if (list.size() == INDEX_0) {
+            出力順１ = 被保険者番号R;
+            出力順２ = 支給申請書整理番号R;
+        }
+        if (list.size() == INDEX_1) {
             出力順１ = list.get(INDEX_0).get項目名();
+            出力順２ = 被保険者番号R;
+            出力順３ = 支給申請書整理番号R;
         }
-        if (list.size() > INDEX_1) {
+        if (list.size() == INDEX_2) {
+            出力順１ = list.get(INDEX_0).get項目名();
             出力順２ = list.get(INDEX_1).get項目名();
+            出力順３ = 被保険者番号R;
+            出力順４ = 支給申請書整理番号R;
         }
-        if (list.size() > INDEX_2) {
+        if (list.size() == INDEX_3) {
+            出力順１ = list.get(INDEX_0).get項目名();
+            出力順２ = list.get(INDEX_1).get項目名();
             出力順３ = list.get(INDEX_2).get項目名();
+            出力順４ = 被保険者番号R;
+            出力順５ = 支給申請書整理番号R;
         }
-        if (list.size() > INDEX_3) {
+        if (list.size() == INDEX_4) {
+            出力順１ = list.get(INDEX_0).get項目名();
+            出力順２ = list.get(INDEX_1).get項目名();
+            出力順３ = list.get(INDEX_2).get項目名();
             出力順４ = list.get(INDEX_3).get項目名();
+            出力順５ = 被保険者番号R;
         }
         if (list.size() > INDEX_4) {
+            出力順１ = list.get(INDEX_0).get項目名();
+            出力順２ = list.get(INDEX_1).get項目名();
+            出力順３ = list.get(INDEX_2).get項目名();
+            出力順４ = list.get(INDEX_3).get項目名();
             出力順５ = list.get(INDEX_4).get項目名();
         }
 

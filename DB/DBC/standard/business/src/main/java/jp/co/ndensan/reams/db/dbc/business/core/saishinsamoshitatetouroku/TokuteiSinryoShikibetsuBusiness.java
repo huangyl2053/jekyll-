@@ -20,7 +20,7 @@ public class TokuteiSinryoShikibetsuBusiness {
     /**
      * コンストラクタです。
      *
-     * @param entity 護給付費再審査申立書作成のRelateEntityです
+     * @param entity 護給付費再審査申立書作成のRelateEntity
      */
     public TokuteiSinryoShikibetsuBusiness(SaishinsaMoshitateTourokuRelateEntity entity) {
         this.entity = entity;

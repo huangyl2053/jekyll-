@@ -36,7 +36,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class JigyoHokokuGeppoIppanShokanDBU300007Process extends BatchProcessBase<JigyoHokokuDataRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyojokyohokokushiryonemposakuseiiti."
+            "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.ippanshokanketteiym."
             + "IJigyoHokokuGeppoIppanShokanMapper.getJigyouHoukokuTokeiTyouhyou");
     private JigyoHokokuGeppoIppanShokanProcessParamter processParameter;
 

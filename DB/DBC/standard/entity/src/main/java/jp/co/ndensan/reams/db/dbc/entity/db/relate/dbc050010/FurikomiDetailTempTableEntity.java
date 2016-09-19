@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
+import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -22,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 import lombok.Getter;
 import lombok.Setter;
@@ -39,18 +41,23 @@ public class FurikomiDetailTempTableEntity extends DbTableEntityBase<FurikomiDet
     public static final RString TABLE_NAME;
 
     static {
-        TABLE_NAME = new RString("FurikomiDetailTempTable");
+        TABLE_NAME = new RString("DbWT0510FurikomiMeisai");
     }
 
     @TempTableColumnOrder(1)
+    @PrimaryKey
     private RString dataKubun;
     @TempTableColumnOrder(2)
+    @PrimaryKey
     private HihokenshaNo hihokenshaNo;
     @TempTableColumnOrder(3)
+    @PrimaryKey
     private FlexibleYearMonth serviceTeikyoYM;
     @TempTableColumnOrder(4)
+    @PrimaryKey
     private RString seiriNo;
     @TempTableColumnOrder(5)
+    @PrimaryKey
     private int rirekiNo;
     @TempTableColumnOrder(6)
     private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
@@ -99,7 +106,7 @@ public class FurikomiDetailTempTableEntity extends DbTableEntityBase<FurikomiDet
     @TempTableColumnOrder(28)
     private LasdecCode shichosonCode;
     @TempTableColumnOrder(29)
-    private RString kozaDataFlag;
+    private boolean kozaDataFlag;
     @TempTableColumnOrder(30)
     private ShikibetsuCode kozaShikibetsuCode;
     @TempTableColumnOrder(31)
@@ -109,7 +116,7 @@ public class FurikomiDetailTempTableEntity extends DbTableEntityBase<FurikomiDet
     @TempTableColumnOrder(33)
     private RString kinyuKikanKanaName;
     @TempTableColumnOrder(34)
-    private RString kinyuKikanShitenCode;
+    private KinyuKikanShitenCode kinyuKikanShitenCode;
     @TempTableColumnOrder(35)
     private RString kinyuKikanShitenName;
     @TempTableColumnOrder(36)
@@ -121,9 +128,9 @@ public class FurikomiDetailTempTableEntity extends DbTableEntityBase<FurikomiDet
     @TempTableColumnOrder(39)
     private RString kozaNo;
     @TempTableColumnOrder(40)
-    private RString kozaMeiginin;
+    private AtenaKanaMeisho kozaMeiginin;
     @TempTableColumnOrder(41)
-    private RString kozaMeigininKanji;
+    private AtenaMeisho kozaMeigininKanji;
     @TempTableColumnOrder(42)
     private RString kozaNayoseKey;
     @TempTableColumnOrder(43)

@@ -36,10 +36,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public class JigyoHokokuGeppoIppanShokanDBU300006Process extends BatchProcessBase<JigyoHokokuDataRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyojokyohokokushiryonemposakuseiiti."
+            "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.ippanshokanketteiym."
             + "IJigyoHokokuGeppoIppanShokanMapper.getJigyouHoukokuTokeiTyouhyou");
     private JigyoHokokuGeppoIppanShokanProcessParamter processParameter;
-
     private static final ReportId REPORT_DBU300006 = ReportIdDBU.DBU300006.getReportId();
     private static final RString 過去集計分旧市町村区分 = new RString("1");
     private static final RString 固定文字列_旧 = new RString("（旧）");

@@ -187,7 +187,6 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
 
     @Override
     protected void process(KeikakuTodokedeJokyoIchiranEntity entity) {
-        count = count + INDEX_1;
         アクセスログ対象追加(entity);
         outputCsvList = new ArrayList<>();
         if (entity.get識別コード() == null) {
@@ -236,9 +235,14 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
             }
         }
 
+        if (check(entity)) {
+            return;
+        }
+
         if (!entity.get被保険者番号().equals(被保険者番号_前) && 被保険者番号_前 != null) {
             List<KyotakuServiceKeikakuSaList> list = outputReportMap.get(被保険者番号_前);
             for (KyotakuServiceKeikakuSaList result : list) {
+                count = count + INDEX_1;
                 KyotakuServiceKeikakuSaParam param = new KyotakuServiceKeikakuSaParam();
                 param.set計画届出状況情報リスト(result);
                 param.setシステム日時(システム日付);
@@ -248,27 +252,87 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
                 param.set基準日(基準日);
                 param.set地方公共団体(AssociationFinderFactory.createInstance().getAssociation());
                 param.set出力順(並び順);
+                param.set連番(count);
                 KyotakuServiceKeikakuSaReport report = new KyotakuServiceKeikakuSaReport(param);
                 report.writeBy(reportSourceWriter);
             }
             outputReportMap = new HashMap<>();
         }
 
-        if (check(entity)) {
-            return;
-        }
-
         KyotakuServiceKeikakuSaList reportList
                 = new KyotakuServiceKeikakuSaList();
+
+        setReportList(entity, reportList);
+
+        if (outputReportMap.get(entity.get被保険者番号()) != null) {
+            RString 受給申請年月日 = new RString("");
+            RString 受給申請事由 = new RString("");
+            if (entity.get受給申請年月日() != null) {
+                受給申請年月日 = new RString(entity.get受給申請年月日().toString());
+            }
+            if (entity.get受給申請事由() != null) {
+                受給申請事由 = JukyuShinseiJiyu.toValue(entity.get受給申請事由().getColumnValue()).get名称();
+            }
+            outputReportMap.get(entity.get被保険者番号())
+                    .get(outputReportMap.get(entity.get被保険者番号()).size() - INDEX_1)
+                    .set現在の申請状況(受給申請年月日
+                            .concat(仕切る_2)
+                            .concat(受給申請事由));
+            outputReportMap.get(entity.get被保険者番号()).add(reportList);
+        } else {
+            List<KyotakuServiceKeikakuSaList> list = new ArrayList<>();
+            list.add(reportList);
+            outputReportMap.put(entity.get被保険者番号(), list);
+        }
+        被保険者番号_前 = entity.get被保険者番号();
+
+    }
+
+    @Override
+    protected void afterExecute() {
+        List<KyotakuServiceKeikakuSaList> list = outputReportMap.get(被保険者番号_前);
+        if (list != null) {
+            for (KyotakuServiceKeikakuSaList result : list) {
+                count = count + INDEX_1;
+                KyotakuServiceKeikakuSaParam param = new KyotakuServiceKeikakuSaParam();
+                param.set計画届出状況情報リスト(result);
+                param.setシステム日時(システム日付);
+                param.set申請日(申請日);
+                param.set対象者(対象者);
+                param.set届出状況(届出状況);
+                param.set基準日(基準日);
+                param.set地方公共団体(AssociationFinderFactory.createInstance().getAssociation());
+                param.set出力順(並び順);
+                param.set連番(count);
+                KyotakuServiceKeikakuSaReport report = new KyotakuServiceKeikakuSaReport(param);
+                report.writeBy(reportSourceWriter);
+            }
+        }
+        csvWriter.close();
+        if (null != personalDataList && !personalDataList.isEmpty()) {
+            AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
+            manager.spool(Path.combinePath(manager.getEucOutputDirectry(), CSVFILENAME), log);
+        } else {
+            manager.spool(Path.combinePath(manager.getEucOutputDirectry(), CSVFILENAME));
+        }
+    }
+
+    private void setReportList(KeikakuTodokedeJokyoIchiranEntity entity, KyotakuServiceKeikakuSaList reportList) {
         reportList.set被保険者番号(entity.get被保険者番号());
         reportList.set住民コード(entity.get識別コード());
         reportList.set宛名(entity.get宛名());
         reportList.set資格取得日(entity.get資格取得年月日());
         reportList.set資格喪失日(entity.get資格喪失年月日());
-        reportList.set喪失事由(ShikakuSoshitsuJiyu.toValue(entity.get資格喪失事由コード()).get名称());
+        if (entity.get資格喪失事由コード() != null) {
+            reportList.set喪失事由(ShikakuSoshitsuJiyu.toValue(entity.get資格喪失事由コード()).get名称());
+        }
         reportList.set受給申請日(entity.get受給申請年月日());
-        reportList.set申請事由(JukyuShinseiJiyu.toValue(entity.get受給申請事由().getColumnValue()).get名称());
-        reportList.set要介護度(YokaigoJotaiKubun09.toValue(entity.get要介護認定状態区分コード().getColumnValue()).get名称());
+        if (entity.get受給申請事由() != null) {
+            reportList.set申請事由(JukyuShinseiJiyu.toValue(entity.get受給申請事由().getColumnValue()).get名称());
+        }
+        if (entity.get要介護認定状態区分コード() != null) {
+            reportList.set要介護度(YokaigoJotaiKubun09.toValue(entity.get要介護認定状態区分コード().getColumnValue()).get名称());
+        }
         reportList.set認定有効開始日(entity.get認定有効期間開始日());
         reportList.set認定有効終了日(entity.get認定有効期間終了日());
         reportList.set認定日(entity.get認定年月日());
@@ -287,31 +351,6 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
         if (!RS_3.equals(entity.get作成区分コード())
                 && entity.get事業者名称() == null) {
             reportList.set備考2(定値_事業者無効);
-        }
-        if (outputReportMap.get(entity.get被保険者番号()) != null) {
-            outputReportMap.get(entity.get被保険者番号())
-                    .get(outputReportMap.get(entity.get被保険者番号()).size() - INDEX_1)
-                    .set現在の申請状況(new RString(entity.get受給申請年月日().toString())
-                            .concat(仕切る_2)
-                            .concat(JukyuShinseiJiyu.toValue(entity.get受給申請事由().getColumnValue()).get名称()));
-            outputReportMap.get(entity.get被保険者番号()).add(reportList);
-        } else {
-            List<KyotakuServiceKeikakuSaList> list = new ArrayList<>();
-            list.add(reportList);
-            outputReportMap.put(entity.get被保険者番号(), list);
-        }
-        被保険者番号_前 = entity.get被保険者番号();
-
-    }
-
-    @Override
-    protected void afterExecute() {
-        csvWriter.close();
-        if (null != personalDataList && !personalDataList.isEmpty()) {
-            AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
-            manager.spool(Path.combinePath(manager.getEucOutputDirectry(), CSVFILENAME), log);
-        } else {
-            manager.spool(Path.combinePath(manager.getEucOutputDirectry(), CSVFILENAME));
         }
     }
 
