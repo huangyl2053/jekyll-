@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE0110003;
 
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.ninteichosayoteimitei.NinteichosaYoteiMiteiBatchParamter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE012001.DBE012001_ChosaInfoPrintParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0110003.HakkoJokenDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0110003.HakkoJokenHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0110003.HakkoJokenValidationHandler;
@@ -165,7 +165,7 @@ public class HakkoJoken {
      * @param div 画面情報
      * @return ResponseData<HakkoJokenDiv>
      */
-    public ResponseData<NinteichosaYoteiMiteiBatchParamter> onClick_Jikkou(HakkoJokenDiv div) {
+    public ResponseData<DBE012001_ChosaInfoPrintParameter> onClick_Jikkou(HakkoJokenDiv div) {
         return ResponseData.of(getHandler(div).setBatchParameter()).respond();
     }
 

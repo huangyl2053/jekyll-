@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0110003;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.ninteichosayoteimitei.NinteichosaYoteiMiteiBatchParamter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE012001.DBE012001_ChosaInfoPrintParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0110003.HakkoJokenDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -132,8 +132,8 @@ public class HakkoJokenHandler {
      *
      * @return ninteichosaYoteiMiteiBatchParamter
      */
-    public NinteichosaYoteiMiteiBatchParamter setBatchParameter() {
-        NinteichosaYoteiMiteiBatchParamter batchParamter = new NinteichosaYoteiMiteiBatchParamter();
+    public DBE012001_ChosaInfoPrintParameter setBatchParameter() {
+        DBE012001_ChosaInfoPrintParameter batchParamter = new DBE012001_ChosaInfoPrintParameter();
         if (div.getChkNinteiChosaYoteiMiteishaIchiran().getSelectedKeys().contains(SELECT_KEY0)) {
             batchParamter.setNinteichosayoteimitei(true);
             if (div.getRadJoken1().getSelectedKey().contains(SELECT_KEY0)) {
