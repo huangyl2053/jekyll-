@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.definition.batchprm.shinsaiinjissekiichiran;
+package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601001;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsaiinjissekiichiran.ShinsaiinJissekiIchiranKey;
@@ -23,7 +23,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShinsaiinJissekiIchiranBatchParameter extends BatchParameterBase {
+public class DBE601001_IkenshoSakuseiJIssekiParameter extends BatchParameterBase {
 
     private static final String SYOHYO_SYUTURYOKU = "syohyoSyuturyoku";
     private static final String SHINSAKAI_KAISAIBI_FROM = "shinsakaikaisaibiFrom";
@@ -43,7 +43,7 @@ public class ShinsaiinJissekiIchiranBatchParameter extends BatchParameterBase {
     /**
      * コンストラクタです。
      */
-    public ShinsaiinJissekiIchiranBatchParameter() {
+    public DBE601001_IkenshoSakuseiJIssekiParameter() {
     }
 
     /**
@@ -54,7 +54,7 @@ public class ShinsaiinJissekiIchiranBatchParameter extends BatchParameterBase {
      * @param shinsakaikaisaibiTo 審査会開催日TO
      * @param keyJoho キー情報Entityリスト
      */
-    public ShinsaiinJissekiIchiranBatchParameter(RString syohyoSyuturyoku,
+    public DBE601001_IkenshoSakuseiJIssekiParameter(RString syohyoSyuturyoku,
             FlexibleDate shinsakaikaisaibiFrom,
             FlexibleDate shinsakaikaisaibiTo,
             List<ShinsaiinJissekiIchiranKey> keyJoho) {

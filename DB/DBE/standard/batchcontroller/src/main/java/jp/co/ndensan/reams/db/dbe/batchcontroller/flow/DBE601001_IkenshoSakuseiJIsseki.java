@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.shinsaiinjissekiichiran;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinsaiinjissekiichiran.ShinsaiinJissekiIchiranCsvProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinsaiinjissekiichiran.ShinsaiinJissekiIchiranReportProcess;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.shinsaiinjissekiichiran.ShinsaiinJissekiIchiranBatchParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601001.DBE601001_IkenshoSakuseiJIssekiParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBE-1700-020 wanghuafeng
  */
-public class ShinsaiinJissekiIchiranFlow extends BatchFlowBase<ShinsaiinJissekiIchiranBatchParameter> {
+public class DBE601001_IkenshoSakuseiJIsseki extends BatchFlowBase<DBE601001_IkenshoSakuseiJIssekiParameter> {
 
     private static final String SHINSAI_JISSE_ICHIRAN_CSV = "shinsaiinjissekiichirancsv";
     private static final String SHINSAI_JISSE_ICHIRAN_REPORT = "shinsaiinjissekiichiranreport";
