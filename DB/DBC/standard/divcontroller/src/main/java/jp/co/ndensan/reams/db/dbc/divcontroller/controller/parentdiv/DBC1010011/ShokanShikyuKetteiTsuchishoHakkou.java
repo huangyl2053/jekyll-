@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.SogoJigyoTaishosha;
 import jp.co.ndensan.reams.db.dbc.business.core.shokanshikyuketteitsuchishohakkou.ShokanShikyuKetteiTsuchishoHakkouBusiness;
-import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcInformationMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcWarningMessages;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -37,7 +36,6 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -45,7 +43,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.ButtonSelectPattern;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
@@ -177,15 +174,7 @@ public class ShokanShikyuKetteiTsuchishoHakkou {
         ShiharaiHohoHenkoSashitome 支払方法変更差止 = shoukanFinder.getSashitome(被保険者番号, new FlexibleYearMonth(div.
                 getDdlServiceTeikyoYM().getSelectedKey()), div.getDdlSeiriNO().getSelectedValue());
         RString 差額支給対象者区分 = RString.EMPTY;
-        if (支払方法変更差止 != null) {
-            if (支払方法変更差止.get差止控除番号() != null && !支払方法変更差止.get差止控除番号().isEmpty()) {
-                throw new ApplicationException(DbcErrorMessages.支払方法差止エラー.getMessage());
-            } else if (shokanHanteiKekka.get差額金額合計() != null && shokanHanteiKekka.get差額金額合計().compareTo(Decimal.ZERO) == 0) {
-                throw new ApplicationException(DbcErrorMessages.差額支給エラー.getMessage());
-            } else {
-                差額支給対象者区分 = new RString("1");
-            }
-        }
+        差額支給対象者区分 = getHandler(div).check(支払方法変更差止, 差額支給対象者区分, shokanHanteiKekka);
         ViewStateHolder.put(ViewStateKeys.資料作成, 差額支給対象者区分);
         buidler.set決定通知書作成年月日(new FlexibleDate(div.getTxtHakkouYMD().getValue().
                 toDateString())).set決定通知リアル発行区分(new RString("1"));
