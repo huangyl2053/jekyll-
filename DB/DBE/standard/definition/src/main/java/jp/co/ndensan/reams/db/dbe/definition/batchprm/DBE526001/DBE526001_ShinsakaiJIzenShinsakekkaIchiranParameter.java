@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.definition.batchprm.shinsakaijizenshinsakekkaichiran;
+package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE526001;
 
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shinsakaijizenshinsakekkaichiran.ShinsakaiJizenshinsakekkaIchiranProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -20,7 +20,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShinsakaiJizenshinsakekkaIchiranBatchParameter extends BatchParameterBase {
+public class DBE526001_ShinsakaiJIzenShinsakekkaIchiranParameter extends BatchParameterBase {
 
     private static final String SHINSAKAI_KAISAI_NO = "shinsakaiKaisaiNo";
 
@@ -30,7 +30,7 @@ public class ShinsakaiJizenshinsakekkaIchiranBatchParameter extends BatchParamet
     /**
      * コンストラクタです。
      */
-    public ShinsakaiJizenshinsakekkaIchiranBatchParameter() {
+    public DBE526001_ShinsakaiJIzenShinsakekkaIchiranParameter() {
     }
 
     /**
@@ -38,7 +38,7 @@ public class ShinsakaiJizenshinsakekkaIchiranBatchParameter extends BatchParamet
      *
      * @param shinsakaiKaisaiNo 介護認定審査会開催番号
      */
-    public ShinsakaiJizenshinsakekkaIchiranBatchParameter(RString shinsakaiKaisaiNo) {
+    public DBE526001_ShinsakaiJIzenShinsakekkaIchiranParameter(RString shinsakaiKaisaiNo) {
         this.shinsakaiKaisaiNo = shinsakaiKaisaiNo;
     }
 

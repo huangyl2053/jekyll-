@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.shinsakaijizenshinsakekkaichiran;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinsakaijizenshinsakekkaichiran.ShinsakaiJizenshinsakekkaIchiranProcess;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.shinsakaijizenshinsakekkaichiran.ShinsakaiJizenshinsakekkaIchiranBatchParameter;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE526001.ShinsakaiJizenshinsakekkaIchiranProcess;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -16,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBE-1640-020 zhaoyao
  */
-public class ShinsakaiJizenshinsakekkaIchiranFlow extends BatchFlowBase<ShinsakaiJizenshinsakekkaIchiranBatchParameter> {
+public class DBE526001_ShinsakaiJIzenShinsakekkaIchiran extends BatchFlowBase<jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE526001.DBE526001_ShinsakaiJIzenShinsakekkaIchiranParameter> {
 
     private static final String JIZEN_SHINSAKEKKA_ICHIRAN = "shinsakaiJizenshinsakekkaIchiran";
 
