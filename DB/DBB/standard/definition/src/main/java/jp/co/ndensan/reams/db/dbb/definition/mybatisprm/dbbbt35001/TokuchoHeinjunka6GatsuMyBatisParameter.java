@@ -3,14 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt35001;
+package jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbbbt35001;
 
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.OutputChohyoIchiran;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
-import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
+import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,7 +24,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TokuchoHeinjunka6GatsuProcessParameter implements IBatchProcessParameter {
+public class TokuchoHeinjunka6GatsuMyBatisParameter implements IMyBatisParameter {
 
     private FlexibleYear 調定年度;
     private FlexibleYear 賦課年度;
@@ -38,4 +39,5 @@ public class TokuchoHeinjunka6GatsuProcessParameter implements IBatchProcessPara
     private RString 出力順;
     private int 出力ページ数;
     private UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam;
+    private RDateTime システーム日時;
 }
