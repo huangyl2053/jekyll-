@@ -67,9 +67,9 @@ public class DbT1003TashichosonJushochiTokureiDac implements ISaveable<DbT1003Ta
         return accessor.select().
                 table(DbT1003TashichosonJushochiTokurei.class).
                 where(and(
-                        eq(shikibetsuCode, 識別コード),
-                        eq(idoYMD, 異動日),
-                        eq(edaNo, 枝番))).
+                                eq(shikibetsuCode, 識別コード),
+                                eq(idoYMD, 異動日),
+                                eq(edaNo, 枝番))).
                 toObject(DbT1003TashichosonJushochiTokureiEntity.class);
     }
 
@@ -127,8 +127,8 @@ public class DbT1003TashichosonJushochiTokureiDac implements ISaveable<DbT1003Ta
         return accessor.selectSpecific(max(edaNo)).
                 table(DbT1003TashichosonJushochiTokurei.class).
                 where(and(
-                        eq(shikibetsuCode, 識別コード),
-                        eq(idoYMD, 異動日))).
+                                eq(shikibetsuCode, 識別コード),
+                                eq(idoYMD, 異動日))).
                 toObject(DbT1003TashichosonJushochiTokureiEntity.class);
     }
 
@@ -171,9 +171,9 @@ public class DbT1003TashichosonJushochiTokureiDac implements ISaveable<DbT1003Ta
         return accessor.select().
                 table(DbT1003TashichosonJushochiTokurei.class).
                 where(and(
-                        eq(shikibetsuCode, 識別コード),
-                        eq(DbT1003TashichosonJushochiTokurei.tekiyoYMD, 適用年月日),
-                        eq(DbT1003TashichosonJushochiTokurei.isDeleted, false))).
+                                eq(shikibetsuCode, 識別コード),
+                                eq(DbT1003TashichosonJushochiTokurei.tekiyoYMD, 適用年月日),
+                                eq(DbT1003TashichosonJushochiTokurei.isDeleted, false))).
                 toList(DbT1003TashichosonJushochiTokureiEntity.class);
     }
 
@@ -194,9 +194,9 @@ public class DbT1003TashichosonJushochiTokureiDac implements ISaveable<DbT1003Ta
                 table(DbT1003TashichosonJushochiTokurei.class).
                 where(
                         or(and(eq(shikibetsuCode, 識別コード),
-                                leq(tekiyoYMD, 登録異動年月日),
-                                lt(登録異動年月日, kaijoYMD),
-                                eq(logicalDeletedFlag, false)),
+                                        leq(tekiyoYMD, 登録異動年月日),
+                                        lt(登録異動年月日, kaijoYMD),
+                                        eq(logicalDeletedFlag, false)),
                                 and(eq(shikibetsuCode, 識別コード),
                                         leq(tekiyoYMD, 登録異動年月日),
                                         isNULL(kaijoYMD),
@@ -227,4 +227,24 @@ public class DbT1003TashichosonJushochiTokureiDac implements ISaveable<DbT1003Ta
                 toList(DbT1003TashichosonJushochiTokureiEntity.class);
     }
 
+    /**
+     * 他市町村住所地特例で異動日のレコード中で最大の枝番を取得します。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @return DbT1003TashichosonJushochiTokureiEntity
+     */
+    @Transaction
+    public List<DbT1003TashichosonJushochiTokureiEntity> get適用除外者受給者台帳(ShikibetsuCode 識別コード) {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(識別コード_TMP.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT1003TashichosonJushochiTokurei.class).
+                where(and(
+                                eq(shikibetsuCode, 識別コード),
+                                eq(logicalDeletedFlag, false))).
+                order(by(shikibetsuCode), by(idoYMD, Order.DESC), by(edaNo, Order.DESC)).
+                toList(DbT1003TashichosonJushochiTokureiEntity.class);
+    }
 }
