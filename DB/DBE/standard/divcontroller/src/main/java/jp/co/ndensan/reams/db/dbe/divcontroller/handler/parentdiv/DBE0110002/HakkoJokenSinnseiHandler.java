@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0110002;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.shinseijouhouinnsatu.ShinseiJouhouInsatuBatchParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE011001.DBE011001_ShinseiInfoPrintParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0110002.HakkoJokenSinnseiDiv;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -78,10 +78,10 @@ public class HakkoJokenSinnseiHandler {
     /**
      * バッチ用パラメータクラスを作成します。
      *
-     * @return ShinseiJouhouInsatuBatchParameter
+     * @return DBE011001_ShinseiInfoPrintParameter
      */
-    public ShinseiJouhouInsatuBatchParameter setBatchParameter() {
-        ShinseiJouhouInsatuBatchParameter shinseijouhoubatchParameter = new ShinseiJouhouInsatuBatchParameter();
+    public DBE011001_ShinseiInfoPrintParameter setBatchParameter() {
+        DBE011001_ShinseiInfoPrintParameter shinseijouhoubatchParameter = new DBE011001_ShinseiInfoPrintParameter();
         if (div.getChkSakuseiChohyo().getSelectedKeys().contains(SELECT_KEY0)) {
             shinseijouhoubatchParameter.setShinseimonitorflag(true);
         } else {
