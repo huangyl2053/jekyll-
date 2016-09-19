@@ -99,6 +99,7 @@ public class CreateGyomuHokenshaJohoGetsujiProcess extends BatchProcessBase<Toku
         if (null != entity.getHihokensha() && null != entity.getHihokensha().getShikibetsuCode()) {
             boolean 資格喪失flag = do資格喪失の判定(entity.getHihokensha(), now);
             if (!資格喪失flag) {
+                System.out.println("資格が喪失していない。");
                 不一致理由 = do徴収方法の不一致理由(entity.getChoshuhoho(), 開始月);
             } else {
                 不一致理由 = do他市町村住所地特例者台帳時不一致理由(entity.getTokurei(), entity.getJogaisha(), true);
@@ -128,12 +129,16 @@ public class CreateGyomuHokenshaJohoGetsujiProcess extends BatchProcessBase<Toku
         //が実装していませんので、コーディングできません、同じEnumを利用しています
         if (null != tokurei && null != tokurei.getShikibetsuCode()) {
             FlexibleDate 解除年月日 = tokurei.getKaijoYMD();
-            return (null == 解除年月日 || 解除年月日.equals(FlexibleDate.EMPTY))
-                    ? DoteiFuitchiRiyu.その他 : DoteiFuitchiRiyu.資格なし;
+            if (null == 解除年月日 || 解除年月日.equals(FlexibleDate.EMPTY)) {
+                return DoteiFuitchiRiyu.その他;
+            }
+            return DoteiFuitchiRiyu.資格なし;
         } else if (null != jogaisha && null != jogaisha.getShikibetsuCode()) {
             FlexibleDate 解除年月日 = jogaisha.getKaijoYMD();
-            return (null == 解除年月日 || 解除年月日.equals(FlexibleDate.EMPTY))
-                    ? DoteiFuitchiRiyu.その他 : DoteiFuitchiRiyu.資格なし;
+            if (null == 解除年月日 || 解除年月日.equals(FlexibleDate.EMPTY)) {
+                return DoteiFuitchiRiyu.その他;
+            }
+            return DoteiFuitchiRiyu.資格なし;
         } else if (被保険者台帳があるFlag) {
             return DoteiFuitchiRiyu.資格喪失;
         }
