@@ -107,6 +107,8 @@ public class RenekeiDataSakuseiFourMasterHandler {
     }
 
     private void 対象期間の場合表示制御(YokaigoNinteiGaibuDataOutputHistory 要介護認定外部データ出力履歴) {
+        div.getTxtkonkaishoriymdtime().setDisplayNone(false);
+        div.getTxtzenkaishoriymdtime().setDisplayNone(false);
         div.getTxtkonkaishoriymdtime().setToDateValue(RDate.getNowDate());
         div.getTxtkonkaishoriymdtime().setToTimeValue(RDate.getNowTime());
         div.getTxtzenkaishoriymdtime().setReadOnly(true);

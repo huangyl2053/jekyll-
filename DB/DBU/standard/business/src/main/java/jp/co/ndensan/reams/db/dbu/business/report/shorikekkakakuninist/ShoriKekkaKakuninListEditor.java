@@ -45,13 +45,11 @@ public class ShoriKekkaKakuninListEditor implements IShoriKekkaKakuninListEditor
         source.keyKomoku2 = entity.get項目コード2();
         source.keyKomoku3 = entity.get項目コード3();
         source.keyKomoku4 = entity.get項目コード4();
-        source.keyKomoku5 = entity.get項目コード5();
         source.listUpper_1 = entity.getプログラムID();
         source.listUpper_2 = entity.get項目値1();
         source.listUpper_3 = entity.get項目値2();
         source.listUpper_4 = entity.get項目値3();
         source.listUpper_5 = entity.get項目値4();
-        source.listUpper_6 = entity.get項目値5();
         source.listUpper_7 = entity.get内容1();
         source.listLower_1 = entity.get処理名称();
         source.listLower_2 = entity.get内容2();

@@ -14,8 +14,11 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0600031.DBU0
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0600031.KyufuJohoDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0600031.KyufuJohoHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.kyufujoho.KyufuJohoFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -29,6 +32,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class KyufuJoho {
 
     private static final int YEAR_3 = 3;
+    private static final int INDEX_1 = 1;
+    private static final int INDEX_2 = 2;
     private final TaishoshaKey key;
     private final KyufuJohoFinder kyufujohofinder;
 
@@ -74,10 +79,10 @@ public class KyufuJoho {
     private void set福祉用具販売費情報(KyufuJohoDiv div) {
         KounyukingakuParamter maenendo = getHandler(div).set前年度抽出範囲(key);
         KounyukingakuParamter konnendo = getHandler(div).set今年度抽出範囲(key);
-        getHandler(div).set前年度情報(kyufujohofinder.get購入金額(maenendo));
-        getHandler(div).set前年度情報(kyufujohofinder.get請求負担額(maenendo));
-        getHandler(div).set今年度情報(kyufujohofinder.get購入金額(konnendo));
-        getHandler(div).set今年度情報(kyufujohofinder.get請求負担額(konnendo));
+        getHandler(div).set前年度情報(kyufujohofinder.get購入金額(maenendo), INDEX_1);
+        getHandler(div).set前年度情報(kyufujohofinder.get請求負担額(maenendo), INDEX_2);
+        getHandler(div).set今年度情報(kyufujohofinder.get購入金額(konnendo), INDEX_1);
+        getHandler(div).set今年度情報(kyufujohofinder.get請求負担額(konnendo), INDEX_2);
     }
 
     private void set住宅改修費情報(KyufuJohoDiv div) {
@@ -94,6 +99,6 @@ public class KyufuJoho {
     private void set利用状況情報(KyufuJohoDiv div) {
         RDate date = RDate.getNowDate();
         getHandler(div).set利用状況情報(kyufujohofinder.getサービス利用状況情報(KyufuJohoParamter.createParameter(
-                key.get被保険者番号().value(), new RString((date.getYear().minusYear(YEAR_3).toString())), setサービス分類コード(div))).records());
+                key.get被保険者番号().value(), new RString((date.getYearMonth().minusYear(YEAR_3).toString())), setサービス分類コード(div))).records());
     }
 }

@@ -52,17 +52,19 @@ public class KogakuKaigoServiceHandler {
     public void set給付実績高額介護サービス費データ(List<KyufujissekiKogakuKaigoServicehi> 高額介護サービス費等, FlexibleYearMonth サービス提供年月) {
         List<KyufujissekiKogakuKaigoServicehi> 高額介護サービス費リスト = new ArrayList<>();
         if (高額介護サービス費等 != null && !高額介護サービス費等.isEmpty()) {
+            this.setGetsuBtn(高額介護サービス費等, サービス提供年月);
             for (KyufujissekiKogakuKaigoServicehi 高額介護サービス費 : 高額介護サービス費等) {
                 if (サービス提供年月 != null && サービス提供年月.compareTo(高額介護サービス費.getサービス提供年月()) == 0) {
                     高額介護サービス費リスト.add(高額介護サービス費);
                 }
             }
             div.getCcdKyufuJissekiHeader().setサービス提供年月(new RDate(to日期変換(サービス提供年月).toString()));
-
-            this.setGetsuBtn(高額介護サービス費等, サービス提供年月);
         }
         if (!高額介護サービス費リスト.isEmpty()) {
             this.setData(高額介護サービス費リスト.get(INT_ZERO));
+        } else {
+            div.getBtnZengetsu().setDisabled(true);
+            div.getBtnJigetsu().setDisabled(true);
         }
     }
 
