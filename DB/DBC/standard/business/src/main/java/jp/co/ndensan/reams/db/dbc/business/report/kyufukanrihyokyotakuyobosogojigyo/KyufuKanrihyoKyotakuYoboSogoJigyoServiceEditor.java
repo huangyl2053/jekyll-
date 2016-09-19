@@ -65,11 +65,11 @@ public class KyufuKanrihyoKyotakuYoboSogoJigyoServiceEditor implements IKyufuKan
             source.koshinKbn = KyufukanrihyoSakuseiKubun.toValue(帳票出力対象データ.get更新区分()).get名称();
         }
         if (!RString.isNullOrEmpty(帳票出力対象データ.get保険者番号())) {
-            source.koshinKbn = 帳票出力対象データ.get保険者番号().padRight(INDEX_6);
+            source.hokenshaNo = 帳票出力対象データ.get保険者番号().padRight(INDEX_6);
         }
         source.hokenshaName = 帳票出力対象データ.get保険者名();
         if (!RString.isNullOrEmpty(帳票出力対象データ.get被保険者番号())) {
-            source.koshinKbn = 帳票出力対象データ.get被保険者番号().padRight(INDEX_10);
+            source.hihokenshaNo = 帳票出力対象データ.get被保険者番号().padRight(INDEX_10);
         }
         source.hihokenshaKanaShimei = 帳票出力対象データ.get宛名カナ名称();
         source.hihokenshaShimei = 帳票出力対象データ.get宛名名称();
@@ -101,18 +101,18 @@ public class KyufuKanrihyoKyotakuYoboSogoJigyoServiceEditor implements IKyufuKan
         FlexibleYearMonth 利用年月 = 帳票出力対象データ.get利用年月();
         source.yokaigoJotaiKubun
                 = YokaigoJotaiKubunSupport.toValue(利用年月, 表示用要介護状態区分コード).getName();
-        source.yokaigoJotaiKubun = get金額のカンマ編集(帳票出力対象データ.get表示用支給限度単位数());
+        source.shikyuGendoKijunGaku = get金額のカンマ編集(帳票出力対象データ.get表示用支給限度単位数());
         RString 限度額適用期間_開始年月 = パターン62(帳票出力対象データ.get限度額適用期間_開始年月());
         if (!RString.isNullOrEmpty(限度額適用期間_開始年月)) {
-            source.gendogakuTekiyoKikanStGengo = 限度額適用期間_開始年月.substring(0, INDEX_4);
-            source.gendogakuTekiyoKikanStYY = 限度額適用期間_開始年月.substring(INDEX_4, INDEX_6);
-            source.gendogakuTekiyoKikanStMM = 限度額適用期間_開始年月.substring(INDEX_8, INDEX_10);
+            source.gendogakuTekiyoKikanStGengo = 限度額適用期間_開始年月.substring(0, 2);
+            source.gendogakuTekiyoKikanStYY = 限度額適用期間_開始年月.substring(2, INDEX_4);
+            source.gendogakuTekiyoKikanStMM = 限度額適用期間_開始年月.substring(INDEX_5, INDEX_7);
         }
         RString 支給限度有効終了年月 = パターン62(帳票出力対象データ.get支給限度有効終了年月());
         if (!RString.isNullOrEmpty(支給限度有効終了年月)) {
-            source.gendogakuTekiyoKikanStGengo = 支給限度有効終了年月.substring(0, INDEX_4);
-            source.gendogakuTekiyoKikanStYY = 支給限度有効終了年月.substring(INDEX_4, INDEX_6);
-            source.gendogakuTekiyoKikanStMM = 支給限度有効終了年月.substring(INDEX_8, INDEX_10);
+            source.gendogakuTekiyoKikanEdGengo = 支給限度有効終了年月.substring(0, 2);
+            source.gendogakuTekiyoKikanEdYY = 支給限度有効終了年月.substring(2, INDEX_4);
+            source.gendogakuTekiyoKikanEdMM = 支給限度有効終了年月.substring(INDEX_5, INDEX_7);
         }
         RString サービス提供事業者名称 = 帳票出力対象データ.getサービス提供事業者名称();
         if (!RString.isNullOrEmpty(サービス提供事業者名称)) {
@@ -142,10 +142,16 @@ public class KyufuKanrihyoKyotakuYoboSogoJigyoServiceEditor implements IKyufuKan
                 source.listLower_2 = RString.EMPTY;
             }
         }
+        source.listUpper_5 = サービス種類コード;
         if (0 < Decimal.ZERO.compareTo(帳票出力対象データ.get給付計画単位数())) {
             source.listUpper_6 = new RString("(-)");
+            source.listLower_3 = new RString(帳票出力対象データ.get給付計画単位数().toString()).replace(new RString("-"), RString.HALF_SPACE);
+            source.gokeiTanisuMainusKigo = new RString("(-)");
+            source.gokeiTanisu =  new RString(帳票出力対象データ.get給付計画単位数().toString()).replace(new RString("-"), RString.HALF_SPACE);
+        } else {
+            source.listLower_3 = new RString(帳票出力対象データ.get給付計画単位数().toString());
+            source.gokeiTanisu =  new RString(帳票出力対象データ.get給付計画単位数().toString());
         }
-        source.listLower_3 = new RString(帳票出力対象データ.get給付計画単位数().toString()).replace(new RString("-"), RString.HALF_SPACE);
         source.shikibetuCode = ShikibetsuCode.EMPTY;
         source.hishokenshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), 帳票出力対象データ.get被保険者番号());
         return source;

@@ -12,8 +12,7 @@
         FROM
         rgdb."DbT7022ShoriDateKanri"
         WHERE
-        rgdb."DbT7022ShoriDateKanri"."isDeleted" = FALSE
-        and rgdb."DbT7022ShoriDateKanri"."subGyomuCode" = 'DBC'
+        rgdb."DbT7022ShoriDateKanri"."subGyomuCode" = 'DBC'
         AND rgdb."DbT7022ShoriDateKanri"."shoriName" = #{処理名}
        
     </select>

@@ -22,4 +22,6 @@ public class JukyushaTeiseiRenrakuhyoTorokuFinderResult {
     private JukyushaIdoRenrakuhyo 受給者異動送付entity;
     private RString 氏名_性別_生年月日を印字する;
     private FlexibleDate 作成年月日;
+    private Boolean 公費負担上限額減額有フラグ;
+    private Boolean 小多機能居宅介護利用開始月利用有フラグ;
 }

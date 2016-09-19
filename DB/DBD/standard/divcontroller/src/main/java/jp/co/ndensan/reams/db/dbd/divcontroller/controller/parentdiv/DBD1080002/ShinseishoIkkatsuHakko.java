@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.KouhoushaJoho;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShinseishoHakkoTaishoshaHaakuBatch;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd102020.DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD102020.DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.kouhoushajoho.KouhoushaJohoParameter;
 import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1080002.DBD1080002StateName.世帯所得;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1080002.DBD1080002TransitionEventName;

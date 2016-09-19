@@ -30,6 +30,7 @@ public class KyufuJohoHandler {
     private static final int MONTH_3 = 3;
     private static final int YEAR_1 = 1;
     private static final int YEAR_2 = 2;
+    private static final int INDEX_1 = 1;
     private final KyufuJohoDiv div;
 
     /**
@@ -60,7 +61,7 @@ public class KyufuJohoHandler {
     public void set居宅サービス計画情報(KyufuJohoBusiness kyufuJoho) {
         if (kyufuJoho != null) {
             div.getTxtTodokede().setValue(new RDate(kyufuJoho.get届出年月日().toString()));
-            div.getTxtKeikakuSakuseiKubun().setValue(set作成区分(kyufuJoho));
+            set作成区分(kyufuJoho);
         }
 
     }
@@ -69,8 +70,9 @@ public class KyufuJohoHandler {
      * 前年度福祉用具販売費情報の取得です。
      *
      * @param kyufuJoho KyufuJohoBusiness
+     * @param index int
      */
-    public void set前年度情報(KyufuJohoBusiness kyufuJoho) {
+    public void set前年度情報(KyufuJohoBusiness kyufuJoho, int index) {
         FlexibleDate date = FlexibleDate.getNowDate();
         if (date.getMonthValue() <= MONTH_3) {
             div.getTxtMaeNando().setValue(new RString(date.getYear().minusYear(YEAR_2).wareki().toDateString().toString()));
@@ -78,9 +80,12 @@ public class KyufuJohoHandler {
             div.getTxtMaeNando().setValue(new RString(date.getYear().minusYear(YEAR_1).wareki().toDateString().toString()));
         }
         if (kyufuJoho != null) {
-            div.getTxtMaeKingakuGoukei().setValue(カンマ編集(kyufuJoho.get購入金額()));
-            div.getTxtMaeSeihutankuGoukei().setValue(カンマ編集(kyufuJoho.get保険請求額()));
-            div.getTxtMaeSeikyukuGoukei().setValue(カンマ編集(kyufuJoho.get利用者負担額()));
+            if (index == INDEX_1) {
+                div.getTxtMaeKingakuGoukei().setValue(カンマ編集(kyufuJoho.get購入金額()));
+            } else {
+                div.getTxtMaeSeikyukuGoukei().setValue(カンマ編集(kyufuJoho.get保険請求額()));
+                div.getTxtMaeSeihutankuGoukei().setValue(カンマ編集(kyufuJoho.get利用者負担額()));
+            }
         }
     }
 
@@ -88,8 +93,9 @@ public class KyufuJohoHandler {
      * 今年度福祉用具販売費情報の取得です。
      *
      * @param kyufuJoho KyufuJohoBusiness
+     * @param index int
      */
-    public void set今年度情報(KyufuJohoBusiness kyufuJoho) {
+    public void set今年度情報(KyufuJohoBusiness kyufuJoho, int index) {
         RDate date = RDate.getNowDate();
         if (date.getMonthValue() <= MONTH_3) {
             div.getTxtKonNando().setValue(new RString(date.getYear().minusYear(YEAR_2).wareki().toDateString().toString()));
@@ -97,9 +103,12 @@ public class KyufuJohoHandler {
             div.getTxtKonNando().setValue(new RString(date.getYear().minusYear(YEAR_1).wareki().toDateString().toString()));
         }
         if (kyufuJoho != null) {
-            div.getTxtKonKingakuGoukei().setValue(カンマ編集(kyufuJoho.get購入金額()));
-            div.getTxtKonSeihutankuGoukei().setValue(カンマ編集(kyufuJoho.get保険請求額()));
-            div.getTxtKonSeikyukuGoukei().setValue(カンマ編集(kyufuJoho.get利用者負担額()));
+            if (index == INDEX_1) {
+                div.getTxtKonKingakuGoukei().setValue(カンマ編集(kyufuJoho.get購入金額()));
+            } else {
+                div.getTxtKonSeikyukuGoukei().setValue(カンマ編集(kyufuJoho.get保険請求額()));
+                div.getTxtKonSeihutankuGoukei().setValue(カンマ編集(kyufuJoho.get利用者負担額()));
+            }
         }
     }
 
@@ -200,7 +209,7 @@ public class KyufuJohoHandler {
         return bunnrui;
     }
 
-    private RString set作成区分(KyufuJohoBusiness kyufujoho) {
+    private void set作成区分(KyufuJohoBusiness kyufujoho) {
         if (!RString.isNullOrEmpty(kyufujoho.get事業作成区分())) {
             div.getTxtKeikakuSakuseiKubun().setValue(kyufujoho.get事業作成区分());
             if (!RString.isNullOrEmpty(kyufujoho.get事業適用開始())) {
@@ -225,7 +234,6 @@ public class KyufuJohoHandler {
             div.getTxtZigyoushaKodo().setValue(RString.EMPTY);
             div.getTxtZigyoushaMesai().setValue(RString.EMPTY);
         }
-        return RString.EMPTY;
     }
 
     private RString カンマ編集(int kegaku) {

@@ -31,7 +31,7 @@ public class IdoufunRiyoushyafutanKanendoMainHandler {
 
     private final IdoufunRiyoushyafutanKanendoDiv div;
     private final RDateTime dateTime;
-
+    private static final RString 時分秒 = new RString("00:00:00");
     private static final int NUM_ONE = 1;
     private static final int NUM_SEVEN = 7;
 
@@ -76,11 +76,15 @@ public class IdoufunRiyoushyafutanKanendoMainHandler {
      * @param business ShoriDateKanri
      */
     public void set取得できたの抽出期間(ShoriDateKanri business) {
-        div.getTxtZenkaiKaishiDate().setValue(get日期(getパターン1(business.get対象開始年月日())));
+        if (business.get対象開始年月日() != null && !business.get対象開始年月日().isEmpty()) {
+            div.getTxtZenkaiKaishiDate().setValue(get日期(getパターン1(business.get対象開始年月日())));
+        }
         div.getTxtZenkaiKaishiTime().setValue(new RTime(getパターン141(business.get対象開始日時())));
-        div.getTxtZenkaiShuryoDate().setValue(get日期(getパターン1(business.get対象終了年月日())));
+        if (business.get対象終了年月日() != null && !business.get対象終了年月日().isEmpty()) {
+            div.getTxtKonkaiKaishiDate().setValue(get日期(getパターン1(business.get対象終了年月日())));
+            div.getTxtZenkaiShuryoDate().setValue(get日期(getパターン1(business.get対象終了年月日())));
+        }
         div.getTxtZenkaiShuryoTime().setValue(new RTime(getパターン141(business.get対象終了日時())));
-        div.getTxtKonkaiKaishiDate().setValue(get日期(getパターン1(business.get対象終了年月日())));
         div.getTxtKonkaiKaishiTime().setValue(new RTime(getパターン141(business.get対象終了日時())));
         div.getTxtKonkaiShuryoDate().setValue(get日期(getパターン1(new FlexibleDate(dateTime.getDate().toString()))));
         div.getTxtKonkaiShuryoTime().setValue(new RTime(dateTime.getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss)));
@@ -92,11 +96,11 @@ public class IdoufunRiyoushyafutanKanendoMainHandler {
      * @param business ShoriDateKanri
      */
     public void set取得できないの抽出期間(ShoriDateKanri business) {
-        div.getTxtZenkaiKaishiDate().setValue(get日期(RString.EMPTY));
-        div.getTxtZenkaiKaishiTime().setValue(new RTime(RString.EMPTY));
-        div.getTxtZenkaiShuryoDate().setValue(get日期(getパターン1(business.get対象終了年月日())));
+        if (business.get対象終了年月日() != null && !business.get対象終了年月日().isEmpty()) {
+            div.getTxtZenkaiShuryoDate().setValue(get日期(getパターン1(business.get対象終了年月日())));
+            div.getTxtKonkaiKaishiDate().setValue(get日期(getパターン1(business.get対象終了年月日())));
+        }
         div.getTxtZenkaiShuryoTime().setValue(new RTime(getパターン141(business.get対象終了日時())));
-        div.getTxtKonkaiKaishiDate().setValue(get日期(getパターン1(business.get対象終了年月日())));
         div.getTxtKonkaiKaishiTime().setValue(new RTime(getパターン141(business.get対象終了日時())));
         div.getTxtKonkaiShuryoDate().setValue(get日期(getパターン1(new FlexibleDate(dateTime.getDate().toString()))));
         div.getTxtKonkaiShuryoTime().setValue(new RTime(dateTime.getTime().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss)));
@@ -130,24 +134,18 @@ public class IdoufunRiyoushyafutanKanendoMainHandler {
     }
 
     private RDate get日期(RString 年月日) {
-        if (!年月日.isNullOrEmpty()) {
-            return new RDate(年月日.toString());
-        }
-        return null;
+        return new RDate(年月日.toString());
     }
 
     private RString getパターン1(FlexibleDate 年月日) {
-        if (年月日 != null && !年月日.isEmpty()) {
-            return 年月日.wareki().toDateString();
-        }
-        return RString.EMPTY;
+        return 年月日.wareki().toDateString();
     }
 
     private RString getパターン141(YMDHMS 日時) {
         if (日時 != null && !日時.isEmpty()) {
             return strToTime(日時.toDateString()).toFormattedTimeString(DisplayTimeFormat.HH_mm_ss);
         }
-        return RString.EMPTY;
+        return 時分秒;
     }
 
     private RTime strToTime(RString 日時) {

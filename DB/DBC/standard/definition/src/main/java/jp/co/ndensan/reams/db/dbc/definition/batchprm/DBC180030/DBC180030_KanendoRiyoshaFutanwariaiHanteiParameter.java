@@ -33,7 +33,10 @@ public class DBC180030_KanendoRiyoshaFutanwariaiHanteiParameter extends BatchPar
     private static final String KEY_年度終了年月日 = "年度終了年月日";
     private static final String KEY_処理日時 = "処理日時";
     private static final String KEY_抽出回数 = "抽出回数";
+    private static final RString 異動 = new RString("2");
+    private static final RString 過年度 = new RString("3");
     private static final int INT_5 = 5;
+    private static final FlexibleYear 年度 = new FlexibleYear("2015");
     @BatchParameter(key = KEY_対象年度, name = "対象年度")
     private FlexibleYear 対象年度;
     @BatchParameter(key = KEY_基準日, name = "基準日")
@@ -71,7 +74,7 @@ public class DBC180030_KanendoRiyoshaFutanwariaiHanteiParameter extends BatchPar
             RString 前回終了date = 対象年度.minusYear(ループ回数 - 1).toDateString().concat(new RString("0731"));
             parameter.setKijunbi(new FlexibleDate(前回終了date));
         }
-        parameter.setShoriKubun(new RString("2"));
+        parameter.setShoriKubun(異動);
         parameter.setChushutsuKaishiNichiji(抽出開始日時);
         parameter.setChushutsuShuryonichiNichiji(抽出終了日時);
         parameter.setTestMode(true);
@@ -94,9 +97,9 @@ public class DBC180030_KanendoRiyoshaFutanwariaiHanteiParameter extends BatchPar
             parameter.setKijunbi(new FlexibleDate(基準日.toDateString()));
         }
         if (1 < ループ回数) {
-            parameter.setKijunbi(new FlexibleDate(基準日.toDateString()));
+            parameter.setKijunbi(get基準日(ループ回数));
         }
-        parameter.setShoriKubun(new RString("2"));
+        parameter.setShoriKubun(異動);
         parameter.setTestMode(true);
         parameter.setChushutuKaisu(ループ回数);
         return parameter;
@@ -110,19 +113,20 @@ public class DBC180030_KanendoRiyoshaFutanwariaiHanteiParameter extends BatchPar
     public DBC180020_IdoRiyoshaFutanwariaiHanteiParameter toFutanWariaiIchiranFlowParameter() {
         DBC180020_IdoRiyoshaFutanwariaiHanteiParameter parameter = new DBC180020_IdoRiyoshaFutanwariaiHanteiParameter();
         parameter.setTaishoNendo(対象年度);
-        parameter.setShoriKubun(new RString("3"));
+        parameter.setShoriKubun(過年度);
         parameter.setNendoShuryoNengappi(年度終了年月日);
         parameter.setShoriNichiji(処理日時);
         return parameter;
     }
 
     private int getループ回数() {
-        if (対象年度.equals(new FlexibleYear("2017"))) {
+        if (対象年度.minusYear(1).compareTo(年度) < INT_5) {
             return 2;
         }
-        if (対象年度.equals(new FlexibleYear("2030"))) {
-            return INT_5;
-        }
-        return 1;
+        return INT_5;
+    }
+
+    private FlexibleDate get基準日(int ループ回数) {
+        return new FlexibleDate(対象年度.minusYear(ループ回数).toDateString().concat(new RString("0731")));
     }
 }
