@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.definition.batchprm.chosahyojissekiichiran;
+package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601003;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyojissekiichiran.ChosahyoJissekiIchiranKey;
@@ -17,7 +17,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ChosahyoJissekiIchiranBatchParameter extends BatchParameterBase {
+public class DBE601003_ShinsakaiiinJissekiParameter extends BatchParameterBase {
 
     private static final String SYOHYO_SYUTURYOKU = "syohyoSyuturyoku";
     private static final String CHOSA_JISSHIBI_TO = "chosajisshibiTo";
@@ -40,7 +40,7 @@ public class ChosahyoJissekiIchiranBatchParameter extends BatchParameterBase {
     /**
      * コンストラクタです。
      */
-    public ChosahyoJissekiIchiranBatchParameter() {
+    public DBE601003_ShinsakaiiinJissekiParameter() {
     }
 
     /**
@@ -52,7 +52,7 @@ public class ChosahyoJissekiIchiranBatchParameter extends BatchParameterBase {
      * @param hokensya 保険者
      * @param keyJoho キー情報Entityリスト
      */
-    public ChosahyoJissekiIchiranBatchParameter(RString syohyoSyuturyoku,
+    public DBE601003_ShinsakaiiinJissekiParameter(RString syohyoSyuturyoku,
             RString chosajisshibiFrom,
             RString chosajisshibiTo,
             RString hokensya,

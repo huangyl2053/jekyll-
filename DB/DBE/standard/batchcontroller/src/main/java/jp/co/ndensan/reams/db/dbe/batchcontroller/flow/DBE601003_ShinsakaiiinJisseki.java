@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.chosahyojissekiichiran;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.chosahyojissekiichiran.ChosahyoJissekiIchiranProcess;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.chosahyojissekiichiran.ChosahyoJissekiIchiranBatchParameter;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE601003.ChosahyoJissekiIchiranProcess;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601003.DBE601003_ShinsakaiiinJissekiParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBE-1691-020 dangjingjing
  */
-public class ChosahyoJissekiIchiranFlow extends BatchFlowBase<ChosahyoJissekiIchiranBatchParameter> {
+public class DBE601003_ShinsakaiiinJisseki extends BatchFlowBase<DBE601003_ShinsakaiiinJissekiParameter> {
 
     private static final String CHOSAHYO_JISSEKI_ICHIRAN = "chosahyojissekiichiran";
 
