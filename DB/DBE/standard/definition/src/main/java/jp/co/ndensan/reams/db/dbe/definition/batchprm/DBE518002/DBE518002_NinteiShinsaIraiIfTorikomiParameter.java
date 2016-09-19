@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.definition.batchprm.ninteishinsakaikekkadatatorikomi;
+package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE518002;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ninteishinsakaikekkadatatorikomi.ShinsakaiKekkaDataTorikomiProcessParameter;
@@ -21,7 +21,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShinsakaiKekkaDataTorikomiBatchParameter extends BatchParameterBase {
+public class DBE518002_NinteiShinsaIraiIfTorikomiParameter extends BatchParameterBase {
 
     private static final String FILENAME = "filename";
     private static final String TORIKOMIDATAKUBUN = "torikomidatakubun";
@@ -43,7 +43,7 @@ public class ShinsakaiKekkaDataTorikomiBatchParameter extends BatchParameterBase
     /**
      * コンストラクタです。
      */
-    public ShinsakaiKekkaDataTorikomiBatchParameter() {
+    public DBE518002_NinteiShinsaIraiIfTorikomiParameter() {
 
     }
 
@@ -57,7 +57,7 @@ public class ShinsakaiKekkaDataTorikomiBatchParameter extends BatchParameterBase
      * @param torikominaiyoukubun torikominaiyoukubun
      * @param mediapath mediapath
      */
-    public ShinsakaiKekkaDataTorikomiBatchParameter(
+    public DBE518002_NinteiShinsaIraiIfTorikomiParameter(
             List<RString> filename,
             RString torikomidatakubun,
             RString shinsakaiiintorikomikubun,

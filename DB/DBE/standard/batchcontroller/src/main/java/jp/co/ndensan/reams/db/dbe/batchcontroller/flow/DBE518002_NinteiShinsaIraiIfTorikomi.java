@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.ninteishinsakaikekkadatatorikomi;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
 import java.io.File;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.ninteishinsakaikekkadatatorikomi.DataTorikomiProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.ninteishinsakaikekkadatatorikomi.ShinsakaiWariateProcess;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.ninteishinsakaikekkadatatorikomi.ShinsakaiKekkaDataTorikomiBatchParameter;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE518002.DataTorikomiProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE518002.ShinsakaiWariateProcess;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE518002.DBE518002_NinteiShinsaIraiIfTorikomiParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomi.TmpNijiHanteikekkaTourokuyoDataItijiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomi.TmpNinteiShinsakaiWariateIinJohoItijiEntity;
 import jp.co.ndensan.reams.uz.uza.batch.DbTableType;
@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBE-1841-020 xuyongchao
  */
-public class ShinsakaiKekkaDataTorikomiFlow extends BatchFlowBase<ShinsakaiKekkaDataTorikomiBatchParameter> {
+public class DBE518002_NinteiShinsaIraiIfTorikomi extends BatchFlowBase<DBE518002_NinteiShinsaIraiIfTorikomiParameter> {
 
     private static final String DATATORIKOMI_PROCESS = "DataTorikomiProcess";
     private static final String SHINSAKAIWARIATE_PROCESS = "ShinsakaiWariateProcess";
