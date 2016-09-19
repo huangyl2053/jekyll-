@@ -6,8 +6,8 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.koshintaisho.IKoshinTaishoMapper">
 
     <select resultOrdered="true" id="get調査データの取得"
-            resultType = "jp.co.ndensan.reams.db.dbd.entity.db.relate.koshinTaisho.SelectSyuuShadeTaEntity"
-            parameterType = "jp.co.ndensan.reams.db.dbd.definition.mybatisprm.koshinTaisho.KoshinTaishoMybatisParameter"
+            resultType = "jp.co.ndensan.reams.db.dbd.entity.db.relate.koshintaisho.SelectSyuuShadeTaEntity"
+            parameterType = "jp.co.ndensan.reams.db.dbd.definition.mybatisprm.koshintaisho.KoshinTaishoMybatisParameter"
             fetchSize="500">
         SELECT 
             要介護認定申請情報."shinseishoKanriNo" AS 申請書管理番号,
@@ -27,7 +27,7 @@
             要介護認定申請情報."ninteiChosaItakusakiCode" AS 認定調査委託先コード,
             要介護認定申請情報."ninteiChosainCode" AS 認定調査員コード,
             構成市町村マスタ."shichosonMeisho" AS 保険者名,
-            要介護認定完了情報.認定調査依頼完了年月日,
+            要介護認定完了情報."ninteichosaIraiKanryoYMD" AS 認定調査依頼完了年月日,
             認定調査依頼情報."ninteichosaIraiRirekiNo" AS 認定調査依頼履歴番号,
             認定調査委託先情報."jigyoshaMeisho" AS 調査委託先,
             認定調査委託先情報."jigyoshaMeishoKana" AS 委託先の事業者名称カナ,
@@ -94,8 +94,8 @@
             認定調査票基本調査調査項目."remban" AS 調査項目連番,
             認定調査票基本調査調査項目."researchItem" AS 内容
         FROM rgdb."DbT4101NinteiShinseiJoho" AS 要介護認定申請情報
-        INNER JOIN rgdb."DbT4105NinteiKanryoJoho" AS 要介護認定完了情報
-            ON 要介護認定申請情報."shinseishoKanriNo" = 要介護認定完了情報."申請書管理番号"
+        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS 要介護認定完了情報
+            ON 要介護認定申請情報."shinseishoKanriNo" = 要介護認定完了情報."shinseishoKanriNo"
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS 構成市町村マスタ
             ON 構成市町村マスタ."shoKisaiHokenshaNo" = 要介護認定申請情報."shoKisaiHokenshaNo"
         LEFT JOIN rgdb."DbT4201NinteichosaIraiJoho" AS 認定調査依頼情報
@@ -112,12 +112,12 @@
 	    AND 認定調査委託先情報."shichosonCode" = 構成市町村マスタ."shichosonCode"
 	    AND 認定調査委託先情報."jokyoFlag" = TRUE
         LEFT JOIN rgdb."DbT4913ChosainJoho" AS 調査員情報
-            ON 調査員情報."ninteiChosaItakusakiCode" = 要介護認定申請情報．"ninteiChosaItakusakiCode"
+            ON 調査員情報."ninteiChosaItakusakiCode" = 要介護認定申請情報."ninteiChosaItakusakiCode"
 	    AND 調査員情報."ninteiChosainCode" = 要介護認定申請情報."ninteiChosainCode"
 	    AND 調査員情報."shichosonCode" = 構成市町村マスタ."shichosonCode"
 	    AND 調査員情報."jokyoFlag" = TRUE
         LEFT JOIN rgdb."DbT4202NinteichosahyoGaikyoChosa" AS 認定調査票概況調査
-            ON　認定調査票概況調査."shinseishoKanriNo" = 要介護認定申請情報."shinseishoKanriNo"
+            ON 認定調査票概況調査."shinseishoKanriNo" = 要介護認定申請情報."shinseishoKanriNo"
             AND 認定調査票概況調査."gaikyoChosaTextImageKubun" = #{概況調査テキストイメージ区分}
             AND 要介護認定申請情報."koroshoIfShikibetsuCode" = 認定調査票概況調査."koroshoIfShikibetsuCode"
             AND NOT EXISTS (SELECT 'X'
@@ -171,7 +171,7 @@
                                 AND 認定調査票概況調査施設利用."ninteichosaRirekiNo" &lt; G."ninteichosaRirekiNo"
                                 )
         LEFT JOIN rgdb."DbT4203NinteichosahyoKihonChosa" AS 認定調査票基本調査
-            ON　認定調査票基本調査."shinseishoKanriNo" = 要介護認定申請情報."shinseishoKanriNo"
+            ON 認定調査票基本調査."shinseishoKanriNo" = 要介護認定申請情報."shinseishoKanriNo"
             AND 要介護認定申請情報."koroshoIfShikibetsuCode" = 認定調査票基本調査."koroshoIfShikibetsuCode"
             AND NOT EXISTS (SELECT 'X' 
                                 FROM rgdb."DbT4203NinteichosahyoKihonChosa" AS H
@@ -189,7 +189,7 @@
                                 AND 認定調査票基本調査調査項目."ninteichosaRirekiNo" &lt; I."ninteichosaRirekiNo"
                                 )
         LEFT JOIN rgdb."DbT4205NinteichosahyoTokkijiko" AS 認定調査票特記情報
-            ON　認定調査票特記情報."shinseishoKanriNo" = 要介護認定申請情報."shinseishoKanriNo"
+            ON 認定調査票特記情報."shinseishoKanriNo" = 要介護認定申請情報."shinseishoKanriNo"
             AND 認定調査票特記情報."tokkijikoTextImageKubun" = #{特記事項テキストイメージ区分}
             AND NOT EXISTS (SELECT 'X'
                                 FROM rgdb."DbT4205NinteichosahyoTokkijiko" AS J
@@ -197,15 +197,15 @@
                                 AND 認定調査票特記情報."ninteichosaRirekiNo" &lt; J."ninteichosaRirekiNo"
                                 )
         WHERE
-	    要介護認定完了情報．認定申請情報登録完了年月日 IS NOT NULL
-            AND	要介護認定完了情報.認定審査会割当完了年月日 IS NULL
-            AND	要介護認定完了情報.認定審査会完了年月日　IS NULLL
-            AND	要介護認定完了情報.センター送信年月日 IS NULL
+	    要介護認定完了情報."ninteiShinseiJohoTorokuKanryoYMD" IS NOT null
+            AND	要介護認定完了情報."ninteiShinsakaiWariateKanryoYMD" IS null
+            AND	要介護認定完了情報."ninteiShinsakaiKanryoYMD" IS null
+            AND	要介護認定完了情報."centerSoshinYMD" IS null
             AND	要介護認定申請情報."shinseishoKanriNo" IN (#{申請書管理番号})
             AND	要介護認定申請情報."shoriJotaiKubun" = #{処理状態区分}
             AND	要介護認定申請情報."logicalDeletedFlag" = FALSE
-        ORDER BY 被保険者氏名カナ,認定申請年月日,証記載保険者番号,	
-                        サービスの状況連番,サービスの状況フラグ連番,記入項目連番,施設利用連番,調査項目連番 ,認定調査特記事項番号,認定調査特記事項連番 desc
+        ORDER BY 被保険者氏名カナ, 認定申請年月日, 証記載保険者番号,	
+                        サービスの状況連番, サービスの状況フラグ連番, 記入項目連番, 施設利用連番, 調査項目連番, 認定調査特記事項番号, 認定調査特記事項連番
     </select>
 
     <select resultOrdered="true" id="get認定調査依頼情報の取得"
