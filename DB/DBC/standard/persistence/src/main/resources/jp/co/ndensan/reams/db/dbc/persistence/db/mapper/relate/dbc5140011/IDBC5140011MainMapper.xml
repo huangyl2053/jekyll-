@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-3330-010 lihang -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc5140011.IDBC5140011MainMapper">
+    <select id="get介護サービス種類データ" resultMap="resultMap_DbT7130KaigoServiceShuruiEntity" fetchSize="500" resultOrdered="true">
+        SELECT mst.*
+        FROM rgdb."DbT7130KaigoServiceShurui" AS mst 
+        WHERE (NOT EXISTS
+        (SELECT mst."isDeleted" ,mst."serviceShuruiCd", mst."teikyoKaishiYM"
+        FROM rgdb."DbT7130KaigoServiceShurui" AS slv WHERE slv."isDeleted" = FALSE
+        AND mst."serviceShuruiCd" = slv."serviceShuruiCd"
+        AND mst."teikyoKaishiYM" <![CDATA[ < ]]> slv."teikyoKaishiYM"))
+        AND mst."isDeleted" = FALSE
+    </select>
+
+    <resultMap id="resultMap_DbT7130KaigoServiceShuruiEntity" 
+                   type="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7130KaigoServiceShuruiEntity" autoMapping="true">
+        <result property="serviceShuruiCd" column="DbT7130KaigoServiceShurui_serviceShuruiCd" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="teikyoKaishiYM" column="DbT7130KaigoServiceShurui_teikyoKaishiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="insertDantaiCd" column="DbT7130KaigoServiceShurui_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="DbT7130KaigoServiceShurui_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="DbT7130KaigoServiceShurui_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="DbT7130KaigoServiceShurui_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="DbT7130KaigoServiceShurui_isDeleted" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+        <result property="updateCount" column="DbT7130KaigoServiceShurui_updateCount" />
+        <result property="lastUpdateTimestamp" column="DbT7130KaigoServiceShurui_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="DbT7130KaigoServiceShurui_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="teikyoshuryoYM" column="DbT7130KaigoServiceShurui_teikyoshuryoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="serviceShuruiMeisho" column="DbT7130KaigoServiceShurui_serviceShuruiMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="serviceShuruiRyakusho" column="DbT7130KaigoServiceShurui_serviceShuruiRyakusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="serviceBunrruicode" column="DbT7130KaigoServiceShurui_serviceBunrruicode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="serviceShuruiNaibuCd" column="DbT7130KaigoServiceShurui_serviceShuruiNaibuCd" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ServiceShuruiCodeTypeHandler"/>
+        <result property="gendogakuKubun" column="DbT7130KaigoServiceShurui_gendogakuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yusenJuni" column="DbT7130KaigoServiceShurui_yusenJuni" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kyotakuServiceKubun" column="DbT7130KaigoServiceShurui_kyotakuServiceKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shiteiServiceKubun" column="DbT7130KaigoServiceShurui_shiteiServiceKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kijunGaitoServiceKubun" column="DbT7130KaigoServiceShurui_kijunGaitoServiceKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="minashiKubun" column="DbT7130KaigoServiceShurui_minashiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gamenHyojiKubun" column="DbT7130KaigoServiceShurui_gamenHyojiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shien1InKahiKubun" column="DbT7130KaigoServiceShurui_shien1InKahiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shien2InKahiKubun" column="DbT7130KaigoServiceShurui_shien2InKahiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="nijiyoboInKahiKubun" column="DbT7130KaigoServiceShurui_nijiyoboInKahiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="serviceShoBunrui" column="DbT7130KaigoServiceShurui_serviceShoBunrui" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+</mapper>
