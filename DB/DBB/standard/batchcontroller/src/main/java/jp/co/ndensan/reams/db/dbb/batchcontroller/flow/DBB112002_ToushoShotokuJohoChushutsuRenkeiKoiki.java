@@ -5,9 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb031001.SystemTimeHonsanteiFukaProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb112001.CheckShotokuJohoProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb112001.ConfigUpdateProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb112001.InsKaigoShotokuKanriProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb112001.SelectShotokuJohoProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb112001.SpoolShotokuJohoIchiranProcess;
@@ -18,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 所得情報抽出・連携_当初広域のバッチFlowです。
@@ -27,22 +24,18 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class DBB112002_ToushoShotokuJohoChushutsuRenkeiKoiki extends BatchFlowBase<DBB112002_ToushoShotokuJohoChushutsuRenkeiKoikiParameter> {
 
-    private static final String システム日時の取得 = "getSystemDate";
     private static final String CSVファイル読み込み = "csvFileYomikomi";
     private static final String 所得情報をチェックとEUCファイル出力 = "callCheckShotokuJohoProcess";
     private static final String 介護所得TEMPテーブルに登録 = "callInsKaigoShotokuKanriProcess";
     private static final String 帳票とEUCファイル出力 = "callSpoolShotokuJohoIchiranProcess";
     private static final String 処理日付管理マスタの更新 = "callUpdShoriHidukeKanriProcess";
-    private static final String 業務コンフィグの更新 = "callConfigUpdateProcess";
 
     private ShutokuJohoShuchutsuRenkeiProcessParameter processParameter;
 
     @Override
     protected void initialize() {
         processParameter = getParameter().toProcessParamter();
-        executeStep(システム日時の取得);
-        YMDHMS システム日時 = getResult(YMDHMS.class, new RString(システム日時の取得), SystemTimeHonsanteiFukaProcess.SYSTEM_TIME);
-        processParameter.set処理日時(システム日時);
+        processParameter.set処理日時(YMDHMS.now());
     }
 
     @Override
@@ -52,17 +45,6 @@ public class DBB112002_ToushoShotokuJohoChushutsuRenkeiKoiki extends BatchFlowBa
         executeStep(介護所得TEMPテーブルに登録);
         executeStep(帳票とEUCファイル出力);
         executeStep(処理日付管理マスタの更新);
-        executeStep(業務コンフィグの更新);
-    }
-
-    /**
-     * システム日時の取得を行います。
-     *
-     * @return バッチコマンド
-     */
-    @Step(システム日時の取得)
-    protected IBatchFlowCommand getSystemDate() {
-        return simpleBatch(SystemTimeHonsanteiFukaProcess.class).define();
     }
 
     /**
@@ -113,15 +95,5 @@ public class DBB112002_ToushoShotokuJohoChushutsuRenkeiKoiki extends BatchFlowBa
     @Step(処理日付管理マスタの更新)
     protected IBatchFlowCommand callUpdShoriHidukeKanriProcess() {
         return loopBatch(UpdShoriHidukeKanriProcess.class).arguments(processParameter).define();
-    }
-
-    /**
-     * 業務コンフィグの更新を行います。
-     *
-     * @return IBatchFlowCommand
-     */
-    @Step(業務コンフィグの更新)
-    protected IBatchFlowCommand callConfigUpdateProcess() {
-        return simpleBatch(ConfigUpdateProcess.class).arguments(processParameter).define();
     }
 }

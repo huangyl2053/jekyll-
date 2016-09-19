@@ -29,7 +29,7 @@
 
     <select resultOrdered="true" id="get出力対象データ"
             resultMap="ResultMap_ShotokuJohoIchiranKozaEntity"
-            parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.shutokujohochushutsurenkei.SpoolShotokuJohoIchiranMybatisParameter" fetchSize="500">
+            parameterType="jp.co.ndensan.reams.db.dbb.definition.processprm.shutokujohoshuchutsurenkei.ShutokuJohoShuchutsuRenkeiProcessParameter" fetchSize="500">
         SELECT
             <include refid="allColumns_KaigoShotoTempTableEntity" />,
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,

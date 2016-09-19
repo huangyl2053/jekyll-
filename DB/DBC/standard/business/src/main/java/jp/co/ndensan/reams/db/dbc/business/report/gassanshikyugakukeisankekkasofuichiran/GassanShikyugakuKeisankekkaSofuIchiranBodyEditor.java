@@ -87,6 +87,13 @@ public class GassanShikyugakuKeisankekkaSofuIchiranBodyEditor implements IGassan
         source.listLower_5 = doカンマ編集(高額合算Entity.getOver70_SanteiKijyunGaku());
         source.listLower_6 = doカンマ編集(高額合算Entity.getOver70_SetaiShikyuSogaku());
         source.listLower_7 = doカンマ編集(高額合算Entity.getOver70_honninShikyugaku());
+        source.yubinNo = tempEntity.getYubinNo();
+        source.choikiCode = tempEntity.getChoikiCode();
+        source.gyoseikuCode = tempEntity.getGyoseikuCode();
+        source.shimei50onKana = tempEntity.getShimei50onKana();
+        source.shichosonCode = tempEntity.getShichosonCode();
+        source.shoKisaiHokenshaNo = 高額合算Entity.getShoKisaiHokenshaNo().getColumnValue();
+
         return source;
     }
 

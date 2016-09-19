@@ -81,10 +81,6 @@ public class SelectShotokuJohoProcess extends BatchProcessBase<RString> {
 
     }
 
-    @Override
-    protected void afterExecute() {
-    }
-
     private boolean 市町村コードチェック(RString 市町村コードcsv, LasdecCode 市町村コードentity) {
         if (市町村コードcsv == null || 市町村コードcsv.isEmpty() || 市町村コードentity == null || 市町村コードentity.isEmpty()) {
             return false;

@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbb.business.report.kaigohokenshotokujohoichiran.K
 import jp.co.ndensan.reams.db.dbb.business.report.toushoshotokujohochushutsurenkei.ShotokuJohoIchiranOrder;
 import jp.co.ndensan.reams.db.dbb.business.report.toushoshotokujohochushutsurenkei.ShotokuJohoIchiranPageBreak;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB112003.SichousonEntity;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.shutokujohochushutsurenkei.SpoolShotokuJohoIchiranMybatisParameter;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.shutokujohochushutsurenkei.ShutokuJohoChushutsuRenkeiMybatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.shutokujohoshuchutsurenkei.ShutokuJohoShuchutsuRenkeiProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.csv.ShotokuJohoIchiranCSVEntity;
@@ -22,10 +22,7 @@ import jp.co.ndensan.reams.db.dbb.entity.report.kaigohokenshotokujohoichiran.Kai
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
-import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
-import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
@@ -38,7 +35,6 @@ import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryo
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
-import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
@@ -47,8 +43,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -67,7 +61,6 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -132,26 +125,19 @@ public class SpoolShotokuJohoIchiranProcess extends BatchKeyBreakBase<ShotokuJoh
         IAssociationFinder finder = AssociationFinderFactory.createInstance();
         association = finder.getAssociation();
         連番 = INT_1;
-        super.initialize();
         get出力順();
     }
 
     @Override
     protected IBatchReader createReader() {
-        KozaSearchKeyBuilder builder = new KozaSearchKeyBuilder();
-        builder.setサブ業務コード(SubGyomuCode.DBB介護賦課);
-        builder.set業務コード(GyomuCode.DB介護保険);
-        IKozaSearchKey key = builder.build();
-        ShunoKamokuAuthority sut = InstanceProvider.create(ShunoKamokuAuthority.class);
-        List<KamokuCode> list = sut.get更新権限科目コード(ControlDataHolder.getUserId());
         RString 出力順 = MyBatisOrderByClauseCreator.create(ShotokuJohoIchiranOrder.class, 出力順情報);
-        return new BatchDbReader(READ_DATA_ID, new SpoolShotokuJohoIchiranMybatisParameter(key, list, 出力順));
+        return new BatchDbReader(READ_DATA_ID, new ShutokuJohoChushutsuRenkeiMybatisParameter(出力順));
     }
 
     @Override
     protected void createWriter() {
         PageBreaker<KaigoHokenShotokuJohoIchiranSource> breakPage
-                = new ShotokuJohoIchiranPageBreak(改頁リスト);
+                = new ShotokuJohoIchiranPageBreak(pageBreakKeys);
         batchReportWriter
                 = BatchReportFactory.createBatchReportWriter(帳票ID.getColumnValue(), SubGyomuCode.DBB介護賦課).addBreak(breakPage).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
