@@ -260,40 +260,23 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
 
         KyotakuServiceKeikakuSaList reportList
                 = new KyotakuServiceKeikakuSaList();
-        reportList.set被保険者番号(entity.get被保険者番号());
-        reportList.set住民コード(entity.get識別コード());
-        reportList.set宛名(entity.get宛名());
-        reportList.set資格取得日(entity.get資格取得年月日());
-        reportList.set資格喪失日(entity.get資格喪失年月日());
-        reportList.set喪失事由(ShikakuSoshitsuJiyu.toValue(entity.get資格喪失事由コード()).get名称());
-        reportList.set受給申請日(entity.get受給申請年月日());
-        reportList.set申請事由(JukyuShinseiJiyu.toValue(entity.get受給申請事由().getColumnValue()).get名称());
-        reportList.set要介護度(YokaigoJotaiKubun09.toValue(entity.get要介護認定状態区分コード().getColumnValue()).get名称());
-        reportList.set認定有効開始日(entity.get認定有効期間開始日());
-        reportList.set認定有効終了日(entity.get認定有効期間終了日());
-        reportList.set認定日(entity.get認定年月日());
-        reportList.set計画届出日(entity.get計画届出日());
-        reportList.set計画適用開始日(entity.get適用開始年月日());
-        reportList.set計画適用終了日(entity.get適用終了年月日());
-        reportList.set事業者番号(entity.get事業者番号());
-        reportList.set電話番号(entity.get電話番号());
-        reportList.set変更年月日(entity.get変更年月日());
-        reportList.set事業者名称(entity.get事業者名称());
-        if (entity.get対象年月() == null) {
-            reportList.set備考1(定値_届出なし);
-        } else if (entity.get適用終了年月日().isBefore(processParameter.getKijyunbi())) {
-            reportList.set備考1(定値_有効なし);
-        }
-        if (!RS_3.equals(entity.get作成区分コード())
-                && entity.get事業者名称() == null) {
-            reportList.set備考2(定値_事業者無効);
-        }
+
+        setReportList(entity, reportList);
+
         if (outputReportMap.get(entity.get被保険者番号()) != null) {
+            RString 受給申請年月日 = new RString("");
+            RString 受給申請事由 = new RString("");
+            if (entity.get受給申請年月日() != null) {
+                受給申請年月日 = new RString(entity.get受給申請年月日().toString());
+            }
+            if (entity.get受給申請事由() != null) {
+                受給申請事由 = JukyuShinseiJiyu.toValue(entity.get受給申請事由().getColumnValue()).get名称();
+            }
             outputReportMap.get(entity.get被保険者番号())
                     .get(outputReportMap.get(entity.get被保険者番号()).size() - INDEX_1)
-                    .set現在の申請状況(new RString(entity.get受給申請年月日().toString())
+                    .set現在の申請状況(受給申請年月日
                             .concat(仕切る_2)
-                            .concat(JukyuShinseiJiyu.toValue(entity.get受給申請事由().getColumnValue()).get名称()));
+                            .concat(受給申請事由));
             outputReportMap.get(entity.get被保険者番号()).add(reportList);
         } else {
             List<KyotakuServiceKeikakuSaList> list = new ArrayList<>();
@@ -328,6 +311,43 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
             manager.spool(Path.combinePath(manager.getEucOutputDirectry(), CSVFILENAME), log);
         } else {
             manager.spool(Path.combinePath(manager.getEucOutputDirectry(), CSVFILENAME));
+        }
+    }
+
+    private void setReportList(KeikakuTodokedeJokyoIchiranEntity entity, KyotakuServiceKeikakuSaList reportList) {
+        reportList.set被保険者番号(entity.get被保険者番号());
+        reportList.set住民コード(entity.get識別コード());
+        reportList.set宛名(entity.get宛名());
+        reportList.set資格取得日(entity.get資格取得年月日());
+        reportList.set資格喪失日(entity.get資格喪失年月日());
+        if (entity.get資格喪失事由コード() != null) {
+            reportList.set喪失事由(ShikakuSoshitsuJiyu.toValue(entity.get資格喪失事由コード()).get名称());
+        }
+        reportList.set受給申請日(entity.get受給申請年月日());
+        if (entity.get受給申請事由() != null) {
+            reportList.set申請事由(JukyuShinseiJiyu.toValue(entity.get受給申請事由().getColumnValue()).get名称());
+        }
+        if (entity.get要介護認定状態区分コード() != null) {
+            reportList.set要介護度(YokaigoJotaiKubun09.toValue(entity.get要介護認定状態区分コード().getColumnValue()).get名称());
+        }
+        reportList.set認定有効開始日(entity.get認定有効期間開始日());
+        reportList.set認定有効終了日(entity.get認定有効期間終了日());
+        reportList.set認定日(entity.get認定年月日());
+        reportList.set計画届出日(entity.get計画届出日());
+        reportList.set計画適用開始日(entity.get適用開始年月日());
+        reportList.set計画適用終了日(entity.get適用終了年月日());
+        reportList.set事業者番号(entity.get事業者番号());
+        reportList.set電話番号(entity.get電話番号());
+        reportList.set変更年月日(entity.get変更年月日());
+        reportList.set事業者名称(entity.get事業者名称());
+        if (entity.get対象年月() == null) {
+            reportList.set備考1(定値_届出なし);
+        } else if (entity.get適用終了年月日().isBefore(processParameter.getKijyunbi())) {
+            reportList.set備考1(定値_有効なし);
+        }
+        if (!RS_3.equals(entity.get作成区分コード())
+                && entity.get事業者名称() == null) {
+            reportList.set備考2(定値_事業者無効);
         }
     }
 

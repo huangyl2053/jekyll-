@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho1;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcInformationMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010000.DBC0010000StateName;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010000.DBC0010000TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010000.KyufuJissekiShokaiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0010000.KyufuJissekiShokaiHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0010000.KyufuJissekiShokaiValidationHandler;
@@ -20,6 +21,7 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
@@ -37,7 +39,42 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class KyufuJissekiShokai {
 
     private static final int INT_ZERO = 0;
+    private static final int INT_ICHI = 1;
+    private static final int INT_NI = 2;
+    private static final int INT_SAN = 3;
+    private static final int INT_YON = 4;
+    private static final int INT_GO = 5;
     private static final int INT_ROKU = 6;
+    private static final int INT_NANA = 7;
+    private static final int INT_HACHI = 8;
+    private static final int INT_KYU = 9;
+    private static final int INT_JYU = 10;
+    private static final int INT_JYUI = 11;
+    private static final int INT_JYUN = 12;
+    private static final int INT_JYUS = 13;
+    private static final int INT_JYUY = 14;
+    private static final int INT_JYUG = 15;
+    private static final int INT_JYUR = 16;
+    private static final int INT_JYUNA = 17;
+    private static final int INT_JYUH = 18;
+    private static final int INT_JYUK = 19;
+    private static final int INT_NJYU = 20;
+    private static final int INT_NJYUI = 21;
+    private static final int INT_NJYUN = 22;
+    private static final int INT_NJYUS = 23;
+    private static final int INT_NJYUY = 24;
+    private static final int INT_NJYUG = 25;
+    private static final int INT_NJYUR = 26;
+    private static final int INT_NJYUNA = 27;
+    private static final int INT_NJYUH = 28;
+    private static final int INT_NJYUK = 29;
+    private static final int INT_SJYU = 30;
+    private static final int INT_SJYUI = 31;
+    private static final int INT_SJYUN = 32;
+    private static final int INT_SJYUS = 33;
+    private static final int INT_SJYUY = 34;
+    private static final int INT_SJYUG = 35;
+    private static final int INT_SJYUR = 36;
     private static final int INT_NJYUNG = 75;
     private static final RString サービス提供月_開始 = new RString("04");
     private static final RString サービス提供月_終了 = new RString("03");
@@ -142,6 +179,411 @@ public class KyufuJissekiShokai {
         return ResponseData.of(div).setState(DBC0010000StateName.給付実績照会検索);
     }
 
+    /**
+     * 選択ボタンを押下する場合、基本情報照会画面（DBC0010011）へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM1(KyufuJissekiShokaiDiv div) {
+        setパラメータサービス提供年月(div, INT_ICHI);
+        return response_Meisai(div);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、基本情報照会画面（DBC0010011）へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM2(KyufuJissekiShokaiDiv div) {
+        setパラメータサービス提供年月(div, INT_NI);
+        return response_Meisai(div);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、基本情報照会画面（DBC0010011）へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM3(KyufuJissekiShokaiDiv div) {
+        setパラメータサービス提供年月(div, INT_SAN);
+        return response_Meisai(div);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、基本情報照会画面（DBC0010011）へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM4(KyufuJissekiShokaiDiv div) {
+        setパラメータサービス提供年月(div, INT_YON);
+        return response_Meisai(div);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、基本情報照会画面（DBC0010011）へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM5(KyufuJissekiShokaiDiv div) {
+        setパラメータサービス提供年月(div, INT_GO);
+        return response_Meisai(div);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、基本情報照会画面（DBC0010011）へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM6(KyufuJissekiShokaiDiv div) {
+        setパラメータサービス提供年月(div, INT_ROKU);
+        return response_Meisai(div);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、基本情報照会画面（DBC0010011）へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM7(KyufuJissekiShokaiDiv div) {
+        setパラメータサービス提供年月(div, INT_NANA);
+        return response_Meisai(div);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、基本情報照会画面（DBC0010011）へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM8(KyufuJissekiShokaiDiv div) {
+        setパラメータサービス提供年月(div, INT_HACHI);
+        return response_Meisai(div);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、基本情報照会画面（DBC0010011）へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM9(KyufuJissekiShokaiDiv div) {
+        setパラメータサービス提供年月(div, INT_KYU);
+        return response_Meisai(div);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、基本情報照会画面（DBC0010011）へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM10(KyufuJissekiShokaiDiv div) {
+        setパラメータサービス提供年月(div, INT_JYU);
+        return response_Meisai(div);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、基本情報照会画面（DBC0010011）へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM11(KyufuJissekiShokaiDiv div) {
+        setパラメータサービス提供年月(div, INT_JYUI);
+        return response_Meisai(div);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、基本情報照会画面（DBC0010011）へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM12(KyufuJissekiShokaiDiv div) {
+        setパラメータサービス提供年月(div, INT_JYUN);
+        return response_Meisai(div);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、基本情報照会画面（DBC0010011）へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM13(KyufuJissekiShokaiDiv div) {
+        setパラメータサービス提供年月(div, INT_JYUS);
+        return response_Meisai(div);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、基本情報照会画面（DBC0010011）へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM14(KyufuJissekiShokaiDiv div) {
+        setパラメータサービス提供年月(div, INT_JYUY);
+        return response_Meisai(div);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、基本情報照会画面（DBC0010011）へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM15(KyufuJissekiShokaiDiv div) {
+        setパラメータサービス提供年月(div, INT_JYUG);
+        return response_Meisai(div);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、基本情報照会画面（DBC0010011）へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM16(KyufuJissekiShokaiDiv div) {
+        setパラメータサービス提供年月(div, INT_JYUR);
+        return response_Meisai(div);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、基本情報照会画面（DBC0010011）へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM17(KyufuJissekiShokaiDiv div) {
+        setパラメータサービス提供年月(div, INT_JYUNA);
+        return response_Meisai(div);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、基本情報照会画面（DBC0010011）へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM18(KyufuJissekiShokaiDiv div) {
+        setパラメータサービス提供年月(div, INT_JYUH);
+        return response_Meisai(div);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、基本情報照会画面（DBC0010011）へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM19(KyufuJissekiShokaiDiv div) {
+        setパラメータサービス提供年月(div, INT_JYUK);
+        return response_Meisai(div);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、基本情報照会画面（DBC0010011）へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM20(KyufuJissekiShokaiDiv div) {
+        setパラメータサービス提供年月(div, INT_NJYU);
+        return response_Meisai(div);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、基本情報照会画面（DBC0010011）へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM21(KyufuJissekiShokaiDiv div) {
+        setパラメータサービス提供年月(div, INT_NJYUI);
+        return response_Meisai(div);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、基本情報照会画面（DBC0010011）へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM22(KyufuJissekiShokaiDiv div) {
+        setパラメータサービス提供年月(div, INT_NJYUN);
+        return response_Meisai(div);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、基本情報照会画面（DBC0010011）へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM23(KyufuJissekiShokaiDiv div) {
+        setパラメータサービス提供年月(div, INT_NJYUS);
+        return response_Meisai(div);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、基本情報照会画面（DBC0010011）へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM24(KyufuJissekiShokaiDiv div) {
+        setパラメータサービス提供年月(div, INT_NJYUY);
+        return response_Meisai(div);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、基本情報照会画面（DBC0010011）へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM25(KyufuJissekiShokaiDiv div) {
+        setパラメータサービス提供年月(div, INT_NJYUG);
+        return response_Meisai(div);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、基本情報照会画面（DBC0010011）へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM26(KyufuJissekiShokaiDiv div) {
+        setパラメータサービス提供年月(div, INT_NJYUR);
+        return response_Meisai(div);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、基本情報照会画面（DBC0010011）へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM27(KyufuJissekiShokaiDiv div) {
+        setパラメータサービス提供年月(div, INT_NJYUNA);
+        return response_Meisai(div);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、基本情報照会画面（DBC0010011）へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM28(KyufuJissekiShokaiDiv div) {
+        setパラメータサービス提供年月(div, INT_NJYUH);
+        return response_Meisai(div);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、基本情報照会画面（DBC0010011）へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM29(KyufuJissekiShokaiDiv div) {
+        setパラメータサービス提供年月(div, INT_NJYUK);
+        return response_Meisai(div);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、基本情報照会画面（DBC0010011）へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM30(KyufuJissekiShokaiDiv div) {
+        setパラメータサービス提供年月(div, INT_SJYU);
+        return response_Meisai(div);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、基本情報照会画面（DBC0010011）へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM31(KyufuJissekiShokaiDiv div) {
+        setパラメータサービス提供年月(div, INT_SJYUI);
+        return response_Meisai(div);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、基本情報照会画面（DBC0010011）へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM32(KyufuJissekiShokaiDiv div) {
+        setパラメータサービス提供年月(div, INT_SJYUN);
+        return response_Meisai(div);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、基本情報照会画面（DBC0010011）へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM33(KyufuJissekiShokaiDiv div) {
+        setパラメータサービス提供年月(div, INT_SJYUS);
+        return response_Meisai(div);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、基本情報照会画面（DBC0010011）へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM34(KyufuJissekiShokaiDiv div) {
+        setパラメータサービス提供年月(div, INT_SJYUY);
+        return response_Meisai(div);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、基本情報照会画面（DBC0010011）へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM35(KyufuJissekiShokaiDiv div) {
+        setパラメータサービス提供年月(div, INT_SJYUG);
+        return response_Meisai(div);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、基本情報照会画面（DBC0010011）へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Meisai_btnYM36(KyufuJissekiShokaiDiv div) {
+        setパラメータサービス提供年月(div, INT_SJYUR);
+        return response_Meisai(div);
+    }
+
+    private void setパラメータサービス提供年月(KyufuJissekiShokaiDiv div, int 列) {
+        RString サービス提供年月 = div.getDgKyufuJissekiMeisaiList().getGridSetting().
+                getColumns().get(列 * INT_NI + INT_ICHI).getGroupName();
+        ViewStateHolder.put(ViewStateKeys.サービス提供年月,
+                new FlexibleYearMonth(new RDate(サービス提供年月.toString()).getYearMonth().toDateString()));
+//        ViewStateHolder.put(ViewStateKeys.整理番号, RString.class);
+//        ViewStateHolder.put(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class);
+    }
+
     private KyufuJissekiShokaiHandler getHandler(KyufuJissekiShokaiDiv div) {
         return new KyufuJissekiShokaiHandler(div);
     }
@@ -155,4 +597,20 @@ public class KyufuJissekiShokai {
                 new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), 被保険者番号.value()));
         AccessLogger.log(AccessLogType.照会, personalData);
     }
+
+    private ResponseData<KyufuJissekiShokaiDiv> response_Meisai(KyufuJissekiShokaiDiv div) {
+        return ResponseData.of(div).forwardWithEventName(DBC0010000TransitionEventName.明細_集計).respond();
+    }
+
+//    private ResponseData<KyufuJissekiShokaiDiv> response_GokeiKogakuKaigoService(KyufuJissekiShokaiDiv div) {
+//        return ResponseData.of(div).forwardWithEventName(DBC0010000TransitionEventName.高額介護サービス費).respond();
+//    }
+//
+//    private ResponseData<KyufuJissekiShokaiDiv> response_GokeiFukushiYogu(KyufuJissekiShokaiDiv div) {
+//        return ResponseData.of(div).forwardWithEventName(DBC0010000TransitionEventName.福祉用具購入費).respond();
+//    }
+//
+//    private ResponseData<KyufuJissekiShokaiDiv> response_GokeiJyutakuKayisyu(KyufuJissekiShokaiDiv div) {
+//        return ResponseData.of(div).forwardWithEventName(DBC0010000TransitionEventName.住宅改修費).respond();
+//    }
 }

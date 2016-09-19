@@ -77,7 +77,7 @@
             B."setaiCode",
             B."gaikokujinKanaShimei",
             B."shoriYMD",
-            DbT7051."yubinNo"
+            B."yubinNo"
         FROM 
             rgdb."DbV4001JukyushaDaicho" AS DbV4001
         INNER JOIN

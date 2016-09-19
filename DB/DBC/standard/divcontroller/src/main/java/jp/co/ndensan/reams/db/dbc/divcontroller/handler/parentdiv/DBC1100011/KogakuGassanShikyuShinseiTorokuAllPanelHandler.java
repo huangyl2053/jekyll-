@@ -808,11 +808,9 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         div.getBtnAddKanyuRireki().setVisible(true);
         div.getBtnKakuteiKanyuRireki().setVisible(true);
         div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowModifyButtonColumn(true);
-        div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowSelectButtonColumn(false);
         div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowDeleteButtonColumn(true);
         div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowRowState(true);
         div.getBtnKakuteiShintei().setVisible(true);
-        div.getBtnBackShinseiIchiran().setVisible(true);
         申請情報パネル制御(false);
         申請登録パネル制御(false);
     }
@@ -827,11 +825,9 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         div.getBtnAddKanyuRireki().setVisible(true);
         div.getBtnKakuteiKanyuRireki().setVisible(true);
         div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowModifyButtonColumn(true);
-        div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowSelectButtonColumn(false);
         div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowDeleteButtonColumn(true);
         div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowRowState(true);
         div.getBtnKakuteiShintei().setVisible(true);
-        div.getBtnBackShinseiIchiran().setVisible(true);
         申請情報パネル制御(false);
         申請登録パネル制御(false);
     }
@@ -846,10 +842,8 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         div.getBtnAddKanyuRireki().setVisible(false);
         div.getBtnKakuteiKanyuRireki().setVisible(false);
         div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowModifyButtonColumn(false);
-        div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowSelectButtonColumn(true);
         div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowDeleteButtonColumn(false);
         div.getDgKanyuRirekiIchiran().getGridSetting().setIsShowRowState(false);
-        div.getBtnBackShinseiIchiran().setVisible(false);
         div.getBtnKakuteiShintei().setVisible(false);
         申請情報パネル制御(true);
         申請登録パネル制御(true);
@@ -934,7 +928,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         if (年度 < INT_2008) {
             div.getDdlShinseiTaishoNendo().setDataSource(dataSource);
         } else {
-            for (int i = 年度; i >= INT_2008; i--) {
+            for (int i = 年度; INT_2008 <= i; i--) {
                 KeyValueDataSource data = new KeyValueDataSource();
                 data.setKey(new RString(i));
                 data.setValue(DateConverter.getWarekiYear(new RYear(i)));
@@ -1007,7 +1001,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
                 h26年度以降.add(new KeyValueDataSource(type.getCode(), type.get名称()));
             }
         }
-        if (年度_2013 - 年度 >= 0) {
+        if (0 <= 年度_2013 - 年度) {
             div.getDdlShotokuKubun().setDataSource(h25年度以前);
         } else if (年度_2014 - 年度 < 0 && 年度_2015 - 年度 <= 0) {
             div.getDdlShotokuKubun().setDataSource(h26年度以降);

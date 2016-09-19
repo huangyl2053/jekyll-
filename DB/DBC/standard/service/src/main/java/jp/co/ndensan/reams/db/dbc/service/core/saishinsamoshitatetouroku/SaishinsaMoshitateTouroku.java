@@ -57,7 +57,7 @@ public class SaishinsaMoshitateTouroku {
     /**
      * 給付実績該当者一覧を取得します。
      *
-     * @param parameter 介護給付費再審査申立書作成のパラメタです
+     * @param parameter 介護給付費再審査申立書作成のパラメタ
      * @return 給付実績該当者一覧
      */
     public List<KyufuJissekiGaitoshaBusiness> selectKyufuJissekiList(SaishinsaMoshitateTourokuMybatisParameter parameter) {
@@ -76,10 +76,11 @@ public class SaishinsaMoshitateTouroku {
     /**
      * 再審査申立情報一覧を取得します。
      *
-     * @param parameter 介護給付費再審査申立書作成のパラメタです
+     * @param parameter 介護給付費再審査申立書作成のパラメタ
      * @return 再審査申立情報一覧
      */
-    public List<SaishinsaMoshitateJohoBusiness> selectSaishinsaMoshitateJohoList(SaishinsaMoshitateTourokuMybatisParameter parameter) {
+    public List<SaishinsaMoshitateJohoBusiness> selectSaishinsaMoshitateJohoList(
+            SaishinsaMoshitateTourokuMybatisParameter parameter) {
         ISaishinsaMoshitateTourokuMapper mapper = mapperProvider.create(ISaishinsaMoshitateTourokuMapper.class);
         List<SaishinsaMoshitateTourokuRelateEntity> entityList = mapper.selectSaishinsaMoshitateJohoList(parameter);
         if (entityList.isEmpty()) {
@@ -95,7 +96,7 @@ public class SaishinsaMoshitateTouroku {
     /**
      * サービス種類リストを取得します。
      *
-     * @param parameter 介護給付費再審査申立書作成のパラメタです
+     * @param parameter 介護給付費再審査申立書作成のパラメタ
      * @return サービス種類リスト
      */
     public List<ServiceShuruiBusiness> selectSabisuShuruiList(SaishinsaMoshitateTourokuMybatisParameter parameter) {
@@ -114,7 +115,7 @@ public class SaishinsaMoshitateTouroku {
     /**
      * サービスコードリストを取得します。
      *
-     * @param parameter 介護給付費再審査申立書作成のパラメタです
+     * @param parameter 介護給付費再審査申立書作成のパラメタ
      * @return サービスコードリスト
      */
     public List<ServiceCodeBusiness> selectSabisuKodoList(SaishinsaMoshitateTourokuMybatisParameter parameter) {
@@ -133,10 +134,11 @@ public class SaishinsaMoshitateTouroku {
     /**
      * 特定診療識別リストを取得します。
      *
-     * @param parameter 介護給付費再審査申立書作成のパラメタです
+     * @param parameter 介護給付費再審査申立書作成のパラメタ
      * @return 特定診療識別リスト
      */
-    public List<TokuteiSinryoShikibetsuBusiness> selectTokuteiShinryoShikibetsuList(SaishinsaMoshitateTourokuMybatisParameter parameter) {
+    public List<TokuteiSinryoShikibetsuBusiness> selectTokuteiShinryoShikibetsuList(
+            SaishinsaMoshitateTourokuMybatisParameter parameter) {
         ISaishinsaMoshitateTourokuMapper mapper = mapperProvider.create(ISaishinsaMoshitateTourokuMapper.class);
         List<SaishinsaMoshitateTourokuRelateEntity> entityList = mapper.selectTokuteiShinryoShikibetsuList(parameter);
         if (entityList.isEmpty()) {
@@ -152,7 +154,7 @@ public class SaishinsaMoshitateTouroku {
     /**
      * 再審査申立情報の最大履歴番号を取得します。
      *
-     * @param parameter 介護給付費再審査申立書作成のパラメタです
+     * @param parameter 介護給付費再審査申立書作成のパラメタ
      * @return 再審査申立情報の最大履歴番号
      */
     public RString selectSaishinsaMoshitateJohoSidaiRenBan(SaishinsaMoshitateTourokuMybatisParameter parameter) {

@@ -20,7 +20,7 @@ public interface ISaishinsaMoshitateTourokuMapper {
     /**
      * 給付実績該当者一覧を取得します。
      *
-     * @param parameter 介護給付費再審査申立書作成のパラメタです
+     * @param parameter 介護給付費再審査申立書作成のパラメタ
      * @return 給付実績該当者一覧
      */
     List<SaishinsaMoshitateTourokuRelateEntity> selectKyufuJissekiList(SaishinsaMoshitateTourokuMybatisParameter parameter);
@@ -28,7 +28,7 @@ public interface ISaishinsaMoshitateTourokuMapper {
     /**
      * 再審査申立情報一覧を取得します。
      *
-     * @param parameter 介護給付費再審査申立書作成のパラメタです
+     * @param parameter 介護給付費再審査申立書作成のパラメタ
      * @return 再審査申立情報一覧
      */
     List<SaishinsaMoshitateTourokuRelateEntity> selectSaishinsaMoshitateJohoList(SaishinsaMoshitateTourokuMybatisParameter parameter);
@@ -36,7 +36,7 @@ public interface ISaishinsaMoshitateTourokuMapper {
     /**
      * サービス種類リストを取得します。
      *
-     * @param parameter 介護給付費再審査申立書作成のパラメタです
+     * @param parameter 介護給付費再審査申立書作成のパラメタ
      * @return サービス種類リスト
      */
     List<SaishinsaMoshitateTourokuRelateEntity> selectSabisuShuruiList(SaishinsaMoshitateTourokuMybatisParameter parameter);
@@ -44,7 +44,7 @@ public interface ISaishinsaMoshitateTourokuMapper {
     /**
      * サービスコードリストを取得します。
      *
-     * @param parameter 介護給付費再審査申立書作成のパラメタです
+     * @param parameter 介護給付費再審査申立書作成のパラメタ
      * @return サービスコードリスト
      */
     List<SaishinsaMoshitateTourokuRelateEntity> selectSabisuKodoList(SaishinsaMoshitateTourokuMybatisParameter parameter);
@@ -52,7 +52,7 @@ public interface ISaishinsaMoshitateTourokuMapper {
     /**
      * 特定診療識別リストを取得します。
      *
-     * @param parameter 介護給付費再審査申立書作成のパラメタです
+     * @param parameter 介護給付費再審査申立書作成のパラメタ
      * @return 特定診療識別リスト
      */
     List<SaishinsaMoshitateTourokuRelateEntity> selectTokuteiShinryoShikibetsuList(SaishinsaMoshitateTourokuMybatisParameter parameter);
@@ -60,7 +60,7 @@ public interface ISaishinsaMoshitateTourokuMapper {
     /**
      * 再審査申立情報の最大連番取得を取得します。
      *
-     * @param parameter 介護給付費再審査申立書作成のパラメタです
+     * @param parameter 介護給付費再審査申立書作成のパラメタ
      * @return 再審査申立情報の最大連番取得
      */
     RString selectSaishinsaMoshitateJohoSidaiRenBan(SaishinsaMoshitateTourokuMybatisParameter parameter);

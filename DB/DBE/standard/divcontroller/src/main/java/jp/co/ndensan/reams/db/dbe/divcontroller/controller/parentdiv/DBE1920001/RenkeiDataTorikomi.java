@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE1920001
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.renkeidatatorikomi.RenkeiDataTorikomiBatchParamter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001.DBE1920001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001.RenkeiDataTorikomiDiv;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001.dgTorikomiTaisho_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE1920001.RenkeiDataTorikomiHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE1920001.RenkeiDataTorikomiValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.renkeidatatorikomi.RenkeiDataTorikomiFinder;
@@ -30,13 +29,13 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class RenkeiDataTorikomi {
 
-    private static final RString 要介護認定申請連携データ取込みファイル名 = new RString("Z8NCI201.CSV");
-    private static final RString 認定調査委託先データ取込みファイル名 = new RString("C1NCI101.CSV");
-    private static final RString 認定調査員データ取込みファイル名 = new RString("C1NCI111.CSV");
-    private static final RString 主治医医療機関データ取込みファイル名 = new RString("C1NCI121.CSV");
-    private static final RString 主治医データ取込みファイル名 = new RString("C1NCI131.CSV");
-    private static final RString あり = new RString("1");
-
+    // TODO 内部QA：1610 Redmine#98087 文字コードはS-JISの場合、CSVファイルに上3バイトのUNICODEが知らないので、実装できない。
+//    private static final RString 要介護認定申請連携データ取込みファイル名 = new RString("Z8NCI201.CSV");
+//    private static final RString 認定調査委託先データ取込みファイル名 = new RString("C1NCI101.CSV");
+//    private static final RString 認定調査員データ取込みファイル名 = new RString("C1NCI111.CSV");
+//    private static final RString 主治医医療機関データ取込みファイル名 = new RString("C1NCI121.CSV");
+//    private static final RString 主治医データ取込みファイル名 = new RString("C1NCI131.CSV");
+//    private static final RString あり = new RString("1");
     /**
      * 初期化の設定します。
      *
@@ -47,21 +46,22 @@ public class RenkeiDataTorikomi {
         RString path = DbBusinessConfig.get(ConfigNameDBE.認定申請連携データ出力先, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         getHandler(div).onLoad(RenkeiDataTorikomiFinder.createInstance().get法改正前Flag(FlexibleDate.getNowDate()), path);
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        for (dgTorikomiTaisho_Row row : div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho().getDataSource()) {
-            if (row.getTotal().equals(あり)) {
-                if (要介護認定申請連携データ取込みファイル名.equals(row.getFileName())) {
-                    validPairs = getValidationHandler(div).check認定申請情報ファイル(validPairs, path, false);
-                } else if (認定調査委託先データ取込みファイル名.equals(row.getFileName())) {
-                    validPairs = getValidationHandler(div).check認定調査委託先情報ファイル(validPairs, path, false);
-                } else if (認定調査員データ取込みファイル名.equals(row.getFileName())) {
-                    validPairs = getValidationHandler(div).check認定調査員情報ファイル(validPairs, path, false);
-                } else if (主治医医療機関データ取込みファイル名.equals(row.getFileName())) {
-                    validPairs = getValidationHandler(div).check主治医医療機関情報ファイル(validPairs, path, false);
-                } else if (主治医データ取込みファイル名.equals(row.getFileName())) {
-                    validPairs = getValidationHandler(div).check主治医情報ファイル(validPairs, path, false);
-                }
-            }
-        }
+        // TODO 内部QA：1610 Redmine#98087 文字コードはS-JISの場合、CSVファイルに上3バイトのUNICODEが知らないので、実装できない。
+//        for (dgTorikomiTaisho_Row row : div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho().getDataSource()) {
+//            if (row.getTotal().equals(あり)) {
+//                if (要介護認定申請連携データ取込みファイル名.equals(row.getFileName())) {
+//                    validPairs = getValidationHandler(div).check認定申請情報ファイル(validPairs, path, false);
+//                } else if (認定調査委託先データ取込みファイル名.equals(row.getFileName())) {
+//                    validPairs = getValidationHandler(div).check認定調査委託先情報ファイル(validPairs, path, false);
+//                } else if (認定調査員データ取込みファイル名.equals(row.getFileName())) {
+//                    validPairs = getValidationHandler(div).check認定調査員情報ファイル(validPairs, path, false);
+//                } else if (主治医医療機関データ取込みファイル名.equals(row.getFileName())) {
+//                    validPairs = getValidationHandler(div).check主治医医療機関情報ファイル(validPairs, path, false);
+//                } else if (主治医データ取込みファイル名.equals(row.getFileName())) {
+//                    validPairs = getValidationHandler(div).check主治医情報ファイル(validPairs, path, false);
+//                }
+//            }
+//        }
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
@@ -78,42 +78,43 @@ public class RenkeiDataTorikomi {
     @SuppressWarnings("checkstyle:illegaltoken")
     public ResponseData<RenkeiDataTorikomiDiv> onClick_TorikomiBtn(RenkeiDataTorikomiDiv div, FileData[] files) {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        RString 要介護認定申請 = DbBusinessConfig.get(
-                ConfigNameDBE.要介護認定申請連携データ取込みファイル名, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        RString 認定調査委託先 = DbBusinessConfig.get(
-                ConfigNameDBE.認定調査委託先データ取込みファイル名, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        RString 認定調査員 = DbBusinessConfig.get(
-                ConfigNameDBE.認定調査員データ取込みファイル名, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        RString 主治医医療機関 = DbBusinessConfig.get(
-                ConfigNameDBE.主治医医療機関データ取込みファイル名, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        RString 主治医 = DbBusinessConfig.get(
-                ConfigNameDBE.主治医データ取込みファイル名, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        boolean is認定申請情報ファイル = false;
-        boolean is認定調査委託先情報ファイル = false;
-        boolean is認定調査員情報ファイル = false;
-        boolean is主治医医療機関情報ファイル = false;
-        boolean is主治医情報ファイル = false;
-        for (FileData file : files) {
-            if (要介護認定申請.equals(file.getFileName())) {
-                validPairs = getValidationHandler(div).check認定申請情報ファイル(validPairs, file.getFilePath(), true);
-                is認定申請情報ファイル = true;
-            } else if (認定調査委託先.equals(file.getFileName())) {
-                validPairs = getValidationHandler(div).check認定調査委託先情報ファイル(validPairs, file.getFilePath(), true);
-                is認定調査委託先情報ファイル = true;
-            } else if (認定調査員.equals(file.getFileName())) {
-                validPairs = getValidationHandler(div).check認定調査員情報ファイル(validPairs, file.getFilePath(), true);
-                is認定調査員情報ファイル = true;
-            } else if (主治医医療機関.equals(file.getFileName())) {
-                validPairs = getValidationHandler(div).check主治医医療機関情報ファイル(validPairs, file.getFilePath(), true);
-                is主治医医療機関情報ファイル = true;
-            } else if (主治医.equals(file.getFileName())) {
-                validPairs = getValidationHandler(div).check主治医情報ファイル(validPairs, file.getFilePath(), true);
-                is主治医情報ファイル = true;
-            }
-        }
-        validPairs = getValidationHandler(div).checkFileName(validPairs,
-                is認定申請情報ファイル, is認定調査委託先情報ファイル, is認定調査員情報ファイル,
-                is主治医医療機関情報ファイル, is主治医情報ファイル);
+        // TODO 内部QA：1610 Redmine#98087 文字コードはS-JISの場合、CSVファイルに上3バイトのUNICODEが知らないので、実装できない。
+//        RString 要介護認定申請 = DbBusinessConfig.get(
+//                ConfigNameDBE.要介護認定申請連携データ取込みファイル名, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+//        RString 認定調査委託先 = DbBusinessConfig.get(
+//                ConfigNameDBE.認定調査委託先データ取込みファイル名, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+//        RString 認定調査員 = DbBusinessConfig.get(
+//                ConfigNameDBE.認定調査員データ取込みファイル名, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+//        RString 主治医医療機関 = DbBusinessConfig.get(
+//                ConfigNameDBE.主治医医療機関データ取込みファイル名, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+//        RString 主治医 = DbBusinessConfig.get(
+//                ConfigNameDBE.主治医データ取込みファイル名, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+//        boolean is認定申請情報ファイル = false;
+//        boolean is認定調査委託先情報ファイル = false;
+//        boolean is認定調査員情報ファイル = false;
+//        boolean is主治医医療機関情報ファイル = false;
+//        boolean is主治医情報ファイル = false;
+//        for (FileData file : files) {
+//            if (要介護認定申請.equals(file.getFileName())) {
+//                validPairs = getValidationHandler(div).check認定申請情報ファイル(validPairs, file.getFilePath(), true);
+//                is認定申請情報ファイル = true;
+//            } else if (認定調査委託先.equals(file.getFileName())) {
+//                validPairs = getValidationHandler(div).check認定調査委託先情報ファイル(validPairs, file.getFilePath(), true);
+//                is認定調査委託先情報ファイル = true;
+//            } else if (認定調査員.equals(file.getFileName())) {
+//                validPairs = getValidationHandler(div).check認定調査員情報ファイル(validPairs, file.getFilePath(), true);
+//                is認定調査員情報ファイル = true;
+//            } else if (主治医医療機関.equals(file.getFileName())) {
+//                validPairs = getValidationHandler(div).check主治医医療機関情報ファイル(validPairs, file.getFilePath(), true);
+//                is主治医医療機関情報ファイル = true;
+//            } else if (主治医.equals(file.getFileName())) {
+//                validPairs = getValidationHandler(div).check主治医情報ファイル(validPairs, file.getFilePath(), true);
+//                is主治医情報ファイル = true;
+//            }
+//        }
+//        validPairs = getValidationHandler(div).checkFileName(validPairs,
+//                is認定申請情報ファイル, is認定調査委託先情報ファイル, is認定調査員情報ファイル,
+//                is主治医医療機関情報ファイル, is主治医情報ファイル);
         if (validPairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }

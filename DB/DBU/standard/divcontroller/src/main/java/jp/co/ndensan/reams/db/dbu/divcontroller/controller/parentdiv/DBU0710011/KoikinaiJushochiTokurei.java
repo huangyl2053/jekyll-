@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0710011;
 
-import jp.co.ndensan.reams.db.dbu.definition.batchprm.koikinaijushochitokurei.KoikinaiJushochiTokureiBatchParamter;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU050010.DBU050010_KoikinaiJushochitokureishaIchiranhyoParameter;
 import jp.co.ndensan.reams.db.dbu.definition.core.koikinaijushochitokurei.KoikinaiJushochiTokureiEnum;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0710011.KoikinaiJushochiTokureiDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0710011.KoikinaiJushochiTokureiHandler;
@@ -86,7 +86,7 @@ public class KoikinaiJushochiTokurei {
      * @param div KoikinaiJushochiTokurei のクラスファイル
      * @return ResponseData<KoikinaiJushochiTokureiDiv>
      */
-    public ResponseData<KoikinaiJushochiTokureiBatchParamter> clickBatch(KoikinaiJushochiTokureiDiv div) {
+    public ResponseData<DBU050010_KoikinaiJushochitokureishaIchiranhyoParameter> clickBatch(KoikinaiJushochiTokureiDiv div) {
         return ResponseData.of(getHandler(div).click実行()).respond();
     }
 

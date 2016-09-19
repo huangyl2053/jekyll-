@@ -172,7 +172,9 @@ public class PostMainPanelCheck {
      */
     public void 長さ判定(RString fileName, int num, int from, int to, Code 導入形態コード, dgShichoson_Row row) {
         try {
-            File file = new File(SharedFile.getBasePath().concat(IDENTIFICATION.toString()).concat(fileName.toString()));
+            RString path = new RString(SharedFile.getBasePath() + File.separator + fileName);
+            File file = new File(path.toString());
+            // File file = new File(SharedFile.getBasePath().concat(IDENTIFICATION.toString()).concat(fileName.toString()));
             InputStreamReader read = new InputStreamReader(new FileInputStream(file));
             BufferedReader bufferedReader = new BufferedReader(read);
             if (bufferedReader.readLine().length() != num) {

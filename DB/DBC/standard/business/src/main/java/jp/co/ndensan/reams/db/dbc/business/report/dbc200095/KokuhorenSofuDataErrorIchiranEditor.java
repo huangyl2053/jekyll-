@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -100,7 +101,7 @@ public class KokuhorenSofuDataErrorIchiranEditor
                 .fillType(FillType.BLANK).toDateString();
     }
 
-    private static RString getパターン12(FlexibleDate date) {
+    private static RString getパターン12(FlexibleYearMonth date) {
         if (date == null || date.isEmpty()) {
             return RString.EMPTY;
         }

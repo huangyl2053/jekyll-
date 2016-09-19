@@ -114,7 +114,7 @@
     
     <!--    同定情報一時テーブルの全件を取ります -->
     <select resultOrdered="true" id="get同定情報一時テーブルの全件" resultType="java.util.Map" fetchSize="500">
-        SELECT row_number() OVER (PARTITION BY DoteiTemp."shikibetsuCode") AS rrkno,
+        SELECT row_number() OVER (PARTITION BY Dotei."shikibetsuCode") AS rrkno,
         Dotei."shikibetsuCode",
         Dotei."dtTokubetsuChoshuGimushaCode",
         Dotei."dtKisoNenkinNo",
