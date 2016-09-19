@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.dbd102020;
+package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.gemmen.shinseisho.hakko.FutanGendogakuNinteiShinseishoHakko;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.gemmen.shinseisho.hakko.FutanGendogakuOshiraseTsuchiHakko;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.gemmen.shinseisho.hakko.FutanGengaokuNinteiShinseishoHakkoIchiranSakusei;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.gemmen.shinseisho.hakko.HomonRiyoshaFutanGengakuShinseishoHakko;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.gemmen.shinseisho.hakko.RiyoshaFutangakuGemmenShinseishoHakko;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.gemmen.shinseisho.hakko.ShafukuRiyoshaKeigenShinseishoHakko;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd102020.DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD102020.FutanGendogakuNinteiShinseishoHakko;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD102020.FutanGendogakuOshiraseTsuchiHakko;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD102020.FutanGengaokuNinteiShinseishoHakkoIchiranSakusei;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD102020.HomonRiyoshaFutanGengakuShinseishoHakko;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD102020.RiyoshaFutangakuGemmenShinseishoHakko;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD102020.ShafukuRiyoshaKeigenShinseishoHakko;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD102020.DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBD-3530-070 mawy
  */
-public class GemmenGengakuShinseishoIkkatsuHakkoFlow extends BatchFlowBase<DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter> {
+public class DBD102020_GemmenGengakuShinseishoIkkatsuHakko extends BatchFlowBase<DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter> {
 
     private static final String 介護保険負担限度額認定申請書 = "futanGendogakuNinteiShinseishoHakko";
     private static final String 利用者負担額免除申請書 = "riyoshaFutangakuGemmenShinseishoHakko";
