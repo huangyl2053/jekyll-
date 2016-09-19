@@ -381,7 +381,7 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
             csvEntity.set送付先住所コード(送付先住所コード != null
                     ? 送付先住所コード.getColumnValue() : RString.EMPTY);
             csvEntity.set送付先郵便番号(送付先郵便番号 != null
-                    ? 送付先郵便番号.getColumnValue() : RString.EMPTY);
+                    ? 送付先郵便番号.getEditedYubinNo() : RString.EMPTY);
 
             csvEntity.set送付先行政区コード(送付先行政区コード != null
                     ? 送付先行政区コード.getColumnValue() : RString.EMPTY);
@@ -828,7 +828,7 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
     private RStringBuilder get保険者コード() {
         RStringBuilder builder = new RStringBuilder();
         builder.append(保険者);
-        if (!RString.isNullOrEmpty(parameter.get保険者コード()) && すべて.equals(parameter.get保険者コード())) {
+        if (!RString.isNullOrEmpty(parameter.get保険者コード()) && !すべて.equals(parameter.get保険者コード())) {
             return builder.append(AssociationFinderFactory.createInstance().getAssociation(new LasdecCode(parameter.get保険者コード())));
         }
         return null;
