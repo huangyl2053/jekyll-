@@ -30,6 +30,7 @@ public class KyotakuServiceKeikakuSaBodyEditor implements IKyotakuServiceKeikaku
 
     @Override
     public KyotakuServiceKeikakuSakuseiSource edit(KyotakuServiceKeikakuSakuseiSource source) {
+        source.pagecnt = new RString(target.get連番());
         if (target.get計画届出状況情報リスト() != null) {
             KyotakuServiceKeikakuSaList 帳票情報 = target.get計画届出状況情報リスト();
             if (帳票情報.get宛名() != null) {
