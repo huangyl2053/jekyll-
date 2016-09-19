@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 import lombok.Getter;
 import lombok.Setter;
@@ -39,18 +40,23 @@ public class FurikomiDetailTempTableEntity extends DbTableEntityBase<FurikomiDet
     public static final RString TABLE_NAME;
 
     static {
-        TABLE_NAME = new RString("FurikomiDetailTempTable");
+        TABLE_NAME = new RString("DbWT0510FurikomiMeisai");
     }
 
     @TempTableColumnOrder(1)
+    @PrimaryKey
     private RString dataKubun;
     @TempTableColumnOrder(2)
+    @PrimaryKey
     private HihokenshaNo hihokenshaNo;
     @TempTableColumnOrder(3)
+    @PrimaryKey
     private FlexibleYearMonth serviceTeikyoYM;
     @TempTableColumnOrder(4)
+    @PrimaryKey
     private RString seiriNo;
     @TempTableColumnOrder(5)
+    @PrimaryKey
     private int rirekiNo;
     @TempTableColumnOrder(6)
     private ShoKisaiHokenshaNo shoKisaiHokenshaNo;

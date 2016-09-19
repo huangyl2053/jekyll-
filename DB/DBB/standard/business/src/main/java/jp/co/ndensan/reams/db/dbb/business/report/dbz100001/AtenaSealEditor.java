@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCode;
+import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCodeResult;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
@@ -77,6 +79,8 @@ public class AtenaSealEditor
     private RString tmp19;
     private Method method;
     private int posIndex;
+    private CustomerBarCode barcode;
+    private CustomerBarCodeResult result;
 
     /**
      * コンストラクタです
@@ -259,7 +263,9 @@ public class AtenaSealEditor
         this.tmp17 = entity.get様分1();
         this.tmp18 = entity.get右括号2();
         this.tmp19 = entity.get右括号1();
-        this.tmp5 = entity.getバーコード住所();
+        barcode = new CustomerBarCode();
+        result = barcode.convertCustomerBarCode(tmp1, entity.getバーコード住所());
+        this.tmp5 = result.getCustomerBarCode();
     }
 
 }
