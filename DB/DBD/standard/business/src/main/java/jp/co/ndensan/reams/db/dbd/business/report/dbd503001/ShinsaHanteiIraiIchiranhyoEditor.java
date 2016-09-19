@@ -7,11 +7,11 @@ package jp.co.ndensan.reams.db.dbd.business.report.dbd503001;
 
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.chohyoshuchiryokuyoshiseijyoho.ChohyoShuchiryokuyoShiseiJyohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd503001.ShinsaHanteiIraiIchiranhyoReportSource;
-import jp.co.ndensan.reams.db.dbx.definition.core.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -64,8 +64,7 @@ public class ShinsaHanteiIraiIchiranhyoEditor implements IShinsaHanteiIraiIchira
             RString 認定申請区分_申請時コード = this.帳票出力用申請情報Entityリスト.get認定申請区分_申請時コード().value();
             RString 認定申請区分_申請時名称 = RString.EMPTY;
             if (null != 認定申請区分_申請時コード && !認定申請区分_申請時コード.isEmpty()) {
-                認定申請区分_申請時名称 = new RString(
-                        NinteiShinseiKubunShinsei.toValue(Integer.parseInt(認定申請区分_申請時コード.toString())).name());
+                認定申請区分_申請時名称 = NinteiShinseiShinseijiKubunCode.toValue(認定申請区分_申請時コード).get名称();
             }
             source.listIraiichiranhyo2_3 = 認定申請区分_申請時名称;
             RString 被保険者区分コード = this.帳票出力用申請情報Entityリスト.get被保険者区分コード();

@@ -2,7 +2,9 @@ package jp.co.ndensan.reams.db.dbd.entity.report.dbd200008;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 給付額減額把握リストReportSourceです。
@@ -355,5 +357,10 @@ public class KyufuGengakuHaakuIchiranReportSource implements IReportSource {
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
+    @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
+    public RString hihokenshaNo;
+    @ReportPerson(id = "A")
+    public RString shikibetsuCode;
+
 // </editor-fold>
 }
