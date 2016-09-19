@@ -175,11 +175,6 @@ public class KaigoKyufuhiKagoMositateTourokuDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public IShisetsuJohoCommonChildDiv getCcdJigyoshaSentaku() {
-        return this.getSearchToKyufujissekiPanel().getCcdJigyoshaSentaku();
-    }
-
-    @JsonIgnore
     public TextBox getTxtHihoNo() {
         return this.getSearchToKyufujissekiPanel().getTxtHihoNo();
     }
@@ -237,6 +232,11 @@ public class KaigoKyufuhiKagoMositateTourokuDiv extends Panel {
     @JsonIgnore
     public void  setMoshitateshoSakuseiZumi(CheckBoxList MoshitateshoSakuseiZumi) {
         this.getSearchToKyufujissekiPanel().setMoshitateshoSakuseiZumi(MoshitateshoSakuseiZumi);
+    }
+
+    @JsonIgnore
+    public IShisetsuJohoCommonChildDiv getCcdJigyoshaSentaku() {
+        return this.getSearchToKyufujissekiPanel().getCcdJigyoshaSentaku();
     }
 
     @JsonIgnore
