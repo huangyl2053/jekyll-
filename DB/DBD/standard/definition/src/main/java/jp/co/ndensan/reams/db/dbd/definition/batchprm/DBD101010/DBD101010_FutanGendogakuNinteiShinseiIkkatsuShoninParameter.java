@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.definition.batchprm.dbdbt22006;
+package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD101010;
 
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBDZ00001.DBDZ00001_GemmenGengakuTaishoshaHanteiYoKonkyoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt22006.NinteiBatchKekkaHanteiProcessParameter;
@@ -27,7 +27,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class DBDBT22006Parameter extends BatchParameterBase {
+public class DBD101010_FutanGendogakuNinteiShinseiIkkatsuShoninParameter extends BatchParameterBase {
 
     @BatchParameter(key = "作成年度", name = "作成年度")
     private FlexibleYear 作成年度;

@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd581000;
+package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD581000;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd581001.DBD581001Parameter;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd582001.DBD582001Parameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD581001.DBD581001Parameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD582001.DBD582001Parameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;

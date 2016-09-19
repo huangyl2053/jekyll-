@@ -3,15 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd582001;
+package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD581001;
 
-import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd582001.DBD582001ProcessParameter;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd581001.YokaigoJissiJyokyohyoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,7 +23,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class DBD582001Parameter extends BatchParameterBase {
+public class DBD581001Parameter extends BatchParameterBase {
 
     @BatchParameter(key = "出力帳票", name = "出力帳票")
     private RString 出力帳票;
@@ -52,53 +51,31 @@ public class DBD582001Parameter extends BatchParameterBase {
     private RString 基準フラグ;
     @BatchParameter(key = "基準日", name = "基準日")
     private RString 基準日;
-    private static final RString 基準0 = new RString("0");
-    private static final RString 基準1 = new RString("1");
-    private static final int MONTH_4 = 4;
-    private static final int MONTH_12 = 12;
-    private static final int SUBSTRING_4 = 4;
-    private static final int SUBSTRING_6 = 6;
+    private static final RString 月日FROM = new RString("0401");
+    private static final RString 月日TO = new RString("0331");
 
     /**
      * バッチProcessパラメターを取得します．
      *
-     * @return DBD582001ProcessParameter
+     * @return YokaigoJissiJyokyohyoProcessParameter
      */
-    public DBD582001ProcessParameter toDBD582001ProcessParameter() {
-        FlexibleDate 基準年月日 = FlexibleDate.EMPTY;
-        if (基準フラグ.equals(基準0)) {
-            if (RDate.getNowDate().getMonthValue() >= MONTH_4 && RDate.getNowDate().getMonthValue() <= MONTH_12) {
-                基準年月日 = new FlexibleDate(対象年度.toDateString()
-                        .concat(RDate.getNowDate().toDateString().substring(SUBSTRING_4, SUBSTRING_6))
-                        .concat(基準日));
-            } else {
-                基準年月日 = new FlexibleDate(対象年度.plusYear(1).toDateString()
-                        .concat(RDate.getNowDate().toDateString().substring(SUBSTRING_4, SUBSTRING_6))
-                        .concat(基準日));
-            }
-        }
-        RString 基準年月 = RString.EMPTY;
-        if (基準フラグ.equals(基準1)) {
-            if (RDate.getNowDate().getMonthValue() >= MONTH_4 && RDate.getNowDate().getMonthValue() <= MONTH_12) {
-                基準年月 = 対象年度.toDateString().concat(new RString(RDate.getNowDate().getMonthValue()));
-            } else {
-                基準年月 = 対象年度.plusYear(1).toDateString().concat(new RString(RDate.getNowDate().getMonthValue()));
-            }
-        }
-        return new DBD582001ProcessParameter(
-                基準フラグ,
+    public YokaigoJissiJyokyohyoProcessParameter toYokaigoJissiJyokyohyoProcessParameter() {
+        FlexibleDate 対象年月日From = new FlexibleDate(new RString(対象年度.getYearValue()).concat(月日FROM));
+        FlexibleDate 対象年月日To = new FlexibleDate(new RString(対象年度.plusYear(1).getYearValue()).concat(月日TO));
+        return new YokaigoJissiJyokyohyoProcessParameter(
+                出力帳票,
+                対象年月日From,
+                対象年月日To,
                 年齢基準日,
-                基準年月日,
-                基準年月,
+                年齢From,
+                年齢To,
                 生年月日From,
                 生年月日To,
                 地区区分,
                 開始地区コード,
                 終了地区コード,
                 集計単位,
-                年齢From,
-                年齢To,
-                対象年度
-        );
+                基準日,
+                対象年度);
     }
 }

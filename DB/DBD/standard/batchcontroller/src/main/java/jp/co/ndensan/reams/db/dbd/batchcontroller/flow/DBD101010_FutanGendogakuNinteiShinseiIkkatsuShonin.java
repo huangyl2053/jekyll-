@@ -9,7 +9,7 @@ import jp.co.ndensan.reams.db.dbd.batchcontroller.step.gemmen.futangendogaku.nin
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.gemmen.futangendogaku.nintei.NinteiBatchKekkaListShutsuryoku;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.gemmen.futangendogaku.nintei.NinteiBatchMain;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.gemmen.futangendogaku.nintei.NinteiBatchTaishoTokutei;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbdbt22006.DBDBT22006Parameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD101010.DBD101010_FutanGendogakuNinteiShinseiIkkatsuShoninParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBD-3710-040 chenxin
  */
-public class DBDBT22006 extends BatchFlowBase<DBDBT22006Parameter> {
+public class DBD101010_FutanGendogakuNinteiShinseiIkkatsuShonin extends BatchFlowBase<DBD101010_FutanGendogakuNinteiShinseiIkkatsuShoninParameter> {
 
     private static final String 処理対象の特定 = "ninteiBatchTaishoTokutei";
     private static final String 減免減額対象者判定用根拠作成 = "gemmmenGengakuTaishoshaHanteiYoKonkyoSakusei";
