@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.batchcontroller.step.createtsukibetsusuiihyo;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb021011;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,10 +35,10 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBB-0760-030 lishengli
  */
-public class GoukeyiReportProcess extends BatchProcessBase<KoumokuGoukey> {
+public class TokubetuProcess extends BatchProcessBase<KoumokuGoukey> {
 
-    private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper."
-            + "relate.createtsukibetsusuiihyo.ICreateTsukibetsuSuiihyoMapper.get合計帳票データの取得");
+    private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper"
+            + ".relate.createtsukibetsusuiihyo.ICreateTsukibetsuSuiihyoMapper.get特別徴収帳票データの取得");
     private static final ReportId 帳票ID = ReportIdDBB.DBB300002.getReportId();
     private List<KoumokuGoukey> koumokuGoukeyList;
     private List<RString> 表記List;
@@ -85,7 +85,7 @@ public class GoukeyiReportProcess extends BatchProcessBase<KoumokuGoukey> {
         return reportDateHensyu.getTsukibetsuSuiihyoEntity(list,
                 mybatisPrm.getChoteiNendo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).getEra(),
                 mybatisPrm.getChoteiNendo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString().substring(2),
-                new RString("合計"),
+                new RString("特別徴収"),
                 AssociationFinderFactory.createInstance().getAssociation().get市町村名(),
                 AssociationFinderFactory.createInstance().getAssociation().getLasdecCode_().getColumnValue(), 表記List);
     }
