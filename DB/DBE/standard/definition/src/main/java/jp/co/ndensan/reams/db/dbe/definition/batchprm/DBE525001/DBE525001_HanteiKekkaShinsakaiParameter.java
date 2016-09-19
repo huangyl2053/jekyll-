@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.definition.batchprm.hanteikekkajohoshuturyoku;
+package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE525001;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuProcessParameter;
@@ -21,7 +21,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
 @Setter
-public class HanteiKekkaJohoShuturyokuBatchParameter extends BatchParameterBase {
+public class DBE525001_HanteiKekkaShinsakaiParameter extends BatchParameterBase {
 
     private static final String KEY_HAKKOUTYOUHYOU = "hakkouTyouhyou";
     private static final String KEY_KAISAIBANGOULIST = "kaisaiBangouList";

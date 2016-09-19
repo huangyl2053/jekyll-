@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.hanteikekkajohoshuturyoku;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hanteikekkajohoshuturyoku.HanteiKekkaIchiranA3Process;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hanteikekkajohoshuturyoku.HanteiKekkaIchiranProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hanteikekkajohoshuturyoku.HanteikekkaKagamiProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hanteikekkajohoshuturyoku.KekkatsuchiIchiranhyoProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hanteikekkajohoshuturyoku.ShinsakaiGijirokuProcess;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuBatchParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE525001.DBE525001_HanteiKekkaShinsakaiParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBE-0180-030 xuyannan
  */
-public class HanteiKekkaJohoShuturyokuFlow extends BatchFlowBase<HanteiKekkaJohoShuturyokuBatchParameter> {
+public class DBE525001_HanteiKekkaShinsakai extends BatchFlowBase<DBE525001_HanteiKekkaShinsakaiParameter> {
 
     private static final String HANTEIKEKKA_PROCESS = "hanteiKekkaIchiranProcess";
     private static final String HANTEIKEKKA_A3_PROCESS = "hanteiKekkaIchiranA3Process";
