@@ -249,7 +249,9 @@ public class ShikyuFushikyuDoIchiranhyoSakuseiProcess extends BatchProcessBase<S
         if (支給.equals(決定.get支給区分コード())) {
             csvEntity.set支給区分名称(名称_支給);
             csvEntity.set支払方法(決定.get支払方法区分());
-            csvEntity.set支払方法名称(ShiharaiHohoKubun.toValue(決定.get支払方法区分()).get名称());
+            if (!RString.isNullOrEmpty(決定.get支払方法区分())) {
+                csvEntity.set支払方法名称(ShiharaiHohoKubun.toValue(決定.get支払方法区分()).get名称());
+            }
             if (窓口払.equals(決定.get支払方法区分())) {
                 csvEntity.set窓口払い_支払場所(決定.get支払場所());
                 csvEntity.set窓口払_支払期間(get支払期間(決定.get支払期間開始年月日(),
