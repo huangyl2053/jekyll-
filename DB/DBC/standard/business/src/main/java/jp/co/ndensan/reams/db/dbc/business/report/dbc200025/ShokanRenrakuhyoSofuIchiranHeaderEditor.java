@@ -66,7 +66,7 @@ public class ShokanRenrakuhyoSofuIchiranHeaderEditor
                 source.hokenshaName = 償還払支給申請Entity.get保険者名();
             }
         }
-        source.sofuYM = doパターン54(parameter.get処理年月());
+        source.sofuYM = doパターン56(parameter.get処理年月());
         source.shutsuryokujun1 = get並び順(KEY_並び順の２件目);
         source.shutsuryokujun2 = get並び順(KEY_並び順の３件目);
         source.shutsuryokujun3 = get並び順(KEY_並び順の４件目);
@@ -95,10 +95,11 @@ public class ShokanRenrakuhyoSofuIchiranHeaderEditor
         return RString.EMPTY;
     }
 
-    private RString doパターン54(FlexibleYearMonth 年月) {
+    private RString doパターン56(FlexibleYearMonth 年月) {
         if (null == 年月) {
             return RString.EMPTY;
         }
-        return 年月.wareki().separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+        return 年月.wareki().eraType(EraType.KANJI_RYAKU)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 }
