@@ -36,12 +36,12 @@ public class KyufuJissekiShokaiDiv extends Panel {
     private KaigoShikakuKihonDiv ccdKaigoShikakuKihon;
     @JsonProperty("ccdKaigoAtenaInfo")
     private KaigoAtenaInfoDiv ccdKaigoAtenaInfo;
-    @JsonProperty("hiddenZenBanGo")
-    private RString hiddenZenBanGo;
     @JsonProperty("hiddenSaiGoBango")
     private RString hiddenSaiGoBango;
     @JsonProperty("hiddenSyuToKenSu")
     private RString hiddenSyuToKenSu;
+    @JsonProperty("hiddenZenBanGo")
+    private RString hiddenZenBanGo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -104,24 +104,6 @@ public class KyufuJissekiShokaiDiv extends Panel {
     }
 
     /*
-     * gethiddenZenBanGo
-     * @return hiddenZenBanGo
-     */
-    @JsonProperty("hiddenZenBanGo")
-    public RString getHiddenZenBanGo() {
-        return hiddenZenBanGo;
-    }
-
-    /*
-     * sethiddenZenBanGo
-     * @param hiddenZenBanGo hiddenZenBanGo
-     */
-    @JsonProperty("hiddenZenBanGo")
-    public void setHiddenZenBanGo(RString hiddenZenBanGo) {
-        this.hiddenZenBanGo = hiddenZenBanGo;
-    }
-
-    /*
      * gethiddenSaiGoBango
      * @return hiddenSaiGoBango
      */
@@ -155,6 +137,24 @@ public class KyufuJissekiShokaiDiv extends Panel {
     @JsonProperty("hiddenSyuToKenSu")
     public void setHiddenSyuToKenSu(RString hiddenSyuToKenSu) {
         this.hiddenSyuToKenSu = hiddenSyuToKenSu;
+    }
+
+    /*
+     * gethiddenZenBanGo
+     * @return hiddenZenBanGo
+     */
+    @JsonProperty("hiddenZenBanGo")
+    public RString getHiddenZenBanGo() {
+        return hiddenZenBanGo;
+    }
+
+    /*
+     * sethiddenZenBanGo
+     * @param hiddenZenBanGo hiddenZenBanGo
+     */
+    @JsonProperty("hiddenZenBanGo")
+    public void setHiddenZenBanGo(RString hiddenZenBanGo) {
+        this.hiddenZenBanGo = hiddenZenBanGo;
     }
 
     /*
