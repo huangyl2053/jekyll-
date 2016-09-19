@@ -230,6 +230,8 @@ public class GassanShikyugakuKeisankekkaRanrakuhyoSofuProcess extends BatchProce
                 DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
         headEntity.set保険者名(
                 DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
+        連番 = 連番 + INT_1;
+        headEntity.set連番(new RString(連番));
         headEntity.set支給申請書整理番号(entity.get高額合算支給額計算結果一時().getShikyuShinseishoSeiriNo());
         headEntity.set被保険者番号(entity.get高額合算支給額計算結果一時().getHihokenshaNo().getColumnValue());
         headEntity.set被保険者氏名(entity.get被保険者一時().getMeisho());
