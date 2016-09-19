@@ -35,6 +35,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
@@ -65,6 +66,7 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -73,16 +75,13 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.biz.ZenkokuJushoCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.util.CountedItem;
 import jp.co.ndensan.reams.uz.uza.util.Saiban;
@@ -719,9 +718,9 @@ public class NinteiShinseiTorokuUketsukeHandler {
      */
     public void edit状態_職権記載() {
 
-        div.getBtnIryohokenGuide().setDisabled(true);
+        div.getBtnIryohokenGuide().setDisabled(false);
         div.getBtnRenrakusaki().setDisabled(false);
-        div.getBtnNyuinAndShisetsuNyusho().setDisabled(true);
+        div.getBtnNyuinAndShisetsuNyusho().setDisabled(false);
         div.getBtnShichosonRenrakuJiko().setDisabled(false);
         div.getBtnChosaJokyo().setDisabled(false);
         div.getBtnTainoJokyo().setDisabled(false);
@@ -1616,9 +1615,8 @@ public class NinteiShinseiTorokuUketsukeHandler {
             iNinteiShinseiTodokedeshaDiv.getDdlTodokledeDaikoKubun().setSelectedKey(result.getEntity().get申請届出代行区分コード().getColumnValue());
         }
         if (result.getEntity().get事業者番号() != null) {
-            TextBox 事業者番号 = new TextBox();
-            事業者番号.setValue(result.getEntity().get事業者番号().getColumnValue());
-            iNinteiShinseiTodokedeshaDiv.setTxtJigyoshaCode(事業者番号);
+            RString 事業者番号 = result.getEntity().get事業者番号().getColumnValue();
+            iNinteiShinseiTodokedeshaDiv.getTxtJigyoshaCode().setValue(事業者番号);
         }
 
         List<RString> shinseiKankeishaCodeList = new ArrayList<>();
@@ -1626,33 +1624,38 @@ public class NinteiShinseiTorokuUketsukeHandler {
             shinseiKankeishaCodeList.add(code.getコード());
         }
         iNinteiShinseiTodokedeshaDiv.getDdlShinseiKankeisha().setDataSource(setDataSource(shinseiKankeishaCodeList, false));
+        iNinteiShinseiTodokedeshaDiv.getDdlShinseiKankeisha().setSelectedKey(result.getEntity().get届出者_申請者関係コード().getColumnValue());
 
-        TextBox 氏名 = new TextBox();
-        氏名.setValue(result.getEntity().get申請届出者氏名());
-        iNinteiShinseiTodokedeshaDiv.setTxtShimei(氏名);
+        RString 氏名 = result.getEntity().get申請届出者氏名();
+        iNinteiShinseiTodokedeshaDiv.getTxtShimei().setValue(氏名);
 
-        TextBox カナ氏名 = new TextBox();
-        カナ氏名.setValue(result.getEntity().get申請届出者氏名カナ());
-        iNinteiShinseiTodokedeshaDiv.setTxtKanaShimei(カナ氏名);
+        RString カナ氏名 = result.getEntity().get申請届出者氏名カナ();
+        iNinteiShinseiTodokedeshaDiv.getTxtKanaShimei().setValue(カナ氏名);
 
-        TextBox 本人との関係性 = new TextBox();
-        本人との関係性.setValue(result.getEntity().get届出者_本人との関係());
-        iNinteiShinseiTodokedeshaDiv.setTxtHonninKankeisei(本人との関係性);
+        RString 本人との関係性 = result.getEntity().get届出者_本人との関係();
+        iNinteiShinseiTodokedeshaDiv.getTxtHonninKankeisei().setValue(本人との関係性);
 
         if (new RString("0").equals(result.getEntity().get管内管外区分())) {
             iNinteiShinseiTodokedeshaDiv.getRadKannaiKangai().setSelectedKey(SELECT_KEY0);
+            iNinteiShinseiTodokedeshaDiv.set状態(new RString(NinteiShinseiTodokedeshaDiv.DisplayType.管内.toString()));
+
+            TelNo 電話番号 = result.getEntity().get申請届出者電話番号();
+            iNinteiShinseiTodokedeshaDiv.getTxtTelNo().setDomain(電話番号);
+
+            YubinNo 郵便番号 = result.getEntity().get申請届出者郵便番号();
+            iNinteiShinseiTodokedeshaDiv.getTxtYubinNo().setValue(郵便番号);
+
+            iNinteiShinseiTodokedeshaDiv.getCcdChoikiInput().load(new ChoikiCode(result.getEntity().get申請届出者住所()));
         } else if (new RString("1").equals(result.getEntity().get管内管外区分())) {
             iNinteiShinseiTodokedeshaDiv.getRadKannaiKangai().setSelectedKey(SELECT_KEY1);
+            iNinteiShinseiTodokedeshaDiv.set状態(new RString(NinteiShinseiTodokedeshaDiv.DisplayType.管外.toString()));
+
+            TelNo 電話番号 = result.getEntity().get申請届出者電話番号();
+            iNinteiShinseiTodokedeshaDiv.getTxtTelNo().setDomain(電話番号);
+
+            YubinNo 郵便番号 = result.getEntity().get申請届出者郵便番号();
+            iNinteiShinseiTodokedeshaDiv.getCcdZenkokuJushoInput().load(new ZenkokuJushoCode(result.getEntity().get申請届出者住所()), 郵便番号);
         }
-
-        TextBoxTelNo 電話番号 = new TextBoxTelNo();
-        電話番号.setDomain(result.getEntity().get申請届出者電話番号());
-        iNinteiShinseiTodokedeshaDiv.setTxtTelNo(電話番号);
-
-        TextBoxYubinNo 郵便番号 = new TextBoxYubinNo();
-        郵便番号.setValue(result.getEntity().get申請届出者郵便番号());
-        iNinteiShinseiTodokedeshaDiv.setTxtYubinNo(郵便番号);
-
     }
 
     private List<KeyValueDataSource> setDataSource(List<RString> codeList, boolean kubun) {
@@ -1679,21 +1682,13 @@ public class NinteiShinseiTorokuUketsukeHandler {
 
         IShujiiIryokikanAndShujiiInputDiv 主治医div = div.getCcdShujiiIryokikanAndShujiiInput();
 
-        TextBoxCode 主治医医療機関 = new TextBoxCode();
-        主治医医療機関.setValue(result.getEntity().get主治医医療機関コード());
-        主治医div.setTxtIryoKikanCode(主治医医療機関);
+        主治医div.getTxtIryoKikanCode().setValue(result.getEntity().get主治医医療機関コード());
 
-        TextBox 主治医医療機関名 = new TextBox();
-        主治医医療機関名.setValue(result.getEntity().get医療機関名称());
-        主治医div.setTxtIryoKikanName(主治医医療機関名);
+        主治医div.getTxtIryoKikanName().setValue(result.getEntity().get医療機関名称());
 
-        TextBoxCode 主治医 = new TextBoxCode();
-        主治医.setValue(result.getEntity().get主治医コード());
-        主治医div.setTxtShujiiCode(主治医);
+        主治医div.getTxtShujiiCode().setValue(result.getEntity().get主治医コード());
 
-        TextBox 主治医名 = new TextBox();
-        主治医名.setValue(result.getEntity().get主治医氏名());
-        主治医div.setTxtShujiiName(主治医名);
+        主治医div.getTxtShujiiName().setValue(result.getEntity().get主治医氏名());
 
         主治医div.setShiteii(result.getEntity().is指定医フラグ());
     }
@@ -1715,8 +1710,16 @@ public class NinteiShinseiTorokuUketsukeHandler {
 
         INinteiInputDiv 認定div = div.getCcdNinteiInput();
 
+        if (new RString("00").equals(result.getEntity().get異動事由().getColumnValue())) {
+            認定div.getNinteiJoho().getRadNinteiKubun().setSelectedKey(new RString("1"));
+        } else {
+            認定div.getNinteiJoho().getRadNinteiKubun().setSelectedKey(new RString("2"));
+        }
+
         if (result.getEntity().get要介護認定状態区分コード() != null) {
             認定div.getNinteiJoho().getTxtYokaigodoCode().setValue(result.getEntity().get要介護認定状態区分コード().getColumnValue());
+            認定div.getNinteiJoho().getTxtYokaigodoName().setValue(
+                    YokaigoJotaiKubun.toValue(result.getEntity().get要介護認定状態区分コード().getColumnValue()).get名称());
         }
         認定div.getNinteiJoho().getTxtNinteiYMD().setValue(result.getEntity().get認定年月日());
         認定div.getNinteiJoho().getTxtYukoKaishiYMD().setValue(result.getEntity().get認定有効期間開始年月日());
@@ -1729,7 +1732,8 @@ public class NinteiShinseiTorokuUketsukeHandler {
         IZenkaiNinteiKekkaJohoDiv 前回認定結果div = div.getCcdZenkaiNinteiKekkaJoho();
 
         if (result.getEntity().get前回要介護状態区分コード() != null) {
-            前回認定結果div.getTxtYokaigodo().setValue(result.getEntity().get前回要介護状態区分コード().getColumnValue());
+            前回認定結果div.getTxtYokaigodo().setValue(
+                    YokaigoJotaiKubun.toValue(result.getEntity().get前回要介護状態区分コード().getColumnValue()).get名称());
         }
         前回認定結果div.getTxtNinteiDay().setValue(result.getEntity().get前回認定年月日());
         前回認定結果div.getTxtYukoKikanFrom().setValue(result.getEntity().get前回認定有効期間_開始());

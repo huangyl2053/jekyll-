@@ -211,10 +211,8 @@ public class NinteiShinseiTorokuUketsuke {
 
         if (new RString("2").equals(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getDdlHihokenshaKubun().getSelectedKey())) {
-            div.getBtnIryohokenGuide().setDisabled(false);
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlTokuteiShippei().setRequired(true);
         } else {
-            div.getBtnIryohokenGuide().setDisabled(true);
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlTokuteiShippei().setRequired(false);
         }
         return ResponseData.of(div).respond();
