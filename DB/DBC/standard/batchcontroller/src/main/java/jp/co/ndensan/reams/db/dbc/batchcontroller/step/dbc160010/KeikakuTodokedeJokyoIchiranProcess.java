@@ -236,6 +236,10 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
             }
         }
 
+        if (check(entity)) {
+            return;
+        }
+
         if (!entity.get被保険者番号().equals(被保険者番号_前) && 被保険者番号_前 != null) {
             List<KyotakuServiceKeikakuSaList> list = outputReportMap.get(被保険者番号_前);
             for (KyotakuServiceKeikakuSaList result : list) {
@@ -252,10 +256,6 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
                 report.writeBy(reportSourceWriter);
             }
             outputReportMap = new HashMap<>();
-        }
-
-        if (check(entity)) {
-            return;
         }
 
         KyotakuServiceKeikakuSaList reportList
@@ -306,6 +306,22 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
 
     @Override
     protected void afterExecute() {
+        List<KyotakuServiceKeikakuSaList> list = outputReportMap.get(被保険者番号_前);
+        if (list != null) {
+            for (KyotakuServiceKeikakuSaList result : list) {
+                KyotakuServiceKeikakuSaParam param = new KyotakuServiceKeikakuSaParam();
+                param.set計画届出状況情報リスト(result);
+                param.setシステム日時(システム日付);
+                param.set申請日(申請日);
+                param.set対象者(対象者);
+                param.set届出状況(届出状況);
+                param.set基準日(基準日);
+                param.set地方公共団体(AssociationFinderFactory.createInstance().getAssociation());
+                param.set出力順(並び順);
+                KyotakuServiceKeikakuSaReport report = new KyotakuServiceKeikakuSaReport(param);
+                report.writeBy(reportSourceWriter);
+            }
+        }
         csvWriter.close();
         if (null != personalDataList && !personalDataList.isEmpty()) {
             AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
