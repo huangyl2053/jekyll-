@@ -36,21 +36,22 @@
             fetchSize="500" resultOrdered="true">
         SELECT
         <include refid="allColumns_DbWT38P1KogakuGassanKyufuJisseki" />,
-        sofuData.* 
+        <include refid="allColumns_DbT3075KogakuGassanKyufuJisseki" />
+        
         FROM 
         "DbWT38P1KogakuGassanKyufuJisseki" AS  DbWT38P1
         LEFT JOIN
-        (SELECT <include refid="allColumns_DbT3075KogakuGassanKyufuJisseki" />
+        (SELECT *
         FROM rgdb."DbT3075KogakuGassanKyufuJisseki" AS  DbT3075
-        WHERE (DbT3075_shoriYM IS NULL  OR  DbT3075_shoriYM='' )
-        AND( DbT3075_uketoriYM  IN  ('',#{処理年月})  OR DbT3075_uketoriYM IS NULL )
-        AND (DbT3075_kokanJohoShikibetsuNo  LIKE '38Q%'
-        OR(DbT3075_kokanJohoShikibetsuNo  LIKE'38P%'
-        AND DbT3075_dataKubun = '1'))) AS sofuData
-        ON DbWT38P1."hihokenshaNoIn"=sofuData."hihokenshaNo"
-        AND DbWT38P1."shikyuShinseiSeiriNo"=sofuData."shikyuShinseiSeiriNo"
-        AND DbWT38P1."jikoFutanSeiriNo"=sofuData."jikoFutanSeiriNo"
-        AND DbWT38P1."shikyuGaku"=sofuData."shikyuGaku"          
+        WHERE (DbT3075."shoriYM" IS NULL  OR  DbT3075."shoriYM"='' )
+        AND( DbT3075."uketoriYM" ='' OR DbT3075."uketoriYM" IS NULL  OR  DbT3075."uketoriYM" = #{処理年月} )
+        AND (DbT3075."kokanJohoShikibetsuNo"  LIKE '38Q%'
+        OR(DbT3075."kokanJohoShikibetsuNo"  LIKE'38P%'
+        AND DbT3075."dataKubun" = '1'))) AS DbT3075
+        ON DbWT38P1."hihokenshaNoIn"=DbT3075."hihokenshaNo"
+        AND DbWT38P1."shikyuShinseiSeiriNo"=DbT3075."shikyuShinseiSeiriNo"
+        AND DbWT38P1."jikoFutanSeiriNo"=DbT3075."jikoFutanSeiriNo"
+        AND DbWT38P1."shikyuGaku"=DbT3075."shikyuGaku"
     </select>
     
     <update id="update高額合算給付実績と一時データ" 
