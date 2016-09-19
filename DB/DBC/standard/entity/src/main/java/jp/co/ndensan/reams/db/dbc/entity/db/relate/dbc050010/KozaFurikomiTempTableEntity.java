@@ -38,7 +38,7 @@ public class KozaFurikomiTempTableEntity extends DbTableEntityBase<KozaFurikomiT
     public static final RString TABLE_NAME;
 
     static {
-        TABLE_NAME = new RString("KozaFurikomiTempTable");
+        TABLE_NAME = new RString("DbWT0511KozaFurikomi");
     }
 
     @PrimaryKey
@@ -77,7 +77,7 @@ public class KozaFurikomiTempTableEntity extends DbTableEntityBase<KozaFurikomiT
     @TempTableColumnOrder(17)
     private RString kinyuKikanShitenKanaName;
     @TempTableColumnOrder(18)
-    private RString yokinShubetsuName;
+    private RString yokinShubetsuCode;
     @TempTableColumnOrder(19)
     private RString kozaNo;
     @TempTableColumnOrder(20)
