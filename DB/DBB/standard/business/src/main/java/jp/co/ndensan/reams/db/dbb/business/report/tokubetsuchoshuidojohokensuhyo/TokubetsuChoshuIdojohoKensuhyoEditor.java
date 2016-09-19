@@ -32,7 +32,6 @@ public class TokubetsuChoshuIdojohoKensuhyoEditor implements ITokubetsuChoshuIdo
     private static final RString EIGHT = new RString("8");
     private static final int ZERO = 0;
     private static final int TWO = 2;
-    private static final int TEN = 10;
     private static final RString 月開始 = new RString("月開始");
     private static final RString 特徴追加依頼 = new RString("特徴追加依頼");
 
@@ -54,7 +53,6 @@ public class TokubetsuChoshuIdojohoKensuhyoEditor implements ITokubetsuChoshuIdo
         RString 作成時 = parameter.get作成日時().getRDateTime().getTime()
                 .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE).concat(SAKUSEI);
         source.printTimeStamp = 作成日.concat(RString.HALF_SPACE).concat(作成時);
-//        総ページ数 帳票基盤で自動で取得 source.pageCount=;
         source.testShori = RString.EMPTY;
 //        TODO 年金保険者名称 ビジネス設計
         source.nenkinHokenshaName = new RString("年金保険者名称");
@@ -64,7 +62,7 @@ public class TokubetsuChoshuIdojohoKensuhyoEditor implements ITokubetsuChoshuIdo
                 fillType(FillType.BLANK).toDateString().
                 concat(parameter.get処理対象月()).concat(月開始);
         source.shichosonCode = parameter.get特徴異動件数Entity().get構成市町村コード().getColumnValue();
-//        TODO      市町村名称 ビジネス設計
+//        TODO   市町村名称 ビジネス設計
         source.shichosonName = new RString("市町村名称");
         RDate システム日時 = RDate.getNowDate();
         source.hokenshaNo = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, システム日時, SubGyomuCode.DBU介護統計報告);
