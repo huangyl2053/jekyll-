@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2230001;
 
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.ninteichosatokusokujyo.NinteichosaTokusokujyoFlowParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE223001.DBE223001_NinteichosaTokusokujyoParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.ninteichosatokusokujohakko.NinteiChosaTokusokujoHakkoTempData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2230001.NinteiChosaTokusokujoHakkoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2230001.NinteiChosaTokusokujoHakkoHandler;
@@ -74,8 +74,8 @@ public class NinteiChosaTokusokujoHakko {
      * @param div NinteiChosaTokusokujoHakkoDiv
      * @return ResponseData<NinteiChosaTokusokujoHakkoDiv>
      */
-    public ResponseData<NinteichosaTokusokujyoFlowParameter> jikkou(NinteiChosaTokusokujoHakkoDiv div) {
-        NinteichosaTokusokujyoFlowParameter parameter = new NinteichosaTokusokujyoFlowParameter();
+    public ResponseData<DBE223001_NinteichosaTokusokujyoParameter> jikkou(NinteiChosaTokusokujoHakkoDiv div) {
+        DBE223001_NinteichosaTokusokujyoParameter parameter = new DBE223001_NinteichosaTokusokujyoParameter();
         NinteiChosaTokusokujoHakkoTempData tempData = getHandler(div).getTempData();
         parameter.toDBE223001Parameter(tempData);
         return ResponseData.of(parameter).respond();
