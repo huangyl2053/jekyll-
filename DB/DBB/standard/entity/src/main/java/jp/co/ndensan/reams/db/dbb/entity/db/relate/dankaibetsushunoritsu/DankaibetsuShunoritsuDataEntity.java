@@ -6,10 +6,8 @@
 package jp.co.ndensan.reams.db.dbb.entity.db.relate.dankaibetsushunoritsu;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.ca.cax.entity.db.relate.TotalShunyuRelateEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2002FukaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 
 /**
@@ -22,9 +20,9 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEnt
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DankaibetsuShunoritsuDataEntity implements Serializable {
 
-    private TotalShunyuRelateEntity 収入情報取得PSM;
+    private TotalShunyuDataEntity 収入情報取得PSM;
     private UaFt200FindShikibetsuTaishoEntity 宛名;
     private DbT2002FukaEntity 介護賦課;
     private DbT1001HihokenshaDaichoEntity 被保険者台帳;
-    private DbT4001JukyushaDaichoEntity 受給者台帳;
+    private JukyushaKyufujissekiCountEntity 受給者給付COUNT;
 }

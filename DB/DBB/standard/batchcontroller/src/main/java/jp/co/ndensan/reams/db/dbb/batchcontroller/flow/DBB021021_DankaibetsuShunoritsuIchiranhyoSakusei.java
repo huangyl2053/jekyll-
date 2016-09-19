@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.dbb021021;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  *
  * @reamsid_L DBB-1630-020 tianshuai
  */
-public class DBB021021_DankaibetsuShunoritsuIchiranhyoSakuseiFlow extends
+public class DBB021021_DankaibetsuShunoritsuIchiranhyoSakusei extends
         BatchFlowBase<DBB021021_DankaibetsuShunoritsuIchiranhyoSakuseiParameter> {
 
     private static final String INS_DANKAIBETSU_SHUNORITSU = "insDankaibetsuShunoritsuTmpProcess";
