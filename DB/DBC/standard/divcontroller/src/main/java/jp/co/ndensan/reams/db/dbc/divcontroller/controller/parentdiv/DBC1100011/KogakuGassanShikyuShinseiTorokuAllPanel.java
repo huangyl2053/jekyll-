@@ -86,6 +86,19 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
             div.getTxtIryoShikyuShinseishoSeiriBango4().setReadOnly(false);
             return ResponseData.of(div).setState(DBC1100011StateName.申請登録);
         } else if (RSTRING_TWO.equals(高額合算申請書保持.get申請状態()) || RSTRING_THREE.equals(高額合算申請書保持.get申請状態())) {
+            if (引き継ぎデータ != null) {
+                HihokenshaNo 被保険者番号 = 引き継ぎデータ.get被保険者番号();
+                FlexibleYear 対象年度 = 引き継ぎデータ.get対象年度();
+                HokenshaNo 保険者番号 = 引き継ぎデータ.get保険者番号();
+                RString 整理番号 = 引き継ぎデータ.get整理番号();
+                Decimal 履歴番号 = 引き継ぎデータ.get履歴番号();
+                KogakuGassanShinseishoIdentifier identifier = new KogakuGassanShinseishoIdentifier(
+                        被保険者番号, 対象年度, 保険者番号, 整理番号, 履歴番号);
+                KogakuGassanShinseishoResult 高額合算申請書 = 高額合算申請書保持.get高額合算申請書(identifier);
+                ViewStateHolder.put(ViewStateKeys.高額合算申請書, 高額合算申請書);
+                handler.onClick_dgShinseiJohoModify(高額合算申請書.get高額合算申請書());
+                ViewStateHolder.put(ViewStateKeys.高額合算申請書状態, 修正);
+            }
             div.getTxtIryoShikyuShinseishoSeiriBango2().setReadOnly(true);
             div.getTxtIryoShikyuShinseishoSeiriBango3().setReadOnly(true);
             div.getTxtIryoShikyuShinseishoSeiriBango4().setReadOnly(true);
@@ -293,20 +306,6 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
     }
 
     /**
-     * 加入履歴グリッド「選択」ボタンのイベントです。
-     *
-     * @param div JikoFutangakuHoseiDiv
-     * @return ResponseData
-     */
-    public ResponseData<KogakuGassanShikyuShinseiTorokuAllPanelDiv> onClick_dgKanyRirekiSelect(
-            KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-        KogakuGassanShikyuShinseiTorokuAllPanelHandler handler = getHandler(div);
-        handler.onClick_dgKanyRirekiSelect();
-        ViewStateHolder.put(ViewStateKeys.加入歴状態, 照会);
-        return ResponseData.of(div).setState(DBC1100011StateName.申請登録加入履歴情報);
-    }
-
-    /**
      * 加入履歴グリッド「削除」ボタンのイベントです。
      *
      * @param div JikoFutangakuHoseiDiv
@@ -397,7 +396,13 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
                 排他解除(排他情報.concat(被保険者番号));
             }
             handler.onClick_btnShinseiJohoModoru();
-            return ResponseData.of(div).setState(DBC1100011StateName.申請登録);
+            KogakuGassanShinseishoHoji 高額合算申請書保持
+                    = ViewStateHolder.get(ViewStateKeys.高額合算申請書保持Entity, KogakuGassanShinseishoHoji.class);
+            if (RSTRING_ONE.equals(高額合算申請書保持.get申請状態())) {
+                return ResponseData.of(div).setState(DBC1100011StateName.申請登録);
+            } else if (RSTRING_TWO.equals(高額合算申請書保持.get申請状態()) || RSTRING_THREE.equals(高額合算申請書保持.get申請状態())) {
+                return ResponseData.of(div).setState(DBC1100011StateName.変更取下げ);
+            }
         }
         return ResponseData.of(div).respond();
     }
