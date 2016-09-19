@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class JukyushaTeiseiRenrakuhyoTorokuFinder {
 
     private final DbT3001JukyushaIdoRenrakuhyoDac 受給者異動送付Dac;
+    private static final Decimal DE_ZERO = new Decimal(0);
     private static final RString TWO = new RString("2");
     private static final RString THREE = new RString("3");
 
@@ -191,7 +192,8 @@ public class JukyushaTeiseiRenrakuhyoTorokuFinder {
         if (!is比較変更文字列(変更前entity.get認定有効期間終了年月日(), 変更後entity.get認定有効期間終了年月日())) {
             変更後entity = 変更後entity.createBuilderForEdit().set認定有効期間終了年月日(RString.EMPTY).build();
         }
-        if (変更前entity.get訪問通所サービス支給限度基準額() != 変更後entity.get訪問通所サービス支給限度基準額()) {
+        if (!is比較変更数字(new Decimal(変更前entity.get訪問通所サービス支給限度基準額()),
+                new Decimal(変更後entity.get訪問通所サービス支給限度基準額()))) {
             変更後entity = 変更後entity.createBuilderForEdit().set訪問通所サービス支給限度基準額(0).build();
         }
         if (!is比較変更年月日(変更前entity.get訪問通所サービス上限管理適用期間開始年月日(),
@@ -204,9 +206,9 @@ public class JukyushaTeiseiRenrakuhyoTorokuFinder {
             変更後entity = 変更後entity.createBuilderForEdit().
                     set訪問通所サービス上限管理適用期間終了年月日(RString.EMPTY).build();
         }
-        if (変更前entity.get短期入所サービス支給限度基準額() != 変更後entity.get短期入所サービス支給限度基準額()) {
-            変更後entity = 変更後entity.createBuilderForEdit().
-                    set短期入所サービス支給限度基準額(0).build();
+        if (!is比較変更数字(new Decimal(変更前entity.get短期入所サービス支給限度基準額()),
+                new Decimal(変更後entity.get短期入所サービス支給限度基準額()))) {
+            変更後entity = 変更後entity.createBuilderForEdit().set短期入所サービス支給限度基準額(0).build();
         }
         if (!is比較変更年月日(変更前entity.get短期入所サービス上限管理適用期間開始年月日(),
                 変更後entity.get短期入所サービス上限管理適用期間開始年月日())) {
@@ -250,7 +252,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuFinder {
         }
         if (!is比較変更数字(変更前entity.get給付率(), 変更後entity.get給付率())) {
             変更後entity = 変更後entity.createBuilderForEdit().
-                    set給付率(null).build();
+                    set給付率(DE_ZERO).build();
         }
         return get変更後受給者訂正情報修正Entity_One(変更前entity, 変更後entity);
     }
@@ -454,6 +456,28 @@ public class JukyushaTeiseiRenrakuhyoTorokuFinder {
                 変更後entity.get特定入所者介護サービス区分コード())) {
             変更後entity = 変更後entity.createBuilderForEdit().
                     set特定入所者介護サービス区分コード(RString.EMPTY).build();
+        }
+        if (!is比較変更数字(変更前entity.get負担額(), 変更後entity.get負担額())) {
+            変更後entity = 変更後entity.createBuilderForEdit().
+                    set負担額(DE_ZERO).build();
+        }
+        if (!is比較変更文字列(変更前entity.get要介護状態区分コード(), 変更後entity.get要介護状態区分コード())) {
+            変更後entity = 変更後entity.createBuilderForEdit().set要介護状態区分コード(RString.EMPTY).build();
+        }
+        if (!is比較変更文字列(変更前entity.get標準負担区分コード(), 変更後entity.get標準負担区分コード())) {
+            変更後entity = 変更後entity.createBuilderForEdit().set標準負担区分コード(RString.EMPTY).build();
+        }
+        if (!is比較変更文字列(変更前entity.get負担額適用開始年月日(), 変更後entity.get負担額適用開始年月日())) {
+            変更後entity = 変更後entity.createBuilderForEdit().set負担額適用開始年月日(RString.EMPTY).build();
+        }
+        if (!is比較変更文字列(変更前entity.get負担額適用終了年月日(), 変更後entity.get負担額適用終了年月日())) {
+            変更後entity = 変更後entity.createBuilderForEdit().set負担額適用終了年月日(RString.EMPTY).build();
+        }
+        if (!is比較変更文字列(変更前entity.get利用者負担割合有効開始日(), 変更後entity.get利用者負担割合有効開始日())) {
+            変更後entity = 変更後entity.createBuilderForEdit().set利用者負担割合有効開始日(RString.EMPTY).build();
+        }
+        if (!is比較変更文字列(変更前entity.get利用者負担割合有効終了日(), 変更後entity.get利用者負担割合有効終了日())) {
+            変更後entity = 変更後entity.createBuilderForEdit().set利用者負担割合有効終了日(RString.EMPTY).build();
         }
         return 変更後entity;
     }
