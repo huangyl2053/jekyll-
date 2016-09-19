@@ -80,7 +80,8 @@ public class KogakuGassanJikofutangakuDoMasterTorokuProcess
 
     private void マッチング2(DbWT37H1KogakuGassanaJikofutangakuCsvEntity 高額合算自己負担額一時entity,
             DbT3070KogakuGassanJikoFutanGakuCsvEntity 高額合算自己負担額entity) {
-        if (高額合算自己負担額entity.get自己負担額確認情報受取年月().isEmpty()) {
+        if (高額合算自己負担額entity.get自己負担額確認情報受取年月() == null
+                || 高額合算自己負担額entity.get自己負担額確認情報受取年月().isEmpty()) {
             this.マスタ更新(高額合算自己負担額一時entity,
                     高額合算自己負担額entity);
             this.履歴番号登録(高額合算自己負担額一時entity,
