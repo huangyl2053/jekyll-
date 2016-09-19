@@ -61,37 +61,30 @@ public class KaigoHihokenshaInfoPanel {
      * @return ResponseData
      */
     public ResponseData<KaigoHihokenshaInfoPanelDiv> onLoad(KaigoHihokenshaInfoPanelDiv div) {
-        //FukaTaishoshaKey taishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
-        //if (taishoshaKey != null) {
-        RString 被保険者番号 = new RString("0000000002");
-        ShikibetsuCode 識別コード = new ShikibetsuCode(new RString("000000001004001"));
-        SetaiCode 世帯コード = new SetaiCode(new RString("000000002011009"));
-        KaigoHihokenshaInfoPanelHandler handler = getHandler(div);
-        //handler.initializeDisplay(taishoshaKey);
-        // handler.printLog識別コード照会(taishoshaKey.get識別コード(), taishoshaKey.get被保険者番号().getColumnValue());
-        handler.printLog識別コード照会(識別コード, 被保険者番号);
-        //RString 前排他キー = DBBHIHOKENSHANO.concat(taishoshaKey.get被保険者番号().getColumnValue());
-        RString 前排他キー = DBBHIHOKENSHANO.concat(被保険者番号);
-        LockingKey key = new LockingKey(前排他キー);
-        if (!RealInitialLocker.tryGetLock(key)) {
-            throw new PessimisticLockingException();
+        FukaTaishoshaKey taishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
+        if (taishoshaKey != null) {
+            KaigoHihokenshaInfoPanelHandler handler = getHandler(div);
+            handler.initializeDisplay(taishoshaKey);
+            handler.printLog識別コード照会(taishoshaKey.get識別コード(), taishoshaKey.get被保険者番号().getColumnValue());
+            RString 前排他キー = DBBHIHOKENSHANO.concat(taishoshaKey.get被保険者番号().getColumnValue());
+            LockingKey key = new LockingKey(前排他キー);
+            if (!RealInitialLocker.tryGetLock(key)) {
+                throw new PessimisticLockingException();
+            }
+            RentaiNofuGimusha rentaiNofuGimusha = RentaiNofuGimusha.createInstance();
+            List<RentaiGimusha> list = rentaiNofuGimusha.getRentaiNofuGimushaInfo(taishoshaKey.get被保険者番号());
+            ViewStateHolder.put(ViewStateKeys.連帯納付義務者情報, new RentaiGimushaHolder(list));
+            if (list.isEmpty()) {
+                List<AtenaJouhou> atenaList = rentaiNofuGimusha.getLastSetaiIchiran(taishoshaKey.get世帯コード());
+                handler.setDgSetaiIchiran(atenaList, taishoshaKey.get被保険者番号());
+                return ResponseData.of(div).setState(DBB6110001StateName.連帯納付義務者新規);
+            } else {
+                List<RentaiGimushaAtenaJouhou> rentaiList = rentaiNofuGimusha.getRentaiNofuGimushaAtenaInfo(list);
+                handler.setDgRentaiNofuGimushaIchiran(rentaiList, taishoshaKey.get被保険者番号());
+                return ResponseData.of(div).setState(DBB6110001StateName.連帯納付義務者情報一覧);
+            }
         }
-        RentaiNofuGimusha rentaiNofuGimusha = RentaiNofuGimusha.createInstance();
-        // List<RentaiGimusha> list = rentaiNofuGimusha.getRentaiNofuGimushaInfo(taishoshaKey.get被保険者番号());
-        List<RentaiGimusha> list = rentaiNofuGimusha.getRentaiNofuGimushaInfo(new HihokenshaNo(被保険者番号));
-        ViewStateHolder.put(ViewStateKeys.連帯納付義務者情報, new RentaiGimushaHolder(list));
-        if (list.isEmpty()) {
-            //List<AtenaJouhou> atenaList = rentaiNofuGimusha.getLastSetaiIchiran(taishoshaKey.get世帯コード());
-            List<AtenaJouhou> atenaList = rentaiNofuGimusha.getLastSetaiIchiran(世帯コード);
-            handler.setDgSetaiIchiran(atenaList, new HihokenshaNo(被保険者番号));
-            return ResponseData.of(div).setState(DBB6110001StateName.連帯納付義務者新規);
-        } else {
-            List<RentaiGimushaAtenaJouhou> rentaiList = rentaiNofuGimusha.getRentaiNofuGimushaAtenaInfo(list);
-            handler.setDgRentaiNofuGimushaIchiran(rentaiList, new HihokenshaNo(被保険者番号));
-            return ResponseData.of(div).setState(DBB6110001StateName.連帯納付義務者情報一覧);
-        }
-        //}
-        //return ResponseData.of(div).respond();
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -134,26 +127,26 @@ public class KaigoHihokenshaInfoPanel {
      */
     public ResponseData<KaigoHihokenshaInfoPanelDiv> onClick_Certained(
             KaigoHihokenshaInfoPanelDiv div) {
+        //TODO
         KaigoHihokenshaInfoPanelHandler handler = getHandler(div);
         KaigoHihokenshaInfoValidationHandler validationHander = getValidationHandler(div);
         ValidationMessageControlPairs pairs = validationHander.validate();
         if (pairs.iterator().hasNext() && !ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-        //FukaTaishoshaKey taishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
-        //HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
-        RString 被保険者番号 = new RString("0000000001");
+        FukaTaishoshaKey taishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         RDate 開始年月日 = div.getRentaiNofuGimushaInfo().getTxtKaishiYMD().getValue();
         RDate 終了年月日 = div.getRentaiNofuGimushaInfo().getTxtShuryoYMD().getValue();
         ShikibetsuCode 識別コード = div.getRentaiNofuGimushaInfo().getTxtShikibetsuCode().getDomain();
         RString 履歴番号 = div.getRentaiNofuGimushaInfo().getTxtRirekiNo().getValue();
         RentaiGimushaHolder holder = ViewStateHolder.get(ViewStateKeys.連帯納付義務者情報, RentaiGimushaHolder.class);
         RentaiGimushaIdentifier identifier = new RentaiGimushaIdentifier(
-                new HihokenshaNo(被保険者番号), new Decimal(履歴番号.toString()));
+                被保険者番号, new Decimal(履歴番号.toString()));
         RentaiGimusha result = holder.getKogakuGassanJikoFutanGaku(identifier);
         if (result == null) {
             result = new RentaiGimusha(
-                    new HihokenshaNo(被保険者番号), new Decimal(ONE.toString()));
+                    被保険者番号, new Decimal(ONE.toString()));
             result = result.createBuilderForEdit()
                     .set開始年月日(new FlexibleDate(開始年月日.toString()))
                     .set終了年月日(new FlexibleDate(終了年月日.toString()))
@@ -174,7 +167,7 @@ public class KaigoHihokenshaInfoPanel {
         RentaiNofuGimusha rentaiNofuGimusha = RentaiNofuGimusha.createInstance();
         List<RentaiGimusha> list = holder.getRentaiGimushaList();
         List<RentaiGimushaAtenaJouhou> rentaiList = rentaiNofuGimusha.getRentaiNofuGimushaAtenaInfo(list);
-        handler.setDgRentaiNofuGimushaIchiran(rentaiList, new HihokenshaNo(被保険者番号));
+        handler.setDgRentaiNofuGimushaIchiran(rentaiList, 被保険者番号);
         ViewStateHolder.put(ViewStateKeys.連帯納付義務者情報, holder);
         return ResponseData.of(div).setState(DBB6110001StateName.連帯納付義務者情報一覧);
     }
@@ -211,6 +204,7 @@ public class KaigoHihokenshaInfoPanel {
                     .set識別コード(ShikibetsuCode.EMPTY);
             IShikibetsuTaishoPSMSearchKey searchKey = builder.build();
             HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
+            //TODO
         }
         return ResponseData.of(div).respond();
     }
@@ -223,12 +217,10 @@ public class KaigoHihokenshaInfoPanel {
      */
     public ResponseData<KaigoHihokenshaInfoPanelDiv> onClick_Modify(
             KaigoHihokenshaInfoPanelDiv div) {
-        //FukaTaishoshaKey taishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
+        FukaTaishoshaKey taishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
         KaigoHihokenshaInfoPanelHandler handler = getHandler(div);
         RentaiNofuGimusha rentaiNofuGimusha = RentaiNofuGimusha.createInstance();
-        //List<AtenaJouhou> list = rentaiNofuGimusha.getLastSetaiIchiran(taishoshaKey.get世帯コード());
-        SetaiCode 世帯コード = new SetaiCode(new RString("000000002011009"));
-        List<AtenaJouhou> list = rentaiNofuGimusha.getLastSetaiIchiran(世帯コード);
+        List<AtenaJouhou> list = rentaiNofuGimusha.getLastSetaiIchiran(taishoshaKey.get世帯コード());
         handler.set直近世帯情報取得(list);
         dgRentaiNofuGimushaIchiran_Row row = div.getDgRentaiNofuGimushaIchiran().getClickedItem();
         handler.setRentaiNofuGimushaInfo(row);
@@ -262,7 +254,7 @@ public class KaigoHihokenshaInfoPanel {
         }
         FukaTaishoshaKey taishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
         RentaiNofuGimusha rentaiNofuGimusha = RentaiNofuGimusha.createInstance();
-        List<RentaiGimusha> list = rentaiNofuGimusha.getRentaiNofuGimushaInfo(taishoshaKey.get被保険者番号());
+        //List<RentaiGimusha> list = rentaiNofuGimusha.getRentaiNofuGimushaInfo(taishoshaKey.get被保険者番号());
         RentaiGimushaHolder holder = ViewStateHolder.get(ViewStateKeys.連帯納付義務者情報, RentaiGimushaHolder.class);
         KaigoHihokenshaInfoPanelManger manager = InstanceProvider.create(KaigoHihokenshaInfoPanelManger.class);
         for (RentaiGimusha entity : holder.getRentaiGimushaList()) {

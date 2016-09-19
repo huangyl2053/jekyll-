@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.ninteichosatokusokujyo;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.ninteichosatokusokujyo.NinteiChosaTokusokuTaishoshaIchiranhyoReportProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.ninteichosatokusokujyo.NinteiChosaTokusokujoReportProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.ninteichosatokusokujyo.NinteichosaIraiJohoUpdateProcess;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.ninteichosatokusokujyo.NinteichosaTokusokujyoFlowParameter;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.dbe223001.NinteiChosaTokusokuTaishoshaIchiranhyoReportProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.dbe223001.NinteiChosaTokusokujoReportProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.dbe223001.NinteichosaIraiJohoUpdateProcess;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE223001.DBE223001_NinteichosaTokusokujyoParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ninteichosatokusokujyo.NinteichosaIraiJohoUpdateProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBE-0030-040 xuyue
  */
-public class NinteichosaTokusokujyoFlow extends BatchFlowBase<NinteichosaTokusokujyoFlowParameter> {
+public class DBE223001_NinteichosaTokusokujyo extends BatchFlowBase<DBE223001_NinteichosaTokusokujyoParameter> {
 
     private static final String 要介護認定調査督促状の作成 = "ninteiChosaTokusokujoReport";
     private static final String 認定調査督促対象者一覧表の作成 = "ninteiChosaTokusokuTaishoshaIchiranhyoReport";

@@ -444,8 +444,8 @@
         <result property="旧措置者フラグ" column=" 受給者台帳_旧措置者フラグ"/>
         <result property="みなし要介護区分コード" column=" 受給者台帳_みなし要介護区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="直近異動事由コード" column=" 受給者台帳_直近異動事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="対象年度" column="高額合算自己負担額_対象年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
-        <result property="保険者番号" column="高額合算自己負担額_保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
+        <result property="対象年度" column="高額合算自己負担額_対象年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="保険者番号" column="高額合算自己負担額_保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="支給申請書整理番号" column="高額合算自己負担額_整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="履歴番号" column="高額合算自己負担額_履歴番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="所得区分" column="高額合算自己負担額_所得区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

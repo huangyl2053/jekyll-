@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012003;
 
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHoho;
+import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheijunka6tsuchishoikatsuhako.DbT2002FukaTempTableEntity;
 import jp.co.ndensan.reams.db.dbb.service.core.tokuchoheijunka6gatsutsuchishoikkatsuhakko.TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko;
@@ -17,19 +18,25 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 「賦課情報取得」処理の「6月開始の被保険者区分を更新する」処理です。
+ * 「賦課情報取得」処理の「前年度特徴期別金額06の更新」と「継続の被保険者区分を更新する」処理です。
  *
  * @reamsid_L DBB-0820-030 xuyue
  */
-public class HihokenshaKubunTo6gatsuKaishiProcess extends BatchProcessBase<DbT2002FukaTempTableEntity> {
+public class KeizokuHihokenshaKubunUpdateProcess extends BatchProcessBase<DbT2002FukaTempTableEntity> {
 
     private static final RString TABLE_NAME = new RString("DbT2002FukaTemp");
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchoheijunka6tsuchishoikatsuhako."
-            + "ITokuchoHeijunka6gatsuTsuchishoIkatsuHakoMapper.select6月開始の被保険者区分TempTableEntity");
+            + "ITokuchoHeijunka6gatsuTsuchishoIkatsuHakoMapper.select継続の被保険者区分TempTableEntity");
+    private TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko service;
 
     @BatchWriter
     private BatchEntityCreatedTempTableWriter<DbT2002FukaTempTableEntity> batchEntityCreatedWriter;
+
+    @Override
+    protected void initialize() {
+        service = TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko.createInstance();
+    }
 
     @Override
     protected IBatchReader createReader() {
@@ -45,9 +52,15 @@ public class HihokenshaKubunTo6gatsuKaishiProcess extends BatchProcessBase<DbT20
     }
 
     @Override
+    protected void beforeExecute() {
+        RString 徴収方法 = ChoshuHohoKibetsu.特別徴収.getコード();
+        service.update前年度特徴期別金額06(new TokuchoHeijunka6gatsuMyBatisParameter(
+                false, null, null, null, null, 徴収方法, null, null, null));
+    }
+
+    @Override
     protected void process(DbT2002FukaTempTableEntity entity) {
-        TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko service = TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko.createInstance();
-        batchEntityCreatedWriter.update(service.set6月開始の被保険者区分_更新対象(entity));
+        batchEntityCreatedWriter.update(service.set継続の被保険者区分_更新対象(entity));
     }
 
 }

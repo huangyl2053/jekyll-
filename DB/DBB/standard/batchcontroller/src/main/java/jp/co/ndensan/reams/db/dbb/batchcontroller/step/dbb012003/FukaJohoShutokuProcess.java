@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012003;
 
 import java.util.ArrayList;
 import java.util.List;

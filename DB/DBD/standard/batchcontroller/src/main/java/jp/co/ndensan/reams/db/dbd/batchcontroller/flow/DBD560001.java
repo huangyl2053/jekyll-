@@ -42,7 +42,7 @@ public class DBD560001 extends BatchFlowBase<DBD560001Parameter> {
     }
 
     /**
-     * batchProcessです。
+     * update認定データ一括認定広域batchProcessです。
      *
      * @return IBatchFlowCommand
      */
@@ -54,7 +54,7 @@ public class DBD560001 extends BatchFlowBase<DBD560001Parameter> {
     }
 
     /**
-     * batchProcessです。
+     * update認定データ一括認定単一batchProcessです。
      *
      * @return IBatchFlowCommand
      */

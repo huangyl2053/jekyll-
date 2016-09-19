@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012003;
 
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuMyBatisParameter;
@@ -17,16 +17,16 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 「賦課情報取得」処理の「4月開始の被保険者区分を更新する」処理です。
+ * 「賦課情報取得」処理の「6月開始の被保険者区分を更新する」処理です。
  *
  * @reamsid_L DBB-0820-030 xuyue
  */
-public class HihokenshaKubunTo4gatsuKaishiProcess extends BatchProcessBase<DbT2002FukaTempTableEntity> {
+public class HihokenshaKubunTo6gatsuKaishiProcess extends BatchProcessBase<DbT2002FukaTempTableEntity> {
 
     private static final RString TABLE_NAME = new RString("DbT2002FukaTemp");
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchoheijunka6tsuchishoikatsuhako."
-            + "ITokuchoHeijunka6gatsuTsuchishoIkatsuHakoMapper.select4月開始の被保険者区分TempTableEntity");
+            + "ITokuchoHeijunka6gatsuTsuchishoIkatsuHakoMapper.select6月開始の被保険者区分TempTableEntity");
 
     @BatchWriter
     private BatchEntityCreatedTempTableWriter<DbT2002FukaTempTableEntity> batchEntityCreatedWriter;
@@ -47,8 +47,7 @@ public class HihokenshaKubunTo4gatsuKaishiProcess extends BatchProcessBase<DbT20
     @Override
     protected void process(DbT2002FukaTempTableEntity entity) {
         TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko service = TokuchoHeijunka6gatsuTsuchishoIkkatsuHakko.createInstance();
-
-        batchEntityCreatedWriter.update(service.set4月開始の被保険者区分_更新対象(entity));
+        batchEntityCreatedWriter.update(service.set6月開始の被保険者区分_更新対象(entity));
     }
 
 }
