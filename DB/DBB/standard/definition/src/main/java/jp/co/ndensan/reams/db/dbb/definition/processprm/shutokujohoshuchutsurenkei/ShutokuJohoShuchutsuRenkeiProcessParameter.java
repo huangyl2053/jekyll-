@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbb.definition.processprm.shutokujohoshuchutsuren
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB112003.SichousonEntity;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.shutokujohochushutsurenkei.ShutokuJohoChushutsuRenkeiMybatisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -56,23 +55,5 @@ public class ShutokuJohoShuchutsuRenkeiProcessParameter implements IBatchProcess
         this.共有ファイルID = 共有ファイルID;
         this.処理区分 = 処理区分;
         this.処理日時 = 処理日時;
-    }
-
-    /**
-     * 所得情報抽出・連携（バッチ）のMyBatisパラメータ作成です。
-     *
-     * @return 所得情報抽出・連携（バッチ）のMyBatisパラメータ
-     */
-    public ShutokuJohoChushutsuRenkeiMybatisParameter toMybatisParamter() {
-        return new ShutokuJohoChushutsuRenkeiMybatisParameter(
-                処理年度,
-                市町村情報List,
-                出力順ID,
-                帳票ID,
-                共有ファイル名,
-                共有ファイルID,
-                処理区分,
-                処理日時
-        );
     }
 }

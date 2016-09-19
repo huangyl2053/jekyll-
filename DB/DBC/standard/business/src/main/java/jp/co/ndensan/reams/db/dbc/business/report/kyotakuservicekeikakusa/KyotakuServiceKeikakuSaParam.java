@@ -29,5 +29,6 @@ public class KyotakuServiceKeikakuSaParam {
     private FlexibleDate 基準日;
     private Association 地方公共団体;
     private IOutputOrder 出力順;
+    private int 連番;
 
 }

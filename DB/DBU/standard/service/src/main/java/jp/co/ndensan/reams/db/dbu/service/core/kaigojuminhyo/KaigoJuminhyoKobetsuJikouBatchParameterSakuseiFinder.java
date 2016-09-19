@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbu.service.core.kaigojuminhyo;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigojuminhyo.ChushutsuKikanJohoData;
-import jp.co.ndensan.reams.db.dbu.definition.batchprm.kaigojuminhyo.KaigoJuminhyoBatchParameter;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU070010.DBU070010_KobetsujikoRenkei_TashaParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7022ShoriDateKanriDac;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -61,8 +61,8 @@ public class KaigoJuminhyoKobetsuJikouBatchParameterSakuseiFinder {
      * @param kaishiTimestamp 今回開始時分秒
      * @return KaigoJuminhyoBatchParameter 介護住民票個別事項連携情報作成【他社住基】のバッチのパラメータ
      */
-    public KaigoJuminhyoBatchParameter getKaigoJuminhyoKobetsuJikouBatchParameter(RDate kaishiYMD, RTime kaishiTimestamp) {
-        KaigoJuminhyoBatchParameter kaigoJuminhyoBatchParameter = new KaigoJuminhyoBatchParameter();
+    public DBU070010_KobetsujikoRenkei_TashaParameter getKaigoJuminhyoKobetsuJikouBatchParameter(RDate kaishiYMD, RTime kaishiTimestamp) {
+        DBU070010_KobetsujikoRenkei_TashaParameter kaigoJuminhyoBatchParameter = new DBU070010_KobetsujikoRenkei_TashaParameter();
         if (kaishiYMD != null && kaishiTimestamp != null) {
             kaigoJuminhyoBatchParameter.setTaishoKaishiYMDHMS(
                     RDateTime.of(new RString(kaishiYMD.toString()), new RString(kaishiTimestamp.toString())));

@@ -123,8 +123,7 @@ public class SokujiFukaKouseiManager {
         if (!介護賦課.hasChanged()) {
             return false;
         }
-        介護賦課 = 介護賦課.modifiedModel();
-        save介護期別リスト(shunoKamokuManager, 収納Manager, 介護賦課, 介護賦課.getKibetsuList());
+        save介護期別リスト(shunoKamokuManager, 収納Manager, 介護賦課.modifiedModel(), 介護賦課.getKibetsuList());
         return 1 == 介護賦課Dac.save(介護賦課.toEntity());
     }
 
@@ -145,7 +144,6 @@ public class SokujiFukaKouseiManager {
         if (!介護期別.hasChanged()) {
             return false;
         }
-        介護期別 = 介護期別.modifiedModel();
         long 調定ID = ChoteiSaiban.getNumbering調定ID();
         long 収納ID = ShunoSaiban.getNumbering収納ID();
         ChoteiKyotsuIdentifier identifier = new ChoteiKyotsuIdentifier(介護期別.get調定ID().longValue());
@@ -164,6 +162,11 @@ public class SokujiFukaKouseiManager {
                 set処理番号(0).
                 set科目コード(科目.getコード()).
                 set科目枝番コード(科目.get枝番コード()).
+                set料金種別コード(new RyokinShubetsuCodeValue(RString.EMPTY)).
+                set事業区分コード(RString.EMPTY).
+                set収納処理状況(false).
+                set合計件数(0).
+                set合計金額(Decimal.ZERO).
                 build();
         builder.set収納ID(収納ID);
         builder.set会計年度(choteiKyotsu.get会計年度());

@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaicho;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaicho.edaNo;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaicho.hihokenshaNo;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaicho.idoYMD;
+import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaicho.logicalDeletedFlag;
 import static jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaicho.shikibetsuCode;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbV1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -189,6 +190,28 @@ public class DbV1001HihokenshaDaichoAliveDac {
         return accessor.select().
                 table(DbV1001HihokenshaDaicho.class).
                 where(eq(hihokenshaNo, 被保険者番号)).
+                toObject(DbV1001HihokenshaDaichoEntity.class);
+    }
+
+    /**
+     * 被保険者番号により、最新の被保険者台帳履歴情報を取得します。
+     *
+     * @param 被保険者番号 HihokenshaNo
+     * @return DbV1001HihokenshaDaichoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public DbV1001HihokenshaDaichoEntity get最新の被保険者台帳履歴(HihokenshaNo 被保険者番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(項目名_被保険者番号.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbV1001HihokenshaDaicho.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(logicalDeletedFlag, false))).
+                order(by(DbV1001HihokenshaDaicho.idoYMD, Order.DESC), by(DbV1001HihokenshaDaicho.edaNo, Order.DESC)).
                 toObject(DbV1001HihokenshaDaichoEntity.class);
     }
 

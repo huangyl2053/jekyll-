@@ -7,31 +7,23 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD5010001
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.business.core.dbd5010001.KoshinTaishoBussiness;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD511002.DBD511002_KoshinOshiraseTsuchiParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5010001.DBD5010001StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5010001.KoshinTaishoDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5010001.KoshinTaishoCsvEntity;
+import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5010001.KoshinTaishoHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5010001.KoshinTaishoValidationHandler;
-import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5010001.SelectSyuuShadeTaCsvEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.koshinTaisho.SelectSyuuShadeTaEntity;
+import jp.co.ndensan.reams.db.dbd.service.core.koshintaisho.KoshinTaishoManager;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiTaskList.YokaigoNinteiTaskList.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDownload;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.io.Encode;
-import jp.co.ndensan.reams.uz.uza.io.NewLine;
-import jp.co.ndensan.reams.uz.uza.io.Path;
-import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
+import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -49,7 +41,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class KoshinTaisho {
 
-    private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString CSVファイル名 = new RString("更新管理対象者一覧.csv");
     private static final RString CSV調査ファイル名 = new RString("調査データ（モバイル用）.csv");
     private static final RString 更新対象モード = new RString("更新対象モード");
@@ -70,7 +61,7 @@ public class KoshinTaisho {
         div.getTxtKikan().setFromValue(RDate.getNowDate());
         div.getTxtKikan().setToValue(RDate.getNowDate());
         div.getTxtHakobi().setValue(new FlexibleDate(RDate.getNowDate().toDateString()));
-        AccessLogger.log(AccessLogType.照会, new KoshinTaishoValidationHandler().アクセスログ情報(div));
+        AccessLogger.log(AccessLogType.照会, new KoshinTaishoHandler().アクセスログ情報(div));
         return ResponseData.of(div).respond();
     }
 
@@ -82,27 +73,28 @@ public class KoshinTaisho {
      * @return IDownLoadServletResponse
      */
     public IDownLoadServletResponse onClick_btndataoutput(KoshinTaishoDiv div, IDownLoadServletResponse response) {
-
-        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
-        KoshinTaishoCsvEntity entity = new KoshinTaishoCsvEntity();
-        try (CsvWriter<KoshinTaishoCsvEntity> csvWriter
-                = new CsvWriter.InstanceBuilder(filePath).canAppend(true).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
-                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
-            for (dgNinteiTaskList_Row row : div.getCcdKoshinTaisho().getDataSource()) {
-                csvWriter.writeLine(new KoshinTaishoValidationHandler().setCsvEntity(entity, row));
+        List<KoshinTaishoBussiness> 画面更新情報ビジネス = new ArrayList<>();
+        for (dgNinteiTaskList_Row row : div.getCcdKoshinTaisho().getCheckbox()) {
+            KoshinTaishoBussiness bussiness = new KoshinTaishoBussiness();
+            bussiness.set保険者(row.getHokensha());
+            bussiness.set被保険者被保番号(row.getNyuryokuHoho());
+            bussiness.set被保険者氏名(row.getHihoShimei());
+            if (row.getCenterSoshinDay().getValue() != null) {
+                bussiness.set更新対象完了日(row.getCenterSoshinDay().getValue().wareki().toDateString());
             }
-            csvWriter.close();
+            if (row.getChosahyoDataNyuryokuDay().getValue() != null) {
+                bussiness.set更新対象通知年月日(row.getChosahyoDataNyuryokuDay().getValue().wareki().toDateString());
+            }
+            画面更新情報ビジネス.add(bussiness);
         }
-        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(CSVファイル名));
-        sfd = SharedFile.defineSharedFile(sfd);
-        CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
-        SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
-        AccessLogger.log(AccessLogType.照会, new KoshinTaishoValidationHandler().アクセスログ情報(div));
+        KoshinTaishoManager manager = KoshinTaishoManager.createInstance();
+        SharedFileEntryDescriptor entry = manager.csvSyutsuryoku(画面更新情報ビジネス);
+        AccessLogger.log(AccessLogType.照会, new KoshinTaishoHandler().アクセスログ情報(div));
         return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, CSVファイル名), response);
     }
 
     /**
-     * 調査用データと一覧を出力するボタンチック
+     * 調査用データと一覧を出力するボタンチェック
      *
      * @param div KoshinTaishoDiv
      * @return ResponseData<KoshinTaishoDiv>
@@ -147,7 +139,6 @@ public class KoshinTaisho {
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-//        div.getCcdChosaIraiAndChosahyoAndIkenshoPrint();
         return ResponseData.of(div).respond();
     }
 
@@ -159,30 +150,14 @@ public class KoshinTaisho {
      * @return IDownLoadServletResponse
      */
     public IDownLoadServletResponse onClick_syuShayoubutton(KoshinTaishoDiv div, IDownLoadServletResponse response) {
-        KoshinTaishoValidationHandler validationHandler = new KoshinTaishoValidationHandler();
-        List<SelectSyuuShadeTaEntity> 調査データ情報List = validationHandler.csvSyuShayou(div);
+        KoshinTaishoHandler taishoHandler = new KoshinTaishoHandler();
+        SharedFileEntryDescriptor ptor = taishoHandler.csvSyuShayou(div);
 
-        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSV調査ファイル名);
-        try (CsvWriter<SelectSyuuShadeTaCsvEntity> csvdeTeWriter
-                = new CsvWriter.InstanceBuilder(filePath).canAppend(true).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
-                setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
-            if (調査データ情報List == null || 調査データ情報List.size() <= 0) {
-                SelectSyuuShadeTaCsvEntity selectnullEntity = new SelectSyuuShadeTaCsvEntity();
-                csvdeTeWriter.writeLine(selectnullEntity);
-            } else {
-                for (SelectSyuuShadeTaEntity entity : 調査データ情報List) {
-                    csvdeTeWriter.writeLine(validationHandler.setdetaEntity(entity));
-                }
-                csvdeTeWriter.close();
-            }
-        }
-        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(CSV調査ファイル名));
-        sfd = SharedFile.defineSharedFile(sfd);
-        CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
-        SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
-        validationHandler.koushiDb(div);
-        AccessLogger.log(AccessLogType.照会, new KoshinTaishoValidationHandler().アクセスログ情報(div));
-        return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, CSV調査ファイル名), response);
+        前排他キーのセット();
+        taishoHandler.koushiDb(div);
+        前排他キーの解除();
+        AccessLogger.log(AccessLogType.照会, taishoHandler.アクセスログ情報(div));
+        return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(ptor, CSV調査ファイル名), response);
     }
 
     /**
@@ -192,9 +167,9 @@ public class KoshinTaisho {
      * @return ResponseData<NinshiuUpdatebatctParameter>
      */
     public ResponseData<DBD511002_KoshinOshiraseTsuchiParameter> onClick_cyoupuButton(KoshinTaishoDiv div) {
-        KoshinTaishoValidationHandler validationHandler = new KoshinTaishoValidationHandler();
+        KoshinTaishoHandler taishoHandler = new KoshinTaishoHandler();
         DBD511002_KoshinOshiraseTsuchiParameter parameter = new DBD511002_KoshinOshiraseTsuchiParameter();
-        validationHandler.onCilck_btnBatchRegister(parameter, div);
+        taishoHandler.onCilck_btnBatchRegister(parameter, div);
         return ResponseData.of(parameter).respond();
     }
 
@@ -240,17 +215,20 @@ public class KoshinTaisho {
         KoshinTaishoValidationHandler validationHandler = new KoshinTaishoValidationHandler();
         validationHandler.更新管理完了対象者一覧データの存在チェック(pairs, div);
         validationHandler.更新管理完了対象者一覧データの行選択チェック(pairs, div);
-        if (pairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
-        }
         validationHandler.更新管理完了対象者一覧選択行の完了処理事前チェック(pairs, div);
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-        validationHandler.youKihoKoushiDb(div);
+        前排他キーのセット();
+        new KoshinTaishoHandler().youKihoKoushiDb(div);
+        前排他キーの解除();
+
+        ResponseData<KoshinTaishoDiv> response = new ResponseData<>();
+        response.getRootTitle();
+
         div.getCcdKanryoMessege().setMessage(new RString(div.getTitle() + "の保存処理が完了しました。"),
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
-        AccessLogger.log(AccessLogType.更新, new KoshinTaishoValidationHandler().アクセスログ情報(div));
+        AccessLogger.log(AccessLogType.更新, new KoshinTaishoHandler().アクセスログ情報(div));
         return ResponseData.of(div).setState(DBD5010001StateName.完了);
     }
 
@@ -272,5 +250,15 @@ public class KoshinTaisho {
             }
         }
         return ResponseData.of(div).respond();
+    }
+
+    private void 前排他キーのセット() {
+        LockingKey 排他キー = new LockingKey("ShinseishoKanriNo");
+        RealInitialLocker.lock(排他キー);
+    }
+
+    private void 前排他キーの解除() {
+        LockingKey 排他キー = new LockingKey("ShinseishoKanriNo");
+        RealInitialLocker.release(排他キー);
     }
 }

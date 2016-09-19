@@ -164,14 +164,15 @@ public class ShikyuFushikyuDoIchiranhyoSakuseiProcess extends BatchProcessBase<S
 
     @Override
     protected void afterExecute() {
+        csvWriter.close();
+        reportWriter.close();
+
         if (!personalDataList.isEmpty()) {
             AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
             manager.spool(path, accessLogUUID);
         } else {
             manager.spool(path);
         }
-        csvWriter.close();
-        reportWriter.close();
     }
 
     private void get出力順() {
@@ -249,7 +250,9 @@ public class ShikyuFushikyuDoIchiranhyoSakuseiProcess extends BatchProcessBase<S
         if (支給.equals(決定.get支給区分コード())) {
             csvEntity.set支給区分名称(名称_支給);
             csvEntity.set支払方法(決定.get支払方法区分());
-            csvEntity.set支払方法名称(ShiharaiHohoKubun.toValue(決定.get支払方法区分()).get名称());
+            if (!RString.isNullOrEmpty(決定.get支払方法区分())) {
+                csvEntity.set支払方法名称(ShiharaiHohoKubun.toValue(決定.get支払方法区分()).get名称());
+            }
             if (窓口払.equals(決定.get支払方法区分())) {
                 csvEntity.set窓口払い_支払場所(決定.get支払場所());
                 csvEntity.set窓口払_支払期間(get支払期間(決定.get支払期間開始年月日(),
@@ -292,6 +295,9 @@ public class ShikyuFushikyuDoIchiranhyoSakuseiProcess extends BatchProcessBase<S
     }
 
     private RString get住所(RString jusho, RString banchi, RString katagaki) {
+        if (RString.isNullOrEmpty(jusho) && RString.isNullOrEmpty(banchi) && RString.isNullOrEmpty(katagaki)) {
+            return RString.EMPTY;
+        }
         RStringBuilder sakuseiYMD = new RStringBuilder();
         sakuseiYMD.append(jusho);
         sakuseiYMD.append(banchi);
@@ -309,7 +315,9 @@ public class ShikyuFushikyuDoIchiranhyoSakuseiProcess extends BatchProcessBase<S
     }
 
     private RString get支払期間(RString kaishiYMD, RString kaishiTime, RString shuryoYMD, RString shuryoTime) {
-
+        if (RString.isNullOrEmpty(kaishiYMD) && RString.isNullOrEmpty(shuryoYMD)) {
+            return RString.EMPTY;
+        }
         RStringBuilder sakuseiYMD = new RStringBuilder();
         if (!RString.isNullOrEmpty(kaishiYMD)) {
             FlexibleDate 開始年月日 = new FlexibleDate(kaishiYMD);

@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBDHanyoList;
 
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710150.DBD710150_HanyoListShisetsuNyutaishoParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd710040.DBD710040_HanyoListRiyoshaFutanGakuGengakuParameter;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd710060.DBD710060_HanyoListShakaiFukushiHojinKeigenParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd710070.DBD710070_HanyoListTokubetsuChiikiKasanGemmenParameter;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd710110.DBD710110_HanyoListKokuhoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd710120.DBD710120_HanyoListKokiKoreishaParameter;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd710130.DBD710130_HanyoListJigyoTaishoshaParameter;
@@ -38,7 +40,9 @@ public class HanyoListPanel {
 
         RString batchKind = ResponseHolder.getState();
 
-        if (DBDHanyoListStateName.汎用リスト_社会福祉法人軽減.getName().equals(batchKind)) {
+        if (DBDHanyoListStateName.汎用リスト_社会福祉法人軽減.getName().equals(batchKind)
+                || DBDHanyoListStateName.汎用リスト_特別地域加算減免.getName().equals(batchKind)
+                || DBDHanyoListStateName.汎用リスト_利用者負担額減免.getName().equals(batchKind)) {
             div.getBtnShutsuryokujun().setDisplayNone(true);
         } else {
             div.getBtnShutsuryokujun().setDisplayNone(false);
@@ -70,6 +74,31 @@ public class HanyoListPanel {
             shisetsuNyutaishoBatchParameter.set出力順(getSyutsuryokujun(div));
             shisetsuNyutaishoBatchParameter.set出力項目(div.getTxtSyutsuryokukomoku1().getValue());
             parameter.setShisetsuNyutaishoBatchParameter(shisetsuNyutaishoBatchParameter);
+        }
+
+        if (DBDHanyoListStateName.汎用リスト_利用者負担額減免.getName().equals(batchKind)) {
+            DBD710040_HanyoListRiyoshaFutanGakuGengakuParameter riyoshaFutanGakuGengakuParameter = new DBD710040_HanyoListRiyoshaFutanGakuGengakuParameter();
+            riyoshaFutanGakuGengakuParameter.setHyoudai(div.getTxtHyoudai2().getValue());
+            riyoshaFutanGakuGengakuParameter.setDetasyubetsumesyo(div.getTxtDetasyubetsumesyo2().getValue());
+            riyoshaFutanGakuGengakuParameter.setSyutsuryoku(div.getTxtSyutsuryoku2().getValue());
+            riyoshaFutanGakuGengakuParameter.setCyusyutsuhohokubun(div.getDdlCyusyutsuhohokubun2().getSelectedKey());
+            riyoshaFutanGakuGengakuParameter.setCyusyutsukomokukubun(div.getTxtCyusyutsukomokukubun2().getValue());
+            riyoshaFutanGakuGengakuParameter.setKizyunnichi(div.getTxtKizyunnichi2().getValue());
+            riyoshaFutanGakuGengakuParameter.setHitsukehanifrom(div.getTxtHitsukehanifrom2().getValue());
+            riyoshaFutanGakuGengakuParameter.setHitsukehanito(div.getTxtHitsukehanito2().getValue());
+            riyoshaFutanGakuGengakuParameter.setChokindatacyusyutsu(Boolean.parseBoolean(div.getDdlChokindatacyusyutsu2().getSelectedKey().toString()));
+            riyoshaFutanGakuGengakuParameter.setShinseishadatacyushutsu(Boolean.parseBoolean(div.getDdlIsShinseishadatacyushutsu2().getSelectedKey().toString()));
+            riyoshaFutanGakuGengakuParameter.setKyusochisha(div.getTxtKyusochisha2().getValue());
+            riyoshaFutanGakuGengakuParameter.setKyakasha(div.getTxtKyakasha2().getValue());
+            riyoshaFutanGakuGengakuParameter.setSoshitsukubun(div.getDdlSoshitsukubun2().getSelectedKey());
+            riyoshaFutanGakuGengakuParameter.setCsvkomokumeifuka(Boolean.parseBoolean(div.getDdlIsCsvkomokumeifuka2().getSelectedKey().toString()));
+            riyoshaFutanGakuGengakuParameter.setCsvrenbanfuka(Boolean.parseBoolean(div.getDdlIsCsvrenbanfuka2().getSelectedKey().toString()));
+            riyoshaFutanGakuGengakuParameter.setCsvhitsukesurasyuhensyu(Boolean.parseBoolean(div.getDdlIsCsvhitsukesurasyuhensyu2().getSelectedKey().toString()));
+            riyoshaFutanGakuGengakuParameter.setAtenacyusyutsujyoken(toAtenaSelectBatchParameter(div));
+            riyoshaFutanGakuGengakuParameter.setCyohyoid(div.getTxtCyohyoid2().getValue());
+            riyoshaFutanGakuGengakuParameter.setSyutsuryokujunparameter(div.getTxtSyutsuryokujunparameter2().getValue());
+            riyoshaFutanGakuGengakuParameter.setSyutsuryokukomoku(div.getTxtSyutsuryokukomoku2().getValue());
+            parameter.setRiyoshaFutanGakuGengakuParameter(riyoshaFutanGakuGengakuParameter);
         }
 
         if (DBDHanyoListStateName.汎用リスト_社会福祉法人軽減.getName().equals(batchKind)) {
@@ -115,6 +144,30 @@ public class HanyoListPanel {
             shakaiFukushiHojinKeigenParameter.setCsvfilename(div.getTxtCsvfilename4().getValue());
             shakaiFukushiHojinKeigenParameter.setSyutsuryokujyoken(div.getTxtSyutsuryokujyoken4().getValue());
             parameter.setShakaiFukushiHojinKeigenParameter(shakaiFukushiHojinKeigenParameter);
+        }
+
+        if (DBDHanyoListStateName.汎用リスト_特別地域加算減免.getName().equals(batchKind)) {
+            DBD710070_HanyoListTokubetsuChiikiKasanGemmenParameter tokubetsuChiikiKasanGemmenParameter = new DBD710070_HanyoListTokubetsuChiikiKasanGemmenParameter();
+            tokubetsuChiikiKasanGemmenParameter.setHyoudai(div.getTxtHyoudai5().getValue());
+            tokubetsuChiikiKasanGemmenParameter.setDetasyubetsumesyo(div.getTxtDetasyubetsumesyo5().getValue());
+            tokubetsuChiikiKasanGemmenParameter.setSyutsuryoku(div.getTxtSyutsuryoku5().getValue());
+            tokubetsuChiikiKasanGemmenParameter.setCyusyutsuhohokubun(div.getDdlCyusyutsuhohokubun5().getSelectedKey());
+            tokubetsuChiikiKasanGemmenParameter.setCyusyutsukomokukubun(div.getTxtCyusyutsukomokukubun5().getValue());
+            tokubetsuChiikiKasanGemmenParameter.setKizyunnichi(div.getTxtKizyunnichi5().getValue());
+            tokubetsuChiikiKasanGemmenParameter.setHitsukehanifrom(div.getTxtHitsukehanifrom5().getValue());
+            tokubetsuChiikiKasanGemmenParameter.setHitsukehanito(div.getTxtHitsukehanito5().getValue());
+            tokubetsuChiikiKasanGemmenParameter.setChokindatacyusyutsu(Boolean.parseBoolean(div.getDdlChokindatacyusyutsu5().getSelectedKey().toString()));
+            tokubetsuChiikiKasanGemmenParameter.setShinseishadatacyushutsu(Boolean.parseBoolean(div.getDdlIsShinseishadatacyushutsu5().getSelectedKey().toString()));
+            tokubetsuChiikiKasanGemmenParameter.setKyakasha(div.getTxtKyakasha5().getValue());
+            tokubetsuChiikiKasanGemmenParameter.setSoshitsukubun(div.getDdlSoshitsukubun5().getSelectedKey());
+            tokubetsuChiikiKasanGemmenParameter.setCsvkomokumeifuka(Boolean.parseBoolean(div.getDdlIsCsvkomokumeifuka5().getSelectedKey().toString()));
+            tokubetsuChiikiKasanGemmenParameter.setCsvrenbanfuka(Boolean.parseBoolean(div.getDdlIsCsvrenbanfuka5().getSelectedKey().toString()));
+            tokubetsuChiikiKasanGemmenParameter.setCsvhitsukesurasyuhensyu(Boolean.parseBoolean(div.getDdlIsCsvhitsukesurasyuhensyu5().getSelectedKey().toString()));
+            tokubetsuChiikiKasanGemmenParameter.setAtenacyusyutsujyoken(toAtenaSelectBatchParameter(div));
+            tokubetsuChiikiKasanGemmenParameter.setCyohyoid(div.getTxtCyohyoid5().getValue());
+            tokubetsuChiikiKasanGemmenParameter.setSyutsuryokujunparameter(div.getTxtSyutsuryokujunparameter5().getValue());
+            tokubetsuChiikiKasanGemmenParameter.setSyutsuryokukomoku(div.getTxtSyutsuryoku5().getValue());
+            parameter.setTokubetsuChiikiKasanGemmenParameter(tokubetsuChiikiKasanGemmenParameter);
         }
 
         if (DBDHanyoListStateName.汎用リスト_国保.getName().equals(batchKind)) {
@@ -243,22 +296,18 @@ public class HanyoListPanel {
         }
 
         if (DBDHanyoListStateName.汎用リスト_国保.getName().equals(batchKind)) {
-
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(div.getTxtCyohyoid7().getValue()));
         }
 
         if (DBDHanyoListStateName.汎用リスト_後期高齢者.getName().equals(batchKind)) {
-
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(div.getTxtCyohyoid8().getValue()));
         }
 
         if (DBDHanyoListStateName.汎用リスト_事業対象者.getName().equals(batchKind)) {
-
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(div.getTxtCyohyoid9().getValue()));
         }
 
         if (DBDHanyoListStateName.汎用リスト_利用者負担割合.getName().equals(batchKind)) {
-
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(div.getTxtCyohyoid10().getValue()));
         }
         return ResponseData.of(div).respond();

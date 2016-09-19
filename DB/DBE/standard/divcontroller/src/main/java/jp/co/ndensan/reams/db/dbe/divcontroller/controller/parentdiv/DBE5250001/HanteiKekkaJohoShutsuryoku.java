@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5250001;
 
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuBatchParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE525001.DBE525001_HanteiKekkaShinsakaiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5250001.HanteiKekkaJohoShutsuryokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5250001.HanteiKekkaJohoShutsuryokuValidationHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -56,10 +56,10 @@ public class HanteiKekkaJohoShutsuryoku {
      * パラメーターを作成します。
      *
      * @param div バッチパラメータ情報Div
-     * @return ResponseData<HanteiKekkaJohoShuturyokuBatchParameter>
+     * @return ResponseData<DBE525001_HanteiKekkaShinsakaiParameter>
      */
-    public ResponseData<HanteiKekkaJohoShuturyokuBatchParameter> onClick_btnAction(HanteiKekkaJohoShutsuryokuDiv div) {
-        HanteiKekkaJohoShuturyokuBatchParameter parameter = new HanteiKekkaJohoShuturyokuBatchParameter();
+    public ResponseData<DBE525001_HanteiKekkaShinsakaiParameter> onClick_btnAction(HanteiKekkaJohoShutsuryokuDiv div) {
+        DBE525001_HanteiKekkaShinsakaiParameter parameter = new DBE525001_HanteiKekkaShinsakaiParameter();
         parameter.setHakkouTyouhyou(発行帳票);
         parameter.setKaisaiBangouList(div.getCcdIShinsakaiIchiranList().get開催番号List());
         return ResponseData.of(parameter).respond();

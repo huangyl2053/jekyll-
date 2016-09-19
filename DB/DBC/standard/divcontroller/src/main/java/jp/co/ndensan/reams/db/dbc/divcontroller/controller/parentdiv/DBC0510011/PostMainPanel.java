@@ -68,7 +68,7 @@ public class PostMainPanel {
     /**
      * onOkClose_bth事件です。
      *
-     * @param div JikoFutangakuJohoHoseiDiv
+     * @param div PostMainPanelDiv
      * @return ResponseData
      */
     public ResponseData<PostMainPanelDiv> onOkClose_bth(PostMainPanelDiv div) {

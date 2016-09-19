@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb112001;
 
 import jp.co.ndensan.reams.db.dbb.definition.processprm.shutokujohoshuchutsurenkei.ShutokuJohoShuchutsuRenkeiProcessParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigoshoto.KaigoShotoTempTableEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
@@ -21,7 +23,9 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
 
 /**
  * 所得情報抽出・連携バッチの処理日付管理マスタの更新Processです。
@@ -79,6 +83,15 @@ public class UpdShoriHidukeKanriProcess extends BatchProcessBase<KaigoShotoTempT
         } else if (異動_広域_2.equals(処理区分) || 異動_単一_4.equals(処理区分)) {
             DbT7022ShoriDateKanriEntity dbt7022Entity = get処理日付管理_異動(entity);
             処理日付管理7022tableWriter.insert(dbt7022Entity);
+        }
+    }
+
+    @Override
+    protected void afterExecute() {
+        RString 日付関連_調定年度 = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+        if (当初_広域_1.equals(processParameter.get処理区分()) || 当初_単一_3.equals(processParameter.get処理区分())) {
+            BusinessConfig.update(SubGyomuCode.DBB介護賦課,
+                    ConfigNameDBB.日付関連_所得年度, 日付関連_調定年度, RString.EMPTY, RString.EMPTY, RDate.getNowDate());
         }
     }
 

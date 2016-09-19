@@ -179,16 +179,13 @@ public class HanyoListJukyushaDaichoPanelHandler {
             div.getChkSaisinJoho().setSelectedItemsByKey(最新情報);
         }
         List<RString> 編集方法 = new ArrayList<>();
-        boolean is項目名付加 = restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("項目名付加"));
-        if (is項目名付加) {
+        if (restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("項目名付加"))) {
             編集方法.add(CSVSettings.項目名付加.getコード());
         }
-        boolean is連番付加 = restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("連番付加"));
-        if (is連番付加) {
+        if (restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("連番付加"))) {
             編集方法.add(CSVSettings.連番付加.getコード());
         }
-        boolean is日付編集 = restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("日付編集"));
-        if (is日付編集) {
+        if (restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("日付編集"))) {
             編集方法.add(CSVSettings.日付スラッシュ編集.getコード());
         }
         div.getChkCsvHenshuHoho().setSelectedItemsByKey(編集方法);
@@ -224,10 +221,6 @@ public class HanyoListJukyushaDaichoPanelHandler {
         RString 抽出方法 = 抽出条件.concat(年指定);
         RString 抽出年度 = div.getDdlSiteiNen().getSelectedKey();
         RString 被保険者抽出方法 = div.getRadHihokenshaChushutsu().getSelectedKey();
-        boolean 最新情報 = false;
-        if (div.getChkSaisinJoho().isAllSelected()) {
-            最新情報 = true;
-        }
         boolean 項目名付加 = false;
         boolean 連番付加 = false;
         boolean 日付編集 = false;
@@ -250,7 +243,7 @@ public class HanyoListJukyushaDaichoPanelHandler {
                 抽出方法,
                 抽出年度,
                 被保険者抽出方法,
-                最新情報,
+                div.getChkSaisinJoho().isAllSelected(),
                 項目名付加,
                 連番付加,
                 日付編集,
@@ -318,7 +311,7 @@ public class HanyoListJukyushaDaichoPanelHandler {
                 年度差 = 最大DDL表示;
             }
             for (int i = 0; i <= 年度差; i++) {
-                RString 算出した日付 = new FlexibleDate(調定年度.concat(月日の補正)).minusYear(1).getYear().toDateString();
+                RString 算出した日付 = new FlexibleDate(調定年度.concat(月日の補正)).minusYear(i + 1).getYear().toDateString();
                 KeyValueDataSource keyValueDataSource = new KeyValueDataSource();
                 keyValueDataSource.setKey(算出した日付);
                 keyValueDataSource.setValue(new FlexibleDate(算出した日付.concat(月日の補正)).wareki().getYear());

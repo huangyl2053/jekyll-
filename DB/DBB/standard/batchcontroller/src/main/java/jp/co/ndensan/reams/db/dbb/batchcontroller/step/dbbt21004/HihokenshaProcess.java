@@ -58,8 +58,9 @@ public class HihokenshaProcess extends BatchProcessBase<DbT1001HihokenshaDaichoE
     private static final RString ONE = new RString("1");
     private static final int ONE_INT = 1;
     private static final int APRIL = 4;
-    private static final RString 市町村コード = new RString("1");
+    private static final RString 市町村分 = new RString("市町村分");
     private ShichosonSecurityJoho 市町村セキュリティ情報;
+    private RString 合併情報区分;
 
     @Override
     protected void createWriter() {
@@ -80,13 +81,15 @@ public class HihokenshaProcess extends BatchProcessBase<DbT1001HihokenshaDaichoE
     protected void initialize() {
         super.initialize();
         市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
+        合併情報区分 = DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分,
+                RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
     }
 
     private DankaibetuHihokensyasuIchiranhyoMyBatisParameter toMyBatisParameter() {
         DankaibetuHihokensyasuIchiranhyoMyBatisParameter parameter = new DankaibetuHihokensyasuIchiranhyoMyBatisParameter();
         parameter.set資格基準日(processParameter.get資格基準日());
         parameter.set市町村コード(false);
-        if (市町村コード.equals(processParameter.get市町村コード複数())) {
+        if (市町村分.equals(processParameter.get広域分市町村分区分())) {
             parameter.set市町村コード(true);
             parameter.set市町村コード複数(processParameter.get市町村コード複数());
         }
@@ -130,17 +133,14 @@ public class HihokenshaProcess extends BatchProcessBase<DbT1001HihokenshaDaichoE
         List<HihokenshaDaicho> 資格情報 = new ArrayList<>();
         資格情報.add(new HihokenshaDaicho(entity));
         if (null != 市町村セキュリティ情報 && null != 市町村セキュリティ情報.get導入形態コード()
-                && DonyuKeitaiCode.事務広域.getCode().equals(市町村セキュリティ情報.get導入形態コード().getKey())) {
-            RString 合併情報区分 = DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分,
-                    RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
-            if (合併情報区分_合併あり.equals(合併情報区分)) {
-                HokenryoRank rank = InstanceProvider.create(HokenryoRank.class);
-                List<MonthShichoson> 月別ランク情報 = rank.get月別ランク情報(資格情報, processParameter.get本算定賦課処理日().getYear());
-                TsukibetsuRankTemp rankuEntity = new TsukibetsuRankTemp();
-                rankuEntity.setHihokenshaNo(entity.getHihokenshaNo());
-                set月別ランク(rankuEntity, 月別ランク情報);
-                月別ランクTemp一時tableWriter.insert(rankuEntity);
-            }
+                && DonyuKeitaiCode.事務広域.getCode().equals(市町村セキュリティ情報.get導入形態コード().getKey())
+                && 合併情報区分_合併あり.equals(合併情報区分)) {
+            HokenryoRank rank = InstanceProvider.create(HokenryoRank.class);
+            List<MonthShichoson> 月別ランク情報 = rank.get月別ランク情報(資格情報, processParameter.get本算定賦課処理日().getYear());
+            TsukibetsuRankTemp rankuEntity = new TsukibetsuRankTemp();
+            rankuEntity.setHihokenshaNo(entity.getHihokenshaNo());
+            set月別ランク(rankuEntity, 月別ランク情報);
+            月別ランクTemp一時tableWriter.insert(rankuEntity);
         }
     }
 

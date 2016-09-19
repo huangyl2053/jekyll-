@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE0110002;
 
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.shinseijouhouinnsatu.ShinseiJouhouInsatuBatchParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE011001.DBE011001_ShinseiInfoPrintParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0110002.HakkoJokenSinnseiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0110002.HakkoJokenSinnseiHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0110002.HakkoJokenSinnseiValidationHandler;
@@ -91,7 +91,7 @@ public class HakkoJokenSinnsei {
      * @param div 画面情報
      * @return ResponseData<HakkoJokenSinnseiDiv>
      */
-    public ResponseData<ShinseiJouhouInsatuBatchParameter> onClick_Jikkou(HakkoJokenSinnseiDiv div) {
+    public ResponseData<DBE011001_ShinseiInfoPrintParameter> onClick_Jikkou(HakkoJokenSinnseiDiv div) {
         return ResponseData.of(getHandler(div).setBatchParameter()).respond();
     }
 

@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufukanrihyoout;
 
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
@@ -33,7 +35,7 @@ public class HihokenshaTempEntity extends DbTableEntityBase<HihokenshaTempEntity
     @TempTableColumnOrder(5)
     private RString exHihokenshaNo;
     @TempTableColumnOrder(6)
-    private RString exServiceTeikyoYm;
+    private FlexibleYearMonth exServiceTeikyoYm;
     @TempTableColumnOrder(7)
     private RString henkanFlag;
     @TempTableColumnOrder(8)
@@ -67,22 +69,22 @@ public class HihokenshaTempEntity extends DbTableEntityBase<HihokenshaTempEntity
     @TempTableColumnOrder(22)
     private RString shikibetsuCode;
     @TempTableColumnOrder(23)
-    private RString shikakuShutokuYmd;
+    private FlexibleDate shikakuShutokuYmd;
     @TempTableColumnOrder(24)
     private RString shikakuShutokuJiyuCode;
     @TempTableColumnOrder(25)
-    private RString shikakuSoshitsuYmd;
+    private FlexibleDate shikakuSoshitsuYmd;
     @TempTableColumnOrder(26)
     private RString shikakuSoshitsuJiyuCode;
     @TempTableColumnOrder(27)
     private RString setaiShuyakuNo;
     @TempTableColumnOrder(28)
-    private RString seinenYmd;
+    private FlexibleDate seinenYmd;
     @TempTableColumnOrder(29)
     private RString seibetsuCode;
     @TempTableColumnOrder(30)
-    private RString shichosonKanyuYmd;
+    private FlexibleDate shichosonKanyuYmd;
     @TempTableColumnOrder(31)
-    private RString shichosonDattaiYmd;
+    private FlexibleDate shichosonDattaiYmd;
 
 }

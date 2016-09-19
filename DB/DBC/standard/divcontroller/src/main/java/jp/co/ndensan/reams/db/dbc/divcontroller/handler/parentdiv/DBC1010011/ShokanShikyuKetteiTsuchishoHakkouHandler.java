@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbc.service.core.shoukanbaraishikyuketteitsuchisho
 import jp.co.ndensan.reams.db.dbc.service.report.shokanketteitsuchishoshiharaiyoteibiyijinashi.ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriService;
 import jp.co.ndensan.reams.db.dbc.service.report.shokanketteitsuchishoshiharaiyoteibiyijinashi.ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiService;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShokanHanteiKekka;
+import jp.co.ndensan.reams.db.dbd.business.core.shiharaihohohenko.sashitome.ShiharaiHohoHenkoSashitome;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbd.service.core.basic.ShokanHanteiKekkaManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -40,6 +41,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
@@ -51,7 +53,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 public class ShokanShikyuKetteiTsuchishoHakkouHandler {
 
     private final ShokanShikyuKetteiTsuchishoHakkouDiv div;
-    private static final RString DBCSHIKIBETSUCODE = new RString("DBCshikibetsuCode");
+    private static final RString DBCHIHOKENSHANO = new RString("DBCHihokenshaNo");
 
     /**
      * コンストラクタです。
@@ -77,7 +79,7 @@ public class ShokanShikyuKetteiTsuchishoHakkouHandler {
             List<JukyushaDaicho> 受給者台帳List,
             List<SogoJigyoTaishosha> 総合事業対象者List,
             List<ShokanHanteiKekka> 償還払支給判定結果) {
-        LockingKey key = new LockingKey(DBCSHIKIBETSUCODE.concat(被保険者番号.getColumnValue()));
+        LockingKey key = new LockingKey(DBCHIHOKENSHANO.concat(被保険者番号.getColumnValue()));
         RealInitialLocker.lock(key);
         div.getShokanShikyuKetteiTsuchishoHakkouKihon().initialize(shikibetsuCode);
         div.getShokanShikyuKetteiTsuchishoSakuseiKaigoKihon().initialize(被保険者番号);
@@ -218,7 +220,7 @@ public class ShokanShikyuKetteiTsuchishoHakkouHandler {
     /**
      * 償還払支給判定結果を返します。
      *
-     * @param 償還払支給判定結果List
+     * @param 償還払支給判定結果List List<ShokanShikyuKetteiTsuchishoHakkouBusiness>
      * @param サービス提供年月 FlexibleYearMonth
      * @param 整理番号 RString
      * @return ShokanHanteiKekka
@@ -236,6 +238,37 @@ public class ShokanShikyuKetteiTsuchishoHakkouHandler {
             }
         }
         return shokanHanteiKekka;
+    }
+
+    /**
+     * 入力チェック。
+     *
+     * @param 支払方法変更差止 ShiharaiHohoHenkoSashitome
+     * @param 差額支給対象者区分 RString
+     * @param shokanHanteiKekka ShokanHanteiKekka
+     * @return 差額支給対象者区分
+     */
+    public RString check(ShiharaiHohoHenkoSashitome 支払方法変更差止, RString 差額支給対象者区分, ShokanHanteiKekka shokanHanteiKekka) {
+        if (支払方法変更差止 != null) {
+            if (支払方法変更差止.get差止控除番号() != null && !支払方法変更差止.get差止控除番号().isEmpty()) {
+                throw new ApplicationException(DbcErrorMessages.支払方法差止エラー.getMessage());
+            } else if (shokanHanteiKekka.get差額金額合計() != null && shokanHanteiKekka.get差額金額合計().compareTo(Decimal.ZERO) == 0) {
+                throw new ApplicationException(DbcErrorMessages.差額支給エラー.getMessage());
+            } else {
+                差額支給対象者区分 = new RString("1");
+            }
+        }
+        return 差額支給対象者区分;
+    }
+
+    /**
+     * 前排他キーの解除
+     *
+     * @param 被保険者番号 HihokenshaNo
+     */
+    public void 前排他キーの解除(HihokenshaNo 被保険者番号) {
+        LockingKey 排他キー = new LockingKey(DBCHIHOKENSHANO.concat(被保険者番号.getColumnValue()));
+        RealInitialLocker.release(排他キー);
     }
 
     private List<FlexibleYearMonth> getサービス提供年月(List<ShokanShikyuKetteiTsuchishoHakkouBusiness> 償還払支給判定結果List) {

@@ -91,13 +91,14 @@ public class KogakuGassanRirekiNoKakuninProcess extends BatchProcessBase<DbWTKog
             dbWT3861entity.setFutangakuGokei(entity.getFutangakuGokei());
             dbWT3861entity.setUnder70_ShikyugakuGokei(entity.getUnder70_ShikyugakuGokei());
             dbWT3861entity.setShikyugakuGokei(entity.getShikyugakuGokei());
-            if (データ区分_保険者作成.equals(entity.getDataKubun())) {
+            if (データ区分_保険者作成.equals(entity.getDbt3072DataKubun())) {
                 dbWT3861entity.setDataKubun(データ区分_国保連作成);
             } else {
                 dbWT3861entity.setDataKubun(データ区分);
             }
-            if (データ区分_保険者作成.equals(entity.getDataKubun())
-                    && (再送フラグ_再送要.equals(entity.getSaisoFG()) || entity.getSofuYM() == null || entity.getSofuYM().isEmpty())) {
+            if (データ区分_保険者作成.equals(entity.getDbt3072DataKubun())
+                    && (再送フラグ_再送要.equals(entity.getDbt3072SaisoFG())
+                    || entity.getDbt3072SofuYM() == null || entity.getDbt3072SofuYM().isEmpty())) {
                 dbWT3861entity.setKakuninListFlag(true);
             }
             dbWT3861entity.setUketoriYM(entity.getUketoriYM());

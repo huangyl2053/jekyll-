@@ -40,9 +40,7 @@
             AND ("DbT3068KogakuGassanShinseisho"."jikoFutan_KeisanYM" is not null and "DbT3068KogakuGassanShinseisho"."jikoFutan_KeisanYM" <![CDATA[<>]]> '')
             AND "DbT3068KogakuGassanShinseisho"."isDeleted" = false
             AND "DbT3070KogakuGassanJikoFutanGaku"."isDeleted" = false
-            <if test="対象年度区分!=null and !対象年度区分.isEmpty()">
-                AND "DbT3070KogakuGassanJikoFutanGaku"."dataSakuseiKubun" = #{対象年度区分}
-            </if>    
+            AND "DbT3070KogakuGassanJikoFutanGaku"."dataSakuseiKubun" = #{抽出対象}
             <if test="抽出対象 == 1">
                 AND #{申請開始年月日} <![CDATA[<=]]> "DbT3068KogakuGassanShinseisho"."shinseiYMD"
                 AND "DbT3068KogakuGassanShinseisho"."shinseiYMD" <![CDATA[<=]]> #{申請終了年月日}
