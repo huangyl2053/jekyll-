@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.definition.batchprm.kaigojuminhyo;
+package jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU070010;
 
 import jp.co.ndensan.reams.db.dbu.definition.processprm.kaigojuminhyo.KaigoJuminhyoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
 @lombok.Setter
-public class KaigoJuminhyoBatchParameter extends BatchParameterBase {
+public class DBU070010_KobetsujikoRenkei_TashaParameter extends BatchParameterBase {
 
     /**
      * 対象開始年月日日時
