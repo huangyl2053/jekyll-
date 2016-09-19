@@ -50,12 +50,17 @@ public class KyufuJissekiKihonJouhouMain {
         List<ShikibetsuNoKanri> 識別番号管理データ = KyufuJissekiShokaiFinder.createInstance().
                 getShikibetsuBangoKanri(サービス提供年月, 識別番号検索キー).records();
         List<KyufujissekiKihon> 給付実績基本情報 = get給付実績基本情報();
+        div.getCcdKyufuJissekiHeader().initialize(
+                給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号(),
+                サービス提供年月,
+                整理番号,
+                識別番号検索キー);
         KyufujissekiKihon 給付実績基本 = get給付実績基本情報(給付実績基本情報, サービス提供年月,
                 new JigyoshaNo(div.getCcdKyufuJissekiHeader().get事業者番号()), 整理番号,
                 div.getCcdKyufuJissekiHeader().get様式番号(), div.getCcdKyufuJissekiHeader().get実績区分コード());
         List<KyufuJissekiHedajyoho2> 給付実績ヘッダ情報2 = get給付実績ヘッダ情報2();
-        getHandler(div).onLoad(給付実績情報照会情報.getKojinKakuteiKey().get被保険者番号(), サービス提供年月,
-                整理番号, 識別番号検索キー, 識別番号管理データ, 給付実績基本情報,
+        getHandler(div).onLoad(サービス提供年月,
+                識別番号検索キー, 識別番号管理データ, 給付実績基本情報,
                 給付実績ヘッダ情報2, 給付実績基本, get事業所名称(給付実績基本, サービス提供年月),
                 get給付分類区分(給付実績基本, サービス提供年月));
         div.getKyufuJissekiKihonGokeiPanel().setIsOpen(false);

@@ -335,7 +335,7 @@ public class KyufuJissekiShokaiHandler {
                     明細一覧.setTxtServiceGroup1(RString.EMPTY);
                     明細一覧.setTxtServiceGroup2(RString.EMPTY);
                     明細一覧.setTxtServiceShurui(new RString("訪問看護"));
-                    明細一覧.setRowBgColor(DataGridCellBgColor.bgColorLightBlue);
+                    明細一覧.setCellBgColor(サービス種類.toString(), DataGridCellBgColor.bgColorLightBlue);
                 } else {
                     明細一覧.setTxtServiceGroup1(RString.EMPTY);
                     明細一覧.setTxtServiceGroup2(RString.EMPTY);
