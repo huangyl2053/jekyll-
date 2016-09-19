@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.dbb0120001;
 
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012001.DBB012001_TokuchoHeinjunka6GatsuParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012003.DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakkoParameter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0120001.DBB0120001StateName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0120001.HeijunkaKeisanDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0120001.HeijunkaKeisanHandler;
@@ -77,8 +77,8 @@ public class HeijunkaKeisan {
      * @param div コントロールdiv
      * @return レスポンスデータ
      */
-    public ResponseData<TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter> onClick_btnHeijunkaJikko(HeijunkaKeisanDiv div) {
-        TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter parameter = getHandler(div).setBatchParameter();
+    public ResponseData<DBB012001_TokuchoHeinjunka6GatsuParameter> onClick_btnHeijunkaJikko(HeijunkaKeisanDiv div) {
+        DBB012001_TokuchoHeinjunka6GatsuParameter parameter = getHandler(div).setBatchParameter();
         createFlowParameter(div, parameter);
         return ResponseData.of(parameter).respond();
     }
@@ -94,7 +94,7 @@ public class HeijunkaKeisan {
         return ResponseData.of(parameter).respond();
     }
 
-    private void createFlowParameter(HeijunkaKeisanDiv div, TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter parameter) {
+    private void createFlowParameter(HeijunkaKeisanDiv div, DBB012001_TokuchoHeinjunka6GatsuParameter parameter) {
         FlowParameters fp = new FlowParameters();
         boolean 通知書一括発行 = false;
         for (dgOutputChohyoIchiran_Row row : div.getTokuchoHeijunkaChohyoHakko().getCcdChohyoIchiran().get出力帳票一覧()) {
@@ -105,7 +105,7 @@ public class HeijunkaKeisan {
         fp.add(new RString("通知書一括発行"), 通知書一括発行);
         fp.add(new RString("調定年度"), parameter.get調定年度());
         fp.add(new RString("賦課年度"), parameter.get賦課年度());
-        fp.add(new RString("出力帳票一覧List"), Base64Serializer.serialize(parameter.get出力帳票entity()));
+        fp.add(new RString("出力帳票一覧List"), Base64Serializer.serialize(parameter.get出力帳票entity().get(0)));
         fp.add(new RString("発行日"), parameter.get発行日());
         fp.add(new RString("出力対象"), parameter.get出力対象指示フラグ());
         fp.add(new RString("一括発行フラグ"), parameter.is一括発行フラグ());
