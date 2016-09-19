@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc200095;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -47,6 +48,6 @@ public class KokuhorenSofuDataErrorIchiranEntity {
     private FlexibleDate 標準終了日;
     private FlexibleDate 引下開始日;
     private FlexibleDate 作成年月日;
-    private FlexibleDate 処理年月;
+    private FlexibleYearMonth 処理年月;
 
 }
