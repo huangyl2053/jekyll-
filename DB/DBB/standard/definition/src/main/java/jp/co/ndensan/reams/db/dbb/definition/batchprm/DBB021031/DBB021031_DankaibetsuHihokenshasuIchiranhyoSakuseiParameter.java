@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.definition.batchprm.ShotokuDankaibetsuHihokenshaSuIchiran;
+package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB021031;
 
 import java.util.List;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -21,7 +21,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShotokuDankaibetsuHihokenshaSuIchiranBatchParameter extends BatchParameterBase {
+public class DBB021031_DankaibetsuHihokenshasuIchiranhyoSakuseiParameter extends BatchParameterBase {
 
     private static final String KEY_SETTINGNENDO = "settingnendo";
     private static final String KEY_TREATMENTDAY = "treatmentday";

@@ -9,8 +9,9 @@ import java.util.List;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 一次判定データ出力Businessです。
  *
- * @author soft863
+ * @reamsid_L DBE-1610-010 wanghui
  */
 @lombok.Getter
 @lombok.Setter
