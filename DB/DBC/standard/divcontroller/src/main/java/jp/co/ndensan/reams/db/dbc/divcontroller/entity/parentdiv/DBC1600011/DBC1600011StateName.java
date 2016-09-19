@@ -17,6 +17,7 @@ public enum DBC1600011StateName implements IStateEnumerations {
     NoChange(""),
     search("search"),
     detail("detail"),
+    detail_notUpdate("detail_notUpdate"),
     KanryoMessage("KanryoMessage");
 
     private final RString name;
