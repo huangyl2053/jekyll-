@@ -11,7 +11,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.shichosonsentaku.ShichosonSelectorModel;
 import jp.co.ndensan.reams.db.dba.business.core.shichosonsentaku.ShichosonSelectorResult;
 import jp.co.ndensan.reams.db.dbu.business.core.yoshikibetsurenkeijoho.JigyoHokokuTokei;
-import jp.co.ndensan.reams.db.dbu.definition.batchprm.jigyohokokurenkei.JigyoHokokuRenkeiBatchParameter;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU020010.DBU020010_JigyoHokokuRenkei_MainParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0030011.JigyoJokyoHokokuGeppoDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -519,7 +519,7 @@ public class JigyoJokyoHokokuGeppoHandler {
      * @param div 様式別連携情報Div
      * @return HoshuShiharaiJunbiBatchParameter
      */
-    public JigyoHokokuRenkeiBatchParameter onClick_btnJikko(JigyoJokyoHokokuGeppoDiv div) {
+    public DBU020010_JigyoHokokuRenkei_MainParameter onClick_btnJikko(JigyoJokyoHokokuGeppoDiv div) {
         ShichosonSelectorModel model = DataPassingConverter.deserialize(div.getKyuShichoson(), ShichosonSelectorModel.class);
         List<ShichosonSelectorResult> list = new ArrayList<>();
         if (model != null) {
@@ -534,7 +534,7 @@ public class JigyoJokyoHokokuGeppoHandler {
         if (市町村コードリスト.isEmpty()) {
             市町村コードリスト.add(div.getShichosonCode());
         }
-        JigyoHokokuRenkeiBatchParameter batchParameter = new JigyoHokokuRenkeiBatchParameter(
+        DBU020010_JigyoHokokuRenkei_MainParameter batchParameter = new DBU020010_JigyoHokokuRenkei_MainParameter(
                 div.getJikkoTanni().getDdlKakoHokokuYM().getSelectedKey(),
                 dateToRString(div.getTblShutsuryokuTaisho().getTxtShukeiYM1().getValue()),
                 dateToRString(div.getTblShutsuryokuTaisho().getTxtShukeiYM2().getValue()),

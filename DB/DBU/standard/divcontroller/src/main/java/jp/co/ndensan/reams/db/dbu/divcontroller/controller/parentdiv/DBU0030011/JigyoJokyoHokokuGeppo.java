@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0030011
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.shichosonsentaku.ShichosonSelectorModel;
 import jp.co.ndensan.reams.db.dbu.business.core.yoshikibetsurenkeijoho.JigyoHokokuTokei;
-import jp.co.ndensan.reams.db.dbu.definition.batchprm.jigyohokokurenkei.JigyoHokokuRenkeiBatchParameter;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU020010.DBU020010_JigyoHokokuRenkei_MainParameter;
 import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.yoshikibetsurenkeijoho.ShukeiYearMouthGetterParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0030011.JigyoJokyoHokokuGeppoDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0030011.JigyoJokyoHokokuGeppoHandler;
@@ -171,7 +171,7 @@ public class JigyoJokyoHokokuGeppo {
      * @param div 様式別連携情報Div
      * @return ResponseData<JigyoHokokuRenkeiBatchParameter>
      */
-    public ResponseData<JigyoHokokuRenkeiBatchParameter> onClick_btnJikko(JigyoJokyoHokokuGeppoDiv div) {
+    public ResponseData<DBU020010_JigyoHokokuRenkei_MainParameter> onClick_btnJikko(JigyoJokyoHokokuGeppoDiv div) {
         if (div.getJikkoTanni().getRadHokenshaKyuShichoson().getSelectedKey().contains(保険者分)
                 || div.getJikkoTanni().getRadKoikiKoseiShichoson().getSelectedKey().contains(広域分)) {
             div.setShichosonCode(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告));
