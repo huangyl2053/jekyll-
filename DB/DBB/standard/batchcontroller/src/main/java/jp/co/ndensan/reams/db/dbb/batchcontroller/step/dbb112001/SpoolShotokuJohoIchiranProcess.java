@@ -90,7 +90,7 @@ public class SpoolShotokuJohoIchiranProcess extends BatchKeyBreakBase<ShotokuJoh
     private static final RString 異動_単一_4 = new RString("4");
     private static final RString TIME_FORMAT = new RString("HH:MM:SS");
     private static final RString 導入形態コード_111 = new RString("111");
-    private static final RString 導入形態コード_112 = new RString("112");
+    private static final RString 導入形態コード_120 = new RString("120");
     private static final RString INDEX_22 = new RString("22");
     private static final int INT_1 = 1;
     private static final RString 出力_市町村情報リスト = new RString("【市町村情報リスト】");
@@ -127,7 +127,7 @@ public class SpoolShotokuJohoIchiranProcess extends BatchKeyBreakBase<ShotokuJoh
         if (当初_広域_1.equals(処理区分) || 異動_広域_2.equals(処理区分)) {
             導入形態コード = 導入形態コード_111;
         } else if (当初_単一_3.equals(処理区分) || 異動_単一_4.equals(処理区分)) {
-            導入形態コード = 導入形態コード_112;
+            導入形態コード = 導入形態コード_120;
         }
         IAssociationFinder finder = AssociationFinderFactory.createInstance();
         association = finder.getAssociation();

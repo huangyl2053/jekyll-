@@ -46,7 +46,7 @@ public class SelectShotokuJohoProcess extends BatchProcessBase<RString> {
 
     @Override
     protected void initialize() {
-        // TODO  csvReaderPath = parameter.getPath().concat(KEY_分離文字).concat(parameter.getFileName());
+        // TODO  batchParameterのパラメータは問題があります、csvReaderPath = parameter.getPath().concat(KEY_分離文字).concat(parameter.getFileName());
         csvReaderPath = Path.combinePath(parameter.get共有ファイルID(), parameter.get共有ファイル名());
     }
 
