@@ -120,10 +120,6 @@ public class JikoFutangakushomeishoTo2008OutputProcess extends BatchKeyBreakBase
     protected void createWriter() {
         batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100050.getReportId().value()).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
-    }
-
-    @Override
-    protected void beforeProcess() {
         認証者情報 = NinshoshaSourceBuilderFactory.createInstance(認証者, 地方公共団体情報,
                 reportSourceWriter.getImageFolderPath(), RDate.getNowDate()).buildSource();
     }
