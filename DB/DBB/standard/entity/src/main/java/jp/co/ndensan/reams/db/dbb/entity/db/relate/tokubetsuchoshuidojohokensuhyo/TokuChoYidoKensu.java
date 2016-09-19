@@ -18,12 +18,18 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class TokuChoYidoKensu {
 
-    private NenkinHokenshaCode 特別徴収義務者コード;
+    private NenkinHokenshaCode 特別徴収義務者コードLeft;
+    private NenkinHokenshaCode 特別徴収義務者コードRight;
     private LasdecCode 構成市町村コード;
-    private int 資格件数;
-    private int 件数;
-    private int 仮徴収額変更件数;
-    private int 住所地特例件数;
-    private int 追加依頼件数;
+    private int 資格件数Left;
+    private int 資格件数Right;
+    private int 件数Left;
+    private int 件数Right;
+    private int 仮徴収額変更件数Left;
+    private int 仮徴収額変更件数Right;
+    private int 住所地特例件数Left;
+    private int 住所地特例件数Right;
+    private int 追加依頼件数Left;
+    private int 追加依頼件数Right;
 
 }

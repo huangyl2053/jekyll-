@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-3710-070 chenxin -->
+<!-- 概要： 負担限度額認定申請一括承認（バッチ）_処理対象の特定用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.futangendogaku.INinteiBatchTaishoTokuteiMapper">
+    <delete id="deleteAll">
+        DELETE
+        FROM
+            rgdb."DbT4036FutanGendogakuNinteiBatchTestResults"
+    </delete>
+    
+    <select id="selectAll"
+        parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbdbt22006.NinteiBatchTaishoTokuteiMybatisParameter"
+        resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4018KaigoHokenFutanGendogakuNinteiMapper.ResultMap_DbT4018KaigoHokenFutanGendogakuNinteiEntity"
+        fetchSize="500" resultOrdered="true">
+        SELECT
+            <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4018KaigoHokenFutanGendogakuNinteiMapper.allColumns_DbT4018KaigoHokenFutanGendogakuNintei" />
+        FROM
+            rgdb."DbT4018KaigoHokenFutanGendogakuNintei"
+        WHERE
+            #{申請日開始} <![CDATA[<=]]> "DbT4018KaigoHokenFutanGendogakuNintei"."shinseiYMD"
+            AND "DbT4018KaigoHokenFutanGendogakuNintei"."shinseiYMD"  <![CDATA[<=]]> #{申請日終了}
+            AND ( "DbT4018KaigoHokenFutanGendogakuNintei"."ketteiKubun" IS NULL 
+                OR "DbT4018KaigoHokenFutanGendogakuNintei"."ketteiKubun" = '')
+    </select>
+
+</mapper>

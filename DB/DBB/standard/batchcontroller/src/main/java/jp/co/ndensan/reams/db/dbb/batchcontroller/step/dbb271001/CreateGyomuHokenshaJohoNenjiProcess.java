@@ -94,9 +94,9 @@ public class CreateGyomuHokenshaJohoNenjiProcess extends BatchProcessBase<Tokuch
 
     private boolean do資格喪失の判定(DbV1001HihokenshaDaichoEntity 被保険者, FlexibleDate now) {
         return !(ShikakuKubun._１号.getコード().equals(被保険者.getHihokennshaKubunCode())
-                && 被保険者.getIchigoShikakuShutokuYMD().compareTo(now) <= 0
+                && 被保険者.getIchigoShikakuShutokuYMD().isBeforeOrEquals(now)
                 && (null == 被保険者.getShikakuSoshitsuYMD() || FlexibleDate.EMPTY.equals(被保険者.getShikakuSoshitsuYMD())
-                || now.compareTo(被保険者.getShikakuSoshitsuYMD()) <= 0) && !被保険者.getLogicalDeletedFlag());
+                || now.isBeforeOrEquals(被保険者.getShikakuSoshitsuYMD())) && !被保険者.getLogicalDeletedFlag());
     }
 
     private DoteiFuitchiRiyu do他市町村住所地特例者台帳時不一致理由(DbV1003TashichosonJushochiTokureiEntity tokurei,
@@ -105,12 +105,16 @@ public class CreateGyomuHokenshaJohoNenjiProcess extends BatchProcessBase<Tokuch
         //が実装していませんので、コーディングできません、同じEnumを利用しています
         if (null != tokurei && null != tokurei.getShikibetsuCode()) {
             FlexibleDate 解除年月日 = tokurei.getKaijoYMD();
-            return (null == 解除年月日 || 解除年月日.equals(FlexibleDate.EMPTY))
-                    ? DoteiFuitchiRiyu.その他 : DoteiFuitchiRiyu.資格なし;
+            if (null == 解除年月日 || 解除年月日.equals(FlexibleDate.EMPTY)) {
+                return DoteiFuitchiRiyu.その他;
+            }
+            return DoteiFuitchiRiyu.資格なし;
         } else if (null != jogaisha && null != jogaisha.getShikibetsuCode()) {
             FlexibleDate 解除年月日 = jogaisha.getKaijoYMD();
-            return (null == 解除年月日 || 解除年月日.equals(FlexibleDate.EMPTY))
-                    ? DoteiFuitchiRiyu.その他 : DoteiFuitchiRiyu.資格なし;
+            if (null == 解除年月日 || 解除年月日.equals(FlexibleDate.EMPTY)) {
+                return DoteiFuitchiRiyu.その他;
+            }
+            return DoteiFuitchiRiyu.資格なし;
         } else if (被保険者台帳があるFlag) {
             return DoteiFuitchiRiyu.資格喪失;
         }

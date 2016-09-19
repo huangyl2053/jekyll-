@@ -192,10 +192,8 @@ public class TokuchoHeijunkaRokuBatchTaishogaiTempEntity
      *
      * @param 介護賦課 HeinjunkaFukaTmpEntity
      * @param 備考コード RString
-     * @param fukaGakuEntity TokuchoHeijyunkaRokuBatchFukaGakuEntity
      */
-    public TokuchoHeijunkaRokuBatchTaishogaiTempEntity(FukaJohoTmpEntity 介護賦課, RString 備考コード,
-            TokuchoHeijyunkaRokuBatchFukaGakuEntity fukaGakuEntity) {
+    public TokuchoHeijunkaRokuBatchTaishogaiTempEntity(FukaJohoTmpEntity 介護賦課, RString 備考コード) {
         this.choteiNendo = 介護賦課.getChoteiNendo();
         this.fukaNendo = 介護賦課.getFukaNendo();
         this.tsuchishoNo = 介護賦課.getTsuchishoNo();
@@ -244,27 +242,27 @@ public class TokuchoHeijunkaRokuBatchTaishogaiTempEntity
         this.fukaShichosonCode = 介護賦課.getFukaShichosonCode();
         this.tkSaishutsuKampuGaku = 介護賦課.getTkSaishutsuKampuGaku();
         this.fuSaishutsuKampuGaku = 介護賦課.getFuSaishutsuKampuGaku();
-        this.hokenryoDankaiKarisanntei = fukaGakuEntity.get保険料段階仮算定時();
-        this.tokubetsuChoteigaku01 = fukaGakuEntity.get特徴期期別金額01();
-        this.tokubetsuChoteigaku02 = fukaGakuEntity.get特徴期期別金額02();
-        this.tokubetsuChoteigaku03 = fukaGakuEntity.get特徴期期別金額03();
-        this.tokubetsuChoteigaku04 = fukaGakuEntity.get特徴期期別金額04();
-        this.tokubetsuChoteigaku05 = fukaGakuEntity.get特徴期期別金額05();
-        this.tokubetsuChoteigaku06 = fukaGakuEntity.get特徴期期別金額06();
-        this.fuchoChoteigaku01 = fukaGakuEntity.get普徴期期別金額01();
-        this.fuchoChoteigaku02 = fukaGakuEntity.get普徴期期別金額02();
-        this.fuchoChoteigaku03 = fukaGakuEntity.get普徴期期別金額03();
-        this.fuchoChoteigaku04 = fukaGakuEntity.get普徴期期別金額04();
-        this.fuchoChoteigaku05 = fukaGakuEntity.get普徴期期別金額05();
-        this.fuchoChoteigaku06 = fukaGakuEntity.get普徴期期別金額06();
-        this.fuchoChoteigaku07 = fukaGakuEntity.get普徴期期別金額07();
-        this.fuchoChoteigaku08 = fukaGakuEntity.get普徴期期別金額08();
-        this.fuchoChoteigaku09 = fukaGakuEntity.get普徴期期別金額09();
-        this.fuchoChoteigaku10 = fukaGakuEntity.get普徴期期別金額10();
-        this.fuchoChoteigaku11 = fukaGakuEntity.get普徴期期別金額11();
-        this.fuchoChoteigaku12 = fukaGakuEntity.get普徴期期別金額12();
-        this.fuchoChoteigaku13 = fukaGakuEntity.get普徴期期別金額13();
-        this.fuchoChoteigaku14 = fukaGakuEntity.get普徴期期別金額14();
+        this.hokenryoDankaiKarisanntei = 介護賦課.getHokenryoDankaiKarisanntei();
+        this.tokubetsuChoteigaku01 = 介護賦課.getTkKibetsuGaku01();
+        this.tokubetsuChoteigaku02 = 介護賦課.getTkKibetsuGaku02();
+        this.tokubetsuChoteigaku03 = 介護賦課.getTkKibetsuGaku03();
+        this.tokubetsuChoteigaku04 = 介護賦課.getTkKibetsuGaku04();
+        this.tokubetsuChoteigaku05 = 介護賦課.getTkKibetsuGaku05();
+        this.tokubetsuChoteigaku06 = 介護賦課.getTkKibetsuGaku06();
+        this.fuchoChoteigaku01 = 介護賦課.getFuKibetsuGaku01();
+        this.fuchoChoteigaku02 = 介護賦課.getFuKibetsuGaku02();
+        this.fuchoChoteigaku03 = 介護賦課.getFuKibetsuGaku03();
+        this.fuchoChoteigaku04 = 介護賦課.getFuKibetsuGaku04();
+        this.fuchoChoteigaku05 = 介護賦課.getFuKibetsuGaku05();
+        this.fuchoChoteigaku06 = 介護賦課.getFuKibetsuGaku06();
+        this.fuchoChoteigaku07 = 介護賦課.getFuKibetsuGaku07();
+        this.fuchoChoteigaku08 = 介護賦課.getFuKibetsuGaku08();
+        this.fuchoChoteigaku09 = 介護賦課.getFuKibetsuGaku09();
+        this.fuchoChoteigaku10 = 介護賦課.getFuKibetsuGaku10();
+        this.fuchoChoteigaku11 = 介護賦課.getFuKibetsuGaku11();
+        this.fuchoChoteigaku12 = 介護賦課.getFuKibetsuGaku12();
+        this.fuchoChoteigaku13 = 介護賦課.getFuKibetsuGaku13();
+        this.fuchoChoteigaku14 = 介護賦課.getFuKibetsuGaku14();
         this.備考コード = 備考コード;
     }
 }

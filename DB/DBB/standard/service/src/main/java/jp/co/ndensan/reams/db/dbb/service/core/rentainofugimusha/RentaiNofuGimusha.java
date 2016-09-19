@@ -113,7 +113,7 @@ public class RentaiNofuGimusha {
                 連帯納付義務者宛名情報.set住民種別(宛名entity.getJuminJotaiCode());
                 連帯納付義務者宛名情報.set続柄(宛名entity.getTsuzukigara());
                 連帯納付義務者宛名情報.set住所(宛名entity.getJusho());
-                連帯納付義務者宛名情報.set履歴番号(宛名entity.getRirekiNo());
+                連帯納付義務者宛名情報.set履歴番号(連帯納付義務者entity.getRirekiNo().intValue());
                 連帯納付義務者宛名情報リスト.add(連帯納付義務者宛名情報);
             }
         }

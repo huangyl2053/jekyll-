@@ -180,12 +180,12 @@ public class PrtTokuchoDoteiIchiranhyoProcess extends BatchProcessBase<Tokubetsu
                 entity.getKisoNenkinNo(),
                 entity.getNenkinCode(),
                 entity.getShikibetsuCode(),
-                entity.getSetaiCode().getColumnValue(),
-                entity.getGyoseikuCode().getColumnValue(),
+                entity.getSetaiCode() == null ? RString.EMPTY : entity.getSetaiCode().getColumnValue(),
+                entity.getGyoseikuCode() == null ? RString.EMPTY : entity.getGyoseikuCode().getColumnValue(),
                 new RDate(entity.getBirthDay().toString()),
                 entity.getJuminShubetsuCode(),
                 get性別コード(entity.getSeibetsu()),
-                entity.getKanaMeisho().getColumnValue(),
+                entity.getKanaMeisho() == null ? RString.EMPTY : entity.getKanaMeisho().getColumnValue(),
                 entity.getKanaShimei(),
                 entity.getKanjiShimei(),
                 entity.getYubinNo(),
@@ -203,17 +203,24 @@ public class PrtTokuchoDoteiIchiranhyoProcess extends BatchProcessBase<Tokubetsu
         return seibetsu.value().get性別コード();
     }
 
+    private RString get性別名称(SeibetsuCodeNenkinTokucho seibetsu) {
+        if (seibetsu == null) {
+            return RString.EMPTY;
+        }
+        return seibetsu.value().get性別名称();
+    }
+
     private void outputCsv(TokubetsuChoshuDoteiIchiranEntity entity) {
         eucCsvWriter.writeLine(new TokubetsuChoshuDoteiIchiranCSVEntity(
                 entity.getHihokenshaNo(),
                 entity.getKisoNenkinNo(),
                 entity.getNenkinCode(),
-                entity.getShikibetsuCode().getColumnValue(),
-                entity.getSetaiCode().getColumnValue(),
-                entity.getGyoseikuCode().getColumnValue(),
+                entity.getShikibetsuCode() == null ? RString.EMPTY : entity.getShikibetsuCode().getColumnValue(),
+                entity.getSetaiCode() == null ? RString.EMPTY : entity.getSetaiCode().getColumnValue(),
+                entity.getGyoseikuCode() == null ? RString.EMPTY : entity.getGyoseikuCode().getColumnValue(),
                 entity.getBirthDay(),
-                entity.getSeibetsu().value().get性別名称(),
-                entity.getKanaMeisho().getColumnValue(),
+                get性別名称(entity.getSeibetsu()),
+                entity.getKanaMeisho() == null ? RString.EMPTY : entity.getKanaMeisho().getColumnValue(),
                 entity.getKanaShimei(),
                 entity.getKanjiShimei(),
                 entity.getYubinNo(),
