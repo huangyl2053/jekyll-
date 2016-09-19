@@ -489,43 +489,41 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
         }
     }
 
-    private void set明細情報の表示制御(RString 様式番号, FlexibleYearMonth サービス提供年月) {
-        KyufuJissekiYoshikiKubun 基準様式番号 = KyufuJissekiYoshikiKubun.toValue(様式番号);
-        if (KyufuJissekiYoshikiKubun._21C1_福祉用具販売費.equals(基準様式番号)
-                || KyufuJissekiYoshikiKubun._21C2_予防用具販売費.equals(基準様式番号)
-                || KyufuJissekiYoshikiKubun._21D1_住宅改修費.equals(基準様式番号)
-                || KyufuJissekiYoshikiKubun._21D2_予防住宅改修費.equals(基準様式番号)) {
+    private void set明細情報の表示制御(RString 基準様式番号, FlexibleYearMonth サービス提供年月) {
+        if (KyufuJissekiYoshikiKubun._21C1_福祉用具販売費.get様式番号().equals(基準様式番号)
+                || KyufuJissekiYoshikiKubun._21C2_予防用具販売費.get様式番号().equals(基準様式番号)
+                || KyufuJissekiYoshikiKubun._21D1_住宅改修費.get様式番号().equals(基準様式番号)
+                || KyufuJissekiYoshikiKubun._21D2_予防住宅改修費.get様式番号().equals(基準様式番号)) {
             div.getDgKyufuJissekiMeisai().setDisplayNone(true);
         } else if (平成27年4月.isBeforeOrEquals(サービス提供年月)) {
-            if (KyufuJissekiYoshikiKubun._7131_様式第二.equals(基準様式番号)
-                    && KyufuJissekiYoshikiKubun._2131_様式第二.equals(基準様式番号)) {
+            if (KyufuJissekiYoshikiKubun._7131_様式第二.get様式番号().equals(基準様式番号)
+                    || KyufuJissekiYoshikiKubun._2131_様式第二.get様式番号().equals(基準様式番号)) {
                 div.getDgKyufuJissekiMeisai().setDisplayNone(false);
             }
-            if (KyufuJissekiYoshikiKubun._7132_様式第二の二.equals(基準様式番号)
-                    && KyufuJissekiYoshikiKubun._2132_様式第二の二.equals(基準様式番号)) {
+            if (KyufuJissekiYoshikiKubun._7132_様式第二の二.get様式番号().equals(基準様式番号)
+                    || KyufuJissekiYoshikiKubun._2132_様式第二の二.get様式番号().equals(基準様式番号)) {
                 div.getDgKyufuJissekiMeisai().setDisplayNone(false);
             }
-        } else if (KyufuJissekiYoshikiKubun._71R1_様式第二の三.equals(基準様式番号)
-                || KyufuJissekiYoshikiKubun._8171_様式第七の三.equals(基準様式番号)) {
+        } else if (KyufuJissekiYoshikiKubun._71R1_様式第二の三.get様式番号().equals(基準様式番号)
+                || KyufuJissekiYoshikiKubun._8171_様式第七の三.get様式番号().equals(基準様式番号)) {
             div.getDgKyufuJissekiMeisai().setDisplayNone(false);
         } else {
             div.getDgKyufuJissekiMeisai().setDisplayNone(true);
         }
     }
 
-    private void set明細情報特例の表示制御(RString 様式番号, FlexibleYearMonth サービス提供年月) {
-        KyufuJissekiYoshikiKubun 基準様式番号 = KyufuJissekiYoshikiKubun.toValue(様式番号);
+    private void set明細情報特例の表示制御(RString 基準様式番号, FlexibleYearMonth サービス提供年月) {
         if (平成27年4月.isBeforeOrEquals(サービス提供年月)) {
-            if (KyufuJissekiYoshikiKubun._7131_様式第二.equals(基準様式番号)
-                    && KyufuJissekiYoshikiKubun._2131_様式第二.equals(基準様式番号)) {
+            if (KyufuJissekiYoshikiKubun._7131_様式第二.get様式番号().equals(基準様式番号)
+                    || KyufuJissekiYoshikiKubun._2131_様式第二.get様式番号().equals(基準様式番号)) {
                 div.getDgKyufuJissekiMeisaiJustoku().setDisplayNone(false);
             }
-            if (KyufuJissekiYoshikiKubun._7132_様式第二の二.equals(基準様式番号)
-                    && KyufuJissekiYoshikiKubun._2132_様式第二の二.equals(基準様式番号)) {
+            if (KyufuJissekiYoshikiKubun._7132_様式第二の二.get様式番号().equals(基準様式番号)
+                    || KyufuJissekiYoshikiKubun._2132_様式第二の二.get様式番号().equals(基準様式番号)) {
                 div.getDgKyufuJissekiMeisaiJustoku().setDisplayNone(false);
             }
-        } else if (KyufuJissekiYoshikiKubun._71R1_様式第二の三.equals(基準様式番号)
-                || KyufuJissekiYoshikiKubun._8171_様式第七の三.equals(基準様式番号)) {
+        } else if (KyufuJissekiYoshikiKubun._71R1_様式第二の三.get様式番号().equals(基準様式番号)
+                || KyufuJissekiYoshikiKubun._8171_様式第七の三.get様式番号().equals(基準様式番号)) {
             div.getDgKyufuJissekiMeisaiJustoku().setDisplayNone(false);
         } else {
             div.getDgKyufuJissekiMeisaiJustoku().setDisplayNone(true);
