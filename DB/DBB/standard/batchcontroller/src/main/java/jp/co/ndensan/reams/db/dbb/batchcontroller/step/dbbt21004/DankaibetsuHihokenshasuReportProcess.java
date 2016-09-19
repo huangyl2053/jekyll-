@@ -47,7 +47,7 @@ public class DankaibetsuHihokenshasuReportProcess extends BatchKeyBreakBase<Dank
     @BatchWriter
     private BatchReportWriter<ShotokuDankaiBetsuHihokenshasuIchiranSource> batchReportWriter;
     private ReportSourceWriter<ShotokuDankaiBetsuHihokenshasuIchiranSource> reportSourceWriter;
-    private static final RString 市町村コード = new RString("1");
+    private static final RString 市町村分 = new RString("市町村分");
     List<RString> 改頁項目リスト;
 
     @Override
@@ -111,7 +111,7 @@ public class DankaibetsuHihokenshasuReportProcess extends BatchKeyBreakBase<Dank
     private DankaibetuHihokensyasuIchiranhyoMyBatisParameter toMyBatisParameter() {
         DankaibetuHihokensyasuIchiranhyoMyBatisParameter parameter = new DankaibetuHihokensyasuIchiranhyoMyBatisParameter();
         parameter.set市町村コード(false);
-        if (市町村コード.equals(processParameter.get市町村コード複数())) {
+        if (市町村分.equals(processParameter.get広域分市町村分区分())) {
             parameter.set市町村コード(true);
             parameter.set市町村コード複数(processParameter.get市町村コード複数());
         }

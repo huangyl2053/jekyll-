@@ -94,6 +94,34 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
     private static final int TEN = 10;
     private static final int ELE = 11;
     private static final int TWE = 12;
+    private Decimal 基準年金収入額01;
+    private Decimal 基準年金収入額02;
+    private Decimal 基準年金収入額03;
+    private Decimal 基準所得金額01;
+    private Decimal 基準所得金額02;
+    private Decimal 基準所得金額03;
+    private Decimal 基準所得金額04;
+    private Decimal 基準所得金額05;
+    private Decimal 基準所得金額06;
+    private Decimal 基準所得金額07;
+    private Decimal 基準所得金額08;
+    private Decimal 基準所得金額09;
+    private Decimal 基準所得金額10;
+    private Decimal 基準所得金額11;
+    private Decimal 基準所得金額12;
+    private Decimal 基準所得金額13;
+    private Decimal 基準所得金額14;
+    private Decimal 基準所得金額15;
+    private RString 課税層所得段階;
+    private RString 未申告段階使用;
+    private RString 未申告段階インデックス;
+    private RString 未申告課税区分;
+    private RString 所得調査中段階使用;
+    private RString 所得調査中段階インデックス;
+    private RString 所得調査中課税区分;
+    private RString 課税取消段階使用;
+    private RString 課税取消段階インデックス;
+    private RString 課税取消課税区分;
 
     @Override
     protected void createWriter() {
@@ -118,6 +146,63 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
         月別Entity = null;
         被保険者対象Entity = null;
         dankaiProcessEntityList = new ArrayList<>();
+        RDate nowDate = RDate.getNowDate();
+        基準年金収入額01 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準年金収入1,
+                nowDate, SubGyomuCode.DBB介護賦課).toString());
+        基準年金収入額02 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準年金収入2,
+                nowDate, SubGyomuCode.DBB介護賦課).toString());
+        基準年金収入額03 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準年金収入3,
+                nowDate, SubGyomuCode.DBB介護賦課).toString());
+        基準所得金額01 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額1,
+                nowDate, SubGyomuCode.DBB介護賦課).toString());
+        基準所得金額02 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額2,
+                nowDate, SubGyomuCode.DBB介護賦課).toString());
+        基準所得金額03 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額3,
+                nowDate, SubGyomuCode.DBB介護賦課).toString());
+        基準所得金額04 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額4,
+                nowDate, SubGyomuCode.DBB介護賦課).toString());
+        基準所得金額05 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額5,
+                nowDate, SubGyomuCode.DBB介護賦課).toString());
+        基準所得金額06 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額6,
+                nowDate, SubGyomuCode.DBB介護賦課).toString());
+        基準所得金額07 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額7,
+                nowDate, SubGyomuCode.DBB介護賦課).toString());
+        基準所得金額08 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額8,
+                nowDate, SubGyomuCode.DBB介護賦課).toString());
+        基準所得金額09 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額9,
+                nowDate, SubGyomuCode.DBB介護賦課).toString());
+        基準所得金額10 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額10,
+                nowDate, SubGyomuCode.DBB介護賦課).toString());
+        基準所得金額11 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額11,
+                nowDate, SubGyomuCode.DBB介護賦課).toString());
+        基準所得金額12 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額12,
+                nowDate, SubGyomuCode.DBB介護賦課).toString());
+        基準所得金額13 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額13,
+                nowDate, SubGyomuCode.DBB介護賦課).toString());
+        基準所得金額14 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額14,
+                nowDate, SubGyomuCode.DBB介護賦課).toString());
+        基準所得金額15 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額15,
+                nowDate, SubGyomuCode.DBB介護賦課).toString());
+        課税層所得段階 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_課税層保険料段階インデックス,
+                nowDate, SubGyomuCode.DBB介護賦課);
+        未申告段階使用 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_未申告保険料段階使用,
+                nowDate, SubGyomuCode.DBB介護賦課);
+        未申告段階インデックス = DbBusinessConfig.get(ConfigNameDBB.賦課基準_未申告保険料段階インデックス,
+                nowDate, SubGyomuCode.DBB介護賦課);
+        未申告課税区分 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_未申告課税区分,
+                nowDate, SubGyomuCode.DBB介護賦課);
+        所得調査中段階使用 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_所得調査中保険料段階使用,
+                nowDate, SubGyomuCode.DBB介護賦課);
+        所得調査中段階インデックス = DbBusinessConfig.get(ConfigNameDBB.賦課基準_所得調査中保険料段階インデックス,
+                nowDate, SubGyomuCode.DBB介護賦課);
+        所得調査中課税区分 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_所得調査中課税区分,
+                nowDate, SubGyomuCode.DBB介護賦課);
+        課税取消段階使用 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_課税取消保険料段階使用,
+                nowDate, SubGyomuCode.DBB介護賦課);
+        課税取消段階インデックス = DbBusinessConfig.get(ConfigNameDBB.賦課基準_課税取消保険料段階インデックス,
+                nowDate, SubGyomuCode.DBB介護賦課);
+        課税取消課税区分 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_課税取消課税区分,
+                nowDate, SubGyomuCode.DBB介護賦課);
     }
 
     @Override
@@ -167,6 +252,7 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
             dankaiProcessEntity.set世帯員所得情報Temp(世帯員所得情報List);
             dankaiProcessEntity.set生保の情報(生保の情報);
             dankaiProcessEntity.set老齢の情報(老齢の情報);
+            set被保険者番号(entity);
             dankaiProcessEntityList.add(dankaiProcessEntity);
             dankaiProcessEntity = new DankaiProcessEntityList();
             dankaiProcessEntity.set被保険者対象Temp(entity.get被保険者対象Temp());
@@ -187,7 +273,6 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
             dankaiProcessEntity.set老齢の情報(老齢の情報);
             set生活保護扶助種類EntityList(entity.get生活保護扶助種類());
             dankaiProcessEntity.set生保の情報(生保の情報);
-            set被保険者番号(entity);
             insetTable(dankaiProcessEntityList);
         } else {
             set老齢の情報(entity.get老齢の情報());
@@ -242,7 +327,7 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
         月別保険料制御情報Map.put(ELE, 月別保険料段階.get保険料段階02月());
         月別保険料制御情報Map.put(TWE, 月別保険料段階.get保険料段階03月());
         int i;
-        for (i = 1; i <= TWE; i++) {
+        for (i = ONE; i <= TWE; i++) {
             if (null != 月別保険料制御情報Map.get(i)
                     && null != 月別保険料制御情報Map.get(i).get段階区分()
                     && RString.EMPTY != 月別保険料制御情報Map.get(i).get段階区分()) {
@@ -250,7 +335,7 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
                 break;
             }
         }
-        for (int j = i; j <= TWE; j++) {
+        for (int j = i + ONE; j <= TWE; j++) {
             if (null != 月別保険料制御情報Map.get(j)
                     && null != 月別保険料制御情報Map.get(j).get段階区分()
                     && RString.EMPTY != 月別保険料制御情報Map.get(j).get段階区分()) {
@@ -262,7 +347,7 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
         HyojunDankaiTemp hyojunDankaiTemp = new HyojunDankaiTemp();
         hyojunDankaiTemp.set被保険者番号(dankaiProcessEntityList.get被保険者対象Temp().getHihokenshaNo());
         int k;
-        for (k = 1; k <= TWE; k++) {
+        for (k = ONE; k <= TWE; k++) {
             if (null != 月別保険料制御情報Map.get(k)
                     && null != 月別保険料制御情報Map.get(k).get段階区分()
                     && RString.EMPTY != 月別保険料制御情報Map.get(k).get段階区分()) {
@@ -270,7 +355,7 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
                 break;
             }
         }
-        for (int l = k; l <= TWE; l++) {
+        for (int l = k + ONE; l <= TWE; l++) {
             if (null != 月別保険料制御情報Map.get(l)
                     && null != 月別保険料制御情報Map.get(l).get段階区分()
                     && RString.EMPTY != 月別保険料制御情報Map.get(l).get段階区分()) {
@@ -295,81 +380,24 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
     }
 
     private SeigyoJoho get月別保険料制御情報(HokenryoDankaiList 保険料段階リスト) {
-        RDate nowDate = RDate.getNowDate();
-        Decimal 基準年金収入額01 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準年金収入1,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準年金収入額02 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準年金収入2,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準年金収入額03 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準年金収入3,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額01 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額1,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額02 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額2,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額03 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額3,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額04 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額4,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額05 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額5,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額06 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額6,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額07 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額7,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額08 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額8,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額09 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額9,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額10 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額10,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額11 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額11,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額12 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額12,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額13 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額13,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額14 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額14,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        Decimal 基準所得金額15 = new Decimal(DbBusinessConfig.get(ConfigNameDBB.賦課基準_基準所得金額15,
-                nowDate, SubGyomuCode.DBB介護賦課).toString());
-        RString 課税層所得段階 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_課税層保険料段階インデックス,
-                nowDate, SubGyomuCode.DBB介護賦課);
-        RString 未申告段階使用 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_未申告保険料段階使用,
-                nowDate, SubGyomuCode.DBB介護賦課);
         boolean 未申告段階使用有無 = false;
         if (使用する.equals(未申告段階使用)) {
             未申告段階使用有無 = true;
         } else if (使用しない.equals(未申告段階使用)) {
             未申告段階使用有無 = false;
         }
-        RString 未申告段階インデックス = DbBusinessConfig.get(ConfigNameDBB.賦課基準_未申告保険料段階インデックス,
-                nowDate, SubGyomuCode.DBB介護賦課);
-        RString 未申告課税区分 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_未申告課税区分,
-                nowDate, SubGyomuCode.DBB介護賦課);
-        RString 所得調査中段階使用 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_所得調査中保険料段階使用,
-                nowDate, SubGyomuCode.DBB介護賦課);
         boolean 所得調査中段階使用有無 = false;
         if (使用する.equals(所得調査中段階使用)) {
             所得調査中段階使用有無 = true;
         } else if (使用しない.equals(所得調査中段階使用)) {
             所得調査中段階使用有無 = false;
         }
-        RString 所得調査中段階インデックス = DbBusinessConfig.get(ConfigNameDBB.賦課基準_所得調査中保険料段階インデックス,
-                nowDate, SubGyomuCode.DBB介護賦課);
-        RString 所得調査中課税区分 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_所得調査中課税区分,
-                nowDate, SubGyomuCode.DBB介護賦課);
-        RString 課税取消段階使用 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_課税取消保険料段階使用,
-                nowDate, SubGyomuCode.DBB介護賦課);
         boolean 課税取消段階使用有無 = false;
         if (使用する.equals(課税取消段階使用)) {
             課税取消段階使用有無 = true;
         } else if (使用しない.equals(課税取消段階使用)) {
             課税取消段階使用有無 = false;
         }
-        RString 課税取消段階インデックス = DbBusinessConfig.get(ConfigNameDBB.賦課基準_課税取消保険料段階インデックス,
-                nowDate, SubGyomuCode.DBB介護賦課);
-        RString 課税取消課税区分 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_課税取消課税区分,
-                nowDate, SubGyomuCode.DBB介護賦課);
 
         SeigyojohoFactory seigyojohoFactory = InstanceProvider.create(SeigyojohoFactory.class);
         SeigyoJoho 月別保険料制御情報 = seigyojohoFactory.createSeigyojoho(
@@ -436,7 +464,7 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
     }
 
     private void set世帯員所得情報List(SetaiShotokuEntity entity) {
-        if (entity != null) {
+        if (entity != null && 被保険者番号 != entity.getHihokenshaNo()) {
             世帯員所得情報List.add(entity);
         }
     }
