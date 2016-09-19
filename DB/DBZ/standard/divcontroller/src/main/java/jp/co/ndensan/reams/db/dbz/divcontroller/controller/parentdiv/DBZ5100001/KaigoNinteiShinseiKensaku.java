@@ -52,6 +52,8 @@ public class KaigoNinteiShinseiKensaku {
     private final RString 職権取消全喪失 = new RString("DBDUC51217");
     private final RString 受給者転入 = new RString("DBDUC51205");
     private final RString 要介護認定申請認定_新規更新 = new RString("DBDUC50201");
+    private final RString 要介護認定申請認定_サービス種類変更 = new RString("DBDUC55105");
+    private final RString 要介護認定申請認定_区分変更 = new RString("DBDUC55103");
 
     private final RString 検索状態 = new RString("検索状態");
 
@@ -200,7 +202,9 @@ public class KaigoNinteiShinseiKensaku {
                 || 職権記載.equals(uiContainerId)
                 || 職権取消全喪失.equals(uiContainerId)
                 || 受給者転入.equals(uiContainerId)
-                || 要介護認定申請認定_新規更新.equals(uiContainerId);
+                || 要介護認定申請認定_新規更新.equals(uiContainerId)
+                || 要介護認定申請認定_サービス種類変更.equals(uiContainerId)
+                || 要介護認定申請認定_区分変更.equals(uiContainerId);
     }
 
     private KaigoNinteiShinseiKensakuHandler getHandler(KaigoNinteiShinseiKensakuDiv div) {
