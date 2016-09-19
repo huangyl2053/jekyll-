@@ -29,6 +29,7 @@ import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.NinshoshaSourceBuilderFactory;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
+import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.toiawasesaki.ToiawasesakiSource;
 import jp.co.ndensan.reams.ur.urz.entity.report.sofubutsuatesaki.SofubutsuAtesakiSource;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -75,7 +76,8 @@ public class JikoFutangakushomeishoFrom2009OutputProcess extends BatchKeyBreakBa
     private IOutputOrder 出力順;
     private JikofutanShomeishoProcessParameter parameter;
     private IJikofutanShomeishoMapper mapper;
-    private Ninshosha 認証者情報;
+    private Ninshosha 認証者;
+    private NinshoshaSource 認証者情報;
     private Association 地方公共団体情報;
     private List<KogakuGassanMeisai> 明細List;
     private ToiawasesakiSource 問合せ先情報;
@@ -91,7 +93,7 @@ public class JikoFutangakushomeishoFrom2009OutputProcess extends BatchKeyBreakBa
         問合せ先情報 = get問合せ先情報(toiawasesakiEntity);
         明細List = get明細List();
         INinshoshaManager ninshoshaManager = NinshoshaFinderFactory.createInstance();
-        認証者情報 = ninshoshaManager.get帳票認証者(GyomuCode.DB介護保険, 保険者印_0001);
+        認証者 = ninshoshaManager.get帳票認証者(GyomuCode.DB介護保険, 保険者印_0001);
         地方公共団体情報 = AssociationFinderFactory.createInstance().getAssociation();
         parameter.set対象年度区分(対象年度区分_2);
         if (parameter.get出力順ID() != 0L) {
@@ -119,6 +121,12 @@ public class JikoFutangakushomeishoFrom2009OutputProcess extends BatchKeyBreakBa
     }
 
     @Override
+    protected void beforeProcess() {
+        認証者情報 = NinshoshaSourceBuilderFactory.createInstance(認証者, 地方公共団体情報,
+                reportSourceWriter.getImageFolderPath(), RDate.getNowDate()).buildSource();
+    }
+
+    @Override
     protected void keyBreakProcess(JikoFutangakushomeishoEntity entity) {
         if (isBreak(entity)) {
             IAtesaki atesaki = AtesakiFactory.createInstance(getBefore().get宛先());
@@ -129,8 +137,7 @@ public class JikoFutangakushomeishoFrom2009OutputProcess extends BatchKeyBreakBa
             JikoFutangakushomeishoFromData data = new JikoFutangakushomeishoFromData();
             data.set問合せ先情報(問合せ先情報);
             data.set宛先情報(compSofubutsuAtesakiソース);
-            data.set認証者情報(NinshoshaSourceBuilderFactory.createInstance(認証者情報, 地方公共団体情報,
-                    reportSourceWriter.getImageFolderPath(), RDate.getNowDate()).buildSource());
+            data.set認証者情報(認証者情報);
             data.set文書番号(parameter.get文書情報());
             data.set高額合算データ(高額合算データ);
             data.setタイトル(定数_自己負担額証明書);
@@ -162,8 +169,7 @@ public class JikoFutangakushomeishoFrom2009OutputProcess extends BatchKeyBreakBa
             JikoFutangakushomeishoFromData data = new JikoFutangakushomeishoFromData();
             data.set問合せ先情報(問合せ先情報);
             data.set宛先情報(compSofubutsuAtesakiソース);
-            data.set認証者情報(NinshoshaSourceBuilderFactory.createInstance(認証者情報, 地方公共団体情報,
-                    reportSourceWriter.getImageFolderPath(), RDate.getNowDate()).buildSource());
+            data.set認証者情報(認証者情報);
             data.set文書番号(parameter.get文書情報());
             data.set高額合算データ(高額合算データ);
             data.setタイトル(定数_自己負担額証明書);
