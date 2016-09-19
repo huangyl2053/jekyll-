@@ -1,16 +1,16 @@
-package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.hoshushiharaijunbi;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hoshushiharaijunbi.ChosaHoshuSeikyuProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hoshushiharaijunbi.ChosaHoshuShiharaiProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hoshushiharaijunbi.ChosaHoshumeisaiProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hoshushiharaijunbi.HiyobenshotoShiharaiMeisaishoProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hoshushiharaijunbi.IinhoshushiharaiProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hoshushiharaijunbi.IkenShiharaiuchiwakeProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hoshushiharaijunbi.IkenshoHoshuSeikyuProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hoshushiharaijunbi.ShinsainShiharaiMeisaishoProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hoshushiharaijunbi.ShujiiHoshuShiharaiProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hoshushiharaijunbi.ShujiiHoshumeisaiProcess;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.hoshushiharaijunbi.HoshuShiharaiJunbiBatchParameter;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE621001.ChosaHoshuSeikyuProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE621001.ChosaHoshuShiharaiProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE621001.ChosaHoshumeisaiProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE621001.HiyobenshotoShiharaiMeisaishoProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE621001.IinhoshushiharaiProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE621001.IkenShiharaiuchiwakeProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE621001.IkenshoHoshuSeikyuProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE621001.ShinsainShiharaiMeisaishoProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE621001.ShujiiHoshuShiharaiProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE621001.ShujiiHoshumeisaiProcess;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE621001.DBE621001_HoshuTsuchishoSeikyushoParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBE-1980-020 suguangjun
  */
-public class HoshuShiharaiJunbiFlow extends BatchFlowBase<HoshuShiharaiJunbiBatchParameter> {
+public class DBE621001_HoshuTsuchishoSeikyusho extends BatchFlowBase<DBE621001_HoshuTsuchishoSeikyushoParameter> {
 
     private static final String CHOSAHOSHUSEIKYU_PROCESS = "ChosaHoshuSeikyuProcess";
     private static final String CHOSAHOSHUSHIHARAI_PROCESS = "ChosaHoshuShiharaiProcess";

@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.step.hoshushiharaijunbi;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE621001;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsainshiharaimeisaisho.ShinsainShiharaiMeisaishoEdit;
-import jp.co.ndensan.reams.db.dbe.business.core.shinsainshiharaimeisaisho.ShinsainShiharaimeisaisho;
-import jp.co.ndensan.reams.db.dbe.business.report.shinsainshiharaimeisaisho.ShinsainShiharaimeisaishoReport;
+import jp.co.ndensan.reams.db.dbe.business.core.ikenshohoshuseikyu.IkenshoHoshuSeikyuEdit;
+import jp.co.ndensan.reams.db.dbe.business.report.ikenshohoshuseikyu.IkenshoHoshuSeikyuReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hoshushiharaijunbi.HoshuShiharaiJunbiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hoshushiharaijunbi.HoshuShiharaiJunbiRelateEntity;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.shinsainshiharaimeisaisho.ShinsainShiharaimeisaishoReportSource;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshohoshuseikyu.IkenshoHoshuSeikyuEntity;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.ikenshohoshuseikyu.IkenshoHoshuSeikyuReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hoshushiharaijunbi.IHoshuShiharaiJunbiMapper;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
@@ -43,37 +43,34 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
- * 介護認定審査会委員報酬支払明細書のprocessです。
+ * 主治医意見書作成報酬請求書のprocessです。
  *
  * @reamsid_L DBE-1980-020 suguangjun
  */
-public class ShinsainShiharaiMeisaishoProcess extends BatchKeyBreakBase<HoshuShiharaiJunbiRelateEntity> {
+public class IkenshoHoshuSeikyuProcess extends BatchKeyBreakBase<HoshuShiharaiJunbiRelateEntity> {
 
-    private static final ReportId REPORT_ID = ReportIdDBE.DBE622003.getReportId();
+    private static final ReportId REPORT_ID = ReportIdDBE.DBE621004.getReportId();
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.hoshushiharaijunbi."
-            + "IHoshuShiharaiJunbiMapper.get介護認定審査会委員報酬支払明細書");
-    private HoshuShiharaiJunbiProcessParameter processParameter;
+            + "IHoshuShiharaiJunbiMapper.get主治医意見書作成報酬請求書");
     private static final List<RString> PAGE_BREAK_KEYS = Collections
-            .unmodifiableList(Arrays.asList(new RString(ShinsainShiharaimeisaishoReportSource.ReportSourceFields.shinsakaiIinCode.name())));
+            .unmodifiableList(Arrays.asList(new RString(IkenshoHoshuSeikyuReportSource.ReportSourceFields.shujiiIryokikanCode.name())));
+    private HoshuShiharaiJunbiProcessParameter processParameter;
     private static final RString MIDDLELINE = new RString("なし");
     private static final RString なし = new RString("なし");
-    private RString shinsakaiIinCode = RString.EMPTY;
 
     @BatchWriter
-    private BatchReportWriter<ShinsainShiharaimeisaishoReportSource> batchWrite;
-    private ReportSourceWriter<ShinsainShiharaimeisaishoReportSource> reportSourceWriter;
-    private int index = 1;
-    private static final int INDEX_25 = 25;
-    private Decimal 合計金額;
+    private BatchReportWriter<IkenshoHoshuSeikyuReportSource> batchWrite;
+    private ReportSourceWriter<IkenshoHoshuSeikyuReportSource> reportSourceWriter;
     private RString 導入団体コード;
     private RString 市町村名;
     private RString 消費税率;
+    private RString shujiiIryokikanCode = RString.EMPTY;
+    private IkenshoHoshuSeikyuEntity seikyuEntity = new IkenshoHoshuSeikyuEntity();
 
     @Override
     protected void beforeExecute() {
@@ -85,18 +82,44 @@ public class ShinsainShiharaiMeisaishoProcess extends BatchKeyBreakBase<HoshuShi
     }
 
     @Override
-    protected void keyBreakProcess(HoshuShiharaiJunbiRelateEntity entity) {
+    protected IBatchReader createReader() {
+        return new BatchDbReader(MYBATIS_SELECT_ID, processParameter.toHoshuShiharaiJunbiProcessParameter());
+    }
+
+    @Override
+    protected void createWriter() {
+        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value())
+                .addBreak(new BreakerCatalog<IkenshoHoshuSeikyuReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
+                .create();
+        reportSourceWriter = new ReportSourceWriter<>(batchWrite);
+    }
+
+    @Override
+    protected void afterExecute() {
+        IkenshoHoshuSeikyuReport report = new IkenshoHoshuSeikyuReport(seikyuEntity);
+        report.writeBy(reportSourceWriter);
+        バッチ出力条件リストの出力();
+    }
+
+    @Override
+    protected void keyBreakProcess(HoshuShiharaiJunbiRelateEntity current) {
     }
 
     @Override
     protected void usualProcess(HoshuShiharaiJunbiRelateEntity entity) {
         AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
-        ShinsainShiharaiMeisaishoEdit edit = new ShinsainShiharaiMeisaishoEdit();
-        ShinsainShiharaimeisaisho shinsainshi = edit.getShinsainShiharaimeisaishoEntity(entity);
-        shinsainshi = getShinsainShiharaimeisaisho(shinsainshi, entity);
-        ShinsainShiharaimeisaishoReport report = new ShinsainShiharaimeisaishoReport(shinsainshi);
-        report.writeBy(reportSourceWriter);
-        ++index;
+        IkenshoHoshuSeikyuEdit edit = new IkenshoHoshuSeikyuEdit();
+        if (!RString.isNullOrEmpty(shujiiIryokikanCode) && !shujiiIryokikanCode.equals(entity.getShujiiIryoKikanCode())) {
+            IkenshoHoshuSeikyuEntity seikyuEntity_bak = seikyuEntity;
+            seikyuEntity_bak = edit.getIkenshoHoshuSeikyuEntity(getBefore(), 消費税率, ChosaHoshuShiharaiProcess.get通知文(),
+                    seikyuEntity_bak, shujiiIryokikanCode, false);
+            IkenshoHoshuSeikyuReport report = new IkenshoHoshuSeikyuReport(seikyuEntity_bak);
+            report.writeBy(reportSourceWriter);
+        }
+        seikyuEntity = edit.getIkenshoHoshuSeikyuEntity(entity, 消費税率, ChosaHoshuShiharaiProcess.get通知文(), seikyuEntity, shujiiIryokikanCode, true);
+        seikyuEntity.set対象期間(get対象期間());
+        seikyuEntity.set発行年月日(dateFormat9(FlexibleDate.getNowDate()));
+        shujiiIryokikanCode = entity.getShujiiIryoKikanCode();
     }
 
     private PersonalData toPersonalData(HoshuShiharaiJunbiRelateEntity entity) {
@@ -109,27 +132,9 @@ public class ShinsainShiharaiMeisaishoProcess extends BatchKeyBreakBase<HoshuShi
         return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
     }
 
-    @Override
-    protected void afterExecute() {
-        バッチ出力条件リストの出力();
-    }
-
-    @Override
-    protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID, processParameter.toHoshuShiharaiJunbiProcessParameter());
-    }
-
-    @Override
-    protected void createWriter() {
-        batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value())
-                .addBreak(new BreakerCatalog<ShinsainShiharaimeisaishoReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
-                .create();
-        reportSourceWriter = new ReportSourceWriter<>(batchWrite);
-    }
-
     private void バッチ出力条件リストの出力() {
         RString ジョブ番号 = new RString(JobContextHolder.getJobId());
-        RString 帳票名 = ReportIdDBE.DBE622003.getReportName();
+        RString 帳票名 = ReportIdDBE.DBE621004.getReportName();
         RString 出力ページ数 = new RString(reportSourceWriter.pageCount().value());
         RString csv出力有無 = なし;
         RString csvファイル名 = MIDDLELINE;
@@ -145,14 +150,13 @@ public class ShinsainShiharaiMeisaishoProcess extends BatchKeyBreakBase<HoshuShi
         出力条件.add(実績期間開始日.toRString());
         出力条件.add(実績期間終了日.toRString());
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
-                ReportIdDBE.DBE622003.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,
+                ReportIdDBE.DBE621004.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,
                 帳票名, 出力ページ数, csv出力有無, csvファイル名, 出力条件);
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(item);
         printer.print();
     }
 
     private RString dateFormat(FlexibleDate date) {
-
         if (date == null || date.isEmpty()) {
             return RString.EMPTY;
         }
@@ -173,35 +177,5 @@ public class ShinsainShiharaiMeisaishoProcess extends BatchKeyBreakBase<HoshuShi
         builder.append(new RString("～"));
         builder.append(dateFormat9(processParameter.getJissekidaterangeto()));
         return builder.toRString();
-    }
-
-    private Decimal rstringToDecimal(RString date) {
-        if (RString.isNullOrEmpty(date)) {
-            return Decimal.ZERO;
-        }
-        return new Decimal(date.toString());
-    }
-
-    private RString decimalToRString(Decimal date) {
-        if (date == null) {
-            return RString.EMPTY;
-        }
-        return new RString(date.toString());
-    }
-
-    private ShinsainShiharaimeisaisho getShinsainShiharaimeisaisho(ShinsainShiharaimeisaisho shinsainshi, HoshuShiharaiJunbiRelateEntity entity) {
-        if (!shinsakaiIinCode.equals(entity.getShinsakaiIinCode()) || index % INDEX_25 == 1) {
-            index = 1;
-            合計金額 = Decimal.ZERO;
-            shinsakaiIinCode = entity.getShinsakaiIinCode();
-        }
-        shinsainshi.set対象期間(get対象期間());
-        shinsainshi.set明細番号(new RString(index));
-        合計金額 = 合計金額.add(rstringToDecimal(shinsainshi.get報酬合計()).roundUpTo(0));
-        Decimal 消費税 = (合計金額.multiply(rstringToDecimal(消費税率))).subtract(合計金額);
-        shinsainshi.set合計金額(decimalToRString(合計金額.roundUpTo(0)));
-        shinsainshi.set消費税(decimalToRString(消費税.roundUpTo(0)));
-        shinsainshi.set合計請求額(decimalToRString(合計金額.add(消費税).roundUpTo(0)));
-        return shinsainshi;
     }
 }
