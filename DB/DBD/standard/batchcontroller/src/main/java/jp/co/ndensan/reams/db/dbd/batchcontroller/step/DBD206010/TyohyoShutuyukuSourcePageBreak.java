@@ -39,7 +39,8 @@ public class TyohyoShutuyukuSourcePageBreak extends PageBreaker<JigyoshoMukeShak
             ReportLineRecord<JigyoshoMukeShakaiFukushiHojinKeigenReportSource> nextSource) {
         boolean flag = false;
         if (super.isBreak(currentSource, nextSource) || (nextSource.getSource().hokenshaNo != null && nextSource.getSource().jigyoshaCd != null
-                && nextSource.getSource().jigyoshaCd.compareTo(nextSource.getSource().hokenshaNo) == 1)) {
+                && 0 < (Integer.valueOf(nextSource.getSource().jigyoshaCd.toString())
+                - Integer.valueOf(nextSource.getSource().hokenshaNo.toString())))) {
             flag = true;
         }
         return flag;
