@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE0110004;
 
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.ikenshojohoprint.IkenshoJohoPrintBatchParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE013001.DBE013001_IkenshoInfoPrintParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0110004.HakkoJokenSyujiiIkensyoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0110004.HakkoJokenSyujiiIkensyoHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0110004.HakkoJokenSyujiiIkensyoValidationHandler;
@@ -312,7 +312,7 @@ public class HakkoJokenSyujiiIkensyo {
      * @param div 画面情報
      * @return ResponseData<HakkoJokenSyujiiIkensyoDiv>
      */
-    public ResponseData<IkenshoJohoPrintBatchParameter> onClick_Jikkou(HakkoJokenSyujiiIkensyoDiv div) {
+    public ResponseData<DBE013001_IkenshoInfoPrintParameter> onClick_Jikkou(HakkoJokenSyujiiIkensyoDiv div) {
         return ResponseData.of(getHandler(div).setBatchParameter()).respond();
     }
 
