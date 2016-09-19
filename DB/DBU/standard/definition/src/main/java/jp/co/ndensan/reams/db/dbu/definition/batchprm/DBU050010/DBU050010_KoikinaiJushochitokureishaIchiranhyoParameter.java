@@ -3,8 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-package jp.co.ndensan.reams.db.dbu.definition.batchprm.koikinaijushochitokurei;
+package jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU050010;
 
 import jp.co.ndensan.reams.db.dbu.definition.processprm.koikinaijushochitokurei.KoikinaiJushochiTokureiProcessParamter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -14,17 +13,17 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- *
  * 広域内住所地特例者一覧表_バッチパラメータクラスです。
+ *
  * @reamsid_L DBU-1140-020 dongyabin
  */
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KoikinaiJushochiTokureiBatchParamter extends BatchParameterBase {
-    
+public class DBU050010_KoikinaiJushochitokureishaIchiranhyoParameter extends BatchParameterBase {
+
     private static final long serialVersionUID = 1L;
-    
+
     private static final String KEY_MODEL = "model";
     private static final String SHICHOSON_CODE = "shichosonCode";
     private static final String SHICHOSON_NAME = "shichosonName";
@@ -32,7 +31,7 @@ public class KoikinaiJushochiTokureiBatchParamter extends BatchParameterBase {
     private static final String KAISHIBI = "kaishibi";
     private static final String SHURYOBI = "shuryobi";
     private static final String NARABI_ID = "narabiId";
-    
+
     @BatchParameter(key = KEY_MODEL, name = "取得モード")
     private RString model;
     @BatchParameter(key = SHICHOSON_CODE, name = "市町村コード")
@@ -47,13 +46,14 @@ public class KoikinaiJushochiTokureiBatchParamter extends BatchParameterBase {
     private RString shuryobi;
     @BatchParameter(key = NARABI_ID, name = "出力順ID")
     private RString narabiId;
-    
+
     /**
      * 域内住所地特例者一覧表のProcessParamterパラメータ作成です。
+     *
      * @return 域内住所地特例者一覧表のProcessParamterパラメータ
      */
     public KoikinaiJushochiTokureiProcessParamter toProcessParamter() {
-        return new KoikinaiJushochiTokureiProcessParamter(model, 
+        return new KoikinaiJushochiTokureiProcessParamter(model,
                 shichosonCode,
                 shichosonName,
                 kijyunbi,
@@ -61,5 +61,5 @@ public class KoikinaiJushochiTokureiBatchParamter extends BatchParameterBase {
                 shuryobi,
                 narabiId);
     }
-    
+
 }

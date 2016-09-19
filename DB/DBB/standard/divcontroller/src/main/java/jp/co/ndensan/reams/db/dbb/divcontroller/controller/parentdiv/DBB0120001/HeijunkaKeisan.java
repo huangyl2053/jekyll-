@@ -105,7 +105,7 @@ public class HeijunkaKeisan {
         fp.add(new RString("通知書一括発行"), 通知書一括発行);
         fp.add(new RString("調定年度"), parameter.get調定年度());
         fp.add(new RString("賦課年度"), parameter.get賦課年度());
-        fp.add(new RString("出力帳票一覧List"), Base64Serializer.serialize(parameter.get出力帳票entity().get(0)));
+        fp.add(new RString("出力帳票一覧List"), Base64Serializer.serialize(parameter.get出力帳票entity()));
         fp.add(new RString("発行日"), parameter.get発行日());
         fp.add(new RString("出力対象"), parameter.get出力対象指示フラグ());
         fp.add(new RString("一括発行フラグ"), parameter.is一括発行フラグ());
