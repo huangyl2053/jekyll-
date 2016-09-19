@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc710150;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -630,9 +629,7 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
 
     private RString get受給みなし更新認定(RString みなし要介護区分コード) {
         RString 受給みなし更新認定 = RString.EMPTY;
-        List minashiCodeList = new ArrayList();
-        minashiCodeList.addAll(Arrays.asList(MinashiCode.values()));
-        if (minashiCodeList.contains(みなし要介護区分コード) && !MinashiCode.通常の認定.getコード().equals(みなし要介護区分コード)) {
+        if (!MinashiCode.通常の認定.getコード().equals(みなし要介護区分コード)) {
             受給みなし更新認定 = みなし_表示;
         }
         return 受給みなし更新認定;
@@ -672,41 +669,35 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
     }
 
     private RString get受給申請事由(HanyoListKogakuGassanJikoFutangakuEntity entity) {
-        List jukyuShinseiJiyuList = new ArrayList();
         RString 受給申請事由 = RString.EMPTY;
-        RString 受給申請事由コード = entity.get受給申請事由();
-        RString 受給申請事由名称 = RString.EMPTY;
-        if (受給申請事由コード != null) {
-            受給申請事由名称 = JukyuShinseiJiyu.toValue(受給申請事由コード).get名称();
+        RString 受給申請事由コード = RString.EMPTY;
+        if (entity.get受給申請事由() != null) {
+            受給申請事由コード = entity.get受給申請事由();
         }
-        jukyuShinseiJiyuList.addAll(Arrays.asList(JukyuShinseiJiyu.values()));
-        if (jukyuShinseiJiyuList.contains(受給申請事由名称)) {
-            getJukyuShinseiJiyu(受給申請事由コード, 受給申請事由, entity.get要支援者認定申請区分());
-        }
-        return 受給申請事由;
+        return getJukyuShinseiJiyu(受給申請事由コード, 受給申請事由, entity.get要支援者認定申請区分());
     }
 
     private RString getJukyuShinseiJiyu(RString 受給申請事由コード, RString 受給申請事由, RString 要支援者認定申請区分) {
         if (JukyuShinseiJiyu.初回申請.getコード().equals(受給申請事由コード)) {
-            受給申請事由 = 受給申請事由_初回申請;
+            return 受給申請事由_初回申請;
         } else if (JukyuShinseiJiyu.再申請_有効期限内.getコード().equals(受給申請事由コード)) {
-            受給申請事由 = 受給申請事由_再申請内;
+            return 受給申請事由_再申請内;
         } else if (JukyuShinseiJiyu.再申請_有効期限外.getコード().equals(受給申請事由コード)) {
-            受給申請事由 = 受給申請事由_再申請外;
+            return 受給申請事由_再申請外;
         } else if (JukyuShinseiJiyu.要介護度変更申請.getコード().equals(受給申請事由コード)) {
             if (NinteiShienShinseiKubun.認定支援申請.getコード().equals(要支援者認定申請区分)) {
-                受給申請事由 = 受給申請事由_支援から申請;
+                return 受給申請事由_支援から申請;
             } else {
-                受給申請事由 = 受給申請事由_区分変更申請;
+                return 受給申請事由_区分変更申請;
             }
         } else if (JukyuShinseiJiyu.指定サービス種類変更申請.getコード().equals(受給申請事由コード)) {
-            受給申請事由 = 受給申請事由_サ変更申請;
+            return 受給申請事由_サ変更申請;
         } else if (JukyuShinseiJiyu.申請_法施行前.getコード().equals(受給申請事由コード)) {
-            受給申請事由 = 受給申請事由_施行前申請;
+            return 受給申請事由_施行前申請;
         } else if (JukyuShinseiJiyu.追加_申請なしの追加.getコード().equals(受給申請事由コード)) {
-            受給申請事由 = 受給申請事由_追加;
+            return 受給申請事由_追加;
         }
-        return 受給申請事由;
+        return RString.EMPTY;
     }
 
     private RString dataToRString(FlexibleDate 日付) {
@@ -829,7 +820,9 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
         RStringBuilder builder = new RStringBuilder();
         builder.append(保険者);
         if (!RString.isNullOrEmpty(parameter.get保険者コード()) && !すべて.equals(parameter.get保険者コード())) {
-            return builder.append(AssociationFinderFactory.createInstance().getAssociation(new LasdecCode(parameter.get保険者コード())));
+            Association 地方公共団体コード = AssociationFinderFactory.createInstance().getAssociation(
+                    new LasdecCode(parameter.get保険者コード()));
+            return builder.append(地方公共団体コード.get市町村名());
         }
         return null;
     }
