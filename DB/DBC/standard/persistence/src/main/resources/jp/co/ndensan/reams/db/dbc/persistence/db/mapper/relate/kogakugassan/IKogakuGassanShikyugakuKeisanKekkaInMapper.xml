@@ -8,7 +8,10 @@
             resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc120120.DbWTKogakuGassanShikyugakuKeisanKekkaEntity" fetchSize="500"  resultOrdered="true">
          SELECT 
             "DbWT3861".*,
-             最新データ."rirekiNo" as "rirekiNoMax"
+             最新データ."rirekiNo" as "rirekiNoMax",
+             最新データ."dataKubun" as "dbt3072DataKubun",
+             最新データ."saisoFG" as "dbt3072SaisoFG",
+             最新データ."sofuYM" as "dbt3072SofuYM"
          FROM
              "DbWT3861KogakuGassanShikyugakuKeisanKekka" as "DbWT3861"
          LEFT JOIN 
