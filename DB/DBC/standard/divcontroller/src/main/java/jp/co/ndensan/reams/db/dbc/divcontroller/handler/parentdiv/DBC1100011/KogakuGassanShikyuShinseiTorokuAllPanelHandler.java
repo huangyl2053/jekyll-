@@ -344,6 +344,18 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
     }
 
     /**
+     * 初期化用のメソッドです。
+     *
+     * @param 高額合算申請書 KogakuGassanShinseisho
+     */
+    public void initializePanel(KogakuGassanShinseisho 高額合算申請書) {
+        申請情報データで設定(高額合算申請書);
+        画面内共有子DIV初期化処理(高額合算申請書);
+        申請登録データで設定(高額合算申請書);
+        国保後期資格情報TABデータで設定(高額合算申請書);
+    }
+
+    /**
      * 申請情報グリッド「削除」ボタンのイベントです。
      *
      * @param 高額合算申請書 KogakuGassanShinseisho
@@ -850,9 +862,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
     }
 
     private void 申請情報パネル制御(boolean flag) {
-        div.getTxtTeishutsuHokenshaNo().setReadOnly(flag);
-        div.getTxtKaigoShikyuShinseishoSeiriBango4().setReadOnly(flag);
-        div.getDdlShinseiTaishoNendo().setReadOnly(true);
+        div.getDdlShinseiTaishoNendo().setReadOnly(flag);
         div.getTxtIryoShikyuShinseishoSeiriBango2().setReadOnly(flag);
         div.getTxtIryoShikyuShinseishoSeiriBango3().setReadOnly(flag);
         div.getTxtIryoShikyuShinseishoSeiriBango4().setReadOnly(flag);
@@ -957,13 +967,11 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         if (resultMap != null && resultMap.get(resultMap.keySet().iterator().next()) != null) {
             RString モード = resultMap.keySet().iterator().next();
             if (広域市町村モード.equals(モード)) {
-                div.getTxtTeishutsuHokenshaNo().setReadOnly(false);
                 div.getDdlShokisaiHokenshaNo().setReadOnly(false);
                 KeyValueDataSource data = new KeyValueDataSource(RString.EMPTY, RString.EMPTY);
                 dataSource.add(data);
             } else {
                 div.getDdlShokisaiHokenshaNo().setReadOnly(true);
-                div.getTxtTeishutsuHokenshaNo().setReadOnly(true);
             }
             List<RString> keyList = new ArrayList();
             for (KoikiZenShichosonJoho item : resultMap.get(resultMap.keySet().iterator().next())) {
@@ -1172,14 +1180,13 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
     }
 
     private void 画面内共有子DIV初期化処理(KogakuGassanShinseisho 高額合算申請書) {
-        dgShinseiIchiran_Row row = div.getDgShinseiIchiran().getClickedItem();
-        HihokenshaNo 被保険者番号 = new HihokenshaNo(row.getTxtHihokenshaNo());
+        HihokenshaNo 被保険者番号 = 高額合算申請書.get被保険者番号();
         Long 口座ID = 高額合算申請書.get口座ID();
         KogakuGassanShikyuShinseiToroku bussiness = KogakuGassanShikyuShinseiToroku.createInstance();
         IShikibetsuTaisho 被保険者情報 = bussiness.被保険者名の取得(高額合算申請書.toEntity());
         ShikibetsuCode 最新の識別コード = 被保険者情報.get識別コード();
         div.getCcdKaigoAtenaInfo().initialize(最新の識別コード);
-        div.getCcdKaigoShikakuKihon().initialize(new HihokenshaNo(row.getTxtHihokenshaNo()));
+        div.getCcdKaigoShikakuKihon().initialize(被保険者番号);
         SikyuSinseiJyohoParameter pram = new SikyuSinseiJyohoParameter();
         pram.setHihokenshaNo(被保険者番号);
         pram.setShikibetsuCode(最新の識別コード);
