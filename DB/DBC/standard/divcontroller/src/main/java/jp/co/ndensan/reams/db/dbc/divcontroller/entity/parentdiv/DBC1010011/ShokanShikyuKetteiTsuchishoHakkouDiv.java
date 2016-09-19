@@ -38,6 +38,8 @@ public class ShokanShikyuKetteiTsuchishoHakkouDiv extends Panel {
     private DropDownList ddlSeiriNO;
     @JsonProperty("ShokanShikyuKetteiTsuchishoHakkouPrint")
     private ShokanShikyuKetteiTsuchishoHakkouPrintDiv ShokanShikyuKetteiTsuchishoHakkouPrint;
+    @JsonProperty("ccdKanryoMessage")
+    private KaigoKanryoMessageDiv ccdKanryoMessage;
     @JsonProperty("ShokanShikyuKetteiTsuchishoSakuseiKaigoKihon")
     private KaigoShikakuKihonDiv ShokanShikyuKetteiTsuchishoSakuseiKaigoKihon;
     @JsonProperty("ShokanShikyuKetteiTsuchishoHakkouKihon")
@@ -122,6 +124,15 @@ public class ShokanShikyuKetteiTsuchishoHakkouDiv extends Panel {
     }
 
     /*
+     * getccdKanryoMessage
+     * @return ccdKanryoMessage
+     */
+    @JsonProperty("ccdKanryoMessage")
+    public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
+        return ccdKanryoMessage;
+    }
+
+    /*
      * getShokanShikyuKetteiTsuchishoSakuseiKaigoKihon
      * @return ShokanShikyuKetteiTsuchishoSakuseiKaigoKihon
      */
@@ -175,11 +186,6 @@ public class ShokanShikyuKetteiTsuchishoHakkouDiv extends Panel {
     @JsonIgnore
     public IBunshoBangoInputDiv getCcdBunshoNO() {
         return this.getShokanShikyuKetteiTsuchishoHakkouPrint().getCcdBunshoNO();
-    }
-
-    @JsonIgnore
-    public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
-        return this.getShokanShikyuKetteiTsuchishoHakkouPrint().getCcdKanryoMessage();
     }
 
     // </editor-fold>

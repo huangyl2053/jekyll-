@@ -25,8 +25,16 @@
                 AND "shikakuSoshitsuTodokedeYMD" IS NULL
                 OR #{資格基準日}<![CDATA[<=]]> "shikakuSoshitsuTodokedeYMD"
                 <if test="市町村コード">
-                    AND ("koikinaiJushochiTokureiFlag" ='1' AND "koikinaiTokureiSochimotoShichosonCode" in (#{市町村コード複数}))
-                    OR ("koikinaiJushochiTokureiFlag" ='0' AND "koikinaiTokureiSochimotoShichosonCode" in (#{市町村コード複数}))
+                    AND ("koikinaiJushochiTokureiFlag" ='1' AND "koikinaiTokureiSochimotoShichosonCode" in 
+                    <foreach item="市町村コード複数" index="index" collection="市町村コード複数" open="(" separator="," close=")">
+                        #{市町村コード複数}
+                    </foreach>
+                    )
+                    OR ("koikinaiJushochiTokureiFlag" ='0' AND "koikinaiTokureiSochimotoShichosonCode" in 
+                    <foreach item="市町村コード複数" index="index" collection="市町村コード複数" open="(" separator="," close=")">
+                        #{市町村コード複数}
+                    </foreach>
+                    )
                 </if>
         GROUP BY "hihokenshaNo") AS B
         ON "DbT1001HihokenshaDaicho"."hihokenshaNo" = B."hihokenshaNo"
@@ -346,10 +354,12 @@
             "HokenshaDankaiTemp"."年金収入額" AS HokenshaDankaiTemp_年金収入額,
             "HokenshaDankaiTemp"."合計所得金額" AS HokenshaDankaiTemp_合計所得金額,
             (CASE WHEN "HokenshaDankaiTemp"."保険者設定段階2" IS NULL 
+                OR "HokenshaDankaiTemp"."保険者設定段階2" =''
                 THEN "HokenshaDankaiTemp"."保険者設定段階1" 
                 ELSE "HokenshaDankaiTemp"."保険者設定段階2" 
             END) AS HokenshaDankaiTemp_保険者設定段階,
             (CASE WHEN "HyojunDankaiTemp"."標準設定段階2" IS NULL 
+                OR "HokenshaDankaiTemp"."保険者設定段階2" =''
                 THEN "HyojunDankaiTemp"."標準設定段階1" 
                 ELSE "HyojunDankaiTemp"."標準設定段階2" 
             END) AS HyojunDankaiTemp_標準設定段階
@@ -364,7 +374,10 @@
         ON
                 "HihokenshaTaihoTemp"."hihokenshaNo"="HyojunDankaiTemp"."被保険者番号"
             <if test="市町村コード" >
-                AND "HihokenshaTaihoTemp"."outPutShichosonCode" in (#{市町村コード複数})
+                AND "HihokenshaTaihoTemp"."outPutShichosonCode" in 
+                <foreach item="市町村コード複数" index="index" collection="市町村コード複数" open="(" separator="," close=")">
+                    #{市町村コード複数}
+                </foreach>
             </if>
         ORDER  BY "HihokenshaTaihoTemp"."outPutShichosonCode","HihokenshaTaihoTemp"."hihokenshaNo"
     
@@ -399,68 +412,81 @@
     <select resultOrdered="true" id="select帳票出力対象データ" resultMap="ResultMap_DankaibeHihokensixyaForReport"
             parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbbbt21004.DankaibetuHihokensyasuIchiranhyoMyBatisParameter" fetchSize="500">
     SELECT
-    '1' as flag,
-    *
-    FROM(
-        SELECT
-            A."shichosonCode",
-            A."保険者設定段階",
-            count(保険者設定段階) AS 保険者設定
+        *
         FROM(
-            SELECT
-                "HihokenshaTaihoTemp"."shichosonCode",
-                (case when
-                "HokenshaDankaiTemp"."保険者設定段階2" is null
-                then
-                "HokenshaDankaiTemp"."保険者設定段階1"
-                else
-                "HokenshaDankaiTemp"."保険者設定段階2"
-                end) as 保険者設定段階 
-            FROM
-                "HokenshaDankaiTemp"
-            LEFT JOIN
-                "HihokenshaTaihoTemp"
-            ON
-                "HokenshaDankaiTemp"."被保険者番号" = "HihokenshaTaihoTemp"."hihokenshaNo"
-            <if test="市町村コード" >
-                AND "HihokenshaTaihoTemp"."outPutShichosonCode" in (#{市町村コード複数})
-            </if>
-        ) A
-        GROUP BY A."shichosonCode",A."保険者設定段階"
-        ORDER BY A."shichosonCode",A."保険者設定段階"
-    ) B
-    UNION ALL(
         SELECT
-        '2' as flag,
+        '1' as flag,
         *
         FROM(
             SELECT
-                C."shichosonCode",
-                C."標準設定段階",
-                count(標準設定段階) AS 標準設定段階
+                A."shichosonCode",
+                A."保険者設定段階",
+                count(保険者設定段階) AS 保険者設定
             FROM(
                 SELECT
                     "HihokenshaTaihoTemp"."shichosonCode",
                     (case when
-                    "HyojunDankaiTemp"."標準設定段階2" is null
+                    "HokenshaDankaiTemp"."保険者設定段階2" is null
+                    OR "HokenshaDankaiTemp"."保険者設定段階2" =''
                     then
-                    "HyojunDankaiTemp"."標準設定段階1"
+                    "HokenshaDankaiTemp"."保険者設定段階1"
                     else
-                    "HyojunDankaiTemp"."標準設定段階2"
-                    end) as 標準設定段階 
+                    "HokenshaDankaiTemp"."保険者設定段階2"
+                    end) as 保険者設定段階 
                 FROM
-                    "HyojunDankaiTemp"
+                    "HokenshaDankaiTemp"
                 LEFT JOIN
                     "HihokenshaTaihoTemp"
                 ON
-                    "HyojunDankaiTemp"."被保険者番号" = "HihokenshaTaihoTemp"."hihokenshaNo"
-                <if test="市町村コード"  >
-                    AND "HihokenshaTaihoTemp"."outPutShichosonCode" in (#{市町村コード複数})
+                    "HokenshaDankaiTemp"."被保険者番号" = "HihokenshaTaihoTemp"."hihokenshaNo"
+                <if test="市町村コード" >
+                    AND "HihokenshaTaihoTemp"."outPutShichosonCode" in 
+                    <foreach item="市町村コード複数" index="index" collection="市町村コード複数" open="(" separator="," close=")">
+                        #{市町村コード複数}
+                    </foreach>
                 </if>
-            ) C
-            GROUP BY C."shichosonCode",C."標準設定段階"
-            ORDER BY C."shichosonCode",C."標準設定段階"
-        ) D
+            ) A
+            GROUP BY A."shichosonCode",A."保険者設定段階"
+            ORDER BY A."shichosonCode",A."保険者設定段階"
+        ) B
+        UNION ALL(
+            SELECT
+            '2' as flag,
+            *
+            FROM(
+                SELECT
+                    C."shichosonCode",
+                    C."標準設定段階",
+                    count(標準設定段階) AS 標準設定段階
+                FROM(
+                    SELECT
+                        "HihokenshaTaihoTemp"."shichosonCode",
+                        (case when
+                        "HyojunDankaiTemp"."標準設定段階2" is null
+                        OR "HokenshaDankaiTemp"."保険者設定段階2" =''
+                        then
+                        "HyojunDankaiTemp"."標準設定段階1"
+                        else
+                        "HyojunDankaiTemp"."標準設定段階2"
+                        end) as 標準設定段階 
+                    FROM
+                        "HyojunDankaiTemp"
+                    LEFT JOIN
+                        "HihokenshaTaihoTemp"
+                    ON
+                        "HyojunDankaiTemp"."被保険者番号" = "HihokenshaTaihoTemp"."hihokenshaNo"
+                    <if test="市町村コード"  >
+                        AND "HihokenshaTaihoTemp"."outPutShichosonCode" in 
+                        <foreach item="市町村コード複数" index="index" collection="市町村コード複数" open="(" separator="," close=")">
+                            #{市町村コード複数}
+                        </foreach>
+                    </if>
+                ) C
+                GROUP BY C."shichosonCode",C."標準設定段階"
+                ORDER BY C."shichosonCode",C."標準設定段階"
+            ) D
+        ) E
     )
+    ORDER BY E."shichosonCode",E."標準設定段階"
     </select>
 </mapper>

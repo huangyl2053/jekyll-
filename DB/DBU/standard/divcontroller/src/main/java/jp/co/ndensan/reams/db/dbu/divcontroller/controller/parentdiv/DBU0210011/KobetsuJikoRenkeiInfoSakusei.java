@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0210011
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.business.core.kaigojuminhyo.ChushutsuKikanJohoData;
-import jp.co.ndensan.reams.db.dbu.definition.batchprm.kaigojuminhyo.KaigoJuminhyoBatchParameter;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU070010.DBU070010_KobetsujikoRenkei_TashaParameter;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0210011.KobetsuJikoRenkeiInfoSakuseiDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0210011.KobetsuJikoRenkeiInfoSakuseiHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.kaigojuminhyo.KaigoJuminhyoKobetsuJikouBatchParameterSakuseiFinder;
@@ -105,7 +105,7 @@ public class KobetsuJikoRenkeiInfoSakusei {
      * @return 介護住民票個別事項連携情報作成【他社住基】情報Divを持つResponseData
      */
     public ResponseData onClick_btnJikko(KobetsuJikoRenkeiInfoSakuseiDiv div) {
-        ResponseData<KaigoJuminhyoBatchParameter> response = new ResponseData<>();
+        ResponseData<DBU070010_KobetsujikoRenkei_TashaParameter> response = new ResponseData<>();
         RDate konkaiFromYMD = div.getChushutsuKikan().getTxtKonkaiChushutsuFromYMD().getValue();
         RTime konkaiFromTime = div.getTblChushutsuKikan().getTxtKonkaiChushutsuFromTime().getValue();
 

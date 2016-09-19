@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
-import jp.co.ndensan.reams.ua.uax.entity.db.relate.KozaRelateEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.relate.TokuteiKozaRelateEntity;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -152,6 +152,6 @@ public class KeisangojohoAtenaKozaEntity {
     private Decimal 普徴収入額13;
     private Decimal 普徴収入額14;
     private UaFt200FindShikibetsuTaishoEntity 宛名Entity;
-    private KozaRelateEntity 口座Entity;
+    private TokuteiKozaRelateEntity 口座Entity;
 
 }

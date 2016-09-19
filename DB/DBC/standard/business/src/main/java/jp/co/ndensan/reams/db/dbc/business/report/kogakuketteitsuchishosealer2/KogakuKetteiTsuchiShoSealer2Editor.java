@@ -170,7 +170,7 @@ public class KogakuKetteiTsuchiShoSealer2Editor implements IKogakuKetteiTsuchiSh
             source.bangoTitle = 口座番号;
         }
 
-        if (帳票情報.isゆうちょ銀行フラグ()) {
+        if (!帳票情報.isゆうちょ銀行フラグ()) {
             source.kouzaShu = 帳票情報.get口座種別();
             source.kouzaNo = 帳票情報.get口座番号();
         } else {

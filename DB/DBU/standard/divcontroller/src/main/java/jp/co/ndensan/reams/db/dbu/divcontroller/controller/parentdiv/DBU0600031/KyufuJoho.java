@@ -14,11 +14,8 @@ import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0600031.DBU0
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0600031.KyufuJohoDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0600031.KyufuJohoHandler;
 import jp.co.ndensan.reams.db.dbu.service.core.kyufujoho.KyufuJohoFinder;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
-import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -99,6 +96,6 @@ public class KyufuJoho {
     private void set利用状況情報(KyufuJohoDiv div) {
         RDate date = RDate.getNowDate();
         getHandler(div).set利用状況情報(kyufujohofinder.getサービス利用状況情報(KyufuJohoParamter.createParameter(
-                key.get被保険者番号().value(), new RString((date.getYearMonth().minusYear(YEAR_3).toString())), setサービス分類コード(div))).records());
+                key.get被保険者番号().value(), new RString((date.getYearMonth().minusMonth(YEAR_3).toString())), setサービス分類コード(div))).records());
     }
 }
