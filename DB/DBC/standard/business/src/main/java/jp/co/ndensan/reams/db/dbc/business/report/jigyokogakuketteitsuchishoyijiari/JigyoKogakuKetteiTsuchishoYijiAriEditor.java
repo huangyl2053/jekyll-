@@ -10,6 +10,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.jigyokogakuketteitsuchishoyijiari.JigyoKogakuKetteiTsuchishoYijiAriSource;
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakuketteitsuchishosealer2.KogakuKetteiTsuchiShoEntity;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -123,28 +125,18 @@ public class JigyoKogakuKetteiTsuchishoYijiAriEditor implements IJigyoKogakuKett
             source.hihokenshaNo10 = set被保険者番号(被保険者番号List, INDEX_NINE);
         }
 
-        if (帳票情報.get受付年月日() != null) {
-            source.uketsukeYMD = new RString(帳票情報.get受付年月日().toString());
-        }
-        if (帳票情報.get決定年月日() != null) {
-            source.ketteiYMD = new RString(帳票情報.get決定年月日().toString());
-        }
-        if (帳票情報.get本人支払額() != null) {
-            source.honninShiharaiGaku = new RString(帳票情報.get本人支払額().toString());
-        }
-        if (帳票情報.get対象年月() != null) {
-            source.taishoYM = 帳票情報.get対象年月().toDateString();
-        }
+        source.uketsukeYMD = get変換値年月日(帳票情報.get受付年月日());
+        source.ketteiYMD = get変換値年月日(帳票情報.get決定年月日());
+        source.honninShiharaiGaku = get変換値金額(帳票情報.get本人支払額());
+        source.taishoYM = get変換値年月(帳票情報.get対象年月());
+
         source.kyufuShu1 = 帳票情報.get給付の種類();
         source.kyufuShu2 = 帳票情報.get給付の種類();
         source.kyufuShu3 = 帳票情報.get給付の種類();
         source.kekka = 帳票情報.get支給不支給決定区分();
-        if (帳票情報.get決定額() != null) {
-            source.ketteiGaku = new RString(帳票情報.get決定額().toString());
-        }
-        if (帳票情報.get支給金額() != null) {
-            source.shikyuGaku = new RString(帳票情報.get支給金額().toString());
-        }
+
+        source.ketteiGaku = get変換値金額(帳票情報.get決定額());
+        source.shikyuGaku = get変換値金額(帳票情報.get支給金額());
 
         if (支給.equals(帳票情報.get支給不支給区分())) {
             source.riyuTitle = 増減の理由;
@@ -172,13 +164,11 @@ public class JigyoKogakuKetteiTsuchishoYijiAriEditor implements IJigyoKogakuKett
         source.mochimono3 = 帳票情報.get持ちもの();
         source.shiharaiBasho = 帳票情報.get支払場所();
 
-        if (帳票情報.get支払期間() != null) {
-            source.shiharaiStartYMD = new RString(帳票情報.get支払期間().toString());
-            source.karaFugo = new RString(帳票情報.get支払期間().toString());
-            source.shiharaiEndYMD = new RString(帳票情報.get支払期間().toString());
-            source.shiharaiStartHMS = new RString(帳票情報.get支払期間().toString());
-            source.shiharaiEndHMS = new RString(帳票情報.get支払期間().toString());
-        }
+        source.shiharaiStartYMD = get変換値年月日(帳票情報.get支払期間());
+        source.karaFugo = get変換値年月日(帳票情報.get支払期間());
+        source.shiharaiEndYMD = get変換値年月日(帳票情報.get支払期間());
+        source.shiharaiStartHMS = get変換値年月日(帳票情報.get支払期間());
+        source.shiharaiEndHMS = get変換値年月日(帳票情報.get支払期間());
 
         if (支給.equals(帳票情報.get支給不支給区分())) {
             if (窓口払い.equals(帳票情報.get支払方法())) {
@@ -198,7 +188,7 @@ public class JigyoKogakuKetteiTsuchishoYijiAriEditor implements IJigyoKogakuKett
             source.bangoTitle = 口座番号;
         }
 
-        if (帳票情報.isゆうちょ銀行フラグ()) {
+        if (!帳票情報.isゆうちょ銀行フラグ()) {
             source.kouzaShu = 帳票情報.get口座種別();
             source.kouzaNo = 帳票情報.get口座番号();
         } else {
@@ -207,14 +197,26 @@ public class JigyoKogakuKetteiTsuchishoYijiAriEditor implements IJigyoKogakuKett
         }
 
         source.kouzaMeigi = 帳票情報.get口座名義人();
-        if (帳票情報.get支払予定日() != null) {
-            source.sihaYoYmd = new RString(帳票情報.get支払予定日().toString());
-        }
+
+        source.sihaYoYmd = get変換値年月日(帳票情報.get支払予定日());
+
         source.tsuchiNo = 帳票情報.get決定通知書番号();
 
         set雛形部品CompNinshosha(source);
 
         return source;
+    }
+
+    private RString get変換値金額(Decimal 金額) {
+        return 金額 != null ? new RString(金額.toString()) : RString.EMPTY;
+    }
+
+    private RString get変換値年月日(FlexibleDate 年月日) {
+        return 年月日 != null ? new RString(年月日.toString()) : RString.EMPTY;
+    }
+
+    private RString get変換値年月(FlexibleYearMonth 年月) {
+        return 年月 != null ? 年月.toDateString() : RString.EMPTY;
     }
 
     private RString set被保険者番号(List<RString> 被保険者番号List, int index) {

@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.kaigofukatokuchoheijunka6.ShorijyokyoJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchoheijunka6tsuchishoikatsuhako.HeijunkaKeisanPageJoho;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012001.DBB012001_TokuchoHeinjunka6GatsuParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012003.DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.OutputChohyoIchiran;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6.ShorijyokyoEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
@@ -64,8 +64,8 @@ public class KaigoFukaTokuchoHeijunka6 {
      * @param pageData 画面情報
      * @return batchParameterクラス
      */
-    public TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter getBatchiPara(HeijunkaKeisanPageJoho pageData) {
-        TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter batchParameter = new TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter();
+    public DBB012001_TokuchoHeinjunka6GatsuParameter getBatchiPara(HeijunkaKeisanPageJoho pageData) {
+        DBB012001_TokuchoHeinjunka6GatsuParameter batchParameter = new DBB012001_TokuchoHeinjunka6GatsuParameter();
         batchParameter.set調定年度(pageData.get調定年度());
         batchParameter.set賦課年度(pageData.get賦課年度());
         batchParameter.set増額平準化方法(pageData.get増額平準化方法());

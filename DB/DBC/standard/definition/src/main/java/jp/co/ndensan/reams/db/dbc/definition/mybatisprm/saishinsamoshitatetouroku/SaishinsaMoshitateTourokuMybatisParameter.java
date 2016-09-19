@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.saishinsamoshitatetouro
 
 import jp.co.ndensan.reams.db.dbc.definition.core.kyufujissekikubun.KyufuJissekiKubun;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -61,9 +62,21 @@ public final class SaishinsaMoshitateTourokuMybatisParameter implements IMyBatis
         this.被保険者番号フラグ = 被保険者番号フラグ;
         this.事業所番号フラグ = 事業所番号フラグ;
         this.保険者番号フラグ = 保険者番号フラグ;
-        this.サービス提供年月 = サービス提供年月;
-        this.提供年月開始 = 提供年月開始;
-        this.提供年月終了 = 提供年月終了;
+        if (!RString.isNullOrEmpty(サービス提供年月)) {
+            this.サービス提供年月 = (new RDate(サービス提供年月.toString()).getYearMonth().toDateString());
+        } else {
+            this.サービス提供年月 = RString.EMPTY;
+        }
+        if (!RString.isNullOrEmpty(提供年月開始)) {
+            this.提供年月開始 = (new RDate(提供年月開始.toString()).getYearMonth().toDateString());
+        } else {
+            this.提供年月開始 = RString.EMPTY;
+        }
+        if (!RString.isNullOrEmpty(提供年月終了)) {
+            this.提供年月終了 = (new RDate(提供年月終了.toString()).getYearMonth().toDateString());
+        } else {
+            this.提供年月終了 = RString.EMPTY;
+        }
         this.保険者種別 = new RString("08");
         this.行番号 = new RString("1");
         this.給付実績区分コード = KyufuJissekiKubun.現物.getコード();
@@ -93,9 +106,9 @@ public final class SaishinsaMoshitateTourokuMybatisParameter implements IMyBatis
             RString 事業所番号) {
         return new SaishinsaMoshitateTourokuMybatisParameter(
                 被保険者番号,
-                (被保険者番号 != null),
+                !RString.isNullOrEmpty(被保険者番号),
                 事業所番号,
-                (事業所番号 != null),
+                !RString.isNullOrEmpty(事業所番号),
                 RString.EMPTY,
                 false,
                 サービス提供年月,
@@ -121,11 +134,11 @@ public final class SaishinsaMoshitateTourokuMybatisParameter implements IMyBatis
             RString 提供年月終了) {
         return new SaishinsaMoshitateTourokuMybatisParameter(
                 被保険者番号,
-                (被保険者番号 != null),
+                !RString.isNullOrEmpty(被保険者番号),
                 事業所番号,
-                (事業所番号 != null),
+                !RString.isNullOrEmpty(事業所番号),
                 保険者番号,
-                (保険者番号 != null) && (!EMPTY保険者番号.equals(保険者番号)),
+                !RString.isNullOrEmpty(保険者番号) && (!EMPTY保険者番号.equals(保険者番号)),
                 RString.EMPTY,
                 提供年月開始,
                 提供年月終了);

@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -38,6 +39,10 @@ import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -52,6 +57,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class KaigoHihokenshaInfoPanel {
 
     private static final RString DBBHIHOKENSHANO = new RString("DBBHihokenshaNo");
+    private static final RString CODE_003 = new RString("003");
+    private static final RString 名称_被保険者番号 = new RString("被保険者番号");
     private static final RString ONE = new RString("1");
 
     /**
@@ -151,17 +158,19 @@ public class KaigoHihokenshaInfoPanel {
                     .set開始年月日(new FlexibleDate(開始年月日.toString()))
                     .set終了年月日(new FlexibleDate(終了年月日.toString()))
                     .set識別コード(識別コード).build();
-            result.added();
-            holder.getRentaiGimushaList().add(result);
+            result = result.added();
+            holder.addKogakuGassanJikoFutanGaku(result);
         } else {
             if (DBB6110001StateName.連帯納付義務者削除.getName().equals(ResponseHolder.getState())) {
                 result = result.deleted();
+                holder.getRentaiGimushaList().add(result);
             } else {
                 result = result.createBuilderForEdit()
                         .set開始年月日(new FlexibleDate(開始年月日.toString()))
                         .set終了年月日(new FlexibleDate(終了年月日.toString()))
                         .set識別コード(識別コード).build();
-                result.modified();
+                result = result.modified();
+                holder.addKogakuGassanJikoFutanGaku(result);
             }
         }
         RentaiNofuGimusha rentaiNofuGimusha = RentaiNofuGimusha.createInstance();
@@ -254,7 +263,8 @@ public class KaigoHihokenshaInfoPanel {
         }
         FukaTaishoshaKey taishoshaKey = FukaShokaiController.getFukaTaishoshaKeyInViewState();
         RentaiNofuGimusha rentaiNofuGimusha = RentaiNofuGimusha.createInstance();
-        //List<RentaiGimusha> list = rentaiNofuGimusha.getRentaiNofuGimushaInfo(taishoshaKey.get被保険者番号());
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
+        List<RentaiGimusha> list = rentaiNofuGimusha.getRentaiNofuGimushaInfo(被保険者番号);
         RentaiGimushaHolder holder = ViewStateHolder.get(ViewStateKeys.連帯納付義務者情報, RentaiGimushaHolder.class);
         KaigoHihokenshaInfoPanelManger manager = InstanceProvider.create(KaigoHihokenshaInfoPanelManger.class);
         for (RentaiGimusha entity : holder.getRentaiGimushaList()) {
@@ -262,6 +272,12 @@ public class KaigoHihokenshaInfoPanel {
                 manager.save(entity);
             }
         }
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(CODE_003),
+                名称_被保険者番号, 被保険者番号.getColumnValue());
+        PersonalData personalData = PersonalData.of(taishoshaKey.get識別コード(), expandedInfo);
+        AccessLogger.log(AccessLogType.更新, personalData);
+        LockingKey 前排他キー = new LockingKey(DBBHIHOKENSHANO.concat(被保険者番号.getColumnValue()));
+        RealInitialLocker.release(前排他キー);
         return ResponseData.of(div).forwardWithEventName(DBB6110001TransitionEventName.完了状態).respond();
     }
 

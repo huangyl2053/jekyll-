@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsamoshitatetouroku;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 @lombok.Getter
 @lombok.Setter
-public class SaishinsaMoshitateTourokuRelateEntity {
+public class SaishinsaMoshitateTourokuRelateEntity implements Serializable {
 
     private RString 氏名;
     private RString 証記載保険者名;
@@ -140,4 +141,5 @@ public class SaishinsaMoshitateTourokuRelateEntity {
     private RString 国保連送付年月;
     private RString 国保連再送付有フラグ;
     private RString 備考;
+    private RString 識別コード;
 }
