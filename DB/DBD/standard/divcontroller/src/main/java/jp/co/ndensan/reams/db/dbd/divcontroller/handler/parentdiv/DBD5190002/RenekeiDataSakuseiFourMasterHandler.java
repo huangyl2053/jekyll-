@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5190002;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.kaigoninteihokaiseikanri.HokaiseiShikoYMDToKoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbd.business.core.ninteishinseijoho.YokaigoNinteiGaibuDataOutputHistory;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD519002.DBD519002Parameter;
@@ -22,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
  * 要介護認定関連データ作成のハンドラークラスです。
@@ -56,6 +59,7 @@ public class RenekeiDataSakuseiFourMasterHandler {
         div.getRadChushutsuJoken().setDisabled(false);
         div.getRadChushutsuJoken().setSelectedKey(対象期間キー);
         対象期間の場合表示制御(get要介護認定外部データ出力履歴());
+        出力対象IFのドロップダウンリスト初期化();
         出力対象IFエリア表示制御();
     }
 
@@ -141,6 +145,25 @@ public class RenekeiDataSakuseiFourMasterHandler {
         div.getTxtzenkaishoriymdtime().clearToValue();
         div.getTxtkonkaishoriymdtime().setDisplayNone(true);
         div.getTxtzenkaishoriymdtime().setDisplayNone(true);
+    }
+
+    private void 出力対象IFのドロップダウンリスト初期化() {
+        List<KeyValueDataSource> 認定調査委託先情報ドロップダウンリスト = new ArrayList<>();
+        認定調査委託先情報ドロップダウンリスト.add(new KeyValueDataSource(新キー, getDBDConfigValue(ConfigNameDBD.認定調査委託先データ送信ファイル名)));
+        認定調査委託先情報ドロップダウンリスト.add(new KeyValueDataSource(旧キー, getDBEConfigValue(ConfigNameDBE.認定調査委託先データ送信ファイル名_新)));
+        List<KeyValueDataSource> 認定調査員情報ドロップダウンリスト = new ArrayList<>();
+        認定調査員情報ドロップダウンリスト.add(new KeyValueDataSource(新キー, getDBDConfigValue(ConfigNameDBD.認定調査員データ送信ファイル名)));
+        認定調査員情報ドロップダウンリスト.add(new KeyValueDataSource(旧キー, getDBEConfigValue(ConfigNameDBE.認定調査員データ送信ファイル名_新)));
+        List<KeyValueDataSource> 主治医医療機関情報ドロップダウンリスト = new ArrayList<>();
+        主治医医療機関情報ドロップダウンリスト.add(new KeyValueDataSource(新キー, getDBDConfigValue(ConfigNameDBD.主治医医療機関データ送信ファイル名)));
+        主治医医療機関情報ドロップダウンリスト.add(new KeyValueDataSource(旧キー, getDBEConfigValue(ConfigNameDBE.主治医医療機関データ送信ファイル名_新)));
+        List<KeyValueDataSource> 主治医情報ドロップダウンリスト = new ArrayList<>();
+        主治医情報ドロップダウンリスト.add(new KeyValueDataSource(新キー, getDBDConfigValue(ConfigNameDBD.主治医データ送信ファイル名)));
+        主治医情報ドロップダウンリスト.add(new KeyValueDataSource(旧キー, getDBEConfigValue(ConfigNameDBE.主治医データ送信ファイル名_新)));
+        div.getDropDownListChosaItakusakiFileName().setDataSource(認定調査委託先情報ドロップダウンリスト);
+        div.getDropDownListChosainFileName().setDataSource(認定調査員情報ドロップダウンリスト);
+        div.getDropDownListShujiiIryoKikanFileName().setDataSource(主治医医療機関情報ドロップダウンリスト);
+        div.getDropDownListShujiiFileName().setDataSource(主治医情報ドロップダウンリスト);
     }
 
     private void 出力対象IFエリア表示制御() {
