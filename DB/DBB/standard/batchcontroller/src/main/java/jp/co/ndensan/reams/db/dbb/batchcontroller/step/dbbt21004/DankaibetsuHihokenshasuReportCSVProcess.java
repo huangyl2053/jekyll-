@@ -48,7 +48,7 @@ public class DankaibetsuHihokenshasuReportCSVProcess extends BatchKeyBreakBase<D
     private static final RString ダブル引用符 = new RString("\"");
     private static final RString 出力ファイル名
             = new RString("ShotokuDankaiBetsuHihokenshasuIchiran.csv");
-    private static final RString 市町村コード = new RString("1");
+    private static final RString 市町村分 = new RString("市町村分");
 
     @Override
     protected void createWriter() {
@@ -88,7 +88,7 @@ public class DankaibetsuHihokenshasuReportCSVProcess extends BatchKeyBreakBase<D
     private DankaibetuHihokensyasuIchiranhyoMyBatisParameter toMyBatisParameter() {
         DankaibetuHihokensyasuIchiranhyoMyBatisParameter parameter = new DankaibetuHihokensyasuIchiranhyoMyBatisParameter();
         parameter.set市町村コード(false);
-        if (市町村コード.equals(processParameter.get市町村コード複数())) {
+        if (市町村分.equals(processParameter.get広域分市町村分区分())) {
             parameter.set市町村コード(true);
             parameter.set市町村コード複数(processParameter.get市町村コード複数());
         }

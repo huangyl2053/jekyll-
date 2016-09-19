@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.dbe090001;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.dbe090001.YouKaiGoNinTeiKekTesuChiProcess;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe090001.YouKaiGoNinTeiKekTesuChiFlowParameter;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE090001.YouKaiGoNinTeiKekTesuChiProcess;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE090001.DBE090001_ShujiiKekkaTsuchiParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBE-0220-030 wangkun
  */
-public class YouKaiGoNinTeiKekTesuChiFlow extends BatchFlowBase<YouKaiGoNinTeiKekTesuChiFlowParameter> {
+public class DBE090001_ShujiiKekkaTsuchi extends BatchFlowBase<DBE090001_ShujiiKekkaTsuchiParameter> {
 
     private static final String 主治医への結果通知書発行 = "youKaiGoNinTeiKekTesuChiReport";
 
