@@ -148,7 +148,7 @@ public class KoshinOshiraseTsuchiProcess extends BatchProcessBase<KoshinOshirase
     protected void createWriter() {
         batchReportWrite01 = BatchReportFactory.createBatchReportWriter(帳票01.getReportId().getColumnValue()).create();
         reportSourceWriter01 = new ReportSourceWriter<>(batchReportWrite01);
-        batchReportWrite11 = BatchReportFactory.createBatchReportWriter(帳票01.getReportId().getColumnValue()).create();
+        batchReportWrite11 = BatchReportFactory.createBatchReportWriter(帳票11.getReportId().getColumnValue()).create();
         reportSourceWriter11 = new ReportSourceWriter<>(batchReportWrite11);
         batchReportWrite112 = BatchReportFactory.createBatchReportWriter(帳票12.getReportId().getColumnValue()).create();
         reportSourceWriter112 = new ReportSourceWriter<>(batchReportWrite112);
