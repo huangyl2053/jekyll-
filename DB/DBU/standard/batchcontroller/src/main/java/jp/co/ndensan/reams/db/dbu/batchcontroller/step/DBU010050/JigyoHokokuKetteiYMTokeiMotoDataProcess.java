@@ -6,10 +6,12 @@
 package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010050;
 
 import jp.co.ndensan.reams.db.dbu.definition.processprm.ippanshokanketteiym.JigyoHokokuGeppoIppanShokanProcessParamter;
-import jp.co.ndensan.reams.db.dbu.entity.db.relate.ippanshokanketteiym.JyukyushaJohoKonkyoCSVRelateEntity;
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.ippanshokanketteiym.IJigyoHokokuGeppoIppanShokanMapper;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * temp事業報告償還分決定年月統計元データのバッチ処理クラスです。
@@ -17,8 +19,11 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
  * @reamsid_L DBU-5550-030 suguangjun
  *
  */
-public class JigyoHokokuKetteiYMTokeiMotoDataProcess extends BatchProcessBase<JyukyushaJohoKonkyoCSVRelateEntity> {
+public class JigyoHokokuKetteiYMTokeiMotoDataProcess extends BatchProcessBase<DbT5912ShujiiJohoEntity> {
 
+    private static final RString MYBATIS_SELECT_ID = new RString(
+            "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.ippanshokanketteiym."
+            + "IJigyoHokokuGeppoIppanShokanMapper.selectShujiiJohoList");
     private JigyoHokokuGeppoIppanShokanProcessParamter processParameter;
     private IJigyoHokokuGeppoIppanShokanMapper mapper;
 
@@ -30,23 +35,10 @@ public class JigyoHokokuKetteiYMTokeiMotoDataProcess extends BatchProcessBase<Jy
 
     @Override
     protected IBatchReader createReader() {
-        return null;
+        return new BatchDbReader(MYBATIS_SELECT_ID);
     }
 
     @Override
-    protected void createWriter() {
-    }
-
-    @Override
-    protected void beforeExecute() {
-
-    }
-
-    @Override
-    protected void process(JyukyushaJohoKonkyoCSVRelateEntity entity) {
-    }
-
-    @Override
-    protected void afterExecute() {
+    protected void process(DbT5912ShujiiJohoEntity entity) {
     }
 }
