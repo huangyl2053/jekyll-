@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5010001;
+package jp.co.ndensan.reams.db.dbd.entity.db.relate.koshintaisho;
 
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -31,9 +31,9 @@ public class SelectSyuuShadeTaCsvEntity {
     private RString 被保険者番号;
     @CsvField(order = 6, name = "認定申請年月日")
     private FlexibleDate 認定申請年月日;
-    @CsvField(order = 7, name = "認定申請区分申請時コード")
+    @CsvField(order = 7, name = "認定申請区分（申請時）コード")
     private RString 認定申請区分申請時コード;
-    @CsvField(order = 8, name = "認定申請区分申請時")
+    @CsvField(order = 8, name = "認定申請区分（申請時）")
     private RString 認定申請区分申請時;
     @CsvField(order = 9, name = "被保険者氏名")
     private RString 被保険者氏名;
@@ -113,9 +113,9 @@ public class SelectSyuuShadeTaCsvEntity {
     private RString 調査員のFAX番号;
     @CsvField(order = 47, name = "調査員の所属機関名称")
     private RString 調査員の所属機関名称;
-    @CsvField(order = 48, name = "概況特記テキストイメージ区分コード")
+    @CsvField(order = 48, name = "概況特記テキスト・イメージ区分コード")
     private RString 概況特記テキストイメージ区分コード;
-    @CsvField(order = 49, name = "概況特記テキストイメージ区分")
+    @CsvField(order = 49, name = "概況特記テキスト・イメージ区分")
     private RString 概況特記テキストイメージ区分;
     @CsvField(order = 50, name = "認定調査依頼区分コード")
     private RString 認定調査依頼区分コード;
@@ -137,9 +137,9 @@ public class SelectSyuuShadeTaCsvEntity {
     private RString 認定調査実施場所;
     @CsvField(order = 59, name = "認定調査実施場所名称")
     private RString 認定調査実施場所名称;
-    @CsvField(order = 60, name = "認定調査サービス区分コード")
+    @CsvField(order = 60, name = "認定調査・サービス区分コード")
     private RString 認定調査サービス区分コード;
-    @CsvField(order = 61, name = "認定調査サービス区分")
+    @CsvField(order = 61, name = "認定調査・サービス区分")
     private RString 認定調査サービス区分;
     @CsvField(order = 62, name = "利用施設名")
     private RString 利用施設名;
@@ -155,19 +155,19 @@ public class SelectSyuuShadeTaCsvEntity {
     private FlexibleDate 認定調査特記事項受付年月日;
     @CsvField(order = 68, name = "認定調査特記事項受領年月日")
     private FlexibleDate 認定調査特記事項受領年月日;
-    @CsvField(order = 69, name = "住宅改修改修箇所")
+    @CsvField(order = 69, name = "住宅改修（改修箇所）")
     private RString 住宅改修改修箇所;
     @CsvField(order = 70, name = "市町村特別給付サービス種類名")
     private RString 市町村特別給付サービス種類名;
     @CsvField(order = 71, name = "介護保険給付以外の在宅サービス種類名")
     private RString 介護保険給付以外の在宅サービス種類名;
-    @CsvField(order = 72, name = "概況特記事項主訴")
+    @CsvField(order = 72, name = "概況特記事項（主訴）")
     private RString 概況特記事項主訴;
-    @CsvField(order = 73, name = "概況特記事項家族状況")
+    @CsvField(order = 73, name = "概況特記事項（家族状況）")
     private RString 概況特記事項家族状況;
-    @CsvField(order = 74, name = "概況特記事項居住環境")
+    @CsvField(order = 74, name = "概況特記事項（居住環境）")
     private RString 概況特記事項居住環境;
-    @CsvField(order = 75, name = "概況特記事項機器器械")
+    @CsvField(order = 75, name = "概況特記事項（機器・器械）")
     private RString 概況特記事項機器器械;
     @CsvField(order = 76, name = "認定調査特記事項番号")
     private RString 認定調査特記事項番号;
@@ -195,13 +195,13 @@ public class SelectSyuuShadeTaCsvEntity {
     private RString 施設利用連番;
     @CsvField(order = 88, name = "施設利用フラグ")
     private RString 施設利用フラグ;
-    @CsvField(order = 89, name = "認定調査認知症高齢者の日常生活自立度コード")
+    @CsvField(order = 89, name = "認定調査・認知症高齢者の日常生活自立度コード")
     private RString 認定調査認知症高齢者の日常生活自立度コード;
-    @CsvField(order = 90, name = "認定調査認知症高齢者の日常生活自立度")
+    @CsvField(order = 90, name = "認定調査・認知症高齢者の日常生活自立度")
     private RString 認定調査認知症高齢者の日常生活自立度;
-    @CsvField(order = 91, name = "認定調査障害高齢者の日常生活自立度コード")
+    @CsvField(order = 91, name = "認定調査・障害高齢者の日常生活自立度コード")
     private RString 認定調査障害高齢者の日常生活自立度コード;
-    @CsvField(order = 92, name = "認定調査障害高齢者の日常生活自立度")
+    @CsvField(order = 92, name = "認定調査・障害高齢者の日常生活自立度")
     private RString 認定調査障害高齢者の日常生活自立度;
     @CsvField(order = 93, name = "調査項目連番")
     private RString 調査項目連番;

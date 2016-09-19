@@ -3,8 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5010001;
+package jp.co.ndensan.reams.db.dbd.entity.db.relate.koshintaisho;
 
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -21,12 +20,12 @@ public class KoshinTaishoCsvEntity {
 
     @CsvField(order = 1, name = "保険者")
     private RString 保険者;
-    @CsvField(order = 2, name = "被保番号")
-    private RString 被保番号;
-    @CsvField(order = 3, name = "氏名")
-    private RString 氏名;
-    @CsvField(order = 4, name = "完了日")
-    private RString 完了日;
-    @CsvField(order = 5, name = "通知年月日")
-    private RString 通知年月日;
+    @CsvField(order = 2, name = "(被保険者)被保番号")
+    private RString 被保険者被保番号;
+    @CsvField(order = 3, name = "(被保険者)氏名")
+    private RString 被保険者氏名;
+    @CsvField(order = 4, name = "(更新対象)完了日")
+    private RString 更新対象完了日;
+    @CsvField(order = 5, name = "(更新対象)通知年月日")
+    private RString 更新対象通知年月日;
 }
