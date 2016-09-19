@@ -1,7 +1,7 @@
-package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.taisyosyajidowaritsuke;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.taisyosyajidowaritsuke.TaisyosyaJidoWaritsukeProcess;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.taisyosyajidowaritsuke.TaisyosyaJidoWaritsukeBatchParameter;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE510001.TaisyosyaJidoWaritsukeProcess;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE510001.DBE510001_ShinsakaiAutoWaritsukeParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBE-1350-040 wangxiaodong
  */
-public class TaisyosyaJidoWaritsukeFlow extends BatchFlowBase<TaisyosyaJidoWaritsukeBatchParameter> {
+public class DBE510001_ShinsakaiAutoWaritsuke extends BatchFlowBase<DBE510001_ShinsakaiAutoWaritsukeParameter> {
 
     private static final String 対象者自動割付 = "TaisyosyaJidoWaritsuke";
 

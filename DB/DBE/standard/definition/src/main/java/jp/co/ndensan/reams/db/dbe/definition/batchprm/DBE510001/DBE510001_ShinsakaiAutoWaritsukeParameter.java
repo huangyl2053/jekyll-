@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.definition.batchprm.taisyosyajidowaritsuke;
+package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE510001;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.taisyosyajidowaritsuke.TaisyosyaJidoWaritsukeProcessParameter;
@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBE-1350-040 wangxiaodong
  */
-public class TaisyosyaJidoWaritsukeBatchParameter extends BatchParameterBase {
+public class DBE510001_ShinsakaiAutoWaritsukeParameter extends BatchParameterBase {
 
     private static final String SHINSAKAI_KAISAINO = "shinsakaiKaisaiNo";
     private static final String SHINSAKAI_KAISAIYMD = "shinsakaiKaisaiKikanTo";
@@ -31,7 +31,7 @@ public class TaisyosyaJidoWaritsukeBatchParameter extends BatchParameterBase {
     /**
      * コンストラクタです。
      */
-    public TaisyosyaJidoWaritsukeBatchParameter() {
+    public DBE510001_ShinsakaiAutoWaritsukeParameter() {
 
     }
 
@@ -43,7 +43,7 @@ public class TaisyosyaJidoWaritsukeBatchParameter extends BatchParameterBase {
      * @param shinsakaiWaritsukeNinsu 審査会割付人数
      * @param shinsakaiJidoWariateTeiin 審査会自動割当定員
      */
-    public TaisyosyaJidoWaritsukeBatchParameter(
+    public DBE510001_ShinsakaiAutoWaritsukeParameter(
             List<RString> shinsakaiKaisaiNo,
             List<FlexibleDate> shinsakaiKaisaiYMD,
             List<Integer> shinsakaiWaritsukeNinsu,

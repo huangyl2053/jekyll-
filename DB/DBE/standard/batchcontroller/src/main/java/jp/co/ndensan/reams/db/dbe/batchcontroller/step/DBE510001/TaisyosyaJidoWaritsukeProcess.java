@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.batchcontroller.step.taisyosyajidowaritsuke;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE510001;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.taisyosyajidowaritsuke.TaisyosyaJidoWaritsukeMybatisParameter;
