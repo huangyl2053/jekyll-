@@ -184,8 +184,6 @@ public class IchijiHanteizumiDataShutsuryoku {
             return IchijiHanteiKekkaCode09.要介護4.get名称();
         } else if (IchijiHanteiKekkaCode09.要介護5.getコード().equals(一次判定結果コード)) {
             return IchijiHanteiKekkaCode09.要介護5.get名称();
-        } else if (IchijiHanteiKekkaCode09.送付済.getコード().equals(一次判定結果コード)) {
-            return IchijiHanteiKekkaCode09.送付済.get名称();
         } else if (IchijiHanteiKekkaCode09.非該当.getコード().equals(一次判定結果コード)) {
             return IchijiHanteiKekkaCode09.非該当.get名称();
         } else if (IchijiHanteiKekkaCode09.要支援2.getコード().equals(一次判定結果コード)) {
