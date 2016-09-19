@@ -32,6 +32,7 @@ public class HanyoListParamKokurenJyukyujyaJyohoHandler {
     private static final RString モード2 = new RString("共同処理用受給者情報（償還）");
     private static final RString モード3 = new RString("共同処理用受給者情報（高額）");
     private static final RString モード4 = new RString("国保連受給者情報");
+    private static final RString 全市町村 = new RString("000000");
     private static final RString 導入形態_単一 = new RString("0");
     private static final RString 導入形態_広域 = new RString("1");
     private static final RString すべて = new RString("0");
@@ -122,10 +123,12 @@ public class HanyoListParamKokurenJyukyujyaJyohoHandler {
         parameter.setRenbanFuka(is連番付加);
         parameter.setHitsukeHenshu(is日付編集);
         RString 市町村コード = RString.EMPTY;
-        if (導入形態_広域.equals(div.getHdnDonyuKeitai())
-                && div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード() != null
-                && !div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().isEmpty()) {
-            市町村コード = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().value();
+        if (導入形態_広域.equals(div.getHdnDonyuKeitai())) {
+            if (!div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().isEmpty()) {
+                市町村コード = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().value();
+            } else {
+                市町村コード = 全市町村;
+            }
         }
         parameter.setHokenshaKodo(市町村コード);
         parameter.setHitsukeChushutsuKubun(div.getRadChushutsuHaniSentaku().getSelectedKey());
@@ -183,10 +186,12 @@ public class HanyoListParamKokurenJyukyujyaJyohoHandler {
         parameter.setRenbanFuka(is連番付加);
         parameter.setHitsukeHenshu(is日付編集);
         RString 市町村コード = RString.EMPTY;
-        if (導入形態_広域.equals(div.getHdnDonyuKeitai())
-                && div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード() != null
-                && !div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().isEmpty()) {
-            市町村コード = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().value();
+        if (導入形態_広域.equals(div.getHdnDonyuKeitai())) {
+            if (!div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().isEmpty()) {
+                市町村コード = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().value();
+            } else {
+                市町村コード = 全市町村;
+            }
         }
         parameter.setHokenshaKodo(市町村コード);
         parameter.setHitsukeChushutsuKubun(div.getRadChushutsuHaniSentaku().getSelectedKey());
@@ -244,10 +249,12 @@ public class HanyoListParamKokurenJyukyujyaJyohoHandler {
         parameter.setRenbanFuka(is連番付加);
         parameter.setHitsukeHenshu(is日付編集);
         RString 市町村コード = RString.EMPTY;
-        if (導入形態_広域.equals(div.getHdnDonyuKeitai())
-                && div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード() != null
-                && !div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().isEmpty()) {
-            市町村コード = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().value();
+        if (導入形態_広域.equals(div.getHdnDonyuKeitai())) {
+            if (!div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().isEmpty()) {
+                市町村コード = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().value();
+            } else {
+                市町村コード = 全市町村;
+            }
         }
         parameter.setHokenshaKodo(市町村コード);
         parameter.setHitsukeChushutsuKubun(div.getRadChushutsuHaniSentaku().getSelectedKey());
@@ -329,10 +336,12 @@ public class HanyoListParamKokurenJyukyujyaJyohoHandler {
         parameter.setRenbanFuka(is連番付加);
         parameter.setHitsukeHenshu(is日付編集);
         RString 市町村コード = RString.EMPTY;
-        if (導入形態_広域.equals(div.getHdnDonyuKeitai())
-                && div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード() != null
-                && !div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().isEmpty()) {
-            市町村コード = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().value();
+        if (導入形態_広域.equals(div.getHdnDonyuKeitai())) {
+            if (!div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().isEmpty()) {
+                市町村コード = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().value();
+            } else {
+                市町村コード = 全市町村;
+            }
         }
         parameter.setHokenshaKodo(市町村コード);
         parameter.setHitsukeChushutsuKubun(div.getRadChushutsuHaniSentaku().getSelectedKey());
@@ -399,8 +408,13 @@ public class HanyoListParamKokurenJyukyujyaJyohoHandler {
         }
         set編集方法(restoreBatchParameterMap);
         if (導入形態_広域.equals(div.getHdnDonyuKeitai())) {
-            div.getChushutsuJokenPanel().getCcdHokenshaList().setSelectedShichosonIfExist(
-                    new LasdecCode(restoreBatchParameterMap.getParameterValue(RString.class, new RString("honkenshaCode"))));
+            RString honkenshaCode = restoreBatchParameterMap.getParameterValue(RString.class, new RString("honkenshaCode"));
+            if (全市町村.equals(honkenshaCode)) {
+                div.getCcdHokenshaList().loadHokenshaList();
+            } else {
+                div.getChushutsuJokenPanel().getCcdHokenshaList().setSelectedShichosonIfExist(
+                        new LasdecCode(honkenshaCode));
+            }
         }
         List<RString> idoKubunList = new ArrayList<>();
         for (Object idokubun : restoreBatchParameterMap.getParameterValue(List.class, new RString("idoKubun"))) {
