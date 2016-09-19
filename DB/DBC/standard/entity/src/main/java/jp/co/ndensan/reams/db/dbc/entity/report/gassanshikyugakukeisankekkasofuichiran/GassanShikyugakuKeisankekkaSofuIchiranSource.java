@@ -1,5 +1,6 @@
 package jp.co.ndensan.reams.db.dbc.entity.report.gassanshikyugakukeisankekkasofuichiran;
 
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
@@ -82,6 +83,18 @@ public class GassanShikyugakuKeisankekkaSofuIchiranSource implements IReportSour
     @ReportPerson(id = "A")
     @ReportItem(name = "shikibetsuCode", length = 15)
     public RString shikibetsuCode;
+    @ReportItem(name = "yubinNo", length = 20, order = 33)
+    public RString yubinNo;
+    @ReportItem(name = "choikiCode", length = 20, order = 34)
+    public RString choikiCode;
+    @ReportItem(name = "gyoseikuCode", length = 20, order = 35)
+    public RString gyoseikuCode;
+    @ReportItem(name = "shimei50onKana", length = 20, order = 36)
+    public RString shimei50onKana;
+    @ReportItem(name = "shichosonCode", length = 20, order = 37)
+    public LasdecCode shichosonCode;
+    @ReportItem(name = "shoKisaiHokenshaNo", length = 20, order = 38)
+    public RString shoKisaiHokenshaNo;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
