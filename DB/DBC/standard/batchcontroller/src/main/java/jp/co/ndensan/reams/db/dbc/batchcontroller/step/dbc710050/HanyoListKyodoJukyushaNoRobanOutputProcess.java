@@ -59,7 +59,7 @@ public class HanyoListKyodoJukyushaNoRobanOutputProcess extends BatchProcessBase
                     + "IHanyoListKyodoJukyushaMapper.select共同処理用受給者情報");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC701005");
     private final RString csvFileName = new RString("HanyoList_KyodoJukyushaKihon.csv");
-    private static final RString 日本語ファイル名 = new RString("汎用リスト　共同受給者基本情報");
+    private static final RString 日本語ファイル名 = new RString("汎用リスト　共同受給者基本情報CSV");
     private static final RString 定数_なし = new RString("なし");
     private static final RString 定数_あり = new RString("あり");
     private static final RString TITLE_抽出条件 = new RString("【抽出条件】");
@@ -89,7 +89,7 @@ public class HanyoListKyodoJukyushaNoRobanOutputProcess extends BatchProcessBase
     FileSpoolManager spoolManager;
 
     @BatchWriter
-    private CsvWriter<HanyoListKyodoJukyushaNoRebanCsvEntity> NoRebancsvWriter;
+    private CsvWriter<HanyoListKyodoJukyushaNoRebanCsvEntity> noRebancsvWriter;
 
     @Override
     protected void initialize() {
@@ -115,24 +115,16 @@ public class HanyoListKyodoJukyushaNoRobanOutputProcess extends BatchProcessBase
                 UzUDE0831EucAccesslogFileType.Csv);
         eucFilePath = Path.combinePath(spoolManager.getEucOutputDirectry(),
                 csvFileName);
+        noRebancsvWriter = BatchWriters.csvWriter(HanyoListKyodoJukyushaNoRebanCsvEntity.class).
+                filePath(eucFilePath).
+                setDelimiter(EUC_WRITER_DELIMITER).
+                setEnclosure(EUC_WRITER_ENCLOSURE).
+                setEncode(Encode.UTF_8withBOM).
+                setNewLine(NewLine.CRLF).
+                hasHeader(false).
+                build();
         if (parameter.is項目名付加()) {
-            NoRebancsvWriter = BatchWriters.csvWriter(HanyoListKyodoJukyushaNoRebanCsvEntity.class).
-                    filePath(eucFilePath).
-                    setDelimiter(EUC_WRITER_DELIMITER).
-                    setEnclosure(EUC_WRITER_ENCLOSURE).
-                    setEncode(Encode.UTF_8withBOM).
-                    setNewLine(NewLine.CRLF).
-                    hasHeader(true).
-                    build();
-        } else {
-            NoRebancsvWriter = BatchWriters.csvWriter(HanyoListKyodoJukyushaNoRebanCsvEntity.class).
-                    filePath(eucFilePath).
-                    setDelimiter(EUC_WRITER_DELIMITER).
-                    setEnclosure(EUC_WRITER_ENCLOSURE).
-                    setEncode(Encode.UTF_8withBOM).
-                    setNewLine(NewLine.CRLF).
-                    hasHeader(false).
-                    build();
+            noRebancsvWriter.writeLine(HanyoListKyodoJukyushaCsvEntityEditor.getHeaderNoRenban());
         }
     }
 
@@ -142,7 +134,7 @@ public class HanyoListKyodoJukyushaNoRobanOutputProcess extends BatchProcessBase
         csv出力Flag = 定数_あり;
         HanyoListKyodoJukyushaCsvEntityEditor edit = new HanyoListKyodoJukyushaCsvEntityEditor(entity, parameter,
                 地方公共団体情報, 構成市町村マスタ, 連番);
-        NoRebancsvWriter.writeLine(edit.noRenbanEdit());
+        noRebancsvWriter.writeLine(edit.noRenbanEdit());
         ExpandedInformation expandedInformation = new ExpandedInformation(
                 CODE_0003, DATANAME_被保険者番号, entity.get共同処理用受給者異動基本送付().getHiHokenshaNo().getColumnValue());
         personalDataList.add(PersonalData.of(entity.get宛名().getShikibetsuCode(), expandedInformation));
@@ -151,20 +143,20 @@ public class HanyoListKyodoJukyushaNoRobanOutputProcess extends BatchProcessBase
 
     @Override
     protected void afterExecute() {
+        noRebancsvWriter.close();
         if (!personalDataList.isEmpty()) {
             AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
             spoolManager.spool(eucFilePath, accessLogUUID);
         } else {
             spoolManager.spool(eucFilePath);
         }
-        NoRebancsvWriter.close();
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
                 EUC_ENTITY_ID.toRString(),
                 地方公共団体情報.getLasdecCode_().value(),
                 地方公共団体情報.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
                 日本語ファイル名,
-                new RString(NoRebancsvWriter.getCount()),
+                new RString(noRebancsvWriter.getCount()),
                 csv出力Flag,
                 csvFileName,
                 get抽出条件()

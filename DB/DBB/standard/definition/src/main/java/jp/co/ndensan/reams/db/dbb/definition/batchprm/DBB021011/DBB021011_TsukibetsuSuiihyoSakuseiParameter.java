@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.definition.batchprm.createtsukibetsusuiihyo;
+package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB021011;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoProcessParameter;
@@ -24,7 +24,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class CreateTsukibetsuSuiihyoBatchParameter extends BatchParameterBase {
+public class DBB021011_TsukibetsuSuiihyoSakuseiParameter extends BatchParameterBase {
 
     private static final String KEY_CHOTEINENDO = "choteiNendo";
     private static final String KEY_CHOTEIKIJUNNICHIJI = "choteiKijunNichiji";
@@ -79,7 +79,7 @@ public class CreateTsukibetsuSuiihyoBatchParameter extends BatchParameterBase {
     /**
      * コンストラクタです。
      */
-    public CreateTsukibetsuSuiihyoBatchParameter() {
+    public DBB021011_TsukibetsuSuiihyoSakuseiParameter() {
     }
 
     /**
@@ -102,7 +102,7 @@ public class CreateTsukibetsuSuiihyoBatchParameter extends BatchParameterBase {
      * @param kyuShichosonCode 旧市町村コード
      * @param kyuShichosonMeisho 旧市町村名称
      */
-    public CreateTsukibetsuSuiihyoBatchParameter(
+    public DBB021011_TsukibetsuSuiihyoSakuseiParameter(
             FlexibleYear choteiNendo,
             RString choteiKijunNichiji,
             RString kakutukiShikakuKijunNichi,

@@ -132,4 +132,140 @@ public class HanyoListKyodoJukyushaNoRebanCsvEntity {
     private RString 電話番号;
     @CsvField(order = 56, name = "帳票出力順序コード")
     private RString 帳票出力順序コード;
+
+    /**
+     * コンストラクタです。
+     */
+    public HanyoListKyodoJukyushaNoRebanCsvEntity() {
+    }
+
+    /**
+     * コンストラクタです。
+     *
+     * @param 識別コード 識別コード
+     * @param 住民種別 住民種別
+     * @param 氏名 氏名
+     * @param 氏名カナ 氏名カナ
+     * @param 生年月日 生年月日
+     * @param 年齢 年齢
+     * @param 性別 性別
+     * @param 続柄コード 続柄コード
+     * @param 世帯コード 世帯コード
+     * @param 世帯主名 世帯主名
+     * @param 住所コード 住所コード
+     * @param 郵便番号 郵便番号
+     * @param 住所_番地_方書 住所_番地_方書
+     * @param 住所 住所
+     * @param 番地 番地
+     * @param 方書 方書
+     * @param 行政区コード 行政区コード
+     * @param 行政区名 行政区名
+     * @param 地区１ 地区１
+     * @param 地区２ 地区２
+     * @param 地区３ 地区３
+     * @param 連絡先１ 連絡先１
+     * @param 連絡先２ 連絡先２
+     * @param 登録異動日 登録異動日
+     * @param 登録事由 登録事由
+     * @param 登録届出日 登録届出日
+     * @param 住定異動日 住定異動日
+     * @param 住定事由 住定事由
+     * @param 住定届出日 住定届出日
+     * @param 消除異動日 消除異動日
+     * @param 消除事由 消除事由
+     * @param 消除届出日 消除届出日
+     * @param 転出入理由 転出入理由
+     * @param 前住所郵便番号 前住所郵便番号
+     * @param 前住所_番地_方書 前住所_番地_方書
+     * @param 前住所 前住所
+     * @param 前住所番地 前住所番地
+     * @param 前住所方書 前住所方書
+     * @param 市町村コード 市町村コード
+     * @param 市町村名 市町村名
+     * @param 保険者コード 保険者コード
+     * @param 保険者名 保険者名
+     * @param 空白 空白
+     * @param 処理対象年月 処理対象年月
+     * @param 被保険者番号 被保険者番号
+     * @param 履歴番号 履歴番号
+     * @param 異動年月日 異動年月日
+     * @param 異動区分 異動区分
+     * @param 異動事由 異動事由
+     * @param （給付）証記載保険者番号 （給付）証記載保険者番号
+     * @param 被保険者氏名漢字 被保険者氏名漢字
+     * @param 送付郵便番号 送付郵便番号
+     * @param 送付住所カナ 送付住所カナ
+     * @param 送付住所 送付住所
+     * @param 電話番号 電話番号
+     * @param 帳票出力順序コード 帳票出力順序コード
+     *
+     */
+    public HanyoListKyodoJukyushaNoRebanCsvEntity(RString 識別コード,
+            RString 住民種別, RString 氏名, RString 氏名カナ, RString 生年月日, RString 年齢,
+            RString 性別, RString 続柄コード, RString 世帯コード, RString 世帯主名, RString 住所コード,
+            RString 郵便番号, RString 住所_番地_方書, RString 住所, RString 番地, RString 方書, RString 行政区コード,
+            RString 行政区名, RString 地区１, RString 地区２, RString 地区３, RString 連絡先１, RString 連絡先２,
+            RString 登録異動日, RString 登録事由, RString 登録届出日, RString 住定異動日, RString 住定事由, RString 住定届出日,
+            RString 消除異動日, RString 消除事由, RString 消除届出日, RString 転出入理由, RString 前住所郵便番号, RString 前住所_番地_方書,
+            RString 前住所, RString 前住所番地, RString 前住所方書, RString 市町村コード, RString 市町村名, RString 保険者コード,
+            RString 保険者名, RString 空白, RString 処理対象年月, RString 被保険者番号, RString 履歴番号, RString 異動年月日, RString 異動区分,
+            RString 異動事由, RString 給付_証記載保険者番号, RString 被保険者氏名漢字, RString 送付郵便番号, RString 送付住所カナ,
+            RString 送付住所, RString 電話番号, RString 帳票出力順序コード) {
+        this.識別コード = 識別コード;
+        this.住民種別 = 住民種別;
+        this.氏名 = 氏名;
+        this.氏名カナ = 氏名カナ;
+        this.生年月日 = 生年月日;
+        this.年齢 = 年齢;
+        this.性別 = 性別;
+        this.続柄コード = 続柄コード;
+        this.世帯コード = 世帯コード;
+        this.世帯主名 = 世帯主名;
+        this.住所コード = 住所コード;
+        this.郵便番号 = 郵便番号;
+        this.住所番地方書 = 住所_番地_方書;
+        this.住所 = 住所;
+        this.番地 = 番地;
+        this.方書 = 方書;
+        this.行政区コード = 行政区コード;
+        this.行政区名 = 行政区名;
+        this.地区１ = 地区１;
+        this.地区２ = 地区２;
+        this.地区３ = 地区３;
+        this.連絡先１ = 連絡先１;
+        this.連絡先２ = 連絡先２;
+        this.登録異動日 = 登録異動日;
+        this.登録事由 = 登録事由;
+        this.登録届出日 = 登録届出日;
+        this.住定異動日 = 住定異動日;
+        this.住定事由 = 住定事由;
+        this.住定届出日 = 住定届出日;
+        this.消除異動日 = 消除異動日;
+        this.消除事由 = 消除事由;
+        this.消除届出日 = 消除届出日;
+        this.転出入理由 = 転出入理由;
+        this.前住所郵便番号 = 前住所郵便番号;
+        this.前住所番地方書 = 前住所_番地_方書;
+        this.前住所 = 前住所;
+        this.前住所番地 = 前住所番地;
+        this.前住所方書 = 前住所方書;
+        this.市町村コード = 市町村コード;
+        this.市町村名 = 市町村名;
+        this.保険者コード = 保険者コード;
+        this.保険者名 = 保険者名;
+        this.空白 = 空白;
+        this.処理対象年月 = 処理対象年月;
+        this.被保険者番号 = 被保険者番号;
+        this.履歴番号 = 履歴番号;
+        this.異動年月日 = 異動年月日;
+        this.異動区分 = 異動区分;
+        this.異動事由 = 異動事由;
+        this.給付_証記載保険者番号 = 給付_証記載保険者番号;
+        this.被保険者氏名漢字 = 被保険者氏名漢字;
+        this.送付郵便番号 = 送付郵便番号;
+        this.送付住所カナ = 送付住所カナ;
+        this.送付住所 = 送付住所;
+        this.電話番号 = 電話番号;
+        this.帳票出力順序コード = 帳票出力順序コード;
+    }
 }

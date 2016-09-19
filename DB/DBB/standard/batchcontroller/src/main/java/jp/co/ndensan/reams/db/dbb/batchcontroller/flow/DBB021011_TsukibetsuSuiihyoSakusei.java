@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.createtsukibetsusuiihyo;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.createtsukibetsusuiihyo.FutuChoushuProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.createtsukibetsusuiihyo.GemmenReportProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.createtsukibetsusuiihyo.GokeyBubunKoumokuProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.createtsukibetsusuiihyo.GoukeyiReportProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.createtsukibetsusuiihyo.KoumokuGoukeyProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.createtsukibetsusuiihyo.KoumokuSyoukeyiProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.createtsukibetsusuiihyo.TokubetuProcess;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.createtsukibetsusuiihyo.CreateTsukibetsuSuiihyoBatchParameter;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb021011.CreateTsukibetsuSuiihyoProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb021011.FutuChoushuProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb021011.GemmenReportProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb021011.GokeyBubunKoumokuProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb021011.GoukeyiReportProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb021011.KoumokuGoukeyProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb021011.KoumokuSyoukeyiProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb021011.TokubetuProcess;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB021011.DBB021011_TsukibetsuSuiihyoSakuseiParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBB-0760-030 lishengli
  */
-public class CreateTsukibetsuSuiihyoFlow extends BatchFlowBase<CreateTsukibetsuSuiihyoBatchParameter> {
+public class DBB021011_TsukibetsuSuiihyoSakusei extends BatchFlowBase<DBB021011_TsukibetsuSuiihyoSakuseiParameter> {
 
     @Override
     protected void defineFlow() {
