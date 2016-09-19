@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.ippanshokanketteiym.Jigy
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.ippanshokanketteiym.JigyouHoukokuTokTyhyouRelateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.ippanshokanketteiym.JigyouHoukokuTokeiThuRelateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.ippanshokanketteiym.JyukyushaJohoKonkyoCSVRelateEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity;
 
 /**
  *
@@ -76,5 +77,13 @@ public interface IJigyoHokokuGeppoIppanShokanMapper {
      * @return 事業状況報告統計帳票用情報
      */
     List<JigyouHoukokuTokTyhyouRelateEntity> getJigyouHoukokuTokeiTyouhyou(JigyoHokokuGeppoIppanShokanMybatisParamter parameter);
+
+    /**
+     * 主治医情報の取得処理です。
+     *
+     *
+     * @return 主治医情報
+     */
+    List<DbT5912ShujiiJohoEntity> selectShujiiJohoList();
 
 }

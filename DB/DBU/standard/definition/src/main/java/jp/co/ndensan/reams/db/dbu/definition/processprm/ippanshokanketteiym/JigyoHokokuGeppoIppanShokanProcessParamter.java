@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.ippanshokanketteiym.Jigy
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import lombok.Getter;
 
 /**
@@ -38,6 +39,8 @@ public class JigyoHokokuGeppoIppanShokanProcessParamter implements IBatchProcess
     private final RString 作成CSVファイルID;
     private final RString バッチID;
     private final RString 集計番号;
+    private final RString csvFilePath;
+    private final FileSpoolManager manager;
 
     /**
      * コンストラクタです。
@@ -59,6 +62,8 @@ public class JigyoHokokuGeppoIppanShokanProcessParamter implements IBatchProcess
      * @param 処理日時 処理日時
      * @param バッチID バッチID
      * @param 集計番号 集計番号
+     * @param csvFilePath csvFilePath
+     * @param manager manager
      */
     public JigyoHokokuGeppoIppanShokanProcessParamter(RString プリントコントロール区分,
             RString 決定年月,
@@ -76,7 +81,9 @@ public class JigyoHokokuGeppoIppanShokanProcessParamter implements IBatchProcess
             RString 過去集計分旧市町村区分,
             RString 作成CSVファイルID,
             RString バッチID,
-            RString 集計番号) {
+            RString 集計番号,
+            RString csvFilePath,
+            FileSpoolManager manager) {
         this.プリントコントロール区分 = プリントコントロール区分;
         this.決定年月 = 決定年月;
         this.報告年月 = 報告年月;
@@ -94,6 +101,8 @@ public class JigyoHokokuGeppoIppanShokanProcessParamter implements IBatchProcess
         this.作成CSVファイルID = 作成CSVファイルID;
         this.バッチID = バッチID;
         this.集計番号 = 集計番号;
+        this.csvFilePath = csvFilePath;
+        this.manager = manager;
     }
 
     /**
