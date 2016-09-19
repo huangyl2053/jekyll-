@@ -31,7 +31,7 @@ public class KyotakuKeikakuJikosakuseiKanriTempEntity extends DbTableEntityBase<
     @TempTableColumnOrder(3)
     private FlexibleYearMonth taishoYM;
     @TempTableColumnOrder(4)
-    private FlexibleYearMonth rirekiNo;
+    private RString rirekiNo;
     @TempTableColumnOrder(5)
     private FlexibleYearMonth riyoYM;
     @TempTableColumnOrder(6)
