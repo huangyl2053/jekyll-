@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120041.CreateTmptable5
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120041.CreateTmptable5E4Process;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120041.IchiTmpTableTorokuProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120041.DBC120041_KyodoJukyushaInSubParameter;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -46,7 +45,6 @@ public class DBC120041_KyodoJukyushaInSub extends BatchFlowBase<DBC120041_KyodoJ
 
     @Override
     protected void defineFlow() {
-        レコード総件数 = 0;
         for (RString csvファイル名 : getParameter().getエントリ情報List()) {
             ファイル名 = csvファイル名;
             try {
@@ -76,7 +74,7 @@ public class DBC120041_KyodoJukyushaInSub extends BatchFlowBase<DBC120041_KyodoJ
                             CreateTmptable5C3Process.レコード件数);
                 }
             } catch (Exception e) {
-                throw new BatchInterruptedException(UrErrorMessages.指定ファイルが存在しない.toString());
+                throw new BatchInterruptedException(e.getMessage());
             }
             getResult(RString.class, new RString(一時TBL基本情報_5C3作成), CreateTmptable5C3Process.処理対象年月);
         }
