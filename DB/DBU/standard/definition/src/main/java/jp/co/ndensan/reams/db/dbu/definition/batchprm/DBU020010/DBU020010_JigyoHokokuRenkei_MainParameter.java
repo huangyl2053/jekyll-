@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.definition.batchprm.jigyohokokurenkei;
+package jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU020010;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyohokokurenkei.JigyoHokokuRenkeiProcessParameter;
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
 @lombok.Setter
-public class JigyoHokokuRenkeiBatchParameter extends BatchParameterBase {
+public class DBU020010_JigyoHokokuRenkei_MainParameter extends BatchParameterBase {
 
     private static final long serialVersionUID = -4784133600634129238L;
     private RString spoolWorkPath;
@@ -89,7 +89,7 @@ public class JigyoHokokuRenkeiBatchParameter extends BatchParameterBase {
     /**
      * コンストラクタです。
      */
-    public JigyoHokokuRenkeiBatchParameter() {
+    public DBU020010_JigyoHokokuRenkei_MainParameter() {
     }
 
     /**
@@ -117,7 +117,7 @@ public class JigyoHokokuRenkeiBatchParameter extends BatchParameterBase {
      * @param is構成市町村分 boolean
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
-    public JigyoHokokuRenkeiBatchParameter(
+    public DBU020010_JigyoHokokuRenkei_MainParameter(
             RString 過去集計年月,
             RString 一般状況1_10集計年月,
             RString 一般状況11_14現物分_集計年月,

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.batchcontroller.step.jigyohokokurenkei;
+package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU020010;
 
 import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyohokokurenkei.JigyoHokokuRenkeiProcessParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
@@ -34,11 +34,9 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
  *
  * @reamsid_L DBU-4050-020 lijia
  */
-public class JigyoHokokuRenkeiGenbutsuYousikiNi_GoToRokuProcess extends BatchProcessBase<DbT7021JigyoHokokuTokeiDataEntity> {
+public class JigyoHokokuRenkeiShokanYousikiNi_GoToRokuProcess extends BatchProcessBase<DbT7021JigyoHokokuTokeiDataEntity> {
 
-    private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyohokokurenkei.IJigyoHokokuRenkeiMapper."
-            + "get保険給付決定状況現物分情報の取得");
+    private RString myBatisSelsectId;
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("JigyoHokokuRenkeiEucCsv"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
@@ -143,8 +141,19 @@ public class JigyoHokokuRenkeiGenbutsuYousikiNi_GoToRokuProcess extends BatchPro
 
     @Override
     protected void initialize() {
-        csvFileName = new RString("DUJRENF12_" + processParameter.get過去集計年月()
+        if (processParameter.is出力_保険給付決定状況償還分_審査年月()) {
+            myBatisSelsectId = new RString(
+                    "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyohokokurenkei.IJigyoHokokuRenkeiMapper."
+                    + "get保険給付決定状況償還分審査年月情報の取得");
+        }
+        if (processParameter.is出力_保険給付決定状況償還分_決定年月()) {
+            myBatisSelsectId = new RString(
+                    "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyohokokurenkei.IJigyoHokokuRenkeiMapper."
+                    + "get保険給付決定状況償還分決定年月情報の取得");
+        }
+        csvFileName = new RString("DUJRENF13_" + processParameter.get過去集計年月()
                 + "_" + DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBU介護統計報告) + ".csv");
+
     }
 
     @BatchWriter
@@ -152,7 +161,7 @@ public class JigyoHokokuRenkeiGenbutsuYousikiNi_GoToRokuProcess extends BatchPro
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID, processParameter.toMybatisParamter());
+        return new BatchDbReader(myBatisSelsectId, processParameter.toMybatisParamter());
     }
 
     @Override

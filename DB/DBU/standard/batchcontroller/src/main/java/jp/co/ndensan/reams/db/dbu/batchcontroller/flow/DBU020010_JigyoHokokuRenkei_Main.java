@@ -3,25 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.batchcontroller.flow.jigyohokokurenkei;
+package jp.co.ndensan.reams.db.dbu.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbu.batchcontroller.step.jigyohokokurenkei.JigyoHokokuRenkei11_14GassanProcess;
-import jp.co.ndensan.reams.db.dbu.batchcontroller.step.jigyohokokurenkei.JigyoHokokuRenkei11_14GenbutsuProcess;
-import jp.co.ndensan.reams.db.dbu.batchcontroller.step.jigyohokokurenkei.JigyoHokokuRenkei11_14ShokanProcess;
-import jp.co.ndensan.reams.db.dbu.batchcontroller.step.jigyohokokurenkei.JigyoHokokuRenkeiGassanYousikiNi_GoToRokuProcess;
-import jp.co.ndensan.reams.db.dbu.batchcontroller.step.jigyohokokurenkei.JigyoHokokuRenkeiGassanYousikiNi_IchiToYonProcess;
-import jp.co.ndensan.reams.db.dbu.batchcontroller.step.jigyohokokurenkei.JigyoHokokuRenkeiGassanYousikiNi_SitiProcess;
-import jp.co.ndensan.reams.db.dbu.batchcontroller.step.jigyohokokurenkei.JigyoHokokuRenkeiGenbutsuYousikiNi_GoToRokuProcess;
-import jp.co.ndensan.reams.db.dbu.batchcontroller.step.jigyohokokurenkei.JigyoHokokuRenkeiGenbutsuYousikiNi_IchiToYonProcess;
-import jp.co.ndensan.reams.db.dbu.batchcontroller.step.jigyohokokurenkei.JigyoHokokuRenkeiGenbutsuYousikiNi_SitiProcess;
-import jp.co.ndensan.reams.db.dbu.batchcontroller.step.jigyohokokurenkei.JigyoHokokuRenkeiHokenYousikiIchiProcess;
-import jp.co.ndensan.reams.db.dbu.batchcontroller.step.jigyohokokurenkei.JigyoHokokuRenkeiHokenYousikiIchi_NiProcess;
-import jp.co.ndensan.reams.db.dbu.batchcontroller.step.jigyohokokurenkei.JigyoHokokuRenkeiHokenYousikiIchi_SanProcess;
-import jp.co.ndensan.reams.db.dbu.batchcontroller.step.jigyohokokurenkei.JigyoHokokuRenkeiHokenYousikiIchi_YonProcess;
-import jp.co.ndensan.reams.db.dbu.batchcontroller.step.jigyohokokurenkei.JigyoHokokuRenkeiShokanYousikiNi_GoToRokuProcess;
-import jp.co.ndensan.reams.db.dbu.batchcontroller.step.jigyohokokurenkei.JigyoHokokuRenkeiShokanYousikiNi_IchiToYonProcess;
-import jp.co.ndensan.reams.db.dbu.batchcontroller.step.jigyohokokurenkei.JigyoHokokuRenkeiShokanYousikiNi_SitiProcess;
-import jp.co.ndensan.reams.db.dbu.definition.batchprm.jigyohokokurenkei.JigyoHokokuRenkeiBatchParameter;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU020010.JigyoHokokuRenkei11_14GassanProcess;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU020010.JigyoHokokuRenkei11_14GenbutsuProcess;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU020010.JigyoHokokuRenkei11_14ShokanProcess;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU020010.JigyoHokokuRenkeiGassanYousikiNi_GoToRokuProcess;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU020010.JigyoHokokuRenkeiGassanYousikiNi_IchiToYonProcess;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU020010.JigyoHokokuRenkeiGassanYousikiNi_SitiProcess;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU020010.JigyoHokokuRenkeiGenbutsuYousikiNi_GoToRokuProcess;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU020010.JigyoHokokuRenkeiGenbutsuYousikiNi_IchiToYonProcess;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU020010.JigyoHokokuRenkeiGenbutsuYousikiNi_SitiProcess;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU020010.JigyoHokokuRenkeiHokenYousikiIchiProcess;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU020010.JigyoHokokuRenkeiHokenYousikiIchi_NiProcess;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU020010.JigyoHokokuRenkeiHokenYousikiIchi_SanProcess;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU020010.JigyoHokokuRenkeiHokenYousikiIchi_YonProcess;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU020010.JigyoHokokuRenkeiShokanYousikiNi_GoToRokuProcess;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU020010.JigyoHokokuRenkeiShokanYousikiNi_IchiToYonProcess;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU020010.JigyoHokokuRenkeiShokanYousikiNi_SitiProcess;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU020010.DBU020010_JigyoHokokuRenkei_MainParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -40,7 +40,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @reamsid_L DBU-4050-020 lijia
  *
  */
-public class JigyoHokokuRenkeiFlow extends BatchFlowBase<JigyoHokokuRenkeiBatchParameter> {
+public class DBU020010_JigyoHokokuRenkei_Main extends BatchFlowBase<DBU020010_JigyoHokokuRenkei_MainParameter> {
 
     private static final String YOUSIKIICHIPROCESS = "yousikiIchiProcess";
     private static final String YOUSIKIICHI_NIPROCESS = "yousikiIchi_NiProcess";

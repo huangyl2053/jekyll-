@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.batchcontroller.step.jigyohokokurenkei;
+package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU020010;
 
 import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyohokokurenkei.JigyoHokokuRenkeiProcessParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
@@ -34,7 +34,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
  *
  * @reamsid_L DBU-4050-020 lijia
  */
-public class JigyoHokokuRenkeiShokanYousikiNi_GoToRokuProcess extends BatchProcessBase<DbT7021JigyoHokokuTokeiDataEntity> {
+public class JigyoHokokuRenkeiGassanYousikiNi_GoToRokuProcess extends BatchProcessBase<DbT7021JigyoHokokuTokeiDataEntity> {
 
     private RString myBatisSelsectId;
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("JigyoHokokuRenkeiEucCsv"));
@@ -134,26 +134,25 @@ public class JigyoHokokuRenkeiShokanYousikiNi_GoToRokuProcess extends BatchProce
     private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_居住_老人保健施設Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
     private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_居住_療養型医療施設等Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
     private final JigyoHokokuRenkei24or26EucCsvEntity 第２号_給付費_総計Entity = new JigyoHokokuRenkei24or26EucCsvEntity();
+    private final JigyoHokokuRenkei24or26EucCsvEntity eucCsvEntity = new JigyoHokokuRenkei24or26EucCsvEntity();
     private RString csvFileName;
     private final RDate 基準日 = RDate.getNowDate();
     private JigyoHokokuRenkeiProcessParameter processParameter;
-    private final JigyoHokokuRenkei24or26EucCsvEntity eucCsvEntity = new JigyoHokokuRenkei24or26EucCsvEntity();
 
     @Override
     protected void initialize() {
-        if (processParameter.is出力_保険給付決定状況償還分_審査年月()) {
+        if (processParameter.is出力_保険給付決定状況合算_審査年月()) {
             myBatisSelsectId = new RString(
                     "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyohokokurenkei.IJigyoHokokuRenkeiMapper."
-                    + "get保険給付決定状況償還分審査年月情報の取得");
+                    + "get保険給付決定状況合算分審査年月情報の取得");
         }
-        if (processParameter.is出力_保険給付決定状況償還分_決定年月()) {
+        if (processParameter.is出力_保険給付決定状況合算_決定年月()) {
             myBatisSelsectId = new RString(
                     "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyohokokurenkei.IJigyoHokokuRenkeiMapper."
-                    + "get保険給付決定状況償還分決定年月情報の取得");
+                    + "get保険給付決定状況合算分決定年月情報の取得");
         }
-        csvFileName = new RString("DUJRENF13_" + processParameter.get過去集計年月()
+        csvFileName = new RString("DUJRENF11_" + processParameter.get過去集計年月()
                 + "_" + DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBU介護統計報告) + ".csv");
-
     }
 
     @BatchWriter
