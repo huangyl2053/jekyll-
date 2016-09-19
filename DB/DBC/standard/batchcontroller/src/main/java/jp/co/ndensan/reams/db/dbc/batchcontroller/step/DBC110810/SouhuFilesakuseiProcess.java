@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110810;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110810;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +58,7 @@ public class SouhuFilesakuseiProcess extends BatchProcessBase<DbT3001JukyushaIdo
     private static final RString TABLE_処理結果リスト一時TBL = new RString("DbWT1002KokuhorenSakuseiError");
     private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jukyushatotsugoiraiout"
             + ".IJukyushaTotsugoIraiOutMapper.");
+    private static int index = 1;
     private RString myBatisSelsectId;
     private RString eucFilePath;
     private FileSpoolManager manager;
@@ -162,7 +163,7 @@ public class SouhuFilesakuseiProcess extends BatchProcessBase<DbT3001JukyushaIdo
     private SouhuFilesakuseiEntity getControl(
             SouhuFilesakuseiEntity record1Entity) {
         record1Entity.set種別(new RString("1"));
-        record1Entity.set番号連番(new RString(entityList.size()));
+        record1Entity.set番号連番(new RString(index));
         record1Entity.set通番(new RString("000"));
         record1Entity.set件数(new RString(entityList.size()));
         record1Entity.setデータ種別(new RString("536"));
@@ -192,7 +193,7 @@ public class SouhuFilesakuseiProcess extends BatchProcessBase<DbT3001JukyushaIdo
                     + new RString(processParameter.getTaishouKaishiNengetu().getMonthValue()).toString()).trim();
         }
         record2Entity.set種別(new RString("2"));
-        record2Entity.set番号連番(new RString(entityList.size()));
+        record2Entity.set番号連番(new RString(++index));
         record2Entity.set交換情報識別番号(new RString("5361"));
         record2Entity.set突合区分(kubun.trim());
         record2Entity.set認定有効年月(有効年月);
@@ -278,7 +279,7 @@ public class SouhuFilesakuseiProcess extends BatchProcessBase<DbT3001JukyushaIdo
 
     private SouhuFilesakuseiEntity getEnd(SouhuFilesakuseiEntity record3Entity) {
         record3Entity.set種別(new RString("3"));
-        record3Entity.set番号連番(new RString(entityList.size()));
+        record3Entity.set番号連番(new RString(++index));
         return record3Entity;
 
     }
