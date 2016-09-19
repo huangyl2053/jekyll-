@@ -407,13 +407,193 @@ public class HanyoListPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLbl1() {
-        return this.getHanyoListRiyoshaFutanGakuGengaku().getLbl1();
+    public TextBox getTxtHyoudai2() {
+        return this.getHanyoListRiyoshaFutanGakuGengaku().getTxtHyoudai2();
     }
 
     @JsonIgnore
-    public void  setLbl1(Label lbl1) {
-        this.getHanyoListRiyoshaFutanGakuGengaku().setLbl1(lbl1);
+    public void  setTxtHyoudai2(TextBox txtHyoudai2) {
+        this.getHanyoListRiyoshaFutanGakuGengaku().setTxtHyoudai2(txtHyoudai2);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtDetasyubetsumesyo2() {
+        return this.getHanyoListRiyoshaFutanGakuGengaku().getTxtDetasyubetsumesyo2();
+    }
+
+    @JsonIgnore
+    public void  setTxtDetasyubetsumesyo2(TextBox txtDetasyubetsumesyo2) {
+        this.getHanyoListRiyoshaFutanGakuGengaku().setTxtDetasyubetsumesyo2(txtDetasyubetsumesyo2);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtSyutsuryoku2() {
+        return this.getHanyoListRiyoshaFutanGakuGengaku().getTxtSyutsuryoku2();
+    }
+
+    @JsonIgnore
+    public void  setTxtSyutsuryoku2(TextBox txtSyutsuryoku2) {
+        this.getHanyoListRiyoshaFutanGakuGengaku().setTxtSyutsuryoku2(txtSyutsuryoku2);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlCyusyutsuhohokubun2() {
+        return this.getHanyoListRiyoshaFutanGakuGengaku().getDdlCyusyutsuhohokubun2();
+    }
+
+    @JsonIgnore
+    public void  setDdlCyusyutsuhohokubun2(DropDownList ddlCyusyutsuhohokubun2) {
+        this.getHanyoListRiyoshaFutanGakuGengaku().setDdlCyusyutsuhohokubun2(ddlCyusyutsuhohokubun2);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtCyusyutsukomokukubun2() {
+        return this.getHanyoListRiyoshaFutanGakuGengaku().getTxtCyusyutsukomokukubun2();
+    }
+
+    @JsonIgnore
+    public void  setTxtCyusyutsukomokukubun2(TextBox txtCyusyutsukomokukubun2) {
+        this.getHanyoListRiyoshaFutanGakuGengaku().setTxtCyusyutsukomokukubun2(txtCyusyutsukomokukubun2);
+    }
+
+    @JsonIgnore
+    public TextBoxFlexibleDate getTxtKizyunnichi2() {
+        return this.getHanyoListRiyoshaFutanGakuGengaku().getTxtKizyunnichi2();
+    }
+
+    @JsonIgnore
+    public void  setTxtKizyunnichi2(TextBoxFlexibleDate txtKizyunnichi2) {
+        this.getHanyoListRiyoshaFutanGakuGengaku().setTxtKizyunnichi2(txtKizyunnichi2);
+    }
+
+    @JsonIgnore
+    public TextBoxFlexibleDate getTxtHitsukehanifrom2() {
+        return this.getHanyoListRiyoshaFutanGakuGengaku().getTxtHitsukehanifrom2();
+    }
+
+    @JsonIgnore
+    public void  setTxtHitsukehanifrom2(TextBoxFlexibleDate txtHitsukehanifrom2) {
+        this.getHanyoListRiyoshaFutanGakuGengaku().setTxtHitsukehanifrom2(txtHitsukehanifrom2);
+    }
+
+    @JsonIgnore
+    public TextBoxFlexibleDate getTxtHitsukehanito2() {
+        return this.getHanyoListRiyoshaFutanGakuGengaku().getTxtHitsukehanito2();
+    }
+
+    @JsonIgnore
+    public void  setTxtHitsukehanito2(TextBoxFlexibleDate txtHitsukehanito2) {
+        this.getHanyoListRiyoshaFutanGakuGengaku().setTxtHitsukehanito2(txtHitsukehanito2);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlChokindatacyusyutsu2() {
+        return this.getHanyoListRiyoshaFutanGakuGengaku().getDdlChokindatacyusyutsu2();
+    }
+
+    @JsonIgnore
+    public void  setDdlChokindatacyusyutsu2(DropDownList ddlChokindatacyusyutsu2) {
+        this.getHanyoListRiyoshaFutanGakuGengaku().setDdlChokindatacyusyutsu2(ddlChokindatacyusyutsu2);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlIsShinseishadatacyushutsu2() {
+        return this.getHanyoListRiyoshaFutanGakuGengaku().getDdlIsShinseishadatacyushutsu2();
+    }
+
+    @JsonIgnore
+    public void  setDdlIsShinseishadatacyushutsu2(DropDownList ddlIsShinseishadatacyushutsu2) {
+        this.getHanyoListRiyoshaFutanGakuGengaku().setDdlIsShinseishadatacyushutsu2(ddlIsShinseishadatacyushutsu2);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtKyusochisha2() {
+        return this.getHanyoListRiyoshaFutanGakuGengaku().getTxtKyusochisha2();
+    }
+
+    @JsonIgnore
+    public void  setTxtKyusochisha2(TextBox txtKyusochisha2) {
+        this.getHanyoListRiyoshaFutanGakuGengaku().setTxtKyusochisha2(txtKyusochisha2);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtKyakasha2() {
+        return this.getHanyoListRiyoshaFutanGakuGengaku().getTxtKyakasha2();
+    }
+
+    @JsonIgnore
+    public void  setTxtKyakasha2(TextBox txtKyakasha2) {
+        this.getHanyoListRiyoshaFutanGakuGengaku().setTxtKyakasha2(txtKyakasha2);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlSoshitsukubun2() {
+        return this.getHanyoListRiyoshaFutanGakuGengaku().getDdlSoshitsukubun2();
+    }
+
+    @JsonIgnore
+    public void  setDdlSoshitsukubun2(DropDownList ddlSoshitsukubun2) {
+        this.getHanyoListRiyoshaFutanGakuGengaku().setDdlSoshitsukubun2(ddlSoshitsukubun2);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlIsCsvkomokumeifuka2() {
+        return this.getHanyoListRiyoshaFutanGakuGengaku().getDdlIsCsvkomokumeifuka2();
+    }
+
+    @JsonIgnore
+    public void  setDdlIsCsvkomokumeifuka2(DropDownList ddlIsCsvkomokumeifuka2) {
+        this.getHanyoListRiyoshaFutanGakuGengaku().setDdlIsCsvkomokumeifuka2(ddlIsCsvkomokumeifuka2);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlIsCsvrenbanfuka2() {
+        return this.getHanyoListRiyoshaFutanGakuGengaku().getDdlIsCsvrenbanfuka2();
+    }
+
+    @JsonIgnore
+    public void  setDdlIsCsvrenbanfuka2(DropDownList ddlIsCsvrenbanfuka2) {
+        this.getHanyoListRiyoshaFutanGakuGengaku().setDdlIsCsvrenbanfuka2(ddlIsCsvrenbanfuka2);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlIsCsvhitsukesurasyuhensyu2() {
+        return this.getHanyoListRiyoshaFutanGakuGengaku().getDdlIsCsvhitsukesurasyuhensyu2();
+    }
+
+    @JsonIgnore
+    public void  setDdlIsCsvhitsukesurasyuhensyu2(DropDownList ddlIsCsvhitsukesurasyuhensyu2) {
+        this.getHanyoListRiyoshaFutanGakuGengaku().setDdlIsCsvhitsukesurasyuhensyu2(ddlIsCsvhitsukesurasyuhensyu2);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtCyohyoid2() {
+        return this.getHanyoListRiyoshaFutanGakuGengaku().getTxtCyohyoid2();
+    }
+
+    @JsonIgnore
+    public void  setTxtCyohyoid2(TextBox txtCyohyoid2) {
+        this.getHanyoListRiyoshaFutanGakuGengaku().setTxtCyohyoid2(txtCyohyoid2);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtSyutsuryokujunparameter2() {
+        return this.getHanyoListRiyoshaFutanGakuGengaku().getTxtSyutsuryokujunparameter2();
+    }
+
+    @JsonIgnore
+    public void  setTxtSyutsuryokujunparameter2(TextBox txtSyutsuryokujunparameter2) {
+        this.getHanyoListRiyoshaFutanGakuGengaku().setTxtSyutsuryokujunparameter2(txtSyutsuryokujunparameter2);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtSyutsuryokukomoku2() {
+        return this.getHanyoListRiyoshaFutanGakuGengaku().getTxtSyutsuryokukomoku2();
+    }
+
+    @JsonIgnore
+    public void  setTxtSyutsuryokukomoku2(TextBox txtSyutsuryokukomoku2) {
+        this.getHanyoListRiyoshaFutanGakuGengaku().setTxtSyutsuryokukomoku2(txtSyutsuryokukomoku2);
     }
 
     @JsonIgnore
@@ -817,13 +997,183 @@ public class HanyoListPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLbl3() {
-        return this.getHanyoListTokubetsuChiikiKasanGemmen().getLbl3();
+    public TextBox getTxtHyoudai5() {
+        return this.getHanyoListTokubetsuChiikiKasanGemmen().getTxtHyoudai5();
     }
 
     @JsonIgnore
-    public void  setLbl3(Label lbl3) {
-        this.getHanyoListTokubetsuChiikiKasanGemmen().setLbl3(lbl3);
+    public void  setTxtHyoudai5(TextBox txtHyoudai5) {
+        this.getHanyoListTokubetsuChiikiKasanGemmen().setTxtHyoudai5(txtHyoudai5);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtDetasyubetsumesyo5() {
+        return this.getHanyoListTokubetsuChiikiKasanGemmen().getTxtDetasyubetsumesyo5();
+    }
+
+    @JsonIgnore
+    public void  setTxtDetasyubetsumesyo5(TextBox txtDetasyubetsumesyo5) {
+        this.getHanyoListTokubetsuChiikiKasanGemmen().setTxtDetasyubetsumesyo5(txtDetasyubetsumesyo5);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtSyutsuryoku5() {
+        return this.getHanyoListTokubetsuChiikiKasanGemmen().getTxtSyutsuryoku5();
+    }
+
+    @JsonIgnore
+    public void  setTxtSyutsuryoku5(TextBox txtSyutsuryoku5) {
+        this.getHanyoListTokubetsuChiikiKasanGemmen().setTxtSyutsuryoku5(txtSyutsuryoku5);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlCyusyutsuhohokubun5() {
+        return this.getHanyoListTokubetsuChiikiKasanGemmen().getDdlCyusyutsuhohokubun5();
+    }
+
+    @JsonIgnore
+    public void  setDdlCyusyutsuhohokubun5(DropDownList ddlCyusyutsuhohokubun5) {
+        this.getHanyoListTokubetsuChiikiKasanGemmen().setDdlCyusyutsuhohokubun5(ddlCyusyutsuhohokubun5);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtCyusyutsukomokukubun5() {
+        return this.getHanyoListTokubetsuChiikiKasanGemmen().getTxtCyusyutsukomokukubun5();
+    }
+
+    @JsonIgnore
+    public void  setTxtCyusyutsukomokukubun5(TextBox txtCyusyutsukomokukubun5) {
+        this.getHanyoListTokubetsuChiikiKasanGemmen().setTxtCyusyutsukomokukubun5(txtCyusyutsukomokukubun5);
+    }
+
+    @JsonIgnore
+    public TextBoxFlexibleDate getTxtKizyunnichi5() {
+        return this.getHanyoListTokubetsuChiikiKasanGemmen().getTxtKizyunnichi5();
+    }
+
+    @JsonIgnore
+    public void  setTxtKizyunnichi5(TextBoxFlexibleDate txtKizyunnichi5) {
+        this.getHanyoListTokubetsuChiikiKasanGemmen().setTxtKizyunnichi5(txtKizyunnichi5);
+    }
+
+    @JsonIgnore
+    public TextBoxFlexibleDate getTxtHitsukehanifrom5() {
+        return this.getHanyoListTokubetsuChiikiKasanGemmen().getTxtHitsukehanifrom5();
+    }
+
+    @JsonIgnore
+    public void  setTxtHitsukehanifrom5(TextBoxFlexibleDate txtHitsukehanifrom5) {
+        this.getHanyoListTokubetsuChiikiKasanGemmen().setTxtHitsukehanifrom5(txtHitsukehanifrom5);
+    }
+
+    @JsonIgnore
+    public TextBoxFlexibleDate getTxtHitsukehanito5() {
+        return this.getHanyoListTokubetsuChiikiKasanGemmen().getTxtHitsukehanito5();
+    }
+
+    @JsonIgnore
+    public void  setTxtHitsukehanito5(TextBoxFlexibleDate txtHitsukehanito5) {
+        this.getHanyoListTokubetsuChiikiKasanGemmen().setTxtHitsukehanito5(txtHitsukehanito5);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlChokindatacyusyutsu5() {
+        return this.getHanyoListTokubetsuChiikiKasanGemmen().getDdlChokindatacyusyutsu5();
+    }
+
+    @JsonIgnore
+    public void  setDdlChokindatacyusyutsu5(DropDownList ddlChokindatacyusyutsu5) {
+        this.getHanyoListTokubetsuChiikiKasanGemmen().setDdlChokindatacyusyutsu5(ddlChokindatacyusyutsu5);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlIsShinseishadatacyushutsu5() {
+        return this.getHanyoListTokubetsuChiikiKasanGemmen().getDdlIsShinseishadatacyushutsu5();
+    }
+
+    @JsonIgnore
+    public void  setDdlIsShinseishadatacyushutsu5(DropDownList ddlIsShinseishadatacyushutsu5) {
+        this.getHanyoListTokubetsuChiikiKasanGemmen().setDdlIsShinseishadatacyushutsu5(ddlIsShinseishadatacyushutsu5);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtKyakasha5() {
+        return this.getHanyoListTokubetsuChiikiKasanGemmen().getTxtKyakasha5();
+    }
+
+    @JsonIgnore
+    public void  setTxtKyakasha5(TextBox txtKyakasha5) {
+        this.getHanyoListTokubetsuChiikiKasanGemmen().setTxtKyakasha5(txtKyakasha5);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlSoshitsukubun5() {
+        return this.getHanyoListTokubetsuChiikiKasanGemmen().getDdlSoshitsukubun5();
+    }
+
+    @JsonIgnore
+    public void  setDdlSoshitsukubun5(DropDownList ddlSoshitsukubun5) {
+        this.getHanyoListTokubetsuChiikiKasanGemmen().setDdlSoshitsukubun5(ddlSoshitsukubun5);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlIsCsvkomokumeifuka5() {
+        return this.getHanyoListTokubetsuChiikiKasanGemmen().getDdlIsCsvkomokumeifuka5();
+    }
+
+    @JsonIgnore
+    public void  setDdlIsCsvkomokumeifuka5(DropDownList ddlIsCsvkomokumeifuka5) {
+        this.getHanyoListTokubetsuChiikiKasanGemmen().setDdlIsCsvkomokumeifuka5(ddlIsCsvkomokumeifuka5);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlIsCsvrenbanfuka5() {
+        return this.getHanyoListTokubetsuChiikiKasanGemmen().getDdlIsCsvrenbanfuka5();
+    }
+
+    @JsonIgnore
+    public void  setDdlIsCsvrenbanfuka5(DropDownList ddlIsCsvrenbanfuka5) {
+        this.getHanyoListTokubetsuChiikiKasanGemmen().setDdlIsCsvrenbanfuka5(ddlIsCsvrenbanfuka5);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlIsCsvhitsukesurasyuhensyu5() {
+        return this.getHanyoListTokubetsuChiikiKasanGemmen().getDdlIsCsvhitsukesurasyuhensyu5();
+    }
+
+    @JsonIgnore
+    public void  setDdlIsCsvhitsukesurasyuhensyu5(DropDownList ddlIsCsvhitsukesurasyuhensyu5) {
+        this.getHanyoListTokubetsuChiikiKasanGemmen().setDdlIsCsvhitsukesurasyuhensyu5(ddlIsCsvhitsukesurasyuhensyu5);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtCyohyoid5() {
+        return this.getHanyoListTokubetsuChiikiKasanGemmen().getTxtCyohyoid5();
+    }
+
+    @JsonIgnore
+    public void  setTxtCyohyoid5(TextBox txtCyohyoid5) {
+        this.getHanyoListTokubetsuChiikiKasanGemmen().setTxtCyohyoid5(txtCyohyoid5);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtSyutsuryokujunparameter5() {
+        return this.getHanyoListTokubetsuChiikiKasanGemmen().getTxtSyutsuryokujunparameter5();
+    }
+
+    @JsonIgnore
+    public void  setTxtSyutsuryokujunparameter5(TextBox txtSyutsuryokujunparameter5) {
+        this.getHanyoListTokubetsuChiikiKasanGemmen().setTxtSyutsuryokujunparameter5(txtSyutsuryokujunparameter5);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtSyutsuryokukomoku5() {
+        return this.getHanyoListTokubetsuChiikiKasanGemmen().getTxtSyutsuryokukomoku5();
+    }
+
+    @JsonIgnore
+    public void  setTxtSyutsuryokukomoku5(TextBox txtSyutsuryokukomoku5) {
+        this.getHanyoListTokubetsuChiikiKasanGemmen().setTxtSyutsuryokukomoku5(txtSyutsuryokukomoku5);
     }
 
     @JsonIgnore
