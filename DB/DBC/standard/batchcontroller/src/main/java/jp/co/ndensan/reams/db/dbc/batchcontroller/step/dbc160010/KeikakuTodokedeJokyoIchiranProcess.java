@@ -187,7 +187,6 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
 
     @Override
     protected void process(KeikakuTodokedeJokyoIchiranEntity entity) {
-        count = count + INDEX_1;
         アクセスログ対象追加(entity);
         outputCsvList = new ArrayList<>();
         if (entity.get識別コード() == null) {
@@ -243,6 +242,7 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
         if (!entity.get被保険者番号().equals(被保険者番号_前) && 被保険者番号_前 != null) {
             List<KyotakuServiceKeikakuSaList> list = outputReportMap.get(被保険者番号_前);
             for (KyotakuServiceKeikakuSaList result : list) {
+                count = count + INDEX_1;
                 KyotakuServiceKeikakuSaParam param = new KyotakuServiceKeikakuSaParam();
                 param.set計画届出状況情報リスト(result);
                 param.setシステム日時(システム日付);
@@ -252,6 +252,7 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
                 param.set基準日(基準日);
                 param.set地方公共団体(AssociationFinderFactory.createInstance().getAssociation());
                 param.set出力順(並び順);
+                param.set連番(count);
                 KyotakuServiceKeikakuSaReport report = new KyotakuServiceKeikakuSaReport(param);
                 report.writeBy(reportSourceWriter);
             }
@@ -292,6 +293,7 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
         List<KyotakuServiceKeikakuSaList> list = outputReportMap.get(被保険者番号_前);
         if (list != null) {
             for (KyotakuServiceKeikakuSaList result : list) {
+                count = count + INDEX_1;
                 KyotakuServiceKeikakuSaParam param = new KyotakuServiceKeikakuSaParam();
                 param.set計画届出状況情報リスト(result);
                 param.setシステム日時(システム日付);
@@ -301,6 +303,7 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
                 param.set基準日(基準日);
                 param.set地方公共団体(AssociationFinderFactory.createInstance().getAssociation());
                 param.set出力順(並び順);
+                param.set連番(count);
                 KyotakuServiceKeikakuSaReport report = new KyotakuServiceKeikakuSaReport(param);
                 report.writeBy(reportSourceWriter);
             }
