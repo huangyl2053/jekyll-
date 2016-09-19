@@ -187,7 +187,7 @@
     <resultMap id="resultMap_DankaiProcessEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.dankaiprocessentity.DankaiProcessEntity" autoMapping="true">
         <id column="HihokenshaTaihoTemp_hihokenshaNo" />
         <id column="TsukibetsuRankTemp_hihokenshaNo" />
-        <id column="SetaiShotokuEntity_hihokenshaNo" />
+        <id column="SetaiShotokuEntity_shikibetsuCode" />
         <id column="UrT0508SeikatsuHogoJukyusha_shikibetsuCode" />
         <id column="UrT0508SeikatsuHogoJukyusha_gyomuCode" />
         <id column="UrT0508SeikatsuHogoJukyusha_jukyuKaishiYMD" />
@@ -320,8 +320,8 @@
 
     <!--テーブルSetaiShotokuEntityの項目をSetaiShotokuEntityの項目にマッピングします。-->
     <resultMap id="resultMap_SetaiShotokuEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.SetaiShotokuEntity" autoMapping="true">
-        <id property="hihokenshaNo" column="SetaiShotokuEntity_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <result property="shikibetsuCode" column="SetaiShotokuEntity_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="hihokenshaNo" column="SetaiShotokuEntity_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="shikibetsuCode" column="SetaiShotokuEntity_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="kijunYMD" column="SetaiShotokuEntity_kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="shotokuNendo" column="SetaiShotokuEntity_shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <result property="jushochiTokureiFlag" column="SetaiShotokuEntity_jushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

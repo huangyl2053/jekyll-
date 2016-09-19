@@ -75,6 +75,7 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
     private List<UrT0526SeikatsuHogoFujoShuruiEntity> 生活保護扶助種類EntityList;
     private HihokenshaNo 被保険者番号;
     private ShikibetsuCode 識別コード;
+    private ShikibetsuCode 世帯識別コード;
     private GyomuCode 業務コード;
     private FlexibleDate 受給開始日;
     private HihokenshaTaihoTemp 被保険者対象Entity;
@@ -141,6 +142,7 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
         生活保護扶助種類EntityList = new ArrayList<>();
         被保険者番号 = null;
         識別コード = null;
+        世帯識別コード = null;
         業務コード = null;
         受給開始日 = null;
         月別Entity = null;
@@ -242,6 +244,7 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
             set老齢の情報(entity.get老齢の情報());
             set被保険者番号(entity);
             set識別コード(entity);
+            set世帯識別コード(entity);
             set生活保護受給者Entity(entity.get生活保護受給者());
             set生活保護扶助種類EntityList(entity.get生活保護扶助種類());
             set世帯員所得情報List(entity.get世帯員所得情報Temp());
@@ -253,6 +256,7 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
             dankaiProcessEntity.set生保の情報(生保の情報);
             dankaiProcessEntity.set老齢の情報(老齢の情報);
             set被保険者番号(entity);
+            set世帯識別コード(entity);
             dankaiProcessEntityList.add(dankaiProcessEntity);
             dankaiProcessEntity = new DankaiProcessEntityList();
             dankaiProcessEntity.set被保険者対象Temp(entity.get被保険者対象Temp());
@@ -464,7 +468,7 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
     }
 
     private void set世帯員所得情報List(SetaiShotokuEntity entity) {
-        if (entity != null && 被保険者番号 != entity.getHihokenshaNo()) {
+        if (entity != null && 世帯識別コード != entity.getShikibetsuCode()) {
             世帯員所得情報List.add(entity);
         }
     }
@@ -485,6 +489,12 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
             識別コード = entity.get生活保護受給者().getShikibetsuCode();
             業務コード = entity.get生活保護受給者().getGyomuCode();
             受給開始日 = entity.get生活保護受給者().getJukyuKaishiYMD();
+        }
+    }
+
+    private void set世帯識別コード(DankaiProcessEntity entity) {
+        if (entity.get世帯員所得情報Temp() != null) {
+            世帯識別コード = entity.get世帯員所得情報Temp().getShikibetsuCode();
         }
     }
 
