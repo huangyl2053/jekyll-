@@ -89,8 +89,8 @@ public class KoshinTaishoHandler {
             parameter.set抽出対象期間_終了(抽出対象期間_終了);
         }
         FlexibleDate 通知書発行日 = div.getTxtHakobi().getValue();
-        if (div.getCcdChohyoShutsuryokuJun().getSelected出力順() != null) {
-            parameter.set出力順(new RString(div.getCcdChohyoShutsuryokuJun().getSelected出力順().toString()));
+        if (div.getCcdChohyoShutsuryokuJun().get出力順ID() != null) {
+            parameter.set出力順(new RString(div.getCcdChohyoShutsuryokuJun().get出力順ID().toString()));
         }
         parameter.set出力対象区分(出力対象区分);
         parameter.set申請書管理番号リスト(申請書管理番号リスト);
