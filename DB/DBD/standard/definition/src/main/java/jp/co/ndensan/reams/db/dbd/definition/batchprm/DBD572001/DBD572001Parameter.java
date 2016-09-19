@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd5720001;
+package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD572001;
 
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd5720001.JyukyushaDaichoIdoCheckListProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -22,7 +22,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class JyukyushaDaichoIdoCheckListParameter extends BatchParameterBase {
+public class DBD572001Parameter extends BatchParameterBase {
 
     @BatchParameter(key = "今回抽出開始年月日", name = "今回抽出開始年月日")
     private RDate 今回抽出開始年月日;

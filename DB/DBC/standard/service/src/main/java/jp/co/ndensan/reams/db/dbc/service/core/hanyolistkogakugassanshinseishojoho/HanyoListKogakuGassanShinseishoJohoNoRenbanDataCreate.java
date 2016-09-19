@@ -31,7 +31,6 @@ import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikan;
 import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikanShiten;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
-import jp.co.ndensan.reams.ua.uax.business.core.koza.YokinShubetsuPattern;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.models.ITennyuMae;
@@ -111,10 +110,8 @@ public class HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate {
     private static final RString 受給申請事由_施行前申請 = new RString("施行前申請　");
     private static final RString 受給申請事由_追加 = new RString("追加　　　　");
     private static final RString 斜線 = new RString("/");
-    private static final int INT_7 = 7;
     private static final int INT_8 = 8;
     private static final int INT_10 = 10;
-    private static final int INT_19 = 19;
     private static final int INT_20 = 20;
     private final FlexibleDate システム日付;
 
@@ -520,7 +517,7 @@ public class HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate {
         }
         if (entity.get受給者台帳_直近異動事由コード() != null) {
             csvEntity.set受給直近事由(get受給直近事由(ChokkinIdoJiyuCode.toValue(
-                    entity.get受給者台帳_直近異動事由コード()).get名称()));
+                    entity.get受給者台帳_直近異動事由コード()).getコード()));
         }
     }
 
@@ -530,31 +527,30 @@ public class HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate {
         if (entity.get受給者台帳_受給申請事由() != null) {
             受給申請事由コード = entity.get受給者台帳_受給申請事由();
         }
-        getJukyuShinseiJiyu(受給申請事由コード, 受給申請事由, entity.get受給者台帳_要支援者認定申請区分());
-        return 受給申請事由;
+        return getJukyuShinseiJiyu(受給申請事由コード, 受給申請事由, entity.get受給者台帳_要支援者認定申請区分());
     }
 
     private RString getJukyuShinseiJiyu(RString 受給申請事由コード, RString 受給申請事由, RString 要支援者認定申請区分) {
         if (JukyuShinseiJiyu.初回申請.getコード().equals(受給申請事由コード)) {
-            受給申請事由 = 受給申請事由_初回申請;
+            return 受給申請事由_初回申請;
         } else if (JukyuShinseiJiyu.再申請_有効期限内.getコード().equals(受給申請事由コード)) {
-            受給申請事由 = 受給申請事由_再申請内;
+            return 受給申請事由_再申請内;
         } else if (JukyuShinseiJiyu.再申請_有効期限外.getコード().equals(受給申請事由コード)) {
-            受給申請事由 = 受給申請事由_再申請外;
+            return 受給申請事由_再申請外;
         } else if (JukyuShinseiJiyu.要介護度変更申請.getコード().equals(受給申請事由コード)) {
             if (NinteiShienShinseiKubun.認定支援申請.getコード().equals(要支援者認定申請区分)) {
-                受給申請事由 = 受給申請事由_支援から申請;
+                return 受給申請事由_支援から申請;
             } else {
-                受給申請事由 = 受給申請事由_区分変更申請;
+                return 受給申請事由_区分変更申請;
             }
         } else if (JukyuShinseiJiyu.指定サービス種類変更申請.getコード().equals(受給申請事由コード)) {
-            受給申請事由 = 受給申請事由_サ変更申請;
+            return 受給申請事由_サ変更申請;
         } else if (JukyuShinseiJiyu.申請_法施行前.getコード().equals(受給申請事由コード)) {
-            受給申請事由 = 受給申請事由_施行前申請;
+            return 受給申請事由_施行前申請;
         } else if (JukyuShinseiJiyu.追加_申請なしの追加.getコード().equals(受給申請事由コード)) {
-            受給申請事由 = 受給申請事由_追加;
+            return 受給申請事由_追加;
         }
-        return 受給申請事由;
+        return RString.EMPTY;
     }
 
     private RString get受給直近事由(RString 直近異動事由コード) {
@@ -611,8 +607,7 @@ public class HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate {
             csvEntity.set銀行名(金融機関 != null ? 金融機関.get金融機関名称() : RString.EMPTY);
             csvEntity.set支店名カナ(支店 != null ? 支店.get支店カナ名称() : RString.EMPTY);
             csvEntity.set支店名(支店 != null ? 支店.get支店名称() : RString.EMPTY);
-            YokinShubetsuPattern 口座種目 = 口座.get預金種別();
-            csvEntity.set口座種目(口座種目 != null ? 口座種目.get預金種別名称() : RString.EMPTY);
+            csvEntity.set口座種目(口座.get預金種別略称() != null ? 口座.get預金種別略称() : RString.EMPTY);
             csvEntity.set口座番号(口座.get口座番号());
 
             AtenaKanaMeisho 名義人カナ = 口座.get口座名義人();
@@ -621,12 +616,12 @@ public class HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate {
             csvEntity.set名義人(名義人 != null ? 名義人.getColumnValue() : RString.EMPTY);
             if (名義人カナ != null && 名義人カナ.getColumnValue().toString().length() > INT_8) {
                 csvEntity.set名義人カナ短(new RString(名義人カナ.getColumnValue()
-                        .toString().substring(0, INT_7)));
+                        .toString().substring(0, INT_8)));
             } else {
                 csvEntity.set名義人カナ短(名義人カナ != null ? 名義人カナ.getColumnValue() : RString.EMPTY);
             }
             if (名義人 != null && 名義人.getColumnValue().length() > INT_20) {
-                csvEntity.set名義人短(名義人.getColumnValue().substring(0, INT_19));
+                csvEntity.set名義人短(名義人.getColumnValue().substring(0, INT_20));
             } else {
                 csvEntity.set名義人短(名義人 != null ? 名義人.getColumnValue() : RString.EMPTY);
             }
