@@ -59,7 +59,7 @@ public class HanyoListKyodoJukyushaOutputProcess extends BatchProcessBase<KyodoJ
                     + "IHanyoListKyodoJukyushaMapper.select共同処理用受給者情報");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC701005");
     private final RString csvFileName = new RString("HanyoList_KyodoJukyushaKihon.csv");
-    private static final RString 日本語ファイル名 = new RString("汎用リスト　共同受給者基本情報");
+    private static final RString 日本語ファイル名 = new RString("汎用リスト　共同受給者基本情報CSV");
     private static final RString 定数_なし = new RString("なし");
     private static final RString 定数_あり = new RString("あり");
     private static final RString TITLE_抽出条件 = new RString("【抽出条件】");
@@ -157,7 +157,6 @@ public class HanyoListKyodoJukyushaOutputProcess extends BatchProcessBase<KyodoJ
         } else {
             spoolManager.spool(eucFilePath);
         }
-        csvWriter.close();
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
                 EUC_ENTITY_ID.toRString(),
                 地方公共団体情報.getLasdecCode_().value(),
