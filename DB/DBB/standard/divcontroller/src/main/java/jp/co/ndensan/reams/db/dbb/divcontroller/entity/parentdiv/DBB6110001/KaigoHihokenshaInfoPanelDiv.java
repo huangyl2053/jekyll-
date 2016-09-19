@@ -4,25 +4,24 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB6110001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kaigofukakihon.KaigoFukaKihon.IKaigoFukaKihonDiv;
-import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kaigofukakihon.KaigoFukaKihon.KaigoFukaKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.IKaigoAtenaInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.KaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * KaigoHihokenshaInfoPanel のクラスファイル 
- * 
- * @author 自動生成
+ * KaigoHihokenshaInfoPanel のクラスファイル
+ *
+ * @reamsid_L DBB-1640-010 jiangzongyue
  */
 public class KaigoHihokenshaInfoPanelDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
@@ -236,7 +235,7 @@ public class KaigoHihokenshaInfoPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnAdd(Button btnAdd) {
+    public void setBtnAdd(Button btnAdd) {
         this.getRentaiGimushaIchiran().setBtnAdd(btnAdd);
     }
 
@@ -246,7 +245,7 @@ public class KaigoHihokenshaInfoPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgRentaiNofuGimushaIchiran(DataGrid<dgRentaiNofuGimushaIchiran_Row> dgRentaiNofuGimushaIchiran) {
+    public void setDgRentaiNofuGimushaIchiran(DataGrid<dgRentaiNofuGimushaIchiran_Row> dgRentaiNofuGimushaIchiran) {
         this.getRentaiGimushaIchiran().setDgRentaiNofuGimushaIchiran(dgRentaiNofuGimushaIchiran);
     }
 
@@ -256,7 +255,7 @@ public class KaigoHihokenshaInfoPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDgSetaiIchiran(DataGrid<dgSetaiIchiran_Row> dgSetaiIchiran) {
+    public void setDgSetaiIchiran(DataGrid<dgSetaiIchiran_Row> dgSetaiIchiran) {
         this.getSetaiIchiran().setDgSetaiIchiran(dgSetaiIchiran);
     }
 
@@ -266,7 +265,7 @@ public class KaigoHihokenshaInfoPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnRentaiNofuGimushaKensaku(ButtonDialog btnRentaiNofuGimushaKensaku) {
+    public void setBtnRentaiNofuGimushaKensaku(ButtonDialog btnRentaiNofuGimushaKensaku) {
         this.getSetaiIchiran().setBtnRentaiNofuGimushaKensaku(btnRentaiNofuGimushaKensaku);
     }
 
@@ -276,7 +275,7 @@ public class KaigoHihokenshaInfoPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKaishiYMD(TextBoxDate txtKaishiYMD) {
+    public void setTxtKaishiYMD(TextBoxDate txtKaishiYMD) {
         this.getRentaiNofuGimushaInfo().setTxtKaishiYMD(txtKaishiYMD);
     }
 
@@ -286,7 +285,7 @@ public class KaigoHihokenshaInfoPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShuryoYMD(TextBoxDate txtShuryoYMD) {
+    public void setTxtShuryoYMD(TextBoxDate txtShuryoYMD) {
         this.getRentaiNofuGimushaInfo().setTxtShuryoYMD(txtShuryoYMD);
     }
 
@@ -296,7 +295,7 @@ public class KaigoHihokenshaInfoPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setLin1(HorizontalLine lin1) {
+    public void setLin1(HorizontalLine lin1) {
         this.getRentaiNofuGimushaInfo().setLin1(lin1);
     }
 
@@ -306,7 +305,7 @@ public class KaigoHihokenshaInfoPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShikibetsuCode(TextBoxShikibetsuCode txtShikibetsuCode) {
+    public void setTxtShikibetsuCode(TextBoxShikibetsuCode txtShikibetsuCode) {
         this.getRentaiNofuGimushaInfo().setTxtShikibetsuCode(txtShikibetsuCode);
     }
 
@@ -316,7 +315,7 @@ public class KaigoHihokenshaInfoPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtSetaiCode(TextBoxSetaiCode txtSetaiCode) {
+    public void setTxtSetaiCode(TextBoxSetaiCode txtSetaiCode) {
         this.getRentaiNofuGimushaInfo().setTxtSetaiCode(txtSetaiCode);
     }
 
@@ -326,7 +325,7 @@ public class KaigoHihokenshaInfoPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtUmareYMD(TextBoxDate txtUmareYMD) {
+    public void setTxtUmareYMD(TextBoxDate txtUmareYMD) {
         this.getRentaiNofuGimushaInfo().setTxtUmareYMD(txtUmareYMD);
     }
 
@@ -336,7 +335,7 @@ public class KaigoHihokenshaInfoPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtJuminShu(TextBox txtJuminShu) {
+    public void setTxtJuminShu(TextBox txtJuminShu) {
         this.getRentaiNofuGimushaInfo().setTxtJuminShu(txtJuminShu);
     }
 
@@ -346,7 +345,7 @@ public class KaigoHihokenshaInfoPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShimei(TextBox txtShimei) {
+    public void setTxtShimei(TextBox txtShimei) {
         this.getRentaiNofuGimushaInfo().setTxtShimei(txtShimei);
     }
 
@@ -356,7 +355,7 @@ public class KaigoHihokenshaInfoPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtSeibetsu(TextBox txtSeibetsu) {
+    public void setTxtSeibetsu(TextBox txtSeibetsu) {
         this.getRentaiNofuGimushaInfo().setTxtSeibetsu(txtSeibetsu);
     }
 
@@ -366,7 +365,7 @@ public class KaigoHihokenshaInfoPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtZokuGara(TextBox txtZokuGara) {
+    public void setTxtZokuGara(TextBox txtZokuGara) {
         this.getRentaiNofuGimushaInfo().setTxtZokuGara(txtZokuGara);
     }
 
@@ -376,7 +375,7 @@ public class KaigoHihokenshaInfoPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtJusho(TextBoxJusho txtJusho) {
+    public void setTxtJusho(TextBoxJusho txtJusho) {
         this.getRentaiNofuGimushaInfo().setTxtJusho(txtJusho);
     }
 
@@ -386,7 +385,7 @@ public class KaigoHihokenshaInfoPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnKakutei(Button btnKakutei) {
+    public void setBtnKakutei(Button btnKakutei) {
         this.getRentaiNofuGimushaInfo().setBtnKakutei(btnKakutei);
     }
 
@@ -396,7 +395,7 @@ public class KaigoHihokenshaInfoPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnCancel(Button btnCancel) {
+    public void setBtnCancel(Button btnCancel) {
         this.getRentaiNofuGimushaInfo().setBtnCancel(btnCancel);
     }
 
@@ -406,7 +405,7 @@ public class KaigoHihokenshaInfoPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtRirekiNo(TextBox txtRirekiNo) {
+    public void setTxtRirekiNo(TextBox txtRirekiNo) {
         this.getRentaiNofuGimushaInfo().setTxtRirekiNo(txtRirekiNo);
     }
 

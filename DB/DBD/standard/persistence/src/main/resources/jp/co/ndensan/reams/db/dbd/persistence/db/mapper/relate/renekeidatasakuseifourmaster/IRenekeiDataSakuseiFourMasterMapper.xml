@@ -3,7 +3,7 @@
 <!-- @reamsid_L DBD-2100-020 liwul-->
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.renekeidatasakuseifourmaster.IRenekeiDataSakuseiFourMasterMapper">
     
-    <select id="get認定調査員情報ＩＦのcsv情報" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd519002.RenekeiDataSakuseiMyBatisParameter"
+    <select resultOrdered="true" id="get認定調査員情報ＩＦのcsv情報" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd519002.RenekeiDataSakuseiMyBatisParameter"
     resultMap="ResultMap_ChosainEntity" fetchSize="500">
         SELECT
         "DbT5913ChosainJoho"."ninteiChosaItakusakiCode" as "DbT5913ChosainJoho_ninteiChosaItakusakiCode",
@@ -25,7 +25,7 @@
             AND "DbT5913ChosainJoho"."insertTimestamp" <![CDATA[<]]> #{今回処理日時終了日時の年月日時分秒}
         </if>    
     </select>
-    <select id="get調査委託先情報ＩＦのcsv情報" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd519002.RenekeiDataSakuseiMyBatisParameter"
+    <select resultOrdered="true" id="get調査委託先情報ＩＦのcsv情報" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd519002.RenekeiDataSakuseiMyBatisParameter"
     resultMap="ResultMap_ChosaitakusakiEntity" fetchSize="500">
         SElECT
         "DbT5910NinteichosaItakusakiJoho"."ninteichosaItakusakiCode" as "DbT5910NinteichosaItakusakiJoho_ninteichosaItakusakiCode",
@@ -49,7 +49,7 @@
             AND "DbT5910NinteichosaItakusakiJoho"."insertTimestamp" <![CDATA[<]]> #{今回処理日時終了日時の年月日時分秒}
         </if> 
     </select>
-    <select id="get主治医医療機関情報ＩＦのcsv情報" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd519002.RenekeiDataSakuseiMyBatisParameter"
+    <select resultOrdered="true" id="get主治医医療機関情報ＩＦのcsv情報" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd519002.RenekeiDataSakuseiMyBatisParameter"
     resultMap="ResultMap_ShujiiIryokikanEntity" fetchSize="500">
         SElECT
         "DbT5911ShujiiIryoKikanJoho"."iryokikanCode" as "DbT5911ShujiiIryoKikanJoho_iryokikanCode",
@@ -73,7 +73,7 @@
         </if> 
         
     </select>
-    <select id="get主治医情報情報ＩＦのcsv情報" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd519002.RenekeiDataSakuseiMyBatisParameter"
+    <select resultOrdered="true" id="get主治医情報情報ＩＦのcsv情報" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd519002.RenekeiDataSakuseiMyBatisParameter"
     resultMap="ResultMap_ShujiiEntity" fetchSize="500">
         SElECT
         "DbT5912ShujiiJoho"."shujiiIryokikanCode" as "DbT5912ShujiiJoho_shujiiIryokikanCode",
@@ -94,7 +94,7 @@
             AND "DbT5912ShujiiJoho"."insertTimestamp" <![CDATA[<]]> #{今回処理日時終了日時の年月日時分秒}
         </if>   
     </select>
-    <select id="get要介護認定外部データ出力履歴" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd519002.RenekeiDataSakuseiMyBatisParameter"
+    <select resultOrdered="true" id="get要介護認定外部データ出力履歴" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd519002.RenekeiDataSakuseiMyBatisParameter"
     resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd5190001.DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity" fetchSize="500" >
         SELECT * 
         FROM
