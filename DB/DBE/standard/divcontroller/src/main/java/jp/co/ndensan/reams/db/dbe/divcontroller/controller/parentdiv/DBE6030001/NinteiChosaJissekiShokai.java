@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE6030001;
 
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.chosahyojissekiichiran.ChosahyoJissekiIchiranBatchParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601003.DBE601003_ShinsakaiiinJissekiParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosahyojissekiichiran.ChosahyoJissekiIchiranMybitisParamter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6030001.NinteiChosaJissekiShokaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6030001.NinteiChosaJissekiShokaiHandler;
@@ -106,8 +106,8 @@ public class NinteiChosaJissekiShokai {
      * @param div 画面情報
      * @return ResponseData<NinteiChosaJissekiShokaiBatchParameter>
      */
-    public ResponseData<ChosahyoJissekiIchiranBatchParameter> onClick_BtnShutsutyoku(NinteiChosaJissekiShokaiDiv div) {
-        ChosahyoJissekiIchiranBatchParameter param = getHandler(div).createBatchParam(CSVを出力する);
+    public ResponseData<DBE601003_ShinsakaiiinJissekiParameter> onClick_BtnShutsutyoku(NinteiChosaJissekiShokaiDiv div) {
+        DBE601003_ShinsakaiiinJissekiParameter param = getHandler(div).createBatchParam(CSVを出力する);
         return ResponseData.of(param).respond();
     }
 
@@ -117,8 +117,8 @@ public class NinteiChosaJissekiShokai {
      * @param div 画面情報
      * @return ResponseData<NinteiChosaJissekiShokaiBatchParameter>
      */
-    public ResponseData<ChosahyoJissekiIchiranBatchParameter> onClick_BtnPulish(NinteiChosaJissekiShokaiDiv div) {
-        ChosahyoJissekiIchiranBatchParameter param = getHandler(div).createBatchParam(集計表を発行する);
+    public ResponseData<DBE601003_ShinsakaiiinJissekiParameter> onClick_BtnPulish(NinteiChosaJissekiShokaiDiv div) {
+        DBE601003_ShinsakaiiinJissekiParameter param = getHandler(div).createBatchParam(集計表を発行する);
         return ResponseData.of(param).respond();
     }
 
