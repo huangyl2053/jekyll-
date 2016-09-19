@@ -22,8 +22,6 @@ public class TokubetsuChoshuIraiJohoIchiranEntity implements Serializable {
     private RString 市町村コード;
     private RString 市町村名称;
     private RString 保険者番号;
-    private RString 被保険者氏名;
-    private RString 町域コード;
     private RString 保険者名称;
     private RString 表示コード名称1;
     private RString 表示コード名称2;

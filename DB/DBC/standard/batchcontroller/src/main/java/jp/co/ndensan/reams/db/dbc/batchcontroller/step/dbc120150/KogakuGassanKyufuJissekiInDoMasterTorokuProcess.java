@@ -47,9 +47,7 @@ public class KogakuGassanKyufuJissekiInDoMasterTorokuProcess
     protected void initialize() {
         super.initialize();
         dbParameter = new KogakuGassanKyufuJissekiInLoginMybatisParameter();
-
         dbParameter.set処理年月(parameter.get処理年月());
-
     }
 
     @Override
@@ -68,15 +66,14 @@ public class KogakuGassanKyufuJissekiInDoMasterTorokuProcess
         if (entity.get高額合算給付実績一時() != null) {
             採番 = Saiban.get(SubGyomuCode.DBZ介護共通, entity.get高額合算給付実績一時().getSeiriNo(), 年度, count);
         }
-        DbWT38P1KogakuGassanKyufuJissekiTempEntity 高額合算給付実績一時 = entity.get高額合算給付実績一時();
         DbT3075KogakuGassanKyufuJissekiEntity 高額合算給付実績 = entity.get高額合算給付実績();
-        if (!(高額合算給付実績一時.getHihokenshaNoIn().equals(高額合算給付実績.getHihokenshaNo())
-                && 高額合算給付実績一時.getShikyuShinseiSeiriNo().equals(高額合算給付実績.getShikyuShinseiSeiriNo())
-                && 高額合算給付実績一時.getJikoFutanSeiriNo().equals(高額合算給付実績.getJikoFutanSeiriNo())
-                && 高額合算給付実績一時.getShikyuGaku().equals(高額合算給付実績.getShikyuGaku()))) {
+
+        if (高額合算給付実績 != null) {
             doデータ追加(entity);
             count = count + 1;
+
         }
+
     }
 
     private void doデータ追加(KogakuGassanKyufuJissekiInDoMasterTorokuEntity entity) {
