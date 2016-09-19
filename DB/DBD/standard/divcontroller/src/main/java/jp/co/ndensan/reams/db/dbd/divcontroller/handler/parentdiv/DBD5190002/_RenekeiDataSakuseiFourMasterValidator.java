@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 
 /**
- * 要介護認定関連データ作成画面の入力チェッククラスです
+ * 要介護認定関連データ作成画面の入力チェッククラスです。
  *
  * @reamsid_L DBD-2100-010 liwul
  */
@@ -21,7 +21,7 @@ public class _RenekeiDataSakuseiFourMasterValidator implements IValidatable {
     private final RenekeiDataSakuseiFourMasterDiv div;
 
     /**
-     * バリデーション
+     * バリデーション。
      *
      * @param div ドメインオブジェクトを取り出したい{@link RenekeiDataSakuseiFourMasterDiv}
      */

@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.service.core.kogakuservicehijuryoininkeiyakushoninkakuninsho;
 
 import jp.co.ndensan.reams.db.dbc.definition.core.shoninkubun.ShoninKubun;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3076KogakuJuryoininKeiyakuJigyoshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc010020.KogakuServicehiJuryoininKeiyakuShoninKakuninshoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc010020.ServiceEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc100031.KogakuServiceHiJyuryoItakuKeiyakuKakuninShoEntity;
@@ -28,7 +29,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 高額サービス費受領委任契約承認（不承認）確認書作成サービスのクラスです。
@@ -94,6 +94,7 @@ public class KogakuServicehiJuryoininKeiyakuShoninService {
             SofubutsuAtesakiSource 宛先Source, KogakuServicehiJuryoininKeiyakuShoninKakuninshoEntity entity) {
         KogakuServiceHiJyuryoItakuKeiyakuKakuninShoEntity 介護保険高額Entity = new KogakuServiceHiJyuryoItakuKeiyakuKakuninShoEntity();
         DbT7060KaigoJigyoshaEntity 介護事業者 = entity.get介護事業者();
+        DbT3076KogakuJuryoininKeiyakuJigyoshaEntity 高額介護事業者 = entity.get高額介護事業者();
         介護保険高額Entity.set郵便番号(宛先Source.yubinNo);
         介護保険高額Entity.set行政区(宛先Source.gyoseiku);
         介護保険高額Entity.set住所Text(宛先Source.jushoText);
@@ -126,15 +127,15 @@ public class KogakuServicehiJuryoininKeiyakuShoninService {
         介護保険高額Entity.setカスタマバーコード(宛先Source.customerBarCode);
         介護保険高額Entity.set被保険者氏名カナ(entity.getカナ名称().value());
         介護保険高額Entity.set被保険者氏名(entity.get名称().value());
-        介護保険高額Entity.set被保険者番号(entity.get高額介護事業者().getHihokenshaNo().value());
+        介護保険高額Entity.set被保険者番号(高額介護事業者.getHihokenshaNo().value());
         介護保険高額Entity.set受付日(
-                do日付編集パターン_12(entity.get高額介護事業者().getUketsukeYMD()));
+                do日付編集パターン_12(高額介護事業者.getUketsukeYMD()));
         介護保険高額Entity.set承認区分(
-                ShoninKubun.toValue(entity.get高額介護事業者().getShoninKekkaKubun()).get名称());
+                ShoninKubun.toValue(高額介護事業者.getShoninKekkaKubun()).get名称());
         介護保険高額Entity.set承認年月日(
-                do日付編集パターン_12(entity.get高額介護事業者().getKetteiYMD()));
-        if (ShoninKubun.承認する.getコード().equals(ShoninKubun.toValue(entity.get高額介護事業者().getShoninKekkaKubun()).getコード())) {
-            介護保険高額Entity.set不承認理由(entity.get高額介護事業者().getFuShoninRiyu());
+                do日付編集パターン_12(高額介護事業者.getKetteiYMD()));
+        if (ShoninKubun.承認しない.getコード().equals(ShoninKubun.toValue(高額介護事業者.getShoninKekkaKubun()).getコード())) {
+            介護保険高額Entity.set不承認理由(高額介護事業者.getFuShoninRiyu());
         }
         介護保険高額Entity.set事業所名(介護事業者.getJigyoshaName().value());
         介護保険高額Entity.set代表者名(entity.get介護事業者代表者().getDaihyoshaShimei().value());
@@ -150,8 +151,10 @@ public class KogakuServicehiJuryoininKeiyakuShoninService {
         if (null != telNo) {
             介護保険高額Entity.set事業所電話番号(telNo.value());
         }
-        介護保険高額Entity.set利用者負担上限額(
-                doカンマ編集(entity.get高額介護事業者().getRiyoshaFutanJogenGaku()));
+        Decimal 利用者負担上限額 = 高額介護事業者.getRiyoshaFutanJogenGaku();
+        if (利用者負担上限額 != null) {
+            介護保険高額Entity.set利用者負担上限額(new RString(利用者負担上限額.toString()));
+        }
         return 介護保険高額Entity;
     }
 
@@ -176,13 +179,6 @@ public class KogakuServicehiJuryoininKeiyakuShoninService {
             tmp = rstr.substring(from - 1, to);
         }
         return tmp;
-    }
-
-    private RString doカンマ編集(Decimal decimal) {
-        if (null != decimal) {
-            return DecimalFormatter.toコンマ区切りRString(decimal, 0);
-        }
-        return RString.EMPTY;
     }
 
     private RString do日付編集パターン_12(FlexibleDate date) {

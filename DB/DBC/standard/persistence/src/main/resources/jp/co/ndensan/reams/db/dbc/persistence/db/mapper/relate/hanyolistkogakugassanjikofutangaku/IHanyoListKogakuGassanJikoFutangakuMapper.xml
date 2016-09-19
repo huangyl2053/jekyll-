@@ -25,13 +25,13 @@
         最新被保台帳."jushochiTokureiFlag" AS 最新被保台帳_住所地特例フラグ,
         高額合算自己負担額."taishoNendo" AS 高額合算自己負担額_対象年度,
         高額合算自己負担額."hokenshaNo" AS 高額合算自己負担額_保険者番号,
-        高額合算自己負担額."shikyuShinseishoSeiriNo" AS 高額合算自己負担額_支給申請書整理番号,
+        高額合算自己負担額."shikyuShinseishoSeiriNo" AS 高額合算自己負担額_整理番号,
         高額合算自己負担額."rirekiNo" AS 高額合算自己負担額_履歴番号,
         高額合算自己負担額."shotokuKubun" AS 高額合算自己負担額_所得区分,
-        高額合算自己負担額."over70_ShotokuKubun" AS 高額合算自己負担額_70歳以上の者に係る所得区分,
-        高額合算自己負担額."jikoFutanSeiriNo" AS 高額合算自己負担額_自己負担額証明書整理番号,
+        高額合算自己負担額."over70_ShotokuKubun" AS 高額合算自己負担額_70歳以上所得区分,
+        高額合算自己負担額."jikoFutanSeiriNo" AS 高額合算自己負担額_証明書整理番号,
         高額合算自己負担額."idoKubun" AS 高額合算自己負担額_異動区分,
-        高額合算自己負担額."hoseiZumiSofuKubun" AS 高額合算自己負担額_補正済自己負担額送付区分,
+        高額合算自己負担額."hoseiZumiSofuKubun" AS 高額合算自己負担額_補正済送付区分,
         高額合算自己負担額."taishoKeisanKaishiYMD" AS 高額合算自己負担額_対象計算期間開始年月日,
         高額合算自己負担額."taishoKeisanShuryoYMD" AS 高額合算自己負担額_対象計算期間終了年月日,
         高額合算自己負担額."hihokenshaKaishiYMD" AS 高額合算自己負担額_被保険者期間開始年月日,
@@ -41,114 +41,124 @@
         高額合算自己負担額."gokei_70_74JikoFutanGaku" AS 高額合算自己負担額_合計_70_74自己負担額_内訳,
         高額合算自己負担額."gokei_70_74KogakuShikyuGaku" AS 高額合算自己負担額_合計_70_74高額支給額,
         高額合算自己負担額."sumi_Gokei_JikoFutanGaku" AS 高額合算自己負担額_補正済_合計_自己負担額,
-        高額合算自己負担額."sumi_Gokei_70_74JikoFutanGaku" AS 高額合算自己負担額_補正済_合計_70_74自己負担額_内訳,
-        高額合算自己負担額."sumi_Gokei_70_74KogakuShikyuGaku" AS 高額合算自己負担額_補正済_合計_70_74高額支給額,
+        高額合算自己負担額."sumi_Gokei_70_74JikoFutanGaku" AS 高額合算自己負担額_補70_74_内訳,
+        高額合算自己負担額."sumi_Gokei_70_74KogakuShikyuGaku" AS 高額合算自己負担額_補70_74高額支給額,
         高額合算自己負担額."dataSakuseiKubun" AS 高額合算自己負担額_データ作成区分,
-        高額合算自己負担額."kakunin_UketoriYM" AS 高額合算自己負担額_自己負担額確認情報受取年月,
-        高額合算自己負担額."hoseiZumi_SofuYM" AS 高額合算自己負担額_補正済自己負担額情報送付年月,
-        高額合算自己負担額."shomeisho_UketoriYM" AS 高額合算自己負担額_自己負担額証明書情報受取年月,
+        高額合算自己負担額."kakunin_UketoriYM" AS 高額合算自己負担額_確認情報受取年月,
+        高額合算自己負担額."hoseiZumi_SofuYM" AS 高額合算自己負担額_補情報送付年月,
+        高額合算自己負担額."shomeisho_UketoriYM" AS 高額合算自己負担額_情報受取年月,
         高額合算自己負担額."sofuTaishoGaiFlag" AS 高額合算自己負担額_送付対象外フラグ,
         高額合算自己負担額."jikoFutanKeisanYMD" AS 高額合算自己負担額_自己負担額計算年月日,
-        高額合算自己負担額."shomeiShoSakuseiYMD" AS 高額合算自己負担額_自己負担額証明書作成年月日,
+        高額合算自己負担額."shomeiShoSakuseiYMD" AS 高額合算自己負担額_作成年月日,
         高額合算自己負担額."batchHoseiJissiYMD" AS 高額合算自己負担額_バッチ補正実施年月日,
         高額合算自己負担額."realHoseiJissiYMD" AS 高額合算自己負担額_リアル補正実施年月日,
         高額合算自己負担額."hihokenshaNo" AS 高額合算自己負担額_被保険者番号,
+        受給者台帳.受給者台帳_受給申請事由,
+        受給者台帳.受給者台帳_要支援者認定申請区分,
+        受給者台帳.受給者台帳_受給申請年月日,
+        受給者台帳.受給者台帳_要介護認定状態区分コード,
+        受給者台帳.受給者台帳_認定有効期間開始年月日,
+        受給者台帳.受給者台帳_認定有効期間終了年月日,
+        受給者台帳.受給者台帳_認定年月日,
+        受給者台帳.受給者台帳_旧措置者フラグ,
+        受給者台帳.受給者台帳_みなし要介護区分コード,
+        受給者台帳.受給者台帳_直近異動事由コード,
         高額合算自己負担額明細004."jikoFutanGaku" AS 高額合算自己負担額明細004_自己負担額,
-        高額合算自己負担額明細004."uchisu_70_74JikoFutanGaku" AS 高額合算自己負担額明細004_70_74自己負担額_内数,
+        高額合算自己負担額明細004."uchisu_70_74JikoFutanGaku" AS 高額合算自己負担額明細004_70_74内数,
         高額合算自己負担額明細004."over_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細004_70_74高額支給額,
         高額合算自己負担額明細005."jikoFutanGaku" AS 高額合算自己負担額明細005_自己負担額,
-        高額合算自己負担額明細005."uchisu_70_74JikoFutanGaku" AS 高額合算自己負担額明細005_70_74自己負担額_内数,
+        高額合算自己負担額明細005."uchisu_70_74JikoFutanGaku" AS 高額合算自己負担額明細005_70_74内数,
         高額合算自己負担額明細005."over_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細005_70_74高額支給額,
         高額合算自己負担額明細006."jikoFutanGaku" AS 高額合算自己負担額明細006_自己負担額,
-        高額合算自己負担額明細006."uchisu_70_74JikoFutanGaku" AS 高額合算自己負担額明細006_70_74自己負担額_内数,
+        高額合算自己負担額明細006."uchisu_70_74JikoFutanGaku" AS 高額合算自己負担額明細006_70_74内数,
         高額合算自己負担額明細006."over_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細006_70_74高額支給額,
         高額合算自己負担額明細007."jikoFutanGaku" AS 高額合算自己負担額明細007_自己負担額,
-        高額合算自己負担額明細007."uchisu_70_74JikoFutanGaku" AS 高額合算自己負担額明細007_70_74自己負担額_内数,
+        高額合算自己負担額明細007."uchisu_70_74JikoFutanGaku" AS 高額合算自己負担額明細007_70_74内数,
         高額合算自己負担額明細007."over_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細007_70_74高額支給額,
         高額合算自己負担額明細008."jikoFutanGaku" AS 高額合算自己負担額明細008_自己負担額,
-        高額合算自己負担額明細008."uchisu_70_74JikoFutanGaku" AS 高額合算自己負担額明細008_70_74自己負担額_内数,
+        高額合算自己負担額明細008."uchisu_70_74JikoFutanGaku" AS 高額合算自己負担額明細008_70_74内数,
         高額合算自己負担額明細008."over_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細008_70_74高額支給額,
         高額合算自己負担額明細009."jikoFutanGaku" AS 高額合算自己負担額明細009_自己負担額,
-        高額合算自己負担額明細009."uchisu_70_74JikoFutanGaku" AS 高額合算自己負担額明細009_70_74自己負担額_内数,
+        高額合算自己負担額明細009."uchisu_70_74JikoFutanGaku" AS 高額合算自己負担額明細009_70_74内数,
         高額合算自己負担額明細009."over_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細009_70_74高額支給額,
         高額合算自己負担額明細010."jikoFutanGaku" AS 高額合算自己負担額明細010_自己負担額,
-        高額合算自己負担額明細010."uchisu_70_74JikoFutanGaku" AS 高額合算自己負担額明細010_70_74自己負担額_内数,
+        高額合算自己負担額明細010."uchisu_70_74JikoFutanGaku" AS 高額合算自己負担額明細010_70_74内数,
         高額合算自己負担額明細010."over_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細010_70_74高額支給額,
         高額合算自己負担額明細011."jikoFutanGaku" AS 高額合算自己負担額明細011_自己負担額,
-        高額合算自己負担額明細011."uchisu_70_74JikoFutanGaku" AS 高額合算自己負担額明細011_70_74自己負担額_内数,
+        高額合算自己負担額明細011."uchisu_70_74JikoFutanGaku" AS 高額合算自己負担額明細011_70_74内数,
         高額合算自己負担額明細011."over_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細011_70_74高額支給額,
         高額合算自己負担額明細012."jikoFutanGaku" AS 高額合算自己負担額明細012_自己負担額,
-        高額合算自己負担額明細012."uchisu_70_74JikoFutanGaku" AS 高額合算自己負担額明細012_70_74自己負担額_内数,
+        高額合算自己負担額明細012."uchisu_70_74JikoFutanGaku" AS 高額合算自己負担額明細012_70_74内数,
         高額合算自己負担額明細012."over_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細012_70_74高額支給額,
         高額合算自己負担額明細101."jikoFutanGaku" AS 高額合算自己負担額明細101_自己負担額,
-        高額合算自己負担額明細101."uchisu_70_74JikoFutanGaku" AS 高額合算自己負担額明細101_70_74自己負担額_内数,
+        高額合算自己負担額明細101."uchisu_70_74JikoFutanGaku" AS 高額合算自己負担額明細101_70_74内数,
         高額合算自己負担額明細101."over_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細101_70_74高額支給額,
         高額合算自己負担額明細102."jikoFutanGaku" AS 高額合算自己負担額明細102_自己負担額,
-        高額合算自己負担額明細102."uchisu_70_74JikoFutanGaku" AS 高額合算自己負担額明細102_70_74自己負担額_内数,
+        高額合算自己負担額明細102."uchisu_70_74JikoFutanGaku" AS 高額合算自己負担額明細102_70_74内数,
         高額合算自己負担額明細102."over_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細102_70_74高額支給額,
         高額合算自己負担額明細103."jikoFutanGaku" AS 高額合算自己負担額明細103_自己負担額,
-        高額合算自己負担額明細103."uchisu_70_74JikoFutanGaku" AS 高額合算自己負担額明細103_70_74自己負担額_内数,
+        高額合算自己負担額明細103."uchisu_70_74JikoFutanGaku" AS 高額合算自己負担額明細103_70_74内数,
         高額合算自己負担額明細103."over_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細103_70_74高額支給額,
         高額合算自己負担額明細104."jikoFutanGaku" AS 高額合算自己負担額明細104_自己負担額,
-        高額合算自己負担額明細104."uchisu_70_74JikoFutanGaku" AS 高額合算自己負担額明細104_70_74自己負担額_内数,
+        高額合算自己負担額明細104."uchisu_70_74JikoFutanGaku" AS 高額合算自己負担額明細104_70_74内数,
         高額合算自己負担額明細104."over_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細104_70_74高額支給額,
         高額合算自己負担額明細105."jikoFutanGaku" AS 高額合算自己負担額明細105_自己負担額,
-        高額合算自己負担額明細105."uchisu_70_74JikoFutanGaku" AS 高額合算自己負担額明細105_70_74自己負担額_内数,
+        高額合算自己負担額明細105."uchisu_70_74JikoFutanGaku" AS 高額合算自己負担額明細105_70_74内数,
         高額合算自己負担額明細105."over_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細105_70_74高額支給額,
         高額合算自己負担額明細106."jikoFutanGaku" AS 高額合算自己負担額明細106_自己負担額,
-        高額合算自己負担額明細106."uchisu_70_74JikoFutanGaku" AS 高額合算自己負担額明細106_70_74自己負担額_内数,
+        高額合算自己負担額明細106."uchisu_70_74JikoFutanGaku" AS 高額合算自己負担額明細106_70_74内数,
         高額合算自己負担額明細106."over_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細106_70_74高額支給額,
         高額合算自己負担額明細107."jikoFutanGaku" AS 高額合算自己負担額明細107_自己負担額,
-        高額合算自己負担額明細107."uchisu_70_74JikoFutanGaku" AS 高額合算自己負担額明細107_70_74自己負担額_内数,
+        高額合算自己負担額明細107."uchisu_70_74JikoFutanGaku" AS 高額合算自己負担額明細107_70_74内数,
         高額合算自己負担額明細107."over_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細107_70_74高額支給額,
         高額合算自己負担額明細004."sumi_JikoFutanGaku" AS 高額合算自己負担額明細004_補正済_自己負担額,
-        高額合算自己負担額明細004."sumi_70_74JikoFutanGaku"  AS 高額合算自己負担額明細004_補正済_70_74自己負担額_内数,
-        高額合算自己負担額明細004."sumi_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細004_補正済_70_74高額支給額,
+        高額合算自己負担額明細004."sumi_70_74JikoFutanGaku"  AS 高額合算自己負担額明細004_補70_74内数,
+        高額合算自己負担額明細004."sumi_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細004_補70_74高額支給額,
         高額合算自己負担額明細005."sumi_JikoFutanGaku" AS 高額合算自己負担額明細005_補正済_自己負担額,
-        高額合算自己負担額明細005."sumi_70_74JikoFutanGaku"  AS 高額合算自己負担額明細005_補正済_70_74自己負担額_内数,
-        高額合算自己負担額明細005."sumi_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細005_補正済_70_74高額支給額,
+        高額合算自己負担額明細005."sumi_70_74JikoFutanGaku"  AS 高額合算自己負担額明細005_補70_74内数,
+        高額合算自己負担額明細005."sumi_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細005_補70_74高額支給額,
         高額合算自己負担額明細006."sumi_JikoFutanGaku" AS 高額合算自己負担額明細006_補正済_自己負担額,
-        高額合算自己負担額明細006."sumi_70_74JikoFutanGaku"  AS 高額合算自己負担額明細006_補正済_70_74自己負担額_内数,
-        高額合算自己負担額明細006."sumi_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細006_補正済_70_74高額支給額,
+        高額合算自己負担額明細006."sumi_70_74JikoFutanGaku"  AS 高額合算自己負担額明細006_補70_74内数,
+        高額合算自己負担額明細006."sumi_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細006_補70_74高額支給額,
         高額合算自己負担額明細007."sumi_JikoFutanGaku" AS 高額合算自己負担額明細007_補正済_自己負担額,
-        高額合算自己負担額明細007."sumi_70_74JikoFutanGaku"  AS 高額合算自己負担額明細007_補正済_70_74自己負担額_内数,
-        高額合算自己負担額明細007."sumi_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細007_補正済_70_74高額支給額,
+        高額合算自己負担額明細007."sumi_70_74JikoFutanGaku"  AS 高額合算自己負担額明細007_補70_74内数,
+        高額合算自己負担額明細007."sumi_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細007_補70_74高額支給額,
         高額合算自己負担額明細008."sumi_JikoFutanGaku" AS 高額合算自己負担額明細008_補正済_自己負担額,
-        高額合算自己負担額明細008."sumi_70_74JikoFutanGaku"  AS 高額合算自己負担額明細008_補正済_70_74自己負担額_内数,
-        高額合算自己負担額明細008."sumi_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細008_補正済_70_74高額支給額,
+        高額合算自己負担額明細008."sumi_70_74JikoFutanGaku"  AS 高額合算自己負担額明細008_補70_74内数,
+        高額合算自己負担額明細008."sumi_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細008_補70_74高額支給額,
         高額合算自己負担額明細009."sumi_JikoFutanGaku" AS 高額合算自己負担額明細009_補正済_自己負担額,
-        高額合算自己負担額明細009."sumi_70_74JikoFutanGaku"  AS 高額合算自己負担額明細009_補正済_70_74自己負担額_内数,
-        高額合算自己負担額明細009."sumi_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細009_補正済_70_74高額支給額,
+        高額合算自己負担額明細009."sumi_70_74JikoFutanGaku"  AS 高額合算自己負担額明細009_補70_74内数,
+        高額合算自己負担額明細009."sumi_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細009_補70_74高額支給額,
         高額合算自己負担額明細010."sumi_JikoFutanGaku" AS 高額合算自己負担額明細010_補正済_自己負担額,
-        高額合算自己負担額明細010."sumi_70_74JikoFutanGaku"  AS 高額合算自己負担額明細010_補正済_70_74自己負担額_内数,
-        高額合算自己負担額明細010."sumi_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細010_補正済_70_74高額支給額,
+        高額合算自己負担額明細010."sumi_70_74JikoFutanGaku"  AS 高額合算自己負担額明細010_補70_74内数,
+        高額合算自己負担額明細010."sumi_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細010_補70_74高額支給額,
         高額合算自己負担額明細011."sumi_JikoFutanGaku" AS 高額合算自己負担額明細011_補正済_自己負担額,
-        高額合算自己負担額明細011."sumi_70_74JikoFutanGaku"  AS 高額合算自己負担額明細011_補正済_70_74自己負担額_内数,
-        高額合算自己負担額明細011."sumi_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細011_補正済_70_74高額支給額,
+        高額合算自己負担額明細011."sumi_70_74JikoFutanGaku"  AS 高額合算自己負担額明細011_補70_74内数,
+        高額合算自己負担額明細011."sumi_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細011_補70_74高額支給額,
         高額合算自己負担額明細012."sumi_JikoFutanGaku" AS 高額合算自己負担額明細012_補正済_自己負担額,
-        高額合算自己負担額明細012."sumi_70_74JikoFutanGaku"  AS 高額合算自己負担額明細012_補正済_70_74自己負担額_内数,
-        高額合算自己負担額明細012."sumi_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細012_補正済_70_74高額支給額,
+        高額合算自己負担額明細012."sumi_70_74JikoFutanGaku"  AS 高額合算自己負担額明細012_補70_74内数,
+        高額合算自己負担額明細012."sumi_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細012_補70_74高額支給額,
         高額合算自己負担額明細101."sumi_JikoFutanGaku" AS 高額合算自己負担額明細101_補正済_自己負担額,
-        高額合算自己負担額明細101."sumi_70_74JikoFutanGaku"  AS 高額合算自己負担額明細101_補正済_70_74自己負担額_内数,
-        高額合算自己負担額明細101."sumi_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細101_補正済_70_74高額支給額,
+        高額合算自己負担額明細101."sumi_70_74JikoFutanGaku"  AS 高額合算自己負担額明細101_補70_74内数,
+        高額合算自己負担額明細101."sumi_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細101_補70_74高額支給額,
         高額合算自己負担額明細102."sumi_JikoFutanGaku" AS 高額合算自己負担額明細102_補正済_自己負担額,
-        高額合算自己負担額明細102."sumi_70_74JikoFutanGaku"  AS 高額合算自己負担額明細102_補正済_70_74自己負担額_内数,
-        高額合算自己負担額明細102."sumi_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細102_補正済_70_74高額支給額,
+        高額合算自己負担額明細102."sumi_70_74JikoFutanGaku"  AS 高額合算自己負担額明細102_補70_74内数,
+        高額合算自己負担額明細102."sumi_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細102_補70_74高額支給額,
         高額合算自己負担額明細103."sumi_JikoFutanGaku" AS 高額合算自己負担額明細103_補正済_自己負担額,
-        高額合算自己負担額明細103."sumi_70_74JikoFutanGaku"  AS 高額合算自己負担額明細103_補正済_70_74自己負担額_内数,
-        高額合算自己負担額明細103."sumi_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細103_補正済_70_74高額支給額,
+        高額合算自己負担額明細103."sumi_70_74JikoFutanGaku"  AS 高額合算自己負担額明細103_補70_74内数,
+        高額合算自己負担額明細103."sumi_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細103_補70_74高額支給額,
         高額合算自己負担額明細104."sumi_JikoFutanGaku" AS 高額合算自己負担額明細104_補正済_自己負担額,
-        高額合算自己負担額明細104."sumi_70_74JikoFutanGaku"  AS 高額合算自己負担額明細104_補正済_70_74自己負担額_内数,
-        高額合算自己負担額明細104."sumi_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細104_補正済_70_74高額支給額,
+        高額合算自己負担額明細104."sumi_70_74JikoFutanGaku"  AS 高額合算自己負担額明細104_補70_74内数,
+        高額合算自己負担額明細104."sumi_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細104_補70_74高額支給額,
         高額合算自己負担額明細105."sumi_JikoFutanGaku" AS 高額合算自己負担額明細105_補正済_自己負担額,
-        高額合算自己負担額明細105."sumi_70_74JikoFutanGaku"  AS 高額合算自己負担額明細105_補正済_70_74自己負担額_内数,
-        高額合算自己負担額明細105."sumi_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細105_補正済_70_74高額支給額,
+        高額合算自己負担額明細105."sumi_70_74JikoFutanGaku"  AS 高額合算自己負担額明細105_補70_74内数,
+        高額合算自己負担額明細105."sumi_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細105_補70_74高額支給額,
         高額合算自己負担額明細106."sumi_JikoFutanGaku" AS 高額合算自己負担額明細106_補正済_自己負担額,
-        高額合算自己負担額明細106."sumi_70_74JikoFutanGaku"  AS 高額合算自己負担額明細106_補正済_70_74自己負担額_内数,
-        高額合算自己負担額明細106."sumi_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細106_補正済_70_74高額支給額,
+        高額合算自己負担額明細106."sumi_70_74JikoFutanGaku"  AS 高額合算自己負担額明細106_補70_74内数,
+        高額合算自己負担額明細106."sumi_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細106_補70_74高額支給額,
         高額合算自己負担額明細107."sumi_JikoFutanGaku" AS 高額合算自己負担額明細107_補正済_自己負担額,
-        高額合算自己負担額明細107."sumi_70_74JikoFutanGaku"  AS 高額合算自己負担額明細107_補正済_70_74自己負担額_内数,
-        高額合算自己負担額明細107."sumi_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細107_補正済_70_74高額支給額
+        高額合算自己負担額明細107."sumi_70_74JikoFutanGaku"  AS 高額合算自己負担額明細107_補70_74内数,
+        高額合算自己負担額明細107."sumi_70_74KogakuShikyuGaku" AS 高額合算自己負担額明細107_補70_74高額支給額
        From
         rgdb."DbT3070KogakuGassanJikoFutanGaku"   AS   高額合算自己負担額
         LEFT  JOIN
@@ -434,142 +444,142 @@
         <result property="資格喪失届出年月日" column="最新被保台帳_資格喪失届出年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="被保険者区分コード" column="最新被保台帳_被保険者区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="住所地特例フラグ" column="最新被保台帳_住所地特例フラグ"/>
-        <result property="受給申請事由" column=" 受給者台帳_受給申請事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="要支援者認定申請区分" column=" 受給者台帳_要支援者認定申請区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="受給申請年月日" column=" 受給者台帳_受給申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="要介護認定状態区分コード" column=" 受給者台帳_要介護認定状態区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="認定有効期間開始年月日" column=" 受給者台帳_認定有効期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="認定有効期間終了年月日" column=" 受給者台帳_認定有効期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="認定年月日" column=" 受給者台帳_認定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="旧措置者フラグ" column=" 受給者台帳_旧措置者フラグ"/>
-        <result property="みなし要介護区分コード" column=" 受給者台帳_みなし要介護区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="直近異動事由コード" column=" 受給者台帳_直近異動事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="対象年度" column="高額合算自己負担額_対象年度 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
-        <result property="保険者番号" column="高額合算自己負担額_保険者番号 " typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
-        <result property="支給申請書整理番号" column="高額合算自己負担額_支給申請書整理番号 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="履歴番号" column="高額合算自己負担額_履歴番号 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="所得区分" column="高額合算自己負担額_所得区分 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="所得区分_70歳以上" column="高額合算自己負担額_70歳以上の者に係る所得区分 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="自己負担額証明書整理番号" column="高額合算自己負担額_自己負担額証明書整理番号 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="異動区分" column="高額合算自己負担額_異動区分 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="補正済自己負担額送付区分" column="高額合算自己負担額_補正済自己負担額送付区分 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="対象計算期間開始年月日" column="高額合算自己負担額_対象計算期間開始年月日 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="対象計算期間終了年月日" column="高額合算自己負担額_対象計算期間終了年月日 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="被保険者期間開始年月日" column="高額合算自己負担額_被保険者期間開始年月日 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="被保険者期間終了年月日" column="高額合算自己負担額_被保険者期間終了年月日 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="申請年月日" column="高額合算自己負担額_申請年月日 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="高額合算自己負担額_合計_自己負担額" column="高額合算自己負担額_合計_自己負担額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額_合計_70_74自己負担額_内訳" column="高額合算自己負担額_合計_70_74自己負担額_内訳 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額_合計_70_74高額支給額" column="高額合算自己負担額_合計_70_74高額支給額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額_補正済_合計_自己負担額" column="高額合算自己負担額_補正済_合計_自己負担額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額_補正済_合計_70_74自己負担額_内訳" column="高額合算自己負担額_補正済_合計_70_74自己負担額_内訳 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額_補正済_合計_70_74高額支給額" column="高額合算自己負担額_補正済_合計_70_74高額支給額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額_データ作成区分" column="高額合算自己負担額_データ作成区分 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="高額合算自己負担額_自己負担額確認情報受取年月" column="高額合算自己負担額_自己負担額確認情報受取年月 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <result property="高額合算自己負担額_補正済自己負担額情報送付年月" column="高額合算自己負担額_補正済自己負担額情報送付年月 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
-        <result property="高額合算自己負担額_自己負担額証明書情報受取年月" column="高額合算自己負担額_自己負担額証明書情報受取年月 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="受給申請事由" column="受給者台帳_受給申請事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="要支援者認定申請区分" column="受給者台帳_要支援者認定申請区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="受給申請年月日" column="受給者台帳_受給申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="要介護認定状態区分コード" column="受給者台帳_要介護認定状態区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定有効期間開始年月日" column="受給者台帳_認定有効期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定有効期間終了年月日" column="受給者台帳_認定有効期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="認定年月日" column="受給者台帳_認定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="旧措置者フラグ" column="受給者台帳_旧措置者フラグ"/>
+        <result property="みなし要介護区分コード" column="受給者台帳_みなし要介護区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="直近異動事由コード" column="受給者台帳_直近異動事由コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="対象年度" column="高額合算自己負担額_対象年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="保険者番号" column="高額合算自己負担額_保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="支給申請書整理番号" column="高額合算自己負担額_整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="履歴番号" column="高額合算自己負担額_履歴番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="所得区分" column="高額合算自己負担額_所得区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="所得区分_70歳以上" column="高額合算自己負担額_70歳以上所得区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="自己負担額証明書整理番号" column="高額合算自己負担額_証明書整理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="異動区分" column="高額合算自己負担額_異動区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="補正済自己負担額送付区分" column="高額合算自己負担額_補正済送付区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="対象計算期間開始年月日" column="高額合算自己負担額_対象計算期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="対象計算期間終了年月日" column="高額合算自己負担額_対象計算期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="被保険者期間開始年月日" column="高額合算自己負担額_被保険者期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="被保険者期間終了年月日" column="高額合算自己負担額_被保険者期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="申請年月日" column="高額合算自己負担額_申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="高額合算自己負担額_合計_自己負担額" column="高額合算自己負担額_合計_自己負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額_合計_70_74自己負担額_内訳" column="高額合算自己負担額_合計_70_74自己負担額_内訳" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額_合計_70_74高額支給額" column="高額合算自己負担額_合計_70_74高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額_補正済_合計_自己負担額" column="高額合算自己負担額_補正済_合計_自己負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額_補正済_合計_70_74自己負担額_内訳" column="高額合算自己負担額_補70_74_内訳" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額_補正済_合計_70_74高額支給額" column="高額合算自己負担額_補70_74高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額_データ作成区分" column="高額合算自己負担額_データ作成区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="高額合算自己負担額_自己負担額確認情報受取年月" column="高額合算自己負担額_確認情報受取年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="高額合算自己負担額_補正済自己負担額情報送付年月" column="高額合算自己負担額_補情報送付年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="高額合算自己負担額_自己負担額証明書情報受取年月" column="高額合算自己負担額_情報受取年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="高額合算自己負担額_送付対象外フラグ" column="高額合算自己負担額_送付対象外フラグ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="高額合算自己負担額_自己負担額計算年月日" column="高額合算自己負担額_自己負担額計算年月日 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="高額合算自己負担額_自己負担額証明書作成年月日" column="高額合算自己負担額_自己負担額証明書作成年月日 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="高額合算自己負担額_バッチ補正実施年月日" column="高額合算自己負担額_バッチ補正実施年月日 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="高額合算自己負担額_リアル補正実施年月日" column="高額合算自己負担額_リアル補正実施年月日 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="高額合算自己負担額_被保険者番号" column="高額合算自己負担額_被保険者番号 " typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <result property="高額合算自己負担額明細004_自己負担額" column="高額合算自己負担額明細004_自己負担額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細004_70_74自己負担額_内数" column="高額合算自己負担額明細004_70_74自己負担額_内数 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細004_70_74高額支給額" column="高額合算自己負担額明細004_70_74高額支給額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細005_自己負担額" column="高額合算自己負担額明細005_自己負担額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細005_70_74自己負担額_内数" column="高額合算自己負担額明細005_70_74自己負担額_内数 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細005_70_74高額支給額" column="高額合算自己負担額明細005_70_74高額支給額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細006_自己負担額" column="高額合算自己負担額明細006_自己負担額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細006_70_74自己負担額_内数" column="高額合算自己負担額明細006_70_74自己負担額_内数 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細006_70_74高額支給額" column="高額合算自己負担額明細006_70_74高額支給額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細007_自己負担額" column="高額合算自己負担額明細007_自己負担額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細007_70_74自己負担額_内数" column="高額合算自己負担額明細007_70_74自己負担額_内数 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細007_70_74高額支給額" column="高額合算自己負担額明細007_70_74高額支給額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細008_自己負担額" column="高額合算自己負担額明細008_自己負担額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細008_70_74自己負担額_内数" column="高額合算自己負担額明細008_70_74自己負担額_内数 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細008_70_74高額支給額" column="高額合算自己負担額明細008_70_74高額支給額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細009_自己負担額" column="高額合算自己負担額明細009_自己負担額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細009_70_74自己負担額_内数" column="高額合算自己負担額明細009_70_74自己負担額_内数 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細009_70_74高額支給額" column="高額合算自己負担額明細009_70_74高額支給額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細010_自己負担額" column="高額合算自己負担額明細010_自己負担額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細010_70_74自己負担額_内数" column="高額合算自己負担額明細010_70_74自己負担額_内数 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細010_70_74高額支給額" column="高額合算自己負担額明細010_70_74高額支給額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細011_自己負担額" column="高額合算自己負担額明細011_自己負担額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細011_70_74自己負担額_内数" column="高額合算自己負担額明細011_70_74自己負担額_内数 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細011_70_74高額支給額" column="高額合算自己負担額明細011_70_74高額支給額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細012_自己負担額" column="高額合算自己負担額明細012_自己負担額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細012_70_74自己負担額_内数" column="高額合算自己負担額明細012_70_74自己負担額_内数 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細012_70_74高額支給額" column="高額合算自己負担額明細012_70_74高額支給額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細101_自己負担額" column="高額合算自己負担額明細101_自己負担額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細101_70_74自己負担額_内数" column="高額合算自己負担額明細101_70_74自己負担額_内数 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細101_70_74高額支給額" column="高額合算自己負担額明細101_70_74高額支給額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細102_自己負担額" column="高額合算自己負担額明細102_自己負担額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細102_70_74自己負担額_内数" column="高額合算自己負担額明細102_70_74自己負担額_内数 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細102_70_74高額支給額" column="高額合算自己負担額明細102_70_74高額支給額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細103_自己負担額" column="高額合算自己負担額明細103_自己負担額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細103_70_74自己負担額_内数" column="高額合算自己負担額明細103_70_74自己負担額_内数 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細103_70_74高額支給額" column="高額合算自己負担額明細103_70_74高額支給額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細104_自己負担額" column="高額合算自己負担額明細104_自己負担額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細104_70_74自己負担額_内数" column="高額合算自己負担額明細104_70_74自己負担額_内数 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細104_70_74高額支給額" column="高額合算自己負担額明細104_70_74高額支給額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細105_自己負担額" column="高額合算自己負担額明細105_自己負担額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細105_70_74自己負担額_内数" column="高額合算自己負担額明細105_70_74自己負担額_内数 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細105_70_74高額支給額" column="高額合算自己負担額明細105_70_74高額支給額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細106_自己負担額" column="高額合算自己負担額明細106_自己負担額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細106_70_74自己負担額_内数" column="高額合算自己負担額明細106_70_74自己負担額_内数 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細106_70_74高額支給額" column="高額合算自己負担額明細106_70_74高額支給額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細107_自己負担額" column="高額合算自己負担額明細107_自己負担額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細107_70_74自己負担額_内数" column="高額合算自己負担額明細107_70_74自己負担額_内数 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細107_70_74高額支給額" column="高額合算自己負担額明細107_70_74高額支給額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細004_補正済_自己負担額" column="高額合算自己負担額明細004_補正済_自己負担額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細004_補正済_70_74自己負担額_内数" column="高額合算自己負担額明細004_補正済_70_74自己負担額_内数 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細004_補正済_70_74高額支給額" column="高額合算自己負担額明細004_補正済_70_74高額支給額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細005_補正済_自己負担額" column="高額合算自己負担額明細005_補正済_自己負担額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細005_補正済_70_74自己負担額_内数" column="高額合算自己負担額明細005_補正済_70_74自己負担額_内数 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細005_補正済_70_74高額支給額" column="高額合算自己負担額明細005_補正済_70_74高額支給額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細006_補正済_自己負担額" column="高額合算自己負担額明細006_補正済_自己負担額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細006_補正済_70_74自己負担額_内数" column="高額合算自己負担額明細006_補正済_70_74自己負担額_内数 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細006_補正済_70_74高額支給額" column="高額合算自己負担額明細006_補正済_70_74高額支給額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細007_補正済_自己負担額" column="高額合算自己負担額明細007_補正済_自己負担額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細007_補正済_70_74自己負担額_内数" column="高額合算自己負担額明細007_補正済_70_74自己負担額_内数 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細007_補正済_70_74高額支給額" column="高額合算自己負担額明細007_補正済_70_74高額支給額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細008_補正済_自己負担額" column="高額合算自己負担額明細008_補正済_自己負担額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細008_補正済_70_74自己負担額_内数" column="高額合算自己負担額明細008_補正済_70_74自己負担額_内数 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細008_補正済_70_74高額支給額" column="高額合算自己負担額明細008_補正済_70_74高額支給額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細009_補正済_自己負担額" column="高額合算自己負担額明細009_補正済_自己負担額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細009_補正済_70_74自己負担額_内数" column="高額合算自己負担額明細009_補正済_70_74自己負担額_内数 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細009_補正済_70_74高額支給額" column="高額合算自己負担額明細009_補正済_70_74高額支給額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細010_補正済_自己負担額" column="高額合算自己負担額明細010_補正済_自己負担額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細010_補正済_70_74自己負担額_内数" column="高額合算自己負担額明細010_補正済_70_74自己負担額_内数 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細010_補正済_70_74高額支給額" column="高額合算自己負担額明細010_補正済_70_74高額支給額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細011_補正済_自己負担額" column="高額合算自己負担額明細011_補正済_自己負担額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細011_補正済_70_74自己負担額_内数" column="高額合算自己負担額明細011_補正済_70_74自己負担額_内数 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細011_補正済_70_74高額支給額" column="高額合算自己負担額明細011_補正済_70_74高額支給額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細012_補正済_自己負担額" column="高額合算自己負担額明細012_補正済_自己負担額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細012_補正済_70_74自己負担額_内数" column="高額合算自己負担額明細012_補正済_70_74自己負担額_内数 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細012_補正済_70_74高額支給額" column="高額合算自己負担額明細012_補正済_70_74高額支給額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細101_補正済_自己負担額" column="高額合算自己負担額明細101_補正済_自己負担額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細101_補正済_70_74自己負担額_内数" column="高額合算自己負担額明細101_補正済_70_74自己負担額_内数 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細101_補正済_70_74高額支給額" column="高額合算自己負担額明細101_補正済_70_74高額支給額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細102_補正済_自己負担額" column="高額合算自己負担額明細102_補正済_自己負担額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細102_補正済_70_74自己負担額_内数" column="高額合算自己負担額明細102_補正済_70_74自己負担額_内数 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細102_補正済_70_74高額支給額" column="高額合算自己負担額明細102_補正済_70_74高額支給額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細103_補正済_自己負担額" column="高額合算自己負担額明細103_補正済_自己負担額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細103_補正済_70_74自己負担額_内数" column="高額合算自己負担額明細103_補正済_70_74自己負担額_内数 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細103_補正済_70_74高額支給額" column="高額合算自己負担額明細103_補正済_70_74高額支給額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細104_補正済_自己負担額" column="高額合算自己負担額明細104_補正済_自己負担額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細104_補正済_70_74自己負担額_内数" column="高額合算自己負担額明細104_補正済_70_74自己負担額_内数 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細104_補正済_70_74高額支給額" column="高額合算自己負担額明細104_補正済_70_74高額支給額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細105_補正済_自己負担額" column="高額合算自己負担額明細105_補正済_自己負担額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細105_補正済_70_74自己負担額_内数" column="高額合算自己負担額明細105_補正済_70_74自己負担額_内数 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細105_補正済_70_74高額支給額" column="高額合算自己負担額明細105_補正済_70_74高額支給額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細106_補正済_自己負担額" column="高額合算自己負担額明細106_補正済_自己負担額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細106_補正済_70_74自己負担額_内数" column="高額合算自己負担額明細106_補正済_70_74自己負担額_内数 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細106_補正済_70_74高額支給額" column="高額合算自己負担額明細106_補正済_70_74高額支給額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細107_補正済_自己負担額" column="高額合算自己負担額明細107_補正済_自己負担額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細107_補正済_70_74自己負担額_内数" column="高額合算自己負担額明細107_補正済_70_74自己負担額_内数 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="高額合算自己負担額明細107_補正済_70_74高額支給額" column="高額合算自己負担額明細107_補正済_70_74高額支給額 " typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額_自己負担額計算年月日" column="高額合算自己負担額_自己負担額計算年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="高額合算自己負担額_自己負担額証明書作成年月日" column="高額合算自己負担額_作成年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="高額合算自己負担額_バッチ補正実施年月日" column="高額合算自己負担額_バッチ補正実施年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="高額合算自己負担額_リアル補正実施年月日" column="高額合算自己負担額_リアル補正実施年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="高額合算自己負担額_被保険者番号" column="高額合算自己負担額_被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="高額合算自己負担額明細004_自己負担額" column="高額合算自己負担額明細004_自己負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細004_70_74自己負担額_内数" column="高額合算自己負担額明細004_70_74内数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細004_70_74高額支給額" column="高額合算自己負担額明細004_70_74高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細005_自己負担額" column="高額合算自己負担額明細005_自己負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細005_70_74自己負担額_内数" column="高額合算自己負担額明細005_70_74内数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細005_70_74高額支給額" column="高額合算自己負担額明細005_70_74高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細006_自己負担額" column="高額合算自己負担額明細006_自己負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細006_70_74自己負担額_内数" column="高額合算自己負担額明細006_70_74内数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細006_70_74高額支給額" column="高額合算自己負担額明細006_70_74高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細007_自己負担額" column="高額合算自己負担額明細007_自己負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細007_70_74自己負担額_内数" column="高額合算自己負担額明細007_70_74内数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細007_70_74高額支給額" column="高額合算自己負担額明細007_70_74高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細008_自己負担額" column="高額合算自己負担額明細008_自己負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細008_70_74自己負担額_内数" column="高額合算自己負担額明細008_70_74内数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細008_70_74高額支給額" column="高額合算自己負担額明細008_70_74高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細009_自己負担額" column="高額合算自己負担額明細009_自己負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細009_70_74自己負担額_内数" column="高額合算自己負担額明細009_70_74内数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細009_70_74高額支給額" column="高額合算自己負担額明細009_70_74高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細010_自己負担額" column="高額合算自己負担額明細010_自己負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細010_70_74自己負担額_内数" column="高額合算自己負担額明細010_70_74内数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細010_70_74高額支給額" column="高額合算自己負担額明細010_70_74高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細011_自己負担額" column="高額合算自己負担額明細011_自己負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細011_70_74自己負担額_内数" column="高額合算自己負担額明細011_70_74内数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細011_70_74高額支給額" column="高額合算自己負担額明細011_70_74高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細012_自己負担額" column="高額合算自己負担額明細012_自己負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細012_70_74自己負担額_内数" column="高額合算自己負担額明細012_70_74内数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細012_70_74高額支給額" column="高額合算自己負担額明細012_70_74高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細101_自己負担額" column="高額合算自己負担額明細101_自己負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細101_70_74自己負担額_内数" column="高額合算自己負担額明細101_70_74内数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細101_70_74高額支給額" column="高額合算自己負担額明細101_70_74高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細102_自己負担額" column="高額合算自己負担額明細102_自己負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細102_70_74自己負担額_内数" column="高額合算自己負担額明細102_70_74内数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細102_70_74高額支給額" column="高額合算自己負担額明細102_70_74高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細103_自己負担額" column="高額合算自己負担額明細103_自己負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細103_70_74自己負担額_内数" column="高額合算自己負担額明細103_70_74内数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細103_70_74高額支給額" column="高額合算自己負担額明細103_70_74高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細104_自己負担額" column="高額合算自己負担額明細104_自己負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細104_70_74自己負担額_内数" column="高額合算自己負担額明細104_70_74内数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細104_70_74高額支給額" column="高額合算自己負担額明細104_70_74高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細105_自己負担額" column="高額合算自己負担額明細105_自己負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細105_70_74自己負担額_内数" column="高額合算自己負担額明細105_70_74内数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細105_70_74高額支給額" column="高額合算自己負担額明細105_70_74高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細106_自己負担額" column="高額合算自己負担額明細106_自己負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細106_70_74自己負担額_内数" column="高額合算自己負担額明細106_70_74内数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細106_70_74高額支給額" column="高額合算自己負担額明細106_70_74高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細107_自己負担額" column="高額合算自己負担額明細107_自己負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細107_70_74自己負担額_内数" column="高額合算自己負担額明細107_70_74内数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細107_70_74高額支給額" column="高額合算自己負担額明細107_70_74高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細004_補正済_自己負担額" column="高額合算自己負担額明細004_補正済_自己負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細004_補正済_70_74自己負担額_内数" column="高額合算自己負担額明細004_補70_74内数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細004_補正済_70_74高額支給額" column="高額合算自己負担額明細004_補70_74高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細005_補正済_自己負担額" column="高額合算自己負担額明細005_補正済_自己負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細005_補正済_70_74自己負担額_内数" column="高額合算自己負担額明細005_補70_74内数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細005_補正済_70_74高額支給額" column="高額合算自己負担額明細005_補70_74高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細006_補正済_自己負担額" column="高額合算自己負担額明細006_補正済_自己負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細006_補正済_70_74自己負担額_内数" column="高額合算自己負担額明細006_補70_74内数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細006_補正済_70_74高額支給額" column="高額合算自己負担額明細006_補70_74高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細007_補正済_自己負担額" column="高額合算自己負担額明細007_補正済_自己負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細007_補正済_70_74自己負担額_内数" column="高額合算自己負担額明細007_補70_74内数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細007_補正済_70_74高額支給額" column="高額合算自己負担額明細007_補70_74高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細008_補正済_自己負担額" column="高額合算自己負担額明細008_補正済_自己負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細008_補正済_70_74自己負担額_内数" column="高額合算自己負担額明細008_補70_74内数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細008_補正済_70_74高額支給額" column="高額合算自己負担額明細008_補70_74高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細009_補正済_自己負担額" column="高額合算自己負担額明細009_補正済_自己負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細009_補正済_70_74自己負担額_内数" column="高額合算自己負担額明細009_補70_74内数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細009_補正済_70_74高額支給額" column="高額合算自己負担額明細009_補70_74高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細010_補正済_自己負担額" column="高額合算自己負担額明細010_補正済_自己負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細010_補正済_70_74自己負担額_内数" column="高額合算自己負担額明細010_補70_74内数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細010_補正済_70_74高額支給額" column="高額合算自己負担額明細010_補70_74高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細011_補正済_自己負担額" column="高額合算自己負担額明細011_補正済_自己負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細011_補正済_70_74自己負担額_内数" column="高額合算自己負担額明細011_補70_74内数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細011_補正済_70_74高額支給額" column="高額合算自己負担額明細011_補70_74高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細012_補正済_自己負担額" column="高額合算自己負担額明細012_補正済_自己負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細012_補正済_70_74自己負担額_内数" column="高額合算自己負担額明細012_補70_74内数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細012_補正済_70_74高額支給額" column="高額合算自己負担額明細012_補70_74高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細101_補正済_自己負担額" column="高額合算自己負担額明細101_補正済_自己負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細101_補正済_70_74自己負担額_内数" column="高額合算自己負担額明細101_補70_74内数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細101_補正済_70_74高額支給額" column="高額合算自己負担額明細101_補70_74高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細102_補正済_自己負担額" column="高額合算自己負担額明細102_補正済_自己負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細102_補正済_70_74自己負担額_内数" column="高額合算自己負担額明細102_補70_74内数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細102_補正済_70_74高額支給額" column="高額合算自己負担額明細102_補70_74高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細103_補正済_自己負担額" column="高額合算自己負担額明細103_補正済_自己負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細103_補正済_70_74自己負担額_内数" column="高額合算自己負担額明細103_補70_74内数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細103_補正済_70_74高額支給額" column="高額合算自己負担額明細103_補70_74高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細104_補正済_自己負担額" column="高額合算自己負担額明細104_補正済_自己負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細104_補正済_70_74自己負担額_内数" column="高額合算自己負担額明細104_補70_74内数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細104_補正済_70_74高額支給額" column="高額合算自己負担額明細104_補70_74高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細105_補正済_自己負担額" column="高額合算自己負担額明細105_補正済_自己負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細105_補正済_70_74自己負担額_内数" column="高額合算自己負担額明細105_補70_74内数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細105_補正済_70_74高額支給額" column="高額合算自己負担額明細105_補70_74高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細106_補正済_自己負担額" column="高額合算自己負担額明細106_補正済_自己負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細106_補正済_70_74自己負担額_内数" column="高額合算自己負担額明細106_補70_74内数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細106_補正済_70_74高額支給額" column="高額合算自己負担額明細106_補70_74高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細107_補正済_自己負担額" column="高額合算自己負担額明細107_補正済_自己負担額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細107_補正済_70_74自己負担額_内数" column="高額合算自己負担額明細107_補70_74内数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="高額合算自己負担額明細107_補正済_70_74高額支給額" column="高額合算自己負担額明細107_補70_74高額支給額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <association property="宛名Entity"
                      resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
         <association property="宛先Entity"

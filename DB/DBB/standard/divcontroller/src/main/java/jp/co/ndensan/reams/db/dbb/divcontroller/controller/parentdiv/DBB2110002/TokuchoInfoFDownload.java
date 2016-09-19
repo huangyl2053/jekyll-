@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDownload;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 
 /**
@@ -23,8 +22,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
  * @reamsid_L DBB-4240-010 chenhui
  */
 public class TokuchoInfoFDownload {
-
-    private static final RString 単一 = new RString("単一");
 
     /**
      * 画面初期化のメソッドです。
@@ -78,6 +75,28 @@ public class TokuchoInfoFDownload {
      */
     public ResponseData<TokuchoInfoFDownloadDiv> onChange_ddlTsuki(TokuchoInfoFDownloadDiv div) {
         getHandler(div).処理対象月onChange();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 処理対象選択のonChangeメソッドです。
+     *
+     * @param div TokuchoInfoFDownloadDiv
+     * @return ResponseData
+     */
+    public ResponseData<TokuchoInfoFDownloadDiv> onChange_dgkoikiShoriSelect(TokuchoInfoFDownloadDiv div) {
+        getHandler(div).onChange_dgkoikiShoriSelect();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 処理対象選択のonChangeメソッドです。
+     *
+     * @param div TokuchoInfoFDownloadDiv
+     * @return ResponseData
+     */
+    public ResponseData<TokuchoInfoFDownloadDiv> onChange_dgTsukiShoriSelect(TokuchoInfoFDownloadDiv div) {
+        getHandler(div).onChange_dgTsukiShoriSelect();
         return ResponseData.of(div).respond();
     }
 

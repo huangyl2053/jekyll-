@@ -43,13 +43,13 @@
             <if test="対象年度区分!=null and !対象年度区分.isEmpty()">
                 AND "DbT3070KogakuGassanJikoFutanGaku"."dataSakuseiKubun" = #{対象年度区分}
             </if>    
-            <if test="対象年度区分 == 1">
+            <if test="抽出対象 == 1">
                 AND #{申請開始年月日} <![CDATA[<=]]> "DbT3068KogakuGassanShinseisho"."shinseiYMD"
                 AND "DbT3068KogakuGassanShinseisho"."shinseiYMD" <![CDATA[<=]]> #{申請終了年月日}
                 AND #{申請開始年月日} <![CDATA[<=]]> "DbT3070KogakuGassanJikoFutanGaku"."shinseiYMD"
                 AND "DbT3070KogakuGassanJikoFutanGaku"."shinseiYMD" <![CDATA[<=]]> #{申請終了年月日}
             </if>
-            <if test="対象年度区分 == 2">
+            <if test="抽出対象 == 2">
                 AND "DbT3070KogakuGassanJikoFutanGaku"."kakunin_UketoriYM" = #{受取年月}
             </if>
         ORDER BY
@@ -63,27 +63,40 @@
         <include refid="selectHihokenshaDaichoJoho" />
     </select>
     <sql id="selectHihokenshaDaichoJoho">
+        WITH master AS (
         SELECT
             <include refid="allColumns_KogakuGassanTemp" />, 
-            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.allColumns_DbT1001HihokenshaDaicho" />,
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.allColumns_DbT1001HihokenshaDaicho" />
         FROM
             (SELECT * FROM 
             (SELECT *,Row_Number() OVER (partition by "hihokenshaNo" ORDER BY "idoYMD" desc ,"edaNo"  DESC) AS "rrkno" 
             FROM rgdb."DbT1001HihokenshaDaicho") "A" 
             WHERE "A"."rrkno"='1')  AS "DbT1001HihokenshaDaicho"
-        INNER JOIN 
-            rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',true,
-            '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-            true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho" 
-        ON
-            "DbT1001HihokenshaDaicho"."shikibetsuCode" =  "ShikibetsuTaisho"."shikibetsuCode"
         INNER JOIN
             "KogakuGassanTemp" AS "KogakuGassanTemp"
         ON 
             "DbT1001HihokenshaDaicho"."hihokenshaNo" = "KogakuGassanTemp"."hihokenshaNo"
         ORDER BY
             "DbT1001HihokenshaDaicho"."hihokenshaNo" ASC
+        )
+        SELECT    
+             master.*,
+             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
+        FROM 
+             master     
+        INNER JOIN 
+            rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',true,
+            '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
+            true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
+                (
+                    SELECT
+                        ARRAY_AGG(CAST (master."dbT1001HihokenshaDaicho_shikibetsuCode" AS TEXT))
+                    FROM
+                        master
+                )             
+             ) AS "ShikibetsuTaisho" 
+        ON
+            "master"."dbT1001HihokenshaDaicho_shikibetsuCode" =  "ShikibetsuTaisho"."shikibetsuCode"
     </sql> 
     
     <select resultOrdered="true" id="select高額合算一時"
@@ -387,7 +400,7 @@
          "KogakuGassanTemp"."jikoFutanGaku_Gokei_70_74KogakuShikyuGaku" as "kogakuGassanTemp_jikoFutanGaku_Gokei_70_74KogakuShikyuGaku",
          "KogakuGassanTemp"."jikoFutanGaku_Sumi_Gokei_JikoFutanGaku" as "kogakuGassanTemp_jikoFutanGaku_Sumi_Gokei_JikoFutanGaku",
          "KogakuGassanTemp"."jikoFutanGaku_Sumi_Gokei_70_74JikoFutanGaku" as "kogakuGassanTemp_jikoFutanGaku_Sumi_Gokei_70_74JikoFutanGaku",
-         "KogakuGassanTemp"."jikoFutanGaku_Sumi_Gokei_Under70KogakuShikyuGaku" as "kogakuGassanTemp_jikoFutanGaku_Sumi_Gokei_Under70KogakuShikyuGaku",
+         "KogakuGassanTemp"."jikoFutanGaku_Sumi_Gokei_Under70KogakuShikyuGaku" as "kogakuGassanTemp_Sumi_Gokei_Under70KogakuShikyuGaku",
          "KogakuGassanTemp"."jikoFutanGaku_Sumi_Gokei_70_74KogakuShikyuGaku" as "kogakuGassanTemp_jikoFutanGaku_Sumi_Gokei_70_74KogakuShikyuGaku",
          "KogakuGassanTemp"."jikoFutanGaku_AtesakiShimei" as "kogakuGassanTemp_jikoFutanGaku_AtesakiShimei",
          "KogakuGassanTemp"."jikoFutanGaku_AtesakiYubinNo" as "kogakuGassanTemp_jikoFutanGaku_AtesakiYubinNo",
@@ -484,7 +497,7 @@
         <result property="jikoFutanGaku_Koki_HihokenshaNo" column="kogakuGassanTemp_jikoFutanGaku_Koki_HihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jikoFutanGaku_Kokuho_HokenshaNo" column="kogakuGassanTemp_jikoFutanGaku_Kokuho_HokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jikoFutanGaku_Kokuho_HihokenshaShoNo" column="kogakuGassanTemp_jikoFutanGaku_Kokuho_HihokenshaShoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="jikoFutanGaku_Kokuho_KojinNo" column="kogakuGassanTemp_jikoFutanGaku_Kokuho_KojinNonNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jikoFutanGaku_Kokuho_KojinNo" column="kogakuGassanTemp_jikoFutanGaku_Kokuho_KojinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jikoFutanGaku_IdoKubun" column="kogakuGassanTemp_jikoFutanGaku_IdoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jikoFutanGaku_HoseiZumiSofuKubun" column="kogakuGassanTemp_jikoFutanGaku_HoseiZumiSofuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jikoFutanGaku_TaishoKeisanKaishiYMD" column="kogakuGassanTemp_jikoFutanGaku_TaishoKeisanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
@@ -498,7 +511,7 @@
         <result property="jikoFutanGaku_Gokei_70_74KogakuShikyuGaku" column="kogakuGassanTemp_jikoFutanGaku_Gokei_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="jikoFutanGaku_Sumi_Gokei_JikoFutanGaku" column="kogakuGassanTemp_jikoFutanGaku_Sumi_Gokei_JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="jikoFutanGaku_Sumi_Gokei_70_74JikoFutanGaku" column="kogakuGassanTemp_jikoFutanGaku_Sumi_Gokei_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <result property="jikoFutanGaku_Sumi_Gokei_Under70KogakuShikyuGaku" column="kogakuGassanTemp_jikoFutanGaku_Sumi_Gokei_Under70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="jikoFutanGaku_Sumi_Gokei_Under70KogakuShikyuGaku" column="kogakuGassanTemp_Sumi_Gokei_Under70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="jikoFutanGaku_Sumi_Gokei_70_74KogakuShikyuGaku" column="kogakuGassanTemp_jikoFutanGaku_Sumi_Gokei_70_74KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="jikoFutanGaku_AtesakiShimei" column="kogakuGassanTemp_jikoFutanGaku_AtesakiShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <result property="jikoFutanGaku_AtesakiYubinNo" column="kogakuGassanTemp_jikoFutanGaku_AtesakiYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>

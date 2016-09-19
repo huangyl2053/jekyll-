@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.lang.Width;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -57,6 +56,7 @@ public class KyufujissekiTorikomiIchiranEditor implements
     private static final RString 環まる = new RString("◎");
     private static final RString ソリッドまる = new RString("●");
     private static final RString 日時作成 = new RString("作成");
+    private static final RString 件タイトル = new RString("件");
     private static final RString 合計件数タイトル = new RString("合計件数");
     private static final RString 事業者名不明タイトル = new RString(" 事業者名不明");
 
@@ -111,18 +111,17 @@ public class KyufujissekiTorikomiIchiranEditor implements
 
         source.listUpper_1 = new RString(連番);
         source.listUpper_2 = entity.get給付実績_入力識別番号();
-        if (entity.get給付実績_入力識別名称().length() < LENGTH_9) {
-            source.listUpper_3 = entity.get給付実績_入力識別名称();
-            source.listLower_1 = RString.EMPTY;
-
-        } else if (entity.get給付実績_入力識別名称().length() < LENGTH_17) {
-            source.listUpper_3 = entity.get給付実績_入力識別名称().substring(INDEX_0, INDEX_8);
-            source.listLower_1 = entity.get給付実績_入力識別名称().substring(INDEX_8);
-        } else {
-            source.listUpper_3 = entity.get給付実績_入力識別名称().substring(INDEX_0, INDEX_8);
-            source.listLower_1 = entity.get給付実績_入力識別名称().substring(INDEX_8, INDEX_16);
+        if (entity.get給付実績_入力識別名称() != null) {
+            if (entity.get給付実績_入力識別名称().length() < LENGTH_9) {
+                source.listUpper_3 = entity.get給付実績_入力識別名称();
+            } else if (entity.get給付実績_入力識別名称().length() < LENGTH_17) {
+                source.listUpper_3 = entity.get給付実績_入力識別名称().substring(INDEX_0, INDEX_8);
+                source.listLower_1 = entity.get給付実績_入力識別名称().substring(INDEX_8);
+            } else {
+                source.listUpper_3 = entity.get給付実績_入力識別名称().substring(INDEX_0, INDEX_8);
+                source.listLower_1 = entity.get給付実績_入力識別名称().substring(INDEX_8, INDEX_16);
+            }
         }
-
         source.listUpper_4 = get作成区分(entity, DBCCodeShubetsu.給付実績情報作成区分.getコード());
 
         if (entity.get被保険者_登録被保険者番号() != null) {
@@ -151,8 +150,6 @@ public class KyufujissekiTorikomiIchiranEditor implements
         } else if (entity.get給付実績_レコード件数D1() == レコード値_0) {
             if (レコード値_1 <= entity.get給付実績_レコード件数DD()) {
                 source.listUpper_12 = ソリッドまる;
-            } else if (entity.get給付実績_レコード件数DD() == レコード値_0) {
-                source.listUpper_12 = RString.EMPTY;
             }
         }
 
@@ -164,8 +161,6 @@ public class KyufujissekiTorikomiIchiranEditor implements
         source.listUpper_18 = getレコード種別(entity.get給付実績_レコード件数D7());
         if (レコード値_1 <= entity.get給付実績_レコード件数D8() || レコード値_1 <= entity.get給付実績_レコード件数DE()) {
             source.listUpper_19 = 中空まる;
-        } else if (レコード値_0 == entity.get給付実績_レコード件数D8() && レコード値_0 == entity.get給付実績_レコード件数DE()) {
-            source.listUpper_19 = RString.EMPTY;
         }
 
         source.listUpper_20 = getレコード種別(entity.get給付実績_レコード件数T1());
@@ -173,9 +168,7 @@ public class KyufujissekiTorikomiIchiranEditor implements
         source.listUpper_22 = getレコード種別(entity.get給付実績_レコード件数DA());
         source.listUpper_23 = getレコード種別(entity.get給付実績_レコード件数DB());
         source.listUpper_24 = getレコード種別(entity.get給付実績_レコード件数DC());
-        if (entity.get給付実績_警告区分コード().equals(警告なし)) {
-            source.listUpper_25 = RString.EMPTY;
-        } else {
+        if (!entity.get給付実績_警告区分コード().equals(警告なし)) {
             source.listUpper_25 = KeikokuKubun.toValue(警告あり).get略称();
         }
 
@@ -185,12 +178,12 @@ public class KyufujissekiTorikomiIchiranEditor implements
         } else {
             source.listLower_3 = entity.get給付実績_事業者名称();
         }
-
-        source.gokeiKensuTitle = 合計件数タイトル;
-        if (entity.get給付実績_出力データ件数() != null) {
-            source.gokeiKensu = DecimalFormatter.toコンマ区切りRString(entity.get給付実績_出力データ件数(), 0);
+        if (entity.isコントロール()) {
+            source.gokeiKensuTitle = 合計件数タイトル;
+            if (entity.get給付実績_出力データ件数() != null) {
+                source.gokeiKensu = DecimalFormatter.toコンマ区切りRString(entity.get給付実績_出力データ件数(), 0).concat(件タイトル);
+            }
         }
-
         return source;
 
     }
@@ -200,10 +193,9 @@ public class KyufujissekiTorikomiIchiranEditor implements
         RStringBuilder sakuseiYMD = new RStringBuilder();
 
         sakuseiYMD.append(datetime.getDate().wareki().
-                eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).
+                eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).
-                fillType(FillType.NONE).
-                width(Width.HALF).toDateString());
+                fillType(FillType.BLANK).toDateString());
         sakuseiYMD.append(RString.HALF_SPACE);
         sakuseiYMD.append(datetime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         sakuseiYMD.append(RString.HALF_SPACE);

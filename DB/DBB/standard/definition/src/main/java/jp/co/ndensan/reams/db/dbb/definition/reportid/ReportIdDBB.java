@@ -347,6 +347,10 @@ public enum ReportIdDBB {
      */
     DBB300002(new ReportId("DBB300002_TsukibetsuSuiihyo"), new RString("月別推移表")),
     /**
+     * 特別徴収異動情報件数表の帳票ID
+     */
+    DBB200022(new ReportId("DBB200022_TokubetsuChoshuIdojohoKensuhyo"), new RString("特別徴収異動情報件数表")),
+    /**
      * 通知書発行後異動対象者一覧の帳票ID
      */
     DBB200028(new ReportId("DBB200028_HakkogoIdoTaishoshaIchiran"), new RString("通知書発行後異動対象者一覧")),
@@ -468,7 +472,11 @@ public enum ReportIdDBB {
     /**
      * 所得段階別収納率一覧表
      */
-    DBB300003(new ReportId("DBB300003_ShotokuDankaiBetsuShunoritsuIchiran"), new RString("所得段階別収納率一覧表"));
+    DBB300003(new ReportId("DBB300003_ShotokuDankaiBetsuShunoritsuIchiran"), new RString("所得段階別収納率一覧表")),
+    /**
+     * 特別徴収依頼情報件数表の帳票ID
+     */
+    DBB200020(new ReportId("DBB200020_TokubetsuChoshuIraiJohoKensuhyo"), new RString("特別徴収依頼情報件数表"));
 
     private final ReportId reportId;
     private final RString reportName;

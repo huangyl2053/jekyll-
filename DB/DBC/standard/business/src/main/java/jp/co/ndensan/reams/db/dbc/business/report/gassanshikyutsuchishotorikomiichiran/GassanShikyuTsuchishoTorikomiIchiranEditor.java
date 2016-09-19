@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.gassanshikyutsuchishotorikomiichiran;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.jigyobunkogakugassanshikyukettei.ShiharaiHohoKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shikyufushikyukubun.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.DbWT0001HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyotsu.DbWT38B1KogakuGassanShikyuFushikyuKetteiTempEntity;
@@ -20,8 +20,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.lang.Width;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -40,13 +38,13 @@ public class GassanShikyuTsuchishoTorikomiIchiranEditor implements
     private static final int NUM_2 = 2;
     private static final int NUM_3 = 3;
     private static final int NUM_4 = 4;
-    private static final RString 支給 = new RString("0");
+    private static final RString 支給 = new RString("1");
     private static final RString 窓口払 = new RString("1");
     private static final RString 口座払 = new RString("2");
     private static final RString 日時作成 = new RString("作成");
     private static final RString 接続文字 = new RString("～");
-    private static final RString 左カッコ = new RString("(");
-    private static final RString 右カッコ = new RString(")");
+    private static final RString 左カッコ = new RString("（");
+    private static final RString 右カッコ = new RString("）");
     private final ShikyuFushikyuChohyoParameter entity;
 
     /**
@@ -67,7 +65,7 @@ public class GassanShikyuTsuchishoTorikomiIchiranEditor implements
         DbWT0001HihokenshaTempEntity 被保険者 = entity.get帳票出力対象().get被保険者();
 
         source.printTimeStamp = getSakuseiYmhm(entity.get作成日時());
-        source.torikomiYM = entity.get処理年月().wareki().eraType(EraType.KANJI).
+        source.torikomiYM = entity.get処理年月().wareki().eraType(EraType.KANJI_RYAKU).
                 firstYear(FirstYear.ICHI_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         source.hokenshaNo = entity.get保険者番号();
         source.hokenshaName = entity.get保険者名();
@@ -105,18 +103,20 @@ public class GassanShikyuTsuchishoTorikomiIchiranEditor implements
             source.listCenter_2 = ShikyuFushikyuKubun.toValue(計算結果entity.get支給区分コード()).get名称();
         }
 
-        if (計算結果entity.get自己負担総額() != null && NUM_0 <= 計算結果entity.get自己負担総額().compareTo(Decimal.ZERO)) {
+        if (計算結果entity.get自己負担総額() != null) {
             source.listUpper_5 = DecimalFormatter.toコンマ区切りRString(計算結果entity.get自己負担総額(), 0);
         }
-        if (計算結果entity.get支給区分コード().equals(支給)) {
-            source.listCenter_3 = ShiharaiHohoKubun.toValue(計算結果entity.get支払方法区分()).get名称();
-            if (計算結果entity.get支払方法区分().equals(窓口払)) {
+        if (支給.equals(計算結果entity.get支給区分コード())) {
+            if (!RString.isNullOrEmpty(計算結果entity.get支払方法区分())) {
+                source.listCenter_3 = ShiharaiHohoKubun.toValue(計算結果entity.get支払方法区分()).get名称();
+            }
+            if (窓口払.equals(計算結果entity.get支払方法区分())) {
                 source.listUpper_6 = 計算結果entity.get支払場所();
                 source.listLower_6 = getlistLower_6(new FlexibleDate(計算結果entity.get支払期間開始年月日()),
                         new RTime(計算結果entity.get支払期間開始時間()),
                         new FlexibleDate(計算結果entity.get支払期間終了年月日()),
                         new RTime(計算結果entity.get支払期間終了時間()));
-            } else if (計算結果entity.get支払方法区分().equals(口座払)) {
+            } else if (口座払.equals(計算結果entity.get支払方法区分())) {
                 source.listUpper_6 = getlistUpper_6(計算結果entity.get金融機関名(), 計算結果entity.get金融機関支店名());
                 source.listLower_6 = getlistlower_6(計算結果entity.get口座種目名(), 計算結果entity.get口座番号(),
                         計算結果entity.get口座名義人_カナ());
@@ -133,7 +133,7 @@ public class GassanShikyuTsuchishoTorikomiIchiranEditor implements
                 separator(Separator.PERIOD).fillType(FillType.BLANK).
                 toDateString();
 
-        if (計算結果entity.get支給額() != null && NUM_0 <= 計算結果entity.get支給額().compareTo(Decimal.ZERO)) {
+        if (計算結果entity.get支給額() != null) {
             source.listLower_5 = DecimalFormatter.toコンマ区切りRString(計算結果entity.get支給額(), 0);
         }
 
@@ -148,8 +148,7 @@ public class GassanShikyuTsuchishoTorikomiIchiranEditor implements
         sakuseiYMD.append(datetime.getDate().wareki().
                 eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).
                 separator(Separator.JAPANESE).
-                fillType(FillType.NONE).
-                width(Width.HALF).toDateString());
+                fillType(FillType.BLANK).toDateString());
         sakuseiYMD.append(RString.HALF_SPACE);
         sakuseiYMD.append(datetime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         sakuseiYMD.append(RString.HALF_SPACE);

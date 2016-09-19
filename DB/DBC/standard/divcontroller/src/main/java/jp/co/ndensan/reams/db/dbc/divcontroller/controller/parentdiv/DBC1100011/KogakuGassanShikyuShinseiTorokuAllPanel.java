@@ -79,6 +79,8 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
         }
         if (RSTRING_ONE.equals(高額合算申請書保持.get申請状態())) {
             handler.申請登録状態初期表示に設定();
+            handler.onChange_ddlShinseiTaisyoNendo();
+            handler.onChange_ddlShokisaiHokenshaNo();
             div.getTxtIryoShikyuShinseishoSeiriBango2().setReadOnly(false);
             div.getTxtIryoShikyuShinseishoSeiriBango3().setReadOnly(false);
             div.getTxtIryoShikyuShinseishoSeiriBango4().setReadOnly(false);
@@ -260,7 +262,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
         handler.onClick_btnKanyuJohoTsuika();
         ViewStateHolder.put(ViewStateKeys.加入歴, null);
         ViewStateHolder.put(ViewStateKeys.加入歴状態, 追加);
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBC1100011StateName.申請登録加入履歴情報);
     }
 
     /**
@@ -287,7 +289,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
         handler.onClick_dgKanyurekiModify();
         ViewStateHolder.put(ViewStateKeys.加入歴, 加入歴);
         ViewStateHolder.put(ViewStateKeys.加入歴状態, 修正);
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBC1100011StateName.申請登録加入履歴情報);
     }
 
     /**
@@ -301,7 +303,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
         KogakuGassanShikyuShinseiTorokuAllPanelHandler handler = getHandler(div);
         handler.onClick_dgKanyRirekiSelect();
         ViewStateHolder.put(ViewStateKeys.加入歴状態, 照会);
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBC1100011StateName.申請登録加入履歴情報);
     }
 
     /**
@@ -328,7 +330,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
         handler.onClick_dgKanyRirekiDelete();
         ViewStateHolder.put(ViewStateKeys.加入歴, 加入歴);
         ViewStateHolder.put(ViewStateKeys.加入歴状態, 削除);
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBC1100011StateName.申請登録加入履歴情報);
     }
 
     /**
@@ -380,7 +382,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
     public ResponseData<KogakuGassanShikyuShinseiTorokuAllPanelDiv> onClick_btnShinseiJohoModoru(
             KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
         if (!ResponseHolder.isReRequest()) {
-            ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage());
+            return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
         }
         if (MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
             KogakuGassanShikyuShinseiTorokuAllPanelHandler handler = getHandler(div);
@@ -438,11 +440,14 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
      */
     public ResponseData<KogakuGassanShikyuShinseiTorokuAllPanelDiv> onClick_btnBackKensaku(
             KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+        RString 照会モード = ViewStateHolder.get(ViewStateKeys.照会モード, RString.class);
+        if (RString.isNullOrEmpty(照会モード)) {
+            return ResponseData.of(div).forwardWithEventName(DBC1100011TransitionEventName.戻る).respond();
+        }
         if (変更有無判定(div) && !ResponseHolder.isReRequest()) {
-            ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage());
+            return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
         }
         if (MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
-            RString 照会モード = ViewStateHolder.get(ViewStateKeys.照会モード, RString.class);
             if (!RString.isNullOrEmpty(照会モード) && div.getDgShinseiIchiran().getDataSource() != null) {
                 for (dgShinseiIchiran_Row row : div.getDgShinseiIchiran().getDataSource()) {
                     排他解除(排他情報.concat(row.getTxtHihokenshaNo()));
@@ -473,9 +478,9 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
         KogakuGassanShikyuShinseiTorokuAllPanelHandler handler = getHandler(div);
         boolean 変更有無 = handler.変更有無チェック();
         if (変更有無 && !ResponseHolder.isReRequest()) {
-            ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage());
+            return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         } else if (!変更有無 && !ResponseHolder.isReRequest()) {
-            ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage());
+            return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
         }
         if (MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
             KogakuGassanShinseishoHoji 高額合算申請書保持

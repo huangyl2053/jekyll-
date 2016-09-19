@@ -133,6 +133,8 @@ public class PrtKetteiTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchis
     private ChohyoSeigyoKyotsu 帳票制御共通;
     private RString 通知書定型文;
     private HonsanteiTsuchishoInfo 通知書共通情報entity;
+    private FileSpoolManager fileSpoolManager;
+    private RString eucFilePath;
 
     private BatchReportWriter<KaigoHokenHokenryogakuKetteiTsuchishoB5YokoReportSource> dbb100039reportWriter;
     private ReportSourceWriter<KaigoHokenHokenryogakuKetteiTsuchishoB5YokoReportSource> dbb100039ReportSourceWriter;
@@ -188,10 +190,10 @@ public class PrtKetteiTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchis
         一覧表reportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB200012.getReportId().value()).addBreak(breaker).create();
         一覧表ReportSourceWriter = new ReportSourceWriter<>(一覧表reportWriter);
 
-        FileSpoolManager fileSpoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
+        fileSpoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
                 決定_EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = fileSpoolManager.getEucOutputDirectry();
-        RString eucFilePath = Path.combinePath(spoolWorkPath, 決定_EUCファイル名);
+        eucFilePath = Path.combinePath(spoolWorkPath, 決定_EUCファイル名);
         csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).setNewLine(NewLine.CRLF)
                 .setDelimiter(カンマ)
                 .setEnclosure(EUC_WRITER_ENCLOSURE)
@@ -285,6 +287,7 @@ public class PrtKetteiTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchis
         close決定通知書();
         一覧表reportWriter.close();
         csvListWriter.close();
+        fileSpoolManager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
     }
 
     private int publish決定通知書(KaigoHokenHokenryogakuKetteiTsuchishoJoho 介護保険料額決定通知書) {

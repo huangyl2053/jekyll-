@@ -48,7 +48,7 @@ public class FukushiYoguKonyuhiShokai {
         List<ShikibetsuNoKanri> 識別番号管理データリスト = KyufuJissekiShokaiFinder.createInstance().getShikibetsuBangoKanri(
                 サービス提供年月, 識別番号検索キー).records();
         if (!識別番号管理データリスト.isEmpty()) {
-            getHandler(div).setButton(サービス提供年月, 識別番号管理データリスト.get(0));
+            getHandler(div).setButton(識別番号管理データリスト.get(0));
         }
         getHandler(div).onLoad(給付実績情報照会情報.getCsData_G(), 整理番号, div.getCcdKyufuJissekiHeader().get事業者番号(),
                 div.getCcdKyufuJissekiHeader().get様式番号(), サービス提供年月.toDateString());

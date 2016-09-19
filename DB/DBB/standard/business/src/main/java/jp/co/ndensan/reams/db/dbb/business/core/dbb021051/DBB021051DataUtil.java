@@ -422,6 +422,9 @@ public class DBB021051DataUtil {
 
     private void set出力順(List<RString> jokenList, List<RString> 出力順設定リスト) {
         boolean firstFlag = true;
+        if (出力順設定リスト == null || 出力順設定リスト.isEmpty()) {
+            return;
+        }
         for (RString 出力順項目 : 出力順設定リスト) {
             if (firstFlag) {
                 jokenList.add(出力順.concat(出力順項目));

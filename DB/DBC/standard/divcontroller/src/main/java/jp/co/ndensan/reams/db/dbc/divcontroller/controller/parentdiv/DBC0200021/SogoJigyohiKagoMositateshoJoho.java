@@ -59,8 +59,10 @@ public class SogoJigyohiKagoMositateshoJoho {
      * @return ResponseData
      */
     public ResponseData<DBC110140_SogojigyohiKagoMoshitateshoOutParameter> onClick_Execute(SogoJigyohiKagoMositateshoJohoDiv div) {
+        再処理区分 = div.getCcdKokuhorenJohoSofu().get再処理区分のValue();
+        処理年月 = div.getCcdKokuhorenJohoSofu().get処理年月のValue().getYearMonth();
         if (getHandler(div).setBatchParameter(再処理区分, 処理年月) != null) {
-            return getHandler(div).setBatchParameter(再処理区分, 処理年月);
+            return ResponseData.of(getHandler(div).setBatchParameter(再処理区分, 処理年月)).respond();
         }
         return ResponseData.of(new DBC110140_SogojigyohiKagoMoshitateshoOutParameter()).respond();
     }

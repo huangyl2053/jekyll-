@@ -7,18 +7,20 @@ package jp.co.ndensan.reams.db.dbb.business.report.dbz100001;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jp.co.ndensan.reams.db.dbb.business.report.dbb021051.DBZ100001AtenaSealEntity;
 import jp.co.ndensan.reams.db.dbb.business.report.dbb021051.DBZ100001AtenaSealParameterEntity;
 import jp.co.ndensan.reams.db.dbb.entity.report.atenaseal.DBZ100001AtenaSealSource;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCode;
+import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCodeResult;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
@@ -30,7 +32,6 @@ public class AtenaSealEditor
         implements IAtenaSealEditor {
 
     private final DBZ100001AtenaSealParameterEntity entity;
-    private List<DBZ100001AtenaSealEntity> entityList;
     private static final RString 宛名シール = new RString("宛名シール");
     private static final RString SAKUSEI = new RString("作成");
     private static final RString SET = new RString("set");
@@ -39,7 +40,7 @@ public class AtenaSealEditor
     private static final int NUM_16 = 16;
     private static final int NUM_17 = 17;
     private static final int NUM_18 = 18;
-    private static final int NUM_19 = 17;
+    private static final int NUM_19 = 19;
     private static final int NUM_13 = 13;
     private static final int NUM_12 = 12;
     private static final int NUM_11 = 11;
@@ -56,7 +57,7 @@ public class AtenaSealEditor
     private static final int NUM_0 = 0;
     private static final RString EMPTY = RString.EMPTY;
     private final Class cls = DBZ100001AtenaSealSource.class;
-    private RString tmp0;
+    private ShikibetsuCode tmp0;
     private RString tmp1;
     private RString tmp2;
     private RString tmp3;
@@ -78,6 +79,8 @@ public class AtenaSealEditor
     private RString tmp19;
     private Method method;
     private int posIndex;
+    private CustomerBarCode barcode;
+    private CustomerBarCodeResult result;
 
     /**
      * コンストラクタです
@@ -111,7 +114,7 @@ public class AtenaSealEditor
         source.shichosonName = entity.get市町村名称();
         source.title = 宛名シール;
         this.posIndex = 1;
-        for (DBZ100001AtenaSealEntity e : this.entityList) {
+        for (DBZ100001AtenaSealEntity e : entity.getEntityList()) {
             setTemp(e);
             editBody(source);
             this.posIndex += 1;
@@ -121,7 +124,7 @@ public class AtenaSealEditor
 
     private void editBody(DBZ100001AtenaSealSource source) {
         try {
-            this.method = this.cls.getMethod(getMethodName(0), RString.class);
+            this.method = this.cls.getMethod(getMethodName(0), ShikibetsuCode.class);
             this.method.invoke(source, this.tmp0);
             this.method = this.cls.getMethod(getMethodName(NUM_1), RString.class);
             this.method.invoke(source, this.tmp1);
@@ -190,7 +193,7 @@ public class AtenaSealEditor
     private static enum MethodName {
 
         未定義(AtenaSealEditor.EMPTY, Integer.valueOf(-1)),
-        shikibetsuCode(new RString("shikibetsuCode"), Integer.valueOf(0)),
+        shikibetsuCode(new RString("ShikibetsuCode"), Integer.valueOf(0)),
         yubinNo(new RString("YubinNo"), Integer.valueOf(1)),
         gyoseiku(new RString("Gyoseiku"), Integer.valueOf(2)),
         jushoText(new RString("JushoText"), Integer.valueOf(3)),
@@ -208,8 +211,8 @@ public class AtenaSealEditor
         meishoFuyo1(new RString("MeishoFuyo"), Integer.valueOf(15)),
         samaBun(new RString("SamaBun"), Integer.valueOf(16)),
         samaBun1(new RString("SamaBun"), Integer.valueOf(17)),
-        kakkoRigh(new RString("KakkoRigh"), Integer.valueOf(18)),
-        kakkoRigh1(new RString("KakkoRigh"), Integer.valueOf(19));
+        kakkoRight(new RString("KakkoRight"), Integer.valueOf(18)),
+        kakkoRight1(new RString("KakkoRight"), Integer.valueOf(19));
 
         private final RString name;
         private final Integer index;
@@ -241,7 +244,7 @@ public class AtenaSealEditor
     }
 
     private void setTemp(DBZ100001AtenaSealEntity entity) {
-        this.tmp0 = entity.get識別コード().value();
+        this.tmp0 = entity.get識別コード();
         this.tmp1 = entity.get郵便番号();
         this.tmp2 = entity.get行政区();
         this.tmp3 = entity.get住所TXT();
@@ -260,7 +263,9 @@ public class AtenaSealEditor
         this.tmp17 = entity.get様分1();
         this.tmp18 = entity.get右括号2();
         this.tmp19 = entity.get右括号1();
-        this.tmp5 = entity.getバーコード住所();
+        barcode = new CustomerBarCode();
+        result = barcode.convertCustomerBarCode(tmp1, entity.getバーコード住所());
+        this.tmp5 = result.getCustomerBarCode();
     }
 
 }

@@ -161,7 +161,7 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
     private static final RString 波線 = new RString("　～　");
     private static final RString 左記号 = new RString("(");
     private static final RString 右記号 = new RString(")");
-    private static final RString 送付対象外データを含める = new RString("送付対象外データを含める：");
+    private static final RString 送付対象外データを含める = new RString("送付対象外データを含める");
     private static final RString 日本語ファイル名 = new RString("汎用リスト　高額合算自己負担額情報CSV");
     private static final RString 出力ファイル名 = new RString("HanyoListKogakuGassanJikoFutangaku.csv");
     private static final RString CSV出力有無_なし = new RString("なし");
@@ -381,7 +381,7 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
             csvEntity.set送付先住所コード(送付先住所コード != null
                     ? 送付先住所コード.getColumnValue() : RString.EMPTY);
             csvEntity.set送付先郵便番号(送付先郵便番号 != null
-                    ? 送付先郵便番号.getColumnValue() : RString.EMPTY);
+                    ? 送付先郵便番号.getEditedYubinNo() : RString.EMPTY);
 
             csvEntity.set送付先行政区コード(送付先行政区コード != null
                     ? 送付先行政区コード.getColumnValue() : RString.EMPTY);
@@ -828,7 +828,7 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
     private RStringBuilder get保険者コード() {
         RStringBuilder builder = new RStringBuilder();
         builder.append(保険者);
-        if (!RString.isNullOrEmpty(parameter.get保険者コード()) && すべて.equals(parameter.get保険者コード())) {
+        if (!RString.isNullOrEmpty(parameter.get保険者コード()) && !すべて.equals(parameter.get保険者コード())) {
             return builder.append(AssociationFinderFactory.createInstance().getAssociation(new LasdecCode(parameter.get保険者コード())));
         }
         return null;

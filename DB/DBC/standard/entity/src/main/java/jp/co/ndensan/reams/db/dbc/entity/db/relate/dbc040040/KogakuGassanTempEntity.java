@@ -41,7 +41,6 @@ public class KogakuGassanTempEntity extends DbTableEntityBase<KogakuGassanTempEn
     private HokenshaNo hokenshaNo;
     @PrimaryKey
     private RString seiriNo;
-    @PrimaryKey
     private Decimal rirekiNo;
     private RString shinseiJokyoKubun;
     private FlexibleDate shinseiYMD;

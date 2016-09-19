@@ -41,7 +41,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class JigyoKogakuKetteiTsuchishoYijiAriPrintService {
 
     private static final FlexibleYear 管理年度 = new FlexibleYear("0000");
-    private static final ReportId 帳票分類ID = new ReportId("DBC100007_KogakuKetteiTsuchiSho");
+    private static final ReportId 帳票分類ID = new ReportId("DBC100061_JigyoKogakuKetteiTsuchisho");
     private static final RString 項目名 = new RString("取り消し線");
 
     /**

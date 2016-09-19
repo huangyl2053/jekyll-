@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbu.definition.processprm.ippanshokanketteiym.Jigy
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 
 /**
  * 事業報告月報_一般状況のパラメータクラスです。
@@ -38,6 +39,8 @@ public class DBU010050_JigyoHokokuGeppo_IppanShokan_KetteiYMParamter extends Bat
     private static final String CSVID = "csvId";
     private static final String BACTHID = "bacthId";
     private static final String SHUKEINO = "shukeiNo";
+    private static final String SYUTURYOKUCSVFILEPATH = "syuturyokuCSVFilePath";
+    private static final String MANAGER = "manager";
 
     @BatchParameter(key = PRINTCONTROLKBN, name = "プリントコントロール区分")
     private RString プリントコントロール区分;
@@ -73,6 +76,10 @@ public class DBU010050_JigyoHokokuGeppo_IppanShokan_KetteiYMParamter extends Bat
     private RString バッチID;
     @BatchParameter(key = SHUKEINO, name = "集計番号")
     private RString 集計番号;
+    @BatchParameter(key = SYUTURYOKUCSVFILEPATH, name = "出力CSVファイルPath")
+    private RString csvFilePath;
+    @BatchParameter(key = MANAGER, name = "manager")
+    private FileSpoolManager manager;
 
     /**
      * Process用のパラメータを生成します。
@@ -97,6 +104,8 @@ public class DBU010050_JigyoHokokuGeppo_IppanShokan_KetteiYMParamter extends Bat
                 過去集計分旧市町村区分,
                 作成CSVファイルID,
                 バッチID,
-                集計番号);
+                集計番号,
+                csvFilePath,
+                manager);
     }
 }

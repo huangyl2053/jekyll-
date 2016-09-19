@@ -147,6 +147,8 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
     private HonsanteiTsuchishoIkkatsuHakkoSyori honsanteiSyori;
     private PrtNonyuTsuchishoParameter myBatisParameter;
     private NonyuTsuchiShoJohoFactory nonyuTsuchiShoJohoFactory;
+    private FileSpoolManager fileSpoolManager;
+    private RString eucFilePath;
 
     private Decimal 連番;
     private int 総ページ数;
@@ -288,10 +290,10 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
         一覧表reportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBB.DBB200010.getReportId().value()).create();
         一覧表ReportSourceWriter = new ReportSourceWriter<>(一覧表reportWriter);
 
-        FileSpoolManager fileSpoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
+        fileSpoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
                 納入_EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = fileSpoolManager.getEucOutputDirectry();
-        RString eucFilePath = Path.combinePath(spoolWorkPath, 納入_EUCファイル名);
+        eucFilePath = Path.combinePath(spoolWorkPath, 納入_EUCファイル名);
         csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).setNewLine(NewLine.CRLF)
                 .setDelimiter(カンマ)
                 .setEnclosure(EUC_WRITER_ENCLOSURE)
@@ -381,6 +383,11 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
             manager.loadバッチ出力条件リスト(出力条件リスト, 出力帳票一覧.get帳票ID(), new RString(総ページ数),
                     CSV出力有無_あり, CSVファイル名_納入一覧表, 帳票名);
         }
+
+        close納入通知書();
+
+        csvListWriter.close();
+        fileSpoolManager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
     }
 
     private void initializ納入通知書() {
@@ -778,6 +785,42 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
             if (帳票制御汎用２ != null && !RString.isNullOrEmpty(帳票制御汎用２.get設定値())) {
                 当初出力_後期開始期 = Integer.parseInt(帳票制御汎用２.get設定値().toString());
             }
+        }
+    }
+
+    private void close納入通知書() {
+        if (ReportIdDBB.DBB100045.getReportId().equals(出力帳票一覧.get帳票ID())) {
+            dbb100045reportWriter.close();
+        } else if (ReportIdDBB.DBB100046.getReportId().equals(出力帳票一覧.get帳票ID())) {
+            dbb100046reportWriter.close();
+        } else if (ReportIdDBB.DBB100051.getReportId().equals(出力帳票一覧.get帳票ID())) {
+            dbb100051reportWriter.close();
+        } else if (ReportIdDBB.DBB100052.getReportId().equals(出力帳票一覧.get帳票ID())) {
+            dbb100052reportWriter.close();
+        } else if (ReportIdDBB.DBB100053.getReportId().equals(出力帳票一覧.get帳票ID())) {
+            dbb100053reportWriter.close();
+        } else if (ReportIdDBB.DBB100054.getReportId().equals(出力帳票一覧.get帳票ID())) {
+            dbb100054reportWriter.close();
+        } else if (ReportIdDBB.DBB100055.getReportId().equals(出力帳票一覧.get帳票ID())) {
+            dbb100055reportWriter.close();
+        } else if (ReportIdDBB.DBB100056.getReportId().equals(出力帳票一覧.get帳票ID())) {
+            dbb100056reportWriter.close();
+        } else if (ReportIdDBB.DBB100057.getReportId().equals(出力帳票一覧.get帳票ID())) {
+            dbb100057reportWriter.close();
+        } else if (ReportIdDBB.DBB100058.getReportId().equals(出力帳票一覧.get帳票ID())) {
+            dbb100058reportWriter.close();
+        } else if (ReportIdDBB.DBB100059.getReportId().equals(出力帳票一覧.get帳票ID())) {
+            dbb100059reportWriter.close();
+        } else if (ReportIdDBB.DBB100060.getReportId().equals(出力帳票一覧.get帳票ID())) {
+            dbb100060reportWriter.close();
+        } else if (ReportIdDBB.DBB100061.getReportId().equals(出力帳票一覧.get帳票ID())) {
+            dbb100061reportWriter.close();
+        } else if (ReportIdDBB.DBB100062.getReportId().equals(出力帳票一覧.get帳票ID())) {
+            dbb100062reportWriter.close();
+        } else if (ReportIdDBB.DBB100063.getReportId().equals(出力帳票一覧.get帳票ID())) {
+            dbb100063reportWriter.close();
+        } else if (ReportIdDBB.DBB100064.getReportId().equals(出力帳票一覧.get帳票ID())) {
+            dbb100064reportWriter.close();
         }
     }
 }

@@ -55,7 +55,7 @@
         DbWT3061."toriatsukaiYM" AS dbWT3061_toriatsukaiYm,
         DbWT3061."jigyoshoNo" AS dbWT3061_jigyoshoNo,
         DbWT0001."hihokenshaNo" AS dbWT0001_hihokenshaNo,
-        DbWT0001."orgHihokenshaShimei" AS dbWT0001_orgHihokenshaShimei,
+        DbWT0001."meisho" AS dbWT0001_orgHihokenshaShimei,
         DbWT3061."serviceTeikyoYM" AS dbWT3061_serviceTeikyoYm,
         DbWT3061."serviceShuruiCode" AS dbWT3061_serviceShuruiCode,
         DbWT3061."serviceShuruiName" AS dbWT3061_serviceShuruiName,

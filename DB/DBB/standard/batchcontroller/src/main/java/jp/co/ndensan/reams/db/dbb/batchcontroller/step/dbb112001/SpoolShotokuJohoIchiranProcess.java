@@ -90,7 +90,7 @@ public class SpoolShotokuJohoIchiranProcess extends BatchKeyBreakBase<ShotokuJoh
     private static final RString 異動_単一_4 = new RString("4");
     private static final RString TIME_FORMAT = new RString("HH:MM:SS");
     private static final RString 導入形態コード_111 = new RString("111");
-    private static final RString 導入形態コード_112 = new RString("112");
+    private static final RString 導入形態コード_120 = new RString("120");
     private static final RString INDEX_22 = new RString("22");
     private static final int INT_1 = 1;
     private static final RString 出力_市町村情報リスト = new RString("【市町村情報リスト】");
@@ -102,7 +102,6 @@ public class SpoolShotokuJohoIchiranProcess extends BatchKeyBreakBase<ShotokuJoh
     private static final RString CSVファイル名_あり = new RString("介護保険所得情報一覧表");
 
     private ShutokuJohoShuchutsuRenkeiProcessParameter processParameter;
-    private SpoolShotokuJohoIchiranMybatisParameter mybatisParam;
     private IOutputOrder 出力順情報;
     private List<RString> 改頁リスト;
     private List<RString> 並び順リスト;
@@ -128,7 +127,7 @@ public class SpoolShotokuJohoIchiranProcess extends BatchKeyBreakBase<ShotokuJoh
         if (当初_広域_1.equals(処理区分) || 異動_広域_2.equals(処理区分)) {
             導入形態コード = 導入形態コード_111;
         } else if (当初_単一_3.equals(処理区分) || 異動_単一_4.equals(処理区分)) {
-            導入形態コード = 導入形態コード_112;
+            導入形態コード = 導入形態コード_120;
         }
         IAssociationFinder finder = AssociationFinderFactory.createInstance();
         association = finder.getAssociation();
@@ -146,8 +145,7 @@ public class SpoolShotokuJohoIchiranProcess extends BatchKeyBreakBase<ShotokuJoh
         ShunoKamokuAuthority sut = InstanceProvider.create(ShunoKamokuAuthority.class);
         List<KamokuCode> list = sut.get更新権限科目コード(ControlDataHolder.getUserId());
         RString 出力順 = MyBatisOrderByClauseCreator.create(ShotokuJohoIchiranOrder.class, 出力順情報);
-        mybatisParam.set出力順(出力順);
-        return new BatchDbReader(READ_DATA_ID, new SpoolShotokuJohoIchiranMybatisParameter(key, list));
+        return new BatchDbReader(READ_DATA_ID, new SpoolShotokuJohoIchiranMybatisParameter(key, list, 出力順));
     }
 
     @Override
@@ -242,7 +240,7 @@ public class SpoolShotokuJohoIchiranProcess extends BatchKeyBreakBase<ShotokuJoh
                 出力条件リスト.add(出力条件);
             }
         }
-        RString 出力条件_出力順 = 出力_出力順.concat(RString.FULL_SPACE).concat(だいなり);
+        RString 出力条件_出力順 = 出力_出力順.concat(RString.FULL_SPACE);
         for (RString 出力順 : 並び順リスト) {
             出力条件_出力順 = 出力条件_出力順.concat(出力順).concat(だいなり);
         }
@@ -372,7 +370,7 @@ public class SpoolShotokuJohoIchiranProcess extends BatchKeyBreakBase<ShotokuJoh
         if (RString.isNullOrEmpty(processParameter.get出力順ID())) {
             出力順情報 = null;
         } else {
-            出力順情報 = finder.get出力順(SubGyomuCode.DBC介護給付, 帳票ID, Long.parseLong(processParameter.get出力順ID().toString()));
+            出力順情報 = finder.get出力順(SubGyomuCode.DBB介護賦課, 帳票ID, Long.parseLong(processParameter.get出力順ID().toString()));
         }
         if (出力順情報 == null) {
             return;

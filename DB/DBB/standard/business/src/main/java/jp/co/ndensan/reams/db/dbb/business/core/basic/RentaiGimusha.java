@@ -157,6 +157,30 @@ public class RentaiGimusha extends ModelBase<RentaiGimushaIdentifier, DbT2009Ren
     }
 
     /**
+     * 保持する利用者負担割合を追加対象とします。
+     * <br/> {@link DbT2009RentaiGimushaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば追加状態にします。
+     *
+     * @return 追加対象処理実施後の{@link RiyoshaFutanWariai}
+     */
+    public RentaiGimusha added() {
+        DbT2009RentaiGimushaEntity addedEntity = this.toEntity();
+        addedEntity.setState(EntityDataState.Added);
+        return new RentaiGimusha(addedEntity, id);
+    }
+
+    /**
+     * 保持する利用者負担割合を追加対象とします。
+     * <br/> {@link DbT2009RentaiGimushaEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば修正状態にします。
+     *
+     * @return 修正対象処理実施後の{@link RiyoshaFutanWariai}
+     */
+    public RentaiGimusha modified() {
+        DbT2009RentaiGimushaEntity modifiedEntity = this.toEntity();
+        modifiedEntity.setState(EntityDataState.Modified);
+        return new RentaiGimusha(modifiedEntity, id);
+    }
+
+    /**
      * {@link RentaiGimusha}のシリアライズ形式を提供します。
      *
      * @return {@link RentaiGimusha}のシリアライズ形式
@@ -168,7 +192,7 @@ public class RentaiGimusha extends ModelBase<RentaiGimushaIdentifier, DbT2009Ren
 
     @Override
     public boolean hasChanged() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return hasChangedEntity();
     }
 
     private static final class _SerializationProxy implements Serializable {

@@ -62,7 +62,6 @@ public class TyohyoShutuyukuProcess extends BatchKeyBreakBase<ShafukugemmenTaish
     private DBD206010TyohyoProcessParameter processParameter;
     private static Association association;
     private IOutputOrder outputOrder;
-    private IOutputOrder breakoutputOrder;
     private static final int NUM5 = 5;
     private static final int NUM8 = 8;
     private int 番号;
@@ -83,14 +82,11 @@ public class TyohyoShutuyukuProcess extends BatchKeyBreakBase<ShafukugemmenTaish
         association = AssociationFinderFactory.createInstance().getAssociation();
         IChohyoShutsuryokujunFinder chohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
         long 帳票出力順ID = processParameter.get出力順ID();
-        long 帳票改頁出力順ID = processParameter.get改頁出力順ID();
         outputOrder = chohyoShutsuryokujunFinder.get出力順(
                 SubGyomuCode.DBD介護受給, ReportIdDBD.DBD200017.getReportId(), 帳票出力順ID);
-        breakoutputOrder = chohyoShutsuryokujunFinder.get出力順(
-                SubGyomuCode.DBD介護受給, ReportIdDBD.DBD200017.getReportId(), 帳票改頁出力順ID);
 
         if (null != outputOrder) {
-            if (processParameter.get改頁出力順ID() != null) {
+            if (processParameter.get出力順ID() != null) {
                 orderBy = ChohyoUtil.get出力順OrderBy(MyBatisOrderByClauseCreator.create(TyohyoShutuyukuOrderKey.class,
                         outputOrder).replace("order by", ","), NUM5);
             } else {
@@ -118,7 +114,7 @@ public class TyohyoShutuyukuProcess extends BatchKeyBreakBase<ShafukugemmenTaish
     @Override
     protected void createWriter() {
         List<RString> pageBreakKeys = new ArrayList<>();
-        set改頁Key(breakoutputOrder, pageBreakKeys);
+        set改頁Key(outputOrder, pageBreakKeys);
         if (!pageBreakKeys.isEmpty()) {
             batchReportWriter = BatchReportFactory.createBatchReportWriter(REPORT_DBD200017.value())
                     .addBreak(new TyohyoShutuyukuSourcePageBreak(pageBreakKeys)).create();
@@ -130,27 +126,10 @@ public class TyohyoShutuyukuProcess extends BatchKeyBreakBase<ShafukugemmenTaish
 
     @Override
     protected void keyBreakProcess(ShafukugemmenTaishoshaJohoEntity t) {
-//        if (hasBrek(getBefore(), t)) {
-//            outputMessageBreak(t);
-//            outputState = false;
-//        } else {
-//            outputState = true;
-//        }
     }
 
-//    private boolean hasBrek(ShafukugemmenTaishoshaJohoEntity before, ShafukugemmenTaishoshaJohoEntity current) {
-//        boolean state = false;
-//        if (1 < 番号 && current.get証記載保険者番号() != null && before.get事業所番号() != null
-//                && before.get事業所番号().compareTo(current.get証記載保険者番号().getColumnValue()) == 1) {
-//            state = true;
-//        }
-//        return state;
-//    }
     @Override
     protected void usualProcess(ShafukugemmenTaishoshaJohoEntity t) {
-//        if (outputState) {
-//            outputMessage(t);
-//        }
         outputMessage(t);
     }
 
@@ -158,22 +137,15 @@ public class TyohyoShutuyukuProcess extends BatchKeyBreakBase<ShafukugemmenTaish
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation(
                 new LasdecCode(t.get証記載保険者番号().value()));
         JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranReport report
-                = new JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranReport(t, association, 地方公共団体, outputOrder, breakoutputOrder, 番号++);
+                = new JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranReport(t, association, 地方公共団体, outputOrder, 番号++);
         report.writeBy(reportSourceWriter);
     }
 
-//    private void outputMessageBreak(ShafukugemmenTaishoshaJohoEntity t) {
-//        Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation(
-//                new LasdecCode(t.get証記載保険者番号().value()));
-//        JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranReport report
-//                = new JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranReport(t, association, 地方公共団体, outputOrder, breakoutputOrder, 番号++);
-//        report.writeBy(reportSourceWriter);
-//    }
     @Override
     protected void afterExecute() {
         if (番号 == 1) {
             JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranReport report
-                    = new JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranReport(null, association, null, outputOrder, breakoutputOrder, 番号++);
+                    = new JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranReport(null, association, null, outputOrder, 番号++);
             report.writeBy(reportSourceWriter);
         }
         outputJokenhyoFactory();

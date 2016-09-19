@@ -76,7 +76,7 @@
                 rgdb."DbT1001HihokenshaDaicho" AS 被保険者台帳管理
             WHERE
                 (被保険者台帳管理."shikakuShutokuYMD" <![CDATA[ <= ]]> #{ 基準日 }
-                AND 被保険者台帳管理."shikakuSoshitsuYMD" > #{ 基準日 }
+                AND 被保険者台帳管理."shikakuSoshitsuYMD" <![CDATA[ > ]]> #{ 基準日 }
                 OR 被保険者台帳管理."shikakuSoshitsuYMD" IS NULL)
                 AND 被保険者台帳管理."logicalDeletedFlag" = FALSE
                 ) AS 被保険者台帳

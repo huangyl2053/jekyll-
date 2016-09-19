@@ -51,11 +51,22 @@ public class HeinjunkaKeisanProcess extends BatchProcessBase<TokuchoHeijunkaRoku
     private static final RString 備考コード_結果0円以下 = new RString("3");
     private static final RString 備考コード_対象外減額 = new RString("4");
     private static final RString 備考コード_対象外増額 = new RString("5");
+    private static RString 特徴期情報_設定納期数;
+    private static RString 特徴期情報_仮算定期数;
+    private static RString 特別徴収_期別端数;
     private TokuchoHeinjunka6GatsuProcessParameter parameter;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 平準化計算結果一時tableWriter;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 対象外データ一時tableWriter;
+
+    @Override
+    protected void initialize() {
+        RDate effectiveDate = new RDate(parameter.get賦課年度().toDateString().toString());
+        特徴期情報_設定納期数 = コンフィグ値取得(ConfigNameDBB.特徴期情報_設定納期数, effectiveDate);
+        特徴期情報_仮算定期数 = コンフィグ値取得(ConfigNameDBB.特徴期情報_仮算定期数, effectiveDate);
+        特別徴収_期別端数 = コンフィグ値取得(ConfigNameDBB.特別徴収_期別端数, effectiveDate);
+    }
 
     @Override
     protected void createWriter() {
@@ -74,10 +85,9 @@ public class HeinjunkaKeisanProcess extends BatchProcessBase<TokuchoHeijunkaRoku
     protected void process(TokuchoHeijunkaRokuBatchTaishogaiTempEntity taishogaiTempEntity) {
         Heijunka heijunka = new Heijunka();
         HokenryoDankaiManager 保険料段階取得 = new HokenryoDankaiManager();
-        RDate effectiveDate = new RDate(parameter.get賦課年度().toDateString().toString());
         HeijunkaInput heijunkaInput = new HeijunkaInput();
         平準化入力設定(保険料段階取得, parameter.get賦課年度(), taishogaiTempEntity, heijunkaInput, parameter.get増額平準化方法(),
-                parameter.get減額平準化方法(), effectiveDate);
+                parameter.get減額平準化方法());
         HeijunkaOutput 平準化結果 = heijunka.calculateHeijunka(heijunkaInput);
         if (平準化結果.is平準化済フラグ()) {
             TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity tmpEntity = new TokuchoHeijunkaRokuBatchHeijunkaKeisanKekaTempEntity(
@@ -92,7 +102,7 @@ public class HeinjunkaKeisanProcess extends BatchProcessBase<TokuchoHeijunkaRoku
 
     private void 平準化入力設定(HokenryoDankaiManager 保険料段階取得, FlexibleYear 賦課年度,
             TokuchoHeijunkaRokuBatchTaishogaiTempEntity entity, HeijunkaInput heijunkaInput,
-            RString 平準化計算方法_増額, RString 平準化計算方法_減額, RDate effectiveDate) {
+            RString 平準化計算方法_増額, RString 平準化計算方法_減額) {
         Optional<HokenryoDankai> 保険料段階 = 保険料段階取得.get保険料段階(賦課年度, entity.getHokenryoDankaiKarisanntei());
         heijunkaInput.set年保険料額(今年度保険料率取得(保険料段階));
         List<Decimal> 特徴期別額リスト = new ArrayList<>();
@@ -117,14 +127,11 @@ public class HeinjunkaKeisanProcess extends BatchProcessBase<TokuchoHeijunkaRoku
         heijunkaInput.set普徴期別額(普徴期別額リスト);
         heijunkaInput.set八月特徴開始者(NUM_0);
         GyomuConfigJohoClass 業務コンフィグ情報 = new GyomuConfigJohoClass();
-        業務コンフィグ情報.set特徴定期数(Integer.parseInt(
-                コンフィグ値取得(ConfigNameDBB.特徴期情報_設定納期数, effectiveDate).toString()));
-        業務コンフィグ情報.set特徴仮算定期数(Integer.parseInt(
-                コンフィグ値取得(ConfigNameDBB.特徴期情報_仮算定期数, effectiveDate).toString()));
+        業務コンフィグ情報.set特徴定期数(Integer.parseInt(特徴期情報_設定納期数.toString()));
+        業務コンフィグ情報.set特徴仮算定期数(Integer.parseInt(特徴期情報_仮算定期数.toString()));
         業務コンフィグ情報.set平準化計算方法増額分(Integer.parseInt(平準化計算方法_増額.toString()));
         業務コンフィグ情報.set平準化計算方法減額分(Integer.parseInt(平準化計算方法_減額.toString()));
-        業務コンフィグ情報.set端数区分特徴期別額(Integer.parseInt(
-                コンフィグ値取得(ConfigNameDBB.特別徴収_期別端数, effectiveDate).toString()));
+        業務コンフィグ情報.set端数区分特徴期別額(Integer.parseInt(特別徴収_期別端数.toString()));
         業務コンフィグ情報.set基準となる差額幅(Decimal.ZERO);
         業務コンフィグ情報.set基準となる差額率(Decimal.ZERO);
         業務コンフィグ情報.set平準化対象期別額最小値(Decimal.ONE);

@@ -12,7 +12,7 @@ import java.util.Set;
 import jp.co.ndensan.reams.db.dbc.business.report.gassanshikyutsuchishotorikomiichiran.GassanShikyuTsuchishoTorikomiIchiranOutputOrder;
 import jp.co.ndensan.reams.db.dbc.business.report.gassanshikyutsuchishotorikomiichiran.GassanShikyuTsuchishoTorikomiIchiranPageBreak;
 import jp.co.ndensan.reams.db.dbc.business.report.gassanshikyutsuchishotorikomiichiran.GassanShikyuTsuchishoTorikomiIchiranReport;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.jigyobunkogakugassanshikyukettei.ShiharaiHohoKubun;
+import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kokuhorenkyoutsuu.KokuhorenIchiranhyoMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kyufukanrihyoin.KyufukanrihyoDoIchiranhyoSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
@@ -95,8 +95,8 @@ public class ShikyuFushikyuDoIchiranhyoSakuseiProcess extends BatchProcessBase<S
     private static final RString 名称_支給 = new RString("支給");
     private static final RString 名称_不支給 = new RString("不支給");
     private static final RString 接続文字 = new RString("～");
-    private static final RString 左カッコ = new RString("(");
-    private static final RString 右カッコ = new RString(")");
+    private static final RString 左カッコ = new RString("（");
+    private static final RString 右カッコ = new RString("）");
     private static final RString SAKUSEI = new RString("作成");
     private static final RString 漢字_被保険者番号 = new RString("被保険者番号");
     private static final RString エラーメッセージ = new RString("帳票出力順の取得");
@@ -252,9 +252,10 @@ public class ShikyuFushikyuDoIchiranhyoSakuseiProcess extends BatchProcessBase<S
             csvEntity.set支払方法名称(ShiharaiHohoKubun.toValue(決定.get支払方法区分()).get名称());
             if (窓口払.equals(決定.get支払方法区分())) {
                 csvEntity.set窓口払い_支払場所(決定.get支払場所());
-                csvEntity.set窓口払_支払期間(get支払期間(決定.get支払期間開始年月日(), 決定.get支払期間開始時間(), 決定.get支払期間終了年月日(), 決定.get支払期間終了時間()));
-                csvEntity.set口座払_金融機関_支店名(get金融機関支店名(決定.get金融機関名(), 決定.get金融機関支店名()));
+                csvEntity.set窓口払_支払期間(get支払期間(決定.get支払期間開始年月日(),
+                        決定.get支払期間開始時間(), 決定.get支払期間終了年月日(), 決定.get支払期間終了時間()));
             } else if (口座払.equals(決定.get支払方法区分())) {
+                csvEntity.set口座払_金融機関_支店名(get金融機関支店名(決定.get金融機関名(), 決定.get金融機関支店名()));
                 csvEntity.set口座払_種目(決定.get口座種目名());
                 csvEntity.set口座払_口座番号(決定.get口座番号());
                 csvEntity.set口座払_口座名義人(決定.get口座名義人_カナ());
@@ -337,7 +338,7 @@ public class ShikyuFushikyuDoIchiranhyoSakuseiProcess extends BatchProcessBase<S
             sakuseiYMD.append(右カッコ);
         }
         if (!RString.isNullOrEmpty(shuryoTime)) {
-            RTime 終了時間 = new RTime(kaishiTime);
+            RTime 終了時間 = new RTime(shuryoTime);
             sakuseiYMD.append(RString.HALF_SPACE);
             sakuseiYMD.append(終了時間.toFormattedTimeString(DisplayTimeFormat.HH_mm));
         }

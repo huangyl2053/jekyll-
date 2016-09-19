@@ -80,6 +80,8 @@ public class MeisaiDiv extends Panel {
     private RString hdnGyomuCode;
     @JsonProperty("hdnShikibetuCode")
     private RString hdnShikibetuCode;
+    @JsonProperty("hdnShikibetsuTaishoKubun")
+    private RString hdnShikibetsuTaishoKubun;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -499,6 +501,24 @@ public class MeisaiDiv extends Panel {
     @JsonProperty("hdnShikibetuCode")
     public void setHdnShikibetuCode(RString hdnShikibetuCode) {
         this.hdnShikibetuCode = hdnShikibetuCode;
+    }
+
+    /*
+     * gethdnShikibetsuTaishoKubun
+     * @return hdnShikibetsuTaishoKubun
+     */
+    @JsonProperty("hdnShikibetsuTaishoKubun")
+    public RString getHdnShikibetsuTaishoKubun() {
+        return hdnShikibetsuTaishoKubun;
+    }
+
+    /*
+     * sethdnShikibetsuTaishoKubun
+     * @param hdnShikibetsuTaishoKubun hdnShikibetsuTaishoKubun
+     */
+    @JsonProperty("hdnShikibetsuTaishoKubun")
+    public void setHdnShikibetsuTaishoKubun(RString hdnShikibetsuTaishoKubun) {
+        this.hdnShikibetsuTaishoKubun = hdnShikibetsuTaishoKubun;
     }
 
     /*

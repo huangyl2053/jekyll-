@@ -621,7 +621,7 @@ public enum ReportIdDBC {
     /**
      * 汎用リスト出力(総合事業費情報1)帳票ＩＤです。
      */
-    DBC701018(new ReportId("DBC701018_HanyoList_SogoJigyoHi"), new RString("汎用リスト出力( 総合事業費情報)")),
+    DBC701018(new ReportId("DBC701018_HanyoListSogoJigyoHi"), new RString("汎用リスト出力( 総合事業費情報)")),
     /**
      * 汎用リスト出力(総合事業費情報2)帳票ＩＤです。
      */

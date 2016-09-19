@@ -52,17 +52,19 @@ public class KogakuKaigoServiceHandler {
     public void set給付実績高額介護サービス費データ(List<KyufujissekiKogakuKaigoServicehi> 高額介護サービス費等, FlexibleYearMonth サービス提供年月) {
         List<KyufujissekiKogakuKaigoServicehi> 高額介護サービス費リスト = new ArrayList<>();
         if (高額介護サービス費等 != null && !高額介護サービス費等.isEmpty()) {
+            this.setGetsuBtn(高額介護サービス費等, サービス提供年月);
             for (KyufujissekiKogakuKaigoServicehi 高額介護サービス費 : 高額介護サービス費等) {
                 if (サービス提供年月 != null && サービス提供年月.compareTo(高額介護サービス費.getサービス提供年月()) == 0) {
                     高額介護サービス費リスト.add(高額介護サービス費);
                 }
             }
             div.getCcdKyufuJissekiHeader().setサービス提供年月(new RDate(to日期変換(サービス提供年月).toString()));
-
-            this.setGetsuBtn(高額介護サービス費等, サービス提供年月);
         }
         if (!高額介護サービス費リスト.isEmpty()) {
             this.setData(高額介護サービス費リスト.get(INT_ZERO));
+        } else {
+            div.getBtnZengetsu().setDisabled(true);
+            div.getBtnJigetsu().setDisabled(true);
         }
     }
 
@@ -89,9 +91,8 @@ public class KogakuKaigoServiceHandler {
      * 制御性設定です。
      *
      * @param 識別番号管理データ 識別番号
-     * @param サービス提供年月 サービス提供年月
      */
-    public void clear制御性(ShikibetsuNoKanri 識別番号管理データ, FlexibleYearMonth サービス提供年月) {
+    public void clear制御性(ShikibetsuNoKanri 識別番号管理データ) {
         div.getBtnKogakuKaigoService().setDisabled(true);
         if (ZERO.equals(識別番号管理データ.get基本設定区分())) {
             div.getBtnKihon().setDisabled(true);
@@ -202,12 +203,16 @@ public class KogakuKaigoServiceHandler {
 
     private void setGetsuBtn(List<KyufujissekiKogakuKaigoServicehi> 高額介護サービス費リスト, FlexibleYearMonth サービス提供年月) {
         List<FlexibleYearMonth> サービス提供年月リスト = getサービス提供年月リスト(高額介護サービス費リスト);
-        Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
-        if (サービス提供年月.isBeforeOrEquals(サービス提供年月リスト.get(サービス提供年月リスト.size() - 1))) {
-            div.getBtnZengetsu().setDisabled(true);
-        }
-        if (サービス提供年月リスト.get(INT_ZERO).isBeforeOrEquals(サービス提供年月)) {
-            div.getBtnJigetsu().setDisabled(true);
+        div.getBtnZengetsu().setDisabled(true);
+        div.getBtnJigetsu().setDisabled(true);
+        if (サービス提供年月リスト != null && !サービス提供年月リスト.isEmpty()) {
+            Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
+            if (!サービス提供年月.isBeforeOrEquals(サービス提供年月リスト.get(サービス提供年月リスト.size() - 1))) {
+                div.getBtnZengetsu().setDisabled(false);
+            }
+            if (!サービス提供年月リスト.get(INT_ZERO).isBeforeOrEquals(サービス提供年月)) {
+                div.getBtnJigetsu().setDisabled(false);
+            }
         }
     }
 

@@ -41,17 +41,7 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
     private final TokuchoHeijunkaRokuBatchTaishoshaIchiran 特徴平準化結果対象者一覧表;
     private final TokuchoHeijunkaRokuBatchTaishogaiIchiran 特徴平準化結果対象外一覧表;
     private static final int NUM_0 = 0;
-    private static final int NUM_1 = 1;
-    private static final int NUM_2 = 2;
     private static final int NUM_3 = 3;
-    private static final int NUM_4 = 4;
-    private static final int NUM_5 = 5;
-    private static final int NUM_6 = 6;
-    private static final RString 編集コード_併徴者 = new RString("併徴者");
-    private static final RString 編集コード_仮徴収額修正者 = new RString("仮徴収額修正者");
-    private static final RString 編集コード_対象外_減額 = new RString("対象外_減額");
-    private static final RString 編集コード_対象外_増額 = new RString("象外_増額");
-    private static final RString 編集コード_特徴6月開始者 = new RString("特徴6月開始者");
     private final Association association;
 
     protected TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor(
@@ -256,35 +246,5 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
         if (item.get特徴期期別金額06() != null) {
             source.listLower_11 = DecimalFormatter.toコンマ区切りRString(item.get特徴期期別金額06(), 0);
         }
-    }
-
-    private RString 備考名を転換(RString 編集コード) {
-        RString 備考名 = RString.EMPTY;
-        if (!RString.isNullOrEmpty(編集コード)) {
-            switch (Integer.parseInt(編集コード.toString())) {
-                case NUM_1:
-                    備考名 = 編集コード_併徴者;
-                    break;
-                case NUM_2:
-                    備考名 = 編集コード_仮徴収額修正者;
-                    break;
-                case NUM_3:
-                    備考名 = 編集コード_仮徴収額修正者;
-                    break;
-                case NUM_4:
-                    備考名 = 編集コード_対象外_減額;
-                    break;
-                case NUM_5:
-                    備考名 = 編集コード_対象外_増額;
-                    break;
-                case NUM_6:
-                    備考名 = 編集コード_特徴6月開始者;
-                    break;
-                default:
-                    break;
-            }
-            return 備考名;
-        }
-        return RString.EMPTY;
     }
 }

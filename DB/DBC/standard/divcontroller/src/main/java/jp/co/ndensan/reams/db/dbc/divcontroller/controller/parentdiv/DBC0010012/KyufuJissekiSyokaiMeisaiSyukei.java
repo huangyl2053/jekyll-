@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiP
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010012.KyufuJissekiSyokaiMeisaiSyukeiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0010012.KyufuJissekiSyokaiMeisaiSyukeiHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.kyufujissekishokai.KyufuJissekiShokaiFinder;
+import jp.co.ndensan.reams.db.dbc.service.core.kyufujissekisyokaimeisaisyukei.KyufuJissekiSyokaiMeisaiSyukeiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
@@ -45,7 +46,8 @@ public class KyufuJissekiSyokaiMeisaiSyukei {
         RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
         RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
         handler.onLoad(給付実績情報照会情報.getCsData_Z(), 給付実績情報照会情報.getCsData_B(), 給付実績情報照会情報.getCsData_N(),
-                整理番号, サービス提供年月, 様式番号, 事業者番号);
+                整理番号, サービス提供年月, 様式番号, 事業者番号,
+                KyufuJissekiSyokaiMeisaiSyukeiFinder.createInstance().get保険者情報().records());
         ShikibetsuNoKanri 識別番号管理 = KyufuJissekiShokaiFinder.createInstance().getShikibetsuBangoKanri(
                 サービス提供年月, 識別番号).records().get(0);
         handler.setButton(識別番号管理, サービス提供年月);
@@ -68,7 +70,8 @@ public class KyufuJissekiSyokaiMeisaiSyukei {
                 給付実績情報照会情報.getCommonHeader().get給付実績ヘッダ情報2(),
                 new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString()),
                 ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
-                ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class));
+                ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class),
+                KyufuJissekiSyokaiMeisaiSyukeiFinder.createInstance().get保険者情報().records());
         FlexibleYearMonth 今提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
         ViewStateHolder.put(ViewStateKeys.サービス提供年月, 今提供年月);
         return ResponseData.of(div).respond();
@@ -87,7 +90,8 @@ public class KyufuJissekiSyokaiMeisaiSyukei {
                 給付実績情報照会情報.getCommonHeader().get給付実績ヘッダ情報2(),
                 new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString()),
                 ViewStateHolder.get(ViewStateKeys.整理番号, RString.class),
-                ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class));
+                ViewStateHolder.get(ViewStateKeys.識別番号検索キー, NyuryokuShikibetsuNo.class),
+                KyufuJissekiSyokaiMeisaiSyukeiFinder.createInstance().get保険者情報().records());
         FlexibleYearMonth 今提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString());
         ViewStateHolder.put(ViewStateKeys.サービス提供年月, 今提供年月);
         return ResponseData.of(div).respond();
@@ -103,7 +107,8 @@ public class KyufuJissekiSyokaiMeisaiSyukei {
         KyufuJissekiPrmBusiness 給付実績情報照会情報 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
         getHandler(div).change事業者(new RString("前事業者"),
                 給付実績情報照会情報.getCommonHeader().get給付実績ヘッダ情報2(),
-                給付実績情報照会情報.getCsData_Z(), 給付実績情報照会情報.getCsData_B(), 給付実績情報照会情報.getCsData_N());
+                給付実績情報照会情報.getCsData_Z(), 給付実績情報照会情報.getCsData_B(), 給付実績情報照会情報.getCsData_N(),
+                KyufuJissekiSyokaiMeisaiSyukeiFinder.createInstance().get保険者情報().records());
         return ResponseData.of(div).respond();
     }
 
@@ -117,7 +122,8 @@ public class KyufuJissekiSyokaiMeisaiSyukei {
         KyufuJissekiPrmBusiness 給付実績情報照会情報 = ViewStateHolder.get(ViewStateKeys.給付実績情報照会情報, KyufuJissekiPrmBusiness.class);
         getHandler(div).change事業者(new RString("後事業者"),
                 給付実績情報照会情報.getCommonHeader().get給付実績ヘッダ情報2(),
-                給付実績情報照会情報.getCsData_Z(), 給付実績情報照会情報.getCsData_B(), 給付実績情報照会情報.getCsData_N());
+                給付実績情報照会情報.getCsData_Z(), 給付実績情報照会情報.getCsData_B(), 給付実績情報照会情報.getCsData_N(),
+                KyufuJissekiSyokaiMeisaiSyukeiFinder.createInstance().get保険者情報().records());
         return ResponseData.of(div).respond();
     }
 

@@ -280,19 +280,30 @@ public class KanendoFukaHandler {
      */
     public void get帳票IDのチェック() {
         List<HonsanteiIdoParameter> hoList = get各通知書の帳票ID();
+        if (hoList == null || hoList.isEmpty()) {
+            return;
+        }
         FlexibleYear 調定年度 = new FlexibleYear(DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度,
                 RDate.getNowDate(), SubGyomuCode.DBB介護賦課).toString());
         Kitsuki 月の期 = get月の期();
         List<ChohyoResult> 帳票IDList = HonsanteiIdoKanendo.
                 createInstance().getChohyoID(調定年度, new RString(月の期.get期AsInt()), hoList, ZERO_RS);
+        Map<RString, RString> rowMap = div.getCcdChohyoIchiran().getSelected帳票IdAnd出力順Id();
+        Set<Map.Entry<RString, RString>> set = rowMap.entrySet();
+        boolean 納入通知書Flag = false;
+        for (Map.Entry<RString, RString> entry : set) {
+            if (納入通知書.equals(entry.getKey())) {
+                納入通知書Flag = true;
+            }
+        }
         if (帳票IDList != null) {
             boolean flag = false;
             for (ChohyoResult result : 帳票IDList) {
-                if (納入通知書.equals(result.get帳票ID())) {
+                if (納入通知書.equals(result.get帳票分類ID().value())) {
                     flag = true;
                 }
             }
-            if (!flag) {
+            if (!flag && 納入通知書Flag) {
                 throw new ApplicationException(DbbErrorMessages.帳票ID取得不可のため処理不可.getMessage());
             }
         } else {

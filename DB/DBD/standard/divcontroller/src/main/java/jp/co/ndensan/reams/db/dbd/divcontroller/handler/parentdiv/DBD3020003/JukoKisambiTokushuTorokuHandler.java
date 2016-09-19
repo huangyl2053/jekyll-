@@ -160,10 +160,10 @@ public class JukoKisambiTokushuTorokuHandler {
             List<JikoKisambiKanri> 時効起算日管理List,
             HihokenshaNo 被保険者番号) {
 
-        div.getJikoKisambi().setTitle(div.getDgShunoJokyo().getActiveRow().getChoteiNendo().
+        div.getJikoKisambi().getLblHokenryoTitle().setText(div.getDgShunoJokyo().getActiveRow().getChoteiNendo().
                 getText().concat(保険料));
         RString 調定年度 = div.getDgShunoJokyo().getActiveRow().getSeirekiChoteiNendo();
-        div.setHdnChoteiNendo(調定年度 == null ? RString.EMPTY : 調定年度);
+        div.setHdnChoteiNendo(null判定(調定年度));
 
         List<JikoKisambiKanri> dbから時効起算日管理List = this.get時効起算日管理リスト(被保険者番号, new RYear(調定年度));
         List<dgJikoKisambi_Row> 時効起算日登録List = new ArrayList<>();
@@ -445,6 +445,11 @@ public class JukoKisambiTokushuTorokuHandler {
             時効起算日区分List.add(keyValue);
         }
         return 時効起算日区分List;
+    }
+
+    private RString null判定(RString 判断用の値) {
+
+        return 判断用の値 == null ? RString.EMPTY : 判断用の値;
     }
 
     private List<JikoKisambiKanri> setFor時効起算日管理が存在しない(

@@ -24,7 +24,15 @@ public class SpoolShotokuJohoIchiranMybatisParameter extends KozaSearchParameter
 
     private RString 出力順;
 
-    public SpoolShotokuJohoIchiranMybatisParameter(IKozaSearchKey searchkey, List<KamokuCode> list) {
+    /**
+     * * コンストラクタです。
+     *
+     * @param searchkey IKozaSearchKey
+     * @param list List<KamokuCode>
+     * @param 出力順 RString
+     */
+    public SpoolShotokuJohoIchiranMybatisParameter(IKozaSearchKey searchkey, List<KamokuCode> list, RString 出力順) {
         super(searchkey, list);
+        this.出力順 = 出力順;
     }
 }

@@ -47,7 +47,9 @@ public class FurikomiTsuchishoBodyEditor implements IFurikomiTsuchishoEditor {
         if (振込Entity.get被保険者番号() != null) {
             source.List2_5 = 振込Entity.get被保険者番号().value();
         }
-        source.List2_6 = new RString(振込Entity.get金額().toString());
+        if (振込Entity.get金額() != null) {
+            source.List2_6 = new RString(振込Entity.get金額().toString());
+        }
         source.List2_7 = 振込Entity.get摘要2();
 
         source.ginko_kei_ft = 定数銀行計;
@@ -55,13 +57,25 @@ public class FurikomiTsuchishoBodyEditor implements IFurikomiTsuchishoEditor {
         source.yen_1 = 定数円;
         source.kuchi_2 = 定数口;
         source.yen_2 = 定数円;
-        source.ginko_kuchisu = new RString(振込Entity.get銀行計口数().toString());
-        source.ginko_kingaku = new RString(振込Entity.get銀行計金額().toString());
+        if (振込Entity.get銀行計口数() != null) {
+            source.ginko_kuchisu = new RString(振込Entity.get銀行計口数().toString());
+        }
+        if (振込Entity.get銀行計金額() != null) {
+            source.ginko_kingaku = new RString(振込Entity.get銀行計金額().toString());
+        }
         source.shiten_kei_ft = 定数支店計;
-        source.shiten_kuchisu = new RString(振込Entity.get支店計口数().toString());
-        source.shiten_kingaku = new RString(振込Entity.get支店計金額().toString());
-        source.shokei_kuchisu = new RString(振込Entity.get頁計口数().toString());
-        source.shokei_kingaku = new RString(振込Entity.get頁計金額().toString());
+        if (振込Entity.get支店計口数() != null) {
+            source.shiten_kuchisu = new RString(振込Entity.get支店計口数().toString());
+        }
+        if (振込Entity.get支店計金額() != null) {
+            source.shiten_kingaku = new RString(振込Entity.get支店計金額().toString());
+        }
+        if (振込Entity.get頁計口数() != null) {
+            source.shokei_kuchisu = new RString(振込Entity.get頁計口数().toString());
+        }
+        if (振込Entity.get頁計金額() != null) {
+            source.shokei_kingaku = new RString(振込Entity.get頁計金額().toString());
+        }
 
         return source;
     }

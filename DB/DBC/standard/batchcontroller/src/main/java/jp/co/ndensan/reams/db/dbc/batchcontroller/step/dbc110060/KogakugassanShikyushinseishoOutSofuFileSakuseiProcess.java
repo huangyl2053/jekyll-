@@ -96,7 +96,6 @@ public class KogakugassanShikyushinseishoOutSofuFileSakuseiProcess extends Batch
     private int 総出力件数;
     private int レコード番号;
     private int 口座管理番号の件数;
-    private BatchDbReader reader;
     private Encode 文字コード;
     private RString csvFilePath;
     private RString csvFileName;
@@ -125,7 +124,7 @@ public class KogakugassanShikyushinseishoOutSofuFileSakuseiProcess extends Batch
         レコード番号 = INDEX_0;
         口座管理番号の件数 = INDEX_0;
         RString 国保連送付外字_変換区分 = DbBusinessConfig.get(ConfigNameDBC.国保連送付外字_変換区分, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
-        if (変換区分_1.equals(国保連送付外字_変換区分)) {
+        if (!変換区分_1.equals(国保連送付外字_変換区分)) {
             文字コード = Encode.SJIS;
         } else {
             文字コード = Encode.UTF_8withBOM;
@@ -151,8 +150,7 @@ public class KogakugassanShikyushinseishoOutSofuFileSakuseiProcess extends Batch
 
     @Override
     protected IBatchReader createReader() {
-        reader = new BatchDbReader(MAPPERPATH, mybatisParameter);
-        return reader;
+        return new BatchDbReader(MAPPERPATH, mybatisParameter);
     }
 
     @Override
@@ -215,9 +213,9 @@ public class KogakugassanShikyushinseishoOutSofuFileSakuseiProcess extends Batch
     @Override
     protected void afterExecute() {
         if (null != meisaiCsvEntity) {
-            レコード番号 = レコード番号 + INDEX_1;
             csvWriter.writeLine(meisaiCsvEntity);
             総出力件数 = 総出力件数 + INDEX_1;
+            レコード番号 = レコード番号 + INDEX_1;
             csvWriter.writeLine(getEndEntity());
         }
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(csvFileName));
@@ -234,7 +232,7 @@ public class KogakugassanShikyushinseishoOutSofuFileSakuseiProcess extends Batch
         controlEntity.setレコード種別(RecordShubetsu.コントロールレコード.getコード());
         controlEntity.setレコード番号_連番(new RString(レコード番号));
         controlEntity.setボリュ_ム通番(RSTRING_0);
-        controlEntity.setレコード件数(new RString(reader.getCount() + parameter.get件数()));
+        controlEntity.setレコード件数(new RString(parameter.getレコード件数() + parameter.get件数()));
         controlEntity.setデータ種別(ConfigKeysKokuhorenSofu.高額合算支給申請書情報.getコード());
         controlEntity.set福祉事務所特定番号(RSTRING_0);
         controlEntity.set保険者番号(parameter.get保険者番号().getColumnValue());
@@ -343,6 +341,9 @@ public class KogakugassanShikyushinseishoOutSofuFileSakuseiProcess extends Batch
     }
 
     private RString 囲み文字(RString str) {
+        if (str.isEmpty()) {
+            return str;
+        }
         return 囲みの文字.concat(str).concat(囲みの文字);
     }
 

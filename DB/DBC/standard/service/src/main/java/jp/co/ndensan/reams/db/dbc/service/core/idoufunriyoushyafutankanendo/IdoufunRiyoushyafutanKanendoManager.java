@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.service.core.idoufunriyoushyafutankanendo;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.idoufunriyoushyafutankanendo.IIdoufunRiyoushyafutanKanendoMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
@@ -44,7 +45,11 @@ public class IdoufunRiyoushyafutanKanendoManager {
      */
     public ShoriDateKanri get直近の年次負担割合判定処理(RString 処理名) {
         IIdoufunRiyoushyafutanKanendoMapper mapper = mapperProvider.create(IIdoufunRiyoushyafutanKanendoMapper.class);
-        return new ShoriDateKanri(mapper.get直近の年次負担割合判定処理(処理名));
+        DbT7022ShoriDateKanriEntity entity = mapper.get直近の年次負担割合判定処理(処理名);
+        if (entity != null) {
+            return new ShoriDateKanri(entity);
+        }
+        return null;
     }
 
     /**
@@ -55,7 +60,11 @@ public class IdoufunRiyoushyafutanKanendoManager {
      */
     public ShoriDateKanri get異動分利用者負担割合判定_過年度のデータ(RString 処理名) {
         IIdoufunRiyoushyafutanKanendoMapper mapper = mapperProvider.create(IIdoufunRiyoushyafutanKanendoMapper.class);
-        return new ShoriDateKanri(mapper.get処理年度の異動分利用者負担割合判定_過年度のデータ(処理名));
+        DbT7022ShoriDateKanriEntity entity = mapper.get処理年度の異動分利用者負担割合判定_過年度のデータ(処理名);
+        if (entity != null) {
+            return new ShoriDateKanri(entity);
+        }
+        return null;
     }
 
     /**
@@ -67,7 +76,10 @@ public class IdoufunRiyoushyafutanKanendoManager {
      */
     public ShoriDateKanri get異動分利用者負担割合判定のデータ(RString 処理名, RString 年次判定年度) {
         IIdoufunRiyoushyafutanKanendoMapper mapper = mapperProvider.create(IIdoufunRiyoushyafutanKanendoMapper.class);
-
-        return new ShoriDateKanri(mapper.get異動分利用者負担割合判定のデータ(処理名, 年次判定年度));
+        DbT7022ShoriDateKanriEntity entity = mapper.get異動分利用者負担割合判定のデータ(処理名, 年次判定年度);
+        if (entity != null) {
+            return new ShoriDateKanri(entity);
+        }
+        return null;
     }
 }
