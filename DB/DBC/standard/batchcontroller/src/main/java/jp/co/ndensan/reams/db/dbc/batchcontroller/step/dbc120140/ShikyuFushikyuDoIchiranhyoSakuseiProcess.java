@@ -164,14 +164,15 @@ public class ShikyuFushikyuDoIchiranhyoSakuseiProcess extends BatchProcessBase<S
 
     @Override
     protected void afterExecute() {
+        csvWriter.close();
+        reportWriter.close();
+
         if (!personalDataList.isEmpty()) {
             AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
             manager.spool(path, accessLogUUID);
         } else {
             manager.spool(path);
         }
-        csvWriter.close();
-        reportWriter.close();
     }
 
     private void get出力順() {
@@ -294,6 +295,9 @@ public class ShikyuFushikyuDoIchiranhyoSakuseiProcess extends BatchProcessBase<S
     }
 
     private RString get住所(RString jusho, RString banchi, RString katagaki) {
+        if (RString.isNullOrEmpty(jusho) && RString.isNullOrEmpty(banchi) && RString.isNullOrEmpty(katagaki)) {
+            return RString.EMPTY;
+        }
         RStringBuilder sakuseiYMD = new RStringBuilder();
         sakuseiYMD.append(jusho);
         sakuseiYMD.append(banchi);
@@ -311,7 +315,9 @@ public class ShikyuFushikyuDoIchiranhyoSakuseiProcess extends BatchProcessBase<S
     }
 
     private RString get支払期間(RString kaishiYMD, RString kaishiTime, RString shuryoYMD, RString shuryoTime) {
-
+        if (RString.isNullOrEmpty(kaishiYMD) && RString.isNullOrEmpty(shuryoYMD)) {
+            return RString.EMPTY;
+        }
         RStringBuilder sakuseiYMD = new RStringBuilder();
         if (!RString.isNullOrEmpty(kaishiYMD)) {
             FlexibleDate 開始年月日 = new FlexibleDate(kaishiYMD);

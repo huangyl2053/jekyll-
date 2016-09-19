@@ -115,6 +115,7 @@
         INNER JOIN 
         "DbWT0001Hihokensha" AS TEMP 
         ON DbWT38B1."renban" = TEMP."meisaiRenban"
+        ${出力順}
     </select>
     
     <resultMap id="resultMap_ShikyuFushikyuTsuchishoIchiranEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.shikyufushikyu.ShikyuFushikyuTsuchishoIchiranEntity" autoMapping="true">
