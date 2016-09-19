@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.batchcontroller.step.jigyohokokurenkei;
+package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU020010;
 
 import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyohokokurenkei.JigyoHokokuRenkeiProcessParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokurenkei.JigyoHokokuRenkeiEntity;
-import jp.co.ndensan.reams.db.dbu.entity.euc.jigyohokokurenkei.JigyoHokokuRenkei4EucCsvEntity;
+import jp.co.ndensan.reams.db.dbu.entity.euc.jigyohokokurenkei.JigyoHokokuRenkei2or3EucCsvEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -30,7 +30,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBU-4050-020 lijia
  */
-public class JigyoHokokuRenkeiHokenYousikiIchi_YonProcess extends BatchProcessBase<DbT7021JigyoHokokuTokeiDataEntity> {
+public class JigyoHokokuRenkeiHokenYousikiIchi_SanProcess extends BatchProcessBase<DbT7021JigyoHokokuTokeiDataEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyohokokurenkei.IJigyoHokokuRenkeiMapper.get事業報告統計情報の取得");
@@ -59,14 +59,14 @@ public class JigyoHokokuRenkeiHokenYousikiIchi_YonProcess extends BatchProcessBa
 
     @Override
     protected void initialize() {
-        csvFileName = new RString("DUJRENF04_"
+        csvFileName = new RString("DUJRENF03_"
                 + processParameter.get過去集計年月()
                 + "_"
                 + DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBU介護統計報告) + ".csv");
     }
 
     @BatchWriter
-    private EucCsvWriter<JigyoHokokuRenkei4EucCsvEntity> eucCsvWriter;
+    private EucCsvWriter<JigyoHokokuRenkei2or3EucCsvEntity> eucCsvWriter;
 
     @Override
     protected IBatchReader createReader() {
@@ -88,18 +88,18 @@ public class JigyoHokokuRenkeiHokenYousikiIchi_YonProcess extends BatchProcessBa
 
     @Override
     protected void process(DbT7021JigyoHokokuTokeiDataEntity entity) {
-        get様式１の４の項目編集(entity, new RString("1040"), new RString("1030"), jigyoHokokuRenkeiEntity);
+        get様式１の３の項目編集(entity, new RString("1010"), new RString("0900"), new RString("1020"), new RString("1002"), jigyoHokokuRenkeiEntity);
     }
 
     @Override
     protected void afterExecute() {
-        get様式１の４のCSV出力();
+        get様式１の３再掲_第二号被保険者のCSV出力();
         eucCsvWriter.close();
     }
 
-    private void get様式１の４のCSV出力() {
+    private void get様式１の３再掲_第二号被保険者のCSV出力() {
         eucCsvWriter.writeLine(
-                new JigyoHokokuRenkei4EucCsvEntity(
+                new JigyoHokokuRenkei2or3EucCsvEntity(
                         dateFormat(processParameter.get過去集計年月()),
                         processParameter.get過去集計年月().substring(桁_4),
                         DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBU介護統計報告),
@@ -177,14 +177,42 @@ public class JigyoHokokuRenkeiHokenYousikiIchi_YonProcess extends BatchProcessBa
                         jigyoHokokuRenkeiEntity.getD072(),
                         jigyoHokokuRenkeiEntity.getD073(),
                         jigyoHokokuRenkeiEntity.getD074(),
-                        jigyoHokokuRenkeiEntity.getD075())
+                        jigyoHokokuRenkeiEntity.getD075(),
+                        jigyoHokokuRenkeiEntity.getD076(),
+                        jigyoHokokuRenkeiEntity.getD077(),
+                        jigyoHokokuRenkeiEntity.getD078(),
+                        jigyoHokokuRenkeiEntity.getD079(),
+                        jigyoHokokuRenkeiEntity.getD080(),
+                        jigyoHokokuRenkeiEntity.getD081(),
+                        jigyoHokokuRenkeiEntity.getD082(),
+                        jigyoHokokuRenkeiEntity.getD083(),
+                        jigyoHokokuRenkeiEntity.getD084(),
+                        jigyoHokokuRenkeiEntity.getD085(),
+                        jigyoHokokuRenkeiEntity.getD086(),
+                        jigyoHokokuRenkeiEntity.getD087(),
+                        jigyoHokokuRenkeiEntity.getD088(),
+                        jigyoHokokuRenkeiEntity.getD089(),
+                        jigyoHokokuRenkeiEntity.getD090(),
+                        jigyoHokokuRenkeiEntity.getD091(),
+                        jigyoHokokuRenkeiEntity.getD092(),
+                        jigyoHokokuRenkeiEntity.getD093(),
+                        jigyoHokokuRenkeiEntity.getD094(),
+                        jigyoHokokuRenkeiEntity.getD095(),
+                        jigyoHokokuRenkeiEntity.getD096(),
+                        jigyoHokokuRenkeiEntity.getD097(),
+                        jigyoHokokuRenkeiEntity.getD098(),
+                        jigyoHokokuRenkeiEntity.getD099(),
+                        jigyoHokokuRenkeiEntity.getD100(),
+                        jigyoHokokuRenkeiEntity.getD101())
         );
     }
 
-    private JigyoHokokuRenkeiEntity get様式１の４の項目編集(
+    private JigyoHokokuRenkeiEntity get様式１の３の項目編集(
             DbT7021JigyoHokokuTokeiDataEntity entity,
             RString 集計番号_01,
             RString 集計番号_02,
+            RString 集計番号_03,
+            RString 集計番号_04,
             JigyoHokokuRenkeiEntity jigyoHokokuRenkeiEntity) {
         if (集計番号_01.equals(entity.getShukeiNo().getColumnValue()) && 番号_1.equals(new RString(entity.getTateNo().toString()))) {
             if (番号_1.equals(new RString(entity.getYokoNo().toString()))) {
@@ -206,13 +234,15 @@ public class JigyoHokokuRenkeiHokenYousikiIchi_YonProcess extends BatchProcessBa
                 jigyoHokokuRenkeiEntity.setD004(new RString(entity.getShukeiKekkaAtai().toString()));
             }
         }
-        return get様式１の４の項目編集2(entity, 集計番号_01, 集計番号_02, jigyoHokokuRenkeiEntity);
+        return get様式１の３の項目編集2(entity, 集計番号_01, 集計番号_02, 集計番号_03, 集計番号_04, jigyoHokokuRenkeiEntity);
     }
 
-    private JigyoHokokuRenkeiEntity get様式１の４の項目編集2(
+    private JigyoHokokuRenkeiEntity get様式１の３の項目編集2(
             DbT7021JigyoHokokuTokeiDataEntity entity,
             RString 集計番号_01,
             RString 集計番号_02,
+            RString 集計番号_03,
+            RString 集計番号_04,
             JigyoHokokuRenkeiEntity jigyoHokokuRenkeiEntity) {
         if (集計番号_01.equals(entity.getShukeiNo().getColumnValue()) && 番号_2.equals(new RString(entity.getTateNo().toString()))) {
             if (番号_1.equals(new RString(entity.getYokoNo().toString()))) {
@@ -252,13 +282,15 @@ public class JigyoHokokuRenkeiHokenYousikiIchi_YonProcess extends BatchProcessBa
                 jigyoHokokuRenkeiEntity.setD014(new RString(entity.getShukeiKekkaAtai().toString()));
             }
         }
-        return get様式１の４の項目編集3(entity, 集計番号_01, 集計番号_02, jigyoHokokuRenkeiEntity);
+        return get様式１の３の項目編集3(entity, 集計番号_01, 集計番号_02, 集計番号_03, 集計番号_04, jigyoHokokuRenkeiEntity);
     }
 
-    private JigyoHokokuRenkeiEntity get様式１の４の項目編集3(
+    private JigyoHokokuRenkeiEntity get様式１の３の項目編集3(
             DbT7021JigyoHokokuTokeiDataEntity entity,
             RString 集計番号_01,
             RString 集計番号_02,
+            RString 集計番号_03,
+            RString 集計番号_04,
             JigyoHokokuRenkeiEntity jigyoHokokuRenkeiEntity) {
         if (集計番号_01.equals(entity.getShukeiNo().getColumnValue()) && 番号_3.equals(new RString(entity.getTateNo().toString()))) {
             if (番号_1.equals(new RString(entity.getYokoNo().toString()))) {
@@ -298,13 +330,15 @@ public class JigyoHokokuRenkeiHokenYousikiIchi_YonProcess extends BatchProcessBa
                 jigyoHokokuRenkeiEntity.setD026(new RString(entity.getShukeiKekkaAtai().toString()));
             }
         }
-        return get様式１の４の項目編集4(entity, 集計番号_01, 集計番号_02, jigyoHokokuRenkeiEntity);
+        return get様式１の３の項目編集4(entity, 集計番号_01, 集計番号_02, 集計番号_03, 集計番号_04, jigyoHokokuRenkeiEntity);
     }
 
-    private JigyoHokokuRenkeiEntity get様式１の４の項目編集4(
+    private JigyoHokokuRenkeiEntity get様式１の３の項目編集4(
             DbT7021JigyoHokokuTokeiDataEntity entity,
             RString 集計番号_01,
             RString 集計番号_02,
+            RString 集計番号_03,
+            RString 集計番号_04,
             JigyoHokokuRenkeiEntity jigyoHokokuRenkeiEntity) {
         if (集計番号_01.equals(entity.getShukeiNo().getColumnValue()) && 番号_4.equals(new RString(entity.getTateNo().toString()))) {
             if (番号_1.equals(new RString(entity.getYokoNo().toString()))) {
@@ -344,13 +378,15 @@ public class JigyoHokokuRenkeiHokenYousikiIchi_YonProcess extends BatchProcessBa
                 jigyoHokokuRenkeiEntity.setD038(new RString(entity.getShukeiKekkaAtai().toString()));
             }
         }
-        return get様式１の４の項目編集5(entity, 集計番号_01, 集計番号_02, jigyoHokokuRenkeiEntity);
+        return get様式１の３の項目編集5(entity, 集計番号_01, 集計番号_02, 集計番号_03, 集計番号_04, jigyoHokokuRenkeiEntity);
     }
 
-    private JigyoHokokuRenkeiEntity get様式１の４の項目編集5(
+    private JigyoHokokuRenkeiEntity get様式１の３の項目編集5(
             DbT7021JigyoHokokuTokeiDataEntity entity,
             RString 集計番号_01,
             RString 集計番号_02,
+            RString 集計番号_03,
+            RString 集計番号_04,
             JigyoHokokuRenkeiEntity jigyoHokokuRenkeiEntity) {
         if (集計番号_01.equals(entity.getShukeiNo().getColumnValue()) && 番号_5.equals(new RString(entity.getTateNo().toString()))) {
             if (番号_1.equals(new RString(entity.getYokoNo().toString()))) {
@@ -390,14 +426,17 @@ public class JigyoHokokuRenkeiHokenYousikiIchi_YonProcess extends BatchProcessBa
                 jigyoHokokuRenkeiEntity.setD050(new RString(entity.getShukeiKekkaAtai().toString()));
             }
         }
-        return get様式１の４の項目編集6(entity, 集計番号_02, jigyoHokokuRenkeiEntity);
+        return get様式１の３の項目編集6(entity, 集計番号_01, 集計番号_02, 集計番号_03, 集計番号_04, jigyoHokokuRenkeiEntity);
     }
 
-    private JigyoHokokuRenkeiEntity get様式１の４の項目編集6(
+    private JigyoHokokuRenkeiEntity get様式１の３の項目編集6(
             DbT7021JigyoHokokuTokeiDataEntity entity,
+            RString 集計番号_01,
             RString 集計番号_02,
+            RString 集計番号_03,
+            RString 集計番号_04,
             JigyoHokokuRenkeiEntity jigyoHokokuRenkeiEntity) {
-        if (集計番号_02.equals(entity.getShukeiNo().getColumnValue()) && 番号_1.equals(new RString(entity.getTateNo().toString()))) {
+        if (集計番号_01.equals(entity.getShukeiNo().getColumnValue()) && 番号_6.equals(new RString(entity.getTateNo().toString()))) {
             if (番号_1.equals(new RString(entity.getYokoNo().toString()))) {
                 jigyoHokokuRenkeiEntity.setD055(new RString(entity.getShukeiKekkaAtai().toString()));
             }
@@ -407,48 +446,45 @@ public class JigyoHokokuRenkeiHokenYousikiIchi_YonProcess extends BatchProcessBa
             if (番号_3.equals(new RString(entity.getYokoNo().toString()))) {
                 jigyoHokokuRenkeiEntity.setD057(new RString(entity.getShukeiKekkaAtai().toString()));
             }
-        }
-        if (集計番号_02.equals(entity.getShukeiNo().getColumnValue()) && 番号_2.equals(new RString(entity.getTateNo().toString()))) {
-            if (番号_1.equals(new RString(entity.getYokoNo().toString()))) {
+            if (番号_4.equals(new RString(entity.getYokoNo().toString()))) {
                 jigyoHokokuRenkeiEntity.setD058(new RString(entity.getShukeiKekkaAtai().toString()));
             }
-            if (番号_2.equals(new RString(entity.getYokoNo().toString()))) {
+            if (番号_5.equals(new RString(entity.getYokoNo().toString()))) {
                 jigyoHokokuRenkeiEntity.setD059(new RString(entity.getShukeiKekkaAtai().toString()));
             }
-            if (番号_3.equals(new RString(entity.getYokoNo().toString()))) {
+            if (番号_6.equals(new RString(entity.getYokoNo().toString()))) {
                 jigyoHokokuRenkeiEntity.setD060(new RString(entity.getShukeiKekkaAtai().toString()));
             }
-        }
-        if (集計番号_02.equals(entity.getShukeiNo().getColumnValue()) && 番号_3.equals(new RString(entity.getTateNo().toString()))) {
-            if (番号_1.equals(new RString(entity.getYokoNo().toString()))) {
-                jigyoHokokuRenkeiEntity.setD061(new RString(entity.getShukeiKekkaAtai().toString()));
-            }
-            if (番号_2.equals(new RString(entity.getYokoNo().toString()))) {
-                jigyoHokokuRenkeiEntity.setD062(new RString(entity.getShukeiKekkaAtai().toString()));
-            }
-            if (番号_3.equals(new RString(entity.getYokoNo().toString()))) {
+            if (番号_7.equals(new RString(entity.getYokoNo().toString()))) {
                 jigyoHokokuRenkeiEntity.setD063(new RString(entity.getShukeiKekkaAtai().toString()));
             }
-        }
-        return get様式１の４の項目編集7(entity, 集計番号_02, jigyoHokokuRenkeiEntity);
-    }
-
-    private JigyoHokokuRenkeiEntity get様式１の４の項目編集7(
-            DbT7021JigyoHokokuTokeiDataEntity entity,
-            RString 集計番号_02,
-            JigyoHokokuRenkeiEntity jigyoHokokuRenkeiEntity) {
-        if (集計番号_02.equals(entity.getShukeiNo().getColumnValue()) && 番号_4.equals(new RString(entity.getTateNo().toString()))) {
-            if (番号_1.equals(new RString(entity.getYokoNo().toString()))) {
+            if (番号_8.equals(new RString(entity.getYokoNo().toString()))) {
                 jigyoHokokuRenkeiEntity.setD064(new RString(entity.getShukeiKekkaAtai().toString()));
             }
-            if (番号_2.equals(new RString(entity.getYokoNo().toString()))) {
+            if (番号_9.equals(new RString(entity.getYokoNo().toString()))) {
                 jigyoHokokuRenkeiEntity.setD065(new RString(entity.getShukeiKekkaAtai().toString()));
             }
-            if (番号_3.equals(new RString(entity.getYokoNo().toString()))) {
+            if (番号_10.equals(new RString(entity.getYokoNo().toString()))) {
                 jigyoHokokuRenkeiEntity.setD066(new RString(entity.getShukeiKekkaAtai().toString()));
             }
+            if (番号_11.equals(new RString(entity.getYokoNo().toString()))) {
+                jigyoHokokuRenkeiEntity.setD061(new RString(entity.getShukeiKekkaAtai().toString()));
+            }
+            if (番号_12.equals(new RString(entity.getYokoNo().toString()))) {
+                jigyoHokokuRenkeiEntity.setD062(new RString(entity.getShukeiKekkaAtai().toString()));
+            }
         }
-        if (集計番号_02.equals(entity.getShukeiNo().getColumnValue()) && 番号_5.equals(new RString(entity.getTateNo().toString()))) {
+        return get様式１の３の項目編集7(entity, 集計番号_01, 集計番号_02, 集計番号_03, 集計番号_04, jigyoHokokuRenkeiEntity);
+    }
+
+    private JigyoHokokuRenkeiEntity get様式１の３の項目編集7(
+            DbT7021JigyoHokokuTokeiDataEntity entity,
+            RString 集計番号_01,
+            RString 集計番号_02,
+            RString 集計番号_03,
+            RString 集計番号_04,
+            JigyoHokokuRenkeiEntity jigyoHokokuRenkeiEntity) {
+        if (集計番号_01.equals(entity.getShukeiNo().getColumnValue()) && 番号_7.equals(new RString(entity.getTateNo().toString()))) {
             if (番号_1.equals(new RString(entity.getYokoNo().toString()))) {
                 jigyoHokokuRenkeiEntity.setD067(new RString(entity.getShukeiKekkaAtai().toString()));
             }
@@ -458,34 +494,126 @@ public class JigyoHokokuRenkeiHokenYousikiIchi_YonProcess extends BatchProcessBa
             if (番号_3.equals(new RString(entity.getYokoNo().toString()))) {
                 jigyoHokokuRenkeiEntity.setD069(new RString(entity.getShukeiKekkaAtai().toString()));
             }
-        }
-        return get様式１の４の項目編集8(entity, 集計番号_02, jigyoHokokuRenkeiEntity);
-    }
-
-    private JigyoHokokuRenkeiEntity get様式１の４の項目編集8(
-            DbT7021JigyoHokokuTokeiDataEntity entity,
-            RString 集計番号_02,
-            JigyoHokokuRenkeiEntity jigyoHokokuRenkeiEntity) {
-        if (集計番号_02.equals(entity.getShukeiNo().getColumnValue()) && 番号_6.equals(new RString(entity.getTateNo().toString()))) {
-            if (番号_1.equals(new RString(entity.getYokoNo().toString()))) {
+            if (番号_4.equals(new RString(entity.getYokoNo().toString()))) {
                 jigyoHokokuRenkeiEntity.setD070(new RString(entity.getShukeiKekkaAtai().toString()));
             }
-            if (番号_2.equals(new RString(entity.getYokoNo().toString()))) {
+            if (番号_5.equals(new RString(entity.getYokoNo().toString()))) {
                 jigyoHokokuRenkeiEntity.setD071(new RString(entity.getShukeiKekkaAtai().toString()));
             }
-            if (番号_3.equals(new RString(entity.getYokoNo().toString()))) {
+            if (番号_6.equals(new RString(entity.getYokoNo().toString()))) {
                 jigyoHokokuRenkeiEntity.setD072(new RString(entity.getShukeiKekkaAtai().toString()));
             }
-        }
-        if (集計番号_02.equals(entity.getShukeiNo().getColumnValue()) && 番号_7.equals(new RString(entity.getTateNo().toString()))) {
-            if (番号_1.equals(new RString(entity.getYokoNo().toString()))) {
+            if (番号_7.equals(new RString(entity.getYokoNo().toString()))) {
+                jigyoHokokuRenkeiEntity.setD075(new RString(entity.getShukeiKekkaAtai().toString()));
+            }
+            if (番号_8.equals(new RString(entity.getYokoNo().toString()))) {
+                jigyoHokokuRenkeiEntity.setD076(new RString(entity.getShukeiKekkaAtai().toString()));
+            }
+            if (番号_9.equals(new RString(entity.getYokoNo().toString()))) {
+                jigyoHokokuRenkeiEntity.setD077(new RString(entity.getShukeiKekkaAtai().toString()));
+            }
+            if (番号_10.equals(new RString(entity.getYokoNo().toString()))) {
+                jigyoHokokuRenkeiEntity.setD078(new RString(entity.getShukeiKekkaAtai().toString()));
+            }
+            if (番号_11.equals(new RString(entity.getYokoNo().toString()))) {
                 jigyoHokokuRenkeiEntity.setD073(new RString(entity.getShukeiKekkaAtai().toString()));
             }
-            if (番号_2.equals(new RString(entity.getYokoNo().toString()))) {
+            if (番号_12.equals(new RString(entity.getYokoNo().toString()))) {
                 jigyoHokokuRenkeiEntity.setD074(new RString(entity.getShukeiKekkaAtai().toString()));
             }
-            if (番号_3.equals(new RString(entity.getYokoNo().toString()))) {
-                jigyoHokokuRenkeiEntity.setD075(new RString(entity.getShukeiKekkaAtai().toString()));
+        }
+        return get様式１の３の項目編集8(entity, 集計番号_02, 集計番号_03, 集計番号_04, jigyoHokokuRenkeiEntity);
+    }
+
+    private JigyoHokokuRenkeiEntity get様式１の３の項目編集8(
+            DbT7021JigyoHokokuTokeiDataEntity entity,
+            RString 集計番号_02,
+            RString 集計番号_03,
+            RString 集計番号_04,
+            JigyoHokokuRenkeiEntity jigyoHokokuRenkeiEntity) {
+        if (集計番号_02.equals(entity.getShukeiNo().getColumnValue()) && 番号_1.equals(new RString(entity.getYokoNo().toString()))) {
+            if (番号_1.equals(new RString(entity.getTateNo().toString()))) {
+                jigyoHokokuRenkeiEntity.setD079(new RString(entity.getShukeiKekkaAtai().toString()));
+            }
+            if (番号_2.equals(new RString(entity.getTateNo().toString()))) {
+                jigyoHokokuRenkeiEntity.setD080(new RString(entity.getShukeiKekkaAtai().toString()));
+            }
+            if (番号_3.equals(new RString(entity.getTateNo().toString()))) {
+                jigyoHokokuRenkeiEntity.setD081(new RString(entity.getShukeiKekkaAtai().toString()));
+            }
+            if (番号_4.equals(new RString(entity.getTateNo().toString()))) {
+                jigyoHokokuRenkeiEntity.setD082(new RString(entity.getShukeiKekkaAtai().toString()));
+            }
+            if (番号_5.equals(new RString(entity.getTateNo().toString()))) {
+                jigyoHokokuRenkeiEntity.setD083(new RString(entity.getShukeiKekkaAtai().toString()));
+            }
+        }
+        if (集計番号_03.equals(entity.getShukeiNo().getColumnValue()) && 番号_1.equals(new RString(entity.getYokoNo().toString()))) {
+            if (番号_1.equals(new RString(entity.getTateNo().toString()))) {
+                jigyoHokokuRenkeiEntity.setD084(new RString(entity.getShukeiKekkaAtai().toString()));
+            }
+            if (番号_2.equals(new RString(entity.getTateNo().toString()))) {
+                jigyoHokokuRenkeiEntity.setD085(new RString(entity.getShukeiKekkaAtai().toString()));
+            }
+            if (番号_3.equals(new RString(entity.getTateNo().toString()))) {
+                jigyoHokokuRenkeiEntity.setD087(new RString(entity.getShukeiKekkaAtai().toString()));
+            }
+            if (番号_4.equals(new RString(entity.getTateNo().toString()))) {
+                jigyoHokokuRenkeiEntity.setD089(new RString(entity.getShukeiKekkaAtai().toString()));
+            }
+            if (番号_5.equals(new RString(entity.getTateNo().toString()))) {
+                jigyoHokokuRenkeiEntity.setD091(new RString(entity.getShukeiKekkaAtai().toString()));
+            }
+            if (番号_6.equals(new RString(entity.getTateNo().toString()))) {
+                jigyoHokokuRenkeiEntity.setD093(new RString(entity.getShukeiKekkaAtai().toString()));
+            }
+            if (番号_7.equals(new RString(entity.getTateNo().toString()))) {
+                jigyoHokokuRenkeiEntity.setD095(new RString(entity.getShukeiKekkaAtai().toString()));
+            }
+        }
+        return get様式１の３の項目編集9(entity, 集計番号_03, 集計番号_04, jigyoHokokuRenkeiEntity);
+    }
+
+    private JigyoHokokuRenkeiEntity get様式１の３の項目編集9(
+            DbT7021JigyoHokokuTokeiDataEntity entity,
+            RString 集計番号_03,
+            RString 集計番号_04,
+            JigyoHokokuRenkeiEntity jigyoHokokuRenkeiEntity) {
+        if (集計番号_03.equals(entity.getShukeiNo().getColumnValue()) && 番号_2.equals(new RString(entity.getYokoNo().toString()))) {
+            if (番号_2.equals(new RString(entity.getTateNo().toString()))) {
+                jigyoHokokuRenkeiEntity.setD086(new RString(entity.getShukeiKekkaAtai().toString()));
+            }
+            if (番号_3.equals(new RString(entity.getTateNo().toString()))) {
+                jigyoHokokuRenkeiEntity.setD088(new RString(entity.getShukeiKekkaAtai().toString()));
+            }
+            if (番号_4.equals(new RString(entity.getTateNo().toString()))) {
+                jigyoHokokuRenkeiEntity.setD090(new RString(entity.getShukeiKekkaAtai().toString()));
+            }
+            if (番号_5.equals(new RString(entity.getTateNo().toString()))) {
+                jigyoHokokuRenkeiEntity.setD092(new RString(entity.getShukeiKekkaAtai().toString()));
+            }
+            if (番号_6.equals(new RString(entity.getTateNo().toString()))) {
+                jigyoHokokuRenkeiEntity.setD094(new RString(entity.getShukeiKekkaAtai().toString()));
+            }
+            if (番号_7.equals(new RString(entity.getTateNo().toString()))) {
+                jigyoHokokuRenkeiEntity.setD096(new RString(entity.getShukeiKekkaAtai().toString()));
+            }
+        }
+        if (集計番号_04.equals(entity.getShukeiNo().getColumnValue()) && 番号_1.equals(new RString(entity.getYokoNo().toString()))) {
+            if (番号_1.equals(new RString(entity.getTateNo().toString()))) {
+                jigyoHokokuRenkeiEntity.setD097(new RString(entity.getShukeiKekkaAtai().toString()));
+            }
+            if (番号_2.equals(new RString(entity.getTateNo().toString()))) {
+                jigyoHokokuRenkeiEntity.setD098(new RString(entity.getShukeiKekkaAtai().toString()));
+            }
+            if (番号_3.equals(new RString(entity.getTateNo().toString()))) {
+                jigyoHokokuRenkeiEntity.setD099(new RString(entity.getShukeiKekkaAtai().toString()));
+            }
+            if (番号_4.equals(new RString(entity.getTateNo().toString()))) {
+                jigyoHokokuRenkeiEntity.setD100(new RString(entity.getShukeiKekkaAtai().toString()));
+            }
+            if (番号_5.equals(new RString(entity.getTateNo().toString()))) {
+                jigyoHokokuRenkeiEntity.setD101(new RString(entity.getShukeiKekkaAtai().toString()));
             }
         }
         return jigyoHokokuRenkeiEntity;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.batchcontroller.step.jigyohokokurenkei;
+package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU020010;
 
 import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyohokokurenkei.JigyoHokokuRenkeiProcessParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
@@ -30,7 +30,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBU-4050-020 lijia
  */
-public class JigyoHokokuRenkeiHokenYousikiIchi_SanProcess extends BatchProcessBase<DbT7021JigyoHokokuTokeiDataEntity> {
+public class JigyoHokokuRenkeiHokenYousikiIchi_NiProcess extends BatchProcessBase<DbT7021JigyoHokokuTokeiDataEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyohokokurenkei.IJigyoHokokuRenkeiMapper.get事業報告統計情報の取得");
@@ -59,7 +59,7 @@ public class JigyoHokokuRenkeiHokenYousikiIchi_SanProcess extends BatchProcessBa
 
     @Override
     protected void initialize() {
-        csvFileName = new RString("DUJRENF03_"
+        csvFileName = new RString("DUJRENF02_"
                 + processParameter.get過去集計年月()
                 + "_"
                 + DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBU介護統計報告) + ".csv");
@@ -88,16 +88,16 @@ public class JigyoHokokuRenkeiHokenYousikiIchi_SanProcess extends BatchProcessBa
 
     @Override
     protected void process(DbT7021JigyoHokokuTokeiDataEntity entity) {
-        get様式１の３の項目編集(entity, new RString("1010"), new RString("0900"), new RString("1020"), new RString("1002"), jigyoHokokuRenkeiEntity);
+        get様式１の２の項目編集(entity, new RString("0710"), new RString("0600"), new RString("0720"), new RString("0702"), jigyoHokokuRenkeiEntity);
     }
 
     @Override
     protected void afterExecute() {
-        get様式１の３再掲_第二号被保険者のCSV出力();
+        get様式１の２総括のCSV出力();
         eucCsvWriter.close();
     }
 
-    private void get様式１の３再掲_第二号被保険者のCSV出力() {
+    private void get様式１の２総括のCSV出力() {
         eucCsvWriter.writeLine(
                 new JigyoHokokuRenkei2or3EucCsvEntity(
                         dateFormat(processParameter.get過去集計年月()),
@@ -207,7 +207,7 @@ public class JigyoHokokuRenkeiHokenYousikiIchi_SanProcess extends BatchProcessBa
         );
     }
 
-    private JigyoHokokuRenkeiEntity get様式１の３の項目編集(
+    private JigyoHokokuRenkeiEntity get様式１の２の項目編集(
             DbT7021JigyoHokokuTokeiDataEntity entity,
             RString 集計番号_01,
             RString 集計番号_02,
@@ -234,10 +234,10 @@ public class JigyoHokokuRenkeiHokenYousikiIchi_SanProcess extends BatchProcessBa
                 jigyoHokokuRenkeiEntity.setD004(new RString(entity.getShukeiKekkaAtai().toString()));
             }
         }
-        return get様式１の３の項目編集2(entity, 集計番号_01, 集計番号_02, 集計番号_03, 集計番号_04, jigyoHokokuRenkeiEntity);
+        return get様式１の２の項目編集2(entity, 集計番号_01, 集計番号_02, 集計番号_03, 集計番号_04, jigyoHokokuRenkeiEntity);
     }
 
-    private JigyoHokokuRenkeiEntity get様式１の３の項目編集2(
+    private JigyoHokokuRenkeiEntity get様式１の２の項目編集2(
             DbT7021JigyoHokokuTokeiDataEntity entity,
             RString 集計番号_01,
             RString 集計番号_02,
@@ -282,10 +282,10 @@ public class JigyoHokokuRenkeiHokenYousikiIchi_SanProcess extends BatchProcessBa
                 jigyoHokokuRenkeiEntity.setD014(new RString(entity.getShukeiKekkaAtai().toString()));
             }
         }
-        return get様式１の３の項目編集3(entity, 集計番号_01, 集計番号_02, 集計番号_03, 集計番号_04, jigyoHokokuRenkeiEntity);
+        return get様式１の２の項目編集3(entity, 集計番号_01, 集計番号_02, 集計番号_03, 集計番号_04, jigyoHokokuRenkeiEntity);
     }
 
-    private JigyoHokokuRenkeiEntity get様式１の３の項目編集3(
+    private JigyoHokokuRenkeiEntity get様式１の２の項目編集3(
             DbT7021JigyoHokokuTokeiDataEntity entity,
             RString 集計番号_01,
             RString 集計番号_02,
@@ -330,10 +330,10 @@ public class JigyoHokokuRenkeiHokenYousikiIchi_SanProcess extends BatchProcessBa
                 jigyoHokokuRenkeiEntity.setD026(new RString(entity.getShukeiKekkaAtai().toString()));
             }
         }
-        return get様式１の３の項目編集4(entity, 集計番号_01, 集計番号_02, 集計番号_03, 集計番号_04, jigyoHokokuRenkeiEntity);
+        return get様式１の２の項目編集4(entity, 集計番号_01, 集計番号_02, 集計番号_03, 集計番号_04, jigyoHokokuRenkeiEntity);
     }
 
-    private JigyoHokokuRenkeiEntity get様式１の３の項目編集4(
+    private JigyoHokokuRenkeiEntity get様式１の２の項目編集4(
             DbT7021JigyoHokokuTokeiDataEntity entity,
             RString 集計番号_01,
             RString 集計番号_02,
@@ -378,10 +378,10 @@ public class JigyoHokokuRenkeiHokenYousikiIchi_SanProcess extends BatchProcessBa
                 jigyoHokokuRenkeiEntity.setD038(new RString(entity.getShukeiKekkaAtai().toString()));
             }
         }
-        return get様式１の３の項目編集5(entity, 集計番号_01, 集計番号_02, 集計番号_03, 集計番号_04, jigyoHokokuRenkeiEntity);
+        return get様式１の２の項目編集5(entity, 集計番号_01, 集計番号_02, 集計番号_03, 集計番号_04, jigyoHokokuRenkeiEntity);
     }
 
-    private JigyoHokokuRenkeiEntity get様式１の３の項目編集5(
+    private JigyoHokokuRenkeiEntity get様式１の２の項目編集5(
             DbT7021JigyoHokokuTokeiDataEntity entity,
             RString 集計番号_01,
             RString 集計番号_02,
@@ -426,10 +426,10 @@ public class JigyoHokokuRenkeiHokenYousikiIchi_SanProcess extends BatchProcessBa
                 jigyoHokokuRenkeiEntity.setD050(new RString(entity.getShukeiKekkaAtai().toString()));
             }
         }
-        return get様式１の３の項目編集6(entity, 集計番号_01, 集計番号_02, 集計番号_03, 集計番号_04, jigyoHokokuRenkeiEntity);
+        return get様式１の２の項目編集6(entity, 集計番号_01, 集計番号_02, 集計番号_03, 集計番号_04, jigyoHokokuRenkeiEntity);
     }
 
-    private JigyoHokokuRenkeiEntity get様式１の３の項目編集6(
+    private JigyoHokokuRenkeiEntity get様式１の２の項目編集6(
             DbT7021JigyoHokokuTokeiDataEntity entity,
             RString 集計番号_01,
             RString 集計番号_02,
@@ -474,10 +474,10 @@ public class JigyoHokokuRenkeiHokenYousikiIchi_SanProcess extends BatchProcessBa
                 jigyoHokokuRenkeiEntity.setD062(new RString(entity.getShukeiKekkaAtai().toString()));
             }
         }
-        return get様式１の３の項目編集7(entity, 集計番号_01, 集計番号_02, 集計番号_03, 集計番号_04, jigyoHokokuRenkeiEntity);
+        return get様式１の２の項目編集7(entity, 集計番号_01, 集計番号_02, 集計番号_03, 集計番号_04, jigyoHokokuRenkeiEntity);
     }
 
-    private JigyoHokokuRenkeiEntity get様式１の３の項目編集7(
+    private JigyoHokokuRenkeiEntity get様式１の２の項目編集7(
             DbT7021JigyoHokokuTokeiDataEntity entity,
             RString 集計番号_01,
             RString 集計番号_02,
@@ -522,10 +522,10 @@ public class JigyoHokokuRenkeiHokenYousikiIchi_SanProcess extends BatchProcessBa
                 jigyoHokokuRenkeiEntity.setD074(new RString(entity.getShukeiKekkaAtai().toString()));
             }
         }
-        return get様式１の３の項目編集8(entity, 集計番号_02, 集計番号_03, 集計番号_04, jigyoHokokuRenkeiEntity);
+        return get様式１の２の項目編集8(entity, 集計番号_02, 集計番号_03, 集計番号_04, jigyoHokokuRenkeiEntity);
     }
 
-    private JigyoHokokuRenkeiEntity get様式１の３の項目編集8(
+    private JigyoHokokuRenkeiEntity get様式１の２の項目編集8(
             DbT7021JigyoHokokuTokeiDataEntity entity,
             RString 集計番号_02,
             RString 集計番号_03,
@@ -571,10 +571,10 @@ public class JigyoHokokuRenkeiHokenYousikiIchi_SanProcess extends BatchProcessBa
                 jigyoHokokuRenkeiEntity.setD095(new RString(entity.getShukeiKekkaAtai().toString()));
             }
         }
-        return get様式１の３の項目編集9(entity, 集計番号_03, 集計番号_04, jigyoHokokuRenkeiEntity);
+        return get様式１の２の項目編集9(entity, 集計番号_03, 集計番号_04, jigyoHokokuRenkeiEntity);
     }
 
-    private JigyoHokokuRenkeiEntity get様式１の３の項目編集9(
+    private JigyoHokokuRenkeiEntity get様式１の２の項目編集9(
             DbT7021JigyoHokokuTokeiDataEntity entity,
             RString 集計番号_03,
             RString 集計番号_04,

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.batchcontroller.step.jigyohokokurenkei;
+package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU020010;
 
 import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyohokokurenkei.JigyoHokokuRenkeiProcessParameter;
 import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEntity;
@@ -33,14 +33,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
- * 様式別連携情報作成のバッチ処理・一般状況（１１）～（１４）現物分に対応するのCSV出力のプロセスクラスです。
+ * 様式別連携情報作成のバッチ処理・一般状況（１１）～（１４）償還分_審査年月に対応するのCSV出力のプロセスクラスです。
  *
  * @reamsid_L DBU-4050-020 lijia
  */
-public class JigyoHokokuRenkei11_14GenbutsuProcess extends BatchProcessBase<DbT7021JigyoHokokuTokeiDataEntity> {
+public class JigyoHokokuRenkei11_14ShokanProcess extends BatchProcessBase<DbT7021JigyoHokokuTokeiDataEntity> {
 
-    private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyohokokurenkei.IJigyoHokokuRenkeiMapper.get事業報告統計現物分情報の取得");
+    private RString myBatisSelsectId;
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("JigyoHokokuRenkeiEucCsv"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
@@ -73,7 +72,17 @@ public class JigyoHokokuRenkei11_14GenbutsuProcess extends BatchProcessBase<DbT7
 
     @Override
     protected void initialize() {
-        csvFileName = new RString("DUJRENF06_" + processParameter.get過去集計年月()
+        if (processParameter.is出力_一般状況11_14償還分_審査年月()) {
+            myBatisSelsectId = new RString(
+                    "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyohokokurenkei.IJigyoHokokuRenkeiMapper."
+                    + "get事業報告統計償還分審査年月情報の取得");
+        }
+        if (processParameter.is出力_一般状況11_14償還分_決定年月()) {
+            myBatisSelsectId = new RString(
+                    "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyohokokurenkei.IJigyoHokokuRenkeiMapper."
+                    + "get事業報告統計償還分決定年月情報の取得");
+        }
+        csvFileName = new RString("DUJRENF07_" + processParameter.get過去集計年月()
                 + "_" + DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, 基準日, SubGyomuCode.DBU介護統計報告) + ".csv");
         record1Entity = new JigyoHokokuRenkei11or14Entity();
         record2Entity = new JigyoHokokuRenkei11or14Entity();
@@ -86,7 +95,7 @@ public class JigyoHokokuRenkei11_14GenbutsuProcess extends BatchProcessBase<DbT7
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID, processParameter.toMybatisParamter());
+        return new BatchDbReader(myBatisSelsectId, processParameter.toMybatisParamter());
     }
 
     @Override

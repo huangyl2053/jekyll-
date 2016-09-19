@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.definition.core.honnsanteifuka;
 import java.util.List;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.KozaSearchParameter;
+import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,7 +21,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class CaluculateFukaParameter extends KozaSearchParameter {
+public class CaluculateFukaParameter extends KozaSearchParameter implements IMyBatisParameter {
 
     /**
      * コンストラクタです。
