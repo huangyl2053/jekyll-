@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012001;
 
-import java.util.List;
+import java.util.ArrayList;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.fukajohotoroku.FukaJohoTorokuBatchParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.OutputChohyoIchiran;
@@ -59,7 +59,7 @@ public class DBB012001_TokuchoHeinjunka6GatsuParameter extends BatchParameterBas
     @BatchParameter(key = KEY_GENGAKUHENJUNKAHOHO, name = NAME_GENGAKUHENJUNKAHOHO)
     private RString 減額平準化方法;
     @BatchParameter(key = KEY_SHUTSURYOCHOHYO, name = NAME_SHUTSURYOCHOHYO)
-    private List<OutputChohyoIchiran> 出力帳票entity;
+    private ArrayList<OutputChohyoIchiran> 出力帳票entity;
     @BatchParameter(key = KEY_SHUTSURYOTAISHO, name = NAME_SHUTSURYOTAISHO)
     private RString 出力対象;
     @BatchParameter(key = KEY_HAKOKI, name = NAME_HAKOKI)
