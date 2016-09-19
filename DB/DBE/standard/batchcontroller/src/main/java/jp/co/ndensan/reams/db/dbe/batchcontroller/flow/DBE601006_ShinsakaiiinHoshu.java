@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.shinsahoshuichiran;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinsahoshuichiran.ShinsaHoshuIchiranProcess;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.shinsahoshuichiran.ShinsaHoshuIchiranBatchParameter;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE601006.ShinsaHoshuIchiranProcess;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601006.DBE601006_ShinsakaiiinHoshuParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBE-1920-020 zhaoyao
  */
-public class ShinsaHoshuIchiranFlow extends BatchFlowBase<ShinsaHoshuIchiranBatchParameter> {
+public class DBE601006_ShinsakaiiinHoshu extends BatchFlowBase<DBE601006_ShinsakaiiinHoshuParameter> {
 
     private static final String SHINSA_HOSHU_ICHIRAN = "shinsahoshuichiran";
 

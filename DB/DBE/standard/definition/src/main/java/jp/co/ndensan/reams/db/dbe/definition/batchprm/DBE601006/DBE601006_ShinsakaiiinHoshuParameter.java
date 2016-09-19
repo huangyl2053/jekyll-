@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.definition.batchprm.shinsahoshuichiran;
+package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601006;
 
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shinsahoshuichiran.ShinsaHoshuIchiranProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -20,7 +20,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShinsaHoshuIchiranBatchParameter extends BatchParameterBase {
+public class DBE601006_ShinsakaiiinHoshuParameter extends BatchParameterBase {
 
     private static final String SYOHYO_SYUTURYOKU = "syohyoSyuturyoku";
     private static final String SHINSAKAI_KAISAI_YMD = "shinsakaiKaisaiYMD";
@@ -33,7 +33,7 @@ public class ShinsaHoshuIchiranBatchParameter extends BatchParameterBase {
     /**
      * コンストラクタです。
      */
-    public ShinsaHoshuIchiranBatchParameter() {
+    public DBE601006_ShinsakaiiinHoshuParameter() {
     }
 
     /**
@@ -42,7 +42,7 @@ public class ShinsaHoshuIchiranBatchParameter extends BatchParameterBase {
      * @param syohyoSyuturyoku 帳票出力区分
      * @param shinsakaiKaisaiYMD 審査会開催年月
      */
-    public ShinsaHoshuIchiranBatchParameter(RString syohyoSyuturyoku,
+    public DBE601006_ShinsakaiiinHoshuParameter(RString syohyoSyuturyoku,
             RString shinsakaiKaisaiYMD) {
         this.syohyoSyuturyoku = syohyoSyuturyoku;
         this.shinsakaiKaisaiYMD = shinsakaiKaisaiYMD;
