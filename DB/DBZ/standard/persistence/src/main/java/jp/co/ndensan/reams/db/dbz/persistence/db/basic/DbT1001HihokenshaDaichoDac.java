@@ -839,4 +839,22 @@ public class DbT1001HihokenshaDaichoDac implements ISaveable<DbT1001HihokenshaDa
                 limit(1).
                 toObject(DbT1001HihokenshaDaichoEntity.class);
     }
+
+    /**
+     * 被保険者台帳管理情報を取得します。
+     *
+     * @param 識別コード 識別コード
+     * @return List<DbT1001HihokenshaDaichoEntity>
+     */
+    @Transaction
+    public List<DbT1001HihokenshaDaichoEntity> get被保険者台帳管理(ShikibetsuCode 識別コード) {
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT1001HihokenshaDaicho.class).
+                where(and(
+                                eq(shikibetsuCode, 識別コード),
+                                eq(logicalDeletedFlag, false))).
+                order(by(shikibetsuCode), by(DbT1001HihokenshaDaicho.idoYMD, Order.DESC), by(DbT1001HihokenshaDaicho.edaNo, Order.DESC)).
+                toList(DbT1001HihokenshaDaichoEntity.class);
+    }
 }
