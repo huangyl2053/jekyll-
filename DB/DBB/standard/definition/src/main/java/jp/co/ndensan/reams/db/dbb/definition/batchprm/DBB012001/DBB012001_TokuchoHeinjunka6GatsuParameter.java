@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012001;
 
 import java.util.ArrayList;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.fukajohotoroku.FukaJohoTorokuBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB004001.DBB004001_FukaJohoTorokuParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.OutputChohyoIchiran;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
@@ -89,7 +89,7 @@ public class DBB012001_TokuchoHeinjunka6GatsuParameter extends BatchParameterBas
      *
      * @return FukaJohoTorokuBatchParameter
      */
-    public FukaJohoTorokuBatchParameter toFukaJohoTorokuBatchParameter() {
-        return new FukaJohoTorokuBatchParameter(true);
+    public DBB004001_FukaJohoTorokuParameter toFukaJohoTorokuBatchParameter() {
+        return new DBB004001_FukaJohoTorokuParameter(true);
     }
 }

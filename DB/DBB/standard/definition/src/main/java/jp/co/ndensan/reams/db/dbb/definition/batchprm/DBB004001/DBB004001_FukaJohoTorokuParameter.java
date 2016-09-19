@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbb.definition.batchprm.fukajohotoroku;
+package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB004001;
 
 import jp.co.ndensan.reams.db.dbb.definition.processprm.fukajohotoroku.FukaJohoHenshuProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -14,7 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class FukaJohoTorokuBatchParameter extends BatchParameterBase {
+public class DBB004001_FukaJohoTorokuParameter extends BatchParameterBase {
 
     @BatchParameter(key = "is当初処理", name = "is当初処理")
     private boolean is当初処理;
@@ -24,7 +24,7 @@ public class FukaJohoTorokuBatchParameter extends BatchParameterBase {
      *
      * @param is当初処理 boolean
      */
-    public FukaJohoTorokuBatchParameter(boolean is当初処理) {
+    public DBB004001_FukaJohoTorokuParameter(boolean is当初処理) {
         this.is当初処理 = is当初処理;
     }
 

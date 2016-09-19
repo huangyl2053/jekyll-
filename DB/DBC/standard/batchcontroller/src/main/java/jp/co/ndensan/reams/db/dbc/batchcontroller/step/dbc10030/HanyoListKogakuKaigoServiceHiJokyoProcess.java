@@ -21,8 +21,8 @@ import jp.co.ndensan.reams.db.dbc.service.report.hanyolistkogakukaigo.HanyoListK
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
-import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
@@ -76,12 +76,12 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<HanyouRisutoSyuturyokuEntity> {
 
-    private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
-            + "hanyourisutosyuturyoku.IHanyouRisutoSyuturyokuMapper.selectAllデータ");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBC701003"));
-    private static final ReportId EUC_ID = new ReportId("DBC701003");
+    private static RString readDataId;
+    private static EucEntityId eucEntityId;
+    private static ReportId eucId;
+    private static RString 日本語ファイル名;
+    private static RString 英数字ファイル名;
     private static final RString ジョブ番号 = new RString("【ジョブ番号】");
-    private static final RString 日本語ファイル名 = new RString("汎用リスト　高額介護サービス費状況CSV");
     private static final RString CSV出力有無 = new RString("");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
@@ -102,12 +102,12 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
     private static final RString 対象者受取年月 = new RString("対象者受取年月：");
     private static final RString 国保連送付年月 = new RString("国保連送付年月：");
     private static final RString 決定情報受取年月 = new RString("決定情報受取年月：");
+    private static final RString 審査年月 = new RString("審査年月：");
     private static final RString 波線 = new RString("　～　");
     private static final RString 左記号 = new RString("(");
     private static final RString 右記号 = new RString(")");
     private static final RString CODE = new RString("0003");
     private static final RString 定数_被保険者番号 = new RString("被保険者番号");
-    private static final RString 英数字ファイル名 = new RString("HanyoList_KogakuKaigoServiceHiJokyo.csv");
     private static final RString SPLIT = new RString("|");
     private static final RString 区分_1 = new RString("1");
     private static final RString 区分_2 = new RString("2");
@@ -122,9 +122,30 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
     private Decimal 連番;
     private List<KinyuKikanEntity> lstKinyuKikanEntity;
     private FlexibleDate システム日付;
+    private boolean modoFlag = true;
 
     @BatchWriter
     private EucCsvWriter<HanyouRisutoSyuturyokuEucCsvEntity> eucCsvWriter;
+
+    @Override
+    protected void initialize() {
+        if (1 == parameter.getModo()) {
+            readDataId = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
+                    + "hanyolistkogakuservicehi.IHanyoListKogakuServiceHiMapper.selectAllデータ");
+            eucEntityId = new EucEntityId(new RString("DBC701003"));
+            eucId = new ReportId("DBC701003");
+            日本語ファイル名 = new RString("汎用リスト　高額介護サービス費状況CSV");
+            英数字ファイル名 = new RString("HanyoList_KogakuKaigoServiceHiJokyo.csv");
+        } else if (2 == parameter.getModo()) {
+            readDataId = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
+                    + "hanyolistkogakuservicehi.IHanyoListKogakuServiceHiMapper.selectAllModeデータ");
+            eucEntityId = new EucEntityId(new RString("DBC701019"));
+            eucId = new ReportId("DBC701019");
+            日本語ファイル名 = new RString("汎用リスト　事業高額サービス費状況CSV");
+            英数字ファイル名 = new RString("HanyoList_JigyoKogakuServiceHiJokyo.csv");
+            this.modoFlag = false;
+        }
+    }
 
     @Override
     protected void beforeExecute() {
@@ -152,15 +173,15 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
         parameter.setKamokuCodelist(list);
         parameter.set国保連IFなし区分(国保連IFなし区分);
         parameter.set事業高額分(事業高額分);
-        return new BatchDbReader(READ_DATA_ID, parameter.toMybatisParamter());
+        return new BatchDbReader(readDataId, parameter.toMybatisParamter());
     }
 
     @Override
     protected void createWriter() {
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, eucEntityId, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, 英数字ファイル名);
-        eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, EUC_ENTITY_ID).
+        eucCsvWriter = new EucCsvWriter.InstanceBuilder(eucFilePath, eucEntityId).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
                 setEncode(Encode.UTF_8withBOM).
@@ -244,7 +265,7 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
         if (personalDataList == null || personalDataList.isEmpty()) {
             manager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
         } else {
-            AccessLogUUID accessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
+            AccessLogUUID accessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
             manager.spool(SubGyomuCode.DBC介護給付, eucFilePath, accessLog);
         }
         バッチ出力条件リストの出力();
@@ -264,7 +285,7 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
         List<RString> 出力条件 = get出力条件();
 
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
-                EUC_ID.value(),
+                eucId.value(),
                 導入団体コード,
                 市町村名,
                 ジョブ番号.concat(String.valueOf(JobContextHolder.getJobId())),
@@ -313,11 +334,13 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
                 ? RString.EMPTY : ShoriJokyo.toValue(parameter.getShoriJokyo()));
         出力条件.add(builder.toRString());
 
-        builder = new RStringBuilder();
-        builder.append(審査方法);
-        builder.append(null == parameter.getShinsaHoho() || parameter.getShinsaHoho().isEmpty()
-                ? RString.EMPTY : ShinsaHoho.toValue(parameter.getShinsaHoho()));
-        出力条件.add(builder.toRString());
+        if (this.modoFlag) {
+            builder = new RStringBuilder();
+            builder.append(審査方法);
+            builder.append(null == parameter.getShinsaHoho() || parameter.getShinsaHoho().isEmpty()
+                    ? RString.EMPTY : ShinsaHoho.toValue(parameter.getShinsaHoho()));
+            出力条件.add(builder.toRString());
+        }
 
         builder = new RStringBuilder();
         builder.append(算定基準);
@@ -326,12 +349,14 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
                 ? RString.EMPTY : SanteiKijun.toValue(parameter.getSanteiKijun()));
         出力条件.add(builder.toRString());
 
-        builder = new RStringBuilder();
-        builder.append(国保連不一致);
-        builder.append(null == parameter.getKokuhorenFuicchi()
-                || parameter.getKokuhorenFuicchi().isEmpty()
-                ? RString.EMPTY : KokuhorenFuicchi.toValue(parameter.getKokuhorenFuicchi()));
-        出力条件.add(builder.toRString());
+        if (this.modoFlag) {
+            builder = new RStringBuilder();
+            builder.append(国保連不一致);
+            builder.append(null == parameter.getKokuhorenFuicchi()
+                    || parameter.getKokuhorenFuicchi().isEmpty()
+                    ? RString.EMPTY : KokuhorenFuicchi.toValue(parameter.getKokuhorenFuicchi()));
+            出力条件.add(builder.toRString());
+        }
 
         出力条件 = get対象者TO金融機関の出力条件(出力条件);
 
@@ -400,49 +425,68 @@ public class HanyoListKogakuKaigoServiceHiJokyoProcess extends BatchProcessBase<
         }
         出力条件.add(builder.toRString());
 
-        builder = new RStringBuilder();
-        builder.append(国保連決定年月);
-        serviceYmFrom = get提供年月(parameter.getKokuhoreKeteiymFrom());
-        serviceYmTo = get提供年月(parameter.getKokuhoreKeteiymTo());
-        if (!serviceYmFrom.isNullOrEmpty() || !serviceYmTo.isNullOrEmpty()) {
-            builder.append(serviceYmFrom.concat(波線)
-                    .concat(serviceYmTo));
+        if (this.modoFlag) {
+            builder = new RStringBuilder();
+            builder.append(国保連決定年月);
+
+            serviceYmFrom = get提供年月(parameter.getKokuhoreKeteiymFrom());
+            serviceYmTo = get提供年月(parameter.getKokuhoreKeteiymTo());
+            if (!serviceYmFrom.isNullOrEmpty() || !serviceYmTo.isNullOrEmpty()) {
+                builder.append(serviceYmFrom.concat(波線)
+                        .concat(serviceYmTo));
+            }
+            出力条件.add(builder.toRString());
         }
-        出力条件.add(builder.toRString());
         return get年月出力条件(出力条件);
     }
 
     private List<RString> get年月出力条件(List<RString> 出力条件) {
 
         RStringBuilder builder = new RStringBuilder();
-        builder.append(対象者受取年月);
-        RString serviceYmFrom = get提供年月(parameter.getTaishoshaUketoriymFrom());
-        RString serviceYmTo = get提供年月(parameter.getTaishoshaUketoriymTo());
-        if (!serviceYmFrom.isNullOrEmpty() || !serviceYmTo.isNullOrEmpty()) {
-            builder.append(serviceYmFrom.concat(波線)
-                    .concat(serviceYmTo));
-        }
-        出力条件.add(builder.toRString());
+        RString serviceYmFrom;
+        RString serviceYmTo;
 
-        builder = new RStringBuilder();
-        builder.append(国保連送付年月);
-        serviceYmFrom = get提供年月(parameter.getKokuhoreSofuYMFrom());
-        serviceYmTo = get提供年月(parameter.getKokuhoreSofuYMTo());
-        if (!serviceYmFrom.isNullOrEmpty() || !serviceYmTo.isNullOrEmpty()) {
-            builder.append(serviceYmFrom.concat(波線)
-                    .concat(serviceYmTo));
+        if (this.modoFlag) {
+            builder.append(対象者受取年月);
+            serviceYmFrom = get提供年月(parameter.getTaishoshaUketoriymFrom());
+            serviceYmTo = get提供年月(parameter.getTaishoshaUketoriymTo());
+            if (!serviceYmFrom.isNullOrEmpty() || !serviceYmTo.isNullOrEmpty()) {
+                builder.append(serviceYmFrom.concat(波線)
+                        .concat(serviceYmTo));
+            }
+            出力条件.add(builder.toRString());
         }
-        出力条件.add(builder.toRString());
+        if (this.modoFlag) {
+            builder = new RStringBuilder();
+            builder.append(国保連送付年月);
+            serviceYmFrom = get提供年月(parameter.getKokuhoreSofuYMFrom());
+            serviceYmTo = get提供年月(parameter.getKokuhoreSofuYMTo());
+            if (!serviceYmFrom.isNullOrEmpty() || !serviceYmTo.isNullOrEmpty()) {
+                builder.append(serviceYmFrom.concat(波線)
+                        .concat(serviceYmTo));
+            }
+            出力条件.add(builder.toRString());
+        }
+        if (this.modoFlag) {
+            builder = new RStringBuilder();
+            builder.append(決定情報受取年月);
+            serviceYmFrom = get提供年月(parameter.getKeteijohoUketoriymFrom());
+            serviceYmTo = get提供年月(parameter.getKeteijohoUketoriymTo());
+            if (!serviceYmFrom.isNullOrEmpty() || !serviceYmTo.isNullOrEmpty()) {
+                builder.append(serviceYmFrom.concat(波線)
+                        .concat(serviceYmTo));
+            }
+            出力条件.add(builder.toRString());
+        }
 
-        builder = new RStringBuilder();
-        builder.append(決定情報受取年月);
-        serviceYmFrom = get提供年月(parameter.getKeteijohoUketoriymFrom());
-        serviceYmTo = get提供年月(parameter.getKeteijohoUketoriymTo());
-        if (!serviceYmFrom.isNullOrEmpty() || !serviceYmTo.isNullOrEmpty()) {
-            builder.append(serviceYmFrom.concat(波線)
-                    .concat(serviceYmTo));
+        if (!this.modoFlag) {
+            builder = new RStringBuilder();
+            builder.append(審査年月);
+            serviceYmFrom = get提供年月(parameter.getShinsaYM());
+            builder.append(serviceYmFrom);
+            出力条件.add(builder.toRString());
         }
-        出力条件.add(builder.toRString());
+
         return 出力条件;
     }
 

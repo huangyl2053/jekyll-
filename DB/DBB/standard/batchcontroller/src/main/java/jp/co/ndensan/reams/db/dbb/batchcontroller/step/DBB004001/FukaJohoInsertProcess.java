@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbb.batchcontroller.step.fukajohotoroku;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB004001;
 
 import jp.co.ndensan.reams.db.dbb.business.core.fukajohotoroku.FukaJohoInsertResult;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;

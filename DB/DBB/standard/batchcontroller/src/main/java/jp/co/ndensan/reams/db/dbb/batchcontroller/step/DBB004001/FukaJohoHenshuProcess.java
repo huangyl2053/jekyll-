@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbb.batchcontroller.step.fukajohotoroku;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB004001;
 
 import jp.co.ndensan.reams.db.dbb.definition.processprm.fukajohotoroku.FukaJohoHenshuProcessParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajohotoroku.DbT2002FukaJohoTempTableEntity;
