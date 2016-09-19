@@ -18,27 +18,32 @@ public enum DBB200003_HeijunkaKeisanJuneKekkaIchiran implements IReportItems {
     /**
      * 町域コード
      */
-    町域コード(new RString("0002"), new RString(""), new RString("\"").concat(new RString("ShikibetsuTaisho_choikiCode").concat(new RString("\"")))),
+    町域コード(new RString("0002"), new RString("町域コード"), new RString("\"").concat(new RString("ShikibetsuTaisho_choikiCode").concat(new RString("\"")))),
     /**
      * 行政区コード
      */
-    行政区コード(new RString("0004"), new RString(""), new RString("\"").concat(new RString("ShikibetsuTaisho_gyoseikuCode").concat(new RString("\"")))),
+    行政区コード(new RString("0004"), new RString("行政区コード"),
+            new RString("\"").concat(new RString("ShikibetsuTaisho_gyoseikuCode").concat(new RString("\"")))),
     /**
      * 世帯コード
      */
-    世帯コード(new RString("0008"), new RString(""), new RString("\"").concat(new RString("setaiCode").concat(new RString("\"")))),
+    世帯コード(new RString("0008"), new RString("世帯コード"),
+            new RString("\"").concat(new RString("setaiCode").concat(new RString("\"")))),
     /**
      * 識別コード
      */
-    識別コード(new RString("0009"), new RString(""), new RString("\"").concat(new RString("shikibetsuCode").concat(new RString("\"")))),
+    識別コード(new RString("0009"), new RString("識別コード"),
+            new RString("\"").concat(new RString("shikibetsuCode").concat(new RString("\"")))),
     /**
      * 市町村コード
      */
-    市町村コード(new RString("0016"), new RString(""), new RString("\"").concat(new RString("dtCityCode").concat(new RString("\"")))),
+    市町村コード(new RString("0016"), new RString("市町村コード"),
+            new RString("\"").concat(new RString("dtCityCode").concat(new RString("\"")))),
     /**
      * 被保険者番号
      */
-    被保険者番号(new RString("0104"), new RString(""), new RString("\"").concat(new RString("hihokenshaNo").concat(new RString("\""))));
+    被保険者番号(new RString("0104"), new RString("被保険者番号"),
+            new RString("\"").concat(new RString("hihokenshaNo").concat(new RString("\""))));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;
