@@ -43,6 +43,12 @@ public class DBB012001_TokuchoHeinjunka6GatsuParameter extends BatchParameterBas
     private static final String NAME_HAKOKI = "発行日";
     private static final String KEY_BUNSHUBANGO = "bunshubango";
     private static final String NAME_BUNSHUBANGO = "文書番号";
+    private static final String KEY_CHOHYOGROUP = "chohyogroup";
+    private static final String NAME_CHOHYOGROUP = "帳票グループ";
+    private static final String KEY_SHUTSURYOFLAG = "shutsuryoflag";
+    private static final String NAME_SHUTSURYOFLAG = "出力対象指示フラグ";
+    private static final String KEY_IKATSUFLAG = "ikatsuflag";
+    private static final String NAME_IKATSUFLAG = "一括発行フラグ";
 
     @BatchParameter(key = KEY_CHOTEINENDO, name = NAME_CHOTEINENDO)
     private FlexibleYear 調定年度;
@@ -60,6 +66,12 @@ public class DBB012001_TokuchoHeinjunka6GatsuParameter extends BatchParameterBas
     private FlexibleDate 発行日;
     @BatchParameter(key = KEY_BUNSHUBANGO, name = NAME_BUNSHUBANGO)
     private RString 文書番号;
+    @BatchParameter(key = KEY_CHOHYOGROUP, name = NAME_CHOHYOGROUP)
+    private RString 帳票グループ;
+    @BatchParameter(key = KEY_SHUTSURYOFLAG, name = NAME_SHUTSURYOFLAG)
+    private RString 出力対象指示フラグ;
+    @BatchParameter(key = KEY_IKATSUFLAG, name = NAME_IKATSUFLAG)
+    private boolean 一括発行フラグ;
 
     /**
      * processのパラメータを生成します。

@@ -46,7 +46,7 @@ public class JukyushaKyufuJissekiDaicho {
      */
     public ResponseData<JukyushaKyufuJissekiDaichoDiv> onLond(JukyushaKyufuJissekiDaichoDiv div) {
         RString 被保険者番号_FromOrTO = ViewStateHolder.get(ViewStateKeys.番号, RString.class);
-        ResponseData<JukyushaKyufuJissekiDaichoDiv> responseData = new ResponseData<>();
+        ResponseData<JukyushaKyufuJissekiDaichoDiv> responseData;
         getHandler(div).onLond();
         IUrControlData controlData = UrControlDataFactory.createInstance();
         RString menuID = controlData.getMenuID();
