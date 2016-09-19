@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.ninteichosayoteimitei;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.ninteichosayoteimitei.ChosahyoIkenshoCheckListProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.ninteichosayoteimitei.NinteichosaIraiHenkoProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.ninteichosayoteimitei.NinteichosaYoteiMiteiProcess;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.ninteichosayoteimitei.NinteichosaYoteiMiteiBatchParamter;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE012001.ChosahyoIkenshoCheckListProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE012001.NinteichosaIraiHenkoProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE012001.NinteichosaYoteiMiteiProcess;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE012001.DBE012001_ChosaInfoPrintParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBE-1390-080 dongyabin
  */
-public class NinteichosaYoteiMiteiFlow extends BatchFlowBase<NinteichosaYoteiMiteiBatchParamter> {
+public class DBE012001_ChosaInfoPrint extends BatchFlowBase<DBE012001_ChosaInfoPrintParameter> {
 
     private static final String NINTEICHOSA_YOTEIMITEI = "ninteichosaYoteiMitei";
     private static final String NINTEICHOSA_IRAIHENKO = "ninteichosaIraiHenko";

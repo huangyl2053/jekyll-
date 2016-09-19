@@ -3,20 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.step.ninteichosayoteimitei;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE012001;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.chosahyoikenshochecklist.ChosahyoIkenshoCheckListData;
-import jp.co.ndensan.reams.db.dbe.business.report.chosahyoikenshochecklist.ChosahyoIkenshoCheckListReport;
+import jp.co.ndensan.reams.db.dbe.business.report.ninteichosayoteimitei.NinteichosaYoteiMiteiReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.ninteichosayoteimitei.ChosahyoIkenshoCheckListProcessParamter;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.chosahyoikenshochecklist.ChosahyoIkenshoCheckListRelateEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.chosahyoikenshochecklist.ChosahyoIkenshoCheckListReportEntity;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.chosahyoikenshochecklist.ChosahyoIkenshoCheckListReportSource;
-import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosairaihenko.NinteichosaIraiHenkoReportSource;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.ninteichosayoteimitei.NinteichosaYoteiMiteiProcessParamter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosayoteimitei.NinteichosaYoteiMiteiRelateEntity;
+import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosayoteimitei.NinteichosaYoteiMiteiReportSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -45,29 +42,28 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  *
- * 認定調査結果と主治医意見書のチェックリスト情報の取得バッチクラスです。
+ * 認定調査予定未定者一覧表情報の取得バッチクラスです。
  *
  * @reamsid_L DBE-1390-080 dongyabin
  */
-public class ChosahyoIkenshoCheckListProcess extends BatchKeyBreakBase<ChosahyoIkenshoCheckListRelateEntity> {
+public class NinteichosaYoteiMiteiProcess extends BatchKeyBreakBase<NinteichosaYoteiMiteiRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosayoteimitei."
-                    + "INinteichosaYoteiMiteiMapper.getChosahyoIkenshoCheckList");
+                    + "INinteichosaYoteiMiteiMapper.getNinteichosaScheduleInput");
+    private static final ReportId REPORT_ID = ReportIdDBE.DBE012001.getReportId();
     private static final List<RString> PAGE_BREAK_KEYS = Collections
-            .unmodifiableList(Arrays.asList(new RString(ChosahyoIkenshoCheckListReportSource.ReportSourceFields.hihokenshaNo.name())));
-    private static final ReportId REPORT_ID = ReportIdDBE.DBE012003.getReportId();
+            .unmodifiableList(Arrays.asList(new RString(NinteichosaYoteiMiteiReportSource.ReportSourceFields.shichosonName.name())));
     private static final RString JOBNO_NAME = new RString("【ジョブ番号】");
     private static final RString MIDDLELINE = RString.EMPTY;
     private static final RString なし = new RString("無し");
-    private ChosahyoIkenshoCheckListProcessParamter paramter;
+    private NinteichosaYoteiMiteiProcessParamter paramter;
     @BatchWriter
-    private BatchReportWriter<ChosahyoIkenshoCheckListReportSource> batchWrite;
-    private ReportSourceWriter<ChosahyoIkenshoCheckListReportSource> reportSourceWriter;
+    private BatchReportWriter<NinteichosaYoteiMiteiReportSource> batchWrite;
+    private ReportSourceWriter<NinteichosaYoteiMiteiReportSource> reportSourceWriter;
     private int index_tmp = 0;
     private RString 導入団体コード;
     private RString 市町村名;
-    private ChosahyoIkenshoCheckListReportEntity reportData = new ChosahyoIkenshoCheckListReportEntity();
 
     @Override
     protected void beforeExecute() {
@@ -85,7 +81,7 @@ public class ChosahyoIkenshoCheckListProcess extends BatchKeyBreakBase<ChosahyoI
     @Override
     protected void createWriter() {
         batchWrite = BatchReportFactory.createBatchReportWriter(REPORT_ID.value())
-                .addBreak(new BreakerCatalog<NinteichosaIraiHenkoReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
+                .addBreak(new BreakerCatalog<NinteichosaYoteiMiteiReportSource>().simplePageBreaker(PAGE_BREAK_KEYS))
                 .create();
         reportSourceWriter = new ReportSourceWriter<>(batchWrite);
     }
@@ -93,48 +89,37 @@ public class ChosahyoIkenshoCheckListProcess extends BatchKeyBreakBase<ChosahyoI
     @Override
     protected void afterExecute() {
         if (index_tmp == 0) {
-            ChosahyoIkenshoCheckListRelateEntity entity = new ChosahyoIkenshoCheckListRelateEntity();
+            NinteichosaYoteiMiteiRelateEntity entity = new NinteichosaYoteiMiteiRelateEntity();
             entity.setDbT5101_hihokenshaName(new AtenaMeisho("該当データがありません"));
-            ChosahyoIkenshoCheckListData data = new ChosahyoIkenshoCheckListData(entity);
-            reportData = data.get帳票データ(reportData);
-            ChosahyoIkenshoCheckListReport report = new ChosahyoIkenshoCheckListReport(reportData);
-            report.writeBy(reportSourceWriter);
-        }
-        if (!RString.isNullOrEmpty(reportData.getHihokenshaNo())) {
-            ChosahyoIkenshoCheckListReport report = new ChosahyoIkenshoCheckListReport(reportData);
+            NinteichosaYoteiMiteiReport report = new NinteichosaYoteiMiteiReport(entity, -1);
             report.writeBy(reportSourceWriter);
         }
         バッチ出力条件リストの出力();
     }
 
     @Override
-    protected void usualProcess(ChosahyoIkenshoCheckListRelateEntity entity) {
-        if (getBefore() != null && !hasBrek(getBefore(), entity)) {
-            AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
+    protected void keyBreakProcess(NinteichosaYoteiMiteiRelateEntity current) {
+        if (hasBrek(getBefore(), current)) {
+            AccessLogger.log(AccessLogType.照会, toPersonalData(current));
+            NinteichosaYoteiMiteiReport report = new NinteichosaYoteiMiteiReport(current, index_tmp);
+            report.writeBy(reportSourceWriter);
             index_tmp++;
-            ChosahyoIkenshoCheckListData data = new ChosahyoIkenshoCheckListData(entity);
-            reportData = data.get帳票データ(reportData);
         }
+    }
+
+    private boolean hasBrek(NinteichosaYoteiMiteiRelateEntity before, NinteichosaYoteiMiteiRelateEntity current) {
+        return !before.getDbT5101_hihokenshaName().equals(current.getDbT5101_hihokenshaName());
     }
 
     @Override
-    protected void keyBreakProcess(ChosahyoIkenshoCheckListRelateEntity current) {
-        if (hasBrek(getBefore(), current)) {
-            AccessLogger.log(AccessLogType.照会, toPersonalData(current));
-            ChosahyoIkenshoCheckListReport report = new ChosahyoIkenshoCheckListReport(reportData);
-            report.writeBy(reportSourceWriter);
-            ChosahyoIkenshoCheckListData data = new ChosahyoIkenshoCheckListData(current);
-            reportData = new ChosahyoIkenshoCheckListReportEntity();
-            reportData = data.get帳票データ(reportData);
-            index_tmp++;
-        }
+    protected void usualProcess(NinteichosaYoteiMiteiRelateEntity entity) {
+        AccessLogger.log(AccessLogType.照会, toPersonalData(entity));
+        NinteichosaYoteiMiteiReport report = new NinteichosaYoteiMiteiReport(entity, index_tmp);
+        report.writeBy(reportSourceWriter);
+        index_tmp++;
     }
 
-    private boolean hasBrek(ChosahyoIkenshoCheckListRelateEntity before, ChosahyoIkenshoCheckListRelateEntity current) {
-        return !before.getDbT5101_shinseishoKanriNo().equals(current.getDbT5101_shinseishoKanriNo());
-    }
-
-    private PersonalData toPersonalData(ChosahyoIkenshoCheckListRelateEntity entity) {
+    private PersonalData toPersonalData(NinteichosaYoteiMiteiRelateEntity entity) {
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0001")), new RString("申請書管理番号"),
                 entity.getDbT5101_shinseishoKanriNo().value());
         return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
@@ -146,18 +131,16 @@ public class ChosahyoIkenshoCheckListProcess extends BatchKeyBreakBase<ChosahyoI
         ジョブ番号_Tmp.append(RString.HALF_SPACE);
         ジョブ番号_Tmp.append(JobContextHolder.getJobId());
         RString ジョブ番号 = ジョブ番号_Tmp.toRString();
-        RString 帳票名 = ReportIdDBE.DBE012003.getReportName();
+        RString 帳票名 = ReportIdDBE.DBE012001.getReportName();
         RString 出力ページ数 = new RString(reportSourceWriter.pageCount().value());
         RString csv出力有無 = なし;
         RString csvファイル名 = MIDDLELINE;
         List<RString> 出力条件 = new ArrayList<>();
-        出力条件.add(set認定調査予定未定者一覧作成条件(paramter.get作成条件()));
-        出力条件.add(dateFormat(paramter.get認定調査結果と主治医意見書のチェックリスト申請日From()));
-        出力条件.add(dateFormat(paramter.get認定調査結果と主治医意見書のチェックリスト申請日To()));
-        出力条件.add(dateFormat(paramter.get認定調査結果と主治医意見書のチェックリスト審査日()));
-        出力条件.add(paramter.get認定調査結果と主治医意見書のチェックリスト審査会());
+        出力条件.add(set認定調査予定未定者一覧作成条件(paramter.get認定調査予定未定者一覧作成条件()));
+        出力条件.add(dateFormat(paramter.get認定調査予定未定者一覧申請日From()));
+        出力条件.add(dateFormat(paramter.get認定調査予定未定者一覧申請日To()));
         ReportOutputJokenhyoItem item = new ReportOutputJokenhyoItem(
-                ReportIdDBE.DBE012003.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,
+                ReportIdDBE.DBE012001.getReportId().value(), 導入団体コード, 市町村名, ジョブ番号,
                 帳票名, 出力ページ数, csv出力有無, csvファイル名, 出力条件);
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(item);
         printer.print();
@@ -174,13 +157,9 @@ public class ChosahyoIkenshoCheckListProcess extends BatchKeyBreakBase<ChosahyoI
     private RString set認定調査予定未定者一覧作成条件(RString 作成条件) {
         RString 一覧作成条件 = RString.EMPTY;
         if (new RString("1").equals(作成条件)) {
-            一覧作成条件 = new RString("未割当");
+            一覧作成条件 = new RString("全件出力対象");
         } else if (new RString("2").equals(作成条件)) {
             一覧作成条件 = new RString("申請日範囲指定");
-        } else if (new RString("3").equals(作成条件)) {
-            一覧作成条件 = new RString("審査日指定");
-        } else if (new RString("4").equals(作成条件)) {
-            一覧作成条件 = new RString("審査会指定");
         }
         return 一覧作成条件;
     }

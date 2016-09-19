@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.definition.batchprm.ninteichosayoteimitei;
+package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE012001;
 
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ninteichosayoteimitei.ChosahyoIkenshoCheckListProcessParamter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ninteichosayoteimitei.NinteichosaIraiHenkoProcessParamter;
@@ -23,7 +23,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class NinteichosaYoteiMiteiBatchParamter extends BatchParameterBase {
+public class DBE012001_ChosaInfoPrintParameter extends BatchParameterBase {
 
     private static final String NINTEICHOSAYOTEIMITEI = "ninteichosayoteimitei";
     private static final String JOKEN1 = "joken1";
