@@ -151,6 +151,7 @@ public class HanyoListKyodoJukyushaOutputProcess extends BatchProcessBase<KyodoJ
 
     @Override
     protected void afterExecute() {
+        csvWriter.close();
         if (!personalDataList.isEmpty()) {
             AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
             spoolManager.spool(eucFilePath, accessLogUUID);
