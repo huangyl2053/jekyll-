@@ -34,6 +34,63 @@ public class HanyoListKyodoJukyushaCsvEntityEditor {
 
     private static final RString SLASH = new RString("/");
     private static final RString 空白 = new RString(" ");
+    private static final RString HEADER_連番 = new RString("連番");
+    private static final RString HEADER_識別コード = new RString("識別コード");
+    private static final RString HEADER_住民種別 = new RString("住民種別");
+    private static final RString HEADER_氏名 = new RString("氏名");
+    private static final RString HEADER_氏名カナ = new RString("氏名カナ");
+    private static final RString HEADER_生年月日 = new RString("生年月日");
+    private static final RString HEADER_年齢 = new RString("年齢");
+    private static final RString HEADER_性別 = new RString("性別");
+    private static final RString HEADER_続柄コード = new RString("続柄コード");
+    private static final RString HEADER_世帯コード = new RString("世帯コード");
+    private static final RString HEADER_世帯主名 = new RString("世帯主名");
+    private static final RString HEADER_住所コード = new RString("住所コード");
+    private static final RString HEADER_郵便番号 = new RString("郵便番号");
+    private static final RString HEADER_住所_番地_方書 = new RString("住所＋番地＋方書");
+    private static final RString HEADER_住所 = new RString("住所");
+    private static final RString HEADER_番地 = new RString("番地");
+    private static final RString HEADER_方書 = new RString("方書");
+    private static final RString HEADER_行政区コード = new RString("行政区コード");
+    private static final RString HEADER_行政区名 = new RString("行政区名");
+    private static final RString HEADER_地区１ = new RString("地区１");
+    private static final RString HEADER_地区２ = new RString("地区２");
+    private static final RString HEADER_地区３ = new RString("地区３");
+    private static final RString HEADER_連絡先１ = new RString("連絡先１");
+    private static final RString HEADER_連絡先２ = new RString("連絡先２");
+    private static final RString HEADER_登録異動日 = new RString("登録異動日");
+    private static final RString HEADER_登録事由 = new RString("登録事由");
+    private static final RString HEADER_登録届出日 = new RString("登録届出日");
+    private static final RString HEADER_住定異動日 = new RString("住定異動日");
+    private static final RString HEADER_住定事由 = new RString("住定事由");
+    private static final RString HEADER_住定届出日 = new RString("住定届出日");
+    private static final RString HEADER_消除異動日 = new RString("消除異動日");
+    private static final RString HEADER_消除事由 = new RString("消除事由");
+    private static final RString HEADER_消除届出日 = new RString("消除届出日");
+    private static final RString HEADER_転出入理由 = new RString("転出入理由");
+    private static final RString HEADER_前住所郵便番号 = new RString("前住所郵便番号");
+    private static final RString HEADER_前住所_番地_方書 = new RString("前住所＋番地＋方書");
+    private static final RString HEADER_前住所 = new RString("前住所");
+    private static final RString HEADER_前住所番地 = new RString("前住所番地");
+    private static final RString HEADER_前住所方書 = new RString("前住所方書");
+    private static final RString HEADER_市町村コード = new RString("市町村コード");
+    private static final RString HEADER_市町村名 = new RString("市町村名");
+    private static final RString HEADER_保険者コード = new RString("保険者コード");
+    private static final RString HEADER_保険者名 = new RString("保険者名");
+    private static final RString HEADER_空白 = new RString("空白");
+    private static final RString HEADER_処理対象年月 = new RString("処理対象年月");
+    private static final RString HEADER_被保険者番号 = new RString("被保険者番号");
+    private static final RString HEADER_履歴番号 = new RString("履歴番号");
+    private static final RString HEADER_異動年月日 = new RString("異動年月日");
+    private static final RString HEADER_異動区分 = new RString("異動区分");
+    private static final RString HEADER_異動事由 = new RString("異動事由");
+    private static final RString HEADER_給付_証記載保険者番号 = new RString("（給付）証記載保険者番号");
+    private static final RString HEADER_被保険者氏名漢字 = new RString("被保険者氏名漢字");
+    private static final RString HEADER_送付郵便番号 = new RString("送付郵便番号");
+    private static final RString HEADER_送付住所カナ = new RString("送付住所カナ");
+    private static final RString HEADER_送付住所 = new RString("送付住所");
+    private static final RString HEADER_電話番号 = new RString("電話番号");
+    private static final RString HEADER_帳票出力順序コード = new RString("帳票出力順序コード");
 
     private final KyodoJukyushaKihonEntity entity;
     private final HanyoListKyodoJukyushaProcessParameter param;
@@ -240,6 +297,132 @@ public class HanyoListKyodoJukyushaCsvEntityEditor {
         }
         csvEntity.set帳票出力順序コード(entity.get共同処理用受給者異動基本送付().getChohyoOutputJunjyoCode());
         return csvEntity;
+    }
+
+    /**
+     * CSVのHeaderを取得します。
+     *
+     * @return HanyoListKyodoJukyushaCsvEntity
+     */
+    public static HanyoListKyodoJukyushaCsvEntity getHeader() {
+        return new HanyoListKyodoJukyushaCsvEntity(
+                HEADER_連番,
+                HEADER_識別コード,
+                HEADER_住民種別,
+                HEADER_氏名,
+                HEADER_氏名カナ,
+                HEADER_生年月日,
+                HEADER_年齢,
+                HEADER_性別,
+                HEADER_続柄コード,
+                HEADER_世帯コード,
+                HEADER_世帯主名,
+                HEADER_住所コード,
+                HEADER_郵便番号,
+                HEADER_住所_番地_方書,
+                HEADER_住所,
+                HEADER_番地,
+                HEADER_方書,
+                HEADER_行政区コード,
+                HEADER_行政区名,
+                HEADER_地区１,
+                HEADER_地区２,
+                HEADER_地区３,
+                HEADER_連絡先１,
+                HEADER_連絡先２,
+                HEADER_登録異動日,
+                HEADER_登録事由,
+                HEADER_登録届出日,
+                HEADER_住定異動日,
+                HEADER_住定事由,
+                HEADER_住定届出日,
+                HEADER_消除異動日,
+                HEADER_消除事由,
+                HEADER_消除届出日,
+                HEADER_転出入理由,
+                HEADER_前住所郵便番号,
+                HEADER_前住所_番地_方書,
+                HEADER_前住所,
+                HEADER_前住所番地,
+                HEADER_前住所方書,
+                HEADER_市町村コード,
+                HEADER_市町村名,
+                HEADER_保険者コード,
+                HEADER_保険者名,
+                HEADER_空白,
+                HEADER_処理対象年月,
+                HEADER_被保険者番号,
+                HEADER_履歴番号,
+                HEADER_異動年月日,
+                HEADER_異動区分,
+                HEADER_異動事由,
+                HEADER_給付_証記載保険者番号,
+                HEADER_被保険者氏名漢字,
+                HEADER_送付郵便番号,
+                HEADER_送付住所カナ,
+                HEADER_送付住所,
+                HEADER_電話番号,
+                HEADER_帳票出力順序コード);
+    }
+
+    public static HanyoListKyodoJukyushaNoRebanCsvEntity getHeaderNoRenban() {
+        return new HanyoListKyodoJukyushaNoRebanCsvEntity(
+                HEADER_識別コード,
+                HEADER_住民種別,
+                HEADER_氏名,
+                HEADER_氏名カナ,
+                HEADER_生年月日,
+                HEADER_年齢,
+                HEADER_性別,
+                HEADER_続柄コード,
+                HEADER_世帯コード,
+                HEADER_世帯主名,
+                HEADER_住所コード,
+                HEADER_郵便番号,
+                HEADER_住所_番地_方書,
+                HEADER_住所,
+                HEADER_番地,
+                HEADER_方書,
+                HEADER_行政区コード,
+                HEADER_行政区名,
+                HEADER_地区１,
+                HEADER_地区２,
+                HEADER_地区３,
+                HEADER_連絡先１,
+                HEADER_連絡先２,
+                HEADER_登録異動日,
+                HEADER_登録事由,
+                HEADER_登録届出日,
+                HEADER_住定異動日,
+                HEADER_住定事由,
+                HEADER_住定届出日,
+                HEADER_消除異動日,
+                HEADER_消除事由,
+                HEADER_消除届出日,
+                HEADER_転出入理由,
+                HEADER_前住所郵便番号,
+                HEADER_前住所_番地_方書,
+                HEADER_前住所,
+                HEADER_前住所番地,
+                HEADER_前住所方書,
+                HEADER_市町村コード,
+                HEADER_市町村名,
+                HEADER_保険者コード,
+                HEADER_保険者名,
+                HEADER_空白,
+                HEADER_処理対象年月,
+                HEADER_被保険者番号,
+                HEADER_履歴番号,
+                HEADER_異動年月日,
+                HEADER_異動区分,
+                HEADER_異動事由,
+                HEADER_給付_証記載保険者番号,
+                HEADER_被保険者氏名漢字,
+                HEADER_送付郵便番号,
+                HEADER_送付住所カナ,
+                HEADER_送付住所,
+                HEADER_電話番号,
+                HEADER_帳票出力順序コード);
     }
 
     private RString format日付項目(FlexibleDate date) {
