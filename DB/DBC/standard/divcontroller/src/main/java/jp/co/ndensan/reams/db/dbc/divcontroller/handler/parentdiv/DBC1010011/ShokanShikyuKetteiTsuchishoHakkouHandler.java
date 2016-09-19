@@ -53,7 +53,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 public class ShokanShikyuKetteiTsuchishoHakkouHandler {
 
     private final ShokanShikyuKetteiTsuchishoHakkouDiv div;
-    private static final RString DBCSHIKIBETSUCODE = new RString("DBCshikibetsuCode");
+    private static final RString DBCHIHOKENSHANO = new RString("DBCHihokenshaNo");
 
     /**
      * コンストラクタです。
@@ -79,7 +79,7 @@ public class ShokanShikyuKetteiTsuchishoHakkouHandler {
             List<JukyushaDaicho> 受給者台帳List,
             List<SogoJigyoTaishosha> 総合事業対象者List,
             List<ShokanHanteiKekka> 償還払支給判定結果) {
-        LockingKey key = new LockingKey(DBCSHIKIBETSUCODE.concat(被保険者番号.getColumnValue()));
+        LockingKey key = new LockingKey(DBCHIHOKENSHANO.concat(被保険者番号.getColumnValue()));
         RealInitialLocker.lock(key);
         div.getShokanShikyuKetteiTsuchishoHakkouKihon().initialize(shikibetsuCode);
         div.getShokanShikyuKetteiTsuchishoSakuseiKaigoKihon().initialize(被保険者番号);
@@ -259,6 +259,16 @@ public class ShokanShikyuKetteiTsuchishoHakkouHandler {
             }
         }
         return 差額支給対象者区分;
+    }
+
+    /**
+     * 前排他キーの解除
+     *
+     * @param 被保険者番号 HihokenshaNo
+     */
+    public void 前排他キーの解除(HihokenshaNo 被保険者番号) {
+        LockingKey 排他キー = new LockingKey(DBCHIHOKENSHANO.concat(被保険者番号.getColumnValue()));
+        RealInitialLocker.release(排他キー);
     }
 
     private List<FlexibleYearMonth> getサービス提供年月(List<ShokanShikyuKetteiTsuchishoHakkouBusiness> 償還払支給判定結果List) {
