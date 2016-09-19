@@ -64,6 +64,7 @@ public class SouhuFilesakuseiProcess extends BatchProcessBase<DbT3001JukyushaIdo
             + ".IJukyushaTotsugoIraiOutMapper.");
     private static final int 世代管理する = 1;
     private static final RString 国保連送付外字_変換区分_1 = new RString("1");
+    private final RDate 基準日 = RDate.getNowDate();
     private static int index = 1;
     private RString myBatisSelsectId;
     private RString eucFilePath;
@@ -77,7 +78,6 @@ public class SouhuFilesakuseiProcess extends BatchProcessBase<DbT3001JukyushaIdo
     private SouhuFilesakuseiEntity record3Entity;
     private RString kubun;
     List<DbT3001JukyushaIdoRenrakuhyoEntity> entityList;
-    private final RDate 基準日 = RDate.getNowDate();
     private Encode 文字コード;
 
     /**
