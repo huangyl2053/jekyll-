@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBU-5550-030 suguangjun
  */
-public class JigyoHokokuGeppoIppanShokanDBU011200Process extends BatchProcessBase<JyukyushaJohoKonkyoCSVRelateEntity> {
+public class JigyoHokokuGeppoIppanShokanDBU011391Process extends BatchProcessBase<JyukyushaJohoKonkyoCSVRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.ippanshokanketteiym."
@@ -49,7 +49,7 @@ public class JigyoHokokuGeppoIppanShokanDBU011200Process extends BatchProcessBas
 
     @Override
     protected void createWriter() {
-        eucFilePath = Path.combinePath(processParameter.getCsvFilePath(), new RString("DBU011200.CSV"));
+        eucFilePath = Path.combinePath(processParameter.getCsvFilePath(), new RString("DBU011391.csv"));
         eucCsvWriter = BatchWriters.csvWriter(IJigyouHoukokuTokeiEUCEntity.class)
                 .filePath(eucFilePath)
                 .setDelimiter(コンマ)

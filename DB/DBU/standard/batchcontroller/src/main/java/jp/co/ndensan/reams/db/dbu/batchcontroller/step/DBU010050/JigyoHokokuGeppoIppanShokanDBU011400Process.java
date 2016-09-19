@@ -17,15 +17,17 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.ZipUtil;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 
 /**
  * 事業報告月報_一般状況のProcessクラスです。
  *
  * @reamsid_L DBU-5550-030 suguangjun
  */
-public class JigyoHokokuGeppoIppanShokanDBU011200Process extends BatchProcessBase<JyukyushaJohoKonkyoCSVRelateEntity> {
+public class JigyoHokokuGeppoIppanShokanDBU011400Process extends BatchProcessBase<JyukyushaJohoKonkyoCSVRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.ippanshokanketteiym."
@@ -33,6 +35,7 @@ public class JigyoHokokuGeppoIppanShokanDBU011200Process extends BatchProcessBas
     private JigyoHokokuGeppoIppanShokanProcessParamter processParameter;
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
+    private FileSpoolManager manager;
     private RString eucFilePath;
     private JigyoHokokuGeppoIppanShokanBusiness business;
     @BatchWriter
@@ -40,6 +43,8 @@ public class JigyoHokokuGeppoIppanShokanDBU011200Process extends BatchProcessBas
 
     @Override
     protected void initialize() {
+        business = new JigyoHokokuGeppoIppanShokanBusiness();
+        manager = processParameter.getManager();
     }
 
     @Override
@@ -49,7 +54,7 @@ public class JigyoHokokuGeppoIppanShokanDBU011200Process extends BatchProcessBas
 
     @Override
     protected void createWriter() {
-        eucFilePath = Path.combinePath(processParameter.getCsvFilePath(), new RString("DBU011200.CSV"));
+        eucFilePath = Path.combinePath(processParameter.getCsvFilePath(), new RString("DBU011400.csv"));
         eucCsvWriter = BatchWriters.csvWriter(IJigyouHoukokuTokeiEUCEntity.class)
                 .filePath(eucFilePath)
                 .setDelimiter(コンマ)
@@ -68,5 +73,9 @@ public class JigyoHokokuGeppoIppanShokanDBU011200Process extends BatchProcessBas
     @Override
     protected void afterExecute() {
         eucCsvWriter.close();
+        RString zipFilePath = new RString(Path.combinePath(processParameter.getCsvFilePath(),
+                new RString("KonkyoCsv_HokenKyufuKetteJyokyou_Kougaku.zip")).toString());
+        ZipUtil.createFromFolder(zipFilePath, processParameter.getCsvFilePath());
+        manager.spool(zipFilePath);
     }
 }
