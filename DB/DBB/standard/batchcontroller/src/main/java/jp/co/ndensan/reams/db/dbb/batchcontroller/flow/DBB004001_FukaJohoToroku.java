@@ -1,9 +1,9 @@
-package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.fukajohotoroku;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
 import jp.co.ndensan.reams.ca.cax.definition.batchprm.ChoteiTorokuParameter;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.fukajohotoroku.FukaJohoHenshuProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.fukajohotoroku.FukaJohoInsertProcess;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.fukajohotoroku.FukaJohoTorokuBatchParameter;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB004001.FukaJohoHenshuProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB004001.FukaJohoInsertProcess;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB004001.DBB004001_FukaJohoTorokuParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBB-9040-060 wangxiaodong
  */
-public class FukaJohoTorokuFlow extends BatchFlowBase<FukaJohoTorokuBatchParameter> {
+public class DBB004001_FukaJohoToroku extends BatchFlowBase<DBB004001_FukaJohoTorokuParameter> {
 
     @Override
     protected void defineFlow() {

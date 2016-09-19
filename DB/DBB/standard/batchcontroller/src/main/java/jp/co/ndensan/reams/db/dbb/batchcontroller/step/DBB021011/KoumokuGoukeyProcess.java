@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb021011;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB021011;
 
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.GemmenJyoho;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.GokeiChi;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.KoumokuGoukey;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.createtsukibetsusuiihyo.KoumokuSyoukeyi;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.createtsukibetsusuiihyo.ICreateTsukibetsuSuiihyoMapper;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -21,25 +20,22 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- * 合計部分項目一時テーブルProcessクラスです。
+ * 項目合計一時テーブルProcessクラスです。
  *
  * @reamsid_L DBB-0760-030 lishengli
  */
-public class GokeyBubunKoumokuProcess extends BatchProcessBase<KoumokuSyoukeyi> {
+public class KoumokuGoukeyProcess extends BatchProcessBase<KoumokuSyoukeyi> {
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate."
-            + "createtsukibetsusuiihyo.ICreateTsukibetsuSuiihyoMapper.get項目小計一時テーブル合計データの取得");
-    private static final RString TABLE_合計部分項目一時テーブル = new RString("TmpGokeyBubunKoumoku_Ichi");
-    private static final RString TABLE_項目合計一時テーブル = new RString("TmpKoumokuGoukey_Ichi");
+            + "createtsukibetsusuiihyo.ICreateTsukibetsuSuiihyoMapper.get項目小計一時テーブルデータの取得");
     private static final RString TABLE_減免情報一時テーブル = new RString("TmpGemmenJyoho_Ichi");
+    private static final RString TABLE_項目合計一時テーブル = new RString("TmpKoumokuGoukey_Ichi");
     private List<KoumokuSyoukeyi> koumokuSyoukeyiList;
     private ICreateTsukibetsuSuiihyoMapper iCreateTsukibetsuSuiihyoMapper;
     @BatchWriter
-    BatchEntityCreatedTempTableWriter 合計部分項目一時テーブル;
+    BatchEntityCreatedTempTableWriter 減免情報一時テーブル;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 項目合計一時テーブル;
-    @BatchWriter
-    BatchEntityCreatedTempTableWriter 減免情報一時テーブル;
 
     @Override
     protected void initialize() {
@@ -58,8 +54,6 @@ public class GokeyBubunKoumokuProcess extends BatchProcessBase<KoumokuSyoukeyi> 
                 GemmenJyoho.class);
         項目合計一時テーブル = new BatchEntityCreatedTempTableWriter(TABLE_項目合計一時テーブル,
                 GokeiChi.class);
-        合計部分項目一時テーブル = new BatchEntityCreatedTempTableWriter(TABLE_合計部分項目一時テーブル,
-                KoumokuGoukey.class);
     }
 
     @Override
@@ -70,14 +64,12 @@ public class GokeyBubunKoumokuProcess extends BatchProcessBase<KoumokuSyoukeyi> 
     @Override
     protected void afterExecute() {
         データ合計();
-        get合計部分の項目();
         減免部分の人数と金額の計算();
     }
 
     private void 減免部分の人数と金額の計算() {
-        GemmenJyoho gemmenJyoho = iCreateTsukibetsuSuiihyoMapper.get減免部分過年度の人数合計と金額合計();
-        if (gemmenJyoho != null) {
-            gemmenJyoho.setHokenryoDankai(new RString("合計"));
+        List<GemmenJyoho> gemmenJyoholist = iCreateTsukibetsuSuiihyoMapper.get該当段階の過年度の人数と金額合計();
+        for (GemmenJyoho gemmenJyoho : gemmenJyoholist) {
             減免情報一時テーブル.insert(gemmenJyoho);
         }
     }
@@ -87,7 +79,7 @@ public class GokeyBubunKoumokuProcess extends BatchProcessBase<KoumokuSyoukeyi> 
             if (koumokuSyoukeyi != null) {
                 GokeiChi gokeiChi = new GokeiChi();
                 gokeiChi.setChoshuHouhou(koumokuSyoukeyi.getChoshuHouhou());
-                gokeiChi.setHokenryoDankai(new RString("合計"));
+                gokeiChi.setHokenryoDankai(koumokuSyoukeyi.getHokenryoDankai());
                 gokeiChi.setYoGetuNinsuuGoukeyi(getNinsuOrKinkakul(koumokuSyoukeyi.getYoGetuNinsu()));
                 gokeiChi.setYoGetuKinkakuGoukeyi(getNinsuOrKinkakul(koumokuSyoukeyi.getYoGetuKinkaku()));
                 gokeiChi.setGoGetuNinsuuGoukeyi(getNinsuOrKinkakul(koumokuSyoukeyi.getGoGetuNinsu()));
@@ -122,13 +114,6 @@ public class GokeyBubunKoumokuProcess extends BatchProcessBase<KoumokuSyoukeyi> 
                 gokeiChi.set該当段階の金額合計(get該当段階の金額合計(koumokuSyoukeyi));
                 項目合計一時テーブル.insert(gokeiChi);
             }
-        }
-    }
-
-    private void get合計部分の項目() {
-        List<KoumokuGoukey> list = iCreateTsukibetsuSuiihyoMapper.get項目合計一時テーブルデータの取得();
-        for (KoumokuGoukey koumokuGoukey : list) {
-            合計部分項目一時テーブル.insert(koumokuGoukey);
         }
     }
 
