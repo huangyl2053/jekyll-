@@ -123,16 +123,28 @@ public class JigyoKogakuKetteiTsuchishoYijiAriEditor implements IJigyoKogakuKett
             source.hihokenshaNo10 = set被保険者番号(被保険者番号List, INDEX_NINE);
         }
 
-        source.uketsukeYMD = new RString(帳票情報.get受付年月日().toString());
-        source.ketteiYMD = new RString(帳票情報.get決定年月日().toString());
-        source.honninShiharaiGaku = new RString(帳票情報.get本人支払額().toString());
-        source.taishoYM = 帳票情報.get対象年月().toDateString();
+        if (帳票情報.get受付年月日() != null) {
+            source.uketsukeYMD = new RString(帳票情報.get受付年月日().toString());
+        }
+        if (帳票情報.get決定年月日() != null) {
+            source.ketteiYMD = new RString(帳票情報.get決定年月日().toString());
+        }
+        if (帳票情報.get本人支払額() != null) {
+            source.honninShiharaiGaku = new RString(帳票情報.get本人支払額().toString());
+        }
+        if (帳票情報.get対象年月() != null) {
+            source.taishoYM = 帳票情報.get対象年月().toDateString();
+        }
         source.kyufuShu1 = 帳票情報.get給付の種類();
         source.kyufuShu2 = 帳票情報.get給付の種類();
         source.kyufuShu3 = 帳票情報.get給付の種類();
         source.kekka = 帳票情報.get支給不支給決定区分();
-        source.ketteiGaku = new RString(帳票情報.get決定額().toString());
-        source.shikyuGaku = new RString(帳票情報.get支給金額().toString());
+        if (帳票情報.get決定額() != null) {
+            source.ketteiGaku = new RString(帳票情報.get決定額().toString());
+        }
+        if (帳票情報.get支給金額() != null) {
+            source.shikyuGaku = new RString(帳票情報.get支給金額().toString());
+        }
 
         if (支給.equals(帳票情報.get支給不支給区分())) {
             source.riyuTitle = 増減の理由;
@@ -160,11 +172,13 @@ public class JigyoKogakuKetteiTsuchishoYijiAriEditor implements IJigyoKogakuKett
         source.mochimono3 = 帳票情報.get持ちもの();
         source.shiharaiBasho = 帳票情報.get支払場所();
 
-        source.shiharaiStartYMD = new RString(帳票情報.get支払期間().toString());
-        source.karaFugo = new RString(帳票情報.get支払期間().toString());
-        source.shiharaiEndYMD = new RString(帳票情報.get支払期間().toString());
-        source.shiharaiStartHMS = new RString(帳票情報.get支払期間().toString());
-        source.shiharaiEndHMS = new RString(帳票情報.get支払期間().toString());
+        if (帳票情報.get支払期間() != null) {
+            source.shiharaiStartYMD = new RString(帳票情報.get支払期間().toString());
+            source.karaFugo = new RString(帳票情報.get支払期間().toString());
+            source.shiharaiEndYMD = new RString(帳票情報.get支払期間().toString());
+            source.shiharaiStartHMS = new RString(帳票情報.get支払期間().toString());
+            source.shiharaiEndHMS = new RString(帳票情報.get支払期間().toString());
+        }
 
         if (支給.equals(帳票情報.get支給不支給区分())) {
             if (窓口払い.equals(帳票情報.get支払方法())) {
@@ -193,7 +207,9 @@ public class JigyoKogakuKetteiTsuchishoYijiAriEditor implements IJigyoKogakuKett
         }
 
         source.kouzaMeigi = 帳票情報.get口座名義人();
-        source.sihaYoYmd = new RString(帳票情報.get支払予定日().toString());
+        if (帳票情報.get支払予定日() != null) {
+            source.sihaYoYmd = new RString(帳票情報.get支払予定日().toString());
+        }
         source.tsuchiNo = 帳票情報.get決定通知書番号();
 
         set雛形部品CompNinshosha(source);
