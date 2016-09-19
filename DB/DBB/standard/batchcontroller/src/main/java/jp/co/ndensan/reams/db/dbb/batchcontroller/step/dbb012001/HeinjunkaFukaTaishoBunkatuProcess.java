@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012001;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishogaiTempEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijyunkaRokuBatchFukaGakuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka6gatsu.FukaJohoTmpEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka6gatsu.TaishoshaTmpEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
@@ -82,7 +81,6 @@ public class HeinjunkaFukaTaishoBunkatuProcess extends BatchProcessBase<FukaJoho
     @Override
     protected void process(FukaJohoTmpEntity fukaTmpEntity) {
         RString 備考コード = RString.EMPTY;
-        TokuchoHeijyunkaRokuBatchFukaGakuEntity fukaGakuEntity = new TokuchoHeijyunkaRokuBatchFukaGakuEntity();
         Decimal 特徴期別金額合計 = Decimal.ZERO;
         final Decimal 特徴期別金額01 = fukaTmpEntity.getTkKibetsuGaku01();
         final Decimal 特徴期別金額02 = fukaTmpEntity.getTkKibetsuGaku02();
@@ -100,8 +98,8 @@ public class HeinjunkaFukaTaishoBunkatuProcess extends BatchProcessBase<FukaJoho
         for (int i = 仮算定期間_最小期; i <= 仮算定期間_最大期; i++) {
             普徴期別金額合計 = 普徴期別金額合計.add(普徴期別金額取得(i, fukaTmpEntity));
         }
-        TokuchoHeijunkaRokuBatchTaishogaiTempEntity 対象外データTempEntity = null;
-        TokuchoHeijunkaRokuBatchTaishogaiTempEntity 対象者データTempEntity = null;
+        TokuchoHeijunkaRokuBatchTaishogaiTempEntity 対象外データTempEntity;
+        TokuchoHeijunkaRokuBatchTaishogaiTempEntity 対象者データTempEntity;
         if (Decimal.ZERO.compareTo(特徴期別金額合計) < 0 && Decimal.ZERO.compareTo(普徴期別金額合計) < 0) {
             備考コード = 備考コード_併徴者;
         } else if (Decimal.ZERO.equals(普徴期別金額合計) && Decimal.ZERO.equals(特徴期別金額01)) {
@@ -109,40 +107,25 @@ public class HeinjunkaFukaTaishoBunkatuProcess extends BatchProcessBase<FukaJoho
         } else if (特徴期別金額比較(特徴期別金額01, 特徴期別金額02, 特徴期別金額03)) {
             備考コード = 備考コード_仮徴収額修正者;
         }
-        fukaGakuEntity.set保険料段階仮算定時(fukaTmpEntity.getHokenryoDankaiKarisanntei());
-        fukaGakuEntity.set特徴期期別金額01(特徴期別金額01);
-        fukaGakuEntity.set特徴期期別金額02(特徴期別金額02);
-        fukaGakuEntity.set特徴期期別金額03(特徴期別金額03);
-        普徴期別金額設定(fukaGakuEntity, fukaTmpEntity);
 
         if (!備考コード.isEmpty()) {
-            対象外データTempEntity = new TokuchoHeijunkaRokuBatchTaishogaiTempEntity(fukaTmpEntity, 備考コード, fukaGakuEntity);
+            対象外データTempEntity = new TokuchoHeijunkaRokuBatchTaishogaiTempEntity(fukaTmpEntity, 備考コード);
             対象外データ一時tableWriter.insert(対象外データTempEntity);
         } else {
-            対象者データTempEntity = new TokuchoHeijunkaRokuBatchTaishogaiTempEntity(fukaTmpEntity, RString.EMPTY, fukaGakuEntity);
+            対象者データTempEntity = new TokuchoHeijunkaRokuBatchTaishogaiTempEntity(fukaTmpEntity, RString.EMPTY);
             対象者データ一時tableWriter.insert(対象者データTempEntity);
         }
     }
 
     private boolean 特徴期別金額比較(final Decimal 特徴期別金額01, final Decimal 特徴期別金額02, final Decimal 特徴期別金額03) {
-        return (特徴期別金額01 != null && 特徴期別金額02 != null && !特徴期別金額01.equals(特徴期別金額02))
-                || (特徴期別金額02 != null && 特徴期別金額03 != null && !特徴期別金額02.equals(特徴期別金額03))
-                || (特徴期別金額01 != null && 特徴期別金額03 != null && !特徴期別金額01.equals(特徴期別金額03));
+        return 特徴期別金額不等(特徴期別金額01, 特徴期別金額02)
+                || 特徴期別金額不等(特徴期別金額02, 特徴期別金額03)
+                || 特徴期別金額不等(特徴期別金額01, 特徴期別金額03);
     }
 
-    private void 普徴期別金額設定(TokuchoHeijyunkaRokuBatchFukaGakuEntity fukaGakuEntity, FukaJohoTmpEntity fukaTmpEntity) {
-        fukaGakuEntity.set普徴期期別金額01(fukaTmpEntity.getFuKibetsuGaku01());
-        fukaGakuEntity.set普徴期期別金額02(fukaTmpEntity.getFuKibetsuGaku02());
-        fukaGakuEntity.set普徴期期別金額03(fukaTmpEntity.getFuKibetsuGaku03());
-        fukaGakuEntity.set普徴期期別金額04(fukaTmpEntity.getFuKibetsuGaku04());
-        fukaGakuEntity.set普徴期期別金額05(fukaTmpEntity.getFuKibetsuGaku05());
-        fukaGakuEntity.set普徴期期別金額06(fukaTmpEntity.getFuKibetsuGaku06());
-        fukaGakuEntity.set普徴期期別金額07(fukaTmpEntity.getFuKibetsuGaku07());
-        fukaGakuEntity.set普徴期期別金額08(fukaTmpEntity.getFuKibetsuGaku08());
-        fukaGakuEntity.set普徴期期別金額09(fukaTmpEntity.getFuKibetsuGaku09());
-        fukaGakuEntity.set普徴期期別金額10(fukaTmpEntity.getFuKibetsuGaku10());
-        fukaGakuEntity.set普徴期期別金額11(fukaTmpEntity.getFuKibetsuGaku11());
-        fukaGakuEntity.set普徴期期別金額12(fukaTmpEntity.getFuKibetsuGaku12());
+    private boolean 特徴期別金額不等(final Decimal 特徴期別金額01, final Decimal 特徴期別金額02) {
+        return (特徴期別金額01 != null && 特徴期別金額02 != null && !特徴期別金額01.equals(特徴期別金額02))
+                || (特徴期別金額01 == null && 特徴期別金額02 != null) || (特徴期別金額01 != null && 特徴期別金額02 == null);
     }
 
     private Decimal 普徴期別金額取得(int 仮算定期間_期, FukaJohoTmpEntity fukaTmpEntity) {

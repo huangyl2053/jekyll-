@@ -93,14 +93,10 @@ public class KogakugassanGassanSofuReprotProcess extends BatchKeyBreakBase<Syutu
     private static final Code コード = new Code("0003");
     private static final RString 漢字_被保険者番号 = new RString("被保険者番号");
     private static final FlexibleYear 管理年度 = new FlexibleYear("0000");
-    private static final RString 被保険者番号R = new RString("被保険者番号");
-    private static final RString 支給申請書整理番号R = new RString("支給申請書整理番号");
 
     private KogakugassanProcessParameter processParameter;
     private KogakugassanMybatisParameter mybatisParam;
     private IOutputOrder 出力順情報;
-    private List<RString> 改頁リスト;
-    private List<RString> 並び順リスト;
     private List<RString> pageBreakKeys;
     private FileSpoolManager eucManager;
     private RString eucFilePath;
@@ -136,7 +132,7 @@ public class KogakugassanGassanSofuReprotProcess extends BatchKeyBreakBase<Syutu
     @Override
     protected void createWriter() {
         PageBreaker<GassanHoseizumiJikofutangakuSofuchiranSource> breakPage
-                = new KogakugassanHoseisumiJikofutangakuOutPageBreak(改頁リスト);
+                = new KogakugassanHoseisumiJikofutangakuOutPageBreak(pageBreakKeys);
         batchReportWriter
                 = BatchReportFactory.createBatchReportWriter(帳票ID.getColumnValue(), SubGyomuCode.DBC介護給付).addBreak(breakPage).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
@@ -277,18 +273,11 @@ public class KogakugassanGassanSofuReprotProcess extends BatchKeyBreakBase<Syutu
         if (出力順情報 == null) {
             throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage().replace(メッセージ引数.toString()).evaluate());
         }
-
-        並び順リスト = new ArrayList<>();
-        改頁リスト = new ArrayList();
         pageBreakKeys = new ArrayList<>();
         for (ISetSortItem item : 出力順情報.get設定項目リスト()) {
-            並び順リスト.add(item.get項目名());
             if (item.is改頁項目()) {
-                改頁リスト.add(item.get項目名());
                 pageBreakKeys.add(item.get項目ID());
             }
         }
-        並び順リスト.add(被保険者番号R);
-        並び順リスト.add(支給申請書整理番号R);
     }
 }
