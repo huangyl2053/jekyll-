@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE701001;
 
 import java.util.ArrayList;
 import java.util.Arrays;

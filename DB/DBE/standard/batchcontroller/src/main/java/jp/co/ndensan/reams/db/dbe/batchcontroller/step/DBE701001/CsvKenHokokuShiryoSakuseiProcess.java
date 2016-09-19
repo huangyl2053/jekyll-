@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE701001;
 
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei.CsvKenHokokuShiryoSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hokokushiryosakusei.CsvKenHokokuShiryoEntity;

@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.definition.batchprm.hokokushiryosakusei;
+package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE701001;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hokokushiryosakusei.CsvKenHokokuShiryoSakuseiProcessParameter;
@@ -25,7 +25,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class HokokuShiryoSakuSeiBatchParameter extends BatchParameterBase {
+public class DBE701001_HokokuShiryoParameter extends BatchParameterBase {
 
     private static final String JIGYOJYOKYOHOKOKU = "jigyoJyokyoHokoku";
     private static final String JISSIJYOKYOTOKEI = "jissiJyokyoTokei";
@@ -95,7 +95,7 @@ public class HokokuShiryoSakuSeiBatchParameter extends BatchParameterBase {
     /**
      * コンストラクタです。
      */
-    public HokokuShiryoSakuSeiBatchParameter() {
+    public DBE701001_HokokuShiryoParameter() {
     }
 
     /**
@@ -123,7 +123,7 @@ public class HokokuShiryoSakuSeiBatchParameter extends BatchParameterBase {
      * @param isSinseiKubunSinseitoki 申請区分(申請時)
      * @param isSinseiKubunHorei 申請区分(法令)
      */
-    public HokokuShiryoSakuSeiBatchParameter(
+    public DBE701001_HokokuShiryoParameter(
             boolean jigyoJyokyoHokoku,
             boolean jissiJyokyoTokei,
             boolean sinsaHanteiJyokyo,

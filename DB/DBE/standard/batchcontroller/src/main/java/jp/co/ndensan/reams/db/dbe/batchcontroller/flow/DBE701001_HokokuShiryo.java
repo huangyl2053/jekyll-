@@ -1,16 +1,16 @@
-package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.hokokushiryosakusei;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.CsvKenHokokuShiryoSakuseiProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.JigyoJyokyoHokokuDataSakuseiProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.JigyoJyokyoHokokuProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.JisshiJokyoTokeiProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.JotaikubunbetsuhanteiProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.ShinsahanteinoHenkojokyoProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.ShinsakaiShukeiGenzainojokyoProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.ShinsakaiShukeihyoShinseiBetsuProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.ShinsakaishukeihyoHanteiBetsuProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.hokokushiryosakusei.SinsakaiHanteiJyokyoProcess;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.hokokushiryosakusei.HokokuShiryoSakuSeiBatchParameter;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE701001.CsvKenHokokuShiryoSakuseiProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE701001.JigyoJyokyoHokokuDataSakuseiProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE701001.JigyoJyokyoHokokuProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE701001.JisshiJokyoTokeiProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE701001.JotaikubunbetsuhanteiProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE701001.ShinsahanteinoHenkojokyoProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE701001.ShinsakaiShukeiGenzainojokyoProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE701001.ShinsakaiShukeihyoShinseiBetsuProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE701001.ShinsakaishukeihyoHanteiBetsuProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE701001.SinsakaiHanteiJyokyoProcess;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE701001.DBE701001_HokokuShiryoParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBE-1450-020 wangxiaodong
  */
-public class HokokuShiryoSakuSeiFlow extends BatchFlowBase<HokokuShiryoSakuSeiBatchParameter> {
+public class DBE701001_HokokuShiryo extends BatchFlowBase<DBE701001_HokokuShiryoParameter> {
 
     private static final String 事業状況データ作成 = "jigyoJyokyoDataSakuSei";
     private static final String 事業状況報告出力 = "jigyoJyokyoHokoku";
