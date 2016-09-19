@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110120.SaishinsaMoshitateDoDBKoushinProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110120.SaishinsaMoshitateDoIchiranhyoSakuseiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110120.SaishinsaMoshitateDoServiceNameErrTourokuProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110120.SaishinsaMoshitateDoSofuFileSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110120.SaishinsaMoshitateDoSofuJogaiFlagSetteiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110120.SaishinsaMoshitateGetHokenshaNoProcess;
@@ -281,11 +282,11 @@ public class DBC110120_SaishinsaMoshitateshoOut extends BatchFlowBase<DBC110120_
     /**
      * サービス名称エラー登録です。
      *
-     * @return SaishinsaMoshitateGetJigyoshaNameProcess
+     * @return SaishinsaMoshitateDoServiceNameErrTourokuProcess
      */
     @Step(サービス名称エラー登録)
     protected IBatchFlowCommand callDoServiceNameErrTourokuProcess() {
-        return loopBatch(SaishinsaMoshitateGetJigyoshaNameProcess.class).define();
+        return loopBatch(SaishinsaMoshitateDoServiceNameErrTourokuProcess.class).define();
     }
 
     /**
