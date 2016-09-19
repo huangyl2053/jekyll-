@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc040040;
 
-import java.text.DecimalFormat;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc040040.JikofutanShomeishoProcessParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -31,10 +30,11 @@ public class ShoriDateKanriInsertPocess extends BatchProcessBase<DbT7022ShoriDat
     private static final RString MYBATIS_SELECT_ID
             = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc040040."
                     + "IJikofutanShomeishoMapper.select処理日付管理");
-    private static final String STR_FORMAT = "0000";
     private JikofutanShomeishoProcessParameter parameter;
+    private static final int NUM_4 = 4;
+
     @BatchWriter
-    BatchPermanentTableWriter tableWriter;
+    private BatchPermanentTableWriter tableWriter;
 
     @Override
     protected void initialize() {
@@ -58,8 +58,7 @@ public class ShoriDateKanriInsertPocess extends BatchProcessBase<DbT7022ShoriDat
     protected void process(DbT7022ShoriDateKanriEntity entity) {
         Integer nendoNaiRenban = Integer.parseInt(entity.getNendoNaiRenban().toString());
         nendoNaiRenban++;
-        DecimalFormat df = new DecimalFormat(STR_FORMAT);
-        entity.setNendoNaiRenban(new RString(df.format(nendoNaiRenban)));
+        entity.setNendoNaiRenban(new RString(nendoNaiRenban).padZeroToLeft(NUM_4));
         entity.setTaishoKaishiYMD(parameter.get開始申請年月日());
         entity.setTaishoShuryoYMD(parameter.get終了申請年月日());
         tableWriter.insert(entity);

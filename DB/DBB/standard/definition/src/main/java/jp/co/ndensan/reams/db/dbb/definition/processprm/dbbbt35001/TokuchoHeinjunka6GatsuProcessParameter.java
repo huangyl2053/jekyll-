@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt35001;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.OutputChohyoIchiran;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
-import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -24,7 +23,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TokuchoHeinjunka6GatsuProcessParameter implements IMyBatisParameter, IBatchProcessParameter {
+public class TokuchoHeinjunka6GatsuProcessParameter implements IBatchProcessParameter {
 
     private FlexibleYear 調定年度;
     private FlexibleYear 賦課年度;

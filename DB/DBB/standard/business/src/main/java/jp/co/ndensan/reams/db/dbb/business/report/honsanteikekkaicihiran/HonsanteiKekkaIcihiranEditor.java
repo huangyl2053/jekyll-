@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.koza.IKoza;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.Koza;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.ua.uax.entity.db.relate.KozaRelateEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.relate.TokuteiKozaRelateEntity;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -421,7 +421,7 @@ public class HonsanteiKekkaIcihiranEditor implements IHonsanteiKekkaIcihiranEdit
     }
 
     private void kozaJoho(HonsanteiKekkaIcihiranReportSource source, KeisangojohoAtenaKozaEntity entity) {
-        KozaRelateEntity releteEntity = entity.get口座Entity();
+        TokuteiKozaRelateEntity releteEntity = entity.get口座Entity();
         if (releteEntity == null) {
             return;
         }

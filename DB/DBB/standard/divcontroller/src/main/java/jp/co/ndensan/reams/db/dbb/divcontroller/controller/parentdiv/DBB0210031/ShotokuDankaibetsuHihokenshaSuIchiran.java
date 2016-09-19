@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0210031;
 
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.ShotokuDankaibetsuHihokenshaSuIchiran.ShotokuDankaibetsuHihokenshaSuIchiranBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB021031.DBB021031_DankaibetsuHihokenshasuIchiranhyoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0210031.ShotokuDankaibetsuHihokenshaSuIchiranDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0210031.ShotokuDankaibetsuHihokenshaSuIchiranHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0210031.ShotokuDankaibetsuHihokenshaSuIchiranValidationHandler;
@@ -52,6 +52,12 @@ public class ShotokuDankaibetsuHihokenshaSuIchiran {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * chkChosaJokenのonChange事件です。
+     *
+     * @param div ShotokuDankaibetsuHihokenshaSuIchiranDiv
+     * @return ResponseData
+     */
     public ResponseData<ShotokuDankaibetsuHihokenshaSuIchiranDiv> onChange_chkChosaJoken(ShotokuDankaibetsuHihokenshaSuIchiranDiv div) {
         getHandler(div).onChangeChosaJoken();
         return ResponseData.of(div).respond();
@@ -77,16 +83,16 @@ public class ShotokuDankaibetsuHihokenshaSuIchiran {
      * @param div ShotokuDankaibetsuHihokenshaSuIchiranDiv
      * @return ResponseData
      */
-    public ResponseData<ShotokuDankaibetsuHihokenshaSuIchiranBatchParameter> onClick_btn(
+    public ResponseData<DBB021031_DankaibetsuHihokenshasuIchiranhyoSakuseiParameter> onClick_btn(
             ShotokuDankaibetsuHihokenshaSuIchiranDiv div) {
-        ShotokuDankaibetsuHihokenshaSuIchiranBatchParameter param = setBatchParameter(div);
+        DBB021031_DankaibetsuHihokenshasuIchiranhyoSakuseiParameter param = setBatchParameter(div);
         return ResponseData.of(param).respond();
     }
 
-    private ShotokuDankaibetsuHihokenshaSuIchiranBatchParameter setBatchParameter(
+    private DBB021031_DankaibetsuHihokenshasuIchiranhyoSakuseiParameter setBatchParameter(
             ShotokuDankaibetsuHihokenshaSuIchiranDiv div) {
-        ShotokuDankaibetsuHihokenshaSuIchiranBatchParameter parameter
-                = new ShotokuDankaibetsuHihokenshaSuIchiranBatchParameter();
+        DBB021031_DankaibetsuHihokenshasuIchiranhyoSakuseiParameter parameter
+                = new DBB021031_DankaibetsuHihokenshasuIchiranhyoSakuseiParameter();
         parameter.setSettingnendo(div.getDdlChoteiNendo().getSelectedKey());
         parameter.setTreatmentday(div.getTxtHonsanteiShoriYMD().getValue());
         parameter.setRegiondivision(div.getRadShichoson().getSelectedValue());

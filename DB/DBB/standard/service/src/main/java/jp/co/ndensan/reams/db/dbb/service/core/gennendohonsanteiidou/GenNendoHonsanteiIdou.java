@@ -34,6 +34,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.NengakuFukaK
 import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.NengakuFukaKonkyoFactory;
 import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.NengakuHokenryoKeisanParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.NengakuSeigyoJoho;
+import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.NengakuSeigyoJohoFactory;
 import jp.co.ndensan.reams.db.dbb.business.core.nengakukeisan.param.RankBetsuKijunKingaku;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.ErrorCode;
@@ -1378,8 +1379,8 @@ public class GenNendoHonsanteiIdou extends GenNendoHonsanteiIdouFath {
 //        ランク別制御情報.put(new RString("01"), gaku);
 //        ランク別制御情報.put(new RString("1"), gaku);
 
-        NengakuFukaKonkyoFactory nengakuFukaKonkyoFactory = InstanceProvider.create(NengakuFukaKonkyoFactory.class);
-        NengakuSeigyoJoho 年額制御情報 = nengakuFukaKonkyoFactory.createNengakuSeigyoJoho(
+        NengakuSeigyoJohoFactory nengakuSeigyoJohoFactory = InstanceProvider.create(NengakuSeigyoJohoFactory.class);
+        NengakuSeigyoJoho 年額制御情報 = nengakuSeigyoJohoFactory.createNengakuSeigyoJoho(
                 端数単位,
                 HasuChoseiHoho.toValue(端数調整方法),
                 端数単位_ランク用,

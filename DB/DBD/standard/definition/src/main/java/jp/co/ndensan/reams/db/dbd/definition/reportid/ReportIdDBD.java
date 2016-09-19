@@ -303,7 +303,11 @@ public enum ReportIdDBD {
     /**
      * 非課税年金対象者情報遡及不一致チェックリストの帳票ＩＤです。
      */
-    DBD900007(new ReportId("DBD900007_HikazeiNenkinSokyuFuicchiCheckList"), new RString("非課税年金対象者情報遡及不一致チェックリスト"));
+    DBD900007(new ReportId("DBD900007_HikazeiNenkinSokyuFuicchiCheckList"), new RString("非課税年金対象者情報遡及不一致チェックリスト")),
+    /**
+     * 汎用リスト出力(非課税年金対象者)の帳票ＩＤです。
+     */
+    DBD701008(new ReportId("DBD701008_HanyoListHikazeiNenkinTaishosha"), new RString("汎用リスト　非課税年金対象者"));
 
     private final ReportId reportId;
     private final RString reportName;

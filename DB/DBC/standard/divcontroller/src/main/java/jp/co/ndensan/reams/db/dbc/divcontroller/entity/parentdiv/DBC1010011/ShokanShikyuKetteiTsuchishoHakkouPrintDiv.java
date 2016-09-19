@@ -5,8 +5,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1010011;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.BunshoBangoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshobangoinput.BunshoBangoInput.IBunshoBangoInputDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -33,8 +31,6 @@ public class ShokanShikyuKetteiTsuchishoHakkouPrintDiv extends Panel {
     private TextBoxDate txtShiharaiYoteiYMD;
     @JsonProperty("ccdBunshoNO")
     private BunshoBangoInputDiv ccdBunshoNO;
-    @JsonProperty("ccdKanryoMessage")
-    private KaigoKanryoMessageDiv ccdKanryoMessage;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -103,15 +99,6 @@ public class ShokanShikyuKetteiTsuchishoHakkouPrintDiv extends Panel {
     @JsonProperty("ccdBunshoNO")
     public IBunshoBangoInputDiv getCcdBunshoNO() {
         return ccdBunshoNO;
-    }
-
-    /*
-     * getccdKanryoMessage
-     * @return ccdKanryoMessage
-     */
-    @JsonProperty("ccdKanryoMessage")
-    public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
-        return ccdKanryoMessage;
     }
 
     // </editor-fold>

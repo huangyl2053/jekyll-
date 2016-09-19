@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012001;
 
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbbbt35001.TokuchoHeinjunka6GatsuMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt35001.TokuchoHeinjunka6GatsuProcessParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunka6gatsu.FukaJohoTmpEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
@@ -42,7 +43,7 @@ public class InsHeinjunkaFukaTmpProcess extends BatchProcessBase<FukaJohoTmpEnti
     private static final int 期_13 = 13;
     private static final int 期_14 = 14;
     private TokuchoHeinjunka6GatsuProcessParameter parameter;
-    private TsuchishoNo tsuchishoNo;
+    private TsuchishoNo tsuchishoNo = TsuchishoNo.EMPTY;
     private FukaJohoTmpEntity fukaTmpEntity;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 仮算定一括発行一時tableWriter;
@@ -55,23 +56,31 @@ public class InsHeinjunkaFukaTmpProcess extends BatchProcessBase<FukaJohoTmpEnti
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MAPPERPATH, parameter);
+        TokuchoHeinjunka6GatsuMyBatisParameter myBatisParameter = new TokuchoHeinjunka6GatsuMyBatisParameter();
+        myBatisParameter.set調定年度(parameter.get調定年度());
+        myBatisParameter.set賦課年度(parameter.get賦課年度());
+        return new BatchDbReader(MAPPERPATH, myBatisParameter);
     }
 
     @Override
     protected void process(FukaJohoTmpEntity fukaTmpEntity) {
-        if (tsuchishoNo == null || !tsuchishoNo.equals(fukaTmpEntity.getTsuchishoNo())) {
+        if (tsuchishoNo.equals(fukaTmpEntity.getTsuchishoNo())) {
+            金額設定(fukaTmpEntity);
+        } else {
+            if (this.fukaTmpEntity != null) {
+                仮算定一括発行一時tableWriter.insert(this.fukaTmpEntity);
+            }
             tsuchishoNo = fukaTmpEntity.getTsuchishoNo();
             this.fukaTmpEntity = fukaTmpEntity;
-            仮算定一括発行一時tableWriter.insert(this.fukaTmpEntity);
+            金額設定(fukaTmpEntity);
         }
-        if (tsuchishoNo.equals(fukaTmpEntity.getTsuchishoNo())) {
-            if (徴収方法_特別.equals(fukaTmpEntity.getChoshuHouhou())) {
-                特別徴収金額設定(this.fukaTmpEntity, fukaTmpEntity.getKi());
-            } else if (徴収方法_普通.equals(fukaTmpEntity.getChoshuHouhou())) {
-                普通徴収金額設定(this.fukaTmpEntity, fukaTmpEntity.getKi());
-            }
-            仮算定一括発行一時tableWriter.update(this.fukaTmpEntity);
+    }
+
+    private void 金額設定(FukaJohoTmpEntity fukaTmpEntity) {
+        if (徴収方法_特別.equals(fukaTmpEntity.getChoshuHouhou())) {
+            特別徴収金額設定(this.fukaTmpEntity, fukaTmpEntity.getKi());
+        } else if (徴収方法_普通.equals(fukaTmpEntity.getChoshuHouhou())) {
+            普通徴収金額設定(this.fukaTmpEntity, fukaTmpEntity.getKi());
         }
     }
 

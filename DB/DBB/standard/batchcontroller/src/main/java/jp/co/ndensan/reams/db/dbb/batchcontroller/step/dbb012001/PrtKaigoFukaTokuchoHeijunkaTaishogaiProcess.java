@@ -9,8 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TkChoshuHeijunkaKeisanJuneKekkaIchiranPageBreak;
-import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranProperty;
+import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranProperty.DBB200003_HeijunkaKeisanJuneKekkaIchiran;
 import jp.co.ndensan.reams.db.dbb.business.report.tokubetsuchoshuheijunkakeisanjunekekkaichiran.TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranReport;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbbbt35001.TokuchoHeinjunka6GatsuMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt35001.TokuchoHeinjunka6GatsuProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishogaiEntity;
@@ -24,6 +25,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
@@ -90,7 +92,6 @@ public class PrtKaigoFukaTokuchoHeijunkaTaishogaiProcess extends BatchKeyBreakBa
     private static final int NUM_5 = 5;
     private static final int NUM_6 = 6;
     private static final RString 対象外データテンプ_テーブル = new RString("対象外データ.");
-//    private static final RString 対象外データテンプ_テーブル = new RString("対象外データTemp.");
     private static final RString 識別コード = new RString("\"shikibetsuCode\"");
     private static final RString 被保険者番号 = new RString("\"hihokenshaNo\"");
     private static final RString 世帯コード = new RString("\"setaiCode\"");
@@ -137,7 +138,7 @@ public class PrtKaigoFukaTokuchoHeijunkaTaishogaiProcess extends BatchKeyBreakBa
         出力順 = RString.EMPTY;
         if (outputOrder != null) {
             出力順 = MyBatisOrderByClauseCreator.create(
-                    TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranProperty.DBB200003_HeijunkaKeisanJuneKekkaIchiran.class, outputOrder);
+                    DBB200003_HeijunkaKeisanJuneKekkaIchiran.class, outputOrder);
             for (ISetSortItem item : outputOrder.get設定項目リスト()) {
                 if (item.is改頁項目()) {
                     pageBreakKeys.add(item.get項目ID());
@@ -151,7 +152,8 @@ public class PrtKaigoFukaTokuchoHeijunkaTaishogaiProcess extends BatchKeyBreakBa
         count = new OutputParameter<>();
         parameter.set出力順(出力順再設定(出力順));
         保険料段階取得 = new HokenryoDankaiManager();
-        帳票制御共通 = new ChohyoSeigyoKyotsu(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200003.getReportId());
+        ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
+        帳票制御共通 = chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200003.getReportId());
     }
 
     @Override
@@ -175,7 +177,13 @@ public class PrtKaigoFukaTokuchoHeijunkaTaishogaiProcess extends BatchKeyBreakBa
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MAPPERPATH, parameter);
+        TokuchoHeinjunka6GatsuMyBatisParameter myBatisParameter = new TokuchoHeinjunka6GatsuMyBatisParameter();
+        myBatisParameter.set調定年度(parameter.get調定年度());
+        myBatisParameter.set賦課年度(parameter.get賦課年度());
+        myBatisParameter.set調定前年度(parameter.get調定前年度());
+        myBatisParameter.set出力順(parameter.get出力順());
+        myBatisParameter.setShikibetsutaishoParam(parameter.getShikibetsutaishoParam());
+        return new BatchDbReader(MAPPERPATH, myBatisParameter);
     }
 
     @Override

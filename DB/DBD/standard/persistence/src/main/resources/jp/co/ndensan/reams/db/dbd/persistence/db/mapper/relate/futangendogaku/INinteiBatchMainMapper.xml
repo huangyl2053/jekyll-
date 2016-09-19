@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-3710-070 chenxin -->
+<!-- 概要： 負担限度額認定申請一括承認（バッチ）_承認処理用XMLです。 -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.futangendogaku.INinteiBatchMainMapper">
+    <select id="get承認処理データ"
+        resultMap="ResultMap_ShoninShori"
+        fetchSize="500" resultOrdered="true">
+        SELECT
+            <include refid="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4018KaigoHokenFutanGendogakuNinteiMapper.allColumns_DbT4018KaigoHokenFutanGendogakuNintei" />,
+            C."被保険者番号" AS 被保険者番号,
+            C."本人識別コード" AS 本人識別コード,
+            C."本人課税区分" AS 本人課税区分,
+            C."利用者負担段階" AS 利用者負担段階,
+            C."配偶者識別コード" AS 配偶者識別コード,
+            C."配偶者課税区分" AS 配偶者課税区分,
+            C."世帯課税区分" AS 世帯課税区分,
+            C."is生活保護受給者" AS is生活保護受給者,
+            C."is老齢福祉年金受給者" AS is老齢福祉年金受給者,
+            C."合計所得金額" AS 合計所得金額,
+            C."年金収入額" AS 年金収入額,
+            C."非課税年金勘案額" AS 非課税年金勘案額,
+            C."is高齢者複数世帯" AS is高齢者複数世帯,
+            C."is所得税課税世帯" AS is所得税課税世帯,
+            C."is所得税課税者" AS is所得税課税者,
+            C."課税所得額" AS 課税所得額
+        FROM
+            rgdb."DbT4018KaigoHokenFutanGendogakuNintei" AS "DbT4018KaigoHokenFutanGendogakuNintei"
+        INNER JOIN  "shoriTaishoTempEntity" AS B
+            ON  B."hihokenshaNo" = "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo"
+        INNER JOIN  "taishoShaHanteiYoukonkyoItokiTemp" AS C
+            ON  C."被保険者番号" = "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo"
+            
+    </select>
+    
+    <resultMap id="ResultMap_ShoninShori" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt22006.ShoninShoriEntity">
+        <result property="減免減額対象者判定用根拠一時Entity.被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="減免減額対象者判定用根拠一時Entity.本人識別コード" column="本人識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="減免減額対象者判定用根拠一時Entity.本人課税区分" column="本人課税区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="減免減額対象者判定用根拠一時Entity.利用者負担段階" column="利用者負担段階" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="減免減額対象者判定用根拠一時Entity.配偶者識別コード" column="配偶者識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="減免減額対象者判定用根拠一時Entity.配偶者課税区分" column="配偶者課税区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="減免減額対象者判定用根拠一時Entity.世帯課税区分" column="世帯課税区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="減免減額対象者判定用根拠一時Entity.is生活保護受給者" column="is生活保護受給者" />
+        <result property="減免減額対象者判定用根拠一時Entity.is老齢福祉年金受給者" column="is老齢福祉年金受給者" />
+        <result property="減免減額対象者判定用根拠一時Entity.合計所得金額" column="合計所得金額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="減免減額対象者判定用根拠一時Entity.年金収入額" column="年金収入額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="減免減額対象者判定用根拠一時Entity.非課税年金勘案額" column="非課税年金勘案額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <result property="減免減額対象者判定用根拠一時Entity.is高齢者複数世帯" column="is高齢者複数世帯" />
+        <result property="減免減額対象者判定用根拠一時Entity.is所得税課税世帯" column="is所得税課税世帯" />
+        <result property="減免減額対象者判定用根拠一時Entity.is所得税課税者" column="is所得税課税者" />
+        <result property="減免減額対象者判定用根拠一時Entity.課税所得額" column="課税所得額" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+        <association property="介護保険負担限度額認定Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4018KaigoHokenFutanGendogakuNinteiMapper.ResultMap_DbT4018KaigoHokenFutanGendogakuNinteiEntity"/>
+    </resultMap>
+</mapper>

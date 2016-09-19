@@ -55,7 +55,9 @@ public class KyotakuServiceKeikakuSaHeaderEditor implements IKyotakuServiceKeika
         source.joken1 = target.get申請日();
         source.joken2 = target.get対象者();
         source.joken3 = target.get届出状況();
-        source.kijunYmd = new RString(target.get基準日().toString());
+        if (target.get基準日() != null) {
+            source.kijunYmd = new RString(target.get基準日().toString());
+        }
         return source;
     }
 
@@ -65,8 +67,12 @@ public class KyotakuServiceKeikakuSaHeaderEditor implements IKyotakuServiceKeika
         RString 作成時 = target.getシステム日時().getTime()
                 .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE).concat(SAKUSEI);
         source.shoriYmdHms = 作成日.concat(RString.HALF_SPACE).concat(作成時);
-        source.cityCd = target.get地方公共団体().get地方公共団体コード().getColumnValue();
-        source.cityMei = target.get地方公共団体().get市町村名();
+        if (target.get地方公共団体() != null) {
+            if (target.get地方公共団体().get地方公共団体コード() != null) {
+                source.cityCd = target.get地方公共団体().get地方公共団体コード().getColumnValue();
+            }
+            source.cityMei = target.get地方公共団体().get市町村名();
+        }
         editIOutputOrder(source);
         return source;
     }

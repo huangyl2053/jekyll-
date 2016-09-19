@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  *
  * @reamsid_L DBB-1650-050 lijunjun
  */
+@lombok.Setter
 @lombok.Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KaigoHokenShotokuCSVEntity {

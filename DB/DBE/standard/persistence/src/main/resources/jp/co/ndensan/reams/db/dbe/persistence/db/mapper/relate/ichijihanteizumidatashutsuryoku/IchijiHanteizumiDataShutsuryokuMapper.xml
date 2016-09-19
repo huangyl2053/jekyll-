@@ -1,0 +1,1420 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBE-1610-010 wanghui --> 
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijihanteizumidatashutsuryoku.IchijiHanteizumiDataShutsuryokuMapper">
+  <resultMap id="resultMap_IchijiHanteizumiDataShutsuryokuRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteizumidatashutsuryoku.IchijiHanteizumiDataShutsuryokuRelateEntity" autoMapping="true">
+        <result property="shinseishoKanriNo" column="T5101_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="koroshoIfShikibetsuCode" column="T5101_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shoKisaiHokenshaNo" column="T5101_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shichosonMeisho" column="T7051_shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ninteiShinseiYMD" column="T5101_ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="hihokenshaNo" column="T5101_hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="hihokenshaName" column="T5101_hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="ninteiShinseiShinseijiKubunCode" column= "T5101_ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ninteiShinseiHoreiKubunCode" column= "T5101_ninteiShinseiShinseijiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ichijiHanteiYMD" column= "T5116_ichijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ichijiHanteiKekkaCode" column= "T5116_ichijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ichijihanteiChushutsuYMD" column= "T7211_ichijihanteiChushutsuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="ichijiHnateiKeikokuCode" column= "T5116_ichijiHnateiKeikokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/> 
+    </resultMap>
+    <select resultOrdered="true"  id="get一次判定済みデータ"
+            resultMap="resultMap_IchijiHanteizumiDataShutsuryokuRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichijihanteizumidatashutsuryoku.IchijiHanteizumiDataShutsuryokuMybitisParamter" fetchSize="500">
+        	SELECT  
+                        T5101."shinseishoKanriNo"  as "T5101_shinseishoKanriNo",
+			T5101."koroshoIfShikibetsuCode" as "T5101_koroshoIfShikibetsuCode",
+			T5101."shoKisaiHokenshaNo" as "T5101_shoKisaiHokenshaNo",
+			T7051."shichosonMeisho"  as "T7051_shichosonMeisho",
+			T5101."ninteiShinseiYMD" as "T5101_ninteiShinseiYMD", 
+			T5101."hihokenshaNo" as "T5101_hihokenshaNo",
+			T5101."hihokenshaName" as "T5101_hihokenshaName",
+			T5101."ninteiShinseiShinseijiKubunCode" as "T5101_ninteiShinseiShinseijiKubunCode", 
+			T5101."ninteiShinseiHoreiKubunCode" as "T5101_ninteiShinseiHoreiKubunCode", 
+			T5116."ichijiHanteiYMD"as "T5116_ichijiHanteiYMD", 
+			T5116."ichijiHanteiKekkaCode" as "T5116_ichijiHanteiKekkaCode",
+			T7211."ichijihanteiChushutsuYMD" as "T7211_ichijihanteiChushutsuYMD", 
+			T5116."ichijiHnateiKeikokuCode" as "T5116_ichijiHnateiKeikokuCode"
+                FROM	       
+                       rgdb."DbT5101NinteiShinseiJoho" as T5101 
+                INNER JOIN     rgdb."DbT5116IchijiHanteiKekkaJoho" as T5116 
+                ON  T5116."shinseishoKanriNo"= T5101."shinseishoKanriNo" 
+                AND  T5116."kariIchijiHanteiKubun" = False
+                <if test="一次判定日フラグ">
+                  AND #{一次判定日From} <![CDATA[<=]]> T5116."ichijiHanteiYMD"
+                  AND T5116."ichijiHanteiYMD" <![CDATA[<=]]> #{一次判定日To}
+                </if>
+                INNER JOIN  rgdb."DbT5105NinteiKanryoJoho"  as  T5105 
+                    ON   T5105."shinseishoKanriNo"= T5101."shinseishoKanriNo"
+                    AND  T5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+                    AND  T5105."ninteichosaIraiKanryoYMD" IS NOT NULL
+                    AND  T5105."ninteichosaKanryoYMD" IS NOT NULL
+                    AND  T5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
+                    AND  T5105."ikenshoTorokuKanryoYMD" IS NOT NULL
+                    AND  T5105."ichijiHanteiKanryoYMD" IS NOT NULL
+                    AND  T5105."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
+                    AND  T5105."ninteiShinsakaiKanryoYMD" IS NOT NULL
+                    AND  T5105."centerSoshinYMD" IS NOT NULL
+               INNER JOIN rgdb."DbT7051KoseiShichosonMaster" as T7051
+                   ON  T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo"
+               LEFT JOIN rgdb."DbT7211GaibuRenkeiDataoutputJoho"  as T7211  
+                   ON  T7211."shinseishoKanriNo" = T5101."shinseishoKanriNo"
+               WHERE
+                      T5101."shoriJotaiKubun" IN (#{通常},#{延期})
+                  AND T5101."logicalDeletedFlag" = False
+                 <if test="申請日フラグ">
+                  AND #{一次判定日From} <![CDATA[<=]]> T5101."ninteiShinseiYMD"
+                  AND T5101."ninteiShinseiYMD" <![CDATA[<=]]> #{一次判定日To}
+                </if>
+               ORDER BY
+                    T5101."shoKisaiHokenshaNo", T5101."ninteiShinseiYMD", T5101."hihokenshaNo"
+                <if test="usesSaidaiHyojiKensu">
+                    LIMIT #{saidaiHyojiKensu}
+               </if>      
+</select>
+<resultMap id="resultMap_IchijiHanteizumiDataRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteizumidatashutsuryoku.IchijiHanteizumiDataRelateEntity" autoMapping="true">
+    <result property="保険者番号" column="保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="厚労省IF識別コード" column="厚労省IF識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="申請書管理番号" column="申請書管理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="被保険者氏名" column="被保険者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="年齢" column="年齢" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="性別" column="性別" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="郵便番号" column="郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="認定申請年月日" column="認定申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="申請区分申" column="申請区分申" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="申請区分法" column="申請区分法" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回厚労省IF識別コード" column="前回厚労省IF識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回認定日" column="前回認定日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回認定有効期間開始年月日" column="前回認定有効期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回認定有効期間終了年月日" column="前回認定有効期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回認定有効期間" column="前回認定有効期間" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="住所" column="住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="電話" column="電話" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="連絡先郵便番号" column="連絡先郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="連絡先住所" column="連絡先住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="連絡先電話電話" column="連絡先電話電話" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="連絡先携帯電話" column="連絡先携帯電話" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="連絡先氏名" column="連絡先氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="関係" column="関係" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="審査会開催日" column="審査会開催日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="一次判定結果" column="一次判定結果" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="二次判定結果" column="二次判定結果" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="二次判定年月日" column="二次判定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="認定有効期間開始年月日" column="認定有効期間開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="認定有効期間終了年月日" column="認定有効期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="認定有効期間" column="認定有効期間" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="要介護状態像例コード" column="要介護状態像例コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="変更事由" column="変更事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="特定疾病" column="特定疾病" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="審査会意見" column="審査会意見" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="実施年月日" column="実施年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="概況調査テキストイメージ区分" column="概況調査テキストイメージ区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="実施場所コード" column="実施場所コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="実施場所名称" column="実施場所名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="調査員氏名" column="調査員氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="事業者名称" column="事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="作成年月日" column="作成年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="サービス区分コード" column="サービス区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="訪問介護ホームヘルプ" column="訪問介護ホームヘルプ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="訪問入浴介護" column="訪問入浴介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="訪問看護" column="訪問看護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="訪問リハビリテーション" column="訪問リハビリテーション" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="居宅療養管理指導" column="居宅療養管理指導" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="通所介護デイサービス" column="通所介護デイサービス" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="通所リハビリテーションデイケア" column="通所リハビリテーションデイケア" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="短期入所生活介護ショートステイ" column="短期入所生活介護ショートステイ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="短期入所療養介護" column="短期入所療養介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="特定施設入居者生活介護" column="特定施設入居者生活介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="福祉用具貸与" column="福祉用具貸与" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="特定福祉用具販売" column="特定福祉用具販売" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="夜間対応型訪問介護" column="夜間対応型訪問介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="認知症対応型通所介護" column="認知症対応型通所介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="小規模多機能型居宅介護" column="小規模多機能型居宅介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="認知症対応型共同生活介護グループホーム" column="認知症対応型共同生活介護グループホーム" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="地域密着型特定施設入居者生活介護" column="地域密着型特定施設入居者生活介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="地域密着型介護老人福祉施設入所者生活介護" column="地域密着型介護老人福祉施設入所者生活介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="定期巡回随時対応型訪問介護看護" column="定期巡回随時対応型訪問介護看護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="看護小規模多機能型居宅介護" column="看護小規模多機能型居宅介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="複合型サービス" column="複合型サービス" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="訪問介護ﾎｰﾑﾍﾙﾌﾟｻｰﾋﾞｽ" column="訪問介護ﾎｰﾑﾍﾙﾌﾟｻｰﾋﾞｽ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="訪問ﾘﾊﾋﾞﾘﾃｰｼｮﾝ" column="訪問ﾘﾊﾋﾞﾘﾃｰｼｮﾝ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="通所介護ﾃﾞｲｻｰﾋﾞｽ" column="通所介護ﾃﾞｲｻｰﾋﾞｽ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝﾃﾞｲｹｱ" column="通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝﾃﾞｲｹｱ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="短期入所生活介護特養" column="短期入所生活介護特養" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="短期入所療養介護老健診療所" column="短期入所療養介護老健診療所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="認知症対応型共同生活介護" column="認知症対応型共同生活介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="特定施設入所者生活介護" column="特定施設入所者生活介護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="福祉用具購入" column="福祉用具購入" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="住宅改修" column="住宅改修" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="市町村特別給付" column="市町村特別給付" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="介護保険給付外の在宅サービス" column="介護保険給付外の在宅サービス" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="施設利用" column="施設利用" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="施設名" column="施設名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="施設住所" column="施設住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="施設電話番号" column="施設電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="麻痺左上肢" column="麻痺左上肢" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="麻痺右上肢" column="麻痺右上肢" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="麻痺左下肢" column="麻痺左下肢" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="麻痺右下肢" column="麻痺右下肢" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="麻痺その他" column="麻痺その他" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="拘縮肩関節" column="拘縮肩関節" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="拘縮股関節" column="拘縮股関節" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="拘縮膝関節" column="拘縮膝関節" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="拘縮その他" column="拘縮その他" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="寝返り" column="寝返り" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="起き上がり" column="起き上がり" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="座位保持" column="座位保持" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="両足での立位" column="両足での立位" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="歩行" column="歩行" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="立ち上がり" column="立ち上がり" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="片足での立位" column="片足での立位" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="洗身" column="洗身" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="つめ切り" column="つめ切り" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="視力" column="視力" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="聴力" column="聴力" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="移乗" column="移乗" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="移動" column="移動" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="えん下" column="えん下" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="食事摂取" column="食事摂取" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="排尿" column="排尿" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="排便" column="排便" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="口腔清潔" column="口腔清潔" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="洗顔" column="洗顔" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="整髪" column="整髪" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="上衣の着脱" column="上衣の着脱" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="ズボン等の着脱" column="ズボン等の着脱" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="外出頻度" column="外出頻度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="意思の伝達" column="意思の伝達" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="毎日の日課を理解" column="毎日の日課を理解" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="生年月日をいう" column="生年月日をいう" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="短期記憶" column="短期記憶" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="自分の名前をいう" column="自分の名前をいう" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="今の季節を理解" column="今の季節を理解" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="場所の理解" column="場所の理解" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="徘徊" column="徘徊" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="外出して戻れない" column="外出して戻れない" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="被害的" column="被害的" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="作話" column="作話" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="感情が不安定" column="感情が不安定" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="昼夜逆転" column="昼夜逆転" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="同じ話をする" column="同じ話をする" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="大声を出す" column="大声を出す" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="介護に抵抗" column="介護に抵抗" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="落ち着きなし" column="落ち着きなし" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="一人で出たがる" column="一人で出たがる" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="収集癖" column="収集癖" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="物や衣類を壊す" column="物や衣類を壊す" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="ひどい物忘れ" column="ひどい物忘れ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="独り言独り笑い" column="独り言独り笑い" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="自分勝手に行動する" column="自分勝手に行動する" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="話がまとまらない" column="話がまとまらない" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="薬の内服" column="薬の内服" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="金銭の管理" column="金銭の管理" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="日常の意思決定" column="日常の意思決定" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="集団への不適応" column="集団への不適応" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="買い物" column="買い物" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="簡単な調理" column="簡単な調理" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="点滴の管理" column="点滴の管理" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="中心静脈栄養" column="中心静脈栄養" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="透析" column="透析" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="ストーマの処置" column="ストーマの処置" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="酸素療法" column="酸素療法" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="レスピレーター" column="レスピレーター" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="気管切開の処置" column="気管切開の処置" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="疼痛の看護" column="疼痛の看護" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="経管栄養" column="経管栄養" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="モニター測定" column="モニター測定" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="じょくそうの処置" column="じょくそうの処置" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="カテーテル" column="カテーテル" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="拘縮肘関節" column="拘縮肘関節" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="拘縮足関節" column="拘縮足関節" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="じょくそう" column="じょくそう" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="皮膚疾患" column="皮膚疾患" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="飲水" column="飲水" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="電話の利用" column="電話の利用" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="指示への反応" column="指示への反応" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="毎日の日課の理解" column="毎日の日課の理解" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="幻視幻聴" column="幻視幻聴" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="暴言暴行" column="暴言暴行" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="常時の徘徊" column="常時の徘徊" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="火の不始末" column="火の不始末" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="不潔行為" column="不潔行為" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="異食行動" column="異食行動" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="日中の生活" column="日中の生活" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="参加などの状況" column="参加などの状況" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="浴槽の出入り" column="浴槽の出入り" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="持ち上げ" column="持ち上げ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="嚥下" column="嚥下" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="尿意" column="尿意" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="便意" column="便意" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="排尿後の後始末" column="排尿後の後始末" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="排便後の後始末" column="排便後の後始末" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="ボタンのかけはずし" column="ボタンのかけはずし" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="靴下の着脱" column="靴下の着脱" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="掃除" column="掃除" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="物忘れ" column="物忘れ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="無関心" column="無関心" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="性的行動" column="性的行動" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回麻痺左上肢" column="前回麻痺左上肢" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回麻痺右上肢" column="前回麻痺右上肢" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回麻痺左下肢" column="前回麻痺左下肢" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回麻痺右下肢" column="前回麻痺右下肢" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回麻痺その他" column="前回麻痺その他" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回拘縮肩関節" column="前回拘縮肩関節" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回拘縮股関節" column="前回拘縮股関節" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回拘縮膝関節" column="前回拘縮膝関節" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回拘縮その他" column="前回拘縮その他" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回寝返り" column="前回寝返り" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回起き上がり" column="前回起き上がり" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回座位保持" column="前回座位保持" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回両足での立位" column="前回両足での立位" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回歩行" column="前回歩行" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回立ち上がり" column="前回立ち上がり" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回片足での立位" column="前回片足での立位" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回洗身" column="前回洗身" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回つめ切り" column="前回つめ切り" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回視力" column="前回視力" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回聴力" column="前回聴力" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回移乗" column="前回移乗" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回移動" column="前回移動" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回えん下" column="前回えん下" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回食事摂取" column="前回食事摂取" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回排尿" column="前回排尿" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回排便" column="前回排便" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回口腔清潔" column="前回口腔清潔" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回洗顔" column="前回洗顔" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回整髪" column="前回整髪" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回上衣の着脱" column="前回上衣の着脱" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回ズボン等の着脱" column="前回ズボン等の着脱" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回外出頻度" column="前回外出頻度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回意思の伝達" column="前回意思の伝達" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回毎日の日課を理解" column="前回毎日の日課を理解" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回生年月日をいう" column="前回生年月日をいう" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回短期記憶" column="前回短期記憶" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回自分の名前をいう" column="前回自分の名前をいう" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回今の季節を理解" column="前回今の季節を理解" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回場所の理解" column="前回場所の理解" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回徘徊" column="前回徘徊" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回外出して戻れない" column="前回外出して戻れない" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回被害的" column="前回被害的" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回作話" column="前回作話" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回感情が不安定" column="前回感情が不安定" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回昼夜逆転" column="前回昼夜逆転" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回同じ話をする" column="前回同じ話をする" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回大声を出す" column="前回大声を出す" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回介護に抵抗" column="前回介護に抵抗" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回落ち着きなし" column="前回落ち着きなし" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回一人で出たがる" column="前回一人で出たがる" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回収集癖" column="前回収集癖" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回物や衣類を壊す" column="前回物や衣類を壊す" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回ひどい物忘れ" column="前回ひどい物忘れ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回独り言独り笑い" column="前回独り言独り笑い" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回自分勝手に行動する" column="前回自分勝手に行動する" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回話がまとまらない" column="前回話がまとまらない" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回薬の内服" column="前回薬の内服" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回金銭の管理" column="前回金銭の管理" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回日常の意思決定" column="前回日常の意思決定" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回集団への不適応" column="前回集団への不適応" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回買い物" column="前回買い物" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回簡単な調理" column="前回簡単な調理" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回拘縮肘関節" column="前回拘縮肘関節" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回拘縮足関節" column="前回拘縮足関節" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回じょくそう" column="前回じょくそう" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回皮膚疾患" column="前回皮膚疾患" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回飲水" column="前回飲水" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回電話の利用" column="前回電話の利用" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回指示への反応" column="前回指示への反応" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回毎日の日課の理解" column="前回毎日の日課の理解" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回幻視幻聴" column="前回幻視幻聴" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回暴言暴行" column="前回暴言暴行" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回常時の徘徊" column="前回常時の徘徊" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回火の不始末" column="前回火の不始末" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回不潔行為" column="前回不潔行為" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回異食行動" column="前回異食行動" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回持ち上げ" column="前回持ち上げ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回嚥下" column="前回嚥下" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回尿意" column="前回尿意" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回便意" column="前回便意" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回排尿後の後始末" column="前回排尿後の後始末" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回排便後の後始末" column="前回排便後の後始末" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回ボタンのかけはずし" column="前回ボタンのかけはずし" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回靴下の着脱" column="前回靴下の着脱" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回掃除" column="前回掃除" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回物忘れ" column="前回物忘れ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回無関心" column="前回無関心" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回性的行動" column="前回性的行動" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="障害高齢者自立度日常生活自立度" column="障害高齢者自立度日常生活自立度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="認知症高齢者自立度日常生活自立度" column="認知症高齢者自立度日常生活自立度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="申請書管理番号" column="申請書管理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="被保険者区分コード" column="被保険者区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="主治医医療機関コード" column="主治医医療機関コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="医療機関名称" column="医療機関名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="主治医コード" column="主治医コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="主治医氏名" column="主治医氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="合議体番号" column="合議体番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="審査会審査順" column="審査会審査順" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回認定結果" column="前回認定結果" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前々回要介護度" column="前々回要介護度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前々回認定有効期間" column="前々回認定有効期間" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前々回認定有効期間開始" column="前々回認定有効期間開始" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前々回認定有効期間終了" column="前々回認定有効期間終了" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回二次判定年月日" column="前回二次判定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回認定有効期間開始" column="前回認定有効期間開始" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回認定有効期間終了" column="前回認定有効期間終了" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回状態像" column="前回状態像" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="所属" column="所属" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="市町村名" column="市町村名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="事業者番号" column="事業者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="認定調査員コード" column="認定調査員コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="調査員資格" column="調査員資格" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="要介護認定等基準時間" column="要介護認定等基準時間" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="要介護認定等基準時間食事" column="要介護認定等基準時間食事" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="要介護認定等基準時間排泄" column="要介護認定等基準時間排泄" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="要介護認定等基準時間移動" column="要介護認定等基準時間移動" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="要介護認定等基準時間清潔保持" column="要介護認定等基準時間清潔保持" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="要介護認定等基準時間間接ケア" column="要介護認定等基準時間間接ケア" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="要介護認定等基準時間BPSD関連" column="要介護認定等基準時間BPSD関連" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="要介護認定等基準時間機能訓練" column="要介護認定等基準時間機能訓練" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="要介護認定等基準時間医療関連" column="要介護認定等基準時間医療関連" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="要介護認定等基準時間認知症加算" column="要介護認定等基準時間認知症加算" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="警告コード" column="警告コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="中間評価項目得点第1群" column="中間評価項目得点第1群" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="中間評価項目得点第2群" column="中間評価項目得点第2群" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="中間評価項目得点第3群" column="中間評価項目得点第3群" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="中間評価項目得点第4群" column="中間評価項目得点第4群" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="中間評価項目得点第5群" column="中間評価項目得点第5群" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="意見書認知症高齢者自立度" column="意見書認知症高齢者自立度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="意見書認知症高齢者自立度15" column="意見書認知症高齢者自立度15" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回意見書認知症高齢者自立度" column="前回意見書認知症高齢者自立度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回意見書認知症高齢者自立度15" column="前回意見書認知症高齢者自立度15" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="認知症自立度Ⅱ以上の蓋然性" column="認知症自立度Ⅱ以上の蓋然性" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="状態の安定性" column="状態の安定性" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="給付区分" column="給付区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="短期記憶15" column="短期記憶15" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="短期記憶16" column="短期記憶16" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回短期記憶15" column="前回短期記憶15" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回短期記憶16" column="前回短期記憶16" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="日常の意思決定を行うための認知能力" column="日常の意思決定を行うための認知能力" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="日常の意思決定を行うための認知能力17" column="日常の意思決定を行うための認知能力17" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回日常の意思決定を行うための認知能力" column="前回日常の意思決定を行うための認知能力" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回日常の意思決定を行うための認知能力17" column="前回日常の意思決定を行うための認知能力17" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="自分の意思の伝達能力" column="自分の意思の伝達能力" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="自分の意思の伝達能力18" column="自分の意思の伝達能力18" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回自分の意思の伝達能力" column="前回自分の意思の伝達能力" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回自分の意思の伝達能力18" column="前回自分の意思の伝達能力18" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="食事行為" column="食事行為" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="食事行為69" column="食事行為69" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回食事行為" column="前回食事行為" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="前回食事行為69" column="前回食事行為69" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    <result property="ninteichosaTokkijikoNo" column="特記事項有無" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    <select resultOrdered="true"  id="get一次判定結果票"
+            resultMap="resultMap_IchijiHanteizumiDataRelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichijihanteizumidatashutsuryoku.IchijiHanteizumiDataShutsuryokuMybitisParamter" fetchSize="500">
+        	SELECT  
+                        B."shoKisaiHokenshaNo" AS "証記載保険者番号",
+                        A."koroshoIfShikibetsuCode" AS "厚労省IF識別コード",
+                        A."shinseishoKanriNo" AS "申請書管理番号",
+                        A."hihokenshaNo" AS "被保険者番号",
+                        A."hihokenshaName" AS "被保険者氏名",
+                        A.age AS "年齢",
+                        A.seibetsu AS "性別",
+                        A."yubinNo" AS "郵便番号",
+                        A."ninteiShinseiYMD"  AS "認定申請年月日",
+                        A."ninteiShinseiShinseijiKubunCode" AS "申請区分申",
+                        A."ninteiShinseiHoreiKubunCode" AS "申請区分法",
+                        A1."koroshoIfShikibetsuCode" AS "前回厚労省IF識別コード",
+                        D1."nijiHanteiYMD" AS "前回認定日",
+                        D1."nijiHanteiNinteiYukoKaishiYMD"  AS "前回認定有効期間開始年月日",
+                        D1."nijiHanteiNinteiYukoShuryoYMD" AS "前回認定有効期間終了年月日",
+                        D1."nijiHanteiNinteiYukoKikan" AS "二次判定認定有効期間",
+                        A.jusho AS "住所",
+                        A."telNo" AS "電話",
+                        J."renrakusakiYubinNo"  AS "連絡先郵便番号",
+                        J."renrakusakiJusho" AS "連絡先住所",
+                        J."renrakusakiTelNo" AS "連絡先電話電話",
+                        J."renrakusakiKeitaiTelNo" AS "連絡先携帯電話",
+                        J."renrakusakiShimei" AS "連絡先氏名",
+                        J."renrakusakiTuzukigara" AS "関係",
+                        O."shinsakaiKaisaiYMD" AS "審査会開催日",
+                        C."ichijiHanteiKekkaCode" AS "一次判定結果",
+                        D."nijiHanteiYokaigoJotaiKubunCode" AS "二次判定結果",
+                        D."nijiHanteiYMD" AS "二次判定年月日",
+                        D."nijiHanteiNinteiYukoKaishiYMD" AS "認定有効期間開始年月日",
+                        D."nijiHanteiNinteiYukoShuryoYMD" AS "認定有効期間終了年月日",
+                        D."nijiHanteiNinteiYukoKikan" AS "認定有効期間",
+                        D."yokaigoJotaizoReiCode" AS "要介護状態像例コード",
+                        D."ichijiHanteiKekkaHenkoRiyu" AS "変更事由",
+                        A."nigoTokuteiShippeiCode" AS "特定疾病",
+                        D."shinsakaiIken" AS "介護認定審査会意見",
+                        P."ninteichosaJisshiYMD" AS "実施年月日",
+                        P."gaikyoChosaTextImageKubun" AS "概況調査テキストイメージ区分",
+                        P."chosaJisshiBashoCode" AS "実施場所コード",
+                        P."chosaJisshiBashoMeisho" AS "実施場所名称",
+                        L."chosainShimei" AS "調査員氏名",
+                        K."jigyoshaMeisho" AS "事業者名称",
+                        E."shinsakaiShiryoSakuseiYMD" AS "作成年月日",
+                        P."serviceKubunCode" AS "サービス区分コード",
+                        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijihanteizumidatashutsuryoku.IchijiHanteizumiDataShutsuryokuMapper.allColumns_認定調査票概況調査サービスの状況" />,
+                        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijihanteizumidatashutsuryoku.IchijiHanteizumiDataShutsuryokuMapper.allColumns_認定調査票概況調査サービス" />,
+                        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijihanteizumidatashutsuryoku.IchijiHanteizumiDataShutsuryokuMapper.allColumns_認定調査票概況調査" />,
+                        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijihanteizumidatashutsuryoku.IchijiHanteizumiDataShutsuryokuMapper.allColumns_NinteichosahyoServiceJokyo" />,
+                        CASE WHEN Q2."remban" = 1 THEN Q2."serviceJokyoFlag" END AS 住宅改修,
+                        CASE WHEN R."remban" = 1 THEN R."serviceJokyoKinyu"  END AS 市町村特別給付,
+                        CASE WHEN R."remban" = 2 THEN R."serviceJokyoKinyu"  END AS 介護保険給付外の在宅サービス, 
+                        S."remban" AS "施設利用",
+                        P."riyoShisetsuShimei"  AS "施設名",
+                        P."riyoShisetsuJusho"  AS "施設住所",
+                        P."riyoShisetsuTelNo"  AS "施設電話番号",
+                        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijihanteizumidatashutsuryoku.IchijiHanteizumiDataShutsuryokuMapper.allColumns_認定調査票基本調査調査項目"/>,
+                        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijihanteizumidatashutsuryoku.IchijiHanteizumiDataShutsuryokuMapper.allColumns_認定調査票基本調査"/>,
+                        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijihanteizumidatashutsuryoku.IchijiHanteizumiDataShutsuryokuMapper.allColumns_NinteichosahyoChosaItem"/>,
+                        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijihanteizumidatashutsuryoku.IchijiHanteizumiDataShutsuryokuMapper.allColumns_NinteichosahyoChosaItem99A"/>,
+                        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijihanteizumidatashutsuryoku.IchijiHanteizumiDataShutsuryokuMapper.allColumns_ZenkaiNinteichosahyoChosaItem09B"/>,
+                        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijihanteizumidatashutsuryoku.IchijiHanteizumiDataShutsuryokuMapper.allColumns_ZenkaiNinteichosahyoChosaItem06A"/>,
+                        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijihanteizumidatashutsuryoku.IchijiHanteizumiDataShutsuryokuMapper.allColumns_ZenkaiNinteichosahyoChosaItem02A"/>,
+                        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijihanteizumidatashutsuryoku.IchijiHanteizumiDataShutsuryokuMapper.allColumns_ZenkaiNinteichosahyoChosaItem99A"/>
+                        G."ninchishoNichijoSeikatsuJiritsudoCode"  AS "障害高齢者自立度日常生活自立度",
+                        G."shogaiNichijoSeikatsuJiritsudoCode" AS "認知症高齢者自立度日常生活自立度",
+                        A."shinseishoKanriNo" AS "申請書管理番号",
+                        A."hihokenshaKubunCode" AS "被保険者区分コード",
+                        M."shujiiIryokikanCode" AS "主治医医療機関コード",
+                        M."iryoKikanMeisho" AS "医療機関名称",
+                        N."shujiiCode" AS "主治医コード",
+                        N."shujiiName" AS "主治医氏名",
+                        O."gogitaiNo" AS "合議体番号",
+                        E."shinsakaiOrder" AS "審査会審査順",
+                        D1."nijiHanteiYokaigoJotaiKubunCode" AS "前回認定結果",
+                        D2."nijiHanteiYokaigoJotaiKubunCode"  AS "前々回要介護度",
+                        D2."nijiHanteiNinteiYukoKaishiYMD"  AS "前々回認定有効期間開始",
+                        D2."nijiHanteiNinteiYukoShuryoYMD" AS "前々回認定有効期間終了",
+                        D1."yokaigoJotaizoReiCode" AS "前回状態像",
+                        A."chikuCode" AS "所属",
+                        B."shichosonMeisho"  AS "市町村名",
+                        K."jigyoshaNo" AS "事業者番号",
+                        L."ninteiChosainCode" AS "認定調査員コード",
+                        L."chosainShikaku" AS "調査員資格",
+                        C."kijunJikan" AS "要介護認定等基準時間",
+                        C."kijunJikanShokuji" AS "要介護認定等基準時間食事",
+                        C."kijunJikanHaisetsu" AS "要介護認定等基準時間排泄",
+                        C."kijunJikanIdo" AS "要介護認定等基準時間移動",
+                        C."kijunJikanSeiketsuHoji" AS "要介護認定等基準時間清潔保持",
+                        C."kijunJikanKansetsuCare" AS "要介護認定等基準時間間接ケア",
+                        C."kijunJikanBPSDKanren" AS "要介護認定等基準時間BPSD関連",
+                        C."kijunJikanKinoKunren" AS "要介護認定等基準時間機能訓練",
+                        C."kijunJikanIryoKanren" AS "要介護認定等基準時間医療関連",
+                        C."kijunJikanNinchishoKasan" AS "要介護認定等基準時間認知症加算",
+                        C."ichijiHnateiKeikokuCode" AS "要介護認定一次判定警告コード",
+                        C."chukanHyokaKomoku1gun" AS "中間評価項目得点第1群",
+                        C."chukanHyokaKomoku2gun" AS "中間評価項目得点第2群",
+                        C."chukanHyokaKomoku3gun" AS "中間評価項目得点第3群",
+                        C."chukanHyokaKomoku4gun" AS "中間評価項目得点第4群",
+                        C."chukanHyokaKomoku5gun" AS "中間評価項目得点第5群",
+                        CASE WHEN A."koroshoIfShikibetsuCode" IN('09B','09A','06A') AND I."ikenItem" = '14' 
+                        THEN I."ikenItem" END AS 意見書認知症高齢者自立度,
+                        CASE WHEN A."koroshoIfShikibetsuCode" IN ('02A','99A') AND I."ikenItem" = '15'
+                        THEN I."ikenItem" END AS 意見書認知症高齢者自立度15,
+                        CASE WHEN A1."koroshoIfShikibetsuCode" IN('09B','09A','06A') AND I2."ikenItem" = '14'
+                        THEN I2."ikenItem" END AS 前回意見書認知症高齢者自立度,
+                        CASE WHEN A1."koroshoIfShikibetsuCode" IN ('02A','99A') AND I2."ikenItem" = '15'
+                        THEN I2."ikenItem" END AS 前回意見書認知症高齢者自立度15,    
+                        C."ninchishoJiritsudoIIijoNoGaizensei" AS "認知症自立度Ⅱ以上の蓋然性",
+                        C."jotaiAnteiseiCode" AS "状態の安定性",
+                        C."suiteiKyufuKubunCode" AS "給付区分",    
+                        CASE WHEN A."koroshoIfShikibetsuCode" IN('09B','09A','06A') AND I."ikenItem" = '15'
+                        THEN I."ikenItem" END AS 短期記憶 ,
+                        CASE WHEN A."koroshoIfShikibetsuCode" IN('02A','99A') AND I."ikenItem" = '16'
+                        THEN I."ikenItem" END AS 短期記憶16,
+                        CASE WHEN A1."koroshoIfShikibetsuCode" IN('09B','09A','06A') AND I2."ikenItem" ='15'
+                        THEN I2."ikenItem" END AS 前回短期記憶, 
+                        CASE WHEN A1."koroshoIfShikibetsuCode" IN('02A','99A') AND I2."ikenItem" = '16'
+                        THEN I2."ikenItem" END AS 前回短期記憶16,
+                        CASE WHEN A."koroshoIfShikibetsuCode" IN('09B','09A','06A') AND I."ikenItem" = '16'
+                        THEN I."ikenItem" END AS 日常の意思決定を行うための認知能力,
+                        CASE WHEN A."koroshoIfShikibetsuCode" IN('02A','99A') AND I."ikenItem" = '17'
+                        THEN I."ikenItem" END AS 日常の意思決定を行うための認知能力17,
+                        CASE WHEN A1."koroshoIfShikibetsuCode" IN('09B','09A','06A') AND I2."ikenItem" = '16'
+                        THEN I2."ikenItem" END AS 前回日常の意思決定を行うための認知能力,
+                        CASE WHEN A1."koroshoIfShikibetsuCode" IN('02A','99A') AND I2."ikenItem" = '17'
+                        THEN I2."ikenItem" END AS 前回日常の意思決定を行うための認知能力17,
+                         CASE WHEN A."koroshoIfShikibetsuCode" IN('09B','09A','06A') AND I."ikenItem" = '17'
+                        THEN I."ikenItem" END AS 自分の意思の伝達能力,
+                        CASE WHEN A."koroshoIfShikibetsuCode" IN('02A','99A') AND I."ikenItem" = '18'
+                        THEN I."ikenItem" END AS 自分の意思の伝達能力18,
+                        CASE WHEN A1."koroshoIfShikibetsuCode" IN('09B','09A','06A') AND I2."ikenItem" = '17'
+                        THEN I2."ikenItem" END AS 前回自分の意思の伝達能力,
+                        CASE WHEN A1."koroshoIfShikibetsuCode" IN ('02A','99A') AND I2."ikenItem" = '18'
+                        THEN I2."ikenItem" END AS 前回自分の意思の伝達能力18,
+                        CASE WHEN A."koroshoIfShikibetsuCode" IN ('09B','09A','06A') AND I."ikenItem" = '69'
+                        THEN I."ikenItem" END AS 食事行為,
+                        CASE WHEN A."koroshoIfShikibetsuCode" IN('02A','99A') AND I."ikenItem" = '19'
+                        THEN I."ikenItem" END AS 食事行為19,
+                         CASE WHEN A1."koroshoIfShikibetsuCode" IN ('09B','09A','06A') AND I2."ikenItem" = '69'
+                        THEN I2."ikenItem" END AS 前回食事行為,
+                        CASE WHEN A1."koroshoIfShikibetsuCode" IN ('02A','99A') AND I2."ikenItem" = '19'
+                        THEN I2."ikenItem" END AS 前回食事行為19,
+                        認定調査票特記情報."ninteichosaTokkijikoNo" as 特記事項有無
+                FROM	       
+                       rgdb."DbT5101NinteiShinseiJoho" as A 
+                INNER JOIN  rgdb."DbT7051KoseiShichosonMaster" as B 
+                        ON  B."shoKisaiHokenshaNo" = A."shoKisaiHokenshaNo"
+                INNER JOIN  rgdb."DbT5116IchijiHanteiKekkaJoho" as C
+                        ON  C."shinseishoKanriNo" = A."shinseishoKanriNo"
+                       AND  C."kariIchijiHanteiKubun" = #{仮一次判定区分}
+                       <if test="一次判定日フラグ">
+                        AND #{一次判定日From} <![CDATA[<=]]> C."ichijiHanteiYMD"
+                        AND C."ichijiHanteiYMD" <![CDATA[<=]]> #{一次判定日To}
+                       </if>
+                LEFT JOIN  rgdb."DbT5102NinteiKekkaJoho" as D
+                       ON  D."shinseishoKanriNo" = A."shinseishoKanriNo"
+                LEFT JOIN  rgdb."DbT5502ShinsakaiWariateJoho" as E
+                       ON  E."shinsakaiKaisaiNo" = D."shinsakaiKaisaiNo"
+                      AND  E."shinseishoKanriNo" = D."shinseishoKanriNo"
+                LEFT JOIN  rgdb."DbT5121ShinseiRirekiJoho" as F
+                       ON  F."shinseishoKanriNo" = A."shinseishoKanriNo"
+                LEFT JOIN  rgdb."DbT5101NinteiShinseiJoho" as A1
+                       ON  A1."shinseishoKanriNo" = F."zenkaiShinseishoKanriNo" 
+                LEFT JOIN  rgdb."DbT5102NinteiKekkaJoho" as D1
+                       ON  D1."shinseishoKanriNo" = F."zenkaiShinseishoKanriNo"
+                LEFT JOIN  rgdb."DbT5121ShinseiRirekiJoho" as F1
+                       ON  F1."shinseishoKanriNo" = F."zenkaiShinseishoKanriNo"
+                LEFT JOIN  rgdb."DbT5102NinteiKekkaJoho" as D2
+                       ON  D2."shinseishoKanriNo" = F1."zenkaiShinseishoKanriNo"
+                LEFT JOIN  rgdb."DbT5203NinteichosahyoKihonChosa" as G
+                       ON  G."shinseishoKanriNo" = A."shinseishoKanriNo"
+                      AND  G."ninteichosaRirekiNo" =(
+                                        SELECT
+                                            MAX(G1."ninteichosaRirekiNo")
+                                        FROM    
+                                            rgdb."DbT5203NinteichosahyoKihonChosa" as G1
+                                        WHERE
+                                           G1."shinseishoKanriNo" = G."shinseishoKanriNo"  
+                                   )
+                           
+                LEFT JOIN  rgdb."DbT5211NinteichosahyoChosaItem" as H
+                       ON  H."shinseishoKanriNo" = A."shinseishoKanriNo"
+                      AND  H."ninteichosaRirekiNo" =(
+                                        SELECT
+                                            MAX(H1."ninteichosaRirekiNo")
+                                        FROM    
+                                            rgdb."DbT5203NinteichosahyoKihonChosa" as H1
+                                        WHERE
+                                           H1."shinseishoKanriNo" = G."shinseishoKanriNo"
+                           )    
+                LEFT JOIN  rgdb."DbT5211NinteichosahyoChosaItem" H2
+                       ON  H2."shinseishoKanriNo" = F."zenkaiShinseishoKanriNo"
+                       AND H2."ninteichosaRirekiNo" =(
+                                        SELECT
+                                            MAX(H3."ninteichosaRirekiNo")
+                                        FROM    
+                                            rgdb."DbT5211NinteichosahyoChosaItem" as H3
+                                        WHERE
+                                           H3."shinseishoKanriNo" = H2."shinseishoKanriNo"
+                           )
+                LEFT JOIN  rgdb."DbT5304ShujiiIkenshoIkenItem" I
+                       ON  I."shinseishoKanriNo" = A."shinseishoKanriNo"
+                      AND  I."ikenshoIraiRirekiNo"  = (
+                                        SELECT
+                                            MAX(I1."ikenshoIraiRirekiNo")
+                                        FROM    
+                                            rgdb."DbT5304ShujiiIkenshoIkenItem" as I1
+                                        WHERE
+                                           I."shinseishoKanriNo" = I1."shinseishoKanriNo"
+                       )  
+                 LEFT JOIN  rgdb."DbT5304ShujiiIkenshoIkenItem" I2
+                       ON  I2."shinseishoKanriNo" = F."zenkaiShinseishoKanriNo"
+                      AND  I2."ikenshoIraiRirekiNo"  = (
+                                        SELECT
+                                            MAX(I3."ikenshoIraiRirekiNo")
+                                        FROM    
+                                            rgdb."DbT5304ShujiiIkenshoIkenItem" as I3
+                                        WHERE
+                                           I2."shinseishoKanriNo" = I3."shinseishoKanriNo"
+                       )
+                 LEFT JOIN  rgdb."DbT5150RenrakusakiJoho" as J
+                        ON  J."shinseishoKanriNo" = A."shinseishoKanriNo"
+                       AND  J.priority = (
+                                    SELECT
+                                       MIN(J1.priority)
+                                     FROM
+                                       rgdb."DbT5150RenrakusakiJoho" as J1
+                                     WHERE
+                                        J1."shinseishoKanriNo" = J."shinseishoKanriNo"
+                       )
+                 LEFT JOIN  rgdb."DbT5910NinteichosaItakusakiJoho" as K
+                        ON  K."shichosonCode" = B."shichosonCode"
+                       AND  K."ninteichosaItakusakiCode" = A."ninteiChosaItakusakiCode"
+                 LEFT JOIN  rgdb."DbT5913ChosainJoho" as L
+                        ON  L."shichosonCode" = B."shichosonCode"
+                       AND  L."ninteiChosaItakusakiCode" = A."ninteiChosaItakusakiCode"
+                       AND  L."ninteiChosainCode" = A."ninteiChosainCode"
+                 LEFT JOIN  rgdb."DbT5911ShujiiIryoKikanJoho" as  M
+                        ON  M."shichosonCode" = B."shichosonCode"
+                       AND  M."shujiiIryokikanCode" = A."shujiiIryokikanCode"
+                 LEFT JOIN  rgdb."DbT5912ShujiiJoho" AS N
+                        ON  N."shichosonCode" = B."shichosonCode"
+                       AND  N."shujiiIryokikanCode" = A."shujiiIryokikanCode"
+                       AND  N."shujiiCode" = A."shujiiCode"
+                 LEFT JOIN  rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" as O
+                        ON  O."shinsakaiKaisaiNo" = D."shinsakaiKaisaiNo"
+                 LEFT JOIN  rgdb."DbT5202NinteichosahyoGaikyoChosa" as P
+                        ON  P."shinseishoKanriNo" =  A."shinseishoKanriNo"
+                       AND  P."ninteichosaRirekiNo" = (
+                                            SELECT
+                                                MAX(P1."ninteichosaRirekiNo")
+                                            FROM  rgdb."DbT5202NinteichosahyoGaikyoChosa" P1
+                                            WHERE
+                                                P1."shinseishoKanriNo" = P."shinseishoKanriNo"       
+                             )  
+                LEFT JOIN  rgdb."DbT5207NinteichosahyoServiceJokyo" as Q
+                       ON  Q."shinseishoKanriNo" = A."shinseishoKanriNo"
+                      AND  Q."ninteichosaRirekiNo" = (
+                                            SELECT
+                                               MAX(Q1."ninteichosaRirekiNo")
+                                            FROM  rgdb."DbT5207NinteichosahyoServiceJokyo" as Q1
+                                            WHERE
+                                              Q1."shinseishoKanriNo" = Q."shinseishoKanriNo"    
+                       )
+                LEFT JOIN  rgdb."DbT5208NinteichosahyoServiceJokyoFlag" as Q2 
+                       ON  Q2."shinseishoKanriNo" = A."shinseishoKanriNo"     
+                       AND  Q2."ninteichosaRirekiNo" = (
+                                            SELECT
+                                               MAX(Q3."ninteichosaRirekiNo")
+                                            FROM  rgdb."DbT5208NinteichosahyoServiceJokyoFlag" as Q3
+                                            WHERE
+                                              Q2."shinseishoKanriNo" = Q3."shinseishoKanriNo"    
+                       )
+                LEFT JOIN  rgdb."DbT5209NinteichosahyoKinyuItem" as R
+                       ON  R."shinseishoKanriNo" = A."shinseishoKanriNo"
+                      AND  R."ninteichosaRirekiNo" = (
+                                            SELECT
+                                              MAX(R1."ninteichosaRirekiNo")
+                                            FROM  rgdb."DbT5209NinteichosahyoKinyuItem" as R1
+                                            WHERE
+                                               R1."shinseishoKanriNo" = R."shinseishoKanriNo"  
+                       )
+                LEFT JOIN  rgdb."DbT5210NinteichosahyoShisetsuRiyo" as S
+                       ON  S."shinseishoKanriNo" = A."shinseishoKanriNo"
+                      AND  S."ninteichosaRirekiNo" = (
+                                            SELECT 
+                                              MAX(S1."ninteichosaRirekiNo")
+                                            FROM rgdb."DbT5210NinteichosahyoShisetsuRiyo" as S1
+                                            WHERE  
+                                               S1."shinseishoKanriNo" = S."shinseishoKanriNo"  
+                       )
+                LEFT JOIN  (SELECT
+                                   DbT5205."ninteichosaTokkijikoNo",
+                                   DbT5205."shinseishoKanriNo"
+                                FROM
+                                   rgdb."DbT5205NinteichosahyoTokkijiko" AS DbT5205
+                                WHERE
+                                      DbT5205."shinseishoKanriNo" IN
+                                      <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach>       
+                                   AND DbT5205."ninteichosaRirekiNo" = (
+                                                    SELECT
+                                                        MAX(DbT5202Nintei."ninteichosaRirekiNo")
+                                                     FROM  rgdb."DbT5202NinteichosahyoGaikyoChosa" as DbT5202Nintei
+                                                     WHERE
+                                                       DbT5202Nintei."shinseishoKanriNo" IN
+                                                       <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach> )       
+                        ORDER BY
+                          DbT5205."ninteichosaTokkijikoNo" , DbT5205."ninteichosaTokkijikoRemban" ) as 認定調査票特記情報
+                         ON 認定調査票特記情報."shinseishoKanriNo" =  A."shinseishoKanriNo"       
+               WHERE
+                A."shinseishoKanriNo" IN 
+                       <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach>         
+                  AND A."shoriJotaiKubun" IN (#{通常},#{延期})
+                  AND A."logicalDeletedFlag" = False
+                 <if test="申請日フラグ">
+                  AND #{一次判定日From} <![CDATA[<=]]> A."ninteiShinseiYMD"
+                  AND A."ninteiShinseiYMD" <![CDATA[<=]]> #{一次判定日To}
+                </if>
+                LIMIT(1)                                                                                                                
+    </select>
+    <sql id="allColumns_認定調査票概況調査サービスの状況">
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B'  AND Q."remban" = 1 AND #{総合事業開始区分} ='1' THEN  Q."serviceJokyo" END AS 訪問介護ホームヘルプ,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B'  AND Q."remban" = 2 AND #{総合事業開始区分} ='1' THEN  Q."serviceJokyo" END AS 訪問入浴介護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B'  AND Q."remban" = 3 AND #{総合事業開始区分} ='1' THEN  Q."serviceJokyo" END AS 訪問看護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B'  AND Q."remban" = 3 AND #{総合事業開始区分} ='1' THEN  Q."serviceJokyo" END AS 訪問リハビリテーション,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 5 THEN  Q."serviceJokyo" END AS 居宅療養管理指導,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 6 THEN  Q."serviceJokyo" END AS 通所介護デイサービス,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 7 THEN  Q."serviceJokyo" END AS 通所リハビリテーションデイケア,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 8 THEN  Q."serviceJokyo" END AS 短期入所生活介護ショートステイ,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 9 THEN  Q."serviceJokyo" END AS 短期入所療養介護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 10 THEN  Q."serviceJokyo" END AS 特定施設入居者生活介護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 11 THEN  Q."serviceJokyo" END AS 福祉用具貸与,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 12 THEN  Q."serviceJokyo" END AS 特定福祉用具販売,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 13 THEN  Q."serviceJokyo" END AS 夜間対応型訪問介護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 14 THEN  Q."serviceJokyo" END AS 認知症対応型通所介護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 15 THEN  Q."serviceJokyo" END AS 小規模多機能型居宅介護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 16 THEN  Q."serviceJokyo" END AS 小規模多機能型居宅介護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 17 THEN  Q."serviceJokyo" END AS 地域密着型特定施設入居者生活介護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 18 THEN  Q."serviceJokyo" END AS 地域密着型介護老人福祉施設入所者生活介護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 19 THEN  Q."serviceJokyo" END AS 定期巡回随時対応型訪問介護看護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 20 THEN  Q."serviceJokyo" END AS 看護小規模多機能型居宅介護 
+    </sql>
+    <sql id="allColumns_認定調査票概況調査サービス">
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='2' AND Q."remban" = 1 THEN  Q."serviceJokyo" END AS 訪問介護ホームヘルプ,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='2' AND Q."remban" = 2 THEN  Q."serviceJokyo" END AS 訪問入浴介護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='2' AND Q."remban" = 3 THEN  Q."serviceJokyo" END AS 訪問看護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='2' AND Q."remban" = 4 THEN  Q."serviceJokyo" END AS 訪問リハビリテーション,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='2' AND Q."remban" = 5 THEN  Q."serviceJokyo" END AS 居宅療養管理指導,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='2' AND Q."remban" = 6 THEN  Q."serviceJokyo" END AS 通所介護デイサービス,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='2' AND Q."remban" = 7 THEN  Q."serviceJokyo" END AS 通所リハビリテーションデイケア,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='2' AND Q."remban" = 8 THEN  Q."serviceJokyo" END AS 短期入所生活介護ショートステイ,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='2' AND Q."remban" = 9 THEN  Q."serviceJokyo" END AS 短期入所療養介護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='2' AND Q."remban" = 10 THEN  Q."serviceJokyo" END AS 特定施設入居者生活介護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='2' AND Q."remban" = 11 THEN  Q."serviceJokyo" END AS 福祉用具貸与,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='2' AND Q."remban" = 12 THEN  Q."serviceJokyo" END AS 特定福祉用具販売,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='2' AND Q."remban" = 13 THEN  Q."serviceJokyo" END AS 夜間対応型訪問介護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='2' AND Q."remban" = 14 THEN  Q."serviceJokyo" END AS 認知症対応型通所介護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='2' AND Q."remban" = 15 THEN  Q."serviceJokyo" END AS 小規模多機能型居宅介護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='2' AND Q."remban" = 16 THEN  Q."serviceJokyo" END AS 小規模多機能型居宅介護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='2' AND Q."remban" = 17 THEN  Q."serviceJokyo" END AS 地域密着型特定施設入居者生活介護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='2' AND Q."remban" = 18 THEN  Q."serviceJokyo" END AS 地域密着型介護老人福祉施設入所者生活介護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='2' AND Q."remban" = 19 THEN  Q."serviceJokyo" END AS 定期巡回随時対応型訪問介護看護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='2' AND Q."remban" = 20 THEN  Q."serviceJokyo" END AS 複合型サービス 
+    </sql>
+    <sql id="allColumns_認定調査票概況調査">
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09A','06A') AND Q."remban" = 1 THEN  Q."serviceJokyo" END AS 訪問介護ホームヘルプ,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09A','06A') AND Q."remban" = 2 THEN  Q."serviceJokyo" END AS 訪問入浴介護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09A','06A') AND Q."remban" = 3 THEN  Q."serviceJokyo" END AS 訪問看護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09A','06A') AND Q."remban" = 4 THEN  Q."serviceJokyo" END AS 訪問リハビリテーション,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09A','06A') AND Q."remban" = 5 THEN  Q."serviceJokyo" END AS 居宅療養管理指導,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09A','06A') AND Q."remban" = 6 THEN  Q."serviceJokyo" END AS 通所介護デイサービス,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09A','06A') AND Q."remban" = 7 THEN  Q."serviceJokyo" END AS 通所リハビリテーションデイケア,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09A','06A') AND Q."remban" = 8 THEN  Q."serviceJokyo" END AS 短期入所生活介護ショートステイ,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09A','06A') AND Q."remban" = 9 THEN  Q."serviceJokyo" END AS 短期入所療養介護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09A','06A') AND Q."remban" = 10 THEN  Q."serviceJokyo" END AS 特定施設入居者生活介護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09A','06A') AND Q."remban" = 11 THEN  Q."serviceJokyo" END AS 福祉用具貸与,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09A','06A') AND Q."remban" = 12 THEN  Q."serviceJokyo" END AS 特定福祉用具販売,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09A','06A') AND Q."remban" = 13 THEN  Q."serviceJokyo" END AS 夜間対応型訪問介護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09A','06A') AND Q."remban" = 14 THEN  Q."serviceJokyo" END AS 認知症対応型通所介護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09A','06A') AND Q."remban" = 15 THEN  Q."serviceJokyo" END AS 小規模多機能型居宅介護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09A','06A') AND Q."remban" = 16 THEN  Q."serviceJokyo" END AS 小規模多機能型居宅介護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09A','06A') AND Q."remban" = 17 THEN  Q."serviceJokyo" END AS 地域密着型特定施設入居者生活介護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09A','06A') AND Q."remban" = 18 THEN  Q."serviceJokyo" END AS 地域密着型介護老人福祉施設入所者生活介護
+    </sql>
+    <sql id="allColumns_NinteichosahyoServiceJokyo">
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('02A','99A') AND Q."remban" = 1 THEN  Q."serviceJokyo" END AS 訪問介護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('02A','99A') AND Q."remban" = 2 THEN  Q."serviceJokyo" END AS 訪問入浴介護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('02A','99A') AND Q."remban" = 3 THEN  Q."serviceJokyo" END AS 訪問看護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('02A','99A') AND Q."remban" = 4 THEN  Q."serviceJokyo" END AS 訪問リハビリテーション,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('02A','99A') AND Q."remban" = 5 THEN  Q."serviceJokyo" END AS 居宅療養管理指導,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('02A','99A') AND Q."remban" = 6 THEN  Q."serviceJokyo" END AS 通所介護デイサービス,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('02A','99A') AND Q."remban" = 7 THEN  Q."serviceJokyo" END AS 通所リハビリテーションデイケア,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('02A','99A') AND Q."remban" = 8 THEN  Q."serviceJokyo" END AS 福祉用具貸与,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('02A','99A') AND Q."remban" = 9 THEN  Q."serviceJokyo" END AS 短期入所生活介護特養,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('02A','99A') AND Q."remban" = 10 THEN  Q."serviceJokyo" END AS 短期入所療養介護老健診療所,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('02A','99A') AND Q."remban" = 11 THEN  Q."serviceJokyo" END AS 認知症対応型共同生活介護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('02A','99A') AND Q."remban" = 12 THEN  Q."serviceJokyo" END AS 特定施設入所者生活介護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('02A','99A') AND Q."remban" = 13 THEN  Q."serviceJokyo" END AS 福祉用具購入
+    </sql>
+    <sql id="allColumns_認定調査票基本調査調査項目">
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 1 THEN  H."researchItem" END AS 麻痺左上肢,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 2 THEN  H."researchItem" END AS 麻痺右上肢,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 3 THEN  H."researchItem" END AS 麻痺左下肢,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 4 THEN  H."researchItem" END AS 麻痺右下肢,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 5 THEN  H."researchItem" END AS 麻痺その他,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 6 THEN  H."researchItem" END AS 拘縮肩関節,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 7 THEN  H."researchItem" END AS 拘縮股関節,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 8 THEN  H."researchItem" END AS 拘縮膝関節,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 9 THEN  H."researchItem" END AS 拘縮その他,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 10 THEN  H."researchItem" END AS 寝返り,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 11 THEN  H."researchItem" END AS 起き上がり,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 12 THEN  H."researchItem" END AS 座位保持,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 13 THEN  H."researchItem" END AS 両足での立位,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 14 THEN  H."researchItem" END AS 歩行,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 15 THEN  H."researchItem" END AS 立ち上がり,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 16 THEN  H."researchItem" END AS 片足での立位,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 17 THEN  H."researchItem" END AS 洗身,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 18 THEN  H."researchItem" END AS つめ切り,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 19 THEN  H."researchItem" END AS 視力,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 20 THEN  H."researchItem" END AS 聴力,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 21 THEN  H."researchItem" END AS 移乗,    
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 22 THEN  H."researchItem" END AS 移動,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 23 THEN  H."researchItem" END AS えん下,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 24 THEN  H."researchItem" END AS 食事摂取,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 25 THEN  H."researchItem" END AS 排尿,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 26 THEN  H."researchItem" END AS 排便,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 27 THEN  H."researchItem" END AS 口腔清潔,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 28 THEN  H."researchItem" END AS 洗顔,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 29 THEN  H."researchItem" END AS 整髪,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 30 THEN  H."researchItem" END AS 上衣の着脱,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 31 THEN  H."researchItem" END AS ズボン等の着脱,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 32 THEN  H."researchItem" END AS 外出頻度,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 33 THEN  H."researchItem" END AS 意思の伝達,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 34 THEN  H."researchItem" END AS 毎日の日課を理解,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 35 THEN  H."researchItem" END AS 生年月日をいう,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 36 THEN  H."researchItem" END AS 短期記憶,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 37 THEN  H."researchItem" END AS 自分の名前をいう,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 38 THEN  H."researchItem" END AS 今の季節を理解,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 39 THEN  H."researchItem" END AS 場所の理解,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 40 THEN  H."researchItem" END AS 徘徊,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 41 THEN  H."researchItem" END AS 外出して戻れない,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 42 THEN  H."researchItem" END AS 被害的,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 43 THEN  H."researchItem" END AS 作話,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 44 THEN  H."researchItem" END AS 感情が不安定,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 45 THEN  H."researchItem" END AS 昼夜逆転,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 46 THEN  H."researchItem" END AS 同じ話をする,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 47 THEN  H."researchItem" END AS 大声を出す,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 48 THEN  H."researchItem" END AS 介護に抵抗,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 49 THEN  H."researchItem" END AS 落ち着きなし,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 50 THEN  H."researchItem" END AS 一人で出たがる,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 51 THEN  H."researchItem" END AS 収集癖,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 52 THEN  H."researchItem" END AS 物や衣類を壊す,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 53 THEN  H."researchItem" END AS ひどい物忘れ,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 54 THEN  H."researchItem" END AS 独り言独り笑い,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 55 THEN  H."researchItem" END AS 自分勝手に行動する,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 56 THEN  H."researchItem" END AS 話がまとまらない,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 57 THEN  H."researchItem" END AS 薬の内服,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 58 THEN  H."researchItem" END AS 金銭の管理,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 59 THEN  H."researchItem" END AS 日常の意思決定,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 60 THEN  H."researchItem" END AS 集団への不適応,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 61 THEN  H."researchItem" END AS 買い物,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 62 THEN  H."researchItem" END AS 簡単な調理,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 63 THEN  H."researchItem" END AS 点滴の管理,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 64 THEN  H."researchItem" END AS 中心静脈栄養,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 65 THEN  H."researchItem" END AS 透析,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 66 THEN  H."researchItem" END AS ストーマの処置,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 67 THEN  H."researchItem" END AS 酸素療法,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 68 THEN  H."researchItem" END AS レスピレータ,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 69 THEN  H."researchItem" END AS 気管切開の処置,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 70 THEN  H."researchItem" END AS 疼痛の看護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 71 THEN  H."researchItem" END AS 経管栄養,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 72 THEN  H."researchItem" END AS モニター測定,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 73 THEN  H."researchItem" END AS じょくそうの処置,
+           CASE WHEN  A."koroshoIfShikibetsuCode" IN('09B','09A') AND H."remban" = 74 THEN  H."researchItem" END AS カテーテル    
+    </sql>
+    <sql id="allColumns_認定調査票基本調査">
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 1 THEN  H."researchItem" END AS 麻痺左上肢,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 2 THEN  H."researchItem" END AS 麻痺右上肢,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 3 THEN  H."researchItem" END AS 麻痺左下肢,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 4 THEN  H."researchItem" END AS 麻痺右下肢,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 5 THEN  H."researchItem" END AS 麻痺その他,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 6 THEN  H."researchItem" END AS 拘縮肩関節,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 7 THEN  H."researchItem" END AS 拘縮肘関節,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 8 THEN  H."researchItem" END AS 拘縮股関節,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 9 THEN  H."researchItem" END AS 拘縮膝関節,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 10 THEN  H."researchItem" END AS 拘縮足関節, 
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 11 THEN  H."researchItem" END AS 拘縮その他,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 12 THEN  H."researchItem" END AS 寝返り,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 13 THEN  H."researchItem" END AS 起き上がり,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 14 THEN  H."researchItem" END AS 座位保持,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 15 THEN  H."researchItem" END AS 両足での立位,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 16 THEN  H."researchItem" END AS 歩行,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 17 THEN  H."researchItem" END AS 移乗,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 18 THEN  H."researchItem" END AS 移動,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 19 THEN  H."researchItem" END AS 立ち上がり,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 20 THEN  H."researchItem" END AS 片足での立位,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 21 THEN  H."researchItem" END AS 洗身,    
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 22 THEN  H."researchItem" END AS じょくそう,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 23 THEN  H."researchItem" END AS 皮膚疾患,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 24 THEN  H."researchItem" END AS えん下,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 25 THEN  H."researchItem" END AS 食事摂取,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 26 THEN  H."researchItem" END AS 飲水,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 27 THEN  H."researchItem" END AS 排尿,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 28 THEN  H."researchItem" END AS 排便,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 29 THEN  H."researchItem" END AS 口腔清潔,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 30 THEN  H."researchItem" END AS 洗顔,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 31 THEN  H."researchItem" END AS 整髪,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 32 THEN  H."researchItem" END AS つめ切り,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 33 THEN  H."researchItem" END AS 上衣の着脱,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 34 THEN  H."researchItem" END AS ズボン等の着脱,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 35 THEN  H."researchItem" END AS 薬の内服,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 36 THEN  H."researchItem" END AS 金銭の管理,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 37 THEN  H."researchItem" END AS 電話の利用,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 38 THEN  H."researchItem" END AS 常の意思決定,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 39 THEN  H."researchItem" END AS 視力,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 40 THEN  H."researchItem" END AS 聴力,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 41 THEN  H."researchItem" END AS 意思の伝達,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 42 THEN  H."researchItem" END AS 指示への反応,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 43 THEN  H."researchItem" END AS 毎日の日課の理解,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 44 THEN  H."researchItem" END AS 生年月日をいう,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 45 THEN  H."researchItem" END AS 短期記憶,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 46 THEN  H."researchItem" END AS 自分の名前をいう,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 47 THEN  H."researchItem" END AS 今の季節を理解,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 48 THEN  H."researchItem" END AS 場所の理解,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 49 THEN  H."researchItem" END AS 被害的,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 50 THEN  H."researchItem" END AS 作話,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 51 THEN  H."researchItem" END AS 幻視幻聴,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 52 THEN  H."researchItem" END AS 感情が不安定,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 53 THEN  H."researchItem" END AS 昼夜逆転,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 54 THEN  H."researchItem" END AS 暴言暴行,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 55 THEN  H."researchItem" END AS 同じ話をする,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 56 THEN  H."researchItem" END AS 大声を出す,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 57 THEN  H."researchItem" END AS 介護に抵抗,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 58 THEN  H."researchItem" END AS 常時の徘徊,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 59 THEN  H."researchItem" END AS 落ち着きなし,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 60 THEN  H."researchItem" END AS 外出して戻れない,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 61 THEN  H."researchItem" END AS 一人で出たがる,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 62 THEN  H."researchItem" END AS 収集癖,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 63 THEN  H."researchItem" END AS 火の不始末,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 64 THEN  H."researchItem" END AS 物や衣類を壊す,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 65 THEN  H."researchItem" END AS 不潔行為,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 66 THEN  H."researchItem" END AS 異食行動,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 67 THEN  H."researchItem" END AS ひどい物忘れ,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 68 THEN  H."researchItem" END AS 点滴の管理,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 69 THEN  H."researchItem" END AS 中心静脈栄養,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 70 THEN  H."researchItem" END AS 透析,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 71 THEN  H."researchItem" END AS ストーマの処置,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 72 THEN  H."researchItem" END AS 酸素療法,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 73 THEN  H."researchItem" END AS レスピレータ,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 74 THEN  H."researchItem" END AS 気管切開の処置,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 75 THEN  H."researchItem" END AS 疼痛の看護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 76 THEN  H."researchItem" END AS 経管栄養,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 77 THEN  H."researchItem" END AS モニター測定,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 78 THEN  H."researchItem" END AS じょくそうの処置,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 79 THEN  H."researchItem" END AS カテーテル,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 80 THEN  H."researchItem" END AS 日中の生活,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 81 THEN  H."researchItem" END AS 外出頻度,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '06A' AND H."remban" = 82 THEN  H."researchItem" END AS 参加などの状況    
+    </sql>
+    <sql id="allColumns_NinteichosahyoChosaItem">
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 1 THEN  H."researchItem" END AS 麻痺左上肢,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 2 THEN  H."researchItem" END AS 麻痺右上肢,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 3 THEN  H."researchItem" END AS 麻痺左下肢,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 4 THEN  H."researchItem" END AS 麻痺右下肢,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 5 THEN  H."researchItem" END AS 麻痺その他,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 6 THEN  H."researchItem" END AS 拘縮肩関節,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 7 THEN  H."researchItem" END AS 拘縮肘関節,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 8 THEN  H."researchItem" END AS 拘縮股関節,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 9 THEN  H."researchItem" END AS 拘縮膝関節,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 10 THEN  H."researchItem" END AS 拘縮足関節, 
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 11 THEN  H."researchItem" END AS 拘縮その他,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 12 THEN  H."researchItem" END AS 寝返り,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 13 THEN  H."researchItem" END AS 起き上がり,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 14 THEN  H."researchItem" END AS 座位保持,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 15 THEN  H."researchItem" END AS 両足での立位,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 16 THEN  H."researchItem" END AS 歩行,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 17 THEN  H."researchItem" END AS 移乗,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 18 THEN  H."researchItem" END AS 移動,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 19 THEN  H."researchItem" END AS 立ち上がり,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 20 THEN  H."researchItem" END AS 片足での立位,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 21 THEN  H."researchItem" END AS 洗身,    
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 22 THEN  H."researchItem" END AS じょくそう,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 23 THEN  H."researchItem" END AS 皮膚疾患,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 24 THEN  H."researchItem" END AS えん下,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 25 THEN  H."researchItem" END AS 食事摂取,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 26 THEN  H."researchItem" END AS 飲水,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 27 THEN  H."researchItem" END AS 排尿,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 28 THEN  H."researchItem" END AS 排便,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 29 THEN  H."researchItem" END AS 口腔清潔,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 30 THEN  H."researchItem" END AS 洗顔,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 31 THEN  H."researchItem" END AS 整髪,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 32 THEN  H."researchItem" END AS つめ切り,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 33 THEN  H."researchItem" END AS 上衣の着脱,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 34 THEN  H."researchItem" END AS ズボン等の着脱,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 35 THEN  H."researchItem" END AS 薬の内服,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 36 THEN  H."researchItem" END AS 金銭の管理,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 37 THEN  H."researchItem" END AS 電話の利用,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 38 THEN  H."researchItem" END AS 常の意思決定,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 39 THEN  H."researchItem" END AS 視力,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 40 THEN  H."researchItem" END AS 聴力,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 41 THEN  H."researchItem" END AS 意思の伝達,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 42 THEN  H."researchItem" END AS 指示への反応,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 43 THEN  H."researchItem" END AS 毎日の日課の理解,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 44 THEN  H."researchItem" END AS 生年月日をいう,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 45 THEN  H."researchItem" END AS 短期記憶,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 46 THEN  H."researchItem" END AS 自分の名前をいう,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 47 THEN  H."researchItem" END AS 今の季節を理解,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 48 THEN  H."researchItem" END AS 場所の理解,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 49 THEN  H."researchItem" END AS 被害的,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 50 THEN  H."researchItem" END AS 作話,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 51 THEN  H."researchItem" END AS 幻視幻聴,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 52 THEN  H."researchItem" END AS 感情が不安定,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 53 THEN  H."researchItem" END AS 昼夜逆転,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 54 THEN  H."researchItem" END AS 暴言暴行,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 55 THEN  H."researchItem" END AS 同じ話をする,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 56 THEN  H."researchItem" END AS 大声を出す,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 57 THEN  H."researchItem" END AS 介護に抵抗,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 58 THEN  H."researchItem" END AS 常時の徘徊,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 59 THEN  H."researchItem" END AS 落ち着きなし,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 60 THEN  H."researchItem" END AS 外出して戻れない,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 61 THEN  H."researchItem" END AS 一人で出たがる,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 62 THEN  H."researchItem" END AS 収集癖,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 63 THEN  H."researchItem" END AS 火の不始末,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 64 THEN  H."researchItem" END AS 物や衣類を壊す,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 65 THEN  H."researchItem" END AS 不潔行為,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 66 THEN  H."researchItem" END AS 異食行動,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 67 THEN  H."researchItem" END AS ひどい物忘れ,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 68 THEN  H."researchItem" END AS 点滴の管理,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 69 THEN  H."researchItem" END AS 中心静脈栄養,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 70 THEN  H."researchItem" END AS 透析,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 71 THEN  H."researchItem" END AS ストーマの処置,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 72 THEN  H."researchItem" END AS 酸素療法,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 73 THEN  H."researchItem" END AS レスピレータ,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 74 THEN  H."researchItem" END AS 気管切開の処置,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 75 THEN  H."researchItem" END AS 疼痛の看護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 76 THEN  H."researchItem" END AS 経管栄養,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 77 THEN  H."researchItem" END AS モニター測定,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 78 THEN  H."researchItem" END AS じょくそうの処置,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '02A' AND H."remban" = 79 THEN  H."researchItem" END AS カテーテル 
+    </sql>
+    <sql id="allColumns_NinteichosahyoChosaItem99A">
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 1 THEN  H."researchItem" END AS 麻痺左上肢,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 2 THEN  H."researchItem" END AS 麻痺右上肢,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 3 THEN  H."researchItem" END AS 麻痺左下肢,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 4 THEN  H."researchItem" END AS 麻痺右下肢,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 5 THEN  H."researchItem" END AS 麻痺その他,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 6 THEN  H."researchItem" END AS 拘縮肩関節,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 7 THEN  H."researchItem" END AS 拘縮肘関節,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 8 THEN  H."researchItem" END AS 拘縮股関節,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 9 THEN  H."researchItem" END AS 拘縮膝関節,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 10 THEN  H."researchItem" END AS 拘縮足関節, 
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 11 THEN  H."researchItem" END AS 拘縮その他,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 12 THEN  H."researchItem" END AS 寝返り,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 13 THEN  H."researchItem" END AS 起き上がり,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 14 THEN  H."researchItem" END AS 座位保持,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 15 THEN  H."researchItem" END AS 両足での立位,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 16 THEN  H."researchItem" END AS 歩行,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 17 THEN  H."researchItem" END AS 移乗,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 18 THEN  H."researchItem" END AS 移動,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 19 THEN  H."researchItem" END AS 立ち上がり,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 20 THEN  H."researchItem" END AS 片足での立位,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 21 THEN  H."researchItem" END AS 浴槽の出入り,    
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 22 THEN  H."researchItem" END AS 洗身,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 23 THEN  H."researchItem" END AS じょくそう,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 24 THEN  H."researchItem" END AS 皮膚疾患,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 25 THEN  H."researchItem" END AS 持ち上げ,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 26 THEN  H."researchItem" END AS 嚥下,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 27 THEN  H."researchItem" END AS 尿意,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 28 THEN  H."researchItem" END AS 便意,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 29 THEN  H."researchItem" END AS 排尿後の後始末,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 30 THEN  H."researchItem" END AS 排便後の後始末,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 31 THEN  H."researchItem" END AS 食事摂取,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 32 THEN  H."researchItem" END AS 口腔清潔,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 33 THEN  H."researchItem" END AS 洗顔,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 34 THEN  H."researchItem" END AS 整髪,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 35 THEN  H."researchItem" END AS つめ切り,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 36 THEN  H."researchItem" END AS ボタンのかけはずし,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 37 THEN  H."researchItem" END AS 上衣の着脱,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 38 THEN  H."researchItem" END AS ズボン等の着脱,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 39 THEN  H."researchItem" END AS 靴下の着脱,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 40 THEN  H."researchItem" END AS 掃除,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 41 THEN  H."researchItem" END AS 薬の内服,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 42 THEN  H."researchItem" END AS 金銭の管理,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 43 THEN  H."researchItem" END AS 物忘れ,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 44 THEN  H."researchItem" END AS 無関心,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 45 THEN  H."researchItem" END AS 視力,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 46 THEN  H."researchItem" END AS 聴力,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 47 THEN  H."researchItem" END AS 意思の伝達,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 48 THEN  H."researchItem" END AS 指示への反応,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 49 THEN  H."researchItem" END AS 毎日の日課の理解,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 50 THEN  H."researchItem" END AS 生年月日をいう,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 51 THEN  H."researchItem" END AS 短期記憶,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 52 THEN  H."researchItem" END AS 自分の名前をいう,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 53 THEN  H."researchItem" END AS 今の季節を理解,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 54 THEN  H."researchItem" END AS 場所の理解,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 55 THEN  H."researchItem" END AS 被害的,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 56 THEN  H."researchItem" END AS 作話,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 57 THEN  H."researchItem" END AS 幻視幻聴,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 58 THEN  H."researchItem" END AS 感情が不安定,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 59 THEN  H."researchItem" END AS 昼夜逆転,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 60 THEN  H."researchItem" END AS 暴言暴行,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 61 THEN  H."researchItem" END AS 同じ話をする,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 62 THEN  H."researchItem" END AS 大声を出す,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 63 THEN  H."researchItem" END AS 介護に抵抗,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 64 THEN  H."researchItem" END AS 常時の徘徊,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 65 THEN  H."researchItem" END AS 落ち着きなし,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 66 THEN  H."researchItem" END AS 外出して戻れない,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 67 THEN  H."researchItem" END AS 一人で出たがる,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 68 THEN  H."researchItem" END AS 収集癖,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 69 THEN  H."researchItem" END AS 火の不始末,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 70 THEN  H."researchItem" END AS 物や衣類を壊す,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 71 THEN  H."researchItem" END AS 不潔行為,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 72 THEN  H."researchItem" END AS 異食行動,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 73 THEN  H."researchItem" END AS 性的行動,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 74 THEN  H."researchItem" END AS 点滴の管理,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 75 THEN  H."researchItem" END AS 中心静脈栄養,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 76 THEN  H."researchItem" END AS 透析,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 77 THEN  H."researchItem" END AS ストーマの処置,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 78 THEN  H."researchItem" END AS 酸素療法,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 79 THEN  H."researchItem" END AS レスピレータ,   
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 80 THEN  H."researchItem" END AS 気管切開の処置,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 81 THEN  H."researchItem" END AS 疼痛の看護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 82 THEN  H."researchItem" END AS 経管栄養,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 83 THEN  H."researchItem" END AS 経管栄養,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 84 THEN  H."researchItem" END AS じょくそうの処置,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '99A' AND H."remban" = 85 THEN  H."researchItem" END AS カテーテル
+    </sql>
+    <sql id="allColumns_ZenkaiNinteichosahyoChosaItem09B">
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 1 THEN  H2."researchItem" END AS 前回麻痺左上肢,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 2 THEN  H2."researchItem" END AS 前回麻痺右上肢,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 3 THEN  H2."researchItem" END AS 前回麻痺左下肢,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 4 THEN  H2."researchItem" END AS 前回麻痺右下肢,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 5 THEN  H2."researchItem" END AS 前回麻痺その他,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 6 THEN  H2."researchItem" END AS 前回拘縮肩関節,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 7 THEN  H2."researchItem" END AS 前回拘縮股関節,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 8 THEN  H2."researchItem" END AS 前回拘縮膝関節,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 9 THEN  H2."researchItem" END AS 前回拘縮その他,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 10 THEN  H2."researchItem" END AS 前回寝返り, 
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 11 THEN  H2."researchItem" END AS 前回起き上がり,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 12 THEN  H2."researchItem" END AS 前回座位保持,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 13 THEN  H2."researchItem" END AS 前回両足での立位,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 14 THEN  H2."researchItem" END AS 前回歩行,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 15 THEN  H2."researchItem" END AS 前回立ち上がり,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 16 THEN  H2."researchItem" END AS 前回片足での立位,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 17 THEN  H2."researchItem" END AS 前回洗身,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 18 THEN  H2."researchItem" END AS 前回つめ切り,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 19 THEN  H2."researchItem" END AS 前回視力,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 20 THEN  H2."researchItem" END AS 前回聴力,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 21 THEN  H2."researchItem" END AS 前回移乗,    
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 22 THEN  H2."researchItem" END AS 前回移動,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 23 THEN  H2."researchItem" END AS 前回えん下,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 24 THEN  H2."researchItem" END AS 前回食事摂取,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 25 THEN  H2."researchItem" END AS 前回排尿,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 26 THEN  H2."researchItem" END AS 前回排便,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 27 THEN  H2."researchItem" END AS 前回口腔清潔,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 28 THEN  H2."researchItem" END AS 前回洗顔,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 29 THEN  H2."researchItem" END AS 前回整髪,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 30 THEN  H2."researchItem" END AS 前回上衣の着脱,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 31 THEN  H2."researchItem" END AS 前回ズボン等の着脱,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 32 THEN  H2."researchItem" END AS 前回外出頻度,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 33 THEN  H2."researchItem" END AS 前回意思の伝達,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 34 THEN  H2."researchItem" END AS 前回毎日の日課を理解,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 35 THEN  H2."researchItem" END AS 前回生年月日をいう,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 36 THEN  H2."researchItem" END AS 前回短期記憶,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 37 THEN  H2."researchItem" END AS 前回自分の名前をいう,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 38 THEN  H2."researchItem" END AS 前回今の季節を理解,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 39 THEN  H2."researchItem" END AS 前回場所の理解,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 40 THEN  H2."researchItem" END AS 前回徘徊,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 41 THEN  H2."researchItem" END AS 前回外出して戻れない,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 42 THEN  H2."researchItem" END AS 前回被害的,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 43 THEN  H2."researchItem" END AS 前回作話,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 44 THEN  H2."researchItem" END AS 前回感情が不安定,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 45 THEN  H2."researchItem" END AS 前回昼夜逆転,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 46 THEN  H2."researchItem" END AS 前回同じ話をする,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 47 THEN  H2."researchItem" END AS 前回大声を出す,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 48 THEN  H2."researchItem" END AS 前回介護に抵抗,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 49 THEN  H2."researchItem" END AS 前回落ち着きなし,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 50 THEN  H2."researchItem" END AS 前回一人で出たがる,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 51 THEN  H2."researchItem" END AS 前回収集癖,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 52 THEN  H2."researchItem" END AS 前回物や衣類を壊す,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 53 THEN  H2."researchItem" END AS 前回ひどい物忘れ,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 54 THEN  H2."researchItem" END AS 前回独り言独り笑い,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 55 THEN  H2."researchItem" END AS 前回自分勝手に行動する,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 56 THEN  H2."researchItem" END AS 前回話がまとまらない,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 57 THEN  H2."researchItem" END AS 前回薬の内服,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 58 THEN  H2."researchItem" END AS 前回金銭の管理,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 59 THEN  H2."researchItem" END AS 前回日常の意思決定,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 60 THEN  H2."researchItem" END AS 前回集団への不適応,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 61 THEN  H2."researchItem" END AS 前回買い物,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" IN ('09B','09A') AND H2."remban" = 62 THEN  H2."researchItem" END AS 前回簡単な調理
+    </sql>
+    <sql id="allColumns_ZenkaiNinteichosahyoChosaItem06A">
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 1 THEN  H2."researchItem" END AS 前回麻痺左上肢,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 2 THEN  H2."researchItem" END AS 前回麻痺右上肢,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 3 THEN  H2."researchItem" END AS 前回麻痺左下肢,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 4 THEN  H2."researchItem" END AS 前回麻痺右下肢,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 5 THEN  H2."researchItem" END AS 前回麻痺その他,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 6 THEN  H2."researchItem" END AS 前回拘縮肩関節,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 7 THEN  H2."researchItem" END AS 前回拘縮肘関節,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 8 THEN  H2."researchItem" END AS 前回拘縮股関節,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 9 THEN  H2."researchItem" END AS 前回拘縮膝関節,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 10 THEN  H2."researchItem" END AS 前回拘縮足関節, 
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 11 THEN  H2."researchItem" END AS 前回拘縮その他,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 12 THEN  H2."researchItem" END AS 前回寝返り,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 13 THEN  H2."researchItem" END AS 前回起き上がり,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 14 THEN  H2."researchItem" END AS 前回座位保持,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 15 THEN  H2."researchItem" END AS 前回両足での立位,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 16 THEN  H2."researchItem" END AS 前回歩行,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 17 THEN  H2."researchItem" END AS 前回移乗,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 18 THEN  H2."researchItem" END AS 前回移動,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 19 THEN  H2."researchItem" END AS 前回立ち上がり,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 20 THEN  H2."researchItem" END AS 前回片足での立位,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 21 THEN  H2."researchItem" END AS 前回洗身,    
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 22 THEN  H2."researchItem" END AS 前回じょくそう,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 23 THEN  H2."researchItem" END AS 前回皮膚疾患,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 24 THEN  H2."researchItem" END AS 前回えん下,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 25 THEN  H2."researchItem" END AS 前回食事摂取,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 26 THEN  H2."researchItem" END AS 前回飲水,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 27 THEN  H2."researchItem" END AS 前回排尿,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 28 THEN  H2."researchItem" END AS 前回排便,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 29 THEN  H2."researchItem" END AS 前回口腔清潔,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 30 THEN  H2."researchItem" END AS 前回洗顔,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 31 THEN  H2."researchItem" END AS 前回整髪,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 32 THEN  H2."researchItem" END AS 前回つめ切り,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 33 THEN  H2."researchItem" END AS 前回上衣の着脱,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 34 THEN  H2."researchItem" END AS 前回ズボン等の着脱,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 35 THEN  H2."researchItem" END AS 前回薬の内服,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 36 THEN  H2."researchItem" END AS 前回金銭の管理,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 37 THEN  H2."researchItem" END AS 前回電話の利用,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 38 THEN  H2."researchItem" END AS 前回日常の意思決定,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 39 THEN  H2."researchItem" END AS 前回視力,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 40 THEN  H2."researchItem" END AS 前回聴力,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 41 THEN  H2."researchItem" END AS 前回意思の伝達,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 42 THEN  H2."researchItem" END AS 前回指示への反応,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 43 THEN  H2."researchItem" END AS 前回毎日の日課の理解,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 44 THEN  H2."researchItem" END AS 前回生年月日をいう,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 45 THEN  H2."researchItem" END AS 前回短期記憶,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 46 THEN  H2."researchItem" END AS 前回自分の名前をいう,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 47 THEN  H2."researchItem" END AS 前回今の季節を理解,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 48 THEN  H2."researchItem" END AS 前回場所の理解,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 49 THEN  H2."researchItem" END AS 前回被害的,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 50 THEN  H2."researchItem" END AS 前回作話,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 51 THEN  H2."researchItem" END AS 前回幻視幻聴,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 52 THEN  H2."researchItem" END AS 前回感情が不安定,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 53 THEN  H2."researchItem" END AS 前回昼夜逆転,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 54 THEN  H2."researchItem" END AS 前回暴言暴行,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 55 THEN  H2."researchItem" END AS 前回同じ話をする,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 56 THEN  H2."researchItem" END AS 前回大声を出す,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 57 THEN  H2."researchItem" END AS 前回大声を出す,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 58 THEN  H2."researchItem" END AS 前回常時の徘徊,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 59 THEN  H2."researchItem" END AS 前回落ち着きなし,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 60 THEN  H2."researchItem" END AS 前回外出して戻れない,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 61 THEN  H2."researchItem" END AS 前回一人で出たがる,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 62 THEN  H2."researchItem" END AS 前回収集癖,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 63 THEN  H2."researchItem" END AS 前回火の不始末,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 64 THEN  H2."researchItem" END AS 前回物や衣類を壊す,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 65 THEN  H2."researchItem" END AS 前回不潔行為,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 66 THEN  H2."researchItem" END AS 前回異食行動,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '06A' AND H2."remban" = 67 THEN  H2."researchItem" END AS 前回ひどい物忘れ
+    </sql>
+    <sql id="allColumns_ZenkaiNinteichosahyoChosaItem02A">
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 1 THEN  H2."researchItem" END AS 前回麻痺左上肢,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 2 THEN  H2."researchItem" END AS 前回麻痺右上肢,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 3 THEN  H2."researchItem" END AS 前回麻痺左下肢,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 4 THEN  H2."researchItem" END AS 前回麻痺右下肢,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 5 THEN  H2."researchItem" END AS 前回麻痺その他,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 6 THEN  H2."researchItem" END AS 前回拘縮肩関節,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 7 THEN  H2."researchItem" END AS 前回拘縮肘関節,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 8 THEN  H2."researchItem" END AS 前回拘縮股関節,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 9 THEN  H2."researchItem" END AS 前回拘縮膝関節,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 10 THEN  H2."researchItem" END AS 前回拘縮足関節, 
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 11 THEN  H2."researchItem" END AS 前回拘縮その他,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 12 THEN  H2."researchItem" END AS 前回寝返り,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 13 THEN  H2."researchItem" END AS 前回起き上がり,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 14 THEN  H2."researchItem" END AS 前回座位保持,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 15 THEN  H2."researchItem" END AS 前回両足での立位,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 16 THEN  H2."researchItem" END AS 前回歩行,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 17 THEN  H2."researchItem" END AS 前回移乗,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 18 THEN  H2."researchItem" END AS 前回移動,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 19 THEN  H2."researchItem" END AS 前回立ち上がり,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 20 THEN  H2."researchItem" END AS 前回片足での立位,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 21 THEN  H2."researchItem" END AS 前回洗身,    
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 22 THEN  H2."researchItem" END AS 前回じょくそう,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 23 THEN  H2."researchItem" END AS 前回皮膚疾患,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 24 THEN  H2."researchItem" END AS 前回えん下,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 25 THEN  H2."researchItem" END AS 前回食事摂取,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 26 THEN  H2."researchItem" END AS 前回飲水,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 27 THEN  H2."researchItem" END AS 前回排尿,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 28 THEN  H2."researchItem" END AS 前回排便,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 29 THEN  H2."researchItem" END AS 前回口腔清潔,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 30 THEN  H2."researchItem" END AS 前回洗顔,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 31 THEN  H2."researchItem" END AS 前回整髪,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 32 THEN  H2."researchItem" END AS 前回つめ切り,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 33 THEN  H2."researchItem" END AS 前回上衣の着脱,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 34 THEN  H2."researchItem" END AS 前回ズボン等の着脱,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 35 THEN  H2."researchItem" END AS 前回薬の内服,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 36 THEN  H2."researchItem" END AS 前回金銭の管理,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 37 THEN  H2."researchItem" END AS 前回電話の利用,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 38 THEN  H2."researchItem" END AS 前回日常の意思決定,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 39 THEN  H2."researchItem" END AS 前回視力,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 40 THEN  H2."researchItem" END AS 前回聴力,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 41 THEN  H2."researchItem" END AS 前回意思の伝達,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 42 THEN  H2."researchItem" END AS 前回指示への反応,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 43 THEN  H2."researchItem" END AS 前回毎日の日課の理解,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 44 THEN  H2."researchItem" END AS 前回生年月日をいう,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 45 THEN  H2."researchItem" END AS 前回短期記憶,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 46 THEN  H2."researchItem" END AS 前回自分の名前をいう,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 47 THEN  H2."researchItem" END AS 前回今の季節を理解,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 48 THEN  H2."researchItem" END AS 前回場所の理解,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 49 THEN  H2."researchItem" END AS 前回被害的,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 50 THEN  H2."researchItem" END AS 前回作話,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 51 THEN  H2."researchItem" END AS 前回幻視幻聴,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 52 THEN  H2."researchItem" END AS 前回感情が不安定,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 53 THEN  H2."researchItem" END AS 前回昼夜逆転,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 54 THEN  H2."researchItem" END AS 前回暴言暴行,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 55 THEN  H2."researchItem" END AS 前回同じ話をする,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 56 THEN  H2."researchItem" END AS 前回大声を出す,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 57 THEN  H2."researchItem" END AS 前回大声を出す,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 58 THEN  H2."researchItem" END AS 前回常時の徘徊,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 59 THEN  H2."researchItem" END AS 前回落ち着きなし,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 60 THEN  H2."researchItem" END AS 前回外出して戻れない,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 61 THEN  H2."researchItem" END AS 前回一人で出たがる,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 62 THEN  H2."researchItem" END AS 前回収集癖,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 63 THEN  H2."researchItem" END AS 前回火の不始末,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 64 THEN  H2."researchItem" END AS 前回物や衣類を壊す,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 65 THEN  H2."researchItem" END AS 前回不潔行為,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 66 THEN  H2."researchItem" END AS 前回異食行動,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '02A' AND H2."remban" = 67 THEN  H2."researchItem" END AS 前回ひどい物忘れ
+    </sql>
+     <sql id="allColumns_ZenkaiNinteichosahyoChosaItem99A">
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 1 THEN  H2."researchItem" END AS 前回麻痺左上肢,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 2 THEN  H2."researchItem" END AS 前回麻痺右上肢,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 3 THEN  H2."researchItem" END AS 前回麻痺左下肢,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 4 THEN  H2."researchItem" END AS 前回麻痺右下肢,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 5 THEN  H2."researchItem" END AS 前回麻痺その他,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 6 THEN  H2."researchItem" END AS 前回拘縮肩関節,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 7 THEN  H2."researchItem" END AS 前回拘縮肘関節,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 8 THEN  H2."researchItem" END AS 前回拘縮股関節,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 9 THEN  H2."researchItem" END AS 前回拘縮膝関節,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 10 THEN  H2."researchItem" END AS 前回拘縮足関節, 
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 11 THEN  H2."researchItem" END AS 前回拘縮その他,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 12 THEN  H2."researchItem" END AS 前回寝返り,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 13 THEN  H2."researchItem" END AS 前回起き上がり,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 14 THEN  H2."researchItem" END AS 前回座位保持,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 15 THEN  H2."researchItem" END AS 前回両足での立位,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 16 THEN  H2."researchItem" END AS 前回歩行,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 17 THEN  H2."researchItem" END AS 前回移乗,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 18 THEN  H2."researchItem" END AS 前回移動,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 19 THEN  H2."researchItem" END AS 前回立ち上がり,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 20 THEN  H2."researchItem" END AS 前回片足での立位,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 21 THEN  H2."researchItem" END AS 前回浴槽の出入り,    
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 22 THEN  H2."researchItem" END AS 前回洗身,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 23 THEN  H2."researchItem" END AS 前回じょくそう,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 24 THEN  H2."researchItem" END AS 前回皮膚疾患,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 25 THEN  H2."researchItem" END AS 前回持ち上げ,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 26 THEN  H2."researchItem" END AS 前回嚥下,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 27 THEN  H2."researchItem" END AS 前回尿意,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 28 THEN  H2."researchItem" END AS 前回排便,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 29 THEN  H2."researchItem" END AS 前回排尿後の後始末,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 30 THEN  H2."researchItem" END AS 回排便後の後始末,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 31 THEN  H2."researchItem" END AS 前回食事摂取,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 32 THEN  H2."researchItem" END AS 前回口腔清潔,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 33 THEN  H2."researchItem" END AS 前回洗顔,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 34 THEN  H2."researchItem" END AS 前回整髪,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 35 THEN  H2."researchItem" END AS 前回つめ切り,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 36 THEN  H2."researchItem" END AS 前回ボタンのかけはずし,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 37 THEN  H2."researchItem" END AS 前回上衣の着脱,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 38 THEN  H2."researchItem" END AS 前回ズボン等の着脱,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 39 THEN  H2."researchItem" END AS 前回靴下の着脱,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 40 THEN  H2."researchItem" END AS 前回掃除,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 41 THEN  H2."researchItem" END AS 前回薬の内服,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 42 THEN  H2."researchItem" END AS 前回金銭の管理,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 43 THEN  H2."researchItem" END AS 前回物忘れ,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 44 THEN  H2."researchItem" END AS 前回無関心,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 45 THEN  H2."researchItem" END AS 前回視力,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 46 THEN  H2."researchItem" END AS 前回聴力,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 47 THEN  H2."researchItem" END AS 前回意思の伝達,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 48 THEN  H2."researchItem" END AS 前回指示への反応,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 49 THEN  H2."researchItem" END AS 前回毎日の日課の理解,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 50 THEN  H2."researchItem" END AS 前回生年月日をいう,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 51 THEN  H2."researchItem" END AS 前回短期記憶,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 52 THEN  H2."researchItem" END AS 前回自分の名前をいう,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 53 THEN  H2."researchItem" END AS 前回今の季節を理解,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 54 THEN  H2."researchItem" END AS 前回場所の理解,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 55 THEN  H2."researchItem" END AS 前回被害的,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 56 THEN  H2."researchItem" END AS 前回作話,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 57 THEN  H2."researchItem" END AS 前回作話,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 58 THEN  H2."researchItem" END AS 前回感情が不安定,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 59 THEN  H2."researchItem" END AS 前回昼夜逆転,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 60 THEN  H2."researchItem" END AS 前回暴言暴行,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 61 THEN  H2."researchItem" END AS 前回同じ話をする,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 62 THEN  H2."researchItem" END AS 前回大声を出す,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 63 THEN  H2."researchItem" END AS 前回介護に抵抗,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 64 THEN  H2."researchItem" END AS 前回常時の徘徊,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 65 THEN  H2."researchItem" END AS 前回落ち着きなし,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 66 THEN  H2."researchItem" END AS 前回外出して戻れない,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 67 THEN  H2."researchItem" END AS 前回一人で出たがる,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 68 THEN  H2."researchItem" END AS 前回収集癖,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 69 THEN  H2."researchItem" END AS 前回火の不始末,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 70 THEN  H2."researchItem" END AS 前回物や衣類を壊す,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 71 THEN  H2."researchItem" END AS 前回不潔行為,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 72 THEN  H2."researchItem" END AS 前回異食行動,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 73 THEN  H2."researchItem" END AS 前回性的行動,
+    </sql>
+</mapper>

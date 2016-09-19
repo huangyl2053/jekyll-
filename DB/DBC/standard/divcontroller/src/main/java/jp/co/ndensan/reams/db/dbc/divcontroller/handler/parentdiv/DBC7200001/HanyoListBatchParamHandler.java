@@ -34,6 +34,7 @@ public class HanyoListBatchParamHandler {
     private static final FlexibleYear 固定年度 = new FlexibleYear("2015");
     private static final RString 導入形態_単一 = new RString("0");
     private static final RString 導入形態_広域 = new RString("1");
+    private static final RString 全て市町村 = new RString("000000");
     private final HanyoListBatchParamDiv div;
 
     /**
@@ -110,9 +111,12 @@ public class HanyoListBatchParamHandler {
         parameter.set日付編集(is日付編集);
         RString 市町村コード = RString.EMPTY;
         if (導入形態_広域.equals(div.getHdnDonyuKeitai())
-                && div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード() != null
-                && !div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().isEmpty()) {
-            市町村コード = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().value();
+                && div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード() != null) {
+            if (!div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().isEmpty()) {
+                市町村コード = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().value();
+            } else {
+                市町村コード = 全て市町村;
+            }
         }
         parameter.set保険者コード(市町村コード);
         parameter.set対象年度(div.getChushutsuJokenPanel().getDdlTaishoNendo().getSelectedValue());
@@ -160,8 +164,12 @@ public class HanyoListBatchParamHandler {
         }
         div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().setSelectedItemsByKey(編集方法);
         if (導入形態_広域.equals(div.getHdnDonyuKeitai())) {
-            div.getChushutsuJokenPanel().getCcdHokenshaList().setSelectedShichosonIfExist(
-                    new LasdecCode(restoreBatchParameterMap.getParameterValue(RString.class, new RString("保険者コード"))));
+            if (全て市町村.equals(restoreBatchParameterMap.getParameterValue(RString.class, new RString("保険者コード")))) {
+                div.getChushutsuJokenPanel().getCcdHokenshaList().loadHokenshaList();
+            } else {
+                div.getChushutsuJokenPanel().getCcdHokenshaList().setSelectedShichosonIfExist(
+                        new LasdecCode(restoreBatchParameterMap.getParameterValue(RString.class, new RString("保険者コード"))));
+            }
         }
         div.getChushutsuJokenPanel().getDdlTaishoNendo().setSelectedValue(
                 restoreBatchParameterMap.getParameterValue(RString.class, new RString("対象年度")));

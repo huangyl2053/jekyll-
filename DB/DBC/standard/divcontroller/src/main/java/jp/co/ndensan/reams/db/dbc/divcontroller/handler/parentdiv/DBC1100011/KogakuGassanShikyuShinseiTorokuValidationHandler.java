@@ -41,33 +41,33 @@ public class KogakuGassanShikyuShinseiTorokuValidationHandler {
 
     private ValidationDictionary create入力内容を確定するDictionary() {
         return new ValidationDictionaryBuilder()
-                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.老人所得区分必須項目)
-                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.計算期間年度内範囲制約)
-                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.計算期間加入期間内範囲制約)
-                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.資格喪失1)
-                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.資格喪失2)
-                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.後期保険者番号制約)
-                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.国保保険者番号桁数が不正)
-                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.後期保険者番号桁数が不正)
-                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.後期被保険者番号桁数が不正)
-                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.国保被保険者番号桁数が不正)
-                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.被保険者証番号桁数が不正)
-                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.介護日付が不正)
-                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.被保日付が不正)
-                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.国保日付が不正)
-                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.後期日付が不正)
-                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.開始計算期間1)
-                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.開始計算期間2)
-                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.開始計算期間3)
-                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.開始計算期間4)
-                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.開始計算期間5)
-                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.開始計算期間6)
-                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.終了計算期間1)
-                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.終了計算期間2)
-                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.終了計算期間3)
-                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.終了計算期間4)
-                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.終了計算期間5)
-                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.終了計算期間6)
+                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.老人所得区分必須項目, div.getDdlOver70ShotokuKubun())
+                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.計算期間年度内範囲制約, div.getTxtTaishoKeisanKikanYMD())
+                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.計算期間加入期間内範囲制約, div.getTxtTaishoKeisanKikanYMD())
+                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.資格喪失1, div.getTxtShikakuSoshitsuYMD())
+                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.資格喪失2, div.getTxtShikakuSoshitsuYMD())
+                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.後期保険者番号制約, div.getTxtKokiHokenshaNo())
+                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.国保保険者番号桁数が不正, div.getTxtKokuhoHokenshaNo())
+                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.後期保険者番号桁数が不正, div.getTxtKokiHokenshaNo())
+                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.後期被保険者番号桁数が不正, div.getTxtKokiHihokenshaNo())
+                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.国保被保険者番号桁数が不正, div.getTxtKokuhoHikonenshaShoKigo())
+                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.被保険者証番号桁数が不正, div.getTxtKokuhoHikonenshaShoNo())
+                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.介護日付が不正, div.getTxtKanyuKikanYMD())
+                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.被保日付が不正, div.getTxtTaishoKeisanKikanYMD())
+                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.国保日付が不正, div.getTxtKokuhoKanyuKikanYMD())
+                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.後期日付が不正, div.getTxtKokiKanyuKikanYMD())
+                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.開始計算期間1, div.getTxtTaishoKeisanKikanYMD())
+                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.開始計算期間2, div.getTxtTaishoKeisanKikanYMD())
+                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.開始計算期間3, div.getTxtTaishoKeisanKikanYMD())
+                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.開始計算期間4, div.getTxtTaishoKeisanKikanYMD())
+                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.開始計算期間5, div.getTxtTaishoKeisanKikanYMD())
+                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.開始計算期間6, div.getTxtTaishoKeisanKikanYMD())
+                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.終了計算期間1, div.getTxtTaishoKeisanKikanYMD())
+                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.終了計算期間2, div.getTxtTaishoKeisanKikanYMD())
+                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.終了計算期間3, div.getTxtTaishoKeisanKikanYMD())
+                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.終了計算期間4, div.getTxtTaishoKeisanKikanYMD())
+                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.終了計算期間5, div.getTxtTaishoKeisanKikanYMD())
+                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.終了計算期間6, div.getTxtTaishoKeisanKikanYMD())
                 .build();
     }
 
@@ -83,8 +83,9 @@ public class KogakuGassanShikyuShinseiTorokuValidationHandler {
 
     private ValidationDictionary create加入情報を確定するDictionary() {
         return new ValidationDictionaryBuilder()
-                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.保険加入期間が不正)
-                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.証明書整理番号桁数が不正)
+                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.保険加入期間が不正, div.getTxtKanyuRirekiKanyuKikanYMD())
+                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.証明書整理番号桁数が不正,
+                        div.getTxtJikoFutangakuShomeishoSeiriBango())
                 .add(KogakuGassanShikyuShinseiTorokuValidationMessage.証明書整理番号既に存在).build();
     }
 
@@ -100,6 +101,8 @@ public class KogakuGassanShikyuShinseiTorokuValidationHandler {
 
     private ValidationDictionary create申請情報を保存するDictionary() {
         return new ValidationDictionaryBuilder()
-                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.医療支給申請書整理番号入力桁不足).build();
+                .add(KogakuGassanShikyuShinseiTorokuValidationMessage.医療支給申請書整理番号入力桁不足,
+                        div.getTxtIryoShikyuShinseishoSeiriBango2(), div.getTxtIryoShikyuShinseishoSeiriBango3(),
+                        div.getTxtIryoShikyuShinseishoSeiriBango4()).build();
     }
 }

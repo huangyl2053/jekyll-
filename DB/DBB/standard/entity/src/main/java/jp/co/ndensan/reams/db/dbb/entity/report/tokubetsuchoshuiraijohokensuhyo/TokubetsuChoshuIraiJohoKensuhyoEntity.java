@@ -27,7 +27,6 @@ public class TokubetsuChoshuIraiJohoKensuhyoEntity {
     private RString left金額1;
     private RString left金額2;
     private Code right特別徴収義務者コード;
-    private RString right年金保険者名称;
     private int right件数;
     private RString right金額1;
     private RString right金額2;

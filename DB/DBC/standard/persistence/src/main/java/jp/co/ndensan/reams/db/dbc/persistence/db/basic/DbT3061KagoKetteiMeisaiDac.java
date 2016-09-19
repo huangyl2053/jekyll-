@@ -6,6 +6,7 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3060KagoKetteiShukei.torikomiYM;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3061KagoKetteiMeisai;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3061KagoKetteiMeisai.hokenshaKubun;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3061KagoKetteiMeisai.rirekiNo;
@@ -65,23 +66,23 @@ public class DbT3061KagoKetteiMeisaiDac implements ISaveable<DbT3061KagoKetteiMe
     /**
      * selectByKey。
      *
-     * @param 取扱年月 ToriatsukaiYM
+     * @param 取込年月 ToriatsukaiYM
      * @param 保険者区分 HokenshaKubun
      * @return DbT3061KagoKetteiMeisaiEntity
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
     @Transaction
     public List<DbT3061KagoKetteiMeisaiEntity> selectByKey(
-            FlexibleYearMonth 取扱年月,
+            FlexibleYearMonth 取込年月,
             RString 保険者区分) throws NullPointerException {
-        requireNonNull(取扱年月, UrSystemErrorMessages.値がnull.getReplacedMessage("取扱年月"));
+        requireNonNull(取込年月, UrSystemErrorMessages.値がnull.getReplacedMessage("取込年月"));
         requireNonNull(保険者区分, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者区分"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
                 table(DbT3061KagoKetteiMeisai.class).
                 where(and(
-                                eq(toriatsukaiYM, 取扱年月),
+                                eq(torikomiYM, 取込年月),
                                 eq(hokenshaKubun, 保険者区分))).
                 toList(DbT3061KagoKetteiMeisaiEntity.class);
     }

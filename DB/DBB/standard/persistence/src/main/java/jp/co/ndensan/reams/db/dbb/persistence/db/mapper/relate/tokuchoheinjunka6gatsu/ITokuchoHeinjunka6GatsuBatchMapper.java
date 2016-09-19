@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchoheinjunka6gatsu;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt35001.TokuchoHeinjunka6GatsuProcessParameter;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbbbt35001.TokuchoHeinjunka6GatsuMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchFukaJohoResult;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishogaiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigofukatokuchoheijunka6batch.TokuchoHeijunkaRokuBatchTaishogaiTempEntity;
@@ -23,10 +23,10 @@ public interface ITokuchoHeinjunka6GatsuBatchMapper {
     /**
      * 平準化前賦課Temp情報を取得するメソッドです。
      *
-     * @param parameter TokuchoHeinjunka6GatsuProcessParameter
+     * @param parameter TokuchoHeinjunka6GatsuMyBatisParameter
      * @return List<FukaJohoTmpEntity>
      */
-    List<FukaJohoTmpEntity> get平準化前賦課Temp(TokuchoHeinjunka6GatsuProcessParameter parameter);
+    List<FukaJohoTmpEntity> get平準化前賦課Temp(TokuchoHeinjunka6GatsuMyBatisParameter parameter);
 
     /**
      * 平準化前賦課Temp情報を取得するメソッドです。
@@ -52,14 +52,23 @@ public interface ITokuchoHeinjunka6GatsuBatchMapper {
     /**
      * 対象者データの情報を取得するメソッドです。
      *
+     * @param parameter TokuchoHeinjunka6GatsuProcessParameter
      * @return List<TokuchoHeijunkaRokuBatchTaishoshaEntity>
      */
-    List<TokuchoHeijunkaRokuBatchTaishoshaEntity> get対象者データ();
+    List<TokuchoHeijunkaRokuBatchTaishoshaEntity> get対象者データ(TokuchoHeinjunka6GatsuMyBatisParameter parameter);
 
     /**
      * get対象外データの情報を取得するメソッドです。
      *
+     * @param parameter TokuchoHeinjunka6GatsuProcessParameter
      * @return List<TokuchoHeijunkaRokuBatchTaishogaiEntity>
      */
-    List<TokuchoHeijunkaRokuBatchTaishogaiEntity> get対象外データ();
+    List<TokuchoHeijunkaRokuBatchTaishogaiEntity> get対象外データ(TokuchoHeinjunka6GatsuMyBatisParameter parameter);
+
+    /**
+     * 処理日付管理テーブルを更新するメソッドです。
+     *
+     * @param parameter TokuchoHeinjunka6GatsuProcessParameter
+     */
+    void updateShoriDateKanri(TokuchoHeinjunka6GatsuMyBatisParameter parameter);
 }

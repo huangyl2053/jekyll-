@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
@@ -268,7 +269,8 @@ public class KanendoFukaHandler {
                 return 期月;
             }
         }
-        return null;
+        RDate sysTime = RDate.getNowDate();
+        return 期月リスト.get月の期(Tsuki.toValue(new RString(sysTime.getMonthValue()).padZeroToLeft(NUM_2)));
     }
 
     private RString get期名(RString 月, RString 期) {

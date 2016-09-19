@@ -731,7 +731,7 @@ public class TokubetsuChoshuJohoAppurodoHandler {
         int チェック日数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBB.取込ファイルチェック期間,
                 システム日付, SubGyomuCode.DBB介護賦課).toString());
         RDate 管理作成年月日 = new RDate(ファイルのデータレコード.substring(INT_9, INT_17).toString());
-        int 取込日の差 = 管理作成年月日.getBetweenDays(システム日付);
+        int 取込日の差 = Math.abs(管理作成年月日.getBetweenDays(システム日付));
         if (チェック日数 < 取込日の差) {
             throw new ApplicationException(取込日の差のチェック_MSG.toString());
         }

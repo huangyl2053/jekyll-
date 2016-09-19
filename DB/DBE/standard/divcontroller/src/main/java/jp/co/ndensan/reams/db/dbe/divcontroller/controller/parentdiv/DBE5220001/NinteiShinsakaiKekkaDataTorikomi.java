@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5220001;
 
 import java.io.File;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.ninteishinsakaikekkadatatorikomi.ShinsakaiKekkaDataTorikomiBatchParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE518002.DBE518002_NinteiShinsaIraiIfTorikomiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5220001.NinteiShinsakaiKekkaDataTorikomiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5220001.NinteiShinsakaiKekkaDataTorikomiHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5220001.NinteiShinsakaiKekkaDataTorikomiValidationHandler;
@@ -78,7 +78,7 @@ public class NinteiShinsakaiKekkaDataTorikomi {
      * @param div 画面情報
      * @return NinteiShinsakaiKekkaDataTorikomiDiv
      */
-    public ResponseData<ShinsakaiKekkaDataTorikomiBatchParameter> onClick_Jikkou(NinteiShinsakaiKekkaDataTorikomiDiv div) {
+    public ResponseData<DBE518002_NinteiShinsaIraiIfTorikomiParameter> onClick_Jikkou(NinteiShinsakaiKekkaDataTorikomiDiv div) {
         return ResponseData.of(getHandler(div).setBatchParameter()).respond();
     }
 

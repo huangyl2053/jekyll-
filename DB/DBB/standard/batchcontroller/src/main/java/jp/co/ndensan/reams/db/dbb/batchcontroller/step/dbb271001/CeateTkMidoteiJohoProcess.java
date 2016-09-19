@@ -53,19 +53,19 @@ public class CeateTkMidoteiJohoProcess extends BatchProcessBase<MidoteiTempEntit
 
     @Override
     protected void process(MidoteiTempEntity entity) {
-        DbT2019TokuchoMidoteiJohoEntity 未同定情報 = new DbT2019TokuchoMidoteiJohoEntity();
-        未同定情報.setShoriNendo(entity.getShoriNendo());
-        未同定情報.setKisoNenkinNo(entity.getKisoNenkinNo());
-        未同定情報.setNenkinCode(entity.getNenkinCode());
-        未同定情報.setHosokuM(entity.getHosokuTsuki());
-        未同定情報.setKaishiM(parameter.get開始月());
         if (!RString.isNullOrEmpty(entity.getShikibetsuCode())) {
+            DbT2019TokuchoMidoteiJohoEntity 未同定情報 = new DbT2019TokuchoMidoteiJohoEntity();
+            未同定情報.setShoriNendo(entity.getShoriNendo());
+            未同定情報.setKisoNenkinNo(entity.getKisoNenkinNo());
+            未同定情報.setNenkinCode(entity.getNenkinCode());
+            未同定情報.setHosokuM(entity.getHosokuTsuki());
+            未同定情報.setKaishiM(parameter.get開始月());
             未同定情報.setShikibetsuCode(new ShikibetsuCode(entity.getShikibetsuCode()));
+            未同定情報.setFuichiRiyuCode(entity.getFuitchiRiyuCode());
+            未同定情報.setKakuninJokyoKbn(確認状況区分_未同定);
+            未同定情報.setState(EntityDataState.Added);
+            特徴未同定情報tableWriter.insert(未同定情報);
         }
-        未同定情報.setFuichiRiyuCode(entity.getFuitchiRiyuCode());
-        未同定情報.setKakuninJokyoKbn(確認状況区分_未同定);
-        未同定情報.setState(EntityDataState.Added);
-        特徴未同定情報tableWriter.insert(未同定情報);
     }
 
 }

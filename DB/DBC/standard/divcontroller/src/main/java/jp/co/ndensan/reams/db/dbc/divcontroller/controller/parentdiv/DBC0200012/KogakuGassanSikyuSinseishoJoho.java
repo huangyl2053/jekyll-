@@ -54,8 +54,10 @@ public class KogakuGassanSikyuSinseishoJoho {
      * @return ResponseData DBC110060_KogakugassanShikyushinseishoOutParameter
      */
     public ResponseData<DBC110060_KogakugassanShikyushinseishoOutParameter> onClick_Execute(KogakuGassanSikyuSinseishoJohoDiv div) {
-        再処理区分 = div.getCcdKokuhorenJohoSofu().get再処理区分のValue();
-        処理年月 = div.getCcdKokuhorenJohoSofu().get処理年月のValue().getYearMonth();
+        KokuhorenDataSofuViewState parmater = ViewStateHolder.get(ViewStateHolderName.国保連取込情報,
+                KokuhorenDataSofuViewState.class);
+        再処理区分 = parmater.get再処理区分();
+        処理年月 = parmater.get処理年月();
         DBC110060_KogakugassanShikyushinseishoOutParameter parameter = new DBC110060_KogakugassanShikyushinseishoOutParameter();
         parameter.set再処理区分(再処理区分);
         parameter.set処理年月(処理年月);

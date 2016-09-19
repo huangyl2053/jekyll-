@@ -46,7 +46,7 @@ public class SelectShotokuJohoProcess extends BatchProcessBase<RString> {
 
     @Override
     protected void initialize() {
-        // TODO  csvReaderPath = parameter.getPath().concat(KEY_分離文字).concat(parameter.getFileName());
+        // TODO  batchParameterのパラメータは問題があります、csvReaderPath = parameter.getPath().concat(KEY_分離文字).concat(parameter.getFileName());
         csvReaderPath = Path.combinePath(parameter.get共有ファイルID(), parameter.get共有ファイル名());
     }
 
@@ -79,10 +79,6 @@ public class SelectShotokuJohoProcess extends BatchProcessBase<RString> {
             所得情報一時tableWriter.insert(tempEntity);
         }
 
-    }
-
-    @Override
-    protected void afterExecute() {
     }
 
     private boolean 市町村コードチェック(RString 市町村コードcsv, LasdecCode 市町村コードentity) {

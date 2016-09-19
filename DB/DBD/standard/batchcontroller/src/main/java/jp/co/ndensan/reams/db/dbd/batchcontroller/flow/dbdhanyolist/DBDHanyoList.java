@@ -23,8 +23,14 @@ public class DBDHanyoList extends BatchFlowBase<DBDHanyoListParameter> {
         if ("汎用リスト_施設入退所".equals(getParameter().getBatchKind().toString())) {
             executeStep("汎用リスト出力_施設入退所");
         }
+        if ("汎用リスト_利用者負担額減免".equals(getParameter().getBatchKind().toString())) {
+            executeStep("汎用リスト出力_利用者負担額減免");
+        }
         if ("汎用リスト_社会福祉法人軽減".equals(getParameter().getBatchKind().toString())) {
             executeStep("汎用リスト出力_社会福祉法人軽減");
+        }
+        if ("汎用リスト_特別地域加算減免".equals(getParameter().getBatchKind().toString())) {
+            executeStep("汎用リスト出力_特別地域加算減免");
         }
         if ("汎用リスト_国保".equals(getParameter().getBatchKind().toString())) {
             executeStep("汎用リスト出力_国保");
@@ -45,9 +51,19 @@ public class DBDHanyoList extends BatchFlowBase<DBDHanyoListParameter> {
         return otherBatchFlow(new RString("DBD710150_HanyoListShisetsuNyutaisho"), SubGyomuCode.DBD介護受給, getParameter().getShisetsuNyutaishoBatchParameter()).define();
     }
 
+    @Step("汎用リスト出力_利用者負担額減免")
+    protected IBatchFlowCommand callHanyoListRiyoshaFutanGakuGengakuFlow() {
+        return otherBatchFlow(new RString("DBD710040_HanyoListRiyoshaFutanGakuGengaku"), SubGyomuCode.DBD介護受給, getParameter().getRiyoshaFutanGakuGengakuParameter()).define();
+    }
+
     @Step("汎用リスト出力_社会福祉法人軽減")
     protected IBatchFlowCommand callHanyoListShakaiFukushiHojinKeigenFlow() {
         return otherBatchFlow(new RString("DBD710060_HanyoListShakaiFukushiHojinKeigen"), SubGyomuCode.DBD介護受給, getParameter().getShakaiFukushiHojinKeigenParameter()).define();
+    }
+
+    @Step("汎用リスト出力_特別地域加算減免")
+    protected IBatchFlowCommand callHanyoListTokubetsuChiikiKasanGemmenFlow() {
+        return otherBatchFlow(new RString("DBD710070_HanyoListTokubetsuChiikiKasanGemmen"), SubGyomuCode.DBD介護受給, getParameter().getTokubetsuChiikiKasanGemmenParameter()).define();
     }
 
     @Step("汎用リスト出力_国保")
