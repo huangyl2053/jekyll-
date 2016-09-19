@@ -61,9 +61,7 @@ public class KyufuJissekiKihonJouhouMainHandler {
     /**
      * 画面の初期化メソッドです。
      *
-     * @param 被保険者番号 被保険者番号
      * @param サービス提供年月 サービス提供年月
-     * @param 整理番号 整理番号
      * @param 識別番号検索キー 識別番号検索キー
      * @param 識別番号管理データ 識別番号管理データ
      * @param 給付実績基本情報 給付実績基本情報
@@ -72,12 +70,10 @@ public class KyufuJissekiKihonJouhouMainHandler {
      * @param 事業所名称 事業所名称
      * @param 給付分類区分 給付分類区分
      */
-    public void onLoad(HihokenshaNo 被保険者番号, FlexibleYearMonth サービス提供年月,
-            RString 整理番号, NyuryokuShikibetsuNo 識別番号検索キー, List<ShikibetsuNoKanri> 識別番号管理データ,
+    public void onLoad(FlexibleYearMonth サービス提供年月, NyuryokuShikibetsuNo 識別番号検索キー,
+            List<ShikibetsuNoKanri> 識別番号管理データ,
             List<KyufujissekiKihon> 給付実績基本情報, List<KyufuJissekiHedajyoho2> 事業者番号リスト,
             KyufujissekiKihon 給付実績基本, RString 事業所名称, RString 給付分類区分) {
-        set給付実績基本情報(被保険者番号,
-                サービス提供年月, 整理番号, 識別番号検索キー);
         if (識別番号管理データ != null && !識別番号管理データ.isEmpty()) {
             set各ボタン活性非活性設定(識別番号管理データ.get(0), サービス提供年月, 識別番号検索キー);
         }
