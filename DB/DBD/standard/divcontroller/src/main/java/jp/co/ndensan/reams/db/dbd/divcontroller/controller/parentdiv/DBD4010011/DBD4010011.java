@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD4010011;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd4010011.ShogaishaKojoTaishoshaHaakuKekkaIchiranParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD221010.DBD221010_ShogaishaKojoTaishoshaHaakuParameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4010011.DBD4010011Div;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD4010011.DBD4010011Handler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD4010011.DBD4010011ValidationHandler;
@@ -58,8 +58,8 @@ public class DBD4010011 {
      * @param div コントロールdiv
      * @return ResponseData<ShogaishaKojoTaishoshaHaakuKekkaIchiranParameter>
      */
-    public ResponseData<ShogaishaKojoTaishoshaHaakuKekkaIchiranParameter> onClick_btnJiKou(DBD4010011Div div) {
-        ShogaishaKojoTaishoshaHaakuKekkaIchiranParameter parameter = getHandler(div).getParameter();
+    public ResponseData<DBD221010_ShogaishaKojoTaishoshaHaakuParameter> onClick_btnJiKou(DBD4010011Div div) {
+        DBD221010_ShogaishaKojoTaishoshaHaakuParameter parameter = getHandler(div).getParameter();
         return ResponseData.of(parameter).respond();
     }
 

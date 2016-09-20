@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.dbd4010011;
+package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD4010011.ShogaishaKojoTaishoshaHaakuKekkaIchiranCsvProcess;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD4010011.ShogaishaKojoTaishoshaHaakuKekkaIchiranProcess;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd4010011.ShogaishaKojoTaishoshaHaakuKekkaIchiranParameter;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD221010.ShogaishaKojoTaishoshaHaakuKekkaIchiranCsvProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD221010.ShogaishaKojoTaishoshaHaakuKekkaIchiranProcess;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD221010.DBD221010_ShogaishaKojoTaishoshaHaakuParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd4010011.ShogaishaKojoTaishoshaHaakuKekkaIchiranProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBD-3850-030 liuwei2
  */
-public class ShogaishaKojoTaishoshaHaakuKekkaIchiranFlow extends BatchFlowBase<ShogaishaKojoTaishoshaHaakuKekkaIchiranParameter> {
+public class DBD221010_ShogaishaKojoTaishoshaHaaku extends BatchFlowBase<DBD221010_ShogaishaKojoTaishoshaHaakuParameter> {
 
     private static final String 減免減額申請更新 = "update減免減額申請List";
     private static final String CSV_PROCESS = "csvProcess";
@@ -54,7 +54,7 @@ public class ShogaishaKojoTaishoshaHaakuKekkaIchiranFlow extends BatchFlowBase<S
     }
 
     private ShogaishaKojoTaishoshaHaakuKekkaIchiranProcessParameter createProcessParameter() {
-        ShogaishaKojoTaishoshaHaakuKekkaIchiranParameter parameter = getParameter();
+        DBD221010_ShogaishaKojoTaishoshaHaakuParameter parameter = getParameter();
         ShogaishaKojoTaishoshaHaakuKekkaIchiranProcessParameter processParameter = new ShogaishaKojoTaishoshaHaakuKekkaIchiranProcessParameter();
         processParameter.set基準日(parameter.get基準日());
         processParameter.set対象年度(parameter.get対象年度());
