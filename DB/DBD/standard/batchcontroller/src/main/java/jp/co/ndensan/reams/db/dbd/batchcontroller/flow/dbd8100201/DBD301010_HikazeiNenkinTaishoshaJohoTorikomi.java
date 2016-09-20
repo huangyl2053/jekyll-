@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd8100201.NennkinnBanngo
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd8100201.SeinenngappiCsvProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd8100201.SyoriHidukeKanriMasterUpdateProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd8100201.TorikomiProcess;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd8100201.HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD301010.DBD301010_HikazeiNenkinTaishoshaJohoTorikomiParameter;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd8100202.HikazeNenkinTaishoshaDouteiBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBD-4910-040 x_lilh
  */
-public class HikazeiNennkinTaishouSyaJohoTorikomiFlow extends BatchFlowBase<HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter> {
+public class DBD301010_HikazeiNenkinTaishoshaJohoTorikomi extends BatchFlowBase<DBD301010_HikazeiNenkinTaishoshaJohoTorikomiParameter> {
 
     /**
      * 非課税年金対象者同定フロー
@@ -174,7 +174,7 @@ public class HikazeiNennkinTaishouSyaJohoTorikomiFlow extends BatchFlowBase<Hika
     }
 
     private HikazeNenkinTaishoshaDouteiBatchParameter createHikazeNenkinTaishoshaDouteiBatchParameter() {
-        HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter batchParameter = getParameter();
+        DBD301010_HikazeiNenkinTaishoshaJohoTorikomiParameter batchParameter = getParameter();
         HikazeNenkinTaishoshaDouteiBatchParameter subParameter = new HikazeNenkinTaishoshaDouteiBatchParameter();
         subParameter.set年度(batchParameter.get処理年度());
         subParameter.set対象月(batchParameter.get対象月());

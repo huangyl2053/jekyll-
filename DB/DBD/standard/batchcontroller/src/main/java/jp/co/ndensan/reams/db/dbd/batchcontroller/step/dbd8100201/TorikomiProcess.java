@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.flow.dbd8100201.HikazeiNennkinTaishouSyaJohoTorikomiFlow;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.flow.dbd8100201.DBD301010_HikazeiNenkinTaishoshaJohoTorikomi;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100201.TorikomiProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100201.TorikomiCsvDataEntity;
@@ -201,7 +201,7 @@ public class TorikomiProcess extends BatchProcessBase<RString> {
         try {
             fileList = SharedFile.searchSharedFile(ファイル名);
         } catch (Exception e) {
-            Logger.getLogger(HikazeiNennkinTaishouSyaJohoTorikomiFlow.class.getName()).log(Level.SEVERE, null, e);
+            Logger.getLogger(DBD301010_HikazeiNenkinTaishoshaJohoTorikomi.class.getName()).log(Level.SEVERE, null, e);
         }
         if (!fileList.isEmpty()) {
             dataList.addAll(fileList);

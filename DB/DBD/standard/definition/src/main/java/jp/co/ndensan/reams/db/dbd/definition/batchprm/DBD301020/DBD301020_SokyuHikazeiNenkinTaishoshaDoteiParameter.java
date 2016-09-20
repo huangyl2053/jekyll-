@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd8100203;
+package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD301020;
 
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100203.SokyuuFuicchiCsvProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100203.SokyuuGaitouIchirannCsvProcessParameter;
@@ -23,7 +23,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class SokyuHikazeiNenkinBatchParameter extends BatchParameterBase {
+public class DBD301020_SokyuHikazeiNenkinTaishoshaDoteiParameter extends BatchParameterBase {
 
     private static final String TAISHOUNENDO = "taishouNendo";
     private static final String SHORIKUBUNN = "shoriKubunn";

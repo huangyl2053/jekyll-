@@ -16,8 +16,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import jp.co.ndensan.reams.db.dbd.business.core.hikazeinenkintaishoshajoho.HikazeiNenkinTaishoshaJohoBusiness;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd8100201.HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd8100203.SokyuHikazeiNenkinBatchParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD301010.DBD301010_HikazeiNenkinTaishoshaJohoTorikomiParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD301020.DBD301020_SokyuHikazeiNenkinTaishoshaDoteiParameter;
 import jp.co.ndensan.reams.db.dbd.definition.core.syorijyoutaicode.SyoriJyoutaiCode;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
@@ -366,11 +366,11 @@ public class HikazeiNenkinTaishoshaJohoHandler {
      * @param 構成市町村コードリスト List<RString>
      * @return HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter
      */
-    public HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter createDBD301010BatchParamter(
+    public DBD301010_HikazeiNenkinTaishoshaJohoTorikomiParameter createDBD301010BatchParamter(
             HikazeiNenkinTaishoshaJohoDiv div,
             List<RString> 構成市町村コードリスト) {
 
-        HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter parameter = new HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter();
+        DBD301010_HikazeiNenkinTaishoshaJohoTorikomiParameter parameter = new DBD301010_HikazeiNenkinTaishoshaJohoTorikomiParameter();
 
         parameter.set処理年度(new FlexibleYear(div.getDdlShoriNendo().getSelectedKey()));
         parameter.set処理区分(div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getHdnShoriCode());
@@ -398,10 +398,10 @@ public class HikazeiNenkinTaishoshaJohoHandler {
      * @param div JissiJyokyohyoDiv
      * @return SokyuHikazeiNenkinBatchParameter
      */
-    public SokyuHikazeiNenkinBatchParameter createDBD301020BatchParamter(
+    public DBD301020_SokyuHikazeiNenkinTaishoshaDoteiParameter createDBD301020BatchParamter(
             HikazeiNenkinTaishoshaJohoDiv div) {
 
-        SokyuHikazeiNenkinBatchParameter parameter = new SokyuHikazeiNenkinBatchParameter();
+        DBD301020_SokyuHikazeiNenkinTaishoshaDoteiParameter parameter = new DBD301020_SokyuHikazeiNenkinTaishoshaDoteiParameter();
 
         parameter.set処理年度(new FlexibleYear(new RString("9999")));
         parameter.set処理区分(new RString("9"));
