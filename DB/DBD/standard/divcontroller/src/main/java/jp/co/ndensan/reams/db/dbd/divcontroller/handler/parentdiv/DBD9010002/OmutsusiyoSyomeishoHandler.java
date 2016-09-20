@@ -44,7 +44,7 @@ public class OmutsusiyoSyomeishoHandler {
     private static final RString DB = new RString("DB");
     private static final RString 帳票分類ID = new RString("DBD100029_OmutsuShoumeisho");
     private RString 表示対象のデータ区分 = RString.EMPTY;
-    private static final RString 完了メッセージメイン = new RString("おむつ使用証明書の作成を完了しました。");
+
     private final OmutsusiyoSyomeishoDiv div;
 
     /**
@@ -133,7 +133,5 @@ public class OmutsusiyoSyomeishoHandler {
         param.set発行年月日(new FlexibleDate(div.getPanelShosaiEria().getTxtSakuseiBi().getValue().toDateString()));
         param.set被保険者番号(被保険者番号);
         manager.updateIryohikojyo(param);
-        div.getCcdKaigoKanryoMessage().setMessage(完了メッセージメイン, 被保険者番号.value(),
-                div.getPanelKakuninsho().getCcdKaigoAtenaInfo().get氏名漢字(), true);
     }
 }
