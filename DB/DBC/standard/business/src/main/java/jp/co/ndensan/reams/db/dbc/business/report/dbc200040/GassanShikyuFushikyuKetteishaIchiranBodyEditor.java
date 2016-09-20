@@ -92,7 +92,7 @@ public class GassanShikyuFushikyuKetteishaIchiranBodyEditor
             source.listCerter_4 = 口座払;
         }
         if (区分_1.equals(内部帳票文字切れ制御)) {
-            source.listLower_1 = getColumnValue(entity.get住所()).substringReturnAsPossible(0, INT_15);
+//            source.listLower_1 = getColumnValue(entity.get住所()).substringReturnAsPossible(0, INT_15);
         } else {
             source.listLower_1 = アステリスク_15;
         }
@@ -113,7 +113,7 @@ public class GassanShikyuFushikyuKetteishaIchiranBodyEditor
             source.listUpper_5 = entity.get金融機関名称().concat(スペース).concat(entity.get支店名称());
         }
         if (区分_1.equals(内部帳票文字切れ制御) && null != entity.get被保険者氏名()) {
-            source.listUpper_1 = entity.get被保険者氏名().substringReturnAsPossible(0, INT_15);
+//            source.listUpper_1 = entity.get被保険者氏名().substringReturnAsPossible(0, INT_15);
         } else {
             source.listUpper_1 = アステリスク_15;
         }
