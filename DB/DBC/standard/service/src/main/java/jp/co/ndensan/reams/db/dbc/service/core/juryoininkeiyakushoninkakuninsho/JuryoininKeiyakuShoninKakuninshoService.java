@@ -119,7 +119,7 @@ public class JuryoininKeiyakuShoninKakuninshoService {
         if (entity.get償還受領委任契約者().getKetteiYMD() != null) {
             利用者向けEntity.set承認年月日(getWarekiYmd(entity.get償還受領委任契約者().getKetteiYMD()));
         }
-        if (ZERO.equals(entity.get償還受領委任契約者().getShoninKekkaTsuchiSaiHakkoKubun())) {
+        if (ZERO.equals(entity.get償還受領委任契約者().getShoninKekkaKubun())) {
             利用者向けEntity.set不承認理由(entity.get償還受領委任契約者().getFuShoninRiyu());
         }
         利用者向けEntity.set給付の種類(edit契約サービス種類(entity.get償還受領委任契約者().getKeiyakuServiceShurui()));
@@ -165,7 +165,7 @@ public class JuryoininKeiyakuShoninKakuninshoService {
         } else if (keiyakuJigyoshaYubinNo != null) {
             事業者用Entity.set郵便番号(keiyakuJigyoshaYubinNo.value());
         }
-        if (sofusakiJusho != null) {
+        if (sofusakiJusho != null && !sofusakiJusho.isEmpty()) {
             事業者用Entity.set住所Text(sofusakiJusho.value());
         } else if (keiyakuJigyoshaJusho != null) {
             事業者用Entity.set住所Text(keiyakuJigyoshaJusho.value());
@@ -188,7 +188,7 @@ public class JuryoininKeiyakuShoninKakuninshoService {
         if (entity.get償還受領委任契約者().getKetteiYMD() != null) {
             事業者用Entity.set承認年月日(getWarekiYmd(entity.get償還受領委任契約者().getKetteiYMD()));
         }
-        if (ZERO.equals(entity.get償還受領委任契約者().getShoninKekkaTsuchiSaiHakkoKubun())) {
+        if (ZERO.equals(entity.get償還受領委任契約者().getShoninKekkaKubun())) {
             事業者用Entity.set不承認理由(entity.get償還受領委任契約者().getFuShoninRiyu());
         }
         事業者用Entity.set給付の種類(edit契約サービス種類(entity.get償還受領委任契約者().getKeiyakuServiceShurui()));

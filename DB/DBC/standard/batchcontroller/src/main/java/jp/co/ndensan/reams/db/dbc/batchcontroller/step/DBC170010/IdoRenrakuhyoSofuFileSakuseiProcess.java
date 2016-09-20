@@ -9,6 +9,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenSofuKokanJohoShikibetsuBango;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.RecordShubetsu;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.ServiceCode_IdoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhoreninterface.ConfigKeysKokuhorenSofu;
@@ -160,7 +161,7 @@ public class IdoRenrakuhyoSofuFileSakuseiProcess extends BatchProcessBase<SogoJi
         eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
                 .setDelimiter(コンマ)
-                .setEnclosure(ダブル引用符)
+                .setEnclosure(RString.EMPTY)
                 .setEncode(文字コード)
                 .setNewLine(NewLine.CRLF)
                 .hasHeader(false)
@@ -230,7 +231,7 @@ public class IdoRenrakuhyoSofuFileSakuseiProcess extends BatchProcessBase<SogoJi
         ServicecodeIdoRenrakuhyoOutDataEntity dataEntity = new ServicecodeIdoRenrakuhyoOutDataEntity();
         dataEntity.setレコード種別(RecordShubetsu.データレコード.getコード());
         dataEntity.setレコード番号_連番(new RString(レコード番号));
-        dataEntity.set交換情報識別番号(ConfigKeysKokuhorenSofu.総合事業分サービスコード異動連絡票情報.getコード());
+        dataEntity.set交換情報識別番号(KokuhorenSofuKokanJohoShikibetsuBango.総合事業分サービスコード異動連絡票情報.getコード());
         dataEntity.set異動年月日(trimRString(new RString(entity.getIdoYMD().toString())));
         dataEntity.set異動区分コード(trimRString(entity.getIdoKubunCode()));
         dataEntity.set異動事由(異動事由);
@@ -262,8 +263,8 @@ public class IdoRenrakuhyoSofuFileSakuseiProcess extends BatchProcessBase<SogoJi
                     || AD.equals(entity.getServiceShuruiCode().getColumnValue())) {
                 dataEntity.set適用開始年月(trimRString(entity.getTekiyoKaishiYM().toDateString()));
                 dataEntity.set適用終了年月(RString.EMPTY);
-                dataEntity.setサービス名称(
-                        null == entity.getServiceMeisho() ? RString.EMPTY : 囲み文字(entity.getServiceMeisho()));
+                dataEntity.setサービス名称(囲み文字(
+                        null == entity.getServiceMeisho() ? RString.EMPTY : entity.getServiceMeisho()));
                 dataEntity.set単位数(trimDecimal(entity.getTaniSu()));
                 dataEntity.set算定単位(entity.getSanteiTaniKubun());
                 dataEntity.set制限日数回数(RString.EMPTY);
@@ -284,8 +285,8 @@ public class IdoRenrakuhyoSofuFileSakuseiProcess extends BatchProcessBase<SogoJi
                     || AE.equals(entity.getServiceShuruiCode().getColumnValue())) {
                 dataEntity.set適用開始年月(trimRString(entity.getTekiyoKaishiYM().toDateString()));
                 dataEntity.set適用終了年月(RString.EMPTY);
-                dataEntity.setサービス名称(
-                        null == entity.getServiceMeisho() ? RString.EMPTY : 囲み文字(entity.getServiceMeisho()));
+                dataEntity.setサービス名称(囲み文字(
+                        null == entity.getServiceMeisho() ? RString.EMPTY : entity.getServiceMeisho()));
                 dataEntity.set単位数(trimDecimal(entity.getTaniSu()));
                 dataEntity.set算定単位(entity.getSanteiTaniKubun());
                 dataEntity.set制限日数回数(RString.EMPTY);
@@ -326,7 +327,7 @@ public class IdoRenrakuhyoSofuFileSakuseiProcess extends BatchProcessBase<SogoJi
 
     private void csvファイル出力(SogoJigyoServiceCodeTempEntity entity) {
         ServicecodeIdoRenrakuhyoOutCsvEntity csvEntity = new ServicecodeIdoRenrakuhyoOutCsvEntity();
-        csvEntity.set交換情報識別番号(ConfigKeysKokuhorenSofu.総合事業分サービスコード異動連絡票情報.getコード());
+        csvEntity.set交換情報識別番号(KokuhorenSofuKokanJohoShikibetsuBango.総合事業分サービスコード異動連絡票情報.getコード());
         csvEntity.set異動年月日(new RString(entity.getIdoYMD().toString()));
         csvEntity.set異動区分コード(entity.getIdoKubunCode());
         csvEntity.set異動区分名称(ServiceCode_IdoKubun.toValue(entity.getIdoKubunCode()).get名称());

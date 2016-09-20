@@ -43,6 +43,7 @@ public class GassanShikyuShinseishoJohoSofuIchiranEditor implements IGassanShiky
     private final YMDHMS システム日時;
     private final FlexibleYearMonth 処理年月;
     private final int 連番;
+    private static final RString 年度 = new RString("年度");
     private static final RDate NOWDATE = RDate.getNowDate();
     private static final SubGyomuCode DBU介護統計報告 = SubGyomuCode.DBU介護統計報告;
     private static final RString 保険者情報_保険者番号 = DbBusinessConfig.get(ConfigKeysHokenshaJoho.保険者情報_保険者番号, NOWDATE, DBU介護統計報告);
@@ -89,13 +90,13 @@ public class GassanShikyuShinseishoJohoSofuIchiranEditor implements IGassanShiky
         source.hokenshaNo = 保険者情報_保険者番号;
         source.hokenshaName = 保険者情報_保険者名称;
         source.list_1 = new RString(連番);
-        source.list_2 = 高額合算申請書一時Entity.getTaishoNendo().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        source.list_2 = 高額合算申請書一時Entity.getTaishoNendo().wareki().fillType(FillType.BLANK).toDateString().concat(年度);
         if (高額合算申請書一時Entity.getShikyuShinseiKubun() != null) {
             source.list_3 = KaigoGassan_ShinseiKbn.toValue(高額合算申請書一時Entity.getShikyuShinseiKubun()).get名称();
         }
         if (高額合算申請書一時Entity.getShinseiYMD() != null) {
-            source.list_4 = new RString(高額合算申請書一時Entity.getShinseiYMD().toString());
+            source.list_4 = 高額合算申請書一時Entity.getShinseiYMD().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
         }
         source.list_5 = 高額合算申請書一時Entity.getShikyuShinseishoSeiriNo();
         if (高額合算申請書一時Entity.getShinseiDaihyoshaShimei() != null) {

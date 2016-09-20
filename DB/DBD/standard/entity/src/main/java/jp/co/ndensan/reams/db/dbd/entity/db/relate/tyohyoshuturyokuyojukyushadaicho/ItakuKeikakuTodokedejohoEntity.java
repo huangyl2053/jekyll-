@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushadaicho;
 
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -20,7 +21,7 @@ public class ItakuKeikakuTodokedejohoEntity {
 
     private RString 居宅計画区分;
     private RString 明細番号;
-    private FlexibleDate 対象年月;
+    private FlexibleYearMonth 対象年月;
     private RString 区分;
     private RString 作成;
     private FlexibleDate 計画届出日;

@@ -72,56 +72,58 @@ public class TokuteiNyushoshahiHandler {
         List<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness> 特定入所者介護サービス費用list = get給付実績データ(business,
                 整理番号, 事業者番号, 様式番号, サービス提供.getYearMonth().toDateString());
         List<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness> dataToRepeat = getサービス提供年月list(business);
-        List<dgTokuteiNyushoshaKaigoServicehi_Row> rowList = new ArrayList<>();
-        int 費用額合計 = 0;
-        int 保険分請求額合計 = 0;
-        int 利用者負担額合計 = 0;
-        int 公費１_負担額合計 = 0;
-        int 公費２_負担額合計 = 0;
-        int 公費３_負担額合計 = 0;
-        for (KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness 特定入所者介護サービス費用 : 特定入所者介護サービス費用list) {
-            rowList.add(getデータ(特定入所者介護サービス費用));
-            費用額合計 = 特定入所者介護サービス費用.get特定入所者費用().get費用額合計().intValue() + 費用額合計;
-            保険分請求額合計 = 特定入所者介護サービス費用.get特定入所者費用().get保険分請求額合計().intValue() + 保険分請求額合計;
-            利用者負担額合計 = 特定入所者介護サービス費用.get特定入所者費用().get利用者負担額合計().intValue() + 利用者負担額合計;
-            公費１_負担額合計 = 特定入所者介護サービス費用.get特定入所者費用().get公費１_負担額合計().intValue() + 公費１_負担額合計;
-            公費２_負担額合計 = 特定入所者介護サービス費用.get特定入所者費用().get公費２_負担額合計().intValue() + 公費２_負担額合計;
-            公費３_負担額合計 = 特定入所者介護サービス費用.get特定入所者費用().get公費３_負担額合計().intValue() + 公費３_負担額合計;
+        if (特定入所者介護サービス費用list != null && !特定入所者介護サービス費用list.isEmpty()) {
+            List<dgTokuteiNyushoshaKaigoServicehi_Row> rowList = new ArrayList<>();
+            int 費用額合計 = 0;
+            int 保険分請求額合計 = 0;
+            int 利用者負担額合計 = 0;
+            int 公費１_負担額合計 = 0;
+            int 公費２_負担額合計 = 0;
+            int 公費３_負担額合計 = 0;
+            for (KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness 特定入所者介護サービス費用 : 特定入所者介護サービス費用list) {
+                rowList.add(getデータ(特定入所者介護サービス費用));
+                費用額合計 = 特定入所者介護サービス費用.get特定入所者費用().get費用額合計().intValue() + 費用額合計;
+                保険分請求額合計 = 特定入所者介護サービス費用.get特定入所者費用().get保険分請求額合計().intValue() + 保険分請求額合計;
+                利用者負担額合計 = 特定入所者介護サービス費用.get特定入所者費用().get利用者負担額合計().intValue() + 利用者負担額合計;
+                公費１_負担額合計 = 特定入所者介護サービス費用.get特定入所者費用().get公費１_負担額合計().intValue() + 公費１_負担額合計;
+                公費２_負担額合計 = 特定入所者介護サービス費用.get特定入所者費用().get公費２_負担額合計().intValue() + 公費２_負担額合計;
+                公費３_負担額合計 = 特定入所者介護サービス費用.get特定入所者費用().get公費３_負担額合計().intValue() + 公費３_負担額合計;
+            }
+            dgTokuteiNyushoshaKaigoServicehi_Row 合計row = new dgTokuteiNyushoshaKaigoServicehi_Row();
+            合計row.setTxtMeisaiGokei(new RString("合計"));
+            合計row.setTxtHiyogaku(get金額(new Decimal(費用額合計)));
+            合計row.setTxtSeikyugaku(get金額(new Decimal(保険分請求額合計)));
+            合計row.setTxtRiyoshaFutangaku(get金額(new Decimal(利用者負担額合計)));
+            合計row.setTxtKohi1Futangaku(get金額(new Decimal(公費１_負担額合計)));
+            合計row.setTxtKohi2Futangaku(get金額(new Decimal(公費２_負担額合計)));
+            合計row.setTxtKohi3Futangaku(get金額(new Decimal(公費３_負担額合計)));
+            rowList.add(合計row);
+            int 後_費用額合計 = 0;
+            int 後_保険分請求額合計 = 0;
+            int 後_利用者負担額合計 = 0;
+            int 後_公費１_負担額合計 = 0;
+            int 後_公費２_負担額合計 = 0;
+            int 後_公費３_負担額合計 = 0;
+            for (KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness 特定入所者介護サービス費用 : 特定入所者介護サービス費用list) {
+                rowList.add(get後のデータ(特定入所者介護サービス費用));
+                後_費用額合計 = 特定入所者介護サービス費用.get特定入所者費用().get後_費用額合計().intValue() + 後_費用額合計;
+                後_保険分請求額合計 = 特定入所者介護サービス費用.get特定入所者費用().get後_保険分請求額合計().intValue() + 後_保険分請求額合計;
+                後_利用者負担額合計 = 特定入所者介護サービス費用.get特定入所者費用().get後_利用者負担額合計().intValue() + 後_利用者負担額合計;
+                後_公費１_負担額合計 = 特定入所者介護サービス費用.get特定入所者費用().get後_公費１_負担額合計().intValue() + 後_公費１_負担額合計;
+                後_公費２_負担額合計 = 特定入所者介護サービス費用.get特定入所者費用().get後_公費２_負担額合計().intValue() + 後_公費２_負担額合計;
+                後_公費３_負担額合計 = 特定入所者介護サービス費用.get特定入所者費用().get後_公費３_負担額合計().intValue() + 後_公費３_負担額合計;
+            }
+            dgTokuteiNyushoshaKaigoServicehi_Row 後_合計row = new dgTokuteiNyushoshaKaigoServicehi_Row();
+            後_合計row.setTxtMeisaiGokei(new RString("合計"));
+            後_合計row.setTxtHiyogaku(get金額(new Decimal(後_費用額合計)));
+            後_合計row.setTxtSeikyugaku(get金額(new Decimal(後_保険分請求額合計)));
+            後_合計row.setTxtRiyoshaFutangaku(get金額(new Decimal(後_利用者負担額合計)));
+            後_合計row.setTxtKohi1Futangaku(get金額(new Decimal(後_公費１_負担額合計)));
+            後_合計row.setTxtKohi2Futangaku(get金額(new Decimal(後_公費２_負担額合計)));
+            後_合計row.setTxtKohi3Futangaku(get金額(new Decimal(後_公費３_負担額合計)));
+            rowList.add(後_合計row);
+            div.getDgTokuteiNyushoshaKaigoServicehi().setDataSource(rowList);
         }
-        dgTokuteiNyushoshaKaigoServicehi_Row 合計row = new dgTokuteiNyushoshaKaigoServicehi_Row();
-        合計row.setTxtMeisaiGokei(new RString("合計"));
-        合計row.setTxtHiyogaku(get金額(new Decimal(費用額合計)));
-        合計row.setTxtSeikyugaku(get金額(new Decimal(保険分請求額合計)));
-        合計row.setTxtRiyoshaFutangaku(get金額(new Decimal(利用者負担額合計)));
-        合計row.setTxtKohi1Futangaku(get金額(new Decimal(公費１_負担額合計)));
-        合計row.setTxtKohi2Futangaku(get金額(new Decimal(公費２_負担額合計)));
-        合計row.setTxtKohi3Futangaku(get金額(new Decimal(公費３_負担額合計)));
-        rowList.add(合計row);
-        int 後_費用額合計 = 0;
-        int 後_保険分請求額合計 = 0;
-        int 後_利用者負担額合計 = 0;
-        int 後_公費１_負担額合計 = 0;
-        int 後_公費２_負担額合計 = 0;
-        int 後_公費３_負担額合計 = 0;
-        for (KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness 特定入所者介護サービス費用 : 特定入所者介護サービス費用list) {
-            rowList.add(get後のデータ(特定入所者介護サービス費用));
-            後_費用額合計 = 特定入所者介護サービス費用.get特定入所者費用().get後_費用額合計().intValue() + 後_費用額合計;
-            後_保険分請求額合計 = 特定入所者介護サービス費用.get特定入所者費用().get後_保険分請求額合計().intValue() + 後_保険分請求額合計;
-            後_利用者負担額合計 = 特定入所者介護サービス費用.get特定入所者費用().get後_利用者負担額合計().intValue() + 後_利用者負担額合計;
-            後_公費１_負担額合計 = 特定入所者介護サービス費用.get特定入所者費用().get後_公費１_負担額合計().intValue() + 後_公費１_負担額合計;
-            後_公費２_負担額合計 = 特定入所者介護サービス費用.get特定入所者費用().get後_公費２_負担額合計().intValue() + 後_公費２_負担額合計;
-            後_公費３_負担額合計 = 特定入所者介護サービス費用.get特定入所者費用().get後_公費３_負担額合計().intValue() + 後_公費３_負担額合計;
-        }
-        dgTokuteiNyushoshaKaigoServicehi_Row 後_合計row = new dgTokuteiNyushoshaKaigoServicehi_Row();
-        後_合計row.setTxtMeisaiGokei(new RString("合計"));
-        後_合計row.setTxtHiyogaku(get金額(new Decimal(後_費用額合計)));
-        後_合計row.setTxtSeikyugaku(get金額(new Decimal(後_保険分請求額合計)));
-        後_合計row.setTxtRiyoshaFutangaku(get金額(new Decimal(後_利用者負担額合計)));
-        後_合計row.setTxtKohi1Futangaku(get金額(new Decimal(後_公費１_負担額合計)));
-        後_合計row.setTxtKohi2Futangaku(get金額(new Decimal(後_公費２_負担額合計)));
-        後_合計row.setTxtKohi3Futangaku(get金額(new Decimal(後_公費３_負担額合計)));
-        rowList.add(後_合計row);
-        div.getDgTokuteiNyushoshaKaigoServicehi().setDataSource(rowList);
         setGetsuBtn(dataToRepeat, new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月()
                 .getYearMonth().toDateString()));
     }

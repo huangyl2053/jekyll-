@@ -40,12 +40,9 @@ public final class IdoufunRiyoushyafutanKanendoMainValidationHandler {
      * @return バリデーション結果
      */
     public ValidationMessageControlPairs 実行するボタンを押下の存在チェック(ValidationMessageControlPairs pairs) {
-
         if (div.getTxtKonkaiKaishiDate().getText().isNullOrEmpty() || div.getTxtKonkaiKaishiTime().getText().isNullOrEmpty()) {
             pairs.add(new ValidationMessageControlPair(IdoufunRiyoushyafutanKanendoMessages.今回開始年月日の未入力チェック));
-            return pairs;
         }
-
         if (div.getTxtKonkaiShuryoDate().getText().isNullOrEmpty() || div.getTxtKonkaiShuryoTime().getText().isNullOrEmpty()) {
             pairs.add(new ValidationMessageControlPair(IdoufunRiyoushyafutanKanendoMessages.今回終了年月日の未入力チェック));
             return pairs;
@@ -59,7 +56,6 @@ public final class IdoufunRiyoushyafutanKanendoMainValidationHandler {
         if (今回終了date.isBefore(今回開始date)) {
             pairs.add(new ValidationMessageControlPair(IdoufunRiyoushyafutanKanendoMessages.今回開始日時と今回終了日時の比較チェック));
         }
-
         return pairs;
     }
 

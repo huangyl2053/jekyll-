@@ -32,7 +32,7 @@ public class FutanGengaokuNintteiKakuninListEntity {
     private FlexibleDate 認定終了日;
     private RString 要介護状態区分コード;
     private RString 厚労省IF識別コード;
-    private RString 旧措置;
+    private boolean 旧措置;
     private UaFt200FindShikibetsuTaishoEntity atesakiEntity;
     private List<IsShinseiEntity> 利用軽減;
     private List<IsShinseiEntity> 訪問減額;
@@ -41,8 +41,6 @@ public class FutanGengaokuNintteiKakuninListEntity {
     private boolean is生活保護受給者;
     private boolean is老齢福祉年金受給者;
     private Decimal 合計所得金額;
-    private Decimal 年金収入額;
-    private Decimal 非課税年金勘案額;
     private RString 世帯課税区分;
     private DbT4018KaigoHokenFutanGendogakuNinteiEntity 今回認定結果;
     private DbT4018KaigoHokenFutanGendogakuNinteiEntity 前回認定結果;

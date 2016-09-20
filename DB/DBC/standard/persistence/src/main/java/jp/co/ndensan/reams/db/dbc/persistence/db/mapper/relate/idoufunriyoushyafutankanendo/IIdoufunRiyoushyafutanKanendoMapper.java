@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.idoufunriyoushyafutankanendo;
 
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.idoufunriyoushyafutankanendo.IdoufunRiyoushyafutanKanendoMybatisParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -34,9 +35,8 @@ public interface IIdoufunRiyoushyafutanKanendoMapper {
     /**
      * 異動分利用者負担割合判定のデータを取得です.
      *
-     * @param 処理名 処理名
-     * @param 年次判定年度 RString
+     * @param parameter IdoufunRiyoushyafutanKanendoMybatisParameter
      * @return 異動分利用者負担割合判定のデータ ShoriDateKanri
      */
-    DbT7022ShoriDateKanriEntity get異動分利用者負担割合判定のデータ(RString 処理名, RString 年次判定年度);
+    DbT7022ShoriDateKanriEntity get異動分利用者負担割合判定のデータ(IdoufunRiyoushyafutanKanendoMybatisParameter parameter);
 }

@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushadaicho;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.common.KyusochishaKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiTodokedeDaikoKubunCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -49,7 +47,7 @@ public class YokaigoNinteiJohoEntity {
     private RString 一次要介護度;
     private FlexibleDate 一次判定日;
     private RString 一次要介護度_重;
-    private KyusochishaKubun 旧措置;
+    private RString 旧措置;
     private FlexibleDate 喪失日;
     private RString 資格取得前申請;
     private FlexibleDate 延期通知書発行日;
@@ -58,7 +56,7 @@ public class YokaigoNinteiJohoEntity {
     private FlexibleDate 資格証明書発行日２;
     private RString 特定疾病;
     private RString 申請代行事業者;
-    private ShinseiTodokedeDaikoKubunCode 代行者コード;
+    private RString 代行者コード;
     private RString 指定医区分;
     private RString 調査委託先コード;
     private RString 調査委託先名;

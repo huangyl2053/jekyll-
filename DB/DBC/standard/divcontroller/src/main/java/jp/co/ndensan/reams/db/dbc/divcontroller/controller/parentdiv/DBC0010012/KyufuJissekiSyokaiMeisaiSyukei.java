@@ -48,9 +48,11 @@ public class KyufuJissekiSyokaiMeisaiSyukei {
         handler.onLoad(給付実績情報照会情報.getCsData_Z(), 給付実績情報照会情報.getCsData_B(), 給付実績情報照会情報.getCsData_N(),
                 整理番号, サービス提供年月, 様式番号, 事業者番号,
                 KyufuJissekiSyokaiMeisaiSyukeiFinder.createInstance().get保険者情報().records());
-        ShikibetsuNoKanri 識別番号管理 = KyufuJissekiShokaiFinder.createInstance().getShikibetsuBangoKanri(
-                サービス提供年月, 識別番号).records().get(0);
-        handler.setButton(識別番号管理, サービス提供年月);
+        List<ShikibetsuNoKanri> 識別番号管理リスト = KyufuJissekiShokaiFinder.createInstance().getShikibetsuBangoKanri(
+                サービス提供年月, 識別番号).records();
+        if (識別番号管理リスト != null && !識別番号管理リスト.isEmpty()) {
+            handler.setButton(識別番号管理リスト.get(0), サービス提供年月);
+        }
         RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();
         List<KyufuJissekiHedajyoho2> 事業者番号リスト = 給付実績情報照会情報.getCommonHeader().get給付実績ヘッダ情報2();
         handler.check事業者Btn(事業者番号リスト, 整理番号, 事業者番号, 様式番号, サービス提供年月.toDateString(), 実績区分コード);

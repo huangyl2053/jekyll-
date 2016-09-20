@@ -69,7 +69,6 @@ public class SofuFileSakuseiProcess extends BatchKeyBreakBase<KogakuGassanKeisan
             + "IKogakugassanKeisankekkaRenrakuhyoOutMapper.get送付ファイル作成データ");
     private static final RString 処理結果リスト一時 = new RString("DbWT1002KokuhorenSakuseiError");
     private static final RString コンマ = new RString(",");
-    private static final RString ダブル引用符 = new RString("\"");
     private static final RString ファイル名_前 = new RString("10_381");
     private static final RString ファイル名_後 = new RString(".csv");
     private static final RString RSTONE = new RString("1");
@@ -161,7 +160,7 @@ public class SofuFileSakuseiProcess extends BatchKeyBreakBase<KogakuGassanKeisan
             eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
             eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
                     .setDelimiter(コンマ)
-                    .setEnclosure(ダブル引用符)
+                    .setEnclosure(RString.EMPTY)
                     .setEncode(文字コード)
                     .setNewLine(NewLine.CRLF)
                     .hasHeader(false)
@@ -305,28 +304,28 @@ public class SofuFileSakuseiProcess extends BatchKeyBreakBase<KogakuGassanKeisan
                 trimDecimal(entity.get高額合算支給額計算結果一時().getOver70_honninShikyugaku()));
         headEntity.set介護低所得者Ⅰ再計算実施の有無(
                 trimRString(entity.get高額合算支給額計算結果一時().getTeiShotoku_1_SaiKeisanUmu()));
-        headEntity.set備考(trimRString(entity.get高額合算支給額計算結果一時().getBiko()));
+        headEntity.set備考(囲み文字(trimRString(entity.get高額合算支給額計算結果一時().getBiko())));
         YubinNo 宛先郵便番号 = entity.get高額合算支給額計算結果一時().getKekkaRenrakusakiYubinNo();
         RString 宛先郵便番号R
                 = 宛先郵便番号 == null || 宛先郵便番号.isEmpty() ? RString.EMPTY : 宛先郵便番号.getColumnValue().trim();
         headEntity.set支給額計算結果連絡先郵便番号(宛先郵便番号R);
         RString 支給額計算結果連絡先住所 = entity.get高額合算支給額計算結果一時().getKekkaRenrakusakiJusho();
         if (支給額計算結果連絡先住所 != null) {
-            headEntity.set支給額計算結果連絡先住所(
+            headEntity.set支給額計算結果連絡先住所(囲み文字(
                     trimRString(INT_64 < 支給額計算結果連絡先住所.length()
-                            ? 支給額計算結果連絡先住所.substring(0, INT_64) : 支給額計算結果連絡先住所));
+                            ? 支給額計算結果連絡先住所.substring(0, INT_64) : 支給額計算結果連絡先住所)));
         }
         RString 支給額計算結果連絡先名称1 = entity.get高額合算支給額計算結果一時().getKetteRenrakusakiMeisho1();
         if (支給額計算結果連絡先名称1 != null) {
-            headEntity.set支給額計算結果連絡先名称1(
+            headEntity.set支給額計算結果連絡先名称1(囲み文字(
                     trimRString(INT_20 < 支給額計算結果連絡先名称1.length()
-                            ? 支給額計算結果連絡先名称1.substring(0, INT_20) : 支給額計算結果連絡先名称1));
+                            ? 支給額計算結果連絡先名称1.substring(0, INT_20) : 支給額計算結果連絡先名称1)));
         }
         RString 支給額計算結果連絡先名称2 = entity.get高額合算支給額計算結果一時().getKekkaRenrakusakiMeisho2();
         if (支給額計算結果連絡先名称2 != null) {
-            headEntity.set支給額計算結果連絡先名称2(
+            headEntity.set支給額計算結果連絡先名称2(囲み文字(
                     trimRString(INT_20 < 支給額計算結果連絡先名称2.length()
-                            ? 支給額計算結果連絡先名称2.substring(0, INT_20) : 支給額計算結果連絡先名称2));
+                            ? 支給額計算結果連絡先名称2.substring(0, INT_20) : 支給額計算結果連絡先名称2)));
         }
         headEntity.set通知年月日(trimDate(entity.get高額合算支給額計算結果一時().getTsuchiYMD()));
         setヘッダーレコード(headEntity, entity);
@@ -337,9 +336,9 @@ public class SofuFileSakuseiProcess extends BatchKeyBreakBase<KogakuGassanKeisan
             KogakuGassanKeisanKekkaRenrakuJohoRelateEntity entity) {
         AtenaMeisho 連絡票発行者名 = entity.get高額合算支給額計算結果一時().getRenrakuhyoHakkoshaMei();
         if (連絡票発行者名 != null && !連絡票発行者名.isEmpty()) {
-            headEntity.set連絡票発行者名(
+            headEntity.set連絡票発行者名(囲み文字(
                     INT_50 < 連絡票発行者名.getColumnValue().length()
-                    ? 連絡票発行者名.getColumnValue().substring(0, INT_50).trim() : 連絡票発行者名.getColumnValue());
+                    ? 連絡票発行者名.getColumnValue().substring(0, INT_50).trim() : 連絡票発行者名.getColumnValue()));
         }
         YubinNo 連絡票発行者郵便番号 = entity.get高額合算支給額計算結果一時().getRenrakuhyoHakkoshaYubinNo();
         RString 連絡票発行者郵便番号R
@@ -348,8 +347,8 @@ public class SofuFileSakuseiProcess extends BatchKeyBreakBase<KogakuGassanKeisan
         headEntity.set連絡票発行者郵便番号(連絡票発行者郵便番号R);
         RString 連絡票発行者住所 = entity.get高額合算支給額計算結果一時().getRenrakuhyoHakkoshaJusho();
         if (連絡票発行者住所 != null) {
-            headEntity.set連絡票発行者住所(trimRString(INT_64 < 連絡票発行者住所.length()
-                    ? 連絡票発行者住所.substring(0, INT_64) : 連絡票発行者住所));
+            headEntity.set連絡票発行者住所(囲み文字(trimRString(INT_64 < 連絡票発行者住所.length()
+                    ? 連絡票発行者住所.substring(0, INT_64) : 連絡票発行者住所)));
         }
         YubinNo 問い合わせ先郵便番号 = entity.get高額合算支給額計算結果一時().getToiawasesakiYobinNo();
         RString 問い合わせ先郵便番号R
@@ -358,18 +357,18 @@ public class SofuFileSakuseiProcess extends BatchKeyBreakBase<KogakuGassanKeisan
         headEntity.set問い合わせ先郵便番号(問い合わせ先郵便番号R);
         RString 問い合わせ先住所 = entity.get高額合算支給額計算結果一時().getToiawasesakiJusho();
         if (問い合わせ先住所 != null) {
-            headEntity.set問い合わせ先住所(trimRString(INT_64 < 問い合わせ先住所.length()
-                    ? 問い合わせ先住所.substring(0, INT_64) : 問い合わせ先住所));
+            headEntity.set問い合わせ先住所(囲み文字(trimRString(INT_64 < 問い合わせ先住所.length()
+                    ? 問い合わせ先住所.substring(0, INT_64) : 問い合わせ先住所)));
         }
         RString 問い合わせ先名称1 = entity.get高額合算支給額計算結果一時().getToiawasesakiMeisho1();
         if (問い合わせ先名称1 != null) {
-            headEntity.set問い合わせ先名称1(trimRString(INT_20 < 問い合わせ先名称1.length()
-                    ? 問い合わせ先名称1.substring(0, INT_20) : 問い合わせ先名称1));
+            headEntity.set問い合わせ先名称1(囲み文字(trimRString(INT_20 < 問い合わせ先名称1.length()
+                    ? 問い合わせ先名称1.substring(0, INT_20) : 問い合わせ先名称1)));
         }
         RString 問い合わせ先名称2 = entity.get高額合算支給額計算結果一時().getToiawasesakiMeisho2();
         if (問い合わせ先名称2 != null) {
-            headEntity.set問い合わせ先名称2(trimRString(INT_20 < 問い合わせ先名称2.length()
-                    ? 問い合わせ先名称2.substring(0, INT_20) : 問い合わせ先名称2));
+            headEntity.set問い合わせ先名称2(囲み文字(trimRString(INT_20 < 問い合わせ先名称2.length()
+                    ? 問い合わせ先名称2.substring(0, INT_20) : 問い合わせ先名称2)));
         }
         TelNo 問い合わせ先電話番号 = entity.get高額合算支給額計算結果一時().getToiawasesakiTelNo();
         RString 問い合わせ先電話番号R

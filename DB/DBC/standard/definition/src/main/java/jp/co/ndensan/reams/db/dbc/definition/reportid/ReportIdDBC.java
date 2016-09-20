@@ -243,6 +243,10 @@ public enum ReportIdDBC {
     DBC100006(
             new ReportId("DBC100006_ShokanKetteiTsuchiShoSealer2"), new RString("償還払支給（不支給）決定通知書（ｼｰﾗﾀｲﾌﾟ2）")),
     /**
+     * 高額サービス等支給（不支給）決定通知書(支払予定日あり）の帳票ＩＤです。
+     */
+    DBC100008(new ReportId("DBC100008_KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAri"), new RString("高額サービス等支給（不支給）決定通知書(支払予定日あり）")),
+    /**
      * 高額介護サービス費対象者一覧表 の帳票ＩＤです。
      */
     DBC200016(

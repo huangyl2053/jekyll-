@@ -129,9 +129,13 @@ public class ShinseishoIkkatsuHakko {
         ShinseishoIkkatsuHakkoBatchBuilder buidler = shinseishoIkkatsuHakkoBatch.createBuidler();
         buidler.set把握処理ID(UUID.fromString(selectedItem.get(0).getHaakuShoriID().toString()));
         shinseisho.insertDbT4032(buidler.build());
+        RString 被保険者番号 = new RString("0000000000");
         for (ddlKohoshaList_Row row : selectedItem) {
-            ShinseishoHakkoTaishoshas shinseishoHakkoTaishoshas = new ShinseishoHakkoTaishoshas(発行処理ID, new HihokenshaNo(row.getHihoNo()));
-            shinseisho.insertDbT4033(shinseishoHakkoTaishoshas);
+            if (!被保険者番号.equals(row.getHihoNo())) {
+                ShinseishoHakkoTaishoshas shinseishoHakkoTaishoshas = new ShinseishoHakkoTaishoshas(発行処理ID, new HihokenshaNo(row.getHihoNo()));
+                shinseisho.insertDbT4033(shinseishoHakkoTaishoshas);
+            }
+            被保険者番号 = row.getHihoNo();
         }
         DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter parameter = getHandler(div).getParameter(発行処理ID);
         return ResponseData.of(parameter).respond();

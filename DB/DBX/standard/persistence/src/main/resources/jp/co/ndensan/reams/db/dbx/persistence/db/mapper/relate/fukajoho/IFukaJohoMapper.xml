@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要：全ての賦課の情報を取得のマッピング用XMLです。 -->
+<!-- @reamsid_L DBB-5723-020 xuxin -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.relate.fukajoho.IFukaJohoMapper">
+    
+    <select id="get賦課情報"
+            resultMap="resultMap_FukaJohoEntity"
+            parameterType="jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode" fetchSize="500" resultOrdered="true">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.allColumns_DbT2002Fuka" />,
+        B."ki" as "期",
+        C."choteigaku" as "調定額"
+        FROM
+        rgdb."DbT2002Fuka" as "DbT2002Fuka",
+        rgdb."DbT2003Kibetsu" as B,
+        rgdb."UrT0705ChoteiKyotsu" as C
+        WHERE
+        "DbT2002Fuka"."shikibetsuCode" = #{識別コード}
+        AND "DbT2002Fuka"."choteiNendo" = B."choteiNendo"
+        AND "DbT2002Fuka"."fukaNendo" = B."fukaNendo"
+        AND "DbT2002Fuka"."tsuchishoNo" = B."tsuchishoNo"
+        AND "DbT2002Fuka"."rirekiNo" = B."rirekiNo"
+        AND B."choteiId" = C."choteiId"
+        ORDER BY
+        "DbT2002Fuka"."choteiNendo",
+        "DbT2002Fuka"."fukaNendo",
+        "DbT2002Fuka"."tsuchishoNo",
+        "DbT2002Fuka"."rirekiNo" ASC
+    </select>
+    <resultMap id="resultMap_FukaJohoEntity" autoMapping="true"
+               type="jp.co.ndensan.reams.db.dbx.entity.db.relate.fukajoho.FukaJohoEntity">
+        <id  column="dbT2002Fuka_choteiNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id  column="dbT2002Fuka_fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id  column="dbT2002Fuka_tsuchishoNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.TsuchishoNoTypeHandler"/>
+        <id  column="dbT2002Fuka_rirekiNo" />
+        <result property="期" column="期" />
+        <result property="調定額" column="調定額" 
+                typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />
+        <association property="介護賦課Entity" 
+                     resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2002FukaMapper.ResultMap_DbT2002FukaEntity" />
+    </resultMap>
+    
+</mapper>

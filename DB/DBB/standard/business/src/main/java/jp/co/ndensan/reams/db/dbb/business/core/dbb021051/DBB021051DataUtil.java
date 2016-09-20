@@ -195,6 +195,8 @@ public class DBB021051DataUtil {
         atena.set名称付与2(parameter.get敬称());
         atena.set様分1(parameter.get敬称());
         atena.set様分2(parameter.get敬称());
+        atena.set様分氏名1(parameter.get敬称());
+        atena.set様分氏名2(parameter.get敬称());
         atena.set右括号1(右括号);
         atena.set右括号2(右括号);
         atena.setバーコード住所(entity.getバーコード住所());
