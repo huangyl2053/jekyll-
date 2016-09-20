@@ -40,17 +40,17 @@ import jp.co.ndensan.reams.ur.urz.business.core.jusho.banchi.Banchi;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Katagaki;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
@@ -137,7 +137,7 @@ public class HanyoListSogoJigyoHi {
         eucEntity.set給付実績情報作成区分(KyufukanrihyoSakuseiKubun.toValue(entity.get給付実績情報作成区分コード()).get名称());
         eucEntity.set給付実績区分(KyufuJissekiKubun.toValue(entity.get給付実績区分()).get名称());
         eucEntity.set給付証記載保険者番号(entity.get証記載保険者番号());
-        eucEntity.setサービス提供年月(set日付編集(entity.getサービス提供年月()));
+        eucEntity.setサービス提供年月(set年月(entity.getサービス提供年月()));
         eucEntity.set給付実績事業者番号(entity.get事業所番号());
         if (entity.get事業者名称().isNullOrEmpty()) {
             eucEntity.set給付実績事業者名(RString.EMPTY);
@@ -164,8 +164,8 @@ public class HanyoListSogoJigyoHi {
         eucEntity.set後保険請求額(entity.get後保険請求額());
         eucEntity.set後保険利用者負担額(entity.get後保険利用者負担額());
         eucEntity.set警告区分(KeikokuKubun.toValue(entity.get警告区分コード()).get名称());
-        eucEntity.set審査年月(set日付編集(entity.get審査年月()));
-        eucEntity.set取込年月(set日付編集(entity.get取込年月()));
+        eucEntity.set審査年月(set年月(entity.get審査年月()));
+        eucEntity.set取込年月(set年月(entity.get取込年月()));
         return eucEntity;
     }
 
@@ -304,8 +304,8 @@ public class HanyoListSogoJigyoHi {
         eucEntity.set後保険請求額(entity.get後保険請求額());
         eucEntity.set後保険利用者負担額(entity.get後保険利用者負担額());
         eucEntity.set警告区分(KeikokuKubun.toValue(entity.get警告区分コード()).get名称());
-        eucEntity.set審査年月(set日付編集(entity.get審査年月()));
-        eucEntity.set取込年月(set日付編集(entity.get取込年月()));
+        eucEntity.set審査年月(set年月(entity.get審査年月()));
+        eucEntity.set取込年月(set年月(entity.get取込年月()));
         return eucEntity;
     }
 
@@ -438,8 +438,8 @@ public class HanyoListSogoJigyoHi {
         eucEntity.set後保険請求額(entity.get後保険請求額());
         eucEntity.set後保険利用者負担額(entity.get後保険利用者負担額());
         eucEntity.set警告区分(KeikokuKubun.toValue(entity.get警告区分コード()).get名称());
-        eucEntity.set審査年月(set日付編集(entity.get審査年月()));
-        eucEntity.set取込年月(set日付編集(entity.get取込年月()));
+        eucEntity.set審査年月(set年月(entity.get審査年月()));
+        eucEntity.set取込年月(set年月(entity.get取込年月()));
         return eucEntity;
     }
 
@@ -578,8 +578,8 @@ public class HanyoListSogoJigyoHi {
         eucEntity.set後保険請求額(entity.get後保険請求額());
         eucEntity.set後保険利用者負担額(entity.get後保険利用者負担額());
         eucEntity.set警告区分(KeikokuKubun.toValue(entity.get警告区分コード()).get名称());
-        eucEntity.set審査年月(set日付編集(entity.get審査年月()));
-        eucEntity.set取込年月(set日付編集(entity.get取込年月()));
+        eucEntity.set審査年月(set年月(entity.get審査年月()));
+        eucEntity.set取込年月(set年月(entity.get取込年月()));
         return eucEntity;
     }
 
@@ -697,7 +697,7 @@ public class HanyoListSogoJigyoHi {
         eucEntity.set給付実績情報作成区分(KyufukanrihyoSakuseiKubun.toValue(entity.get給付実績情報作成区分コード()).get名称());
         eucEntity.set給付実績区分(KyufuJissekiKubun.toValue(entity.get給付実績区分()).get名称());
         eucEntity.set給付証記載保険者番号(entity.get証記載保険者番号());
-        eucEntity.setサービス提供年月(set日付編集(entity.getサービス提供年月()));
+        eucEntity.setサービス提供年月(set年月(entity.getサービス提供年月()));
         eucEntity.set給付実績事業者番号(entity.get事業所番号());
         if (entity.get事業者名称().isNullOrEmpty()) {
             eucEntity.set給付実績事業者名(RString.EMPTY);
@@ -724,8 +724,8 @@ public class HanyoListSogoJigyoHi {
         eucEntity.set後保険請求額(entity.get後保険請求額());
         eucEntity.set後保険利用者負担額(entity.get後保険利用者負担額());
         eucEntity.set警告区分(KeikokuKubun.toValue(entity.get警告区分コード()).get名称());
-        eucEntity.set審査年月(set日付編集(entity.get審査年月()));
-        eucEntity.set取込年月(set日付編集(entity.get取込年月()));
+        eucEntity.set審査年月(set年月(entity.get審査年月()));
+        eucEntity.set取込年月(set年月(entity.get取込年月()));
         return eucEntity;
     }
 
@@ -861,8 +861,8 @@ public class HanyoListSogoJigyoHi {
         eucEntity.set後保険請求額(entity.get後保険請求額());
         eucEntity.set後保険利用者負担額(entity.get後保険利用者負担額());
         eucEntity.set警告区分(KeikokuKubun.toValue(entity.get警告区分コード()).get名称());
-        eucEntity.set審査年月(set日付編集(entity.get審査年月()));
-        eucEntity.set取込年月(set日付編集(entity.get取込年月()));
+        eucEntity.set審査年月(set年月(entity.get審査年月()));
+        eucEntity.set取込年月(set年月(entity.get取込年月()));
         return eucEntity;
     }
 
@@ -992,8 +992,8 @@ public class HanyoListSogoJigyoHi {
         eucEntity.set後保険請求額(entity.get後保険請求額());
         eucEntity.set後利用者負担額(entity.get後保険利用者負担額());
         eucEntity.set警告区分(KeikokuKubun.toValue(entity.get警告区分コード()).get名称());
-        eucEntity.set審査年月(set日付編集(entity.get審査年月()));
-        eucEntity.set取込年月(set日付編集(entity.get取込年月()));
+        eucEntity.set審査年月(set年月(entity.get審査年月()));
+        eucEntity.set取込年月(set年月(entity.get取込年月()));
         return eucEntity;
     }
 
@@ -1129,8 +1129,8 @@ public class HanyoListSogoJigyoHi {
         eucEntity.set後保険請求額(entity.get後保険請求額());
         eucEntity.set後保険利用者負担額(entity.get後保険利用者負担額());
         eucEntity.set警告区分(KeikokuKubun.toValue(entity.get警告区分コード()).get名称());
-        eucEntity.set審査年月(set日付編集(entity.get審査年月()));
-        eucEntity.set取込年月(set日付編集(entity.get取込年月()));
+        eucEntity.set審査年月(set年月(entity.get審査年月()));
+        eucEntity.set取込年月(set年月(entity.get取込年月()));
         return eucEntity;
     }
 
@@ -1276,8 +1276,10 @@ public class HanyoListSogoJigyoHi {
     }
 
     private RString set年月(RString date) {
-        return new FlexibleDate(date).getYearMonth().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        if (date.isNullOrEmpty()) {
+            return RString.EMPTY;
+        }
+        return new FlexibleDate(date).seireki().separator(Separator.SLASH).fillType(FillType.ZERO).getYearMonth();
     }
 
     private RStringBuilder set抽出方法() {
@@ -1361,7 +1363,8 @@ public class HanyoListSogoJigyoHi {
     }
 
     private PersonalData toPersonalData(RString 被保険者番号, ShikibetsuCode 識別コード) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), 被保険者番号);
+        return PersonalData.of(識別コード, expandedInfo);
     }
 
     private RString set日付編集(FlexibleDate value) {
