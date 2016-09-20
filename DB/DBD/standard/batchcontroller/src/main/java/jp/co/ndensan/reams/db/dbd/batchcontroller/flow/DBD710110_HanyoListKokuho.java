@@ -5,19 +5,18 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD710050.HanyoListHomonKaigoRiyoshaFutanGakuGengakuProcess;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710050.DBD710050_HanyoListHomonKaigoRiyoshaFutanGakuGengakuParameter;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD710110.HanyoListKokuhoProcess;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710110.DBD710110_HanyoListKokuhoParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 
 /**
+ * 汎用リスト出力(国保)のバッチフロークラスです。
  *
- * 汎用リスト出力(訪問介護利用者負担額減額)のバッチフロークラスです。
- *
- * @reamsid_L DBD-3940-030 panxiaobo
+ * @reamsid_L DBD-5510-030 mawy
  */
-public class DBD710050_HanyoListHomonKaigoRiyoshaFutanGakuGengaku extends BatchFlowBase<DBD710050_HanyoListHomonKaigoRiyoshaFutanGakuGengakuParameter> {
+public class DBD710110_HanyoListKokuho extends BatchFlowBase<DBD710110_HanyoListKokuhoParameter> {
 
     @Override
     protected void defineFlow() {
@@ -33,8 +32,8 @@ public class DBD710050_HanyoListHomonKaigoRiyoshaFutanGakuGengaku extends BatchF
      */
     @Step(CSV_PROCESS)
     protected IBatchFlowCommand reportProcess() {
-        return loopBatch(HanyoListHomonKaigoRiyoshaFutanGakuGengakuProcess.class)
-                .arguments(getParameter().toHanyoListHomonKaigoRiyoshaFutanGakuGengakuProcessParameter())
+        return loopBatch(HanyoListKokuhoProcess.class)
+                .arguments(getParameter().toHanyoRisutoKokuhoProcessParameter())
                 .define();
     }
 }

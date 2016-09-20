@@ -441,7 +441,11 @@ public enum ReportIdDBC {
     /**
      * DBC701008_HanyoList_KyufuKanriHyo
      */
-    DBC701008(new ReportId("DBC701008_HanyoList_KyufuKanriHyo"), new RString("汎用リスト出力(給付管理票)")),
+    DBC701008(new ReportId("DBC701008_HanyoListKyufuKanriHyo"), new RString("汎用リスト出力(給付管理票)")),
+    /**
+     * DBC701008_HanyoList_KyufuKanriHyo
+     */
+    DBC701009(new ReportId("DBC701009_HanyoListKagoMoshitate"), new RString("汎用リスト出力(過誤申立情報)")),
     /**
      * DBC701016_HanyoListKogakuGassanKeisanKekkaRenrakuHyo
      */

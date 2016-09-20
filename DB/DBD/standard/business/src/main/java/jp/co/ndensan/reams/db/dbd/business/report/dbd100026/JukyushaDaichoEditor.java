@@ -822,7 +822,7 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
             source.listNinteiLower_8 = 要介護認定情報Entity.get一次要介護度_重();
         }
         if (要介護認定情報Entity.get旧措置() != null) {
-            source.listNinteiUpper_10 = 要介護認定情報Entity.get旧措置().get名称();
+            source.listNinteiUpper_10 = 要介護認定情報Entity.get旧措置();
         }
         if (要介護認定情報Entity.get喪失日() != null) {
             source.listNinteiCenter_10 = 要介護認定情報Entity.get喪失日().wareki().toDateString();
@@ -853,7 +853,7 @@ public class JukyushaDaichoEditor implements IJukyushaDaichoEditor {
             source.listNinteiUpper_13 = 要介護認定情報Entity.get申請代行事業者();
         }
         if (要介護認定情報Entity.get代行者コード() != null) {
-            source.listNinteiUpper_14 = 要介護認定情報Entity.get代行者コード().get名称();
+            source.listNinteiUpper_14 = 要介護認定情報Entity.get代行者コード();
         }
         if (要介護認定情報Entity.get指定医区分() != null) {
             source.listNinteiUpper_15 = 要介護認定情報Entity.get指定医区分();
