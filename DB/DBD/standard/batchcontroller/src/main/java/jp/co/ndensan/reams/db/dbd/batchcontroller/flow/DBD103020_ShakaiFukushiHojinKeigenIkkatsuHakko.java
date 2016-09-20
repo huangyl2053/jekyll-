@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.dbd1200902;
+package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd1200902.ShakaiFukushiHoujinnKeigenListProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd1200902.ShakaiFukushiHoujinnKeigenNinnteiProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd1200902.ShakaiFukushiHoujinnKeigenTsuuchishoProcess;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd1200902.ShakaiFukushiHoujinnKeigenBatchParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD103020.DBD103020_ShakaiFukushiHojinKeigenIkkatsuHakkoParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBD-3981-030 x_lilh
  */
-public class ShakaiFukushiHoujinnKeigenPublishFlow extends BatchFlowBase<ShakaiFukushiHoujinnKeigenBatchParameter> {
+public class DBD103020_ShakaiFukushiHojinKeigenIkkatsuHakko extends BatchFlowBase<DBD103020_ShakaiFukushiHojinKeigenIkkatsuHakkoParameter> {
 
     private static final String 社会福祉法人等軽減の認定証発行 = "社会福祉法人等軽減の認定証発行";
     private static final String 社会福祉法人等軽減の通知書発行 = "社会福祉法人等軽減の通知書発行";
@@ -26,7 +26,7 @@ public class ShakaiFukushiHoujinnKeigenPublishFlow extends BatchFlowBase<ShakaiF
 
     @Override
     protected void defineFlow() {
-        ShakaiFukushiHoujinnKeigenBatchParameter parameter = getParameter();
+        DBD103020_ShakaiFukushiHojinKeigenIkkatsuHakkoParameter parameter = getParameter();
         if (parameter.is認定証発行フラグ()) {
             executeStep(社会福祉法人等軽減の認定証発行);
         }

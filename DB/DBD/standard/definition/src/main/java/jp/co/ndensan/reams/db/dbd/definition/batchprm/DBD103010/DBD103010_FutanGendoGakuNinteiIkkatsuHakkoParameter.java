@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd1200902;
+package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD103010;
 
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.common.KyusochishaKubun;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.chohyoikkatsu.TaishoKubun;
@@ -26,7 +26,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class FutanGenndoGakuTsuuchishoIkkatsuBatchParameter extends BatchParameterBase {
+public class DBD103010_FutanGendoGakuNinteiIkkatsuHakkoParameter extends BatchParameterBase {
 
     private static final String TANPYOHAKKOKUBUN = "tanpyoHakkoKubun";
     private static final String KYUSOCHISHAKUBUN = "kyusochishaKubun";
