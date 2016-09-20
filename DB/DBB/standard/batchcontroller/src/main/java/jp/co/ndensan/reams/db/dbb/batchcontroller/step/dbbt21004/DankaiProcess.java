@@ -466,7 +466,9 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
     private void set老齢の情報(DbT7006RoreiFukushiNenkinJukyushaEntity entity) {
         if (entity != null) {
             entity.initializeMd5();
-            老齢の情報.add(new RoreiFukushiNenkinJukyusha(entity));
+            if (!老齢の情報.contains(new RoreiFukushiNenkinJukyusha(entity))) {
+                老齢の情報.add(new RoreiFukushiNenkinJukyusha(entity));
+            }
         }
     }
 
@@ -508,7 +510,7 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
     }
 
     private void set生活保護扶助種類EntityList(UrT0526SeikatsuHogoFujoShuruiEntity entity) {
-        if (entity != null) {
+        if (entity != null && !生活保護扶助種類EntityList.contains(entity)) {
             生活保護扶助種類EntityList.add(entity);
         }
     }
