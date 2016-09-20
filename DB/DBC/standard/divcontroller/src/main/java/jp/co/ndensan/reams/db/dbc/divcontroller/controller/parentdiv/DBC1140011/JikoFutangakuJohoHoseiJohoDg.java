@@ -470,15 +470,15 @@ public class JikoFutangakuJohoHoseiJohoDg {
     }
 
     /**
-     * 「履歴Dgdの選択」ボタン表示制御を設定です。
+     * 「完了する」ボタンクリック時の事件です。
      *
      * @param div JikoFutangakuJohoHoseiJohoDgDiv
      * @return ResponseData
      */
-    public ResponseData<JikoFutangakuJohoHoseiJohoDgDiv> onStateTransition(
+    public ResponseData<JikoFutangakuJohoHoseiJohoDgDiv> onClick_btnEnd(
             JikoFutangakuJohoHoseiJohoDgDiv div) {
-        getHandler(div).set履歴Dgdの選択ボタンする();
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).forwardWithEventName(
+                DBC1140011TransitionEventName.完了).respond();
     }
 
     private boolean 登録メッセージ判定(boolean 登録flg) {

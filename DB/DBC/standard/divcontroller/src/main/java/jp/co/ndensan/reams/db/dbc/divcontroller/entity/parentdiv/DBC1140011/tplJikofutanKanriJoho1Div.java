@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxAtenaMeisho;
 
 /**
  * tplJikofutanKanriJoho1 のクラスファイル
@@ -33,8 +34,8 @@ public class tplJikofutanKanriJoho1Div extends TabPanel {
     private DropDownList ddlShotokuKBN;
     @JsonProperty("ddl70SaiIjouShotokuKBN")
     private DropDownList ddl70SaiIjouShotokuKBN;
-    @JsonProperty("txtHihokenshaName")
-    private TextBox txtHihokenshaName;
+    @JsonProperty("txtHihokenshaShimei")
+    private TextBoxAtenaMeisho txtHihokenshaShimei;
     @JsonProperty("JikoFutangakuHoseiTotsugo1")
     private JikoFutangakuHoseiTotsugo1Div JikoFutangakuHoseiTotsugo1;
     @JsonProperty("JikoFutangakuHoseiTotsugo2")
@@ -107,21 +108,21 @@ public class tplJikofutanKanriJoho1Div extends TabPanel {
     }
 
     /*
-     * gettxtHihokenshaName
-     * @return txtHihokenshaName
+     * gettxtHihokenshaShimei
+     * @return txtHihokenshaShimei
      */
-    @JsonProperty("txtHihokenshaName")
-    public TextBox getTxtHihokenshaName() {
-        return txtHihokenshaName;
+    @JsonProperty("txtHihokenshaShimei")
+    public TextBoxAtenaMeisho getTxtHihokenshaShimei() {
+        return txtHihokenshaShimei;
     }
 
     /*
-     * settxtHihokenshaName
-     * @param txtHihokenshaName txtHihokenshaName
+     * settxtHihokenshaShimei
+     * @param txtHihokenshaShimei txtHihokenshaShimei
      */
-    @JsonProperty("txtHihokenshaName")
-    public void setTxtHihokenshaName(TextBox txtHihokenshaName) {
-        this.txtHihokenshaName = txtHihokenshaName;
+    @JsonProperty("txtHihokenshaShimei")
+    public void setTxtHihokenshaShimei(TextBoxAtenaMeisho txtHihokenshaShimei) {
+        this.txtHihokenshaShimei = txtHihokenshaShimei;
     }
 
     /*
