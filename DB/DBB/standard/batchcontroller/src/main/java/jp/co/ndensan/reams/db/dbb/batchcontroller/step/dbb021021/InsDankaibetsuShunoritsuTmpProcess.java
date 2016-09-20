@@ -124,7 +124,6 @@ public class InsDankaibetsuShunoritsuTmpProcess extends BatchProcessBase<Dankaib
         List<RString> kamokuList = new ArrayList<>();
         kamokuList.add(収納科目_国保特徴.get表示用コードwithハイフン());
         kamokuList.add(収納科目_国保普徴.get表示用コードwithハイフン());
-        kamokuList.add(new RString("001-001"));
         return kamokuList;
     }
 
