@@ -39,11 +39,9 @@ public class KagoMoshitatePanel {
      * @return 居宅サービスの給付管理照会
      */
     public ResponseData<KagoMoshitatePanelDiv> onLoad(KagoMoshitatePanelDiv div) {
-        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
-        div.getCommonKaigpAtenainfoChildDiv1().initialize(識別コード);
-
         KyufuKanrihyoShokaiDataModel 給付管理票 = ViewStateHolder.get(
                 ViewStateKeys.給付管理票200604Entity, KyufuKanrihyoShokaiDataModel.class);
+        div.getCommonKaigpAtenainfoChildDiv1().initialize(new ShikibetsuCode(給付管理票.get識別コード()));
         ValidationMessageControlPairs pairs = getValidationHandler().validateFor被保険者番号(給付管理票);
         if (pairs.iterator().hasNext()) {
             div.getCommonKaigoshikakuKihonChildDiv2().setVisible(false);
