@@ -386,6 +386,7 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
 
         close納入通知書();
 
+        一覧表reportWriter.close();
         csvListWriter.close();
         fileSpoolManager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
     }
