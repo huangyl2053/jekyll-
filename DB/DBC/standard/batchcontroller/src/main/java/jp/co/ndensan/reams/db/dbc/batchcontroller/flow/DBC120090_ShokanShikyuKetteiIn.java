@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.dbc120090;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120090.ShokanShikyuKetteiDoDBTorokuProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120090.ShokanShikyuKetteiDoIchiranhyoSakuseiProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120090.ShokanShikyuKetteiReadCsvFileProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120090.ShokanShikyuKetteiDoDBTorokuProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120090.ShokanShikyuKetteiDoIchiranhyoSakuseiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120090.ShokanShikyuKetteiReadCsvFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDeleteReveicedFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoHihokenshaKanrenProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoInterfaceKanriKousinProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoShoriKekkaListSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuGetFileProcess;
 import jp.co.ndensan.reams.db.dbc.business.core.kokuhorenkyoutsuu.KokuhorenKyoutsuuFileGetReturnEntity;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.shokanshikyuketteiin.DBC120090_ShokanShikyuKetteiInBacthParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120090.DBC120090_ShokanShikyuKetteiInParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorListType;
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kagoketteikohifutanshain.KohifutanshaDoIchiranhyoSakuseiProcessParameter;
@@ -42,7 +42,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-0980-330 gongliang
  */
-public class DBC120090_ShokanShikyuKetteiInFlow extends BatchFlowBase<DBC120090_ShokanShikyuKetteiInBacthParameter> {
+public class DBC120090_ShokanShikyuKetteiIn extends BatchFlowBase<DBC120090_ShokanShikyuKetteiInParameter> {
 
     private static final String ファイル取得 = "getFile";
     private static final String CSVファイル取込 = "readCsvFile";
