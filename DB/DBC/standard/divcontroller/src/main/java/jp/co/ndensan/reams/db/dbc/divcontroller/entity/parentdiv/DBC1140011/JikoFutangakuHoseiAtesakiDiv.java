@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxAtenaMeisho;
 
 /**
  * JikoFutangakuHoseiAtesaki のクラスファイル
@@ -25,9 +26,9 @@ public class JikoFutangakuHoseiAtesakiDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("txtAtesakiShimei")
-    private TextBox txtAtesakiShimei;
-    @JsonProperty("txtAtesakiYubinNO")
-    private TextBoxYubinNo txtAtesakiYubinNO;
+    private TextBoxAtenaMeisho txtAtesakiShimei;
+    @JsonProperty("txtAtesakiYubinNo")
+    private TextBoxYubinNo txtAtesakiYubinNo;
     @JsonProperty("txtAtesakiJusho")
     private TextBox txtAtesakiJusho;
 
@@ -42,7 +43,7 @@ public class JikoFutangakuHoseiAtesakiDiv extends Panel {
      * @return txtAtesakiShimei
      */
     @JsonProperty("txtAtesakiShimei")
-    public TextBox getTxtAtesakiShimei() {
+    public TextBoxAtenaMeisho getTxtAtesakiShimei() {
         return txtAtesakiShimei;
     }
 
@@ -51,26 +52,26 @@ public class JikoFutangakuHoseiAtesakiDiv extends Panel {
      * @param txtAtesakiShimei txtAtesakiShimei
      */
     @JsonProperty("txtAtesakiShimei")
-    public void setTxtAtesakiShimei(TextBox txtAtesakiShimei) {
+    public void setTxtAtesakiShimei(TextBoxAtenaMeisho txtAtesakiShimei) {
         this.txtAtesakiShimei = txtAtesakiShimei;
     }
 
     /*
-     * gettxtAtesakiYubinNO
-     * @return txtAtesakiYubinNO
+     * gettxtAtesakiYubinNo
+     * @return txtAtesakiYubinNo
      */
-    @JsonProperty("txtAtesakiYubinNO")
-    public TextBoxYubinNo getTxtAtesakiYubinNO() {
-        return txtAtesakiYubinNO;
+    @JsonProperty("txtAtesakiYubinNo")
+    public TextBoxYubinNo getTxtAtesakiYubinNo() {
+        return txtAtesakiYubinNo;
     }
 
     /*
-     * settxtAtesakiYubinNO
-     * @param txtAtesakiYubinNO txtAtesakiYubinNO
+     * settxtAtesakiYubinNo
+     * @param txtAtesakiYubinNo txtAtesakiYubinNo
      */
-    @JsonProperty("txtAtesakiYubinNO")
-    public void setTxtAtesakiYubinNO(TextBoxYubinNo txtAtesakiYubinNO) {
-        this.txtAtesakiYubinNO = txtAtesakiYubinNO;
+    @JsonProperty("txtAtesakiYubinNo")
+    public void setTxtAtesakiYubinNo(TextBoxYubinNo txtAtesakiYubinNo) {
+        this.txtAtesakiYubinNo = txtAtesakiYubinNo;
     }
 
     /*
