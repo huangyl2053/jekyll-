@@ -78,6 +78,8 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
     private RString 作成日時;
     private RString 受給申請年月日;
     private RString 受給申請事由;
+    private RString 受給申請日From;
+    private RString 受給申請日To;
     private int count;
     private boolean flag;
     private KeikakuTodokedeJokyoProcessParam processParameter;
@@ -121,8 +123,17 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
         flag = true;
         システム日付 = RDateTime.now();
 
-        申請日 = new RString(processParameter.getJyukyuushinseibiFrom().toString())
-                .concat(仕切る).concat(processParameter.getJyukyuushinseibiTo().toString());
+        if (processParameter.getJyukyuushinseibiFrom() != null) {
+            受給申請日From = new RString(processParameter.getJyukyuushinseibiFrom().toString());
+        } else {
+            受給申請日From = RString.EMPTY;
+        }
+        if (processParameter.getJyukyuushinseibiTo() != null) {
+            受給申請日To = new RString(processParameter.getJyukyuushinseibiTo().toString());
+        } else {
+            受給申請日To = RString.EMPTY;
+        }
+        申請日 = 受給申請日From.concat(仕切る).concat(受給申請日To);
         対象者 = processParameter.getTaisyoushatyuusyutu();
         届出状況 = processParameter.getTodokeidejyoukyou();
         基準日 = processParameter.getKijyunbi();
