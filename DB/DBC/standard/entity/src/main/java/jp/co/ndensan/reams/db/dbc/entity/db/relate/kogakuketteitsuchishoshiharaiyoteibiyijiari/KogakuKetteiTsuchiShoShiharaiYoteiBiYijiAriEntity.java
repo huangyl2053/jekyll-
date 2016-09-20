@@ -53,5 +53,6 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEntity {
     private RDate 支払予定日;
     private RString 決定通知書番号;
     private Decimal 支給額;
+    private RString 文書番号;
 
 }

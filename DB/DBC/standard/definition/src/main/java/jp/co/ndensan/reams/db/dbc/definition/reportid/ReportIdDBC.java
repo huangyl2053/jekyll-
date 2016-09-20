@@ -651,6 +651,10 @@ public enum ReportIdDBC {
      */
     DBC100007(new ReportId("DBC100007_KogakuKetteiTsuchiSho"), new RString("高額サービス等支給（不支給）決定通知書")),
     /**
+     * 高額サービス等支給（不支給）決定通知書帳票ＩＤです。
+     */
+    DBC100007_支給(new ReportId("DBC100007_KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashi"), new RString("高額サービス等支給（不支給）決定通知書")),
+    /**
      * 給付実績情報取込結果一覧表ＩＤです。
      */
     DBC200007(new ReportId("DBC200007_KyufujissekiTorikomiIchiran"), new RString("給付実績情報取込結果一覧表")),
