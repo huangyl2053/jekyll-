@@ -6,9 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc160010;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import jp.co.ndensan.reams.db.dbc.business.report.keikakutodokedejokyoichiran.KeikakuTodokedeJokyoIchiranCsvEntity;
 import jp.co.ndensan.reams.db.dbc.business.report.keikakutodokedejokyoichiran.KeikakuTodokedeJokyoIchiranOrder;
 import jp.co.ndensan.reams.db.dbc.business.report.keikakutodokedejokyoichiran.KeikakuTodokedeJokyoIchiranPageBreak;
@@ -40,9 +38,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -57,10 +53,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
@@ -77,7 +69,6 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
     private RString 出力順;
     private List<RString> breakItemIds;
     private KyotakuServiceKeikakuSaList outputReport;
-    private List<PersonalData> personalDataList;
     private HihokenshaNo 被保険者番号_前;
     private FileSpoolManager manager;
     private RString 申請日;
@@ -87,7 +78,6 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
     private RString 作成日時;
     private RString 受給申請年月日;
     private RString 受給申請事由;
-    private Set<ShikibetsuCode> 識別コードset;
     private int count;
     private boolean flag;
     private KeikakuTodokedeJokyoProcessParam processParameter;
@@ -120,18 +110,14 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
     private static final int INDEX_6 = 6;
     private static final int INDEX_8 = 8;
     private static final RString 一覧EUCエンティティID = new RString("DBU900002");
-    private static final RString CSVFILENAME = new RString("ShakaiFukushiHojinKeigenGaitoshaIchiran.csv");
+    private static final RString CSVFILENAME = new RString("DBU900002_ShoriKekkaKakuninList.csv");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
-    private final Code 定値_CODE = new Code("0003");
-    private final RString 漢字_被保険者番号 = new RString("被保険者番号");
 
     @Override
     protected void initialize() {
         count = INDEX_0;
-        personalDataList = new ArrayList<>();
         breakItemIds = new ArrayList<>();
-        識別コードset = new HashSet<>();
         flag = true;
         システム日付 = RDateTime.now();
 
@@ -184,7 +170,6 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
 
     @Override
     protected void process(KeikakuTodokedeJokyoIchiranEntity entity) {
-        アクセスログ対象追加(entity);
         if (entity.get識別コード() == null) {
             if (flag) {
                 RTime time = システム日付.getTime();
@@ -287,12 +272,7 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
             report.writeBy(reportSourceWriter);
         }
         csvWriter.close();
-        if (null != personalDataList && !personalDataList.isEmpty()) {
-            AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
-            manager.spool(Path.combinePath(manager.getEucOutputDirectry(), CSVFILENAME), log);
-        } else {
-            manager.spool(Path.combinePath(manager.getEucOutputDirectry(), CSVFILENAME));
-        }
+        manager.spool(Path.combinePath(manager.getEucOutputDirectry(), CSVFILENAME));
     }
 
     private void setReportList(KeikakuTodokedeJokyoIchiranEntity entity, KyotakuServiceKeikakuSaList reportList) {
@@ -330,24 +310,6 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
                 && entity.get事業者名称() == null) {
             reportList.set備考2(定値_事業者無効);
         }
-    }
-
-    private void アクセスログ対象追加(KeikakuTodokedeJokyoIchiranEntity entity) {
-        if (null == entity.get識別コード() || entity.get識別コード().isEmpty()) {
-            return;
-        }
-        if (識別コードset.contains(entity.get識別コード())) {
-            return;
-        }
-        識別コードset.add(entity.get識別コード());
-        PersonalData personalData = getPersonalData(entity);
-        personalDataList.add(personalData);
-    }
-
-    private PersonalData getPersonalData(KeikakuTodokedeJokyoIchiranEntity entity) {
-        ExpandedInformation expandedInformations = new ExpandedInformation(定値_CODE, 漢字_被保険者番号,
-                entity.get被保険者番号().getColumnValue());
-        return PersonalData.of(entity.get識別コード(), expandedInformations);
     }
 
     private boolean check(KeikakuTodokedeJokyoIchiranEntity entity) {
