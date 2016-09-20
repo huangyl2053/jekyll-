@@ -426,6 +426,7 @@ public class JukoKisambiTokushuTorokuHandler {
             JikoKisambiKanriManager manager = new JikoKisambiKanriManager();
             if (jikoKisambiKanri.isDeleted()) {
                 manager.save時効起算日管理ForDeletePhysical(jikoKisambiKanri);
+                continue;
             }
             if (jikoKisambiKanri.isUnchanged()) {
                 continue;

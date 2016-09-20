@@ -76,7 +76,7 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
     private IOutputOrder 並び順;
     private RString 出力順;
     private List<RString> breakItemIds;
-    private List<KyotakuServiceKeikakuSaList> outputReportList;
+    private KyotakuServiceKeikakuSaList outputReport;
     private List<PersonalData> personalDataList;
     private HihokenshaNo 被保険者番号_前;
     private FileSpoolManager manager;
@@ -130,7 +130,6 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
     protected void initialize() {
         count = INDEX_0;
         personalDataList = new ArrayList<>();
-        outputReportList = new ArrayList<>();
         breakItemIds = new ArrayList<>();
         識別コードset = new HashSet<>();
         flag = true;
@@ -232,22 +231,20 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
         }
 
         if (!entity.get被保険者番号().equals(被保険者番号_前) && 被保険者番号_前 != null) {
-            for (KyotakuServiceKeikakuSaList result : outputReportList) {
-                count = count + INDEX_1;
-                KyotakuServiceKeikakuSaParam param = new KyotakuServiceKeikakuSaParam();
-                param.set計画届出状況情報リスト(result);
-                param.setシステム日時(システム日付);
-                param.set申請日(申請日);
-                param.set対象者(対象者);
-                param.set届出状況(届出状況);
-                param.set基準日(基準日);
-                param.set地方公共団体(AssociationFinderFactory.createInstance().getAssociation());
-                param.set出力順(並び順);
-                param.set連番(count);
-                KyotakuServiceKeikakuSaReport report = new KyotakuServiceKeikakuSaReport(param);
-                report.writeBy(reportSourceWriter);
-            }
-            outputReportList = new ArrayList<>();
+            count = count + INDEX_1;
+            KyotakuServiceKeikakuSaParam param = new KyotakuServiceKeikakuSaParam();
+            param.set計画届出状況情報リスト(outputReport);
+            param.setシステム日時(システム日付);
+            param.set申請日(申請日);
+            param.set対象者(対象者);
+            param.set届出状況(届出状況);
+            param.set基準日(基準日);
+            param.set地方公共団体(AssociationFinderFactory.createInstance().getAssociation());
+            param.set出力順(並び順);
+            param.set連番(count);
+            KyotakuServiceKeikakuSaReport report = new KyotakuServiceKeikakuSaReport(param);
+            report.writeBy(reportSourceWriter);
+            outputReport = null;
         }
 
         KyotakuServiceKeikakuSaList reportList
@@ -255,7 +252,7 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
 
         setReportList(entity, reportList);
 
-        if (outputReportList.size() > INDEX_0) {
+        if (outputReport != null) {
             受給申請年月日 = RString.EMPTY;
             受給申請事由 = RString.EMPTY;
             if (entity.get受給申請年月日() != null) {
@@ -264,13 +261,9 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
             if (entity.get受給申請事由() != null) {
                 受給申請事由 = JukyuShinseiJiyu.toValue(entity.get受給申請事由().getColumnValue()).get名称();
             }
-            outputReportList
-                    .get(outputReportList.size() - INDEX_1)
-                    .set現在の申請状況(受給申請年月日
-                            .concat(仕切る_2)
-                            .concat(受給申請事由));
+            outputReport.set現在の申請状況(受給申請年月日.concat(仕切る_2).concat(受給申請事由));
         } else {
-            outputReportList.add(reportList);
+            outputReport = reportList;
         }
         被保険者番号_前 = entity.get被保険者番号();
 
@@ -278,22 +271,20 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
 
     @Override
     protected void afterExecute() {
-        if (outputReportList.size() > INDEX_0) {
-            for (KyotakuServiceKeikakuSaList result : outputReportList) {
-                count = count + INDEX_1;
-                KyotakuServiceKeikakuSaParam param = new KyotakuServiceKeikakuSaParam();
-                param.set計画届出状況情報リスト(result);
-                param.setシステム日時(システム日付);
-                param.set申請日(申請日);
-                param.set対象者(対象者);
-                param.set届出状況(届出状況);
-                param.set基準日(基準日);
-                param.set地方公共団体(AssociationFinderFactory.createInstance().getAssociation());
-                param.set出力順(並び順);
-                param.set連番(count);
-                KyotakuServiceKeikakuSaReport report = new KyotakuServiceKeikakuSaReport(param);
-                report.writeBy(reportSourceWriter);
-            }
+        if (outputReport != null) {
+            count = count + INDEX_1;
+            KyotakuServiceKeikakuSaParam param = new KyotakuServiceKeikakuSaParam();
+            param.set計画届出状況情報リスト(outputReport);
+            param.setシステム日時(システム日付);
+            param.set申請日(申請日);
+            param.set対象者(対象者);
+            param.set届出状況(届出状況);
+            param.set基準日(基準日);
+            param.set地方公共団体(AssociationFinderFactory.createInstance().getAssociation());
+            param.set出力順(並び順);
+            param.set連番(count);
+            KyotakuServiceKeikakuSaReport report = new KyotakuServiceKeikakuSaReport(param);
+            report.writeBy(reportSourceWriter);
         }
         csvWriter.close();
         if (null != personalDataList && !personalDataList.isEmpty()) {
