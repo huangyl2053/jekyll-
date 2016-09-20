@@ -591,23 +591,25 @@ public class HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate {
         KozaRelateEntity releteEntity = entity.get口座情報Entity();
         if (releteEntity != null) {
             IKoza 口座 = new Koza(releteEntity);
+            KinyuKikanShiten 支店 = 口座.get支店();
             if (口座.isゆうちょ銀行()) {
                 csvEntity.set銀行郵便区分(Kaigogassan_KinyuKikanKubun.ゆうちょ.get名称());
                 csvEntity.set支店コード(口座.get店番());
+                csvEntity.set支店名カナ(RString.EMPTY);
+                csvEntity.set支店名(RString.EMPTY);
             } else {
                 csvEntity.set銀行郵便区分(Kaigogassan_KinyuKikanKubun.普銀.get名称());
                 KinyuKikanShitenCode 支店コード = 口座.get支店コード();
                 csvEntity.set支店コード(支店コード != null ? 支店コード.getColumnValue() : RString.EMPTY);
+                csvEntity.set支店名カナ(支店 != null ? 支店.get支店カナ名称() : RString.EMPTY);
+                csvEntity.set支店名(支店 != null ? 支店.get支店名称() : RString.EMPTY);
             }
             KinyuKikanCode 銀行コード = 口座.get金融機関コード();
             KinyuKikan 金融機関 = 口座.get金融機関();
-            KinyuKikanShiten 支店 = 口座.get支店();
             csvEntity.set銀行コード(銀行コード != null ? 銀行コード.getColumnValue() : RString.EMPTY);
             csvEntity.set銀行名カナ(金融機関 != null ? 金融機関.get金融機関カナ名称() : RString.EMPTY);
             csvEntity.set銀行名(金融機関 != null ? 金融機関.get金融機関名称() : RString.EMPTY);
-            csvEntity.set支店名カナ(支店 != null ? 支店.get支店カナ名称() : RString.EMPTY);
-            csvEntity.set支店名(支店 != null ? 支店.get支店名称() : RString.EMPTY);
-            csvEntity.set口座種目(口座.get預金種別略称() != null ? 口座.get預金種別略称() : RString.EMPTY);
+            csvEntity.set口座種目(口座.get預金種別() != null ? 口座.get預金種別().get預金種別コード() : RString.EMPTY);
             csvEntity.set口座番号(口座.get口座番号());
 
             AtenaKanaMeisho 名義人カナ = 口座.get口座名義人();
