@@ -6,10 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc160010;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import jp.co.ndensan.reams.db.dbc.business.report.keikakutodokedejokyoichiran.KeikakuTodokedeJokyoIchiranCsvEntity;
 import jp.co.ndensan.reams.db.dbc.business.report.keikakutodokedejokyoichiran.KeikakuTodokedeJokyoIchiranOrder;
@@ -78,8 +76,7 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
     private IOutputOrder 並び順;
     private RString 出力順;
     private List<RString> breakItemIds;
-    private List<KeikakuTodokedeJokyoIchiranCsvEntity> outputCsvList;
-    private Map<HihokenshaNo, List<KyotakuServiceKeikakuSaList>> outputReportMap;
+    private List<KyotakuServiceKeikakuSaList> outputReportList;
     private List<PersonalData> personalDataList;
     private HihokenshaNo 被保険者番号_前;
     private FileSpoolManager manager;
@@ -88,6 +85,8 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
     private RString 届出状況;
     private FlexibleDate 基準日;
     private RString 作成日時;
+    private RString 受給申請年月日;
+    private RString 受給申請事由;
     private Set<ShikibetsuCode> 識別コードset;
     private int count;
     private boolean flag;
@@ -104,13 +103,12 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
     private static final RString 仕切る = new RString("~");
     private static final RString 仕切る_2 = new RString(":");
     private static final RString MESSAGE_1 = new RString("計画届出状況抽出処理");
-    private static final RString MESSAGE_2 = new RString("1(受給者申請中者のみ)");
-    private static final RString MESSAGE_3 = new RString("3(全受給者・施設含む)");
-    private static final RString MESSAGE_4 = new RString("1(未提出者のみ)");
-    private static final RString MESSAGE_5 = new RString("3(提出者のみ)");
     private static final RString 定値_届出なし = new RString("届出なし");
     private static final RString 定値_有効なし = new RString("有効なし");
     private static final RString 定値_事業者無効 = new RString("事業者無効");
+    private static final RString 定値_時 = new RString("時");
+    private static final RString 定値_分 = new RString("分");
+    private static final RString 定値_秒 = new RString("秒");
     private static final RString RS_0000 = new RString("0000");
     private static final RString RS_1 = new RString("1");
     private static final RString RS_3 = new RString("3");
@@ -132,7 +130,7 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
     protected void initialize() {
         count = INDEX_0;
         personalDataList = new ArrayList<>();
-        outputReportMap = new HashMap<>();
+        outputReportList = new ArrayList<>();
         breakItemIds = new ArrayList<>();
         識別コードset = new HashSet<>();
         flag = true;
@@ -179,7 +177,7 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
         csvWriter = new CsvWriter.InstanceBuilder(Path.combinePath(manager.getEucOutputDirectry(), CSVFILENAME)).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
-                setEncode(Encode.SJIS).
+                setEncode(Encode.UTF_8withBOM).
                 setNewLine(NewLine.CRLF).
                 hasHeader(true).
                 build();
@@ -188,14 +186,13 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
     @Override
     protected void process(KeikakuTodokedeJokyoIchiranEntity entity) {
         アクセスログ対象追加(entity);
-        outputCsvList = new ArrayList<>();
         if (entity.get識別コード() == null) {
             if (flag) {
                 RTime time = システム日付.getTime();
                 RString hour = new RString(time.toString()).substringReturnAsPossible(INDEX_0, INDEX_2);
                 RString min = new RString(time.toString()).substringReturnAsPossible(INDEX_3, INDEX_5);
                 RString sec = new RString(time.toString()).substringReturnAsPossible(INDEX_6, INDEX_8);
-                RString timeFormat = hour.concat("時").concat(min).concat("分").concat(sec).concat("秒");
+                RString timeFormat = hour.concat(定値_時).concat(min).concat(定値_分).concat(sec).concat(定値_秒);
                 作成日時 = システム日付.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                         .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(RString.FULL_SPACE).concat(timeFormat);
                 flag = false;
@@ -207,7 +204,7 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
                     entity.get被保険者番号().getColumnValue(),
                     kyotakuTodokede_ErrorListType.リストタイプ0.get名称(),
                     RString.EMPTY);
-            outputCsvList.add(csvEntity);
+            csvWriter.writeLine(csvEntity);
         }
         if (entity.get宛名() == null) {
             if (flag) {
@@ -215,7 +212,7 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
                 RString hour = new RString(time.toString()).substringReturnAsPossible(INDEX_0, INDEX_2);
                 RString min = new RString(time.toString()).substringReturnAsPossible(INDEX_3, INDEX_5);
                 RString sec = new RString(time.toString()).substringReturnAsPossible(INDEX_6, INDEX_8);
-                RString timeFormat = hour.concat("時").concat(min).concat("分").concat(sec).concat("秒");
+                RString timeFormat = hour.concat(定値_時).concat(min).concat(定値_分).concat(sec).concat(定値_秒);
                 作成日時 = システム日付.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                         .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(RString.FULL_SPACE).concat(timeFormat);
                 flag = false;
@@ -227,12 +224,7 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
                     entity.get被保険者番号().getColumnValue(),
                     kyotakuTodokede_ErrorListType.リストタイプ1.get名称(),
                     RString.EMPTY);
-            outputCsvList.add(csvEntity);
-        }
-        if (outputCsvList != null) {
-            for (KeikakuTodokedeJokyoIchiranCsvEntity csvEntity : outputCsvList) {
-                csvWriter.writeLine(csvEntity);
-            }
+            csvWriter.writeLine(csvEntity);
         }
 
         if (check(entity)) {
@@ -240,8 +232,7 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
         }
 
         if (!entity.get被保険者番号().equals(被保険者番号_前) && 被保険者番号_前 != null) {
-            List<KyotakuServiceKeikakuSaList> list = outputReportMap.get(被保険者番号_前);
-            for (KyotakuServiceKeikakuSaList result : list) {
+            for (KyotakuServiceKeikakuSaList result : outputReportList) {
                 count = count + INDEX_1;
                 KyotakuServiceKeikakuSaParam param = new KyotakuServiceKeikakuSaParam();
                 param.set計画届出状況情報リスト(result);
@@ -256,7 +247,7 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
                 KyotakuServiceKeikakuSaReport report = new KyotakuServiceKeikakuSaReport(param);
                 report.writeBy(reportSourceWriter);
             }
-            outputReportMap = new HashMap<>();
+            outputReportList = new ArrayList<>();
         }
 
         KyotakuServiceKeikakuSaList reportList
@@ -264,25 +255,22 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
 
         setReportList(entity, reportList);
 
-        if (outputReportMap.get(entity.get被保険者番号()) != null) {
-            RString 受給申請年月日 = new RString("");
-            RString 受給申請事由 = new RString("");
+        if (outputReportList.size() > INDEX_0) {
+            受給申請年月日 = RString.EMPTY;
+            受給申請事由 = RString.EMPTY;
             if (entity.get受給申請年月日() != null) {
                 受給申請年月日 = new RString(entity.get受給申請年月日().toString());
             }
             if (entity.get受給申請事由() != null) {
                 受給申請事由 = JukyuShinseiJiyu.toValue(entity.get受給申請事由().getColumnValue()).get名称();
             }
-            outputReportMap.get(entity.get被保険者番号())
-                    .get(outputReportMap.get(entity.get被保険者番号()).size() - INDEX_1)
+            outputReportList
+                    .get(outputReportList.size() - INDEX_1)
                     .set現在の申請状況(受給申請年月日
                             .concat(仕切る_2)
                             .concat(受給申請事由));
-            outputReportMap.get(entity.get被保険者番号()).add(reportList);
         } else {
-            List<KyotakuServiceKeikakuSaList> list = new ArrayList<>();
-            list.add(reportList);
-            outputReportMap.put(entity.get被保険者番号(), list);
+            outputReportList.add(reportList);
         }
         被保険者番号_前 = entity.get被保険者番号();
 
@@ -290,9 +278,8 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
 
     @Override
     protected void afterExecute() {
-        List<KyotakuServiceKeikakuSaList> list = outputReportMap.get(被保険者番号_前);
-        if (list != null) {
-            for (KyotakuServiceKeikakuSaList result : list) {
+        if (outputReportList.size() > INDEX_0) {
+            for (KyotakuServiceKeikakuSaList result : outputReportList) {
                 count = count + INDEX_1;
                 KyotakuServiceKeikakuSaParam param = new KyotakuServiceKeikakuSaParam();
                 param.set計画届出状況情報リスト(result);
@@ -381,27 +368,27 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
                 && processParameter.getJyukyuushinseibiTo().isBefore(entity.get受給申請年月日())) {
             return true;
         }
-        if (MESSAGE_2.equals(processParameter.getTaisyoushatyuusyutu())
+        if (RS_1.equals(processParameter.getTaisyoushatyuusyutu())
                 && !RS_0000.equals(entity.get履歴番号())) {
             return true;
         }
         if (!(RS_1.equals(entity.get住所地特例フラグ())
-                && MESSAGE_3.equals(processParameter.getTaisyoushatyuusyutu())
+                && RS_3.equals(processParameter.getTaisyoushatyuusyutu())
                 && (entity.get資格喪失年月日() == null
                 || !entity.get資格取得年月日().equals(entity.get資格喪失年月日())))) {
             return true;
         }
         if (entity.get施設フラウ() != null
-                && !(MESSAGE_3.equals(processParameter.getTaisyoushatyuusyutu()))) {
+                && !(RS_3.equals(processParameter.getTaisyoushatyuusyutu()))) {
             return true;
         }
-        if (MESSAGE_4.equals(processParameter.getTodokeidejyoukyou())
+        if (RS_1.equals(processParameter.getTodokeidejyoukyou())
                 && entity.get適用開始年月日().isBeforeOrEquals(processParameter.getKijyunbi())
                 && (processParameter.getKijyunbi().isBeforeOrEquals(entity.get適用終了年月日())
                 || entity.get適用終了年月日() == null)) {
             return true;
         }
-        return MESSAGE_5.equals(processParameter.getTodokeidejyoukyou())
+        return RS_3.equals(processParameter.getTodokeidejyoukyou())
                 && entity.get適用終了年月日() != null
                 && entity.get適用終了年月日().isBefore(processParameter.getKijyunbi());
 
