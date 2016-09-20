@@ -185,7 +185,7 @@ public class PrtTokuchoMidoteiIchiranhyoProcess extends BatchProcessBase<Tokubet
                 entity.getKisoNenkinNo(),
                 entity.getNenkinCode(),
                 entity.getShikibetsuCode(),
-                new RDate(entity.getBirthDay().toString()),
+                getDate(entity.getBirthDay()),
                 entity.getJuminShubetsuCode(),
                 get性別コード(entity.getSeibetsu()),
                 entity.getKanaShimei(),
@@ -198,6 +198,13 @@ public class PrtTokuchoMidoteiIchiranhyoProcess extends BatchProcessBase<Tokubet
         TokubetsuChoshuMidoteiIchiranReport report = new TokubetsuChoshuMidoteiIchiranReport(
                 導入団体クラス, null, null, target, parameter.get特別徴収開始月());
         report.writeBy(reportSourceWriter);
+    }
+
+    private RDate getDate(RString str) {
+        if (RString.isNullOrEmpty(str)) {
+            return null;
+        }
+        return new RDate(str.toString());
     }
 
     private void outputCsv(TokubetsuChoshuMidoteiIchiranEntity entity) {

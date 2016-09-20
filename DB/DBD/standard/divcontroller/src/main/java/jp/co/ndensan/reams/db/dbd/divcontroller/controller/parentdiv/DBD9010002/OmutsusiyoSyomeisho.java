@@ -36,6 +36,7 @@ public class OmutsusiyoSyomeisho {
 
     private static final RString 医療費控除証明書 = new RString("IryohiKojyoSyomeisho");
     private static final RString DB = new RString("DB");
+    private static final RString 完了メッセージメイン = new RString("おむつ使用証明書の作成を完了しました。");
 
     /**
      * 画面初期化
@@ -89,13 +90,26 @@ public class OmutsusiyoSyomeisho {
     }
 
     /**
-     * 「発行する」ボタンonClick
+     * 発行処理
      *
      * @param div OmutsusiyoSyomeishoDiv
      * @return ResponseData<OmutsusiyoSyomeishoDiv>
      */
     public ResponseData<OmutsusiyoSyomeishoDiv> onClick_btnReportPublish(OmutsusiyoSyomeishoDiv div) {
         getHandler(div).publishReport(ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class));
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 発行完了
+     *
+     * @param div OmutsusiyoSyomeishoDiv
+     * @return ResponseData<OmutsusiyoSyomeishoDiv>
+     */
+    public ResponseData<OmutsusiyoSyomeishoDiv> onClick_completePublish(OmutsusiyoSyomeishoDiv div) {
+        div.getCcdKaigoKanryoMessage().setMessage(完了メッセージメイン,
+                ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get被保険者番号().value(),
+                div.getPanelKakuninsho().getCcdKaigoAtenaInfo().get氏名漢字(), true);
         return ResponseData.of(div).setState(DBD9010002StateName.完了状態);
     }
 
