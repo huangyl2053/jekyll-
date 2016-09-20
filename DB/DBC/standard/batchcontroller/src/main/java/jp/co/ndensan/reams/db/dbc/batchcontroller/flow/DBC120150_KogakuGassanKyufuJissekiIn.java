@@ -65,18 +65,12 @@ public class DBC120150_KogakuGassanKyufuJissekiIn extends BatchFlowBase<DBC12015
     private boolean isLast;
     private FlowEntity flowEntity;
     private static RString 交換情報識別番号;
-    // private static RString 交換情報識別番号1;
     private KokuhorenKyoutsuuFileGetReturnEntity returnEntity;
 
     @Override
     protected void defineFlow() {
         try {
-//            RString 処理区分 = RString.EMPTY;
-//            if (!RString.isNullOrEmpty(getParameter().get処理区分())) {
-//                処理区分 = getParameter().get処理区分().trim();
-//            }
-            //  交換情報識別番号1 = DbBusinessConfig.get(ConfigNameDBC.国保連取込_高額合算給付実績情報_交換情報識別番号,
-            //         RDate.getNowDate(), SubGyomuCode.DBC介護給付).concat(処理区分);
+
             交換情報識別番号 = DbBusinessConfig.get(ConfigNameDBC.国保連取込_高額合算給付実績情報_交換情報識別番号,
                     RDate.getNowDate(), SubGyomuCode.DBC介護給付);
             executeStep(ファイル取得);

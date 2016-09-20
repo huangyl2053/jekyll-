@@ -51,29 +51,6 @@ public class KogakuGassanKyufuJissekiInDoMasterTorokuSaiShoriProcess extends Bat
 
     @Override
     protected void process(DbT3075KogakuGassanKyufuJissekiEntity entity) {
-        doデータ削除(entity);
+        dbT3075Writer.delete(entity);
     }
-
-    private void doデータ削除(DbT3075KogakuGassanKyufuJissekiEntity entity) {
-        DbT3075KogakuGassanKyufuJissekiEntity dbt3075entity = new DbT3075KogakuGassanKyufuJissekiEntity();
-        dbt3075entity.setKokanJohoShikibetsuNo(entity.getKokanJohoShikibetsuNo());
-        dbt3075entity.setHihokenshaNo(entity.getHihokenshaNo());
-        dbt3075entity.setShikyuShinseiSeiriNo(entity.getShikyuShinseiSeiriNo());
-        dbt3075entity.setSeiriNo(entity.getSeiriNo());
-        dbt3075entity.setJikoFutanSeiriNo(entity.getJikoFutanSeiriNo());
-        dbt3075entity.setHokenSeidoCode(entity.getHokenSeidoCode());
-        dbt3075entity.setKyufuJissekiSakuseiKubunCode(entity.getKyufuJissekiSakuseiKubunCode());
-        dbt3075entity.setShoKisaiHokenshaNo(entity.getShoKisaiHokenshaNo());
-        dbt3075entity.setKokuho_HihokenshaShoKigo(entity.getKokuho_HihokenshaShoKigo());
-        dbt3075entity.setShinseiYMD(entity.getShinseiYMD());
-        dbt3075entity.setKetteiYMD(entity.getKetteiYMD());
-        dbt3075entity.setJikoFutanSogaku(entity.getJikoFutanSogaku());
-        dbt3075entity.setShikyuGaku(entity.getShikyuGaku());
-        dbt3075entity.setShoriYM(entity.getShoriYM());
-        dbt3075entity.setUketoriYM(entity.getUketoriYM());
-        dbt3075entity.setSofuYM(entity.getSofuYM());
-        dbt3075entity.setDataKubun(entity.getDataKubun());
-        dbT3075Writer.delete(dbt3075entity);
-    }
-
 }
