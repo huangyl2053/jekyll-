@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.report.dbd100029;
 
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.iryohikojokakuninsinsei.OmutsusiyoSyomeishoEntity;
+import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.OmutsusiyoSyomeishoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd100029.OmutsuShoumeishoReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;

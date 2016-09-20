@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.entity.db.relate.iryohikojokakuninsinsei;
+package jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

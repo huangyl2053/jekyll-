@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbd.definition.message.DbdQuestionMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD9010002.DBD9010002StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD9010002.OmutsusiyoSyomeishoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD9010002.OmutsusiyoSyomeishoHandler;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.iryohikojokakuninsinsei.IryohiKojoEntity;
+import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.IryohiKojoEntityResult;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
@@ -49,7 +49,7 @@ public class OmutsusiyoSyomeisho {
         if (引き継ぎEntity.get被保険者番号() == null || 引き継ぎEntity.get被保険者番号().isEmpty()) {
             return ResponseData.of(div).addMessage(DbdInformationMessages.被保険者でないデータ.getMessage()).respond();
         }
-        List<IryohiKojoEntity> 医療費控除リスト = getHandler(div).onLoad(引き継ぎEntity);
+        List<IryohiKojoEntityResult> 医療費控除リスト = getHandler(div).onLoad(引き継ぎEntity);
         ViewStateHolder.put(IryoHiKojoNaiyo.おむつ使用証明書, new ArrayList(医療費控除リスト));
         return ResponseData.of(div).setState(DBD9010002StateName.初期状態);
     }
@@ -61,7 +61,7 @@ public class OmutsusiyoSyomeisho {
      * @return ResponseData<OmutsusiyoSyomeishoDiv>
      */
     public ResponseData<OmutsusiyoSyomeishoDiv> onChange_ddlTaishonen(OmutsusiyoSyomeishoDiv div) {
-        List<IryohiKojoEntity> 医療費控除リスト = ViewStateHolder.get(IryoHiKojoNaiyo.おむつ使用証明書, ArrayList.class);
+        List<IryohiKojoEntityResult> 医療費控除リスト = ViewStateHolder.get(IryoHiKojoNaiyo.おむつ使用証明書, ArrayList.class);
         getHandler(div).onChange対象年(医療費控除リスト);
         return ResponseData.of(div).respond();
     }
