@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.dbc120180;
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120170.KohifutanshaDoMasterTorokuProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120170.KohifutanshaDoMasterTorokuProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120180.KagoKetteiHokenshaInCsvFileReadProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120180.SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDeleteReveicedFileProcess;

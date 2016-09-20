@@ -368,52 +368,52 @@ public class KogakugassanShikyushinseishoOutSofuFileSakuseiProcess extends Batch
             DbT3069KogakuGassanShinseishoKanyurekiEntity entity) {
         if (加入歴番号_01.equals(entity.getKanyurekiNo())) {
             meisaiEntity.set保険者名1(囲み文字(trimRString(entity.getHokenshaMei())));
-            meisaiEntity.set加入期間_開始年月日1(formatDate(entity.getKanyuShuryoYMD()));
+            meisaiEntity.set加入期間_開始年月日1(formatDate(entity.getKanyuKaishiYMD()));
             meisaiEntity.set加入期間_終了年月日1(formatDate(entity.getKanyuShuryoYMD()));
             meisaiEntity.set自己負担額証明書整理番号1(trimRString(entity.getJikoFutanShomeisho_SeiriNo()));
         } else if (加入歴番号_02.equals(entity.getKanyurekiNo())) {
             meisaiEntity.set保険者名2(囲み文字(trimRString(entity.getHokenshaMei())));
-            meisaiEntity.set加入期間_開始年月日2(formatDate(entity.getKanyuShuryoYMD()));
+            meisaiEntity.set加入期間_開始年月日2(formatDate(entity.getKanyuKaishiYMD()));
             meisaiEntity.set加入期間_終了年月日2(formatDate(entity.getKanyuShuryoYMD()));
             meisaiEntity.set自己負担額証明書整理番号2(trimRString(entity.getJikoFutanShomeisho_SeiriNo()));
         } else if (加入歴番号_03.equals(entity.getKanyurekiNo())) {
             meisaiEntity.set保険者名3(囲み文字(trimRString(entity.getHokenshaMei())));
-            meisaiEntity.set加入期間_開始年月日3(formatDate(entity.getKanyuShuryoYMD()));
+            meisaiEntity.set加入期間_開始年月日3(formatDate(entity.getKanyuKaishiYMD()));
             meisaiEntity.set加入期間_終了年月日3(formatDate(entity.getKanyuShuryoYMD()));
             meisaiEntity.set自己負担額証明書整理番号3(trimRString(entity.getJikoFutanShomeisho_SeiriNo()));
         } else if (加入歴番号_04.equals(entity.getKanyurekiNo())) {
             meisaiEntity.set保険者名4(囲み文字(trimRString(entity.getHokenshaMei())));
-            meisaiEntity.set加入期間_開始年月日4(formatDate(entity.getKanyuShuryoYMD()));
+            meisaiEntity.set加入期間_開始年月日4(formatDate(entity.getKanyuKaishiYMD()));
             meisaiEntity.set加入期間_終了年月日4(formatDate(entity.getKanyuShuryoYMD()));
             meisaiEntity.set自己負担額証明書整理番号4(trimRString(entity.getJikoFutanShomeisho_SeiriNo()));
         } else if (加入歴番号_05.equals(entity.getKanyurekiNo())) {
             meisaiEntity.set保険者名5(囲み文字(trimRString(entity.getHokenshaMei())));
-            meisaiEntity.set加入期間_開始年月日5(formatDate(entity.getKanyuShuryoYMD()));
+            meisaiEntity.set加入期間_開始年月日5(formatDate(entity.getKanyuKaishiYMD()));
             meisaiEntity.set加入期間_終了年月日5(formatDate(entity.getKanyuShuryoYMD()));
             meisaiEntity.set自己負担額証明書整理番号5(trimRString(entity.getJikoFutanShomeisho_SeiriNo()));
         } else if (加入歴番号_06.equals(entity.getKanyurekiNo())) {
             meisaiEntity.set保険者名6(囲み文字(trimRString(entity.getHokenshaMei())));
-            meisaiEntity.set加入期間_開始年月日6(formatDate(entity.getKanyuShuryoYMD()));
+            meisaiEntity.set加入期間_開始年月日6(formatDate(entity.getKanyuKaishiYMD()));
             meisaiEntity.set加入期間_終了年月日6(formatDate(entity.getKanyuShuryoYMD()));
             meisaiEntity.set自己負担額証明書整理番号6(trimRString(entity.getJikoFutanShomeisho_SeiriNo()));
         } else if (加入歴番号_07.equals(entity.getKanyurekiNo())) {
             meisaiEntity.set保険者名7(囲み文字(trimRString(entity.getHokenshaMei())));
-            meisaiEntity.set加入期間_開始年月日7(formatDate(entity.getKanyuShuryoYMD()));
+            meisaiEntity.set加入期間_開始年月日7(formatDate(entity.getKanyuKaishiYMD()));
             meisaiEntity.set加入期間_終了年月日7(formatDate(entity.getKanyuShuryoYMD()));
             meisaiEntity.set自己負担額証明書整理番号7(trimRString(entity.getJikoFutanShomeisho_SeiriNo()));
         } else if (加入歴番号_08.equals(entity.getKanyurekiNo())) {
             meisaiEntity.set保険者名8(囲み文字(trimRString(entity.getHokenshaMei())));
-            meisaiEntity.set加入期間_開始年月日8(formatDate(entity.getKanyuShuryoYMD()));
+            meisaiEntity.set加入期間_開始年月日8(formatDate(entity.getKanyuKaishiYMD()));
             meisaiEntity.set加入期間_終了年月日8(formatDate(entity.getKanyuShuryoYMD()));
             meisaiEntity.set自己負担額証明書整理番号8(trimRString(entity.getJikoFutanShomeisho_SeiriNo()));
         } else if (加入歴番号_09.equals(entity.getKanyurekiNo())) {
             meisaiEntity.set保険者名9(囲み文字(trimRString(entity.getHokenshaMei())));
-            meisaiEntity.set加入期間_開始年月日9(formatDate(entity.getKanyuShuryoYMD()));
+            meisaiEntity.set加入期間_開始年月日9(formatDate(entity.getKanyuKaishiYMD()));
             meisaiEntity.set加入期間_終了年月日9(formatDate(entity.getKanyuShuryoYMD()));
             meisaiEntity.set自己負担額証明書整理番号9(trimRString(entity.getJikoFutanShomeisho_SeiriNo()));
         } else if (加入歴番号_10.equals(entity.getKanyurekiNo())) {
             meisaiEntity.set保険者名10(囲み文字(trimRString(entity.getHokenshaMei())));
-            meisaiEntity.set加入期間_開始年月日10(formatDate(entity.getKanyuShuryoYMD()));
+            meisaiEntity.set加入期間_開始年月日10(formatDate(entity.getKanyuKaishiYMD()));
             meisaiEntity.set加入期間_終了年月日10(formatDate(entity.getKanyuShuryoYMD()));
             meisaiEntity.set自己負担額証明書整理番号10(trimRString(entity.getJikoFutanShomeisho_SeiriNo()));
         }
