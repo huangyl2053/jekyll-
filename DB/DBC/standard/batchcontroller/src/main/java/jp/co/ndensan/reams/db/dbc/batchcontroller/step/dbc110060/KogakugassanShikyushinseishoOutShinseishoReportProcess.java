@@ -80,6 +80,7 @@ public class KogakugassanShikyushinseishoOutShinseishoReportProcess
     private static final Code コード = new Code("0003");
     private static final RString 漢字_被保険者番号 = new RString("被保険者番号");
     private static final RString 固定改頁項目 = new RString("重複フラグ");
+    private static final RString 年度R = new RString("年度");
 
     private KogakugassanShikyushinseishoOutProcessParameter processParameter;
     private List<RString> pageBreakKeys;
@@ -223,8 +224,8 @@ public class KogakugassanShikyushinseishoOutShinseishoReportProcess
         DbWT3711KogakuGassanShinseishoTempEntity 一時Entity = entity.get高額合算申請書一時Entity();
         csvEntity.setNo(new RString(flag));
         FlexibleYear 対象年度 = 一時Entity.getTaishoNendo();
-        RString 対象年度R = 対象年度 == null || 対象年度.isEmpty() ? RString.EMPTY
-                : 対象年度.wareki().fillType(FillType.BLANK).toDateString();
+        RString 対象年度R = 対象年度 == null || 対象年度.isEmpty() ? RString.EMPTY : 対象年度.wareki().eraType(EraType.KANJI_RYAKU)
+                .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(年度R);
         csvEntity.set申請年度(対象年度R);
         csvEntity.set支給申請区分(一時Entity.getShikyuShinseiKubun());
         if (一時Entity.getShikyuShinseiKubun() != null) {
