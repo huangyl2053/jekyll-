@@ -914,7 +914,7 @@ public class TokubetsuChoshuJohoAppurodoHandler {
         } else {
             List<dgGetuShoriSelect_Row> 処理対象Rows = div.getShoriTaishoShichosonPanel().getDgGetuShoriSelect().getSelectedItems();
             Map<RString, RString> map = get処理月と月Map();
-            選択月 = map.get(処理対象Rows.get(INT_0).getData1()).substring(INT_2, INT_4);
+            選択月 = map.get(処理対象Rows.get(INT_0).getData1());
             選択市町村ID = div.getShoriJokyoPanel().getDdlShichoson().getSelectedKey();
         }
         shareファイル名 = shareファイル名.replace(市町村ID, 選択市町村ID);
