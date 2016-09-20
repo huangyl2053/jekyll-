@@ -435,30 +435,10 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
             要介護認定情報.set先頭Entity(先頭Entity);
             要介護認定情報.set認定区分(RString.EMPTY);
             要介護認定情報.set明細番号(new RString(String.valueOf(明細++)));
-            if (導入形態コード.equals(DonyuKeitaiCode.事務構成市町村)
-                    || 導入形態コード.equals(DonyuKeitaiCode.事務広域)) {
-                要介護認定情報.set認定申請日(t.get要介護認定情報().getT4003_認定申請日());
-            }
-            if (導入形態コード.equals(DonyuKeitaiCode.事務単一)) {
-                要介護認定情報.set認定申請日(t.get要介護認定情報().getT4101_認定申請年月日());
-            }
             要介護認定情報.set認定日(t.get要介護認定情報().get受給者台帳_認定年月日());
             要介護認定情報.set申請事由(JukyuShinseiJiyu.toValue(t.get要介護認定情報().get受給者台帳_受給申請事由().getColumnValue()).get名称());
             要介護認定情報.set異動事由(Datakubun.toValue(t.get要介護認定情報().get受給者台帳_データ区分()).get名称());
-            if (t.get要介護認定情報().getT4101_厚労省IF識別コード().equals(区分_99A)) {
-                要介護認定情報.set要介護度(t.get要介護認定情報().get受給者台帳_要介護認定状態区分コード() != null
-                        ? 要介護状態区分コード.concat(YokaigoJotaiKubun99.toValue(t.get要介護認定情報().get受給者台帳_要介護認定状態区分コード()).get名称()) : RString.EMPTY);
-            } else if (t.get要介護認定情報().getT4101_厚労省IF識別コード().equals(区分_02A)) {
-                要介護認定情報.set要介護度(t.get要介護認定情報().get受給者台帳_要介護認定状態区分コード() != null
-                        ? 要介護状態区分コード.concat(YokaigoJotaiKubun02.toValue(t.get要介護認定情報().get受給者台帳_要介護認定状態区分コード()).get名称()) : RString.EMPTY);
-            } else if (t.get要介護認定情報().getT4101_厚労省IF識別コード().equals(区分_06A)) {
-                要介護認定情報.set要介護度(t.get要介護認定情報().get受給者台帳_要介護認定状態区分コード() != null
-                        ? 要介護状態区分コード.concat(YokaigoJotaiKubun06.toValue(t.get要介護認定情報().get受給者台帳_要介護認定状態区分コード()).get名称()) : RString.EMPTY);
-            } else if (t.get要介護認定情報().getT4101_厚労省IF識別コード().equals(区分_09A)
-                    || t.get要介護認定情報().getT4101_厚労省IF識別コード().equals(区分_09B)) {
-                要介護認定情報.set要介護度(t.get要介護認定情報().get受給者台帳_要介護認定状態区分コード() != null
-                        ? 要介護状態区分コード.concat(YokaigoJotaiKubun09.toValue(t.get要介護認定情報().get受給者台帳_要介護認定状態区分コード()).get名称()) : RString.EMPTY);
-            }
+            set要介護度(要介護認定情報, t);
             要介護認定情報.set認定開始日(t.get要介護認定情報().get受給者台帳_認定有効期間開始年月日());
             要介護認定情報.set認定終了日(t.get要介護認定情報().get受給者台帳_認定有効期間終了年月日());
             要介護認定情報.set訪問限度額(t.get要介護認定情報().get受給者台帳_支給限度単位数());
@@ -469,69 +449,11 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
             要介護認定情報.set短期終了日(t.get要介護認定情報().get受給者台帳_短期入所支給限度終了年月日());
             if (導入形態コード.equals(DonyuKeitaiCode.事務構成市町村)
                     || 導入形態コード.equals(DonyuKeitaiCode.事務広域)) {
-                要介護認定情報.set調査依頼日(t.get要介護認定情報().getT4003_調査委託年月日());
-                要介護認定情報.set調査実施日(t.get要介護認定情報().getT4003_調査終了年月日());
-                要介護認定情報.set医師依頼日(t.get要介護認定情報().getT4003_意見書依頼年月日());
-                要介護認定情報.set医師取寄日(t.get要介護認定情報().getT4003_意見書取寄せ年月日());
-                要介護認定情報.set資料作成日(t.get要介護認定情報().getT4003_審査会資料作成年月日());
-                要介護認定情報.set審査予定日(t.get要介護認定情報().getT4003_審査会予定年月日());
-                要介護認定情報.set二次判定日(t.get要介護認定情報().getT4003_二次判定日());
-                if (t.get要介護認定情報().getT4101_厚労省IF識別コード().equals(区分_99A)) {
-                    要介護認定情報.set一次要介護度(t.get要介護認定情報().getT4003_一次判定結果() != null
-                            ? 要介護認定一次判定結果コード.concat(IchijiHanteiKekkaCode99.toValue(t.get要介護認定情報().getT4003_一次判定結果()).get名称()) : RString.EMPTY);
-                    要介護認定情報.set一次要介護度_重(t.get要介護認定情報().getT4003_一次判定結果重み() != null
-                            ? 要介護認定一次判定結果コード.concat(IchijiHanteiKekkaCode99.toValue(t.get要介護認定情報().getT4003_一次判定結果重み()).get名称()) : RString.EMPTY);
-                } else if (t.get要介護認定情報().getT4101_厚労省IF識別コード().equals(区分_02A)) {
-                    要介護認定情報.set一次要介護度(t.get要介護認定情報().getT4003_一次判定結果() != null
-                            ? 要介護認定一次判定結果コード.concat(IchijiHanteiKekkaCode02.toValue(t.get要介護認定情報().getT4003_一次判定結果()).get名称()) : RString.EMPTY);
-                    要介護認定情報.set一次要介護度_重(t.get要介護認定情報().getT4003_一次判定結果重み() != null
-                            ? 要介護認定一次判定結果コード.concat(IchijiHanteiKekkaCode02.toValue(t.get要介護認定情報().getT4003_一次判定結果重み()).get名称()) : RString.EMPTY);
-                } else if (t.get要介護認定情報().getT4101_厚労省IF識別コード().equals(区分_06A)) {
-                    要介護認定情報.set一次要介護度(t.get要介護認定情報().getT4003_一次判定結果() != null
-                            ? 要介護認定一次判定結果コード.concat(IchijiHanteiKekkaCode06.toValue(t.get要介護認定情報().getT4003_一次判定結果()).get名称()) : RString.EMPTY);
-                    要介護認定情報.set一次要介護度_重(t.get要介護認定情報().getT4003_一次判定結果重み() != null
-                            ? 要介護認定一次判定結果コード.concat(IchijiHanteiKekkaCode06.toValue(t.get要介護認定情報().getT4003_一次判定結果重み()).get名称()) : RString.EMPTY);
-                } else if (t.get要介護認定情報().getT4101_厚労省IF識別コード().equals(区分_09A)
-                        || t.get要介護認定情報().getT4101_厚労省IF識別コード().equals(区分_09B)) {
-                    要介護認定情報.set一次要介護度(t.get要介護認定情報().getT4003_一次判定結果() != null
-                            ? 要介護認定一次判定結果コード.concat(IchijiHanteiKekkaCode09.toValue(t.get要介護認定情報().getT4003_一次判定結果()).get名称()) : RString.EMPTY);
-                    要介護認定情報.set一次要介護度_重(t.get要介護認定情報().getT4003_一次判定結果重み() != null
-                            ? 要介護認定一次判定結果コード.concat(IchijiHanteiKekkaCode09.toValue(t.get要介護認定情報().getT4003_一次判定結果重み()).get名称()) : RString.EMPTY);
-                }
-                要介護認定情報.set一次判定日(t.get要介護認定情報().getT4003_一次判定日());
-                要介護認定情報.set特定疾病(TokuteiShippei.toValue(t.get要介護認定情報().getT4003_特定疾病コード()).get名称());
-                要介護認定情報.set調査委託先コード(t.get要介護認定情報().getT4003_調査委託先コード());
-                要介護認定情報.set調査員コード(t.get要介護認定情報().getT4003_調査員コード());
-                要介護認定情報.set主治医医療機関コード(t.get要介護認定情報().getT4003_医療機関コード());
-                要介護認定情報.set主治医コード(t.get要介護認定情報().getT4003_主治医コード());
-                要介護認定情報.set認定審査会意見(t.get要介護認定情報().getT4003_審査会意見());
+                set広域(要介護認定情報, t);
             }
             if (導入形態コード.equals(DonyuKeitaiCode.事務単一)) {
-                要介護認定情報.set調査依頼日(t.get要介護認定情報().getX4102_認定調査依頼年月日());
-                要介護認定情報.set調査実施日(t.get要介護認定情報().getX4102_認定調査実施年月日());
-                要介護認定情報.set医師依頼日(t.get要介護認定情報().getX4102_主治医意見書作成依頼年月日());
-                要介護認定情報.set医師取寄日(t.get要介護認定情報().getX4102_主治医意見書受領年月日());
-                要介護認定情報.set資料作成日(t.get要介護認定情報().getX4102_介護認定審査会資料作成年月日());
-                要介護認定情報.set審査予定日(t.get要介護認定情報().getT4123_認定審査会予定年月日());
-                要介護認定情報.set二次判定日(t.get要介護認定情報().getX4102_二次判定年月日());
-                if (t.get要介護認定情報().getX4102_要介護認定一次判定結果コード() != null) {
-                    set一次要介護度(要介護認定情報, t);
-                }
-                if (t.get要介護認定情報().getX4102_要介護認定一次判定結果コード認知症加算() != null) {
-                    set一次要介護度_重(要介護認定情報, t);
-                }
-                要介護認定情報.set一次判定日(t.get要介護認定情報().getX4102_要介護認定一次判定年月日() != null
-                        ? t.get要介護認定情報().getX4102_要介護認定一次判定年月日() : FlexibleDate.EMPTY);
-                要介護認定情報.set特定疾病(t.get要介護認定情報().getT4101_２号特定疾病コード() != null
-                        ? TokuteiShippei.toValue(t.get要介護認定情報().getT4101_２号特定疾病コード()).get名称() : RString.EMPTY);
-                要介護認定情報.set調査委託先コード(t.get要介護認定情報().getT4101_認定調査委託先コード() != null
-                        ? t.get要介護認定情報().getT4101_認定調査委託先コード() : RString.EMPTY);
-                要介護認定情報.set調査員コード(t.get要介護認定情報().getT4101_認定調査員コード());
-                要介護認定情報.set主治医医療機関コード(t.get要介護認定情報().getT4101_主治医医療機関コード());
-                要介護認定情報.set主治医コード(t.get要介護認定情報().getT4101_主治医コード());
-                要介護認定情報.set認定審査会意見(t.get要介護認定情報().getX4102_介護認定審査会意見());
+                set単一(要介護認定情報, t);
             }
-
             要介護認定情報.set調査予定日(t.get要介護認定情報().getT4123_認定調査予定年月日());
             要介護認定情報.set医師予定日(t.get要介護認定情報().getT4123_主治医意見書作成登録予定日());
             要介護認定情報.set旧措置(KyusochishaKubun.toValue(t.get要介護認定情報().is受給者台帳_旧措置者フラグ()).get名称());
@@ -565,6 +487,102 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
 
             要介護認定情報List.add(要介護認定情報);
         }
+    }
+
+    private void set要介護度(YokaigoNinteiJohoEntity 要介護認定情報, IdoChushutsuDaichoNewEntity t) {
+        if (t.get要介護認定情報().getT4101_厚労省IF識別コード().equals(区分_99A)) {
+            要介護認定情報.set要介護度(t.get要介護認定情報().get受給者台帳_要介護認定状態区分コード() != null
+                    ? 要介護状態区分コード.concat(YokaigoJotaiKubun99
+                            .toValue(t.get要介護認定情報().get受給者台帳_要介護認定状態区分コード()).get名称()) : RString.EMPTY);
+        } else if (t.get要介護認定情報().getT4101_厚労省IF識別コード().equals(区分_02A)) {
+            要介護認定情報.set要介護度(t.get要介護認定情報().get受給者台帳_要介護認定状態区分コード() != null
+                    ? 要介護状態区分コード.concat(YokaigoJotaiKubun02
+                            .toValue(t.get要介護認定情報().get受給者台帳_要介護認定状態区分コード()).get名称()) : RString.EMPTY);
+        } else if (t.get要介護認定情報().getT4101_厚労省IF識別コード().equals(区分_06A)) {
+            要介護認定情報.set要介護度(t.get要介護認定情報().get受給者台帳_要介護認定状態区分コード() != null
+                    ? 要介護状態区分コード.concat(YokaigoJotaiKubun06
+                            .toValue(t.get要介護認定情報().get受給者台帳_要介護認定状態区分コード()).get名称()) : RString.EMPTY);
+        } else if (t.get要介護認定情報().getT4101_厚労省IF識別コード().equals(区分_09A)
+                || t.get要介護認定情報().getT4101_厚労省IF識別コード().equals(区分_09B)) {
+            要介護認定情報.set要介護度(t.get要介護認定情報().get受給者台帳_要介護認定状態区分コード() != null
+                    ? 要介護状態区分コード.concat(YokaigoJotaiKubun09
+                            .toValue(t.get要介護認定情報().get受給者台帳_要介護認定状態区分コード()).get名称()) : RString.EMPTY);
+        }
+    }
+
+    private void set広域(YokaigoNinteiJohoEntity 要介護認定情報, IdoChushutsuDaichoNewEntity t) {
+        要介護認定情報.set認定申請日(t.get要介護認定情報().getT4003_認定申請日());
+        要介護認定情報.set調査依頼日(t.get要介護認定情報().getT4003_調査委託年月日());
+        要介護認定情報.set調査実施日(t.get要介護認定情報().getT4003_調査終了年月日());
+        要介護認定情報.set医師依頼日(t.get要介護認定情報().getT4003_意見書依頼年月日());
+        要介護認定情報.set医師取寄日(t.get要介護認定情報().getT4003_意見書取寄せ年月日());
+        要介護認定情報.set資料作成日(t.get要介護認定情報().getT4003_審査会資料作成年月日());
+        要介護認定情報.set審査予定日(t.get要介護認定情報().getT4003_審査会予定年月日());
+        要介護認定情報.set二次判定日(t.get要介護認定情報().getT4003_二次判定日());
+        if (t.get要介護認定情報().getT4101_厚労省IF識別コード().equals(区分_99A)) {
+            要介護認定情報.set一次要介護度(t.get要介護認定情報().getT4003_一次判定結果() != null
+                    ? 要介護認定一次判定結果コード.concat(IchijiHanteiKekkaCode99
+                            .toValue(t.get要介護認定情報().getT4003_一次判定結果()).get名称()) : RString.EMPTY);
+            要介護認定情報.set一次要介護度_重(t.get要介護認定情報().getT4003_一次判定結果重み() != null
+                    ? 要介護認定一次判定結果コード.concat(IchijiHanteiKekkaCode99
+                            .toValue(t.get要介護認定情報().getT4003_一次判定結果重み()).get名称()) : RString.EMPTY);
+        } else if (t.get要介護認定情報().getT4101_厚労省IF識別コード().equals(区分_02A)) {
+            要介護認定情報.set一次要介護度(t.get要介護認定情報().getT4003_一次判定結果() != null
+                    ? 要介護認定一次判定結果コード.concat(IchijiHanteiKekkaCode02
+                            .toValue(t.get要介護認定情報().getT4003_一次判定結果()).get名称()) : RString.EMPTY);
+            要介護認定情報.set一次要介護度_重(t.get要介護認定情報().getT4003_一次判定結果重み() != null
+                    ? 要介護認定一次判定結果コード.concat(IchijiHanteiKekkaCode02
+                            .toValue(t.get要介護認定情報().getT4003_一次判定結果重み()).get名称()) : RString.EMPTY);
+        } else if (t.get要介護認定情報().getT4101_厚労省IF識別コード().equals(区分_06A)) {
+            要介護認定情報.set一次要介護度(t.get要介護認定情報().getT4003_一次判定結果() != null
+                    ? 要介護認定一次判定結果コード.concat(IchijiHanteiKekkaCode06
+                            .toValue(t.get要介護認定情報().getT4003_一次判定結果()).get名称()) : RString.EMPTY);
+            要介護認定情報.set一次要介護度_重(t.get要介護認定情報().getT4003_一次判定結果重み() != null
+                    ? 要介護認定一次判定結果コード.concat(IchijiHanteiKekkaCode06
+                            .toValue(t.get要介護認定情報().getT4003_一次判定結果重み()).get名称()) : RString.EMPTY);
+        } else if (t.get要介護認定情報().getT4101_厚労省IF識別コード().equals(区分_09A)
+                || t.get要介護認定情報().getT4101_厚労省IF識別コード().equals(区分_09B)) {
+            要介護認定情報.set一次要介護度(t.get要介護認定情報().getT4003_一次判定結果() != null
+                    ? 要介護認定一次判定結果コード.concat(IchijiHanteiKekkaCode09
+                            .toValue(t.get要介護認定情報().getT4003_一次判定結果()).get名称()) : RString.EMPTY);
+            要介護認定情報.set一次要介護度_重(t.get要介護認定情報().getT4003_一次判定結果重み() != null
+                    ? 要介護認定一次判定結果コード.concat(IchijiHanteiKekkaCode09
+                            .toValue(t.get要介護認定情報().getT4003_一次判定結果重み()).get名称()) : RString.EMPTY);
+        }
+        要介護認定情報.set一次判定日(t.get要介護認定情報().getT4003_一次判定日());
+        要介護認定情報.set特定疾病(TokuteiShippei.toValue(t.get要介護認定情報().getT4003_特定疾病コード()).get名称());
+        要介護認定情報.set調査委託先コード(t.get要介護認定情報().getT4003_調査委託先コード());
+        要介護認定情報.set調査員コード(t.get要介護認定情報().getT4003_調査員コード());
+        要介護認定情報.set主治医医療機関コード(t.get要介護認定情報().getT4003_医療機関コード());
+        要介護認定情報.set主治医コード(t.get要介護認定情報().getT4003_主治医コード());
+        要介護認定情報.set認定審査会意見(t.get要介護認定情報().getT4003_審査会意見());
+    }
+
+    private void set単一(YokaigoNinteiJohoEntity 要介護認定情報, IdoChushutsuDaichoNewEntity t) {
+        要介護認定情報.set認定申請日(t.get要介護認定情報().getT4101_認定申請年月日());
+        要介護認定情報.set調査依頼日(t.get要介護認定情報().getX4102_認定調査依頼年月日());
+        要介護認定情報.set調査実施日(t.get要介護認定情報().getX4102_認定調査実施年月日());
+        要介護認定情報.set医師依頼日(t.get要介護認定情報().getX4102_主治医意見書作成依頼年月日());
+        要介護認定情報.set医師取寄日(t.get要介護認定情報().getX4102_主治医意見書受領年月日());
+        要介護認定情報.set資料作成日(t.get要介護認定情報().getX4102_介護認定審査会資料作成年月日());
+        要介護認定情報.set審査予定日(t.get要介護認定情報().getT4123_認定審査会予定年月日());
+        要介護認定情報.set二次判定日(t.get要介護認定情報().getX4102_二次判定年月日());
+        if (t.get要介護認定情報().getX4102_要介護認定一次判定結果コード() != null) {
+            set一次要介護度(要介護認定情報, t);
+        }
+        if (t.get要介護認定情報().getX4102_要介護認定一次判定結果コード認知症加算() != null) {
+            set一次要介護度_重(要介護認定情報, t);
+        }
+        要介護認定情報.set一次判定日(t.get要介護認定情報().getX4102_要介護認定一次判定年月日() != null
+                ? t.get要介護認定情報().getX4102_要介護認定一次判定年月日() : FlexibleDate.EMPTY);
+        要介護認定情報.set特定疾病(t.get要介護認定情報().getT4101_２号特定疾病コード() != null
+                ? TokuteiShippei.toValue(t.get要介護認定情報().getT4101_２号特定疾病コード()).get名称() : RString.EMPTY);
+        要介護認定情報.set調査委託先コード(t.get要介護認定情報().getT4101_認定調査委託先コード() != null
+                ? t.get要介護認定情報().getT4101_認定調査委託先コード() : RString.EMPTY);
+        要介護認定情報.set調査員コード(t.get要介護認定情報().getT4101_認定調査員コード());
+        要介護認定情報.set主治医医療機関コード(t.get要介護認定情報().getT4101_主治医医療機関コード());
+        要介護認定情報.set主治医コード(t.get要介護認定情報().getT4101_主治医コード());
+        要介護認定情報.set認定審査会意見(t.get要介護認定情報().getX4102_介護認定審査会意見());
     }
 
     private void set一次要介護度(YokaigoNinteiJohoEntity 要介護認定情報, IdoChushutsuDaichoNewEntity t) {
