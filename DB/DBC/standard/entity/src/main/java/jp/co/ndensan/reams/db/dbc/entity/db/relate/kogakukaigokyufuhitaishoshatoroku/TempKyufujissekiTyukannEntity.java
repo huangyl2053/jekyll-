@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShur
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.TsuzukigaraCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -131,6 +130,7 @@ public class TempKyufujissekiTyukannEntity extends DbTableEntityBase<TempKyufuji
 
     private HihokenshaNo shotokuHantei_hihokenshaNo;
     private ShikibetsuCode shotokuHantei_shikibetsuCode;
+    private ShikibetsuCode shotokuHantei_setaiinShikibetsuCode;
     private FlexibleDate shotokuHantei_kijunYMD;
     private FlexibleYear shotokuHantei_shotokuNendo;
     private RString shotokuHantei_jushochiTokureiFlag;
@@ -151,9 +151,8 @@ public class TempKyufujissekiTyukannEntity extends DbTableEntityBase<TempKyufuji
     private RString shotokuHantei_honninKazeiKubun;
     private RString shotokuHantei_setaiKazeiKubun;
     private FlexibleYear shotokuHantei_tsuzukigaraCodeNen;
-    private TsuzukigaraCode atena_tsuzukigaraCode;
-    private RString atena_juminShubetsuCode;
-    private FlexibleDate atena_seinengappiYMD;
+    private boolean kogakuServicehiJogengakuGengakuGaitoFlag;
+    private Decimal kogakuServicehiJogengakuGengakugoJogengaku;
 
     private ServiceShuruiCode serviceSyuruiCode;
     private Decimal hokenSeikyugaku;
@@ -181,6 +180,8 @@ public class TempKyufujissekiTyukannEntity extends DbTableEntityBase<TempKyufuji
     private Decimal sikyugaku;
     private Decimal santeiKijungaku;
     private RString kogakuHanteiKekka;
+    private RString sagakuKubun;
+    private RString koogakuKetteiKubun;
     private RString beikoSetaishotokuKubun;
     private RString beikoKojinshotokuKubun;
     private RString riyoFitanDankai2;
