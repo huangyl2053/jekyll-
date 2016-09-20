@@ -5,11 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd8100203.HikazeiNennkinnTaishousyaUpdateProcess;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd8100203.MiDouteiDataCreateProcess;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd8100203.SokyuuFuicchiCsvProcess;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd8100203.SokyuuGaitouIchirannCsvProcess;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd8100203.SokyuuSeinenngappiCsvProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD301020.HikazeiNennkinnTaishousyaUpdateProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD301020.MiDouteiDataCreateProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD301020.SokyuuFuicchiCsvProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD301020.SokyuuGaitouIchirannCsvProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD301020.SokyuuSeinenngappiCsvProcess;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD301020.DBD301020_SokyuHikazeiNenkinTaishoshaDoteiParameter;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd8100202.HikazeNenkinTaishoshaDouteiBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;

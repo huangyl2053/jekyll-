@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd1200902.FutanGenndoGakuNinnteiListProcess;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd1200902.FutanGenndoGakuNinnteiShouProcess;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd1200902.FutanGenndoGakuNinnteiTsuuchishoProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD103010.FutanGenndoGakuNinnteiListProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD103010.FutanGenndoGakuNinnteiShouProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD103010.FutanGenndoGakuNinnteiTsuuchishoProcess;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD103010.DBD103010_FutanGendoGakuNinteiIkkatsuHakkoParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
