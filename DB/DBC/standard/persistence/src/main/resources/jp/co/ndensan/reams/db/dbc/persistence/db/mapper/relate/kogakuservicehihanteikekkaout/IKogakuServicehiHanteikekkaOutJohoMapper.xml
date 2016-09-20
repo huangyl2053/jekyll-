@@ -173,7 +173,7 @@
         (
         "DbT3057KogakuShikyuHanteiKekka"."hanteiKekkaSofuYM" IS NULL
         OR "DbT3057KogakuShikyuHanteiKekka"."hanteiKekkaSofuYM" = '' 
-        <if test="再処理区分 == '1'">
+        <if test="再処理区分 == 1">
             OR "DbT3057KogakuShikyuHanteiKekka"."hanteiKekkaSofuYM" = #{処理年月}
         </if>
         OR "DbT3057KogakuShikyuHanteiKekka"."saiSofuFlag" = true
