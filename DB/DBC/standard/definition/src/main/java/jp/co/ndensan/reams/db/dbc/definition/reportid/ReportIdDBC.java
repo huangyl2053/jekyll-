@@ -709,7 +709,11 @@ public enum ReportIdDBC {
     /**
      * 汎用リスト出力(高額合算支給額決定情報) 帳票ＩＤです。
      */
-    DBC701017(new ReportId("DBC701017_HanyoListKogakuGassanShikyugakuKettei"), new RString("汎用リスト出力(高額合算支給額決定情報)"));
+    DBC701017(new ReportId("DBC701017_HanyoListKogakuGassanShikyugakuKettei"), new RString("汎用リスト出力(高額合算支給額決定情報)")),
+    /**
+     * 高額介護サービス費対象者一覧表（遡及分） 帳票ＩＤです。
+     */
+    DBC200100(new ReportId("DBC200100_KogakuServicehiTaishoshaIchiranSokyubun"), new RString("高額介護サービス費対象者一覧表（遡及分）"));
     private final ReportId reportId;
 
     private final RString reportName;
