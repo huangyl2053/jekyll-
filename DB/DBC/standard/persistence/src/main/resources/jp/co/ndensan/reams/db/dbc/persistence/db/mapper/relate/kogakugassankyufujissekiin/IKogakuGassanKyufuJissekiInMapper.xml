@@ -21,7 +21,7 @@
         FROM rgdb."DbT3075KogakuGassanKyufuJisseki" AS  DbT3075
         WHERE  DbT3075."uketoriYM" = #{処理年月}
         <if test ="処理区分 == null">
-            AND DbT3075."dataKubun"!='1'
+            AND  DbT3075."dataKubun" <![CDATA[<>]]> '1'
         </if> 
         <if test ="処理区分 = 1"> 
             AND DbT3075."dataKubun" NOT IN ('1','3')
@@ -56,31 +56,31 @@
     
     <update id="update高額合算給付実績と一時データ" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassankyufujissekiin.KogakuGassanKyufuJissekiInLoginMybatisParameter">
-      UPDATE
-    rgdb. "DbT3075KogakuGassanKyufuJisseki" AS DbT3075
-SET
-    "kokanJohoShikibetsuNo" = DbWT38P1."kokanJohoShikibetsuNo"
-    ,"hihokenshaNo" = DbWT38P1."hihokenshaNoIn"
-    ,"shikyuShinseiSeiriNo" = DbWT38P1."shikyuShinseiSeiriNo"
-    ,"jikoFutanSeiriNo" = DbWT38P1."jikoFutanSeiriNo"
-    ,"hokenSeidoCode" = DbWT38P1."hokenSeidoCode"
-    ,"kyufuJissekiSakuseiKubunCode" = DbWT38P1."kyufuJissekiSakuseiKubunCode"
-    ,"shoKisaiHokenshaNo" = DbWT38P1."shoKisaiHokenshaNo"
-    ,"kokuho_HihokenshaShoKigo" = DbWT38P1."kokuho_HihokenshaShoKigo"
-    ,"shinseiYMD" = DbWT38P1."shinseiYMD"
-    ,"ketteiYMD" = DbWT38P1."ketteiYMD"
-    ,"jikoFutanSogaku" = DbWT38P1."jikoFutanSogaku"
-    ,"shikyuGaku" = DbWT38P1."shikyuGaku"
-    ,"shoriYM" = DbWT38P1."shoriYM"
-    ,"uketoriYM" = #{処理年月}
-    ,"dataKubun" = '1'
-FROM
-    "DbWT38P1KogakuGassanKyufuJisseki" AS DbWT38P1
-WHERE
-    DbWT38P1."hihokenshaNoIn" = DbT3075."hihokenshaNo"
-    AND DbWT38P1."shikyuShinseiSeiriNo" = DbT3075."shikyuShinseiSeiriNo"
-    AND DbWT38P1."jikoFutanSeiriNo" = DbT3075."jikoFutanSeiriNo"
-    AND DbWT38P1."shikyuGaku" = DbT3075."shikyuGaku"   
+        UPDATE
+        rgdb. "DbT3075KogakuGassanKyufuJisseki" AS DbT3075
+        SET
+        "kokanJohoShikibetsuNo" = DbWT38P1."kokanJohoShikibetsuNo"
+        ,"hihokenshaNo" = DbWT38P1."hihokenshaNoIn"
+        ,"shikyuShinseiSeiriNo" = DbWT38P1."shikyuShinseiSeiriNo"
+        ,"jikoFutanSeiriNo" = DbWT38P1."jikoFutanSeiriNo"
+        ,"hokenSeidoCode" = DbWT38P1."hokenSeidoCode"
+        ,"kyufuJissekiSakuseiKubunCode" = DbWT38P1."kyufuJissekiSakuseiKubunCode"
+        ,"shoKisaiHokenshaNo" = DbWT38P1."shoKisaiHokenshaNo"
+        ,"kokuho_HihokenshaShoKigo" = DbWT38P1."kokuho_HihokenshaShoKigo"
+        ,"shinseiYMD" = DbWT38P1."shinseiYMD"
+        ,"ketteiYMD" = DbWT38P1."ketteiYMD"
+        ,"jikoFutanSogaku" = DbWT38P1."jikoFutanSogaku"
+        ,"shikyuGaku" = DbWT38P1."shikyuGaku"
+        ,"shoriYM" = DbWT38P1."shoriYM"
+        ,"uketoriYM" = #{処理年月}
+        ,"dataKubun" = '1'
+        FROM
+        "DbWT38P1KogakuGassanKyufuJisseki" AS DbWT38P1
+        WHERE
+        DbWT38P1."hihokenshaNoIn" = DbT3075."hihokenshaNo"
+        AND DbWT38P1."shikyuShinseiSeiriNo" = DbT3075."shikyuShinseiSeiriNo"
+        AND DbWT38P1."jikoFutanSeiriNo" = DbT3075."jikoFutanSeiriNo"
+        AND DbWT38P1."shikyuGaku" = DbT3075."shikyuGaku"   
     </update>
     <resultMap id="resultMap_KogakuGassanKyufuJissekiInEntity" 
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassankyufujissekiin.KogakuGassanKyufuJissekiInEntity" autoMapping="true">
