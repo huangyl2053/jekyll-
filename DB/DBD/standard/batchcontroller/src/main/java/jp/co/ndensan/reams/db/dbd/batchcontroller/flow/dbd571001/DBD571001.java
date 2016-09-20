@@ -28,12 +28,22 @@ public class DBD571001 extends BatchFlowBase<DBD571001Parameter> {
         executeStep(受給者台帳処理帳票出力用情報);
     }
 
+    /**
+     * batchProcessです。
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(受給者台帳処理一時テーブル)
     protected IBatchFlowCommand callHanyoListShisetsuNyutaishoFlow() {
         return loopBatch(JukyushaDaichoProcess.class).
                 arguments(getParameter().toIdoChushutsuDaichoProcessParameter()).define();
     }
 
+    /**
+     * batchProcessです。
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(受給者台帳処理帳票出力用情報)
     protected IBatchFlowCommand callHanyoListShisetsuNyutaishonewFlow() {
         return loopBatch(JukyushaDaichoCyouhyoujouhouProcess.class).
