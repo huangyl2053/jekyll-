@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -57,6 +58,7 @@ public class ShoriKekkaListSakuseiDoProcess
             = new RString("処理結果リスト.csv");
     private static final RString ダブル引用符 = new RString("\"");
     private int 行目;
+    private static final int INT_0 = 0;
     private static final int INT_1 = 1;
 
     @Override
@@ -72,30 +74,22 @@ public class ShoriKekkaListSakuseiDoProcess
 
     @Override
     protected void createWriter() {
-
-    }
-
-    @Override
-    protected void beforeExecute() {
-
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
+                EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        shoriKekkaFilePath = Path.combinePath(manager.getEucOutputDirectry(),
+                出力ファイル名);
+        shoriKekkaCsvWriter = BatchWriters.csvWriter(ShoriKekkaCSVEntity.class).
+                filePath(shoriKekkaFilePath).
+                setDelimiter(コンマ).
+                setEnclosure(ダブル引用符).
+                setEncode(Encode.UTF_8withBOM).
+                setNewLine(NewLine.CRLF).
+                hasHeader(true).
+                build();
     }
 
     @Override
     protected void process(DbWT3470shoriKekkaListTempEntity entity) {
-        if (shoriKekkaCsvWriter == null) {
-            manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
-                    EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-            shoriKekkaFilePath = Path.combinePath(manager.getEucOutputDirectry(),
-                    出力ファイル名);
-            shoriKekkaCsvWriter = BatchWriters.csvWriter(ShoriKekkaCSVEntity.class).
-                    filePath(shoriKekkaFilePath).
-                    setDelimiter(コンマ).
-                    setEnclosure(ダブル引用符).
-                    setEncode(Encode.UTF_8withBOM).
-                    setNewLine(NewLine.CRLF).
-                    hasHeader(true).
-                    build();
-        }
         ShoriKekkaCSVEntity output;
         if (行目 == INT_1) {
             output = get帳票のCSVファイル作成(entity);
@@ -108,8 +102,9 @@ public class ShoriKekkaListSakuseiDoProcess
 
     @Override
     protected void afterExecute() {
-        if (shoriKekkaCsvWriter != null) {
-            shoriKekkaCsvWriter.close();
+        shoriKekkaCsvWriter.close();
+        if (shoriKekkaCsvWriter.getCount() != INT_0) {
+            manager.spool(SubGyomuCode.DBC介護給付, shoriKekkaFilePath);
         }
     }
 

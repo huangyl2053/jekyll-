@@ -60,10 +60,6 @@ public class ShikibetsuTaishoProcess
     }
 
     @Override
-    protected void beforeExecute() {
-    }
-
-    @Override
     protected void process(DbWT3470ToukeihyoMeisaichukanTempEntity entity) {
         count = count + INT_1;
         統計表明細中間一時tableWriter.insert(entity);
