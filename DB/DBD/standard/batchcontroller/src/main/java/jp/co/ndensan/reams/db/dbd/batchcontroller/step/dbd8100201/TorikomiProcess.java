@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.flow.dbd8100201.DBD301010_HikazeiNenkinTaishoshaJohoTorikomi;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.flow.DBD301010_HikazeiNenkinTaishoshaJohoTorikomi;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100201.TorikomiProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd8100201.TorikomiCsvDataEntity;
