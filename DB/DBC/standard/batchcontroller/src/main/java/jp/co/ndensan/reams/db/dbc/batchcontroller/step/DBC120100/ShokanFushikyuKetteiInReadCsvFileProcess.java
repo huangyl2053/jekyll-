@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120100;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120100;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukyufuketteiin.KogakuKyufuKetteiReadCsvFileProcessParameter;
@@ -123,10 +123,10 @@ public class ShokanFushikyuKetteiInReadCsvFileProcess extends BatchProcessBase<R
                 headEntity = ListToObjectMappingHelper.
                         toObject(ShokanFushikyuKetteiInCSVHeadEntity.class, data);
             } else if (帳票レコード種別_D1.equals(data.get(INDEX_3))) {
-                連番 = 連番 + INT_1;
                 meisaiZenEntity = new ShokanFushikyuKetteiInCSVMeisaiEntity();
                 meisaiZenEntity = ListToObjectMappingHelper.
                         toObject(ShokanFushikyuKetteiInCSVMeisaiEntity.class, data);
+                連番 = 連番 + INT_1;
                 一時TBLに登録する(headEntity, meisaiZenEntity, 連番);
             }
 
@@ -156,7 +156,9 @@ public class ShokanFushikyuKetteiInReadCsvFileProcess extends BatchProcessBase<R
         登録Entity.setTsuchishoNo(meisaiZenEntity.getNo());
         登録Entity.setSeiriNo(meisaiZenEntity.get整理番号());
         登録Entity.setServiceTeikyoYM(meisaiZenEntity.getサービス提供年月());
-        登録Entity.setJigyoshoNo(getJigyoshaNo(meisaiZenEntity.get事業所番号()));
+        if (!RString.isNullOrEmpty(meisaiZenEntity.get事業所番号())) {
+            登録Entity.setJigyoshoNo(getJigyoshaNo(meisaiZenEntity.get事業所番号()));
+        }
         登録Entity.setJigyoshoName(getRString(meisaiZenEntity.get事業所名_漢字()));
         登録Entity.setServiceShuruiCode(getServiceShuruiCode(meisaiZenEntity.getサービス種類コード()));
         登録Entity.setServiceShuruiMei(getRString(meisaiZenEntity.getサービス種類名()));

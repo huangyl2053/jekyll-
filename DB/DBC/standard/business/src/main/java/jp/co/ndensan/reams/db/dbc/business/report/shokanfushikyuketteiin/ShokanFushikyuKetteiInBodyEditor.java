@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanfushikyuketteiin.Shokan
 import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanfushikyuketteiin.ShokanbaraiFushikyuKetteishaIchiranSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.code.shikaku.DBACodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -57,7 +58,7 @@ public class ShokanFushikyuKetteiInBodyEditor implements IShokanFushikyuKetteiIn
         if (!RString.isNullOrEmpty(帳票出力対象データ.get被保険者氏名())) {
             source.listUpper_3 = 帳票出力対象データ.get被保険者氏名();
         }
-        if (!RString.isNullOrEmpty(帳票出力対象データ.get事業者番号().getColumnValue())) {
+        if (帳票出力対象データ.get事業者番号() != null) {
             source.listUpper_4 = 帳票出力対象データ.get事業者番号().getColumnValue();
         }
         if (!RString.isNullOrEmpty(帳票出力対象データ.get事業者名())) {
@@ -66,7 +67,7 @@ public class ShokanFushikyuKetteiInBodyEditor implements IShokanFushikyuKetteiIn
         source.listUpper_6 = doパターン54(帳票出力対象データ.getサービス提供年月());
         source.listUpper_7 = doカンマ編集(帳票出力対象データ.get単位数());
         if (!RString.isNullOrEmpty(帳票出力対象データ.get資格喪失事由コード())) {
-            source.listUpper_8 = CodeMaster.getCodeMeisho(DBACodeShubetsu.介護資格喪失事由_被保険者.getCodeShubetsu(),
+            source.listUpper_8 = CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, DBACodeShubetsu.介護資格喪失事由_被保険者.getCodeShubetsu(),
                     new Code(帳票出力対象データ.get資格喪失事由コード()));
         }
         source.listUpper_9 = 帳票出力対象データ.get備考1();

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120100;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120100;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,6 +48,7 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -98,6 +99,9 @@ public class ShokanFushikyuKetteiInProcess extends BatchKeyBreakBase<ShokanFushi
     private final List<PersonalData> personalDataList = new ArrayList<>();
     private FileSpoolManager manager;
     private RString eucFilePath;
+    private ShokanFushikyuKetteiInEntity lastentity;
+    private List<RString> pageBreakKeys;
+    private static final RString SAKUSEI = new RString("作成");
 
     private static final RString 出力ファイル名
             = new RString("DBC200022_ShokanbaraiFushikyuKetteishaIchiran.csv");
@@ -112,8 +116,10 @@ public class ShokanFushikyuKetteiInProcess extends BatchKeyBreakBase<ShokanFushi
     @Override
     protected void initialize() {
         改頁項目 = new ArrayList<>();
+        pageBreakKeys = new ArrayList<>();
         識別コードset = new HashSet<>();
         出力順Map = new HashMap<>();
+        lastentity = new ShokanFushikyuKetteiInEntity();
         帳票データの取得Parameter = new KokuhorenIchiranhyoMybatisParameter();
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
         並び順 = finder.get出力順(parameter.getサブ業務コード(), parameter.get帳票ID(),
@@ -137,11 +143,14 @@ public class ShokanFushikyuKetteiInProcess extends BatchKeyBreakBase<ShokanFushi
             }
         }
         帳票データの取得Parameter.set出力順(出力順);
-
+        改頁項目.add(new RString(ShokanbaraiFushikyuKetteishaIchiranSource.ReportSourceFields.shoKisaiHokenshaNo.name()));
+        pageBreakKeys.add(new RString(ShokanbaraiFushikyuKetteishaIchiranSource.ReportSourceFields.shoKisaiHokenshaNo.name()));
         int index = 0;
         for (ISetSortItem item : 並び順.get設定項目リスト()) {
             if (item.is改頁項目()) {
                 改頁項目.add(item.get項目名());
+                pageBreakKeys.add(item.get項目ID());
+
             }
             if (index == INDEX_1) {
                 出力順Map.put(KEY_並び順の２件目, item.get項目名());
@@ -156,14 +165,12 @@ public class ShokanFushikyuKetteiInProcess extends BatchKeyBreakBase<ShokanFushi
             }
             index = index + 1;
         }
-
-        改頁項目.add(new RString(ShokanbaraiFushikyuKetteishaIchiranSource.ReportSourceFields.shoKisaiHokenshaNo.name()));
     }
 
     @Override
     protected void createWriter() {
         PageBreaker<ShokanbaraiFushikyuKetteishaIchiranSource> breaker
-                = new ShokanFushikyuKetteiInPageBreak(改頁項目);
+                = new ShokanFushikyuKetteiInPageBreak(pageBreakKeys);
         batchReportWriter = BatchReportFactory.createBatchReportWriter(
                 parameter.get帳票ID().value()).addBreak(breaker).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
@@ -196,6 +203,7 @@ public class ShokanFushikyuKetteiInProcess extends BatchKeyBreakBase<ShokanFushi
 
     @Override
     protected void usualProcess(ShokanFushikyuKetteiInEntity entity) {
+        boolean flag = entity.get国保連合会名().equals(lastentity.get国保連合会名());
         ChohyoJushoEditor 住所Editor = new ChohyoJushoEditor(
                 SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200022.getReportId().getColumnValue(), GyomuBunrui.介護事務);
         RString 編集住所 = 住所Editor.editJusho(
@@ -207,7 +215,8 @@ public class ShokanFushikyuKetteiInProcess extends BatchKeyBreakBase<ShokanFushi
                 parameter.getシステム日付(),
                 編集住所);
         report.writeBy(reportSourceWriter);
-        do帳票のCSVファイル作成(entity, parameter.getシステム日付(), 編集住所);
+        do帳票のCSVファイル作成(entity, parameter.getシステム日付(), 編集住所, flag);
+        lastentity = entity;
     }
 
     @Override
@@ -225,37 +234,45 @@ public class ShokanFushikyuKetteiInProcess extends BatchKeyBreakBase<ShokanFushi
     private void do帳票のCSVファイル作成(
             ShokanFushikyuKetteiInEntity entity,
             RDateTime 作成日時,
-            RString 編集住所) {
+            RString 編集住所,
+            boolean flag) {
         ShokanFushikyuKetteiInCSVEntity output = new ShokanFushikyuKetteiInCSVEntity();
-        RString 作成日 = 作成日時.getDate().wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
-                .fillType(FillType.BLANK).toDateString();
-        RString 作成時 = 作成日時.getTime()
-                .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE);
-        output.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時));
-        output.set国保連合会名(entity.get国保連合会名());
+        if (!flag) {
+            output.set処理年月(パターン56(parameter.get処理年月()));
+            RString 作成日 = 作成日時.getDate().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                    .fillType(FillType.BLANK).toDateString();
+            RString 作成時 = 作成日時.getTime()
+                    .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE).concat(SAKUSEI);
+            output.set作成日時(作成日.concat(RString.HALF_SPACE).concat(作成時));
+            output.set国保連合会名(entity.get国保連合会名());
+        }
         output.set証記載保険者番号(entity.get証記載保険者番号().getColumnValue());
         output.set証記載保険者名(entity.get証記載保険者名());
         output.set決定通知(entity.get決定通知());
+        output.set整理番号(entity.get整理番号());
         output.set被保険者番号(entity.get被保険者番号().getColumnValue());
         output.set被保険者氏名(entity.get被保険者氏名());
-        output.set事業者番号(entity.get事業者番号().getColumnValue());
-        output.set事業者名(entity.get事業者名());
-        output.setサービス提供年月(entity.getサービス提供年月().wareki().separator(Separator.PERIOD)
-                .fillType(FillType.BLANK).toDateString());
-        output.set単位数(doカンマ編集(entity.get単位数()));
-        output.set喪失事由(CodeMaster.getCodeMeisho(DBACodeShubetsu.介護資格喪失事由_被保険者.getCodeShubetsu(),
-                new Code(entity.get資格喪失事由コード())));
-        output.set備考1(entity.get備考1());
-        output.set整理番号(entity.get整理番号());
         output.set町域コード(entity.get町域コード());
         output.set住所(編集住所.substringReturnAsPossible(0, 文字20));
         output.set行政区コード(entity.get行政区コード());
-        output.set行政区(entity.get行政区名());
+        output.set行政区名(entity.get行政区名());
+        if (entity.get事業者番号() != null) {
+            output.set事業者番号(entity.get事業者番号().getColumnValue());
+        }
+        output.set事業者名(entity.get事業者名());
+        output.setサービス提供年月(entity.getサービス提供年月().wareki().separator(Separator.PERIOD)
+                .fillType(FillType.BLANK).toDateString());
+        output.setサービス種類コード(entity.getサービス種類コード().getColumnValue());
         RString サービス種類名 = (null == entity.getサービス種類名()) ? RString.EMPTY : entity.getサービス種類名();
         output.setサービス種類(サービス種類名);
-        output.set喪失年月日(entity.get資格喪失日().wareki().eraType(EraType.KANJI_RYAKU)
+        output.set単位数(doカンマ編集(entity.get単位数()));
+        output.set喪失事由コード(entity.get資格喪失事由コード());
+        output.set喪失事由(CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, DBACodeShubetsu.介護資格喪失事由_被保険者.getCodeShubetsu(),
+                new Code(entity.get資格喪失事由コード())));
+        output.set資格喪失日(entity.get資格喪失日().wareki().eraType(EraType.KANJI_RYAKU)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString());
+        output.set備考1(entity.get備考1());
         output.set備考2(entity.get備考2());
         if (更新DB有無_有.equals(entity.get更新DB無())) {
             output.set更新DB無(アスタリスク);
@@ -283,5 +300,13 @@ public class ShokanFushikyuKetteiInProcess extends BatchKeyBreakBase<ShokanFushi
             return RString.EMPTY;
         }
         return DecimalFormatter.toコンマ区切りRString(number, 0);
+    }
+
+    private RString パターン56(FlexibleYearMonth 年月) {
+        if (null == 年月) {
+            return RString.EMPTY;
+        }
+        return 年月.wareki().eraType(EraType.KANJI_RYAKU)
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 }
