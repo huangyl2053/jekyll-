@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxAtenaMeisho;
 
 /**
  * tabJikofutanKanriJohoNyuryoku のクラスファイル
@@ -109,13 +110,13 @@ public class tabJikofutanKanriJohoNyuryokuDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public TextBox getTxtHihokenshaName() {
-        return this.getTplJikofutanKanriJoho1().getTxtHihokenshaName();
+    public TextBoxAtenaMeisho getTxtHihokenshaShimei() {
+        return this.getTplJikofutanKanriJoho1().getTxtHihokenshaShimei();
     }
 
     @JsonIgnore
-    public void setTxtHihokenshaName(TextBox txtHihokenshaName) {
-        this.getTplJikofutanKanriJoho1().setTxtHihokenshaName(txtHihokenshaName);
+    public void setTxtHihokenshaShimei(TextBoxAtenaMeisho txtHihokenshaShimei) {
+        this.getTplJikofutanKanriJoho1().setTxtHihokenshaShimei(txtHihokenshaShimei);
     }
 
     @JsonIgnore
@@ -229,23 +230,23 @@ public class tabJikofutanKanriJohoNyuryokuDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public TextBox getTxtAtesakiShimei() {
+    public TextBoxAtenaMeisho getTxtAtesakiShimei() {
         return this.getTplJikofutanKanriJoho2().getJikoFutangakuHoseiAtesaki().getTxtAtesakiShimei();
     }
 
     @JsonIgnore
-    public void setTxtAtesakiShimei(TextBox txtAtesakiShimei) {
+    public void setTxtAtesakiShimei(TextBoxAtenaMeisho txtAtesakiShimei) {
         this.getTplJikofutanKanriJoho2().getJikoFutangakuHoseiAtesaki().setTxtAtesakiShimei(txtAtesakiShimei);
     }
 
     @JsonIgnore
-    public TextBoxYubinNo getTxtAtesakiYubinNO() {
-        return this.getTplJikofutanKanriJoho2().getJikoFutangakuHoseiAtesaki().getTxtAtesakiYubinNO();
+    public TextBoxYubinNo getTxtAtesakiYubinNo() {
+        return this.getTplJikofutanKanriJoho2().getJikoFutangakuHoseiAtesaki().getTxtAtesakiYubinNo();
     }
 
     @JsonIgnore
-    public void setTxtAtesakiYubinNO(TextBoxYubinNo txtAtesakiYubinNO) {
-        this.getTplJikofutanKanriJoho2().getJikoFutangakuHoseiAtesaki().setTxtAtesakiYubinNO(txtAtesakiYubinNO);
+    public void setTxtAtesakiYubinNo(TextBoxYubinNo txtAtesakiYubinNo) {
+        this.getTplJikofutanKanriJoho2().getJikoFutangakuHoseiAtesaki().setTxtAtesakiYubinNo(txtAtesakiYubinNo);
     }
 
     @JsonIgnore
