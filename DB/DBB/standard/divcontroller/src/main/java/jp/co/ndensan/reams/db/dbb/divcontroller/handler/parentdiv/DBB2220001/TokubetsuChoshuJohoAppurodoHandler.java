@@ -909,6 +909,9 @@ public class TokubetsuChoshuJohoAppurodoHandler {
         RString 選択市町村ID;
         if (STR_1.equals(選択Key)) {
             選択月 = div.getShoriJokyoPanel().getDdlGetu().getSelectedKey();
+            if (選択月.length() < INT_2) {
+                選択月 = STR_0.concat(選択月);
+            }
             選択市町村ID = div.getShoriTaishoGetuPanel().getDgShichosonShoriSelect().
                     getSelectedItems().get(INT_0).getData6();
         } else {
