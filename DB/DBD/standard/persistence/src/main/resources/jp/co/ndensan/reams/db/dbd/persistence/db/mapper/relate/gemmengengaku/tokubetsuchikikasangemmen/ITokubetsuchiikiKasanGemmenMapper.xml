@@ -48,8 +48,8 @@
         DbT4020TokubetsuchiikiKasanGemmen."dbT4020TokubetsuchiikiKasanGemmen_shoKisaiHokenshaNo" = DbT4010GemmenGengakuShinsei."dbT4010GemmenGengakuShinsei_shoKisaiHokenshaNo" and
         DbT4020TokubetsuchiikiKasanGemmen."dbT4020TokubetsuchiikiKasanGemmen_hihokenshaNo" = DbT4010GemmenGengakuShinsei."dbT4010GemmenGengakuShinsei_hihokenshaNo" and
         DbT4020TokubetsuchiikiKasanGemmen."dbT4020TokubetsuchiikiKasanGemmen_rirekiNo" = DbT4010GemmenGengakuShinsei."dbT4010GemmenGengakuShinsei_shinseiRirekiNo"
-        WHERE DbT4020TokubetsuchiikiKasanGemmen."dbT4020TokubetsuchiikiKasanGemmen_hihokenshaNo" = #{被保険者番号}
         AND (DbT4010GemmenGengakuShinsei."dbT4010GemmenGengakuShinsei_gemmenGengakuShurui" = #{減免減額種類} OR DbT4010GemmenGengakuShinsei."dbT4010GemmenGengakuShinsei_gemmenGengakuShurui" IS NULL)
+        WHERE DbT4020TokubetsuchiikiKasanGemmen."dbT4020TokubetsuchiikiKasanGemmen_hihokenshaNo" = #{被保険者番号}
         ORDER BY
         DbT4020TokubetsuchiikiKasanGemmen."dbT4020TokubetsuchiikiKasanGemmen_shinseiYMD" DESC
     </select>
