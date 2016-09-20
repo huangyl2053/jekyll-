@@ -92,12 +92,8 @@ public class GassanShikyuFushikyuKetteishaIchiranBodyEditor
             source.listCerter_4 = 口座払;
         }
         if (区分_1.equals(内部帳票文字切れ制御)) {
-            if (null == entity.get住所()) {
-                return;
-            }
-            if (null != entity.get住所().get住所()) {
-                source.listLower_1 = entity.get住所().get住所().substringReturnAsPossible(0, INT_15);
-            }
+
+            source.listLower_1 = get住所();
 
         } else {
             source.listLower_1 = アステリスク_15;
@@ -115,7 +111,10 @@ public class GassanShikyuFushikyuKetteishaIchiranBodyEditor
                     );
             source.listUpper_5 = entity.get支払場所();
         } else if (区分_2.equals(entity.get支払方法区分())) {
-            source.listLower_6 = entity.get預金種別().get預金種別名称().concat(スペース).concat(entity.get口座番号()).concat(getColumnValue(entity.get口座名義人カナ()));
+            if (null != entity.get預金種別()) {
+                source.listLower_6 = entity.get預金種別().get預金種別名称().concat(スペース).concat(entity.get口座番号()).
+                        concat(getColumnValue(entity.get口座名義人カナ()));
+            }
             source.listUpper_5 = entity.get金融機関名称().concat(スペース).concat(entity.get支店名称());
         }
         if (区分_1.equals(内部帳票文字切れ制御) && null != entity.get被保険者氏名()) {
@@ -143,6 +142,15 @@ public class GassanShikyuFushikyuKetteishaIchiranBodyEditor
         source.listUpper_1 = 対象データは存在しません;
     }
 
+    private RString get住所() {
+        if (null != entity.get住所()) {
+            if (null != entity.get住所().get住所()) {
+                return entity.get住所().get住所().substringReturnAsPossible(0, INT_15);
+            }
+        }
+        return RString.EMPTY;
+    }
+
     private RString doカンマ編集(Decimal number) {
         if (null == number) {
             return RString.EMPTY;
@@ -151,13 +159,6 @@ public class GassanShikyuFushikyuKetteishaIchiranBodyEditor
     }
 
     private RString getColumnValue(IDbColumnMappable entity) {
-        if (null != entity) {
-            return entity.getColumnValue();
-        }
-        return RString.EMPTY;
-    }
-
-    private RString get曜日(IDbColumnMappable entity) {
         if (null != entity) {
             return entity.getColumnValue();
         }
