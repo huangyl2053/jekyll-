@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.dbc120850;
 
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120170.KohifutanshaReadCsvFileProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120200.SaishinsaKohifutanshaDoDBTorokuProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120200.SaishinsaKohifutanshaDoDBTorokuProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120850.SaishinsaKetteiHokenshaReadCsvFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120850.SogojigyohiSaishinsaDoIchiranhyoSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDeleteReveicedFileProcess;

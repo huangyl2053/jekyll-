@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.definition.batchprm.saishinsai;
+package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120200;
 
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class DBC120200_SaishinsaKetteiKohifutanshaInBatchParameter extends BatchParameterBase {
+public class DBC120200_SaishinsaKetteiKohifutanshaInParameter extends BatchParameterBase {
 
     private static final String KEY_SHORIYM = "shoriYM";
     private static final String NAME_SHORIYM = "処理年月";
