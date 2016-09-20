@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbb.definition.processprm.shutokujohoshuchutsurenk
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigoshoto.KaigoShotoTempTableEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
@@ -95,18 +96,15 @@ public class UpdShoriHidukeKanriProcess extends BatchProcessBase<KaigoShotoTempT
     }
 
     private DbT7022ShoriDateKanriEntity get処理日付管理_当初(KaigoShotoTempTableEntity entity) {
-        DbT7022ShoriDateKanriEntity dbt7022Entity = new DbT7022ShoriDateKanriEntity();
+        RString 処理枝番;
         if (当初_広域_1.equals(処理区分)) {
-            RString 処理枝番 = 処理枝番_00.concat(entity.getShichosonShikibetuId());
-            dbt7022Entity.setShoriEdaban(処理枝番);
+            処理枝番 = 処理枝番_00.concat(entity.getShichosonShikibetuId());
         } else {
-            dbt7022Entity.setShoriEdaban(枝番_0001);
+            処理枝番 = 枝番_0001;
         }
-        dbt7022Entity.setSubGyomuCode(SubGyomuCode.DBB介護賦課);
-        dbt7022Entity.setShoriName(ShoriName.当初所得引出.get名称());
-        dbt7022Entity.setNendo(処理年度);
-        dbt7022Entity.setNendoNaiRenban(枝番_0001);
-        dbt7022Entity.setShichosonCode(entity.getShichosonCode());
+        ShoriDateKanri result = ShoriDateKanriManager.createInstance().get処理日付管理マスタ(
+                SubGyomuCode.DBB介護賦課, entity.getShichosonCode(), ShoriName.当初所得引出.get名称(), 処理枝番, 処理年度, 枝番_0001);
+        DbT7022ShoriDateKanriEntity dbt7022Entity = result.toEntity();
         dbt7022Entity.setKijunTimestamp(バッチ起動処理日時);
         dbt7022Entity.setTaishoShuryoTimestamp(バッチ起動処理日時);
         return dbt7022Entity;
