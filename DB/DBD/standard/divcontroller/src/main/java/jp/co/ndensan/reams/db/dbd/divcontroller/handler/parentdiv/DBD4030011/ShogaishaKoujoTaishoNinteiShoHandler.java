@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD4030011;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.shogaishakojotaishoshalist.DBD222010_ShogaishakojoTaishoshaNinteishoIkkatsuHakkoParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD222010.DBD222010_ShogaishakojoTaishoshaNinteishoIkkatsuHakkoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.shogaishakoujo.NinteiNaiyoKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.shogaishakoujo.Ninteikubun;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;

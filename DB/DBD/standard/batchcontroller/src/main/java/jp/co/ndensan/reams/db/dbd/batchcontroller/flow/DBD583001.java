@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd583001.NenreiKaikyubetsuYokaigodoJokyoProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD583001.NenreiKaikyubetsuYokaigodoJokyoProcess;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD583001.DBD583001Parameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;

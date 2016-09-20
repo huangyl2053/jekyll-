@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd5720001;
+package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD572001;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd5720001.JyukyushaDaichoIdoCheckListProcessParameter;
