@@ -49,6 +49,7 @@
         AND "Dbt4001"."rirekiNo" =  #{履歴番号}
         AND "Dbt4001".edaban  =  #{枝番}
         AND "Dbt4001"."jukyuShinseiJiyu" = #{受給申請事由}
+        AND "Dbt4001"."hihokenshaNo" = #{被保険者番号}
         )
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.allColumns_DbT4001JukyushaDaicho" />,
