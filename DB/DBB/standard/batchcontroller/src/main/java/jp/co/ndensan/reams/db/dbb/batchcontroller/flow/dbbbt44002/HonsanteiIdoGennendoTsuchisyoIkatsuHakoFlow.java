@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt44002.PrtIdoTokuchoK
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt44002.PrtIdoTokuchoKaishiTsuchishoKarisanteiProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidogennen.ChohyoResult;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidogennen.CreateHonsanteiIdoBatchParameter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB003001.DBB003001_KeisangoJohoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.TokuchoKaishiTsuhishoHoniOutputJoken;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt44002.HonsanteiIdoProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
@@ -199,8 +199,8 @@ public class HonsanteiIdoGennendoTsuchisyoIkatsuHakoFlow extends BatchFlowBase<C
                 getKeisangoJohoSakuseiBatchParamter(バッチフロー_帳票分類ID)).define();
     }
 
-    private KeisangoJohoSakuseiBatchParamter getKeisangoJohoSakuseiBatchParamter(RString 帳票分類ID) {
-        return new KeisangoJohoSakuseiBatchParamter(getParameter().getChoteiNendo().toDateString(),
+    private DBB003001_KeisangoJohoSakuseiParameter getKeisangoJohoSakuseiBatchParamter(RString 帳票分類ID) {
+        return new DBB003001_KeisangoJohoSakuseiParameter(getParameter().getChoteiNendo().toDateString(),
                 getParameter().get賦課年度().toDateString(), null, ShoriName.異動賦課.get名称(), 帳票分類ID);
     }
 

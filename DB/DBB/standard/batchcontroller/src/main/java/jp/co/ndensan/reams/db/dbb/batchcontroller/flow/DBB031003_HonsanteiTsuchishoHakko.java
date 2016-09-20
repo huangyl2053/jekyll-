@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031003.UpdZenkenFukaIn
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031003.UpdZenkenFukaInfoTmpTaisyoshaDataProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB031003.DBB031003_HonsanteiTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteifuka.HonsanteifukaBatchTyouhyou;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB003001.DBB003001_KeisangoJohoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt43002.HonsanteifukaProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
@@ -327,12 +327,12 @@ public class DBB031003_HonsanteiTsuchishoHakko extends BatchFlowBase<DBB031003_H
         return otherBatchFlow(BATCH_ID, SubGyomuCode.DBB介護賦課, getKeisangoJohoSakuseiBatchParamter(バッチフロー_帳票分類ID)).define();
     }
 
-    private KeisangoJohoSakuseiBatchParamter getKeisangoJohoSakuseiBatchParamter(RString 帳票分類ID) {
+    private DBB003001_KeisangoJohoSakuseiParameter getKeisangoJohoSakuseiBatchParamter(RString 帳票分類ID) {
         if (バッチフロー_帳票分類ID.equals(特別徴収開始通知書本算定_帳票分類ID.getColumnValue())) {
-            return new KeisangoJohoSakuseiBatchParamter(getParameter().get調定年度().toDateString(),
+            return new DBB003001_KeisangoJohoSakuseiParameter(getParameter().get調定年度().toDateString(),
                     getParameter().get賦課年度().toDateString(), null, ShoriName.本算定賦課.get名称(), 帳票分類ID);
         }
-        return new KeisangoJohoSakuseiBatchParamter(getParameter().get調定年度().toDateString(),
+        return new DBB003001_KeisangoJohoSakuseiParameter(getParameter().get調定年度().toDateString(),
                 getParameter().get賦課年度().toDateString(),
                 getResult(YMDHMS.class, new RString(最新調定日時の取得), InitPrtKetteiTsuchishoProcess.KIJUN_TIME).toDateString(),
                 ShoriName.本算定賦課.get名称(), 帳票分類ID);
