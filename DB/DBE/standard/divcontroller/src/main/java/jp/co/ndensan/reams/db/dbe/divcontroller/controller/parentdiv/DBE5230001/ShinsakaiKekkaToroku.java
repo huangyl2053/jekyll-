@@ -413,7 +413,10 @@ public class ShinsakaiKekkaToroku {
 
        /** 申請区分（申請時）と二次判定より、申請区分（法令）を設定 */
        if (新規申請.equals(shinseiKubunShinseiji)) {
-           div.getTxtShinseiKubunLow().setValue(新規申請);
+           if (要支援1.equals(nijiHantei) || 要支援2.equals(nijiHantei)
+               || 要介護1.equals(nijiHantei) || 要介護2.equals(nijiHantei) || 要介護3.equals(nijiHantei) || 要介護4.equals(nijiHantei) || 要介護5.equals(nijiHantei)) {
+               div.getTxtShinseiKubunLow().setValue(新規申請);
+           }
        } else if (更新申請.equals(shinseiKubunShinseiji)) {
            if ((要支援1.equals(zenkaiNijiHantei) || 要支援2.equals(zenkaiNijiHantei)) && (要支援1.equals(nijiHantei) || 要支援2.equals(nijiHantei)) ) {
                div.getTxtShinseiKubunLow().setValue(更新申請);
