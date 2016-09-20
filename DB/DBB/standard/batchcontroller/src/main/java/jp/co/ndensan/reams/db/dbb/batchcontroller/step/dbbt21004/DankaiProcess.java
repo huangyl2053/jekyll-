@@ -123,6 +123,9 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
     private RString 課税取消段階使用;
     private RString 課税取消段階インデックス;
     private RString 課税取消課税区分;
+    private HokenryoDankaiSettings hokenryoDankaiSettings;
+    private HokenryoDankaiList hokenryoDankaiList;
+    private HokenryoDankaiHantei hantei;
 
     @Override
     protected void createWriter() {
@@ -205,6 +208,9 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
                 nowDate, SubGyomuCode.DBB介護賦課);
         課税取消課税区分 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_課税取消課税区分,
                 nowDate, SubGyomuCode.DBB介護賦課);
+        hokenryoDankaiSettings = new HokenryoDankaiSettings();
+        hokenryoDankaiList = hokenryoDankaiSettings.get保険料段階ListIn(processParameter.get調定年度());
+        hantei = InstanceProvider.create(HokenryoDankaiHantei.class);
     }
 
     @Override
@@ -308,9 +314,6 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
         hokenshaDankaiTemp.set老年終了日(賦課根拠.getRoreiNenkinEndYMD());
         hokenshaDankaiTemp.set年金収入額(賦課根拠.getKotekiNenkinShunyu());
         hokenshaDankaiTemp.set合計所得金額(賦課根拠.getGokeiShotoku());
-        HokenryoDankaiSettings hokenryoDankaiSettings = new HokenryoDankaiSettings();
-        HokenryoDankaiList hokenryoDankaiList = hokenryoDankaiSettings.get保険料段階ListIn(processParameter.get調定年度());
-        HokenryoDankaiHantei hantei = InstanceProvider.create(HokenryoDankaiHantei.class);
         HokenryoDankaiHanteiParameter 保険料段階パラメータ = new HokenryoDankaiHanteiParameter();
         保険料段階パラメータ.setFukaNendo(dankaiProcessEntityList.get被保険者対象Temp().getHukaNando());
         保険料段階パラメータ.setFukaKonkyo(賦課根拠);
