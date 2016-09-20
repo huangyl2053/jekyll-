@@ -190,6 +190,7 @@ public class JikoFutangakushomeishoCsvOutputProcess extends BatchKeyBreakBase<Ji
             report.writeBy(reportSourceWriter);
         }
         csvWriter.close();
+        spoolManager.spool(eucFilePath);
     }
 
 }
