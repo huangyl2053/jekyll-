@@ -133,7 +133,7 @@
         (
         DbT3062."kokuhorenSofuYM" IS NULL
         OR DbT3062."kokuhorenSofuYM" = '' 
-        <if test="再処理区分 == '1'">
+        <if test="再処理区分 == 1">
             OR DbT3062."kokuhorenSofuYM" = #{処理年月}
         </if>
         OR DbT3062."kokuhirenSaiSofuAriFlag" = true
