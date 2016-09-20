@@ -7,8 +7,6 @@ package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC150050;
 
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -47,13 +45,13 @@ public class DBC150050_ServicecodeTaniMeisaiIchiranParameter extends BatchParame
     @BatchParameter(key = KEY_終了年月, name = "終了年月")
     private FlexibleYearMonth 終了年月;
     @BatchParameter(key = KEY_被保険者番号, name = "被保険者番号")
-    private HihokenshaNo 被保険者番号;
+    private RString 被保険者番号;
     @BatchParameter(key = KEY_事業者番号, name = "事業者番号")
     private RString 事業者番号;
     @BatchParameter(key = KEY_認定結果リスト, name = "認定結果リスト")
     private List<RString> 認定結果リスト;
     @BatchParameter(key = KEY_サービス種類コードリスト, name = "サービス種類コードリスト")
-    private List<ServiceShuruiCode> サービス種類コードリスト;
+    private List<RString> サービス種類コードリスト;
     @BatchParameter(key = KEY_サービス項目コード, name = "サービス項目コード")
     private RString サービス項目コード;
     @BatchParameter(key = KEY_地区指定, name = "地区指定")

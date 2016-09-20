@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD8010002
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd8100201.HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd8100203.SokyuHikazeiNenkinBatchParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD301010.DBD301010_HikazeiNenkinTaishoshaJohoTorikomiParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD301020.DBD301020_SokyuHikazeiNenkinTaishoshaDoteiParameter;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdQuestionMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010002.DBD8010002StateName;
@@ -159,7 +159,7 @@ public class HikazeiNenkinTaishoshaJoho {
      * @param div JissiJyokyohyoDiv
      * @return HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter
      */
-    public ResponseData<HikazeiNennkinTaishouSyaJohoTorikomiBatchParameter> createDBD301010BatchParamter(HikazeiNenkinTaishoshaJohoDiv div) {
+    public ResponseData<DBD301010_HikazeiNenkinTaishoshaJohoTorikomiParameter> createDBD301010BatchParamter(HikazeiNenkinTaishoshaJohoDiv div) {
 
         List<RString> 構成市町村コードリスト = ViewStateHolder.
                 get(ViewStateKeys.取込対象市町村コードリスト, new ArrayList<>().getClass());
@@ -173,7 +173,7 @@ public class HikazeiNenkinTaishoshaJoho {
      * @param div JissiJyokyohyoDiv
      * @return SokyuHikazeiNenkinBatchParameter
      */
-    public ResponseData<SokyuHikazeiNenkinBatchParameter> createDBD301020BatchParamter(HikazeiNenkinTaishoshaJohoDiv div) {
+    public ResponseData<DBD301020_SokyuHikazeiNenkinTaishoshaDoteiParameter> createDBD301020BatchParamter(HikazeiNenkinTaishoshaJohoDiv div) {
 
         return ResponseData.of(getHandler(div).createDBD301020BatchParamter(div)).respond();
     }

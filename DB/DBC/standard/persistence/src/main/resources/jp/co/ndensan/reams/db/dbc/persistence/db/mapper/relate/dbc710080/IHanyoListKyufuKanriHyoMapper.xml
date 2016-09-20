@@ -214,7 +214,10 @@
             "KyufuKanrihyo"."isDeleted" =false      
         <if test="保険者コード!=null">
             AND #{保険者コード} = "DbT1001HihokenshaDaicho"."shichosonCode"
-        </if>         
+        </if>
+        <if test="出力順!=null and !出力順.isEmpty()">
+            ${出力順}
+        </if>             
      </sql>    
     
     <resultMap id="resultMap_HanyoListKyufuKanriHyoEntity" autoMapping="true"

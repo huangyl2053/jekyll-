@@ -30,6 +30,7 @@ public class HanyoListKagoMoshitateMybatisParameter extends UaFt200FindShikibets
     private FlexibleYearMonth サービス提供年月To;
     private RString 事業者コード;
     private RString 保険者コード;
+    private RString 出力順;
 
     /**
      * ンストラクタです。

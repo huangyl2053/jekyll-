@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd710050.HanyoListHomonKaigoRiyoshaFutanGakuGengakuProcess;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd710050.DBD710050_HanyoListHomonKaigoRiyoshaFutanGakuGengakuParameter;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD710050.HanyoListHomonKaigoRiyoshaFutanGakuGengakuProcess;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710050.DBD710050_HanyoListHomonKaigoRiyoshaFutanGakuGengakuParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;

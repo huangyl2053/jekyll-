@@ -441,7 +441,11 @@ public enum ReportIdDBC {
     /**
      * DBC701008_HanyoList_KyufuKanriHyo
      */
-    DBC701008(new ReportId("DBC701008_HanyoList_KyufuKanriHyo"), new RString("汎用リスト出力(給付管理票)")),
+    DBC701008(new ReportId("DBC701008_HanyoListKyufuKanriHyo"), new RString("汎用リスト出力(給付管理票)")),
+    /**
+     * DBC701008_HanyoList_KyufuKanriHyo
+     */
+    DBC701009(new ReportId("DBC701009_HanyoListKagoMoshitate"), new RString("汎用リスト出力(過誤申立情報)")),
     /**
      * DBC701016_HanyoListKogakuGassanKeisanKekkaRenrakuHyo
      */
@@ -650,6 +654,10 @@ public enum ReportIdDBC {
      * 高額サービス等支給（不支給）決定通知書帳票ＩＤです。
      */
     DBC100007(new ReportId("DBC100007_KogakuKetteiTsuchiSho"), new RString("高額サービス等支給（不支給）決定通知書")),
+    /**
+     * 高額サービス等支給（不支給）決定通知書帳票ＩＤです。
+     */
+    DBC100007_支給(new ReportId("DBC100007_KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashi"), new RString("高額サービス等支給（不支給）決定通知書")),
     /**
      * 給付実績情報取込結果一覧表ＩＤです。
      */

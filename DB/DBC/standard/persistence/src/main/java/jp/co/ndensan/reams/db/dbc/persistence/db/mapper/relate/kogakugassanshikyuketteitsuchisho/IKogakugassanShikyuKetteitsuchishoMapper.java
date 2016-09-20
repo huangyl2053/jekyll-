@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3074KogakuGassanShikyuFushi
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanshikyuketteitsuchisho.KogakuGassanShikyuFushikyuKetteiResultEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanshikyuketteitsuchisho.KogakugassanShikyuKetteitsuchishoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanshikyuketteitsuchisho.KogakugassanShikyuKetteitsuchishoTempEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 
 /**
  * 高額合算支給決定通知書（一括）のハンドラクラスです。
@@ -55,8 +56,9 @@ public interface IKogakugassanShikyuKetteitsuchishoMapper {
      * 処理日付管理マスタを更新する。
      *
      * @param parameter KogakugassanShikyuKetteitsuchishoMybatisParameter
+     * @return DbT7022ShoriDateKanriEntity
      */
-    void update処理日付管理マスタ(KogakugassanShikyuKetteitsuchishoMybatisParameter parameter);
+    DbT7022ShoriDateKanriEntity update処理日付管理マスタ(KogakugassanShikyuKetteitsuchishoMybatisParameter parameter);
 
     /**
      * 高額合算支給決定通知書データをクリアする。

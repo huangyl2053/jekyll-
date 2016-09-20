@@ -5,14 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.batchprm.dbdhanyolist;
 
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710040.DBD710040_HanyoListRiyoshaFutanGakuGengakuParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710060.DBD710060_HanyoListShakaiFukushiHojinKeigenParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710070.DBD710070_HanyoListTokubetsuChiikiKasanGemmenParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710110.DBD710110_HanyoListKokuhoParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710120.DBD710120_HanyoListKokiKoreishaParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710130.DBD710130_HanyoListJigyoTaishoshaParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710140.DBD710140_HanyoListRiyoshaFutanwariaiParameter;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710150.DBD710150_HanyoListShisetsuNyutaishoParameter;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd710040.DBD710040_HanyoListRiyoshaFutanGakuGengakuParameter;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd710060.DBD710060_HanyoListShakaiFukushiHojinKeigenParameter;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd710070.DBD710070_HanyoListTokubetsuChiikiKasanGemmenParameter;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd710110.DBD710110_HanyoListKokuhoParameter;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd710120.DBD710120_HanyoListKokiKoreishaParameter;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd710130.DBD710130_HanyoListJigyoTaishoshaParameter;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd710140.DBD710140_HanyoListRiyoshaFutanwariaiParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

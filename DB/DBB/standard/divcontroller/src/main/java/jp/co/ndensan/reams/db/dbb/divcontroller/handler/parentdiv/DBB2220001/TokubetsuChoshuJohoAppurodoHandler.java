@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
@@ -892,8 +893,6 @@ public class TokubetsuChoshuJohoAppurodoHandler {
         }
         shareファイル名 = shareファイル名.replace(市町村ID, 選択市町村ID);
         shareファイル名 = shareファイル名.replace(対象月, 選択月);
-        FilesystemName sharedFileName = new FilesystemName(shareファイル名);
-        SharedFileDescriptor sharedfiledescriptor = SharedFile.defineSharedFile(sharedFileName);
         RString filePath = 選択ファイル.getFilePath();
         File tempFile = new File(filePath.toString());
         filePath = filePath.replace(選択ファイル.getFileName(), shareファイル名);
@@ -902,9 +901,11 @@ public class TokubetsuChoshuJohoAppurodoHandler {
             if (!renameTo) {
                 return;
             }
+            SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(shareファイル名));
+            sfd = SharedFile.defineSharedFile(sfd);
             CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
             FilesystemPath 絶対パス = new FilesystemPath(filePath);
-            SharedFile.copyToSharedFile(sharedfiledescriptor, 絶対パス, opts);
+            SharedFile.copyToSharedFile(sfd, 絶対パス, opts);
             if (STR_1.equals(選択Key)) {
                 div.getShoriTaishoGetuPanel().getDgShichosonShoriSelect().
                         getSelectedItems().get(INT_0).setData4(済);

@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd5720001.JyukyushaDaichoIdoCheckListProcess;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd5720001.ShoriDateKanriProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD572001.JyukyushaDaichoIdoCheckListProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD572001.ShoriDateKanriProcess;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD572001.DBD572001Parameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;

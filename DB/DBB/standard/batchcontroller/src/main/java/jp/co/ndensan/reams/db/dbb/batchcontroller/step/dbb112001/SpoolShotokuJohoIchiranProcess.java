@@ -176,15 +176,16 @@ public class SpoolShotokuJohoIchiranProcess extends BatchKeyBreakBase<ShotokuJoh
         RString csv出力有無;
         RString csvファイル名;
         if (連番 != INT_1) {
-            出力ページ数 = reportSourceWriter.getPageGroupCount();
+            出力ページ数 = reportSourceWriter.pageCount().value();
             csv出力有無 = CSV出力有無_あり;
-            csvファイル名 = CSVファイル名_なし;
-        } else {
-            csv出力有無 = CSV出力有無_なし;
             csvファイル名 = CSVファイル名_あり;
+        } else {
+            csvファイル名 = CSVファイル名_なし;
+            csv出力有無 = CSV出力有無_なし;
         }
         load出力条件リスト(出力ページ数, csv出力有無, csvファイル名);
         eucCsvWriter.close();
+        eucManager.spool(eucFilePath);
     }
 
     private void load出力条件リスト(int 出力ページ数, RString csv出力有無, RString csvファイル名) {

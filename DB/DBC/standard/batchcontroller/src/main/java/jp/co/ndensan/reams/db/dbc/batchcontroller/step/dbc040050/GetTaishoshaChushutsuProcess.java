@@ -5,10 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc040050;
 
+import jp.co.ndensan.reams.db.dbc.business.report.dbc200040.GassanShikyuFushikyuKetteishaIchiranReport;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteitsuchisho.KogakugassanShikyuKetteitsuchishoMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakugassanshikyuketteitsuchisho.KogakugassanShikyuKetteitsuchishoProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanshikyuketteitsuchisho.KogakuGassanShikyuFushikyuKetteiResultEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanshikyuketteitsuchisho.KogakugassanShikyuKetteitsuchishoTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.report.dbc200040.GassanShikyuFushikyuKetteishaIchiranSource;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassanshikyuketteitsuchisho.IKogakugassanShikyuKetteitsuchishoMapper;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
@@ -16,6 +19,8 @@ import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryo
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
@@ -24,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
  * 対象者抽出processクラスです。
@@ -45,7 +51,7 @@ public class GetTaishoshaChushutsuProcess extends BatchProcessBase<KogakuGassanS
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "kogakugassanshikyuketteitsuchisho.IKogakugassanShikyuKetteitsuchishoMapper.select高額合算支給不支給決定データ");
 
-    private KogakugassanShikyuKetteitsuchishoProcessParameter parameter;
+    private KogakugassanShikyuKetteitsuchishoProcessParameter processParameter;
     private int 対象者抽出件数;
     private static final ReportId 帳票ID = new ReportId("DBC100053_GassanKetteiTsuchisho");
     private static final RString TABLE_NAME = new RString("KogakugassanShikyuKetteitsuchishoTemp");
@@ -68,12 +74,14 @@ public class GetTaishoshaChushutsuProcess extends BatchProcessBase<KogakuGassanS
     private RString 改頁4 = RString.EMPTY;
     private RString 改頁5 = RString.EMPTY;
 
+    private BatchReportWriter<GassanShikyuFushikyuKetteishaIchiranSource> batchReportWriter_一覧表;
+    private ReportSourceWriter<GassanShikyuFushikyuKetteishaIchiranSource> reportSourceWriter_一覧表;
+
     @BatchWriter
     private IBatchTableWriter tempDbWriter;
 
     @Override
     protected void initialize() {
-        super.initialize();
         出力件数 = new OutputParameter<>();
         出力件数.setValue(INT_0);
         対象者抽出件数 = INT_0;
@@ -82,7 +90,7 @@ public class GetTaishoshaChushutsuProcess extends BatchProcessBase<KogakuGassanS
     @Override
     protected void beforeExecute() {
         IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
-                .get出力順(SubGyomuCode.DBC介護給付, 帳票ID, Long.parseLong(parameter.get改頁出力順ID().toString()));
+                .get出力順(SubGyomuCode.DBC介護給付, 帳票ID, Long.parseLong(processParameter.get改頁出力順ID().toString()));
         if (並び順 != null) {
             int i = INT_0;
             for (ISetSortItem item : 並び順.get設定項目リスト()) {
@@ -122,18 +130,21 @@ public class GetTaishoshaChushutsuProcess extends BatchProcessBase<KogakuGassanS
     protected IBatchReader createReader() {
         KogakugassanShikyuKetteitsuchishoMybatisParameter 高額合算支給不支給決定データParameter
                 = new KogakugassanShikyuKetteitsuchishoMybatisParameter();
-        高額合算支給不支給決定データParameter.set日付選択区分(parameter.get日付選択区分());
-        高額合算支給不支給決定データParameter.set印書区分(parameter.get印書区分());
-        高額合算支給不支給決定データParameter.set受取年月(parameter.get受取年月());
-        高額合算支給不支給決定データParameter.set申請開始年月日(parameter.get申請開始年月日());
-        高額合算支給不支給決定データParameter.set申請終了年月日(parameter.get申請終了年月日());
-        高額合算支給不支給決定データParameter.set決定開始年月日(parameter.get決定開始年月日());
-        高額合算支給不支給決定データParameter.set決定終了年月日(parameter.get決定終了年月日());
+        高額合算支給不支給決定データParameter.set日付選択区分(processParameter.get日付選択区分());
+        高額合算支給不支給決定データParameter.set印書区分(processParameter.get印書区分());
+        高額合算支給不支給決定データParameter.set受取年月(processParameter.get受取年月());
+        高額合算支給不支給決定データParameter.set申請開始年月日(processParameter.get申請開始年月日());
+        高額合算支給不支給決定データParameter.set申請終了年月日(processParameter.get申請終了年月日());
+        高額合算支給不支給決定データParameter.set決定開始年月日(processParameter.get決定開始年月日());
+        高額合算支給不支給決定データParameter.set決定終了年月日(processParameter.get決定終了年月日());
         return new BatchDbReader(READ_DATA_ID, 高額合算支給不支給決定データParameter);
     }
 
     @Override
     protected void createWriter() {
+        batchReportWriter_一覧表 = BatchReportFactory.createBatchReportWriter(
+                ReportIdDBC.DBC200040.getReportId().value(), SubGyomuCode.DBC介護給付).create();
+        reportSourceWriter_一覧表 = new ReportSourceWriter<>(batchReportWriter_一覧表);
         this.tempDbWriter = new BatchEntityCreatedTempTableWriter(TABLE_NAME, KogakugassanShikyuKetteitsuchishoTempEntity.class);
     }
 
@@ -191,6 +202,12 @@ public class GetTaishoshaChushutsuProcess extends BatchProcessBase<KogakuGassanS
     @Override
     protected void afterExecute() {
         出力件数.setValue(対象者抽出件数);
+        if (対象者抽出件数 == INT_0) {
+            GassanShikyuFushikyuKetteishaIchiranReport 一覧表report = new GassanShikyuFushikyuKetteishaIchiranReport(null,
+                    processParameter.get処理日時(), false, null, null);
+            一覧表report.writeBy(reportSourceWriter_一覧表);
+            batchReportWriter_一覧表.close();
+        }
     }
 
 }
