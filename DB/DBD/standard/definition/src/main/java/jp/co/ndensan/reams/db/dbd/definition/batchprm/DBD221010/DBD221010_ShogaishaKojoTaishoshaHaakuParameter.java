@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd4010011;
+package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD221010;
 
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
@@ -20,7 +20,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShogaishaKojoTaishoshaHaakuKekkaIchiranParameter extends BatchParameterBase {
+public class DBD221010_ShogaishaKojoTaishoshaHaakuParameter extends BatchParameterBase {
 
     private static final String KIJUNRI = "kijinhi";
     private static final String TAISHONANDU = "taishonandu";
