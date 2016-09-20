@@ -113,7 +113,7 @@ public class DankaibetsuHihokenshasuReportProcess extends BatchKeyBreakBase<Dank
         parameter.set市町村コード(false);
         if (市町村分.equals(processParameter.get広域分市町村分区分())) {
             parameter.set市町村コード(true);
-            parameter.set市町村コード複数(processParameter.get市町村コード複数());
+            parameter.set市町村コードList(processParameter.get市町村コード複数());
         }
         return parameter;
     }
