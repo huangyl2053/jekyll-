@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 高額受領委任契約事業者のデータアクセスクラスです。
+ *
+ *
  */
 public class DbT3076KogakuJuryoininKeiyakuJigyoshaDac implements ISaveable<DbT3076KogakuJuryoininKeiyakuJigyoshaEntity> {
 
@@ -81,5 +83,17 @@ public class DbT3076KogakuJuryoininKeiyakuJigyoshaDac implements ISaveable<DbT30
         // TODO 物理削除であるかは業務ごとに検討してください。
         //return DbAccessorMethodSelector.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
+    }
+
+    /**
+     * DbT3076KogakuJuryoininKeiyakuJigyoshaEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
+     *
+     * @param entity entity
+     * @return 登録件数
+     */
+    @Transaction
+    public int saveOrDeletePhysical(DbT3076KogakuJuryoininKeiyakuJigyoshaEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("高額受領委任契約事業者エンティティ"));
+        return DbAccessors.saveOrDeletePhysicalBy(new DbAccessorNormalType(session), entity);
     }
 }
