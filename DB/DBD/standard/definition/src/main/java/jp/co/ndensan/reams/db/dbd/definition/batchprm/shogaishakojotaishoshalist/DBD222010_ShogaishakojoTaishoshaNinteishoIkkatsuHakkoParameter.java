@@ -23,7 +23,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class ShogaishaKojoTaishoshaListParameter extends BatchParameterBase {
+public class DBD222010_ShogaishakojoTaishoshaNinteishoIkkatsuHakkoParameter extends BatchParameterBase {
 
     @BatchParameter(key = "対象年度", name = "対象年度")
     private FlexibleYear 対象年度;

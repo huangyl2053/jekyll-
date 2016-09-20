@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD4030011;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.shogaishakojotaishoshalist.ShogaishaKojoTaishoshaListParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.shogaishakojotaishoshalist.DBD222010_ShogaishakojoTaishoshaNinteishoIkkatsuHakkoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.shogaishakoujo.NinteiNaiyoKubun;
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.shogaishakoujo.Ninteikubun;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
@@ -169,8 +169,8 @@ public class ShogaishaKoujoTaishoNinteiShoHandler {
      *
      * @return ShogaishaKojoTaishoshaListParameter 障がい者控除対象者認定書一括発行リスト_バッチ用のパラメータです。
      */
-    public ShogaishaKojoTaishoshaListParameter getParameter() {
-        ShogaishaKojoTaishoshaListParameter parameter = new ShogaishaKojoTaishoshaListParameter();
+    public DBD222010_ShogaishakojoTaishoshaNinteishoIkkatsuHakkoParameter getParameter() {
+        DBD222010_ShogaishakojoTaishoshaNinteishoIkkatsuHakkoParameter parameter = new DBD222010_ShogaishakojoTaishoshaNinteishoIkkatsuHakkoParameter();
         parameter.set対象年度(new FlexibleYear(div.getTyusyutuJyokenPanel().getTxtTaishoNendo().getValue().toDateString().substring(0, INT4)));
         if (div.getTyusyutuJyokenPanel().getTxtHihokenshaNo().getValue() != null) {
             parameter.set被保険者番号(new RString(div.getTyusyutuJyokenPanel().getTxtHihokenshaNo().getValue().toString()));

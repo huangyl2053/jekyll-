@@ -185,6 +185,10 @@ public class HokenshaSofuListPanelHandler {
                 return true;
             case "37K":
                 return true;
+            case "37K1":
+                return true;
+            case "37K2":
+                return true;
             case "381":
                 return true;
             case "38Q":
@@ -195,6 +199,8 @@ public class HokenshaSofuListPanelHandler {
                 return true;
             case "536":
                 return true;
+            case "5Ｈ1":
+                return false;
             default:
                 return false;
         }
