@@ -61,7 +61,7 @@ public class ShisetsuNyutaishoRirekiKanri {
      */
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onSelectBySelectButton_dgShisetsuNyutaishoRireki(ShisetsuNyutaishoRirekiKanriDiv requestDiv) {
         dgShisetsuNyutaishoRireki_Row row = requestDiv.getDgShisetsuNyutaishoRireki().getActiveRow();
-        getHandler(requestDiv).onSelectBySelectButton_dgShisetsuNyutaishoRireki(row, get保険者名(row.getTxtTenshutsusakiHokenshaBango()));
+        getHandler(requestDiv).onSelectBySelectButton_dgShisetsuNyutaishoRireki(row);
         return ResponseData.of(requestDiv).respond();
     }
 
@@ -73,7 +73,7 @@ public class ShisetsuNyutaishoRirekiKanri {
      */
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onSelectByModifyButton_dgShisetsuNyutaishoRireki(ShisetsuNyutaishoRirekiKanriDiv requestDiv) {
         dgShisetsuNyutaishoRireki_Row row = requestDiv.getDgShisetsuNyutaishoRireki().getActiveRow();
-        getHandler(requestDiv).onSelectByModifyButton_dgShisetsuNyutaishoRireki(row, get保険者名(row.getTxtTenshutsusakiHokenshaBango()));
+        getHandler(requestDiv).onSelectByModifyButton_dgShisetsuNyutaishoRireki(row);
         return ResponseData.of(requestDiv).respond();
     }
 
@@ -85,7 +85,7 @@ public class ShisetsuNyutaishoRirekiKanri {
      */
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onSelectByDeleteButton_dgShisetsuNyutaishoRireki(ShisetsuNyutaishoRirekiKanriDiv requestDiv) {
         dgShisetsuNyutaishoRireki_Row row = requestDiv.getDgShisetsuNyutaishoRireki().getActiveRow();
-        getHandler(requestDiv).onSelectByDeleteButton_dgShisetsuNyutaishoRireki(row, get保険者名(row.getTxtTenshutsusakiHokenshaBango()));
+        getHandler(requestDiv).onSelectByDeleteButton_dgShisetsuNyutaishoRireki(row);
         return ResponseData.of(requestDiv).respond();
     }
 
