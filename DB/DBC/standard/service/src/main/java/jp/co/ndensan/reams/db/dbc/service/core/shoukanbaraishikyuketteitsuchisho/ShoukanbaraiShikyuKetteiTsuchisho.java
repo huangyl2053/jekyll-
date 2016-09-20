@@ -589,11 +589,9 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
     private RString edit給付の種類Total(RString serviceShuruiRyakusho, RString 給付の種類) {
         if (給付の種類.isEmpty()) {
             給付の種類 = 給付の種類.concat(serviceShuruiRyakusho);
-        } else {
-            if (給付の種類.indexOf(serviceShuruiRyakusho) == -1) {
-                給付の種類 = 給付の種類.concat(間)
-                        .concat(serviceShuruiRyakusho);
-            }
+        } else if (給付の種類.indexOf(serviceShuruiRyakusho) == -1) {
+            給付の種類 = 給付の種類.concat(間)
+                    .concat(serviceShuruiRyakusho);
         }
         return 給付の種類;
     }
@@ -601,11 +599,9 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
     private RString edit給付の種類(RString serviceShuruiRyakusho, RString 給付の種類) {
         if (給付の種類.isEmpty()) {
             給付の種類 = 給付の種類.concat(serviceShuruiRyakusho);
-        } else {
-            if (給付の種類.indexOf(serviceShuruiRyakusho) == -1) {
-                給付の種類 = 給付の種類.concat(間)
-                        .concat(serviceShuruiRyakusho);
-            }
+        } else if (給付の種類.indexOf(serviceShuruiRyakusho) == -1) {
+            給付の種類 = 給付の種類.concat(間)
+                    .concat(serviceShuruiRyakusho);
         }
         return 給付の種類;
     }
@@ -613,11 +609,9 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
     private RString edit給付種類(RString serviceShuruiRyakusho, RString 給付の種類) {
         if (給付の種類.isEmpty()) {
             給付の種類 = 給付の種類.concat(serviceShuruiRyakusho);
-        } else {
-            if (給付の種類.indexOf(serviceShuruiRyakusho) == -1) {
-                給付の種類 = 給付の種類.concat(間)
-                        .concat(serviceShuruiRyakusho);
-            }
+        } else if (給付の種類.indexOf(serviceShuruiRyakusho) == -1) {
+            給付の種類 = 給付の種類.concat(間)
+                    .concat(serviceShuruiRyakusho);
         }
         return 給付の種類;
     }
@@ -722,14 +716,12 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
                     }
                 }
             }
-        } else {
-            if (!dbt3047entitys.isEmpty()) {
-                for (DbT3047ShokanServicePlan200904Entity entity3047 : dbt3047entitys) {
-                    for (DbT7130KaigoServiceShuruiEntity entity7130 : dbt7130entitys) {
-                        ServiceCode code = entity3047.getServiceCode();
-                        if (code != null) {
-                            給付の種類 = editServiceCode(entity7130, code, 給付の種類);
-                        }
+        } else if (!dbt3047entitys.isEmpty()) {
+            for (DbT3047ShokanServicePlan200904Entity entity3047 : dbt3047entitys) {
+                for (DbT7130KaigoServiceShuruiEntity entity7130 : dbt7130entitys) {
+                    ServiceCode code = entity3047.getServiceCode();
+                    if (code != null) {
+                        給付の種類 = editServiceCode(entity7130, code, 給付の種類);
                     }
                 }
             }
@@ -749,28 +741,28 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
         FlexibleDate shiharaiShuryoYMD = shoukanbaraiShikyuEntity.get償還払支給申請().getShiharaiShuryoYMD();
         RString shiharaiKaishiTime = shoukanbaraiShikyuEntity.get償還払支給申請().getShiharaiKaishiTime();
         RString shiharaiShuryoTime = shoukanbaraiShikyuEntity.get償還払支給申請().getShiharaiShuryoTime();
-        if (shiharaiKaishiYMD != null) {
+        if (shiharaiKaishiYMD != null && !shiharaiKaishiYMD.isEmpty()) {
             entity.setShiharaiStartYMD(shiharaiKaishiYMD.wareki().
                     eraType(EraType.KANJI).
                     firstYear(FirstYear.GAN_NEN).
                     separator(Separator.JAPANESE).
-                    fillType(FillType.BLANK).toDateString().concat(shiharaiKaishiYMD.getDayOfWeek().toString()).concat(KARA));
-        } else if (shiharaiShuryoYMD != null) {
-            entity.setShiharaiStartYMD(KARA.concat(shiharaiShuryoYMD.wareki().
-                    eraType(EraType.KANJI).
-                    firstYear(FirstYear.GAN_NEN).
-                    separator(Separator.JAPANESE).
-                    fillType(FillType.BLANK).toDateString()).concat(shiharaiShuryoYMD.getDayOfWeek().toString()));
+                    fillType(FillType.BLANK).toDateString().concat(shiharaiKaishiYMD.getDayOfWeek().getShortTerm()).concat(KARA));
+        } else if (shiharaiKaishiYMD == null || shiharaiKaishiYMD.isEmpty() && shiharaiShuryoYMD != null && !shiharaiShuryoYMD.isEmpty()) {
+            entity.setShiharaiStartYMD(KARA);
         }
-        if (shiharaiKaishiYMD != null && shiharaiShuryoYMD != null) {
+        if (shiharaiShuryoYMD == null) {
+            entity.setShiharaiEndYMD(RString.EMPTY);
+        }
+        if (shiharaiKaishiYMD != null && shiharaiShuryoYMD != null && !shiharaiKaishiYMD.isEmpty() && !shiharaiShuryoYMD.isEmpty()) {
             entity.setShiharaiEndYMD(shiharaiShuryoYMD.wareki().
                     eraType(EraType.KANJI).
                     firstYear(FirstYear.GAN_NEN).
                     separator(Separator.JAPANESE).
-                    fillType(FillType.BLANK).toDateString().concat(shiharaiShuryoYMD.getDayOfWeek().toString()));
+                    fillType(FillType.BLANK).toDateString().concat(shiharaiShuryoYMD.getDayOfWeek().getShortTerm()));
         }
         entity.setShiharaiStart(set時間(shiharaiKaishiTime));
-        if ((shiharaiKaishiYMD != null || shiharaiShuryoYMD != null) && (shiharaiKaishiTime != null || shiharaiShuryoTime != null)) {
+        if ((shiharaiKaishiYMD != null && !shiharaiKaishiYMD.isEmpty() || shiharaiShuryoYMD.isEmpty() && shiharaiShuryoYMD != null)
+                && (!shiharaiKaishiTime.isEmpty() && shiharaiKaishiTime != null || !shiharaiShuryoTime.isEmpty() && shiharaiShuryoTime != null)) {
             entity.setKaraFugo(KARA);
         }
         entity.setShiharaiEnd(set時間(shiharaiShuryoTime));
