@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.core.idoufunriyoushyafutankanendo;
 
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.idoufunriyoushyafutankanendo.IdoufunRiyoushyafutanKanendoMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.idoufunriyoushyafutankanendo.IIdoufunRiyoushyafutanKanendoMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
@@ -70,13 +71,12 @@ public class IdoufunRiyoushyafutanKanendoManager {
     /**
      * 異動分利用者負担割合判定のデータを取得です.
      *
-     * @param 処理名 RString
-     * @param 年次判定年度 RString
+     * @param parameter IdoufunRiyoushyafutanKanendoMybatisParameter
      * @return 異動分利用者負担割合判定のデータ ShoriDateKanri
      */
-    public ShoriDateKanri get異動分利用者負担割合判定のデータ(RString 処理名, RString 年次判定年度) {
+    public ShoriDateKanri get異動分利用者負担割合判定のデータ(IdoufunRiyoushyafutanKanendoMybatisParameter parameter) {
         IIdoufunRiyoushyafutanKanendoMapper mapper = mapperProvider.create(IIdoufunRiyoushyafutanKanendoMapper.class);
-        DbT7022ShoriDateKanriEntity entity = mapper.get異動分利用者負担割合判定のデータ(処理名, 年次判定年度);
+        DbT7022ShoriDateKanriEntity entity = mapper.get異動分利用者負担割合判定のデータ(parameter);
         if (entity != null) {
             return new ShoriDateKanri(entity);
         }

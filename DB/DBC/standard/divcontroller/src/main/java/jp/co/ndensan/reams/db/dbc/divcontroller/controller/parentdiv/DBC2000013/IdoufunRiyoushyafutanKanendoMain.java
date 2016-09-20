@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC2000013;
 
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180030.DBC180030_KanendoRiyoshaFutanwariaiHanteiParameter;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.idoufunriyoushyafutankanendo.IdoufunRiyoushyafutanKanendoMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000013.DBC2000013TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000013.IdoufunRiyoushyafutanKanendoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2000013.IdoufunRiyoushyafutanKanendoMainHandler;
@@ -36,9 +37,12 @@ public class IdoufunRiyoushyafutanKanendoMain {
         ShoriDateKanri business = get異動分利用者負担割合判定_過年度のデータ();
         if (business != null) {
             getHandler(div).set取得できたの抽出期間(business);
-        } else {
+        }
+        if (business == null && データ != null) {
             RString 年次判定年度 = データ.get年度().toDateString();
-            getHandler(div).set取得できないの抽出期間(get異動分利用者負担割合判定のデータ(年次判定年度));
+            IdoufunRiyoushyafutanKanendoMybatisParameter parameter = new IdoufunRiyoushyafutanKanendoMybatisParameter(
+                    ShoriName.異動分利用者負担割合判定.get名称(), 年次判定年度);
+            getHandler(div).set取得できないの抽出期間(get異動分利用者負担割合判定のデータ(parameter));
         }
         return ResponseData.of(div).respond();
     }
@@ -78,9 +82,8 @@ public class IdoufunRiyoushyafutanKanendoMain {
                 ShoriName.異動分利用者負担割合判定_過年度.get名称());
     }
 
-    private ShoriDateKanri get異動分利用者負担割合判定のデータ(RString 年次判定年度) {
-        return IdoufunRiyoushyafutanKanendoManager.createInstance().get異動分利用者負担割合判定のデータ(
-                ShoriName.異動分利用者負担割合判定.get名称(), 年次判定年度);
+    private ShoriDateKanri get異動分利用者負担割合判定のデータ(IdoufunRiyoushyafutanKanendoMybatisParameter parameter) {
+        return IdoufunRiyoushyafutanKanendoManager.createInstance().get異動分利用者負担割合判定のデータ(parameter);
     }
 
     private IdoufunRiyoushyafutanKanendoMainHandler getHandler(IdoufunRiyoushyafutanKanendoDiv div) {
