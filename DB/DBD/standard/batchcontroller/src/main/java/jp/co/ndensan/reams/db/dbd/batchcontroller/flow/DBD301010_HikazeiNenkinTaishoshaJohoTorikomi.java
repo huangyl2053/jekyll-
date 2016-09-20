@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.dbd8100201;
+package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd8100201.FuicchiCsvProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd8100201.GaitouIchirannCsvProcess;
