@@ -12,23 +12,23 @@
      "type": "start",
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",
-     "toLayoutName": "DBC0220011",
-     "toLayoutTitle": "受給者異動連絡票変更登録",
-     "toState": "対象者検索"
+     "toLayoutName": "DBC0260011",
+     "toLayoutTitle": "対象者検索",
+     "toState": "検索条件"
     },
     {
      "id": "2",
      "type": "ordinal",
      "layoutSubGyomuCode": "DBC",
-     "layoutName": "DBC0220011",
-     "layoutTitle": "受給者異動連絡票変更登録",
-     "eventName": "連絡票情報照会",
+     "layoutName": "DBC0260011",
+     "layoutTitle": "対象者検索",
+     "eventName": "選択",
      "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0041011",
      "toLayoutTitle": "共同処理用受給者異動連絡票情報照会",
-     "toState": ""
+     "toState": "default"
     },
     {
      "id": "3",
@@ -44,20 +44,6 @@
      "id": "4",
      "type": "ordinal",
      "layoutSubGyomuCode": "DBC",
-     "layoutName": "DBC0220011",
-     "layoutTitle": "受給者異動連絡票変更登録",
-     "eventName": "該当者検索",
-     "destroy": false,
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBC",
-     "toLayoutName": "DBC0260011",
-     "toLayoutTitle": "対象者検索",
-     "toState": ""
-    },
-    {
-     "id": "5",
-     "type": "ordinal",
-     "layoutSubGyomuCode": "DBC",
      "layoutName": "DBC0260011",
      "layoutTitle": "対象者検索",
      "eventName": "該当者検索",
@@ -66,10 +52,10 @@
      "toLayoutSubGyomuCode": "DBZ",
      "toLayoutName": "DBZ0200001",
      "toLayoutTitle": "対象者検索",
-     "toState": ""
+     "toState": "検索条件"
     },
     {
-     "id": "6",
+     "id": "5",
      "type": "ordinal",
      "layoutSubGyomuCode": "DBZ",
      "layoutName": "DBZ0200001",
@@ -81,6 +67,34 @@
      "toLayoutName": "DBC0260011",
      "toLayoutTitle": "対象者検索",
      "toState": ""
+    },
+    {
+     "id": "6",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0041011",
+     "layoutTitle": "共同処理用受給者異動連絡票情報照会",
+     "eventName": "再検索",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0260011",
+     "toLayoutTitle": "対象者検索",
+     "toState": "検索条件"
+    },
+    {
+     "id": "7",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC0041011",
+     "layoutTitle": "共同処理用受給者異動連絡票情報照会",
+     "eventName": "検索結果一覧",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBC",
+     "toLayoutName": "DBC0260011",
+     "toLayoutTitle": "対象者検索",
+     "toState": "対象者一覧"
     }
    ]
   }
