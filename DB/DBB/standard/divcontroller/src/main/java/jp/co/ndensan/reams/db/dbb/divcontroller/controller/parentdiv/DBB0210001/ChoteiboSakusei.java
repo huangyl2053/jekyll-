@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0210001;
 
 import jp.co.ndensan.reams.db.dbb.business.core.choteibo.ChoteiboSakuseiManager;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.choteibo.ChoteiboBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB021001.DBB021001_ChoteiboSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0210001.ChoteiboSakuseiDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0210001.ChoteiboSakuseiHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0210001.ChoteiboSakuseiValidationHandler;
@@ -61,15 +61,15 @@ public class ChoteiboSakusei {
      * @param div コントロールdiv
      * @return レスポンスデータ
      */
-    public ResponseData<ChoteiboBatchParameter> onClick_btnBatchRegister(ChoteiboSakuseiDiv div) {
-        ResponseData<ChoteiboBatchParameter> responseData = new ResponseData<>();
+    public ResponseData<DBB021001_ChoteiboSakuseiParameter> onClick_btnBatchRegister(ChoteiboSakuseiDiv div) {
+        ResponseData<DBB021001_ChoteiboSakuseiParameter> responseData = new ResponseData<>();
         responseData.data = setBatchParameter(div);
         return responseData;
     }
 
-    private ChoteiboBatchParameter setBatchParameter(ChoteiboSakuseiDiv div) {
+    private DBB021001_ChoteiboSakuseiParameter setBatchParameter(ChoteiboSakuseiDiv div) {
         ChoteiboSakuseiManager manage = new ChoteiboSakuseiManager();
-        ChoteiboBatchParameter parameter = manage.getChoteiboParameter(
+        DBB021001_ChoteiboSakuseiParameter parameter = manage.getChoteiboParameter(
                 new FlexibleYear(new RDate(div.getDdlShoriNendo().getSelectedValue().toString()).seireki().getYear()),
                 div.getTxtChushutsuStYMD().getValue(),
                 div.getTxtChushutsuStTime().getValue(),

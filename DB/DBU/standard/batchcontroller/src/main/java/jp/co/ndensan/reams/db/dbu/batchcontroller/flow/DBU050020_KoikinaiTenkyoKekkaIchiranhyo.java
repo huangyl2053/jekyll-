@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.batchcontroller.flow.hiroshimadomain;
+package jp.co.ndensan.reams.db.dbu.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbu.batchcontroller.step.hiroshimadomain.HiroshimaDomainReportProcess;
-import jp.co.ndensan.reams.db.dbu.definition.batchprm.hiroshimadomain.HiroshimaDomainBatchParameter;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU050020.HiroshimaDomainReportProcess;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU050020.DBU050020_KoikinaiTenkyoKekkaIchiranhyoParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBU-1150-020 chenaoqi
  */
-public class HiroshimaDomainFlow extends BatchFlowBase<HiroshimaDomainBatchParameter> {
+public class DBU050020_KoikinaiTenkyoKekkaIchiranhyo extends BatchFlowBase<DBU050020_KoikinaiTenkyoKekkaIchiranhyoParameter> {
 
     private static final String REPORT_PROCESS = "hiroshimaDomainReportProcess";
 

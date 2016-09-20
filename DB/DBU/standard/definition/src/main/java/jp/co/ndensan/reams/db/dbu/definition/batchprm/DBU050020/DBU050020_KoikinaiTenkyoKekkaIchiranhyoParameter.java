@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.definition.batchprm.hiroshimadomain;
+package jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU050020;
 
 import jp.co.ndensan.reams.db.dbu.definition.processprm.hiroshimadomain.HiroshimaDomainProcessParameter;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
@@ -23,7 +23,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class HiroshimaDomainBatchParameter extends BatchParameterBase {
+public class DBU050020_KoikinaiTenkyoKekkaIchiranhyoParameter extends BatchParameterBase {
 
     private static final long serialVersionUID = 1L;
     @BatchParameter(key = "市町村コード", name = "市町村コード")
@@ -40,7 +40,7 @@ public class HiroshimaDomainBatchParameter extends BatchParameterBase {
      * コンストラクタです。
      *
      */
-    public HiroshimaDomainBatchParameter() {
+    public DBU050020_KoikinaiTenkyoKekkaIchiranhyoParameter() {
 
     }
 
@@ -53,7 +53,7 @@ public class HiroshimaDomainBatchParameter extends BatchParameterBase {
      * @param 日付To 日付To
      * @param 宛名検索条件 IShikibetsuTaishoPSMSearchKey
      */
-    public HiroshimaDomainBatchParameter(LasdecCode 市町村コード,
+    public DBU050020_KoikinaiTenkyoKekkaIchiranhyoParameter(LasdecCode 市町村コード,
             RString 市町村名称,
             FlexibleDate 日付From,
             FlexibleDate 日付To,

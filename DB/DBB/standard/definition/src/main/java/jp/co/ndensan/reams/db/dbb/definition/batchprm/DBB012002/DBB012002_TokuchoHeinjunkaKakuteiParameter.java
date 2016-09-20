@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunkakakutei;
+package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012002;
 
 import java.util.Map;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TokuchoHeijunkaKakuteiBatchParameter extends BatchParameterBase {
+public class DBB012002_TokuchoHeinjunkaKakuteiParameter extends BatchParameterBase {
 
     private static final long serialVersionUID = 1L;
     private Map<RString, Decimal> 差額Map;
