@@ -64,7 +64,10 @@
             SELECT
                             <include refid="allColumns_TempTable" />
             FROM        "DbWT1051AtenaShirYoho" AS "TempTable"
-            ${出力順}
+            ORDER BY "TempTable"."市町村コード"
+            <if test="出力順" >
+            ,${出力順}
+            </if>
     </select>
 
 <!--処理詳細8-->

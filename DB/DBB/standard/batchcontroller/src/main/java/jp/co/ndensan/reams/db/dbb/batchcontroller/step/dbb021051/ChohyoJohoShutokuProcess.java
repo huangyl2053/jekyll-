@@ -57,6 +57,7 @@ public class ChohyoJohoShutokuProcess extends BatchKeyBreakBase<DBB021051TableJo
 
     private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate."
             + "dbb021051.IDBB021051Mapper.get宛名シール情報一時");
+    private static final RString ORDERBY = new RString("order by");
     private static final int 最大宛先数 = 12;
     private static final int INT_5 = 5;
     private static final RString ERROR_出力順 = new RString("出力順");
@@ -86,7 +87,7 @@ public class ChohyoJohoShutokuProcess extends BatchKeyBreakBase<DBB021051TableJo
         if (出力順情報 == null) {
             throw new ApplicationException(UrErrorMessages.実行不可.getMessage().replace(ERROR_出力順.toString()));
         }
-        出力順 = MyBatisOrderByClauseCreator.create(DBB021051OutPutOrder.class, 出力順情報);
+        出力順 = MyBatisOrderByClauseCreator.create(DBB021051OutPutOrder.class, 出力順情報).replace(ORDERBY, RString.EMPTY);
         int i = 0;
         for (ISetSortItem setSortItem : 出力順情報.get設定項目リスト()) {
             if (i < INT_5) {
