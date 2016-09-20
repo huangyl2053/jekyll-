@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.dbd583001;
+package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd583001.NenreiKaikyubetsuYokaigodoJokyoProcess;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd583001.NenreiKaikyubetsuYokaigodoJokyoParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD583001.DBD583001Parameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBD-1790-020 donghj
  */
-public class DBD583001_NenreiKaikyubetsuKaigodo extends BatchFlowBase<NenreiKaikyubetsuYokaigodoJokyoParameter> {
+public class DBD583001 extends BatchFlowBase<DBD583001Parameter> {
 
     private static final String 集計表出力 = "get集計表出力";
 

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd583001;
+package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD583001;
 
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd583001.NenreiKaikyubetsuYokaigodoJokyoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -23,7 +23,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class NenreiKaikyubetsuYokaigodoJokyoParameter extends BatchParameterBase {
+public class DBD583001Parameter extends BatchParameterBase {
 
     @BatchParameter(key = "基準日", name = "基準日")
     private RDate 基準日;
