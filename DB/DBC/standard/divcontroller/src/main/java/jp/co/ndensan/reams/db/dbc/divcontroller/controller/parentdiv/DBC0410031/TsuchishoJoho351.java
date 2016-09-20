@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0410031;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.kogakukyufuketteiin.KogakuKyufuKetteiInBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120080.DBC120080_KogakuKyufuKetteiInParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410031.TsuchishoJoho351Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
@@ -50,8 +50,8 @@ public class TsuchishoJoho351 {
      * @param div TsuchishoJoho351Div
      * @return ResponseData
      */
-    public ResponseData<KogakuKyufuKetteiInBatchParameter> onClick_btnExcute(TsuchishoJoho351Div div) {
-        KogakuKyufuKetteiInBatchParameter parameter = new KogakuKyufuKetteiInBatchParameter();
+    public ResponseData<DBC120080_KogakuKyufuKetteiInParameter> onClick_btnExcute(TsuchishoJoho351Div div) {
+        DBC120080_KogakuKyufuKetteiInParameter parameter = new DBC120080_KogakuKyufuKetteiInParameter();
         RDate 処理年月 = div.getCcdKokurenJohoTorikomi().get処理年月();
         Long 出力順ID = div.getCcdKokurenJohoTorikomi().get出力順ID();
         RString 再処理区分 = div.getCcdKokurenJohoTorikomi().get再処理区分();
