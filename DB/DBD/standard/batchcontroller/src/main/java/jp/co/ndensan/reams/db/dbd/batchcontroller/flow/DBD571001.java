@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.dbd571001;
+package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd571001.JukyushaDaichoCyouhyoujouhouProcess;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd571001.JukyushaDaichoProcess;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd571001.DBD571001Parameter;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD571001.JukyushaDaichoCyouhyoujouhouProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD571001.JukyushaDaichoProcess;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD571001.DBD571001Parameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;

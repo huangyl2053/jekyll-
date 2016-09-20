@@ -56,7 +56,19 @@ public class IdoChushutsuDaichoNewMybatisParameter implements IMyBatisParameter 
      * @param is広域 is広域
      * @param is単一 is単一
      */
-    public IdoChushutsuDaichoNewMybatisParameter(RString 抽出条件設定区分, HihokenshaNo 被保険者番号From, HihokenshaNo 被保険者番号To, RDate 今回抽出開始年月日, RTime 今回抽出開始時分秒, RDate 今回抽出終了年月日, RTime 今回抽出終了時分秒, List<HihokenshaNo> 被保険者番号リスト, List<ShikibetsuCode> 識別コードリスト, RString 出力順, boolean is広域, boolean is単一) {
+    public IdoChushutsuDaichoNewMybatisParameter(
+            RString 抽出条件設定区分,
+            HihokenshaNo 被保険者番号From,
+            HihokenshaNo 被保険者番号To,
+            RDate 今回抽出開始年月日,
+            RTime 今回抽出開始時分秒,
+            RDate 今回抽出終了年月日,
+            RTime 今回抽出終了時分秒,
+            List<HihokenshaNo> 被保険者番号リスト,
+            List<ShikibetsuCode> 識別コードリスト,
+            RString 出力順,
+            boolean is広域,
+            boolean is単一) {
         this.抽出条件設定区分 = 抽出条件設定区分;
         this.被保険者番号From = 被保険者番号From;
         this.被保険者番号To = 被保険者番号To;
