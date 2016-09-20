@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0140011;
 
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC160010.DBC160010_KeikakuTodokedeJokyoIchiranParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0140011.DBC0140011KeikakuTodokeJohoListDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0140011.DBC0140011KeikakuTodokeJohoListHandler;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -44,10 +45,9 @@ public class DBC0140011KeikakuTodokeJohoList {
      * @param div DBC0140011KeikakuTodokeJohoListDiv
      * @return ResponseData
      */
-    public ResponseData<DBC0140011KeikakuTodokeJohoListDiv> onClick_btnBatchRegister(DBC0140011KeikakuTodokeJohoListDiv div) {
-
-        getHandler(div).onClick_btnBatchRegister();
-        return ResponseData.of(div).respond();
+    public ResponseData<DBC160010_KeikakuTodokedeJokyoIchiranParameter> onClick_btnBatchRegister(DBC0140011KeikakuTodokeJohoListDiv div) {
+        DBC160010_KeikakuTodokedeJokyoIchiranParameter parameter = getHandler(div).onClick_btnBatchRegister();
+        return ResponseData.of(parameter).respond();
 
     }
 
