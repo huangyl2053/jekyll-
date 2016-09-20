@@ -36,7 +36,7 @@ public class SougouJigyoHiJouhouHandler {
     private static final RString 作成区分_KEY1 = new RString("key1");
     private static final RString 作成区分_KEY2 = new RString("key2");
     private static final RString 作成区分_KEY3 = new RString("key3");
-    private static final RString 全市町村 = new RString("000000");
+    private static final RString 全て市町村 = new RString("000000");
     private final SougouJigyoHiJouhouDiv div;
 
     /**
@@ -137,17 +137,34 @@ public class SougouJigyoHiJouhouHandler {
         parameter.setサービス種類コード(div.getDdlSabisuSyurui().getSelectedKey());
         RString 市町村コード = RString.EMPTY;
         if (導入形態_広域.equals(div.getHdnDonyuKeitai())
-                && !div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().value().equals(全市町村)) {
+                && !div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().value().equals(全て市町村)) {
             市町村コード = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().value();
+            if (!div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().isEmpty()) {
+                市町村コード = div.getChushutsuJokenPanel().getCcdHokenshaList().getSelectedItem().get市町村コード().value();
+            } else {
+                市町村コード = 全て市町村;
+            }
         }
         parameter.set保険者コード(市町村コード);
         parameter.set抽出方法(div.getRadSakuseiKubun().getSelectedValue());
-        parameter.setサービス提供年月開始年月(rDateToRString(div.getTxtSabisuTeikyoNengetsu().getFromValue()));
-        parameter.setサービス提供年月終了年月(rDateToRString(div.getTxtSabisuTeikyoNengetsu().getToValue()));
-        parameter.set審査年月開始年月(rDateToRString(div.getTxtSinsaNengetsu().getFromValue()));
-        parameter.set審査年月終了年月(rDateToRString(div.getTxtSinsaNengetsu().getToValue()));
-        parameter.set取込年月開始年月(rDateToRString(div.getTxtTorikomiNengetsu().getFromValue()));
-        parameter.set取込年月終了年月(rDateToRString(div.getTxtTorikomiNengetsu().getToValue()));
+        if (div.getTxtSabisuTeikyoNengetsu().getFromValue() != null) {
+            parameter.setサービス提供年月開始年月(rDateToRString(div.getTxtSabisuTeikyoNengetsu().getFromValue()));
+        }
+        if (div.getTxtSabisuTeikyoNengetsu().getToValue() != null) {
+            parameter.setサービス提供年月終了年月(rDateToRString(div.getTxtSabisuTeikyoNengetsu().getToValue()));
+        }
+        if (div.getTxtSinsaNengetsu().getFromValue() != null) {
+            parameter.set審査年月開始年月(rDateToRString(div.getTxtSinsaNengetsu().getFromValue()));
+        }
+        if (div.getTxtSinsaNengetsu().getToValue() != null) {
+            parameter.set審査年月終了年月(rDateToRString(div.getTxtSinsaNengetsu().getToValue()));
+        }
+        if (div.getTxtTorikomiNengetsu().getFromValue() != null) {
+            parameter.set取込年月開始年月(rDateToRString(div.getTxtTorikomiNengetsu().getFromValue()));
+        }
+        if (div.getTxtTorikomiNengetsu().getToValue() != null) {
+            parameter.set取込年月終了年月(rDateToRString(div.getTxtTorikomiNengetsu().getToValue()));
+        }
         return parameter;
     }
 
@@ -170,6 +187,14 @@ public class SougouJigyoHiJouhouHandler {
             編集方法.add(CSVSettings.日付スラッシュ編集.getコード());
         }
         div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().setSelectedItemsByKey(編集方法);
+        if (導入形態_広域.equals(div.getHdnDonyuKeitai())) {
+            if (全て市町村.equals(restoreBatchParameterMap.getParameterValue(RString.class, new RString("保険者コード")))) {
+                div.getChushutsuJokenPanel().getCcdHokenshaList().loadHokenshaList();
+            } else {
+                div.getChushutsuJokenPanel().getCcdHokenshaList().setSelectedShichosonIfExist(
+                        new LasdecCode(restoreBatchParameterMap.getParameterValue(RString.class, new RString("保険者コード"))));
+            }
+        }
         div.getRadSakuseiKubun().setSelectedValue(restoreBatchParameterMap.getParameterValue(
                 RString.class, new RString("抽出方法")));
         div.getChushutsuJokenPanel().getCcdHokenshaList().setSelectedShichosonIfExist(
