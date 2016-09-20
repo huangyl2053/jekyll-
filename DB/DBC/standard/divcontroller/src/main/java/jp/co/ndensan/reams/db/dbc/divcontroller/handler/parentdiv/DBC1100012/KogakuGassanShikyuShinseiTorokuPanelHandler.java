@@ -320,12 +320,12 @@ public class KogakuGassanShikyuShinseiTorokuPanelHandler {
         if (医療支給申請書整理番号list.length() != 十七) {
             医療支給申請書整理番号list = null;
         }
-        boolean 申請基本情報検索有無 = div.getKogakuGassanShikyuShinseiTorokuSearch().getRdbShinseiKihonJohoKensaku().getSelectedKey().isEmpty();
+        boolean 申請基本情報検索有無 = !div.getKogakuGassanShikyuShinseiTorokuSearch().getRdbShinseiKihonJohoKensaku().getSelectedKey().isEmpty();
         List<RString> 前方一致list = new ArrayList<>();
         前方一致list.add(キー);
         boolean 申請代表者氏名前方一致 = div.getKogakuGassanShikyuShinseiTorokuSearch().getChkZempoItchi1().getSelectedKeys().equals(前方一致list);
         RString 申請代表者氏名 = div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtShinseiDaihyoshaShimei().getValue();
-        boolean 被保険者情報検索有無 = div.getKogakuGassanShikyuShinseiTorokuSearch().getRdbHihokensyaJohoKensaku().getSelectedKey().isEmpty();
+        boolean 被保険者情報検索有無 = !div.getKogakuGassanShikyuShinseiTorokuSearch().getRdbHihokensyaJohoKensaku().getSelectedKey().isEmpty();
         HihokenshaNo 被保険者番号 = new HihokenshaNo(div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtHihobango().getValue());
         boolean 被保険者氏名前方一致 = div.getKogakuGassanShikyuShinseiTorokuSearch().getChkZempoItchi2().getSelectedKeys().equals(前方一致list);
         RString 被保険者氏名 = div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtHihokensyaShimei().getValue();
