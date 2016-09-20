@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt81003.PrtTokuchoDoteiIchiranhyoProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt81003.PrtTokuchoMidoteiIchiranhyoProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB271003.PrtTokuchoDoteiIchiranhyoProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB271003.PrtTokuchoMidoteiIchiranhyoProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB271003.DBB271003_TokuchoTaishoshaIchiranSakuseiParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
