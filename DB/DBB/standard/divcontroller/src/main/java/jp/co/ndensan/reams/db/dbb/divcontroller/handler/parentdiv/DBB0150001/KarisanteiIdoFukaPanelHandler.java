@@ -17,8 +17,8 @@ import jp.co.ndensan.reams.db.dbb.business.core.honsanteiidogennen.ChohyoMeter;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.business.core.tsuchisho.notsu.ShutsuryokuKiKoho;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.karisanteiidofuka.KarisanteiIdoFukaParameter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.karisanteiidofuka.TyouhyouEntity;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB015003.DBB015003_KarisanteiIdoTsuchishoHakkoParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB015003.TyouhyouEntity;
 import jp.co.ndensan.reams.db.dbb.definition.core.fucho.ZanteiKeisanIdoHoho;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.FuchoKarisanteiIdoShinkiShikakuFuka;
 import jp.co.ndensan.reams.db.dbb.definition.core.fuka.FuchoZanteiKeisanHoho;
@@ -614,7 +614,7 @@ public class KarisanteiIdoFukaPanelHandler {
      *
      * @return バッチパラメータ
      */
-    public KarisanteiIdoFukaParameter getバッチパラメータ() {
+    public DBB015003_KarisanteiIdoTsuchishoHakkoParameter getバッチパラメータ() {
         KariSanteiIdoFuka idoFuka = new KariSanteiIdoFuka();
         KariSanteiIdoParameter parameter = new KariSanteiIdoParameter();
         FlexibleYear 調定年度 = div.getShoriJokyo().getKarisanteiIdoShoriNaiyo().getTxtChoteiNendo().getDomain();

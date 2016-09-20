@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt44002;
 import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt43002.PrtNonyuTsuchishoProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031003.PrtNonyuTsuchishoProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidogennen.ChohyoResult;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt44002.HonsanteiIdoProcessParameter;
 import jp.co.ndensan.reams.db.dbb.service.core.honsanteiidogennendotsuchisyoikatsuhako.HonsanteiIdoGennendoTsuchisyoIkatsuHako;

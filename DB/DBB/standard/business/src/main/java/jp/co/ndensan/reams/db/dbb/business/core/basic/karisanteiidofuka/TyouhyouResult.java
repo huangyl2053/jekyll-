@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.business.core.basic.karisanteiidofuka;
 
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.karisanteiidofuka.TyouhyouEntity;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB015003.TyouhyouEntity;
 
 /**
  * 出力帳票一覧のクラスです。
