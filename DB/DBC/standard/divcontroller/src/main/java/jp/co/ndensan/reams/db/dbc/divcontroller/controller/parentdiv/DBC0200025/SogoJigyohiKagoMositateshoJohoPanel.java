@@ -63,7 +63,7 @@ public class SogoJigyohiKagoMositateshoJohoPanel {
         } else {
             parameter.set再処理区分(RString.EMPTY);
         }
-        if (再処理区分 != null) {
+        if (処理年月 != null) {
             parameter.set処理年月(処理年月);
         } else {
             parameter.set処理年月(null);
