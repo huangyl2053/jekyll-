@@ -190,7 +190,7 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEditor implements IKogak
 
     private void setレイヤフォント混在2(KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriSource source) {
         source.tsuchibunMixTwo1 = 決定通知書Entity.get通知文5_上大();
-        source.tsuchibunMixTwo1 = 決定通知書Entity.get通知文6_下小();
+        source.tsuchibunMixTwo2 = 決定通知書Entity.get通知文6_下小();
     }
 
 }
