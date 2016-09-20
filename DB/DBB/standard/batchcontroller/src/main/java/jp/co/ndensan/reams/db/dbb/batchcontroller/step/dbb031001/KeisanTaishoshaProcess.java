@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb031001;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031001;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +16,6 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.HonSanJonTyuSh
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.KeisanTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.KuBunnGaTsurakuTempEntity;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoRank;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -36,7 +34,6 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -78,7 +75,8 @@ public class KeisanTaishoshaProcess extends BatchKeyBreakBase<KeisanTaishoshaEnt
     @Override
     public void initialize() {
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        導入形態コード = 市町村セキュリティ情報.get導入形態コード().getKey();
+//        導入形態コード = 市町村セキュリティ情報.get導入形態コード().getKey();
+        導入形態コード = new RString("111");
         資格の情報List = new ArrayList<>();
         count = 0;
     }
@@ -132,7 +130,6 @@ public class KeisanTaishoshaProcess extends BatchKeyBreakBase<KeisanTaishoshaEnt
         }
         if (計算対象者抽出Entity.get資格の情報() == null && count == 1) {
             set賦課情報Error(計算対象者抽出Entity);
-            return;
         } else if (計算対象者抽出Entity.get賦課の情報() == null && count == 1) {
             HonSanJonTyuShutuTempEntity tempEntity = new HonSanJonTyuShutuTempEntity();
             set資格情報Entity(計算対象者抽出Entity.get資格の情報(), tempEntity, myBatisParameter);
@@ -140,6 +137,7 @@ public class KeisanTaishoshaProcess extends BatchKeyBreakBase<KeisanTaishoshaEnt
             tempEntity.setFukaNendo(myBatisParameter.get賦課年度());
             tempEntity.setTsuchishoNo(create通知書番号(計算対象者抽出Entity.get資格の情報().getHihokenshaNo().getColumnValue(), 1));
             本算定抽出writer.insert(tempEntity);
+            load月別ランク情報();
         } else if (計算対象者抽出Entity.get賦課の情報() != null && count == 1) {
             HonSanJonTyuShutuTempEntity tempEntity = new HonSanJonTyuShutuTempEntity();
             set資格情報Entity(計算対象者抽出Entity.get資格の情報(), tempEntity, myBatisParameter);
@@ -147,8 +145,9 @@ public class KeisanTaishoshaProcess extends BatchKeyBreakBase<KeisanTaishoshaEnt
             tempEntity.setChoteiNendo(計算対象者抽出Entity.get賦課の情報().getChoteiNendo());
             tempEntity.setFukaNendo(計算対象者抽出Entity.get賦課の情報().getFukaNendo());
             tempEntity.setTsuchishoNo(計算対象者抽出Entity.get賦課の情報().getTsuchishoNo());
+            本算定抽出writer.insert(tempEntity);
+            load月別ランク情報();
         }
-        load月別ランク情報();
     }
 
     private void load月別ランク情報() {
@@ -157,8 +156,9 @@ public class KeisanTaishoshaProcess extends BatchKeyBreakBase<KeisanTaishoshaEnt
             資格情報List.add(new HihokenshaDaicho(daichoentity));
         }
         if (DonyuKeitaiCode.事務広域.getCode().equals(導入形態コード)) {
-            RString 合併情報区分 = DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分,
-                    RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+//            RString 合併情報区分 = DbBusinessConfig.get(ConfigNameDBU.合併情報管理_合併情報区分,
+//                    RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+            RString 合併情報区分 = new RString("1");
             if (合併情報区分_合併あり.equals(合併情報区分)) {
                 HokenryoRank rank = InstanceProvider.create(HokenryoRank.class);
                 List<MonthShichoson> 月別ランク情報 = rank.get月別ランク情報(資格情報List, myBatisParameter.get賦課年度());
@@ -216,7 +216,7 @@ public class KeisanTaishoshaProcess extends BatchKeyBreakBase<KeisanTaishoshaEnt
                     ? null : choteiNichiji.getRDateTime());
         }
         errorListEntity.setBatchId(バッチID);
-        errorListEntity.setBatchStartingDateTime(RDate.getNowDateTime());
+        errorListEntity.setBatchStartingDateTime(processParameter.getバッチ起動時処理日時().getRDateTime());
         errorListEntity.setErrorCode(new Code(ErrorCode.被保険者台帳データなし.getコード()));
         errorListEntity.setHihokenshaNo(entity.get賦課の情報().getHihokenshaNo());
         errorListEntity.setShikibetsuCode(entity.get賦課の情報().getShikibetsuCode());

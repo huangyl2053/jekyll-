@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb031001;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031001;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.core.honnsanteifuka.CaluculateFukaParameter;
