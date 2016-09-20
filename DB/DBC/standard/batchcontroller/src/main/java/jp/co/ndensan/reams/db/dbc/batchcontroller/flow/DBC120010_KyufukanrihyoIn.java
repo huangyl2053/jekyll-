@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.dbc120010;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import java.io.File;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120010.KyufukanrihyoDoIchiranhyoSakuseiProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120010.KyufukanrihyoDoMasterTorokuProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120010.KyufukanrihyoGetJigyoshaNameKyotakuProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120010.KyufukanrihyoGetJigyoshaNameYobouProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120010.KyufukanrihyoGetShokisaiHokenshaNoProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120010.KyufukanrihyoReadCsvFileProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120010.KyufukanrihyoDoIchiranhyoSakuseiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120010.KyufukanrihyoDoMasterTorokuProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120010.KyufukanrihyoGetJigyoshaNameKyotakuProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120010.KyufukanrihyoGetJigyoshaNameYobouProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120010.KyufukanrihyoGetShokisaiHokenshaNoProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120010.KyufukanrihyoReadCsvFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDeleteReveicedFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoHihokenshaKanrenProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoInterfaceKanriKousinProcess;
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.Kokuhore
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuGetFileProcess;
 import jp.co.ndensan.reams.db.dbc.business.core.kokuhorenkyoutsuu.KokuhorenKyoutsuuFileGetReturnEntity;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufukanrihyoin.KyufukanrihyoInCsvReadReturnEntity;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.kokuhorenkyoutsu.KokuhorenKyoutsuBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120010.DBC120010_KyufukanrihyoInParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorListType;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuCsvFileReadProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDeleteReveicedFileProcessParameter;
@@ -45,7 +45,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-2450-030 zhangrui
  */
-public class DBC120010_KyufukanrihyoInFlow extends BatchFlowBase<KokuhorenKyoutsuBatchParameter> {
+public class DBC120010_KyufukanrihyoIn extends BatchFlowBase<DBC120010_KyufukanrihyoInParameter> {
 
     private static final String ファイル取得 = "getFile";
     private static final String CSVファイル取込 = "readCsvFile";
