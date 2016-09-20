@@ -52,9 +52,7 @@ public class TokubetsuChoshuIraiJohoKensuhyoEditor implements ITokubetsuChoshuIr
         source.hokenshaName = 保険者名称;
         if (parameter.getEntity() != null) {
             source.nenkinHokenshaName = parameter.getEntity().get年金保険者名称();
-            if (parameter.getEntity().get構成市町村コード() != null) {
-                source.shichosonCode = parameter.getEntity().get構成市町村コード().getColumnValue();
-            }
+            source.shichosonCode = parameter.getEntity().get構成市町村コード();
             source.shichosonName = parameter.getEntity().get市町村名称();
             source.listLeftUpper_2 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
                     UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
