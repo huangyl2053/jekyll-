@@ -271,7 +271,8 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
         NonyuTsuchiShoSeigyoJohoLoaderFinder finder = NonyuTsuchiShoSeigyoJohoLoaderFinder.createInstance(processParameter.get調定年度());
         本算定納入通知書制御情報 = finder.get本算定納入通知書制御情報();
 
-        出力期リスト = manager.get出力期リスト(processParameter.get納入_出力期());
+        出力期リスト = manager.get出力期リスト(processParameter.get調定年度(), processParameter.get納入_出力方法(),
+                帳票タイプ, 期月リスト_普徴, 本算定期間, 出力期AsInt);
 
         帳票タイプ = manager.get帳票タイプ(出力帳票一覧.get帳票ID());
 
