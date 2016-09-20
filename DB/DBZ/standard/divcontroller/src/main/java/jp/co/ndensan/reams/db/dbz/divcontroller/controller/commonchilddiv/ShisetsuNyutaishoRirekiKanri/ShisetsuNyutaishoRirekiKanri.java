@@ -137,7 +137,6 @@ public class ShisetsuNyutaishoRirekiKanri {
      * @return 保険者入力補助Divを持つResponseData
      */
     public ResponseData<ShisetsuNyutaishoRirekiKanriDiv> onOkClose_btnSearch(ShisetsuNyutaishoRirekiKanriDiv div) {
-        div.getTxtHokensyaMeisho().setValue(get保険者名(div.getTxtHokensha().getValue()));
         return ResponseData.of(div).respond();
     }
 
@@ -160,7 +159,7 @@ public class ShisetsuNyutaishoRirekiKanri {
         if (!RString.isNullOrEmpty(保険者番号)) {
             Hokensha hokensha = HokenshaNyuryokuHojoFinder.createInstance().getHokensha(new HokenjaNo(保険者番号));
             if (hokensha != null) {
-                return 保険者番号.concat(":").concat(hokensha.get保険者名());
+                return hokensha.get保険者名();
             }
         }
         return RString.EMPTY;
