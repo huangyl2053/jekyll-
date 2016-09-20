@@ -95,7 +95,6 @@ public class SaishinsaKetteiReportProcess extends BatchKeyBreakBase<SaishinsaKet
     private List<RString> 改頁項目リスト;
     private int 連番;
 
-    @BatchWriter
     private CsvWriter<SaishinsaKetteitsuchishoCSVEntity> eucCsvWriter;
     @BatchWriter
     private BatchReportWriter<SaishinsaKetteitsuchishoTorikomiIchiranHokenshaBunSource> batchReportWriter;
@@ -223,6 +222,7 @@ public class SaishinsaKetteiReportProcess extends BatchKeyBreakBase<SaishinsaKet
             report.writeBy(reportSourceWriter);
             eucCsvWriter.writeLine(service.to集計項目(beforeEntity));
         }
+        eucCsvWriter.close();
         AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
         manager.spool(eucFilePath, log);
     }
