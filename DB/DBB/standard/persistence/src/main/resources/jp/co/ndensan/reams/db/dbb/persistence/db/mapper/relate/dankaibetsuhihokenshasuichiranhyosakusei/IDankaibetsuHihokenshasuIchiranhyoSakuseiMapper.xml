@@ -22,8 +22,8 @@
                     "hihokennshaKubunCode" = '1'
                 AND "logicalDeletedFlag" = FALSE
                 AND "shikakuSoshitsuYMD" <![CDATA[<=]]> #{資格基準日}
-                AND "shikakuSoshitsuTodokedeYMD" IS NULL
-                OR #{資格基準日}<![CDATA[<=]]> "shikakuSoshitsuTodokedeYMD"
+                AND ("shikakuSoshitsuTodokedeYMD" IS NULL
+                OR #{資格基準日}<![CDATA[<=]]> "shikakuSoshitsuTodokedeYMD")
                 <if test="市町村コード">
                     AND ("koikinaiJushochiTokureiFlag" ='1' AND "koikinaiTokureiSochimotoShichosonCode" in 
                     <foreach item="市町村コード複数" index="index" collection="市町村コード複数" open="(" separator="," close=")">
