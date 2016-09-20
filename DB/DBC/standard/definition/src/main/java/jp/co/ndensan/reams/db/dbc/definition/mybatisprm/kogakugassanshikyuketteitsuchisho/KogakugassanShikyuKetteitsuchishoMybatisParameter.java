@@ -38,4 +38,5 @@ public class KogakugassanShikyuKetteitsuchishoMybatisParameter implements IMyBat
     private RString 処理名;
     private RString 処理枝番;
     private RString 出力順;
+    private FlexibleDate 基準年月日;
 }

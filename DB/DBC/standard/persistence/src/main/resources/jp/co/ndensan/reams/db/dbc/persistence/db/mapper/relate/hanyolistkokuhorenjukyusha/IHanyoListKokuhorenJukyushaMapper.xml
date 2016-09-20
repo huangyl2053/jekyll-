@@ -34,7 +34,7 @@
         <result property="認定有効期間終了年月日" column="認定有効期間終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="居宅サービス計画作成区分コード" column="居宅サービス計画作成区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="居宅介護支援事業所番号" column="居宅介護支援事業所番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="事業者番号" column="事業者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="事業者名称" column="事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="居宅サービス計画適用開始年月日" column="居宅サービス計画適用開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="居宅サービス計画適用終了年月日" column="居宅サービス計画適用終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="訪問通所サービス支給限度基準額" column="訪問通所サービス支給限度基準額" />
@@ -212,7 +212,7 @@ SELECT
     国保連受給者情報.認定有効期間終了年月日,
     国保連受給者情報.居宅サービス計画作成区分コード,
     国保連受給者情報.居宅介護支援事業所番号,
-    国保連受給者情報.事業者番号,
+    国保連受給者情報.事業者名称,
     国保連受給者情報.居宅サービス計画適用開始年月日,
     国保連受給者情報.居宅サービス計画適用終了年月日,
     国保連受給者情報.訪問通所サービス支給限度基準額,
@@ -292,7 +292,7 @@ FROM
         受給者異動送付."ninteiYukoKikanShuryoYMD" AS 認定有効期間終了年月日,
         受給者異動送付."kyotakuServiceSakuseiKubunCode" AS 居宅サービス計画作成区分コード,
         受給者異動送付."kyotakuKaigoShienJigyoshoNo" AS 居宅介護支援事業所番号,
-        介護事業者.事業者番号,
+        介護事業者.事業者名称,
         受給者異動送付."kyotakuServiceTekiyoKaishiYMD" AS 居宅サービス計画適用開始年月日,
         受給者異動送付."kyotakuServiceTekiyoShuryoYMD" AS 居宅サービス計画適用終了年月日,
         受給者異動送付."homonTsushoServiceShikyuGendoKijungaku" AS 訪問通所サービス支給限度基準額,

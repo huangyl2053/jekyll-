@@ -5,11 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kenkoukaruterenkeidatakoiki;
 
-import jp.co.ndensan.reams.uz.uza.io.NewLine;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kenkoukaruterenkeidata.KenkouKaruteRenkeiDATEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
  * 健康かるて連携データ作成（広域用）のEditEntityです。
@@ -18,12 +17,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
  */
 public class KenkouKaruteRenkeiDataKoikiEditEntity {
 
-    private static final int 識別コードLENGTH = 12;
-    private static final int 年月日LENGTH = 8;
-    private static final int 氏名LENGTH = 70;
-    private static final int 減額認定証受給者番号LENGTH = 7;
-    private static final int 被保険者番号LENGTH = 15;
-    private static final int LENGTH_33 = 33;
     private final KenkoKaruteRenkeiKoikiTempTableEntity entity;
 
     /**
@@ -38,50 +31,46 @@ public class KenkouKaruteRenkeiDataKoikiEditEntity {
     /**
      * WriteLine内容をeditします。
      *
-     * @return WriteLine内容
+     * @return KenkouKaruteRenkeiDATEntity
      */
-    public RString getWriteLine内容() {
-        RStringBuilder builder = new RStringBuilder();
+    public KenkouKaruteRenkeiDATEntity getWriteLine内容() {
+        KenkouKaruteRenkeiDATEntity 出力entity = new KenkouKaruteRenkeiDATEntity();
         if (RString.isNullOrEmpty(entity.getShikibetsuCode())) {
-            builder.append(RString.EMPTY.padRight(RString.HALF_SPACE, 識別コードLENGTH));
-        } else if (entity.getShikibetsuCode().length() <= 識別コードLENGTH) {
-            builder.append(entity.getShikibetsuCode().padRight(RString.HALF_SPACE, 識別コードLENGTH));
-        } else if (識別コードLENGTH < entity.getShikibetsuCode().length()) {
-            builder.append(entity.getShikibetsuCode().substring(entity.getShikibetsuCode().length() - 識別コードLENGTH));
+            出力entity.set個人番号(RString.HALF_SPACE);
+        } else {
+            出力entity.set個人番号(entity.getShikibetsuCode());
         }
-        // TODO QA1689 210バイトを判断するAPIが無い
         if (!RString.isNullOrEmpty(entity.getMeisho())) {
-            builder.append(entity.getMeisho().padRight(RString.FULL_SPACE, 氏名LENGTH));
+            出力entity.set漢字氏名_カナ氏名(entity.getMeisho());
         } else {
-            builder.append(entity.getKanaMeisho().padRight(RString.FULL_SPACE, 氏名LENGTH));
+            出力entity.set漢字氏名_カナ氏名(entity.getKanaMeisho());
         }
-        builder.append(get年月日(entity.getSeinengappiYMD()));
-        builder.append(entity.getSeibetsuCode());
+        出力entity.set生年月日(get年月日(entity.getSeinengappiYMD()));
+        出力entity.set性別(entity.getSeibetsuCode());
         if (!RString.isNullOrEmpty(entity.getHihokenshaNo())) {
-            builder.append(entity.getHihokenshaNo().padRight(RString.HALF_SPACE, 被保険者番号LENGTH));
+            出力entity.set被保険者番号(entity.getHihokenshaNo());
         } else {
-            builder.append(RString.EMPTY.padRight(RString.FULL_SPACE, 氏名LENGTH));
+            出力entity.set被保険者番号(RString.HALF_SPACE);
         }
-        builder.append(get年月日(entity.getShikakuShutokuYMD()));
-        builder.append(get年月日(entity.getShikakuSoshitsuYMD()));
+        出力entity.set資格取得日(get年月日(entity.getShikakuShutokuYMD()));
+        出力entity.set資格喪失日(get年月日(entity.getShikakuSoshitsuYMD()));
         if (!RString.isNullOrEmpty(entity.getYokaigoJotaiKubunCode())) {
-            builder.append(entity.getYokaigoJotaiKubunCode());
+            出力entity.set要介護状態区分(entity.getYokaigoJotaiKubunCode());
         } else {
-            builder.append(RString.EMPTY.padRight(RString.HALF_SPACE, 2));
+            出力entity.set要介護状態区分(RString.HALF_SPACE);
         }
-        builder.append(RString.EMPTY.padRight(RString.FULL_SPACE, 減額認定証受給者番号LENGTH));
-        builder.append(get年月日(entity.getNinteiYMD()));
-        builder.append(get年月日(entity.getNinteiYukoKikanKaishiYMD()));
-        builder.append(get年月日(entity.getNinteiYukoKikanShuryoYMD()));
-        builder.append(RString.EMPTY.padRight(RString.HALF_SPACE, LENGTH_33));
-        builder.append(RDate.getNowDate().toString());
-        builder.append(NewLine.CRLF);
-        return builder.toRString();
+        出力entity.set減額認定証受給者番号(RString.HALF_SPACE);
+        出力entity.set認定年月日(get年月日(entity.getNinteiYMD()));
+        出力entity.set認定有効期間開始日(get年月日(entity.getNinteiYukoKikanKaishiYMD()));
+        出力entity.set認定有効期間終了日(get年月日(entity.getNinteiYukoKikanShuryoYMD()));
+        出力entity.set終了日と作成日区切り文字(RString.HALF_SPACE);
+        出力entity.set作成日(RDate.getNowDate().toDateString());
+        return 出力entity;
     }
 
     private RString get年月日(FlexibleDate 年月日) {
         if (年月日 == null || 年月日.isEmpty()) {
-            return RString.EMPTY.padRight(RString.HALF_SPACE, 年月日LENGTH);
+            return RString.HALF_SPACE;
         }
         return new RString(年月日.toString());
     }

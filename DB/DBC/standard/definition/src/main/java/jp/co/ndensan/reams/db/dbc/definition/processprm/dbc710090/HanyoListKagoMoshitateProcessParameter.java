@@ -55,8 +55,10 @@ public class HanyoListKagoMoshitateProcessParameter implements IBatchProcessPara
         if (保険者コード != null) {
             temp = 保険者コード.getColumnValue();
         }
-        return new HanyoListKagoMoshitateMybatisParameter(国保連送付年月From, 国保連送付年月To, 過誤申立給付区分,
+        HanyoListKagoMoshitateMybatisParameter param = new HanyoListKagoMoshitateMybatisParameter(国保連送付年月From, 国保連送付年月To, 過誤申立給付区分,
                 サービス提供年月From, サービス提供年月To, 事業者コード, temp, searchKey);
+        param.set出力順(出力項目);
+        return param;
     }
 
 }

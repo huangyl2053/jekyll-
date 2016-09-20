@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import java.io.File;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120010.KyufukanrihyoReadCsvFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120140.ShikyuFushikyuDoIchiranhyoSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120140.ShikyuFushikyuIchiranDataNomiTorokuProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120140.ShikyuFushikyuKozaJohoTorokuProcess;
@@ -113,7 +112,7 @@ public class DBC120140_KogakuGassanShikyuFushikyuKetteiIn
                 isLast = ((returnEntity38B.getFileNameList().size() - 1) == i);
                 executeStep(CSVファイル取込38B);
                 flowEntity38B = getResult(KyufukanrihyoInCsvReadReturnEntity.class, new RString(CSVファイル取込38B),
-                        KyufukanrihyoReadCsvFileProcess.PARAMETER_OUT_FLOWENTITY);
+                        ShikyuFushikyuReadCsvFile38BProcess.PARAMETER_OUT_FLOWENTITY);
                 明細件数合算 = flowEntity38B.get明細件数合算();
                 集計件数合算 = flowEntity38B.get集計件数合算();
                 レコード件数合算 = flowEntity38B.getレコード件数合算();
@@ -131,7 +130,7 @@ public class DBC120140_KogakuGassanShikyuFushikyuKetteiIn
                 isLast = ((returnEntity38G.getFileNameList().size() - 1) == i);
                 executeStep(CSVファイル取込38G);
                 flowEntity38G = getResult(KyufukanrihyoInCsvReadReturnEntity.class, new RString(CSVファイル取込38G),
-                        KyufukanrihyoReadCsvFileProcess.PARAMETER_OUT_FLOWENTITY);
+                        ShikyuFushikyuReadCsvFile38GProcess.PARAMETER_OUT_FLOWENTITY);
                 明細件数合算 = flowEntity38G.get明細件数合算();
                 集計件数合算 = flowEntity38G.get集計件数合算();
                 レコード件数合算 = flowEntity38G.getレコード件数合算();

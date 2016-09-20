@@ -384,20 +384,20 @@ public class KoshinOshiraseTsuchiService {
 
         FlexibleDate ninteiShinseiYMD = koshinOshiraseEn.getDbt4101Entity().getNinteiShinseiYMD();
         if (ninteiShinseiYMD != null && !ninteiShinseiYMD.isEmpty()) {
-            entity.set受給申請日(ninteiShinseiYMD.wareki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+            entity.set受給申請日(ninteiShinseiYMD.wareki().toDateString());
         }
 
         FlexibleDate ninteiYMD = koshinOshiraseEn.getDbV4001JukyushaDaicho().getNinteiYMD();
         if (ninteiYMD != null && !ninteiYMD.isEmpty()) {
-            entity.set認定日(ninteiYMD.wareki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+            entity.set認定日(ninteiYMD.wareki().toDateString());
         }
         FlexibleDate ninteiYukoKikanKaishiYMD = koshinOshiraseEn.getDbV4001JukyushaDaicho().getNinteiYukoKikanKaishiYMD();
         if (ninteiYukoKikanKaishiYMD != null && !ninteiYukoKikanKaishiYMD.isEmpty()) {
-            entity.set認定開始日(ninteiYukoKikanKaishiYMD.wareki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+            entity.set認定開始日(ninteiYukoKikanKaishiYMD.wareki().toDateString());
         }
         FlexibleDate ninteiYukoKikanShuryoYMD = koshinOshiraseEn.getDbV4001JukyushaDaicho().getNinteiYukoKikanShuryoYMD();
         if (ninteiYukoKikanShuryoYMD != null && !ninteiYukoKikanShuryoYMD.isEmpty()) {
-            entity.set認定終了日(ninteiYukoKikanShuryoYMD.wareki().separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+            entity.set認定終了日(ninteiYukoKikanShuryoYMD.wareki().toDateString());
         }
         entity.set受給申請事由(koshinOshiraseEn.getDbt4101Entity().getNinteiShinseiRiyu());
         entity.set申請区分_申請時(NinteiShinseiShinseijiKubunCode.toValue(koshinOshiraseEn.getDbt4101Entity().getNinteiShinseiShinseijiKubunCode().getColumnValue()).get名称());

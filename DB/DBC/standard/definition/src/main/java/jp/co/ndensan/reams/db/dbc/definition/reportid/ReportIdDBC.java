@@ -441,7 +441,11 @@ public enum ReportIdDBC {
     /**
      * DBC701008_HanyoList_KyufuKanriHyo
      */
-    DBC701008(new ReportId("DBC701008_HanyoList_KyufuKanriHyo"), new RString("汎用リスト出力(給付管理票)")),
+    DBC701008(new ReportId("DBC701008_HanyoListKyufuKanriHyo"), new RString("汎用リスト出力(給付管理票)")),
+    /**
+     * DBC701008_HanyoList_KyufuKanriHyo
+     */
+    DBC701009(new ReportId("DBC701009_HanyoListKagoMoshitate"), new RString("汎用リスト出力(過誤申立情報)")),
     /**
      * DBC701016_HanyoListKogakuGassanKeisanKekkaRenrakuHyo
      */
@@ -651,6 +655,10 @@ public enum ReportIdDBC {
      */
     DBC100007(new ReportId("DBC100007_KogakuKetteiTsuchiSho"), new RString("高額サービス等支給（不支給）決定通知書")),
     /**
+     * 高額サービス等支給（不支給）決定通知書帳票ＩＤです。
+     */
+    DBC100007_支給(new ReportId("DBC100007_KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashi"), new RString("高額サービス等支給（不支給）決定通知書")),
+    /**
      * 給付実績情報取込結果一覧表ＩＤです。
      */
     DBC200007(new ReportId("DBC200007_KyufujissekiTorikomiIchiran"), new RString("給付実績情報取込結果一覧表")),
@@ -697,7 +705,15 @@ public enum ReportIdDBC {
     /**
      * 給付管理票（居宅・介護予防サービス・総合事業） 帳票ＩＤです。
      */
-    DBC100035(new ReportId("DBC100035_KyufuKanrihyoKyotakuYoboSogoJigyoService"), new RString("給付管理票（居宅・介護予防サービス・総合事業）"));
+    DBC100035(new ReportId("DBC100035_KyufuKanrihyoKyotakuYoboSogoJigyoService"), new RString("給付管理票（居宅・介護予防サービス・総合事業）")),
+    /**
+     * 汎用リスト出力(高額合算支給額決定情報) 帳票ＩＤです。
+     */
+    DBC701017(new ReportId("DBC701017_HanyoListKogakuGassanShikyugakuKettei"), new RString("汎用リスト出力(高額合算支給額決定情報)")),
+    /**
+     * 高額介護サービス費対象者一覧表（遡及分） 帳票ＩＤです。
+     */
+    DBC200100(new ReportId("DBC200100_KogakuServicehiTaishoshaIchiranSokyubun"), new RString("高額介護サービス費対象者一覧表（遡及分）"));
     private final ReportId reportId;
 
     private final RString reportName;

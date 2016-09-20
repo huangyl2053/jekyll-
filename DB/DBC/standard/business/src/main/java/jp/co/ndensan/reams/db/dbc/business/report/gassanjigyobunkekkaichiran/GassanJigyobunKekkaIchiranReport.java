@@ -29,7 +29,7 @@ public class GassanJigyobunKekkaIchiranReport
      *
      * @param entity KogakuGassanDataEntity
      * @param 出力順情報 IOutputOrder
-     * @param 自市町村コード
+     * @param 自市町村コード RString
      */
     public GassanJigyobunKekkaIchiranReport(JigyobunShikyugakuRenrakuhyo entity, IOutputOrder 出力順情報, RString 自市町村コード) {
         this.entity = entity;

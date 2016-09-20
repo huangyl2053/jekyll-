@@ -86,7 +86,7 @@ public class DBU030010_JigyoHokokuNenpo_Main extends BatchFlowBase<DBU030010_Jig
     @Step(事業状況報告資料年報作成様式１_２)
     protected IBatchFlowCommand callDBU030020_JigyoHokokuNenpo_Yoshiki1To2Flow() {
         //TODO 事業状況報告資料（年報）作成　様式１・２時装なし。対応不可。
-        return otherBatchFlow(事業状況報告資料年報作成様式１_２バッチID, SubGyomuCode.DBE認定支援, getParameter()).define();
+        return otherBatchFlow(事業状況報告資料年報作成様式１_２バッチID, SubGyomuCode.DBU介護統計報告, getParameter()).define();
     }
 
     /**
@@ -97,7 +97,7 @@ public class DBU030010_JigyoHokokuNenpo_Main extends BatchFlowBase<DBU030010_Jig
     @Step(事業状況報告資料年報作成一般状況_１_１１)
     protected IBatchFlowCommand callDBU030030_JigyoHokokuNenpo_IppanFlow() {
         return otherBatchFlow(事業状況報告資料年報作成一般状況_１_１１バッチID,
-                SubGyomuCode.DBE認定支援, getParameter().toDBU030030Parameter()).define();
+                SubGyomuCode.DBU介護統計報告, getParameter().toDBU030030Parameter()).define();
     }
 
     /**
@@ -107,7 +107,8 @@ public class DBU030010_JigyoHokokuNenpo_Main extends BatchFlowBase<DBU030010_Jig
      */
     @Step(事業状況報告資料年報作成一般状況_１２_１４_3)
     protected IBatchFlowCommand callDBU030040_JigyoHokokuNenpo_IppanGenbutsu_3Flow() {
-        return otherBatchFlow(事業状況報告資料年報作成一般状況_１２_１４バッチID, SubGyomuCode.DBE認定支援, getDBU030040Parameter(INDEX_3)).define();
+        return otherBatchFlow(事業状況報告資料年報作成一般状況_１２_１４バッチID,
+                SubGyomuCode.DBU介護統計報告, getDBU030040Parameter(INDEX_3)).define();
     }
 
     /**
@@ -118,7 +119,7 @@ public class DBU030010_JigyoHokokuNenpo_Main extends BatchFlowBase<DBU030010_Jig
     @Step(事業状況報告資料年報作成一般状況_１２_１４_4)
     protected IBatchFlowCommand callDBU030040_JigyoHokokuNenpo_IppanGenbutsu_4Flow() {
         return otherBatchFlow(事業状況報告資料年報作成一般状況_１２_１４バッチID,
-                SubGyomuCode.DBE認定支援, getDBU030040Parameter(INDEX_4)).define();
+                SubGyomuCode.DBU介護統計報告, getDBU030040Parameter(INDEX_4)).define();
     }
 
     /**
@@ -128,7 +129,8 @@ public class DBU030010_JigyoHokokuNenpo_Main extends BatchFlowBase<DBU030010_Jig
      */
     @Step(事業状況報告資料年報作成_保険給付決定情報_5)
     protected IBatchFlowCommand callDBU030070_JigyoHokokuNenpo_HokenkyufuGenbutsu_5Flow() {
-        return otherBatchFlow(事業状況報告資料年報作成_保険給付決定情報バッチID, SubGyomuCode.DBE認定支援, getDBU030070Parameter(INDEX_5)).define();
+        return otherBatchFlow(事業状況報告資料年報作成_保険給付決定情報バッチID,
+                SubGyomuCode.DBU介護統計報告, getDBU030070Parameter(INDEX_5)).define();
     }
 
     /**
@@ -138,7 +140,8 @@ public class DBU030010_JigyoHokokuNenpo_Main extends BatchFlowBase<DBU030010_Jig
      */
     @Step(事業状況報告資料年報作成_保険給付決定情報_6)
     protected IBatchFlowCommand callDBU030070_JigyoHokokuNenpo_HokenkyufuGenbutsu_6Flow() {
-        return otherBatchFlow(事業状況報告資料年報作成_保険給付決定情報バッチID, SubGyomuCode.DBE認定支援, getDBU030070Parameter(INDEX_6)).define();
+        return otherBatchFlow(事業状況報告資料年報作成_保険給付決定情報バッチID,
+                SubGyomuCode.DBU介護統計報告, getDBU030070Parameter(INDEX_6)).define();
     }
 
     /**
@@ -149,7 +152,7 @@ public class DBU030010_JigyoHokokuNenpo_Main extends BatchFlowBase<DBU030010_Jig
     @Step(事業状況報告資料年報作成_保険給付決定状況_高額分)
     protected IBatchFlowCommand callDBU030100_JigyoHokokuNenpo_HokenkyufuKogakuFlow() {
         return otherBatchFlow(事業状況報告資料年報作成_保険給付決定状況_高額分バッチID,
-                SubGyomuCode.DBE認定支援, getParameter().toDBU030100Parameter()).define();
+                SubGyomuCode.DBU介護統計報告, getParameter().toDBU030100Parameter()).define();
     }
 
     /**
@@ -159,9 +162,8 @@ public class DBU030010_JigyoHokokuNenpo_Main extends BatchFlowBase<DBU030010_Jig
      */
     @Step(事業状況報告資料月報作成_保険給付決定状況_高額合算分)
     protected IBatchFlowCommand callDBU010100_JigyoHokokuGeppo_HokenkyufuKogakuGassanFlow() {
-        //TODO 事業状況報告資料（月報）作成　保険給付決定状況(高額合算分)時装なし。対応不可。
         return otherBatchFlow(事業状況報告資料月報作成_保険給付決定状況_高額合算分バッチID,
-                SubGyomuCode.DBE認定支援, getParameter()).define();
+                SubGyomuCode.DBU介護統計報告, getParameter().toDBU010100Parameter()).define();
     }
 
     private DBU030040_JigyoHokokuNenpo_IppanGenbutsuParameter getDBU030040Parameter(int index) {

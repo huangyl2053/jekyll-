@@ -26,11 +26,17 @@ public class DBDHanyoList extends BatchFlowBase<DBDHanyoListParameter> {
         if ("汎用リスト_利用者負担額減免".equals(getParameter().getBatchKind().toString())) {
             executeStep("汎用リスト出力_利用者負担額減免");
         }
+        if ("汎用リスト_訪問介護利用者負担額減額".equals(getParameter().getBatchKind().toString())) {
+            executeStep("汎用リスト出力_訪問介護利用者負担額減額");
+        }
         if ("汎用リスト_社会福祉法人軽減".equals(getParameter().getBatchKind().toString())) {
             executeStep("汎用リスト出力_社会福祉法人軽減");
         }
         if ("汎用リスト_特別地域加算減免".equals(getParameter().getBatchKind().toString())) {
             executeStep("汎用リスト出力_特別地域加算減免");
+        }
+        if ("汎用リスト_負担限度額認定".equals(getParameter().getBatchKind().toString())) {
+            executeStep("汎用リスト出力_負担限度額認定");
         }
         if ("汎用リスト_国保".equals(getParameter().getBatchKind().toString())) {
             executeStep("汎用リスト出力_国保");
@@ -56,6 +62,11 @@ public class DBDHanyoList extends BatchFlowBase<DBDHanyoListParameter> {
         return otherBatchFlow(new RString("DBD710040_HanyoListRiyoshaFutanGakuGengaku"), SubGyomuCode.DBD介護受給, getParameter().getRiyoshaFutanGakuGengakuParameter()).define();
     }
 
+    @Step("汎用リスト出力_訪問介護利用者負担額減額")
+    protected IBatchFlowCommand callHanyoListHomonKaigoRiyoshaFutanGakuGengakuFlow() {
+        return otherBatchFlow(new RString("DBD710050_HanyoListHomonKaigoRiyoshaFutanGakuGengaku"), SubGyomuCode.DBD介護受給, getParameter().getHomonKaigoRiyoshaFutanGakuGengakuParameter()).define();
+    }
+
     @Step("汎用リスト出力_社会福祉法人軽減")
     protected IBatchFlowCommand callHanyoListShakaiFukushiHojinKeigenFlow() {
         return otherBatchFlow(new RString("DBD710060_HanyoListShakaiFukushiHojinKeigen"), SubGyomuCode.DBD介護受給, getParameter().getShakaiFukushiHojinKeigenParameter()).define();
@@ -64,6 +75,11 @@ public class DBDHanyoList extends BatchFlowBase<DBDHanyoListParameter> {
     @Step("汎用リスト出力_特別地域加算減免")
     protected IBatchFlowCommand callHanyoListTokubetsuChiikiKasanGemmenFlow() {
         return otherBatchFlow(new RString("DBD710070_HanyoListTokubetsuChiikiKasanGemmen"), SubGyomuCode.DBD介護受給, getParameter().getTokubetsuChiikiKasanGemmenParameter()).define();
+    }
+
+    @Step("汎用リスト出力_負担限度額認定")
+    protected IBatchFlowCommand callHanyoListFutanGendoGakuNinteiFlow() {
+        return otherBatchFlow(new RString("DBD710080_HanyoListFutanGendoGakuNintei"), SubGyomuCode.DBD介護受給, getParameter().getFutanGendoGakuNinteiParameter()).define();
     }
 
     @Step("汎用リスト出力_国保")

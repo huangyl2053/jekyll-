@@ -76,7 +76,7 @@
                 rgdb."DbT1001HihokenshaDaicho" AS 被保険者台帳管理
             WHERE
                 (被保険者台帳管理."shikakuShutokuYMD" <![CDATA[ <= ]]> #{ 基準日 }
-                AND 被保険者台帳管理."shikakuSoshitsuYMD" <![CDATA[ > ]]> #{ 基準日 }
+                AND #{ 基準日 } <![CDATA[ < ]]> 被保険者台帳管理."shikakuSoshitsuYMD"
                 OR 被保険者台帳管理."shikakuSoshitsuYMD" IS NULL)
                 AND 被保険者台帳管理."logicalDeletedFlag" = FALSE
                 ) AS 被保険者台帳
@@ -89,7 +89,7 @@
             rgdb."DbT1004ShisetsuNyutaisho" AS 介護保険施設入退所
         ON 介護保険施設入退所."shikibetsuCode" = 被保険者台帳."shikibetsuCode"
         AND 介護保険施設入退所."nyushoYMD" <![CDATA[ <= ]]> #{ 基準日 }
-        AND 介護保険施設入退所."taishoYMD" <![CDATA[ >= ]]> #{ 基準日 }
+        AND #{ 基準日 } <![CDATA[ <= ]]> 介護保険施設入退所."taishoYMD"
         LEFT JOIN
             (SELECT	
                 居宅給付計画届出."hihokenshaNo"
@@ -177,8 +177,8 @@
         ON 居宅サービス計画."hihokenshaNo" = 受給者台帳."hihokenshaNo"
         AND 居宅サービス計画."最大順" = '1'
         WHERE
-            受給者台帳."ninteiYukoKikanKaishiYMD" <![CDATA[ <= ]]> #{ 基準日 }
-            AND (受給者台帳."ninteiYukoKikanShuryoYMD" <![CDATA[ >= ]]> #{ 基準日 }
+            (受給者台帳."ninteiYukoKikanKaishiYMD" <![CDATA[ <= ]]> #{ 基準日 }
+            AND #{ 基準日 } <![CDATA[ <= ]]> 受給者台帳."ninteiYukoKikanShuryoYMD"
             OR 受給者台帳."rirekiNo" = '0000')
             AND 受給者台帳."logicalDeletedFlag" = FALSE
         ORDER BY

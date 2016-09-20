@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0410022;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.saishinsaketteihokenshain.SaishinsaKetteiHokenshaInBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120190.DBC120190_SaishinsaKetteiHokenshaInParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410022.TsuchishoJoho172Div;
@@ -48,8 +48,8 @@ public class TsuchishoJoho172 {
      * @param div TsuchishoJoho152Div
      * @return ResponseData
      */
-    public ResponseData<SaishinsaKetteiHokenshaInBatchParameter> onImplement(TsuchishoJoho172Div div) {
-        SaishinsaKetteiHokenshaInBatchParameter parameter = new SaishinsaKetteiHokenshaInBatchParameter();
+    public ResponseData<DBC120190_SaishinsaKetteiHokenshaInParameter> onImplement(TsuchishoJoho172Div div) {
+        DBC120190_SaishinsaKetteiHokenshaInParameter parameter = new DBC120190_SaishinsaKetteiHokenshaInParameter();
         if (div.getCcdKokurenJohoTorikomi().get処理年月() != null) {
             parameter.set処理年月(new FlexibleYearMonth(
                     div.getCcdKokurenJohoTorikomi().get処理年月().getYearMonth().toDateString()));

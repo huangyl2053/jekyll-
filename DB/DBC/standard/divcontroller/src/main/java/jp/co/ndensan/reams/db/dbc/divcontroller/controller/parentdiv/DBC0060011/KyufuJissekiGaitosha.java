@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0060011.Kyu
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0060011.KyufuJissekiGaitoshaValidationHandler;
 import jp.co.ndensan.reams.db.dbc.service.core.kyufukanrihyoshokai.KyufuKanrihyoShokai;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -97,7 +96,6 @@ public class KyufuJissekiGaitosha {
         ViewStateHolder.put(ViewStateKeys.訪問通所サービスフラグ, 訪問通所サービスフラグ);
         ViewStateHolder.put(ViewStateKeys.短期入所サービスフラグ, 短期入所サービスフラグ);
         ViewStateHolder.put(ViewStateKeys.居宅サービスフラグ, 居宅サービスフラグ);
-        ViewStateHolder.put(ViewStateKeys.識別コード, new ShikibetsuCode(給付管理票.get識別コード()));
         FlexibleYearMonth 支給限度額一本化年月 = new FlexibleYearMonth(div.getHdn支給限度額一本化年月());
         FlexibleYearMonth サービス提供年月 = 給付管理票.getサービス提供年月();
         if (支給限度額一本化年月.isBeforeOrEquals(サービス提供年月)) {

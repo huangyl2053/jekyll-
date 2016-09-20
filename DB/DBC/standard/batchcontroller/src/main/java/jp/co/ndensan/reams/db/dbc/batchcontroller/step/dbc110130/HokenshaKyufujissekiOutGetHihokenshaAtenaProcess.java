@@ -106,7 +106,7 @@ public class HokenshaKyufujissekiOutGetHihokenshaAtenaProcess extends BatchProce
         dbWT1001.setShikakuSoshitsuJiyuCode(dbV1001.getShikakuSoshitsuJiyuCode());
         if (null != 識別対象.to個人()) {
             dbWT1001.setSeinenYmd((識別対象.to個人().get生年月日().toFlexibleDate()));
-            dbWT1001.setSeibetsuCode(識別対象.to個人().get性別().toRString());
+            dbWT1001.setSeibetsuCode(識別対象.to個人().get性別().getCode());
         } else {
             dbWT1001.setSeinenYmd((FlexibleDate.EMPTY));
             dbWT1001.setSeibetsuCode(RString.EMPTY);

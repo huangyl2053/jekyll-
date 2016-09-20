@@ -93,7 +93,6 @@ public class KogakuGassanKyufuJissekiInDoIchiranhyoSakuseiProcess
     private static final RString 出力ファイル名 = new RString("DBC200041_GassanKyufujissekiTorikomiIchiran.csv");
     private static final RString 漢字_被保険者番号 = new RString("被保険者番号");
     private static final Code コード = new Code("0003");
-//TODO mapper
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "kogakugassankyufujissekiin.IKogakuGassanKyufuJissekiInMapper.get帳票出力対象データ");
     private IOutputOrder 出力順情報;
@@ -104,7 +103,6 @@ public class KogakuGassanKyufuJissekiInDoIchiranhyoSakuseiProcess
     private Map<RString, RString> 出力順Map;
     private int 連番;
     private RString eucFilePath;
-    private List<KogakuGassanKyufuJissekiInEntity> entityList;
     private KogakuGassanKyufuJissekiInEntity currentRecord;
     private KogakuGassanKyufuJissekiInCsvEntity csvEntity;
     private final Set<RString> 識別コードset = new HashSet<>();
@@ -135,7 +133,6 @@ public class KogakuGassanKyufuJissekiInDoIchiranhyoSakuseiProcess
         改頁項目名リスト = new ArrayList<>();
         改頁リスト = new ArrayList<>();
         出力順Map = new HashMap<>();
-        entityList = new ArrayList<>();
         帳票データの取得Parameter = new KokuhorenIchiranhyoMybatisParameter();
         RString 出力順 = MyBatisOrderByClauseCreator.create(KogakuGassanKyufuJissekiInOutputOrder.class, 出力順情報);
         帳票データの取得Parameter.set出力順(出力順);
@@ -190,7 +187,6 @@ public class KogakuGassanKyufuJissekiInDoIchiranhyoSakuseiProcess
     protected void usualProcess(KogakuGassanKyufuJissekiInEntity entity) {
         アクセスログ対象追加(entity);
         currentRecord = entity;
-        entityList.add(entity);
         KogakuGassanKyufuJissekiInEntity beforeEntity = getBefore();
         if (null != beforeEntity) {
             if (null == csvEntity) {
@@ -211,8 +207,8 @@ public class KogakuGassanKyufuJissekiInDoIchiranhyoSakuseiProcess
 
     @Override
     protected void afterExecute() {
-        if (!entityList.isEmpty()) {
-            if (1 == entityList.size()) {
+        if (連番 != 0) {
+            if (1 == 連番) {
                 csvEntity = new KogakuGassanKyufuJissekiInCsvEntity();
                 editヘッダー項目();
             }
@@ -296,12 +292,6 @@ public class KogakuGassanKyufuJissekiInDoIchiranhyoSakuseiProcess
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
     }
 
-    /**
-     * 数値からstringに転換する。
-     *
-     * @param number 数値
-     * @return カンマで編集した値
-     */
     private static RString decimal_to_string(Decimal number) {
         if (null == number) {
             return RString.EMPTY;

@@ -161,12 +161,13 @@ public class InsDankaibetsuShunoritsuTmpProcess extends BatchProcessBase<Dankaib
         entity.setKamokuCode(収納データ.get収入情報取得PSM().get収納キーRelateEntity().
                 get収納科目Entity().getKamokuCode().getColumnValue());
         entity.setLasdecCode(市町村コード);
+        LasdecCode 賦課市町村コード = 収納データ.get介護賦課().getFukaShichosonCode();
         if (市町村コード != null
                 && 広域保険者.equals(parameter.get広域判定区分())
-                && 市町村分.equals(市町村コード.code市町村RString())
-                && 収納データ.get介護賦課().getFukaShichosonCode() != null
-                && (収納データ.get介護賦課().getFukaShichosonCode().code市町村RString().equals(parameter.get市町村情報())
-                || 収納データ.get介護賦課().getFukaShichosonCode().code市町村RString().equals(parameter.get旧市町村情報()))) {
+                && !市町村分.equals(市町村コード.code市町村RString())
+                && 賦課市町村コード != null
+                && (賦課市町村コード.code市町村RString().equals(parameter.get市町村情報())
+                || 賦課市町村コード.code市町村RString().equals(parameter.get旧市町村情報()))) {
             if (ONE.equals(収納データ.get被保険者台帳().getKoikinaiJushochiTokureiFlag())) {
                 entity.setFukaLasdecCode(収納データ.get被保険者台帳().getKoikinaiTokureiSochimotoShichosonCode());
             } else {

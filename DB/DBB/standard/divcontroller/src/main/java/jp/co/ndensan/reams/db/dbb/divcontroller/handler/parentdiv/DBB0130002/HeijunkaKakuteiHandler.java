@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchoheijunkakakutei.HokenryoDankaibetu;
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchoheijunkakakutei.Taishokensu;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunkakakutei.TokuchoHeijunkaKakuteiBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012002.DBB012002_TokuchoHeinjunkaKakuteiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0130002.HeijunkaKakuteiDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0130002.dgHeijunkaKakutei_Row;
@@ -255,7 +255,7 @@ public class HeijunkaKakuteiHandler {
      * @param 調定日時 YMDHMS
      * @return パラメータ
      */
-    public TokuchoHeijunkaKakuteiBatchParameter creatParameter(YMDHMS 調定日時) {
+    public DBB012002_TokuchoHeinjunkaKakuteiParameter creatParameter(YMDHMS 調定日時) {
 
         RString 遷移区分 = RString.EMPTY;
         if (特徴平準化_特徴6月分.equals(ResponseHolder.getMenuID())) {
@@ -269,7 +269,7 @@ public class HeijunkaKakuteiHandler {
             差額Map.put(row.getTxtDankaiKubun(), row.getTxtSagaku().getValue());
         }
         RYear 賦課年度 = div.getHeijunkaKakuteiShoriNaiyo().getTxtFukaNendo().getDomain();
-        TokuchoHeijunkaKakuteiBatchParameter parameter = TokuchoHeijunkaKakutei.createInstance()
+        DBB012002_TokuchoHeinjunkaKakuteiParameter parameter = TokuchoHeijunkaKakutei.createInstance()
                 .createTokuchoHeijunkaKakuteiParameter(差額Map, new FlexibleYear(賦課年度.toString()),
                         new FlexibleYear(賦課年度.toString()), 調定日時, 遷移区分);
         return parameter;

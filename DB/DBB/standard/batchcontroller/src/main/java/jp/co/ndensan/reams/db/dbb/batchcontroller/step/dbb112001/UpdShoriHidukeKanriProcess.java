@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbb.definition.processprm.shutokujohoshuchutsurenk
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.kaigoshoto.KaigoShotoTempTableEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShoriDateKanriManager;
@@ -42,7 +43,6 @@ public class UpdShoriHidukeKanriProcess extends BatchProcessBase<KaigoShotoTempT
     private static final RString 異動_単一_4 = new RString("4");
     private static final RString 処理枝番_00 = new RString("00");
     private static final RString 枝番_0001 = new RString("0001");
-    private static final RString 市町村識別ID_01 = new RString("01");
     private static final int INT_1 = 1;
     private static final int INT_4 = 4;
 
@@ -96,18 +96,15 @@ public class UpdShoriHidukeKanriProcess extends BatchProcessBase<KaigoShotoTempT
     }
 
     private DbT7022ShoriDateKanriEntity get処理日付管理_当初(KaigoShotoTempTableEntity entity) {
-        DbT7022ShoriDateKanriEntity dbt7022Entity = new DbT7022ShoriDateKanriEntity();
+        RString 処理枝番;
         if (当初_広域_1.equals(処理区分)) {
-            RString 処理枝番 = 処理枝番_00.concat(entity.getShichosonShikibetuId());
-            dbt7022Entity.setShoriEdaban(処理枝番);
+            処理枝番 = 処理枝番_00.concat(entity.getShichosonShikibetuId());
         } else {
-            dbt7022Entity.setShoriEdaban(枝番_0001);
+            処理枝番 = 枝番_0001;
         }
-        dbt7022Entity.setSubGyomuCode(SubGyomuCode.DBB介護賦課);
-        dbt7022Entity.setShoriName(ShoriName.当初所得引出.get名称());
-        dbt7022Entity.setNendo(処理年度);
-        dbt7022Entity.setNendoNaiRenban(枝番_0001);
-        dbt7022Entity.setShichosonCode(entity.getShichosonCode());
+        ShoriDateKanri result = ShoriDateKanriManager.createInstance().get処理日付管理マスタ(
+                SubGyomuCode.DBB介護賦課, entity.getShichosonCode(), ShoriName.当初所得引出.get名称(), 処理枝番, 処理年度, 枝番_0001);
+        DbT7022ShoriDateKanriEntity dbt7022Entity = result.toEntity();
         dbt7022Entity.setKijunTimestamp(バッチ起動処理日時);
         dbt7022Entity.setTaishoShuryoTimestamp(バッチ起動処理日時);
         return dbt7022Entity;
@@ -116,27 +113,24 @@ public class UpdShoriHidukeKanriProcess extends BatchProcessBase<KaigoShotoTempT
     private DbT7022ShoriDateKanriEntity get処理日付管理_異動(KaigoShotoTempTableEntity entity) {
         RString 最大年度内連番;
         YMDHMS 対象開始日時;
+        RString 処理枝番;
         DbT7022ShoriDateKanriEntity dbt7022Entity = new DbT7022ShoriDateKanriEntity();
-        RString 市町村識別ID;
         if (異動_広域_2.equals(処理区分)) {
-            市町村識別ID = entity.getShichosonShikibetuId();
-            dbt7022Entity.setShichosonCode(entity.getShichosonCode());
-            RString 処理枝番 = 処理枝番_00.concat(entity.getShichosonShikibetuId());
-            dbt7022Entity.setShoriEdaban(処理枝番);
+            処理枝番 = 処理枝番_00.concat(entity.getShichosonShikibetuId());
         } else {
-            市町村識別ID = 市町村識別ID_01;
-            dbt7022Entity.setShichosonCode(市町村コード);
-            dbt7022Entity.setShoriEdaban(枝番_0001);
+            処理枝番 = 枝番_0001;
         }
+        dbt7022Entity.setShoriEdaban(処理枝番);
+        dbt7022Entity.setShichosonCode(市町村コード);
         DbT7022ShoriDateKanriEntity result = ShoriDateKanriManager.createInstance()
-                .select処理日付管理マスタ_所得情報抽出連携異動(処理年度, entity.getShichosonCode(), 市町村識別ID);
+                .select処理日付管理マスタ_所得情報抽出連携異動(処理年度, ShoriName.所得引出.get名称(), 処理枝番, SubGyomuCode.DBB介護賦課);
         if (result != null) {
             最大年度内連番 = new RString((Integer.valueOf(result.getNendoNaiRenban().toString()) + INT_1)).padZeroToLeft(INT_4);
             対象開始日時 = result.getTaishoShuryoTimestamp();
         } else {
             最大年度内連番 = 枝番_0001;
-            DbT7022ShoriDateKanriEntity result前年度 = ShoriDateKanriManager.createInstance()
-                    .select処理日付管理マスタ_所得情報抽出連携異動(処理年度.minusYear(INT_1), entity.getShichosonCode(), 市町村識別ID);
+            DbT7022ShoriDateKanriEntity result前年度 = ShoriDateKanriManager.createInstance().select処理日付管理マスタ_所得情報抽出連携異動(
+                    処理年度.minusYear(INT_1), ShoriName.所得引出.get名称(), 処理枝番, SubGyomuCode.DBB介護賦課);
             対象開始日時 = result前年度.getTaishoShuryoTimestamp();
         }
         dbt7022Entity.setSubGyomuCode(SubGyomuCode.DBB介護賦課);

@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxAtenaMeisho;
 
 /**
  * tplJikofutanKanriJoho2 のクラスファイル
@@ -77,23 +78,23 @@ public class tplJikofutanKanriJoho2Div extends TabPanel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public TextBox getTxtAtesakiShimei() {
+    public TextBoxAtenaMeisho getTxtAtesakiShimei() {
         return this.getJikoFutangakuHoseiAtesaki().getTxtAtesakiShimei();
     }
 
     @JsonIgnore
-    public void setTxtAtesakiShimei(TextBox txtAtesakiShimei) {
+    public void setTxtAtesakiShimei(TextBoxAtenaMeisho txtAtesakiShimei) {
         this.getJikoFutangakuHoseiAtesaki().setTxtAtesakiShimei(txtAtesakiShimei);
     }
 
     @JsonIgnore
-    public TextBoxYubinNo getTxtAtesakiYubinNO() {
-        return this.getJikoFutangakuHoseiAtesaki().getTxtAtesakiYubinNO();
+    public TextBoxYubinNo getTxtAtesakiYubinNo() {
+        return this.getJikoFutangakuHoseiAtesaki().getTxtAtesakiYubinNo();
     }
 
     @JsonIgnore
-    public void setTxtAtesakiYubinNO(TextBoxYubinNo txtAtesakiYubinNO) {
-        this.getJikoFutangakuHoseiAtesaki().setTxtAtesakiYubinNO(txtAtesakiYubinNO);
+    public void setTxtAtesakiYubinNo(TextBoxYubinNo txtAtesakiYubinNo) {
+        this.getJikoFutangakuHoseiAtesaki().setTxtAtesakiYubinNo(txtAtesakiYubinNo);
     }
 
     @JsonIgnore

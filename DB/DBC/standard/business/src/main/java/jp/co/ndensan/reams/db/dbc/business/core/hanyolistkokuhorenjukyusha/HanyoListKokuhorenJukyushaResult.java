@@ -150,7 +150,7 @@ public class HanyoListKokuhorenJukyushaResult {
         eucEntity.set保険者名(asociation.get市町村名());
         eucEntity.set空白(RString.HALF_SPACE);
         eucEntity.set二次予防適用開始日(set日付編集(entity.get二次予防事業対象者_適用開始年月日()));
-        eucEntity.set二次予防適用終了日(set日付編集(entity.get二次予防事業対象者_適用開始年月日()));
+        eucEntity.set二次予防適用終了日(set日付編集(entity.get二次予防事業対象者_適用終了年月日()));
         eucEntity.set二次予防調査実施日(set日付編集(entity.get調査実施日()));
         eucEntity.set二次予防決定日(set日付編集(entity.get決定年月日()));
         eucEntity.set処理対象年月(set日付編集(entity.get送付年月()));
@@ -178,7 +178,7 @@ public class HanyoListKokuhorenJukyushaResult {
         eucEntity.set認定終了日(set日付編集(entity.get認定有効期間終了年月日()));
         eucEntity.set居宅計画作成区分(set居宅計画作成区分(entity.get居宅サービス計画作成区分コード()));
         eucEntity.set居宅支援事業者番号(entity.get居宅介護支援事業所番号());
-        eucEntity.set居宅支援事業者名(entity.get事業者番号());
+        eucEntity.set居宅支援事業者名(entity.get事業者名称());
         eucEntity.setサービス計画適用開始日(set日付編集(entity.get居宅サービス計画適用開始年月日()));
         eucEntity.setサービス計画適用終了日(set日付編集(entity.get居宅サービス計画適用終了年月日()));
         eucEntity.set訪問通所支給限度基準額(new RString(String.valueOf(entity.get訪問通所サービス支給限度基準額())));
@@ -198,7 +198,7 @@ public class HanyoListKokuhorenJukyushaResult {
         eucEntity.set利用者負担適用開始日(set日付編集(entity.get適用開始年月日()));
         eucEntity.set利用者負担適用終了日(set日付編集(entity.get適用終了年月日()));
         eucEntity.set標準負担区分(set標準負担区分(entity.get標準負担区分コード()));
-        eucEntity.set標準負担額(new RString(entity.get給付率()));
+        eucEntity.set標準負担額(new RString(entity.get負担額()));
         eucEntity.set標準負担適用開始日(set日付編集(entity.get負担額適用開始年月日()));
         eucEntity.set標準負担適用終了日(set日付編集(entity.get負担額適用終了年月日()));
         eucEntity.set特定入所者認定申請中区分コード(set特定入所者認定申請中区分(entity.get特定入所者認定申請中区分コード()));
@@ -421,7 +421,7 @@ public class HanyoListKokuhorenJukyushaResult {
         eucEntity.set保険者名(asociation.get市町村名());
         eucEntity.set空白(RString.HALF_SPACE);
         eucEntity.set二次予防適用開始日(set日付編集(entity.get二次予防事業対象者_適用開始年月日()));
-        eucEntity.set二次予防適用終了日(set日付編集(entity.get二次予防事業対象者_適用開始年月日()));
+        eucEntity.set二次予防適用終了日(set日付編集(entity.get二次予防事業対象者_適用終了年月日()));
         eucEntity.set二次予防調査実施日(set日付編集(entity.get調査実施日()));
         eucEntity.set二次予防決定日(set日付編集(entity.get決定年月日()));
         eucEntity.set処理対象年月(set日付編集(entity.get送付年月()));
@@ -449,7 +449,7 @@ public class HanyoListKokuhorenJukyushaResult {
         eucEntity.set認定終了日(set日付編集(entity.get認定有効期間終了年月日()));
         eucEntity.set居宅計画作成区分(set居宅計画作成区分(entity.get居宅サービス計画作成区分コード()));
         eucEntity.set居宅支援事業者番号(entity.get居宅介護支援事業所番号());
-        eucEntity.set居宅支援事業者名(entity.get事業者番号());
+        eucEntity.set居宅支援事業者名(entity.get事業者名称());
         eucEntity.setサービス計画適用開始日(set日付編集(entity.get居宅サービス計画適用開始年月日()));
         eucEntity.setサービス計画適用終了日(set日付編集(entity.get居宅サービス計画適用終了年月日()));
         eucEntity.set訪問通所支給限度基準額(new RString(String.valueOf(entity.get訪問通所サービス支給限度基準額())));
@@ -469,7 +469,7 @@ public class HanyoListKokuhorenJukyushaResult {
         eucEntity.set利用者負担適用開始日(set日付編集(entity.get適用開始年月日()));
         eucEntity.set利用者負担適用終了日(set日付編集(entity.get適用終了年月日()));
         eucEntity.set標準負担区分(set標準負担区分(entity.get標準負担区分コード()));
-        eucEntity.set標準負担額(new RString(entity.get給付率()));
+        eucEntity.set標準負担額(new RString(entity.get負担額()));
         eucEntity.set標準負担適用開始日(set日付編集(entity.get負担額適用開始年月日()));
         eucEntity.set標準負担適用終了日(set日付編集(entity.get負担額適用終了年月日()));
         eucEntity.set特定入所者認定申請中区分コード(set特定入所者認定申請中区分(entity.get特定入所者認定申請中区分コード()));

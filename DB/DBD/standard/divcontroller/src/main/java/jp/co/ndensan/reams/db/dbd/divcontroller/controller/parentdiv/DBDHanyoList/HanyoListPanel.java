@@ -5,14 +5,16 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBDHanyoList;
 
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710040.DBD710040_HanyoListRiyoshaFutanGakuGengakuParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710050.DBD710050_HanyoListHomonKaigoRiyoshaFutanGakuGengakuParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710060.DBD710060_HanyoListShakaiFukushiHojinKeigenParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710070.DBD710070_HanyoListTokubetsuChiikiKasanGemmenParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710080.DBD710080_HanyoListFutanGendoGakuNinteiParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710110.DBD710110_HanyoListKokuhoParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710120.DBD710120_HanyoListKokiKoreishaParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710130.DBD710130_HanyoListJigyoTaishoshaParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710140.DBD710140_HanyoListRiyoshaFutanwariaiParameter;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710150.DBD710150_HanyoListShisetsuNyutaishoParameter;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd710040.DBD710040_HanyoListRiyoshaFutanGakuGengakuParameter;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd710060.DBD710060_HanyoListShakaiFukushiHojinKeigenParameter;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd710070.DBD710070_HanyoListTokubetsuChiikiKasanGemmenParameter;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd710110.DBD710110_HanyoListKokuhoParameter;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd710120.DBD710120_HanyoListKokiKoreishaParameter;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd710130.DBD710130_HanyoListJigyoTaishoshaParameter;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd710140.DBD710140_HanyoListRiyoshaFutanwariaiParameter;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbdhanyolist.DBDHanyoListParameter;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.ChushutsuHohoKubun;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.SoshitsuKubun;
@@ -42,7 +44,9 @@ public class HanyoListPanel {
 
         if (DBDHanyoListStateName.汎用リスト_社会福祉法人軽減.getName().equals(batchKind)
                 || DBDHanyoListStateName.汎用リスト_特別地域加算減免.getName().equals(batchKind)
-                || DBDHanyoListStateName.汎用リスト_利用者負担額減免.getName().equals(batchKind)) {
+                || DBDHanyoListStateName.汎用リスト_利用者負担額減免.getName().equals(batchKind)
+                || DBDHanyoListStateName.汎用リスト_訪問介護利用者負担額減額.getName().equals(batchKind)
+                || DBDHanyoListStateName.汎用リスト_負担限度額認定.getName().equals(batchKind)) {
             div.getBtnShutsuryokujun().setDisplayNone(true);
         } else {
             div.getBtnShutsuryokujun().setDisplayNone(false);
@@ -99,6 +103,30 @@ public class HanyoListPanel {
             riyoshaFutanGakuGengakuParameter.setSyutsuryokujunparameter(div.getTxtSyutsuryokujunparameter2().getValue());
             riyoshaFutanGakuGengakuParameter.setSyutsuryokukomoku(div.getTxtSyutsuryokukomoku2().getValue());
             parameter.setRiyoshaFutanGakuGengakuParameter(riyoshaFutanGakuGengakuParameter);
+        }
+
+        if (DBDHanyoListStateName.汎用リスト_訪問介護利用者負担額減額.getName().equals(batchKind)) {
+            DBD710050_HanyoListHomonKaigoRiyoshaFutanGakuGengakuParameter homonKaigoRiyoshaFutanGakuGengakuParameter = new DBD710050_HanyoListHomonKaigoRiyoshaFutanGakuGengakuParameter();
+            homonKaigoRiyoshaFutanGakuGengakuParameter.setHyoudai(div.getTxtHyoudai3().getValue());
+            homonKaigoRiyoshaFutanGakuGengakuParameter.setDetasyubetsumesyo(div.getTxtDetasyubetsumesyo3().getValue());
+            homonKaigoRiyoshaFutanGakuGengakuParameter.setSyutsuryoku(div.getTxtSyutsuryoku3().getValue());
+            homonKaigoRiyoshaFutanGakuGengakuParameter.setCyusyutsuhohokubun(div.getDdlCyusyutsuhohokubun3().getSelectedKey());
+            homonKaigoRiyoshaFutanGakuGengakuParameter.setCyusyutsukomokukubun(div.getTxtCyusyutsukomokukubun3().getValue());
+            homonKaigoRiyoshaFutanGakuGengakuParameter.setKizyunnichi(div.getTxtKizyunnichi3().getValue());
+            homonKaigoRiyoshaFutanGakuGengakuParameter.setHitsukehanifrom(div.getTxtHitsukehanifrom3().getValue());
+            homonKaigoRiyoshaFutanGakuGengakuParameter.setHitsukehanito(div.getTxtHitsukehanito3().getValue());
+            homonKaigoRiyoshaFutanGakuGengakuParameter.setChokindatacyusyutsu(Boolean.parseBoolean(div.getDdlChokindatacyusyutsu3().getSelectedKey().toString()));
+            homonKaigoRiyoshaFutanGakuGengakuParameter.setHobetsukubun(div.getTxtHobetsukubun3().getValue());
+            homonKaigoRiyoshaFutanGakuGengakuParameter.setKyakasha(div.getTxtKyakasha3().getValue());
+            homonKaigoRiyoshaFutanGakuGengakuParameter.setSoshitsukubun(div.getDdlSoshitsukubun3().getSelectedKey());
+            homonKaigoRiyoshaFutanGakuGengakuParameter.setCsvkomokumeifuka(Boolean.parseBoolean(div.getDdlIsCsvkomokumeifuka3().getSelectedKey().toString()));
+            homonKaigoRiyoshaFutanGakuGengakuParameter.setCsvrenbanfuka(Boolean.parseBoolean(div.getDdlIsCsvrenbanfuka3().getSelectedKey().toString()));
+            homonKaigoRiyoshaFutanGakuGengakuParameter.setCsvhitsukesurasyuhensyu(Boolean.parseBoolean(div.getDdlIsCsvhitsukesurasyuhensyu3().getSelectedKey().toString()));
+            homonKaigoRiyoshaFutanGakuGengakuParameter.setAtenacyusyutsujyoken(toAtenaSelectBatchParameter(div));
+            homonKaigoRiyoshaFutanGakuGengakuParameter.setCyohyoid(div.getTxtCyohyoid3().getValue());
+            homonKaigoRiyoshaFutanGakuGengakuParameter.setSyutsuryokujunparameter(div.getTxtSyutsuryokujunparameter3().getValue());
+            homonKaigoRiyoshaFutanGakuGengakuParameter.setSyutsuryokukomoku(div.getTxtSyutsuryokukomoku3().getValue());
+            parameter.setHomonKaigoRiyoshaFutanGakuGengakuParameter(homonKaigoRiyoshaFutanGakuGengakuParameter);
         }
 
         if (DBDHanyoListStateName.汎用リスト_社会福祉法人軽減.getName().equals(batchKind)) {
@@ -168,6 +196,37 @@ public class HanyoListPanel {
             tokubetsuChiikiKasanGemmenParameter.setSyutsuryokujunparameter(div.getTxtSyutsuryokujunparameter5().getValue());
             tokubetsuChiikiKasanGemmenParameter.setSyutsuryokukomoku(div.getTxtSyutsuryoku5().getValue());
             parameter.setTokubetsuChiikiKasanGemmenParameter(tokubetsuChiikiKasanGemmenParameter);
+        }
+
+        if (DBDHanyoListStateName.汎用リスト_負担限度額認定.getName().equals(batchKind)) {
+            DBD710080_HanyoListFutanGendoGakuNinteiParameter futanGendoGakuNinteiParameter = new DBD710080_HanyoListFutanGendoGakuNinteiParameter();
+            futanGendoGakuNinteiParameter.setHyoudai(div.getTxtHyoudai6().getValue());
+            futanGendoGakuNinteiParameter.setDetasyubetsumesyo(div.getTxtDetasyubetsumesyo6().getValue());
+            futanGendoGakuNinteiParameter.setSyutsuryoku(div.getTxtSyutsuryoku6().getValue());
+            futanGendoGakuNinteiParameter.setCyusyutsuhohokubun(div.getDdlCyusyutsuhohokubun6().getSelectedKey());
+            futanGendoGakuNinteiParameter.setCyusyutsukomokukubun(div.getTxtCyusyutsukomokukubun6().getValue());
+            futanGendoGakuNinteiParameter.setKizyunnichi(div.getTxtKizyunnichi6().getValue());
+            futanGendoGakuNinteiParameter.setHitsukehanifrom(div.getTxtHitsukehanifrom6().getValue());
+            futanGendoGakuNinteiParameter.setHitsukehanito(div.getTxtHitsukehanito6().getValue());
+            futanGendoGakuNinteiParameter.setChokindatacyusyutsu(Boolean.parseBoolean(div.getDdlChokindatacyusyutsu6().getSelectedKey().toString()));
+            futanGendoGakuNinteiParameter.setShinseishadatacyushutsu(Boolean.parseBoolean(div.getDdlIsShinseishadatacyushutsu6().getSelectedKey().toString()));
+            futanGendoGakuNinteiParameter.setShiteinyushoshakyusochisha(Boolean.parseBoolean(div.getDdlShiteinyushoshakyusochisha6().getSelectedKey().toString()));
+            futanGendoGakuNinteiParameter.setShiteinyushoshafutankeigensha(Boolean.parseBoolean(div.getDdlShiteinyushoshafutankeigensha6().getSelectedKey().toString()));
+            futanGendoGakuNinteiParameter.setShiteinyushoshasonota(Boolean.parseBoolean(div.getDdlShiteinyushoshasonota6().getSelectedKey().toString()));
+            futanGendoGakuNinteiParameter.setShiteinyushoshadaiichidankai(Boolean.parseBoolean(div.getDdlShiteinyushoshadaiichidankai6().getSelectedKey().toString()));
+            futanGendoGakuNinteiParameter.setShiteinyushoshadainidankai(Boolean.parseBoolean(div.getDdlShiteinyushoshadainidankai6().getSelectedKey().toString()));
+            futanGendoGakuNinteiParameter.setShiteinyushoshadaisandankai(Boolean.parseBoolean(div.getDdlShiteinyushoshadaisandankai6().getSelectedKey().toString()));
+            futanGendoGakuNinteiParameter.setShiteinyushoshakazeisou(Boolean.parseBoolean(div.getDdlShiteinyushoshakazeisou6().getSelectedKey().toString()));
+            futanGendoGakuNinteiParameter.setKyakasha(div.getTxtKyakasha6().getValue());
+            futanGendoGakuNinteiParameter.setSoshitsukubun(div.getDdlSoshitsukubun6().getSelectedKey());
+            futanGendoGakuNinteiParameter.setCsvkomokumeifuka(Boolean.parseBoolean(div.getDdlIsCsvkomokumeifuka6().getSelectedKey().toString()));
+            futanGendoGakuNinteiParameter.setCsvrenbanfuka(Boolean.parseBoolean(div.getDdlIsCsvrenbanfuka6().getSelectedKey().toString()));
+            futanGendoGakuNinteiParameter.setCsvhitsukesurasyuhensyu(Boolean.parseBoolean(div.getDdlIsCsvhitsukesurasyuhensyu6().getSelectedKey().toString()));
+            futanGendoGakuNinteiParameter.setAtenacyusyutsujyoken(toAtenaSelectBatchParameter(div));
+            futanGendoGakuNinteiParameter.setCyohyoid(div.getTxtCyohyoid6().getValue());
+            futanGendoGakuNinteiParameter.setSyutsuryokujunparameter(div.getTxtSyutsuryokujunparameter6().getValue());
+            futanGendoGakuNinteiParameter.setSyutsuryokukomoku(div.getTxtSyutsuryoku6().getValue());
+            parameter.setFutanGendoGakuNinteiParameter(futanGendoGakuNinteiParameter);
         }
 
         if (DBDHanyoListStateName.汎用リスト_国保.getName().equals(batchKind)) {

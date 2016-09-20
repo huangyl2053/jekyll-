@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.fukajoho.fukajoho.FukaJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchoheijunkakakutei.HokenryoDankaibetu;
 import jp.co.ndensan.reams.db.dbb.business.core.tokuchoheijunkakakutei.Taishokensu;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunkakakutei.TokuchoHeijunkaKakuteiBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012002.DBB012002_TokuchoHeinjunkaKakuteiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheinjunkakakutei.HeinjunkaAfterParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fukajoho.fukajoho.FukaJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchoheinjunkakakutei.TokuchoHeinjunkaKakuteiEntity;
@@ -350,13 +350,13 @@ public class TokuchoHeijunkaKakutei {
      * @param 遷移区分 RString
      * @return パラメータ
      */
-    public TokuchoHeijunkaKakuteiBatchParameter createTokuchoHeijunkaKakuteiParameter(
+    public DBB012002_TokuchoHeinjunkaKakuteiParameter createTokuchoHeijunkaKakuteiParameter(
             Map<RString, Decimal> 差額Map,
             FlexibleYear 賦課年度,
             FlexibleYear 調定年度,
             YMDHMS 調定日時,
             RString 遷移区分) {
-        TokuchoHeijunkaKakuteiBatchParameter parameter = new TokuchoHeijunkaKakuteiBatchParameter();
+        DBB012002_TokuchoHeinjunkaKakuteiParameter parameter = new DBB012002_TokuchoHeinjunkaKakuteiParameter();
         parameter.set差額Map(差額Map);
         parameter.set賦課年度(賦課年度);
         parameter.set調定年度(調定年度);

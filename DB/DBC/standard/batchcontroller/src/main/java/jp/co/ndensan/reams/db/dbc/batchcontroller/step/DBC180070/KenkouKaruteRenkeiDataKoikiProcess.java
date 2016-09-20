@@ -7,14 +7,16 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180070;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kenkoukaruterenkeidata.KenkouKaruteRenkeiDATEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kenkoukaruterenkeidatakoiki.KenkoKaruteRenkeiKoikiTempTableEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kenkoukaruterenkeidatakoiki.KenkouKaruteRenkeiDataKoikiEditEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kenkoukaruterenkeidatakoiki.KenkouKaruteRenkeiDataKoikiHenkanErrorCsvEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchSimpleWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
@@ -24,8 +26,13 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
+import jp.co.ndensan.reams.uz.uza.io.fld.FldWriter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 
 /**
  * 健康かるて連携データ作成（広域用）のバッチクラスです。
@@ -41,12 +48,13 @@ public class KenkouKaruteRenkeiDataKoikiProcess extends BatchKeyBreakBase<KenkoK
     private static final RString CSV_NAME = new RString("KoikiShikibetsuHenkanError.csv");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
+    private static final RString DAT_WRITER_DELIMITER = new RString("-");
     private RString filePath;
     private boolean isNotFirst;
     private List<RString> 作成されたファイル;
 
     @BatchWriter
-    BatchSimpleWriter batchsimplewriter;
+    private FldWriter<KenkouKaruteRenkeiDATEntity> fldWriter;
     @BatchWriter
     private CsvWriter<KenkouKaruteRenkeiDataKoikiHenkanErrorCsvEntity> csvWriter;
 
@@ -76,9 +84,11 @@ public class KenkouKaruteRenkeiDataKoikiProcess extends BatchKeyBreakBase<KenkoK
     @Override
     protected void keyBreakProcess(KenkoKaruteRenkeiKoikiTempTableEntity entity) {
         if (hasBreak(getBefore(), entity)) {
-            batchsimplewriter.close();
-            batchsimplewriter = new BatchSimpleWriter(Path.combinePath(filePath,
-                    DAT_NAME.concat(entity.getShichosonCode().concat(DAT_拡張子))), Encode.UTF_8withBOM);
+            fldWriter.close();
+            fldWriter = new FldWriter.InstanceBuilder(Path.combinePath(filePath, DAT_NAME.concat(entity.getShichosonCode().concat(DAT_拡張子))))
+                    .setEncodeUtf8(true)
+                    .setDelimiter(DAT_WRITER_DELIMITER)
+                    .setNewLine(NewLine.CRLF).build();
             作成されたファイル.add(DAT_NAME.concat(entity.getShichosonCode().concat(DAT_拡張子)));
         }
     }
@@ -86,7 +96,10 @@ public class KenkouKaruteRenkeiDataKoikiProcess extends BatchKeyBreakBase<KenkoK
     @Override
     protected void usualProcess(KenkoKaruteRenkeiKoikiTempTableEntity entity) {
         if (isNotFirst) {
-            batchsimplewriter = new BatchSimpleWriter(DAT_NAME.concat(entity.getShichosonCode().concat(DAT_拡張子)), Encode.UTF_8withBOM);
+            fldWriter = new FldWriter.InstanceBuilder(Path.combinePath(filePath, DAT_NAME.concat(entity.getShichosonCode().concat(DAT_拡張子))))
+                    .setEncodeUtf8(true)
+                    .setDelimiter(DAT_WRITER_DELIMITER)
+                    .setNewLine(NewLine.CRLF).build();
             作成されたファイル.add(DAT_NAME.concat(entity.getShichosonCode().concat(DAT_拡張子)));
         }
         isNotFirst = false;
@@ -113,9 +126,9 @@ public class KenkouKaruteRenkeiDataKoikiProcess extends BatchKeyBreakBase<KenkoK
             csvEntity.setエラーメッセージ(new RString("該当市町村の識別コード未登録"));
             csvWriter.writeLine(csvEntity);
         } else {
-            batchsimplewriter.writeLine(new KenkouKaruteRenkeiDataKoikiEditEntity(entity).getWriteLine内容());
+            fldWriter.writeLine(new KenkouKaruteRenkeiDataKoikiEditEntity(entity).getWriteLine内容());
         }
-
+        AccessLogger.log(AccessLogType.照会, toPersonalData(entity.getShikibetsuCode(), entity.getHihokenshaNo()));
     }
 
     @Override
@@ -133,7 +146,8 @@ public class KenkouKaruteRenkeiDataKoikiProcess extends BatchKeyBreakBase<KenkoK
     }
 
     private boolean has識別コード変換エラー(KenkoKaruteRenkeiKoikiTempTableEntity entity) {
-        //        TODO QA1697 「介護広域連合」が管理する「識別コード」」の意味はあまりわかりません
+        // TODO#100470 「介護広域連合」が管理する「識別コード」」の意味はあまりわかりません
+        // 回答：現時点でも共通メソッドは決定しておりません。申し訳ありませんがToDoとして実装しておいてください。
         return RString.isNullOrEmpty(entity.getShichosonCode());
     }
 
@@ -144,4 +158,8 @@ public class KenkouKaruteRenkeiDataKoikiProcess extends BatchKeyBreakBase<KenkoK
         return new RString(年月日.toString());
     }
 
+    private PersonalData toPersonalData(RString 識別コード, RString 被保険者番号) {
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), 被保険者番号);
+        return PersonalData.of(new ShikibetsuCode(識別コード), expandedInfo);
+    }
 }

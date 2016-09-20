@@ -113,8 +113,10 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEditor implements IKogak
         setタイトル(source);
         if (通知書定型文List.size() > INDEX_ONE) {
             source.tsuchibun1 = 通知書定型文List.get(INDEX_ONE);
+            source.tsuchibun2 = 通知書定型文List.get(INDEX_ONE);
         } else {
             source.tsuchibun1 = RString.EMPTY;
+            source.tsuchibun2 = RString.EMPTY;
         }
         source.hihokenshaName = 帳票情報.get被保険者氏名();
         source.uketsukeYMD = get日付年月日(帳票情報.get受付年月日());

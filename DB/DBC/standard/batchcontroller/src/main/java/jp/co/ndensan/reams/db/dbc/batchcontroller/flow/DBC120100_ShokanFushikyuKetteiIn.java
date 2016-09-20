@@ -6,16 +6,16 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import java.io.File;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120100.ShokanFushikyuKetteiDoDBTorokuProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120100.ShokanFushikyuKetteiInProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120100.ShokanFushikyuKetteiInReadCsvFileProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120100.ShokanFushikyuKetteiDoDBTorokuProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120100.ShokanFushikyuKetteiInProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120100.ShokanFushikyuKetteiInReadCsvFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDeleteReveicedFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoHihokenshaKanrenProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoInterfaceKanriKousinProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoShoriKekkaListSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuGetFileProcess;
 import jp.co.ndensan.reams.db.dbc.business.core.kokuhorenkyoutsuu.KokuhorenKyoutsuuFileGetReturnEntity;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.shokanfushikyuketteiin.DBC120100_ShokanFushikyuKetteiInBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120100.DBC120100_ShokanFushikyuKetteiInParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorListType;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kagoketteikohifutanshain.KohifutanshaDoIchiranhyoSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukyufuketteiin.KogakuKyufuKetteiDoDBTorokuProcessParameter;
@@ -40,7 +40,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-2590-010 xuhao
  */
-public class DBC120100_ShokanFushikyuKetteiIn extends BatchFlowBase<DBC120100_ShokanFushikyuKetteiInBatchParameter> {
+public class DBC120100_ShokanFushikyuKetteiIn extends BatchFlowBase<DBC120100_ShokanFushikyuKetteiInParameter> {
 
     private static final String ファイル取得 = "getFile";
     private static final String CSVファイル取込 = "readCsvFile";
