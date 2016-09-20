@@ -114,7 +114,7 @@ public final class TokutyoKariSanteiFukaHandler {
             for (HokenryoDankai hokenryodankai : 保険料段階List.asList()) {
                 dgKanrijoho1_Row newRow = new dgKanrijoho1_Row();
                 newRow.setTxtHokenryoDankai(hokenryodankai.get表記());
-                newRow.setTxtHokenryoritsu(new RString(hokenryodankai.get保険料率().toString()));
+                newRow.getTxtHokenryoritsu().setValue(hokenryodankai.get保険料率());
                 保険料RowLists.add(newRow);
             }
             div.getTokutyoKariSanteiKanriInfo().getDgKanrijoho1().setDataSource(保険料RowLists);

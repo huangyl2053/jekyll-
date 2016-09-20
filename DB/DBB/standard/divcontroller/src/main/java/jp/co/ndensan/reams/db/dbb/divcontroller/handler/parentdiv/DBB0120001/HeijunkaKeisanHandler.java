@@ -158,7 +158,7 @@ public class HeijunkaKeisanHandler {
             }
         }
 
-        div.getTokuchoHeijunkaChohyoHakko().getCcdHeijunkaHenkoTsuchishoBunshoNo().initialize(REPORTID_DBB100012, FlexibleDate.getNowDate());
+        //div.getTokuchoHeijunkaChohyoHakko().getCcdHeijunkaHenkoTsuchishoBunshoNo().initialize(REPORTID_DBB100012, FlexibleDate.getNowDate());
         div.getTokuchoHeijunkaChohyoHakko().getRadHeijunkaHenkoTsuchi().setSelectedIndex(0);
     }
 
@@ -275,7 +275,7 @@ public class HeijunkaKeisanHandler {
         }
         data.set出力対象指示フラグ(出力対象);
         data.set一括発行フラグ(true);
-
+        data.set文書番号(div.getTokuchoHeijunkaChohyoHakko().getCcdHeijunkaHenkoTsuchishoBunshoNo().get文書番号());
         KaigoFukaTokuchoHeijunka6 kaigoFukaTokuchoHeijunka6 = KaigoFukaTokuchoHeijunka6.createInstance();
         return kaigoFukaTokuchoHeijunka6.getIkatsuBatchiPara(data);
     }
