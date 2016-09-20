@@ -760,14 +760,15 @@ public class ShoriDateKanriManager {
      * 処理日付管理マスタテーブルから連携（異動）所得情報取得します。
      *
      * @param 年度 FlexibleYear
-     * @param 市町村コード LasdecCode
-     * @param 市町村識別ID RString
+     * @param 処理名 RString
+     * @param 処理枝番 RString
+     * @param サブ業務コード SubGyomuCode
      * @return DbT7022ShoriDateKanriEntity
      */
     @Transaction
     public DbT7022ShoriDateKanriEntity select処理日付管理マスタ_所得情報抽出連携異動(
-            FlexibleYear 年度, LasdecCode 市町村コード, RString 市町村識別ID) {
-        return dac.select処理日付管理マスタ_所得情報抽出連携異動(年度, 市町村コード, 市町村識別ID);
+            FlexibleYear 年度, RString 処理名, RString 処理枝番, SubGyomuCode サブ業務コード) {
+        return dac.selectByFourKeys(サブ業務コード, 処理名, 処理枝番, 年度);
     }
 
     /**
