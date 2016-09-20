@@ -35,27 +35,22 @@ public class ShobunShuruiCodeTest extends DbzTestBase {
 
     @Test
     public void 引数に03を指定した場合_toValueは_03居宅介護サービス費等の支給を返す() {
-        assertThat(ShobunShuruiCode.toValue(new RString("03")), is(ShobunShuruiCode._03居宅介護サービス費等の支給));
+        assertThat(ShobunShuruiCode.toValue(new RString("03")), is(ShobunShuruiCode.居宅介護サービス費等の支給));
     }
 
-    @Test
-    public void 引数に04を指定した場合_toValueは_04居宅介護サービス費等の支給を返す() {
-        assertThat(ShobunShuruiCode.toValue(new RString("04")), is(ShobunShuruiCode._04居宅介護サービス費等の支給));
-    }
-
-    @Test
+      @Test
     public void 引数に05を指定した場合_toValueは_給付制限に関する処分を返す() {
-        assertThat(ShobunShuruiCode.toValue(new RString("05")), is(ShobunShuruiCode.給付制限に関する処分));
+        assertThat(ShobunShuruiCode.toValue(new RString("04")), is(ShobunShuruiCode.給付制限に関する処分));
     }
 
     @Test
     public void 引数に06を指定した場合_toValueは_保険料に関する処分を返す() {
-        assertThat(ShobunShuruiCode.toValue(new RString("06")), is(ShobunShuruiCode.保険料に関する処分));
+        assertThat(ShobunShuruiCode.toValue(new RString("05")), is(ShobunShuruiCode.保険料に関する処分));
     }
 
     @Test
     public void 引数に07を指定した場合_toValueは_不正利得に関る徴収金等に係る賦課徴収を返す() {
-        assertThat(ShobunShuruiCode.toValue(new RString("07")), is(ShobunShuruiCode.不正利得に関る徴収金等に係る賦課徴収));
+        assertThat(ShobunShuruiCode.toValue(new RString("06")), is(ShobunShuruiCode.不正利得に関る徴収金等に係る賦課徴収));
     }
 
     @Test
@@ -70,27 +65,22 @@ public class ShobunShuruiCodeTest extends DbzTestBase {
 
     @Test
     public void _03居宅介護サービス費等の支給を指定した場合_getコードは_03を返す() {
-        assertThat(ShobunShuruiCode._03居宅介護サービス費等の支給.getコード(), is(new RString("03")));
-    }
-
-    @Test
-    public void _04居宅介護サービス費等の支給を指定した場合_getコードは_04を返す() {
-        assertThat(ShobunShuruiCode._04居宅介護サービス費等の支給.getコード(), is(new RString("04")));
+        assertThat(ShobunShuruiCode.居宅介護サービス費等の支給.getコード(), is(new RString("03")));
     }
 
     @Test
     public void 給付制限に関する処分を指定した場合_getコードは_05を返す() {
-        assertThat(ShobunShuruiCode.給付制限に関する処分.getコード(), is(new RString("05")));
+        assertThat(ShobunShuruiCode.給付制限に関する処分.getコード(), is(new RString("04")));
     }
 
     @Test
     public void 保険料に関する処分を指定した場合_getコードは_06を返す() {
-        assertThat(ShobunShuruiCode.保険料に関する処分.getコード(), is(new RString("06")));
+        assertThat(ShobunShuruiCode.保険料に関する処分.getコード(), is(new RString("05")));
     }
 
     @Test
     public void 不正利得に関る徴収金等に係る賦課徴収を指定した場合_getコードは_07を返す() {
-        assertThat(ShobunShuruiCode.不正利得に関る徴収金等に係る賦課徴収.getコード(), is(new RString("07")));
+        assertThat(ShobunShuruiCode.不正利得に関る徴収金等に係る賦課徴収.getコード(), is(new RString("06")));
     }
 
     @Test
@@ -105,12 +95,7 @@ public class ShobunShuruiCodeTest extends DbzTestBase {
 
     @Test
     public void _03居宅介護サービス費等の支給を指定した場合_get名称は_居宅介護サービス費等の支給を返す() {
-        assertThat(ShobunShuruiCode._03居宅介護サービス費等の支給.get名称(), is(new RString("居宅介護サービス費等の支給")));
-    }
-
-    @Test
-    public void _04居宅介護サービス費等の支給を指定した場合_get名称は_居宅介護サービス費等の支給を返す() {
-        assertThat(ShobunShuruiCode._04居宅介護サービス費等の支給.get名称(), is(new RString("居宅介護サービス費等の支給")));
+        assertThat(ShobunShuruiCode.居宅介護サービス費等の支給.get名称(), is(new RString("居宅介護サービス費等の支給")));
     }
 
     @Test
