@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd571001;
+package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD571001;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -102,11 +102,11 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * バッチ設計_DBD571001_受給者台帳のprocess処理クラスです。
@@ -287,7 +287,7 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
 //        }
         ExpandedInformation expandedInformations
                 = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), t.get要介護認定情報().get受給者台帳_被保険者番号().getColumnValue());
-        PersonalData personalData = PersonalData.of(t.get要介護認定情報().getPSM_識別コード(), expandedInformations);
+        PersonalData personalData = PersonalData.of(t.get要介護認定情報().getPsm_識別コード(), expandedInformations);
         personalDataList.add(personalData);
     }
 
@@ -444,7 +444,7 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
             要介護認定情報.set訪問限度額(t.get要介護認定情報().get受給者台帳_支給限度単位数());
             要介護認定情報.set訪問開始日(t.get要介護認定情報().get受給者台帳_支給限度有効開始年月日());
             要介護認定情報.set訪問終了日(t.get要介護認定情報().get受給者台帳_支給限度有効終了年月日());
-            要介護認定情報.set短期限度額(new Decimal(t.get要介護認定情報().get受給者台帳_短期入所支給限度日数()));
+            要介護認定情報.set短期限度額(t.get要介護認定情報().get受給者台帳_短期入所支給限度日数());
             要介護認定情報.set短期開始日(t.get要介護認定情報().get受給者台帳_短期入所支給限度開始年月日());
             要介護認定情報.set短期終了日(t.get要介護認定情報().get受給者台帳_短期入所支給限度終了年月日());
             if (導入形態コード.equals(DonyuKeitaiCode.事務構成市町村)
@@ -460,7 +460,7 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
             要介護認定情報.set喪失日(t.get要介護認定情報().get受給者台帳_喪失年月日());
             要介護認定情報.set資格取得前申請(t.get要介護認定情報().is受給者台帳_資格取得前申請フラグ() ? new RString("取得前申請") : RString.EMPTY);
             要介護認定情報.set延期通知書発行日(t.get要介護認定情報().getT4101_延期通知発行年月日());
-            要介護認定情報.set延期通知書発行回数(new RString(String.valueOf(t.get要介護認定情報().getT4101_延期通知発行回数())));
+            要介護認定情報.set延期通知書発行回数(DecimalFormatter.toコンマ区切りRString(t.get要介護認定情報().getT4101_延期通知発行回数(), 0));
             要介護認定情報.set資格証明書発行日１(t.get要介護認定情報().get受給者台帳_受給資格証明書発行年月日１());
             要介護認定情報.set資格証明書発行日２(t.get要介護認定情報().get受給者台帳_受給資格証明書発行年月日２());
             要介護認定情報.set申請代行事業者((t.get要介護認定情報().get受給者台帳_届出者申請者関係コード() == null
@@ -550,7 +550,8 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
                             .toValue(t.get要介護認定情報().getT4003_一次判定結果重み()).get名称()) : RString.EMPTY);
         }
         要介護認定情報.set一次判定日(t.get要介護認定情報().getT4003_一次判定日());
-        要介護認定情報.set特定疾病(TokuteiShippei.toValue(t.get要介護認定情報().getT4003_特定疾病コード()).get名称());
+        要介護認定情報.set特定疾病(t.get要介護認定情報().getT4003_特定疾病コード() != null
+                ? TokuteiShippei.toValue(t.get要介護認定情報().getT4003_特定疾病コード()).get名称() : RString.EMPTY);
         要介護認定情報.set調査委託先コード(t.get要介護認定情報().getT4003_調査委託先コード());
         要介護認定情報.set調査員コード(t.get要介護認定情報().getT4003_調査員コード());
         要介護認定情報.set主治医医療機関コード(t.get要介護認定情報().getT4003_医療機関コード());
@@ -907,14 +908,14 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
             先頭Entity.set証記載保険者名(保険者名称の取得);
         }
         先頭Entity.set被保険者番号(t.get要介護認定情報().get受給者台帳_被保険者番号().value());
-        先頭Entity.set被保険者名(t.get要介護認定情報().getPSM_名称());
-        先頭Entity.set被保険者名カナ(t.get要介護認定情報().getPSM_カナ名称());
-        先頭Entity.set性別(Seibetsu.toValue(t.get要介護認定情報().getPSM_性別コード()).get名称());
-        先頭Entity.set生年月日(t.get要介護認定情報().getPSM_生年月日());
-        先頭Entity.set住所コード(t.get要介護認定情報().getPSM_全国住所コード());
-        先頭Entity.set住所(t.get要介護認定情報().getPSM_住所());
-        先頭Entity.set世帯コード(t.get要介護認定情報().getPSM_世帯コード());
-        先頭Entity.set住民コード(t.get要介護認定情報().getPSM_識別コード().getColumnValue());
+        先頭Entity.set被保険者名(t.get要介護認定情報().getPsm_名称());
+        先頭Entity.set被保険者名カナ(t.get要介護認定情報().getPsm_カナ名称());
+        先頭Entity.set性別(Seibetsu.toValue(t.get要介護認定情報().getPsm_性別コード()).get名称());
+        先頭Entity.set生年月日(t.get要介護認定情報().getPsm_生年月日());
+        先頭Entity.set住所コード(t.get要介護認定情報().getPsm_全国住所コード());
+        先頭Entity.set住所(t.get要介護認定情報().getPsm_住所());
+        先頭Entity.set世帯コード(t.get要介護認定情報().getPsm_世帯コード());
+        先頭Entity.set住民コード(t.get要介護認定情報().getPsm_識別コード().getColumnValue());
         if (t.get要介護認定情報().get受給者台帳_データ区分().substring(0, 1).equals(区分_1)) {
             先頭Entity.set現状態(new RString("職権取消者"));
         } else if (t.get要介護認定情報().get受給者台帳_データ区分().substring(0, 1).equals(区分_2)
@@ -925,21 +926,21 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
         } else if (t.get要介護認定情報().get受給者台帳_データ区分().substring(0, 1).equals(区分_4)) {
             先頭Entity.set現状態(new RString("申請取消者"));
         }
-        先頭Entity.set行政区コード(t.get要介護認定情報().getPSM_行政区コード());
-        先頭Entity.set行政区名称(t.get要介護認定情報().getPSM_行政区名称());
+        先頭Entity.set行政区コード(t.get要介護認定情報().getPsm_行政区コード());
+        先頭Entity.set行政区名称(t.get要介護認定情報().getPsm_行政区名称());
         先頭Entity.set連絡先区分1(new RString("連絡先1"));
-        先頭Entity.set連絡先1(t.get要介護認定情報().getPSM_連絡先1());
+        先頭Entity.set連絡先1(t.get要介護認定情報().getPsm_連絡先1());
         先頭Entity.set連絡先区分2(new RString("連絡先2"));
-        先頭Entity.set連絡先2(t.get要介護認定情報().getPSM_連絡先2());
+        先頭Entity.set連絡先2(t.get要介護認定情報().getPsm_連絡先2());
         先頭Entity.set老健市町村コード(t.get要介護認定情報().getT7005_老人保健市町村コード());
         先頭Entity.set老健市町村名称(t.get要介護認定情報().getT7051_市町村名称());
         先頭Entity.set老健受給者番号(t.get要介護認定情報().getT7005_老人保健受給者番号());
-        先頭Entity.set地区タイトル1(t.get要介護認定情報().getPSM_地区名1());
-        先頭Entity.set地区タイトル2(t.get要介護認定情報().getPSM_地区名2());
-        先頭Entity.set地区タイトル3(t.get要介護認定情報().getPSM_地区名3());
-        先頭Entity.set地区コード1(t.get要介護認定情報().getPSM_地区コード1());
-        先頭Entity.set地区コード2(t.get要介護認定情報().getPSM_地区コード2());
-        先頭Entity.set地区コード3(t.get要介護認定情報().getPSM_地区コード3());
+        先頭Entity.set地区タイトル1(t.get要介護認定情報().getPsm_地区名1());
+        先頭Entity.set地区タイトル2(t.get要介護認定情報().getPsm_地区名2());
+        先頭Entity.set地区タイトル3(t.get要介護認定情報().getPsm_地区名3());
+        先頭Entity.set地区コード1(t.get要介護認定情報().getPsm_地区コード1());
+        先頭Entity.set地区コード2(t.get要介護認定情報().getPsm_地区コード2());
+        先頭Entity.set地区コード3(t.get要介護認定情報().getPsm_地区コード3());
         if (t.get要介護認定情報().getX1008_医療保険種別コード() != null) {
             先頭Entity.set医療種別(CodeMaster.getCodeMeisho(CodeShubetsu.EMPTY, new Code(t.get要介護認定情報().getX1008_医療保険種別コード()), FlexibleDate.getNowDate()));
         }
