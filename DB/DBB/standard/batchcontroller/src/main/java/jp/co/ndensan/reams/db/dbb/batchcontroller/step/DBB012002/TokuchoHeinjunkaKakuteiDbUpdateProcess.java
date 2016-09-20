@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb0120002;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012002;
 
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunkakakutei.TokuchoHeijunkaKakuteiBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012002.DBB012002_TokuchoHeinjunkaKakuteiParameter;
 import jp.co.ndensan.reams.db.dbb.service.core.tokuchoheijunkakakutei.TokuchoHeijunkaKakuteiBatch;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.uz.uza.batch.process.InputParameter;
@@ -34,7 +34,7 @@ public class TokuchoHeinjunkaKakuteiDbUpdateProcess extends SimpleBatchProcessBa
     private final RString 遷移区分_1 = new RString("1");
     private final RString 枝番 = new RString("0001");
 
-    InputParameter<TokuchoHeijunkaKakuteiBatchParameter> parameter;
+    InputParameter<DBB012002_TokuchoHeinjunkaKakuteiParameter> parameter;
 
     @Override
     protected void beforeExecute() {
