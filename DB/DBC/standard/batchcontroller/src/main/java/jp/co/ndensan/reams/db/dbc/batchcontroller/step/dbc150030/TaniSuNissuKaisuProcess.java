@@ -55,11 +55,6 @@ public class TaniSuNissuKaisuProcess
     }
 
     @Override
-    protected void beforeExecute() {
-
-    }
-
-    @Override
     protected void process(TaniSuNissuKaisuEntity entity) {
         DbWT3470chohyouShutsuryokuyouTempEntity tempEntity = new DbWT3470chohyouShutsuryokuyouTempEntity();
         tempEntity.setRenban(履歴番号);
@@ -76,10 +71,6 @@ public class TaniSuNissuKaisuProcess
         tempEntity.setTaniSuSyukeichi(getDecimalVaule(entity.get単位数集計値()));
         帳票出力用一時tableWriter.insert(tempEntity);
         履歴番号 = 履歴番号 + INT_1;
-    }
-
-    @Override
-    protected void afterExecute() {
     }
 
     private Decimal getDecimalVaule(Decimal 値) {
