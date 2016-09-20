@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import java.io.File;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120250.SogojigyohiSeiDoIchiranhyoSakuseiProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120890.SogojigyohiSeikyugakuTsuchishoInReadCsvFileProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120890.SogojigyohiSeikyugakuTsuchishoInReadCsvFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDeleteReveicedFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoInterfaceKanriKousinProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoShoriKekkaListSakuseiProcess;
