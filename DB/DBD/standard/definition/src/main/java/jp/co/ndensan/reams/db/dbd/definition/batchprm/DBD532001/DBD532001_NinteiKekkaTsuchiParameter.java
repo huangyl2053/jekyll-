@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd5320001;
+package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD532001;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd5320001.NinteiKekkaTsutishoProcessParameter;
@@ -26,7 +26,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TsutishoHakkoParameter extends BatchParameterBase {
+public class DBD532001_NinteiKekkaTsuchiParameter extends BatchParameterBase {
 
     @BatchParameter(key = "出力対象リスト", name = "出力対象リスト")
     private List<ShutsuryokuTaishoKubun> 出力対象;

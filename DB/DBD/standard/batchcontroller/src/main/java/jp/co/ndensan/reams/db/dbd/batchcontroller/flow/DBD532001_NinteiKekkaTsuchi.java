@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.dbd5320001;
+package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd5320001.NinteiKekkaTsutishoProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd5320001.ServiceHenkoTsutishoProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd5320001.YokaigoHenkoTsutishoProcess;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd5320001.ShutsuryokuTaishoKubun;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd5320001.TsutishoHakkoParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD532001.ShutsuryokuTaishoKubun;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD532001.DBD532001_NinteiKekkaTsuchiParameter;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
  *
  * @reamsid_L DBD-1430-020 lit
  */
-public class NinteiKekkaTsutishoHakkoFlow extends BatchFlowBase<TsutishoHakkoParameter> {
+public class DBD532001_NinteiKekkaTsuchi extends BatchFlowBase<DBD532001_NinteiKekkaTsuchiParameter> {
 
     private static final String 認定結果通知書発行 = "認定結果通知書発行";
     private static final String サービス変更通知書発行 = "サービス変更通知書発行";

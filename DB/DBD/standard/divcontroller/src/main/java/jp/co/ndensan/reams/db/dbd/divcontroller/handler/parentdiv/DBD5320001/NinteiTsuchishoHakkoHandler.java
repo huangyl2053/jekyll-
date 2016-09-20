@@ -18,8 +18,8 @@ import jp.co.ndensan.reams.db.dbd.business.report.dbd532001.NinteiKekkaTsuchisho
 import jp.co.ndensan.reams.db.dbd.business.report.dbd550001.NinteikyakkaTsuchishoJoho;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd550002.ServiceHenkoTsuchishoJoho;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd550003.YokaigodoHenkoTsuchishoJoho;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd5320001.ShutsuryokuTaishoKubun;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd5320001.TsutishoHakkoParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD532001.ShutsuryokuTaishoKubun;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD532001.DBD532001_NinteiKekkaTsuchiParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.relate.yokaigoninteijoho.YokaigoNinteiTsutishoMybatisParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5320001.NinteiTsuchishoHakkoDiv;
@@ -378,11 +378,11 @@ public class NinteiTsuchishoHakkoHandler {
     /**
      * 「通知書を発行する」一括発行ボタンクリックイベント。
      *
-     * @return バッチ用パラメタ TsutishoHakkoParameter
+     * @return バッチ用パラメタ DBD532001_NinteiKekkaTsuchiParameter
      */
-    public TsutishoHakkoParameter createTsutishoHakkoParameter() {
+    public DBD532001_NinteiKekkaTsuchiParameter createTsutishoHakkoParameter() {
 
-        TsutishoHakkoParameter parameter = new TsutishoHakkoParameter();
+        DBD532001_NinteiKekkaTsuchiParameter parameter = new DBD532001_NinteiKekkaTsuchiParameter();
         List<ShutsuryokuTaishoKubun> 出力対象 = new ArrayList<>();
         if (div.getChkOutPutSelect().getSelectedKeys().contains(RadioValue.認定結果通知書.getKey())) {
             出力対象.add(ShutsuryokuTaishoKubun.認定結果通知書);

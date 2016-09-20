@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD5320001
 import java.io.Serializable;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei.YokaigoNinteiTsutisho;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd5320001.TsutishoHakkoParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD532001.DBD532001_NinteiKekkaTsuchiParameter;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdQuestionMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5320001.DBD5320001StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5320001.DBD5320001TransitionEventName;
@@ -263,8 +263,8 @@ public class NinteiTsuchishoHakko {
      * @param div NinteiTsuchishoHakkoDiv
      * @return ResponseData<NinteiTsuchishoHakkoDiv>
      */
-    public ResponseData<TsutishoHakkoParameter> onClick_btnIkkatsuHakkoUpdate(NinteiTsuchishoHakkoDiv div) {
-        TsutishoHakkoParameter param = getHandler(div).createTsutishoHakkoParameter();
+    public ResponseData<DBD532001_NinteiKekkaTsuchiParameter> onClick_btnIkkatsuHakkoUpdate(NinteiTsuchishoHakkoDiv div) {
+        DBD532001_NinteiKekkaTsuchiParameter param = getHandler(div).createTsutishoHakkoParameter();
         div.getCcdKanryoMessege().setMessage(new RString("更新処理が正常に終了しました。"), RString.EMPTY, RString.EMPTY, true);
         return ResponseData.of(param).forwardWithEventName(DBD5320001TransitionEventName.完了).respond();
     }
