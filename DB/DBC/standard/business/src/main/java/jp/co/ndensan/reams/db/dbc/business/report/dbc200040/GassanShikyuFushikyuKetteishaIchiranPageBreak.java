@@ -40,16 +40,16 @@ public class GassanShikyuFushikyuKetteishaIchiranPageBreak extends PageBreaker<G
             ReportLineRecord<GassanShikyuFushikyuKetteishaIchiranSource> nextSource) {
         boolean flag = false;
         if (!RString.EMPTY.equals(nextSource.getSource().listCerter_2)) {
-            if (this.breakKeysList.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.被保険者番号.getフォームフィールド名())
+            if (this.breakKeysList.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.被保険者番号.get項目ID())
                     && !currentSource.getSource().listCerter_2.equals(nextSource.getSource().listCerter_2)) {
                 flag = true;
-            } else if (this.breakKeysList.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.申請年月日.getフォームフィールド名())
+            } else if (this.breakKeysList.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.申請年月日.get項目ID())
                     && !currentSource.getSource().listUpper_3.equals(nextSource.getSource().listUpper_3)) {
                 flag = true;
-            } else if (this.breakKeysList.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.対象年度.getフォームフィールド名())
+            } else if (this.breakKeysList.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.対象年度.get項目ID())
                     && !currentSource.getSource().listLower_2.equals(nextSource.getSource().listLower_2)) {
                 flag = true;
-            } else if (this.breakKeysList.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.申請書整理番号.getフォームフィールド名())
+            } else if (this.breakKeysList.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.申請書整理番号.get項目ID())
                     && !currentSource.getSource().listUpper_2.equals(nextSource.getSource().listUpper_2)) {
                 flag = true;
             }
@@ -67,16 +67,16 @@ public class GassanShikyuFushikyuKetteishaIchiranPageBreak extends PageBreaker<G
     public boolean is改頁(KogakugassanShikyuKetteitsuchishoEntity currentSource,
             KogakugassanShikyuKetteitsuchishoEntity nextSource) {
         boolean flag = false;
-        if (this.breakKeysList.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.被保険者番号.getフォームフィールド名())
+        if (this.breakKeysList.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.被保険者番号.get項目ID())
                 && !currentSource.getHihokenshaNo().equals(nextSource.getHihokenshaNo())) {
             flag = true;
-        } else if (this.breakKeysList.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.申請年月日.getフォームフィールド名())
+        } else if (this.breakKeysList.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.申請年月日.get項目ID())
                 && !currentSource.getShinseiYMD().equals(nextSource.getShinseiYMD())) {
             flag = true;
-        } else if (this.breakKeysList.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.対象年度.getフォームフィールド名())
+        } else if (this.breakKeysList.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.対象年度.get項目ID())
                 && !currentSource.getTaishoNendo().equals(nextSource.getTaishoNendo())) {
             flag = true;
-        } else if (this.breakKeysList.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.申請書整理番号.getフォームフィールド名())
+        } else if (this.breakKeysList.contains(GassanShikyuFushikyuKetteishaIchiranOutPutOrder.申請書整理番号.get項目ID())
                 && !currentSource.getShikyuSeiriNo().equals(nextSource.getShikyuSeiriNo())) {
             flag = true;
         }
