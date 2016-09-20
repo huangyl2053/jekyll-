@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD4030011;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.shogaishakojotaishoshalist.DBD222010_ShogaishakojoTaishoshaNinteishoIkkatsuHakkoParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD222010.DBD222010_ShogaishakojoTaishoshaNinteishoIkkatsuHakkoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4030011.ShogaishaKoujoTaishoNinteiShoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD4030011.ShogaishaKoujoTaishoNinteiShoHandler;

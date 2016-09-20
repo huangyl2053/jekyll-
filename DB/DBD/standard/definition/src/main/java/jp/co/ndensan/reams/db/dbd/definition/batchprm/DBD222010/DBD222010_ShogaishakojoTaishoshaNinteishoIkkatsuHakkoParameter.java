@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.definition.batchprm.shogaishakojotaishoshalist;
+package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD222010;
 
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd4030011.ShogaishakojoTaishoshaListProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
