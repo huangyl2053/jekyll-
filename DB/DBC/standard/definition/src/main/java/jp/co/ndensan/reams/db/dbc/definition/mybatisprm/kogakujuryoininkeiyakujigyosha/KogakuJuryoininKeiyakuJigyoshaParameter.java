@@ -8,8 +8,9 @@ package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakujuryoininkeiyakuj
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 高額サービス費等受領委任払情報管理のParameterです。
  *
- * @author Administrator
+ * @reamsid_L DBC-1980-010 yuqingzhang
  */
 @lombok.Getter
 @lombok.Setter

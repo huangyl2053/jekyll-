@@ -11,8 +11,9 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 
 /**
+ * 高額サービス費等受領委任払情報管理のValidationMessagesです。
  *
- * @author Administrator
+ * @reamsid_L DBC-1980-010 yuqingzhang
  */
 public enum DvKogakuServiceJuryoIninValidationMessages implements IValidationMessage {
 

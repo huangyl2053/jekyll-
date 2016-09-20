@@ -25,6 +25,8 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
  * 介護事業者代表者のデータアクセスクラスです。
+ *
+ * @reamsid_L DBC-1980-030 yuqingzhang
  */
 public class DbT7062KaigoJigyoshaDaihyoshaDac implements ISaveable<DbT7062KaigoJigyoshaDaihyoshaEntity> {
 

@@ -38,8 +38,9 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 
 /**
+ * 高額サービス費等受領委任払情報管理のHandlerです。
  *
- * @author Administrator
+ * @reamsid_L DBC-1980-010 yuqingzhang
  */
 public class DvKogakuServiceJuryoIninHandler {
 

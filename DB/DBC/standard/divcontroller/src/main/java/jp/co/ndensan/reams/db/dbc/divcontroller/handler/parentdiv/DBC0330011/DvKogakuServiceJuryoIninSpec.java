@@ -10,8 +10,9 @@ import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 高額サービス費等受領委任払情報管理のSpecです。
  *
- * @author Administrator
+ * @reamsid_L DBC-1980-010 yuqingzhang
  */
 public enum DvKogakuServiceJuryoIninSpec implements IPredicate<DvKogakuServiceJuryoIninDiv> {
 

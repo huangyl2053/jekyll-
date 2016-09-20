@@ -16,8 +16,9 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
 /**
+ * 高額受領委任契約事業者情報を取得する 用Finderです。
  *
- * @author Administrator
+ * @reamsid_L DBC-1980-010 yuqingzhang
  */
 public class KogakuJuryoininKeiyakuJigyoshaFinder {
 

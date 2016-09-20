@@ -11,8 +11,9 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 
 /**
+ * 帳票設計_DBCMN32002_介護保険受領委任契約承認（不承認）確認書（利用者向け）のPropertyです。
  *
- * @author Administrator
+ * @reamsid_L DBC-1980-030 yuqingzhang
  */
 public class JyuryoItakuKeiyakuKakuninShoProperty extends
         ReportPropertyBase<JyuryoItakuKeiyakuKakuninShoSource> {
