@@ -208,10 +208,10 @@ public class KogakuGassanShikyuShinseiToroku {
      *
      * @param 高額合算申請書保持 KogakuGassanShinseishoHoji
      * @param 画面項目 KogakuGassanShinseishoDataResult
-     * @return boolean
+     * @return RString
      */
     @Transaction
-    public boolean getKogakuGassanShikyuShinseishoTorokuKoshin(
+    public RString getKogakuGassanShikyuShinseishoTorokuKoshin(
             KogakuGassanShinseishoHoji 高額合算申請書保持, KogakuGassanShinseishoDataResult 画面項目) {
         RString 整理番号New = Saiban.get(SubGyomuCode.DBC介護給付,
                 SaibanHanyokeyName.支給申請書整理番号.getコード(), 高額合算申請書保持.get対象年度() == null
@@ -262,7 +262,7 @@ public class KogakuGassanShikyuShinseiToroku {
                 }
             }
         }
-        return true;
+        return 整理番号New;
     }
 
     /**
@@ -303,8 +303,7 @@ public class KogakuGassanShikyuShinseiToroku {
 
     private void set支給申請書整理番号(RString 支給申請書整理番号, DbT3068KogakuGassanShinseishoEntity entity, RString 整理番号New) {
         if (!支給申請書整理番号.isNullOrEmpty()) {
-            entity.setShikyuShinseishoSeiriNo(
-                    支給申請書整理番号.substring(INT_0, 支給申請書整理番号.length() - INT_6).concat(整理番号New));
+            entity.setShikyuShinseishoSeiriNo(支給申請書整理番号.concat(整理番号New));
         }
     }
 
