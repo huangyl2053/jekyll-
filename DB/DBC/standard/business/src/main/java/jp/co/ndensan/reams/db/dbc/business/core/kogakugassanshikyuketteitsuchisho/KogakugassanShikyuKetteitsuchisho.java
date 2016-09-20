@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteitsuchisho;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikan;
+import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikanShiten;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.YokinShubetsuPattern;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
@@ -98,8 +100,8 @@ public class KogakugassanShikyuKetteitsuchisho {
     private FlexibleDate 支払期間終了年月日;
     private RString 支払期間開始時間;
     private RString 支払期間終了時間;
-    private RString 金融機関名称;
-    private RString 支店名称;
+    private KinyuKikan 金融機関名称;
+    private KinyuKikanShiten 支店名称;
     private KinyuKikanCode 金融機関コード;
     private KinyuKikanShitenCode 支店コード;
     private YokinShubetsuPattern 預金種別;

@@ -7,7 +7,8 @@ package jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteitsuchis
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.YokinShubetsuPattern;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.ur.urz.business.core.jusho.IJusho;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.IName;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -39,8 +40,8 @@ public class KogakugassanShikyuKetteiTsuchiIchiran {
     private RString 改頁5;
     private int 帳票通番;
     private HihokenshaNo 被保険者番号;
-    private RString 被保険者氏名;
-    private AtenaJusho 住所;
+    private IName 被保険者氏名;
+    private IJusho 住所;
     private RString 支給申請整理番号;
     private FlexibleYear 対象年度;
     private int 履歴番号;

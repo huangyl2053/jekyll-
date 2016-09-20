@@ -6,8 +6,11 @@
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710070;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc710070.HanyoListKyodoJukyushaShokanProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -68,4 +71,38 @@ public class DBC710070_HanyoListKyodoJukyushaShokanParameter extends BatchParame
     @BatchParameter(key = SAKUJYOMERU, name = "削除含める")
     private boolean sakujyoMeru;
 
+    /**
+     * toProcessParameterのメソッドです。
+     *
+     * @return 汎用リスト_共同処理用受給者情報（償還）用ProcessParameter HanyoListKyodoJukyushaShokanProcessParameter
+     */
+    public HanyoListKyodoJukyushaShokanProcessParameter toProcessParameter() {
+        LasdecCode 保険者コード = null;
+        FlexibleYearMonth 処理対象年月From = null;
+        FlexibleYearMonth 処理対象年月To = null;
+        FlexibleYearMonth 異動年月From = null;
+        FlexibleYearMonth 異動年月To = null;
+        RString 帳票ID = RString.EMPTY;
+        if (!RString.isNullOrEmpty(shoriTaishoNengetsuFrom)) {
+            処理対象年月From = new FlexibleYearMonth(shoriTaishoNengetsuFrom);
+        }
+        if (!RString.isNullOrEmpty(shoriTaishoNengetsuTo)) {
+            処理対象年月To = new FlexibleYearMonth(shoriTaishoNengetsuTo);
+        }
+        if (!RString.isNullOrEmpty(idoNengetsuFrom)) {
+            異動年月From = new FlexibleYearMonth(idoNengetsuFrom);
+        }
+        if (!RString.isNullOrEmpty(idoNengetsuTo)) {
+            異動年月To = new FlexibleYearMonth(idoNengetsuTo);
+        }
+        if (!RString.isNullOrEmpty(hokenshaKodo)) {
+            保険者コード = new LasdecCode(hokenshaKodo);
+        }
+        if (shutsuryokujunId != null) {
+            帳票ID = new RString(shutsuryokujunId);
+        }
+        return new HanyoListKyodoJukyushaShokanProcessParameter(
+                chohyoId, 帳票ID, shutsuryokukomokuId, komokumeFuka, renbanFuka, hitsukeHenshu, 保険者コード, hitsukeChushutsuKubun,
+                処理対象年月From, 処理対象年月To, 異動年月From, 異動年月To, kakuidozukinoSaishinNomi, idoKubun, sakujyoMeru);
+    }
 }

@@ -62,6 +62,13 @@ public interface INinteiShinseiTodokedeshaDiv extends ICommonChildDivBasePropert
     public void setTxtJigyoshaCode(TextBox txtJigyoshaCode);
 
     /**
+     * 事業者を取得。
+     *
+     * @return TextBox
+     */
+    public TextBox getTxtJigyoshaCode();
+
+    /**
      * 申請関係者を取得。
      *
      * @return DropDownList
@@ -83,6 +90,13 @@ public interface INinteiShinseiTodokedeshaDiv extends ICommonChildDivBasePropert
     public void setTxtShimei(TextBox txtShimei);
 
     /**
+     * 氏名を取得。
+     *
+     * @return TextBox
+     */
+    public TextBox getTxtShimei();
+
+    /**
      * カナ氏名を設定。
      *
      * @param txtKanaShimei TextBox
@@ -90,11 +104,25 @@ public interface INinteiShinseiTodokedeshaDiv extends ICommonChildDivBasePropert
     public void setTxtKanaShimei(TextBox txtKanaShimei);
 
     /**
+     * カナ氏名を取得。
+     *
+     * @return TextBox
+     */
+    public TextBox getTxtKanaShimei();
+
+    /**
      * 本人との関係性を設定。
      *
      * @param txtHonninKankeisei TextBox
      */
     public void setTxtHonninKankeisei(TextBox txtHonninKankeisei);
+
+    /**
+     * 本人との関係性を取得。
+     *
+     * @return TextBox
+     */
+    public TextBox getTxtHonninKankeisei();
 
     /**
      * 管内管外区分を取得。
@@ -111,11 +139,25 @@ public interface INinteiShinseiTodokedeshaDiv extends ICommonChildDivBasePropert
     public void setTxtTelNo(TextBoxTelNo txtTelNo);
 
     /**
+     * 電話番号を取得。
+     *
+     * @return TextBoxTelNo
+     */
+    public TextBoxTelNo getTxtTelNo();
+
+    /**
      * 郵便番号を設定。
      *
      * @param txtYubinNo TextBoxYubinNo
      */
     public void setTxtYubinNo(TextBoxYubinNo txtYubinNo);
+
+    /**
+     * 郵便番号を設定。
+     *
+     * @return TextBoxYubinNo
+     */
+    public TextBoxYubinNo getTxtYubinNo();
 
     /**
      * IChoikiInputDivを取得。

@@ -12,12 +12,14 @@ import jp.co.ndensan.reams.db.dbb.business.core.basic.KeisangoJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.ShikakuKikan;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.ShikakuKikanJoho;
 import jp.co.ndensan.reams.db.dbb.business.report.honsanteikekkaicihiran.HonsanteiKekkaIcihiranProperty;
+import jp.co.ndensan.reams.db.dbb.business.report.honsanteikekkaicihiran.HonsanteiKekkaIcihiranReport;
 import jp.co.ndensan.reams.db.dbb.definition.core.honnsanteifuka.HonsenteiKeisangojohoParameter;
+import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.HonsenteiKeisangojohoEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.KeisangojohoAtenaKozaEntity;
+import jp.co.ndensan.reams.db.dbb.entity.report.honsanteikekkaicihiran.HonsanteiKekkaIcihiranReportSource;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.honnsanteifuka.IHonnSanteiFukaMapper;
 import jp.co.ndensan.reams.db.dbb.service.core.MapperProvider;
-import jp.co.ndensan.reams.db.dbb.service.report.honsanteikekkaicihiran.HonsanteiKekkaIcihiranPrintService;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.FuchoKiUtil;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.Kitsuki;
 import jp.co.ndensan.reams.db.dbx.business.core.kanri.KitsukiList;
@@ -33,7 +35,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.KozaYotoKubunType;
 import jp.co.ndensan.reams.ua.uax.definition.core.valueobject.code.KozaYotoKubunCodeValue;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
-import jp.co.ndensan.reams.ua.uax.entity.db.relate.KozaRelateEntity;
+import jp.co.ndensan.reams.ua.uax.entity.db.relate.TokuteiKozaRelateEntity;
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -42,6 +44,7 @@ import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderBy
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
@@ -71,7 +74,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
+import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.Report;
+import jp.co.ndensan.reams.uz.uza.report.ReportAssembler;
+import jp.co.ndensan.reams.uz.uza.report.ReportAssemblerBuilder;
+import jp.co.ndensan.reams.uz.uza.report.ReportManager;
+import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
+import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
@@ -246,13 +257,33 @@ public class HonnSanteiFukaFath {
                 .createSelectByKeyParam(調定年度, 賦課年度, 調定日時, 出力順, kozaSearchKey, list);
         List<HonsenteiKeisangojohoEntity> 本算定計算後賦課情報リスト = mapper.select本算定計算後賦課情報(param);
         List<KeisangojohoAtenaKozaEntity> 計算後情報_宛名_口座List = new ArrayList<>();
+        SourceDataCollection sourceDataCollection = null;
+
+        IAssociationFinder finder = AssociationFinderFactory.createInstance();
+        Association association = finder.getAssociation();
+        RString 市町村コード = association.get地方公共団体コード().value();
+        RString 市町村名 = association.get市町村名();
+        HonsanteiKekkaIcihiranProperty property = new HonsanteiKekkaIcihiranProperty(outputOrder);
+        List<RString> 出力順項目リスト = get出力順(出力順ID);
+        List<RString> 改頁項目リスト = get改頁項目(出力順ID);
+        ChohyoSeigyoKyotsu 帳票制御共通 = load帳票制御共通(帳票ID);
+        int 出力ページ数 = 0;
         for (HonsenteiKeisangojohoEntity entity : 本算定計算後賦課情報リスト) {
             KeisangoJoho keisangoJoho = new KeisangoJoho(entity.get計算後情報());
             KeisangojohoAtenaKozaEntity 計算後情報_宛名_口座Entity = setKeisangojohoAtenaKozaEntity(keisangoJoho, entity);
+            IKojin 宛名情報 = ShikibetsuTaishoFactory.createKojin(計算後情報_宛名_口座Entity.get宛名Entity());
+            RString 住所編集 = JushoHenshu.editJusho(帳票制御共通, 宛名情報, AssociationFinderFactory.createInstance().getAssociation());
+            try (ReportManager reportManager = new ReportManager()) {
+                try (ReportAssembler<HonsanteiKekkaIcihiranReportSource> assembler = createAssembler(property, reportManager)) {
+                    ReportSourceWriter<HonsanteiKekkaIcihiranReportSource> reportSourceWriter = new ReportSourceWriter(assembler);
+                    new HonsanteiKekkaIcihiranReport(
+                            計算後情報_宛名_口座Entity, 賦課年度, 調定日時,
+                            市町村コード, 市町村名, 住所編集, 出力順項目リスト, 改頁項目リスト).writeBy(reportSourceWriter);
+                    出力ページ数 = reportSourceWriter.getPageGroupCount();
+                }
+            }
             計算後情報_宛名_口座List.add(計算後情報_宛名_口座Entity);
         }
-        SourceDataCollection sourceDataCollection = new HonsanteiKekkaIcihiranPrintService().printHonsanteiKekkaIcihira(
-                計算後情報_宛名_口座List, 賦課年度, 調定日時, 出力順ID);
         publish本算定結果一覧表(調定日時, 賦課年度, 計算後情報_宛名_口座List);
         List<RString> 出力条件リスト = new ArrayList<>();
         RStringBuilder builder = new RStringBuilder();
@@ -276,8 +307,7 @@ public class HonnSanteiFukaFath {
             }
         }
         出力条件リスト.add(builder.toRString());
-        RString 出力ページ数 = new RString(sourceDataCollection.iterator().next().getPageCount());
-        loadバッチ出力条件リスト(出力条件リスト, 出力ページ数, CSV出力有無_有り, CSVファイル名_一覧表);
+        loadバッチ出力条件リスト(出力条件リスト, new RString(String.valueOf(出力ページ数)), CSV出力有無_有り, CSVファイル名_一覧表);
     }
 
     private void loadバッチ出力条件リスト(List<RString> 出力条件リスト, RString 出力ページ数,
@@ -299,6 +329,43 @@ public class HonnSanteiFukaFath {
                 出力条件リスト);
         IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);
         printer.print();
+    }
+
+    private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(
+            IReportProperty<T> property, ReportManager manager) {
+        ReportAssemblerBuilder builder = manager.reportAssembler(property.reportId().value(), property.subGyomuCode());
+        for (BreakAggregator<? super T, ?> breaker : property.breakers()) {
+            builder.addBreak(breaker);
+        }
+        builder.isHojinNo(property.containsHojinNo());
+        builder.isKojinNo(property.containsKojinNo());
+        return builder.<T>create();
+    }
+
+    private List<RString> get出力順(Long 出力順ID) {
+        IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
+                .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200009.getReportId(), 出力順ID);
+        List<RString> 並び順List = new ArrayList<>();
+        if (並び順 != null) {
+            for (ISetSortItem item : 並び順.get設定項目リスト()) {
+                並び順List.add(item.get項目名());
+            }
+        }
+        return 並び順List;
+    }
+
+    private List<RString> get改頁項目(Long 出力順ID) {
+        IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
+                .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200009.getReportId(), 出力順ID);
+        List<RString> 改頁項目List = new ArrayList<>();
+        if (並び順 != null) {
+            for (ISetSortItem item : 並び順.get設定項目リスト()) {
+                if (item.is改頁項目()) {
+                    改頁項目List.add(item.get項目名());
+                }
+            }
+        }
+        return 改頁項目List;
     }
 
     /**
@@ -564,7 +631,14 @@ public class HonnSanteiFukaFath {
         }
     }
 
-    private ChohyoSeigyoKyotsu load帳票制御共通(ReportId 帳票分類Id) throws NullPointerException {
+    /**
+     * 帳票制御共通を取得のメソッドです。
+     *
+     * @param 帳票分類Id ReportId
+     * @return ChohyoSeigyoKyotsu
+     * @throws NullPointerException NullPointerException
+     */
+    public ChohyoSeigyoKyotsu load帳票制御共通(ReportId 帳票分類Id) throws NullPointerException {
         requireNonNull(帳票分類Id, UrSystemErrorMessages.値がnull.getReplacedMessage(帳票分類Id.toString()));
 
         DbT7065ChohyoSeigyoKyotsuEntity entity = 帳票制御共通Dac.selectByKey(SubGyomuCode.DBB介護賦課, 帳票分類Id);
@@ -779,12 +853,12 @@ public class HonnSanteiFukaFath {
         atenaKozaEntity.set普徴収入額13(keisangoJoho.get普徴収入額13());
         atenaKozaEntity.set普徴収入額14(keisangoJoho.get普徴収入額14());
         atenaKozaEntity.set宛名Entity(entity.get宛名());
-        atenaKozaEntity.set口座Entity(entity.get口座());
+        atenaKozaEntity.set口座Entity(entity.get特定口座());
         return atenaKozaEntity;
     }
 
     private RString kozaJoho(KeisangojohoAtenaKozaEntity entity) {
-        KozaRelateEntity releteEntity = entity.get口座Entity();
+        TokuteiKozaRelateEntity releteEntity = entity.get口座Entity();
         IKoza koza = new Koza(releteEntity);
         RString 口座情報 = RString.EMPTY;
         if (koza.get金融機関コード() != null) {
@@ -827,9 +901,9 @@ public class HonnSanteiFukaFath {
 
     private RString 金融機関コードHander2(IKoza koza) {
         RString 金融機関コード;
-        RString 預金種別略称;
         RString 支店コード;
         RString 口座番号;
+        RString 預金種別略称 = RString.EMPTY;
         RString 口座情報 = RString.EMPTY;
         if (koza.get支店コード() != null && koza.get口座番号() != null && koza.get口座名義人漢字() != null) {
             if (koza.get金融機関コード().value().length() >= NUM_4) {
@@ -842,9 +916,10 @@ public class HonnSanteiFukaFath {
             } else {
                 支店コード = koza.get支店コード().value();
             }
-            if (koza.get預金種別() != null && koza.get預金種別().get預金種別略称().length() >= NUM_2) {
+            if (koza.get預金種別() != null && koza.get預金種別().get預金種別略称() != null
+                    && koza.get預金種別().get預金種別略称().length() >= NUM_2) {
                 預金種別略称 = koza.get預金種別().get預金種別略称().substring(NUM_0, NUM_2);
-            } else {
+            } else if (koza.get預金種別() != null && koza.get預金種別().get預金種別略称() != null) {
                 預金種別略称 = koza.get預金種別().get預金種別略称();
             }
             if (koza.get口座番号().length() >= NUM_7) {

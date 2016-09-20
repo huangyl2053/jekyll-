@@ -192,7 +192,7 @@ public class FutanWariaisho {
      * @return RString
      */
     private HokenshaNo getHokenshaCode(HihokenshaNo 被保険者番号) {
-        HokenshaNo 証記載保険者番号;
+        HokenshaNo 証記載保険者番号 = null;
         if (被保険者番号 == null) {
             throw new NullPointerException();
         }
@@ -208,10 +208,16 @@ public class FutanWariaisho {
             } else {
                 shichoson = finder.shichosonCodeYoriShichosonJoho(entity.getKoikinaiTokureiSochimotoShichosonCode());
             }
-            証記載保険者番号 = new HokenshaNo(shichoson.records().get(ZERO_INDEX).get証記載保険者番号().value());
+            if (shichoson != null && shichoson.records() != null && shichoson.records().size() > ZERO_INDEX
+                    && shichoson.records().get(ZERO_INDEX).get証記載保険者番号() != null) {
+                証記載保険者番号 = new HokenshaNo(shichoson.records().get(ZERO_INDEX).get証記載保険者番号().value());
+            }
         } else {
             SearchResult<KoikiZenShichosonJoho> shichosonjoho = finder.koseiShichosonJoho();
-            証記載保険者番号 = new HokenshaNo(shichosonjoho.records().get(ZERO_INDEX).get証記載保険者番号().value());
+            if (shichosonjoho != null && shichosonjoho.records() != null && shichosonjoho.records().size() > ZERO_INDEX
+                    && shichosonjoho.records().get(ZERO_INDEX).get証記載保険者番号() != null) {
+                証記載保険者番号 = new HokenshaNo(shichosonjoho.records().get(ZERO_INDEX).get証記載保険者番号().value());
+            }
         }
         return 証記載保険者番号;
     }

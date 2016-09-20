@@ -25,8 +25,6 @@ public class SearchToKyufujissekiPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdJigyoshaSentaku")
-    private ShisetsuJohoCommonChildDivDiv ccdJigyoshaSentaku;
     @JsonProperty("txtHihoNo")
     private TextBox txtHihoNo;
     @JsonProperty("btnSearchHihokensha")
@@ -39,6 +37,8 @@ public class SearchToKyufujissekiPanelDiv extends Panel {
     private Button btnSearch;
     @JsonProperty("MoshitateshoSakuseiZumi")
     private CheckBoxList MoshitateshoSakuseiZumi;
+    @JsonProperty("ccdJigyoshaSentaku")
+    private ShisetsuJohoCommonChildDivDiv ccdJigyoshaSentaku;
     @JsonProperty("Hokenshalist")
     private HokenshaListDiv Hokenshalist;
 
@@ -48,15 +48,6 @@ public class SearchToKyufujissekiPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getccdJigyoshaSentaku
-     * @return ccdJigyoshaSentaku
-     */
-    @JsonProperty("ccdJigyoshaSentaku")
-    public IShisetsuJohoCommonChildDiv getCcdJigyoshaSentaku() {
-        return ccdJigyoshaSentaku;
-    }
-
     /*
      * gettxtHihoNo
      * @return txtHihoNo
@@ -163,6 +154,15 @@ public class SearchToKyufujissekiPanelDiv extends Panel {
     @JsonProperty("MoshitateshoSakuseiZumi")
     public void setMoshitateshoSakuseiZumi(CheckBoxList MoshitateshoSakuseiZumi) {
         this.MoshitateshoSakuseiZumi = MoshitateshoSakuseiZumi;
+    }
+
+    /*
+     * getccdJigyoshaSentaku
+     * @return ccdJigyoshaSentaku
+     */
+    @JsonProperty("ccdJigyoshaSentaku")
+    public IShisetsuJohoCommonChildDiv getCcdJigyoshaSentaku() {
+        return ccdJigyoshaSentaku;
     }
 
     /*

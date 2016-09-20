@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbc.business.core.hanyolistkogakugassanshikyugakukettei.HanyoListKogakuGassanShikyugakuKetteiOutPutOrder;
 import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistkogakugassanshikyugakukettei.HanyoListKogakuGassanShikyugakuKetteiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.hanyolistkogakugassanshikyugakukettei.HanyoListKogakuGassanShikyugakuKetteiCSVEntity;
@@ -38,15 +39,17 @@ import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ua.uax.entity.db.relate.KozaRelateEntity;
 import jp.co.ndensan.reams.ua.uax.service.core.maskedkoza.MaskedKozaCreator;
 import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
-import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
@@ -58,7 +61,7 @@ import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
-import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvListWriter;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -98,14 +101,11 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC701017");
     private HanyoListKogakuGassanShikyugakuKetteiProcessParameter parameter;
     private RString hanyoListKogakuFilePath;
-    @BatchWriter
-    private CsvWriter<HanyoListKogakuGassanShikyugakuKetteiCSVEntity> hanyoListKogakuCSVWriter;
+    private CsvListWriter csvListWriter;
     private static final RString コンマ = new RString(",");
     private static final RString 出力ファイル名
             = new RString("HanyoList_KogakuGassanShikyugakuKettei.csv");
     private static final RString ダブル引用符 = new RString("\"");
-    // TODO
-    // private IOutputOrder 並び順;
     private Decimal 連番;
     private final int 定値INT_0 = 0;
     private final int 定値INT_10 = 10;
@@ -157,10 +157,122 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
     private static final RString 右記号 = new RString(")");
     private static final RString 斜線 = new RString("/");
     private static final RString 年度作成 = new RString("年度");
+    private static final RString HEAD_連番 = new RString("連番");
+    private static final RString HEAD_識別コード = new RString("識別コード");
+    private static final RString HEAD_住民種別 = new RString("住民種別");
+    private static final RString HEAD_氏名 = new RString("氏名");
+    private static final RString HEAD_氏名カナ = new RString("氏名カナ");
+    private static final RString HEAD_生年月日 = new RString("生年月日");
+    private static final RString HEAD_年齢 = new RString("年齢");
+    private static final RString HEAD_性別 = new RString("性別");
+    private static final RString HEAD_続柄コード = new RString("続柄コード");
+    private static final RString HEAD_世帯コード = new RString("世帯コード");
+    private static final RString HEAD_世帯主名 = new RString("世帯主名");
+    private static final RString HEAD_住所コード = new RString("住所コード");
+    private static final RString HEAD_郵便番号 = new RString("郵便番号");
+    private static final RString HEAD_住所番地方書 = new RString("住所番地方書");
+    private static final RString HEAD_住所 = new RString("住所");
+    private static final RString HEAD_番地 = new RString("番地");
+    private static final RString HEAD_方書 = new RString("方書");
+    private static final RString HEAD_行政区コード = new RString("行政区コード");
+    private static final RString HEAD_行政区名 = new RString("行政区名");
+    private static final RString HEAD_地区１ = new RString("地区１");
+    private static final RString HEAD_地区２ = new RString("地区２");
+    private static final RString HEAD_地区３ = new RString("地区３");
+    private static final RString HEAD_連絡先１ = new RString("連絡先１");
+    private static final RString HEAD_連絡先２ = new RString("連絡先２");
+    private static final RString HEAD_登録異動日 = new RString("登録異動日");
+    private static final RString HEAD_登録事由 = new RString("登録事由");
+    private static final RString HEAD_登録届出日 = new RString("登録届出日");
+    private static final RString HEAD_住定異動日 = new RString("住定異動日");
+    private static final RString HEAD_住定事由 = new RString("住定事由");
+    private static final RString HEAD_住定届出日 = new RString("住定届出日");
+    private static final RString HEAD_消除異動日 = new RString("消除異動日");
+    private static final RString HEAD_消除事由 = new RString("消除事由");
+    private static final RString HEAD_消除届出日 = new RString("消除届出日");
+    private static final RString HEAD_転出入理由 = new RString("転出入理由");
+    private static final RString HEAD_前住所郵便番号 = new RString("前住所郵便番号");
+    private static final RString HEAD_前住所番地方書 = new RString("前住所番地方書");
+    private static final RString HEAD_前住所 = new RString("前住所");
+    private static final RString HEAD_前住所番地 = new RString("前住所番地");
+    private static final RString HEAD_前住所方書 = new RString("前住所方書");
+    private static final RString HEAD_市町村コード = new RString("市町村コード");
+    private static final RString HEAD_市町村名 = new RString("市町村名");
+    private static final RString HEAD_保険者コード = new RString("保険者コード");
+    private static final RString HEAD_保険者名 = new RString("保険者名");
+    private static final RString HEAD_空白 = new RString("空白");
+    private static final RString HEAD_送付先氏名 = new RString("送付先氏名");
+    private static final RString HEAD_送付先氏名カナ = new RString("送付先氏名カナ");
+    private static final RString HEAD_送付先住所コード = new RString("送付先住所コード");
+    private static final RString HEAD_送付先郵便番号 = new RString("送付先郵便番号");
+    private static final RString HEAD_送付先住所番地方書 = new RString("送付先住所番地方書");
+    private static final RString HEAD_送付先住所 = new RString("送付先住所");
+    private static final RString HEAD_送付先番地 = new RString("送付先番地");
+    private static final RString HEAD_送付先方書 = new RString("送付先方書");
+    private static final RString HEAD_送付先行政区コード = new RString("送付先行政区コード");
+    private static final RString HEAD_送付先行政区名 = new RString("送付先行政区名");
+    private static final RString HEAD_被保険者番号 = new RString("被保険者番号");
+    private static final RString HEAD_資格取得事由 = new RString("資格取得事由");
+    private static final RString HEAD_資格取得日 = new RString("資格取得日");
+    private static final RString HEAD_資格取得届出日 = new RString("資格取得届出日");
+    private static final RString HEAD_喪失事由 = new RString("喪失事由");
+    private static final RString HEAD_資格喪失日 = new RString("資格喪失日");
+    private static final RString HEAD_資格喪失届出日 = new RString("資格喪失届出日");
+    private static final RString HEAD_資格区分 = new RString("資格区分");
+    private static final RString HEAD_住所地特例状態 = new RString("住所地特例状態");
+    private static final RString HEAD_受給申請事由 = new RString("受給申請事由");
+    private static final RString HEAD_受給申請日 = new RString("受給申請日");
+    private static final RString HEAD_受給要介護度 = new RString("受給要介護度");
+    private static final RString HEAD_受給認定開始日 = new RString("受給認定開始日");
+    private static final RString HEAD_受給認定終了日 = new RString("受給認定終了日");
+    private static final RString HEAD_受給認定日 = new RString("受給認定日");
+    private static final RString HEAD_受給旧措置 = new RString("受給旧措置");
+    private static final RString HEAD_受給みなし更新認定 = new RString("受給みなし更新認定");
+    private static final RString HEAD_受給直近事由 = new RString("受給直近事由");
+    private static final RString HEAD_対象年度 = new RString("対象年度");
+    private static final RString HEAD_保険者番号 = new RString("保険者番号");
+    private static final RString HEAD_連絡票整理番号 = new RString("連絡票整理番号");
+    private static final RString HEAD_履歴番号 = new RString("履歴番号");
+    private static final RString HEAD_自己負担額証明書整理番号 = new RString("自己負担額証明書整理番号");
+    private static final RString HEAD_対象計算期間開始 = new RString("対象計算期間（開始）");
+    private static final RString HEAD_対象計算期間終了 = new RString("対象計算期間（終了）");
+    private static final RString HEAD_申請年月日 = new RString("申請年月日");
+    private static final RString HEAD_決定年月日 = new RString("決定年月日");
+    private static final RString HEAD_自己負担総額 = new RString("自己負担総額");
+    private static final RString HEAD_支給区分コード = new RString("支給区分コード");
+    private static final RString HEAD_支給額 = new RString("支給額");
+    private static final RString HEAD_給付の種類 = new RString("給付の種類");
+    private static final RString HEAD_不支給理由 = new RString("不支給理由");
+    private static final RString HEAD_支払方法区分 = new RString("支払方法区分");
+    private static final RString HEAD_支払場所 = new RString("支払場所");
+    private static final RString HEAD_支払期間開始年月日 = new RString("支払期間開始年月日");
+    private static final RString HEAD_支払期間終了年月日 = new RString("支払期間終了年月日");
+    private static final RString HEAD_支払期間開始年月日曜日 = new RString("支払期間開始年月日(曜日)");
+    private static final RString HEAD_支払期間終了年月日曜日 = new RString("支払期間終了年月日(曜日)");
+    private static final RString HEAD_支払期間開始年月日時間 = new RString("支払期間開始年月日(時間)");
+    private static final RString HEAD_支払期間終了年月日時間 = new RString("支払期間終了年月日(時間)");
+    private static final RString HEAD_金融機関コード = new RString("金融機関コード");
+    private static final RString HEAD_金融機関名 = new RString("金融機関名");
+    private static final RString HEAD_金融機関支店コード = new RString("金融機関支店コード");
+    private static final RString HEAD_金融機関支店名 = new RString("金融機関支店名");
+    private static final RString HEAD_口座種目名 = new RString("口座種目名");
+    private static final RString HEAD_口座番号 = new RString("口座番号");
+    private static final RString HEAD_口座名義人カナ = new RString("口座名義人（カナ）");
+    private static final RString HEAD_決定通知書作成年月日 = new RString("決定通知書作成年月日");
+    private static final RString HEAD_振込通知書作成年月日 = new RString("振込通知書作成年月日");
+    private static final RString HEAD_受取年月 = new RString("受取年月");
+    private static final RString HEAD_給付の種類短 = new RString("給付の種類(短)");
+    private static final RString HEAD_不支給理由短 = new RString("不支給理由(短)");
+    private static final RString HEAD_支払場所短 = new RString("支払場所(短)");
+    private static final RString ORDER_BY = new RString("ORDER BY ");
+    private static final RString 出力順_被保険者番号 = new RString("\"dbT3074KogakuGassanShikyuFushikyuKettei_hihokenshaNo\" ASC, ");
+    private static final RString 出力順_対象年度 = new RString("\"dbT3074KogakuGassanShikyuFushikyuKettei_taishoNendo\" ASC, ");
+    private static final RString 出力順_保険者番号 = new RString("\"dbT3074KogakuGassanShikyuFushikyuKettei_hokenshaNo\" ASC, ");
+    private static final RString 出力順_支給申請書整理番号 = new RString("\"dbT3074KogakuGassanShikyuFushikyuKettei_shikyuSeiriNo\" ASC, ");
+    private static final RString 出力順_履歴番号 = new RString("\"dbT3074KogakuGassanShikyuFushikyuKettei_rirekiNo\" ASC");
 
     @Override
     protected void initialize() {
-        super.initialize();
         出力有無 = なし;
         連番 = Decimal.ZERO;
         システム日付 = FlexibleDate.getNowDate();
@@ -189,6 +301,7 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
         ShunoKamokuAuthority sut = InstanceProvider.create(ShunoKamokuAuthority.class);
         List<KamokuCode> list = sut.get更新権限科目コード(parameter.getReamsLoginId());
         parameter.setList(list);
+        parameter.set出力順(get出力順());
         return new BatchDbReader(READ_DATA_ID, parameter.toMybatisParam());
     }
 
@@ -196,19 +309,15 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
     protected void createWriter() {
         hanyoListKogakuFilePath = Path.combinePath(manager.getEucOutputDirectry(),
                 出力ファイル名);
-        hanyoListKogakuCSVWriter = BatchWriters.csvWriter(HanyoListKogakuGassanShikyugakuKetteiCSVEntity.class).
-                filePath(hanyoListKogakuFilePath).
-                setDelimiter(コンマ).
-                setEnclosure(ダブル引用符).
-                setEncode(Encode.UTF_8withBOM).
-                setNewLine(NewLine.CRLF).
-                hasHeader(parameter.is項目名付加()).
-                build();
-    }
-
-    @Override
-    protected void beforeExecute() {
-
+        csvListWriter = new CsvListWriter.InstanceBuilder(hanyoListKogakuFilePath).setNewLine(NewLine.CRLF)
+                .setDelimiter(コンマ)
+                .setEnclosure(ダブル引用符)
+                .setEncode(Encode.UTF_8withBOM)
+                .hasHeader(false)
+                .build();
+        if (parameter.is項目名付加()) {
+            csvListWriter.writeLine(getHeader());
+        }
     }
 
     @Override
@@ -217,13 +326,123 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
         連番 = 連番.add(Decimal.ONE);
         HanyoListKogakuGassanShikyugakuKetteiCSVEntity output;
         output = get帳票のCSVファイル作成(entity);
-        hanyoListKogakuCSVWriter.writeLine(output);
+        List<RString> rList = new ArrayList<>();
+        if (parameter.is連番付加()) {
+            rList.add(output.get連番());
+        }
+        rList.add(getRStringVaule(output.get識別コード()));
+        rList.add(getRStringVaule(output.get住民種別()));
+        rList.add(getRStringVaule(output.get氏名()));
+        rList.add(getRStringVaule(output.get氏名カナ()));
+        rList.add(getRStringVaule(output.get生年月日()));
+        rList.add(getRStringVaule(output.get年齢()));
+        rList.add(getRStringVaule(output.get性別()));
+        rList.add(getRStringVaule(output.get続柄コード()));
+        rList.add(getRStringVaule(output.get世帯コード()));
+        rList.add(getRStringVaule(output.get世帯主名()));
+        rList.add(getRStringVaule(output.get住所コード()));
+        rList.add(getRStringVaule(output.get郵便番号()));
+        rList.add(getRStringVaule(output.get住所番地方書()));
+        rList.add(getRStringVaule(output.get住所()));
+        rList.add(getRStringVaule(output.get番地()));
+        rList.add(getRStringVaule(output.get方書()));
+        rList.add(getRStringVaule(output.get行政区コード()));
+        rList.add(getRStringVaule(output.get行政区名()));
+        rList.add(getRStringVaule(output.get地区１()));
+        rList.add(getRStringVaule(output.get地区２()));
+        rList.add(getRStringVaule(output.get地区３()));
+        rList.add(getRStringVaule(output.get連絡先１()));
+        rList.add(getRStringVaule(output.get連絡先２()));
+        rList.add(getRStringVaule(output.get登録異動日()));
+        rList.add(getRStringVaule(output.get登録事由()));
+        rList.add(getRStringVaule(output.get登録届出日()));
+        rList.add(getRStringVaule(output.get住定異動日()));
+        rList.add(getRStringVaule(output.get住定事由()));
+        rList.add(getRStringVaule(output.get住定届出日()));
+        rList.add(getRStringVaule(output.get消除異動日()));
+        rList.add(getRStringVaule(output.get消除事由()));
+        rList.add(getRStringVaule(output.get消除届出日()));
+        rList.add(getRStringVaule(output.get転出入理由()));
+        rList.add(getRStringVaule(output.get前住所郵便番号()));
+        rList.add(getRStringVaule(output.get前住所番地方書()));
+        rList.add(getRStringVaule(output.get前住所()));
+        rList.add(getRStringVaule(output.get前住所番地()));
+        rList.add(getRStringVaule(output.get前住所方書()));
+        rList.add(getRStringVaule(output.get市町村コード()));
+        rList.add(getRStringVaule(output.get市町村名()));
+        rList.add(getRStringVaule(output.get保険者コード()));
+        rList.add(getRStringVaule(output.get保険者名()));
+        rList.add(getRStringVaule(output.get空白()));
+        rList.add(getRStringVaule(output.get送付先氏名()));
+        rList.add(getRStringVaule(output.get送付先氏名カナ()));
+        rList.add(getRStringVaule(output.get送付先住所コード()));
+        rList.add(getRStringVaule(output.get送付先郵便番号()));
+        rList.add(getRStringVaule(output.get送付先住所番地方書()));
+        rList.add(getRStringVaule(output.get送付先住所()));
+        rList.add(getRStringVaule(output.get送付先番地()));
+        rList.add(getRStringVaule(output.get送付先方書()));
+        rList.add(getRStringVaule(output.get送付先行政区コード()));
+        rList.add(getRStringVaule(output.get送付先行政区名()));
+        rList.add(getRStringVaule(output.get被保険者番号()));
+        rList.add(getRStringVaule(output.get資格取得事由()));
+        rList.add(getRStringVaule(output.get資格取得日()));
+        rList.add(getRStringVaule(output.get資格取得届出日()));
+        rList.add(getRStringVaule(output.get喪失事由()));
+        rList.add(getRStringVaule(output.get資格喪失日()));
+        rList.add(getRStringVaule(output.get資格喪失届出日()));
+        rList.add(getRStringVaule(output.get資格区分()));
+        rList.add(getRStringVaule(output.get住所地特例状態()));
+        rList.add(getRStringVaule(output.get受給申請事由()));
+        rList.add(getRStringVaule(output.get受給申請日()));
+        rList.add(getRStringVaule(output.get受給要介護度()));
+        rList.add(getRStringVaule(output.get受給認定開始日()));
+        rList.add(getRStringVaule(output.get受給認定終了日()));
+        rList.add(getRStringVaule(output.get受給認定日()));
+        rList.add(getRStringVaule(output.get受給旧措置()));
+        rList.add(getRStringVaule(output.get受給みなし更新認定()));
+        rList.add(getRStringVaule(output.get受給直近事由()));
+        rList.add(getRStringVaule(output.get対象年度()));
+        rList.add(getRStringVaule(output.get保険者番号()));
+        rList.add(getRStringVaule(output.get連絡票整理番号()));
+        rList.add(getRStringVaule(output.get履歴番号()));
+        rList.add(getRStringVaule(output.get自己負担額証明書整理番号()));
+        rList.add(getRStringVaule(output.get対象計算期間_開始()));
+        rList.add(getRStringVaule(output.get対象計算期間_終了()));
+        rList.add(getRStringVaule(output.get申請年月日()));
+        rList.add(getRStringVaule(output.get決定年月日()));
+        rList.add(getRStringVaule(output.get自己負担総額()));
+        rList.add(getRStringVaule(output.get支給区分コード()));
+        rList.add(getRStringVaule(output.get支給額()));
+        rList.add(getRStringVaule(output.get給付の種類()));
+        rList.add(getRStringVaule(output.get不支給理由()));
+        rList.add(getRStringVaule(output.get支払方法区分()));
+        rList.add(getRStringVaule(output.get支払場所()));
+        rList.add(getRStringVaule(output.get支払期間開始年月日()));
+        rList.add(getRStringVaule(output.get支払期間終了年月日()));
+        rList.add(getRStringVaule(output.get支払期間開始年月日_曜日()));
+        rList.add(getRStringVaule(output.get支払期間終了年月日_曜日()));
+        rList.add(getRStringVaule(output.get支払期間開始年月日_時間()));
+        rList.add(getRStringVaule(output.get支払期間終了年月日_時間()));
+        rList.add(getRStringVaule(output.get金融機関コード()));
+        rList.add(getRStringVaule(output.get金融機関名()));
+        rList.add(getRStringVaule(output.get金融機関支店コード()));
+        rList.add(getRStringVaule(output.get金融機関支店名()));
+        rList.add(getRStringVaule(output.get口座種目名()));
+        rList.add(getRStringVaule(output.get口座番号()));
+        rList.add(getRStringVaule(output.get口座名義人_カナ()));
+        rList.add(getRStringVaule(output.get決定通知書作成年月日()));
+        rList.add(getRStringVaule(output.get振込通知書作成年月日()));
+        rList.add(getRStringVaule(output.get受取年月()));
+        rList.add(getRStringVaule(output.get給付の種類_短()));
+        rList.add(getRStringVaule(output.get不支給理由_短()));
+        rList.add(getRStringVaule(output.get支払場所_短()));
+        csvListWriter.writeLine(rList);
         personalDataList.add(toPersonalData(entity));
     }
 
     @Override
     protected void afterExecute() {
-        hanyoListKogakuCSVWriter.close();
+        csvListWriter.close();
         if (!personalDataList.isEmpty()) {
             AccessLogUUID accessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
             manager.spool(SubGyomuCode.DBC介護給付, hanyoListKogakuFilePath, accessLog);
@@ -564,15 +783,6 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
         return 対象年度.toDateString();
     }
 
-//    TODO QA#
-//    private IOutputOrder get並び順(ReportId 帳票分類ID, RString 出力順ID) {
-//        if (RString.isNullOrEmpty(出力順ID)) {
-//            return null;
-//        }
-//        IChohyoShutsuryokujunFinder fider = ChohyoShutsuryokujunFinderFactory.createInstance();
-//        IOutputOrder outputOrder = fider.get出力順(SubGyomuCode.DBC介護給付, 帳票分類ID, Long.parseLong(出力順ID.toString()));
-//        return outputOrder;
-//    }
     private RString getパターン32(FlexibleDate date) {
         if (date != null) {
             return date.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
@@ -686,7 +896,7 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
     private void バッチ出力条件リストの出力() {
         RString 導入団体コード = 地方公共団体.getLasdecCode_().value();
         RString 市町村名 = 地方公共団体.get市町村名();
-        RString 出力件数 = new RString(String.valueOf(hanyoListKogakuCSVWriter.getCount()));
+        RString 出力件数 = new RString(String.valueOf(csvListWriter.getCount()));
         List<RString> 出力条件 = get出力条件();
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
                 EUC_ENTITY_ID.toRString(),
@@ -808,6 +1018,13 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
         return builder;
     }
 
+    private RString getRStringVaule(RString csv編集元) {
+        if (csv編集元 == null) {
+            return RString.EMPTY;
+        }
+        return csv編集元;
+    }
+
     private void get出力条件(List<RString> 出力条件, RStringBuilder builder) {
         if (builder == null) {
             return;
@@ -821,5 +1038,136 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
         }
         return date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).
                 fillType(FillType.ZERO).toDateString();
+    }
+
+    private List<RString> getHeader() {
+        List<RString> headList = new ArrayList<>();
+        headList.add(HEAD_連番);
+        headList.add(HEAD_識別コード);
+        headList.add(HEAD_住民種別);
+        headList.add(HEAD_氏名);
+        headList.add(HEAD_氏名カナ);
+        headList.add(HEAD_生年月日);
+        headList.add(HEAD_年齢);
+        headList.add(HEAD_性別);
+        headList.add(HEAD_続柄コード);
+        headList.add(HEAD_世帯コード);
+        headList.add(HEAD_世帯主名);
+        headList.add(HEAD_住所コード);
+        headList.add(HEAD_郵便番号);
+        headList.add(HEAD_住所番地方書);
+        headList.add(HEAD_住所);
+        headList.add(HEAD_番地);
+        headList.add(HEAD_方書);
+        headList.add(HEAD_行政区コード);
+        headList.add(HEAD_行政区名);
+        headList.add(HEAD_地区１);
+        headList.add(HEAD_地区２);
+        headList.add(HEAD_地区３);
+        headList.add(HEAD_連絡先１);
+        headList.add(HEAD_連絡先２);
+        headList.add(HEAD_登録異動日);
+        headList.add(HEAD_登録事由);
+        headList.add(HEAD_登録届出日);
+        headList.add(HEAD_住定異動日);
+        headList.add(HEAD_住定事由);
+        headList.add(HEAD_住定届出日);
+        headList.add(HEAD_消除異動日);
+        headList.add(HEAD_消除事由);
+        headList.add(HEAD_消除届出日);
+        headList.add(HEAD_転出入理由);
+        headList.add(HEAD_前住所郵便番号);
+        headList.add(HEAD_前住所番地方書);
+        headList.add(HEAD_前住所);
+        headList.add(HEAD_前住所番地);
+        headList.add(HEAD_前住所方書);
+        headList.add(HEAD_市町村コード);
+        headList.add(HEAD_市町村名);
+        headList.add(HEAD_保険者コード);
+        headList.add(HEAD_保険者名);
+        headList.add(HEAD_空白);
+        headList.add(HEAD_送付先氏名);
+        headList.add(HEAD_送付先氏名カナ);
+        headList.add(HEAD_送付先住所コード);
+        headList.add(HEAD_送付先郵便番号);
+        headList.add(HEAD_送付先住所番地方書);
+        headList.add(HEAD_送付先住所);
+        headList.add(HEAD_送付先番地);
+        headList.add(HEAD_送付先方書);
+        headList.add(HEAD_送付先行政区コード);
+        headList.add(HEAD_送付先行政区名);
+        headList.add(HEAD_被保険者番号);
+        headList.add(HEAD_資格取得事由);
+        headList.add(HEAD_資格取得日);
+        headList.add(HEAD_資格取得届出日);
+        headList.add(HEAD_喪失事由);
+        headList.add(HEAD_資格喪失日);
+        headList.add(HEAD_資格喪失届出日);
+        headList.add(HEAD_資格区分);
+        headList.add(HEAD_住所地特例状態);
+        headList.add(HEAD_受給申請事由);
+        headList.add(HEAD_受給申請日);
+        headList.add(HEAD_受給要介護度);
+        headList.add(HEAD_受給認定開始日);
+        headList.add(HEAD_受給認定終了日);
+        headList.add(HEAD_受給認定日);
+        headList.add(HEAD_受給旧措置);
+        headList.add(HEAD_受給みなし更新認定);
+        headList.add(HEAD_受給直近事由);
+        headList.add(HEAD_対象年度);
+        headList.add(HEAD_保険者番号);
+        headList.add(HEAD_連絡票整理番号);
+        headList.add(HEAD_履歴番号);
+        headList.add(HEAD_自己負担額証明書整理番号);
+        headList.add(HEAD_対象計算期間開始);
+        headList.add(HEAD_対象計算期間終了);
+        headList.add(HEAD_申請年月日);
+        headList.add(HEAD_決定年月日);
+        headList.add(HEAD_自己負担総額);
+        headList.add(HEAD_支給区分コード);
+        headList.add(HEAD_支給額);
+        headList.add(HEAD_給付の種類);
+        headList.add(HEAD_不支給理由);
+        headList.add(HEAD_支払方法区分);
+        headList.add(HEAD_支払場所);
+        headList.add(HEAD_支払期間開始年月日);
+        headList.add(HEAD_支払期間終了年月日);
+        headList.add(HEAD_支払期間開始年月日曜日);
+        headList.add(HEAD_支払期間終了年月日曜日);
+        headList.add(HEAD_支払期間開始年月日時間);
+        headList.add(HEAD_支払期間終了年月日時間);
+        headList.add(HEAD_金融機関コード);
+        headList.add(HEAD_金融機関名);
+        headList.add(HEAD_金融機関支店コード);
+        headList.add(HEAD_金融機関支店名);
+        headList.add(HEAD_口座種目名);
+        headList.add(HEAD_口座番号);
+        headList.add(HEAD_口座名義人カナ);
+        headList.add(HEAD_決定通知書作成年月日);
+        headList.add(HEAD_振込通知書作成年月日);
+        headList.add(HEAD_受取年月);
+        headList.add(HEAD_給付の種類短);
+        headList.add(HEAD_不支給理由短);
+        headList.add(HEAD_支払場所短);
+        return headList;
+    }
+
+    private RString get出力順() {
+        IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
+        IOutputOrder order = finder.get出力順(parameter.getサブ業務コード(), parameter.get帳票ID(),
+                parameter.get出力順ID());
+        RString 出力順 = RString.EMPTY;
+        if (order != null) {
+            出力順 = MyBatisOrderByClauseCreator.create(HanyoListKogakuGassanShikyugakuKetteiOutPutOrder.class, order);
+        }
+        if (RString.isNullOrEmpty(出力順)) {
+            出力順 = 出力順.concat(ORDER_BY);
+        }
+        出力順 = 出力順.concat(出力順_被保険者番号);
+        出力順 = 出力順.concat(出力順_対象年度);
+        出力順 = 出力順.concat(出力順_保険者番号);
+        出力順 = 出力順.concat(出力順_支給申請書整理番号);
+        出力順 = 出力順.concat(出力順_履歴番号);
+        return 出力順;
     }
 }

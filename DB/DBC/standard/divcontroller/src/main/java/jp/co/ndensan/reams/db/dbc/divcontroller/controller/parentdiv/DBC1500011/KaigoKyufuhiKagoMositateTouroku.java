@@ -305,11 +305,9 @@ public class KaigoKyufuhiKagoMositateTouroku {
             }
         }
         if (再検索フラグ.equals(div.getHdnKensaku())) {
-            div.getTxtTeikyoYMRange().getFromValue();
-            div.getHokenshalist().getSelectedItem().get市町村コード();
-            RString 提供年月開始 = div.getTxtTeikyoYMRange().getFromValue().seireki().separator(Separator.NONE).fillType(FillType.NONE)
+            RString 提供年月開始 = div.getTxtTeikyoYMRange().getFromValue().seireki().separator(Separator.NONE).fillType(FillType.ZERO)
                     .toDateString().substring(0, 提供年月);
-            RString 提供年月終了 = div.getTxtTeikyoYMRange().getToValue().seireki().separator(Separator.NONE).fillType(FillType.NONE)
+            RString 提供年月終了 = div.getTxtTeikyoYMRange().getToValue().seireki().separator(Separator.NONE).fillType(FillType.ZERO)
                     .toDateString().substring(0, 提供年月);
             KaigoKyufuhiParamter param = KaigoKyufuhiParamter.createParem(div.getTxtHihoNo().getValue(),
                     div.getCcdJigyoshaSentaku().getNyuryokuShisetsuKodo(),

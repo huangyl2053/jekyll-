@@ -798,4 +798,47 @@ public class DbT4001JukyushaDaichoDac implements ISaveable<DbT4001JukyushaDaicho
                                 eq(rirekiNo, 履歴番号))).
                 toList(DbT4001JukyushaDaichoEntity.class);
     }
+
+    /**
+     * 被保険者番号をキーにして、受給者台帳．被保険者番号情報ある場合は、最新の履歴番号で、かつ、最大の枝番である情報を取得する。
+     *
+     * @param 被保険者番号 被保険者番号
+     * @return DbT4001JukyushaDaichoEntity 受給者台帳のデータ
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT4001JukyushaDaichoEntity> get受給者台帳データ(HihokenshaNo 被保険者番号) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT4001JukyushaDaicho.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                eq(logicalDeletedFlag, false))).
+                toList(DbT4001JukyushaDaichoEntity.class);
+    }
+
+    /**
+     * 受給者台帳情報取得
+     *
+     * @param 被保険者番号 被保険者番号
+     * @param 転出予定日 転出予定日
+     * @return DbT4001JukyushaDaichoEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT4001JukyushaDaichoEntity> get受給者台帳(HihokenshaNo 被保険者番号,
+            FlexibleDate 転出予定日) throws NullPointerException {
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(メッセージ_被保険者番号.toString()));
+        requireNonNull(転出予定日, UrSystemErrorMessages.値がnull.getReplacedMessage("転出予定日"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT4001JukyushaDaicho.class).
+                where(and(
+                                eq(hihokenshaNo, 被保険者番号),
+                                leq(ninteiYukoKikanKaishiYMD, 転出予定日),
+                                leq(転出予定日, ninteiYukoKikanShuryoYMD))).
+                toList(DbT4001JukyushaDaichoEntity.class);
+    }
+
 }

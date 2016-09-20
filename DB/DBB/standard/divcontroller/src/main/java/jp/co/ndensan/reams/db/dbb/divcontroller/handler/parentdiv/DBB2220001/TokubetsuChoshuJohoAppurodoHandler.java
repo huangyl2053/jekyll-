@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
@@ -92,6 +93,15 @@ public class TokubetsuChoshuJohoAppurodoHandler {
     private static final RString STR_0010 = new RString("0010");
     private static final RString STR_0011 = new RString("0011");
     private static final RString STR_0012 = new RString("0012");
+    private static final RString STR_01 = new RString("01");
+    private static final RString STR_02 = new RString("02");
+    private static final RString STR_03 = new RString("03");
+    private static final RString STR_04 = new RString("04");
+    private static final RString STR_05 = new RString("05");
+    private static final RString STR_06 = new RString("06");
+    private static final RString STR_07 = new RString("07");
+    private static final RString STR_08 = new RString("08");
+    private static final RString STR_09 = new RString("09");
     private static final RString STR_00 = new RString("00");
     private static final RString SPACE = new RString(" ");
     private static final RString 異動処理結果情報 = new RString("異動処理結果情報");
@@ -354,6 +364,23 @@ public class TokubetsuChoshuJohoAppurodoHandler {
         処理月と処理名Map.put(月_1, STR_0010);
         処理月と処理名Map.put(月_2, STR_0011);
         処理月と処理名Map.put(月_3, STR_0012);
+        return 処理月と処理名Map;
+    }
+
+    private Map<RString, RString> get処理月と月Map() {
+        Map<RString, RString> 処理月と処理名Map = new HashMap<>();
+        処理月と処理名Map.put(月_4, STR_04);
+        処理月と処理名Map.put(月_5, STR_05);
+        処理月と処理名Map.put(月_6, STR_06);
+        処理月と処理名Map.put(月_7, STR_07);
+        処理月と処理名Map.put(月_8, STR_08);
+        処理月と処理名Map.put(月_9, STR_09);
+        処理月と処理名Map.put(月_10, STR_10);
+        処理月と処理名Map.put(月_11, STR_11);
+        処理月と処理名Map.put(月_12, STR_12);
+        処理月と処理名Map.put(月_1, STR_01);
+        処理月と処理名Map.put(月_2, STR_02);
+        処理月と処理名Map.put(月_3, STR_03);
         return 処理月と処理名Map;
     }
 
@@ -886,14 +913,12 @@ public class TokubetsuChoshuJohoAppurodoHandler {
                     getSelectedItems().get(INT_0).getData6();
         } else {
             List<dgGetuShoriSelect_Row> 処理対象Rows = div.getShoriTaishoShichosonPanel().getDgGetuShoriSelect().getSelectedItems();
-            Map<RString, RString> map = get処理月と年度内連番Map();
+            Map<RString, RString> map = get処理月と月Map();
             選択月 = map.get(処理対象Rows.get(INT_0).getData1()).substring(INT_2, INT_4);
             選択市町村ID = div.getShoriJokyoPanel().getDdlShichoson().getSelectedKey();
         }
         shareファイル名 = shareファイル名.replace(市町村ID, 選択市町村ID);
         shareファイル名 = shareファイル名.replace(対象月, 選択月);
-        FilesystemName sharedFileName = new FilesystemName(shareファイル名);
-        SharedFileDescriptor sharedfiledescriptor = SharedFile.defineSharedFile(sharedFileName);
         RString filePath = 選択ファイル.getFilePath();
         File tempFile = new File(filePath.toString());
         filePath = filePath.replace(選択ファイル.getFileName(), shareファイル名);
@@ -902,9 +927,11 @@ public class TokubetsuChoshuJohoAppurodoHandler {
             if (!renameTo) {
                 return;
             }
+            SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(shareファイル名));
+            sfd = SharedFile.defineSharedFile(sfd);
             CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
             FilesystemPath 絶対パス = new FilesystemPath(filePath);
-            SharedFile.copyToSharedFile(sharedfiledescriptor, 絶対パス, opts);
+            SharedFile.copyToSharedFile(sfd, 絶対パス, opts);
             if (STR_1.equals(選択Key)) {
                 div.getShoriTaishoGetuPanel().getDgShichosonShoriSelect().
                         getSelectedItems().get(INT_0).setData4(済);

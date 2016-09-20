@@ -75,6 +75,7 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
     private List<UrT0526SeikatsuHogoFujoShuruiEntity> 生活保護扶助種類EntityList;
     private HihokenshaNo 被保険者番号;
     private ShikibetsuCode 識別コード;
+    private ShikibetsuCode 世帯識別コード;
     private GyomuCode 業務コード;
     private FlexibleDate 受給開始日;
     private HihokenshaTaihoTemp 被保険者対象Entity;
@@ -122,6 +123,9 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
     private RString 課税取消段階使用;
     private RString 課税取消段階インデックス;
     private RString 課税取消課税区分;
+    private HokenryoDankaiSettings hokenryoDankaiSettings;
+    private HokenryoDankaiList hokenryoDankaiList;
+    private HokenryoDankaiHantei hantei;
 
     @Override
     protected void createWriter() {
@@ -141,6 +145,7 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
         生活保護扶助種類EntityList = new ArrayList<>();
         被保険者番号 = null;
         識別コード = null;
+        世帯識別コード = null;
         業務コード = null;
         受給開始日 = null;
         月別Entity = null;
@@ -203,6 +208,9 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
                 nowDate, SubGyomuCode.DBB介護賦課);
         課税取消課税区分 = DbBusinessConfig.get(ConfigNameDBB.賦課基準_課税取消課税区分,
                 nowDate, SubGyomuCode.DBB介護賦課);
+        hokenryoDankaiSettings = new HokenryoDankaiSettings();
+        hokenryoDankaiList = hokenryoDankaiSettings.get保険料段階ListIn(processParameter.get調定年度());
+        hantei = InstanceProvider.create(HokenryoDankaiHantei.class);
     }
 
     @Override
@@ -242,6 +250,7 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
             set老齢の情報(entity.get老齢の情報());
             set被保険者番号(entity);
             set識別コード(entity);
+            set世帯識別コード(entity);
             set生活保護受給者Entity(entity.get生活保護受給者());
             set生活保護扶助種類EntityList(entity.get生活保護扶助種類());
             set世帯員所得情報List(entity.get世帯員所得情報Temp());
@@ -253,6 +262,7 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
             dankaiProcessEntity.set生保の情報(生保の情報);
             dankaiProcessEntity.set老齢の情報(老齢の情報);
             set被保険者番号(entity);
+            set世帯識別コード(entity);
             dankaiProcessEntityList.add(dankaiProcessEntity);
             dankaiProcessEntity = new DankaiProcessEntityList();
             dankaiProcessEntity.set被保険者対象Temp(entity.get被保険者対象Temp());
@@ -304,9 +314,6 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
         hokenshaDankaiTemp.set老年終了日(賦課根拠.getRoreiNenkinEndYMD());
         hokenshaDankaiTemp.set年金収入額(賦課根拠.getKotekiNenkinShunyu());
         hokenshaDankaiTemp.set合計所得金額(賦課根拠.getGokeiShotoku());
-        HokenryoDankaiSettings hokenryoDankaiSettings = new HokenryoDankaiSettings();
-        HokenryoDankaiList hokenryoDankaiList = hokenryoDankaiSettings.get保険料段階ListIn(processParameter.get調定年度());
-        HokenryoDankaiHantei hantei = InstanceProvider.create(HokenryoDankaiHantei.class);
         HokenryoDankaiHanteiParameter 保険料段階パラメータ = new HokenryoDankaiHanteiParameter();
         保険料段階パラメータ.setFukaNendo(dankaiProcessEntityList.get被保険者対象Temp().getHukaNando());
         保険料段階パラメータ.setFukaKonkyo(賦課根拠);
@@ -459,12 +466,14 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
     private void set老齢の情報(DbT7006RoreiFukushiNenkinJukyushaEntity entity) {
         if (entity != null) {
             entity.initializeMd5();
-            老齢の情報.add(new RoreiFukushiNenkinJukyusha(entity));
+            if (!老齢の情報.contains(new RoreiFukushiNenkinJukyusha(entity))) {
+                老齢の情報.add(new RoreiFukushiNenkinJukyusha(entity));
+            }
         }
     }
 
     private void set世帯員所得情報List(SetaiShotokuEntity entity) {
-        if (entity != null && 被保険者番号 != entity.getHihokenshaNo()) {
+        if (entity != null && 世帯識別コード != entity.getShikibetsuCode()) {
             世帯員所得情報List.add(entity);
         }
     }
@@ -488,6 +497,12 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
         }
     }
 
+    private void set世帯識別コード(DankaiProcessEntity entity) {
+        if (entity.get世帯員所得情報Temp() != null) {
+            世帯識別コード = entity.get世帯員所得情報Temp().getShikibetsuCode();
+        }
+    }
+
     private void set生活保護受給者Entity(UrT0508SeikatsuHogoJukyushaEntity entity) {
         if (entity != null) {
             生活保護受給者Entity = entity;
@@ -495,7 +510,7 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
     }
 
     private void set生活保護扶助種類EntityList(UrT0526SeikatsuHogoFujoShuruiEntity entity) {
-        if (entity != null) {
+        if (entity != null && !生活保護扶助種類EntityList.contains(entity)) {
             生活保護扶助種類EntityList.add(entity);
         }
     }

@@ -5,12 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbt21004.DankaiProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbt21004.DankaibetsuHihokenshasuReportCSVProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbt21004.DankaibetsuHihokenshasuReportProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbt21004.HihokenshaProcess;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.ShotokuDankaibetsuHihokenshaSuIchiran.ShotokuDankaibetsuHihokenshaSuIchiranBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB021031.DBB021031_DankaibetsuHihokenshasuIchiranhyoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt21004.DankaibetuHihokensyasuIchiranhyoProcessParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.fuka.SetaiShotokuKazeiHanteiBatchParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SetaiinHaakuKanriShikibetsuKubun;
@@ -28,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBB-1820-040 dingminghao
  */
-public class DBB021031_DankaibetsuHihokenshasuIchiranhyoSakusei extends BatchFlowBase<ShotokuDankaibetsuHihokenshaSuIchiranBatchParameter> {
+public class DBB021031_DankaibetsuHihokenshasuIchiranhyoSakusei extends BatchFlowBase<DBB021031_DankaibetsuHihokenshasuIchiranhyoSakuseiParameter> {
 
     private static final String 被保険者対象抽出 = "getHihokensha";
     private static final String 世帯員把握 = "collectSetaiin";
@@ -36,11 +35,8 @@ public class DBB021031_DankaibetsuHihokenshasuIchiranhyoSakusei extends BatchFlo
     private static final String 帳票の出力 = "getReport";
     private static final String CSVの出力 = "getDankaiCSV";
     private static final RString BATCH_ID = new RString("SetaiShotokuKazeiHanteiFlow");
-    private ShotokuDankaibetsuHihokenshaSuIchiranBatchParameter parameter;
+    private DBB021031_DankaibetsuHihokenshasuIchiranhyoSakuseiParameter parameter;
     private DankaibetuHihokensyasuIchiranhyoProcessParameter processParameter;
-    private static final RString コンマ = new RString(",");
-    private static final int ZERO = 0;
-    private static final int ONE = 1;
 
     @Override
     protected void defineFlow() {
@@ -50,12 +46,8 @@ public class DBB021031_DankaibetsuHihokenshasuIchiranhyoSakusei extends BatchFlo
         processParameter.set調定年度(new FlexibleYear(parameter.getSettingnendo()));
         processParameter.set本算定賦課処理日(new FlexibleDate(new RString(parameter.getTreatmentday().toString())));
         processParameter.set広域分市町村分区分(parameter.getRegiondivision());
-        RString 市町村コード複数 = null;
-        if (parameter.getDantaiCd() != null) {
-            市町村コード複数 = get市町村コード複数(parameter.getDantaiCd(), 市町村コード複数);
-        }
-        if (市町村コード複数 != null) {
-            processParameter.set市町村コード複数(市町村コード複数.substringReturnAsPossible(ZERO, 市町村コード複数.length() - ONE));
+        if (parameter.getDantaiCd() != null && !parameter.getDantaiCd().isEmpty()) {
+            processParameter.set市町村コード複数(parameter.getDantaiCd());
         }
         processParameter.set資格基準日(new FlexibleDate(new RString(parameter.getQkijund().toString())));
         processParameter.set調定基準日(new FlexibleDate(new RString(parameter.getAdjustedkijund().toString())));
@@ -116,16 +108,5 @@ public class DBB021031_DankaibetsuHihokenshasuIchiranhyoSakusei extends BatchFlo
     @Step(帳票の出力)
     protected IBatchFlowCommand getReport() {
         return loopBatch(DankaibetsuHihokenshasuReportProcess.class).arguments(processParameter).define();
-    }
-
-    private RString get市町村コード複数(
-            List<RString> dantaiCdList,
-            RString 市町村コード複数) {
-        for (RString dantaiCd : dantaiCdList) {
-            if (dantaiCd != null) {
-                市町村コード複数 = dantaiCd.concat(コンマ);
-            }
-        }
-        return 市町村コード複数;
     }
 }

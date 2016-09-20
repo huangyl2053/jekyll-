@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.ninteienkitsuchishohakko.DgHakkotaishoshaRow;
 import jp.co.ndensan.reams.db.dbd.business.core.ninteienkitsuchishohakko.NinteiEnkiTsuchishoHakkoBusiness;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd522001.DBD522001_EnkitsuchiParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD522001.DBD522001_EnkitsuchiParameter;
 import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5220001.DBD5220001StateName.検索;
 import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5220001.DBD5220001StateName.通知書;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5220001.NinteiEnkiTsuchishoHakkoDiv;

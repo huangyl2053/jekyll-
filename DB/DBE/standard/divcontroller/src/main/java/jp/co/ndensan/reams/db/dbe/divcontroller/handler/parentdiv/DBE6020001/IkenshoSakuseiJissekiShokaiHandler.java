@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6020001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ikenshojissekiichiran.IkenshoJissekiIchiran;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.ikenshojissekiichiran.IkenshoJissekiIchiranBatchParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601002.DBE601002_NinteichosaJissekiParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.ikenshojissekiichiran.IkenshoJissekiIchiranKey;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6020001.IkenshoSakuseiJissekiShokaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6020001.dgIkenshoSakuseiJisseki_Row;
@@ -148,8 +148,8 @@ public class IkenshoSakuseiJissekiShokaiHandler {
      * @param 帳票出力区分 帳票出力区分
      * @return バッチパラメータ
      */
-    public IkenshoJissekiIchiranBatchParameter createBatchParam(RString 帳票出力区分) {
-        IkenshoJissekiIchiranBatchParameter param = new IkenshoJissekiIchiranBatchParameter();
+    public DBE601002_NinteichosaJissekiParameter createBatchParam(RString 帳票出力区分) {
+        DBE601002_NinteichosaJissekiParameter param = new DBE601002_NinteichosaJissekiParameter();
         List<IkenshoJissekiIchiranKey> keyJoho = new ArrayList<>();
         for (dgIkenshoSakuseiJisseki_Row row : div.getDgIkenshoSakuseiJisseki().getDataSource()) {
             if (row.getSelected()) {

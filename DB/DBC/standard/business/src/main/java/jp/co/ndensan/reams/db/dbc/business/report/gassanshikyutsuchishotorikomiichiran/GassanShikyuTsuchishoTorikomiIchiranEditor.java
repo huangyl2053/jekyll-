@@ -257,6 +257,7 @@ public class GassanShikyuTsuchishoTorikomiIchiranEditor implements
         source.shichosonCode = getColumnValue(被保険者.get市町村コード());
         source.taishoNendo = get非空項目(計算結果entity.get対象年度());
         source.shikyuKubunCode = get非空項目(計算結果entity.get支給区分コード());
+        source.shikibetsuCode = 被保険者.get識別コード();
     }
 
     private RString get非空項目(RString 項目) {

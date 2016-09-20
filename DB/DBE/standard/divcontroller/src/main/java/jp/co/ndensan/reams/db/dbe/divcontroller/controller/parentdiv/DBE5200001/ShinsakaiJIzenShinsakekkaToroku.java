@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5200001
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.shinsakaijizenshinsakekkaichiran.ShinsakaiJizenshinsakekkaIchiranBatchParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE526001.DBE526001_ShinsakaiJIzenShinsakekkaIchiranParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5200001.DBE5200001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5200001.ShinsakaiJIzenShinsakekkaTorokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5200001.ShinsakaikekkaIchiranInputCsvEntity;
@@ -133,11 +133,11 @@ public class ShinsakaiJIzenShinsakekkaToroku {
     public ResponseData onclick_btnToBeforeDocument(ShinsakaiJIzenShinsakekkaTorokuDiv div) {
 
         if (div.getPublicationResult().getDgBeforeShinsakaiResult().getDataSource().isEmpty()) {
-            ShinsakaiJizenshinsakekkaIchiranBatchParameter paramter = new ShinsakaiJizenshinsakekkaIchiranBatchParameter(
+            DBE526001_ShinsakaiJIzenShinsakekkaIchiranParameter paramter = new DBE526001_ShinsakaiJIzenShinsakekkaIchiranParameter(
                     ViewStateHolder.get(ViewStateKeys.開催番号, RString.class));
             return ResponseData.of(paramter).respond();
         } else {
-            ShinsakaiJizenshinsakekkaIchiranBatchParameter paramter = new ShinsakaiJizenshinsakekkaIchiranBatchParameter(div
+            DBE526001_ShinsakaiJIzenShinsakekkaIchiranParameter paramter = new DBE526001_ShinsakaiJIzenShinsakekkaIchiranParameter(div
                     .getJizenShinsakaiShiryoPublication().getPublicationTargetShinsakai().getTxtShinsakaiKaisaiNo().getValue());
             return ResponseData.of(paramter).respond();
         }

@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbb.business.report.kaigohokenshotokujohoichiran.K
 import jp.co.ndensan.reams.db.dbb.business.report.toushoshotokujohochushutsurenkei.ShotokuJohoIchiranOrder;
 import jp.co.ndensan.reams.db.dbb.business.report.toushoshotokujohochushutsurenkei.ShotokuJohoIchiranPageBreak;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB112003.SichousonEntity;
-import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.shutokujohochushutsurenkei.SpoolShotokuJohoIchiranMybatisParameter;
+import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.shutokujohochushutsurenkei.ShutokuJohoChushutsuRenkeiMybatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.shutokujohoshuchutsurenkei.ShutokuJohoShuchutsuRenkeiProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.entity.csv.ShotokuJohoIchiranCSVEntity;
@@ -22,10 +22,7 @@ import jp.co.ndensan.reams.db.dbb.entity.report.kaigohokenshotokujohoichiran.Kai
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
-import jp.co.ndensan.reams.ua.uax.business.core.koza.KozaSearchKeyBuilder;
-import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
-import jp.co.ndensan.reams.ur.urc.service.core.shunokamoku.authority.ShunoKamokuAuthority;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
@@ -38,7 +35,6 @@ import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryo
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
-import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
@@ -46,9 +42,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -67,7 +62,6 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -132,26 +126,19 @@ public class SpoolShotokuJohoIchiranProcess extends BatchKeyBreakBase<ShotokuJoh
         IAssociationFinder finder = AssociationFinderFactory.createInstance();
         association = finder.getAssociation();
         連番 = INT_1;
-        super.initialize();
         get出力順();
     }
 
     @Override
     protected IBatchReader createReader() {
-        KozaSearchKeyBuilder builder = new KozaSearchKeyBuilder();
-        builder.setサブ業務コード(SubGyomuCode.DBB介護賦課);
-        builder.set業務コード(GyomuCode.DB介護保険);
-        IKozaSearchKey key = builder.build();
-        ShunoKamokuAuthority sut = InstanceProvider.create(ShunoKamokuAuthority.class);
-        List<KamokuCode> list = sut.get更新権限科目コード(ControlDataHolder.getUserId());
         RString 出力順 = MyBatisOrderByClauseCreator.create(ShotokuJohoIchiranOrder.class, 出力順情報);
-        return new BatchDbReader(READ_DATA_ID, new SpoolShotokuJohoIchiranMybatisParameter(key, list, 出力順));
+        return new BatchDbReader(READ_DATA_ID, new ShutokuJohoChushutsuRenkeiMybatisParameter(出力順));
     }
 
     @Override
     protected void createWriter() {
         PageBreaker<KaigoHokenShotokuJohoIchiranSource> breakPage
-                = new ShotokuJohoIchiranPageBreak(改頁リスト);
+                = new ShotokuJohoIchiranPageBreak(pageBreakKeys);
         batchReportWriter
                 = BatchReportFactory.createBatchReportWriter(帳票ID.getColumnValue(), SubGyomuCode.DBB介護賦課).addBreak(breakPage).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
@@ -190,15 +177,16 @@ public class SpoolShotokuJohoIchiranProcess extends BatchKeyBreakBase<ShotokuJoh
         RString csv出力有無;
         RString csvファイル名;
         if (連番 != INT_1) {
-            出力ページ数 = reportSourceWriter.getPageGroupCount();
+            出力ページ数 = reportSourceWriter.pageCount().value();
             csv出力有無 = CSV出力有無_あり;
-            csvファイル名 = CSVファイル名_なし;
-        } else {
-            csv出力有無 = CSV出力有無_なし;
             csvファイル名 = CSVファイル名_あり;
+        } else {
+            csvファイル名 = CSVファイル名_なし;
+            csv出力有無 = CSV出力有無_なし;
         }
         load出力条件リスト(出力ページ数, csv出力有無, csvファイル名);
         eucCsvWriter.close();
+        eucManager.spool(eucFilePath);
     }
 
     private void load出力条件リスト(int 出力ページ数, RString csv出力有無, RString csvファイル名) {
@@ -264,23 +252,24 @@ public class SpoolShotokuJohoIchiranProcess extends BatchKeyBreakBase<ShotokuJoh
         RString 識別コードR = 介護所得TempEntity.getShikibetsuCode() == null
                 || 介護所得TempEntity.getShikibetsuCode().isEmpty() ? RString.EMPTY : 介護所得TempEntity.getShikibetsuCode().getColumnValue();
         csvEntity.set識別コード(識別コードR);
-        RString 氏名_カナR = 宛名entity.getKanaMeisho() == null
+        RString 氏名_カナR = 宛名entity == null || 宛名entity.getKanaMeisho() == null
                 || 宛名entity.getKanaMeisho().isEmpty() ? RString.EMPTY : 宛名entity.getKanaMeisho().getColumnValue();
         csvEntity.set氏名_カナ(氏名_カナR);
         RString 所得年度 = 介護所得TempEntity.getShotoNendo() == null
                 || 介護所得TempEntity.getShotoNendo().isEmpty() ? RString.EMPTY : 介護所得TempEntity.getShotoNendo().toDateString();
         csvEntity.set所得年度(所得年度);
-        RString 生年月日R = 宛名entity.getSeinengappiYMD() == null
+        RString 生年月日R = 宛名entity == null || 宛名entity.getSeinengappiYMD() == null
                 || 宛名entity.getSeinengappiYMD().isEmpty() ? RString.EMPTY : 宛名entity.getSeinengappiYMD().seireki().toDateString();
         csvEntity.set生年月日(生年月日R);
-        RString 性別code = 宛名entity.getSeibetsuCode();
+        RString 性別code = 宛名entity == null ? RString.EMPTY : 宛名entity.getSeibetsuCode();
         RString 性別 = 性別code == null || 性別code.isEmpty() ? RString.EMPTY : Seibetsu.toValue(性別code).get名称();
         csvEntity.set性別(性別);
         RString 住民税課税区分_減免前 = 介護所得TempEntity.getKazeiKubun();
         RString 住民税課税区分_減免前R = 住民税課税区分_減免前 == null
                 || 住民税課税区分_減免前.isEmpty() ? RString.EMPTY : KazeiKubun.toValue(住民税課税区分_減免前).get名称();
         csvEntity.set住民税課税区分_減免前(住民税課税区分_減免前R);
-        HihokenshaNo 被保険者番号 = entity.get被保険者台帳管理entity().getHihokenshaNo();
+        HihokenshaNo 被保険者番号 = entity.get被保険者台帳管理entity() == null
+                ? HihokenshaNo.EMPTY : entity.get被保険者台帳管理entity().getHihokenshaNo();
         RString 被保険者番号R = 被保険者番号 == null || 被保険者番号.isEmpty() ? RString.EMPTY : 被保険者番号.getColumnValue();
         csvEntity.set被保険者番号(被保険者番号R);
         csvEntity = getCsvEntity(介護所得TempEntity, 宛名entity, csvEntity);
@@ -299,16 +288,16 @@ public class SpoolShotokuJohoIchiranProcess extends BatchKeyBreakBase<ShotokuJoh
         RString 課税標準額 = 介護所得TempEntity.getKazeiShotoGaku() == null
                 ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(介護所得TempEntity.getKazeiShotoGaku(), 0);
         csvEntity.set課税標準額(課税標準額);
-        csvEntity.set登録業務(宛名entity.getTorokuJiyuCode());
-        AtenaMeisho 氏名 = 宛名entity.getMeisho();
-        RString 氏名R = 氏名 == null || 氏名.isEmpty() ? RString.EMPTY : 氏名.getColumnValue();
+        csvEntity.set登録業務(宛名entity == null ? RString.EMPTY : 宛名entity.getTorokuJiyuCode());
+        RString 氏名R = 宛名entity == null || 宛名entity.getMeisho() == null
+                || 宛名entity.getMeisho().isEmpty() ? RString.EMPTY : 宛名entity.getMeisho().getColumnValue();
         csvEntity.set氏名(氏名R);
-        RString 消除事由コード = 宛名entity.getShojoJiyuCode();
-        FlexibleDate 生年月日 = 宛名entity.getSeinengappiYMD();
+        RString 消除事由コード = 宛名entity == null ? RString.EMPTY : 宛名entity.getShojoJiyuCode();
+        FlexibleDate 生年月日 = 宛名entity == null ? FlexibleDate.EMPTY : 宛名entity.getSeinengappiYMD();
         RString 年齢 = RString.EMPTY;
         if (生年月日 != null && !生年月日.isEmpty()) {
             if (INDEX_22.equals(消除事由コード)) {
-                FlexibleDate 消除異動年月日 = 宛名entity.getShojoIdoYMD();
+                FlexibleDate 消除異動年月日 = 宛名entity == null ? FlexibleDate.EMPTY : 宛名entity.getShojoIdoYMD();
                 年齢 = new RString(消除異動年月日.getYearValue() - 生年月日.getYearValue());
             } else {
                 int システム年 = FlexibleDate.getNowDate().getYearValue();
@@ -316,7 +305,7 @@ public class SpoolShotokuJohoIchiranProcess extends BatchKeyBreakBase<ShotokuJoh
             }
         }
         csvEntity.set年齢(年齢);
-        RString 住民種別コード = 宛名entity.getJuminShubetsuCode();
+        RString 住民種別コード = 宛名entity == null ? RString.EMPTY : 宛名entity.getJuminShubetsuCode();
         RString 種別 = 住民種別コード == null || 住民種別コード.isEmpty() ? RString.EMPTY : JuminShubetsu.toValue(住民種別コード).toRString();
         csvEntity.set種別(種別);
         RString 年金収入額 = 介護所得TempEntity.getNenkiniShunyuGaku() == null
@@ -330,22 +319,34 @@ public class SpoolShotokuJohoIchiranProcess extends BatchKeyBreakBase<ShotokuJoh
         UaFt200FindShikibetsuTaishoEntity 宛名entity = entity.get宛名();
         KaigoHokenShotokuTempEntity item = new KaigoHokenShotokuTempEntity();
         item.setShikibetsuCode(介護所得TempEntity.getShikibetsuCode());
-        item.setHihokenshaNo(entity.get被保険者台帳管理entity().getHihokenshaNo());
-        item.setKanaMeisho(宛名entity.getKanaMeisho());
-        item.setMeisho(宛名entity.getMeisho());
+        item.setHihokenshaNo(entity.get被保険者台帳管理entity() == null
+                ? HihokenshaNo.EMPTY : entity.get被保険者台帳管理entity().getHihokenshaNo());
+        if (宛名entity != null) {
+            item.setKanaMeisho(宛名entity.getKanaMeisho());
+            item.setMeisho(宛名entity.getMeisho());
+            item.setSeinengappiYMD(宛名entity.getSeinengappiYMD());
+            item.setShojoJiyuCode(宛名entity.getShojoJiyuCode());
+            item.setShojoIdoYMD(宛名entity.getShojoIdoYMD());
+            item.setSeibetsuCode(宛名entity.getSeibetsuCode());
+            item.setJuminShubetsuCode(宛名entity.getJuminShubetsuCode());
+            item.setTorokuGyomu(宛名entity.getTorokuJiyuCode());
+        } else {
+            item.setKanaMeisho(AtenaKanaMeisho.EMPTY);
+            item.setMeisho(AtenaMeisho.EMPTY);
+            item.setSeinengappiYMD(FlexibleDate.EMPTY);
+            item.setShojoJiyuCode(RString.EMPTY);
+            item.setShojoIdoYMD(FlexibleDate.EMPTY);
+            item.setSeibetsuCode(RString.EMPTY);
+            item.setJuminShubetsuCode(RString.EMPTY);
+            item.setTorokuGyomu(RString.EMPTY);
+        }
         item.setShotokuNendo(介護所得TempEntity.getShotoNendo());
-        item.setSeinengappiYMD(宛名entity.getSeinengappiYMD());
-        item.setShojoJiyuCode(宛名entity.getShojoJiyuCode());
-        item.setShojoIdoYMD(宛名entity.getShojoIdoYMD());
-        item.setSeibetsuCode(宛名entity.getSeibetsuCode());
-        item.setJuminShubetsuCode(宛名entity.getJuminShubetsuCode());
         item.setKazeiKubun(介護所得TempEntity.getKazeiKubun());
         item.setKazeiKubunGemmenGo(介護所得TempEntity.getKazeiKubunGemmenGo());
         item.setGokeiShotokuGaku(介護所得TempEntity.getGokeiShotokuGaku());
         item.setNenkiniShunyuGaku(介護所得TempEntity.getNenkiniShunyuGaku());
         item.setNenkiniShotokuGaku(介護所得TempEntity.getNenkiniShotokuGaku());
         item.setKazeiShotokuGaku(介護所得TempEntity.getKazeiShotoGaku());
-        item.setTorokuGyomu(宛名entity.getTorokuJiyuCode());
         return item.toKaigoHokenShotokuTempEntity(item);
     }
 

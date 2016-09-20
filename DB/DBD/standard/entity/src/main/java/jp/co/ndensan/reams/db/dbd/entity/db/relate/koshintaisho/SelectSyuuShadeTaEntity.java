@@ -50,8 +50,7 @@ public class SelectSyuuShadeTaEntity {
     private boolean 委託先の特定調査員表示フラグ;
     private RString 委託先の割付定員;
     private RString 委託先の割付地区;
-    private boolean 委託先の自動割付フラグ;
-    private RString 委託先の自動割付名称;
+    private boolean 委託先の自動割付;
     private RString 委託先の機関の区分;
     private RString 認定調査員コード;
     private RString 調査員氏名;

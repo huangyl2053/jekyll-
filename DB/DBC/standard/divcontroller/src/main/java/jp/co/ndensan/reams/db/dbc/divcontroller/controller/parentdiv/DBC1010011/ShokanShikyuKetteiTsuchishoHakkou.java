@@ -179,6 +179,7 @@ public class ShokanShikyuKetteiTsuchishoHakkou {
         buidler.set決定通知書作成年月日(new FlexibleDate(div.getTxtHakkouYMD().getValue().
                 toDateString())).set決定通知リアル発行区分(new RString("1"));
         shokanHanteiKekkaManager.save償還払支給判定結果(buidler.build());
+        getHandler(div).前排他キーの解除(被保険者番号);
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0003")), new RString("被保険者番号"),
                 被保険者番号.value());
         AccessLogger.log(AccessLogType.更新, PersonalData.withHojinNo(shikibetsuCode, expandedInfo));

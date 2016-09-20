@@ -41,9 +41,9 @@ public class JikoFutangakuJohoHoseiJohoDgValidationHandler {
 
     private ValidationDictionary create保存するDictionary() {
         return new ValidationDictionaryBuilder()
-                .add(JikoFutangakuJohoHoseiJohoDgValidationMessage.被保険者氏名漢字必須項目, div.getTxtHihokenshaName())
-                .add(JikoFutangakuJohoHoseiJohoDgValidationMessage.被保険者名全角文字で入力してください, div.getTxtHihokenshaName())
-                .add(JikoFutangakuJohoHoseiJohoDgValidationMessage.郵便番号が不正, div.getTxtAtesakiYubinNO())
+                .add(JikoFutangakuJohoHoseiJohoDgValidationMessage.被保険者氏名漢字必須項目, div.getTxtHihokenshaShimei())
+                .add(JikoFutangakuJohoHoseiJohoDgValidationMessage.被保険者名全角文字で入力してください, div.getTxtHihokenshaShimei())
+                .add(JikoFutangakuJohoHoseiJohoDgValidationMessage.郵便番号が不正, div.getTxtAtesakiYubinNo())
                 .add(JikoFutangakuJohoHoseiJohoDgValidationMessage.住所全角文字で入力してください, div.getTxtAtesakiJusho())
                 .add(JikoFutangakuJohoHoseiJohoDgValidationMessage.対象期間開始日終了日が不正, div.getTxtTaishouKeisanKikan())
                 .add(JikoFutangakuJohoHoseiJohoDgValidationMessage.被保険者期間が不正, div.getTxtHihokenshaKikan())

@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.UUID;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.KouhoushaJoho;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.ShinseishoHakkoTaishoshaHaakuBatch;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShinseishoHakkoTaishoshas;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShinseishoIkkatsuHakkoBatch;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.ShinseishoIkkatsuHakkoBatchBuilder;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD102020.DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.kouhoushajoho.KouhoushaJohoParameter;
 import static jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1080002.DBD1080002StateName.世帯所得;
@@ -122,9 +125,17 @@ public class ShinseishoIkkatsuHakko {
         UUID 発行処理ID = UUID.randomUUID();
         ShinseishoIkkatsuHakkoService shinseisho = new ShinseishoIkkatsuHakkoService();
         List<ddlKohoshaList_Row> selectedItem = div.getGenmenShinseiHaakuList().getDdlKohoshaList().getSelectedItems();
+        ShinseishoIkkatsuHakkoBatch shinseishoIkkatsuHakkoBatch = new ShinseishoIkkatsuHakkoBatch(発行処理ID);
+        ShinseishoIkkatsuHakkoBatchBuilder buidler = shinseishoIkkatsuHakkoBatch.createBuidler();
+        buidler.set把握処理ID(UUID.fromString(selectedItem.get(0).getHaakuShoriID().toString()));
+        shinseisho.insertDbT4032(buidler.build());
+        RString 被保険者番号 = new RString("0000000000");
         for (ddlKohoshaList_Row row : selectedItem) {
-            shinseisho.insertDbT4032(UUID.fromString(row.getHaakuShoriID().toString()), 発行処理ID);
-            shinseisho.insertDbT4033(new HihokenshaNo(row.getHihoNo()), 発行処理ID);
+            if (!被保険者番号.equals(row.getHihoNo())) {
+                ShinseishoHakkoTaishoshas shinseishoHakkoTaishoshas = new ShinseishoHakkoTaishoshas(発行処理ID, new HihokenshaNo(row.getHihoNo()));
+                shinseisho.insertDbT4033(shinseishoHakkoTaishoshas);
+            }
+            被保険者番号 = row.getHihoNo();
         }
         DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter parameter = getHandler(div).getParameter(発行処理ID);
         return ResponseData.of(parameter).respond();

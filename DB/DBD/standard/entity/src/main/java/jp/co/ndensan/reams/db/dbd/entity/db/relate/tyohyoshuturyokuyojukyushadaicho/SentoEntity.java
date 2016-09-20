@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.tyohyoshuturyokuyojukyushadaicho;
 
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 先頭Entity
@@ -54,10 +54,10 @@ public class SentoEntity {
     private RString 医療保険者番号;
     private RString 医療保険者名称;
     private RString 記号番号;
-    private Decimal 直近管理票;
-    private Decimal 直近実績;
-    private Decimal 直近高額;
-    private Decimal 直近償還;
+    private FlexibleYearMonth 直近管理票;
+    private FlexibleYearMonth 直近実績;
+    private FlexibleYearMonth 直近高額;
+    private FlexibleYearMonth 直近償還;
     private RString 直近所得段階;
     private RString 調査先郵便番号;
     private RString 調査先住所;

@@ -115,24 +115,16 @@ public class HanyoListKyodoJukyushaOutputProcess extends BatchProcessBase<KyodoJ
                 UzUDE0831EucAccesslogFileType.Csv);
         eucFilePath = Path.combinePath(spoolManager.getEucOutputDirectry(),
                 csvFileName);
+        csvWriter = BatchWriters.csvWriter(HanyoListKyodoJukyushaCsvEntity.class).
+                filePath(eucFilePath).
+                setDelimiter(EUC_WRITER_DELIMITER).
+                setEnclosure(EUC_WRITER_ENCLOSURE).
+                setEncode(Encode.UTF_8withBOM).
+                setNewLine(NewLine.CRLF).
+                hasHeader(false).
+                build();
         if (parameter.is項目名付加()) {
-            csvWriter = BatchWriters.csvWriter(HanyoListKyodoJukyushaCsvEntity.class).
-                    filePath(eucFilePath).
-                    setDelimiter(EUC_WRITER_DELIMITER).
-                    setEnclosure(EUC_WRITER_ENCLOSURE).
-                    setEncode(Encode.UTF_8withBOM).
-                    setNewLine(NewLine.CRLF).
-                    hasHeader(true).
-                    build();
-        } else {
-            csvWriter = BatchWriters.csvWriter(HanyoListKyodoJukyushaCsvEntity.class).
-                    filePath(eucFilePath).
-                    setDelimiter(EUC_WRITER_DELIMITER).
-                    setEnclosure(EUC_WRITER_ENCLOSURE).
-                    setEncode(Encode.UTF_8withBOM).
-                    setNewLine(NewLine.CRLF).
-                    hasHeader(false).
-                    build();
+            csvWriter.writeLine(HanyoListKyodoJukyushaCsvEntityEditor.getHeader());
         }
     }
 

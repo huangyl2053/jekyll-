@@ -291,22 +291,20 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
         zougenFushikyuRiyu.set増減_不支給の理由2(RString.EMPTY);
         zougenFushikyuRiyu.set増減_不支給の理由3(RString.EMPTY);
         if (支給不支給決定区分.equals(一) && 償還計画費データ件数 > 0) {
-            if (サービス提供年月.isBefore(new FlexibleYearMonth("200604"))) {
-                List<DbT3045ShokanServicePlan200004Entity> dbt3045entitys = dbT3045dac.get償還払請求サービス計画(被保険者番号, サービス提供年月, 整理番号);
-                増減_不支給の理由 = 増減_不支給の理由.concat(dbt3045entitys.get(0).getZougenRiyu());
-            } else if (サービス提供年月.isBefore(new FlexibleYearMonth("200903")) && new FlexibleYearMonth("200604").isBeforeOrEquals(サービス提供年月)) {
-                List<DbT3046ShokanServicePlan200604Entity> dbt3046entitys = dbT3046dac.get償還払請求サービス計画(被保険者番号, サービス提供年月, 整理番号);
-                増減_不支給の理由 = 増減_不支給の理由.concat(dbt3046entitys.get(0).getZougenRiyu());
+            増減_不支給の理由 = edit増減_不支給の理由(被保険者番号, 整理番号, サービス提供年月);
+            if (増減_不支給の理由.length() <= NUM_38) {
+                zougenFushikyuRiyu.set増減_不支給の理由1(増減_不支給の理由.substring(0, 増減_不支給の理由.length()));
             } else {
-                List<DbT3047ShokanServicePlan200904Entity> dbt3047entitys = dbT3047dac.get償還払請求サービス計画(被保険者番号, サービス提供年月, 整理番号);
-                増減_不支給の理由 = 増減_不支給の理由.concat(dbt3047entitys.get(0).getZougenRiyu());
+                zougenFushikyuRiyu.set増減_不支給の理由1(増減_不支給の理由.substring(0, NUM_38));
+                zougenFushikyuRiyu.set増減_不支給の理由2(増減_不支給の理由.substring(NUM_38, 増減_不支給の理由.length()));
             }
-            zougenFushikyuRiyu.set増減_不支給の理由1(増減_不支給の理由.substring(0, NUM_38));
-            zougenFushikyuRiyu.set増減_不支給の理由2(増減_不支給の理由.substring(NUM_38, NUM_40));
         }
         if (支給不支給決定区分.equals(一) && 償還集計データ件数 > 0) {
             List<DbT3053ShokanShukeiEntity> dbt3053entitys = dbT3053dac.select償還払請求集計(被保険者番号, サービス提供年月, 整理番号);
-            増減理由 = 増減理由.concat(dbt3053entitys.get(0).getZougenRiyu());
+            if (!dbt3053entitys.isEmpty()) {
+                RString 理由 = dbt3053entitys.get(0).getZougenRiyu();
+                増減理由 = 理由 != null ? 増減理由.concat(理由) : 増減理由;
+            }
             if (増減_不支給の理由.isEmpty()) {
                 zougenFushikyuRiyu.set増減_不支給の理由1(増減理由);
             } else if (増減_不支給の理由.length() <= NUM_38) {
@@ -319,22 +317,20 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
             }
         }
         if (支給不支給決定区分.equals(二) && 償還計画費データ件数 > 0) {
-            if (サービス提供年月.isBefore(new FlexibleYearMonth("200604"))) {
-                List<DbT3045ShokanServicePlan200004Entity> dbt3045entitys = dbT3045dac.get償還払請求サービス計画(被保険者番号, サービス提供年月, 整理番号);
-                増減_不支給の理由 = 増減_不支給の理由.concat(dbt3045entitys.get(0).getFushikyuRiyu());
-            } else if (サービス提供年月.isBefore(new FlexibleYearMonth("200903")) && new FlexibleYearMonth("200604").isBeforeOrEquals(サービス提供年月)) {
-                List<DbT3046ShokanServicePlan200604Entity> dbt3046entitys = dbT3046dac.get償還払請求サービス計画(被保険者番号, サービス提供年月, 整理番号);
-                増減_不支給の理由 = 増減_不支給の理由.concat(dbt3046entitys.get(0).getFushikyuRiyu());
+            増減_不支給の理由 = edit増減不支給の理由(被保険者番号, 整理番号, サービス提供年月);
+            if (増減_不支給の理由.length() <= NUM_38) {
+                zougenFushikyuRiyu.set増減_不支給の理由1(増減_不支給の理由.substring(0, 増減_不支給の理由.length()));
             } else {
-                List<DbT3047ShokanServicePlan200904Entity> dbt3047entitys = dbT3047dac.get償還払請求サービス計画(被保険者番号, サービス提供年月, 整理番号);
-                増減_不支給の理由 = 増減_不支給の理由.concat(dbt3047entitys.get(0).getFushikyuRiyu());
+                zougenFushikyuRiyu.set増減_不支給の理由1(増減_不支給の理由.substring(0, NUM_38));
+                zougenFushikyuRiyu.set増減_不支給の理由2(増減_不支給の理由.substring(NUM_38, 増減_不支給の理由.length()));
             }
-            zougenFushikyuRiyu.set増減_不支給の理由1(増減_不支給の理由.substring(0, NUM_38));
-            zougenFushikyuRiyu.set増減_不支給の理由2(増減_不支給の理由.substring(NUM_38, NUM_40));
         }
         if (支給不支給決定区分.equals(二) && 償還集計データ件数 > 0) {
             List<DbT3053ShokanShukeiEntity> dbt3053entitys = dbT3053dac.select償還払請求集計(被保険者番号, サービス提供年月, 整理番号);
-            増減理由 = 増減理由.concat(dbt3053entitys.get(0).getHushikyuRiyu());
+            if (!dbt3053entitys.isEmpty()) {
+                RString 理由 = dbt3053entitys.get(0).getHushikyuRiyu();
+                増減理由 = 理由 != null ? 増減理由.concat(理由) : 増減理由;
+            }
             if (増減_不支給の理由.isEmpty()) {
                 zougenFushikyuRiyu.set増減_不支給の理由1(増減理由);
             } else if (増減_不支給の理由.length() <= NUM_38) {
@@ -785,5 +781,53 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
             償還集計データ件数++;
         }
         return 償還集計データ件数;
+    }
+
+    private RString edit増減_不支給の理由(HihokenshaNo 被保険者番号, RString 整理番号, FlexibleYearMonth サービス提供年月) {
+        RString 増減_不支給の理由 = RString.EMPTY;
+        if (サービス提供年月.isBefore(new FlexibleYearMonth("200604"))) {
+            List<DbT3045ShokanServicePlan200004Entity> dbt3045entitys = dbT3045dac.get償還払請求サービス計画(被保険者番号, サービス提供年月, 整理番号);
+            if (!dbt3045entitys.isEmpty()) {
+                RString 理由 = dbt3045entitys.get(0).getZougenRiyu();
+                増減_不支給の理由 = 理由 != null ? 増減_不支給の理由.concat(理由) : 増減_不支給の理由;
+            }
+        } else if (サービス提供年月.isBefore(new FlexibleYearMonth("200903")) && new FlexibleYearMonth("200604").isBeforeOrEquals(サービス提供年月)) {
+            List<DbT3046ShokanServicePlan200604Entity> dbt3046entitys = dbT3046dac.get償還払請求サービス計画(被保険者番号, サービス提供年月, 整理番号);
+            if (!dbt3046entitys.isEmpty()) {
+                RString 理由 = dbt3046entitys.get(0).getZougenRiyu();
+                増減_不支給の理由 = 理由 != null ? 増減_不支給の理由.concat(理由) : 増減_不支給の理由;
+            }
+        } else {
+            List<DbT3047ShokanServicePlan200904Entity> dbt3047entitys = dbT3047dac.get償還払請求サービス計画(被保険者番号, サービス提供年月, 整理番号);
+            if (!dbt3047entitys.isEmpty()) {
+                RString 理由 = dbt3047entitys.get(0).getZougenRiyu();
+                増減_不支給の理由 = 理由 != null ? 増減_不支給の理由.concat(理由) : 増減_不支給の理由;
+            }
+        }
+        return 増減_不支給の理由;
+    }
+
+    private RString edit増減不支給の理由(HihokenshaNo 被保険者番号, RString 整理番号, FlexibleYearMonth サービス提供年月) {
+        RString 増減_不支給の理由 = RString.EMPTY;
+        if (サービス提供年月.isBefore(new FlexibleYearMonth("200604"))) {
+            List<DbT3045ShokanServicePlan200004Entity> dbt3045entitys = dbT3045dac.get償還払請求サービス計画(被保険者番号, サービス提供年月, 整理番号);
+            if (!dbt3045entitys.isEmpty()) {
+                RString 理由 = dbt3045entitys.get(0).getFushikyuRiyu();
+                増減_不支給の理由 = 理由 != null ? 増減_不支給の理由.concat(理由) : 増減_不支給の理由;
+            }
+        } else if (サービス提供年月.isBefore(new FlexibleYearMonth("200903")) && new FlexibleYearMonth("200604").isBeforeOrEquals(サービス提供年月)) {
+            List<DbT3046ShokanServicePlan200604Entity> dbt3046entitys = dbT3046dac.get償還払請求サービス計画(被保険者番号, サービス提供年月, 整理番号);
+            if (!dbt3046entitys.isEmpty()) {
+                RString 理由 = dbt3046entitys.get(0).getFushikyuRiyu();
+                増減_不支給の理由 = 理由 != null ? 増減_不支給の理由.concat(理由) : 増減_不支給の理由;
+            }
+        } else {
+            List<DbT3047ShokanServicePlan200904Entity> dbt3047entitys = dbT3047dac.get償還払請求サービス計画(被保険者番号, サービス提供年月, 整理番号);
+            if (!dbt3047entitys.isEmpty()) {
+                RString 理由 = dbt3047entitys.get(0).getFushikyuRiyu();
+                増減_不支給の理由 = 理由 != null ? 増減_不支給の理由.concat(理由) : 増減_不支給の理由;
+            }
+        }
+        return 増減_不支給の理由;
     }
 }

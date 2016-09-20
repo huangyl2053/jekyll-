@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
+import jp.co.ndensan.reams.uz.uza.util.db.Order;
 import static jp.co.ndensan.reams.uz.uza.util.db.Order.DESC;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.by;
@@ -221,5 +222,21 @@ public class DbT1004ShisetsuNyutaishoDac implements ISaveable<DbT1004ShisetsuNyu
                 order(by(DbT1004ShisetsuNyutaisho.rirekiNo)).
                 limit(INT_1).
                 toObject(DbT1004ShisetsuNyutaishoEntity.class);
+    }
+
+    /**
+     * 識別コードにより、介護保険施設入退所の取得。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @return 介護保険施設入退所
+     */
+    public List<DbT1004ShisetsuNyutaishoEntity> get介護保険施設入退所(ShikibetsuCode 識別コード) {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage("識別コード"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.select().
+                table(DbT1004ShisetsuNyutaisho.class).
+                where(eq(shikibetsuCode, 識別コード)).
+                order(by(shikibetsuCode), by(rirekiNo, Order.DESC)).
+                toList(DbT1004ShisetsuNyutaishoEntity.class);
     }
 }

@@ -63,7 +63,11 @@ public class ShotokuDankaiBetsuShunoritsuIchiranEditor implements IShotokuDankai
         } else {
             source.list_2 = new RString(パラメータ.get期());
         }
-        source.list_3 = パラメータ.get保険料段階();
+        if (パラメータ.get年度().startsWith(記号)) {
+            source.list_3 = RString.EMPTY;
+        } else {
+            source.list_3 = パラメータ.get保険料段階();
+        }
         source.list_4 = new RString(パラメータ.get調定額_件数());
         source.list_5 = get金額Formatter(パラメータ.get調定額());
         source.list_6 = new RString(パラメータ.get収入額_件数());

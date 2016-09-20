@@ -57,7 +57,8 @@ public class SouhuFilesakuseiProcess extends BatchProcessBase<DbT3001JukyushaIdo
     private static final RString KUBUN_3 = new RString("3");
     private static final RString KUBUN_4 = new RString("4");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
-    private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
+    private static final RString EUC_WRITER_ENCLOSURE = new RString("");
+    private static final RString DOUBLE_QUOTATION = new RString("\"");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBC110810"));
     private static final RString TABLE_処理結果リスト一時TBL = new RString("DbWT1002KokuhorenSakuseiError");
     private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jukyushatotsugoiraiout"
@@ -221,7 +222,7 @@ public class SouhuFilesakuseiProcess extends BatchProcessBase<DbT3001JukyushaIdo
         record2Entity.set異動事由(entity.getJukyushaIdoJiyu().trim());
         record2Entity.set証記載保険者番号(entity.getShoKisaiHokenshaNo().value().trim());
         record2Entity.set被保険者番号(entity.getHiHokenshaNo().value().trim());
-        record2Entity.set被保険者氏名カナ(entity.getHiHokenshaNameKana().trim());
+        record2Entity.set被保険者氏名カナ(DOUBLE_QUOTATION.concat(entity.getHiHokenshaNameKana().trim()).concat(DOUBLE_QUOTATION));
         record2Entity.set生年月日(new RString(entity.getUmareYMD().toString().trim()));
         record2Entity.set性別コード(entity.getSeibetsuCode().trim());
         record2Entity.set資格取得年月日(new RString(entity.getShikakuShutokuYMD().toString().trim()));

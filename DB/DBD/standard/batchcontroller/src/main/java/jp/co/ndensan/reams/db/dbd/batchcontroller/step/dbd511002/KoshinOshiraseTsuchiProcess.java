@@ -95,6 +95,8 @@ public class KoshinOshiraseTsuchiProcess extends BatchProcessBase<KoshinOshirase
     @BatchWriter
     private BatchReportWriter<KoshinShinseiTsuchishoHakkoIchiranhyoReportSource> batchReportWrite112;
     private ReportSourceWriter<KoshinShinseiTsuchishoHakkoIchiranhyoReportSource> reportSourceWriter112;
+    @BatchWriter
+    private BatchPermanentTableWriter<DbT4101NinteiShinseiJohoEntity> dbT4101EntityWriter;
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.koshinoshirasetsuchi."
             + "IKoshinOshiraseTsuchiMapper.get帳票出力用情報取得");
@@ -132,17 +134,16 @@ public class KoshinOshiraseTsuchiProcess extends BatchProcessBase<KoshinOshirase
     @Override
     protected IBatchReader createReader() {
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
-        outputOrder = finder.get出力順(SubGyomuCode.DBB介護賦課, 帳票12.getReportId(), Long.parseLong(parameter.get出力順().toString()));
+        if (parameter.get出力順() != null && !parameter.get出力順().isEmpty()) {
+            outputOrder = finder.get出力順(SubGyomuCode.DBB介護賦課, 帳票12.getReportId(), Long.parseLong(parameter.get出力順().toString()));
+        }
         RString 出力順 = RString.EMPTY;
         if (outputOrder != null) {
             出力順 = ChohyoUtil.get出力順OrderBy(MyBatisOrderByClauseCreator.
                     create(NinshiuUpdateProperty.DBD511002_ResultListEnum.class, outputOrder), NUM5);
         }
         return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toNinshiuUpdateMyBatisParameter(出力順));
-
     }
-    @BatchWriter
-    private BatchPermanentTableWriter<DbT4101NinteiShinseiJohoEntity> dbT4101EntityWriter;
 
     @Override
     protected void createWriter() {

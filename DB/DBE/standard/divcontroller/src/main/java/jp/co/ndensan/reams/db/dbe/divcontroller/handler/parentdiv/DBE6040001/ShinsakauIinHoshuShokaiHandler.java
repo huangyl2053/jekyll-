@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6040001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsahoshuichiran.ShinsaHoshuIchiran;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.shinsahoshuichiran.ShinsaHoshuIchiranBatchParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE601006.DBE601006_ShinsakaiiinHoshuParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6040001.ShinsakauIinHoshuShokaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE6040001.dgShinsakaiIinHoshu_Row;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -133,8 +133,8 @@ public class ShinsakauIinHoshuShokaiHandler {
      * @param 帳票出力区分 帳票出力区分のフラグ
      * @return BatchParameter
      */
-    public ShinsaHoshuIchiranBatchParameter createBatchParam(RString 帳票出力区分) {
-        ShinsaHoshuIchiranBatchParameter param = new ShinsaHoshuIchiranBatchParameter();
+    public DBE601006_ShinsakaiiinHoshuParameter createBatchParam(RString 帳票出力区分) {
+        DBE601006_ShinsakaiiinHoshuParameter param = new DBE601006_ShinsakaiiinHoshuParameter();
         param.setShinsakaiKaisaiYMD(new RString(div.getTxtShinsakaiKaisaiYM().getValue().getYearMonth().toString()));
         param.setSyohyoSyuturyoku(帳票出力区分);
         return param;

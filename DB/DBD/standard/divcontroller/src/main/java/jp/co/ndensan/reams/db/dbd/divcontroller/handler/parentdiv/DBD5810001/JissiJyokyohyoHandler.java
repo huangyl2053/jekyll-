@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5810001;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd581001.DBD581001Parameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD581001.DBD581001Parameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5810001.JissiJyokyohyoDiv;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
