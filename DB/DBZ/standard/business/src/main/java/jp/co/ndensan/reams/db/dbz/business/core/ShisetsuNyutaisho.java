@@ -228,6 +228,21 @@ public class ShisetsuNyutaisho extends
         return hasChangedEntity();
     }
 
+    /**
+     * 他市町村住所地特例のみを変更対象とします。<br/>
+     * {@link DbT1004ShisetsuNyutaishoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     *
+     * @return 変更対象処理実施後の{@link KyokaisoGaitosha}
+     */
+    public ShisetsuNyutaisho modifiedModel() {
+        DbT1004ShisetsuNyutaishoEntity modifiedEntity = entity.clone();
+        if (modifiedEntity.getState().equals(EntityDataState.Unchanged)) {
+            modifiedEntity.setState(EntityDataState.Modified);
+        }
+        return new ShisetsuNyutaisho(
+                modifiedEntity, id);
+    }
+
     private static final class _SerializationProxy implements Serializable {
 
         private static final long serialVersionUID = 1L;

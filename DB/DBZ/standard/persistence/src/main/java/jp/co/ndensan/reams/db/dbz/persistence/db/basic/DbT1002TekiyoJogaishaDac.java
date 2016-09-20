@@ -67,9 +67,9 @@ public class DbT1002TekiyoJogaishaDac implements ISaveable<DbT1002TekiyoJogaisha
         return accessor.select().
                 table(DbT1002TekiyoJogaisha.class).
                 where(and(
-                        eq(shikibetsuCode, 識別コード),
-                        eq(idoYMD, 異動日),
-                        eq(edaNo, 枝番))).
+                                eq(shikibetsuCode, 識別コード),
+                                eq(idoYMD, 異動日),
+                                eq(edaNo, 枝番))).
                 toObject(DbT1002TekiyoJogaishaEntity.class);
     }
 
@@ -162,9 +162,9 @@ public class DbT1002TekiyoJogaishaDac implements ISaveable<DbT1002TekiyoJogaisha
                 table(DbT1002TekiyoJogaisha.class).
                 where(
                         or(and(eq(shikibetsuCode, 識別コード),
-                                leq(tekiyoYMD, 登録異動年月日),
-                                lt(登録異動年月日, kaijoYMD),
-                                eq(logicalDeletedFlag, false)),
+                                        leq(tekiyoYMD, 登録異動年月日),
+                                        lt(登録異動年月日, kaijoYMD),
+                                        eq(logicalDeletedFlag, false)),
                                 and(eq(shikibetsuCode, 識別コード),
                                         leq(tekiyoYMD, 登録異動年月日),
                                         isNULL(kaijoYMD),
@@ -211,8 +211,31 @@ public class DbT1002TekiyoJogaishaDac implements ISaveable<DbT1002TekiyoJogaisha
         return accessor.selectSpecific(max(edaNo)).
                 table(DbT1002TekiyoJogaisha.class).
                 where(and(
-                        eq(shikibetsuCode, 識別コード),
-                        eq(idoYMD, 異動日))).
+                                eq(shikibetsuCode, 識別コード),
+                                eq(idoYMD, 異動日))).
                 toObject(DbT1002TekiyoJogaishaEntity.class);
+    }
+
+    /**
+     * 受給者台帳を取得する。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @return DbT1002TekiyoJogaishaEntity
+     * @throws NullPointerException 引数のいずれかがnullの場合
+     */
+    @Transaction
+    public List<DbT1002TekiyoJogaishaEntity> get適用除外者受給者台帳(
+            ShikibetsuCode 識別コード) throws NullPointerException {
+        requireNonNull(識別コード, UrSystemErrorMessages.値がnull.getReplacedMessage(識別コード_TEMP.toString()));
+
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT1002TekiyoJogaisha.class).
+                where(and(
+                                eq(shikibetsuCode, 識別コード),
+                                eq(logicalDeletedFlag, false))).
+                order(by(shikibetsuCode), by(idoYMD, Order.DESC), by(edaNo, Order.DESC))
+                .toList(DbT1002TekiyoJogaishaEntity.class);
     }
 }

@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1140011;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -24,6 +25,8 @@ public class JikoFutangakuHoseiListDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("linLine1")
+    private HorizontalLine linLine1;
     @JsonProperty("chkRirekiHyouji")
     private CheckBoxList chkRirekiHyouji;
     @JsonProperty("dgJohoIchiran")
@@ -35,6 +38,24 @@ public class JikoFutangakuHoseiListDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getlinLine1
+     * @return linLine1
+     */
+    @JsonProperty("linLine1")
+    public HorizontalLine getLinLine1() {
+        return linLine1;
+    }
+
+    /*
+     * setlinLine1
+     * @param linLine1 linLine1
+     */
+    @JsonProperty("linLine1")
+    public void setLinLine1(HorizontalLine linLine1) {
+        this.linLine1 = linLine1;
+    }
+
     /*
      * getchkRirekiHyouji
      * @return chkRirekiHyouji

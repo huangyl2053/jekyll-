@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE7010001
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaijoho.GogitaiJoho;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.hokokushiryosakusei.HokokuShiryoSakuSeiBatchParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE701001.DBE701001_HokokuShiryoParameter;
 import jp.co.ndensan.reams.db.dbe.definition.core.yokaigonintei.shinsei.HihokenshaKubun;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE7010001.HokokuShiryoSakuSeiParameterDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE7010001.HokokuShiryoSakuSeiParameterHandler;
@@ -127,7 +127,7 @@ public class HokokuShiryoSakuSeiParameter {
      * @param div 報告資料発行画面
      * @return ResponseData<HokokuShiryoSakuSeiParameterDiv>
      */
-    public ResponseData<HokokuShiryoSakuSeiBatchParameter> onClick_btnBatchRegisterHokokuShiryo(HokokuShiryoSakuSeiParameterDiv div) {
+    public ResponseData<DBE701001_HokokuShiryoParameter> onClick_btnBatchRegisterHokokuShiryo(HokokuShiryoSakuSeiParameterDiv div) {
         return ResponseData.of(getBatchParameter(div)).respond();
     }
 
@@ -142,8 +142,8 @@ public class HokokuShiryoSakuSeiParameter {
         div.getDdlGogitaiBango().setSelectedIndex(0);
     }
 
-    private HokokuShiryoSakuSeiBatchParameter getBatchParameter(HokokuShiryoSakuSeiParameterDiv div) {
-        return new HokokuShiryoSakuSeiBatchParameter(
+    private DBE701001_HokokuShiryoParameter getBatchParameter(HokokuShiryoSakuSeiParameterDiv div) {
+        return new DBE701001_HokokuShiryoParameter(
                 div.getChkShutsuryokuChohyo().getSelectedKeys().contains(SELECTKEY_KEY0),
                 div.getChkShutsuryokuChohyo().getSelectedKeys().contains(SELECTKEY_KEY1),
                 div.getChkShutsuryokuChohyo().getSelectedKeys().contains(SELECTKEY_KEY2),

@@ -2,6 +2,7 @@ package jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppoippan;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -36,7 +37,7 @@ public class JigyoHokokuHihokenshaTokeiMotoTempEntity extends DbTableEntityBase<
     @TempTableColumnOrder(3)
     private ShikibetsuCode shikibetsuCode;
     @TempTableColumnOrder(4)
-    private RString setaiCode;
+    private SetaiCode setaiCode;
     @TempTableColumnOrder(5)
     private LasdecCode shichosonCode;
     @TempTableColumnOrder(6)
@@ -195,14 +196,14 @@ public class JigyoHokokuHihokenshaTokeiMotoTempEntity extends DbTableEntityBase<
     /**
      * @return the setaiCode
      */
-    public RString getSetaiCode() {
+    public SetaiCode getSetaiCode() {
         return setaiCode;
     }
 
     /**
      * @param setaiCode the setaiCode to set
      */
-    public void setSetaiCode(RString setaiCode) {
+    public void setSetaiCode(SetaiCode setaiCode) {
         this.setaiCode = setaiCode;
     }
 

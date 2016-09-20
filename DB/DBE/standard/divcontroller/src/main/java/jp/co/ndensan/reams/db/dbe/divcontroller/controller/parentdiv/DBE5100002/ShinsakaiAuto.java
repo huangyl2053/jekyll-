@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5100002
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakayijidouwaritsuke.ShinsaKayiJidouWaritsukeBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.taisyosyajidowaritsuke.TaisyosyaJidoWaritsukeBatchParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE510001.DBE510001_ShinsakaiAutoWaritsukeParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.kaigoninteishinsakai.KaigoNinteiShinsakaiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100002.DBE5100002TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5100002.ShinsakaiAutoDiv;
@@ -60,7 +60,7 @@ public class ShinsakaiAuto {
      * @param shinDiv ShinsakaiAutoDiv
      * @return ResponseData<ShinsakaiAutoDiv>
      */
-    public ResponseData<TaisyosyaJidoWaritsukeBatchParameter> onClick_btnShinsakaiAuto(ShinsakaiAutoDiv shinDiv) {
+    public ResponseData<DBE510001_ShinsakaiAutoWaritsukeParameter> onClick_btnShinsakaiAuto(ShinsakaiAutoDiv shinDiv) {
         return ResponseData.of(getHandler(shinDiv).setBatchParameter()).respond();
     }
 

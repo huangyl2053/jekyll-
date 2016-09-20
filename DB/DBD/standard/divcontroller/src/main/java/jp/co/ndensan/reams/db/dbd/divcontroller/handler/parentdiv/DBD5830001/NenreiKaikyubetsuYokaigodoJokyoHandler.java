@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5830001;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd583001.NenreiKaikyubetsuYokaigodoJokyoParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD583001.DBD583001Parameter;
 import jp.co.ndensan.reams.db.dbd.definition.core.chiku.ChikuKubun;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5830001.NenreiKaikyubetsuYokaigodoJokyoDiv;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurityjoho.KoseiShichosonJoho;
@@ -117,8 +117,8 @@ public class NenreiKaikyubetsuYokaigodoJokyoHandler {
      *
      * @return NenreiKaikyubetsuYokaigodoJokyoParameter
      */
-    public NenreiKaikyubetsuYokaigodoJokyoParameter getParameter() {
-        NenreiKaikyubetsuYokaigodoJokyoParameter parameter = new NenreiKaikyubetsuYokaigodoJokyoParameter();
+    public DBD583001Parameter getParameter() {
+        DBD583001Parameter parameter = new DBD583001Parameter();
         if (キー0.equals(div.getRdoKijyun().getSelectedKey())) {
             parameter.set基準日(div.getTxtKijyunD().getValue());
         } else {
@@ -134,7 +134,7 @@ public class NenreiKaikyubetsuYokaigodoJokyoHandler {
         return parameter;
     }
 
-    private void set地区(NenreiKaikyubetsuYokaigodoJokyoParameter parameter) {
+    private void set地区(DBD583001Parameter parameter) {
         if (ChikuKubun.住所.get漢字名称().equals(div.getDdlChiku().getSelectedValue())) {
             setパラメータ(parameter, new Code(div.getCcdChoikiStart().get町域コード().getColumnValue()),
                     new Code(div.getCcdChoikiEnd().get町域コード().getColumnValue()), RString.EMPTY, RString.EMPTY);
@@ -154,7 +154,7 @@ public class NenreiKaikyubetsuYokaigodoJokyoHandler {
         }
     }
 
-    private void setパラメータ(NenreiKaikyubetsuYokaigodoJokyoParameter parameter, Code 開始地区コード,
+    private void setパラメータ(DBD583001Parameter parameter, Code 開始地区コード,
             Code 終了地区コード, RString 旧市町村コード, RString 旧市町村名称) {
         parameter.set開始地区コード(開始地区コード);
         parameter.set終了地区コード(終了地区コード);

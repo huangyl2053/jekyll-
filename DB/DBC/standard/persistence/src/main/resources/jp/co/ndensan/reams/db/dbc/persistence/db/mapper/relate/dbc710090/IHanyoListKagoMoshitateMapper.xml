@@ -128,7 +128,10 @@
             </if>  
             <if test="保険者コード!=null and !保険者コード.isEmpty()">
                 AND  "DbT1001HihokenshaDaicho"."shichosonCode" = #{保険者コード}
-            </if>            
+            </if>  
+        <if test="出力順!=null and !出力順.isEmpty()">
+            ${出力順}
+        </if>               
     </sql>
     
     

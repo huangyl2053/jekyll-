@@ -94,8 +94,9 @@ public class NinteiTanitsuProcessDataManager {
      * @return DbT4001JukyushaDaichoEntity
      */
     public DbT4001JukyushaDaichoEntity upDate受給者台帳Detial(YokaigoNinteiInterfaceEntity entity, FlexibleDate 認定日) {
+        RString rirekNo = entity.get受給者台帳Entity().getRirekiNo();
         entity.get受給者台帳Entity().setRirekiNo(new RString(format("%04d",
-                Integer.valueOf(entity.get受給者台帳Entity().getRirekiNo().toString().replaceFirst("^0*", "")) + 1)));
+                Integer.valueOf(rirekNo.toString().replaceFirst("^0*", "")) + 1)));
         RString 受給申請事由 = entity.get受給者台帳Entity().getJukyuShinseiJiyu().value();
         if (JukyuShinseiJiyu.再申請_有効期限内.getコード().equals(受給申請事由) || JukyuShinseiJiyu.再申請_有効期限外.getコード().equals(受給申請事由)) {
             entity.get受給者台帳Entity().setShinseiJokyoKubun(ShinseiJokyoKubun.認定完了.getコード());

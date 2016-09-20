@@ -6,11 +6,11 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.basic;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3060KagoKetteiShukei.torikomiYM;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3061KagoKetteiMeisai;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3061KagoKetteiMeisai.hokenshaKubun;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3061KagoKetteiMeisai.rirekiNo;
 import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3061KagoKetteiMeisai.toriatsukaiYM;
+import static jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3061KagoKetteiMeisai.torikomiYM;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3061KagoKetteiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;

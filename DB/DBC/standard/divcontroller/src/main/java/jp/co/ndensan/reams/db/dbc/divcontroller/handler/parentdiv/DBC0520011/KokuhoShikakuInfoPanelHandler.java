@@ -25,12 +25,17 @@ import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaShubetsuType;
 import jp.co.ndensan.reams.ur.urz.service.core.hokenja.HokenjaManagerFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.hokenja.HokenjaSearchItem;
 import jp.co.ndensan.reams.ur.urz.service.core.hokenja.IHokenjaManager;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.INewSearchCondition;
@@ -109,20 +114,21 @@ public class KokuhoShikakuInfoPanelHandler {
             }
             div.getMeisaiPanel().getChkTorokuKubun().setSelectedItemsByKey(keys);
             set文字コード(国保資格詳細情報);
-            前排他の設定(shikibetsuCode, 国保資格詳細情報.get履歴番号());
-        } else {
-            前排他の設定(shikibetsuCode, RString.EMPTY);
         }
+        前排他の設定(被保険者番号);
+        AccessLogger.log(AccessLogType.照会, toPersonalData(被保険者番号));
         return 国保資格詳細情報;
     }
 
     /**
      * データを保存する
      *
+     * @param 被保険者番号 HihokenshaNo
      * @param shikibetsuCode ShikibetsuCode
+     * @param 国保資格詳細情報 KokuhoShikakuInfo
      * @return boolean
      */
-    public boolean updateorinsert(ShikibetsuCode shikibetsuCode, KokuhoShikakuInfo 国保資格詳細情報) {
+    public boolean updateorinsert(HihokenshaNo 被保険者番号, ShikibetsuCode shikibetsuCode, KokuhoShikakuInfo 国保資格詳細情報) {
         boolean flag = false;
         KokuhoShikakuInfoManager kokuhoShikakuInfoManager = KokuhoShikakuInfoManager.createInstance();
         KokuhoShikakuInfoBuilder builder;
@@ -169,7 +175,8 @@ public class KokuhoShikakuInfoPanelHandler {
                 builder.set登録区分(new RString("0"));
             }
             if (kokuhoShikakuInfoManager.save国保資格詳細情報(builder.build())) {
-                前排他制御の解除(shikibetsuCode, 国保資格詳細情報.get履歴番号());
+                前排他制御の解除(被保険者番号);
+                AccessLogger.log(AccessLogType.更新, toPersonalData(被保険者番号));
                 flag = true;
             }
         } else {
@@ -209,7 +216,8 @@ public class KokuhoShikakuInfoPanelHandler {
                 builder.set登録区分(new RString("0"));
             }
             if (kokuhoShikakuInfoManager.save国保資格詳細情報(builder.build())) {
-                前排他制御の解除(shikibetsuCode, RString.EMPTY);
+                前排他制御の解除(被保険者番号);
+                AccessLogger.log(AccessLogType.更新, toPersonalData(被保険者番号));
                 flag = true;
             }
         }
@@ -219,14 +227,15 @@ public class KokuhoShikakuInfoPanelHandler {
     /**
      * 「一覧へ戻る」ボタンの処理
      *
-     * @param shikibetsuCode shikibetsuCode
+     * @param 被保険者番号 shikibetsuCode
      * @param div FutangendogakuShinseiDiv
+     * @param 国保資格詳細情報 KokuhoShikakuInfo
      */
-    public void onClick_btnBack(ShikibetsuCode shikibetsuCode, KokuhoShikakuInfoPanelDiv div, KokuhoShikakuInfo 国保資格詳細情報) {
+    public void onClick_btnBack(HihokenshaNo 被保険者番号, KokuhoShikakuInfoPanelDiv div, KokuhoShikakuInfo 国保資格詳細情報) {
         if (国保資格詳細情報 != null) {
-            前排他制御の解除(shikibetsuCode, 国保資格詳細情報.get履歴番号());
+            前排他制御の解除(被保険者番号);
         } else {
-            前排他制御の解除(shikibetsuCode, RString.EMPTY);
+            前排他制御の解除(被保険者番号);
         }
     }
 
@@ -249,18 +258,13 @@ public class KokuhoShikakuInfoPanelHandler {
         }
     }
 
-    private void 前排他の設定(ShikibetsuCode shikibetsuCode, RString rirekiNo) {
-//        LockingKey 排他キー = new LockingKey(shikibetsuCode.value().concat(rirekiNo));
-//        RealInitialLocker.lock(new LockingKey(排他キー));
-        LockingKey 排他キー = new LockingKey(new RString("DBCShikibetsuCode").concat(shikibetsuCode.getColumnValue()).
-                concat(new RString("DBCrirekiNo")).concat(rirekiNo));
+    private void 前排他の設定(HihokenshaNo 被保険者番号) {
+        LockingKey 排他キー = new LockingKey(new RString("DBCHihokenshaNo").concat(被保険者番号.getColumnValue()));
         RealInitialLocker.lock(new LockingKey(排他キー));
     }
 
-    private void 前排他制御の解除(ShikibetsuCode shikibetsuCode, RString rirekiNo) {
-//        LockingKey 排他キー = new LockingKey(shikibetsuCode.value().concat(rirekiNo));
-        LockingKey 排他キー = new LockingKey(new RString("DBCShikibetsuCode").concat(shikibetsuCode.getColumnValue()).
-                concat(new RString("DBCrirekiNo")).concat(rirekiNo));
+    private void 前排他制御の解除(HihokenshaNo 被保険者番号) {
+        LockingKey 排他キー = new LockingKey(new RString("DBCHihokenshaNo").concat(被保険者番号.getColumnValue()));
         RealInitialLocker.release(new LockingKey(排他キー));
     }
 
@@ -276,4 +280,8 @@ public class KokuhoShikakuInfoPanelHandler {
         return new KeyValueDataSource(hokenja.get保険者番号().getColumnValue(), hokenja.get保険者名());
     }
 
+    private PersonalData toPersonalData(HihokenshaNo 被保険者番号) {
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), 被保険者番号.value());
+        return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
+    }
 }

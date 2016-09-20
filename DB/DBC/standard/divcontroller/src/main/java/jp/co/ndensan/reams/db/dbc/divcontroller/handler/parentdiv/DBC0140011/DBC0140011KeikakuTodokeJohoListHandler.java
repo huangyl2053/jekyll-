@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0140011;
 
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC160010.DBC160010_KeikakuTodokedeJokyoIchiranParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0140011.DBC0140011KeikakuTodokeJohoListDiv;
-import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
@@ -28,9 +27,8 @@ public final class DBC0140011KeikakuTodokeJohoListHandler {
      *
      * @return KeikakuTodokedeJokyoIchiranBatchParameter　parameter
      */
-    public ResponseData<DBC160010_KeikakuTodokedeJokyoIchiranParameter> onClick_btnBatchRegister() {
+    public DBC160010_KeikakuTodokedeJokyoIchiranParameter onClick_btnBatchRegister() {
         DBC160010_KeikakuTodokedeJokyoIchiranParameter parameter = new DBC160010_KeikakuTodokedeJokyoIchiranParameter();
-
         if (div.getTbJukyuShinseibi().getFromValue() != null) {
             parameter.setJyukyuushinseibiFrom(new FlexibleDate(div.getTbJukyuShinseibi().getFromValue().toDateString()));
         }
@@ -39,11 +37,13 @@ public final class DBC0140011KeikakuTodokeJohoListHandler {
         }
         parameter.setTaisyoushatyuusyutu(div.getDdlTaishousha().getLabelLText());
         parameter.setTodokeidejyoukyou(div.getDdlTodokeJokyo().getLabelLText());
-        parameter.setKijyunbi(new FlexibleDate(div.getTbKijunbi().getValue().toDateString()));
+        if (div.getTbKijunbi().getValue() != null) {
+            parameter.setKijyunbi(new FlexibleDate(div.getTbKijunbi().getValue().toDateString()));
+        }
         if (div.getPrintOrderCv().get出力順ID() != null) {
             parameter.setShutsuryokujunId(new Long(div.getPrintOrderCv().get出力順ID()));
         }
-        return ResponseData.of(parameter).respond();
+        return parameter;
 
     }
 

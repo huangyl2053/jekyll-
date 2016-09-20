@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.ca.cax.business.search.CaFt702FindTotalShunyuFunction
 import jp.co.ndensan.reams.ca.cax.business.search.TotalShunyuSearchKeyBuilder;
 import jp.co.ndensan.reams.ca.cax.definition.core.shuno.SearchSaishutsuKubun;
 import jp.co.ndensan.reams.ca.cax.definition.core.shuno.SearchSokuhoKubun;
+import jp.co.ndensan.reams.ca.cax.entity.db.basic.CaV0704SaishinShunyuNiniFutaikinEntity;
+import jp.co.ndensan.reams.ca.cax.entity.db.relate.SaikinShunyugakuUchiwakeRelateEntity;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dankaibetsushunoritsu.InsDankaibetsuShunoritsuTmpProcessParameter;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.dankaibetsushunoritsu.DankaibetsuShunoritsuDataEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.dankaibetsushunoritsu.DankaibetsuShunoritsuTempEntity;
@@ -53,6 +55,10 @@ public class InsDankaibetsuShunoritsuTmpProcess extends BatchProcessBase<Dankaib
     private static final RString 単一市町村分 = new RString("単一市町村分");
     private static final RString 市町村分 = new RString("000000");
     private static final RString ONE = new RString("1");
+    private static final int INT_0 = 0;
+    private List<SaikinShunyugakuUchiwakeRelateEntity> 最新収入額内訳RelateEntityリスト;
+    private List<CaV0704SaishinShunyuNiniFutaikinEntity> 最新収入任意附帯金Entityリスト;
+    private DankaibetsuShunoritsuDataEntity beforeEntity;
 
     @BatchWriter
     BatchEntityCreatedTempTableWriter 保険料段階別収納率一時tableWriter;
@@ -69,6 +75,9 @@ public class InsDankaibetsuShunoritsuTmpProcess extends BatchProcessBase<Dankaib
         searchKey.set速報区分(SearchSokuhoKubun.全て);
         searchKey.set歳出区分(SearchSaishutsuKubun.全て);
         psmEntity = new CaFt702FindTotalShunyuFunction(searchKey);
+        最新収入額内訳RelateEntityリスト = new ArrayList<>();
+        最新収入任意附帯金Entityリスト = new ArrayList<>();
+        beforeEntity = null;
     }
 
     @Override
@@ -84,6 +93,41 @@ public class InsDankaibetsuShunoritsuTmpProcess extends BatchProcessBase<Dankaib
 
     @Override
     protected void process(DankaibetsuShunoritsuDataEntity 収納データ) {
+        if (beforeEntity == null) {
+            beforeEntity = 収納データ;
+        }
+        if (収納データ.get収入情報取得PSM().get収納キーRelateEntity().get収納管理Entity().getShunoId().compareTo(
+                beforeEntity.get収入情報取得PSM().get収納キーRelateEntity().get収納管理Entity().getShunoId()) == 0) {
+            最新収入額内訳RelateEntityリスト.add(収納データ.get収入情報取得PSM().get最新収入額内訳RelateEntity());
+            最新収入任意附帯金Entityリスト.add(収納データ.get収入情報取得PSM().get最新収入任意附帯金Entity());
+        } else {
+            DankaibetsuShunoritsuTempEntity entity = get保険料段階別収納率一時(収納データ);
+            保険料段階別収納率一時tableWriter.insert(entity);
+            最新収入額内訳RelateEntityリスト = new ArrayList<>();
+            最新収入任意附帯金Entityリスト = new ArrayList<>();
+            最新収入額内訳RelateEntityリスト.add(収納データ.get収入情報取得PSM().get最新収入額内訳RelateEntity());
+            最新収入任意附帯金Entityリスト.add(収納データ.get収入情報取得PSM().get最新収入任意附帯金Entity());
+        }
+        beforeEntity = 収納データ;
+    }
+
+    @Override
+    protected void afterExecute() {
+        DankaibetsuShunoritsuTempEntity entity = get保険料段階別収納率一時(beforeEntity);
+        保険料段階別収納率一時tableWriter.insert(entity);
+    }
+
+    private List<RString> get検索用科目リスト() {
+        ShunoKamokuFinder 収納科目Finder = ShunoKamokuFinder.createInstance();
+        IShunoKamoku 収納科目_国保特徴 = 収納科目Finder.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収);
+        IShunoKamoku 収納科目_国保普徴 = 収納科目Finder.get科目(ShunoKamokuShubetsu.介護保険料_特別徴収);
+        List<RString> kamokuList = new ArrayList<>();
+        kamokuList.add(収納科目_国保特徴.get表示用コードwithハイフン());
+        kamokuList.add(収納科目_国保普徴.get表示用コードwithハイフン());
+        return kamokuList;
+    }
+
+    private DankaibetsuShunoritsuTempEntity get保険料段階別収納率一時(DankaibetsuShunoritsuDataEntity 収納データ) {
         LasdecCode 市町村コード = 収納データ.get宛名().getGenLasdecCode();
         UrT0700ShunoKanriEntity 収納管理Entity
                 = 収納データ.get収入情報取得PSM().get収納キーRelateEntity().get収納管理Entity();
@@ -94,11 +138,14 @@ public class InsDankaibetsuShunoritsuTmpProcess extends BatchProcessBase<Dankaib
         entity.setTsuchishoNo(new TsuchishoNo(収納管理Entity.getTsuchishoNo().get通知書番号()));
         if ((広域保険者.equals(parameter.get広域判定区分())
                 || 単一市町村分.equals(parameter.get広域判定区分()))
+                && 市町村コード != null
                 && 市町村分.equals(市町村コード.code市町村RString())) {
-            if (認定者のみ.equals(parameter.get抽出条件())
-                    || 認定者を除く１号被保険者.equals(parameter.get抽出条件())) {
+            if ((認定者のみ.equals(parameter.get抽出条件())
+                    || 認定者を除く１号被保険者.equals(parameter.get抽出条件()))
+                    && 収納データ.get受給者給付COUNT().get受給者台帳COUNT() != INT_0) {
                 entity.setTaishouKubun(認定者);
-            } else if (受給者のみ.equals(parameter.get抽出条件())) {
+            } else if (受給者のみ.equals(parameter.get抽出条件())
+                    && 収納データ.get受給者給付COUNT().get給付実績基本COUNT() != INT_0) {
                 entity.setTaishouKubun(受給者);
             }
         }
@@ -114,8 +161,10 @@ public class InsDankaibetsuShunoritsuTmpProcess extends BatchProcessBase<Dankaib
         entity.setKamokuCode(収納データ.get収入情報取得PSM().get収納キーRelateEntity().
                 get収納科目Entity().getKamokuCode().getColumnValue());
         entity.setLasdecCode(市町村コード);
-        if (広域保険者.equals(parameter.get広域判定区分())
+        if (市町村コード != null
+                && 広域保険者.equals(parameter.get広域判定区分())
                 && 市町村分.equals(市町村コード.code市町村RString())
+                && 収納データ.get介護賦課().getFukaShichosonCode() != null
                 && (収納データ.get介護賦課().getFukaShichosonCode().code市町村RString().equals(parameter.get市町村情報())
                 || 収納データ.get介護賦課().getFukaShichosonCode().code市町村RString().equals(parameter.get旧市町村情報()))) {
             if (ONE.equals(収納データ.get被保険者台帳().getKoikinaiJushochiTokureiFlag())) {
@@ -124,16 +173,6 @@ public class InsDankaibetsuShunoritsuTmpProcess extends BatchProcessBase<Dankaib
                 entity.setFukaLasdecCode(収納データ.get被保険者台帳().getShichosonCode());
             }
         }
-        保険料段階別収納率一時tableWriter.insert(entity);
-    }
-
-    private List<RString> get検索用科目リスト() {
-        ShunoKamokuFinder 収納科目Finder = ShunoKamokuFinder.createInstance();
-        IShunoKamoku 収納科目_国保特徴 = 収納科目Finder.get科目(ShunoKamokuShubetsu.介護保険料_普通徴収);
-        IShunoKamoku 収納科目_国保普徴 = 収納科目Finder.get科目(ShunoKamokuShubetsu.介護保険料_特別徴収);
-        List<RString> kamokuList = new ArrayList<>();
-        kamokuList.add(収納科目_国保特徴.get表示用コードwithハイフン());
-        kamokuList.add(収納科目_国保普徴.get表示用コードwithハイフン());
-        return kamokuList;
+        return entity;
     }
 }

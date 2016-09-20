@@ -38,6 +38,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -58,6 +59,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
     private static final RString RSTRING_TWO = new RString("2");
     private static final RString RSTRING_THREE = new RString("3");
     private static final RString 排他情報 = new RString("DBCHihokenshaNo");
+    private static final RString 申請情報を保存する = new RString("btnSaveHenkoTorisage");
 
     /**
      * 画面の初期化メソッドです。
@@ -81,6 +83,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
             handler.申請登録状態初期表示に設定();
             handler.onChange_ddlShinseiTaisyoNendo();
             handler.onChange_ddlShokisaiHokenshaNo();
+            div.getTxtKaigoShikyuShinseishoSeiriBango4().setReadOnly(true);
             div.getTxtIryoShikyuShinseishoSeiriBango2().setReadOnly(false);
             div.getTxtIryoShikyuShinseishoSeiriBango3().setReadOnly(false);
             div.getTxtIryoShikyuShinseishoSeiriBango4().setReadOnly(false);
@@ -96,9 +99,10 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
                         被保険者番号, 対象年度, 保険者番号, 整理番号, 履歴番号);
                 KogakuGassanShinseishoResult 高額合算申請書 = 高額合算申請書保持.get高額合算申請書(identifier);
                 ViewStateHolder.put(ViewStateKeys.高額合算申請書, 高額合算申請書);
-                handler.onClick_dgShinseiJohoModify(高額合算申請書.get高額合算申請書());
+                handler.initializePanel(高額合算申請書.get高額合算申請書());
                 ViewStateHolder.put(ViewStateKeys.高額合算申請書状態, 修正);
             }
+            div.getTxtKaigoShikyuShinseishoSeiriBango4().setReadOnly(true);
             div.getTxtIryoShikyuShinseishoSeiriBango2().setReadOnly(true);
             div.getTxtIryoShikyuShinseishoSeiriBango3().setReadOnly(true);
             div.getTxtIryoShikyuShinseishoSeiriBango4().setReadOnly(true);
@@ -120,6 +124,10 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
         IUrControlData controlData = UrControlDataFactory.createInstance();
         RString メニューID = controlData.getMenuID();
         RString タイトル = handler.画面タイトルを設定(メニューID);
+        if (DBC1100011StateName.変更取下げ.getName().equals(ResponseHolder.getState())
+                && !div.getBtnAddShinsei().isVisible()) {
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(申請情報を保存する, true);
+        }
         return ResponseData.of(div).rootTitle(タイトル).respond();
     }
 
@@ -399,8 +407,14 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
             KogakuGassanShinseishoHoji 高額合算申請書保持
                     = ViewStateHolder.get(ViewStateKeys.高額合算申請書保持Entity, KogakuGassanShinseishoHoji.class);
             if (RSTRING_ONE.equals(高額合算申請書保持.get申請状態())) {
+                div.getTxtIryoShikyuShinseishoSeiriBango2().setReadOnly(false);
+                div.getTxtIryoShikyuShinseishoSeiriBango3().setReadOnly(false);
+                div.getTxtIryoShikyuShinseishoSeiriBango4().setReadOnly(false);
                 return ResponseData.of(div).setState(DBC1100011StateName.申請登録);
             } else if (RSTRING_TWO.equals(高額合算申請書保持.get申請状態()) || RSTRING_THREE.equals(高額合算申請書保持.get申請状態())) {
+                div.getTxtIryoShikyuShinseishoSeiriBango2().setReadOnly(true);
+                div.getTxtIryoShikyuShinseishoSeiriBango3().setReadOnly(true);
+                div.getTxtIryoShikyuShinseishoSeiriBango4().setReadOnly(true);
                 return ResponseData.of(div).setState(DBC1100011StateName.変更取下げ);
             }
         }

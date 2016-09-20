@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.iryohikojokakuninsinsei.SogoJ
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import org.apache.ibatis.annotations.Param;
 
 /**
  *
@@ -36,7 +37,7 @@ public interface IIryoHiKojoKakuninSinseiMapper {
      * @param 対象年
      * @return DbT4001JukyushaDaicho
      */
-    SogoJigyouTaisyouSyaJyohoJoho select受給者台帳情報(RString 被保険者番号, RString 対象年);
+    SogoJigyouTaisyouSyaJyohoJoho select受給者台帳情報(@Param("被保険者番号") RString 被保険者番号, @Param("対象年") RString 対象年);
 
     /**
      * 単票用医療費控除取得
@@ -45,7 +46,7 @@ public interface IIryoHiKojoKakuninSinseiMapper {
      * @param データ区分 RString
      * @return 単票用医療費控除
      */
-    List<IryohiKojoEntity> select単票用医療費控除(RString 被保険者番号, RString データ区分);
+    List<IryohiKojoEntity> select単票用医療費控除(@Param("被保険者番号") RString 被保険者番号, @Param("データ区分") RString データ区分);
 
     /**
      * おむつ使用証明書、主治医意見書確認書の編集に用いる宛名情報を取得する。

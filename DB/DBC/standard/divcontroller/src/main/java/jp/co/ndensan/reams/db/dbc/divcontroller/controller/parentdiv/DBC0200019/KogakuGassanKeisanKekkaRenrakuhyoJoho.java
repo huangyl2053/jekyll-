@@ -59,8 +59,10 @@ public class KogakuGassanKeisanKekkaRenrakuhyoJoho {
      * @return ResponseData
      */
     public ResponseData<DBC110070_KogakugassanKeisankekkaRenrakuhyoOutParameter> onClick_Execute(KogakuGassanKeisanKekkaRenrakuhyoJohoDiv div) {
-        再処理区分 = div.getCcdKokuhorenJohoSofu().get再処理区分のValue();
-        処理年月 = div.getCcdKokuhorenJohoSofu().get処理年月のValue().getYearMonth();
+        KokuhorenDataSofuViewState parmater = ViewStateHolder.get(ViewStateHolderName.国保連取込情報,
+                KokuhorenDataSofuViewState.class);
+        再処理区分 = parmater.get再処理区分();
+        処理年月 = parmater.get処理年月();
         if (getHandler(div).setBatchParameter(再処理区分, 処理年月) != null) {
             return ResponseData.of(getHandler(div).setBatchParameter(再処理区分, 処理年月)).respond();
         }

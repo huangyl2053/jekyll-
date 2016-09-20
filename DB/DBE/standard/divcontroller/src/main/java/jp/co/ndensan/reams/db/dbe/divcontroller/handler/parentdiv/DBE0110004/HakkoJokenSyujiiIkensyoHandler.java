@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0110004;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.ikenshojohoprint.IkenshoJohoPrintBatchParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE013001.DBE013001_IkenshoInfoPrintParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0110004.HakkoJokenSyujiiIkensyoDiv;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -195,7 +195,7 @@ public class HakkoJokenSyujiiIkensyoHandler {
      *
      * @return ikenshoJohoPrintBatchParameter
      */
-    public IkenshoJohoPrintBatchParameter setBatchParameter() {
+    public DBE013001_IkenshoInfoPrintParameter setBatchParameter() {
         boolean 主治医意見書未提出者一覧フラグ = div.getChkMiteishutsushaIchiran().getSelectedKeys().contains(SELECT_KEY0);
         boolean 主治医意見書５項目確認一覧表フラグ = div.getChkKakuninIchiranhyo().getSelectedKeys().contains(SELECT_KEY0);
         boolean 主治医意見書依頼未処理者一覧表フラグ = div.getChkIraiMishorishaIchiranhyo().getSelectedKeys().contains(SELECT_KEY0);
@@ -277,7 +277,7 @@ public class HakkoJokenSyujiiIkensyoHandler {
                 主治医意見書作成料請求一覧表受領日To = new FlexibleDate(div.getTxtJuryoYMD().getToValue().toDateString());
             }
         }
-        IkenshoJohoPrintBatchParameter ikenshoJohoPrintBatchParameter = new IkenshoJohoPrintBatchParameter(
+        DBE013001_IkenshoInfoPrintParameter ikenshoJohoPrintBatchParameter = new DBE013001_IkenshoInfoPrintParameter(
                 主治医意見書未提出者一覧フラグ,
                 主治医意見書未提出者一覧作成条件,
                 主治医意見書未提出者一覧依頼日数,

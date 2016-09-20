@@ -23,4 +23,249 @@
         ORDER BY A."ninteiYMD",A."insertTimestamp" DESC
         limit 1
     </select>
+    <select id="get異動抽出台帳リスト" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd571001.IdoChushutsuDaichoMybatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd571001.IdoChushutsuDaichoEntity" fetchSize="500">
+        <if test="is要介護認定">
+            <include refid="要介護認定" />
+            UNION
+        </if>
+        <if test="is利用者負担額減免">
+            <include refid="利用者負担額減免" />
+            UNION
+        </if>
+        <if test="is施設入退所">
+            <include refid="施設入退所" />
+            UNION
+        </if>
+        <if test="is資格">
+            <include refid="資格" />
+            UNION
+        </if>
+        <if test="is訪問介護">
+            <include refid="訪問介護" />
+            UNION
+        </if>
+        <if test="is居宅サービス計画">
+           <include refid="居宅サービス計画" />
+            UNION
+        </if>
+        <if test="is老齢福祉年金">
+           <include refid="老齢福祉年金" />
+            UNION
+        </if>
+        <if test="is負担限度額">
+           <include refid="負担限度額" />
+            UNION
+        </if>
+        <if test="is社会福祉法人軽減">
+           <include refid="社会福祉法人軽減" />
+            UNION
+        </if>
+        <if test="is給付制限">
+            <include refid="給付制限" />
+            UNION           
+        </if>
+        <if test="is生活保護">
+            <include refid="生活保護" />
+            UNION
+        </if>
+        SELECT
+            ''  被保険者番号,
+            ''  識別コード
+    </select>
+    
+    <sql id="要介護認定">
+        SELECT 
+            T4001.被保険者番号,
+            T4001.識別コード
+        FROM
+            (   SELECT
+                    "hihokenshaNo"      被保険者番号,
+                    "shikibetsuCode"    識別コード,
+                    row_number() over(partition by "hihokenshaNo", "rirekiNo" order by edaban desc) rank_number
+                FROM    rgdb."DbT4001JukyushaDaicho"
+                WHERE   "logicalDeletedFlag" = FALSE
+                <include refid="共通条件" />    )   T4001
+        WHERE   T4001.rank_number =   1
+    </sql>
+    
+    <sql id="利用者負担額減免">
+        SELECT 
+            T1001.被保険者番号,
+            T1001.識別コード
+        FROM    rgdb."DbT4014RiyoshaFutangakuGengaku"
+        INNER JOIN  (<include refid="被保険者台帳管理" />)  T1001
+        ON  "hihokenshaNo" = T1001."被保険者番号"
+        <where>
+            <include refid="共通条件" />
+        </where>
+    </sql>
+    
+    <sql id="施設入退所">
+        SELECT 
+            T1001.被保険者番号,
+            T1001.識別コード
+        FROM    rgdb."DbT1004ShisetsuNyutaisho"
+        INNER JOIN  (   SELECT
+                            T.被保険者番号,
+                            T.識別コード
+                        FROM
+                            (   SELECT
+                                    "hihokenshaNo"      被保険者番号,
+                                    "shikibetsuCode"    識別コード,
+                                    row_number() over(partition by "hihokenshaNo" order by "idoYMD" desc, "edaNo" desc) rank_number
+                                FROM    rgdb."DbT1001HihokenshaDaicho"
+                                WHERE   "logicalDeletedFlag" = FALSE
+                                <if test="抽出条件設定区分 == 1">
+                                    AND "hihokenshaNo" <![CDATA[>=]]> #{被保険者番号From}
+                                    AND "hihokenshaNo" <![CDATA[<=]]> #{被保険者番号To}
+                                </if>   )   T
+                        WHERE   T.rank_number =   1 )  T1001
+        ON  "shikibetsuCode" = T1001."識別コード"
+        WHERE   "daichoShubetsu"    =   '1'
+        AND     "nyushoShisetsuShurui"  IN  ('11', '12')
+        <if test="抽出条件設定区分 == 0">
+            AND "lastUpdateTimestamp" <![CDATA[>=]]> #{今回抽出開始日付}
+            AND "lastUpdateTimestamp" <![CDATA[<=]]> #{今回抽出終了日付} 
+        </if>
+    </sql>
+    
+    <sql id="資格">
+        SELECT
+            T1001.被保険者番号,
+            T1001.識別コード
+        FROM
+            (   SELECT
+                    "hihokenshaNo"      被保険者番号,
+                    "shikibetsuCode"    識別コード,
+                    row_number() over(partition by "hihokenshaNo" order by "idoYMD" desc, "edaNo" desc) rank_number
+                FROM    rgdb."DbT1001HihokenshaDaicho"
+                WHERE   "logicalDeletedFlag" = FALSE
+                <include refid="共通条件" />)   T1001
+        WHERE   T1001.rank_number =   1
+    </sql>
+    
+    <sql id="訪問介護">
+        SELECT 
+            T1001.被保険者番号,
+            T1001.識別コード
+        FROM    rgdb."DbT4016HomonKaigoRiyoshaFutangakuGengaku"
+        INNER JOIN  (<include refid="被保険者台帳管理" />)  T1001
+        ON  "hihokenshaNo" = T1001."被保険者番号"
+        <where>
+            <include refid="共通条件" />
+        </where>
+    </sql>
+    
+    <sql id="居宅サービス計画">
+        SELECT 
+            T1001.被保険者番号,
+            T1001.識別コード
+        FROM    rgdb."DbT3005KyotakuKeikakuTodokede"
+        INNER JOIN  (<include refid="被保険者台帳管理" />)  T1001
+        ON  "hihokenshaNo" = T1001."被保険者番号"
+        <where>
+            <include refid="共通条件" />
+        </where>
+    </sql>
+    
+    <sql id="老齢福祉年金">
+        SELECT 
+            "hihokenshaNo"      被保険者番号,
+            "shikibetsuCode"    識別コード
+        FROM    rgdb."DbT7006RoreiFukushiNenkinJukyusha"
+        <where>
+            <include refid="共通条件" />
+        </where>
+    </sql>
+
+    <sql id="負担限度額">
+        SELECT 
+            T1001.被保険者番号,
+            T1001.識別コード
+        FROM    rgdb."DbT4018KaigoHokenFutanGendogakuNintei"
+        INNER JOIN  (<include refid="被保険者台帳管理" />)  T1001
+        ON  "hihokenshaNo" = T1001."被保険者番号"
+        <where>
+            <include refid="共通条件" />
+        </where>
+    </sql>
+    
+    <sql id="社会福祉法人軽減">
+        SELECT 
+            T1001.被保険者番号,
+            T1001.識別コード
+        FROM    rgdb."DbT4017ShakaiFukushiHojinRiyoshaFutanKeigen"
+        INNER JOIN  (<include refid="被保険者台帳管理" />)  T1001
+        ON  "hihokenshaNo" = T1001."被保険者番号"
+        <where>
+            <include refid="共通条件" />
+        </where>
+    </sql>
+    
+    <sql id="給付制限">
+        SELECT 
+            T1001.被保険者番号,
+            T1001.識別コード
+        FROM    rgdb."DbT4021ShiharaiHohoHenko"
+        INNER JOIN  (<include refid="被保険者台帳管理" />)  T1001
+        ON  "hihokenshaNo" = T1001."被保険者番号"
+        <where>
+            <include refid="共通条件" />
+        </where>
+    </sql>
+    
+    <sql id="生活保護">
+        SELECT 
+            T1001.被保険者番号,
+            T1001.識別コード
+        FROM    rgur."UrT0508SeikatsuHogoJukyusha"
+        INNER JOIN  (   SELECT
+                            T.被保険者番号,
+                            T.識別コード
+                        FROM
+                            (   SELECT
+                                    "hihokenshaNo"      被保険者番号,
+                                    "shikibetsuCode"    識別コード,
+                                    row_number() over(partition by "hihokenshaNo" order by "idoYMD" desc, "edaNo" desc) rank_number
+                                FROM    rgdb."DbT1001HihokenshaDaicho"
+                                WHERE   "logicalDeletedFlag" = FALSE
+                                <if test="抽出条件設定区分 == 1">
+                                    AND "hihokenshaNo" <![CDATA[>=]]> #{被保険者番号From}
+                                    AND "hihokenshaNo" <![CDATA[<=]]> #{被保険者番号To}
+                                </if>   )   T
+                        WHERE   T.rank_number =   1)  T1001
+        ON  "hihokenshaNo" = T1001."被保険者番号"
+        <if test="抽出条件設定区分 == 0">
+            <where>
+                AND "lastUpdateTimestamp" <![CDATA[>=]]> #{今回抽出開始日付}
+                AND "lastUpdateTimestamp" <![CDATA[<=]]> #{今回抽出終了日付} 
+            </where>
+        </if>
+    </sql>
+        
+    <sql id="被保険者台帳管理">
+        SELECT
+            T.被保険者番号,
+            T.識別コード
+        FROM
+            (   SELECT
+                    "hihokenshaNo"      被保険者番号,
+                    "shikibetsuCode"    識別コード,
+                    row_number() over(partition by "hihokenshaNo" order by "idoYMD" desc, "edaNo" desc) rank_number
+                FROM    rgdb."DbT1001HihokenshaDaicho"
+                WHERE   "logicalDeletedFlag" = FALSE)   T
+        WHERE   T.rank_number =   1
+    </sql>
+        
+    <sql id="共通条件">
+        <if test="抽出条件設定区分 == 0">
+            AND "lastUpdateTimestamp" <![CDATA[>=]]> #{今回抽出開始日付}
+            AND "lastUpdateTimestamp" <![CDATA[<=]]> #{今回抽出終了日付} 
+        </if>
+        <if test="抽出条件設定区分 == 1">
+            AND "hihokenshaNo" <![CDATA[>=]]> #{被保険者番号From}
+            AND "hihokenshaNo" <![CDATA[<=]]> #{被保険者番号To}
+        </if>
+    </sql>
 </mapper>

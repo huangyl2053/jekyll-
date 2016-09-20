@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc710170.HanyoListKogakuGassanShikyugakuKetteiNoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc710170.HanyoListKogakuGassanShikyugakuKetteiProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710170.DBC710170_HanyoListKogakuGassanShikyugakuKetteiParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -29,11 +28,7 @@ public class DBC710170_HanyoListKogakuGassanShikyugakuKettei
 
     @Step(CSV_EUC_PROCESS)
     IBatchFlowCommand csvEucProcess() {
-        if (getParameter().is連番付加()) {
-            return loopBatch(HanyoListKogakuGassanShikyugakuKetteiProcess.class)
-                    .arguments(getParameter().toProcessParam()).define();
-        }
-        return loopBatch(HanyoListKogakuGassanShikyugakuKetteiNoProcess.class)
+        return loopBatch(HanyoListKogakuGassanShikyugakuKetteiProcess.class)
                 .arguments(getParameter().toProcessParam()).define();
     }
 

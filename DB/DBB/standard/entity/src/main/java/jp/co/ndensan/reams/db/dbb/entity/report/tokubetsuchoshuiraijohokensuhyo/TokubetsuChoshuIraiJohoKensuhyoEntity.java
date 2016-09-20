@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuiraijohokensuhyo;
 
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -20,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class TokubetsuChoshuIraiJohoKensuhyoEntity {
 
     private RString 年金保険者名称;
-    private LasdecCode 構成市町村コード;
+    private RString 構成市町村コード;
     private RString 市町村名称;
     private Code left特別徴収義務者コード;
     private int left件数;

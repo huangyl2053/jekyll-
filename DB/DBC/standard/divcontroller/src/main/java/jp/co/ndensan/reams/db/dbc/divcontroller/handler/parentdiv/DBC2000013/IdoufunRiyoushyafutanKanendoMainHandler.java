@@ -51,14 +51,18 @@ public class IdoufunRiyoushyafutanKanendoMainHandler {
      * @param business ShoriDateKanri
      */
     public void initControl(ShoriDateKanri business) {
-        FlexibleYear 年次判定年度 = business.get年度();
+        FlexibleYear 年次判定年度;
+        if (business != null) {
+            年次判定年度 = business.get年度();
+            set年次処理実施日時(business);
+        } else {
+            年次判定年度 = new FlexibleYear("");
+        }
         FlexibleDate date = new FlexibleDate(dateTime.getDate().toDateString());
         FlexibleYear 処理年度 = NUM_SEVEN < date.getMonthValue() ? date.getYear() : date.getYear().minusYear(NUM_ONE);
-        if (年次判定年度.isBefore(処理年度) || 年次判定年度.isEmpty()) {
-            div.getTxtKonkaiKaishiDate().setDisabled(true);
-            div.getTxtKonkaiKaishiTime().setDisabled(true);
-            div.getTxtKonkaiShuryoDate().setDisabled(true);
-            div.getTxtKonkaiShuryoTime().setDisabled(true);
+        if (年次判定年度.isEmpty()) {
+            throw new ApplicationException(DbcErrorMessages.年次判定未処理.getMessage());
+        } else if (年次判定年度.isBefore(処理年度)) {
             throw new ApplicationException(DbcErrorMessages.年次判定未処理.getMessage());
         } else {
             div.getTxtKonkaiKaishiDate().setDisabled(false);
@@ -66,7 +70,6 @@ public class IdoufunRiyoushyafutanKanendoMainHandler {
             div.getTxtKonkaiShuryoDate().setDisabled(false);
             div.getTxtKonkaiShuryoTime().setDisabled(false);
         }
-        set年次処理実施日時(business);
 
     }
 

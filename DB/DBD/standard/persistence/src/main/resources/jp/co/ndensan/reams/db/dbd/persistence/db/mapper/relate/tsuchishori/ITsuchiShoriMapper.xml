@@ -14,7 +14,9 @@
             T4101."ninteiShinseiShinseijiKubunCode" AS 認定申請区分申請時コード,
             T4101."ninteiShinseiHoreiKubunCode" AS 認定申請区分法令コード,
             T4101."shinseishoKanriNo" AS 申請書管理番号,
-            T4122."tsuchiKanryoYMD" AS 通知完了年月日,
+<!--        TODO QA #100668-->
+<!--            T4122."tsuchiKanryoYMD" AS 通知完了年月日,-->
+            '20000101' AS 通知完了年月日,
             T4001."ninteiKekkaTsuchishoHakkoYMD" AS 認定結果通知書発行年月日,
             T4001."kubunHenkoTsuchishoHakkoYMD" AS 区分変更通知書発行年月日,
             T4001."serviceHenkoTsuchishoHakkoYMD" AS サービス変更通知書発行年月日,
@@ -24,18 +26,6 @@
             rgdb."DbT4101NinteiShinseiJoho" AS T4101
         INNER JOIN  rgdb."DbT7051KoseiShichosonMaster" AS T7051
             ON  T7051."shoKisaiHokenshaNo" = T4101."shoKisaiHokenshaNo"
-<!-- TODO  QA #98451-->
-        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS T4105
-            ON  T4105."shinseishoKanriNo" = T4101."shinseishoKanriNo"
-            AND T4105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
-            AND T4105."ninteichosaIraiKanryoYMD" IS NOT NULL
-            AND T4105."ninteichosaKanryoYMD" IS NOT NULL
-            AND T4105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
-            AND T4105."ikenshoTorokuKanryoYMD" IS NOT NULL
-            AND T4105."ichijiHanteiKanryoYMD" IS NOT NULL
-            AND T4105."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
-            AND T4105."ninteiShinsakaiKanryoYMD" IS NOT NULL
-            AND T4105."centerSoshinYMD" IS NULL
         INNER JOIN  rgdb."DbT4001JukyushaDaicho" AS T4001
             ON  T4001."shichosonCode" = T7051."shichosonCode"
             AND T4001."hihokenshaNo" = T4101."hihokenshaNo"
@@ -50,10 +40,22 @@
                                     WHERE rgdb."DbT4001JukyushaDaicho"."shichosonCode" = T7051."shichosonCode" 
                                     AND rgdb."DbT4001JukyushaDaicho"."hihokenshaNo" = T4101."hihokenshaNo")
             AND T4001."logicalDeletedFlag" = FALSE
-        LEFT JOIN rgdb."DbT4122TsuchishoHakkoJoho" AS T4122
-            ON  T4122."shinseishoKanriNo"= T4101."shinseishoKanriNo"
+            AND T4001."rirekiNo" != '0000'
+            AND (T4001."ninteiKekkaTsuchishoHakkoYMD" IS NOT NULL
+                OR T4001."kubunHenkoTsuchishoHakkoYMD" IS NOT NULL
+                OR T4001."serviceHenkoTsuchishoHakkoYMD" IS NOT NULL
+                OR T4001."ninteiKyakkaTsuchishoHakkoYMD" IS NOT NULL
+                OR T4001."ninteiTorikeshiTsuchishoHakkoYMD" IS NOT NULL
+            )
         WHERE
             T4101."shoriJotaiKubun" = '1'
+        AND NOT EXISTS(
+            SELECT
+                *
+            FROM
+                rgdb."DbT4122TsuchishoHakkoJoho" AS T4122
+            WHERE
+                T4122."shinseishoKanriNo"= T4101."shinseishoKanriNo")
         AND T4101."logicalDeletedFlag" = FALSE
         ORDER BY 被保険者番号,被保険者氏名,認定申請年月日            
     </select>

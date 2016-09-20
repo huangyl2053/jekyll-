@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt21004;
 
+import java.util.List;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -24,7 +25,7 @@ public class DankaibetuHihokensyasuIchiranhyoProcessParameter implements IBatchP
     private FlexibleYear 調定年度;
     private FlexibleDate 本算定賦課処理日;
     private RString 広域分市町村分区分;
-    private RString 市町村コード複数;
+    private List<RString> 市町村コード複数;
     private FlexibleDate 資格基準日;
     private FlexibleDate 調定基準日;
     private YMDHMS バッチ起動時処理日時;

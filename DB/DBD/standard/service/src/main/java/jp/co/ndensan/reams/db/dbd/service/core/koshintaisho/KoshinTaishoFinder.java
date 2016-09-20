@@ -165,81 +165,115 @@ public class KoshinTaishoFinder {
      */
     private SelectSyuuShadeTaCsvEntity setdetaEntity(SelectSyuuShadeTaEntity sqlEntity) {
         SelectSyuuShadeTaCsvEntity entity = new SelectSyuuShadeTaCsvEntity();
-        entity.set厚労省認定ソフトのバージョン(KoroshoIfShikibetsuCode.toValue(sqlEntity.get厚労省IF識別コード()).get名称());
+        if (sqlEntity.get厚労省IF識別コード() != null && !sqlEntity.get厚労省IF識別コード().isEmpty()) {
+            entity.set厚労省認定ソフトのバージョン(KoroshoIfShikibetsuCode.toValue(sqlEntity.get厚労省IF識別コード()).get名称());
+        }
         if (sqlEntity.get認定申請年月日() != null) {
-            entity.set認定申請年月日(new FlexibleDate(sqlEntity.get認定申請年月日().wareki().toString()));
+            entity.set認定申請年月日(sqlEntity.get認定申請年月日().wareki().toDateString());
         }
-        entity.set認定申請区分申請時(NinteiShinseiShinseijiKubunCode.toValue(sqlEntity.get認定申請区分申請時コード()).get名称());
+        if (sqlEntity.get認定申請区分申請時コード() != null && !sqlEntity.get認定申請区分申請時コード().isEmpty()) {
+            entity.set認定申請区分申請時(NinteiShinseiShinseijiKubunCode.toValue(sqlEntity.get認定申請区分申請時コード()).get名称());
+        }
         if (sqlEntity.get生年月日() != null) {
-            entity.set生年月日(new FlexibleDate(sqlEntity.get生年月日().wareki().toString()));
+            entity.set生年月日(sqlEntity.get生年月日().wareki().toDateString());
         }
-        entity.set性別(Seibetsu.toValue(sqlEntity.get性別()).get名称());
-        if (sqlEntity.get郵便番号() != null) {
+        if (sqlEntity.get性別() != null && !sqlEntity.get性別().isEmpty()) {
+            entity.set性別(Seibetsu.toValue(sqlEntity.get性別()).get名称());
+        }
+        if (sqlEntity.get郵便番号() != null && !sqlEntity.get郵便番号().isEmpty()) {
             RString three = sqlEntity.get郵便番号().substring(ZEOR, THREE);
             RString four = sqlEntity.get郵便番号().substring(THREE, SEVEN);
             entity.set郵便番号(three.concat(横木).concat(four));
         }
         if (sqlEntity.get認定調査依頼完了年月日() != null) {
-            entity.set認定調査依頼完了年月日(new FlexibleDate(sqlEntity.get認定調査依頼完了年月日().wareki().toString()));
+            entity.set認定調査依頼完了年月日(sqlEntity.get認定調査依頼完了年月日().wareki().toDateString());
         }
-        if (sqlEntity.get委託先の郵便番号() != null) {
+        if (sqlEntity.get委託先の郵便番号() != null && !sqlEntity.get委託先の郵便番号().isEmpty()) {
             RString three = sqlEntity.get委託先の郵便番号().substring(ZEOR, THREE);
             RString four = sqlEntity.get委託先の郵便番号().substring(THREE, SEVEN);
             entity.set委託先の郵便番号(three.concat(横木).concat(four));
         }
-        entity.set委託先の調査委託区分(ChosaItakuKubunCode.toValue(sqlEntity.get委託先の調査委託区分()).get名称());
-        entity.set委託先の自動割付名称(AutoWaritsukeFlag.toValue(sqlEntity.is委託先の自動割付フラグ()).get名称());
-        entity.set委託先の機関の区分(ChosaKikanKubun.toValue(sqlEntity.get委託先の機関の区分()).get名称());
-        entity.set調査員の性別(Seibetsu.toValue(sqlEntity.get調査員の性別()).get名称());
-        entity.set調査員の調査員資格(Sikaku.toValue(sqlEntity.get調査員の調査員資格()).get名称());
         if (sqlEntity.get調査員の郵便番号() != null) {
             RString three = sqlEntity.get調査員の郵便番号().substring(ZEOR, THREE);
             RString four = sqlEntity.get調査員の郵便番号().substring(THREE, SEVEN);
             entity.set調査員の郵便番号(three.concat(横木).concat(four));
         }
-        entity.set概況特記テキストイメージ区分(TokkijikoTextImageKubun.toValue(sqlEntity.get概況特記テキストイメージ区分コード()).get名称());
-        entity.set認定調査依頼区分(NinteiChousaIraiKubunCode.toValue(sqlEntity.get認定調査依頼区分コード()).get名称());
         if (sqlEntity.get認定調査実施年月日() != null) {
-            entity.set認定調査実施年月日(new FlexibleDate(sqlEntity.get認定調査実施年月日().wareki().toString()));
+            entity.set認定調査実施年月日(sqlEntity.get認定調査実施年月日().wareki().toDateString());
         }
         if (sqlEntity.get認定調査受領年月日() != null) {
-            entity.set認定調査受領年月日(new FlexibleDate(sqlEntity.get認定調査受領年月日().wareki().toString()));
+            entity.set認定調査受領年月日(sqlEntity.get認定調査受領年月日().wareki().toDateString());
         }
-        entity.set認定調査区分(ChosaKubun.toValue(sqlEntity.get認定調査区分コード()).get名称());
-        entity.set認定調査実施場所(ChosaJisshiBashoCode.toValue(sqlEntity.get認定調査実施場所コード()).get名称());
-        entity.set認定調査サービス区分(ServiceKubunCode.toValue(sqlEntity.get認定調査サービス区分コード()).get名称());
         if (sqlEntity.get利用施設郵便番号() != null) {
             RString three = sqlEntity.get利用施設郵便番号().substring(ZEOR, THREE);
             RString four = sqlEntity.get利用施設郵便番号().substring(THREE, SEVEN);
             entity.set利用施設郵便番号(three.concat(横木).concat(four));
         }
         if (sqlEntity.get認定調査特記事項受付年月日() != null) {
-            entity.set認定調査特記事項受付年月日(new FlexibleDate(sqlEntity.get認定調査特記事項受付年月日().wareki().toString()));
+            entity.set認定調査特記事項受付年月日(sqlEntity.get認定調査特記事項受付年月日().wareki().toDateString());
         }
         if (sqlEntity.get認定調査特記事項受領年月日() != null) {
-            entity.set認定調査特記事項受領年月日(new FlexibleDate(sqlEntity.get認定調査特記事項受領年月日().wareki().toString()));
+            entity.set認定調査特記事項受領年月日(sqlEntity.get認定調査特記事項受領年月日().wareki().toDateString());
         }
-        entity.set原本マスク区分(GenponMaskKubun.toValue(sqlEntity.get原本マスク区分コード()).get名称());
-        entity.set認定調査認知症高齢者の日常生活自立度(NinchishoNichijoSeikatsuJiritsudoCode.toValue(
-                sqlEntity.get認定調査認知症高齢者の日常生活自立度コード()).get名称());
-        entity.set認定調査障害高齢者の日常生活自立度(ShogaiNichijoSeikatsuJiritsudoCode.toValue(
-                sqlEntity.get認定調査障害高齢者の日常生活自立度コード()).get名称());
-        if (九厚労省IF識別コード_99A.equals(sqlEntity.get厚労省IF識別コード())) {
-            entity.set調査項目文言(NinteichosaKomokuMapping99A.toValue(sqlEntity.get調査項目連番()).get名称());
-        } else if (九厚労省IF識別コード_02A.equals(sqlEntity.get厚労省IF識別コード())) {
-            entity.set調査項目文言(NinteichosaKomokuMapping02A.toValue(sqlEntity.get調査項目連番()).get名称());
-        } else if (九厚労省IF識別コード_06A.equals(sqlEntity.get厚労省IF識別コード())) {
-            entity.set調査項目文言(NinteichosaKomokuMapping06A.toValue(sqlEntity.get調査項目連番()).get名称());
-        } else if (九厚労省IF識別コード_09A.equals(sqlEntity.get厚労省IF識別コード())) {
-            entity.set調査項目文言(NinteichosaKomokuMapping09A.toValue(sqlEntity.get調査項目連番()).get名称());
-        } else if (九厚労省IF識別コード_09B.equals(sqlEntity.get厚労省IF識別コード())) {
-            entity.set調査項目文言(NinteichosaKomokuMapping09B.toValue(sqlEntity.get調査項目連番()).get名称());
+        if (sqlEntity.get調査項目連番() != null && !sqlEntity.get調査項目連番().isEmpty()) {
+            if (九厚労省IF識別コード_99A.equals(sqlEntity.get厚労省IF識別コード())) {
+                entity.set調査項目文言(NinteichosaKomokuMapping99A.toValue(sqlEntity.get調査項目連番()).get名称());
+            } else if (九厚労省IF識別コード_02A.equals(sqlEntity.get厚労省IF識別コード())) {
+                entity.set調査項目文言(NinteichosaKomokuMapping02A.toValue(sqlEntity.get調査項目連番()).get名称());
+            } else if (九厚労省IF識別コード_06A.equals(sqlEntity.get厚労省IF識別コード())) {
+                entity.set調査項目文言(NinteichosaKomokuMapping06A.toValue(sqlEntity.get調査項目連番()).get名称());
+            } else if (九厚労省IF識別コード_09A.equals(sqlEntity.get厚労省IF識別コード())) {
+                entity.set調査項目文言(NinteichosaKomokuMapping09A.toValue(sqlEntity.get調査項目連番()).get名称());
+            } else if (九厚労省IF識別コード_09B.equals(sqlEntity.get厚労省IF識別コード())) {
+                entity.set調査項目文言(NinteichosaKomokuMapping09B.toValue(sqlEntity.get調査項目連番()).get名称());
+            }
         }
         setVoidEntity(entity, sqlEntity);
         return entity;
     }
 
     private void setVoidEntity(SelectSyuuShadeTaCsvEntity entity, SelectSyuuShadeTaEntity sqlEntity) {
+        if (sqlEntity.get委託先の調査委託区分() != null && !sqlEntity.get委託先の調査委託区分().isEmpty()) {
+            entity.set委託先の調査委託区分(ChosaItakuKubunCode.toValue(sqlEntity.get委託先の調査委託区分()).get名称());
+        }
+        entity.set委託先の自動割付フラグ(AutoWaritsukeFlag.toValue(sqlEntity.is委託先の自動割付()).get名称());
+        if (sqlEntity.get委託先の機関の区分() != null && !sqlEntity.get委託先の機関の区分().isEmpty()) {
+            entity.set委託先の機関の区分(ChosaKikanKubun.toValue(sqlEntity.get委託先の機関の区分()).get名称());
+        }
+        if (sqlEntity.get調査員の性別() != null && !sqlEntity.get調査員の性別().isEmpty()) {
+            entity.set調査員の性別(Seibetsu.toValue(sqlEntity.get調査員の性別()).get名称());
+        }
+        if (sqlEntity.get調査員の調査員資格() != null && !sqlEntity.get調査員の調査員資格().isEmpty()) {
+            entity.set調査員の調査員資格(Sikaku.toValue(sqlEntity.get調査員の調査員資格()).get名称());
+        }
+        if (sqlEntity.get概況特記テキストイメージ区分コード() != null && !sqlEntity.get概況特記テキストイメージ区分コード().isEmpty()) {
+            entity.set概況特記テキストイメージ区分(TokkijikoTextImageKubun.toValue(sqlEntity.get概況特記テキストイメージ区分コード()).get名称());
+        }
+        if (sqlEntity.get認定調査依頼区分コード() != null && !sqlEntity.get認定調査依頼区分コード().isEmpty()) {
+            entity.set認定調査依頼区分(NinteiChousaIraiKubunCode.toValue(sqlEntity.get認定調査依頼区分コード()).get名称());
+        }
+        if (sqlEntity.get認定調査区分コード() != null && !sqlEntity.get認定調査区分コード().isEmpty()) {
+            entity.set認定調査区分(ChosaKubun.toValue(sqlEntity.get認定調査区分コード()).get名称());
+        }
+        if (sqlEntity.get認定調査実施場所コード() != null && !sqlEntity.get認定調査実施場所コード().isEmpty()) {
+            entity.set認定調査実施場所(ChosaJisshiBashoCode.toValue(sqlEntity.get認定調査実施場所コード()).get名称());
+        }
+        if (sqlEntity.get認定調査サービス区分コード() != null && !sqlEntity.get認定調査サービス区分コード().isEmpty()) {
+            entity.set認定調査サービス区分(ServiceKubunCode.toValue(sqlEntity.get認定調査サービス区分コード()).get名称());
+        }
+        if (sqlEntity.get原本マスク区分コード() != null && !sqlEntity.get原本マスク区分コード().isEmpty()) {
+            entity.set原本マスク区分(GenponMaskKubun.toValue(sqlEntity.get原本マスク区分コード()).get名称());
+        }
+        if (sqlEntity.get認定調査認知症高齢者の日常生活自立度コード() != null
+                && !sqlEntity.get認定調査認知症高齢者の日常生活自立度コード().isEmpty()) {
+            entity.set認定調査認知症高齢者の日常生活自立度(NinchishoNichijoSeikatsuJiritsudoCode.toValue(
+                sqlEntity.get認定調査認知症高齢者の日常生活自立度コード()).get名称());
+        }
+        if (sqlEntity.get認定調査障害高齢者の日常生活自立度コード() != null
+                && !sqlEntity.get認定調査障害高齢者の日常生活自立度コード().isEmpty()) {
+            entity.set認定調査障害高齢者の日常生活自立度(ShogaiNichijoSeikatsuJiritsudoCode.toValue(
+                sqlEntity.get認定調査障害高齢者の日常生活自立度コード()).get名称());
+        }
         entity.set申請書管理番号(sqlEntity.get申請書管理番号());
         entity.set厚労省IF識別コード(sqlEntity.get厚労省IF識別コード());
         entity.set証記載保険者番号(sqlEntity.get証記載保険者番号());

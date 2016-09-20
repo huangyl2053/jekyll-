@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -165,10 +164,7 @@ public class KougakuKetteiTuutisyo {
      */
     public ResponseData<KougakuKetteiTuutisyoDiv> onClick_btnHakkouAfter(KougakuKetteiTuutisyoDiv div) {
         key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        排他キー = new LockingKey(new RString("DBCHihokenshaNo"));
-        RealInitialLocker.lock(排他キー);
         getHandler().ＤＢ更新(div, key.get被保険者番号());
-        RealInitialLocker.release(排他キー);
         PersonalData personalData = PersonalData.of(key.get識別コード(),
                 new ExpandedInformation(new Code("003"),
                         new RString("被保険者番号"),

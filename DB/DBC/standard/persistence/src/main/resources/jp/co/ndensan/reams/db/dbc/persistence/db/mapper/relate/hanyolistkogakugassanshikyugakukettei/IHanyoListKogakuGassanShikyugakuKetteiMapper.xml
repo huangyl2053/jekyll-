@@ -17,64 +17,23 @@
         rgdb."DbV1001HihokenshaDaicho" AS "DbT1001HihokenshaDaicho"
         ON "DbT1001HihokenshaDaicho"."hihokenshaNo" = "DbT3074KogakuGassanShikyuFushikyuKettei"."hihokenshaNo"
         LEFT JOIN 
-        (SELECT * 
-         FROM ( SELECT
-        支給不支給_受給."hihokenshaNo" AS 支給不支給_受給_hihokenshaNo,
-        支給不支給_受給."taishoNendo",
-        支給不支給_受給."hokenshaNo",
-        支給不支給_受給."shikyuSeiriNo",
-        支給不支給_受給."keisanKaishiYMD",
-        支給不支給_受給."keisanShuryoYMD",
-        受給JOIN."shichosonCode",
-        受給JOIN."hihokenshaNo",
-        受給JOIN."rirekiNo",
-        受給JOIN."edaban",
-        受給JOIN."jukyuShinseiJiyu",
-        受給JOIN."yoshienshaNinteiShinseiFlag",
-        受給JOIN."jukyuShinseiYMD",
-        受給JOIN."yokaigoJotaiKubunCode",
-        受給JOIN."ninteiYukoKikanKaishiYMD",
-        受給JOIN."ninteiYukoKikanShuryoYMD",
-        受給JOIN."ninteiYMD",
-        受給JOIN."kyuSochishaFlag",
-        受給JOIN."minashiCode",
-        受給JOIN."chokkinIdoJiyuCode",
-        row_number() over(partition by 受給JOIN."shichosonCode",
-        受給JOIN."hihokenshaNo"	order by 受給JOIN."rirekiNo" DESC,
-        受給JOIN."edaban" DESC)	AS 番号	
-        FROM rgdb."DbT3074KogakuGassanShikyuFushikyuKettei" AS 支給不支給_受給
-        INNER JOIN
-        rgdb."DbT4001JukyushaDaicho" AS 受給JOIN
-        ON 受給JOIN."hihokenshaNo" = 支給不支給_受給."hihokenshaNo"
-        AND 受給JOIN."yukoMukoKubun" = '1'
-        AND 受給JOIN."logicalDeletedFlag" = false
-<!--        AND SUBSTR(受給JOIN."ninteiYukoKikanKaishiYMD",1,6)<![CDATA[<=]]>支給不支給_受給.サービス提供年月
-        AND SUBSTR(受給JOIN."ninteiYukoKikanShuryoYMD",1,6)<![CDATA[>=]]>支給不支給_受給.サービス提供年月-->
-        ) AS "DbT4001JukyushaDai"
-        WHERE 番号 = '1') AS "DbT4001JukyushaDaicho"
-        ON 支給不支給_受給_hihokenshaNo = "DbT3074KogakuGassanShikyuFushikyuKettei"."hihokenshaNo"
-        AND "DbT4001JukyushaDaicho"."taishoNendo" = "DbT3074KogakuGassanShikyuFushikyuKettei"."taishoNendo"
-        AND "DbT4001JukyushaDaicho"."hokenshaNo" = "DbT3074KogakuGassanShikyuFushikyuKettei"."hokenshaNo"
-        AND "DbT4001JukyushaDaicho"."shikyuSeiriNo" = "DbT3074KogakuGassanShikyuFushikyuKettei"."shikyuSeiriNo"
-        <if test="支給区分 != null and !支給区分.isEmpty()">
+        rgdb."DbV4001JukyushaDaicho" AS "DbT4001JukyushaDaicho"
+        ON "DbT4001JukyushaDaicho"."hihokenshaNo" = "DbT3074KogakuGassanShikyuFushikyuKettei"."hihokenshaNo"
+        <if test="支給区分 != null and 支給区分.toString()!=''.toString()">
         AND "DbT3074KogakuGassanShikyuFushikyuKettei"."shikyuKubunCode" = #{支給区分}   
         </if>
-        <if test="支払方法区分 != null and !支払方法区分.isEmpty()">
+        <if test="支払方法区分 != null and 支払方法区分.toString()!=''.toString()">
         AND "DbT3074KogakuGassanShikyuFushikyuKettei"."shiharaiHohoKubun" = #{支払方法区分}   
         </if>
-        <if test="金融機関コード != null and !金融機関コード.isEmpty()">
-        AND koza."uaT0310Koza_kinyuKikanCode" = #{金融機関コード} 
-        </if>
-        <if test="対象年度 != null and !対象年度.isEmpty()">
+        <if test="対象年度 != null and !対象年度.toString()!=''.toString()">
         AND "DbT3074KogakuGassanShikyuFushikyuKettei"."taishoNendo" = #{対象年度}   
         </if>
         <if test="決定情報受取年月From != null and !決定情報受取年月From.isEmpty()">
-        AND "DbT3074KogakuGassanShikyuFushikyuKettei"."uketoriYM" <![CDATA[>=]]> #{決定情報受取年月From}   
+        AND #{決定情報受取年月From}" <![CDATA[<=]]> DbT3074KogakuGassanShikyuFushikyuKettei"."uketoriYM"  
         </if>
         <if test="決定情報受取年月To != null and !決定情報受取年月To.isEmpty()">
-        AND "DbT3074KogakuGassanShikyuFushikyuKettei"."uketoriYM" <![CDATA[<=]]> #{決定情報受取年月To}   
+        AND "DbT3074KogakuGassanShikyuFushikyuKettei"."uketoriYM" <![CDATA[<=]]>  #{決定情報受取年月To}   
         </if>
-        ${出力順}
         )
         SELECT 
         "dbT1001HihokenshaDaicho_hihokenshaNo",
@@ -112,7 +71,6 @@
         "dbT4001JukyushaDaicho_ninteiYukoKikanKaishiYMD",
         "dbT4001JukyushaDaicho_ninteiYukoKikanShuryoYMD",
         "dbT4001JukyushaDaicho_ninteiYMD",
-        "dbT4001JukyushaDaicho_minashiCode",
         "dbT4001JukyushaDaicho_chokkinIdoJiyuCode",
         "dbT4001JukyushaDaicho_yoshienshaNinteiShinseiFlag",
         "dbT4001JukyushaDaicho_kyuSochishaFlag",
@@ -169,9 +127,16 @@
         ON "Atesaki"."shikibetsuCode" = "dbT1001HihokenshaDaicho_shikibetsuCode"
         <if test="hasValidKamoku">
         LEFT JOIN
-        (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.kozaSearch" />) AS koza
+        (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS koza
         ON "DbT1001HihokenshaDaicho"."shikibetsuCode" = koza."uaT0310Koza_shikibetsuCode"
+            <if test="金融機関コード != null and !金融機関コード.isEmpty()">
+            WHERE koza."uaT0310Koza_kinyuKikanCode" = #{金融機関コード} 
+            </if>
         </if>
+         <if test="出力順 != null">
+            ${出力順} 
+         </if>
+        
     </select>
     
      <resultMap id="resultMap_HanyoListKogakuGassanShikyugakuKetteiEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkogakugassanshikyugakukettei.HanyoListKogakuGassanShikyugakuKetteiEntity" autoMapping="true">
@@ -261,7 +226,6 @@
          "DbT4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD" as "dbT4001JukyushaDaicho_ninteiYukoKikanKaishiYMD",
          "DbT4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD" as "dbT4001JukyushaDaicho_ninteiYukoKikanShuryoYMD",
          "DbT4001JukyushaDaicho"."ninteiYMD" as "dbT4001JukyushaDaicho_ninteiYMD",
-         "DbT4001JukyushaDaicho"."minashiCode" as "dbT4001JukyushaDaicho_minashiCode",
          "DbT4001JukyushaDaicho"."chokkinIdoJiyuCode" as "dbT4001JukyushaDaicho_chokkinIdoJiyuCode",
          "DbT4001JukyushaDaicho"."yoshienshaNinteiShinseiFlag" as "dbT4001JukyushaDaicho_yoshienshaNinteiShinseiFlag",
          "DbT4001JukyushaDaicho"."kyuSochishaFlag" as "dbT4001JukyushaDaicho_kyuSochishaFlag"
@@ -278,7 +242,6 @@
         <result property="ninteiYukoKikanKaishiYMD" column="dbT4001JukyushaDaicho_ninteiYukoKikanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="ninteiYukoKikanShuryoYMD" column="dbT4001JukyushaDaicho_ninteiYukoKikanShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="ninteiYMD" column="dbT4001JukyushaDaicho_ninteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="minashiCode" column="dbT4001JukyushaDaicho_minashiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="chokkinIdoJiyuCode" column="dbT4001JukyushaDaicho_chokkinIdoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="yoshienshaNinteiShinseiFlag" column="dbT4001JukyushaDaicho_yoshienshaNinteiShinseiFlag" />
         <result property="kyuSochishaFlag" column="dbT4001JukyushaDaicho_kyuSochishaFlag" />

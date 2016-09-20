@@ -50,28 +50,34 @@ public class KyotakuServiceKeikakuSaHeaderEditor implements IKyotakuServiceKeika
 
     }
 
-    private KyotakuServiceKeikakuSakuseiSource editorタイトル部(KyotakuServiceKeikakuSakuseiSource source) {
+    private void editorタイトル部(KyotakuServiceKeikakuSakuseiSource source) {
 
         source.joken1 = target.get申請日();
         source.joken2 = target.get対象者();
         source.joken3 = target.get届出状況();
-        source.kijunYmd = new RString(target.get基準日().toString());
-        return source;
+        if (target.get基準日() != null) {
+            source.kijunYmd = new RString(target.get基準日().toString());
+        }
+
     }
 
-    private KyotakuServiceKeikakuSakuseiSource editorヘッダー(KyotakuServiceKeikakuSakuseiSource source) {
+    private void editorヘッダー(KyotakuServiceKeikakuSakuseiSource source) {
         RString 作成日 = target.getシステム日時().getDate().wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         RString 作成時 = target.getシステム日時().getTime()
                 .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE).concat(SAKUSEI);
         source.shoriYmdHms = 作成日.concat(RString.HALF_SPACE).concat(作成時);
-        source.cityCd = target.get地方公共団体().get地方公共団体コード().getColumnValue();
-        source.cityMei = target.get地方公共団体().get市町村名();
+        if (target.get地方公共団体() != null) {
+            if (target.get地方公共団体().get地方公共団体コード() != null) {
+                source.cityCd = target.get地方公共団体().get地方公共団体コード().getColumnValue();
+            }
+            source.cityMei = target.get地方公共団体().get市町村名();
+        }
         editIOutputOrder(source);
-        return source;
+
     }
 
-    private KyotakuServiceKeikakuSakuseiSource editIOutputOrder(KyotakuServiceKeikakuSakuseiSource source) {
+    private void editIOutputOrder(KyotakuServiceKeikakuSakuseiSource source) {
         List<ISetSortItem> list = null;
         IOutputOrder 出力順 = target.get出力順();
         if (出力順 != null) {
@@ -110,7 +116,6 @@ public class KyotakuServiceKeikakuSaHeaderEditor implements IKyotakuServiceKeika
         if (list.size() > INDEX_4) {
             source.sortJunArea5 = list.get(INDEX_4).get項目名();
         }
-        return source;
     }
 
 }
