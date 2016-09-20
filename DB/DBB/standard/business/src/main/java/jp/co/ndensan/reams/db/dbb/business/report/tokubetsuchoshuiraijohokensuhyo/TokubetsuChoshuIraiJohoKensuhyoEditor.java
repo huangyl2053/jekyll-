@@ -54,22 +54,22 @@ public class TokubetsuChoshuIraiJohoKensuhyoEditor implements ITokubetsuChoshuIr
             source.nenkinHokenshaName = parameter.getEntity().get年金保険者名称();
             source.shichosonCode = parameter.getEntity().get構成市町村コード();
             source.shichosonName = parameter.getEntity().get市町村名称();
-            source.listLeftUpper_2 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
-                    UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
-                    parameter.getEntity().getLeft特別徴収義務者コード());
             source.listLeftUpper_3 = new RString(parameter.getEntity().getLeft件数());
             source.listLeftUpper_4 = parameter.getEntity().getLeft金額1();
             source.listLeftLower_1 = parameter.getEntity().getLeft金額2();
             if (parameter.getEntity().getLeft特別徴収義務者コード() != null) {
+                source.listLeftUpper_2 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
+                        UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
+                        parameter.getEntity().getLeft特別徴収義務者コード());
                 source.listLeftUpper_1 = parameter.getEntity().getLeft特別徴収義務者コード().getColumnValue();
             }
-            source.listRightUpper_2 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
-                    UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
-                    parameter.getEntity().getRight特別徴収義務者コード());
             source.listRightUpper_3 = new RString(parameter.getEntity().getRight件数());
             source.listRightUpper_4 = parameter.getEntity().getRight金額1();
             source.listRightLower_1 = parameter.getEntity().getRight金額2();
             if (parameter.getEntity().getRight特別徴収義務者コード() != null) {
+                source.listRightUpper_2 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
+                        UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
+                        parameter.getEntity().getRight特別徴収義務者コード());
                 source.listRightUpper_1 = parameter.getEntity().getRight特別徴収義務者コード().getColumnValue();
             }
         }
