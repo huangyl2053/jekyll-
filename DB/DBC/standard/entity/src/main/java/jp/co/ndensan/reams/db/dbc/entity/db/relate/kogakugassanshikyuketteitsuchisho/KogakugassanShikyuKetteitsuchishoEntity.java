@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanshikyuketteitsuc
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
-import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -65,7 +64,5 @@ public class KogakugassanShikyuKetteitsuchishoEntity {
     private FlexibleYearMonth uketoriYM;
     private long kozaID;
     private RString ketteiTsuchiRealHakkoFlag;
-    private KogakugassanShikyuKetteiKozaJyohoEntity 口座情報;
     private HihokenshaDaichoResultEntity 被保検者情報;
-    private UaFt250FindAtesakiEntity 宛先Entity;
 }
