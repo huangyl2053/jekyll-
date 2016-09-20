@@ -37,7 +37,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  *
  * @reamsid_L DBD-1790-020 donghj
  */
-public class NenreiKaikyubetsuYokaigodoJokyoProcess extends BatchProcessBase<ToukeiNinzuEntity> {
+public class NenreiKaikyubetsuYokaigodoProcess extends BatchProcessBase<ToukeiNinzuEntity> {
 
     private static final ReportId REPORT_DBD300005 = ReportIdDBD.DBD300005.getReportId();
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper."

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD583001.NenreiKaikyubetsuYokaigodoJokyoProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD583001.NenreiKaikyubetsuYokaigodoProcess;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD583001.DBD583001Parameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -32,7 +32,7 @@ public class DBD583001 extends BatchFlowBase<DBD583001Parameter> {
      */
     @Step(集計表出力)
     protected IBatchFlowCommand get集計表出力() {
-        return loopBatch(NenreiKaikyubetsuYokaigodoJokyoProcess.class).
+        return loopBatch(NenreiKaikyubetsuYokaigodoProcess.class).
                 arguments(getParameter().toNenreiKaikyubetsuYokaigodoJokyoProcessParameter()).define();
     }
 
