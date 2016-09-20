@@ -48,7 +48,7 @@ public class HanyoListKokuhorenJukyushaRelateEntity {
     private RString 認定有効期間終了年月日;
     private RString 居宅サービス計画作成区分コード;
     private RString 居宅介護支援事業所番号;
-    private RString 事業者番号;
+    private RString 事業者名称;
     private RString 居宅サービス計画適用開始年月日;
     private RString 居宅サービス計画適用終了年月日;
     private int 訪問通所サービス支給限度基準額;
