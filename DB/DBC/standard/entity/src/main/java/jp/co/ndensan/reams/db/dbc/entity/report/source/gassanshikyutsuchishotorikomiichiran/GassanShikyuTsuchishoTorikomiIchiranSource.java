@@ -92,8 +92,10 @@ public class GassanShikyuTsuchishoTorikomiIchiranSource implements IReportSource
     public RString taishoNendo;
     @ReportItem(name = "shikyuKubunCode", length = 1, order = 36)
     public RString shikyuKubunCode;
+    @ReportItem(name = "shoKisaiHokenshaNo", length = 10, order = 37)
+    public RString shoKisaiHokenshaNo;
     @ReportPerson(id = "X")
-    @ReportItem(name = "shikibetsuCode", length = 10, order = 37)
+    @ReportItem(name = "shikibetsuCode", length = 10, order = 38)
     public RString shikibetsuCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">

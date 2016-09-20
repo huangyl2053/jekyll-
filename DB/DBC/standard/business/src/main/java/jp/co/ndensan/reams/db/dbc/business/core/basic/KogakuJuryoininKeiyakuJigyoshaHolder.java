@@ -11,8 +11,9 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
 
 /**
+ * 高額受領委任契約事業者を管理のHolderです。
  *
- * @author Administrator
+ * @reamsid_L DBC-1980-010 yuqingzhang
  */
 public class KogakuJuryoininKeiyakuJigyoshaHolder implements Serializable {
 

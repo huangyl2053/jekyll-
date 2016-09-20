@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 高額受領委任契約事業者のデータアクセスクラスです。
  *
- *
+ * @reamsid_L DBC-1980-010 yuqingzhang
  */
 public class DbT3076KogakuJuryoininKeiyakuJigyoshaDac implements ISaveable<DbT3076KogakuJuryoininKeiyakuJigyoshaEntity> {
 

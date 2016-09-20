@@ -41,7 +41,7 @@ public class KyufuKanrihyoPanel {
      * @return ResponseData KyufuKanrihyoPanelDiv
      */
     public ResponseData<KyufuKanrihyoPanelDiv> onLoad(KyufuKanrihyoPanelDiv div) {
-        KokuhorenDataSofuViewState parmater = ViewStateHolder.get(ViewStateHolderName.国保連取込情報,
+        KokuhorenDataSofuViewState parmater = ViewStateHolder.get(ViewStateHolderName.国保連送付情報,
                 KokuhorenDataSofuViewState.class);
         再処理区分 = parmater.get再処理区分();
         処理年月 = parmater.get処理年月();
@@ -60,7 +60,7 @@ public class KyufuKanrihyoPanel {
      * @return ResponseData DBC110010_KyufukanrihyoOutParameter
      */
     public ResponseData<DBC110010_KyufukanrihyoOutParameter> onClick_Execute(KyufuKanrihyoPanelDiv div) {
-        KokuhorenDataSofuViewState parmater = ViewStateHolder.get(ViewStateHolderName.国保連取込情報,
+        KokuhorenDataSofuViewState parmater = ViewStateHolder.get(ViewStateHolderName.国保連送付情報,
                 KokuhorenDataSofuViewState.class);
         再処理区分 = parmater.get再処理区分();
         処理年月 = parmater.get処理年月();

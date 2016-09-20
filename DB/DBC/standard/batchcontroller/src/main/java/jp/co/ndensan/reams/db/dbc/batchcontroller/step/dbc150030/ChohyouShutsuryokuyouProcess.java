@@ -49,15 +49,6 @@ public class ChohyouShutsuryokuyouProcess
     }
 
     @Override
-    protected void createWriter() {
-    }
-
-    @Override
-    protected void beforeExecute() {
-
-    }
-
-    @Override
     protected void process(DbWT3470chohyouShutsuryokuyouTempEntity entity) {
         tempEntityList.add(entity);
     }

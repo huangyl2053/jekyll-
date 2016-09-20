@@ -13,8 +13,9 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
+ * 高額サービス費等受領委任払情報管理のValidationHandlerです。
  *
- * @author Administrator
+ * @reamsid_L DBC-1980-010 yuqingzhang
  */
 public class DvKogakuServiceJuryoIninValidationHandler {
 

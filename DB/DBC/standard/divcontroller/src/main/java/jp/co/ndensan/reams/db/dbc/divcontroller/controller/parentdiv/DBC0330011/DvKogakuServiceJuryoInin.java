@@ -42,8 +42,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
+ * 高額サービス費等受領委任払情報管理のDivControllerです。
  *
- * @author Administrator
+ * @reamsid_L DBC-1980-010 yuqingzhang
  */
 public class DvKogakuServiceJuryoInin {
 
@@ -53,7 +54,6 @@ public class DvKogakuServiceJuryoInin {
     private static final RString メニューID_修正 = new RString("DBCMN31006");
     private static final RString BUTTONID_該当者一覧へ_一覧 = new RString("btnShuseiIchiranBack");
     private static final RString BUTTONID_該当者一覧へ_追加 = new RString("btnTsukaIchiranBack");
-    private static final RString BUTTONID_該当者検索へ = new RString("btnShuseiKensakuBack");
     private static final RString BUTTONID_発行する = new RString("btnHakko");
     private static final RString 追加 = new RString("追加");
     private static final RString 修正 = new RString("修正");

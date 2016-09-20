@@ -10,8 +10,9 @@ import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3076KogakuJuryoininKeiyakuJ
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 高額サービス費等受領委任払情報管理のEntityです。
  *
- * @author Administrator
+ * @reamsid_L DBC-1980-010 yuqingzhang
  */
 @lombok.Getter
 @lombok.Setter

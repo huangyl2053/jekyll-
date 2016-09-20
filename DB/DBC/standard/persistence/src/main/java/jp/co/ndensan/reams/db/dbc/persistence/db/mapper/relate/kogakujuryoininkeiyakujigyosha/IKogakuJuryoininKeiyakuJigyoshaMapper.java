@@ -10,8 +10,9 @@ import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakujuryoininkeiyakuji
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakujuryoininkeiyakujigyosha.KogakuJuryoininKeiyakuJigyoshaEntity;
 
 /**
+ * 高額受領委任契約事業者情報を取得する 用マッパーインタフェースです。
  *
- * @author Administrator
+ * @reamsid_L DBC-1980-010 yuqingzhang
  */
 public interface IKogakuJuryoininKeiyakuJigyoshaMapper {
 
