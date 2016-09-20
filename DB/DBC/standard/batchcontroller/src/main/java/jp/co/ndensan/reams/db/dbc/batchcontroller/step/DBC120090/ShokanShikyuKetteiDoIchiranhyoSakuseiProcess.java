@@ -80,7 +80,7 @@ public class ShokanShikyuKetteiDoIchiranhyoSakuseiProcess extends SimpleBatchPro
     private static final RString 帳票分類ID = new RString("DBC200021_ShokanbaraiShikyuKetteishaIchiran");
     private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
     private static final RString キー_出力順 = new RString("出力順");
-    private static final RString デフォルト出力順 = new RString(" ORDER BY DbWT3036.\"shokisaiHokenshaNo\" ASC ");
+    private static final RString デフォルト出力順 = new RString(" ORDER BY DbWT3036.\"shoKisaiHokenshaNo\" ASC ");
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
     private static final RString 漢字_分 = new RString("分");
