@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.dbc120180;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120170.KohifutanshaDoMasterTorokuProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120180.KagoKetteiHokenshaInCsvFileReadProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120180.SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120180.KagoKetteiHokenshaInCsvFileReadProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120180.SogojigyohiKagoKetteiInDoIchiranhyoSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDeleteReveicedFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoHihokenshaKanrenProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoInterfaceKanriKousinProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoShoriKekkaListSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuGetFileProcess;
 import jp.co.ndensan.reams.db.dbc.business.core.kokuhorenkyoutsuu.KokuhorenKyoutsuuFileGetReturnEntity;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.sogojigyohikagoketteiin.DBC120180_SogojigyohiKagoKetteiInParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120180.DBC120180_SogojigyohiKagoKetteiInParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorListType;
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kagoketteikohifutanshain.KohifutanshaDoIchiranhyoSakuseiProcessParameter;
