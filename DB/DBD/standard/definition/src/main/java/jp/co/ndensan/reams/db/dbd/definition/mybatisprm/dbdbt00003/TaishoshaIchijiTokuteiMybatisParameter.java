@@ -91,29 +91,35 @@ public class TaishoshaIchijiTokuteiMybatisParameter implements IMyBatisParameter
     }
 
     private void edit受給者区分(JukyushaKubun2 受給者区分) {
-        if (受給者区分_受給者_いち.equals(受給者区分.getコード())) {
-            is受給者区分_受給者 = true;
-        }
-        if (受給者区分_事業対象者_に.equals(受給者区分.getコード())) {
-            is受給者区分_事業対象者 = true;
+        if (受給者区分 != null) {
+            if (受給者区分_受給者_いち.equals(受給者区分.getコード())) {
+                is受給者区分_受給者 = true;
+            }
+            if (受給者区分_事業対象者_に.equals(受給者区分.getコード())) {
+                is受給者区分_事業対象者 = true;
+            }
         }
     }
 
     private void edit旧措置者区分(KyusochishaJukyushaKubun 旧措置者区分) {
-        if (旧措置者区分_旧措置者以外_いち.equals(旧措置者区分.getコード())) {
-            is旧措置者区分_旧措置者以外 = true;
-        }
-        if (旧措置者区分_旧措置者_に.equals(旧措置者区分.getコード())) {
-            is旧措置者区分_旧措置者 = true;
+        if (旧措置者区分 != null) {
+            if (旧措置者区分_旧措置者以外_いち.equals(旧措置者区分.getコード())) {
+                is旧措置者区分_旧措置者以外 = true;
+            }
+            if (旧措置者区分_旧措置者_に.equals(旧措置者区分.getコード())) {
+                is旧措置者区分_旧措置者 = true;
+            }
         }
     }
 
     private void edit対象期間指定(TaishoKikan 対象期間指定) {
-        if (対象期間指定_対象年度_いち.equals(対象期間指定.getコード())) {
-            is対象期間指定_対象年度 = true;
-        }
-        if (対象期間指定_基準日_に.equals(対象期間指定.getコード())) {
-            is対象期間指定_基準日 = true;
+        if (対象期間指定 != null) {
+            if (対象期間指定_対象年度_いち.equals(対象期間指定.getコード())) {
+                is対象期間指定_対象年度 = true;
+            }
+            if (対象期間指定_基準日_に.equals(対象期間指定.getコード())) {
+                is対象期間指定_基準日 = true;
+            }
         }
     }
 
