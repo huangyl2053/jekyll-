@@ -179,7 +179,6 @@ public class KogakuJuryoininKeiyakuJigyoshaBuilder {
      * @return {@link KogakuJuryoininKeiyakuJigyoshaBuilder}
      */
     public KogakuJuryoininKeiyakuJigyoshaBuilder set利用者負担上限額(Decimal 利用者負担上限額) {
-        requireNonNull(利用者負担上限額, UrSystemErrorMessages.値がnull.getReplacedMessage("利用者負担上限額"));
         entity.setRiyoshaFutanJogenGaku(利用者負担上限額);
         return this;
     }
