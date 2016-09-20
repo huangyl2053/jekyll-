@@ -113,7 +113,7 @@ public class ShinsakaiKekkaTorokuManager {
         IShinsakaiKekkaTorokuMapper mapper = mapperProvider.create(IShinsakaiKekkaTorokuMapper.class);
         List<ShinsakaiKekkaTorokuIChiRanRelateEntity> entityList = mapper
                 .get審査会委員一覧検索(ShinsakaiKekkaTorokuParameter.createShinsakaiKekkaTorokuParameter(開催番号));
-        if (null == entityList.get(0) || entityList.isEmpty()) {
+        if (entityList.size() == 0 || null == entityList.get(0)) {
             return SearchResult.of(Collections.<ShinsakaiKekkaTorokuIChiRanBusiness>emptyList(), 0, false);
         }
         List<ShinsakaiKekkaTorokuIChiRanBusiness> ichiRanBusinessList = new ArrayList();
@@ -167,7 +167,6 @@ public class ShinsakaiKekkaTorokuManager {
         for (DbT5101NinteiShinseiJohoEntity entity : entityList) {
             if (null == entity || entityList.isEmpty()) {
                 count = count + 1;
-                continue;
             } else {
                 entity.initializeMd5();
                 resultList.add(new NinteiShinseiJoho(entity));

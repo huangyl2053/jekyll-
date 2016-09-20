@@ -517,16 +517,17 @@ public class ShinsakaiKekkaTorokuHandler {
     private void set二次判定ドロップダウン() {
         List<KeyValueDataSource> 二次判定リスト = new ArrayList();
         二次判定リスト.add(new KeyValueDataSource(YokaigoJotaiKubun09.なし.getコード(), YokaigoJotaiKubun09.なし.get名称()));
-        二次判定リスト.add(new KeyValueDataSource(YokaigoJotaiKubun09.再調査.getコード(), YokaigoJotaiKubun09.再調査.get名称()));
-        二次判定リスト.add(new KeyValueDataSource(YokaigoJotaiKubun09.取消.getコード(), YokaigoJotaiKubun09.取消.get名称()));
+        二次判定リスト.add(new KeyValueDataSource(YokaigoJotaiKubun09.要支援1.getコード(), YokaigoJotaiKubun09.要支援1.get名称()));
+        二次判定リスト.add(new KeyValueDataSource(YokaigoJotaiKubun09.要支援2.getコード(), YokaigoJotaiKubun09.要支援2.get名称()));
         二次判定リスト.add(new KeyValueDataSource(YokaigoJotaiKubun09.要介護1.getコード(), YokaigoJotaiKubun09.要介護1.get名称()));
         二次判定リスト.add(new KeyValueDataSource(YokaigoJotaiKubun09.要介護2.getコード(), YokaigoJotaiKubun09.要介護2.get名称()));
         二次判定リスト.add(new KeyValueDataSource(YokaigoJotaiKubun09.要介護3.getコード(), YokaigoJotaiKubun09.要介護3.get名称()));
         二次判定リスト.add(new KeyValueDataSource(YokaigoJotaiKubun09.要介護4.getコード(), YokaigoJotaiKubun09.要介護4.get名称()));
         二次判定リスト.add(new KeyValueDataSource(YokaigoJotaiKubun09.要介護5.getコード(), YokaigoJotaiKubun09.要介護5.get名称()));
-        二次判定リスト.add(new KeyValueDataSource(YokaigoJotaiKubun09.要支援1.getコード(), YokaigoJotaiKubun09.要支援1.get名称()));
-        二次判定リスト.add(new KeyValueDataSource(YokaigoJotaiKubun09.要支援2.getコード(), YokaigoJotaiKubun09.要支援2.get名称()));
         二次判定リスト.add(new KeyValueDataSource(YokaigoJotaiKubun09.非該当.getコード(), YokaigoJotaiKubun09.非該当.get名称()));
+        二次判定リスト.add(new KeyValueDataSource(YokaigoJotaiKubun09.再調査.getコード(), YokaigoJotaiKubun09.再調査.get名称()));
+        二次判定リスト.add(new KeyValueDataSource(YokaigoJotaiKubun09.取消.getコード(), YokaigoJotaiKubun09.取消.get名称()));
+
         div.getKobetsuHyojiArea().getDdlNijiHantei().setDataSource(二次判定リスト);
     }
 

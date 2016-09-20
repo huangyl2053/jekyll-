@@ -53,7 +53,7 @@ public enum YokaigoJotaiKubun09 {
     /**
      * コード:99 名称:なし 略称:なし
      */
-    なし("99", "なし", "なし");
+    なし("99", "", "");
 
     private final RString code;
     private final RString fullName;
