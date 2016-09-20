@@ -5,19 +5,18 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD710050.HanyoListHomonKaigoRiyoshaFutanGakuGengakuProcess;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710050.DBD710050_HanyoListHomonKaigoRiyoshaFutanGakuGengakuParameter;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD710060.HanyoListShakaiFukushiHojinKeigenProcess;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710060.DBD710060_HanyoListShakaiFukushiHojinKeigenParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 
 /**
+ * 汎用リスト出力(社会福祉法人軽減)のバッチフロークラスです。
  *
- * 汎用リスト出力(訪問介護利用者負担額減額)のバッチフロークラスです。
- *
- * @reamsid_L DBD-3940-030 panxiaobo
+ * @reamsid_L DBD-3900-030 mawy
  */
-public class DBD710050_HanyoListHomonKaigoRiyoshaFutanGakuGengaku extends BatchFlowBase<DBD710050_HanyoListHomonKaigoRiyoshaFutanGakuGengakuParameter> {
+public class DBD710060_HanyoListShakaiFukushiHojinKeigen extends BatchFlowBase<DBD710060_HanyoListShakaiFukushiHojinKeigenParameter> {
 
     @Override
     protected void defineFlow() {
@@ -33,8 +32,9 @@ public class DBD710050_HanyoListHomonKaigoRiyoshaFutanGakuGengaku extends BatchF
      */
     @Step(CSV_PROCESS)
     protected IBatchFlowCommand reportProcess() {
-        return loopBatch(HanyoListHomonKaigoRiyoshaFutanGakuGengakuProcess.class)
-                .arguments(getParameter().toHanyoListHomonKaigoRiyoshaFutanGakuGengakuProcessParameter())
+        return loopBatch(HanyoListShakaiFukushiHojinKeigenProcess.class)
+                .arguments(getParameter().toHanyoRisutoShakaiFukushiHoujinKeigenProcessParameter())
                 .define();
     }
+
 }
