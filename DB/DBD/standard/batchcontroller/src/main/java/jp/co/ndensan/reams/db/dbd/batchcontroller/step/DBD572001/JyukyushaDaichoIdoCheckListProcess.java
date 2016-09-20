@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
+import jp.co.ndensan.reams.uz.uza.batch.journal.JournalWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
@@ -42,6 +43,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
@@ -86,6 +88,8 @@ public class JyukyushaDaichoIdoCheckListProcess extends BatchKeyBreakBase<Jyukyu
             order = finder.get出力順(SubGyomuCode.DBD介護受給, REPORT_DBD200037, parameter.get出力順ID());
             出力順 = get出力順(order);
         } else {
+            new JournalWriter().writeErrorJournal(RDateTime.now(), new RString(UrErrorMessages.実行不可.getMessage()
+                    .replace(帳票出力順の取得.toString()).toString()));
             throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
                     .replace(帳票出力順の取得.toString()).toString());
         }
@@ -140,6 +144,8 @@ public class JyukyushaDaichoIdoCheckListProcess extends BatchKeyBreakBase<Jyukyu
             throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
                     .replace(帳票出力順の取得.toString()).toString());
         } else {
+            new JournalWriter().writeErrorJournal(RDateTime.now(), new RString(UrErrorMessages.実行不可.getMessage()
+                    .replace(帳票出力順の取得.toString()).toString()));
             出力順 = ChohyoUtil.get出力順OrderBy(MyBatisOrderByClauseCreator.
                     create(DBD200037_JukyushaIdoCheckListEnum.class, order), NUM5);
         }
