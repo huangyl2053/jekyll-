@@ -18,8 +18,7 @@
     </select>
 
     <select resultOrdered="true" id="select受給者台帳情報"
-            resultMap="resultmap_getSogoJigyouTaisyouSyaJyohoJoho"
-            parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
+            resultMap="resultmap_getSogoJigyouTaisyouSyaJyohoJoho" fetchSize="500">
         SELECT Jukyu."ninteiYukoKikanKaishiYMD", Jukyu."ninteiYukoKikanShuryoYMD", Jukyu."ikenshoJuryoYMD",
         Jukyu."hihokenshaNo",Jukyu."rirekiNo",Jukyu."edaban"
         FROM(
@@ -81,8 +80,7 @@
     </resultMap>
 
     <select resultOrdered="true" id="select単票用医療費控除"
-            resultMap="resultmap_getIryohikojyoChohyo"
-            parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
+            resultMap="resultmap_getIryohikojyoChohyo" fetchSize="500">
         SELECT
         "hihokenshaNo" ,
         "kojoTaishoNen" ,
