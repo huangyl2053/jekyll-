@@ -169,7 +169,7 @@ public class KogakuServicehiHanteiDoSofuFileSakuseiProcess extends BatchProcessB
         controlEntity.setレコード番号_連番(new RString(レコード番号));
         controlEntity.setボリュ_ム通番(RSTRING_000);
         controlEntity.setレコード件数(new RString(reader.getCount()));
-        controlEntity.setデータ種別(ConfigKeysKokuhorenSofu.受給者情報更新結果情報.getコード());
+        controlEntity.setデータ種別(ConfigKeysKokuhorenSofu.高額介護サービス費給付判定結果情報.getコード());
         controlEntity.set福祉事務所特定番号(RSTRING_00);
         controlEntity.set保険者番号(parameter.get保険者番号());
         controlEntity.set事業所番号(RSTRING_0000000000);

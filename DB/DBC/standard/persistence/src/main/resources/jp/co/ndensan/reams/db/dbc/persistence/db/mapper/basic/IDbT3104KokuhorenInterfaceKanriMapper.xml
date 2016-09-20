@@ -55,37 +55,23 @@
     <select id="getスケジュール履歴情報初期_送付"
            resultMap="ResultMap_DbT3104KokuhorenInterfaceKanriEntity" fetchSize="500" resultOrdered="true">
             SELECT TAB.*
-            FROM rgdb."DbT3104KokuhorenInterfaceKanri" as TAB
-            INNER  JOIN (
-		SELECT 
-                    "kokanShikibetsuNo",
-                    MAX("shoriYM") AS max
-		FROM rgdb."DbT3104KokuhorenInterfaceKanri"
-		GROUP BY "kokanShikibetsuNo") 
-            AS TEMPTAB
-            ON  TAB."shoriYM" = TEMPTAB.max
-            AND TAB."kokanShikibetsuNo" = TEMPTAB."kokanShikibetsuNo" 
-        WHERE TAB."sofuTorikomiKubun" = '1'
-        ORDER BY
-            TAB."shoriYM" DESC       
+            FROM rgdb."DbT3104KokuhorenInterfaceKanri" as TAB 
+            WHERE TAB."sofuTorikomiKubun" = '1' 
+              AND TAB."shoriYM" = (
+                SELECT MAX(TempTAB."shoriYM")
+                FROM rgdb."DbT3104KokuhorenInterfaceKanri" AS TempTAB
+                WHERE TempTAB."sofuTorikomiKubun" = '1')
     </select>
     
     <select id="getスケジュール履歴情報初期_取込"
            resultMap="ResultMap_DbT3104KokuhorenInterfaceKanriEntity" fetchSize="500" resultOrdered="true">
             SELECT TAB.*
-            FROM rgdb."DbT3104KokuhorenInterfaceKanri" as TAB
-            INNER  JOIN (
-		SELECT 
-                    "kokanShikibetsuNo",
-                    MAX("shoriYM") AS max
-		FROM rgdb."DbT3104KokuhorenInterfaceKanri"
-		GROUP BY "kokanShikibetsuNo") 
-            AS TEMPTAB
-            ON  TAB."shoriYM" = TEMPTAB.max
-            AND TAB."kokanShikibetsuNo" = TEMPTAB."kokanShikibetsuNo" 
-        WHERE TAB."sofuTorikomiKubun" = '2'
-        ORDER BY
-            TAB."shoriYM" DESC       
+            FROM rgdb."DbT3104KokuhorenInterfaceKanri" as TAB 
+            WHERE TAB."sofuTorikomiKubun" = '2' 
+              AND TAB."shoriYM" = (
+                SELECT MAX(TempTAB."shoriYM")
+                FROM rgdb."DbT3104KokuhorenInterfaceKanri" AS TempTAB
+                WHERE TempTAB."sofuTorikomiKubun" = '2')  
     </select>
 
 
