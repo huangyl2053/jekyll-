@@ -1,19 +1,20 @@
 package jp.co.ndensan.reams.db.dbz.entity.db.basic;
 
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import java.util.UUID;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import java.util.Objects;
+import java.util.UUID;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 介護保険施設入退所テーブルのエンティティクラスです。
@@ -45,6 +46,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
     private FlexibleDate taishoShoriYMD;
     private FlexibleDate taishoYMD;
     private RString roomKigoNo;
+    private HokenshaNo hokenshaNo;
 
     /**
      * insertDantaiCdのgetメソッドです。
@@ -306,6 +308,25 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
     }
 
     /**
+     * 保険者番号のgetメソッドです。
+     *
+     * @return 保険者番号
+     */
+    @CheckForNull
+    public HokenshaNo getHokenshaNo() {
+        return hokenshaNo;
+    }
+
+    /**
+     * 保険者番号のsetメソッドです。
+     *
+     * @param hokenshaNo 保険者番号
+     */
+    public void setHokenshaNo(HokenshaNo hokenshaNo) {
+        this.hokenshaNo = hokenshaNo;
+    }
+
+    /**
      * このエンティティの主キーが他の{@literal DbT1004ShisetsuNyutaishoEntity}と等しいか判定します。
      *
      * @param other 比較するエンティティ
@@ -342,6 +363,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
         this.taishoShoriYMD = entity.taishoShoriYMD;
         this.taishoYMD = entity.taishoYMD;
         this.roomKigoNo = entity.roomKigoNo;
+        this.hokenshaNo = entity.hokenshaNo;
     }
 
     /**
@@ -351,7 +373,7 @@ public class DbT1004ShisetsuNyutaishoEntity extends DbTableEntityBase<DbT1004Shi
      */
     @Override
     public RString getMd5() {
-        return super.toMd5(shikibetsuCode, rirekiNo, shichosonCode, daichoShubetsu, nyushoShisetsuShurui, nyushoShisetsuCode, nyushoShoriYMD, nyushoYMD, taishoShoriYMD, taishoYMD, roomKigoNo);
+        return super.toMd5(shikibetsuCode, rirekiNo, shichosonCode, daichoShubetsu, nyushoShisetsuShurui, nyushoShisetsuCode, nyushoShoriYMD, nyushoYMD, taishoShoriYMD, taishoYMD, roomKigoNo, hokenshaNo);
     }
 
 // </editor-fold>

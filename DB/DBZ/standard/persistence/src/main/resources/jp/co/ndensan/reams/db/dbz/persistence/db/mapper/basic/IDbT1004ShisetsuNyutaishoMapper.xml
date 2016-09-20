@@ -36,7 +36,8 @@
          "DbT1004ShisetsuNyutaisho"."nyushoYMD" as "dbT1004ShisetsuNyutaisho_nyushoYMD",
          "DbT1004ShisetsuNyutaisho"."taishoShoriYMD" as "dbT1004ShisetsuNyutaisho_taishoShoriYMD",
          "DbT1004ShisetsuNyutaisho"."taishoYMD" as "dbT1004ShisetsuNyutaisho_taishoYMD",
-         "DbT1004ShisetsuNyutaisho"."roomKigoNo" as "dbT1004ShisetsuNyutaisho_roomKigoNo"
+         "DbT1004ShisetsuNyutaisho"."roomKigoNo" as "dbT1004ShisetsuNyutaisho_roomKigoNo",
+         "DbT1004ShisetsuNyutaisho"."hokenshaNo" as "dbT1004ShisetsuNyutaisho_hokenshaNo"
     </sql>
 
 
@@ -61,6 +62,7 @@
         <result property="taishoShoriYMD" column="dbT1004ShisetsuNyutaisho_taishoShoriYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="taishoYMD" column="dbT1004ShisetsuNyutaisho_taishoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="roomKigoNo" column="dbT1004ShisetsuNyutaisho_roomKigoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="hokenshaNo" column="dbT1004ShisetsuNyutaisho_hokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
     </resultMap>
     
         <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT1004ShisetsuNyutaishoEntity">
