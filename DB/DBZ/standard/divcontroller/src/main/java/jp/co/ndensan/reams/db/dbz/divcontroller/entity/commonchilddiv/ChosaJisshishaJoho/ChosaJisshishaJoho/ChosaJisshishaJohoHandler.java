@@ -80,7 +80,7 @@ public class ChosaJisshishaJohoHandler {
             div.getDdlShozokuKikan().setSelectedValue(key.get所属機関());
         }
         List<ChosainJoho> chosainJohoList = service.getKinyusha(key
-                .get申請書管理番号()).records();
+                .get申請書管理番号(), div.getDdlShozokuKikan().getSelectedKey()).records();
         List<KeyValueDataSource> kinyusha = new ArrayList<>();
         kinyusha.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         for (ChosainJoho chosainJoho : chosainJohoList) {

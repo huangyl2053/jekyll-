@@ -25,7 +25,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChosainJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJoho;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJohoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJohoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaItakusakiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoChosaItem;
@@ -44,10 +46,13 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoShisetsuRiyo
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoShisetsuRiyoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.kihonchosainput.KihonChosaInput;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosajisshishajoho.ChosaJisshishaJohoModel;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaJisshiBashoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteiShinseiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosaIraiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoChosaItemManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoGaikyoChosaManager;
@@ -131,6 +136,7 @@ public class NinnteiChousaKekkaTouroku1 {
 
         ChosaJisshishaJohoModel model = new ChosaJisshishaJohoModel();
         model.set申請書管理番号(temp_申請書管理番号.getColumnValue());
+
         if (is再調査の場合) {
             getHandler(div).住宅改修_既存初期化(temp_申請書管理番号, temp_認定調査履歴番号);
             ViewStateHolder.put(ViewStateKeys.住宅改修rad, div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getRadJutakuKaishu().getSelectedKey());
@@ -142,12 +148,14 @@ public class NinnteiChousaKekkaTouroku1 {
             for (NinteichosaItakusakiJoho joho : ninteichosaItakusakiJohoList) {
                 if (joho.get認定調査委託先コード().equals(gaikyoChosa.getTemp_調査委託先コード())) {
                     model.set所属機関(joho.get事業者名称());
+                    break;
                 }
             }
-            List<ChosainJoho> chosainJohoList = service.getKinyusha(temp_申請書管理番号.getColumnValue()).records();
+            List<ChosainJoho> chosainJohoList = service.getKinyusha(temp_申請書管理番号.getColumnValue(), gaikyoChosa.getTemp_調査委託先コード()).records();
             for (ChosainJoho chosainJoho : chosainJohoList) {
                 if (chosainJoho.get認定調査員コード().equals(gaikyoChosa.getTemp_調査員コード())) {
                     model.set記入者(chosainJoho.get調査員氏名());
+                    break;
                 }
             }
             model.set調査実施日(gaikyoChosa.getTemp_調査実施年月日());
@@ -155,7 +163,23 @@ public class NinnteiChousaKekkaTouroku1 {
             model.set実施場所名称(gaikyoChosa.getTemp_調査実施場所名称());
             getHandler(div).共有子DIV初期化(temp_申請書管理番号, model);
             再調査場合の初期化(div, 認定調査情報, gaikyoChosa, temp_申請書管理番号, temp_認定調査履歴番号);
-        } else {
+        } else {    
+            ChosaJisshishaJohoFinder service = ChosaJisshishaJohoFinder.createInstance();
+            List<NinteichosaItakusakiJoho> ninteichosaItakusakiJohoList = service.getSyozokuKikan(temp_申請書管理番号.getColumnValue()).records();
+            for (NinteichosaItakusakiJoho joho : ninteichosaItakusakiJohoList) {
+                if (joho.get認定調査委託先コード().equals(認定調査情報.getTemp_調査委託先コード())) {
+                    model.set所属機関(joho.get事業者名称());
+                    break;
+                }
+            }
+            List<ChosainJoho> chosainJohoList = service.getKinyusha(temp_申請書管理番号.getColumnValue(), 認定調査情報.getTemp_調査委託先コード()).records();
+            for (ChosainJoho chosainJoho : chosainJohoList) {
+                if (chosainJoho.get認定調査員コード().equals(認定調査情報.getTemp_調査員コード())) {
+                    model.set記入者(chosainJoho.get調査員氏名());
+                    break;
+                }
+            }
+
             getHandler(div).共有子DIV初期化(temp_申請書管理番号, model);
 
             ViewStateHolder.put(ViewStateKeys.現在の概況調査場所, 在宅);
@@ -960,6 +984,7 @@ public class NinnteiChousaKekkaTouroku1 {
                 || ChosaKubun.再調査.get名称().equals(div.getCcdChosaJisshishaJoho().getTxtChosaKubun().getValue())) {
 
             現在の状況_在宅or施設の保存(div);
+            認定申請情報の更新(div);
             認定調査依頼情報の更新();
             概況調査の更新(div);
             サービス状況フラグの更新(div);
@@ -984,7 +1009,21 @@ public class NinnteiChousaKekkaTouroku1 {
             }
         }
     }
+    
+    private void 認定申請情報の更新(NinnteiChousaKekkaTouroku1Div div) {
+        ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
 
+        NinteiShinseiJohoManager dbt5101Manager = NinteiShinseiJohoManager.createInstance();
+        NinteiShinseiJoho dbt5101 = dbt5101Manager.get要介護認定申請情報(temp_申請書管理番号);
+        if (dbt5101 == null) {
+            dbt5101 = new NinteiShinseiJoho(temp_申請書管理番号);
+        }
+        NinteiShinseiJohoBuilder dbt5101Bulid = dbt5101.createBuilderForEdit();
+        dbt5101Bulid.set認定調査委託先コード(new ChosaItakusakiCode(div.getCcdChosaJisshishaJoho().getDdlShozokuKikan().getSelectedKey()));
+        dbt5101Bulid.set認定調査員コード(new ChosainCode(div.getCcdChosaJisshishaJoho().getDdlKinyusha().getSelectedKey()));
+        dbt5101Manager.save要介護認定申請情報(dbt5101Bulid.build());
+    }
+    
     private void 認定調査依頼情報の更新() {
         ShinseishoKanriNo temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         int temp_認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);

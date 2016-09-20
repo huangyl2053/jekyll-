@@ -72,13 +72,12 @@
         WHERE
           A."shichosonCode" IN (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.chosajisshishajoho.IChosaJisshishaJohoMapper.get_ShichosonCode" /> )
         AND
-          A."ninteichosaItakusakiCode" IN  (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.chosajisshishajoho.IChosaJisshishaJohoMapper.get_NinteichosaItakusakiCode"/>)
-        AND
           A."jokyoFlag"  = True
     </select>
     
     <!--記入者のデータソースの取得処理--> 
     <select resultOrdered="true" id="getKinyusha" 
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.chosaJisshishaJoho.ChosaJisshishaMapperParameter"
             resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5913ChosainJohoMapper.ResultMap_DbT5913ChosainJohoEntity" 
             fetchSize="500">
         SELECT
@@ -89,7 +88,7 @@
         WHERE
           A."shichosonCode" IN (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.chosajisshishajoho.IChosaJisshishaJohoMapper.get_ShichosonCode" />)
         AND
-          A."ninteiChosaItakusakiCode" IN  (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.chosajisshishajoho.IChosaJisshishaJohoMapper.get_NinteichosaItakusakiCode" />)
+          A."ninteiChosaItakusakiCode" = #{ninteiChosaItakusakiCode}   
         AND
           A."jokyoFlag"  = True
         ORDER BY A."ninteiChosainCode" 

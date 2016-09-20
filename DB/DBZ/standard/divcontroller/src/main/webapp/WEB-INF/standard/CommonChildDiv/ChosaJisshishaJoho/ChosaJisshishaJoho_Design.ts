@@ -12,6 +12,10 @@ module DBZ {
                 return "onChange_ddlChosaJisshiBasho";
             }
 
+            public static onChange_ddlShozokuKikan(): string {
+                return "onChange_ddlShozokuKikan";
+            }
+
         }
 
         export class Controls {

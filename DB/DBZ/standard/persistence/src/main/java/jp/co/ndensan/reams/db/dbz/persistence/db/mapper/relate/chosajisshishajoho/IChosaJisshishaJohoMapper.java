@@ -7,6 +7,7 @@
 package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.chosajisshishajoho;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.chosaJisshishaJoho.ChosaJisshishaMapperParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -27,10 +28,10 @@ public interface IChosaJisshishaJohoMapper {
     
     /**
      * 記入者のデータソースを取得します。
-     * @param shinseishoKanriNo 申請書管理番号
+     * @param paramer ChosaJisshishaMapperParameter
      * @return List<DbT5913ChosainJohoEntity>
      */
-    List<DbT5913ChosainJohoEntity> getKinyusha(RString shinseishoKanriNo);
+    List<DbT5913ChosainJohoEntity> getKinyusha(ChosaJisshishaMapperParameter paramer);
     
     /**
      * 記入者の初期値を取得します。

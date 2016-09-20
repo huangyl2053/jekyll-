@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChosainJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaItakusakiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho.NinteiShinseiJoho;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.chosaJisshishaJoho.ChosaJisshishaMapperParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
@@ -81,12 +82,16 @@ public class ChosaJisshishaJohoFinder {
     /**
      * 記入者の初期値を取得します。
      * @param shinseishoKanriNo 申請書管理番号
+     * @param ninteiChosaItakusakiCode 調査委託先コード
      * @return SearchResult<NinteichosaItakusakiJoho>
      */
-    public SearchResult<ChosainJoho> getKinyusha(RString shinseishoKanriNo) {
+    public SearchResult<ChosainJoho> getKinyusha(RString shinseishoKanriNo, RString ninteiChosaItakusakiCode) {
         List<ChosainJoho> chosainJohoList = new ArrayList<>();
         IChosaJisshishaJohoMapper mapper = mapperProvider.create(IChosaJisshishaJohoMapper.class);
-        List<DbT5913ChosainJohoEntity> kinyushaList = mapper.getKinyusha(shinseishoKanriNo);
+        ChosaJisshishaMapperParameter paramer = new ChosaJisshishaMapperParameter();
+        paramer.setShinseishoKanriNo(shinseishoKanriNo);
+        paramer.setNinteiChosaItakusakiCode(ninteiChosaItakusakiCode);
+        List<DbT5913ChosainJohoEntity> kinyushaList = mapper.getKinyusha(paramer);
         for (DbT5913ChosainJohoEntity kinyusha : kinyushaList) {
             chosainJohoList.add(new ChosainJoho(kinyusha));
         }

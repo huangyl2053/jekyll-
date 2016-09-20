@@ -7,6 +7,10 @@ var DBZ;
             Events.onChange_ddlChosaJisshiBasho = function () {
                 return "onChange_ddlChosaJisshiBasho";
             };
+
+            Events.onChange_ddlShozokuKikan = function () {
+                return "onChange_ddlShozokuKikan";
+            };
             return Events;
         })();
         ChosaJisshishaJoho.Events = Events;

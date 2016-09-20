@@ -32,7 +32,9 @@
         DbT5101NinteiShinseiJoho."koroshoIfShikibetsuCode"  AS  temp_厚労省IF識別コード,
         DbT5201NinteichosaIraiJoho."ninteichosaIraiKubunCode"  AS  temp_認定調査依頼区分コード,
         DbT5201NinteichosaIraiJoho."ninteichosaIraiKaisu"  AS  temp_認定調査回数,
-        DbT5910NinteichosaItakusakiJoho."chosaItakuKubun"  AS  temp_認定調査委託区分コード
+        DbT5910NinteichosaItakusakiJoho."chosaItakuKubun"  AS  temp_認定調査委託区分コード,
+        DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode" AS temp_調査委託先コード,
+        DbT5913ChosainJoho."ninteiChosainCode" AS temp_調査員コード
         FROM
         rgdb."DbT5101NinteiShinseiJoho"  AS  DbT5101NinteiShinseiJoho
         LEFT JOIN
@@ -46,7 +48,12 @@
         LEFT JOIN
         rgdb."DbT5910NinteichosaItakusakiJoho"  AS  DbT5910NinteichosaItakusakiJoho
         ON  DbT5910NinteichosaItakusakiJoho."shichosonCode" = DbT7051KoseiShichosonMaster."shichosonCode"
-        AND DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode" = #{temp_認定調査委託先コード}
+        AND DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode" = DbT5201NinteichosaIraiJoho."ninteichosaItakusakiCode"
+        LEFT JOIN
+        rgdb."DbT5913ChosainJoho"  AS  DbT5913ChosainJoho
+        ON  DbT5913ChosainJoho."shichosonCode" = DbT7051KoseiShichosonMaster."shichosonCode"
+        AND DbT5913ChosainJoho."ninteiChosaItakusakiCode" = DbT5201NinteichosaIraiJoho."ninteichosaItakusakiCode"
+        AND DbT5913ChosainJoho."ninteiChosainCode" = DbT5201NinteichosaIraiJoho."ninteiChosainCode"
         WHERE
         DbT5101NinteiShinseiJoho."shinseishoKanriNo" = #{temp_申請書管理番号}
         AND  DbT5101NinteiShinseiJoho."logicalDeletedFlag" = FALSE

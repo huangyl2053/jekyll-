@@ -72,6 +72,8 @@ public class NinnteiChousaKekkaTouroku1Finder {
             data.setTemp_厚労省IF識別コード(entity.getTemp_厚労省IF識別コード());
             data.setTemp_認定調査依頼区分コード(entity.getTemp_認定調査依頼区分コード());
             data.setTemp_認定調査回数(entity.getTemp_認定調査回数());
+            data.setTemp_調査委託先コード(entity.getTemp_調査委託先コード());
+            data.setTemp_調査員コード(entity.getTemp_調査員コード());
         }
         return data;
     }
