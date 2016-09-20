@@ -96,13 +96,7 @@
                "DbV1001"."zenkokuJushoCode" AS "DbV1001_zenkokuJushoCode",
                "DbV1001"."gyoseikuCode" AS "DbV1001_gyoseikuCode",
                "DbV1001"."juminShubetsuCode" AS "DbV1001_juminShubetsuCode",
-               "DbV1001"."jusho" AS "DbV1001_jusho",
-               <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki"/>,
-               "Koza"."gyomuCode" AS "Koza_gyomuCode",
-               "Koza"."subGyomuCode" AS "Koza_subGyomuCode",
-               "Koza"."kamokuCode" AS "Koza_kamokuCode",
-               "Koza"."gyomuKoyuKey" AS "Koza_gyomuKoyuKey",
-               "Koza"."yotoKubun" AS "Koza_yotoKubun"
+               "DbV1001"."jusho" AS "DbV1001_jusho"
         FROM "KogakugassanShikyuKetteitsuchishoTemp" AS "KogakugassanShikyuKetteitsuchishoTemp"
         LEFT JOIN ( SELECT "DbV1001HihokenshaDaicho"."shichosonCode",
                            "DbV1001HihokenshaDaicho"."hihokenshaNo",
@@ -118,29 +112,13 @@
                            "ShikibetsuTaisho"."jusho"
                     FROM rgdb."DbV1001HihokenshaDaicho" AS "DbV1001HihokenshaDaicho"
                     LEFT JOIN
-                    rgua."UaFt200FindShikibetsuTaisho"('2','20160908',true,'DB',FALSE,'','','','','','','','','','','',true,
+                    rgua."UaFt200FindShikibetsuTaisho"('2',#{基準年月日},true,'DB',FALSE,'','','','','','','','','','','',true,
                     '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
                     true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
                     ON "ShikibetsuTaisho"."shikibetsuCode" = "DbV1001HihokenshaDaicho"."shikibetsuCode"
                     WHERE "DbV1001HihokenshaDaicho"."logicalDeletedFlag" = false
                    ) AS "DbV1001"
         ON "DbV1001"."hihokenshaNo" = "KogakugassanShikyuKetteitsuchishoTemp"."hihokenshaNo"
-        LEFT JOIN
-        rgua."UaFt250FindAtesaki"('DB','DBC','','false','','','true','true','false','false','') AS "Atesaki"
-        ON "Atesaki"."shikibetsuCode" = "DbV1001"."shikibetsuCode"
-        LEFT JOIN (SELECT
-                        GyomubetsuPrimaryKey."gyomuCode" as "gyomuCode",
-                        GyomubetsuPrimaryKey."subGyomuCode" as "subGyomuCode",
-                        GyomubetsuPrimaryKey."kamokuCode" as "kamokuCode",
-                        "UaT0310Koza"."gyomuKoyuKey"  as "gyomuKoyuKey",
-                        "UaT0310Koza"."yotoKubun" as "yotoKubun",
-                        "UaT0310Koza"."kozaId" as "kozaId"
-                    FROM
-                        rgua."UaT0310Koza" AS "UaT0310Koza"
-                        LEFT JOIN 
-                        rgua."UaT0100GyomubetsuPrimaryKey" AS GyomubetsuPrimaryKey
-                        ON "UaT0310Koza"."gyomubetsuPrimaryKey" = GyomubetsuPrimaryKey."gyomubetsuPrimaryKey") AS "Koza"
-        ON "Koza"."kozaId" = "KogakugassanShikyuKetteitsuchishoTemp"."kozaID"
         ORDER BY "KogakugassanShikyuKetteitsuchishoTemp"."shikyuKubun" ASC
                <if test="出力順 != null">
                 ,${出力順}
@@ -189,10 +167,7 @@
         <result property="uketoriYM" column="uketoriYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <result property="kozaID" column="kozaID" />
         <result property="ketteiTsuchiRealHakkoFlag" column="ketteiTsuchiRealHakkoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <association property="口座情報" resultMap="resultMap_KozaJyoho"/>
         <association property="被保検者情報" resultMap="resultMap_HihokenshaDaichoResultEntity"/>
-        <association property="宛先Entity"
-                     resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
     </resultMap>
     
     <resultMap id="resultMap_HihokenshaDaichoResultEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanshikyuketteitsuchisho.HihokenshaDaichoResultEntity" autoMapping="true">
@@ -207,13 +182,6 @@
         <result property="gyoseikuCode" column="DbV1001_gyoseikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyoseikuCodeTypeHandler"/>
         <result property="juminShubetsuCode" column="DbV1001_juminShubetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jusho" column="DbV1001_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
-    </resultMap>
-    <resultMap id="resultMap_KozaJyoho" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanshikyuketteitsuchisho.KogakugassanShikyuKetteiKozaJyohoEntity" autoMapping="true">
-        <result property="業務コード" column="Koza_gyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.GyomuCodeTypeHandler"/>
-        <result property="サブ業務コード" column="Koza_subGyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SubGyomuCodeTypeHandler"/>
-        <result property="科目コード" column="Koza_kamokuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.KamokuCodeTypeHandler"/>
-        <result property="業務固有キー" column="Koza_gyomuKoyuKey" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="用途区分" column="Koza_yotoKubun" typeHandler="jp.co.ndensan.reams.ua.uax.entity.typehandlers.KozaYotoKubunCodeValueTypeHandler"/>       
     </resultMap>
     <select id="get中間DB_高額合算支給決定通知書データ" resultOrdered="true" 
             resultMap="ResultMap_DbT3074KogakuGassanShikyuFushikyuKetteiEntity" fetchSize="500">
@@ -268,22 +236,9 @@
         <result property="ketteiTsuchiRealHakkoFlag" column="ketteiTsuchiRealHakkoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     
-    <update id="update処理日付管理マスタ" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteitsuchisho.KogakugassanShikyuKetteitsuchishoMybatisParameter">
-        UPDATE
-            rgdb."DbT7022ShoriDateKanri" AS "DbT7022ShoriDateKanri"
-        SET "updateCount" = "DbT7022ShoriDateKanri"."updateCount" + 1,
-            "lastUpdateTimestamp" = now(),
-        <if test="処理枝番 == 0001">
-            "taishoKaishiYMD" = #{受取年月_01}
-        </if>
-        <if test="処理枝番 == 0002">
-            "taishoKaishiYMD" = #{申請開始年月日},
-            "taishoShuryoYMD" = #{申請終了年月日}
-        </if>
-        <if test="処理枝番 == 0003">
-            "taishoKaishiYMD" = #{決定開始年月日},
-            "taishoShuryoYMD" = #{決定終了年月日}
-        </if>
+    <select id="update処理日付管理マスタ" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyuketteitsuchisho.KogakugassanShikyuKetteitsuchishoMybatisParameter"
+            resultMap="ResultMap_DbT7022ShoriDateKanriEntity">
+        SELECT B.*
         FROM (SELECT A.*,
                      row_number() OVER (PARTITION BY A."subGyomuCode",A."shichosonCode",A."shoriName",A."shoriEdaban" ORDER BY A."nendo" DESC, A."nendoNaiRenban" DESC) AS "rowNo"
               FROM rgdb."DbT7022ShoriDateKanri" AS A
@@ -292,12 +247,28 @@
               AND A."shoriName" = #{処理名}
               AND A."shoriEdaban" = #{処理枝番}
              ) AS B
-        WHERE "DbT7022ShoriDateKanri"."subGyomuCode" = B."subGyomuCode"
-        AND "DbT7022ShoriDateKanri"."shichosonCode" = B."shichosonCode"
-        AND "DbT7022ShoriDateKanri"."shoriName" = B."shoriName"
-        AND "DbT7022ShoriDateKanri"."shoriEdaban" = B."shoriEdaban"
-        AND "DbT7022ShoriDateKanri"."nendo" = B."nendo"
-        AND "DbT7022ShoriDateKanri"."nendoNaiRenban" = B."nendoNaiRenban"
-        AND B."rowNo" = 1
-    </update>
+        WHERE B."rowNo" = 1
+    </select>
+    <resultMap id="ResultMap_DbT7022ShoriDateKanriEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity" autoMapping="true">
+        <id property="subGyomuCode" column="dbT7022ShoriDateKanri_subGyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SubGyomuCodeTypeHandler"/>
+        <id property="shichosonCode" column="dbT7022ShoriDateKanri_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <id property="shoriName" column="dbT7022ShoriDateKanri_shoriName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="shoriEdaban" column="dbT7022ShoriDateKanri_shoriEdaban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="nendo" column="dbT7022ShoriDateKanri_nendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="nendoNaiRenban" column="dbT7022ShoriDateKanri_nendoNaiRenban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT7022ShoriDateKanri_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT7022ShoriDateKanri_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT7022ShoriDateKanri_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT7022ShoriDateKanri_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT7022ShoriDateKanri_isDeleted" />
+        <result property="updateCount" column="dbT7022ShoriDateKanri_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT7022ShoriDateKanri_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT7022ShoriDateKanri_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kijunYMD" column="dbT7022ShoriDateKanri_kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kijunTimestamp" column="dbT7022ShoriDateKanri_kijunTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="taishoKaishiYMD" column="dbT7022ShoriDateKanri_taishoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="taishoShuryoYMD" column="dbT7022ShoriDateKanri_taishoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="taishoKaishiTimestamp" column="dbT7022ShoriDateKanri_taishoKaishiTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="taishoShuryoTimestamp" column="dbT7022ShoriDateKanri_taishoShuryoTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+    </resultMap>
 </mapper>
