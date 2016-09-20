@@ -142,11 +142,6 @@
     </select>
 
     <resultMap id="resultMap_ShunyuTaishoData" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.dankaibetsushunoritsu.DankaibetsuShunoritsuDataEntity" autoMapping="true">
-        <id column="UrT0700shunoId"/>
-        <id column="dbT2002Fuka_choteiNendo"/>
-        <id column="dbT2002Fuka_fukaNendo"/>
-        <id column="dbT2002Fuka_tsuchishoNo"/>
-        <id column="dbT2002Fuka_rirekiNo"/>
         <association property="収入情報取得PSM" resultMap="totalShunyuResult"/>
         <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
         <association property="介護賦課" resultMap="ResultMap_DbV2002FukaEntity"/>
@@ -224,12 +219,12 @@
         <id column="UrT0700shunoId" />
         <association property="収納キーRelateEntity"                    resultMap="shunoKeyRelateEntity" />
         <association property="最新収入Entity"                         resultMap="saishinShunyuEntity" />
-        <collection property="最新収入額内訳RelateEntity"         resultMap="saishinShunyugakuUchiwakeRelateEntity" />
-        <collection property="最新収入任意附帯金Entity"           resultMap="saishinShunyuNiniFutaikinEntity" />
+        <association property="最新収入額内訳RelateEntity"         resultMap="saishinShunyugakuUchiwakeRelateEntity" />
+        <association property="最新収入任意附帯金Entity"           resultMap="saishinShunyuNiniFutaikinEntity" />
     </resultMap>
 
     <resultMap id="shunoKeyRelateEntity" type="jp.co.ndensan.reams.ca.cax.entity.db.relate.ShunoKeyRelateEntity" autoMapping="true">
-        <id property="収納管理Entity.shunoId"                 column="UrT0700shunoId" />
+        <id column="UrT0700shunoId" />
         <association property="収納管理Entity"                resultMap="shunoKanriEntity" />
         <association property="収納科目Entity"         resultMap="shunoKamokuEntity" />
         <association property="収納科目枝番Entity"     resultMap="shunoKamokuEdabanEntity" />
