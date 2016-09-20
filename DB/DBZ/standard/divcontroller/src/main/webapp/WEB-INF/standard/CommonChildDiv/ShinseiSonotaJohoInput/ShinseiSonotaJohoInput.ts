@@ -133,8 +133,8 @@ module DBZ
                     this.controls.txtRiyu().readOnly = false;
                     this.controls.txtSoshitsuDay().readOnly = true;
                     this.controls.txtTorisageDay().readOnly = true;
-                    this.controls.txtToshoNinteiKikanFrom().readOnly = false;
-                    this.controls.txtToshoNinteiKikanTo().readOnly = false;
+                    this.controls.txtToshoNinteiKikanFrom().readOnly = true;
+                    this.controls.txtToshoNinteiKikanTo().readOnly = true;
                     this.controls.txtJukyuShikakuHakkoDay1().readOnly = true;
                     this.controls.txtJukyuShikakuHakkoDay2().readOnly = true;
                 }
@@ -144,8 +144,8 @@ module DBZ
                     this.controls.txtRiyu().readOnly = false;
                     this.controls.txtSoshitsuDay().readOnly = true;
                     this.controls.txtTorisageDay().readOnly = false;
-                    this.controls.txtToshoNinteiKikanFrom().readOnly = false;
-                    this.controls.txtToshoNinteiKikanTo().readOnly = false;
+                    this.controls.txtToshoNinteiKikanFrom().readOnly = true;
+                    this.controls.txtToshoNinteiKikanTo().readOnly = true;
                     this.controls.txtJukyuShikakuHakkoDay1().readOnly = true;
                     this.controls.txtJukyuShikakuHakkoDay2().readOnly = true;
                 }
@@ -163,7 +163,7 @@ module DBZ
                 public JukyuShikakushashoMode(): void {
                     this.controls.ddlIdoJiyu().readOnly = true;
                     this.controls.ddlSakujoJiyu().disabled = true;
-                    this.controls.txtRiyu().readOnly = false;
+                    this.controls.txtRiyu().readOnly = true;
                     this.controls.txtSoshitsuDay().readOnly = true;
                     this.controls.txtTorisageDay().readOnly = true;
                     this.controls.txtToshoNinteiKikanFrom().readOnly = true;
