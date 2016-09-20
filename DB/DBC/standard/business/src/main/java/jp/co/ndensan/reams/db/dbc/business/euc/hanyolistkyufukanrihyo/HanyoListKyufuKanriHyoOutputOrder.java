@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 汎用リスト(給付管理票)ORDERBYデータの編集クラスです。
  *
- * @author Saku
+ * @reamsid_L DBC-3096-020 pengxingyi
  */
 public enum HanyoListKyufuKanriHyoOutputOrder implements IReportItems {
 
