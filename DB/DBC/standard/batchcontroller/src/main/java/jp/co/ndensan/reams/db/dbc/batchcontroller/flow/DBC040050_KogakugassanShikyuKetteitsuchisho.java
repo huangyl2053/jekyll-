@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc040050.GetTaishoshaChushutsuProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc040050.SetKougakuGassanKetteiTsuuchishoProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc040050.SetNullKogakugassanShikyuKetteiTsuchiIchiranProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc040050.UpdateDbT3074Process;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc040050.UpdateDbT7022Process;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC040050.DBC040050_KogakugassanShikyuKetteitsuchishoParameter;
@@ -30,7 +29,6 @@ public class DBC040050_KogakugassanShikyuKetteitsuchisho extends BatchFlowBase<D
     private static final String BACKUP_TO_TEMPORARY_TABLE = "backupShikyuuKetteiTsuuchisho";
     private static final String 対象者抽出 = "getTaishoshaChushutsu";
     private static final String 高額合算支給決定通知書発行 = "setKougakuGassanKetteiTsuuchisho";
-    private static final String EMPTY高額合算支給不支給決定者一覧表を作成 = "setNullKogakugassanShikyuKetteiTsuchiIchiran";
     private static final String 高額合算支給不支給決定の決定通知書作成年月日を更新 = "updateDbT3074KogakuGassanShikyuFushikyuKettei";
     private static final String 処理日付管理マスタを更新 = "updateDbT7022ShoriDateKanri";
     private static final RString IMPORTTABLENAMEPERMANENT = new RString("DbT3074KogakuGassanShikyuFushikyuKettei");
@@ -43,8 +41,6 @@ public class DBC040050_KogakugassanShikyuKetteitsuchisho extends BatchFlowBase<D
         int 件数 = getResult(Integer.class, new RString(対象者抽出), GetTaishoshaChushutsuProcess.件数);
         if (INT_0 < 件数) {
             executeStep(高額合算支給決定通知書発行);
-        } else {
-            executeStep(EMPTY高額合算支給不支給決定者一覧表を作成);
         }
         if (文字列_1.equals(getParameter().get決定日一括更新区分())) {
             executeStep(高額合算支給不支給決定の決定通知書作成年月日を更新);
@@ -84,16 +80,6 @@ public class DBC040050_KogakugassanShikyuKetteitsuchisho extends BatchFlowBase<D
     }
 
     /**
-     * EMPTY高額合算支給不支給決定者一覧表を作成のメソッドです。
-     *
-     * @return 対象者抽出Process
-     */
-    @Step(EMPTY高額合算支給不支給決定者一覧表を作成)
-    protected IBatchFlowCommand setNullKogakugassanShikyuKetteiTsuchiIchiran() {
-        return simpleBatch(SetNullKogakugassanShikyuKetteiTsuchiIchiranProcess.class).arguments(setParameter()).define();
-    }
-
-    /**
      * 高額合算支給不支給決定の決定通知書作成年月日を更新のメソッドです。
      *
      * @return 対象者抽出Process
@@ -110,7 +96,7 @@ public class DBC040050_KogakugassanShikyuKetteitsuchisho extends BatchFlowBase<D
      */
     @Step(処理日付管理マスタを更新)
     protected IBatchFlowCommand updateDbT7022ShoriDateKanri() {
-        return simpleBatch(UpdateDbT7022Process.class).arguments(setParameter()).define();
+        return loopBatch(UpdateDbT7022Process.class).arguments(setParameter()).define();
     }
 
     private KogakugassanShikyuKetteitsuchishoProcessParameter setParameter() {

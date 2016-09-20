@@ -42,6 +42,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -176,15 +177,16 @@ public class SpoolShotokuJohoIchiranProcess extends BatchKeyBreakBase<ShotokuJoh
         RString csv出力有無;
         RString csvファイル名;
         if (連番 != INT_1) {
-            出力ページ数 = reportSourceWriter.getPageGroupCount();
+            出力ページ数 = reportSourceWriter.pageCount().value();
             csv出力有無 = CSV出力有無_あり;
-            csvファイル名 = CSVファイル名_なし;
-        } else {
-            csv出力有無 = CSV出力有無_なし;
             csvファイル名 = CSVファイル名_あり;
+        } else {
+            csvファイル名 = CSVファイル名_なし;
+            csv出力有無 = CSV出力有無_なし;
         }
         load出力条件リスト(出力ページ数, csv出力有無, csvファイル名);
         eucCsvWriter.close();
+        eucManager.spool(eucFilePath);
     }
 
     private void load出力条件リスト(int 出力ページ数, RString csv出力有無, RString csvファイル名) {
@@ -250,23 +252,24 @@ public class SpoolShotokuJohoIchiranProcess extends BatchKeyBreakBase<ShotokuJoh
         RString 識別コードR = 介護所得TempEntity.getShikibetsuCode() == null
                 || 介護所得TempEntity.getShikibetsuCode().isEmpty() ? RString.EMPTY : 介護所得TempEntity.getShikibetsuCode().getColumnValue();
         csvEntity.set識別コード(識別コードR);
-        RString 氏名_カナR = 宛名entity.getKanaMeisho() == null
+        RString 氏名_カナR = 宛名entity == null || 宛名entity.getKanaMeisho() == null
                 || 宛名entity.getKanaMeisho().isEmpty() ? RString.EMPTY : 宛名entity.getKanaMeisho().getColumnValue();
         csvEntity.set氏名_カナ(氏名_カナR);
         RString 所得年度 = 介護所得TempEntity.getShotoNendo() == null
                 || 介護所得TempEntity.getShotoNendo().isEmpty() ? RString.EMPTY : 介護所得TempEntity.getShotoNendo().toDateString();
         csvEntity.set所得年度(所得年度);
-        RString 生年月日R = 宛名entity.getSeinengappiYMD() == null
+        RString 生年月日R = 宛名entity == null || 宛名entity.getSeinengappiYMD() == null
                 || 宛名entity.getSeinengappiYMD().isEmpty() ? RString.EMPTY : 宛名entity.getSeinengappiYMD().seireki().toDateString();
         csvEntity.set生年月日(生年月日R);
-        RString 性別code = 宛名entity.getSeibetsuCode();
+        RString 性別code = 宛名entity == null ? RString.EMPTY : 宛名entity.getSeibetsuCode();
         RString 性別 = 性別code == null || 性別code.isEmpty() ? RString.EMPTY : Seibetsu.toValue(性別code).get名称();
         csvEntity.set性別(性別);
         RString 住民税課税区分_減免前 = 介護所得TempEntity.getKazeiKubun();
         RString 住民税課税区分_減免前R = 住民税課税区分_減免前 == null
                 || 住民税課税区分_減免前.isEmpty() ? RString.EMPTY : KazeiKubun.toValue(住民税課税区分_減免前).get名称();
         csvEntity.set住民税課税区分_減免前(住民税課税区分_減免前R);
-        HihokenshaNo 被保険者番号 = entity.get被保険者台帳管理entity().getHihokenshaNo();
+        HihokenshaNo 被保険者番号 = entity.get被保険者台帳管理entity() == null
+                ? HihokenshaNo.EMPTY : entity.get被保険者台帳管理entity().getHihokenshaNo();
         RString 被保険者番号R = 被保険者番号 == null || 被保険者番号.isEmpty() ? RString.EMPTY : 被保険者番号.getColumnValue();
         csvEntity.set被保険者番号(被保険者番号R);
         csvEntity = getCsvEntity(介護所得TempEntity, 宛名entity, csvEntity);
@@ -285,16 +288,16 @@ public class SpoolShotokuJohoIchiranProcess extends BatchKeyBreakBase<ShotokuJoh
         RString 課税標準額 = 介護所得TempEntity.getKazeiShotoGaku() == null
                 ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(介護所得TempEntity.getKazeiShotoGaku(), 0);
         csvEntity.set課税標準額(課税標準額);
-        csvEntity.set登録業務(宛名entity.getTorokuJiyuCode());
-        AtenaMeisho 氏名 = 宛名entity.getMeisho();
-        RString 氏名R = 氏名 == null || 氏名.isEmpty() ? RString.EMPTY : 氏名.getColumnValue();
+        csvEntity.set登録業務(宛名entity == null ? RString.EMPTY : 宛名entity.getTorokuJiyuCode());
+        RString 氏名R = 宛名entity == null || 宛名entity.getMeisho() == null
+                || 宛名entity.getMeisho().isEmpty() ? RString.EMPTY : 宛名entity.getMeisho().getColumnValue();
         csvEntity.set氏名(氏名R);
-        RString 消除事由コード = 宛名entity.getShojoJiyuCode();
-        FlexibleDate 生年月日 = 宛名entity.getSeinengappiYMD();
+        RString 消除事由コード = 宛名entity == null ? RString.EMPTY : 宛名entity.getShojoJiyuCode();
+        FlexibleDate 生年月日 = 宛名entity == null ? FlexibleDate.EMPTY : 宛名entity.getSeinengappiYMD();
         RString 年齢 = RString.EMPTY;
         if (生年月日 != null && !生年月日.isEmpty()) {
             if (INDEX_22.equals(消除事由コード)) {
-                FlexibleDate 消除異動年月日 = 宛名entity.getShojoIdoYMD();
+                FlexibleDate 消除異動年月日 = 宛名entity == null ? FlexibleDate.EMPTY : 宛名entity.getShojoIdoYMD();
                 年齢 = new RString(消除異動年月日.getYearValue() - 生年月日.getYearValue());
             } else {
                 int システム年 = FlexibleDate.getNowDate().getYearValue();
@@ -302,7 +305,7 @@ public class SpoolShotokuJohoIchiranProcess extends BatchKeyBreakBase<ShotokuJoh
             }
         }
         csvEntity.set年齢(年齢);
-        RString 住民種別コード = 宛名entity.getJuminShubetsuCode();
+        RString 住民種別コード = 宛名entity == null ? RString.EMPTY : 宛名entity.getJuminShubetsuCode();
         RString 種別 = 住民種別コード == null || 住民種別コード.isEmpty() ? RString.EMPTY : JuminShubetsu.toValue(住民種別コード).toRString();
         csvEntity.set種別(種別);
         RString 年金収入額 = 介護所得TempEntity.getNenkiniShunyuGaku() == null
@@ -316,22 +319,34 @@ public class SpoolShotokuJohoIchiranProcess extends BatchKeyBreakBase<ShotokuJoh
         UaFt200FindShikibetsuTaishoEntity 宛名entity = entity.get宛名();
         KaigoHokenShotokuTempEntity item = new KaigoHokenShotokuTempEntity();
         item.setShikibetsuCode(介護所得TempEntity.getShikibetsuCode());
-        item.setHihokenshaNo(entity.get被保険者台帳管理entity().getHihokenshaNo());
-        item.setKanaMeisho(宛名entity.getKanaMeisho());
-        item.setMeisho(宛名entity.getMeisho());
+        item.setHihokenshaNo(entity.get被保険者台帳管理entity() == null
+                ? HihokenshaNo.EMPTY : entity.get被保険者台帳管理entity().getHihokenshaNo());
+        if (宛名entity != null) {
+            item.setKanaMeisho(宛名entity.getKanaMeisho());
+            item.setMeisho(宛名entity.getMeisho());
+            item.setSeinengappiYMD(宛名entity.getSeinengappiYMD());
+            item.setShojoJiyuCode(宛名entity.getShojoJiyuCode());
+            item.setShojoIdoYMD(宛名entity.getShojoIdoYMD());
+            item.setSeibetsuCode(宛名entity.getSeibetsuCode());
+            item.setJuminShubetsuCode(宛名entity.getJuminShubetsuCode());
+            item.setTorokuGyomu(宛名entity.getTorokuJiyuCode());
+        } else {
+            item.setKanaMeisho(AtenaKanaMeisho.EMPTY);
+            item.setMeisho(AtenaMeisho.EMPTY);
+            item.setSeinengappiYMD(FlexibleDate.EMPTY);
+            item.setShojoJiyuCode(RString.EMPTY);
+            item.setShojoIdoYMD(FlexibleDate.EMPTY);
+            item.setSeibetsuCode(RString.EMPTY);
+            item.setJuminShubetsuCode(RString.EMPTY);
+            item.setTorokuGyomu(RString.EMPTY);
+        }
         item.setShotokuNendo(介護所得TempEntity.getShotoNendo());
-        item.setSeinengappiYMD(宛名entity.getSeinengappiYMD());
-        item.setShojoJiyuCode(宛名entity.getShojoJiyuCode());
-        item.setShojoIdoYMD(宛名entity.getShojoIdoYMD());
-        item.setSeibetsuCode(宛名entity.getSeibetsuCode());
-        item.setJuminShubetsuCode(宛名entity.getJuminShubetsuCode());
         item.setKazeiKubun(介護所得TempEntity.getKazeiKubun());
         item.setKazeiKubunGemmenGo(介護所得TempEntity.getKazeiKubunGemmenGo());
         item.setGokeiShotokuGaku(介護所得TempEntity.getGokeiShotokuGaku());
         item.setNenkiniShunyuGaku(介護所得TempEntity.getNenkiniShunyuGaku());
         item.setNenkiniShotokuGaku(介護所得TempEntity.getNenkiniShotokuGaku());
         item.setKazeiShotokuGaku(介護所得TempEntity.getKazeiShotoGaku());
-        item.setTorokuGyomu(宛名entity.getTorokuJiyuCode());
         return item.toKaigoHokenShotokuTempEntity(item);
     }
 

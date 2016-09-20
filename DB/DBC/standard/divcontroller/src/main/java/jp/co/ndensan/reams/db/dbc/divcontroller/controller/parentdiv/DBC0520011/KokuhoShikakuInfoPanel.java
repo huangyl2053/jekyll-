@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -61,6 +62,7 @@ public class KokuhoShikakuInfoPanel {
      */
     public ResponseData<KokuhoShikakuInfoPanelDiv> onClick_btnSave(KokuhoShikakuInfoPanelDiv mainPanelDiv) {
         KokuhoShikakuInfo 国保資格詳細情報 = ViewStateHolder.get(ViewStateKeys.国保資格詳細情報, KokuhoShikakuInfo.class);
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         MainPanelValidationHandler validation = new MainPanelValidationHandler();
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         validation.資格期間大小関係チェック(pairs, mainPanelDiv);
@@ -73,7 +75,7 @@ public class KokuhoShikakuInfoPanel {
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             return ResponseData.of(mainPanelDiv).respond();
         }
-        if (getHandler(mainPanelDiv).updateorinsert(
+        if (getHandler(mainPanelDiv).updateorinsert(taishoshaKey.get被保険者番号(),
                 new ShikibetsuCode(mainPanelDiv.getHeaderPanel().getCcdAtenaInfo().get識別コード()), 国保資格詳細情報)) {
             mainPanelDiv.getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()),
                     RString.EMPTY, RString.EMPTY, true);
@@ -89,8 +91,16 @@ public class KokuhoShikakuInfoPanel {
      * @return ResponseData<FutangendogakuShinseiDiv>
      */
     public ResponseData<KokuhoShikakuInfoPanelDiv> onClick_btnBack(KokuhoShikakuInfoPanelDiv div) {
+        if (!ResponseHolder.isReRequest()) {
+            QuestionMessage message = new QuestionMessage("URZQ00070", "入力内容を破棄してよいか確認する");
+            return ResponseData.of(div).addMessage(message).respond();
+        }
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            return ResponseData.of(div).respond();
+        }
         KokuhoShikakuInfo 国保資格詳細情報 = ViewStateHolder.get(ViewStateKeys.国保資格詳細情報, KokuhoShikakuInfo.class);
-        getHandler(div).onClick_btnBack(new ShikibetsuCode(div.getHeaderPanel().getCcdAtenaInfo().get識別コード()), div, 国保資格詳細情報);
+        TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+        getHandler(div).onClick_btnBack(taishoshaKey.get被保険者番号(), div, 国保資格詳細情報);
         return ResponseData.of(div).forwardWithEventName(DBC0520011TransitionEventName.対象者検索へ戻る).respond();
     }
 

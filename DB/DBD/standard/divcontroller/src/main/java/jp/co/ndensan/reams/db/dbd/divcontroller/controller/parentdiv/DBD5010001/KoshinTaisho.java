@@ -22,8 +22,6 @@ import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDownload;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -152,10 +150,7 @@ public class KoshinTaisho {
     public IDownLoadServletResponse onClick_syuShayoubutton(KoshinTaishoDiv div, IDownLoadServletResponse response) {
         KoshinTaishoHandler taishoHandler = new KoshinTaishoHandler();
         SharedFileEntryDescriptor ptor = taishoHandler.csvSyuShayou(div);
-
-        前排他キーのセット();
         taishoHandler.koushiDb(div);
-        前排他キーの解除();
         AccessLogger.log(AccessLogType.照会, taishoHandler.アクセスログ情報(div));
         return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(ptor, CSV調査ファイル名), response);
     }
@@ -219,14 +214,9 @@ public class KoshinTaisho {
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-        前排他キーのセット();
         new KoshinTaishoHandler().youKihoKoushiDb(div);
-        前排他キーの解除();
-
         ResponseData<KoshinTaishoDiv> response = new ResponseData<>();
-        response.getRootTitle();
-
-        div.getCcdKanryoMessege().setMessage(new RString(div.getTitle() + "の保存処理が完了しました。"),
+        div.getCcdKanryoMessege().setMessage(new RString(response.getRootTitle() + "の保存処理が完了しました。"),
                 RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
         AccessLogger.log(AccessLogType.更新, new KoshinTaishoHandler().アクセスログ情報(div));
         return ResponseData.of(div).setState(DBD5010001StateName.完了);
@@ -250,15 +240,5 @@ public class KoshinTaisho {
             }
         }
         return ResponseData.of(div).respond();
-    }
-
-    private void 前排他キーのセット() {
-        LockingKey 排他キー = new LockingKey("ShinseishoKanriNo");
-        RealInitialLocker.lock(排他キー);
-    }
-
-    private void 前排他キーの解除() {
-        LockingKey 排他キー = new LockingKey("ShinseishoKanriNo");
-        RealInitialLocker.release(排他キー);
     }
 }

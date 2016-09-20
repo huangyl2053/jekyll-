@@ -143,19 +143,19 @@ public class IryoHiKojoKakuninSinsei {
         DbT7065ChohyoSeigyoKyotsuEntity 帳票制御共通 = 帳票制御共通Dac.selectByKey(SubGyomuCode.DBD介護受給, new ReportId(帳票分類ID));
         RString 管内住所編集_都道府県名付与有無 = DbBusinessConfig.getConfigInfo(
                 ConfigNameDBU.帳票共通住所編集方法_管内住所編集_都道府県名付与有無,
-                SubGyomuCode.DBD介護受給).getConfigValue();
+                SubGyomuCode.DBU介護統計報告).getConfigValue();
         RString 管内住所編集_郡名付与有無 = DbBusinessConfig.getConfigInfo(
                 ConfigNameDBU.帳票共通住所編集方法_管内住所編集_郡名付与有無,
-                SubGyomuCode.DBD介護受給).getConfigValue();
+                SubGyomuCode.DBU介護統計報告).getConfigValue();
         RString 管内住所編集_市町村名付与有無 = DbBusinessConfig.getConfigInfo(
                 ConfigNameDBU.帳票共通住所編集方法_管内住所編集_市町村名付与有無,
-                SubGyomuCode.DBD介護受給).getConfigValue();
+                SubGyomuCode.DBU介護統計報告).getConfigValue();
         RString 管内住所編集_編集方法 = DbBusinessConfig.getConfigInfo(
                 ConfigNameDBU.帳票共通住所編集方法_管内住所編集_編集方法,
-                SubGyomuCode.DBD介護受給).getConfigValue();
+                SubGyomuCode.DBU介護統計報告).getConfigValue();
         RString 住所編集_方書表示有無 = DbBusinessConfig.getConfigInfo(
                 ConfigNameDBU.帳票共通住所編集方法_住所編集_方書表示有無,
-                SubGyomuCode.DBD介護受給).getConfigValue();
+                SubGyomuCode.DBU介護統計報告).getConfigValue();
         if (帳票制御共通 != null) {
             if (帳票制御共通.getJushoHenshuTodoufukenMeiHyojiUmu()) {
                 管内住所編集_都道府県名付与有無 = 表示する;

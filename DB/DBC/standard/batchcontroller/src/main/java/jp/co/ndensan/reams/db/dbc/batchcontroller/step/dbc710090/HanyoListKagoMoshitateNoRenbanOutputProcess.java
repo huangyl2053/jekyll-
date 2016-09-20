@@ -10,16 +10,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.euc.hanyolistkagomoshitate.HanyoListKagoMoshitateCsvEntityEditor;
+import jp.co.ndensan.reams.db.dbc.business.euc.hanyolistkagomoshitate.HanyoListKagoMoshitateOutputOrder;
 import jp.co.ndensan.reams.db.dbc.definition.core.kagomoshitate.KagoMoshitateHokenshaKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc710090.HanyoListKagoMoshitateProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc710090.HanyoListKagoMoshitateNoRenbanCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc710090.HanyoListKagoMoshitateEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -76,6 +82,10 @@ public class HanyoListKagoMoshitateNoRenbanOutputProcess extends BatchProcessBas
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final Code CODE_0003 = new Code("0003");
     private static final RString DATANAME_被保険者番号 = new RString("被保険者番号");
+    private static final RString 定数_ORDERBY = new RString("order by");
+    private static final RString コンマ = new RString(",");
+    private static final RString 項目名_履歴番号 = new RString("\"dbT3059KagoMoshitate_rirekiNo\"");
+    private IOutputOrder 出力順;
     private HanyoListKagoMoshitateProcessParameter parameter;
     private Association 地方公共団体情報;
     private Map<LasdecCode, KoseiShichosonMaster> 構成市町村マスタ;
@@ -90,7 +100,21 @@ public class HanyoListKagoMoshitateNoRenbanOutputProcess extends BatchProcessBas
 
     @Override
     protected void initialize() {
-        //TODO  出力順の補正
+        if (RString.isNullOrEmpty(parameter.get出力順())) {
+            IChohyoShutsuryokujunFinder iChohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
+            出力順 = iChohyoShutsuryokujunFinder.get出力順(SubGyomuCode.DBC介護給付,
+                    ReportIdDBC.DBC701009.getReportId(), Long.valueOf(parameter.get出力順().toString()));
+            if (出力順 != null) {
+                parameter.set出力項目(MyBatisOrderByClauseCreator.create(HanyoListKagoMoshitateOutputOrder.class, 出力順).
+                        concat(コンマ).concat(HanyoListKagoMoshitateOutputOrder.被保険者番号.getMyBatis項目名()).
+                        concat(コンマ).concat(HanyoListKagoMoshitateOutputOrder.サービス年月.getMyBatis項目名()).
+                        concat(コンマ).concat(項目名_履歴番号));
+            }
+        } else {
+            parameter.set出力項目(定数_ORDERBY.concat(HanyoListKagoMoshitateOutputOrder.被保険者番号.getMyBatis項目名()).
+                    concat(コンマ).concat(HanyoListKagoMoshitateOutputOrder.サービス年月.getMyBatis項目名()).
+                    concat(コンマ).concat(項目名_履歴番号));
+        }
         構成市町村マスタ = new HashMap<>();
         連番 = 0;
         csv出力Flag = 定数_なし;

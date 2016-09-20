@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU030010;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU010100.DBU010100_JigyoHokokuGeppo_HokenkyufuKogakuGassanParameter;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU030030.DBU030030_JigyoHokokuNenpo_IppanParamter;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU030040.DBU030040_JigyoHokokuNenpo_IppanGenbutsuParameter;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU030070.DBU030070_JigyoHokokuNenpo_HokenkyufuGenbutsuParameter;
@@ -26,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class DBU030010_JigyoHokokuNenpo_MainParameter extends BatchParameterBase {
 
     private static final int INDEX_7 = 7;
+    private static final int INDEX_8 = 8;
     private static final String PRINTCONTROLKBN = "printControlKbn";
     private static final String HOKOKUNENDO = "hokokuNendo";
     private static final String HOKOKUKAISHIYM = "hokokuKaishiYm";
@@ -201,5 +203,40 @@ public class DBU030010_JigyoHokokuNenpo_MainParameter extends BatchParameterBase
         parameter.set過去集計分市町村コードリスト(過去集計分市町村コードリスト);
         parameter.set過去集計分旧市町村区分(過去集計分旧市町村区分);
         return parameter;
+    }
+
+    /**
+     * 事業状況報告資料月報作成_保険給付決定状況_高額合算分を生成します。
+     *
+     * @return 事業状況報告資料月報作成_保険給付決定状況_高額合算分のバッチパラメータ
+     */
+    public DBU010100_JigyoHokokuGeppo_HokenkyufuKogakuGassanParameter toDBU010100Parameter() {
+        DBU010100_JigyoHokokuGeppo_HokenkyufuKogakuGassanParameter parameter = new DBU010100_JigyoHokokuGeppo_HokenkyufuKogakuGassanParameter();
+        parameter.setプリントコントロール区分(プリントコントロール区分);
+        parameter.set報告区分(new RString("2"));
+        parameter.set報告年月(報告開始年月);
+        parameter.set年度(報告年度);
+        parameter.set決定年月(null);
+        parameter.set報告年度(報告年度);
+        parameter.set集計年度(集計年度.get(INDEX_8));
+        parameter.set集計開始年月(集計開始年月.get(INDEX_8));
+        parameter.set集計終了年月(集計終了年月.get(INDEX_8));
+        parameter.set作成日時(作成日時.get(INDEX_8).getDate().toDateString().concat(getDate(作成日時.get(INDEX_8).getHour())).
+                concat(getDate(作成日時.get(INDEX_8).getMinute())).concat(getDate(作成日時.get(INDEX_8).getSecond())));
+        parameter.set処理日時(処理日時.getDate().toDateString().concat(getDate(処理日時.getHour())).
+                concat(getDate(処理日時.getMinute())).concat(getDate(処理日時.getSecond())));
+        parameter.set市町村コード(市町村コード);
+        parameter.set構成市町村区分(構成市町村区分);
+        parameter.set旧市町村区分(旧市町村区分);
+        parameter.set構成市町村コードリスト(構成市町村コードリスト);
+        parameter.set旧市町村コードリスト(旧市町村コードリスト);
+        parameter.set過去集計分市町村コードリスト(過去集計分市町村コードリスト);
+        parameter.set過去集計分旧市町村区分(過去集計分旧市町村区分);
+        parameter.setバッチID(new RString("DBU030010_JigyoHokokuNenpo_Main"));
+        return parameter;
+    }
+
+    private static RString getDate(int 時間) {
+        return new RString(時間).padZeroToLeft(2);
     }
 }

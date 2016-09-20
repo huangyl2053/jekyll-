@@ -251,7 +251,7 @@
      <result property="受給者台帳_支給限度単位数" column="受給者台帳_支給限度単位数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" /> 
      <result property="受給者台帳_支給限度有効開始年月日" column="受給者台帳_支給限度有効開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />  
      <result property="受給者台帳_支給限度有効終了年月日" column="受給者台帳_支給限度有効終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />  
-     <result property="受給者台帳_短期入所支給限度日数" column="受給者台帳_短期入所支給限度日数" />  
+     <result property="受給者台帳_短期入所支給限度日数" column="受給者台帳_短期入所支給限度日数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />  
      <result property="受給者台帳_短期入所支給限度開始年月日" column="受給者台帳_短期入所支給限度開始年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />  
      <result property="受給者台帳_短期入所支給限度終了年月日" column="受給者台帳_短期入所支給限度終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" /> 
      <result property="受給者台帳_旧措置者フラグ" column="受給者台帳_旧措置者フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" /> 
@@ -261,91 +261,91 @@
      <result property="受給者台帳_受給資格証明書発行年月日２" column="受給者台帳_受給資格証明書発行年月日２" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />  
      <result property="受給者台帳_届出者申請者関係コード" column="受給者台帳_届出者申請者関係コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />  
      <result property="受給者台帳_届出者本人との関係" column="受給者台帳_届出者本人との関係" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />  
-     <result property="T4101_厚労省IF識別コード" column="T4101_厚労省IF識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />  
-     <result property="T4101_延期通知発行年月日" column="T4101_延期通知発行年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />  
-     <result property="T4101_延期通知発行回数" column="T4101_延期通知発行回数" />  
-     <result property="T4101_指定医フラグ" column="T4101_指定医フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" />  
-     <result property="T4101_認定申請区分_申請時_コード" column="T4101_認定申請区分_申請時_コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />  
-     <result property="T4101_認定申請区分_法令_コード" column="T4101_認定申請区分_法令_コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />  
-     <result property="T4101_訪問調査先郵便番号" column="T4101_訪問調査先郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />  
-     <result property="T4101_訪問調査先住所" column="T4101_訪問調査先住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />  
-     <result property="T4101_訪問調査先名称" column="T4101_訪問調査先名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />  
-     <result property="T4101_訪問調査先電話番号" column="T4101_訪問調査先電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />  
-     <result property="T4123_認定調査予定年月日" column="T4123_認定調査予定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />  
-     <result property="T4123_主治医意見書作成登録予定日" column="T4123_主治医意見書作成登録予定日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />  
-     <result property="T4003_認定申請日" column="T4003_認定申請日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />  
-     <result property="T4003_調査委託年月日" column="T4003_調査委託年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />  
-     <result property="T4003_調査終了年月日" column="T4003_調査終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />  
-     <result property="T4003_意見書依頼年月日" column="T4003_意見書依頼年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />  
-     <result property="T4003_意見書取寄せ年月日" column="T4003_意見書取寄せ年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />  
-     <result property="T4003_審査会資料作成年月日" column="T4003_審査会資料作成年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />  
-     <result property="T4003_審査会予定年月日" column="T4003_審査会予定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />  
-     <result property="T4003_二次判定日" column="T4003_二次判定日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />  
-     <result property="T4003_一次判定結果" column="T4003_一次判定結果" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />  
-     <result property="T4003_一次判定日" column="T4003_一次判定日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />  
-     <result property="T4003_一次判定結果重み" column="T4003_一次判定結果重み" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" /> 
-     <result property="T4003_特定疾病コード" column="T4003_特定疾病コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="T4003_調査委託先コード" column="T4003_調査委託先コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="T4003_調査員コード" column="T4003_調査員コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="T4003_医療機関コード" column="T4003_医療機関コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="T4003_主治医コード" column="T4003_主治医コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="T4003_審査会意見" column="T4003_審査会意見" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="T4101_認定申請年月日" column="T4101_認定申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-     <result property="X4102_認定調査依頼年月日" column="X4102_認定調査依頼年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-     <result property="X4102_認定調査実施年月日" column="X4102_認定調査実施年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-     <result property="X4102_主治医意見書作成依頼年月日" column="X4102_主治医意見書作成依頼年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-     <result property="X4102_主治医意見書受領年月日" column="X4102_主治医意見書受領年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-     <result property="X4102_介護認定審査会資料作成年月日" column="X4102_介護認定審査会資料作成年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-     <result property="T4123_認定審査会予定年月日" column="T4123_認定審査会予定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-     <result property="X4102_二次判定年月日" column="X4102_二次判定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-     <result property="X4102_要介護認定一次判定結果コード" column="X4102_要介護認定一次判定結果コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="X4102_要介護認定一次判定年月日" column="X4102_要介護認定一次判定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-     <result property="X4102_要介護認定一次判定結果コード認知症加算" column="X4102_要介護認定一次判定結果コード認知症加算" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="T4101_２号特定疾病コード" column="T4101_２号特定疾病コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="T4101_認定調査委託先コード" column="T4101_認定調査委託先コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="T4101_認定調査員コード" column="T4101_認定調査員コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="T4101_主治医医療機関コード" column="T4101_主治医医療機関コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="T4101_主治医コード" column="T4101_主治医コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="X4102_介護認定審査会意見" column="X4102_介護認定審査会意見" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="T4910_事業者名称" column="T4910_事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="T4913_調査員氏名" column="T4913_調査員氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="T4911_医療機関名称" column="T4911_医療機関名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="T4912_主治医氏名" column="T4912_主治医氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="X4120_申請届出代行区分コード" column="X4120_申請届出代行区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="X4120_申請届出者氏名" column="X4120_申請届出者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="X4120_事業者名称" column="X4120_事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="X4001_データ区分の1桁目" column="X4001_データ区分の1桁目" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="PSM_名称" column="PSM_名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="PSM_カナ名称" column="PSM_カナ名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="PSM_全国住所コード" column="PSM_全国住所コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="PSM_住所" column="PSM_住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="PSM_性別コード" column="PSM_性別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="PSM_生年月日" column="PSM_生年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
-     <result property="PSM_世帯コード" column="PSM_世帯コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="PSM_識別コード" column="PSM_識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
-     <result property="PSM_行政区コード" column="PSM_行政区コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="PSM_行政区名称" column="PSM_行政区名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="PSM_連絡先1" column="PSM_連絡先1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="PSM_連絡先2" column="PSM_連絡先2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="PSM_地区コード1" column="PSM_地区コード1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="PSM_地区名1" column="PSM_地区名1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="PSM_地区コード2" column="PSM_地区コード2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="PSM_地区名2" column="PSM_地区名2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="PSM_地区コード3" column="PSM_地区コード3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="PSM_地区名3" column="PSM_地区名3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="T7005_老人保健市町村コード" column="T7005_老人保健市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="T7005_老人保健受給者番号" column="T7005_老人保健受給者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="T7051_市町村名称" column="T7051_市町村名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="X1008_医療保険種別コード" column="X1008_医療保険種別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="X1008_医療保険者番号" column="X1008_医療保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="X1008_医療保険者名称" column="X1008_医療保険者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="X1008_医療保険記号番号" column="X1008_医療保険記号番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="X3015_サービス提供年月" column="X3015_サービス提供年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler" />
-     <result property="X3017_サービス提供年月" column="X3017_サービス提供年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler" />
-     <result property="X3056_サービス提供年月" column="X3056_サービス提供年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler" />
-     <result property="X3034_サービス提供年月" column="X3034_サービス提供年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler" />
-     <result property="X2002_調定年度" column="X2002_調定年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-     <result property="X2002_保険料段階" column="X2002_保険料段階" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="t4101_厚労省IF識別コード" column="t4101_厚労省IF識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />  
+     <result property="t4101_延期通知発行年月日" column="t4101_延期通知発行年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />  
+     <result property="t4101_延期通知発行回数" column="t4101_延期通知発行回数" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />  
+     <result property="t4101_指定医フラグ" column="t4101_指定医フラグ" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" />  
+     <result property="t4101_認定申請区分_申請時_コード" column="t4101_認定申請区分_申請時_コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />  
+     <result property="t4101_認定申請区分_法令_コード" column="t4101_認定申請区分_法令_コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />  
+     <result property="t4101_訪問調査先郵便番号" column="t4101_訪問調査先郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />  
+     <result property="t4101_訪問調査先住所" column="t4101_訪問調査先住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />  
+     <result property="t4101_訪問調査先名称" column="t4101_訪問調査先名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />  
+     <result property="t4101_訪問調査先電話番号" column="t4101_訪問調査先電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />  
+     <result property="t4123_認定調査予定年月日" column="t4123_認定調査予定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />  
+     <result property="t4123_主治医意見書作成登録予定日" column="t4123_主治医意見書作成登録予定日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />  
+     <result property="t4003_認定申請日" column="t4003_認定申請日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />  
+     <result property="t4003_調査委託年月日" column="t4003_調査委託年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />  
+     <result property="t4003_調査終了年月日" column="t4003_調査終了年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />  
+     <result property="t4003_意見書依頼年月日" column="t4003_意見書依頼年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />  
+     <result property="t4003_意見書取寄せ年月日" column="t4003_意見書取寄せ年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />  
+     <result property="t4003_審査会資料作成年月日" column="t4003_審査会資料作成年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />  
+     <result property="t4003_審査会予定年月日" column="t4003_審査会予定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />  
+     <result property="t4003_二次判定日" column="t4003_二次判定日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />  
+     <result property="t4003_一次判定結果" column="t4003_一次判定結果" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />  
+     <result property="t4003_一次判定日" column="t4003_一次判定日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />  
+     <result property="t4003_一次判定結果重み" column="t4003_一次判定結果重み" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" /> 
+     <result property="t4003_特定疾病コード" column="t4003_特定疾病コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="t4003_調査委託先コード" column="t4003_調査委託先コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="t4003_調査員コード" column="t4003_調査員コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="t4003_医療機関コード" column="t4003_医療機関コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="t4003_主治医コード" column="t4003_主治医コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="t4003_審査会意見" column="t4003_審査会意見" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="t4101_認定申請年月日" column="t4101_認定申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+     <result property="x4102_認定調査依頼年月日" column="x4102_認定調査依頼年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+     <result property="x4102_認定調査実施年月日" column="x4102_認定調査実施年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+     <result property="x4102_主治医意見書作成依頼年月日" column="x4102_主治医意見書作成依頼年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+     <result property="x4102_主治医意見書受領年月日" column="x4102_主治医意見書受領年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+     <result property="x4102_介護認定審査会資料作成年月日" column="x4102_介護認定審査会資料作成年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+     <result property="t4123_認定審査会予定年月日" column="t4123_認定審査会予定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+     <result property="x4102_二次判定年月日" column="x4102_二次判定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+     <result property="x4102_要介護認定一次判定結果コード" column="x4102_要介護認定一次判定結果コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="x4102_要介護認定一次判定年月日" column="x4102_要介護認定一次判定年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+     <result property="x4102_要介護認定一次判定結果コード認知症加算" column="x4102_要介護認定一次判定結果コード認知症加算" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="t4101_２号特定疾病コード" column="t4101_２号特定疾病コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="t4101_認定調査委託先コード" column="t4101_認定調査委託先コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="t4101_認定調査員コード" column="t4101_認定調査員コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="t4101_主治医医療機関コード" column="t4101_主治医医療機関コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="t4101_主治医コード" column="t4101_主治医コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="x4102_介護認定審査会意見" column="x4102_介護認定審査会意見" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="t4910_事業者名称" column="t4910_事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="t4913_調査員氏名" column="t4913_調査員氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="t4911_医療機関名称" column="t4911_医療機関名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="t4912_主治医氏名" column="t4912_主治医氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="x4120_申請届出代行区分コード" column="x4120_申請届出代行区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="x4120_申請届出者氏名" column="x4120_申請届出者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="x4120_事業者名称" column="x4120_事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="x4001_データ区分の1桁目" column="x4001_データ区分の1桁目" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="psm_名称" column="psm_名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="psm_カナ名称" column="psm_カナ名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="psm_全国住所コード" column="psm_全国住所コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="psm_住所" column="psm_住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="psm_性別コード" column="psm_性別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="psm_生年月日" column="psm_生年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
+     <result property="psm_世帯コード" column="psm_世帯コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="psm_識別コード" column="psm_識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" />
+     <result property="psm_行政区コード" column="psm_行政区コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="psm_行政区名称" column="psm_行政区名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="psm_連絡先1" column="psm_連絡先1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="psm_連絡先2" column="psm_連絡先2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="psm_地区コード1" column="psm_地区コード1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="psm_地区名1" column="psm_地区名1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="psm_地区コード2" column="psm_地区コード2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="psm_地区名2" column="psm_地区名2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="psm_地区コード3" column="psm_地区コード3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="psm_地区名3" column="psm_地区名3" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="t7005_老人保健市町村コード" column="t7005_老人保健市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="t7005_老人保健受給者番号" column="t7005_老人保健受給者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="t7051_市町村名称" column="t7051_市町村名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="x1008_医療保険種別コード" column="x1008_医療保険種別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="x1008_医療保険者番号" column="x1008_医療保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="x1008_医療保険者名称" column="x1008_医療保険者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="x1008_医療保険記号番号" column="x1008_医療保険記号番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="x3015_サービス提供年月" column="x3015_サービス提供年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler" />
+     <result property="x3017_サービス提供年月" column="x3017_サービス提供年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler" />
+     <result property="x3056_サービス提供年月" column="x3056_サービス提供年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler" />
+     <result property="x3034_サービス提供年月" column="x3034_サービス提供年月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler" />
+     <result property="x2002_調定年度" column="x2002_調定年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+     <result property="x2002_保険料段階" column="x2002_保険料段階" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
      <result property="rank_number" column="rank_number" />
     </resultMap>
       <select id="get個人情報と要介護認定情報" 
@@ -377,95 +377,95 @@
           T4001."jukyuShikakuShomeishoHakkoYMD2" AS 受給者台帳_受給資格証明書発行年月日２,
           T4001."shinseishaKankeiCode" AS 受給者台帳_届出者申請者関係コード,
           T4001."homninKankei" AS 受給者台帳_届出者本人との関係,
-          T4101."koroshoIfShikibetsuCode" AS T4101_厚労省IF識別コード,
-          T4101."enkiTsuchiHakkoYMD" AS T4101_延期通知発行年月日,
-          T4101."enkiTsuchiHakkoKaisu" AS T4101_延期通知発行回数,
-          T4101."shiteiiFlag" AS T4101_指定医フラグ,
-          T4101."ninteiShinseiShinseijiKubunCode" AS T4101_認定申請区分_申請時_コード,
-          T4101."ninteiShinseiHoreiKubunCode" AS T4101_認定申請区分_法令_コード,
-          T4101."homonChosasakiYubinNo" AS T4101_訪問調査先郵便番号,
-          T4101."homonChosasakiJusho" AS T4101_訪問調査先住所,
-          T4101."homonChosasakiName" AS T4101_訪問調査先名称,
-          T4101."homonChosasakiTelNo" AS T4101_訪問調査先電話番号,
-          T4123."ninteichosaYoteiYMD" AS T4123_認定調査予定年月日,
-          T4123."ikenshoTorokuYoteiYMD" AS T4123_主治医意見書作成登録予定日,
+          T4101."koroshoIfShikibetsuCode" AS t4101_厚労省IF識別コード,
+          T4101."enkiTsuchiHakkoYMD" AS t4101_延期通知発行年月日,
+          T4101."enkiTsuchiHakkoKaisu" AS t4101_延期通知発行回数,
+          T4101."shiteiiFlag" AS t4101_指定医フラグ,
+          T4101."ninteiShinseiShinseijiKubunCode" AS t4101_認定申請区分_申請時_コード,
+          T4101."ninteiShinseiHoreiKubunCode" AS t4101_認定申請区分_法令_コード,
+          T4101."homonChosasakiYubinNo" AS t4101_訪問調査先郵便番号,
+          T4101."homonChosasakiJusho" AS t4101_訪問調査先住所,
+          T4101."homonChosasakiName" AS t4101_訪問調査先名称,
+          T4101."homonChosasakiTelNo" AS t4101_訪問調査先電話番号,
+          T4123."ninteichosaYoteiYMD" AS t4123_認定調査予定年月日,
+          T4123."ikenshoTorokuYoteiYMD" AS t4123_主治医意見書作成登録予定日,
           <if test="is広域">
-            T4003."shinseiYMD" AS T4003_認定申請日,
-            T4003."chosaItakuYMD" AS T4003_調査委託年月日,
-            T4003."chosaShuryoYMD" AS T4003_調査終了年月日,
-            T4003."ikenshoIraiYMD" AS T4003_意見書依頼年月日,
-            T4003."ikenshoToriyoseYMD" AS T4003_意見書取寄せ年月日,
-            T4003."shinsakaiShiryoSakuseiYMD" AS T4003_審査会資料作成年月日,
-            T4003."shinsakaiYoteiYMD" AS T4003_審査会予定年月日,
-            T4003."nijiHanteiYMD" AS T4003_二次判定日,
-            T4003."ichijiHanteiKekkaCode" AS T4003_一次判定結果,
-            T4003."ichijiHanteiYMD" AS T4003_一次判定日,
-            T4003."ichijiHanteiKekkaKasanCode" AS T4003_一次判定結果重み,
-            T4003."tokuteiShippeiCode" AS T4003_特定疾病コード,
-            T4003."chosaItakusakiCode" AS T4003_調査委託先コード,
-            T4003."chosainCode" AS T4003_調査員コード,
-            T4003."iryoKikanCode" AS T4003_医療機関コード,
-            T4003."shujiiCode" AS T4003_主治医コード,
-            T4003."shinsakaiIken" AS T4003_審査会意見,
+            T4003."shinseiYMD" AS t4003_認定申請日,
+            T4003."chosaItakuYMD" AS t4003_調査委託年月日,
+            T4003."chosaShuryoYMD" AS t4003_調査終了年月日,
+            T4003."ikenshoIraiYMD" AS t4003_意見書依頼年月日,
+            T4003."ikenshoToriyoseYMD" AS t4003_意見書取寄せ年月日,
+            T4003."shinsakaiShiryoSakuseiYMD" AS t4003_審査会資料作成年月日,
+            T4003."shinsakaiYoteiYMD" AS t4003_審査会予定年月日,
+            T4003."nijiHanteiYMD" AS t4003_二次判定日,
+            T4003."ichijiHanteiKekkaCode" AS t4003_一次判定結果,
+            T4003."ichijiHanteiYMD" AS t4003_一次判定日,
+            T4003."ichijiHanteiKekkaKasanCode" AS t4003_一次判定結果重み,
+            T4003."tokuteiShippeiCode" AS t4003_特定疾病コード,
+            T4003."chosaItakusakiCode" AS t4003_調査委託先コード,
+            T4003."chosainCode" AS t4003_調査員コード,
+            T4003."iryoKikanCode" AS t4003_医療機関コード,
+            T4003."shujiiCode" AS t4003_主治医コード,
+            T4003."shinsakaiIken" AS t4003_審査会意見,
           </if>
            <if test="is単一">
-             T4101."ninteiShinseiYMD" AS T4101_認定申請年月日, 
-             X4102."ninteichosaIraiYMD" AS X4102_認定調査依頼年月日,
-             X4102."ninteichosaJisshiYMD" AS X4102_認定調査実施年月日,
-             X4102."ikenshoSakuseiIraiYMD" AS X4102_主治医意見書作成依頼年月日,
-             X4102."ikenshoJuryoYMD" AS X4102_主治医意見書受領年月日,
-             X4102."shinsakaiShiryoSakuseiYMD" AS X4102_介護認定審査会資料作成年月日,
-             T4123."ninteiShinsakaiYoteiYMD" AS T4123_認定審査会予定年月日,
-             X4102."nijiHanteiYMD" AS X4102_二次判定年月日,
-             X4102."ichijiHanteiKekkaCode" AS X4102_要介護認定一次判定結果コード,
-             X4102."ichijiHanteiYMD" AS X4102_要介護認定一次判定年月日,
-             X4102."ichijiHanteiKekkaNinchishoKasanCode" AS X4102_要介護認定一次判定結果コード認知症加算,
-             T4101."nigoTokuteiShippeiCode" AS T4101_２号特定疾病コード,
-             T4101."ninteiChosaItakusakiCode" AS T4101_認定調査委託先コード,
-             T4101."ninteiChosainCode" AS T4101_認定調査員コード,
-             T4101."shujiiIryokikanCode" AS T4101_主治医医療機関コード,
-             T4101."shujiiCode" AS T4101_主治医コード,
-             X4102."shinsakaiIken" AS X4102_介護認定審査会意見,
+             T4101."ninteiShinseiYMD" AS t4101_認定申請年月日, 
+             X4102."ninteichosaIraiYMD" AS x4102_認定調査依頼年月日,
+             X4102."ninteichosaJisshiYMD" AS x4102_認定調査実施年月日,
+             X4102."ikenshoSakuseiIraiYMD" AS x4102_主治医意見書作成依頼年月日,
+             X4102."ikenshoJuryoYMD" AS x4102_主治医意見書受領年月日,
+             X4102."shinsakaiShiryoSakuseiYMD" AS x4102_介護認定審査会資料作成年月日,
+             T4123."ninteiShinsakaiYoteiYMD" AS t4123_認定審査会予定年月日,
+             X4102."nijiHanteiYMD" AS x4102_二次判定年月日,
+             X4102."ichijiHanteiKekkaCode" AS x4102_要介護認定一次判定結果コード,
+             X4102."ichijiHanteiYMD" AS x4102_要介護認定一次判定年月日,
+             X4102."ichijiHanteiKekkaNinchishoKasanCode" AS x4102_要介護認定一次判定結果コード認知症加算,
+             T4101."nigoTokuteiShippeiCode" AS t4101_２号特定疾病コード,
+             T4101."ninteiChosaItakusakiCode" AS t4101_認定調査委託先コード,
+             T4101."ninteiChosainCode" AS t4101_認定調査員コード,
+             T4101."shujiiIryokikanCode" AS t4101_主治医医療機関コード,
+             T4101."shujiiCode" AS t4101_主治医コード,
+             X4102."shinsakaiIken" AS x4102_介護認定審査会意見,
           </if>
-           T4910."jigyoshaMeisho" AS T4910_事業者名称,
-           T4913."chosainShimei" AS T4913_調査員氏名,
-           T4911."iryoKikanMeisho" AS T4911_医療機関名称,
-           T4912."shujiiName" AS T4912_主治医氏名,
-           X4120."shinseiTodokedeDaikoKubunCode" AS X4120_申請届出代行区分コード,
-           X4120."shinseiTodokedeshaShimei" AS X4120_申請届出者氏名,
-           X4120."jigyoshaName" AS X4120_事業者名称,
-           X4001."dataKubun" AS X4001_データ区分の1桁目,
-           PSM."kanjiShimei" AS PSM_名称,
-           PSM."kanaShimei" AS PSM_カナ名称,
-           PSM."honsekiZenkokuJushoCode" AS PSM_全国住所コード,
-           PSM."honsekiJusho" AS PSM_住所,
-           PSM."seibetsuCode" AS PSM_性別コード,
-           PSM."seinengappiYMD" AS PSM_生年月日,
-           PSM."setaiCode" AS PSM_世帯コード,
-           PSM."shikibetsuCode" AS PSM_識別コード,
-           PSM."gyoseikuCode" AS PSM_行政区コード,
-           PSM."gyoseikuName" AS PSM_行政区名称,
-           PSM."renrakusaki1" AS PSM_連絡先1,
-           PSM."renrakusaki2" AS PSM_連絡先2,
-           PSM."chikuCode1" AS PSM_地区コード1,
-           PSM."chikuName1" AS PSM_地区名1,
-           PSM."chikuCode2" AS PSM_地区コード2,
-           PSM."chikuName2" AS PSM_地区名2,
-           PSM."chikuCode3" AS PSM_地区コード3,
-           PSM."chikuName3" AS PSM_地区名3,
-           T7005."rojinHokenShichosonCode" AS T7005_老人保健市町村コード,
-           T7005."rojinHokenJukyushaNo" AS T7005_老人保健受給者番号,
-           T7051."shichosonMeisho" AS T7051_市町村名称,
-           X1008."iryoHokenShubetsuCode" AS X1008_医療保険種別コード,
-           X1008."iryoHokenshaNo" AS X1008_医療保険者番号,
-           X1008."iryoHokenshaMeisho" AS X1008_医療保険者名称,
-           X1008."iryoHokenKigoNo" AS X1008_医療保険記号番号,
-           X3015."serviceTeikyoYM" AS X3015_サービス提供年月,
-           X3017."serviceTeikyoYM" AS X3017_サービス提供年月,
-           X3056."serviceTeikyoYM" AS X3056_サービス提供年月,
-           X3034."serviceTeikyoYM" AS X3034_サービス提供年月,
-           X2002."choteiNendo" AS X2002_調定年度,
-           X2002."hokenryoDankai" AS X2002_保険料段階,
+           T4910."jigyoshaMeisho" AS t4910_事業者名称,
+           T4913."chosainShimei" AS t4913_調査員氏名,
+           T4911."iryoKikanMeisho" AS t4911_医療機関名称,
+           T4912."shujiiName" AS t4912_主治医氏名,
+           X4120."shinseiTodokedeDaikoKubunCode" AS x4120_申請届出代行区分コード,
+           X4120."shinseiTodokedeshaShimei" AS x4120_申請届出者氏名,
+           X4120."jigyoshaName" AS x4120_事業者名称,
+           X4001."dataKubun" AS x4001_データ区分の1桁目,
+           PSM."kanjiShimei" AS psm_名称,
+           PSM."kanaShimei" AS psm_カナ名称,
+           PSM."honsekiZenkokuJushoCode" AS psm_全国住所コード,
+           PSM."honsekiJusho" AS psm_住所,
+           PSM."seibetsuCode" AS psm_性別コード,
+           PSM."seinengappiYMD" AS psm_生年月日,
+           PSM."setaiCode" AS psm_世帯コード,
+           PSM."shikibetsuCode" AS psm_識別コード,
+           PSM."gyoseikuCode" AS psm_行政区コード,
+           PSM."gyoseikuName" AS psm_行政区名称,
+           PSM."renrakusaki1" AS psm_連絡先1,
+           PSM."renrakusaki2" AS psm_連絡先2,
+           PSM."chikuCode1" AS psm_地区コード1,
+           PSM."chikuName1" AS psm_地区名1,
+           PSM."chikuCode2" AS psm_地区コード2,
+           PSM."chikuName2" AS psm_地区名2,
+           PSM."chikuCode3" AS psm_地区コード3,
+           PSM."chikuName3" AS psm_地区名3,
+           T7005."rojinHokenShichosonCode" AS t7005_老人保健市町村コード,
+           T7005."rojinHokenJukyushaNo" AS t7005_老人保健受給者番号,
+           T7051."shichosonMeisho" AS t7051_市町村名称,
+           X1008."iryoHokenShubetsuCode" AS x1008_医療保険種別コード,
+           X1008."iryoHokenshaNo" AS x1008_医療保険者番号,
+           X1008."iryoHokenshaMeisho" AS x1008_医療保険者名称,
+           X1008."iryoHokenKigoNo" AS x1008_医療保険記号番号,
+           X3015."serviceTeikyoYM" AS x3015_サービス提供年月,
+           X3017."serviceTeikyoYM" AS x3017_サービス提供年月,
+           X3056."serviceTeikyoYM" AS x3056_サービス提供年月,
+           X3034."serviceTeikyoYM" AS x3034_サービス提供年月,
+           X2002."choteiNendo" AS x2002_調定年度,
+           X2002."hokenryoDankai" AS x2002_保険料段階,
            row_number() over(partition by T4001."hihokenshaNo", T4001."rirekiNo" order by T4001."edaban" desc) AS rank_number,
            負担限度額."hihokenshaNo" AS 負担限度額_被保険者番号,
            負担限度額."shinseiYMD" AS 負担限度額_申請年月日,

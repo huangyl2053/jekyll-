@@ -26,7 +26,7 @@ public enum JikoFutangakuHoseiJohoDgSpec implements IPredicate<JikoFutangakuJoho
     被保険者氏名必須入力チェック {
                 @Override
                 public boolean apply(JikoFutangakuJohoHoseiJohoDgDiv div) {
-                    return !RString.isNullOrEmpty(div.getTxtHihokenshaName().getValue().trim());
+                    return !RString.isNullOrEmpty(div.getTxtHihokenshaShimei().getDomain().getColumnValue().trim());
                 }
             },
     /**
@@ -223,13 +223,13 @@ public enum JikoFutangakuHoseiJohoDgSpec implements IPredicate<JikoFutangakuJoho
         private static final RString MONTH_SEVEN = new RString("07");
 
         public static boolean is被保険者氏名全角文字チェック(JikoFutangakuJohoHoseiJohoDgDiv div) {
-            return !RString.isNullOrEmpty(div.getTxtHihokenshaName().getValue())
-                    && RStringUtil.is全角Only(div.getTxtHihokenshaName().getValue());
+            return !RString.isNullOrEmpty(div.getTxtHihokenshaShimei().getDomain().getColumnValue())
+                    && RStringUtil.is全角Only(div.getTxtHihokenshaShimei().getDomain().getColumnValue());
         }
 
         public static boolean is郵便番号チェック(JikoFutangakuJohoHoseiJohoDgDiv div) {
-            return div.getTxtAtesakiYubinNO().getValue() != null
-                    && div.getTxtAtesakiYubinNO().getValue().getColumnValue().length() == INT_7;
+            return div.getTxtAtesakiYubinNo().getValue() != null
+                    && div.getTxtAtesakiYubinNo().getValue().getColumnValue().length() == INT_7;
         }
 
         public static boolean is住所チェック(JikoFutangakuJohoHoseiJohoDgDiv div) {

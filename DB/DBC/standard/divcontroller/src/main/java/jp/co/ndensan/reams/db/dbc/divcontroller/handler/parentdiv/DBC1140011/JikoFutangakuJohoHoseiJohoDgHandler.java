@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.kogaku.KogakuGassanJikofutangaku
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Idokubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Over70_ShotokuKbn;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ShotokuKbn;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1140011.DBC1140011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1140011.JikoFutangakuHoseiDetailDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1140011.JikoFutangakuJohoHoseiJohoDgDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1140011.dgJohoIchiran_Row;
@@ -38,8 +37,6 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  * 高額合算自己負担額情報補正(単)_情報一覧のHandlerクラスです。
@@ -256,8 +253,8 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
         return result.createBuilderForEdit()
                 .set所得区分(div.getDdlShotokuKBN().getSelectedKey())
                 .set所得区分_70歳以上の者に係る(div.getDdl70SaiIjouShotokuKBN().getSelectedKey())
-                .set被保険者氏名(div.getTxtHihokenshaName().getValue() == null ? null
-                        : new AtenaMeisho(div.getTxtHihokenshaName().getValue()))
+                .set被保険者氏名(div.getTxtHihokenshaShimei() == null ? null
+                        : new AtenaMeisho(div.getTxtHihokenshaShimei().getDomain().getColumnValue()))
                 .set後期保険者番号(div.getTxtKoukiHokenjaNO().getValue())
                 .set後期被保険者番号(div.getTxtKoukiHihokenshaNO().getValue())
                 .set国保保険者番号(div.getTxtKokuhoHokenjaNO().getValue())
@@ -268,9 +265,9 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
                 .set対象計算期間終了年月日(getDate(div.getTxtTaishouKeisanKikan().getToValue()))
                 .set被保険者期間開始年月日(getDate(div.getTxtHihokenshaKikan().getFromValue()))
                 .set被保険者期間終了年月日(getDate(div.getTxtHihokenshaKikan().getToValue()))
-                .set宛先氏名(div.getTxtAtesakiShimei().getValue() == null ? null
-                        : new AtenaMeisho(div.getTxtAtesakiShimei().getValue()))
-                .set宛先郵便番号(div.getTxtAtesakiYubinNO().getValue())
+                .set宛先氏名(div.getTxtAtesakiShimei() == null ? null
+                        : new AtenaMeisho(div.getTxtAtesakiShimei().getDomain().getColumnValue()))
+                .set宛先郵便番号(div.getTxtAtesakiYubinNo().getValue())
                 .set宛先住所(div.getTxtAtesakiJusho().getValue())
                 .set支払場所(div.getTxtMadoguchiShiharaiBasho().getValue())
                 .set支払期間開始年月日(getDate(div.getTxtMadoguchiKaishiYMD().getValue()))
@@ -398,9 +395,9 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
                     result.get70歳以上の者に係る所得区分());
         }
         if (result.get被保険者氏名() == null) {
-            kanriJohoDiv1.getTxtHihokenshaName().clearValue();
+            kanriJohoDiv1.getTxtHihokenshaShimei().clearDomain();
         } else {
-            kanriJohoDiv1.getTxtHihokenshaName().setValue(result.get被保険者氏名().getColumnValue());
+            kanriJohoDiv1.getTxtHihokenshaShimei().setDomain(result.get被保険者氏名());
         }
         if (result.get後期保険者番号() == null) {
             kanriJohoDiv1.getTxtKoukiHokenjaNO().clearValue();
@@ -434,14 +431,14 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
         tplJikofutanKanriJoho2Div kanriJohoDiv2
                 = div.getJikoFutangakuHoseiDetail().getTplJikofutanKanriJoho2();
         if (result.get宛先氏名() == null) {
-            kanriJohoDiv2.getTxtAtesakiShimei().clearValue();
+            kanriJohoDiv2.getTxtAtesakiShimei().clearDomain();
         } else {
-            kanriJohoDiv2.getTxtAtesakiShimei().setValue(result.get宛先氏名().getColumnValue());
+            kanriJohoDiv2.getTxtAtesakiShimei().setDomain(result.get宛先氏名());
         }
         if (result.get宛先郵便番号() == null) {
-            kanriJohoDiv2.getTxtAtesakiYubinNO().clearValue();
+            kanriJohoDiv2.getTxtAtesakiYubinNo().clearValue();
         } else {
-            kanriJohoDiv2.getTxtAtesakiYubinNO().setValue(result.get宛先郵便番号());
+            kanriJohoDiv2.getTxtAtesakiYubinNo().setValue(result.get宛先郵便番号());
         }
         if (result.get宛先住所() == null) {
             kanriJohoDiv2.getTxtAtesakiJusho().clearValue();
@@ -723,15 +720,6 @@ public class JikoFutangakuJohoHoseiJohoDgHandler {
         } else {
             div.getJikoFutangakuHoseiDetail().getChkSoufuTaishougai().setDisabled(true);
             div.getChkSaisouKBN().setDisabled(true);
-        }
-    }
-
-    /**
-     * 保存する設定です。
-     */
-    public void set履歴Dgdの選択ボタンする() {
-        if (DBC1140011StateName.自己負担額管理情報入力.getName().equals(ResponseHolder.getState())) {
-            CommonButtonHolder.setVisibleByCommonButtonFieldName(入力前の状態に戻る, false);
         }
     }
 }

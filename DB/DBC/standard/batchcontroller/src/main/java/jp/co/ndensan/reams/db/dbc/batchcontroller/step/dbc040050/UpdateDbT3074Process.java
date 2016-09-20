@@ -13,18 +13,12 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 
 /**
  * 高額合算支給不支給決定の決定通知書作成年月日を更新processクラスです。
  *
- * @reamsid_L DBB-0700-010 xuhao
+ * @reamsid_L DBC-2300-030 xuhao
  */
 public class UpdateDbT3074Process extends BatchProcessBase<DbT3074KogakuGassanShikyuFushikyuKetteiEntity> {
 
@@ -51,16 +45,4 @@ public class UpdateDbT3074Process extends BatchProcessBase<DbT3074KogakuGassanSh
         tempDbWriter.update(entity);
     }
 
-    @Override
-    protected void afterExecute() {
-        PersonalData personalData = toPersonalData();
-        AccessLogger.log(AccessLogType.照会, personalData);
-
-    }
-
-    private PersonalData toPersonalData() {
-        // TODO QA1509
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), new RString("0000000012"));
-        return PersonalData.of(new ShikibetsuCode("0000000011"), expandedInfo);
-    }
 }

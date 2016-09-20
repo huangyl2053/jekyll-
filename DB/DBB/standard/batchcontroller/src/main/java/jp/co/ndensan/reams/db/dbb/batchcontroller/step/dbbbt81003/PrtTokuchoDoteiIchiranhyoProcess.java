@@ -182,7 +182,7 @@ public class PrtTokuchoDoteiIchiranhyoProcess extends BatchProcessBase<Tokubetsu
                 entity.getShikibetsuCode(),
                 entity.getSetaiCode() == null ? RString.EMPTY : entity.getSetaiCode().getColumnValue(),
                 entity.getGyoseikuCode() == null ? RString.EMPTY : entity.getGyoseikuCode().getColumnValue(),
-                new RDate(entity.getBirthDay().toString()),
+                getDate(entity.getBirthDay()),
                 entity.getJuminShubetsuCode(),
                 get性別コード(entity.getSeibetsu()),
                 entity.getKanaMeisho() == null ? RString.EMPTY : entity.getKanaMeisho().getColumnValue(),
@@ -208,6 +208,13 @@ public class PrtTokuchoDoteiIchiranhyoProcess extends BatchProcessBase<Tokubetsu
             return RString.EMPTY;
         }
         return seibetsu.value().get性別名称();
+    }
+
+    private RDate getDate(RString str) {
+        if (RString.isNullOrEmpty(str)) {
+            return null;
+        }
+        return new RDate(str.toString());
     }
 
     private void outputCsv(TokubetsuChoshuDoteiIchiranEntity entity) {

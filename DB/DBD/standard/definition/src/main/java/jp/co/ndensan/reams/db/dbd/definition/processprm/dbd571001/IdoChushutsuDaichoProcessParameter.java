@@ -79,6 +79,12 @@ public class IdoChushutsuDaichoProcessParameter implements IBatchProcessParamete
         this.市町村コード = 市町村コード;
     }
 
+    /**
+     * コンストラクタです。
+     *
+     * @return SQLのパラメータ SQLのパラメータ
+     *
+     */
     public IdoChushutsuDaichoMybatisParameter toIdoChushutsuDaichoMybatisParameter() {
         return new IdoChushutsuDaichoMybatisParameter(
                 抽出条件設定区分,
@@ -94,6 +100,15 @@ public class IdoChushutsuDaichoProcessParameter implements IBatchProcessParamete
                 市町村コード);
     }
 
+    /**
+     * コンストラクタです。
+     *
+     * @param 被保険者番号リスト 被保険者番号リスト
+     * @param 識別コードリスト 識別コードリスト
+     * @param is広域 is広域
+     * @param is単一 is単一
+     * @return JyukyushaDaichoIdoCheckListMybatisParameter
+     */
     public IdoChushutsuDaichoNewMybatisParameter toIdoChushutsuDaichoNewMybatisParameter(
             List<HihokenshaNo> 被保険者番号リスト,
             List<ShikibetsuCode> 識別コードリスト,

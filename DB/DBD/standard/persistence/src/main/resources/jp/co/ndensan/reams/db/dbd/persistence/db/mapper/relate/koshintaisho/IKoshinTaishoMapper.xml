@@ -41,7 +41,7 @@
             認定調査委託先情報."tokuteiChosainDisplayFlag" AS 委託先の特定調査員表示フラグ,
             認定調査委託先情報."waritsukeTeiin" AS 委託先の割付定員,
             認定調査委託先情報."waritsukeChiku" AS 委託先の割付地区,
-            認定調査委託先情報."autoWaritsukeFlag" AS 委託先の自動割付フラグ,
+            認定調査委託先情報."autoWaritsukeFlag" AS 委託先の自動割付,
             認定調査委託先情報."kikanKubun" 委託先の機関の区分,
             調査員情報."chosainShimei" AS 調査員氏名,
             調査員情報."chosainKanaShimei" AS 調査員の調査員氏名カナ,

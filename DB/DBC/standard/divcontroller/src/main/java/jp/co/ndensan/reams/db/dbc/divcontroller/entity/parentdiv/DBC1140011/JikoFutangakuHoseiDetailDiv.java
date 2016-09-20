@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxAtenaMeisho;
 
 /**
  * JikoFutangakuHoseiDetail のクラスファイル
@@ -31,6 +32,8 @@ public class JikoFutangakuHoseiDetailDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("lin02")
+    private HorizontalLine lin02;
     @JsonProperty("txtSanteiKBN")
     private TextBox txtSanteiKBN;
     @JsonProperty("txtTaishouNendo")
@@ -64,6 +67,24 @@ public class JikoFutangakuHoseiDetailDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getlin02
+     * @return lin02
+     */
+    @JsonProperty("lin02")
+    public HorizontalLine getLin02() {
+        return lin02;
+    }
+
+    /*
+     * setlin02
+     * @param lin02 lin02
+     */
+    @JsonProperty("lin02")
+    public void setLin02(HorizontalLine lin02) {
+        this.lin02 = lin02;
+    }
+
     /*
      * gettxtSanteiKBN
      * @return txtSanteiKBN
@@ -342,13 +363,13 @@ public class JikoFutangakuHoseiDetailDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxtHihokenshaName() {
-        return this.getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getTxtHihokenshaName();
+    public TextBoxAtenaMeisho getTxtHihokenshaShimei() {
+        return this.getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getTxtHihokenshaShimei();
     }
 
     @JsonIgnore
-    public void setTxtHihokenshaName(TextBox txtHihokenshaName) {
-        this.getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().setTxtHihokenshaName(txtHihokenshaName);
+    public void setTxtHihokenshaShimei(TextBoxAtenaMeisho txtHihokenshaShimei) {
+        this.getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().setTxtHihokenshaShimei(txtHihokenshaShimei);
     }
 
     @JsonIgnore
@@ -472,23 +493,23 @@ public class JikoFutangakuHoseiDetailDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBox getTxtAtesakiShimei() {
+    public TextBoxAtenaMeisho getTxtAtesakiShimei() {
         return this.getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiAtesaki().getTxtAtesakiShimei();
     }
 
     @JsonIgnore
-    public void setTxtAtesakiShimei(TextBox txtAtesakiShimei) {
+    public void setTxtAtesakiShimei(TextBoxAtenaMeisho txtAtesakiShimei) {
         this.getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiAtesaki().setTxtAtesakiShimei(txtAtesakiShimei);
     }
 
     @JsonIgnore
-    public TextBoxYubinNo getTxtAtesakiYubinNO() {
-        return this.getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiAtesaki().getTxtAtesakiYubinNO();
+    public TextBoxYubinNo getTxtAtesakiYubinNo() {
+        return this.getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiAtesaki().getTxtAtesakiYubinNo();
     }
 
     @JsonIgnore
-    public void setTxtAtesakiYubinNO(TextBoxYubinNo txtAtesakiYubinNO) {
-        this.getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiAtesaki().setTxtAtesakiYubinNO(txtAtesakiYubinNO);
+    public void setTxtAtesakiYubinNo(TextBoxYubinNo txtAtesakiYubinNo) {
+        this.getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiAtesaki().setTxtAtesakiYubinNo(txtAtesakiYubinNo);
     }
 
     @JsonIgnore
