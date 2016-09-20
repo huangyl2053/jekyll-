@@ -54,7 +54,11 @@ public class SogoJigyohiKagoMositateshoJohoPanel {
             SogoJigyohiKagoMositateshoJohoPanelDiv div) {
         DBC110140_SogojigyohiKagoMoshitateshoOutParameter parameter
                 = new DBC110140_SogojigyohiKagoMoshitateshoOutParameter();
-        parameter.set再処理区分(new RString(list.get(0).toString()));
+        if (list != null) {
+            parameter.set再処理区分(new RString(list.get(0).toString()));
+        } else {
+            parameter.set再処理区分(RString.EMPTY);
+        }
         parameter.set処理年月(new RYearMonth(list.get(1).toString()));
         parameter.set出力順ID(new RString(Long.toString(div.getCcdShutsuryokujun().getSelected出力順()
                 .get出力順ID())));
