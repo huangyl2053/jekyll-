@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE1920001;
 
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.renkeidatatorikomi.RenkeiDataTorikomiBatchParamter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE192001.DBE192001_NnteiShinseiInfoUploadParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001.DBE1920001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001.RenkeiDataTorikomiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE1920001.RenkeiDataTorikomiHandler;
@@ -156,7 +156,7 @@ public class RenkeiDataTorikomi {
      * @param div RenkeiDataTorikomiDiv
      * @return ResponseData<RenkeiDataTorikomiBatchParamter>
      */
-    public ResponseData<RenkeiDataTorikomiBatchParamter> onClick_JikkouBtn(RenkeiDataTorikomiDiv div) {
+    public ResponseData<DBE192001_NnteiShinseiInfoUploadParameter> onClick_JikkouBtn(RenkeiDataTorikomiDiv div) {
         return ResponseData.of(getHandler(div).setBatchParameter()).respond();
     }
 
