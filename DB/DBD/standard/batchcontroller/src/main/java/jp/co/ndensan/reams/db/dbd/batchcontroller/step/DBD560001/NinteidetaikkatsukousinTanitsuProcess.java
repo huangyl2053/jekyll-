@@ -91,7 +91,8 @@ public class NinteidetaikkatsukousinTanitsuProcess extends BatchProcessBase<Nint
     }
 
     private void upDate受給者台帳Detial(NinteiKekkaJohoEntity entity, NinteiTanitsuProcessDataManager manager) {
-        dbt4001tableWriter.update(manager.set受給者台帳Detail(entity, 認定日));
+        dbt4001tableWriter.delete(entity.get受給者台帳Entity());
+        dbt4001tableWriter.insert(manager.set受給者台帳Detail(entity, 認定日));
     }
 
     private boolean get要介護認定更新比較結果(NinteiKekkaJohoEntity entity, NinteiTanitsuProcessDataManager manager) {
