@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.batchcontroller.step.keisangojoho;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB003001;
 
 import jp.co.ndensan.reams.ca.cax.business.search.CaFt702FindTotalShunyuFunction;
 import jp.co.ndensan.reams.ca.cax.business.search.TotalShunyuSearchKeyBuilder;

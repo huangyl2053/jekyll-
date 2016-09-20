@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.keisangojoho;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.keisangojoho.KeisangoJohoInsertProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.keisangojoho.KibetsuUpdateProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.keisangojoho.ShuyuJohoUpdateProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.keisangojoho.TyukanTempAfterInsertProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.keisangojoho.TyukanTempBeforeInsertProcess;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB003001.KeisangoJohoInsertProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB003001.KibetsuUpdateProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB003001.ShuyuJohoUpdateProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB003001.TyukanTempAfterInsertProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB003001.TyukanTempBeforeInsertProcess;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB003001.DBB003001_KeisangoJohoSakuseiParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBB-9060-010 duanzhanli
  */
-public class KeisangoJohoSakuseiFlow extends BatchFlowBase<KeisangoJohoSakuseiBatchParamter> {
+public class DBB003001_KeisangoJohoSakusei extends BatchFlowBase<DBB003001_KeisangoJohoSakuseiParameter> {
 
     private static final String TYUKANTEMPINSERTPROCESS = "tyukanTempInsertProcess";
     private static final String TYUKANTEMPBEFOREINSERTPROCESS = "tyukanTempBeforeInsertProcess";

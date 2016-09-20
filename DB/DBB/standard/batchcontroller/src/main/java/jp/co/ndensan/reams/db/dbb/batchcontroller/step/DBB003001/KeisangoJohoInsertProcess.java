@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.batchcontroller.step.keisangojoho;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB003001;
 
 import jp.co.ndensan.reams.db.dbb.business.core.keisangojoho.KeisangoJohoResult;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.keisangojoho.KeisangoJohoSakuseiProcessParamter;

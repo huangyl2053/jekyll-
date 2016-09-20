@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho;
+package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB003001;
 
 import jp.co.ndensan.reams.db.dbb.definition.processprm.keisangojoho.KeisangoJohoSakuseiProcessParamter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -21,7 +21,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class KeisangoJohoSakuseiBatchParamter extends BatchParameterBase {
+public class DBB003001_KeisangoJohoSakuseiParameter extends BatchParameterBase {
 
     private static final String CHOTEINENDO = "choteiNendo";
     private static final String FUKANENDO = "fukaNendo";
@@ -51,7 +51,7 @@ public class KeisangoJohoSakuseiBatchParamter extends BatchParameterBase {
      * @param chohyoBunruiID 帳票分類ID
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
-    public KeisangoJohoSakuseiBatchParamter(
+    public DBB003001_KeisangoJohoSakuseiParameter(
             RString choteiNendo,
             RString fukaNendo,
             RString choteiNichiji,
