@@ -193,7 +193,7 @@
             "KogakuGassanTemp"."jikoFutanGaku_RirekiNo" as "rirekiNo",
             "KogakuGassanTemp"."jikoFutanGaku_HokenSeidoCode" as "hokenSeidoCode",
             "KogakuGassanTemp"."jikoFutanGaku_HokenshaMei" as "hokenshaMei",
-            "KogakuGassanTemp"."jikoFutanGaku_Kokuho_HihokenshaShoKigo" as "hihokenshaShoKigo",
+            "KogakuGassanTemp"."jikoFutanGaku_Kokuho_HihokenshaShoKigo" as "kokuho_HihokenshaShoKigo",
             "KogakuGassanTemp"."jikoFutanGaku_HihokenshaShimeiKana" as "hihokenshaShimeiKana",
             "KogakuGassanTemp"."jikoFutanGaku_HihokenshaShimei" as "hihokenshaShimei",
             "KogakuGassanTemp"."jikoFutanGaku_UmareYMD" as "umareYMD",

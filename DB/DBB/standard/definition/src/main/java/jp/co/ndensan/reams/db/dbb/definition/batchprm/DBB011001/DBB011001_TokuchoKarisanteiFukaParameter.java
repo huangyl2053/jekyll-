@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB011001;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB004001.DBB004001_FukaJohoTorokuParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchokarisanteitsuchishohakko.TokuchoKaishiTsuchishoBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB011003.DBB011003_TokuchoKarisanteiTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchokarisanteifuka.CreateFukaJohoJuneProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchokarisanteifuka.CreateFukaJohoKeizokuProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchokarisanteifuka.ReflectShikakuToSaishinAprilProcessParameter;
@@ -48,7 +48,7 @@ public class DBB011001_TokuchoKarisanteiFukaParameter extends BatchParameterBase
     @BatchParameter(key = KEY_FLAG, name = "flag")
     private boolean flag;
     @BatchParameter(key = KEY_PARAMETER, name = "parameter")
-    private TokuchoKaishiTsuchishoBatchParameter parameter;
+    private DBB011003_TokuchoKarisanteiTsuchishoHakkoParameter parameter;
 
     /**
      * processのパラメータを生成します。

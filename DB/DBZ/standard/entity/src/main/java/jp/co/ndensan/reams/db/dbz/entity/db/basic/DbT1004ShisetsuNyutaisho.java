@@ -7,6 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  */
 public enum DbT1004ShisetsuNyutaisho implements IColumnDefinition {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+
     /**
      * insertDantaiCd
      */
@@ -85,7 +86,11 @@ public enum DbT1004ShisetsuNyutaisho implements IColumnDefinition {
      * 部屋記号番号
      * <br/>部屋の記号番号
      */
-    roomKigoNo(20, 0);
+    roomKigoNo(20, 0),
+    /**
+     * 保険者番号
+     */
+    hokenshaNo(2147483647, 0);
 
     private final int maxLength;
     private final int scale;
@@ -97,7 +102,7 @@ public enum DbT1004ShisetsuNyutaisho implements IColumnDefinition {
 
     /**
      * 項目の最大長のgetメソッドです。
-     * 
+     *
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -106,7 +111,7 @@ public enum DbT1004ShisetsuNyutaisho implements IColumnDefinition {
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     * 
+     *
      * @return 小数点以下の桁数
      */
     public int getScale() {

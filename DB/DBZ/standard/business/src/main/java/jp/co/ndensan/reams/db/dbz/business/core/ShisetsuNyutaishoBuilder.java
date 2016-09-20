@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.business.core;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1004ShisetsuNyutaishoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -169,6 +170,18 @@ public class ShisetsuNyutaishoBuilder {
     public ShisetsuNyutaishoBuilder set部屋記号番号(RString 部屋記号番号) {
         requireNonNull(部屋記号番号, UrSystemErrorMessages.値がnull.getReplacedMessage("部屋記号番号"));
         entity.setRoomKigoNo(部屋記号番号);
+        return this;
+    }
+
+    /**
+     * 保険者番号を設定します。
+     *
+     * @param 保険者番号 保険者番号
+     * @return {@link ShisetsuNyutaishoBuilder}
+     */
+    public ShisetsuNyutaishoBuilder set保険者番号(HokenshaNo 保険者番号) {
+        requireNonNull(保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("保険者番号"));
+        entity.setHokenshaNo(保険者番号);
         return this;
     }
 
