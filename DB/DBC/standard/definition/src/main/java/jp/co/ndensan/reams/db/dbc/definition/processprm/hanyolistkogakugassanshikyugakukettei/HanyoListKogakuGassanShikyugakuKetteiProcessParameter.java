@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -45,6 +46,8 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcessParameter implements IB
     private IKozaSearchKey searchkey;
     private List<KamokuCode> list;
     private ReportId 帳票ID;
+    private SubGyomuCode サブ業務コード;
+    private Long 出力順ID;
 
     /**
      * コンストラクタです
