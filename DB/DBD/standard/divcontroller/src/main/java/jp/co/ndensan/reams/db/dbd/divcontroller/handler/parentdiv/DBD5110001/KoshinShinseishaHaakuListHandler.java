@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5110001;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd5110001.KoshinShinseishaHaakuListParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD511003.DBD511003_KoshinMiShinseishaHaakuParameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5110001.KoshinShinseishaHaakuListDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -77,8 +77,8 @@ public class KoshinShinseishaHaakuListHandler {
      *
      * @return バッチパラメータ
      */
-    public KoshinShinseishaHaakuListParameter getParameter() {
-        KoshinShinseishaHaakuListParameter parameter = new KoshinShinseishaHaakuListParameter();
+    public DBD511003_KoshinMiShinseishaHaakuParameter getParameter() {
+        DBD511003_KoshinMiShinseishaHaakuParameter parameter = new DBD511003_KoshinMiShinseishaHaakuParameter();
         parameter.set印刷範囲指定(div.getRadPrintSelect().getSelectedValue());
         parameter.set認定有効期間_終了月(div.getTxtInsatsuDate().getDomain());
         parameter.set認定有効期間_終了月_To(div.getTxtInsatsuDateTo().getDomain());

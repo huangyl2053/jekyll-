@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd5110001;
+package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD511003;
 
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -19,7 +19,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KoshinShinseishaHaakuListParameter extends BatchParameterBase {
+public class DBD511003_KoshinMiShinseishaHaakuParameter extends BatchParameterBase {
 
     private RString 印刷範囲指定;
     private RYearMonth 認定有効期間_終了月;
