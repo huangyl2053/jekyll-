@@ -10,7 +10,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.KeisangoJoho;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.ShikakuKikan;
 import jp.co.ndensan.reams.db.dbb.business.core.fuka.ShikakuKikanJoho;
-import jp.co.ndensan.reams.db.dbb.business.report.honsanteikekkaicihiran.HonsanteiKekkaIcihiranProperty;
+import jp.co.ndensan.reams.db.dbb.business.report.honsanteikekkaici.HonsanteiKekkaIcihiranOutPutOrder;
+import jp.co.ndensan.reams.db.dbb.business.report.honsanteikekkaici.HonsanteiKekkaIcihiranPageBreak;
 import jp.co.ndensan.reams.db.dbb.business.report.honsanteikekkaicihiran.HonsanteiKekkaIcihiranReport;
 import jp.co.ndensan.reams.db.dbb.definition.core.honnsanteifuka.HonsenteiKeisangojohoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt4300.HonsanteiFukaProcessParameter;
@@ -43,12 +44,13 @@ import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJok
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
@@ -76,6 +78,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
@@ -87,7 +90,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  *
  * @reamsid_L DBB-0730-010 lijunjun
  */
-public class HonsanteiKekkaIchiranProcess extends BatchProcessBase<HonsenteiKeisangojohoEntity> {
+public class HonsanteiKekkaIchiranProcess extends BatchKeyBreakBase<HonsenteiKeisangojohoEntity> {
 
     private static final RString SELECTPATH = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate"
             + ".honnsanteifuka.IHonnSanteiFukaMapper.select本算定計算後賦課情報");
@@ -134,7 +137,9 @@ public class HonsanteiKekkaIchiranProcess extends BatchProcessBase<HonsenteiKeis
     private CsvWriter<HonnSanteiFukaCSVEntity> eucCsvWriter;
     private HonsanteiFukaProcessParameter processParameter;
     private HonsenteiKeisangojohoParameter myBatisParameter;
-    private IOutputOrder outputOrder;
+    private ChohyoSeigyoKyotsu 帳票制御共通;
+    private IOutputOrder 出力順情報;
+    private List<RString> pageBreakKeys;
     private Association association;
     private List<RString> 出力順項目リスト;
     private List<RString> 改頁項目リスト;
@@ -144,9 +149,8 @@ public class HonsanteiKekkaIchiranProcess extends BatchProcessBase<HonsenteiKeis
 
     @Override
     public void initialize() {
-        outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(
-                SubGyomuCode.DBB介護賦課, 帳票ID, Long.parseLong(processParameter.get出力帳票().get出力順ID().toString()));
-        出力順 = MyBatisOrderByClauseCreator.create(HonsanteiKekkaIcihiranProperty.DBB200009ShutsuryokujunEnum.class, outputOrder);
+        get出力順();
+        出力順 = MyBatisOrderByClauseCreator.create(HonsanteiKekkaIcihiranOutPutOrder.class, 出力順情報);
         KozaSearchKeyBuilder kozabuilder = new KozaSearchKeyBuilder();
         kozabuilder.set業務コード(GyomuCode.DB介護保険);
         kozabuilder.set用途区分(new KozaYotoKubunCodeValue(KozaYotoKubunType.振替口座.getCode()));
@@ -158,16 +162,35 @@ public class HonsanteiKekkaIchiranProcess extends BatchProcessBase<HonsenteiKeis
                 .createSelectByKeyParam(processParameter.get調定年度(), processParameter.get賦課年度(),
                         processParameter.getバッチ起動時処理日時(), 出力順, kozaSearchKey, list);
 
+        帳票制御共通 = HonnSanteiFukaFath.createInstance().load帳票制御共通(ReportIdDBB.DBB200009.getReportId());
         IAssociationFinder finder = AssociationFinderFactory.createInstance();
         association = finder.getAssociation();
         市町村コード = association.get地方公共団体コード().value();
         市町村名 = association.get市町村名();
-        出力順項目リスト = get出力順(Long.parseLong(processParameter.get出力帳票().get出力順ID().toString()));
-        改頁項目リスト = get改頁項目(Long.parseLong(processParameter.get出力帳票().get出力順ID().toString()));
 
-        reportWriter = BatchReportFactory.createBatchReportWriter(
-                ReportIdDBB.DBB200009.getReportId().value(), SubGyomuCode.DBB介護賦課).create();
-        sourceWriter = new ReportSourceWriter<>(reportWriter);
+    }
+
+    private void get出力順() {
+        IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
+        if (RString.isNullOrEmpty(processParameter.get出力帳票().get出力順ID())) {
+            出力順情報 = null;
+        } else {
+            出力順情報 = finder.get出力順(SubGyomuCode.DBB介護賦課, 帳票ID,
+                    Long.parseLong(processParameter.get出力帳票().get出力順ID().toString()));
+        }
+        if (出力順情報 == null) {
+            return;
+        }
+        出力順項目リスト = new ArrayList<>();
+        改頁項目リスト = new ArrayList();
+        pageBreakKeys = new ArrayList<>();
+        for (ISetSortItem item : 出力順情報.get設定項目リスト()) {
+            出力順項目リスト.add(item.get項目名());
+            if (item.is改頁項目()) {
+                改頁項目リスト.add(item.get項目名());
+                pageBreakKeys.add(item.get項目ID());
+            }
+        }
     }
 
     @Override
@@ -176,7 +199,17 @@ public class HonsanteiKekkaIchiranProcess extends BatchProcessBase<HonsenteiKeis
     }
 
     @Override
+    protected void keyBreakProcess(HonsenteiKeisangojohoEntity t) {
+    }
+
+    @Override
     protected void createWriter() {
+        PageBreaker<HonsanteiKekkaIcihiranReportSource> breakPage
+                = new HonsanteiKekkaIcihiranPageBreak(pageBreakKeys);
+        reportWriter = BatchReportFactory.createBatchReportWriter(
+                ReportIdDBB.DBB200009.getReportId().value(), SubGyomuCode.DBB介護賦課).addBreak(breakPage).create();
+        sourceWriter = new ReportSourceWriter<>(reportWriter);
+
         FileSpoolManager manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
                 EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
@@ -191,11 +224,10 @@ public class HonsanteiKekkaIchiranProcess extends BatchProcessBase<HonsenteiKeis
     }
 
     @Override
-    protected void process(HonsenteiKeisangojohoEntity entity) {
+    protected void usualProcess(HonsenteiKeisangojohoEntity entity) {
         KeisangoJoho keisangoJoho = new KeisangoJoho(entity.get計算後情報());
         KeisangojohoAtenaKozaEntity 本算定結果一覧表Entity = setKeisangojohoAtenaKozaEntity(keisangoJoho, entity);
         IKojin 宛名情報 = ShikibetsuTaishoFactory.createKojin(本算定結果一覧表Entity.get宛名Entity());
-        ChohyoSeigyoKyotsu 帳票制御共通 = HonnSanteiFukaFath.createInstance().load帳票制御共通(帳票ID);
         RString 住所編集 = JushoHenshu.editJusho(帳票制御共通, 宛名情報, association);
         new HonsanteiKekkaIcihiranReport(
                 本算定結果一覧表Entity, processParameter.get賦課年度(), processParameter.getバッチ起動時処理日時(),
@@ -217,8 +249,8 @@ public class HonsanteiKekkaIchiranProcess extends BatchProcessBase<HonsenteiKeis
         出力条件リスト.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append((FORMAT_LEFT).concat(定数_出力順).concat(FORMAT_RIGHT).concat(RString.FULL_SPACE));
-        if (outputOrder != null) {
-            List<ISetSortItem> iSetSortItemList = outputOrder.get設定項目リスト();
+        if (出力順情報 != null) {
+            List<ISetSortItem> iSetSortItemList = 出力順情報.get設定項目リスト();
             for (ISetSortItem iSetSortItem : iSetSortItemList) {
                 if (iSetSortItem == iSetSortItemList.get(iSetSortItemList.size() - 1)) {
                     builder.append(iSetSortItem.get項目名());
@@ -235,10 +267,9 @@ public class HonsanteiKekkaIchiranProcess extends BatchProcessBase<HonsenteiKeis
     private void loadバッチ出力条件リスト(List<RString> 出力条件リスト, int 出力ページ数,
             RString csv出力有無, RString 帳票名) {
 
-        RString 導入団体コード = association.getLasdecCode_().value();
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
-                帳票ID.getColumnValue(),
-                導入団体コード,
+                ReportIdDBB.DBB200009.getReportId().getColumnValue(),
+                association.getLasdecCode_().value(),
                 市町村名,
                 RString.FULL_SPACE.concat(String.valueOf(JobContextHolder.getJobId())),
                 帳票名,
@@ -382,7 +413,7 @@ public class HonsanteiKekkaIchiranProcess extends BatchProcessBase<HonsenteiKeis
 
     private void publish所得情報一覧表(KeisangojohoAtenaKozaEntity 計算後情報_宛名_口座Entity) {
         IKojin 宛名情報 = ShikibetsuTaishoFactory.createKojin(計算後情報_宛名_口座Entity.get宛名Entity());
-        ChohyoSeigyoKyotsu 帳票制御共通 = HonnSanteiFukaFath.createInstance().load帳票制御共通(帳票ID);
+//        ChohyoSeigyoKyotsu 帳票制御共通 = HonnSanteiFukaFath.createInstance().load帳票制御共通(帳票ID);
         RString 住所編集 = JushoHenshu.editJusho(帳票制御共通, 宛名情報,
                 AssociationFinderFactory.createInstance().getAssociation());
         RString 口座情報 = kozaJoho(計算後情報_宛名_口座Entity);
@@ -767,32 +798,31 @@ public class HonsanteiKekkaIchiranProcess extends BatchProcessBase<HonsenteiKeis
         }
     }
 
-    private List<RString> get出力順(Long 出力順ID) {
-        IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
-                .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200009.getReportId(), 出力順ID);
-        List<RString> 並び順List = new ArrayList<>();
-        if (並び順 != null) {
-            for (ISetSortItem item : 並び順.get設定項目リスト()) {
-                並び順List.add(item.get項目名());
-            }
-        }
-        return 並び順List;
-    }
-
-    private List<RString> get改頁項目(Long 出力順ID) {
-        IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
-                .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200009.getReportId(), 出力順ID);
-        List<RString> 改頁項目List = new ArrayList<>();
-        if (並び順 != null) {
-            for (ISetSortItem item : 並び順.get設定項目リスト()) {
-                if (item.is改頁項目()) {
-                    改頁項目List.add(item.get項目名());
-                }
-            }
-        }
-        return 改頁項目List;
-    }
-
+//    private List<RString> get出力順(Long 出力順ID) {
+//        IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
+//                .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200009.getReportId(), 出力順ID);
+//        List<RString> 並び順List = new ArrayList<>();
+//        if (並び順 != null) {
+//            for (ISetSortItem item : 並び順.get設定項目リスト()) {
+//                並び順List.add(item.get項目名());
+//            }
+//        }
+//        return 並び順List;
+//    }
+//
+//    private List<RString> get改頁項目(Long 出力順ID) {
+//        IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
+//                .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200009.getReportId(), 出力順ID);
+//        List<RString> 改頁項目List = new ArrayList<>();
+//        if (並び順 != null) {
+//            for (ISetSortItem item : 並び順.get設定項目リスト()) {
+//                if (item.is改頁項目()) {
+//                    改頁項目List.add(item.get項目名());
+//                }
+//            }
+//        }
+//        return 改頁項目List;
+//    }
     private Decimal nullTOZero(Decimal 期別金額) {
         if (期別金額 == null) {
             return Decimal.ZERO;
