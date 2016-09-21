@@ -108,8 +108,7 @@ public class KoshinTaishoFinder {
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(true).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
             if (調査データ情報List == null || 調査データ情報List.size() <= 0) {
-                SelectSyuuShadeTaCsvEntity selectnullEntity = new SelectSyuuShadeTaCsvEntity();
-                csvdeTeWriter.writeLine(selectnullEntity);
+                //                
             } else {
                 for (SelectSyuuShadeTaEntity entity : 調査データ情報List) {
                     csvdeTeWriter.writeLine(setdetaEntity(entity));
