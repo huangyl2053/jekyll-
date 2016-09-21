@@ -87,7 +87,6 @@ public class SaishinsaMoshitateDoSofuFileSakuseiProcess extends BatchProcessBase
     private List<SharedFileDescriptor> entryList;
     private int 総出力件数;
     private int レコード番号;
-    private BatchDbReader reader;
     private Encode 文字コード;
     private RString eucFilePath;
     private RString 出力ファイル名;
@@ -114,8 +113,7 @@ public class SaishinsaMoshitateDoSofuFileSakuseiProcess extends BatchProcessBase
 
     @Override
     protected IBatchReader createReader() {
-        reader = new BatchDbReader(READ_DATA_ID, mybatisParameter);
-        return reader;
+        return new BatchDbReader(READ_DATA_ID, mybatisParameter);
     }
 
     @Override
@@ -166,7 +164,7 @@ public class SaishinsaMoshitateDoSofuFileSakuseiProcess extends BatchProcessBase
         controlEntity.setレコード種別(RecordShubetsu.コントロールレコード.getコード());
         controlEntity.setレコード番号_連番(new RString(レコード番号));
         controlEntity.setボリュ_ム通番(RSTRING_000);
-        controlEntity.setレコード件数(new RString(reader.getCount()));
+        controlEntity.setレコード件数(new RString(parameter.getレコード件数()));
         controlEntity.setデータ種別(ConfigKeysKokuhorenSofu.再審査申立書情報.getコード());
         controlEntity.set福祉事務所特定番号(RSTRING_00);
         controlEntity.set保険者番号(trimRString(parameter.get保険者番号()));
