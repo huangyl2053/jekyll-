@@ -45,7 +45,7 @@ public class DBDZ00001_GemmenGengakuTaishoshaHanteiYoKonkyoSakusei
     @Step(世帯員把握入力)
     protected IBatchFlowCommand setaiinHaakuInputSakusei() {
         if (getParameter().get所得年度() == null || getParameter().get所得年度().isEmpty()) {
-            return loopBatch(GemmmenGengakuTaishoshaHanteiYoKonkyoSakusei.class)
+            return loopBatch(SetaiinHaakuInputSakusei.class)
                     .arguments(getParameter().toGemmenGengakuTaishoShaHanteiYoukonSakuseiProcessParameter(new HizukeConfig().get所得年度()))
                     .define();
         } else {

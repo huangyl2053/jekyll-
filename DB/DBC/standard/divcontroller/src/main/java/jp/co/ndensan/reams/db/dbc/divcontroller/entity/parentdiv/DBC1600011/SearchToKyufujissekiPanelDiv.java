@@ -5,6 +5,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1600011;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.IShisetsuJohoCommonChildDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.ShisetsuJohoCommonChildDivDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -23,12 +25,8 @@ public class SearchToKyufujissekiPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("TextBox1")
-    private TextBoxCode TextBox1;
-    @JsonProperty("btnSearchJigyosha")
-    private ButtonDialog btnSearchJigyosha;
-    @JsonProperty("txtJigyoshaName")
-    private TextBox txtJigyoshaName;
+    @JsonProperty("ccdJigyoshaSentaku")
+    private ShisetsuJohoCommonChildDivDiv ccdJigyoshaSentaku;
     @JsonProperty("txtHihoNo")
     private TextBoxCode txtHihoNo;
     @JsonProperty("btnSearchHihokensha")
@@ -51,57 +49,12 @@ public class SearchToKyufujissekiPanelDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getTextBox1
-     * @return TextBox1
+     * getccdJigyoshaSentaku
+     * @return ccdJigyoshaSentaku
      */
-    @JsonProperty("TextBox1")
-    public TextBoxCode getTextBox1() {
-        return TextBox1;
-    }
-
-    /*
-     * setTextBox1
-     * @param TextBox1 TextBox1
-     */
-    @JsonProperty("TextBox1")
-    public void setTextBox1(TextBoxCode TextBox1) {
-        this.TextBox1 = TextBox1;
-    }
-
-    /*
-     * getbtnSearchJigyosha
-     * @return btnSearchJigyosha
-     */
-    @JsonProperty("btnSearchJigyosha")
-    public ButtonDialog getBtnSearchJigyosha() {
-        return btnSearchJigyosha;
-    }
-
-    /*
-     * setbtnSearchJigyosha
-     * @param btnSearchJigyosha btnSearchJigyosha
-     */
-    @JsonProperty("btnSearchJigyosha")
-    public void setBtnSearchJigyosha(ButtonDialog btnSearchJigyosha) {
-        this.btnSearchJigyosha = btnSearchJigyosha;
-    }
-
-    /*
-     * gettxtJigyoshaName
-     * @return txtJigyoshaName
-     */
-    @JsonProperty("txtJigyoshaName")
-    public TextBox getTxtJigyoshaName() {
-        return txtJigyoshaName;
-    }
-
-    /*
-     * settxtJigyoshaName
-     * @param txtJigyoshaName txtJigyoshaName
-     */
-    @JsonProperty("txtJigyoshaName")
-    public void setTxtJigyoshaName(TextBox txtJigyoshaName) {
-        this.txtJigyoshaName = txtJigyoshaName;
+    @JsonProperty("ccdJigyoshaSentaku")
+    public IShisetsuJohoCommonChildDiv getCcdJigyoshaSentaku() {
+        return ccdJigyoshaSentaku;
     }
 
     /*

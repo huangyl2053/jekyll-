@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0410016;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.kokuhorenkyoutsu.KokuhorenKyoutsuBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120270.DBC120270_ShikakuShogohyoInParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410016.TsuchishoJoho121Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
 import jp.co.ndensan.reams.db.dbz.definition.core.viewstatename.ViewStateHolderName;
@@ -41,10 +41,11 @@ public class TsuchishoJoho121 {
      * @param div TsuchishoJoho121Div
      * @return TsuchishoJoho121Div
      */
-    public ResponseData<KokuhorenKyoutsuBatchParameter> onClick_btnExcute(TsuchishoJoho121Div div) {
-        KokuhorenKyoutsuBatchParameter parameter = new KokuhorenKyoutsuBatchParameter();
+    public ResponseData<DBC120270_ShikakuShogohyoInParameter> onClick_btnExcute(TsuchishoJoho121Div div) {
+        DBC120270_ShikakuShogohyoInParameter parameter = new DBC120270_ShikakuShogohyoInParameter();
         RDate date = div.getCcdKokurenJohoTorikomi().get処理年月();
-        FlexibleYearMonth 処理年月 = date == null ? FlexibleYearMonth.EMPTY : new FlexibleYearMonth(date.getYearMonth().toDateString());
+        FlexibleYearMonth 処理年月 = date == null ? FlexibleYearMonth.EMPTY
+                : new FlexibleYearMonth(date.getYearMonth().toDateString());
         parameter.setShoriYM(処理年月);
         return ResponseData.of(parameter).respond();
     }

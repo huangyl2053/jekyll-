@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.hanyorisutojyukyusyadaicho;
+package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.hanyorisutojyukyusyadaicho.HanyoRisutoJyukyusyaDaichoProcess;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyorisutojyukyusyadaicho.HanyoRisutoJyukyusyaDaichoBatchParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710020.DBD710020_HanyoListJukyushaDaicho2Parameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBD-1810-020 yaodongsheng
  */
-public class HanyoRisutoJyukyusyaDaichoFlow extends BatchFlowBase<HanyoRisutoJyukyusyaDaichoBatchParameter> {
+public class DBD710020_HanyoListJukyushaDaicho2 extends BatchFlowBase<DBD710020_HanyoListJukyushaDaicho2Parameter> {
 
     @Override
     protected void defineFlow() {

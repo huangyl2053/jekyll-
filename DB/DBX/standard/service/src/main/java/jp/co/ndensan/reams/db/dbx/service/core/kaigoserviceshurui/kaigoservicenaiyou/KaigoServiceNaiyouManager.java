@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservicenaiyou.KaigoServiceNaiyou;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.servicecode.SabisuKodoParameter;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7131KaigoServiceNaiyouEntity;
@@ -16,8 +18,12 @@ import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7131KaigoServiceNaiyou
 import jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7131KaigoServiceNaiyouMapper;
 import jp.co.ndensan.reams.db.dbx.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -28,8 +34,13 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class KaigoServiceNaiyouManager {
 
+    private static final RString 抽出パターン_1 = new RString("1");
+    private static final RString 抽出パターン_2 = new RString("2");
+    private static final RString 抽出パターン_3 = new RString("3");
+    private static final RString 抽出パターン_4 = new RString("4");
+    private static final RString 抽出パターン_5 = new RString("5");
+    private static final int 年月_INDEX = 6;
     private final DbT7131KaigoServiceNaiyouDac dac;
-
     private final MapperProvider mapperProvider;
 
     /**
@@ -54,8 +65,7 @@ public class KaigoServiceNaiyouManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link KaigoJigyoshaManager}のインスタンスを返します。
      *
-     * @return
-     * {@link InstanceProvider#create}にて生成した{@link KaigoJigyoshaManager}のインスタンス
+     * @return {@link InstanceProvider#create}にて生成した{@link KaigoJigyoshaManager}のインスタンス
      */
     public static KaigoServiceNaiyouManager createInstance() {
         return InstanceProvider.create(KaigoServiceNaiyouManager.class);
@@ -108,6 +118,82 @@ public class KaigoServiceNaiyouManager {
             サービスコード情報検索リスト.add(new KaigoServiceNaiyou(kaigoServiceNaiyouEntity));
         }
         return サービスコード情報検索リスト;
+    }
+
+    /**
+     * サービスコード取得２を取得します。
+     *
+     * @param 基準年月 基準年月
+     * @param サービス種類リスト サービス種類リスト
+     * @return SearchResult<KaigoServiceNaiyou>
+     */
+    public SearchResult<KaigoServiceNaiyou> getServiceCodeList2(FlexibleYearMonth 基準年月,
+            List<RString> サービス種類リスト) {
+        List<KaigoServiceNaiyou> kaigoServiceNaiyouList = new ArrayList<>();
+        if (基準年月.isEmpty()) {
+            基準年月 = new FlexibleYearMonth(FlexibleDate.getNowDate().toString().substring(0, 年月_INDEX));
+        }
+        List<DbT7131KaigoServiceNaiyouEntity> entityList = dac.getServiceCodeList2(基準年月, サービス種類リスト);
+        for (DbT7131KaigoServiceNaiyouEntity entity : entityList) {
+            kaigoServiceNaiyouList.add(new KaigoServiceNaiyou(entity));
+        }
+        return SearchResult.of(kaigoServiceNaiyouList, 0, false);
+    }
+
+    /**
+     * サービスコード取得３を取得します。
+     *
+     * @param 基準年月 基準年月
+     * @param 抽出パターン 抽出パターン
+     * @return SearchResult<KaigoServiceNaiyou>
+     */
+    public SearchResult<KaigoServiceNaiyou> getServiceCodeList3(FlexibleYearMonth 基準年月,
+            RString 抽出パターン) {
+        if (抽出パターン_1.equals(抽出パターン)) {
+            基準年月 = new FlexibleYearMonth(DbBusinessConfig.
+                    get(ConfigNameDBU.制度改正施行日_支給限度額一本化, RDate.MAX, SubGyomuCode.DBU介護統計報告).substring(0, 年月_INDEX));
+        } else if (抽出パターン_2.equals(抽出パターン)
+                || 抽出パターン_3.equals(抽出パターン)
+                || 抽出パターン_4.equals(抽出パターン)
+                || 抽出パターン_5.equals(抽出パターン)) {
+            基準年月 = new FlexibleYearMonth(DbBusinessConfig.
+                    get(ConfigNameDBU.制度改正施行日_平成１８年０４月改正, RDate.MAX, SubGyomuCode.DBU介護統計報告).substring(0, 年月_INDEX));
+        } else {
+            if (基準年月.isEmpty()) {
+                基準年月 = new FlexibleYearMonth(FlexibleDate.getNowDate().toString().substring(0, 年月_INDEX));
+            }
+        }
+        IDbT7131KaigoServiceNaiyouMapper mapper = mapperProvider.create(IDbT7131KaigoServiceNaiyouMapper.class);
+        SabisuKodoParameter param = SabisuKodoParameter.createSearchParam3(基準年月, 抽出パターン);
+        List<KaigoServiceNaiyou> kaigoServiceNaiyouList = new ArrayList<>();
+        List<DbT7131KaigoServiceNaiyouEntity> entityList = mapper.getServiceCodeList3(param);
+        for (DbT7131KaigoServiceNaiyouEntity entity : entityList) {
+            kaigoServiceNaiyouList.add(new KaigoServiceNaiyou(entity));
+        }
+        return SearchResult.of(kaigoServiceNaiyouList, 0, false);
+    }
+
+    /**
+     * サービスコード取得４を取得します。
+     *
+     * @param 基準年月 基準年月
+     * @param サービス分類リスト サービス分類リスト
+     * @return SearchResult<KaigoServiceNaiyou>
+     */
+    public SearchResult<KaigoServiceNaiyou> getServiceCodeList4(FlexibleYearMonth 基準年月,
+            List<RString> サービス分類リスト) {
+        IDbT7131KaigoServiceNaiyouMapper mapper = mapperProvider.create(IDbT7131KaigoServiceNaiyouMapper.class);
+        if (基準年月.isEmpty()) {
+            基準年月 = new FlexibleYearMonth(FlexibleDate.getNowDate().toString().substring(0, 年月_INDEX));
+        }
+
+        SabisuKodoParameter param = SabisuKodoParameter.createSearchParam4(基準年月, サービス分類リスト);
+        List<KaigoServiceNaiyou> kaigoServiceNaiyouList = new ArrayList<>();
+        List<DbT7131KaigoServiceNaiyouEntity> entityList = mapper.getServiceCodeList4(param);
+        for (DbT7131KaigoServiceNaiyouEntity entity : entityList) {
+            kaigoServiceNaiyouList.add(new KaigoServiceNaiyou(entity));
+        }
+        return SearchResult.of(kaigoServiceNaiyouList, 0, false);
     }
 
     /**

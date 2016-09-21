@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.kaigoninteishinsakaischedulekagami;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.kaigoninteishinsakaischedulekagami.KaigoNinteiShinsakaiScheduleKagamiProcess;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE514001.DBE514001_ShinsakaiScheduleParameter;
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBE-0130-100 yaodongsheng
  */
-public class KaigoNinteiShinsakaiScheduleKagamiFlow extends BatchFlowBase<DBE514001_ShinsakaiScheduleParameter> {
+public class DBE514002_ShinsakaiScheduleKagami extends BatchFlowBase<DBE514001_ShinsakaiScheduleParameter> {
 
     private static final String SHINSAKAISCHEDULEKAGAMIHYO = "shinsakaischedulekagamihyo";
 

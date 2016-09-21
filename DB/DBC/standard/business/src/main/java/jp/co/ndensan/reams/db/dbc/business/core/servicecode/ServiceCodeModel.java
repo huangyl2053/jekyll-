@@ -6,71 +6,28 @@
 package jp.co.ndensan.reams.db.dbc.business.core.servicecode;
 
 import java.io.Serializable;
+import java.util.List;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
  * サービスコード入力ガイドのダイアログパラメータクラスです。
+ *
  * @reamsid_L DBA-0060-010 dongyabin
  */
+@Getter
+@Setter
+@SuppressWarnings("PMD.UnusedPrivateField")
 public class ServiceCodeModel implements Serializable {
 
     private RString サービス種類コード;
     private RString サービス項目コード;
     private RString サービス種類名称;
-
-    /**
-     * サービス種類コードを返します。
-     *
-     * @return サービス種類コード
-     */
-    public RString getサービス種類コード() {
-        return サービス種類コード;
-    }
-
-    /**
-     * サービス種類コードを設定します。
-     *
-     * @param サービス種類コード サービス種類コード
-     */
-    public void setサービス種類コード(RString サービス種類コード) {
-        this.サービス種類コード = サービス種類コード;
-    }
-
-    /**
-     * サービス項目コードを返します。
-     *
-     * @return サービス項目コード
-     */
-    public RString getサービス項目コード() {
-        return サービス項目コード;
-    }
-
-    /**
-     * サービス項目コードを設定します。
-     *
-     * @param サービス項目コード サービス項目コード
-     */
-    public void setサービス項目コード(RString サービス項目コード) {
-        this.サービス項目コード = サービス項目コード;
-    }
-
-    /**
-     * サービス種類名称を返します。
-     *
-     * @return サービス項目コード
-     */
-    public RString getサービス種類名称() {
-        return サービス種類名称;
-    }
-
-    /**
-     * サービス項目コードを設定します。
-     *
-     * @param サービス種類名称 サービス種類名称
-     */
-    public void setサービス種類名称(RString サービス種類名称) {
-        this.サービス種類名称 = サービス種類名称;
-    }
-
+    private FlexibleYearMonth 基準年月;
+    private List<RString> サービス種類リスト;
+    private List<RString> サービス分類リスト;
+    private RString 抽出パターン;
 }

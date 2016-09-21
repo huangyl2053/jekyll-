@@ -75,13 +75,13 @@ public class KoshinTaisho {
         for (dgNinteiTaskList_Row row : div.getCcdKoshinTaisho().getCheckbox()) {
             KoshinTaishoBussiness bussiness = new KoshinTaishoBussiness();
             bussiness.set保険者(row.getHokensha());
-            bussiness.set被保険者被保番号(row.getNyuryokuHoho());
+            bussiness.set被保険者被保番号(row.getHihoNumber());
             bussiness.set被保険者氏名(row.getHihoShimei());
-            if (row.getCenterSoshinDay().getValue() != null) {
-                bussiness.set更新対象完了日(row.getCenterSoshinDay().getValue().wareki().toDateString());
+            if (row.getKoshinKanryoDay().getValue() != null) {
+                bussiness.set更新対象完了日(row.getKoshinKanryoDay().getValue().wareki().toDateString());
             }
-            if (row.getChosahyoDataNyuryokuDay().getValue() != null) {
-                bussiness.set更新対象通知年月日(row.getChosahyoDataNyuryokuDay().getValue().wareki().toDateString());
+            if (row.getKoshinTsuchiYMD().getValue() != null) {
+                bussiness.set更新対象通知年月日(row.getKoshinTsuchiYMD().getValue().wareki().toDateString());
             }
             画面更新情報ビジネス.add(bussiness);
         }
@@ -102,8 +102,7 @@ public class KoshinTaisho {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.No)) {
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             return ResponseData.of(div).respond();
         }
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
@@ -126,8 +125,7 @@ public class KoshinTaisho {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.No)) {
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             return ResponseData.of(div).respond();
         }
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
@@ -178,8 +176,7 @@ public class KoshinTaisho {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.No)) {
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             return ResponseData.of(div).respond();
         }
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
@@ -202,8 +199,7 @@ public class KoshinTaisho {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType().equals(MessageDialogSelectedResult.No)) {
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             return ResponseData.of(div).respond();
         }
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();

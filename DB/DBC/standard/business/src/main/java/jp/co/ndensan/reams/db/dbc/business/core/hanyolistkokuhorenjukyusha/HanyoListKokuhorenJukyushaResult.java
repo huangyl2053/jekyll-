@@ -1117,8 +1117,6 @@ public class HanyoListKokuhorenJukyushaResult {
         異動年月日(new RString("0017"), new RString(""), new RString("異動年月日")),
         /**
          * 計画適用開始日
-         *
-         * TODO QA1711 出力順について、ご提供した資料「帳票出力順管理.xls」より、取得した出力順項目はDB検索SQLで下記の項目がない
          */
         計画適用開始日(new RString("0409"), new RString(""), new RString("居宅サービス計画適用開始年月日"));
         private final RString 項目ID;

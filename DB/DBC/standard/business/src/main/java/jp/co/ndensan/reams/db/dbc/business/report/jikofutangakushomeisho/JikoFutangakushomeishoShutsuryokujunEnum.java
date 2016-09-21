@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 高額合算自己負担額証明書発行一覧表の帳票出力項目管理Enumクラスです。
  *
- * @reamsid_L DBC-2680-010 xicongwang
+ * @reamsid_L DBC-2380-030 pengxingyi
  */
 public enum JikoFutangakushomeishoShutsuryokujunEnum implements IReportItems {
 
@@ -30,7 +30,7 @@ public enum JikoFutangakushomeishoShutsuryokujunEnum implements IReportItems {
     /**
      * 氏名５０音カナ
      */
-    氏名５０音カナ(new RString("0010"), new RString(""), new RString("")),
+    氏名５０音カナ(new RString("0010"), new RString(""), new RString("\"kogakuGassanTemp_hihokenshaNo\"")),
     /**
      * 市町村コード
      */
@@ -44,17 +44,9 @@ public enum JikoFutangakushomeishoShutsuryokujunEnum implements IReportItems {
      */
     被保険者番号(new RString("0104"), new RString(""), new RString("\"dbT3071KogakuGassanJikoFutanGakuMeisai_hihokenshaNo\"")),
     /**
-     * 支給区分コード
-     */
-    支給区分コード(new RString("0336"), new RString(""), new RString("")),
-    /**
      * 申請書整理番号
      */
-    申請書整理番号(new RString("0337"), new RString(""), new RString("\"dbT3071KogakuGassanJikoFutanGakuMeisai_shikyuShinseishoSeiriNo\"")),
-    /**
-     * 新規継続区分
-     */
-    新規継続区分(new RString("0340 "), new RString(""), new RString(""));
+    申請書整理番号(new RString("0337"), new RString(""), new RString("\"dbT3071KogakuGassanJikoFutanGakuMeisai_shikyuShinseishoSeiriNo\""));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;

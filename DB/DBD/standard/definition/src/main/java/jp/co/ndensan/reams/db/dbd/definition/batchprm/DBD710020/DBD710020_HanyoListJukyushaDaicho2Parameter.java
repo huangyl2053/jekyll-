@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyorisutojyukyusyadaicho;
+package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710020;
 
 import jp.co.ndensan.reams.db.dbd.definition.processprm.hanyorisutojyukyusyadaicho.HanyoRisutoJyukyusyaDaichoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -22,7 +22,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class HanyoRisutoJyukyusyaDaichoBatchParameter extends BatchParameterBase {
+public class DBD710020_HanyoListJukyushaDaicho2Parameter extends BatchParameterBase {
 
     private static final String CYUSYUTSUDATAKUBUN = "cyusyutsudatakubun";
     private static final String SHINSEITORIKESHIDETACYUSYUTSU = "shinseitorikeshidetacyusyutsu";
