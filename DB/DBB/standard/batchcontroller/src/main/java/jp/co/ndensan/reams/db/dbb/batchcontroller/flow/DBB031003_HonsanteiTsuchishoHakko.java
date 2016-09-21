@@ -21,9 +21,9 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031003.UpdHonsanteiTsu
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031003.UpdZenkenFukaInfoTmpKouseiMaeDataProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031003.UpdZenkenFukaInfoTmpSeikahoboKubunProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031003.UpdZenkenFukaInfoTmpTaisyoshaDataProcess;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB003001.DBB003001_KeisangoJohoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB031003.DBB031003_HonsanteiTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteifuka.HonsanteifukaBatchTyouhyou;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB003001.DBB003001_KeisangoJohoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt43002.HonsanteifukaProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
@@ -67,7 +67,7 @@ public class DBB031003_HonsanteiTsuchishoHakko extends BatchFlowBase<DBB031003_H
 
     private static final String 納入通知書の発行 = "prtNonyuTsuchishoProcess";
 
-    private static final RString BATCH_ID = new RString("KeisangoJohoSakuseiFlow");
+    private static final RString BATCH_ID = new RString("DBB003001_KeisangoJohoSakusei");
     private DBB031003_HonsanteiTsuchishoHakkoParameter parameter;
     private RString バッチフロー_帳票分類ID;
     private HonsanteifukaProcessParameter processParameter;
