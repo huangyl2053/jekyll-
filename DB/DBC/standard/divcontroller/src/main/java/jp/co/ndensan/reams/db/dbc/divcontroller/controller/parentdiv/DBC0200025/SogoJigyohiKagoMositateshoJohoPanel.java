@@ -54,10 +54,9 @@ public class SogoJigyohiKagoMositateshoJohoPanel {
             SogoJigyohiKagoMositateshoJohoPanelDiv div) {
         DBC110140_SogojigyohiKagoMoshitateshoOutParameter parameter
                 = new DBC110140_SogojigyohiKagoMoshitateshoOutParameter();
-        RString 再処理区分 = ViewStateHolder.get(ViewStateHolderName.国保連送付情報, KokuhorenDataSofuViewState.class).
-                get再処理区分();
-        RYearMonth 処理年月 = ViewStateHolder.get(ViewStateHolderName.国保連送付情報, KokuhorenDataSofuViewState.class).
-                get処理年月();
+        KokuhorenDataSofuViewState 送付情報 = ViewStateHolder.get(ViewStateHolderName.国保連送付情報, KokuhorenDataSofuViewState.class);
+        RString 再処理区分 = 送付情報.get再処理区分();
+        RYearMonth 処理年月 = 送付情報.get処理年月();
         if (再処理区分 != null) {
             parameter.set再処理区分(再処理区分);
         } else {
