@@ -12,6 +12,10 @@ import jp.co.ndensan.reams.db.dbc.business.core.hanyolistsogojigyohi.HanyoListSo
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistsogojigyohi.HanyoListSogoJigyoHiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistsogojigyohi.HanyoListSogoJigyoHiRelateEntity;
+import jp.co.ndensan.reams.db.dbc.entity.euc.hanyolistsogojigyohi.HanyoListSogoJigyoHiKiHonManejimentoReibanNashiEUCEntity;
+import jp.co.ndensan.reams.db.dbc.entity.euc.hanyolistsogojigyohi.HanyoListSogoJigyoHiKiHonMeisaiReibanNashiEUCEntity;
+import jp.co.ndensan.reams.db.dbc.entity.euc.hanyolistsogojigyohi.HanyoListSogoJigyoHiKiHonReibanNashiEUCEntity;
+import jp.co.ndensan.reams.db.dbc.entity.euc.hanyolistsogojigyohi.HanyoListSogoJigyoHiKiHonShukeiReibanNashiEUCEntity;
 import jp.co.ndensan.reams.db.dbc.entity.euc.hanyolistsogojigyohi.IHanyoListSogoJigyoHiEUCEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
@@ -133,13 +137,13 @@ public class HanyoListSogoJigyoHiRenbanNashiProcess extends BatchProcessBase<Han
     protected void afterExecute() {
         if (!flag) {
             if (基本情報.equals(processParameter.get抽出方法())) {
-                eucCsvWriter.writeLine(hanyolistsogojigyohi.set連番基本なしEUCEntity());
+                eucCsvWriter.writeLine(new HanyoListSogoJigyoHiKiHonReibanNashiEUCEntity());
             } else if (基本明細情報.equals(processParameter.get抽出方法())) {
-                eucCsvWriter.writeLine(hanyolistsogojigyohi.set連番基本明細なしEUCEntity());
+                eucCsvWriter.writeLine(new HanyoListSogoJigyoHiKiHonMeisaiReibanNashiEUCEntity());
             } else if (基本集計情報.equals(processParameter.get抽出方法())) {
-                eucCsvWriter.writeLine(hanyolistsogojigyohi.set連番基本集計なしEUCEntity());
+                eucCsvWriter.writeLine(new HanyoListSogoJigyoHiKiHonShukeiReibanNashiEUCEntity());
             } else if (基本ケアマネジメント情報.equals(processParameter.get抽出方法())) {
-                eucCsvWriter.writeLine(hanyolistsogojigyohi.set連番基本マネジなしEUCEntity());
+                eucCsvWriter.writeLine(new HanyoListSogoJigyoHiKiHonManejimentoReibanNashiEUCEntity());
             }
         }
         eucCsvWriter.close();
