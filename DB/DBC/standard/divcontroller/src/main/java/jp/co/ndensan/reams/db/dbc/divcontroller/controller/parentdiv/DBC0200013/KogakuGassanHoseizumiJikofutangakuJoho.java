@@ -6,17 +6,11 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0200013;
 
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110080.DBC110080_KogakugassanHoseisumiJikofutangakuOutParameter;
-import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0200013.KogakuGassanHoseizumiJikofutangakuJohoDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0200013.KogakuGassanHoseizumiJikofutangakuJohoHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0200011.KokuhorenDataSofuViewState;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.viewstatename.ViewStateHolderName;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -30,9 +24,7 @@ public class KogakuGassanHoseizumiJikofutangakuJoho {
 
     private RYearMonth 処理年月;
     private RString 再処理区分;
-    private RString 外部ＣＳＶファイル名;
-    private static final RString 状態パターン = new RString("1");
-    private static final ReportId 帳票ID = ReportIdDBC.DBC200032.getReportId();
+    private RString 交換情報識別番号;
 
     /**
      * onLoadのメソッドです。
@@ -45,10 +37,8 @@ public class KogakuGassanHoseizumiJikofutangakuJoho {
                 KokuhorenDataSofuViewState.class);
         再処理区分 = parmater.get再処理区分();
         処理年月 = parmater.get処理年月();
-        RDate 基準日 = RDate.getNowDate();
-        外部ＣＳＶファイル名 = DbBusinessConfig.get(ConfigNameDBC.国保連送付媒体_補正自己負担Ｆ_外部ＣＳＶファイル名, 基準日, SubGyomuCode.DBC介護給付);
-        div.getCcdKokuhorenJohoSofu().initialize(処理年月, 再処理区分, 外部ＣＳＶファイル名, 状態パターン);
-        div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, 帳票ID);
+        交換情報識別番号 = parmater.get交換情報識別番号();
+        getHandler(div).onload(再処理区分, 処理年月, 交換情報識別番号);
         return ResponseData.of(div).respond();
     }
 
