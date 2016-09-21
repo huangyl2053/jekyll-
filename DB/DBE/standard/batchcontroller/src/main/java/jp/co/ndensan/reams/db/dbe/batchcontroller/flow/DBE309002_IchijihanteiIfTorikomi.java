@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.itizihanteiiftorikomi;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.itizihanteiiftorikomi.ItizihanteiIFtoriKomiProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.itizihanteiiftorikomi.ItizihanteiIFtoriKomiUpdateProcess;
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBE-1470-022 wanghui
  */
-public class ItizihanteiIFtoriKomiFlow extends BatchFlowBase<ItziHanteiShoriBatchParamter> {
+public class DBE309002_IchijihanteiIfTorikomi extends BatchFlowBase<ItziHanteiShoriBatchParamter> {
 
     private static final String SHINSAKAISCHEDULEKAGAMIHYO = "ItizihanteiIFtoriKomiProcess";
     private static final String HEDULEKAGAMIHYOUPDATE = "ItizihanteiIFtoriKomiUpdateProcess";

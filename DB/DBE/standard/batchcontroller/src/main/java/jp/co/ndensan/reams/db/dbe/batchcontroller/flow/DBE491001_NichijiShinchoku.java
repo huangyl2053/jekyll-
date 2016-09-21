@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.shinchokudataoutput;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinchokudataoutput.NinteichosahyoChosaItemSkuseyiProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinchokudataoutput.NinteichosahyoServiceJokyoSkuseyiProcess;
@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinchokudataoutput.Shinc
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinchokudataoutput.ShujiiIkenshoJohoSkuseyiProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinchokudataoutput.ZenkaiChosaGaikyouChousaJokyoProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinchokudataoutput.ZenkaiNinteichosahyoChosaItemProcess;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.shinchokudataoutput.ShinchokuDataOutputBatchParamter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE491001.DBE491001_NichijiShinchokuParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBE-1500-020 wanghui
  */
-public class ShinchokuDataOutputFlow extends BatchFlowBase<ShinchokuDataOutputBatchParamter> {
+public class DBE491001_NichijiShinchoku extends BatchFlowBase<DBE491001_NichijiShinchokuParameter> {
 
     private static final String 調査票概況調査サービスの状況 = "NinteichosahyoServiceJokyoSkuseyiProcess";
     private static final String 認定調査票基本調査調査項目 = "NinteichosahyoChosaItemSkuseyiProcess";

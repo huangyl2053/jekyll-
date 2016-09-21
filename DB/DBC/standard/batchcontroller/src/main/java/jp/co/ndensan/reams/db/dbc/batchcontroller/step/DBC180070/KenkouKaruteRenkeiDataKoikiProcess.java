@@ -42,7 +42,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 public class KenkouKaruteRenkeiDataKoikiProcess extends BatchKeyBreakBase<KenkoKaruteRenkeiKoikiTempTableEntity> {
 
     private static final RString SELECT_GENSHICHOSONJOHO = new RString("jp.co.ndensan.reams.db.dbc."
-            + "persistence.db.mapper.relate.kenkoukaruterenkeidata.IKenkouKaruteRenkeiDataKoikiMapper.getGenShichosonJoho");
+            + "persistence.db.mapper.relate.kenkoukaruterenkeidatakoiki.IKenkouKaruteRenkeiDataKoikiMapper.getKenkouKaruteRenkeiDataKoiki");
     private static final RString DAT_拡張子 = new RString(".DAT");
     private static final RString DAT_NAME = new RString("HCSETF8_");
     private static final RString CSV_NAME = new RString("KoikiShikibetsuHenkanError.csv");
