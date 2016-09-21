@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.saishinsamoshitateshoout
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsamoshitateshoout.DbWT1741SaishinsaMoshitateEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsamoshitateshoout.DbWT1741SaishinsaMoshitateTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsamoshitateshoout.SaishinsaMoshitateAndHihokenshaKanrenEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsamoshitateshoout.SaishinsaMoshitateGetHokenshaNoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsamoshitateshoout.SaishinsaMoshitateIchiranhyoTaisyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsamoshitateshoout.SaishinsaMoshitateMeisyoKanrenEntity;
 
@@ -39,9 +40,9 @@ public interface ISaishinsaMoshitateshoOutJohoMapper {
     /**
      * 再審査申立一時TBLからデータを取ります。
      *
-     * @return List<SaishinsaMoshitateAndHihokenshaKanrenEntity>
+     * @return List<SaishinsaMoshitateGetHokenshaNoEntity>
      */
-    List<SaishinsaMoshitateAndHihokenshaKanrenEntity> select保険者番号取得関連リスト();
+    List<SaishinsaMoshitateGetHokenshaNoEntity> select保険者番号取得関連リスト();
 
     /**
      * 被保険者一時TBLと再審査申立一時TBLからデータを取ります。

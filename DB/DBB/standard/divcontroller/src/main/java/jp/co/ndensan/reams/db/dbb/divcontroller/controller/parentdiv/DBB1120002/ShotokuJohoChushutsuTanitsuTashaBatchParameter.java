@@ -44,7 +44,6 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameter {
     private static final RString BBKAIGO = new RString("BBKAIGO");
     private static final RString 所得情報抽出_連携当初 = new RString("DBBMN51009");
     private static final RString 所得情報抽出_連携異動 = new RString("DBBMN51010");
-    private static final RString 所得情報ファイル = new RString("BBKAIGO.CSV");
 
     /**
      * 画面初期化のonLoadメソッドです。
@@ -102,9 +101,8 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameter {
         FilesystemPath 絶対パス = new FilesystemPath(files[0].getFilePath());
         RDateTime 共有ファイルID = SharedFile.copyToSharedFile(絶対パス, sharedFileName);
         ViewStateHolder.put(ViewStateKeys.イメージ共有ファイルID, 共有ファイルID);
-        RString path = new RString(SharedFile.getBasePath() + File.separator + 所得情報ファイル);
-        File file = new File(path.toString());
-        if (file.exists() && file.getName().contains(所得情報ファイル)) {
+        File file = new File(絶対パス.toString());
+        if (file.exists() && file.getName().contains(BBKAIGO)) {
             div.getShotokuJohoChushutsuTanitsuTashaPanel().getTxtTorikomiJotai().setValue(処理待ち);
         } else {
             div.getShotokuJohoChushutsuTanitsuTashaPanel().getTxtTorikomiJotai().setValue(RString.EMPTY);
@@ -140,8 +138,7 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameter {
      * 「実行する」を押下場合、DBB112001 バリデーション、バッチパラメータの設定とバッチを起動します。
      *
      * @param div ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv
-     * @return
-     * ResponseData<DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuParameter>
+     * @return ResponseData<DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuParameter>
      */
     public ResponseData<DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuParameter> onclick_batchRegister_DBB112001(
             ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv div) {
@@ -154,8 +151,7 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameter {
      * 「実行する」を押下場合、DBB112003 バリデーション、バッチパラメータの設定とバッチを起動します。
      *
      * @param div ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv
-     * @return
-     * ResponseData<DBB112003_ShotokuJohoChushutsuRenkeiTanitsuParameter>
+     * @return ResponseData<DBB112003_ShotokuJohoChushutsuRenkeiTanitsuParameter>
      */
     public ResponseData<DBB112003_ShotokuJohoChushutsuRenkeiTanitsuParameter> onclick_batchRegister__DBB112003(
             ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv div) {

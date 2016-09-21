@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 /**
  * {@link KaigoHihokenshaInfoDiv}の仕様クラスです。 <br> {@link KaigoHihokenshaInfoDiv}における画面としての仕様を定義しています。
  *
- * @reamsid_L DBC-1640-010 jiangzongyue
+ * @reamsid_L DBB-1640-010 jiangzongyue
  */
 public enum KaigoHihokenshaInfoSpec implements IPredicate<KaigoHihokenshaInfoPanelDiv> {
 

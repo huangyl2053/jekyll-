@@ -225,6 +225,6 @@ public class KoshinOshiraseTsuchiProcess extends BatchProcessBase<KoshinOshirase
             帳票ID12出力ページ数 = new RString(String.valueOf(batchReportWrite112.getPageCount()));
         }
         service.バッチ出力条件リストの出力(association, parameter, 帳票ID01出力ページ数, 帳票ID11出力ページ数, 帳票ID12出力ページ数,
-                帳票ID01TF, 帳票ID11TF, 帳票ID12TF);
+                帳票ID01TF, 帳票ID11TF, 帳票ID12TF, outputOrder);
     }
 }

@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.KokuhorenJ
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.IChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 
 /**
  * KogakuGassanHoseizumiJikofutangakuJoho のクラスファイル
@@ -26,6 +27,10 @@ public class KogakuGassanHoseizumiJikofutangakuJohoDiv extends PanelBatchParamet
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("txtShoriTaisho")
+    private TextBox txtShoriTaisho;
+    @JsonProperty("txtShori")
+    private TextBox txtShori;
     @JsonProperty("ccdKokuhorenJohoSofu")
     private KokuhorenJohoSofuDiv ccdKokuhorenJohoSofu;
     @JsonProperty("ccdShutsuryokujun")
@@ -37,6 +42,42 @@ public class KogakuGassanHoseizumiJikofutangakuJohoDiv extends PanelBatchParamet
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * gettxtShoriTaisho
+     * @return txtShoriTaisho
+     */
+    @JsonProperty("txtShoriTaisho")
+    public TextBox getTxtShoriTaisho() {
+        return txtShoriTaisho;
+    }
+
+    /*
+     * settxtShoriTaisho
+     * @param txtShoriTaisho txtShoriTaisho
+     */
+    @JsonProperty("txtShoriTaisho")
+    public void setTxtShoriTaisho(TextBox txtShoriTaisho) {
+        this.txtShoriTaisho = txtShoriTaisho;
+    }
+
+    /*
+     * gettxtShori
+     * @return txtShori
+     */
+    @JsonProperty("txtShori")
+    public TextBox getTxtShori() {
+        return txtShori;
+    }
+
+    /*
+     * settxtShori
+     * @param txtShori txtShori
+     */
+    @JsonProperty("txtShori")
+    public void setTxtShori(TextBox txtShori) {
+        this.txtShori = txtShori;
+    }
+
     /*
      * getccdKokuhorenJohoSofu
      * @return ccdKokuhorenJohoSofu

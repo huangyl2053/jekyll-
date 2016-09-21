@@ -93,6 +93,7 @@ public class DBC110120_SaishinsaMoshitateshoOut extends BatchFlowBase<DBC110120_
     private int レコード件数合計 = 0;
     private List<SharedFileDescriptor> 送付ファイルエントリ情報List;
     private List<RString> hokenshaNoList = new ArrayList<>();
+    private List<Integer> レコード件数List = new ArrayList<>();
     private SaishinsaMoshitateshoOutSofuDataGetReturnEntity returnEntity;
     private SaishinsaMoshitateGetSoufuDataProcessParameter parameter;
     private static final String 被保険者番号変換対象データの取得 = "getHihokenshaNoDataInformation";
@@ -135,8 +136,11 @@ public class DBC110120_SaishinsaMoshitateshoOut extends BatchFlowBase<DBC110120_
             executeStep(保険者番号取得);
             hokenshaNoList = getResult(
                     List.class, new RString(保険者番号取得), SaishinsaMoshitateGetHokenshaNoProcess.PARAMETER_OUT_OUTPUTENTRY);
+            レコード件数List = getResult(
+                    List.class, new RString(保険者番号取得), SaishinsaMoshitateGetHokenshaNoProcess.PARAMETER_OUT_OUTPUTCOUNT);
             for (int i = 0; i < hokenshaNoList.size(); i++) {
                 parameter.set保険者番号(hokenshaNoList.get(i));
+                parameter.setレコード件数(レコード件数List.get(i));
                 executeStep(送付ファイル作成);
                 int レコード件数 = getResult(
                         Integer.class, new RString(送付ファイル作成), SaishinsaMoshitateDoSofuFileSakuseiProcess.PARAMETER_OUT_OUTPUTCOUNT);
