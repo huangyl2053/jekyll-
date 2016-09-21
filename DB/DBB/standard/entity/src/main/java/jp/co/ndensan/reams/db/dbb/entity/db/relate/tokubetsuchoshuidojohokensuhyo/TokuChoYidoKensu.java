@@ -34,5 +34,10 @@ public class TokuChoYidoKensu {
     private int 追加依頼件数Right;
     private RString 年金保険者名称;
     private RString 市町村名称;
+    private RString 該当件数の件数の合計;
+    private RString 資格喪失の件数の合計;
+    private RString 仮徴収額変更の件数の合計;
+    private RString 住所地特例の件数の合計;
+    private RString 特徴追加依頼の件数の合計;
 
 }
