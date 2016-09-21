@@ -13,6 +13,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiShokujiHiyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiHedajyoho2;
+import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufuJissekiPrmBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai.KyufujissekiMeisaiBusiness;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010016.ShokujiHiyoShokaiDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0010016.dgShokujiHiyoGokeiFromH1504_Row;
@@ -43,15 +44,10 @@ public class ShokujiHiyoShokaiHandler {
     private final RString 公費１ = new RString("公費１");
     private final RString 公費２ = new RString("公費２");
     private final RString 公費３ = new RString("公費３");
-    private final RString 基本 = new RString("基本");
-    private final RString 特別 = new RString("特別");
     private static final int INT_ZERO = 0;
     private static final int INT_SEX = 6;
     private static final RString ZERO = new RString("0");
-    private static final RString NI = new RString("2");
-    private static final FlexibleYearMonth 平成24年4月 = new FlexibleYearMonth("201204");
     private static final RString 前事業者 = new RString("前事業者");
-    private static final int INT_1 = 1;
     private static final RString 前月 = new RString("前月");
 
     /**
@@ -72,12 +68,20 @@ public class ShokujiHiyoShokaiHandler {
      * @param 給付実績食事費用1504等 List<KyufujissekiShokujiHiyo>
      */
     public void set給付実績食事費用15041(List<KyufujissekiShokujiHiyo> 給付実績食事費用1504等) {
+        RString 整理番号 = div.getCcdKyufuJissekiHeader().get整理番号();
+        RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
+        RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
+        RString サービス提供年月 = div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString();
         List<dgShokujiHiyoGokeiFromH1504_Row> dataSources = new ArrayList<>();
+        if (!提供年月.isBeforeOrEquals(new FlexibleYearMonth(サービス提供年月))) {
+            div.getDgShokujiHiyoGokeiFromH1504().setDataSource(dataSources);
+            return;
+        }
         for (KyufujissekiShokujiHiyo 給付実績食事費用1504 : 給付実績食事費用1504等) {
-            if (div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toString()
-                    .equals(給付実績食事費用1504.getサービス提供年月().toString())
-                    && div.getCcdKyufuJissekiHeader().get事業者番号().toString()
-                    .equals(給付実績食事費用1504.get事業所番号().toString())) {
+            if (事業者番号.equals(給付実績食事費用1504.get事業所番号().getColumnValue())
+                    && 整理番号.equals(給付実績食事費用1504.get整理番号())
+                    && 様式番号.equals(給付実績食事費用1504.get入力識別番号().getColumnValue())
+                    && サービス提供年月.equals(給付実績食事費用1504.getサービス提供年月().toDateString())) {
                 dgShokujiHiyoGokeiFromH1504_Row row_前 = new dgShokujiHiyoGokeiFromH1504_Row();
                 row_前.setTxtShokujiTeikyohiGokei(get金額(給付実績食事費用1504.get基本_提供金額()));
                 row_前.setTxtHyojunFutangakuTsuki(get金額(給付実績食事費用1504.get標準負担額_月額()));
@@ -156,100 +160,93 @@ public class ShokujiHiyoShokaiHandler {
                 dataSources.add(row_前_公費１);
                 dataSources.add(row_後_公費１);
                 dataSources.add(row_公費１);
+                this.set給付実績食事費用15042(給付実績食事費用1504, dataSources);
             }
         }
         div.getDgShokujiHiyoGokeiFromH1504().setDataSource(dataSources);
-        this.set給付実績食事費用15042(給付実績食事費用1504等);
+        List<KyufujissekiShokujiHiyo> dataToRepeat = get食費1504サービス提供年月リスト(給付実績食事費用1504等);
+        setGetsuBtn(dataToRepeat, new FlexibleYearMonth(サービス提供年月));
     }
 
-    private void set給付実績食事費用15042(List<KyufujissekiShokujiHiyo> 給付実績食事費用1504等) {
-        List<dgShokujiHiyoGokeiFromH1504_Row> dataSources = new ArrayList<>();
-        for (KyufujissekiShokujiHiyo 給付実績食事費用1504 : 給付実績食事費用1504等) {
-            if (div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toString()
-                    .equals(給付実績食事費用1504.getサービス提供年月().toString())
-                    && div.getCcdKyufuJissekiHeader().get事業者番号().toString()
-                    .equals(給付実績食事費用1504.get事業所番号().toString())) {
-                dgShokujiHiyoGokeiFromH1504_Row row_前_公費２ = new dgShokujiHiyoGokeiFromH1504_Row();
-                row_前_公費２.setTxtShokujiTeikyohiGokei(RString.EMPTY);
-                row_前_公費２.setTxtHyojunFutangakuTsuki(RString.EMPTY);
-                row_前_公費２.setTxtHyojunFutangakuHi(RString.EMPTY);
-                row_前_公費２.setTxtKohi(公費２);
-                row_前_公費２.setTxtShokujiTeikyoNobeNissu(RString.EMPTY);
-                row_前_公費２.setTxtSeikyugakuZengo(前);
-                row_前_公費２.setTxtKohiSeikyu(RString.EMPTY);
-                row_前_公費２.setTxtShokujiTeikyohiSeikyugaku(RString.EMPTY);
-                row_前_公費２.setTxtSaishinsaKaisu(RString.EMPTY);
-                row_前_公費２.setTxtKagoKaisu(RString.EMPTY);
-                row_前_公費２.setTxtShinsaYM(RString.EMPTY);
-                dgShokujiHiyoGokeiFromH1504_Row row_後_公費２ = new dgShokujiHiyoGokeiFromH1504_Row();
-                row_後_公費２.setTxtShokujiTeikyohiGokei(RString.EMPTY);
-                row_後_公費２.setTxtHyojunFutangakuTsuki(RString.EMPTY);
-                row_後_公費２.setTxtHyojunFutangakuHi(RString.EMPTY);
-                row_後_公費２.setTxtKohi(公費２);
-                row_後_公費２.setTxtShokujiTeikyoNobeNissu(RString.EMPTY);
-                row_後_公費２.setTxtSeikyugakuZengo(後);
-                row_後_公費２.setTxtKohiSeikyu(RString.EMPTY);
-                row_後_公費２.setTxtShokujiTeikyohiSeikyugaku(RString.EMPTY);
-                row_後_公費２.setTxtSaishinsaKaisu(RString.EMPTY);
-                row_後_公費２.setTxtKagoKaisu(RString.EMPTY);
-                row_後_公費２.setTxtShinsaYM(RString.EMPTY);
-                dgShokujiHiyoGokeiFromH1504_Row row_公費２ = new dgShokujiHiyoGokeiFromH1504_Row();
-                row_公費２.setTxtShokujiTeikyohiGokei(RString.EMPTY);
-                row_公費２.setTxtHyojunFutangakuTsuki(RString.EMPTY);
-                row_公費２.setTxtHyojunFutangakuHi(RString.EMPTY);
-                row_公費２.setTxtKohi(公費２);
-                row_公費２.setTxtShokujiTeikyoNobeNissu(new RString(給付実績食事費用1504.get公費２対象食事提供延べ日数()));
-                row_公費２.setTxtSeikyugakuZengo(RString.EMPTY);
-                row_公費２.setTxtKohiSeikyu(get金額(給付実績食事費用1504.get公費２食事提供費請求額()));
-                row_公費２.setTxtShokujiTeikyohiSeikyugaku(RString.EMPTY);
-                row_公費２.setTxtSaishinsaKaisu(RString.EMPTY);
-                row_公費２.setTxtKagoKaisu(RString.EMPTY);
-                row_公費２.setTxtShinsaYM(RString.EMPTY);
-                dgShokujiHiyoGokeiFromH1504_Row row_前_公費３ = new dgShokujiHiyoGokeiFromH1504_Row();
-                row_前_公費３.setTxtShokujiTeikyohiGokei(RString.EMPTY);
-                row_前_公費３.setTxtHyojunFutangakuTsuki(RString.EMPTY);
-                row_前_公費３.setTxtHyojunFutangakuHi(RString.EMPTY);
-                row_前_公費３.setTxtKohi(公費３);
-                row_前_公費３.setTxtShokujiTeikyoNobeNissu(RString.EMPTY);
-                row_前_公費３.setTxtSeikyugakuZengo(前);
-                row_前_公費３.setTxtKohiSeikyu(RString.EMPTY);
-                row_前_公費３.setTxtShokujiTeikyohiSeikyugaku(RString.EMPTY);
-                row_前_公費３.setTxtSaishinsaKaisu(RString.EMPTY);
-                row_前_公費３.setTxtKagoKaisu(RString.EMPTY);
-                row_前_公費３.setTxtShinsaYM(RString.EMPTY);
-                dgShokujiHiyoGokeiFromH1504_Row row_後_公費３ = new dgShokujiHiyoGokeiFromH1504_Row();
-                row_後_公費３.setTxtShokujiTeikyohiGokei(RString.EMPTY);
-                row_後_公費３.setTxtHyojunFutangakuTsuki(RString.EMPTY);
-                row_後_公費３.setTxtHyojunFutangakuHi(RString.EMPTY);
-                row_後_公費３.setTxtKohi(公費３);
-                row_後_公費３.setTxtShokujiTeikyoNobeNissu(RString.EMPTY);
-                row_後_公費３.setTxtSeikyugakuZengo(後);
-                row_後_公費３.setTxtKohiSeikyu(RString.EMPTY);
-                row_後_公費３.setTxtShokujiTeikyohiSeikyugaku(RString.EMPTY);
-                row_後_公費３.setTxtSaishinsaKaisu(RString.EMPTY);
-                row_後_公費３.setTxtKagoKaisu(RString.EMPTY);
-                row_後_公費３.setTxtShinsaYM(RString.EMPTY);
-                dgShokujiHiyoGokeiFromH1504_Row row_公費３ = new dgShokujiHiyoGokeiFromH1504_Row();
-                row_公費３.setTxtShokujiTeikyohiGokei(RString.EMPTY);
-                row_公費３.setTxtHyojunFutangakuTsuki(RString.EMPTY);
-                row_公費３.setTxtHyojunFutangakuHi(RString.EMPTY);
-                row_公費３.setTxtKohi(公費３);
-                row_公費３.setTxtShokujiTeikyoNobeNissu(new RString(給付実績食事費用1504.get公費３対象食事提供延べ日数()));
-                row_公費３.setTxtSeikyugakuZengo(RString.EMPTY);
-                row_公費３.setTxtKohiSeikyu(get金額(給付実績食事費用1504.get公費３食事提供費請求額()));
-                row_公費３.setTxtShokujiTeikyohiSeikyugaku(RString.EMPTY);
-                row_公費３.setTxtSaishinsaKaisu(RString.EMPTY);
-                row_公費３.setTxtKagoKaisu(RString.EMPTY);
-                row_公費３.setTxtShinsaYM(RString.EMPTY);
-                dataSources.add(row_前_公費２);
-                dataSources.add(row_後_公費２);
-                dataSources.add(row_公費２);
-                dataSources.add(row_前_公費３);
-                dataSources.add(row_後_公費３);
-                dataSources.add(row_公費３);
-            }
-        }
-        div.getDgShokujiHiyoGokeiFromH1504().setDataSource(dataSources);
+    private void set給付実績食事費用15042(KyufujissekiShokujiHiyo 給付実績食事費用1504, List<dgShokujiHiyoGokeiFromH1504_Row> dataSources) {
+        dgShokujiHiyoGokeiFromH1504_Row row_前_公費２ = new dgShokujiHiyoGokeiFromH1504_Row();
+        row_前_公費２.setTxtShokujiTeikyohiGokei(RString.EMPTY);
+        row_前_公費２.setTxtHyojunFutangakuTsuki(RString.EMPTY);
+        row_前_公費２.setTxtHyojunFutangakuHi(RString.EMPTY);
+        row_前_公費２.setTxtKohi(公費２);
+        row_前_公費２.setTxtShokujiTeikyoNobeNissu(RString.EMPTY);
+        row_前_公費２.setTxtSeikyugakuZengo(前);
+        row_前_公費２.setTxtKohiSeikyu(RString.EMPTY);
+        row_前_公費２.setTxtShokujiTeikyohiSeikyugaku(RString.EMPTY);
+        row_前_公費２.setTxtSaishinsaKaisu(RString.EMPTY);
+        row_前_公費２.setTxtKagoKaisu(RString.EMPTY);
+        row_前_公費２.setTxtShinsaYM(RString.EMPTY);
+        dgShokujiHiyoGokeiFromH1504_Row row_後_公費２ = new dgShokujiHiyoGokeiFromH1504_Row();
+        row_後_公費２.setTxtShokujiTeikyohiGokei(RString.EMPTY);
+        row_後_公費２.setTxtHyojunFutangakuTsuki(RString.EMPTY);
+        row_後_公費２.setTxtHyojunFutangakuHi(RString.EMPTY);
+        row_後_公費２.setTxtKohi(公費２);
+        row_後_公費２.setTxtShokujiTeikyoNobeNissu(RString.EMPTY);
+        row_後_公費２.setTxtSeikyugakuZengo(後);
+        row_後_公費２.setTxtKohiSeikyu(RString.EMPTY);
+        row_後_公費２.setTxtShokujiTeikyohiSeikyugaku(RString.EMPTY);
+        row_後_公費２.setTxtSaishinsaKaisu(RString.EMPTY);
+        row_後_公費２.setTxtKagoKaisu(RString.EMPTY);
+        row_後_公費２.setTxtShinsaYM(RString.EMPTY);
+        dgShokujiHiyoGokeiFromH1504_Row row_公費２ = new dgShokujiHiyoGokeiFromH1504_Row();
+        row_公費２.setTxtShokujiTeikyohiGokei(RString.EMPTY);
+        row_公費２.setTxtHyojunFutangakuTsuki(RString.EMPTY);
+        row_公費２.setTxtHyojunFutangakuHi(RString.EMPTY);
+        row_公費２.setTxtKohi(公費２);
+        row_公費２.setTxtShokujiTeikyoNobeNissu(new RString(給付実績食事費用1504.get公費２対象食事提供延べ日数()));
+        row_公費２.setTxtSeikyugakuZengo(RString.EMPTY);
+        row_公費２.setTxtKohiSeikyu(get金額(給付実績食事費用1504.get公費２食事提供費請求額()));
+        row_公費２.setTxtShokujiTeikyohiSeikyugaku(RString.EMPTY);
+        row_公費２.setTxtSaishinsaKaisu(RString.EMPTY);
+        row_公費２.setTxtKagoKaisu(RString.EMPTY);
+        row_公費２.setTxtShinsaYM(RString.EMPTY);
+        dgShokujiHiyoGokeiFromH1504_Row row_前_公費３ = new dgShokujiHiyoGokeiFromH1504_Row();
+        row_前_公費３.setTxtShokujiTeikyohiGokei(RString.EMPTY);
+        row_前_公費３.setTxtHyojunFutangakuTsuki(RString.EMPTY);
+        row_前_公費３.setTxtHyojunFutangakuHi(RString.EMPTY);
+        row_前_公費３.setTxtKohi(公費３);
+        row_前_公費３.setTxtShokujiTeikyoNobeNissu(RString.EMPTY);
+        row_前_公費３.setTxtSeikyugakuZengo(前);
+        row_前_公費３.setTxtKohiSeikyu(RString.EMPTY);
+        row_前_公費３.setTxtShokujiTeikyohiSeikyugaku(RString.EMPTY);
+        row_前_公費３.setTxtSaishinsaKaisu(RString.EMPTY);
+        row_前_公費３.setTxtKagoKaisu(RString.EMPTY);
+        row_前_公費３.setTxtShinsaYM(RString.EMPTY);
+        dgShokujiHiyoGokeiFromH1504_Row row_後_公費３ = new dgShokujiHiyoGokeiFromH1504_Row();
+        row_後_公費３.setTxtShokujiTeikyohiGokei(RString.EMPTY);
+        row_後_公費３.setTxtHyojunFutangakuTsuki(RString.EMPTY);
+        row_後_公費３.setTxtHyojunFutangakuHi(RString.EMPTY);
+        row_後_公費３.setTxtKohi(公費３);
+        row_後_公費３.setTxtShokujiTeikyoNobeNissu(RString.EMPTY);
+        row_後_公費３.setTxtSeikyugakuZengo(後);
+        row_後_公費３.setTxtKohiSeikyu(RString.EMPTY);
+        row_後_公費３.setTxtShokujiTeikyohiSeikyugaku(RString.EMPTY);
+        row_後_公費３.setTxtSaishinsaKaisu(RString.EMPTY);
+        row_後_公費３.setTxtKagoKaisu(RString.EMPTY);
+        row_後_公費３.setTxtShinsaYM(RString.EMPTY);
+        dgShokujiHiyoGokeiFromH1504_Row row_公費３ = new dgShokujiHiyoGokeiFromH1504_Row();
+        row_公費３.setTxtShokujiTeikyohiGokei(RString.EMPTY);
+        row_公費３.setTxtHyojunFutangakuTsuki(RString.EMPTY);
+        row_公費３.setTxtHyojunFutangakuHi(RString.EMPTY);
+        row_公費３.setTxtKohi(公費３);
+        row_公費３.setTxtShokujiTeikyoNobeNissu(new RString(給付実績食事費用1504.get公費３対象食事提供延べ日数()));
+        row_公費３.setTxtSeikyugakuZengo(RString.EMPTY);
+        row_公費３.setTxtKohiSeikyu(get金額(給付実績食事費用1504.get公費３食事提供費請求額()));
+        row_公費３.setTxtShokujiTeikyohiSeikyugaku(RString.EMPTY);
+        row_公費３.setTxtSaishinsaKaisu(RString.EMPTY);
+        row_公費３.setTxtKagoKaisu(RString.EMPTY);
+        row_公費３.setTxtShinsaYM(RString.EMPTY);
+        dataSources.add(row_前_公費２);
+        dataSources.add(row_後_公費２);
+        dataSources.add(row_公費２);
+        dataSources.add(row_前_公費３);
+        dataSources.add(row_後_公費３);
+        dataSources.add(row_公費３);
     }
 
     /**
@@ -259,11 +256,19 @@ public class ShokujiHiyoShokaiHandler {
      */
     public void set給付実績明細(List<KyufujissekiMeisaiBusiness> 給付実績明細等) {
         List<dgShokujiHiyoMeisaiFromH1504_Row> dataSources = new ArrayList<>();
+        RString 整理番号 = div.getCcdKyufuJissekiHeader().get整理番号();
+        RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
+        RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
+        RString サービス提供年月 = div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString();
+        if (!提供年月.isBeforeOrEquals(new FlexibleYearMonth(サービス提供年月))) {
+            div.getDgShokujiHiyoMeisaiFromH1504().setDataSource(dataSources);
+            return;
+        }
         for (KyufujissekiMeisaiBusiness 給付実績明細 : 給付実績明細等) {
-            if (div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toString()
-                    .equals(給付実績明細.get給付実績明細().getサービス提供年月().toString())
-                    && div.getCcdKyufuJissekiHeader().get事業者番号().toString()
-                    .equals(給付実績明細.get給付実績明細().get事業所番号().toString())) {
+            if (事業者番号.equals(給付実績明細.get給付実績明細().get事業所番号().getColumnValue())
+                    && 整理番号.equals(給付実績明細.get給付実績明細().get整理番号())
+                    && 様式番号.equals(給付実績明細.get給付実績明細().get入力識別番号().getColumnValue())
+                    && サービス提供年月.equals(給付実績明細.get給付実績明細().getサービス提供年月().toDateString())) {
                 dgShokujiHiyoMeisaiFromH1504_Row row = new dgShokujiHiyoMeisaiFromH1504_Row();
                 row.setTxtServiceName(給付実績明細.getサービス種類略称());
                 row.setTxtKettei(RString.EMPTY);
@@ -302,11 +307,19 @@ public class ShokujiHiyoShokaiHandler {
      */
     public void set給付実績食事費用15031(List<KyufujissekiShokujiHiyo> 給付実績食事費用1503等) {
         List<dgShokujiHiyoToH1503_Row> dataSources = new ArrayList<>();
+        RString 整理番号 = div.getCcdKyufuJissekiHeader().get整理番号();
+        RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
+        RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
+        RString サービス提供年月 = div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toDateString();
+        if (提供年月.isBeforeOrEquals(new FlexibleYearMonth(サービス提供年月))) {
+            div.getDgShokujiHiyoToH1503().setDataSource(dataSources);
+            return;
+        }
         for (KyufujissekiShokujiHiyo 給付実績食事費用1503 : 給付実績食事費用1503等) {
-            if (div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toString()
-                    .equals(給付実績食事費用1503.getサービス提供年月().toString())
-                    && div.getCcdKyufuJissekiHeader().get事業者番号().toString()
-                    .equals(給付実績食事費用1503.get事業所番号().toString())) {
+            if (事業者番号.equals(給付実績食事費用1503.get事業所番号().getColumnValue())
+                    && 整理番号.equals(給付実績食事費用1503.get整理番号())
+                    && 様式番号.equals(給付実績食事費用1503.get入力識別番号().getColumnValue())
+                    && サービス提供年月.equals(給付実績食事費用1503.getサービス提供年月().toDateString())) {
                 dgShokujiHiyoToH1503_Row row = new dgShokujiHiyoToH1503_Row();
                 row.setTxtZengo(RString.EMPTY);
                 row.setTxtTeikyoNissu(new RString(給付実績食事費用1503.get基本_提供日数()));
@@ -383,109 +396,96 @@ public class ShokujiHiyoShokaiHandler {
                 dataSources.add(row_公費１);
                 dataSources.add(row_公費２);
                 dataSources.add(row_公費３);
+                set給付実績食事費用15032(給付実績食事費用1503, dataSources);
             }
         }
         div.getDgShokujiHiyoToH1503().setDataSource(dataSources);
-        this.set給付実績食事費用15032(給付実績食事費用1503等);
+        List<KyufujissekiShokujiHiyo> dataToRepeat = get食費1504サービス提供年月リスト(給付実績食事費用1503等);
+        setGetsuBtn(dataToRepeat, new FlexibleYearMonth(サービス提供年月));
     }
 
-    /**
-     * 給付実績食事費用15032
-     *
-     * @param 給付実績食事費用1503等 List<KyufujissekiShokujiHiyo>
-     */
-    public void set給付実績食事費用15032(List<KyufujissekiShokujiHiyo> 給付実績食事費用1503等) {
-        List<dgShokujiHiyoToH1503_Row> dataSources = new ArrayList<>();
-        for (KyufujissekiShokujiHiyo 給付実績食事費用1503 : 給付実績食事費用1503等) {
-            if (div.getCcdKyufuJissekiHeader().getサービス提供年月().getYearMonth().toString()
-                    .equals(給付実績食事費用1503.getサービス提供年月().toString())
-                    && div.getCcdKyufuJissekiHeader().get事業者番号().toString()
-                    .equals(給付実績食事費用1503.get事業所番号().toString())) {
-                dgShokujiHiyoToH1503_Row row_後 = new dgShokujiHiyoToH1503_Row();
-                row_後.setTxtZengo(後);
-                row_後.setTxtTeikyoNissu(RString.EMPTY);
-                row_後.setTxtTokubetsuTeikyoNissu(RString.EMPTY);
-                row_後.setTxtTeikyoTanka(new RString(給付実績食事費用1503.get後_基本食提供費用提供単価()));
-                row_後.setTxtTokubetsuTeikyoTanka(new RString(給付実績食事費用1503.get後_特別食提供費用提供単価()));
-                row_後.setTxtTeikyoKingaku(RString.EMPTY);
-                row_後.setTxtTokubetsuTeikyoKingaku(RString.EMPTY);
-                row_後.setTxtShokujiTeikyohiGokei(RString.EMPTY);
-                row_後.setTxtHyojunFutangakuTsuki(RString.EMPTY);
-                row_後.setTxtHyojunFutangakuHi(RString.EMPTY);
-                row_後.setTxtKohi(RString.EMPTY);
-                row_後.setTxtShokujiTeikyoNobeNissu(RString.EMPTY);
-                row_後.setTxtSeikyugakuZengo(new RString(給付実績食事費用1503.get後_食事提供費請求額()));
-                row_後.setTxtKohiSeikyu(RString.EMPTY);
-                row_後.setTxtSaishinsaKaisu(RString.EMPTY);
-                row_後.setTxtKagoKaisu(RString.EMPTY);
-                row_後.setTxtShinsaYM(RString.EMPTY);
-                dgShokujiHiyoToH1503_Row row_後_公費１ = new dgShokujiHiyoToH1503_Row();
-                row_後_公費１.setTxtZengo(後);
-                row_後_公費１.setTxtTeikyoNissu(RString.EMPTY);
-                row_後_公費１.setTxtTokubetsuTeikyoNissu(RString.EMPTY);
-                row_後_公費１.setTxtTeikyoTanka(RString.EMPTY);
-                row_後_公費１.setTxtTokubetsuTeikyoTanka(RString.EMPTY);
-                row_後_公費１.setTxtTeikyoKingaku(RString.EMPTY);
-                row_後_公費１.setTxtTokubetsuTeikyoKingaku(RString.EMPTY);
-                row_後_公費１.setTxtShokujiTeikyohiGokei(RString.EMPTY);
-                row_後_公費１.setTxtHyojunFutangakuTsuki(RString.EMPTY);
-                row_後_公費１.setTxtHyojunFutangakuHi(RString.EMPTY);
-                row_後_公費１.setTxtKohi(公費１);
-                row_後_公費１.setTxtShokujiTeikyoNobeNissu(RString.EMPTY);
-                row_後_公費１.setTxtSeikyugakuZengo(RString.EMPTY);
-                row_後_公費１.setTxtKohiSeikyu(RString.EMPTY);
-                row_後_公費１.setTxtSaishinsaKaisu(RString.EMPTY);
-                row_後_公費１.setTxtKagoKaisu(RString.EMPTY);
-                row_後_公費１.setTxtShinsaYM(RString.EMPTY);
-                dgShokujiHiyoToH1503_Row row_後_公費２ = new dgShokujiHiyoToH1503_Row();
-                row_後_公費２.setTxtZengo(後);
-                row_後_公費２.setTxtTeikyoNissu(RString.EMPTY);
-                row_後_公費２.setTxtTokubetsuTeikyoNissu(RString.EMPTY);
-                row_後_公費２.setTxtTeikyoTanka(RString.EMPTY);
-                row_後_公費２.setTxtTokubetsuTeikyoTanka(RString.EMPTY);
-                row_後_公費２.setTxtTeikyoKingaku(RString.EMPTY);
-                row_後_公費２.setTxtTokubetsuTeikyoKingaku(RString.EMPTY);
-                row_後_公費２.setTxtShokujiTeikyohiGokei(RString.EMPTY);
-                row_後_公費２.setTxtHyojunFutangakuTsuki(RString.EMPTY);
-                row_後_公費２.setTxtHyojunFutangakuHi(RString.EMPTY);
-                row_後_公費２.setTxtKohi(公費２);
-                row_後_公費２.setTxtShokujiTeikyoNobeNissu(RString.EMPTY);
-                row_後_公費２.setTxtSeikyugakuZengo(RString.EMPTY);
-                row_後_公費２.setTxtKohiSeikyu(RString.EMPTY);
-                row_後_公費２.setTxtSaishinsaKaisu(RString.EMPTY);
-                row_後_公費２.setTxtKagoKaisu(RString.EMPTY);
-                row_後_公費２.setTxtShinsaYM(RString.EMPTY);
-                dgShokujiHiyoToH1503_Row row_後_公費３ = new dgShokujiHiyoToH1503_Row();
-                row_後_公費３.setTxtZengo(後);
-                row_後_公費３.setTxtTeikyoNissu(RString.EMPTY);
-                row_後_公費３.setTxtTeikyoTanka(RString.EMPTY);
-                row_後_公費３.setTxtTeikyoKingaku(RString.EMPTY);
-                row_後_公費３.setTxtShokujiTeikyohiGokei(RString.EMPTY);
-                row_後_公費３.setTxtHyojunFutangakuTsuki(RString.EMPTY);
-                row_後_公費３.setTxtHyojunFutangakuHi(RString.EMPTY);
-                row_後_公費３.setTxtKohi(公費３);
-                row_後_公費３.setTxtShokujiTeikyoNobeNissu(RString.EMPTY);
-                row_後_公費３.setTxtSeikyugakuZengo(RString.EMPTY);
-                row_後_公費３.setTxtKohiSeikyu(RString.EMPTY);
-                row_後_公費３.setTxtSaishinsaKaisu(RString.EMPTY);
-                row_後_公費３.setTxtKagoKaisu(RString.EMPTY);
-                row_後_公費３.setTxtShinsaYM(RString.EMPTY);
-                dataSources.add(row_後);
-                dataSources.add(row_後_公費１);
-                dataSources.add(row_後_公費２);
-                dataSources.add(row_後_公費３);
-            }
-        }
-        div.getDgShokujiHiyoToH1503().setDataSource(dataSources);
+    private void set給付実績食事費用15032(KyufujissekiShokujiHiyo 給付実績食事費用1503, List<dgShokujiHiyoToH1503_Row> dataSources) {
+        dgShokujiHiyoToH1503_Row row_後 = new dgShokujiHiyoToH1503_Row();
+        row_後.setTxtZengo(後);
+        row_後.setTxtTeikyoNissu(RString.EMPTY);
+        row_後.setTxtTokubetsuTeikyoNissu(RString.EMPTY);
+        row_後.setTxtTeikyoTanka(new RString(給付実績食事費用1503.get後_基本食提供費用提供単価()));
+        row_後.setTxtTokubetsuTeikyoTanka(new RString(給付実績食事費用1503.get後_特別食提供費用提供単価()));
+        row_後.setTxtTeikyoKingaku(RString.EMPTY);
+        row_後.setTxtTokubetsuTeikyoKingaku(RString.EMPTY);
+        row_後.setTxtShokujiTeikyohiGokei(RString.EMPTY);
+        row_後.setTxtHyojunFutangakuTsuki(RString.EMPTY);
+        row_後.setTxtHyojunFutangakuHi(RString.EMPTY);
+        row_後.setTxtKohi(RString.EMPTY);
+        row_後.setTxtShokujiTeikyoNobeNissu(RString.EMPTY);
+        row_後.setTxtSeikyugakuZengo(new RString(給付実績食事費用1503.get後_食事提供費請求額()));
+        row_後.setTxtKohiSeikyu(RString.EMPTY);
+        row_後.setTxtSaishinsaKaisu(RString.EMPTY);
+        row_後.setTxtKagoKaisu(RString.EMPTY);
+        row_後.setTxtShinsaYM(RString.EMPTY);
+        dgShokujiHiyoToH1503_Row row_後_公費１ = new dgShokujiHiyoToH1503_Row();
+        row_後_公費１.setTxtZengo(後);
+        row_後_公費１.setTxtTeikyoNissu(RString.EMPTY);
+        row_後_公費１.setTxtTokubetsuTeikyoNissu(RString.EMPTY);
+        row_後_公費１.setTxtTeikyoTanka(RString.EMPTY);
+        row_後_公費１.setTxtTokubetsuTeikyoTanka(RString.EMPTY);
+        row_後_公費１.setTxtTeikyoKingaku(RString.EMPTY);
+        row_後_公費１.setTxtTokubetsuTeikyoKingaku(RString.EMPTY);
+        row_後_公費１.setTxtShokujiTeikyohiGokei(RString.EMPTY);
+        row_後_公費１.setTxtHyojunFutangakuTsuki(RString.EMPTY);
+        row_後_公費１.setTxtHyojunFutangakuHi(RString.EMPTY);
+        row_後_公費１.setTxtKohi(公費１);
+        row_後_公費１.setTxtShokujiTeikyoNobeNissu(RString.EMPTY);
+        row_後_公費１.setTxtSeikyugakuZengo(RString.EMPTY);
+        row_後_公費１.setTxtKohiSeikyu(RString.EMPTY);
+        row_後_公費１.setTxtSaishinsaKaisu(RString.EMPTY);
+        row_後_公費１.setTxtKagoKaisu(RString.EMPTY);
+        row_後_公費１.setTxtShinsaYM(RString.EMPTY);
+        dgShokujiHiyoToH1503_Row row_後_公費２ = new dgShokujiHiyoToH1503_Row();
+        row_後_公費２.setTxtZengo(後);
+        row_後_公費２.setTxtTeikyoNissu(RString.EMPTY);
+        row_後_公費２.setTxtTokubetsuTeikyoNissu(RString.EMPTY);
+        row_後_公費２.setTxtTeikyoTanka(RString.EMPTY);
+        row_後_公費２.setTxtTokubetsuTeikyoTanka(RString.EMPTY);
+        row_後_公費２.setTxtTeikyoKingaku(RString.EMPTY);
+        row_後_公費２.setTxtTokubetsuTeikyoKingaku(RString.EMPTY);
+        row_後_公費２.setTxtShokujiTeikyohiGokei(RString.EMPTY);
+        row_後_公費２.setTxtHyojunFutangakuTsuki(RString.EMPTY);
+        row_後_公費２.setTxtHyojunFutangakuHi(RString.EMPTY);
+        row_後_公費２.setTxtKohi(公費２);
+        row_後_公費２.setTxtShokujiTeikyoNobeNissu(RString.EMPTY);
+        row_後_公費２.setTxtSeikyugakuZengo(RString.EMPTY);
+        row_後_公費２.setTxtKohiSeikyu(RString.EMPTY);
+        row_後_公費２.setTxtSaishinsaKaisu(RString.EMPTY);
+        row_後_公費２.setTxtKagoKaisu(RString.EMPTY);
+        row_後_公費２.setTxtShinsaYM(RString.EMPTY);
+        dgShokujiHiyoToH1503_Row row_後_公費３ = new dgShokujiHiyoToH1503_Row();
+        row_後_公費３.setTxtZengo(後);
+        row_後_公費３.setTxtTeikyoNissu(RString.EMPTY);
+        row_後_公費３.setTxtTeikyoTanka(RString.EMPTY);
+        row_後_公費３.setTxtTeikyoKingaku(RString.EMPTY);
+        row_後_公費３.setTxtShokujiTeikyohiGokei(RString.EMPTY);
+        row_後_公費３.setTxtHyojunFutangakuTsuki(RString.EMPTY);
+        row_後_公費３.setTxtHyojunFutangakuHi(RString.EMPTY);
+        row_後_公費３.setTxtKohi(公費３);
+        row_後_公費３.setTxtShokujiTeikyoNobeNissu(RString.EMPTY);
+        row_後_公費３.setTxtSeikyugakuZengo(RString.EMPTY);
+        row_後_公費３.setTxtKohiSeikyu(RString.EMPTY);
+        row_後_公費３.setTxtSaishinsaKaisu(RString.EMPTY);
+        row_後_公費３.setTxtKagoKaisu(RString.EMPTY);
+        row_後_公費３.setTxtShinsaYM(RString.EMPTY);
+        dataSources.add(row_後);
+        dataSources.add(row_後_公費１);
+        dataSources.add(row_後_公費２);
+        dataSources.add(row_後_公費３);
     }
 
     /**
      * ボタン状態の設定です。
      *
      * @param 識別番号管理 識別番号管理
-     * @param サービス提供年月 サービス提供年月
      */
-    public void setButton(ShikibetsuNoKanri 識別番号管理, FlexibleYearMonth サービス提供年月) {
+    public void setButton(ShikibetsuNoKanri 識別番号管理) {
         div.getBtnShokuji().setDisabled(true);
         if (ZERO.equals(識別番号管理.get基本設定区分())) {
             div.getBtnKihon().setDisabled(true);
@@ -503,9 +503,9 @@ public class ShokujiHiyoShokaiHandler {
             div.getBtnKinkyujiShisetsuRyoyo().setDisabled(false);
         }
         if (ZERO.equals(識別番号管理.get所定疾患施設療養設定区分())) {
-            div.getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
+            div.getBtnShoteiShikkanShisetsuRyoyo().setDisabled(true);
         } else {
-            div.getBtnKinkyujiShisetsuRyoyo().setDisabled(false);
+            div.getBtnShoteiShikkanShisetsuRyoyo().setDisabled(false);
         }
         if (ZERO.equals(識別番号管理.get福祉用具購入費設定区分())) {
             div.getBtnFukushiYoguKonyu().setDisabled(true);
@@ -561,9 +561,9 @@ public class ShokujiHiyoShokaiHandler {
      */
     public void setJigyoshaBtn(List<KyufuJissekiHedajyoho2> 事業者番号リスト, RString 整理番号, RString 事業者番号,
             RString 様式番号, RString サービス提供年月, RString 実績区分コード) {
+        div.getBtnMaeJigyosha().setDisabled(true);
+        div.getBtnAtoJigyosha().setDisabled(true);
         if (!事業者番号リスト.isEmpty()) {
-            div.getBtnMaeJigyosha().setDisabled(true);
-            div.getBtnAtoJigyosha().setDisabled(true);
             int index = get事業者番号index(事業者番号リスト, 整理番号, 事業者番号, 様式番号, サービス提供年月, 実績区分コード);
             if (0 < index) {
                 div.getBtnMaeJigyosha().setDisabled(false);
@@ -580,23 +580,22 @@ public class ShokujiHiyoShokaiHandler {
      * @param サービス提供年月リスト サービス提供年月リスト
      * @param サービス提供年月 サービス提供年月
      */
-    public void setGetsuBtn(List<FlexibleYearMonth> サービス提供年月リスト, FlexibleYearMonth サービス提供年月) {
+    public void setGetsuBtn(List<KyufujissekiShokujiHiyo> サービス提供年月リスト, FlexibleYearMonth サービス提供年月) {
         Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
-
-        if (サービス提供年月.isBeforeOrEquals(サービス提供年月リスト.get(サービス提供年月リスト.size() - 1))) {
-            div.getBtnZengetsu().setDisabled(true);
-        } else {
-            div.getBtnZengetsu().setDisabled(false);
-        }
-        if (サービス提供年月リスト.get(INT_ZERO).isBeforeOrEquals(サービス提供年月)) {
-            div.getBtnJigetsu().setDisabled(true);
-        } else {
-            div.getBtnJigetsu().setDisabled(false);
+        div.getBtnZengetsu().setDisabled(true);
+        div.getBtnJigetsu().setDisabled(true);
+        if (サービス提供年月リスト != null && !サービス提供年月リスト.isEmpty()) {
+            if (!サービス提供年月.isBeforeOrEquals(サービス提供年月リスト.get(サービス提供年月リスト.size() - 1).getサービス提供年月())) {
+                div.getBtnZengetsu().setDisabled(false);
+            }
+            if (!サービス提供年月リスト.get(INT_ZERO).getサービス提供年月().isBeforeOrEquals(サービス提供年月)) {
+                div.getBtnJigetsu().setDisabled(false);
+            }
         }
     }
 
     /**
-     * change事業者です
+     * change事業者です。
      *
      * @param 事業者 事業者
      * @param 事業者番号リスト 事業者番号リスト
@@ -630,10 +629,10 @@ public class ShokujiHiyoShokaiHandler {
                     && !RString.isNullOrEmpty(事業者番号リスト.get(index + i).get事業所番号().value())) {
                 div.getCcdKyufuJissekiHeader().set事業者番号(事業者番号リスト.get(index + i).get事業所番号().value());
             }
-            setDataGrid(事業者番号リスト.get(index + i).getサービス提供年月(), 給付実績食事費用1504, 給付実績明細, 給付実績食事費用1503);
+            setDataGrid(給付実績食事費用1504, 給付実績明細, 給付実績食事費用1503);
             div.getBtnMaeJigyosha().setDisabled(true);
             div.getBtnAtoJigyosha().setDisabled(true);
-            if (index + i - 1 > 0) {
+            if (0 < index + i) {
                 div.getBtnMaeJigyosha().setDisabled(false);
             }
             if (index + i + 1 < 事業者番号リスト.size()) {
@@ -657,139 +656,67 @@ public class ShokujiHiyoShokaiHandler {
         return 0;
     }
 
-    private void setDataGrid(FlexibleYearMonth サービス提供年月,
-            List<KyufujissekiShokujiHiyo> 給付実績食事費用1504,
+    /**
+     * setDataGridです。
+     *
+     * @param 給付実績食事費用1504 List<KyufujissekiShokujiHiyo>
+     * @param 給付実績明細 List<KyufujissekiMeisaiBusiness>
+     * @param 給付実績食事費用1503 List<KyufujissekiShokujiHiyo>
+     */
+    public void setDataGrid(List<KyufujissekiShokujiHiyo> 給付実績食事費用1504,
             List<KyufujissekiMeisaiBusiness> 給付実績明細,
             List<KyufujissekiShokujiHiyo> 給付実績食事費用1503) {
-        if (提供年月.isBeforeOrEquals(サービス提供年月)) {
-            for (KyufujissekiShokujiHiyo 給付実績食事費用15041 : 給付実績食事費用1504) {
-                div.getBtnZengetsu().setDisabled(サービス提供年月.minusMonth(INT_1).equals(給付実績食事費用15041.getサービス提供年月()));
-                div.getBtnJigetsu().setDisabled(サービス提供年月.plusMonth(INT_1).equals(給付実績食事費用15041.getサービス提供年月()));
+        set給付実績食事費用15041(給付実績食事費用1504);
+        set給付実績明細(給付実績明細);
+        set給付実績食事費用15031(給付実績食事費用1503);
+    }
+
+    /**
+     * change年月です。
+     *
+     * @param date RString
+     * @param 給付実績情報照会情報 KyufuJissekiPrmBusiness
+     * @param サービス提供年月 FlexibleYearMonth
+     * @param 整理番号 RString
+     * @param 被保険者番号 HihokenshaNo
+     * @param 識別番号 NyuryokuShikibetsuNo
+     */
+    public void change年月(RString date, KyufuJissekiPrmBusiness 給付実績情報照会情報,
+            FlexibleYearMonth サービス提供年月, RString 整理番号, HihokenshaNo 被保険者番号,
+            NyuryokuShikibetsuNo 識別番号) {
+        List<KyufujissekiShokujiHiyo> 給付実績食事費用1504 = 給付実績情報照会情報.getCsData_E();
+        int index = INT_ZERO;
+        List<KyufujissekiShokujiHiyo> サービス提供年月リスト = get食費1504サービス提供年月リスト(給付実績食事費用1504);
+        Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
+        for (int i = 0; i < サービス提供年月リスト.size(); i++) {
+            if (サービス提供年月.equals(サービス提供年月リスト.get(i).getサービス提供年月())) {
+                index = i;
+                break;
             }
-            set給付実績食事費用15041(給付実績食事費用1504);
-            for (KyufujissekiMeisaiBusiness 給付実績明細1 : 給付実績明細) {
-                div.getBtnZengetsu().setDisabled(サービス提供年月.minusMonth(INT_1).equals(給付実績明細1.get給付実績明細().getサービス提供年月()));
-                div.getBtnJigetsu().setDisabled(サービス提供年月.plusMonth(INT_1).equals(給付実績明細1.get給付実績明細().getサービス提供年月()));
-            }
-            set給付実績明細(給付実績明細);
+        }
+        FlexibleYearMonth 今提供年月;
+        RString 新整理番号;
+        NyuryokuShikibetsuNo 新識別番号;
+        RString 事業者番号;
+        if (前月.equals(date)) {
+            今提供年月 = サービス提供年月リスト.get(index + 1).getサービス提供年月();
+            新整理番号 = サービス提供年月リスト.get(index + 1).get整理番号();
+            新識別番号 = サービス提供年月リスト.get(index + 1).get入力識別番号();
+            事業者番号 = サービス提供年月リスト.get(index + 1).get事業所番号().value();
+            div.getBtnJigetsu().setDisabled(false);
         } else {
-            for (KyufujissekiShokujiHiyo 給付実績食事費用15031 : 給付実績食事費用1503) {
-                div.getBtnZengetsu().setDisabled(サービス提供年月.minusMonth(INT_1).equals(給付実績食事費用15031.getサービス提供年月()));
-                div.getBtnJigetsu().setDisabled(サービス提供年月.plusMonth(INT_1).equals(給付実績食事費用15031.getサービス提供年月()));
-            }
-            set給付実績食事費用15031(給付実績食事費用1503);
+            今提供年月 = サービス提供年月リスト.get(index - 1).getサービス提供年月();
+            新整理番号 = サービス提供年月リスト.get(index - 1).get整理番号();
+            新識別番号 = サービス提供年月リスト.get(index - 1).get入力識別番号();
+            事業者番号 = サービス提供年月リスト.get(index - 1).get事業所番号().value();
+            div.getBtnZengetsu().setDisabled(false);
         }
-    }
-
-    /**
-     * change食費1504年月です。
-     *
-     * @param data RString
-     * @param 給付実績食事費用1504 List<KyufujissekiShokujiHiyo>
-     * @param サービス提供年月 FlexibleYearMonth
-     * @param 整理番号 RString
-     * @param 被保険者番号 HihokenshaNo
-     * @param 識別番号 NyuryokuShikibetsuNo
-     */
-    public void change食費1504年月(RString data, List<KyufujissekiShokujiHiyo> 給付実績食事費用1504,
-            FlexibleYearMonth サービス提供年月, RString 整理番号, HihokenshaNo 被保険者番号, NyuryokuShikibetsuNo 識別番号) {
-        int index = INT_ZERO;
-        List<FlexibleYearMonth> サービス提供年月リスト = get食費1504サービス提供年月リスト(給付実績食事費用1504);
-        Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
-        for (int i = 0; i < サービス提供年月リスト.size(); i++) {
-            if (サービス提供年月.equals(サービス提供年月リスト.get(i))) {
-                index = i;
-                break;
-            }
-        }
-        FlexibleYearMonth 今提供年月 = FlexibleYearMonth.EMPTY;
-        if (INT_ZERO < index && index < サービス提供年月リスト.size() - 1) {
-            if (前月.equals(data)) {
-                今提供年月 = サービス提供年月リスト.get(index + 1);
-            } else {
-                今提供年月 = サービス提供年月リスト.get(index - 1);
-            }
-        }
-        this.set給付実績食事費用15041(get給付実績食事費用1504等(給付実績食事費用1504, div.getCcdKyufuJissekiHeader().get整理番号(),
-                div.getCcdKyufuJissekiHeader().get事業者番号(),
-                div.getCcdKyufuJissekiHeader().get様式番号(),
-                今提供年月.toDateString()));
-        div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 今提供年月, 整理番号, 識別番号);
-        setGetsuBtn(サービス提供年月リスト, 今提供年月);
-    }
-
-    /**
-     * change明細年月です。
-     *
-     * @param data RString
-     * @param 給付実績明細 List<KyufujissekiMeisaiBusiness>
-     * @param サービス提供年月 FlexibleYearMonth
-     * @param 整理番号 RString
-     * @param 被保険者番号 HihokenshaNo
-     * @param 識別番号 NyuryokuShikibetsuNo
-     */
-    public void change明細年月(RString data, List<KyufujissekiMeisaiBusiness> 給付実績明細,
-            FlexibleYearMonth サービス提供年月, RString 整理番号, HihokenshaNo 被保険者番号, NyuryokuShikibetsuNo 識別番号) {
-        int index = INT_ZERO;
-        List<FlexibleYearMonth> サービス提供年月リスト = get明細サービス提供年月リスト(給付実績明細);
-        Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
-        for (int i = 0; i < サービス提供年月リスト.size(); i++) {
-            if (サービス提供年月.equals(サービス提供年月リスト.get(i))) {
-                index = i;
-                break;
-            }
-        }
-        FlexibleYearMonth 今提供年月 = FlexibleYearMonth.EMPTY;
-        if (INT_ZERO < index && index < サービス提供年月リスト.size() - 1) {
-            if (前月.equals(data)) {
-                今提供年月 = サービス提供年月リスト.get(index + 1);
-            } else {
-                今提供年月 = サービス提供年月リスト.get(index - 1);
-            }
-        }
-        this.set給付実績明細(get給付実績明細等(給付実績明細, div.getCcdKyufuJissekiHeader().get整理番号(),
-                div.getCcdKyufuJissekiHeader().get事業者番号(),
-                div.getCcdKyufuJissekiHeader().get様式番号(),
-                今提供年月.toDateString()));
-        div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 今提供年月, 整理番号, 識別番号);
-        setGetsuBtn(サービス提供年月リスト, 今提供年月);
-    }
-
-    /**
-     * change食費1503年月です。
-     *
-     * @param data RString
-     * @param 給付実績食事費用1503 List<KyufujissekiShokujiHiyo>
-     * @param サービス提供年月 FlexibleYearMonth
-     * @param 整理番号 RString
-     * @param 被保険者番号 HihokenshaNo
-     * @param 識別番号 NyuryokuShikibetsuNo
-     */
-    public void change食費1503年月(RString data, List<KyufujissekiShokujiHiyo> 給付実績食事費用1503,
-            FlexibleYearMonth サービス提供年月, RString 整理番号, HihokenshaNo 被保険者番号, NyuryokuShikibetsuNo 識別番号) {
-        int index = INT_ZERO;
-        List<FlexibleYearMonth> サービス提供年月リスト = get食費1503サービス提供年月リスト(給付実績食事費用1503);
-        Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
-        for (int i = 0; i < サービス提供年月リスト.size(); i++) {
-            if (サービス提供年月.equals(サービス提供年月リスト.get(i))) {
-                index = i;
-                break;
-            }
-        }
-        FlexibleYearMonth 今提供年月 = FlexibleYearMonth.EMPTY;
-        if (INT_ZERO < index && index < サービス提供年月リスト.size() - 1) {
-            if (前月.equals(data)) {
-                今提供年月 = サービス提供年月リスト.get(index + 1);
-            } else {
-                今提供年月 = サービス提供年月リスト.get(index - 1);
-            }
-        }
-        this.set給付実績食事費用15031(get給付実績食事費用1503等(給付実績食事費用1503, div.getCcdKyufuJissekiHeader().get整理番号(),
-                div.getCcdKyufuJissekiHeader().get事業者番号(),
-                div.getCcdKyufuJissekiHeader().get様式番号(),
-                今提供年月.toDateString()));
-        div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 今提供年月, 整理番号, 識別番号);
-        setGetsuBtn(サービス提供年月リスト, 今提供年月);
+        div.getCcdKyufuJissekiHeader().initialize(被保険者番号, 今提供年月, 新整理番号, 新識別番号);
+        div.getCcdKyufuJissekiHeader().setサービス提供年月(new RDate(今提供年月.toString()));
+        div.getCcdKyufuJissekiHeader().set整理番号(新整理番号);
+        div.getCcdKyufuJissekiHeader().set様式番号(新識別番号.value());
+        div.getCcdKyufuJissekiHeader().set事業者番号(事業者番号);
+        setDataGrid(給付実績情報照会情報.getCsData_E(), 給付実績情報照会情報.getCsData_B(), 給付実績情報照会情報.getCsData_E());
     }
 
     /**
@@ -867,44 +794,24 @@ public class ShokujiHiyoShokaiHandler {
         return 給付実績食事費用1503等;
     }
 
-    private List<FlexibleYearMonth> get食費1504サービス提供年月リスト(List<KyufujissekiShokujiHiyo> 給付実績食事費用1504) {
+    private List<KyufujissekiShokujiHiyo> get食費1504サービス提供年月リスト(List<KyufujissekiShokujiHiyo> 給付実績食事費用1504) {
         List<FlexibleYearMonth> 食費1504提供年月リスト = new ArrayList<>();
+        List<KyufujissekiShokujiHiyo> 給付実績食事費用 = new ArrayList<>();
         for (int i = 0; i < 給付実績食事費用1504.size(); i++) {
             FlexibleYearMonth 提供年月1 = 給付実績食事費用1504.get(i).getサービス提供年月();
             if (!食費1504提供年月リスト.contains(提供年月1)) {
                 食費1504提供年月リスト.add(提供年月1);
+                給付実績食事費用.add(給付実績食事費用1504.get(i));
             }
         }
-        return 食費1504提供年月リスト;
+        return 給付実績食事費用;
     }
 
-    private List<FlexibleYearMonth> get明細サービス提供年月リスト(List<KyufujissekiMeisaiBusiness> 給付実績明細) {
-        List<FlexibleYearMonth> 明細提供年月リスト = new ArrayList<>();
-        for (int i = 0; i < 給付実績明細.size(); i++) {
-            FlexibleYearMonth 提供年月1 = 給付実績明細.get(i).get給付実績明細().getサービス提供年月();
-            if (!明細提供年月リスト.contains(提供年月1)) {
-                明細提供年月リスト.add(提供年月1);
-            }
-        }
-        return 明細提供年月リスト;
-    }
-
-    private List<FlexibleYearMonth> get食費1503サービス提供年月リスト(List<KyufujissekiShokujiHiyo> 給付実績食事費用1503) {
-        List<FlexibleYearMonth> 食費1503提供年月リスト = new ArrayList<>();
-        for (int i = 0; i < 給付実績食事費用1503.size(); i++) {
-            FlexibleYearMonth 提供年月1 = 給付実績食事費用1503.get(i).getサービス提供年月();
-            if (!食費1503提供年月リスト.contains(提供年月1)) {
-                食費1503提供年月リスト.add(提供年月1);
-            }
-        }
-        return 食費1503提供年月リスト;
-    }
-
-    private static class DateComparatorServiceTeikyoYM implements Comparator<FlexibleYearMonth>, Serializable {
+    private static class DateComparatorServiceTeikyoYM implements Comparator<KyufujissekiShokujiHiyo>, Serializable {
 
         @Override
-        public int compare(FlexibleYearMonth o1, FlexibleYearMonth o2) {
-            return o2.compareTo(o1);
+        public int compare(KyufujissekiShokujiHiyo o1, KyufujissekiShokujiHiyo o2) {
+            return o2.getサービス提供年月().compareTo(o1.getサービス提供年月());
         }
     }
 
