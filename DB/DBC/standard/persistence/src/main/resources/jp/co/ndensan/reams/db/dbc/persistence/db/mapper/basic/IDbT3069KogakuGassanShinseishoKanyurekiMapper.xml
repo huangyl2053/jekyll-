@@ -34,7 +34,7 @@
          "DbT3069KogakuGassanShinseishoKanyureki"."hokenshaMei" as "dbT3069KogakuGassanShinseishoKanyureki_hokenshaMei",
          "DbT3069KogakuGassanShinseishoKanyureki"."kanyuKaishiYMD" as "dbT3069KogakuGassanShinseishoKanyureki_kanyuKaishiYMD",
          "DbT3069KogakuGassanShinseishoKanyureki"."kanyuShuryoYMD" as "dbT3069KogakuGassanShinseishoKanyureki_kanyuShuryoYMD",
-         "DbT3069KogakuGassanShinseishoKanyureki"."jikoFutanShomeisho_SeiriNo" as "dbT3069KogakuGassanShinseishoKanyureki_jikoFutanShomeisho_SeiriNo"
+         "DbT3069KogakuGassanShinseishoKanyureki"."jikoFutanShomeisho_SeiriNo" as "dbT3069KogakuGassanShinseishoKanyure_jikoFutanShomeisho_SeiriNo"
     </sql>
 
 
@@ -57,7 +57,7 @@
         <result property="hokenshaMei" column="dbT3069KogakuGassanShinseishoKanyureki_hokenshaMei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="kanyuKaishiYMD" column="dbT3069KogakuGassanShinseishoKanyureki_kanyuKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="kanyuShuryoYMD" column="dbT3069KogakuGassanShinseishoKanyureki_kanyuShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="jikoFutanShomeisho_SeiriNo" column="dbT3069KogakuGassanShinseishoKanyureki_jikoFutanShomeisho_SeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jikoFutanShomeisho_SeiriNo" column="dbT3069KogakuGassanShinseishoKanyure_jikoFutanShomeisho_SeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
 </mapper>
