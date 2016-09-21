@@ -14,8 +14,12 @@ import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEnt
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshiki272.JigyohokokuCompYoshiki272Change;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshiki272.JigyohokokuCompYoshiki272Entity;
 import jp.co.ndensan.reams.db.dbu.entity.report.jigyohokokucompyoshiki272.JigyohokokuCompYoshiki272ReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -100,25 +104,25 @@ public class JigyohokokuCompYoshiki272Report extends Report<JigyohokokuCompYoshi
         return dataList;
     }
 
-    private RString set件数(DbT7021JigyoHokokuTokeiDataEntity jigyohokokutokei) {
-        RString 件数 = RString.EMPTY;
+    private Decimal set件数(DbT7021JigyoHokokuTokeiDataEntity jigyohokokutokei) {
+        Decimal 件数 = Decimal.ZERO;
         if (縦番号_1.equals(jigyohokokutokei.getTateNo())) {
-            件数 = new RString(jigyohokokutokei.getShukeiKekkaAtai().toString());
+            件数 = new Decimal(jigyohokokutokei.getShukeiKekkaAtai().toString());
         }
         return 件数;
     }
 
-    private RString set給付額(DbT7021JigyoHokokuTokeiDataEntity jigyohokokutokei) {
-        RString 給付額 = RString.EMPTY;
+    private Decimal set給付額(DbT7021JigyoHokokuTokeiDataEntity jigyohokokutokei) {
+        Decimal 給付額 = Decimal.ZERO;
         if (縦番号_2.equals(jigyohokokutokei.getTateNo())) {
-            給付額 = new RString(jigyohokokutokei.getShukeiKekkaAtai().toString());
+            給付額 = new Decimal(jigyohokokutokei.getShukeiKekkaAtai().toString());
         }
         return 給付額;
     }
 
     private JigyohokokuCompYoshiki272Change setDataChange(List<DbT7021JigyoHokokuTokeiDataEntity> list) {
-        RString 件数 = RString.EMPTY;
-        RString 給付額 = RString.EMPTY;
+        Decimal 件数 = Decimal.ZERO;
+        Decimal 給付額 = Decimal.ZERO;
         RString 保険者番号 = RString.EMPTY;
         RString 保険者名 = RString.EMPTY;
         for (DbT7021JigyoHokokuTokeiDataEntity jigyohokokutokei : list) {
@@ -127,11 +131,8 @@ public class JigyohokokuCompYoshiki272Report extends Report<JigyohokokuCompYoshi
             保険者番号 = jigyohokokutokei.getShichosonCode().value();
             保険者名 = jigyohokokutokei.getShukeiKomokuMeisho();
         }
-        if (保険者名 != null && 過去集計分旧市町村区分_旧.equals(data.get過去集計分旧市町村区分())) {
-            保険者名 = 保険者名.concat(new RString("旧"));
-        }
-        return new JigyohokokuCompYoshiki272Change(件数,
-                給付額,
+        return new JigyohokokuCompYoshiki272Change(new RString(件数.toString()),
+                new RString(給付額.toString()),
                 data.get作成日時(),
                 set集計範囲(data),
                 set年報月報(data.get年報月報区分()),
@@ -145,16 +146,20 @@ public class JigyohokokuCompYoshiki272Report extends Report<JigyohokokuCompYoshi
         RStringBuilder 集計範囲_SB = new RStringBuilder();
         if (月報_1.equals(entity.get年報月報区分())) {
             集計範囲_SB.append("（");
-            集計範囲_SB.append(entity.get集計年月());
+            集計範囲_SB.append(new FlexibleDate(entity.get集計年月()).getYearMonth().wareki().firstYear(FirstYear.ICHI_NEN).
+                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             集計範囲_SB.append("分）");
         }
         if (年報_2.equals(entity.get年報月報区分())) {
             集計範囲_SB.append("（");
-            集計範囲_SB.append(entity.get集計年度());
+            集計範囲_SB.append(new FlexibleDate(entity.get集計年度()).getYearMonth().wareki().firstYear(FirstYear.ICHI_NEN).
+                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             集計範囲_SB.append("分）");
-            集計範囲_SB.append(entity.get集計期間FROM());
+            集計範囲_SB.append(new FlexibleDate(entity.get集計期間FROM()).getYearMonth().wareki().firstYear(FirstYear.ICHI_NEN).
+                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             集計範囲_SB.append(" ～ ");
-            集計範囲_SB.append(entity.get集計期間TO());
+            集計範囲_SB.append(new FlexibleDate(entity.get集計期間TO()).getYearMonth().wareki().firstYear(FirstYear.ICHI_NEN).
+                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         }
         return 集計範囲_SB.toRString();
     }
