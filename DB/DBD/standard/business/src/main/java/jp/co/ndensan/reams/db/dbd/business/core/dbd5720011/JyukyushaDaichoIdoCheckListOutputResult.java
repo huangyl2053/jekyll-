@@ -96,8 +96,6 @@ public class JyukyushaDaichoIdoCheckListOutputResult {
         }
         if (entity.get行政区コード() != null && !entity.get行政区コード().isEmpty()) {
             lower.set行政区コード(entity.get行政区コード());
-        } else {
-
         }
         return lower;
     }

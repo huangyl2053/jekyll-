@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0520011;
 
-import jp.co.ndensan.reams.db.dbu.definition.batchprm.kyokaisogaitoshabatchparameter.KyokaisoKanriMasterListBatchParameter;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU060010.DBU060010_KyokaisoKanriMasterListParameter;
 import jp.co.ndensan.reams.db.dbu.definition.reportid.ReportIdDBU;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0520011.KyokaisouKanriMasterListPanelDiv;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoBunruiKanri;
@@ -107,9 +107,8 @@ public class KyokaisouKanriMasterListPanelHandler {
      *
      * @return batchPara 境界層管理マスタリストバッチパラメータ
      */
-    public KyokaisoKanriMasterListBatchParameter setBatchParameter() {
-        KyokaisoKanriMasterListBatchParameter batchPara = new KyokaisoKanriMasterListBatchParameter();
-
+    public DBU060010_KyokaisoKanriMasterListParameter setBatchParameter() {
+        DBU060010_KyokaisoKanriMasterListParameter batchPara = new DBU060010_KyokaisoKanriMasterListParameter();
         バッチパラメータ_基準日(batchPara);
         バッチパラメータ_範囲(batchPara);
         バッチパラメータ_境界層対象抽出範囲(batchPara);
@@ -179,7 +178,7 @@ public class KyokaisouKanriMasterListPanelHandler {
      *
      * @return batchPara 境界層管理マスタリストバッチパラメータ
      */
-    private void バッチパラメータ_基準日(KyokaisoKanriMasterListBatchParameter batchPara) {
+    private void バッチパラメータ_基準日(DBU060010_KyokaisoKanriMasterListParameter batchPara) {
 
         if (div.getKyokaisoKariParam().getRadKijunbi().getSelectedKey().equals(KEY0_基準日)) {
             batchPara.setDate_FROM(new FlexibleDate(div.getKyokaisoKariParam().getTxtKijumbi().getValue().toDateString()));
@@ -193,7 +192,7 @@ public class KyokaisouKanriMasterListPanelHandler {
      *
      * @return batchPara 境界層管理マスタリストバッチパラメータ
      */
-    private void バッチパラメータ_範囲(KyokaisoKanriMasterListBatchParameter batchPara) {
+    private void バッチパラメータ_範囲(DBU060010_KyokaisoKanriMasterListParameter batchPara) {
         if (div.getKyokaisoKariParam().getRadHani().getSelectedKey().equals(KEY0_範囲)) {
             batchPara.setMode(取得モード_範囲);
             if (div.getKyokaisoKariParam().getTxtHaniChushutsu().getFromValue() == null) {
@@ -215,7 +214,7 @@ public class KyokaisouKanriMasterListPanelHandler {
      *
      * @return batchPara 境界層管理マスタリストバッチパラメータ
      */
-    private void バッチパラメータ_指定無し(KyokaisoKanriMasterListBatchParameter batchPara) {
+    private void バッチパラメータ_指定無し(DBU060010_KyokaisoKanriMasterListParameter batchPara) {
         if (div.getKyokaisoKariParam().getRadShiteiNashi().getSelectedKey().equals(KEY0指定無し)) {
             batchPara.setMode(取得モード_指定無し);
         }
@@ -226,7 +225,7 @@ public class KyokaisouKanriMasterListPanelHandler {
      *
      * @return batchPara 境界層管理マスタリストバッチパラメータ
      */
-    private void バッチパラメータ_境界層対象抽出範囲(KyokaisoKanriMasterListBatchParameter batchPara) {
+    private void バッチパラメータ_境界層対象抽出範囲(DBU060010_KyokaisoKanriMasterListParameter batchPara) {
         if (div.getKyokaisoKariParam().getRadHani().getSelectedKey().equals(境界層対象抽出範囲)) {
 
             if (div.getKyokaisoKariParam().getRadHaniRadio().getSelectedIndex() == 0) {

@@ -24,7 +24,7 @@ import lombok.Setter;
 @Setter
 public class KoshinOshiraseTsuchiUpdateEntity {
 
-    DbT4101NinteiShinseiJohoEntity dbt4101Entity;
+    private DbT4101NinteiShinseiJohoEntity dbt4101Entity;
     private DbT7051KoseiShichosonMasterEntity dbT7051KoseiShichosonMaster;
     private DbV4001JukyushaDaichoEntity dbV4001JukyushaDaicho;
     private DbT4910NinteichosaItakusakiJohoEntity dbT4910NinteichosaItakusakiJoho;
