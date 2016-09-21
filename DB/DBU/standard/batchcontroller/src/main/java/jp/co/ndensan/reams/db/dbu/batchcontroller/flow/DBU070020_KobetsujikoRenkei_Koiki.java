@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.batchcontroller.flow.kaigojyuminhyokoukiu;
+package jp.co.ndensan.reams.db.dbu.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.kaigojyuminhyokoukiu.KaiGoJuminHyokouKiuDBUpdateProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.kaigojyuminhyokoukiu.KaiGoJuminHyokouKiuEucCsvProcess;
-import jp.co.ndensan.reams.db.dbu.definition.batchprm.kaigojuminhyokoukiu.KaiGoJuminHyokouKiuBatchParameter;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU070020.DBU070020_KobetsujikoRenkei_KoikiParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  * @reamsid_L DBU-0550-020 wanghui
  *
  */
-public class KaiGoJuminHyokouKiuFlow extends BatchFlowBase<KaiGoJuminHyokouKiuBatchParameter> {
+public class DBU070020_KobetsujikoRenkei_Koiki extends BatchFlowBase<DBU070020_KobetsujikoRenkei_KoikiParameter> {
 
     @Override
     protected void defineFlow() {

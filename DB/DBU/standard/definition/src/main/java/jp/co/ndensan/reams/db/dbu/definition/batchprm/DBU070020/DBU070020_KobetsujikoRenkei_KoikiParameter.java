@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.definition.batchprm.kaigojuminhyokoukiu;
+package jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU070020;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.kobetsujikorenkeiinfosakuseikoiki.KobetsuKoikiunyoParameter;
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
 @lombok.Setter
-public class KaiGoJuminHyokouKiuBatchParameter extends BatchParameterBase {
+public class DBU070020_KobetsujikoRenkei_KoikiParameter extends BatchParameterBase {
 
     private static final String SHICHOSOMCODE = "kobetsuKoikiunyoParameterList";
     @BatchParameter(key = SHICHOSOMCODE, name = "市町村コード")
@@ -29,7 +29,7 @@ public class KaiGoJuminHyokouKiuBatchParameter extends BatchParameterBase {
     /**
      * コンストラクタです。
      */
-    public KaiGoJuminHyokouKiuBatchParameter() {
+    public DBU070020_KobetsujikoRenkei_KoikiParameter() {
     }
 
     /**
@@ -37,7 +37,7 @@ public class KaiGoJuminHyokouKiuBatchParameter extends BatchParameterBase {
      *
      * @param kobetsuKoikiunyoParameterList kobetsuKoikiunyoParameterList
      */
-    public KaiGoJuminHyokouKiuBatchParameter(
+    public DBU070020_KobetsujikoRenkei_KoikiParameter(
             List<KobetsuKoikiunyoParameter> kobetsuKoikiunyoParameterList) {
         this.kobetsuKoikiunyoParameterList = kobetsuKoikiunyoParameterList;
     }
