@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.basic.kaigofukatokuchoheijunka6.
 import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchoheijunka6tsuchishoikatsuhako.HeijunkaKeisanPageJoho;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012003.DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.OutputChohyoIchiran;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012001.DBB012001_TokuchoHeinjunka6GatsuParameter;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoHeijunkaKeisanHoho6Gatsu;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.HeijunkaHenkoOutputJoken;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0120001.HeijunkaKeisanDiv;
@@ -167,7 +167,7 @@ public class HeijunkaKeisanHandler {
      *
      * @return バッチパラメータ
      */
-    public TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter setBatchParameter() {
+    public DBB012001_TokuchoHeinjunka6GatsuParameter setBatchParameter() {
 
         HeijunkaKeisanPageJoho data = new HeijunkaKeisanPageJoho();
         data.set調定年度(div.getShoriJokyo().getHeijunkaShoriNaiyo().getTxtChoteiNendo().getDomain());

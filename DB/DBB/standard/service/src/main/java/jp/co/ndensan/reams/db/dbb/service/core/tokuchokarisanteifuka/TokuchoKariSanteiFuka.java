@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchokarisanteifuka.FukaParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchokarisanteifuka.TokuchoKariSanteiEntity;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchokarisanteitsuchishohakko.TokuchoKaishiTsuchishoBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB011003.DBB011003_TokuchoKarisanteiTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchokarisanteitsuchishohakko.KarisanteiBatchEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
@@ -116,9 +116,9 @@ public class TokuchoKariSanteiFuka {
      * @param parameter FukaParameter
      * @return バッチパラメータ
      */
-    public TokuchoKaishiTsuchishoBatchParameter createTokuchoKariSanteiParameter(FukaParameter parameter) {
+    public DBB011003_TokuchoKarisanteiTsuchishoHakkoParameter createTokuchoKariSanteiParameter(FukaParameter parameter) {
         List<KarisanteiBatchEntity> 出力帳票一覧List = get出力帳票一覧(parameter.get出力帳票一覧List());
-        TokuchoKaishiTsuchishoBatchParameter resultParameter = new TokuchoKaishiTsuchishoBatchParameter();
+        DBB011003_TokuchoKarisanteiTsuchishoHakkoParameter resultParameter = new DBB011003_TokuchoKarisanteiTsuchishoHakkoParameter();
         resultParameter.set調定年度(parameter.get調定年度());
         resultParameter.set賦課年度(parameter.get賦課年度());
         resultParameter.set発行日(parameter.get発行日());

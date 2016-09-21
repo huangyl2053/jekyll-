@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.dbb0120001;
 
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012003.DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakkoParameter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012001.DBB012001_TokuchoHeinjunka6GatsuParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0120001.DBB0120001StateName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0120001.HeijunkaKeisanDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0120001.HeijunkaKeisanHandler;
@@ -77,8 +77,8 @@ public class HeijunkaKeisan {
      * @param div コントロールdiv
      * @return レスポンスデータ
      */
-    public ResponseData<TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter> onClick_btnHeijunkaJikko(HeijunkaKeisanDiv div) {
-        TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter parameter = getHandler(div).setBatchParameter();
+    public ResponseData<DBB012001_TokuchoHeinjunka6GatsuParameter> onClick_btnHeijunkaJikko(HeijunkaKeisanDiv div) {
+        DBB012001_TokuchoHeinjunka6GatsuParameter parameter = getHandler(div).setBatchParameter();
         createFlowParameter(div, parameter);
         return ResponseData.of(parameter).respond();
     }
@@ -94,7 +94,7 @@ public class HeijunkaKeisan {
         return ResponseData.of(parameter).respond();
     }
 
-    private void createFlowParameter(HeijunkaKeisanDiv div, TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter parameter) {
+    private void createFlowParameter(HeijunkaKeisanDiv div, DBB012001_TokuchoHeinjunka6GatsuParameter parameter) {
         FlowParameters fp = new FlowParameters();
         boolean 通知書一括発行 = false;
         for (dgOutputChohyoIchiran_Row row : div.getTokuchoHeijunkaChohyoHakko().getCcdChohyoIchiran().get出力帳票一覧()) {

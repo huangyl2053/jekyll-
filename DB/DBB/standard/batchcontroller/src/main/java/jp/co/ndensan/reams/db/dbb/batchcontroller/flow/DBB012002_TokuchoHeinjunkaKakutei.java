@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.dbb012002;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
 import java.util.HashMap;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb0120002.TokuchoHeinjunkaKakuteiDbUpdateProcess;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunkakakutei.TokuchoHeijunkaKakuteiBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012002.DBB012002_TokuchoHeinjunkaKakuteiParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBB-0830-030 xuhao
  */
-public class DBB012002_TokuchoHeinjunkaKakutei extends BatchFlowBase<TokuchoHeijunkaKakuteiBatchParameter> {
+public class DBB012002_TokuchoHeinjunkaKakutei extends BatchFlowBase<DBB012002_TokuchoHeinjunkaKakuteiParameter> {
 
     private static final String DB_UPDATE = "dbUpdateProcess";
 
