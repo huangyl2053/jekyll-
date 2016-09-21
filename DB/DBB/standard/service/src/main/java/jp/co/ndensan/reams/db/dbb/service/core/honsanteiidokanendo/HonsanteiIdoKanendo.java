@@ -10,7 +10,7 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.honsanteiidokanendo.HonsanteiIdoDivParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.honsanteiidokanendo.HonsanteiIdoParameter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidogennen.ChohyoResult;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB051001.ChohyoResult;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB055001.DBB055001_KanendoIdoFukaParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB055003.DBB055003_KanendoIdoTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
