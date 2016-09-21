@@ -6,12 +6,16 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceCo
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbc.business.core.servicecode.ServiceCodeModel;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Label;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * ServiceCodeInputCommonChildDiv のクラスファイル
@@ -163,6 +167,24 @@ public class ServiceCodeInputCommonChildDivDiv extends Panel implements IService
     @Override
     public void initialize() {
         this.getTxtServiceCodeName().setDisabled(true);
+    }
+
+    /**
+     * 画面を画面初期化します。
+     *
+     * @param 基準年月 基準年月
+     * @param サービス種類リスト サービス種類リスト
+     * @param サービス分類リスト サービス分類リスト
+     * @param 抽出パターン 抽出パターン
+     */
+    @Override
+    public void initialize(FlexibleYearMonth 基準年月, List<RString> サービス種類リスト, List<RString> サービス分類リスト, RString 抽出パターン) {
+        ServiceCodeModel serviceCode = new ServiceCodeModel();
+        serviceCode.set基準年月(基準年月);
+        serviceCode.setサービス分類リスト(サービス分類リスト);
+        serviceCode.setサービス種類リスト(サービス種類リスト);
+        serviceCode.set抽出パターン(抽出パターン);
+        this.setServiceCodeModel(DataPassingConverter.serialize(serviceCode));
     }
 
     /**

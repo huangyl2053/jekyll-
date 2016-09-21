@@ -28,6 +28,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class HokenshaSofuListPanel {
 
     private FlexibleYearMonth 処理年月;
+    private final int 定数_0 = 0;
+    private final int 定数_3 = 3;
 
     /**
      * 初期化のンメソッドます。
@@ -73,7 +75,7 @@ public class HokenshaSofuListPanel {
         KokuhorenDataSofuViewState parmater = new KokuhorenDataSofuViewState(
                 div.getTxtShoriNengetsu().getValue().getYearMonth(), 再処理区分, row.getKokanShikibetsuNo());
         ViewStateHolder.put(ViewStateHolderName.国保連送付情報, parmater);
-        RString paramete = row.getKokanShikibetsuNo();
+        RString paramete = row.getKokanShikibetsuNo().substring(定数_0, 定数_3);
         return ResponseData.of(div).forwardWithEventName(DBC0200011TransitionEventName.バッチ起動)
                 .parameter(paramete);
     }
@@ -82,7 +84,7 @@ public class HokenshaSofuListPanel {
      * スケジュール設定へのメソッドます。
      *
      * @param div KokuhorenTorikomiListDiv
-     * @return ResponseData
+     * @return ResponseData HokenshaSofuListPanelDiv
      */
     public ResponseData<HokenshaSofuListPanelDiv> onClick_btnScheduleSetting(HokenshaSofuListPanelDiv div) {
         ViewStateHolder.put(ViewStateKeys.処理年月, div.getTxtShoriNengetsu().getValue());

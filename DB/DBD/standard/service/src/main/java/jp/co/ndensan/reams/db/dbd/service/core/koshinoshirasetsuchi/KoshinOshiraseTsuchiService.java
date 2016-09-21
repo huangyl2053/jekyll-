@@ -57,38 +57,31 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  */
 public class KoshinOshiraseTsuchiService {
 
-    private static final int ZERO = 0;
-    private static final int ONE = 1;
-    private static final int TWO = 2;
-    private static final int THREE = 3;
-    private static final int FOUR = 4;
-    private static final int FIVE = 5;
-    private static final int SIX = 6;
-    private static final int SEVEN = 7;
-    private static final int EIGHT = 8;
-    private static final int NINE = 9;
-    private static final int TEN = 10;
-    private static final int INDEX_0 = 0;
-    private static final int INDEX_2 = 2;
-    private static final int INDEX_3 = 3;
-    private static final int INDEX_5 = 5;
-    private static final int INDEX_6 = 6;
-    private static final int INDEX_8 = 8;
-    private static final int LISTINDEX_0 = 0;
-    private static final int LISTINDEX_1 = 1;
-    private static final int LISTINDEX_2 = 2;
-    private static final int LISTINDEX_3 = 3;
-    private static final int LISTINDEX_4 = 4;
+    private static final int NUM_0 = 0;
+    private static final int NUM_1 = 1;
+    private static final int NUM_2 = 2;
+    private static final int NUM_3 = 3;
+    private static final int NUM_4 = 4;
+    private static final int NUM_5 = 5;
+    private static final int NUM_6 = 6;
+    private static final int NUM_7 = 7;
+    private static final int NUM_8 = 8;
+    private static final int NUM_9 = 9;
+    private static final int NUM_10 = 10;
     private static final ReportIdDBD 帳票11 = ReportIdDBD.DBD511001;
     private static final ReportIdDBD 帳票01 = ReportIdDBD.DBD501001;
     private static final ReportIdDBD 帳票12 = ReportIdDBD.DBD511002;
-    private static RString ジョブ番号 = new RString("【ジョブ番号】");
-    private static final RString カラ = new RString("～");
-    private static final RString カあ = new RString("-");
+    private static final RString SIGN = new RString(" ＞ ");
     private static final RString まる = new RString("○");
     private static final String 明治 = "明治";
     private static final String 昭和 = "昭和";
     private static final String 大正 = "大正";
+    private static final RString 抽出条件_申請書管理番号リスト = new RString("【申請書管理番号リスト】");
+    private static final RString 抽出条件_出力対象区分 = new RString("【出力対象区分】");
+    private static final RString 抽出条件_抽出対象期間開始 = new RString("【抽出対象期間(開始)】");
+    private static final RString 抽出条件_抽出対象期間終了 = new RString("【抽出対象期間(終了)】");
+    private static final RString 抽出条件_通知書発行日 = new RString("【通知書発行日】");
+    private static final RString 抽出条件_出力順 = new RString("【出力順】");
 
     /**
      * 認定更新お知らせ通知書発行_サービスを生成します。
@@ -123,30 +116,88 @@ public class KoshinOshiraseTsuchiService {
      * @param 帳票ID01TF 帳票DBD501001出力判断フラグ
      * @param 帳票ID11TF 帳票DBD511001出力判断フラグ
      * @param 帳票ID12TF 帳票DBD511002出力判断フラグ
+     * @param outputOrder 出力順
      */
     public void バッチ出力条件リストの出力(Association association, KoshinOshiraseTsuchiProcessParameter parameter,
             RString 帳票ID01出力ページ数, RString 帳票ID11出力ページ数, RString 帳票ID12出力ページ数,
-            boolean 帳票ID01TF, boolean 帳票ID11TF, boolean 帳票ID12TF) {
+            boolean 帳票ID01TF, boolean 帳票ID11TF, boolean 帳票ID12TF, IOutputOrder outputOrder) {
 
         RString 導入団体コード = association.getLasdecCode_().getColumnValue();
         RString 市町村名 = association.get市町村名();
-        ジョブ番号 = new RString(String.valueOf(JobContextHolder.getJobId()));
+        RString ジョブ番号 = new RString(String.valueOf(JobContextHolder.getJobId()));
         RString csv出力有無 = new RString("なし");
-        RString csvファイル名 = カあ;
-        RStringBuilder builder = new RStringBuilder();
+        RString csvファイル名 = new RString("-");
         List<RString> 出力条件 = new ArrayList<>();
-        builder.append(parameter.get申請書管理番号リスト());
-        出力条件.add(builder.toRString());
-        builder.append(parameter.get抽出対象期間_開始());
-        出力条件.add(builder.toRString());
-        builder.append(parameter.get出力対象区分());
-        出力条件.add(builder.toRString());
-        builder.append(parameter.get出力順());
-        出力条件.add(builder.toRString());
-        builder.append(parameter.get抽出対象期間_終了());
-        出力条件.add(builder.toRString());
-        builder.append(parameter.get通知書発行日());
-        出力条件.add(builder.toRString());
+
+        RStringBuilder 出力対象区分builder = new RStringBuilder();
+        RStringBuilder 抽出対象期間開始builder = new RStringBuilder();
+        RStringBuilder 抽出対象期間終了builder = new RStringBuilder();
+        RStringBuilder 通知書発行日builder = new RStringBuilder();
+        RStringBuilder 出力順builder = new RStringBuilder();
+
+        RString 出力対象区分 = RString.EMPTY;
+        if (new RString("0").equals(parameter.get出力対象区分())) {
+            出力対象区分 = new RString("お知らせ通知書");
+        } else if (new RString("1").equals(parameter.get出力対象区分())) {
+            出力対象区分 = new RString("要介護認定申請書");
+        } else if (new RString("2").equals(parameter.get出力対象区分())) {
+            出力対象区分 = new RString("お知らせ通知書と要介護認定申請書");
+        }
+
+        出力対象区分builder.append(抽出条件_出力対象区分).append(出力対象区分);
+        抽出対象期間開始builder.append(抽出条件_抽出対象期間開始).append(parameter.get抽出対象期間_開始());
+        抽出対象期間終了builder.append(抽出条件_抽出対象期間終了).append(parameter.get抽出対象期間_終了());
+        通知書発行日builder.append(抽出条件_通知書発行日).append(parameter.get通知書発行日());
+        出力順builder.append(抽出条件_出力順);
+
+        List<ISetSortItem> list = new ArrayList<>();
+        if (outputOrder != null) {
+            list = outputOrder.get設定項目リスト();
+        }
+        if (list != null && list.size() > NUM_0) {
+            出力順builder.append(list.get(NUM_0).get項目名()).append(SIGN);
+        }
+        if (list != null && list.size() > NUM_1) {
+            出力順builder.append(list.get(NUM_1).get項目名()).append(SIGN);
+        }
+        if (list != null && list.size() > NUM_2) {
+            出力順builder.append(list.get(NUM_2).get項目名()).append(SIGN);
+        }
+        if (list != null && list.size() > NUM_3) {
+            出力順builder.append(list.get(NUM_3).get項目名()).append(SIGN);
+        }
+        if (list != null && list.size() > NUM_4) {
+            出力順builder.append(list.get(NUM_4).get項目名()).append(SIGN);
+        }
+        RString 出力順RStr = 出力順builder.toRString();
+        if (出力順builder.length() > NUM_5) {
+            出力順RStr = 出力順builder.substring(0, 出力順builder.length() - NUM_3);
+        }
+
+        RString 申請書管理番号 = 抽出条件_申請書管理番号リスト;
+        int i = 0;
+        if (parameter.get申請書管理番号リスト() != null) {
+            for (RString str : parameter.get申請書管理番号リスト()) {
+                i++;
+                申請書管理番号 = 申請書管理番号.concat(str).concat(RString.HALF_SPACE);
+                if (i == 8) {
+                    出力条件.add(申請書管理番号);
+                    申請書管理番号 = RString.FULL_SPACE.concat(RString.FULL_SPACE).concat(RString.FULL_SPACE).concat(RString.FULL_SPACE)
+                            .concat(RString.FULL_SPACE).concat(RString.FULL_SPACE).concat(RString.FULL_SPACE).concat(RString.FULL_SPACE)
+                            .concat(RString.FULL_SPACE).concat(RString.FULL_SPACE).concat(RString.FULL_SPACE).concat(RString.FULL_SPACE);
+                    i = 0;
+                }
+            }
+        }
+        if (i > 0) {
+            出力条件.add(申請書管理番号);
+        }
+        出力条件.add(出力対象区分builder.toRString());
+        出力条件.add(抽出対象期間開始builder.toRString());
+        出力条件.add(抽出対象期間終了builder.toRString());
+        出力条件.add(通知書発行日builder.toRString());
+        出力条件.add(出力順RStr);
+
         if (帳票ID01TF) {
             RString 帳票ID = 帳票01.getReportId().getColumnValue();
             RString 帳票名 = 帳票01.getReportName();
@@ -214,16 +265,16 @@ public class KoshinOshiraseTsuchiService {
         entity.set通知文2(map.get(2));
         entity.set文書番号(ReportUtil.get文書番号(SubGyomuCode.DBD介護受給, 帳票11.getReportId(), 通知書発行日));
         entity.set被保険者氏名フリガナ(koshinOshiraseEn.getDbt4101Entity().getHihokenshaKana().getColumnValue());
-        entity.set被保険者番号1(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(ZERO, ONE));
-        entity.set被保険者番号2(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(ONE, TWO));
-        entity.set被保険者番号3(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(TWO, THREE));
-        entity.set被保険者番号4(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(THREE, FOUR));
-        entity.set被保険者番号5(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(FOUR, FIVE));
-        entity.set被保険者番号6(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(FIVE, SIX));
-        entity.set被保険者番号7(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(SIX, SEVEN));
-        entity.set被保険者番号8(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(SEVEN, EIGHT));
-        entity.set被保険者番号9(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(EIGHT, NINE));
-        entity.set被保険者番号10(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(NINE, TEN));
+        entity.set被保険者番号1(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(NUM_0, NUM_1));
+        entity.set被保険者番号2(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(NUM_1, NUM_2));
+        entity.set被保険者番号3(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(NUM_2, NUM_3));
+        entity.set被保険者番号4(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(NUM_3, NUM_4));
+        entity.set被保険者番号5(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(NUM_4, NUM_5));
+        entity.set被保険者番号6(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(NUM_5, NUM_6));
+        entity.set被保険者番号7(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(NUM_6, NUM_7));
+        entity.set被保険者番号8(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(NUM_7, NUM_8));
+        entity.set被保険者番号9(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(NUM_8, NUM_9));
+        entity.set被保険者番号10(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(NUM_9, NUM_10));
         entity.set被保険者氏名(koshinOshiraseEn.getDbt4101Entity().getHihokenshaName().getColumnValue());
         entity.set要介護認定開始日(koshinOshiraseEn.getDbV4001JukyushaDaicho().getNinteiYukoKikanKaishiYMD().wareki().separator(Separator.JAPANESE).
                 fillType(FillType.BLANK).toDateString());
@@ -258,31 +309,31 @@ public class KoshinOshiraseTsuchiService {
         KoshinOshiraseHeaderEntity headerEntity = new KoshinOshiraseHeaderEntity();
         RStringBuilder builder = new RStringBuilder();
         builder.append(parameter.get抽出対象期間_開始().wareki().separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
-        builder.append(カラ);
+        builder.append(new RString("～"));
         builder.append(parameter.get抽出対象期間_終了().wareki().separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
         headerEntity.set抽出対象期間(builder.toRString());
         headerEntity.set市町村コード(koshinOshiraseEn.getDbT7051KoseiShichosonMaster().getShichosonCode().getColumnValue());
         headerEntity.set市町村名称(koshinOshiraseEn.getDbT7051KoseiShichosonMaster().getShichosonMeisho());
         Map<Integer, ISetSortItem> 出力順Map = ChohyoUtil.get出力順項目Map(outputOrder);
-        if (出力順Map.get(LISTINDEX_0) != null) {
-            headerEntity.set並び順1(出力順Map.get(LISTINDEX_0).get項目名());
+        if (出力順Map.get(NUM_0) != null) {
+            headerEntity.set並び順1(出力順Map.get(NUM_0).get項目名());
         }
-        if (出力順Map.get(LISTINDEX_1) != null) {
-            headerEntity.set並び順2(出力順Map.get(LISTINDEX_1).get項目名());
+        if (出力順Map.get(NUM_1) != null) {
+            headerEntity.set並び順2(出力順Map.get(NUM_1).get項目名());
         }
-        if (出力順Map.get(LISTINDEX_2) != null) {
-            headerEntity.set並び順3(出力順Map.get(LISTINDEX_2).get項目名());
+        if (出力順Map.get(NUM_2) != null) {
+            headerEntity.set並び順3(出力順Map.get(NUM_2).get項目名());
         }
-        if (出力順Map.get(LISTINDEX_3) != null) {
-            headerEntity.set並び順4(出力順Map.get(LISTINDEX_3).get項目名());
+        if (出力順Map.get(NUM_3) != null) {
+            headerEntity.set並び順4(出力順Map.get(NUM_3).get項目名());
         }
-        if (出力順Map.get(LISTINDEX_4) != null) {
-            headerEntity.set並び順4(出力順Map.get(LISTINDEX_4).get項目名());
+        if (出力順Map.get(NUM_4) != null) {
+            headerEntity.set並び順4(出力順Map.get(NUM_4).get項目名());
         }
         RTime time = RDate.getNowTime();
-        RString hour = new RString(time.toString()).substring(INDEX_0, INDEX_2);
-        RString min = new RString(time.toString()).substring(INDEX_3, INDEX_5);
-        RString sec = new RString(time.toString()).substring(INDEX_6, INDEX_8);
+        RString hour = new RString(time.toString()).substring(NUM_0, NUM_2);
+        RString min = new RString(time.toString()).substring(NUM_3, NUM_5);
+        RString sec = new RString(time.toString()).substring(NUM_6, NUM_8);
         RString timeFormat = hour.concat("時").concat(min).concat("分").concat(sec).concat("秒");
         headerEntity.set印刷時間(new RString(RDate.getNowDate().wareki().eraType(EraType.KANJI).
                 firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).
@@ -302,16 +353,16 @@ public class KoshinOshiraseTsuchiService {
     public ShinseiShoEntity 要介護認定申請書データ編集(KoshinOshiraseTsuchiUpdateEntity koshinOshiraseEn) {
         ShinseiShoEntity entity = new ShinseiShoEntity();
         entity.set市町村名称(koshinOshiraseEn.getDbT7051KoseiShichosonMaster().getShichosonMeisho());
-        entity.set被保険者番号第1桁(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(ZERO, ONE));
-        entity.set被保険者番号第2桁(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(ONE, TWO));
-        entity.set被保険者番号第3桁(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(TWO, THREE));
-        entity.set被保険者番号第4桁(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(THREE, FOUR));
-        entity.set被保険者番号第5桁(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(FOUR, FIVE));
-        entity.set被保険者番号第6桁(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(FIVE, SIX));
-        entity.set被保険者番号第7桁(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(SIX, SEVEN));
-        entity.set被保険者番号第8桁(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(SEVEN, EIGHT));
-        entity.set被保険者番号第9桁(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(EIGHT, NINE));
-        entity.set被保険者番号第10桁(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(NINE, TEN));
+        entity.set被保険者番号第1桁(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(NUM_0, NUM_1));
+        entity.set被保険者番号第2桁(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(NUM_1, NUM_2));
+        entity.set被保険者番号第3桁(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(NUM_2, NUM_3));
+        entity.set被保険者番号第4桁(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(NUM_3, NUM_4));
+        entity.set被保険者番号第5桁(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(NUM_4, NUM_5));
+        entity.set被保険者番号第6桁(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(NUM_5, NUM_6));
+        entity.set被保険者番号第7桁(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(NUM_6, NUM_7));
+        entity.set被保険者番号第8桁(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(NUM_7, NUM_8));
+        entity.set被保険者番号第9桁(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(NUM_8, NUM_9));
+        entity.set被保険者番号第10桁(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(NUM_9, NUM_10));
         String nianhao = koshinOshiraseEn.getDbt4101Entity().getSeinengappiYMD().wareki().eraType(EraType.KANJI).getEra().toString();
         if (nianhao.startsWith(明治)) {
             entity.set出生元号明治(まる);

@@ -9,14 +9,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbc.business.euc.hanyolistkyodojukyushakogaku.HanyoListKyodoJukyushaKogakuCsvEntityEditor;
+import jp.co.ndensan.reams.db.dbc.business.euc.hanyolistkyodojukyushakogaku.HanyoListKyodoJukyushaKogakuCsvEditor;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc710060.HanyoListKyodoJukyushaKogakuProcessParameter;
-import jp.co.ndensan.reams.db.dbc.entity.csv.dbc710060.HanyoListKyodoJukyushaKogakuCsvEntity;
-import jp.co.ndensan.reams.db.dbc.entity.csv.dbc710060.HanyoListKyodoJukyushaKogakuNoReBanCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc710060.HanyoListKyodoJukyushaKogakuEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
-import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -24,7 +21,6 @@ import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFa
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -33,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
-import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvListWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -104,20 +100,19 @@ public class HanyoListKyodoJukyushaKogakuProcess extends BatchProcessBase<HanyoL
     private static final RString 非課税等_false = new RString("□非課税等　　　　");
     private static final RString 非課税等_true = new RString("■非課税等　　　　");
     private HanyoListKyodoJukyushaKogakuProcessParameter parameter;
+    private HanyoListKyodoJukyushaKogakuCsvEditor edit;
     private Association 地方公共団体情報;
     private Map<LasdecCode, KoseiShichosonMaster> 構成市町村マスタ;
     private List<PersonalData> personalDataList;
     private RString eucFilePath;
     private int 連番;
     private RString csv出力Flag;
-    FileSpoolManager spoolManager;
-
-    @BatchWriter
-    private CsvWriter<HanyoListKyodoJukyushaKogakuCsvEntity> csvWriter;
-    private CsvWriter<HanyoListKyodoJukyushaKogakuNoReBanCsvEntity> noReBanCsvWriter;
+    private FileSpoolManager spoolManager;
+    private CsvListWriter csvListWriter;
 
     @Override
     protected void initialize() {
+        edit = new HanyoListKyodoJukyushaKogakuCsvEditor();
         地方公共団体情報 = AssociationFinderFactory.createInstance().getAssociation();
         構成市町村マスタ = new HashMap<>();
         List<KoseiShichosonMaster> 現市町村情報 = KoseiShichosonJohoFinder.createInstance().get現市町村情報();
@@ -140,24 +135,21 @@ public class HanyoListKyodoJukyushaKogakuProcess extends BatchProcessBase<HanyoL
                 UzUDE0831EucAccesslogFileType.Csv);
         eucFilePath = Path.combinePath(spoolManager.getEucOutputDirectry(),
                 csvFileName);
-        if (parameter.is連番付加()) {
-            csvWriter = BatchWriters.csvWriter(HanyoListKyodoJukyushaKogakuCsvEntity.class).
-                    filePath(eucFilePath).
-                    setDelimiter(EUC_WRITER_DELIMITER).
-                    setEnclosure(EUC_WRITER_ENCLOSURE).
-                    setEncode(Encode.UTF_8withBOM).
-                    setNewLine(NewLine.CRLF).
-                    hasHeader(parameter.is項目名付加()).
-                    build();
+        if (!parameter.is項目名付加()) {
+            csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).setNewLine(NewLine.CRLF)
+                    .setDelimiter(EUC_WRITER_DELIMITER)
+                    .setEnclosure(EUC_WRITER_ENCLOSURE)
+                    .setEncode(Encode.UTF_8withBOM)
+                    .hasHeader(false)
+                    .build();
         } else {
-            noReBanCsvWriter = BatchWriters.csvWriter(HanyoListKyodoJukyushaKogakuNoReBanCsvEntity.class).
-                    filePath(eucFilePath).
-                    setDelimiter(EUC_WRITER_DELIMITER).
-                    setEnclosure(EUC_WRITER_ENCLOSURE).
-                    setEncode(Encode.UTF_8withBOM).
-                    setNewLine(NewLine.CRLF).
-                    hasHeader(parameter.is項目名付加()).
-                    build();
+            csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).setNewLine(NewLine.CRLF)
+                    .setDelimiter(EUC_WRITER_DELIMITER)
+                    .setEnclosure(EUC_WRITER_ENCLOSURE)
+                    .setEncode(Encode.UTF_8withBOM)
+                    .hasHeader(true)
+                    .setHeader(edit.setHeaderList(parameter))
+                    .build();
         }
     }
 
@@ -165,37 +157,22 @@ public class HanyoListKyodoJukyushaKogakuProcess extends BatchProcessBase<HanyoL
     protected void process(HanyoListKyodoJukyushaKogakuEntity entity) {
         連番++;
         csv出力Flag = 定数_あり;
-        HanyoListKyodoJukyushaKogakuCsvEntityEditor edit = new HanyoListKyodoJukyushaKogakuCsvEntityEditor(entity, parameter,
-                地方公共団体情報, 連番);
-        if (parameter.is連番付加()) {
-            csvWriter.writeLine(edit.edit());
-        } else {
-            noReBanCsvWriter.writeLine(edit.noReBanEdit());
-        }
-        if (entity.get受給者異動高額().getHiHokenshaNo() != null
-                && !entity.get受給者異動高額().getHiHokenshaNo().isEmpty()) {
-            ExpandedInformation expandedInformation = new ExpandedInformation(
-                    CODE_0003, DATANAME_被保険者番号, entity.get受給者異動高額().getHiHokenshaNo().getColumnValue());
-            personalDataList.add(PersonalData.of(entity.get宛名().getShikibetsuCode(), expandedInformation));
-        }
+        csvListWriter.writeLine(edit.setBodyList(entity, parameter, 地方公共団体情報, 連番));
+        ExpandedInformation expandedInformation = new ExpandedInformation(
+                CODE_0003, DATANAME_被保険者番号, entity.get受給者異動高額().getHiHokenshaNo().getColumnValue());
+        personalDataList.add(PersonalData.of(entity.get宛名().getShikibetsuCode(), expandedInformation));
     }
 
     @Override
     protected void afterExecute() {
+        csvListWriter.close();
         if (!personalDataList.isEmpty()) {
             AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
             spoolManager.spool(eucFilePath, accessLogUUID);
         } else {
             spoolManager.spool(eucFilePath);
         }
-        RString csvCount;
-        if (parameter.is連番付加()) {
-            csvWriter.close();
-            csvCount = new RString(csvWriter.getCount());
-        } else {
-            noReBanCsvWriter.close();
-            csvCount = new RString(noReBanCsvWriter.getCount());
-        }
+        RString csvCount = new RString(csvListWriter.getCount());
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
                 EUC_ENTITY_ID.toRString(),
                 地方公共団体情報.getLasdecCode_().value(),

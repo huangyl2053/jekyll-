@@ -50,4 +50,11 @@ public class KogakuGassanData {
     private ShikibetsuCode 識別コード;
     private List<KogakuGassanMeisai> 明細List;
 
+    public RString 郵便番号;
+    public RString 町域コード;
+    public RString 行政区コード;
+    public RString 市町村コード;
+    public RString 証記載保険者番号;
+    public RString 氏名５０音カナ;
+
 }

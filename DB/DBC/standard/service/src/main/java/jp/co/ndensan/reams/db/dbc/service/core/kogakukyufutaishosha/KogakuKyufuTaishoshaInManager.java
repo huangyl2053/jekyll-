@@ -174,7 +174,7 @@ public class KogakuKyufuTaishoshaInManager {
         for (KogakuKyufuTaishoshaCsvEntity csvEntity : csvlist) {
             KagoKetteiHokenshaInControlCsvEntity コントロールレコード = csvEntity.getControlCsvEntity();
             コントロールレコードのレコード件数の合計 = コントロールレコードのレコード件数の合計
-                                   + Integer.valueOf(コントロールレコード.getCodeNum().toString());
+                    + Integer.valueOf(コントロールレコード.getCodeNum().toString());
             if (FlexibleYearMonth.EMPTY.equals(処理対象年月)) {
                 処理対象年月 = new FlexibleYearMonth(コントロールレコード.getShoriYM());
             }
@@ -399,6 +399,7 @@ public class KogakuKyufuTaishoshaInManager {
             dataEntity.setHeadCsvEntity(csvHeadEntity);
             dataEntity.setListGroupCsvEntity(groupList);
             dataList.add(dataEntity);
+            dataEntity = new KogakuKyufuTaishoshaDataCsvEntity();
             csvHeadEntity = new KogakuKyufuTaishoshaHeadCsvEntity();
             csvGroupEntity = new KogakuKyufuTaishoshaGroupCsvEntity();
             csvMeisaiEntity = new KogakuKyufuTaishoshaMeisaiCsvEntity();

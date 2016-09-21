@@ -9,8 +9,9 @@ and open the template in the editor.
 
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmenshinseishotaishohaaku.IShinseishoHakkoTaishoJohoSakuseiMapper">
     <select id="get申請書発行対象者情報_負担限度額認定"
+            resultOrdered="true"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.ShinseishoHakkoTaishoJohoSakuseiMyBatisParameter"
-            resultMap="RseultMap_ShinseishoHakkoTaishoJohoSakuseiEntity" fetchSize="500" resultOrdered="true">
+            resultMap="RseultMap_ShinseishoHakkoTaishoJohoSakuseiEntity" fetchSize="500">
         SELECT
         A."被保険者番号" as "hihokenshaNo",
         CASE WHEN C."hihokenshaNo" IS NULL THEN FALSE ELSE TRUE END AS "kousinninteifuragu",
@@ -64,6 +65,7 @@ and open the template in the editor.
 
 
     <select id="get申請書発行対象者情報_利用者負担額減額"
+            resultOrdered="true"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.ShinseishoHakkoTaishoJohoSakuseiMyBatisParameter"
             resultMap="RseultMap_ShinseishoHakkoTaishoJohoSakuseiEntity" fetchSize="500">
         SELECT
@@ -114,6 +116,7 @@ and open the template in the editor.
         </if>
     </select>
     <select id="get申請書発行対象者情報_訪問介護利用者負担額減額"
+            resultOrdered="true"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.ShinseishoHakkoTaishoJohoSakuseiMyBatisParameter"
             resultMap="RseultMap_ShinseishoHakkoTaishoJohoSakuseiEntity" fetchSize="500">
         SELECT
@@ -166,6 +169,7 @@ and open the template in the editor.
 
 
     <select id="get申請書発行対象者情報_社会福祉法人等利用者負担軽減"
+            resultOrdered="true"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.ShinseishoHakkoTaishoJohoSakuseiMyBatisParameter"
             resultMap="RseultMap_ShinseishoHakkoTaishoJohoSakuseiEntity" fetchSize="500">
         SELECT

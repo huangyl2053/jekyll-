@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassankyuf
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassankyufujissekiin.KogakuGassanKyufuJissekiInLoginMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kokuhorenkyoutsuu.KokuhorenIchiranhyoMybatisParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3075KogakuGassanKyufuJissekiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassankyufujissekiin.KogakuGassanKyufuJissekiInDoMasterTorokuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassankyufujissekiin.KogakuGassanKyufuJissekiInEntity;
 
@@ -38,9 +37,9 @@ public interface IKogakuGassanKyufuJissekiInMapper {
      * 高額合算給付実績一時再処理準備のデータを取ります。
      *
      * @param parameter パラメータ
-     * @return List<DbWT38P1KogakuGassanKyufuJissekiTempEntity>
+     *
      */
-    List<DbT3075KogakuGassanKyufuJissekiEntity> get高額合算給付実績一時再処理準備のデータ(KogakuGassanKyufuJissekiInLoginMybatisParameter parameter);
+    void get高額合算給付実績一時再処理準備のデータ(KogakuGassanKyufuJissekiInLoginMybatisParameter parameter);
 
     /**
      * 高額合算給付実績一時TBLのデータと被保険者一時TBLを取ります。

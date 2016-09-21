@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.karisanteiidofuka.KariSanteiIdoParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.karisanteiidofuka.TyouhyouResult;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB015003.DBB015003_KarisanteiIdoTsuchishoHakkoParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB015001.DBB015001_KarisanteiIdoFukaParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB015003.TyouhyouEntity;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2014TsuchishoUchiwakeJokenDac;
@@ -527,10 +527,10 @@ public class KariSanteiIdoFuka {
      * バッチ用パラメータ作成します。
      *
      * @param parameter parameter
-     * @return DBB015003_KarisanteiIdoTsuchishoHakkoParameter
+     * @return DBB015001_KarisanteiIdoFukaParameter
      */
-    public DBB015003_KarisanteiIdoTsuchishoHakkoParameter createKariSanteiIdoParameter(KariSanteiIdoParameter parameter) {
-        DBB015003_KarisanteiIdoTsuchishoHakkoParameter result = new DBB015003_KarisanteiIdoTsuchishoHakkoParameter();
+    public DBB015001_KarisanteiIdoFukaParameter createKariSanteiIdoParameter(KariSanteiIdoParameter parameter) {
+        DBB015001_KarisanteiIdoFukaParameter result = new DBB015001_KarisanteiIdoFukaParameter();
         result.set調定年度(parameter.get調定年度());
         result.set賦課年度(parameter.get賦課年度());
         result.set処理対象月(parameter.get処理対象());

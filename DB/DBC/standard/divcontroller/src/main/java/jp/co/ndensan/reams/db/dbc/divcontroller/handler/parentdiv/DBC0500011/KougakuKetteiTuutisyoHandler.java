@@ -124,7 +124,7 @@ public class KougakuKetteiTuutisyoHandler {
             様式 = 画面_自動償還用様式;
         }
         FlexibleDate 支払予定日 = FlexibleDate.EMPTY;
-        if (!div.getTxtSiharaiYoteibi().isVisible() && div.getTxtSiharaiYoteibi().getValue() != null) {
+        if (div.getTxtSiharaiYoteibi().isVisible() && div.getTxtSiharaiYoteibi().getValue() != null) {
             支払予定日 = new FlexibleDate(div.getTxtSiharaiYoteibi().getValue().toDateString());
         }
         HokenshaNo 証記載保険者番号 = new HokenshaNo(div.getKyoTuuKaigoNinnteiSikaku().getHookenshaCode());

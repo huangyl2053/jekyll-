@@ -50,11 +50,14 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
+import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
-import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
-import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
+import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.EucFileOutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -62,6 +65,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -164,6 +168,8 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
     private static final RString カラ = new RString("～");
     private static final RString 左記号 = new RString("(");
     private static final RString 右記号 = new RString(")");
+    private static final RString SHOKISAIHIHOKENSHANO = new RString("利用者負担額減額_証記載保険者番号");
+    private static final RString HIHOKENSHANO = new RString("利用者負担額減額_被保険者番号");
     private FileSpoolManager manager;
     private RString eucFilePath;
     private HanyoListRiyoshaFutanGakuGengakuProcessParameter processParamter;
@@ -171,7 +177,6 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
     private Association association;
     private HokenshaList hokenshaList;
     private List<PersonalData> personalDataList;
-    private int i = 0;
 
     @Override
     protected void initialize() {
@@ -182,19 +187,25 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
 
     @Override
     protected IBatchReader createReader() {
+        RString 出力順 = get出力順();
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
+//        List<JuminShubetsu> 住民種別List = new ArrayList<>();
+//        List<JuminJotai> 住民状態List = new ArrayList<>();
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
-//        key.set町域コード開始値(ChoikiCode.EMPTY);
-//        key.set町域コード終了値(ChoikiCode.EMPTY);
-//        key.set行政区コード開始値(GyoseikuCode.EMPTY);
-//        key.set行政区コード終了値(GyoseikuCode.EMPTY);
-//        key.set地区コード1開始値(ChikuCode.EMPTY);
-//        key.set地区コード1終了値(ChikuCode.EMPTY);
-//        key.set地区コード2開始値(ChikuCode.EMPTY);
-//        key.set地区コード2終了値(ChikuCode.EMPTY);
-//        key.set地区コード3開始値(ChikuCode.EMPTY);
-//        key.set地区コード3終了値(ChikuCode.EMPTY);
+//        key.set住民種別(get住民種別(住民種別List));
+//        key.set住民状態(get住民状態(住民状態List));
+//        key.set同一人代表者優先区分(DoitsuninDaihyoshaYusenKubun.同一人代表者を優先しない);
+//        key.set町域コード開始値(new ChoikiCode(processParamter.getAtenacyusyutsujyoken().getJusho_From()));
+//        key.set町域コード終了値(new ChoikiCode(processParamter.getAtenacyusyutsujyoken().getJusho_To()));
+//        key.set行政区コード開始値(new GyoseikuCode(processParamter.getAtenacyusyutsujyoken().getGyoseiku_From()));
+//        key.set行政区コード終了値(new GyoseikuCode(processParamter.getAtenacyusyutsujyoken().getGyoseiku_To()));
+//        key.set地区コード1開始値(new ChikuCode(processParamter.getAtenacyusyutsujyoken().getChiku1_From()));
+//        key.set地区コード1終了値(new ChikuCode(processParamter.getAtenacyusyutsujyoken().getChiku1_To()));
+//        key.set地区コード2開始値(new ChikuCode(processParamter.getAtenacyusyutsujyoken().getChiku2_From()));
+//        key.set地区コード2終了値(new ChikuCode(processParamter.getAtenacyusyutsujyoken().getChiku2_To()));
+//        key.set地区コード3開始値(new ChikuCode(processParamter.getAtenacyusyutsujyoken().getChiku2_From()));
+//        key.set地区コード3終了値(new ChikuCode(processParamter.getAtenacyusyutsujyoken().getChiku3_To()));
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         RString psmShikibetsuTaisho = new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
         AtenaSearchKeyBuilder atenaSearchKeyBuilder = new AtenaSearchKeyBuilder(
@@ -202,7 +213,7 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
         UaFt250FindAtesakiFunction uaFt250Psm = new UaFt250FindAtesakiFunction(atenaSearchKeyBuilder.build().get宛先検索キー());
         RString psmAtesaki = new RString(uaFt250Psm.getParameterMap().get("psmAtesaki").toString());
         return new BatchDbReader(MYBATIS_SELECT_ID,
-                processParamter.toTokubetsuChiikiKasanGemmenMybatisParameter(psmShikibetsuTaisho, psmAtesaki));
+                processParamter.toTokubetsuChiikiKasanGemmenMybatisParameter(psmShikibetsuTaisho, psmAtesaki, 出力順));
     }
 
     @Override
@@ -236,6 +247,38 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
         manager.spool(eucFilePath, log);
 //        processParamter.getSyutsuryoku().equals(CSVSettings.日付スラッシュ編集)
         バッチ出力条件リストの出力();
+    }
+
+    private RString get出力順() {
+        RStringBuilder orderByClause = new RStringBuilder("order by");
+        List<RString> 出力DB項目名 = new ArrayList();
+        List<RString> 出力DB項目 = new ArrayList();
+        IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
+        IOutputOrder order = finder.get出力順(SubGyomuCode.DBD介護受給, new ReportId(processParamter.getCyohyoid()),
+                Long.valueOf(processParamter.getSyutsuryokujunparameter().toString()));
+        List<ISetSortItem> 設定項目リスト = order.get設定項目リスト();
+        for (ISetSortItem item : 設定項目リスト) {
+            出力DB項目名.add(item.getDB項目名());
+            出力DB項目.add(item.getDB項目名().concat(SPACE).concat(item.get昇降順().getOrder()));
+        }
+        if (出力DB項目名.contains(SHOKISAIHIHOKENSHANO) && !出力DB項目名.contains(HIHOKENSHANO)) {
+            for (int index = 0; index < 出力DB項目.size(); index++) {
+                if (出力DB項目.get(index).startsWith(SHOKISAIHIHOKENSHANO)) {
+                    出力DB項目.add(index + 1, HIHOKENSHANO);
+                }
+            }
+        } else if (!出力DB項目名.contains(SHOKISAIHIHOKENSHANO) && !出力DB項目名.contains(HIHOKENSHANO)) {
+            出力DB項目.add(SHOKISAIHIHOKENSHANO);
+            出力DB項目.add(HIHOKENSHANO);
+        }
+        for (int j = 0; j < 出力DB項目.size(); j++) {
+            if (j != 0) {
+                orderByClause = orderByClause.append(SPACE).append(COMMA).append(SPACE).append(出力DB項目.get(j));
+            } else {
+                orderByClause = orderByClause.append(SPACE).append(出力DB項目.get(j));
+            }
+        }
+        return orderByClause.toRString();
     }
 
     private RiyoshaFutanGakuGengakuEucCsvEntity setBlank() {
@@ -1049,7 +1092,7 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
         RString 導入団体コード = association.getLasdecCode_().value();
         RString 市町村名 = association.get市町村名();
         RString 出力ページ数 = new RString(String.valueOf(eucCsvWriter.getCount()));
-        RString csv出力有無 = new RString("無し");
+//        RString csv出力有無 = new RString("無し");
         RString 日本語ファイル名 = new RString("汎用リスト 利用者負担額減免CSV");
         RString 英数字ファイル名 = new RString("HanyoList_RiyoshaFutanGakuGengaku.csv");
         RString ジョブ番号 = new RString(String.valueOf(JobContextHolder.getJobId()));
@@ -1067,7 +1110,7 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
         if (null != processParamter.getKizyunnichi()) {
             builder.append(KIZYUNNICHI);
             builder.append(processParamter.getKizyunnichi().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             builder.append(COMMA);
         }
         builder = get日付範囲(builder);
@@ -1105,18 +1148,16 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
                 出力条件.add(build);
             }
         }
-        ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
-                new RString("DBD701004"),
+        EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
+                日本語ファイル名,
                 導入団体コード,
                 市町村名,
                 ジョブ番号,
-                日本語ファイル名,
-                出力ページ数,
-                csv出力有無,
                 英数字ファイル名,
+                new RString("DBD701004"),
+                出力ページ数,
                 出力条件);
-        IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);
-        printer.print();
+        EucFileOutputJokenhyoFactory.createInstance(item).print();
     }
 
     private RStringBuilder get日付範囲(RStringBuilder builder) {
@@ -1127,12 +1168,12 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
             builder.append(COLON);
             builder.append(SPACE);
             builder.append(processParamter.getHitsukehanifrom().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             builder.append(SPACE);
             builder.append(カラ);
             builder.append(SPACE);
             builder.append(processParamter.getHitsukehanito().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             builder.append(COMMA);
         } else if (!processParamter.getHitsukehanifrom().isEmpty()
                 && processParamter.getHitsukehanito().isEmpty()) {
@@ -1141,7 +1182,7 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
             builder.append(COLON);
             builder.append(SPACE);
             builder.append(processParamter.getHitsukehanifrom().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             builder.append(SPACE);
             builder.append(カラ);
             builder.append(COMMA);
@@ -1154,7 +1195,7 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
             builder.append(カラ);
             builder.append(SPACE);
             builder.append(processParamter.getHitsukehanito().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             builder.append(COMMA);
         }
         return builder;
@@ -1300,7 +1341,7 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
             builder.append(左記号);
             builder.append(NENLEIKIZYUNNICHI);
             builder.append(processParamter.getAtenacyusyutsujyoken().getNenreiKijunbi().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             builder.append(右記号);
         } else if (null != processParamter.getAtenacyusyutsujyoken().getNenreiRange()
                 && null != processParamter.getAtenacyusyutsujyoken().getNenreiRange().getFrom()
@@ -1317,7 +1358,7 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
             builder.append(左記号);
             builder.append(NENLEIKIZYUNNICHI);
             builder.append(processParamter.getAtenacyusyutsujyoken().getNenreiKijunbi().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             builder.append(右記号);
         } else if (null != processParamter.getAtenacyusyutsujyoken().getNenreiRange()
                 && null == processParamter.getAtenacyusyutsujyoken().getNenreiRange().getFrom()
@@ -1334,7 +1375,7 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
             builder.append(左記号);
             builder.append(NENLEIKIZYUNNICHI);
             builder.append(processParamter.getAtenacyusyutsujyoken().getNenreiKijunbi().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             builder.append(右記号);
         }
         return builder;
@@ -1348,19 +1389,19 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
             builder.append(SEINENGAPPI);
             builder.append(COLON);
             builder.append(processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getFrom().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             builder.append(SPACE);
             builder.append(カラ);
             builder.append(SPACE);
             builder.append(processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getTo().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         } else if (null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange()
                 && null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getFrom()
                 && null == processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getTo()) {
             builder.append(SEINENGAPPI);
             builder.append(COLON);
             builder.append(processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getFrom().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             builder.append(SPACE);
             builder.append(カラ);
         } else if (null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange()
@@ -1372,7 +1413,7 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
             builder.append(カラ);
             builder.append(SPACE);
             builder.append(processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getTo().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         }
         return builder;
     }
@@ -1381,4 +1422,20 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
         IAssociationFinder finder = AssociationFinderFactory.createInstance();
         return finder.getAssociation(市町村コード);
     }
+
+//    private List<JuminShubetsu> get住民種別(List<JuminShubetsu> 住民種別List) {
+//        住民種別List.add(JuminShubetsu.日本人);
+//        住民種別List.add(JuminShubetsu.外国人);
+//        住民種別List.add(JuminShubetsu.住登外個人_日本人);
+//        住民種別List.add(JuminShubetsu.住登外個人_外国人);
+//        return 住民種別List;
+//    }
+//
+//    private List<JuminJotai> get住民状態(List<JuminJotai> 住民状態List) {
+//        住民状態List.add(JuminJotai.住登外);
+//        住民状態List.add(JuminJotai.消除者);
+//        住民状態List.add(JuminJotai.転出者);
+//        住民状態List.add(JuminJotai.死亡者);
+//        return 住民状態List;
+//    }
 }

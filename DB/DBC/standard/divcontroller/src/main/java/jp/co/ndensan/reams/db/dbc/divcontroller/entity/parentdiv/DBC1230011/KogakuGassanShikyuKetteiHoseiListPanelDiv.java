@@ -4,22 +4,17 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1230011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
- * KogakuGassanShikyuKetteiHoseiListPanel のクラスファイル
- *
- * @reamsid_L DBC-2290-010 quxiaodong
+ * KogakuGassanShikyuKetteiHoseiListPanel のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class KogakuGassanShikyuKetteiHoseiListPanelDiv extends Panel {
-
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
@@ -103,7 +98,7 @@ public class KogakuGassanShikyuKetteiHoseiListPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShinkiTaishoNendo(TextBoxDate txtShinkiTaishoNendo) {
+    public void  setTxtShinkiTaishoNendo(TextBoxDate txtShinkiTaishoNendo) {
         this.getShinkiPanel().setTxtShinkiTaishoNendo(txtShinkiTaishoNendo);
     }
 
@@ -113,7 +108,7 @@ public class KogakuGassanShikyuKetteiHoseiListPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShinkiHihokenshaNo(TextBox txtShinkiHihokenshaNo) {
+    public void  setTxtShinkiHihokenshaNo(TextBox txtShinkiHihokenshaNo) {
         this.getShinkiPanel().setTxtShinkiHihokenshaNo(txtShinkiHihokenshaNo);
     }
 
@@ -123,7 +118,7 @@ public class KogakuGassanShikyuKetteiHoseiListPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtShinkiShikyuSeiriNo(TextBox txtShinkiShikyuSeiriNo) {
+    public void  setTxtShinkiShikyuSeiriNo(TextBox txtShinkiShikyuSeiriNo) {
         this.getShinkiPanel().setTxtShinkiShikyuSeiriNo(txtShinkiShikyuSeiriNo);
     }
 
@@ -133,7 +128,7 @@ public class KogakuGassanShikyuKetteiHoseiListPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnKetteiJohoAdd(Button btnKetteiJohoAdd) {
+    public void  setBtnKetteiJohoAdd(Button btnKetteiJohoAdd) {
         this.getShinkiPanel().setBtnKetteiJohoAdd(btnKetteiJohoAdd);
     }
 
@@ -143,7 +138,7 @@ public class KogakuGassanShikyuKetteiHoseiListPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtKensakuTaishoNendo(TextBoxDate txtKensakuTaishoNendo) {
+    public void  setTxtKensakuTaishoNendo(TextBoxDate txtKensakuTaishoNendo) {
         this.getSearchPanel().setTxtKensakuTaishoNendo(txtKensakuTaishoNendo);
     }
 
@@ -153,7 +148,7 @@ public class KogakuGassanShikyuKetteiHoseiListPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnKensaku(Button btnKensaku) {
+    public void  setBtnKensaku(Button btnKensaku) {
         this.getSearchPanel().setBtnKensaku(btnKensaku);
     }
 
@@ -163,7 +158,7 @@ public class KogakuGassanShikyuKetteiHoseiListPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtKensakuHihokenshaNo(TextBox txtKensakuHihokenshaNo) {
+    public void  setTxtKensakuHihokenshaNo(TextBox txtKensakuHihokenshaNo) {
         this.getSearchPanel().setTxtKensakuHihokenshaNo(txtKensakuHihokenshaNo);
     }
 
@@ -173,7 +168,7 @@ public class KogakuGassanShikyuKetteiHoseiListPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setTxtKensakuShikyuSeiriNo(TextBox txtKensakuShikyuSeiriNo) {
+    public void  setTxtKensakuShikyuSeiriNo(TextBox txtKensakuShikyuSeiriNo) {
         this.getSearchPanel().setTxtKensakuShikyuSeiriNo(txtKensakuShikyuSeiriNo);
     }
 

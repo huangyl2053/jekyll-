@@ -26,39 +26,28 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DBD571001Parameter extends BatchParameterBase {
 
-    private static final String CHUSHUTSUJYOHENSETEIKUBUN = "chushutsuJyohenSeteiKubun";
-    private static final String HIHOKENSHANOFROM = "hihokenshaNoFrom";
-    private static final String HIHOKENSHANOTO = "hihokenshaNoTo";
-    private static final String KONKAICHUSHUTSUYMDFROM = "konkaiChushutsuYMDFrom";
-    private static final String KONKAICHUSHUTSUTIMEFROM = "konkaiChushutsuTimeFrom";
-    private static final String KONKAICHUSHUTSUYMDTO = "konkaiChushutsuYMDTo";
-    private static final String KONKAICHUSHUTSUTIMETO = "konkaiChushutsuTimeTo";
-    private static final String IDOUCHUSHUTSUTAISHOU = "idouChushutsuTaishou";
-    private static final String SHUTSURYOKUOPTION = "shutsuryokuOption";
-    private static final String SHUTSURYOKUJUNSETEI = "shutsuryokujunSetei";
-    private static final String SHICHOSONCODE = "shichosonCode";
-    @BatchParameter(key = "CHUSHUTSUJYOHENSETEIKUBUN", name = "抽出条件設定区分")
-    private RString chushutsuJyohenSeteiKubun;
-    @BatchParameter(key = "HIHOKENSHANOFROM", name = "被保険者番号（From）")
-    private HihokenshaNo hihokenshaNoFrom;
-    @BatchParameter(key = "HIHOKENSHANOTO", name = "被保険者番号（To）")
-    private HihokenshaNo hihokenshaNoTo;
-    @BatchParameter(key = "KONKAICHUSHUTSUYMDFROM", name = "今回抽出開始年月日")
-    private RDate konkaiChushutsuYMDFrom;
-    @BatchParameter(key = "KONKAICHUSHUTSUTIMEFROM", name = "今回抽出開始時分秒")
-    private RTime konkaiChushutsuTimeFrom;
-    @BatchParameter(key = "KONKAICHUSHUTSUYMDTO", name = "今回抽出終了年月日")
-    private RDate konkaiChushutsuYMDTo;
-    @BatchParameter(key = "KONKAICHUSHUTSUTIMETO", name = "今回抽出終了時分秒")
-    private RTime konkaiChushutsuTimeTo;
-    @BatchParameter(key = "IDOUCHUSHUTSUTAISHOU", name = "異動抽出対象リスト")
-    private List<RString> idouChushutsuTaishou;
-    @BatchParameter(key = "SHUTSURYOKUOPTION", name = "出力オプション区分")
-    private RString shutsuryokuOption;
-    @BatchParameter(key = "SHUTSURYOKUJUNSETEI", name = "出力順設定リスト")
-    private RString shutsuryokujunSetei;
-    @BatchParameter(key = "SHICHOSONCODE", name = "市町村コード")
-    private RString shichosonCode;
+    @BatchParameter(key = "抽出条件設定区分", name = "抽出条件設定区分")
+    private RString 抽出条件設定区分;
+    @BatchParameter(key = "被保険者番号_From", name = "被保険者番号_From")
+    private HihokenshaNo 被保険者番号_From;
+    @BatchParameter(key = "被保険者番号_To", name = "被保険者番号_To")
+    private HihokenshaNo 被保険者番号_To;
+    @BatchParameter(key = "今回抽出開始年月日", name = "今回抽出開始年月日")
+    private RDate 今回抽出開始年月日;
+    @BatchParameter(key = "今回抽出開始時分秒", name = "今回抽出開始時分秒")
+    private RTime 今回抽出開始時分秒;
+    @BatchParameter(key = "今回抽出終了年月日", name = "今回抽出終了年月日")
+    private RDate 今回抽出終了年月日;
+    @BatchParameter(key = "今回抽出終了時分秒", name = "今回抽出終了時分秒")
+    private RTime 今回抽出終了時分秒;
+    @BatchParameter(key = "異動抽出対象リスト", name = "異動抽出対象リスト")
+    private List<RString> 異動抽出対象リスト;
+    @BatchParameter(key = "出力オプション区分", name = "出力オプション区分")
+    private RString 出力オプション区分;
+    @BatchParameter(key = "出力順設定リスト", name = "出力順設定リスト")
+    private RString 出力順設定リスト;
+    @BatchParameter(key = "市町村コード", name = "市町村コード")
+    private RString 市町村コード;
 
     /**
      * バーチのパラメータを作成します。
@@ -67,16 +56,16 @@ public class DBD571001Parameter extends BatchParameterBase {
      */
     public IdoChushutsuDaichoProcessParameter toIdoChushutsuDaichoProcessParameter() {
         return new IdoChushutsuDaichoProcessParameter(
-                chushutsuJyohenSeteiKubun,
-                hihokenshaNoFrom,
-                hihokenshaNoTo,
-                konkaiChushutsuYMDFrom,
-                konkaiChushutsuTimeFrom,
-                konkaiChushutsuYMDTo,
-                konkaiChushutsuTimeTo,
-                idouChushutsuTaishou,
-                shutsuryokuOption,
-                shutsuryokujunSetei,
-                shichosonCode);
+                抽出条件設定区分,
+                被保険者番号_From,
+                被保険者番号_To,
+                今回抽出開始年月日,
+                今回抽出開始時分秒,
+                今回抽出終了年月日,
+                今回抽出終了時分秒,
+                異動抽出対象リスト,
+                出力オプション区分,
+                出力順設定リスト,
+                市町村コード);
     }
 }

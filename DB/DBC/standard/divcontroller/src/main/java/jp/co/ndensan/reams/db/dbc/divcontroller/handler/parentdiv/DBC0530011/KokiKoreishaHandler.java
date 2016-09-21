@@ -22,12 +22,17 @@ import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaShubetsuType;
 import jp.co.ndensan.reams.ur.urz.service.core.hokenja.HokenjaManagerFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.hokenja.HokenjaSearchItem;
 import jp.co.ndensan.reams.ur.urz.service.core.hokenja.IHokenjaManager;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.INewSearchCondition;
 import jp.co.ndensan.reams.uz.uza.util.db.searchcondition.SearchConditionFactory;
@@ -68,15 +73,8 @@ public class KokiKoreishaHandler {
      * @param 後期高齢者情報 KokiKoreishaInfo
      */
     public void onLoad(ShikibetsuCode shikibetsuCode, HihokenshaNo 被保険者番号, KokiKoreishaInfo 後期高齢者情報) {
-        RString 履歴番号;
-        if (後期高齢者情報 != null) {
-            履歴番号 = 後期高齢者情報.get履歴番号();
-        } else {
-            履歴番号 = RString.EMPTY;
-        }
-        LockingKey key = new LockingKey(DBCSHIKIBETSUCODE.concat(shikibetsuCode.getColumnValue()).concat(DBCRIREKINO).
-                concat(履歴番号));
-        RealInitialLocker.lock(key);
+        LockingKey 排他キー = new LockingKey(new RString("DBCHihokenshaNo").concat(被保険者番号.getColumnValue()));
+        RealInitialLocker.lock(排他キー);
         ShichosonSecurityJoho shichosonSecurityJoho = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         IHokenjaManager iHokenjaManager = HokenjaManagerFactory.createInstance();
         INewSearchCondition 検索条件 = SearchConditionFactory.condition(
@@ -96,7 +94,7 @@ public class KokiKoreishaHandler {
         div.getHeaderPanel().getCcdAtenaInfo().setShoriType(コード);
         div.getHeaderPanel().getCcdAtenaInfo().setShinseishaJohoByShikibetsuCode(ShinseishoKanriNo.EMPTY, shikibetsuCode);
         div.getHeaderPanel().getCcdAtenaInfo().initialize();
-        div.getHeaderPanel().getCcdShikakuInfo().set被保険者番号(被保険者番号.value());
+        div.getHeaderPanel().getCcdShikakuInfo().initialize(shichosonSecurityJoho.get市町村情報().get市町村コード().value(), 被保険者番号.value());
         set資格取得事由();
         set資格喪失事由();
         set保険者番号(hokenja);
@@ -117,10 +115,10 @@ public class KokiKoreishaHandler {
                 keys.add(new RString("key0"));
                 div.getMeisaiPanel().getChkTorokuKubun().setSelectedItemsByKey(keys);
             }
-            if (後期高齢者情報.get保険者適用開始日() != null) {
+            if (後期高齢者情報.get保険者適用開始日() != null && !後期高齢者情報.get保険者適用開始日().isEmpty()) {
                 div.getMeisaiPanel().getTxtHokenshaKaishiYMD().setValue(new RDate(後期高齢者情報.get保険者適用開始日().toString()));
             }
-            if (後期高齢者情報.get保険者適用終了日() != null) {
+            if (後期高齢者情報.get保険者適用終了日() != null && !後期高齢者情報.get保険者適用終了日().isEmpty()) {
                 div.getMeisaiPanel().getTxtHokenshaShuryoYMD().setValue(new RDate(後期高齢者情報.get保険者適用終了日().toString()));
             }
             if (後期高齢者情報.get資格取得事由コード() != null) {
@@ -133,31 +131,24 @@ public class KokiKoreishaHandler {
                 div.getMeisaiPanel().getDdlKojinKubunCode().setSelectedKey(後期高齢者情報.get個人区分コード());
             }
         }
-        if (!DbBusinessConfig.get(ConfigNameDBC.国保_後期高齢ＩＦ_後期ＩＦ種類, RDate.getNowDate(), SubGyomuCode.DBC介護給付).
-                equals(コード)) {
-            div.getMeisaiPanel().getTxtHokenshaKaishiYMD().setVisible(false);
-            div.getMeisaiPanel().getTxtHokenshaShuryoYMD().setVisible(false);
-            div.getMeisaiPanel().getDdlShikakuShutokuJiyu().setVisible(false);
-            div.getMeisaiPanel().getDdlShikakuSoshitsuJiyu().setVisible(false);
-            div.getMeisaiPanel().getDdlKojinKubunCode().setVisible(false);
-        }
-
+        setVisible();
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), 被保険者番号.value());
+        AccessLogger.log(AccessLogType.照会, PersonalData.of(shikibetsuCode, expandedInfo));
     }
 
     /**
      * 前排他キーの解除
      *
-     * @param shikibetsuCode ShikibetsuCode
-     * @param rirekiNo RString
+     * @param 被保険者番号 HihokenshaNo
      */
-    public void 前排他キーの解除(ShikibetsuCode shikibetsuCode, RString rirekiNo) {
-        LockingKey 排他キー = new LockingKey(DBCSHIKIBETSUCODE.concat(shikibetsuCode.getColumnValue()).
-                concat(DBCRIREKINO).concat(rirekiNo));
-        RealInitialLocker.release(排他キー);
+    public void 前排他キーの解除(HihokenshaNo 被保険者番号) {
+        LockingKey 排他キー = new LockingKey(new RString("DBCHihokenshaNo").concat(被保険者番号.getColumnValue()));
+        RealInitialLocker.release(new LockingKey(排他キー));
     }
 
     private void set資格取得事由() {
         List<KeyValueDataSource> dataSources = new ArrayList<>();
+        dataSources.add(new KeyValueDataSource(new RString("EMPTY"), RString.EMPTY));
         for (ShikakuShutokuJiyu code : ShikakuShutokuJiyu.values()) {
             dataSources.add(get資格取得事由(code));
         }
@@ -176,6 +167,7 @@ public class KokiKoreishaHandler {
 
     private void set資格喪失事由() {
         List<KeyValueDataSource> dataSources = new ArrayList<>();
+        dataSources.add(new KeyValueDataSource(new RString("EMPTY"), RString.EMPTY));
         for (ShikakuSoshitsuJiyu code : ShikakuSoshitsuJiyu.values()) {
             dataSources.add(get資格喪失事由(code));
         }
@@ -188,5 +180,16 @@ public class KokiKoreishaHandler {
 
     private KeyValueDataSource get資格喪失事由(ShikakuSoshitsuJiyu 資格喪失事由) {
         return new KeyValueDataSource(資格喪失事由.getコード(), 資格喪失事由.get名称());
+    }
+
+    private void setVisible() {
+        if (!DbBusinessConfig.get(ConfigNameDBC.国保_後期高齢ＩＦ_後期ＩＦ種類, RDate.getNowDate(), SubGyomuCode.DBC介護給付).
+                equals(コード)) {
+            div.getMeisaiPanel().getTxtHokenshaKaishiYMD().setVisible(false);
+            div.getMeisaiPanel().getTxtHokenshaShuryoYMD().setVisible(false);
+            div.getMeisaiPanel().getDdlShikakuShutokuJiyu().setVisible(false);
+            div.getMeisaiPanel().getDdlShikakuSoshitsuJiyu().setVisible(false);
+            div.getMeisaiPanel().getDdlKojinKubunCode().setVisible(false);
+        }
     }
 }

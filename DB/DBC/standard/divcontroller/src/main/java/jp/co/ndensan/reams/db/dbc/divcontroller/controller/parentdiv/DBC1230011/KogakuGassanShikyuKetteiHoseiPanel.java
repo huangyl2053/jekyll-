@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC1230011;
 
+import java.io.Serializable;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei.KogakuGassanShikyuKetteiHoseiResult;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcInformationMessages;
@@ -41,6 +42,9 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
     private static final RString 事業高額合算支給決定情報補正 = new RString("事業分高額合算支給決定情報補正（単）");
     private static final RString 新規 = new RString("新規");
     private static final RString 修正 = new RString("修正");
+    private static final RString 削除 = new RString("削除");
+    private static final RString 削除照会モード = new RString("削除照会モード");
+    private static final RString 照会 = new RString("照会");
     private static final RString 処理不可 = new RString("処理不可");
     private static final int NUM_FOUR = 4;
     private static final int NUM_SIX = 6;
@@ -103,6 +107,7 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
         if (result == null || result.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         }
+        ViewStateHolder.put(ViewStateKeys.支給決定情報補正, (Serializable) result);
         getHandler(div).set決定情報一覧グリッド(result);
         return ResponseData.of(div).setState(DBC1230011StateName.支給決定情報一覧);
     }
@@ -242,9 +247,47 @@ public class KogakuGassanShikyuKetteiHoseiPanel {
     public ResponseData<KogakuGassanShikyuKetteiHoseiPanelDiv> onClick_modify(
             KogakuGassanShikyuKetteiHoseiPanelDiv div) {
         HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
         RString 処理モー = getHandler(div).get処理モード(被保険者番号, 修正);
         if (処理不可.equals(処理モー)) {
             return ResponseData.of(div).respond();
+        }
+        getHandler(div).set新規以外の決定情報(修正, 識別コード);
+
+        return ResponseData.of(div).setState(DBC1230011StateName.支給決定情報補正);
+    }
+
+    /**
+     * 「決定情報を選択する」ボタンです。
+     *
+     * @param div KogakuGassanShikyuKetteiHoseiPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<KogakuGassanShikyuKetteiHoseiPanelDiv> onClick_select(
+            KogakuGassanShikyuKetteiHoseiPanelDiv div) {
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        getHandler(div).set新規以外の決定情報(照会, 識別コード);
+        return ResponseData.of(div).setState(DBC1230011StateName.支給決定情報補正);
+    }
+
+    /**
+     * 「決定情報を削除する」ボタンです。
+     *
+     * @param div KogakuGassanShikyuKetteiHoseiPanelDiv
+     * @return ResponseData
+     */
+    public ResponseData<KogakuGassanShikyuKetteiHoseiPanelDiv> onClick_delete(
+            KogakuGassanShikyuKetteiHoseiPanelDiv div) {
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        ShikibetsuCode 識別コード = ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class);
+        RString 処理モー = getHandler(div).get処理モード(被保険者番号, 削除);
+        if (処理不可.equals(処理モー)) {
+            return ResponseData.of(div).respond();
+        }
+        if (削除照会モード.equals(処理モー)) {
+            getHandler(div).set新規以外の決定情報(照会, 識別コード);
+        } else {
+            getHandler(div).set新規以外の決定情報(削除, 識別コード);
         }
         return ResponseData.of(div).setState(DBC1230011StateName.支給決定情報補正);
     }

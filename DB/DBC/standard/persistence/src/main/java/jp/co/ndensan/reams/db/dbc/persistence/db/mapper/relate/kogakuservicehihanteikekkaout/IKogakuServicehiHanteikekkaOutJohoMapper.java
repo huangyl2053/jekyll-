@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakuservicehih
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kokuhorenkyoutsuu.KokuhorenIchiranhyoMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakuservicehihanteikekkaout.KogakuServicehiHanteiMybatisParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakuservicehihanteikekkaout.DbWT3411KogakuShikyuShinseiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakuservicehihanteikekkaout.KogakuServicehiHanteiGetHokenshaNoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakuservicehihanteikekkaout.KogakuServicehiHanteiGetSoufuDataEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakuservicehihanteikekkaout.KogakuServicehiHanteiIchiranhyoTaisyoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakuservicehihanteikekkaout.KogakuServicehiHanteiKanrenDataKoushinEntity;
@@ -45,9 +45,9 @@ public interface IKogakuServicehiHanteikekkaOutJohoMapper {
     /**
      * 高額介護サービス費支給一時TBLからデータを取ります。
      *
-     * @return List<DbWT3411KogakuShikyuShinseiEntity>
+     * @return List<KogakuServicehiHanteiGetHokenshaNoEntity>
      */
-    List<DbWT3411KogakuShikyuShinseiEntity> select保険者番号取得関連リスト();
+    List<KogakuServicehiHanteiGetHokenshaNoEntity> select保険者番号取得関連リスト();
 
     /**
      * 高額介護サービス費支給一時TBLからデータを取ります。
