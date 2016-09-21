@@ -72,8 +72,8 @@ public class GassanKetteiTsuchishoShiharaiYoteiBiYijiNashiBodyEditor
     private static final RString 口座種別 = new RString("口座種別");
     private static final RString ゆうちょ銀行店名表示 = new RString("ゆうちょ銀行店名表示");
     private static final RString 持ち物内容文言１ = new RString("持ち物内容文言１");
-    private static final RString 持ち物内容文言2 = new RString("持ち物内容文言2");
-    private static final RString 持ち物内容文言3 = new RString("持ち物内容文言3");
+    private static final RString 持ち物内容文言2 = new RString("持ち物内容文言２");
+    private static final RString 持ち物内容文言3 = new RString("持ち物内容文言３");
 
     /**
      * コンストラクタです
