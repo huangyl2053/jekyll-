@@ -1042,7 +1042,9 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
 
     private List<RString> getHeader() {
         List<RString> headList = new ArrayList<>();
-        headList.add(HEAD_連番);
+        if (parameter.is連番付加()) {
+            headList.add(HEAD_連番);
+        }
         headList.add(HEAD_識別コード);
         headList.add(HEAD_住民種別);
         headList.add(HEAD_氏名);

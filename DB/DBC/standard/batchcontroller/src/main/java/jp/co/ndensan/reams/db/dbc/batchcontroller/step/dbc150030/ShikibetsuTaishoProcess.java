@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc150030;
 
 import jp.co.ndensan.reams.db.dbc.definition.processprm.servicecoderiyojokyo.KyufuJissekiMeisaiGetProcessParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.DbWT3470ToukeihyoMeisaiTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.DbWT3470ToukeihyoMeisaichukanTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.DbWT3470shoriKekkaListTempEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -54,7 +53,7 @@ public class ShikibetsuTaishoProcess
     @Override
     protected void createWriter() {
         統計表明細中間一時tableWriter = new BatchEntityCreatedTempTableWriter(
-                統計表明細中間一時_TABLE_NAME, DbWT3470ToukeihyoMeisaiTempEntity.class);
+                統計表明細中間一時_TABLE_NAME, DbWT3470ToukeihyoMeisaichukanTempEntity.class);
         処理結果リスト一時tableWriter = new BatchEntityCreatedTempTableWriter(
                 処理結果リスト一時_TABLE_NAME, DbWT3470shoriKekkaListTempEntity.class);
     }
