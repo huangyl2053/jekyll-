@@ -325,10 +325,16 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
 
     private boolean check(KeikakuTodokedeJokyoIchiranEntity entity) {
         if (processParameter.getJyukyuushinseibiFrom() != null
+                && !processParameter.getJyukyuushinseibiFrom().isEmpty()
+                && entity.get受給申請年月日() != null
+                && !entity.get受給申請年月日().isEmpty()
                 && entity.get受給申請年月日().isBefore(processParameter.getJyukyuushinseibiFrom())) {
             return true;
         }
         if (processParameter.getJyukyuushinseibiTo() != null
+                && !processParameter.getJyukyuushinseibiTo().isEmpty()
+                && entity.get受給申請年月日() != null
+                && !entity.get受給申請年月日().isEmpty()
                 && processParameter.getJyukyuushinseibiTo().isBefore(entity.get受給申請年月日())) {
             return true;
         }
@@ -347,9 +353,13 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
             return true;
         }
         if (RS_1.equals(processParameter.getTodokeidejyoukyou())
+                && entity.get適用開始年月日() != null
+                && !entity.get適用開始年月日().isEmpty()
+                && processParameter.getKijyunbi() != null
+                && !processParameter.getKijyunbi().isEmpty()
                 && entity.get適用開始年月日().isBeforeOrEquals(processParameter.getKijyunbi())
-                && (processParameter.getKijyunbi().isBeforeOrEquals(entity.get適用終了年月日())
-                || entity.get適用終了年月日() == null)) {
+                && (entity.get適用終了年月日() == null
+                || processParameter.getKijyunbi().isBeforeOrEquals(entity.get適用終了年月日()))) {
             return true;
         }
         return RS_3.equals(processParameter.getTodokeidejyoukyou())
