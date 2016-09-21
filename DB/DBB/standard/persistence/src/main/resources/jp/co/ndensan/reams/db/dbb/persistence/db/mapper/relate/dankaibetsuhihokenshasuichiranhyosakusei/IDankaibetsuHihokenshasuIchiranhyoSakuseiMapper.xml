@@ -25,15 +25,11 @@
                 AND ("shikakuSoshitsuYMD" IS NULL
                 OR #{資格基準日}<![CDATA[<=]]> "shikakuSoshitsuYMD")
                 <if test="市町村コード">
-                    AND ("koikinaiJushochiTokureiFlag" ='1' AND "koikinaiTokureiSochimotoShichosonCode" in 
-                    <foreach item="市町村コード複数" index="index" collection="市町村コード複数" open="(" separator="," close=")">
-                        #{市町村コード複数}
-                    </foreach>
+                    AND ("koikinaiJushochiTokureiFlag" ='1' AND "koikinaiTokureiSochimotoShichosonCode" IN
+                    <foreach collection="市町村コードList" item="市町村コード" open="(" separator="," close=")"> #{市町村コード} </foreach>
                     )
-                    OR ("koikinaiJushochiTokureiFlag" ='0' AND "koikinaiTokureiSochimotoShichosonCode" in 
-                    <foreach item="市町村コード複数" index="index" collection="市町村コード複数" open="(" separator="," close=")">
-                        #{市町村コード複数}
-                    </foreach>
+                    OR ("koikinaiJushochiTokureiFlag" ='0' AND "koikinaiTokureiSochimotoShichosonCode" IN
+                    <foreach collection="市町村コードList" item="市町村コード" open="(" separator="," close=")"> #{市町村コード} </foreach>
                     )
                 </if>
         GROUP BY "hihokenshaNo") AS B
@@ -359,7 +355,7 @@
                 ELSE "HokenshaDankaiTemp"."保険者設定段階2" 
             END) AS HokenshaDankaiTemp_保険者設定段階,
             (CASE WHEN "HyojunDankaiTemp"."標準設定段階2" IS NULL 
-                OR "HokenshaDankaiTemp"."保険者設定段階2" =''
+                OR "HyojunDankaiTemp"."標準設定段階2" =''
                 THEN "HyojunDankaiTemp"."標準設定段階1" 
                 ELSE "HyojunDankaiTemp"."標準設定段階2" 
             END) AS HyojunDankaiTemp_標準設定段階
@@ -374,10 +370,8 @@
         ON
                 "HihokenshaTaihoTemp"."hihokenshaNo"="HyojunDankaiTemp"."被保険者番号"
             <if test="市町村コード" >
-                AND "HihokenshaTaihoTemp"."outPutShichosonCode" in 
-                <foreach item="市町村コード複数" index="index" collection="市町村コード複数" open="(" separator="," close=")">
-                    #{市町村コード複数}
-                </foreach>
+                AND "HihokenshaTaihoTemp"."outPutShichosonCode" IN
+                <foreach collection="市町村コードList" item="市町村コード" open="(" separator="," close=")"> #{市町村コード} </foreach>
             </if>
         ORDER  BY "HihokenshaTaihoTemp"."outPutShichosonCode","HihokenshaTaihoTemp"."hihokenshaNo"
     
@@ -440,10 +434,8 @@
                 ON
                     "HokenshaDankaiTemp"."被保険者番号" = "HihokenshaTaihoTemp"."hihokenshaNo"
                 <if test="市町村コード" >
-                    AND "HihokenshaTaihoTemp"."outPutShichosonCode" in 
-                    <foreach item="市町村コード複数" index="index" collection="市町村コード複数" open="(" separator="," close=")">
-                        #{市町村コード複数}
-                    </foreach>
+                    AND "HihokenshaTaihoTemp"."outPutShichosonCode" IN
+                    <foreach collection="市町村コードList" item="市町村コード" open="(" separator="," close=")"> #{市町村コード} </foreach>
                 </if>
             ) A
             GROUP BY A."shichosonCode",A."保険者設定段階"
@@ -463,7 +455,7 @@
                         "HihokenshaTaihoTemp"."shichosonCode",
                         (case when
                         "HyojunDankaiTemp"."標準設定段階2" is null
-                        OR "HokenshaDankaiTemp"."保険者設定段階2" =''
+                        OR "HyojunDankaiTemp"."標準設定段階2" =''
                         then
                         "HyojunDankaiTemp"."標準設定段階1"
                         else
@@ -476,17 +468,15 @@
                     ON
                         "HyojunDankaiTemp"."被保険者番号" = "HihokenshaTaihoTemp"."hihokenshaNo"
                     <if test="市町村コード"  >
-                        AND "HihokenshaTaihoTemp"."outPutShichosonCode" in 
-                        <foreach item="市町村コード複数" index="index" collection="市町村コード複数" open="(" separator="," close=")">
-                            #{市町村コード複数}
-                        </foreach>
+                        AND "HihokenshaTaihoTemp"."outPutShichosonCode" IN
+                        <foreach collection="市町村コードList" item="市町村コード" open="(" separator="," close=")"> #{市町村コード} </foreach>
                     </if>
                 ) C
                 GROUP BY C."shichosonCode",C."標準設定段階"
                 ORDER BY C."shichosonCode",C."標準設定段階"
             ) D
-        ) E
-    )
-    ORDER BY E."shichosonCode",E."標準設定段階"
+        )
+    ) E
+    ORDER BY E."shichosonCode"
     </select>
 </mapper>

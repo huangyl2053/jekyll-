@@ -40,17 +40,17 @@ import jp.co.ndensan.reams.ur.urz.business.core.jusho.banchi.Banchi;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Katagaki;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
@@ -132,14 +132,14 @@ public class HanyoListSogoJigyoHi {
         }
         eucEntity.set保険者コード(association.get地方公共団体コード().value());
         eucEntity.set保険者名(association.get市町村名());
-        eucEntity.set空白(new RString(" "));
+        eucEntity.set空白(RString.EMPTY);
         eucEntity.set被保険者番号(entity.get被保険者番号());
         eucEntity.set給付実績情報作成区分(KyufukanrihyoSakuseiKubun.toValue(entity.get給付実績情報作成区分コード()).get名称());
         eucEntity.set給付実績区分(KyufuJissekiKubun.toValue(entity.get給付実績区分()).get名称());
         eucEntity.set給付証記載保険者番号(entity.get証記載保険者番号());
-        eucEntity.setサービス提供年月(set日付編集(entity.getサービス提供年月()));
+        eucEntity.setサービス提供年月(set年月(entity.getサービス提供年月()));
         eucEntity.set給付実績事業者番号(entity.get事業所番号());
-        if (entity.get事業者名称().isNullOrEmpty()) {
+        if (RString.isNullOrEmpty(entity.get事業者名称())) {
             eucEntity.set給付実績事業者名(RString.EMPTY);
         } else {
             eucEntity.set給付実績事業者名(entity.get事業者名称());
@@ -164,73 +164,8 @@ public class HanyoListSogoJigyoHi {
         eucEntity.set後保険請求額(entity.get後保険請求額());
         eucEntity.set後保険利用者負担額(entity.get後保険利用者負担額());
         eucEntity.set警告区分(KeikokuKubun.toValue(entity.get警告区分コード()).get名称());
-        eucEntity.set審査年月(set日付編集(entity.get審査年月()));
-        eucEntity.set取込年月(set日付編集(entity.get取込年月()));
-        return eucEntity;
-    }
-
-    /**
-     * HanyoListSogoJigyoHiKiHonReibanAriEUCEntityの設定クラスです。
-     *
-     * @return HanyoListSogoJigyoHiKiHonReibanAriEUCEntity
-     */
-    public HanyoListSogoJigyoHiKiHonReibanAriEUCEntity set連番基本ありEUCEntity() {
-        HanyoListSogoJigyoHiKiHonReibanAriEUCEntity eucEntity = new HanyoListSogoJigyoHiKiHonReibanAriEUCEntity();
-        eucEntity.set連番(null);
-        eucEntity.set識別コード(null);
-        eucEntity.set住民種別(null);
-        eucEntity.set氏名(null);
-        eucEntity.set氏名カナ(null);
-        eucEntity.set生年月日(null);
-        eucEntity.set年齢(null);
-        eucEntity.set性別(null);
-        eucEntity.set続柄コード(null);
-        eucEntity.set世帯コード(null);
-        eucEntity.set世帯主名(null);
-        eucEntity.set住所コード(null);
-        eucEntity.set郵便番号(null);
-        eucEntity.set住所_番地_方書(null);
-        eucEntity.set住所(null);
-        eucEntity.set番地(null);
-        eucEntity.set方書(null);
-        eucEntity.set行政区コード(null);
-        eucEntity.set行政区名(null);
-        eucEntity.set地区１(null);
-        eucEntity.set地区２(null);
-        eucEntity.set地区３(null);
-        eucEntity.set市町村コード(null);
-        eucEntity.set市町村名(null);
-        eucEntity.set空白(null);
-        eucEntity.set被保険者番号(null);
-        eucEntity.set給付実績情報作成区分(null);
-        eucEntity.set給付実績区分(null);
-        eucEntity.set給付証記載保険者番号(null);
-        eucEntity.setサービス提供年月(null);
-        eucEntity.set給付実績事業者番号(null);
-        eucEntity.set給付実績事業者名(null);
-        eucEntity.set整理番号(null);
-        eucEntity.set給付実績生年月日(null);
-        eucEntity.set給付実績性別(null);
-        eucEntity.set給付実績要介護状態区分(null);
-        eucEntity.set給付実績認定開始日(null);
-        eucEntity.set給付実績認定終了日(null);
-        eucEntity.set老人保健市町村番号(null);
-        eucEntity.set老人保健受給者番号(null);
-        eucEntity.set保険者番号後期(null);
-        eucEntity.set被保険者番号後期(null);
-        eucEntity.set保険者番号国保(null);
-        eucEntity.set被保険者証番号国保(null);
-        eucEntity.set個人番号国保(null);
-        eucEntity.set開始年月日(null);
-        eucEntity.set中止年月日(null);
-        eucEntity.set前保険サービス単位数(0);
-        eucEntity.set前保険請求額(0);
-        eucEntity.set前保険利用者負担額(0);
-        eucEntity.set後サービス単位数(0);
-        eucEntity.set後保険請求額(0);
-        eucEntity.set後保険利用者負担額(0);
-        eucEntity.set警告区分(null);
-        eucEntity.set取込年月(null);
+        eucEntity.set審査年月(set年月(entity.get審査年月()));
+        eucEntity.set取込年月(set年月(entity.get取込年月()));
         return eucEntity;
     }
 
@@ -281,7 +216,7 @@ public class HanyoListSogoJigyoHi {
         }
         eucEntity.set保険者コード(association.get地方公共団体コード().value());
         eucEntity.set保険者名(association.get市町村名());
-        eucEntity.set空白(new RString(" "));
+        eucEntity.set空白(RString.EMPTY);
         eucEntity.setサービス種類コード(entity.get明細サービス種類コード());
         eucEntity.setサービス種類名称(entity.get明細サービス種類名称());
         eucEntity.setサービス項目コード(entity.get明細サービス項目コード());
@@ -304,66 +239,8 @@ public class HanyoListSogoJigyoHi {
         eucEntity.set後保険請求額(entity.get後保険請求額());
         eucEntity.set後保険利用者負担額(entity.get後保険利用者負担額());
         eucEntity.set警告区分(KeikokuKubun.toValue(entity.get警告区分コード()).get名称());
-        eucEntity.set審査年月(set日付編集(entity.get審査年月()));
-        eucEntity.set取込年月(set日付編集(entity.get取込年月()));
-        return eucEntity;
-    }
-
-    /**
-     * HanyoListSogoJigyoHiKiHonMeisaiReibanAriEUCEntityの設定クラスです。
-     *
-     * @return HanyoListSogoJigyoHiKiHonMeisaiReibanAriEUCEntity
-     */
-    public HanyoListSogoJigyoHiKiHonMeisaiReibanAriEUCEntity set連番基本明細ありEUCEntity() {
-        HanyoListSogoJigyoHiKiHonMeisaiReibanAriEUCEntity eucEntity = new HanyoListSogoJigyoHiKiHonMeisaiReibanAriEUCEntity();
-        eucEntity.set連番(null);
-        eucEntity.set識別コード(null);
-        eucEntity.set住民種別(null);
-        eucEntity.set氏名(null);
-        eucEntity.set氏名カナ(null);
-        eucEntity.set生年月日(null);
-        eucEntity.set年齢(null);
-        eucEntity.set性別(null);
-        eucEntity.set続柄コード(null);
-        eucEntity.set世帯コード(null);
-        eucEntity.set世帯主名(null);
-        eucEntity.set住所コード(null);
-        eucEntity.set郵便番号(null);
-        eucEntity.set住所_番地_方書(null);
-        eucEntity.set住所(null);
-        eucEntity.set番地(null);
-        eucEntity.set方書(null);
-        eucEntity.set行政区コード(null);
-        eucEntity.set行政区名(null);
-        eucEntity.set地区１(null);
-        eucEntity.set地区２(null);
-        eucEntity.set地区３(null);
-        eucEntity.set市町村コード(null);
-        eucEntity.set市町村名(null);
-        eucEntity.set空白(null);
-        eucEntity.setサービス種類コード(null);
-        eucEntity.setサービス種類名称(null);
-        eucEntity.setサービス項目コード(null);
-        eucEntity.setサービス項目名称(null);
-        eucEntity.set点数(0);
-        eucEntity.set日数回数(0);
-        eucEntity.setサービス点数(0);
-        eucEntity.set摘要(null);
-        eucEntity.set後点数(0);
-        eucEntity.set後日数回数(0);
-        eucEntity.set後サービス点数(0);
-        eucEntity.set再審査回数(0);
-        eucEntity.set過誤回数(0);
-        eucEntity.set開始年月日(null);
-        eucEntity.set中止年月日(null);
-        eucEntity.set前保険サービス単位数(0);
-        eucEntity.set前保険請求額(0);
-        eucEntity.set前保険利用者負担額(0);
-        eucEntity.set後保険サービス単位数(0);
-        eucEntity.set後保険請求額(0);
-        eucEntity.set後保険利用者負担額(0);
-        eucEntity.set警告区分(null);
-        eucEntity.set取込年月(null);
+        eucEntity.set審査年月(set年月(entity.get審査年月()));
+        eucEntity.set取込年月(set年月(entity.get取込年月()));
         return eucEntity;
     }
 
@@ -414,7 +291,7 @@ public class HanyoListSogoJigyoHi {
         }
         eucEntity.set保険者コード(association.get地方公共団体コード().value());
         eucEntity.set保険者名(association.get市町村名());
-        eucEntity.set空白(new RString(" "));
+        eucEntity.set空白(RString.EMPTY);
         eucEntity.setサービス種類コード(entity.get集計サービス種類コード());
         eucEntity.setサービス種類名称(entity.get集計サービス種類名称());
         eucEntity.setサービス実日数(entity.get集計サービス実日数());
@@ -438,67 +315,8 @@ public class HanyoListSogoJigyoHi {
         eucEntity.set後保険請求額(entity.get後保険請求額());
         eucEntity.set後保険利用者負担額(entity.get後保険利用者負担額());
         eucEntity.set警告区分(KeikokuKubun.toValue(entity.get警告区分コード()).get名称());
-        eucEntity.set審査年月(set日付編集(entity.get審査年月()));
-        eucEntity.set取込年月(set日付編集(entity.get取込年月()));
-        return eucEntity;
-    }
-
-    /**
-     * HanyoListSogoJigyoHiKiHonShukeiReibanAriEUCEntityの設定クラスです。
-     *
-     * @return HanyoListSogoJigyoHiKiHonShukeiReibanAriEUCEntity
-     */
-    public HanyoListSogoJigyoHiKiHonShukeiReibanAriEUCEntity set連番基本集計ありEUCEntity() {
-        HanyoListSogoJigyoHiKiHonShukeiReibanAriEUCEntity eucEntity = new HanyoListSogoJigyoHiKiHonShukeiReibanAriEUCEntity();
-        eucEntity.set連番(null);
-        eucEntity.set識別コード(null);
-        eucEntity.set住民種別(null);
-        eucEntity.set氏名(null);
-        eucEntity.set氏名カナ(null);
-        eucEntity.set生年月日(null);
-        eucEntity.set年齢(null);
-        eucEntity.set性別(null);
-        eucEntity.set続柄コード(null);
-        eucEntity.set世帯コード(null);
-        eucEntity.set世帯主名(null);
-        eucEntity.set住所コード(null);
-        eucEntity.set郵便番号(null);
-        eucEntity.set住所_番地_方書(null);
-        eucEntity.set住所(null);
-        eucEntity.set番地(null);
-        eucEntity.set方書(null);
-        eucEntity.set行政区コード(null);
-        eucEntity.set行政区名(null);
-        eucEntity.set地区１(null);
-        eucEntity.set地区２(null);
-        eucEntity.set地区３(null);
-        eucEntity.set市町村コード(null);
-        eucEntity.set市町村名(null);
-        eucEntity.set空白(null);
-        eucEntity.setサービス種類コード(null);
-        eucEntity.setサービス種類名称(null);
-        eucEntity.setサービス実日数(0);
-        eucEntity.set計画点数(0);
-        eucEntity.set限度額管理対象点数(0);
-        eucEntity.set限度額管理対象外点数(0);
-        eucEntity.set請求点数合計(0);
-        eucEntity.set請求点数単価(0);
-        eucEntity.set請求額(0);
-        eucEntity.set利用者負担額(0);
-        eucEntity.set後点数合計(0);
-        eucEntity.set後保険請求分請求額(0);
-        eucEntity.set再審査回数(0);
-        eucEntity.set過誤回数(0);
-        eucEntity.set開始年月日(null);
-        eucEntity.set中止年月日(null);
-        eucEntity.set前保険サービス単位数(0);
-        eucEntity.set前保険請求額(0);
-        eucEntity.set前保険利用者負担額(0);
-        eucEntity.set後保険サービス単位数(0);
-        eucEntity.set後保険請求額(0);
-        eucEntity.set後保険利用者負担額(0);
-        eucEntity.set警告区分(null);
-        eucEntity.set取込年月(null);
+        eucEntity.set審査年月(set年月(entity.get審査年月()));
+        eucEntity.set取込年月(set年月(entity.get取込年月()));
         return eucEntity;
     }
 
@@ -549,7 +367,7 @@ public class HanyoListSogoJigyoHi {
         }
         eucEntity.set保険者コード(association.get地方公共団体コード().value());
         eucEntity.set保険者名(association.get市町村名());
-        eucEntity.set空白(new RString(" "));
+        eucEntity.set空白(RString.EMPTY);
         eucEntity.set指定基準該当事業者区分(JigyoshoKubun.toValue(entity.getケアマネジメント費指定基準該当事業所区分()).get名称());
         eucEntity.set単位数単価(entity.getケアマネジメント費単位数単価());
         eucEntity.setサービスコード(entity.getケアマネジメント費サービスコード());
@@ -578,72 +396,8 @@ public class HanyoListSogoJigyoHi {
         eucEntity.set後保険請求額(entity.get後保険請求額());
         eucEntity.set後保険利用者負担額(entity.get後保険利用者負担額());
         eucEntity.set警告区分(KeikokuKubun.toValue(entity.get警告区分コード()).get名称());
-        eucEntity.set審査年月(set日付編集(entity.get審査年月()));
-        eucEntity.set取込年月(set日付編集(entity.get取込年月()));
-        return eucEntity;
-    }
-
-    /**
-     * HanyoListSogoJigyoHiKiHonManejimentoReibanAriEUCEntityの設定クラスです。
-     *
-     * @return HanyoListSogoJigyoHiKiHonManejimentoReibanAriEUCEntity
-     */
-    public HanyoListSogoJigyoHiKiHonManejimentoReibanAriEUCEntity set連番基本マネジありEUCEntity() {
-        HanyoListSogoJigyoHiKiHonManejimentoReibanAriEUCEntity eucEntity = new HanyoListSogoJigyoHiKiHonManejimentoReibanAriEUCEntity();
-        eucEntity.set連番(null);
-        eucEntity.set識別コード(null);
-        eucEntity.set住民種別(null);
-        eucEntity.set氏名(null);
-        eucEntity.set氏名カナ(null);
-        eucEntity.set生年月日(null);
-        eucEntity.set年齢(null);
-        eucEntity.set性別(null);
-        eucEntity.set続柄コード(null);
-        eucEntity.set世帯コード(null);
-        eucEntity.set世帯主名(null);
-        eucEntity.set住所コード(null);
-        eucEntity.set郵便番号(null);
-        eucEntity.set住所_番地_方書(null);
-        eucEntity.set住所(null);
-        eucEntity.set番地(null);
-        eucEntity.set方書(null);
-        eucEntity.set行政区コード(null);
-        eucEntity.set行政区名(null);
-        eucEntity.set地区１(null);
-        eucEntity.set地区２(null);
-        eucEntity.set地区３(null);
-        eucEntity.set市町村コード(null);
-        eucEntity.set市町村名(null);
-        eucEntity.set空白(null);
-        eucEntity.set指定基準該当事業者区分(null);
-        eucEntity.set単位数単価(0);
-        eucEntity.setサービスコード(null);
-        eucEntity.setサービス名称(null);
-        eucEntity.set単位数(0);
-        eucEntity.set回数(0);
-        eucEntity.setサービス単位数(0);
-        eucEntity.setサービス単位数合計(0);
-        eucEntity.set請求金額(0);
-        eucEntity.set摘要(null);
-        eucEntity.set利用者負担額(0);
-        eucEntity.set後単位数(0);
-        eucEntity.set後回数(0);
-        eucEntity.set後サービス単位数(0);
-        eucEntity.set後サービス単位数合計(0);
-        eucEntity.set後請求金額(0);
-        eucEntity.set後利用者負担額(0);
-        eucEntity.set再審査回数(0);
-        eucEntity.set過誤回数(0);
-        eucEntity.set開始年月日(null);
-        eucEntity.set中止年月日(null);
-        eucEntity.set前保険サービス単位数(0);
-        eucEntity.set前保険請求額(0);
-        eucEntity.set前保険利用者負担額(0);
-        eucEntity.set後保険サービス単位数(0);
-        eucEntity.set後保険請求額(0);
-        eucEntity.set後保険利用者負担額(0);
-        eucEntity.set警告区分(null);
-        eucEntity.set取込年月(null);
+        eucEntity.set審査年月(set年月(entity.get審査年月()));
+        eucEntity.set取込年月(set年月(entity.get取込年月()));
         return eucEntity;
     }
 
@@ -692,14 +446,14 @@ public class HanyoListSogoJigyoHi {
         }
         eucEntity.set保険者コード(association.get地方公共団体コード().value());
         eucEntity.set保険者名(association.get市町村名());
-        eucEntity.set空白(new RString(" "));
+        eucEntity.set空白(RString.EMPTY);
         eucEntity.set被保険者番号(entity.get被保険者番号());
         eucEntity.set給付実績情報作成区分(KyufukanrihyoSakuseiKubun.toValue(entity.get給付実績情報作成区分コード()).get名称());
         eucEntity.set給付実績区分(KyufuJissekiKubun.toValue(entity.get給付実績区分()).get名称());
         eucEntity.set給付証記載保険者番号(entity.get証記載保険者番号());
-        eucEntity.setサービス提供年月(set日付編集(entity.getサービス提供年月()));
+        eucEntity.setサービス提供年月(set年月(entity.getサービス提供年月()));
         eucEntity.set給付実績事業者番号(entity.get事業所番号());
-        if (entity.get事業者名称().isNullOrEmpty()) {
+        if (RString.isNullOrEmpty(entity.get事業者名称())) {
             eucEntity.set給付実績事業者名(RString.EMPTY);
         } else {
             eucEntity.set給付実績事業者名(entity.get事業者名称());
@@ -724,72 +478,8 @@ public class HanyoListSogoJigyoHi {
         eucEntity.set後保険請求額(entity.get後保険請求額());
         eucEntity.set後保険利用者負担額(entity.get後保険利用者負担額());
         eucEntity.set警告区分(KeikokuKubun.toValue(entity.get警告区分コード()).get名称());
-        eucEntity.set審査年月(set日付編集(entity.get審査年月()));
-        eucEntity.set取込年月(set日付編集(entity.get取込年月()));
-        return eucEntity;
-    }
-
-    /**
-     * HanyoListSogoJigyoHiKiHonReibanNashiEUCEntityの設定クラスです。
-     *
-     * @return HanyoListSogoJigyoHiKiHonReibanNashiEUCEntity
-     */
-    public HanyoListSogoJigyoHiKiHonReibanNashiEUCEntity set連番基本なしEUCEntity() {
-        HanyoListSogoJigyoHiKiHonReibanNashiEUCEntity eucEntity = new HanyoListSogoJigyoHiKiHonReibanNashiEUCEntity();
-        eucEntity.set識別コード(null);
-        eucEntity.set住民種別(null);
-        eucEntity.set氏名(null);
-        eucEntity.set氏名カナ(null);
-        eucEntity.set生年月日(null);
-        eucEntity.set年齢(null);
-        eucEntity.set性別(null);
-        eucEntity.set続柄コード(null);
-        eucEntity.set世帯コード(null);
-        eucEntity.set世帯主名(null);
-        eucEntity.set住所コード(null);
-        eucEntity.set郵便番号(null);
-        eucEntity.set住所_番地_方書(null);
-        eucEntity.set住所(null);
-        eucEntity.set番地(null);
-        eucEntity.set方書(null);
-        eucEntity.set行政区コード(null);
-        eucEntity.set行政区名(null);
-        eucEntity.set地区１(null);
-        eucEntity.set地区２(null);
-        eucEntity.set地区３(null);
-        eucEntity.set市町村コード(null);
-        eucEntity.set市町村名(null);
-        eucEntity.set空白(null);
-        eucEntity.set被保険者番号(null);
-        eucEntity.set給付実績情報作成区分(null);
-        eucEntity.set給付実績区分(null);
-        eucEntity.set給付証記載保険者番号(null);
-        eucEntity.setサービス提供年月(null);
-        eucEntity.set給付実績事業者番号(null);
-        eucEntity.set給付実績事業者名(null);
-        eucEntity.set整理番号(null);
-        eucEntity.set給付実績生年月日(null);
-        eucEntity.set給付実績性別(null);
-        eucEntity.set給付実績要介護状態区分(null);
-        eucEntity.set給付実績認定開始日(null);
-        eucEntity.set給付実績認定終了日(null);
-        eucEntity.set老人保健市町村番号(null);
-        eucEntity.set老人保健受給者番号(null);
-        eucEntity.set保険者番号後期(null);
-        eucEntity.set被保険者番号後期(null);
-        eucEntity.set保険者番号国保(null);
-        eucEntity.set被保険者証番号国保(null);
-        eucEntity.set個人番号国保(null);
-        eucEntity.set開始年月日(null);
-        eucEntity.set中止年月日(null);
-        eucEntity.set前保険サービス単位数(0);
-        eucEntity.set前保険請求額(0);
-        eucEntity.set前保険利用者負担額(0);
-        eucEntity.set後保険サービス単位数(0);
-        eucEntity.set後保険請求額(0);
-        eucEntity.set後保険利用者負担額(0);
-        eucEntity.set警告区分(null);
-        eucEntity.set取込年月(null);
+        eucEntity.set審査年月(set年月(entity.get審査年月()));
+        eucEntity.set取込年月(set年月(entity.get取込年月()));
         return eucEntity;
     }
 
@@ -838,7 +528,7 @@ public class HanyoListSogoJigyoHi {
         }
         eucEntity.set保険者コード(association.get地方公共団体コード().value());
         eucEntity.set保険者名(association.get市町村名());
-        eucEntity.set空白(new RString(" "));
+        eucEntity.set空白(RString.EMPTY);
         eucEntity.setサービス種類コード(entity.get明細サービス種類コード());
         eucEntity.setサービス種類名称(entity.get明細サービス種類名称());
         eucEntity.setサービス項目コード(entity.get明細サービス項目コード());
@@ -861,65 +551,8 @@ public class HanyoListSogoJigyoHi {
         eucEntity.set後保険請求額(entity.get後保険請求額());
         eucEntity.set後保険利用者負担額(entity.get後保険利用者負担額());
         eucEntity.set警告区分(KeikokuKubun.toValue(entity.get警告区分コード()).get名称());
-        eucEntity.set審査年月(set日付編集(entity.get審査年月()));
-        eucEntity.set取込年月(set日付編集(entity.get取込年月()));
-        return eucEntity;
-    }
-
-    /**
-     * HanyoListSogoJigyoHiKiHonMeisaiReibanNashiEUCEntityの設定クラスです。
-     *
-     * @return HanyoListSogoJigyoHiKiHonMeisaiReibanNashiEUCEntity
-     */
-    public HanyoListSogoJigyoHiKiHonMeisaiReibanNashiEUCEntity set連番基本明細なしEUCEntity() {
-        HanyoListSogoJigyoHiKiHonMeisaiReibanNashiEUCEntity eucEntity = new HanyoListSogoJigyoHiKiHonMeisaiReibanNashiEUCEntity();
-        eucEntity.set識別コード(null);
-        eucEntity.set住民種別(null);
-        eucEntity.set氏名(null);
-        eucEntity.set氏名カナ(null);
-        eucEntity.set生年月日(null);
-        eucEntity.set年齢(null);
-        eucEntity.set性別(null);
-        eucEntity.set続柄コード(null);
-        eucEntity.set世帯コード(null);
-        eucEntity.set世帯主名(null);
-        eucEntity.set住所コード(null);
-        eucEntity.set郵便番号(null);
-        eucEntity.set住所_番地_方書(null);
-        eucEntity.set住所(null);
-        eucEntity.set番地(null);
-        eucEntity.set方書(null);
-        eucEntity.set行政区コード(null);
-        eucEntity.set行政区名(null);
-        eucEntity.set地区１(null);
-        eucEntity.set地区２(null);
-        eucEntity.set地区３(null);
-        eucEntity.set市町村コード(null);
-        eucEntity.set市町村名(null);
-        eucEntity.set空白(null);
-        eucEntity.setサービス種類コード(null);
-        eucEntity.setサービス種類名称(null);
-        eucEntity.setサービス項目コード(null);
-        eucEntity.setサービス項目名称(null);
-        eucEntity.set点数(0);
-        eucEntity.set日数回数(0);
-        eucEntity.setサービス点数(0);
-        eucEntity.set摘要(null);
-        eucEntity.set後点数(0);
-        eucEntity.set後日数回数(0);
-        eucEntity.set後サービス点数(0);
-        eucEntity.set再審査回数(0);
-        eucEntity.set過誤回数(0);
-        eucEntity.set開始年月日(null);
-        eucEntity.set中止年月日(null);
-        eucEntity.set前保険サービス単位数(0);
-        eucEntity.set前保険請求額(0);
-        eucEntity.set前保険利用者負担額(0);
-        eucEntity.set後保険サービス単位数(0);
-        eucEntity.set後保険請求額(0);
-        eucEntity.set後保険利用者負担額(0);
-        eucEntity.set警告区分(null);
-        eucEntity.set取込年月(null);
+        eucEntity.set審査年月(set年月(entity.get審査年月()));
+        eucEntity.set取込年月(set年月(entity.get取込年月()));
         return eucEntity;
     }
 
@@ -968,7 +601,7 @@ public class HanyoListSogoJigyoHi {
         }
         eucEntity.set保険者コード(association.get地方公共団体コード().value());
         eucEntity.set保険者名(association.get市町村名());
-        eucEntity.set空白(new RString(" "));
+        eucEntity.set空白(RString.EMPTY);
         eucEntity.setサービス種類コード(entity.get集計サービス種類コード());
         eucEntity.setサービス種類名称(entity.get集計サービス種類名称());
         eucEntity.setサービス実日数(entity.get集計サービス実日数());
@@ -992,66 +625,8 @@ public class HanyoListSogoJigyoHi {
         eucEntity.set後保険請求額(entity.get後保険請求額());
         eucEntity.set後利用者負担額(entity.get後保険利用者負担額());
         eucEntity.set警告区分(KeikokuKubun.toValue(entity.get警告区分コード()).get名称());
-        eucEntity.set審査年月(set日付編集(entity.get審査年月()));
-        eucEntity.set取込年月(set日付編集(entity.get取込年月()));
-        return eucEntity;
-    }
-
-    /**
-     * HanyoListSogoJigyoHiKiHonShukeiReibanNashiEUCEntityの設定クラスです。
-     *
-     * @return HanyoListSogoJigyoHiKiHonShukeiReibanNashiEUCEntity
-     */
-    public HanyoListSogoJigyoHiKiHonShukeiReibanNashiEUCEntity set連番基本集計なしEUCEntity() {
-        HanyoListSogoJigyoHiKiHonShukeiReibanNashiEUCEntity eucEntity = new HanyoListSogoJigyoHiKiHonShukeiReibanNashiEUCEntity();
-        eucEntity.set識別コード(null);
-        eucEntity.set住民種別(null);
-        eucEntity.set氏名(null);
-        eucEntity.set氏名カナ(null);
-        eucEntity.set生年月日(null);
-        eucEntity.set年齢(null);
-        eucEntity.set性別(null);
-        eucEntity.set続柄コード(null);
-        eucEntity.set世帯コード(null);
-        eucEntity.set世帯主名(null);
-        eucEntity.set住所コード(null);
-        eucEntity.set郵便番号(null);
-        eucEntity.set住所_番地_方書(null);
-        eucEntity.set住所(null);
-        eucEntity.set番地(null);
-        eucEntity.set方書(null);
-        eucEntity.set行政区コード(null);
-        eucEntity.set行政区名(null);
-        eucEntity.set地区１(null);
-        eucEntity.set地区２(null);
-        eucEntity.set地区３(null);
-        eucEntity.set市町村コード(null);
-        eucEntity.set市町村名(null);
-        eucEntity.set空白(null);
-        eucEntity.setサービス種類コード(null);
-        eucEntity.setサービス種類名称(null);
-        eucEntity.setサービス実日数(0);
-        eucEntity.set計画点数(0);
-        eucEntity.set限度額管理対象点数(0);
-        eucEntity.set限度額管理対象外点数(0);
-        eucEntity.set請求点数合計(0);
-        eucEntity.set請求点数単価(0);
-        eucEntity.set請求額(0);
-        eucEntity.set利用者負担額(0);
-        eucEntity.set後点数合計(0);
-        eucEntity.set後保険請求分請求額(0);
-        eucEntity.set再審査回数(0);
-        eucEntity.set過誤回数(0);
-        eucEntity.set開始年月日(null);
-        eucEntity.set中止年月日(null);
-        eucEntity.set前サービス単位数(0);
-        eucEntity.set前保険請求額(0);
-        eucEntity.set前利用者負担額(0);
-        eucEntity.set後サービス単位数(0);
-        eucEntity.set後保険請求額(0);
-        eucEntity.set後利用者負担額(0);
-        eucEntity.set警告区分(null);
-        eucEntity.set取込年月(null);
+        eucEntity.set審査年月(set年月(entity.get審査年月()));
+        eucEntity.set取込年月(set年月(entity.get取込年月()));
         return eucEntity;
     }
 
@@ -1100,7 +675,7 @@ public class HanyoListSogoJigyoHi {
         }
         eucEntity.set保険者コード(association.get地方公共団体コード().value());
         eucEntity.set保険者名(association.get市町村名());
-        eucEntity.set空白(new RString(" "));
+        eucEntity.set空白(RString.EMPTY);
         eucEntity.set指定基準該当事業者区分(JigyoshoKubun.toValue(entity.getケアマネジメント費指定基準該当事業所区分()).get名称());
         eucEntity.set単位数単価(entity.getケアマネジメント費単位数単価());
         eucEntity.setサービスコード(entity.getケアマネジメント費サービスコード());
@@ -1129,71 +704,8 @@ public class HanyoListSogoJigyoHi {
         eucEntity.set後保険請求額(entity.get後保険請求額());
         eucEntity.set後保険利用者負担額(entity.get後保険利用者負担額());
         eucEntity.set警告区分(KeikokuKubun.toValue(entity.get警告区分コード()).get名称());
-        eucEntity.set審査年月(set日付編集(entity.get審査年月()));
-        eucEntity.set取込年月(set日付編集(entity.get取込年月()));
-        return eucEntity;
-    }
-
-    /**
-     * HanyoListSogoJigyoHiKiHonManejimentoReibanNashiEUCEntityの設定クラスです。
-     *
-     * @return HanyoListSogoJigyoHiKiHonManejimentoReibanNashiEUCEntity
-     */
-    public HanyoListSogoJigyoHiKiHonManejimentoReibanNashiEUCEntity set連番基本マネジなしEUCEntity() {
-        HanyoListSogoJigyoHiKiHonManejimentoReibanNashiEUCEntity eucEntity = new HanyoListSogoJigyoHiKiHonManejimentoReibanNashiEUCEntity();
-        eucEntity.set識別コード(null);
-        eucEntity.set住民種別(null);
-        eucEntity.set氏名(null);
-        eucEntity.set氏名カナ(null);
-        eucEntity.set生年月日(null);
-        eucEntity.set年齢(null);
-        eucEntity.set性別(null);
-        eucEntity.set続柄コード(null);
-        eucEntity.set世帯コード(null);
-        eucEntity.set世帯主名(null);
-        eucEntity.set住所コード(null);
-        eucEntity.set郵便番号(null);
-        eucEntity.set住所_番地_方書(null);
-        eucEntity.set住所(null);
-        eucEntity.set番地(null);
-        eucEntity.set方書(null);
-        eucEntity.set行政区コード(null);
-        eucEntity.set行政区名(null);
-        eucEntity.set地区１(null);
-        eucEntity.set地区２(null);
-        eucEntity.set地区３(null);
-        eucEntity.set市町村コード(null);
-        eucEntity.set市町村名(null);
-        eucEntity.set空白(null);
-        eucEntity.set指定基準該当事業者区分(null);
-        eucEntity.set単位数単価(0);
-        eucEntity.setサービスコード(null);
-        eucEntity.setサービス名称(null);
-        eucEntity.set単位数(0);
-        eucEntity.set回数(0);
-        eucEntity.setサービス単位数(0);
-        eucEntity.setサービス単位数合計(0);
-        eucEntity.set請求金額(0);
-        eucEntity.set摘要(null);
-        eucEntity.set利用者負担額(0);
-        eucEntity.set後単位数(0);
-        eucEntity.set後回数(0);
-        eucEntity.set後サービス単位数(0);
-        eucEntity.set後サービス単位数合計(0);
-        eucEntity.set後請求金額(0);
-        eucEntity.set後利用者負担額(0);
-        eucEntity.set再審査回数(0);
-        eucEntity.set過誤回数(0);
-        eucEntity.set開始年月日(null);
-        eucEntity.set中止年月日(null);
-        eucEntity.set前保険サービス単位数(0);
-        eucEntity.set前保険請求額(0);
-        eucEntity.set前保険利用者負担額(0);
-        eucEntity.set後保険サービス単位数(0);
-        eucEntity.set後保険請求額(0);
-        eucEntity.set後保険利用者負担額(0);
-        eucEntity.set警告区分(null);
-        eucEntity.set取込年月(null);
+        eucEntity.set審査年月(set年月(entity.get審査年月()));
+        eucEntity.set取込年月(set年月(entity.get取込年月()));
         return eucEntity;
     }
 
@@ -1209,7 +721,7 @@ public class HanyoListSogoJigyoHi {
         RStringBuilder jokenBuilder = new RStringBuilder();
         List<RString> 出力条件List = new ArrayList<>();
         jokenBuilder.append(new RString("【抽出対象者】"));
-        if (!processParameter.get保険者コード().isEmpty() && !保険者_すべて.equals(processParameter.get保険者コード())) {
+        if (!RString.isNullOrEmpty(processParameter.get保険者コード()) && !保険者_すべて.equals(processParameter.get保険者コード())) {
             jokenBuilder.append(new RString("保険者："));
             jokenBuilder.append(市町村名);
         }
@@ -1217,13 +729,13 @@ public class HanyoListSogoJigyoHi {
         jokenBuilder.append(setサービス提供年月());
         jokenBuilder.append(set審査年月());
         jokenBuilder.append(set取込年月());
-        if (!processParameter.get事業者コード().isEmpty()) {
+        if (!RString.isNullOrEmpty(processParameter.get事業者コード())) {
             jokenBuilder.append(new RString("事業者コード：("));
             jokenBuilder.append(processParameter.get事業者コード());
             jokenBuilder.append(new RString("） "));
             jokenBuilder.append(事業所名);
         }
-        if (!processParameter.getサービス種類コード().isEmpty()) {
+        if (!RString.isNullOrEmpty(processParameter.getサービス種類コード())) {
             jokenBuilder.append(new RString("サービス種類コード："));
             jokenBuilder.append(processParameter.getサービス種類コード());
             jokenBuilder.append(new RString("） "));
@@ -1276,8 +788,10 @@ public class HanyoListSogoJigyoHi {
     }
 
     private RString set年月(RString date) {
-        return new FlexibleDate(date).getYearMonth().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        if (date.isNullOrEmpty()) {
+            return RString.EMPTY;
+        }
+        return new FlexibleDate(date).seireki().separator(Separator.SLASH).fillType(FillType.ZERO).getYearMonth();
     }
 
     private RStringBuilder set抽出方法() {
@@ -1296,19 +810,19 @@ public class HanyoListSogoJigyoHi {
 
     private RStringBuilder setサービス提供年月() {
         RStringBuilder jokenBuilder = new RStringBuilder();
-        if (!processParameter.getサービス提供年月開始年月().isEmpty()
-                && !processParameter.getサービス提供年月終了年月().isEmpty()) {
+        if (!RString.isNullOrEmpty(processParameter.getサービス提供年月開始年月())
+                && !RString.isNullOrEmpty(processParameter.getサービス提供年月終了年月())) {
             jokenBuilder.append(new RString("サービス提供年月："));
             jokenBuilder.append(set年月(processParameter.getサービス提供年月開始年月()));
             jokenBuilder.append(new RString("～"));
             jokenBuilder.append(set年月(processParameter.getサービス提供年月終了年月()));
-        } else if (!processParameter.getサービス提供年月開始年月().isEmpty()
-                && processParameter.getサービス提供年月終了年月().isEmpty()) {
+        } else if (!RString.isNullOrEmpty(processParameter.getサービス提供年月開始年月())
+                && RString.isNullOrEmpty(processParameter.getサービス提供年月終了年月())) {
             jokenBuilder.append(new RString("サービス提供年月："));
             jokenBuilder.append(set年月(processParameter.getサービス提供年月開始年月()));
             jokenBuilder.append(new RString("～"));
-        } else if (processParameter.getサービス提供年月開始年月().isEmpty()
-                && !processParameter.getサービス提供年月終了年月().isEmpty()) {
+        } else if (RString.isNullOrEmpty(processParameter.getサービス提供年月開始年月())
+                && !RString.isNullOrEmpty(processParameter.getサービス提供年月終了年月())) {
             jokenBuilder.append(new RString("サービス提供年月："));
             jokenBuilder.append(new RString("～"));
             jokenBuilder.append(set年月(processParameter.getサービス提供年月終了年月()));
@@ -1318,19 +832,19 @@ public class HanyoListSogoJigyoHi {
 
     private RStringBuilder set審査年月() {
         RStringBuilder jokenBuilder = new RStringBuilder();
-        if (!processParameter.get審査年月開始年月().isEmpty()
-                && !processParameter.get審査年月終了年月().isEmpty()) {
+        if (!RString.isNullOrEmpty(processParameter.get審査年月開始年月())
+                && !RString.isNullOrEmpty(processParameter.get審査年月終了年月())) {
             jokenBuilder.append(new RString("審査年月："));
             jokenBuilder.append(set年月(processParameter.get審査年月開始年月()));
             jokenBuilder.append(new RString("～"));
             jokenBuilder.append(set年月(processParameter.get審査年月終了年月()));
-        } else if (!processParameter.get審査年月開始年月().isEmpty()
-                && processParameter.get審査年月終了年月().isEmpty()) {
+        } else if (!RString.isNullOrEmpty(processParameter.get審査年月開始年月())
+                && RString.isNullOrEmpty(processParameter.get審査年月終了年月())) {
             jokenBuilder.append(new RString("審査年月："));
             jokenBuilder.append(set年月(processParameter.get審査年月開始年月()));
             jokenBuilder.append(new RString("～"));
-        } else if (processParameter.get審査年月開始年月().isEmpty()
-                && !processParameter.get審査年月終了年月().isEmpty()) {
+        } else if (RString.isNullOrEmpty(processParameter.get審査年月開始年月())
+                && !RString.isNullOrEmpty(processParameter.get審査年月終了年月())) {
             jokenBuilder.append(new RString("審査年月："));
             jokenBuilder.append(new RString("～"));
             jokenBuilder.append(set年月(processParameter.get審査年月終了年月()));
@@ -1340,19 +854,19 @@ public class HanyoListSogoJigyoHi {
 
     private RStringBuilder set取込年月() {
         RStringBuilder jokenBuilder = new RStringBuilder();
-        if (!processParameter.get取込年月開始年月().isEmpty()
-                && !processParameter.get取込年月終了年月().isEmpty()) {
+        if (!RString.isNullOrEmpty(processParameter.get取込年月開始年月())
+                && !RString.isNullOrEmpty(processParameter.get取込年月終了年月())) {
             jokenBuilder.append(new RString("取込年月："));
             jokenBuilder.append(set年月(processParameter.get取込年月開始年月()));
             jokenBuilder.append(new RString("～"));
             jokenBuilder.append(set年月(processParameter.get取込年月終了年月()));
-        } else if (!processParameter.get取込年月開始年月().isEmpty()
-                && processParameter.get取込年月終了年月().isEmpty()) {
+        } else if (!RString.isNullOrEmpty(processParameter.get取込年月開始年月())
+                && RString.isNullOrEmpty(processParameter.get取込年月終了年月())) {
             jokenBuilder.append(new RString("取込年月："));
             jokenBuilder.append(set年月(processParameter.get取込年月開始年月()));
             jokenBuilder.append(new RString("～"));
-        } else if (processParameter.get取込年月開始年月().isEmpty()
-                && !processParameter.get取込年月終了年月().isEmpty()) {
+        } else if (RString.isNullOrEmpty(processParameter.get取込年月開始年月())
+                && !RString.isNullOrEmpty(processParameter.get取込年月終了年月())) {
             jokenBuilder.append(new RString("取込年月："));
             jokenBuilder.append(new RString("～"));
             jokenBuilder.append(set年月(processParameter.get取込年月終了年月()));
@@ -1361,7 +875,8 @@ public class HanyoListSogoJigyoHi {
     }
 
     private PersonalData toPersonalData(RString 被保険者番号, ShikibetsuCode 識別コード) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), 被保険者番号);
+        return PersonalData.of(識別コード, expandedInfo);
     }
 
     private RString set日付編集(FlexibleDate value) {

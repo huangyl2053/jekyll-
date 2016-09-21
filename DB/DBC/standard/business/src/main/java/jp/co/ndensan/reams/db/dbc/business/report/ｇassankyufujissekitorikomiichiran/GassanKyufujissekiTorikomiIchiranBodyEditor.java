@@ -42,13 +42,17 @@ public class GassanKyufujissekiTorikomiIchiranBodyEditor implements IGassanKyufu
     @Override
     public GassanKyufujissekiTorikomiIchiranSource edit(GassanKyufujissekiTorikomiIchiranSource source) {
         source.list_1 = new RString(連番);
-        source.list_2 = target.get被保険者一時().get登録被保険者番号().getColumnValue();
+        if (target.get被保険者一時().get登録被保険者番号() != null) {
+            source.list_2 = target.get被保険者一時().get登録被保険者番号().getColumnValue();
+        }
         source.list_3 = target.get被保険者一時().get宛名名称();
         source.list_4 = target.get高額合算給付実績一時().getShikyuShinseiSeiriNo();
         source.list_5 = target.get高額合算給付実績一時().getJikoFutanSeiriNo();
         source.list_6 = KaigoGassan_KyufuJissekiSakuseiKubun
                 .toValue(target.get高額合算給付実績一時().getKyufuJissekiSakuseiKubunCode()).get名称();
-        source.list_7 = target.get高額合算給付実績一時().getShoKisaiHokenshaNo().getColumnValue();
+        if (target.get高額合算給付実績一時().getShoKisaiHokenshaNo() != null) {
+            source.list_7 = target.get高額合算給付実績一時().getShoKisaiHokenshaNo().getColumnValue();
+        }
         source.list_8 = パターン4(target.get高額合算給付実績一時().getShinseiYMD());
         source.list_9 = パターン4(target.get高額合算給付実績一時().getKetteiYMD());
         if (target.get高額合算給付実績一時().getJikoFutanSogaku() != null) {
@@ -61,7 +65,9 @@ public class GassanKyufujissekiTorikomiIchiranBodyEditor implements IGassanKyufu
         source.yubinNo = target.get被保険者一時().get郵便番号();
         source.choikiCode = target.get被保険者一時().get町域コード();
         source.gyoseikuCode = target.get被保険者一時().get行政区コード();
-        source.shichosonCode = target.get被保険者一時().get市町村コード().getColumnValue();
+        if (target.get被保険者一時().get市町村コード() != null) {
+            source.shichosonCode = target.get被保険者一時().get市町村コード().getColumnValue();
+        }
         source.shimei50onKana = target.get被保険者一時().get氏名50音カナ();
         source.shikyuShinseishoSeiriNo = target.get高額合算給付実績一時().getShikyuShinseiSeiriNo();
         return source;

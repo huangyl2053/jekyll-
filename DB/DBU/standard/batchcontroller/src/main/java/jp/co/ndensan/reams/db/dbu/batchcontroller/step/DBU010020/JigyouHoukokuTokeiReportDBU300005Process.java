@@ -138,7 +138,7 @@ public class JigyouHoukokuTokeiReportDBU300005Process extends BatchProcessBase<J
 
     @Override
     protected void createWriter() {
-        batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBU.DBU300003.getReportId().value()).create();
+        batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBU.DBU300005.getReportId().value()).create();
         reportSourceWriter = new ReportSourceWriter(batchWrite);
     }
 

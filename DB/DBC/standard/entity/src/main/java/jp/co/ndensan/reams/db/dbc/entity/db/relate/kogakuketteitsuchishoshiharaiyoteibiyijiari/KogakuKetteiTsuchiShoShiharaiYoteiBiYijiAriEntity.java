@@ -41,6 +41,10 @@ public class KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEntity {
     private RString 支払方法区分;
     private RString 支払場所;
     private RDate 支払期間;
+    private RDate 支払期間開始年月日;
+    private RDate 支払期間終了年月日;
+    private RString 支払窓口開始時間;
+    private RString 支払窓口終了時間;
     private RString 金融機関上段;
     private RString 金融機関下段;
     private RString 支払方法;

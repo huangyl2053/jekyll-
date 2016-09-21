@@ -148,7 +148,7 @@ public class JigyoHokokuGeppoHokenkyufuKogakuGassanProcessParamter implements IB
      * @return JigyoHokokuGeppoHokenkyufuKogakuGassanMybatisParamter
      */
     public JigyoHokokuGeppoHokenkyufuKogakuGassanMybatisParamter toJigyoHokokuDataCSVMybitisParamter(RString 集計番号) {
-        return JigyoHokokuGeppoHokenkyufuKogakuGassanMybatisParamter.createInsertKougakuDataParam(集計番号);
+        return JigyoHokokuGeppoHokenkyufuKogakuGassanMybatisParamter.createInsertKougakuCSVDataParam(集計番号, 決定年月);
     }
 
     /**

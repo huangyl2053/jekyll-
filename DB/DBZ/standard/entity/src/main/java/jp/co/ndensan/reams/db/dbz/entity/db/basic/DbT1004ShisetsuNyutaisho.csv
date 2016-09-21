@@ -9,3 +9,4 @@ nyushoYMD,UDD015YMD,FlexibleDate,,,,,入所年月日,A
 taishoShoriYMD,UDD015YMD,FlexibleDate,,,,,退所処理年月日,A
 taishoYMD,UDD015YMD,FlexibleDate,,,,,退所年月日,A
 roomKigoNo,varchar,RString,,,,,部屋記号番号,A
+hokenshaNo,DbUDD003HokenshaNo,DbUDD003HokenshaNo,,,,,保険者番号,A

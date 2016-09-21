@@ -2,13 +2,13 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.servicecoderiyoj
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.servicecoderiyojokyo.KyufuJissekiMeisaiGetMybatisParameter;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.ChohyouShutsuryokuyouTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.DbWT3470ToukeihyoMeisaichukanTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.DbWT3470chohyouShutsuryokuyouTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.DbWT3470shoriKekkaListTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.HihokenshaShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.KyufuJissekiMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.TaniSuNissuKaisuEntity;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * サービスコード別利用状況作成Mapperクラスです。
@@ -65,19 +65,11 @@ public interface IServicecodeRiyojokyoMapper {
     List<TaniSuNissuKaisuEntity> get回数単位数(KyufuJissekiMeisaiGetMybatisParameter parameter);
 
     /**
-     * 帳票出力用一時TBLの取得
-     *
-     * @return DbWT3470chohyouShutsuryokuyouTempEntity
-     */
-    List<DbWT3470chohyouShutsuryokuyouTempEntity> get帳票出力用一時TBL();
-
-    /**
      * 帳票出力用一時TBLの更新処理
      *
-     * @param parameter KyufuJissekiMeisaiGetMybatisParameter
-     * @return RString
+     * @return ChohyouShutsuryokuyouTempEntity
      */
-    List<RString> update帳票出力用一時TBL(KyufuJissekiMeisaiGetMybatisParameter parameter);
+    List<ChohyouShutsuryokuyouTempEntity> update帳票出力用一時TBL();
 
     /**
      * 帳票出力用一時TBLの取得出力順

@@ -25,6 +25,7 @@ public class GassanShikyuFushikyuKetteishaIchiranReport
     private final boolean 集計Flag;
     private final GassanShikyuFushikyuKetteishaIchiranParameter paramter;
     private final RString 内部帳票文字切れ制御;
+    private static final int INT_14 = 14;
 
     /**
      *
@@ -48,6 +49,9 @@ public class GassanShikyuFushikyuKetteishaIchiranReport
     @Override
     public void writeBy(ReportSourceWriter<GassanShikyuFushikyuKetteishaIchiranSource> writer) {
         if (集計Flag) {
+            if (帳票出力対象データ.get履歴番号() == INT_14) {
+                writeLine(writer, null, true);
+            }
             writeLine(writer, null, true);
             writeLine(writer, 帳票出力対象データ, true);
         } else {

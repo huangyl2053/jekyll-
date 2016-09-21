@@ -103,6 +103,18 @@ public class CreatCalCulateEntity {
     public FukaCalculateTempEntity creat賦課Entity(FukaCalculateTempEntity entity,
             FukaCalculateEntity 賦課計算entity) {
         entity = set介護賦課Entity(entity, 賦課計算entity);
+        return entity;
+    }
+
+    /**
+     * 期別金額Entityを作成のメソッドです。
+     *
+     * @param entity FukaCalculateTempEntity
+     * @param 賦課計算entity FukaCalculateEntity
+     * @return FukaCalculateTempEntity
+     */
+    public FukaCalculateTempEntity creat期別金額Entity(FukaCalculateTempEntity entity,
+            FukaCalculateEntity 賦課計算entity) {
         entity = set期別金額(entity, 賦課計算entity);
         return entity;
     }

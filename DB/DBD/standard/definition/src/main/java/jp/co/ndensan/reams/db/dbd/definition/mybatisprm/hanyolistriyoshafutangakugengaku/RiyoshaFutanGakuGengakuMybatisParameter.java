@@ -92,6 +92,7 @@ public class RiyoshaFutanGakuGengakuMybatisParameter implements IMyBatisParamete
     private boolean has地区3To;
     private final RString psmShikibetsuTaisho;
     private final RString psmAtesaki;
+    private final RString 出力順;
 
     /**
      * コンストラクタです。
@@ -109,6 +110,7 @@ public class RiyoshaFutanGakuGengakuMybatisParameter implements IMyBatisParamete
      * @param atenacyusyutsujyoken 宛名抽出条件
      * @param psmShikibetsuTaisho 宛名識別対象PSM
      * @param psmAtesaki 宛名識別対象PSM
+     * @param 出力順 出力順
      */
     public RiyoshaFutanGakuGengakuMybatisParameter(
             RString cyusyutsuhohokubun,
@@ -123,7 +125,8 @@ public class RiyoshaFutanGakuGengakuMybatisParameter implements IMyBatisParamete
             RString kyakasha,
             AtenaSelectBatchParameter atenacyusyutsujyoken,
             RString psmShikibetsuTaisho,
-            RString psmAtesaki) {
+            RString psmAtesaki,
+            RString 出力順) {
         this.cyusyutsuhohokubun = cyusyutsuhohokubun;
         this.cyusyutsukomokukubun = cyusyutsukomokukubun;
         this.kizyunnichi = kizyunnichi;
@@ -139,6 +142,7 @@ public class RiyoshaFutanGakuGengakuMybatisParameter implements IMyBatisParamete
         this.決定区分_承認する = KetteiKubun.承認する.getコード();
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
         this.psmAtesaki = psmAtesaki;
+        this.出力順 = 出力順;
         set抽出方法区分();
         set年齢層抽出方法();
         set地区区分();

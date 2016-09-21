@@ -5,14 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0200025;
 
-import java.util.ArrayList;
-import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0200025.SogoJigyohiKagoMositateshoJohoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0200011.KokuhorenDataSofuViewState;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.viewstatename.ViewStateHolderName;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -38,21 +38,15 @@ public class SogoJigyohiKagoMositateshoJohoPanelHandler {
     /**
      * 画面初期化のメソッドます。
      *
-     * @return list
      */
-    public List initialize() {
+    public void initialize() {
         RString 状態パターン2 = new RString("2");
-        ReportId 帳票ID = new ReportId("DBC200079_SogojigyohiKagoMoshitateshojohoSofuIchiran");
-        RString 再処理区分 = ViewStateHolder.get(ViewStateHolderName.国保連送付情報, KokuhorenDataSofuViewState.class).
-                get再処理区分();
-        RYearMonth 処理年月 = ViewStateHolder.get(ViewStateHolderName.国保連送付情報, KokuhorenDataSofuViewState.class).
-                get処理年月();
-        div.getCcdKokuhorenJohoSofu().initialize(処理年月, 再処理区分,
-                ConfigNameDBC.国保連送付媒体_過誤申立総合Ｆ_外部ＣＳＶファイル名.get名称(), 状態パターン2);
-        div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, 帳票ID);
-        List list = new ArrayList();
-        list.add(再処理区分);
-        list.add(処理年月);
-        return list;
+        KokuhorenDataSofuViewState 送付情報 = ViewStateHolder.get(ViewStateHolderName.国保連送付情報, KokuhorenDataSofuViewState.class);
+        RString 再処理区分 = 送付情報.get再処理区分();
+        RYearMonth 処理年月 = 送付情報.get処理年月();
+        RString 外部ＣＳＶファイル名 = DbBusinessConfig.get(ConfigNameDBC.国保連送付媒体_過誤申立総合Ｆ_外部ＣＳＶファイル名,
+                RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        div.getCcdKokuhorenJohoSofu().initialize(処理年月, 再処理区分, 外部ＣＳＶファイル名, 状態パターン2);
+        div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200079.getReportId());
     }
 }

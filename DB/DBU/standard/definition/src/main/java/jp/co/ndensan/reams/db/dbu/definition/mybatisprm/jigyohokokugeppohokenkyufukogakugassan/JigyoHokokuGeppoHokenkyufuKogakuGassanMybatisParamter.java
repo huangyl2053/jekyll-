@@ -84,10 +84,11 @@ public final class JigyoHokokuGeppoHokenkyufuKogakuGassanMybatisParamter impleme
      * 事業状況報告統計元データ作成のパラメータを生成します。
      *
      * @param 集計番号 集計番号
+     * @param 決定年月 決定年月
      * @return JigyoHokokuGeppoHokenkyufuKogakuMybatisParamter
      */
-    public static JigyoHokokuGeppoHokenkyufuKogakuGassanMybatisParamter createInsertKougakuDataParam(RString 集計番号) {
-        return new JigyoHokokuGeppoHokenkyufuKogakuGassanMybatisParamter(RString.EMPTY, RString.EMPTY, null, RString.EMPTY, 集計番号, null,
+    public static JigyoHokokuGeppoHokenkyufuKogakuGassanMybatisParamter createInsertKougakuCSVDataParam(RString 集計番号, RString 決定年月) {
+        return new JigyoHokokuGeppoHokenkyufuKogakuGassanMybatisParamter(RString.EMPTY, RString.EMPTY, null, 決定年月, 集計番号, null,
                 RString.EMPTY, null, null, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, null);
     }
 

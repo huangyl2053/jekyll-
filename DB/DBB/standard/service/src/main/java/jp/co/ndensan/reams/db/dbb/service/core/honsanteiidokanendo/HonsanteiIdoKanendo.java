@@ -10,9 +10,9 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.honsanteiidokanendo.HonsanteiIdoDivParameter;
 import jp.co.ndensan.reams.db.dbb.business.core.basic.honsanteiidokanendo.HonsanteiIdoParameter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidogennen.ChohyoResult;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidokanendofuka.HonSanteiIdoFukaBatchParameter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidokanendofuka.HonSanteiIdoKanendoFukaBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB051001.ChohyoResult;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB055001.DBB055001_KanendoIdoFukaParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB055003.DBB055003_KanendoIdoTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -198,8 +198,8 @@ public class HonsanteiIdoKanendo {
      * @param parameter parameter
      * @return BatchParamResult
      */
-    public HonSanteiIdoKanendoFukaBatchParameter createBatchParam(HonsanteiIdoDivParameter parameter) {
-        HonSanteiIdoKanendoFukaBatchParameter result = new HonSanteiIdoKanendoFukaBatchParameter();
+    public DBB055003_KanendoIdoTsuchishoHakkoParameter createBatchParam(HonsanteiIdoDivParameter parameter) {
+        DBB055003_KanendoIdoTsuchishoHakkoParameter result = new DBB055003_KanendoIdoTsuchishoHakkoParameter();
         result.set調定年度(parameter.get調定年度());
         RString 決定_変更通知書区分 = RString.EMPTY;
         if (parameter.get決定_チェックボックス().equals(oneRS)) {
@@ -241,8 +241,8 @@ public class HonsanteiIdoKanendo {
      * @param parameter parameter
      * @return BatchParamResult
      */
-    public HonSanteiIdoFukaBatchParameter createIdoBatchParam(HonsanteiIdoDivParameter parameter) {
-        HonSanteiIdoFukaBatchParameter result = new HonSanteiIdoFukaBatchParameter();
+    public DBB055001_KanendoIdoFukaParameter createIdoBatchParam(HonsanteiIdoDivParameter parameter) {
+        DBB055001_KanendoIdoFukaParameter result = new DBB055001_KanendoIdoFukaParameter();
         result.set調定年度(parameter.get調定年度());
         RString 決定_変更通知書区分 = RString.EMPTY;
         if (parameter.get決定_チェックボックス().equals(oneRS)) {

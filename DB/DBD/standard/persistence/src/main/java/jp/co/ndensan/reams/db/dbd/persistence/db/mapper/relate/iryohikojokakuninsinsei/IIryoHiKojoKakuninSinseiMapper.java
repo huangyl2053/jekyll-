@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.iryohikojokakuni
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.iryohikojokakuninsinsei.AtesakiParameter;
-import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.iryohikojokakuninsinsei.IryohiKojoUpdParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.iryohikojokakuninsinsei.ShikibetsuTaishoParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.iryohikojokakuninsinsei.IryohiKojoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.iryohikojokakuninsinsei.SogoJigyouTaisyouSyaJyohoJoho;
@@ -34,7 +33,7 @@ public interface IIryoHiKojoKakuninSinseiMapper {
      * 受給者判定
      *
      * @param 被保険者番号 RString
-     * @param 対象年
+     * @param 対象年 RString
      * @return DbT4001JukyushaDaicho
      */
     SogoJigyouTaisyouSyaJyohoJoho select受給者台帳情報(@Param("被保険者番号") RString 被保険者番号, @Param("対象年") RString 対象年);
@@ -63,12 +62,4 @@ public interface IIryoHiKojoKakuninSinseiMapper {
      * @return 宛先情報
      */
     UaFt250FindAtesakiEntity select宛先情報(AtesakiParameter param);
-
-    /**
-     * 医療費控除データの更新
-     *
-     * @param param
-     */
-    void update医療費控除(IryohiKojoUpdParameter param);
-
 }

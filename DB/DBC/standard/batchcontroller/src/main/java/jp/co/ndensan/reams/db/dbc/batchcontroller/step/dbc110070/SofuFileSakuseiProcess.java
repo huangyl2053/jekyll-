@@ -132,6 +132,8 @@ public class SofuFileSakuseiProcess extends BatchKeyBreakBase<KogakuGassanKeisan
         保険者番号 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         出力用レコード件数 = getレコード件数();
+        出力ファイル名 = ファイル名_前.concat(保険者番号)
+                .concat(processParameter.get処理年月().toDateString()).concat(ファイル名_後);
     }
 
     @Override
@@ -155,8 +157,7 @@ public class SofuFileSakuseiProcess extends BatchKeyBreakBase<KogakuGassanKeisan
         if (flag == 0) {
             flag = INT_1;
             RString spoolWorkPath = Path.getTmpDirectoryPath();
-            出力ファイル名 = ファイル名_前.concat(保険者番号)
-                    .concat(processParameter.get処理年月().toDateString()).concat(ファイル名_後);
+
             eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
             eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
                     .setDelimiter(コンマ)
@@ -196,14 +197,14 @@ public class SofuFileSakuseiProcess extends BatchKeyBreakBase<KogakuGassanKeisan
         if (flag != 0) {
             エンドレコード出力();
         }
-        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(出力ファイル名));
-        sfd = SharedFile.defineSharedFile(sfd, INT_1, SharedFile.GROUP_ALL, null, true, null);
-        CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
-        SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(eucFilePath), opts);
         outputCount.setValue(総出力件数);
-        entryList.add(sfd);
-        outputEntry.setValue(entryList);
         if (null != eucCsvWriter) {
+            SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(出力ファイル名));
+            sfd = SharedFile.defineSharedFile(sfd, INT_1, SharedFile.GROUP_ALL, null, true, null);
+            CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
+            SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(eucFilePath), opts);
+            entryList.add(sfd);
+            outputEntry.setValue(entryList);
             eucCsvWriter.close();
         }
     }

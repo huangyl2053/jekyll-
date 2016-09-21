@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Over70
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ShinseiKbn;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ShinseiKeitai;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ShotokuKbn;
-import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenDataSaisoFlag;
 import jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.DbWT1001HihokenshaTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110060.DbWT3711KogakuGassanShinseishoTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110060.KogakugassanShikyushinseishoOutFileEntity;
@@ -132,7 +131,7 @@ public class GassanShikyuShinseishoJohoSofuIchiranEditor implements IGassanShiky
         }
 
         if (再送.equals(高額合算申請書一時Entity.getSaiSofuFlag())) {
-            source.list_15 = KokuhorenDataSaisoFlag.再送要.get名称();
+            source.list_15 = 図形_2;
         } else {
             source.list_15 = RString.EMPTY;
         }

@@ -17,87 +17,8 @@
         rgdb."DbV1001HihokenshaDaicho" AS "DbT1001HihokenshaDaicho"
         ON "DbT1001HihokenshaDaicho"."hihokenshaNo" = "DbT3072KogakuGassanShikyuGakuKeisanKekka"."hihokenshaNo"
         LEFT JOIN 
-        (SELECT * 
-          FROM ( SELECT
-          計算結果_受給."hihokenshaNo" AS "計算結果_受給_hihokenshaNo",
-          計算結果_受給."taishoNendo",
-          計算結果_受給."shoKisaiHokenshaNo",
-          計算結果_受給."shikyuShinseishoSeiriNo",
-          <!--TODO QA#1347 
-          計算結果_受給."明細番号", -->
-          計算結果_受給."taishoKeisanKaishiYMD",
-          計算結果_受給."taishoKeisanShuryoYMD",
-          受給JOIN."shichosonCode",
-          受給JOIN."hihokenshaNo",
-          受給JOIN."rirekiNo",
-          受給JOIN."edaban",
-          受給JOIN."jukyuShinseiJiyu",
-          受給JOIN."yoshienshaNinteiShinseiFlag",
-          受給JOIN."jukyuShinseiYMD",
-          受給JOIN."yokaigoJotaiKubunCode",
-          受給JOIN."ninteiYukoKikanKaishiYMD",
-          受給JOIN."ninteiYukoKikanShuryoYMD",
-          受給JOIN."ninteiYMD",
-          受給JOIN."kyuSochishaFlag",
-          受給JOIN."minashiCode",
-          受給JOIN."chokkinIdoJiyuCode",
-          row_number() over(partition by 
-          受給JOIN."shichosonCode",
-          受給JOIN."hihokenshaNo"
-          order by 受給JOIN."rirekiNo" DESC,
-          受給JOIN."edaban" DESC) AS 番号
-          FROM rgdb."DbT3072KogakuGassanShikyuGakuKeisanKekka" 
-          AS 計算結果_受給
-          INNER JOIN rgdb."DbT4001JukyushaDaicho" AS 受給JOIN
-          ON 受給JOIN."hihokenshaNo" = 計算結果_受給."hihokenshaNo"
-          AND 受給JOIN."yukoMukoKubun" = '1'
-          AND 受給JOIN."logicalDeletedFlag" = false
-          <!--QA#1347
-            SUBSTR(受給JOIN.認定有効期間開始年月日,1,6) <![CDATA[<=]]> 
-            SUBSTR(受給JOIN.認定有効期間終了年月日,1,6) <![CDATA[>=]]> -->
-          ) AS DbT4001Jukyusha
-          WHERE DbT4001Jukyusha."番号" = '1') AS "DbT4001JukyushaDaicho"
-        ON "DbT4001JukyushaDaicho"."計算結果_受給_hihokenshaNo" = "DbT3072KogakuGassanShikyuGakuKeisanKekka"."hihokenshaNo"
-        AND "DbT4001JukyushaDaicho"."taishoNendo" = "DbT3072KogakuGassanShikyuGakuKeisanKekka"."taishoNendo"
-        AND "DbT4001JukyushaDaicho"."shoKisaiHokenshaNo" = "DbT3072KogakuGassanShikyuGakuKeisanKekka"."shoKisaiHokenshaNo"
-        AND "DbT4001JukyushaDaicho"."shikyuShinseishoSeiriNo" = "DbT3072KogakuGassanShikyuGakuKeisanKekka"."shikyuShinseishoSeiriNo"
-        <!-- TODO QA#1347 
-        AND DbT4001JukyushaDaicho.明細番号 = DbT3072KogakuGassanShikyuGakuKeisanKekka.明細番号 -->
-        LEFT JOIN 
-         (SELECT 
-		DbT4001JukyushaDaicho_履歴."shichosonCode",
-                DbT4001JukyushaDaicho_履歴."hihokenshaNo",
-                DbT4001JukyushaDaicho_履歴."rirekiNo",
-                DbT4001JukyushaDaicho_履歴."edaban",
-                CONCAT(DbT4001JukyushaDaicho_履歴."rirekiNo",DbT4001JukyushaDaicho_履歴."edaban") AS 履歴枝番,
-                DbT4001JukyushaDaicho_履歴."jukyuShinseiJiyu",
-                DbT4001JukyushaDaicho_履歴."yoshienshaNinteiShinseiFlag",
-                DbT4001JukyushaDaicho_履歴."jukyuShinseiYMD",
-                DbT4001JukyushaDaicho_履歴."yokaigoJotaiKubunCode",
-                DbT4001JukyushaDaicho_履歴."ninteiYukoKikanKaishiYMD",
-                DbT4001JukyushaDaicho_履歴."ninteiYukoKikanShuryoYMD",
-                DbT4001JukyushaDaicho_履歴."ninteiYMD",
-                DbT4001JukyushaDaicho_履歴."kyuSochishaFlag",
-                DbT4001JukyushaDaicho_履歴."minashiCode",
-                DbT4001JukyushaDaicho_履歴."chokkinIdoJiyuCode",
-                ROW_NUMBER() OVER (PARTITION BY DbT4001JukyushaDaicho_履歴."shichosonCode",
-                DbT4001JukyushaDaicho_履歴."hihokenshaNo"
-                ORDER BY DbT4001JukyushaDaicho_履歴."rirekiNo" DESC,
-                 DbT4001JukyushaDaicho_履歴."edaban" DESC) AS DbT4001JukyushaDaicho_番号
-          FROM rgdb."DbT4001JukyushaDaicho" AS DbT4001JukyushaDaicho_履歴
-          WHERE
-               DbT4001JukyushaDaicho_履歴."yukoMukoKubun" = '1'
-          AND  DbT4001JukyushaDaicho_履歴."logicalDeletedFlag" = false) AS DbT4001JukyushaDai
-          ON DbT4001JukyushaDai."hihokenshaNo" =  "DbT3072KogakuGassanShikyuGakuKeisanKekka"."hihokenshaNo"
-          AND DbT4001JukyushaDai."履歴枝番" =
-          (SELECT MAX(DbT4001JukyushaDaicho_最大."rirekiNo")
-          FROM
-          (SELECT 
-          DbT4001Jukyu."rirekiNo"
-          FROM rgdb."DbT4001JukyushaDaicho" AS DbT4001Jukyu
-          INNER JOIN
-          rgdb."DbT3072KogakuGassanShikyuGakuKeisanKekka" AS DbT3072KogakuGassanShikyu
-          ON DbT4001Jukyu."hihokenshaNo" = DbT3072KogakuGassanShikyu."hihokenshaNo") AS DbT4001JukyushaDaicho_最大)
+        rgdb."DbV4001JukyushaDaicho" AS "DbT4001JukyushaDaicho"
+        ON "DbT4001JukyushaDaicho"."hihokenshaNo" = "DbT3072KogakuGassanShikyuGakuKeisanKekka"."hihokenshaNo"
         <if test="抽出区分!=null and !抽出区分.isEmpty()">  
         INNER JOIN
           (SELECT 
@@ -126,10 +47,10 @@
         <!-- QA#1353 -->
         </if>
         WHERE "DbT3072KogakuGassanShikyuGakuKeisanKekka"."isDeleted" = false
-        <if test="データ区分!=null and !データ区分.isEmpty()">
+        <if test="データ区分!=null and データ区分.toString()!=''.toString()">
         AND "DbT3072KogakuGassanShikyuGakuKeisanKekka"."dataKubun" = #{データ区分}   
         </if>
-        <if test="データ種類!=null and !データ種類.isEmpty()">
+        <if test="データ種類!=null and データ種類.toString()!=''.toString()">
             <if test="データ種類 == 1">
             AND "DbT3072KogakuGassanShikyuGakuKeisanKekka"."kekkaRenrakusakiYubinNo" <![CDATA[<>]]> #{介護合算_仮算定データ}
             </if>
@@ -155,7 +76,9 @@
         <if test="保険者コード!=null and !保険者コード.isEmpty() and  保険者コード.getColumnValue() != '1' ">
          AND "DbT1001HihokenshaDaicho"."shichosonCode" = #{保険者コード}
         </if>
-        ${出力順}
+        <if test="出力項目!=null">
+         ${出力項目}
+        </if>
         )
         SELECT
         "dbT1001HihokenshaDaicho_hihokenshaNo",
@@ -193,7 +116,6 @@
         "dbT4001JukyushaDaicho_ninteiYukoKikanKaishiYMD",
         "dbT4001JukyushaDaicho_ninteiYukoKikanShuryoYMD",
         "dbT4001JukyushaDaicho_ninteiYMD",
-        "dbT4001JukyushaDaicho_minashiCode",
         "dbT4001JukyushaDaicho_chokkinIdoJiyuCode",
         "dbT4001JukyushaDaicho_yoshienshaNinteiShinseiFlag",
         "dbT4001JukyushaDaicho_kyuSochishaFlag",
@@ -342,7 +264,6 @@
          "DbT4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD" as "dbT4001JukyushaDaicho_ninteiYukoKikanKaishiYMD",
          "DbT4001JukyushaDaicho"."ninteiYukoKikanShuryoYMD" as "dbT4001JukyushaDaicho_ninteiYukoKikanShuryoYMD",
          "DbT4001JukyushaDaicho"."ninteiYMD" as "dbT4001JukyushaDaicho_ninteiYMD",
-         "DbT4001JukyushaDaicho"."minashiCode" as "dbT4001JukyushaDaicho_minashiCode",
          "DbT4001JukyushaDaicho"."chokkinIdoJiyuCode" as "dbT4001JukyushaDaicho_chokkinIdoJiyuCode",
          "DbT4001JukyushaDaicho"."yoshienshaNinteiShinseiFlag" as "dbT4001JukyushaDaicho_yoshienshaNinteiShinseiFlag",
          "DbT4001JukyushaDaicho"."kyuSochishaFlag" as "dbT4001JukyushaDaicho_kyuSochishaFlag"
@@ -359,7 +280,6 @@
         <result property="ninteiYukoKikanKaishiYMD" column="dbT4001JukyushaDaicho_ninteiYukoKikanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="ninteiYukoKikanShuryoYMD" column="dbT4001JukyushaDaicho_ninteiYukoKikanShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="ninteiYMD" column="dbT4001JukyushaDaicho_ninteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="minashiCode" column="dbT4001JukyushaDaicho_minashiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="chokkinIdoJiyuCode" column="dbT4001JukyushaDaicho_chokkinIdoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="yoshienshaNinteiShinseiFlag" column="dbT4001JukyushaDaicho_yoshienshaNinteiShinseiFlag" />
         <result property="kyuSochishaFlag" column="dbT4001JukyushaDaicho_kyuSochishaFlag" />

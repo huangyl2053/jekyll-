@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2270001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosadataoutput.NinteiChosaDataOutputBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.ninteichosadataoutput.NinteiChosaDataOutputBatchParamter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE224001.DBE224001_NinteichosaDataOutputParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosadataoutput.NinteiChosaDataOutputMybitisParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2270001.NinteiChosaDataOutputDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2270001.dgNinteiChosaData_Row;
@@ -95,8 +95,8 @@ public class NinteiChosaDataOutputHandler {
      *
      * @return NinteiChosaDataOutputBatchParamter
      */
-    public NinteiChosaDataOutputBatchParamter getBatchParameter() {
-        NinteiChosaDataOutputBatchParamter batchParamter = new NinteiChosaDataOutputBatchParamter();
+    public DBE224001_NinteichosaDataOutputParameter getBatchParameter() {
+        DBE224001_NinteichosaDataOutputParameter batchParamter = new DBE224001_NinteichosaDataOutputParameter();
         batchParamter.setNinteichosaItakusakiCode(div.getCcdChosaltakusakiAndChosainInput().getTxtChosaItakusakiCode().getValue());
         batchParamter.setNinteiChosainCode(div.getCcdChosaltakusakiAndChosainInput().getTxtChosainCode().getValue());
         List<dgNinteiChosaData_Row> rowList = div.getNinteiIchiran().getDgNinteiChosaData().getSelectedItems();

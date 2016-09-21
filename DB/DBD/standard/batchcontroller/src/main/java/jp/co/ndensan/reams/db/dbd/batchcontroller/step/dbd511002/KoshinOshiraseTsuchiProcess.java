@@ -56,6 +56,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -151,7 +152,9 @@ public class KoshinOshiraseTsuchiProcess extends BatchProcessBase<KoshinOshirase
         reportSourceWriter01 = new ReportSourceWriter<>(batchReportWrite01);
         batchReportWrite11 = BatchReportFactory.createBatchReportWriter(帳票11.getReportId().getColumnValue()).create();
         reportSourceWriter11 = new ReportSourceWriter<>(batchReportWrite11);
-        batchReportWrite112 = BatchReportFactory.createBatchReportWriter(帳票12.getReportId().getColumnValue()).create();
+        batchReportWrite112 = BatchReportFactory.createBatchReportWriter(帳票12.getReportId().getColumnValue())
+                .addBreak(new BreakerCatalog<KoshinShinseiTsuchishoHakkoIchiranhyoReportSource>().
+                        simplePageBreaker(KoshinShinseiTsuchishoHakkoIchiranhyoReportSource.改頁_市町村コード)).create();
         reportSourceWriter112 = new ReportSourceWriter<>(batchReportWrite112);
         dbT4101EntityWriter = new BatchPermanentTableWriter(DbT4101NinteiShinseiJohoEntity.class);
     }
@@ -222,6 +225,6 @@ public class KoshinOshiraseTsuchiProcess extends BatchProcessBase<KoshinOshirase
             帳票ID12出力ページ数 = new RString(String.valueOf(batchReportWrite112.getPageCount()));
         }
         service.バッチ出力条件リストの出力(association, parameter, 帳票ID01出力ページ数, 帳票ID11出力ページ数, 帳票ID12出力ページ数,
-                帳票ID01TF, 帳票ID11TF, 帳票ID12TF);
+                帳票ID01TF, 帳票ID11TF, 帳票ID12TF, outputOrder);
     }
 }

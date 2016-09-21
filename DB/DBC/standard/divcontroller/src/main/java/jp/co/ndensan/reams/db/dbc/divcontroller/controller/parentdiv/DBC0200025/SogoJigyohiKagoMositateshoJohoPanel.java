@@ -5,15 +5,17 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0200025;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110140.DBC110140_SogojigyohiKagoMoshitateshoOutParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0200025.SogoJigyohiKagoMositateshoJohoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0200025.SogoJigyohiKagoMositateshoJohoPanelHandler;
+import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0200011.KokuhorenDataSofuViewState;
+import jp.co.ndensan.reams.db.dbz.definition.core.viewstatename.ViewStateHolderName;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunManager;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder._ChohyoShutsuryokujunManager;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 画面設計_DBCMNF1001_保険者情報送付データ作成_[179]総合事業費過誤申立書情報のクラスです。
@@ -21,8 +23,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
  * @reamsid_L DBC-2530-010 chenyadong
  */
 public class SogoJigyohiKagoMositateshoJohoPanel {
-
-    private List list;
 
     /**
      * 画面初期化のメソッドます。
@@ -32,7 +32,7 @@ public class SogoJigyohiKagoMositateshoJohoPanel {
      */
     public ResponseData<SogoJigyohiKagoMositateshoJohoPanelDiv> onLoad(SogoJigyohiKagoMositateshoJohoPanelDiv div) {
 
-        list = getHandler(div).initialize();
+        getHandler(div).initialize();
         return ResponseData.of(div).respond();
     }
 
@@ -54,11 +54,22 @@ public class SogoJigyohiKagoMositateshoJohoPanel {
             SogoJigyohiKagoMositateshoJohoPanelDiv div) {
         DBC110140_SogojigyohiKagoMoshitateshoOutParameter parameter
                 = new DBC110140_SogojigyohiKagoMoshitateshoOutParameter();
-        parameter.set再処理区分(new RString(list.get(0).toString()));
-        parameter.set処理年月(new RYearMonth(list.get(1).toString()));
+        KokuhorenDataSofuViewState 送付情報 = ViewStateHolder.get(ViewStateHolderName.国保連送付情報, KokuhorenDataSofuViewState.class);
+        RString 再処理区分 = 送付情報.get再処理区分();
+        RYearMonth 処理年月 = 送付情報.get処理年月();
+        if (再処理区分 != null) {
+            parameter.set再処理区分(再処理区分);
+        } else {
+            parameter.set再処理区分(RString.EMPTY);
+        }
+        if (処理年月 != null) {
+            parameter.set処理年月(処理年月);
+        } else {
+            parameter.set処理年月(null);
+        }
         parameter.set出力順ID(new RString(Long.toString(div.getCcdShutsuryokujun().getSelected出力順()
                 .get出力順ID())));
-        parameter.set送付対象情報のｺｰﾄﾞ(div.getCcdKokuhorenJohoSofu().get送付対象情報のValue());
+        parameter.set送付対象情報のｺｰﾄﾞ(div.getCcdKokuhorenJohoSofu().get送付対象情報のkey());
         return parameter;
     }
 

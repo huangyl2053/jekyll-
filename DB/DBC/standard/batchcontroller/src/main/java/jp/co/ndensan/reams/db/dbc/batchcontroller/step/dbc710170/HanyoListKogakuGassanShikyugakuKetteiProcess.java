@@ -294,7 +294,7 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
     @Override
     protected IBatchReader createReader() {
         KozaSearchKeyBuilder builder = new KozaSearchKeyBuilder();
-        builder.setサブ業務コード(SubGyomuCode.DBD介護受給);
+        builder.setサブ業務コード(SubGyomuCode.DBC介護給付);
         builder.set業務コード(GyomuCode.DB介護保険);
         IKozaSearchKey searchKey = builder.build();
         parameter.setSearchkey(searchKey);

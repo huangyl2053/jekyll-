@@ -27,7 +27,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.db.dbz.definition.core.IYokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
-import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -102,9 +101,7 @@ public class ShikakuShogohyoInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBa
     private int 合計 = 0;
     private int count = 0;
     @BatchWriter
-    private CsvWriter eucCsvWriter;
-    @BatchWriter
-    private CsvWriter eucCsvWriter1;
+    private CsvWriter csvWriter;
 
     @BatchWriter
 
@@ -138,20 +135,13 @@ public class ShikakuShogohyoInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBa
                 EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
-        eucCsvWriter = BatchWriters.csvWriter(ShikakuShogohyoInCsvEntity.class).
-                filePath(eucFilePath).
+        csvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 setDelimiter(コンマ).
                 setEnclosure(ダブル引用符).
                 setEncode(Encode.UTF_8withBOM).
                 setNewLine(NewLine.CRLF).
                 hasHeader(true).build();
-        eucCsvWriter1 = BatchWriters.csvWriter(ShikakuShogohyoInCsvEntitySingle.class).
-                filePath(eucFilePath).
-                setDelimiter(コンマ).
-                setEnclosure(ダブル引用符).
-                setEncode(Encode.UTF_8withBOM).
-                setNewLine(NewLine.CRLF).
-                hasHeader(true).build();
+
     }
 
     @Override
@@ -194,8 +184,7 @@ public class ShikakuShogohyoInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBa
             edit明細項目(currentRecord);
             writeLine(currentRecord, true);
         }
-        eucCsvWriter.close();
-        eucCsvWriter1.close();
+        csvWriter.close();
         if (!personalDataList.isEmpty()) {
             AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
             manager.spool(eucFilePath, accessLogUUID);
@@ -293,9 +282,9 @@ public class ShikakuShogohyoInDoIchiranhyoSakuseiProcess extends BatchKeyBreakBa
 
     private void writeCsvLine(ShikakuShogohyoInCsvEntity entity, ShikakuShogohyoInCsvEntitySingle entity1) {
         if (市町村セキュリティ情報.get導入形態コード().is広域()) {
-            eucCsvWriter.writeLine(entity);
+            csvWriter.writeLine(entity);
         } else {
-            eucCsvWriter1.writeLine(entity1);
+            csvWriter.writeLine(entity1);
         }
     }
 

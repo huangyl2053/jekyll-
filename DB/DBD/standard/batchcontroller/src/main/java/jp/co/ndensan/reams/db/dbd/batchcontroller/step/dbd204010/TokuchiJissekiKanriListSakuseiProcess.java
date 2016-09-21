@@ -14,8 +14,6 @@ import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tokubetsuchiikikasankeigenjissekikanri.TokubetsuChiikiKasanKeigenJissekiKanri;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200012.TokubetsuChiikiKasanKeigenJissekiKanriIchiranReportSource;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoGyomuHanteiKeyFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
@@ -108,9 +106,8 @@ public class TokuchiJissekiKanriListSakuseiProcess extends BatchProcessBase<Toku
 
     @Override
     protected void process(TokubetsuChiikiKasanKeigenJissekiKanri t) {
-        IKojin kojin = ShikibetsuTaishoFactory.createKojin(t.get宛名());
         if (outputOrder != null) {
-            TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport finder = new TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport(t, 地方公共団体, outputOrder, kojin);
+            TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport finder = new TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport(t, 地方公共団体, outputOrder);
             finder.writeBy(reportSourceWriter);
         }
     }

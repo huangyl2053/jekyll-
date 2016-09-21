@@ -1,4 +1,5 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0530011;
+
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -9,18 +10,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.KaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiAtenaInfo.IKaigoNinteiAtenaInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiAtenaInfo.KaigoNinteiAtenaInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoninteishikakuinfo.IKaigoninteiShikakuInfoDiv;
-import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.kaigoninteishikakuinfo.KaigoninteiShikakuInfoDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoninteiShikakuInfo.IKaigoninteiShikakuInfoDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * MainPanel のクラスファイル 
- * 
+ * MainPanel のクラスファイル
+ *
  * @author 自動生成
  */
 public class MainPanelDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
@@ -41,7 +40,7 @@ public class MainPanelDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
+ /*
      * getHeaderPanel
      * @return HeaderPanel
      */
@@ -105,7 +104,7 @@ public class MainPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlHokenshaNo(DropDownList ddlHokenshaNo) {
+    public void setDdlHokenshaNo(DropDownList ddlHokenshaNo) {
         this.getMeisaiPanel().setDdlHokenshaNo(ddlHokenshaNo);
     }
 
@@ -115,7 +114,7 @@ public class MainPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtHokenshaKaishiYMD(TextBoxDate txtHokenshaKaishiYMD) {
+    public void setTxtHokenshaKaishiYMD(TextBoxDate txtHokenshaKaishiYMD) {
         this.getMeisaiPanel().setTxtHokenshaKaishiYMD(txtHokenshaKaishiYMD);
     }
 
@@ -125,7 +124,7 @@ public class MainPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtHihokenshaNo(TextBoxCode txtHihokenshaNo) {
+    public void setTxtHihokenshaNo(TextBoxCode txtHihokenshaNo) {
         this.getMeisaiPanel().setTxtHihokenshaNo(txtHihokenshaNo);
     }
 
@@ -135,7 +134,7 @@ public class MainPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtHokenshaShuryoYMD(TextBoxDate txtHokenshaShuryoYMD) {
+    public void setTxtHokenshaShuryoYMD(TextBoxDate txtHokenshaShuryoYMD) {
         this.getMeisaiPanel().setTxtHokenshaShuryoYMD(txtHokenshaShuryoYMD);
     }
 
@@ -145,7 +144,7 @@ public class MainPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShikakuShutokuYMD(TextBoxDate txtShikakuShutokuYMD) {
+    public void setTxtShikakuShutokuYMD(TextBoxDate txtShikakuShutokuYMD) {
         this.getMeisaiPanel().setTxtShikakuShutokuYMD(txtShikakuShutokuYMD);
     }
 
@@ -155,7 +154,7 @@ public class MainPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlShikakuShutokuJiyu(DropDownList ddlShikakuShutokuJiyu) {
+    public void setDdlShikakuShutokuJiyu(DropDownList ddlShikakuShutokuJiyu) {
         this.getMeisaiPanel().setDdlShikakuShutokuJiyu(ddlShikakuShutokuJiyu);
     }
 
@@ -165,7 +164,7 @@ public class MainPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtShikakuSoshitsuYMD(TextBoxDate txtShikakuSoshitsuYMD) {
+    public void setTxtShikakuSoshitsuYMD(TextBoxDate txtShikakuSoshitsuYMD) {
         this.getMeisaiPanel().setTxtShikakuSoshitsuYMD(txtShikakuSoshitsuYMD);
     }
 
@@ -175,7 +174,7 @@ public class MainPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlShikakuSoshitsuJiyu(DropDownList ddlShikakuSoshitsuJiyu) {
+    public void setDdlShikakuSoshitsuJiyu(DropDownList ddlShikakuSoshitsuJiyu) {
         this.getMeisaiPanel().setDdlShikakuSoshitsuJiyu(ddlShikakuSoshitsuJiyu);
     }
 
@@ -185,7 +184,7 @@ public class MainPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setChkTorokuKubun(CheckBoxList chkTorokuKubun) {
+    public void setChkTorokuKubun(CheckBoxList chkTorokuKubun) {
         this.getMeisaiPanel().setChkTorokuKubun(chkTorokuKubun);
     }
 
@@ -195,7 +194,7 @@ public class MainPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlKojinKubunCode(DropDownList ddlKojinKubunCode) {
+    public void setDdlKojinKubunCode(DropDownList ddlKojinKubunCode) {
         this.getMeisaiPanel().setDdlKojinKubunCode(ddlKojinKubunCode);
     }
 
@@ -205,7 +204,7 @@ public class MainPanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtRirekiNo(TextBox txtRirekiNo) {
+    public void setTxtRirekiNo(TextBox txtRirekiNo) {
         this.getMeisaiPanel().setTxtRirekiNo(txtRirekiNo);
     }
 

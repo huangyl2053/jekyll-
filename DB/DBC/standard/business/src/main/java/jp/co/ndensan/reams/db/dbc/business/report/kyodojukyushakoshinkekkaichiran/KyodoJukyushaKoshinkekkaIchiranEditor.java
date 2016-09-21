@@ -75,21 +75,23 @@ public class KyodoJukyushaKoshinkekkaIchiranEditor implements IKyodoJukyushaKosh
 
     @Override
     public KyodoJukyushaKoshinkekkaIchiranReportSource edit(KyodoJukyushaKoshinkekkaIchiranReportSource source) {
-        List<ISetSortItem> 設定項目リスト = 出力順情報.get設定項目リスト();
         source.printTimeStamp = get作成日時();
         source.title = 帳票用データ.get帳票タイトル();
         source.hokenshaNo = 帳票用データ.get共同処理一時TBL().get保険者番号();
         source.hokenshaName = 帳票用データ.get共同処理一時TBL().get保険者名();
-        source.shutsuryokujun1 = get並び順(設定項目リスト, INDEX_1);
-        source.shutsuryokujun2 = get並び順(設定項目リスト, INDEX_2);
-        source.shutsuryokujun3 = get並び順(設定項目リスト, INDEX_3);
-        source.shutsuryokujun4 = get並び順(設定項目リスト, INDEX_4);
-        source.shutsuryokujun5 = get並び順(設定項目リスト, INDEX_5);
-        source.kaipage1 = get改頁(設定項目リスト, INDEX_1);
-        source.kaipage2 = get改頁(設定項目リスト, INDEX_2);
-        source.kaipage3 = get改頁(設定項目リスト, INDEX_3);
-        source.kaipage4 = get改頁(設定項目リスト, INDEX_4);
-        source.kaipage5 = get改頁(設定項目リスト, INDEX_5);
+        if (出力順情報 != null) {
+            List<ISetSortItem> 設定項目リスト = 出力順情報.get設定項目リスト();
+            source.shutsuryokujun1 = get並び順(設定項目リスト, INDEX_1);
+            source.shutsuryokujun2 = get並び順(設定項目リスト, INDEX_2);
+            source.shutsuryokujun3 = get並び順(設定項目リスト, INDEX_3);
+            source.shutsuryokujun4 = get並び順(設定項目リスト, INDEX_4);
+            source.shutsuryokujun5 = get並び順(設定項目リスト, INDEX_5);
+            source.kaipage1 = get改頁(設定項目リスト, INDEX_1);
+            source.kaipage2 = get改頁(設定項目リスト, INDEX_2);
+            source.kaipage3 = get改頁(設定項目リスト, INDEX_3);
+            source.kaipage4 = get改頁(設定項目リスト, INDEX_4);
+            source.kaipage5 = get改頁(設定項目リスト, INDEX_5);
+        }
         if (ChohyoSeigyoHanyoKomokuMei.帳票タイトル_定期.get名称().equals(帳票制御汎用項目名)) {
             source.komokuName1 = new RString("訂正区分");
             source.komokuName2 = new RString("訂正区分");
@@ -97,7 +99,9 @@ public class KyodoJukyushaKoshinkekkaIchiranEditor implements IKyodoJukyushaKosh
         }
         source.list1_1 = RString.EMPTY;
         source.list1_2 = new RString("基本情報");
-        source.list1_3 = 帳票用データ.get被保険者一時TBL().get登録被保険者番号();
+        if (帳票用データ.get被保険者一時TBL().get登録被保険者番号() != null && !帳票用データ.get被保険者一時TBL().get登録被保険者番号().isEmpty()) {
+            source.list1_3 = 帳票用データ.get被保険者一時TBL().get登録被保険者番号().value();
+        }
         source.list1_9 = 帳票用データ.get被保険者一時TBL().get行政区コード();
         source.list1_10 = 帳票用データ.get被保険者一時TBL().get行政区名();
         source.list2_2 = 帳票用データ.get被保険者一時TBL().get宛名カナ名称();
@@ -161,9 +165,9 @@ public class KyodoJukyushaKoshinkekkaIchiranEditor implements IKyodoJukyushaKosh
             source.list6_1 = 帳票用データ.get共同処理一時TBL().get高_老齢福祉年金受給の有無();
         }
         source.shikibetuCode = ShikibetsuCode.EMPTY;
-        if (!RString.isNullOrEmpty(帳票用データ.get被保険者一時TBL().get被保険者番号())) {
+        if (帳票用データ.get被保険者一時TBL().get被保険者番号() != null && !帳票用データ.get被保険者一時TBL().get被保険者番号().isEmpty()) {
             source.shinseishoKanriNo = new ExpandedInformation(new Code("0003"),
-                    new RString("被保険者番号"), 帳票用データ.get被保険者一時TBL().get被保険者番号());
+                    new RString("被保険者番号"), 帳票用データ.get被保険者一時TBL().get被保険者番号().value());
         }
         return source;
     }
@@ -202,6 +206,14 @@ public class KyodoJukyushaKoshinkekkaIchiranEditor implements IKyodoJukyushaKosh
     private RString getパターン4(FlexibleDate 年月日) {
         if (年月日 != null && !年月日.isEmpty()) {
             return 年月日.wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+        }
+        return RString.EMPTY;
+    }
+
+    private RString getパターン4(RString 年月日) {
+        if (!RString.isNullOrEmpty(年月日)) {
+            return new FlexibleDate(年月日).wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
         }
         return RString.EMPTY;
@@ -292,9 +304,20 @@ public class KyodoJukyushaKoshinkekkaIchiranEditor implements IKyodoJukyushaKosh
     }
 
     private RString get一時差止金額(RString 金額) {
-        if (!RString.isNullOrEmpty(金額)) {
-            return DecimalFormatter.toRString(new Decimal(金額.toString()), 0);
+        if (RString.isNullOrEmpty(金額)) {
+            return RString.EMPTY;
         }
-        return RString.EMPTY;
+        if (金額.contains(",")) {
+            金額 = 金額転換(金額.split(","));
+        }
+        return DecimalFormatter.toRString(new Decimal(金額.toString()), 0);
+    }
+
+    private RString 金額転換(List<RString> 金額) {
+        RStringBuilder builder = new RStringBuilder();
+        for (RString kinkaku : 金額) {
+            builder.append(kinkaku);
+        }
+        return builder.toRString();
     }
 }

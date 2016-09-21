@@ -41,7 +41,7 @@ public class KyufuJissekiJoho {
      * @return ResponseData KyufuJissekiJohoDiv
      */
     public ResponseData<KyufuJissekiJohoDiv> onLoad(KyufuJissekiJohoDiv div) {
-        KokuhorenDataSofuViewState parmater = ViewStateHolder.get(ViewStateHolderName.国保連取込情報,
+        KokuhorenDataSofuViewState parmater = ViewStateHolder.get(ViewStateHolderName.国保連送付情報,
                 KokuhorenDataSofuViewState.class);
         再処理区分 = parmater.get再処理区分();
         処理年月 = parmater.get処理年月();
@@ -59,7 +59,7 @@ public class KyufuJissekiJoho {
      * @return ResponseData DBC110110_KogakugassanKyufujissekiOutParameter
      */
     public ResponseData<DBC110110_KogakugassanKyufujissekiOutParameter> onClick_Execute(KyufuJissekiJohoDiv div) {
-        KokuhorenDataSofuViewState parmater = ViewStateHolder.get(ViewStateHolderName.国保連取込情報,
+        KokuhorenDataSofuViewState parmater = ViewStateHolder.get(ViewStateHolderName.国保連送付情報,
                 KokuhorenDataSofuViewState.class);
         再処理区分 = parmater.get再処理区分();
         処理年月 = parmater.get処理年月();

@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.io.csv.ListToObjectMappingHelper;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -193,7 +194,7 @@ public class KogakuGassanKyufuJissekiInGetFileProcess extends BatchProcessBase<R
         dbWT0001TempEntity.setOldShichosonCode(LasdecCode.EMPTY);
         dbWT0001TempEntity.setHenkanHihokenshaNo(HihokenshaNo.EMPTY);
         dbWT0001TempEntity.setHihokenshaNo(new HihokenshaNo(被保険者番号));
-        dbWT0001TempEntity.setShichosonCode(LasdecCode.EMPTY);
+        dbWT0001TempEntity.setShikibetsuCode(ShikibetsuCode.EMPTY);
         dbWT0001TempEntity.setKannaiKangaiKubun(RString.EMPTY);
         dbWT0001TempEntity.setYubinNo(RString.EMPTY);
         dbWT0001TempEntity.setChoikiCode(RString.EMPTY);
@@ -214,6 +215,7 @@ public class KogakuGassanKyufuJissekiInGetFileProcess extends BatchProcessBase<R
     }
 
     private void 処理結果リスト一時に登録() {
+
         DbWT0002KokuhorenTorikomiErrorEntity 処理結果リスト一時entity = new DbWT0002KokuhorenTorikomiErrorEntity();
         処理結果リスト一時entity.setErrorKubun(KokuhorenJoho_TorikomiErrorKubun.取込対象データなし.getコード());
         処理結果リスト一時entity.setShoHokanehshaNo(ShoKisaiHokenshaNo.EMPTY);
@@ -227,6 +229,7 @@ public class KogakuGassanKyufuJissekiInGetFileProcess extends BatchProcessBase<R
         処理結果リスト一時entity.setHihokenshaShimei(RString.EMPTY);
         処理結果リスト一時entity.setBiko(RString.EMPTY);
         処理結果リスト一時tbWriter.insert(処理結果リスト一時entity);
+
     }
 
     private Decimal getDecimal(RString decimal) {

@@ -44,8 +44,4 @@ public class KogakugassanKyufujissekiSetSofuJogaiFlagProcess extends BatchProces
         高額合算給付実績一時Writer.update(entity);
     }
 
-    @Override
-    protected void afterExecute() {
-    }
-
 }

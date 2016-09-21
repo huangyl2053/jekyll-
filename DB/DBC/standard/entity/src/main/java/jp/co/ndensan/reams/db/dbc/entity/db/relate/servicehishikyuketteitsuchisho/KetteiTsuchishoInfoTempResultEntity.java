@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt250FindAtesakiEntity;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
@@ -45,7 +46,6 @@ public class KetteiTsuchishoInfoTempResultEntity implements Serializable {
     private RString 不支給理由;
     private RString 支給結果;
     private Decimal 支払金額;
-    private RString 支払金額内訳_利用者分;
     private RString 審査方法区分;
     private Decimal 本人支払額;
     private boolean 自動償還対象フラグ;
@@ -59,7 +59,7 @@ public class KetteiTsuchishoInfoTempResultEntity implements Serializable {
     private RString 預金種別;
     private RString 預金種別名称;
     private RString 口座番号;
-    private ShikibetsuCode 口座名義人漢字;
+    private AtenaMeisho 口座名義人漢字;
     private FlexibleDate 口座終了年月日;
     private RString 通帳番号;
 

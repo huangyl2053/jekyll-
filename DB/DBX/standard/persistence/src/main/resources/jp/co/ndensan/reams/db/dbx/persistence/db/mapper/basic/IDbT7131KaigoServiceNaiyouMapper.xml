@@ -129,4 +129,82 @@
         WHERE
         rgdb."DbT7131KaigoServiceNaiyou"."isDeleted" = FALSE
     </select>
+    
+    <select resultOrdered="true" id="getServiceCodeList3" resultMap="ResultMap_DbT7131KaigoServiceNaiyouEntity"
+        parameterType="jp.co.ndensan.reams.db.dbx.definition.mybatisprm.servicecode.SabisuKodoParameter" fetchSize="500">
+        SELECT
+         DbT7131."serviceShuruiCd" as "dbT7131KaigoServiceNaiyou_serviceShuruiCd",
+         DbT7131."serviceKoumokuCd" as "dbT7131KaigoServiceNaiyou_serviceKoumokuCd",
+         DbT7131."serviceName" as "dbT7131KaigoServiceNaiyou_serviceName"
+        FROM
+        rgdb."DbT7130KaigoServiceShurui" AS DbT7130
+            RIGHT JOIN (SELECT
+                "serviceShuruiCd",
+                "serviceKoumokuCd",
+                "serviceName"
+              FROM 
+                rgdb."DbT7131KaigoServiceNaiyou" 
+              WHERE
+                "teikyoKaishiYM" <![CDATA[<=]]>  #{haakuKijunYM}
+                AND #{haakuKijunYM} <![CDATA[<=]]> "teikyoShuryoYM"
+              ) AS DbT7131
+            ON DbT7130."serviceShuruiCd" = DbT7131."serviceShuruiCd"
+        WHERE
+          DbT7130."teikyoKaishiYM" <![CDATA[<=]]>  #{haakuKijunYM}
+          AND #{haakuKijunYM} <![CDATA[<=]]> DbT7130."teikyoshuryoYM"
+          <if test="patan1">
+               AND substring(DbT7130."serviceShuruiCd", 1, 1) = '1'
+          </if>
+          <if test="patan2">
+               AND substring(DbT7130."serviceShuruiCd", 1, 1) = '1'
+               OR (substring(DbT7130."serviceShuruiCd", 1, 1) = '1'
+               AND DbT7130."serviceBunrruicode" = '01')
+          </if>
+          <if test="patan3">
+               AND (substring(DbT7130."serviceShuruiCd", 1, 1) = '1'
+               OR substring(DbT7130."serviceShuruiCd", 1, 1) = '2'
+               OR substring(DbT7130."serviceShuruiCd", 1, 1) = '6'
+               OR substring(DbT7130."serviceShuruiCd", 1, 1) = '7')
+          </if>
+          <if test="patan4">
+               AND substring(DbT7130."serviceShuruiCd", 1, 1) = '6'
+               OR (substring(DbT7130."serviceShuruiCd", 1, 1) = '2'
+               AND DbT7130."serviceBunrruicode" = '05')
+               OR (substring(DbT7130."serviceShuruiCd", 1, 1) = '7'
+               AND DbT7130."serviceBunrruicode" = '08')
+          </if>
+          <if test="patan5">
+               AND substring(DbT7130."serviceShuruiCd", 1, 1) = '6'
+               OR (substring(DbT7130."serviceShuruiCd", 1, 1) = '2'
+               AND DbT7130."serviceBunrruicode" = '01')
+               OR (substring(DbT7130."serviceShuruiCd", 1, 1) = '7'
+               AND DbT7130."serviceBunrruicode" = '07')
+          </if>
+    </select>
+    
+    <select resultOrdered="true" id="getServiceCodeList4" resultMap="ResultMap_DbT7131KaigoServiceNaiyouEntity"
+        parameterType="jp.co.ndensan.reams.db.dbx.definition.mybatisprm.servicecode.SabisuKodoParameter" fetchSize="500">
+        SELECT
+         DbT7131."serviceShuruiCd" as "dbT7131KaigoServiceNaiyou_serviceShuruiCd",
+         DbT7131."serviceKoumokuCd" as "dbT7131KaigoServiceNaiyou_serviceKoumokuCd",
+         DbT7131."serviceName" as "dbT7131KaigoServiceNaiyou_serviceName"
+        FROM
+        rgdb."DbT7130KaigoServiceShurui" AS DbT7130
+            RIGHT JOIN (SELECT
+                "serviceShuruiCd",
+                "serviceKoumokuCd",
+                "serviceName"
+              FROM 
+                rgdb."DbT7131KaigoServiceNaiyou" 
+              WHERE
+                "teikyoKaishiYM" <![CDATA[<=]]>  #{haakuKijunYM}
+                AND #{haakuKijunYM} <![CDATA[<=]]> "teikyoShuryoYM"
+              ) AS DbT7131
+            ON DbT7130."serviceShuruiCd" = DbT7131."serviceShuruiCd"
+        WHERE
+          DbT7130."teikyoKaishiYM" <![CDATA[<=]]>  #{haakuKijunYM}
+          AND #{haakuKijunYM} <![CDATA[<=]]> DbT7130."teikyoshuryoYM"
+          AND DbT7130."serviceBunrruicode" IN
+        <foreach collection="serviceBunrrui" item="bunrrui" open="(" separator="," close=")"> #{bunrrui}</foreach>
+    </select>
 </mapper>

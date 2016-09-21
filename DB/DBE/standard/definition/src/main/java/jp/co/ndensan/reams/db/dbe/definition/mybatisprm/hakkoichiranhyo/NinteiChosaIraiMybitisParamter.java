@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.iraisho.GridParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE220010.GridParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

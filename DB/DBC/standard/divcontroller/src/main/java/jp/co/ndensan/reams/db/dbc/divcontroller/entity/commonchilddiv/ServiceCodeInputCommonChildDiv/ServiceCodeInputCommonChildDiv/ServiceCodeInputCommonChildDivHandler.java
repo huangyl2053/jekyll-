@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDiv;
 
 import java.util.List;
@@ -14,10 +13,11 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 /**
  *
  * サービス種類検索の抽象Handlerクラスです。
+ *
  * @reamsid_L DBA-0340-060 dongyabin
  */
 public class ServiceCodeInputCommonChildDivHandler {
-    
+
     private final ServiceCodeInputCommonChildDivDiv div;
 
     /**
@@ -28,8 +28,8 @@ public class ServiceCodeInputCommonChildDivHandler {
     public ServiceCodeInputCommonChildDivHandler(ServiceCodeInputCommonChildDivDiv div) {
         this.div = div;
     }
-    
-     /**
+
+    /**
      *
      * 「サービスコードのフォーカスアウト」の設定します。
      *
@@ -53,18 +53,18 @@ public class ServiceCodeInputCommonChildDivHandler {
         div.getTxtServiceCode2().clearValue();
         div.getTxtServiceCodeName().clearValue();
     }
-    
+
     /**
      * 「検索」ボタンをクリック場合、サービスコード検索一覧ダイアログ画面が表示します。
      *
      */
     public void onBeforeOpenDialog_btnSearch() {
-        ServiceCodeModel serviceCode = new ServiceCodeModel();
+        ServiceCodeModel serviceCode = DataPassingConverter.deserialize(div.getServiceCodeModel(), ServiceCodeModel.class);
         serviceCode.setサービス種類コード(div.getTxtServiceCode1().getValue());
         serviceCode.setサービス項目コード(div.getTxtServiceCode2().getValue());
         div.setServiceCodeModel(DataPassingConverter.serialize(serviceCode));
     }
-    
+
     /**
      * 「検索」ボタンをクリック場合、サービスコード検索一覧ダイアログ画面が表示します。
      *

@@ -30,7 +30,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -87,6 +86,7 @@ public class KogakuServicehiHanteiDoIchiranhyoSakuseiProcess extends BatchKeyBre
     private FileSpoolManager manager;
     private RString eucFilePath;
     private static final RString デフォルト出力順 = new RString(" ORDER BY DbWT3411.\"hokenshaNo\" ASC");
+    private static final RString 固定付加出力順 = new RString(" , DbWT3411.\"hihokenshaNo\" ASC, DbWT3411.\"serviceTeikyoYM\" ASC");
     private static final RString 出力ファイル名 = new RString("DBC200019_KogakuServicehiKyufuHanteiKekkaSofuIchiran.csv");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC200019");
     private static final RString コンマ = new RString(",");
@@ -98,7 +98,6 @@ public class KogakuServicehiHanteiDoIchiranhyoSakuseiProcess extends BatchKeyBre
     private static final RString 被保険者番号 = new RString("被保険者番号");
     private static final RString 実行不可MESSAGE = new RString("帳票出力順の取得");
     private int 連番 = 0;
-    @BatchWriter
     private CsvWriter csvWriter;
     private BatchReportWriter<KogakuServicehiSofuIchiranSource> batchReportWriter;
     private ReportSourceWriter<KogakuServicehiSofuIchiranSource> reportSourceWriter;
@@ -151,6 +150,7 @@ public class KogakuServicehiHanteiDoIchiranhyoSakuseiProcess extends BatchKeyBre
                 }
             }
         }
+        出力順 = 出力順.concat(固定付加出力順);
         帳票データの取得Parameter = new KokuhorenIchiranhyoMybatisParameter();
         帳票データの取得Parameter.set出力順(出力順);
     }
@@ -165,16 +165,6 @@ public class KogakuServicehiHanteiDoIchiranhyoSakuseiProcess extends BatchKeyBre
         PageBreaker<KogakuServicehiSofuIchiranSource> breaker = new KogakuServicehiHanteiDoIchiranhyoPageBreak(改頁リスト);
         batchReportWriter = BatchReportFactory.createBatchReportWriter(parameter.get帳票ID().value()).addBreak(breaker).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        RString spoolWorkPath = manager.getEucOutputDirectry();
-        eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
-        csvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
-                .setDelimiter(コンマ)
-                .setEnclosure(ダブル引用符)
-                .setEncode(Encode.UTF_8withBOM)
-                .setNewLine(NewLine.CRLF)
-                .hasHeader(true)
-                .build();
     }
 
     @Override
@@ -184,6 +174,18 @@ public class KogakuServicehiHanteiDoIchiranhyoSakuseiProcess extends BatchKeyBre
 
     @Override
     protected void usualProcess(KogakuServicehiHanteiIchiranhyoTaisyoEntity currentEntity) {
+        if (null == csvWriter) {
+            manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+            RString spoolWorkPath = manager.getEucOutputDirectry();
+            eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
+            csvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
+                    .setDelimiter(コンマ)
+                    .setEnclosure(ダブル引用符)
+                    .setEncode(Encode.UTF_8withBOM)
+                    .setNewLine(NewLine.CRLF)
+                    .hasHeader(true)
+                    .build();
+        }
         連番 = 連番 + 1;
         KogakuServicehiHanteiIchiranhyoTaisyoEntity beforeEntity = getBefore();
         KogakuServicehiHanteiDoIchiranCSVEntity output;
@@ -208,13 +210,14 @@ public class KogakuServicehiHanteiDoIchiranhyoSakuseiProcess extends BatchKeyBre
 
     @Override
     protected void afterExecute() {
-
-        csvWriter.close();
-        if (null != personalDataList && !personalDataList.isEmpty()) {
-            AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
-            manager.spool(eucFilePath, log);
-        } else {
-            manager.spool(eucFilePath);
+        if (null != csvWriter) {
+            csvWriter.close();
+            if (null != personalDataList && !personalDataList.isEmpty()) {
+                AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
+                manager.spool(eucFilePath, log);
+            } else {
+                manager.spool(eucFilePath);
+            }
         }
         batchReportWriter.close();
     }

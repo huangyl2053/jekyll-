@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.kaigoninteishinsakaischedulekagami;
 
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.kaigoninteishinsakaischedulekagami.KaigoNinteiShinsakaiScheduleKagamiProcess;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.kaigoninteishinsakaischedule.KaigoNinteiShinsakaiScheduleBatchParamter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE514001.DBE514001_ShinsakaiScheduleParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBE-0130-100 yaodongsheng
  */
-public class KaigoNinteiShinsakaiScheduleKagamiFlow extends BatchFlowBase<KaigoNinteiShinsakaiScheduleBatchParamter> {
+public class KaigoNinteiShinsakaiScheduleKagamiFlow extends BatchFlowBase<DBE514001_ShinsakaiScheduleParameter> {
 
     private static final String SHINSAKAISCHEDULEKAGAMIHYO = "shinsakaischedulekagamihyo";
 

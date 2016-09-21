@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JigyoKogakuGassanShikyuFushikyuKettei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShikyuFushikyuKettei;
 
@@ -16,7 +17,7 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShikyuFushikyu
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KogakuGassanShikyuKetteiHoseiResult {
+public class KogakuGassanShikyuKetteiHoseiResult implements Serializable {
 
     private KogakuGassanShikyuFushikyuKettei 高額合算決定entity;
     private JigyoKogakuGassanShikyuFushikyuKettei 事業高額合算決定entity;

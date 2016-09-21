@@ -5,14 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012001.HeinjunkaFukaTaishoBunkatuProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012001.HeinjunkaKeisanProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012001.InsFukaTmpProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012001.InsHeinjunkaFukaTmpProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012001.PrtKaigoFukaTokuchoHeijunkaTaishogaiProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012001.PrtKaigoFukaTokuchoHeijunkaTaishoshaProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012001.PrtReportOutputJokenhyoProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012001.UpdShoriDateKanriProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012001.HeinjunkaFukaTaishoBunkatuProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012001.HeinjunkaKeisanProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012001.InsFukaTmpProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012001.InsHeinjunkaFukaTmpProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012001.PrtKaigoFukaTokuchoHeijunkaTaishogaiProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012001.PrtKaigoFukaTokuchoHeijunkaTaishoshaProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012001.PrtReportOutputJokenhyoProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012001.UpdShoriDateKanriProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012001.DBB012001_TokuchoHeinjunka6GatsuParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.OutputChohyoIchiran;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt35001.TokuchoHeinjunka6GatsuProcessParameter;
@@ -42,11 +42,11 @@ public class DBB012001_TokuchoHeinjunka6Gatsu extends BatchFlowBase<DBB012001_To
     private static final String 対象者の帳票出力 = "PrtKaigoFukaTokuchoHeijunkaTaishoshaProcess";
     private static final String 対象外の帳票出力 = "PrtKaigoFukaTokuchoHeijunkaTaishogaiProcess";
     private static final String 賦課の情報一時テーブルに賦課情報を登録 = "InsFukaTmpProcess";
-    private static final String 賦課情報の登録 = "DBB004001_FukaJohoToroku";
+    private static final String 賦課情報の登録 = "FukaJohoToroku";
     private static final String バッチ出力条件表 = "PrtReportOutputJokenhyoProcess";
     private static final String 処理日付管理テーブル更新 = "updateSystemTimeProcess";
     private static final RString BATCH_ID = new RString("KeisangoJohoSakuseiFlow");
-    private static final RString FUKAJOHOTOROKUFLOW_FLOWID = new RString("FukaJohoTorokuFlow");
+    private static final RString FUKAJOHOTOROKUFLOW_FLOWID = new RString("DBB004001_FukaJohoToroku");
     private static RString 対象者ページ数;
     private static RString 対象外ページ数;
     private static final int YEAR_ONE = 1;

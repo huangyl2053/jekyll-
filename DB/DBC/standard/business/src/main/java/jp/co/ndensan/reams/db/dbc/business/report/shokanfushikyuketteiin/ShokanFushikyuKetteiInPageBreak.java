@@ -42,6 +42,24 @@ public class ShokanFushikyuKetteiInPageBreak extends PageBreaker<ShokanbaraiFush
         if (this.breakKeysList.contains(ShokanFushikyuKetteiInOutPutOrder.証記載保険者番号.getフォームフィールド名())
                 && !currentSource.getSource().shoKisaiHokenshaNo.equals(nextSource.getSource().shoKisaiHokenshaNo)) {
             flag = true;
+        } else if (this.breakKeysList.contains(ShokanFushikyuKetteiInOutPutOrder.町域コード.get項目ID())
+                && !currentSource.getSource().listLower_2.equals(nextSource.getSource().listLower_2)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(ShokanFushikyuKetteiInOutPutOrder.行政区コード.get項目ID())
+                && !currentSource.getSource().listLower_4.equals(nextSource.getSource().listLower_4)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(ShokanFushikyuKetteiInOutPutOrder.被保険者番号.get項目ID())
+                && !currentSource.getSource().listUpper_2.equals(nextSource.getSource().listUpper_2)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(ShokanFushikyuKetteiInOutPutOrder.通知書番号.get項目ID())
+                && !currentSource.getSource().listUpper_1.equals(nextSource.getSource().listUpper_1)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(ShokanFushikyuKetteiInOutPutOrder.整理番号.get項目ID())
+                && !currentSource.getSource().listLower_1.equals(nextSource.getSource().listLower_1)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(ShokanFushikyuKetteiInOutPutOrder.サービス種類コード.get項目ID())
+                && !currentSource.getSource().listLower_6.equals(nextSource.getSource().listLower_6)) {
+            flag = true;
         }
         return flag;
     }
@@ -59,22 +77,22 @@ public class ShokanFushikyuKetteiInPageBreak extends PageBreaker<ShokanbaraiFush
         if (this.breakKeysList.contains(ShokanFushikyuKetteiInOutPutOrder.証記載保険者番号.getフォームフィールド名())
                 && !currentSource.get証記載保険者番号().equals(nextSource.get証記載保険者番号())) {
             flag = true;
-        } else if (this.breakKeysList.contains(ShokanFushikyuKetteiInOutPutOrder.町域コード.getフォームフィールド名())
+        } else if (this.breakKeysList.contains(ShokanFushikyuKetteiInOutPutOrder.町域コード.get項目ID())
                 && !currentSource.get町域コード().equals(nextSource.get町域コード())) {
             flag = true;
-        } else if (this.breakKeysList.contains(ShokanFushikyuKetteiInOutPutOrder.行政区コード.getフォームフィールド名())
+        } else if (this.breakKeysList.contains(ShokanFushikyuKetteiInOutPutOrder.行政区コード.get項目ID())
                 && !currentSource.get行政区コード().equals(nextSource.get行政区コード())) {
             flag = true;
-        } else if (this.breakKeysList.contains(ShokanFushikyuKetteiInOutPutOrder.被保険者番号.getフォームフィールド名())
+        } else if (this.breakKeysList.contains(ShokanFushikyuKetteiInOutPutOrder.被保険者番号.get項目ID())
                 && !currentSource.get被保険者番号().equals(nextSource.get被保険者番号())) {
             flag = true;
-        } else if (this.breakKeysList.contains(ShokanFushikyuKetteiInOutPutOrder.通知書番号.getフォームフィールド名())
+        } else if (this.breakKeysList.contains(ShokanFushikyuKetteiInOutPutOrder.通知書番号.get項目ID())
                 && !currentSource.get決定通知().equals(nextSource.get決定通知())) {
             flag = true;
-        } else if (this.breakKeysList.contains(ShokanFushikyuKetteiInOutPutOrder.整理番号.getフォームフィールド名())
+        } else if (this.breakKeysList.contains(ShokanFushikyuKetteiInOutPutOrder.整理番号.get項目ID())
                 && !currentSource.get整理番号().equals(nextSource.get整理番号())) {
             flag = true;
-        } else if (this.breakKeysList.contains(ShokanFushikyuKetteiInOutPutOrder.サービス種類コード.getフォームフィールド名())
+        } else if (this.breakKeysList.contains(ShokanFushikyuKetteiInOutPutOrder.サービス種類コード.get項目ID())
                 && !currentSource.getサービス種類コード().equals(nextSource.getサービス種類コード())) {
             flag = true;
         }

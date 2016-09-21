@@ -214,9 +214,6 @@ public class DBU030010_JigyoHokokuNenpo_MainParameter extends BatchParameterBase
         DBU010100_JigyoHokokuGeppo_HokenkyufuKogakuGassanParameter parameter = new DBU010100_JigyoHokokuGeppo_HokenkyufuKogakuGassanParameter();
         parameter.setプリントコントロール区分(プリントコントロール区分);
         parameter.set報告区分(new RString("2"));
-        parameter.set報告年月(報告開始年月);
-        parameter.set年度(報告年度);
-        parameter.set決定年月(null);
         parameter.set報告年度(報告年度);
         parameter.set集計年度(集計年度.get(INDEX_8));
         parameter.set集計開始年月(集計開始年月.get(INDEX_8));

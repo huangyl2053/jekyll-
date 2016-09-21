@@ -197,7 +197,7 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaList {
      * @return bparamt
      */
     public DBD202010_HomonKaigoRiyoshaFutanGakuNinteishaListParameter set受給者区分の設定(HomonKaigoRiyoshaFutanGengakuNinteishaListDiv div) {
-        RString jukyushakubun = div.getRadJukyushaKubun().getSelectedValue();
+        RString jukyushakubun = div.getRadJukyushaKubun().getSelectedKey();
         if (jukyushakubun.equals(被保険者)) {
             bparamt.set受給者区分(JukyushaKubun2.被保険者);
         } else if (jukyushakubun.equals(受給者)) {
@@ -215,9 +215,9 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaList {
      * @return bparamt
      */
     public DBD202010_HomonKaigoRiyoshaFutanGakuNinteishaListParameter set旧措置区分の設定(HomonKaigoRiyoshaFutanGengakuNinteishaListDiv div) {
-        if (div.getRadKyusochishaKubun().getSelectedValue().equals(両方)) {
+        if (div.getRadKyusochishaKubun().getSelectedKey().equals(両方)) {
             bparamt.set旧措置区分(KyusochishaJukyushaKubun.両方);
-        } else if (div.getRadKyusochishaKubun().getSelectedValue().equals(旧措置者のみ)) {
+        } else if (div.getRadKyusochishaKubun().getSelectedKey().equals(旧措置者のみ)) {
             bparamt.set旧措置区分(KyusochishaJukyushaKubun.旧措置者のみ);
         } else {
             bparamt.set旧措置区分(KyusochishaJukyushaKubun.旧措置者以外);

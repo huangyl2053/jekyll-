@@ -133,7 +133,7 @@
         (
         DbT3062."kokuhorenSofuYM" IS NULL
         OR DbT3062."kokuhorenSofuYM" = '' 
-        <if test="再処理区分 == '1'">
+        <if test="再処理区分 == 1">
             OR DbT3062."kokuhorenSofuYM" = #{処理年月}
         </if>
         OR DbT3062."kokuhirenSaiSofuAriFlag" = true
@@ -316,12 +316,21 @@
     </sql>
     
     <select id="select保険者番号取得関連リスト"
-            resultMap="ResultMap_DbWT1741SaishinsaMoshitateEntity" fetchSize="500" resultOrdered="true">
+            resultMap="ResultMap_HokenshaNoEntity" fetchSize="500" resultOrdered="true">
         SELECT
-        DISTINCT "DbWT1741SaishinsaMoshitate"."hokenshaNo"
+        "DbWT1741SaishinsaMoshitate"."hokenshaNo" AS dbwt1741_hokenshaNo,
+        COUNT(DISTINCT "DbWT1741SaishinsaMoshitate"."renban") AS dbwt1741_count
         FROM "DbWT1741SaishinsaMoshitate"
         WHERE "DbWT1741SaishinsaMoshitate"."sofuJogaiFlag" = false
+        GROUP BY "DbWT1741SaishinsaMoshitate"."hokenshaNo"
     </select>
+    
+    <resultMap id="ResultMap_HokenshaNoEntity"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsamoshitateshoout.SaishinsaMoshitateGetHokenshaNoEntity"
+               autoMapping="true">
+        <id property="保険者番号" column="dbwt1741_hokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler" />
+        <result property="レコード件数" column="dbwt1741_count" />
+    </resultMap>
  
     <select id="select送付対象データ関連リスト" resultMap="resultMap_SofuTaisyoDataEntity" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.processprm.saishinsamoshitateshoout.SaishinsaMoshitateMybatisParameter" fetchSize="500" resultOrdered="true">

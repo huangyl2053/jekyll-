@@ -61,7 +61,7 @@ public class GassanShikyuTsuchishoTorikomiIchiranPageBreak
     private boolean doBreak(ReportLineRecord<GassanShikyuTsuchishoTorikomiIchiranSource> currentSource,
             ReportLineRecord<GassanShikyuTsuchishoTorikomiIchiranSource> nextSource) {
         if (this.breakKeysList.contains(GassanShikyuTsuchishoTorikomiIchiranOutputOrder.証記載保険者番号.get項目ID())
-                && !currentSource.getSource().hokenshaNo.equals(nextSource.getSource().hokenshaNo)) {
+                && !currentSource.getSource().shoKisaiHokenshaNo.equals(nextSource.getSource().shoKisaiHokenshaNo)) {
             return true;
         } else if (this.breakKeysList.contains(GassanShikyuTsuchishoTorikomiIchiranOutputOrder.被保険者番号.get項目ID())
                 && !currentSource.getSource().listUpper_1.equals(nextSource.getSource().listUpper_1)) {

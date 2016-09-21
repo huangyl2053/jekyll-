@@ -234,7 +234,9 @@
        ORDER BY
             DbWT3711."shikyuShinseishoSeiriNo" ASC,
             DbWT3711."rirekiNo" ASC,
-            DbWT3711."hihokenshaNo" ASC
+            DbWT3711."hihokenshaNo" ASC,
+            DbWT3711."taishoNendo" ASC,
+            DbWT3711."seiriNo" ASC
     </select>
     
     <resultMap autoMapping="true" id="resultMap_KogakuGassanShinseishoSofuFileEntity" 

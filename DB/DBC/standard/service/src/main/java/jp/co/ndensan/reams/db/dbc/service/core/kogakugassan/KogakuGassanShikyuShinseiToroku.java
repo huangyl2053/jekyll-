@@ -74,7 +74,6 @@ public class KogakuGassanShikyuShinseiToroku {
     private static final RString 削除 = new RString("削除");
     private static final RString 単一市町村モード = new RString("単一市町村モード");
     private static final RString 広域市町村モード = new RString("広域市町村モード");
-    private static final int INT_0 = 0;
     private static final int INT_6 = 6;
 
     /**
@@ -208,21 +207,26 @@ public class KogakuGassanShikyuShinseiToroku {
      *
      * @param 高額合算申請書保持 KogakuGassanShinseishoHoji
      * @param 画面項目 KogakuGassanShinseishoDataResult
-     * @return boolean
+     * @return RString
      */
     @Transaction
-    public boolean getKogakuGassanShikyuShinseishoTorokuKoshin(
+    public RString getKogakuGassanShikyuShinseishoTorokuKoshin(
             KogakuGassanShinseishoHoji 高額合算申請書保持, KogakuGassanShinseishoDataResult 画面項目) {
         RString 整理番号New = Saiban.get(SubGyomuCode.DBC介護給付,
                 SaibanHanyokeyName.支給申請書整理番号.getコード(), 高額合算申請書保持.get対象年度() == null
-                ? 画面項目.get対象年度() : 高額合算申請書保持.get対象年度()).nextString();
+                ? 画面項目.get対象年度() : 高額合算申請書保持.get対象年度()).nextString().padZeroToLeft(INT_6);
         if (高額合算申請書保持.get高額合算申請書() != null) {
             for (KogakuGassanShinseishoResult item : 高額合算申請書保持.get高額合算申請書()) {
                 if (追加.equals(item.get状態())) {
                     DbT3068KogakuGassanShinseishoEntity entity = item.get高額合算申請書().toEntity();
+                    entity.setTaishoNendo(画面項目.get対象年度());
                     entity.setSeiriNo(整理番号New);
-                    RString 支給申請書整理番号 = entity.getShikyuShinseishoSeiriNo();
+                    RString 支給申請書整理番号 = 画面項目.get支給申請書整理番号_追加用();
                     set支給申請書整理番号(支給申請書整理番号, entity, 整理番号New);
+                    entity.setShinseiYMD(画面項目.get申請年月日());
+                    entity.setKokuhoShikyuShinseishoSeiriNo(画面項目.get国保支給申請書整理番号());
+                    entity.setShikyuShinseiKeitai(画面項目.get支給申請形態());
+                    entity.setJikoFutanKofuUmu(画面項目.get自己負担額証明書交付申請の有無());
                     entity.setState(EntityDataState.Added);
                     高額合算申請書Dac.save(entity);
                 } else if (修正.equals(item.get状態())) {
@@ -232,6 +236,11 @@ public class KogakuGassanShikyuShinseiToroku {
                     entity.setHokenshaNo(画面項目.get保険者番号());
                     entity.setSeiriNo(画面項目.get整理番号());
                     entity.setRirekiNo(画面項目.get履歴番号().add(Decimal.ONE));
+                    entity.setShinseiYMD(画面項目.get申請年月日());
+                    entity.setShikyuShinseishoSeiriNo(画面項目.get支給申請書整理番号_更新用());
+                    entity.setKokuhoShikyuShinseishoSeiriNo(画面項目.get国保支給申請書整理番号());
+                    entity.setShikyuShinseiKeitai(画面項目.get支給申請形態());
+                    entity.setJikoFutanKofuUmu(画面項目.get自己負担額証明書交付申請の有無());
                     entity.setState(EntityDataState.Added);
                     高額合算申請書Dac.save(entity);
                 } else if (削除.equals(item.get状態())) {
@@ -243,7 +252,10 @@ public class KogakuGassanShikyuShinseiToroku {
             for (KogakuGassanShinseishoKanyurekiResult item : 高額合算申請書保持.get加入歴()) {
                 if (追加.equals(item.get状態())) {
                     DbT3069KogakuGassanShinseishoKanyurekiEntity entity = item.get高額合算申請書加入歴().toEntity();
+                    entity.setTaishoNendo(画面項目.get対象年度());
                     entity.setSeiriNo(整理番号New);
+                    RString 加入履歴番号 = getMaxKanyuRirekiNo(entity);
+                    entity.setKanyurekiNo(new RString(Integer.parseInt(加入履歴番号.toString()) + 1));
                     entity.setState(EntityDataState.Added);
                     高額合算申請書加入歴Dac.save(entity);
                 } else if (修正.equals(item.get状態())) {
@@ -262,7 +274,7 @@ public class KogakuGassanShikyuShinseiToroku {
                 }
             }
         }
-        return true;
+        return 整理番号New;
     }
 
     /**
@@ -303,8 +315,7 @@ public class KogakuGassanShikyuShinseiToroku {
 
     private void set支給申請書整理番号(RString 支給申請書整理番号, DbT3068KogakuGassanShinseishoEntity entity, RString 整理番号New) {
         if (!支給申請書整理番号.isNullOrEmpty()) {
-            entity.setShikyuShinseishoSeiriNo(
-                    支給申請書整理番号.substring(INT_0, 支給申請書整理番号.length() - INT_6).concat(整理番号New));
+            entity.setShikyuShinseishoSeiriNo(支給申請書整理番号.concat(整理番号New));
         }
     }
 

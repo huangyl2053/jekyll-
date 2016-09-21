@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0410012;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.kokuhorenkyoutsu.KokuhorenKyoutsuBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120230.DBC120230_SeikyugakuTsuchishoInParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410012.TsuchishoJoho151Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
@@ -43,8 +43,8 @@ public class TsuchishoJoho151 {
      * @param div TsuchishoJoho151Div
      * @return ResponseData
      */
-    public ResponseData<KokuhorenKyoutsuBatchParameter> onImplement(TsuchishoJoho151Div div) {
-        KokuhorenKyoutsuBatchParameter parameter = new KokuhorenKyoutsuBatchParameter();
+    public ResponseData<DBC120230_SeikyugakuTsuchishoInParameter> onImplement(TsuchishoJoho151Div div) {
+        DBC120230_SeikyugakuTsuchishoInParameter parameter = new DBC120230_SeikyugakuTsuchishoInParameter();
         SaiShoriKubun 再処理区分 = null;
         if (SaiShoriKubun.再処理.get名称().equals(div.getCcdKokurenJohoTorikomi().get再処理区分())) {
             再処理区分 = SaiShoriKubun.再処理;

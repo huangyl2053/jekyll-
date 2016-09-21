@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 給付額減額管理リストのハンドラークラスです。
  *
- * @reamsid_L DBD-3800-010 b_zhengs
+ * @reamsid_L DBD-3800-040 b_zhengs
  */
 public class KyufugakuGengakuKanriListHandler {
 

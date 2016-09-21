@@ -582,11 +582,14 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
         eucCsvEntity.set住所地特例状態(new RString("1").equals(entity.get被保険者台帳管理_住所地特例フラグ()) ? 住所地特例 : RString.EMPTY);
         LasdecCode lasdecCode;
         if (new RString("1").equals(entity.get被保険者台帳管理_広域内住所地特例フラグ())) {
-            lasdecCode = new LasdecCode(entity.get被保険者台帳管理_広住特措置元市町村コード());
+            lasdecCode = entity.get被保険者台帳管理_広住特措置元市町村コード() != null
+                    ? new LasdecCode(entity.get被保険者台帳管理_広住特措置元市町村コード()) : LasdecCode.EMPTY;
         } else {
-            lasdecCode = new LasdecCode(entity.get被保険者台帳管理_市町村コード());
+            lasdecCode = entity.get被保険者台帳管理_市町村コード() != null
+                    ? new LasdecCode(entity.get被保険者台帳管理_市町村コード()) : LasdecCode.EMPTY;
         }
-        eucCsvEntity.set資格証記載保険者番号(hokenshaList.get(lasdecCode).get証記載保険者番号().value());
+        eucCsvEntity.set資格証記載保険者番号(!lasdecCode.isEmpty()
+                ? hokenshaList.get(lasdecCode).get証記載保険者番号().value() : RString.EMPTY);
         eucCsvEntity.set医療保険種別(set医療保険種別(entity.get医療保険加入状況_医療保険種別コード()));
         eucCsvEntity.set医療保険番号(entity.get医療保険加入状況_医療保険者番号());
         eucCsvEntity.set医療保険者名(entity.get医療保険加入状況_医療保険者名称());

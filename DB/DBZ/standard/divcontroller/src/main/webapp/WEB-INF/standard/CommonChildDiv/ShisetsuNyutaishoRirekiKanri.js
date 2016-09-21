@@ -264,6 +264,8 @@ var DBZ;
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
 
+                    this.controls.ccdShisetsuJoho().State().DaichoShubetsuAriMode();
+
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
 
                     var columns = gridSetting.columns;
@@ -279,6 +281,7 @@ var DBZ;
 
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
+                    this.controls.TenshutsusakiJohoPanel().displayNone = false;
                 };
 
                 Riyou.prototype.全施設対象機能 = function () {
@@ -295,6 +298,8 @@ var DBZ;
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
 
+                    this.controls.ccdShisetsuJoho().State().DaichoShubetsuNashiMode();
+
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
 
                     var columns = gridSetting.columns;
@@ -310,6 +315,7 @@ var DBZ;
 
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
+                    this.controls.TenshutsusakiJohoPanel().displayNone = false;
                 };
 
                 Riyou.prototype.被保険者対象機能 = function () {
@@ -326,6 +332,8 @@ var DBZ;
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
 
+                    this.controls.ccdShisetsuJoho().State().OtherTokureiMode();
+
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
 
                     var columns = gridSetting.columns;
@@ -340,6 +348,7 @@ var DBZ;
                     gridSetting.columns = columns;
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
+                    this.controls.TenshutsusakiJohoPanel().displayNone = false;
                 };
 
                 Riyou.prototype.他市町村住所地特例者対象機能 = function () {
@@ -356,6 +365,8 @@ var DBZ;
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
 
+                    this.controls.ccdShisetsuJoho().State().OtherTokureiMode();
+
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
 
                     var columns = gridSetting.columns;
@@ -371,6 +382,7 @@ var DBZ;
 
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
+                    this.controls.TenshutsusakiJohoPanel().displayNone = true;
                 };
 
                 Riyou.prototype.適用除外者対象機能 = function () {
@@ -387,6 +399,8 @@ var DBZ;
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
 
+                    this.controls.ccdShisetsuJoho().State().TekiyoJogaiMode();
+
                     var gridSetting = this.controls.dgShisetsuNyutaishoRireki().gridSetting;
 
                     var columns = gridSetting.columns;
@@ -402,6 +416,7 @@ var DBZ;
 
                     this.controls.dgShisetsuNyutaishoRireki().gridSetting = gridSetting;
                     this.controls.dgShisetsuNyutaishoRireki()._control.afterPropertiesSet();
+                    this.controls.TenshutsusakiJohoPanel().displayNone = true;
                 };
                 return Riyou;
             })();

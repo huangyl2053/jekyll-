@@ -5,7 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kyodojukyushakoshinkekkaichiran;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 被保険者一時TBLのEntityクラスです。
@@ -17,16 +23,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DbWT0001HihokenshaEntity {
 
-    private RString 連番;
-    private RString 証記載保険者番号;
-    private RString 被保険者番号;
-    private RString サービス提供年月末日;
+    private Decimal 連番;
+    private ShoKisaiHokenshaNo 証記載保険者番号;
+    private HihokenshaNo 被保険者番号;
+    private FlexibleDate サービス提供年月末日;
     private RString 被保険者カナ氏名;
     private RString 被保険者氏名;
-    private RString 旧市町村コード;
-    private RString 変換被保険者番号;
-    private RString 登録被保険者番号;
-    private RString 市町村コード;
+    private LasdecCode 旧市町村コード;
+    private HihokenshaNo 変換被保険者番号;
+    private HihokenshaNo 登録被保険者番号;
+    private LasdecCode 市町村コード;
     private RString 管内管外区分;
     private RString 郵便番号;
     private RString 町域コード;
@@ -38,10 +44,10 @@ public class DbWT0001HihokenshaEntity {
     private RString 宛名カナ名称;
     private RString 宛名名称;
     private RString 氏名50音カナ;
-    private RString 識別コード;
-    private RString 資格取得日;
+    private ShikibetsuCode 識別コード;
+    private FlexibleDate 資格取得日;
     private RString 資格取得事由コード;
-    private RString 資格喪失日;
+    private FlexibleDate 資格喪失日;
     private RString 資格喪失事由コード;
-    private RString 世帯集約番号;
+    private HihokenshaNo 世帯集約番号;
 }
