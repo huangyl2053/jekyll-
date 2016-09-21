@@ -52,7 +52,7 @@
         <association property="要介護認定結果情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4102NinteiKekkaJohoMapper.ResultMap_DbT4102NinteiKekkaJohoEntity"/>
     </resultMap>
 
-    <select id="get今回認定情報WITHOUT結果情報" resultMap="ResultMap_NowYokaigoNinteiJohoEntityWithoutKekka" fetchSize="500">
+    <select id="get今回認定情報WITHOUT結果情報" resultOrdered="true" resultMap="ResultMap_NowYokaigoNinteiJohoEntityWithoutKekka" fetchSize="500">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.allColumns_DbT4101NinteiShinseiJoho"/>
         ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.allColumns_DbT4001JukyushaDaicho"/>
@@ -112,7 +112,7 @@
         "DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = #{申請書管理番号}
     </select>
 
-    <select id="get今回認定情報WITH結果情報" resultMap="ResultMap_NowYokaigoNinteiJohoEntityWithKekka" fetchSize="500">
+    <select id="get今回認定情報WITH結果情報" resultOrdered="true" resultMap="ResultMap_NowYokaigoNinteiJohoEntityWithKekka" fetchSize="500">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.allColumns_DbT4101NinteiShinseiJoho"/>
         ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.allColumns_DbT4001JukyushaDaicho"/>
@@ -171,7 +171,7 @@
         "DbT4101NinteiShinseiJoho"."shinseishoKanriNo" = #{申請書管理番号WITH結果情報}
     </select>
 
-    <select id="get前回認定情報" resultMap="ResultMap_OldYokaigoNinteiJohoEntity" fetchSize="500">
+    <select id="get前回認定情報" resultOrdered="true" resultMap="ResultMap_OldYokaigoNinteiJohoEntity" fetchSize="500">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.allColumns_DbT4101NinteiShinseiJoho"/>
         ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.allColumns_DbT4001JukyushaDaicho"/>
@@ -207,7 +207,7 @@
         "DbT4101NinteiShinseiJohoNew"."shinseishoKanriNo" = #{申請書管理番号}
     </select>
 
-    <select id="getMax履歴番号" resultType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
+    <select id="getMax履歴番号" resultOrdered="true" resultType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
         SELECT MAX("rirekiNo")
         FROM
         rgdb."DbT4001JukyushaDaicho" AS "T4001a"
@@ -237,7 +237,7 @@
         <association property="要介護認定結果情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4102NinteiKekkaJohoMapper.ResultMap_DbT4102NinteiKekkaJohoEntity"/>
     </resultMap>
 
-    <select id="get認定情報受給" resultMap="ResultMap_JyukyuYokaigoNinteiJohoEntity" fetchSize="500">
+    <select id="get認定情報受給" resultOrdered="true" resultMap="ResultMap_JyukyuYokaigoNinteiJohoEntity" fetchSize="500">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.allColumns_DbT4101NinteiShinseiJoho"/>
         ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.allColumns_DbT4001JukyushaDaicho"/>
@@ -295,7 +295,7 @@
         <association property="要介護認定結果情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4102NinteiKekkaJohoMapper.ResultMap_DbT4102NinteiKekkaJohoEntity"/>
     </resultMap>
 
-    <select id="get認定情報認定" resultMap="ResultMap_NinteiYokaigoNinteiJohoEntity" fetchSize="500">
+    <select id="get認定情報認定" resultOrdered="true" resultMap="ResultMap_NinteiYokaigoNinteiJohoEntity" fetchSize="500">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho"/>
         ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.allColumns_DbT4001JukyushaDaicho"/>
@@ -339,7 +339,7 @@
         "DbV4001JukyushaDaicho"."hihokenshaNo" = #{被保険者番号}
     </select>
 
-    <update id="updDbt4003YokaigoNinteiInterface"  parameterType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4003YokaigoNinteiInterfaceEntity">
+    <update id="updDbt4003YokaigoNinteiInterface" parameterType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4003YokaigoNinteiInterfaceEntity">
         UPDATE rgdb."DbT4003YokaigoNinteiInterface"
         SET
         "keshikomiFlag" = #{keshikomiFlag},
@@ -368,7 +368,7 @@
         <association property="要介護認定一次判定結果情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4116IchijiHanteiKekkaJohoMapper.ResultMap_DbT4116IchijiHanteiKekkaJohoEntity"/>
     </resultMap>
 
-    <select id="get今回前回履歴情報" resultMap="ResultMap_YokaigoRirekiJohoEntity" fetchSize="500">
+    <select id="get今回前回履歴情報" resultOrdered="true" resultMap="ResultMap_YokaigoRirekiJohoEntity" fetchSize="500">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.allColumns_DbT4001JukyushaDaicho"/>
         ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.allColumns_DbT4101NinteiShinseiJoho"/>
