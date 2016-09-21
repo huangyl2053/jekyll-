@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.batchcontroller.flow.kyokaisoggaitosha;
+package jp.co.ndensan.reams.db.dbu.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.kyokaisoggaitoshareportprocess.KyokaisogGaitoshaReportPageBreakProcess;
-import jp.co.ndensan.reams.db.dbu.definition.batchprm.kyokaisogaitoshabatchparameter.KyokaisoKanriMasterListBatchParameter;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU060010.DBU060010_KyokaisoKanriMasterListParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBU-1050-020 wanghui
  */
-public class KyokaisogGaitoshaFlow extends BatchFlowBase<KyokaisoKanriMasterListBatchParameter> {
+public class DBU060010_KyokaisoKanriMasterList extends BatchFlowBase<DBU060010_KyokaisoKanriMasterListParameter> {
 
     private static final String KYOKAISOG_REPORT_PROCESS = "KyokaisogGaitoshaReportPageBreakProcess";
 

@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
  */
 public class DBC8030001MainHandler {
 
-    private DBC8030001MainDiv div;
+    private final DBC8030001MainDiv div;
 
     /**
      * コンストラクターです。

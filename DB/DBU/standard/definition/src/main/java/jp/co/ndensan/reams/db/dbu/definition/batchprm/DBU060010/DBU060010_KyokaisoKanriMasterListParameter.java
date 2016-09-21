@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbu.definition.batchprm.kyokaisogaitoshabatchparameter;
+package jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU060010;
 
 import jp.co.ndensan.reams.db.dbu.definition.processprm.kyokaisogaitosha.KyokaisoGaitoshaProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -21,7 +21,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class KyokaisoKanriMasterListBatchParameter extends BatchParameterBase {
+public class DBU060010_KyokaisoKanriMasterListParameter extends BatchParameterBase {
 
     private static final String KEY_MODE = "mode";
     private static final String KEY_RANGE = "range";
