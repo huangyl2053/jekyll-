@@ -95,15 +95,11 @@ public class TokubetsuChoshuIdojohoKensuhyoEditor implements ITokubetsuChoshuIdo
 
         source.baitaiNo = RString.EMPTY;
         source.shurokuKensu = RString.EMPTY;
-        source.gokeiKensu = new RString(parameter.get特徴異動件数Entity().get件数Right() + parameter.get特徴異動件数Entity().get件数Left());
-        source.gokeiSoshituKensu = new RString(parameter.get特徴異動件数Entity().get資格件数Left()
-                + parameter.get特徴異動件数Entity().get資格件数Right());
-        source.gokeiKariSanShutsuGakuHenkoKensu = new RString(parameter.get特徴異動件数Entity().get仮徴収額変更件数Left()
-                + parameter.get特徴異動件数Entity().get仮徴収額変更件数Right());
-        source.gokeijushochiTokureiKensu = new RString(parameter.get特徴異動件数Entity().get住所地特例件数Left()
-                + parameter.get特徴異動件数Entity().get住所地特例件数Right());
-        source.gokeiTsukairaiKensu = new RString(parameter.get特徴異動件数Entity().get追加依頼件数Left()
-                + parameter.get特徴異動件数Entity().get追加依頼件数Right());
+        source.gokeiKensu = parameter.get特徴異動件数Entity().get該当件数の件数の合計();
+        source.gokeiSoshituKensu = parameter.get特徴異動件数Entity().get資格喪失の件数の合計();
+        source.gokeiKariSanShutsuGakuHenkoKensu = parameter.get特徴異動件数Entity().get仮徴収額変更の件数の合計();
+        source.gokeijushochiTokureiKensu = parameter.get特徴異動件数Entity().get住所地特例の件数の合計();
+        source.gokeiTsukairaiKensu = parameter.get特徴異動件数Entity().get特徴追加依頼の件数の合計();
         return source;
 
     }
