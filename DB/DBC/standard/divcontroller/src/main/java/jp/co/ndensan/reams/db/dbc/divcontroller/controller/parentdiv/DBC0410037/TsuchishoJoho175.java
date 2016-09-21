@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0410037;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.sogojigyohikagoketteiin.DBC120180_SogojigyohiKagoKetteiInParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120180.DBC120180_SogojigyohiKagoKetteiInParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410037.TsuchishoJoho175Div;

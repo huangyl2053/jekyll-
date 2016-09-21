@@ -59,12 +59,12 @@ public class JigyoHokokuDataTorokuProcess extends BatchProcessBase<JigyoJoukyouH
         if (区分_1.equals(processParameter.get報告区分())) {
             dbT7021Entity.setHokokuYSeireki(new FlexibleYear(processParameter.get報告年月().substring(0, 連番_4)));
             dbT7021Entity.setHokokuM(processParameter.get報告年月().substring(連番_4));
-            dbT7021Entity.setShukeiTaishoYSeireki(new FlexibleYear(processParameter.get年度().substring(0, 連番_4)));
+            dbT7021Entity.setShukeiTaishoYSeireki(new FlexibleYear(processParameter.get年度()));
             dbT7021Entity.setShukeiTaishoM(processParameter.get決定年月().substring(連番_4));
         } else {
             dbT7021Entity.setHokokuYSeireki(new FlexibleYear(processParameter.get報告年度().substring(0, 連番_4)));
             dbT7021Entity.setHokokuM(年報月);
-            dbT7021Entity.setShukeiTaishoYSeireki(new FlexibleYear(processParameter.get集計年度().substring(0, 連番_4)));
+            dbT7021Entity.setShukeiTaishoYSeireki(new FlexibleYear(processParameter.get集計年度()));
             dbT7021Entity.setShukeiTaishoM(年報月);
         }
         dbT7021Entity.setToukeiTaishoKubun(entity.getToukeiTaishoKubun());

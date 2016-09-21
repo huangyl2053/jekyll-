@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB055003.PntNonyuTsuchis
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB055003.SystemTimeSakuseiKanendoProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidogennen.ChohyoResult;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB055003.DBB055003_KanendoIdoTsuchishoHakkoParameter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB003001.DBB003001_KeisangoJohoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.honsanteiidokanendofuka.IdoFukaJohoFlgTrueProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.honsanteiidokanendofuka.KanendoHonsanteifukaProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
@@ -325,21 +325,21 @@ public class DBB055003_KanendoIdoTsuchishoHakko extends BatchFlowBase<DBB055003_
         return simpleBatch(HonsanteiIdoTsuchishoKanendoTempDropProcess.class).define();
     }
 
-    private KeisangoJohoSakuseiBatchParamter getKeisangoJohoSakuseiBatchParamter(RString 帳票分類ID, RString 回目) {
+    private DBB003001_KeisangoJohoSakuseiParameter getKeisangoJohoSakuseiBatchParamter(RString 帳票分類ID, RString 回目) {
         if (回目１.equals(回目)) {
-            return new KeisangoJohoSakuseiBatchParamter(getParameter().get調定年度().minusYear(1).toDateString(),
+            return new DBB003001_KeisangoJohoSakuseiParameter(getParameter().get調定年度().minusYear(1).toDateString(),
                     getParameter().get調定年度().minusYear(1).toDateString(),
                     getResult(RString.class, new RString(システム日時の取得), SystemTimeSakuseiKanendoProcess.KIJUN_TIME),
                     RString.EMPTY, 帳票分類ID);
         }
         if (回目２.equals(回目)) {
-            return new KeisangoJohoSakuseiBatchParamter(getParameter().get調定年度().toDateString(),
+            return new DBB003001_KeisangoJohoSakuseiParameter(getParameter().get調定年度().toDateString(),
                     getParameter().get調定年度().minusYear(1).toDateString(),
                     getResult(RString.class, new RString(システム日時の取得), SystemTimeSakuseiKanendoProcess.KIJUN_TIME),
                     RString.EMPTY, 帳票分類ID);
         }
         if (回目３.equals(回目)) {
-            return new KeisangoJohoSakuseiBatchParamter(getParameter().get調定年度().toDateString(),
+            return new DBB003001_KeisangoJohoSakuseiParameter(getParameter().get調定年度().toDateString(),
                     getParameter().get調定年度().minusYear(2).toDateString(),
                     getResult(RString.class, new RString(システム日時の取得), SystemTimeSakuseiKanendoProcess.KIJUN_TIME),
                     RString.EMPTY, 帳票分類ID);

@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE1920001;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.renkeidatatorikomi.RenkeiDataTorikomiBatchParamter;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.renkeidatatorikomi.ShiseiDataParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE192001.DBE192001_NnteiShinseiInfoUploadParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE192001.ShiseiDataParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001.NinteiShinseiJohoDensanCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001.NinteiShinseiJohoKouroushouCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001.RenkeiDataTorikomiDiv;
@@ -156,8 +156,8 @@ public class RenkeiDataTorikomiHandler {
      *
      * @return RenkeiDataTorikomiBatchParamter
      */
-    public RenkeiDataTorikomiBatchParamter setBatchParameter() {
-        RenkeiDataTorikomiBatchParamter batchParameter = new RenkeiDataTorikomiBatchParamter();
+    public DBE192001_NnteiShinseiInfoUploadParameter setBatchParameter() {
+        DBE192001_NnteiShinseiInfoUploadParameter batchParameter = new DBE192001_NnteiShinseiInfoUploadParameter();
         List<RString> list = new ArrayList<>();
         List<ShiseiDataParameter> parameterList = new ArrayList<>();
         batchParameter.set市町村コード(div.getRenkeiDataTorikomiBatchParameter().getListHokennsha().getSelectedItem().get市町村コード().value());

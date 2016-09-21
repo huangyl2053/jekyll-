@@ -16,11 +16,14 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoIdentifier;
+import jp.co.ndensan.reams.db.dbz.business.core.hokenshainputguide.Hokensha;
 import jp.co.ndensan.reams.db.dbz.business.core.kaigohohenshisetsu.KaigoHohenShisetsuBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
 import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
+import jp.co.ndensan.reams.db.dbz.service.core.hokensha.HokenshaNyuryokuHojoFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.kaigohohenshisetsunyutaishoshakanri.KaigoHohenShisetsuNyutaishoshaKanriManager;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -173,10 +176,8 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
      * 「選択」ボタンを押下する場合、明細エリアに選択行の内容を表示します。
      *
      * @param row 選択データ
-     * @param 保険者名称 保険者名称
      */
-    public void onSelectBySelectButton_dgShisetsuNyutaishoRireki(dgShisetsuNyutaishoRireki_Row row,
-            RString 保険者名称) {
+    public void onSelectBySelectButton_dgShisetsuNyutaishoRireki(dgShisetsuNyutaishoRireki_Row row) {
         div.getTxtNyushoDate().setValue(row.getNyushoDate().getValue());
         div.getTxtTaishoDate().setValue(row.getTaishoDate().getValue());
         if (ShisetsuNyutaishoRirekiKanriDiv.Riyou.台帳種別表示機能.equals(div.getMode_Riyou())) {
@@ -186,9 +187,10 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
             div.getCcdShisetsuJoho().set施設種類(row.getShisetsuShuruiKey());
         }
         if (!ShisetsuNyutaishoRirekiKanriDiv.Riyou.適用除外者対象機能.equals(div.getMode_Riyou())
-                && !ShisetsuNyutaishoRirekiKanriDiv.Riyou.他市町村住所地特例者対象機能.equals(div.getMode_Riyou())) {
-            div.getTxtHokensha().setValue(row.getTxtTenshutsusakiHokenshaBango());
-            div.getTxtHokensyaMeisho().setValue(保険者名称);
+                && !ShisetsuNyutaishoRirekiKanriDiv.Riyou.他市町村住所地特例者対象機能.equals(div.getMode_Riyou())
+                && !RString.isNullOrEmpty(row.getTxtTenshutsusakiHokenshaBango())) {
+            div.getTxtHokensha().setValue(get保険者番号と保険者名称(row.getTxtTenshutsusakiHokenshaBango()).get(0));
+            div.getTxtHokensyaMeisho().setValue(get保険者番号と保険者名称(row.getTxtTenshutsusakiHokenshaBango()).get(1));
         }
         div.getCcdShisetsuJoho().setNyuryokuShisetsuKodo(row.getShisetsuCode());
         div.getCcdShisetsuJoho().setShisetsuMeisho(row.getShisetsu());
@@ -200,10 +202,8 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
      * 「修正」ボタンを押下する場合、明細エリアに選択行の内容を表示します。
      *
      * @param row 選択データ
-     * @param 保険者名称 保険者名称
      */
-    public void onSelectByModifyButton_dgShisetsuNyutaishoRireki(dgShisetsuNyutaishoRireki_Row row,
-            RString 保険者名称) {
+    public void onSelectByModifyButton_dgShisetsuNyutaishoRireki(dgShisetsuNyutaishoRireki_Row row) {
         div.setInputMode(更新);
         div.getTxtNyushoDate().setDisabled(false);
         div.getTxtTaishoDate().setDisabled(false);
@@ -217,9 +217,10 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
             div.getCcdShisetsuJoho().set台帳種別(row.getDaichoShubetsuKey());
         }
         if (!ShisetsuNyutaishoRirekiKanriDiv.Riyou.適用除外者対象機能.equals(div.getMode_Riyou())
-                && !ShisetsuNyutaishoRirekiKanriDiv.Riyou.他市町村住所地特例者対象機能.equals(div.getMode_Riyou())) {
-            div.getTxtHokensha().setValue(row.getTxtTenshutsusakiHokenshaBango());
-            div.getTxtHokensyaMeisho().setValue(保険者名称);
+                && !ShisetsuNyutaishoRirekiKanriDiv.Riyou.他市町村住所地特例者対象機能.equals(div.getMode_Riyou())
+                && !RString.isNullOrEmpty(row.getTxtTenshutsusakiHokenshaBango())) {
+            div.getTxtHokensha().setValue(get保険者番号と保険者名称(row.getTxtTenshutsusakiHokenshaBango()).get(0));
+            div.getTxtHokensyaMeisho().setValue(get保険者番号と保険者名称(row.getTxtTenshutsusakiHokenshaBango()).get(1));
         }
         div.getCcdShisetsuJoho().setNyuryokuShisetsuKodo(row.getShisetsuCode());
         div.getCcdShisetsuJoho().setShisetsuMeisho(row.getShisetsu());
@@ -232,10 +233,8 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
      * 「削除」ボタンを押下する場合、明細エリアに選択行の内容を表示します。
      *
      * @param row 選択データ
-     * @param 保険者名称 保険者名称
      */
-    public void onSelectByDeleteButton_dgShisetsuNyutaishoRireki(dgShisetsuNyutaishoRireki_Row row,
-            RString 保険者名称) {
+    public void onSelectByDeleteButton_dgShisetsuNyutaishoRireki(dgShisetsuNyutaishoRireki_Row row) {
         div.setInputMode(削除);
         div.getTxtNyushoDate().setDisabled(true);
         div.getTxtTaishoDate().setDisabled(true);
@@ -249,9 +248,10 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
             div.getCcdShisetsuJoho().set台帳種別(row.getDaichoShubetsuKey());
         }
         if (!ShisetsuNyutaishoRirekiKanriDiv.Riyou.適用除外者対象機能.equals(div.getMode_Riyou())
-                && !ShisetsuNyutaishoRirekiKanriDiv.Riyou.他市町村住所地特例者対象機能.equals(div.getMode_Riyou())) {
-            div.getTxtHokensha().setValue(row.getTxtTenshutsusakiHokenshaBango());
-            div.getTxtHokensyaMeisho().setValue(保険者名称);
+                && !ShisetsuNyutaishoRirekiKanriDiv.Riyou.他市町村住所地特例者対象機能.equals(div.getMode_Riyou())
+                && !RString.isNullOrEmpty(row.getTxtTenshutsusakiHokenshaBango())) {
+            div.getTxtHokensha().setValue(get保険者番号と保険者名称(row.getTxtTenshutsusakiHokenshaBango()).get(0));
+            div.getTxtHokensyaMeisho().setValue(get保険者番号と保険者名称(row.getTxtTenshutsusakiHokenshaBango()).get(1));
         }
         div.getCcdShisetsuJoho().setNyuryokuShisetsuKodo(row.getShisetsuCode());
         div.getCcdShisetsuJoho().setShisetsuMeisho(row.getShisetsu());
@@ -411,7 +411,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
             row.setDaichoShubetsuKey(施設入退所.get台帳種別());
             row.setShisetsuShuruiKey(施設入退所.get入所施設種類());
             row.setRirekiNo(new RString(施設入退所.get履歴番号().toString()));
-            row.setTxtTenshutsusakiHokenshaBango(get保険者番号(施設入退所.get保険者番号()));
+            row.setTxtTenshutsusakiHokenshaBango(get保険者名(get保険者番号(施設入退所.get保険者番号())));
             施設種類(施設入退所.get台帳種別(), row);
             rowList.add(row);
 
@@ -534,13 +534,13 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
             台帳種別 = row.getDaichoShubetsuKey();
             施設種類 = row.getShisetsuShuruiKey();
             if (!RString.isNullOrEmpty(row.getTxtTenshutsusakiHokenshaBango())) {
-                保険者番号 = new HokenshaNo(row.getTxtTenshutsusakiHokenshaBango());
+                保険者番号 = new HokenshaNo(get保険者番号と保険者名称(row.getTxtTenshutsusakiHokenshaBango()).get(0));
             }
         } else if (被保険者対象機能.equals(new RString(div.getMode_Riyou().toString()))) {
             台帳種別 = row.getDaichoShubetsuKey();
             施設種類 = row.getShisetsuShuruiKey();
             if (!RString.isNullOrEmpty(row.getTxtTenshutsusakiHokenshaBango())) {
-                保険者番号 = new HokenshaNo(row.getTxtTenshutsusakiHokenshaBango());
+                保険者番号 = new HokenshaNo(get保険者番号と保険者名称(row.getTxtTenshutsusakiHokenshaBango()).get(0));
             }
         } else if (他市町村住所地特例者対象機能.equals(new RString(div.getMode_Riyou().toString()))) {
             台帳種別 = row.getDaichoShubetsuKey();
@@ -551,7 +551,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
         } else if (全施設対象機能.equals(new RString(div.getMode_Riyou().toString()))) {
             施設種類 = row.getShisetsuShuruiKey();
             if (!RString.isNullOrEmpty(row.getTxtTenshutsusakiHokenshaBango())) {
-                保険者番号 = new HokenshaNo(row.getTxtTenshutsusakiHokenshaBango());
+                保険者番号 = new HokenshaNo(get保険者番号と保険者名称(row.getTxtTenshutsusakiHokenshaBango()).get(0));
             }
         }
         if (div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo() != null
@@ -598,13 +598,13 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
             台帳種別 = row.getDaichoShubetsuKey();
             施設種類 = row.getShisetsuShuruiKey();
             if (!RString.isNullOrEmpty(row.getTxtTenshutsusakiHokenshaBango())) {
-                保険者番号 = new HokenshaNo(row.getTxtTenshutsusakiHokenshaBango());
+                保険者番号 = new HokenshaNo(get保険者番号と保険者名称(row.getTxtTenshutsusakiHokenshaBango()).get(0));
             }
         } else if (被保険者対象機能.equals(new RString(div.getMode_Riyou().toString()))) {
             台帳種別 = row.getDaichoShubetsuKey();
             施設種類 = row.getShisetsuShuruiKey();
             if (!RString.isNullOrEmpty(row.getTxtTenshutsusakiHokenshaBango())) {
-                保険者番号 = new HokenshaNo(row.getTxtTenshutsusakiHokenshaBango());
+                保険者番号 = new HokenshaNo(get保険者番号と保険者名称(row.getTxtTenshutsusakiHokenshaBango()).get(0));
             }
         } else if (他市町村住所地特例者対象機能.equals(new RString(div.getMode_Riyou().toString()))) {
             台帳種別 = row.getDaichoShubetsuKey();
@@ -615,7 +615,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
         } else if (全施設対象機能.equals(new RString(div.getMode_Riyou().toString()))) {
             施設種類 = row.getShisetsuShuruiKey();
             if (!RString.isNullOrEmpty(row.getTxtTenshutsusakiHokenshaBango())) {
-                保険者番号 = new HokenshaNo(row.getTxtTenshutsusakiHokenshaBango());
+                保険者番号 = new HokenshaNo(get保険者番号と保険者名称(row.getTxtTenshutsusakiHokenshaBango()).get(0));
             }
         }
         if (div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo() != null
@@ -657,14 +657,14 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
             newRow.setDaichoShubetsuKey(div.getCcdShisetsuJoho().getDaichoShubetsu());
             newRow.setShisetsuShurui(get施設種類(div.getCcdShisetsuJoho().get施設種類()));
             newRow.setShisetsuShuruiKey(div.getCcdShisetsuJoho().get施設種類());
-            newRow.setTxtTenshutsusakiHokenshaBango(div.getTxtHokensha().getValue());
+            newRow.setTxtTenshutsusakiHokenshaBango(get保険者名(div.getTxtHokensha().getValue()));
             施設種類(newRow.getDaichoShubetsuKey(), newRow);
         } else if (被保険者対象機能.equals(new RString(div.getMode_Riyou().toString()))) {
             newRow.setDaichoShubetsu(DaichoType.被保険者.get名称());
             newRow.setDaichoShubetsuKey(DaichoType.被保険者.getコード());
             newRow.setShisetsuShurui(get施設種類(div.getCcdShisetsuJoho().get施設種類()));
             newRow.setShisetsuShuruiKey(div.getCcdShisetsuJoho().get施設種類());
-            newRow.setTxtTenshutsusakiHokenshaBango(div.getTxtHokensha().getValue());
+            newRow.setTxtTenshutsusakiHokenshaBango(get保険者名(div.getTxtHokensha().getValue()));
         } else if (他市町村住所地特例者対象機能.equals(new RString(div.getMode_Riyou().toString()))) {
             newRow.setDaichoShubetsu(DaichoType.他市町村住所地特例者.get名称());
             newRow.setDaichoShubetsuKey(DaichoType.他市町村住所地特例者.getコード());
@@ -678,7 +678,7 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
         } else if (全施設対象機能.equals(new RString(div.getMode_Riyou().toString()))) {
             newRow.setShisetsuShurui(get施設種類(div.getCcdShisetsuJoho().get施設種類()));
             newRow.setShisetsuShuruiKey(div.getCcdShisetsuJoho().get施設種類());
-            newRow.setTxtTenshutsusakiHokenshaBango(div.getTxtHokensha().getValue());
+            newRow.setTxtTenshutsusakiHokenshaBango(get保険者名(div.getTxtHokensha().getValue()));
         }
     }
 
@@ -693,6 +693,20 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
             }
         }
         return false;
+    }
+
+    private RString get保険者名(RString 保険者番号) {
+        if (!RString.isNullOrEmpty(保険者番号)) {
+            Hokensha hokensha = HokenshaNyuryokuHojoFinder.createInstance().getHokensha(new HokenjaNo(保険者番号));
+            if (hokensha != null) {
+                return 保険者番号.concat(":").concat(hokensha.get保険者名());
+            }
+        }
+        return RString.EMPTY;
+    }
+
+    private List<RString> get保険者番号と保険者名称(RString 保険者番号と保険者名称) {
+        return 保険者番号と保険者名称.split(":");
     }
 
     private static class RirekiNoDateComparator implements Comparator<dgShisetsuNyutaishoRireki_Row>, Serializable {

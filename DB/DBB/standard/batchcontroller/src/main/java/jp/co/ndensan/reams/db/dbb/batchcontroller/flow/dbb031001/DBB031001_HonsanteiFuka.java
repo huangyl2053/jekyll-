@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB004001.DBB004001_FukaJo
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB031001.DBB031001_HonsanteiFukaParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB031003.DBB031003_HonsanteiTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteifuka.HonsanteifukaBatchTyouhyou;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB003001.DBB003001_KeisangoJohoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt4300.HonsanteiFukaProcessParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.fuka.SetaiShotokuKazeiHanteiBatchParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SetaiinHaakuKanriShikibetsuKubun;
@@ -191,8 +191,8 @@ public class DBB031001_HonsanteiFuka extends BatchFlowBase<DBB031001_HonsanteiFu
                 getKeisangoJohoSakuseiBatchParamter(RString.EMPTY)).define();
     }
 
-    private KeisangoJohoSakuseiBatchParamter getKeisangoJohoSakuseiBatchParamter(RString 帳票分類ID) {
-        return new KeisangoJohoSakuseiBatchParamter(getParameter().get調定年度().toDateString(),
+    private DBB003001_KeisangoJohoSakuseiParameter getKeisangoJohoSakuseiBatchParamter(RString 帳票分類ID) {
+        return new DBB003001_KeisangoJohoSakuseiParameter(getParameter().get調定年度().toDateString(),
                 getParameter().get賦課年度().toDateString(),
                 new RString(システム日時.toString()),
                 ShoriName.本算定賦課.get名称(), 帳票分類ID);

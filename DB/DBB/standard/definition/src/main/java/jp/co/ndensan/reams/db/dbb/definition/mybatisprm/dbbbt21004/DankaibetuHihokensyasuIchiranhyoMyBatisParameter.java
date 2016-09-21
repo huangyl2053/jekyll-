@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class DankaibetuHihokensyasuIchiranhyoMyBatisParameter implements IMyBatisParameter {
 
     private boolean 市町村コード;
-    private List<RString> 市町村コード複数;
+    private List<RString> 市町村コードList;
     private FlexibleDate 資格基準日;
     private FlexibleDate 調定年月日;
 }

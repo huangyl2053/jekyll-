@@ -163,15 +163,15 @@
     
     <sql id="allColumns_DbWT3036ShokanHanteiKekka">
         DbWT3036."renban" as dbWT3036_連番,
-        DbWT3036."shokisaiHokenshaNo" as dbWT3036_証記載保険者番号,
-        DbWT3036."shokisaiHokenshaMei" as dbWT3036_証記載保険者名,
-        DbWT3036."sakuseiYmd" as dbWT3036_作成年月日,
-        DbWT3036."kokuhoRengokaiMei" as dbWT3036_国保連合会名,
+        DbWT3036."shoKisaiHokenshaNo" as dbWT3036_証記載保険者番号,
+        DbWT3036."shoKisaiHokenshaName" as dbWT3036_証記載保険者名,
+        DbWT3036."sakuseiYMD" as dbWT3036_作成年月日,
+        DbWT3036."kokuhorenName" as dbWT3036_国保連合会名,
         DbWT3036."tsuchishoNo" as dbWT3036_No,
         DbWT3036."seiriNo" as dbWT3036_整理番号,
-        DbWT3036."serviceTeikyoYm" as dbWT3036_サービス提供年月,
+        DbWT3036."serviceTeikyoYM" as dbWT3036_サービス提供年月,
         DbWT3036."jigyoshoNo" as dbWT3036_事業所番号,
-        DbWT3036."jigyoshoMei" as dbWT3036_事業所名,
+        DbWT3036."jigyoshoName" as dbWT3036_事業所名,
         DbWT3036."serviceShuruiCode" as dbWT3036_サービス種類コード,
         DbWT3036."serviceShuruiMei" as dbWT3036_サービス種類名,
         DbWT3036."tanisuKingaku" as dbWT3036_単位数,
@@ -183,5 +183,5 @@
         DbWT3036."koshinDBumu" as dbWT3036_更新DB有無,
         DbWT3036."wrkJigyoshoNo" as dbWT3036_ワーク事業所番号
     </sql>
-
+    
 </mapper>
