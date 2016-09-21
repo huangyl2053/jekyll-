@@ -109,10 +109,14 @@ public class ChikuShichosonSelectHandler {
             dataSource.add(new KeyValueDataSource(KEY, KEY.concat(全角空白).concat(文字_全市町村)));
             List<KoseiShichoson> 広域市町村情報 = finder.getKoseiShichosonList().records();
             if (!広域市町村情報.isEmpty()) {
+                List<RString> keyList = new ArrayList<>();
                 for (KoseiShichoson item : 広域市町村情報) {
-                    RString 市町村Code = item.get市町村コード().value();
+                    RString 市町村Code = item.get市町村コード().getColumnValue();
                     RString 市町村名称 = item.get市町村名称();
-                    dataSource.add(new KeyValueDataSource(市町村Code, 市町村Code.concat(全角空白).concat(市町村名称)));
+                    if (!keyList.contains(市町村Code)) {
+                        dataSource.add(new KeyValueDataSource(市町村Code, 市町村Code.concat(全角空白).concat(市町村名称)));
+                        keyList.add(item.get市町村コード().getColumnValue());
+                    }
                 }
             }
             div.getDdlShichoson().setDataSource(dataSource);
