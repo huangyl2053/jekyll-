@@ -77,7 +77,15 @@ public class TokuchoTaishoshaIchiran {
      * @return ResponseData
      */
     public ResponseData<TokuchoTaishoshaIchiranDiv> onLoad(TokuchoTaishoshaIchiranDiv div) {
-        if (DBB2710002StateName.同定非同定表示.getName().equals(ResponseHolder.getState())
+        if (DBB2710002StateName.特別徴収対象者一覧作成.getName().equals(ResponseHolder.getState())
+                && (メニューID_特徴対象者一覧作成.equals(ResponseHolder.getMenuID()))) {
+            TokuchoTaishoshaIchiranSakuseiResult result = getHandler(div).特別徴収対象者一覧作成initialize();
+            if (result != null) {
+                ViewStateHolder.put(ViewStateKeys.特別徴収開始月, result.get特別徴収開始月());
+                ViewStateHolder.put(ViewStateKeys.捕捉月リスト, (Serializable) result.get捕捉月リスト());
+            }
+            return ResponseData.of(div).setState(DBB2710002StateName.特別徴収対象者一覧作成);
+        } else if (DBB2710002StateName.同定非同定表示.getName().equals(ResponseHolder.getState())
                 && (メニューID_特徴対象者一覧同定非同定表示確認.equals(ResponseHolder.getMenuID())
                 || メニューID_特徴対象者同定一括.equals(ResponseHolder.getFlowId()))) {
             return 同定非同定表示initialize(div);
@@ -90,14 +98,6 @@ public class TokuchoTaishoshaIchiran {
                 || メニューID_特徴対象者同定一括.equals(ResponseHolder.getFlowId()))) {
             特別徴収同定候補者一覧initialize(div);
             return ResponseData.of(div).setState(DBB2710002StateName.特別徴収同定候補者一覧);
-        } else if (DBB2710002StateName.特別徴収対象者一覧作成.getName().equals(ResponseHolder.getState())
-                && (メニューID_特徴対象者一覧作成.equals(ResponseHolder.getMenuID()))) {
-            TokuchoTaishoshaIchiranSakuseiResult result = getHandler(div).特別徴収対象者一覧作成initialize();
-            if (result != null) {
-                ViewStateHolder.put(ViewStateKeys.特別徴収開始月, result.get特別徴収開始月());
-                ViewStateHolder.put(ViewStateKeys.捕捉月リスト, (Serializable) result.get捕捉月リスト());
-            }
-            return ResponseData.of(div).setState(DBB2710002StateName.特別徴収対象者一覧作成);
         } else if (DBB2710002StateName.特別徴収未同定一覧.getName().equals(ResponseHolder.getState())
                 && (メニューID_特徴対象者一覧同定非同定表示確認.equals(ResponseHolder.getMenuID())
                 || メニューID_特徴対象者同定一括.equals(ResponseHolder.getFlowId()))) {

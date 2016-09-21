@@ -553,7 +553,7 @@ public class RiyoshaFutanWariaiHantei {
      */
     public List<RiyoshaFutanWariaiMeisaiTempEntity> futanWariaiHanteiMerge(
             List<RiyoshaFutanWariaiMeisaiTempEntity> 利用者負担割合明細情報, FlexibleYear 対象年度) {
-        if (利用者負担割合明細情報 == null || 対象年度 == null) {
+        if (利用者負担割合明細情報 == null || 利用者負担割合明細情報.isEmpty() || 対象年度 == null) {
             throw new NullPointerException();
         }
         set負担割合判定マージソット(利用者負担割合明細情報);

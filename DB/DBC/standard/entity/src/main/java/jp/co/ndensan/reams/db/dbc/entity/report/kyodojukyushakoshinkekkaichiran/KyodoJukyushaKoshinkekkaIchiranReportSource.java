@@ -151,4 +151,13 @@ public class KyodoJukyushaKoshinkekkaIchiranReportSource implements IReportSourc
     public ShikibetsuCode shikibetuCode;
     @ReportExpandedInfo(id = "X")
     public ExpandedInformation shinseishoKanriNo;
+
+    /**
+     * 改ページ条件のキーです。
+     */
+    public enum ReportSourceFields {
+
+        hokenshaNo,
+
+    }
 }
