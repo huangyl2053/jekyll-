@@ -101,8 +101,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomo
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku99A_19;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku99A_20;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.NinnteiChousaKekkaTouroku1Div;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.dgRiyoSerViceFirstHalf_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.dgRiyoSerViceSecondHalf_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.dgRiyoServiceJyokyo_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.dgRiyoShisetsu_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.ninnteichousakekkatouroku1.NinnteiChousaKekkaTouroku1Finder;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
@@ -285,197 +284,179 @@ public class NinnteiChousaKekkaTouroku1Handler {
      */
     public RString 予防給付サービス名称取得(RString temp_厚労省IF識別コード) {
 
-        List<dgRiyoSerViceFirstHalf_Row> halfListTmp = new ArrayList<>();
+        List<dgRiyoServiceJyokyo_Row> halfListTmp = new ArrayList<>();
         if (厚労省IF識別コード_06A.equals(temp_厚労省IF識別コード)) {
-            halfListTmp.add(予防データ(GaikyochosaKomoku06A_1._介護予防_訪問介護_ﾎｰﾑﾍﾙﾌﾟｻｰﾋﾞｽ.get名称(), GaikyochosaKomoku06A_1._介護予防_訪問介護_ﾎｰﾑﾍﾙﾌﾟｻｰﾋﾞｽ.get単位()));
-            halfListTmp.add(予防データ(GaikyochosaKomoku06A_2._介護予防_訪問入浴介護.get名称(), GaikyochosaKomoku06A_2._介護予防_訪問入浴介護.get単位()));
-            halfListTmp.add(予防データ(GaikyochosaKomoku06A_3._介護予防_訪問看護.get名称(), GaikyochosaKomoku06A_3._介護予防_訪問看護.get単位()));
-            halfListTmp.add(予防データ(GaikyochosaKomoku06A_4._介護予防_訪問ﾘﾊﾋﾞﾘﾃｰｼｮﾝ.get名称(), GaikyochosaKomoku06A_4._介護予防_訪問ﾘﾊﾋﾞﾘﾃｰｼｮﾝ.get単位()));
-            halfListTmp.add(予防データ(GaikyochosaKomoku06A_5._介護予防_居宅療養管理指導.get名称(), GaikyochosaKomoku06A_5._介護予防_居宅療養管理指導.get単位()));
-            halfListTmp.add(予防データ(GaikyochosaKomoku06A_6._介護予防_通所介護_ﾃﾞｲｻｰﾋﾞｽ.get名称(), GaikyochosaKomoku06A_6._介護予防_通所介護_ﾃﾞｲｻｰﾋﾞｽ.get単位()));
-            halfListTmp.add(予防データ(GaikyochosaKomoku06A_7._介護予防_通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_ﾃﾞｲｹｱ.get名称(), GaikyochosaKomoku06A_7._介護予防_通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_ﾃﾞｲｹｱ.get単位()));
-            halfListTmp.add(予防データ(GaikyochosaKomoku06A_8._介護予防_短期入所生活介護_特養等.get名称(), GaikyochosaKomoku06A_8._介護予防_短期入所生活介護_特養等.get単位()));
-            halfListTmp.add(予防データ(GaikyochosaKomoku06A_9._介護予防_短期入所療養介護_老健_診療所.get名称(), GaikyochosaKomoku06A_9._介護予防_短期入所療養介護_老健_診療所.get単位()));
-            halfListTmp.add(予防データ(GaikyochosaKomoku06A_10._介護予防_特定施設入居者生活介護.get名称(), GaikyochosaKomoku06A_10._介護予防_特定施設入居者生活介護.get単位()));
-            halfListTmp.add(予防データ(GaikyochosaKomoku06A_11._介護予防_福祉用具貸与.get名称(), GaikyochosaKomoku06A_11._介護予防_福祉用具貸与.get単位()));
-            halfListTmp.add(予防データ(GaikyochosaKomoku06A_12.特定_介護予防_福祉用具販売.get名称(), GaikyochosaKomoku06A_12.特定_介護予防_福祉用具販売.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku06A_1._介護予防_訪問介護_ﾎｰﾑﾍﾙﾌﾟｻｰﾋﾞｽ.get名称(), GaikyochosaKomoku06A_1._介護予防_訪問介護_ﾎｰﾑﾍﾙﾌﾟｻｰﾋﾞｽ.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku06A_2._介護予防_訪問入浴介護.get名称(), GaikyochosaKomoku06A_2._介護予防_訪問入浴介護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku06A_3._介護予防_訪問看護.get名称(), GaikyochosaKomoku06A_3._介護予防_訪問看護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku06A_4._介護予防_訪問ﾘﾊﾋﾞﾘﾃｰｼｮﾝ.get名称(), GaikyochosaKomoku06A_4._介護予防_訪問ﾘﾊﾋﾞﾘﾃｰｼｮﾝ.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku06A_5._介護予防_居宅療養管理指導.get名称(), GaikyochosaKomoku06A_5._介護予防_居宅療養管理指導.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku06A_6._介護予防_通所介護_ﾃﾞｲｻｰﾋﾞｽ.get名称(), GaikyochosaKomoku06A_6._介護予防_通所介護_ﾃﾞｲｻｰﾋﾞｽ.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku06A_7._介護予防_通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_ﾃﾞｲｹｱ.get名称(), GaikyochosaKomoku06A_7._介護予防_通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_ﾃﾞｲｹｱ.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku06A_8._介護予防_短期入所生活介護_特養等.get名称(), GaikyochosaKomoku06A_8._介護予防_短期入所生活介護_特養等.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku06A_9._介護予防_短期入所療養介護_老健_診療所.get名称(), GaikyochosaKomoku06A_9._介護予防_短期入所療養介護_老健_診療所.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku06A_10._介護予防_特定施設入居者生活介護.get名称(), GaikyochosaKomoku06A_10._介護予防_特定施設入居者生活介護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku06A_11._介護予防_福祉用具貸与.get名称(), GaikyochosaKomoku06A_11._介護予防_福祉用具貸与.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku06A_12.特定_介護予防_福祉用具販売.get名称(), GaikyochosaKomoku06A_12.特定_介護予防_福祉用具販売.get単位()));
 
-            halfListTmp.add(予防データ(GaikyochosaKomoku06A_15._介護予防_認知症対応型通所介護.get名称(), GaikyochosaKomoku06A_15._介護予防_認知症対応型通所介護.get単位()));
-            halfListTmp.add(予防データ(GaikyochosaKomoku06A_16._介護予防_小規模多機能型居宅介護.get名称(), GaikyochosaKomoku06A_16._介護予防_小規模多機能型居宅介護.get単位()));
-            halfListTmp.add(予防データ(GaikyochosaKomoku06A_17._介護予防_認知症対応型共同生活介護.get名称(), GaikyochosaKomoku06A_17._介護予防_認知症対応型共同生活介護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku06A_15._介護予防_認知症対応型通所介護.get名称(), GaikyochosaKomoku06A_15._介護予防_認知症対応型通所介護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku06A_16._介護予防_小規模多機能型居宅介護.get名称(), GaikyochosaKomoku06A_16._介護予防_小規模多機能型居宅介護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku06A_17._介護予防_認知症対応型共同生活介護.get名称(), GaikyochosaKomoku06A_17._介護予防_認知症対応型共同生活介護.get単位()));
         } else if (厚労省IF識別コード_09A.equals(temp_厚労省IF識別コード)) {
-            halfListTmp.add(予防データ(GaikyochosaKomoku09A_1._介護予防_訪問介護_ﾎｰﾑﾍﾙﾌﾟｻｰﾋﾞｽ.get名称(), GaikyochosaKomoku09A_1._介護予防_訪問介護_ﾎｰﾑﾍﾙﾌﾟｻｰﾋﾞｽ.get単位()));
-            halfListTmp.add(予防データ(GaikyochosaKomoku09A_2._介護予防_訪問入浴介護.get名称(), GaikyochosaKomoku09A_2._介護予防_訪問入浴介護.get単位()));
-            halfListTmp.add(予防データ(GaikyochosaKomoku09A_3._介護予防_訪問看護.get名称(), GaikyochosaKomoku09A_3._介護予防_訪問看護.get単位()));
-            halfListTmp.add(予防データ(GaikyochosaKomoku09A_4._介護予防_訪問ﾘﾊﾋﾞﾘﾃｰｼｮﾝ.get名称(), GaikyochosaKomoku09A_4._介護予防_訪問ﾘﾊﾋﾞﾘﾃｰｼｮﾝ.get単位()));
-            halfListTmp.add(予防データ(GaikyochosaKomoku09A_5._介護予防_居宅療養管理指導.get名称(), GaikyochosaKomoku09A_5._介護予防_居宅療養管理指導.get単位()));
-            halfListTmp.add(予防データ(GaikyochosaKomoku09A_6._介護予防_通所介護_ﾃﾞｲｻｰﾋﾞｽ.get名称(), GaikyochosaKomoku09A_6._介護予防_通所介護_ﾃﾞｲｻｰﾋﾞｽ.get単位()));
-            halfListTmp.add(予防データ(GaikyochosaKomoku09A_7._介護予防_通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_ﾃﾞｲｹｱ.get名称(), GaikyochosaKomoku09A_7._介護予防_通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_ﾃﾞｲｹｱ.get単位()));
-            halfListTmp.add(予防データ(GaikyochosaKomoku09A_8._介護予防_短期入所生活介護_特養等.get名称(), GaikyochosaKomoku09A_8._介護予防_短期入所生活介護_特養等.get単位()));
-            halfListTmp.add(予防データ(GaikyochosaKomoku09A_9._介護予防_短期入所療養介護_老健_診療所.get名称(), GaikyochosaKomoku09A_9._介護予防_短期入所療養介護_老健_診療所.get単位()));
-            halfListTmp.add(予防データ(GaikyochosaKomoku09A_10._介護予防_特定施設入居者生活介護.get名称(), GaikyochosaKomoku09A_10._介護予防_特定施設入居者生活介護.get単位()));
-            halfListTmp.add(予防データ(GaikyochosaKomoku09A_11._介護予防_福祉用具貸与.get名称(), GaikyochosaKomoku09A_11._介護予防_福祉用具貸与.get単位()));
-            halfListTmp.add(予防データ(GaikyochosaKomoku09A_12.特定_介護予防_福祉用具販売.get名称(), GaikyochosaKomoku09A_12.特定_介護予防_福祉用具販売.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09A_1._介護予防_訪問介護_ﾎｰﾑﾍﾙﾌﾟｻｰﾋﾞｽ.get名称(), GaikyochosaKomoku09A_1._介護予防_訪問介護_ﾎｰﾑﾍﾙﾌﾟｻｰﾋﾞｽ.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09A_2._介護予防_訪問入浴介護.get名称(), GaikyochosaKomoku09A_2._介護予防_訪問入浴介護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09A_3._介護予防_訪問看護.get名称(), GaikyochosaKomoku09A_3._介護予防_訪問看護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09A_4._介護予防_訪問ﾘﾊﾋﾞﾘﾃｰｼｮﾝ.get名称(), GaikyochosaKomoku09A_4._介護予防_訪問ﾘﾊﾋﾞﾘﾃｰｼｮﾝ.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09A_5._介護予防_居宅療養管理指導.get名称(), GaikyochosaKomoku09A_5._介護予防_居宅療養管理指導.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09A_6._介護予防_通所介護_ﾃﾞｲｻｰﾋﾞｽ.get名称(), GaikyochosaKomoku09A_6._介護予防_通所介護_ﾃﾞｲｻｰﾋﾞｽ.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09A_7._介護予防_通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_ﾃﾞｲｹｱ.get名称(), GaikyochosaKomoku09A_7._介護予防_通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_ﾃﾞｲｹｱ.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09A_8._介護予防_短期入所生活介護_特養等.get名称(), GaikyochosaKomoku09A_8._介護予防_短期入所生活介護_特養等.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09A_9._介護予防_短期入所療養介護_老健_診療所.get名称(), GaikyochosaKomoku09A_9._介護予防_短期入所療養介護_老健_診療所.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09A_10._介護予防_特定施設入居者生活介護.get名称(), GaikyochosaKomoku09A_10._介護予防_特定施設入居者生活介護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09A_11._介護予防_福祉用具貸与.get名称(), GaikyochosaKomoku09A_11._介護予防_福祉用具貸与.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09A_12.特定_介護予防_福祉用具販売.get名称(), GaikyochosaKomoku09A_12.特定_介護予防_福祉用具販売.get単位()));
 
-            halfListTmp.add(予防データ(GaikyochosaKomoku09A_15._介護予防_認知症対応型通所介護.get名称(), GaikyochosaKomoku09A_15._介護予防_認知症対応型通所介護.get単位()));
-            halfListTmp.add(予防データ(GaikyochosaKomoku09A_16._介護予防_小規模多機能型居宅介護.get名称(), GaikyochosaKomoku09A_16._介護予防_小規模多機能型居宅介護.get単位()));
-            halfListTmp.add(予防データ(GaikyochosaKomoku09A_17._介護予防_認知症対応型共同生活介護.get名称(), GaikyochosaKomoku09A_17._介護予防_認知症対応型共同生活介護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09A_15._介護予防_認知症対応型通所介護.get名称(), GaikyochosaKomoku09A_15._介護予防_認知症対応型通所介護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09A_16._介護予防_小規模多機能型居宅介護.get名称(), GaikyochosaKomoku09A_16._介護予防_小規模多機能型居宅介護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09A_17._介護予防_認知症対応型共同生活介護.get名称(), GaikyochosaKomoku09A_17._介護予防_認知症対応型共同生活介護.get単位()));
         } else if (厚労省IF識別コード_09B.equals(temp_厚労省IF識別コード)) {
-            halfListTmp.add(予防データ(GaikyochosaKomoku09B_1._介護予防_訪問介護_ﾎｰﾑﾍﾙﾌﾟｻｰﾋﾞｽ.get名称(), GaikyochosaKomoku09B_1._介護予防_訪問介護_ﾎｰﾑﾍﾙﾌﾟｻｰﾋﾞｽ.get単位()));
-            halfListTmp.add(予防データ(GaikyochosaKomoku09B_2._介護予防_訪問入浴介護.get名称(), GaikyochosaKomoku09B_2._介護予防_訪問入浴介護.get単位()));
-            halfListTmp.add(予防データ(GaikyochosaKomoku09B_3._介護予防_訪問看護.get名称(), GaikyochosaKomoku09B_3._介護予防_訪問看護.get単位()));
-            halfListTmp.add(予防データ(GaikyochosaKomoku09B_4._介護予防_訪問ﾘﾊﾋﾞﾘﾃｰｼｮﾝ.get名称(), GaikyochosaKomoku09B_4._介護予防_訪問ﾘﾊﾋﾞﾘﾃｰｼｮﾝ.get単位()));
-            halfListTmp.add(予防データ(GaikyochosaKomoku09B_5._介護予防_居宅療養管理指導.get名称(), GaikyochosaKomoku09B_5._介護予防_居宅療養管理指導.get単位()));
-            halfListTmp.add(予防データ(GaikyochosaKomoku09B_6._介護予防_通所介護_ﾃﾞｲｻｰﾋﾞｽ.get名称(), GaikyochosaKomoku09B_6._介護予防_通所介護_ﾃﾞｲｻｰﾋﾞｽ.get単位()));
-            halfListTmp.add(予防データ(GaikyochosaKomoku09B_7._介護予防_通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_ﾃﾞｲｹｱ.get名称(), GaikyochosaKomoku09B_7._介護予防_通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_ﾃﾞｲｹｱ.get単位()));
-            halfListTmp.add(予防データ(GaikyochosaKomoku09B_8._介護予防_短期入所生活介護_特養等.get名称(), GaikyochosaKomoku09B_8._介護予防_短期入所生活介護_特養等.get単位()));
-            halfListTmp.add(予防データ(GaikyochosaKomoku09B_9._介護予防_短期入所療養介護_老健_診療所.get名称(), GaikyochosaKomoku09B_9._介護予防_短期入所療養介護_老健_診療所.get単位()));
-            halfListTmp.add(予防データ(GaikyochosaKomoku09B_10._介護予防_特定施設入居者生活介護.get名称(), GaikyochosaKomoku09B_10._介護予防_特定施設入居者生活介護.get単位()));
-            halfListTmp.add(予防データ(GaikyochosaKomoku09B_11._介護予防_福祉用具貸与.get名称(), GaikyochosaKomoku09B_11._介護予防_福祉用具貸与.get単位()));
-            halfListTmp.add(予防データ(GaikyochosaKomoku09B_12.特定_介護予防_福祉用具販売.get名称(), GaikyochosaKomoku09B_12.特定_介護予防_福祉用具販売.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09B_1._介護予防_訪問介護_ﾎｰﾑﾍﾙﾌﾟｻｰﾋﾞｽ.get名称(), GaikyochosaKomoku09B_1._介護予防_訪問介護_ﾎｰﾑﾍﾙﾌﾟｻｰﾋﾞｽ.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09B_2._介護予防_訪問入浴介護.get名称(), GaikyochosaKomoku09B_2._介護予防_訪問入浴介護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09B_3._介護予防_訪問看護.get名称(), GaikyochosaKomoku09B_3._介護予防_訪問看護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09B_4._介護予防_訪問ﾘﾊﾋﾞﾘﾃｰｼｮﾝ.get名称(), GaikyochosaKomoku09B_4._介護予防_訪問ﾘﾊﾋﾞﾘﾃｰｼｮﾝ.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09B_5._介護予防_居宅療養管理指導.get名称(), GaikyochosaKomoku09B_5._介護予防_居宅療養管理指導.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09B_6._介護予防_通所介護_ﾃﾞｲｻｰﾋﾞｽ.get名称(), GaikyochosaKomoku09B_6._介護予防_通所介護_ﾃﾞｲｻｰﾋﾞｽ.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09B_7._介護予防_通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_ﾃﾞｲｹｱ.get名称(), GaikyochosaKomoku09B_7._介護予防_通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_ﾃﾞｲｹｱ.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09B_8._介護予防_短期入所生活介護_特養等.get名称(), GaikyochosaKomoku09B_8._介護予防_短期入所生活介護_特養等.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09B_9._介護予防_短期入所療養介護_老健_診療所.get名称(), GaikyochosaKomoku09B_9._介護予防_短期入所療養介護_老健_診療所.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09B_10._介護予防_特定施設入居者生活介護.get名称(), GaikyochosaKomoku09B_10._介護予防_特定施設入居者生活介護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09B_11._介護予防_福祉用具貸与.get名称(), GaikyochosaKomoku09B_11._介護予防_福祉用具貸与.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09B_12.特定_介護予防_福祉用具販売.get名称(), GaikyochosaKomoku09B_12.特定_介護予防_福祉用具販売.get単位()));
 
-            halfListTmp.add(予防データ(GaikyochosaKomoku09B_15._介護予防_認知症対応型通所介護.get名称(), GaikyochosaKomoku09B_15._介護予防_認知症対応型通所介護.get単位()));
-            halfListTmp.add(予防データ(GaikyochosaKomoku09B_16._介護予防_小規模多機能型居宅介護.get名称(), GaikyochosaKomoku09B_16._介護予防_小規模多機能型居宅介護.get単位()));
-            halfListTmp.add(予防データ(GaikyochosaKomoku09B_17._介護予防_認知症対応型共同生活介護.get名称(), GaikyochosaKomoku09B_17._介護予防_認知症対応型共同生活介護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09B_15._介護予防_認知症対応型通所介護.get名称(), GaikyochosaKomoku09B_15._介護予防_認知症対応型通所介護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09B_16._介護予防_小規模多機能型居宅介護.get名称(), GaikyochosaKomoku09B_16._介護予防_小規模多機能型居宅介護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09B_17._介護予防_認知症対応型共同生活介護.get名称(), GaikyochosaKomoku09B_17._介護予防_認知症対応型共同生活介護.get単位()));
         }
 
-        List<dgRiyoSerViceFirstHalf_Row> halfList = new ArrayList<>();
+        List<dgRiyoServiceJyokyo_Row> halfList = new ArrayList<>();
         RString 予防給付状況 = RString.EMPTY;
-        for (dgRiyoSerViceFirstHalf_Row rowData : halfListTmp) {
+        for (dgRiyoServiceJyokyo_Row rowData : halfListTmp) {
             if (rowData.getServiceMeisho().getValue().contains(介護予防)) {
-                halfList.add(予防_介護予防を取り除く(rowData));
+                halfList.add(介護予防を取り除く(rowData));
                 予防給付状況 = 予防給付状況.concat(カンマ);
             }
         }
-        div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoSerViceFirstHalf().setDataSource(halfList);
+        div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoServiceJyokyo().setDataSource(halfList);
         return 予防給付状況;
     }
 
     /**
-     * 利用サービス前半Grid非表示を行います。
+     * 利用サービスGrid非表示を行います。
      */
-    public void 利用サービス前半Grid非表示() {
-        div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoSerViceFirstHalf().setVisible(false);
+    public void 利用サービスGrid非表示() {
+        div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoServiceJyokyo().setVisible(false);
     }
 
     /**
-     * 利用サービス前半Grid表示を行います。（初期の値を表示する）
-     *
+     * 利用サービスGrid表示を行います。（初期の値を表示する）
+     * 
+     * @param 現在の選択 現在サービス区分の選択値
      * @param is再調査の場合 true:再調査の場合
      * @param 厚労省IF識別コード 厚労省IF識別コード
      * @param 変更前の設定値 変更前の設定値
      */
-    public void 利用サービス前半Grid表示(boolean is再調査の場合, RString 厚労省IF識別コード, RString 変更前の設定値) {
+    public void 利用サービスGrid表示(RString 現在の選択, boolean is再調査の場合, RString 厚労省IF識別コード, RString 変更前の設定値) {
 
-        予防給付サービス名称取得(厚労省IF識別コード);
-        if (is再調査の場合) {
-            利用サービス前半Gridの破棄(変更前の設定値);
+        if (予防給付サービス_選択.toString().equalsIgnoreCase(現在の選択.toString())) {
+            予防給付サービス名称取得(厚労省IF識別コード);
+        } else {
+            介護給付サービス名称取得(厚労省IF識別コード);
         }
-        div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoSerViceFirstHalf().setVisible(true);
+        if (is再調査の場合) {
+            利用サービスGridの破棄(変更前の設定値);
+        }
+        div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoServiceJyokyo().setVisible(true);
     }
 
     private RString 介護給付サービス名称取得(RString temp_厚労省IF識別コード) {
-        List<dgRiyoSerViceSecondHalf_Row> halfListTmp = new ArrayList<>();
+        List<dgRiyoServiceJyokyo_Row> halfListTmp = new ArrayList<>();
 
         if (厚労省IF識別コード_06A.equals(temp_厚労省IF識別コード)) {
-            halfListTmp.add(介護データ(GaikyochosaKomoku06A_1._介護予防_訪問介護_ﾎｰﾑﾍﾙﾌﾟｻｰﾋﾞｽ.get名称(), GaikyochosaKomoku06A_1._介護予防_訪問介護_ﾎｰﾑﾍﾙﾌﾟｻｰﾋﾞｽ.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku06A_2._介護予防_訪問入浴介護.get名称(), GaikyochosaKomoku06A_2._介護予防_訪問入浴介護.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku06A_3._介護予防_訪問看護.get名称(), GaikyochosaKomoku06A_3._介護予防_訪問看護.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku06A_4._介護予防_訪問ﾘﾊﾋﾞﾘﾃｰｼｮﾝ.get名称(), GaikyochosaKomoku06A_4._介護予防_訪問ﾘﾊﾋﾞﾘﾃｰｼｮﾝ.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku06A_5._介護予防_居宅療養管理指導.get名称(), GaikyochosaKomoku06A_5._介護予防_居宅療養管理指導.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku06A_6._介護予防_通所介護_ﾃﾞｲｻｰﾋﾞｽ.get名称(), GaikyochosaKomoku06A_6._介護予防_通所介護_ﾃﾞｲｻｰﾋﾞｽ.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku06A_7._介護予防_通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_ﾃﾞｲｹｱ.get名称(), GaikyochosaKomoku06A_7._介護予防_通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_ﾃﾞｲｹｱ.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku06A_8._介護予防_短期入所生活介護_特養等.get名称(), GaikyochosaKomoku06A_8._介護予防_短期入所生活介護_特養等.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku06A_9._介護予防_短期入所療養介護_老健_診療所.get名称(), GaikyochosaKomoku06A_9._介護予防_短期入所療養介護_老健_診療所.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku06A_10._介護予防_特定施設入居者生活介護.get名称(), GaikyochosaKomoku06A_10._介護予防_特定施設入居者生活介護.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku06A_11._介護予防_福祉用具貸与.get名称(), GaikyochosaKomoku06A_11._介護予防_福祉用具貸与.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku06A_12.特定_介護予防_福祉用具販売.get名称(), GaikyochosaKomoku06A_12.特定_介護予防_福祉用具販売.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku06A_1._介護予防_訪問介護_ﾎｰﾑﾍﾙﾌﾟｻｰﾋﾞｽ.get名称(), GaikyochosaKomoku06A_1._介護予防_訪問介護_ﾎｰﾑﾍﾙﾌﾟｻｰﾋﾞｽ.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku06A_2._介護予防_訪問入浴介護.get名称(), GaikyochosaKomoku06A_2._介護予防_訪問入浴介護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku06A_3._介護予防_訪問看護.get名称(), GaikyochosaKomoku06A_3._介護予防_訪問看護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku06A_4._介護予防_訪問ﾘﾊﾋﾞﾘﾃｰｼｮﾝ.get名称(), GaikyochosaKomoku06A_4._介護予防_訪問ﾘﾊﾋﾞﾘﾃｰｼｮﾝ.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku06A_5._介護予防_居宅療養管理指導.get名称(), GaikyochosaKomoku06A_5._介護予防_居宅療養管理指導.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku06A_6._介護予防_通所介護_ﾃﾞｲｻｰﾋﾞｽ.get名称(), GaikyochosaKomoku06A_6._介護予防_通所介護_ﾃﾞｲｻｰﾋﾞｽ.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku06A_7._介護予防_通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_ﾃﾞｲｹｱ.get名称(), GaikyochosaKomoku06A_7._介護予防_通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_ﾃﾞｲｹｱ.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku06A_8._介護予防_短期入所生活介護_特養等.get名称(), GaikyochosaKomoku06A_8._介護予防_短期入所生活介護_特養等.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku06A_9._介護予防_短期入所療養介護_老健_診療所.get名称(), GaikyochosaKomoku06A_9._介護予防_短期入所療養介護_老健_診療所.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku06A_10._介護予防_特定施設入居者生活介護.get名称(), GaikyochosaKomoku06A_10._介護予防_特定施設入居者生活介護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku06A_11._介護予防_福祉用具貸与.get名称(), GaikyochosaKomoku06A_11._介護予防_福祉用具貸与.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku06A_12.特定_介護予防_福祉用具販売.get名称(), GaikyochosaKomoku06A_12.特定_介護予防_福祉用具販売.get単位()));
 
-            halfListTmp.add(介護データ(GaikyochosaKomoku06A_14.夜間対応型訪問介護.get名称(), GaikyochosaKomoku06A_14.夜間対応型訪問介護.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku06A_15._介護予防_認知症対応型通所介護.get名称(), GaikyochosaKomoku06A_15._介護予防_認知症対応型通所介護.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku06A_16._介護予防_小規模多機能型居宅介護.get名称(), GaikyochosaKomoku06A_16._介護予防_小規模多機能型居宅介護.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku06A_17._介護予防_認知症対応型共同生活介護.get名称(), GaikyochosaKomoku06A_17._介護予防_認知症対応型共同生活介護.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku06A_18.地域密着型特定施設入居者生活介護.get名称(), GaikyochosaKomoku06A_18.地域密着型特定施設入居者生活介護.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku06A_19.地域密着型介護老人福祉施設入所者生活介護.get名称(), GaikyochosaKomoku06A_19.地域密着型介護老人福祉施設入所者生活介護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku06A_14.夜間対応型訪問介護.get名称(), GaikyochosaKomoku06A_14.夜間対応型訪問介護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku06A_15._介護予防_認知症対応型通所介護.get名称(), GaikyochosaKomoku06A_15._介護予防_認知症対応型通所介護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku06A_16._介護予防_小規模多機能型居宅介護.get名称(), GaikyochosaKomoku06A_16._介護予防_小規模多機能型居宅介護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku06A_17._介護予防_認知症対応型共同生活介護.get名称(), GaikyochosaKomoku06A_17._介護予防_認知症対応型共同生活介護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku06A_18.地域密着型特定施設入居者生活介護.get名称(), GaikyochosaKomoku06A_18.地域密着型特定施設入居者生活介護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku06A_19.地域密着型介護老人福祉施設入所者生活介護.get名称(), GaikyochosaKomoku06A_19.地域密着型介護老人福祉施設入所者生活介護.get単位()));
         } else if (厚労省IF識別コード_09A.equals(temp_厚労省IF識別コード)) {
-            halfListTmp.add(介護データ(GaikyochosaKomoku09A_1._介護予防_訪問介護_ﾎｰﾑﾍﾙﾌﾟｻｰﾋﾞｽ.get名称(), GaikyochosaKomoku09A_1._介護予防_訪問介護_ﾎｰﾑﾍﾙﾌﾟｻｰﾋﾞｽ.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku09A_2._介護予防_訪問入浴介護.get名称(), GaikyochosaKomoku09A_2._介護予防_訪問入浴介護.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku09A_3._介護予防_訪問看護.get名称(), GaikyochosaKomoku09A_3._介護予防_訪問看護.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku09A_4._介護予防_訪問ﾘﾊﾋﾞﾘﾃｰｼｮﾝ.get名称(), GaikyochosaKomoku09A_4._介護予防_訪問ﾘﾊﾋﾞﾘﾃｰｼｮﾝ.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku09A_5._介護予防_居宅療養管理指導.get名称(), GaikyochosaKomoku09A_5._介護予防_居宅療養管理指導.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku09A_6._介護予防_通所介護_ﾃﾞｲｻｰﾋﾞｽ.get名称(), GaikyochosaKomoku09A_6._介護予防_通所介護_ﾃﾞｲｻｰﾋﾞｽ.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku09A_7._介護予防_通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_ﾃﾞｲｹｱ.get名称(), GaikyochosaKomoku09A_7._介護予防_通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_ﾃﾞｲｹｱ.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku09A_8._介護予防_短期入所生活介護_特養等.get名称(), GaikyochosaKomoku09A_8._介護予防_短期入所生活介護_特養等.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku09A_9._介護予防_短期入所療養介護_老健_診療所.get名称(), GaikyochosaKomoku09A_9._介護予防_短期入所療養介護_老健_診療所.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku09A_10._介護予防_特定施設入居者生活介護.get名称(), GaikyochosaKomoku09A_10._介護予防_特定施設入居者生活介護.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku09A_11._介護予防_福祉用具貸与.get名称(), GaikyochosaKomoku09A_11._介護予防_福祉用具貸与.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku09A_12.特定_介護予防_福祉用具販売.get名称(), GaikyochosaKomoku09A_12.特定_介護予防_福祉用具販売.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09A_1._介護予防_訪問介護_ﾎｰﾑﾍﾙﾌﾟｻｰﾋﾞｽ.get名称(), GaikyochosaKomoku09A_1._介護予防_訪問介護_ﾎｰﾑﾍﾙﾌﾟｻｰﾋﾞｽ.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09A_2._介護予防_訪問入浴介護.get名称(), GaikyochosaKomoku09A_2._介護予防_訪問入浴介護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09A_3._介護予防_訪問看護.get名称(), GaikyochosaKomoku09A_3._介護予防_訪問看護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09A_4._介護予防_訪問ﾘﾊﾋﾞﾘﾃｰｼｮﾝ.get名称(), GaikyochosaKomoku09A_4._介護予防_訪問ﾘﾊﾋﾞﾘﾃｰｼｮﾝ.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09A_5._介護予防_居宅療養管理指導.get名称(), GaikyochosaKomoku09A_5._介護予防_居宅療養管理指導.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09A_6._介護予防_通所介護_ﾃﾞｲｻｰﾋﾞｽ.get名称(), GaikyochosaKomoku09A_6._介護予防_通所介護_ﾃﾞｲｻｰﾋﾞｽ.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09A_7._介護予防_通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_ﾃﾞｲｹｱ.get名称(), GaikyochosaKomoku09A_7._介護予防_通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_ﾃﾞｲｹｱ.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09A_8._介護予防_短期入所生活介護_特養等.get名称(), GaikyochosaKomoku09A_8._介護予防_短期入所生活介護_特養等.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09A_9._介護予防_短期入所療養介護_老健_診療所.get名称(), GaikyochosaKomoku09A_9._介護予防_短期入所療養介護_老健_診療所.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09A_10._介護予防_特定施設入居者生活介護.get名称(), GaikyochosaKomoku09A_10._介護予防_特定施設入居者生活介護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09A_11._介護予防_福祉用具貸与.get名称(), GaikyochosaKomoku09A_11._介護予防_福祉用具貸与.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09A_12.特定_介護予防_福祉用具販売.get名称(), GaikyochosaKomoku09A_12.特定_介護予防_福祉用具販売.get単位()));
 
-            halfListTmp.add(介護データ(GaikyochosaKomoku09A_14.夜間対応型訪問介護.get名称(), GaikyochosaKomoku09A_14.夜間対応型訪問介護.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku09A_15._介護予防_認知症対応型通所介護.get名称(), GaikyochosaKomoku09A_15._介護予防_認知症対応型通所介護.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku09A_16._介護予防_小規模多機能型居宅介護.get名称(), GaikyochosaKomoku09A_16._介護予防_小規模多機能型居宅介護.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku09A_17._介護予防_認知症対応型共同生活介護.get名称(), GaikyochosaKomoku09A_17._介護予防_認知症対応型共同生活介護.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku09A_18.地域密着型特定施設入居者生活介護.get名称(), GaikyochosaKomoku09A_18.地域密着型特定施設入居者生活介護.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku09A_19.地域密着型介護老人福祉施設入所者生活介護.get名称(), GaikyochosaKomoku09A_19.地域密着型介護老人福祉施設入所者生活介護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09A_14.夜間対応型訪問介護.get名称(), GaikyochosaKomoku09A_14.夜間対応型訪問介護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09A_15._介護予防_認知症対応型通所介護.get名称(), GaikyochosaKomoku09A_15._介護予防_認知症対応型通所介護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09A_16._介護予防_小規模多機能型居宅介護.get名称(), GaikyochosaKomoku09A_16._介護予防_小規模多機能型居宅介護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09A_17._介護予防_認知症対応型共同生活介護.get名称(), GaikyochosaKomoku09A_17._介護予防_認知症対応型共同生活介護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09A_18.地域密着型特定施設入居者生活介護.get名称(), GaikyochosaKomoku09A_18.地域密着型特定施設入居者生活介護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09A_19.地域密着型介護老人福祉施設入所者生活介護.get名称(), GaikyochosaKomoku09A_19.地域密着型介護老人福祉施設入所者生活介護.get単位()));
         } else if (厚労省IF識別コード_09B.equals(temp_厚労省IF識別コード)) {
-            halfListTmp.add(介護データ(GaikyochosaKomoku09B_1._介護予防_訪問介護_ﾎｰﾑﾍﾙﾌﾟｻｰﾋﾞｽ.get名称(), GaikyochosaKomoku09B_1._介護予防_訪問介護_ﾎｰﾑﾍﾙﾌﾟｻｰﾋﾞｽ.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku09B_2._介護予防_訪問入浴介護.get名称(), GaikyochosaKomoku09B_2._介護予防_訪問入浴介護.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku09B_3._介護予防_訪問看護.get名称(), GaikyochosaKomoku09B_3._介護予防_訪問看護.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku09B_4._介護予防_訪問ﾘﾊﾋﾞﾘﾃｰｼｮﾝ.get名称(), GaikyochosaKomoku09B_4._介護予防_訪問ﾘﾊﾋﾞﾘﾃｰｼｮﾝ.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku09B_5._介護予防_居宅療養管理指導.get名称(), GaikyochosaKomoku09B_5._介護予防_居宅療養管理指導.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku09B_6._介護予防_通所介護_ﾃﾞｲｻｰﾋﾞｽ.get名称(), GaikyochosaKomoku09B_6._介護予防_通所介護_ﾃﾞｲｻｰﾋﾞｽ.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku09B_7._介護予防_通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_ﾃﾞｲｹｱ.get名称(), GaikyochosaKomoku09B_7._介護予防_通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_ﾃﾞｲｹｱ.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku09B_8._介護予防_短期入所生活介護_特養等.get名称(), GaikyochosaKomoku09B_8._介護予防_短期入所生活介護_特養等.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku09B_9._介護予防_短期入所療養介護_老健_診療所.get名称(), GaikyochosaKomoku09B_9._介護予防_短期入所療養介護_老健_診療所.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku09B_10._介護予防_特定施設入居者生活介護.get名称(), GaikyochosaKomoku09B_10._介護予防_特定施設入居者生活介護.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku09B_11._介護予防_福祉用具貸与.get名称(), GaikyochosaKomoku09B_11._介護予防_福祉用具貸与.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku09B_12.特定_介護予防_福祉用具販売.get名称(), GaikyochosaKomoku09B_12.特定_介護予防_福祉用具販売.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09B_1._介護予防_訪問介護_ﾎｰﾑﾍﾙﾌﾟｻｰﾋﾞｽ.get名称(), GaikyochosaKomoku09B_1._介護予防_訪問介護_ﾎｰﾑﾍﾙﾌﾟｻｰﾋﾞｽ.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09B_2._介護予防_訪問入浴介護.get名称(), GaikyochosaKomoku09B_2._介護予防_訪問入浴介護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09B_3._介護予防_訪問看護.get名称(), GaikyochosaKomoku09B_3._介護予防_訪問看護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09B_4._介護予防_訪問ﾘﾊﾋﾞﾘﾃｰｼｮﾝ.get名称(), GaikyochosaKomoku09B_4._介護予防_訪問ﾘﾊﾋﾞﾘﾃｰｼｮﾝ.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09B_5._介護予防_居宅療養管理指導.get名称(), GaikyochosaKomoku09B_5._介護予防_居宅療養管理指導.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09B_6._介護予防_通所介護_ﾃﾞｲｻｰﾋﾞｽ.get名称(), GaikyochosaKomoku09B_6._介護予防_通所介護_ﾃﾞｲｻｰﾋﾞｽ.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09B_7._介護予防_通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_ﾃﾞｲｹｱ.get名称(), GaikyochosaKomoku09B_7._介護予防_通所ﾘﾊﾋﾞﾘﾃｰｼｮﾝ_ﾃﾞｲｹｱ.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09B_8._介護予防_短期入所生活介護_特養等.get名称(), GaikyochosaKomoku09B_8._介護予防_短期入所生活介護_特養等.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09B_9._介護予防_短期入所療養介護_老健_診療所.get名称(), GaikyochosaKomoku09B_9._介護予防_短期入所療養介護_老健_診療所.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09B_10._介護予防_特定施設入居者生活介護.get名称(), GaikyochosaKomoku09B_10._介護予防_特定施設入居者生活介護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09B_11._介護予防_福祉用具貸与.get名称(), GaikyochosaKomoku09B_11._介護予防_福祉用具貸与.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09B_12.特定_介護予防_福祉用具販売.get名称(), GaikyochosaKomoku09B_12.特定_介護予防_福祉用具販売.get単位()));
 
-            halfListTmp.add(介護データ(GaikyochosaKomoku09B_14.夜間対応型訪問介護.get名称(), GaikyochosaKomoku09B_14.夜間対応型訪問介護.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku09B_15._介護予防_認知症対応型通所介護.get名称(), GaikyochosaKomoku09B_15._介護予防_認知症対応型通所介護.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku09B_16._介護予防_小規模多機能型居宅介護.get名称(), GaikyochosaKomoku09B_16._介護予防_小規模多機能型居宅介護.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku09B_17._介護予防_認知症対応型共同生活介護.get名称(), GaikyochosaKomoku09B_17._介護予防_認知症対応型共同生活介護.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku09B_18.地域密着型特定施設入居者生活介護.get名称(), GaikyochosaKomoku09B_18.地域密着型特定施設入居者生活介護.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku09B_19.地域密着型介護老人福祉施設入所者生活介護.get名称(), GaikyochosaKomoku09B_19.地域密着型介護老人福祉施設入所者生活介護.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku09B_20.定期巡回_随時対応型訪問介護看護.get名称(), GaikyochosaKomoku09B_20.定期巡回_随時対応型訪問介護看護.get単位()));
-            halfListTmp.add(介護データ(GaikyochosaKomoku09B_21.複合型サービス.get名称(), GaikyochosaKomoku09B_21.複合型サービス.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09B_14.夜間対応型訪問介護.get名称(), GaikyochosaKomoku09B_14.夜間対応型訪問介護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09B_15._介護予防_認知症対応型通所介護.get名称(), GaikyochosaKomoku09B_15._介護予防_認知症対応型通所介護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09B_16._介護予防_小規模多機能型居宅介護.get名称(), GaikyochosaKomoku09B_16._介護予防_小規模多機能型居宅介護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09B_17._介護予防_認知症対応型共同生活介護.get名称(), GaikyochosaKomoku09B_17._介護予防_認知症対応型共同生活介護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09B_18.地域密着型特定施設入居者生活介護.get名称(), GaikyochosaKomoku09B_18.地域密着型特定施設入居者生活介護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09B_19.地域密着型介護老人福祉施設入所者生活介護.get名称(), GaikyochosaKomoku09B_19.地域密着型介護老人福祉施設入所者生活介護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09B_20.定期巡回_随時対応型訪問介護看護.get名称(), GaikyochosaKomoku09B_20.定期巡回_随時対応型訪問介護看護.get単位()));
+            halfListTmp.add(利用サービスデータ(GaikyochosaKomoku09B_21.複合型サービス.get名称(), GaikyochosaKomoku09B_21.複合型サービス.get単位()));
         }
 
         RString 介護給付状況 = RString.EMPTY;
-        List<dgRiyoSerViceSecondHalf_Row> halfList = new ArrayList<>();
-        for (dgRiyoSerViceSecondHalf_Row rowData : halfListTmp) {
+        List<dgRiyoServiceJyokyo_Row> halfList = new ArrayList<>();
+        for (dgRiyoServiceJyokyo_Row rowData : halfListTmp) {
             if (rowData.getServiceMeisho().getValue().contains(介護予防)) {
-                halfList.add(介護_介護予防を取り除く(rowData));
+                halfList.add(介護予防を取り除く(rowData));
             } else {
                 halfList.add(rowData);
             }
             介護給付状況 = 介護給付状況.concat(カンマ);
         }
-        div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoSerViceSecondHalf().setDataSource(halfList);
+        div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoServiceJyokyo().setDataSource(halfList);
         return 介護給付状況;
-    }
-
-    /**
-     * 利用サービス後半Grid非表示を行います。
-     */
-    public void 利用サービス後半Grid非表示() {
-        div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoSerViceSecondHalf().setVisible(false);
-    }
-
-    /**
-     * 利用サービス後半Grid表示を行います。（初期の値を表示する）
-     *
-     * @param is再調査の場合 true:再調査の場合
-     * @param 厚労省IF識別コード 厚労省IF識別コード
-     * @param 変更前の設定値 変更前の設定値
-     */
-    public void 利用サービス後半Grid表示(boolean is再調査の場合, RString 厚労省IF識別コード, RString 変更前の設定値) {
-
-        介護給付サービス名称取得(厚労省IF識別コード);
-        if (is再調査の場合) {
-            利用サービス後半Gridの破棄(変更前の設定値);
-        }
-        div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoSerViceSecondHalf().setVisible(true);
     }
 
     private RString 施設利用名称取得(RString temp_厚労省IF識別コード) {
@@ -547,11 +528,11 @@ public class NinnteiChousaKekkaTouroku1Handler {
         NinteichosahyoServiceJokyoManager manager = new NinteichosahyoServiceJokyoManager();
         List<Integer> 連番 = get予防給付サービス連番List(厚労省IF識別コード);
 
-        List<dgRiyoSerViceFirstHalf_Row> halfList = div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoSerViceFirstHalf().getDataSource();
+        List<dgRiyoServiceJyokyo_Row> halfList = div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoServiceJyokyo().getDataSource();
         RString 予防給付状況 = RString.EMPTY;
         if (halfList == null || halfList.isEmpty()) {
             予防給付状況 = 予防給付サービス名称取得(厚労省IF識別コード);
-            halfList = div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoSerViceFirstHalf().getDataSource();
+            halfList = div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoServiceJyokyo().getDataSource();
         }
 
         List<NinteichosahyoServiceJokyo> johoList = manager.get認定調査票_概況調査_サービスの状況By連番List(申請書管理番号, 認定調査履歴番号, 連番);
@@ -560,7 +541,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
 
         if (halfList != null && !halfList.isEmpty()) {
             予防給付状況 = RString.EMPTY;
-            for (dgRiyoSerViceFirstHalf_Row row : halfList) {
+            for (dgRiyoServiceJyokyo_Row row : halfList) {
                 joho = johoList.get(index++);
                 if (joho != null) {
                     row.getServiceJokyo().setValue(new Decimal(joho.getサービスの状況()));
@@ -586,11 +567,11 @@ public class NinnteiChousaKekkaTouroku1Handler {
         NinteichosahyoServiceJokyoManager manager = new NinteichosahyoServiceJokyoManager();
         List<Integer> 連番 = get介護給付サービス連番List(厚労省IF識別コード);
 
-        List<dgRiyoSerViceSecondHalf_Row> halfList = div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoSerViceSecondHalf().getDataSource();
+        List<dgRiyoServiceJyokyo_Row> halfList = div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoServiceJyokyo().getDataSource();
         RString 介護給付状況 = RString.EMPTY;
         if (halfList == null || halfList.isEmpty()) {
             介護給付状況 = 介護給付サービス名称取得(厚労省IF識別コード);
-            halfList = div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoSerViceSecondHalf().getDataSource();
+            halfList = div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoServiceJyokyo().getDataSource();
         }
 
         List<NinteichosahyoServiceJokyo> johoList = manager.get認定調査票_概況調査_サービスの状況By連番List(申請書管理番号, 認定調査履歴番号, 連番);
@@ -599,7 +580,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
 
         if (halfList != null && !halfList.isEmpty()) {
             介護給付状況 = RString.EMPTY;
-            for (dgRiyoSerViceSecondHalf_Row row : halfList) {
+            for (dgRiyoServiceJyokyo_Row row : halfList) {
                 joho = johoList.get(index++);
                 if (joho != null) {
                     row.getServiceJokyo().setValue(new Decimal(joho.getサービスの状況()));
@@ -690,27 +671,15 @@ public class NinnteiChousaKekkaTouroku1Handler {
         }
     }
 
-    private dgRiyoSerViceFirstHalf_Row 予防_介護予防を取り除く(dgRiyoSerViceFirstHalf_Row row) {
-        row.getServiceMeisho().setValue(row.getServiceMeisho().getValue().replace(介護予防, RString.EMPTY));
-        return row;
-    }
-
-    private dgRiyoSerViceFirstHalf_Row 予防データ(RString name, RString tani) {
-        dgRiyoSerViceFirstHalf_Row row = new dgRiyoSerViceFirstHalf_Row();
+    private dgRiyoServiceJyokyo_Row 利用サービスデータ(RString name, RString tani) {
+        dgRiyoServiceJyokyo_Row row = new dgRiyoServiceJyokyo_Row();
         row.getServiceMeisho().setValue(name);
         row.setTani(tani);
         return row;
     }
 
-    private dgRiyoSerViceSecondHalf_Row 介護_介護予防を取り除く(dgRiyoSerViceSecondHalf_Row row) {
+    private dgRiyoServiceJyokyo_Row 介護予防を取り除く(dgRiyoServiceJyokyo_Row row) {
         row.getServiceMeisho().setValue(row.getServiceMeisho().getValue().replace(介護予防, RString.EMPTY));
-        return row;
-    }
-
-    private dgRiyoSerViceSecondHalf_Row 介護データ(RString name, RString tani) {
-        dgRiyoSerViceSecondHalf_Row row = new dgRiyoSerViceSecondHalf_Row();
-        row.getServiceMeisho().setValue(name);
-        row.setTani(tani);
         return row;
     }
 
@@ -721,46 +690,33 @@ public class NinnteiChousaKekkaTouroku1Handler {
     }
 
     /**
-     * 利用サービス前半or後半の切り替え処理です。
+     * 利用サービスの切り替え処理です。
      *
      * @param 現在の選択 現在サービス区分の選択値
      * @param is再調査の場合 true:再調査の場合
      * @param 厚労省IF識別コード 厚労省IF識別コード
      * @param 変更前の設定値 変更前の設定値
      */
-    public void 利用サービス前半or後半の切り替え(RString 現在の選択, boolean is再調査の場合, RString 厚労省IF識別コード, RString 変更前の設定値) {
-
-        if (予防給付サービス_選択.toString().equalsIgnoreCase(現在の選択.toString())) {
-            利用サービス前半Grid表示(is再調査の場合, 厚労省IF識別コード, 変更前の設定値);
-            利用サービス後半Grid非表示();
-            利用サービス後半Gridのクリア();
-
-        } else if (介護給付サービス_選択.toString().equalsIgnoreCase(現在の選択.toString())) {
-            利用サービス後半Grid表示(is再調査の場合, 厚労省IF識別コード, 変更前の設定値);
-            利用サービス前半Grid非表示();
-            利用サービス前半Gridのクリア();
-
-        } else if (なし_選択.toString().equalsIgnoreCase(現在の選択.toString())) {
-
-            利用サービス前半Grid非表示();
-            利用サービス後半Grid非表示();
-            利用サービス前半Gridのクリア();
-            利用サービス後半Gridのクリア();
+    public void 利用サービスの切り替え(RString 現在の選択, boolean is再調査の場合, RString 厚労省IF識別コード, RString 変更前の設定値) {
+        if (なし_選択.toString().equalsIgnoreCase(現在の選択.toString())) {
+            利用サービスGrid非表示();
+            利用サービスGridのクリア();
+        } else {
+            利用サービスGrid表示(現在の選択, is再調査の場合, 厚労省IF識別コード, 変更前の設定値);
         }
-
     }
 
     /**
-     * 利用サービス前半Gridの破棄を行います。
+     * 利用サービスGridの破棄を行います。
      *
      * @param 変更前の設定値 変更前の設定値
      */
-    public void 利用サービス前半Gridの破棄(RString 変更前の設定値) {
+    public void 利用サービスGridの破棄(RString 変更前の設定値) {
 
-        List<dgRiyoSerViceFirstHalf_Row> fistHalf = div.getDgRiyoSerViceFirstHalf().getDataSource();
+        List<dgRiyoServiceJyokyo_Row> fistHalf = div.getDgRiyoServiceJyokyo().getDataSource();
 
         if (変更前の設定値 == null || 変更前の設定値.isEmpty()) {
-            for (dgRiyoSerViceFirstHalf_Row row : fistHalf) {
+            for (dgRiyoServiceJyokyo_Row row : fistHalf) {
                 row.getServiceJokyo().clearValue();
             }
             return;
@@ -769,7 +725,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
         List<RString> 変更前の設定値List = 変更前の設定値.split(カンマ.toString());
         int index = 0;
         RString 数値 = RString.EMPTY;
-        for (dgRiyoSerViceFirstHalf_Row row : fistHalf) {
+        for (dgRiyoServiceJyokyo_Row row : fistHalf) {
             row.setSelected(Boolean.FALSE);
             数値 = 変更前の設定値List.get(index);
             if (数値.isEmpty()) {
@@ -782,47 +738,10 @@ public class NinnteiChousaKekkaTouroku1Handler {
     }
 
     /**
-     * 利用サービス前半Gridのクリアを行います。
+     * 利用サービスGridのクリアを行います。
      */
-    public void 利用サービス前半Gridのクリア() {
-        div.getDgRiyoSerViceFirstHalf().getDataSource().clear();
-    }
-
-    /**
-     * 利用サービス後半Gridの破棄を行います。
-     *
-     * @param 変更前の設定値 変更前の設定値
-     */
-    public void 利用サービス後半Gridの破棄(RString 変更前の設定値) {
-
-        List<dgRiyoSerViceSecondHalf_Row> secondHalf = div.getDgRiyoSerViceSecondHalf().getDataSource();
-        if (変更前の設定値 == null || 変更前の設定値.isEmpty()) {
-            for (dgRiyoSerViceSecondHalf_Row row : secondHalf) {
-                row.getServiceJokyo().clearValue();
-            }
-            return;
-        }
-
-        List<RString> 変更前の設定値List = 変更前の設定値.split(カンマ.toString());
-        int index = 0;
-        RString 数値 = RString.EMPTY;
-        for (dgRiyoSerViceSecondHalf_Row row : secondHalf) {
-            row.setSelected(Boolean.FALSE);
-            数値 = 変更前の設定値List.get(index);
-            if (数値.isEmpty()) {
-                row.getServiceJokyo().clearValue();
-            } else {
-                row.getServiceJokyo().setValue(new Decimal(数値.toString()));
-            }
-            index++;
-        }
-    }
-
-    /**
-     * 利用サービス後半Gridのクリアを行います。
-     */
-    public void 利用サービス後半Gridのクリア() {
-        div.getDgRiyoSerViceSecondHalf().getDataSource().clear();
+    public void 利用サービスGridのクリア() {
+        div.getDgRiyoServiceJyokyo().getDataSource().clear();
     }
 
     /**
@@ -1200,8 +1119,8 @@ public class NinnteiChousaKekkaTouroku1Handler {
         RString 選択値 = div.getRadGenzaiservis().getSelectedKey();
         RString 現在の設定値 = RString.EMPTY;
         if (予防給付サービス_選択.toString().equalsIgnoreCase(選択値.toString())) {
-            List<dgRiyoSerViceFirstHalf_Row> fistHalf = div.getDgRiyoSerViceFirstHalf().getDataSource();
-            for (dgRiyoSerViceFirstHalf_Row row : fistHalf) {
+            List<dgRiyoServiceJyokyo_Row> fistHalf = div.getDgRiyoServiceJyokyo().getDataSource();
+            for (dgRiyoServiceJyokyo_Row row : fistHalf) {
                 if (row.getServiceJokyo().getValue() != null) {
                     現在の設定値 = 現在の設定値.concat(row.getServiceJokyo().getValue().toString()).concat(カンマ);
                 } else {
@@ -1210,8 +1129,8 @@ public class NinnteiChousaKekkaTouroku1Handler {
             }
             is在宅等しい = is等しい(初期の予防給付サービス, 現在の設定値);
         } else if (介護給付サービス_選択.toString().equalsIgnoreCase(選択値.toString())) {
-            List<dgRiyoSerViceSecondHalf_Row> fistHalf = div.getDgRiyoSerViceSecondHalf().getDataSource();
-            for (dgRiyoSerViceSecondHalf_Row row : fistHalf) {
+            List<dgRiyoServiceJyokyo_Row> fistHalf = div.getDgRiyoServiceJyokyo().getDataSource();
+            for (dgRiyoServiceJyokyo_Row row : fistHalf) {
                 if (row.getServiceJokyo().getValue() != null) {
                     現在の設定値 = 現在の設定値.concat(row.getServiceJokyo().getValue().toString()).concat(カンマ);
                 } else {
@@ -1533,5 +1452,4 @@ public class NinnteiChousaKekkaTouroku1Handler {
                     基本情報.get前回調査連番(), 基本情報.get前回調査項目());
         }
     }
-
 }

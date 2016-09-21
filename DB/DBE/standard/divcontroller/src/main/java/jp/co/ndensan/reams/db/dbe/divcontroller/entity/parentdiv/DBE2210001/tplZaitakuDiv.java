@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
  * @author 自動生成
  */
 public class tplZaitakuDiv extends TabPanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2015-11-30_08-54-50">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -63,23 +63,13 @@ public class tplZaitakuDiv extends TabPanel {
     }
 
     @JsonIgnore
-    public DataGrid<dgRiyoSerViceFirstHalf_Row> getDgRiyoSerViceFirstHalf() {
-        return this.getJutakuGaikyoChosa().getDgRiyoSerViceFirstHalf();
+    public DataGrid<dgRiyoServiceJyokyo_Row> getDgRiyoServiceJyokyo() {
+        return this.getJutakuGaikyoChosa().getDgRiyoServiceJyokyo();
     }
 
     @JsonIgnore
-    public void  setDgRiyoSerViceFirstHalf(DataGrid<dgRiyoSerViceFirstHalf_Row> dgRiyoSerViceFirstHalf) {
-        this.getJutakuGaikyoChosa().setDgRiyoSerViceFirstHalf(dgRiyoSerViceFirstHalf);
-    }
-
-    @JsonIgnore
-    public DataGrid<dgRiyoSerViceSecondHalf_Row> getDgRiyoSerViceSecondHalf() {
-        return this.getJutakuGaikyoChosa().getDgRiyoSerViceSecondHalf();
-    }
-
-    @JsonIgnore
-    public void  setDgRiyoSerViceSecondHalf(DataGrid<dgRiyoSerViceSecondHalf_Row> dgRiyoSerViceSecondHalf) {
-        this.getJutakuGaikyoChosa().setDgRiyoSerViceSecondHalf(dgRiyoSerViceSecondHalf);
+    public void  setDgRiyoServiceJyokyo(DataGrid<dgRiyoServiceJyokyo_Row> dgRiyoServiceJyokyo) {
+        this.getJutakuGaikyoChosa().setDgRiyoServiceJyokyo(dgRiyoServiceJyokyo);
     }
 
     @JsonIgnore

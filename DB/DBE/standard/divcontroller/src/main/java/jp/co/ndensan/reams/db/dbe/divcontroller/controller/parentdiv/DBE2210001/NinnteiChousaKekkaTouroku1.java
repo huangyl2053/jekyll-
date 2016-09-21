@@ -12,8 +12,7 @@ import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.DBE2210001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.DBE2210001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.NinnteiChousaKekkaTouroku1Div;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.dgRiyoSerViceFirstHalf_Row;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.dgRiyoSerViceSecondHalf_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.dgRiyoServiceJyokyo_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.dgRiyoShisetsu_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.tplShisetsuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.tplZaitakuDiv;
@@ -169,9 +168,7 @@ public class NinnteiChousaKekkaTouroku1 {
             div.getTabChosaBasho().setSelectedItem(new tplZaitakuDiv());
             RString 予防給付状況 = getHandler(div).予防給付サービス名称取得(認定調査情報.getTemp_厚労省IF識別コード());
             ViewStateHolder.put(ViewStateKeys.初期の予防給付サービス, 予防給付状況);
-
-            getHandler(div).利用サービス前半Grid表示(is再調査の場合, 認定調査情報.getTemp_厚労省IF識別コード(), null);
-            getHandler(div).利用サービス後半Grid非表示();
+            div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoServiceJyokyo().setVisible(true);
         }
         ViewStateHolder.put(ViewStateKeys.調査実施場所コード, div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().getSelectedKey());
         ViewStateHolder.put(ViewStateKeys.申請書管理番号, temp_申請書管理番号);
@@ -223,15 +220,15 @@ public class NinnteiChousaKekkaTouroku1 {
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
             変更前の設定値 = get変更前の現在のサービス区分(現在の選択);
-            getHandler(div).利用サービス前半or後半の切り替え(現在の選択, is再調査の場合, temp_厚労省IF識別コード, 変更前の設定値);
+            getHandler(div).利用サービスの切り替え(現在の選択, is再調査の場合, temp_厚労省IF識別コード, 変更前の設定値);
             ViewStateHolder.put(ViewStateKeys.現在のサービス区分, 現在の選択);
             return ResponseData.of(div).respond();
         }
 
         boolean 入力あり = Boolean.FALSE;
         if (予防給付サービス_選択.equals(元の選択)) {
-            List<dgRiyoSerViceFirstHalf_Row> fistHalf = div.getDgRiyoSerViceFirstHalf().getDataSource();
-            for (dgRiyoSerViceFirstHalf_Row row : fistHalf) {
+            List<dgRiyoServiceJyokyo_Row> fistHalf = div.getDgRiyoServiceJyokyo().getDataSource();
+            for (dgRiyoServiceJyokyo_Row row : fistHalf) {
                 if (row.getServiceJokyo().getValue() != null) {
                     現在の設定値 = 現在の設定値.concat(row.getServiceJokyo().getValue().toString()).concat(カンマ);
                     入力あり = Boolean.TRUE;
@@ -241,8 +238,8 @@ public class NinnteiChousaKekkaTouroku1 {
             }
             変更前の設定値 = ViewStateHolder.get(ViewStateKeys.初期の予防給付サービス, RString.class);
         } else if (介護給付サービス_選択.equals(元の選択)) {
-            List<dgRiyoSerViceSecondHalf_Row> secondHalf = div.getDgRiyoSerViceSecondHalf().getDataSource();
-            for (dgRiyoSerViceSecondHalf_Row row : secondHalf) {
+            List<dgRiyoServiceJyokyo_Row> secondHalf = div.getDgRiyoServiceJyokyo().getDataSource();
+            for (dgRiyoServiceJyokyo_Row row : secondHalf) {
                 if (row.getServiceJokyo().getValue() != null) {
                     現在の設定値 = 現在の設定値.concat(row.getServiceJokyo().getValue().toString()).concat(カンマ);
                     入力あり = Boolean.TRUE;
@@ -266,7 +263,7 @@ public class NinnteiChousaKekkaTouroku1 {
             return ResponseData.of(div).addMessage(message).respond();
         } else if (!変更あり) {
             変更前の設定値 = get初期のサービス設定値(現在の選択);
-            getHandler(div).利用サービス前半or後半の切り替え(現在の選択, is再調査の場合, temp_厚労省IF識別コード, 変更前の設定値);
+            getHandler(div).利用サービスの切り替え(現在の選択, is再調査の場合, temp_厚労省IF識別コード, 変更前の設定値);
         }
 
         ViewStateHolder.put(ViewStateKeys.現在のサービス区分, 現在の選択);
@@ -327,8 +324,7 @@ public class NinnteiChousaKekkaTouroku1 {
             ViewStateHolder.put(ViewStateKeys.初期のサービス区分, なし_選択);
             ViewStateHolder.put(ViewStateKeys.現在のサービス区分, なし_選択);
             RString 施設利用 = getHandler(div).施設_施設利用フラグ_初期設定(申請書管理番号, 認定調査履歴番号, tempData.getTemp_厚労省IF識別コード());
-            getHandler(div).利用サービス前半Grid非表示();
-            getHandler(div).利用サービス後半Grid非表示();
+            getHandler(div).利用サービスGrid非表示();
 
             ViewStateHolder.put(ViewStateKeys.初期の施設利用, 施設利用);
 
@@ -343,21 +339,19 @@ public class NinnteiChousaKekkaTouroku1 {
                 ViewStateHolder.put(ViewStateKeys.現在のサービス区分, 予防給付サービス_選択);
                 RString 予防給付状況 = getHandler(div).予防給付サービス_利用状況_初期設定(申請書管理番号, 認定調査履歴番号, tempData.getTemp_厚労省IF識別コード());
                 ViewStateHolder.put(ViewStateKeys.初期の予防給付サービス, 予防給付状況);
-                getHandler(div).利用サービス後半Grid非表示();
+                div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoServiceJyokyo().setVisible(false);
             } else if (ServiceKubunCode.介護給付サービス.getコード().equals(サービス区分コード)) {
                 div.getRadGenzaiservis().setSelectedKey(介護給付サービス_選択);
                 ViewStateHolder.put(ViewStateKeys.初期のサービス区分, 介護給付サービス_選択);
                 ViewStateHolder.put(ViewStateKeys.現在のサービス区分, 介護給付サービス_選択);
                 RString 介護給付状況 = getHandler(div).介護給付サービス_利用状況_初期設定(申請書管理番号, 認定調査履歴番号, tempData.getTemp_厚労省IF識別コード());
-                getHandler(div).利用サービス前半Grid非表示();
-
                 ViewStateHolder.put(ViewStateKeys.初期の介護給付サービス, 介護給付状況);
+                div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoServiceJyokyo().setVisible(false);
             } else {
                 div.getRadGenzaiservis().setSelectedKey(なし_選択);
                 ViewStateHolder.put(ViewStateKeys.初期のサービス区分, なし_選択);
                 ViewStateHolder.put(ViewStateKeys.現在のサービス区分, なし_選択);
-                getHandler(div).利用サービス前半Grid非表示();
-                getHandler(div).利用サービス後半Grid非表示();
+                getHandler(div).利用サービスGrid非表示();
             }
         }
     }
@@ -382,7 +376,6 @@ public class NinnteiChousaKekkaTouroku1 {
             return ResponseData.of(div).respond();
         }
         ViewStateHolder.put(ViewStateKeys.現在の概況調査場所, 在宅);
-        getHandler(div).施設tplのクリア();
         div.getRadGenzaiservis().setDisabled(Boolean.FALSE);
         return ResponseData.of(div).respond();
     }
@@ -406,16 +399,10 @@ public class NinnteiChousaKekkaTouroku1 {
             div.getTabChosaBasho().setSelectedItem(new tplZaitakuDiv());
             return ResponseData.of(div).respond();
         }
+
         RString temp_厚労省IF識別コード = ViewStateHolder.get(ViewStateKeys.厚労省IF識別コード, RString.class);
         ViewStateHolder.put(ViewStateKeys.現在の概況調査場所, 施設);
-        div.getRadGenzaiservis().setSelectedKey(なし_選択);
-        ViewStateHolder.put(ViewStateKeys.現在のサービス区分, なし_選択);
         getHandler(div).施設の表示(temp_厚労省IF識別コード);
-        getHandler(div).利用サービス前半Gridのクリア();
-        getHandler(div).利用サービス後半Gridのクリア();
-        getHandler(div).利用サービス前半Grid非表示();
-        getHandler(div).利用サービス後半Grid非表示();
-        getHandler(div).住宅改修と記入項目のクリア();
         div.getRadGenzaiservis().setDisabled(Boolean.TRUE);
         return ResponseData.of(div).respond();
     }
@@ -1288,14 +1275,14 @@ public class NinnteiChousaKekkaTouroku1 {
         List<Integer> 連番List = getHandler(div).get予防給付サービス連番List(temp_厚労省IF識別コード);
 
         NinteichosahyoServiceJokyoManager dbt5207Manager = new NinteichosahyoServiceJokyoManager();
-        List<dgRiyoSerViceFirstHalf_Row> firstHalf = div.getDgRiyoSerViceFirstHalf().getDataSource();
+        List<dgRiyoServiceJyokyo_Row> firstHalf = div.getDgRiyoServiceJyokyo().getDataSource();
         if (firstHalf == null) {
             return;
         }
         Decimal 利用状況;
         int index = 0;
         int 連番;
-        for (dgRiyoSerViceFirstHalf_Row firstRow : firstHalf) {
+        for (dgRiyoServiceJyokyo_Row firstRow : firstHalf) {
             利用状況 = firstRow.getServiceJokyo().getValue();
             if (利用状況 == null || 利用状況.toString().isEmpty()) {
                 利用状況 = new Decimal(0);
@@ -1342,14 +1329,14 @@ public class NinnteiChousaKekkaTouroku1 {
         List<Integer> 連番List = getHandler(div).get介護給付サービス連番List(temp_厚労省IF識別コード);
 
         NinteichosahyoServiceJokyoManager dbt5207Manager = new NinteichosahyoServiceJokyoManager();
-        List<dgRiyoSerViceSecondHalf_Row> secondHalf = div.getDgRiyoSerViceSecondHalf().getDataSource();
+        List<dgRiyoServiceJyokyo_Row> secondHalf = div.getDgRiyoServiceJyokyo().getDataSource();
         if (secondHalf == null) {
             return;
         }
         Decimal 利用状況;
         int index = 0;
         int 連番;
-        for (dgRiyoSerViceSecondHalf_Row secondRow : secondHalf) {
+        for (dgRiyoServiceJyokyo_Row secondRow : secondHalf) {
             利用状況 = secondRow.getServiceJokyo().getValue();
             if (利用状況 == null || 利用状況.toString().isEmpty()) {
                 利用状況 = new Decimal(0);
@@ -1442,8 +1429,7 @@ public class NinnteiChousaKekkaTouroku1 {
         ViewStateHolder.put(ViewStateKeys.第六群認定調査基本情報リスト, list);
         ViewStateHolder.put(ViewStateKeys.第七群認定調査基本情報リスト, list);
 
-        getHandler(div).利用サービス前半Gridのクリア();
-        getHandler(div).利用サービス後半Gridのクリア();
+        getHandler(div).利用サービスGridのクリア();
         getHandler(div).住宅改修と記入項目のクリア();
         div.getTabChosaShurui().getGaikyoTokkiInput().getTxtGaikyoTokkiNyuroku().clearValue();
         getHandler(div).施設tplのクリア();

@@ -57,6 +57,7 @@ public class ChosaJisshishaJohoHandler {
 
         div.getTxtChosaJisshiDate().setValue(RString.isNullOrEmpty(key.get調査実施日()) ? RDate.getNowDate() : new RDate(key.get調査実施日().toString()));
         List<KeyValueDataSource> chosaJisshiBasho = new ArrayList<>();
+        chosaJisshiBasho.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         for (ChosaJisshiBashoCode code : ChosaJisshiBashoCode.values()) {
             KeyValueDataSource data = new KeyValueDataSource(code.getコード(), code.get名称());
             chosaJisshiBasho.add(data);
