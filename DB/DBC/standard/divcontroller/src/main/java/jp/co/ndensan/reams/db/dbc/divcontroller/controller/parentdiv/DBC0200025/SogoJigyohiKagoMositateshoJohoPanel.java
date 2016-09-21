@@ -70,7 +70,7 @@ public class SogoJigyohiKagoMositateshoJohoPanel {
         }
         parameter.set出力順ID(new RString(Long.toString(div.getCcdShutsuryokujun().getSelected出力順()
                 .get出力順ID())));
-        parameter.set送付対象情報のｺｰﾄﾞ(div.getCcdKokuhorenJohoSofu().get送付対象情報のValue());
+        parameter.set送付対象情報のｺｰﾄﾞ(div.getCcdKokuhorenJohoSofu().get送付対象情報のkey());
         return parameter;
     }
 
