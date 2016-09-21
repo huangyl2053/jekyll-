@@ -65,13 +65,12 @@ public class DBC180030_KanendoRiyoshaFutanwariaiHanteiParameter extends BatchPar
      */
     public DBC180020_IdoRiyoshaFutanwariaiHanteiParameter toIdoDateTyuushutuKyoutsuuParameter() {
         DBC180020_IdoRiyoshaFutanwariaiHanteiParameter parameter = new DBC180020_IdoRiyoshaFutanwariaiHanteiParameter();
-        int ループ回数 = getループ回数();
-        parameter.setTaishoNendo(対象年度.minusYear(ループ回数));
-        if (ループ回数 == 1) {
+        parameter.setTaishoNendo(対象年度.minusYear(抽出回数));
+        if (抽出回数 == 1) {
             parameter.setKijunbi(new FlexibleDate(基準日.toDateString()));
         }
-        if (1 < ループ回数) {
-            RString 前回終了date = 対象年度.minusYear(ループ回数 - 1).toDateString().concat(new RString("0731"));
+        if (1 < 抽出回数) {
+            RString 前回終了date = 対象年度.minusYear(抽出回数 - 1).toDateString().concat(new RString("0731"));
             parameter.setKijunbi(new FlexibleDate(前回終了date));
         }
         parameter.setShoriKubun(異動);
@@ -80,7 +79,7 @@ public class DBC180030_KanendoRiyoshaFutanwariaiHanteiParameter extends BatchPar
         parameter.setTestMode(true);
         parameter.setNendoShuryoNengappi(年度終了年月日);
         parameter.setShoriNichiji(処理日時);
-        parameter.setChushutuKaisu(ループ回数);
+        parameter.setChushutuKaisu(抽出回数);
         return parameter;
     }
 
@@ -91,17 +90,16 @@ public class DBC180030_KanendoRiyoshaFutanwariaiHanteiParameter extends BatchPar
      */
     public DBC180020_IdoRiyoshaFutanwariaiHanteiParameter toRiyoshaFutanwariaiHanteiCommonFlowParameter() {
         DBC180020_IdoRiyoshaFutanwariaiHanteiParameter parameter = new DBC180020_IdoRiyoshaFutanwariaiHanteiParameter();
-        int ループ回数 = getループ回数();
-        parameter.setTaishoNendo(対象年度.minusYear(ループ回数));
-        if (ループ回数 == 1) {
+        parameter.setTaishoNendo(対象年度.minusYear(抽出回数));
+        if (抽出回数 == 1) {
             parameter.setKijunbi(new FlexibleDate(基準日.toDateString()));
         }
-        if (1 < ループ回数) {
-            parameter.setKijunbi(get基準日(ループ回数));
+        if (1 < 抽出回数) {
+            parameter.setKijunbi(get基準日(抽出回数));
         }
         parameter.setShoriKubun(異動);
         parameter.setTestMode(true);
-        parameter.setChushutuKaisu(ループ回数);
+        parameter.setChushutuKaisu(抽出回数);
         return parameter;
     }
 
@@ -119,9 +117,15 @@ public class DBC180030_KanendoRiyoshaFutanwariaiHanteiParameter extends BatchPar
         return parameter;
     }
 
-    private int getループ回数() {
-        if (対象年度.minusYear(1).compareTo(年度) < INT_5) {
-            return 2;
+    /**
+     * 最大ループ回数を設定します。
+     *
+     * @return 最大ループ回数 最大ループ回数
+     */
+    public int get最大ループ回数() {
+        if (対象年度.compareTo(年度) < INT_5) {
+            int ループ回数 = 対象年度.getYearValue() - 年度.getYearValue();
+            return ループ回数;
         }
         return INT_5;
     }
