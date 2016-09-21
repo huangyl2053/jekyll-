@@ -16,8 +16,10 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
+import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 帳票設計_DBBPR82001_2_特別徴収依頼情報件数表のEditor
@@ -55,8 +57,12 @@ public class TokubetsuChoshuIraiJohoKensuhyoEditor implements ITokubetsuChoshuIr
             source.shichosonCode = parameter.getEntity().get構成市町村コード();
             source.shichosonName = parameter.getEntity().get市町村名称();
             source.listLeftUpper_3 = new RString(parameter.getEntity().getLeft件数());
-            source.listLeftUpper_4 = parameter.getEntity().getLeft金額1();
-            source.listLeftLower_1 = parameter.getEntity().getLeft金額2();
+            if (parameter.getEntity().getLeft金額1() != null) {
+                source.listLeftUpper_4 = doカンマ編集(new Decimal(parameter.getEntity().getLeft金額1().toString()));
+            }
+            if (parameter.getEntity().getLeft金額2() != null) {
+                source.listLeftLower_1 = doカンマ編集(new Decimal(parameter.getEntity().getLeft金額2().toString()));
+            }
             if (parameter.getEntity().getLeft特別徴収義務者コード() != null) {
                 source.listLeftUpper_2 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
                         UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
@@ -64,8 +70,12 @@ public class TokubetsuChoshuIraiJohoKensuhyoEditor implements ITokubetsuChoshuIr
                 source.listLeftUpper_1 = parameter.getEntity().getLeft特別徴収義務者コード().getColumnValue();
             }
             source.listRightUpper_3 = new RString(parameter.getEntity().getRight件数());
-            source.listRightUpper_4 = parameter.getEntity().getRight金額1();
-            source.listRightLower_1 = parameter.getEntity().getRight金額2();
+            if (parameter.getEntity().getRight金額1() != null) {
+                source.listRightUpper_4 = doカンマ編集(new Decimal(parameter.getEntity().getRight金額1().toString()));
+            }
+            if (parameter.getEntity().getRight金額2() != null) {
+                source.listRightLower_1 = doカンマ編集(new Decimal(parameter.getEntity().getRight金額2().toString()));
+            }
             if (parameter.getEntity().getRight特別徴収義務者コード() != null) {
                 source.listRightUpper_2 = CodeMaster.getCodeMeisho(SubGyomuCode.UEX分配集約公開,
                         UEXCodeShubetsu.特別徴収義務者コード.getCodeShubetsu(),
@@ -74,8 +84,19 @@ public class TokubetsuChoshuIraiJohoKensuhyoEditor implements ITokubetsuChoshuIr
             }
         }
         source.gokeiKensu = parameter.get該当件数の件数の合計();
-        source.gokeiKingaku1 = parameter.get金額1の金額の合計();
-        source.gokeiKingaku2 = parameter.get金額2の金額の合計();
+        if (parameter.get金額1の金額の合計() != null) {
+            source.gokeiKingaku1 = doカンマ編集(new Decimal(parameter.get金額1の金額の合計().toString()));
+        }
+        if (parameter.get金額2の金額の合計() != null) {
+            source.gokeiKingaku2 = doカンマ編集(new Decimal(parameter.get金額2の金額の合計().toString()));
+        }
         return source;
+    }
+
+    private RString doカンマ編集(Decimal decimal) {
+        if (null != decimal) {
+            return DecimalFormatter.toコンマ区切りRString(decimal, 0);
+        }
+        return RString.EMPTY;
     }
 }
