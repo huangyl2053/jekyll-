@@ -36,7 +36,7 @@ public class KenkouKaruteRenkeiDATEntity {
     private RString 資格喪失日;
     @FldField(order = 80, length = 2)
     private RString 要介護状態区分;
-    @FldField(order = 90, length = 7)
+    @FldField(order = 90, length = 7, paddingChar = "　")
     private RString 減額認定証受給者番号;
     @FldField(order = 100, length = 8)
     private RString 認定年月日;

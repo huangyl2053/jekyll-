@@ -215,9 +215,9 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaList {
      * @return bparamt
      */
     public DBD202010_HomonKaigoRiyoshaFutanGakuNinteishaListParameter set旧措置区分の設定(HomonKaigoRiyoshaFutanGengakuNinteishaListDiv div) {
-        if (div.getRadKyusochishaKubun().getSelectedValue().equals(両方)) {
+        if (div.getRadKyusochishaKubun().getSelectedKey().equals(両方)) {
             bparamt.set旧措置区分(KyusochishaJukyushaKubun.両方);
-        } else if (div.getRadKyusochishaKubun().getSelectedValue().equals(旧措置者のみ)) {
+        } else if (div.getRadKyusochishaKubun().getSelectedKey().equals(旧措置者のみ)) {
             bparamt.set旧措置区分(KyusochishaJukyushaKubun.旧措置者のみ);
         } else {
             bparamt.set旧措置区分(KyusochishaJukyushaKubun.旧措置者以外);

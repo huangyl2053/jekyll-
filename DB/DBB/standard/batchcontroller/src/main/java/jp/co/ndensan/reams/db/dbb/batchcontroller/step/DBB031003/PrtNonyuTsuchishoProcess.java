@@ -379,6 +379,9 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
         if (!データ有無区分) {
             manager.loadバッチ出力条件リスト(出力条件リスト, 出力帳票一覧.get帳票ID(), 定値_ゼロ, CSV出力有無_なし, CSVファイル名_なし, 帳票名);
         } else {
+            if (定値区分_1.equals(processParameter.get納入_ページごとに山分け())) {
+                総ページ数 = スプール.get(String.valueOf(0)).pageCount().value();
+            }
             manager.load代行プリント送付票(processParameter.get調定年度(), processParameter.get賦課年度(), 代行プリント送付票_帳票ID,
                     processParameter.get納入_発行日(), processParameter.get納入_出力期(), processParameter.get納入_対象者(),
                     processParameter.get納入_生活保護対象者をまとめて先頭に出力(), processParameter.get納入_ページごとに山分け(),
@@ -564,24 +567,32 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
         }
     }
 
+    private ReportSourceWriter getReportSourceWriter(int idex) {
+        if (定値区分_1.equals(processParameter.get納入_ページごとに山分け())) {
+            return スプール.get(String.valueOf(0));
+        } else {
+            return スプール.get(String.valueOf(idex));
+        }
+    }
+
     private void publish納入通知書(HonSanteiNonyuTsuchiShoJoho 編集後本算定通知書共通情報) {
         int ページ数 = 0;
         if (ReportIdDBB.DBB100045.getReportId().equals(出力帳票一覧.get帳票ID())) {
             HokenryoNonyuTsuchishoKigotoReport report
                     = new HokenryoNonyuTsuchishoKigotoReport(編集後本算定通知書共通情報, dbb100045NinshoshaSource);
             List<NonyuTsuchisho<HokenryoNonyuTsuchishoKigotoSource>> nonyuTsuchishoList = report.devidedByPage();
-            for (int idex = 0; idex < 山分け用スプール数; idex++) {
-                nonyuTsuchishoList.get(idex).writeBy(スプール.get(String.valueOf(idex)));
-                ページ数 = ページ数 + スプール.get(String.valueOf(idex)).pageCount().value();
+            for (int idex = 0; idex < nonyuTsuchishoList.size(); idex++) {
+                nonyuTsuchishoList.get(idex).writeBy(getReportSourceWriter(idex));
+                ページ数 = ページ数 + getReportSourceWriter(idex).pageCount().value();
             }
             総ページ数 = ページ数;
         } else if (ReportIdDBB.DBB100046.getReportId().equals(出力帳票一覧.get帳票ID())) {
             HokenryoNonyuTsuchishoKigotoRenchoReport report
                     = new HokenryoNonyuTsuchishoKigotoRenchoReport(編集後本算定通知書共通情報, dbb100046NinshoshaSource);
             List<NonyuTsuchisho<HokenryoNonyuTsuchishoKigotoRenchoSource>> nonyuTsuchishoList = report.devidedByPage();
-            for (int idex = 0; idex < 山分け用スプール数; idex++) {
-                nonyuTsuchishoList.get(idex).writeBy(スプール.get(String.valueOf(idex)));
-                ページ数 = ページ数 + スプール.get(String.valueOf(idex)).pageCount().value();
+            for (int idex = 0; idex < nonyuTsuchishoList.size(); idex++) {
+                nonyuTsuchishoList.get(idex).writeBy(getReportSourceWriter(idex));
+                ページ数 = ページ数 + getReportSourceWriter(idex).pageCount().value();
             }
             総ページ数 = ページ数;
         } else if (ReportIdDBB.DBB100055.getReportId().equals(出力帳票一覧.get帳票ID())
@@ -597,18 +608,18 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
         } else if (ReportIdDBB.DBB100063.getReportId().equals(出力帳票一覧.get帳票ID())) {
             NonyuTsuchishoCVSKigotoReport report = new NonyuTsuchishoCVSKigotoReport(編集後本算定通知書共通情報, dbb100063NinshoshaSource);
             List<NonyuTsuchisho<NonyuTsuchishoCVSKigotoSource>> nonyuTsuchishoList = report.devidedByPage();
-            for (int idex = 0; idex < 山分け用スプール数; idex++) {
-                nonyuTsuchishoList.get(idex).writeBy(スプール.get(String.valueOf(idex)));
-                ページ数 = ページ数 + スプール.get(String.valueOf(idex)).pageCount().value();
+            for (int idex = 0; idex < nonyuTsuchishoList.size(); idex++) {
+                nonyuTsuchishoList.get(idex).writeBy(getReportSourceWriter(idex));
+                ページ数 = ページ数 + getReportSourceWriter(idex).pageCount().value();
             }
             総ページ数 = ページ数;
         } else if (ReportIdDBB.DBB100064.getReportId().equals(出力帳票一覧.get帳票ID())) {
             NonyuTsuchishoCVSKigotoRenchoReport report
                     = new NonyuTsuchishoCVSKigotoRenchoReport(編集後本算定通知書共通情報, dbb100064NinshoshaSource);
             List<NonyuTsuchisho<NonyuTsuchishoCVSKigotoRenchoSource>> nonyuTsuchishoList = report.devidedByPage();
-            for (int idex = 0; idex < 山分け用スプール数; idex++) {
-                nonyuTsuchishoList.get(idex).writeBy(スプール.get(String.valueOf(idex)));
-                ページ数 = ページ数 + スプール.get(String.valueOf(idex)).pageCount().value();
+            for (int idex = 0; idex < nonyuTsuchishoList.size(); idex++) {
+                nonyuTsuchishoList.get(idex).writeBy(getReportSourceWriter(idex));
+                ページ数 = ページ数 + getReportSourceWriter(idex).pageCount().value();
             }
             総ページ数 = ページ数;
         } else {
@@ -625,36 +636,36 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
             HokenryoNonyuTsuchishoGinfuriFourKiReport report = new HokenryoNonyuTsuchishoGinfuriFourKiReport(編集後本算定通知書共通情報,
                     dbb100051NinshoshaSource, 当初出力_中期開始期, 当初出力_後期開始期);
             List<NonyuTsuchisho<HokenryoNonyuTsuchishoGinfuriFourKiSource>> nonyuTsuchishoList = report.devidedByPage();
-            for (int idex = 0; idex < 山分け用スプール数; idex++) {
-                nonyuTsuchishoList.get(idex).writeBy(スプール.get(String.valueOf(idex)));
-                ページ数 = ページ数 + スプール.get(String.valueOf(idex)).pageCount().value();
+            for (int idex = 0; idex < nonyuTsuchishoList.size(); idex++) {
+                nonyuTsuchishoList.get(idex).writeBy(getReportSourceWriter(idex));
+                ページ数 = ページ数 + getReportSourceWriter(idex).pageCount().value();
             }
             総ページ数 = ページ数;
         } else if (ReportIdDBB.DBB100052.getReportId().equals(出力帳票一覧.get帳票ID())) {
             HokenryoNonyuTsuchishoGinfuriFourKiRenchoReport report = new HokenryoNonyuTsuchishoGinfuriFourKiRenchoReport(編集後本算定通知書共通情報,
                     dbb100052NinshoshaSource, 当初出力_中期開始期, 当初出力_後期開始期);
             List<NonyuTsuchisho<HokenryoNonyuTsuchishoGinfuriFourKiRenchoSource>> nonyuTsuchishoList = report.devidedByPage();
-            for (int idex = 0; idex < 山分け用スプール数; idex++) {
-                nonyuTsuchishoList.get(idex).writeBy(スプール.get(String.valueOf(idex)));
-                ページ数 = ページ数 + スプール.get(String.valueOf(idex)).pageCount().value();
+            for (int idex = 0; idex < nonyuTsuchishoList.size(); idex++) {
+                nonyuTsuchishoList.get(idex).writeBy(getReportSourceWriter(idex));
+                ページ数 = ページ数 + getReportSourceWriter(idex).pageCount().value();
             }
             総ページ数 = ページ数;
         } else if (ReportIdDBB.DBB100053.getReportId().equals(出力帳票一覧.get帳票ID())) {
             HokenryoNonyuTsuchishoGinfuriFiveKiReport report = new HokenryoNonyuTsuchishoGinfuriFiveKiReport(編集後本算定通知書共通情報,
                     dbb100053NinshoshaSource, 当初出力_中期開始期, 当初出力_後期開始期);
             List<NonyuTsuchisho<HokenryoNonyuTsuchishoGinfuriFiveKiSource>> nonyuTsuchishoList = report.devidedByPage();
-            for (int idex = 0; idex < 山分け用スプール数; idex++) {
-                nonyuTsuchishoList.get(idex).writeBy(スプール.get(String.valueOf(idex)));
-                ページ数 = ページ数 + スプール.get(String.valueOf(idex)).pageCount().value();
+            for (int idex = 0; idex < nonyuTsuchishoList.size(); idex++) {
+                nonyuTsuchishoList.get(idex).writeBy(getReportSourceWriter(idex));
+                ページ数 = ページ数 + getReportSourceWriter(idex).pageCount().value();
             }
             総ページ数 = ページ数;
         } else if (ReportIdDBB.DBB100054.getReportId().equals(出力帳票一覧.get帳票ID())) {
             HokenryoNonyuTsuchishoGinfuriFiveKiRenchoReport report = new HokenryoNonyuTsuchishoGinfuriFiveKiRenchoReport(編集後本算定通知書共通情報,
                     dbb100054NinshoshaSource, 当初出力_中期開始期, 当初出力_後期開始期);
             List<NonyuTsuchisho<HokenryoNonyuTsuchishoGinfuriFiveKiRenchoSource>> nonyuTsuchishoList = report.devidedByPage();
-            for (int idex = 0; idex < 山分け用スプール数; idex++) {
-                nonyuTsuchishoList.get(idex).writeBy(スプール.get(String.valueOf(idex)));
-                ページ数 = ページ数 + スプール.get(String.valueOf(idex)).pageCount().value();
+            for (int idex = 0; idex < nonyuTsuchishoList.size(); idex++) {
+                nonyuTsuchishoList.get(idex).writeBy(getReportSourceWriter(idex));
+                ページ数 = ページ数 + getReportSourceWriter(idex).pageCount().value();
             }
             総ページ数 = ページ数;
         }
@@ -668,18 +679,18 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
             HokenryoNonyuTsuchishoBookFuriKaeAriCoverReport report = new HokenryoNonyuTsuchishoBookFuriKaeAriCoverReport(編集後本算定通知書共通情報,
                     dbb100055NinshoshaSource, new RString(当初出力_中期開始期), new RString(当初出力_後期開始期));
             List<NonyuTsuchisho<HokenryoNonyuNonyuTsuchishoBookFuriKaeAriCoverSource>> nonyuTsuchishoList = report.devidedByPage();
-            for (int idex = 0; idex < 山分け用スプール数; idex++) {
-                nonyuTsuchishoList.get(idex).writeBy(スプール.get(String.valueOf(idex)));
-                ページ数 = ページ数 + スプール.get(String.valueOf(idex)).pageCount().value();
+            for (int idex = 0; idex < nonyuTsuchishoList.size(); idex++) {
+                nonyuTsuchishoList.get(idex).writeBy(getReportSourceWriter(idex));
+                ページ数 = ページ数 + getReportSourceWriter(idex).pageCount().value();
             }
             総ページ数 = ページ数;
         } else if (ReportIdDBB.DBB100056.getReportId().equals(出力帳票一覧.get帳票ID())) {
             HokenryoNonyuTsuchishoBookFuriKaeNashiReport report = new HokenryoNonyuTsuchishoBookFuriKaeNashiReport(編集後本算定通知書共通情報,
                     dbb100056NinshoshaSource, new RString(当初出力_中期開始期), new RString(当初出力_後期開始期));
             List<NonyuTsuchisho<HokenryoNonyuTsuchishoBookFuriKaeNashiCoverSource>> nonyuTsuchishoList = report.devidedByPage();
-            for (int idex = 0; idex < 山分け用スプール数; idex++) {
-                nonyuTsuchishoList.get(idex).writeBy(スプール.get(String.valueOf(idex)));
-                ページ数 = ページ数 + スプール.get(String.valueOf(idex)).pageCount().value();
+            for (int idex = 0; idex < nonyuTsuchishoList.size(); idex++) {
+                nonyuTsuchishoList.get(idex).writeBy(getReportSourceWriter(idex));
+                ページ数 = ページ数 + getReportSourceWriter(idex).pageCount().value();
             }
             総ページ数 = ページ数;
         } else if (ReportIdDBB.DBB100057.getReportId().equals(出力帳票一覧.get帳票ID())) {
@@ -687,9 +698,9 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
                     = new HokenryoNonyuTsuchishoBookFuriKaeAriRenchoCoverReport(編集後本算定通知書共通情報,
                             dbb100057NinshoshaSource, new RString(当初出力_中期開始期), new RString(当初出力_後期開始期));
             List<NonyuTsuchisho<HokenryoNonyuNonyuTsuchishoBookFuriKaeAriRenchoCoverSource>> nonyuTsuchishoList = report.devidedByPage();
-            for (int idex = 0; idex < 山分け用スプール数; idex++) {
-                nonyuTsuchishoList.get(idex).writeBy(スプール.get(String.valueOf(idex)));
-                ページ数 = ページ数 + スプール.get(String.valueOf(idex)).pageCount().value();
+            for (int idex = 0; idex < nonyuTsuchishoList.size(); idex++) {
+                nonyuTsuchishoList.get(idex).writeBy(getReportSourceWriter(idex));
+                ページ数 = ページ数 + getReportSourceWriter(idex).pageCount().value();
             }
             総ページ数 = ページ数;
         } else if (ReportIdDBB.DBB100058.getReportId().equals(出力帳票一覧.get帳票ID())) {
@@ -697,9 +708,9 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
                     = new HokenryoNonyuTsuchishoBookFuriKaeNashiRenchoCoverReport(編集後本算定通知書共通情報,
                             dbb100058NinshoshaSource, new RString(当初出力_中期開始期), new RString(当初出力_後期開始期));
             List<NonyuTsuchisho<HokenryoNonyuTsuchishoBookFuriKaeNashiRenchoCoverSource>> nonyuTsuchishoList = report.devidedByPage();
-            for (int idex = 0; idex < 山分け用スプール数; idex++) {
-                nonyuTsuchishoList.get(idex).writeBy(スプール.get(String.valueOf(idex)));
-                ページ数 = ページ数 + スプール.get(String.valueOf(idex)).pageCount().value();
+            for (int idex = 0; idex < nonyuTsuchishoList.size(); idex++) {
+                nonyuTsuchishoList.get(idex).writeBy(getReportSourceWriter(idex));
+                ページ数 = ページ数 + getReportSourceWriter(idex).pageCount().value();
             }
             総ページ数 = ページ数;
         }
@@ -711,35 +722,35 @@ public class PrtNonyuTsuchishoProcess extends BatchProcessBase<HonsanteiTsuchish
         if (ReportIdDBB.DBB100059.getReportId().equals(出力帳票一覧.get帳票ID())) {
             NonyuTsuchishoCVSKakukoReport report = new NonyuTsuchishoCVSKakukoReport(編集後本算定通知書共通情報, dbb100059NinshoshaSource);
             List<NonyuTsuchisho<NonyuTsuchishoCVSKakukoSource>> nonyuTsuchishoList = report.devidedByPage();
-            for (int idex = 0; idex < 山分け用スプール数; idex++) {
-                nonyuTsuchishoList.get(idex).writeBy(スプール.get(String.valueOf(idex)));
-                ページ数 = ページ数 + スプール.get(String.valueOf(idex)).pageCount().value();
+            for (int idex = 0; idex < nonyuTsuchishoList.size(); idex++) {
+                nonyuTsuchishoList.get(idex).writeBy(getReportSourceWriter(idex));
+                ページ数 = ページ数 + getReportSourceWriter(idex).pageCount().value();
             }
             総ページ数 = ページ数;
         } else if (ReportIdDBB.DBB100060.getReportId().equals(出力帳票一覧.get帳票ID())) {
             NonyuTsuchishoCVSKakukoRenchoReport report
                     = new NonyuTsuchishoCVSKakukoRenchoReport(編集後本算定通知書共通情報, dbb100060NinshoshaSource);
             List<NonyuTsuchisho<NonyuTsuchishoCVSKakukoRenchoSource>> nonyuTsuchishoList = report.devidedByPage();
-            for (int idex = 0; idex < 山分け用スプール数; idex++) {
-                nonyuTsuchishoList.get(idex).writeBy(スプール.get(String.valueOf(idex)));
-                ページ数 = ページ数 + スプール.get(String.valueOf(idex)).pageCount().value();
+            for (int idex = 0; idex < nonyuTsuchishoList.size(); idex++) {
+                nonyuTsuchishoList.get(idex).writeBy(getReportSourceWriter(idex));
+                ページ数 = ページ数 + getReportSourceWriter(idex).pageCount().value();
             }
             総ページ数 = ページ数;
         } else if (ReportIdDBB.DBB100061.getReportId().equals(出力帳票一覧.get帳票ID())) {
             NonyuTsuchishoCVSMultiReport report = new NonyuTsuchishoCVSMultiReport(編集後本算定通知書共通情報, dbb100061NinshoshaSource);
             List<NonyuTsuchisho<NonyuTsuchishoCVSMultiSource>> nonyuTsuchishoList = report.devidedByPage();
-            for (int idex = 0; idex < 山分け用スプール数; idex++) {
-                nonyuTsuchishoList.get(idex).writeBy(スプール.get(String.valueOf(idex)));
-                ページ数 = ページ数 + スプール.get(String.valueOf(idex)).pageCount().value();
+            for (int idex = 0; idex < nonyuTsuchishoList.size(); idex++) {
+                nonyuTsuchishoList.get(idex).writeBy(getReportSourceWriter(idex));
+                ページ数 = ページ数 + getReportSourceWriter(idex).pageCount().value();
             }
             総ページ数 = ページ数;
         } else if (ReportIdDBB.DBB100062.getReportId().equals(出力帳票一覧.get帳票ID())) {
             NonyuTsuchishoCVSMultiRenchoReport report
                     = new NonyuTsuchishoCVSMultiRenchoReport(編集後本算定通知書共通情報, dbb100062NinshoshaSource);
             List<NonyuTsuchisho<NonyuTsuchishoCVSMultiRenchoSource>> nonyuTsuchishoList = report.devidedByPage();
-            for (int idex = 0; idex < 山分け用スプール数; idex++) {
-                nonyuTsuchishoList.get(idex).writeBy(スプール.get(String.valueOf(idex)));
-                ページ数 = ページ数 + スプール.get(String.valueOf(idex)).pageCount().value();
+            for (int idex = 0; idex < nonyuTsuchishoList.size(); idex++) {
+                nonyuTsuchishoList.get(idex).writeBy(getReportSourceWriter(idex));
+                ページ数 = ページ数 + getReportSourceWriter(idex).pageCount().value();
             }
             総ページ数 = ページ数;
         }
