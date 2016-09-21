@@ -66,7 +66,9 @@ public class SogojigyohiKagoMoshitateshojohoSofuBodyEditor implements ISogojigyo
         source.listUpper_3 = 過誤申立一時TBL.getJigyoshaName();
         if (過誤申立一時TBL.getHiHokenshaNo() != null) {
             source.listUpper_4 = 過誤申立一時TBL.getHiHokenshaNo().value();
-            source.shikibetsuCode = 過誤申立一時TBL.getHiHokenshaNo().value();
+        }
+        if (被保険者一時TBL.getShikibetsuCode() != null) {
+            source.shikibetsuCode = 被保険者一時TBL.getShikibetsuCode().value();
         }
         source.listUpper_5 = 被保険者一時TBL.getKanaMeisho();
         source.listLower_1 = 被保険者一時TBL.getMeisho();
