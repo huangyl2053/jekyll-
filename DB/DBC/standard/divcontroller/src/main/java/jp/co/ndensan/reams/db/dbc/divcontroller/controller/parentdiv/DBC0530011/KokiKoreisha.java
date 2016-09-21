@@ -18,10 +18,15 @@ import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -46,6 +51,7 @@ public class KokiKoreisha {
             throw new ApplicationException(DbzErrorMessages.理由付き登録不可.getMessage().replace("被保険者番号なし"));
         }
         HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
         ShikibetsuCode 識別コード = 資格対象者.get識別コード();
         KokiKoreishaInfoManager manager = new KokiKoreishaInfoManager();
         KokiKoreishaInfo 後期高齢者情報 = manager.get後期高齢者情報(識別コード);
@@ -69,8 +75,16 @@ public class KokiKoreisha {
      * @return ResponseData<MainPanelDiv>
      */
     public ResponseData<KokiKoreishaDiv> onClick_back(KokiKoreishaDiv div) {
-        getHandler(div).前排他キーの解除(ViewStateHolder.get(ViewStateKeys.識別コード, ShikibetsuCode.class),
-                ViewStateHolder.get(ViewStateKeys.履歴番号, RString.class));
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
+        }
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            return ResponseData.of(div).respond();
+        }
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
+        if (被保険者番号 != null && !被保険者番号.isEmpty()) {
+            getHandler(div).前排他キーの解除(被保険者番号);
+        }
         return ResponseData.of(div).forwardWithEventName(DBC0530011TransitionEventName.対象者検索へ戻る).respond();
     }
 
@@ -85,6 +99,7 @@ public class KokiKoreisha {
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         validation.保険者適用期間大小関係チェック(pairs, div);
         validation.資格期間大小関係チェック(pairs, div);
+        HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
@@ -128,7 +143,6 @@ public class KokiKoreisha {
             }
             kokiKoreishaInfo.createBuilderForEdit().set後期高齢保険者番号_広域(null);
             manager.save後期高齢者情報(kokiKoreishaInfo);
-            getHandler(div).前排他キーの解除(識別コード, RString.EMPTY);
         } else {
             if (div.getMeisaiPanel().getTxtHokenshaShuryoYMD().getValue() != null) {
                 後期高齢者情報.createBuilderForEdit().set保険者適用終了日(div.getMeisaiPanel().getTxtHokenshaShuryoYMD().
@@ -168,8 +182,10 @@ public class KokiKoreisha {
                 後期高齢者情報.createBuilderForEdit().set登録区分(new RString("0"));
             }
             manager.save後期高齢者情報(後期高齢者情報);
-            getHandler(div).前排他キーの解除(識別コード, div.getMeisaiPanel().getTxtRirekiNo().getValue());
         }
+        getHandler(div).前排他キーの解除(被保険者番号);
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), 被保険者番号.value());
+        AccessLogger.log(AccessLogType.更新, PersonalData.of(識別コード, expandedInfo));
         div.getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()),
                 RString.EMPTY, RString.EMPTY, true);
         return ResponseData.of(div).setState(DBC0530011StateName.完了);

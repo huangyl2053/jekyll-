@@ -66,9 +66,9 @@ public class NinteishaListSakuseiMybatisParameter implements IMyBatisParameter {
     private RString 減免減額種類_訪問介護利用者負担額減額;
     private RString 有効無効区分_有効;
     private RString 決定区分_承認する;
-    private RString 法別区分_施行時;
-    private RString 法別区分_障害時;
-    private RString 法別区分_障害全額免除;
+    private RString 法別区分施行時;
+    private RString 法別区分障害時;
+    private RString 法別区分障害全額免除;
     private RString 世帯課税区分_非課税;
     private TaishoKikan 対象期間指定;
     private FlexibleYear 対象年度;
@@ -131,6 +131,9 @@ public class NinteishaListSakuseiMybatisParameter implements IMyBatisParameter {
             RDateTime 帳票作成日時,
             RString psmShikibetsuTaisho,
             RString 出力順) {
+        法別区分障害時 = RString.EMPTY;
+        法別区分施行時 = RString.EMPTY;
+        法別区分障害全額免除 = RString.EMPTY;
         this.対象年度 = 対象年度;
         this.対象年度の開始年月日 = 対象年度の開始年月日;
         this.対象年度の終了年月日 = 対象年度の終了年月日;
@@ -182,15 +185,15 @@ public class NinteishaListSakuseiMybatisParameter implements IMyBatisParameter {
             is法別区分_全て = true;
         }
         if (法別区分_施行時_いち.equals(法別区分.getコード())) {
-            法別区分_施行時 = 法別区分_施行時_いち;
+            法別区分施行時 = 法別区分_施行時_いち;
             is法別区分_施行時 = true;
         }
         if (法別区分_障害時_に.equals(法別区分.getコード())) {
-            法別区分_障害時 = 法別区分_障害時_に;
+            法別区分障害時 = 法別区分_障害時_に;
             is法別区分_障害時 = true;
         }
         if (法別区分_障害時_さん.equals(法別区分.getコード())) {
-            法別区分_障害全額免除 = 法別区分_障害時_さん;
+            法別区分障害全額免除 = 法別区分_障害時_さん;
             is法別区分_障害ヘルプ全額免除 = true;
         }
 

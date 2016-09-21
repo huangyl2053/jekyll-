@@ -11,7 +11,7 @@ and open the template in the editor.
     <select id="get申請書発行対象者情報_負担限度額認定"
             resultOrdered="true"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.ShinseishoHakkoTaishoJohoSakuseiMyBatisParameter"
-            resultMap="RseultMap_ShinseishoHakkoTaishoJohoSakuseiEntity" fetchSize="500" resultOrdered="true">
+            resultMap="RseultMap_ShinseishoHakkoTaishoJohoSakuseiEntity" fetchSize="500">
         SELECT
         A."被保険者番号" as "hihokenshaNo",
         CASE WHEN C."hihokenshaNo" IS NULL THEN FALSE ELSE TRUE END AS "kousinninteifuragu",

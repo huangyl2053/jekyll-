@@ -10,8 +10,7 @@ and open the template in the editor.
 
 <mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.gemmenshinseishotaishohaaku.IHanteiTaishoshaTokuteiMapper">
 
-    <select id="get減免減額対象者判定用根拠作成対象者_負担限度額認定"
-            resultOrdered="true"
+    <select resultOrdered="true" id="get減免減額対象者判定用根拠作成対象者_負担限度額認定"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.ShinseishoHakkoTaishoJohoSakuseiMyBatisParameter"
             resultMap="ResultMap_HanteiTaishoshaTokuteiEntity" fetchSize="500">
         SELECT
@@ -115,8 +114,7 @@ and open the template in the editor.
 
 
 
-    <select id="get減免減額対象者判定用根拠作成対象者_利用者負担額減額"
-            resultOrdered="true"
+    <select resultOrdered="true" id="get減免減額対象者判定用根拠作成対象者_利用者負担額減額"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.HanteiTaishoshaTokuteiMyBatisParameter"
             resultMap="ResultMap_HanteiTaishoshaTokuteiEntity" fetchSize="500">
         SELECT
@@ -217,8 +215,7 @@ and open the template in the editor.
             )
         </if>
     </select>
-    <select id="get減免減額対象者判定用根拠作成対象者_訪問介護利用者負担額減額"
-            resultOrdered="true"
+    <select resultOrdered="true" id="get減免減額対象者判定用根拠作成対象者_訪問介護利用者負担額減額"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.HanteiTaishoshaTokuteiMyBatisParameter"
             resultMap="ResultMap_HanteiTaishoshaTokuteiEntity" fetchSize="500">
         SELECT
@@ -319,8 +316,7 @@ and open the template in the editor.
             )
         </if>
     </select>
-    <select id="get減免減額対象者判定用根拠作成対象者_社会福祉法人等利用者負担軽減"
-            resultOrdered="true"
+    <select resultOrdered="true" id="get減免減額対象者判定用根拠作成対象者_社会福祉法人等利用者負担軽減"
             parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.HanteiTaishoshaTokuteiMyBatisParameter"
             resultMap="ResultMap_HanteiTaishoshaTokuteiEntity" fetchSize="500">
         SELECT

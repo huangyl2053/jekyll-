@@ -137,9 +137,9 @@ public class ShogaishaKojoNinteishoEditorImpl implements IShogaishaKojoNinteisho
         source.denshiKoin = ninshoshaSource.denshiKoin;
         source.hakkoYMD = ninshoshaSource.hakkoYMD;
         source.ninshoshaYakushokuMei = ninshoshaSource.ninshoshaYakushokuMei;
-        //source.ninshoshaYakushokuMei1 = ninshoshaSource.ninshoshaYakushokuMei1;
+        source.ninshoshaYakushokuMei1 = ninshoshaSource.ninshoshaYakushokuMei1;
         source.koinMojiretsu = ninshoshaSource.koinMojiretsu;
-        //source.ninshoshaYakushokuMei2 = ninshoshaSource.ninshoshaYakushokuMei2;
+        source.ninshoshaYakushokuMei2 = ninshoshaSource.ninshoshaYakushokuMei2;
         source.ninshoshaShimeiKakenai = ninshoshaSource.ninshoshaShimeiKakenai;
         source.ninshoshaShimeiKakeru = ninshoshaSource.ninshoshaShimeiKakeru;
         source.koinShoryaku = ninshoshaSource.koinShoryaku;

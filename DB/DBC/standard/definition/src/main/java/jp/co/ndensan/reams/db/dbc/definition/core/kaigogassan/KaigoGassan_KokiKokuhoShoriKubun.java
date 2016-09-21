@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 介護合算_後期国保処理区分列挙型です。
  *
- * @reamsid_L DBC-2700-010 wangxingpeng
+ * @reamsid_L DBC-9999-022 wangxingpeng
  */
 public enum KaigoGassan_KokiKokuhoShoriKubun {
 

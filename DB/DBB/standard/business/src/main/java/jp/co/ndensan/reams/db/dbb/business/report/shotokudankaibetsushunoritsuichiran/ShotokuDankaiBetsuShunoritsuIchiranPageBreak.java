@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 /**
  * 保険料段階別収納率一覧表のPageBreakクラスです。
  *
- * @reamsid_L @reamsid_L DBB-1630-040 tianshuai
+ * @reamsid_L DBB-1630-040 tianshuai
  */
 public class ShotokuDankaiBetsuShunoritsuIchiranPageBreak extends PageBreaker<ShotokuDankaiBetsuShunoritsuIchiranSource> {
 

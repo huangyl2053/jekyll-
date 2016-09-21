@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.dbc790060;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc710060.HanyoListKyodoJukyushaKogakuProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710060.DBC710060_HanyoListKyodoJukyushaKogakuParameter;
