@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.itizihanteishori;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.itizihanteishori.ItziHanteiShoriBatchParamter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBE-1470-020 wanghui
  */
-public class ItziHanteiShoriFlow extends BatchFlowBase<ItziHanteiShoriBatchParamter> {
+public class DBE309000_IchijihanteiShori extends BatchFlowBase<ItziHanteiShoriBatchParamter> {
 
     private static final RString ITAKUSAKICHOSAINICHIRAN_FLOWID = new RString("DBE309001_IchijihanteiIfSakusei");
     private static final String ITAKUSAKICHOSAINICHIRAN_FLOW = "IchijiHanteizumIfOutputFlow";
