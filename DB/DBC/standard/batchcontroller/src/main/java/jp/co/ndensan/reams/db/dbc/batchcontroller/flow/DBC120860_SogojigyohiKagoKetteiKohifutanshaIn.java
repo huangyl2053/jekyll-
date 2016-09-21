@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120170.KohifutanshaDoM
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoShoriKekkaListSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuGetFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120170.KohifutanshaReadCsvFileProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120860.SogojigyohiKagoKetteiKohifutanshaDoIchiranhyoSakuseiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120860.SogojigyohiKagoKetteiKohifutanshaDoIchiranhyoSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.business.core.kokuhorenkyoutsuu.KokuhorenKyoutsuuFileGetReturnEntity;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120860.DBC120860_SogojigyohiKagoKetteiKohifutanshaInParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorListType;

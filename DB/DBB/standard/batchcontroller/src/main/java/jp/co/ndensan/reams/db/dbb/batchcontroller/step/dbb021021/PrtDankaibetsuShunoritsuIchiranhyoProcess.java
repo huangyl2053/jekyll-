@@ -242,6 +242,7 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         最終頁帳票タイトル = RString.EMPTY;
         市町村コード = RString.EMPTY;
         市町村名称 = RString.EMPTY;
+        lastEntity = null;
     }
 
     @Override
@@ -346,6 +347,9 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
 
     @Override
     protected void afterExecute() {
+        if (lastEntity == null) {
+            return;
+        }
         DankaibetsuShunoritsuIchiran 険料段階別収納率通知書集計Data
                 = get険料段階別収納率通知書小計集計パラメータ(lastEntity);
         険料段階別収納率通知書集計Data.set保険料段階(保険料段階の小計);

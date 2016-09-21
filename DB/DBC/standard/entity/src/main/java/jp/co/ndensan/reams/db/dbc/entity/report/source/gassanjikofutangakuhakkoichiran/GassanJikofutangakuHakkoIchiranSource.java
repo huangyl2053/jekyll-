@@ -77,8 +77,7 @@ public class GassanJikofutangakuHakkoIchiranSource implements IReportSource {
     public RString 行政区コード;
     public RString 市町村コード;
     public RString 証記載保険者番号;
-    public RString 支給区分コード;
-    public RString 新規継続区分;
+    public RString 氏名５０音カナ;
 
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">

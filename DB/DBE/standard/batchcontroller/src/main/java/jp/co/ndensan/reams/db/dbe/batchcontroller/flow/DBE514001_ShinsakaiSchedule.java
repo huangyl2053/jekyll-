@@ -24,8 +24,8 @@ public class DBE514001_ShinsakaiSchedule extends BatchFlowBase<DBE514001_Shinsak
 
     private static final String SHINSAKAISCHEDULEHYO = "shinsakaischedulehyo";
     private static final String NENKAN = "nenkanReport";
-    private static final String CALL_KAGAMIFLOW = "kaigoNinteiShinsakaiScheduleKagamiFlow";
-    private static final RString SCHEDULEKAGAMIFLOW_FLOWID = new RString("KaigoNinteiShinsakaiScheduleKagamiFlow");
+    private static final String CALL_KAGAMIFLOW = "DBE514002_ShinsakaiScheduleKagami";
+    private static final RString SCHEDULEKAGAMIFLOW_FLOWID = new RString("DBE514002_ShinsakaiScheduleKagami");
     private final RString 帳票出力区分1 = new RString("1");
     private final RString 帳票出力区分2 = new RString("2");
 

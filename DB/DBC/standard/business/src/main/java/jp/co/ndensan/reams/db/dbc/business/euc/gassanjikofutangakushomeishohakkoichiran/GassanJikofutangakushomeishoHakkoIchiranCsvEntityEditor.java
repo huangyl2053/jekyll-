@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.euc.gassanjikofutangakushomeishohakkoichiran;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc040040.GassanJikofutangakushomeishoHakkoIchiranCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040040.JikoFutangakushomeishoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -30,6 +32,10 @@ public class GassanJikofutangakushomeishoHakkoIchiranCsvEntityEditor {
     private final RDateTime システム日時;
     private final int 連番;
 
+    private static final RString FORMAT1 = new RString("###,###,###,##0");
+    private static final RString TXTZERO = new RString("0");
+    private static final RString 定数_年度 = new RString("年度");
+
     /**
      * コンストラクタです。
      *
@@ -47,7 +53,7 @@ public class GassanJikofutangakushomeishoHakkoIchiranCsvEntityEditor {
     /**
      * CSVレコードを取得します。
      *
-     * s* @return GassanJikofutangakushomeishoHakkoIchiranCsvEntity
+     * @return GassanJikofutangakushomeishoHakkoIchiranCsvEntity
      */
     public GassanJikofutangakushomeishoHakkoIchiranCsvEntity edit() {
         GassanJikofutangakushomeishoHakkoIchiranCsvEntity csvEntity = new GassanJikofutangakushomeishoHakkoIchiranCsvEntity();
@@ -62,8 +68,8 @@ public class GassanJikofutangakushomeishoHakkoIchiranCsvEntityEditor {
         csvEntity.set介護加入期間開始(dateFormat6(entity.get高額合算一時().getJikoFutanGaku_HihokenshaKaishiYMD()));
         csvEntity.set介護加入期間終了(dateFormat6(entity.get高額合算一時().getJikoFutanGaku_HihokenshaShuryoYMD()));
         csvEntity.set自己負担額証明書整理番号(entity.get高額合算一時().getJikoFutanGaku_JikoFutanSeiriNo());
-        csvEntity.set自己負担楽合計金額_補正後(toRString(entity.get高額合算一時().getJikoFutanGaku_Sumi_Gokei_JikoFutanGaku()));
-        csvEntity.setうち70_74歳の者に係る自己負担額(toRString(entity.get高額合算一時().getJikoFutanGaku_Sumi_Gokei_70_74JikoFutanGaku()));
+        csvEntity.set自己負担楽合計金額_補正後(getFormat(entity.get高額合算一時().getJikoFutanGaku_Sumi_Gokei_JikoFutanGaku()));
+        csvEntity.setうち70_74歳の者に係る自己負担額(getFormat(entity.get高額合算一時().getJikoFutanGaku_Sumi_Gokei_70_74JikoFutanGaku()));
         return csvEntity;
     }
 
@@ -71,7 +77,7 @@ public class GassanJikofutangakushomeishoHakkoIchiranCsvEntityEditor {
         if (year == null) {
             return RString.EMPTY;
         }
-        return year.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
+        return year.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString().concat(定数_年度);
     }
 
     private RString dateFormat6(FlexibleDate date) {
@@ -90,13 +96,6 @@ public class GassanJikofutangakushomeishoHakkoIchiranCsvEntityEditor {
                 fillType(FillType.BLANK).toDateString();
     }
 
-    private RString toRString(Decimal dec) {
-        if (dec == null) {
-            return RString.EMPTY;
-        }
-        return new RString(dec.toString());
-    }
-
     private RString format日時(RDateTime 作成日時) {
         if (作成日時 == null) {
             return RString.EMPTY;
@@ -111,5 +110,13 @@ public class GassanJikofutangakushomeishoHakkoIchiranCsvEntityEditor {
         dateTime.append(RString.FULL_SPACE);
         dateTime.append(作成日時.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         return dateTime.toRString();
+    }
+
+    public RString getFormat(Decimal sum) {
+        if (sum == null) {
+            return TXTZERO;
+        }
+        NumberFormat format = new DecimalFormat(FORMAT1.toString());
+        return new RString(format.format(sum));
     }
 }

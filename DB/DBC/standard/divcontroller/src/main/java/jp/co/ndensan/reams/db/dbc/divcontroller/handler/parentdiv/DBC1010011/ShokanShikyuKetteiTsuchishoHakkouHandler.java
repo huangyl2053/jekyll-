@@ -35,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -355,14 +356,16 @@ public class ShokanShikyuKetteiTsuchishoHakkouHandler {
         if (償還払支給決定通知書.get償還払支給決定通知書().getUketsukeYMD() != null) {
             item.setUketsukeYMD(償還払支給決定通知書.get償還払支給決定通知書().getUketsukeYMD().wareki().eraType(EraType.KANJI).
                     firstYear(FirstYear.GAN_NEN).
-                    separator(Separator.JAPANESE).toDateString());
+                    separator(Separator.JAPANESE).
+                    fillType(FillType.BLANK).toDateString());
         } else {
             item.setUketsukeYMD(RString.EMPTY);
         }
         if (償還払支給決定通知書.get償還払支給決定通知書().getKetteiYMD() != null) {
             item.setKetteiYMD(償還払支給決定通知書.get償還払支給決定通知書().getKetteiYMD().wareki().eraType(EraType.KANJI).
                     firstYear(FirstYear.GAN_NEN).
-                    separator(Separator.JAPANESE).toDateString());
+                    separator(Separator.JAPANESE).
+                    fillType(FillType.BLANK).toDateString());
         } else {
             item.setKetteiYMD(RString.EMPTY);
         }
@@ -375,7 +378,8 @@ public class ShokanShikyuKetteiTsuchishoHakkouHandler {
         if (償還払支給決定通知書.get償還払支給決定通知書().getServiceTeikyoYM() != null) {
             item.setTaishoYM(償還払支給決定通知書.get償還払支給決定通知書().getServiceTeikyoYM().wareki().eraType(EraType.KANJI).
                     firstYear(FirstYear.GAN_NEN).
-                    separator(Separator.JAPANESE).toDateString());
+                    separator(Separator.JAPANESE).
+                    fillType(FillType.BLANK).toDateString());
         } else {
             item.setTaishoYM(RString.EMPTY);
         }
@@ -485,7 +489,8 @@ public class ShokanShikyuKetteiTsuchishoHakkouHandler {
         if (償還払支給決定通知書.get償還払支給決定通知書().getUketsukeYMD() != null) {
             item.setUketsukeYMD(償還払支給決定通知書.get償還払支給決定通知書().getUketsukeYMD().wareki().eraType(EraType.KANJI).
                     firstYear(FirstYear.GAN_NEN).
-                    separator(Separator.JAPANESE).toDateString());
+                    separator(Separator.JAPANESE).
+                    fillType(FillType.BLANK).toDateString());
         } else {
             item.setUketsukeYMD(RString.EMPTY);
         }
@@ -493,7 +498,8 @@ public class ShokanShikyuKetteiTsuchishoHakkouHandler {
             item.setKetteiYMD(償還払支給決定通知書.get償還払支給決定通知書().getKetteiYMD().wareki()
                     .eraType(EraType.KANJI).
                     firstYear(FirstYear.GAN_NEN).
-                    separator(Separator.JAPANESE).toDateString()
+                    separator(Separator.JAPANESE).
+                    fillType(FillType.BLANK).toDateString()
             );
         } else {
             item.setKetteiYMD(RString.EMPTY);
@@ -507,7 +513,8 @@ public class ShokanShikyuKetteiTsuchishoHakkouHandler {
         if (償還払支給決定通知書.get償還払支給決定通知書().getServiceTeikyoYM() != null) {
             item.setTaishoYM(償還払支給決定通知書.get償還払支給決定通知書().getServiceTeikyoYM().wareki().eraType(EraType.KANJI).
                     firstYear(FirstYear.GAN_NEN).
-                    separator(Separator.JAPANESE).toDateString());
+                    separator(Separator.JAPANESE).
+                    fillType(FillType.BLANK).toDateString());
         } else {
             item.setTaishoYM(RString.EMPTY);
         }
@@ -549,7 +556,8 @@ public class ShokanShikyuKetteiTsuchishoHakkouHandler {
         if (償還払支給決定通知書.get償還払支給決定通知書().get支払予定日() != null) {
             item.setSihaYoYmd(償還払支給決定通知書.get償還払支給決定通知書().get支払予定日().wareki().eraType(EraType.KANJI).
                     firstYear(FirstYear.GAN_NEN).
-                    separator(Separator.JAPANESE).toDateString());
+                    separator(Separator.JAPANESE).
+                    fillType(FillType.BLANK).toDateString());
         } else {
             item.setSihaYoYmd(RString.EMPTY);
         }

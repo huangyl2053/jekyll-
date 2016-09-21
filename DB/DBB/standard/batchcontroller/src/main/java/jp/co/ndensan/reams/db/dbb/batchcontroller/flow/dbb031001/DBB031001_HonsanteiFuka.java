@@ -13,11 +13,11 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031001.InsSetaiTempPro
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031001.KeisanTaishoshaProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031001.SetaiinHaakuProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031001.SystemTimeUpdateHonsanteiProcess;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB003001.DBB003001_KeisangoJohoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB004001.DBB004001_FukaJohoTorokuParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB031001.DBB031001_HonsanteiFukaParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB031003.DBB031003_HonsanteiTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteifuka.HonsanteifukaBatchTyouhyou;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB003001.DBB003001_KeisangoJohoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt4300.HonsanteiFukaProcessParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.fuka.SetaiShotokuKazeiHanteiBatchParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SetaiinHaakuKanriShikibetsuKubun;
@@ -46,7 +46,6 @@ public class DBB031001_HonsanteiFuka extends BatchFlowBase<DBB031001_HonsanteiFu
     private static final String 賦課計算_賦課 = "insFukaKeisanTemp";
     private static final String 賦課計算_世帯員 = "insSetaiTempProcess";
     private static final String 賦課計算 = "caluculateFuka";
-    private static final String 賦課計算中間一時テーブルに登録 = "insFukaKeisanTemp";
     private static final String 計算後情報作成 = "keisangoJohoSakusei";
     private static final String 本算定結果一覧表出力 = "spoolHonsanteiKekkaIchiran";
     private static final String 処理日付管理テーブル更新 = "updateSystemTimeProcess";
@@ -79,7 +78,6 @@ public class DBB031001_HonsanteiFuka extends BatchFlowBase<DBB031001_HonsanteiFu
         executeStep(計算対象者抽出_通知書番号発番);
         executeStep(世帯員把握);
         executeStep(世帯員把握フロー);
-        executeStep(賦課計算中間一時テーブルに登録);
         executeStep(賦課計算_賦課);
         executeStep(賦課計算_世帯員);
         executeStep(賦課計算);
