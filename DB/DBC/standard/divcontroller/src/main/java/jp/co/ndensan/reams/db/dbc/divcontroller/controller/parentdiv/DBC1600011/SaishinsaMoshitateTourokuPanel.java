@@ -117,8 +117,7 @@ public class SaishinsaMoshitateTourokuPanel {
                 div.getSearchToKyufujissekiPanel().getTxtHihoNo().setValue(collect.get被保険者番号());
                 div.getSearchToKyufujissekiPanel().getTxtHihoName().setValue(collect.get被保険者名称());
             }
-            div.getSearchToKyufujissekiPanel().getTextBox1().setValue(collect.get事業所番号());
-            div.getSearchToKyufujissekiPanel().getTxtJigyoshaName().setValue(collect.get事業者名称());
+            div.getCcdJigyoshaSentaku().setNyuryokuShisetsuKodo(collect.get事業所番号());
             if (collect.get提供年月開始() != null) {
                 div.getSearchToKyufujissekiPanel().getTxtTeikyoYMRange().setFromValue(
                         new RDate(collect.get提供年月開始().toString()));
@@ -212,7 +211,7 @@ public class SaishinsaMoshitateTourokuPanel {
         }
         SaishinsaMoshitateTourokuMybatisParameter parameter = SaishinsaMoshitateTourokuMybatisParameter.createMybatisParameter(
                 div.getSearchToKyufujissekiPanel().getTxtHihoNo().getValue(),
-                div.getSearchToKyufujissekiPanel().getTextBox1().getValue(),
+                div.getCcdJigyoshaSentaku().getNyuryokuShisetsuKodo(),
                 getHandler(div).get保険者番号の選択値(
                         getHandler(div).get保険者リストの値()),
                 div.getSearchToKyufujissekiPanel().getTxtTeikyoYMRange().getFromValue().getYearMonth().toDateString(),
@@ -238,7 +237,7 @@ public class SaishinsaMoshitateTourokuPanel {
         }
         SaishinsaMoshitateTourokuMybatisParameter parameter = SaishinsaMoshitateTourokuMybatisParameter.createMybatisParameter(
                 div.getSearchToKyufujissekiPanel().getTxtHihoNo().getValue(),
-                div.getSearchToKyufujissekiPanel().getTextBox1().getValue(),
+                div.getCcdJigyoshaSentaku().getNyuryokuShisetsuKodo(),
                 getHandler(div).get保険者番号の選択値(
                         getHandler(div).get保険者リストの値()),
                 div.getSearchToKyufujissekiPanel().getTxtTeikyoYMRange().getFromValue().getYearMonth().toDateString(),
@@ -277,12 +276,12 @@ public class SaishinsaMoshitateTourokuPanel {
                 div.getKyufuJissekiGaitoshaListPanel().getDgHihokenshaSearchGaitosha().getActiveRow().getTxtHiHoekNo());
         LockingKey key = new LockingKey(前排他キー);
         if (!RealInitialLocker.tryGetLock(key)) {
+            div.getKagoMoshitatePanel().setHdn排他状態フラグ(FALSE);
             responseData = ResponseData.of(div).setState(DBC1600011StateName.detail_notUpdate);
             responseData.addValidationMessages(getValidationHandler(div).get他のユーザが使用中エラーメッセージ());
-            div.getKagoMoshitatePanel().setHdn排他状態フラグ(FALSE);
         } else {
-            responseData = ResponseData.of(div).setState(DBC1600011StateName.detail);
             div.getKagoMoshitatePanel().setHdn排他状態フラグ(TRUE);
+            responseData = ResponseData.of(div).setState(DBC1600011StateName.detail);
         }
         return responseData;
     }
@@ -311,12 +310,13 @@ public class SaishinsaMoshitateTourokuPanel {
                 div.getKyufuJissekiGaitoshaListPanel().getDgHihokenshaSearchGaitosha().getActiveRow().getTxtHiHoekNo());
         LockingKey key = new LockingKey(前排他キー);
         if (!RealInitialLocker.tryGetLock(key)) {
+            div.getKagoMoshitatePanel().setHdn排他状態フラグ(FALSE);
             responseData = ResponseData.of(div).setState(DBC1600011StateName.detail_notUpdate);
             responseData.addValidationMessages(getValidationHandler(div).get他のユーザが使用中エラーメッセージ());
-            div.getKagoMoshitatePanel().setHdn排他状態フラグ(FALSE);
+            ResponseData.of(div).setState(null).addValidationMessages(getValidationHandler(div).get他のユーザが使用中エラーメッセージ());
         } else {
-            responseData = ResponseData.of(div).setState(DBC1600011StateName.detail);
             div.getKagoMoshitatePanel().setHdn排他状態フラグ(TRUE);
+            responseData = ResponseData.of(div).setState(DBC1600011StateName.detail);
         }
         return responseData;
     }
@@ -345,12 +345,12 @@ public class SaishinsaMoshitateTourokuPanel {
                 div.getKyufuJissekiGaitoshaListPanel().getDgHihokenshaSearchGaitosha().getActiveRow().getTxtHiHoekNo());
         LockingKey key = new LockingKey(前排他キー);
         if (!RealInitialLocker.tryGetLock(key)) {
-            responseData = ResponseData.of(div).setState(DBC1600011StateName.detail_notUpdate);
-            responseData.addValidationMessages(getValidationHandler(div).get他のユーザが使用中エラーメッセージ());
             div.getKagoMoshitatePanel().setHdn排他状態フラグ(FALSE);
+            responseData = ResponseData.of(div).setState(DBC1600011StateName.KanryoMessage);
+            responseData.addValidationMessages(getValidationHandler(div).get他のユーザが使用中エラーメッセージ());
         } else {
-            responseData = ResponseData.of(div).setState(DBC1600011StateName.detail);
             div.getKagoMoshitatePanel().setHdn排他状態フラグ(TRUE);
+            responseData = ResponseData.of(div).setState(DBC1600011StateName.detail);
         }
         return responseData;
     }
@@ -372,6 +372,7 @@ public class SaishinsaMoshitateTourokuPanel {
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                getHandler(div).clear();
                 RString 前排他キー = 排他キー.concat(div.getHdn被保険者番号());
                 RealInitialLocker.release(new LockingKey(前排他キー));
                 return ResponseData.of(div).setState(DBC1600011StateName.search);
@@ -390,6 +391,7 @@ public class SaishinsaMoshitateTourokuPanel {
      */
     public ResponseData<SaishinsaMoshitateTourokuPanelDiv> onClick_btnKanryoSearchResult(
             SaishinsaMoshitateTourokuPanelDiv div) {
+        getHandler(div).clear();
         AccessLogger.log(AccessLogType.更新, toPersonalData(
                 new ShikibetsuCode(div.getHdn識別コード()),
                 new HihokenshaNo(div.getHdn被保険者番号())));
@@ -520,7 +522,9 @@ public class SaishinsaMoshitateTourokuPanel {
             builder.setサービス種類コード(new ServiceShuruiCode(再審査申立情報.getサービス種類コード()));
             builder.setサービス項目コード(new ServiceKomokuCode(再審査申立情報.getサービス項目コード()));
             builder.set証記載保険者番号(new ShoKisaiHokenshaNo(再審査申立情報.get証記載保険者番号()));
-            builder.set国保連送付年月(new FlexibleYearMonth(再審査申立情報.get国保連送付年月()));
+            if (!RString.isNullOrEmpty(再審査申立情報.get国保連送付年月())) {
+                builder.set国保連送付年月(new FlexibleYearMonth(再審査申立情報.get国保連送付年月()));
+            }
             if (!RString.isNullOrEmpty(再審査申立情報.get備考())) {
                 builder.set備考(再審査申立情報.get備考());
             }
