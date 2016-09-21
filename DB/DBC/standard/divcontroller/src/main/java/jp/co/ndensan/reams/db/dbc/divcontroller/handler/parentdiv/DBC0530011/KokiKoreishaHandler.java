@@ -94,7 +94,7 @@ public class KokiKoreishaHandler {
         div.getHeaderPanel().getCcdAtenaInfo().setShoriType(コード);
         div.getHeaderPanel().getCcdAtenaInfo().setShinseishaJohoByShikibetsuCode(ShinseishoKanriNo.EMPTY, shikibetsuCode);
         div.getHeaderPanel().getCcdAtenaInfo().initialize();
-        div.getHeaderPanel().getCcdShikakuInfo().set被保険者番号(被保険者番号.value());
+        div.getHeaderPanel().getCcdShikakuInfo().initialize(shichosonSecurityJoho.get市町村情報().get市町村コード().value(), 被保険者番号.value());
         set資格取得事由();
         set資格喪失事由();
         set保険者番号(hokenja);
@@ -121,24 +121,17 @@ public class KokiKoreishaHandler {
             if (後期高齢者情報.get保険者適用終了日() != null && !後期高齢者情報.get保険者適用終了日().isEmpty()) {
                 div.getMeisaiPanel().getTxtHokenshaShuryoYMD().setValue(new RDate(後期高齢者情報.get保険者適用終了日().toString()));
             }
-            if (後期高齢者情報.get資格取得事由コード() != null && !後期高齢者情報.get資格取得事由コード().isEmpty()) {
+            if (後期高齢者情報.get資格取得事由コード() != null) {
                 div.getMeisaiPanel().getDdlShikakuShutokuJiyu().setSelectedKey(後期高齢者情報.get資格取得事由コード());
             }
-            if (後期高齢者情報.get資格喪失事由コード() != null && !後期高齢者情報.get資格喪失事由コード().isEmpty()) {
+            if (後期高齢者情報.get資格喪失事由コード() != null) {
                 div.getMeisaiPanel().getDdlShikakuSoshitsuJiyu().setSelectedKey(後期高齢者情報.get資格喪失事由コード());
             }
-            if (後期高齢者情報.get個人区分コード() != null && !後期高齢者情報.get個人区分コード().isEmpty()) {
+            if (後期高齢者情報.get個人区分コード() != null) {
                 div.getMeisaiPanel().getDdlKojinKubunCode().setSelectedKey(後期高齢者情報.get個人区分コード());
             }
         }
-        if (!DbBusinessConfig.get(ConfigNameDBC.国保_後期高齢ＩＦ_後期ＩＦ種類, RDate.getNowDate(), SubGyomuCode.DBC介護給付).
-                equals(コード)) {
-            div.getMeisaiPanel().getTxtHokenshaKaishiYMD().setVisible(false);
-            div.getMeisaiPanel().getTxtHokenshaShuryoYMD().setVisible(false);
-            div.getMeisaiPanel().getDdlShikakuShutokuJiyu().setVisible(false);
-            div.getMeisaiPanel().getDdlShikakuSoshitsuJiyu().setVisible(false);
-            div.getMeisaiPanel().getDdlKojinKubunCode().setVisible(false);
-        }
+        setVisible();
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), 被保険者番号.value());
         AccessLogger.log(AccessLogType.照会, PersonalData.of(shikibetsuCode, expandedInfo));
     }
@@ -155,6 +148,7 @@ public class KokiKoreishaHandler {
 
     private void set資格取得事由() {
         List<KeyValueDataSource> dataSources = new ArrayList<>();
+        dataSources.add(new KeyValueDataSource(new RString("EMPTY"), RString.EMPTY));
         for (ShikakuShutokuJiyu code : ShikakuShutokuJiyu.values()) {
             dataSources.add(get資格取得事由(code));
         }
@@ -173,6 +167,7 @@ public class KokiKoreishaHandler {
 
     private void set資格喪失事由() {
         List<KeyValueDataSource> dataSources = new ArrayList<>();
+        dataSources.add(new KeyValueDataSource(new RString("EMPTY"), RString.EMPTY));
         for (ShikakuSoshitsuJiyu code : ShikakuSoshitsuJiyu.values()) {
             dataSources.add(get資格喪失事由(code));
         }
@@ -185,5 +180,16 @@ public class KokiKoreishaHandler {
 
     private KeyValueDataSource get資格喪失事由(ShikakuSoshitsuJiyu 資格喪失事由) {
         return new KeyValueDataSource(資格喪失事由.getコード(), 資格喪失事由.get名称());
+    }
+
+    private void setVisible() {
+        if (!DbBusinessConfig.get(ConfigNameDBC.国保_後期高齢ＩＦ_後期ＩＦ種類, RDate.getNowDate(), SubGyomuCode.DBC介護給付).
+                equals(コード)) {
+            div.getMeisaiPanel().getTxtHokenshaKaishiYMD().setVisible(false);
+            div.getMeisaiPanel().getTxtHokenshaShuryoYMD().setVisible(false);
+            div.getMeisaiPanel().getDdlShikakuShutokuJiyu().setVisible(false);
+            div.getMeisaiPanel().getDdlShikakuSoshitsuJiyu().setVisible(false);
+            div.getMeisaiPanel().getDdlKojinKubunCode().setVisible(false);
+        }
     }
 }
