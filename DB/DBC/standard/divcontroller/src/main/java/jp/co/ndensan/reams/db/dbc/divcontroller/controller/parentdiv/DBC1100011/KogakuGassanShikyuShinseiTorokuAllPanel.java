@@ -63,7 +63,9 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
     private static final RString RSTRING_THREE = new RString("3");
     private static final RString 排他情報 = new RString("DBCHihokenshaNo");
     private static final RString 申請情報を保存する = new RString("btnSaveHenkoTorisage");
+    private static final int INT_6 = 6;
     private static final RString 完了メッセージ = new RString("高額合算支給申請情報の登録が完了しました。");
+    private static final RString 支給申請書整理番号 = new RString("支給申請書整理番号：");
 
     /**
      * 画面の初期化メソッドです。
@@ -529,19 +531,19 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
             画面項目.set申請年月日(rDateToFixibleDate(div.getTxtShinseiYMD().getValue()));
             画面項目.set支給申請書整理番号_追加用(div.getTxtKaigoShikyuShinseishoSeiriBango1().getValue()
                     .concat(div.getTxtKaigoShikyuShinseishoSeiriBango2().getValue())
-                    .concat(div.getTxtKaigoShikyuShinseishoSeiriBango3().getValue()));
+                    .concat(div.getTxtKaigoShikyuShinseishoSeiriBango3().getValue()).padZeroToLeft(INT_6));
             画面項目.set支給申請書整理番号_更新用(RString.EMPTY.concat(div.getTxtKaigoShikyuShinseishoSeiriBango1().getValue())
                     .concat(div.getTxtKaigoShikyuShinseishoSeiriBango2().getValue())
-                    .concat(div.getTxtKaigoShikyuShinseishoSeiriBango3().getValue())
-                    .concat(div.getTxtKaigoShikyuShinseishoSeiriBango4().getValue()));
+                    .concat(div.getTxtKaigoShikyuShinseishoSeiriBango3().getValue().padZeroToLeft(INT_6))
+                    .concat(div.getTxtKaigoShikyuShinseishoSeiriBango4().getValue().padZeroToLeft(INT_6)));
             画面項目.set国保支給申請書整理番号(RString.isNullOrEmpty(div.getTxtIryoShikyuShinseishoSeiriBango2().getValue())
                     && RString.isNullOrEmpty(div.getTxtIryoShikyuShinseishoSeiriBango3().getValue())
                     && RString.isNullOrEmpty(div.getTxtIryoShikyuShinseishoSeiriBango4().getValue())
                     ? RString.EMPTY
                     : RString.EMPTY.concat(div.getTxtIryoShikyuShinseishoSeiriBango1().getValue())
                     .concat(div.getTxtIryoShikyuShinseishoSeiriBango2().getValue())
-                    .concat(div.getTxtIryoShikyuShinseishoSeiriBango3().getValue())
-                    .concat(div.getTxtIryoShikyuShinseishoSeiriBango4().getValue()));
+                    .concat(div.getTxtIryoShikyuShinseishoSeiriBango3().getValue().padZeroToLeft(INT_6))
+                    .concat(div.getTxtIryoShikyuShinseishoSeiriBango4().getValue().padZeroToLeft(INT_6)));
             画面項目.set支給申請形態(div.getDdlShikyuShinseiKeitai().getSelectedKey());
             画面項目.set自己負担額証明書交付申請の有無(Collections.EMPTY_LIST.equals(div.getChkKofuShinseiUmu().getSelectedKeys()) ? RSTRING_ONE : RSTRING_TWO);
             RString 整理番号New = bussiness.getKogakuGassanShikyuShinseishoTorokuKoshin(高額合算申請書保持, 画面項目);
@@ -554,15 +556,15 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
             if (DBC1100011StateName.申請登録.getName().equals(ResponseHolder.getState())) {
                 messageTaisho1 = RString.EMPTY.concat(div.getTxtKaigoShikyuShinseishoSeiriBango1().getValue())
                         .concat(div.getTxtKaigoShikyuShinseishoSeiriBango2().getValue())
-                        .concat(div.getTxtKaigoShikyuShinseishoSeiriBango3().getValue())
+                        .concat(div.getTxtKaigoShikyuShinseishoSeiriBango3().getValue().padZeroToLeft(INT_6))
                         .concat(整理番号New);
             } else {
                 messageTaisho1 = RString.EMPTY.concat(div.getTxtKaigoShikyuShinseishoSeiriBango1().getValue())
                         .concat(div.getTxtKaigoShikyuShinseishoSeiriBango2().getValue())
-                        .concat(div.getTxtKaigoShikyuShinseishoSeiriBango3().getValue())
-                        .concat(div.getTxtKaigoShikyuShinseishoSeiriBango4().getValue());
+                        .concat(div.getTxtKaigoShikyuShinseishoSeiriBango3().getValue().padZeroToLeft(INT_6))
+                        .concat(div.getTxtKaigoShikyuShinseishoSeiriBango4().getValue().padZeroToLeft(INT_6));
             }
-            div.getCcdKanryoMessage().setSuccessMessage(完了メッセージ, messageTaisho1, RString.EMPTY);
+            div.getCcdKanryoMessage().setSuccessMessage(完了メッセージ, 支給申請書整理番号.concat(messageTaisho1), RString.EMPTY);
             return ResponseData.of(div).setState(DBC1100011StateName.処理完了);
         }
         return ResponseData.of(div).respond();
