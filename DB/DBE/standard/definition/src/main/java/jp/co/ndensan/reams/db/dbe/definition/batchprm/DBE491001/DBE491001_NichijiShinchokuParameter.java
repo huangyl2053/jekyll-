@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.definition.batchprm.shinchokudataoutput;
+package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE491001;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shinchokudataoutput.ShinchokuDataOutputProcessParamter;
@@ -21,7 +21,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
 @Setter
-public class ShinchokuDataOutputBatchParamter extends BatchParameterBase {
+public class DBE491001_NichijiShinchokuParameter extends BatchParameterBase {
 
     private static final String SHINSEISHOLANRINOLIST = "shinseishoKanriNoList";
     private static final String FAYIRUKUBEN = "fayirukuben";
@@ -33,7 +33,7 @@ public class ShinchokuDataOutputBatchParamter extends BatchParameterBase {
     /**
      * コンストラクタです。
      */
-    public ShinchokuDataOutputBatchParamter() {
+    public DBE491001_NichijiShinchokuParameter() {
     }
 
     /**
@@ -43,7 +43,7 @@ public class ShinchokuDataOutputBatchParamter extends BatchParameterBase {
      * @param ファイル区分 RString
      * @throws NullPointerException 引数のいずれかが{@code null}の場合
      */
-    public ShinchokuDataOutputBatchParamter(
+    public DBE491001_NichijiShinchokuParameter(
             List<RString> 申請書管理番号リスト,
             RString ファイル区分) {
         this.shinseishoKanriNoList = 申請書管理番号リスト;

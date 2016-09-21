@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE4910001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.youkaigoninteishinchokujouhou.YouKaigoNinteiShinchokuJohouBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.shinchokudataoutput.ShinchokuDataOutputBatchParamter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE491001.DBE491001_NichijiShinchokuParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.youkaigoninteishinchokujouhou.YouKaigoNinteiShinchokuJohouParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4910001.ShinchokuDataOutputDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4910001.dgShinchokuIchiran_Row;
@@ -191,8 +191,8 @@ public class ShinchokuDataOutputHandler {
      * @param div HomonChosaItakuNyuryokuDiv
      * @return ShinchokuDataOutputBatchParamter
      */
-    public ShinchokuDataOutputBatchParamter setBatchParamter(ShinchokuDataOutputDiv div) {
-        ShinchokuDataOutputBatchParamter batchparamter = new ShinchokuDataOutputBatchParamter();
+    public DBE491001_NichijiShinchokuParameter setBatchParamter(ShinchokuDataOutputDiv div) {
+        DBE491001_NichijiShinchokuParameter batchparamter = new DBE491001_NichijiShinchokuParameter();
         List<dgShinchokuIchiran_Row> rowList = div.getDgShinchokuIchiran().getSelectedItems();
         List<RString> shinseishoKanriNo = new ArrayList<>();
         for (dgShinchokuIchiran_Row row : rowList) {
