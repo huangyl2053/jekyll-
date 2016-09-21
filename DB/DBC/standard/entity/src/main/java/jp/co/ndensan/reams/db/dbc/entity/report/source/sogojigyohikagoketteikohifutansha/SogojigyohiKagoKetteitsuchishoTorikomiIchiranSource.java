@@ -62,7 +62,6 @@ public class SogojigyohiKagoKetteitsuchishoTorikomiIchiranSource implements IRep
     public RString listUpper_9;
     @ReportItem(name = "listLower_1", length = 18, order = 24)
     public RString listLower_1;
-    @ReportPerson(id = "A")
     @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listLower_2", length = 10, order = 25)
     public RString listLower_2;
@@ -86,6 +85,9 @@ public class SogojigyohiKagoKetteitsuchishoTorikomiIchiranSource implements IRep
     public RString sogojigyohiTanisu;
     @ReportItem(name = "sogojigyohiFutangaku", length = 17, order = 35)
     public RString sogojigyohiFutangaku;
+    @ReportPerson(id = "A")
+    @ReportItem(name = "shikibetsuCode", length = 36)
+    public RString shikibetsuCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
