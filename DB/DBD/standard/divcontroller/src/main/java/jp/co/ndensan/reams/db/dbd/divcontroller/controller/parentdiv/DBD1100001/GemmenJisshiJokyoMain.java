@@ -69,7 +69,7 @@ public class GemmenJisshiJokyoMain {
      * @return ResponseData<BatchParameterMap>
      */
     public ResponseData<BatchParameterMap> onClick_btnBatchParameterSave(GemmenJisshiJokyoMainDiv div) {
-        //TODO 待条件保存和条件复原功能理清后调整修改
+        //TODO
         ResponseData<BatchParameterMap> responseData = new ResponseData<>();
         responseData.data = new BatchParameterMap(getHandler(div).onClick_btnBatchParameterSave());
         return responseData;
@@ -82,7 +82,7 @@ public class GemmenJisshiJokyoMain {
      * @return ResponseData<GemmenJisshiJokyoMainDiv>
      */
     public ResponseData<GemmenJisshiJokyoMainDiv> onClick_btnBatchParameterRestore(GemmenJisshiJokyoMainDiv div) {
-        //TODO 待条件保存和条件复原功能理清后调整修改
+        //TODO
         getHandler(div).onClick_btnBatchParameterRestore();
         return ResponseData.of(div).respond();
     }
@@ -94,7 +94,7 @@ public class GemmenJisshiJokyoMain {
      * @return ResponseData<DBD104010_JukyushaGemmenJisshiJokyoParameter>
      */
     public ResponseData<DBD104010_JukyushaGemmenJisshiJokyoParameter> onClickCheck_btnBatchRegister(GemmenJisshiJokyoMainDiv div) {
-        //TODO DBD104010_JukyushaGemmenJisshiJokyoParameter这只是个临时的类，等相关バッチ完成后调整
+        //TODO DBD104010_JukyushaGemmenJisshiJokyoParameter
         DBD104010_JukyushaGemmenJisshiJokyoParameter parameter = getHandler(div).onClick_btnBatchParameterSave();
         return ResponseData.of(parameter).respond();
     }

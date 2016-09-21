@@ -6,9 +6,8 @@
 
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1100001;
 
-import java.util.ArrayList;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD104010.DBD104010_JukyushaGemmenJisshiJokyoParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.JukyushaGenmenJissijokyo.NinteijokyohyoKijyunbiKubun;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1100001.GemmenJisshiJokyoMainDiv;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
@@ -17,7 +16,6 @@ import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.NendoUtil;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
@@ -74,24 +72,21 @@ public class GemmenJisshiJokyoMainHandler {
     }
     
     /**
-     * 「条件を保存する」ボタンを押下時、バッチパラメータを保存します。
+     * 「条件を保存する」ボタンを押下時、バッチパラメータを保存します。//TODO
      * @return parameter
      */
     public DBD104010_JukyushaGemmenJisshiJokyoParameter onClick_btnBatchParameterSave(){
         DBD104010_JukyushaGemmenJisshiJokyoParameter parameter = new DBD104010_JukyushaGemmenJisshiJokyoParameter();
-        //暂时这样写，等QA回复后再改正，不要上传相关代码，--------------完善时需删除该注释-------开始-------
         parameter.set出力帳票(div.getGemmenJisshiJokyoJoken().getRadShutsuryokuChohyo().getSelectedKey());
-        //暂时这样写，等QA回复后再改正，不要上传相关代码，--------------完善时需删除该注释-------结束-------
         parameter.set対象年度(new FlexibleYear(div.getGemmenJisshiJokyoJoken().getTxtTaishoNendo().getDomain().toDateString()));
-        //暂时这样写，等QA回复后再改正，不要上传相关代码，--------------完善时需删除该注释-------开始-------
         if("1".equals(div.getGemmenJisshiJokyoJoken().getRadShutsuryokuChohyo().getSelectedKey().toString())){
             parameter.set基準日区分(new RString("0"));
         }else{
             RString key = div.getGemmenJisshiJokyoJoken().getRadKijunBi().getSelectedKey();
             if(null != key && "1".equals(key.toString())){
-                parameter.set基準日区分(new RString("1"));
+                parameter.set基準日区分(NinteijokyohyoKijyunbiKubun.基準日.getコード());
             }else{
-                parameter.set基準日区分(new RString("2"));
+                parameter.set基準日区分(NinteijokyohyoKijyunbiKubun.基準年月.getコード());
             }
         }
         if("1".equals(div.getGemmenJisshiJokyoJoken().getRadShutsuryokuChohyo().getSelectedKey().toString())){
@@ -104,7 +99,6 @@ public class GemmenJisshiJokyoMainHandler {
                 parameter.set基準日(new RString("00"));
             }
         }
-        //暂时这样写，等QA回复后再改正，不要上传相关代码，--------------完善时需删除该注释-------结束-------
         if("1".equals(div.getGemmenJisshiJokyoJoken().getRadShutsuryokuChohyo().getSelectedKey().toString())){
             parameter.set帳票ID(new ReportId("DBD300001_JukyushaGemmenTsukibetsuShinseiNinteiJokyohyoCover"));
         }else{
