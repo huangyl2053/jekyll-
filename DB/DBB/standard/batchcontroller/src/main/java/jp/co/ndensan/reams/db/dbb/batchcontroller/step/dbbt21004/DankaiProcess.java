@@ -341,7 +341,8 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
         for (int j = i + ONE; j <= TWE; j++) {
             if (null != 月別保険料制御情報Map.get(j)
                     && null != 月別保険料制御情報Map.get(j).get段階区分()
-                    && RString.EMPTY != 月別保険料制御情報Map.get(j).get段階区分()) {
+                    && RString.EMPTY != 月別保険料制御情報Map.get(j).get段階区分()
+                    && 月別保険料制御情報Map.get(i).get段階区分() != 月別保険料制御情報Map.get(j).get段階区分()) {
                 hokenshaDankaiTemp.set保険者設定段階2(月別保険料制御情報Map.get(j).get段階区分());
                 break;
             }
@@ -354,14 +355,15 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
             if (null != 月別保険料制御情報Map.get(k)
                     && null != 月別保険料制御情報Map.get(k).get段階区分()
                     && RString.EMPTY != 月別保険料制御情報Map.get(k).get段階区分()) {
-                hyojunDankaiTemp.set標準設定段階1(月別保険料制御情報Map.get(i).get段階区分());
+                hyojunDankaiTemp.set標準設定段階1(月別保険料制御情報Map.get(k).get段階区分());
                 break;
             }
         }
         for (int l = k + ONE; l <= TWE; l++) {
             if (null != 月別保険料制御情報Map.get(l)
                     && null != 月別保険料制御情報Map.get(l).get段階区分()
-                    && RString.EMPTY != 月別保険料制御情報Map.get(l).get段階区分()) {
+                    && RString.EMPTY != 月別保険料制御情報Map.get(l).get段階区分()
+                    && 月別保険料制御情報Map.get(k).get段階区分() != 月別保険料制御情報Map.get(l).get段階区分()) {
                 hyojunDankaiTemp.set標準設定段階2(月別保険料制御情報Map.get(l).get段階区分());
                 break;
             }
