@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110040;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.DbWT1002KokuhorenSakuseiErrorTempEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakuservicehihanteikekkaout.DbWT3411KogakuShikyuShinseiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakuservicehihanteikekkaout.KogakuServicehiHanteiGetHokenshaNoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -26,11 +26,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  *
  * @reamsid_L DBC-2610-030 liuhui
  */
-public class KogakuServicehiHanteiGetHokenshaNoProcess extends BatchProcessBase<DbWT3411KogakuShikyuShinseiEntity> {
+public class KogakuServicehiHanteiGetHokenshaNoProcess extends BatchProcessBase<KogakuServicehiHanteiGetHokenshaNoEntity> {
 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "kogakuservicehihanteikekkaout.IKogakuServicehiHanteikekkaOutJohoMapper.select保険者番号取得関連リスト");
     private List<RString> hokenshaNoList;
+    private List<Integer> レコード件数List;
     private static final RString エラー区分_名称取得エラー = new RString("01");
     @BatchWriter
     private IBatchTableWriter 処理結果リスト一時tableWriter;
@@ -39,16 +40,24 @@ public class KogakuServicehiHanteiGetHokenshaNoProcess extends BatchProcessBase<
      * エントリ情報Listです。
      */
     public static final RString PARAMETER_OUT_OUTPUTENTRY;
+    /**
+     * レコード件数です。
+     */
+    public static final RString PARAMETER_OUT_OUTPUTCOUNT;
 
     static {
         PARAMETER_OUT_OUTPUTENTRY = new RString("outputEntry");
+        PARAMETER_OUT_OUTPUTCOUNT = new RString("outputCount");
     }
     private OutputParameter<List> outputEntry;
+    private OutputParameter<List> outputCount;
 
     @Override
     protected void initialize() {
         outputEntry = new OutputParameter<>();
+        outputCount = new OutputParameter<>();
         hokenshaNoList = new ArrayList<>();
+        レコード件数List = new ArrayList<>();
     }
 
     @Override
@@ -64,13 +73,15 @@ public class KogakuServicehiHanteiGetHokenshaNoProcess extends BatchProcessBase<
     }
 
     @Override
-    protected void process(DbWT3411KogakuShikyuShinseiEntity entity) {
-        hokenshaNoList.add(entity.getHokenshaNo().getColumnValue());
+    protected void process(KogakuServicehiHanteiGetHokenshaNoEntity entity) {
+        hokenshaNoList.add(entity.get保険者番号().getColumnValue());
+        レコード件数List.add(entity.getレコード件数());
     }
 
     @Override
     protected void afterExecute() {
         outputEntry.setValue(hokenshaNoList);
+        outputCount.setValue(レコード件数List);
         if (hokenshaNoList.isEmpty()) {
             DbWT1002KokuhorenSakuseiErrorTempEntity 処理結果 = new DbWT1002KokuhorenSakuseiErrorTempEntity();
             処理結果.setErrorKubun(エラー区分_名称取得エラー);

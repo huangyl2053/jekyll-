@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidokanendoikkatsuhakko;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidogennen.ChohyoResult;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB051001.ChohyoResult;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;

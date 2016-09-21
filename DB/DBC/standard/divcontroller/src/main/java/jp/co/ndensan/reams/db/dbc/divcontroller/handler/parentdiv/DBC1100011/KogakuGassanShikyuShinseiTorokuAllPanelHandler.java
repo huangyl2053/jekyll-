@@ -701,7 +701,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
             row.setTxtJikoFutanKeisanYM(高額合算申請書.get自己負担額計算年月() == null
                     ? null : 高額合算申請書.get自己負担額計算年月().toDateString());
             row.setTxtKokiHihokenshaNo(高額合算申請書.get後期被保険者番号());
-            row.setTxtKokuhoHihokenshashoNo(高額合算申請書.get国保保険者番号());
+            row.setTxtKokuhoHihokenshashoNo(高額合算申請書.get国保被保険者証番号());
             row.setTxtSaiKeisanKubun(高額合算申請書.get再計算区分());
             row.setTxtSaiSofuFlag(高額合算申請書.get再送フラグ());
             row.setTxtShikyuShinseishoSofuYM(高額合算申請書.get支給申請書情報送付年月() == null

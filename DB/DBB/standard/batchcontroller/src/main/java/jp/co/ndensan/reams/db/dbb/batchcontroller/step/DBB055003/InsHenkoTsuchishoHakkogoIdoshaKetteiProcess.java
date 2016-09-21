@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB055003;
 
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidogennen.ChohyoResult;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB051001.ChohyoResult;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.honsanteiidokanendofuka.KanendoHonsanteifukaProcessParameter;
 import jp.co.ndensan.reams.db.dbb.service.core.honsanteiidokanendotsuchishoikkatsuhakko.HonsanteiIdoKanendoTsuchishoIkkatsuHakko;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;

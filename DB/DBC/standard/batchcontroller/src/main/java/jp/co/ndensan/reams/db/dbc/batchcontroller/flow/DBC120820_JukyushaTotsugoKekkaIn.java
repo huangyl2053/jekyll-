@@ -6,15 +6,15 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import java.io.File;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120820.JukyushaTotsugoKekkaDoIchiranhyoSakuseiProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120820.JukyushaTotsugoKekkaReadCsvFileProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120820.JukyushaTotsugoKekkaDoIchiranhyoSakuseiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120820.JukyushaTotsugoKekkaReadCsvFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDeleteReveicedFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoHihokenshaKanrenProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoInterfaceKanriKousinProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoShoriKekkaListSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuGetFileProcess;
 import jp.co.ndensan.reams.db.dbc.business.core.kokuhorenkyoutsuu.KokuhorenKyoutsuuFileGetReturnEntity;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120820.DBC120820_JukyushaTotsugoKekkaInBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120820.DBC120820_JukyushaTotsugoKekkaInParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorListType;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.jukyushatotsugokekkain.JukyushaTotsugoKekkaReadCsvFileProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kagoketteikohifutanshain.KohifutanshaDoIchiranhyoSakuseiProcessParameter;
@@ -40,7 +40,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-2760-010 jianglaisheng
  */
-public class DBC120820_JukyushaTotsugoKekkaIn extends BatchFlowBase<DBC120820_JukyushaTotsugoKekkaInBatchParameter> {
+public class DBC120820_JukyushaTotsugoKekkaIn extends BatchFlowBase<DBC120820_JukyushaTotsugoKekkaInParameter> {
 
     private static final String ファイル取得 = "getFile";
     private static final String CSVファイル取込 = "readCsvFile";
