@@ -75,6 +75,7 @@ public class KogakuGassanShikyuShinseiToroku {
     private static final RString 単一市町村モード = new RString("単一市町村モード");
     private static final RString 広域市町村モード = new RString("広域市町村モード");
     private static final int INT_6 = 6;
+    private static final int INT_2 = 2;
 
     /**
      * コンストラクタです。
@@ -255,7 +256,7 @@ public class KogakuGassanShikyuShinseiToroku {
                     entity.setTaishoNendo(画面項目.get対象年度());
                     entity.setSeiriNo(整理番号New);
                     RString 加入履歴番号 = getMaxKanyuRirekiNo(entity);
-                    entity.setKanyurekiNo(new RString(Integer.parseInt(加入履歴番号.toString()) + 1));
+                    entity.setKanyurekiNo(new RString(Integer.parseInt(加入履歴番号.toString()) + 1).padZeroToLeft(INT_2));
                     entity.setState(EntityDataState.Added);
                     高額合算申請書加入歴Dac.save(entity);
                 } else if (修正.equals(item.get状態())) {
@@ -266,7 +267,7 @@ public class KogakuGassanShikyuShinseiToroku {
                     entity.setTaishoNendo(高額合算申請書保持.get対象年度());
                     entity.setHokenshaNo(高額合算申請書保持.get保険者番号());
                     entity.setRirekiNo(高額合算申請書保持.get履歴番号().intValue());
-                    entity.setKanyurekiNo(new RString(Integer.parseInt(加入履歴番号.toString()) + 1));
+                    entity.setKanyurekiNo(new RString(Integer.parseInt(加入履歴番号.toString()) + 1).padZeroToLeft(INT_2));
                     entity.setState(EntityDataState.Added);
                     高額合算申請書加入歴Dac.save(entity);
                 } else if (削除.equals(item.get状態())) {

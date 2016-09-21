@@ -336,11 +336,11 @@ public enum KogakuGassanShikyuShinseiTorokuSpec implements IPredicate<KogakuGass
             if (申請対象年度 == INT_2008) {
                 RDate 計算期間FROM = new RDate(new RString(INT_2008).concat(DATE_0401).toString());
                 RDate 計算期間TO = new RDate(new RString(INT_2008 + INT_1).concat(DATE_0731).toString());
-                return 計算期間FROM.compareTo(開始計算期間) <= INT_0 && 計算期間TO.compareTo(終了計算期間) <= INT_0;
+                return 計算期間FROM.compareTo(開始計算期間) <= INT_0 && 終了計算期間.compareTo(計算期間TO) <= INT_0;
             } else if (INT_2008 < 申請対象年度) {
                 RDate 計算期間FROM = new RDate(new RString(申請対象年度).concat(DATE_0801).toString());
                 RDate 計算期間TO = new RDate(new RString(申請対象年度 + INT_1).concat(DATE_0731).toString());
-                return 計算期間FROM.compareTo(開始計算期間) <= INT_0 && 計算期間TO.compareTo(終了計算期間) <= INT_0;
+                return 計算期間FROM.compareTo(開始計算期間) <= INT_0 && 終了計算期間.compareTo(計算期間TO) <= INT_0;
             }
             return true;
         }
@@ -366,7 +366,7 @@ public enum KogakuGassanShikyuShinseiTorokuSpec implements IPredicate<KogakuGass
         public static boolean is資格喪失チェック2(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
             RDate 資格喪失日 = div.getTxtShikakuSoshitsuYMD().getValue();
             boolean flg1 = 資格喪失日 != null && !RString.isNullOrEmpty(資格喪失日.toDateString());
-            boolean flg2 = div.getDdlShikakuSoshitsuJiyu().getSelectedIndex() == 0;
+            boolean flg2 = div.getDdlShikakuSoshitsuJiyu().getSelectedIndex() == INT_0;
             return !(flg1 && flg2);
         }
 
