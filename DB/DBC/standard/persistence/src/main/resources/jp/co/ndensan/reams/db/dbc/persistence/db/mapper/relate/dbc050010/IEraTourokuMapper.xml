@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--@reamsid_L DBC-5010-030 donghj-->
+
+
+
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc050010.IEraTourokuMapper">
+    <resultMap id="resultMap_EraTourokuEntity" autoMapping="true" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.EraTourokuEntity">
+        <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+    </resultMap>  
+    
+    <select id="エラー登録" resultOrdered="true"  resultMap="resultMap_EraTourokuEntity" fetchSize="500" >
+        
+        SELECT
+            DISTINCT 振込明細一時TBL."hihokenshaNo"
+        FROM
+            "DbWT0510FurikomiMeisai" AS 振込明細一時TBL
+        WHERE
+            振込明細一時TBL."shikibetsuCode" = ''
+        
+    </select>
+    
+</mapper>
