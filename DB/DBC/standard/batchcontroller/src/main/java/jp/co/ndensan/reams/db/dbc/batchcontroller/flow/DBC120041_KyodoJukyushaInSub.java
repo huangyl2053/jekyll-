@@ -89,7 +89,6 @@ public class DBC120041_KyodoJukyushaInSub extends BatchFlowBase<DBC120041_KyodoJ
             } catch (Exception e) {
                 throw new BatchInterruptedException(e.getMessage());
             }
-            getResult(RString.class, new RString(一時TBL基本情報_5C3作成), CreateTmptable5C3Process.処理対象年月);
         }
         executeStep(一時TBLの登録);
     }
