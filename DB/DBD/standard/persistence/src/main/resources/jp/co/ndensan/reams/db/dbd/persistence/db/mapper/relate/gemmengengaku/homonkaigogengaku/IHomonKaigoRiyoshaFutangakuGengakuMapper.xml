@@ -45,9 +45,9 @@
         ON A."dbT4016HomonKaigoRiyoshaFutangakuGengaku_hihokenshaNo" = B."dbT4010GemmenGengakuShinsei_hihokenshaNo"
         AND A."dbT4016HomonKaigoRiyoshaFutangakuGengaku_shoKisaiHokenshaNo" = B."dbT4010GemmenGengakuShinsei_shoKisaiHokenshaNo"
         AND A."dbT4016HomonKaigoRiyoshaFutangakuGengaku_rirekiNo" = B."dbT4010GemmenGengakuShinsei_shinseiRirekiNo"
+        AND (B."dbT4010GemmenGengakuShinsei_gemmenGengakuShurui" = '05' OR B."dbT4010GemmenGengakuShinsei_gemmenGengakuShurui" IS NULL)
         WHERE
-        (B."dbT4010GemmenGengakuShinsei_gemmenGengakuShurui" = '05' OR B."dbT4010GemmenGengakuShinsei_gemmenGengakuShurui" IS NULL)
-        AND A."dbT4016HomonKaigoRiyoshaFutangakuGengaku_hihokenshaNo" = #{被保険者番号}
+         A."dbT4016HomonKaigoRiyoshaFutangakuGengaku_hihokenshaNo" = #{被保険者番号}
         ORDER BY A."dbT4016HomonKaigoRiyoshaFutangakuGengaku_shinseiYMD" DESC
     </select>
 
@@ -71,8 +71,8 @@
     </select>
     
     <resultMap id="resultMap_HomonKaigoRiyoshaFutangakuGengakuEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmengengaku.homonkaigogengaku.HomonKaigoRiyoshaFutangakuGengakuEntity" autoMapping="true">
-        <id property="訪問介護利用者負担額減額Entity.hihokenshaNo" column="dbT4020TokubetsuchiikiKasanGemmen_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <id property="訪問介護利用者負担額減額Entity.rirekiNo" column="dbT4020TokubetsuchiikiKasanGemmen_rirekiNo" />
+        <id property="訪問介護利用者負担額減額Entity.hihokenshaNo" column="dbT4016HomonKaigoRiyoshaFutangakuGengaku_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="訪問介護利用者負担額減額Entity.rirekiNo" column="dbT4016HomonKaigoRiyoshaFutangakuGengaku_rirekiNo" />
         <association property="訪問介護利用者負担額減額Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4016HomonKaigoRiyoshaFutangakuGengakuMapper.ResultMap_DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity"/>
         <collection property="減免減額申請Entity" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.ResultMap_DbT4010GemmenGengakuShinseiEntity"/>
     </resultMap>

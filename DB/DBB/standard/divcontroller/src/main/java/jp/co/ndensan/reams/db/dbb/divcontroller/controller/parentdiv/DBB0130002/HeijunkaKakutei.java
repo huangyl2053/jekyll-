@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0130002;
 
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunkakakutei.TokuchoHeijunkaKakuteiBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012002.DBB012002_TokuchoHeinjunkaKakuteiParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0130002.DBB0130002StateName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0130002.HeijunkaKakuteiDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB0130002.HeijunkaKakuteiHandler;
@@ -78,9 +78,9 @@ public class HeijunkaKakutei {
      * @param div HeijunkaKakuteiDiv
      * @return ResponseData
      */
-    public ResponseData<TokuchoHeijunkaKakuteiBatchParameter> onClick_btnKakuteiBatch(HeijunkaKakuteiDiv div) {
+    public ResponseData<DBB012002_TokuchoHeinjunkaKakuteiParameter> onClick_btnKakuteiBatch(HeijunkaKakuteiDiv div) {
         ShoriDateKanri 処理日付管理 = ViewStateHolder.get(ViewStateKeys.処理日付管理, ShoriDateKanri.class);
-        TokuchoHeijunkaKakuteiBatchParameter parameter = getHandler(div).creatParameter(処理日付管理.get基準日時());
+        DBB012002_TokuchoHeinjunkaKakuteiParameter parameter = getHandler(div).creatParameter(処理日付管理.get基準日時());
         return ResponseData.of(parameter).respond();
     }
 

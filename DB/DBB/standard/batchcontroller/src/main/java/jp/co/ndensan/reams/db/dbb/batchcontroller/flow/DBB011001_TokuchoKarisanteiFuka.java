@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.dbb011001;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011001.CreateFukaJohoJuneProcess;
@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011001.SelectKarisatei
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011001.SelectShikakuFuseigoDataProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011001.SpoolTokuchoKarisanteiKekkaIchiranProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchokarisanteifuka.ShuturyokuTyoutuke;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchokarisanteifuka.TokuchoKarisanteiFukaBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB011001.DBB011001_TokuchoKarisanteiFukaParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBB-0700-010 xuhao
  */
-public class DBB011001_TokuchoKarisanteiFukaFlow extends BatchFlowBase<TokuchoKarisanteiFukaBatchParameter> {
+public class DBB011001_TokuchoKarisanteiFuka extends BatchFlowBase<DBB011001_TokuchoKarisanteiFukaParameter> {
 
     private static final String 特徴仮算定対象抽出 = "selectKarisateiTaishoProcess";
     private static final String 資格不整合データ抽出 = "selectShikakuFuseigoData";

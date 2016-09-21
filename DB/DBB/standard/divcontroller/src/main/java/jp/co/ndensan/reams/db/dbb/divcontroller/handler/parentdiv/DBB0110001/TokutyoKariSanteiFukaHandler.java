@@ -13,8 +13,8 @@ import jp.co.ndensan.reams.db.dbb.business.core.basic.tokuchokarisanteifuka.Toku
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai;
 import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchokarisanteifuka.ShuturyokuTyoutuke;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchokarisanteifuka.TokuchoKarisanteiFukaBatchParameter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchokarisanteitsuchishohakko.TokuchoKaishiTsuchishoBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB011001.DBB011001_TokuchoKarisanteiFukaParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB011003.DBB011003_TokuchoKarisanteiTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoIraikingakuKeisanHoho6Gatsu;
 import jp.co.ndensan.reams.db.dbb.definition.core.tokucho.TokuchoNengakuKijunNendo6Gatsu;
 import jp.co.ndensan.reams.db.dbb.definition.core.tsuchisho.TokuchoKaishiTsuhishoKariOutputJoken;
@@ -114,7 +114,7 @@ public final class TokutyoKariSanteiFukaHandler {
             for (HokenryoDankai hokenryodankai : 保険料段階List.asList()) {
                 dgKanrijoho1_Row newRow = new dgKanrijoho1_Row();
                 newRow.setTxtHokenryoDankai(hokenryodankai.get表記());
-                newRow.setTxtHokenryoritsu(new RString(hokenryodankai.get保険料率().toString()));
+                newRow.getTxtHokenryoritsu().setValue(hokenryodankai.get保険料率());
                 保険料RowLists.add(newRow);
             }
             div.getTokutyoKariSanteiKanriInfo().getDgKanrijoho1().setDataSource(保険料RowLists);
@@ -203,7 +203,7 @@ public final class TokutyoKariSanteiFukaHandler {
      * @param div TokutyoKariSanteiFukaDiv
      * @return TokuchoKariSanteiParameter
      */
-    public TokuchoKaishiTsuchishoBatchParameter 特徴仮算定通知書一括発行BatchParam(TokutyoKariSanteiFukaDiv div) {
+    public DBB011003_TokuchoKarisanteiTsuchishoHakkoParameter 特徴仮算定通知書一括発行BatchParam(TokutyoKariSanteiFukaDiv div) {
         FukaParameter param = new FukaParameter();
         param.set出力対象(div.getTokutyoKariSanteiFukaChohyoHakko().
                 getTokutyoKariTsuchiKobetsuJoho().getRadTokuKaishiTsuchiTaisho2().getSelectedValue());
@@ -225,8 +225,8 @@ public final class TokutyoKariSanteiFukaHandler {
      * @param div TokutyoKariSanteiFukaDiv
      * @return TokuchoKariSanteiParameter
      */
-    public TokuchoKarisanteiFukaBatchParameter 特徴仮算定賦課BatchParam(TokutyoKariSanteiFukaDiv div) {
-        TokuchoKarisanteiFukaBatchParameter batchParam = new TokuchoKarisanteiFukaBatchParameter();
+    public DBB011001_TokuchoKarisanteiFukaParameter 特徴仮算定賦課BatchParam(TokutyoKariSanteiFukaDiv div) {
+        DBB011001_TokuchoKarisanteiFukaParameter batchParam = new DBB011001_TokuchoKarisanteiFukaParameter();
         batchParam.set調定年度(div.getShoriJokyo().getTokutyoKariSanteiShoriNaiyo().getTxtChoteiNendo().getDomain());
         batchParam.set賦課年度(div.getShoriJokyo().getTokutyoKariSanteiShoriNaiyo().getTxtFukaNendo().getDomain());
         FukaParameter fukaParameter = new FukaParameter();
@@ -242,7 +242,7 @@ public final class TokutyoKariSanteiFukaHandler {
             fukaParameter.set発行日(new FlexibleDate(div.getTokutyoKariSanteiFukaChohyoHakko().
                     getTokutyoKariTsuchiKobetsuJoho().getTxtTokuKaishiTsuchiHakkoYMD2().getValue().toDateString()));
         }
-        TokuchoKaishiTsuchishoBatchParameter param = tokuchokarisanteifuka
+        DBB011003_TokuchoKarisanteiTsuchishoHakkoParameter param = tokuchokarisanteifuka
                 .createTokuchoKariSanteiParameter(fukaParameter);
         List<ShuturyokuTyoutuke> 出力帳票一覧 = new ArrayList();
         for (KarisanteiBatchEntity result : param.get出力帳票一覧()) {

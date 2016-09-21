@@ -38,12 +38,14 @@ public interface IJukyushaShokaiMapper {
      * @param 履歴番号 履歴番号
      * @param 枝番 枝番
      * @param 受給申請事由 受給申請事由
+     * @param 被保険者番号 被保険者番号
      * @return 申請認定一覧情報
      */
     List<JukyuShokaiShinseiNinteiEntity> find申請認定情報(@Param("市町村コード") RString 市町村コード,
             @Param("履歴番号") RString 履歴番号,
             @Param("枝番") RString 枝番,
-            @Param("受給申請事由") RString 受給申請事由);
+            @Param("受給申請事由") RString 受給申請事由,
+            @Param("被保険者番号") RString 被保険者番号);
 
     /**
      * 被保険者番号より、利用者負担割合情報を取得します。

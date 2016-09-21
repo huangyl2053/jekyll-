@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD3010002;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Jun 21 14:12:46 CST 2016 
+ * Tue Sep 20 13:25:53 JST 2016 
  */
 
 
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
  */
 
 public class dgNinteiRireki_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
 
     private RString nintei;
     private TextBoxFlexibleDate shinseiDate;
@@ -34,6 +34,7 @@ public class dgNinteiRireki_Row extends DataRow {
     private RString rirekiNo;
     private RString edaban;
     private RString jukyuShinseiJiyu;
+    private RString hihokenshaNo;
 
     public dgNinteiRireki_Row() {
         super();
@@ -49,6 +50,7 @@ public class dgNinteiRireki_Row extends DataRow {
         this.rirekiNo = RString.EMPTY;
         this.edaban = RString.EMPTY;
         this.jukyuShinseiJiyu = RString.EMPTY;
+        this.hihokenshaNo = RString.EMPTY;
         this.setOriginalData("nintei", nintei);
         this.setOriginalData("shinseiDate", shinseiDate);
         this.setOriginalData("ninteiDate", ninteiDate);
@@ -61,9 +63,10 @@ public class dgNinteiRireki_Row extends DataRow {
         this.setOriginalData("rirekiNo", rirekiNo);
         this.setOriginalData("edaban", edaban);
         this.setOriginalData("jukyuShinseiJiyu", jukyuShinseiJiyu);
+        this.setOriginalData("hihokenshaNo", hihokenshaNo);
     }
 
-    public dgNinteiRireki_Row(RString nintei, TextBoxFlexibleDate shinseiDate, TextBoxFlexibleDate ninteiDate, RString yokaigodo, TextBoxFlexibleDate kaishiDate, TextBoxFlexibleDate shuryoDate, RString so, RString shinsakaiIken, RString shichosonCode, RString rirekiNo, RString edaban, RString jukyuShinseiJiyu) {
+    public dgNinteiRireki_Row(RString nintei, TextBoxFlexibleDate shinseiDate, TextBoxFlexibleDate ninteiDate, RString yokaigodo, TextBoxFlexibleDate kaishiDate, TextBoxFlexibleDate shuryoDate, RString so, RString shinsakaiIken, RString shichosonCode, RString rirekiNo, RString edaban, RString jukyuShinseiJiyu, RString hihokenshaNo) {
         super();
         this.setOriginalData("nintei", nintei);
         this.setOriginalData("shinseiDate", shinseiDate);
@@ -77,6 +80,7 @@ public class dgNinteiRireki_Row extends DataRow {
         this.setOriginalData("rirekiNo", rirekiNo);
         this.setOriginalData("edaban", edaban);
         this.setOriginalData("jukyuShinseiJiyu", jukyuShinseiJiyu);
+        this.setOriginalData("hihokenshaNo", hihokenshaNo);
         this.nintei = nintei;
         this.shinseiDate = shinseiDate;
         this.ninteiDate = ninteiDate;
@@ -89,6 +93,7 @@ public class dgNinteiRireki_Row extends DataRow {
         this.rirekiNo = rirekiNo;
         this.edaban = edaban;
         this.jukyuShinseiJiyu = jukyuShinseiJiyu;
+        this.hihokenshaNo = hihokenshaNo;
     }
 
     public RString getNintei() {
@@ -137,6 +142,10 @@ public class dgNinteiRireki_Row extends DataRow {
 
     public RString getJukyuShinseiJiyu() {
         return jukyuShinseiJiyu;
+    }
+
+    public RString getHihokenshaNo() {
+        return hihokenshaNo;
     }
 
     public void setNintei(RString nintei) {
@@ -197,6 +206,11 @@ public class dgNinteiRireki_Row extends DataRow {
     public void setJukyuShinseiJiyu(RString jukyuShinseiJiyu) {
         this.setOriginalData("jukyuShinseiJiyu", jukyuShinseiJiyu);
         this.jukyuShinseiJiyu = jukyuShinseiJiyu;
+    }
+
+    public void setHihokenshaNo(RString hihokenshaNo) {
+        this.setOriginalData("hihokenshaNo", hihokenshaNo);
+        this.hihokenshaNo = hihokenshaNo;
     }
 
     // </editor-fold>

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchokarisanteitsuchishohakko;
+package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB011003;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchokarisanteitsuchishohakko.KarisanteiBatchEntity;
@@ -24,7 +24,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TokuchoKaishiTsuchishoBatchParameter extends BatchParameterBase {
+public class DBB011003_TokuchoKarisanteiTsuchishoHakkoParameter extends BatchParameterBase {
 
     private static final String KEY_調定年度 = "調定年度";
     private static final String KEY_賦課年度 = "賦課年度";

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.dbbbt36002;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36002.InsKarisanteigakuHenkoTsuchishoHakkogoIdoshaProcess;
@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36002.PntKarisanteiN
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36002.PntKarisanteigakuHenkoTsuchishoProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36002.PntTokuchouKaishiTutishoKarisanteiProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36002.SystemTimeSyutokuProcess;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.karisanteiidofuka.KarisanteiIdoFukaParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB015003.DBB015003_KarisanteiIdoTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.karisanteiidofuka.TyouhyouEntity;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt36002.KarisanteiIdoFukaProcessParameter;
@@ -38,7 +38,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBB-0890-030 xicongwang
  */
-public class KarisanteiIdoTsuchishoIkkatsuHakkoFlow extends BatchFlowBase<KarisanteiIdoFukaParameter> {
+public class DBB015003_KarisanteiIdoTsuchishoHakko extends BatchFlowBase<DBB015003_KarisanteiIdoTsuchishoHakkoParameter> {
 
     private static final RString 帳票タイプ_期毎 = new RString("期毎タイプ");
     private static final RString 帳票タイプ_銀振型4 = new RString("銀振型4期タイプ");
@@ -77,7 +77,7 @@ public class KarisanteiIdoTsuchishoIkkatsuHakkoFlow extends BatchFlowBase<Karisa
     private RString バッチフロー_帳票分類ID;
     private KarisanteiIdoFukaProcessParameter processParameter;
 
-    private KarisanteiIdoFukaParameter parameter;
+    private DBB015003_KarisanteiIdoTsuchishoHakkoParameter parameter;
 
     @Override
     protected void defineFlow() {

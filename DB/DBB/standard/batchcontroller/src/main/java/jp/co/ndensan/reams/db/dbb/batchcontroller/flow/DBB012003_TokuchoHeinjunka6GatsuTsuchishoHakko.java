@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.tokuchoheijunka6tsuchishoikatsuhako;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.FukaJohoShutokuIkatsuHakoProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.tokuchoheijunka6tsuchishoikatsuhako.FukaJohoShutokuProcess;
@@ -30,7 +30,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBB-0820-030 xuyue
  */
-public class TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlow extends BatchFlowBase<DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakkoParameter> {
+public class DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakko extends BatchFlowBase<DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakkoParameter> {
 
     private static final String システム日時の取得 = "getSystemDate";
     private static final String 計算後情報作成 = "keisangoJohoSakusei";

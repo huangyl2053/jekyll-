@@ -218,6 +218,8 @@ public class JukyushaShokaiHandler {
             row.setRirekiNo(joho.get受給者台帳_履歴番号());
             row.setEdaban(joho.get受給者台帳_枝番());
             row.setJukyuShinseiJiyu(joho.get受給者台帳_受給申請事由().getColumnValue());
+            // 被保険者番号を追加
+            row.setHihokenshaNo(joho.get受給者台帳_被保険者番号());
 
             履歴番号 = joho.get受給者台帳_履歴番号();
             受給申請事由 = joho.get受給者台帳_受給申請事由().getColumnValue();
@@ -319,7 +321,7 @@ public class JukyushaShokaiHandler {
         dgNinteiRireki_Row row = div.getNinteiRireki().getDgNinteiRireki().getActiveRow();
 
         List<JukyuShokaiShinseiNinteiJoho> 申請認定情報List = service.
-                find申請認定情報(row.getShichosonCode(), row.getRirekiNo(), row.getEdaban(), row.getJukyuShinseiJiyu());
+                find申請認定情報(row.getShichosonCode(), row.getRirekiNo(), row.getEdaban(), row.getJukyuShinseiJiyu(), row.getHihokenshaNo());
         if (申請認定情報List == null || 申請認定情報List.isEmpty()) {
             return;
         }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.dbb011003;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.DbT2002FukaZennendoTempInsertProcess;
@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.KarisanteiIkkat
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.PrtTokuchoKaishiTsuchishoKarisanteiProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb011003.SystemTimeKarisanteiProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchokarisanteitsuchishohakko.TokuchoKaishiTsuchishoBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB011003.DBB011003_TokuchoKarisanteiTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchokarisanteitsuchishohakko.KarisanteiBatchEntity;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchokarisanteitsuchishohakko.TokuchoKaishiTsuchishoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBB-0790-030 chenaoqi
  */
-public class DBB011003_TokuchoKarisanteiTsuchishoHakko extends BatchFlowBase<TokuchoKaishiTsuchishoBatchParameter> {
+public class DBB011003_TokuchoKarisanteiTsuchishoHakko extends BatchFlowBase<DBB011003_TokuchoKarisanteiTsuchishoHakkoParameter> {
 
     private static final String システム日時の取得 = "getSystemDate";
     private static final String 計算後情報作成 = "keisangoJohoSakusei";

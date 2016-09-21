@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.dbb012001;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012001.HeijunkaMaeFukaTempCreatProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012001.KaigoJyouhouJyourikuProcess;
@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012001.TaisyoushaToTai
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012001.TokuchoHeinjunkaResultIchiranProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.OutputChohyoIchiran;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012001.DBB012001_TokuchoHeinjunka6GatsuParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt35001.TokuchoHeinjunka6GatsuProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
@@ -29,7 +29,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBB-0810-010 yuanzhenxia
  */
-public class TokuchoHeinjunka6GatsuFlow extends BatchFlowBase<TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter> {
+public class DBB012001_TokuchoHeinjunka6Gatsu extends BatchFlowBase<DBB012001_TokuchoHeinjunka6GatsuParameter> {
 
     private static final String システム日時の取得 = "getSystemDate";
     private static final String 平準化前賦課TEMP作成 = "creatTmpProcess";
@@ -40,7 +40,7 @@ public class TokuchoHeinjunka6GatsuFlow extends BatchFlowBase<TokuchoHeijunka6ga
     private static final String 計算後情報作成 = "keisangoJohoSakusei";
     private static final RString BATCH_ID = new RString("KeisangoJohoSakuseiFlow");
 
-    private TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter parameter;
+    private DBB012001_TokuchoHeinjunka6GatsuParameter parameter;
     private TokuchoHeinjunka6GatsuProcessParameter processParameter;
 
     @Override

@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako;
+package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012001;
 
 import java.util.ArrayList;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.OutputChohyoIchiran;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -21,7 +22,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class TokuchoHeijunka6gatsuTsuchishoIkatsuHakoFlowParameter extends BatchParameterBase {
+public class DBB012001_TokuchoHeinjunka6GatsuParameter extends BatchParameterBase {
 
     private boolean 一括発行フラグ;
     private FlexibleYear 調定年度;

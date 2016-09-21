@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.core.jukyushokai;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4003YokaigoNinteiInterfaceEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -178,4 +179,12 @@ public class JukyuShokaiShinseiJoho {
         return 要介護認定インターフェース情報Entity.getShinsakaiIken();
     }
 
+    /**
+     * 受給者台帳_被保険者番号を取得します。
+     *
+     * @return 受給者台帳_被保険者番号
+     */
+    public RString get受給者台帳_被保険者番号() {
+        return 受給者台帳Entity.getHihokenshaNo().getColumnValue();
+    }
 }
