@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120260;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120260;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,7 +63,8 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  *
  * @reamsid_L DBC-2500-011 jiangwenkai
  */
-public class SogojigyohiShinsaKetteiSeikyumeisaiKeikaSochiInProcess extends BatchKeyBreakBase<SogojigyohiShinsaKetteiSeikyumeisaihyoEntity> {
+public class SogojigyohiShinsaKetteiSeikyumeisaiKeikaSochiInProcess
+        extends BatchKeyBreakBase<SogojigyohiShinsaKetteiSeikyumeisaihyoEntity> {
 
     private SogojigyohiShinsaProcessParameter parameter;
     private KokuhorenIchiranhyoMybatisParameter 帳票データの取得Parameter;
