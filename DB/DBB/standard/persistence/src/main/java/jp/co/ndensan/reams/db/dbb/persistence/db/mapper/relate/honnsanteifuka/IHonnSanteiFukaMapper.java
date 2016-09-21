@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.honnsanteifuka.Honsantei
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.CaluculateFukaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.FukaCalculateEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.HonsenteiKeisangojohoEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.KakuShugyoumuJouHouEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.KeisanTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.honnsanteifuka.SetaiHaakuShuturyokuEntity;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
@@ -31,14 +30,6 @@ public interface IHonnSanteiFukaMapper {
      * @return List<SetaiHaakuShuturyokuEntity>
      */
     List<SetaiHaakuShuturyokuEntity> select世帯員把握();
-
-    /**
-     * get賦課計算情報
-     *
-     * @param parameter CaluculateFukaParameter
-     * @return List<KakuShugyoumuJouHouEntity>
-     */
-    List<KakuShugyoumuJouHouEntity> get賦課計算情報(CaluculateFukaParameter parameter);
 
     /**
      * select本算定計算後賦課情報
