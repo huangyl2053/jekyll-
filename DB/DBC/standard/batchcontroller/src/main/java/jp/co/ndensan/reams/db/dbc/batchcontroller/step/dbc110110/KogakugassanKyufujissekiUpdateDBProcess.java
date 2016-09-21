@@ -52,8 +52,4 @@ public class KogakugassanKyufujissekiUpdateDBProcess extends BatchProcessBase<Db
         高額合算給付実績Writer.update(entity);
     }
 
-    @Override
-    protected void afterExecute() {
-    }
-
 }
