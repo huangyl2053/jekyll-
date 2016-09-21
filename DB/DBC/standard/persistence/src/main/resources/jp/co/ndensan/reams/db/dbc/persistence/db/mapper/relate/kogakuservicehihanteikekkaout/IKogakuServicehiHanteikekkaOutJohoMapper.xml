@@ -385,12 +385,21 @@
     </resultMap>
     
     <select id="select保険者番号取得関連リスト"
-            resultMap="ResultMap_DbWT3411KogakuShikyuShinseiEntity" fetchSize="500" resultOrdered="true">
+            resultMap="ResultMap_HokenshaNoEntity" fetchSize="500" resultOrdered="true">
         SELECT
-        DISTINCT "DbWT3411KogakuShikyuShinsei"."hokenshaNo"
-        FROM "DbWT3411KogakuShikyuShinsei"
+        "DbWT3411KogakuShikyuShinsei"."hokenshaNo" AS dbwt3411_hokenshaNo,
+        COUNT(DISTINCT "DbWT3411KogakuShikyuShinsei"."renban") AS dbwt3411_count
+        FROM "DbWT3411KogakuShikyuShinsei" 
         WHERE "DbWT3411KogakuShikyuShinsei"."sofuJogaiFlag" = false
+        GROUP BY "DbWT3411KogakuShikyuShinsei"."hokenshaNo"
     </select>
+    
+    <resultMap id="ResultMap_HokenshaNoEntity"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakuservicehihanteikekkaout.KogakuServicehiHanteiGetHokenshaNoEntity"
+               autoMapping="true">
+        <id property="保険者番号" column="dbwt3411_hokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler" />
+        <result property="レコード件数" column="dbwt3411_count" />
+    </resultMap>
  
     <select id="select送付対象データ関連リスト" resultMap="resultMap_SofuTaisyoDataEntity" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.processprm.kogakuservicehihanteikekkaout.KogakuServicehiHanteiMybatisParameter" fetchSize="500" resultOrdered="true">
