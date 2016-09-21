@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbe.definition.batchprm.dbe233001.Dbe233001FlowPar
 import jp.co.ndensan.reams.db.dbe.definition.core.shujiiikentokusokujohakko.ShujiiIkenTokusokujoHakkoTempData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2330001.ShujiiIkenshoTokusokujoHakkoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2330001.ShujiiIkenTokusokujoHakkoHandler;
+import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2330001.ShujiiIkenTokusokujoHakkoValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -16,6 +17,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 主治医意見書督促状発行のコントローラです。
@@ -71,6 +73,13 @@ public class ShujiiIkenshoTokusokujoHakko {
      * @return ResponseData<ShujiiIkenTokusokujoHakkoDiv>
      */
     public ResponseData<ShujiiIkenshoTokusokujoHakkoDiv> beforeHakkou(ShujiiIkenshoTokusokujoHakkoDiv div) {
+        ValidationMessageControlPairs message
+                = new ShujiiIkenTokusokujoHakkoValidationHandler(div).check_btnBatchRegisterHakko();
+        
+        if (message.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(message).respond();
+        }
+        
         RDate 開始日 = div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getTxtInsatsuKikan().getFromValue() == null
                 ? RDate.MIN : div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getTxtInsatsuKikan().getFromValue();
         RDate 終了日 = div.getNinteiChosaTokusokuTaishoshaIchiranhyo().getTxtInsatsuKikan().getToValue() == null
