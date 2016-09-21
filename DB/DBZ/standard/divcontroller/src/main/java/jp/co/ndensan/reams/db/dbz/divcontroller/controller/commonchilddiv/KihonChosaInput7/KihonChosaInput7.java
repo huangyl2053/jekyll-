@@ -56,7 +56,7 @@ public class KihonChosaInput7 {
             ArrayList<KihonChosaInput> new認定調査基本情報リスト = getHandler(div).onClick_btnConfirm(認定調査基本情報リスト);
             ViewStateHolder.put(ViewStateKeys.第七群認定調査基本情報リスト, new認定調査基本情報リスト);
             必須入力チェック(new認定調査基本情報リスト);
-            ResponseData.of(div).dialogOKClose();
+            return ResponseData.of(div).dialogOKClose();
         }
         return ResponseData.of(div).respond();
     }
