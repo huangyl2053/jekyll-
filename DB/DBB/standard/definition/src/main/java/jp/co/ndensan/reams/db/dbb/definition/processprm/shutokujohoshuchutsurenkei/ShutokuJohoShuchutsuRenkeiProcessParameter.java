@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -28,7 +29,7 @@ public class ShutokuJohoShuchutsuRenkeiProcessParameter implements IBatchProcess
     private RString 出力順ID;
     private ReportId 帳票ID;
     private RString 共有ファイル名;
-    private RString 共有ファイルID;
+    private RDateTime 共有ファイルID;
     private RString 処理区分;
     private YMDHMS 処理日時;
 
@@ -46,7 +47,7 @@ public class ShutokuJohoShuchutsuRenkeiProcessParameter implements IBatchProcess
      */
     public ShutokuJohoShuchutsuRenkeiProcessParameter(FlexibleYear 処理年度,
             List<SichousonEntity> 市町村情報List, RString 出力順ID, ReportId 帳票ID,
-            RString 共有ファイル名, RString 共有ファイルID, RString 処理区分, YMDHMS 処理日時) {
+            RString 共有ファイル名, RDateTime 共有ファイルID, RString 処理区分, YMDHMS 処理日時) {
         this.処理年度 = 処理年度;
         this.市町村情報List = 市町村情報List;
         this.出力順ID = 出力順ID;

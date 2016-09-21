@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbb.business.core.shotokujohochushutsu;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB112003.SichousonEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -23,4 +24,6 @@ public class ShotokuJohoChushutsuGamenParameter {
     private FlexibleYear 処理年度;
     private List<SichousonEntity> 市町村情報List;
     private RString 出力順ID;
+    private RDateTime 共有ファイルID;
+    private RString 共有ファイル名;
 }

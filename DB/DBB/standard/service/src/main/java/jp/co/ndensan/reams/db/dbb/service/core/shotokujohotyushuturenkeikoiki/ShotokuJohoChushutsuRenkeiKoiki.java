@@ -49,7 +49,6 @@ public class ShotokuJohoChushutsuRenkeiKoiki {
     private static final RString 当初所得情報ファイル名 = new RString("DEC05F001");
     private static final RString 異動所得情報ファイル名 = new RString("DEE01F001");
     private static final RString 共有ファイル名 = new RString("DEC05F001");
-    private static final RString 共有ファイルID = new RString("C:\\Users\\LDNS\\shared\\sharedFiles");
     private static final RString 当初_広域 = new RString("1");
     private static final RString 異動_広域 = new RString("2");
     private static final RString RSTRING_00 = new RString("00");
@@ -153,8 +152,8 @@ public class ShotokuJohoChushutsuRenkeiKoiki {
         result.set市町村情報List(parameter.get市町村情報List());
         result.set出力順ID(parameter.get出力順ID());
         result.set帳票ID(ReportIdDBB.DBB200008.getReportId());
-        result.set共有ファイル名(共有ファイル名);
-        result.set共有ファイルID(共有ファイルID);
+        result.set共有ファイル名(parameter.get共有ファイル名());
+        result.set共有ファイルID(parameter.get共有ファイルID());
         result.set処理区分(当初_広域);
         return result;
     }
@@ -172,8 +171,8 @@ public class ShotokuJohoChushutsuRenkeiKoiki {
         result.set市町村情報List(parameter.get市町村情報List());
         result.set出力順ID(parameter.get出力順ID());
         result.set帳票ID(ReportIdDBB.DBB200008.getReportId());
-        result.set共有ファイル名(共有ファイル名);
-        result.set共有ファイルID(共有ファイルID);
+        result.set共有ファイル名(parameter.get共有ファイル名());
+        result.set共有ファイルID(parameter.get共有ファイルID());
         result.set処理区分(異動_広域);
         return result;
     }
