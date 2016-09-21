@@ -33,6 +33,7 @@ public class TokubetsuChoshuIdojohoKensuhyoEditor implements ITokubetsuChoshuIdo
     private static final int ZERO = 0;
     private static final int TWO = 2;
     private static final RString 月開始 = new RString("月開始");
+    private static final RString 年度 = new RString("年度");
     private static final RString 特徴追加依頼 = new RString("特徴追加依頼");
 
     /**
@@ -54,16 +55,14 @@ public class TokubetsuChoshuIdojohoKensuhyoEditor implements ITokubetsuChoshuIdo
                 .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE).concat(SAKUSEI);
         source.printTimeStamp = 作成日.concat(RString.HALF_SPACE).concat(作成時);
         source.testShori = RString.EMPTY;
-//        TODO 年金保険者名称 ビジネス設計
-        source.nenkinHokenshaName = new RString("年金保険者名称");
+        source.nenkinHokenshaName = parameter.get特徴異動件数Entity().get年金保険者名称();
         source.nengetsu = (null == parameter.get賦課年度() || parameter.get賦課年度().isEmpty())
                 ? RString.EMPTY
                 : parameter.get賦課年度().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
-                fillType(FillType.BLANK).toDateString().
+                fillType(FillType.BLANK).toDateString().concat(年度).
                 concat(parameter.get処理対象月()).concat(月開始);
         source.shichosonCode = parameter.get特徴異動件数Entity().get構成市町村コード().getColumnValue();
-//        TODO   市町村名称 ビジネス設計
-        source.shichosonName = new RString("市町村名称");
+        source.shichosonName = parameter.get特徴異動件数Entity().get市町村名称();
         RDate システム日時 = RDate.getNowDate();
         source.hokenshaNo = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, システム日時, SubGyomuCode.DBU介護統計報告);
         source.hokenshaName = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者名称, システム日時, SubGyomuCode.DBU介護統計報告);

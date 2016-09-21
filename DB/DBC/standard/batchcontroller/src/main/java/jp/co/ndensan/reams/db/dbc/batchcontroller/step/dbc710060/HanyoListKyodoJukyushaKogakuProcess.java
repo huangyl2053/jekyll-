@@ -246,6 +246,40 @@ public class HanyoListKyodoJukyushaKogakuProcess extends BatchProcessBase<HanyoL
     }
 
     private void get抽出条件Part2(RString empty, RString temp, List<RString> 抽出条件) {
+        get抽出条件Part2_1(temp, 抽出条件);
+        if (parameter.get老齢年金受給区分s() != null && !parameter.get老齢年金受給区分s().isEmpty()) {
+            temp = TITLE_老齢年金受給区分;
+            if (parameter.get老齢年金受給区分s().contains(true) && parameter.get老齢年金受給区分s().contains(false)) {
+                temp = temp.concat(すべて);
+            } else if (parameter.get老齢年金受給区分s().contains(true)) {
+                temp = temp.concat(受給あり);
+            } else if (parameter.get老齢年金受給区分s().contains(false)) {
+                temp = temp.concat(受給なし);
+            }
+            抽出条件.add(temp);
+        }
+
+        if (parameter.get利用者負担第２段階s() != null && !parameter.get利用者負担第２段階s().isEmpty()) {
+            temp = TITLE_利用者負担第２段階;
+            if (parameter.get利用者負担第２段階s().contains(true) && parameter.get利用者負担第２段階s().contains(false)) {
+                temp = temp.concat(すべて);
+            } else if (parameter.get利用者負担第２段階s().contains(true)) {
+                temp = temp.concat(該当あり);
+            } else if (parameter.get利用者負担第２段階s().contains(false)) {
+                temp = temp.concat(該当なし);
+            }
+            抽出条件.add(temp);
+        }
+
+        抽出条件.add(empty);
+        if (parameter.is削除含める()) {
+            抽出条件.add(削除含める);
+        } else {
+            抽出条件.add(empty);
+        }
+    }
+
+    private void get抽出条件Part2_1(RString temp, List<RString> 抽出条件) {
         if (parameter.get異動区分s() != null && !parameter.get異動区分s().isEmpty()) {
             temp = TITLE_異動区分;
             if (parameter.get異動区分s().contains(ONE)) {
@@ -314,37 +348,6 @@ public class HanyoListKyodoJukyushaKogakuProcess extends BatchProcessBase<HanyoL
                 temp = temp.concat(現役並み所得相当_FALSE);
             }
             抽出条件.add(temp);
-        }
-
-        if (parameter.get老齢年金受給区分s() != null && !parameter.get老齢年金受給区分s().isEmpty()) {
-            temp = TITLE_老齢年金受給区分;
-            if (parameter.get老齢年金受給区分s().contains(true) && parameter.get老齢年金受給区分s().contains(false)) {
-                temp = temp.concat(すべて);
-            } else if (parameter.get老齢年金受給区分s().contains(true)) {
-                temp = temp.concat(受給あり);
-            } else if (parameter.get老齢年金受給区分s().contains(false)) {
-                temp = temp.concat(受給なし);
-            }
-            抽出条件.add(temp);
-        }
-
-        if (parameter.get利用者負担第２段階s() != null && !parameter.get利用者負担第２段階s().isEmpty()) {
-            temp = TITLE_利用者負担第２段階;
-            if (parameter.get利用者負担第２段階s().contains(true) && parameter.get利用者負担第２段階s().contains(false)) {
-                temp = temp.concat(すべて);
-            } else if (parameter.get利用者負担第２段階s().contains(true)) {
-                temp = temp.concat(該当あり);
-            } else if (parameter.get利用者負担第２段階s().contains(false)) {
-                temp = temp.concat(該当なし);
-            }
-            抽出条件.add(temp);
-        }
-
-        抽出条件.add(empty);
-        if (parameter.is削除含める()) {
-            抽出条件.add(削除含める);
-        } else {
-            抽出条件.add(empty);
         }
     }
 }
