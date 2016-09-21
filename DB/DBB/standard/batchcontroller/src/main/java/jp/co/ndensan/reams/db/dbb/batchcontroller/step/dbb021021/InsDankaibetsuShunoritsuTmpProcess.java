@@ -113,8 +113,10 @@ public class InsDankaibetsuShunoritsuTmpProcess extends BatchProcessBase<Dankaib
 
     @Override
     protected void afterExecute() {
-        DankaibetsuShunoritsuTempEntity entity = get保険料段階別収納率一時(beforeEntity);
-        保険料段階別収納率一時tableWriter.insert(entity);
+        if (beforeEntity != null) {
+            DankaibetsuShunoritsuTempEntity entity = get保険料段階別収納率一時(beforeEntity);
+            保険料段階別収納率一時tableWriter.insert(entity);
+        }
     }
 
     private List<RString> get検索用科目リスト() {
