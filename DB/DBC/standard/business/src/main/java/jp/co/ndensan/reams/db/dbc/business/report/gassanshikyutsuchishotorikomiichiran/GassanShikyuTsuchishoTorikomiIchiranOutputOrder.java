@@ -42,7 +42,7 @@ public enum GassanShikyuTsuchishoTorikomiIchiranOutputOrder implements IReportIt
     /**
      * 被保険者番号
      */
-    被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("DbWT38B1.\"hihokenshaNoIn\"")),
+    被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("TEMP.\"hihokenshaNo\"")),
     /**
      * 対象年度
      */

@@ -16,6 +16,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum ReportIdDBC {
 
     /**
+     * 受給者給付実績台帳作成
+     *
+     */
+    DBC100055(new ReportId("DBC100055_JukyushaKyufuJissekidaicho"), new RString("受給者給付実績台帳作成")),
+    /**
      * 利用状況統計表
      */
     DBC200064(new ReportId("DBC200064_JutakukaishuRiyushoTesuryoSeikyuKenShinseishoIchiran"), new RString("住宅改修理由書作成手数料請求書兼申請書作成")),
@@ -446,6 +451,10 @@ public enum ReportIdDBC {
      * DBC701008_HanyoList_KyufuKanriHyo
      */
     DBC701009(new ReportId("DBC701009_HanyoListKagoMoshitate"), new RString("汎用リスト出力(過誤申立情報)")),
+    /**
+     * DBC701010_HanyoList_KyufuKanriHyo
+     */
+    DBC701010(new ReportId("DBC701010_HanyoListKagoKekka"), new RString("汎用リスト出力(過誤結果情報)")),
     /**
      * DBC701016_HanyoListKogakuGassanKeisanKekkaRenrakuHyo
      */

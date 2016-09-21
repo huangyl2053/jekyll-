@@ -4,7 +4,11 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuN
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.IShisetsuJohoCommonChildDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuJohoCommonChildDiv.ShisetsuJohoCommonChildDivDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
@@ -17,8 +21,11 @@ import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
 import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoIdentifier;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
@@ -27,7 +34,7 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
  * @reamsid_L DBA-0360-030 linghuhang
  */
 public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuNyutaishoRirekiKanriDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -405,6 +412,94 @@ public class ShisetsuNyutaishoRirekiKanriDiv extends Panel implements IShisetsuN
 
     public void setMode_Riyou( Riyou value ) {
         _CommonChildDivModeUtil.setMode( this.modes, Riyou.class , value );
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public TextBoxFlexibleDate getTxtNyushoDate() {
+        return this.getShisetsuNyutaishoInput().getTxtNyushoDate();
+    }
+
+    @JsonIgnore
+    public void  setTxtNyushoDate(TextBoxFlexibleDate txtNyushoDate) {
+        this.getShisetsuNyutaishoInput().setTxtNyushoDate(txtNyushoDate);
+    }
+
+    @JsonIgnore
+    public TextBoxFlexibleDate getTxtTaishoDate() {
+        return this.getShisetsuNyutaishoInput().getTxtTaishoDate();
+    }
+
+    @JsonIgnore
+    public void  setTxtTaishoDate(TextBoxFlexibleDate txtTaishoDate) {
+        this.getShisetsuNyutaishoInput().setTxtTaishoDate(txtTaishoDate);
+    }
+
+    @JsonIgnore
+    public IShisetsuJohoCommonChildDiv getCcdShisetsuJoho() {
+        return this.getShisetsuNyutaishoInput().getCcdShisetsuJoho();
+    }
+
+    @JsonIgnore
+    public TenshutsusakiJohoPanelDiv getTenshutsusakiJohoPanel() {
+        return this.getShisetsuNyutaishoInput().getTenshutsusakiJohoPanel();
+    }
+
+    @JsonIgnore
+    public void  setTenshutsusakiJohoPanel(TenshutsusakiJohoPanelDiv TenshutsusakiJohoPanel) {
+        this.getShisetsuNyutaishoInput().setTenshutsusakiJohoPanel(TenshutsusakiJohoPanel);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtHokensha() {
+        return this.getShisetsuNyutaishoInput().getTenshutsusakiJohoPanel().getTxtHokensha();
+    }
+
+    @JsonIgnore
+    public void  setTxtHokensha(TextBox txtHokensha) {
+        this.getShisetsuNyutaishoInput().getTenshutsusakiJohoPanel().setTxtHokensha(txtHokensha);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnHokenshaKensaku() {
+        return this.getShisetsuNyutaishoInput().getTenshutsusakiJohoPanel().getBtnHokenshaKensaku();
+    }
+
+    @JsonIgnore
+    public void  setBtnHokenshaKensaku(ButtonDialog btnHokenshaKensaku) {
+        this.getShisetsuNyutaishoInput().getTenshutsusakiJohoPanel().setBtnHokenshaKensaku(btnHokenshaKensaku);
+    }
+
+    @JsonIgnore
+    public TextBox getTxtHokensyaMeisho() {
+        return this.getShisetsuNyutaishoInput().getTenshutsusakiJohoPanel().getTxtHokensyaMeisho();
+    }
+
+    @JsonIgnore
+    public void  setTxtHokensyaMeisho(TextBox txtHokensyaMeisho) {
+        this.getShisetsuNyutaishoInput().getTenshutsusakiJohoPanel().setTxtHokensyaMeisho(txtHokensyaMeisho);
+    }
+
+    @JsonIgnore
+    public Button getBtnShisetsuNyutaishoKakutei() {
+        return this.getShisetsuNyutaishoInput().getBtnShisetsuNyutaishoKakutei();
+    }
+
+    @JsonIgnore
+    public void  setBtnShisetsuNyutaishoKakutei(Button btnShisetsuNyutaishoKakutei) {
+        this.getShisetsuNyutaishoInput().setBtnShisetsuNyutaishoKakutei(btnShisetsuNyutaishoKakutei);
+    }
+
+    @JsonIgnore
+    public Button getBtnShisetsuNyutaishoTorikeshi() {
+        return this.getShisetsuNyutaishoInput().getBtnShisetsuNyutaishoTorikeshi();
+    }
+
+    @JsonIgnore
+    public void  setBtnShisetsuNyutaishoTorikeshi(Button btnShisetsuNyutaishoTorikeshi) {
+        this.getShisetsuNyutaishoInput().setBtnShisetsuNyutaishoTorikeshi(btnShisetsuNyutaishoTorikeshi);
     }
 
     // </editor-fold>

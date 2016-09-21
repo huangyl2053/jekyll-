@@ -118,7 +118,6 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
     private static final int NUM_17 = 17;
     private static final int NUM_21 = 21;
     private static final int NUM_38 = 38;
-    private static final int NUM_40 = 40;
     private static final int NUM_76 = 76;
     private static final int NUM_114 = 114;
     private static final RString ゼロ = new RString("0");
@@ -127,7 +126,6 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
     private static final RString 窓口払 = ShiharaiHohoKubun.窓口払.getコード();
     private static final RString 口座払 = ShiharaiHohoKubun.口座払.getコード();
     private static final RString 一 = new RString("1");
-    private static final RString 二 = new RString("2");
     private static final ReportId 通知文情報帳票ID = new ReportId("DBC100002_ShokanKetteiTsuchiSho");
     private static final RString 項目名_取り消し線 = new RString("取り消し線");
     private static final RString 項目名_帳票タイトル = new RString("帳票タイトル");
@@ -316,7 +314,7 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
                 zougenFushikyuRiyu.set増減_不支給の理由3(増減理由);
             }
         }
-        if (支給不支給決定区分.equals(二) && 償還計画費データ件数 > 0) {
+        if (支給不支給決定区分.equals(ゼロ) && 償還計画費データ件数 > 0) {
             増減_不支給の理由 = edit増減不支給の理由(被保険者番号, 整理番号, サービス提供年月);
             if (増減_不支給の理由.length() <= NUM_38) {
                 zougenFushikyuRiyu.set増減_不支給の理由1(増減_不支給の理由.substring(0, 増減_不支給の理由.length()));
@@ -325,7 +323,7 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
                 zougenFushikyuRiyu.set増減_不支給の理由2(増減_不支給の理由.substring(NUM_38, 増減_不支給の理由.length()));
             }
         }
-        if (支給不支給決定区分.equals(二) && 償還集計データ件数 > 0) {
+        if (支給不支給決定区分.equals(ゼロ) && 償還集計データ件数 > 0) {
             List<DbT3053ShokanShukeiEntity> dbt3053entitys = dbT3053dac.select償還払請求集計(被保険者番号, サービス提供年月, 整理番号);
             if (!dbt3053entitys.isEmpty()) {
                 RString 理由 = dbt3053entitys.get(0).getHushikyuRiyu();

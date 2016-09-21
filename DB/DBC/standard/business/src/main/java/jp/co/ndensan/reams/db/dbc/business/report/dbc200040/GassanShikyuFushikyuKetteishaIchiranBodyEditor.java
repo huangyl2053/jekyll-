@@ -32,7 +32,7 @@ public class GassanShikyuFushikyuKetteishaIchiranBodyEditor
     private static final RString 前括弧 = new RString("（");
     private static final RString 接続符 = new RString("～");
     private static final RString 支給計 = new RString("支給計");
-    private static final RString 不支給計 = new RString("不支給");
+    private static final RString 不支給計 = new RString("不支給計");
     private static final RString 支給 = new RString("支給");
     private static final RString 不支給 = new RString("不支給");
     private static final RString 窓口払 = new RString("窓口払");
@@ -92,7 +92,9 @@ public class GassanShikyuFushikyuKetteishaIchiranBodyEditor
             source.listCerter_4 = 口座払;
         }
         if (区分_1.equals(内部帳票文字切れ制御)) {
-//            source.listLower_1 = getColumnValue(entity.get住所()).substringReturnAsPossible(0, INT_15);
+
+            source.listLower_1 = get住所();
+
         } else {
             source.listLower_1 = アステリスク_15;
         }
@@ -102,18 +104,21 @@ public class GassanShikyuFushikyuKetteishaIchiranBodyEditor
         source.listLower_5 = doカンマ編集(entity.get支給額());
         if (区分_1.equals(entity.get支払方法区分())) {
             source.listLower_6 = toRS(entity.get支払期間開始年月日().toString()).concat(前括弧)
-                    .concat(entity.get支払期間開始年月日().getDayOfWeek().getInFullParentheses()).concat(後括弧).concat(
+                    .concat(entity.get支払期間開始年月日().getDayOfWeek().getShortTerm()).concat(後括弧).concat(
                             entity.get支払期間開始時間().toString()).concat(接続符).concat(entity.get支払期間終了年月日().toString()).concat(前括弧)
-                    .concat(entity.get支払期間終了年月日().getDayOfWeek().getInFullParentheses()).concat(後括弧)
+                    .concat(entity.get支払期間終了年月日().getDayOfWeek().getShortTerm()).concat(後括弧)
                     .concat(entity.get支払期間終了時間().toString()
                     );
             source.listUpper_5 = entity.get支払場所();
         } else if (区分_2.equals(entity.get支払方法区分())) {
-            source.listLower_6 = entity.get預金種別().get預金種別名称().concat(スペース).concat(entity.get口座番号()).concat(getColumnValue(entity.get口座名義人カナ()));
+            if (null != entity.get預金種別()) {
+                source.listLower_6 = entity.get預金種別().get預金種別名称().concat(スペース).concat(entity.get口座番号()).
+                        concat(getColumnValue(entity.get口座名義人カナ()));
+            }
             source.listUpper_5 = entity.get金融機関名称().concat(スペース).concat(entity.get支店名称());
         }
         if (区分_1.equals(内部帳票文字切れ制御) && null != entity.get被保険者氏名()) {
-//            source.listUpper_1 = entity.get被保険者氏名().substringReturnAsPossible(0, INT_15);
+            source.listUpper_1 = getColumnValue(entity.get被保険者氏名().getName()).substringReturnAsPossible(0, INT_15);
         } else {
             source.listUpper_1 = アステリスク_15;
         }
@@ -125,16 +130,25 @@ public class GassanShikyuFushikyuKetteishaIchiranBodyEditor
     private void edit集計(GassanShikyuFushikyuKetteishaIchiranSource source) {
         if (区分_1.equals(entity.get支給不支給区分())) {
             source.listUpper_2 = 支給計;
+            source.listLower_5 = doカンマ編集(paramter.get支給額の合計金額());
         } else {
             source.listUpper_2 = 不支給計;
         }
         source.listUpper_3 = new RString(paramter.get支給の件数()).concat(件);
         source.listUpper_4 = doカンマ編集(paramter.get自己負担総額の合計金額());
-        source.listLower_5 = doカンマ編集(paramter.get支給額の合計金額());
     }
 
     private void editEmpty(GassanShikyuFushikyuKetteishaIchiranSource source) {
         source.listUpper_1 = 対象データは存在しません;
+    }
+
+    private RString get住所() {
+        if (null != entity.get住所()) {
+            if (null != entity.get住所().get住所()) {
+                return entity.get住所().get住所().substringReturnAsPossible(0, INT_15);
+            }
+        }
+        return RString.EMPTY;
     }
 
     private RString doカンマ編集(Decimal number) {
@@ -145,13 +159,6 @@ public class GassanShikyuFushikyuKetteishaIchiranBodyEditor
     }
 
     private RString getColumnValue(IDbColumnMappable entity) {
-        if (null != entity) {
-            return entity.getColumnValue();
-        }
-        return RString.EMPTY;
-    }
-
-    private RString get曜日(IDbColumnMappable entity) {
         if (null != entity) {
             return entity.getColumnValue();
         }

@@ -6,8 +6,10 @@
 package jp.co.ndensan.reams.db.dbd.definition.batchprm.dbdhanyolist;
 
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710040.DBD710040_HanyoListRiyoshaFutanGakuGengakuParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710050.DBD710050_HanyoListHomonKaigoRiyoshaFutanGakuGengakuParameter;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710060.DBD710060_HanyoListShakaiFukushiHojinKeigenParameter;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710070.DBD710070_HanyoListTokubetsuChiikiKasanGemmenParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710080.DBD710080_HanyoListFutanGendoGakuNinteiParameter;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710110.DBD710110_HanyoListKokuhoParameter;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710120.DBD710120_HanyoListKokiKoreishaParameter;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710130.DBD710130_HanyoListJigyoTaishoshaParameter;
@@ -32,10 +34,14 @@ public class DBDHanyoListParameter extends BatchParameterBase {
     private DBD710150_HanyoListShisetsuNyutaishoParameter shisetsuNyutaishoBatchParameter;
     @BatchParameter(key = "riyoshaFutanGakuGengakuParameter", name = "汎用リスト出力_利用者負担額減免")
     private DBD710040_HanyoListRiyoshaFutanGakuGengakuParameter riyoshaFutanGakuGengakuParameter;
+    @BatchParameter(key = "homonKaigoRiyoshaFutanGakuGengakuParameter", name = "汎用リスト出力_訪問介護利用者負担額減額")
+    private DBD710050_HanyoListHomonKaigoRiyoshaFutanGakuGengakuParameter homonKaigoRiyoshaFutanGakuGengakuParameter;
     @BatchParameter(key = "shakaiFukushiHojinKeigenParameter", name = "汎用リスト出力_社会福祉法人軽減")
     private DBD710060_HanyoListShakaiFukushiHojinKeigenParameter shakaiFukushiHojinKeigenParameter;
     @BatchParameter(key = "tokubetsuChiikiKasanGemmenParameter", name = "汎用リスト出力_特別地域加算減免")
     private DBD710070_HanyoListTokubetsuChiikiKasanGemmenParameter tokubetsuChiikiKasanGemmenParameter;
+    @BatchParameter(key = "futanGendoGakuNinteiParameter", name = "汎用リスト出力_負担限度額認定")
+    private DBD710080_HanyoListFutanGendoGakuNinteiParameter futanGendoGakuNinteiParameter;
     @BatchParameter(key = "kokuhoParameter", name = "汎用リスト出力_国保")
     private DBD710110_HanyoListKokuhoParameter kokuhoParameter;
     @BatchParameter(key = "kokiKoreishaParameter", name = "汎用リスト出力_後期高齢者")

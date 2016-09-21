@@ -193,7 +193,7 @@ public class KogakuServicehiKetteiTsuchishoTan {
         set送付物宛先(決定通知書Entity, 地方公共団体, 帳票制御共通, 識別コード);
         決定通知書Entity.set文書番号(文書番号);
         決定通知書Entity.set作成年月日(発行日 == null || 発行日.isEmpty() ? RString.EMPTY : 発行日.wareki().eraType(EraType.KANJI)
-                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).width(Width.FULL).toDateString());
+                .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         IServiceNoKanribangouRendou2Mapper mapper = mapperProvider.create(IServiceNoKanribangouRendou2Mapper.class);
         JigyouKetteiTutisyoParameter param = JigyouKetteiTutisyoParameter.createParam(被保険者番号,
                 サービス提供年月, 履歴番号, 証記載保険者番号);

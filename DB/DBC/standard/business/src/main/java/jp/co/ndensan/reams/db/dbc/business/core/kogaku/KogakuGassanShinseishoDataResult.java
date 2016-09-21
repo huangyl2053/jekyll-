@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -38,4 +39,10 @@ public class KogakuGassanShinseishoDataResult implements Serializable {
     private YubinNo 申請代表者郵便番号;
     private RString 申請代表者住所;
     private TelNo 申請代表者電話番号;
+    private FlexibleDate 申請年月日;
+    private RString 支給申請書整理番号_追加用;
+    private RString 支給申請書整理番号_更新用;
+    private RString 国保支給申請書整理番号;
+    private RString 支給申請形態;
+    private RString 自己負担額証明書交付申請の有無;
 }

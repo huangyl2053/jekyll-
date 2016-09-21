@@ -506,6 +506,7 @@
         ON 被保険者台帳管理Newest."hihokenshaNo" = "DbT2002FukaJohoTemp"."hihokenshaNo"
         INNER JOIN rgdb."DbV2001ChoshuHoho" AS "DbV2001ChoshuHoho"
         ON "DbV2001ChoshuHoho"."hihokenshaNo" = "DbT2002FukaJohoTemp"."hihokenshaNo"
+        AND "DbV2001ChoshuHoho"."fukaNendo" = "DbT2002FukaJohoTemp"."fukaNendo"
         LEFT JOIN rgur."UrT0508SeikatsuHogoJukyusha" AS 生活保護受給者
         ON 生活保護受給者."shikibetsuCode" = 被保険者台帳管理Newest."shikibetsuCode"
         LEFT JOIN rgur."UrT0526SeikatsuHogoFujoShurui" AS 生活保護扶助種類
@@ -541,7 +542,10 @@
                  "DbT2002FukaJohoTemp"."fukaNendo",
                  "DbT2002FukaJohoTemp"."tsuchishoNo",
                  "DbT2002FukaJohoTemp"."rirekiNo",
-                 "DbT2002FukaJohoTemp"."hihokenshaNo"
+                 "DbT2002FukaJohoTemp"."hihokenshaNo",
+                 "UrT0508SeikatsuHogoJukyusha_shikibetsuCode",
+                 "UrT0508SeikatsuHogoJukyusha_gyomuCode",
+                 "UrT0508SeikatsuHogoJukyusha_jukyuKaishiYMD"
     </select>
     <resultMap id="resultMap_SikakuSaisinnsiki"
                type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukamanager.SikakuSaisinnsikiRelateEntity" autoMapping="true">
@@ -552,6 +556,7 @@
         <id column="UrT0508SeikatsuHogoJukyusha_gyomuCode"/>
         <id column="UrT0508SeikatsuHogoJukyusha_jukyuKaishiYMD"/>
         <id column="UrT0526SeikatsuHogoFujoShurui_fujoShuruiCode"/>
+        <id column="dbT7006RoreiFukushiNenkinJukyusha_jukyuKaishiYMD"/>
         <result property="生保開始日" column="seihoKaishiYMDBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="生保廃止日" column="seihoHaishiYMDBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="老年開始日" column="ronenKaishiYMDBefore" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
@@ -816,6 +821,7 @@
         ON 被保険者台帳管理Newest."hihokenshaNo" = 特徴仮算定抽出Temp."hihokenshaNo"
         INNER JOIN rgdb."DbV2001ChoshuHoho" AS "DbV2001ChoshuHoho"
         ON "DbV2001ChoshuHoho"."hihokenshaNo" = 特徴仮算定抽出Temp."hihokenshaNo"
+        AND "DbV2001ChoshuHoho"."fukaNendo" = 特徴仮算定抽出Temp."fukaNendo"
         LEFT JOIN rgur."UrT0508SeikatsuHogoJukyusha" AS 生活保護受給者
         ON 生活保護受給者."shikibetsuCode" = 被保険者台帳管理Newest."shikibetsuCode"
         LEFT JOIN rgur."UrT0526SeikatsuHogoFujoShurui" AS 生活保護扶助種類
@@ -830,8 +836,15 @@
     </select>
     <resultMap id="resultMap_FukaJohokeizokuRelateEntity" autoMapping="true"
                type="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchokarisanteifukamanager.FukaJohokeizokuRelateEntity">
-        <id property="fukaNendo" column="fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
-        <id property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id column="fukaNendo"/>
+        <id column="hihokenshaNo"/>
+        <id column="UrT0508SeikatsuHogoJukyusha_shikibetsuCode"/>
+        <id column="UrT0508SeikatsuHogoJukyusha_gyomuCode"/>
+        <id column="UrT0508SeikatsuHogoJukyusha_jukyuKaishiYMD"/>
+        <id column="UrT0526SeikatsuHogoFujoShurui_fujoShuruiCode"/>
+        <id column="dbT7006RoreiFukushiNenkinJukyusha_jukyuKaishiYMD"/>
+        <result property="fukaNendo" column="fukaNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="hokenryoDankai" column="hokenryoDankai" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="choteigaku" column="choteigaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="seihoKaishiYMD" column="seihoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
@@ -853,7 +866,6 @@
         
         SELECT 特徴仮算定抽出Temp."hihokenshaNo",
         特徴仮算定抽出Temp."fukaNendo",
-        特徴仮算定抽出Temp."hokenryoDankai",
         特徴仮算定抽出Temp."choteigaku",
         特徴仮算定抽出Temp."hokenryoDankai",
         特徴仮算定抽出Temp."seihoKaishiYMD",
@@ -928,6 +940,7 @@
         ON 被保険者台帳管理Newest."hihokenshaNo" = 特徴仮算定抽出Temp."hihokenshaNo"
         INNER JOIN rgdb."DbV2001ChoshuHoho" AS "DbV2001ChoshuHoho"
         ON "DbV2001ChoshuHoho"."hihokenshaNo" = 特徴仮算定抽出Temp."hihokenshaNo"
+        AND "DbV2001ChoshuHoho"."fukaNendo" = 特徴仮算定抽出Temp."fukaNendo"
         LEFT JOIN rgur."UrT0508SeikatsuHogoJukyusha" AS 生活保護受給者
         ON 生活保護受給者."shikibetsuCode" = 被保険者台帳管理Newest."shikibetsuCode"
         LEFT JOIN rgur."UrT0526SeikatsuHogoFujoShurui" AS 生活保護扶助種類
@@ -956,21 +969,21 @@
         "DbV2002Fuka"."hokenryoDankai2"
         end) AS 前年度保険料段階
         FROM rgdb."DbT2015KeisangoJoho" AS "DbT2015KeisangoJoho"
-        INNER JOIN rgue."UeT0511NenkinTokuchoKaifuJoho" AS 年金特徴回付情報_介護継承
+        LEFT JOIN rgue."UeT0511NenkinTokuchoKaifuJoho" AS 年金特徴回付情報_介護継承
         ON "DbT2015KeisangoJoho"."kariNenkinNo" = 年金特徴回付情報_介護継承."kisoNenkinNo"
         AND "DbT2015KeisangoJoho"."kariNenkinCode" = 年金特徴回付情報_介護継承."nenkinCode"
         AND "DbT2015KeisangoJoho"."kariHosokuM" = 年金特徴回付情報_介護継承."hosokuTsuki"
         AND 年金特徴回付情報_介護継承."tsuchiNaiyoCode" IN ('00', '30')
         AND 年金特徴回付情報_介護継承."shoriNendo" = #{調定年度BeforeYear}
-        INNER JOIN 
+        LEFT JOIN 
             rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',true,
         '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
         true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
         ON "DbT2015KeisangoJoho"."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
-        INNER JOIN rgdb."DbV2002Fuka" AS "DbV2002Fuka"
+        LEFT JOIN rgdb."DbV2002Fuka" AS "DbV2002Fuka"
         ON "DbV2002Fuka"."fukaNendo" = #{賦課年度BeforeYear}
         AND "DbV2002Fuka"."hihokenshaNo" = "DbT2015KeisangoJoho"."hihokenshaNo"
-        INNER JOIN ( SELECT 賦課情報MAX通知書."choteiNendo",
+        LEFT JOIN ( SELECT 賦課情報MAX通知書."choteiNendo",
                             賦課情報MAX通知書."hihokenshaNo",
                             MAX(賦課情報MAX通知書."tsuchishoNo") AS 通知書番号
                      FROM rgdb."DbV2002Fuka" AS 賦課情報MAX通知書,
@@ -1022,7 +1035,7 @@
         ON "DbV2001ChoshuHoho"."fukaNendo" = #{調定年度BeforeYear}
         AND "DbV2001ChoshuHoho"."choshuHoho2gatsu" IN ('1', '2')
         AND "DbV2001ChoshuHoho"."hihokenshaNo" = "DbV2002Fuka"."hihokenshaNo"
-        INNER JOIN 
+        LEFT JOIN 
             rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',true,
         '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
         true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"

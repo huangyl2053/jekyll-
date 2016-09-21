@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.entity.db.relate.kaigohohenshisetsu;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -15,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 /**
  *
  * 介護保険入退所履歴のRelateEntityクラスです。
- * 
+ *
  * @reamsid_L DBA-0360-050 wangkun
  */
 @lombok.Getter
@@ -35,5 +36,5 @@ public class KaigoHohenShisetsuRelateEntity {
     private FlexibleDate taishoYMD;
     private RString roomKigoNo;
     private RString jigyoshaName;
-    
+    private HokenshaNo hokenshaNo;
 }

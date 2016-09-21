@@ -45,7 +45,8 @@
         PSM."seinengappiYMD" AS "PSMseinengappiYMD",
         PSM."seibetsuCode" AS "PSMseibetsuCode",
         Dbv.*
-        FROM (Dbv1001."hihokenshaNo" AS "Dbv1001hihokenshaNo",
+        FROM (
+        SELECT Dbv1001."hihokenshaNo" AS "Dbv1001hihokenshaNo",
         Dbv1001."idoYMD" AS "Dbv1001idoYMD",
         Dbv1001."shichosonCode" AS "Dbv1001shichosonCode",
         Dbv1001."shikibetsuCode" AS "Dbv1001shikibetsuCode",
@@ -64,8 +65,8 @@
         ON Dbv1001."hihokenshaNo" = Dbv4001."hihokenshaNo") AS Dbv
         INNER JOIN
         rgua.${psmShikibetsuTaisho} AS PSM
-        ON Dbv."shikibetsuCode" = PSM."shikibetsuCode"
-        ORDER BY Dbv."shikibetsuCode"
+        ON Dbv."Dbv1001shikibetsuCode" = PSM."shikibetsuCode"
+        ORDER BY Dbv."Dbv1001shikibetsuCode"
     </select>
 
     <select id="getKenkouKaruteRenkeiDataKoiki"

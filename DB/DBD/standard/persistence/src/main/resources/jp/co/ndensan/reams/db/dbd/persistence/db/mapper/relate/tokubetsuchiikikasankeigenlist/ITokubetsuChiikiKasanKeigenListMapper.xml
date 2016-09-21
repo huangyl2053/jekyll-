@@ -92,15 +92,15 @@
         <result property="給付区分" column="給付実績情報作成区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="exists社福軽減給付実績" column="exists社福軽減給付実績" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" />
         <result property="exists有効特地減免" column="exists有効特地減免" typeHandler="org.apache.ibatis.type.BooleanTypeHandler" />
-         <association property="給付実績集計Entity" resultMap="resultMap_KyuufuJiqsekiShuukeiEntity"/>
+        <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+        <association property="給付実績集計Entity" resultMap="resultMap_KyuufuJiqsekiShuukeiEntity"/>
         <collection property="給付実績明細リスト" resultMap="resultMap_KyuufuJiqsekiDetailListEntity"/>
     </resultMap>
 
    <resultMap id="resultMap_TokubetsuChiikiKasanKeigenJissekiKanriListEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.tokubetsuchiikikasankeigenjissekikanri.TokubetsuChiikiKasanKeigenJissekiKanri" autoMapping="true">
         <id property="事業者番号" column="事業者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/> 
         <result property="事業者名称" column="事業者名称" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
-       
+        
         <collection property="給付実績被保険者リスト" resultMap="resultMap_KyuufuJiqsekiHihokenshaListEntity"/>
        <!-- <result property="入力識別番号" column="入力識別番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.NyuryokuShikibetsuNoTypeHandler" />
         <result property="証記載保険者番号" column="証記載保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler" />

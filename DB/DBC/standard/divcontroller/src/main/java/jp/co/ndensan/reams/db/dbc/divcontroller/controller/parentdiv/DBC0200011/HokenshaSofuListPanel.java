@@ -72,7 +72,7 @@ public class HokenshaSofuListPanel {
         dgHokenshaSofuList_Row row = div.getDgHokenshaSofuList().getClickedItem();
         KokuhorenDataSofuViewState parmater = new KokuhorenDataSofuViewState(
                 div.getTxtShoriNengetsu().getValue().getYearMonth(), 再処理区分, row.getKokanShikibetsuNo());
-        ViewStateHolder.put(ViewStateHolderName.国保連取込情報, parmater);
+        ViewStateHolder.put(ViewStateHolderName.国保連送付情報, parmater);
         RString paramete = row.getKokanShikibetsuNo();
         return ResponseData.of(div).forwardWithEventName(DBC0200011TransitionEventName.バッチ起動)
                 .parameter(paramete);

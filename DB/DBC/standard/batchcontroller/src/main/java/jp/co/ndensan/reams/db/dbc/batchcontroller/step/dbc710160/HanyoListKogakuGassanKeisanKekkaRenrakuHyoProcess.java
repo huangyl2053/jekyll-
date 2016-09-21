@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbc.business.core.hanyolistKogakugassankeisankekkarenrakuhyo.HanyoListKogakuGassanOutPutOrder;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Over70_ShotokuKbn;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ShotokuKbn;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_ChushutsuKubun;
@@ -40,8 +41,12 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -102,8 +107,6 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
     private static final RString 出力ファイル名
             = new RString("HanyoListKogakuGassanKeisanKekkaRenrakuHyo.csv");
     private static final RString ダブル引用符 = new RString("\"");
-    // TODO QA#1347
-    // private IOutputOrder 並び順;
     private Decimal 連番;
     private final int 定値INT_0 = 0;
     private final RString 定値RSTRING_0 = new RString("0");
@@ -255,6 +258,12 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
     private static final RString HEAD_送付年月 = new RString("送付年月");
     private static final RString HEAD_支給額計算結果連絡票作成年月日 = new RString("支給額計算結果連絡票作成年月日");
     private static final RString HEAD_データ種類 = new RString("データ種類");
+    private static final RString ORDER_BY = new RString("ORDER BY ");
+    private static final RString 出力順_被保険者番号 = new RString("\"dbT3072_hihokenshaNo\" ASC, ");
+    private static final RString 出力順_対象年度 = new RString("\"dbT3072_taishoNendo\" ASC, ");
+    private static final RString 出力順_保険者番号 = new RString("\"dbT3072_shoKisaiHokenshaNo\" ASC, ");
+    private static final RString 出力順_支給申請書整理番号 = new RString("\"dbT3072_shikyuShinseishoSeiriNo\" ASC, ");
+    private static final RString 出力順_履歴番号 = new RString("\"dbT3072_rirekiNo\" ASC");
 
     @Override
     protected void initialize() {
@@ -275,19 +284,6 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
         }
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
                 EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
-        // TODO QA#1347
-//        if (RString.isNullOrEmpty(parameter.get抽出区分())) {
-//            IChohyoShutsuryokujunFinder iChohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
-//            IOutputOrder 出力順;
-//            出力順 = iChohyoShutsuryokujunFinder.get出力順(SubGyomuCode.DBC介護給付,
-//                    ReportIdDBC.DBC701016.getReportId(), parameter.get出力順().toString());
-//            if (出力順 != null) {
-//                parameter.set出力順(MyBatisOrderByClauseCreator.create(
-//                        HanyoList_KogakuGassanShinseishoJohoProperty.DBC701016ShutsuryokujunEnum.class, 出力順));
-//            } else {
-//                parameter.set出力順(デフォルト出力順);
-//            }
-//        }
         parameter.setSearchKey(new ShikibetsuTaishoPSMSearchKeyBuilder(
                 GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先).setデータ取得区分(DataShutokuKubun.直近レコード).build());
     }
@@ -295,6 +291,7 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
     @Override
     protected IBatchReader createReader() {
         parameter.set介護合算_仮算定データ(Kaigogassan_KarisanteiData.仮算定データ.getコード());
+        parameter.set出力項目(get出力順());
         return new BatchDbReader(READ_DATA_ID, parameter.toMybatisParam());
     }
 
@@ -313,11 +310,6 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
         if (parameter.is項目名付加()) {
             hanyoListKogakuCSVWriter.writeLine(getHeader());
         }
-    }
-
-    @Override
-    protected void beforeExecute() {
-
     }
 
     @Override
@@ -626,15 +618,6 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
         return 対象年度.toDateString();
     }
 
-// TODO QA#1347
-//    private IOutputOrder get並び順(ReportId 帳票分類ID, RString 出力順ID) {
-//        if (RString.isNullOrEmpty(出力順ID)) {
-//            return null;
-//        }
-//        IChohyoShutsuryokujunFinder fider = ChohyoShutsuryokujunFinderFactory.createInstance();
-//        IOutputOrder outputOrder = fider.get出力順(SubGyomuCode.DBC介護給付, 帳票分類ID, Long.parseLong(出力順ID.toString()));
-//        return outputOrder;
-//    }
     private RString getパターン32(FlexibleDate date) {
         if (date != null) {
             return date.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
@@ -992,5 +975,24 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
         csvEntity.set支給額計算結果連絡票作成年月日(HEAD_支給額計算結果連絡票作成年月日);
         csvEntity.setデータ種類(HEAD_データ種類);
         return csvEntity;
+    }
+
+    private RString get出力順() {
+        IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
+        IOutputOrder order = finder.get出力順(parameter.getサブ業務コード(), parameter.get帳票ID(),
+                parameter.get出力順());
+        RString 出力順 = RString.EMPTY;
+        if (order != null) {
+            出力順 = MyBatisOrderByClauseCreator.create(HanyoListKogakuGassanOutPutOrder.class, order);
+        }
+        if (RString.isNullOrEmpty(出力順)) {
+            出力順 = 出力順.concat(ORDER_BY);
+        }
+        出力順 = 出力順.concat(出力順_被保険者番号);
+        出力順 = 出力順.concat(出力順_対象年度);
+        出力順 = 出力順.concat(出力順_保険者番号);
+        出力順 = 出力順.concat(出力順_支給申請書整理番号);
+        出力順 = 出力順.concat(出力順_履歴番号);
+        return 出力順;
     }
 }

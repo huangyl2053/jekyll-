@@ -613,7 +613,6 @@ public class JikoFutangakuHosei2Handler4 {
                 .getTxt20NendoJissaiJikofutangakuYoku6GatsuMae().getValue());
         高額合算自己負担額補正保持Entity.set変更前_補正後_実際の自己負担額_翌年7月分(div.getTbl20Nendo()
                 .getTxt20NendoJissaiJikofutangakuYoku7GatsuMae().getValue());
-        高額合算自己負担額補正保持Entity.set呼び出しフラグ(呼び出しフラグ_1);
     }
 
     /**
@@ -806,53 +805,6 @@ public class JikoFutangakuHosei2Handler4 {
     }
 
     /**
-     * is補正後チェック4のメソッドです。
-     *
-     * @param div JikoFutangakuHosei2PanelDiv
-     * @return boolean
-     */
-    public boolean is補正後チェック4(JikoFutangakuHosei2PanelDiv div) {
-        Decimal うち70_74歳に係る負担額_4月分 = div.getTbl20Nendo().getTxt20Nendo70Kara74Futangaku4GatsuMae().getValue();
-        Decimal うち70_74歳に係る負担額_5月分 = div.getTbl20Nendo().getTxt20Nendo70Kara74Futangaku5GatsuMae().getValue();
-        Decimal うち70_74歳に係る負担額_6月分 = div.getTbl20Nendo().getTxt20Nendo70Kara74Futangaku6GatsuMae().getValue();
-        Decimal うち70_74歳に係る負担額_7月分 = div.getTbl20Nendo().getTxt20Nendo70Kara74Futangaku7GatsuMae().getValue();
-        Decimal うち70_74歳に係る負担額_8月分 = div.getTbl20Nendo().getTxt20Nendo70Kara74Futangaku8GatsuMae().getValue();
-        Decimal うち70_74歳に係る負担額_9月分 = div.getTbl20Nendo().getTxt20Nendo70Kara74Futangaku9GatsuMae().getValue();
-        Decimal うち70_74歳に係る負担額_10月分 = div.getTbl20Nendo().getTxt20Nendo70Kara74Futangaku10GatsuMae().getValue();
-        Decimal うち70_74歳に係る負担額_11月分 = div.getTbl20Nendo().getTxt20Nendo70Kara74Futangaku11GatsuMae().getValue();
-        Decimal うち70_74歳に係る負担額_12月分 = div.getTbl20Nendo().getTxt20Nendo70Kara74Futangaku12GatsuMae().getValue();
-        if (!Decimal.ZERO.equals(うち70_74歳に係る負担額_4月分)
-                || !Decimal.ZERO.equals(うち70_74歳に係る負担額_5月分)
-                || !Decimal.ZERO.equals(うち70_74歳に係る負担額_6月分)
-                || !Decimal.ZERO.equals(うち70_74歳に係る負担額_7月分)
-                || !Decimal.ZERO.equals(うち70_74歳に係る負担額_8月分)
-                || !Decimal.ZERO.equals(うち70_74歳に係る負担額_9月分)
-                || !Decimal.ZERO.equals(うち70_74歳に係る負担額_10月分)
-                || !Decimal.ZERO.equals(うち70_74歳に係る負担額_11月分)
-                || !Decimal.ZERO.equals(うち70_74歳に係る負担額_12月分)) {
-            return true;
-        }
-        return is補正後チェック4_翌年(div);
-    }
-
-    private boolean is補正後チェック4_翌年(JikoFutangakuHosei2PanelDiv div) {
-        Decimal うち70_74歳に係る負担額_翌年1月分 = div.getTbl20Nendo().getTxt20Nendo70Kara74FutangakuYoku1GatsuMae().getValue();
-        Decimal うち70_74歳に係る負担額_翌年2月分 = div.getTbl20Nendo().getTxt20Nendo70Kara74FutangakuYoku2GatsuMae().getValue();
-        Decimal うち70_74歳に係る負担額_翌年3月分 = div.getTbl20Nendo().getTxt20Nendo70Kara74FutangakuYoku3GatsuMae().getValue();
-        Decimal うち70_74歳に係る負担額_翌年4月分 = div.getTbl20Nendo().getTxt20Nendo70Kara74FutangakuYoku4GatsuMae().getValue();
-        Decimal うち70_74歳に係る負担額_翌年5月分 = div.getTbl20Nendo().getTxt20Nendo70Kara74FutangakuYoku5GatsuMae().getValue();
-        Decimal うち70_74歳に係る負担額_翌年6月分 = div.getTbl20Nendo().getTxt20Nendo70Kara74FutangakuYoku6GatsuMae().getValue();
-        Decimal うち70_74歳に係る負担額_翌年7月分 = div.getTbl20Nendo().getTxt20Nendo70Kara74FutangakuYoku7GatsuMae().getValue();
-        return (!Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年1月分)
-                || !Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年2月分)
-                || !Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年3月分)
-                || !Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年4月分)
-                || !Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年5月分)
-                || !Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年6月分)
-                || !Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年7月分));
-    }
-
-    /**
      * is補正後チェック4_補正後のメソッドです。
      *
      * @param div JikoFutangakuHosei2PanelDiv
@@ -914,42 +866,33 @@ public class JikoFutangakuHosei2Handler4 {
         FlexibleYearMonth 対象年月_004 = new FlexibleYearMonth(対象年度.toString().concat(月_004.toString()));
         FlexibleYearMonth 対象年月_005 = new FlexibleYearMonth(対象年度.toString().concat(月_005.toString()));
         FlexibleYearMonth 対象年月_006 = new FlexibleYearMonth(対象年度.toString().concat(月_006.toString()));
-        Decimal うち70_74歳に係る負担額_4月分 = div.getTbl20Nendo().getTxt20Nendo70Kara74Futangaku4GatsuMae().getValue();
         Decimal うち70_74歳に係る負担額_4月分_補正後 = div.getTbl20Nendo().getTxt20Nendo70Kara74Futangaku4GatsuGo().getValue();
         if (対象年月_004.isBefore(歳_70_年月) || 歳_75_年月.isBeforeOrEquals(対象年月_004)) {
-            if (!Decimal.ZERO.equals(うち70_74歳に係る負担額_4月分)
-                    || !Decimal.ZERO.equals(うち70_74歳に係る負担額_4月分_補正後)) {
+            if (!Decimal.ZERO.equals(うち70_74歳に係る負担額_4月分_補正後)) {
                 return CODE_35;
             }
         } else {
-            if (Decimal.ZERO.equals(うち70_74歳に係る負担額_4月分)
-                    || Decimal.ZERO.equals(うち70_74歳に係る負担額_4月分_補正後)) {
+            if (Decimal.ZERO.equals(うち70_74歳に係る負担額_4月分_補正後)) {
                 return CODE_36;
             }
         }
-        Decimal うち70_74歳に係る負担額_5月分 = div.getTbl20Nendo().getTxt20Nendo70Kara74Futangaku5GatsuMae().getValue();
         Decimal うち70_74歳に係る負担額_5月分_補正後 = div.getTbl20Nendo().getTxt20Nendo70Kara74Futangaku5GatsuGo().getValue();
         if (対象年月_005.isBefore(歳_70_年月) || 歳_75_年月.isBeforeOrEquals(対象年月_005)) {
-            if (!Decimal.ZERO.equals(うち70_74歳に係る負担額_5月分)
-                    || !Decimal.ZERO.equals(うち70_74歳に係る負担額_5月分_補正後)) {
+            if (!Decimal.ZERO.equals(うち70_74歳に係る負担額_5月分_補正後)) {
                 return CODE_35;
             }
         } else {
-            if (Decimal.ZERO.equals(うち70_74歳に係る負担額_5月分)
-                    || Decimal.ZERO.equals(うち70_74歳に係る負担額_5月分_補正後)) {
+            if (Decimal.ZERO.equals(うち70_74歳に係る負担額_5月分_補正後)) {
                 return CODE_36;
             }
         }
-        Decimal うち70_74歳に係る負担額_6月分 = div.getTbl20Nendo().getTxt20Nendo70Kara74Futangaku6GatsuMae().getValue();
         Decimal うち70_74歳に係る負担額_6月分_補正後 = div.getTbl20Nendo().getTxt20Nendo70Kara74Futangaku6GatsuGo().getValue();
         if (対象年月_006.isBefore(歳_70_年月) || 歳_75_年月.isBeforeOrEquals(対象年月_006)) {
-            if (!Decimal.ZERO.equals(うち70_74歳に係る負担額_6月分)
-                    || !Decimal.ZERO.equals(うち70_74歳に係る負担額_6月分_補正後)) {
+            if (!Decimal.ZERO.equals(うち70_74歳に係る負担額_6月分_補正後)) {
                 return CODE_35;
             }
         } else {
-            if (Decimal.ZERO.equals(うち70_74歳に係る負担額_6月分)
-                    || Decimal.ZERO.equals(うち70_74歳に係る負担額_6月分_補正後)) {
+            if (Decimal.ZERO.equals(うち70_74歳に係る負担額_6月分_補正後)) {
                 return CODE_36;
             }
         }
@@ -963,42 +906,33 @@ public class JikoFutangakuHosei2Handler4 {
         FlexibleYearMonth 対象年月_007 = new FlexibleYearMonth(対象年度.toString().concat(月_007.toString()));
         FlexibleYearMonth 対象年月_008 = new FlexibleYearMonth(対象年度.toString().concat(月_008.toString()));
         FlexibleYearMonth 対象年月_009 = new FlexibleYearMonth(対象年度.toString().concat(月_009.toString()));
-        Decimal うち70_74歳に係る負担額_7月分 = div.getTbl20Nendo().getTxt20Nendo70Kara74Futangaku7GatsuMae().getValue();
         Decimal うち70_74歳に係る負担額_7月分_補正後 = div.getTbl20Nendo().getTxt20Nendo70Kara74Futangaku7GatsuGo().getValue();
         if (対象年月_007.isBefore(歳_70_年月) || 歳_75_年月.isBeforeOrEquals(対象年月_007)) {
-            if (!Decimal.ZERO.equals(うち70_74歳に係る負担額_7月分)
-                    || !Decimal.ZERO.equals(うち70_74歳に係る負担額_7月分_補正後)) {
+            if (!Decimal.ZERO.equals(うち70_74歳に係る負担額_7月分_補正後)) {
                 return CODE_35;
             }
         } else {
-            if (Decimal.ZERO.equals(うち70_74歳に係る負担額_7月分)
-                    || Decimal.ZERO.equals(うち70_74歳に係る負担額_7月分_補正後)) {
+            if (Decimal.ZERO.equals(うち70_74歳に係る負担額_7月分_補正後)) {
                 return CODE_36;
             }
         }
-        Decimal うち70_74歳に係る負担額_8月分 = div.getTbl20Nendo().getTxt20Nendo70Kara74Futangaku8GatsuMae().getValue();
         Decimal うち70_74歳に係る負担額_8月分_補正後 = div.getTbl20Nendo().getTxt20Nendo70Kara74Futangaku8GatsuGo().getValue();
         if (対象年月_008.isBefore(歳_70_年月) || 歳_75_年月.isBeforeOrEquals(対象年月_008)) {
-            if (!Decimal.ZERO.equals(うち70_74歳に係る負担額_8月分)
-                    || !Decimal.ZERO.equals(うち70_74歳に係る負担額_8月分_補正後)) {
+            if (!Decimal.ZERO.equals(うち70_74歳に係る負担額_8月分_補正後)) {
                 return CODE_35;
             }
         } else {
-            if (Decimal.ZERO.equals(うち70_74歳に係る負担額_8月分)
-                    || Decimal.ZERO.equals(うち70_74歳に係る負担額_8月分_補正後)) {
+            if (Decimal.ZERO.equals(うち70_74歳に係る負担額_8月分_補正後)) {
                 return CODE_36;
             }
         }
-        Decimal うち70_74歳に係る負担額_9月分 = div.getTbl20Nendo().getTxt20Nendo70Kara74Futangaku9GatsuMae().getValue();
         Decimal うち70_74歳に係る負担額_9月分_補正後 = div.getTbl20Nendo().getTxt20Nendo70Kara74Futangaku9GatsuGo().getValue();
         if (対象年月_009.isBefore(歳_70_年月) || 歳_75_年月.isBeforeOrEquals(対象年月_009)) {
-            if (!Decimal.ZERO.equals(うち70_74歳に係る負担額_9月分)
-                    || !Decimal.ZERO.equals(うち70_74歳に係る負担額_9月分_補正後)) {
+            if (!Decimal.ZERO.equals(うち70_74歳に係る負担額_9月分_補正後)) {
                 return CODE_35;
             }
         } else {
-            if (Decimal.ZERO.equals(うち70_74歳に係る負担額_9月分)
-                    || Decimal.ZERO.equals(うち70_74歳に係る負担額_9月分_補正後)) {
+            if (Decimal.ZERO.equals(うち70_74歳に係る負担額_9月分_補正後)) {
                 return CODE_36;
             }
         }
@@ -1012,42 +946,33 @@ public class JikoFutangakuHosei2Handler4 {
         FlexibleYearMonth 対象年月_010 = new FlexibleYearMonth(対象年度.toString().concat(月_010.toString()));
         FlexibleYearMonth 対象年月_011 = new FlexibleYearMonth(対象年度.toString().concat(月_011.toString()));
         FlexibleYearMonth 対象年月_012 = new FlexibleYearMonth(対象年度.toString().concat(月_012.toString()));
-        Decimal うち70_74歳に係る負担額_10月分 = div.getTbl20Nendo().getTxt20Nendo70Kara74Futangaku10GatsuMae().getValue();
         Decimal うち70_74歳に係る負担額_10月分_補正後 = div.getTbl20Nendo().getTxt20Nendo70Kara74Futangaku10GatsuGo().getValue();
         if (対象年月_010.isBefore(歳_70_年月) || 歳_75_年月.isBeforeOrEquals(対象年月_010)) {
-            if (!Decimal.ZERO.equals(うち70_74歳に係る負担額_10月分)
-                    || !Decimal.ZERO.equals(うち70_74歳に係る負担額_10月分_補正後)) {
+            if (!Decimal.ZERO.equals(うち70_74歳に係る負担額_10月分_補正後)) {
                 return CODE_35;
             }
         } else {
-            if (Decimal.ZERO.equals(うち70_74歳に係る負担額_10月分)
-                    || Decimal.ZERO.equals(うち70_74歳に係る負担額_10月分_補正後)) {
+            if (Decimal.ZERO.equals(うち70_74歳に係る負担額_10月分_補正後)) {
                 return CODE_36;
             }
         }
-        Decimal うち70_74歳に係る負担額_11月分 = div.getTbl20Nendo().getTxt20Nendo70Kara74Futangaku11GatsuMae().getValue();
         Decimal うち70_74歳に係る負担額_11月分_補正後 = div.getTbl20Nendo().getTxt20Nendo70Kara74Futangaku11GatsuGo().getValue();
         if (対象年月_011.isBefore(歳_70_年月) || 歳_75_年月.isBeforeOrEquals(対象年月_011)) {
-            if (!Decimal.ZERO.equals(うち70_74歳に係る負担額_11月分)
-                    || !Decimal.ZERO.equals(うち70_74歳に係る負担額_11月分_補正後)) {
+            if (!Decimal.ZERO.equals(うち70_74歳に係る負担額_11月分_補正後)) {
                 return CODE_35;
             }
         } else {
-            if (Decimal.ZERO.equals(うち70_74歳に係る負担額_11月分)
-                    || Decimal.ZERO.equals(うち70_74歳に係る負担額_11月分_補正後)) {
+            if (Decimal.ZERO.equals(うち70_74歳に係る負担額_11月分_補正後)) {
                 return CODE_36;
             }
         }
-        Decimal うち70_74歳に係る負担額_12月分 = div.getTbl20Nendo().getTxt20Nendo70Kara74Futangaku12GatsuMae().getValue();
         Decimal うち70_74歳に係る負担額_12月分_補正後 = div.getTbl20Nendo().getTxt20Nendo70Kara74Futangaku12GatsuGo().getValue();
         if (対象年月_012.isBefore(歳_70_年月) || 歳_75_年月.isBeforeOrEquals(対象年月_012)) {
-            if (!Decimal.ZERO.equals(うち70_74歳に係る負担額_12月分)
-                    || !Decimal.ZERO.equals(うち70_74歳に係る負担額_12月分_補正後)) {
+            if (!Decimal.ZERO.equals(うち70_74歳に係る負担額_12月分_補正後)) {
                 return CODE_35;
             }
         } else {
-            if (Decimal.ZERO.equals(うち70_74歳に係る負担額_12月分)
-                    || Decimal.ZERO.equals(うち70_74歳に係る負担額_12月分_補正後)) {
+            if (Decimal.ZERO.equals(うち70_74歳に係る負担額_12月分_補正後)) {
                 return CODE_36;
             }
         }
@@ -1061,42 +986,33 @@ public class JikoFutangakuHosei2Handler4 {
         FlexibleYearMonth 対象年月_101 = new FlexibleYearMonth(対象年度.plusYear(INT_1).toString().concat(月_101.toString()));
         FlexibleYearMonth 対象年月_102 = new FlexibleYearMonth(対象年度.plusYear(INT_1).toString().concat(月_102.toString()));
         FlexibleYearMonth 対象年月_103 = new FlexibleYearMonth(対象年度.plusYear(INT_1).toString().concat(月_103.toString()));
-        Decimal うち70_74歳に係る負担額_翌年1月分 = div.getTbl20Nendo().getTxt20Nendo70Kara74FutangakuYoku1GatsuMae().getValue();
         Decimal うち70_74歳に係る負担額_翌年1月分_補正後 = div.getTbl20Nendo().getTxt20Nendo70Kara74FutangakuYoku1GatsuGo().getValue();
         if (対象年月_101.isBefore(歳_70_年月) || 歳_75_年月.isBeforeOrEquals(対象年月_101)) {
-            if (!Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年1月分)
-                    || !Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年1月分_補正後)) {
+            if (!Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年1月分_補正後)) {
                 return CODE_35;
             }
         } else {
-            if (Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年1月分)
-                    || Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年1月分_補正後)) {
+            if (Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年1月分_補正後)) {
                 return CODE_36;
             }
         }
-        Decimal うち70_74歳に係る負担額_翌年2月分 = div.getTbl20Nendo().getTxt20Nendo70Kara74FutangakuYoku2GatsuMae().getValue();
         Decimal うち70_74歳に係る負担額_翌年2月分_補正後 = div.getTbl20Nendo().getTxt20Nendo70Kara74FutangakuYoku2GatsuGo().getValue();
         if (対象年月_102.isBefore(歳_70_年月) || 歳_75_年月.isBeforeOrEquals(対象年月_102)) {
-            if (!Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年2月分)
-                    || !Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年2月分_補正後)) {
+            if (!Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年2月分_補正後)) {
                 return CODE_35;
             }
         } else {
-            if (Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年2月分)
-                    || Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年2月分_補正後)) {
+            if (Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年2月分_補正後)) {
                 return CODE_36;
             }
         }
-        Decimal うち70_74歳に係る負担額_翌年3月分 = div.getTbl20Nendo().getTxt20Nendo70Kara74FutangakuYoku3GatsuMae().getValue();
         Decimal うち70_74歳に係る負担額_翌年3月分_補正後 = div.getTbl20Nendo().getTxt20Nendo70Kara74FutangakuYoku3GatsuGo().getValue();
         if (対象年月_103.isBefore(歳_70_年月) || 歳_75_年月.isBeforeOrEquals(対象年月_103)) {
-            if (!Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年3月分)
-                    || !Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年3月分_補正後)) {
+            if (!Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年3月分_補正後)) {
                 return CODE_35;
             }
         } else {
-            if (Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年3月分)
-                    || Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年3月分_補正後)) {
+            if (Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年3月分_補正後)) {
                 return CODE_36;
             }
         }
@@ -1110,42 +1026,33 @@ public class JikoFutangakuHosei2Handler4 {
         FlexibleYearMonth 対象年月_104 = new FlexibleYearMonth(対象年度.plusYear(INT_1).toString().concat(月_104.toString()));
         FlexibleYearMonth 対象年月_105 = new FlexibleYearMonth(対象年度.plusYear(INT_1).toString().concat(月_105.toString()));
         FlexibleYearMonth 対象年月_106 = new FlexibleYearMonth(対象年度.plusYear(INT_1).toString().concat(月_106.toString()));
-        Decimal うち70_74歳に係る負担額_翌年4月分 = div.getTbl20Nendo().getTxt20Nendo70Kara74FutangakuYoku4GatsuMae().getValue();
         Decimal うち70_74歳に係る負担額_翌年4月分_補正後 = div.getTbl20Nendo().getTxt20Nendo70Kara74FutangakuYoku4GatsuGo().getValue();
         if (対象年月_104.isBefore(歳_70_年月) || 歳_75_年月.isBeforeOrEquals(対象年月_104)) {
-            if (!Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年4月分)
-                    || !Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年4月分_補正後)) {
+            if (!Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年4月分_補正後)) {
                 return CODE_35;
             }
         } else {
-            if (Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年4月分)
-                    || Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年4月分_補正後)) {
+            if (Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年4月分_補正後)) {
                 return CODE_36;
             }
         }
-        Decimal うち70_74歳に係る負担額_翌年5月分 = div.getTbl20Nendo().getTxt20Nendo70Kara74FutangakuYoku5GatsuMae().getValue();
         Decimal うち70_74歳に係る負担額_翌年5月分_補正後 = div.getTbl20Nendo().getTxt20Nendo70Kara74FutangakuYoku5GatsuGo().getValue();
         if (対象年月_105.isBefore(歳_70_年月) || 歳_75_年月.isBeforeOrEquals(対象年月_105)) {
-            if (!Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年5月分)
-                    || !Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年5月分_補正後)) {
+            if (!Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年5月分_補正後)) {
                 return CODE_35;
             }
         } else {
-            if (Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年5月分)
-                    || Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年5月分_補正後)) {
+            if (Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年5月分_補正後)) {
                 return CODE_36;
             }
         }
-        Decimal うち70_74歳に係る負担額_翌年6月分 = div.getTbl20Nendo().getTxt20Nendo70Kara74FutangakuYoku6GatsuMae().getValue();
         Decimal うち70_74歳に係る負担額_翌年6月分_補正後 = div.getTbl20Nendo().getTxt20Nendo70Kara74FutangakuYoku6GatsuGo().getValue();
         if (対象年月_106.isBefore(歳_70_年月) || 歳_75_年月.isBeforeOrEquals(対象年月_106)) {
-            if (!Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年6月分)
-                    || !Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年6月分_補正後)) {
+            if (!Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年6月分_補正後)) {
                 return CODE_35;
             }
         } else {
-            if (Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年6月分)
-                    || Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年6月分_補正後)) {
+            if (Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年6月分_補正後)) {
                 return CODE_36;
             }
         }
@@ -1157,16 +1064,13 @@ public class JikoFutangakuHosei2Handler4 {
         FlexibleYearMonth 歳_75_年月 = 生年月.plusYear(歳_75);
         FlexibleYearMonth 歳_70_年月 = 生年月.plusYear(歳_70);
         FlexibleYearMonth 対象年月_107 = new FlexibleYearMonth(対象年度.plusYear(INT_1).toString().concat(月_107.toString()));
-        Decimal うち70_74歳に係る負担額_翌年7月分 = div.getTbl20Nendo().getTxt20Nendo70Kara74FutangakuYoku7GatsuMae().getValue();
         Decimal うち70_74歳に係る負担額_翌年7月分_補正後 = div.getTbl20Nendo().getTxt20Nendo70Kara74FutangakuYoku7GatsuGo().getValue();
         if (対象年月_107.isBefore(歳_70_年月) || 歳_75_年月.isBeforeOrEquals(対象年月_107)) {
-            if (!Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年7月分)
-                    || !Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年7月分_補正後)) {
+            if (!Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年7月分_補正後)) {
                 return CODE_35;
             }
         } else {
-            if (Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年7月分)
-                    || Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年7月分_補正後)) {
+            if (Decimal.ZERO.equals(うち70_74歳に係る負担額_翌年7月分_補正後)) {
                 return CODE_36;
             }
         }
@@ -1198,15 +1102,15 @@ public class JikoFutangakuHosei2Handler4 {
         Decimal 高額介護_予防_サービス費_11月分 = div.getTbl20Nendo().getTxt20NendoKougakuKaigoServicehi11GatsuGo().getValue();
         Decimal 自己負担額_12月分 = div.getTbl20Nendo().getTxt20NendoJikofutangaku12GatsuGo().getValue();
         Decimal 高額介護_予防_サービス費_12月分 = div.getTbl20Nendo().getTxt20NendoKougakuKaigoServicehi12GatsuGo().getValue();
-        if (高額介護_予防_サービス費_4月分.compareTo(自己負担額_4月分) != INT_1
-                || 高額介護_予防_サービス費_5月分.compareTo(自己負担額_5月分) != INT_1
-                || 高額介護_予防_サービス費_6月分.compareTo(自己負担額_6月分) != INT_1
-                || 高額介護_予防_サービス費_7月分.compareTo(自己負担額_7月分) != INT_1
-                || 高額介護_予防_サービス費_8月分.compareTo(自己負担額_8月分) != INT_1
-                || 高額介護_予防_サービス費_9月分.compareTo(自己負担額_9月分) != INT_1
-                || 高額介護_予防_サービス費_10月分.compareTo(自己負担額_10月分) != INT_1
-                || 高額介護_予防_サービス費_11月分.compareTo(自己負担額_11月分) != INT_1
-                || 高額介護_予防_サービス費_12月分.compareTo(自己負担額_12月分) != INT_1) {
+        if (高額介護_予防_サービス費_4月分.compareTo(自己負担額_4月分) == INT_1
+                || 高額介護_予防_サービス費_5月分.compareTo(自己負担額_5月分) == INT_1
+                || 高額介護_予防_サービス費_6月分.compareTo(自己負担額_6月分) == INT_1
+                || 高額介護_予防_サービス費_7月分.compareTo(自己負担額_7月分) == INT_1
+                || 高額介護_予防_サービス費_8月分.compareTo(自己負担額_8月分) == INT_1
+                || 高額介護_予防_サービス費_9月分.compareTo(自己負担額_9月分) == INT_1
+                || 高額介護_予防_サービス費_10月分.compareTo(自己負担額_10月分) == INT_1
+                || 高額介護_予防_サービス費_11月分.compareTo(自己負担額_11月分) == INT_1
+                || 高額介護_予防_サービス費_12月分.compareTo(自己負担額_12月分) == INT_1) {
             return true;
         }
         return is高額介護_予防_サービス費チェック_翌年(div);
@@ -1227,13 +1131,13 @@ public class JikoFutangakuHosei2Handler4 {
         Decimal 高額介護_予防_サービス費_6月分 = div.getTbl20Nendo().getTxt20NendoKougakuKaigoServicehiYoku6GatsuGo().getValue();
         Decimal 自己負担額_7月分 = div.getTbl20Nendo().getTxt20NendoJikofutangakuYoku7GatsuGo().getValue();
         Decimal 高額介護_予防_サービス費_7月分 = div.getTbl20Nendo().getTxt20NendoKougakuKaigoServicehiYoku7GatsuGo().getValue();
-        return (高額介護_予防_サービス費_1月分.compareTo(自己負担額_1月分) != INT_1
-                || 高額介護_予防_サービス費_2月分.compareTo(自己負担額_2月分) != INT_1
-                || 高額介護_予防_サービス費_3月分.compareTo(自己負担額_3月分) != INT_1
-                || 高額介護_予防_サービス費_4月分.compareTo(自己負担額_4月分) != INT_1
-                || 高額介護_予防_サービス費_5月分.compareTo(自己負担額_5月分) != INT_1
-                || 高額介護_予防_サービス費_6月分.compareTo(自己負担額_6月分) != INT_1
-                || 高額介護_予防_サービス費_7月分.compareTo(自己負担額_7月分) != INT_1);
+        return (高額介護_予防_サービス費_1月分.compareTo(自己負担額_1月分) == INT_1
+                || 高額介護_予防_サービス費_2月分.compareTo(自己負担額_2月分) == INT_1
+                || 高額介護_予防_サービス費_3月分.compareTo(自己負担額_3月分) == INT_1
+                || 高額介護_予防_サービス費_4月分.compareTo(自己負担額_4月分) == INT_1
+                || 高額介護_予防_サービス費_5月分.compareTo(自己負担額_5月分) == INT_1
+                || 高額介護_予防_サービス費_6月分.compareTo(自己負担額_6月分) == INT_1
+                || 高額介護_予防_サービス費_7月分.compareTo(自己負担額_7月分) == INT_1);
     }
 
     /**

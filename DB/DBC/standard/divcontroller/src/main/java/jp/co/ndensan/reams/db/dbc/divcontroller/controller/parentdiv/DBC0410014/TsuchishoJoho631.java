@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0410014;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.kokuhorenkyoutsu.KokuhorenKyoutsuBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120240.DBC120240_SeikyugakuTsuchishoKohiInParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410014.TsuchishoJoho631Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
 import jp.co.ndensan.reams.db.dbz.definition.core.viewstatename.ViewStateHolderName;
@@ -42,8 +42,8 @@ public class TsuchishoJoho631 {
      * @param div TsuchishoJoho631Div
      * @return ResponseData
      */
-    public ResponseData<KokuhorenKyoutsuBatchParameter> onImplement(TsuchishoJoho631Div div) {
-        KokuhorenKyoutsuBatchParameter parameter = new KokuhorenKyoutsuBatchParameter();
+    public ResponseData<DBC120240_SeikyugakuTsuchishoKohiInParameter> onImplement(TsuchishoJoho631Div div) {
+        DBC120240_SeikyugakuTsuchishoKohiInParameter parameter = new DBC120240_SeikyugakuTsuchishoKohiInParameter();
         RDate 処理年月 = div.getCcdKokurenJohoTorikomi().get処理年月();
         parameter.setShoriYM(new FlexibleYearMonth(処理年月.getYearMonth().toDateString()));
         return ResponseData.of(parameter).respond();

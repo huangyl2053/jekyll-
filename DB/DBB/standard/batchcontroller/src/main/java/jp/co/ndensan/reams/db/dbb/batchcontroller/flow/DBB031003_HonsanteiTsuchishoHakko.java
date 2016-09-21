@@ -6,24 +6,24 @@
 package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt43002.DecideKetteiHenkoTsuchishoProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt43002.HonsanteiTsuchishoTempTableDropProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt43002.InitPrtKetteiTsuchishoProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt43002.InsHonsanteiTsuchishoTmpProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt43002.InsZenkenFukaInfoTmpProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt43002.PrtHenkoTsuchishoProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt43002.PrtKetteiTsuchishoProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt43002.PrtNonyuTsuchishoProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt43002.PrtTokuchoKaishiTsuchishoHonsanteiProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt43002.UpdHonsanteiTsuchishoTmpKouseiMaeDataProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt43002.UpdHonsanteiTsuchishoTmpSeikahoboKubunProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt43002.UpdHonsanteiTsuchishoTmpTaisyoshaDataProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt43002.UpdZenkenFukaInfoTmpKouseiMaeDataProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt43002.UpdZenkenFukaInfoTmpSeikahoboKubunProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt43002.UpdZenkenFukaInfoTmpTaisyoshaDataProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031003.DecideKetteiHenkoTsuchishoProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031003.HonsanteiTsuchishoTempTableDropProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031003.InitPrtKetteiTsuchishoProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031003.InsHonsanteiTsuchishoTmpProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031003.InsZenkenFukaInfoTmpProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031003.PrtHenkoTsuchishoProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031003.PrtKetteiTsuchishoProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031003.PrtNonyuTsuchishoProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031003.PrtTokuchoKaishiTsuchishoHonsanteiProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031003.UpdHonsanteiTsuchishoTmpKouseiMaeDataProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031003.UpdHonsanteiTsuchishoTmpSeikahoboKubunProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031003.UpdHonsanteiTsuchishoTmpTaisyoshaDataProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031003.UpdZenkenFukaInfoTmpKouseiMaeDataProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031003.UpdZenkenFukaInfoTmpSeikahoboKubunProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB031003.UpdZenkenFukaInfoTmpTaisyoshaDataProcess;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB003001.DBB003001_KeisangoJohoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB031003.DBB031003_HonsanteiTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteifuka.HonsanteifukaBatchTyouhyou;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt43002.HonsanteifukaProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
@@ -67,7 +67,7 @@ public class DBB031003_HonsanteiTsuchishoHakko extends BatchFlowBase<DBB031003_H
 
     private static final String 納入通知書の発行 = "prtNonyuTsuchishoProcess";
 
-    private static final RString BATCH_ID = new RString("KeisangoJohoSakuseiFlow");
+    private static final RString BATCH_ID = new RString("DBB003001_KeisangoJohoSakusei");
     private DBB031003_HonsanteiTsuchishoHakkoParameter parameter;
     private RString バッチフロー_帳票分類ID;
     private HonsanteifukaProcessParameter processParameter;
@@ -327,12 +327,12 @@ public class DBB031003_HonsanteiTsuchishoHakko extends BatchFlowBase<DBB031003_H
         return otherBatchFlow(BATCH_ID, SubGyomuCode.DBB介護賦課, getKeisangoJohoSakuseiBatchParamter(バッチフロー_帳票分類ID)).define();
     }
 
-    private KeisangoJohoSakuseiBatchParamter getKeisangoJohoSakuseiBatchParamter(RString 帳票分類ID) {
+    private DBB003001_KeisangoJohoSakuseiParameter getKeisangoJohoSakuseiBatchParamter(RString 帳票分類ID) {
         if (バッチフロー_帳票分類ID.equals(特別徴収開始通知書本算定_帳票分類ID.getColumnValue())) {
-            return new KeisangoJohoSakuseiBatchParamter(getParameter().get調定年度().toDateString(),
+            return new DBB003001_KeisangoJohoSakuseiParameter(getParameter().get調定年度().toDateString(),
                     getParameter().get賦課年度().toDateString(), null, ShoriName.本算定賦課.get名称(), 帳票分類ID);
         }
-        return new KeisangoJohoSakuseiBatchParamter(getParameter().get調定年度().toDateString(),
+        return new DBB003001_KeisangoJohoSakuseiParameter(getParameter().get調定年度().toDateString(),
                 getParameter().get賦課年度().toDateString(),
                 getResult(YMDHMS.class, new RString(最新調定日時の取得), InitPrtKetteiTsuchishoProcess.KIJUN_TIME).toDateString(),
                 ShoriName.本算定賦課.get名称(), 帳票分類ID);

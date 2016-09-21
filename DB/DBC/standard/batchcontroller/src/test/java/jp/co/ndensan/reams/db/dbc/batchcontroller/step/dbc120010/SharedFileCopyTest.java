@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120010;
 
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120010.SharedFileCopyProcess;
 import java.util.HashMap;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.IcchiJoken;

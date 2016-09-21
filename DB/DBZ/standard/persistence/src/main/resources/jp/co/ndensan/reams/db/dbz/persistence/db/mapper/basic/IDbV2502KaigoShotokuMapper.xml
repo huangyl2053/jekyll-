@@ -9,7 +9,7 @@
     <sql id="allColumns_DbV2502">
         "DbV2502"."shotokuNendo" as "DbV2502_shotokuNendo",
         "DbV2502"."shikibetsuCode" as "DbV2502_shikibetsuCode",
-        "DbV2502"."rirekino" as "DbV2502_rirekino",
+        "DbV2502"."rirekiNo" as "DbV2502_rirekino",
         "DbV2502"."kazeiKubun" as "DbV2502_kazeiKubun",
         "DbV2502"."kazeiKubunGemmenGo" as "DbV2502_kazeiKubunGemmenGo",
         "DbV2502"."gokeiShotokuGaku" as "DbV2502_gokeiShotokuGaku",

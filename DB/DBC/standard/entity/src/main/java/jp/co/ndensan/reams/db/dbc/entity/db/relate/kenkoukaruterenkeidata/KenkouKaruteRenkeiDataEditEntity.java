@@ -5,11 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kenkoukaruterenkeidata;
 
-import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
  * 健康かるて連携データ作成のEditEntityです。
@@ -18,12 +16,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
  */
 public class KenkouKaruteRenkeiDataEditEntity {
 
-    private static final int 識別コードLENGTH = 12;
-    private static final int 年月日LENGTH = 8;
-    private static final int 氏名LENGTH = 70;
-    private static final int 減額認定証受給者番号LENGTH = 7;
-    private static final int 被保険者番号LENGTH = 15;
-    private static final int LENGTH_33 = 33;
     private final KenkouKaruteRenkeiDataEntity entity;
 
     /**
@@ -38,50 +30,46 @@ public class KenkouKaruteRenkeiDataEditEntity {
     /**
      * WriteLine内容をeditします。
      *
-     * @return WriteLine内容
+     * @return KenkouKaruteRenkeiDATEntity
      */
-    public RString getWriteLine内容() {
-        RStringBuilder builder = new RStringBuilder();
+    public KenkouKaruteRenkeiDATEntity getWriteLine内容() {
+        KenkouKaruteRenkeiDATEntity 出力entity = new KenkouKaruteRenkeiDATEntity();
         if (RString.isNullOrEmpty(entity.get識別コード())) {
-            builder.append(RString.EMPTY.padRight(RString.HALF_SPACE, 識別コードLENGTH));
-        } else if (entity.get識別コード().length() <= 識別コードLENGTH) {
-            builder.append(entity.get識別コード().padRight(RString.HALF_SPACE, 識別コードLENGTH));
-        } else if (識別コードLENGTH < entity.get識別コード().length()) {
-            builder.append(entity.get識別コード().substring(entity.get識別コード().length() - 識別コードLENGTH));
+            出力entity.set個人番号(RString.HALF_SPACE);
+        } else {
+            出力entity.set個人番号(entity.get識別コード());
         }
-        // TODO QA1689 210バイトを判断するAPIが無い
         if (!RString.isNullOrEmpty(entity.get名称())) {
-            builder.append(entity.get名称().padRight(RString.FULL_SPACE, 氏名LENGTH));
+            出力entity.set漢字氏名_カナ氏名(entity.get名称());
         } else {
-            builder.append(entity.getカナ名称().padRight(RString.FULL_SPACE, 氏名LENGTH));
+            出力entity.set漢字氏名_カナ氏名(entity.getカナ名称());
         }
-        builder.append(get年月日(entity.get生年月日()));
-        builder.append(entity.get性別());
+        出力entity.set生年月日(get年月日(entity.get生年月日()));
+        出力entity.set性別(entity.get性別());
         if (!RString.isNullOrEmpty(entity.get被保険者番号())) {
-            builder.append(entity.get被保険者番号().padRight(RString.HALF_SPACE, 被保険者番号LENGTH));
+            出力entity.set被保険者番号(entity.get被保険者番号());
         } else {
-            builder.append(RString.EMPTY.padRight(RString.FULL_SPACE, 氏名LENGTH));
+            出力entity.set被保険者番号(RString.HALF_SPACE);
         }
-        builder.append(get年月日(entity.get資格取得年月日()));
-        builder.append(get年月日(entity.get資格喪失年月日()));
+        出力entity.set資格取得日(get年月日(entity.get資格取得年月日()));
+        出力entity.set資格喪失日(get年月日(entity.get資格喪失年月日()));
         if (!RString.isNullOrEmpty(entity.get要介護認定状態区分コード())) {
-            builder.append(entity.get要介護認定状態区分コード());
+            出力entity.set要介護状態区分(entity.get要介護認定状態区分コード());
         } else {
-            builder.append(RString.EMPTY.padRight(RString.HALF_SPACE, 2));
+            出力entity.set要介護状態区分(RString.HALF_SPACE);
         }
-        builder.append(RString.EMPTY.padRight(RString.FULL_SPACE, 減額認定証受給者番号LENGTH));
-        builder.append(get年月日(entity.get認定年月日()));
-        builder.append(get年月日(entity.get認定有効期間開始年月日()));
-        builder.append(get年月日(entity.get認定有効期間終了年月日()));
-        builder.append(RString.EMPTY.padRight(RString.HALF_SPACE, LENGTH_33));
-        builder.append(RDate.getNowDate().toString());
-        builder.append(NewLine.CRLF);
-        return builder.toRString();
+        出力entity.set減額認定証受給者番号(RString.FULL_SPACE);
+        出力entity.set認定年月日(get年月日(entity.get認定年月日()));
+        出力entity.set認定有効期間開始日(get年月日(entity.get認定有効期間開始年月日()));
+        出力entity.set認定有効期間終了日(get年月日(entity.get認定有効期間終了年月日()));
+        出力entity.set終了日と作成日区切り文字(RString.HALF_SPACE);
+        出力entity.set作成日(RDate.getNowDate().toDateString());
+        return 出力entity;
     }
 
     private RString get年月日(FlexibleDate 年月日) {
         if (年月日 == null || 年月日.isEmpty()) {
-            return RString.EMPTY.padRight(RString.HALF_SPACE, 年月日LENGTH);
+            return RString.HALF_SPACE;
         }
         return new RString(年月日.toString());
     }

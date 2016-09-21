@@ -54,6 +54,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.Saiban;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
@@ -700,7 +701,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
             row.setTxtJikoFutanKeisanYM(高額合算申請書.get自己負担額計算年月() == null
                     ? null : 高額合算申請書.get自己負担額計算年月().toDateString());
             row.setTxtKokiHihokenshaNo(高額合算申請書.get後期被保険者番号());
-            row.setTxtKokuhoHihokenshashoNo(高額合算申請書.get国保保険者番号());
+            row.setTxtKokuhoHihokenshashoNo(高額合算申請書.get国保被保険者証番号());
             row.setTxtSaiKeisanKubun(高額合算申請書.get再計算区分());
             row.setTxtSaiSofuFlag(高額合算申請書.get再送フラグ());
             row.setTxtShikyuShinseishoSofuYM(高額合算申請書.get支給申請書情報送付年月() == null
@@ -751,7 +752,11 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         return 高額合算申請書Result.createBuilderForEdit()
                 .set申請状況区分(高額合算申請書保持.get申請状況())
                 .set申請年月日(rDateToFixibleDate(div.getTxtShinseiYMD().getValue()))
-                .set支給申請書整理番号(RString.EMPTY.concat(div.getTxtKaigoShikyuShinseishoSeiriBango1().getValue())
+                .set支給申請書整理番号(引き継ぎデータ == null
+                        ? RString.EMPTY.concat(div.getTxtKaigoShikyuShinseishoSeiriBango1().getValue())
+                        .concat(div.getTxtKaigoShikyuShinseishoSeiriBango2().getValue())
+                        .concat(div.getTxtKaigoShikyuShinseishoSeiriBango3().getValue())
+                        : RString.EMPTY.concat(div.getTxtKaigoShikyuShinseishoSeiriBango1().getValue())
                         .concat(div.getTxtKaigoShikyuShinseishoSeiriBango2().getValue())
                         .concat(div.getTxtKaigoShikyuShinseishoSeiriBango3().getValue())
                         .concat(div.getTxtKaigoShikyuShinseishoSeiriBango4().getValue()))
@@ -772,7 +777,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
                 .set申請代表者郵便番号(引き継ぎデータ == null ? null : 引き継ぎデータ.get申請代表者郵便番号())
                 .set申請代表者住所(引き継ぎデータ == null ? null : 引き継ぎデータ.get申請代表者住所())
                 .set申請代表者電話番号(引き継ぎデータ == null ? null : 引き継ぎデータ.get申請代表者電話番号())
-                .set所得区分(div.getDdlShotokuKubun().getSelectedKey())
+                .set所得区分(RString.isNullOrEmpty(div.getDdlShotokuKubun().getSelectedValue()) ? null : div.getDdlShotokuKubun().getSelectedKey())
                 .set所得区分_70歳以上の者に係る(div.getDdlOver70ShotokuKubun().getSelectedKey())
                 .set資格喪失年月日(rDateToFixibleDate(div.getTxtShikakuSoshitsuYMD().getValue()))
                 .set資格喪失事由(div.getDdlShikakuSoshitsuJiyu().getSelectedKey())
@@ -796,9 +801,9 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
                 .set支払期間開始年月日(rDateToFixibleDate(div.getCcdShiharaiHohoJoho().getStartYMD()))
                 .set支払期間終了年月日(rDateToFixibleDate(div.getCcdShiharaiHohoJoho().getEndYMD()))
                 .set支払期間開始時間(div.getCcdShiharaiHohoJoho().getStartHHMM() == null ? null
-                        : new RString(div.getCcdShiharaiHohoJoho().getStartHHMM().toString()))
+                        : div.getCcdShiharaiHohoJoho().getStartHHMM().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss))
                 .set支払期間終了時間(div.getCcdShiharaiHohoJoho().getEndHHMM() == null ? null
-                        : new RString(div.getCcdShiharaiHohoJoho().getEndHHMM().toString()))
+                        : div.getCcdShiharaiHohoJoho().getEndHHMM().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss))
                 .set閉庁内容(null)
                 .set口座ID(RString.isNullOrEmpty(div.getCcdShiharaiHohoJoho().getKozaID()) ? 0L
                         : Long.parseLong(div.getCcdShiharaiHohoJoho().getKozaID().toString()))
@@ -1191,7 +1196,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         pram.setHihokenshaNo(被保険者番号);
         pram.setShikibetsuCode(最新の識別コード);
         pram.setKozaId(口座ID);
-        div.getCcdShiharaiHohoJoho().initialize(pram, 修正);
+        div.getCcdShiharaiHohoJoho().initialize(pram, 登録);
     }
 
     private void 申請登録データで設定(KogakuGassanShinseisho 高額合算申請書) {
@@ -1415,7 +1420,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
                 .set対象計算期間終了年月日(rDateToFixibleDate(div.getTxtTaishoKeisanKikanYMD().getToValue()))
                 .set支給申請形態(div.getDdlShikyuShinseiKeitai().getSelectedKey())
                 .set自己負担額証明書交付申請の有無(Collections.EMPTY_LIST.equals(div.getChkKofuShinseiUmu().getSelectedKeys()) ? RSTRING_1 : RSTRING_2)
-                .set所得区分(div.getDdlShotokuKubun().getSelectedKey())
+                .set所得区分(RString.isNullOrEmpty(div.getDdlShotokuKubun().getSelectedValue()) ? null : div.getDdlShotokuKubun().getSelectedKey())
                 .set所得区分_70歳以上の者に係る(div.getDdlOver70ShotokuKubun().getSelectedKey())
                 .set資格喪失年月日(rDateToFixibleDate(div.getTxtShikakuSoshitsuYMD().getValue()))
                 .set資格喪失事由(div.getDdlShikakuSoshitsuJiyu().getSelectedKey())
@@ -1439,9 +1444,9 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
                 .set支払期間開始年月日(rDateToFixibleDate(div.getCcdShiharaiHohoJoho().getStartYMD()))
                 .set支払期間終了年月日(rDateToFixibleDate(div.getCcdShiharaiHohoJoho().getEndYMD()))
                 .set支払期間開始時間(div.getCcdShiharaiHohoJoho().getStartHHMM() == null ? null
-                        : new RString(div.getCcdShiharaiHohoJoho().getStartHHMM().toString()))
+                        : div.getCcdShiharaiHohoJoho().getStartHHMM().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss))
                 .set支払期間終了時間(div.getCcdShiharaiHohoJoho().getEndHHMM() == null ? null
-                        : new RString(div.getCcdShiharaiHohoJoho().getEndHHMM().toString()))
+                        : div.getCcdShiharaiHohoJoho().getEndHHMM().toFormattedTimeString(DisplayTimeFormat.HH_mm_ss))
                 .set口座ID(RString.isNullOrEmpty(div.getCcdShiharaiHohoJoho().getKozaID()) ? 0L
                         : Long.parseLong(div.getCcdShiharaiHohoJoho().getKozaID().toString()))
                 .set備考(div.getTxtBiko().getValue())

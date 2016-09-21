@@ -172,9 +172,9 @@ public final class HanyoListSogoJigyoMybatisParameter implements IMyBatisParamet
                 is項目名付加,
                 is連番付加,
                 is日付スラッシュ付加,
-                !事業者コード.isEmpty(),
+                !isnull(事業者コード),
                 事業者コード,
-                !サービス種類コード.isEmpty(),
+                !isnull(サービス種類コード),
                 サービス種類コード,
                 保険者コードFlag,
                 保険者コード,
@@ -182,20 +182,28 @@ public final class HanyoListSogoJigyoMybatisParameter implements IMyBatisParamet
                 is基本情報明細情報,
                 is基本情報集計情報,
                 is基本情報ケアマネジメント費情報,
-                !サービス提供年月開始年月.isEmpty(),
+                !isnull(サービス提供年月開始年月),
                 サービス提供年月開始年月,
-                !サービス提供年月終了年月.isEmpty(),
+                !isnull(サービス提供年月終了年月),
                 サービス提供年月終了年月,
-                !審査年月開始年月.isEmpty(),
+                !isnull(審査年月開始年月),
                 審査年月開始年月,
-                !審査年月終了年月.isEmpty(),
+                !isnull(審査年月終了年月),
                 審査年月終了年月,
-                !取込年月開始年月.isEmpty(),
+                !isnull(取込年月開始年月),
                 取込年月開始年月,
-                !取込年月終了年月.isEmpty(),
+                !isnull(取込年月終了年月),
                 取込年月終了年月,
                 psmShikibetsuTaisho,
                 出力順
         );
+    }
+
+    private static boolean isnull(RString value) {
+        boolean flag = false;
+        if (RString.isNullOrEmpty(value)) {
+            flag = true;
+        }
+        return flag;
     }
 }

@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbb.business.core.basic.karisanteiidofuka;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.karisanteiidofuka.TyouhyouEntity;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB015003.TyouhyouEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**

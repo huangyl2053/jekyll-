@@ -160,11 +160,6 @@ public class IchiranServicecodeRiyojokyoProcess
     }
 
     @Override
-    protected void beforeExecute() {
-
-    }
-
-    @Override
     protected void usualProcess(DbWT3470chohyouShutsuryokuyouTempEntity entity) {
         beforeEntity = getBefore();
         if (beforeEntity != null) {

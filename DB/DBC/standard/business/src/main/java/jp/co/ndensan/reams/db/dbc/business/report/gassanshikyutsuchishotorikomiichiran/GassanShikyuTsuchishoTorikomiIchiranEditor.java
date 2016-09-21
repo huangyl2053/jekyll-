@@ -258,6 +258,7 @@ public class GassanShikyuTsuchishoTorikomiIchiranEditor implements
         source.taishoNendo = get非空項目(計算結果entity.get対象年度());
         source.shikyuKubunCode = get非空項目(計算結果entity.get支給区分コード());
         source.shikibetsuCode = 被保険者.get識別コード();
+        source.shoKisaiHokenshaNo = getColumnValue(計算結果entity.get保険者番号());
     }
 
     private RString get非空項目(RString 項目) {
