@@ -430,7 +430,7 @@ public class NinteiEnkiTsuchishoHakkoHandler {
             parameter.set申請書管理番号リスト(get申請書管理番号リスト());
             parameter.set処理見込み日From(FlexibleDate.EMPTY);
             parameter.set処理見込み日To(FlexibleDate.EMPTY);
-            parameter.set通知書発行日(FlexibleDate.EMPTY);
+            parameter.set通知書発行日(new FlexibleDate(RDate.getNowDate().toDateString()));
         }
         return parameter;
     }
