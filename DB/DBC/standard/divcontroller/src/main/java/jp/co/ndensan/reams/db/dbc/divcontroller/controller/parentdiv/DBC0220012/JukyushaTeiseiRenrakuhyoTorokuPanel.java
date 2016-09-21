@@ -136,7 +136,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
                 return get更新と状態遷移(div, 受給者訂正連絡票登録画面Div, 引き継ぎ情報);
             } else {
                 HihokenshaNo 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, HihokenshaNo.class);
-                getHandler(div).前排他キーの解除(被保険者番号.getColumnValue());
+                getHandler(div).前排他キーの解除(被保険者番号);
                 getErrorMessages(result);
                 return ResponseData.of(div).respond();
             }
@@ -214,7 +214,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
             if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                getHandler(div).前排他キーの解除(被保険者番号.getColumnValue());
+                getHandler(div).前排他キーの解除(被保険者番号);
                 return ResponseData.of(div).forwardWithEventName(eventName).respond();
             } else {
                 return ResponseData.of(div).respond();
