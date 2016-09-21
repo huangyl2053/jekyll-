@@ -16,7 +16,8 @@ public enum DBC0330011TransitionEventName implements IContainerEvents {
 
     対象検索へ戻る("対象検索へ戻る"),
     対象一覧へ戻る("対象一覧へ戻る"),
-    完了("完了");
+    完了("完了"),
+    世帯情報表示("世帯情報表示");
 
     private final RString name;
 
