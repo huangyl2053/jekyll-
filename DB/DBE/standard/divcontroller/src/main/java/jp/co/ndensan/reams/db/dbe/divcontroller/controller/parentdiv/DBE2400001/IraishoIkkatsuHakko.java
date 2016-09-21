@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.iraisho.IraishoIkkatsuHakkoResult;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.iraisho.GridParameter;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.iraisho.IraishoIkkatsuHakkoBatchParamter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE220010.DBE220010_IraishoIkkatuParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE220010.GridParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.iraisho.IraishoIkkatsuHakkoParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2400001.DBE2400001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2400001.IraishoIkkatsuHakkoDiv;
@@ -189,8 +189,8 @@ public class IraishoIkkatsuHakko {
      * @param div 依頼書一括発行Div
      * @return ResponseData<IraishoIkkatsuHakkoDiv>
      */
-    public ResponseData<IraishoIkkatsuHakkoBatchParamter> onClick_btnBatchRegister(IraishoIkkatsuHakkoDiv div) {
-        IraishoIkkatsuHakkoBatchParamter param = new IraishoIkkatsuHakkoBatchParamter();
+    public ResponseData<DBE220010_IraishoIkkatuParameter> onClick_btnBatchRegister(IraishoIkkatsuHakkoDiv div) {
+        DBE220010_IraishoIkkatuParameter param = new DBE220010_IraishoIkkatuParameter();
         if (STATE_NINTEIO.equals(div.getState())) {
             param.setIraiFromYMD(div.getTxtIraibiFrom().getValue() == null
                     ? RString.EMPTY : div.getTxtIraibiFrom().getValue().toDateString());
@@ -224,7 +224,7 @@ public class IraishoIkkatsuHakko {
         return ResponseData.of(param).respond();
     }
 
-    private void setNinteParam(IraishoIkkatsuHakkoBatchParamter param, IraishoIkkatsuHakkoDiv div) {
+    private void setNinteParam(DBE220010_IraishoIkkatuParameter param, IraishoIkkatsuHakkoDiv div) {
         if (div.getChkNinteioChosaIraisho().getSelectedKeys().size() == 2) {
             param.setNinteioChosaIraisho(PRINT_AND_NOPRINT);
         } else {
@@ -289,7 +289,7 @@ public class IraishoIkkatsuHakko {
         param.setNinteiChosairaiHakkou(div.getChkchosairaihakko().getSelectedKeys().contains(SELECTED_KEY0));
     }
 
-    private void setShujiiParam(IraishoIkkatsuHakkoBatchParamter param, IraishoIkkatsuHakkoDiv div) {
+    private void setShujiiParam(DBE220010_IraishoIkkatuParameter param, IraishoIkkatsuHakkoDiv div) {
         if (div.getChkShujiiikenshoSakuseiIrai().getSelectedKeys().size() == 2) {
             param.setShujiiikenshoSakuseiIrai(PRINT_AND_NOPRINT);
         } else {

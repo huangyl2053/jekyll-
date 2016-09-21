@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0410047;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.kokuhorenkyoutsu.KokuhorenKyoutsuBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120890.DBC120890_SogojigyohiSeikyugakuTsuchishoInParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410047.TsuchishoJoho153Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
@@ -41,8 +41,9 @@ public class TsuchishoJoho153 {
      * @param div TsuchishoJoho153Div
      * @return ResponseData
      */
-    public ResponseData<KokuhorenKyoutsuBatchParameter> onClick_btnExcute(TsuchishoJoho153Div div) {
-        KokuhorenKyoutsuBatchParameter parameter = new KokuhorenKyoutsuBatchParameter();
+    public ResponseData<DBC120890_SogojigyohiSeikyugakuTsuchishoInParameter> onClick_btnExcute(TsuchishoJoho153Div div) {
+        DBC120890_SogojigyohiSeikyugakuTsuchishoInParameter parameter
+                = new DBC120890_SogojigyohiSeikyugakuTsuchishoInParameter();
         SaiShoriKubun 再処理区分 = null;
         if (SaiShoriKubun.再処理.get名称().equals(div.getCcdKokurenJohoTorikomi().get再処理区分())) {
             再処理区分 = SaiShoriKubun.再処理;

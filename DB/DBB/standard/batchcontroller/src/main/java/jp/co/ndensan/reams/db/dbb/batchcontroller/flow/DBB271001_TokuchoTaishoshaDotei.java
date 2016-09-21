@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb271001.CeateTkMidoteiJohoProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb271001.CreateChoshuHohoJohoProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb271001.CreateGyomuHokenshaJohoGetsujiProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb271001.CreateGyomuHokenshaJohoNenjiProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB271001.CeateTkMidoteiJohoProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB271001.CreateChoshuHohoJohoProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB271001.CreateGyomuHokenshaJohoGetsujiProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB271001.CreateGyomuHokenshaJohoNenjiProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB271001.DBB271001_TokuchoTaishoshaDoteiParameter;
 import jp.co.ndensan.reams.ue.uex.business.core.TokuchoDotei;
 import jp.co.ndensan.reams.ue.uex.definition.batchprm.tokuchodotei.UEXT02010_TokuchoDoteiParameter;

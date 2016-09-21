@@ -268,7 +268,7 @@ public class TokubetsuChoshuJohoAppurodoHandler {
         ShoriDateKanri 処理日付 = TokuchoInfoShoriDateKanri
                 .createInstance().get市町村処理日付(year, new RString(STR_00.toString() + 選択市町村ID.toString()), 処理名List);
         RString 処理日時パターン = get処理日時パターン(処理日付);
-        Map<RString, RString> 処理月と年度内Map = get処理月と年度内連番Map();
+        Map<RString, RString> map = get処理月と月Map();
         List<RString> 処理月List = 処理月取得();
         Map<RString, RString> 処理月と処理名Map = get処理月と処理名Map();
         List<dgGetuShoriSelect_Row> 処理対象Rows = new ArrayList<>();
@@ -278,7 +278,7 @@ public class TokubetsuChoshuJohoAppurodoHandler {
             row.setData2(処理月と処理名Map.get(処理月));
             row.setData3(処理日時パターン);
             RString sharedファイル = 共有ファイル名.replace(連携種別, get行連携種別(処理月と処理名Map.get(処理月))).
-                    replace(市町村ID, 選択市町村ID).replace(対象月, 処理月と年度内Map.get(処理月).substring(INT_2, INT_4));
+                    replace(市町村ID, 選択市町村ID).replace(対象月, map.get(処理月));
             boolean isUpload = !SharedFile.searchSharedFile(sharedファイル).isEmpty();
             if (isUpload) {
                 row.setData4(済);
@@ -291,7 +291,7 @@ public class TokubetsuChoshuJohoAppurodoHandler {
                 row.setData2(対象者情報);
                 row.setData3(処理日時パターン);
                 sharedファイル = 共有ファイル名.replace(連携種別, get行連携種別(対象者情報)).
-                        replace(市町村ID, 選択市町村ID).replace(対象月, 処理月と年度内Map.get(処理月).substring(INT_2, INT_4));
+                        replace(市町村ID, 選択市町村ID).replace(対象月, map.get(処理月));
                 isUpload = !SharedFile.searchSharedFile(sharedファイル).isEmpty();
                 if (isUpload) {
                     row.setData4(済);
@@ -304,7 +304,7 @@ public class TokubetsuChoshuJohoAppurodoHandler {
                 row.setData2(依頼処理結果情報);
                 row.setData3(処理日時パターン);
                 sharedファイル = 共有ファイル名.replace(連携種別, get行連携種別(依頼処理結果情報)).
-                        replace(市町村ID, 選択市町村ID).replace(対象月, 処理月と年度内Map.get(処理月).substring(INT_2, INT_4));
+                        replace(市町村ID, 選択市町村ID).replace(対象月, map.get(処理月));
                 isUpload = !SharedFile.searchSharedFile(sharedファイル).isEmpty();
                 if (isUpload) {
                     row.setData4(済);
@@ -418,6 +418,7 @@ public class TokubetsuChoshuJohoAppurodoHandler {
         RString 選択月 = div.getShoriJokyoPanel().getDdlGetu().getSelectedValue();
         Map<RString, RString> 月と年度内連番Map = get処理月と年度内連番Map();
         Map<RString, RString> 月と処理名Map = get処理月と処理名Map();
+        Map<RString, RString> map = get処理月と月Map();
         RString 市町村識別ID = ShichosonSecurityJoho.getShichosonShikibetsuId(
                 ControlDataHolder.getUserId()).get(INT_0).getItemId();
         if (!STR_00.equals(市町村識別ID)) {
@@ -435,7 +436,7 @@ public class TokubetsuChoshuJohoAppurodoHandler {
             row.setData2(月と処理名Map.get(選択月));
             row.setData3(処理日時パターン);
             RString sharedファイル = 共有ファイル名.replace(連携種別, get行連携種別(月と処理名Map.get(選択月))).
-                    replace(市町村ID, 市町村識別ID).replace(対象月, 月と年度内連番Map.get(選択月).substring(INT_2, INT_4));
+                    replace(市町村ID, 市町村識別ID).replace(対象月, map.get(選択月));
             boolean isUpload = !SharedFile.searchSharedFile(sharedファイル).isEmpty();
             if (isUpload) {
                 row.setData4(済);
@@ -469,7 +470,7 @@ public class TokubetsuChoshuJohoAppurodoHandler {
                 row.setData3(get処理日時パターン(処理日付Map.get(
                         new RString(STR_00.toString() + 構成市町村.get市町村識別ID().toString()))));
                 RString sharedファイル = 共有ファイル名.replace(連携種別, get行連携種別(月と処理名Map.get(選択月))).
-                        replace(市町村ID, 構成市町村.get市町村識別ID()).replace(対象月, 月と年度内連番Map.get(選択月).substring(INT_2, INT_4));
+                        replace(市町村ID, 構成市町村.get市町村識別ID()).replace(対象月, map.get(選択月));
                 boolean isUpload = !SharedFile.searchSharedFile(sharedファイル).isEmpty();
                 if (isUpload) {
                     row.setData4(済);
@@ -504,7 +505,7 @@ public class TokubetsuChoshuJohoAppurodoHandler {
             row.setData2(月と処理名Map.get(選択月));
             row.setData3(処理日時パターン);
             RString sharedファイル = 共有ファイル名.replace(連携種別, get行連携種別(月と処理名Map.get(選択月))).
-                    replace(市町村ID, 構成市町村.get市町村識別ID()).replace(対象月, 月と年度内連番Map.get(選択月).substring(INT_2, INT_4));
+                    replace(市町村ID, 構成市町村.get市町村識別ID()).replace(対象月, map.get(選択月));
             boolean isUpload = !SharedFile.searchSharedFile(sharedファイル).isEmpty();
             if (isUpload) {
                 row.setData4(済);
@@ -518,11 +519,11 @@ public class TokubetsuChoshuJohoAppurodoHandler {
             if (月_5.equals(選択月)) {
                 row.setData2(対象者情報);
                 sharedファイル = 共有ファイル名.replace(連携種別, get行連携種別(対象者情報)).
-                        replace(市町村ID, 構成市町村.get市町村識別ID()).replace(対象月, 月と年度内連番Map.get(選択月).substring(INT_2, INT_4));
+                        replace(市町村ID, 構成市町村.get市町村識別ID()).replace(対象月, map.get(選択月));
             } else {
                 row.setData2(依頼処理結果情報);
                 sharedファイル = 共有ファイル名.replace(連携種別, get行連携種別(依頼処理結果情報)).
-                        replace(市町村ID, 構成市町村.get市町村識別ID()).replace(対象月, 月と年度内連番Map.get(選択月).substring(INT_2, INT_4));
+                        replace(市町村ID, 構成市町村.get市町村識別ID()).replace(対象月, map.get(選択月));
             }
             isUpload = !SharedFile.searchSharedFile(sharedファイル).isEmpty();
             row.setData3(処理日時パターン);
@@ -552,12 +553,13 @@ public class TokubetsuChoshuJohoAppurodoHandler {
                 get月構成市町村処理日付(year, new RString(STR_00.toString() + 市町村識別ID.toString()),
                         月と年度内連番Map.get(選択月), 処理名List);
         RString 処理日時パターン = get処理日時パターン(処理日付);
+        Map<RString, RString> map = get処理月と月Map();
         dgShichosonShoriSelect_Row row = new dgShichosonShoriSelect_Row();
         row.setData1(市町村.get市町村名称());
         row.setData2(月と処理名Map.get(選択月));
         row.setData3(処理日時パターン);
         RString sharedファイル = 共有ファイル名.replace(連携種別, get行連携種別(月と処理名Map.get(選択月))).
-                replace(市町村ID, 市町村.get市町村識別ID()).replace(対象月, 月と年度内連番Map.get(選択月).substring(INT_2, INT_4));
+                replace(市町村ID, 市町村.get市町村識別ID()).replace(対象月, map.get(選択月));
         boolean isUpload = !SharedFile.searchSharedFile(sharedファイル).isEmpty();
         if (isUpload) {
             row.setData4(済);
@@ -571,11 +573,11 @@ public class TokubetsuChoshuJohoAppurodoHandler {
         if (月_5.equals(選択月)) {
             row.setData2(対象者情報);
             sharedファイル = 共有ファイル名.replace(連携種別, get行連携種別(対象者情報)).
-                    replace(市町村ID, 市町村.get市町村識別ID()).replace(対象月, 月と年度内連番Map.get(選択月).substring(INT_2, INT_4));
+                    replace(市町村ID, 市町村.get市町村識別ID()).replace(対象月, map.get(選択月));
         } else {
             row.setData2(依頼処理結果情報);
             sharedファイル = 共有ファイル名.replace(連携種別, get行連携種別(依頼処理結果情報)).
-                    replace(市町村ID, 市町村.get市町村識別ID()).replace(対象月, 月と年度内連番Map.get(選択月).substring(INT_2, INT_4));
+                    replace(市町村ID, 市町村.get市町村識別ID()).replace(対象月, map.get(選択月));
         }
         isUpload = !SharedFile.searchSharedFile(sharedファイル).isEmpty();
         row.setData3(処理日時パターン);

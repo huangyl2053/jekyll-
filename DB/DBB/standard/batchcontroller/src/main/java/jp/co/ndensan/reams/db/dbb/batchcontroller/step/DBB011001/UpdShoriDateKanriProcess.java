@@ -33,11 +33,10 @@ public class UpdShoriDateKanriProcess extends SimpleBatchProcessBase {
         getMapper(ITokuchoKariSanteiFukaMapper.class).update処理日付管理テーブル_特徴仮算定賦課(parameter_特徴仮算定賦課);
         TokuchoKarisanteiFukaMyBatisParameter parameter_依頼金額計算 = new TokuchoKarisanteiFukaMyBatisParameter();
         parameter_依頼金額計算.setサーブ業務コード(SubGyomuCode.DBB介護賦課);
-        parameter_依頼金額計算.set処理名(ShoriName.特徴仮算定賦課.get名称());
+        parameter_依頼金額計算.set処理名(ShoriName.依頼金額計算.get名称());
         parameter_依頼金額計算.set年度(processParameter.get調定年度());
         parameter_依頼金額計算.set調定日時(processParameter.get調定日時());
         parameter_依頼金額計算.set年度内番号(年度内番号);
         getMapper(ITokuchoKariSanteiFukaMapper.class).update処理日付管理テーブル_依頼金額計算(parameter_依頼金額計算);
     }
-
 }

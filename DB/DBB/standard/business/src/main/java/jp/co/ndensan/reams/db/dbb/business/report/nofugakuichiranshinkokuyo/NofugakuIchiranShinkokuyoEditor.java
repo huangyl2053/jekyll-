@@ -17,11 +17,17 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Katagaki;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -40,18 +46,19 @@ public class NofugakuIchiranShinkokuyoEditor implements
     private static final int NUM_4 = 4;
     private static final int NUM_6 = 6;
     private static final int NUM_7 = 7;
+
     private static final RString 前正符号 = new RString("+");
     private static final RString 前负符号 = new RString("-");
     private static final RString INDEX_0 = new RString("0");
+    private static final RString 年分タイトル = new RString("年分");
     private static final RString 確定申告用タイトル = new RString("確定申告用");
     private static final RString 特別徴収タイトル = new RString("特別徴収");
     private static final RString 普通徴収タイトル = new RString("普通徴収");
     private static final RString 併徴タイトル = new RString("併徴");
     private static final RString 男_1 = new RString("1");
-    private static final RString 女_2 = new RString("2");
     private static final RString 男 = new RString("男");
     private static final RString 女 = new RString("女");
-
+    private static final RString 日時作成 = new RString("作成");
     private static final RString 特別徴収期別調定額 = new RString("+000000");
     private static final RString 通知書番号タイトル = new RString("通知書番号");
 
@@ -129,8 +136,8 @@ public class NofugakuIchiranShinkokuyoEditor implements
 
         source.cityMei = 市町村名称;
         source.data1 = 確定申告用タイトル;
-        source.nen = 対象年.toDateString();
-        source.printTimeStamp = RDate.getNowDate().toDateString();
+        source.nen = 対象年.toDateString().substring(NUM_0, NUM_4).concat(年分タイトル);
+        source.printTimeStamp = getSakuseiYmhm(RDateTime.now());
 
         source.sortJunArea1 = get並び順(NUM_0);
         source.sortJunArea2 = get並び順(NUM_1);
@@ -166,7 +173,7 @@ public class NofugakuIchiranShinkokuyoEditor implements
 
         if (男_1.equals(宛名psm.get性別().getCode())) {
             source.list6_2 = 男;
-        } else if (女_2.equals(宛名psm.get性別().getCode())) {
+        } else {
             source.list6_2 = 女;
         }
 
@@ -206,6 +213,19 @@ public class NofugakuIchiranShinkokuyoEditor implements
 
     }
 
+    private RString getSakuseiYmhm(RDateTime datetime) {
+
+        RStringBuilder sakuseiYMD = new RStringBuilder();
+
+        sakuseiYMD.append(datetime.getDate().wareki().
+                eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                separator(Separator.JAPANESE).
+                fillType(FillType.BLANK).toDateString());
+        sakuseiYMD.append(datetime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
+        sakuseiYMD.append(日時作成);
+        return sakuseiYMD.toRString();
+    }
+
     private void getlist6_4(NofugakuIchiranShinkokuyoSource source, Decimal middle1, Decimal middle2, Decimal middle3,
             Decimal middle4, Decimal middle5, Decimal middle6) {
         if (middle1.compareTo(Decimal.ZERO) != NUM_0 || middle2.compareTo(Decimal.ZERO) != NUM_0) {
@@ -227,13 +247,13 @@ public class NofugakuIchiranShinkokuyoEditor implements
 
         RStringBuilder sakuseiYMD = new RStringBuilder();
         if (ijusho != null) {
-            sakuseiYMD.append(ijusho);
+            sakuseiYMD.append(ijusho.get住所());
         }
         if (banchi != null) {
-            sakuseiYMD.append(banchi);
+            sakuseiYMD.append(banchi.value());
         }
         if (katagaki != null) {
-            sakuseiYMD.append(katagaki);
+            sakuseiYMD.append(katagaki.value());
         }
 
         return sakuseiYMD.toRString();

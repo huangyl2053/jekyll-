@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb051001.TsuchishoNoProc
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB004001.DBB004001_FukaJohoTorokuParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidogennen.ChohyoResult;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidogennen.CreateHonsanteiIdoBatchParameter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB003001.DBB003001_KeisangoJohoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt44001.GennendoIdoFukaProcessParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.Tsuki;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.fuka.SetaiShotokuKazeiHanteiBatchParameter;
@@ -238,14 +238,14 @@ public class GennendoIdoFukaFlow extends BatchFlowBase<CreateHonsanteiIdoBatchPa
                 getKeisangoJohoSakuseiBatchParamter(RString.EMPTY)).define();
     }
 
-    private KeisangoJohoSakuseiBatchParamter getKeisangoJohoSakuseiBatchParamter(RString 帳票分類ID) {
+    private DBB003001_KeisangoJohoSakuseiParameter getKeisangoJohoSakuseiBatchParamter(RString 帳票分類ID) {
         FlexibleYear 調定年度 = getParameter().getChoteiNendo();
         FlexibleYear 賦課年度 = getParameter().get賦課年度();
         if (parameter != null && Tsuki._2月.getコード().equals(parameter.get処理対象())) {
             調定年度 = 調定年度.plusYear(1);
             賦課年度 = 賦課年度.plusYear(1);
         }
-        return new KeisangoJohoSakuseiBatchParamter(調定年度.toDateString(),
+        return new DBB003001_KeisangoJohoSakuseiParameter(調定年度.toDateString(),
                 賦課年度.toDateString(),
                 new RString(getResult(YMDHMS.class, new RString(システム日時の取得),
                                 SystemTimeGennendoIdoFukaProcess.SYSTEM_TIME).toString()),
