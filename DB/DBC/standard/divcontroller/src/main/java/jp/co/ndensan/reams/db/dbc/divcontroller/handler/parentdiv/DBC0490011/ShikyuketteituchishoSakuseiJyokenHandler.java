@@ -9,8 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.ketteitsuchishosakusei.param.KogakuJigyoServicehiShikyuKetteiTsuchishoParameter;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc020030.DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc020060.DBC020060_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020030.DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020060.DBC020060_KogakuJigyoServicehiShikyuKetteiTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihohokinokubun.ShiharaiHohoKinoKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0490011.ShikyuketteituchishoSakuseiJyokenDiv;
 import jp.co.ndensan.reams.db.dbc.service.core.kougakusabisuhishikyuuketteitsuchishosakusei.KougakuSabisuhiShikyuuKetteiTsuchishoSakusei;
@@ -197,7 +197,7 @@ public class ShikyuketteituchishoSakuseiJyokenHandler {
      *
      * @return ShoukanBaraiSuuchiShoIkatsuBatchParamter
      */
-    public DBC020060_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter creatBatchParameter2() {
+    public DBC020060_KogakuJigyoServicehiShikyuKetteiTsuchishoParameter creatBatchParameter2() {
         return KougakuSabisuhiShikyuuKetteiTsuchishoSakusei.createInstance().
                 getDBC020060_KougakuSabisuhiShikyuuKetteiTsuchishoBatchParameter(creatCommonParameter());
     }
