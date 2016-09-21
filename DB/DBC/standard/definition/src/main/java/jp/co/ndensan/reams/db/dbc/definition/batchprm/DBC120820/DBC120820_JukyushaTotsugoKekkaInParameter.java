@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class DBC120820_JukyushaTotsugoKekkaInBatchParameter extends BatchParameterBase {
+public class DBC120820_JukyushaTotsugoKekkaInParameter extends BatchParameterBase {
 
     @BatchParameter(key = "処理年月", name = "処理年月")
     private FlexibleYearMonth 処理年月;

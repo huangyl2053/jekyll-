@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0410046;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120820.DBC120820_JukyushaTotsugoKekkaInBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120820.DBC120820_JukyushaTotsugoKekkaInParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0410046.TsuchishoJoho537Div;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.kaigokyufukokuhorenjohotorikomi.KokuhorenDataTorikomiViewStateClass;
 import jp.co.ndensan.reams.db.dbz.definition.core.viewstatename.ViewStateHolderName;
@@ -50,14 +50,14 @@ public class TsuchishoJoho537 {
      * @param div TsuchishoJoho537Div
      * @return ResponseData
      */
-    public ResponseData<DBC120820_JukyushaTotsugoKekkaInBatchParameter> onClick_btnExcute(TsuchishoJoho537Div div) {
+    public ResponseData<DBC120820_JukyushaTotsugoKekkaInParameter> onClick_btnExcute(TsuchishoJoho537Div div) {
         if (setBatchParameter(div) != null) {
             return ResponseData.of(setBatchParameter(div)).respond();
         }
-        return ResponseData.of(new DBC120820_JukyushaTotsugoKekkaInBatchParameter()).respond();
+        return ResponseData.of(new DBC120820_JukyushaTotsugoKekkaInParameter()).respond();
     }
 
-    private DBC120820_JukyushaTotsugoKekkaInBatchParameter setBatchParameter(TsuchishoJoho537Div div) {
+    private DBC120820_JukyushaTotsugoKekkaInParameter setBatchParameter(TsuchishoJoho537Div div) {
 
         if (div.getCcdKokurenJohoTorikomi().get出力順ID() != null) {
             Long 出力順ID = div.getCcdKokurenJohoTorikomi().get出力順ID();
@@ -70,7 +70,7 @@ public class TsuchishoJoho537 {
                 IChohyoShutsuryokujunManager manager = new _ChohyoShutsuryokujunManager();
                 manager.save前回出力順(iOutputOrder);
             }
-            DBC120820_JukyushaTotsugoKekkaInBatchParameter parameter = new DBC120820_JukyushaTotsugoKekkaInBatchParameter();
+            DBC120820_JukyushaTotsugoKekkaInParameter parameter = new DBC120820_JukyushaTotsugoKekkaInParameter();
             RDate 処理年月 = div.getCcdKokurenJohoTorikomi().get処理年月();
             parameter.set処理年月(new FlexibleYearMonth(処理年月.getYearMonth().toDateString()));
             parameter.set出力順ID(出力順ID);
