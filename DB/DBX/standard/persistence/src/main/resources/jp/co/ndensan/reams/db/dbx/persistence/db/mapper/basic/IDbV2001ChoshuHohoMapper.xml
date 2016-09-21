@@ -7,48 +7,48 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper">
 
     <sql id="allColumns_DbV2001ChoshuHoho">
-         "DbV2001ChoshuHoho"."fukaNendo" as "dbV2001ChoshuHoho_fukaNendo",
-         "DbV2001ChoshuHoho"."hihokenshaNo" as "dbV2001ChoshuHoho_hihokenshaNo",
-         "DbV2001ChoshuHoho"."rirekiNo" as "dbV2001ChoshuHoho_rirekiNo",
-         "DbV2001ChoshuHoho"."insertDantaiCd" as "dbV2001ChoshuHoho_insertDantaiCd",
-         "DbV2001ChoshuHoho"."insertTimestamp" as "dbV2001ChoshuHoho_insertTimestamp",
-         "DbV2001ChoshuHoho"."insertReamsLoginId" as "dbV2001ChoshuHoho_insertReamsLoginId",
-         "DbV2001ChoshuHoho"."insertContextId" as "dbV2001ChoshuHoho_insertContextId",
-         "DbV2001ChoshuHoho"."isDeleted" as "dbV2001ChoshuHoho_isDeleted",
-         "DbV2001ChoshuHoho"."updateCount" as "dbV2001ChoshuHoho_updateCount",
-         "DbV2001ChoshuHoho"."lastUpdateTimestamp" as "dbV2001ChoshuHoho_lastUpdateTimestamp",
-         "DbV2001ChoshuHoho"."lastUpdateReamsLoginId" as "dbV2001ChoshuHoho_lastUpdateReamsLoginId",
-         "DbV2001ChoshuHoho"."choshuHoho4gatsu" as "dbV2001ChoshuHoho_choshuHoho4gatsu",
-         "DbV2001ChoshuHoho"."choshuHoho5gatsu" as "dbV2001ChoshuHoho_choshuHoho5gatsu",
-         "DbV2001ChoshuHoho"."choshuHoho6gatsu" as "dbV2001ChoshuHoho_choshuHoho6gatsu",
-         "DbV2001ChoshuHoho"."choshuHoho7gatsu" as "dbV2001ChoshuHoho_choshuHoho7gatsu",
-         "DbV2001ChoshuHoho"."choshuHoho8gatsu" as "dbV2001ChoshuHoho_choshuHoho8gatsu",
-         "DbV2001ChoshuHoho"."choshuHoho9gatsu" as "dbV2001ChoshuHoho_choshuHoho9gatsu",
-         "DbV2001ChoshuHoho"."choshuHoho10gatsu" as "dbV2001ChoshuHoho_choshuHoho10gatsu",
-         "DbV2001ChoshuHoho"."choshuHoho11gatsu" as "dbV2001ChoshuHoho_choshuHoho11gatsu",
-         "DbV2001ChoshuHoho"."choshuHoho12gatsu" as "dbV2001ChoshuHoho_choshuHoho12gatsu",
-         "DbV2001ChoshuHoho"."choshuHoho1gatsu" as "dbV2001ChoshuHoho_choshuHoho1gatsu",
-         "DbV2001ChoshuHoho"."choshuHoho2gatsu" as "dbV2001ChoshuHoho_choshuHoho2gatsu",
-         "DbV2001ChoshuHoho"."choshuHoho3gatsu" as "dbV2001ChoshuHoho_choshuHoho3gatsu",
-         "DbV2001ChoshuHoho"."choshuHohoYoku4gatsu" as "dbV2001ChoshuHoho_choshuHohoYoku4gatsu",
-         "DbV2001ChoshuHoho"."choshuHohoYoku5gatsu" as "dbV2001ChoshuHoho_choshuHohoYoku5gatsu",
-         "DbV2001ChoshuHoho"."choshuHohoYoku6gatsu" as "dbV2001ChoshuHoho_choshuHohoYoku6gatsu",
-         "DbV2001ChoshuHoho"."choshuHohoYoku7gatsu" as "dbV2001ChoshuHoho_choshuHohoYoku7gatsu",
-         "DbV2001ChoshuHoho"."choshuHohoYoku8gatsu" as "dbV2001ChoshuHoho_choshuHohoYoku8gatsu",
-         "DbV2001ChoshuHoho"."choshuHohoYoku9gatsu" as "dbV2001ChoshuHoho_choshuHohoYoku9gatsu",
-         "DbV2001ChoshuHoho"."kariNenkinNo" as "dbV2001ChoshuHoho_kariNenkinNo",
-         "DbV2001ChoshuHoho"."kariNenkinCode" as "dbV2001ChoshuHoho_kariNenkinCode",
-         "DbV2001ChoshuHoho"."kariHosokuM" as "dbV2001ChoshuHoho_kariHosokuM",
-         "DbV2001ChoshuHoho"."honNenkinNo" as "dbV2001ChoshuHoho_honNenkinNo",
-         "DbV2001ChoshuHoho"."honNenkinCode" as "dbV2001ChoshuHoho_honNenkinCode",
-         "DbV2001ChoshuHoho"."honHosokuM" as "dbV2001ChoshuHoho_honHosokuM",
-         "DbV2001ChoshuHoho"."yokunendoKariNenkinNo" as "dbV2001ChoshuHoho_yokunendoKariNenkinNo",
-         "DbV2001ChoshuHoho"."yokunendoKariNenkinCode" as "dbV2001ChoshuHoho_yokunendoKariNenkinCode",
-         "DbV2001ChoshuHoho"."yokunendoKariHosokuM" as "dbV2001ChoshuHoho_yokunendoKariHosokuM",
-         "DbV2001ChoshuHoho"."iraiSohuzumiFlag" as "dbV2001ChoshuHoho_iraiSohuzumiFlag",
-         "DbV2001ChoshuHoho"."tsuikaIraiSohuzumiFlag" as "dbV2001ChoshuHoho_tsuikaIraiSohuzumiFlag",
-         "DbV2001ChoshuHoho"."tokuchoTeishiNichiji" as "dbV2001ChoshuHoho_tokuchoTeishiNichiji",
-         "DbV2001ChoshuHoho"."tokuchoTeishiJiyuCode" as "dbV2001ChoshuHoho_tokuchoTeishiJiyuCode"
+        "DbV2001ChoshuHoho"."fukaNendo" as "dbV2001ChoshuHoho_fukaNendo",
+        "DbV2001ChoshuHoho"."hihokenshaNo" as "dbV2001ChoshuHoho_hihokenshaNo",
+        "DbV2001ChoshuHoho"."rirekiNo" as "dbV2001ChoshuHoho_rirekiNo",
+        "DbV2001ChoshuHoho"."insertDantaiCd" as "dbV2001ChoshuHoho_insertDantaiCd",
+        "DbV2001ChoshuHoho"."insertTimestamp" as "dbV2001ChoshuHoho_insertTimestamp",
+        "DbV2001ChoshuHoho"."insertReamsLoginId" as "dbV2001ChoshuHoho_insertReamsLoginId",
+        "DbV2001ChoshuHoho"."insertContextId" as "dbV2001ChoshuHoho_insertContextId",
+        "DbV2001ChoshuHoho"."isDeleted" as "dbV2001ChoshuHoho_isDeleted",
+        "DbV2001ChoshuHoho"."updateCount" as "dbV2001ChoshuHoho_updateCount",
+        "DbV2001ChoshuHoho"."lastUpdateTimestamp" as "dbV2001ChoshuHoho_lastUpdateTimestamp",
+        "DbV2001ChoshuHoho"."lastUpdateReamsLoginId" as "dbV2001ChoshuHoho_lastUpdateReamsLoginId",
+        "DbV2001ChoshuHoho"."choshuHoho4gatsu" as "dbV2001ChoshuHoho_choshuHoho4gatsu",
+        "DbV2001ChoshuHoho"."choshuHoho5gatsu" as "dbV2001ChoshuHoho_choshuHoho5gatsu",
+        "DbV2001ChoshuHoho"."choshuHoho6gatsu" as "dbV2001ChoshuHoho_choshuHoho6gatsu",
+        "DbV2001ChoshuHoho"."choshuHoho7gatsu" as "dbV2001ChoshuHoho_choshuHoho7gatsu",
+        "DbV2001ChoshuHoho"."choshuHoho8gatsu" as "dbV2001ChoshuHoho_choshuHoho8gatsu",
+        "DbV2001ChoshuHoho"."choshuHoho9gatsu" as "dbV2001ChoshuHoho_choshuHoho9gatsu",
+        "DbV2001ChoshuHoho"."choshuHoho10gatsu" as "dbV2001ChoshuHoho_choshuHoho10gatsu",
+        "DbV2001ChoshuHoho"."choshuHoho11gatsu" as "dbV2001ChoshuHoho_choshuHoho11gatsu",
+        "DbV2001ChoshuHoho"."choshuHoho12gatsu" as "dbV2001ChoshuHoho_choshuHoho12gatsu",
+        "DbV2001ChoshuHoho"."choshuHoho1gatsu" as "dbV2001ChoshuHoho_choshuHoho1gatsu",
+        "DbV2001ChoshuHoho"."choshuHoho2gatsu" as "dbV2001ChoshuHoho_choshuHoho2gatsu",
+        "DbV2001ChoshuHoho"."choshuHoho3gatsu" as "dbV2001ChoshuHoho_choshuHoho3gatsu",
+        "DbV2001ChoshuHoho"."choshuHohoYoku4gatsu" as "dbV2001ChoshuHoho_choshuHohoYoku4gatsu",
+        "DbV2001ChoshuHoho"."choshuHohoYoku5gatsu" as "dbV2001ChoshuHoho_choshuHohoYoku5gatsu",
+        "DbV2001ChoshuHoho"."choshuHohoYoku6gatsu" as "dbV2001ChoshuHoho_choshuHohoYoku6gatsu",
+        "DbV2001ChoshuHoho"."choshuHohoYoku7gatsu" as "dbV2001ChoshuHoho_choshuHohoYoku7gatsu",
+        "DbV2001ChoshuHoho"."choshuHohoYoku8gatsu" as "dbV2001ChoshuHoho_choshuHohoYoku8gatsu",
+        "DbV2001ChoshuHoho"."choshuHohoYoku9gatsu" as "dbV2001ChoshuHoho_choshuHohoYoku9gatsu",
+        "DbV2001ChoshuHoho"."kariNenkinNo" as "dbV2001ChoshuHoho_kariNenkinNo",
+        "DbV2001ChoshuHoho"."kariNenkinCode" as "dbV2001ChoshuHoho_kariNenkinCode",
+        "DbV2001ChoshuHoho"."kariHosokuM" as "dbV2001ChoshuHoho_kariHosokuM",
+        "DbV2001ChoshuHoho"."honNenkinNo" as "dbV2001ChoshuHoho_honNenkinNo",
+        "DbV2001ChoshuHoho"."honNenkinCode" as "dbV2001ChoshuHoho_honNenkinCode",
+        "DbV2001ChoshuHoho"."honHosokuM" as "dbV2001ChoshuHoho_honHosokuM",
+        "DbV2001ChoshuHoho"."yokunendoKariNenkinNo" as "dbV2001ChoshuHoho_yokunendoKariNenkinNo",
+        "DbV2001ChoshuHoho"."yokunendoKariNenkinCode" as "dbV2001ChoshuHoho_yokunendoKariNenkinCode",
+        "DbV2001ChoshuHoho"."yokunendoKariHosokuM" as "dbV2001ChoshuHoho_yokunendoKariHosokuM",
+        "DbV2001ChoshuHoho"."iraiSohuzumiFlag" as "dbV2001ChoshuHoho_iraiSohuzumiFlag",
+        "DbV2001ChoshuHoho"."tsuikaIraiSohuzumiFlag" as "dbV2001ChoshuHoho_tsuikaIraiSohuzumiFlag",
+        "DbV2001ChoshuHoho"."tokuchoTeishiNichiji" as "dbV2001ChoshuHoho_tokuchoTeishiNichiji",
+        "DbV2001ChoshuHoho"."tokuchoTeishiJiyuCode" as "dbV2001ChoshuHoho_tokuchoTeishiJiyuCode"
     </sql>
 
 
@@ -97,8 +97,8 @@
         <result property="tokuchoTeishiNichiji" column="dbV2001ChoshuHoho_tokuchoTeishiNichiji" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
         <result property="tokuchoTeishiJiyuCode" column="dbV2001ChoshuHoho_tokuchoTeishiJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
-    
-    <select id="getEntity" resultMap="ResultMap_DbV2001ChoshuHohoEntity">
+
+    <select id="getEntity" resultOrdered="true" resultMap="ResultMap_DbV2001ChoshuHohoEntity">
         SELECT
         <include refid="allColumns_DbV2001ChoshuHoho" />
         FROM
@@ -107,11 +107,11 @@
 
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbV2001ChoshuHoho">
-     SELECT
-         <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.allColumns_DbV2001ChoshuHoho" />
-     FROM
-         rgdb."DbV2001ChoshuHoho"
-     WHERE
-         rgdb."DbV2001ChoshuHoho"."isDeleted" = FALSE
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbV2001ChoshuHohoMapper.allColumns_DbV2001ChoshuHoho" />
+        FROM
+        rgdb."DbV2001ChoshuHoho"
+        WHERE
+        rgdb."DbV2001ChoshuHoho"."isDeleted" = FALSE
     </sql>
 </mapper>
