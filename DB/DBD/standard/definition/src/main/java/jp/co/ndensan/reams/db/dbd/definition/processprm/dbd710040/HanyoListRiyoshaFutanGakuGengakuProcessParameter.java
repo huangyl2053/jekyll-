@@ -103,11 +103,13 @@ public class HanyoListRiyoshaFutanGakuGengakuProcessParameter implements IBatchP
      *
      * @param psmShikibetsuTaisho 宛名識別対象PSM
      * @param psmAtesaki 宛先PSM
+     * @param 出力順 出力順
      * @return RiyoshaFutanGakuGengakuMybatisParameter
      */
     public RiyoshaFutanGakuGengakuMybatisParameter toTokubetsuChiikiKasanGemmenMybatisParameter(
             RString psmShikibetsuTaisho,
-            RString psmAtesaki) {
+            RString psmAtesaki,
+            RString 出力順) {
         return new RiyoshaFutanGakuGengakuMybatisParameter(
                 cyusyutsuhohokubun,
                 cyusyutsukomokukubun,
@@ -121,6 +123,7 @@ public class HanyoListRiyoshaFutanGakuGengakuProcessParameter implements IBatchP
                 kyakasha,
                 atenacyusyutsujyoken,
                 psmShikibetsuTaisho,
-                psmAtesaki);
+                psmAtesaki,
+                出力順);
     }
 }
