@@ -17,7 +17,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.io.csv.ListToObjectMappingHelper;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -46,8 +47,8 @@ public class SelectShotokuJohoProcess extends BatchProcessBase<RString> {
 
     @Override
     protected void initialize() {
-        // TODO  batchParameterのパラメータは問題があります、csvReaderPath = parameter.getPath().concat(KEY_分離文字).concat(parameter.getFileName());
-        csvReaderPath = Path.combinePath(parameter.get共有ファイルID(), parameter.get共有ファイル名());
+        csvReaderPath = new SharedFileEntryDescriptor(
+                FilesystemName.fromString(parameter.get共有ファイル名()), parameter.get共有ファイルID()).getDirectAccessPath();
     }
 
     @Override

@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1120002.Shot
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1120002.ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -21,10 +22,12 @@ import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 所得情報抽出・連携（単一他社）のクラスです。
@@ -97,7 +100,8 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameter {
         FilesystemName sharedFileName = new FilesystemName(ファイル付箋);
         SharedFile.defineSharedFile(sharedFileName);
         FilesystemPath 絶対パス = new FilesystemPath(files[0].getFilePath());
-        SharedFile.copyToSharedFile(絶対パス, sharedFileName);
+        RDateTime 共有ファイルID = SharedFile.copyToSharedFile(絶対パス, sharedFileName);
+        ViewStateHolder.put(ViewStateKeys.イメージ共有ファイルID, 共有ファイルID);
         RString path = new RString(SharedFile.getBasePath() + File.separator + 所得情報ファイル);
         File file = new File(path.toString());
         if (file.exists() && file.getName().contains(所得情報ファイル)) {
@@ -141,7 +145,8 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameter {
      */
     public ResponseData<DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuParameter> onclick_batchRegister_DBB112001(
             ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv div) {
-        DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuParameter parameter = getHandler(div).getBatchParamter_DBB112001();
+        RDateTime 共有ファイルID = ViewStateHolder.get(ViewStateKeys.イメージ共有ファイルID, RDateTime.class);
+        DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuParameter parameter = getHandler(div).getBatchParamter_DBB112001(共有ファイルID);
         return ResponseData.of(parameter).respond();
     }
 
@@ -154,7 +159,8 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameter {
      */
     public ResponseData<DBB112003_ShotokuJohoChushutsuRenkeiTanitsuParameter> onclick_batchRegister__DBB112003(
             ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv div) {
-        DBB112003_ShotokuJohoChushutsuRenkeiTanitsuParameter parameter = getHandler(div).getBatchParameter_DBB112003();
+        RDateTime 共有ファイルID = ViewStateHolder.get(ViewStateKeys.イメージ共有ファイルID, RDateTime.class);
+        DBB112003_ShotokuJohoChushutsuRenkeiTanitsuParameter parameter = getHandler(div).getBatchParameter_DBB112003(共有ファイルID);
         return ResponseData.of(parameter).respond();
     }
 

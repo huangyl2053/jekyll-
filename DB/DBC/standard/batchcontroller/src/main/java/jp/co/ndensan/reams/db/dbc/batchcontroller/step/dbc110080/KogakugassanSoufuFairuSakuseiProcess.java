@@ -100,7 +100,7 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
     private int レコード件数;
     private int renben;
     private KogakugassanSoufuFairuSakuseiMeisaiEntity meisEntity;
-    @BatchWriter
+
     private CsvWriter eucCsvWriter;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 処理結果リスト一時tableWriter;

@@ -355,7 +355,7 @@
                 ELSE "HokenshaDankaiTemp"."保険者設定段階2" 
             END) AS HokenshaDankaiTemp_保険者設定段階,
             (CASE WHEN "HyojunDankaiTemp"."標準設定段階2" IS NULL 
-                OR "HokenshaDankaiTemp"."保険者設定段階2" =''
+                OR "HyojunDankaiTemp"."標準設定段階2" =''
                 THEN "HyojunDankaiTemp"."標準設定段階1" 
                 ELSE "HyojunDankaiTemp"."標準設定段階2" 
             END) AS HyojunDankaiTemp_標準設定段階
@@ -455,7 +455,7 @@
                         "HihokenshaTaihoTemp"."shichosonCode",
                         (case when
                         "HyojunDankaiTemp"."標準設定段階2" is null
-                        OR "HokenshaDankaiTemp"."保険者設定段階2" =''
+                        OR "HyojunDankaiTemp"."標準設定段階2" =''
                         then
                         "HyojunDankaiTemp"."標準設定段階1"
                         else
@@ -475,8 +475,8 @@
                 GROUP BY C."shichosonCode",C."標準設定段階"
                 ORDER BY C."shichosonCode",C."標準設定段階"
             ) D
-        ) E
-    )
-    ORDER BY E."shichosonCode",E."標準設定段階"
+        )
+    ) E
+    ORDER BY E."shichosonCode"
     </select>
 </mapper>

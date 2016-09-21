@@ -115,12 +115,14 @@ public class HihokenshaProcess extends BatchProcessBase<DbT1001HihokenshaDaichoE
         賦課基準日 = FukaKeisan.createInstance().findOut賦課基準日(processParameter.get調定年度(), new HihokenshaDaicho(entity));
         processEntity.setHukaSystemDate(賦課基準日);
         processEntity.setHukaNando(processParameter.get調定年度());
-        if (entity != null && null != entity.getShikakuSoshitsuYMD() && APRIL == entity.getShikakuSoshitsuYMD().getMonthValue()) {
+        if (entity.getShikakuSoshitsuYMD() != null && APRIL == getMonthValue(entity.getShikakuSoshitsuYMD()).getMonthValue()) {
             processEntity.setShikakuSoshitsuYMD(new FlexibleDate(processEntity.getShikakuSoshitsuYMD().getYearValue(),
                     processEntity.getShikakuSoshitsuYMD().getMonthValue() + ONE_INT, ONE_INT));
         }
-        if (entity.getIchigoShikakuShutokuYMD() != null && entity.getShikakuSoshitsuYMD() != null
-                && entity.getIchigoShikakuShutokuYMD().getMonthValue() == entity.getShikakuSoshitsuYMD().getMonthValue()) {
+        if (getMonthValue(entity.getIchigoShikakuShutokuYMD()) != null
+                && getMonthValue(entity.getShikakuSoshitsuYMD()) != null
+                && getMonthValue(entity.getIchigoShikakuShutokuYMD()).getMonthValue()
+                == getMonthValue(entity.getShikakuSoshitsuYMD()).getMonthValue()) {
             processEntity.setShikakuSoshitsuYMD(new FlexibleDate(processEntity.getShikakuSoshitsuYMD().getYearValue(),
                     processEntity.getShikakuSoshitsuYMD().getMonthValue() + ONE_INT, ONE_INT));
         }
@@ -143,6 +145,10 @@ public class HihokenshaProcess extends BatchProcessBase<DbT1001HihokenshaDaichoE
             set月別ランク(rankuEntity, 月別ランク情報);
             月別ランクTemp一時tableWriter.insert(rankuEntity);
         }
+    }
+
+    private FlexibleDate getMonthValue(FlexibleDate flexibleDate) {
+        return flexibleDate;
     }
 
     private void editHihokenshaDaichoEntity(DbT1001HihokenshaDaichoEntity entity, HihokenshaTaihoTemp processEntity) {

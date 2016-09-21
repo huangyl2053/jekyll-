@@ -130,6 +130,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
                 初期化データ = 初期化データ.createBuilderForEdit().
                         set送付年月(new FlexibleYearMonth(システムタイム.getYearMonth().toDateString()))
                         .set訂正区分コード(訂正区分コード)
+                        .set論理削除フラグ(true)
                         .set訂正年月日(訂正年月日).build();
                 初期化データ = 初期化データ.modified();
                 return JukyushaTeiseiRenrakuhyoTorokuManager.createInstance().
