@@ -34,11 +34,11 @@ public enum KogakuGassanKyufuJissekiInOutputOrder implements IReportItems {
     /**
      * 氏名５０音カナ
      */
-    氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), new RString("TEMP.\"shimei50onKana\"")),
+    氏名５０音カナ(new RString("0016"), new RString("氏名５０音カナ"), new RString("TEMP.\"shimei50onKana\"")),
     /**
      * 市町村コード
      */
-    市町村コード(new RString("0016"), new RString("市町村コード"), new RString("TEMP.\"shichosonCode\"")),
+    市町村コード(new RString("0010"), new RString("市町村コード"), new RString("TEMP.\"shichosonCode\"")),
     /**
      * 被保険者番号
      */
@@ -50,7 +50,7 @@ public enum KogakuGassanKyufuJissekiInOutputOrder implements IReportItems {
     /**
      * 申請書整理番号
      */
-    申請書整理番号(new RString("0337"), new RString("申請書整理番号"), new RString("DbWT38P1.\"shikyuShinseishoSeiriNo\""));
+    申請書整理番号(new RString("0337"), new RString("申請書整理番号"), new RString("DbWT38P1.\"shikyuShinseiSeiriNo\""));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;
