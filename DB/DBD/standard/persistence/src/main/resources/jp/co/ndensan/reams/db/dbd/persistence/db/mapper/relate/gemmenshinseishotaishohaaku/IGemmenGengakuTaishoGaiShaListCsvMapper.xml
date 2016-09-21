@@ -18,12 +18,12 @@ and open the template in the editor.-->
         B."kijunYMD" AS "kijunYMD",
         B."shotokuNendo" AS "shotokuNendo",
 
-        A."dbT4018KaigoHokenFutanGendogakuNintei_shoKisaiHokenshaNo" AS "shoKisaiHokenshaNo",
-        A."dbT4018KaigoHokenFutanGendogakuNintei_ketteiKubun" AS "ketteiKubun",
-        A."dbT4018KaigoHokenFutanGendogakuNintei_shinseiYMD" AS "shinseiYMD",
-        A."dbT4018KaigoHokenFutanGendogakuNintei_ketteiYMD" AS "ketteiYMD",
-        A."dbT4018KaigoHokenFutanGendogakuNintei_tekiyoKaishiYMD" AS "tekiyoKaishiYMD",
-        A."dbT4018KaigoHokenFutanGendogakuNintei_tekiyoShuryoYMD" AS "tekiyoShuryoYMD",
+        A."dbT4018KaigohFutanGengkNint_shoKisaiHokenshaNo" AS "shoKisaiHokenshaNo",
+        A."dbT4018KaigohFutanGengkNint_ketteiKubun" AS "ketteiKubun",
+        A."dbT4018KaigohFutanGengkNint_shinseiYMD" AS "shinseiYMD",
+        A."dbT4018KaigohFutanGengkNint_ketteiYMD" AS "ketteiYMD",
+        A."dbT4018KaigohFutanGengkNint_tekiyoKaishiYMD" AS "tekiyoKaishiYMD",
+        A."dbT4018KaigohFutanGengkNint_tekiyoShuryoYMD" AS "tekiyoShuryoYMD",
 
         E."世帯課税区分" AS 世帯課税区分,
         E."利用者負担段階" AS 利用者負担段階,
@@ -61,7 +61,7 @@ and open the template in the editor.-->
         ON  A1."hihokenshaNo" = "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo"
         AND M ="DbT4018KaigoHokenFutanGendogakuNintei"."rirekiNo"
         ) A
-        ON A."dbT4018KaigoHokenFutanGendogakuNintei_hihokenshaNo" = B."hihokenshaNo"
+        ON A."dbT4018KaigohFutanGengkNint_hihokenshaNo" = B."hihokenshaNo"
         INNER JOIN
         rgdb."DbV1001HihokenshaDaicho" C
         ON C."hihokenshaNo" = B."hihokenshaNo"
@@ -414,12 +414,12 @@ and open the template in the editor.-->
         B."kijunYMD" AS "kijunYMD",
         B."shotokuNendo" AS "shotokuNendo",
 
-        A."dbT4018KaigoHokenFutanGendogakuNintei_shoKisaiHokenshaNo" AS "shoKisaiHokenshaNo",
-        A."dbT4018KaigoHokenFutanGendogakuNintei_ketteiKubun" AS "ketteiKubun",
-        A."dbT4018KaigoHokenFutanGendogakuNintei_shinseiYMD" AS "shinseiYMD",
-        A."dbT4018KaigoHokenFutanGendogakuNintei_ketteiYMD" AS "ketteiYMD",
-        A."dbT4018KaigoHokenFutanGendogakuNintei_tekiyoKaishiYMD" AS "tekiyoKaishiYMD",
-        A."dbT4018KaigoHokenFutanGendogakuNintei_tekiyoShuryoYMD" AS "tekiyoShuryoYMD",
+        A."dbT4018KaigohFutanGengkNint_shoKisaiHokenshaNo" AS "shoKisaiHokenshaNo",
+        A."dbT4018KaigohFutanGengkNint_ketteiKubun" AS "ketteiKubun",
+        A."dbT4018KaigohFutanGengkNint_shinseiYMD" AS "shinseiYMD",
+        A."dbT4018KaigohFutanGengkNint_ketteiYMD" AS "ketteiYMD",
+        A."dbT4018KaigohFutanGengkNint_tekiyoKaishiYMD" AS "tekiyoKaishiYMD",
+        A."dbT4018KaigohFutanGengkNint_tekiyoShuryoYMD" AS "tekiyoShuryoYMD",
 
         E."世帯課税区分" AS 世帯課税区分,
         E."利用者負担段階" AS 利用者負担段階,
@@ -457,7 +457,7 @@ and open the template in the editor.-->
         ON  A1."hihokenshaNo" = "DbT4018KaigoHokenFutanGendogakuNintei"."hihokenshaNo"
         AND M ="DbT4018KaigoHokenFutanGendogakuNintei"."rirekiNo"
         ) A
-        ON A."dbT4018KaigoHokenFutanGendogakuNintei_hihokenshaNo" = B."hihokenshaNo"
+        ON A."dbT4018KaigohFutanGengkNint_hihokenshaNo" = B."hihokenshaNo"
         INNER JOIN
         rgdb."DbV1001HihokenshaDaicho" C
         ON C."hihokenshaNo" = B."hihokenshaNo"
