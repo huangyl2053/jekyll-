@@ -475,8 +475,8 @@
                 GROUP BY C."shichosonCode",C."標準設定段階"
                 ORDER BY C."shichosonCode",C."標準設定段階"
             ) D
-        ) E
-    )
-    ORDER BY E."shichosonCode",E."標準設定段階"
+        )
+    ) E
+    ORDER BY E."shichosonCode"
     </select>
 </mapper>
