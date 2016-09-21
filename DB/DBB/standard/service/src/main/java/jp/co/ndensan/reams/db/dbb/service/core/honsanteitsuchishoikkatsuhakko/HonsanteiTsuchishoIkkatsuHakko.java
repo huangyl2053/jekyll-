@@ -367,7 +367,7 @@ public class HonsanteiTsuchishoIkkatsuHakko extends HonsanteiTsuchishoIkkatsuHak
 
     private int get山分け用スプール数_銀振型(List<NokiJoho> 期月List, KitsukiList 本算定期間) {
         int 山分け用スプール数 = 0;
-        //TODO セルフ業務決定
+        //TODO セルフ業務決定436　確認中
         本算定期間.toList();
 //        List<Kitsuki> 銀振計算期月リスト = 本算定期間.toList();
 //        int 最初の月 = 銀振計算期月リスト.get(銀振計算期月リスト.size() - INT_1).get月AsInt();

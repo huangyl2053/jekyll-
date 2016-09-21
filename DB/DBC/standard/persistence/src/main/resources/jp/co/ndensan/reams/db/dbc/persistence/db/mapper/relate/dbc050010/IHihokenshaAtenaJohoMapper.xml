@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--@reamsid_L DBC-5010-030 donghj-->
+
+
+
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc050010.IHihokenshaAtenaJohoMapper">
+    
+    <resultMap id="resultMap_HihokenshaAtena" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.HihokenshaAtenaResultEntity" autoMapping="true">
+        <result property="市町村コード" column="DbV1001HihokenshaDaicho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="広域内住所地特例フラグ" column="DbV1001HihokenshaDaicho_koikinaiJushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="広住特措置元市町村コード" column="DbV1001HihokenshaDaicho_koikinaiTokureiSochimotoShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <association property="宛名Entity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+    </resultMap>  
+    
+    <select id="get被保険者台帳と宛名情報" resultOrdered="true"  resultMap="resultMap_HihokenshaAtena" fetchSize="500" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc050010.HihokenshaAtenaMybatisParameter">
+        
+        SELECT
+            振込明細一時TBL.*,
+            被保険者台帳."hihokenshaNo" AS "DbV1001HihokenshaDaicho_hihokenshaNo",
+            被保険者台帳."idoYMD" AS "DbV1001HihokenshaDaicho_idoYMD",
+            被保険者台帳."edaNo" AS "DbV1001HihokenshaDaicho_edaNo",
+            被保険者台帳."idoJiyuCode" AS "DbV1001HihokenshaDaicho_idoJiyuCode",
+            被保険者台帳."shichosonCode" AS "DbV1001HihokenshaDaicho_shichosonCode",
+            被保険者台帳."shikibetsuCode" AS "DbV1001HihokenshaDaicho_shikibetsuCode",
+            被保険者台帳."shikakuShutokuJiyuCode" AS "DbV1001HihokenshaDaicho_shikakuShutokuJiyuCode",
+            被保険者台帳."shikakuShutokuYMD" AS "DbV1001HihokenshaDaicho_shikakuShutokuYMD",
+            被保険者台帳."shikakuShutokuTodokedeYMD" AS "DbV1001HihokenshaDaicho_shikakuShutokuTodokedeYMD",
+            被保険者台帳."ichigoShikakuShutokuYMD" AS "DbV1001HihokenshaDaicho_ichigoShikakuShutokuYMD",
+            被保険者台帳."hihokennshaKubunCode" AS "DbV1001HihokenshaDaicho_hihokennshaKubunCode",
+            被保険者台帳."shikakuSoshitsuJiyuCode" AS "DbV1001HihokenshaDaicho_shikakuSoshitsuJiyuCode",
+            被保険者台帳."shikakuSoshitsuYMD" AS "DbV1001HihokenshaDaicho_shikakuSoshitsuYMD",
+            被保険者台帳."shikakuSoshitsuTodokedeYMD" AS "DbV1001HihokenshaDaicho_shikakuSoshitsuTodokedeYMD",
+            被保険者台帳."shikakuHenkoJiyuCode" AS "DbV1001HihokenshaDaicho_shikakuHenkoJiyuCode",
+            被保険者台帳."shikakuHenkoYMD" AS "DbV1001HihokenshaDaicho_shikakuHenkoYMD",
+            被保険者台帳."shikakuHenkoTodokedeYMD" AS "DbV1001HihokenshaDaicho_shikakuHenkoTodokedeYMD",
+            被保険者台帳."jushochitokureiTekiyoJiyuCode" AS "DbV1001HihokenshaDaicho_jushochitokureiTekiyoJiyuCode",
+            被保険者台帳."jushochitokureiTekiyoYMD" AS "DbV1001HihokenshaDaicho_jushochitokureiTekiyoYMD",
+            被保険者台帳."jushochitokureiTekiyoTodokedeYMD" AS "DbV1001HihokenshaDaicho_jushochitokureiTekiyoTodokedeYMD",
+            被保険者台帳."jushochitokureiKaijoJiyuCode" AS "DbV1001HihokenshaDaicho_jushochitokureiKaijoJiyuCode",
+            被保険者台帳."jushochitokureiKaijoYMD" AS "DbV1001HihokenshaDaicho_jushochitokureiKaijoYMD",
+            被保険者台帳."jushochitokureiKaijoTodokedeYMD" AS "DbV1001HihokenshaDaicho_jushochitokureiKaijoTodokedeYMD",
+            被保険者台帳."jushochiTokureiFlag" AS "DbV1001HihokenshaDaicho_jushochiTokureiFlag",
+            被保険者台帳."koikinaiJushochiTokureiFlag" AS "DbV1001HihokenshaDaicho_koikinaiJushochiTokureiFlag",
+            被保険者台帳."koikinaiTokureiSochimotoShichosonCode" AS "DbV1001HihokenshaDaicho_koikinaiTokureiSochimotoShichosonCode",
+            被保険者台帳."kyuShichosonCode" AS "DbV1001HihokenshaDaicho_kyuShichosonCode",
+            被保険者台帳."logicalDeletedFlag" AS "DbV1001HihokenshaDaicho_logicalDeletedFlag",
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        FROM
+            "DbWT0510FurikomiMeisai" AS 振込明細一時TBL
+        INNER JOIN
+            rgdb."DbV1001HihokenshaDaichoAlive" AS 被保険者台帳
+        ON
+            振込明細一時TBL."hihokenshaNo" = 被保険者台帳."hihokenshaNo"
+        INNER JOIN
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
+            AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
+            ON
+               被保険者台帳."shikibetsuCode" =  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
+        
+    </select>
+    
+</mapper>

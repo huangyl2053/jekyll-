@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbc.entity.report.source.saishinsaketteihokenshai
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 過誤決定通知書情報取込一覧表（公費負担者分）のReportSourceです。
@@ -155,6 +156,8 @@ public class SaishinsaKetteitsuchishoTorikomiIchiranHokenshaBunSource implements
     public RString kogakuServicehiChoseiTanisu;
     @ReportItem (name = "kogakuServicehiChoseiFutangaku", length = 17, order = 69)
     public RString kogakuServicehiChoseiFutangaku;
+    @ReportPerson (id = "A")
+    public RString shikibetsuCode;
 
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
