@@ -105,7 +105,7 @@ public class KogakugassanGassanMiSofuReprotProcess extends BatchKeyBreakBase<Syu
     private RString 設定値;
     private List<PersonalData> personalDataList;
     private Set<ShikibetsuCode> 識別コードset;
-    @BatchWriter
+
     private BatchReportWriter<GassanHoseizumiJikofutangakuSofuchiranSource> batchReportWriter;
     private ReportSourceWriter<GassanHoseizumiJikofutangakuSofuchiranSource> reportSourceWriter;
     @BatchWriter
@@ -131,12 +131,6 @@ public class KogakugassanGassanMiSofuReprotProcess extends BatchKeyBreakBase<Syu
 
     @Override
     protected void createWriter() {
-        PageBreaker<GassanHoseizumiJikofutangakuSofuchiranSource> breakPage
-                = new KogakugassanHoseisumiJikofutangakuOutPageBreak(pageBreakKeys);
-        batchReportWriter
-                = BatchReportFactory.createBatchReportWriter(帳票ID.getColumnValue(), SubGyomuCode.DBC介護給付).addBreak(breakPage).create();
-        reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
-
         eucManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         spoolWorkPath = eucManager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
@@ -152,6 +146,13 @@ public class KogakugassanGassanMiSofuReprotProcess extends BatchKeyBreakBase<Syu
 
     @Override
     protected void usualProcess(SyuturyokuEntity entity) {
+        if (index == INT_1) {
+            PageBreaker<GassanHoseizumiJikofutangakuSofuchiranSource> breakPage
+                    = new KogakugassanHoseisumiJikofutangakuOutPageBreak(pageBreakKeys);
+            batchReportWriter
+                    = BatchReportFactory.createBatchReportWriter(帳票ID.getColumnValue(), SubGyomuCode.DBC介護給付).addBreak(breakPage).create();
+            reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
+        }
         GassanHoseizumiJikofutangakuSofuchiranReport report
                 = new GassanHoseizumiJikofutangakuSofuchiranReport(
                         entity, 出力順情報, processParameter.getShoriYM(), processParameter.getNow().getRDateTime(), index, 設定値);
@@ -171,6 +172,7 @@ public class KogakugassanGassanMiSofuReprotProcess extends BatchKeyBreakBase<Syu
     protected void afterExecute() {
         eucCsvWriter.close();
         if (index != INT_1) {
+            batchReportWriter.close();
             if (!personalDataList.isEmpty()) {
                 AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
                 eucManager.spool(eucFilePath, accessLogUUID);
