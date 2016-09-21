@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.batchcontroller.flow.ichijihanteizumifoutput;
+package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.ichijihanteizumifoutput.IchijiHanteizumIfOutputEucCsvProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.ichijihanteizumifoutput.NinteichosahyoChosaItemSkuseyiProcess;
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBE-1470-021 wanghui
  */
-public class IchijiHanteizumIfOutputFlow extends BatchFlowBase<ItziHanteiShoriBatchParamter> {
+public class DBE309001_IchijihanteiIfSakusei extends BatchFlowBase<ItziHanteiShoriBatchParamter> {
 
     private static final String 調査票概況調査サービスの状況 = "NinteichosahyoServiceJokyoSkuseyiProcess";
     private static final String 認定調査票基本調査調査項目 = "NinteichosahyoChosaItemSkuseyiProcess";
