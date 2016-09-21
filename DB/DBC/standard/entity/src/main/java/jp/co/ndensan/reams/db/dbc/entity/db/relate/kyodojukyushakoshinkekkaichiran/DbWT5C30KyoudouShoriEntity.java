@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kyodojukyushakoshinkekkaichiran;
 
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 共同処理一時TBLのEntityクラスです。
@@ -18,15 +18,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DbWT5C30KyoudouShoriEntity {
 
-    private RString 連番;
+    private Decimal 連番;
     private RString 保険者番号;
     private RString 保険者名;
     private RString 集約被保険者番号;
-    private FlexibleDate 集約異動年月日;
+    private RString 集約異動年月日;
     private RString 基_交換情報識別番号;
-    private FlexibleDate 基_異動年月日;
+    private RString 基_異動年月日;
     private RString 基_異動区分コード;
-    private FlexibleDate 基_訂正年月日;
+    private RString 基_訂正年月日;
     private RString 基_訂正区分コード;
     private RString 基_異動事由;
     private RString 基_証記載保険者番号;
@@ -38,21 +38,21 @@ public class DbWT5C30KyoudouShoriEntity {
     private RString 基_住所;
     private RString 基_帳票出力順序コード;
     private RString 償_交換情報識別番号;
-    private FlexibleDate 償_異動年月日;
+    private RString 償_異動年月日;
     private RString 償_異動区分コード;
-    private FlexibleDate 償_訂正年月日;
+    private RString 償_訂正年月日;
     private RString 償_訂正区分コード;
     private RString 償_異動事由;
     private RString 償_証記載保険者番号;
     private RString 償_被保険者番号;
-    private FlexibleDate 償_保険給付支払の一時差止の開始年月日;
-    private FlexibleDate 償_保険給付支払の一時差止の終了年月日;
+    private RString 償_保険給付支払の一時差止の開始年月日;
+    private RString 償_保険給付支払の一時差止の終了年月日;
     private RString 償_保険給付支払の一時差止区分;
     private RString 償_保険給付支払の一時差止金額;
     private RString 高_交換情報識別番号;
-    private FlexibleDate 高_異動年月日;
+    private RString 高_異動年月日;
     private RString 高_異動区分コード;
-    private FlexibleDate 高_訂正年月日;
+    private RString 高_訂正年月日;
     private RString 高_訂正区分コード;
     private RString 高_異動事由;
     private RString 高_証記載保険者番号;

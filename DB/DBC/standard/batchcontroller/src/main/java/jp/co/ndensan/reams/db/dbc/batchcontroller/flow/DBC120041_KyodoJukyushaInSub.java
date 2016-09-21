@@ -13,6 +13,9 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120041.CreateTmptable5
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120041.CreateTmptable5E4Process;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120041.IchiTmpTableTorokuProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120041.DBC120041_KyodoJukyushaInSubParameter;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyodojukyushainsub.DbWT5C31KihonKyoudouShoriEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyodojukyushainsub.DbWT5C32ShoukanKyoudouShoriEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyodojukyushainsub.DbWT5C33KougakuKyoudouShoriEntity;
 import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -26,6 +29,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class DBC120041_KyodoJukyushaInSub extends BatchFlowBase<DBC120041_KyodoJukyushaInSubParameter> {
 
+    private static final RString TABLE_基本共同処理一時TBL = new RString("DbWT5C31KihonKyoudouShori");
+    private static final RString TABLE_償還共同処理一時TBL = new RString("DbWT5C32ShoukanKyoudouShori");
+    private static final RString TABLE_高額共同処理一時TBL = new RString("DbWT5C33KougakuKyoudouShori");
     private static final RString 基本情報_5C3 = new RString("5C3");
     private static final RString 償還情報_5D3 = new RString("5D3");
     private static final RString 高額情報_5E3 = new RString("5E3");
@@ -40,11 +46,18 @@ public class DBC120041_KyodoJukyushaInSub extends BatchFlowBase<DBC120041_KyodoJ
     private static final String 一時TBL償還情報_5D4作成 = "一時TBL償還情報_5D4作成";
     private static final String 一時TBL高額情報_5E4作成 = "一時TBL高額情報_5E4作成";
     private static final String 一時TBLの登録 = "一時TBLの登録";
+    private static final String CREATE基本共同処理一時TBL = "CREATE基本共同処理一時TBL";
+    private static final String CREATE償還共同処理一時TBL = "CREATE償還共同処理一時TBL";
+    private static final String CREATE高額共同処理一時TBL = "CREATE高額共同処理一時TBL";
     private RString ファイル名;
     private Integer レコード総件数;
 
     @Override
     protected void defineFlow() {
+        レコード総件数 = 0;
+        executeStep(CREATE基本共同処理一時TBL);
+        executeStep(CREATE償還共同処理一時TBL);
+        executeStep(CREATE高額共同処理一時TBL);
         for (RString csvファイル名 : getParameter().getエントリ情報List()) {
             ファイル名 = csvファイル名;
             try {
@@ -79,6 +92,36 @@ public class DBC120041_KyodoJukyushaInSub extends BatchFlowBase<DBC120041_KyodoJ
             getResult(RString.class, new RString(一時TBL基本情報_5C3作成), CreateTmptable5C3Process.処理対象年月);
         }
         executeStep(一時TBLの登録);
+    }
+
+    /**
+     * 基本共同処理一時TBLをCREATEするProcessです。
+     *
+     * @return 基本共同処理一時TBL
+     */
+    @Step(CREATE基本共同処理一時TBL)
+    protected IBatchFlowCommand create基本共同処理一時TempTable() {
+        return createTempTable(TABLE_基本共同処理一時TBL, DbWT5C31KihonKyoudouShoriEntity.class).define();
+    }
+
+    /**
+     * 償還共同処理一時TBLをCREATEするProcessです。
+     *
+     * @return 償還共同処理一時TBL
+     */
+    @Step(CREATE償還共同処理一時TBL)
+    protected IBatchFlowCommand create償還共同処理一時TempTable() {
+        return createTempTable(TABLE_償還共同処理一時TBL, DbWT5C32ShoukanKyoudouShoriEntity.class).define();
+    }
+
+    /**
+     * 高額共同処理一時TBLをCREATEするProcessです。
+     *
+     * @return 要介護認定申請情報中間一時テーブル
+     */
+    @Step(CREATE高額共同処理一時TBL)
+    protected IBatchFlowCommand create高額共同処理一時TempTable() {
+        return createTempTable(TABLE_高額共同処理一時TBL, DbWT5C33KougakuKyoudouShoriEntity.class).define();
     }
 
     /**
