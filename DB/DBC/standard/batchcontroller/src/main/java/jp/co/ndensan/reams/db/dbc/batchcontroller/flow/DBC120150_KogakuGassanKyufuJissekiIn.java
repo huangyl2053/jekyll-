@@ -70,9 +70,12 @@ public class DBC120150_KogakuGassanKyufuJissekiIn extends BatchFlowBase<DBC12015
     @Override
     protected void defineFlow() {
         try {
-
+            RString 処理区分 = RString.EMPTY;
+            if (!RString.isNullOrEmpty(getParameter().get処理区分())) {
+                処理区分 = getParameter().get処理区分().trim();
+            }
             交換情報識別番号 = DbBusinessConfig.get(ConfigNameDBC.国保連取込_高額合算給付実績情報_交換情報識別番号,
-                    RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+                    RDate.getNowDate(), SubGyomuCode.DBC介護給付).concat(処理区分);
             executeStep(ファイル取得);
             returnEntity = getResult(KokuhorenKyoutsuuFileGetReturnEntity.class, new RString(ファイル取得),
                     KokuhorenkyoutsuGetFileProcess.PARAMETER_OUT_RETURNENTITY);
@@ -98,10 +101,11 @@ public class DBC120150_KogakuGassanKyufuJissekiIn extends BatchFlowBase<DBC12015
                 executeStep(被保険者関連処理);
                 if (SaiShoriKubun.再処理.equals(getParameter().get再処理区分())) {
                     executeStep(マスタ登録_再処理準備);
-                    executeStep(マスタ登録_マスタ更新);
-                } else {
-                    executeStep(マスタ登録_マスタ追加);
+
                 }
+                executeStep(マスタ登録_マスタ追加);
+                executeStep(マスタ登録_マスタ更新);
+
                 executeStep(国保連インタフェース管理更新);
                 executeStep(一覧表作成);
                 executeStep(処理結果リスト作成);
@@ -165,7 +169,7 @@ public class DBC120150_KogakuGassanKyufuJissekiIn extends BatchFlowBase<DBC12015
         KogakuGassanKyufuJissekiInDoMasterLoginProcessParameter parameter = new KogakuGassanKyufuJissekiInDoMasterLoginProcessParameter();
         parameter.set処理区分(getParameter().get処理区分());
         parameter.set処理年月(getParameter().get処理年月());
-        return loopBatch(KogakuGassanKyufuJissekiInDoMasterTorokuSaiShoriProcess.class).arguments(parameter).define();
+        return simpleBatch(KogakuGassanKyufuJissekiInDoMasterTorokuSaiShoriProcess.class).arguments(parameter).define();
 
     }
 

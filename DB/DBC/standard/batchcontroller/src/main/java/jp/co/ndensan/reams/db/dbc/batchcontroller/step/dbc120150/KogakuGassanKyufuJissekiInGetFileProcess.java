@@ -214,6 +214,7 @@ public class KogakuGassanKyufuJissekiInGetFileProcess extends BatchProcessBase<R
     }
 
     private void 処理結果リスト一時に登録() {
+
         DbWT0002KokuhorenTorikomiErrorEntity 処理結果リスト一時entity = new DbWT0002KokuhorenTorikomiErrorEntity();
         処理結果リスト一時entity.setErrorKubun(KokuhorenJoho_TorikomiErrorKubun.取込対象データなし.getコード());
         処理結果リスト一時entity.setShoHokanehshaNo(ShoKisaiHokenshaNo.EMPTY);
@@ -227,6 +228,7 @@ public class KogakuGassanKyufuJissekiInGetFileProcess extends BatchProcessBase<R
         処理結果リスト一時entity.setHihokenshaShimei(RString.EMPTY);
         処理結果リスト一時entity.setBiko(RString.EMPTY);
         処理結果リスト一時tbWriter.insert(処理結果リスト一時entity);
+
     }
 
     private Decimal getDecimal(RString decimal) {
