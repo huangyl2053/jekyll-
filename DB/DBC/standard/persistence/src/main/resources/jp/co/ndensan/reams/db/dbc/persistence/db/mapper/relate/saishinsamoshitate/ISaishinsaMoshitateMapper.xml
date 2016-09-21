@@ -170,7 +170,7 @@
             AND
                 "DbT3062SaishinsaMoshitate"."rirekiNo" = 抽出対象."rirekiNo"
         INNER JOIN
-            rgdb."DbT1001HihokenshaDaicho" AS 被保険者台帳管理
+            rgdb."DbV1001HihokenshaDaicho" AS 被保険者台帳管理
             ON
                 被保険者台帳管理."hihokenshaNo" = "DbT3062SaishinsaMoshitate"."hiHokenshaNo"
         
