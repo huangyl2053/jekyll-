@@ -22,7 +22,7 @@ public class KenkouKaruteRenkeiDATEntity {
 
     @FldField(order = 10, length = 12)
     private RString 個人番号;
-    @FldField(order = 20, length = 70)
+    @FldField(order = 20, length = 210)
     private RString 漢字氏名_カナ氏名;
     @FldField(order = 30, length = 8)
     private RString 生年月日;
@@ -36,7 +36,7 @@ public class KenkouKaruteRenkeiDATEntity {
     private RString 資格喪失日;
     @FldField(order = 80, length = 2)
     private RString 要介護状態区分;
-    @FldField(order = 90, length = 7, paddingChar = "　")
+    @FldField(order = 90, length = 21, paddingChar = "　")
     private RString 減額認定証受給者番号;
     @FldField(order = 100, length = 8)
     private RString 認定年月日;
