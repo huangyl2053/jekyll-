@@ -122,11 +122,12 @@ public class UpdShoriHidukeKanriProcess extends BatchProcessBase<KaigoShotoTempT
         DbT7022ShoriDateKanriEntity dbt7022Entity = new DbT7022ShoriDateKanriEntity();
         if (異動_広域_2.equals(処理区分)) {
             処理枝番 = 処理枝番_00.concat(entity.getShichosonShikibetuId());
+            dbt7022Entity.setShichosonCode(entity.getShichosonCode());
         } else {
             処理枝番 = 枝番_0001;
+            dbt7022Entity.setShichosonCode(市町村コード);
         }
         dbt7022Entity.setShoriEdaban(処理枝番);
-        dbt7022Entity.setShichosonCode(市町村コード);
         DbT7022ShoriDateKanriEntity result = ShoriDateKanriManager.createInstance()
                 .select処理日付管理マスタ_所得情報抽出連携異動(処理年度, ShoriName.所得引出.get名称(), 処理枝番, SubGyomuCode.DBB介護賦課);
         if (result != null) {
