@@ -174,6 +174,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
         for (KogakuGassanShikyuKetteiHoseiResult entity : result) {
             dgKogakuGassanShikyuFushikyuKettei_Row row = new dgKogakuGassanShikyuFushikyuKettei_Row();
             if (事業分フラグ) {
+                row.setHihokenshaNo(entity.get事業高額合算決定entity().get被保険者番号().value());
                 row.getTxtTaishoNendo().setValue(new FlexibleDate(entity.get事業高額合算決定entity().
                         get対象年度().toDateString()));
                 row.setTxtShokisaiNo(entity.get事業高額合算決定entity().get保険者番号().value());
@@ -201,6 +202,7 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
                 row.getFurikomiTsuchiSakuseiYMD().setValue(entity.get事業高額合算決定entity().get振込通知書作成年月日());
                 rowList.add(row);
             } else {
+                row.setHihokenshaNo(entity.get高額合算決定entity().get被保険者番号().value());
                 row.getTxtTaishoNendo().setValue(new FlexibleDate(
                         entity.get高額合算決定entity().get対象年度().toDateString()));
                 row.setTxtShokisaiNo(entity.get高額合算決定entity().get保険者番号().value());
@@ -370,10 +372,10 @@ public class KogakuGassanShikyuKetteiHoseiPanelHandler {
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getCcdShiharaiHohoJoho().initialize(para, 登録);
         } else if (修正.equals(処理モデル)) {
             para.setKozaId(Long.parseLong(row.getKozaID().toString()));
-            para.setHihokenshaNo(new HihokenshaNo(row.getTxtShokisaiNo()));
+            para.setHihokenshaNo(new HihokenshaNo(row.getHihokenshaNo()));
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getCcdShiharaiHohoJoho().initialize(para, 修正);
         } else if (削除.equals(処理モデル) || 照会.equals(処理モデル)) {
-            para.setHihokenshaNo(new HihokenshaNo(row.getTxtShokisaiNo()));
+            para.setHihokenshaNo(new HihokenshaNo(row.getHihokenshaNo()));
             para.setKozaId(Long.parseLong(row.getKozaID().toString()));
             div.getKogakuGassanShikyuKetteiHoseiDetailPanel().getCcdShiharaiHohoJoho().initialize(para, 照会);
         }
