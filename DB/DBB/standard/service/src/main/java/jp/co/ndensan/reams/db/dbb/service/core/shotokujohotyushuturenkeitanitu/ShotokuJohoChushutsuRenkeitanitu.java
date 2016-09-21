@@ -118,8 +118,8 @@ public class ShotokuJohoChushutsuRenkeitanitu {
         result.set市町村情報List(parameter.get市町村情報List());
         result.set出力順ID(parameter.get出力順ID());
         result.set帳票ID(ReportIdDBB.DBB200008.getReportId());
-        result.set共有ファイル名(共有ファイル名);
-        result.set共有ファイルID(共有ファイルID);
+        result.set共有ファイル名(parameter.get共有ファイル名());
+        result.set共有ファイルID(parameter.get共有ファイルID());
         result.set処理区分(当初_単一);
         return result;
     }
@@ -137,8 +137,8 @@ public class ShotokuJohoChushutsuRenkeitanitu {
         result.set市町村情報List(parameter.get市町村情報List());
         result.set出力順ID(parameter.get出力順ID());
         result.set帳票ID(ReportIdDBB.DBB200008.getReportId());
-        result.set共有ファイル名(共有ファイル名);
-        result.set共有ファイルID(共有ファイルID);
+        result.set共有ファイル名(parameter.get共有ファイル名());
+        result.set共有ファイルID(parameter.get共有ファイルID());
         result.set処理区分(異動_単一);
         return result;
     }

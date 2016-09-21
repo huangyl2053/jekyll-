@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -53,7 +54,7 @@ public class DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuParameter extends 
     @BatchParameter(key = KEY_SHARE_FILES_NAME, name = NAME_SHARE_FILES_NAME)
     private RString 共有ファイル名;
     @BatchParameter(key = KEY_SHARE_FILES_ID, name = NAME_SHARE_FILES_ID)
-    private RString 共有ファイルID;
+    private RDateTime 共有ファイルID;
     @BatchParameter(key = KEY_SHORI_KUBUN, name = NAME_SHORI_KUBUN)
     private RString 処理区分;
     @BatchParameter(key = KEY_SHORI_NICHIJI, name = NAME_SHORI_NICHIJI)

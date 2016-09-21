@@ -79,7 +79,9 @@ public class UpdShoriHidukeKanriProcess extends BatchProcessBase<KaigoShotoTempT
     protected void process(KaigoShotoTempTableEntity entity) {
         if (当初_広域_1.equals(処理区分) || 当初_単一_3.equals(処理区分)) {
             DbT7022ShoriDateKanriEntity dbt7022Entity = get処理日付管理_当初(entity);
-            処理日付管理7022tableWriter.update(dbt7022Entity);
+            if (dbt7022Entity != null) {
+                処理日付管理7022tableWriter.update(dbt7022Entity);
+            }
         } else if (異動_広域_2.equals(処理区分) || 異動_単一_4.equals(処理区分)) {
             DbT7022ShoriDateKanriEntity dbt7022Entity = get処理日付管理_異動(entity);
             処理日付管理7022tableWriter.insert(dbt7022Entity);
@@ -104,6 +106,9 @@ public class UpdShoriHidukeKanriProcess extends BatchProcessBase<KaigoShotoTempT
         }
         ShoriDateKanri result = ShoriDateKanriManager.createInstance().get処理日付管理マスタ(
                 SubGyomuCode.DBB介護賦課, entity.getShichosonCode(), ShoriName.当初所得引出.get名称(), 処理枝番, 処理年度, 枝番_0001);
+        if (result == null) {
+            return null;
+        }
         DbT7022ShoriDateKanriEntity dbt7022Entity = result.toEntity();
         dbt7022Entity.setKijunTimestamp(バッチ起動処理日時);
         dbt7022Entity.setTaishoShuryoTimestamp(バッチ起動処理日時);
