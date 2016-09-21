@@ -68,7 +68,7 @@ public class KogakuGassanKyufuJissekiInDoMasterTorokuProcess
         }
         DbT3075KogakuGassanKyufuJissekiEntity 高額合算給付実績 = entity.get高額合算給付実績();
 
-        if (高額合算給付実績 != null) {
+        if (高額合算給付実績 == null) {
             doデータ追加(entity);
             count = count + 1;
 

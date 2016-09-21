@@ -9,12 +9,7 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD206010.DBD206010_Jigyos
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1050021.SFKTishoshaIchiranPanelBatchParameterDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1050021.SFKTishoshaIchiranPanelBatchParameterHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1050021.SFKTishoshaIchiranPanelBatchParameterValidationHandler;
-import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
@@ -48,9 +43,6 @@ public class SFKTishoshaIchiranPanelBatchParameter {
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-        IUrControlData controlData = UrControlDataFactory.createInstance();
-        RString メニューID = controlData.getMenuID();
-        RealInitialLocker.release(new LockingKey(メニューID));
         return ResponseData.of(div).respond();
     }
 

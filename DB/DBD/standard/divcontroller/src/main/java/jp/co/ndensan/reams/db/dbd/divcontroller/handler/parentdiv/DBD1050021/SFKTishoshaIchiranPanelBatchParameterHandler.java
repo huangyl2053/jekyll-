@@ -10,12 +10,8 @@ import jp.co.ndensan.reams.db.dbd.definition.core.shafugemmentaisyousyalist.Jigy
 import jp.co.ndensan.reams.db.dbd.definition.core.shafugemmentaisyousyalist.ShikakuSoshitsushaSentaku;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1050021.SFKTishoshaIchiranPanelBatchParameterDiv;
-import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -46,9 +42,6 @@ public class SFKTishoshaIchiranPanelBatchParameterHandler {
      * onLoad
      */
     public void onLoad() {
-        IUrControlData controlData = UrControlDataFactory.createInstance();
-        RString メニューID = controlData.getMenuID();
-        RealInitialLocker.lock(new LockingKey(メニューID));
         div.getChutsutsuJoken().getRadShikakuSoshitsuChushutsu().setSelectedKey(KEY1);
         div.getChutsutsuJoken().getTxtKijunYMD().setValue(RDate.getNowDate());
         div.getChushutsuSetsumei().getCcdChohyoShutsuryokuJun().load(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD200017.getReportId());

@@ -197,7 +197,7 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaList {
      * @return bparamt
      */
     public DBD202010_HomonKaigoRiyoshaFutanGakuNinteishaListParameter set受給者区分の設定(HomonKaigoRiyoshaFutanGengakuNinteishaListDiv div) {
-        RString jukyushakubun = div.getRadJukyushaKubun().getSelectedValue();
+        RString jukyushakubun = div.getRadJukyushaKubun().getSelectedKey();
         if (jukyushakubun.equals(被保険者)) {
             bparamt.set受給者区分(JukyushaKubun2.被保険者);
         } else if (jukyushakubun.equals(受給者)) {
