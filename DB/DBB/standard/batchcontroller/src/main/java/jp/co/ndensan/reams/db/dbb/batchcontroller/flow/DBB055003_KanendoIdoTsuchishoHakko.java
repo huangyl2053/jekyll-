@@ -18,9 +18,9 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB055003.PntHenkoTsuchis
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB055003.PntKetteiTsuchishoProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB055003.PntNonyuTsuchishoProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB055003.SystemTimeSakuseiKanendoProcess;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidogennen.ChohyoResult;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB055003.DBB055003_KanendoIdoTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB003001.DBB003001_KeisangoJohoSakuseiParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB051001.ChohyoResult;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB055003.DBB055003_KanendoIdoTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.honsanteiidokanendofuka.IdoFukaJohoFlgTrueProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.honsanteiidokanendofuka.KanendoHonsanteifukaProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
