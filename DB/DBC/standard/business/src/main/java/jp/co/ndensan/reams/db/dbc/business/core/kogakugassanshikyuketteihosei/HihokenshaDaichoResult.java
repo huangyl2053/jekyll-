@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyuketteihosei;
 
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,7 +20,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class HihokenshaDaichoResult {
 
-    private FlexibleDate 資格喪失年月日;
+    private RDate 資格喪失年月日;
     private RString 喪失事由コード;
 
 }
