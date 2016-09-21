@@ -14,7 +14,6 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120120.KogakuGassanRir
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120120.KogakuGassanShikyugakuKeisanKekkaInProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120120.PntKogakuGassanKakuninIchiranProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120120.PntKogakuGassanTorikomiIchiranProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120920.SogojigyohiShinsaKetteiSeikyumeisaiInReadCsvFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDeleteReveicedFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoHihokenshaKanrenProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoInterfaceKanriKousinProcess;
@@ -98,7 +97,7 @@ public class DBC120120_KogakuGassanShikyugakuKeisanKekkaIn extends BatchFlowBase
                 isLast = ((returnEntity.getFileNameList().size() - 1) == i);
                 executeStep(CSVファイル取込);
                 flowEntity = getResult(FlowEntity.class, new RString(CSVファイル取込),
-                        SogojigyohiShinsaKetteiSeikyumeisaiInReadCsvFileProcess.PARAMETER_OUT_FLOWENTITY);
+                        KogakuGassanShikyugakuKeisanKekkaInProcess.PARAMETER_OUT_FLOWENTITY);
                 コントロールレコード件数 = flowEntity.getCodeNum();
                 集計件数 = flowEntity.get集計データ登録件数();
                 明細件数 = flowEntity.get明細データ登録件数();

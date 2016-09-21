@@ -136,7 +136,7 @@ public class KoshinOshiraseTsuchiProcess extends BatchProcessBase<KoshinOshirase
     protected IBatchReader createReader() {
         IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
         if (parameter.get出力順() != null && !parameter.get出力順().isEmpty()) {
-            outputOrder = finder.get出力順(SubGyomuCode.DBB介護賦課, 帳票12.getReportId(), Long.parseLong(parameter.get出力順().toString()));
+            outputOrder = finder.get出力順(SubGyomuCode.DBD介護受給, 帳票12.getReportId(), Long.parseLong(parameter.get出力順().toString()));
         }
         RString 出力順 = RString.EMPTY;
         if (outputOrder != null) {

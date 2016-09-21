@@ -17,7 +17,7 @@
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassankyufujissekiin.KogakuGassanKyufuJissekiInLoginMybatisParameter" >
         DELETE FROM rgdb."DbT3075KogakuGassanKyufuJisseki" AS  DbT3075
         WHERE  DbT3075."uketoriYM" = #{処理年月}
-        <if test ="処理区分 IS NULL or 処理区分.isEmpty()">
+        <if test ="処理区分 == null or 処理区分=''">
             AND  DbT3075."dataKubun" <![CDATA[<>]]> '1'
         </if> 
         <if test ="処理区分 == 1"> 
