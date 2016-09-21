@@ -3,24 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.definition.batchprm.sogojigyohisaishinsaketteihokenshain;
+package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120240;
 
 import jp.co.ndensan.reams.db.dbc.definition.core.saishori.SaiShoriKubun;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import lombok.Getter;
-import lombok.Setter;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 国保連情報受取データ取込_[178]総合事業費過再審査定通知書情報のバッチパラメータです
+ * 介護給付費等請求額通知書情報（公費）取込のバッチパラメータです。
  *
- * @reamsid_L DBC-4680-010 changying
+ * @reamsid_L DBC-2790-010 surun
  */
-@Getter
-@Setter
+@lombok.Getter
+@lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class DBC120850_SogojigyohiSaishinsaKetteiHokenshaInParameter extends BatchParameterBase {
+public class DBC120240_SeikyugakuTsuchishoKohiInParameter extends BatchParameterBase {
 
     private static final String KEY_SHORIYM = "shoriYM";
     private static final String NAME_SHORIYM = "処理年月";
@@ -34,5 +33,5 @@ public class DBC120850_SogojigyohiSaishinsaKetteiHokenshaInParameter extends Bat
     @BatchParameter(key = KEY_SAISHORIKUBUN, name = NAME_SAISHORIKUBUN)
     private SaiShoriKubun saishoriKubun;
     @BatchParameter(key = KEY_SHUTSURYOKUJUNID, name = NAME_SHUTSURYOKUJUNID)
-    private Long shutsuryokujunId;
+    private RString shutsuryokujunId;
 }

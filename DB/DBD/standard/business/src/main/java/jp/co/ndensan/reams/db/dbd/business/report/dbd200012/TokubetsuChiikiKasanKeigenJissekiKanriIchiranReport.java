@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tokubetsuchiikikasankeigenjissekikanri.KyuhuJissekiMeisai;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.tokubetsuchiikikasankeigenjissekikanri.TokubetsuChiikiKasanKeigenJissekiKanri;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200012.TokubetsuChiikiKasanKeigenJissekiKanriIchiranReportSource;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
@@ -26,7 +27,6 @@ public final class TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport extends
     private final TokubetsuChiikiKasanKeigenJissekiKanri 帳票情報;
     private final Association association;
     private final IOutputOrder iOutputOrder;
-    private final IKojin 宛名;
 
     /**
      * インスタンスを生成します。
@@ -34,15 +34,13 @@ public final class TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport extends
      * @param 帳票情報 TokubetsuChiikiKasanKeigenJissekiKanri
      * @param association Association
      * @param iOutputOrder IOutputOrder
-     * @param 宛名 IKojin
      */
     public TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport(
             TokubetsuChiikiKasanKeigenJissekiKanri 帳票情報, Association association,
-            IOutputOrder iOutputOrder, IKojin 宛名) {
+            IOutputOrder iOutputOrder) {
         this.帳票情報 = 帳票情報;
         this.association = association;
         this.iOutputOrder = iOutputOrder;
-        this.宛名 = 宛名;
     }
 
     /**
@@ -69,7 +67,7 @@ public final class TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport extends
             }
         } else {
             ITokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor bodyEditor = new TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor(
-                    帳票情報, association, iOutputOrder, 宛名, -1, -1);
+                    帳票情報, association, iOutputOrder, null, -1, -1);
             ITokubetsuChiikiKasanKeigenJissekiKanriIchiranBuilder builder = new TokubetsuChiikiKasanKeigenJissekiKanriIchiranBuilder(bodyEditor);
             writer.writeLine(builder);
         }
@@ -78,6 +76,7 @@ public final class TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport extends
     private void 非事業所計(int 給付実績明細リストCount, ReportSourceWriter<TokubetsuChiikiKasanKeigenJissekiKanriIchiranReportSource> writer, int i) {
         if (給付実績明細リストCount <= 1) {
             for (int j = 0; j < 3; j++) {
+                IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(帳票情報.get給付実績被保険者リスト().get(i).get宛名());
                 ITokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor bodyEditor
                         = new TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor(
                                 帳票情報, association, iOutputOrder, 宛名, j, i);
@@ -87,6 +86,7 @@ public final class TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport extends
             }
         } else {
             for (int j = 0; j < 給付実績明細リストCount + 1; j++) {
+                IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(帳票情報.get給付実績被保険者リスト().get(i).get宛名());
                 ITokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor bodyEditor
                         = new TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor(
                                 帳票情報, association, iOutputOrder, 宛名, j, i);
@@ -101,6 +101,7 @@ public final class TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport extends
             ReportSourceWriter<TokubetsuChiikiKasanKeigenJissekiKanriIchiranReportSource> writer) {
         if (1 == 給付実績明細リストCount) {
             for (int j = 0; j <= 給付実績明細リストCount + 2; j++) {
+                IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(帳票情報.get給付実績被保険者リスト().get(i).get宛名());
                 ITokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor bodyEditor
                         = new TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor(
                                 帳票情報, association, iOutputOrder, 宛名, j, i);
@@ -110,6 +111,7 @@ public final class TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport extends
             }
         } else {
             for (int j = 0; j <= 給付実績明細リストCount + 1; j++) {
+                IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(帳票情報.get給付実績被保険者リスト().get(i).get宛名());
                 ITokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor bodyEditor
                         = new TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor(
                                 帳票情報, association, iOutputOrder, 宛名, j, i);

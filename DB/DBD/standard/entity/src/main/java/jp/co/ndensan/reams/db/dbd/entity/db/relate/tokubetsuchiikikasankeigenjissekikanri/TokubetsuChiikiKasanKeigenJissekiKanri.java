@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbd.entity.db.relate.tokubetsuchiikikasankeigenji
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
-import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -23,5 +22,5 @@ public class TokubetsuChiikiKasanKeigenJissekiKanri {
     private JigyoshaNo 事業者番号;
     private RString 事業者名称;
     private List<KyuhuJissekiHihokensha> 給付実績被保険者リスト;
-    private UaFt200FindShikibetsuTaishoEntity 宛名;
+
 }
