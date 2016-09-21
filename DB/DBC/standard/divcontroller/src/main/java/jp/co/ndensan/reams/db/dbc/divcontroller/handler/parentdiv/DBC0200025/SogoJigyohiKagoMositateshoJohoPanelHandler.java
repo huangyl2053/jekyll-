@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0200025;
 
-import java.util.ArrayList;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0200025.SogoJigyohiKagoMositateshoJohoPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.viewbox.dbc0200011.KokuhorenDataSofuViewState;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
@@ -40,9 +38,8 @@ public class SogoJigyohiKagoMositateshoJohoPanelHandler {
     /**
      * 画面初期化のメソッドます。
      *
-     * @return list
      */
-    public List initialize() {
+    public void initialize() {
         RString 状態パターン2 = new RString("2");
         ReportId 帳票ID = new ReportId("DBC200079_SogojigyohiKagoMoshitateshojohoSofuIchiran");
         RString 再処理区分 = ViewStateHolder.get(ViewStateHolderName.国保連送付情報, KokuhorenDataSofuViewState.class).
@@ -53,9 +50,5 @@ public class SogoJigyohiKagoMositateshoJohoPanelHandler {
                 RDate.getNowDate(), SubGyomuCode.DBC介護給付);
         div.getCcdKokuhorenJohoSofu().initialize(処理年月, 再処理区分, 外部ＣＳＶファイル名, 状態パターン2);
         div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, 帳票ID);
-        List list = new ArrayList();
-        list.add(再処理区分);
-        list.add(処理年月);
-        return list;
     }
 }

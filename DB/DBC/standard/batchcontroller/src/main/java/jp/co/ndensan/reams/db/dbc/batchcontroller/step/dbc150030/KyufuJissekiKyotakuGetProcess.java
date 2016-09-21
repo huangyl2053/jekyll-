@@ -67,11 +67,6 @@ public class KyufuJissekiKyotakuGetProcess
     }
 
     @Override
-    protected void beforeExecute() {
-
-    }
-
-    @Override
     protected void process(KyufuJissekiMeisaiEntity entity) {
         連番 = 連番 + INT_1;
         DbWT3470ToukeihyoMeisaiTempEntity toukeihyoMeisaiTempEntity = new DbWT3470ToukeihyoMeisaiTempEntity();

@@ -8,6 +8,26 @@ module DBX {
 
         export class Events {
 
+            public static onChange_ddlChoteiNendo(): string {
+                return "onChange_ddlChoteiNendo";
+            }
+
+            public static onChange_ddlFukaNendo(): string {
+                return "onChange_ddlFukaNendo";
+            }
+
+            public static onClick_btnSearch(): string {
+                return "onClick_btnSearch";
+            }
+
+            public static onClick_btnBefore(): string {
+                return "onClick_btnBefore";
+            }
+
+            public static onClick_btnClose(): string {
+                return "onClick_btnClose";
+            }
+
         }
 
         export class Controls {

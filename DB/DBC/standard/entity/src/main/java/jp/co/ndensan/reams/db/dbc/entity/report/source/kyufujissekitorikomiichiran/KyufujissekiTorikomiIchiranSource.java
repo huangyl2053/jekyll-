@@ -7,7 +7,9 @@ package jp.co.ndensan.reams.db.dbc.entity.report.source.kyufujissekitorikomiichi
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 帳票設計_DBC200007_給付実績情報取込結果一覧表 のソースクラスです。
@@ -53,6 +55,7 @@ public class KyufujissekiTorikomiIchiranSource implements IReportSource {
     public RString listUpper_3;
     @ReportItem(name = "listUpper_4", length = 2, order = 18)
     public RString listUpper_4;
+    @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listUpper_5", length = 10, order = 19)
     public RString listUpper_5;
     @ReportItem(name = "listUpper_6", length = 30, order = 20)
@@ -105,6 +108,9 @@ public class KyufujissekiTorikomiIchiranSource implements IReportSource {
     public RString gokeiKensuTitle;
     @ReportItem(name = "gokeiKensu", length = 8, order = 44)
     public RString gokeiKensu;
+    @ReportPerson(id = "A")
+    @ReportItem(name = "shikibetsuCode", length = 15)
+    public RString shikibetsuCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

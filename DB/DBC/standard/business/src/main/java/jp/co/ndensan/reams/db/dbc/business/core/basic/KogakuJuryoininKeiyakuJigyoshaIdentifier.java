@@ -12,7 +12,7 @@ import lombok.Value;
 /**
  * 高額受領委任契約事業者の識別子です。
  *
- * @reamsid_L DBC-1980-010 yuqingzhang
+ * @reamsid_L DBC-9999-012 yuqingzhang
  */
 @Value
 @SuppressWarnings("PMD.UnusedPrivateField")

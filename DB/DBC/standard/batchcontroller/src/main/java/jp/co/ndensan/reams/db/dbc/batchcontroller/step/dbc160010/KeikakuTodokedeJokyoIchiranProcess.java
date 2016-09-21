@@ -142,7 +142,7 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
                 ReportIdDBC.DBC200060.getReportId(), processParameter.getShutsuryokujunId());
         if (並び順 != null) {
             出力順 = MyBatisOrderByClauseCreator.create(
-                    KeikakuTodokedeJokyoIchiranOrder.class, 並び順).replace(ORDER_BY, RString.EMPTY);
+                    KeikakuTodokedeJokyoIchiranOrder.class, 並び順).replace(ORDER_BY, EUC_WRITER_DELIMITER);
             for (ISetSortItem item : 並び順.get設定項目リスト()) {
                 if (item.is改頁項目()) {
                     breakItemIds.add(item.get項目ID());
@@ -189,7 +189,7 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
                 RString sec = new RString(time.toString()).substringReturnAsPossible(INDEX_6, INDEX_8);
                 RString timeFormat = hour.concat(定値_時).concat(min).concat(定値_分).concat(sec).concat(定値_秒);
                 作成日時 = システム日付.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                        .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(RString.FULL_SPACE).concat(timeFormat);
+                        .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(timeFormat);
                 flag = false;
             } else {
                 作成日時 = RString.EMPTY;
@@ -209,7 +209,7 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
                 RString sec = new RString(time.toString()).substringReturnAsPossible(INDEX_6, INDEX_8);
                 RString timeFormat = hour.concat(定値_時).concat(min).concat(定値_分).concat(sec).concat(定値_秒);
                 作成日時 = システム日付.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                        .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(RString.FULL_SPACE).concat(timeFormat);
+                        .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(timeFormat);
                 flag = false;
             } else {
                 作成日時 = RString.EMPTY;

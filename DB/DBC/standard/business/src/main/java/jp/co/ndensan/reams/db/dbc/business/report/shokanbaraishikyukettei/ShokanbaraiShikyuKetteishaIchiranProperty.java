@@ -144,7 +144,7 @@ public class ShokanbaraiShikyuKetteishaIchiranProperty
         /**
          * 証記載保険者番号
          */
-        証記載保険者番号(new RString("0103"), new RString("shoKisaiHokenshaNo"), new RString("DbWT3036.\"shokisaiHokenshaNo\"")),
+        証記載保険者番号(new RString("0103"), new RString("shoKisaiHokenshaNo"), new RString("DbWT3036.\"shoKisaiHokenshaNo\"")),
         /**
          * 町域コード
          */

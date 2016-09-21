@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
 
 /**
  * DB出力(特徴仮算定抽出Temp)
@@ -25,8 +26,11 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class TokutyoukariSannteiTyuushutuEntity implements IDbAccessable, Serializable {
 
+    @PrimaryKey
     private FlexibleYear fukaNendo;
+    @PrimaryKey
     private HihokenshaNo hihokenshaNo;
+    @PrimaryKey
     private int rirekiNo;
     private RString choshuHoho4gatsu;
     private RString choshuHoho5gatsu;

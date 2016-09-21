@@ -70,9 +70,9 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
     /**
      * 前排他キーの解除のンメソッドです。
      *
-     * @param 被保険者番号 RString
+     * @param 被保険者番号 HihokenshaNo
      */
-    public void 前排他キーの解除(RString 被保険者番号) {
+    public void 前排他キーの解除(HihokenshaNo 被保険者番号) {
         LockingKey 排他キー = new LockingKey(被保険者番号);
         RealInitialLocker.release(排他キー);
     }
@@ -103,6 +103,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
             JukyushaIdoRenrakuhyo 訂正対象データ,
             JukyushaIdoRenrakuhyo 初期化データ,
             RString 処理モード) {
+        RDate システムタイム = RDate.getNowDate();
         if (受給者訂正連絡票登録画面Div != null) {
             if (div.getOutputJukyushaIdoRenrakuhyo().getChkJukyushaTeiseiRearakuhyoHakkou().isAllSelected()) {
                 受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.
@@ -114,7 +115,9 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
             if (処理モード.equals(修正モード_TWO)) {
                 RString 訂正区分コード = JukyushaIF_TeiseiKubunCode.修正.getコード();
                 受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.createBuilderForEdit().
-                        set訂正年月日(FlexibleDate.getNowDate()).build();
+                        set送付年月(new FlexibleYearMonth(システムタイム.getYearMonth().toDateString())).build();
+                受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.createBuilderForEdit().
+                        set訂正年月日(new FlexibleDate(システムタイム.toDateString())).build();
                 受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.createBuilderForEdit().
                         set訂正区分コード(訂正区分コード).build();
                 受給者訂正連絡票登録画面Div = 受給者訂正連絡票登録画面Div.added();
@@ -125,7 +128,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
                 RString 訂正区分コード = 受給者訂正連絡票登録画面Div.get訂正区分コード();
                 FlexibleDate 訂正年月日 = 受給者訂正連絡票登録画面Div.get訂正年月日();
                 初期化データ = 初期化データ.createBuilderForEdit().
-                        set送付年月(new FlexibleYearMonth(RDate.getNowDate().toDateString()))
+                        set送付年月(new FlexibleYearMonth(システムタイム.getYearMonth().toDateString()))
                         .set訂正区分コード(訂正区分コード)
                         .set訂正年月日(訂正年月日).build();
                 初期化データ = 初期化データ.modified();
@@ -264,10 +267,10 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
     }
 
     private int get履歴番号(RString 処理モード, int 履歴番号) {
-        if (処理モード.equals(修正モード_TWO) || 処理モード.equals(修正モード_THREE)) {
-            履歴番号 = 履歴番号 + 1;
+        if (照会モード.equals(処理モード)) {
+            return 履歴番号;
         }
-        return 履歴番号;
+        return 履歴番号 + 1;
     }
 
     private JukyushaIdoRenrakuhyo get登録用Entity(

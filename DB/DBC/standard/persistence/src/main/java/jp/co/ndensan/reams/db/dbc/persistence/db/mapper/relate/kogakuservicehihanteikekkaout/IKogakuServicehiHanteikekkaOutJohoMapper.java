@@ -53,9 +53,9 @@ public interface IKogakuServicehiHanteikekkaOutJohoMapper {
      * 高額介護サービス費支給一時TBLからデータを取ります。
      *
      * @param parameter KogakuServicehiHanteiMybatisParameter
-     * @return List<KogakuServicehiHanteiGetSoufuDataEntity>
+     * @return List<KogakuServicehiHanteiKanrenDataKoushinEntity>
      */
-    List<KogakuServicehiHanteiGetSoufuDataEntity> select送付対象データ関連リスト(KogakuServicehiHanteiMybatisParameter parameter);
+    List<KogakuServicehiHanteiKanrenDataKoushinEntity> select送付対象データ関連リスト(KogakuServicehiHanteiMybatisParameter parameter);
 
     /**
      * 帳票出力対象データを取得する。

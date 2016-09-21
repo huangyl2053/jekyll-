@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import java.io.File;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120100.ShokanFushikyuKetteiDoDBTorokuProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120100.ShokanFushikyuKetteiInProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120100.ShokanFushikyuKetteiInReadCsvFileProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120100.ShokanFushikyuKetteiInProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120100.ShokanFushikyuKetteiInReadCsvFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDeleteReveicedFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoHihokenshaKanrenProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoInterfaceKanriKousinProcess;

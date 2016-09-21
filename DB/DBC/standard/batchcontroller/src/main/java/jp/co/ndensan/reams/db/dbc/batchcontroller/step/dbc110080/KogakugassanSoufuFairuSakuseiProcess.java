@@ -8,10 +8,12 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110080;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_JikofutangakuMeisaiTaishoTsuki;
+import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_SakuseiErrorKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenSofuKokanJohoShikibetsuBango;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.RecordShubetsu;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhoreninterface.ConfigKeysKokuhorenSofu;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakugassan.KogakugassanProcessParameter;
+import jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.DbWT1002KokuhorenSakuseiErrorTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kogakugassan.KogakugassanSoufuFairuSakuseiControlEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kogakugassan.KogakugassanSoufuFairuSakuseiEndEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kogakugassan.KogakugassanSoufuFairuSakuseiMeisaiEntity;
@@ -23,7 +25,9 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
@@ -61,6 +65,7 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassan."
             + "IKogakugassanHoseisumiJikofutangakuOutMapper.get出力対象データ");
+    private static final RString 処理結果リスト一時NAME = new RString("DbWT1002KokuhorenSakuseiError");
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
     private static final RString ファイル名_前 = new RString("10_37K");
@@ -97,6 +102,8 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
     private KogakugassanSoufuFairuSakuseiMeisaiEntity meisEntity;
     @BatchWriter
     private CsvWriter eucCsvWriter;
+    @BatchWriter
+    BatchEntityCreatedTempTableWriter 処理結果リスト一時tableWriter;
 
     @Override
     protected void initialize() {
@@ -127,18 +134,20 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
         出力ファイル名 = ファイル名_前.concat(processParameter.getShoriKunbun())
                 .concat(processParameter.get保険者情報_保険者番号()).concat(processParameter.getShoriYM().toDateString()).concat(ファイル名_後);
         eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
-        eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
-                .setDelimiter(コンマ)
-                .setEnclosure(ダブル引用符)
-                .setEncode(文字コード)
-                .setNewLine(NewLine.CRLF)
-                .hasHeader(false)
-                .build();
+        処理結果リスト一時tableWriter
+                = new BatchEntityCreatedTempTableWriter(処理結果リスト一時NAME, DbWT1002KokuhorenSakuseiErrorTempEntity.class);
     }
 
     @Override
     protected void process(SyuturyokuEntity entity) {
         if (レコード番号 == INT_0) {
+            eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
+                    .setDelimiter(コンマ)
+                    .setEnclosure(ダブル引用符)
+                    .setEncode(文字コード)
+                    .setNewLine(NewLine.CRLF)
+                    .hasHeader(false)
+                    .build();
             renben = entity.get高額合算自己負担額一時Entity().getRenban();
             レコード番号 = レコード番号 + 1;
             KogakugassanSoufuFairuSakuseiControlEntity controlEntity = getControlEntity();
@@ -168,10 +177,29 @@ public class KogakugassanSoufuFairuSakuseiProcess extends BatchProcessBase<Syutu
             CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
             SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(eucFilePath), opts);
             entryList.add(sfd);
+            eucCsvWriter.close();
+        } else {
+            DbWT1002KokuhorenSakuseiErrorTempEntity dbWT1002Entity = get処理結果リスト一時Entity();
+            処理結果リスト一時tableWriter.insert(dbWT1002Entity);
         }
         outputCount.setValue(総出力件数);
         outputEntry.setValue(entryList);
-        eucCsvWriter.close();
+    }
+
+    private DbWT1002KokuhorenSakuseiErrorTempEntity get処理結果リスト一時Entity() {
+        DbWT1002KokuhorenSakuseiErrorTempEntity 一時Enttiy = new DbWT1002KokuhorenSakuseiErrorTempEntity();
+        一時Enttiy.setErrorKubun(KokuhorenJoho_SakuseiErrorKubun.送付対象データなし.getコード());
+        一時Enttiy.setShoHokanehshaNo(ShoKisaiHokenshaNo.EMPTY);
+        一時Enttiy.setHihokenshaNo(HihokenshaNo.EMPTY);
+        一時Enttiy.setKey1(RString.EMPTY);
+        一時Enttiy.setKey2(RString.EMPTY);
+        一時Enttiy.setKey3(RString.EMPTY);
+        一時Enttiy.setKey4(RString.EMPTY);
+        一時Enttiy.setKey5(RString.EMPTY);
+        一時Enttiy.setHihokenshaKanaShimei(RString.EMPTY);
+        一時Enttiy.setHihokenshaShimei(RString.EMPTY);
+        一時Enttiy.setBiko(RString.EMPTY);
+        return 一時Enttiy;
     }
 
     private KogakugassanSoufuFairuSakuseiEndEntity getEndEntity() {

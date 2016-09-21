@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt36001.TsuchishoBango
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB004001.DBB004001_FukaJohoTorokuParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB015003.DBB015003_KarisanteiIdoTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB015003.TyouhyouEntity;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB003001.DBB003001_KeisangoJohoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.karisanteiidokekka.KarisanteiIdoKekkaProcessParameter;
 import jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.karisanteiidofuka.IKariSanteiIdoFukaBatchMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
@@ -356,8 +356,8 @@ public class KarisanteiIdoKekkaFlow extends BatchFlowBase<DBB015003_KarisanteiId
         return new SetaiShotokuKazeiHanteiBatchParameter(SetaiinHaakuKanriShikibetsuKubun.賦課.getコード());
     }
 
-    private KeisangoJohoSakuseiBatchParamter getKeisangoJohoSakuseiBatchParamter() {
-        return new KeisangoJohoSakuseiBatchParamter(getParameter().get調定年度(),
+    private DBB003001_KeisangoJohoSakuseiParameter getKeisangoJohoSakuseiBatchParamter() {
+        return new DBB003001_KeisangoJohoSakuseiParameter(getParameter().get調定年度(),
                 getParameter().get賦課年度(),
                 new RString(getResult(YMDHMS.class, new RString(システム日時の取得),
                                 SystemTimeShutokuProcess.SYSTEM_TIME).toString()),
