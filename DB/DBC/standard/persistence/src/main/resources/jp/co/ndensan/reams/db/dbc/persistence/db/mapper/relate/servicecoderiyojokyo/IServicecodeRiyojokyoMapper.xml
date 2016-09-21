@@ -40,10 +40,10 @@
             "DbT3017KyufujissekiKihon"."toshiNo") AS T0
             ON T9."shinsaYM" = 最新審査年月
             AND T9."inputShikibetsuNo" = T0."DbT3017_inputShikibetsuNo"
-            AND T9."hiHokenshaNo" = T0."DbT3017_inputShikibetsuNo"
-            AND T9."serviceTeikyoYM" = T0."DbT3017_inputShikibetsuNo"
-            AND T9."jigyoshoNo" = T0."DbT3017_inputShikibetsuNo"
-            AND T9."toshiNo" = T0."DbT3017_inputShikibetsuNo"
+            AND T9."hiHokenshaNo" = T0."DbT3017_hiHokenshaNo"
+            AND T9."serviceTeikyoYM" = T0."DbT3017_serviceTeikyoYM"
+            AND T9."jigyoshoNo" = T0."DbT3017_jigyoshoNo"
+            AND T9."toshiNo" = T0."DbT3017_toshiNo"
             ) AS T1
             LEFT OUTER JOIN
             rgdb."DbT3018KyufujissekiMeisai" AS T2
@@ -113,10 +113,10 @@
             "DbT3017KyufujissekiKihon"."toshiNo") AS T0
             ON T9."shinsaYM" = 最新審査年月
             AND T9."inputShikibetsuNo" = T0."DbT3017_inputShikibetsuNo"
-            AND T9."hiHokenshaNo" = T0."DbT3017_inputShikibetsuNo"
-            AND T9."serviceTeikyoYM" = T0."DbT3017_inputShikibetsuNo"
-            AND T9."jigyoshoNo" = T0."DbT3017_inputShikibetsuNo"
-            AND T9."toshiNo" = T0."DbT3017_inputShikibetsuNo"
+            AND T9."hiHokenshaNo" = T0."DbT3017_hiHokenshaNo"
+            AND T9."serviceTeikyoYM" = T0."DbT3017_serviceTeikyoYM"
+            AND T9."jigyoshoNo" = T0."DbT3017_jigyoshoNo"
+            AND T9."toshiNo" = T0."DbT3017_toshiNo"
             ) AS T1
             LEFT OUTER JOIN
             rgdb."DbT3025KyufujissekiKyotakuService" AS T2
@@ -186,10 +186,10 @@
             "DbT3017KyufujissekiKihon"."toshiNo") AS T0
             ON T9."shinsaYM" = 最新審査年月
             AND T9."inputShikibetsuNo" = T0."DbT3017_inputShikibetsuNo"
-            AND T9."hiHokenshaNo" = T0."DbT3017_inputShikibetsuNo"
-            AND T9."serviceTeikyoYM" = T0."DbT3017_inputShikibetsuNo"
-            AND T9."jigyoshoNo" = T0."DbT3017_inputShikibetsuNo"
-            AND T9."toshiNo" = T0."DbT3017_inputShikibetsuNo"
+            AND T9."hiHokenshaNo" = T0."DbT3017_hiHokenshaNo"
+            AND T9."serviceTeikyoYM" = T0."DbT3017_serviceTeikyoYM"
+            AND T9."jigyoshoNo" = T0."DbT3017_jigyoshoNo"
+            AND T9."toshiNo" = T0."DbT3017_toshiNo"
             ) AS T1
             LEFT OUTER JOIN
             rgdb."DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo" AS T2
