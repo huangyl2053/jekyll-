@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120920;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120920;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,7 +12,7 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.report.dbc120920.SogojigyohiShinsaKetteiSeikyumeisaiInOutPutOrder;
 import jp.co.ndensan.reams.db.dbc.business.report.dbc120920.SogojigyohiShinsaKetteiSeikyumeisaiInPageBreak;
 import jp.co.ndensan.reams.db.dbc.business.report.dbc120920.SogojigyohiShinsaKetteiSeikyumeisaiInReport;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120920.SogojigyohiShinsaKetteiSeikyumeisaiInDoIchiranhyoSakuseiProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc120920.SogojigyohiShinsaKetteiSeikyumeisaiInDoIchiranhyoSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kokuhorenkyoutsuu.KokuhorenIchiranhyoMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc120920.DbWT1611SinsaKetteiSeikyuMeisaiEntity;
