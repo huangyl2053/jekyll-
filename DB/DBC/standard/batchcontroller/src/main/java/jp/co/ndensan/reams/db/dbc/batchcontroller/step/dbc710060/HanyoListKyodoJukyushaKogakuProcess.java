@@ -83,22 +83,22 @@ public class HanyoListKyodoJukyushaKogakuProcess extends BatchProcessBase<HanyoL
     private static final RString TWO = new RString("2");
     private static final RString THREE = new RString("3");
     private static final RString FOUR = new RString("4");
-    private static final RString 新規_false = new RString("□新規　　");
-    private static final RString 新規_true = new RString("■新規　　");
-    private static final RString 変更_false = new RString("□変更　　");
-    private static final RString 変更_true = new RString("■変更　　");
-    private static final RString 終了_false = new RString("□終了");
-    private static final RString 終了_true = new RString("■終了");
-    private static final RString 一般_false = new RString("□一般（低所得者等以外）　");
-    private static final RString 一般_true = new RString("■一般（低所得者等以外）　");
-    private static final RString 世帯非課税等_false = new RString("□世帯非課税等　　");
-    private static final RString 世帯非課税等_true = new RString("■世帯非課税等　　");
-    private static final RString 生活保護_false = new RString("□生活保護　　");
-    private static final RString 生活保護_true = new RString("■生活保護　　");
-    private static final RString 現役並み所得相当_false = new RString("□現役並み所得相当");
-    private static final RString 現役並み所得相当_true = new RString("■現役並み所得相当");
-    private static final RString 非課税等_false = new RString("□非課税等　　　　");
-    private static final RString 非課税等_true = new RString("■非課税等　　　　");
+    private static final RString 新規_FALSE = new RString("□新規　　");
+    private static final RString 新規_TRUE = new RString("■新規　　");
+    private static final RString 変更_FALSE = new RString("□変更　　");
+    private static final RString 変更_TRUE = new RString("■変更　　");
+    private static final RString 終了_FALSE = new RString("□終了");
+    private static final RString 終了_TRUE = new RString("■終了");
+    private static final RString 一般_FALSE = new RString("□一般（低所得者等以外）　");
+    private static final RString 一般_TRUE = new RString("■一般（低所得者等以外）　");
+    private static final RString 世帯非課税等_FALSE = new RString("□世帯非課税等　　");
+    private static final RString 世帯非課税等_TRUE = new RString("■世帯非課税等　　");
+    private static final RString 生活保護_FALSE = new RString("□生活保護　　");
+    private static final RString 生活保護_TRUE = new RString("■生活保護　　");
+    private static final RString 現役並み所得相当_FALSE = new RString("□現役並み所得相当");
+    private static final RString 現役並み所得相当_TRUE = new RString("■現役並み所得相当");
+    private static final RString 非課税等_FALSE = new RString("□非課税等　　　　");
+    private static final RString 非課税等_TRUE = new RString("■非課税等　　　　");
     private HanyoListKyodoJukyushaKogakuProcessParameter parameter;
     private HanyoListKyodoJukyushaKogakuCsvEditor edit;
     private Association 地方公共団体情報;
@@ -249,19 +249,19 @@ public class HanyoListKyodoJukyushaKogakuProcess extends BatchProcessBase<HanyoL
         if (parameter.get異動区分s() != null && !parameter.get異動区分s().isEmpty()) {
             temp = TITLE_異動区分;
             if (parameter.get異動区分s().contains(ONE)) {
-                temp = temp.concat(新規_true);
+                temp = temp.concat(新規_TRUE);
             } else {
-                temp = temp.concat(新規_false);
+                temp = temp.concat(新規_FALSE);
             }
             if (parameter.get異動区分s().contains(TWO)) {
-                temp = temp.concat(変更_true);
+                temp = temp.concat(変更_TRUE);
             } else {
-                temp = temp.concat(変更_false);
+                temp = temp.concat(変更_FALSE);
             }
             if (parameter.get異動区分s().contains(THREE)) {
-                temp = temp.concat(終了_true);
+                temp = temp.concat(終了_TRUE);
             } else {
-                temp = temp.concat(終了_false);
+                temp = temp.concat(終了_FALSE);
             }
             抽出条件.add(temp);
         }
@@ -269,24 +269,24 @@ public class HanyoListKyodoJukyushaKogakuProcess extends BatchProcessBase<HanyoL
         if (parameter.get世帯所得区分s() != null && !parameter.get世帯所得区分s().isEmpty()) {
             temp = TITLE_世帯所得区分;
             if (parameter.get世帯所得区分s().contains(ONE)) {
-                temp = temp.concat(一般_true);
+                temp = temp.concat(一般_TRUE);
             } else {
-                temp = temp.concat(一般_false);
+                temp = temp.concat(一般_FALSE);
             }
             if (parameter.get世帯所得区分s().contains(TWO)) {
-                temp = temp.concat(世帯非課税等_true);
+                temp = temp.concat(世帯非課税等_TRUE);
             } else {
-                temp = temp.concat(世帯非課税等_false);
+                temp = temp.concat(世帯非課税等_FALSE);
             }
             if (parameter.get世帯所得区分s().contains(THREE)) {
-                temp = temp.concat(生活保護_true);
+                temp = temp.concat(生活保護_TRUE);
             } else {
-                temp = temp.concat(生活保護_false);
+                temp = temp.concat(生活保護_FALSE);
             }
             if (parameter.get世帯所得区分s().contains(FOUR)) {
-                temp = temp.concat(現役並み所得相当_true);
+                temp = temp.concat(現役並み所得相当_TRUE);
             } else {
-                temp = temp.concat(現役並み所得相当_false);
+                temp = temp.concat(現役並み所得相当_FALSE);
             }
             抽出条件.add(temp);
         }
@@ -294,24 +294,24 @@ public class HanyoListKyodoJukyushaKogakuProcess extends BatchProcessBase<HanyoL
         if (parameter.get所得区分s() != null && !parameter.get所得区分s().isEmpty()) {
             temp = TITLE_所得区分;
             if (parameter.get所得区分s().contains(ONE)) {
-                temp = temp.concat(一般_true);
+                temp = temp.concat(一般_TRUE);
             } else {
-                temp = temp.concat(一般_false);
+                temp = temp.concat(一般_FALSE);
             }
             if (parameter.get所得区分s().contains(TWO)) {
-                temp = temp.concat(非課税等_true);
+                temp = temp.concat(非課税等_TRUE);
             } else {
-                temp = temp.concat(非課税等_false);
+                temp = temp.concat(非課税等_FALSE);
             }
             if (parameter.get所得区分s().contains(THREE)) {
-                temp = temp.concat(生活保護_true);
+                temp = temp.concat(生活保護_TRUE);
             } else {
-                temp = temp.concat(生活保護_false);
+                temp = temp.concat(生活保護_FALSE);
             }
             if (parameter.get所得区分s().contains(FOUR)) {
-                temp = temp.concat(現役並み所得相当_true);
+                temp = temp.concat(現役並み所得相当_TRUE);
             } else {
-                temp = temp.concat(現役並み所得相当_false);
+                temp = temp.concat(現役並み所得相当_FALSE);
             }
             抽出条件.add(temp);
         }
