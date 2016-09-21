@@ -82,6 +82,14 @@ public class HanyoListKyodoJukyushaShokanProcess extends BatchProcessBase<KyodoJ
     private static final RString 各異動月の最新のみ = new RString("■各異動月の最新情報のみ抽出する");
     private static final LasdecCode 全市町村_CODE = new LasdecCode("000000");
     private static final RString 全市町村 = new RString("00000 全市町村");
+    private static final RString 新規_黒 = new RString("■新規");
+    private static final RString 新規_白 = new RString("□新規");
+    private static final RString 変更_黒 = new RString("■変更");
+    private static final RString 変更_白 = new RString("□変更");
+    private static final RString 終了_黒 = new RString("■終了");
+    private static final RString 終了_白 = new RString("□終了");
+    private static final RString スペース = new RString("   ");
+    private static final RString 削除された情報を含める_黒 = new RString("■削除された情報を含める");
     private Association 地方公共団体情報;
     private HanyoListKyodoJukyushaShokanCsvEditor editor;
     private CsvListWriter csvListWriter;
@@ -158,13 +166,13 @@ public class HanyoListKyodoJukyushaShokanProcess extends BatchProcessBase<KyodoJ
 
     @Override
     protected void afterExecute() {
+        csvListWriter.close();
         if (!personalDataList.isEmpty()) {
             AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
             spoolManager.spool(eucFilePath, accessLogUUID);
         } else {
             spoolManager.spool(eucFilePath);
         }
-        csvListWriter.close();
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
                 EUC_ENTITY_ID.toRString(),
                 地方公共団体情報.getLasdecCode_().value(),
@@ -234,27 +242,27 @@ public class HanyoListKyodoJukyushaShokanProcess extends BatchProcessBase<KyodoJ
         RString 新規;
         if (processParameter.get異動区分S() != null && !processParameter.get異動区分S().isEmpty()) {
             if (processParameter.get異動区分S().contains(INDEX_1)) {
-                新規 = new RString("■新規").concat("   ");
+                新規 = 新規_黒.concat(スペース);
             } else {
-                新規 = new RString("□新規").concat("   ");
+                新規 = 新規_白.concat(スペース);
             }
             RString 変更;
             if (processParameter.get異動区分S().contains(INDEX_2)) {
-                変更 = new RString("■変更").concat("   ");
+                変更 = 変更_黒.concat(スペース);
             } else {
-                変更 = new RString("□変更").concat("   ");
+                変更 = 変更_白.concat(スペース);
             }
             RString 終了;
             if (processParameter.get異動区分S().contains(INDEX_3)) {
-                終了 = new RString("■終了");
+                終了 = 終了_黒;
             } else {
-                終了 = new RString("□終了");
+                終了 = 終了_白;
             }
             抽出条件.add(TITLE_異動区分.concat(新規).concat(変更).concat(終了));
         }
         RString 削除された情報を含める;
         if (processParameter.is削除含める()) {
-            削除された情報を含める = new RString("■削除された情報を含める");
+            削除された情報を含める = 削除された情報を含める_黒;
         } else {
             削除された情報を含める = RString.EMPTY;
         }
