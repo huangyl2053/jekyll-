@@ -70,6 +70,7 @@ public class GassanKyufujissekiTorikomiIchiranBodyEditor implements IGassanKyufu
         }
         source.shimei50onKana = target.get被保険者一時().get氏名50音カナ();
         source.shikyuShinseishoSeiriNo = target.get高額合算給付実績一時().getShikyuShinseiSeiriNo();
+        source.shikibetsuCode = target.get被保険者一時().get識別コード();
         return source;
     }
 

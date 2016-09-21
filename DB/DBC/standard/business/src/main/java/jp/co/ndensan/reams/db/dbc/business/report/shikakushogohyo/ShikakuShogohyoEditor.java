@@ -128,6 +128,7 @@ public class ShikakuShogohyoEditor implements IShikakuShogohyoEditor {
         editor集計(source);
         if (target.get被保険者一時() != null) {
             source.listLower_1 = target.get被保険者一時().get宛名名称();
+            source.shikibetsuCode = target.get被保険者一時().get識別コード();
             source.listUpper_2 = target.get被保険者一時().get登録被保険者番号().getColumnValue();
             if (導入形態コード.is広域()) {
                 source.listUpper_3 = target.get被保険者一時().get証記載保険者番号().getColumnValue();

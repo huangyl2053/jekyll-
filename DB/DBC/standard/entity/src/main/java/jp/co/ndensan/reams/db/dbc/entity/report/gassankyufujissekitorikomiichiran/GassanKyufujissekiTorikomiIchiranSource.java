@@ -3,7 +3,9 @@ package jp.co.ndensan.reams.db.dbc.entity.report.gassankyufujissekitorikomiichir
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 高額合算給付実績情報取込一覧表Sourceクラスです。
@@ -43,6 +45,7 @@ public class GassanKyufujissekiTorikomiIchiranSource implements IReportSource {
     public RString kaipage5;
     @ReportItem(name = "list_1", length = 4, order = 15)
     public RString list_1;
+    @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
     @ReportItem(name = "list_2", length = 10, order = 16)
     public RString list_2;
     @ReportItem(name = "list_3", length = 25, order = 17)
@@ -75,6 +78,9 @@ public class GassanKyufujissekiTorikomiIchiranSource implements IReportSource {
     public RString shimei50onKana;
     @ReportItem(name = "shikyuShinseishoSeiriNo", length = 30, order = 31)
     public RString shikyuShinseishoSeiriNo;
+    @ReportPerson(id = "A")
+    @ReportItem(name = "shikibetsuCode", length = 15)
+    public RString shikibetsuCode;
 
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
