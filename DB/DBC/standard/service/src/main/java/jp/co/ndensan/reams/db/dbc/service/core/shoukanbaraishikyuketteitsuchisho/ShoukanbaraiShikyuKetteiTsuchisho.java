@@ -112,6 +112,7 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
     private static final int NUM_8 = 8;
     private static final int NUM_9 = 9;
     private static final int NUM_10 = 10;
+    private static final int NUM_12 = 12;
     private static final RString 間 = new RString("、");
     private static final RString その他 = new RString(" その他");
     private static final RString ワークの文言 = new RString(" 滞納保険料への控除が行われました");
@@ -423,11 +424,11 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
         entity.set増減の理由1(zougenFushikyuRiyu.get増減_不支給の理由1());
         entity.set増減の理由2(zougenFushikyuRiyu.get増減_不支給の理由2());
         entity.set増減の理由3(zougenFushikyuRiyu.get増減_不支給の理由3());
-        if (不支給.equals(shikyuHushikyuKetteiKubun) || 支給.equals(shikyuHushikyuKetteiKubun)
-                && 口座払.equals(shoukanbaraiShikyuEntity.get償還払支給申請().getShiharaiHohoKubunCode())) {
+        if ((不支給.equals(shikyuHushikyuKetteiKubun) || 支給.equals(shikyuHushikyuKetteiKubun))
+                && (口座払.equals(shoukanbaraiShikyuEntity.get償還払支給申請().getShiharaiHohoKubunCode()))) {
             entity.setTorikeshi1(HOSHI_14);
-        } else if (不支給.equals(shikyuHushikyuKetteiKubun) || 支給.equals(shikyuHushikyuKetteiKubun)
-                && 窓口払.equals(shoukanbaraiShikyuEntity.get償還払支給申請().getShiharaiHohoKubunCode())) {
+        } else if ((不支給.equals(shikyuHushikyuKetteiKubun) || 支給.equals(shikyuHushikyuKetteiKubun))
+                && (窓口払.equals(shoukanbaraiShikyuEntity.get償還払支給申請().getShiharaiHohoKubunCode()))) {
             entity.setTorikeshi2(HOSHI_14);
         }
         setKoza(entity, 口座ID, 識別コード);
@@ -667,7 +668,10 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
         RString mm = time.substring(NUM_2, NUM_4);
         if (hh.compareTo(RSTRING_12) < 0) {
             時間 = 午前.concat(hh).concat(時);
+        } else if (hh.equals(RSTRING_12)) {
+            時間 = 午後.concat(new RString("零")).concat(時);
         } else {
+            hh = new RString(Integer.parseInt(hh.toString()) - NUM_12);
             時間 = 午後.concat(hh).concat(時);
         }
         if (!RSTRING_00.equals(mm)) {
@@ -744,22 +748,24 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
                     eraType(EraType.KANJI).
                     firstYear(FirstYear.GAN_NEN).
                     separator(Separator.JAPANESE).
-                    fillType(FillType.BLANK).toDateString().concat(shiharaiKaishiYMD.getDayOfWeek().getShortTerm()).concat(KARA));
-        } else if (shiharaiKaishiYMD == null || shiharaiKaishiYMD.isEmpty() && shiharaiShuryoYMD != null && !shiharaiShuryoYMD.isEmpty()) {
+                    fillType(FillType.BLANK).toDateString().
+                    concat("（").
+                    concat(shiharaiKaishiYMD.getDayOfWeek().getShortTerm()).concat("）").concat(KARA));
+        } else if ((shiharaiKaishiYMD == null || shiharaiKaishiYMD.isEmpty()) && (shiharaiShuryoYMD != null && !shiharaiShuryoYMD.isEmpty())) {
             entity.setShiharaiStartYMD(KARA);
         }
         if (shiharaiShuryoYMD == null) {
             entity.setShiharaiEndYMD(RString.EMPTY);
         }
-        if (shiharaiKaishiYMD != null && shiharaiShuryoYMD != null && !shiharaiKaishiYMD.isEmpty() && !shiharaiShuryoYMD.isEmpty()) {
+        if (shiharaiShuryoYMD != null && !shiharaiShuryoYMD.isEmpty()) {
             entity.setShiharaiEndYMD(shiharaiShuryoYMD.wareki().
                     eraType(EraType.KANJI).
                     firstYear(FirstYear.GAN_NEN).
                     separator(Separator.JAPANESE).
-                    fillType(FillType.BLANK).toDateString().concat(shiharaiShuryoYMD.getDayOfWeek().getShortTerm()));
+                    fillType(FillType.BLANK).toDateString().concat("（").concat(shiharaiShuryoYMD.getDayOfWeek().getShortTerm().concat("）")));
         }
         entity.setShiharaiStart(set時間(shiharaiKaishiTime));
-        if ((shiharaiKaishiYMD != null && !shiharaiKaishiYMD.isEmpty() || shiharaiShuryoYMD.isEmpty() && shiharaiShuryoYMD != null)
+        if ((shiharaiKaishiYMD != null && !shiharaiKaishiYMD.isEmpty() || !shiharaiShuryoYMD.isEmpty() && shiharaiShuryoYMD != null)
                 && (!shiharaiKaishiTime.isEmpty() && shiharaiKaishiTime != null || !shiharaiShuryoTime.isEmpty() && shiharaiShuryoTime != null)) {
             entity.setKaraFugo(KARA);
         }

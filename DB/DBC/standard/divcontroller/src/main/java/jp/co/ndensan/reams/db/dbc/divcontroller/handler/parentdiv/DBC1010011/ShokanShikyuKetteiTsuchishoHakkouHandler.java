@@ -110,12 +110,10 @@ public class ShokanShikyuKetteiTsuchishoHakkouHandler {
         if (!整理番号List.isEmpty()) {
             div.getDdlSeiriNO().setSelectedValue(整理番号List.get(0));
         }
-        if (!償還払支給判定結果List.isEmpty()) {
-            if (償還払支給判定結果List.get(0).get償還払支給判定結果().get決定通知書作成年月日() != null && !償還払支給判定結果List.get(0).
-                    get償還払支給判定結果().get決定通知書作成年月日().isEmpty()) {
-                div.getShokanShikyuKetteiTsuchishoHakkouPrint().getTxtZenkaiHakkoYMD().setValue(new RDate(償還払支給判定結果List.get(0).
-                        get償還払支給判定結果().get決定通知書作成年月日().toString()));
-            }
+        if (!償還払支給判定結果List.isEmpty() && 償還払支給判定結果List.get(0).get償還払支給判定結果().
+                get決定通知書作成年月日() != null && !償還払支給判定結果List.get(0).get償還払支給判定結果().get決定通知書作成年月日().isEmpty()) {
+            div.getShokanShikyuKetteiTsuchishoHakkouPrint().getTxtZenkaiHakkoYMD().setValue(new RDate(償還払支給判定結果List.get(0).
+                    get償還払支給判定結果().get決定通知書作成年月日().toString()));
         }
         ChohyoSeigyoHanyoManager manager = new ChohyoSeigyoHanyoManager();
         ChohyoSeigyoHanyo 帳票制御 = manager.get帳票制御汎用(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.
