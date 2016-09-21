@@ -45,7 +45,7 @@
             ,受給者台帳."ninteiYukoKikanKaishiYMD" AS DbT4001_ninteiYukoKikanKaishiYMD
             ,受給者台帳."ninteiYukoKikanShuryoYMD" AS DbT4001_ninteiYukoKikanShuryoYMD
             ,受給者台帳."ninteiYMD" AS DbT4001_ninteiYMD
-            ,宛名.*
+            ,ShikibetsuTaisho.*
             ,被保険者台帳."shikibetsuCode" AS DbT1001_shikibetsuCode
             ,被保険者台帳."shikakuShutokuYMD" AS DbT1001_shikakuShutokuYMD
             ,被保険者台帳."shikakuSoshitsuYMD" AS DbT1001_shikakuSoshitsuYMD
@@ -83,8 +83,8 @@
             ON  被保険者台帳."hihokenshaNo" = 受給者台帳."hihokenshaNo"
             AND 被保険者台帳."異動日降順" = '1'
         LEFT JOIN						
-            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> AS 宛名
-        ON 宛名."shikibetsuCode" = 被保険者台帳."shikibetsuCode"
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> AS ShikibetsuTaisho
+        ON ShikibetsuTaisho."shikibetsuCode" = 被保険者台帳."shikibetsuCode"
         LEFT JOIN
             rgdb."DbT1004ShisetsuNyutaisho" AS 介護保険施設入退所
         ON 介護保険施設入退所."shikibetsuCode" = 被保険者台帳."shikibetsuCode"

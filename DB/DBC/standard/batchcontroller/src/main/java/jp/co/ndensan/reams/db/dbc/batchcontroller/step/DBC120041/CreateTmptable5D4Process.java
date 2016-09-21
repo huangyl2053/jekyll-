@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120041;
 
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kyodojukyushainsub.KyufuJissekiInProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyodojukyushainsub.DbWT5C32ShoukanKyoudouShoriEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyodojukyushainsub.KyoudouShori5C3CsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyodojukyushainsub.KyoudouShori5D4CsvEntity;
 import jp.co.ndensan.reams.db.dbz.business.core.hokenshainputguide.Hokensha;
 import jp.co.ndensan.reams.db.dbz.service.core.hokensha.HokenshaNyuryokuHojoFinder;
@@ -62,7 +61,7 @@ public class CreateTmptable5D4Process extends BatchProcessBase<KyoudouShori5D4Cs
     protected IBatchReader createReader() {
         RString csvReaderPath = Path.combinePath(processParameter.get保存先フォルダ(), processParameter.getCsvファイル名());
         RString filePath = Path.combinePath(csvReaderPath);
-        CsvReader csvReader = new CsvReader.InstanceBuilder(filePath, KyoudouShori5C3CsvEntity.class)
+        CsvReader csvReader = new CsvReader.InstanceBuilder(filePath, KyoudouShori5D4CsvEntity.class)
                 .setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS)
                 .hasHeader(true).setNewLine(NewLine.LF).build();
         return new BatchCsvReader(csvReader);

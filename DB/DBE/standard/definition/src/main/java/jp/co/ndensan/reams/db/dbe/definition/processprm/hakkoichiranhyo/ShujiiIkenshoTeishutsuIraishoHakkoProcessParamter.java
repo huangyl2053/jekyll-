@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.iraisho.GridParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE220010.GridParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoMybitisParamter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

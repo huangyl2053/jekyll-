@@ -174,7 +174,9 @@ public class KogakuGassanShikyuKetteiHosei {
         if (被保険者台帳管理entity == null) {
             return null;
         }
-        result.set資格喪失年月日(被保険者台帳管理entity.getShikakuSoshitsuYMD());
+        if (被保険者台帳管理entity.getShikakuSoshitsuYMD() != null) {
+            result.set資格喪失年月日(new RDate(被保険者台帳管理entity.getShikakuSoshitsuYMD().toString()));
+        }
         result.set喪失事由コード(被保険者台帳管理entity.getShikakuShutokuJiyuCode());
         return result;
     }

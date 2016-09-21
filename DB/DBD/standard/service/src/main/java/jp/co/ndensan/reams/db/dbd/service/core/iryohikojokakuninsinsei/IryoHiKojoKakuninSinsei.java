@@ -7,10 +7,11 @@ package jp.co.ndensan.reams.db.dbd.service.core.iryohikojokakuninsinsei;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.IryohiKojoEntityResult;
+import jp.co.ndensan.reams.db.dbd.business.core.iryohikojokakuninsinsei.OmutsusiyoSyomeishoEntity;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.iryohikojokakuninsinsei.AtesakiParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.iryohikojokakuninsinsei.ShikibetsuTaishoParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.iryohikojokakuninsinsei.IryohiKojoEntity;
-import jp.co.ndensan.reams.db.dbd.entity.db.relate.iryohikojokakuninsinsei.OmutsusiyoSyomeishoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.iryohikojokakuninsinsei.SogoJigyouTaisyouSyaJyohoJoho;
 import jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.iryohikojokakuninsinsei.IIryoHiKojoKakuninSinseiMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
@@ -93,8 +94,8 @@ public class IryoHiKojoKakuninSinsei {
     /**
      * 受給者台帳取得
      *
-     * @param 被保険者番号
-     * @param 対象年
+     * @param 被保険者番号 被保険者番号
+     * @param 対象年 対象年
      * @return 受給者台帳情報
      */
     public SogoJigyouTaisyouSyaJyohoJoho getJukyusha(RString 被保険者番号, RString 対象年) {
@@ -116,16 +117,30 @@ public class IryoHiKojoKakuninSinsei {
     /**
      * 単票用医療費控除取得
      *
-     * @param 被保険者番号
-     * @param データ区分
+     * @param 被保険者番号 被保険者番号
+     * @param データ区分 データ区分
      * @return 医療費控除情報
      */
-    public List<IryohiKojoEntity> getIryohikojyo_Chohyo(RString 被保険者番号, RString データ区分) {
+    public List<IryohiKojoEntityResult> getIryohikojyo_Chohyo(RString 被保険者番号, RString データ区分) {
         IIryoHiKojoKakuninSinseiMapper mapper = mapperProvider.create(IIryoHiKojoKakuninSinseiMapper.class);
-        List<IryohiKojoEntity> 単票用医療費控除 = new ArrayList<>();
+        List<IryohiKojoEntityResult> 単票用医療費控除 = new ArrayList<>();
         List<IryohiKojoEntity> result = mapper.select単票用医療費控除(被保険者番号, データ区分);
         if (result != null) {
-            単票用医療費控除 = result;
+            for (IryohiKojoEntity entity : result) {
+                IryohiKojoEntityResult 医療費控除 = new IryohiKojoEntityResult();
+                医療費控除.setデータ区分(entity.getデータ区分());
+                医療費控除.set主治医意見書受領年月日(entity.get主治医意見書受領年月日());
+                医療費控除.set尿失禁の有無(entity.is尿失禁の有無());
+                医療費控除.set控除対象年(entity.get控除対象年());
+                医療費控除.set日常生活自立度(entity.get日常生活自立度());
+                医療費控除.set申請年月日(entity.get申請年月日());
+                医療費控除.set発行年月日(entity.get発行年月日());
+                医療費控除.set登録年月日(entity.get登録年月日());
+                医療費控除.set被保険者番号(entity.get被保険者番号());
+                医療費控除.set認定有効期間終了年月日(entity.get認定有効期間終了年月日());
+                医療費控除.set認定有効期間開始年月日(entity.get認定有効期間開始年月日());
+                単票用医療費控除.add(医療費控除);
+            }
         }
         return 単票用医療費控除;
     }

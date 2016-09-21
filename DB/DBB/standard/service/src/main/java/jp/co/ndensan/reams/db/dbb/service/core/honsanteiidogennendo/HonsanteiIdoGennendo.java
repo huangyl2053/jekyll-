@@ -10,8 +10,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.honsanteiidogennen.ChohyoMeter;
 import jp.co.ndensan.reams.db.dbb.business.core.honsanteiidogennen.SanteiIdoGennen;
 import jp.co.ndensan.reams.db.dbb.business.core.honsanteiidogennen.Shoriku;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidogennen.ChohyoResult;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidogennen.CreateHonsanteiIdoBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB051001.ChohyoResult;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB051001.DBB051001_GennendoIdoFukaParameter;
 import jp.co.ndensan.reams.db.dbb.definition.reportid.ReportIdDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -786,8 +786,8 @@ public class HonsanteiIdoGennendo {
      * @param parameter parameter
      * @return BatchParamResult
      */
-    public CreateHonsanteiIdoBatchParameter createBatchParam(SanteiIdoGennen parameter) {
-        CreateHonsanteiIdoBatchParameter result = new CreateHonsanteiIdoBatchParameter();
+    public DBB051001_GennendoIdoFukaParameter createBatchParam(SanteiIdoGennen parameter) {
+        DBB051001_GennendoIdoFukaParameter result = new DBB051001_GennendoIdoFukaParameter();
         result.setChoteiNendo(parameter.get調定年度());
         result.set賦課年度(parameter.get賦課年度());
         result.set処理対象(parameter.get処理対象());

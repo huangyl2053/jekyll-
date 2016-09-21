@@ -31,8 +31,12 @@ public class DBC180030_KanendoRiyoshaFutanwariaiHantei extends BatchFlowBase<DBC
 
     @Override
     protected void defineFlow() {
-        executeStep(異動データ抽出);
-        executeStep(利用者負担割合判定);
+
+        for (int i = 1; i <= getParameter().get最大ループ回数(); i++) {
+            getParameter().set抽出回数(i);
+            executeStep(異動データ抽出);
+            executeStep(利用者負担割合判定);
+        }
         executeStep(負担割合判定一覧出力);
         executeStep(DB_UPDATE);
     }

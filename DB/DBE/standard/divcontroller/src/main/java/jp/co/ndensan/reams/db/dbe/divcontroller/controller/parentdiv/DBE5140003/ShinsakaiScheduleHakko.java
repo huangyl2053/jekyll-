@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5140003
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinjohogogitai.ShinsakaiIinJohoGoitaiBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.batchprm.kaigoninteishinsakaischedule.KaigoNinteiShinsakaiScheduleBatchParamter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE514001.DBE514001_ShinsakaiScheduleParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140003.ShinsakaiScheduleHakkoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140003.dgShinsakaiScheduleKagami_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5140003.ShinsakaiScheduleHakkoValidationHandler;
@@ -97,7 +97,7 @@ public class ShinsakaiScheduleHakko {
      * @param div 護認定審査会開催予定登録3div
      * @return ResponseData<KaigoNinteiShinsakaiScheduleBatchParamter>
      */
-    public ResponseData<KaigoNinteiShinsakaiScheduleBatchParamter> onClick_btnHakko(ShinsakaiScheduleHakkoDiv div) {
+    public ResponseData<DBE514001_ShinsakaiScheduleParameter> onClick_btnHakko(ShinsakaiScheduleHakkoDiv div) {
         return ResponseData.of(getParamter(div)).respond();
     }
 
@@ -115,7 +115,7 @@ public class ShinsakaiScheduleHakko {
         div.getDgShinsakaiScheduleKagami().setDataSource(dgShinsakaiScheduleKagamiRow);
     }
 
-    private KaigoNinteiShinsakaiScheduleBatchParamter getParamter(ShinsakaiScheduleHakkoDiv div) {
+    private DBE514001_ShinsakaiScheduleParameter getParamter(ShinsakaiScheduleHakkoDiv div) {
         List<dgShinsakaiScheduleKagami_Row> rowList = div.getDgShinsakaiScheduleKagami().getSelectedItems();
         List<RString> 審査会委員コードリスト = new ArrayList<>();
         for (dgShinsakaiScheduleKagami_Row row : rowList) {
@@ -127,7 +127,7 @@ public class ShinsakaiScheduleHakko {
             nendoParameter = div.getShinsakaiScheduleSrch().getTxtNendo().getValue().getYear().toDateString();
             kubun = new RString("2");
         }
-        return new KaigoNinteiShinsakaiScheduleBatchParamter(
+        return new DBE514001_ShinsakaiScheduleParameter(
                 div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().getFromValue().toDateString(),
                 div.getShinsakaiScheduleSrch().getTxtShinsakaiKaisaiYoteiKikan().getToValue().toDateString(),
                 nendoParameter, kubun, 審査会委員コードリスト);

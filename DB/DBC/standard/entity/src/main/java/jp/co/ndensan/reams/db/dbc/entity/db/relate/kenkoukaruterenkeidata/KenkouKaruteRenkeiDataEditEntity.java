@@ -58,7 +58,7 @@ public class KenkouKaruteRenkeiDataEditEntity {
         } else {
             出力entity.set要介護状態区分(RString.HALF_SPACE);
         }
-        出力entity.set減額認定証受給者番号(RString.HALF_SPACE);
+        出力entity.set減額認定証受給者番号(RString.FULL_SPACE);
         出力entity.set認定年月日(get年月日(entity.get認定年月日()));
         出力entity.set認定有効期間開始日(get年月日(entity.get認定有効期間開始年月日()));
         出力entity.set認定有効期間終了日(get年月日(entity.get認定有効期間終了年月日()));

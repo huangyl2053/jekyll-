@@ -6,7 +6,8 @@
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB0510001;
 
 import jp.co.ndensan.reams.db.dbb.business.core.honsanteiidogennen.SanteiIdoGennen;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.honsanteiidogennen.CreateHonsanteiIdoBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB051001.DBB051001_GennendoIdoFukaParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB051003.DBB051003_GennendoIdoTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.message.DbbErrorMessages;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0510001.DBB0510001StateName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0510001.HonsanteiIdoDiv;
@@ -84,9 +85,9 @@ public class HonsanteiIdo {
      * @param div コントロールdiv
      * @return ResponseData
      */
-    public ResponseData<CreateHonsanteiIdoBatchParameter> onClick_Register(HonsanteiIdoDiv div) {
+    public ResponseData<DBB051001_GennendoIdoFukaParameter> onClick_Register(HonsanteiIdoDiv div) {
         SanteiIdoGennen paramter = getHandler(div).setParamter();
-        CreateHonsanteiIdoBatchParameter batchParamter = HonsanteiIdoGennendo.createInstance().createBatchParam(paramter);
+        DBB051001_GennendoIdoFukaParameter batchParamter = HonsanteiIdoGennendo.createInstance().createBatchParam(paramter);
         return ResponseData.of(batchParamter).respond();
     }
 
@@ -96,10 +97,10 @@ public class HonsanteiIdo {
      * @param div コントロールdiv
      * @return ResponseData
      */
-    public ResponseData<CreateHonsanteiIdoBatchParameter> onClick_btnTsuchishoRegister(HonsanteiIdoDiv div) {
+    public ResponseData<DBB051003_GennendoIdoTsuchishoHakkoParameter> onClick_btnTsuchishoRegister(HonsanteiIdoDiv div) {
         SanteiIdoGennen paramter = getHandler(div).setParamter();
-        CreateHonsanteiIdoBatchParameter batchParamter = HonsanteiIdoGennendo.createInstance().createBatchParam(paramter);
-        return ResponseData.of(batchParamter).respond();
+        DBB051001_GennendoIdoFukaParameter batchParamter = HonsanteiIdoGennendo.createInstance().createBatchParam(paramter);
+        return ResponseData.of(batchParamter.toDBB051003_GennendoIdoTsuchishoHakkoParameter()).respond();
     }
 
     /**

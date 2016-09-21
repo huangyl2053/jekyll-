@@ -24,7 +24,12 @@
             FROM rgdb."DbT3017KyufujissekiKihon" AS T9
             INNER JOIN
             (SELECT 
-            MAX("DbT3017KyufujissekiKihon"."shinsaYM") AS 最新審査年月
+            MAX("DbT3017KyufujissekiKihon"."shinsaYM") AS 最新審査年月,
+            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" AS "DbT3017_inputShikibetsuNo",
+            "DbT3017KyufujissekiKihon"."hiHokenshaNo" AS "DbT3017_hiHokenshaNo",
+            "DbT3017KyufujissekiKihon"."serviceTeikyoYM" AS "DbT3017_serviceTeikyoYM",
+            "DbT3017KyufujissekiKihon"."jigyoshoNo" AS "DbT3017_jigyoshoNo",
+            "DbT3017KyufujissekiKihon"."toshiNo" AS "DbT3017_toshiNo"
             FROM
             rgdb."DbT3017KyufujissekiKihon"
             GROUP BY
@@ -33,7 +38,13 @@
             "DbT3017KyufujissekiKihon"."serviceTeikyoYM",
             "DbT3017KyufujissekiKihon"."jigyoshoNo",
             "DbT3017KyufujissekiKihon"."toshiNo") AS T0
-            ON T9."shinsaYM" = 最新審査年月) AS T1
+            ON T9."shinsaYM" = 最新審査年月
+            AND T9."inputShikibetsuNo" = T0."DbT3017_inputShikibetsuNo"
+            AND T9."hiHokenshaNo" = T0."DbT3017_inputShikibetsuNo"
+            AND T9."serviceTeikyoYM" = T0."DbT3017_inputShikibetsuNo"
+            AND T9."jigyoshoNo" = T0."DbT3017_inputShikibetsuNo"
+            AND T9."toshiNo" = T0."DbT3017_inputShikibetsuNo"
+            ) AS T1
             LEFT OUTER JOIN
             rgdb."DbT3018KyufujissekiMeisai" AS T2
             ON T1."inputShikibetsuNo" = T2."inputShikibetsuNo"
@@ -47,13 +58,13 @@
             OR T1."kyufuSakuseiKubunCode" = '2')
             AND SUBSTR(T1."inputShikibetsuNo",1,3) IN ('71P','816','71R','817')
         <if test="00==対象年月指定">
-        AND T1."serviceTeikyoYM" <![CDATA[>=]]> #{年月範囲開始}
+        AND #{年月範囲開始} <![CDATA[<=]]> T1."serviceTeikyoYM" 
         AND T1."serviceTeikyoYM" <![CDATA[<=]]> #{年月範囲終了}
         </if>
         <if test="01==対象年月指定">
-        AND (T1."shinsaYM"  <![CDATA[>=]]> #{年月範囲開始}
+        AND ( #{年月範囲開始} <![CDATA[<=]]> T1."shinsaYM" 
             OR T1."shinsaYM" IS NULL)
-        AND T2."shinsaYM" <![CDATA[>=]]> #{年月範囲開始}
+        AND #{年月範囲開始} <![CDATA[<=]]> T2."shinsaYM" 
         AND T2."shinsaYM" <![CDATA[<=]]> #{年月範囲終了}
         </if>
         <if test="00==対象サービス種類">
@@ -86,7 +97,12 @@
             FROM rgdb."DbT3017KyufujissekiKihon" AS T9
             INNER JOIN
             (SELECT 
-            MAX("DbT3017KyufujissekiKihon"."shinsaYM") AS 最新審査年月
+            MAX("DbT3017KyufujissekiKihon"."shinsaYM") AS 最新審査年月,
+            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" AS "DbT3017_inputShikibetsuNo",
+            "DbT3017KyufujissekiKihon"."hiHokenshaNo" AS "DbT3017_hiHokenshaNo",
+            "DbT3017KyufujissekiKihon"."serviceTeikyoYM" AS "DbT3017_serviceTeikyoYM",
+            "DbT3017KyufujissekiKihon"."jigyoshoNo" AS "DbT3017_jigyoshoNo",
+            "DbT3017KyufujissekiKihon"."toshiNo" AS "DbT3017_toshiNo"
             FROM
             rgdb."DbT3017KyufujissekiKihon"
             GROUP BY
@@ -95,7 +111,13 @@
             "DbT3017KyufujissekiKihon"."serviceTeikyoYM",
             "DbT3017KyufujissekiKihon"."jigyoshoNo",
             "DbT3017KyufujissekiKihon"."toshiNo") AS T0
-            ON T9."shinsaYM" = 最新審査年月) AS T1
+            ON T9."shinsaYM" = 最新審査年月
+            AND T9."inputShikibetsuNo" = T0."DbT3017_inputShikibetsuNo"
+            AND T9."hiHokenshaNo" = T0."DbT3017_inputShikibetsuNo"
+            AND T9."serviceTeikyoYM" = T0."DbT3017_inputShikibetsuNo"
+            AND T9."jigyoshoNo" = T0."DbT3017_inputShikibetsuNo"
+            AND T9."toshiNo" = T0."DbT3017_inputShikibetsuNo"
+            ) AS T1
             LEFT OUTER JOIN
             rgdb."DbT3025KyufujissekiKyotakuService" AS T2
             ON T1."inputShikibetsuNo" = T2."inputShikibetsuNo"
@@ -109,13 +131,13 @@
             OR T1."kyufuSakuseiKubunCode" = '2')
             AND SUBSTR(T1."inputShikibetsuNo",1,3) IN ('71P','816','71R','817')
         <if test="00==対象年月指定">
-        AND T1."serviceTeikyoYM" <![CDATA[>=]]> #{年月範囲開始}
+        AND #{年月範囲開始}<![CDATA[<=]]>T1."serviceTeikyoYM"  
         AND T1."serviceTeikyoYM" <![CDATA[<=]]> #{年月範囲終了}
         </if>
         <if test="01==対象年月指定">
-        AND (T1."shinsaYM"  <![CDATA[>=]]> #{年月範囲開始}
+        AND (#{年月範囲開始}<![CDATA[<=]]>T1."shinsaYM"   
             OR T1."shinsaYM" IS NULL)
-        AND T2."shinsaYM" <![CDATA[>=]]> #{年月範囲開始}
+        AND #{年月範囲開始}<![CDATA[<=]]>T2."shinsaYM"  
         AND T2."shinsaYM" <![CDATA[<=]]> #{年月範囲終了}
         </if>
         <if test="00==対象サービス種類">
@@ -148,7 +170,12 @@
             FROM rgdb."DbT3017KyufujissekiKihon" AS T9
             INNER JOIN
             (SELECT 
-            MAX("DbT3017KyufujissekiKihon"."shinsaYM") AS 最新審査年月
+            MAX("DbT3017KyufujissekiKihon"."shinsaYM") AS 最新審査年月,
+            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" AS "DbT3017_inputShikibetsuNo",
+            "DbT3017KyufujissekiKihon"."hiHokenshaNo" AS "DbT3017_hiHokenshaNo",
+            "DbT3017KyufujissekiKihon"."serviceTeikyoYM" AS "DbT3017_serviceTeikyoYM",
+            "DbT3017KyufujissekiKihon"."jigyoshoNo" AS "DbT3017_jigyoshoNo",
+            "DbT3017KyufujissekiKihon"."toshiNo" AS "DbT3017_toshiNo"
             FROM
             rgdb."DbT3017KyufujissekiKihon"
             GROUP BY
@@ -157,7 +184,13 @@
             "DbT3017KyufujissekiKihon"."serviceTeikyoYM",
             "DbT3017KyufujissekiKihon"."jigyoshoNo",
             "DbT3017KyufujissekiKihon"."toshiNo") AS T0
-            ON T9."shinsaYM" = 最新審査年月) AS T1
+            ON T9."shinsaYM" = 最新審査年月
+            AND T9."inputShikibetsuNo" = T0."DbT3017_inputShikibetsuNo"
+            AND T9."hiHokenshaNo" = T0."DbT3017_inputShikibetsuNo"
+            AND T9."serviceTeikyoYM" = T0."DbT3017_inputShikibetsuNo"
+            AND T9."jigyoshoNo" = T0."DbT3017_inputShikibetsuNo"
+            AND T9."toshiNo" = T0."DbT3017_inputShikibetsuNo"
+            ) AS T1
             LEFT OUTER JOIN
             rgdb."DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo" AS T2
             ON T1."inputShikibetsuNo" = T2."inputShikibetsuNo"
@@ -171,13 +204,13 @@
             OR T1."kyufuSakuseiKubunCode" = '2')
             AND SUBSTR(T1."inputShikibetsuNo",1,3) IN ('71P','816','71R','817')
         <if test="00==対象年月指定">
-        AND T1."serviceTeikyoYM" <![CDATA[>=]]> #{年月範囲開始}
+        AND #{年月範囲開始}<![CDATA[<=]]>T1."serviceTeikyoYM"  
         AND T1."serviceTeikyoYM" <![CDATA[<=]]> #{年月範囲終了}
         </if>
         <if test="01==対象年月指定">
-        AND (T1."shinsaYM"  <![CDATA[>=]]> #{年月範囲開始}
+        AND (#{年月範囲開始}<![CDATA[<=]]>T1."shinsaYM"   
             OR T1."shinsaYM" IS NULL)
-        AND T2."shinsaYM" <![CDATA[>=]]> #{年月範囲開始}
+        AND #{年月範囲開始}<![CDATA[<=]]>T2."shinsaYM"  
         AND T2."shinsaYM" <![CDATA[<=]]> #{年月範囲終了}
         </if>
         <if test="00==対象サービス種類">
@@ -193,18 +226,7 @@
     <select resultOrdered="true" id="get被保険者宛名情報"
             resultMap="resultMap_HihokenshaShikibetsuTaishoEntity" fetchSize="500">
         SELECT
-            "DbWT3470ToukeihyoMeisai"."renban" AS DbWT3470ToukeihyoMeisai_renban,
-            "DbWT3470ToukeihyoMeisai"."hiHokenshaNo" AS T1_hiHokenshaNo,
-            "DbWT3470ToukeihyoMeisai"."inputShikibetsuNo" AS T1_inputShikibetsuNo,
-            "DbWT3470ToukeihyoMeisai"."serviceTeikyoYM" AS T1_serviceTeikyoYM,
-            "DbWT3470ToukeihyoMeisai"."jigyoshoNo" AS T1_jigyoshoNo,
-            "DbWT3470ToukeihyoMeisai"."toshiNo" AS T1_toshiNo,
-            "DbWT3470ToukeihyoMeisai"."yoKaigoJotaiKubunCode" AS T1_yoKaigoJotaiKubunCode,
-            "DbWT3470ToukeihyoMeisai"."taniSu" AS T2_atoTanisu,
-            "DbWT3470ToukeihyoMeisai"."nissuKaisu" AS T2_atoNissuKaisu,
-            "DbWT3470ToukeihyoMeisai"."serviceTanisu" AS T2_atoServiceTanisu,
-            "DbWT3470ToukeihyoMeisai"."serviceShuruiCode" AS T2_serviceShuruiCode,
-            "DbWT3470ToukeihyoMeisai"."serviceKomokuCode" AS T2_serviceKomokuCode,
+            "DbWT3470ToukeihyoMeisai".*,
             <include refid="allColumns_DbT1001HihokenshaDaicho" />,
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
         FROM "DbWT3470ToukeihyoMeisai"
@@ -227,43 +249,86 @@
         FROM
         "DbWT3470ToukeihyoMeisai"
         WHERE 1 = 1
-        <if test="市町村コード==null or 市町村コード.isEmpty()">
-            <if test="旧市町村コード==null or 旧市町村コード.isEmpty()">
-                <if test="'町域'==選択対象">
-                    AND DbWT3470ToukeihyoMeisai."machiikiCode" IN #{対象コード}
-                </if>
-                <if test="'地区１'==選択対象">
-                    AND DbWT3470ToukeihyoMeisai."chikuCode1" IN #{対象コード}
-                </if>
-                <if test="'地区２'==選択対象">
-                    AND DbWT3470ToukeihyoMeisai."chikuCode2" IN #{対象コード}
-                </if>
-                <if test="'地区３'==選択対象">
-                    AND DbWT3470ToukeihyoMeisai."chikuCode3" IN #{対象コード}
-                </if>
-                <if test="'行政区'==選択対象">
-                    AND DbWT3470ToukeihyoMeisai."gyoseikuCode" IN #{対象コード}
-                </if>
-            </if>
-            <if test="旧市町村コード!=null and !旧市町村コード.isEmpty()">
-                <if test="!(000000==旧市町村コード)">
-                AND DbWT3470ToukeihyoMeisai."kyuShichosonCode" = #{旧市町村コード}
-                </if>
-            </if> 
-        </if>
-        <if test="(市町村コード!=null and !市町村コード.isEmpty()) and !(000000==市町村コード)">
-            <if test="旧市町村コード==null or 旧市町村コード.isEmpty()">
-                AND DbWT3470ToukeihyoMeisai."koikinaiJushochiTokureiFlag" = '1'
-                AND DbWT3470ToukeihyoMeisai."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}
-            </if>
-            <if test="000000==旧市町村コード">
-                AND DbWT3470ToukeihyoMeisai."koikinaiJushochiTokureiFlag" = '1'
-                AND DbWT3470ToukeihyoMeisai."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}
-            </if>
-            <if test="(旧市町村コード!=null and !旧市町村コード.isEmpty()) and !(000000==旧市町村コード)">
-                AND DbWT3470ToukeihyoMeisai."kyuShichosonCode" = #{旧市町村コード}
-            </if>
-        </if>
+        <choose>
+                    <when test="市町村コード==null or 市町村コード.toString() == ''.toString()">
+                            <choose>
+                                    <when test="旧市町村コード==null or 旧市町村コード.toString() == ''.toString()">
+                                            <if test="'町域'==選択対象">
+                                                AND DbWT3470ToukeihyoMeisai."machiikiCode" IN <foreach  
+                                                collection="対象コード"
+                                                item="item"
+                                                open="("  
+                                                separator=","  
+                                                close=")">  
+                                                #{item}  
+                                                </foreach>
+                                            </if>
+                                            <if test="'地区１'==選択対象">
+                                                AND DbWT3470ToukeihyoMeisai."chikuCode1" IN <foreach  
+                                                collection="対象コード"
+                                                item="item"
+                                                open="("  
+                                                separator=","  
+                                                close=")">  
+                                                #{item}  
+                                                </foreach>
+                                            </if>
+                                            <if test="'地区２'==選択対象">
+                                                AND DbWT3470ToukeihyoMeisai."chikuCode2" IN <foreach  
+                                                collection="対象コード"
+                                                item="item"
+                                                open="("  
+                                                separator=","  
+                                                close=")">  
+                                                #{item}  
+                                                </foreach>
+                                            </if>
+                                            <if test="'地区３'==選択対象">
+                                                AND DbWT3470ToukeihyoMeisai."chikuCode3" IN <foreach  
+                                                collection="対象コード"
+                                                item="item"
+                                                open="("  
+                                                separator=","  
+                                                close=")">  
+                                                #{item}  
+                                                </foreach>
+                                            </if>
+                                            <if test="'行政区'==選択対象">
+                                                AND DbWT3470ToukeihyoMeisai."gyoseikuCode" IN <foreach  
+                                                collection="対象コード"
+                                                item="item"
+                                                open="("  
+                                                separator=","  
+                                                close=")">  
+                                                #{item}  
+                                                </foreach>
+                                            </if>
+                                    </when>
+                                    <when test="旧市町村コード==000000">
+                                    </when>
+                                    <otherwise>
+                                            AND DbWT3470ToukeihyoMeisai."kyuShichosonCode" = #{旧市町村コード}
+                                    </otherwise>
+                            </choose>
+                    </when>
+                    <when test="市町村コード==000000">
+                    </when>
+                    <otherwise>
+                            <choose>
+                                    <when test="旧市町村コード==null or 旧市町村コード.toString() == ''.toString()">
+                                         AND DbWT3470ToukeihyoMeisai."koikinaiJushochiTokureiFlag" = '1'
+                                         AND DbWT3470ToukeihyoMeisai."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}
+                                    </when>
+                                    <when test="旧市町村コード==000000">
+                                          AND DbWT3470ToukeihyoMeisai."koikinaiJushochiTokureiFlag" = '1'
+                                          AND DbWT3470ToukeihyoMeisai."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}
+                                    </when>
+                                    <otherwise>
+                                          AND DbWT3470ToukeihyoMeisai."kyuShichosonCode" = #{旧市町村コード}
+                                    </otherwise>
+                            </choose>
+                    </otherwise>
+            </choose>
     </select>
     
     <select resultOrdered="true" id="get回数単位数"
@@ -344,46 +409,89 @@
         </if>
     </select>
     
-    <select resultOrdered="true" id="get帳票出力用一時TBL"
-            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.DbWT3470chohyouShutsuryokuyouTempEntity" fetchSize="500">
+    <select resultOrdered="true" id="update帳票出力用一時TBL"
+            resultMap="resultMap_UpdateDbWT3470chohyouShutsuryokuyou" fetchSize="500">
+        WITH 取得項目 AS(
         SELECT
-        "DbWT3470chohyouShutsuryokuyou".*
+        "T5"."serviceMeisho",
+        "T5"."serviceKomokuCode",
+        "T8"."serviceShuruiCode",
+        "T8"."T1_sortYouKomokuCode"
+        FROM 
+        rgdb."DbT7119ServiceCode" AS "T5"
+        INNER JOIN
+        ((SELECT
+        "T2"."serviceTeikyoYM",
+        "T2"."serviceShuruiCode" AS "T2_serviceShuruiCode",
+        "T1"."sortYouKomokuCode" AS "T1_sortYouKomokuCode",
+        "T2"."serviceKomokuCode" AS "T2_serviceKomokuCode"
+        FROM 
+        "DbWT3470chohyouShutsuryokuyou" AS "T1"
+        INNER JOIN
+        "DbWT3470ToukeihyoMeisai" AS "T2"
+        ON "T1"."serviceShuruiCode" = "T2"."serviceShuruiCode"
+        AND "T1"."sortYouKomokuCode" <![CDATA[<=]]> "T2"."serviceKomokuCode"
+        GROUP BY
+        "T2"."serviceShuruiCode",
+        "T1"."sortYouKomokuCode",
+        "T2"."serviceKomokuCode",
+        "T2"."serviceTeikyoYM"
+        ) AS "T7"
+        INNER JOIN
+        (SELECT
+        MAX("T02"."serviceTeikyoYM") AS "T02_serviceTeikyoYM",
+        "T02"."serviceShuruiCode",
+        "T02"."serviceKomokuCode" AS "T02_serviceKomokuCode"
+        FROM 
+        "DbWT3470chohyouShutsuryokuyou" AS "T01"
+        INNER JOIN
+        "DbWT3470ToukeihyoMeisai" AS "T02"
+        ON "T01"."serviceShuruiCode" = "T02"."serviceShuruiCode"
+        AND "T01"."sortYouKomokuCode" <![CDATA[<=]]> "T02"."serviceKomokuCode"
+        GROUP BY
+        "T02"."serviceShuruiCode",
+        "T02"."serviceKomokuCode",
+        "T02"."serviceTeikyoYM"
+        ) AS "T3"
+        ON "T7"."T2_serviceShuruiCode" = "T3"."serviceShuruiCode"
+        AND "T7"."T2_serviceKomokuCode" = "T3"."T02_serviceKomokuCode"
+        AND "T7"."serviceTeikyoYM" = "T3"."T02_serviceTeikyoYM"
+        ) AS "T8"
+        ON "T5"."serviceShuruiCode" = "T8"."serviceShuruiCode"
+        AND "T8"."T1_sortYouKomokuCode"<![CDATA[<=]]>"T5"."serviceKomokuCode" 
+        AND "T5"."tekiyoKaishiYM" <![CDATA[<=]]> "T8"."serviceTeikyoYM"
+        AND "T8"."serviceTeikyoYM" <![CDATA[<=]]> "T5"."tekiyoShuryoYM"
+        )
+        
+        SELECT
+        "DbWT3470chohyouShutsuryokuyou".*,
+        "T9"."serviceMeisho"
         FROM 
         "DbWT3470chohyouShutsuryokuyou"
-    </select>
-    
-    <select resultOrdered="true" id="update帳票出力用一時TBL"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.servicecoderiyojokyo.KyufuJissekiMeisaiGetMybatisParameter"
-            resultMap="resultMap_UpdateDbWT3470chohyouShutsuryokuyou" fetchSize="500">
-        SELECT 
-        "DbT7119ServiceCode"."serviceMeisho" AS "DbT7119ServiceCode_serviceMeisho"
-        FROM 
-        rgdb."DbT7119ServiceCode" AS "DbT7119ServiceCode"
-        WHERE
-        "DbT7119ServiceCode"."serviceShuruiCode" = #{対象サービス種類}
-        "DbT7119ServiceCode"."serviceShuruiCode" <![CDATA[>=]]> #{サービス項目コード}
-        AND "DbT7119ServiceCode"."tekiyoKaishiYM" <![CDATA[<=]]> 
+        INNER JOIN
         (SELECT
-        "DbWT3470ToukeihyoMeisaichukan"."serviceTeikyoYM" 
+        "取得項目1"."serviceMeisho",
+        "取得項目1"."serviceShuruiCode",
+        "取得項目1"."T1_sortYouKomokuCode"
         FROM 
-        "DbWT3470ToukeihyoMeisaichukan"
-        WHERE
-        "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode" = #{対象サービス種類}
-        AND "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode" <![CDATA[<=]]> #{サービス項目コード}
-        ORDER BY "DbWT3470ToukeihyoMeisaichukan"."serviceTeikyoYM" DESC
-        LIMIT 1)
-        AND "DbT7119ServiceCode"."tekiyoShuryoYM" <![CDATA[>=]]>
-        (SELECT
-        "DbWT3470ToukeihyoMeisaichukan"."serviceTeikyoYM" 
-        FROM 
-        "DbWT3470ToukeihyoMeisaichukan"
-        WHERE
-        "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode" = #{対象サービス種類}
-        AND "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode" <![CDATA[<=]]> #{サービス項目コード}
-        ORDER BY "DbWT3470ToukeihyoMeisaichukan"."serviceTeikyoYM" DESC
-        LIMIT 1)
-        ORDER BY "DbT7119ServiceCode"."serviceShuruiCode" ASC
-        LIMIT 1
+        取得項目 AS "取得項目1"
+        INNER JOIN
+        (SELECT 
+        "取得項目"."serviceMeisho",
+        "取得項目"."serviceShuruiCode",
+        MIN("取得項目"."serviceKomokuCode") AS "MIN_serviceKomokuCode"
+        FROM "取得項目"
+        GROUP BY
+        "取得項目"."serviceMeisho",
+        "取得項目"."serviceShuruiCode",
+        "取得項目"."serviceKomokuCode"
+        ) AS "取得項目2"
+        ON "取得項目1"."serviceMeisho" = "取得項目2"."serviceMeisho"
+        AND "取得項目1"."serviceShuruiCode" = "取得項目2"."serviceShuruiCode"
+        AND "取得項目1"."serviceKomokuCode" = "取得項目2"."MIN_serviceKomokuCode"
+        ) AS "T9"
+        ON "DbWT3470chohyouShutsuryokuyou"."serviceShuruiCode" = "T9"."serviceShuruiCode"
+        AND "DbWT3470chohyouShutsuryokuyou"."sortYouKomokuCode" = "T9"."T1_sortYouKomokuCode"
     </select>
     
     <select resultOrdered="true" id="get帳票出力用一時TBL出力順"
@@ -479,8 +587,7 @@
         <id column="dbT1001HihokenshaDaicho_hihokenshaNo"/>
         <id column="dbT1001HihokenshaDaicho_idoYMD"/>
         <id column="dbT1001HihokenshaDaicho_edaNo"/>
-        <result property="連番" column="DbWT3470ToukeihyoMeisai_renban"/>
-        <association property="給付実績" resultMap="resultMap_KyufuJissekiMeisaiEntity"/>
+        <association property="給付実績" resultMap="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.DbWT3470ToukeihyoMeisaiTempEntity"/>
 	<association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
         <association property="最新被保台帳" resultMap="NewResultMap_DbT1001HihokenshaDaichoEntity"/>
     </resultMap>
@@ -521,8 +628,9 @@
         <result property="単位数集計値" column="DbWT3470ToukeihyoMeisaichukan_taniSuSyukeichi" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
     </resultMap>
     
-    <resultMap id="resultMap_UpdateDbWT3470chohyouShutsuryokuyou" type="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" autoMapping="true">
+    <resultMap id="resultMap_UpdateDbWT3470chohyouShutsuryokuyou" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.ChohyouShutsuryokuyouTempEntity" autoMapping="true">
         <result property="サービス名称" column="DbT7119ServiceCode_serviceMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <association property="帳票出力" resultMap="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.DbWT3470chohyouShutsuryokuyouTempEntity"/>
     </resultMap>
     
 </mapper>

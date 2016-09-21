@@ -173,10 +173,15 @@ public class KyufujissekiTorikomiIchiranEditor implements
         }
 
         source.listLower_2 = entity.get被保険者_宛名名称();
-        if (!entity.get給付実績_事業所番号().value().isEmpty() && entity.get給付実績_事業者名称().isEmpty()) {
-            source.listLower_3 = 事業者名不明タイトル;
+        if (!entity.get給付実績_事業所番号().value().isEmpty()) {
+            if (entity.get給付実績_事業者名称().isEmpty()) {
+                source.listLower_3 = 事業者名不明タイトル;
+            } else {
+                source.listLower_3 = entity.get給付実績_事業者名称();
+            }
+
         } else {
-            source.listLower_3 = entity.get給付実績_事業者名称();
+            source.listLower_3 = RString.EMPTY;
         }
         if (entity.isコントロール()) {
             source.gokeiKensuTitle = 合計件数タイトル;
@@ -184,6 +189,8 @@ public class KyufujissekiTorikomiIchiranEditor implements
                 source.gokeiKensu = DecimalFormatter.toコンマ区切りRString(entity.get給付実績_出力データ件数(), 0).concat(件タイトル);
             }
         }
+
+        source.shikibetsuCode = entity.get識別コード();
         return source;
 
     }

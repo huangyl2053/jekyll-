@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB011003.PrintTsuchishoP
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB011003.UpdChoteiGakuProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB011003.UpdFukaJohoProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB011003.UpdHihokenshaKubunProcess;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB003001.DBB003001_KeisangoJohoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB011003.DBB011003_TokuchoKarisanteiTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchokarisanteitsuchishohakko.KarisanteiBatchEntity;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.tokuchokarisanteitsuchishohakko.TokuchoKaishiTsuchishoProcessParameter;
@@ -145,8 +145,8 @@ public class DBB011003_TokuchoKarisanteiTsuchishoHakko extends BatchFlowBase<DBB
                 .define();
     }
 
-    private KeisangoJohoSakuseiBatchParamter getKeisangoJohoSakuseiBatchParamter(RString 帳票分類ID) {
-        return new KeisangoJohoSakuseiBatchParamter(getParameter().get調定年度().toDateString(),
+    private DBB003001_KeisangoJohoSakuseiParameter getKeisangoJohoSakuseiBatchParamter(RString 帳票分類ID) {
+        return new DBB003001_KeisangoJohoSakuseiParameter(getParameter().get調定年度().toDateString(),
                 getParameter().get調定年度().toDateString(),
                 null, null, 帳票分類ID);
     }

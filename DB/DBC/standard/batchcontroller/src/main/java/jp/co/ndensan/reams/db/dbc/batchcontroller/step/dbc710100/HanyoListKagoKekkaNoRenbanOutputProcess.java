@@ -10,8 +10,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.euc.hanyolistkagokekka.HanyoListKagoKekkaCsvEntityEditor;
+import jp.co.ndensan.reams.db.dbc.business.euc.hanyolistkagokekka.HanyoListKagoKekkaOutputOrder;
 import jp.co.ndensan.reams.db.dbc.definition.core.kagomoshitate.KagoMoshitateKekka_HokenshaKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc710100.HanyoListKagoKekkaProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc710100.HanyoListKagoKekkaNoRebanCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc710100.HanyoListKagoKekkaEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
@@ -19,8 +21,12 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
+import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
+import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -29,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -76,6 +83,10 @@ public class HanyoListKagoKekkaNoRenbanOutputProcess extends BatchProcessBase<Ha
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final Code CODE_0003 = new Code("0003");
     private static final RString DATANAME_被保険者番号 = new RString("被保険者番号");
+    private static final RString 定数_ORDERBY = new RString("order by");
+    private static final RString コンマ = new RString(",");
+    private static final RString 項目名_履歴番号 = new RString("\"3061KagoKetteiMeisai_rirekiNo\"");
+    private IOutputOrder 出力順;
     private HanyoListKagoKekkaProcessParameter parameter;
     private Association 地方公共団体情報;
     private Map<LasdecCode, KoseiShichosonMaster> 構成市町村マスタ;
@@ -90,7 +101,21 @@ public class HanyoListKagoKekkaNoRenbanOutputProcess extends BatchProcessBase<Ha
 
     @Override
     protected void initialize() {
-        //TODO  QA1397 出力順の補正
+        if (RString.isNullOrEmpty(parameter.get出力順())) {
+            IChohyoShutsuryokujunFinder iChohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
+            出力順 = iChohyoShutsuryokujunFinder.get出力順(SubGyomuCode.DBC介護給付,
+                    ReportIdDBC.DBC701010.getReportId(), Long.valueOf(parameter.get出力順().toString()));
+            if (出力順 != null) {
+                parameter.set出力項目(MyBatisOrderByClauseCreator.create(HanyoListKagoKekkaOutputOrder.class, 出力順).
+                        concat(コンマ).concat(HanyoListKagoKekkaOutputOrder.被保険者番号.getMyBatis項目名()).
+                        concat(コンマ).concat(HanyoListKagoKekkaOutputOrder.サービス年月.getMyBatis項目名()).
+                        concat(コンマ).concat(項目名_履歴番号));
+            }
+        } else {
+            parameter.set出力項目(定数_ORDERBY.concat(HanyoListKagoKekkaOutputOrder.被保険者番号.getMyBatis項目名()).
+                    concat(コンマ).concat(HanyoListKagoKekkaOutputOrder.サービス年月.getMyBatis項目名()).
+                    concat(コンマ).concat(項目名_履歴番号));
+        }
         構成市町村マスタ = new HashMap<>();
         連番 = 0;
         csv出力Flag = 定数_なし;
@@ -113,24 +138,16 @@ public class HanyoListKagoKekkaNoRenbanOutputProcess extends BatchProcessBase<Ha
                 UzUDE0831EucAccesslogFileType.Csv);
         eucFilePath = Path.combinePath(spoolManager.getEucOutputDirectry(),
                 csvFileName);
+        noRebancsvWriter = BatchWriters.csvWriter(HanyoListKagoKekkaNoRebanCsvEntity.class).
+                filePath(eucFilePath).
+                setDelimiter(EUC_WRITER_DELIMITER).
+                setEnclosure(EUC_WRITER_ENCLOSURE).
+                setEncode(Encode.UTF_8withBOM).
+                setNewLine(NewLine.CRLF).
+                hasHeader(false).
+                build();
         if (parameter.is項目名付加()) {
-            noRebancsvWriter = BatchWriters.csvWriter(HanyoListKagoKekkaNoRebanCsvEntity.class).
-                    filePath(eucFilePath).
-                    setDelimiter(EUC_WRITER_DELIMITER).
-                    setEnclosure(EUC_WRITER_ENCLOSURE).
-                    setEncode(Encode.UTF_8withBOM).
-                    setNewLine(NewLine.CRLF).
-                    hasHeader(parameter.is項目名付加()).
-                    build();
-        } else {
-            noRebancsvWriter = BatchWriters.csvWriter(HanyoListKagoKekkaNoRebanCsvEntity.class).
-                    filePath(eucFilePath).
-                    setDelimiter(EUC_WRITER_DELIMITER).
-                    setEnclosure(EUC_WRITER_ENCLOSURE).
-                    setEncode(Encode.UTF_8withBOM).
-                    setNewLine(NewLine.CRLF).
-                    hasHeader(false).
-                    build();
+            noRebancsvWriter.writeLine(HanyoListKagoKekkaCsvEntityEditor.getNoReBanHeader());
         }
     }
 

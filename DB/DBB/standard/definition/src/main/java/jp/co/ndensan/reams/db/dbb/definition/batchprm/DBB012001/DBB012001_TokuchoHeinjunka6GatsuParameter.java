@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012001;
 
 import java.util.ArrayList;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB004001.DBB004001_FukaJohoTorokuParameter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.keisangojoho.KeisangoJohoSakuseiBatchParamter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB003001.DBB003001_KeisangoJohoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.OutputChohyoIchiran;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -79,8 +79,8 @@ public class DBB012001_TokuchoHeinjunka6GatsuParameter extends BatchParameterBas
      * @param システム日時 YMDHMS
      * @return processパラメータ
      */
-    public KeisangoJohoSakuseiBatchParamter toKeisangoJohoSakuseiBatchParamter(YMDHMS システム日時) {
-        return new KeisangoJohoSakuseiBatchParamter(調定年度.toDateString(), 賦課年度.toDateString(), new RString(システム日時.toString()),
+    public DBB003001_KeisangoJohoSakuseiParameter toKeisangoJohoSakuseiBatchParamter(YMDHMS システム日時) {
+        return new DBB003001_KeisangoJohoSakuseiParameter(調定年度.toDateString(), 賦課年度.toDateString(), new RString(システム日時.toString()),
                 ShoriName.特徴平準化計算_6月分.get名称(), RString.EMPTY);
     }
 

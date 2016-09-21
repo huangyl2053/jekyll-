@@ -408,11 +408,11 @@ public class GassanKetteiTsuchishoShiharaiYoteiBiYijiAriBodyEditor
 
     private void set口座払である(GassanKetteiTsuchishoShiharaiYoteiBiYijiAriSource source) {
         if (entity.get金融機関名称() != null) {
-//            source.bankName = entity.get金融機関名称();
+            source.bankName = entity.get金融機関名称().get金融機関名称();
         }
         if (entity.get金融機関コード() != null && !郵貯銀行.equals(entity.get金融機関コード())) {
             if (entity.get支店名称() != null) {
-//                source.bankShiten = entity.get支店名称();
+                source.bankShiten = entity.get支店名称().get支店名称();
             }
             source.shumokuTitle = 口座種別;
             if (entity.get預金種別() != null) {
@@ -443,7 +443,7 @@ public class GassanKetteiTsuchishoShiharaiYoteiBiYijiAriBodyEditor
 
     private void set金融機関支店名(ChohyoSeigyoHanyo キー, GassanKetteiTsuchishoShiharaiYoteiBiYijiAriSource source) {
         if (区分_1.equals(キー.get設定値()) && entity.get支店名称() != null) {
-//            source.bankShiten = entity.get支店名称();
+            source.bankShiten = entity.get支店名称().get支店名称();
         }
     }
 

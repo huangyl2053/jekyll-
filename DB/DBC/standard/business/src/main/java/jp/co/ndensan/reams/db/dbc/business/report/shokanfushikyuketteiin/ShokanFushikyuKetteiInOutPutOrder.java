@@ -22,35 +22,35 @@ public enum ShokanFushikyuKetteiInOutPutOrder implements IReportItems {
     /**
      * 郵便番号
      */
-    郵便番号(new RString("0001"), new RString("yubinNo"), new RString("DbWT0001.\"yubinNo\"")),
+    郵便番号(new RString("0001"), new RString("郵便番号"), new RString("DbWT0001.\"yubinNo\"")),
     /**
      * 町域コード
      */
-    町域コード(new RString("0002"), new RString("listLower_2"), new RString("DbWT0001.\"choikiCode\"")),
+    町域コード(new RString("0002"), new RString("町域コード"), new RString("DbWT0001.\"choikiCode\"")),
     /**
      * 行政区コード
      */
-    行政区コード(new RString("0004"), new RString("listLower_4"), new RString("DbWT0001.\"gyoseikuCode\"")),
+    行政区コード(new RString("0004"), new RString("行政区コード"), new RString("DbWT0001.\"gyoseikuCode\"")),
     /**
      * 氏名５０音カナ
      */
-    氏名５０音カナ(new RString("0010"), new RString("shimei50onKana"), new RString("DbWT0001.\"shimei50onKana\"")),
+    氏名５０音カナ(new RString("0010"), new RString("氏名５０音カナ"), new RString("DbWT0001.\"shimei50onKana\"")),
     /**
      * 被保険者番号
      */
-    被保険者番号(new RString("0104"), new RString("listUpper_2"), new RString("DbWT0001.\"hihokenshaNo\"")),
+    被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("DbWT0001.\"hihokenshaNo\"")),
     /**
      * 通知書番号
      */
-    通知書番号(new RString("0202"), new RString("listUpper_1"), new RString("DbWT3036.\"tsuchishoNo\"")),
+    通知書番号(new RString("0202"), new RString("通知書番号"), new RString("DbWT3036.\"tsuchishoNo\"")),
     /**
      * 整理番号
      */
-    整理番号(new RString("0305"), new RString("listLower_1"), new RString("DbWT3036.\"seiriNo\"")),
+    整理番号(new RString("0305"), new RString("整理番号"), new RString("DbWT3036.\"seiriNo\"")),
     /**
      * サービス種類コード
      */
-    サービス種類コード(new RString("0308"), new RString("listLower_6"), new RString("DbWT3036.\"serviceShuruiCode\""));
+    サービス種類コード(new RString("0308"), new RString("サービス種類コード"), new RString("DbWT3036.\"serviceShuruiCode\""));
 
     private final RString 項目ID;
     private final RString フォームフィールド名;

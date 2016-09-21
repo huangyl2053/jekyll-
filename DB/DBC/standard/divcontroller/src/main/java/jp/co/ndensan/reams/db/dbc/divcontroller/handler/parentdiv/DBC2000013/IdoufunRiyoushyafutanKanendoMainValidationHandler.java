@@ -45,6 +45,9 @@ public final class IdoufunRiyoushyafutanKanendoMainValidationHandler {
         }
         if (div.getTxtKonkaiShuryoDate().getText().isNullOrEmpty() || div.getTxtKonkaiShuryoTime().getText().isNullOrEmpty()) {
             pairs.add(new ValidationMessageControlPair(IdoufunRiyoushyafutanKanendoMessages.今回終了年月日の未入力チェック));
+        }
+        if (div.getTxtKonkaiKaishiDate().getText().isNullOrEmpty() || div.getTxtKonkaiKaishiTime().getText().isNullOrEmpty()
+                || div.getTxtKonkaiShuryoDate().getText().isNullOrEmpty() || div.getTxtKonkaiShuryoTime().getText().isNullOrEmpty()) {
             return pairs;
         }
         RDateTime 前回終了date = RDateTime.convertFrom(div.getTxtZenkaiShuryoDate().getValue(), div.getTxtZenkaiShuryoTime().getValue());

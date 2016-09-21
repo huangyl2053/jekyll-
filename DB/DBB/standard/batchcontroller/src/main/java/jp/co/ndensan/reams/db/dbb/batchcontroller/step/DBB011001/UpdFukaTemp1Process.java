@@ -135,6 +135,7 @@ public class UpdFukaTemp1Process extends BatchProcessBase<SikakuSaisinnsikiRelat
                     前年度生保廃止日, 前年度老年開始日, 前年度老年廃止日, 前年度世帯課税区分, 前年度課税区分, 前年度合計所得金額,
                     前年度公的年金収入額, 賦課情報一時Entity);
             tempDbWriter.update(賦課情報一時Entity);
+            set識別コード(entity);
             賦課情報一時Entity = entity.get賦課情報一時Entity();
             老齢の情報 = new ArrayList<>();
             set老齢の情報(entity.get老齢の情報());
@@ -168,11 +169,22 @@ public class UpdFukaTemp1Process extends BatchProcessBase<SikakuSaisinnsikiRelat
 
     private void set老齢の情報(DbT7006RoreiFukushiNenkinJukyushaEntity entity) {
         if (entity != null) {
-            entity.initializeMd5();
-            if (!老齢の情報.contains(new RoreiFukushiNenkinJukyusha(entity))) {
+            if (老齢の情報.isEmpty() || isContain(entity)) {
+                entity.initializeMd5();
                 老齢の情報.add(new RoreiFukushiNenkinJukyusha(entity));
             }
         }
+    }
+
+    private boolean isContain(DbT7006RoreiFukushiNenkinJukyushaEntity entity) {
+        boolean flag = true;
+        for (RoreiFukushiNenkinJukyusha 老齢 : 老齢の情報) {
+            if (老齢.get識別コード().equals(entity.getShikibetsuCode()) && 老齢.get受給開始年月日().equals(entity.getJukyuKaishiYMD())) {
+                flag = false;
+                break;
+            }
+        }
+        return flag;
     }
 
     private void set生保の情報(SeikatsuHogoJukyushaRelateEntity entity) {
@@ -217,9 +229,25 @@ public class UpdFukaTemp1Process extends BatchProcessBase<SikakuSaisinnsikiRelat
     }
 
     private void set生活保護扶助種類EntityList(UrT0526SeikatsuHogoFujoShuruiEntity entity) {
-        if (entity != null && !生活保護扶助種類EntityList.contains(entity)) {
-            生活保護扶助種類EntityList.add(entity);
+        if (entity != null) {
+            if (生活保護扶助種類EntityList.isEmpty() || isContain生活保護扶助種類(entity)) {
+                生活保護扶助種類EntityList.add(entity);
+            }
         }
+    }
+
+    private boolean isContain生活保護扶助種類(UrT0526SeikatsuHogoFujoShuruiEntity entity) {
+        boolean flag = true;
+        for (UrT0526SeikatsuHogoFujoShuruiEntity urt0526Entity : 生活保護扶助種類EntityList) {
+            if (urt0526Entity.getShikibetsuCode().equals(entity.getShikibetsuCode())
+                    && urt0526Entity.getGyomuCode().equals(entity.getGyomuCode())
+                    && urt0526Entity.getJukyuKaishiYMD().equals(entity.getJukyuKaishiYMD())
+                    && urt0526Entity.getFujoShuruiCode().equals(entity.getFujoShuruiCode())) {
+                flag = false;
+                break;
+            }
+        }
+        return flag;
     }
 
     private void set生保の情報List(SikakuSaisinnsikiRelateEntity entity) {

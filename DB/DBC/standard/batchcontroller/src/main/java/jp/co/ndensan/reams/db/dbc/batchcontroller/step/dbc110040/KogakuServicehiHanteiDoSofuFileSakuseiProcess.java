@@ -58,7 +58,6 @@ public class KogakuServicehiHanteiDoSofuFileSakuseiProcess extends BatchProcessB
     private KogakuServicehiHanteiProcessParameter parameter;
     private KogakuServicehiHanteiMybatisParameter mybatisParameter;
     private static final RString コンマ = new RString(",");
-    private static final RString ダブル引用符 = new RString("\"");
     private static final RString ファイル名_前 = new RString("10_341");
     private static final RString ファイル名_後 = new RString(".csv");
     private static final RString 国保連送付外字_変換区分_1 = new RString("1");
@@ -89,7 +88,6 @@ public class KogakuServicehiHanteiDoSofuFileSakuseiProcess extends BatchProcessB
     private List<SharedFileDescriptor> entryList;
     private int 総出力件数;
     private int レコード番号;
-    private BatchDbReader reader;
     private Encode 文字コード;
     private RString eucFilePath;
     private RString 出力ファイル名;
@@ -116,8 +114,7 @@ public class KogakuServicehiHanteiDoSofuFileSakuseiProcess extends BatchProcessB
 
     @Override
     protected IBatchReader createReader() {
-        reader = new BatchDbReader(READ_DATA_ID, mybatisParameter);
-        return reader;
+        return new BatchDbReader(READ_DATA_ID, mybatisParameter);
     }
 
     @Override
@@ -128,7 +125,7 @@ public class KogakuServicehiHanteiDoSofuFileSakuseiProcess extends BatchProcessB
         eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
                 .setDelimiter(コンマ)
-                .setEnclosure(ダブル引用符)
+                .setEnclosure(RString.EMPTY)
                 .setEncode(文字コード)
                 .setNewLine(NewLine.CRLF)
                 .hasHeader(false)
@@ -168,7 +165,7 @@ public class KogakuServicehiHanteiDoSofuFileSakuseiProcess extends BatchProcessB
         controlEntity.setレコード種別(RecordShubetsu.コントロールレコード.getコード());
         controlEntity.setレコード番号_連番(new RString(レコード番号));
         controlEntity.setボリュ_ム通番(RSTRING_000);
-        controlEntity.setレコード件数(new RString(reader.getCount()));
+        controlEntity.setレコード件数(new RString(parameter.getレコード件数()));
         controlEntity.setデータ種別(ConfigKeysKokuhorenSofu.高額介護サービス費給付判定結果情報.getコード());
         controlEntity.set福祉事務所特定番号(RSTRING_00);
         controlEntity.set保険者番号(parameter.get保険者番号());

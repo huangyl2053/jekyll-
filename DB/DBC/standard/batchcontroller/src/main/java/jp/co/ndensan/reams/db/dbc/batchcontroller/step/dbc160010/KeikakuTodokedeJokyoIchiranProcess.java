@@ -78,6 +78,8 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
     private RString 作成日時;
     private RString 受給申請年月日;
     private RString 受給申請事由;
+    private RString 受給申請日From;
+    private RString 受給申請日To;
     private int count;
     private boolean flag;
     private KeikakuTodokedeJokyoProcessParam processParameter;
@@ -121,8 +123,17 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
         flag = true;
         システム日付 = RDateTime.now();
 
-        申請日 = new RString(processParameter.getJyukyuushinseibiFrom().toString())
-                .concat(仕切る).concat(processParameter.getJyukyuushinseibiTo().toString());
+        if (processParameter.getJyukyuushinseibiFrom() != null) {
+            受給申請日From = new RString(processParameter.getJyukyuushinseibiFrom().toString());
+        } else {
+            受給申請日From = RString.EMPTY;
+        }
+        if (processParameter.getJyukyuushinseibiTo() != null) {
+            受給申請日To = new RString(processParameter.getJyukyuushinseibiTo().toString());
+        } else {
+            受給申請日To = RString.EMPTY;
+        }
+        申請日 = 受給申請日From.concat(仕切る).concat(受給申請日To);
         対象者 = processParameter.getTaisyoushatyuusyutu();
         届出状況 = processParameter.getTodokeidejyoukyou();
         基準日 = processParameter.getKijyunbi();
@@ -131,7 +142,7 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
                 ReportIdDBC.DBC200060.getReportId(), processParameter.getShutsuryokujunId());
         if (並び順 != null) {
             出力順 = MyBatisOrderByClauseCreator.create(
-                    KeikakuTodokedeJokyoIchiranOrder.class, 並び順).replace(ORDER_BY, RString.EMPTY);
+                    KeikakuTodokedeJokyoIchiranOrder.class, 並び順).replace(ORDER_BY, EUC_WRITER_DELIMITER);
             for (ISetSortItem item : 並び順.get設定項目リスト()) {
                 if (item.is改頁項目()) {
                     breakItemIds.add(item.get項目ID());
@@ -178,7 +189,7 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
                 RString sec = new RString(time.toString()).substringReturnAsPossible(INDEX_6, INDEX_8);
                 RString timeFormat = hour.concat(定値_時).concat(min).concat(定値_分).concat(sec).concat(定値_秒);
                 作成日時 = システム日付.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                        .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(RString.FULL_SPACE).concat(timeFormat);
+                        .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(timeFormat);
                 flag = false;
             } else {
                 作成日時 = RString.EMPTY;
@@ -198,7 +209,7 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
                 RString sec = new RString(time.toString()).substringReturnAsPossible(INDEX_6, INDEX_8);
                 RString timeFormat = hour.concat(定値_時).concat(min).concat(定値_分).concat(sec).concat(定値_秒);
                 作成日時 = システム日付.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                        .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(RString.FULL_SPACE).concat(timeFormat);
+                        .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(timeFormat);
                 flag = false;
             } else {
                 作成日時 = RString.EMPTY;

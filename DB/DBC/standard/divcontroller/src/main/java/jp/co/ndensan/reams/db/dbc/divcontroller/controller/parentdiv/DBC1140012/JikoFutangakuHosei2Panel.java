@@ -952,7 +952,7 @@ public class JikoFutangakuHosei2Panel {
             throw new ApplicationException(DbcErrorMessages.高額合算自己負担額関連２.getMessage());
         }
         if (生年月日.plusYear(歳_75).isBeforeOrEquals(対象年_3月_31日)) {
-            if (handler24.is補正後チェック4(div) || handler24.is補正後チェック4_補正後(div)) {
+            if (handler24.is補正後チェック4_補正後(div)) {
                 throw new ApplicationException(DbcErrorMessages.うち70_74歳に係る負担額関連１.getMessage());
             }
         }
@@ -984,7 +984,7 @@ public class JikoFutangakuHosei2Panel {
             throw new ApplicationException(DbcErrorMessages.高額合算自己負担額関連２.getMessage());
         }
         if (生年月日.plusYear(歳_75).isBeforeOrEquals(対象年_7月_31日)) {
-            if (handler23.is補正後チェック4(div) || handler23.is補正後チェック4_補正後(div)) {
+            if (handler23.is補正後チェック4_補正後(div)) {
                 throw new ApplicationException(DbcErrorMessages.うち70_74歳に係る負担額関連１.getMessage());
             }
         }
