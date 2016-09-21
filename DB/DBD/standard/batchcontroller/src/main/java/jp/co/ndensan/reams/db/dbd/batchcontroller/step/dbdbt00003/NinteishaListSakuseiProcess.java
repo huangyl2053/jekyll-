@@ -166,6 +166,7 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
 
     @Override
     protected void process(NinteishaListSakuseiEntity t) {
+        edit帳票用データ(t);
         HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReport find
                 = new HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReport(parameter.get帳票作成日時(),
                         parameter.get対象リスト(), t, association, outputOrder);
@@ -177,18 +178,44 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
         eucCsvWriter.writeLine(eucCsvEntity);
     }
 
-    private PersonalData toPersonalData(NinteishaListSakuseiEntity entity) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0003")), new RString("被保険者番号"),
-                entity.get被保険者番号().getColumnValue());
-        return PersonalData.of(entity.getPsmEntity() == null ? ShikibetsuCode.EMPTY : entity.getPsmEntity().getShikibetsuCode(), expandedInfo);
-    }
-
     @Override
     protected void afterExecute() {
         AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
         eucCsvWriter.close();
         manager.spool(eucFilePath, log);
         バッチ出力条件リストの出力を行う();
+    }
+
+    private void edit帳票用データ(NinteishaListSakuseiEntity t) {
+        if (t.get認定情報_要介護状態区分コード() != null && !t.get認定情報_要介護状態区分コード().isEmpty()) {
+            t.set認定情報_要介護状態区分コード(t.get認定情報_要介護状態区分コード());
+        } else {
+            t.set認定情報_要介護状態区分コード(new RString("06"));
+        }
+
+        if (t.get認定情報_認定年月日() != null && !t.get認定情報_認定年月日().isEmpty()) {
+            t.set認定情報_認定年月日(t.get認定情報_認定年月日());
+        } else if (t.get総合事業対象者情報_チェックリスト実施日() != null && !t.get総合事業対象者情報_チェックリスト実施日().isEmpty()) {
+            t.set認定情報_認定年月日(t.get総合事業対象者情報_チェックリスト実施日());
+        }
+
+        if (t.get認定情報_認定有効期間開始年月日() != null && !t.get認定情報_認定有効期間開始年月日().isEmpty()) {
+            t.set認定情報_認定有効期間開始年月日(t.get認定情報_認定有効期間開始年月日());
+        } else if (t.get総合事業対象者情報_適用開始年月日() != null && !t.get総合事業対象者情報_適用開始年月日().isEmpty()) {
+            t.set認定情報_認定有効期間開始年月日(t.get総合事業対象者情報_適用開始年月日());
+        }
+
+        if (t.get認定情報_認定有効期間終了年月日() != null && !t.get認定情報_認定有効期間終了年月日().isEmpty()) {
+            t.set認定情報_認定有効期間終了年月日(t.get認定情報_認定有効期間終了年月日());
+        } else if (t.get総合事業対象者情報_適用終了年月日() != null && !t.get総合事業対象者情報_適用終了年月日().isEmpty()) {
+            t.set認定情報_認定有効期間終了年月日(t.get総合事業対象者情報_適用終了年月日());
+        }
+    }
+
+    private PersonalData toPersonalData(NinteishaListSakuseiEntity entity) {
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0003")), new RString("被保険者番号"),
+                entity.get被保険者番号().getColumnValue());
+        return PersonalData.of(entity.getPsmEntity() == null ? ShikibetsuCode.EMPTY : entity.getPsmEntity().getShikibetsuCode(), expandedInfo);
     }
 
     private void バッチ出力条件リストの出力を行う() {
