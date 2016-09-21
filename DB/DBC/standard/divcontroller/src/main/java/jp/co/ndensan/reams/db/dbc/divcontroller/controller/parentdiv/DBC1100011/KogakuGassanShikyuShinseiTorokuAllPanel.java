@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC1100011;
 
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShinseishoIdentifier;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KogakuGassanShinseishoKanyurekiIdentifier;
@@ -34,7 +35,9 @@ import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -523,6 +526,24 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
             画面項目.set保険者番号(new HokenshaNo(div.getTxtTeishutsuHokenshaNo().getValue()));
             画面項目.set整理番号(div.getTxtKaigoShikyuShinseishoSeiriBango4().getValue());
             画面項目.set履歴番号(div.getTxtRirekiBango().getValue());
+            画面項目.set申請年月日(rDateToFixibleDate(div.getTxtShinseiYMD().getValue()));
+            画面項目.set支給申請書整理番号_追加用(div.getTxtKaigoShikyuShinseishoSeiriBango1().getValue()
+                    .concat(div.getTxtKaigoShikyuShinseishoSeiriBango2().getValue())
+                    .concat(div.getTxtKaigoShikyuShinseishoSeiriBango3().getValue()));
+            画面項目.set支給申請書整理番号_更新用(RString.EMPTY.concat(div.getTxtKaigoShikyuShinseishoSeiriBango1().getValue())
+                    .concat(div.getTxtKaigoShikyuShinseishoSeiriBango2().getValue())
+                    .concat(div.getTxtKaigoShikyuShinseishoSeiriBango3().getValue())
+                    .concat(div.getTxtKaigoShikyuShinseishoSeiriBango4().getValue()));
+            画面項目.set国保支給申請書整理番号(RString.isNullOrEmpty(div.getTxtIryoShikyuShinseishoSeiriBango2().getValue())
+                    && RString.isNullOrEmpty(div.getTxtIryoShikyuShinseishoSeiriBango3().getValue())
+                    && RString.isNullOrEmpty(div.getTxtIryoShikyuShinseishoSeiriBango4().getValue())
+                    ? RString.EMPTY
+                    : RString.EMPTY.concat(div.getTxtIryoShikyuShinseishoSeiriBango1().getValue())
+                    .concat(div.getTxtIryoShikyuShinseishoSeiriBango2().getValue())
+                    .concat(div.getTxtIryoShikyuShinseishoSeiriBango3().getValue())
+                    .concat(div.getTxtIryoShikyuShinseishoSeiriBango4().getValue()));
+            画面項目.set支給申請形態(div.getDdlShikyuShinseiKeitai().getSelectedKey());
+            画面項目.set自己負担額証明書交付申請の有無(Collections.EMPTY_LIST.equals(div.getChkKofuShinseiUmu().getSelectedKeys()) ? RSTRING_ONE : RSTRING_TWO);
             RString 整理番号New = bussiness.getKogakuGassanShikyuShinseishoTorokuKoshin(高額合算申請書保持, 画面項目);
             if (div.getDgShinseiIchiran().getDataSource() != null) {
                 for (dgShinseiIchiran_Row row : div.getDgShinseiIchiran().getDataSource()) {
@@ -577,6 +598,13 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
     private void 排他解除(RString 前排他キー) {
         LockingKey key = new LockingKey(前排他キー);
         RealInitialLocker.release(key);
+    }
+
+    private FlexibleDate rDateToFixibleDate(RDate date) {
+        if (date == null || new RString(date.toString()).isEmpty()) {
+            return null;
+        }
+        return new FlexibleDate(date.toString());
     }
 
     private KogakuGassanShikyuShinseiTorokuAllPanelHandler getHandler(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {

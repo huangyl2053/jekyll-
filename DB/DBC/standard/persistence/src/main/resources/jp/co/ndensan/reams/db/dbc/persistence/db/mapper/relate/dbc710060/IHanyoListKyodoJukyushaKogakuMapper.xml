@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBC-3098-020 xushouyue -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc710060.IHanyoListKyodoJukyushaKogakuMapper">
+    <select resultOrdered="true" id="select共同受給者高額情報"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc710060.HanyoListKyodoJukyushaKogakuMybatisParameter"
+            resultMap="resultMap_HanyoListKyodoJukyushaKogaku" fetchSize="500">
+        <include refid="selectHanyoListKyodoJukyushaKogaku" />
+    </select>
+    <sql  id="selectKyodoShoriyoJukyushaIdoKogakuSofu">
+        SELECT 
+        * 
+        FROM 
+        rgdb."DbT3004KyodoShoriyoJukyushaIdoKogakuSofu"
+        WHERE 
+        1=1
+        <if test="異動区分s != null and 異動区分s.size() != 0">
+            AND "idoKubunCode" IN   
+            <foreach collection="異動区分s" item="異動区分" index="index" open="(" close=")" separator=",">
+                #{異動区分}
+            </foreach>
+        </if>
+        <if test="世帯所得区分s!=null and 世帯所得区分s.size()!=0">
+            AND "setaiShotokuKubunCode" IN
+            <foreach collection="世帯所得区分s" item="世帯所得区分" index="index" open="(" close=")" separator=",">
+                #{世帯所得区分}
+            </foreach>
+        </if>
+        <if test="所得区分s!=null and 所得区分s.size()!=0">
+            AND "shotokuKubunCode" IN
+            <foreach collection="所得区分s" item="所得区分" index="index" open="(" close=")" separator=",">
+                #{所得区分}
+            </foreach>
+        </if>
+        <if test="老齢年金受給区分s!=null and 老齢年金受給区分s.size()!=0">
+            AND "roureiFukushiNenkinJukyuAriFlag" IN
+            <foreach collection="老齢年金受給区分s" item="老齢年金受給区分" index="index" open="(" close=")" separator=",">
+                ${老齢年金受給区分}
+            </foreach>
+        </if>
+        <if test="利用者負担第2段階s!=null and 利用者負担第2段階s.size()!=0">
+            AND "riyoshaFutan2DankaiAriFlag" IN
+            <foreach collection="利用者負担第2段階s" item="利用者負担第2段階" index="index" open="(" close=")" separator=",">
+                ${利用者負担第2段階}
+            </foreach>
+        </if>
+        <if test="削除含める == false" >
+            AND "logicalDeletedFlag" = false
+        </if>
+        <if test="2 == 日付抽出区分" >                       
+            <if test="処理対象年月From != null and 処理対象年月From != ''" >
+                AND #{処理対象年月From} <![CDATA[<=]]> "sofuYM"
+            </if>
+            <if test="処理対象年月To != null and 処理対象年月To != ''" >
+                AND "sofuYM" <![CDATA[<=]]> #{処理対象年月To}
+            </if>
+            <if test="異動年月From != null and 異動年月From != ''" > 
+                AND #{異動年月From} <![CDATA[<=]]> SUBSTRING("idoYMD" FROM 1 FOR 6) 
+            </if>
+            <if test="異動年月To != null and 異動年月To != ''" > 
+                AND SUBSTRING("idoYMD" FROM 1 FOR 6)  <![CDATA[<=]]> #{異動年月To}                     
+            </if>
+        </if>
+    </sql>
+    
+    <sql id="selectHanyoListKyodoJukyushaKogaku">
+        WITH master AS (
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3004KyodoShoriyoJukyushaIdoKogakuSofuMapper.allColumns_DbT3004KyodoShoriyoJukyushaIdoKogakuSofu" />,
+        <include refid="allColumns_DbT1001HihokenshaDaicho" />
+        FROM
+        (<include refid="selectKyodoShoriyoJukyushaIdoKogakuSofu" />) AS "DbT3004KyodoShoriyoJukyushaIdoKogakuSofu"
+        INNER JOIN 
+        rgdb."DbT1001HihokenshaDaicho" AS "DbT1001HihokenshaDaicho"
+        ON 
+        "DbT1001HihokenshaDaicho"."hihokenshaNo" = "DbT3004KyodoShoriyoJukyushaIdoKogakuSofu"."hiHokenshaNo"
+        WHERE
+        1 = 1
+        <if test="1 == 日付抽出区分">
+            AND NOT EXISTS(
+            SELECT 1
+            FROM 
+            (<include refid="selectKyodoShoriyoJukyushaIdoKogakuSofu" />) AS "DbT3004HanyoListKyodoJukyushaKogaku2"
+            WHERE 
+            "DbT3004KyodoShoriyoJukyushaIdoKogakuSofu"."hiHokenshaNo" = "DbT3004HanyoListKyodoJukyushaKogaku2"."hiHokenshaNo"
+            AND "DbT3004KyodoShoriyoJukyushaIdoKogakuSofu"."idoYMD" <![CDATA[<]]> "DbT3004HanyoListKyodoJukyushaKogaku2"."idoYMD"
+            )
+        </if>
+        <if test="2 == 日付抽出区分">
+            <if test="各異動月の最新のみ == true">
+                AND NOT EXISTS(
+                SELECT 1
+                FROM 
+                (<include refid="selectKyodoShoriyoJukyushaIdoKogakuSofu" />) AS "DbT3004HanyoListKyodoJukyushaKogaku2"
+                WHERE 
+                "DbT3004KyodoShoriyoJukyushaIdoKogakuSofu"."hiHokenshaNo" = "DbT3004HanyoListKyodoJukyushaKogaku2"."hiHokenshaNo"
+                AND "DbT3004KyodoShoriyoJukyushaIdoKogakuSofu"."sofuYM" = "DbT3004HanyoListKyodoJukyushaKogaku2"."sofuYM"
+                AND "DbT3004KyodoShoriyoJukyushaIdoKogakuSofu"."idoYMD" <![CDATA[<]]> "DbT3004HanyoListKyodoJukyushaKogaku2"."idoYMD"
+                )
+            </if>
+        </if>
+        <if test="保険者コード !='' and 保険者コード != '000000'">
+            AND (
+            (       "DbT1001HihokenshaDaicho"."koikinaiJushochiTokureiFlag" <![CDATA[<>]]> '1'
+            AND "DbT1001HihokenshaDaicho"."shichosonCode" = #{保険者コード}
+            )
+            OR
+            (       "DbT1001HihokenshaDaicho"."koikinaiJushochiTokureiFlag" = '1'
+            AND "DbT1001HihokenshaDaicho"."koikinaiTokureiSochimotoShichosonCode" <![CDATA[<>]]> #{保険者コード}
+            )
+            )
+        </if>
+        )
+        SELECT 
+        master.*,
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
+        FROM
+        master AS master
+        INNER JOIN  
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> AS "ShikibetsuTaisho"
+        ON
+        "ShikibetsuTaisho"."shikibetsuCode" = master."dbT1001HihokenshaDaicho_shikibetsuCode"
+    </sql>
+    
+    <resultMap id="resultMap_HanyoListKyodoJukyushaKogaku" autoMapping="true"
+               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc710060.HanyoListKyodoJukyushaKogakuEntity">
+        <id column="dbT1001HihokenshaDaicho_hihokenshaNo"/>  
+        <association property="受給者異動高額" resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3004KyodoShoriyoJukyushaIdoKogakuSofuMapper.ResultMap_DbT3004KyodoShoriyoJukyushaIdoKogakuSofuEntity"/>
+        <association property="被保険者台帳管理" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.ResultMap_DbT1001HihokenshaDaichoEntity"/>
+        <association property="宛名" resultMap = "jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+    </resultMap> 
+    
+    <sql id="allColumns_DbT1001HihokenshaDaicho">
+        "DbT1001HihokenshaDaicho"."hihokenshaNo" as "dbT1001HihokenshaDaicho_hihokenshaNo",
+        "DbT1001HihokenshaDaicho"."idoYMD" as "dbT1001HihokenshaDaicho_idoYMD",
+        "DbT1001HihokenshaDaicho"."edaNo" as "dbT1001HihokenshaDaicho_edaNo",
+        "DbT1001HihokenshaDaicho"."idoJiyuCode" as "dbT1001HihokenshaDaicho_idoJiyuCode",
+        "DbT1001HihokenshaDaicho"."shichosonCode" as "dbT1001HihokenshaDaicho_shichosonCode",
+        "DbT1001HihokenshaDaicho"."shikibetsuCode" as "dbT1001HihokenshaDaicho_shikibetsuCode",
+        "DbT1001HihokenshaDaicho"."shikakuShutokuJiyuCode" as "dbT1001HihokenshaDaicho_shikakuShutokuJiyuCode",
+        "DbT1001HihokenshaDaicho"."shikakuShutokuYMD" as "dbT1001HihokenshaDaicho_shikakuShutokuYMD",
+        "DbT1001HihokenshaDaicho"."shikakuShutokuTodokedeYMD" as "dbT1001HihokenshaDaicho_shikakuShutokuTodokedeYMD",
+        "DbT1001HihokenshaDaicho"."ichigoShikakuShutokuYMD" as "dbT1001HihokenshaDaicho_ichigoShikakuShutokuYMD",
+        "DbT1001HihokenshaDaicho"."hihokennshaKubunCode" as "dbT1001HihokenshaDaicho_hihokennshaKubunCode",
+        "DbT1001HihokenshaDaicho"."shikakuSoshitsuJiyuCode" as "dbT1001HihokenshaDaicho_shikakuSoshitsuJiyuCode",
+        "DbT1001HihokenshaDaicho"."shikakuSoshitsuYMD" as "dbT1001HihokenshaDaicho_shikakuSoshitsuYMD",
+        "DbT1001HihokenshaDaicho"."shikakuSoshitsuTodokedeYMD" as "dbT1001HihokenshaDaicho_shikakuSoshitsuTodokedeYMD",
+        "DbT1001HihokenshaDaicho"."shikakuHenkoJiyuCode" as "dbT1001HihokenshaDaicho_shikakuHenkoJiyuCode",
+        "DbT1001HihokenshaDaicho"."shikakuHenkoYMD" as "dbT1001HihokenshaDaicho_shikakuHenkoYMD",
+        "DbT1001HihokenshaDaicho"."shikakuHenkoTodokedeYMD" as "dbT1001HihokenshaDaicho_shikakuHenkoTodokedeYMD",
+        "DbT1001HihokenshaDaicho"."jushochitokureiTekiyoJiyuCode" as "dbT1001HihokenshaDaicho_jushochitokureiTekiyoJiyuCode",
+        "DbT1001HihokenshaDaicho"."jushochitokureiTekiyoYMD" as "dbT1001HihokenshaDaicho_jushochitokureiTekiyoYMD",
+        "DbT1001HihokenshaDaicho"."jushochitokureiTekiyoTodokedeYMD" as "dbT1001HihokenshaDaicho_jushochitokureiTekiyoTodokedeYMD",
+        "DbT1001HihokenshaDaicho"."jushochitokureiKaijoJiyuCode" as "dbT1001HihokenshaDaicho_jushochitokureiKaijoJiyuCode",
+        "DbT1001HihokenshaDaicho"."jushochitokureiKaijoYMD" as "dbT1001HihokenshaDaicho_jushochitokureiKaijoYMD",
+        "DbT1001HihokenshaDaicho"."jushochitokureiKaijoTodokedeYMD" as "dbT1001HihokenshaDaicho_jushochitokureiKaijoTodokedeYMD",
+        "DbT1001HihokenshaDaicho"."jushochiTokureiFlag" as "dbT1001HihokenshaDaicho_jushochiTokureiFlag",
+        "DbT1001HihokenshaDaicho"."koikinaiJushochiTokureiFlag" as "dbT1001HihokenshaDaicho_koikinaiJushochiTokureiFlag",
+        "DbT1001HihokenshaDaicho"."koikinaiTokureiSochimotoShichosonCode" as "dbT1001HihokenshaDaicho_koikinaiTokureiSochimotoShichosonCode",
+        "DbT1001HihokenshaDaicho"."kyuShichosonCode" as "dbT1001HihokenshaDaicho_kyuShichosonCode",
+        "DbT1001HihokenshaDaicho"."logicalDeletedFlag" as "dbT1001HihokenshaDaicho_logicalDeletedFlag"
+    </sql>
+</mapper>
+
+
+<!--        WITH "DbT3004HanyoListKyodoJukyushaKogaku" AS (
+    SELECT 
+        * 
+    FROM 
+        rgdb."DbT3004KyodoShoriyoJukyushaIdoKogakuSofu"
+    WHERE 
+        1=1
+        <if test="異動区分s != null and 異動区分s.size() != 0">
+            AND "idoKubunCode" IN   
+            <foreach collection="異動区分s" item="異動区分" index="index" open="(" close=")" separator=",">
+                #{異動区分}
+            </foreach>
+        </if>
+        <if test="世帯所得区分s!=null and 世帯所得区分s.size()!=0">
+            AND "setaiShotokuKubunCode" IN
+            <foreach collection="世帯所得区分s" item="世帯所得区分" index="index" open="(" close=")" separator=",">
+                #{世帯所得区分}
+            </foreach>
+        </if>
+        <if test="所得区分s!=null and 所得区分s.size()!=0">
+            AND "shotokuKubunCode" IN
+            <foreach collection="所得区分s" item="所得区分" index="index" open="(" close=")" separator=",">
+                #{所得区分}
+            </foreach>
+        </if>
+        <if test="老齢年金受給区分s!=null and 老齢年金受給区分s.size()!=0">
+            AND "roureiFukushiNenkinJukyuAriFlag" IN
+            <foreach collection="老齢年金受給区分s" item="老齢年金受給区分" index="index" open="(" close=")" separator=",">
+                ${老齢年金受給区分}
+            </foreach>
+        </if>
+         <if test="利用者負担第2段階s!=null and 利用者負担第2段階s.size()!=0">
+            AND "riyoshaFutan2DankaiAriFlag" IN
+            <foreach collection="利用者負担第2段階s" item="利用者負担第2段階" index="index" open="(" close=")" separator=",">
+                ${利用者負担第2段階}
+            </foreach>
+        </if>
+        <if test="削除含める == false" >
+            AND "logicalDeletedFlag" = false
+        </if>
+        <if test="2 == 日付抽出区分" >                       
+            <if test="処理対象年月From != null and 処理対象年月From != ''" >
+                AND #{処理対象年月From} <![CDATA[<=]]> "sofuYM"
+            </if>
+            <if test="処理対象年月To != null and 処理対象年月To != ''" >
+                AND "sofuYM" <![CDATA[<=]]> #{処理対象年月To}
+            </if>
+            <if test="異動年月From != null and 異動年月From != ''" > 
+                AND #{異動年月From} <![CDATA[<=]]> SUBSTRING("idoYMD" FROM 1 FOR 6) 
+            </if>
+            <if test="異動年月To != null and 異動年月To != ''" > 
+                AND SUBSTRING("idoYMD" FROM 1 FOR 6)  <![CDATA[<=]]> #{異動年月To}                     
+            </if>
+        </if>
+)-->
