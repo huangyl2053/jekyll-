@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120870;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120870;
 
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kagoketteikohifutanshain.KohifutanshaDoMasterTorokuProcessParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.saishinsaketteihokenshainmasuta.SaishinsaKetteiManager;
