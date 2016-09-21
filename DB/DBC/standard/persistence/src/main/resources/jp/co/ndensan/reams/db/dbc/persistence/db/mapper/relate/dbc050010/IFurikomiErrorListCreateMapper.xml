@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 振込エラーリスト作成のマッピング用XMLです。 -->
+<!-- @reamsid_L DBC-5010-030 x_lilh -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc050010.IFurikomiErrorListCreateMapper">
+    <select id="select振込エラーリスト情報"
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.FurikomiDetailTempTableEntity" 
+            fetchSize="500" resultOrdered="true">
+    SELECT
+        振込明細.*
+    FROM "DbWT0510FurikomiMeisai" AS 振込明細
+        WHERE "shinseiDataFlag" = FALSE
+    ORDER BY
+        振込明細."hihokenshaNo",
+        振込明細."serviceTeikyoYM",
+        振込明細."dataKubun",
+        振込明細."seiriNo",
+        振込明細."rirekiNo"
+    </select>
+    
+     <select id="select処理結果確認リスト情報"
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.ShoriKekkaKakuninListTempTableEntity" 
+            fetchSize="500" resultOrdered="true">
+         SELECT
+            処理結果確認.*
+         FROM "DbWT0512ShoriKekkaKakuninList" AS 処理結果確認
+         ORDER BY
+         "errorKubun",
+         "shoKisaiHokenshaNo",
+         "hiHokenshaNo",
+         "key1",
+         "key2",
+         "key3",
+         "key4",
+         "key5"
+     </select>
+</mapper>

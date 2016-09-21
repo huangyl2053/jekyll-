@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
+import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
@@ -28,6 +30,8 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
+import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
+import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
  * バッチ設計_DBCMNF2002-631_介護給付費等請求額通知書情報（公費）取込のProcessのクラス
@@ -44,9 +48,11 @@ public class SeikyugakuTsuchishoKohiInProcess extends BatchKeyBreakBase<DbWT1511
     private static final ReportId ID = ReportIdDBC.DBC200067.getReportId();
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC200067");
     private static final int ZERO_INDEX = 0;
     private static final int ONE_INDEX = 1;
     private RDateTime システム日時;
+    private FileSpoolManager manager;
     private int index;
 
     @BatchWriter
@@ -67,7 +73,9 @@ public class SeikyugakuTsuchishoKohiInProcess extends BatchKeyBreakBase<DbWT1511
 
     @Override
     protected void createWriter() {
-        RString spoolWorkPath = Path.getTmpDirectoryPath();
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
+                EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        RString spoolWorkPath = manager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
         csvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
                 .setDelimiter(コンマ)

@@ -249,7 +249,7 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
                 source.listUpper_9 = 振込明細一時TBL.getServiceTeikyoYM().wareki().eraType(EraType.KANJI_RYAKU).
                         firstYear(FirstYear.GAN_NEN).separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
             }
-            RString 申請区分コード = 振込明細一時TBL.getShinseiKubunCode();
+            RString 申請区分コード = 振込明細一時TBL.getShinseiKubunCode().value();
             RString 申請区分名称 = RString.EMPTY;
             if (null != 申請区分コード && !申請区分コード.isEmpty()) {
                 申請区分名称 = NinteiShinseiShinseijiKubunCode.toValue(申請区分コード).get名称();
@@ -282,7 +282,7 @@ public class FurikomiMeisaiIchiranDetailEditor implements IFurikomiMeisaiIchiran
             }
             if (null != 振込明細一時TBL.getServiceTeikyoYM() && null != 振込明細一時TBL.getYokaigoJotaiKubunCode()) {
                 source.listLower_5 = YokaigoJotaiKubunSupport.toValue(振込明細一時TBL.getServiceTeikyoYM(),
-                        振込明細一時TBL.getYokaigoJotaiKubunCode()).getName();
+                        振込明細一時TBL.getYokaigoJotaiKubunCode().value()).getName();
             }
             if (null != 振込明細一時TBL.getNinteiYukoKikanShuryoYMD()) {
                 source.listLower_6 = 振込明細一時TBL.getNinteiYukoKikanShuryoYMD().wareki().eraType(EraType.KANJI_RYAKU).
