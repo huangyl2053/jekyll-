@@ -447,6 +447,10 @@ public enum ReportIdDBC {
      */
     DBC701009(new ReportId("DBC701009_HanyoListKagoMoshitate"), new RString("汎用リスト出力(過誤申立情報)")),
     /**
+     * DBC701010_HanyoList_KyufuKanriHyo
+     */
+    DBC701010(new ReportId("DBC701010_HanyoListKagoKekka"), new RString("汎用リスト出力(過誤結果情報)")),
+    /**
      * DBC701016_HanyoListKogakuGassanKeisanKekkaRenrakuHyo
      */
     DBC701016(new ReportId("DBC71016_HanyoListKogakuGassanKeisanKekkaRenrakuHyo"), new RString("汎用リスト出力(高額合算計算結果連絡票情報)")),

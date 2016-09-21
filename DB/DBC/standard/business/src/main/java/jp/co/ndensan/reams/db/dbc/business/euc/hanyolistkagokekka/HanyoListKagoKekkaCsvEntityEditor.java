@@ -54,6 +54,86 @@ public class HanyoListKagoKekkaCsvEntityEditor {
     private static final RString 定数_旧措置者 = new RString("旧措置者");
     private static final RString 定数_みなし = new RString("みなし");
     private static final RString SLASH = new RString("/");
+    private static final RString HEADER_連番 = new RString("連番");
+    private static final RString HEADER_識別コード = new RString("識別コード");
+    private static final RString HEADER_住民種別 = new RString("住民種別");
+    private static final RString HEADER_氏名 = new RString("氏名");
+    private static final RString HEADER_氏名カナ = new RString("氏名カナ");
+    private static final RString HEADER_生年月日 = new RString("生年月日");
+    private static final RString HEADER_年齢 = new RString("年齢");
+    private static final RString HEADER_性別 = new RString("性別");
+    private static final RString HEADER_続柄コード = new RString("続柄コード");
+    private static final RString HEADER_世帯コード = new RString("世帯コード");
+    private static final RString HEADER_世帯主名 = new RString("世帯主名");
+    private static final RString HEADER_住所コード = new RString("住所コード");
+    private static final RString HEADER_郵便番号 = new RString("郵便番号");
+    private static final RString HEADER_住所番地方書 = new RString("住所＋番地＋方書");
+    private static final RString HEADER_住所 = new RString("住所");
+    private static final RString HEADER_番地 = new RString("番地");
+    private static final RString HEADER_方書 = new RString("方書");
+    private static final RString HEADER_行政区コード = new RString("行政区コード");
+    private static final RString HEADER_行政区名 = new RString("行政区名");
+    private static final RString HEADER_地区１ = new RString("地区１");
+    private static final RString HEADER_地区２ = new RString("地区２");
+    private static final RString HEADER_地区３ = new RString("地区３");
+    private static final RString HEADER_連絡先１ = new RString("連絡先１");
+    private static final RString HEADER_連絡先２ = new RString("連絡先２");
+    private static final RString HEADER_登録異動日 = new RString("登録異動日");
+    private static final RString HEADER_登録事由 = new RString("登録事由");
+    private static final RString HEADER_登録届出日 = new RString("登録届出日");
+    private static final RString HEADER_住定異動日 = new RString("住定異動日");
+    private static final RString HEADER_住定事由 = new RString("住定事由");
+    private static final RString HEADER_住定届出日 = new RString("住定届出日");
+    private static final RString HEADER_消除異動日 = new RString("消除異動日");
+    private static final RString HEADER_消除事由 = new RString("消除事由");
+    private static final RString HEADER_消除届出日 = new RString("消除届出日");
+    private static final RString HEADER_転出入理由 = new RString("転出入理由");
+    private static final RString HEADER_前住所郵便番号 = new RString("前住所郵便番号");
+    private static final RString HEADER_前住所番地方書 = new RString("前住所＋番地＋方書");
+    private static final RString HEADER_前住所 = new RString("前住所");
+    private static final RString HEADER_前住所番地 = new RString("前住所番地");
+    private static final RString HEADER_前住所方書 = new RString("前住所方書");
+    private static final RString HEADER_市町村コード = new RString("市町村コード");
+    private static final RString HEADER_市町村名 = new RString("市町村名");
+    private static final RString HEADER_保険者コード = new RString("保険者コード");
+    private static final RString HEADER_保険者名 = new RString("保険者名");
+    private static final RString HEADER_空白 = new RString("空白");
+    private static final RString HEADER_被保険者番号 = new RString("被保険者番号");
+    private static final RString HEADER_資格取得事由 = new RString("資格取得事由");
+    private static final RString HEADER_資格取得日 = new RString("資格取得日");
+    private static final RString HEADER_資格取得届出日 = new RString("資格取得届出日");
+    private static final RString HEADER_喪失事由 = new RString("喪失事由");
+    private static final RString HEADER_資格喪失日 = new RString("資格喪失日");
+    private static final RString HEADER_資格喪失届日 = new RString("資格喪失届日");
+    private static final RString HEADER_資格区分 = new RString("資格区分");
+    private static final RString HEADER_住所地特例状態 = new RString("住所地特例状態");
+    private static final RString HEADER_資格_証記載保険者番号 = new RString("（資格）証記載保険者番号");
+    private static final RString HEADER_二次予防適用開始日 = new RString("二次予防適用開始日");
+    private static final RString HEADER_二次予防適用終了日 = new RString("二次予防適用終了日");
+    private static final RString HEADER_二次予防調査実施日 = new RString("二次予防調査実施日");
+    private static final RString HEADER_二次予防決定日 = new RString("二次予防決定日");
+    private static final RString HEADER_取扱年月 = new RString("取扱年月");
+    private static final RString HEADER_保険者区分 = new RString("保険者区分");
+    private static final RString HEADER_サービス提供年月 = new RString("サービス提供年月");
+    private static final RString HEADER_過誤事業者番号 = new RString("過誤事業者番号");
+    private static final RString HEADER_過誤事業者名 = new RString("過誤事業者名");
+    private static final RString HEADER_サービス種類 = new RString("サービス種類");
+    private static final RString HEADER_サービス種類名 = new RString("サービス種類名");
+    private static final RString HEADER_申立事由コード = new RString("申立事由コード");
+    private static final RString HEADER_申立事由 = new RString("申立事由");
+    private static final RString HEADER_単位数 = new RString("単位数");
+    private static final RString HEADER_保険者負担額 = new RString("保険者負担額");
+    private static final RString HEADER_公費受給者番号 = new RString("公費受給者番号");
+    private static final RString HEADER_給付_証記載保険者番号 = new RString("（給付）証記載保険者番号");
+    private static final RString HEADER_受給申請事由 = new RString("受給申請事由");
+    private static final RString HEADER_受給申請日 = new RString("受給申請日");
+    private static final RString HEADER_受給要介護度 = new RString("受給要介護度");
+    private static final RString HEADER_受給認定開始日 = new RString("受給認定開始日");
+    private static final RString HEADER_受給認定終了日 = new RString("受給認定終了日");
+    private static final RString HEADER_受給認定日 = new RString("受給認定日");
+    private static final RString HEADER_受給旧措置 = new RString("受給旧措置");
+    private static final RString HEADER_受給みなし更新認定 = new RString("受給みなし更新認定");
+    private static final RString HEADER_受給直近事由 = new RString("受給直近事由");
 
     private final HanyoListKagoKekkaEntity entity;
     private final HanyoListKagoKekkaProcessParameter param;
@@ -459,5 +539,182 @@ public class HanyoListKagoKekkaCsvEntityEditor {
             temp = temp.replace(SLASH, RString.EMPTY);
         }
         return temp;
+    }
+
+    /**
+     * CSVのHeaderを取得します。
+     *
+     * @return HanyoListKagoKekkaCsvEntity
+     */
+    public static HanyoListKagoKekkaCsvEntity getHeader() {
+        return new HanyoListKagoKekkaCsvEntity(
+                HEADER_連番,
+                HEADER_識別コード,
+                HEADER_住民種別,
+                HEADER_氏名,
+                HEADER_氏名カナ,
+                HEADER_生年月日,
+                HEADER_年齢,
+                HEADER_性別,
+                HEADER_続柄コード,
+                HEADER_世帯コード,
+                HEADER_世帯主名,
+                HEADER_住所コード,
+                HEADER_郵便番号,
+                HEADER_住所番地方書,
+                HEADER_住所,
+                HEADER_番地,
+                HEADER_方書,
+                HEADER_行政区コード,
+                HEADER_行政区名,
+                HEADER_地区１,
+                HEADER_地区２,
+                HEADER_地区３,
+                HEADER_連絡先１,
+                HEADER_連絡先２,
+                HEADER_登録異動日,
+                HEADER_登録事由,
+                HEADER_登録届出日,
+                HEADER_住定異動日,
+                HEADER_住定事由,
+                HEADER_住定届出日,
+                HEADER_消除異動日,
+                HEADER_消除事由,
+                HEADER_消除届出日,
+                HEADER_転出入理由,
+                HEADER_前住所郵便番号,
+                HEADER_前住所番地方書,
+                HEADER_前住所,
+                HEADER_前住所番地,
+                HEADER_前住所方書,
+                HEADER_市町村コード,
+                HEADER_市町村名,
+                HEADER_保険者コード,
+                HEADER_保険者名,
+                HEADER_空白,
+                HEADER_被保険者番号,
+                HEADER_資格取得事由,
+                HEADER_資格取得日,
+                HEADER_資格取得届出日,
+                HEADER_喪失事由,
+                HEADER_資格喪失日,
+                HEADER_資格喪失届日,
+                HEADER_資格区分,
+                HEADER_住所地特例状態,
+                HEADER_資格_証記載保険者番号,
+                HEADER_二次予防適用開始日,
+                HEADER_二次予防適用終了日,
+                HEADER_二次予防調査実施日,
+                HEADER_二次予防決定日,
+                HEADER_取扱年月,
+                HEADER_保険者区分,
+                HEADER_サービス提供年月,
+                HEADER_過誤事業者番号,
+                HEADER_過誤事業者名,
+                HEADER_サービス種類,
+                HEADER_サービス種類名,
+                HEADER_申立事由コード,
+                HEADER_申立事由,
+                HEADER_単位数,
+                HEADER_保険者負担額,
+                HEADER_公費受給者番号,
+                HEADER_給付_証記載保険者番号,
+                HEADER_受給申請事由,
+                HEADER_受給申請日,
+                HEADER_受給要介護度,
+                HEADER_受給認定開始日,
+                HEADER_受給認定終了日,
+                HEADER_受給認定日,
+                HEADER_受給旧措置,
+                HEADER_受給みなし更新認定,
+                HEADER_受給直近事由);
+    }
+
+    /**
+     * CSVのHeaderを取得します。
+     *
+     * @return HanyoListKagoKekkaNoRebanCsvEntity
+     */
+    public static HanyoListKagoKekkaNoRebanCsvEntity getNoReBanHeader() {
+        return new HanyoListKagoKekkaNoRebanCsvEntity(
+                HEADER_識別コード,
+                HEADER_住民種別,
+                HEADER_氏名,
+                HEADER_氏名カナ,
+                HEADER_生年月日,
+                HEADER_年齢,
+                HEADER_性別,
+                HEADER_続柄コード,
+                HEADER_世帯コード,
+                HEADER_世帯主名,
+                HEADER_住所コード,
+                HEADER_郵便番号,
+                HEADER_住所番地方書,
+                HEADER_住所,
+                HEADER_番地,
+                HEADER_方書,
+                HEADER_行政区コード,
+                HEADER_行政区名,
+                HEADER_地区１,
+                HEADER_地区２,
+                HEADER_地区３,
+                HEADER_連絡先１,
+                HEADER_連絡先２,
+                HEADER_登録異動日,
+                HEADER_登録事由,
+                HEADER_登録届出日,
+                HEADER_住定異動日,
+                HEADER_住定事由,
+                HEADER_住定届出日,
+                HEADER_消除異動日,
+                HEADER_消除事由,
+                HEADER_消除届出日,
+                HEADER_転出入理由,
+                HEADER_前住所郵便番号,
+                HEADER_前住所番地方書,
+                HEADER_前住所,
+                HEADER_前住所番地,
+                HEADER_前住所方書,
+                HEADER_市町村コード,
+                HEADER_市町村名,
+                HEADER_保険者コード,
+                HEADER_保険者名,
+                HEADER_空白,
+                HEADER_被保険者番号,
+                HEADER_資格取得事由,
+                HEADER_資格取得日,
+                HEADER_資格取得届出日,
+                HEADER_喪失事由,
+                HEADER_資格喪失日,
+                HEADER_資格喪失届日,
+                HEADER_資格区分,
+                HEADER_住所地特例状態,
+                HEADER_資格_証記載保険者番号,
+                HEADER_二次予防適用開始日,
+                HEADER_二次予防適用終了日,
+                HEADER_二次予防調査実施日,
+                HEADER_二次予防決定日,
+                HEADER_取扱年月,
+                HEADER_保険者区分,
+                HEADER_サービス提供年月,
+                HEADER_過誤事業者番号,
+                HEADER_過誤事業者名,
+                HEADER_サービス種類,
+                HEADER_サービス種類名,
+                HEADER_申立事由コード,
+                HEADER_申立事由,
+                HEADER_単位数,
+                HEADER_保険者負担額,
+                HEADER_公費受給者番号,
+                HEADER_給付_証記載保険者番号,
+                HEADER_受給申請事由,
+                HEADER_受給申請日,
+                HEADER_受給要介護度,
+                HEADER_受給認定開始日,
+                HEADER_受給認定終了日,
+                HEADER_受給認定日,
+                HEADER_受給旧措置,
+                HEADER_受給みなし更新認定,
+                HEADER_受給直近事由);
     }
 }
