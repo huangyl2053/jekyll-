@@ -72,8 +72,8 @@ public class TokuteiNyushoshahiHandler {
         List<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness> 特定入所者介護サービス費用list = get給付実績データ(business,
                 整理番号, 事業者番号, 様式番号, サービス提供.getYearMonth().toDateString());
         List<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness> dataToRepeat = getサービス提供年月list(business);
+        List<dgTokuteiNyushoshaKaigoServicehi_Row> rowList = new ArrayList<>();
         if (特定入所者介護サービス費用list != null && !特定入所者介護サービス費用list.isEmpty()) {
-            List<dgTokuteiNyushoshaKaigoServicehi_Row> rowList = new ArrayList<>();
             int 費用額合計 = 0;
             int 保険分請求額合計 = 0;
             int 利用者負担額合計 = 0;
@@ -122,8 +122,8 @@ public class TokuteiNyushoshahiHandler {
             後_合計row.setTxtKohi2Futangaku(get金額(new Decimal(後_公費２_負担額合計)));
             後_合計row.setTxtKohi3Futangaku(get金額(new Decimal(後_公費３_負担額合計)));
             rowList.add(後_合計row);
-            div.getDgTokuteiNyushoshaKaigoServicehi().setDataSource(rowList);
         }
+        div.getDgTokuteiNyushoshaKaigoServicehi().setDataSource(rowList);
         setGetsuBtn(dataToRepeat, new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().getサービス提供年月()
                 .getYearMonth().toDateString()));
     }
