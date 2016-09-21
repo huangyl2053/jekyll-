@@ -106,7 +106,13 @@
             "DbT3017KyufujissekiKihon"."serviceTeikyoYM",
             "DbT3017KyufujissekiKihon"."jigyoshoNo",
             "DbT3017KyufujissekiKihon"."toshiNo") AS T0
-            ON T9."shinsaYM" = 最新審査年月) AS T1
+            ON T9."shinsaYM" = 最新審査年月
+            AND T9."inputShikibetsuNo" = T0."DbT3017_inputShikibetsuNo"
+            AND T9."hiHokenshaNo" = T0."DbT3017_inputShikibetsuNo"
+            AND T9."serviceTeikyoYM" = T0."DbT3017_inputShikibetsuNo"
+            AND T9."jigyoshoNo" = T0."DbT3017_inputShikibetsuNo"
+            AND T9."toshiNo" = T0."DbT3017_inputShikibetsuNo"
+            ) AS T1
             LEFT OUTER JOIN
             rgdb."DbT3025KyufujissekiKyotakuService" AS T2
             ON T1."inputShikibetsuNo" = T2."inputShikibetsuNo"
@@ -168,7 +174,13 @@
             "DbT3017KyufujissekiKihon"."serviceTeikyoYM",
             "DbT3017KyufujissekiKihon"."jigyoshoNo",
             "DbT3017KyufujissekiKihon"."toshiNo") AS T0
-            ON T9."shinsaYM" = 最新審査年月) AS T1
+            ON T9."shinsaYM" = 最新審査年月
+            AND T9."inputShikibetsuNo" = T0."DbT3017_inputShikibetsuNo"
+            AND T9."hiHokenshaNo" = T0."DbT3017_inputShikibetsuNo"
+            AND T9."serviceTeikyoYM" = T0."DbT3017_inputShikibetsuNo"
+            AND T9."jigyoshoNo" = T0."DbT3017_inputShikibetsuNo"
+            AND T9."toshiNo" = T0."DbT3017_inputShikibetsuNo"
+            ) AS T1
             LEFT OUTER JOIN
             rgdb."DbT3029KyufujissekiTokuteiNyushosyaKaigoServiceHiyo" AS T2
             ON T1."inputShikibetsuNo" = T2."inputShikibetsuNo"
@@ -457,7 +469,7 @@
         (SELECT 
         "取得項目"."serviceMeisho",
         "取得項目"."serviceShuruiCode",
-        MAX("取得項目"."serviceKomokuCode") AS "MAX_serviceKomokuCode"
+        MIN("取得項目"."serviceKomokuCode") AS "MIN_serviceKomokuCode"
         FROM "取得項目"
         GROUP BY
         "取得項目"."serviceMeisho",
@@ -466,7 +478,7 @@
         ) AS "取得項目2"
         ON "取得項目1"."serviceMeisho" = "取得項目2"."serviceMeisho"
         AND "取得項目1"."serviceShuruiCode" = "取得項目2"."serviceShuruiCode"
-        AND "取得項目1"."serviceKomokuCode" = "取得項目2"."MAX_serviceKomokuCode"
+        AND "取得項目1"."serviceKomokuCode" = "取得項目2"."MIN_serviceKomokuCode"
         ) AS "T9"
         ON "DbWT3470chohyouShutsuryokuyou"."serviceShuruiCode" = "T9"."serviceShuruiCode"
         AND "DbWT3470chohyouShutsuryokuyou"."sortYouKomokuCode" = "T9"."T1_sortYouKomokuCode"
