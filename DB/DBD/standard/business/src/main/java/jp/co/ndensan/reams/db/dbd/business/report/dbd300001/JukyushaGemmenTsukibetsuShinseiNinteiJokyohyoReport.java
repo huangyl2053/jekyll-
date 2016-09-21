@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.jukyushagemmenjisshijokyo.Juk
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd300001.JukyushaGemmenTsukibetsuShinseiNinteiJokyohyoReportSource;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -23,7 +22,6 @@ public final class JukyushaGemmenTsukibetsuShinseiNinteiJokyohyoReport extends
 
     private final Association association;
     private final FlexibleYear 対象年度;
-    private final RString 市町村コード;
     private final JukyushaGemmenJisshiJokyoEntity データリスト;
 
     /**
@@ -31,14 +29,12 @@ public final class JukyushaGemmenTsukibetsuShinseiNinteiJokyohyoReport extends
      *
      * @param association Association
      * @param 対象年度 FlexibleDate
-     * @param 市町村コード RString
      * @param データリスト JukyushaGemmenJisshiJokyoEntity
      */
     public JukyushaGemmenTsukibetsuShinseiNinteiJokyohyoReport(Association association, FlexibleYear 対象年度,
-            RString 市町村コード, JukyushaGemmenJisshiJokyoEntity データリスト) {
+            JukyushaGemmenJisshiJokyoEntity データリスト) {
         this.association = association;
         this.対象年度 = 対象年度;
-        this.市町村コード = 市町村コード;
         this.データリスト = データリスト;
     }
 
@@ -50,7 +46,7 @@ public final class JukyushaGemmenTsukibetsuShinseiNinteiJokyohyoReport extends
     @Override
     public void writeBy(ReportSourceWriter<JukyushaGemmenTsukibetsuShinseiNinteiJokyohyoReportSource> writer) {
         IJukyushaGemmenTsukibetsuShinseiNinteiJokyohyoEditor bodyEditor
-                = new JukyushaGemmenTsukibetsuShinseiNinteiJokyohyoEditor(association, 対象年度, 市町村コード, データリスト);
+                = new JukyushaGemmenTsukibetsuShinseiNinteiJokyohyoEditor(association, 対象年度, データリスト);
         IJukyushaGemmenTsukibetsuShinseiNinteiJokyohyoBuilder builder
                 = new JukyushaGemmenTsukibetsuShinseiNinteiJokyohyoBuilder(bodyEditor);
         writer.writeLine(builder);

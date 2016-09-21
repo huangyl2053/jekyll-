@@ -426,7 +426,7 @@ public class SaishinsaMoshitateTourokuPanelHandler {
             List<KyufuJissekiGaitoshaBusiness> 給付実績一覧) {
         SaishinsaMoshitateTourokuCollect collect = new SaishinsaMoshitateTourokuCollect();
         collect.set被保険者番号(div.getSearchToKyufujissekiPanel().getTxtHihoNo().getValue());
-        collect.set事業所番号(div.getSearchToKyufujissekiPanel().getTextBox1().getValue());
+        collect.set事業所番号(div.getCcdJigyoshaSentaku().getNyuryokuShisetsuKodo());
         collect.set保険者番号(get保険者リストの値());
         if (div.getSearchToKyufujissekiPanel().getTxtTeikyoYMRange().getFromValue() != null) {
             collect.set提供年月開始(div.getSearchToKyufujissekiPanel().getTxtTeikyoYMRange().getFromValue()
@@ -444,6 +444,21 @@ public class SaishinsaMoshitateTourokuPanelHandler {
             collect.set一覧モード(給付実績該当者一覧モード);
         }
         div.setHdn一覧検索条件(DataPassingConverter.serialize(collect));
+    }
+
+    /**
+     * 画面情報をクリアします。
+     */
+    public void clear() {
+        div.getTextBox2().clearValue();
+        div.getTextBox3().clearValue();
+        div.getTextBox5().clearValue();
+        div.getTextBox6().clearValue();
+        div.getTextBox7().clearValue();
+        div.getTextBox11().clearValue();
+        div.getTextBox12().clearValue();
+        div.getRadioButton1().clearSelectedItem();
+        div.getTextBoxDate1().clearValue();
     }
 
     private PersonalData toPersonalData(ShikibetsuCode 識別コード, HihokenshaNo 被保険者番号) {

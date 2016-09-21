@@ -25,11 +25,8 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
  */
 public class JukyushaGemmenTsukibetsuShinseiNinteiJokyohyoEditor implements IJukyushaGemmenTsukibetsuShinseiNinteiJokyohyoEditor {
 
-    private static final RString 全て = new RString("全て");
-
     private final Association association;
     private final FlexibleYear 対象年度;
-    private final RString 市町村コード;
     private final JukyushaGemmenJisshiJokyoEntity データリスト;
 
     /**
@@ -37,14 +34,12 @@ public class JukyushaGemmenTsukibetsuShinseiNinteiJokyohyoEditor implements IJuk
      *
      * @param association Association
      * @param 対象年度 FlexibleDate
-     * @param 市町村コード RString
      * @param データリスト JukyushaGemmenJisshiJokyoEntity
      */
     public JukyushaGemmenTsukibetsuShinseiNinteiJokyohyoEditor(Association association, FlexibleYear 対象年度,
-            RString 市町村コード, JukyushaGemmenJisshiJokyoEntity データリスト) {
+            JukyushaGemmenJisshiJokyoEntity データリスト) {
         this.association = association;
         this.対象年度 = 対象年度;
-        this.市町村コード = 市町村コード;
         this.データリスト = データリスト;
     }
 
@@ -61,14 +56,14 @@ public class JukyushaGemmenTsukibetsuShinseiNinteiJokyohyoEditor implements IJuk
             source.nendo = this.対象年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).toDateString();
         }
         source.printTimeStamp = get印刷日時();
-        if (全て.equals(this.市町村コード) || this.市町村コード.isEmpty()) {
-            source.hokenshaNo = this.association.getLasdecCode_().value();
-            source.hokenshaName = this.association.get市町村名();
-        } else {
-            source.hokenshaNo = this.市町村コード;
-            //TODO QA 市町村コードに対応する市町村名がどう取得できますか
-//            source.hokenshaName =
-        }
+        //TODO バッチが実装していない、完成したら、この分はバッチで実装します。
+//        if (全て.equals(this.市町村コード.value()) || this.市町村コード.isEmpty()) {
+//            source.hokenshaNo = this.association.getLasdecCode_().value();
+//            source.hokenshaName = this.association.get市町村名();
+//        } else {
+//            source.hokenshaNo = this.市町村コード.value();
+//            source.hokenshaName = AssociationFinderFactory.createInstance().getAssociation(this.市町村コード).get市町村名();
+//        }
     }
 
     private void set出力内容(JukyushaGemmenTsukibetsuShinseiNinteiJokyohyoReportSource source) {
