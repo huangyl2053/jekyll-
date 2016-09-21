@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.io.csv.ListToObjectMappingHelper;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -193,7 +194,7 @@ public class KogakuGassanKyufuJissekiInGetFileProcess extends BatchProcessBase<R
         dbWT0001TempEntity.setOldShichosonCode(LasdecCode.EMPTY);
         dbWT0001TempEntity.setHenkanHihokenshaNo(HihokenshaNo.EMPTY);
         dbWT0001TempEntity.setHihokenshaNo(new HihokenshaNo(被保険者番号));
-        dbWT0001TempEntity.setShichosonCode(LasdecCode.EMPTY);
+        dbWT0001TempEntity.setShikibetsuCode(ShikibetsuCode.EMPTY);
         dbWT0001TempEntity.setKannaiKangaiKubun(RString.EMPTY);
         dbWT0001TempEntity.setYubinNo(RString.EMPTY);
         dbWT0001TempEntity.setChoikiCode(RString.EMPTY);
