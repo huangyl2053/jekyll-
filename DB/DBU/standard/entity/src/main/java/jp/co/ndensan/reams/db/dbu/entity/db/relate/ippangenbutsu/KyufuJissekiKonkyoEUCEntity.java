@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.OnNextSchema;
 @lombok.Getter
 @lombok.Setter
 @OnNextSchema("rgdb")
-public class KyufuJissekiKonkyoEUCEntity implements IKyufuJissekiKonkyoDBU011200EUCEntity {
+public class KyufuJissekiKonkyoEUCEntity implements IKyufuJissekiKonkyoEUCEntity {
 
     @CsvField(order = 1, name = "データ区分")
     private RString データ区分;

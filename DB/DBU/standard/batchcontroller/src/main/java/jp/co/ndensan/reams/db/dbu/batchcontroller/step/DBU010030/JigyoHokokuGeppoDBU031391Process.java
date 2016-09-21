@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBU-5540-030 suguangjun
  */
-public class JigyoHokokuGeppoDBU011200Process extends BatchProcessBase<KyufuJissekiKonkyoRelateEntity> {
+public class JigyoHokokuGeppoDBU031391Process extends BatchProcessBase<KyufuJissekiKonkyoRelateEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.ippangenbutsu."
             + "IJigyoHokokuGeppoIppanGenbutsuMapper.getResultKyufuJisseki");

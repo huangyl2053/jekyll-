@@ -5,5 +5,5 @@ package jp.co.ndensan.reams.db.dbu.entity.db.relate.ippangenbutsu;
  *
  * @reamsid_L DBU-5540-030 suguangjun
  */
-public interface IKyufuJissekiKonkyoDBU011200EUCEntity {
+public interface IKyufuJissekiKonkyoEUCEntity {
 }

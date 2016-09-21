@@ -10,6 +10,11 @@ import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010030.JigyoHokokuGepp
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010030.JigyoHokokuGeppoDBU011392Process;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010030.JigyoHokokuGeppoDBU011393Process;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010030.JigyoHokokuGeppoDBU011400Process;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010030.JigyoHokokuGeppoDBU031200Process;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010030.JigyoHokokuGeppoDBU031391Process;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010030.JigyoHokokuGeppoDBU031392Process;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010030.JigyoHokokuGeppoDBU031393Process;
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010030.JigyoHokokuGeppoDBU031400Process;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010030.JigyoHokokuGeppoDataTorokuProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010030.JigyoHokokuGeppoReportDBU300006Process;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010030.JigyoHokokuGeppoReportDBU300007Process;
@@ -20,7 +25,11 @@ import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.PrintControlKubun;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
+import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
+import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
  * 事業報告月報_一般現物のバッチフロークラスです。
@@ -36,55 +45,60 @@ public class DBU010030_JigyoHokokuGeppo_IppanGenbutsu extends BatchFlowBase<DBU0
     private static final String 根拠CSV作成_DBU011391 = "根拠CSV作成_DBU011391";
     private static final String 根拠CSV作成_DBU011392 = "根拠CSV作成_DBU011392";
     private static final String 根拠CSV作成_DBU011393 = "根拠CSV作成_DBU011393";
+    private static final String 根拠CSV作成_DBU031200 = "根拠CSV作成_DBU031200";
+    private static final String 根拠CSV作成_DBU031400 = "根拠CSV作成_DBU031400";
+    private static final String 根拠CSV作成_DBU031391 = "根拠CSV作成_DBU031391";
+    private static final String 根拠CSV作成_DBU031392 = "根拠CSV作成_DBU031392";
+    private static final String 根拠CSV作成_DBU031393 = "根拠CSV作成_DBU031393";
     private static final String 事業報告統計データ登録 = "事業報告統計データ登録";
     private static final String 新様式一般状況 = "新様式一般状況";
     private static final String 介護保険事業状況報告資料 = "介護保険事業状況報告資料";
-    private static final RString 集計番号_DBU011200 = new RString("DBU011200");
-    private static final RString 集計番号_DBU011400 = new RString("DBU011400");
-    private static final RString 集計番号_DBU011391 = new RString("DBU011391");
-    private static final RString 集計番号_DBU011392 = new RString("DBU011392");
-    private static final RString 集計番号_DBU011393 = new RString("DBU011393");
+    private DBU010030_JigyoHokokuGeppo_IppanGenbutsuParamter parameter;
+    private FileSpoolManager manager;
 
     @Override
     protected void defineFlow() {
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
+                new EucEntityId("DBU011393"), UzUDE0831EucAccesslogFileType.Csv);
+        parameter = getParameter();
+        parameter.setCsvFilePath(manager.getEucOutputDirectry());
+        parameter.setManager(manager);
         if (PrintControlKubun.集計のみ.getコード().equals(getParameter().getプリントコントロール区分())) {
             executeStep(事業報告統計元データ);
             executeStep(帳票出力_処理確認リスト);
-            if (集計番号_DBU011200.equals(getParameter().get作成CSVファイルID())) {
+            if (new RString("1").equals(getParameter().get給付集計区分())) {
                 executeStep(根拠CSV作成_DBU011200);
-            }
-            if (集計番号_DBU011400.equals(getParameter().get作成CSVファイルID())) {
                 executeStep(根拠CSV作成_DBU011400);
-            }
-            if (集計番号_DBU011391.equals(getParameter().get作成CSVファイルID())) {
                 executeStep(根拠CSV作成_DBU011391);
-            }
-            if (集計番号_DBU011392.equals(getParameter().get作成CSVファイルID())) {
                 executeStep(根拠CSV作成_DBU011392);
-            }
-            if (集計番号_DBU011393.equals(getParameter().get作成CSVファイルID())) {
                 executeStep(根拠CSV作成_DBU011393);
+            } else if (new RString("2").equals(getParameter().get給付集計区分())) {
+                executeStep(根拠CSV作成_DBU031200);
+                executeStep(根拠CSV作成_DBU031400);
+                executeStep(根拠CSV作成_DBU031391);
+                executeStep(根拠CSV作成_DBU031392);
+                executeStep(根拠CSV作成_DBU031393);
             }
             executeStep(事業報告統計データ登録);
         } else if (PrintControlKubun.集計後印刷.getコード().equals(getParameter().getプリントコントロール区分())) {
             executeStep(事業報告統計元データ);
             executeStep(帳票出力_処理確認リスト);
-            if (集計番号_DBU011200.equals(getParameter().get作成CSVファイルID())) {
+            if (new RString("1").equals(getParameter().get給付集計区分())) {
                 executeStep(根拠CSV作成_DBU011200);
-            }
-            if (集計番号_DBU011400.equals(getParameter().get作成CSVファイルID())) {
                 executeStep(根拠CSV作成_DBU011400);
-            }
-            if (集計番号_DBU011391.equals(getParameter().get作成CSVファイルID())) {
                 executeStep(根拠CSV作成_DBU011391);
-            }
-            if (集計番号_DBU011392.equals(getParameter().get作成CSVファイルID())) {
                 executeStep(根拠CSV作成_DBU011392);
-            }
-            if (集計番号_DBU011393.equals(getParameter().get作成CSVファイルID())) {
                 executeStep(根拠CSV作成_DBU011393);
+            } else if (new RString("2").equals(getParameter().get給付集計区分())) {
+                executeStep(根拠CSV作成_DBU031200);
+                executeStep(根拠CSV作成_DBU031400);
+                executeStep(根拠CSV作成_DBU031391);
+                executeStep(根拠CSV作成_DBU031392);
+                executeStep(根拠CSV作成_DBU031393);
             }
             executeStep(事業報告統計データ登録);
+            executeStep(新様式一般状況);
+            executeStep(介護保険事業状況報告資料);
         } else if (PrintControlKubun.過去分の印刷.getコード().equals(getParameter().getプリントコントロール区分())) {
             executeStep(新様式一般状況);
             executeStep(介護保険事業状況報告資料);
@@ -94,7 +108,7 @@ public class DBU010030_JigyoHokokuGeppo_IppanGenbutsu extends BatchFlowBase<DBU0
     /**
      * temp事業報告統計元データ作成処理です。
      *
-     * @return JigyoHokokuDataTorokuProcess
+     * @return TempJigyoHokokuTokeiMotoDataProcess
      */
     @Step(事業報告統計元データ)
     protected IBatchFlowCommand create事業報告統計元データプロセス() {
@@ -104,7 +118,7 @@ public class DBU010030_JigyoHokokuGeppo_IppanGenbutsu extends BatchFlowBase<DBU0
     /**
      * 処理確認リスト帳票の出力処理です。
      *
-     * @return JigyoHokokuDataTorokuProcess
+     * @return ShoriKekkaKakuninListProcess
      */
     @Step(帳票出力_処理確認リスト)
     protected IBatchFlowCommand create処理確認リスト帳票プロセス() {
@@ -114,7 +128,7 @@ public class DBU010030_JigyoHokokuGeppo_IppanGenbutsu extends BatchFlowBase<DBU0
     /**
      * 根拠CSV作成_DBU011200の出力処理です。
      *
-     * @return JigyoHokokuDataTorokuProcess
+     * @return JigyoHokokuGeppoDBU011200Process
      */
     @Step(根拠CSV作成_DBU011200)
     protected IBatchFlowCommand create根拠CSV作成_DBU011200プロセス() {
@@ -124,7 +138,7 @@ public class DBU010030_JigyoHokokuGeppo_IppanGenbutsu extends BatchFlowBase<DBU0
     /**
      * 根拠CSV作成_DBU011400の出力処理です。
      *
-     * @return JigyoHokokuDataTorokuProcess
+     * @return JigyoHokokuGeppoDBU011400Process
      */
     @Step(根拠CSV作成_DBU011400)
     protected IBatchFlowCommand create根拠CSV作成_DBU011400プロセス() {
@@ -134,7 +148,7 @@ public class DBU010030_JigyoHokokuGeppo_IppanGenbutsu extends BatchFlowBase<DBU0
     /**
      * 根拠CSV作成_DBU011391の出力処理です。
      *
-     * @return JigyoHokokuDataTorokuProcess
+     * @return JigyoHokokuGeppoDBU011391Process
      */
     @Step(根拠CSV作成_DBU011391)
     protected IBatchFlowCommand create根拠CSV作成_DBU011391プロセス() {
@@ -144,7 +158,7 @@ public class DBU010030_JigyoHokokuGeppo_IppanGenbutsu extends BatchFlowBase<DBU0
     /**
      * 根拠CSV作成_DBU011392の出力処理です。
      *
-     * @return JigyoHokokuDataTorokuProcess
+     * @return JigyoHokokuGeppoDBU011392Process
      */
     @Step(根拠CSV作成_DBU011392)
     protected IBatchFlowCommand create根拠CSV作成_DBU011392プロセス() {
@@ -154,7 +168,7 @@ public class DBU010030_JigyoHokokuGeppo_IppanGenbutsu extends BatchFlowBase<DBU0
     /**
      * 根拠CSV作成_DBU011393の出力処理です。
      *
-     * @return JigyoHokokuDataTorokuProcess
+     * @return JigyoHokokuGeppoDBU011393Process
      */
     @Step(根拠CSV作成_DBU011393)
     protected IBatchFlowCommand create根拠CSV作成_DBU011393プロセス() {
@@ -162,9 +176,59 @@ public class DBU010030_JigyoHokokuGeppo_IppanGenbutsu extends BatchFlowBase<DBU0
     }
 
     /**
+     * 根拠CSV作成_DBU031200の出力処理です。
+     *
+     * @return JigyoHokokuGeppoDBU031200Process
+     */
+    @Step(根拠CSV作成_DBU031200)
+    protected IBatchFlowCommand create根拠CSV作成_DBU031200プロセス() {
+        return loopBatch(JigyoHokokuGeppoDBU031200Process.class).arguments(getParameter().toProcessParamter()).define();
+    }
+
+    /**
+     * 根拠CSV作成_DBU031400の出力処理です。
+     *
+     * @return JigyoHokokuGeppoDBU031400Process
+     */
+    @Step(根拠CSV作成_DBU031400)
+    protected IBatchFlowCommand create根拠CSV作成_DBU031400プロセス() {
+        return loopBatch(JigyoHokokuGeppoDBU031400Process.class).arguments(getParameter().toProcessParamter()).define();
+    }
+
+    /**
+     * 根拠CSV作成_DBU031391の出力処理です。
+     *
+     * @return JigyoHokokuGeppoDBU031391Process
+     */
+    @Step(根拠CSV作成_DBU031391)
+    protected IBatchFlowCommand create根拠CSV作成_DBU031391プロセス() {
+        return loopBatch(JigyoHokokuGeppoDBU031391Process.class).arguments(getParameter().toProcessParamter()).define();
+    }
+
+    /**
+     * 根拠CSV作成_DBU031392の出力処理です。
+     *
+     * @return JigyoHokokuGeppoDBU031392Process
+     */
+    @Step(根拠CSV作成_DBU031392)
+    protected IBatchFlowCommand create根拠CSV作成_DBU031392プロセス() {
+        return loopBatch(JigyoHokokuGeppoDBU031392Process.class).arguments(getParameter().toProcessParamter()).define();
+    }
+
+    /**
+     * 根拠CSV作成_DBU031393の出力処理です。
+     *
+     * @return JigyoHokokuGeppoDBU031393Process
+     */
+    @Step(根拠CSV作成_DBU031393)
+    protected IBatchFlowCommand create根拠CSV作成_DBU031393プロセス() {
+        return loopBatch(JigyoHokokuGeppoDBU031393Process.class).arguments(getParameter().toProcessParamter()).define();
+    }
+
+    /**
      * 事業報告統計データ登録処理です。
      *
-     * @return JigyoHokokuDataTorokuProcess
+     * @return JigyoHokokuGeppoDataTorokuProcess
      */
     @Step(事業報告統計データ登録)
     protected IBatchFlowCommand create事業報告統計データ登録プロセス() {
@@ -174,7 +238,7 @@ public class DBU010030_JigyoHokokuGeppo_IppanGenbutsu extends BatchFlowBase<DBU0
     /**
      * 新様式一般状況の出力処理です。
      *
-     * @return JigyoHokokuDataTorokuProcess
+     * @return JigyoHokokuGeppoReportDBU300006Process
      */
     @Step(新様式一般状況)
     protected IBatchFlowCommand create新様式一般状況帳票プロセス() {
@@ -184,7 +248,7 @@ public class DBU010030_JigyoHokokuGeppo_IppanGenbutsu extends BatchFlowBase<DBU0
     /**
      * 介護保険事業状況報告資料の出力処理です。
      *
-     * @return JigyoHokokuDataTorokuProcess
+     * @return JigyoHokokuGeppoReportDBU300007Process
      */
     @Step(介護保険事業状況報告資料)
     protected IBatchFlowCommand create介護保険事業状況報告資料帳票プロセス() {
