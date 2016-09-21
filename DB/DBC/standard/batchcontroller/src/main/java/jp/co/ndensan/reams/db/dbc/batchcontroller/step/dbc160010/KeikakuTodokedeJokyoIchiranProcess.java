@@ -142,7 +142,7 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
                 ReportIdDBC.DBC200060.getReportId(), processParameter.getShutsuryokujunId());
         if (並び順 != null) {
             出力順 = MyBatisOrderByClauseCreator.create(
-                    KeikakuTodokedeJokyoIchiranOrder.class, 並び順).replace(ORDER_BY, RString.EMPTY);
+                    KeikakuTodokedeJokyoIchiranOrder.class, 並び順).replace(ORDER_BY, EUC_WRITER_DELIMITER);
             for (ISetSortItem item : 並び順.get設定項目リスト()) {
                 if (item.is改頁項目()) {
                     breakItemIds.add(item.get項目ID());

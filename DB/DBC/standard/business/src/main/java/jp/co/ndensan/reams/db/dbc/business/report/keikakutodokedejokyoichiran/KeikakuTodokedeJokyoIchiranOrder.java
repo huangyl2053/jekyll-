@@ -18,35 +18,35 @@ public enum KeikakuTodokedeJokyoIchiranOrder implements IReportItems {
     /**
      * 郵便番号です。
      */
-    郵便番号(new RString("0001"), new RString(""), new RString("宛名.\"yubinNo\"")),
+    郵便番号(new RString("0001"), new RString(""), new RString("ShikibetsuTaisho.\"yubinNo\"")),
     /**
      * 町域コード です。
      */
-    町域コード(new RString("0002"), new RString(""), new RString("宛名.\"choikiCode\"")),
+    町域コード(new RString("0002"), new RString(""), new RString("ShikibetsuTaisho.\"choikiCode\"")),
     /**
      * 番地コード です。
      */
-    番地コード(new RString("0003"), new RString(""), new RString("宛名.\"banchiCode1\"")),
+    番地コード(new RString("0003"), new RString(""), new RString("ShikibetsuTaisho.\"banchiCode1\"")),
     /**
      * 行政区コード です。
      */
-    行政区コード(new RString("0004"), new RString(""), new RString("宛名.\"gyoseikuCode\"")),
+    行政区コード(new RString("0004"), new RString(""), new RString("ShikibetsuTaisho.\"gyoseikuCode\"")),
     /**
      * 識別コード です。
      */
-    識別コード(new RString("0009"), new RString(""), new RString("宛名.\"shikibetsuCode\"")),
+    識別コード(new RString("0009"), new RString(""), new RString("ShikibetsuTaisho.\"shikibetsuCode\"")),
     /**
      * 氏名５０音カナ です。
      */
-    氏名５０音カナ(new RString("0010"), new RString(""), new RString("宛名.\"kanaMeisho\"")),
+    氏名５０音カナ(new RString("0010"), new RString(""), new RString("ShikibetsuTaisho.\"kanaMeisho\"")),
     /**
      * 生年月日 です。
      */
-    生年月日(new RString("0012"), new RString(""), new RString("宛名.\"seinengappiYMD\"")),
+    生年月日(new RString("0012"), new RString(""), new RString("ShikibetsuTaisho.\"seinengappiYMD\"")),
     /**
      * 性別 です。
      */
-    性別(new RString("0013"), new RString(""), new RString("宛名.\"seibetsuCode\"")),
+    性別(new RString("0013"), new RString(""), new RString("ShikibetsuTaisho.\"seibetsuCode\"")),
     /**
      * 市町村コード です。
      */
