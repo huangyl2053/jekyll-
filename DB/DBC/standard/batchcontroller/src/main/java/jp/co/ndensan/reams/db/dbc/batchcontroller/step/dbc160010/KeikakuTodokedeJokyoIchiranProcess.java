@@ -189,7 +189,7 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
                 RString sec = new RString(time.toString()).substringReturnAsPossible(INDEX_6, INDEX_8);
                 RString timeFormat = hour.concat(定値_時).concat(min).concat(定値_分).concat(sec).concat(定値_秒);
                 作成日時 = システム日付.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                        .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(RString.FULL_SPACE).concat(timeFormat);
+                        .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(timeFormat);
                 flag = false;
             } else {
                 作成日時 = RString.EMPTY;
@@ -209,7 +209,7 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
                 RString sec = new RString(time.toString()).substringReturnAsPossible(INDEX_6, INDEX_8);
                 RString timeFormat = hour.concat(定値_時).concat(min).concat(定値_分).concat(sec).concat(定値_秒);
                 作成日時 = システム日付.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                        .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(RString.FULL_SPACE).concat(timeFormat);
+                        .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString().concat(timeFormat);
                 flag = false;
             } else {
                 作成日時 = RString.EMPTY;
