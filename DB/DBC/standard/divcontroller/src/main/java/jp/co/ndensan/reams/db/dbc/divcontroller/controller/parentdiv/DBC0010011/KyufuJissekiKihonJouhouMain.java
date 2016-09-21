@@ -62,7 +62,7 @@ public class KyufuJissekiKihonJouhouMain {
         getHandler(div).onLoad(サービス提供年月,
                 識別番号検索キー, 識別番号管理データ, 給付実績基本情報,
                 給付実績ヘッダ情報2, 給付実績基本, get事業所名称(給付実績基本, サービス提供年月),
-                get給付分類区分(給付実績基本, サービス提供年月));
+                get給付分類区分(給付実績基本, サービス提供年月), 整理番号);
         div.getKyufuJissekiKihonGokeiPanel().setIsOpen(false);
         return ResponseData.of(div).respond();
     }
@@ -94,6 +94,7 @@ public class KyufuJissekiKihonJouhouMain {
             KyufuJissekiHedajyoho2 給付実績ヘッダ情報 = 給付実績ヘッダ情報2.get(事業者番号の位置 - INT_ITI);
             set画面の表示(給付実績ヘッダ情報, div, 給付実績基本情報, 給付実績ヘッダ情報2, new RString("前事業者"));
         }
+        div.getBtnMaeJigyosha().setDisabled(true);
         if (0 < 事業者番号の位置 - INT_NI && 事業者番号の位置 - INT_NI < 給付実績ヘッダ情報2.size()) {
             div.getBtnMaeJigyosha().setDisabled(false);
         }
@@ -116,6 +117,7 @@ public class KyufuJissekiKihonJouhouMain {
             KyufuJissekiHedajyoho2 給付実績ヘッダ情報 = 給付実績ヘッダ情報2.get(事業者番号の位置 + INT_ITI);
             set画面の表示(給付実績ヘッダ情報, div, 給付実績基本情報, 給付実績ヘッダ情報2, new RString("後事業者"));
         }
+        div.getBtnAtoJigyosha().setDisabled(true);
         if (事業者番号の位置 + INT_NI < 給付実績ヘッダ情報2.size()) {
             div.getBtnAtoJigyosha().setDisabled(false);
         }
@@ -151,6 +153,7 @@ public class KyufuJissekiKihonJouhouMain {
                     get給付分類区分(給付実績基本, サービス提供年月), 給付実績基本情報, 給付実績ヘッダ情報2);
             ViewStateHolder.put(ViewStateKeys.サービス提供年月, サービス年月);
         }
+        div.getBtnZengetsu().setDisabled(true);
         if (0 < 事業者番号の位置 - INT_NI && 事業者番号の位置 - INT_NI < 給付実績ヘッダ情報2.size()) {
             div.getBtnZengetsu().setDisabled(false);
         }
@@ -186,6 +189,7 @@ public class KyufuJissekiKihonJouhouMain {
                     get給付分類区分(給付実績基本, サービス提供年月), 給付実績基本情報, 給付実績ヘッダ情報2);
             ViewStateHolder.put(ViewStateKeys.サービス提供年月, サービス年月);
         }
+        div.getBtnJigetsu().setDisabled(true);
         if (事業者番号の位置 + INT_NI < 給付実績ヘッダ情報2.size()) {
             div.getBtnJigetsu().setDisabled(false);
         }
