@@ -49,11 +49,10 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
+import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
-import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.IReportOutputJokenhyoPrinter;
-import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
+import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.EucFileOutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -1053,7 +1052,7 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
         RString 導入団体コード = association.getLasdecCode_().value();
         RString 市町村名 = association.get市町村名();
         RString 出力ページ数 = new RString(String.valueOf(eucCsvWriter.getCount()));
-        RString csv出力有無 = new RString("無し");
+//        RString csv出力有無 = new RString("無し");
         RString 日本語ファイル名 = new RString("汎用リスト 特別地域加算減免CSV");
         RString 英数字ファイル名 = new RString("HanyoList_TokubetsuChiikiKasanGemmen.csv");
         RString ジョブ番号 = new RString(String.valueOf(JobContextHolder.getJobId()));
@@ -1071,7 +1070,7 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
         if (null != processParamter.getKizyunnichi()) {
             builder.append(KIZYUNNICHI);
             builder.append(processParamter.getKizyunnichi().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             builder.append(COMMA);
         }
         builder = get日付範囲(builder);
@@ -1109,18 +1108,16 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
                 出力条件.add(build);
             }
         }
-        ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
-                new RString("DBD701007"),
+        EucFileOutputJokenhyoItem item = new EucFileOutputJokenhyoItem(
+                日本語ファイル名,
                 導入団体コード,
                 市町村名,
                 ジョブ番号,
-                日本語ファイル名,
-                出力ページ数,
-                csv出力有無,
                 英数字ファイル名,
+                new RString("DBD701007"),
+                出力ページ数,
                 出力条件);
-        IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);
-        printer.print();
+        EucFileOutputJokenhyoFactory.createInstance(item).print();
     }
 
     private RStringBuilder get日付範囲(RStringBuilder builder) {
@@ -1131,12 +1128,12 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
             builder.append(COLON);
             builder.append(SPACE);
             builder.append(processParamter.getHitsukehanifrom().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             builder.append(SPACE);
             builder.append(カラ);
             builder.append(SPACE);
             builder.append(processParamter.getHitsukehanito().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             builder.append(COMMA);
         } else if (!processParamter.getHitsukehanifrom().isEmpty()
                 && processParamter.getHitsukehanito().isEmpty()) {
@@ -1145,7 +1142,7 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
             builder.append(COLON);
             builder.append(SPACE);
             builder.append(processParamter.getHitsukehanifrom().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             builder.append(SPACE);
             builder.append(カラ);
             builder.append(COMMA);
@@ -1158,7 +1155,7 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
             builder.append(カラ);
             builder.append(SPACE);
             builder.append(processParamter.getHitsukehanito().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             builder.append(COMMA);
         }
         return builder;
@@ -1298,7 +1295,7 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
             builder.append(左記号);
             builder.append(NENLEIKIZYUNNICHI);
             builder.append(processParamter.getAtenacyusyutsujyoken().getNenreiKijunbi().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             builder.append(右記号);
         } else if (null != processParamter.getAtenacyusyutsujyoken().getNenreiRange()
                 && null != processParamter.getAtenacyusyutsujyoken().getNenreiRange().getFrom()
@@ -1315,7 +1312,7 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
             builder.append(左記号);
             builder.append(NENLEIKIZYUNNICHI);
             builder.append(processParamter.getAtenacyusyutsujyoken().getNenreiKijunbi().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             builder.append(右記号);
         } else if (null != processParamter.getAtenacyusyutsujyoken().getNenreiRange()
                 && null == processParamter.getAtenacyusyutsujyoken().getNenreiRange().getFrom()
@@ -1332,7 +1329,7 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
             builder.append(左記号);
             builder.append(NENLEIKIZYUNNICHI);
             builder.append(processParamter.getAtenacyusyutsujyoken().getNenreiKijunbi().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             builder.append(右記号);
         }
         return builder;
@@ -1346,19 +1343,19 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
             builder.append(SEINENGAPPI);
             builder.append(COLON);
             builder.append(processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getFrom().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             builder.append(SPACE);
             builder.append(カラ);
             builder.append(SPACE);
             builder.append(processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getTo().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         } else if (null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange()
                 && null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getFrom()
                 && null == processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getTo()) {
             builder.append(SEINENGAPPI);
             builder.append(COLON);
             builder.append(processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getFrom().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             builder.append(SPACE);
             builder.append(カラ);
         } else if (null != processParamter.getAtenacyusyutsujyoken().getSeinengappiRange()
@@ -1370,7 +1367,7 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
             builder.append(カラ);
             builder.append(SPACE);
             builder.append(processParamter.getAtenacyusyutsujyoken().getSeinengappiRange().getTo().wareki().eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString());
+                    .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         }
         return builder;
     }
