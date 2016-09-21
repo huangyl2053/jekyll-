@@ -9,9 +9,17 @@ import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_MeisaiIc
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_ShihraiHohoShitei;
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_ShoriKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kozafurikomi.Furikomi_ShoriTaisho;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc050010.FurikomiDataTourokuProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc050010.GdaekomimeisaiFurikomiProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc050010.HihokenshaAtenaProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc050010.KanendoUpdateFutanwariaiHanteProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc050010.KozaJohoProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc050010.ShoukanFurikomiProcessParameter;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -65,9 +73,9 @@ public class DBC050010_FurikomimeisaiFurikomiDataParameter extends BatchParamete
     @BatchParameter(key = KEY_支払方法, name = "支払方法")
     private Furikomi_ShihraiHohoShitei 支払方法;
     @BatchParameter(key = KEY_開始年月日, name = "開始年月日")
-    private RDate 開始年月日;
+    private FlexibleDate 開始年月日;
     @BatchParameter(key = KEY_終了年月日, name = "終了年月日")
-    private RDate 終了年月日;
+    private FlexibleDate 終了年月日;
     @BatchParameter(key = KEY_開始受取年月, name = "開始受取年月")
     private FlexibleYearMonth 開始受取年月;
     @BatchParameter(key = KEY_終了受取年月, name = "終了受取年月")
@@ -75,7 +83,82 @@ public class DBC050010_FurikomimeisaiFurikomiDataParameter extends BatchParamete
     @BatchParameter(key = KEY_抽出対象, name = "抽出対象")
     private Furikomi_MeisaiIchiranChushutsuTaisho 抽出対象;
     @BatchParameter(key = KEY_対象作成年月日, name = "対象作成年月日")
-    private RDate 対象作成年月日;
+    private FlexibleDate 対象作成年月日;
     @BatchParameter(key = KEY_出力順ID, name = "出力順ID")
     private Long 出力順ID;
+
+    /**
+     * 償還使用されたProcessパラメターを取得
+     *
+     * @return 償還使用されたProcessパラメター
+     */
+    public ShoukanFurikomiProcessParameter toFurikomimeisaiFurikomiProcessParameter() {
+        return new ShoukanFurikomiProcessParameter(支払方法, 抽出対象,
+                再処理フラグ, 開始年月日, 終了年月日, 対象作成年月日);
+    }
+
+    /**
+     * 高額使用されたProcessパラメターを取得
+     *
+     * @return 高額使用されたProcessパラメター
+     */
+    public GdaekomimeisaiFurikomiProcessParameter toGdaekomimeisaiFurikomiProcessParameter() {
+        return new GdaekomimeisaiFurikomiProcessParameter(支払方法, 抽出対象,
+                再処理フラグ, 開始年月日, 終了年月日, 対象作成年月日,
+                開始受取年月, 終了受取年月);
+    }
+
+    /**
+     * 振込データ登録処理_Processパラメターを取得
+     *
+     * @return 振込データ登録処理_Processパラメター
+     */
+    public FurikomiDataTourokuProcessParameter toFurikomiDataTourokuProcessParameter() {
+        return new FurikomiDataTourokuProcessParameter(委託者コード, 代表金融機関コード,
+                振込グループコード,
+                振込指定年月日,
+                再処理フラグ,
+                処理区分,
+                誤振込指定年月日);
+    }
+
+    /**
+     * 処理日付管理マスタ更新とバッチ出力条件パラメターを取得します．
+     *
+     * @param 処理名 処理名
+     * @return 処理日付管理マスタ更新とバッチ出力条件パラメター
+     */
+    public KanendoUpdateFutanwariaiHanteProcessParameter toKanendoUpdateFutanwariaiHanteProcessParameter(ShoriName 処理名) {
+        return new KanendoUpdateFutanwariaiHanteProcessParameter(開始年月日,
+                終了年月日, 処理名,
+                処理区分,
+                処理対象,
+                振込指定年月日,
+                再処理フラグ,
+                正振込指定年月日,
+                誤振込指定年月日,
+                支払方法,
+                開始受取年月,
+                終了受取年月,
+                抽出対象,
+                対象作成年月日);
+    }
+
+    /**
+     * 被保険者台帳・宛名情報パラメターを取得します．
+     *
+     * @return 被保険者台帳・宛名情報パラメター
+     */
+    public HihokenshaAtenaProcessParameter toHihokenshaAtenaProcessParameter() {
+        return new HihokenshaAtenaProcessParameter();
+    }
+
+    /**
+     * 口座情報取得パラメターを取得します．
+     *
+     * @return 口座情報取得パラメター
+     */
+    public KozaJohoProcessParameter toKozaJohoProcessParameter() {
+        return new KozaJohoProcessParameter(振込指定年月日);
+    }
 }

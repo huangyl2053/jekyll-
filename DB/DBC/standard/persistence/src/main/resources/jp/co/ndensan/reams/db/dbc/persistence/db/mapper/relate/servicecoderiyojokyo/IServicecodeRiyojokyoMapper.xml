@@ -69,8 +69,10 @@
         </if>
         <if test="00==対象サービス種類">
         AND T2."serviceShuruiCode" IN 
-             (11,12,13,14,15,16,17,21,22,23,24,25,26,27,28,31,32,33,34,35,36,37,38,39,43,46
-             ,51,52,53,54,59,61,62,63,64,65,66,67,68,69,71,72,73,74,75,76,77,78,79)
+             ('11','12','13','14','15','16','17','21','22','23','24','25','26','27','28','31','32','33','34','35','36'
+            ,'37','38','39','43','46'
+             ,'51','52','53','54','59','61','62','63','64','65','66','67','68','69','71','72','73','74'
+            ,'75','76','77','78','79')
         </if>
         <if test="対象サービス種類 !=null and !(00==対象サービス種類)">
         AND T2."serviceShuruiCode" = #{対象サービス種類}
@@ -142,8 +144,10 @@
         </if>
         <if test="00==対象サービス種類">
         AND SUBSTR(T2."serviceCode",1,2) IN 
-             (11,12,13,14,15,16,17,21,22,23,24,25,26,27,28,31,32,33,34,35,36,37,38,39,43,46
-             ,51,52,53,54,59,61,62,63,64,65,66,67,68,69,71,72,73,74,75,76,77,78,79)
+             ('11','12','13','14','15','16','17','21','22','23','24','25','26','27','28','31','32','33','34','35','36'
+            ,'37','38','39','43','46'
+             ,'51','52','53','54','59','61','62','63','64','65','66','67','68','69','71','72','73','74'
+            ,'75','76','77','78','79')
         </if>
         <if test="対象サービス種類!=null and !(00==対象サービス種類)">
         AND SUBSTR(T2."serviceCode",1,2) = #{対象サービス種類}
@@ -226,7 +230,18 @@
     <select resultOrdered="true" id="get被保険者宛名情報"
             resultMap="resultMap_HihokenshaShikibetsuTaishoEntity" fetchSize="500">
         SELECT
-            "DbWT3470ToukeihyoMeisai".*,
+            "DbWT3470ToukeihyoMeisai"."renban" AS DbWT3470ToukeihyoMeisai_renban,
+            "DbWT3470ToukeihyoMeisai"."hiHokenshaNo" AS T1_hiHokenshaNo,
+            "DbWT3470ToukeihyoMeisai"."inputShikibetsuNo" AS T1_inputShikibetsuNo,
+            "DbWT3470ToukeihyoMeisai"."serviceTeikyoYM" AS T1_serviceTeikyoYM,
+            "DbWT3470ToukeihyoMeisai"."jigyoshoNo" AS T1_jigyoshoNo,
+            "DbWT3470ToukeihyoMeisai"."toshiNo" AS T1_toshiNo,
+            "DbWT3470ToukeihyoMeisai"."yoKaigoJotaiKubunCode" AS T1_yoKaigoJotaiKubunCode,
+            "DbWT3470ToukeihyoMeisai"."taniSu" AS T2_atoTanisu,
+            "DbWT3470ToukeihyoMeisai"."nissuKaisu" AS T2_atoNissuKaisu,
+            "DbWT3470ToukeihyoMeisai"."serviceTanisu" AS T2_atoServiceTanisu,
+            "DbWT3470ToukeihyoMeisai"."serviceShuruiCode" AS T2_serviceShuruiCode,
+            "DbWT3470ToukeihyoMeisai"."serviceKomokuCode" AS T2_serviceKomokuCode,
             <include refid="allColumns_DbT1001HihokenshaDaicho" />,
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
         FROM "DbWT3470ToukeihyoMeisai"
@@ -587,9 +602,10 @@
         <id column="dbT1001HihokenshaDaicho_hihokenshaNo"/>
         <id column="dbT1001HihokenshaDaicho_idoYMD"/>
         <id column="dbT1001HihokenshaDaicho_edaNo"/>
-        <association property="給付実績" resultMap="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.DbWT3470ToukeihyoMeisaiTempEntity"/>
+        <result property="連番" column="DbWT3470ToukeihyoMeisai_renban"/>
+        <association property="給付実績" resultMap="resultMap_KyufuJissekiMeisaiEntity"/>
 	<association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
-        <association property="最新被保台帳" resultMap="NewResultMap_DbT1001HihokenshaDaichoEntity"/>
+        <association property="被保険者台帳管理" resultMap="NewResultMap_DbT1001HihokenshaDaichoEntity"/>
     </resultMap>
     
     <resultMap id="NewResultMap_DbT1001HihokenshaDaichoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity" autoMapping="true">

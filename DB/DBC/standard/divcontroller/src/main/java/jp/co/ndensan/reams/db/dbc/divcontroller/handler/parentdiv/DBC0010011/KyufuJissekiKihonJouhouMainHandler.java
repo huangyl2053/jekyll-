@@ -5,7 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0010011;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
@@ -39,7 +42,6 @@ public class KyufuJissekiKihonJouhouMainHandler {
     private final KyufuJissekiKihonJouhouMainDiv div;
     private static final int INT_ZERO = 0;
     private static final int INT_ITI = 1;
-    private static final int INT_NI = 2;
     private static final RString 設定不可 = new RString("0");
     private static final RString 総合事業 = new RString("5");
     private static final FlexibleYearMonth 平成２４年４月 = new FlexibleYearMonth("201204");
@@ -69,19 +71,22 @@ public class KyufuJissekiKihonJouhouMainHandler {
      * @param 給付実績基本 給付実績基本
      * @param 事業所名称 事業所名称
      * @param 給付分類区分 給付分類区分
+     * @param 整理番号 整理番号
      */
     public void onLoad(FlexibleYearMonth サービス提供年月, NyuryokuShikibetsuNo 識別番号検索キー,
             List<ShikibetsuNoKanri> 識別番号管理データ,
             List<KyufujissekiKihon> 給付実績基本情報, List<KyufuJissekiHedajyoho2> 事業者番号リスト,
-            KyufujissekiKihon 給付実績基本, RString 事業所名称, RString 給付分類区分) {
+            KyufujissekiKihon 給付実績基本, RString 事業所名称, RString 給付分類区分, RString 整理番号) {
         if (識別番号管理データ != null && !識別番号管理データ.isEmpty()) {
-            set各ボタン活性非活性設定(識別番号管理データ.get(0), サービス提供年月, 識別番号検索キー);
+            set各ボタン活性非活性設定(識別番号管理データ.get(0));
         }
         if (給付実績基本 != null) {
             set申請内容エリア(給付実績基本, サービス提供年月, 事業所名称, 給付分類区分);
             set合計内容エリア(給付実績基本);
         }
-        setボタン非活性(事業者番号リスト, 給付実績基本情報, サービス提供年月);
+        set表示制御(サービス提供年月, 識別番号検索キー);
+        set月ボタン(getサービス提供年月リスト(給付実績基本情報), サービス提供年月);
+        set事業者ボタン(事業者番号リスト, 整理番号, サービス提供年月);
     }
 
     /**
@@ -106,7 +111,6 @@ public class KyufuJissekiKihonJouhouMainHandler {
             RString 事業者名称, RString 識別番号名称, KyufujissekiKihon 給付実績基本,
             RString 事業所名称, RString 給付分類区分,
             List<KyufujissekiKihon> 給付実績基本情報, List<KyufuJissekiHedajyoho2> 給付実績ヘッダ情報２) {
-        div.getBtnMaeJigyosha().setDisabled(true);
         div.getBtnAtoJigyosha().setDisabled(false);
         div.getCcdKyufuJissekiHeader().set事業者名称(事業者名称);
         div.getCcdKyufuJissekiHeader().set実績区分(給付実績区分コード);
@@ -119,7 +123,6 @@ public class KyufuJissekiKihonJouhouMainHandler {
             set合計内容エリア(給付実績基本);
         }
         set合計エリア閉();
-        setボタン非活性(給付実績ヘッダ情報２, 給付実績基本情報, サービス提供年月);
     }
 
     /**
@@ -144,7 +147,6 @@ public class KyufuJissekiKihonJouhouMainHandler {
             RString 事業者名称, RString 識別番号名称, KyufujissekiKihon 給付実績基本,
             RString 事業所名称, RString 給付分類区分,
             List<KyufujissekiKihon> 給付実績基本情報, List<KyufuJissekiHedajyoho2> 給付実績ヘッダ情報２) {
-        div.getBtnAtoJigyosha().setDisabled(true);
         div.getBtnMaeJigyosha().setDisabled(false);
         div.getCcdKyufuJissekiHeader().set事業者名称(事業者名称);
         div.getCcdKyufuJissekiHeader().set実績区分(給付実績区分コード);
@@ -157,7 +159,6 @@ public class KyufuJissekiKihonJouhouMainHandler {
             set合計内容エリア(給付実績基本);
         }
         set合計エリア閉();
-        setボタン非活性(給付実績ヘッダ情報２, 給付実績基本情報, サービス提供年月);
     }
 
     /**
@@ -176,15 +177,13 @@ public class KyufuJissekiKihonJouhouMainHandler {
     public void onClick_Zengetsu(FlexibleYearMonth サービス提供年月, KyufujissekiKihon 給付実績基本,
             HihokenshaNo 被保険者番号, RString 整理番号, NyuryokuShikibetsuNo 識別番号検索キー, RString 事業所名称,
             RString 給付分類区分, List<KyufujissekiKihon> 給付実績基本情報, List<KyufuJissekiHedajyoho2> 給付実績ヘッダ情報２) {
-        div.getBtnZengetsu().setDisabled(true);
         div.getBtnJigetsu().setDisabled(false);
+        set給付実績基本情報(被保険者番号, サービス提供年月, 整理番号, 識別番号検索キー);
         if (給付実績基本 != null) {
-            set給付実績基本情報(被保険者番号, サービス提供年月, 整理番号, 識別番号検索キー);
             set申請内容エリア(給付実績基本, サービス提供年月, 事業所名称, 給付分類区分);
             set合計内容エリア(給付実績基本);
         }
         set合計エリア閉();
-        setボタン非活性(給付実績ヘッダ情報２, 給付実績基本情報, サービス提供年月);
     }
 
     /**
@@ -203,19 +202,16 @@ public class KyufuJissekiKihonJouhouMainHandler {
     public void onClick_Jigetsu(FlexibleYearMonth サービス提供年月, KyufujissekiKihon 給付実績基本,
             HihokenshaNo 被保険者番号, RString 整理番号, NyuryokuShikibetsuNo 識別番号検索キー, RString 事業所名称,
             RString 給付分類区分, List<KyufujissekiKihon> 給付実績基本情報, List<KyufuJissekiHedajyoho2> 給付実績ヘッダ情報２) {
-        div.getBtnJigetsu().setDisabled(true);
         div.getBtnZengetsu().setDisabled(false);
+        set給付実績基本情報(被保険者番号, サービス提供年月, 整理番号, 識別番号検索キー);
         if (給付実績基本 != null) {
-            set給付実績基本情報(被保険者番号, サービス提供年月, 整理番号, 識別番号検索キー);
             set申請内容エリア(給付実績基本, サービス提供年月, 事業所名称, 給付分類区分);
             set合計内容エリア(給付実績基本);
         }
         set合計エリア閉();
-        setボタン非活性(給付実績ヘッダ情報２, 給付実績基本情報, サービス提供年月);
     }
 
-    private void set各ボタン活性非活性設定(ShikibetsuNoKanri 識別番号管理データ,
-            FlexibleYearMonth サービス提供年月, NyuryokuShikibetsuNo 識別番号検索キー) {
+    private void set各ボタン活性非活性設定(ShikibetsuNoKanri 識別番号管理データ) {
         div.getBtnMeisaiShukei().setDisabled(false);
         div.getBtnKinkyujiShisetsuRyoyo().setDisabled(false);
         div.getBtnShoteiShikkanShisetsuRyoyo().setDisabled(false);
@@ -264,7 +260,6 @@ public class KyufuJissekiKihonJouhouMainHandler {
         if (設定不可.equals(識別番号管理データ.get緊急時施設療養設定区分())) {
             div.getBtnKinkyujiShisetsuRyoyo().setDisabled(true);
         }
-        set表示制御(サービス提供年月, 識別番号検索キー);
     }
 
     private void set表示制御(FlexibleYearMonth サービス提供年月, NyuryokuShikibetsuNo 識別番号検索キー) {
@@ -521,13 +516,8 @@ public class KyufuJissekiKihonJouhouMainHandler {
                 識別番号検索キー);
     }
 
-    private int get事業者番号の位置(List<KyufuJissekiHedajyoho2> 事業者番号リスト) {
-        RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
-        RString 整理番号 = div.getCcdKyufuJissekiHeader().get整理番号();
-        FlexibleYearMonth サービス提供年月 = new FlexibleYearMonth(div.getCcdKyufuJissekiHeader().
-                getサービス提供年月().getYearMonth().toDateString());
-        RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
-        RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();
+    private int get事業者番号の位置(List<KyufuJissekiHedajyoho2> 事業者番号リスト,
+            RString 整理番号, RString 事業者番号, RString 様式番号, FlexibleYearMonth サービス提供年月, RString 実績区分コード) {
         for (int index = 0; index < 事業者番号リスト.size(); index++) {
             if (事業者番号.equals(事業者番号リスト.get(index).get事業所番号().value())
                     && 整理番号.equals(事業者番号リスト.get(index).get整理番号())
@@ -540,35 +530,54 @@ public class KyufuJissekiKihonJouhouMainHandler {
         return INT_ZERO;
     }
 
-    private void setボタン非活性(List<KyufuJissekiHedajyoho2> 事業者番号リスト,
-            List<KyufujissekiKihon> 給付実績基本情報, FlexibleYearMonth サービス提供年月) {
-        div.getBtnMaeJigyosha().setDisabled(false);
-        div.getBtnAtoJigyosha().setDisabled(false);
-        div.getBtnZengetsu().setDisabled(false);
-        div.getBtnJigetsu().setDisabled(false);
-        if (get事業者番号の位置(事業者番号リスト) == INT_ZERO) {
-            div.getBtnMaeJigyosha().setDisabled(true);
-            div.getBtnAtoJigyosha().setDisabled(false);
-        } else if (get事業者番号の位置(事業者番号リスト) == 事業者番号リスト.size() - INT_ITI) {
-            div.getBtnMaeJigyosha().setDisabled(false);
-            div.getBtnAtoJigyosha().setDisabled(true);
-        }
-        FlexibleYearMonth 提供年月;
-        int index = 0;
-        for (KyufujissekiKihon 給付実績基本 : 給付実績基本情報) {
-            提供年月 = 給付実績基本.getサービス提供年月();
-            if (提供年月.equals(サービス提供年月)) {
-                break;
+    private void set事業者ボタン(List<KyufuJissekiHedajyoho2> 事業者番号リスト,
+            RString 整理番号, FlexibleYearMonth サービス提供年月) {
+        RString 事業者番号 = div.getCcdKyufuJissekiHeader().get事業者番号();
+        RString 様式番号 = div.getCcdKyufuJissekiHeader().get様式番号();
+        RString 実績区分コード = div.getCcdKyufuJissekiHeader().get実績区分コード();
+        div.getBtnMaeJigyosha().setDisabled(true);
+        div.getBtnAtoJigyosha().setDisabled(true);
+        if (!事業者番号リスト.isEmpty()) {
+            int index = get事業者番号の位置(事業者番号リスト, 整理番号, 事業者番号, 様式番号, サービス提供年月, 実績区分コード);
+            if (0 < index) {
+                div.getBtnMaeJigyosha().setDisabled(false);
             }
-            index = index + 1;
-        }
-        if (INT_ZERO == index) {
-            div.getBtnZengetsu().setDisabled(true);
-            div.getBtnJigetsu().setDisabled(false);
-        } else if (給付実績基本情報.size() - INT_ITI == index) {
-            div.getBtnZengetsu().setDisabled(false);
-            div.getBtnJigetsu().setDisabled(true);
+            if (index + INT_ITI < 事業者番号リスト.size()) {
+                div.getBtnAtoJigyosha().setDisabled(false);
+            }
         }
     }
 
+    private void set月ボタン(List<FlexibleYearMonth> サービス提供年月リスト, FlexibleYearMonth サービス提供年月) {
+        Collections.sort(サービス提供年月リスト, new DateComparatorServiceTeikyoYM());
+        div.getBtnZengetsu().setDisabled(true);
+        div.getBtnJigetsu().setDisabled(true);
+        if (サービス提供年月リスト != null && !サービス提供年月リスト.isEmpty()) {
+            if (!サービス提供年月.isBeforeOrEquals(サービス提供年月リスト.get(サービス提供年月リスト.size() - 1))) {
+                div.getBtnZengetsu().setDisabled(false);
+            }
+            if (!サービス提供年月リスト.get(INT_ZERO).isBeforeOrEquals(サービス提供年月)) {
+                div.getBtnJigetsu().setDisabled(false);
+            }
+        }
+    }
+
+    private List<FlexibleYearMonth> getサービス提供年月リスト(List<KyufujissekiKihon> 給付実績基本情報) {
+        List<FlexibleYearMonth> 提供年月リスト = new ArrayList<>();
+        for (KyufujissekiKihon 給付実績基本 : 給付実績基本情報) {
+            FlexibleYearMonth 提供年月 = 給付実績基本.getサービス提供年月();
+            if (!提供年月リスト.contains(提供年月)) {
+                提供年月リスト.add(提供年月);
+            }
+        }
+        return 提供年月リスト;
+    }
+
+    private static class DateComparatorServiceTeikyoYM implements Comparator<FlexibleYearMonth>, Serializable {
+
+        @Override
+        public int compare(FlexibleYearMonth o1, FlexibleYearMonth o2) {
+            return o2.compareTo(o1);
+        }
+    }
 }

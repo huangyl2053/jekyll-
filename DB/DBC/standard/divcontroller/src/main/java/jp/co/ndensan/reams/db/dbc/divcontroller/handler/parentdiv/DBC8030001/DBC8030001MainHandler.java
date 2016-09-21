@@ -12,8 +12,8 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8030001.DBC8
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
-//import jp.co.ndensan.reams.ux.uxx.divcontroller.entity.commonchilddiv.FurikomiBaitaiSakusei.FurikomiBaitaiSakuseiDiv;
-//import jp.co.ndensan.reams.ux.uxx.divcontroller.entity.commonchilddiv.FurikomiBaitaiSakusei.IFurikomiBaitaiSakuseiDiv;
+import jp.co.ndensan.reams.ux.uxx.divcontroller.entity.commonchilddiv.FurikomiBaitaiSakusei.FurikomiBaitaiSakuseiDiv;
+import jp.co.ndensan.reams.ux.uxx.divcontroller.entity.commonchilddiv.FurikomiBaitaiSakusei.IFurikomiBaitaiSakuseiDiv;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
  */
 public class DBC8030001MainHandler {
 
-    private DBC8030001MainDiv div;
+    private final DBC8030001MainDiv div;
 
     /**
      * コンストラクターです。
@@ -44,7 +44,7 @@ public class DBC8030001MainHandler {
     public void initialize() {
         RString メニューID = ResponseHolder.getMenuID();
         RString 振込単位 = DbBusinessConfig.get(ConfigNameDBC.振込単位, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
-        RString 業務内区分;
+        RString 業務内区分 = RString.EMPTY;
         if (メニューID.equals(new RString("DBCMN43004"))) {
             if (振込単位.equals(new RString("1"))) {
                 業務内区分 = FurikomiGyomunaiKubun.償還高額.getコード();
@@ -61,15 +61,15 @@ public class DBC8030001MainHandler {
             業務内区分 = FurikomiGyomunaiKubun.高額合算.getコード();
         } else if (メニューID.equals(new RString("DBCMNL3004"))) {
             業務内区分 = FurikomiGyomunaiKubun.事業高額.getコード();
-        } else {
+        } else if(メニューID.equals(new RString("DBCMNN2005"))){
             業務内区分 = FurikomiGyomunaiKubun.事業高額合算.getコード();
         }
         List<RString> list = new ArrayList<>();
         list.add(RString.EMPTY);
-        //  div.getCcdFurikomiBaitaiSakusei().initialize(SubGyomuCode.DBC介護給付, 業務内区分, list, IFurikomiBaitaiSakuseiDiv.UnyoHohoShokiHyoji.媒体, GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), RString.EMPTY);
-        //  div.getCcdFurikomiBaitaiSakusei().setTestBaitaiSakuseiMode(FurikomiBaitaiSakuseiDiv.TestBaitaiSakuseiMode.通常);
-        //  div.getCcdFurikomiBaitaiSakusei().setCommonChohyoSakuseiMode(FurikomiBaitaiSakuseiDiv.CommonChohyoSakuseiMode.送付書＿明細書);
-        //  div.getCcdFurikomiBaitaiSakusei().setSelectButtonDisplayMode(FurikomiBaitaiSakuseiDiv.SelectButtonDisplayMode.表示しない);
+        div.getCcdFurikomiBaitaiSakusei().initialize(SubGyomuCode.DBC介護給付, 業務内区分, list, IFurikomiBaitaiSakuseiDiv.UnyoHohoShokiHyoji.媒体, GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), RString.EMPTY);
+        div.getCcdFurikomiBaitaiSakusei().setTestBaitaiSakuseiMode(FurikomiBaitaiSakuseiDiv.TestBaitaiSakuseiMode.通常);
+        div.getCcdFurikomiBaitaiSakusei().setCommonChohyoSakuseiMode(FurikomiBaitaiSakuseiDiv.CommonChohyoSakuseiMode.送付書＿明細書);
+        div.getCcdFurikomiBaitaiSakusei().setSelectButtonDisplayMode(FurikomiBaitaiSakuseiDiv.SelectButtonDisplayMode.表示しない);
         div.getTxtShoriTaisho().setReadOnly(true);
     }
 }

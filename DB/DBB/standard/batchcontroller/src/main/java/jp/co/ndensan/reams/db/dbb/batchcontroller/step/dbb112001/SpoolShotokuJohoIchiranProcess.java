@@ -288,7 +288,7 @@ public class SpoolShotokuJohoIchiranProcess extends BatchKeyBreakBase<ShotokuJoh
         RString 課税標準額 = 介護所得TempEntity.getKazeiShotoGaku() == null
                 ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(介護所得TempEntity.getKazeiShotoGaku(), 0);
         csvEntity.set課税標準額(課税標準額);
-        csvEntity.set登録業務(宛名entity == null ? RString.EMPTY : 宛名entity.getTorokuJiyuCode());
+        csvEntity.set登録業務(RString.EMPTY);
         RString 氏名R = 宛名entity == null || 宛名entity.getMeisho() == null
                 || 宛名entity.getMeisho().isEmpty() ? RString.EMPTY : 宛名entity.getMeisho().getColumnValue();
         csvEntity.set氏名(氏名R);

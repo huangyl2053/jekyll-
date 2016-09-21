@@ -37,7 +37,7 @@ public class DBB011003_TokuchoKarisanteiTsuchishoHakko extends BatchFlowBase<DBB
     private static final String 更新特徴調定額 = "updChoteiGaku";
     private static final String 更新被保険者区分 = "updHihokenshaKubun";
     private static final String 通知書の発行 = "printTsuchisho";
-    private static final RString BATCH_ID = new RString("KeisangoJohoSakuseiFlow");
+    private static final RString BATCH_ID = new RString("DBB003001_KeisangoJohoSakusei");
     private static final RString 特別徴収開始通知書仮算定_帳票分類ID
             = new RString("DBB100003_TokubetsuChoshuKaishiTsuchishoKariDaihyo");
     private KarisanteiBatchEntity 出力帳票Entity;

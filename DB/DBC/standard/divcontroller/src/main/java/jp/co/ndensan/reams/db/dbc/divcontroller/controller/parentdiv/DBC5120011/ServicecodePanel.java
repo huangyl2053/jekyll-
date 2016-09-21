@@ -71,15 +71,15 @@ public class ServicecodePanel {
     public ResponseData<DBC150030_ServicecodeRiyojokyoParameter> onClick_btnExcute(ServicecodePanelDiv div) {
 
         DBC150030_ServicecodeRiyojokyoParameter parameter = new DBC150030_ServicecodeRiyojokyoParameter();
-        parameter.set対象年月指定(div.getChusyutsuPanel().getRadtaishoYm().getSelectedValue());
+        parameter.set対象年月指定(div.getChusyutsuPanel().getRadtaishoYm().getSelectedKey());
         if (null != div.getChusyutsuPanel().getTxthani().getFromValue()) {
             parameter.set年月範囲開始(new FlexibleYearMonth(div.getChusyutsuPanel().getTxthani().getFromValue().getYearMonth().toDateString()));
         }
         if (null != div.getChusyutsuPanel().getTxthani().getToValue()) {
             parameter.set年月範囲終了(new FlexibleYearMonth(div.getChusyutsuPanel().getTxthani().getToValue().getYearMonth().toDateString()));
         }
-        parameter.set対象サービス種類(div.getChusyutsuPanel().getDdlshurui().getSelectedValue());
-        parameter.setサービス項目コードのまとめ方(div.getSekkeiPanel().getDdlmatome().getSelectedValue());
+        parameter.set対象サービス種類(div.getChusyutsuPanel().getDdlshurui().getSelectedKey());
+        parameter.setサービス項目コードのまとめ方(div.getSekkeiPanel().getDdlmatome().getSelectedKey());
         parameter.set選択対象(div.getCcdChikuShichosonSelect().get選択対象());
         Map<RString, RString> map = div.getCcdChikuShichosonSelect().get選択結果();
         List<RString> list = new ArrayList<>();
