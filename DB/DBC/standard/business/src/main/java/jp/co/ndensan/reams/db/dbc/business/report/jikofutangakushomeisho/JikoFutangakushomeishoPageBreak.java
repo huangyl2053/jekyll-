@@ -37,7 +37,6 @@ public class JikoFutangakushomeishoPageBreak extends PageBreaker<GassanJikofutan
     @Override
     public boolean isBreak(ReportLineRecord<GassanJikofutangakuHakkoIchiranSource> currentSource,
             ReportLineRecord<GassanJikofutangakuHakkoIchiranSource> nextSource) {
-        //QA 1527
         if (this.breakKeysList.contains(JikoFutangakushomeishoShutsuryokujunEnum.郵便番号.get項目ID())
                 && !currentSource.getSource().郵便番号.equals(nextSource.getSource().郵便番号)) {
             return true;
@@ -51,7 +50,7 @@ public class JikoFutangakushomeishoPageBreak extends PageBreaker<GassanJikofutan
                 && !currentSource.getSource().市町村コード.equals(nextSource.getSource().市町村コード)) {
             return true;
         } else if (this.breakKeysList.contains(JikoFutangakushomeishoShutsuryokujunEnum.氏名５０音カナ.get項目ID())
-                && !currentSource.getSource().市町村コード.equals(nextSource.getSource().市町村コード)) {
+                && !currentSource.getSource().氏名５０音カナ.equals(nextSource.getSource().氏名５０音カナ)) {
             return true;
         } else if (this.breakKeysList.contains(JikoFutangakushomeishoShutsuryokujunEnum.証記載保険者番号.get項目ID())
                 && !currentSource.getSource().証記載保険者番号.equals(nextSource.getSource().証記載保険者番号)) {
@@ -59,33 +58,11 @@ public class JikoFutangakushomeishoPageBreak extends PageBreaker<GassanJikofutan
         } else if (this.breakKeysList.contains(JikoFutangakushomeishoShutsuryokujunEnum.被保険者番号.get項目ID())
                 && !currentSource.getSource().list_2.equals(nextSource.getSource().list_2)) {
             return true;
-        } else if (this.breakKeysList.contains(JikoFutangakushomeishoShutsuryokujunEnum.支給区分コード.get項目ID())
-                && !currentSource.getSource().支給区分コード.equals(nextSource.getSource().支給区分コード)) {
-            return true;
         } else if (this.breakKeysList.contains(JikoFutangakushomeishoShutsuryokujunEnum.申請書整理番号.get項目ID())
                 && !currentSource.getSource().list_6.equals(nextSource.getSource().list_6)) {
-            return true;
-        } else if (this.breakKeysList.contains(JikoFutangakushomeishoShutsuryokujunEnum.新規継続区分.get項目ID())
-                && !currentSource.getSource().新規継続区分.equals(nextSource.getSource().新規継続区分)) {
-            return true;
-        } else if (part2(currentSource, nextSource)) {
             return true;
         }
         return false;
     }
 
-    private boolean part2(ReportLineRecord<GassanJikofutangakuHakkoIchiranSource> currentSource,
-            ReportLineRecord<GassanJikofutangakuHakkoIchiranSource> nextSource) {
-        if (this.breakKeysList.contains(JikoFutangakushomeishoShutsuryokujunEnum.支給区分コード.get項目ID())
-                && !currentSource.getSource().支給区分コード.equals(nextSource.getSource().支給区分コード)) {
-            return true;
-        } else if (this.breakKeysList.contains(JikoFutangakushomeishoShutsuryokujunEnum.申請書整理番号.get項目ID())
-                && !currentSource.getSource().list_6.equals(nextSource.getSource().list_6)) {
-            return true;
-        } else if (this.breakKeysList.contains(JikoFutangakushomeishoShutsuryokujunEnum.新規継続区分.get項目ID())
-                && !currentSource.getSource().新規継続区分.equals(nextSource.getSource().新規継続区分)) {
-            return true;
-        }
-        return false;
-    }
 }
