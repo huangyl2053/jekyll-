@@ -31,6 +31,7 @@ public class InsSetaiTempProcess extends BatchProcessBase<FukaCalculateSetaiEnti
     @BatchWriter
     private BatchEntityCreatedTempTableWriter tableWriter;
     private FukaCalculateTempEntity 賦課計算中間Entity;
+    private CreatCalCulateEntity manager;
     private TsuchishoNo 通知書番号 = TsuchishoNo.EMPTY;
     private FlexibleYear 賦課年度 = FlexibleYear.EMPTY;
     private FlexibleYear 調定年度 = FlexibleYear.EMPTY;
@@ -39,6 +40,7 @@ public class InsSetaiTempProcess extends BatchProcessBase<FukaCalculateSetaiEnti
     @Override
     public void initialize() {
         index = 1;
+        manager = CreatCalCulateEntity.createInstance();
     }
 
     @Override
@@ -53,17 +55,18 @@ public class InsSetaiTempProcess extends BatchProcessBase<FukaCalculateSetaiEnti
 
     @Override
     protected void process(FukaCalculateSetaiEntity entity) {
-        賦課計算中間Entity = entity.get賦課計算中間Entity();
         if (通知書番号.equals(entity.getTsuchishoNo())
                 && 賦課年度.equals(entity.getFukaNendo())
                 && 調定年度.equals(entity.getChoteiNendo())) {
-            賦課計算中間Entity = CreatCalCulateEntity.createInstance().creat世帯員所得情報Entity(賦課計算中間Entity, entity.get世帯員Entity(), index);
+            賦課計算中間Entity = manager.creat世帯員所得情報Entity(賦課計算中間Entity, entity.get世帯員Entity(), index);
             set区分Key(entity);
         } else {
+            if (賦課計算中間Entity != null) {
+                tableWriter.update(賦課計算中間Entity);
+            }
             index = 1;
             賦課計算中間Entity = entity.get賦課計算中間Entity();
-            賦課計算中間Entity = CreatCalCulateEntity.createInstance().creat世帯員所得情報Entity(賦課計算中間Entity, entity.get世帯員Entity(), index);
-            tableWriter.update(賦課計算中間Entity);
+            賦課計算中間Entity = manager.creat世帯員所得情報Entity(賦課計算中間Entity, entity.get世帯員Entity(), index);
             set区分Key(entity);
         }
         index++;

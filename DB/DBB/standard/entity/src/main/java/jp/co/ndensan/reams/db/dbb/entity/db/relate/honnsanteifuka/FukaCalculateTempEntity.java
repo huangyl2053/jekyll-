@@ -112,7 +112,6 @@ public class FukaCalculateTempEntity implements IDbAccessable {
     private Decimal fuKibetsuGaku12;
     private Decimal fuKibetsuGaku13;
     private Decimal fuKibetsuGaku14;
-    // 本算定抽出
     private HihokenshaNo honSanJon_hihokenshaNo;
     private FlexibleDate honSanJon_idoYMD;
     private RString honSanJon_edaNo;
@@ -145,7 +144,6 @@ public class FukaCalculateTempEntity implements IDbAccessable {
     private FlexibleYear honSanJon_fukaNendo;
     private TsuchishoNo honSanJon_tsuchishoNo;
     private FlexibleDate honSanJon_kijunYMD;
-    // 月別Temp全ての内容
     private HihokenshaNo kuBunn_hihokenshaNo;
     private RString kuBunn_rankKubun4Gatsu;
     private RString kuBunn_rankKubun5Gatsu;
@@ -171,7 +169,6 @@ public class FukaCalculateTempEntity implements IDbAccessable {
     private LasdecCode kuBunn_shichosonCode1Gatsu;
     private LasdecCode kuBunn_shichosonCode2Gatsu;
     private LasdecCode kuBunn_shichosonCode3Gatsu;
-    // 徴収方法Newest全ての内容
     private FlexibleYear dbT2001_fukaNendo;
     private HihokenshaNo dbT2001_hihokenshaNo;
     private int dbT2001_rirekiNo;
@@ -206,7 +203,6 @@ public class FukaCalculateTempEntity implements IDbAccessable {
     private boolean dbT2001_tsuikaIraiSohuzumiFlag;
     private YMDHMS dbT2001_tokuchoTeishiNichiji;
     private RString dbT2001_tokuchoTeishiJiyuCode;
-    // 口座（PSM）全ての内容
     private long uaT0310_kozaId;
     private ShikibetsuCode uaT0310_shikibetsuCode;
     private RString uaT0310_gyomubetsuPrimaryKey;
@@ -253,19 +249,6 @@ public class FukaCalculateTempEntity implements IDbAccessable {
     private RString uaT0303_name;
     private RString uaT0303_kanaName;
     private int uaT0303_hyojijun;
-//    private Long urT0700_shunoId;
-//    private KamokuCode urT0700_kamokuCode;
-//    private EdabanCode urT0700_kamokuEdabanCode;
-//    private RyokinShubetsuCodeValue urT0700_ryokinShubetsuCode;
-//    private RString urT0700_jigyoKubunCode;
-//    private RYear urT0700_choteiNendo;
-//    private RYear urT0700_kazeiNendo;
-//    private TsuchishoNo urT0700_tsuchishoNo;
-//    private int urT0700_kibetsu;
-//    private boolean urT0700_choshukenUmu;
-//    private int urT0700_choteiNo;
-//    private ShikibetsuCode urT0700_shikibetsuCode;
-    // 世帯員所得情報一時の内容
     private HihokenshaNo setai_hihokenshaNo_1;
     private ShikibetsuCode setai_shikibetsuCode_1;
     private FlexibleDate setai_kijunYMD_1;
