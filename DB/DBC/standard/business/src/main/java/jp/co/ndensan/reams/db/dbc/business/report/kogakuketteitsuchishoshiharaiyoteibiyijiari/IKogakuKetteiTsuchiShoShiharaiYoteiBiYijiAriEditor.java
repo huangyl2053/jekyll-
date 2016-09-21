@@ -9,9 +9,9 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakuketteitsuchishoshiharai
 import jp.co.ndensan.reams.uz.uza.report.IReportEditor;
 
 /**
- * 帳票設計_DBC200079_総合事業費過誤申立書情報送付一覧表 のEditorクラスです。
+ * 帳票設計_DBCMN43002_高額サービス等支給（不支給）決定通知書((支払予定日あり))のEditorクラスです。
  *
- * @reamsid_L DBC-2045-042 zhengshenlei
+ * @reamsid_L DBC-2000-040 zhengshenlei
  */
 public interface IKogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEditor extends IReportEditor<KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource> {
 
