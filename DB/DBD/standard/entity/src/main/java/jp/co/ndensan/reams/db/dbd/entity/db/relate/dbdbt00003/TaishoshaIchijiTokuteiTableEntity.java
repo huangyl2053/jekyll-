@@ -21,11 +21,12 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class TaishoshaIchijiTokuteiTableEntity extends DbTableEntityBase<TaishoshaIchijiTokuteiTableEntity> implements IDbAccessable {
 
-    public static final RString TABLE_NAME ;
-    static{
-        TABLE_NAME = new RString("TaisyoTaoktei");
+    public static final RString TABLE_NAME;
+
+    static {
+        TABLE_NAME = new RString("gemmenGengakuTaishoShaHanteiYoukonSakuseiTaishoShaTemp");
     }
     private HihokenshaNo hihokenshaNo;
-    private FlexibleDate kijunYmd;
+    private FlexibleDate kijunYMD;
 
 }

@@ -1209,7 +1209,7 @@ public class HanyoListSogoJigyoHi {
         RStringBuilder jokenBuilder = new RStringBuilder();
         List<RString> 出力条件List = new ArrayList<>();
         jokenBuilder.append(new RString("【抽出対象者】"));
-        if (!processParameter.get保険者コード().isEmpty() && !保険者_すべて.equals(processParameter.get保険者コード())) {
+        if (!isnull(processParameter.get保険者コード()) && !保険者_すべて.equals(processParameter.get保険者コード())) {
             jokenBuilder.append(new RString("保険者："));
             jokenBuilder.append(市町村名);
         }
@@ -1217,13 +1217,13 @@ public class HanyoListSogoJigyoHi {
         jokenBuilder.append(setサービス提供年月());
         jokenBuilder.append(set審査年月());
         jokenBuilder.append(set取込年月());
-        if (!processParameter.get事業者コード().isEmpty()) {
+        if (!isnull(processParameter.get事業者コード())) {
             jokenBuilder.append(new RString("事業者コード：("));
             jokenBuilder.append(processParameter.get事業者コード());
             jokenBuilder.append(new RString("） "));
             jokenBuilder.append(事業所名);
         }
-        if (!processParameter.getサービス種類コード().isEmpty()) {
+        if (!isnull(processParameter.getサービス種類コード())) {
             jokenBuilder.append(new RString("サービス種類コード："));
             jokenBuilder.append(processParameter.getサービス種類コード());
             jokenBuilder.append(new RString("） "));
@@ -1298,19 +1298,19 @@ public class HanyoListSogoJigyoHi {
 
     private RStringBuilder setサービス提供年月() {
         RStringBuilder jokenBuilder = new RStringBuilder();
-        if (!processParameter.getサービス提供年月開始年月().isEmpty()
-                && !processParameter.getサービス提供年月終了年月().isEmpty()) {
+        if (!isnull(processParameter.getサービス提供年月開始年月())
+                && !isnull(processParameter.getサービス提供年月終了年月())) {
             jokenBuilder.append(new RString("サービス提供年月："));
             jokenBuilder.append(set年月(processParameter.getサービス提供年月開始年月()));
             jokenBuilder.append(new RString("～"));
             jokenBuilder.append(set年月(processParameter.getサービス提供年月終了年月()));
-        } else if (!processParameter.getサービス提供年月開始年月().isEmpty()
-                && processParameter.getサービス提供年月終了年月().isEmpty()) {
+        } else if (!isnull(processParameter.getサービス提供年月開始年月())
+                && isnull(processParameter.getサービス提供年月終了年月())) {
             jokenBuilder.append(new RString("サービス提供年月："));
             jokenBuilder.append(set年月(processParameter.getサービス提供年月開始年月()));
             jokenBuilder.append(new RString("～"));
-        } else if (processParameter.getサービス提供年月開始年月().isEmpty()
-                && !processParameter.getサービス提供年月終了年月().isEmpty()) {
+        } else if (isnull(processParameter.getサービス提供年月開始年月())
+                && !isnull(processParameter.getサービス提供年月終了年月())) {
             jokenBuilder.append(new RString("サービス提供年月："));
             jokenBuilder.append(new RString("～"));
             jokenBuilder.append(set年月(processParameter.getサービス提供年月終了年月()));
@@ -1320,19 +1320,19 @@ public class HanyoListSogoJigyoHi {
 
     private RStringBuilder set審査年月() {
         RStringBuilder jokenBuilder = new RStringBuilder();
-        if (!processParameter.get審査年月開始年月().isEmpty()
-                && !processParameter.get審査年月終了年月().isEmpty()) {
+        if (!isnull(processParameter.get審査年月開始年月())
+                && !isnull(processParameter.get審査年月終了年月())) {
             jokenBuilder.append(new RString("審査年月："));
             jokenBuilder.append(set年月(processParameter.get審査年月開始年月()));
             jokenBuilder.append(new RString("～"));
             jokenBuilder.append(set年月(processParameter.get審査年月終了年月()));
-        } else if (!processParameter.get審査年月開始年月().isEmpty()
-                && processParameter.get審査年月終了年月().isEmpty()) {
+        } else if (!isnull(processParameter.get審査年月開始年月())
+                && isnull(processParameter.get審査年月終了年月())) {
             jokenBuilder.append(new RString("審査年月："));
             jokenBuilder.append(set年月(processParameter.get審査年月開始年月()));
             jokenBuilder.append(new RString("～"));
-        } else if (processParameter.get審査年月開始年月().isEmpty()
-                && !processParameter.get審査年月終了年月().isEmpty()) {
+        } else if (isnull(processParameter.get審査年月開始年月())
+                && !isnull(processParameter.get審査年月終了年月())) {
             jokenBuilder.append(new RString("審査年月："));
             jokenBuilder.append(new RString("～"));
             jokenBuilder.append(set年月(processParameter.get審査年月終了年月()));
@@ -1342,24 +1342,32 @@ public class HanyoListSogoJigyoHi {
 
     private RStringBuilder set取込年月() {
         RStringBuilder jokenBuilder = new RStringBuilder();
-        if (!processParameter.get取込年月開始年月().isEmpty()
-                && !processParameter.get取込年月終了年月().isEmpty()) {
+        if (!isnull(processParameter.get取込年月開始年月())
+                && !isnull(processParameter.get取込年月終了年月())) {
             jokenBuilder.append(new RString("取込年月："));
             jokenBuilder.append(set年月(processParameter.get取込年月開始年月()));
             jokenBuilder.append(new RString("～"));
             jokenBuilder.append(set年月(processParameter.get取込年月終了年月()));
-        } else if (!processParameter.get取込年月開始年月().isEmpty()
-                && processParameter.get取込年月終了年月().isEmpty()) {
+        } else if (!isnull(processParameter.get取込年月開始年月())
+                && isnull(processParameter.get取込年月終了年月())) {
             jokenBuilder.append(new RString("取込年月："));
             jokenBuilder.append(set年月(processParameter.get取込年月開始年月()));
             jokenBuilder.append(new RString("～"));
-        } else if (processParameter.get取込年月開始年月().isEmpty()
-                && !processParameter.get取込年月終了年月().isEmpty()) {
+        } else if (isnull(processParameter.get取込年月開始年月())
+                && !isnull(processParameter.get取込年月終了年月())) {
             jokenBuilder.append(new RString("取込年月："));
             jokenBuilder.append(new RString("～"));
             jokenBuilder.append(set年月(processParameter.get取込年月終了年月()));
         }
         return jokenBuilder;
+    }
+
+    private static boolean isnull(RString value) {
+        boolean flag = false;
+        if (RString.isNullOrEmpty(value)) {
+            flag = true;
+        }
+        return flag;
     }
 
     private PersonalData toPersonalData(RString 被保険者番号, ShikibetsuCode 識別コード) {

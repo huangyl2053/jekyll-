@@ -97,7 +97,12 @@
             FROM rgdb."DbT3017KyufujissekiKihon" AS T9
             INNER JOIN
             (SELECT 
-            MAX("DbT3017KyufujissekiKihon"."shinsaYM") AS 最新審査年月
+            MAX("DbT3017KyufujissekiKihon"."shinsaYM") AS 最新審査年月,
+            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" AS "DbT3017_inputShikibetsuNo",
+            "DbT3017KyufujissekiKihon"."hiHokenshaNo" AS "DbT3017_hiHokenshaNo",
+            "DbT3017KyufujissekiKihon"."serviceTeikyoYM" AS "DbT3017_serviceTeikyoYM",
+            "DbT3017KyufujissekiKihon"."jigyoshoNo" AS "DbT3017_jigyoshoNo",
+            "DbT3017KyufujissekiKihon"."toshiNo" AS "DbT3017_toshiNo"
             FROM
             rgdb."DbT3017KyufujissekiKihon"
             GROUP BY
@@ -165,7 +170,12 @@
             FROM rgdb."DbT3017KyufujissekiKihon" AS T9
             INNER JOIN
             (SELECT 
-            MAX("DbT3017KyufujissekiKihon"."shinsaYM") AS 最新審査年月
+            MAX("DbT3017KyufujissekiKihon"."shinsaYM") AS 最新審査年月,
+            "DbT3017KyufujissekiKihon"."inputShikibetsuNo" AS "DbT3017_inputShikibetsuNo",
+            "DbT3017KyufujissekiKihon"."hiHokenshaNo" AS "DbT3017_hiHokenshaNo",
+            "DbT3017KyufujissekiKihon"."serviceTeikyoYM" AS "DbT3017_serviceTeikyoYM",
+            "DbT3017KyufujissekiKihon"."jigyoshoNo" AS "DbT3017_jigyoshoNo",
+            "DbT3017KyufujissekiKihon"."toshiNo" AS "DbT3017_toshiNo"
             FROM
             rgdb."DbT3017KyufujissekiKihon"
             GROUP BY

@@ -34,7 +34,8 @@ public class KeikakuTodokedeJokyoIchiranParameter extends UaFt200FindShikibetsuT
      * @param 基準日_年月 FlexibleYearMonth
      * @param orderBy orderBy
      */
-    public KeikakuTodokedeJokyoIchiranParameter(IShikibetsuTaishoPSMSearchKey searchKey, FlexibleDate 基準日, FlexibleYearMonth 基準日_年月, RString orderBy) {
+    public KeikakuTodokedeJokyoIchiranParameter(IShikibetsuTaishoPSMSearchKey searchKey,
+            FlexibleDate 基準日, FlexibleYearMonth 基準日_年月, RString orderBy) {
         super(searchKey);
         this.基準日 = 基準日;
         this.基準日_年月 = 基準日_年月;
