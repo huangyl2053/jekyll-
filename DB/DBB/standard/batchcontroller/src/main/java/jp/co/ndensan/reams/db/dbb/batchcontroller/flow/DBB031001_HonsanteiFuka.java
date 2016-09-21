@@ -48,7 +48,7 @@ public class DBB031001_HonsanteiFuka extends BatchFlowBase<DBB031001_HonsanteiFu
     private static final String 計算後情報作成 = "keisangoJohoSakusei";
     private static final String 世帯員把握フロー = "setaiinBatchFlow";
     private static final String 本算定通知書一括発行フロー = "honsanteiTsuchishoIkkatsuHakkoFlow";
-    private static final RString 計算後情報作成BATCH_ID = new RString("KeisangoJohoSakuseiFlow");
+    private static final RString 計算後情報作成BATCH_ID = new RString("DBB003001_KeisangoJohoSakusei");
     private static final RString 世帯員把握BATCH_ID = new RString("SetaiShotokuKazeiHanteiFlow");
     private static final RString 本算定通知書一括発行BATCH_ID = new RString("DBB031003_HonsanteiTsuchishoHakko");
     private static final ReportId 帳票分類ID = new ReportId("DBB200009_HonsanteiKekkaIcihiran");

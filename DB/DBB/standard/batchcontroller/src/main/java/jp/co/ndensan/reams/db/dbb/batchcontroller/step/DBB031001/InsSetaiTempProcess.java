@@ -72,6 +72,13 @@ public class InsSetaiTempProcess extends BatchProcessBase<FukaCalculateSetaiEnti
         index++;
     }
 
+    @Override
+    protected void afterExecute() {
+        if (賦課計算中間Entity != null) {
+            tableWriter.update(賦課計算中間Entity);
+        }
+    }
+
     private void set区分Key(FukaCalculateSetaiEntity entity) {
         通知書番号 = entity.getTsuchishoNo();
         賦課年度 = entity.getFukaNendo();
