@@ -24,5 +24,6 @@ public class KogakuServicehiHanteiProcessParameter implements IBatchProcessParam
     private FlexibleYearMonth 処理年月;
     private List<RString> 送付ファイルエントリ情報List;
     private RString 保険者番号;
+    private int レコード件数;
 
 }
