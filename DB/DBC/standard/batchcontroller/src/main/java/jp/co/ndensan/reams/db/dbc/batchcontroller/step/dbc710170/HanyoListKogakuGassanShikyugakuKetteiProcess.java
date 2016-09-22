@@ -1162,6 +1162,7 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
         RString 出力順 = RString.EMPTY;
         if (order != null) {
             出力順 = MyBatisOrderByClauseCreator.create(HanyoListKogakuGassanShikyugakuKetteiOutPutOrder.class, order);
+            出力順 = 出力順.concat(コンマ);
         }
         if (RString.isNullOrEmpty(出力順)) {
             出力順 = 出力順.concat(ORDER_BY);
