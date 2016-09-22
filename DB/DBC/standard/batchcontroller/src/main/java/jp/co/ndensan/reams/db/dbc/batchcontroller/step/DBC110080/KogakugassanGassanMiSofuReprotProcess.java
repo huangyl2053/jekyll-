@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110080;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110080;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -71,25 +71,25 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
- * 高額合算補正済自己負担額情報作成のバッチ帳票出力_送付Processです。
+ * 高額合算補正済自己負担額情報作成のバッチ帳票出力_未送付Processです。
  *
  * @reamsid_L DBC-2660-030 gongliang
  */
-public class KogakugassanGassanSofuReprotProcess extends BatchKeyBreakBase<SyuturyokuEntity> {
+public class KogakugassanGassanMiSofuReprotProcess extends BatchKeyBreakBase<SyuturyokuEntity> {
 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassan."
-            + "IKogakugassanHoseisumiJikofutangakuOutMapper.get送付一覧表出力対象データ");
-    private static final ReportId 帳票ID = ReportIdDBC.DBC200032.getReportId();
+            + "IKogakugassanHoseisumiJikofutangakuOutMapper.get未送付一覧表出力対象データ");
+    private static final ReportId 帳票ID = ReportIdDBC.DBC200033.getReportId();
     private static final RString メッセージ引数 = new RString("帳票出力順の取得");
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
-    private static final RString 出力ファイル名 = new RString("DBC200032_GassanHoseizumiJikofutangakuJohoSofuchiran.csv");
+    private static final RString 出力ファイル名 = new RString("DBC200033_GassanHoseizumiJikofutangakuJohoMisofuchiran.csv");
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
     private static final RString 作成R = new RString("作成");
     private static final RString 再送要 = new RString("※");
     private static final RString 年度R = new RString("年度");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC200032");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC200033");
     private static final Code コード = new Code("0003");
     private static final RString 漢字_被保険者番号 = new RString("被保険者番号");
     private static final FlexibleYear 管理年度 = new FlexibleYear("0000");
@@ -141,6 +141,7 @@ public class KogakugassanGassanSofuReprotProcess extends BatchKeyBreakBase<Syutu
                 .setNewLine(NewLine.CRLF)
                 .hasHeader(true)
                 .build();
+
     }
 
     @Override
