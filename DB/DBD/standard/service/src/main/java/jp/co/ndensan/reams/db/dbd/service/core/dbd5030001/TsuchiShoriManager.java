@@ -93,7 +93,7 @@ public class TsuchiShoriManager {
      * @param 画面更新情報ビジネス List<DgTsuchishoHakkoBussiness>
      * @return SharedFileEntryDescriptor
      */
-    public SharedFileEntryDescriptor CSVファイル出力(List<DgTsuchishoHakkoBussiness> 画面更新情報ビジネス) {
+    public SharedFileEntryDescriptor ファイル出力(List<DgTsuchishoHakkoBussiness> 画面更新情報ビジネス) {
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
         try (CsvWriter<TsuchiShoHakkouCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
@@ -106,8 +106,7 @@ public class TsuchiShoriManager {
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(CSVファイル名));
         sfd = SharedFile.defineSharedFile(sfd);
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
-        SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
-        return entry;
+        return SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
     }
 
     /**
