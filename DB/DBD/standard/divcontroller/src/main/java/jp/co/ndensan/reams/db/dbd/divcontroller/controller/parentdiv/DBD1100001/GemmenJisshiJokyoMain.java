@@ -26,14 +26,15 @@ public class GemmenJisshiJokyoMain {
     /**
      * 画面初期化処理です。
      *
-     * @param div　GemmenJisshiJokyoMainDiv
+     * @param div GemmenJisshiJokyoMainDiv
      * @return ResponseData<GemmenJisshiJokyoMainDiv>
      */
     public ResponseData<GemmenJisshiJokyoMainDiv> onload(GemmenJisshiJokyoMainDiv div) {
         div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().initialize();
         div.getGemmenJisshiJokyoJoken().getTxtTaishoNendo().setDomain(NendoUtil.getNendo(RDate.getNowDate()));
         List<RString> list = new ArrayList();
-        for (int i = 1; i < 32; i++) {
+        int length = 32;
+        for (int i = 1; i < length; i++) {
             list.add(new RString(i));
         }
         div.getGemmenJisshiJokyoJoken().getTxtKijunBi().setSuggest(list);
@@ -43,7 +44,7 @@ public class GemmenJisshiJokyoMain {
     /**
      * 出力帳票onChange。
      *
-     * @param div　GemmenJisshiJokyoMainDiv
+     * @param div GemmenJisshiJokyoMainDiv
      * @return ResponseData<GemmenJisshiJokyoMainDiv>
      */
     public ResponseData<GemmenJisshiJokyoMainDiv> onChange_RadShutsuryokuChohyo(GemmenJisshiJokyoMainDiv div) {
@@ -54,7 +55,7 @@ public class GemmenJisshiJokyoMain {
     /**
      * 基準年月と基準日onChange。
      *
-     * @param div　GemmenJisshiJokyoMainDiv
+     * @param div GemmenJisshiJokyoMainDiv
      * @return ResponseData<GemmenJisshiJokyoMainDiv>
      */
     public ResponseData<GemmenJisshiJokyoMainDiv> onChange_RadKijun(GemmenJisshiJokyoMainDiv div) {
@@ -65,7 +66,7 @@ public class GemmenJisshiJokyoMain {
     /**
      * 条件を保存するバッタンonClick。
      *
-     * @param div　GemmenJisshiJokyoMainDiv
+     * @param div GemmenJisshiJokyoMainDiv
      * @return ResponseData<BatchParameterMap>
      */
     public ResponseData<BatchParameterMap> onClick_btnBatchParameterSave(GemmenJisshiJokyoMainDiv div) {
@@ -78,7 +79,7 @@ public class GemmenJisshiJokyoMain {
     /**
      * 条件を復元するバッタンonClick。
      *
-     * @param div　GemmenJisshiJokyoMainDiv
+     * @param div GemmenJisshiJokyoMainDiv
      * @return ResponseData<GemmenJisshiJokyoMainDiv>
      */
     public ResponseData<GemmenJisshiJokyoMainDiv> onClick_btnBatchParameterRestore(GemmenJisshiJokyoMainDiv div) {
