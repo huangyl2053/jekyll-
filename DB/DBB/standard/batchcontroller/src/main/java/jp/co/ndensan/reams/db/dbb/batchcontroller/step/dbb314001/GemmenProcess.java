@@ -29,7 +29,10 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
+import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
@@ -37,6 +40,8 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
+import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
  * バッチ設計_DBBMN61002_介護保険料減免登録(一括)のProcess
@@ -49,6 +54,8 @@ public class GemmenProcess extends BatchProcessBase<GemmenEntity> {
             + "gemmen.IGemmenMapper.getData");
     private static final RString 賦課の情報一時_TABLE_NAME = new RString("DbT2002FukaJohoTemp");
     private static final RString 出力ファイル名 = new RString("GENMENKEKKA.csv");
+    //TODO QA#1590
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBC701001"));
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
     private static final int INDEX_ONE = 1;
@@ -58,6 +65,7 @@ public class GemmenProcess extends BatchProcessBase<GemmenEntity> {
     private GemmenCsvEditor csvEditor;
     private DbT2002FukaJohoTempTableEntity 賦課の情報一時Entity;
     private UaFt200FindShikibetsuTaishoEntity 宛名Entity;
+    private FileSpoolManager manager;
     private FlexibleYear choteiNendo = FlexibleYear.EMPTY;
     private FlexibleYear fukaNendo = FlexibleYear.EMPTY;
     private TsuchishoNo tsuchishoNo = TsuchishoNo.EMPTY;
@@ -89,7 +97,9 @@ public class GemmenProcess extends BatchProcessBase<GemmenEntity> {
         賦課の情報一時tableWriter
                 = new BatchEntityCreatedTempTableWriter(賦課の情報一時_TABLE_NAME, DbT2002FukaJohoTempTableEntity.class);
         介護賦課減免tableWriter = new BatchPermanentTableWriter<>(DbV2004GemmenEntity.class);
-        RString spoolWorkPath = Path.getTmpDirectoryPath();
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
+                EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        RString spoolWorkPath = manager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
         csvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
                 .setDelimiter(コンマ)
@@ -130,6 +140,8 @@ public class GemmenProcess extends BatchProcessBase<GemmenEntity> {
             csvWriter.writeLine(csvEditor.editor(賦課の情報一時Entity, 賦課の情報一時処理後Data, 宛名Entity));
         }
         csvWriter.close();
+        manager.spool(SubGyomuCode.DBB介護賦課, eucFilePath);
+
     }
 
     private void set介護賦課(DbT2002FukaJohoTempTableEntity 賦課の情報一時Entity, GemmenEntity entity) {
