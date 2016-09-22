@@ -16,10 +16,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KakuninListCsvEntity {
+public class KakuninListNoRenbanCsvEntity {
 
-    @CsvField(order = 1, name = "連番")
-    private RString 連番;
     @CsvField(order = 2, name = "被保険者番号")
     private RString 被保険者番号;
     @CsvField(order = 3, name = "識別コード")
