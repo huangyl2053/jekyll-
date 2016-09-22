@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc710140;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC710140;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_ChushutsuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistkogakugassanshinseishojoho.HanyoListKogakuGassanShinseishoJohoProcessParameter;
-import jp.co.ndensan.reams.db.dbc.entity.csv.hanyolistkogakugassanshinseishojoho.HanyoListKogakuGassanShinseishoJohoNoRenbanCSVEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.hanyolistkogakugassanshinseishojoho.HanyoListKogakuGassanShinseishoJohoCSVEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkogakugassanshinseishojoho.HanyoListKogakuGassanShinseishoJohoEntity;
-import jp.co.ndensan.reams.db.dbc.service.core.hanyolistkogakugassanshinseishojoho.HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate;
+import jp.co.ndensan.reams.db.dbc.service.core.hanyolistkogakugassanshinseishojoho.HanyoListKogakuGassanShinseishoJohoDataCreate;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.business.util.DateConverter;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
@@ -55,6 +55,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -64,7 +65,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
  *
  * @reamsid_L DBC-3103-020 fuyanling
  */
-public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcessBase<HanyoListKogakuGassanShinseishoJohoEntity> {
+public class HanyoListKogakuGassanShinseishoProcess extends BatchProcessBase<HanyoListKogakuGassanShinseishoJohoEntity> {
 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper."
             + "relate.hanyolistkogakugassanshinseishojoho."
@@ -87,6 +88,7 @@ public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcess
     private static final RString すべて = new RString("すべて");
     private static final RString CSV出力有無_なし = new RString("なし");
     private static final RString CSV出力有無_あり = new RString("あり");
+    private static final RString HEAD_連番 = new RString("連番");
     private static final RString HEAD_識別コード = new RString("識別コード");
     private static final RString HEAD_住民種別 = new RString("住民種別");
     private static final RString HEAD_氏名 = new RString("氏名");
@@ -259,11 +261,12 @@ public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcess
 
     private RString 出力有無;
     private HanyoListKogakuGassanShinseishoJohoProcessParameter parameter;
-    private HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate dataCreate;
+    private HanyoListKogakuGassanShinseishoJohoDataCreate dataCreate;
     private RString eucFilePath;
     private FileSpoolManager manager;
     private List<PersonalData> personalDataList;
     private Association 地方公共団体;
+    private Decimal 連番;
     private FlexibleDate システム日付;
     private Map<RString, KoseiShichosonMaster> 市町村名MasterMap;
 //    TODO QA1490
@@ -271,13 +274,14 @@ public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcess
 //            + "高額合算申請書_対象年度,高額合算申請書_保険者番号,高額合算申請書_整理番号");
 
     @BatchWriter
-    private CsvWriter<HanyoListKogakuGassanShinseishoJohoNoRenbanCSVEntity> eucCsvWriter;
+    private CsvWriter<HanyoListKogakuGassanShinseishoJohoCSVEntity> eucCsvWriter;
 
     @Override
     protected IBatchReader createReader() {
         出力有無 = CSV出力有無_なし;
+        連番 = Decimal.ONE;
         システム日付 = FlexibleDate.getNowDate();
-        dataCreate = new HanyoListKogakuGassanShinseishoJohoNoRenbanDataCreate(システム日付);
+        dataCreate = new HanyoListKogakuGassanShinseishoJohoDataCreate(システム日付);
 
         KozaSearchKeyBuilder builder = new KozaSearchKeyBuilder();
         builder.setサブ業務コード(SubGyomuCode.DBC介護給付);
@@ -307,8 +311,8 @@ public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcess
 
     @Override
     protected void createWriter() {
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
-                EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID,
+                UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, 英数字ファイル名);
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
@@ -325,22 +329,23 @@ public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcess
 
     @Override
     protected void beforeExecute() {
+
         personalDataList = new ArrayList<>();
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
 
         市町村名MasterMap = new HashMap<>();
-        List<KoseiShichosonMaster> 市町村名Master = KoseiShichosonJohoFinder
-                .createInstance().get現市町村情報();
+        List<KoseiShichosonMaster> 市町村名Master = KoseiShichosonJohoFinder.createInstance().get現市町村情報();
         for (KoseiShichosonMaster koseiShichosonMaster : 市町村名Master) {
-            市町村名MasterMap.put(koseiShichosonMaster.get市町村コード().value(),
-                    koseiShichosonMaster);
+            市町村名MasterMap.put(koseiShichosonMaster.get市町村コード().value(), koseiShichosonMaster);
         }
     }
 
     @Override
     protected void process(HanyoListKogakuGassanShinseishoJohoEntity entity) {
         出力有無 = CSV出力有無_あり;
-        eucCsvWriter.writeLine(dataCreate.createCsvData(entity, parameter, 市町村名MasterMap, 地方公共団体));
+        eucCsvWriter.writeLine(dataCreate.createCsvData(entity, parameter, 連番,
+                市町村名MasterMap, 地方公共団体));
+        連番 = 連番.add(Decimal.ONE);
         personalDataList.add(toPersonalData(entity));
     }
 
@@ -377,8 +382,7 @@ public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcess
                 出力有無,
                 英数字ファイル名,
                 出力条件);
-        IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory
-                .createInstance(reportOutputJokenhyoItem);
+        IReportOutputJokenhyoPrinter printer = OutputJokenhyoFactory.createInstance(reportOutputJokenhyoItem);
         printer.print();
     }
 
@@ -467,8 +471,8 @@ public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcess
         }
         if (parameter.get申請年月日From() != null && !parameter.get申請年月日From().isEmpty()
                 && parameter.get申請年月日To() != null && !parameter.get申請年月日To().isEmpty()) {
-            return builder.append(dataToRString(parameter.get申請年月日From()))
-                    .append(ITEM).append(dataToRString(parameter.get申請年月日To()));
+            return builder.append(dataToRString(parameter.get申請年月日From())).append(ITEM)
+                    .append(dataToRString(parameter.get申請年月日To()));
         } else if (parameter.get申請年月日To() == null || parameter.get申請年月日To().isEmpty()) {
             return builder.append(dataToRString(parameter.get申請年月日From())).append(ITEM);
         } else if (parameter.get申請年月日From() == null || parameter.get申請年月日From().isEmpty()) {
@@ -525,8 +529,9 @@ public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcess
         return null;
     }
 
-    private HanyoListKogakuGassanShinseishoJohoNoRenbanCSVEntity getHeader() {
-        HanyoListKogakuGassanShinseishoJohoNoRenbanCSVEntity csvEntity = new HanyoListKogakuGassanShinseishoJohoNoRenbanCSVEntity();
+    private HanyoListKogakuGassanShinseishoJohoCSVEntity getHeader() {
+        HanyoListKogakuGassanShinseishoJohoCSVEntity csvEntity = new HanyoListKogakuGassanShinseishoJohoCSVEntity();
+        csvEntity.set連番(HEAD_連番);
         csvEntity.set識別コード(HEAD_識別コード);
         csvEntity.set住民種別(HEAD_住民種別);
         csvEntity.set氏名(HEAD_氏名);
@@ -696,7 +701,6 @@ public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcess
         csvEntity.set加入１０証明書番号(HEAD_加入１０証明書番号);
         csvEntity.set支給申請書情報送付年月(HEAD_支給申請書情報送付年月);
         csvEntity.set自己負担額計算年月(HEAD_自己負担額計算年月);
-
         return csvEntity;
     }
 }
