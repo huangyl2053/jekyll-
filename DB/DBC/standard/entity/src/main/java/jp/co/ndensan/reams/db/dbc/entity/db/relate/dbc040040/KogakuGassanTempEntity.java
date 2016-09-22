@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -145,4 +146,6 @@ public class KogakuGassanTempEntity extends DbTableEntityBase<KogakuGassanTempEn
     private FlexibleDate atena_SeinengappiYMD;
     private RString atena_Seibetsu;
     private ShikibetsuCode shikibetsuCode;
+
+    private LasdecCode shichosonCode;
 }
