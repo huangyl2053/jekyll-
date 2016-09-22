@@ -65,6 +65,7 @@ public class AtenaSealJohoShutokuProcess extends BatchProcessBase<AtenaSealJohoE
             koikiZenShichosonJoho = koikiZenShichosonJohoList.get(0);
         }
         dataUtil.intProcessParameter(koikiZenShichosonJoho, parameter);
+
     }
 
     @Override
