@@ -19,9 +19,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchish
 import jp.co.ndensan.reams.db.dbc.entity.jigyokogakuketteitsuchishoyijiari.JigyoKogakuKetteiTsuchishoYijiAriSource;
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakuketteitsuchishosealer2.KogakuKetteiTsuchiShoEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.servicehishikyuketteitsuchisho.ServicehiShikyuKetteiTsuchisho;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
@@ -55,16 +53,9 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchProcessB
     private static final ReportId 帳票分類ID = new ReportId("DBC100061_JigyoKogakuKetteiTsuchisho");
     private static final RString フラグ_TRUE = new RString("true");
     private static final RString 支払方法区分_ = new RString("**************");
-    private static final RString 定型文文字サイズ_1 = new RString("1");
-    private static final RString 定型文文字サイズ_2 = new RString("2");
-    private static final RString 定型文文字サイズ_3 = new RString("3");
-    private static final RString 定型文文字サイズ_4 = new RString("4");
     private static final RString アスタリスク = new RString("*");
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
-    private static final int INT_2 = 2;
-    private static final int INT_3 = 3;
-    private static final int INT_4 = 4;
 
     private KogakuKaigoServiceProcessParameter parameter;
     private JigyoKogakuKetteiTsuchishoReportParameter mybatisParameter;
@@ -73,7 +64,6 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchProcessB
     private IOutputOrder 出力順;
     private List<RString> 改頁リスト;
     private List<RString> 並び順;
-    private ChohyoSeigyoKyotsu 帳票制御共通情報;
     private List<RString> 通知書定型文;
     private Set<RString> 条件set;
     private RString 出力順情報;
@@ -96,7 +86,6 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchProcessB
         service = ServicehiShikyuKetteiTsuchisho.createInstance();
         設定値 = service.get設定値(帳票分類ID);
         get出力順();
-        帳票制御共通情報 = new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBC介護給付, 帳票分類ID);
         通知書定型文 = get通知書定型文();
     }
 
@@ -152,28 +141,8 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchProcessB
 
     private List<RString> get通知書定型文() {
 
+        // TODO QA
         List<RString> list = new ArrayList<>();
-        int パターン番号 = 0;
-        if (定型文文字サイズ_1.equals(帳票制御共通情報.get定型文文字サイズ())) {
-            パターン番号 = INT_1;
-        } else if (定型文文字サイズ_2.equals(帳票制御共通情報.get定型文文字サイズ())) {
-            パターン番号 = INT_2;
-        } else if (定型文文字サイズ_3.equals(帳票制御共通情報.get定型文文字サイズ())) {
-            パターン番号 = INT_3;
-        } else if (定型文文字サイズ_4.equals(帳票制御共通情報.get定型文文字サイズ())) {
-            パターン番号 = INT_4;
-        }
-        // TODO QA通知書定型文設定?
-//        TsuchishoTeikeibunManager manager = new TsuchishoTeikeibunManager();
-//        TsuchishoTeikeibunInfo tsuchishoTeikeibunInfo = manager.get通知書定型文項目(SubGyomuCode.DBC介護給付, 帳票分類ID,
-//                KamokuCode.EMPTY, パターン番号);
-//        ITextHenkanRule rule = KaigoTextHenkanRuleCreator.createRule(SubGyomuCode.DBC介護給付, 帳票分類ID);
-//        List<TsuchishoTeikeibunEntity> 通知書定型文List = tsuchishoTeikeibunInfo.get通知書定型文List();
-//        for (TsuchishoTeikeibunEntity entity : 通知書定型文List) {
-//            int 項目番号 = entity.getTsuchishoTeikeibunEntity().getSentenceNo();
-//            RString 文章 = rule.editText(entity.getTsuchishoTeikeibunEntity().getSentence());
-//            list.add(項目番号, rule.editText(文章));
-//        }
         return list;
     }
 
@@ -188,7 +157,7 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchProcessB
         }
         reportEntity.set文書番号(parameter.get文書番号());
         if (entity.get宛名() != null && entity.get宛名().getKanjiShimei() != null) {
-            reportEntity.set被保険者氏名(entity.get宛名().getKanjiShimei().value());
+            reportEntity.set被保険者氏名(RString.EMPTY);
         }
         reportEntity.set被保険者番号(entity.get被保険者番号());
         reportEntity.set決定年月日(entity.get決定年月日());
@@ -223,12 +192,12 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchProcessB
         if (null != 改頁リスト && 改頁リスト.size() >= INT_1) {
             reportEntity.set持ちもの(改頁リスト.get(INT_0));
         }
-        // 金融機関
+        // TODO 金融機関
         reportEntity.set金融機関(entity.get金融機関名称());
 
         reportEntity.set支払場所(entity.get支払場所());
         reportEntity.set決定通知書番号(entity.get決定通知No());
-        // 支払期間
+        // TODO 支払期間
         reportEntity.set支払期間開始年月日(entity.get支払期間開始年月日());
         reportEntity.set支払期間終了年月日(entity.get支払期間終了年月日());
         reportEntity.set支払窓口開始時間(entity.get支払窓口開始時間());

@@ -116,11 +116,11 @@ public class JigyoHokokuGeppoHokenkyufuKogakuGassanProcessParamter implements IB
     public JigyoHokokuGeppoHokenkyufuKogakuGassanMybatisParamter toInsertKougakuDataMybitisParamter() {
         RString 開始年月 = RString.EMPTY;
         RString 終了年月 = RString.EMPTY;
-        if (区分_1.equals(報告区分)) {
+        if (区分_2.equals(報告区分)) {
             開始年月 = 集計開始年月;
             終了年月 = 集計終了年月;
         }
-        if (区分_2.equals(報告区分)) {
+        if (区分_1.equals(報告区分)) {
             開始年月 = 決定年月;
             終了年月 = 決定年月;
         }
@@ -236,7 +236,7 @@ public class JigyoHokokuGeppoHokenkyufuKogakuGassanProcessParamter implements IB
         }
         if (区分_2.equals(報告区分)) {
             処理名 = new RString("年度報告　保険給付決定　高額合算分");
-            処理枝番 = 年報区分;
+            処理枝番 = new RString("0099");
             年度区分 = 集計年度;
         }
         RString 基準年月日 = RString.EMPTY;

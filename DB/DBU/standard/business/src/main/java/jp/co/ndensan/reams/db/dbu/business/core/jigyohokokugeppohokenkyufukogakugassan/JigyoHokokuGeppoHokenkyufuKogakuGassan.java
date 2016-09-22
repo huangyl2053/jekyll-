@@ -53,7 +53,7 @@ public class JigyoHokokuGeppoHokenkyufuKogakuGassan {
             eucEntity.set集計区分(new RString("減算"));
         }
         eucEntity.set表番号(entity.getHyouNo());
-        eucEntity.set集計番号(entity.getShukeiNo());
+        eucEntity.set集計番号(entity.getSyukeiNo());
         eucEntity.set集計単位(entity.getSyukeTani());
         eucEntity.set縦番号(entity.getTateNo());
         eucEntity.set横番号(entity.getYokoNo());
@@ -81,7 +81,7 @@ public class JigyoHokokuGeppoHokenkyufuKogakuGassan {
         eucEntity.set備考(entity.getBiko());
         eucEntity.set所得区分(entity.getShotokuKubun());
         eucEntity.set係る所得区分(entity.getOver70_ShotokuKubun());
-        eucEntity.set警告(entity.getKeikoku());
+        eucEntity.set警告(entity.getWarning());
         eucEntity.set市町村コード(entity.getShichosonCode());
         eucEntity.set旧市町村コード(entity.getKyuShichosonCode());
         return eucEntity;

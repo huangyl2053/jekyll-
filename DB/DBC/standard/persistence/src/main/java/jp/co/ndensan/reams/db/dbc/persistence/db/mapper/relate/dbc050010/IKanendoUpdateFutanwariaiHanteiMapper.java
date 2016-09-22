@@ -1,0 +1,21 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc050010;
+
+import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc050010.KanendoUpdateFutanwariaiHanteMybatisParameter;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
+
+/**
+ * 処理日付管理マスタ更新のmapperです
+ *
+ * @reamsid_L DBC-5010-030 x_miaocl
+ */
+public interface IKanendoUpdateFutanwariaiHanteiMapper {
+
+    List<DbT7022ShoriDateKanriEntity> get処理日付管理マスタ更新(KanendoUpdateFutanwariaiHanteMybatisParameter parameter);
+
+}

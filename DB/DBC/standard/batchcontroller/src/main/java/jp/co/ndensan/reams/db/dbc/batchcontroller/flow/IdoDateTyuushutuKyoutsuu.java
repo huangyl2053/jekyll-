@@ -5,13 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.HihokenshaDaichoIdoProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.JukyushaDaichoIdoProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.KaigoShotokuIdoProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.SeikatsuHogoJukyushaIdoProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.ShikibetsuTaishoIdoProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.SogoJigyoTaishoshaIdoProcess;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc180020.DBC180020_IdoRiyoshaFutanwariaiHanteiParameter;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.HihokenshaDaichoIdoProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.JukyushaDaichoIdoProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.KaigoShotokuIdoProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.SeikatsuHogoJukyushaIdoProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.ShikibetsuTaishoIdoProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.SogoJigyoTaishoshaIdoProcess;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180020.DBC180020_IdoRiyoshaFutanwariaiHanteiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc180020.IdoDateTyuushutuKyoutsuuProcessParameter;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;

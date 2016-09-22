@@ -25,7 +25,7 @@ public class JigyoHokokuDataCsvRelateEntity {
     private RString dataKubun;
     private RString syukeKubun;
     private RString hyouNo;
-    private RString shukeiNo;
+    private RString syukeiNo;
     private RString syukeTani;
     private RString tateNo;
     private RString yokoNo;
@@ -49,7 +49,7 @@ public class JigyoHokokuDataCsvRelateEntity {
     private RString biko;
     private RString shotokuKubun;
     private RString over70_ShotokuKubun;
-    private RString keikoku;
+    private RString warning;
     private LasdecCode shichosonCode;
     private LasdecCode kyuShichosonCode;
 }

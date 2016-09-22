@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- @reamsid_L DBC-5010-030 x_miaocl -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc050010.IKanendoUpdateFutanwariaiHanteiMapper">
+    <select  resultOrdered="true" id="get処理日付管理マスタ更新" 
+             resultMap="ResultMap_DbT7022ShoriDateKanriEntity"
+             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc050010.KanendoUpdateFutanwariaiHanteMybatisParameter" 
+             fetchSize="500">
+       SELECT
+        rgdb."DbT7022ShoriDateKanri".*
+        FROM
+        rgdb."DbT7022ShoriDateKanri"
+        WHERE
+        rgdb."DbT7022ShoriDateKanri"."subGyomuCode" = 'DBC'
+        AND rgdb."DbT7022ShoriDateKanri"."shichosonCode" = '000000'
+        AND rgdb."DbT7022ShoriDateKanri"."shoriName" = #{処理名}
+        AND rgdb."DbT7022ShoriDateKanri"."shoriEdaban" ='0000'
+        AND rgdb."DbT7022ShoriDateKanri"."nendo" ='0000'
+        AND rgdb."DbT7022ShoriDateKanri"."nendoNaiRenban" ='0001'
+       
+    </select>
+    <resultMap id="ResultMap_DbT7022ShoriDateKanriEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity" autoMapping="true">
+        <id property="shichosonCode" column="dbT7022ShoriDateKanriEntity_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <id property="subGyomuCode" column="dbT7022ShoriDateKanriEntity_subGyomuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SubGyomuCodeTypeHandler"/>
+        <id property="shoriName" column="dbT7022ShoriDateKanriEntity_shoriName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="shoriEdaban" column="dbT7022ShoriDateKanriEntity_shoriEdaban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="nendo" column="dbT7022ShoriDateKanriEntity_nendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <id property="nendoNaiRenban" column="dbT7022ShoriDateKanriEntity_nendoNaiRenban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT7022ShoriDateKanriEntity_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT7022ShoriDateKanriEntity_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="isDeleted" column="dbT7022ShoriDateKanriEntity_isDeleted"/>
+        <result property="insertReamsLoginId" column="dbT7022ShoriDateKanriEntity_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT7022ShoriDateKanriEntity_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="updateCount" column="dbT7022ShoriDateKanriEntity_updateCount"/>
+        <result property="lastUpdateTimestamp" column="dbT7022ShoriDateKanriEntity_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT7022ShoriDateKanriEntity_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kijunYMD" column="dbT7022ShoriDateKanriEntity_kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kijunTimestamp" column="dbT7022ShoriDateKanriEntity_kijunTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="taishoKaishiYMD" column="dbT7022ShoriDateKanriEntity_taishoKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="taishoShuryoYMD" column="dbT7022ShoriDateKanriEntity_taishoShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="taishoKaishiTimestamp" column="dbT7022ShoriDateKanriEntity_taishoKaishiTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+        <result property="taishoShuryoTimestamp" column="dbT7022ShoriDateKanriEntity_taishoShuryoTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YMDHMSTypeHandler"/>
+    </resultMap>
+</mapper>

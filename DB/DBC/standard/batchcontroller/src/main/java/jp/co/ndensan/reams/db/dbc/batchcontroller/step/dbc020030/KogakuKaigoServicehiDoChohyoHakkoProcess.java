@@ -25,20 +25,13 @@ import jp.co.ndensan.reams.db.dbc.entity.report.kogakuketteitsuchishosealer.Koga
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakuketteitsuchishosealer2.KogakuKetteiTsuchiShoEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.servicehishikyuketteitsuchisho.ServicehiShikyuKetteiTsuchisho;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
-import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
-import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
-import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -70,8 +63,6 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
     private static final int INT_2 = 2;
-    private static final int INT_3 = 3;
-    private static final int INT_4 = 4;
 
     private KogakuKaigoServiceProcessParameter parameter;
     private JigyoKogakuKetteiTsuchishoReportParameter mybatisParameter;
@@ -79,9 +70,6 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
 
     private List<RString> 改頁リスト;
     private List<RString> 並び順;
-    private ChohyoSeigyoKyotsu 帳票制御共通情報;
-    private Association 導入団体情報;
-//    private Ninshosha 認証者;
     private RString 出力順情報;
     private Set<RString> 条件set;
     private List<RString> 通知書定型文;
@@ -115,10 +103,7 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
         設定値 = service.get設定値(帳票分類ID);
         通知書定型文 = get通知書定型文();
         get出力順();
-        帳票制御共通情報 = new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBC介護給付, 帳票分類ID);
-        導入団体情報 = AssociationFinderFactory.createInstance().getAssociation();
-//        認証者 = NinshoshaFinderFactory.createInstance().get帳票認証者(
-//                GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード());
+        do口座マスク編集();
     }
 
     @Override
@@ -189,12 +174,6 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
         }
     }
 
-    private RString do住所編集(KetteiTsuchishoInfoTempResultEntity entity) {
-        IShikibetsuTaisho 宛名情報 = ShikibetsuTaishoFactory.createShikibetsuTaisho(entity.get宛名());
-        RString 住所 = JushoHenshu.editJusho(帳票制御共通情報, 宛名情報, 導入団体情報);
-        return RString.EMPTY;
-    }
-
     private void do口座マスク編集() {
         // TODO QA
     }
@@ -214,7 +193,7 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
         }
         reportEntity.set文書番号(parameter.get文書番号());
         if (entity.get宛名() != null && entity.get宛名().getKanjiShimei() != null) {
-            reportEntity.set被保険者氏名(entity.get宛名().getKanjiShimei().value());
+            reportEntity.set被保険者氏名(RString.EMPTY);
         }
         reportEntity.set被保険者番号(entity.get被保険者番号());
         reportEntity.set決定年月日(toRDate(entity.get決定年月日()));
@@ -339,7 +318,7 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
         }
         reportEntity.set文書番号(parameter.get文書番号());
         if (entity.get宛名() != null && entity.get宛名().getKanjiShimei() != null) {
-            reportEntity.set被保険者氏名(entity.get宛名().getKanjiShimei().value());
+            reportEntity.set被保険者氏名(RString.EMPTY);
         }
         reportEntity.set被保険者番号(entity.get被保険者番号());
         reportEntity.set決定年月日(entity.get決定年月日());

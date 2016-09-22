@@ -33,7 +33,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class KenkoKaruteRenkeiKoikiTempTableSakuseiProcess extends BatchProcessBase<KenkouKaruteRenkeiDataEntity> {
 
     private static final RString SELECT_KENKOUKARUTERENKEIDATA = new RString("jp.co.ndensan.reams.db.dbc."
-            + "persistence.db.mapper.relate.kenkoukaruterenkeidata.IKenkouKaruteRenkeiDataKoikiMapper.createKenkouKaruteRenkeiData");
+            + "persistence.db.mapper.relate.kenkoukaruterenkeidatakoiki.IKenkouKaruteRenkeiDataKoikiMapper.createKenkouKaruteRenkeiData");
     private KenkouKaruteRenkeiDataMybatisParameter mybitisParamter;
 
     @BatchWriter

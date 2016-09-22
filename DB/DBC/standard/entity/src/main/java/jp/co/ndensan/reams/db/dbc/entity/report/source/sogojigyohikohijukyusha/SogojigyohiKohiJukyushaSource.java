@@ -2,7 +2,9 @@ package jp.co.ndensan.reams.db.dbc.entity.report.source.sogojigyohikohijukyusha;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 総合事業費公費受給者別一覧表帳票Source。
@@ -60,6 +62,7 @@ public class SogojigyohiKohiJukyushaSource implements IReportSource {
     public RString listUpper_8;
     @ReportItem(name = "listUpper_9", length = 15, order = 24)
     public RString listUpper_9;
+    @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listUpper_10", length = 10, order = 25)
     public RString listUpper_10;
     @ReportItem(name = "listUpper_11", length = 6, order = 26)
@@ -88,6 +91,9 @@ public class SogojigyohiKohiJukyushaSource implements IReportSource {
     public RString shimei50onKana;
     @ReportItem(name = "shichosonCode", length = 40, order = 38)
     public RString shichosonCode;
+    @ReportPerson(id = "A")
+    @ReportItem(name = "shikibetsuCode", length = 15)
+    public RString shikibetsuCode;
 
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">

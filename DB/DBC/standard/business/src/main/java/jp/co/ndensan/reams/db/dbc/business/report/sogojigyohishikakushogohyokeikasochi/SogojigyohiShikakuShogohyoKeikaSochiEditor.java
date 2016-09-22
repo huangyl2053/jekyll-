@@ -74,6 +74,7 @@ public class SogojigyohiShikakuShogohyoKeikaSochiEditor
         source.listUpper_1 = new RString(連番);
         if (target.get被保険者一時() != null) {
             editor編集1(source);
+            source.shikibetsuCode = target.get被保険者一時().get識別コード();
             source.listUpper_2 = target.get被保険者一時().get登録被保険者番号().getColumnValue();
             source.listLower_1 = target.get被保険者一時().get宛名名称();
             if (導入形態コード.is広域()) {
@@ -101,6 +102,7 @@ public class SogojigyohiShikakuShogohyoKeikaSochiEditor
                 source.listUpper_16 = decimal_to_string(target.get資格照合表一時().getRiyoshaFutanGaku());
             }
         }
+
         editor集計(source);
 
         return source;

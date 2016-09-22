@@ -29,7 +29,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -91,9 +90,8 @@ public class KogakugassanShikyushinseishoOutShinseishoReportProcess
     private Set<ShikibetsuCode> 識別コードset;
     private RDateTime システム日付;
     private int count;
-    @BatchWriter
+
     private CsvWriter<KogakugassanShikyushinseishoOutCsvEntity> eucCsvWriter;
-    @BatchWriter
     private BatchReportWriter<GassanShikyuShinseishoJohoSofuIchiranSource> batchReportWriter;
     private ReportSourceWriter<GassanShikyuShinseishoJohoSofuIchiranSource> reportSourceWriter;
 
@@ -115,25 +113,28 @@ public class KogakugassanShikyushinseishoOutShinseishoReportProcess
     @Override
     protected void createWriter() {
         pageBreakKeys.add(固定改頁項目);
-        PageBreaker<GassanShikyuShinseishoJohoSofuIchiranSource> breaker
-                = new GassanShikyuShinseishoJohoSofuIchiranPageBreak(pageBreakKeys);
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200027.getReportId().getColumnValue())
-                .addBreak(breaker).create();
-        reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         eucManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = eucManager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
-        eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
-                .setDelimiter(コンマ)
-                .setEnclosure(ダブル引用符)
-                .setEncode(Encode.UTF_8withBOM)
-                .setNewLine(NewLine.CRLF)
-                .hasHeader(true)
-                .build();
+
     }
 
     @Override
     protected void usualProcess(KogakugassanShikyushinseishoOutFileEntity entity) {
+        if (index == INT_1) {
+            PageBreaker<GassanShikyuShinseishoJohoSofuIchiranSource> breaker
+                    = new GassanShikyuShinseishoJohoSofuIchiranPageBreak(pageBreakKeys);
+            batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200027.getReportId().getColumnValue())
+                    .addBreak(breaker).create();
+            reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
+            eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
+                    .setDelimiter(コンマ)
+                    .setEnclosure(ダブル引用符)
+                    .setEncode(Encode.UTF_8withBOM)
+                    .setNewLine(NewLine.CRLF)
+                    .hasHeader(true)
+                    .build();
+        }
         KogakugassanShikyushinseishoOutFileEntity beforeEntity = getBefore();
         if (!entity.get高額合算申請書一時Entity().isJufukuKubun()) {
             count = INT_1;
@@ -158,12 +159,15 @@ public class KogakugassanShikyushinseishoOutShinseishoReportProcess
 
     @Override
     protected void afterExecute() {
-        eucCsvWriter.close();
-        if (!personalDataList.isEmpty()) {
-            AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
-            eucManager.spool(eucFilePath, accessLogUUID);
-        } else {
-            eucManager.spool(eucFilePath);
+        if (index != INT_1) {
+            eucCsvWriter.close();
+            batchReportWriter.close();
+            if (!personalDataList.isEmpty()) {
+                AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
+                eucManager.spool(eucFilePath, accessLogUUID);
+            } else {
+                eucManager.spool(eucFilePath);
+            }
         }
     }
 
@@ -282,8 +286,7 @@ public class KogakugassanShikyushinseishoOutShinseishoReportProcess
         RString 作成日 = datetime.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         RString 作成時 = datetime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
-        RString sakuseiYMD = 作成日.concat(RString.HALF_SPACE).concat(作成時).concat(RString.HALF_SPACE).concat(作成R);
-        return sakuseiYMD;
+        return 作成日.concat(RString.HALF_SPACE).concat(作成時).concat(RString.HALF_SPACE).concat(作成R);
     }
 
 }

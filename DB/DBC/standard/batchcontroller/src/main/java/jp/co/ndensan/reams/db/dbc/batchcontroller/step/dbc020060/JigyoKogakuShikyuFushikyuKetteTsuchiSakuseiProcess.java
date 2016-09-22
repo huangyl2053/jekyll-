@@ -181,7 +181,7 @@ public class JigyoKogakuShikyuFushikyuKetteTsuchiSakuseiProcess extends BatchKey
             returnEntity.set被保険者番号(entity.get被保険者番号().getColumnValue());
         }
         if (entity.get宛名() != null && entity.get宛名().getKanjiShimei() != null) {
-            returnEntity.set被保険者氏名(entity.get宛名().getKanjiShimei().value());
+            returnEntity.set被保険者氏名(RString.EMPTY);
         }
         returnEntity.set住所(住所);
         // 郵便番号的来源不明

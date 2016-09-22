@@ -11,7 +11,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC170010.IdoRenrakuhyoDBUpdateProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC170010.IdoRenrakuhyoSofuFileSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC170010.IdoRenrakuhyoSofuTaishoDataShutokuProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110130.HokenshaKyufujissekiOutListSakuseiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110130.HokenshaKyufujissekiOutListSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoInterfaceKanriKousinProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC170010.DBC170010_ServicecodeIdoRenrakuhyoOutParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_SakuseiErrorListType;

@@ -6,15 +6,15 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import java.io.File;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120140.ShikyuFushikyuDoIchiranhyoSakuseiProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120140.ShikyuFushikyuIchiranDataNomiTorokuProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120140.ShikyuFushikyuKozaJohoTorokuProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120140.ShikyuFushikyuKozaKakuninTorokuProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120140.ShikyuFushikyuMasterTorokuProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120140.ShikyuFushikyuReadCsvFile38BProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120140.ShikyuFushikyuReadCsvFile38GProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120140.ShikyuFushikyuRirekiNoTorokuProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120140.ShikyuFushikyuSaishoriJunbiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120140.ShikyuFushikyuDoIchiranhyoSakuseiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120140.ShikyuFushikyuIchiranDataNomiTorokuProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120140.ShikyuFushikyuKozaJohoTorokuProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120140.ShikyuFushikyuKozaKakuninTorokuProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120140.ShikyuFushikyuMasterTorokuProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120140.ShikyuFushikyuReadCsvFile38BProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120140.ShikyuFushikyuReadCsvFile38GProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120140.ShikyuFushikyuRirekiNoTorokuProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120140.ShikyuFushikyuSaishoriJunbiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDeleteReveicedFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoHihokenshaKanrenProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoInterfaceKanriKousinProcess;
@@ -87,13 +87,17 @@ public class DBC120140_KogakuGassanShikyuFushikyuKetteiIn
     @Override
     protected void defineFlow() {
         try {
+            RString 処理区分trim = RString.EMPTY;
+            if (!RString.isNullOrEmpty(getParameter().get処理区分())) {
+                処理区分trim = getParameter().get処理区分().trim();
+            }
             RDate now = RDate.getNowDate();
             交換情報識別番号38B = DbBusinessConfig.get(
                     ConfigNameDBC.国保連取込媒体_合算支給通知Ｆ_交換情報識別番号, now, SubGyomuCode.DBC介護給付)
-                    .concat(getParameter().get処理区分().trim());
+                    .concat(処理区分trim);
             交換情報識別番号38G = DbBusinessConfig.get(
                     ConfigNameDBC.国保連取込媒体_合算支給一覧Ｆ_交換情報識別番号, now, SubGyomuCode.DBC介護給付)
-                    .concat(getParameter().get処理区分().trim());
+                    .concat(処理区分trim);
             executeStep(ファイル取得38B);
             returnEntity38B
                     = getResult(KokuhorenKyoutsuuFileGetReturnEntity.class, new RString(ファイル取得38B),

@@ -14,7 +14,7 @@ import lombok.Setter;
 /**
  * 受給者給付実績一覧表発行.xlsx のDivControllerクラスです。
  *
- * @author DBC-3070-010 dangjingjing
+ * @reamsid_L DBC-3070-010 dangjingjing
  */
 @Getter
 @Setter

@@ -2,7 +2,9 @@ package jp.co.ndensan.reams.db.dbd.entity.report.dbd503001;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 介護認定審査判定依頼一覧表ReportSourceです。
@@ -55,5 +57,10 @@ public class ShinsaHanteiIraiIchiranhyoReportSource implements IReportSource {
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
     @ReportItem(name = "reportId", order = 19)
     public RString reportId;
+    @ReportExpandedInfo(id = "001", code = "0003", name = "被保険者番号")
+    public RString hihokenshaNo;
+    @ReportPerson(id = "001", order = 21)
+    public RString shikibetsuCode;
+
 // </editor-fold>
 }

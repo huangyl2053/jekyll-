@@ -18,7 +18,8 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEnt
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class HihokenshaShikibetsuTaishoEntity {
 
-    private DbWT3470ToukeihyoMeisaiTempEntity 給付実績;
+    private int 連番;
+    private KyufuJissekiMeisaiEntity 給付実績;
     private UaFt200FindShikibetsuTaishoEntity 宛名;
     private DbT1001HihokenshaDaichoEntity 被保険者台帳管理;
 

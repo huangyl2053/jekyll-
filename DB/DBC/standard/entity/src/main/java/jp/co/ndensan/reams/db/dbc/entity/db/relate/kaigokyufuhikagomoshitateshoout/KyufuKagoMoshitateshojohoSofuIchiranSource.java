@@ -2,7 +2,9 @@ package jp.co.ndensan.reams.db.dbc.entity.db.relate.kaigokyufuhikagomoshitatesho
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  *
@@ -50,6 +52,7 @@ public class KyufuKagoMoshitateshojohoSofuIchiranSource implements IReportSource
     public RString listUpper_2;
     @ReportItem(name = "listUpper_3", length = 20, order = 19)
     public RString listUpper_3;
+    @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listUpper_4", length = 10, order = 20)
     public RString listUpper_4;
     @ReportItem(name = "listUpper_5", length = 30, order = 21)
@@ -82,5 +85,8 @@ public class KyufuKagoMoshitateshojohoSofuIchiranSource implements IReportSource
     public RString listUpper_14;
     @ReportItem(name = "listUpper_15", length = 20, order = 35)
     public RString listUpper_15;
+    @ReportPerson(id = "A")
+    @ReportItem(name = "shikibetsuCode", length = 15)
+    public RString shikibetsuCode;
 
 }

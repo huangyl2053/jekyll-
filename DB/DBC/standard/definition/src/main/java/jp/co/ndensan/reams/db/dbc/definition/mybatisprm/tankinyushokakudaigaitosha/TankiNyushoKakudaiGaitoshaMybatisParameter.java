@@ -105,10 +105,10 @@ public final class TankiNyushoKakudaiGaitoshaMybatisParameter implements IMyBati
             is保険者コード = true;
         }
 
-        if (ChushutsuKubun.最新拡大データ.get名称().equals(抽出区分)) {
+        if (ChushutsuKubun.最新拡大データ.getコード().equals(抽出区分)) {
             is抽出区分_直近 = true;
         }
-        if (GendogakuKanriKikansu.入力済みを含まない.get名称().equals(限度額管理期間数)) {
+        if (GendogakuKanriKikansu.入力済みを含まない.getコード().equals(限度額管理期間数)) {
             is入力済みを含む = true;
         }
         return new TankiNyushoKakudaiGaitoshaMybatisParameter(保険者コード,

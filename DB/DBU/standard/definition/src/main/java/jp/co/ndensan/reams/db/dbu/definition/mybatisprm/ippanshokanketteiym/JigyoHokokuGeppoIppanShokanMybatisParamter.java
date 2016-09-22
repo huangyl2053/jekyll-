@@ -252,11 +252,9 @@ public final class JigyoHokokuGeppoIppanShokanMybatisParamter implements IMyBati
                 基準年月日 = 処理日時.substring(0, INDEX);
                 基準日時 = 処理日時;
             }
-        } else if (PrintControlKubun.過去分の印刷.getコード().equals(プリントコントロール区分)) {
-            if (!RString.isNullOrEmpty(作成日時)) {
-                基準年月日 = 作成日時.substring(0, INDEX);
-                基準日時 = 作成日時;
-            }
+        } else if (PrintControlKubun.過去分の印刷.getコード().equals(プリントコントロール区分) && !RString.isNullOrEmpty(作成日時)) {
+            基準年月日 = 作成日時.substring(0, INDEX);
+            基準日時 = 作成日時;
         }
         RString 処理枝番 = RString.EMPTY;
         if (!RString.isNullOrEmpty(決定年月)) {

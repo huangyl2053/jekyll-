@@ -71,7 +71,7 @@
               AND TAB."shoriYM" = (
                 SELECT MAX(TempTAB."shoriYM")
                 FROM rgdb."DbT3104KokuhorenInterfaceKanri" AS TempTAB
-                WHERE TempTAB."sofuTorikomiKubun" = '2')  
+                WHERE TempTAB."sofuTorikomiKubun" = '1')  
     </select>
 
 

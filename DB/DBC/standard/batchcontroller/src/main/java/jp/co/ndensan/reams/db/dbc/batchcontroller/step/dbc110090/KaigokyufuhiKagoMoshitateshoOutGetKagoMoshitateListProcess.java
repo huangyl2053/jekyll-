@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110090.DbWT1731KagoMoshita
 import jp.co.ndensan.reams.db.dbx.business.config.kyotsu.hokenshajoho.ConfigKeysHokenshaJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
@@ -134,7 +133,7 @@ public class KaigokyufuhiKagoMoshitateshoOutGetKagoMoshitateListProcess extends 
         dbWT1731Entity.setMoshitateYMD(entity.getMoshitateYMD());
         dbWT1731Entity.setMoshitateJiyuCode(entity.getMoshitateJiyuCode());
         dbWT1731Entity.setShoKisaiHokenshaNo(entity.getShokisaiHokenshaNo());
-        dbWT1731Entity.setMoshitateJiyuCode(entity.getMoshitateJiyuCode());
+        dbWT1731Entity.setMoshitateshaKubunCode(entity.getMoshitateshaKubunCode());
         dbWT1731Entity.setKokuhorenSofuYM(entity.getKokuhorenSofuYM());
         dbWT1731Entity.setKokuhirenSaiSofuAriFlag(entity.getKokuhirenSaiSofuAriFlag());
         dbWT1731Entity.setDogetsuShinsaAriFlag(entity.getDogetsuShinsaAriFlag());
@@ -165,7 +164,7 @@ public class KaigokyufuhiKagoMoshitateshoOutGetKagoMoshitateListProcess extends 
         dbWT1001Entity.setExServiceTeikyoYm(entity.getServiceTeikyoYM());
         dbWT1001Entity.setHenkanFlag(false);
         dbWT1001Entity.setOldShichosonCode(LasdecCode.EMPTY);
-        dbWT1001Entity.setSofuHihokenshaNo(new HihokenshaNo(entity.getShokisaiHokenshaNo().getColumnValue()));
+        dbWT1001Entity.setSofuHihokenshaNo(entity.getHiHokenshaNo());
         dbWT1001Entity.setShichosonCode(LasdecCode.EMPTY);
         dbWT1001Entity.setKannaiKangaiKubun(RString.EMPTY);
         dbWT1001Entity.setYubinNo(RString.EMPTY);

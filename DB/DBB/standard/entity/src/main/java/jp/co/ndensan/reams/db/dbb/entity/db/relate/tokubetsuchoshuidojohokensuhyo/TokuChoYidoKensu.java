@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbb.entity.db.relate.tokubetsuchoshuidojohokensuh
 
 import jp.co.ndensan.reams.ue.uex.definition.core.NenkinHokenshaCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 帳票設計_DBBPR82001_4_特別徴収異動情報件数表Entity
@@ -31,5 +32,12 @@ public class TokuChoYidoKensu {
     private int 住所地特例件数Right;
     private int 追加依頼件数Left;
     private int 追加依頼件数Right;
+    private RString 年金保険者名称;
+    private RString 市町村名称;
+    private RString 該当件数の件数の合計;
+    private RString 資格喪失の件数の合計;
+    private RString 仮徴収額変更の件数の合計;
+    private RString 住所地特例の件数の合計;
+    private RString 特徴追加依頼の件数の合計;
 
 }

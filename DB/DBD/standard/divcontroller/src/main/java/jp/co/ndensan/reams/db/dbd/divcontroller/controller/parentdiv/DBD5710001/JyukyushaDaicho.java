@@ -5,10 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD5710001;
 
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD571001.DBD571001Parameter;
+import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5710001.DBD5710001StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5710001.JyukyushaDaichoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5710001.JyukyushaDaichoHandler;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5710001.JyukyushaDaichoValidationHandler;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -31,6 +34,7 @@ public class JyukyushaDaicho {
      */
     public ResponseData<JyukyushaDaichoDiv> onLoad(JyukyushaDaichoDiv div) {
         creatJyukyushaDaichoHandler(div).onLoad();
+        div.getShutsuryokuSort().load(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD100026.getReportId());
         return ResponseData.of(div).respond();
     }
 
@@ -40,8 +44,8 @@ public class JyukyushaDaicho {
      * @param div JyukyushaDaichoDiv
      * @return ResponseData<JyukyushaDaichoDiv>
      */
-    public ResponseData<JyukyushaDaichoDiv> onChange_radChushutsuJyouken(JyukyushaDaichoDiv div) {
-        creatJyukyushaDaichoHandler(div).onChange_radChushutsuJyouken();
+    public ResponseData<JyukyushaDaichoDiv> radChushutsuJyouken_onChange(JyukyushaDaichoDiv div) {
+        creatJyukyushaDaichoHandler(div).radChushutsuJyouken_onChange();
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         if (対象期間.equals(div.getChushutsuJyouken().getRadChushutsuJyouken().getSelectedKey())) {
             getValidationHandler().validateFor今回抽出対象終了日付が開始日付以前チェック(pairs, div);
@@ -71,8 +75,19 @@ public class JyukyushaDaicho {
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-
         return ResponseData.of(div).setState(DBD5710001StateName.初期表示);
+    }
+
+    /**
+     * 「リスト作成を実行する」ボタンを押下のバッチパラメータ作成。
+     *
+     * @param div JyukyushaDaichoDiv
+     * @return ResponseData<DBD571001Parameter>
+     */
+    public ResponseData<DBD571001Parameter> onCilck_btnBatchRegister(JyukyushaDaichoDiv div) {
+        DBD571001Parameter parameter = new DBD571001Parameter();
+        creatJyukyushaDaichoHandler(div).onCilck_btnBatchRegister(div, parameter);
+        return ResponseData.of(parameter).respond();
     }
 
     private JyukyushaDaichoHandler creatJyukyushaDaichoHandler(JyukyushaDaichoDiv div) {

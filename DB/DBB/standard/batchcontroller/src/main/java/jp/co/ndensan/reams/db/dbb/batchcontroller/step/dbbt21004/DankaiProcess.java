@@ -252,34 +252,32 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
             set生活保護扶助種類EntityList(entity.get生活保護扶助種類());
             set世帯員所得情報List(entity.get世帯員所得情報Temp());
         } else if (!被保険者番号.equals(entity.get被保険者対象Temp().getHihokenshaNo())) {
+            SeikatsuHogoJukyushaRelateEntity 生活保護受給者RelateEntity = new SeikatsuHogoJukyushaRelateEntity();
+            生活保護受給者RelateEntity.set生活保護受給者Entity(生活保護受給者Entity);
+            生活保護受給者RelateEntity.set生活保護扶助種類Entity(生活保護扶助種類EntityList);
+            set生保の情報(生活保護受給者RelateEntity);
             DankaiProcessEntityList dankaiProcessEntity = new DankaiProcessEntityList();
             dankaiProcessEntity.set被保険者対象Temp(被保険者対象Entity);
             dankaiProcessEntity.set月別Temp(月別Entity);
             dankaiProcessEntity.set世帯員所得情報Temp(世帯員所得情報List);
             dankaiProcessEntity.set生保の情報(生保の情報);
             dankaiProcessEntity.set老齢の情報(老齢の情報);
-            set被保険者番号(entity);
             dankaiProcessEntityList.add(dankaiProcessEntity);
-            dankaiProcessEntity = new DankaiProcessEntityList();
-            dankaiProcessEntity.set被保険者対象Temp(entity.get被保険者対象Temp());
+            insetTable(dankaiProcessEntityList);
+            dankaiProcessEntityList = new ArrayList<>();
+            set被保険者番号(entity);
             被保険者対象Entity = entity.get被保険者対象Temp();
-            dankaiProcessEntity.set月別Temp(entity.get月別Temp());
-            世帯員所得情報List = new ArrayList<>();
-            set世帯員所得情報List(entity.get世帯員所得情報Temp());
-            dankaiProcessEntity.set世帯員所得情報Temp(世帯員所得情報List);
-            SeikatsuHogoJukyushaRelateEntity 生活保護受給者RelateEntity = new SeikatsuHogoJukyushaRelateEntity();
-            生活保護受給者RelateEntity.set生活保護受給者Entity(生活保護受給者Entity);
-            生活保護受給者RelateEntity.set生活保護扶助種類Entity(生活保護扶助種類EntityList);
-            set生保の情報(生活保護受給者RelateEntity);
             老齢の情報 = new ArrayList<>();
             set老齢の情報(entity.get老齢の情報());
-            生保の情報 = new ArrayList<>();
+            月別Entity = new TsukibetsuRankTemp();
+            月別Entity = entity.get月別Temp();
+            set被保険者番号(entity);
             set生活保護受給者Entity(entity.get生活保護受給者());
             生活保護扶助種類EntityList = new ArrayList<>();
-            dankaiProcessEntity.set老齢の情報(老齢の情報);
             set生活保護扶助種類EntityList(entity.get生活保護扶助種類());
-            dankaiProcessEntity.set生保の情報(生保の情報);
-            insetTable(dankaiProcessEntityList);
+            生保の情報 = new ArrayList<>();
+            世帯員所得情報List = new ArrayList<>();
+            set世帯員所得情報List(entity.get世帯員所得情報Temp());
         } else {
             set老齢の情報(entity.get老齢の情報());
             set世帯員所得情報List(entity.get世帯員所得情報Temp());
@@ -341,7 +339,8 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
         for (int j = i + ONE; j <= TWE; j++) {
             if (null != 月別保険料制御情報Map.get(j)
                     && null != 月別保険料制御情報Map.get(j).get段階区分()
-                    && RString.EMPTY != 月別保険料制御情報Map.get(j).get段階区分()) {
+                    && RString.EMPTY != 月別保険料制御情報Map.get(j).get段階区分()
+                    && 月別保険料制御情報Map.get(i).get段階区分() != 月別保険料制御情報Map.get(j).get段階区分()) {
                 hokenshaDankaiTemp.set保険者設定段階2(月別保険料制御情報Map.get(j).get段階区分());
                 break;
             }
@@ -354,14 +353,15 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
             if (null != 月別保険料制御情報Map.get(k)
                     && null != 月別保険料制御情報Map.get(k).get段階区分()
                     && RString.EMPTY != 月別保険料制御情報Map.get(k).get段階区分()) {
-                hyojunDankaiTemp.set標準設定段階1(月別保険料制御情報Map.get(i).get段階区分());
+                hyojunDankaiTemp.set標準設定段階1(月別保険料制御情報Map.get(k).get段階区分());
                 break;
             }
         }
         for (int l = k + ONE; l <= TWE; l++) {
             if (null != 月別保険料制御情報Map.get(l)
                     && null != 月別保険料制御情報Map.get(l).get段階区分()
-                    && RString.EMPTY != 月別保険料制御情報Map.get(l).get段階区分()) {
+                    && RString.EMPTY != 月別保険料制御情報Map.get(l).get段階区分()
+                    && 月別保険料制御情報Map.get(k).get段階区分() != 月別保険料制御情報Map.get(l).get段階区分()) {
                 hyojunDankaiTemp.set標準設定段階2(月別保険料制御情報Map.get(l).get段階区分());
                 break;
             }

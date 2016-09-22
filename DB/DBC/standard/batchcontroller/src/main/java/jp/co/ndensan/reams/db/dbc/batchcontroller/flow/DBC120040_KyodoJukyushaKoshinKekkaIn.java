@@ -88,31 +88,36 @@ public class DBC120040_KyodoJukyushaKoshinKekkaIn extends BatchFlowBase<DBC12004
                     executeStep(一時TBL基本情報_5C3作成);
                     レコード総件数 = レコード総件数 + getResult(Integer.class, new RString(一時TBL基本情報_5C3作成),
                             CreateTmptable5C3Process.レコード件数);
+                    処理対象年月 = getResult(RString.class, new RString(一時TBL基本情報_5C3作成), CreateTmptable5C3Process.処理対象年月);
                 } else if (償還情報_5D3.equals(ファイル名.substring(2, ENDINDEX))) {
                     executeStep(一時TBL償還情報_5D3作成);
-                    レコード総件数 = レコード総件数 + getResult(Integer.class, new RString(一時TBL基本情報_5C3作成),
-                            CreateTmptable5C3Process.レコード件数);
+                    レコード総件数 = レコード総件数 + getResult(Integer.class, new RString(一時TBL償還情報_5D3作成),
+                            CreateTmptable5D3Process.レコード件数);
+                    処理対象年月 = getResult(RString.class, new RString(一時TBL償還情報_5D3作成), CreateTmptable5D3Process.処理対象年月);
                 } else if (高額情報_5E3.equals(ファイル名.substring(2, ENDINDEX))) {
                     executeStep(一時TBL高額情報_5E3作成);
-                    レコード総件数 = レコード総件数 + getResult(Integer.class, new RString(一時TBL基本情報_5C3作成),
-                            CreateTmptable5C3Process.レコード件数);
+                    レコード総件数 = レコード総件数 + getResult(Integer.class, new RString(一時TBL高額情報_5E3作成),
+                            CreateTmptable5E3Process.レコード件数);
+                    処理対象年月 = getResult(RString.class, new RString(一時TBL高額情報_5E3作成), CreateTmptable5E3Process.処理対象年月);
                 } else if (基本情報_5C4.equals(ファイル名.substring(2, ENDINDEX))) {
                     executeStep(一時TBL基本情報_5C4作成);
-                    レコード総件数 = レコード総件数 + getResult(Integer.class, new RString(一時TBL基本情報_5C3作成),
-                            CreateTmptable5C3Process.レコード件数);
+                    レコード総件数 = レコード総件数 + getResult(Integer.class, new RString(一時TBL基本情報_5C4作成),
+                            CreateTmptable5C4Process.レコード件数);
+                    処理対象年月 = getResult(RString.class, new RString(一時TBL基本情報_5C4作成), CreateTmptable5C4Process.処理対象年月);
                 } else if (償還情報_5D4.equals(ファイル名.substring(2, ENDINDEX))) {
                     executeStep(一時TBL償還情報_5D4作成);
-                    レコード総件数 = レコード総件数 + getResult(Integer.class, new RString(一時TBL基本情報_5C3作成),
-                            CreateTmptable5C3Process.レコード件数);
+                    レコード総件数 = レコード総件数 + getResult(Integer.class, new RString(一時TBL償還情報_5D4作成),
+                            CreateTmptable5D4Process.レコード件数);
+                    処理対象年月 = getResult(RString.class, new RString(一時TBL償還情報_5D4作成), CreateTmptable5D4Process.処理対象年月);
                 } else if (高額情報_5E4.equals(ファイル名.substring(2, ENDINDEX))) {
                     executeStep(一時TBL高額情報_5E4作成);
-                    レコード総件数 = レコード総件数 + getResult(Integer.class, new RString(一時TBL基本情報_5C3作成),
-                            CreateTmptable5C3Process.レコード件数);
+                    レコード総件数 = レコード総件数 + getResult(Integer.class, new RString(一時TBL高額情報_5E4作成),
+                            CreateTmptable5E4Process.レコード件数);
+                    処理対象年月 = getResult(RString.class, new RString(一時TBL高額情報_5E4作成), CreateTmptable5E4Process.処理対象年月);
                 }
             } catch (Exception e) {
                 throw new BatchInterruptedException(e.getMessage());
             }
-            処理対象年月 = getResult(RString.class, new RString(一時TBL基本情報_5C3作成), CreateTmptable5C3Process.処理対象年月);
         }
         executeStep(一時TBLの登録);
         int 登録件数 = getResult(Integer.class, new RString(一時TBLの登録), IchiTmpTableTorokuProcess.登録件数);

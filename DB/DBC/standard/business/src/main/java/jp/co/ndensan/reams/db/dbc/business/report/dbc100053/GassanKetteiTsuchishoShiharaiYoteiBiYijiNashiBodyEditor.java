@@ -72,8 +72,9 @@ public class GassanKetteiTsuchishoShiharaiYoteiBiYijiNashiBodyEditor
     private static final RString 口座種別 = new RString("口座種別");
     private static final RString ゆうちょ銀行店名表示 = new RString("ゆうちょ銀行店名表示");
     private static final RString 持ち物内容文言１ = new RString("持ち物内容文言１");
-    private static final RString 持ち物内容文言2 = new RString("持ち物内容文言2");
-    private static final RString 持ち物内容文言3 = new RString("持ち物内容文言3");
+    private static final RString 持ち物内容文言2 = new RString("持ち物内容文言２");
+    private static final RString 持ち物内容文言3 = new RString("持ち物内容文言３");
+    private static final RString 口座番号 = new RString("口座番号");
 
     /**
      * コンストラクタです
@@ -93,6 +94,7 @@ public class GassanKetteiTsuchishoShiharaiYoteiBiYijiNashiBodyEditor
     public GassanKetteiTsuchishoShiharaiYoteiBiYijiNashiSource edit(
             GassanKetteiTsuchishoShiharaiYoteiBiYijiNashiSource source) {
         editSource(source);
+        source.hihokenshaNo = getColumnValue(entity.get被保険者番号());
         return source;
     }
 
@@ -197,7 +199,7 @@ public class GassanKetteiTsuchishoShiharaiYoteiBiYijiNashiBodyEditor
                 source.hihoNo10 = 被保険者番号.substring(INT_9, INT_10);
             }
         }
-        source.bangoTitle = entity.get口座番号();
+        source.bangoTitle = 口座番号;
         source.tsuchibun2 = entity.get文書2();
         source.tsuchibun3 = entity.get文書3();
         source.tsuchibun4 = entity.get文書4();
@@ -408,7 +410,7 @@ public class GassanKetteiTsuchishoShiharaiYoteiBiYijiNashiBodyEditor
         if (entity.get金融機関名称() != null) {
             source.bankName = entity.get金融機関名称().get金融機関名称();
         }
-        if (entity.get金融機関コード() != null && !郵貯銀行.equals(entity.get金融機関コード())) {
+        if (entity.get金融機関コード() != null && !郵貯銀行.equals(getColumnValue(entity.get金融機関コード()))) {
             if (entity.get支店名称() != null) {
                 source.bankShiten = entity.get支店名称().get支店名称();
             }

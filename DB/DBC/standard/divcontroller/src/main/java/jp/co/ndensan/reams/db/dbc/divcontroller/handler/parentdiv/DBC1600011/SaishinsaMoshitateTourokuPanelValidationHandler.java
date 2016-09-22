@@ -49,7 +49,7 @@ public class SaishinsaMoshitateTourokuPanelValidationHandler {
      */
     public ValidationMessageControlPairs check被保番号と支援事業者番号の入力関連() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        if (RString.isNullOrEmpty(div.getTxtHihoNo().getValue()) && RString.isNullOrEmpty(div.getTextBox1().getValue())) {
+        if (RString.isNullOrEmpty(div.getTxtHihoNo().getValue()) && RString.isNullOrEmpty(div.getCcdJigyoshaSentaku().getNyuryokuShisetsuKodo())) {
             validPairs.add(new ValidationMessageControlPair(
                     new IdocheckMessages(UrErrorMessages.必須項目_追加メッセージあり, 必須項目1.toString())));
         }

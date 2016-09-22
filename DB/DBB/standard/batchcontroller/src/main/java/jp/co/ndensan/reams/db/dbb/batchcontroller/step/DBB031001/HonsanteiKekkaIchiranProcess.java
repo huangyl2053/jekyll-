@@ -413,7 +413,6 @@ public class HonsanteiKekkaIchiranProcess extends BatchKeyBreakBase<HonsenteiKei
 
     private void publish所得情報一覧表(KeisangojohoAtenaKozaEntity 計算後情報_宛名_口座Entity) {
         IKojin 宛名情報 = ShikibetsuTaishoFactory.createKojin(計算後情報_宛名_口座Entity.get宛名Entity());
-//        ChohyoSeigyoKyotsu 帳票制御共通 = HonnSanteiFukaFath.createInstance().load帳票制御共通(帳票ID);
         RString 住所編集 = JushoHenshu.editJusho(帳票制御共通, 宛名情報,
                 AssociationFinderFactory.createInstance().getAssociation());
         RString 口座情報 = kozaJoho(計算後情報_宛名_口座Entity);
@@ -798,31 +797,6 @@ public class HonsanteiKekkaIchiranProcess extends BatchKeyBreakBase<HonsenteiKei
         }
     }
 
-//    private List<RString> get出力順(Long 出力順ID) {
-//        IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
-//                .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200009.getReportId(), 出力順ID);
-//        List<RString> 並び順List = new ArrayList<>();
-//        if (並び順 != null) {
-//            for (ISetSortItem item : 並び順.get設定項目リスト()) {
-//                並び順List.add(item.get項目名());
-//            }
-//        }
-//        return 並び順List;
-//    }
-//
-//    private List<RString> get改頁項目(Long 出力順ID) {
-//        IOutputOrder 並び順 = ChohyoShutsuryokujunFinderFactory.createInstance()
-//                .get出力順(SubGyomuCode.DBB介護賦課, ReportIdDBB.DBB200009.getReportId(), 出力順ID);
-//        List<RString> 改頁項目List = new ArrayList<>();
-//        if (並び順 != null) {
-//            for (ISetSortItem item : 並び順.get設定項目リスト()) {
-//                if (item.is改頁項目()) {
-//                    改頁項目List.add(item.get項目名());
-//                }
-//            }
-//        }
-//        return 改頁項目List;
-//    }
     private Decimal nullTOZero(Decimal 期別金額) {
         if (期別金額 == null) {
             return Decimal.ZERO;
