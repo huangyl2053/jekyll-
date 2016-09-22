@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200014.HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReport;
 import jp.co.ndensan.reams.db.dbd.business.report.dbdbt00003.NinteishaListSakuseiProcessProperty;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.HihokenshaKeizaiJokyo;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TaishoKikan;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.gemmen.niteishalist.TargetList;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbdbt00003.NinteishaListSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00003.KakuninListCsvEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00003.NinnteiJohoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00003.NinteishaListSakuseiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00003.SetaiInRisutoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.report.dbd200014.HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource;
@@ -54,8 +54,11 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
@@ -187,28 +190,20 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
     }
 
     private void edit帳票用データ(NinteishaListSakuseiEntity t) {
-        if (t.get認定情報_要介護状態区分コード() != null && !t.get認定情報_要介護状態区分コード().isEmpty()) {
-            t.set認定情報_要介護状態区分コード(t.get認定情報_要介護状態区分コード());
-        } else {
-            t.set認定情報_要介護状態区分コード(new RString("06"));
-        }
 
-        if (t.get認定情報_認定年月日() != null && !t.get認定情報_認定年月日().isEmpty()) {
-            t.set認定情報_認定年月日(t.get認定情報_認定年月日());
-        } else if (t.get総合事業対象者情報_チェックリスト実施日() != null && !t.get総合事業対象者情報_チェックリスト実施日().isEmpty()) {
-            t.set認定情報_認定年月日(t.get総合事業対象者情報_チェックリスト実施日());
-        }
-
-        if (t.get認定情報_認定有効期間開始年月日() != null && !t.get認定情報_認定有効期間開始年月日().isEmpty()) {
-            t.set認定情報_認定有効期間開始年月日(t.get認定情報_認定有効期間開始年月日());
-        } else if (t.get総合事業対象者情報_適用開始年月日() != null && !t.get総合事業対象者情報_適用開始年月日().isEmpty()) {
-            t.set認定情報_認定有効期間開始年月日(t.get総合事業対象者情報_適用開始年月日());
-        }
-
-        if (t.get認定情報_認定有効期間終了年月日() != null && !t.get認定情報_認定有効期間終了年月日().isEmpty()) {
-            t.set認定情報_認定有効期間終了年月日(t.get認定情報_認定有効期間終了年月日());
-        } else if (t.get総合事業対象者情報_適用終了年月日() != null && !t.get総合事業対象者情報_適用終了年月日().isEmpty()) {
-            t.set認定情報_認定有効期間終了年月日(t.get総合事業対象者情報_適用終了年月日());
+        if (t.get認定情報Entity() != null) {
+            t.get認定情報Entity().set認定情報_要介護状態区分コード(t.get認定情報Entity().get認定情報_要介護状態区分コード());
+            t.get認定情報Entity().set認定情報_認定年月日(t.get認定情報Entity().get認定情報_認定年月日());
+            t.get認定情報Entity().set認定情報_認定有効期間開始年月日(t.get認定情報Entity().get認定情報_認定有効期間開始年月日());
+            t.get認定情報Entity().set認定情報_認定有効期間終了年月日(t.get認定情報Entity().get認定情報_認定有効期間終了年月日());
+        } else if (t.get総合事業対象者情報Entity() != null) {
+            if (t.get認定情報Entity() == null) {
+                t.set認定情報Entity(new NinnteiJohoEntity());
+            }
+            t.get認定情報Entity().set認定情報_要介護状態区分コード(new RString("06"));
+            t.get認定情報Entity().set認定情報_認定年月日(t.get総合事業対象者情報Entity().get総合事業対象者情報_チェックリスト実施日());
+            t.get認定情報Entity().set認定情報_認定有効期間開始年月日(t.get総合事業対象者情報Entity().get総合事業対象者情報_適用開始年月日());
+            t.get認定情報Entity().set認定情報_認定有効期間終了年月日(t.get総合事業対象者情報Entity().get総合事業対象者情報_適用終了年月日());
         }
     }
 
@@ -232,21 +227,21 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
         RString 市町村名 = association.get市町村名();
         RString ジョブ番号 = new RString(String.valueOf(JobContextHolder.getJobId()));
         RString 帳票名 = new RString("訪問介護利用者負担額減額認定者リスト");
-        RString 出力ページ数 = new RString("");
+        RString 出力ページ数 = new RString(String.valueOf(reportSourceWriter.pageCount().value()));
         RString csv出力有無 = new RString("あり");
         RString csvファイル名 = new RString("HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiran.csv");
 
         List<RString> 出力条件 = new ArrayList<>();
         出力条件.add(対象期間指定.concat(parameter.get対象期間指定().get名称()));
         if (TaishoKikan.対象年度.getコード().equals(parameter.get対象期間指定().getコード())) {
-            出力条件.add(対象年度.concat(parameter.get対象年度の開始年月日().toString())
+            出力条件.add(対象年度.concat(edit日期(parameter.get対象年度の開始年月日()))
                     .concat(EUC_WRITER_LIAN)
-                    .concat(parameter.get対象年度の終了年月日().toString()));
-            出力条件.add(課税判定等基準日.concat(parameter.get課税判定等基準日().toString()));
+                    .concat(edit日期(parameter.get対象年度の終了年月日())));
+            出力条件.add(課税判定等基準日.concat(edit日期(parameter.get課税判定等基準日())));
         } else if (TaishoKikan.基準日.getコード().equals(parameter.get対象期間指定().getコード())) {
             出力条件.add(基準日.concat(parameter.get基準日().toString()));
         }
-        出力条件.add(所得年度.concat(parameter.get所得年度().toDateString()));
+        出力条件.add(所得年度.concat(edit年度(parameter.get所得年度())));
         出力条件.add(旧措置者区分.concat(parameter.get旧措置者区分().get名称()));
         出力条件.add(世帯表示.concat(parameter.get世帯表示().get名称()));
         出力条件.add(法別区分.concat(parameter.get法別区分().get名称()));
@@ -273,15 +268,34 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
         printer.print();
     }
 
+    private RString edit日期(FlexibleDate 日期) {
+
+        RString 変更後日期 = RString.EMPTY;
+        if (日期 != null) {
+            変更後日期 = 日期.wareki().eraType(EraType.KANJI).
+                    firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        }
+        return 変更後日期;
+    }
+
+    private RString edit年度(FlexibleYear 所得年度) {
+        RString 変更後年度 = RString.EMPTY;
+        if (所得年度 != null) {
+            変更後年度 = 所得年度.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)
+                    .fillType(FillType.NONE).toDateString();
+        }
+        return 変更後年度;
+    }
+
     private void 出力条件リスト_該当者() {
         RString 帳票ID = new RString("DBD200003_HomonKaigoRiyoshaFutangakuGengakuGaitoshaIchiran");
         RString 導入団体コード = association.getLasdecCode_().value();
         RString 市町村名 = association.get市町村名();
         RString ジョブ番号 = new RString(String.valueOf(JobContextHolder.getJobId()));
         RString 帳票名 = new RString("訪問介護利用者負担額減額該当者リスト");
-        RString 出力ページ数 = new RString("");
+        RString 出力ページ数 = new RString(String.valueOf(reportSourceWriter.pageCount().value()));
         RString csv出力有無 = new RString("あり");
-        RString csvファイル名 = new RString("HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiran.csv");
+        RString csvファイル名 = new RString("HomonKaigoRiyoshaFutangakuGengakuGaitoshaIchiran.csv");
 
         List<RString> 出力条件 = new ArrayList<>();
         出力条件.add(対象期間指定.concat(parameter.get対象期間指定().get名称()));
@@ -297,27 +311,36 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
         出力条件.add(旧措置者区分.concat(parameter.get旧措置者区分().get名称()));
         出力条件.add(世帯表示.concat(parameter.get世帯表示().get名称()));
         出力条件.add(受給者区分.concat(parameter.get受給者区分().get名称()));
-        if (null == parameter.get世帯非課税等()) {
+        if (parameter.get世帯非課税等() == null || parameter.get世帯非課税等().isEmpty()) {
             出力条件.add(世帯非課税等指定なし);
         } else {
-            出力条件.add(世帯非課税等.concat(HihokenshaKeizaiJokyo.市町村民税非課税世帯.get名称())
-                    .concat(EUC_WRITER_KONG)
-                    .concat(HihokenshaKeizaiJokyo.所得税非課税世帯.get名称())
-                    .concat(EUC_WRITER_KONG)
-                    .concat(HihokenshaKeizaiJokyo.市町村民税本人非課税者.get名称())
-                    .concat(EUC_WRITER_KONG)
-                    .concat(HihokenshaKeizaiJokyo.老齢福祉年金受給者.get名称())
-                    .concat(EUC_WRITER_KONG)
-                    .concat(HihokenshaKeizaiJokyo.生活保護受給者.get名称()));
+            StringBuilder builder = new StringBuilder();
+
+            for (int i = 0; i < parameter.get世帯非課税等().size(); i++) {
+                if (i == parameter.get世帯非課税等().size() - 1) {
+                    builder.append(parameter.get世帯非課税等().get(i).get名称());
+                } else {
+                    builder.append(parameter.get世帯非課税等().get(i).get名称().concat(EUC_WRITER_KONG));
+                }
+            }
+            出力条件.add(世帯非課税等.concat(builder.toString()));
         }
-        if (null == parameter.get出力設定()) {
+        if (parameter.get出力設定() == null || parameter.get出力設定().isEmpty()) {
             出力条件.add(CSV出力設定指定なし);
         } else {
-            出力条件.add(CSV出力設定.concat(CSVSettings.項目名付加.get名称())
-                    .concat(EUC_WRITER_DIAN)
-                    .concat(CSVSettings.連番付加.get名称())
-                    .concat(EUC_WRITER_DIAN)
-                    .concat(CSVSettings.日付スラッシュ編集.get名称()));
+
+            if (parameter.get出力設定() != null && !parameter.get出力設定().isEmpty()) {
+
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < parameter.get出力設定().size(); i++) {
+                    if (i == parameter.get出力設定().size() - 1) {
+                        builder.append(parameter.get出力設定().get(i).get名称());
+                    } else {
+                        builder.append(parameter.get出力設定().get(i).get名称().concat(EUC_WRITER_DIAN));
+                    }
+                }
+                出力条件.add(CSV出力設定.concat(builder.toString()));
+            }
         }
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
                 帳票ID,
@@ -342,7 +365,10 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
         eucCsvEntity.set被保険者番号(t.get被保険者番号().getColumnValue());
         eucCsvEntity.set識別コード(kojin.get識別コード().value());
         eucCsvEntity.set住所コード(kojin.get住所().get全国住所コード().value());
-        eucCsvEntity.set証保険者番号(t.get訪問介護利用者負担額減額().getShoKisaiHokenshaNo().value());
+        if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getShoKisaiHokenshaNo() != null) {
+            eucCsvEntity.set証保険者番号(t.get訪問介護利用者負担額減額().getShoKisaiHokenshaNo().value());
+        }
+
         eucCsvEntity.set氏名(kojin.get名称().getName().value());
         eucCsvEntity.setカナ氏名(kojin.get名称().getKana().value());
         eucCsvEntity.set年齢(kojin.get年齢算出().get年齢());
@@ -351,14 +377,36 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
         eucCsvEntity.set住所(kojin.get住所().get住所());
         eucCsvEntity.set行政区コード(kojin.get行政区画().getGyoseiku().getコード().value());
         eucCsvEntity.set行政区(kojin.get行政区画().getGyoseiku().get名称());
-        eucCsvEntity.set公費受給者番号(t.get訪問介護利用者負担額減額().getKohiJukyushaNo());
-        eucCsvEntity.set法別番号(t.get訪問介護利用者負担額減額().getHobetsuKubun());
-        eucCsvEntity.set決定区分(t.get訪問介護利用者負担額減額().getKetteiKubun()); //---
-        eucCsvEntity.set減免申請日(set年月日(t.get訪問介護利用者負担額減額().getShinseiYMD()));
-        eucCsvEntity.set減免決定日(set年月日(t.get訪問介護利用者負担額減額().getKetteiYMD()));
-        eucCsvEntity.set減免適用日(set年月日(t.get訪問介護利用者負担額減額().getTekiyoKaishiYMD()));
-        eucCsvEntity.set減免有効期限(set年月日(t.get訪問介護利用者負担額減額().getTekiyoShuryoYMD()));
-        eucCsvEntity.set給付率(new RString(t.get訪問介護利用者負担額減額().getKyufuritsu().getColumnValue().toString()));
+        if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getKohiJukyushaNo() != null) {
+            eucCsvEntity.set公費受給者番号(t.get訪問介護利用者負担額減額().getKohiJukyushaNo());
+        }
+
+        if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getHobetsuKubun() != null) {
+            eucCsvEntity.set法別番号(t.get訪問介護利用者負担額減額().getHobetsuKubun());
+        }
+        if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getKetteiKubun() != null) {
+            eucCsvEntity.set決定区分(t.get訪問介護利用者負担額減額().getKetteiKubun());
+        }
+
+        if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getShinseiYMD() != null) {
+            eucCsvEntity.set減免申請日(set年月日(t.get訪問介護利用者負担額減額().getShinseiYMD()));
+        }
+
+        if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getKetteiYMD() != null) {
+            eucCsvEntity.set減免決定日(set年月日(t.get訪問介護利用者負担額減額().getKetteiYMD()));
+        }
+
+        if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getTekiyoKaishiYMD() != null) {
+            eucCsvEntity.set減免適用日(set年月日(t.get訪問介護利用者負担額減額().getTekiyoKaishiYMD()));
+        }
+
+        if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getTekiyoShuryoYMD() != null) {
+            eucCsvEntity.set減免有効期限(set年月日(t.get訪問介護利用者負担額減額().getTekiyoShuryoYMD()));
+        }
+
+        if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getKyufuritsu() != null) {
+            eucCsvEntity.set給付率(new RString(t.get訪問介護利用者負担額減額().getKyufuritsu().value().toString()));
+        }
 
         if (t.is老齢福祉年金受給者() == true) {
             eucCsvEntity.set老齢福祉年金受給(SXING);
@@ -376,8 +424,14 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
         } else {
             eucCsvEntity.set課税区分(SPACE);
         }
-        eucCsvEntity.set障害者手帳等級(t.get訪問介護利用者負担額減額().getShogaishaTechoTokyu());
-        eucCsvEntity.set障害者番号(t.get訪問介護利用者負担額減額().getShogaishaTechoNo());
+        if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getShogaishaTechoTokyu() != null) {
+            eucCsvEntity.set障害者手帳等級(t.get訪問介護利用者負担額減額().getShogaishaTechoTokyu());
+        }
+
+        if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getShogaishaTechoNo() != null) {
+            eucCsvEntity.set障害者番号(t.get訪問介護利用者負担額減額().getShogaishaTechoNo());
+        }
+
         eucCsvEntity.set特定疾病(RString.isNullOrEmpty(t.get要介護認定申請情報_2号特定疾病コード()) ? RString.EMPTY
                 : TokuteiShippei.toValue(t.get要介護認定申請情報_2号特定疾病コード()).get名称());
         if (t.is所得税課税者() == true) {
@@ -390,32 +444,20 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
         } else {
             eucCsvEntity.set旧措置(SPACE);
         }
-        if (t.get認定情報_要介護状態区分コード() != null && !t.get認定情報_要介護状態区分コード().isEmpty()) {
-            eucCsvEntity.set要介護度(t.get認定情報_要介護状態区分コード());
-        } else {
+        if (t.get認定情報Entity() != null) {
+            eucCsvEntity.set要介護度(t.get認定情報Entity().get認定情報_要介護状態区分コード());
+            eucCsvEntity.set認定日(set年月日(t.get認定情報Entity().get認定情報_認定年月日()));
+            eucCsvEntity.set認定開始日(set年月日(t.get認定情報Entity().get認定情報_認定有効期間開始年月日()));
+            eucCsvEntity.set認定終了日(set年月日(t.get認定情報Entity().get認定情報_認定有効期間終了年月日()));
+        } else if (t.get総合事業対象者情報Entity() != null) {
             eucCsvEntity.set要介護度(new RString("06"));
-        }
-
-        if (t.get認定情報_認定年月日() != null && !t.get認定情報_認定年月日().isEmpty()) {
-            eucCsvEntity.set認定日(set年月日(t.get認定情報_認定年月日()));
-        } else if (t.get総合事業対象者情報_チェックリスト実施日() != null && !t.get総合事業対象者情報_チェックリスト実施日().isEmpty()) {
-            eucCsvEntity.set認定日(set年月日(t.get総合事業対象者情報_チェックリスト実施日()));
-        }
-
-        if (t.get認定情報_認定有効期間開始年月日() != null && !t.get認定情報_認定有効期間開始年月日().isEmpty()) {
-            eucCsvEntity.set認定開始日(set年月日(t.get認定情報_認定有効期間開始年月日()));
-        } else if (t.get総合事業対象者情報_適用開始年月日() != null && !t.get総合事業対象者情報_適用開始年月日().isEmpty()) {
-            eucCsvEntity.set認定開始日(set年月日(t.get総合事業対象者情報_適用開始年月日()));
-        }
-
-        if (t.get認定情報_認定有効期間終了年月日() != null && !t.get認定情報_認定有効期間終了年月日().isEmpty()) {
-            eucCsvEntity.set認定終了日(set年月日(t.get認定情報_認定有効期間終了年月日()));
-        } else if (t.get総合事業対象者情報_適用終了年月日() != null && !t.get総合事業対象者情報_適用終了年月日().isEmpty()) {
-            eucCsvEntity.set認定終了日(set年月日(t.get総合事業対象者情報_適用終了年月日()));
+            eucCsvEntity.set認定日(set年月日(t.get総合事業対象者情報Entity().get総合事業対象者情報_チェックリスト実施日()));
+            eucCsvEntity.set認定開始日(set年月日(t.get総合事業対象者情報Entity().get総合事業対象者情報_適用開始年月日()));
+            eucCsvEntity.set認定終了日(set年月日(t.get総合事業対象者情報Entity().get総合事業対象者情報_適用終了年月日()));
         }
         eucCsvEntity.set世帯員氏名(kojin.get名称().getName().value());
         eucCsvEntity.set世帯員住民種別(kojin.get住民状態().住民状態略称());
-        if (!setaEntity.get課税区分().isNullOrEmpty() && setaEntity.get課税区分().equals(new RString("1"))) {
+        if (setaEntity.get課税区分() != null && !setaEntity.get課税区分().isEmpty() && setaEntity.get課税区分().equals(new RString("1"))) {
             eucCsvEntity.set世帯員課税区分(KE);
         } else {
             eucCsvEntity.set世帯員課税区分(SPACE);
