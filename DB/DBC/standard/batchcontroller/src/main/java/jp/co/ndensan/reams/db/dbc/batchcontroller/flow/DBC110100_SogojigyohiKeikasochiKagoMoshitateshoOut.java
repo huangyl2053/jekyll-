@@ -456,21 +456,18 @@ public class DBC110100_SogojigyohiKeikasochiKagoMoshitateshoOut extends BatchFlo
     private KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter getParam() {
         KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter param = new KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter();
         param.set処理年月(new FlexibleYearMonth(getParameter().get処理年月().toDateString()));
-        param.set交換情報識別番号(ConfigKeysKokuhorenSofu.過誤申立書情報.getコード());
+        param.set交換情報識別番号(ConfigKeysKokuhorenSofu.総合事業費経過措置過誤申立書情報.getコード());
         param.set処理対象年月(new FlexibleYearMonth(getParameter().get処理年月().toDateString()));
         param.setレコード件数合計(レコード件数合計);
-//        List<RString> list = new ArrayList<>();
-//        if (エントリ情報List.isEmpty()) {
-//            param.setFileNameList(Collections.EMPTY_LIST);
-//        } else {
-//            for (SharedFileDescriptor entry : エントリ情報List) {
-//                // TODO QA1149 value too long for type character varying(20)
-//                list.add(entry.getSharedFileName().toRString());
-////                list.add(entry.getSharedFileName().toRString().substring(INT_4));
-//                param.setFileNameList(list);
-//            }
-//        }
-        param.setFileNameList(Collections.EMPTY_LIST);
+        List<RString> list = new ArrayList<>();
+        if (エントリ情報List.isEmpty()) {
+            param.setFileNameList(Collections.EMPTY_LIST);
+        } else {
+            for (SharedFileDescriptor entry : エントリ情報List) {
+                list.add(entry.getSharedFileName().toRString());
+            }
+            param.setFileNameList(list);
+        }
         return param;
     }
 }
