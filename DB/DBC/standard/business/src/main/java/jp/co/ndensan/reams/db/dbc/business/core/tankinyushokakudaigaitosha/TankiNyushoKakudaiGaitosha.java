@@ -8,6 +8,8 @@ package jp.co.ndensan.reams.db.dbc.business.core.tankinyushokakudaigaitosha;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.tankinyushokakudaigaitosha.ChushutsuKubun;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.tankinyushokakudaigaitosha.GendogakuKanriKikansu;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.tankinyushokakudaigaitosha.TankiNyushoKakudaiGaitoshaMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.tankinyushokakudaigaitosha.TankiNyushoKakudaiGaitoshaProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.tankinyushokakudaigaitosha.TankiNyushoKakudaiGaitoshaRelateEntity;
@@ -143,7 +145,7 @@ public class TankiNyushoKakudaiGaitosha {
         }
         eucEntity.set保険者コード(association.get地方公共団体コード().value());
         eucEntity.set保険者名(association.get市町村名());
-        eucEntity.set空白(new RString(" "));
+        eucEntity.set空白(RString.HALF_SPACE);
         eucEntity.set被保険者番号(entity.get被保険者番号());
         eucEntity.set資格取得事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getCodeShubetsu(), entity.get資格取得事由コード()));
         eucEntity.set資格取得日(set日付編集(entity.get資格取得年月日()));
@@ -327,7 +329,7 @@ public class TankiNyushoKakudaiGaitosha {
         }
         eucEntity.set保険者コード(association.get地方公共団体コード().value());
         eucEntity.set保険者名(association.get市町村名());
-        eucEntity.set空白(new RString(" "));
+        eucEntity.set空白(RString.HALF_SPACE);
         eucEntity.set被保険者番号(entity.get被保険者番号());
         eucEntity.set資格取得事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getCodeShubetsu(), entity.get資格取得事由コード()));
         eucEntity.set資格取得日(set日付編集(entity.get資格取得年月日()));
@@ -543,7 +545,7 @@ public class TankiNyushoKakudaiGaitosha {
         RStringBuilder builder = new RStringBuilder();
         builder.append(住所);
         builder.append(番地);
-        builder.append(new RString("　"));
+        builder.append(RString.FULL_SPACE);
         builder.append(方書);
         return builder.toRString();
     }
@@ -599,16 +601,16 @@ public class TankiNyushoKakudaiGaitosha {
             jokenBuilder.append(new RString("保険者："));
             RStringBuilder 市町村名builder = new RStringBuilder();
             市町村名builder.append(processParameter.get保険者コード());
-            市町村名builder.append(new RString(" "));
+            市町村名builder.append(RString.HALF_SPACE);
             市町村名builder.append(市町村名);
             jokenBuilder.append(市町村名builder.toRString());
         }
-        出力条件List.add(jokenBuilder.toRString());
+         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(new RString("抽出区分："));
-        jokenBuilder.append(processParameter.get抽出区分());
+        jokenBuilder.append(ChushutsuKubun.toValue(processParameter.get抽出区分()).get名称());
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(new RString("適用開始年月："));
@@ -618,7 +620,7 @@ public class TankiNyushoKakudaiGaitosha {
         出力条件List.add(get期間(jokenBuilder, processParameter.get適用終了年月From(), processParameter.get適用終了年月To()));
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(new RString("限度額管理期間数："));
-        jokenBuilder.append(processParameter.get限度額管理期間数());
+        jokenBuilder.append(GendogakuKanriKikansu.toValue(processParameter.get限度額管理期間数()).get名称());
         出力条件List.add(jokenBuilder.toRString());
         return 出力条件List;
     }
@@ -700,17 +702,17 @@ public class TankiNyushoKakudaiGaitosha {
         /**
          * 要介護度
          */
-        要介護度(new RString("0403"), new RString(""), new RString("yokaigoJotaiKubunCode\"")),
+        要介護度(new RString("0403"), new RString(""), new RString("\"yokaigoJotaiKubunCode\"")),
         /**
          * 認定開始日
          *
          * TODO QA1684 出力順について、ご提供した資料「帳票出力順管理.xls」より、取得した出力順項目はDB検索SQLで下記の項目がない
          */
-        認定開始日(new RString("0411"), new RString(""), new RString("ninteiKaishiYMD\"")),
+        認定開始日(new RString("0411"), new RString(""), new RString("\"ninteiKaishiYMD\"")),
         /**
          * 有効開始年月
          */
-        有効開始年月(new RString("0502"), new RString(""), new RString("yukoKaishiYM\""));
+        有効開始年月(new RString("0502"), new RString(""), new RString("\"yukoKaishiYM\""));
 
         private final RString 項目ID;
         private final RString フォームフィールド名;
