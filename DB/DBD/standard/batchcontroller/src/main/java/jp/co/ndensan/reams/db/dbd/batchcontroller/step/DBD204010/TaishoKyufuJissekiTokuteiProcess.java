@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd204010;
+package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD204010;
 
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd204010.TaishoKyufuJissekiTokuteiProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd204010.KyufujissekiKihonEntity;
@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBD-3880-030 jinge
  */
-public class TaishoKyufuJissekiTokuteiProcess extends BatchProcessBase<KyufujissekiKihonEntity> {//DbT3017KyufujissekiKihonEntity
+public class TaishoKyufuJissekiTokuteiProcess extends BatchProcessBase<KyufujissekiKihonEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.tokubetsuchiikikasankeigenlist."
