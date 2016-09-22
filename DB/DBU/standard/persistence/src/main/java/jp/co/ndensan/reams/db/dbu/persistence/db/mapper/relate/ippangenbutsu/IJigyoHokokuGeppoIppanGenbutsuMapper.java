@@ -6,9 +6,7 @@
 package jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.ippangenbutsu;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.ippangenbutsu.KyufuJissekiKonkyoMybatisParamter;
-import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.ippangenbutsu.TempJigyoHokokuTokeiMotoDataMybatisParamter;
-import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyojokyohokokushiryonemposakuseiiti.JigyoJokyoHokokuShiryoNempoSakuseiItiMybatisParamter;
+import jp.co.ndensan.reams.db.dbu.definition.mybatisprm.ippangenbutsu.JigyoHokokuGeppoIppanGenbutsuMybatisParamter;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.ippangenbutsu.JigyoHokokuIppanGenbutsuRelateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.ippangenbutsu.KyufuJissekiKonkyoRelateEntity;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyojokyohokokushiryonemposakuseiiti.JigyoHokokuDataRelateEntity;
@@ -28,7 +26,7 @@ public interface IJigyoHokokuGeppoIppanGenbutsuMapper {
      *
      * @return 事業報告統計元データ
      */
-    List<JigyoHokokuIppanGenbutsuRelateEntity> getJigyoHokokuTokeiMotoData(TempJigyoHokokuTokeiMotoDataMybatisParamter parameter);
+    List<JigyoHokokuIppanGenbutsuRelateEntity> getJigyoHokokuTokeiMotoData(JigyoHokokuGeppoIppanGenbutsuMybatisParamter parameter);
 
     /**
      * 処理結果確認リストEntityの取得処理です。
@@ -37,7 +35,7 @@ public interface IJigyoHokokuGeppoIppanGenbutsuMapper {
      *
      * @return 処理結果確認リストEntity
      */
-    List<JigyoHokokuIppanGenbutsuRelateEntity> getResultKyufuJisseki(TempJigyoHokokuTokeiMotoDataMybatisParamter parameter);
+    List<JigyoHokokuIppanGenbutsuRelateEntity> getResultKyufuJisseki();
 
     /**
      * 事業報告情報の取得処理です。
@@ -46,7 +44,7 @@ public interface IJigyoHokokuGeppoIppanGenbutsuMapper {
      *
      * @return 事業報告情報
      */
-    List<KyufuJissekiKonkyoRelateEntity> getKyufuJissekiKonkyo(KyufuJissekiKonkyoMybatisParamter parameter);
+    List<KyufuJissekiKonkyoRelateEntity> getKyufuJissekiKonkyo(JigyoHokokuGeppoIppanGenbutsuMybatisParamter parameter);
 
     /**
      * 事業報告統計データの取得処理です。
@@ -55,14 +53,14 @@ public interface IJigyoHokokuGeppoIppanGenbutsuMapper {
      *
      * @return 事業報告統計データ
      */
-    List<KyufuJissekiKonkyoRelateEntity> getJigyoHokokuTokei12to14(KyufuJissekiKonkyoMybatisParamter parameter);
+    List<KyufuJissekiKonkyoRelateEntity> getJigyoHokokuTokei12to14(JigyoHokokuGeppoIppanGenbutsuMybatisParamter parameter);
 
     /**
      * 処理日付管理マスタへ登録処理です。
      *
      * @param parameter 事業状況報告資料（年報）作成　一般状況（１～１１）パラメータ
      */
-    void insertShoriDateKanri(KyufuJissekiKonkyoMybatisParamter parameter);
+    void insertShoriDateKanri(JigyoHokokuGeppoIppanGenbutsuMybatisParamter parameter);
 
     /**
      * 事業状況報告統計帳票用情報の取得処理です。
@@ -71,6 +69,6 @@ public interface IJigyoHokokuGeppoIppanGenbutsuMapper {
      *
      * @return 事業状況報告統計帳票用情報
      */
-    List<JigyoHokokuDataRelateEntity> getJigyouHokokuTokeiReportJyoho(JigyoJokyoHokokuShiryoNempoSakuseiItiMybatisParamter parameter);
+    List<JigyoHokokuDataRelateEntity> getJigyouHoukokuTokeiTyouhyou(JigyoHokokuGeppoIppanGenbutsuMybatisParamter parameter);
 
 }

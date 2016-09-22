@@ -7,7 +7,9 @@ package jp.co.ndensan.reams.db.dbc.entity.report.source.gassankyufujissekisofuic
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 帳票設計_DBC200042_高額合算給付実績情報送付一覧表 のソースクラスです。
@@ -47,6 +49,7 @@ public class GassanKyufujissekiSofuIchiranSource implements IReportSource {
     public RString kaipage5;
     @ReportItem(name = "list_1", length = 4, order = 15)
     public RString list_1;
+    @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
     @ReportItem(name = "list_2", length = 10, order = 16)
     public RString list_2;
     @ReportItem(name = "list_3", length = 32, order = 17)
@@ -67,6 +70,9 @@ public class GassanKyufujissekiSofuIchiranSource implements IReportSource {
     public RString list_10;
     @ReportItem(name = "list_11", length = 13, order = 25)
     public RString list_11;
+    @ReportPerson(id = "A")
+    @ReportItem(name = "shikibetsuCode", length = 15)
+    public RString shikibetsuCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

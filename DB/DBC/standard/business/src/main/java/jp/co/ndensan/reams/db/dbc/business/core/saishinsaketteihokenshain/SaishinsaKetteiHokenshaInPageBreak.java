@@ -40,20 +40,16 @@ public class SaishinsaKetteiHokenshaInPageBreak extends PageBreaker<SaishinsaKet
         if (this.breakKeysList.contains(SaishinsaKetteiHokenshaInOutPutOrder.証記載保険者番号.get項目ID())
                 && !currentSource.getSource().shoKisaiHokenshaNo.equals(nextSource.getSource().shoKisaiHokenshaNo)) {
             flg = true;
-        }
-        if (this.breakKeysList.contains(SaishinsaKetteiHokenshaInOutPutOrder.被保険者番号.get項目ID())
+        } else if (this.breakKeysList.contains(SaishinsaKetteiHokenshaInOutPutOrder.被保険者番号.get項目ID())
                 && !currentSource.getSource().listLower_1.equals(nextSource.getSource().listLower_1)) {
             flg = true;
-        }
-        if (this.breakKeysList.contains(SaishinsaKetteiHokenshaInOutPutOrder.サービス提供年月.get項目ID())
+        } else if (this.breakKeysList.contains(SaishinsaKetteiHokenshaInOutPutOrder.サービス提供年月.get項目ID())
                 && !currentSource.getSource().listUpper_5.equals(nextSource.getSource().listUpper_5)) {
             flg = true;
-        }
-        if (this.breakKeysList.contains(SaishinsaKetteiHokenshaInOutPutOrder.事業所番号.get項目ID())
+        } else if (this.breakKeysList.contains(SaishinsaKetteiHokenshaInOutPutOrder.事業所番号.get項目ID())
                 && !currentSource.getSource().listUpper_4.equals(nextSource.getSource().listUpper_4)) {
             flg = true;
-        }
-        if (this.breakKeysList.contains(SaishinsaKetteiHokenshaInOutPutOrder.取り扱い年月.get項目ID())
+        } else if (this.breakKeysList.contains(SaishinsaKetteiHokenshaInOutPutOrder.取り扱い年月.get項目ID())
                 && !currentSource.getSource().listUpper_2.equals(nextSource.getSource().listUpper_2)) {
             flg = true;
         }

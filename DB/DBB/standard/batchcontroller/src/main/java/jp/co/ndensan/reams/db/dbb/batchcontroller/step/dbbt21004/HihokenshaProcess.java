@@ -107,10 +107,10 @@ public class HihokenshaProcess extends BatchProcessBase<DbT1001HihokenshaDaichoE
             if (ONE.equals(entity.getKoikinaiJushochiTokureiFlag())) {
                 processEntity.setOutPutShichosonCode(ONE);
             } else {
-                processEntity.setOutPutShichosonCode(市町村セキュリティ情報.get市町村情報().get市町村コード().code市町村RString());
+                processEntity.setOutPutShichosonCode(new RString(市町村セキュリティ情報.get市町村情報().get市町村コード().toString()));
             }
         } else if (null != 市町村セキュリティ情報 && null != 市町村セキュリティ情報.get導入形態コード()) {
-            processEntity.setOutPutShichosonCode(市町村セキュリティ情報.get市町村情報().get市町村コード().code市町村RString());
+            processEntity.setOutPutShichosonCode(new RString(市町村セキュリティ情報.get市町村情報().get市町村コード().toString()));
         }
         賦課基準日 = FukaKeisan.createInstance().findOut賦課基準日(processParameter.get調定年度(), new HihokenshaDaicho(entity));
         processEntity.setHukaSystemDate(賦課基準日);
@@ -158,7 +158,7 @@ public class HihokenshaProcess extends BatchProcessBase<DbT1001HihokenshaDaichoE
         processEntity.setIdoJiyuCode(entity.getIdoJiyuCode());
         processEntity.setShichosonCode(entity.getShichosonCode());
         processEntity.setShikibetsuCode(entity.getShikibetsuCode());
-        processEntity.setShikakuHenkoJiyuCode(entity.getShikakuHenkoJiyuCode());
+        processEntity.setShikakuShutokuJiyuCode(entity.getShikakuShutokuJiyuCode());
         processEntity.setShikakuShutokuYMD(entity.getShikakuShutokuYMD());
         processEntity.setShikakuShutokuTodokedeYMD(entity.getShikakuShutokuTodokedeYMD());
         processEntity.setIchigoShikakuShutokuYMD(entity.getIchigoShikakuShutokuYMD());

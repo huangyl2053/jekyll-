@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD1300001
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyorisutojyukyusyadaicho.HanyoRisutoJyukyusyaDaichoBatchParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710020.DBD710020_HanyoListJukyushaDaicho2Parameter;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1300001.JukyushaDaichoPanelDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1300001.JukyushaDaichoPanelHandler;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
@@ -40,7 +40,6 @@ public class JukyushaDaichoPanel {
      * @return ResponseData
      */
     public ResponseData<JukyushaDaichoPanelDiv> onLoad(JukyushaDaichoPanelDiv div) {
-        div.getCcdAtenaJoken().initialize();
         getHandler(div).initialize();
         return ResponseData.of(div).respond();
 
@@ -192,7 +191,7 @@ public class JukyushaDaichoPanel {
      * @return ResponseData
      */
     public ResponseData<BatchParameterMap> onClick_btnBatchParameterSave(JukyushaDaichoPanelDiv div) {
-        HanyoRisutoJyukyusyaDaichoBatchParameter parameter = getHandler(div).setBatchParameter();
+        DBD710020_HanyoListJukyushaDaicho2Parameter parameter = getHandler(div).setBatchParameter();
         ResponseData<BatchParameterMap> responseData = new ResponseData<>();
         responseData.data = new BatchParameterMap(parameter);
         return responseData;
@@ -204,7 +203,7 @@ public class JukyushaDaichoPanel {
      * @param div 汎用リスト受給者台帳２
      * @return ResponseData
      */
-    public ResponseData<HanyoRisutoJyukyusyaDaichoBatchParameter> onClick_jiko(JukyushaDaichoPanelDiv div) {
+    public ResponseData<DBD710020_HanyoListJukyushaDaicho2Parameter> onClick_jiko(JukyushaDaichoPanelDiv div) {
         return ResponseData.of(getHandler(div).setBatchParameter()).respond();
     }
 

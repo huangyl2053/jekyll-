@@ -1213,51 +1213,51 @@ public class CreatCalCulateEntity {
         // 口座（PSM）全ての内容
         if (賦課計算entity.get特定口座() != null && 賦課計算entity.get特定口座().getUaT0310KozaEntity() != null) {
             UaT0310KozaEntity uaT0310Entity = 賦課計算entity.get特定口座().getUaT0310KozaEntity();
-            entity.setUaT0310_kozaId(uaT0310Entity.getKozaId());
-            entity.setUaT0310_shikibetsuCode(uaT0310Entity.getShikibetsuCode());
-            entity.setUaT0310_gyomubetsuPrimaryKey(uaT0310Entity.getGyomubetsuPrimaryKey());
-            entity.setUaT0310_gyomuKoyuKey(uaT0310Entity.getGyomuKoyuKey());
+            entity.setUaT0310Koza_kozaId(uaT0310Entity.getKozaId());
+            entity.setUaT0310Koza_shikibetsuCode(uaT0310Entity.getShikibetsuCode());
+            entity.setUaT0310Koza_gyomubetsuPrimaryKey(uaT0310Entity.getGyomubetsuPrimaryKey());
+            entity.setUaT0310Koza_gyomuKoyuKey(uaT0310Entity.getGyomuKoyuKey());
             KozaYotoKubunCodeValue yotoKubun = uaT0310Entity.getYotoKubun();
             if (yotoKubun != null) {
-                entity.setUaT0310_yotoKubun(yotoKubun.getColumnValue());
+                entity.setUaT0310Koza_yotoKubun(yotoKubun.getColumnValue());
             }
-            entity.setUaT0310_torokuRenban(uaT0310Entity.getTorokuRenban());
-            entity.setUaT0310_kaishiYMD(uaT0310Entity.getKaishiYMD());
-            entity.setUaT0310_shuryoYMD(uaT0310Entity.getShuryoYMD());
-            entity.setUaT0310_kinyuKikanCode(uaT0310Entity.getKinyuKikanCode());
-            entity.setUaT0310_kinyuKikanShitenCode(uaT0310Entity.getKinyuKikanShitenCode());
-            entity.setUaT0310_yokinShubetsu(uaT0310Entity.getYokinShubetsu());
-            entity.setUaT0310_kozaNo(uaT0310Entity.getKozaNo());
-            entity.setUaT0310_tsuchoKigo(uaT0310Entity.getTsuchoKigo());
-            entity.setUaT0310_tsuchoNo(uaT0310Entity.getTsuchoNo());
-            entity.setUaT0310_kozaMeigininShikibetsuCode(uaT0310Entity.getKozaMeigininShikibetsuCode());
-            entity.setUaT0310_kozaMeiginin(uaT0310Entity.getKozaMeiginin());
-            entity.setUaT0310_kozaMeigininKanji(uaT0310Entity.getKozaMeigininKanji());
-            entity.setUaT0310_kensakuyoMeiginin(uaT0310Entity.getKensakuyoMeiginin());
-            entity.setUaT0310_kozaHyojiKubun(uaT0310Entity.getKozaHyojiKubun());
-            entity.setUaT0310_nayoseKubun(uaT0310Entity.getNayoseKubun());
-            entity.setUaT0310_zumitsuHakkoYohi(uaT0310Entity.getZumitsuHakkoYohi());
-            entity.setUaT0310_kozaFurikaeKaishiTsuchiHakkozumi(uaT0310Entity.getKozaFurikaeKaishiTsuchiHakkozumi());
-            entity.setUaT0310_kozaTorokuNo(uaT0310Entity.getKozaTorokuNo());
+            entity.setUaT0310Koza_torokuRenban(uaT0310Entity.getTorokuRenban());
+            entity.setUaT0310Koza_kaishiYMD(uaT0310Entity.getKaishiYMD());
+            entity.setUaT0310Koza_shuryoYMD(uaT0310Entity.getShuryoYMD());
+            entity.setUaT0310Koza_kinyuKikanCode(uaT0310Entity.getKinyuKikanCode());
+            entity.setUaT0310Koza_kinyuKikanShitenCode(uaT0310Entity.getKinyuKikanShitenCode());
+            entity.setUaT0310Koza_yokinShubetsu(uaT0310Entity.getYokinShubetsu());
+            entity.setUaT0310Koza_kozaNo(uaT0310Entity.getKozaNo());
+            entity.setUaT0310Koza_tsuchoKigo(uaT0310Entity.getTsuchoKigo());
+            entity.setUaT0310Koza_tsuchoNo(uaT0310Entity.getTsuchoNo());
+            entity.setUaT0310Koza_kozaMeigininShikibetsuCode(uaT0310Entity.getKozaMeigininShikibetsuCode());
+            entity.setUaT0310Koza_kozaMeiginin(uaT0310Entity.getKozaMeiginin());
+            entity.setUaT0310Koza_kozaMeigininKanji(uaT0310Entity.getKozaMeigininKanji());
+            entity.setUaT0310Koza_kensakuyoMeiginin(uaT0310Entity.getKensakuyoMeiginin());
+            entity.setUaT0310Koza_kozaHyojiKubun(uaT0310Entity.getKozaHyojiKubun());
+            entity.setUaT0310Koza_nayoseKubun(uaT0310Entity.getNayoseKubun());
+            entity.setUaT0310Koza_zumitsuHakkoYohi(uaT0310Entity.getZumitsuHakkoYohi());
+            entity.setUaT0310Koza_kozaFurikaeKaishiTsuchiHakkozumi(uaT0310Entity.getKozaFurikaeKaishiTsuchiHakkozumi());
+            entity.setUaT0310Koza_kozaTorokuNo(uaT0310Entity.getKozaTorokuNo());
             KozaTorokuKubunCodeValue kozaTorokuKubunCode = uaT0310Entity.getKozaTorokuKubunCode();
             if (kozaTorokuKubunCode != null) {
-                entity.setUaT0310_kozaTorokuKubunCode(kozaTorokuKubunCode.getColumnValue());
+                entity.setUaT0310Koza_kozaTorokuKubunCode(kozaTorokuKubunCode.getColumnValue());
             }
-            entity.setUaT0310_kozaKaishiUketsukeYMD(uaT0310Entity.getKozaKaishiUketsukeYMD());
-            entity.setUaT0310_kozaShuryoUketsukeYMD(uaT0310Entity.getKozaShuryoUketsukeYMD());
-            entity.setUaT0310_kozaTorokuYMD(uaT0310Entity.getKozaTorokuYMD());
-            entity.setUaT0310_temban(uaT0310Entity.getTemban());
+            entity.setUaT0310Koza_kozaKaishiUketsukeYMD(uaT0310Entity.getKozaKaishiUketsukeYMD());
+            entity.setUaT0310Koza_kozaShuryoUketsukeYMD(uaT0310Entity.getKozaShuryoUketsukeYMD());
+            entity.setUaT0310Koza_kozaTorokuYMD(uaT0310Entity.getKozaTorokuYMD());
+            entity.setUaT0310Koza_temban(uaT0310Entity.getTemban());
         }
         if (賦課計算entity.get特定口座() != null
                 && 賦課計算entity.get特定口座().getKinyuKikanEntity() != null) {
             UaT0301YokinShubetsuPatternEntity uaT0301Entity = 賦課計算entity.get特定口座().getYokinShubetsuPatternEntity();
             YokinShubetsuPatternCodeValue yokinShubetsuPatternCode = uaT0301Entity.getYokinShubetsuPatternCode();
             if (yokinShubetsuPatternCode != null) {
-                entity.setUaT0301_yokinShubetsuPatternCode(yokinShubetsuPatternCode.getColumnValue());
+                entity.setUaT0301YokinShubetsuPattern_yokinShubetsuPatternCode(yokinShubetsuPatternCode.getColumnValue());
             }
-            entity.setUaT0301_yokinShubetsuCode(uaT0301Entity.getYokinShubetsuCode());
-            entity.setUaT0301_yokinShubetsuMeisho(uaT0301Entity.getYokinShubetsuMeisho());
-            entity.setUaT0301_yokinShubetsuRyakusho(uaT0301Entity.getYokinShubetsuRyakusho());
+            entity.setUaT0301YokinShubetsuPattern_yokinShubetsuCode(uaT0301Entity.getYokinShubetsuCode());
+            entity.setUaT0301YokinShubetsuPattern_yokinShubetsuMeisho(uaT0301Entity.getYokinShubetsuMeisho());
+            entity.setUaT0301YokinShubetsuPattern_yokinShubetsuRyakusho(uaT0301Entity.getYokinShubetsuRyakusho());
         }
         return entity;
     }

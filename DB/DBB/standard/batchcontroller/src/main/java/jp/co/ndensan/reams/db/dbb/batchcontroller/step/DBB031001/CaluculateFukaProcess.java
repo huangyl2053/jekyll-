@@ -211,7 +211,6 @@ public class CaluculateFukaProcess extends BatchProcessBase<CaluculateFukaEntity
             set区分Key(fukaEntity);
         }
         count++;
-
     }
 
     private void set区分Key(CaluculateFukaEntity entity) {

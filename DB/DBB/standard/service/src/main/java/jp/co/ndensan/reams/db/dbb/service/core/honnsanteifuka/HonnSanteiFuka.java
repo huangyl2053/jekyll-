@@ -658,9 +658,6 @@ public class HonnSanteiFuka {
             case INDEX_5:
                 set期別金額(kibetsu, 特徴期別金額.get(INDEX_5));
                 break;
-            case INDEX_6:
-                set期別金額(kibetsu, 特徴期別金額.get(INDEX_6));
-                break;
             default:
         }
     }

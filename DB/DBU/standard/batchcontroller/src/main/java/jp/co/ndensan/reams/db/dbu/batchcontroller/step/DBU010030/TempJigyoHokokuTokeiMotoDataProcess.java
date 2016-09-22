@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010030;
 
+import jp.co.ndensan.reams.db.dbu.definition.processprm.ippangenbutsu.JigyoHokokuGeppoIppanGenbutsuProcessParamter;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.ippangenbutsu.JigyoHokokuIppanGenbutsuRelateEntity;
 import jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.ippangenbutsu.IJigyoHokokuGeppoIppanGenbutsuMapper;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -25,6 +26,7 @@ public class TempJigyoHokokuTokeiMotoDataProcess extends BatchProcessBase<JigyoH
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.ippangenbutsu."
             + "IJigyoHokokuGeppoIppanGenbutsuMapper.getJigyoHokokuTokeiMotoData");
+    private JigyoHokokuGeppoIppanGenbutsuProcessParamter processParameter;
     IJigyoHokokuGeppoIppanGenbutsuMapper mapper;
     private static final RString TABLE_事業報告統計元データ = new RString("tempJigyoHokokuTokeiMotoData");
     @BatchWriter
@@ -37,7 +39,7 @@ public class TempJigyoHokokuTokeiMotoDataProcess extends BatchProcessBase<JigyoH
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID);
+        return new BatchDbReader(MYBATIS_SELECT_ID, processParameter.toDataMybitisParamter());
     }
 
     @Override

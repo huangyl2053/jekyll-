@@ -70,7 +70,7 @@ public class ScheduleSetting {
      *
      * @return ResponseData<ScheduleSettingDiv>
      */
-    public ResponseData<ScheduleSettingDiv> onClick_btnComplete(ScheduleSettingDiv div) {
+    public ResponseData<ScheduleSettingDiv> onClick_btnBack(ScheduleSettingDiv div) {
         return ResponseData.of(div).forwardWithEventName(DBC6000011TransitionEventName.情報送付取込へ戻る).respond();
     }
 
@@ -81,7 +81,7 @@ public class ScheduleSetting {
      *
      * @return ResponseData<ScheduleSettingDiv>
      */
-    public ResponseData<ScheduleSettingDiv> onClick_btnBack(ScheduleSettingDiv div) {
+    public ResponseData<ScheduleSettingDiv> onClick_btnComplete(ScheduleSettingDiv div) {
         return ResponseData.of(div).forwardWithEventName(DBC6000011TransitionEventName.メニューへ戻る).respond();
     }
 
