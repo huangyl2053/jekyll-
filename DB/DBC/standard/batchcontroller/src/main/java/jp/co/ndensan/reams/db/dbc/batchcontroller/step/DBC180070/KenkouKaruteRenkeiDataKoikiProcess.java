@@ -54,9 +54,8 @@ public class KenkouKaruteRenkeiDataKoikiProcess extends BatchKeyBreakBase<KenkoK
     private List<RString> 作成されたファイル;
 
     @BatchWriter
-    private FldWriter<KenkouKaruteRenkeiDATEntity> fldWriter;
-    @BatchWriter
     private CsvWriter<KenkouKaruteRenkeiDataKoikiHenkanErrorCsvEntity> csvWriter;
+    private FldWriter<KenkouKaruteRenkeiDATEntity> fldWriter;
 
     @Override
     protected void initialize() {
