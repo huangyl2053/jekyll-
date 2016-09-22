@@ -1094,13 +1094,16 @@ public class ChoteiboSakuseiReportProcess extends BatchProcessBase<DbT7022ShoriD
     }
 
     private RString changeDecimalToRString(Decimal val) {
+        if( val!=null&&val==Decimal.ZERO){
+            return RString.EMPTY;
+        }
         return null == val ? RString.EMPTY : new RString(String.valueOf(val.intValue()));
     }
 
     private Decimal changeNULLToZero(Decimal val) {
         return null == val ? Decimal.ZERO : val;
     }
-
+    
     private void バッチ出力条件リストの出力() {
         RString ジョブ番号 = new RStringBuilder().append(JobContextHolder.getJobId()).toRString();
         RString 帳票名 = ReportIdDBB.DBB3001.getReportName();

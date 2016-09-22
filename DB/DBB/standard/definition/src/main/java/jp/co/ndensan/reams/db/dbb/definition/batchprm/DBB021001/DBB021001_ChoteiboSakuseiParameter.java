@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.definition.batchprm.choteibo;
+package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB021001;
 
 import jp.co.ndensan.reams.db.dbb.definition.processprm.choteibo.ChoteiboProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @lombok.Getter
 @lombok.Setter
-public class ChoteiboBatchParameter extends BatchParameterBase {
+public class DBB021001_ChoteiboSakuseiParameter extends BatchParameterBase {
 
     private static final long serialVersionUID = 1L;
 
