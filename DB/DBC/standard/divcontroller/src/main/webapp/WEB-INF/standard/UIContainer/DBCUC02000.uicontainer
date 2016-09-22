@@ -28,7 +28,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC6000011",
      "toLayoutTitle": "スケジュール設定",
-     "toState": "スケジュール設定"
+     "toState": "送付取込画面からの遷移"
     },
     {
      "id": "3",
@@ -37,7 +37,7 @@
      "layoutName": "DBC6000011",
      "layoutTitle": "スケジュール設定",
      "eventName": "情報送付取込へ戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0200011",
@@ -445,6 +445,16 @@
      "toLayoutName": "DBC0200011",
      "toLayoutTitle": "保険者情報送付",
      "toState": ""
+    },
+    {
+     "id": "33",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC6000011",
+     "layoutTitle": "スケジュール設定",
+     "eventName": "メニューへ戻る",
+     "destroy": false,
+     "condition": ""
     }
    ]
   }

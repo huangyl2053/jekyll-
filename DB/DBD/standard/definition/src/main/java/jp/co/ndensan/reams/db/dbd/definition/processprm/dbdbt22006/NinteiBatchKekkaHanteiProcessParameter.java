@@ -24,7 +24,7 @@ public class NinteiBatchKekkaHanteiProcessParameter implements IBatchProcessPara
     /**
      * コンストラクタです。
      *
-     * @param テスト処理
+     * @param テスト処理 テスト処理
      */
     public NinteiBatchKekkaHanteiProcessParameter(boolean テスト処理) {
         this.テスト処理 = テスト処理;

@@ -917,7 +917,7 @@ public class HanyoListKokuhorenJukyushaResult {
         jokenBuilder = new RStringBuilder();
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
-        jokenBuilder.append(new RString("抽出区分："));
+        jokenBuilder.append(new RString("日付抽出区分："));
         jokenBuilder.append(HizukeChushutsuKubun.toValue(processParameter.get日付抽出区分()).get名称());
         出力条件List.add(jokenBuilder.toRString());
         if (HizukeChushutsuKubun.範囲指定.getコード().equals(processParameter.get日付抽出区分())) {
@@ -952,7 +952,6 @@ public class HanyoListKokuhorenJukyushaResult {
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append("特定入所者サービス区分：　");
         出力条件List.add(get特定入所者サービス区分(jokenBuilder));
-        出力条件List.add(jokenBuilder.toRString());
         出力条件List.add(RString.EMPTY);
         if (processParameter.is削除含める()) {
             出力条件List.add(new RString("■削除された情報を含める"));
