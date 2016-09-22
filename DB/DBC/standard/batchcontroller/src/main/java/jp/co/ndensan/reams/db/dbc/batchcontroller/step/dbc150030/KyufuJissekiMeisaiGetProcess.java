@@ -9,12 +9,16 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.servicecoderiyojokyo.Kyu
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.FlowEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.DbWT3470ToukeihyoMeisaiTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc150030.KyufuJissekiMeisaiEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
+import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
+import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
@@ -83,6 +87,17 @@ public class KyufuJissekiMeisaiGetProcess
         toukeihyoMeisaiTempEntity.setTaniSu(getDecimalVaule(entity.get後_単位数()));
         toukeihyoMeisaiTempEntity.setNissuKaisu(getDecimalVaule(entity.get後_日数_回数()));
         toukeihyoMeisaiTempEntity.setServiceTanisu(getDecimalVaule(entity.get後_サービス単位数()));
+        toukeihyoMeisaiTempEntity.setSortYouShuruiCode(ServiceShuruiCode.EMPTY);
+        toukeihyoMeisaiTempEntity.setSortYouKomokuName(RString.EMPTY);
+        toukeihyoMeisaiTempEntity.setShichosonCode(LasdecCode.EMPTY);
+        toukeihyoMeisaiTempEntity.setKoikinaiJushochiTokureiFlag(RString.EMPTY);
+        toukeihyoMeisaiTempEntity.setKoikinaiTokureiSochimotoShichosonCode(LasdecCode.EMPTY);
+        toukeihyoMeisaiTempEntity.setKyuShichosonCode(LasdecCode.EMPTY);
+        toukeihyoMeisaiTempEntity.setMachiikiCode(ChoikiCode.EMPTY);
+        toukeihyoMeisaiTempEntity.setGyoseikuCode(GyoseikuCode.EMPTY);
+        toukeihyoMeisaiTempEntity.setChikuCode1(RString.EMPTY);
+        toukeihyoMeisaiTempEntity.setChikuCode2(RString.EMPTY);
+        toukeihyoMeisaiTempEntity.setChikuCode3(RString.EMPTY);
         統計表明細一時tableWriter.insert(toukeihyoMeisaiTempEntity);
     }
 
