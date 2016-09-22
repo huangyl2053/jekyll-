@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 受給者給付実績一覧表発行 のDivControllerクラスです。
  *
- * @author DBC-3070-010 dangjingjing
+ * @reamsid_L DBC-3070-010 dangjingjing
  */
 public class JukyushaKyufuJissekiDaichoHandler {
 
@@ -28,6 +28,8 @@ public class JukyushaKyufuJissekiDaichoHandler {
     private static final RString なし = new RString("なし");
     private static final RString あり = new RString("あり");
     private static final RString ゼロ = new RString("0");
+    private static final RString ゼロゼロ = new RString("0000000000");
+    private static final RString く = new RString("9999999999");
     private static final RString いち = new RString("1");
     private static final RString に = new RString("2");
     private static final RString さん = new RString("3");
@@ -190,9 +192,13 @@ public class JukyushaKyufuJissekiDaichoHandler {
         }
         if (!div.getTabChushutsuJoken().getTxtRangeHihokenshaNoFrom().getValue().isEmpty()) {
             batchParameter.set被保険者番号_開始(div.getTabChushutsuJoken().getTxtRangeHihokenshaNoFrom().getValue());
+        } else {
+            batchParameter.set被保険者番号_開始(ゼロゼロ);
         }
         if (!div.getTabChushutsuJoken().getTxtRangeHihokenshaNoTo().getValue().isEmpty()) {
             batchParameter.set被保険者番号_終了(div.getTabChushutsuJoken().getTxtRangeHihokenshaNoTo().getValue());
+        } else {
+            batchParameter.set被保険者番号_終了(く);
         }
         if (!div.getTabChushutsuJoken().getChkYokaigodo().getSelectedKeys().isEmpty()) {
             batchParameter.setすべて選択(いち);
@@ -438,9 +444,13 @@ public class JukyushaKyufuJissekiDaichoHandler {
         }
         if (!div.getTabChushutsuJoken().getTxtRojinhokenShikuchosonNoRangeFrom().getValue().isEmpty()) {
             batchParameter.set老人保健市町村番号有_開始(div.getTxtRojinhokenShikuchosonNoRangeFrom().getValue());
+        } else {
+            batchParameter.set老人保健市町村番号有_開始(new RString("00000000"));
         }
         if (!div.getTabChushutsuJoken().getTxtRojinhokenShikuchosonNoRangeTo().getValue().isEmpty()) {
             batchParameter.set老人保健市町村番号有_終了(div.getTxtRojinhokenShikuchosonNoRangeTo().getValue());
+        } else {
+            batchParameter.set老人保健市町村番号有_終了(new RString("99999999"));
         }
         if (!div.getTabChushutsuJoken().getRadRojinHokenJukyushaNoUmu().getSelectedKey().isEmpty()) {
             if (div.getTabChushutsuJoken().getRadRojinHokenJukyushaNoUmu().getSelectedKey().equals(全て)) {
@@ -457,9 +467,13 @@ public class JukyushaKyufuJissekiDaichoHandler {
     private void setバッチ4(DBC140020_JukyushaKyufujissekiIchiranParameter batchParameter) {
         if (!div.getTabChushutsuJoken().getTxtRojinHokenJukyushaNoFrom().getValue().isEmpty()) {
             batchParameter.set老人保健受給者番号有_開始(div.getTxtRojinHokenJukyushaNoFrom().getValue());
+        } else {
+            batchParameter.set老人保健受給者番号有_開始(new RString("0000000"));
         }
         if (!div.getTabChushutsuJoken().getTxtRojinHokenJukyushaNoTo().getValue().isEmpty()) {
             batchParameter.set老人保健受給者番号有_終了(div.getTxtRojinHokenJukyushaNoTo().getValue());
+        } else {
+            batchParameter.set老人保健受給者番号有_終了(new RString("9999999"));
         }
         if (!div.getTabChushutsuJoken().getTxtKohiFutanshaNo().getValue().isEmpty()) {
             batchParameter.set公費負担者番号(div.getTxtKohiFutanshaNo().getValue());
@@ -469,9 +483,13 @@ public class JukyushaKyufuJissekiDaichoHandler {
         }
         if (!div.getTabChushutsuJoken().getTxtJigyoshaNoFrom().getValue().isEmpty()) {
             batchParameter.set事業者番号_開始(div.getTxtJigyoshaNoFrom().getValue());
+        } else {
+            batchParameter.set事業者番号_開始(ゼロゼロ);
         }
         if (!div.getTabChushutsuJoken().getTxtJigyoshaNoTo().getValue().isEmpty()) {
             batchParameter.set事業者番号_終了(div.getTxtJigyoshaNoTo().getValue());
+        } else {
+            batchParameter.set事業者番号_終了(く);
         }
         if (!div.getTabChushutsuJoken().getTxtKeikakuSakuseiJigyoshoNo().getValue().isEmpty()) {
             batchParameter.set計画作成事業者番号(div.getTxtKeikakuSakuseiJigyoshoNo().getValue());
