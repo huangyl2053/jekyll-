@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyourisutosyuturyoku.Han
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7020001.DvKogakuChushutsuJokenDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7020001.DvKogakuServiceJohoDiv;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -30,11 +31,12 @@ import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- * 汎用リスト_高額介護サービス費状況
+ * 画面設計_DBCGM23001_汎用リスト出力(高額介護サービス費状況)
  *
- * @reamsid_L DBC-3092-010 sunhui
+ * @reamsid_L DBC-5040-010 chenyadong
  */
 public class DvKogakuServiceJohoHandler {
 
@@ -49,6 +51,8 @@ public class DvKogakuServiceJohoHandler {
     private static final RString 項目名 = new RString("1");
     private static final RString 連番 = new RString("2");
     private static final RString 日付スラッシュ = new RString("3");
+    private static final RString モード１ = new RString("DBCMN23001");
+//    private static final RString モード１ = new RString("高額サービス費状況");
 
     /**
      * コンストラクタです。
@@ -72,24 +76,30 @@ public class DvKogakuServiceJohoHandler {
     /**
      * 初期化設定のinitializeメソッドです
      *
+     * @param state RString
      */
-    public void initialize() {
+    public void initialize(RString state) {
         DvKogakuChushutsuJokenDiv panel = div.getDvKogakuServiceParam().getDvKogakuChushutsuJoken();
+        //TODO QA.1565
         panel.getDdlKogakuShoriJokyo().setDataSource(get処理状況リスト());
-        panel.getDdlKogakuShinsaHoho().setDataSource(get審査方法リスト());
         panel.getDdlKogakuSanteiKijun().setDataSource(get算定基準リスト());
-        panel.getRadKogakuKokuhorenFuicchi().setDataSource(get国保連不一致リスト());
         panel.getRadKogakuTaishosha().setDataSource(get対象者リスト());
         panel.getRadKogakuShinseiKubun().setDataSource(get申請区分リスト());
         panel.getRadKogakuShiharaisaki().setDataSource(get支払先リスト());
 
         div.getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuShoriJokyo().setSelectedKey(すべて_0);
-        div.getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuShinsaHoho().setSelectedKey(すべて_0);
         div.getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuSanteiKijun().setSelectedKey(すべて_0);
-        div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuKokuhorenFuicchi().setSelectedKey(すべて_0);
         div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuTaishosha().setSelectedKey(すべて_0);
         div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShinseiKubun().setSelectedKey(すべて_0);
         div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuShiharaisaki().setSelectedKey(すべて_0);
+
+        if (state.equals(モード１)) {
+            panel.getDdlKogakuShinsaHoho().setDataSource(get審査方法リスト());
+            panel.getRadKogakuKokuhorenFuicchi().setDataSource(get国保連不一致リスト());
+            div.getDvKogakuChushutsuJoken().getDvKogakuService().getDdlKogakuShinsaHoho().setSelectedKey(すべて_0);
+            div.getDvKogakuChushutsuJoken().getDvKogakuService().getRadKogakuKokuhorenFuicchi().setSelectedKey(すべて_0);
+        }
+
     }
 
     /**
@@ -159,11 +169,16 @@ public class DvKogakuServiceJohoHandler {
      * 「実行する」ボタンを押下バッチ実行、バッチパラメータ作成をします。
      *
      * @param 市町村判定 RString
-     * @return HanyoListKogakuKaigoBatchParameter
-     * 汎用リスト_高額介護サービス費状況_バッチパラメータクラスです
+     * @return HanyoListKogakuKaigoBatchParameter 汎用リスト_高額介護サービス費状況_バッチパラメータクラスです
      */
     public HanyoListKogakuKaigoBatchParameter getBatchParamter(RString 市町村判定) {
         HanyoListKogakuKaigoBatchParameter batchparam = new HanyoListKogakuKaigoBatchParameter();
+        batchparam.setModo(ViewStateHolder.get(ViewStateKeys.モード, int.class));
+        if (div.getTxtShinsaNengetsu().getValue() == null) {
+            batchparam.setShinsaYM(null);
+        } else {
+            batchparam.setShinsaYM(new FlexibleYearMonth(div.getTxtShinsaNengetsu().getValue().toString()));
+        }
         if (事務広域.equals(市町村判定)) {
             HokenshaSummary 保険者DDLSelected = div.getDvKogakuChushutsuJoken().getCcdHokenshaList().getSelectedItem();
             if (!全市町村.equals(保険者DDLSelected.get市町村名称())) {
