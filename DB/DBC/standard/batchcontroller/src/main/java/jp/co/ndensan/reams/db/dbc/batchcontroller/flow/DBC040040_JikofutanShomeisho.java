@@ -5,14 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc040040.JikoFutangakushomeishoCsvOutputProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc040040.JikoFutangakushomeishoFrom2009OutputProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc040040.JikoFutangakushomeishoTo2008OutputProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc040040.KogakuGassanJikoFutanGakuInsertProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc040040.KogakuGassanTempInsertProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc040040.KogakuGassanTempUpdateProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc040040.SeiriNoSetProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc040040.ShoriDateKanriInsertPocess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040040.JikoFutangakushomeishoCsvOutputProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040040.JikoFutangakushomeishoFrom2009OutputProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040040.JikoFutangakushomeishoTo2008OutputProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040040.KogakuGassanJikoFutanGakuInsertProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040040.KogakuGassanTempInsertProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040040.KogakuGassanTempUpdateProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040040.SeiriNoSetProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040040.ShoriDateKanriInsertPocess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC040040.DBC040040_JikofutanShomeishoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc040040.JikofutanShomeishoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -27,77 +27,77 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  */
 public class DBC040040_JikofutanShomeisho extends BatchFlowBase<DBC040040_JikofutanShomeishoParameter> {
 
-    private static final String STEP1 = "KogakuGassanTempInsertProcess";
-    private static final String STEP2 = "KogakuGassanTempUpdateProcess";
-    private static final String STEP3 = "SeiriNoSetProcess";
-    private static final String STEP4 = "JikoFutangakushomeishoTo2008OutputProcess";
-    private static final String STEP5 = "JikoFutangakushomeishoFrom2009OutputProcess";
-    private static final String STEP6 = "JikoFutangakushomeishoCsvOutputProcess";
-    private static final String STEP7 = "KogakuGassanJikoFutanGakuInsertProcess";
-    private static final String STEP8 = "ShoriDateKanriInsertPocess";
+    private static final String 高額合算情報抽出 = "KogakuGassanTempInsertProcess";
+    private static final String 被保険者台帳宛名情報抽出 = "KogakuGassanTempUpdateProcess";
+    private static final String 自己負担額証明書整理番号付与 = "SeiriNoSetProcess";
+    private static final String 自己負担額証明書発行2008年度 = "JikoFutangakushomeishoTo2008OutputProcess";
+    private static final String 自己負担額証明書発行2009年度以降 = "JikoFutangakushomeishoFrom2009OutputProcess";
+    private static final String 高額合算自己負担額証明書発行一覧表発行 = "JikoFutangakushomeishoCsvOutputProcess";
+    private static final String 高額合算自己負担額更新 = "KogakuGassanJikoFutanGakuInsertProcess";
+    private static final String 処理日付管理更新 = "ShoriDateKanriInsertPocess";
 
     @Override
     protected void defineFlow() {
-        executeStep(STEP1);
-        executeStep(STEP2);
-        executeStep(STEP3);
-        executeStep(STEP4);
-        executeStep(STEP5);
-        executeStep(STEP6);
-        executeStep(STEP7);
-        executeStep(STEP8);
+        executeStep(高額合算情報抽出);
+        executeStep(被保険者台帳宛名情報抽出);
+        executeStep(自己負担額証明書整理番号付与);
+        executeStep(自己負担額証明書発行2008年度);
+        executeStep(自己負担額証明書発行2009年度以降);
+        executeStep(高額合算自己負担額証明書発行一覧表発行);
+        executeStep(高額合算自己負担額更新);
+        executeStep(処理日付管理更新);
     }
 
-    @Step(STEP1)
+    @Step(高額合算情報抽出)
     IBatchFlowCommand step1() {
         return loopBatch(KogakuGassanTempInsertProcess.class)
                 .arguments(getProcessParameter())
                 .define();
     }
 
-    @Step(STEP2)
+    @Step(被保険者台帳宛名情報抽出)
     IBatchFlowCommand step2() {
         return loopBatch(KogakuGassanTempUpdateProcess.class)
                 .arguments(getProcessParameter())
                 .define();
     }
 
-    @Step(STEP3)
+    @Step(自己負担額証明書整理番号付与)
     IBatchFlowCommand step3() {
         return loopBatch(SeiriNoSetProcess.class)
                 .arguments(getProcessParameter())
                 .define();
     }
 
-    @Step(STEP4)
+    @Step(自己負担額証明書発行2008年度)
     IBatchFlowCommand step4() {
         return loopBatch(JikoFutangakushomeishoTo2008OutputProcess.class)
                 .arguments(getProcessParameter())
                 .define();
     }
 
-    @Step(STEP5)
+    @Step(自己負担額証明書発行2009年度以降)
     IBatchFlowCommand step5() {
         return loopBatch(JikoFutangakushomeishoFrom2009OutputProcess.class)
                 .arguments(getProcessParameter())
                 .define();
     }
 
-    @Step(STEP6)
+    @Step(高額合算自己負担額証明書発行一覧表発行)
     IBatchFlowCommand step6() {
         return loopBatch(JikoFutangakushomeishoCsvOutputProcess.class)
                 .arguments(getProcessParameter())
                 .define();
     }
 
-    @Step(STEP7)
+    @Step(高額合算自己負担額更新)
     IBatchFlowCommand step7() {
         return loopBatch(KogakuGassanJikoFutanGakuInsertProcess.class)
                 .arguments(getProcessParameter())
                 .define();
     }
 
-    @Step(STEP8)
+    @Step(処理日付管理更新)
     IBatchFlowCommand step8() {
         return loopBatch(ShoriDateKanriInsertPocess.class)
                 .arguments(getProcessParameter())
