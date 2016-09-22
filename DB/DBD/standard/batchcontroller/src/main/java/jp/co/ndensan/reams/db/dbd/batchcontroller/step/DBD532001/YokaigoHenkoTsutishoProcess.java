@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd5320001;
+package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD532001;
 
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.yokaigonintei.YokaigoNinteiTsutishoIkkatsuHakkoJoho;
-import jp.co.ndensan.reams.db.dbd.business.report.dbd550002.ServiceHenkoTshuchishoReport;
-import jp.co.ndensan.reams.db.dbd.business.report.dbd550002.ServiceHenkoTsuchishoJoho;
-import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd5320001.ServiceHenkoTsutishoProcessParameter;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd550003.YokaigodoHenkoTshuchishoReport;
+import jp.co.ndensan.reams.db.dbd.business.report.dbd550003.YokaigodoHenkoTsuchishoJoho;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd5320001.YokaigoHenkoTsutishoProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.yokaigoninteijoho.YokaigoNinteiIkatusHakkoEntity;
-import jp.co.ndensan.reams.db.dbd.entity.report.dbd550002.ServiceHenkoTshuchishoReportSource;
+import jp.co.ndensan.reams.db.dbd.entity.report.dbd550003.YokaigodoHenkoTshuchishoReportSource;
 import jp.co.ndensan.reams.db.dbd.service.core.yokaigoninteijoho.YokaigoNinteiTsutishoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBA;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
@@ -47,19 +47,19 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
- * バッチ設計_DBD5320001_サービス変更通知書発行_process処理クラスです。
+ * バッチ設計_DBD5320001_要介護度変更通知書発行_process処理クラスです。
  *
  * @reamsid_L DBD-1430-020 lit
  */
-public class ServiceHenkoTsutishoProcess extends BatchProcessBase<YokaigoNinteiIkatusHakkoEntity> {
+public class YokaigoHenkoTsutishoProcess extends BatchProcessBase<YokaigoNinteiIkatusHakkoEntity> {
 
     private static final RString MYBATIS_MAPPER_ID
             = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.yokaigoninteijoho."
-                    + "IYokaigoNinteiTsutishoMapper.get一括発行サービス変更通知書情報");
+                    + "IYokaigoNinteiTsutishoMapper.get一括発行要介護度変更通知書情報");
 
-    private ServiceHenkoTsutishoProcessParameter parameter;
+    private YokaigoHenkoTsutishoProcessParameter parameter;
 
-    private static final ReportIdDBD REPORT_ID = ReportIdDBD.DBD550002;
+    private static final ReportIdDBD REPORT_ID = ReportIdDBD.DBD550003;
 
     private YokaigoNinteiIkatusHakkoEntity 最新Entity;
     private YokaigoNinteiIkatusHakkoEntity 最新以外Entity;
@@ -70,8 +70,8 @@ public class ServiceHenkoTsutishoProcess extends BatchProcessBase<YokaigoNinteiI
     @BatchWriter
     private BatchPermanentTableWriter<DbT7022ShoriDateKanriEntity> dbT7022tableWriter;
     @BatchWriter
-    private BatchReportWriter<ServiceHenkoTshuchishoReportSource> batchReportWrite;
-    private ReportSourceWriter<ServiceHenkoTshuchishoReportSource> reportSourceWriter;
+    private BatchReportWriter<YokaigodoHenkoTshuchishoReportSource> batchReportWrite;
+    private ReportSourceWriter<YokaigodoHenkoTshuchishoReportSource> reportSourceWriter;
 
     @Override
     protected IBatchReader createReader() {
@@ -98,7 +98,7 @@ public class ServiceHenkoTsutishoProcess extends BatchProcessBase<YokaigoNinteiI
     @Override
     protected void afterExecute() {
         if (null != 最新Entity) {
-            ServiceHenkoTshuchishoReport report = createServiceHenkoTshuchishoReport();
+            YokaigodoHenkoTshuchishoReport report = createYokaigodoHenkoTshuchishoReport();
             report.writeBy(reportSourceWriter);
             DbT4001JukyushaDaichoEntity jukyushaDaichoEntity = createJukyushaDaichoEntity();
             dbT4001tableWriter.insert(jukyushaDaichoEntity);
@@ -112,7 +112,8 @@ public class ServiceHenkoTsutishoProcess extends BatchProcessBase<YokaigoNinteiI
 
     private DbT7022ShoriDateKanriEntity createShoriDateKanriEntity() {
         YokaigoNinteiTsutishoIkkatsuHakkoJoho 通知書 = YokaigoNinteiTsutishoManager.createInstance().get一括発行データ(
-                TsutishoHakkoCommonProcess.get市町村コード(), ShoriName.サービス変更通知書.get名称());
+                TsutishoHakkoCommonProcess.get市町村コード(), ShoriName.要介護区分変更通知書.get名称());
+
         DbT7022ShoriDateKanriEntity result;
         if (null != 通知書) {
             result = 通知書.getEntity();
@@ -128,46 +129,53 @@ public class ServiceHenkoTsutishoProcess extends BatchProcessBase<YokaigoNinteiI
         }
 
         result.setState(EntityDataState.Added);
-        result.setShoriName(ShoriName.サービス変更通知書.get名称());
+        result.setShoriName(ShoriName.要介護区分変更通知書.get名称());
         result.setKijunTimestamp(TsutishoHakkoCommonProcess.convertDateToYMDHMS(parameter.get終了日(), parameter.get終了日時()));
         result.setTaishoKaishiTimestamp(TsutishoHakkoCommonProcess.convertDateToYMDHMS(parameter.get開始日(), parameter.get開始日時()));
         result.setTaishoShuryoTimestamp(TsutishoHakkoCommonProcess.convertDateToYMDHMS(parameter.get終了日(), parameter.get終了日時()));
-
         return result;
     }
 
     private DbT4001JukyushaDaichoEntity createJukyushaDaichoEntity() {
         DbT4001JukyushaDaichoEntity result = 最新Entity.get受給者台帳Entity();
         result.setRirekiNo(new RString(String.format("%04d", Integer.parseInt(result.getRirekiNo().toString()) + 1)));
-        result.setServiceHenkoTsuchishoHakkoYMD(parameter.get発行日());
+        result.setKubunHenkoTsuchishoHakkoYMD(parameter.get発行日());
         return result;
     }
 
-    private ServiceHenkoTshuchishoReport createServiceHenkoTshuchishoReport() {
-        ServiceHenkoTsuchishoJoho reportEntity = createServiceHenkoTsuchishoEntity();
+    private YokaigodoHenkoTshuchishoReport createYokaigodoHenkoTshuchishoReport() {
+        YokaigodoHenkoTsuchishoJoho reportEntity = createYokaigodoHenkoTsuchishoEntity();
         NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBD介護受給, REPORT_ID.getReportId(),
                 parameter.get発行日(), NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
                 KenmeiFuyoKubunType.付与なし, reportSourceWriter);
-        ServiceHenkoTshuchishoReport report
-                = new ServiceHenkoTshuchishoReport(reportEntity, TsutishoHakkoCommonProcess.get帳票共通情報(REPORT_ID.getReportId()), ninshoshaSource);
+        YokaigodoHenkoTshuchishoReport report
+                = new YokaigodoHenkoTshuchishoReport(reportEntity, TsutishoHakkoCommonProcess.get帳票共通情報(REPORT_ID.getReportId()), ninshoshaSource);
         return report;
     }
 
-    private ServiceHenkoTsuchishoJoho createServiceHenkoTsuchishoEntity() {
+    private YokaigodoHenkoTsuchishoJoho createYokaigodoHenkoTsuchishoEntity() {
         ChohyoSeigyoKyotsu 帳票共通情報 = TsutishoHakkoCommonProcess.get帳票共通情報(REPORT_ID.getReportId());
         FlexibleDate 発行日 = parameter.get発行日();
         SofubutsuAtesakiSource 送付物宛先情報 = TsutishoHakkoCommonProcess.get送付物宛先情報(帳票共通情報);
 
-        ServiceHenkoTsuchishoJoho printEntity = new ServiceHenkoTsuchishoJoho();
+        YokaigodoHenkoTsuchishoJoho printEntity = new YokaigodoHenkoTsuchishoJoho();
 
         printEntity.setBunshoNo(TsutishoHakkoCommonProcess.get文書番号(parameter.get文書番号(), REPORT_ID.getReportId(), 発行日));
         printEntity.setTitle(TsutishoHakkoCommonProcess.getタイトル(ConfigNameDBA.サービス変更通知書));
         printEntity.setTsuchibun1(
-                TsutishoHakkoCommonProcess.get通知文情報通知文(REPORT_ID.getReportId(),
-                        TsutishoHakkoCommonProcess.通知文_パターン番号_1, TsutishoHakkoCommonProcess.通知文_項目番号_1));
+                TsutishoHakkoCommonProcess.get通知文情報通知文(REPORT_ID.getReportId(), TsutishoHakkoCommonProcess.通知文_パターン番号_1,
+                        TsutishoHakkoCommonProcess.通知文_項目番号_1)
+                .concat(TsutishoHakkoCommonProcess.get通知文情報通知文(REPORT_ID.getReportId(), TsutishoHakkoCommonProcess.通知文_パターン番号_1,
+                                TsutishoHakkoCommonProcess.通知文_項目番号_2)));
         printEntity.setTsuchibun2(
-                TsutishoHakkoCommonProcess.get通知文情報通知文(REPORT_ID.getReportId(),
-                        TsutishoHakkoCommonProcess.通知文_パターン番号_1, TsutishoHakkoCommonProcess.通知文_項目番号_2));
+                TsutishoHakkoCommonProcess.get通知文情報通知文(REPORT_ID.getReportId(), TsutishoHakkoCommonProcess.通知文_パターン番号_1,
+                        TsutishoHakkoCommonProcess.通知文_項目番号_3));
+        printEntity.setTsuchibun3(
+                TsutishoHakkoCommonProcess.get通知文情報通知文(REPORT_ID.getReportId(), TsutishoHakkoCommonProcess.通知文_パターン番号_1,
+                        TsutishoHakkoCommonProcess.通知文_項目番号_4));
+        printEntity.setTsuchibun4(
+                TsutishoHakkoCommonProcess.get通知文情報通知文(REPORT_ID.getReportId(), TsutishoHakkoCommonProcess.通知文_パターン番号_1,
+                        TsutishoHakkoCommonProcess.通知文_項目番号_5));
         AtenaMeisho 被保険者氏名 = 最新Entity.get被保険者氏名();
         printEntity.setHihokenshaName(null != 被保険者氏名 ? 被保険者氏名.value() : RString.EMPTY);
         RString 被保険者番号 = 最新Entity.get被保険者番号();
@@ -184,26 +192,31 @@ public class ServiceHenkoTsutishoProcess extends BatchProcessBase<YokaigoNinteiI
             printEntity.setHihokenshaNo10(get被保険者番号の某桁(被保険者番号));
             index = 0;
         }
-        printEntity.setHenkoYMD(最新Entity.get認定年月日());
-        printEntity.setMaeService(TsutishoHakkoCommonProcess.getサービス種類(最新以外Entity));
-        printEntity.setAtoService(TsutishoHakkoCommonProcess.getサービス種類(最新Entity));
-        printEntity.setRiyu(最新Entity.get異動理由());
+        printEntity.setKosho1(new RString("今までの要介護状態区分"));
+        printEntity.setKosho2(new RString("これからの要介護状態区分"));
+        printEntity.setBeforeYokaigoKubun(TsutishoHakkoCommonProcess.getサービス種類(最新以外Entity));
+        printEntity.setAfterYokaigoKubun(TsutishoHakkoCommonProcess.getサービス種類(最新Entity));
+        printEntity.setHenkoYmd(最新Entity.get認定年月日());
+        printEntity.setYukoKaishiYMD(最新Entity.get認定有効期間開始年月日());
+        printEntity.setYukoShuryoYMD(最新Entity.get認定有効期間終了年月日());
+        printEntity.setKigenKosho(new RString("被保険者証提出期限"));
+        printEntity.setKigenYMD(FlexibleDate.EMPTY);
 
-        printEntity.setTsuchibun3(
-                TsutishoHakkoCommonProcess.get通知文情報通知文(REPORT_ID.getReportId(),
-                        TsutishoHakkoCommonProcess.通知文_パターン番号_2, TsutishoHakkoCommonProcess.通知文_項目番号_2));
-        printEntity.setTsuchibun4(
-                TsutishoHakkoCommonProcess.get通知文情報通知文(REPORT_ID.getReportId(),
-                        TsutishoHakkoCommonProcess.通知文_パターン番号_3, TsutishoHakkoCommonProcess.通知文_項目番号_2));
         printEntity.setTsuchibun5(
-                TsutishoHakkoCommonProcess.get通知文情報通知文(REPORT_ID.getReportId(),
-                        TsutishoHakkoCommonProcess.通知文_パターン番号_3, TsutishoHakkoCommonProcess.通知文_項目番号_3));
+                TsutishoHakkoCommonProcess.get通知文情報通知文(REPORT_ID.getReportId(), TsutishoHakkoCommonProcess.通知文_パターン番号_2,
+                        TsutishoHakkoCommonProcess.通知文_項目番号_5));
         printEntity.setTsuchibun6(
-                TsutishoHakkoCommonProcess.get通知文情報通知文(REPORT_ID.getReportId(),
-                        TsutishoHakkoCommonProcess.通知文_パターン番号_4, TsutishoHakkoCommonProcess.通知文_項目番号_2));
+                TsutishoHakkoCommonProcess.get通知文情報通知文(REPORT_ID.getReportId(), TsutishoHakkoCommonProcess.通知文_パターン番号_3,
+                        TsutishoHakkoCommonProcess.通知文_項目番号_5));
         printEntity.setTsuchibun7(
-                TsutishoHakkoCommonProcess.get通知文情報通知文(REPORT_ID.getReportId(),
-                        TsutishoHakkoCommonProcess.通知文_パターン番号_4, TsutishoHakkoCommonProcess.通知文_項目番号_3));
+                TsutishoHakkoCommonProcess.get通知文情報通知文(REPORT_ID.getReportId(), TsutishoHakkoCommonProcess.通知文_パターン番号_3,
+                        TsutishoHakkoCommonProcess.通知文_項目番号_6));
+        printEntity.setTsuchibun8(
+                TsutishoHakkoCommonProcess.get通知文情報通知文(REPORT_ID.getReportId(), TsutishoHakkoCommonProcess.通知文_パターン番号_4,
+                        TsutishoHakkoCommonProcess.通知文_項目番号_5));
+        printEntity.setTsuchibun9(
+                TsutishoHakkoCommonProcess.get通知文情報通知文(REPORT_ID.getReportId(), TsutishoHakkoCommonProcess.通知文_パターン番号_4,
+                        TsutishoHakkoCommonProcess.通知文_項目番号_6));
         printEntity.setYubinNo(送付物宛先情報.yubinNo);
         printEntity.setGyoseiku(送付物宛先情報.gyoseiku);
         printEntity.setJushoText(送付物宛先情報.jushoText);

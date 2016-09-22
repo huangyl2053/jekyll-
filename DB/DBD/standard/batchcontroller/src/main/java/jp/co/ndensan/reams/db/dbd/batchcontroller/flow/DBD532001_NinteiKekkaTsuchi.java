@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd5320001.NinteiKekkaTsutishoProcess;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd5320001.ServiceHenkoTsutishoProcess;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd5320001.YokaigoHenkoTsutishoProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD532001.NinteiKekkaTsutishoProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD532001.ServiceHenkoTsutishoProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD532001.YokaigoHenkoTsutishoProcess;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD532001.ShutsuryokuTaishoKubun;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD532001.DBD532001_NinteiKekkaTsuchiParameter;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;

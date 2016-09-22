@@ -71,6 +71,10 @@
         <result property="延期理由" column="延期理由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="延期通知発行年月日" column="延期通知発行年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="延期通知発行回数" column="延期通知発行回数" typeHandler="org.apache.ibatis.type.IntegerTypeHandler"/>
+
+        <result property="履歴番号" column="履歴番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="枝番" column="枝番" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="受給申請事由" column="受給申請事由" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
     </resultMap>
 
     <select resultOrdered="true" id="get初期化情報"
@@ -136,7 +140,10 @@
         T4101."enkiTsuchiHakkoYMD" AS 延期通知発行年月日,
         T4101."enkiTsuchiHakkoKaisu" AS 延期通知発行回数,
         T1001."shichosonCode" AS t1001市町村コード,
-        T4001."shichosonCode" AS t4001市町村コード
+        T4001."shichosonCode" AS t4001市町村コード,
+        T4001."rirekiNo" AS 履歴番号,
+        T4001."edaban" AS 枝番,
+        T4001."jukyuShinseiJiyu" AS 受給申請事由
         FROM
         rgdb."DbV4001JukyushaDaicho" AS V4001
         INNER JOIN
