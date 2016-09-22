@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5120001.Nint
 import jp.co.ndensan.reams.db.dbd.service.core.dbd5120001.NinteiShinseiTorokuUketsukeManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ShinseishaKankeiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -27,10 +28,9 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4120ShinseitodokedeJoho
 import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4120ShinseitodokedeJohoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4121ShinseiRirekiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.DbT4121ShinseiRirekiJohoBuilder;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.IryohokenKanyuJokyo;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.IryohokenKanyuJokyoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaichoBuilder;
+import jp.co.ndensan.reams.db.dbz.business.core.ninteichosajokyo.NinteiChosaJokyoDataPass;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SaibanHanyokeyName;
 import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
@@ -56,7 +56,6 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryo
 import jp.co.ndensan.reams.db.dbz.service.core.basic.DbT4101NinteiShinseiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.DbT4120ShinseitodokedeJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.DbT4121ShinseiRirekiJohoManager;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.IryohokenKanyuJokyoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.JukyushaDaichoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShisetsuNyutaishoManager;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
@@ -85,6 +84,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.util.CountedItem;
 import jp.co.ndensan.reams.uz.uza.util.Saiban;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 要介護認定申請受付画面のHandlerクラスです。
@@ -113,8 +113,10 @@ public class NinteiShinseiTorokuUketsukeHandler {
     private static final RString SELECT_KEY1 = new RString("key1");
     private static final RString ZERO_17 = new RString("00000000000000000");
     private static final RString ZERO_3 = new RString("000");
+    private static final RString ZERO_4 = new RString("0000");
 
     private static final int INT_4 = 4;
+    private static final int INT_60 = 60;
 
     /**
      * コンストラクタです。
@@ -213,6 +215,25 @@ public class NinteiShinseiTorokuUketsukeHandler {
     }
 
     /**
+     * 調査状況ボタン用のデータを準備する。
+     *
+     */
+    public void onBeforeOpenDialog_btnChosaJokyo() {
+
+        NinteiShinseiTorokuUketsukeManager manager = NinteiShinseiTorokuUketsukeManager.createInstance();
+        List<NinteiChosaJokyoDataPass> result = manager.get履歴情報(new HihokenshaNo(div.getHdnHihokenshaNo()));
+
+        if (!result.isEmpty() && result.size() > 0) {
+            div.setHdn今回履歴情報(DataPassingConverter.serialize(result.get(0)));
+        }
+        if (!result.isEmpty() && result.size() > 1) {
+            div.setHdn前回履歴情報(DataPassingConverter.serialize(result.get(1)));
+        }
+        div.setHdn表示判定キー(new RString("1"));
+        div.setHdnSubGyomuCd(SubGyomuCode.DBD介護受給.getColumnValue());
+    }
+
+    /**
      * 状態編集処理です。
      *
      */
@@ -273,7 +294,6 @@ public class NinteiShinseiTorokuUketsukeHandler {
             insert介護連絡先();
             insert申請履歴情報();
             //insert介護保険施設入退所();
-            //insert介護保険医療機関加入状況();
         } else if (DBD5120001StateName.申請修正.getName().equals(ResponseHolder.getState())
                 || DBD5120001StateName.区分変更修正.getName().equals(ResponseHolder.getState())
                 || DBD5120001StateName.サービス変更修正.getName().equals(ResponseHolder.getState())) {
@@ -282,7 +302,6 @@ public class NinteiShinseiTorokuUketsukeHandler {
             update申請届出者();
             update介護連絡先();
             update介護保険施設入退所();
-            update介護保険医療機関加入状況();
         } else if (DBD5120001StateName.申請取下.getName().equals(ResponseHolder.getState())
                 || DBD5120001StateName.区分変更取下.getName().equals(ResponseHolder.getState())
                 || DBD5120001StateName.サービス変更取下.getName().equals(ResponseHolder.getState())) {
@@ -295,7 +314,6 @@ public class NinteiShinseiTorokuUketsukeHandler {
             insert介護連絡先();
             insert申請履歴情報();
             //insert介護保険施設入退所();
-            //insert介護保険医療機関加入状況();
         } else if (DBD5120001StateName.職権記載.getName().equals(ResponseHolder.getState())
                 || DBD5120001StateName.職権全喪失.getName().equals(ResponseHolder.getState())) {
             insert受給者台帳_職権();
@@ -304,7 +322,6 @@ public class NinteiShinseiTorokuUketsukeHandler {
             insert介護連絡先();
             insert申請履歴情報();
             //insert介護保険施設入退所();
-            //insert介護保険医療機関加入状況();
         } else if (DBD5120001StateName.特殊追加.getName().equals(ResponseHolder.getState())
                 || DBD5120001StateName.特殊修正.getName().equals(ResponseHolder.getState())
                 || DBD5120001StateName.特殊削除.getName().equals(ResponseHolder.getState())
@@ -315,7 +332,6 @@ public class NinteiShinseiTorokuUketsukeHandler {
             insert介護連絡先();
             insert申請履歴情報();
             //insert介護保険施設入退所();
-            //insert介護保険医療機関加入状況();
         }
     }
 
@@ -778,15 +794,208 @@ public class NinteiShinseiTorokuUketsukeHandler {
 
     private RString get受給申請事由() {
 
-        if (DBD5120001StateName.申請追加.getName().equals(ResponseHolder.getState())) {
+        if (DBD5120001StateName.申請追加.getName().equals(ResponseHolder.getState())
+                || DBD5120001StateName.申請修正.getName().equals(ResponseHolder.getState())) {
+            return get受給申請事由for申請();
+        } else if (DBD5120001StateName.区分変更追加.getName().equals(ResponseHolder.getState())
+                || DBD5120001StateName.区分変更修正.getName().equals(ResponseHolder.getState())) {
+            return get受給申請事由for区分変更();
+        } else if (DBD5120001StateName.サービス変更追加.getName().equals(ResponseHolder.getState())
+                || DBD5120001StateName.サービス変更修正.getName().equals(ResponseHolder.getState())) {
+            return get受給申請事由for区分サービス変更();
+        }
+
+        return null;
+    }
+
+    private RString get受給申請事由for申請() {
+
+        JukyushaDaichoManager manager = new JukyushaDaichoManager();
+        List<JukyushaDaicho> resultList = manager.get受給者台帳(
+                new HihokenshaNo(div.getHdnHihokenshaNo()),
+                new ShikibetsuCode(div.getHdnShikibetsuCode()));
+
+        boolean 存在フラグ = false;
+        boolean 処理なしフラグ = false;
+        RString 受給申請事由 = RString.EMPTY;
+
+        for (JukyushaDaicho jukyushaDaicho : resultList) {
+            if (ZERO_4.equals(jukyushaDaicho.get履歴番号())) {
+                存在フラグ = true;
+                受給申請事由 = jukyushaDaicho.get受給申請事由().getColumnValue();
+                if (JukyuShinseiJiyu.要介護度変更申請.getコード().equals(jukyushaDaicho.get受給申請事由().getColumnValue())
+                        || JukyuShinseiJiyu.指定サービス種類変更申請.getコード().equals(jukyushaDaicho.get受給申請事由().getColumnValue())) {
+                    処理なしフラグ = true;
+                }
+            }
+        }
+        if (存在フラグ && !処理なしフラグ) {
+            return 受給申請事由;
+        } else if (存在フラグ && 処理なしフラグ) {
+            return null;
+        }
+
+        JukyushaDaicho 最大履歴番号レコード = resultList.get(0);
+
+        if (!YukoMukoKubun.有効.getコード().equals(最大履歴番号レコード.get有効無効区分().getColumnValue())
+                && 最大履歴番号レコード.get受給申請年月日().isBefore(new FlexibleDate(new RString("20000401")))) {
+            return JukyuShinseiJiyu.初回申請.getコード();
+        }
+
+        if (!YukoMukoKubun.有効.getコード().equals(最大履歴番号レコード.get有効無効区分().getColumnValue())
+                && new FlexibleDate(new RString("20000401")).isBefore(最大履歴番号レコード.get受給申請年月日())) {
+            return JukyuShinseiJiyu.申請_法施行前.getコード();
+        }
+
+        if (!(最大履歴番号レコード.get受給申請年月日().isBeforeOrEquals(最大履歴番号レコード.get認定有効期間終了年月日())
+                && 最大履歴番号レコード.get認定有効期間開始年月日().isBeforeOrEquals(最大履歴番号レコード.get受給申請年月日()))) {
             return JukyuShinseiJiyu.再申請_有効期限外.getコード();
-        } else if (DBD5120001StateName.区分変更追加.getName().equals(ResponseHolder.getState())) {
+        }
+
+        if (最大履歴番号レコード.get受給申請年月日().isBeforeOrEquals(最大履歴番号レコード.get認定有効期間終了年月日())
+                && 最大履歴番号レコード.get認定有効期間終了年月日().minusDay(INT_60).isBeforeOrEquals(最大履歴番号レコード.get受給申請年月日())) {
+            return JukyuShinseiJiyu.再申請_有効期限内.getコード();
+        }
+
+        if (YokaigoJotaiKubun.要支援1.getコード().equals(最大履歴番号レコード.get要介護認定状態区分コード().getColumnValue())
+                || YokaigoJotaiKubun.要支援2.getコード().equals(最大履歴番号レコード.get要介護認定状態区分コード().getColumnValue())) {
             return JukyuShinseiJiyu.要介護度変更申請.getコード();
-        } else if (DBD5120001StateName.サービス変更追加.getName().equals(ResponseHolder.getState())) {
+        } else {
+            return null;
+        }
+    }
+
+    private RString get受給申請事由for区分変更() {
+
+        JukyushaDaichoManager manager = new JukyushaDaichoManager();
+        List<JukyushaDaicho> resultList = manager.get受給者台帳(
+                new HihokenshaNo(div.getHdnHihokenshaNo()),
+                new ShikibetsuCode(div.getHdnShikibetsuCode()));
+
+        boolean 存在フラグ = false;
+        boolean 処理なしフラグ = false;
+        RString 受給申請事由 = RString.EMPTY;
+
+        for (JukyushaDaicho jukyushaDaicho : resultList) {
+            if (ZERO_4.equals(jukyushaDaicho.get履歴番号())) {
+                存在フラグ = true;
+                受給申請事由 = jukyushaDaicho.get受給申請事由().getColumnValue();
+                if (JukyuShinseiJiyu.初回申請.getコード().equals(jukyushaDaicho.get受給申請事由().getColumnValue())
+                        || JukyuShinseiJiyu.再申請_有効期限内.getコード().equals(jukyushaDaicho.get受給申請事由().getColumnValue())
+                        || JukyuShinseiJiyu.再申請_有効期限外.getコード().equals(jukyushaDaicho.get受給申請事由().getColumnValue())
+                        || JukyuShinseiJiyu.指定サービス種類変更申請.getコード().equals(jukyushaDaicho.get受給申請事由().getColumnValue())
+                        || JukyuShinseiJiyu.申請_法施行前.getコード().equals(jukyushaDaicho.get受給申請事由().getColumnValue())
+                        || JukyuShinseiJiyu.追加_申請なしの追加.getコード().equals(jukyushaDaicho.get受給申請事由().getColumnValue())) {
+                    処理なしフラグ = true;
+                }
+            }
+        }
+        if (存在フラグ && !処理なしフラグ) {
+            return 受給申請事由;
+        } else if (存在フラグ && 処理なしフラグ) {
+            return null;
+        }
+
+        JukyushaDaicho 最大履歴番号レコード = resultList.get(0);
+
+        if (!YukoMukoKubun.有効.getコード().equals(最大履歴番号レコード.get有効無効区分().getColumnValue())) {
+            return null;
+        }
+
+        if (最大履歴番号レコード.get受給申請年月日().isBeforeOrEquals(最大履歴番号レコード.get認定有効期間終了年月日())
+                && 最大履歴番号レコード.get認定有効期間終了年月日().minusDay(INT_60).isBeforeOrEquals(最大履歴番号レコード.get受給申請年月日())) {
+            return JukyuShinseiJiyu.要介護度変更申請.getコード();
+        } else {
+            return null;
+        }
+    }
+
+    private RString get受給申請事由for区分サービス変更() {
+
+        JukyushaDaichoManager manager = new JukyushaDaichoManager();
+        List<JukyushaDaicho> resultList = manager.get受給者台帳(
+                new HihokenshaNo(div.getHdnHihokenshaNo()),
+                new ShikibetsuCode(div.getHdnShikibetsuCode()));
+
+        boolean 存在フラグ = false;
+        boolean 処理なしフラグ = false;
+        RString 受給申請事由 = RString.EMPTY;
+
+        for (JukyushaDaicho jukyushaDaicho : resultList) {
+            if (ZERO_4.equals(jukyushaDaicho.get履歴番号())) {
+                存在フラグ = true;
+                受給申請事由 = jukyushaDaicho.get受給申請事由().getColumnValue();
+                if (JukyuShinseiJiyu.初回申請.getコード().equals(jukyushaDaicho.get受給申請事由().getColumnValue())
+                        || JukyuShinseiJiyu.再申請_有効期限内.getコード().equals(jukyushaDaicho.get受給申請事由().getColumnValue())
+                        || JukyuShinseiJiyu.再申請_有効期限外.getコード().equals(jukyushaDaicho.get受給申請事由().getColumnValue())
+                        || JukyuShinseiJiyu.指定サービス種類変更申請.getコード().equals(jukyushaDaicho.get受給申請事由().getColumnValue())
+                        || JukyuShinseiJiyu.申請_法施行前.getコード().equals(jukyushaDaicho.get受給申請事由().getColumnValue())
+                        || JukyuShinseiJiyu.追加_申請なしの追加.getコード().equals(jukyushaDaicho.get受給申請事由().getColumnValue())) {
+                    処理なしフラグ = true;
+                }
+            }
+        }
+        if (存在フラグ && !処理なしフラグ) {
+            return 受給申請事由;
+        } else if (存在フラグ && 処理なしフラグ) {
+            return null;
+        }
+
+        JukyushaDaicho 最大履歴番号レコード = resultList.get(0);
+
+        if (YukoMukoKubun.有効.getコード().equals(最大履歴番号レコード.get有効無効区分().getColumnValue())
+                && (指定サービス種類1_10判定(最大履歴番号レコード)
+                || 指定サービス種類11_20判定(最大履歴番号レコード)
+                || 指定サービス種類21_30判定(最大履歴番号レコード))) {
             return JukyuShinseiJiyu.指定サービス種類変更申請.getコード();
         } else {
             return null;
         }
+    }
+
+    private boolean 指定サービス種類1_10判定(JukyushaDaicho 最大履歴番号レコード) {
+
+        return !最大履歴番号レコード.get指定サービス種類01().isEmpty()
+                || !最大履歴番号レコード.get指定サービス種類02().isEmpty()
+                || !最大履歴番号レコード.get指定サービス種類03().isEmpty()
+                || !最大履歴番号レコード.get指定サービス種類04().isEmpty()
+                || !最大履歴番号レコード.get指定サービス種類05().isEmpty()
+                || !最大履歴番号レコード.get指定サービス種類06().isEmpty()
+                || !最大履歴番号レコード.get指定サービス種類07().isEmpty()
+                || !最大履歴番号レコード.get指定サービス種類08().isEmpty()
+                || !最大履歴番号レコード.get指定サービス種類09().isEmpty()
+                || !最大履歴番号レコード.get指定サービス種類10().isEmpty();
+
+    }
+
+    private boolean 指定サービス種類11_20判定(JukyushaDaicho 最大履歴番号レコード) {
+
+        return !最大履歴番号レコード.get指定サービス種類11().isEmpty()
+                || !最大履歴番号レコード.get指定サービス種類12().isEmpty()
+                || !最大履歴番号レコード.get指定サービス種類13().isEmpty()
+                || !最大履歴番号レコード.get指定サービス種類14().isEmpty()
+                || !最大履歴番号レコード.get指定サービス種類15().isEmpty()
+                || !最大履歴番号レコード.get指定サービス種類16().isEmpty()
+                || !最大履歴番号レコード.get指定サービス種類17().isEmpty()
+                || !最大履歴番号レコード.get指定サービス種類18().isEmpty()
+                || !最大履歴番号レコード.get指定サービス種類19().isEmpty()
+                || !最大履歴番号レコード.get指定サービス種類20().isEmpty();
+
+    }
+
+    private boolean 指定サービス種類21_30判定(JukyushaDaicho 最大履歴番号レコード) {
+
+        return !最大履歴番号レコード.get指定サービス種類21().isEmpty()
+                || !最大履歴番号レコード.get指定サービス種類22().isEmpty()
+                || !最大履歴番号レコード.get指定サービス種類23().isEmpty()
+                || !最大履歴番号レコード.get指定サービス種類24().isEmpty()
+                || !最大履歴番号レコード.get指定サービス種類25().isEmpty()
+                || !最大履歴番号レコード.get指定サービス種類26().isEmpty()
+                || !最大履歴番号レコード.get指定サービス種類27().isEmpty()
+                || !最大履歴番号レコード.get指定サービス種類28().isEmpty()
+                || !最大履歴番号レコード.get指定サービス種類29().isEmpty()
+                || !最大履歴番号レコード.get指定サービス種類30().isEmpty();
+
     }
 
     private void insert受給者台帳_申請() {
@@ -795,7 +1004,6 @@ public class NinteiShinseiTorokuUketsukeHandler {
         if (受給申請事由 == null) {
             return;
         }
-        //TODO受給申請事由 QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         JukyushaDaicho jukyushaDaicho = new JukyushaDaicho(
                 new LasdecCode(div.getHdnShichosonCode()),
                 new HihokenshaNo(div.getHdnHihokenshaNo()),
@@ -804,7 +1012,6 @@ public class NinteiShinseiTorokuUketsukeHandler {
                 new Code(受給申請事由));
 
         JukyushaDaichoBuilder builder = jukyushaDaicho.createBuilderForEdit();
-        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set申請書管理番号(shinseishoKanriNo);
         builder.set申請状況区分(new RString("0"));
         builder.set支所コード(div.getCcdKaigoNinteiShinseiKihon().
@@ -824,7 +1031,6 @@ public class NinteiShinseiTorokuUketsukeHandler {
         builder.set有効無効区分(new Code("0"));
         builder.set申請書区分(new Code(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getRadShinseishoKubun().getSelectedKey()));
-        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set要支援者認定申請区分(false);
         builder.set旧措置者フラグ(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getChkKyuSochisha().isAllSelected());
@@ -987,20 +1193,6 @@ public class NinteiShinseiTorokuUketsukeHandler {
 //        ShisetsuNyutaisho newShisetsuNyutaisho = builder.build();
 //        ShisetsuNyutaishoManager manager = new ShisetsuNyutaishoManager();
 //        manager.save介護保険施設入退所(newShisetsuNyutaisho);
-//
-//    }
-//    private void insert介護保険医療機関加入状況() {
-//        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
-//        IryohokenKanyuJokyo iryohokenKanyuJokyo = new IryohokenKanyuJokyo(new ShikibetsuCode(div.getHdnShikibetsuCode()), 0);
-//        IryohokenKanyuJokyoBuilder builder = iryohokenKanyuJokyo.createBuilderForEdit();
-//        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
-//        builder.set市町村コード(new LasdecCode(div.getHdnShichosonCode()));
-//        builder.set被保険者番号(new HihokenshaNo(div.getHdnHihokenshaNo()));
-//        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
-//
-//        IryohokenKanyuJokyo newIryohokenKanyuJokyo = builder.build();
-//        IryohokenKanyuJokyoManager manager = new IryohokenKanyuJokyoManager();
-//        manager.save介護保険医療保険加入状況(newIryohokenKanyuJokyo);
 //
 //    }
     private void insert受給者台帳_転入() {
@@ -1352,15 +1544,18 @@ public class NinteiShinseiTorokuUketsukeHandler {
 
     private void update受給者台帳_申請修正() {
 
+        RString 受給申請事由 = this.get受給申請事由();
+        if (受給申請事由 == null || RString.isNullOrEmpty(受給申請事由)) {
+            return;
+        }
         JukyushaDaicho jukyushaDaicho = new JukyushaDaicho(
                 new LasdecCode(div.getHdnShichosonCode()),
                 new HihokenshaNo(div.getHdnHihokenshaNo()),
                 new RString("0").padZeroToLeft(INT_4),
                 new RString("00"),
-                new Code(""));
+                new Code(受給申請事由));
 
         JukyushaDaichoBuilder builder = jukyushaDaicho.createBuilderForEdit();
-        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
         builder.set直近フラグ(true);
         builder.set申請理由(div.getCcdKaigoNinteiShinseiKihon().
                 getKaigoNinteiShinseiKihonJohoInputDiv().getNinteiShinseiRiyu().getTxtNinteiShinseRiyu().getText());
@@ -1502,7 +1697,7 @@ public class NinteiShinseiTorokuUketsukeHandler {
     private void update申請届出者() {
 
         //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
-        DbT4120ShinseitodokedeJoho shinseitodokedeJoho = new DbT4120ShinseitodokedeJoho(shinseishoKanriNo);
+        DbT4120ShinseitodokedeJoho shinseitodokedeJoho = new DbT4120ShinseitodokedeJoho(new ShinseishoKanriNo(div.getHdnShinseishoKanriNo()));
         DbT4120ShinseitodokedeJohoBuilder builder = shinseitodokedeJoho.createBuilderForEdit();
 
         builder.set申請届出代行区分コード(new Code(div.getCcdShinseiTodokedesha().getDdlTodokledeDaikoKubun().getSelectedKey()));
@@ -1534,21 +1729,6 @@ public class NinteiShinseiTorokuUketsukeHandler {
         ShisetsuNyutaisho newShisetsuNyutaisho = builder.build();
         ShisetsuNyutaishoManager manager = new ShisetsuNyutaishoManager();
         manager.save介護保険施設入退所(newShisetsuNyutaisho);
-
-    }
-
-    private void update介護保険医療機関加入状況() {
-        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
-        IryohokenKanyuJokyo iryohokenKanyuJokyo = new IryohokenKanyuJokyo(new ShikibetsuCode(div.getCcdKaigoNinteiAtenaInfo().get識別コード()), 0);
-        IryohokenKanyuJokyoBuilder builder = iryohokenKanyuJokyo.createBuilderForEdit();
-        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
-        builder.set市町村コード(new LasdecCode(div.getHdnShichosonCode()));
-        builder.set被保険者番号(new HihokenshaNo(div.getHdnHihokenshaNo()));
-        //TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
-
-        IryohokenKanyuJokyo newIryohokenKanyuJokyo = builder.build();
-        IryohokenKanyuJokyoManager manager = new IryohokenKanyuJokyoManager();
-        manager.save介護保険医療保険加入状況(newIryohokenKanyuJokyo);
 
     }
 
