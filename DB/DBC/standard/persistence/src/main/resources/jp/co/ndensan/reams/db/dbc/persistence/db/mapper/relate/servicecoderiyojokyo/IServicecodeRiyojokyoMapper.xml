@@ -269,7 +269,7 @@
                             <choose>
                                     <when test="旧市町村コード==null or 旧市町村コード.toString() == ''.toString()">
                                             <if test="'町域'.toString()==選択対象.toString()">
-                                                AND DbWT3470ToukeihyoMeisai."machiikiCode" IN <foreach  
+                                                AND "DbWT3470ToukeihyoMeisai"."machiikiCode" IN <foreach  
                                                 collection="対象コード"
                                                 item="item"
                                                 open="("  
@@ -279,7 +279,7 @@
                                                 </foreach>
                                             </if>
                                             <if test="'地区１'.toString()==選択対象.toString()">
-                                                AND DbWT3470ToukeihyoMeisai."chikuCode1" IN <foreach  
+                                                AND "DbWT3470ToukeihyoMeisai"."chikuCode1" IN <foreach  
                                                 collection="対象コード"
                                                 item="item"
                                                 open="("  
@@ -289,7 +289,7 @@
                                                 </foreach>
                                             </if>
                                             <if test="'地区２'.toString()==選択対象.toString()">
-                                                AND DbWT3470ToukeihyoMeisai."chikuCode2" IN <foreach  
+                                                AND "DbWT3470ToukeihyoMeisai"."chikuCode2" IN <foreach  
                                                 collection="対象コード"
                                                 item="item"
                                                 open="("  
@@ -299,7 +299,7 @@
                                                 </foreach>
                                             </if>
                                             <if test="'地区３'.toString()==選択対象.toString()">
-                                                AND DbWT3470ToukeihyoMeisai."chikuCode3" IN <foreach  
+                                                AND "DbWT3470ToukeihyoMeisai"."chikuCode3" IN <foreach  
                                                 collection="対象コード"
                                                 item="item"
                                                 open="("  
@@ -309,7 +309,7 @@
                                                 </foreach>
                                             </if>
                                             <if test="'行政区'.toString()==選択対象.toString()">
-                                                AND DbWT3470ToukeihyoMeisai."gyoseikuCode" IN <foreach  
+                                                AND "DbWT3470ToukeihyoMeisai"."gyoseikuCode" IN <foreach  
                                                 collection="対象コード"
                                                 item="item"
                                                 open="("  
@@ -322,7 +322,7 @@
                                     <when test="旧市町村コード.toString()=='000000'.toString()">
                                     </when>
                                     <otherwise>
-                                            AND DbWT3470ToukeihyoMeisai."kyuShichosonCode" = #{旧市町村コード}
+                                            AND "DbWT3470ToukeihyoMeisai"."kyuShichosonCode" = #{旧市町村コード}
                                     </otherwise>
                             </choose>
                     </when>
@@ -331,15 +331,15 @@
                     <otherwise>
                             <choose>
                                     <when test="旧市町村コード==null or 旧市町村コード.toString() == ''.toString()">
-                                         AND DbWT3470ToukeihyoMeisai."koikinaiJushochiTokureiFlag" = '1'
-                                         AND DbWT3470ToukeihyoMeisai."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}
+                                         AND "DbWT3470ToukeihyoMeisai"."koikinaiJushochiTokureiFlag" = '1'
+                                         AND "DbWT3470ToukeihyoMeisai"."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}
                                     </when>
                                     <when test="旧市町村コード.toString()=='000000'.toString()">
-                                          AND DbWT3470ToukeihyoMeisai."koikinaiJushochiTokureiFlag" = '1'
-                                          AND DbWT3470ToukeihyoMeisai."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}
+                                          AND "DbWT3470ToukeihyoMeisai"."koikinaiJushochiTokureiFlag" = '1'
+                                          AND "DbWT3470ToukeihyoMeisai"."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}
                                     </when>
                                     <otherwise>
-                                          AND DbWT3470ToukeihyoMeisai."kyuShichosonCode" = #{旧市町村コード}
+                                          AND "DbWT3470ToukeihyoMeisai"."kyuShichosonCode" = #{旧市町村コード}
                                     </otherwise>
                             </choose>
                     </otherwise>
