@@ -95,7 +95,6 @@ public class DBB031001_HonsanteiFuka extends BatchFlowBase<DBB031001_HonsanteiFu
         if (getParameter().is画面移動フラグ()) {
             executeStep(本算定通知書一括発行フロー);
         }
-
     }
 
     /**

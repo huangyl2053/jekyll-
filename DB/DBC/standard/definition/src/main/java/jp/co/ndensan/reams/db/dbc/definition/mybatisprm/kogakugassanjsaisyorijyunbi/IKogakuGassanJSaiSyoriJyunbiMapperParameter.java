@@ -3,21 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.KogakuGassanJSaiSyoriJyunbi;
+package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanjsaisyorijyunbi;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import lombok.Getter;
 
 /**
  * 高額合算自己負担額証明書情報取込のparameterです。<br>
  *
  * @reamsid_L DBC-2640-010 zhengshenlei
  */
-@lombok.Getter
-@SuppressWarnings("PMD.UnusedPrivateField")
+@Getter
 public class IKogakuGassanJSaiSyoriJyunbiMapperParameter {
 
     private final RString データ作成区分;
