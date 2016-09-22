@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc110060.KogakugassanShikyushinseishoOutCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110060.DbWT3711KogakuGassanShinseishoTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110060.KogakugassanShikyushinseishoOutFileEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.gassanshikyushinseishojohosofuIchiran.GassanShikyuShinseishoJohoSofuIchiranSource;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.gassanshikyushinseishojohosofuichiran.GassanShikyuShinseishoJohoSofuIchiranSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
