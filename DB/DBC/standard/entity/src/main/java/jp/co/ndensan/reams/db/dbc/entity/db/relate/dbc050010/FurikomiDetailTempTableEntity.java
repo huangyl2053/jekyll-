@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanShitenCode;
@@ -136,9 +137,9 @@ public class FurikomiDetailTempTableEntity extends DbTableEntityBase<FurikomiDet
     @TempTableColumnOrder(43)
     private boolean shinseiDataFlag;
     @TempTableColumnOrder(44)
-    private RString shinseiKubunCode;
+    private Code shinseiKubunCode;
     @TempTableColumnOrder(45)
-    private RString yokaigoJotaiKubunCode;
+    private Code yokaigoJotaiKubunCode;
     @TempTableColumnOrder(46)
     private FlexibleDate ninteiYukoKikanKaishiYMD;
     @TempTableColumnOrder(47)

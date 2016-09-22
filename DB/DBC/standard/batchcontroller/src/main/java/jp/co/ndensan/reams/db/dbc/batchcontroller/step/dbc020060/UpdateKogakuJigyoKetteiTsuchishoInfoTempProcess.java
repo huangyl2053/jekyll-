@@ -30,7 +30,7 @@ public class UpdateKogakuJigyoKetteiTsuchishoInfoTempProcess extends BatchProces
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MAPPERPATH);
+        return new BatchDbReader(MAPPERPATH, parameter.toパラメータ());
     }
 
     @Override

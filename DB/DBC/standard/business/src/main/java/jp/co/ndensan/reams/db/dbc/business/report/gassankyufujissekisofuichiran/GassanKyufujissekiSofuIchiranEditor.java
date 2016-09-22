@@ -104,6 +104,9 @@ public class GassanKyufujissekiSofuIchiranEditor implements
                 source.list_11 = DecimalFormatter.toコンマ区切りRString(帳票用データ.get支給額(), 0);
             }
         }
+
+        source.shikibetsuCode = 帳票用データ.get識別コード().value();
+
         return source;
 
     }

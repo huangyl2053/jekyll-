@@ -19,27 +19,27 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 public class GassanShikyuShinseishoJohoSofuIchiranPageBreak extends PageBreaker<GassanShikyuShinseishoJohoSofuIchiranSource> {
 
     private static final RString 固定改頁項目 = new RString("重複フラグ");
-    private final List<RString> breakKeys;
+    private final List<RString> breakKeysList;
 
     /**
      * コンストラクタです。
      *
-     * @param breakKeys List<RString>
+     * @param breakKeysList List<RString>
      */
-    public GassanShikyuShinseishoJohoSofuIchiranPageBreak(List<RString> breakKeys) {
-        this.breakKeys = breakKeys;
+    public GassanShikyuShinseishoJohoSofuIchiranPageBreak(List<RString> breakKeysList) {
+        this.breakKeysList = breakKeysList;
     }
 
     @Override
     public List<RString> breakKeys() {
-        return breakKeys;
+        return breakKeysList;
     }
 
     @Override
     public boolean isBreak(ReportLineRecord<GassanShikyuShinseishoJohoSofuIchiranSource> currentSource,
             ReportLineRecord<GassanShikyuShinseishoJohoSofuIchiranSource> nextSource) {
         boolean flg = false;
-        if (this.breakKeys.contains(固定改頁項目)
+        if (this.breakKeysList.contains(固定改頁項目)
                 && !currentSource.getSource().list_16.equals(nextSource.getSource().list_16)) {
             flg = true;
         }

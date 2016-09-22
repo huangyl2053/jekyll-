@@ -85,6 +85,12 @@
             <artifactId>UaxDivController</artifactId>
             <classifier>classes</classifier>
         </dependency>
+        
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ux.uxx</groupId>
+            <artifactId>UxxDivController</artifactId>
+            <classifier>classes</classifier>
+        </dependency>
         <!-- テスト -->
         <!-- ツール -->
         <dependency>

@@ -86,7 +86,7 @@ public class NinteiBatchKekkaListShutsuryoku extends BatchKeyBreakBase<FutanGeng
     @Override
     protected void initialize() {
         outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance().get出力順(SubGyomuCode.DBD介護受給, new ReportId(parameter.get帳票ID()),
-                UrControlDataFactory.createInstance().getLoginInfo().getUserId(), new Long(parameter.get改頁出力順ID().toString()));
+                UrControlDataFactory.createInstance().getLoginInfo().getUserId(), Long.valueOf(parameter.get改頁出力順ID().toString()));
         if (outputOrder != null) {
             出力順 = MyBatisOrderByClauseCreator.create(FutangakuNinteiHakkoIchiranOrderKey.class, outputOrder);
         } else {

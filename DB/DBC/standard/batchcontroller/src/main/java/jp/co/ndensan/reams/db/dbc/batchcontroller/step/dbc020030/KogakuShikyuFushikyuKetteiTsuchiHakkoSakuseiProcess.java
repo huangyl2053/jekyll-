@@ -56,8 +56,9 @@ import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
+ * 高額サービス費支給（不支給）決定通知書作成の帳票発行_一覧表Process
  *
- * @author wangxue
+ * @reamsid_L DBC-2000-030 wangxue
  */
 public class KogakuShikyuFushikyuKetteiTsuchiHakkoSakuseiProcess extends BatchKeyBreakBase<KetteiTsuchishoInfoTempResultEntity> {
 
@@ -175,7 +176,7 @@ public class KogakuShikyuFushikyuKetteiTsuchiHakkoSakuseiProcess extends BatchKe
             returnEntity.set被保険者番号(entity.get被保険者番号().getColumnValue());
         }
         if (entity.get宛名() != null && entity.get宛名().getKanjiShimei() != null) {
-            returnEntity.set被保険者氏名(entity.get宛名().getKanjiShimei().value());
+            returnEntity.set被保険者氏名(RString.EMPTY);
         }
         returnEntity.set住所(住所);
         // 郵便番号的来源不明

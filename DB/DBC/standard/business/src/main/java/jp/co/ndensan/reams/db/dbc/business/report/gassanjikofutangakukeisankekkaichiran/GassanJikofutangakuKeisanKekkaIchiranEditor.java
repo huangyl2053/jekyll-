@@ -108,10 +108,10 @@ public class GassanJikofutangakuKeisanKekkaIchiranEditor implements IGassanJikof
             }
             source.list_2 = 高額合算自己負担額計算結果一覧表.get被保険者氏名();
             if (高額合算自己負担額計算結果一覧表.get生年月日() != null
-                    && 種別日本人.equals(高額合算自己負担額計算結果一覧表.get宛名ﾃﾞｰﾀ種別())) {
+                    && 種別日本人.equals(高額合算自己負担額計算結果一覧表.get識別コード())) {
                 source.list_3 = 高額合算自己負担額計算結果一覧表.get生年月日().wareki().toDateString();
             } else if (高額合算自己負担額計算結果一覧表.get生年月日() != null
-                    && 種別外国人.equals(高額合算自己負担額計算結果一覧表.get宛名ﾃﾞｰﾀ種別())) {
+                    && 種別外国人.equals(高額合算自己負担額計算結果一覧表.get識別コード())) {
                 source.list_3 = 高額合算自己負担額計算結果一覧表.get生年月日().seireki().toDateString();
             }
             editTwo(source);

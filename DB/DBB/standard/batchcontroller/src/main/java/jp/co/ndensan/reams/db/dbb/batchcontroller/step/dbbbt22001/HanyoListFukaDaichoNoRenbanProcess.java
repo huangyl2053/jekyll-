@@ -306,12 +306,10 @@ public class HanyoListFukaDaichoNoRenbanProcess extends BatchKeyBreakBase<HanyoL
     }
 
     private void csvファイル出力() {
-        if (賦課台帳 != null) {
-            if (is出力データ(賦課台帳)) {
-                csvWriter.writeLine(csvEditor.editor(賦課台帳, processParameter, 保険料段階リスト, 構成市町村マスタlist,
-                        new FlexibleDate(システム日時.getDate().toDateString())));
-                personalDataList.add(toPersonalData(賦課台帳));
-            }
+        if (賦課台帳 != null && is出力データ(賦課台帳)) {
+            csvWriter.writeLine(csvEditor.editor(賦課台帳, processParameter, 保険料段階リスト, 構成市町村マスタlist,
+                    new FlexibleDate(システム日時.getDate().toDateString())));
+            personalDataList.add(toPersonalData(賦課台帳));
         }
     }
 
@@ -573,7 +571,7 @@ public class HanyoListFukaDaichoNoRenbanProcess extends BatchKeyBreakBase<HanyoL
 
     private void set地区区分(RStringBuilder builder, List<RString> 出力条件) {
         RString 地区区分コード = processParameter.get宛名抽出条件().getChiku_Kubun().getコード();
-        if (processParameter != null && processParameter.get宛名抽出条件() != null
+        if (processParameter.get宛名抽出条件() != null
                 && processParameter.get宛名抽出条件().getChiku_Kubun() != null
                 && !Chiku.全て.getコード().equals(地区区分コード)) {
             if (Chiku.住所.getコード().equals(地区区分コード)) {

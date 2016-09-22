@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 受給取得状況データ取得のマッピング用XMLです。 -->
+<!-- @reamsid_L DBC-5010-030 x_lilh -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc050010.IFurikomiMeisaiListStatusMapper">
+    <resultMap id="resultMap_FurikomiMeisaiListStatusEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.FurikomiMeisaiListStatusEntity" autoMapping="true">
+        <id property="受給者台帳Entity.shichosonCode" column="dbT4001JukyushaDaicho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <id property="受給者台帳Entity.hihokenshaNo" column="dbT4001JukyushaDaicho_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <id property="受給者台帳Entity.rirekiNo" column="dbT4001JukyushaDaicho_rirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="受給者台帳Entity.edaban" column="dbT4001JukyushaDaicho_edaban" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="受給者台帳Entity.jukyuShinseiJiyu" column="dbT4001JukyushaDaicho_jukyuShinseiJiyu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <id property="要介護認定申請情報Entity.shinseishoKanriNo" column="dbT4101NinteiShinseiJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
+        <association property="受給者台帳Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.ResultMap_DbT4001JukyushaDaichoEntity"/>
+        <association property="要介護認定申請情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.ResultMap_DbT4101NinteiShinseiJohoEntity"/>
+    </resultMap>
+     
+    <select id="select受給取得状況情報"
+            resultMap="resultMap_FurikomiMeisaiListStatusEntity" 
+            fetchSize="500" resultOrdered="true">
+    WITH 受給者 AS(
+                SELECT <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.allColumns_DbT4001JukyushaDaicho" />,
+                       振込明細一時TBL.*
+                FROM rgdb."DbT4001JukyushaDaicho"
+                INNER JOIN "DbWT0510FurikomiMeisai" AS 振込明細一時TBL
+                ON      rgdb."DbT4001JukyushaDaicho"."hihokenshaNo" = 振込明細一時TBL."hihokenshaNo"
+                        AND rgdb."DbT4001JukyushaDaicho"."ninteiYukoKikanKaishiYMD" <![CDATA[<=]]> 振込明細一時TBL."serviceTeikyoYM"
+                        AND rgdb."DbT4001JukyushaDaicho"."logicalDeletedFlag" =  FALSE
+                WHERE((rgdb."DbT4001JukyushaDaicho"."yukoMukoKubun" = '1'
+                    AND 振込明細一時TBL."serviceTeikyoYM" <![CDATA[<=]]> rgdb."DbT4001JukyushaDaicho"."shikyuGendoShuryoYMD")
+                    OR  (rgdb."DbT4001JukyushaDaicho"."yukoMukoKubun" =  '2'
+                    AND (rgdb."DbT4001JukyushaDaicho"."soshitsuYMD" IS NULL OR (rgdb."DbT4001JukyushaDaicho"."soshitsuYMD" = '')
+                    AND rgdb."DbT4001JukyushaDaicho"."yokaigoJotaiKubunCode" = '01' ))
+                    )
+                )
+    SELECT
+        mst.*,
+        要介護認定申請情報TBL.*
+    FROM 受給者 AS mst
+    LEFT JOIN rgdb."DbT4101NinteiShinseiJoho" AS 要介護認定申請情報TBL
+         ON mst."dbT4001JukyushaDaicho_shinseishoKanriNo" = 要介護認定申請情報TBL."shinseishoKanriNo"
+    WHERE
+        NOT EXISTS (
+            SELECT 1 FROM 受給者 AS slv
+            WHERE mst."dbT4001JukyushaDaicho_hihokenshaNo" = slv."hihokenshaNo"
+            AND mst."dbT4001JukyushaDaicho_rirekiNo" || mst."dbT4001JukyushaDaicho_edaban" <![CDATA[<]]> slv."dbT4001JukyushaDaicho_rirekiNo" || slv."dbT4001JukyushaDaicho_edaban"
+        )
+    </select>
+</mapper>

@@ -548,6 +548,7 @@ public class PanelFuKaHandler {
     }
 
     private void set本算定時(Fuka fuka) {
+        HokenryoDankai 本算所得段階 = get保険料段階情報(fuka, fuka.get保険料段階());
         div.getPanelFukaJoho().getKikan().setVisible(true);
         div.getLblKariSanteiKeisanjouHokenryouGaku().setDisplayNone(true);
         div.getLblKariSanteiKeisanjouHokenryouGakuValue().setDisplayNone(true);
@@ -573,7 +574,7 @@ public class PanelFuKaHandler {
         div.getLblSetaiKazeiValue().setText(fuka.get世帯課税区分().get名称());
         div.getLblShotokuSumValue().setText(dcimalToRstr(fuka.get合計所得金額()));
         div.getLblNenkinShunyuValue().setText(dcimalToRstr(fuka.get公的年金収入額()));
-        div.getLblHokenryoDankaiValue().setText(fuka.get保険料段階());
+        div.getLblHokenryoDankaiValue().setText(本算所得段階.get表記());
         div.getLblKeisanjouNenkanHokenryouGakuValue().setText(dcimalToRstr(fuka.get減免前介護保険料_年額()));
         div.getLblGenmenGakuValue().setText(dcimalToRstr(fuka.get減免額()));
         div.getLblKakuteiNenkanHokenryouGakuValue().setText(dcimalToRstr(fuka.get確定介護保険料_年額()));
@@ -602,8 +603,10 @@ public class PanelFuKaHandler {
         div.getLblZenHokenryoritsuValue().setDisplayNone(false);
         div.getLblZenNengakuHokenryo().setDisplayNone(false);
         div.getLblZenNengakuHokenryoValue().setDisplayNone(false);
-        div.getLblZenHokenryoDankaiValue().setText(前年賦課.get保険料段階());
-        div.getLblZenHokenryoritsuValue().setText(dcimalToRstr(前年所得段階.get保険料率()));
+        if (前年所得段階 != null && !RString.isNullOrEmpty(前年所得段階.get表記())) {
+            div.getLblZenHokenryoDankaiValue().setText(前年所得段階.get表記());
+            div.getLblZenHokenryoritsuValue().setText(dcimalToRstr(前年所得段階.get保険料率()));
+        }
         div.getLblZenNengakuHokenryoValue().setText(dcimalToRstr(前年賦課.get確定介護保険料_年額()));
         div.getLblNenkinShunyuValue().setText(RString.EMPTY);
         div.getLblHokenryoDankaiValue().setText(RString.EMPTY);

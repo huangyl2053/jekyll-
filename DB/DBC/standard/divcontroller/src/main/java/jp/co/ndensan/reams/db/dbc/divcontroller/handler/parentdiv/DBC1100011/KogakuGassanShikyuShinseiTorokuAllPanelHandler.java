@@ -453,7 +453,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
             FlexibleYear 対象年度 = new FlexibleYear(div.getDdlShinseiTaishoNendo().getSelectedKey());
             HokenshaNo 保険者番号 = new HokenshaNo(div.getTxtTeishutsuHokenshaNo().getValue());
             RString 整理番号New = 整理番号Next;
-            RString 加入歴番号 = RSTRING_1;
+            RString 加入歴番号 = RSTRING_1.padZeroToLeft(INT_2);
             int 履歴番号 = INT_1;
             KogakuGassanShinseishoKanyureki 加入歴Result = new KogakuGassanShinseishoKanyureki(
                     被保険者番号, 対象年度, 保険者番号, 整理番号New, 加入歴番号, 履歴番号);
@@ -489,7 +489,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
             FlexibleYear 対象年度 = new FlexibleYear(div.getDdlShinseiTaishoNendo().getSelectedKey());
             HokenshaNo 保険者番号 = new HokenshaNo(div.getTxtTeishutsuHokenshaNo().getValue());
             RString 整理番号New = 整理番号Next;
-            RString 加入歴番号 = RSTRING_1;
+            RString 加入歴番号 = RSTRING_1.padZeroToLeft(INT_2);
             int 履歴番号 = INT_1;
             KogakuGassanShinseishoKanyureki 加入歴Result = new KogakuGassanShinseishoKanyureki(
                     被保険者番号, 対象年度, 保険者番号, 整理番号New, 加入歴番号, 履歴番号);
@@ -1095,50 +1095,53 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
     }
 
     private void 申請情報データで設定(KogakuGassanShinseisho 高額合算申請書) {
-        div.getTxtTeishutsuHokenshaNo().setValue(高額合算申請書.get保険者番号().getColumnValue());
-        RString 支給申請書整理番号 = 高額合算申請書.get支給申請書整理番号();
-        if (RString.isNullOrEmpty(支給申請書整理番号)) {
-            div.getDdlShokisaiHokenshaNo().setSelectedIndex(INT_0);
-        } else {
-            boolean flg = false;
-            RString 証記載保険者番号 = 支給申請書整理番号.substring(INT_5, INT_11);
-            List<KeyValueDataSource> dataSource = div.getDdlShokisaiHokenshaNo().getDataSource();
-            for (KeyValueDataSource data : dataSource) {
-                if (証記載保険者番号.equals(data.getKey())) {
-                    flg = true;
-                    break;
-                }
-            }
-            if (flg) {
-                div.getDdlShokisaiHokenshaNo().setSelectedKey(証記載保険者番号);
+        RowState state = div.getDgShinseiIchiran().getClickedItem().getRowState();
+        if (RowState.Added.equals(state)) {
+            RDate nowDate = RDate.getNowDate();
+            RString 保険者番号 = DbBusinessConfig.get(
+                    ConfigNameDBU.保険者情報_保険者番号, nowDate, SubGyomuCode.DBU介護統計報告);
+            if (RString.isNullOrEmpty(保険者番号)) {
+                div.getTxtTeishutsuHokenshaNo().clearValue();
             } else {
-                div.getDdlShokisaiHokenshaNo().setSelectedIndex(INT_0);
+                div.getTxtTeishutsuHokenshaNo().setValue(保険者番号);
             }
-        }
-        if (RString.isNullOrEmpty(支給申請書整理番号)) {
-            div.getTxtKaigoShikyuShinseishoSeiriBango1().clearValue();
-            div.getTxtKaigoShikyuShinseishoSeiriBango2().clearValue();
-            div.getTxtKaigoShikyuShinseishoSeiriBango3().clearValue();
-            div.getTxtKaigoShikyuShinseishoSeiriBango4().clearValue();
+            div.getDdlShokisaiHokenshaNo().setSelectedIndex(INT_0);
+            div.getTxtKaigoShikyuShinseishoSeiriBango2().setValue(RSTRING_99);
+            div.getTxtRirekiBango().setValue(Decimal.ONE);
+            div.getTxtIryoShikyuShinseishoSeiriBango2().setValue(RSTRING_00);
+            div.getTxtShikyuShinseiKubun().setValue(KaigoGassan_ShinseiKbn.新規.get名称());
+            div.getDdlShikyuShinseiKeitai().setSelectedIndex(INT_0);
+            div.getTxtShinseiYMD().setValue(nowDate);
+            div.getDdlShinseiTaishoNendo().setSelectedIndex(INT_0);
+            onChange_ddlShinseiTaisyoNendo();
         } else {
-            div.getTxtKaigoShikyuShinseishoSeiriBango1().setValue(支給申請書整理番号.substring(INT_0, INT_3));
-            div.getTxtKaigoShikyuShinseishoSeiriBango2().setValue(支給申請書整理番号.substring(INT_3, INT_5));
-            div.getTxtKaigoShikyuShinseishoSeiriBango3().setValue(支給申請書整理番号.substring(INT_5, INT_11));
-            div.getTxtKaigoShikyuShinseishoSeiriBango4().setValue(支給申請書整理番号.substring(INT_11));
-        }
-        div.getTxtRirekiBango().setValue(高額合算申請書.get履歴番号());
-        div.getDdlShinseiTaishoNendo().setSelectedKey(高額合算申請書.get対象年度().toDateString());
-        RString 国保支給申請書整理番号 = 高額合算申請書.get国保支給申請書整理番号();
-        if (RString.isNullOrEmpty(国保支給申請書整理番号)) {
-            div.getTxtIryoShikyuShinseishoSeiriBango1().clearValue();
-            div.getTxtIryoShikyuShinseishoSeiriBango2().clearValue();
-            div.getTxtIryoShikyuShinseishoSeiriBango3().clearValue();
-            div.getTxtIryoShikyuShinseishoSeiriBango4().clearValue();
-        } else {
-            div.getTxtIryoShikyuShinseishoSeiriBango1().setValue(国保支給申請書整理番号.substring(INT_0, INT_3));
-            div.getTxtIryoShikyuShinseishoSeiriBango2().setValue(国保支給申請書整理番号.substring(INT_3, INT_5));
-            div.getTxtIryoShikyuShinseishoSeiriBango3().setValue(国保支給申請書整理番号.substring(INT_5, INT_11));
-            div.getTxtIryoShikyuShinseishoSeiriBango4().setValue(国保支給申請書整理番号.substring(INT_11));
+            div.getTxtTeishutsuHokenshaNo().setValue(高額合算申請書.get保険者番号().getColumnValue());
+            RString 支給申請書整理番号 = 証記載保険者番号設定(高額合算申請書);
+            if (RString.isNullOrEmpty(支給申請書整理番号)) {
+                div.getTxtKaigoShikyuShinseishoSeiriBango1().clearValue();
+                div.getTxtKaigoShikyuShinseishoSeiriBango2().clearValue();
+                div.getTxtKaigoShikyuShinseishoSeiriBango3().clearValue();
+                div.getTxtKaigoShikyuShinseishoSeiriBango4().clearValue();
+            } else {
+                div.getTxtKaigoShikyuShinseishoSeiriBango1().setValue(支給申請書整理番号.substring(INT_0, INT_3));
+                div.getTxtKaigoShikyuShinseishoSeiriBango2().setValue(支給申請書整理番号.substring(INT_3, INT_5));
+                div.getTxtKaigoShikyuShinseishoSeiriBango3().setValue(支給申請書整理番号.substring(INT_5, INT_11));
+                div.getTxtKaigoShikyuShinseishoSeiriBango4().setValue(支給申請書整理番号.substring(INT_11));
+            }
+            div.getTxtRirekiBango().setValue(高額合算申請書.get履歴番号());
+            div.getDdlShinseiTaishoNendo().setSelectedKey(高額合算申請書.get対象年度().toDateString());
+            RString 国保支給申請書整理番号 = 高額合算申請書.get国保支給申請書整理番号();
+            if (RString.isNullOrEmpty(国保支給申請書整理番号)) {
+                div.getTxtIryoShikyuShinseishoSeiriBango1().clearValue();
+                div.getTxtIryoShikyuShinseishoSeiriBango2().clearValue();
+                div.getTxtIryoShikyuShinseishoSeiriBango3().clearValue();
+                div.getTxtIryoShikyuShinseishoSeiriBango4().clearValue();
+            } else {
+                div.getTxtIryoShikyuShinseishoSeiriBango1().setValue(国保支給申請書整理番号.substring(INT_0, INT_3));
+                div.getTxtIryoShikyuShinseishoSeiriBango2().setValue(国保支給申請書整理番号.substring(INT_3, INT_5));
+                div.getTxtIryoShikyuShinseishoSeiriBango3().setValue(国保支給申請書整理番号.substring(INT_5, INT_11));
+                div.getTxtIryoShikyuShinseishoSeiriBango4().setValue(国保支給申請書整理番号.substring(INT_11));
+            }
         }
         if (RString.isNullOrEmpty(高額合算申請書.get支給申請区分())) {
             div.getTxtShikyuShinseiKubun().clearValue();
@@ -1182,6 +1185,29 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         } else {
             div.getTxtDaihyoshaYubinNo().setValue(高額合算申請書.get申請代表者郵便番号());
         }
+    }
+
+    private RString 証記載保険者番号設定(KogakuGassanShinseisho 高額合算申請書) {
+        RString 支給申請書整理番号 = 高額合算申請書.get支給申請書整理番号();
+        if (RString.isNullOrEmpty(支給申請書整理番号)) {
+            div.getDdlShokisaiHokenshaNo().setSelectedIndex(INT_0);
+        } else {
+            boolean flg = false;
+            RString 証記載保険者番号 = 支給申請書整理番号.substring(INT_5, INT_11);
+            List<KeyValueDataSource> dataSource = div.getDdlShokisaiHokenshaNo().getDataSource();
+            for (KeyValueDataSource data : dataSource) {
+                if (証記載保険者番号.equals(data.getKey())) {
+                    flg = true;
+                    break;
+                }
+            }
+            if (flg) {
+                div.getDdlShokisaiHokenshaNo().setSelectedKey(証記載保険者番号);
+            } else {
+                div.getDdlShokisaiHokenshaNo().setSelectedIndex(INT_0);
+            }
+        }
+        return 支給申請書整理番号;
     }
 
     private void 画面内共有子DIV初期化処理(KogakuGassanShinseisho 高額合算申請書) {

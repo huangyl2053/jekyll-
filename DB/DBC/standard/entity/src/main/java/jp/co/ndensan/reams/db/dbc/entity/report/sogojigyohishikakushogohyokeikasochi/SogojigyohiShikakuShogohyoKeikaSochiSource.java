@@ -2,7 +2,9 @@ package jp.co.ndensan.reams.db.dbc.entity.report.sogojigyohishikakushogohyokeika
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 総合事業費（経過措置）資格照合表情報取込Sourceクラスです。
@@ -22,6 +24,7 @@ public class SogojigyohiShikakuShogohyoKeikaSochiSource implements IReportSource
     public RString hokenshaName;
     @ReportItem(name = "listUpper_1", length = 4, order = 5)
     public RString listUpper_1;
+    @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listUpper_2", length = 10, order = 6)
     public RString listUpper_2;
     @ReportItem(name = "listUpper_3", length = 8, order = 7)
@@ -58,6 +61,9 @@ public class SogojigyohiShikakuShogohyoKeikaSochiSource implements IReportSource
     public RString gokeiKensuTitle;
     @ReportItem(name = "gokeiKensu", length = 8, order = 23)
     public RString gokeiKensu;
+    @ReportPerson(id = "A")
+    @ReportItem(name = "shikibetsuCode", length = 15)
+    public RString shikibetsuCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

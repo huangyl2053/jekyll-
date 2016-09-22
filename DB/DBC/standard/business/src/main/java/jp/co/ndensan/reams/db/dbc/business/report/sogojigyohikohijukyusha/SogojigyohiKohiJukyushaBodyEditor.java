@@ -26,7 +26,7 @@ public class SogojigyohiKohiJukyushaBodyEditor implements ISogojigyohiKohiJukyus
 
     private final SogojigyohiKohiJukyushaEntity 帳票出力対象データ;
     private final boolean 集計Flag;
-    private final int eight = 8;
+    private static final int eight = 8;
 
     /**
      * コンストラクタです
@@ -67,6 +67,7 @@ public class SogojigyohiKohiJukyushaBodyEditor implements ISogojigyohiKohiJukyus
         source.listUpper_10 = getColumnValue(帳票出力対象データ.get登録被保険者番号());
         source.listLower_4 = 帳票出力対象データ.get宛名名称();
         source.listUpper_11 = getColumnValue(帳票出力対象データ.get証記載保険者番号());
+        source.shikibetsuCode = getColumnValue(帳票出力対象データ.get識別コード());
     }
 
     private void edit集計(SogojigyohiKohiJukyushaSource source) {

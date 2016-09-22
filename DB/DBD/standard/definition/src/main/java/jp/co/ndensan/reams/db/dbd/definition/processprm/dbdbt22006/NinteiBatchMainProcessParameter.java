@@ -36,16 +36,16 @@ public class NinteiBatchMainProcessParameter implements IBatchProcessParameter {
     /**
      * コンストラクタです。
      *
-     * @param 非課税時_承認しないフラグ
-     * @param 非課税時_承認しない理由
-     * @param 配偶者課税時_承認しないフラグ
-     * @param 配偶者課税時_承認しない理由
-     * @param 預貯金等超過時_承認しないフラグ
-     * @param 預貯金等超過時_理由
-     * @param 決定日
-     * @param 認定期間_開始日
-     * @param 認定期間_終了日
-     * @param バッチ処理日時
+     * @param 非課税時_承認しないフラグ 非課税時_承認しないフラグ
+     * @param 非課税時_承認しない理由 非課税時_承認しない理由
+     * @param 配偶者課税時_承認しないフラグ 配偶者課税時_承認しないフラグ
+     * @param 配偶者課税時_承認しない理由 配偶者課税時_承認しない理由
+     * @param 預貯金等超過時_承認しないフラグ 預貯金等超過時_承認しないフラグ
+     * @param 預貯金等超過時_理由 預貯金等超過時_理由
+     * @param 決定日 決定日
+     * @param 認定期間_開始日 認定期間_開始日
+     * @param 認定期間_終了日 認定期間_終了日
+     * @param バッチ処理日時 バッチ処理日時
      */
     public NinteiBatchMainProcessParameter(
             boolean 非課税時_承認しないフラグ,

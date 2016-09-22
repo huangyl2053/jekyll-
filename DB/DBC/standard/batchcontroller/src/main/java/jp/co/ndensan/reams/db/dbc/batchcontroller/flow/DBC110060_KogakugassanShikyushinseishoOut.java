@@ -18,9 +18,9 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110060.KogakugassanShi
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110060.KogakugassanShikyushinseishoOutSoufuSetteiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110060.KogakugassanShikyushinseishoOutUpdateShinseishoMiSofuProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110060.KogakugassanShikyushinseishoOutUpdateShinseishoSofuProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110130.HokenshaKyufujissekiOutDoErrorProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110130.HokenshaKyufujissekiOutGetHihokenshaAtenaProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110130.HokenshaKyufujissekiOutListSakuseiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110130.HokenshaKyufujissekiOutDoErrorProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110130.HokenshaKyufujissekiOutGetHihokenshaAtenaProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110130.HokenshaKyufujissekiOutListSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoInterfaceKanriKousinProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110060.DBC110060_KogakugassanShikyushinseishoOutParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_SakuseiErrorListType;

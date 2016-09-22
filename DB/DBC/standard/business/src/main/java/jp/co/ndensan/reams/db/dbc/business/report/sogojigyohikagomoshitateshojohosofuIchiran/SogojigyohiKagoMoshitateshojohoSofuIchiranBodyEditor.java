@@ -86,7 +86,7 @@ public class SogojigyohiKagoMoshitateshojohoSofuIchiranBodyEditor implements ISo
         source.listUpper_13 = 被保険者一時TBL.getGyoseikuCode();
         source.listUpper_14 = 被保険者一時TBL.getShimei50onKana();
         source.listUpper_15 = getColumnValue(被保険者一時TBL.getShichosonCode());
-        source.shikibetsuCode = 過誤申立一時TBL.getHiHokenshaNo().getColumnValue();
+        source.shikibetsuCode = 被保険者一時TBL.getShikibetsuCode().getColumnValue();
         if (合計出力flag) {
             source.gokeiKensuTitle = 合計件数;
             source.gokeiKensu = DecimalFormatter.toコンマ区切りRString(new Decimal(件数), NUM_0).concat(漢字_件);

@@ -48,8 +48,8 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
     private static final int LISTINDEX_3 = 3;
     private static final int LISTINDEX_4 = 4;
     private static final RString 作成 = new RString("作成");
-    private static final RString ZERO = new RString("0");
     private static final RString ONE = new RString("1");
+    private static final RString TWO = new RString("2");
     private static final RString 星 = new RString("＊");
     private static final RString 課 = new RString("課");
     private static final RString 承認 = new RString("承認");
@@ -101,10 +101,10 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
                 .append(作成日時.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒))
                 .append(RString.FULL_SPACE)
                 .append(作成).toRString();
-        if (null != 対象リスト && 対象リスト.getコード().equals(ZERO)) {
+        if (null != this.対象リスト && this.対象リスト.getコード().equals(ONE)) {
             source.title = 認定者リスト;
         }
-        if (null != 対象リスト && 対象リスト.getコード().equals(ONE)) {
+        if (null != this.対象リスト && this.対象リスト.getコード().equals(TWO)) {
             source.title = 該当者リスト;
         }
         if (null != this.導入団体.get地方公共団体コード()) {
@@ -124,9 +124,15 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
         if (null != this.訪問介護利用者負担額減額認定者Entity.getPsmEntity()) {
             UaFt200FindShikibetsuTaishoEntity 宛名 = this.訪問介護利用者負担額減額認定者Entity.getPsmEntity();
             IKojin 宛名1 = ShikibetsuTaishoFactory.createKojin(宛名);
-            source.listUpper_2 = 宛名1.get住所().get郵便番号().getYubinNo();
-            source.listUpper_3 = 宛名1.get名称().getName().value();
-            source.listUpper_4 = 宛名1.get年齢算出().get年齢();
+            if (null != 宛名1.get住所() && null != 宛名1.get住所().get郵便番号()) {
+                source.listUpper_2 = 宛名1.get住所().get郵便番号().getYubinNo();
+            }
+            if (null != 宛名1.get名称()) {
+                source.listUpper_3 = 宛名1.get名称().getName().value();
+            }
+            if (null != 宛名1.get年齢算出() && null != 宛名1.get年齢算出().get年齢()) {
+                source.listUpper_4 = 宛名1.get年齢算出().get年齢();
+            }
         }
         if (null != this.訪問介護利用者負担額減額認定者Entity.get訪問介護利用者負担額減額()) {
             DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity 訪問介護利用者負担額減額
@@ -144,7 +150,7 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
         if (this.訪問介護利用者負担額減額認定者Entity.is老齢福祉年金受給者()) {
             source.listUpper_7 = 星;
         }
-        if (this.訪問介護利用者負担額減額認定者Entity.get本人課税区分().equals(KazeiKubun.課税.getコード())) {
+        if (KazeiKubun.課税.getコード().equals(this.訪問介護利用者負担額減額認定者Entity.get本人課税区分())) {
             source.listUpper_8 = 課;
         }
         if (this.訪問介護利用者負担額減額認定者Entity.is所得税課税者()) {
@@ -348,7 +354,7 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
                 source.listUpper_14 = 世帯員宛名1.get住民状態().住民状態略称();
             }
         }
-        if (世帯員情報.get課税区分().equals(KazeiKubun.課税.getコード())) {
+        if (KazeiKubun.課税.getコード().equals(世帯員情報.get課税区分())) {
             source.listUpper_15 = 課;
         }
         if (世帯員情報.get課税所得額() != null && 世帯員情報.get課税所得額().compareTo(Decimal.ZERO) > 0) {
@@ -367,7 +373,7 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
                 source.listCenter_12 = 世帯員宛名1.get住民状態().住民状態略称();
             }
         }
-        if (世帯員情報.get課税区分().equals(KazeiKubun.課税.getコード())) {
+        if (KazeiKubun.課税.getコード().equals(世帯員情報.get課税区分())) {
             source.listCenter_13 = 課;
         }
         if (世帯員情報.get課税所得額() != null && 世帯員情報.get課税所得額().compareTo(Decimal.ZERO) > 0) {
@@ -386,7 +392,7 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
                 source.listLower_11 = 世帯員宛名1.get住民状態().住民状態略称();
             }
         }
-        if (世帯員情報.get課税区分().equals(KazeiKubun.課税.getコード())) {
+        if (KazeiKubun.課税.getコード().equals(世帯員情報.get課税区分())) {
             source.listLower_12 = 課;
         }
         if (世帯員情報.get課税所得額() != null && 世帯員情報.get課税所得額().compareTo(Decimal.ZERO) > 0) {
@@ -472,10 +478,10 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
     private HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource get決定区分(
             HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource source, RString ketteiKubun) {
         if (null != ketteiKubun) {
-            if (ketteiKubun.equals(KetteiKubun.承認する.getコード())) {
+            if (KetteiKubun.承認する.getコード().equals(ketteiKubun)) {
                 source.listLower_5 = 承認;
             }
-            if (ketteiKubun.equals(KetteiKubun.承認しない.getコード())) {
+            if (KetteiKubun.承認しない.getコード().equals(ketteiKubun)) {
                 source.listLower_5 = 却下;
             }
         }

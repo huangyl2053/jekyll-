@@ -6,15 +6,15 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import java.io.File;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120140.ShikyuFushikyuDoIchiranhyoSakuseiProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120140.ShikyuFushikyuIchiranDataNomiTorokuProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120140.ShikyuFushikyuKozaJohoTorokuProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120140.ShikyuFushikyuKozaKakuninTorokuProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120140.ShikyuFushikyuMasterTorokuProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120140.ShikyuFushikyuReadCsvFile38BProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120140.ShikyuFushikyuReadCsvFile38GProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120140.ShikyuFushikyuRirekiNoTorokuProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120140.ShikyuFushikyuSaishoriJunbiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120140.ShikyuFushikyuDoIchiranhyoSakuseiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120140.ShikyuFushikyuIchiranDataNomiTorokuProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120140.ShikyuFushikyuKozaJohoTorokuProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120140.ShikyuFushikyuKozaKakuninTorokuProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120140.ShikyuFushikyuMasterTorokuProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120140.ShikyuFushikyuReadCsvFile38BProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120140.ShikyuFushikyuReadCsvFile38GProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120140.ShikyuFushikyuRirekiNoTorokuProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120140.ShikyuFushikyuSaishoriJunbiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDeleteReveicedFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoHihokenshaKanrenProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoInterfaceKanriKousinProcess;

@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc710160;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC710160;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbc.business.core.hanyolistKogakugassankeisankekkarenrakuhyo.HanyoListKogakuGassanOutPutOrder;
+import jp.co.ndensan.reams.db.dbc.business.core.hanyolistkogakugassankeisan.HanyoListKogakuGassanOutPutOrder;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Over70_ShotokuKbn;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ShotokuKbn;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_ChushutsuKubun;
@@ -984,6 +984,7 @@ public class HanyoListKogakuGassanKeisanKekkaRenrakuHyoProcess
         RString 出力順 = RString.EMPTY;
         if (order != null) {
             出力順 = MyBatisOrderByClauseCreator.create(HanyoListKogakuGassanOutPutOrder.class, order);
+            出力順 = 出力順.concat(コンマ);
         }
         if (RString.isNullOrEmpty(出力順)) {
             出力順 = 出力順.concat(ORDER_BY);

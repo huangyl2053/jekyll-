@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import java.io.File;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120280.SogojigyohiShikakuShogohyoKeikaSochiInDoIchiranhyoSakuseiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120280.SogojigyohiShikakuShogohyoKeikaSochiInDoIchiranhyoSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDeleteReveicedFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoHihokenshaKanrenProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoInterfaceKanriKousinProcess;
@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.Kokuhore
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuGetFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.shikakushogohyojyoho.ShikakuShogohyoJyohoReadCsvFileProcess;
 import jp.co.ndensan.reams.db.dbc.business.core.kokuhorenkyoutsuu.KokuhorenKyoutsuuFileGetReturnEntity;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.kokuhorenkyoutsu.KokuhorenKyoutsuBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC120280.DBC120280_SogojigyohiShikakuShogohyoKeikaSochiInParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorListType;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDeleteReveicedFileProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter;
@@ -39,7 +39,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-2890-011 wangxingpeng
  */
-public class DBC120280_SogojigyohiShikakuShogohyoKeikaSochiIn extends BatchFlowBase<KokuhorenKyoutsuBatchParameter> {
+public class DBC120280_SogojigyohiShikakuShogohyoKeikaSochiIn
+        extends BatchFlowBase<DBC120280_SogojigyohiShikakuShogohyoKeikaSochiInParameter> {
 
     private static final String ファイル取得 = "getFile";
     private static final String CSVファイル取込 = "readCsvFile";
@@ -80,7 +81,7 @@ public class DBC120280_SogojigyohiShikakuShogohyoKeikaSochiIn extends BatchFlowB
                         ShikakuShogohyoJyohoReadCsvFileProcess.PARAMETER_OUT_FLOWENTITY);
                 if (flowEntity != null) {
                     処理対象年月 = flowEntity.getShoriYM();
-                    一時TBL登録件数 = 一時TBL登録件数 + flowEntity.get明細データ登録件数();
+                    一時TBL登録件数 = flowEntity.get明細データ登録件数();
                     レコード件数合計 = flowEntity.getCodeNum();
                 }
 
@@ -154,7 +155,7 @@ public class DBC120280_SogojigyohiShikakuShogohyoKeikaSochiIn extends BatchFlowB
         parameter.set処理年月(getParameter().getShoriYM());
         parameter.set交換情報識別番号(交換情報識別番号);
         parameter.set処理対象年月(処理対象年月);
-        parameter.setレコード件数合計(レコード件数合計);
+        parameter.setレコード件数合計(一時TBL登録件数);
         parameter.setFileNameList(returnEntity.getFileNameList());
         return simpleBatch(KokuhorenkyoutsuDoInterfaceKanriKousinProcess.class).arguments(parameter).define();
     }

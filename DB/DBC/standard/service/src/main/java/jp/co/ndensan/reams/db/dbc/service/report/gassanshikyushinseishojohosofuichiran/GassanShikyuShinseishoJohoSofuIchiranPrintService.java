@@ -35,19 +35,21 @@ public class GassanShikyuShinseishoJohoSofuIchiranPrintService {
      * @param システム日時 YMDHMS
      * @param 処理年月 FlexibleYearMonth
      * @param 連番 int
+     * @param flag boolean
      * @return SourceDataCollection
      */
     public SourceDataCollection printSingle(
             KogakugassanShikyushinseishoOutFileEntity 送付一覧表データ,
             YMDHMS システム日時,
             FlexibleYearMonth 処理年月,
-            int 連番) {
+            int 連番,
+            boolean flag) {
         if (送付一覧表データ == null) {
             return new SourceDataCollection();
         }
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
-            print(送付一覧表データ, システム日時, 処理年月, 連番, reportManager);
+            print(送付一覧表データ, システム日時, 処理年月, 連番, flag, reportManager);
             collection = reportManager.publish();
         }
         return collection;
@@ -60,6 +62,7 @@ public class GassanShikyuShinseishoJohoSofuIchiranPrintService {
      * @param システム日時 YMDHMS
      * @param 処理年月 FlexibleYearMonth
      * @param 連番 int
+     * @param flag boolean
      * @param reportManager ReportManager
      */
     public void print(
@@ -67,12 +70,13 @@ public class GassanShikyuShinseishoJohoSofuIchiranPrintService {
             YMDHMS システム日時,
             FlexibleYearMonth 処理年月,
             int 連番,
+            boolean flag,
             ReportManager reportManager) {
         GassanShikyuShinseishoJohoSofuIchiranProperty property = new GassanShikyuShinseishoJohoSofuIchiranProperty();
         try (ReportAssembler<GassanShikyuShinseishoJohoSofuIchiranSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<GassanShikyuShinseishoJohoSofuIchiranSource> reportSourceWriter
                     = new ReportSourceWriter(assembler);
-            new GassanShikyuShinseishoJohoSofuIchiranReport(送付一覧表データ, システム日時, 処理年月, 連番).writeBy(reportSourceWriter);
+            new GassanShikyuShinseishoJohoSofuIchiranReport(送付一覧表データ, システム日時, 処理年月, 連番, flag).writeBy(reportSourceWriter);
         }
     }
 

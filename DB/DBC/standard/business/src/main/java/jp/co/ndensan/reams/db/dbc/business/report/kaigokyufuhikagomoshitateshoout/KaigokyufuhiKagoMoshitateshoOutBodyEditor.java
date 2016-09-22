@@ -81,7 +81,7 @@ public class KaigokyufuhiKagoMoshitateshoOutBodyEditor implements IKaigokyufuhiK
         source.listUpper_13 = 帳票出力対象データ.getDbWT1001Entity().getGyoseikuCode();
         source.listUpper_14 = 帳票出力対象データ.getDbWT1001Entity().getShimei50onKana();
         source.listUpper_15 = getColumnValue(帳票出力対象データ.getDbWT1001Entity().getShichosonCode());
-        source.shikibetsuCode = 帳票出力対象データ.getDbWT1001Entity().getShikibetsuCode().getColumnValue();
+        source.shikibetsuCode = getColumnValue(帳票出力対象データ.getDbWT1001Entity().getShikibetsuCode());
         if (合計出力flag) {
             source.gokeiKensuTitle = 合計件数;
             source.gokeiKensu = doカンマ編集(new Decimal(件数)).concat(漢字_件);

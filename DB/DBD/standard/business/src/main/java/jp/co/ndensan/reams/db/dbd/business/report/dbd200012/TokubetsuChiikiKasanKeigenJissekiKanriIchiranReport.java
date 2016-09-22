@@ -24,6 +24,8 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 public final class TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport extends
         Report<TokubetsuChiikiKasanKeigenJissekiKanriIchiranReportSource> {
 
+    private static final int LISTINDEX_3 = 3;
+
     private final TokubetsuChiikiKasanKeigenJissekiKanri 帳票情報;
     private final Association association;
     private final IOutputOrder iOutputOrder;
@@ -75,7 +77,7 @@ public final class TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport extends
 
     private void 非事業所計(int 給付実績明細リストCount, ReportSourceWriter<TokubetsuChiikiKasanKeigenJissekiKanriIchiranReportSource> writer, int i) {
         if (給付実績明細リストCount <= 1) {
-            for (int j = 0; j < 3; j++) {
+            for (int j = 0; j < LISTINDEX_3; j++) {
                 IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(帳票情報.get給付実績被保険者リスト().get(i).get宛名());
                 ITokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor bodyEditor
                         = new TokubetsuChiikiKasanKeigenJissekiKanriIchiranEditor(

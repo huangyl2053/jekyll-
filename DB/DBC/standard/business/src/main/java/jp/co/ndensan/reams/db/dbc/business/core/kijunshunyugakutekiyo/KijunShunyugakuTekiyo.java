@@ -149,7 +149,7 @@ public class KijunShunyugakuTekiyo {
         }
         eucEntity.set保険者コード(association.get地方公共団体コード().value());
         eucEntity.set保険者名(association.get市町村名());
-        eucEntity.set空白(new RString(" "));
+        eucEntity.set空白(RString.HALF_SPACE);
         eucEntity.set被保険者番号(entity.get被保険者番号());
         eucEntity.set資格取得事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getCodeShubetsu(), entity.get資格取得事由コード()));
         eucEntity.set資格取得日(set日付編集(entity.get資格取得年月日()));
@@ -461,7 +461,7 @@ public class KijunShunyugakuTekiyo {
         }
         eucEntity.set保険者コード(association.get地方公共団体コード().value());
         eucEntity.set保険者名(association.get市町村名());
-        eucEntity.set空白(new RString(" "));
+        eucEntity.set空白(RString.HALF_SPACE);
         eucEntity.set被保険者番号(entity.get被保険者番号());
         eucEntity.set資格取得事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getCodeShubetsu(), entity.get資格取得事由コード()));
         eucEntity.set資格取得日(set日付編集(entity.get資格取得年月日()));
@@ -620,7 +620,7 @@ public class KijunShunyugakuTekiyo {
         RStringBuilder builder = new RStringBuilder();
         builder.append(住所);
         builder.append(番地);
-        builder.append(new RString("　"));
+        builder.append(RString.FULL_SPACE);
         builder.append(方書);
         return builder.toRString();
     }
@@ -677,7 +677,7 @@ public class KijunShunyugakuTekiyo {
 
             RStringBuilder 市町村名builder = new RStringBuilder();
             市町村名builder.append(processParameter.get保険者コード());
-            市町村名builder.append(new RString(" "));
+            市町村名builder.append(RString.HALF_SPACE);
             市町村名builder.append(市町村名);
             jokenBuilder.append(市町村名builder.toRString());
         }

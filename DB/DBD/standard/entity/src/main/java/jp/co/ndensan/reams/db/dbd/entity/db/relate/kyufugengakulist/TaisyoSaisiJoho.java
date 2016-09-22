@@ -8,8 +8,9 @@ package jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
+ * Entity
  *
- * @author x_miaocl
+ * @reamsid_L DBD-3610-050 x_miaocl
  */
 @lombok.Getter
 @lombok.Setter

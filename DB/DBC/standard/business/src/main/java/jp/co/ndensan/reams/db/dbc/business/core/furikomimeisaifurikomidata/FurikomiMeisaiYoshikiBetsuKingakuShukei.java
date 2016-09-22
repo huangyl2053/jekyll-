@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class FurikomiMeisaiYoshikiBetsuKingakuShukei {
 
     /**
-     * 
+     * 印字様式番号別集計。
      * @param inList
      * @return List<InjiYoushikiBangouBetuKingaku>
      */
@@ -34,7 +34,7 @@ public class FurikomiMeisaiYoshikiBetsuKingakuShukei {
         Set<RString> keyset = map.keySet();
         if (null != inList && 0 != inList.size()) {
             for (RString key : keyset) {
-                outList.addAll(divided(map.get(key)));
+                outList.addAll(divide(map.get(key)));
             }
         }
         return outList;
@@ -83,7 +83,7 @@ public class FurikomiMeisaiYoshikiBetsuKingakuShukei {
         return list;
     }
 
-    public List<InjiYoushikiBangouBetuKingaku> divided(List<YoushikiBangouBetuKingakuEntity> inList) {
+    public List<InjiYoushikiBangouBetuKingaku> divide(List<YoushikiBangouBetuKingakuEntity> inList) {
         Map<RString, ArrayList<YoushikiBangouBetuKingakuEntity>> groups = getGroups();
         for (YoushikiBangouBetuKingakuEntity entity : inList) {
             RString key = getKeyOfGroup(entity);

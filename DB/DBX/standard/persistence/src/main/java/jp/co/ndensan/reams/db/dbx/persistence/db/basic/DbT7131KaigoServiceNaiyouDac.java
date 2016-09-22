@@ -234,4 +234,17 @@ public class DbT7131KaigoServiceNaiyouDac {
                 .order(by(serviceShuruiCd, Order.ASC), by(serviceKoumokuCd, Order.ASC))
                 .toList(DbT7131KaigoServiceNaiyouEntity.class);
     }
+
+    /**
+     * データを物理削除する
+     *
+     * @param entity DbT7131KaigoServiceNaiyouEntity
+     * @return 更新件数 更新結果の件数を返します。
+     */
+    @Transaction
+    public int delete(DbT7131KaigoServiceNaiyouEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("介護サービス内容エンティティ"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.deletePhysical(entity).execute();
+    }
 }

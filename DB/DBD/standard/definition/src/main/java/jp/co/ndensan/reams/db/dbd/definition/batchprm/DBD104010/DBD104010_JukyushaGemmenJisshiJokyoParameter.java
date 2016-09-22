@@ -6,7 +6,6 @@
 
 package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD104010;
 
-import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -18,8 +17,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 受給者減免実施状況のバッチパラメタークラスです。//TODO 待バッチ开发时替换这个类
- * @reamsid_L　DBD-3770-030 x_liuwei　这个是个临时类，为了画面的机能能够继续开发而作，不得上传至服务器
+ * 受給者減免実施状況のバッチパラメタークラスです。//TODO このクラスを使用しないて下さい、これは一時のものです。
+ * @reamsid_L　DBD-3770-030 x_liuwei
  */
 @Getter
 @Setter

@@ -6,17 +6,17 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.dbc180020;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.dataclear.ClearHanteiHihonkenshaNoTempProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.dataclear.ClearSetainHakuNyuryokuTempProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.dataclear.ClearTmpSetaiShotokuProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.work1.HanteiKijunbiSetteiProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.work2.SetainHakunyuryokuProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.work2.SetainJohoSakuseiProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.work4.TsukibetsuHanteiTaishoshaTempNigaimeProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.work4.TsukibetsuHanteiTaishoshaTempProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.dataclear.ClearHanteiHihonkenshaNoTempProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.dataclear.ClearSetainHakuNyuryokuTempProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.dataclear.ClearTmpSetaiShotokuProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.work1.HanteiKijunbiSetteiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.work2.SetainHakunyuryokuProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.work2.SetainJohoSakuseiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.work4.TsukibetsuHanteiTaishoshaTempNigaimeProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.work4.TsukibetsuHanteiTaishoshaTempProcess;
 import jp.co.ndensan.reams.db.dbc.business.core.riyoshafutanwariaihantei.HanteiKijunYMDInstance;
 import jp.co.ndensan.reams.db.dbc.business.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHanteiUtil;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc180020.DBC180020_IdoRiyoshaFutanwariaiHanteiParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180020.DBC180020_IdoRiyoshaFutanwariaiHanteiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc180020.DBC180020ProcessParameter;
 import jp.co.ndensan.reams.db.dbc.service.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHantei;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.fuka.SetaiShotokuKazeiHanteiBatchParameter;

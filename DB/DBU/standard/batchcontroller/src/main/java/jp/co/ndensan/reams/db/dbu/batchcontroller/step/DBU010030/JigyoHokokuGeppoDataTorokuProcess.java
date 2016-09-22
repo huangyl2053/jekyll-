@@ -15,7 +15,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -40,7 +39,6 @@ public class JigyoHokokuGeppoDataTorokuProcess extends BatchProcessBase<KyufuJis
     @Override
     protected void initialize() {
         mapper = getMapper(IJigyoHokokuGeppoIppanGenbutsuMapper.class);
-        //mapper.deleteJigyouHokokuTokei(processParameter.toDeleteDataMybitisParamter());
     }
 
     @Override
@@ -54,11 +52,6 @@ public class JigyoHokokuGeppoDataTorokuProcess extends BatchProcessBase<KyufuJis
     }
 
     @Override
-    protected void beforeExecute() {
-
-    }
-
-    @Override
     protected void process(KyufuJissekiKonkyoRelateEntity entity) {
         DbT7021JigyoHokokuTokeiDataEntity dbT7021Entity = new DbT7021JigyoHokokuTokeiDataEntity();
         if (processParameter.get報告年月() != null) {
@@ -69,17 +62,18 @@ public class JigyoHokokuGeppoDataTorokuProcess extends BatchProcessBase<KyufuJis
             dbT7021Entity.setShukeiTaishoYSeireki(new FlexibleYear(processParameter.get集計年月().substring(0, index_4)));
             dbT7021Entity.setShukeiTaishoM(processParameter.get集計年月().substring(index_4));
         }
-        dbT7021Entity.setToukeiTaishoKubun(processParameter.get統計対象区分());
-        dbT7021Entity.setShichosonCode(new LasdecCode(processParameter.get市町村コード()));
-        if (new RString("1").equals(processParameter.get給付実績区分コード())) {
-            dbT7021Entity.setHyoNo(new Code("01"));
-        } else if (new RString("2").equals(processParameter.get給付実績区分コード())) {
-            dbT7021Entity.setHyoNo(new Code("03"));
-        }
+//        dbT7021Entity.setToukeiTaishoKubun(processParameter.get統計対象区分());
+//        dbT7021Entity.setShichosonCode(new LasdecCode(processParameter.get市町村コード()));
+//        if (new RString("1").equals(processParameter.get給付実績区分コード())) {
+//            dbT7021Entity.setHyoNo(new Code("01"));
+//        } else if (new RString("2").equals(processParameter.get給付実績区分コード())) {
+//            dbT7021Entity.setHyoNo(new Code("03"));
+//        }
         dbT7021Entity.setShukeiNo(new Code(entity.getShukeiNo()));
         dbT7021Entity.setShukeiTani(new Code("1"));
         dbT7021Entity.setTateNo(rstringToDecimal(entity.getTateNo()));
         dbT7021Entity.setYokoNo(rstringToDecimal(entity.getYokoNo()));
+        dbT7021Entity.setShukeiKomokuMeisho(RString.EMPTY);
         dbT7021Entity.setShukeiKekkaAtai(entity.getResult());
         dbT7021Entity.setTateKomokuCode(Code.EMPTY);
         dbT7021Entity.setYokoKomokuCode(Code.EMPTY);

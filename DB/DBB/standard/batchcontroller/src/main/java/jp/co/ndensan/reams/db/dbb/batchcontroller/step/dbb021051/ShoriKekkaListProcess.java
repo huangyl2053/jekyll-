@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb021051;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB021051;
 
 import jp.co.ndensan.reams.db.dbb.business.core.dbb021051.DBB021051DataUtil;
 import jp.co.ndensan.reams.db.dbb.entity.csv.DBB021051ShoriKekkaKakuninListCSVEntity;
@@ -46,6 +46,7 @@ public class ShoriKekkaListProcess extends BatchProcessBase<DBB021051ShoriKekkaL
 
     @Override
     protected void initialize() {
+
         firstFlag = true;
         dataUtil = new DBB021051DataUtil();
     }

@@ -224,6 +224,8 @@ public class GassanKetteiTsuchishoShiharaiYoteiBiYijiAriSource implements IRepor
     public RString tsuchi_no;
     @ReportItem(name = "tsuban", length = 6, order = 105)
     public RString tsuban;
+    @ReportItem(name = "hihokenshaNo", length = 6, order = 106)
+    public RString hihokenshaNo;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

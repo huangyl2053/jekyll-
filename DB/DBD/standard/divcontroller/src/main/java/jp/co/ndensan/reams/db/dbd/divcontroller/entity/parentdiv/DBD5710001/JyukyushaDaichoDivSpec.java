@@ -62,9 +62,7 @@ public enum JyukyushaDaichoDivSpec implements IPredicate<JyukyushaDaichoDiv> {
                     Konkaitotime = div.getChushutsuJyouken().getTaishouKikan().getTxtKonkaiymdtime().getToTimeValue();
                     YMDHMS konkaifromYMDHMS = new YMDHMS(Konkaifromdate, Konkaifromtime);
                     YMDHMS konkaitoYMDHMS = new YMDHMS(Konkaitodate, Konkaitotime);
-
-                    return !konkaitoYMDHMS.isBeforeOrEquals(konkaifromYMDHMS);
-
+                    return !konkaitoYMDHMS.isBefore(konkaifromYMDHMS) && !Konkaitotime.isBefore(Konkaifromtime);
                 }
             },
     被保険者番号非空チェック {
@@ -99,7 +97,7 @@ public enum JyukyushaDaichoDivSpec implements IPredicate<JyukyushaDaichoDiv> {
                     }
                     RString hihokenshaBangoufrom = new RString(div.getChushutsuJyouken().getTaishouSha().getTxtHihokenshaBangou().getFromValue().toString());
                     RString hihokenshaBangouto = new RString(div.getChushutsuJyouken().getTaishouSha().getTxtHihokenshaBangou().getToValue().toString());
-                    return hihokenshaBangouto.compareTo(hihokenshaBangoufrom) <= 0;
+                    return hihokenshaBangoufrom.compareTo(hihokenshaBangouto) <= 0;
                 }
 
             },
@@ -116,6 +114,5 @@ public enum JyukyushaDaichoDivSpec implements IPredicate<JyukyushaDaichoDiv> {
                     RString 出力順 = ((ChohyoShutsuryokujunDiv) div.getShutsuryokuSort()).getTxtSort().getValue();
                     return 出力順 != null && !出力順.isEmpty();
                 }
-
             }
 }

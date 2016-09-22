@@ -71,7 +71,9 @@ public class KogakuGassanHoseizumiJikofutangakuJohoHandler {
             div.getTxtShori().setValue(処理区分);
         } else {
             div.getTxtShoriTaisho().setValue(RString.EMPTY);
+            div.getTxtShoriTaisho().setDisplayNone(true);
             div.getTxtShori().setValue(RString.EMPTY);
+            div.getTxtShori().setDisplayNone(true);
         }
         RDate 基準日 = RDate.getNowDate();
         外部ＣＳＶファイル名 = DbBusinessConfig.get(ConfigNameDBC.国保連送付媒体_補正自己負担Ｆ_外部ＣＳＶファイル名, 基準日, SubGyomuCode.DBC介護給付);

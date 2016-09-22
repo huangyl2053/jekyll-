@@ -19,7 +19,7 @@ public interface INinteiBatchKekkaListShutsuryokuMapper {
     /**
      * 結果一覧データを取得する。
      *
-     * @param parameter
+     * @param parameter NinteiBatchKekkaListShutsuryokuMybatisParameter
      * @return List<FutanGengaokuNintteiKakuninListEntity>
      */
     List<FutanGengaokuNintteiKakuninListEntity> get結果一覧データ(NinteiBatchKekkaListShutsuryokuMybatisParameter parameter);

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb021051;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB021051;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,6 +95,7 @@ public class ChohyoJohoShutokuProcess extends BatchKeyBreakBase<DBB021051TableJo
             }
             i++;
         }
+
         List<KoikiZenShichosonJoho> koikiZenShichosonJohoList
                 = KoikiShichosonJohoFinder.createInstance().koseiShichosonJoho().records();
         KoikiZenShichosonJoho koikiZenShichosonJoho;

@@ -6,8 +6,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8030001;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-//import jp.co.ndensan.reams.ux.uxx.divcontroller.entity.commonchilddiv.FurikomiBaitaiSakusei.FurikomiBaitaiSakuseiDiv;
-//import jp.co.ndensan.reams.ux.uxx.divcontroller.entity.commonchilddiv.FurikomiBaitaiSakusei.IFurikomiBaitaiSakuseiDiv;
+import jp.co.ndensan.reams.ux.uxx.divcontroller.entity.commonchilddiv.FurikomiBaitaiSakusei.FurikomiBaitaiSakuseiDiv;
+import jp.co.ndensan.reams.ux.uxx.divcontroller.entity.commonchilddiv.FurikomiBaitaiSakusei.IFurikomiBaitaiSakuseiDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -29,7 +29,7 @@ public class DBC8030001MainDiv extends Panel {
     private TextBox txtShoriTaisho;
 
     @JsonProperty("ccdFurikomiBaitaiSakusei")
-    //private FurikomiBaitaiSakuseiDiv ccdFurikomiBaitaiSakusei;
+    private FurikomiBaitaiSakuseiDiv ccdFurikomiBaitaiSakusei;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -59,9 +59,9 @@ public class DBC8030001MainDiv extends Panel {
      * getccdFurikomiBaitaiSakusei
      * @return ccdFurikomiBaitaiSakusei
      */
-   // @JsonProperty("ccdFurikomiBaitaiSakusei")
-    // public IFurikomiBaitaiSakuseiDiv getCcdFurikomiBaitaiSakusei() {
-    //    return ccdFurikomiBaitaiSakusei;
-    //}
+    @JsonProperty("ccdFurikomiBaitaiSakusei")
+     public IFurikomiBaitaiSakuseiDiv getCcdFurikomiBaitaiSakusei() {
+        return ccdFurikomiBaitaiSakusei;
+    }
     // </editor-fold>
 }

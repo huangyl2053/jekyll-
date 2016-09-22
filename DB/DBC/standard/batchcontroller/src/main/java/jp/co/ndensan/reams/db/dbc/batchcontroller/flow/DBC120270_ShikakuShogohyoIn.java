@@ -80,7 +80,7 @@ public class DBC120270_ShikakuShogohyoIn extends BatchFlowBase<DBC120270_Shikaku
                         ShikakuShogohyoJyohoReadCsvFileProcess.PARAMETER_OUT_FLOWENTITY);
                 if (flowEntity != null) {
                     処理対象年月 = flowEntity.getShoriYM();
-                    一時TBL登録件数 = 一時TBL登録件数 + flowEntity.get明細データ登録件数();
+                    一時TBL登録件数 = flowEntity.get明細データ登録件数();
                     レコード件数合計 = flowEntity.getCodeNum();
                 }
 
@@ -128,7 +128,7 @@ public class DBC120270_ShikakuShogohyoIn extends BatchFlowBase<DBC120270_Shikaku
         parameter.setエントリ情報List(returnEntity.getFileNameList());
         parameter.setCodeNum(レコード件数合計);
         parameter.setLast(isLast);
-        parameter.set連番(レコード件数合計);
+        parameter.set連番(一時TBL登録件数);
         return loopBatch(ShikakuShogohyoJyohoReadCsvFileProcess.class).arguments(parameter).define();
     }
 

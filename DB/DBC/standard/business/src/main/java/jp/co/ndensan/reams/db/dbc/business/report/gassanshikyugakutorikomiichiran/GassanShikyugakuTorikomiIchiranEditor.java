@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.lang.Width;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -90,33 +91,16 @@ public class GassanShikyugakuTorikomiIchiranEditor implements
 
         source.listLower_3 = KaigoGassan_ShotokuKbn.toValue(計算結果entity.getShotokuKubun()).get名称();
         source.listLower_4 = KaigoGassan_Over70_ShotokuKbn.toValue(計算結果entity.getOver70_ShotokuKubun()).get名称();
-        if (計算結果entity.getSetaiFutanSogaku() != null) {
-            source.listUpper_6 = DecimalFormatter.toコンマ区切りRString(計算結果entity.getSetaiFutanSogaku(), 0);
-        }
-        if (計算結果entity.getSetaiGassanGaku() != null) {
-            source.listLower_5 = DecimalFormatter.toコンマ区切りRString(計算結果entity.getSetaiGassanGaku(), 0);
-        }
-        if (計算結果entity.getOver70_SetaiGassanGaku() != null) {
-            source.listLower_6 = DecimalFormatter.toコンマ区切りRString(計算結果entity.getOver70_SetaiGassanGaku(), 0);
-        }
-        if (計算結果entity.getSanteiKijunGaku() != null) {
-            source.listUpper_7 = DecimalFormatter.toコンマ区切りRString(計算結果entity.getSanteiKijunGaku(), 0);
-        }
-        if (計算結果entity.getOver70_SanteiKijyunGaku() != null) {
-            source.listLower_7 = DecimalFormatter.toコンマ区切りRString(計算結果entity.getOver70_SanteiKijyunGaku(), 0);
-        }
-        if (計算結果entity.getSetaiShikyuSogaku() != null) {
-            source.listUpper_8 = DecimalFormatter.toコンマ区切りRString(計算結果entity.getSetaiShikyuSogaku(), 0);
-        }
-        if (計算結果entity.getOver70_SetaiShikyuSogaku() != null) {
-            source.listLower_8 = DecimalFormatter.toコンマ区切りRString(計算結果entity.getOver70_SetaiShikyuSogaku(), 0);
-        }
-        if (計算結果entity.getHonninShikyugaku() != null) {
-            source.listUpper_9 = DecimalFormatter.toコンマ区切りRString(計算結果entity.getHonninShikyugaku(), 0);
-        }
-        if (計算結果entity.getOver70_honninShikyugaku() != null) {
-            source.listLower_9 = DecimalFormatter.toコンマ区切りRString(計算結果entity.getOver70_honninShikyugaku(), 0);
-        }
+
+        source.listUpper_6 = doカンマ編集(計算結果entity.getSetaiFutanSogaku());
+        source.listLower_5 = doカンマ編集(計算結果entity.getSetaiGassanGaku());
+        source.listLower_6 = doカンマ編集(計算結果entity.getOver70_SetaiGassanGaku());
+        source.listUpper_7 = doカンマ編集(計算結果entity.getSanteiKijunGaku());
+        source.listLower_7 = doカンマ編集(計算結果entity.getOver70_SanteiKijyunGaku());
+        source.listUpper_8 = doカンマ編集(計算結果entity.getSetaiShikyuSogaku());
+        source.listLower_8 = doカンマ編集(計算結果entity.getOver70_SetaiShikyuSogaku());
+        source.listUpper_9 = doカンマ編集(計算結果entity.getHonninShikyugaku());
+        source.listLower_9 = doカンマ編集(計算結果entity.getOver70_honninShikyugaku());
 
         source.kihonKensuTitle = 連絡票データ件数;
         source.kihonKensu = new RString(entity.get計算結果登録件数());
@@ -130,6 +114,8 @@ public class GassanShikyugakuTorikomiIchiranEditor implements
         source.shichosonCode = getColumnValue(entity.get帳票用データ().get被保険者entity().getShichosonCode());
         source.shoKisaiHokenshaNo = getColumnValue(計算結果entity.getShoKisaiHokenshaNo());
         source.hihokenshaNo = getColumnValue(計算結果entity.getHihokenshaNoIn());
+
+        source.shikibetsuCode = entity.get帳票用データ().get被保険者entity().getShikibetsuCode().value();
 
         return source;
 
@@ -169,6 +155,7 @@ public class GassanShikyugakuTorikomiIchiranEditor implements
         }
         sakuseiYMD.append(接続文字);
         if (shuryoYMD != null && !shuryoYMD.isEmpty()) {
+
             sakuseiYMD.append(shuryoYMD.wareki().
                     eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN).
                     separator(Separator.PERIOD).fillType(FillType.BLANK).
@@ -183,6 +170,13 @@ public class GassanShikyugakuTorikomiIchiranEditor implements
 
     private RString get並び順(int index) {
         return index < entity.get並び順リスト().size() ? entity.get並び順リスト().get(index) : RString.EMPTY;
+    }
+
+    private RString doカンマ編集(Decimal decimal) {
+        if (null != decimal) {
+            return DecimalFormatter.toコンマ区切りRString(decimal, 0);
+        }
+        return RString.EMPTY;
     }
 
 }
