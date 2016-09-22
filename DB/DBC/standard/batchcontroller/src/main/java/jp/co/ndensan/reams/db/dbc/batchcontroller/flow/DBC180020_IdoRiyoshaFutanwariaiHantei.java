@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180020.UpdateShoriDateKanriTblProcess;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc180020.DBC180020_IdoRiyoshaFutanwariaiHanteiParameter;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.UpdateShoriDateKanriTblProcess;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180020.DBC180020_IdoRiyoshaFutanwariaiHanteiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.idoriyoshafutanwariaihentei.IdoRiyoshaFutanwariaiHanteiProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
