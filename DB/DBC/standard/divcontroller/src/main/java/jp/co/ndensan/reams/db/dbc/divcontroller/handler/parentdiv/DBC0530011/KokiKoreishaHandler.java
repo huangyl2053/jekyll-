@@ -148,10 +148,10 @@ public class KokiKoreishaHandler {
 
     private void set資格取得事由() {
         List<KeyValueDataSource> dataSources = new ArrayList<>();
-        dataSources.add(new KeyValueDataSource(new RString("EMPTY"), RString.EMPTY));
         for (ShikakuShutokuJiyu code : ShikakuShutokuJiyu.values()) {
             dataSources.add(get資格取得事由(code));
         }
+        dataSources.add(new KeyValueDataSource(new RString("EMPTY"), RString.EMPTY));
         div.getMeisaiPanel().getDdlShikakuShutokuJiyu().setDataSource(dataSources);
     }
 
@@ -167,7 +167,6 @@ public class KokiKoreishaHandler {
 
     private void set資格喪失事由() {
         List<KeyValueDataSource> dataSources = new ArrayList<>();
-        dataSources.add(new KeyValueDataSource(new RString("EMPTY"), RString.EMPTY));
         for (ShikakuSoshitsuJiyu code : ShikakuSoshitsuJiyu.values()) {
             dataSources.add(get資格喪失事由(code));
         }
