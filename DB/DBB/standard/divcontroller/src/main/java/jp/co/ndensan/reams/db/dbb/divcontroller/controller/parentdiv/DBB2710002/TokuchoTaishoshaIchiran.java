@@ -85,7 +85,7 @@ public class TokuchoTaishoshaIchiran {
                 ViewStateHolder.put(ViewStateKeys.捕捉月リスト, (Serializable) result.get捕捉月リスト());
             }
             return ResponseData.of(div).setState(DBB2710002StateName.特別徴収対象者一覧作成);
-        } else if (DBB2710002StateName.同定非同定表示.getName().equals(ResponseHolder.getState())
+        } else if (DBB2710002StateName.特別徴収対象者一覧作成.getName().equals(ResponseHolder.getState())
                 && (メニューID_特徴対象者一覧同定非同定表示確認.equals(ResponseHolder.getMenuID())
                 || メニューID_特徴対象者同定一括.equals(ResponseHolder.getFlowId()))) {
             return 同定非同定表示initialize(div);
