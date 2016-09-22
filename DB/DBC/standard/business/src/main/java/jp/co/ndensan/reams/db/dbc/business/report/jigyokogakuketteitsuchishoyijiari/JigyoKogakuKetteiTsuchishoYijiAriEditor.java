@@ -91,6 +91,10 @@ public class JigyoKogakuKetteiTsuchishoYijiAriEditor implements IJigyoKogakuKett
             source.shikibetsuCode = 帳票情報.get識別コード().value();
         }
 
+        if (帳票情報.get被保険者番号() != null) {
+            source.hihokenshaNo = 帳票情報.get被保険者番号().value();
+        }
+
         source.bunshoNo = 文書番号;
 
         if (帳票情報.isテスト出力フラグ()) {
