@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.core.futanwariaishoikkatsu;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.futanwariaishohakko.DBC180040_FutanwariaishoHakkoParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180040.DBC180040_FutanwariaishoHakkoParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;

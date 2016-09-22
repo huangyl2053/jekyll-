@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc190010.SpoolKijunShunyugakuTekiyoKetteiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC190010.SpoolKijunShunyugakuTekiyoKetteiProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC190010.DBC190010_kijunsyunyuKetteiTsuchisyosakuseiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kijunshunyugakutekiyokettei.SpoolKijunShunyugakuTekiyoKetteiProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;

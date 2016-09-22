@@ -5,14 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.dbc180040;
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180040.FutanWariaiInsertProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180040.FutanWariaiShoHakkoIchiranOutputProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180040.FutanWariaiShoOutputProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180040.FutanWariaiShoRenchoTateOutputProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180040.FutanWariaiShoRenchoYokoOutputProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180040.RiyoshaFutanWariaiShoInsertProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180040.ShoriDateKanriUpdateProcess;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.futanwariaishohakko.DBC180040_FutanwariaishoHakkoParameter;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180040.FutanWariaiInsertProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180040.FutanWariaiShoHakkoIchiranOutputProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180040.FutanWariaiShoOutputProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180040.FutanWariaiShoRenchoTateOutputProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180040.FutanWariaiShoRenchoYokoOutputProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180040.RiyoshaFutanWariaiShoInsertProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180040.ShoriDateKanriUpdateProcess;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180040.DBC180040_FutanwariaishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.futanwariaishohakko.FutanwariaishoHakkoMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.futanwariaishohakko.FutanwariaishoHakkoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
