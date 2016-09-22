@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd204010;
+package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD204010;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,7 +107,8 @@ public class TokuchiJissekiKanriListSakuseiProcess extends BatchProcessBase<Toku
     @Override
     protected void process(TokubetsuChiikiKasanKeigenJissekiKanri t) {
         if (outputOrder != null) {
-            TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport finder = new TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport(t, 地方公共団体, outputOrder);
+            TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport finder
+                    = new TokubetsuChiikiKasanKeigenJissekiKanriIchiranReport(t, 地方公共団体, outputOrder);
             finder.writeBy(reportSourceWriter);
         }
     }
