@@ -812,7 +812,7 @@
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC6000011",
      "toLayoutTitle": "スケジュール設定",
-     "toState": "default"
+     "toState": "送付取込画面からの遷移"
     },
     {
      "id": "59",
@@ -821,7 +821,7 @@
      "layoutName": "DBC6000011",
      "layoutTitle": "スケジュール設定",
      "eventName": "情報送付取込へ戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBC",
      "toLayoutName": "DBC0410011",
@@ -1145,6 +1145,16 @@
      "toLayoutName": "DBC0410011",
      "toLayoutTitle": "国保連情報取込",
      "toState": "国保連情報取込一覧"
+    },
+    {
+     "id": "83",
+     "type": "end",
+     "layoutSubGyomuCode": "DBC",
+     "layoutName": "DBC6000011",
+     "layoutTitle": "スケジュール設定",
+     "eventName": "メニューへ戻る",
+     "destroy": false,
+     "condition": ""
     }
    ]
   }
