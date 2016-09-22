@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.db.dbc.business.report.keikakutodokedejokyoichiran.Ke
 import jp.co.ndensan.reams.db.dbc.business.report.kyotakuservicekeikakusa.KyotakuServiceKeikakuSaList;
 import jp.co.ndensan.reams.db.dbc.business.report.kyotakuservicekeikakusa.KyotakuServiceKeikakuSaParam;
 import jp.co.ndensan.reams.db.dbc.business.report.kyotakuservicekeikakusa.KyotakuServiceKeikakuSaReport;
-import jp.co.ndensan.reams.db.dbc.definition.core.kyotakuTodokede.kyotakuTodokede_ErrorListType;
+import jp.co.ndensan.reams.db.dbc.definition.core.kyotakutodokede.kyotakuTodokede_ErrorListType;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.keikakutodokedejokyoichiran.KeikakuTodokedeJokyoIchiranParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.keikakutodokedejokyo.KeikakuTodokedeJokyoProcessParam;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
