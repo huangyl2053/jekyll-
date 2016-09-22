@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc040040.GassanJikofutangakushomeishoHakkoIchiranCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040040.JikoFutangakushomeishoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.gassanjikofutangakuhakkoichiran.GassanJikofutangakuHakkoIchiranSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
@@ -61,11 +63,14 @@ public class JikoFutangakushomeishoCsvOutputProcess extends BatchKeyBreakBase<Ji
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC701009");
-    private final RString csvFileName = new RString("GassanJikofutangakushomeishoHakkoIchiran.csv");
+    private final RString csvFileName_left = new RString("GassanJikofutangakushomeishoHakkoIchiran");
+    private final RString csvFileName_right = new RString(".csv");
+    private final RString underline = new RString("_");
     private static final RString 定数_ORDERBY = new RString("order by");
 
     private int 連番;
     private IOutputOrder 出力順;
+    private RString csvFileName;
     private List<RString> pageBreakKeys;
     private JikofutanShomeishoProcessParameter parameter;
     private RString eucFilePath;
@@ -79,6 +84,9 @@ public class JikoFutangakushomeishoCsvOutputProcess extends BatchKeyBreakBase<Ji
     @Override
     protected void initialize() {
         連番 = 0;
+        RString 保険者番号 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
+        RString 処理年月日 = new RString(parameter.get発行日().toString());
+        csvFileName = csvFileName_left.concat(underline).concat(保険者番号).concat(underline).concat(処理年月日).concat(csvFileName_right);
         pageBreakKeys = new ArrayList<>();
         if (parameter.get出力順ID() != 0L) {
             IChohyoShutsuryokujunFinder iChohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();

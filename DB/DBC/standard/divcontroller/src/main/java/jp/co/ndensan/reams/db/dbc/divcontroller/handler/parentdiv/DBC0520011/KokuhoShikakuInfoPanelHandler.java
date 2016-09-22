@@ -277,7 +277,7 @@ public class KokuhoShikakuInfoPanelHandler {
     }
 
     private KeyValueDataSource get国保保険者番号(Hokenja hokenja) {
-        return new KeyValueDataSource(hokenja.get保険者番号().getColumnValue(), hokenja.get保険者番号().getColumnValue());
+        return new KeyValueDataSource(hokenja.get保険者番号().getColumnValue(), hokenja.get保険者番号().getColumnValue().concat(RString.HALF_SPACE).concat(hokenja.get保険者名()));
     }
 
     private PersonalData toPersonalData(HihokenshaNo 被保険者番号) {

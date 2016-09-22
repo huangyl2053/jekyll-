@@ -44,7 +44,8 @@ public class ShotokuDankaiBetsuHihokenshasuIchiranHeaderEditor implements IShoto
                 separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         source.choteiKijunYmd = this.調定基準日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-        if (!this.保険者設定段階別被保険者数合計entity.get市町村コード().isEmpty()) {
+        if (this.保険者設定段階別被保険者数合計entity.get市町村コード() != null
+                && !this.保険者設定段階別被保険者数合計entity.get市町村コード().isEmpty()) {
             source.hokenshaNo = new RString(this.保険者設定段階別被保険者数合計entity.get市町村コード().toString());
         }
         return source;

@@ -26,6 +26,9 @@ import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNo;
 import jp.co.ndensan.reams.ur.urz.business.core.bunshono.BunshoNoHatsubanHoho;
@@ -54,6 +57,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -112,6 +116,8 @@ public class ShogaishaKoujoTaishoNinteiShoProcess extends BatchProcessBase<Ninte
     private static final RString 決定日期間 = new RString("【決定日期間】");
     private static final RString 交付日 = new RString("【発行日】");
     private static final RString 出力順漢字 = new RString("【出力順】");
+    private ShikibetsuTaishoPSMSearchKeyBuilder key;
+    private IShikibetsuTaishoPSMSearchKey shikibetsuTaishoPSMSearchKey;
 
     @BatchWriter
     private BatchReportWriter<NinteishoJohoReportSource> batchReportWrite;
@@ -141,13 +147,17 @@ public class ShogaishaKoujoTaishoNinteiShoProcess extends BatchProcessBase<Ninte
             RString 文章 = textHenkanRule.editText(entity.getTsuchishoTeikeibunEntity().getSentence());
             通知書定型文.add(項目番号, textHenkanRule.editText(文章));
         }
+        key = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.未定義);
+        shikibetsuTaishoPSMSearchKey = key.build();
         ShogaishaKoujoService service = ShogaishaKoujoService.createInstance();
-        count = service.get障がい者控除対象者認定書(parameter.toShogaishaKojoTaishoshaListMyBatisParameter(get出力順()));
+        count = service.get障がい者控除対象者認定書(parameter.toShogaishaKojoTaishoshaListMyBatisParameter(
+                get出力順(), shikibetsuTaishoPSMSearchKey));
     }
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toShogaishaKojoTaishoshaListMyBatisParameter(get出力順()));
+        return new BatchDbReader(MYBATIS_SELECT_ID, parameter.toShogaishaKojoTaishoshaListMyBatisParameter(
+                get出力順(), shikibetsuTaishoPSMSearchKey));
     }
 
     @Override

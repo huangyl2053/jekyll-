@@ -87,7 +87,7 @@ public class KoshinShinseishaHaakuListProcess extends BatchProcessBase<UpdateNot
     protected void initialize() {
         mapper = getMapper(IKoshinShinseishaHaakuListMapper.class);
         personalDataList = new ArrayList<>();
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         spoolWorkPath = manager.getEucOutputDirectry();
         fileName = Path.combinePath(spoolWorkPath, new RString("KoshinMiShinseishaHaaku.csv"));
         csvWriterJunitoJugo = new CsvWriter.InstanceBuilder(fileName)
@@ -144,7 +144,7 @@ public class KoshinShinseishaHaakuListProcess extends BatchProcessBase<UpdateNot
     @Override
     protected void afterExecute() {
         eucFileOutputJokenhyoFactory();
-        AccessLogUUID id = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
+        AccessLogUUID id = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
         IBatchWriter batchWriter = (IBatchWriter) csvWriterJunitoJugo;
         batchWriter.close();
         manager.spool(fileName, id);

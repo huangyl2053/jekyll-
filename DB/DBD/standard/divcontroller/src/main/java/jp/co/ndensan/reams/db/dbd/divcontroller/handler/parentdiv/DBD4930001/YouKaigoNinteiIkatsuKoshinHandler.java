@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class YouKaigoNinteiIkatsuKoshinHandler {
 
     private final YouKaigoNinteiIkatsuKoshinDiv div;
-    private FlexibleDate FlexibleDate;
 
     /**
      * コンストラクターです。

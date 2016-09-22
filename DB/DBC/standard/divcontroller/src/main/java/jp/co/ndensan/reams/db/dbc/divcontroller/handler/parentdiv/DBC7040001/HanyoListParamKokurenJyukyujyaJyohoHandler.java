@@ -429,11 +429,11 @@ public class HanyoListParamKokurenJyukyujyaJyohoHandler {
             div.getChkIdokubunKodo3().setSelectedItemsByKey(idoKubunList);
             set国保(restoreBatchParameterMap);
         }
+        List<RString> list = new ArrayList<>();
         if (restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("sakujyoMeru"))) {
-            List<RString> list = new ArrayList<>();
             list.add(new RString("key0"));
-            div.getChkSakujyoDataChushutsu().setSelectedItemsByKey(list);
         }
+        div.getChkSakujyoDataChushutsu().setSelectedItemsByKey(list);
         RString histsukeChushutsuKubun = restoreBatchParameterMap.getParameterValue(RString.class, new RString("hitsukeChushutsuKubun"));
         if (!RString.isNullOrEmpty(histsukeChushutsuKubun)) {
             div.getRadChushutsuHaniSentaku().setSelectedKey(histsukeChushutsuKubun);

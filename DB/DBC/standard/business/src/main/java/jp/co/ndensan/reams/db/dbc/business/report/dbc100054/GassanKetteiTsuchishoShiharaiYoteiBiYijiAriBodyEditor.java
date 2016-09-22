@@ -385,10 +385,8 @@ public class GassanKetteiTsuchishoShiharaiYoteiBiYijiAriBodyEditor
             if (null == キー) {
                 continue;
             }
-            if (支払予定日印字有無.equals(キー.get項目名())) {
-                if (区分_1.equals(キー.get設定値())) {
-                    return true;
-                }
+            if (支払予定日印字有無.equals(キー.get項目名()) && 区分_1.equals(キー.get設定値())) {
+                return true;
             }
 
         }

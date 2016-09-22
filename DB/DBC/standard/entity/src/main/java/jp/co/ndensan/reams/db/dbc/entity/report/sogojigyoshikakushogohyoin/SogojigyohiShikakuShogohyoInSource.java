@@ -1,5 +1,6 @@
 package jp.co.ndensan.reams.db.dbc.entity.report.sogojigyoshikakushogohyoin;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
@@ -25,6 +26,7 @@ public class SogojigyohiShikakuShogohyoInSource implements IReportSource {
     @ReportItem(name = "listUpper_1", length = 4, order = 5)
     public RString listUpper_1;
     @ReportPerson(id = "A")
+    public ShikibetsuCode shikibetsuCode;
     @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listUpper_2", length = 10, order = 6)
     public RString listUpper_2;
