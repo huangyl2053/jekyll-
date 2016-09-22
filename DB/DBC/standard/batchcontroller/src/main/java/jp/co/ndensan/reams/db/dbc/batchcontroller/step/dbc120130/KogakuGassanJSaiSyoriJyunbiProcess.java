@@ -43,6 +43,7 @@ public class KogakuGassanJSaiSyoriJyunbiProcess extends BatchProcessBase {
 
     @Override
     protected void initialize() {
+        dbParameter = new KogakuGassanJikofutangakuDoMasterTorokuParameter();
         dbParameter.set処理年月(parameter.get処理年月());
     }
 
