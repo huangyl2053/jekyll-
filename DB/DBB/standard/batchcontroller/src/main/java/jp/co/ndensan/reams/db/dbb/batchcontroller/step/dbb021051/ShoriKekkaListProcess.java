@@ -46,6 +46,7 @@ public class ShoriKekkaListProcess extends BatchProcessBase<DBB021051ShoriKekkaL
 
     @Override
     protected void initialize() {
+
         firstFlag = true;
         dataUtil = new DBB021051DataUtil();
     }
