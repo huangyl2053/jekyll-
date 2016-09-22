@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110110;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110110;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -33,7 +33,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -98,9 +97,7 @@ public class KogakugassanKyufujissekiDoSofuReportProcess extends BatchKeyBreakBa
     private KogakugassanKyufujissekiDoSofuReportProcessParameter parameter;
     private KogakugassanKyufujissekiDoSofuReportMybatisParameter mybatisParameter;
 
-    @BatchWriter
     private CsvWriter<KogakuGassanKyufuJissekiTyohyoCsvEntity> csvWriter;
-    @BatchWriter
     private BatchReportWriter<GassanKyufujissekiSofuIchiranSource> batchReportWriter;
     private ReportSourceWriter<GassanKyufujissekiSofuIchiranSource> reportSourceWriter;
 
@@ -129,20 +126,11 @@ public class KogakugassanKyufujissekiDoSofuReportProcess extends BatchKeyBreakBa
     @Override
     protected void createWriter() {
 
-        PageBreaker<GassanKyufujissekiSofuIchiranSource> breaker = new KogakugassanKyufujissekiOutPageBreak(改頁項目リスト);
-        batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200042.getReportId().value()).addBreak(breaker).create();
-        reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
                 EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         csvFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
-        csvWriter = new CsvWriter.InstanceBuilder(csvFilePath).
-                setDelimiter(カンマ).
-                setEnclosure(ダブル引用符).
-                setEncode(Encode.UTF_8withBOM).
-                setNewLine(NewLine.CRLF).
-                hasHeader(true).
-                build();
+
     }
 
     @Override
@@ -152,9 +140,21 @@ public class KogakugassanKyufujissekiDoSofuReportProcess extends BatchKeyBreakBa
     @Override
     protected void usualProcess(KogakuGassanKyufuJissekiSofuEntity entity) {
 
+        if (連番 == INT_0) {
+            PageBreaker<GassanKyufujissekiSofuIchiranSource> breaker = new KogakugassanKyufujissekiOutPageBreak(改頁項目リスト);
+            batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200042.getReportId().value()).addBreak(breaker).create();
+            reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);
+            csvWriter = new CsvWriter.InstanceBuilder(csvFilePath).
+                    setDelimiter(カンマ).
+                    setEnclosure(ダブル引用符).
+                    setEncode(Encode.UTF_8withBOM).
+                    setNewLine(NewLine.CRLF).
+                    hasHeader(true).
+                    build();
+        }
+        連番 = 連番 + INT_1;
         GassanKyufujissekiSofuIchiranReport report = new GassanKyufujissekiSofuIchiranReport(getReportEntity(entity));
         report.writeBy(reportSourceWriter);
-        連番 = 連番 + INT_1;
         csvWriter.writeLine(getCsvEntity(entity, 連番));
         if (null != entity.get識別コード() && !entity.get識別コード().isEmpty()
                 && !識別コードset.contains(entity.get識別コード())) {
@@ -165,14 +165,16 @@ public class KogakugassanKyufujissekiDoSofuReportProcess extends BatchKeyBreakBa
 
     @Override
     protected void afterExecute() {
-        csvWriter.close();
-        if (!personalDataList.isEmpty()) {
-            AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
-            manager.spool(csvFilePath, accessLogUUID);
-        } else {
-            manager.spool(csvFilePath);
+        if (連番 != INT_0) {
+            csvWriter.close();
+            batchReportWriter.close();
+            if (!personalDataList.isEmpty()) {
+                AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
+                manager.spool(csvFilePath, accessLogUUID);
+            } else {
+                manager.spool(csvFilePath);
+            }
         }
-
     }
 
     private KogakuGassanKyufuJissekiTyohyoCsvEntity getCsvEntity(KogakuGassanKyufuJissekiSofuEntity entity, int index) {

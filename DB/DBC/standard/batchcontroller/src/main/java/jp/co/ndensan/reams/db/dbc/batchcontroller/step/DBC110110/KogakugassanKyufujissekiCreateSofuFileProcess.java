@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110110;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110110;
 
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_SakuseiErrorKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.RecordShubetsu;
@@ -78,7 +78,7 @@ public class KogakugassanKyufujissekiCreateSofuFileProcess extends BatchProcessB
 
     @BatchWriter
     private BatchEntityCreatedTempTableWriter 処理結果リスト一時Writer;
-    @BatchWriter
+
     private CsvWriter csvWriter;
     /**
      * 総出力件数とエントリ情報Listです。
@@ -121,13 +121,6 @@ public class KogakugassanKyufujissekiCreateSofuFileProcess extends BatchProcessB
                 DbWT1002KokuhorenSakuseiErrorTempEntity.class);
         RString spoolPath = Path.getTmpDirectoryPath();
         csvFilePath = Path.combinePath(spoolPath, csvFileName);
-        csvWriter = new CsvWriter.InstanceBuilder(csvFilePath).
-                setDelimiter(カンマ).
-                setEncode(文字コード).
-                setEnclosure(RString.EMPTY).
-                setNewLine(NewLine.CRLF).
-                hasHeader(false).
-                build();
 
     }
 
@@ -135,6 +128,13 @@ public class KogakugassanKyufujissekiCreateSofuFileProcess extends BatchProcessB
     protected void process(KogakuGassanKyufuJissekiSofuEntity entity) {
 
         if (レコード番号 == INT_0) {
+            csvWriter = new CsvWriter.InstanceBuilder(csvFilePath).
+                    setDelimiter(カンマ).
+                    setEncode(文字コード).
+                    setEnclosure(RString.EMPTY).
+                    setNewLine(NewLine.CRLF).
+                    hasHeader(false).
+                    build();
             csvWriter.writeLine(getControlEntity(INT_1));
         }
         レコード番号 = レコード番号 + INT_1;
