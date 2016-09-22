@@ -33,7 +33,7 @@ public enum Furikomi_SaishoriShitei {
      *
      * @return 振込_再処理指定のコード
      */
-    public RString getCode() {
+    public RString getコード() {
         return code;
     }
 
@@ -42,7 +42,7 @@ public enum Furikomi_SaishoriShitei {
      *
      * @return 振込_再処理指定の名称
      */
-    public RString getFullName() {
+    public RString get名称() {
         return fullName;
     }
 
