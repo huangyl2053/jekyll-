@@ -72,11 +72,17 @@ public class GassanJikofutangakuHakkoIchiranSource implements IReportSource {
     @ReportItem(name = "shikibetsuCode", length = 15)
     public RString shikibetsuCode;
 
+    @ReportItem(name = "郵便番号")
     public RString 郵便番号;
+    @ReportItem(name = "町域コード")
     public RString 町域コード;
+    @ReportItem(name = "行政区コード")
     public RString 行政区コード;
+    @ReportItem(name = "市町村コード")
     public RString 市町村コード;
+    @ReportItem(name = "証記載保険者番号")
     public RString 証記載保険者番号;
+    @ReportItem(name = "氏名５０音カナ")
     public RString 氏名５０音カナ;
 
 // </editor-fold>

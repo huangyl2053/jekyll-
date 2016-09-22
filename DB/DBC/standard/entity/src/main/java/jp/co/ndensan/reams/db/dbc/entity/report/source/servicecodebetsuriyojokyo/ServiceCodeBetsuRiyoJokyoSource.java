@@ -23,8 +23,8 @@ public class ServiceCodeBetsuRiyoJokyoSource implements IReportSource {
     public RString joken2;
     @ReportItem(name = "joken3", length = 50, order = 3)
     public RString joken3;
-    @ReportItem(name = "PageCnt", length = 6, order = 4)
-    public RString PageCnt;
+    @ReportItem(name = "pageCnt", length = 6, order = 4)
+    public RString pageCnt;
     @ReportItem(name = "pageCount1", length = 10, order = 5)
     public RString pageCount1;
     @ReportItem(name = "printTimeStamp1", length = 34, order = 6)
