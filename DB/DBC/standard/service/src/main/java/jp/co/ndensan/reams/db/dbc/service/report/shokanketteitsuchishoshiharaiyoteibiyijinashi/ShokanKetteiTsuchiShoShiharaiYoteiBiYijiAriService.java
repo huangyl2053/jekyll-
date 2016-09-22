@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishoshiharaiy
 import jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishoshiharaiyoteibiyijiari.ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriProperty;
 import jp.co.ndensan.reams.db.dbc.business.report.shokanketteitsuchishoshiharaiyoteibiyijiari.ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriReport;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.shokanketteitsuchishoshiharaiyotei.ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriRepotSource;
+import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.ninshosha.Ninshosha;
 import jp.co.ndensan.reams.ur.urz.business.report.parts.ninshosha.INinshoshaSourceBuilder;
@@ -20,7 +21,6 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -50,7 +50,7 @@ public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriService {
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriRepotSource> assembler = createAssembler(property, reportManager)) {
                 Ninshosha nishosha = NinshoshaFinderFactory.createInstance().get帳票認証者(
-                        GyomuCode.DB介護保険, RString.EMPTY);
+                        GyomuCode.DB介護保険, NinshoshaDenshikoinshubetsuCode.保険者印.getコード());
                 Association association = AssociationFinderFactory.createInstance().getAssociation();
                 INinshoshaSourceBuilder builder = NinshoshaSourceBuilderFactory.createInstance(
                         nishosha, association, assembler.getImageFolderPath(), RDate.getNowDate());
@@ -195,6 +195,7 @@ public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriService {
                 item.getSamaBun1(),
                 item.getKakkoRight1(),
                 item.getSamabunShimeiSmall1(),
-                item.getCustomerBarCode());
+                item.getCustomerBarCode(),
+                item.get定型文文字サイズ());
     }
 }

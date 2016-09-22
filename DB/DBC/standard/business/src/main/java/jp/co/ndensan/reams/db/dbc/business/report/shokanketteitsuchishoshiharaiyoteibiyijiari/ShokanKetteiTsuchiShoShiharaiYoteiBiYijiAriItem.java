@@ -19,6 +19,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem {
 
+    private RString 定型文文字サイズ;
     private RString bunshoNo;
     private RString title;
     private RString title2_1;
@@ -239,6 +240,7 @@ public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem {
      * @param kakkoRight1 右括弧1
      * @param samabunShimeiSmall1 様文氏名小1
      * @param customerBarCode カスタマーバーコード
+     * @param 定型文文字サイズ 定型文文字サイズ
      */
     public ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem(RString bunshoNo, RString title, RString title2_1, RString title2_2_1,
             RString title2_2_2, RString title2_3_1, RString title2_3_2, RString title2_4, RString tsuchibun1, RString hihokenshaName,
@@ -259,7 +261,7 @@ public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem {
             RString shimeiSmall2, RString shimeiText, RString meishoFuyo2, RString shimeiSmall1, RString dainoKubunMei, RString shimei6,
             RString meishoFuyo1, RString samabunShimeiText, RString kakkoLeft2, RString samabunShimei2, RString samabunShimeiSmall2,
             RString samaBun2, RString kakkoRight2, RString kakkoLeft1, RString samabunShimei1, RString samaBun1, RString kakkoRight1,
-            RString samabunShimeiSmall1, RString customerBarCode) {
+            RString samabunShimeiSmall1, RString customerBarCode, RString 定型文文字サイズ) {
         this.bunshoNo = bunshoNo;
         this.title = title;
         this.title2_1 = title2_1;
@@ -365,5 +367,6 @@ public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem {
         this.kakkoRight1 = kakkoRight1;
         this.samabunShimeiSmall1 = samabunShimeiSmall1;
         this.customerBarCode = customerBarCode;
+        this.定型文文字サイズ = 定型文文字サイズ;
     }
 }

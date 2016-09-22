@@ -11,8 +11,9 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteizumidatashutsuryo
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteizumidatashutsuryoku.IchijiHanteizumiDataShutsuryokuRelateEntity;
 
 /**
+ * 一次判定データ出力RelateEntityです。
  *
- * @author soft863
+ * @reamsid_L DBE-1610-010 wanghui
  */
 public interface IchijiHanteizumiDataShutsuryokuMapper {
 

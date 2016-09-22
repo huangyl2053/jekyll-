@@ -50,7 +50,7 @@ public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiService {
         try (ReportManager reportManager = new ReportManager()) {
             try (ReportAssembler<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiReportSource> assembler = createAssembler(property, reportManager)) {
                 Ninshosha nishosha = NinshoshaFinderFactory.createInstance().get帳票認証者(
-                        GyomuCode.DB介護保険, RString.EMPTY);
+                        GyomuCode.DB介護保険, new RString("0001"));
                 Association association = AssociationFinderFactory.createInstance().getAssociation();
                 INinshoshaSourceBuilder builder = NinshoshaSourceBuilderFactory.createInstance(
                         nishosha, association, assembler.getImageFolderPath(), RDate.getNowDate());
@@ -194,6 +194,7 @@ public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiService {
                 item.getSamaBun1(),
                 item.getKakkoRight1(),
                 item.getSamabunShimeiSmall1(),
-                item.getCustomerBarCode());
+                item.getCustomerBarCode(),
+                item.get定型文文字サイズ());
     }
 }
