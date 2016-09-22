@@ -16,9 +16,11 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -27,6 +29,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
 /**
  * 連帯納付義務者登録Handlerです。
@@ -41,8 +44,9 @@ public class KaigoHihokenshaInfoPanelHandler {
     private static final RString CODE_003 = new RString("003");
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
-    private static final RString DB = new RString("DB");
     private static final RString 名称_被保険者番号 = new RString("被保険者番号");
+    private static final RString 保存ボタン = new RString("btnUpdate");
+    private static final RString 再検索ボタン = new RString("btnResearch");
 
     /**
      * コンストラクタです。
@@ -75,7 +79,7 @@ public class KaigoHihokenshaInfoPanelHandler {
      */
     public void initializeDisplay(FukaTaishoshaKey taishoshaKey) {
         div.setTxtDialog(ONE);
-        div.setTxtGyomuCode(DB);
+        div.setTxtGyomuCode(GyomuCode.DB介護保険.getColumnValue());
         div.setTxtSearchYusenKubun(TWO);
         div.setTxtAgeArrivalDay(ONE);
         div.getCcdKaigoAtenaInfo().initialize(taishoshaKey.get識別コード());
@@ -226,6 +230,31 @@ public class KaigoHihokenshaInfoPanelHandler {
     }
 
     /**
+     * 直近世帯一覧行選択を表示するのイベントです。
+     *
+     * @param 宛名情報 IShikibetsuTaisho
+     */
+    public void setRentaiNofuGimushaInfo(IShikibetsuTaisho 宛名情報) {
+        div.getRentaiNofuGimushaInfo().getTxtShikibetsuCode().setDomain(宛名情報.get識別コード() == null ? null
+                : 宛名情報.get識別コード());
+        div.getRentaiNofuGimushaInfo().getTxtSetaiCode().setDomain(宛名情報.get世帯コード() == null ? null
+                : 宛名情報.get世帯コード());
+        div.getRentaiNofuGimushaInfo().getTxtShimei().setValue(宛名情報.toEntity().getMeisho() == null ? RString.EMPTY
+                : 宛名情報.toEntity().getMeisho().getColumnValue());
+        div.getRentaiNofuGimushaInfo().getTxtUmareYMD().setValue(宛名情報.toEntity().getSeinengappiYMD() == null ? null
+                : new RDate(宛名情報.toEntity().getSeinengappiYMD().toString()));
+        div.getRentaiNofuGimushaInfo().getTxtSeibetsu().setValue(宛名情報.toEntity().getSeibetsuCode() == null ? RString.EMPTY
+                : Seibetsu.toValue(宛名情報.toEntity().getSeibetsuCode()).get名称());
+        div.getRentaiNofuGimushaInfo().getTxtJuminShu().setValue(宛名情報.toEntity().getJuminJotaiCode() == null ? RString.EMPTY
+                : JuminShubetsu.toValue(宛名情報.toEntity().getJuminJotaiCode()).toRString());
+        div.getRentaiNofuGimushaInfo().getTxtZokuGara().setValue(宛名情報.toEntity().getTsuzukigara() == null ? RString.EMPTY
+                : 宛名情報.toEntity().getTsuzukigara());
+        div.getRentaiNofuGimushaInfo().getTxtJusho().setDomain(宛名情報.toEntity().getJusho() == null ? null
+                : 宛名情報.toEntity().getJusho());
+        div.getRentaiNofuGimushaInfo().getTxtRirekiNo().setValue(ONE);
+    }
+
+    /**
      * 直近世帯一覧表示するのイベントです。
      *
      * @param list List<RentaiGimushaAtenaJouhou>
@@ -241,9 +270,12 @@ public class KaigoHihokenshaInfoPanelHandler {
             row.getTxtUmareYND().setValue(result.get生年月日() == null ? null
                     : new RDate(result.get生年月日().toString()));
             row.getTxtSeibetsu().setValue(result.get性別() == null ? RString.EMPTY
-                    : result.get性別());
-            row.getTxtJuminShu().setValue(result.get住民種別() == null ? RString.EMPTY
-                    : result.get住民種別());
+                    : Seibetsu.toValue(result.get性別()).get名称());
+            if (result.get住民種別() == null || ONE.equals(result.get住民種別())) {
+                row.getTxtJuminShu().setValue(RString.EMPTY);
+            } else {
+                row.getTxtJuminShu().setValue(JuminShubetsu.toValue(result.get住民種別()).toRString());
+            }
             row.getTxtZokugara().setValue(result.get続柄() == null ? RString.EMPTY
                     : result.get続柄());
             row.getTxtSetaiCode().setValue(result.get世帯コード() == null ? RString.EMPTY
@@ -253,5 +285,16 @@ public class KaigoHihokenshaInfoPanelHandler {
             rowList.add(row);
         }
         div.getDgSetaiIchiran().setDataSource(rowList);
+    }
+
+    /**
+     * 初期化のメソッドです。
+     *
+     * @param flag boolean
+     */
+    public void initialDisable(boolean flag) {
+        div.getDgRentaiNofuGimushaIchiran().setDisabled(flag);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(保存ボタン, flag);
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(再検索ボタン, flag);
     }
 }

@@ -74,6 +74,12 @@ public class KaigoHihokenshaInfoValidationHandler {
             messages.add(ValidateChain.validateStart(div)
                     .ifNot(KaigoHihokenshaInfoSpec.連帯納付義務者が選択されていない)
                     .thenAdd(KaigoHihokenshaInfoValidationMessage.連帯納付義務者が選択されていない)
+                    .ifNot(KaigoHihokenshaInfoSpec.初期状態からの変更有無)
+                    .thenAdd(KaigoHihokenshaInfoValidationMessage.初期状態からの変更有無)
+                    .ifNot(KaigoHihokenshaInfoSpec.開始日と終了日の前後順)
+                    .thenAdd(KaigoHihokenshaInfoValidationMessage.開始日と終了日の前後順)
+                    .ifNot(KaigoHihokenshaInfoSpec.開始日未入力)
+                    .thenAdd(KaigoHihokenshaInfoValidationMessage.開始日未入力)
                     .messages());
             return messages;
         }

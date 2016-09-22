@@ -95,6 +95,7 @@ public class ChohyoJohoShutokuProcess extends BatchKeyBreakBase<DBB021051TableJo
             }
             i++;
         }
+
         List<KoikiZenShichosonJoho> koikiZenShichosonJohoList
                 = KoikiShichosonJohoFinder.createInstance().koseiShichosonJoho().records();
         KoikiZenShichosonJoho koikiZenShichosonJoho;

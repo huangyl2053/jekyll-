@@ -11,9 +11,16 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.commonchilddiv.kaigofukak
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoKanryoMessage.KaigoKanryoMessage.IKaigoKanryoMessageDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.IKaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxJusho;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxSetaiCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxShikibetsuCode;
 
 /**
  * KaigoHihokenshaInfoPanel のクラスファイル
@@ -47,6 +54,10 @@ public class KaigoHihokenshaInfoPanelDiv extends Panel {
     private RString txtSearchYusenKubun;
     @JsonProperty("txtAgeArrivalDay")
     private RString txtAgeArrivalDay;
+    @JsonProperty("txtOutShikibetsuCode")
+    private RString txtOutShikibetsuCode;
+    @JsonProperty("txtOutSetaiCode")
+    private RString txtOutSetaiCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -214,6 +225,42 @@ public class KaigoHihokenshaInfoPanelDiv extends Panel {
     @JsonProperty("txtAgeArrivalDay")
     public void setTxtAgeArrivalDay(RString txtAgeArrivalDay) {
         this.txtAgeArrivalDay = txtAgeArrivalDay;
+    }
+
+    /*
+     * gettxtOutShikibetsuCode
+     * @return txtOutShikibetsuCode
+     */
+    @JsonProperty("txtOutShikibetsuCode")
+    public RString getTxtOutShikibetsuCode() {
+        return txtOutShikibetsuCode;
+    }
+
+    /*
+     * settxtOutShikibetsuCode
+     * @param txtOutShikibetsuCode txtOutShikibetsuCode
+     */
+    @JsonProperty("txtOutShikibetsuCode")
+    public void setTxtOutShikibetsuCode(RString txtOutShikibetsuCode) {
+        this.txtOutShikibetsuCode = txtOutShikibetsuCode;
+    }
+
+    /*
+     * gettxtOutSetaiCode
+     * @return txtOutSetaiCode
+     */
+    @JsonProperty("txtOutSetaiCode")
+    public RString getTxtOutSetaiCode() {
+        return txtOutSetaiCode;
+    }
+
+    /*
+     * settxtOutSetaiCode
+     * @param txtOutSetaiCode txtOutSetaiCode
+     */
+    @JsonProperty("txtOutSetaiCode")
+    public void setTxtOutSetaiCode(RString txtOutSetaiCode) {
+        this.txtOutSetaiCode = txtOutSetaiCode;
     }
 
     /*

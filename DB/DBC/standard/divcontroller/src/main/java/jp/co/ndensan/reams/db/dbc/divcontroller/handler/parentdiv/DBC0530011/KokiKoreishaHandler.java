@@ -53,8 +53,6 @@ public class KokiKoreishaHandler {
     private static final RString 単一市町村 = new RString("1");
     private static final RString 広域市町村 = new RString("2");
     private static final RString 広域保険者 = new RString("3");
-    private static final RString DBCSHIKIBETSUCODE = new RString("DBCshikibetsuCode");
-    private static final RString DBCRIREKINO = new RString("DBCrirekiNo");
 
     /**
      * 生成されたインタフェースを返します
