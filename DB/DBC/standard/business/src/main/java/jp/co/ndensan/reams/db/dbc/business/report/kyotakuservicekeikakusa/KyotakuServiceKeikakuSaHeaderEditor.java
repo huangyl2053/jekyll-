@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 public class KyotakuServiceKeikakuSaHeaderEditor implements IKyotakuServiceKeikakuSaEditor {
 
     private final KyotakuServiceKeikakuSaParam target;
-    private static final RString SAKUSEI = new RString("作成");
     private static final int INDEX_0 = 0;
     private static final int INDEX_1 = 1;
     private static final int INDEX_2 = 2;
@@ -65,7 +64,7 @@ public class KyotakuServiceKeikakuSaHeaderEditor implements IKyotakuServiceKeika
         RString 作成日 = target.getシステム日時().getDate().wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         RString 作成時 = target.getシステム日時().getTime()
-                .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE).concat(SAKUSEI);
+                .toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒).concat(RString.HALF_SPACE);
         source.shoriYmdHms = 作成日.concat(RString.HALF_SPACE).concat(作成時);
         if (target.get地方公共団体() != null) {
             if (target.get地方公共団体().get地方公共団体コード() != null) {
