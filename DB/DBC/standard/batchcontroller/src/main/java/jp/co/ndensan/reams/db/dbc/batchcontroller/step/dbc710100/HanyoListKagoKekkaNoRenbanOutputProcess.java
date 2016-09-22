@@ -101,7 +101,7 @@ public class HanyoListKagoKekkaNoRenbanOutputProcess extends BatchProcessBase<Ha
 
     @Override
     protected void initialize() {
-        if (RString.isNullOrEmpty(parameter.get出力順())) {
+        if (!RString.isNullOrEmpty(parameter.get出力順())) {
             IChohyoShutsuryokujunFinder iChohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
             出力順 = iChohyoShutsuryokujunFinder.get出力順(SubGyomuCode.DBC介護給付,
                     ReportIdDBC.DBC701010.getReportId(), Long.valueOf(parameter.get出力順().toString()));
