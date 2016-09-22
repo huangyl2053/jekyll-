@@ -29,7 +29,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class NinteiTanitsuProcessDataManager {
 
-    private RString configValue_医調取込み情報;
     private int 月数;
     private final RString 支1 = new RString("12");
     private final RString 支2 = new RString("13");
@@ -38,9 +37,9 @@ public class NinteiTanitsuProcessDataManager {
     private final RString 介3 = new RString("23");
     private final RString 介4 = new RString("24");
     private final RString 介5 = new RString("25");
-    private final RString one = new RString("1");
-    private final RString two = new RString("2");
-    private final RString three = new RString("3");
+    private static final Code CODE_ONE = new Code("1");
+    private static final Code CODE_TWO = new Code("2");
+    private static final Code CODE_THREE = new Code("3");
     private final RString 主治医のみ = YokaigoInterfaceIchoTorikomi.主治医のみ.getコード();
     private final RString 調査員のみ = YokaigoInterfaceIchoTorikomi.調査員のみ.getコード();
     private final RString 両方取込む = YokaigoInterfaceIchoTorikomi.両方取込む.getコード();
@@ -72,9 +71,9 @@ public class NinteiTanitsuProcessDataManager {
         entity.get受給者台帳Entity().setNinteiYukoKikanShuryoYMD(entity.get二次判定認定有効終了年月日());
         entity.get受給者台帳Entity().setNinteiYMD(認定日);
 
-        if (one.equals(entity.get要介護認定申請情報Entity().getNinteiShinseiHoreiKubunCode())
-                && two.equals(entity.get要介護認定申請情報Entity().getNinteiShinseiShinseijiKubunCode())) {
-            entity.get受給者台帳Entity().setMinashiCode(new Code(one));
+        if (CODE_ONE.equals(entity.get要介護認定申請情報Entity().getNinteiShinseiHoreiKubunCode())
+                && CODE_TWO.equals(entity.get要介護認定申請情報Entity().getNinteiShinseiShinseijiKubunCode())) {
+            entity.get受給者台帳Entity().setMinashiCode(CODE_ONE);
         } else {
             entity.get受給者台帳Entity().setMinashiCode(new Code("0"));
         }
@@ -108,8 +107,8 @@ public class NinteiTanitsuProcessDataManager {
         entity.get受給者台帳Entity().setNinteiYukoKikanShuryoYMD(entity.get認定有効終了年月日());
         entity.get受給者台帳Entity().setNinteiYMD(認定日);
 
-        if (three.equals(entity.get申請種別コード()) && two.equals(entity.get予備区分4())) {
-            entity.get受給者台帳Entity().setMinashiCode(new Code(one));
+        if (CODE_THREE.value().equals(entity.get申請種別コード()) && CODE_TWO.value().equals(entity.get予備区分4())) {
+            entity.get受給者台帳Entity().setMinashiCode(CODE_ONE);
         } else {
             entity.get受給者台帳Entity().setMinashiCode(new Code("0"));
         }
@@ -129,33 +128,32 @@ public class NinteiTanitsuProcessDataManager {
      * @return state boolean
      */
     public boolean set要介護認定更新比較結果1(RString 前回の要介護度, RString 今回の要介護度) {
-        boolean state = false;
         if (前回の要介護度 != null && 前回の要介護度.equals(支1) && (今回の要介護度 != null && get今回の要介護度支1State(今回の要介護度))) {
-            state = true;
+            return true;
         }
         if (前回の要介護度 != null && 前回の要介護度.equals(支2) && (今回の要介護度 != null && get今回の要介護度支2State(今回の要介護度))) {
-            state = true;
+            return true;
         }
         if (前回の要介護度 != null && 前回の要介護度.equals(介1) && (今回の要介護度 != null && get今回の要介護度介1State(今回の要介護度))) {
-            state = true;
+            return true;
         }
         if (前回の要介護度 != null && 前回の要介護度.equals(介2) && (今回の要介護度 != null && get今回の要介護度介2State(今回の要介護度))) {
-            state = true;
+            return true;
         }
-        set要介護認定更新比較結果2(前回の要介護度, 今回の要介護度, state);
-        return state;
+        return set要介護認定更新比較結果2(前回の要介護度, 今回の要介護度);
     }
 
     /**
      * 医調取込み情報厚労省を設定します。
      *
      * @param entity YokaigoNinteiInterfaceEntity
+     * @param configValue_医調取込み情報 RString
      * @return entity YokaigoNinteiInterfaceEntity
      */
-    public YokaigoNinteiInterfaceEntity set医調取込み情報厚労省(YokaigoNinteiInterfaceEntity entity) {
-        set医調取込み情報_主治医のみ(entity);
-        set医調取込み情報_調査員のみ(entity);
-        set医調取込み情報_両方取込む(entity);
+    public YokaigoNinteiInterfaceEntity set医調取込み情報厚労省(YokaigoNinteiInterfaceEntity entity, RString configValue_医調取込み情報) {
+        set医調取込み情報_主治医のみ(entity, configValue_医調取込み情報);
+        set医調取込み情報_調査員のみ(entity, configValue_医調取込み情報);
+        set医調取込み情報_両方取込む(entity, configValue_医調取込み情報);
         return entity;
     }
 
@@ -226,21 +224,21 @@ public class NinteiTanitsuProcessDataManager {
         return newEntity;
     }
 
-    private void set医調取込み情報_主治医のみ(YokaigoNinteiInterfaceEntity entity) {
+    private void set医調取込み情報_主治医のみ(YokaigoNinteiInterfaceEntity entity, RString configValue_医調取込み情報) {
         if (configValue_医調取込み情報.equals(主治医のみ)) {
             entity.get要介護認定申請情報Entity().setShujiiIryokikanCode(entity.get医療機関コード());
             entity.get要介護認定申請情報Entity().setShujiiCode(entity.get主治医コード());
         }
     }
 
-    private void set医調取込み情報_調査員のみ(YokaigoNinteiInterfaceEntity entity) {
+    private void set医調取込み情報_調査員のみ(YokaigoNinteiInterfaceEntity entity, RString configValue_医調取込み情報) {
         if (configValue_医調取込み情報.equals(調査員のみ)) {
             entity.get要介護認定申請情報Entity().setNinteiChosaItakusakiCode(new ChosaItakusakiCode(entity.get調査委託先コード()));
             entity.get要介護認定申請情報Entity().setNinteiChosainCode(new ChosainCode(entity.get調査員コード()));
         }
     }
 
-    private void set医調取込み情報_両方取込む(YokaigoNinteiInterfaceEntity entity) {
+    private void set医調取込み情報_両方取込む(YokaigoNinteiInterfaceEntity entity, RString configValue_医調取込み情報) {
         if (configValue_医調取込み情報.equals(両方取込む)) {
             entity.get要介護認定申請情報Entity().setShujiiIryokikanCode(entity.get医療機関コード());
             entity.get要介護認定申請情報Entity().setShujiiCode(entity.get主治医コード());
@@ -249,17 +247,15 @@ public class NinteiTanitsuProcessDataManager {
         }
     }
 
-    private void set要介護認定更新比較結果2(RString 前回の要介護度, RString 今回の要介護度, boolean state) {
+    private boolean set要介護認定更新比較結果2(RString 前回の要介護度, RString 今回の要介護度) {
 
         if (前回の要介護度 != null && 前回の要介護度.equals(介3) && (今回の要介護度 != null && get今回の要介護度介3State(今回の要介護度))) {
-            state = true;
+            return true;
         }
         if (前回の要介護度 != null && 前回の要介護度.equals(介4) && (今回の要介護度 != null && get今回の要介護度介4State(今回の要介護度))) {
-            state = true;
+            return true;
         }
-        if (前回の要介護度 != null && 前回の要介護度.equals(介5) && (今回の要介護度 != null && get今回の要介護度介5State(今回の要介護度))) {
-            state = true;
-        }
+        return 前回の要介護度 != null && 前回の要介護度.equals(介5) && (今回の要介護度 != null && get今回の要介護度介5State(今回の要介護度));
     }
 
     private boolean get今回の要介護度支1State(RString 今回の要介護度) {

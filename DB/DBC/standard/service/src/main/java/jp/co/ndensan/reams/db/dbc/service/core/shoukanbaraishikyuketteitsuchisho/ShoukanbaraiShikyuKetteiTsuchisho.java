@@ -752,12 +752,16 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
                     concat("（").
                     concat(shiharaiKaishiYMD.getDayOfWeek().getShortTerm()).concat("）").concat(KARA));
         } else if ((shiharaiKaishiYMD == null || shiharaiKaishiYMD.isEmpty()) && (shiharaiShuryoYMD != null && !shiharaiShuryoYMD.isEmpty())) {
-            entity.setShiharaiStartYMD(KARA);
+            entity.setShiharaiStartYMD(KARA.concat(shiharaiShuryoYMD.wareki().
+                    eraType(EraType.KANJI).
+                    firstYear(FirstYear.GAN_NEN).
+                    separator(Separator.JAPANESE).
+                    fillType(FillType.BLANK).toDateString().concat("（").concat(shiharaiShuryoYMD.getDayOfWeek().getShortTerm().concat("）"))));
         }
         if (shiharaiShuryoYMD == null) {
             entity.setShiharaiEndYMD(RString.EMPTY);
         }
-        if (shiharaiShuryoYMD != null && !shiharaiShuryoYMD.isEmpty()) {
+        if ((shiharaiKaishiYMD != null && !shiharaiKaishiYMD.isEmpty()) && (shiharaiShuryoYMD != null && !shiharaiShuryoYMD.isEmpty())) {
             entity.setShiharaiEndYMD(shiharaiShuryoYMD.wareki().
                     eraType(EraType.KANJI).
                     firstYear(FirstYear.GAN_NEN).
@@ -765,8 +769,8 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
                     fillType(FillType.BLANK).toDateString().concat("（").concat(shiharaiShuryoYMD.getDayOfWeek().getShortTerm().concat("）")));
         }
         entity.setShiharaiStart(set時間(shiharaiKaishiTime));
-        if ((shiharaiKaishiYMD != null && !shiharaiKaishiYMD.isEmpty() || !shiharaiShuryoYMD.isEmpty() && shiharaiShuryoYMD != null)
-                && (!shiharaiKaishiTime.isEmpty() && shiharaiKaishiTime != null || !shiharaiShuryoTime.isEmpty() && shiharaiShuryoTime != null)) {
+        if ((shiharaiKaishiYMD != null && !shiharaiKaishiYMD.isEmpty() || shiharaiShuryoYMD != null && !shiharaiShuryoYMD.isEmpty())
+                && (shiharaiKaishiTime != null && !shiharaiKaishiTime.isEmpty() || shiharaiShuryoTime != null && !shiharaiShuryoTime.isEmpty())) {
             entity.setKaraFugo(KARA);
         }
         entity.setShiharaiEnd(set時間(shiharaiShuryoTime));
