@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEnt
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
@@ -472,7 +473,10 @@ public class KanendoIdouKekkaIchiranBodyEditor implements IKanendoIdouKekkaIchir
         UaFt200FindShikibetsuTaishoEntity 宛名 = 計算後情報_宛名_口座_更正後Entity.get宛名Entity();
         source.shikibetsuCode = getColumnValue(宛名.getShikibetsuCode());
         source.kanaMeisho = getColumnValue(宛名.getKanaMeisho());
-        source.seinengappiYMD = 宛名.getSeinengappiYMD().seireki().toDateString();
+        FlexibleDate 生年月日 = 宛名.getSeinengappiYMD();
+        if (null != 生年月日) {
+            source.seinengappiYMD = 生年月日.seireki().toDateString();
+        }
         source.seibetsuCode = 宛名.getSeibetsuCode();
         source.shichosonCode = getColumnValue(計算後情報_宛名_口座_更正後Entity.get賦課市町村コード());
         source.hihokenshaNo = getColumnValue(計算後情報_宛名_口座_更正後Entity.get被保険者番号());

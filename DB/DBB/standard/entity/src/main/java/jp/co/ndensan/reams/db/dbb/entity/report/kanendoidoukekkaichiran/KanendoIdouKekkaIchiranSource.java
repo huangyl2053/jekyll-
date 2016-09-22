@@ -252,13 +252,21 @@ public class KanendoIdouKekkaIchiranSource implements IReportSource {
     public RString list5_21;
     @ReportItem(name = "list10_1", length = 10, order = 118)
     public RString list10_1;
+    @ReportItem(name = "shikibetsuCode", length = 10, order = 119)
     public RString shikibetsuCode;
+    @ReportItem(name = "kanaMeisho", length = 10, order = 120)
     public RString kanaMeisho;
+    @ReportItem(name = "seinengappiYMD", length = 10, order = 121)
     public RString seinengappiYMD;
+    @ReportItem(name = "seibetsuCode", length = 10, order = 122)
     public RString seibetsuCode;
+    @ReportItem(name = "shichosonCode", length = 10, order = 123)
     public RString shichosonCode;
+    @ReportItem(name = "hihokenshaNo", length = 10, order = 124)
     public RString hihokenshaNo;
+    @ReportItem(name = "nenkinCode", length = 10, order = 125)
     public RString nenkinCode;
+    @ReportItem(name = "nenkinNo", length = 10, order = 126)
     public RString nenkinNo;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
@@ -267,6 +275,9 @@ public class KanendoIdouKekkaIchiranSource implements IReportSource {
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
 
+    /**
+     * KanendoIdouKekkaIchiranSourceのenum
+     */
     public enum DBB200027ReportSourceFields {
 
         printTimeStamp,
