@@ -419,17 +419,17 @@ public class DvKogakuServiceJuryoIninHandler {
                         : new FlexibleDate(div.getDvHaraiKetteiShusei().getTxtUketsukeDate().getValue().toString()))
                 .set決定年月日(null == div.getDvHaraiKetteiShusei().getBtnKetteiDate().getValue() ? FlexibleDate.EMPTY
                         : new FlexibleDate(div.getDvHaraiKetteiShusei().getBtnKetteiDate().getValue().toString()))
-                .set受領委任払適用開始年月日(null == div.getDvHaraiKetteiShusei().getBtnShoninDate().getFromValue() ? FlexibleDate.EMPTY
-                        : new FlexibleDate(div.getDvHaraiKetteiShusei().getBtnShoninDate().getFromValue().toString()))
                 .set受領委任払適用終了年月日(null == div.getDvHaraiKetteiShusei().getBtnShoninDate().getToValue() ? FlexibleDate.EMPTY
                         : new FlexibleDate(div.getDvHaraiKetteiShusei().getBtnShoninDate().getToValue().toString()))
+                .set受領委任払適用開始年月日(null == div.getDvHaraiKetteiShusei().getBtnShoninDate().getFromValue() ? FlexibleDate.EMPTY
+                        : new FlexibleDate(div.getDvHaraiKetteiShusei().getBtnShoninDate().getFromValue().toString()))
                 .set事業者番号(RString.isNullOrEmpty(div.getDvHaraiKetteiShusei().getCcdJigyosha().getNyuryokuShisetsuKodo()) ? JigyoshaNo.EMPTY
                         : new JigyoshaNo(div.getDvHaraiKetteiShusei().getCcdJigyosha().getNyuryokuShisetsuKodo().toString()))
                 .set承認結果区分(KEY_決定区分_承認する.equals(div.getDvHaraiKetteiShusei().getRadKetteiKubun().getSelectedKey())
                         ? CODE_決定区分_承認する : CODE_決定区分_承認しない)
-                .set不承認理由(div.getDvHaraiKetteiShusei().getTxtShoninShinaiRiyu().getValue())
                 .set利用者負担上限額(RString.isNullOrEmpty(div.getDvHaraiKetteiShusei().getDdlRiyoshafutanJogenGaku().getSelectedKey())
                         ? null : new Decimal(div.getDvHaraiKetteiShusei().getDdlRiyoshafutanJogenGaku().getSelectedKey().toString()))
+                .set不承認理由(div.getDvHaraiKetteiShusei().getTxtShoninShinaiRiyu().getValue())
                 .set契約番号(get契約番号(holder))
                 .set承認結果通知書作成日(FlexibleDate.EMPTY)
                 .set承認結果通知書再発行区分(空白)
@@ -472,10 +472,9 @@ public class DvKogakuServiceJuryoIninHandler {
         KogakuJuryoininKeiyakuJigyoshaManager manager = new KogakuJuryoininKeiyakuJigyoshaManager();
         if (null != newBusiness) {
             manager.saveOrDeletePhysical高額受領委任契約事業者(newBusiness);
+            KogakuServiceHiJuryoininKeiyakuKakuninsho 帳票発行処理Business = KogakuServiceHiJuryoininKeiyakuKakuninsho.createInstance();
+            帳票発行処理Business.getKogakuServiceHiJuryoininKeiyakuKakuninshoData(getParameter(newBusiness));
         }
-
-        KogakuServiceHiJuryoininKeiyakuKakuninsho 帳票発行処理Business = KogakuServiceHiJuryoininKeiyakuKakuninsho.createInstance();
-        帳票発行処理Business.getKogakuServiceHiJuryoininKeiyakuKakuninshoData(getParameter(newBusiness));
     }
 
     private KogakuServiceHiJuryoininKeiyakuKakuninshoParameter getParameter(KogakuJuryoininKeiyakuJigyosha business) {
