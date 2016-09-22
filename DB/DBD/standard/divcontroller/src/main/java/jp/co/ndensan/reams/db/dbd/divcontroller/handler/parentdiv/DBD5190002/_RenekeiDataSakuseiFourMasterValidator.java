@@ -21,7 +21,7 @@ public class _RenekeiDataSakuseiFourMasterValidator implements IValidatable {
     private final RenekeiDataSakuseiFourMasterDiv div;
 
     /**
-     * バリデーション。
+     * コンストラクタです。
      *
      * @param div ドメインオブジェクトを取り出したい{@link RenekeiDataSakuseiFourMasterDiv}
      */

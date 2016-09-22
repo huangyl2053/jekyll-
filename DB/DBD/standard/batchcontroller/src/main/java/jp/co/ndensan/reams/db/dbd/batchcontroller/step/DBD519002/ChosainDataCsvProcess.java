@@ -45,16 +45,16 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
  */
 public class ChosainDataCsvProcess extends BatchProcessBase<ChosainEntity> {
 
-    private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate."
-            + "renekeidatasakuseifourmaster.IRenekeiDataSakuseiFourMasterMapper.get認定調査員情報ＩＦのcsv情報");
+    private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.")
+            .concat("renekeidatasakuseifourmaster.IRenekeiDataSakuseiFourMasterMapper.get認定調査員情報ＩＦのcsv情報");
     private static final EucEntityId CSV_ENTITY_ID = new EucEntityId(new RString("DBD519002"));
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
     private static final RString CSV_WRITER_ENCLOSURE = new RString("\"");
     private static final RString ファイル名_日本語 = new RString("認定調査員情報CSV");
     private static final RString EUCエンティティID = new RString("DBD519022");
-    private static final RString 出力件数_状況フラグ = new RString("【状況フラグ】TRUE");
-    private static final RString 出力件数_今回処理日時開始日時 = new RString("【今回処理日時開始日時】");
-    private static final RString 出力件数_今回処理日時終了日時 = new RString("【今回処理日時終了日時】");
+    private static final RString 出力件数_状況フラグ = new RString("【状況フラグ】 TRUE");
+    private static final RString 出力件数_今回処理日時開始日時 = new RString("【今回処理日時開始日時】 ");
+    private static final RString 出力件数_今回処理日時終了日時 = new RString("【今回処理日時終了日時】 ");
     private static final RString 申請書管理番号 = new RString("申請書管理番号");
     private static final Code ログコード = new Code("0001");
     private Association association;

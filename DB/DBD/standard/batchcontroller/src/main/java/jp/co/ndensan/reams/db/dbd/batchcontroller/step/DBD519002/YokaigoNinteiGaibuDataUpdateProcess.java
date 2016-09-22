@@ -22,8 +22,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class YokaigoNinteiGaibuDataUpdateProcess extends BatchProcessBase<DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity> {
 
-    private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate."
-            + "renekeidatasakuseifourmaster.IRenekeiDataSakuseiFourMasterMapper.get要介護認定外部データ出力履歴");
+    private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.")
+            .concat("renekeidatasakuseifourmaster.IRenekeiDataSakuseiFourMasterMapper.get要介護認定外部データ出力履歴");
     private RenekeiDataSakuseiFourMasterProcessParameter para;
     @BatchWriter
     private BatchPermanentTableWriter<DbT7204YokaigoNinteiGaibuDataOutputHistoryEntity> tableWriter;
