@@ -1020,7 +1020,11 @@ public enum ConfigNameDBC {
     /**
      * 減免前後課税区分
      */
-    減免前後課税区分("減免前後課税区分");
+    減免前後課税区分("減免前後課税区分"),
+    /**
+     * 名寄せ
+     */
+    名寄せ("名寄せ");
 
     private final RString fullName;
 

@@ -12,10 +12,10 @@ import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB055001.DeleteKeisangoJ
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB055001.InsShoriDateKanriProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB055001.SelectKanendoIdoDataProcess;
 import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB055001.SpoolKanendoIdoKekkaIchiranProcess;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB003001.DBB003001_KeisangoJohoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB004001.DBB004001_FukaJohoTorokuParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB055001.DBB055001_KanendoIdoFukaParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB055003.DBB055003_KanendoIdoTsuchishoHakkoParameter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB003001.DBB003001_KeisangoJohoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.kanendoidofuka.KanendoIdoFukaProcessParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.fuka.SetaiShotokuKazeiHanteiBatchParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SetaiinHaakuKanriShikibetsuKubun;
@@ -56,7 +56,7 @@ public class DBB055001_KanendoIdoFuka extends BatchFlowBase<DBB055001_KanendoIdo
     private static final RString 賦課の情報登録フローBATCHID = new RString("DBB004001_FukaJohoToroku");
     private static final RString KANENDOIDOTSUCHISHO_FLOW = new RString("DBB055003_KanendoIdoTsuchishoHakko");
     private static final RString SETAISHOTOKUKAZEIHANTEI_FLOW = new RString("SetaiShotokuKazeiHanteiFlow");
-    private static final RString KEISANGOJOHOSAKUEEIFLOW_FLOWID = new RString("KeisangoJohoSakuseiFlow");
+    private static final RString KEISANGOJOHOSAKUEEIFLOW_FLOWID = new RString("DBB003001_KeisangoJohoSakusei");
 
     @Override
     protected void defineFlow() {

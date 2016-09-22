@@ -19,14 +19,14 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110090.KaigokyufuhiKag
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110090.KaigokyufuhiKagoMoshitateshoOutUpdateSofuProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110090.KaigokyufuhiKagoMoshitateshoOutgetCitySingleProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110090.KaigokyufuhiKagoMoshitateshoOutgetCityWideAreaProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110130.HokenshaKyufujissekiOutDoErrorProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110130.HokenshaKyufujissekiOutGetBeforeKanyuYMDProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110130.HokenshaKyufujissekiOutGetHihokenshaAtenaProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110130.HokenshaKyufujissekiOutGetHihokenshaNameProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110130.HokenshaKyufujissekiOutGetHihokenshaNoProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110130.HokenshaKyufujissekiOutGetOldHihokenshaNoProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110130.HokenshaKyufujissekiOutListSakuseiProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110130.HokenshaKyufujissekiOutSetHihokenshaNoProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110130.HokenshaKyufujissekiOutDoErrorProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110130.HokenshaKyufujissekiOutGetBeforeKanyuYMDProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110130.HokenshaKyufujissekiOutGetHihokenshaAtenaProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110130.HokenshaKyufujissekiOutGetHihokenshaNameProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110130.HokenshaKyufujissekiOutGetHihokenshaNoProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110130.HokenshaKyufujissekiOutGetOldHihokenshaNoProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110130.HokenshaKyufujissekiOutListSakuseiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110130.HokenshaKyufujissekiOutSetHihokenshaNoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoInterfaceKanriKousinProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110090.KaigokyufuhiKagoMoshitateshoGetKagoMoshitateListProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110090.KaigokyufuhiKagoMoshitateshoOutDoBillOutProcessParameter;
@@ -456,21 +456,18 @@ public class DBC110140_SogojigyohiKagoMoshitateshoOut extends BatchFlowBase<DBC1
     private KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter getParam() {
         KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter param = new KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter();
         param.set処理年月(new FlexibleYearMonth(getParameter().get処理年月().toDateString()));
-        param.set交換情報識別番号(ConfigKeysKokuhorenSofu.過誤申立書情報.getコード());
+        param.set交換情報識別番号(ConfigKeysKokuhorenSofu.総合事業費過誤申立書情報.getコード());
         param.set処理対象年月(new FlexibleYearMonth(getParameter().get処理年月().toDateString()));
         param.setレコード件数合計(レコード件数合計);
-//        List<RString> list = new ArrayList<>();
-//        if (エントリ情報List.isEmpty()) {
-//            param.setFileNameList(Collections.EMPTY_LIST);
-//        } else {
-//            for (SharedFileDescriptor entry : エントリ情報List) {
-//                // TODO QA1149 value too long for type character varying(20)
-//                list.add(entry.getSharedFileName().toRString());
-////                list.add(entry.getSharedFileName().toRString().substring(INT_4));
-//                param.setFileNameList(list);
-//            }
-//        }
-        param.setFileNameList(Collections.EMPTY_LIST);
+        List<RString> list = new ArrayList<>();
+        if (エントリ情報List.isEmpty()) {
+            param.setFileNameList(Collections.EMPTY_LIST);
+        } else {
+            for (SharedFileDescriptor entry : エントリ情報List) {
+                list.add(entry.getSharedFileName().toRString());
+            }
+            param.setFileNameList(list);
+        }
         return param;
     }
 }

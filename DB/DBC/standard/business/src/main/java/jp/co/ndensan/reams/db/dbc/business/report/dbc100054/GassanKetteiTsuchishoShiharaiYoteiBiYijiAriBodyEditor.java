@@ -75,6 +75,7 @@ public class GassanKetteiTsuchishoShiharaiYoteiBiYijiAriBodyEditor
     private static final RString 持ち物内容文言１ = new RString("持ち物内容文言１");
     private static final RString 持ち物内容文言2 = new RString("持ち物内容文言２");
     private static final RString 持ち物内容文言3 = new RString("持ち物内容文言３");
+    private static final RString 支払予定日印字有無 = new RString("支払予定日印字有無");
 
     /**
      * コンストラクタです
@@ -94,6 +95,7 @@ public class GassanKetteiTsuchishoShiharaiYoteiBiYijiAriBodyEditor
     public GassanKetteiTsuchishoShiharaiYoteiBiYijiAriSource edit(
             GassanKetteiTsuchishoShiharaiYoteiBiYijiAriSource source) {
         editSource(source);
+        source.hihokenshaNo = getColumnValue(entity.get被保険者番号());
         return source;
     }
 
@@ -199,7 +201,9 @@ public class GassanKetteiTsuchishoShiharaiYoteiBiYijiAriBodyEditor
             }
         }
         source.bangoTitle = 口座番号;
-        source.sihaYoYmd = getパターン12(entity.get支払予定日());
+        if (is支払予定日印字有無()) {
+            source.sihaYoYmd = getパターン12(entity.get支払予定日());
+        }
         source.tsuchibun2 = entity.get文書2();
         source.tsuchibun3 = entity.get文書3();
         source.tsuchibun4 = entity.get文書4();
@@ -298,16 +302,14 @@ public class GassanKetteiTsuchishoShiharaiYoteiBiYijiAriBodyEditor
         this.set支払場所(source);
         FlexibleDate shiharaiKaishiYMD = entity.get支払期間開始年月日();
         FlexibleDate shiharaiShuryoYMD = entity.get支払期間終了年月日();
-        if (shiharaiKaishiYMD == null || shiharaiShuryoYMD == null) {
-            return;
-        }
-        if (!shiharaiKaishiYMD.isEmpty()) {
+
+        if (!is空白(shiharaiKaishiYMD)) {
             RString 開始曜日 = new RString(shiharaiKaishiYMD.getDayOfWeek().getInFullParentheses());
             source.maStYmd = getパターン12(shiharaiKaishiYMD).concat(開始曜日).concat(接続符);
-        } else if (shiharaiKaishiYMD.isEmpty() && !shiharaiShuryoYMD.isEmpty()) {
+        } else if (!is空白(shiharaiShuryoYMD)) {
             source.maStYmd = 接続符;
         }
-        if (!shiharaiKaishiYMD.isEmpty() && !shiharaiShuryoYMD.isEmpty()) {
+        if (!is空白(shiharaiKaishiYMD) && !is空白(shiharaiShuryoYMD)) {
             RString 終了曜日 = new RString(shiharaiShuryoYMD.getDayOfWeek().getInFullParentheses());
             source.maEdYmd = getパターン12(shiharaiShuryoYMD).concat(終了曜日);
         }
@@ -378,6 +380,19 @@ public class GassanKetteiTsuchishoShiharaiYoteiBiYijiAriBodyEditor
         }
     }
 
+    private boolean is支払予定日印字有無() {
+        for (ChohyoSeigyoHanyo キー : 帳票制御汎用キー) {
+            if (null == キー) {
+                continue;
+            }
+            if (支払予定日印字有無.equals(キー.get項目名()) && 区分_1.equals(キー.get設定値())) {
+                return true;
+            }
+
+        }
+        return false;
+    }
+
     private void set支払期間時間(GassanKetteiTsuchishoShiharaiYoteiBiYijiAriSource source, RString time) {
         if (time.isEmpty()) {
             return;
@@ -410,7 +425,7 @@ public class GassanKetteiTsuchishoShiharaiYoteiBiYijiAriBodyEditor
         if (entity.get金融機関名称() != null) {
             source.bankName = entity.get金融機関名称().get金融機関名称();
         }
-        if (entity.get金融機関コード() != null && !郵貯銀行.equals(entity.get金融機関コード())) {
+        if (entity.get金融機関コード() != null && !郵貯銀行.equals(getColumnValue(entity.get金融機関コード()))) {
             if (entity.get支店名称() != null) {
                 source.bankShiten = entity.get支店名称().get支店名称();
             }
@@ -476,5 +491,12 @@ public class GassanKetteiTsuchishoShiharaiYoteiBiYijiAriBodyEditor
             return entity.getColumnValue();
         }
         return RString.EMPTY;
+    }
+
+    private boolean is空白(FlexibleDate entity) {
+        if (null == entity || entity.isEmpty()) {
+            return true;
+        }
+        return false;
     }
 }

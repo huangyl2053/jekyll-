@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc710170;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC710170;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.hanyolistkogakugassanshikyugakukettei.HanyoListKogakuGassanShikyugakuKetteiOutPutOrder;
+import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistkogakugassanshikyugakukettei.HanyoListKogakuGassanShikyugakuKetteiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.hanyolistkogakugassanshikyugakukettei.HanyoListKogakuGassanShikyugakuKetteiCSVEntity;
@@ -444,7 +445,7 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
     protected void afterExecute() {
         csvListWriter.close();
         if (!personalDataList.isEmpty()) {
-            AccessLogUUID accessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
+            AccessLogUUID accessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
             manager.spool(SubGyomuCode.DBC介護給付, hanyoListKogakuFilePath, accessLog);
         } else {
             manager.spool(hanyoListKogakuFilePath);
@@ -951,7 +952,7 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
             return null;
         }
         builder.append(支給区分);
-        ShikyuFushikyuKubun 支給区分名称 = ShikyuFushikyuKubun.toValue(parameter.get支給区分());
+        Kaigogassan_ShikyuFushikyuKubun 支給区分名称 = Kaigogassan_ShikyuFushikyuKubun.toValue(parameter.get支給区分());
         builder.append(支給区分名称 != null ? 支給区分名称.get名称() : RString.EMPTY);
         return builder;
     }
@@ -1009,7 +1010,7 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
                     .append(RString.FULL_SPACE).append(波線);
         } else if (決定情報受取年月FromFlag) {
             builder.append(波線).append(RString.FULL_SPACE)
-                    .append(parameter.get決定情報受取年月To().wareki().toDateString());
+                    .append(dateFormat(parameter.get決定情報受取年月To()));
         } else {
             builder.append(dateFormat(parameter.get決定情報受取年月From()))
                     .append(RString.FULL_SPACE).append(波線).append(RString.FULL_SPACE)
@@ -1161,6 +1162,7 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
         RString 出力順 = RString.EMPTY;
         if (order != null) {
             出力順 = MyBatisOrderByClauseCreator.create(HanyoListKogakuGassanShikyugakuKetteiOutPutOrder.class, order);
+            出力順 = 出力順.concat(コンマ);
         }
         if (RString.isNullOrEmpty(出力順)) {
             出力順 = 出力順.concat(ORDER_BY);

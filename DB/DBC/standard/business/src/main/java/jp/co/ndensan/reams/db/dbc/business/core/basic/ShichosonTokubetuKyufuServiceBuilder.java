@@ -183,6 +183,18 @@ public class ShichosonTokubetuKyufuServiceBuilder {
     }
 
     /**
+     * 論理削除フラグを設定します。
+     *
+     * @param 論理削除フラグ 論理削除フラグ
+     * @return {@link ShichosonTokubetuKyufuServiceBuilder}
+     */
+    public ShichosonTokubetuKyufuServiceBuilder set論理削除フラグ(boolean 論理削除フラグ) {
+        requireNonNull(論理削除フラグ, UrSystemErrorMessages.値がnull.getReplacedMessage("論理削除フラグ"));
+        entity.setLogicalDeletedFlag(論理削除フラグ);
+        return this;
+    }
+
+    /**
      * {@link ShichosonTokubetuKyufuService}のインスタンスを生成します。
      *
      * @return {@link ShichosonTokubetuKyufuService}のインスタンス

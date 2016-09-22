@@ -129,7 +129,7 @@ public class KaigoKyufuhiKagoMositateTourokuHandler {
 
     private void set給付実績明細データ(KaigoKyufuhiKagoMositateTourokuResult 給付実績情報) {
         div.getTxtMeisaiJigyoshaNo().setValue(給付実績情報.get事業所番号());
-        div.getTxtMeisaiJigyoshaName().setValue(給付実績情報.get事業所番号());
+        div.getTxtMeisaiJigyoshaName().setValue(給付実績情報.get事業者名());
         div.getTxtMeisaiMoshitateshaKubun().setValue(KagoMoshitate_MoshitateshaKubun.保険者申立.get名称());
         div.getTxtMeisaiShokisaiHokenshaNo().setValue(給付実績情報.get証記載保険者番号());
         if (!RString.isNullOrEmpty(給付実績情報.getサービス提供年月())) {
@@ -165,11 +165,11 @@ public class KaigoKyufuhiKagoMositateTourokuHandler {
         List<KeyValueDataSource> 申立理由DateSource = new ArrayList<>();
         CodeShubetsu コード種別 = CodeShubetsu.EMPTY;
         if (給付区分_1.equals(給付区分)) {
-            コード種別 = DBCCodeShubetsu.過誤申立事由_上２桁_様式番号.getコード();
+            コード種別 = DBCCodeShubetsu.過誤申立事由コード_下２桁_申立理由.getコード();
         } else if (給付区分_2.equals(給付区分)) {
-            コード種別 = DBCCodeShubetsu.総合事業_経過措置_過誤申立事由_様式_.getコード();
+            コード種別 = DBCCodeShubetsu.総合事業_経過措置_過誤申立理由_理由.getコード();
         } else if (給付区分_3.equals(給付区分)) {
-            コード種別 = DBCCodeShubetsu.総合事業過誤申立事由_様式.getコード();
+            コード種別 = DBCCodeShubetsu.総合事業過誤申立事由_理由.getコード();
         }
         List<UzT0007CodeEntity> codeList = CodeMaster.getCode(SubGyomuCode.DBC介護給付, コード種別, FlexibleDate.getNowDate());
         for (UzT0007CodeEntity entity : codeList) {
@@ -180,7 +180,7 @@ public class KaigoKyufuhiKagoMositateTourokuHandler {
             申立理由DateSource.add(new KeyValueDataSource(entity.getコード().value(), 申立理由.toRString()));
         }
         div.getDdlMeisaiKagoMoshitateRiyu().setDataSource(申立理由DateSource);
-        div.getDdlMeisaiKagoMoshitateRiyu().setIsBlankLine(true);
+        div.getDdlMeisaiKagoMoshitateRiyu().setSelectedIndex(0);
     }
 
     /**
@@ -239,7 +239,7 @@ public class KaigoKyufuhiKagoMositateTourokuHandler {
         IUrControlData controlData = UrControlDataFactory.createInstance();
         RString menuID = controlData.getMenuID();
         if (MENUID_DBCMN91001.equals(menuID)) {
-            申立書区分コード = KagoMoshitate_MoshitateshoKubun.総合事業申立書_経過.getコード();
+            申立書区分コード = KagoMoshitate_MoshitateshoKubun.過誤申立書.getコード();
         } else if (MENUID_DBCMN91002.equals(menuID)) {
             申立書区分コード = KagoMoshitate_MoshitateshoKubun.総合事業申立書_経過.getコード();
         } else if (MENUID_DBCMN91003.equals(menuID)) {

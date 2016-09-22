@@ -171,7 +171,6 @@ public class HanyoListTokubetsuChiikiKasanGemmenProcess extends BatchProcessBase
     private Association association;
     private HokenshaList hokenshaList;
     private List<PersonalData> personalDataList;
-    private int i = 0;
 
     @Override
     protected void initialize() {

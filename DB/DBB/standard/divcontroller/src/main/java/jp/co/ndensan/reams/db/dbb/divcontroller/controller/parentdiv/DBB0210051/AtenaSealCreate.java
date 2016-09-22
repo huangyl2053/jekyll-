@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 /**
  * 画面設計_DBB0210051_宛名シール作成（介護賦課）のクラスです。
  *
- * @reamsid_L DBC-5660-010 wangxingpeng
+ * @reamsid_L DBB-5660-010 wangxingpeng
  */
 public class AtenaSealCreate {
 

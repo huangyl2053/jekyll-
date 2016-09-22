@@ -70,27 +70,34 @@
         <result property="is老齢福祉年金受給者" column="is老齢福祉年金受給者"  typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
         <result property="is所得税課税者" column="is所得税課税者"  typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
         <result property="is生活保護受給者" column="is生活保護受給者"  typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+        <result property="要介護認定申請情報_厚労省IF識別コード" column="要介護認定申請情報_厚労省IF識別コード"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="要介護認定申請情報_2号特定疾病コード" column="要介護認定申請情報_2号特定疾病コード"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="受給者台帳Newest_旧措置者フラグ" column="受給者台帳Newest_旧措置者フラグ"  typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
+        <association property="総合事業対象者情報Entity" resultMap="resultMap_総合事業対象者情報"/>
+        <association property="認定情報Entity" resultMap="resultMap_認定情報"/>
+        <association property="訪問介護利用者負担額減額" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4016HomonKaigoRiyoshaFutangakuGengakuMapper.ResultMap_DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity"/>
+        <association property="減免減額申請" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.ResultMap_DbT4010GemmenGengakuShinseiEntity"/>
+        <association property="psmEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+        <collection property="世帯員リスト" resultMap="resultMap_setaiinshotokujoho"/>
+    </resultMap>
+    <resultMap id="resultMap_総合事業対象者情報"  type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00003.SougouJigyouTaisyoSyaEntity" autoMapping="true">
+        <result property="総合事業対象者情報_被保険者番号" column="総合事業対象者情報_被保険者番号"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="総合事業対象者情報_チェックリスト実施日" column="総合事業対象者情報_チェックリスト実施日"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="総合事業対象者情報_適用開始年月日" column="総合事業対象者情報_適用開始年月日"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="総合事業対象者情報_適用終了年月日" column="総合事業対象者情報_適用終了年月日"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+    </resultMap>
+    <resultMap id="resultMap_認定情報"  type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00003.NinnteiJohoEntity" autoMapping="true">
         <result property="認定情報_被保険者番号" column="認定情報_被保険者番号"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="認定情報_要介護状態区分コード" column="認定情報_要介護状態区分コード"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="認定情報_認定年月日" column="認定情報_認定年月日"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="認定情報_認定有効期間開始年月日" column="認定情報_認定有効期間開始年月日"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="認定情報_認定有効期間終了年月日" column="認定情報_認定有効期間終了年月日"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="要介護認定申請情報_厚労省IF識別コード" column="要介護認定申請情報_厚労省IF識別コード"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="要介護認定申請情報_2号特定疾病コード" column="要介護認定申請情報_2号特定疾病コード"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="受給者台帳Newest_旧措置者フラグ" column="受給者台帳Newest_旧措置者フラグ"  typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
-        <result property="総合事業対象者情報_被保険者番号" column="総合事業対象者情報_被保険者番号"  typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <result property="総合事業対象者情報_チェックリスト実施日" column="総合事業対象者情報_チェックリスト実施日"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="総合事業対象者情報_適用開始年月日" column="総合事業対象者情報_適用開始年月日"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="総合事業対象者情報_適用終了年月日" column="総合事業対象者情報_適用終了年月日"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <association property="訪問介護利用者負担額減額" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4016HomonKaigoRiyoshaFutangakuGengakuMapper.ResultMap_DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity"/>
-        <association property="減免減額申請" resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT4010GemmenGengakuShinseiMapper.ResultMap_DbT4010GemmenGengakuShinseiEntity"/>
-        <collection property="世帯員情報" resultMap="resultMap_setaiinshotokujoho"/>
     </resultMap>
     <resultMap id="resultMap_setaiinshotokujoho"  type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00003.SetaiInRisutoEntity" autoMapping="true">
         <result property="識別コード" column="shikibetsuCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="課税区分" column="kazeiKubun"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="課税所得額" column="kazeiShotokuGaku"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
-        <association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>    
+        <association property="世帯員宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>    
         
     </resultMap>
     <select resultOrdered="true" id="get訪問介護利用者負担額減額認定者リスト"
@@ -104,20 +111,13 @@
             A.is所得税課税者 AS is所得税課税者,
             A.is生活保護受給者 AS is生活保護受給者,
             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>,
-            認定情報."hihokenshaNo" AS 認定情報_被保険者番号,
-            認定情報."yokaigoJotaiKubunCode" AS 認定情報_要介護状態区分コード,
-            認定情報."ninteiYMD" AS 認定情報_認定年月日,
-            認定情報."ninteiYukoKikanKaishiYMD" AS 認定情報_認定有効期間開始年月日,
-            認定情報."ninteiYukoKikanShuryoYMD" AS 認定情報_認定有効期間終了年月日,
+            認定情報.*,
             要介護認定申請情報."koroshoIfShikibetsuCode" AS 要介護認定申請情報_厚労省IF識別コード,
             要介護認定申請情報."nigoTokuteiShippeiCode" AS 要介護認定申請情報_2号特定疾病コード,
             受給者台帳Newest."kyuSochishaFlag" AS 受給者台帳Newest_旧措置者フラグ,
             訪問介護利用者負担額減額.*,
             減免減額申請.*,
-            総合事業対象者情報."hihokenshaNo" AS 総合事業対象者情報_被保険者番号,
-            総合事業対象者情報."checklistJisshiYMD" AS 総合事業対象者情報_チェックリスト実施日,
-            総合事業対象者情報."tekiyoKaishiYMD" AS 総合事業対象者情報_適用開始年月日,
-            総合事業対象者情報."tekiyoShuryoYMD" AS 総合事業対象者情報_適用終了年月日,
+            総合事業対象者情報.*,
             世帯員情報.*
         FROM
             "taishoShaHanteiYoukonkyoItokiTemp" A
@@ -127,11 +127,11 @@
         <!--受給認定の情報を取得-->
         LEFT JOIN (
                     SELECT
-                        有効受給認定結果."hihokenshaNo",
-                        有効受給認定結果."yokaigoJotaiKubunCode",
-                        有効受給認定結果."ninteiYMD",
-                        有効受給認定結果."ninteiYukoKikanKaishiYMD",
-                        有効受給認定結果."ninteiYukoKikanShuryoYMD"
+                        有効受給認定結果."hihokenshaNo"  AS 認定情報_被保険者番号,
+                        有効受給認定結果."yokaigoJotaiKubunCode" AS 認定情報_要介護状態区分コード,
+                        有効受給認定結果."ninteiYMD"  AS 認定情報_認定年月日,
+                        有効受給認定結果."ninteiYukoKikanKaishiYMD" AS 認定情報_認定有効期間開始年月日,
+                        有効受給認定結果."ninteiYukoKikanShuryoYMD" AS 認定情報_認定有効期間終了年月日
                     FROM (
                         SELECT
                         *,
@@ -147,10 +147,10 @@
                     WHERE
                     有効受給認定結果.受給者台帳_番号 = 1
                 ) AS 認定情報
-        ON 認定情報."hihokenshaNo" = A."被保険者番号"
+        ON 認定情報."認定情報_被保険者番号" = A."被保険者番号"
         LEFT JOIN
                 rgdb."DbT4101NinteiShinseiJoho" AS 要介護認定申請情報
-                ON 認定情報."hihokenshaNo"  = 要介護認定申請情報."hihokenshaNo"
+                ON 認定情報."認定情報_被保険者番号"  = 要介護認定申請情報."hihokenshaNo"
         <!--旧措置者かどうかの判断のため、最新の受給者台帳を取得-->
         LEFT JOIN
                 rgdb."DbV4001JukyushaDaicho" AS 受給者台帳Newest
@@ -186,17 +186,17 @@
             <!-- 総合事業対象者の情報を取得-->
             LEFT JOIN  (
                         SELECT
-                            総合事業対象者."hihokenshaNo",
-                            総合事業対象者."checklistJisshiYMD",
-                            総合事業対象者."tekiyoKaishiYMD",
-                            総合事業対象者."tekiyoShuryoYMD"
+                            総合事業対象者."hihokenshaNo" AS 総合事業対象者情報_被保険者番号,
+                            総合事業対象者."checklistJisshiYMD" AS 総合事業対象者情報_チェックリスト実施日,
+                            総合事業対象者."tekiyoKaishiYMD" AS 総合事業対象者情報_適用開始年月日,
+                            総合事業対象者."tekiyoShuryoYMD" AS 総合事業対象者情報_適用終了年月日
                         FROM
                             rgdb."DbT3105SogoJigyoTaishosha" AS 総合事業対象者
                         WHERE
                             総合事業対象者."tekiyoKaishiYMD" <![CDATA[<=]]> #{課税判定等基準日}
                             AND #{課税判定等基準日} <![CDATA[<=]]> 総合事業対象者."tekiyoShuryoYMD"
                     ) AS 総合事業対象者情報
-                        ON A."被保険者番号" = 総合事業対象者情報."hihokenshaNo"
+                        ON A."被保険者番号" = 総合事業対象者情報."総合事業対象者情報_被保険者番号"
                     WHERE
                         (減免減額申請."gemmenGengakuShurui" = #{減免減額種類_訪問介護利用者負担額減額}
                         OR 減免減額申請."gemmenGengakuShurui" IS NULL )

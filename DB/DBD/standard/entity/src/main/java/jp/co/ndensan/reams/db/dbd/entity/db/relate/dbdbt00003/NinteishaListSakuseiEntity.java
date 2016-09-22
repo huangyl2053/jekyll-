@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4010GemmenGengakuShinseiEnt
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -29,20 +28,13 @@ public class NinteishaListSakuseiEntity {
     private boolean is所得税課税者;
     private boolean is生活保護受給者;
     private UaFt200FindShikibetsuTaishoEntity psmEntity;
-    private HihokenshaNo 認定情報_被保険者番号;
-    private RString 認定情報_要介護状態区分コード;
-    private FlexibleDate 認定情報_認定年月日;
-    private FlexibleDate 認定情報_認定有効期間開始年月日;
-    private FlexibleDate 認定情報_認定有効期間終了年月日;
     private RString 要介護認定申請情報_厚労省IF識別コード;
     private RString 要介護認定申請情報_2号特定疾病コード;
     private boolean 受給者台帳Newest_旧措置者フラグ;
     private DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity 訪問介護利用者負担額減額;
     private DbT4010GemmenGengakuShinseiEntity 減免減額申請;
-    private HihokenshaNo 総合事業対象者情報_被保険者番号;
-    private FlexibleDate 総合事業対象者情報_チェックリスト実施日;
-    private FlexibleDate 総合事業対象者情報_適用開始年月日;
-    private FlexibleDate 総合事業対象者情報_適用終了年月日;
     private List<SetaiInRisutoEntity> 世帯員リスト;
+    private SougouJigyouTaisyoSyaEntity 総合事業対象者情報Entity;
+    private NinnteiJohoEntity 認定情報Entity;
 
 }

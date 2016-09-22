@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.futanwariaihanteiichiran
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.futanwariaihanteiichiran.FutanWariaiHanteiIchiranProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.futanwariaihanteiichiran.KonkaiFutanWariaiIchiranTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.futanwariaihanteiichiran.MaeFutanWariaiHanteiIchiranTempProcess;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc180020.DBC180020_IdoRiyoshaFutanwariaiHanteiParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180020.DBC180020_IdoRiyoshaFutanwariaiHanteiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.futanwariaihanteiichiran.FutanWariaiHanteiIchiranProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;

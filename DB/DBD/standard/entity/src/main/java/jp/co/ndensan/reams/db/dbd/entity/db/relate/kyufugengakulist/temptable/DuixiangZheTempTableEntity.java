@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.annotation.TempTableColumnOrder;
 /**
  * 対象者情報一時テーブル
  *
- * @author x_miaocl
+ * @reamsid_L DBD-3610-050 x_miaocl
  */
 @lombok.Getter
 @lombok.Setter

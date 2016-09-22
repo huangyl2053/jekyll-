@@ -22,9 +22,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- * 画面設計_DBCMNJ1002_受給者給付実績一覧表発行.xlsx のDivControllerクラスです。
+ * 受給者給付実績一覧表発行 のDivControllerクラスです。
  *
- * @author DBC-3070-010 dangjingjing
+ * @reamsid_L DBC-3070-010 dangjingjing
  */
 public class JukyushaKyufuJissekiDaicho {
 
@@ -42,7 +42,7 @@ public class JukyushaKyufuJissekiDaicho {
      * 画面初期化のメソッドます。
      *
      * @param div JukyushaKyufuJissekiDaichoDiv
-     * @return ResponseData
+     * @return ResponseData<JukyushaKyufuJissekiDaichoDiv>
      */
     public ResponseData<JukyushaKyufuJissekiDaichoDiv> onLond(JukyushaKyufuJissekiDaichoDiv div) {
         RString 被保険者番号_FromOrTO = ViewStateHolder.get(ViewStateKeys.番号, RString.class);
@@ -94,7 +94,7 @@ public class JukyushaKyufuJissekiDaicho {
      * 出力様式ボタンのメソッドます。
      *
      * @param div JukyushaKyufuJissekiDaichoDiv
-     * @return ResponseData
+     * @return ResponseData<JukyushaKyufuJissekiDaichoDiv>
      */
     public ResponseData<JukyushaKyufuJissekiDaichoDiv> onClick_btnShutsuryokuYoshikiAllCheck(JukyushaKyufuJissekiDaichoDiv div) {
         getHandler(div).set出力様式ボタン();
@@ -105,7 +105,7 @@ public class JukyushaKyufuJissekiDaicho {
      * 「被保険者番号 開始検索ボタン」のメソッドます。
      *
      * @param div JukyushaKyufuJissekiDaichoDiv
-     * @return ResponseData
+     * @return ResponseData<JukyushaKyufuJissekiDaichoDiv>
      */
     public ResponseData<JukyushaKyufuJissekiDaichoDiv> onClick_btnHihokenshaNoFromSearch(JukyushaKyufuJissekiDaichoDiv div) {
         ViewStateHolder.put(ViewStateKeys.番号, 遷移1);
@@ -129,7 +129,7 @@ public class JukyushaKyufuJissekiDaicho {
      * 「被保険者番号 終了検索ボタン」のメソッドます。
      *
      * @param div JukyushaKyufuJissekiDaichoDiv
-     * @return ResponseData
+     * @return ResponseData<JukyushaKyufuJissekiDaichoDiv>
      */
     public ResponseData<JukyushaKyufuJissekiDaichoDiv> onClick_btnHihokenshaNoToSearch(JukyushaKyufuJissekiDaichoDiv div) {
         ViewStateHolder.put(ViewStateKeys.番号, 遷移2);
@@ -150,71 +150,67 @@ public class JukyushaKyufuJissekiDaicho {
     }
 
     /**
-     * 「事業者番号開始検索」ボタン。
+     * 「事業者番号開始検索」のメソッドます。
      *
      * @param div JukyushaKyufuJissekiDaichoDiv
-     * @return ResponseData
+     * @return ResponseData<JukyushaKyufuJissekiDaichoDiv>
      */
     public ResponseData<JukyushaKyufuJissekiDaichoDiv> onClick_btnJigyoshaNoFrom_onBeforeOpen(JukyushaKyufuJissekiDaichoDiv div) {
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 「事業者番号開始検索」ボタン。
+     * 「事業者番号開始検索」のメソッドます。
      *
      * @param div JukyushaKyufuJissekiDaichoDiv
-     * @return ResponseData
+     * @return ResponseData<JukyushaKyufuJissekiDaichoDiv>
      */
     public ResponseData<JukyushaKyufuJissekiDaichoDiv> onClick_btnJigyoshaNoFrom_onOkClose(JukyushaKyufuJissekiDaichoDiv div) {
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 「事業者番号終了検索」ボタン。
+     * 「事業者番号終了検索」のメソッドます。
      *
      * @param div JukyushaKyufuJissekiDaichoDiv
-     * @return ResponseData
+     * @return ResponseData<JukyushaKyufuJissekiDaichoDiv>
      */
     public ResponseData<JukyushaKyufuJissekiDaichoDiv> onClick_btnJigyoshaNoTo_onBeforeOpen(JukyushaKyufuJissekiDaichoDiv div) {
-
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 「事業者番号終了検索」ボタン。
+     * 「事業者番号終了検索」のメソッドます。
      *
      * @param div JukyushaKyufuJissekiDaichoDiv
-     * @return ResponseData
+     * @return ResponseData<JukyushaKyufuJissekiDaichoDiv>
      */
     public ResponseData<JukyushaKyufuJissekiDaichoDiv> onClick_btnJigyoshaNoTo_onOkClose(JukyushaKyufuJissekiDaichoDiv div) {
-
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 「計画作成事業者番号」ボタン
+     * 「計画作成事業者番号」のメソッドます。
      *
      * @param div JukyushaKyufuJissekiDaichoDiv
-     * @return ResponseData
+     * @return ResponseData<JukyushaKyufuJissekiDaichoDiv>
      */
     public ResponseData<JukyushaKyufuJissekiDaichoDiv> onClick_btnKeikakuSakuseiJigyoshoNo_onBeforeOpen(JukyushaKyufuJissekiDaichoDiv div) {
-
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 「計画作成事業者番号」ボタン
+     * 「計画作成事業者番号」のメソッドます。
      *
      * @param div JukyushaKyufuJissekiDaichoDiv
-     * @return ResponseData
+     * @return ResponseData<JukyushaKyufuJissekiDaichoDiv>
      */
     public ResponseData<JukyushaKyufuJissekiDaichoDiv> onClick_btnKeikakuSakuseiJigyoshoNo_onOkClose(JukyushaKyufuJissekiDaichoDiv div) {
-
         return ResponseData.of(div).respond();
     }
 
     /**
-     * 「実行する」（台帳用）「実行する」（一覧表用）
+     * 「実行する」（台帳用）「実行する」（一覧表用）のメソッドます。
      *
      * @param div JukyushaKyufuJissekiDaichoDiv
      * @return ResponseData<DBC140020_JukyushaKyufujissekiIchiranParameter>
@@ -227,7 +223,7 @@ public class JukyushaKyufuJissekiDaicho {
      * 「老人保健市町村番号有無」ボタン のメソッドます。
      *
      * @param div JukyushaKyufuJissekiDaichoDiv
-     * @return ResponseData
+     * @return ResponseData<JukyushaKyufuJissekiDaichoDiv>
      */
     public ResponseData<JukyushaKyufuJissekiDaichoDiv> onChange_radRojinHokenShikuchosonNoUmu(JukyushaKyufuJissekiDaichoDiv div) {
         RString 老人保健市町村番号有無 = div.getTabChushutsuJoken().getRadRojinHokenShikuchosonNoUmu().getSelectedValue();
@@ -248,7 +244,7 @@ public class JukyushaKyufuJissekiDaicho {
      * 「老人保健受給者番号有無」ボタン のメソッドます。
      *
      * @param div JukyushaKyufuJissekiDaichoDiv
-     * @return ResponseData
+     * @return ResponseData<JukyushaKyufuJissekiDaichoDiv>
      */
     public ResponseData<JukyushaKyufuJissekiDaichoDiv> onChange_radRojinHokenJukyushaNoUmu(JukyushaKyufuJissekiDaichoDiv div) {
         RString 老人保健受給者番号有無 = div.getTabChushutsuJoken().getRadRojinHokenJukyushaNoUmu().getSelectedValue();

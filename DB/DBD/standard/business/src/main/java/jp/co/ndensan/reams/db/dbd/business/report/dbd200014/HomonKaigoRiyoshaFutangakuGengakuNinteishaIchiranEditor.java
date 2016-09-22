@@ -48,8 +48,8 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
     private static final int LISTINDEX_3 = 3;
     private static final int LISTINDEX_4 = 4;
     private static final RString 作成 = new RString("作成");
-    private static final RString ZERO = new RString("0");
     private static final RString ONE = new RString("1");
+    private static final RString TWO = new RString("2");
     private static final RString 星 = new RString("＊");
     private static final RString 課 = new RString("課");
     private static final RString 承認 = new RString("承認");
@@ -101,10 +101,10 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
                 .append(作成日時.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒))
                 .append(RString.FULL_SPACE)
                 .append(作成).toRString();
-        if (null != 対象リスト && 対象リスト.getコード().equals(ZERO)) {
+        if (null != this.対象リスト && this.対象リスト.getコード().equals(ONE)) {
             source.title = 認定者リスト;
         }
-        if (null != 対象リスト && 対象リスト.getコード().equals(ONE)) {
+        if (null != this.対象リスト && this.対象リスト.getコード().equals(TWO)) {
             source.title = 該当者リスト;
         }
         if (null != this.導入団体.get地方公共団体コード()) {
@@ -124,9 +124,15 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
         if (null != this.訪問介護利用者負担額減額認定者Entity.getPsmEntity()) {
             UaFt200FindShikibetsuTaishoEntity 宛名 = this.訪問介護利用者負担額減額認定者Entity.getPsmEntity();
             IKojin 宛名1 = ShikibetsuTaishoFactory.createKojin(宛名);
-            source.listUpper_2 = 宛名1.get住所().get郵便番号().getYubinNo();
-            source.listUpper_3 = 宛名1.get名称().getName().value();
-            source.listUpper_4 = 宛名1.get年齢算出().get年齢();
+            if (null != 宛名1.get住所() && null != 宛名1.get住所().get郵便番号()) {
+                source.listUpper_2 = 宛名1.get住所().get郵便番号().getYubinNo();
+            }
+            if (null != 宛名1.get名称()) {
+                source.listUpper_3 = 宛名1.get名称().getName().value();
+            }
+            if (null != 宛名1.get年齢算出() && null != 宛名1.get年齢算出().get年齢()) {
+                source.listUpper_4 = 宛名1.get年齢算出().get年齢();
+            }
         }
         if (null != this.訪問介護利用者負担額減額認定者Entity.get訪問介護利用者負担額減額()) {
             DbT4016HomonKaigoRiyoshaFutangakuGengakuEntity 訪問介護利用者負担額減額
@@ -144,7 +150,7 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
         if (this.訪問介護利用者負担額減額認定者Entity.is老齢福祉年金受給者()) {
             source.listUpper_7 = 星;
         }
-        if (this.訪問介護利用者負担額減額認定者Entity.get本人課税区分().equals(KazeiKubun.課税.getコード())) {
+        if (KazeiKubun.課税.getコード().equals(this.訪問介護利用者負担額減額認定者Entity.get本人課税区分())) {
             source.listUpper_8 = 課;
         }
         if (this.訪問介護利用者負担額減額認定者Entity.is所得税課税者()) {
@@ -154,10 +160,12 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
             source.listUpper_10 = 星;
         }
         source.listUpper_11 = get要介護度();
-        if (this.訪問介護利用者負担額減額認定者Entity.get認定情報_認定年月日() != null) {
-            source.listUpper_12 = this.訪問介護利用者負担額減額認定者Entity.get認定情報_認定年月日().
-                    wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        if (this.訪問介護利用者負担額減額認定者Entity.get認定情報Entity() != null) {
+            if (this.訪問介護利用者負担額減額認定者Entity.get認定情報Entity().get認定情報_認定年月日() != null) {
+                source.listUpper_12 = this.訪問介護利用者負担額減額認定者Entity.get認定情報Entity().get認定情報_認定年月日().
+                        wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).
+                        separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+            }
         }
     }
 
@@ -226,10 +234,12 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
         if (this.訪問介護利用者負担額減額認定者Entity.is受給者台帳Newest_旧措置者フラグ()) {
             source.listCenter_9 = 星;
         }
-        if (null != this.訪問介護利用者負担額減額認定者Entity.get認定情報_認定有効期間開始年月日()) {
-            source.listCenter_10 = this.訪問介護利用者負担額減額認定者Entity.get認定情報_認定有効期間開始年月日().
-                    wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        if (this.訪問介護利用者負担額減額認定者Entity.get認定情報Entity() != null) {
+            if (this.訪問介護利用者負担額減額認定者Entity.get認定情報Entity().get認定情報_認定有効期間開始年月日() != null) {
+                source.listCenter_10 = this.訪問介護利用者負担額減額認定者Entity.get認定情報Entity().get認定情報_認定有効期間開始年月日().
+                        wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).
+                        separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+            }
         }
     }
 
@@ -291,12 +301,13 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
             source.listLower_7 = this.訪問介護利用者負担額減額認定者Entity.get要介護認定申請情報_2号特定疾病コード();
         }
         source.listLower_8 = RString.EMPTY;
-        if (null != this.訪問介護利用者負担額減額認定者Entity.get認定情報_認定有効期間終了年月日()) {
-            source.listLower_9 = this.訪問介護利用者負担額減額認定者Entity.get認定情報_認定有効期間終了年月日().
-                    wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        if (訪問介護利用者負担額減額認定者Entity.get認定情報Entity() != null) {
+            if (null != this.訪問介護利用者負担額減額認定者Entity.get認定情報Entity().get認定情報_認定有効期間終了年月日()) {
+                source.listLower_9 = this.訪問介護利用者負担額減額認定者Entity.get認定情報Entity().get認定情報_認定有効期間終了年月日().
+                        wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).
+                        separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+            }
         }
-
     }
 
     private void edit被保険者情報Lower2(HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource source) {
@@ -326,12 +337,15 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
     }
 
     private RString get要介護度() {
-        if (null != this.訪問介護利用者負担額減額認定者Entity.get認定情報_要介護状態区分コード()
-                && null != this.訪問介護利用者負担額減額認定者Entity.get要介護認定申請情報_厚労省IF識別コード()) {
-            RString 要介護状態区分コード = 訪問介護利用者負担額減額認定者Entity.get認定情報_要介護状態区分コード();
-            KoroshoInterfaceShikibetsuCode 厚労省IF識別コード = KoroshoInterfaceShikibetsuCode.
-                    toValue(訪問介護利用者負担額減額認定者Entity.get要介護認定申請情報_厚労省IF識別コード());
-            return YokaigoJotaiKubunSupport.toValue(厚労省IF識別コード, 要介護状態区分コード).getName();
+
+        if (this.訪問介護利用者負担額減額認定者Entity.get認定情報Entity() != null) {
+            if (null != this.訪問介護利用者負担額減額認定者Entity.get認定情報Entity().get認定情報_要介護状態区分コード()
+                    && null != this.訪問介護利用者負担額減額認定者Entity.get要介護認定申請情報_厚労省IF識別コード()) {
+                RString 要介護状態区分コード = 訪問介護利用者負担額減額認定者Entity.get認定情報Entity().get認定情報_要介護状態区分コード();
+                KoroshoInterfaceShikibetsuCode 厚労省IF識別コード = KoroshoInterfaceShikibetsuCode.
+                        toValue(訪問介護利用者負担額減額認定者Entity.get要介護認定申請情報_厚労省IF識別コード());
+                return YokaigoJotaiKubunSupport.toValue(厚労省IF識別コード, 要介護状態区分コード).getName();
+            }
         }
         return RString.EMPTY;
 
@@ -348,7 +362,7 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
                 source.listUpper_14 = 世帯員宛名1.get住民状態().住民状態略称();
             }
         }
-        if (世帯員情報.get課税区分().equals(KazeiKubun.課税.getコード())) {
+        if (KazeiKubun.課税.getコード().equals(世帯員情報.get課税区分())) {
             source.listUpper_15 = 課;
         }
         if (世帯員情報.get課税所得額() != null && 世帯員情報.get課税所得額().compareTo(Decimal.ZERO) > 0) {
@@ -367,7 +381,7 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
                 source.listCenter_12 = 世帯員宛名1.get住民状態().住民状態略称();
             }
         }
-        if (世帯員情報.get課税区分().equals(KazeiKubun.課税.getコード())) {
+        if (KazeiKubun.課税.getコード().equals(世帯員情報.get課税区分())) {
             source.listCenter_13 = 課;
         }
         if (世帯員情報.get課税所得額() != null && 世帯員情報.get課税所得額().compareTo(Decimal.ZERO) > 0) {
@@ -386,7 +400,7 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
                 source.listLower_11 = 世帯員宛名1.get住民状態().住民状態略称();
             }
         }
-        if (世帯員情報.get課税区分().equals(KazeiKubun.課税.getコード())) {
+        if (KazeiKubun.課税.getコード().equals(世帯員情報.get課税区分())) {
             source.listLower_12 = 課;
         }
         if (世帯員情報.get課税所得額() != null && 世帯員情報.get課税所得額().compareTo(Decimal.ZERO) > 0) {
@@ -472,10 +486,10 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
     private HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource get決定区分(
             HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource source, RString ketteiKubun) {
         if (null != ketteiKubun) {
-            if (ketteiKubun.equals(KetteiKubun.承認する.getコード())) {
+            if (KetteiKubun.承認する.getコード().equals(ketteiKubun)) {
                 source.listLower_5 = 承認;
             }
-            if (ketteiKubun.equals(KetteiKubun.承認しない.getコード())) {
+            if (KetteiKubun.承認しない.getコード().equals(ketteiKubun)) {
                 source.listLower_5 = 却下;
             }
         }

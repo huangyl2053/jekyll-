@@ -170,7 +170,6 @@ public class FutanWariaisho {
                     ReportIdDBC.DBC100065.getReportId());
             EditedKojin 編集後個人 = null;
             if (kojinList != null && !kojinList.isEmpty()) {
-                //TODO QA#1173
                 編集後個人 = new EditedKojin(kojinList.get(ZERO_INDEX), 帳票共通情報, 地方公共団体);
             }
             HokenshaNo 保険者コード取得 = getHokenshaCode(被保険者番号);

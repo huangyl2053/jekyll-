@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD104010;
 
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
@@ -18,19 +17,21 @@ import lombok.Setter;
 
 /**
  * 受給者減免実施状況のバッチパラメタークラスです。//TODO このクラスを使用しないて下さい、これは一時のものです。
+ *
  * @reamsid_L　DBD-3770-030 x_liuwei
  */
 @Getter
 @Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class DBD104010_JukyushaGemmenJisshiJokyoParameter extends BatchParameterBase{
+public class DBD104010_JukyushaGemmenJisshiJokyoParameter extends BatchParameterBase {
+
     private static final String OUTPUTBILL = "outputBill";
     private static final String TARGETYEAR = "targetYear";
     private static final String BASEDAYDIFF = "baseDayDiff";
     private static final String BASEDAY = "baseDay";
     private static final String ADRESSABSTRACTCONDITION = "adressAbstractCondition";
     private static final String REPORTID = "reportId";
-    
+
     private static final String PSMCHUSHUTSU_KUBUN = "psmChushutsu_Kubun";
     private static final String PSMCHUSHUTSUAGE_START = "psmChushutsuAge_Start";
     private static final String PSMCHUSHUTSUAGE_END = "psmChushutsuAge_End";
@@ -60,7 +61,7 @@ public class DBD104010_JukyushaGemmenJisshiJokyoParameter extends BatchParameter
     private static final String PSMCHIKU2_TO_NAME = "psmChiku2_To_Name";
     private static final String PSMCHIKU3_FROM_NAME = "psmChiku3_From_Name";
     private static final String PSMCHIKU3_TO_NAME = "psmChiku3_To_Name";
-    
+
     @BatchParameter(key = OUTPUTBILL, name = "出力帳票")
     private RString 出力帳票;
     @BatchParameter(key = TARGETYEAR, name = "対象年度")
@@ -71,7 +72,7 @@ public class DBD104010_JukyushaGemmenJisshiJokyoParameter extends BatchParameter
     private RString 基準日;
     @BatchParameter(key = REPORTID, name = "帳票ID")
     private ReportId 帳票ID;
-    
+
     @BatchParameter(key = PSMCHUSHUTSU_KUBUN, name = "年齢層抽出方法")
     private RString psmChushutsu_Kubun;
     @BatchParameter(key = PSMCHUSHUTSUAGE_START, name = "宛名抽出年齢開始")

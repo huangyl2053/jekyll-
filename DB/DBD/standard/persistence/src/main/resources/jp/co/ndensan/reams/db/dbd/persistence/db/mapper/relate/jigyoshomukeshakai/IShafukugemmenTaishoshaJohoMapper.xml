@@ -11,7 +11,7 @@ and open the template in the editor.-->
     <select
         resultOrdered="true"
         id="get社福減免対象者情報"
-        parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd206010.DBD206010MybatisParameter"
+        parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd206010.DBD206010TyohyoMybatisParameter"
         resultMap="ResultMap_ShafukugemmenTaishoshaJohoEntity" fetchSize="500">
         SELECT
         A."jigyoshaNo",
@@ -50,7 +50,7 @@ and open the template in the editor.-->
     </select>
     <resultMap id="ResultMap_ShafukugemmenTaishoshaJohoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd206010.ShafukugemmenTaishoshaJohoEntity" autoMapping="true">
         <result property="事業所番号" column="jigyoshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="事業者名称" column="jigyoshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="事業者名称" column="jigyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="郵便番号" column="yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="事業者住所" column="jigyoshaAddress" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler" />
         <result property="電話番号" column="telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />

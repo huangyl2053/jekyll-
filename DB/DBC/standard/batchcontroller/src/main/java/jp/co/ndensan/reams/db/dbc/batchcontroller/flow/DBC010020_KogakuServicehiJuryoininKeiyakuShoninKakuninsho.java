@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc010020.KogakuServicehiJuryoininKeiyakuShoninKakuninshoProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC010020.KogakuServicehiJuryoininKeiyakuShoninKakuninshoProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC010020.DBC010020_KogakuServicehiJuryoininKeiyakuShoninKakuninshoParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;

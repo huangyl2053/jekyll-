@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc710070.HanyoListKyodoJukyushaShokanProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC710070.HanyoListKyodoJukyushaShokanProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710070.DBC710070_HanyoListKyodoJukyushaShokanParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;

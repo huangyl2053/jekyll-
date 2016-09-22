@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbu.batchcontroller.flow;
 
+import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.CreateTempJigyoHokokuHihokenshaTokeiMotoDataProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.HihokenshaDaichoBirthYMDProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.HihokenshaDaichoKekkaKakuninProcess;
 import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.JigyouHoukokuTokeiProcess;
@@ -25,7 +26,6 @@ import jp.co.ndensan.reams.db.dbu.batchcontroller.step.DBU010020.YokaigoNinteish
 import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU010020.DBU010020_JigyoHokokuGeppo_IppanParameter;
 import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.PrintControlKubun;
 import jp.co.ndensan.reams.db.dbu.definition.processprm.jigyohokokugeppoippan.JigyouHoukokuTokeiProcessParameter;
-import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokugeppoippan.JigyoHokokuHihokenshaTokeiMotoTempEntity;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -66,12 +66,11 @@ public class DBU010020_JigyoHokokuGeppo_Ippan extends BatchFlowBase<DBU010020_Ji
 
     @Override
     protected void defineFlow() {
-        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc,
+        manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
                 new EucEntityId("DBU010020"), UzUDE0831EucAccesslogFileType.Csv);
         parameter = getParameter();
         parameter.setCsvFilePath(manager.getEucOutputDirectry());
         executeStep(CREATE事業報告世帯情報TEMPテーブル);
-//        createTempTable(JigyoHokokuHihokenshaTokeiMotoTempEntity.TABLE_NAME, JigyoHokokuHihokenshaTokeiMotoTempEntity.class);
         if (PrintControlKubun.過去分の印刷.getコード().equals(parameter.getPrintControlKbn())) {
             executeStep(介護事業状況報告月報一般状況_別紙);
             executeStep(介護事業状況報告月報一般状況_様式1);
@@ -127,8 +126,7 @@ public class DBU010020_JigyoHokokuGeppo_Ippan extends BatchFlowBase<DBU010020_Ji
      */
     @Step(CREATE事業報告世帯情報TEMPテーブル)
     protected IBatchFlowCommand createTempJigyoHokokuHihokenshaTokeiMotoData() {
-        return createTempTable(JigyoHokokuHihokenshaTokeiMotoTempEntity.TABLE_NAME,
-                JigyoHokokuHihokenshaTokeiMotoTempEntity.class).define();
+        return simpleBatch(CreateTempJigyoHokokuHihokenshaTokeiMotoDataProcess.class).define();
     }
 
     /**

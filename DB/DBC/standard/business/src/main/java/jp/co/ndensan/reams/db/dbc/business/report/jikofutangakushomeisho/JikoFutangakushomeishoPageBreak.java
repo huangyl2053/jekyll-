@@ -13,9 +13,9 @@ import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 
 /**
- * 高額合算自己負担額証明書発行一覧表の改ページ処理するクラスです。
+ * 自己負担証明書作成（括）の改ページ処理するクラスです。
  *
- * @reamsid_L DBC-2680-010 xicongwang
+ * @reamsid_L DBC-2380-030 pengxingyi
  */
 public class JikoFutangakushomeishoPageBreak extends PageBreaker<GassanJikofutangakuHakkoIchiranSource> {
 

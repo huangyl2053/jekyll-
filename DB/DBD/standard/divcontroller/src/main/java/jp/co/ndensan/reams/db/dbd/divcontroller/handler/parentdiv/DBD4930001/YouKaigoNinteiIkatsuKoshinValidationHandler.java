@@ -3,13 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD4930001;
 
-import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4930001.YouKaigoNinteiIkatsuKoshinDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD4930001.YouKaigoNinteiIkatsuKoshinDivSpec;
-import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD8010002.HikazeiNenkinTaishoshaJohoValidationHandler;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
@@ -23,37 +20,40 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
 /**
  * 要介護認定一括更新のValidationHandlerです。
+ *
  * @reamsid_L DBD-2120-010 x_liuwei
  */
 public class YouKaigoNinteiIkatsuKoshinValidationHandler {
+
     private final YouKaigoNinteiIkatsuKoshinDiv div;
-    
+
     /**
      * コンストラクターです。
      *
      * @param div YouKaigoNinteiIkatsuKoshinValidationHandler
      */
-    public YouKaigoNinteiIkatsuKoshinValidationHandler(YouKaigoNinteiIkatsuKoshinDiv div){
+    public YouKaigoNinteiIkatsuKoshinValidationHandler(YouKaigoNinteiIkatsuKoshinDiv div) {
         this.div = div;
     }
-    
+
     /**
      * 認定日チェック。
+     *
      * @param pairs ValidationMessageControlPairs
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs validateFor認定日(ValidationMessageControlPairs pairs){
+    public ValidationMessageControlPairs validateFor認定日(ValidationMessageControlPairs pairs) {
+        int days = 60;
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        NoInputMessages checkMessage = new NoInputMessages(DbzErrorMessages.期間が不正_未来日付不可,div.getTxtNinteibi().getValue().toString(),RDate.getNowDate().plusDay(60).toString());
+        NoInputMessages checkMessage = new NoInputMessages(DbzErrorMessages.期間が不正_未来日付不可, div.getTxtNinteibi().getValue().toString(), RDate.getNowDate().plusDay(days).toString());
         messages.add(ValidateChain.validateStart(div).ifNot(YouKaigoNinteiIkatsuKoshinDivSpec.認定日チェック)
                 .thenAdd(checkMessage).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(checkMessage,
                 div.getTxtNinteibi()).build().check(messages));
         return pairs;
     }
-    
-    
-     private static final class NoInputMessages implements IValidationMessage {
+
+    private static final class NoInputMessages implements IValidationMessage {
 
         private final Message message;
 

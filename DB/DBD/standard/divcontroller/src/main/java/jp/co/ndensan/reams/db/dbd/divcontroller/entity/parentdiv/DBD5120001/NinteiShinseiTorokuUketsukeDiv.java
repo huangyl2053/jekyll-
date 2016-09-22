@@ -49,10 +49,10 @@ public class NinteiShinseiTorokuUketsukeDiv extends Panel {
     private ButtonDialog btnTainoJokyo;
     @JsonProperty("tabShinseishaJoho")
     private tabShinseishaJohoDiv tabShinseishaJoho;
-    @JsonProperty("ccdKaigoNinteiShikakuInfo")
-    private KaigoninteiShikakuInfoDiv ccdKaigoNinteiShikakuInfo;
     @JsonProperty("ccdKaigoNinteiAtenaInfo")
     private KaigoNinteiAtenaInfoDiv ccdKaigoNinteiAtenaInfo;
+    @JsonProperty("ccdKaigoNinteiShikakuInfo")
+    private KaigoninteiShikakuInfoDiv ccdKaigoNinteiShikakuInfo;
     @JsonProperty("hdnShinseishoKanriNo")
     private RString hdnShinseishoKanriNo;
     @JsonProperty("hdnShichosonCode")
@@ -89,6 +89,14 @@ public class NinteiShinseiTorokuUketsukeDiv extends Panel {
     private RString hdnサンプル文書;
     @JsonProperty("hdnMode")
     private RString hdnMode;
+    @JsonProperty("hdn今回履歴情報")
+    private RString hdn今回履歴情報;
+    @JsonProperty("hdn前回履歴情報")
+    private RString hdn前回履歴情報;
+    @JsonProperty("hdn表示判定キー")
+    private RString hdn表示判定キー;
+    @JsonProperty("hdnSubGyomuCd")
+    private RString hdnSubGyomuCd;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -223,21 +231,21 @@ public class NinteiShinseiTorokuUketsukeDiv extends Panel {
     }
 
     /*
-     * getccdKaigoNinteiShikakuInfo
-     * @return ccdKaigoNinteiShikakuInfo
-     */
-    @JsonProperty("ccdKaigoNinteiShikakuInfo")
-    public IKaigoninteiShikakuInfoDiv getCcdKaigoNinteiShikakuInfo() {
-        return ccdKaigoNinteiShikakuInfo;
-    }
-
-    /*
      * getccdKaigoNinteiAtenaInfo
      * @return ccdKaigoNinteiAtenaInfo
      */
     @JsonProperty("ccdKaigoNinteiAtenaInfo")
     public IKaigoNinteiAtenaInfoDiv getCcdKaigoNinteiAtenaInfo() {
         return ccdKaigoNinteiAtenaInfo;
+    }
+
+    /*
+     * getccdKaigoNinteiShikakuInfo
+     * @return ccdKaigoNinteiShikakuInfo
+     */
+    @JsonProperty("ccdKaigoNinteiShikakuInfo")
+    public IKaigoninteiShikakuInfoDiv getCcdKaigoNinteiShikakuInfo() {
+        return ccdKaigoNinteiShikakuInfo;
     }
 
     /*
@@ -565,6 +573,78 @@ public class NinteiShinseiTorokuUketsukeDiv extends Panel {
     }
 
     /*
+     * gethdn今回履歴情報
+     * @return hdn今回履歴情報
+     */
+    @JsonProperty("hdn今回履歴情報")
+    public RString getHdn今回履歴情報() {
+        return hdn今回履歴情報;
+    }
+
+    /*
+     * sethdn今回履歴情報
+     * @param hdn今回履歴情報 hdn今回履歴情報
+     */
+    @JsonProperty("hdn今回履歴情報")
+    public void setHdn今回履歴情報(RString hdn今回履歴情報) {
+        this.hdn今回履歴情報 = hdn今回履歴情報;
+    }
+
+    /*
+     * gethdn前回履歴情報
+     * @return hdn前回履歴情報
+     */
+    @JsonProperty("hdn前回履歴情報")
+    public RString getHdn前回履歴情報() {
+        return hdn前回履歴情報;
+    }
+
+    /*
+     * sethdn前回履歴情報
+     * @param hdn前回履歴情報 hdn前回履歴情報
+     */
+    @JsonProperty("hdn前回履歴情報")
+    public void setHdn前回履歴情報(RString hdn前回履歴情報) {
+        this.hdn前回履歴情報 = hdn前回履歴情報;
+    }
+
+    /*
+     * gethdn表示判定キー
+     * @return hdn表示判定キー
+     */
+    @JsonProperty("hdn表示判定キー")
+    public RString getHdn表示判定キー() {
+        return hdn表示判定キー;
+    }
+
+    /*
+     * sethdn表示判定キー
+     * @param hdn表示判定キー hdn表示判定キー
+     */
+    @JsonProperty("hdn表示判定キー")
+    public void setHdn表示判定キー(RString hdn表示判定キー) {
+        this.hdn表示判定キー = hdn表示判定キー;
+    }
+
+    /*
+     * gethdnSubGyomuCd
+     * @return hdnSubGyomuCd
+     */
+    @JsonProperty("hdnSubGyomuCd")
+    public RString getHdnSubGyomuCd() {
+        return hdnSubGyomuCd;
+    }
+
+    /*
+     * sethdnSubGyomuCd
+     * @param hdnSubGyomuCd hdnSubGyomuCd
+     */
+    @JsonProperty("hdnSubGyomuCd")
+    public void setHdnSubGyomuCd(RString hdnSubGyomuCd) {
+        this.hdnSubGyomuCd = hdnSubGyomuCd;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -638,11 +718,6 @@ public class NinteiShinseiTorokuUketsukeDiv extends Panel {
     }
 
     @JsonIgnore
-    public IZenkaiNinteiKekkaJohoDiv getCcdZenkaiNinteiKekkaJoho() {
-        return this.getTabShinseishaJoho().getTplShinseijoho().getCcdZenkaiNinteiKekkaJoho();
-    }
-
-    @JsonIgnore
     public INinteiShinseiTodokedeshaDiv getCcdShinseiTodokedesha() {
         return this.getTabShinseishaJoho().getTplShinseijoho().getCcdShinseiTodokedesha();
     }
@@ -650,6 +725,11 @@ public class NinteiShinseiTorokuUketsukeDiv extends Panel {
     @JsonIgnore
     public IShinseiSonotaJohoInputDiv getCcdShinseiSonotaJohoInput() {
         return this.getTabShinseishaJoho().getTplShinseijoho().getCcdShinseiSonotaJohoInput();
+    }
+
+    @JsonIgnore
+    public IZenkaiNinteiKekkaJohoDiv getCcdZenkaiNinteiKekkaJoho() {
+        return this.getTabShinseishaJoho().getTplShinseijoho().getCcdZenkaiNinteiKekkaJoho();
     }
 
     @JsonIgnore
