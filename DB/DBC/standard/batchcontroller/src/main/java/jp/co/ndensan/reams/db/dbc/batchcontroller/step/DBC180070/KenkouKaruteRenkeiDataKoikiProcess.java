@@ -71,13 +71,13 @@ public class KenkouKaruteRenkeiDataKoikiProcess extends BatchKeyBreakBase<KenkoK
 
     @Override
     protected void createWriter() {
-        csvWriter = new CsvWriter.InstanceBuilder(CSV_NAME).
+        csvWriter = new CsvWriter.InstanceBuilder(Path.combinePath(filePath, CSV_NAME)).
                 setEncode(Encode.UTF_8withBOM)
                 .canAppend(true)
                 .setDelimiter(EUC_WRITER_DELIMITER)
                 .setEnclosure(EUC_WRITER_ENCLOSURE)
                 .setNewLine(NewLine.CRLF)
-                .hasHeader(false).build();
+                .hasHeader(true).build();
     }
 
     @Override
