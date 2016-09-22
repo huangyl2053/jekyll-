@@ -7,7 +7,12 @@ package jp.co.ndensan.reams.db.dbc.business.report.kijunshunyugakutekiyoshinseis
 
 import jp.co.ndensan.reams.db.dbc.business.core.kijunshunyugakutekiyoshinseisho.KijunShunyugakuTekiyoShinseishoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.kijunshunyugakutekiyoshinseisho.KijunShunyugakuTekiyoShinseishoSource;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
+import jp.co.ndensan.reams.uz.uza.lang.FillType;
+import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
  * 帳票設計_DBC100064_基準収入額適用申請書 Editorクラスです。
@@ -33,23 +38,17 @@ public class KijunShunyugakuTekiyoShinseishoEditor implements IKijunShunyugakuTe
         source.shinsenSakiDaihyo = 基準収入額適用申請書Entity.get申請先();
         source.hihokenshaKanaName1 = 基準収入額適用申請書Entity.get被保険者名カナ１();
         source.hihokenshaName1 = 基準収入額適用申請書Entity.get被保険者氏名１();
-        if (基準収入額適用申請書Entity.get被保険者生年月日１() != null) {
-            source.hihokenshaBirthYMD1 = new RString(基準収入額適用申請書Entity.get被保険者生年月日１().toString());
-        }
+        source.hihokenshaBirthYMD1 = doパターン12(基準収入額適用申請書Entity.get被保険者生年月日１());
         source.hihokenshaNo1 = 基準収入額適用申請書Entity.get被保険者番号１();
         source.seibetsu1 = 基準収入額適用申請書Entity.get被保険者性別１();
         source.hihokenshaKanaName2 = 基準収入額適用申請書Entity.get被保険者名カナ２();
         source.hihokenshaName2 = 基準収入額適用申請書Entity.get被保険者氏名２();
-        if (基準収入額適用申請書Entity.get被保険者生年月日２() != null) {
-            source.hihokenshaBirthYMD2 = new RString(基準収入額適用申請書Entity.get被保険者生年月日２().toString());
-        }
+        source.hihokenshaBirthYMD2 = doパターン12(基準収入額適用申請書Entity.get被保険者生年月日２());
         source.hihokenshaNo2 = 基準収入額適用申請書Entity.get被保険者番号２();
         source.seibetsu2 = 基準収入額適用申請書Entity.get被保険者性別２();
         source.hihokenshaKanaName3 = 基準収入額適用申請書Entity.get被保険者名カナ３();
         source.hihokenshaName3 = 基準収入額適用申請書Entity.get被保険者氏名３();
-        if (基準収入額適用申請書Entity.get被保険者生年月日３() != null) {
-            source.hihokenshaBirthYMD3 = new RString(基準収入額適用申請書Entity.get被保険者生年月日３().toString());
-        }
+        source.hihokenshaBirthYMD3 = doパターン12(基準収入額適用申請書Entity.get被保険者生年月日３());
         source.hihokenshaNo3 = 基準収入額適用申請書Entity.get被保険者番号３();
         source.seibetsu3 = 基準収入額適用申請書Entity.get被保険者性別３();
         source.jusho1 = 基準収入額適用申請書Entity.get住所１();
@@ -82,6 +81,13 @@ public class KijunShunyugakuTekiyoShinseishoEditor implements IKijunShunyugakuTe
         }
 
         return source;
+    }
+
+    private RString doパターン12(FlexibleDate 年月日) {
+        if (null == 年月日) {
+            return RString.EMPTY;
+        }
+        return 年月日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
     }
 
 }

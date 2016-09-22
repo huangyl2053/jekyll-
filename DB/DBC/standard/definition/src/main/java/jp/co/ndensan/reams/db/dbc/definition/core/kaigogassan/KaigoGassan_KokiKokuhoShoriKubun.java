@@ -57,9 +57,9 @@ public enum KaigoGassan_KokiKokuhoShoriKubun {
      * @return {@code code} に対応する介護合算_後期国保処理区分
      */
     public static KaigoGassan_KokiKokuhoShoriKubun toValue(RString code) {
-        for (KaigoGassan_KokiKokuhoShoriKubun kaigogassankokikokuhoshorikubun : KaigoGassan_KokiKokuhoShoriKubun.values()) {
-            if (kaigogassankokikokuhoshorikubun.code.equals(code)) {
-                return kaigogassankokikokuhoshorikubun;
+        for (KaigoGassan_KokiKokuhoShoriKubun kokikokuho : KaigoGassan_KokiKokuhoShoriKubun.values()) {
+            if (kokikokuho.code.equals(code)) {
+                return kokikokuho;
             }
         }
         throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("介護合算_後期国保処理区分"));

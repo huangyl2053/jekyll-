@@ -92,7 +92,7 @@ public class NinteidetaikkatsukousinKoukiProcess extends BatchProcessBase<Yokaig
         }
 
         if (configValue_種類情報.equals(厚労省)) {
-            manager.set医調取込み情報厚労省(entity);
+            manager.set医調取込み情報厚労省(entity, configValue_医調取込み情報);
             dbt4101tableWriter.update(entity.get要介護認定申請情報Entity());
         } else if (configValue_種類情報.equals(電算)) {
             manager.set医調取込み情報電算(entity);

@@ -38,13 +38,6 @@ public class NinteidetaikkatsukousinTanitsuProcess extends BatchProcessBase<Nint
     private boolean state;
     private RString 今回の要介護度;
     private RString 前回の要介護度;
-    private final RString 支1 = new RString("12");
-    private final RString 支2 = new RString("13");
-    private final RString 介1 = new RString("21");
-    private final RString 介2 = new RString("22");
-    private final RString 介3 = new RString("23");
-    private final RString 介4 = new RString("24");
-    private final RString 介5 = new RString("25");
     private final RString 富士通2 = YokaigoInterfaceShurui.富士通２.getコード();
 
     @BatchWriter

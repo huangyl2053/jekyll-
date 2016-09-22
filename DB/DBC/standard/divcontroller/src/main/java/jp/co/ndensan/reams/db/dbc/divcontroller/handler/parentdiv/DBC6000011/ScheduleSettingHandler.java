@@ -279,7 +279,7 @@ public class ScheduleSettingHandler {
             for (RString 表示順_CODE : 送付表示順ソートList) {
                 識別番号 = 表示順_CODE.split(ダッシュ.toString()).get(INDEX_ONE);
                 送付交換情報識別番号 = ConfigKeysKokuhorenSofu.toValue(識別番号);
-                if (!送付交換情報識別番号.getスケジュール設定有無()) {
+                if (!送付交換情報識別番号.isスケジュール設定有無()) {
                     continue;
                 }
                 if (ConfigKeysKokuhorenSofu.償還連絡票情報.getコード().equals(識別番号) && 受託あり.equals(国保連共同処理受託区分_償還)) {
@@ -315,7 +315,7 @@ public class ScheduleSettingHandler {
                 }
                 KokuhorenInterfaceKanri entity = 送付Map.get(識別番号);
                 送付交換情報識別番号 = ConfigKeysKokuhorenSofu.toValue(識別番号);
-                if (!送付交換情報識別番号.getスケジュール設定有無()) {
+                if (!送付交換情報識別番号.isスケジュール設定有無()) {
                     continue;
                 }
                 if (ConfigKeysKokuhorenSofu.償還連絡票情報.getコード().equals(識別番号)
