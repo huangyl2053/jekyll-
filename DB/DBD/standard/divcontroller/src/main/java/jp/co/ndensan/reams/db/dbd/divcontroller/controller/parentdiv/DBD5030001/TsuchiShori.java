@@ -99,7 +99,7 @@ public class TsuchiShori {
             画面更新情報ビジネス.add(business);
         }
         TsuchiShoriManager manager = TsuchiShoriManager.createInstance();
-        SharedFileEntryDescriptor entry = manager.CSVファイル出力(画面更新情報ビジネス);
+        SharedFileEntryDescriptor entry = manager.ファイル出力(画面更新情報ビジネス);
         AccessLogger.log(AccessLogType.照会, getHandler().アクセスログ情報(画面更新情報));
         return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, CSVファイル名), response);
     }

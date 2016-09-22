@@ -33,11 +33,12 @@ public class NinteiBatchTaishoTokuteiProcessParameter implements IBatchProcessPa
     /**
      * コンストラクタです。
      *
-     * @param 決定日 FlexibleDate
-     * @param 作成年度 FlexibleYear
-     * @param テスト処理 boolean
-     * @param 申請日開始 FlexibleDate
-     * @param 申請日終了 FlexibleDate
+     * @param バッチ処理日時 バッチ処理日時
+     * @param 決定日 決定日
+     * @param 作成年度 作成年度
+     * @param テスト処理 テスト処理
+     * @param 申請日開始 申請日開始
+     * @param 申請日終了 申請日終了
      */
     public NinteiBatchTaishoTokuteiProcessParameter(
             YMDHMS バッチ処理日時,
