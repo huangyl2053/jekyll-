@@ -135,7 +135,7 @@ public class KokiKoreisha {
             kokiKoreishaInfo.createBuilderForEdit().set個人区分コード(div.getMeisaiPanel().getDdlKojinKubunCode().getSelectedKey())
                     .set資格取得事由コード(div.getMeisaiPanel().getDdlShikakuShutokuJiyu().getSelectedKey())
                     .set資格喪失事由コード(div.getMeisaiPanel().getDdlShikakuSoshitsuJiyu().getSelectedKey())
-                    .set後期高齢保険者番号_市町村(div.getMeisaiPanel().getDdlHokenshaNo().getSelectedValue());
+                    .set後期高齢保険者番号_市町村(div.getMeisaiPanel().getDdlHokenshaNo().getSelectedKey());
             if (div.getMeisaiPanel().getChkTorokuKubun().isAllSelected()) {
                 kokiKoreishaInfo.createBuilderForEdit().set登録区分(new RString("1"));
             } else {

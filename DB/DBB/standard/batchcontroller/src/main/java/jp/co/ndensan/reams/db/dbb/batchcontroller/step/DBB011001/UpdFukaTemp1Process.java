@@ -168,11 +168,9 @@ public class UpdFukaTemp1Process extends BatchProcessBase<SikakuSaisinnsikiRelat
     }
 
     private void set老齢の情報(DbT7006RoreiFukushiNenkinJukyushaEntity entity) {
-        if (entity != null) {
-            if (老齢の情報.isEmpty() || isContain(entity)) {
-                entity.initializeMd5();
-                老齢の情報.add(new RoreiFukushiNenkinJukyusha(entity));
-            }
+        if (entity != null && (老齢の情報.isEmpty() || isContain(entity))) {
+            entity.initializeMd5();
+            老齢の情報.add(new RoreiFukushiNenkinJukyusha(entity));
         }
     }
 
@@ -229,10 +227,8 @@ public class UpdFukaTemp1Process extends BatchProcessBase<SikakuSaisinnsikiRelat
     }
 
     private void set生活保護扶助種類EntityList(UrT0526SeikatsuHogoFujoShuruiEntity entity) {
-        if (entity != null) {
-            if (生活保護扶助種類EntityList.isEmpty() || isContain生活保護扶助種類(entity)) {
-                生活保護扶助種類EntityList.add(entity);
-            }
+        if (entity != null && (生活保護扶助種類EntityList.isEmpty() || isContain生活保護扶助種類(entity))) {
+            生活保護扶助種類EntityList.add(entity);
         }
     }
 

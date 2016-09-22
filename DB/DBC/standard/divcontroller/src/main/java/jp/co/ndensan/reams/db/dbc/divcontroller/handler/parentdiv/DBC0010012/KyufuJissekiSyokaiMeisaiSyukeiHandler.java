@@ -326,7 +326,7 @@ public class KyufuJissekiSyokaiMeisaiSyukeiHandler {
             div.getCcdKyufuJissekiHeader().set整理番号(事業者番号リスト.get(index + i).get整理番号());
             div.getCcdKyufuJissekiHeader().set識別番号名称(事業者番号リスト.get(index + i).get識別番号名称());
             div.getCcdKyufuJissekiHeader().set様式番号(事業者番号リスト.get(index + i).get識別番号());
-            div.getCcdKyufuJissekiHeader().setサービス提供年月(new RDate(事業者番号リスト.get(index + i).getサービス提供年月().getLastDay()));
+            div.getCcdKyufuJissekiHeader().setサービス提供年月(new RDate(事業者番号リスト.get(index + i).getサービス提供年月().toString()));
             for (KyufujissekiShukei 集計情報取得 : 集計情報リスト) {
                 if (事業者番号リスト.get(index + i).get事業所番号().value().equals(集計情報取得.get事業所番号().value())) {
                     集計情報取得リスト.add(集計情報取得);

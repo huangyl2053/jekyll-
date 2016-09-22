@@ -229,7 +229,7 @@ public class DBU030010_JigyoHokokuNenpo_MainParameter extends BatchParameterBase
         parameter.set旧市町村コードリスト(旧市町村コードリスト);
         parameter.set過去集計分市町村コードリスト(過去集計分市町村コードリスト);
         parameter.set過去集計分旧市町村区分(過去集計分旧市町村区分);
-        parameter.setバッチID(new RString("DBU030010_JigyoHokokuNenpo_Main"));
+        parameter.setバッチID(new RString("DBU010100_JigyoHokokuGeppo_HokenkyufuKogakuGassan"));
         return parameter;
     }
 

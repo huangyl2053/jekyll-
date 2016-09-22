@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb112001;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB112001;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -252,15 +252,10 @@ public class SpoolShotokuJohoIchiranProcess extends BatchKeyBreakBase<ShotokuJoh
         RString 識別コードR = 介護所得TempEntity.getShikibetsuCode() == null
                 || 介護所得TempEntity.getShikibetsuCode().isEmpty() ? RString.EMPTY : 介護所得TempEntity.getShikibetsuCode().getColumnValue();
         csvEntity.set識別コード(識別コードR);
-        RString 氏名_カナR = 宛名entity == null || 宛名entity.getKanaMeisho() == null
-                || 宛名entity.getKanaMeisho().isEmpty() ? RString.EMPTY : 宛名entity.getKanaMeisho().getColumnValue();
-        csvEntity.set氏名_カナ(氏名_カナR);
+        csvEntity = getCSVEntity(宛名entity, csvEntity);
         RString 所得年度 = 介護所得TempEntity.getShotoNendo() == null
                 || 介護所得TempEntity.getShotoNendo().isEmpty() ? RString.EMPTY : 介護所得TempEntity.getShotoNendo().toDateString();
         csvEntity.set所得年度(所得年度);
-        RString 生年月日R = 宛名entity == null || 宛名entity.getSeinengappiYMD() == null
-                || 宛名entity.getSeinengappiYMD().isEmpty() ? RString.EMPTY : 宛名entity.getSeinengappiYMD().seireki().toDateString();
-        csvEntity.set生年月日(生年月日R);
         RString 性別code = 宛名entity == null ? RString.EMPTY : 宛名entity.getSeibetsuCode();
         RString 性別 = 性別code == null || 性別code.isEmpty() ? RString.EMPTY : Seibetsu.toValue(性別code).get名称();
         csvEntity.set性別(性別);
@@ -289,18 +284,16 @@ public class SpoolShotokuJohoIchiranProcess extends BatchKeyBreakBase<ShotokuJoh
                 ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(介護所得TempEntity.getKazeiShotoGaku(), 0);
         csvEntity.set課税標準額(課税標準額);
         csvEntity.set登録業務(RString.EMPTY);
-        RString 氏名R = 宛名entity == null || 宛名entity.getMeisho() == null
-                || 宛名entity.getMeisho().isEmpty() ? RString.EMPTY : 宛名entity.getMeisho().getColumnValue();
-        csvEntity.set氏名(氏名R);
         RString 消除事由コード = 宛名entity == null ? RString.EMPTY : 宛名entity.getShojoJiyuCode();
         FlexibleDate 生年月日 = 宛名entity == null ? FlexibleDate.EMPTY : 宛名entity.getSeinengappiYMD();
         RString 年齢 = RString.EMPTY;
         if (生年月日 != null && !生年月日.isEmpty()) {
+            int システム年 = FlexibleDate.getNowDate().getYearValue();
             if (INDEX_22.equals(消除事由コード)) {
                 FlexibleDate 消除異動年月日 = 宛名entity == null ? FlexibleDate.EMPTY : 宛名entity.getShojoIdoYMD();
-                年齢 = new RString(消除異動年月日.getYearValue() - 生年月日.getYearValue());
+                int 消除異動年 = 消除異動年月日 == null || 消除異動年月日.isEmpty() ? システム年 : 消除異動年月日.getYearValue();
+                年齢 = new RString(消除異動年 - 生年月日.getYearValue());
             } else {
-                int システム年 = FlexibleDate.getNowDate().getYearValue();
                 年齢 = new RString(システム年 - 生年月日.getYearValue());
             }
         }
@@ -311,6 +304,24 @@ public class SpoolShotokuJohoIchiranProcess extends BatchKeyBreakBase<ShotokuJoh
         RString 年金収入額 = 介護所得TempEntity.getNenkiniShunyuGaku() == null
                 ? RString.EMPTY : DecimalFormatter.toコンマ区切りRString(介護所得TempEntity.getNenkiniShunyuGaku(), 0);
         csvEntity.set年金収入額(年金収入額);
+        return csvEntity;
+    }
+
+    private ShotokuJohoIchiranCSVEntity getCSVEntity(UaFt200FindShikibetsuTaishoEntity 宛名entity, ShotokuJohoIchiranCSVEntity csvEntity) {
+        RString 氏名_カナR = RString.EMPTY;
+        RString 生年月日R = RString.EMPTY;
+        RString 氏名R = RString.EMPTY;
+        if (宛名entity != null) {
+            AtenaKanaMeisho 氏名_カナ = 宛名entity.getKanaMeisho();
+            氏名_カナR = 氏名_カナ == null || 氏名_カナ.isEmpty() ? RString.EMPTY : 氏名_カナ.getColumnValue();
+            FlexibleDate 生年月日 = 宛名entity.getSeinengappiYMD();
+            生年月日R = 生年月日 == null || 生年月日.isEmpty() ? RString.EMPTY : 生年月日.seireki().toDateString();
+            AtenaMeisho 氏名 = 宛名entity.getMeisho();
+            氏名R = 氏名 == null || 氏名.isEmpty() ? RString.EMPTY : 氏名.getColumnValue();
+        }
+        csvEntity.set氏名_カナ(氏名_カナR);
+        csvEntity.set生年月日(生年月日R);
+        csvEntity.set氏名(氏名R);
         return csvEntity;
     }
 

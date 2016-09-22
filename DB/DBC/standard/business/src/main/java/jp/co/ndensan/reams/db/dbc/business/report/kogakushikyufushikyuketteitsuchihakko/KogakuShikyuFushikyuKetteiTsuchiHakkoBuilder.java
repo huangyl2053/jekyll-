@@ -19,6 +19,12 @@ public class KogakuShikyuFushikyuKetteiTsuchiHakkoBuilder implements IKogakuShik
     private final IKogakuShikyuFushikyuKetteiTsuchiHakkoEditor headerEditor;
     private final IKogakuShikyuFushikyuKetteiTsuchiHakkoEditor bodyEditor;
 
+    /**
+     * コンストラクタです
+     *
+     * @param headerEditor IKogakuShikyuFushikyuKetteiTsuchiHakkoEditor
+     * @param bodyEditor IKogakuShikyuFushikyuKetteiTsuchiHakkoEditor
+     */
     public KogakuShikyuFushikyuKetteiTsuchiHakkoBuilder(IKogakuShikyuFushikyuKetteiTsuchiHakkoEditor headerEditor,
             IKogakuShikyuFushikyuKetteiTsuchiHakkoEditor bodyEditor) {
         this.bodyEditor = bodyEditor;

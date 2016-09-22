@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110060;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.DataRecordShubetsu;
@@ -49,7 +50,15 @@ import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
+import jp.co.ndensan.reams.uz.uza.externalcharacter.BinaryCharacterConvertParameter;
+import jp.co.ndensan.reams.uz.uza.externalcharacter.BinaryCharacterConvertParameterBuilder;
+import jp.co.ndensan.reams.uz.uza.externalcharacter.CharacterAttribute;
+import jp.co.ndensan.reams.uz.uza.externalcharacter.CharacterConvertTable;
+import jp.co.ndensan.reams.uz.uza.externalcharacter.ReamsUnicodeToBinaryConverter;
+import jp.co.ndensan.reams.uz.uza.externalcharacter.RecordConvertMaterial;
+import jp.co.ndensan.reams.uz.uza.io.ByteWriter;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
+import jp.co.ndensan.reams.uz.uza.io.FileReader;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
@@ -88,6 +97,8 @@ public class KogakugassanShikyushinseishoOutSofuFileSakuseiProcess extends Batch
     private static final RString 加入歴番号_09 = new RString("09");
     private static final RString 加入歴番号_10 = new RString("10");
     private static final RString RSTRING_0 = new RString("0");
+    private static final RString 拡張子_TEMP = new RString("temp");
+    private static final RString 拡張子 = new RString("\r\n");
 
     private static final int INDEX_0 = 0;
     private static final int INDEX_1 = 1;
@@ -97,7 +108,6 @@ public class KogakugassanShikyushinseishoOutSofuFileSakuseiProcess extends Batch
     private int 総出力件数;
     private int レコード番号;
     private int 口座管理番号の件数;
-    private Encode 文字コード;
     private RString csvFilePath;
     private RString csvFileName;
     private KogakuGassanShinseishoSofuFileEntity beforeEntity;
@@ -123,12 +133,6 @@ public class KogakugassanShikyushinseishoOutSofuFileSakuseiProcess extends Batch
         総出力件数 = INDEX_0;
         レコード番号 = INDEX_0;
         口座管理番号の件数 = INDEX_0;
-        RString 国保連送付外字_変換区分 = DbBusinessConfig.get(ConfigNameDBC.国保連送付外字_変換区分, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
-        if (!変換区分_1.equals(国保連送付外字_変換区分)) {
-            文字コード = Encode.SJIS;
-        } else {
-            文字コード = Encode.UTF_8withBOM;
-        }
         IKogakugassanShikyushinseishoOutMapper mapper = getMapper(IKogakugassanShikyushinseishoOutMapper.class);
         ShunoKamokuFinder 収納科目Finder = ShunoKamokuFinder.createInstance();
         IShunoKamoku 介護給付_高額合算 = 収納科目Finder.get科目(ShunoKamokuShubetsu.介護給付_高額合算);
@@ -162,7 +166,7 @@ public class KogakugassanShikyushinseishoOutSofuFileSakuseiProcess extends Batch
         csvWriter = new CsvWriter.InstanceBuilder(csvFilePath).
                 setDelimiter(カンマ).
                 setEnclosure(RString.EMPTY).
-                setEncode(文字コード).
+                setEncode(Encode.UTF_8withBOM).
                 setNewLine(NewLine.CRLF).
                 hasHeader(false).
                 build();
@@ -217,6 +221,8 @@ public class KogakugassanShikyushinseishoOutSofuFileSakuseiProcess extends Batch
             レコード番号 = レコード番号 + INDEX_1;
             csvWriter.writeLine(getEndEntity());
         }
+        csvWriter.close();
+        do外字類似変換();
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(csvFileName));
         sfd = SharedFile.defineSharedFile(sfd, 1, SharedFile.GROUP_ALL, null, true, null);
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
@@ -332,6 +338,42 @@ public class KogakugassanShikyushinseishoOutSofuFileSakuseiProcess extends Batch
         set高額合算申請書加入歴(meisaiEntity, entity.get高額合算申請書加入歴());
         meisaiEntity.set備考(囲み文字(trimRString(dbwt3711entity.getBiko())));
         return meisaiEntity;
+    }
+
+    private void do外字類似変換() {
+        try (FileReader reader = new FileReader(csvFilePath, Encode.UTF_8);
+                ByteWriter writer = new ByteWriter(csvFilePath.replace(拡張子_TEMP, RString.EMPTY))) {
+            for (RString record = reader.readLine(); record != null; record = reader.readLine()) {
+                BinaryCharacterConvertParameter convertParameter = new BinaryCharacterConvertParameterBuilder(
+                        new RecordConvertMaterial(getCharacterConvertTable(), CharacterAttribute.混在))
+                        .enabledConvertError(true)
+                        .build();
+                ReamsUnicodeToBinaryConverter converter = new ReamsUnicodeToBinaryConverter(convertParameter);
+                writer.write(converter.convert(record.concat(拡張子)));
+            }
+            writer.close();
+            reader.close();
+        }
+        deleteEmptyFile(csvFilePath);
+    }
+
+    private void deleteEmptyFile(RString filePath) {
+        if (RString.isNullOrEmpty(filePath)) {
+            return;
+        }
+        File file = new File(filePath.toString());
+        if (file.exists()) {
+            file.getAbsoluteFile().deleteOnExit();
+        }
+    }
+
+    private static CharacterConvertTable getCharacterConvertTable() {
+        RString 国保連送付外字_変換区分 = DbBusinessConfig.get(ConfigNameDBC.国保連送付外字_変換区分, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        if (!変換区分_1.equals(国保連送付外字_変換区分)) {
+            return CharacterConvertTable.Sjis;
+        } else {
+            return CharacterConvertTable.SjisRuiji;
+        }
     }
 
     private RString trimRString(RString str) {

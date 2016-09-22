@@ -22,7 +22,7 @@ public class YouKaigoNinteiIkatsuKoshin {
     /**
      * 画面初期化。
      *
-     * @param div　YouKaigoNinteiIkatsuKoshinDiv
+     * @param div YouKaigoNinteiIkatsuKoshinDiv
      * @return ResponseData<YouKaigoNinteiIkatsuKoshinDiv>
      */
     public ResponseData<YouKaigoNinteiIkatsuKoshinDiv> onLoad(YouKaigoNinteiIkatsuKoshinDiv div) {
@@ -33,7 +33,7 @@ public class YouKaigoNinteiIkatsuKoshin {
     /**
      * 選択する時の処理です。
      *
-     * @param div　YouKaigoNinteiIkatsuKoshinDiv
+     * @param div YouKaigoNinteiIkatsuKoshinDiv
      * @return ResponseData<YouKaigoNinteiIkatsuKoshinDiv>
      */
     public ResponseData<YouKaigoNinteiIkatsuKoshinDiv> onChange(YouKaigoNinteiIkatsuKoshinDiv div) {
@@ -44,7 +44,7 @@ public class YouKaigoNinteiIkatsuKoshin {
     /**
      * 認定日チェック。
      *
-     * @param div　YouKaigoNinteiIkatsuKoshinDiv
+     * @param div YouKaigoNinteiIkatsuKoshinDiv
      * @return ResponseData<YouKaigoNinteiIkatsuKoshinDiv>
      */
     public ResponseData<YouKaigoNinteiIkatsuKoshinDiv> onClickCheck(YouKaigoNinteiIkatsuKoshinDiv div) {
@@ -61,7 +61,7 @@ public class YouKaigoNinteiIkatsuKoshin {
     /**
      * バッチを呼び出す。
      *
-     * @param div　YouKaigoNinteiIkatsuKoshinDiv
+     * @param div YouKaigoNinteiIkatsuKoshinDiv
      * @return ResponseData<DBD560001Parameter>
      */
     public ResponseData<DBD560001Parameter> onClickNext(YouKaigoNinteiIkatsuKoshinDiv div) {

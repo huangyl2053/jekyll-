@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  * @reamsid_L DBC-2180-070 x_liuwei
  */
 public class FurikomiMeisaiYoshikiBetsuKingakuShukei {
-
+    private final int length = 25;
     /**
      * 印字様式番号別集計。
      * @param inList
@@ -32,7 +32,7 @@ public class FurikomiMeisaiYoshikiBetsuKingakuShukei {
         List<InjiYoushikiBangouBetuKingaku> outList = new ArrayList<>();
         Map<RString, List<YoushikiBangouBetuKingakuEntity>> map = separateIntoPieces(inList);
         Set<RString> keyset = map.keySet();
-        if (null != inList && 0 != inList.size()) {
+        if (null != inList && !inList.isEmpty()) {
             for (RString key : keyset) {
                 outList.addAll(divide(map.get(key)));
             }
@@ -40,7 +40,7 @@ public class FurikomiMeisaiYoshikiBetsuKingakuShukei {
         return outList;
     }
 
-    public Map<RString, List<YoushikiBangouBetuKingakuEntity>> separateIntoPieces(List<YoushikiBangouBetuKingakuEntity> inList) {
+    private Map<RString, List<YoushikiBangouBetuKingakuEntity>> separateIntoPieces(List<YoushikiBangouBetuKingakuEntity> inList) {
         Map<RString, List<YoushikiBangouBetuKingakuEntity>> map = new HashMap<>();
         List<RString> list = getGroups(inList);
         for (RString key : list) {
@@ -50,11 +50,11 @@ public class FurikomiMeisaiYoshikiBetsuKingakuShukei {
         return map;
     }
 
-    public List<RString> getGroups(List<YoushikiBangouBetuKingakuEntity> inList) {
+    private List<RString> getGroups(List<YoushikiBangouBetuKingakuEntity> inList) {
         List<RString> list = new ArrayList<>();
         for (YoushikiBangouBetuKingakuEntity entity : inList) {
             RString groupRS = entity.get被保険者番号().concat(entity.getサービス提供年月().toDateString()).concat(entity.get整理番号());
-            if (0 == inList.size()) {
+            if (inList.isEmpty()) {
                 list.add(groupRS);
             } else {
                 boolean flag = false;
@@ -72,7 +72,7 @@ public class FurikomiMeisaiYoshikiBetsuKingakuShukei {
         return list;
     }
 
-    public List<YoushikiBangouBetuKingakuEntity> getGropusList(RString key, List<YoushikiBangouBetuKingakuEntity> inList) {
+    private List<YoushikiBangouBetuKingakuEntity> getGropusList(RString key, List<YoushikiBangouBetuKingakuEntity> inList) {
         List<YoushikiBangouBetuKingakuEntity> list = new ArrayList<>();
         for (YoushikiBangouBetuKingakuEntity entity : inList) {
             RString groupRS = entity.get被保険者番号().concat(entity.getサービス提供年月().toDateString()).concat(entity.get整理番号());
@@ -83,7 +83,7 @@ public class FurikomiMeisaiYoshikiBetsuKingakuShukei {
         return list;
     }
 
-    public List<InjiYoushikiBangouBetuKingaku> divide(List<YoushikiBangouBetuKingakuEntity> inList) {
+    private List<InjiYoushikiBangouBetuKingaku> divide(List<YoushikiBangouBetuKingakuEntity> inList) {
         Map<RString, ArrayList<YoushikiBangouBetuKingakuEntity>> groups = getGroups();
         for (YoushikiBangouBetuKingakuEntity entity : inList) {
             RString key = getKeyOfGroup(entity);
@@ -94,11 +94,11 @@ public class FurikomiMeisaiYoshikiBetsuKingakuShukei {
         return getOutPut(groups);
     }
 
-    public List<InjiYoushikiBangouBetuKingaku> getOutPut(Map<RString, ArrayList<YoushikiBangouBetuKingakuEntity>> groups) {
+    private List<InjiYoushikiBangouBetuKingaku> getOutPut(Map<RString, ArrayList<YoushikiBangouBetuKingakuEntity>> groups) {
         List<InjiYoushikiBangouBetuKingaku> outList = new ArrayList<>();
-        for (int i = 1; i < 25; i++) {
+        for (int i = 1; i < length; i++) {
             List group = groups.get(new RString(i));
-            if (null != group && 0 != group.size()) {
+            if (null != group && !group.isEmpty()) {
                 InjiYoushikiBangouBetuKingaku out = getOutItem((ArrayList<YoushikiBangouBetuKingakuEntity>) group);
                 outList.add(out);
             }
@@ -106,7 +106,7 @@ public class FurikomiMeisaiYoshikiBetsuKingakuShukei {
         return outList;
     }
 
-    public InjiYoushikiBangouBetuKingaku getOutItem(ArrayList<YoushikiBangouBetuKingakuEntity> group) {
+    private InjiYoushikiBangouBetuKingaku getOutItem(ArrayList<YoushikiBangouBetuKingakuEntity> group) {
         InjiYoushikiBangouBetuKingaku out = new InjiYoushikiBangouBetuKingaku();
         out.set集計様式番号(group.get(0).get様式番号().substring(0, 2));
         out.set印字様式番号(get印字様式番号(group));
@@ -115,7 +115,7 @@ public class FurikomiMeisaiYoshikiBetsuKingakuShukei {
         return out;
     }
 
-    public RString get印字様式番号(ArrayList<YoushikiBangouBetuKingakuEntity> group) {
+    private RString get印字様式番号(ArrayList<YoushikiBangouBetuKingakuEntity> group) {
         RString rs = new RString("");
         List<RString> list = getGroup様式番号(group);
         for (int i = list.size() - 1; i >= 0; i--) {
@@ -129,7 +129,7 @@ public class FurikomiMeisaiYoshikiBetsuKingakuShukei {
         return rs;
     }
 
-    public Decimal calculate支給金額計(ArrayList<YoushikiBangouBetuKingakuEntity> group) {
+    private Decimal calculate支給金額計(ArrayList<YoushikiBangouBetuKingakuEntity> group) {
         Decimal 支給金額計 = new Decimal(0);
         for (int i = 0; i < group.size(); i++) {
             支給金額計.add(group.get(i).get支給金額計());
@@ -137,7 +137,7 @@ public class FurikomiMeisaiYoshikiBetsuKingakuShukei {
         return 支給金額計;
     }
 
-    public Decimal calculate差額金額計(ArrayList<YoushikiBangouBetuKingakuEntity> group) {
+    private Decimal calculate差額金額計(ArrayList<YoushikiBangouBetuKingakuEntity> group) {
         Decimal 差額金額計 = new Decimal(0);
         for (int i = 0; i < group.size(); i++) {
             差額金額計.add(group.get(i).get差額金額計());
@@ -145,11 +145,12 @@ public class FurikomiMeisaiYoshikiBetsuKingakuShukei {
         return 差額金額計;
     }
 
-    public List<RString> getGroup様式番号(ArrayList<YoushikiBangouBetuKingakuEntity> group) {
+    private List<RString> getGroup様式番号(ArrayList<YoushikiBangouBetuKingakuEntity> group) {
         YoushikiBangouBetuKingakuEntity entity = group.get(0);
         RString 様式番号RS = get様式番号RS();
         List<RString> groupRS = 様式番号RS.split(";");
-        for (int i = 1; i < 25; i++) {
+        
+        for (int i = 1; i < length; i++) {
             int index = i - 1;
             List<RString> list = groupRS.get(index).split(",");
             for (RString rs : list) {
@@ -161,19 +162,19 @@ public class FurikomiMeisaiYoshikiBetsuKingakuShukei {
         return null;
     }
 
-    public Map<RString, ArrayList<YoushikiBangouBetuKingakuEntity>> getGroups() {
+    private Map<RString, ArrayList<YoushikiBangouBetuKingakuEntity>> getGroups() {
         Map<RString, ArrayList<YoushikiBangouBetuKingakuEntity>> map;
         map = new HashMap<>();
-        for (int i = 1; i < 25; i++) {
+        for (int i = 1; i < length; i++) {
             map.put(new RString(i), new ArrayList<YoushikiBangouBetuKingakuEntity>());
         }
         return map;
     }
 
-    public RString getKeyOfGroup(YoushikiBangouBetuKingakuEntity entity) {
+    private RString getKeyOfGroup(YoushikiBangouBetuKingakuEntity entity) {
         RString 様式番号RS = get様式番号RS();
         List<RString> groupRS = 様式番号RS.split(";");
-        for (int i = 1; i < 25; i++) {
+        for (int i = 1; i < length; i++) {
             int index = i - 1;
             List<RString> list = groupRS.get(index).split(",");
             for (RString rs : list) {
@@ -185,7 +186,7 @@ public class FurikomiMeisaiYoshikiBetsuKingakuShukei {
         return new RString("");
     }
 
-    public RString get様式番号RS() {
+    private RString get様式番号RS() {
         StringBuilder sbf;
         sbf = new StringBuilder();
         sbf.append(KyufuJissekiYoshikiKubun._2131_様式第二.getコード());

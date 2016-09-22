@@ -69,7 +69,7 @@ public class JukyushaIdoRenrakuhyoCsvManager {
         csvWriter = new CsvWriter.InstanceBuilder(filePath)
                 .setDelimiter(カンマ)
                 .setEnclosure(ダブルクォート)
-                .setEncode(Encode.UTF_8withBOM)
+                .setEncode(Encode.SJIS)
                 .setNewLine(NewLine.CRLF)
                 .hasHeader(false).build();
         csvWriter.writeLine(editorControlRecord());
