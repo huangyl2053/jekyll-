@@ -42,6 +42,7 @@ public class GassanShikyuShinseishoJohoSofuIchiranEditor implements IGassanShiky
     private final YMDHMS システム日時;
     private final FlexibleYearMonth 処理年月;
     private final int 連番;
+    private final boolean flag;
     private static final RString 年度 = new RString("年度");
     private static final RDate NOWDATE = RDate.getNowDate();
     private static final SubGyomuCode DBU介護統計報告 = SubGyomuCode.DBU介護統計報告;
@@ -55,16 +56,19 @@ public class GassanShikyuShinseishoJohoSofuIchiranEditor implements IGassanShiky
      * @param システム日時 YMDHMS
      * @param 処理年月 FlexibleYearMonth
      * @param 連番 int
+     * @param flag boolean
      */
     public GassanShikyuShinseishoJohoSofuIchiranEditor(
             KogakugassanShikyushinseishoOutFileEntity entity,
             YMDHMS システム日時,
             FlexibleYearMonth 処理年月,
-            int 連番) {
+            int 連番,
+            boolean flag) {
         this.entity = entity;
         this.システム日時 = システム日時;
         this.処理年月 = 処理年月;
         this.連番 = 連番;
+        this.flag = flag;
     }
 
     @Override
@@ -75,13 +79,10 @@ public class GassanShikyuShinseishoJohoSofuIchiranEditor implements IGassanShiky
         if (被保険者一時Entity.getShikibetsuCode() != null) {
             source.shikibetsuCode = 被保険者一時Entity.getShikibetsuCode().value();
         }
-
-        if (システム日時 != null) {
-            RString 帳票作成年月日 = システム日時.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-            RString 帳票作成日時 = システム日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
-            source.printTimeStamp = 帳票作成年月日.concat(RString.HALF_SPACE).concat(帳票作成日時);
-        }
+        RString 帳票作成年月日 = システム日時.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        RString 帳票作成日時 = システム日時.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
+        source.printTimeStamp = 帳票作成年月日.concat(RString.HALF_SPACE).concat(帳票作成日時);
         if (処理年月 != null) {
             source.sofuYM = 処理年月.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
@@ -89,28 +90,10 @@ public class GassanShikyuShinseishoJohoSofuIchiranEditor implements IGassanShiky
         source.hokenshaNo = 保険者情報_保険者番号;
         source.hokenshaName = 保険者情報_保険者名称;
         source.list_1 = new RString(連番);
-        source.list_2 = 高額合算申請書一時Entity.getTaishoNendo().wareki().fillType(FillType.BLANK).toDateString().concat(年度);
-        if (高額合算申請書一時Entity.getShikyuShinseiKubun() != null) {
-            source.list_3 = KaigoGassan_ShinseiKbn.toValue(高額合算申請書一時Entity.getShikyuShinseiKubun()).get名称();
-        }
-        if (高額合算申請書一時Entity.getShinseiYMD() != null) {
-            source.list_4 = 高額合算申請書一時Entity.getShinseiYMD().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
-        }
-        source.list_5 = 高額合算申請書一時Entity.getShikyuShinseishoSeiriNo();
-        if (高額合算申請書一時Entity.getShinseiDaihyoshaShimei() != null) {
-            source.list_6 = 高額合算申請書一時Entity.getShinseiDaihyoshaShimei().value();
-        }
-        if (高額合算申請書一時Entity.getJikoFutanKofuUmu() != null) {
-            source.list_7 = KaigoGassan_JikoFutanKofuUmu.toValue(高額合算申請書一時Entity.getJikoFutanKofuUmu()).get名称();
-        }
-        if (高額合算申請書一時Entity.getShikyuShinseiKeitai() != null) {
-            source.list_8 = KaigoGassan_ShinseiKeitai.toValue(高額合算申請書一時Entity.getShikyuShinseiKeitai()).get名称();
-        }
+        同一申請情報の編集(source);
         if (高額合算申請書一時Entity.getHihokenshaNo() != null) {
             source.list_9 = 高額合算申請書一時Entity.getHihokenshaNo().value();
         }
-
         source.list_10 = 被保険者一時Entity.getMeisho();
         if (高額合算申請書一時Entity.getKanyuKaishiYMD() != null && 高額合算申請書一時Entity.getKanyuShuryoYMD() != null) {
             RString 加入期間開始年月日 = 高額合算申請書一時Entity.getKanyuKaishiYMD().wareki()
@@ -143,4 +126,29 @@ public class GassanShikyuShinseishoJohoSofuIchiranEditor implements IGassanShiky
         return source;
     }
 
+    private void 同一申請情報の編集(GassanShikyuShinseishoJohoSofuIchiranSource source) {
+        DbWT3711KogakuGassanShinseishoTempEntity 高額合算申請書一時Entity = entity.get高額合算申請書一時Entity();
+        if (flag) {
+            if (高額合算申請書一時Entity.getTaishoNendo() != null && !高額合算申請書一時Entity.getTaishoNendo().isEmpty()) {
+                source.list_2 = 高額合算申請書一時Entity.getTaishoNendo().wareki().fillType(FillType.BLANK).toDateString().concat(年度);
+            }
+            if (高額合算申請書一時Entity.getShikyuShinseiKubun() != null) {
+                source.list_3 = KaigoGassan_ShinseiKbn.toValue(高額合算申請書一時Entity.getShikyuShinseiKubun()).get名称();
+            }
+            if (高額合算申請書一時Entity.getShinseiYMD() != null) {
+                source.list_4 = 高額合算申請書一時Entity.getShinseiYMD().wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.GAN_NEN)
+                        .separator(Separator.PERIOD).fillType(FillType.BLANK).toDateString();
+            }
+            source.list_5 = 高額合算申請書一時Entity.getShikyuShinseishoSeiriNo();
+            if (高額合算申請書一時Entity.getShinseiDaihyoshaShimei() != null) {
+                source.list_6 = 高額合算申請書一時Entity.getShinseiDaihyoshaShimei().value();
+            }
+            if (高額合算申請書一時Entity.getJikoFutanKofuUmu() != null) {
+                source.list_7 = KaigoGassan_JikoFutanKofuUmu.toValue(高額合算申請書一時Entity.getJikoFutanKofuUmu()).get名称();
+            }
+            if (高額合算申請書一時Entity.getShikyuShinseiKeitai() != null) {
+                source.list_8 = KaigoGassan_ShinseiKeitai.toValue(高額合算申請書一時Entity.getShikyuShinseiKeitai()).get名称();
+            }
+        }
+    }
 }
