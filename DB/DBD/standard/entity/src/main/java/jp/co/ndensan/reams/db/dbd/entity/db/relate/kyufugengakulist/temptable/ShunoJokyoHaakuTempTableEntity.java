@@ -52,29 +52,29 @@ public class ShunoJokyoHaakuTempTableEntity extends DbTableEntityBase<ShunoJokyo
     @TempTableColumnOrder(4)
     private AtenaMeisho hihokenshaShimei;
     @TempTableColumnOrder(5)
-    private SetaiCode setaiCode;//世帯番号
+    private SetaiCode setaiCode;
     @TempTableColumnOrder(6)
     private GyoseikuCode gyoseikuCode;
     @TempTableColumnOrder(7)
-    private RString gyoseikuName;//行政区
+    private RString gyoseikuName;
     @TempTableColumnOrder(8)
-    private ZenkokuJushoCode jushoCode;//住所コード
+    private ZenkokuJushoCode jushoCode;
     @TempTableColumnOrder(9)
     private RString yubinNo;
     @TempTableColumnOrder(10)
-    private RString jusho;//住所
+    private RString jusho;
     @TempTableColumnOrder(11)
     private FlexibleDate shikakuShutokuYMD;
     @TempTableColumnOrder(12)
     private FlexibleDate shikakuSoshitsuYMD;
     @TempTableColumnOrder(13)
-    private RString shikakuSoshitsuJiyuCode;//喪失事由
+    private RString shikakuSoshitsuJiyuCode;
     @TempTableColumnOrder(14)
-    private RString hihokennshaKubunCode;//
+    private RString hihokennshaKubunCode;
     @TempTableColumnOrder(15)
     private RString koikinaiJushochiTokureiFlag;
     @TempTableColumnOrder(16)
-    private boolean seihoFlag;//生保フラグ
+    private boolean seihoFlag;
     @TempTableColumnOrder(17)
     private Code koroshoIfShikibetsuCode;
     @TempTableColumnOrder(18)
@@ -86,9 +86,9 @@ public class ShunoJokyoHaakuTempTableEntity extends DbTableEntityBase<ShunoJokyo
     @TempTableColumnOrder(21)
     private FlexibleDate ninteiYMD;
     @TempTableColumnOrder(22)
-    private boolean shiseityuFlag;//申請中フラグ
+    private boolean shiseityuFlag;
     @TempTableColumnOrder(23)
-    private FlexibleDate jukyuShinseiYMD;//
+    private FlexibleDate jukyuShinseiYMD;
     @TempTableColumnOrder(24)
     private FlexibleYear choteiNendo;
     @TempTableColumnOrder(25)
@@ -98,23 +98,23 @@ public class ShunoJokyoHaakuTempTableEntity extends DbTableEntityBase<ShunoJokyo
     @TempTableColumnOrder(27)
     private TsuchishoNo tsuchishoNo;
     @TempTableColumnOrder(28)
-    private RString kibetsu;//期別
+    private RString kibetsu;
     @TempTableColumnOrder(29)
     private Decimal choteigaku;
     @TempTableColumnOrder(30)
     private Decimal shunyugaku;
     @TempTableColumnOrder(31)
-    private Decimal minogaku;//未納額
+    private Decimal minogaku;
     @TempTableColumnOrder(32)
     private RDate shunyuYMD;
     @TempTableColumnOrder(33)
     private RDate tokusokujoHakkoYMD;
     @TempTableColumnOrder(34)
-    private FlexibleDate jikoKisanYMD;//時効起算日
+    private FlexibleDate jikoKisanYMD;
     @TempTableColumnOrder(35)
     private RString jikoKisanJiyu;
     @TempTableColumnOrder(36)
-    private RString minoKannoKubun;//未納完納区分DBZ
+    private RString minoKannoKubun;
     @TempTableColumnOrder(37)
-    private RString jikoKubun;//時効区分DBZ
+    private RString jikoKubun;
 }
