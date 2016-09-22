@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC2200011
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2200011.ShichosonTokubetuKyufuServiceTourokuDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2200011.ShichosonTokubetuKyufuServiceTourokuHandler;
 import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2200011.ShichosonTokubetuKyufuServiceTourokuValidationHandler;
-import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
@@ -86,14 +86,11 @@ public class ShichosonTokubetuKyufuServiceTouroku {
      * @return ResponseData
      */
     public ResponseData<ShichosonTokubetuKyufuServiceTourokuDiv> onClick_cancelDelete(ShichosonTokubetuKyufuServiceTourokuDiv div) {
-        boolean is項目が変更 = getHandler(div).is項目が変更();
-        if (is項目が変更) {
-            if (!ResponseHolder.isReRequest()) {
-                return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
-            }
-            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                getHandler(div).initialize();
-            }
+        if (!ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
+        }
+        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            getHandler(div).initialize();
         }
         return ResponseData.of(div).respond();
     }
@@ -105,11 +102,16 @@ public class ShichosonTokubetuKyufuServiceTouroku {
      * @return ResponseData
      */
     public ResponseData<ShichosonTokubetuKyufuServiceTourokuDiv> onClick_cancelInsert(ShichosonTokubetuKyufuServiceTourokuDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
-        }
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            getHandler(div).initialize();
+        boolean is項目が変更 = getHandler(div).is項目が変更();
+        if (is項目が変更) {
+            if (!ResponseHolder.isReRequest()) {
+                return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
+            }
+            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                getHandler(div).initialize();
+            }
+        } else {
+            getHandler(div).initialize照会モード();
         }
         return ResponseData.of(div).respond();
     }
@@ -121,11 +123,16 @@ public class ShichosonTokubetuKyufuServiceTouroku {
      * @return ResponseData
      */
     public ResponseData<ShichosonTokubetuKyufuServiceTourokuDiv> onClick_cancelModify(ShichosonTokubetuKyufuServiceTourokuDiv div) {
-        if (!ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
-        }
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            getHandler(div).initialize();
+        boolean is項目が変更 = getHandler(div).is項目が変更();
+        if (is項目が変更) {
+            if (!ResponseHolder.isReRequest()) {
+                return ResponseData.of(div).addMessage(UrQuestionMessages.入力内容の破棄.getMessage()).respond();
+            }
+            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                getHandler(div).initialize();
+            }
+        } else {
+            getHandler(div).initialize照会モード();
         }
         return ResponseData.of(div).respond();
     }
@@ -146,7 +153,7 @@ public class ShichosonTokubetuKyufuServiceTouroku {
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             getHandler(div).save();
-            return ResponseData.of(div).addMessage(DbzInformationMessages.保存処理完了.getMessage()).respond();
+            return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
         }
         return ResponseData.of(div).respond();
     }
