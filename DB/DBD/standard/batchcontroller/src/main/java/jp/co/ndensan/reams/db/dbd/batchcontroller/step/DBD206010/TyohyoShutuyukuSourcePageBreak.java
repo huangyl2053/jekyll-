@@ -19,19 +19,19 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
  */
 public class TyohyoShutuyukuSourcePageBreak extends PageBreaker<JigyoshoMukeShakaiFukushiHojinKeigenReportSource> {
 
-    private final List<RString> breakKeys;
+    private final List<RString> keyLists;
 
     /**
      *
      * @param pageBreakKeys ページングキー
      */
     public TyohyoShutuyukuSourcePageBreak(List<RString> pageBreakKeys) {
-        this.breakKeys = Collections.unmodifiableList(pageBreakKeys);
+        this.keyLists = Collections.unmodifiableList(pageBreakKeys);
     }
 
     @Override
     public List<RString> breakKeys() {
-        return breakKeys;
+        return keyLists;
     }
 
     @Override

@@ -151,7 +151,8 @@ public class SaishinsaKetteiReportProcess extends BatchKeyBreakBase<SaishinsaKet
     @Override
     protected IBatchReader createReader() {
 
-        SaishinsaKetteiHokenshaInParameter mybatisParm = new SaishinsaKetteiHokenshaInParameter(出力順);
+        SaishinsaKetteiHokenshaInParameter mybatisParm = new SaishinsaKetteiHokenshaInParameter();
+        mybatisParm.set出力順(出力順);
         return new BatchDbReader(MAPPERPATH, mybatisParm);
     }
 

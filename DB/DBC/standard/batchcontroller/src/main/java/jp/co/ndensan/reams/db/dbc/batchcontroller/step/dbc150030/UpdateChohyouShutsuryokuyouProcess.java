@@ -45,7 +45,7 @@ public class UpdateChohyouShutsuryokuyouProcess
     protected void process(ChohyouShutsuryokuyouTempEntity entity) {
 
         DbWT3470chohyouShutsuryokuyouTempEntity tempEntity = entity.get帳票出力();
-        tempEntity.setServiceRyakushou(entity.getサービス名称());
+        tempEntity.setServiceRyakushou(entity.getサービス名称() != null ? entity.getサービス名称() : RString.EMPTY);
         帳票出力用一時tableWriter.update(tempEntity);
     }
 

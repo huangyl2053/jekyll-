@@ -71,21 +71,29 @@ public class ShotokuDankaiBetsuHihokenshasuIchiranBodyEditor implements IShotoku
     }
 
     private void setBody(ShotokuDankaiBetsuHihokenshasuIchiranSource source) {
-        if (!this.保険者設定段階別被保険者数合計entity.get市町村名称().isNullOrEmpty()) {
+
+        if (保険者設定段階別被保険者数合計entity != null && !RString.isNullOrEmpty(this.保険者設定段階別被保険者数合計entity.get市町村名称())) {
             source.hokenshaName = this.保険者設定段階別被保険者数合計entity.get市町村名称();
         }
-        if (null != this.hokenryoDankaiList && !RString.isNullOrEmpty(this.保険者設定段階別被保険者数合計entity.get保険者設定段階())) {
+        if (保険者設定段階別被保険者数合計entity != null && null != this.hokenryoDankaiList
+                && !RString.isNullOrEmpty(this.保険者設定段階別被保険者数合計entity.get保険者設定段階())) {
             source.list_1 = this.hokenryoDankaiList.getBy段階区分(this.保険者設定段階別被保険者数合計entity.get保険者設定段階()).get表記();
         }
-        if (null != this.保険者設定段階別被保険者数合計entity.get保険者設定人数()) {
+        if (保険者設定段階別被保険者数合計entity != null && null != this.保険者設定段階別被保険者数合計entity.get保険者設定人数()) {
             source.list_2 = doカンマ編集(this.保険者設定段階別被保険者数合計entity.get保険者設定人数());
         }
-        if (!RString.isNullOrEmpty(this.標準設定段階別被保険者数合計entity.get保険者設定段階())) {
+        if (this.標準設定段階別被保険者数合計entity != null && !RString.isNullOrEmpty(this.標準設定段階別被保険者数合計entity.get保険者設定段階())) {
             source.list_3
                     = 文字列_第.concat(this.標準設定段階別被保険者数合計entity.get保険者設定段階().replace(ゼロ, RString.EMPTY)).concat(文字列_段階);
         }
-        if (null != this.標準設定段階別被保険者数合計entity.get保険者設定人数()) {
+        if (this.標準設定段階別被保険者数合計entity != null && null != this.標準設定段階別被保険者数合計entity.get保険者設定人数()) {
             source.list_4 = doカンマ編集(this.標準設定段階別被保険者数合計entity.get保険者設定人数());
+        }
+        if (RString.isNullOrEmpty(source.hokenshaNo)) {
+            source.hokenshaNo = new RString(this.標準設定段階別被保険者数合計entity.get市町村コード().toString());
+        }
+        if (RString.isNullOrEmpty(source.hokenshaName)) {
+            source.hokenshaName = this.標準設定段階別被保険者数合計entity.get市町村名称();
         }
     }
 
