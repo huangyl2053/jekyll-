@@ -125,7 +125,7 @@ public class JukyushaDaichoCyouhyoujouhouProcess extends BatchProcessBase<IdoChu
     private List<ShikibetsuCode> 識別コードリスト;
     private ShikibetsuCode 識別コードKEY;
     private HihokenshaNo 被保険者番号KEY;
-    private HihokenshaNo 被保険者番号;
+//    private HihokenshaNo 被保険者番号;
     private DonyuKeitaiCode 導入形態コード;
     private RString 保険者番号の取得;
     private RString 保険者名称の取得;

@@ -187,7 +187,6 @@ public class HanyoListFutanGendoGakuNinteiProcess extends BatchProcessBase<Futan
     private Association association;
     private HokenshaList hokenshaList;
     private List<PersonalData> personalDataList;
-    private int i = 0;
 
     @Override
     protected void initialize() {
@@ -785,8 +784,9 @@ public class HanyoListFutanGendoGakuNinteiProcess extends BatchProcessBase<Futan
                 .setCommaSeparated().toString()));
         eucCsvEntity.set有価証券評価概算額(new RString(KingakuFormatter.create(entity.get介護保険負担限度額認定_有価証券評価概算額()).format(KingakuUnit.円)
                 .setCommaSeparated().toString()));
-        eucCsvEntity.setその他金額(entity.get介護保険負担限度額認定_その他金額() != null ? new RString(KingakuFormatter.create(entity.get介護保険負担限度額認定_その他金額()).format(KingakuUnit.円)
-                .setCommaSeparated().toString()) : RString.EMPTY);
+        eucCsvEntity.setその他金額(entity.get介護保険負担限度額認定_その他金額() != null
+                ? new RString(KingakuFormatter.create(entity.get介護保険負担限度額認定_その他金額()).format(KingakuUnit.円)
+                        .setCommaSeparated().toString()) : RString.EMPTY);
         eucCsvEntity.set届出区分(set届出区分(entity.get居宅届出_届出区分()));
         eucCsvEntity.set居宅計画作成区分(set居宅計画作成区分(entity.get事業者作成_作成区分コード()));
         eucCsvEntity.set計画事業者番号(entity.get事業者作成_計画事業者番号());
