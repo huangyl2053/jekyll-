@@ -76,9 +76,6 @@
         <if test="保険者コード!=null and !保険者コード.isEmpty() and  保険者コード.getColumnValue() != '1' ">
          AND "DbT1001HihokenshaDaicho"."shichosonCode" = #{保険者コード}
         </if>
-        <if test="出力項目!=null">
-         ${出力項目}
-        </if>
         )
         SELECT
         "dbT1001HihokenshaDaicho_hihokenshaNo",
@@ -181,6 +178,9 @@
         ON "ShikibetsuTaisho"."shikibetsuCode" = "dbT1001HihokenshaDaicho_shikibetsuCode"
         INNER JOIN rgua."UaFt250FindAtesaki"('DB','DBC','',FALSE,'','',TRUE ,TRUE ,TRUE ,TRUE ,'') AS "Atesaki"
         ON "Atesaki"."shikibetsuCode" = "dbT1001HihokenshaDaicho_shikibetsuCode"
+        <if test="出力項目!=null">
+         ${出力項目}
+        </if>
     </select>
         
     <resultMap id="resultMap_HanyoListKogakuGassanKeisanEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkogakugassan.HanyoListKogakuGassanKeisanEntity" autoMapping="true">
