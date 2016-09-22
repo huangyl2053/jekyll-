@@ -68,6 +68,7 @@ public class SogojigyohiShikakuShogohyoEditor implements ISogojigyohiShikakuShog
                 .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         RString 作成時 = システム日付.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒);
         source.printTimeStamp = 作成日.concat(RString.HALF_SPACE).concat(作成時).concat(RString.HALF_SPACE).concat(SAKUSEI);
+        source.shikibetsuCode = entity.get識別コード();
         if (null != entity.get資格照合_保険者番号()) {
             source.hokenshaNo = entity.get資格照合_保険者番号().getColumnValue();
         }
