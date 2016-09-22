@@ -271,10 +271,8 @@ public class DvKogakuServiceJuryoInin {
         if (pairs.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
-        if (修正.equals(div.getOperateState())) {
-            if ((!ResponseHolder.isReRequest()) && getHandler(div).onClick_btnSaveBefore()) {
-                return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
-            }
+        if (修正.equals(div.getOperateState()) && (!ResponseHolder.isReRequest()) && getHandler(div).onClick_btnSaveBefore()) {
+            return ResponseData.of(div).addMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage()).respond();
         }
 
         KogakuJuryoininKeiyakuJigyoshaHolder holder = ViewStateHolder.get(

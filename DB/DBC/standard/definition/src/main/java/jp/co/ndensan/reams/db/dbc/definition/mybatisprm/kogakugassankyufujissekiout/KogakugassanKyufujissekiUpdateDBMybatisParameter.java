@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassankyufujissekiout;
 
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 
 /**
  * 高額合算給付実績情報作成のDB更新MybatisParameter
@@ -17,15 +18,15 @@ import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KogakugassanKyufujissekiUpdateDBMybatisParameter implements IMyBatisParameter {
 
-    private boolean 送付除外フラグ;
+    private FlexibleYearMonth 処理年月;
 
     /**
      * インスタンスを生成します。
      *
-     * @param flag boolean
+     * @param 処理年月 FlexibleYearMonth
      */
-    public KogakugassanKyufujissekiUpdateDBMybatisParameter(boolean flag) {
-        this.送付除外フラグ = flag;
+    public KogakugassanKyufujissekiUpdateDBMybatisParameter(FlexibleYearMonth 処理年月) {
+        this.処理年月 = 処理年月;
     }
 
 }
