@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC1500011;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KagoMoshitate;
 import jp.co.ndensan.reams.db.dbc.business.core.kaigokyufuhikagomositatetouroku.KagoMoshitateCollect;
@@ -63,6 +64,7 @@ public class KaigoKyufuhiKagoMositateTouroku {
     private static final RString MENUID_DBCMN91001 = new RString("DBCMN91001");
     private static final RString MENUID_DBCMN91002 = new RString("DBCMN91002");
     private static final RString MENUID_DBCMN91003 = new RString("DBCMN91003");
+    private static final List<RString> 同月審査用_EMPTY = new ArrayList<>();
 
     /**
      * 画面初期化します。
@@ -182,6 +184,10 @@ public class KaigoKyufuhiKagoMositateTouroku {
      * @return ResponseData<KaigoKyufuhiKagoMositateTourokuDiv>
      */
     public ResponseData<KaigoKyufuhiKagoMositateTourokuDiv> onClick_BtnSentaku(KaigoKyufuhiKagoMositateTourokuDiv div) {
+        div.getTxtMeisaiMoshitateDate().setDisabled(false);
+        div.getDdlMeisaiKagoMoshitateRiyu().setDisabled(false);
+        div.getChkMeisaiForDogetsuShinsa().setDisabled(false);
+        div.getKokuhirenSaiSofu().setDisabled(false);
         if (div.getKyufuJissekiGaitoshaListPanel().getDgHihokenshaSearchGaitosha().getActiveRow().getChkCreateMoshitatesho()) {
             div.setHdnState(修正モード);
         } else {
@@ -199,6 +205,10 @@ public class KaigoKyufuhiKagoMositateTouroku {
      */
     public ResponseData<KaigoKyufuhiKagoMositateTourokuDiv> onClick_BtnSakujo(KaigoKyufuhiKagoMositateTourokuDiv div) {
         div.setHdnState(削除モード);
+        div.getTxtMeisaiMoshitateDate().setDisabled(true);
+        div.getDdlMeisaiKagoMoshitateRiyu().setDisabled(true);
+        div.getChkMeisaiForDogetsuShinsa().setDisabled(true);
+        div.getKokuhirenSaiSofu().setDisabled(true);
         set修正給付実績明細(div);
         return ResponseData.of(div).setState(DBC1500011StateName.meisai);
     }
@@ -210,14 +220,14 @@ public class KaigoKyufuhiKagoMositateTouroku {
      * @return ResponseData<KaigoKyufuhiKagoMositateTourokuDiv>
      */
     public ResponseData<KaigoKyufuhiKagoMositateTourokuDiv> onClick_BtnSave(KaigoKyufuhiKagoMositateTourokuDiv div) {
+        if (is送付済みチェック(div)) {
+            return ResponseData.of(div).addValidationMessages(getValidation(div).check送付済みチェック()).respond();
+        }
         if (is申立日の年月と提供年月の関連チェック(div)) {
             return ResponseData.of(div).addValidationMessages(getValidation(div).check申立日エラー()).respond();
         }
         if (is同月審査用と申立理由の関連チェック(div)) {
             return ResponseData.of(div).addValidationMessages(getValidation(div).check同月審査申立理由整合性エラー()).respond();
-        }
-        if (is送付済みチェック(div)) {
-            return ResponseData.of(div).addValidationMessages(getValidation(div).check送付済みチェック()).respond();
         }
         int index = div.getKyufuJissekiGaitoshaListPanel().getDgHihokenshaSearchGaitosha().getClickedRowId();
         KaigoKyufuhiKagoMositateTourokuResult 給付実績情報 = ViewStateHolder
@@ -240,13 +250,21 @@ public class KaigoKyufuhiKagoMositateTouroku {
      */
     public ResponseData<KaigoKyufuhiKagoMositateTourokuDiv> onClick_BtnModuro(KaigoKyufuhiKagoMositateTourokuDiv div) {
         div.setHdnKensaku(再検索フラグ);
+        div.getTxtMeisaiMoshitateDate().clearValue();
+        div.getDdlMeisaiKagoMoshitateRiyu().setSelectedIndex(0);
+        div.getChkMeisaiForDogetsuShinsa().setSelectedItemsByKey(同月審査用_EMPTY);
+        div.getKokuhirenSaiSofu().setSelectedItemsByKey(同月審査用_EMPTY);
         IUrControlData controlData = UrControlDataFactory.createInstance();
         get給付実績一覧(div, controlData);
         return ResponseData.of(div).setState(DBC1500011StateName.search);
     }
 
     private boolean is申立日の年月と提供年月の関連チェック(KaigoKyufuhiKagoMositateTourokuDiv div) {
-        return div.getTxtMeisaiMoshitateDate().getValue().isBefore(div.getTxtMeisaiTeikyoYM().getValue());
+        RDate 申立日の年月 = RDate.MIN;
+        if (div.getTxtMeisaiMoshitateDate().getValue() != null) {
+            申立日の年月 = div.getTxtMeisaiMoshitateDate().getValue();
+        }
+        return 申立日の年月.isBefore(div.getTxtMeisaiTeikyoYM().getValue());
     }
 
     private boolean is同月審査用と申立理由の関連チェック(KaigoKyufuhiKagoMositateTourokuDiv div) {
@@ -256,7 +274,7 @@ public class KaigoKyufuhiKagoMositateTouroku {
 
     private boolean is送付済みチェック(KaigoKyufuhiKagoMositateTourokuDiv div) {
         return 削除モード.equals(div.getHdnState())
-                && div.getTxtMeisaiSendYM().getValue() == null;
+                && div.getTxtMeisaiSendYM().getValue() != null;
     }
 
     private void set修正給付実績明細(KaigoKyufuhiKagoMositateTourokuDiv div) {
