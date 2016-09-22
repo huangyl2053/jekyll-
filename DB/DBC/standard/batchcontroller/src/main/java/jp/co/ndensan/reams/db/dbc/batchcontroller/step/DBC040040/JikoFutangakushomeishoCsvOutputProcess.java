@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc040040;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040040;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +17,8 @@ import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.dbc040040.GassanJikofutangakushomeishoHakkoIchiranCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040040.JikoFutangakushomeishoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.gassanjikofutangakuhakkoichiran.GassanJikofutangakuHakkoIchiranSource;
+import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
@@ -131,10 +133,17 @@ public class JikoFutangakushomeishoCsvOutputProcess extends BatchKeyBreakBase<Ji
     protected void keyBreakProcess(JikoFutangakushomeishoEntity entity) {
         if (isBreak(entity)) {
             連番++;
+            IAtesaki atesaki = AtesakiFactory.createInstance(getBefore().get宛先());
             GassanJikofutangakushomeishoHakkoIchiranCsvEntityEditor editor = new GassanJikofutangakushomeishoHakkoIchiranCsvEntityEditor(
                     getBefore(), RDate.getNowDateTime(), 連番);
             csvWriter.writeLine(editor.edit());
             KogakuGassanData 高額合算データ = getKogakuGassanData(getBefore());
+            高額合算データ.set郵便番号(atesaki.get宛先住所().get郵便番号().getYubinNo());
+            高額合算データ.set町域コード(atesaki.get宛先住所().get町域コード().getColumnValue());
+            高額合算データ.set行政区コード(atesaki.get宛先行政区().getコード().getColumnValue());
+            高額合算データ.set氏名５０音カナ(entity.get高額合算一時().getHihokenshaNo().getColumnValue());
+            高額合算データ.set市町村コード(entity.get高額合算一時().getShichosonCode().getColumnValue());
+            高額合算データ.set証記載保険者番号(entity.get高額合算自己負担額明細().getHokenshaNo().getColumnValue());
             GassanJikofutangakuHakkoIchiranReport report = new GassanJikofutangakuHakkoIchiranReport(高額合算データ, 出力順, 連番);
             report.writeBy(reportSourceWriter);
         }

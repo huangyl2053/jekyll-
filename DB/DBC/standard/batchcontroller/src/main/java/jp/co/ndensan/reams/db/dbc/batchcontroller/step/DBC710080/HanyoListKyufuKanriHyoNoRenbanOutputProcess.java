@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc710090;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC710080;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbc.business.euc.hanyolistkagomoshitate.HanyoListKagoMoshitateCsvEntityEditor;
-import jp.co.ndensan.reams.db.dbc.business.euc.hanyolistkagomoshitate.HanyoListKagoMoshitateOutputOrder;
-import jp.co.ndensan.reams.db.dbc.definition.core.kagomoshitate.KagoMoshitateHokenshaKubun;
-import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc710090.HanyoListKagoMoshitateProcessParameter;
+import jp.co.ndensan.reams.db.dbc.business.euc.hanyolistkyufukanrihyo.HanyoListKyufuKanriHyoCsvEntityEditor;
+import jp.co.ndensan.reams.db.dbc.business.euc.hanyolistkyufukanrihyo.HanyoListKyufuKanriHyoOutputOrder;
+import jp.co.ndensan.reams.db.dbc.definition.core.kyufukanrihyo.KyufuKanrihyo_MeisaigyoKubun;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc710080.HanyoListKyufuKanriHyoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
-import jp.co.ndensan.reams.db.dbc.entity.csv.dbc710090.HanyoListKagoMoshitateCsvEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc710090.HanyoListKagoMoshitateEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.dbc710080.HanyoListKyufuKanriHyoNoRenbanCsvEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc710080.HanyoListKyufuKanriHyoEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
@@ -55,26 +55,26 @@ import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
- * 汎用リスト(過誤申立情報)のバッチ用パラメータフロークラスです。
+ * 汎用リスト(給付管理票)連番出力しないのバッチ用パラメータフロークラスです。
  *
- * @reamsid_L DBC-3095-020 pengxingyi
+ * @reamsid_L DBC-3096-020 pengxingyi
  */
-public class HanyoListKagoMoshitateOutputProcess extends BatchProcessBase<HanyoListKagoMoshitateEntity> {
+public class HanyoListKyufuKanriHyoNoRenbanOutputProcess extends BatchProcessBase<HanyoListKyufuKanriHyoEntity> {
 
     private static final RString MYBATIS_SELECT_ID
-            = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc710090."
-                    + "IHanyoListKagoMoshitateMapper.select過誤申立情報");
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC701009");
-    private final RString csvFileName = new RString("HanyoList_KagoMoshitate.csv");
-    private static final RString 日本語ファイル名 = new RString("汎用リスト　過誤申立情報CSV");
+            = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc710080."
+                    + "IHanyoListKyufuKanriHyoMapper.select給付管理票");
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC701008");
+    private final RString csvFileName = new RString("HanyoList_KyufuKanriHyo.csv");
+    private static final RString 日本語ファイル名 = new RString("汎用リスト　給付管理票");
     private static final RString 定数_なし = new RString("なし");
     private static final RString 定数_あり = new RString("あり");
     private static final RString TITLE_抽出対象者 = new RString("【抽出対象者】");
     private static final RString TITLE_保険者 = new RString("　保険者：");
-    private static final RString TITLE_国保連送付年月 = new RString("　国保連送付年月：");
-    private static final RString TITLE_過誤申立給付区分 = new RString("　過誤申立給付区分：");
-    private static final RString TITLE_サービス提供年月 = new RString("　サービス提供年月：");
-    private static final RString TITLE_事業者 = new RString("　事業者：");
+    private static final RString TITLE_給付対象年月 = new RString("　給付対象年月：");
+    private static final RString TITLE_明細行出力有無 = new RString("　明細行出力有無：");
+    private static final RString TITLE_居宅支援事業者 = new RString("　居宅支援事業者：");
+    private static final RString TITLE_委託先支援事業者 = new RString("　委託先支援事業者：");
     private static final RString 括弧LEFT = new RString("（");
     private static final RString 括弧RIGHT = new RString("）");
     private static final RString TILDE = new RString("～");
@@ -84,36 +84,36 @@ public class HanyoListKagoMoshitateOutputProcess extends BatchProcessBase<HanyoL
     private static final RString DATANAME_被保険者番号 = new RString("被保険者番号");
     private static final RString 定数_ORDERBY = new RString("order by");
     private static final RString コンマ = new RString(",");
-    private static final RString 項目名_履歴番号 = new RString("\"dbT3059KagoMoshitate_rirekiNo\"");
-    private IOutputOrder 出力順;
-    private HanyoListKagoMoshitateProcessParameter parameter;
+    private static final RString 項目名_給付管理票明細行番号 = new RString("\"kyufuKanrihyo_kyufuKanrihyoMeisaiLineNo\"");
+    private HanyoListKyufuKanriHyoProcessParameter parameter;
     private Association 地方公共団体情報;
     private Map<LasdecCode, KoseiShichosonMaster> 構成市町村マスタ;
     private List<PersonalData> personalDataList;
     private RString eucFilePath;
     private int 連番;
+    private IOutputOrder 出力順;
     private RString csv出力Flag;
     FileSpoolManager spoolManager;
 
     @BatchWriter
-    private CsvWriter<HanyoListKagoMoshitateCsvEntity> csvWriter;
+    private CsvWriter<HanyoListKyufuKanriHyoNoRenbanCsvEntity> csvWriter;
 
     @Override
     protected void initialize() {
-        if (RString.isNullOrEmpty(parameter.get出力順())) {
+        if (parameter.get出力順() != 0L) {
             IChohyoShutsuryokujunFinder iChohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
             出力順 = iChohyoShutsuryokujunFinder.get出力順(SubGyomuCode.DBC介護給付,
-                    ReportIdDBC.DBC701009.getReportId(), Long.valueOf(parameter.get出力順().toString()));
+                    ReportIdDBC.DBC701008.getReportId(), parameter.get出力順());
             if (出力順 != null) {
-                parameter.set出力項目(MyBatisOrderByClauseCreator.create(HanyoListKagoMoshitateOutputOrder.class, 出力順).
-                        concat(コンマ).concat(HanyoListKagoMoshitateOutputOrder.被保険者番号.getMyBatis項目名()).
-                        concat(コンマ).concat(HanyoListKagoMoshitateOutputOrder.サービス年月.getMyBatis項目名()).
-                        concat(コンマ).concat(項目名_履歴番号));
+                parameter.set出力項目(MyBatisOrderByClauseCreator.create(HanyoListKyufuKanriHyoOutputOrder.class, 出力順).
+                        concat(コンマ).concat(HanyoListKyufuKanriHyoOutputOrder.被保険者番号.getMyBatis項目名()).
+                        concat(コンマ).concat(HanyoListKyufuKanriHyoOutputOrder.サービス年月.getMyBatis項目名()).
+                        concat(コンマ).concat(項目名_給付管理票明細行番号));
             }
         } else {
-            parameter.set出力項目(定数_ORDERBY.concat(HanyoListKagoMoshitateOutputOrder.被保険者番号.getMyBatis項目名()).
-                    concat(コンマ).concat(HanyoListKagoMoshitateOutputOrder.サービス年月.getMyBatis項目名()).
-                    concat(コンマ).concat(項目名_履歴番号));
+            parameter.set出力項目(定数_ORDERBY.concat(HanyoListKyufuKanriHyoOutputOrder.被保険者番号.getMyBatis項目名()).
+                    concat(コンマ).concat(HanyoListKyufuKanriHyoOutputOrder.サービス年月.getMyBatis項目名()).
+                    concat(コンマ).concat(項目名_給付管理票明細行番号));
         }
         構成市町村マスタ = new HashMap<>();
         連番 = 0;
@@ -137,7 +137,7 @@ public class HanyoListKagoMoshitateOutputProcess extends BatchProcessBase<HanyoL
                 UzUDE0831EucAccesslogFileType.Csv);
         eucFilePath = Path.combinePath(spoolManager.getEucOutputDirectry(),
                 csvFileName);
-        csvWriter = BatchWriters.csvWriter(HanyoListKagoMoshitateCsvEntity.class).
+        csvWriter = BatchWriters.csvWriter(HanyoListKyufuKanriHyoNoRenbanCsvEntity.class).
                 filePath(eucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
@@ -146,19 +146,19 @@ public class HanyoListKagoMoshitateOutputProcess extends BatchProcessBase<HanyoL
                 hasHeader(false).
                 build();
         if (parameter.is項目名付加()) {
-            csvWriter.writeLine(HanyoListKagoMoshitateCsvEntityEditor.getHeader());
+            csvWriter.writeLine(HanyoListKyufuKanriHyoCsvEntityEditor.getHeaderNoRenban());
         }
     }
 
     @Override
-    protected void process(HanyoListKagoMoshitateEntity entity) {
+    protected void process(HanyoListKyufuKanriHyoEntity entity) {
         連番++;
         csv出力Flag = 定数_あり;
-        HanyoListKagoMoshitateCsvEntityEditor edit = new HanyoListKagoMoshitateCsvEntityEditor(entity, parameter,
+        HanyoListKyufuKanriHyoCsvEntityEditor editor = new HanyoListKyufuKanriHyoCsvEntityEditor(entity, parameter,
                 地方公共団体情報, 構成市町村マスタ, parameter.getシステム日付(), 連番);
-        csvWriter.writeLine(edit.edit());
+        csvWriter.writeLine(editor.noRenbanEdit());
         ExpandedInformation expandedInformation = new ExpandedInformation(
-                CODE_0003, DATANAME_被保険者番号, entity.get過誤申立().getHiHokenshaNo().getColumnValue());
+                CODE_0003, DATANAME_被保険者番号, entity.get給付管理票().getHiHokenshaNo().getColumnValue());
         personalDataList.add(PersonalData.of(entity.get宛名().getShikibetsuCode(), expandedInformation));
     }
 
@@ -188,48 +188,39 @@ public class HanyoListKagoMoshitateOutputProcess extends BatchProcessBase<HanyoL
 
     private List<RString> get抽出条件() {
         List<RString> 抽出条件 = new ArrayList<>();
+        RString temp;
         抽出条件.add(TITLE_抽出対象者);
         if (parameter.get保険者コード() != null && !LasdecCode.EMPTY.equals(parameter.get保険者コード())) {
             Association association = AssociationFinderFactory.
                     createInstance().getAssociation(parameter.get保険者コード());
             抽出条件.add(TITLE_保険者.concat(association.get市町村名()));
         }
-        if ((parameter.get国保連送付年月From() != null && !FlexibleYearMonth.EMPTY.equals(parameter.get国保連送付年月From()))
-                || (parameter.get国保連送付年月To() != null && !FlexibleYearMonth.EMPTY.equals(parameter.get国保連送付年月To()))) {
-            RString temp = TITLE_国保連送付年月;
-            if (parameter.get国保連送付年月From() != null && !FlexibleYearMonth.EMPTY.equals(parameter.get国保連送付年月From())) {
-                temp = temp.concat(dateFormat(parameter.get国保連送付年月From())).concat(RString.FULL_SPACE);
+        if ((parameter.get給付対象年月From() != null && !FlexibleYearMonth.EMPTY.equals(parameter.get給付対象年月From()))
+                || (parameter.get給付対象年月To() != null && !FlexibleYearMonth.EMPTY.equals(parameter.get給付対象年月To()))) {
+            temp = TITLE_給付対象年月;
+            if (parameter.get給付対象年月From() != null) {
+                temp = temp.concat(dateFormat(parameter.get給付対象年月From())).concat(RString.FULL_SPACE);
             }
             temp = temp.concat(TILDE);
-            if (parameter.get国保連送付年月To() != null && !FlexibleYearMonth.EMPTY.equals(parameter.get国保連送付年月To())) {
-                temp = temp.concat(RString.FULL_SPACE).concat(dateFormat(parameter.get国保連送付年月To()));
+            if (parameter.get給付対象年月To() != null) {
+                temp = temp.concat(RString.FULL_SPACE).concat(dateFormat(parameter.get給付対象年月To()));
             }
             抽出条件.add(temp);
         }
-        get抽出条件Part2(抽出条件);
+        if (!RString.isNullOrEmpty(parameter.get居宅支援事業者コード())) {
+            抽出条件.add(TITLE_居宅支援事業者.concat(括弧LEFT).concat(parameter.get居宅支援事業者コード()).
+                    concat(括弧RIGHT).concat(parameter.get居宅支援事業者名()));
+        }
+        if (!RString.isNullOrEmpty(parameter.get委託先支援事業者コード())) {
+            抽出条件.add(TITLE_委託先支援事業者.concat(括弧LEFT).concat(parameter.get委託先支援事業者コード()).
+                    concat(括弧RIGHT).concat(parameter.get委託先支援事業者名()));
+        }
+        if (!RString.isNullOrEmpty(parameter.get明細行出力有無())) {
+            抽出条件.add(TITLE_明細行出力有無.concat(KyufuKanrihyo_MeisaigyoKubun.toValue(parameter.get明細行出力有無()).get名称()));
+        } else {
+            抽出条件.add(TITLE_明細行出力有無.concat(KyufuKanrihyo_MeisaigyoKubun.明細行含む.get名称()));
+        }
         return 抽出条件;
-    }
-
-    private void get抽出条件Part2(List<RString> 抽出条件) {
-        if (!RString.isNullOrEmpty(parameter.get過誤申立給付区分())) {
-            抽出条件.add(TITLE_過誤申立給付区分.concat(KagoMoshitateHokenshaKubun.toValue(parameter.get過誤申立給付区分()).get名称()));
-        }
-        if ((parameter.getサービス提供年月From() != null && !FlexibleYearMonth.EMPTY.equals(parameter.getサービス提供年月From()))
-                || (parameter.getサービス提供年月To() != null && !FlexibleYearMonth.EMPTY.equals(parameter.getサービス提供年月To()))) {
-            RString temp = TITLE_サービス提供年月;
-            if (parameter.getサービス提供年月From() != null && !FlexibleYearMonth.EMPTY.equals(parameter.getサービス提供年月From())) {
-                temp = temp.concat(dateFormat(parameter.getサービス提供年月From())).concat(RString.FULL_SPACE);
-            }
-            temp = temp.concat(TILDE);
-            if (parameter.getサービス提供年月To() != null && !FlexibleYearMonth.EMPTY.equals(parameter.getサービス提供年月To())) {
-                temp = temp.concat(RString.FULL_SPACE).concat(dateFormat(parameter.getサービス提供年月To()));
-            }
-            抽出条件.add(temp);
-        }
-        if (!RString.isNullOrEmpty(parameter.get事業者コード())) {
-            抽出条件.add(TITLE_事業者.concat(括弧LEFT).concat(parameter.get事業者コード()).
-                    concat(括弧RIGHT).concat(parameter.get事業者名()));
-        }
     }
 
     private RString dateFormat(FlexibleYearMonth date) {

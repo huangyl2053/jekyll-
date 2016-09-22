@@ -425,7 +425,9 @@
          "KogakuGassanTemp"."atena_HihokenshaShimei" as "kogakuGassanTemp_atena_HihokenshaShimei",
          "KogakuGassanTemp"."atena_SeinengappiYMD" as "kogakuGassanTemp_atena_SeinengappiYMD",
          "KogakuGassanTemp"."atena_Seibetsu" as "kogakuGassanTemp_atena_Seibetsu",
-         "KogakuGassanTemp"."shikibetsuCode" as "kogakuGassanTemp_shikibetsuCode"
+         "KogakuGassanTemp"."shikibetsuCode" as "kogakuGassanTemp_shikibetsuCode",
+         
+         "KogakuGassanTemp"."shichosonCode" as "kogakuGassanTemp_shichosonCode"
     </sql>
     
     <resultMap id="ResultMap_KogakuGassanTemp" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040040.KogakuGassanTempEntity" autoMapping="true">
@@ -536,6 +538,8 @@
         <result property="atena_HihokenshaShimei" column="kogakuGassanTemp_atena_HihokenshaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
         <result property="atena_SeinengappiYMD" column="kogakuGassanTemp_atena_SeinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="atena_Seibetsu" column="kogakuGassanTemp_atena_Seibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="shikibetsuCode" column="kogakuGassanTemp_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>      
+        <result property="shikibetsuCode" column="kogakuGassanTemp_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>    
+        
+         <result property="shichosonCode" column="kogakuGassanTemp_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>        
     </resultMap>
 </mapper>

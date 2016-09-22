@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc040040;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040040;
 
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040040.HihokenshaDaichoJohoEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040040.KogakuGassanTempEntity;
@@ -29,6 +29,7 @@ public class KogakuGassanTempUpdateProcess extends BatchProcessBase<HihokenshaDa
             = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc040040."
                     + "IJikofutanShomeishoMapper.select被保険者台帳宛名情報");
     private static final RString TABLE_NAME = new RString("KogakuGassanTemp");
+    private static final RString 定数_1 = new RString("1");
 
     @BatchWriter
     IBatchTableWriter tableWriter;
@@ -53,7 +54,11 @@ public class KogakuGassanTempUpdateProcess extends BatchProcessBase<HihokenshaDa
         tempEntity.setAtena_SeinengappiYMD(宛名.to個人().get生年月日().toFlexibleDate());
         tempEntity.setAtena_Seibetsu(宛名.to個人().get性別().getCode());
         tempEntity.setShikibetsuCode(宛名.to個人().get識別コード());
-
+        if (定数_1.equals(entity.get被保険者台帳().getKoikinaiJushochiTokureiFlag())) {
+            tempEntity.setShichosonCode(entity.get被保険者台帳().getKoikinaiTokureiSochimotoShichosonCode());
+        } else {
+            tempEntity.setShichosonCode(entity.get被保険者台帳().getShichosonCode());
+        }
         tableWriter.update(tempEntity);
     }
 
