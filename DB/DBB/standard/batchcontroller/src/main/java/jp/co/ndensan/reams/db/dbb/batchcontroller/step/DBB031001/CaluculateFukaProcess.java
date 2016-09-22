@@ -237,16 +237,18 @@ public class CaluculateFukaProcess extends BatchProcessBase<CaluculateFukaEntity
 
     @Override
     protected void afterExecute() {
-        SeikatsuHogoJukyushaRelateEntity 生活保護受給者RelateEntity = new SeikatsuHogoJukyushaRelateEntity();
-        生活保護受給者RelateEntity.set生活保護受給者Entity(生活保護受給者Entity);
-        生活保護受給者RelateEntity.set生活保護扶助種類Entity(生活保護扶助種類EntityList);
-        set生保の情報(生活保護受給者RelateEntity);
-        KyokaisoGaitoshaEntity 境界層RelateEntity = new KyokaisoGaitoshaEntity();
-        境界層RelateEntity.set境界層該当者Entity(境界層該当者Entity);
-        境界層RelateEntity.set境界層保険料段階Entity(境界層保険料段階EntityList);
-        set境界層の情報(境界層RelateEntity);
-        caluculateFuka(fukaEntity, 資格の情報, 賦課の情報, 徴収方法の情報, 世帯員所得情報List, 月別ランク,
-                生保の情報, 老齢の情報, 境界層の情報, 賦課年度);
+        if (fukaEntity != null) {
+            SeikatsuHogoJukyushaRelateEntity 生活保護受給者RelateEntity = new SeikatsuHogoJukyushaRelateEntity();
+            生活保護受給者RelateEntity.set生活保護受給者Entity(生活保護受給者Entity);
+            生活保護受給者RelateEntity.set生活保護扶助種類Entity(生活保護扶助種類EntityList);
+            set生保の情報(生活保護受給者RelateEntity);
+            KyokaisoGaitoshaEntity 境界層RelateEntity = new KyokaisoGaitoshaEntity();
+            境界層RelateEntity.set境界層該当者Entity(境界層該当者Entity);
+            境界層RelateEntity.set境界層保険料段階Entity(境界層保険料段階EntityList);
+            set境界層の情報(境界層RelateEntity);
+            caluculateFuka(fukaEntity, 資格の情報, 賦課の情報, 徴収方法の情報, 世帯員所得情報List, 月別ランク,
+                    生保の情報, 老齢の情報, 境界層の情報, 賦課年度);
+        }
     }
 
     private void set資格の情報(CaluculateFukaEntity entity) {
@@ -258,6 +260,8 @@ public class CaluculateFukaProcess extends BatchProcessBase<CaluculateFukaEntity
     private void set賦課の情報(CaluculateFukaEntity entity) {
         if (entity.get賦課の情報Entity() != null && entity.get賦課の情報Entity().getDbT2002_hihokenshaNo() != null) {
             賦課の情報 = manager.get賦課の情報(entity.get賦課の情報Entity());
+        } else {
+            賦課の情報 = null;
         }
     }
 
@@ -286,10 +290,9 @@ public class CaluculateFukaProcess extends BatchProcessBase<CaluculateFukaEntity
     }
 
     private void set老齢の情報EntityList(CaluculateFukaEntity entity) {
-        if (entity != null && entity.get老齢情報Entity() != null) {
-            if (老齢の情報.isEmpty() || isContain(entity.get老齢情報Entity())) {
-                老齢の情報.add(new RoreiFukushiNenkinJukyusha(entity.get老齢情報Entity()));
-            }
+        if (entity != null && entity.get老齢情報Entity() != null
+                && (老齢の情報.isEmpty() || isContain(entity.get老齢情報Entity()))) {
+            老齢の情報.add(new RoreiFukushiNenkinJukyusha(entity.get老齢情報Entity()));
         }
     }
 
@@ -311,10 +314,9 @@ public class CaluculateFukaProcess extends BatchProcessBase<CaluculateFukaEntity
     }
 
     private void set生活保護扶助種類EntityList(CaluculateFukaEntity entity) {
-        if (entity != null && entity.get生活保護扶助種類Entity() != null) {
-            if (生活保護扶助種類EntityList.isEmpty() || isContain生活保護扶助種類(entity.get生活保護扶助種類Entity())) {
-                生活保護扶助種類EntityList.add(entity.get生活保護扶助種類Entity());
-            }
+        if (entity != null && entity.get生活保護扶助種類Entity() != null
+                && (生活保護扶助種類EntityList.isEmpty() || isContain生活保護扶助種類(entity.get生活保護扶助種類Entity()))) {
+            生活保護扶助種類EntityList.add(entity.get生活保護扶助種類Entity());
         }
     }
 
@@ -339,10 +341,9 @@ public class CaluculateFukaProcess extends BatchProcessBase<CaluculateFukaEntity
     }
 
     private void set境界層保険料段階EntityList(CaluculateFukaEntity entity) {
-        if (entity != null && entity.get境界層保険料段階Entity() != null) {
-            if (境界層保険料段階EntityList.isEmpty() || isContain境界層保険料段階(entity.get境界層保険料段階Entity())) {
-                境界層保険料段階EntityList.add(entity.get境界層保険料段階Entity());
-            }
+        if (entity != null && entity.get境界層保険料段階Entity() != null
+                && (境界層保険料段階EntityList.isEmpty() || isContain境界層保険料段階(entity.get境界層保険料段階Entity()))) {
+            境界層保険料段階EntityList.add(entity.get境界層保険料段階Entity());
         }
     }
 

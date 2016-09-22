@@ -404,13 +404,7 @@
             ORDER BY "FukaCalculateTemp"."dbT2002_choteiNendo",
                      "FukaCalculateTemp"."dbT2002_fukaNendo",
                      "FukaCalculateTemp"."dbT2002_tsuchishoNo",
-                     "FukaCalculateTemp"."dbT2002_shikibetsuCode",
-                     "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode",
-                     "UrT0508SeikatsuHogoJukyusha"."gyomuCode",
-                     "UrT0508SeikatsuHogoJukyusha"."jukyuKaishiYMD",
-                     DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_hihokenshaNo",
-                     DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_rirekiNo",
-                     DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_linkNo"
+                     "FukaCalculateTemp"."dbT2002_shikibetsuCode"
     </select>
     
    <sql id="allColumns_UrT0526SeikatsuHogoFujoShurui">
