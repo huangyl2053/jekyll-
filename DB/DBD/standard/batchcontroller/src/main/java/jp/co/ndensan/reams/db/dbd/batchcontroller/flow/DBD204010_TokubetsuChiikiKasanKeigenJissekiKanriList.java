@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd204010.TaishoKyufuJissekiTokuteiProcess;
-import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd204010.TokuchiJissekiKanriListSakuseiProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD204010.TaishoKyufuJissekiTokuteiProcess;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD204010.TokuchiJissekiKanriListSakuseiProcess;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD204010.DBD204010_TokubetsuChiikiKasanKeigenJissekiKanriListParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -17,7 +17,8 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBD-3880-030 jinge
  */
-public class DBD204010_TokubetsuChiikiKasanKeigenJissekiKanriList extends BatchFlowBase<DBD204010_TokubetsuChiikiKasanKeigenJissekiKanriListParameter> {
+public class DBD204010_TokubetsuChiikiKasanKeigenJissekiKanriList
+        extends BatchFlowBase<DBD204010_TokubetsuChiikiKasanKeigenJissekiKanriListParameter> {
 
     private static final String 給付実績参照キー作成 = "給付実績参照キー作成";
 
