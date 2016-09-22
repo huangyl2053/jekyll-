@@ -96,7 +96,16 @@ public class ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriEditor implements IShoka
         source.seirino = item.getSeirino();
         source.tsuchino = item.getTsuchino();
         source.remban = item.getRemban();
-        set通知書データ(source);
+        if (!item.get定型文文字サイズ().isEmpty()) {
+            set通知書データ(source);
+        } else {
+            source.tsuchibun2 = item.getTsuchibun２();
+            source.tsuchibunLarge = item.getTsuchibunLarge();
+            source.tsuchibunMix1 = item.getTsuchibunMix1();
+            source.tsuchibunMix2 = item.getTsuchibunMix2();
+            source.tsuchibunMixTwo1 = item.getTsuchibunMixtwo1();
+            source.tsuchibunMixTwo2 = item.getTsuchibunMixtwo2();
+        }
         source.hakkoYMD = item.getHakkoYMD();
         source.denshiKoin = item.getDenshiKoin();
         source.ninshoshaYakushokuMei = item.getNinshoshaYakushokuMei();
