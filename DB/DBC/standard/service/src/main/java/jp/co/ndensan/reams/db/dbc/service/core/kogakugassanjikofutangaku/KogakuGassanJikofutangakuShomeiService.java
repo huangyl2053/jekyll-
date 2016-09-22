@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Idokub
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kyufujissekikoshinin.KyufuJissekiKoshinDoIchiranhyoSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kogakugassanjikofutangakushomeishoin.KogakuGassanJikofutangakuCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangakushomeishoin.KogakuGassanJikofutangakuShomeishoDateEntity;
-import jp.co.ndensan.reams.db.dbc.service.core.kyufujissekikoshinin.KyufuJissekiKoshinJohoService;
 import jp.co.ndensan.reams.db.dbx.business.config.kyotsu.hokenshajoho.ConfigKeysHokenshaJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -35,9 +34,9 @@ public class KogakuGassanJikofutangakuShomeiService {
     private static final RString 差異有り = new RString("差異有り");
 
     /**
-     * {@link InstanceProvider#create}にて生成した{@link KyufuJissekiKoshinJohoService}のインスタンスを返します。
+     * {@link InstanceProvider#create}にて生成した{@link KogakuGassanJikofutangakuShomeiService}のインスタンスを返します。
      *
-     * @return KyufuJissekiKoshinJohoService
+     * @return KogakuGassanJikofutangakuShomeiService
      */
     public static KogakuGassanJikofutangakuShomeiService createInstance() {
 

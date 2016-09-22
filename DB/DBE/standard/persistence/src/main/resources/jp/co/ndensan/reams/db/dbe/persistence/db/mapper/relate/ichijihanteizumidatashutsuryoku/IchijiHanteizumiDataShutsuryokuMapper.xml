@@ -40,7 +40,7 @@
                        rgdb."DbT5101NinteiShinseiJoho" as T5101 
                 INNER JOIN     rgdb."DbT5116IchijiHanteiKekkaJoho" as T5116 
                 ON  T5116."shinseishoKanriNo"= T5101."shinseishoKanriNo" 
-                AND  T5116."kariIchijiHanteiKubun" = False
+                AND  T5116."kariIchijiHanteiKubun" = #{仮一次判定区分}
                 <if test="一次判定日フラグ">
                   AND #{一次判定日From} <![CDATA[<=]]> T5116."ichijiHanteiYMD"
                   AND T5116."ichijiHanteiYMD" <![CDATA[<=]]> #{一次判定日To}
@@ -53,9 +53,9 @@
                     AND  T5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
                     AND  T5105."ikenshoTorokuKanryoYMD" IS NOT NULL
                     AND  T5105."ichijiHanteiKanryoYMD" IS NOT NULL
-                    AND  T5105."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
-                    AND  T5105."ninteiShinsakaiKanryoYMD" IS NOT NULL
-                    AND  T5105."centerSoshinYMD" IS NOT NULL
+                    AND  T5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
+                    AND  T5105."ninteiShinsakaiKanryoYMD" IS NULL
+                    AND  T5105."centerSoshinYMD" IS NULL
                INNER JOIN rgdb."DbT7051KoseiShichosonMaster" as T7051
                    ON  T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo"
                LEFT JOIN rgdb."DbT7211GaibuRenkeiDataoutputJoho"  as T7211  
@@ -69,9 +69,7 @@
                 </if>
                ORDER BY
                     T5101."shoKisaiHokenshaNo", T5101."ninteiShinseiYMD", T5101."hihokenshaNo"
-                <if test="usesSaidaiHyojiKensu">
-                    LIMIT #{saidaiHyojiKensu}
-               </if>      
+               LIMIT #{saidaiHyojiKensu}   
 </select>
 <resultMap id="resultMap_IchijiHanteizumiDataRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteizumidatashutsuryoku.IchijiHanteizumiDataRelateEntity" autoMapping="true">
     <result property="保険者番号" column="保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -734,28 +732,6 @@
                 LIMIT(1)                                                                                                                
     </select>
     <sql id="allColumns_認定調査票概況調査サービスの状況">
-           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B'  AND Q."remban" = 1 AND #{総合事業開始区分} ='1' THEN  Q."serviceJokyo" END AS 訪問介護ホームヘルプ,
-           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B'  AND Q."remban" = 2 AND #{総合事業開始区分} ='1' THEN  Q."serviceJokyo" END AS 訪問入浴介護,
-           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B'  AND Q."remban" = 3 AND #{総合事業開始区分} ='1' THEN  Q."serviceJokyo" END AS 訪問看護,
-           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B'  AND Q."remban" = 4 AND #{総合事業開始区分} ='1' THEN  Q."serviceJokyo" END AS 訪問リハビリテーション,
-           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 5 THEN  Q."serviceJokyo" END AS 居宅療養管理指導,
-           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 6 THEN  Q."serviceJokyo" END AS 通所介護デイサービス,
-           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 7 THEN  Q."serviceJokyo" END AS 通所リハビリテーションデイケア,
-           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 8 THEN  Q."serviceJokyo" END AS 短期入所生活介護ショートステイ,
-           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 9 THEN  Q."serviceJokyo" END AS 短期入所療養介護,
-           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 10 THEN  Q."serviceJokyo" END AS 特定施設入居者生活介護,
-           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 11 THEN  Q."serviceJokyo" END AS 福祉用具貸与,
-           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 12 THEN  Q."serviceJokyo" END AS 特定福祉用具販売,
-           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 13 THEN  Q."serviceJokyo" END AS 夜間対応型訪問介護,
-           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 14 THEN  Q."serviceJokyo" END AS 認知症対応型通所介護,
-           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 15 THEN  Q."serviceJokyo" END AS 小規模多機能型居宅介護,
-           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 16 THEN  Q."serviceJokyo" END AS 認知症対応型共同生活介護グループホーム,
-           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 17 THEN  Q."serviceJokyo" END AS 地域密着型特定施設入居者生活介護,
-           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 18 THEN  Q."serviceJokyo" END AS 地域密着型介護老人福祉施設入所者生活介護,
-           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 19 THEN  Q."serviceJokyo" END AS 定期巡回随時対応型訪問介護看護,
-           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 20 THEN  Q."serviceJokyo" END AS 看護小規模多機能型居宅介護 
-    </sql>
-    <sql id="allColumns_認定調査票概況調査サービス">
            CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='2' AND Q."remban" = 1 THEN  Q."serviceJokyo" END AS 訪問介護ホームヘルプ,
            CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='2' AND Q."remban" = 2 THEN  Q."serviceJokyo" END AS 訪問入浴介護,
            CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='2' AND Q."remban" = 3 THEN  Q."serviceJokyo" END AS 訪問看護,
@@ -775,7 +751,29 @@
            CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='2' AND Q."remban" = 17 THEN  Q."serviceJokyo" END AS 地域密着型特定施設入居者生活介護,
            CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='2' AND Q."remban" = 18 THEN  Q."serviceJokyo" END AS 地域密着型介護老人福祉施設入所者生活介護,
            CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='2' AND Q."remban" = 19 THEN  Q."serviceJokyo" END AS 定期巡回随時対応型訪問介護看護,
-           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='2' AND Q."remban" = 20 THEN  Q."serviceJokyo" END AS 複合型サービス 
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='2' AND Q."remban" = 20 THEN  Q."serviceJokyo" END AS 看護小規模多機能型居宅介護 
+    </sql>
+    <sql id="allColumns_認定調査票概況調査サービス">
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 1 THEN  Q."serviceJokyo" END AS 訪問介護ホームヘルプ,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 2 THEN  Q."serviceJokyo" END AS 訪問入浴介護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 3 THEN  Q."serviceJokyo" END AS 訪問看護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 4 THEN  Q."serviceJokyo" END AS 訪問リハビリテーション,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 5 THEN  Q."serviceJokyo" END AS 居宅療養管理指導,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 6 THEN  Q."serviceJokyo" END AS 通所介護デイサービス,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 7 THEN  Q."serviceJokyo" END AS 通所リハビリテーションデイケア,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 8 THEN  Q."serviceJokyo" END AS 短期入所生活介護ショートステイ,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 9 THEN  Q."serviceJokyo" END AS 短期入所療養介護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 10 THEN  Q."serviceJokyo" END AS 特定施設入居者生活介護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 11 THEN  Q."serviceJokyo" END AS 福祉用具貸与,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 12 THEN  Q."serviceJokyo" END AS 特定福祉用具販売,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 13 THEN  Q."serviceJokyo" END AS 夜間対応型訪問介護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 14 THEN  Q."serviceJokyo" END AS 認知症対応型通所介護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 15 THEN  Q."serviceJokyo" END AS 小規模多機能型居宅介護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 16 THEN  Q."serviceJokyo" END AS 認知症対応型共同生活介護グループホーム,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 17 THEN  Q."serviceJokyo" END AS 地域密着型特定施設入居者生活介護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 18 THEN  Q."serviceJokyo" END AS 地域密着型介護老人福祉施設入所者生活介護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 19 THEN  Q."serviceJokyo" END AS 定期巡回随時対応型訪問介護看護,
+           CASE WHEN  A."koroshoIfShikibetsuCode" = '09B' AND #{総合事業開始区分} ='1' AND Q."remban" = 20 THEN  Q."serviceJokyo" END AS 複合型サービス 
     </sql>
     <sql id="allColumns_認定調査票概況調査">
            CASE WHEN  A."koroshoIfShikibetsuCode" IN('09A','06A') AND Q."remban" = 1 THEN  Q."serviceJokyo" END AS 訪問介護ホームヘルプ,

@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassanjikofutangaku;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.KogakuGassanJSaiSyoriJyunbi.IKogakuGassanJSaiSyoriJyunbiMapperParameter;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanjsaisyorijyunbi.IKogakuGassanJSaiSyoriJyunbiMapperParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3070KogakuGassanJikoFutanGakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangakushomeishoin.DbWT37H1KogakuGassanaJikofutangakuTempEntity;
 

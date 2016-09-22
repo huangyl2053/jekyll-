@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.definition.batchprm.koseitaishokyufujissekiichiran;
+package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180050;
 
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -13,12 +13,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 更正対象給付実績一覧画面で入力されたデータより、バッチ用パラメータクラスを作成する。
  *
- * @reamsid_L DBC-4960-031 dongqianjing
+ * @reamsid_L DBC-4960-031 chenyadong
  */
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KoseiTaishoKyufuJissekiIchiranBatchParameter extends BatchParameterBase {
+public class DBC180050_KoseiTaishoKyufuJissekiIchiranParameter extends BatchParameterBase {
 
     private FlexibleYear 年度;
     private YMDHMS 抽出期間開始日時;

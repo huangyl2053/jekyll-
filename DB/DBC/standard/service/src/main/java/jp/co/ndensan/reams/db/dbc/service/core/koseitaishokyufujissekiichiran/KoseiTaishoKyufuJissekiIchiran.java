@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.service.core.koseitaishokyufujissekiichiran;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.koseitaishokyufujissekiichiran.KoseiTaishoKyufuJissekiIchiranBatchParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180050.DBC180050_KoseiTaishoKyufuJissekiIchiranParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 /**
  * 更正対象給付実績一覧のビジネス
  *
- * @reamsid_L DBC-4960-031 dongqianjing
+ * @reamsid_L DBC-4960-031 chenyadong
  */
 public class KoseiTaishoKyufuJissekiIchiran {
 
@@ -39,10 +39,11 @@ public class KoseiTaishoKyufuJissekiIchiran {
      * @param 出力順ID RString
      * @return KoseiTaishoKyufuJissekiIchiranBatchParameter
      */
-    public KoseiTaishoKyufuJissekiIchiranBatchParameter getBatchiParameter(
+    public DBC180050_KoseiTaishoKyufuJissekiIchiranParameter getBatchiParameter(
             YMDHMS 今回抽出期間開始日時, YMDHMS 今回抽出期間終了日時, RString 出力順ID) {
-        KoseiTaishoKyufuJissekiIchiranBatchParameter parameter = new KoseiTaishoKyufuJissekiIchiranBatchParameter();
-        parameter.set年度(new FlexibleYear(DbBusinessConfig.get(ConfigNameDBC.利用者負担割合判定管理_年次負担割合処理済年度, RDate.getNowDate(), SubGyomuCode.DBC介護給付)));
+        DBC180050_KoseiTaishoKyufuJissekiIchiranParameter parameter = new DBC180050_KoseiTaishoKyufuJissekiIchiranParameter();
+        parameter.set年度(new FlexibleYear(DbBusinessConfig.get(ConfigNameDBC.利用者負担割合判定管理_年次負担割合処理済年度,
+                RDate.getNowDate(), SubGyomuCode.DBC介護給付)));
         parameter.set抽出期間開始日時(今回抽出期間開始日時);
         parameter.set抽出期間終了日時(今回抽出期間終了日時);
         parameter.set出力順ID(出力順ID);
