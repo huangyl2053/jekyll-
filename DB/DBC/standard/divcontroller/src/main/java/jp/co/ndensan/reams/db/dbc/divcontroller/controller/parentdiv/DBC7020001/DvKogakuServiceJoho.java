@@ -19,19 +19,25 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
- * 汎用リスト_高額介護サービス費状況
+ * 画面設計_DBCGM23001_汎用リスト出力(高額介護サービス費状況)
  *
- * @reamsid_L DBC-3092-010 sunhui
+ * @reamsid_L DBC-5040-010 chenyadong
  */
 public class DvKogakuServiceJoho {
 
     private static final ReportId 帳票ID = new ReportId("DBC701003_HanyoListKogakuKaigoServiceHiJokyo");
     private static final RString 事務広域 = new RString("事務広域");
     private static final RString 事務単一 = new RString("事務単一");
+    private static final RString モード１ = new RString("DBCMN23001");
+    private static final RString モード２ = new RString("DBCMN23019");
+    private static final int NUM_1 = 1;
+    private static final int NUM_2 = 2;
+    private static final ReportId 帳票IDDBC701019 = new ReportId("DBC701019_HanyoListJigyoKogakuServiceHiJokyo");
 
     /**
      * 画面初期化のonLoadメソッドです。
@@ -40,8 +46,10 @@ public class DvKogakuServiceJoho {
      * @return ResponseData
      */
     public ResponseData<DvKogakuServiceJohoDiv> onLoad(DvKogakuServiceJohoDiv div) {
+        //TODO QA.1578
+        RString state = ResponseHolder.getMenuID();
         DvKogakuServiceJohoHandler handler = getHandler(div);
-        handler.initialize();
+        handler.initialize(state);
         ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJohoFinder.createInstance()
                 .getShichosonSecurityJoho(GyomuBunrui.介護事務);
         DvKogakuChushutsuJokenDiv panel = div.getDvKogakuServiceParam().getDvKogakuChushutsuJoken();
@@ -52,15 +60,35 @@ public class DvKogakuServiceJoho {
                 && 市町村セキュリティ情報.get導入形態コード().is広域()) {
             ViewStateHolder.put(ViewStateKeys.市町村判定, 事務広域);
             panel.getCcdHokenshaList().setDisabled(false);
-            panel.getCcdHokenshaList().setVisible(true);
+            panel.getCcdHokenshaList().setDisplayNone(false);
             panel.getCcdHokenshaList().loadHokenshaList();
         } else {
             ViewStateHolder.put(ViewStateKeys.市町村判定, 事務単一);
             panel.getCcdHokenshaList().setDisabled(true);
-            panel.getCcdHokenshaList().setVisible(false);
+            panel.getCcdHokenshaList().setDisplayNone(true);
         }
-        div.getDvKogakuServiceParam().getCcdKogakuShutsuryokujun().load(SubGyomuCode.DBC介護給付, 帳票ID);
+        if (state.equals(モード１)) {
+            div.getTxtShinsaNengetsu().setVisible(false);
+            div.getDvKogakuServiceParam().getCcdKogakuShutsuryokujun().load(SubGyomuCode.DBC介護給付, 帳票ID);
+            div.getCcdKogakuShutsuryokuKomoku().load(new RString(帳票ID.toString()), SubGyomuCode.DBC介護給付);
+            ViewStateHolder.put(ViewStateKeys.モード, NUM_1);
+        }
+        if (state.equals(モード２)) {
+            div.getDdlKogakuShinsaHoho().setDisplayNone(true);
+            div.getRadKogakuKokuhorenFuicchi().setDisplayNone(true);
+            div.getTxtKogakuKokuhorenKetteiYM().setDisplayNone(true);
+            div.getTxtKogakuTaishoshaUketoriYM().setDisplayNone(true);
+            div.getTxtKogakuKokuhorenSofuYM().setDisplayNone(true);
+            div.getTxtKogakuKetteiJohoUketoriYM().setDisplayNone(true);
+            div.getLblKogakuShiharai().setDisplayNone(true);
+            div.getLblKogakuKetteiGaku().setDisplayNone(true);
+            div.getTxtShinsaNengetsu().setVisible(true);
+            div.getDvKogakuServiceParam().getCcdKogakuShutsuryokujun().load(SubGyomuCode.DBC介護給付, 帳票IDDBC701019);
+            div.getCcdKogakuShutsuryokuKomoku().load(new RString(帳票IDDBC701019.toString()), SubGyomuCode.DBC介護給付);
+            ViewStateHolder.put(ViewStateKeys.モード, NUM_2);
+        }
         div.getCcdKogakuShutsuryokuKomoku().setVisible(false);
+        div.getCcdKogakuShutsuryokuKomoku().setDisabled(true);
         div.getDvCsvHenshuHoho().setVisible(true);
         return createResponse(div);
     }
