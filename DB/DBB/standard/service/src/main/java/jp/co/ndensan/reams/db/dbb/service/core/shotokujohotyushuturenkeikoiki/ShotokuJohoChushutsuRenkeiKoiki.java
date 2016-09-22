@@ -48,7 +48,6 @@ public class ShotokuJohoChushutsuRenkeiKoiki {
     private static final RString SPLIT = new RString("_");
     private static final RString 当初所得情報ファイル名 = new RString("DEC05F001");
     private static final RString 異動所得情報ファイル名 = new RString("DEE01F001");
-    private static final RString 共有ファイル名 = new RString("DEC05F001");
     private static final RString 当初_広域 = new RString("1");
     private static final RString 異動_広域 = new RString("2");
     private static final RString RSTRING_00 = new RString("00");
