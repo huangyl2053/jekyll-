@@ -76,8 +76,9 @@ public class DBC110110_KogakugassanKyufujissekiOut extends BatchFlowBase<DBC1101
             returnEntity = getResult(SofuTaishoEntity.class, new RString(送付ファイル作成),
                     KogakugassanKyufujissekiCreateSofuFileProcess.PARAMETER_OUT_OUTRETURNENTITY);
             executeStep(帳票出力);
-            executeStep(DB更新_送付済);
-            executeStep(DB更新_未送付);
+            // TODO QA1439
+//            executeStep(DB更新_送付済);
+//            executeStep(DB更新_未送付);
         }
         executeStep(国保連インタフェース管理更新);
         executeStep(処理結果リスト作成);
