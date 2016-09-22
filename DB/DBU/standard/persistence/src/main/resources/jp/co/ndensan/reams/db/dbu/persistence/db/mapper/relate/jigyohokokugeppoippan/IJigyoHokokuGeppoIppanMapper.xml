@@ -4,6 +4,45 @@
 <!-- @reamsid_L DBU-1060-050 zhengshukai -->
 <mapper namespace="jp.co.ndensan.reams.db.dbu.persistence.db.mapper.relate.jigyohokokugeppoippan.IJigyoHokokuGeppoIppanMapper">
 
+    <update
+        id="createTempJigyoHokokuHihokenshaTokeiMotoData">
+        CREATE TEMPORARY TABLE "tempJigyoHokokuHihokenshaTokeiMotoData"
+        (
+        "dataShuruiKubun" character varying(2) NOT NULL,                      <!-- データ種類区分 -->
+        "hihokenshaNo" rgdb."DbUDD002HihokenshaNo" NOT NULL,                  <!-- 被保険者番号 -->
+        "shikibetsuCode" rshare."UDD001ShikibetsuCode" NOT NULL,              <!-- 識別コード -->
+        "setaiCode" character varying(16),                                    <!-- 仮世帯コード -->
+        "shichosonCode" rshare."UDD023LasdecCode",                            <!-- 市町村コード -->
+        "kyuShichosonCode" rshare."UDD023LasdecCode",                         <!-- 旧市町村コード    合併市町村の時は、旧市町村コードを設定 -->
+        "kijunYMD" rshare."UDD015YMD",                                        <!-- 基準日 -->
+        "idoYMD" rshare."UDD015YMD",                                          <!-- 異動日 -->
+        "edaNo" character(4),                                                 <!-- 枝番 -->
+        "idoJiyuCode" character varying(2),                                   <!-- 異動事由コード -->
+        "shikakuShutokuJiyuCode" character varying(2),                        <!-- 資格取得事由コード -->
+        "shikakuShutokuYMD" rshare."UDD015YMD",                               <!-- 資格取得年月日 -->
+        "shikakuShutokuTodokedeYMD" rshare."UDD015YMD",                       <!-- 資格取得届出年月日 -->
+        "ichigoShikakuShutokuYMD" rshare."UDD015YMD",                         <!-- 第1号資格取得年月日 -->
+        "hihokennshaKubunCode" character varying(1),                          <!-- 被保険者区分コード    １号・２号 -->
+        "shikakuSoshitsuJiyuCode" character varying(2),                       <!-- 資格喪失事由コード -->
+        "shikakuSoshitsuYMD" rshare."UDD015YMD",                              <!-- 資格喪失年月日 -->
+        "shikakuSoshitsuTodokedeYMD" rshare."UDD015YMD",                      <!-- 資格喪失届出年月日 -->
+        "shikakuHenkoJiyuCode" character varying(2),                          <!-- 資格変更事由コード -->
+        "shikakuHenkoYMD" rshare."UDD015YMD",                                 <!-- 資格変更年月日 -->
+        "shikakuHenkoTodokedeYMD" rshare."UDD015YMD",                         <!-- 資格変更届出年月日 -->
+        "jushochitokureiTekiyoJiyuCode" character varying(2),                 <!-- 住所地特例適用事由コード -->
+        "jushochitokureiTekiyoYMD" rshare."UDD015YMD",                        <!-- 適用年月日 -->
+        "jushochitokureiTekiyoTodokedeYMD" rshare."UDD015YMD",                <!-- 適用届出年月日 -->
+        "jushochitokureiKaijoJiyuCode" character varying(2),                  <!-- 住所地特例解除事由コード -->
+        "jushochitokureiKaijoYMD" rshare."UDD015YMD",                         <!-- 解除年月日 -->
+        "jushochitokureiKaijoTodokedeYMD" rshare."UDD015YMD",                 <!-- 解除届出年月日 -->
+        "jushochiTokureiFlag" character varying(1),                           <!-- 住所地特例フラグ -->
+        "koikinaiJushochiTokureiFlag" character varying(1),                   <!-- 広域内住所地特例フラグ -->
+        "koikinaiTokureiSochimotoShichosonCode" rshare."UDD023LasdecCode",    <!-- 広住特措置元市町村コード -->
+        "shoriTimestamp" rshare."UDD018YMDHMS",                               <!-- 作成日時 -->
+        "seinengappiYMD" rshare."UDD015YMD"                                   <!-- 生年月日 -->
+        );
+    </update>
+
     <insert id="exeShotaiDataInsert"
             parameterType="jp.co.ndensan.reams.db.dbu.definition.mybatisprm.jigyohokokugeppoippan.SyotaiJohoSyoriMybatisParameter">
         SELECT rgdb."DbFt7021ShotaiDataInsert"(#{syukeiYM});

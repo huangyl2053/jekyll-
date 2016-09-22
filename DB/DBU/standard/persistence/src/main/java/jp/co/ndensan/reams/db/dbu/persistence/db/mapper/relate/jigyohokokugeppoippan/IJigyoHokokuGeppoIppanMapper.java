@@ -31,6 +31,11 @@ import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyojokyohokokushiryonemposa
 public interface IJigyoHokokuGeppoIppanMapper {
 
     /**
+     * temp事業報告被保険者統計元データテーブルをCREATEします。
+     */
+    void createTempJigyoHokokuHihokenshaTokeiMotoData();
+
+    /**
      * 事業状況報告世帯情報をtemp事業報告被保険者統計元データテーブルに登録します。
      *
      * @param paramter SyotaiJohoSyoriMybatisParameter
