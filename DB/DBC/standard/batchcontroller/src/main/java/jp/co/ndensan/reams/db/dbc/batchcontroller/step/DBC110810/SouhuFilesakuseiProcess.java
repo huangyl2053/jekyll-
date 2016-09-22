@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110810;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_SakuseiErrorKubun;
@@ -29,12 +30,22 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
+import jp.co.ndensan.reams.uz.uza.externalcharacter.BinaryCharacterConvertParameter;
+import jp.co.ndensan.reams.uz.uza.externalcharacter.BinaryCharacterConvertParameterBuilder;
+import jp.co.ndensan.reams.uz.uza.externalcharacter.CharacterAttribute;
+import jp.co.ndensan.reams.uz.uza.externalcharacter.CharacterConvertTable;
+import jp.co.ndensan.reams.uz.uza.externalcharacter.ReamsUnicodeToBinaryConverter;
+import jp.co.ndensan.reams.uz.uza.externalcharacter.RecordConvertMaterial;
+import jp.co.ndensan.reams.uz.uza.io.ByteWriter;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
+import jp.co.ndensan.reams.uz.uza.io.FileReader;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
@@ -67,6 +78,8 @@ public class SouhuFilesakuseiProcess extends BatchProcessBase<DbT3001JukyushaIdo
     private static final RString 国保連送付外字_変換区分_1 = new RString("1");
     private final RDate 基準日 = RDate.getNowDate();
     private static int index = 1;
+    private static final RString 拡張子_TEMP = new RString("temp");
+    private static final RString 拡張子 = new RString("\r\n");
     private RString myBatisSelsectId;
     private RString eucFilePath;
     private FileSpoolManager manager;
@@ -79,7 +92,6 @@ public class SouhuFilesakuseiProcess extends BatchProcessBase<DbT3001JukyushaIdo
     private SouhuFilesakuseiEntity record3Entity;
     private RString kubun;
     List<DbT3001JukyushaIdoRenrakuhyoEntity> entityList;
-    private Encode 文字コード;
 
     /**
      * 取得データフラグです。
@@ -98,14 +110,6 @@ public class SouhuFilesakuseiProcess extends BatchProcessBase<DbT3001JukyushaIdo
         hasError = new OutputParameter<>();
         hasError.setValue(false);
         entityList = new ArrayList<>();
-
-        RString 国保連送付外字_変換区分 = DbBusinessConfig.get(ConfigNameDBC.国保連送付外字_変換区分, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
-        if (国保連送付外字_変換区分_1.equals(国保連送付外字_変換区分)) {
-            // TODO QA1736 文字コードがありません。
-            文字コード = Encode.UTF_8withBOM;
-        } else {
-            文字コード = Encode.SJIS;
-        }
 
         kubun = processParameter.getChuushutuKubun();
         if (KUBUN_1.equals(kubun)) {
@@ -142,7 +146,7 @@ public class SouhuFilesakuseiProcess extends BatchProcessBase<DbT3001JukyushaIdo
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
-                setEncode(文字コード).
+                setEncode(Encode.UTF_8withBOM).
                 setNewLine(NewLine.CRLF).
                 hasHeader(false).
                 build();
@@ -169,9 +173,12 @@ public class SouhuFilesakuseiProcess extends BatchProcessBase<DbT3001JukyushaIdo
 
             record3Entity = getEnd(record3Entity);
             getEndCSV出力();
-            SharedFileDescriptor des = new ReadOnlySharedFileDescriptor(new FilesystemName(csvFileName));
-            SharedFile.defineSharedFile(des, 世代管理する, SharedFile.GROUP_ALL, null, true, null);
             eucCsvWriter.close();
+            do外字類似変換();
+            SharedFileDescriptor sfd = new ReadOnlySharedFileDescriptor(new FilesystemName(csvFileName));
+            sfd = SharedFile.defineSharedFile(sfd, 世代管理する, SharedFile.GROUP_ALL, null, true, null);
+            CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
+            SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(eucFilePath), opts);
         } else {
             処理結果リスト一時TBL.insert(getErrorEntity());
             hasError.setValue(!existingFlag);
@@ -419,6 +426,42 @@ public class SouhuFilesakuseiProcess extends BatchProcessBase<DbT3001JukyushaIdo
         処理結果.setBiko(RString.EMPTY);
         処理結果.setState(EntityDataState.Added);
         return 処理結果;
+    }
+
+    private void do外字類似変換() {
+        try (FileReader reader = new FileReader(eucFilePath, Encode.UTF_8withBOM);
+                ByteWriter writer = new ByteWriter(eucFilePath.replace(拡張子_TEMP, RString.EMPTY))) {
+            for (RString record = reader.readLine(); record != null; record = reader.readLine()) {
+                BinaryCharacterConvertParameter convertParameter = new BinaryCharacterConvertParameterBuilder(
+                        new RecordConvertMaterial(getCharacterConvertTable(), CharacterAttribute.混在))
+                        .enabledConvertError(true)
+                        .build();
+                ReamsUnicodeToBinaryConverter converter = new ReamsUnicodeToBinaryConverter(convertParameter);
+                writer.write(converter.convert(record.concat(拡張子)));
+            }
+            writer.close();
+            reader.close();
+        }
+        deleteEmptyFile(eucFilePath);
+    }
+
+    private void deleteEmptyFile(RString filePath) {
+        if (RString.isNullOrEmpty(filePath)) {
+            return;
+        }
+        File file = new File(filePath.toString());
+        if (file.exists()) {
+            file.getAbsoluteFile().deleteOnExit();
+        }
+    }
+
+    private static CharacterConvertTable getCharacterConvertTable() {
+        RString 国保連送付外字_変換区分 = DbBusinessConfig.get(ConfigNameDBC.国保連送付外字_変換区分, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        if (!国保連送付外字_変換区分_1.equals(国保連送付外字_変換区分)) {
+            return CharacterConvertTable.Sjis;
+        } else {
+            return CharacterConvertTable.SjisRuiji;
+        }
     }
 
 }
