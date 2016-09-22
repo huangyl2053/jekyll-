@@ -103,12 +103,15 @@ public class GassanShikyuFushikyuKetteishaIchiranBodyEditor
         source.listLower_4 = new RString(entity.get決定年月日().toString());
         source.listLower_5 = doカンマ編集(entity.get支給額());
         if (区分_1.equals(entity.get支払方法区分())) {
-            source.listLower_6 = toRS(entity.get支払期間開始年月日().toString()).concat(前括弧)
-                    .concat(entity.get支払期間開始年月日().getDayOfWeek().getShortTerm()).concat(後括弧).concat(
-                            entity.get支払期間開始時間().toString()).concat(接続符).concat(entity.get支払期間終了年月日().toString()).concat(前括弧)
-                    .concat(entity.get支払期間終了年月日().getDayOfWeek().getShortTerm()).concat(後括弧)
-                    .concat(entity.get支払期間終了時間().toString()
-                    );
+            if (null != entity.get支払期間開始年月日() && null != entity.get支払期間開始時間()
+                    && null != entity.get支払期間終了年月日() && null != entity.get支払期間終了時間()) {
+                source.listLower_6 = toRS(entity.get支払期間開始年月日().toString()).concat(前括弧)
+                        .concat(entity.get支払期間開始年月日().getDayOfWeek().getShortTerm()).concat(後括弧).concat(
+                                entity.get支払期間開始時間().toString()).concat(接続符).concat(entity.get支払期間終了年月日().toString()).concat(前括弧)
+                        .concat(entity.get支払期間終了年月日().getDayOfWeek().getShortTerm()).concat(後括弧)
+                        .concat(entity.get支払期間終了時間().toString()
+                        );
+            }
             source.listUpper_5 = entity.get支払場所();
         } else if (区分_2.equals(entity.get支払方法区分())) {
             if (null != entity.get預金種別()) {

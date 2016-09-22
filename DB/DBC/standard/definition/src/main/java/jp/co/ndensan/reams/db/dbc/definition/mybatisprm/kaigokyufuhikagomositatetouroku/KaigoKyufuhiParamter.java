@@ -110,7 +110,7 @@ public final class KaigoKyufuhiParamter {
                 MENUID_DBCMN91003.equals(メニューID),
                 !RString.isNullOrEmpty(被保番号),
                 !RString.isNullOrEmpty(事業者),
-                保険者番号 != null && new RString("000000").equals(保険者番号.value()),
+                保険者番号 != null && !new RString("000000").equals(保険者番号.value()),
                 KyufubunruiKubun.介護給付.getコード(),
                 KyufubunruiKubun.予防給付.getコード(),
                 KyufubunruiKubun.介護給付と予防給付.getコード(),
