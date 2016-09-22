@@ -146,10 +146,9 @@ public class GassanShikyuFushikyuKetteishaIchiranBodyEditor
     }
 
     private RString get住所() {
-        if (null != entity.get住所()) {
-            if (null != entity.get住所().get住所()) {
-                return entity.get住所().get住所().substringReturnAsPossible(0, INT_15);
-            }
+        if (null != entity.get住所() && null != entity.get住所().get住所()) {
+            return entity.get住所().get住所().substringReturnAsPossible(0, INT_15);
+
         }
         return RString.EMPTY;
     }

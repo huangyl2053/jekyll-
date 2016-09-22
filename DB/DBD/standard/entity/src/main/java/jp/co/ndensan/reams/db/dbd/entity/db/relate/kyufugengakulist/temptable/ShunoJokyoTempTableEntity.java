@@ -75,7 +75,7 @@ public class ShunoJokyoTempTableEntity extends DbTableEntityBase<ShunoJokyoTempT
     @TempTableColumnOrder(13)
     private RString shikakuSoshitsuJiyuCode;
     @TempTableColumnOrder(14)
-    private RString 資格区分;//QA
+    private RString 資格区分;
     @TempTableColumnOrder(15)
     private RString koikinaiJushochiTokureiFlag;
     @TempTableColumnOrder(16)

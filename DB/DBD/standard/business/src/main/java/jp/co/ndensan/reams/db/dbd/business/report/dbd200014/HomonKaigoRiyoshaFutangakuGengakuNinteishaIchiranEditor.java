@@ -160,10 +160,12 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
             source.listUpper_10 = 星;
         }
         source.listUpper_11 = get要介護度();
-        if (this.訪問介護利用者負担額減額認定者Entity.get認定情報_認定年月日() != null) {
-            source.listUpper_12 = this.訪問介護利用者負担額減額認定者Entity.get認定情報_認定年月日().
-                    wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        if (this.訪問介護利用者負担額減額認定者Entity.get認定情報Entity() != null) {
+            if (this.訪問介護利用者負担額減額認定者Entity.get認定情報Entity().get認定情報_認定年月日() != null) {
+                source.listUpper_12 = this.訪問介護利用者負担額減額認定者Entity.get認定情報Entity().get認定情報_認定年月日().
+                        wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).
+                        separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+            }
         }
     }
 
@@ -232,10 +234,12 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
         if (this.訪問介護利用者負担額減額認定者Entity.is受給者台帳Newest_旧措置者フラグ()) {
             source.listCenter_9 = 星;
         }
-        if (null != this.訪問介護利用者負担額減額認定者Entity.get認定情報_認定有効期間開始年月日()) {
-            source.listCenter_10 = this.訪問介護利用者負担額減額認定者Entity.get認定情報_認定有効期間開始年月日().
-                    wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        if (this.訪問介護利用者負担額減額認定者Entity.get認定情報Entity() != null) {
+            if (this.訪問介護利用者負担額減額認定者Entity.get認定情報Entity().get認定情報_認定有効期間開始年月日() != null) {
+                source.listCenter_10 = this.訪問介護利用者負担額減額認定者Entity.get認定情報Entity().get認定情報_認定有効期間開始年月日().
+                        wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).
+                        separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+            }
         }
     }
 
@@ -297,12 +301,13 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
             source.listLower_7 = this.訪問介護利用者負担額減額認定者Entity.get要介護認定申請情報_2号特定疾病コード();
         }
         source.listLower_8 = RString.EMPTY;
-        if (null != this.訪問介護利用者負担額減額認定者Entity.get認定情報_認定有効期間終了年月日()) {
-            source.listLower_9 = this.訪問介護利用者負担額減額認定者Entity.get認定情報_認定有効期間終了年月日().
-                    wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+        if (訪問介護利用者負担額減額認定者Entity.get認定情報Entity() != null) {
+            if (null != this.訪問介護利用者負担額減額認定者Entity.get認定情報Entity().get認定情報_認定有効期間終了年月日()) {
+                source.listLower_9 = this.訪問介護利用者負担額減額認定者Entity.get認定情報Entity().get認定情報_認定有効期間終了年月日().
+                        wareki().eraType(EraType.KANJI_RYAKU).firstYear(FirstYear.ICHI_NEN).
+                        separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+            }
         }
-
     }
 
     private void edit被保険者情報Lower2(HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranReportSource source) {
@@ -332,12 +337,15 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaIchiranEditor implements
     }
 
     private RString get要介護度() {
-        if (null != this.訪問介護利用者負担額減額認定者Entity.get認定情報_要介護状態区分コード()
-                && null != this.訪問介護利用者負担額減額認定者Entity.get要介護認定申請情報_厚労省IF識別コード()) {
-            RString 要介護状態区分コード = 訪問介護利用者負担額減額認定者Entity.get認定情報_要介護状態区分コード();
-            KoroshoInterfaceShikibetsuCode 厚労省IF識別コード = KoroshoInterfaceShikibetsuCode.
-                    toValue(訪問介護利用者負担額減額認定者Entity.get要介護認定申請情報_厚労省IF識別コード());
-            return YokaigoJotaiKubunSupport.toValue(厚労省IF識別コード, 要介護状態区分コード).getName();
+
+        if (this.訪問介護利用者負担額減額認定者Entity.get認定情報Entity() != null) {
+            if (null != this.訪問介護利用者負担額減額認定者Entity.get認定情報Entity().get認定情報_要介護状態区分コード()
+                    && null != this.訪問介護利用者負担額減額認定者Entity.get要介護認定申請情報_厚労省IF識別コード()) {
+                RString 要介護状態区分コード = 訪問介護利用者負担額減額認定者Entity.get認定情報Entity().get認定情報_要介護状態区分コード();
+                KoroshoInterfaceShikibetsuCode 厚労省IF識別コード = KoroshoInterfaceShikibetsuCode.
+                        toValue(訪問介護利用者負担額減額認定者Entity.get要介護認定申請情報_厚労省IF識別コード());
+                return YokaigoJotaiKubunSupport.toValue(厚労省IF識別コード, 要介護状態区分コード).getName();
+            }
         }
         return RString.EMPTY;
 

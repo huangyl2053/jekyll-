@@ -5,11 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist.temptable;
 
-import jp.co.ndensan.reams.db.dbd.definition.core.jikokisanbikanri.JikoKisanbiKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.TsuchishoNo;
-import jp.co.ndensan.reams.db.dbz.definition.core.taino.JikoKubun;
-import jp.co.ndensan.reams.db.dbz.definition.core.taino.MinoKannoKubun;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -75,7 +72,7 @@ public class ShunoTainoJokyoTempTableEntity extends DbTableEntityBase<ShunoTaino
     @TempTableColumnOrder(13)
     private RString shikakuSoshitsuJiyuCode;
     @TempTableColumnOrder(14)
-    private RString 資格区分;//QA
+    private RString 資格区分;
     @TempTableColumnOrder(15)
     private RString koikinaiJushochiTokureiFlag;
     @TempTableColumnOrder(16)
