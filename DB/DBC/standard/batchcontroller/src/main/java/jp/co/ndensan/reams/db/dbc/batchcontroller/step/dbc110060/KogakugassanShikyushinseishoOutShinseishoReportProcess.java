@@ -30,7 +30,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -139,12 +138,12 @@ public class KogakugassanShikyushinseishoOutShinseishoReportProcess
         if (!entity.get高額合算申請書一時Entity().isJufukuKubun()) {
             count = INT_1;
         }
-        boolean flag = false;
+        boolean flag = true;
         if (beforeEntity != null) {
             flag = is同一申請情報(beforeEntity.get高額合算申請書一時Entity(), entity.get高額合算申請書一時Entity(), count);
         }
         GassanShikyuShinseishoJohoSofuIchiranReport report
-                = new GassanShikyuShinseishoJohoSofuIchiranReport(setEntity(entity, flag), YMDHMS.now(), processParameter.get処理年月(), index);
+                = new GassanShikyuShinseishoJohoSofuIchiranReport(entity, YMDHMS.now(), processParameter.get処理年月(), index, flag);
         report.writeBy(reportSourceWriter);
         KogakugassanShikyushinseishoOutCsvEntity csvEntity = getCsvEntity(index, entity);
         eucCsvWriter.writeLine(csvEntity);
@@ -171,33 +170,15 @@ public class KogakugassanShikyushinseishoOutShinseishoReportProcess
         }
     }
 
-    private KogakugassanShikyushinseishoOutFileEntity setEntity(KogakugassanShikyushinseishoOutFileEntity entity, boolean flag) {
-
-        KogakugassanShikyushinseishoOutFileEntity returnEntity = new KogakugassanShikyushinseishoOutFileEntity();
-        DbWT3711KogakuGassanShinseishoTempEntity tempEntity = entity.get高額合算申請書一時Entity();
-        if (flag) {
-            tempEntity.setTaishoNendo(FlexibleYear.EMPTY);
-            tempEntity.setShinseiJokyoKubun(null);
-            tempEntity.setShinseiYMD(FlexibleDate.EMPTY);
-            tempEntity.setShikyuShinseishoSeiriNo(RString.EMPTY);
-            tempEntity.setShinseiDaihyoshaShimei(AtenaMeisho.EMPTY);
-            tempEntity.setJikoFutanKofuUmu(null);
-            tempEntity.setShikyuShinseiKeitai(null);
-        }
-        returnEntity.set被保険者一時Entity(entity.get被保険者一時Entity());
-        returnEntity.set高額合算申請書一時Entity(tempEntity);
-        return returnEntity;
-    }
-
     private boolean is同一申請情報(DbWT3711KogakuGassanShinseishoTempEntity beforeEntity,
             DbWT3711KogakuGassanShinseishoTempEntity entity, int count) {
-        boolean flg = false;
+        boolean flg = true;
         if (beforeEntity.getShikyuShinseishoSeiriNo().equals(entity.getShikyuShinseishoSeiriNo())
                 && beforeEntity.getRirekiNo().equals(entity.getRirekiNo())) {
             if (count > INT_30 && count % INT_30 == INT_1) {
-                flg = false;
-            } else if (entity.isJufukuKubun()) {
                 flg = true;
+            } else if (entity.isJufukuKubun()) {
+                flg = false;
             }
         }
         return flg;
