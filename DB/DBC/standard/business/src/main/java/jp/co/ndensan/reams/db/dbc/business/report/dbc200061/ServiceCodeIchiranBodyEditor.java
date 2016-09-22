@@ -13,9 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
-import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 帳票設計_DBCMNJ2006_サービスコード一覧表BodyEditor
@@ -41,10 +39,8 @@ public class ServiceCodeIchiranBodyEditor
      */
     public ServiceCodeIchiranBodyEditor(
             ServiceCodeIchiranParameter parameter) {
-        if (null != parameter) {
-            if (null != parameter.getサービスコード一覧表()) {
-                this.entity = parameter.getサービスコード一覧表().get介護サービス内容();
-            }
+        if (null != parameter && null != parameter.getサービスコード一覧表()) {
+            this.entity = parameter.getサービスコード一覧表().get介護サービス内容();
         }
 
     }
@@ -120,13 +116,6 @@ public class ServiceCodeIchiranBodyEditor
             return RString.EMPTY;
         }
         return ym.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
-    }
-
-    private RString doカンマ編集(Decimal number) {
-        if (null == number) {
-            return RString.EMPTY;
-        }
-        return DecimalFormatter.toコンマ区切りRString(number, 0);
     }
 
 }

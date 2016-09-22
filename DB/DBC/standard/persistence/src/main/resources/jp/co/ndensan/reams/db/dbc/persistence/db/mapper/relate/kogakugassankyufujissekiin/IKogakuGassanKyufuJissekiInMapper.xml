@@ -40,10 +40,10 @@
         LEFT JOIN
         (SELECT *
         FROM rgdb."DbT3075KogakuGassanKyufuJisseki" AS  DbT3075
-        WHERE (DbT3075."shoriYM" IS NULL  OR  DbT3075."shoriYM"='' )
+        WHERE DbT3075."shoriYM" IS NOT NULL
         AND( DbT3075."uketoriYM" ='' OR DbT3075."uketoriYM" IS NULL  OR  DbT3075."uketoriYM" = #{処理年月} )
-        AND (DbT3075."kokanJohoShikibetsuNo"  LIKE '38Q%'
-        OR(DbT3075."kokanJohoShikibetsuNo"  LIKE'38P%'
+        AND (DbT3075."kokanJohoShikibetsuNo"  LIKE '38Q_'
+        OR(DbT3075."kokanJohoShikibetsuNo"  LIKE '38P_'
         AND DbT3075."dataKubun" = '1'))) AS DbT3075
         ON DbWT38P1."hihokenshaNoIn"=DbT3075."hihokenshaNo"
         AND DbWT38P1."shikyuShinseiSeiriNo"=DbT3075."shikyuShinseiSeiriNo"
@@ -73,6 +73,14 @@
         ,"dataKubun" = '1'
         FROM
         "DbWT38P1KogakuGassanKyufuJisseki" AS DbWT38P1
+        LEFT JOIN
+        (SELECT *
+        FROM rgdb."DbT3075KogakuGassanKyufuJisseki" AS  DbT3075
+        WHERE DbT3075."shoriYM" IS NOT NULL
+        AND( DbT3075."uketoriYM" ='' OR DbT3075."uketoriYM" IS NULL  OR  DbT3075."uketoriYM" = #{処理年月} )
+        AND (DbT3075."kokanJohoShikibetsuNo"  LIKE '38Q_'
+        OR(DbT3075."kokanJohoShikibetsuNo"    LIKE '38P_'
+        AND DbT3075."dataKubun" = '1'))) AS DbT3075
         WHERE
         DbWT38P1."hihokenshaNoIn" = DbT3075."hihokenshaNo"
         AND DbWT38P1."shikyuShinseiSeiriNo" = DbT3075."shikyuShinseiSeiriNo"
@@ -136,9 +144,9 @@
     </sql>
     
     <resultMap id="ResultMap_DbT3075KogakuGassanKyufuJissekiEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3075KogakuGassanKyufuJissekiEntity" autoMapping="true">
-        <id property="kokanJohoShikibetsuNo" column="DbT3075_kokanJohoShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KokanShikibetsuNoTypeHandler"/>
-        <id property="hihokenshaNo" column="DbT3075_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
-        <id property="shikyuShinseiSeiriNo" column="DbT3075_shikyuShinseiSeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kokanJohoShikibetsuNo" column="DbT3075_kokanJohoShikibetsuNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.KokanShikibetsuNoTypeHandler"/>
+        <result property="hihokenshaNo" column="DbT3075_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="shikyuShinseiSeiriNo" column="DbT3075_shikyuShinseiSeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <id property="seiriNo" column="DbT3075_seiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jikoFutanSeiriNo" column="DbT3075_jikoFutanSeiriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="hokenSeidoCode" column="DbT3075_hokenSeidoCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

@@ -86,33 +86,33 @@ public class DBC120040_KyodoJukyushaKoshinKekkaIn extends BatchFlowBase<DBC12004
             try {
                 if (基本情報_5C3.equals(ファイル名.substring(2, ENDINDEX))) {
                     executeStep(一時TBL基本情報_5C3作成);
-                    レコード総件数 = レコード総件数 + getResult(Integer.class, new RString(一時TBL基本情報_5C3作成),
-                            CreateTmptable5C3Process.レコード件数);
+                    レコード総件数 = レコード総件数 + checkNull(getResult(Integer.class, new RString(一時TBL基本情報_5C3作成),
+                            CreateTmptable5C3Process.レコード件数));
                     処理対象年月 = getResult(RString.class, new RString(一時TBL基本情報_5C3作成), CreateTmptable5C3Process.処理対象年月);
                 } else if (償還情報_5D3.equals(ファイル名.substring(2, ENDINDEX))) {
                     executeStep(一時TBL償還情報_5D3作成);
-                    レコード総件数 = レコード総件数 + getResult(Integer.class, new RString(一時TBL償還情報_5D3作成),
-                            CreateTmptable5D3Process.レコード件数);
+                    レコード総件数 = レコード総件数 + checkNull(getResult(Integer.class, new RString(一時TBL償還情報_5D3作成),
+                            CreateTmptable5D3Process.レコード件数));
                     処理対象年月 = getResult(RString.class, new RString(一時TBL償還情報_5D3作成), CreateTmptable5D3Process.処理対象年月);
                 } else if (高額情報_5E3.equals(ファイル名.substring(2, ENDINDEX))) {
                     executeStep(一時TBL高額情報_5E3作成);
-                    レコード総件数 = レコード総件数 + getResult(Integer.class, new RString(一時TBL高額情報_5E3作成),
-                            CreateTmptable5E3Process.レコード件数);
+                    レコード総件数 = レコード総件数 + checkNull(getResult(Integer.class, new RString(一時TBL高額情報_5E3作成),
+                            CreateTmptable5E3Process.レコード件数));
                     処理対象年月 = getResult(RString.class, new RString(一時TBL高額情報_5E3作成), CreateTmptable5E3Process.処理対象年月);
                 } else if (基本情報_5C4.equals(ファイル名.substring(2, ENDINDEX))) {
                     executeStep(一時TBL基本情報_5C4作成);
-                    レコード総件数 = レコード総件数 + getResult(Integer.class, new RString(一時TBL基本情報_5C4作成),
-                            CreateTmptable5C4Process.レコード件数);
+                    レコード総件数 = レコード総件数 + checkNull(getResult(Integer.class, new RString(一時TBL基本情報_5C4作成),
+                            CreateTmptable5C4Process.レコード件数));
                     処理対象年月 = getResult(RString.class, new RString(一時TBL基本情報_5C4作成), CreateTmptable5C4Process.処理対象年月);
                 } else if (償還情報_5D4.equals(ファイル名.substring(2, ENDINDEX))) {
                     executeStep(一時TBL償還情報_5D4作成);
-                    レコード総件数 = レコード総件数 + getResult(Integer.class, new RString(一時TBL償還情報_5D4作成),
-                            CreateTmptable5D4Process.レコード件数);
+                    レコード総件数 = レコード総件数 + checkNull(getResult(Integer.class, new RString(一時TBL償還情報_5D4作成),
+                            CreateTmptable5D4Process.レコード件数));
                     処理対象年月 = getResult(RString.class, new RString(一時TBL償還情報_5D4作成), CreateTmptable5D4Process.処理対象年月);
                 } else if (高額情報_5E4.equals(ファイル名.substring(2, ENDINDEX))) {
                     executeStep(一時TBL高額情報_5E4作成);
-                    レコード総件数 = レコード総件数 + getResult(Integer.class, new RString(一時TBL高額情報_5E4作成),
-                            CreateTmptable5E4Process.レコード件数);
+                    レコード総件数 = レコード総件数 + checkNull(getResult(Integer.class, new RString(一時TBL高額情報_5E4作成),
+                            CreateTmptable5E4Process.レコード件数));
                     処理対象年月 = getResult(RString.class, new RString(一時TBL高額情報_5E4作成), CreateTmptable5E4Process.処理対象年月);
                 }
             } catch (Exception e) {
@@ -122,15 +122,15 @@ public class DBC120040_KyodoJukyushaKoshinKekkaIn extends BatchFlowBase<DBC12004
         executeStep(一時TBLの登録);
         int 登録件数 = getResult(Integer.class, new RString(一時TBLの登録), IchiTmpTableTorokuProcess.登録件数);
         if (登録件数 == 0) {
-            国保連インタフェース管理更新(getParameter().get処理年月(), 交換情報識別番号, new FlexibleYearMonth(処理対象年月), レコード総件数, ファイル名List);
+            国保連インタフェース管理更新(getParameter().get処理年月(), 交換情報識別番号, 処理対象年月CheckNull(処理対象年月), レコード総件数, ファイル名List);
             処理結果リスト作成();
-            取込済ファイル削除(new FlexibleYearMonth(処理対象年月), 保存先フォルダのパス, entityList);
+            取込済ファイル削除(処理対象年月CheckNull(処理対象年月), 保存先フォルダのパス, entityList);
         } else {
             被保険者関連処理();
-            国保連インタフェース管理更新(getParameter().get処理年月(), 交換情報識別番号, new FlexibleYearMonth(処理対象年月), レコード総件数, ファイル名List);
+            国保連インタフェース管理更新(getParameter().get処理年月(), 交換情報識別番号, 処理対象年月CheckNull(処理対象年月), レコード総件数, ファイル名List);
             executeStep(共同処理用受給者情報一覧表);
             処理結果リスト作成();
-            取込済ファイル削除(new FlexibleYearMonth(処理対象年月), 保存先フォルダのパス, entityList);
+            取込済ファイル削除(処理対象年月CheckNull(処理対象年月), 保存先フォルダのパス, entityList);
         }
     }
 
@@ -275,5 +275,19 @@ public class DBC120040_KyodoJukyushaKoshinKekkaIn extends BatchFlowBase<DBC12004
 
     private void 取込済ファイル削除(FlexibleYearMonth 処理年月, RString 保存先フォルダ, List<SharedFileEntryDescriptor> エントリ情報List) {
         KokuhorenKyoutsuuFileReceivedDeleteManager.createInstance().deleteReceivedFile(処理年月, 保存先フォルダ, エントリ情報List);
+    }
+
+    private Integer checkNull(Integer レコード件数) {
+        if (レコード件数 != null) {
+            return レコード件数;
+        }
+        return 0;
+    }
+
+    private FlexibleYearMonth 処理対象年月CheckNull(RString 処理対象年月) {
+        if (!RString.isNullOrEmpty(処理対象年月)) {
+            return new FlexibleYearMonth(処理対象年月);
+        }
+        return FlexibleYearMonth.EMPTY;
     }
 }

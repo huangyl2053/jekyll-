@@ -16,7 +16,11 @@ import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_KyodoKo
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_KyodoShokanIchijiSashitomeKubunCode;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_TeiseiKubunCode;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kyodojukyushakoshinkekkain.KyodoJukyushaIchiranCSVEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyodojukyushakoshinkekkaichiran.DbWT0001HihokenshaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyodojukyushakoshinkekkaichiran.DbWT5C30KyoudouShoriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyodojukyushakoshinkekkaichiran.KyodoJukyushaKoshinkekkaIchiranReportData;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyodojukyushakoshinkekkain.KyodoJukyushaKoshinkekkaIchiranEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -43,6 +47,115 @@ public class KyodoJukyushaIchiranCSVData {
     private static final RString DATE_秒 = new RString("秒");
     private static final RString SAKUSEI = new RString("作成");
     private static final RString SANKAKU = new RString("△");
+
+    /**
+     * 共同処理用受給者情報一覧表のReportデータの設定です。
+     *
+     * @param entity 共同処理用受給者情報一覧表のEntity
+     * @return 共同処理用受給者情報一覧表のReportデータ
+     */
+    public KyodoJukyushaKoshinkekkaIchiranReportData getReportData(KyodoJukyushaKoshinkekkaIchiranEntity entity) {
+        DbWT5C30KyoudouShoriEntity t5C30Entity = new DbWT5C30KyoudouShoriEntity();
+        t5C30Entity.set連番(entity.get連番());
+        t5C30Entity.set保険者番号(entity.get保険者番号());
+        t5C30Entity.set保険者名(entity.get保険者名());
+        t5C30Entity.set集約被保険者番号(entity.get集約被保険者番号());
+        t5C30Entity.set集約異動年月日(entity.get集約異動年月日());
+        t5C30Entity.set基_交換情報識別番号(entity.get基_交換情報識別番号());
+        t5C30Entity.set基_異動年月日(entity.get基_異動年月日());
+        t5C30Entity.set基_異動区分コード(entity.get基_異動区分コード());
+        t5C30Entity.set基_訂正年月日(entity.get基_訂正年月日());
+        t5C30Entity.set基_訂正区分コード(entity.get基_訂正区分コード());
+        t5C30Entity.set基_異動事由(entity.get基_異動事由());
+        t5C30Entity.set基_証記載保険者番号(entity.get基_証記載保険者番号());
+        t5C30Entity.set基_被保険者番号(entity.get基_被保険者番号());
+        t5C30Entity.set基_被保険者氏名(entity.get基_被保険者氏名());
+        t5C30Entity.set基_電話番号(entity.get基_電話番号());
+        t5C30Entity.set基_郵便番号(entity.get基_郵便番号());
+        t5C30Entity.set基_住所カナ(entity.get基_住所カナ());
+        t5C30Entity.set基_住所(entity.get基_住所());
+        t5C30Entity.set基_帳票出力順序コード(entity.get基_帳票出力順序コード());
+        t5C30Entity.set償_交換情報識別番号(entity.get償_交換情報識別番号());
+        t5C30Entity.set償_異動年月日(entity.get償_異動年月日());
+        t5C30Entity.set償_異動区分コード(entity.get償_異動区分コード());
+        t5C30Entity.set償_訂正年月日(entity.get償_訂正年月日());
+        t5C30Entity.set償_訂正区分コード(entity.get償_訂正区分コード());
+        t5C30Entity.set償_異動事由(entity.get償_異動事由());
+        t5C30Entity.set償_証記載保険者番号(entity.get償_証記載保険者番号());
+        t5C30Entity.set償_被保険者番号(entity.get償_被保険者番号());
+        t5C30Entity.set償_保険給付支払の一時差止の開始年月日(entity.get償_保険給付支払の一時差止の開始年月日());
+        t5C30Entity.set償_保険給付支払の一時差止の終了年月日(entity.get償_保険給付支払の一時差止の終了年月日());
+        t5C30Entity.set償_保険給付支払の一時差止区分(entity.get償_保険給付支払の一時差止区分());
+        t5C30Entity.set償_保険給付支払の一時差止金額(entity.get償_保険給付支払の一時差止金額());
+        t5C30Entity.set高_交換情報識別番号(entity.get高_交換情報識別番号());
+        t5C30Entity.set高_異動年月日(entity.get高_異動年月日());
+        t5C30Entity.set高_異動区分コード(entity.get高_異動区分コード());
+        t5C30Entity.set高_訂正年月日(entity.get高_訂正年月日());
+        t5C30Entity.set高_訂正区分コード(entity.get高_訂正区分コード());
+        t5C30Entity.set高_異動事由(entity.get高_異動事由());
+        t5C30Entity.set高_証記載保険者番号(entity.get高_証記載保険者番号());
+        t5C30Entity.set高_被保険者番号(entity.get高_被保険者番号());
+        t5C30Entity.set高_世帯主被保険者番号(entity.get高_世帯主被保険者番号());
+        t5C30Entity.set高_世帯所得区分コード(entity.get高_世帯所得区分コード());
+        t5C30Entity.set高_所得区分コード(entity.get高_所得区分コード());
+        t5C30Entity.set高_老齢福祉年金受給の有無(entity.get高_老齢福祉年金受給の有無());
+        t5C30Entity.set高_利用者負担第２段階(entity.get高_利用者負担第２段階());
+        t5C30Entity.set高_支給申請書出力の有無(entity.get高_支給申請書出力の有無());
+        DbWT0001HihokenshaEntity t0001Entity = new DbWT0001HihokenshaEntity();
+        t0001Entity.set連番(entity.getT0001連番());
+        t0001Entity.set証記載保険者番号(entity.get証記載保険者番号());
+        t0001Entity.set被保険者番号(entity.get被保険者番号());
+        t0001Entity.setサービス提供年月末日(entity.getサービス提供年月末日());
+        t0001Entity.set被保険者カナ氏名(entity.get被保険者カナ氏名());
+        t0001Entity.set被保険者氏名(entity.get被保険者氏名());
+        t0001Entity.set旧市町村コード(entity.get旧市町村コード());
+        t0001Entity.set変換被保険者番号(entity.get変換被保険者番号());
+        t0001Entity.set登録被保険者番号(entity.get登録被保険者番号());
+        t0001Entity.set市町村コード(entity.get市町村コード());
+        t0001Entity.set管内管外区分(entity.get管内管外区分());
+        t0001Entity.set郵便番号(entity.get郵便番号());
+        t0001Entity.set町域コード(entity.get町域コード());
+        t0001Entity.set行政区コード(entity.get行政区コード());
+        t0001Entity.set行政区名(entity.get行政区名());
+        t0001Entity.set住所(entity.get住所());
+        t0001Entity.set番地(entity.get番地());
+        t0001Entity.set方書(entity.get方書());
+        t0001Entity.set宛名カナ名称(entity.get宛名カナ名称());
+        t0001Entity.set宛名名称(entity.get宛名名称());
+        t0001Entity.set氏名50音カナ(entity.get氏名50音カナ());
+        t0001Entity.set識別コード(entity.get識別コード());
+        t0001Entity.set資格取得日(entity.get資格取得日());
+        t0001Entity.set資格取得事由コード(entity.get資格取得事由コード());
+        t0001Entity.set資格喪失日(entity.get資格喪失日());
+        t0001Entity.set資格喪失事由コード(entity.get資格喪失事由コード());
+        t0001Entity.set世帯集約番号(entity.get世帯集約番号());
+        DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity t3002Entity = new DbT3002KyodoShoriyoJukyushaIdoKihonSofuEntity();
+        t3002Entity.setInsertDantaiCd(entity.getInsertDantaiCd());
+        t3002Entity.setIsDeleted(entity.isDeleted());
+        t3002Entity.setLastUpdateReamsLoginId(entity.getInsertDantaiCd());
+        t3002Entity.setHiHokenshaNo(entity.getHiHokenshaNo());
+        t3002Entity.setIdoYMD(entity.getIdoYMD());
+        t3002Entity.setRirekiNo(entity.getRirekiNo());
+        t3002Entity.setIdoKubunCode(entity.getIdoKubunCode());
+        t3002Entity.setJukyushaIdoJiyu(entity.getJukyushaIdoJiyu());
+        t3002Entity.setShoKisaiHokenshaNo(entity.getShoKisaiHokenshaNo());
+        t3002Entity.setHiHokenshaName(entity.getHiHokenshaName());
+        t3002Entity.setYubinNo(entity.getYubinNo());
+        t3002Entity.setDdressKana(entity.getDdressKana());
+        t3002Entity.setAddress(entity.getAddress());
+        t3002Entity.setTelNo(entity.getTelNo());
+        t3002Entity.setChohyoOutputJunjyoCode(entity.getChohyoOutputJunjyoCode());
+        t3002Entity.setTeiseiRenrakuhyoFlag(entity.isTeiseiRenrakuhyoFlag());
+        t3002Entity.setSofuYM(entity.getSofuYM());
+        t3002Entity.setTeiseiKubunCode(entity.getTeiseiKubunCode());
+        t3002Entity.setTeiseiYMD(entity.getTeiseiYMD());
+        t3002Entity.setLogicalDeletedFlag(entity.isLogicalDeletedFlag());
+        KyodoJukyushaKoshinkekkaIchiranReportData reportData = new KyodoJukyushaKoshinkekkaIchiranReportData();
+        reportData.set共同処理一時TBL(t5C30Entity);
+        reportData.set被保険者一時TBL(t0001Entity);
+        reportData.set共同処理用受給者異動基本送付TBL(t3002Entity);
+        return reportData;
+    }
 
     /**
      * 共同処理用受給者情報一覧表のCsvData設定処理です。

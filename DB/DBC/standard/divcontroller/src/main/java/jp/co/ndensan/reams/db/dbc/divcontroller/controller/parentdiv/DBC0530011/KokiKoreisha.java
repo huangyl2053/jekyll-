@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0530011;
 
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KokiKoreishaInfo;
+import jp.co.ndensan.reams.db.dbc.business.core.basic.KokiKoreishaInfoBuilder;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0530011.DBC0530011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0530011.DBC0530011TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0530011.KokiKoreishaDiv;
@@ -114,74 +115,76 @@ public class KokiKoreisha {
         KokiKoreishaInfo 後期高齢者情報 = ViewStateHolder.get(ViewStateKeys.イメージ情報, KokiKoreishaInfo.class);
         if (後期高齢者情報 == null) {
             KokiKoreishaInfo kokiKoreishaInfo = new KokiKoreishaInfo(識別コード, new RString("0001"));
+            KokiKoreishaInfoBuilder buidler = kokiKoreishaInfo.createBuilderForEdit();
             if (div.getMeisaiPanel().getTxtHokenshaShuryoYMD().getValue() != null) {
-                kokiKoreishaInfo.createBuilderForEdit().set保険者適用終了日(div.getMeisaiPanel().getTxtHokenshaShuryoYMD().
+                buidler.set保険者適用終了日(div.getMeisaiPanel().getTxtHokenshaShuryoYMD().
                         getValue().toDateString());
             }
             if (!div.getTxtHihokenshaNo().getValue().isNullOrEmpty()) {
-                kokiKoreishaInfo.createBuilderForEdit().set後期高齢被保険者番号(div.getTxtHihokenshaNo().getValue());
+                buidler.set後期高齢被保険者番号(div.getTxtHihokenshaNo().getValue());
             }
             if (div.getTxtHokenshaKaishiYMD().getValue() != null) {
-                kokiKoreishaInfo.createBuilderForEdit().set保険者適用開始日(div.getTxtHokenshaKaishiYMD().getValue().toDateString());
+                buidler.set保険者適用開始日(div.getTxtHokenshaKaishiYMD().getValue().toDateString());
             }
             if (div.getMeisaiPanel().getTxtShikakuShutokuYMD().getValue() != null) {
-                kokiKoreishaInfo.createBuilderForEdit().set資格取得日(div.getMeisaiPanel().getTxtShikakuShutokuYMD().
+                buidler.set資格取得日(div.getMeisaiPanel().getTxtShikakuShutokuYMD().
                         getValue().toDateString());
             }
             if (div.getMeisaiPanel().getTxtShikakuSoshitsuYMD().getValue() != null) {
-                kokiKoreishaInfo.createBuilderForEdit().set資格喪失日(div.getMeisaiPanel().getTxtShikakuSoshitsuYMD().
+                buidler.set資格喪失日(div.getMeisaiPanel().getTxtShikakuSoshitsuYMD().
                         getValue().toDateString());
             }
-            kokiKoreishaInfo.createBuilderForEdit().set個人区分コード(div.getMeisaiPanel().getDdlKojinKubunCode().getSelectedKey())
+            buidler.set個人区分コード(div.getMeisaiPanel().getDdlKojinKubunCode().getSelectedKey())
                     .set資格取得事由コード(div.getMeisaiPanel().getDdlShikakuShutokuJiyu().getSelectedKey())
                     .set資格喪失事由コード(div.getMeisaiPanel().getDdlShikakuSoshitsuJiyu().getSelectedKey())
-                    .set後期高齢保険者番号_市町村(div.getMeisaiPanel().getDdlHokenshaNo().getSelectedValue());
+                    .set後期高齢保険者番号_市町村(div.getMeisaiPanel().getDdlHokenshaNo().getSelectedKey());
             if (div.getMeisaiPanel().getChkTorokuKubun().isAllSelected()) {
-                kokiKoreishaInfo.createBuilderForEdit().set登録区分(new RString("1"));
+                buidler.set登録区分(new RString("1"));
             } else {
-                kokiKoreishaInfo.createBuilderForEdit().set登録区分(new RString("0"));
+                buidler.set登録区分(new RString("0"));
             }
-            kokiKoreishaInfo.createBuilderForEdit().set後期高齢保険者番号_広域(null);
-            manager.save後期高齢者情報(kokiKoreishaInfo);
+            buidler.set後期高齢保険者番号_広域(null);
+            manager.save後期高齢者情報(buidler.build());
         } else {
+            KokiKoreishaInfoBuilder buidler = 後期高齢者情報.createBuilderForEdit();
             if (div.getMeisaiPanel().getTxtHokenshaShuryoYMD().getValue() != null) {
-                後期高齢者情報.createBuilderForEdit().set保険者適用終了日(div.getMeisaiPanel().getTxtHokenshaShuryoYMD().
+                buidler.set保険者適用終了日(div.getMeisaiPanel().getTxtHokenshaShuryoYMD().
                         getValue().toDateString());
             } else {
-                後期高齢者情報.createBuilderForEdit().set保険者適用終了日(RString.EMPTY);
+                buidler.set保険者適用終了日(RString.EMPTY);
             }
             if (div.getTxtHihokenshaNo().getValue() != null) {
-                後期高齢者情報.createBuilderForEdit().set後期高齢被保険者番号(div.getMeisaiPanel().getTxtHihokenshaNo().getValue());
+                buidler.set後期高齢被保険者番号(div.getMeisaiPanel().getTxtHihokenshaNo().getValue());
             } else {
-                後期高齢者情報.createBuilderForEdit().set後期高齢被保険者番号(RString.EMPTY);
+                buidler.set後期高齢被保険者番号(RString.EMPTY);
             }
             if (div.getTxtHokenshaKaishiYMD().getValue() != null) {
-                後期高齢者情報.createBuilderForEdit().set保険者適用開始日(div.getTxtHokenshaKaishiYMD().getValue().toDateString());
+                buidler.set保険者適用開始日(div.getTxtHokenshaKaishiYMD().getValue().toDateString());
             } else {
-                後期高齢者情報.createBuilderForEdit().set保険者適用開始日(RString.EMPTY);
+                buidler.set保険者適用開始日(RString.EMPTY);
             }
             if (div.getMeisaiPanel().getTxtShikakuShutokuYMD().getValue() != null) {
-                後期高齢者情報.createBuilderForEdit().set資格取得日(div.getMeisaiPanel().getTxtShikakuShutokuYMD().
+                buidler.set資格取得日(div.getMeisaiPanel().getTxtShikakuShutokuYMD().
                         getValue().toDateString());
             } else {
-                後期高齢者情報.createBuilderForEdit().set資格取得日(RString.EMPTY);
+                buidler.set資格取得日(RString.EMPTY);
             }
             if (div.getMeisaiPanel().getTxtShikakuSoshitsuYMD().getValue() != null) {
-                後期高齢者情報.createBuilderForEdit().set資格喪失日(div.getMeisaiPanel().getTxtShikakuSoshitsuYMD().
+                buidler.set資格喪失日(div.getMeisaiPanel().getTxtShikakuSoshitsuYMD().
                         getValue().toDateString());
             } else {
-                後期高齢者情報.createBuilderForEdit().set資格喪失日(RString.EMPTY);
+                buidler.set資格喪失日(RString.EMPTY);
             }
-            後期高齢者情報.createBuilderForEdit().set個人区分コード(div.getMeisaiPanel().getDdlKojinKubunCode().getSelectedKey())
+            buidler.set個人区分コード(div.getMeisaiPanel().getDdlKojinKubunCode().getSelectedKey())
                     .set資格取得事由コード(div.getMeisaiPanel().getDdlShikakuShutokuJiyu().getSelectedKey())
                     .set資格喪失事由コード(div.getMeisaiPanel().getDdlShikakuSoshitsuJiyu().getSelectedKey())
                     .set後期高齢保険者番号_市町村(div.getMeisaiPanel().getDdlHokenshaNo().getSelectedValue());
             if (div.getMeisaiPanel().getChkTorokuKubun().isAllSelected()) {
-                後期高齢者情報.createBuilderForEdit().set登録区分(new RString("1"));
+                buidler.set登録区分(new RString("1"));
             } else {
-                後期高齢者情報.createBuilderForEdit().set登録区分(new RString("0"));
+                buidler.set登録区分(new RString("0"));
             }
-            manager.save後期高齢者情報(後期高齢者情報);
+            manager.save後期高齢者情報(buidler.build());
         }
         getHandler(div).前排他キーの解除(被保険者番号);
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), 被保険者番号.value());

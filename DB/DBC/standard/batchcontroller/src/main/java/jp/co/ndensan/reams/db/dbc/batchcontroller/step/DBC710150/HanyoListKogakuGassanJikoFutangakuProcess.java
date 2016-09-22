@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc710150;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC710150;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_HoseizumiJikofutangakuSofuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_SofuTaishogaiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistkogakugassanjikofutangaku.HanyoListKogakuGassanJikoFutangakuProcessParameter;
-import jp.co.ndensan.reams.db.dbc.entity.csv.HanyoListKogakuGassanJikoFutangakuNoCsvEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.HanyoListKogakuGassanJikoFutangakuCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkogakugassanjikofutangaku.HanyoListKogakuGassanJikoFutangakuEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.business.util.DateConverter;
@@ -95,7 +95,7 @@ import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
  *
  * @reamsid_L DBC-3102-020 sunqingzhu
  */
-public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBase<HanyoListKogakuGassanJikoFutangakuEntity> {
+public class HanyoListKogakuGassanJikoFutangakuProcess extends BatchProcessBase<HanyoListKogakuGassanJikoFutangakuEntity> {
 
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "hanyolistkogakugassanjikofutangaku.IHanyoListKogakuGassanJikoFutangakuMapper.selectAllデータ");
@@ -139,6 +139,7 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
     private static final RString 受給申請事由_サ変更申請 = new RString("サ変更申請　");
     private static final RString 受給申請事由_施行前申請 = new RString("施行前申請　");
     private static final RString 受給申請事由_追加 = new RString("追加　　　　");
+    private static final int NUMZERO = 0;
     private static final Code CODE = new Code("0003");
     private static final RString 定数_被保険者番号 = new RString("被保険者番号");
     private static final RString 住特_表示 = new RString("住特");
@@ -173,6 +174,7 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
     private FileSpoolManager manager;
     private Association 地方公共団体;
     private FlexibleDate システム日付;
+    private Decimal 連番;
     private List<PersonalData> personalDataList;
     private RString eucFilePath;
 //    TODO QA1483
@@ -181,13 +183,13 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
 //            + "高額合算自己負担額_対象年度,高額合算自己負担額_保険者番号,高額合算自己負担額_支給申請書整理番号");
 
     @BatchWriter
-    private CsvWriter<HanyoListKogakuGassanJikoFutangakuNoCsvEntity> eucCsvWriter;
+    private CsvWriter<HanyoListKogakuGassanJikoFutangakuCsvEntity> eucCsvWriter;
 
     @Override
     protected IBatchReader createReader() {
+        連番 = Decimal.ONE;
         出力有無 = CSV出力有無_なし;
         システム日付 = FlexibleDate.getNowDate();
-
 //        TODO QA1483
 //        if (parameter.get出力順() != null) {
 //            IChohyoShutsuryokujunFinder iChohyoShutsuryokujunFinder = ChohyoShutsuryokujunFinderFactory.createInstance();
@@ -211,7 +213,7 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString spoolWorkPath = manager.getEucOutputDirectry();
         eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
-        eucCsvWriter = BatchWriters.csvWriter(HanyoListKogakuGassanJikoFutangakuNoCsvEntity.class).
+        eucCsvWriter = BatchWriters.csvWriter(HanyoListKogakuGassanJikoFutangakuCsvEntity.class).
                 filePath(eucFilePath).
                 setDelimiter(コンマ).
                 setEnclosure(ダブル引用符).
@@ -219,17 +221,15 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
                 setNewLine(NewLine.CRLF).
                 hasHeader(parameter.is項目名付加()).
                 build();
-
     }
 
     @Override
     protected void beforeExecute() {
 
-        personalDataList = new ArrayList<>();
-
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         構成市町村マスタlist = KoseiShichosonJohoFinder.createInstance().get現市町村情報();
         構成市町村Map = new HashMap<>();
+        personalDataList = new ArrayList<>();
         if (構成市町村マスタlist != null) {
             for (KoseiShichosonMaster data : 構成市町村マスタlist) {
                 if (data.get市町村コード() != null) {
@@ -237,15 +237,16 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
                 }
             }
         }
-
     }
 
     @Override
     protected void process(HanyoListKogakuGassanJikoFutangakuEntity entity) {
         出力有無 = CSV出力有無_あり;
-        HanyoListKogakuGassanJikoFutangakuNoCsvEntity eucNoCsvEntity = new HanyoListKogakuGassanJikoFutangakuNoCsvEntity();
-        edit高額合算自己負担額情報ファイル作成(entity, eucNoCsvEntity);
-        eucCsvWriter.writeLine(eucNoCsvEntity);
+        HanyoListKogakuGassanJikoFutangakuCsvEntity eucCsvEntity = new HanyoListKogakuGassanJikoFutangakuCsvEntity();
+        eucCsvEntity.set連番(DecimalFormatter.toRString(連番, NUMZERO));
+        連番 = 連番.add(Decimal.ONE);
+        edit高額合算自己負担額情報ファイル作成(entity, eucCsvEntity);
+        eucCsvWriter.writeLine(eucCsvEntity);
         personalDataList.add(toPersonalData(entity));
     }
 
@@ -256,14 +257,14 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
     }
 
     private void edit高額合算自己負担額情報ファイル作成(HanyoListKogakuGassanJikoFutangakuEntity entity,
-            HanyoListKogakuGassanJikoFutangakuNoCsvEntity eucCsvEntity) {
+            HanyoListKogakuGassanJikoFutangakuCsvEntity eucCsvEntity) {
         set宛名(entity, eucCsvEntity);
         set宛先(entity, eucCsvEntity);
         set被保険者台帳管理(entity, eucCsvEntity);
     }
 
     private void set宛名(HanyoListKogakuGassanJikoFutangakuEntity entity,
-            HanyoListKogakuGassanJikoFutangakuNoCsvEntity csvEntity) {
+            HanyoListKogakuGassanJikoFutangakuCsvEntity csvEntity) {
         if (entity.get宛名Entity() != null) {
             IKojin 宛名 = ShikibetsuTaishoFactory.createKojin(entity.get宛名Entity());
             ShikibetsuCode 識別コード = 宛名.get識別コード();
@@ -300,7 +301,7 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
         }
     }
 
-    private void set宛名本人(IKojin 宛名, HanyoListKogakuGassanJikoFutangakuNoCsvEntity csvEntity) {
+    private void set宛名本人(IKojin 宛名, HanyoListKogakuGassanJikoFutangakuCsvEntity csvEntity) {
         if (宛名.get住所() != null) {
             Banchi 番地 = 宛名.get住所().get番地();
             Katagaki 方書 = 宛名.get住所().get方書();
@@ -365,7 +366,7 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
     }
 
     private void set宛先(HanyoListKogakuGassanJikoFutangakuEntity entity,
-            HanyoListKogakuGassanJikoFutangakuNoCsvEntity csvEntity) {
+            HanyoListKogakuGassanJikoFutangakuCsvEntity csvEntity) {
         if (entity.get宛先Entity() != null) {
             IAtesaki 宛先 = AtesakiFactory.createInstance(entity.get宛先Entity());
             AtenaMeisho 送付先氏名 = 宛先.get宛先名称().getName();
@@ -390,7 +391,7 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
         }
     }
 
-    private void set前住所番地方書(IAtesaki 宛先, HanyoListKogakuGassanJikoFutangakuNoCsvEntity csvEntity) {
+    private void set前住所番地方書(IAtesaki 宛先, HanyoListKogakuGassanJikoFutangakuCsvEntity csvEntity) {
         if (宛先.get宛先住所() != null) {
             RString 送付先住所 = 宛先.get宛先住所().get住所();
             AtenaBanchi 送付先番地 = 宛先.get宛先住所().get番地().getBanchi();
@@ -410,7 +411,7 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
     }
 
     private void set被保険者台帳管理(HanyoListKogakuGassanJikoFutangakuEntity entity,
-            HanyoListKogakuGassanJikoFutangakuNoCsvEntity csvEntity) {
+            HanyoListKogakuGassanJikoFutangakuCsvEntity csvEntity) {
 
         csvEntity.set市町村コード(entity.get市町村コード() != null
                 ? entity.get市町村コード().getColumnValue() : RString.EMPTY);
@@ -490,7 +491,7 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
     }
 
     private void set高額合算自己負担額明細(HanyoListKogakuGassanJikoFutangakuEntity entity,
-            HanyoListKogakuGassanJikoFutangakuNoCsvEntity csvEntity) {
+            HanyoListKogakuGassanJikoFutangakuCsvEntity csvEntity) {
         csvEntity.set当０４_自己負担額(doカンマ編集(entity.get高額合算自己負担額明細004_自己負担額()));
         csvEntity.set当０４_７０_７４(doカンマ編集(entity.get高額合算自己負担額明細004_70_74自己負担額_内数()));
         csvEntity.set当０４_高額支給額(doカンマ編集(entity.get高額合算自己負担額明細004_70_74高額支給額()));
@@ -669,15 +670,14 @@ public class HanyoListKogakuGassanJikoFutangakuNoProcess extends BatchProcessBas
     }
 
     private RString get受給申請事由(HanyoListKogakuGassanJikoFutangakuEntity entity) {
-        RString 受給申請事由 = RString.EMPTY;
         RString 受給申請事由コード = RString.EMPTY;
         if (entity.get受給申請事由() != null) {
             受給申請事由コード = entity.get受給申請事由();
         }
-        return getJukyuShinseiJiyu(受給申請事由コード, 受給申請事由, entity.get要支援者認定申請区分());
+        return getJukyuShinseiJiyu(受給申請事由コード, entity.get要支援者認定申請区分());
     }
 
-    private RString getJukyuShinseiJiyu(RString 受給申請事由コード, RString 受給申請事由, RString 要支援者認定申請区分) {
+    private RString getJukyuShinseiJiyu(RString 受給申請事由コード, RString 要支援者認定申請区分) {
         if (JukyuShinseiJiyu.初回申請.getコード().equals(受給申請事由コード)) {
             return 受給申請事由_初回申請;
         } else if (JukyuShinseiJiyu.再申請_有効期限内.getコード().equals(受給申請事由コード)) {

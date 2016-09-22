@@ -62,10 +62,10 @@ public class JukyushaTeiseiRenrakuhyoSource implements IReportSource {
     public RString seibetsu2;
     @ReportItem(name = "hyodai1_1", length = 7, order = 25)
     public RString hyodai1_1;
-    @ReportItem(name = "Hyodai1_2", length = 7, order = 26)
-    public RString Hyodai1_2;
-    @ReportItem(name = "Hyodai2_1", length = 7, order = 27)
-    public RString Hyodai2_1;
+    @ReportItem(name = "hyodai1_2", length = 7, order = 26)
+    public RString hyodai1_2;
+    @ReportItem(name = "hyodai2_1", length = 7, order = 27)
+    public RString hyodai2_1;
     @ReportItem(name = "minashiKbn", length = 1, order = 28)
     public RString minashiKbn;
     @ReportItem(name = "yoKaigoJotaiKbn", length = 2, order = 29)
@@ -90,10 +90,10 @@ public class JukyushaTeiseiRenrakuhyoSource implements IReportSource {
     public RString jogenTekiyoEDNengo1;
     @ReportItem(name = "jogenTekiyoEDYMD1", length = 6, order = 39)
     public RString jogenTekiyoEDYMD1;
-    @ReportItem(name = "Hyodai2_2", length = 7, order = 40)
-    public RString Hyodai2_2;
-    @ReportItem(name = "Hyodai3_1", length = 7, order = 41)
-    public RString Hyodai3_1;
+    @ReportItem(name = "hyodai2_2", length = 7, order = 40)
+    public RString hyodai2_2;
+    @ReportItem(name = "hyodai3_1", length = 7, order = 41)
+    public RString hyodai3_1;
     @ReportItem(name = "sikyuGendoKijunGaKu2", length = 3, order = 42)
     public RString sikyuGendoKijunGaKu2;
     @ReportItem(name = "jogenTekiyoSTNengo2", length = 2, order = 43)
@@ -104,8 +104,8 @@ public class JukyushaTeiseiRenrakuhyoSource implements IReportSource {
     public RString jogenTekiyoEDNengo2;
     @ReportItem(name = "jogenTekiyoEDYMD2", length = 6, order = 46)
     public RString jogenTekiyoEDYMD2;
-    @ReportItem(name = "Hyodai3_2", length = 7, order = 47)
-    public RString Hyodai3_2;
+    @ReportItem(name = "hyodai3_2", length = 7, order = 47)
+    public RString hyodai3_2;
     @ReportItem(name = "riyoshaFutanKbn", length = 1, order = 48)
     public RString riyoshaFutanKbn;
     @ReportItem(name = "keikakuSakuseiKbn", length = 1, order = 49)

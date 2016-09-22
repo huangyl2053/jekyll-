@@ -11,16 +11,19 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.Chushu
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.ChushutsuDateShurui;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.ChushutsuTaisho;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.SoshitsuKubun;
-import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ChokkinIdoJiyuCode;
-import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.NinteiShienShinseiKubun;
-import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ShinseishaKankeiCode;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.hanyorisutojyukyusyadaicho.HanyoRisutoJyukyusyaDaichoProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyorisutojyukyusyadaicho.HanyoRisutoJyukyusyaDaichoEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyorisutojyukyusyadaicho.HanyoRisutoJyukyusyaDaichoEucCsvEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ChokkinIdoJiyuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.Datakubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.NinteiShienShinseiKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.SakujoJiyuCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ShinseishaKankeiCode;
+import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.hokenshalist.HokenshaListLoader;
 import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
@@ -31,13 +34,10 @@ import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.Sikaku;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNichijoSeikatsuJiritsudoCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.YukoMukoKubun;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.SakujoJiyuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.MinashiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShienShinseiKubun;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
@@ -633,13 +633,13 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
         eucCsvEntity.set主治医状況(entity.is今回主治医_状況フラグ() ? ARI : MURI);
         eucCsvEntity.set一次判定要介護度(set要介護度(entity.get今回申請_厚労省IF識別コード(),
                 entity.get今回一次判定結果_要介護認定一次判定結果コード()));
-        eucCsvEntity.set調査委託日(set年月日(entity.get今回調査依頼_認定調査依頼年月日()));
-        eucCsvEntity.set調査予定日(set年月日(entity.get今回計画情報_認定調査予定年月日()));
-        eucCsvEntity.set調査終了日(set年月日(entity.get今回完了情報_認定調査完了年月日()));
         setEucCsvEntity2(eucCsvEntity, entity);
     }
 
     private void setEucCsvEntity2(HanyoRisutoJyukyusyaDaichoEucCsvEntity eucCsvEntity, HanyoRisutoJyukyusyaDaichoEntity entity) {
+        eucCsvEntity.set調査委託日(set年月日(entity.get今回調査依頼_認定調査依頼年月日()));
+        eucCsvEntity.set調査予定日(set年月日(entity.get今回計画情報_認定調査予定年月日()));
+        eucCsvEntity.set調査終了日(set年月日(entity.get今回完了情報_認定調査完了年月日()));
         eucCsvEntity.set意見依頼日(set年月日(entity.get今回意見書作成依頼_主治医意見書作成依頼年月日()));
         eucCsvEntity.set意見予定日(set年月日(entity.get今回計画情報_主治医意見書登録予定年月日()));
         eucCsvEntity.set意見取寄日(set年月日(entity.get今回意見書情報_主治医意見書受領年月日()));
@@ -880,16 +880,7 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
             return 再申請外;
         } else if (JukyuShinseiJiyu.要介護度変更申請.get名称().equals(受給申請事由)) {
             if (要支援者認定申請区分 != null && !要支援者認定申請区分.trim().isEmpty()) {
-                if (情報区分.equals(情報区分_受給)) {
-                    if (NinteiShienShinseiKubun.認定支援申請.get名称().equals(
-                            NinteiShienShinseiKubun.toValue(要支援者認定申請区分).get名称())) {
-                        return 支援から申請;
-                    } else {
-                        return 区分変更申請;
-                    }
-                } else {
-                    return ShienShinseiKubun.toValue(要支援者認定申請区分).get名称();
-                }
+                setNinteShinseiKubun(情報区分, 要支援者認定申請区分);
             }
         } else if (JukyuShinseiJiyu.指定サービス種類変更申請.get名称().equals(受給申請事由)) {
             return サ変更申請;
@@ -899,6 +890,19 @@ public class HanyoRisutoJyukyusyaDaichoProcess extends BatchProcessBase<HanyoRis
             return 追加;
         }
         return RString.EMPTY;
+    }
+
+    private RString setNinteShinseiKubun(RString 情報区分, RString 要支援者認定申請区分) {
+        if (情報区分.equals(情報区分_受給)) {
+            if (NinteiShienShinseiKubun.認定支援申請.get名称().equals(
+                    NinteiShienShinseiKubun.toValue(要支援者認定申請区分).get名称())) {
+                return 支援から申請;
+            } else {
+                return 区分変更申請;
+            }
+        } else {
+            return ShienShinseiKubun.toValue(要支援者認定申請区分).get名称();
+        }
     }
 
     private RString setみなし更新認定(RString みなし要介護区分コード) {

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc160010;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC160010;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -104,6 +104,10 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
     private static final RString RS_0000 = new RString("0000");
     private static final RString RS_1 = new RString("1");
     private static final RString RS_3 = new RString("3");
+    private static final RString 受給者申請中者のみ = new RString("受給者申請中者のみ");
+    private static final RString 全受給者_施設含む = new RString("全受給者・施設含む");
+    private static final RString 未提出者のみ = new RString("未提出者のみ");
+    private static final RString 提出者のみ = new RString("提出者のみ");
     private static final int INDEX_0 = 0;
     private static final int INDEX_1 = 1;
     private static final int INDEX_2 = 2;
@@ -338,25 +342,25 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
                 && processParameter.getJyukyuushinseibiTo().isBefore(entity.get受給申請年月日())) {
             return true;
         }
-        if (RS_1.equals(processParameter.getTaisyoushatyuusyutu())
+        if (受給者申請中者のみ.equals(processParameter.getTaisyoushatyuusyutu())
                 && !RS_0000.equals(entity.get履歴番号())) {
             return true;
         }
         if (!(RS_1.equals(entity.get住所地特例フラグ())
-                && RS_3.equals(processParameter.getTaisyoushatyuusyutu())
+                && 全受給者_施設含む.equals(processParameter.getTaisyoushatyuusyutu())
                 && (entity.get資格喪失年月日() == null
                 || !entity.get資格取得年月日().equals(entity.get資格喪失年月日())))) {
             return true;
         }
         if (entity.get施設フラウ() != null
-                && !(RS_3.equals(processParameter.getTaisyoushatyuusyutu()))) {
+                && !(全受給者_施設含む.equals(processParameter.getTaisyoushatyuusyutu()))) {
             return true;
         }
         return check2(entity);
     }
 
     private boolean check2(KeikakuTodokedeJokyoIchiranEntity entity) {
-        if (RS_1.equals(processParameter.getTodokeidejyoukyou())
+        if (未提出者のみ.equals(processParameter.getTodokeidejyoukyou())
                 && entity.get適用開始年月日() != null
                 && !entity.get適用開始年月日().isEmpty()
                 && processParameter.getKijyunbi() != null
@@ -367,7 +371,7 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
                 && processParameter.getKijyunbi().isBeforeOrEquals(entity.get適用終了年月日())))) {
             return true;
         }
-        return RS_3.equals(processParameter.getTodokeidejyoukyou())
+        return 提出者のみ.equals(processParameter.getTodokeidejyoukyou())
                 && entity.get適用終了年月日() != null
                 && processParameter.getKijyunbi() != null
                 && !processParameter.getKijyunbi().isEmpty()

@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc160010.KeikakuTodokedeJokyoIchiranProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC160010.KeikakuTodokedeJokyoIchiranProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC160010.DBC160010_KeikakuTodokedeJokyoIchiranParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.keikakutodokedejokyo.KeikakuTodokedeJokyoProcessParam;
 import jp.co.ndensan.reams.uz.uza.batch.Step;

@@ -52,6 +52,10 @@ public enum ReportIdDBC {
      */
     DBC200029(new ReportId("DBC200029_GassanJikofutangakuKeisanKekkaIchiran"), new RString("高額合算自己負担額計算結果一覧表")),
     /**
+     * 更正対象給付実績一覧表
+     */
+    DBC200096(new ReportId("DBC200096_KoseiTaishoKyufuJissekiIchiran"), new RString("更正対象給付実績一覧表")),
+    /**
      * 高額サービス給付のお知らせ通知書（初回申請分）（提出期限あり）
      */
     DBC100011_申請分(new ReportId("DBC100011_KogakuOshiraseTsuchiTeshutsuKigenAriShoShokai"),

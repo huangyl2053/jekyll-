@@ -17,7 +17,8 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBD-3940-030 panxiaobo
  */
-public class DBD710050_HanyoListHomonKaigoRiyoshaFutanGakuGengaku extends BatchFlowBase<DBD710050_HanyoListHomonKaigoRiyoshaFutanGakuGengakuParameter> {
+public class DBD710050_HanyoListHomonKaigoRiyoshaFutanGakuGengaku
+        extends BatchFlowBase<DBD710050_HanyoListHomonKaigoRiyoshaFutanGakuGengakuParameter> {
 
     @Override
     protected void defineFlow() {
