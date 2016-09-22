@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110130;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110130;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.hokenshakyufujissekiout.HokenshaKyufujissekiOutGetHihokenshaNoBatchParameter;
-import jp.co.ndensan.reams.db.dbc.definition.processprm.hokenshakyufujissekiout.HokenshaKyufujissekiOutGetHihokenshaNoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.DbWT1001HihokenshaTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.csv.hokenshakyufujissekiout.HokenshaKyufujissekiOutGetOldHihokenshaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.FlowEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -18,11 +19,11 @@ import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 被保険者番号変換対象データの取得 クラスです
+ * 旧被保険者番号の取得 クラスです
  *
  * @reamsid_L DBC-2460-012 jiangwenkai
  */
-public class HokenshaKyufujissekiOutGetHihokenshaNoProcess extends BatchProcessBase<DbWT1001HihokenshaTempEntity> {
+public class HokenshaKyufujissekiOutGetOldHihokenshaNoProcess extends BatchProcessBase<HokenshaKyufujissekiOutGetOldHihokenshaEntity> {
 
     /**
      * 被保険者番号変換対象データの取得後の返したエンティティ
@@ -34,11 +35,11 @@ public class HokenshaKyufujissekiOutGetHihokenshaNoProcess extends BatchProcessB
     }
     private OutputParameter<FlowEntity> flowEntity;
     FlowEntity returnEntity;
-    private HokenshaKyufujissekiOutGetHihokenshaNoProcessParameter parameter;
+
     private static int numble = 0;
     private static final RString TABLE_NAME = new RString("DbWT1001Hihokensha");
     private static final RString READ_DATA_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.hokenshakyufujissekiout."
-            + "IHokenshaKyufujissekiOutMapper.select被保険者一時TBL");
+            + "IHokenshaKyufujissekiOutMapper.select旧被保険者番号");
     @BatchWriter
     private BatchEntityCreatedTempTableWriter dbWT0001TableWriter;
 
@@ -50,9 +51,7 @@ public class HokenshaKyufujissekiOutGetHihokenshaNoProcess extends BatchProcessB
 
     @Override
     protected IBatchReader createReader() {
-        HokenshaKyufujissekiOutGetHihokenshaNoBatchParameter para = new HokenshaKyufujissekiOutGetHihokenshaNoBatchParameter();
-        para.set年月(this.parameter.get年月());
-        return new BatchDbReader(READ_DATA_ID, para);
+        return new BatchDbReader(READ_DATA_ID);
     }
 
     @Override
@@ -62,9 +61,11 @@ public class HokenshaKyufujissekiOutGetHihokenshaNoProcess extends BatchProcessB
     }
 
     @Override
-    protected void process(DbWT1001HihokenshaTempEntity entity) {
-        entity.setHenkanFlag(true);
-        dbWT0001TableWriter.update(entity);
+    protected void process(HokenshaKyufujissekiOutGetOldHihokenshaEntity entity) {
+        entity.getDbWT1001Entity().setExHokenshaNo(new HokenshaNo(entity.getDbWT1001Entity().getExShoHokenshaNo().getColumnValue()));
+        entity.getDbWT1001Entity().setOldShichosonCode(entity.getDbT7026Entity().getShichosonCode());
+        entity.getDbWT1001Entity().setSofuHihokenshaNo(new HihokenshaNo(entity.getDbT7026Entity().getKyuNo()));
+        dbWT0001TableWriter.update(entity.getDbWT1001Entity());
         numble++;
     }
 
