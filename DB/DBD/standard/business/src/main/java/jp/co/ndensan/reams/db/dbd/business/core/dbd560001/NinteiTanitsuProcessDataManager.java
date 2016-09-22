@@ -43,8 +43,8 @@ public class NinteiTanitsuProcessDataManager {
     private final RString 主治医のみ = YokaigoInterfaceIchoTorikomi.主治医のみ.getコード();
     private final RString 調査員のみ = YokaigoInterfaceIchoTorikomi.調査員のみ.getコード();
     private final RString 両方取込む = YokaigoInterfaceIchoTorikomi.両方取込む.getコード();
-    private final int four = 4;
-    private final RString zero = new RString("0");
+    private static final int FOUR = 4;
+    private static final RString ZERO = new RString("0");
 
     /**
      * コンストラクタです。
@@ -97,7 +97,7 @@ public class NinteiTanitsuProcessDataManager {
     public DbT4001JukyushaDaichoEntity upDate受給者台帳Detial(YokaigoNinteiInterfaceEntity entity, FlexibleDate 認定日) {
         RString rirekNo = entity.get受給者台帳Entity().getRirekiNo();
         entity.get受給者台帳Entity().setRirekiNo(new RString(
-                Integer.valueOf(rirekNo.toString()) + 1).padLeft(zero, four));
+                Integer.valueOf(rirekNo.toString()) + 1).padLeft(ZERO, FOUR));
         RString 受給申請事由 = entity.get受給者台帳Entity().getJukyuShinseiJiyu().value();
         if (JukyuShinseiJiyu.再申請_有効期限内.getコード().equals(受給申請事由) || JukyuShinseiJiyu.再申請_有効期限外.getコード().equals(受給申請事由)) {
             entity.get受給者台帳Entity().setShinseiJokyoKubun(ShinseiJokyoKubun.認定完了.getコード());

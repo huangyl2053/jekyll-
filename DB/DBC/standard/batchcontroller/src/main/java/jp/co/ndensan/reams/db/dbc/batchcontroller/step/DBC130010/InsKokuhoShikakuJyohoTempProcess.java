@@ -32,10 +32,6 @@ public class InsKokuhoShikakuJyohoTempProcess extends BatchProcessBase<KokuhoShi
     private InsKokuhoShikakuJyohoTempProcessParameter processParameter;
     private static final RString ＩＦ種類_電算 = new RString("1");
     private static final RString ＩＦ種類_電算２ = new RString("2");
-    private static final RString エラーコード_14 = new RString("14");
-    private static final RString エラーコード_70 = new RString("70");
-    private static final RString コード文言_住民コード = new RString("住民コードが重複しています。１件のみ登録します");
-    private static final RString エラー区分 = new RString("1");
     private static final RString エラー区分_正常データ = new RString("0");
     private static final RString 取込形式_全件 = new RString("1");
     private static final RString 取込形式_差分 = new RString("2");
@@ -58,7 +54,6 @@ public class InsKokuhoShikakuJyohoTempProcess extends BatchProcessBase<KokuhoShi
 
     @Override
     protected void process(KokuhoShikakuＪyohoYoResultEntity entity) {
-        国保資格情報インポート用Entitｙ = new KokuhoShikakuJyohoInpotoyoEntity();
         if (エラー区分_正常データ.equals(entity.get取込国保情報Entity().getエラー区分())) {
             国保資格情報インポート用Entityリストの編集(entity);
         }
@@ -69,8 +64,9 @@ public class InsKokuhoShikakuJyohoTempProcess extends BatchProcessBase<KokuhoShi
 
         if (ＩＦ種類_電算２.equals(processParameter.getIF種類())) {
         }
+
         if (国保資格情報インポート用Entitｙ != null) {
-            torikomiKokuhoJyohoEntityWriter.update(国保資格情報インポート用Entitｙ);
+            torikomiKokuhoJyohoEntityWriter.insert(国保資格情報インポート用Entitｙ);
         }
     }
 
@@ -91,33 +87,36 @@ public class InsKokuhoShikakuJyohoTempProcess extends BatchProcessBase<KokuhoShi
     }
 
     private void get国保資格情報インポート用Entitｙ(KokuhoShikakuＪyohoYoResultEntity entity) {
-        if (!TorokuKubun.画面登録.getコード().equals(entity.get現在国保資格情報Entity().getTorokuKubun())) {
-            国保資格情報インポート用Entitｙ.set個人区分コード(entity.get取込国保情報Entity().get個人区分コード());
-            国保資格情報インポート用Entitｙ.set国保保険者番号(entity.get取込国保情報Entity().get国保保険者番号());
-            国保資格情報インポート用Entitｙ.set国保保険証番号(entity.get取込国保情報Entity().get国保保険証番号());
-            国保資格情報インポート用Entitｙ.set国保個人番号(entity.get取込国保情報Entity().get国保個人番号());
-            国保資格情報インポート用Entitｙ.set国保番号(entity.get取込国保情報Entity().get国保番号());
-            国保資格情報インポート用Entitｙ.set履歴番号(entity.get取込国保情報Entity().get履歴番号());
-            国保資格情報インポート用Entitｙ.set登録区分(entity.get取込国保情報Entity().get登録区分());
-            国保資格情報インポート用Entitｙ.set識別コード(entity.get取込国保情報Entity().getIN住民コード());
-            国保資格情報インポート用Entitｙ.set資格取得日(entity.get取込国保情報Entity().get国保資格取得年月日());
-            国保資格情報インポート用Entitｙ.set資格喪失日(entity.get取込国保情報Entity().get国保資格喪失年月日());
-            国保資格情報インポート用Entitｙ.set退職該当日(entity.get取込国保情報Entity().get国保退職該当日());
-            国保資格情報インポート用Entitｙ.set退職非該当日(entity.get取込国保情報Entity().get国保退職非該当日());
-        } else {
+        国保資格情報インポート用Entitｙ = new KokuhoShikakuJyohoInpotoyoEntity();
+        if (entity.get現在国保資格情報Entity() != null) {
+            if (!TorokuKubun.画面登録.getコード().equals(entity.get現在国保資格情報Entity().getTorokuKubun())) {
+                国保資格情報インポート用Entitｙ.set個人区分コード(entity.get取込国保情報Entity().get個人区分コード());
+                国保資格情報インポート用Entitｙ.set国保保険者番号(entity.get取込国保情報Entity().get国保保険者番号());
+                国保資格情報インポート用Entitｙ.set国保保険証番号(entity.get取込国保情報Entity().get国保保険証番号());
+                国保資格情報インポート用Entitｙ.set国保個人番号(entity.get取込国保情報Entity().get国保個人番号());
+                国保資格情報インポート用Entitｙ.set国保番号(entity.get取込国保情報Entity().get国保番号());
+                国保資格情報インポート用Entitｙ.set履歴番号(entity.get取込国保情報Entity().get履歴番号());
+                国保資格情報インポート用Entitｙ.set登録区分(entity.get取込国保情報Entity().get登録区分());
+                国保資格情報インポート用Entitｙ.set識別コード(entity.get取込国保情報Entity().getIN住民コード());
+                国保資格情報インポート用Entitｙ.set資格取得日(entity.get取込国保情報Entity().get国保資格取得年月日());
+                国保資格情報インポート用Entitｙ.set資格喪失日(entity.get取込国保情報Entity().get国保資格喪失年月日());
+                国保資格情報インポート用Entitｙ.set退職該当日(entity.get取込国保情報Entity().get国保退職該当日());
+                国保資格情報インポート用Entitｙ.set退職非該当日(entity.get取込国保情報Entity().get国保退職非該当日());
+            } else {
 
-            国保資格情報インポート用Entitｙ.set個人区分コード(entity.get現在国保資格情報Entity().getKojinKubunCode());
-            国保資格情報インポート用Entitｙ.set国保保険者番号(entity.get現在国保資格情報Entity().getKokuhoHokenshaNo());
-            国保資格情報インポート用Entitｙ.set国保保険証番号(entity.get現在国保資格情報Entity().getKokuhoHokenshoNo());
-            国保資格情報インポート用Entitｙ.set国保個人番号(entity.get現在国保資格情報Entity().getKokuhoKojinNo());
-            国保資格情報インポート用Entitｙ.set国保番号(entity.get現在国保資格情報Entity().getKokuhoNo());
-            国保資格情報インポート用Entitｙ.set履歴番号(entity.get現在国保資格情報Entity().getRirekiNo());
-            国保資格情報インポート用Entitｙ.set登録区分(entity.get現在国保資格情報Entity().getTorokuKubun());
-            国保資格情報インポート用Entitｙ.set識別コード(entity.get現在国保資格情報Entity().getShikibetsuCode().value());
-            国保資格情報インポート用Entitｙ.set資格取得日(entity.get現在国保資格情報Entity().getShikakuShutokuYMD());
-            国保資格情報インポート用Entitｙ.set資格喪失日(entity.get現在国保資格情報Entity().getShikakuSoshitsuYMD());
-            国保資格情報インポート用Entitｙ.set退職該当日(entity.get現在国保資格情報Entity().getTaishokuGaitoYMD());
-            国保資格情報インポート用Entitｙ.set退職非該当日(entity.get現在国保資格情報Entity().getTaishokuHigaitoYMD());
+                国保資格情報インポート用Entitｙ.set個人区分コード(entity.get現在国保資格情報Entity().getKojinKubunCode());
+                国保資格情報インポート用Entitｙ.set国保保険者番号(entity.get現在国保資格情報Entity().getKokuhoHokenshaNo());
+                国保資格情報インポート用Entitｙ.set国保保険証番号(entity.get現在国保資格情報Entity().getKokuhoHokenshoNo());
+                国保資格情報インポート用Entitｙ.set国保個人番号(entity.get現在国保資格情報Entity().getKokuhoKojinNo());
+                国保資格情報インポート用Entitｙ.set国保番号(entity.get現在国保資格情報Entity().getKokuhoNo());
+                国保資格情報インポート用Entitｙ.set履歴番号(entity.get現在国保資格情報Entity().getRirekiNo());
+                国保資格情報インポート用Entitｙ.set登録区分(entity.get現在国保資格情報Entity().getTorokuKubun());
+                国保資格情報インポート用Entitｙ.set識別コード(entity.get現在国保資格情報Entity().getShikibetsuCode().value());
+                国保資格情報インポート用Entitｙ.set資格取得日(entity.get現在国保資格情報Entity().getShikakuShutokuYMD());
+                国保資格情報インポート用Entitｙ.set資格喪失日(entity.get現在国保資格情報Entity().getShikakuSoshitsuYMD());
+                国保資格情報インポート用Entitｙ.set退職該当日(entity.get現在国保資格情報Entity().getTaishokuGaitoYMD());
+                国保資格情報インポート用Entitｙ.set退職非該当日(entity.get現在国保資格情報Entity().getTaishokuHigaitoYMD());
+            }
         }
     }
 }

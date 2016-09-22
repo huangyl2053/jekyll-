@@ -57,24 +57,24 @@
             AND (T1."kyufuSakuseiKubunCode" = '1'
             OR T1."kyufuSakuseiKubunCode" = '2')
             AND SUBSTR(T1."inputShikibetsuNo",1,3) IN ('71P','816','71R','817')
-        <if test="00==対象年月指定">
+        <if test="'00'.toString()==対象年月指定.toString()">
         AND #{年月範囲開始} <![CDATA[<=]]> T1."serviceTeikyoYM" 
         AND T1."serviceTeikyoYM" <![CDATA[<=]]> #{年月範囲終了}
         </if>
-        <if test="01==対象年月指定">
+        <if test="'01'.toString()==対象年月指定.toString()">
         AND ( #{年月範囲開始} <![CDATA[<=]]> T1."shinsaYM" 
             OR T1."shinsaYM" IS NULL)
         AND #{年月範囲開始} <![CDATA[<=]]> T2."shinsaYM" 
         AND T2."shinsaYM" <![CDATA[<=]]> #{年月範囲終了}
         </if>
-        <if test="00==対象サービス種類">
+        <if test="'00'.toString()==対象サービス種類.toString()">
         AND T2."serviceShuruiCode" IN 
              ('11','12','13','14','15','16','17','21','22','23','24','25','26','27','28','31','32','33','34','35','36'
             ,'37','38','39','43','46'
              ,'51','52','53','54','59','61','62','63','64','65','66','67','68','69','71','72','73','74'
             ,'75','76','77','78','79')
         </if>
-        <if test="対象サービス種類 !=null and !(00==対象サービス種類)">
+        <if test="対象サービス種類 !=null and '00'.toString()!=対象サービス種類.toString()">
         AND T2."serviceShuruiCode" = #{対象サービス種類}
         </if>
     </select>
@@ -132,24 +132,24 @@
             AND (T1."kyufuSakuseiKubunCode" = '1'
             OR T1."kyufuSakuseiKubunCode" = '2')
             AND SUBSTR(T1."inputShikibetsuNo",1,3) IN ('71P','816','71R','817')
-        <if test="00==対象年月指定">
+        <if test="'00'.toString()==対象年月指定.toString()">
         AND #{年月範囲開始}<![CDATA[<=]]>T1."serviceTeikyoYM"  
         AND T1."serviceTeikyoYM" <![CDATA[<=]]> #{年月範囲終了}
         </if>
-        <if test="01==対象年月指定">
+        <if test="'01'.toString()==対象年月指定.toString()">
         AND (#{年月範囲開始}<![CDATA[<=]]>T1."shinsaYM"   
             OR T1."shinsaYM" IS NULL)
         AND #{年月範囲開始}<![CDATA[<=]]>T2."shinsaYM"  
         AND T2."shinsaYM" <![CDATA[<=]]> #{年月範囲終了}
         </if>
-        <if test="00==対象サービス種類">
+        <if test="'00'.toString()==対象サービス種類.toString()">
         AND SUBSTR(T2."serviceCode",1,2) IN 
              ('11','12','13','14','15','16','17','21','22','23','24','25','26','27','28','31','32','33','34','35','36'
             ,'37','38','39','43','46'
              ,'51','52','53','54','59','61','62','63','64','65','66','67','68','69','71','72','73','74'
             ,'75','76','77','78','79')
         </if>
-        <if test="対象サービス種類!=null and !(00==対象サービス種類)">
+        <if test="対象サービス種類!=null and '00'.toString()!=対象サービス種類.toString()">
         AND SUBSTR(T2."serviceCode",1,2) = #{対象サービス種類}
         </if>
     </select>
@@ -207,22 +207,22 @@
             AND (T1."kyufuSakuseiKubunCode" = '1'
             OR T1."kyufuSakuseiKubunCode" = '2')
             AND SUBSTR(T1."inputShikibetsuNo",1,3) IN ('71P','816','71R','817')
-        <if test="00==対象年月指定">
+        <if test="'00'.toString()==対象年月指定.toString()">
         AND #{年月範囲開始}<![CDATA[<=]]>T1."serviceTeikyoYM"  
         AND T1."serviceTeikyoYM" <![CDATA[<=]]> #{年月範囲終了}
         </if>
-        <if test="01==対象年月指定">
+        <if test="'01'.toString()==対象年月指定.toString()">
         AND (#{年月範囲開始}<![CDATA[<=]]>T1."shinsaYM"   
             OR T1."shinsaYM" IS NULL)
         AND #{年月範囲開始}<![CDATA[<=]]>T2."shinsaYM"  
         AND T2."shinsaYM" <![CDATA[<=]]> #{年月範囲終了}
         </if>
-        <if test="00==対象サービス種類">
+        <if test="'00'.toString()==対象サービス種類.toString()">
         AND T2."serviceSyuruiCode" IN 
              (11,12,13,14,15,16,17,21,22,23,24,25,26,27,28,31,32,33,34,35,36,37,38,39,43,46
              ,51,52,53,54,59,61,62,63,64,65,66,67,68,69,71,72,73,74,75,76,77,78,79)
         </if>
-        <if test="対象サービス種類!=null and !(00==対象サービス種類)">
+        <if test="対象サービス種類!=null and '00'.toString()!=対象サービス種類.toString()">
         AND T2."serviceSyuruiCode" = #{対象サービス種類}
         </if>
     </select>
@@ -268,8 +268,8 @@
                     <when test="市町村コード==null or 市町村コード.toString() == ''.toString()">
                             <choose>
                                     <when test="旧市町村コード==null or 旧市町村コード.toString() == ''.toString()">
-                                            <if test="'町域'==選択対象">
-                                                AND DbWT3470ToukeihyoMeisai."machiikiCode" IN <foreach  
+                                            <if test="'町域'.toString()==選択対象.toString()">
+                                                AND "DbWT3470ToukeihyoMeisai"."machiikiCode" IN <foreach  
                                                 collection="対象コード"
                                                 item="item"
                                                 open="("  
@@ -278,8 +278,8 @@
                                                 #{item}  
                                                 </foreach>
                                             </if>
-                                            <if test="'地区１'==選択対象">
-                                                AND DbWT3470ToukeihyoMeisai."chikuCode1" IN <foreach  
+                                            <if test="'地区１'.toString()==選択対象.toString()">
+                                                AND "DbWT3470ToukeihyoMeisai"."chikuCode1" IN <foreach  
                                                 collection="対象コード"
                                                 item="item"
                                                 open="("  
@@ -288,8 +288,8 @@
                                                 #{item}  
                                                 </foreach>
                                             </if>
-                                            <if test="'地区２'==選択対象">
-                                                AND DbWT3470ToukeihyoMeisai."chikuCode2" IN <foreach  
+                                            <if test="'地区２'.toString()==選択対象.toString()">
+                                                AND "DbWT3470ToukeihyoMeisai"."chikuCode2" IN <foreach  
                                                 collection="対象コード"
                                                 item="item"
                                                 open="("  
@@ -298,8 +298,8 @@
                                                 #{item}  
                                                 </foreach>
                                             </if>
-                                            <if test="'地区３'==選択対象">
-                                                AND DbWT3470ToukeihyoMeisai."chikuCode3" IN <foreach  
+                                            <if test="'地区３'.toString()==選択対象.toString()">
+                                                AND "DbWT3470ToukeihyoMeisai"."chikuCode3" IN <foreach  
                                                 collection="対象コード"
                                                 item="item"
                                                 open="("  
@@ -308,8 +308,8 @@
                                                 #{item}  
                                                 </foreach>
                                             </if>
-                                            <if test="'行政区'==選択対象">
-                                                AND DbWT3470ToukeihyoMeisai."gyoseikuCode" IN <foreach  
+                                            <if test="'行政区'.toString()==選択対象.toString()">
+                                                AND "DbWT3470ToukeihyoMeisai"."gyoseikuCode" IN <foreach  
                                                 collection="対象コード"
                                                 item="item"
                                                 open="("  
@@ -319,27 +319,27 @@
                                                 </foreach>
                                             </if>
                                     </when>
-                                    <when test="旧市町村コード==000000">
+                                    <when test="旧市町村コード.toString()=='000000'.toString()">
                                     </when>
                                     <otherwise>
-                                            AND DbWT3470ToukeihyoMeisai."kyuShichosonCode" = #{旧市町村コード}
+                                            AND "DbWT3470ToukeihyoMeisai"."kyuShichosonCode" = #{旧市町村コード}
                                     </otherwise>
                             </choose>
                     </when>
-                    <when test="市町村コード==000000">
+                    <when test="市町村コード.toString()=='000000'.toString()">
                     </when>
                     <otherwise>
                             <choose>
                                     <when test="旧市町村コード==null or 旧市町村コード.toString() == ''.toString()">
-                                         AND DbWT3470ToukeihyoMeisai."koikinaiJushochiTokureiFlag" = '1'
-                                         AND DbWT3470ToukeihyoMeisai."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}
+                                         AND "DbWT3470ToukeihyoMeisai"."koikinaiJushochiTokureiFlag" = '1'
+                                         AND "DbWT3470ToukeihyoMeisai"."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}
                                     </when>
-                                    <when test="旧市町村コード==000000">
-                                          AND DbWT3470ToukeihyoMeisai."koikinaiJushochiTokureiFlag" = '1'
-                                          AND DbWT3470ToukeihyoMeisai."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}
+                                    <when test="旧市町村コード.toString()=='000000'.toString()">
+                                          AND "DbWT3470ToukeihyoMeisai"."koikinaiJushochiTokureiFlag" = '1'
+                                          AND "DbWT3470ToukeihyoMeisai"."koikinaiTokureiSochimotoShichosonCode" = #{市町村コード}
                                     </when>
                                     <otherwise>
-                                          AND DbWT3470ToukeihyoMeisai."kyuShichosonCode" = #{旧市町村コード}
+                                          AND "DbWT3470ToukeihyoMeisai"."kyuShichosonCode" = #{旧市町村コード}
                                     </otherwise>
                             </choose>
                     </otherwise>
@@ -349,26 +349,26 @@
     <select resultOrdered="true" id="get回数単位数"
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.servicecoderiyojokyo.KyufuJissekiMeisaiGetMybatisParameter"
             resultMap="resultMap_TaniSuNissuKaisuEntity" fetchSize="500">
-        <if test="00==サービス項目コードのまとめ方">
+        <if test="'00'.toString()==サービス項目コードのまとめ方.toString()">
             SELECT
                 "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode" AS DbWT3470ToukeihyoMeisaichukan_serviceShuruiCode,
-                SUBSTR("DbWT3470ToukeihyoMeisaichukan"."serviceKomokuCode",1,1) AS DbWT3470ToukeihyoMeisaichukan_serviceKomokuCode,
+                SUBSTR("DbWT3470ToukeihyoMeisaichukan"."serviceKomokuCode",1,1) AS DbWT3470ToukeihyoMeisaichukan_sortYouKomokuCode,
                 "DbWT3470ToukeihyoMeisaichukan"."yoKaigoJotaiKubunCode" AS DbWT3470ToukeihyoMeisaichukan_yoKaigoJotaiKubunCode,
-                SUM("DbWT3470ToukeihyoMeisaichukan"."nissuKaisu") AS DbWT3470ToukeihyoMeisaichukan_nissuKaisu,
-                SUM("DbWT3470ToukeihyoMeisaichukan"."taniSu") AS DbWT3470ToukeihyoMeisaichukan_taniSu
+                SUM("DbWT3470ToukeihyoMeisaichukan"."nissuKaisu") AS DbWT3470ToukeihyoMeisaichukan_nissuKaisuSyukeichi,
+                SUM("DbWT3470ToukeihyoMeisaichukan"."taniSu") AS DbWT3470ToukeihyoMeisaichukan_taniSuSyukeichi
             FROM "DbWT3470ToukeihyoMeisaichukan" AS "DbWT3470ToukeihyoMeisaichukan"
             GROUP BY
                 "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode",
                 SUBSTR("DbWT3470ToukeihyoMeisaichukan"."serviceKomokuCode",1,1),
                 "DbWT3470ToukeihyoMeisaichukan"."yoKaigoJotaiKubunCode"
         </if>
-        <if test="01==サービス項目コードのまとめ方">
+        <if test="'01'.toString()==サービス項目コードのまとめ方.toString()">
             SELECT
                 "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode" AS DbWT3470ToukeihyoMeisaichukan_serviceShuruiCode,
-                SUBSTR("DbWT3470ToukeihyoMeisaichukan"."serviceKomokuCode",2,1) AS DbWT3470ToukeihyoMeisaichukan_serviceKomokuCode,
+                SUBSTR("DbWT3470ToukeihyoMeisaichukan"."serviceKomokuCode",2,1) AS DbWT3470ToukeihyoMeisaichukan_sortYouKomokuCode,
                 "DbWT3470ToukeihyoMeisaichukan"."yoKaigoJotaiKubunCode" AS DbWT3470ToukeihyoMeisaichukan_yoKaigoJotaiKubunCode,
-                SUM("DbWT3470ToukeihyoMeisaichukan"."nissuKaisu") AS DbWT3470ToukeihyoMeisaichukan_nissuKaisu,
-                SUM("DbWT3470ToukeihyoMeisaichukan"."taniSu") AS DbWT3470ToukeihyoMeisaichukan_taniSu
+                SUM("DbWT3470ToukeihyoMeisaichukan"."nissuKaisu") AS DbWT3470ToukeihyoMeisaichukan_nissuKaisuSyukeichi,
+                SUM("DbWT3470ToukeihyoMeisaichukan"."taniSu") AS DbWT3470ToukeihyoMeisaichukan_taniSuSyukeichi
             FROM "DbWT3470ToukeihyoMeisaichukan" AS "DbWT3470ToukeihyoMeisaichukan"
             WHERE
                 "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode" = #{対象サービス種類}
@@ -377,13 +377,13 @@
                 SUBSTR("DbWT3470ToukeihyoMeisaichukan"."serviceKomokuCode",2,1),
                 "DbWT3470ToukeihyoMeisaichukan"."yoKaigoJotaiKubunCode"
         </if>
-        <if test="02==サービス項目コードのまとめ方">
+        <if test="'02'.toString()==サービス項目コードのまとめ方.toString()">
             SELECT
                 "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode" AS DbWT3470ToukeihyoMeisaichukan_serviceShuruiCode,
-                SUBSTR("DbWT3470ToukeihyoMeisaichukan"."serviceKomokuCode",1,2) AS DbWT3470ToukeihyoMeisaichukan_serviceKomokuCode,
+                SUBSTR("DbWT3470ToukeihyoMeisaichukan"."serviceKomokuCode",1,2) AS DbWT3470ToukeihyoMeisaichukan_sortYouKomokuCode,
                 "DbWT3470ToukeihyoMeisaichukan"."yoKaigoJotaiKubunCode" AS DbWT3470ToukeihyoMeisaichukan_yoKaigoJotaiKubunCode,
-                SUM("DbWT3470ToukeihyoMeisaichukan"."nissuKaisu") AS DbWT3470ToukeihyoMeisaichukan_nissuKaisu,
-                SUM("DbWT3470ToukeihyoMeisaichukan"."taniSu") AS DbWT3470ToukeihyoMeisaichukan_taniSu
+                SUM("DbWT3470ToukeihyoMeisaichukan"."nissuKaisu") AS DbWT3470ToukeihyoMeisaichukan_nissuKaisuSyukeichi,
+                SUM("DbWT3470ToukeihyoMeisaichukan"."taniSu") AS DbWT3470ToukeihyoMeisaichukan_taniSuSyukeichi
             FROM "DbWT3470ToukeihyoMeisaichukan" AS "DbWT3470ToukeihyoMeisaichukan"
             WHERE
                 "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode" = #{対象サービス種類}
@@ -392,13 +392,13 @@
                 SUBSTR("DbWT3470ToukeihyoMeisaichukan"."serviceKomokuCode",1,2),
                 "DbWT3470ToukeihyoMeisaichukan"."yoKaigoJotaiKubunCode"
         </if>
-        <if test="03==サービス項目コードのまとめ方">
+        <if test="'03'.toString()==サービス項目コードのまとめ方.toString()">
             SELECT
                 "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode" AS DbWT3470ToukeihyoMeisaichukan_serviceShuruiCode,
-                SUBSTR("DbWT3470ToukeihyoMeisaichukan"."serviceKomokuCode",1,3) AS DbWT3470ToukeihyoMeisaichukan_serviceKomokuCode,
+                SUBSTR("DbWT3470ToukeihyoMeisaichukan"."serviceKomokuCode",1,3) AS DbWT3470ToukeihyoMeisaichukan_sortYouKomokuCode,
                 "DbWT3470ToukeihyoMeisaichukan"."yoKaigoJotaiKubunCode" AS DbWT3470ToukeihyoMeisaichukan_yoKaigoJotaiKubunCode,
-                SUM("DbWT3470ToukeihyoMeisaichukan"."nissuKaisu") AS DbWT3470ToukeihyoMeisaichukan_nissuKaisu,
-                SUM("DbWT3470ToukeihyoMeisaichukan"."taniSu") AS DbWT3470ToukeihyoMeisaichukan_taniSu
+                SUM("DbWT3470ToukeihyoMeisaichukan"."nissuKaisu") AS DbWT3470ToukeihyoMeisaichukan_nissuKaisuSyukeichi,
+                SUM("DbWT3470ToukeihyoMeisaichukan"."taniSu") AS DbWT3470ToukeihyoMeisaichukan_taniSuSyukeichi
             FROM "DbWT3470ToukeihyoMeisaichukan" AS "DbWT3470ToukeihyoMeisaichukan"
             WHERE
                 "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode" = #{対象サービス種類}
@@ -407,7 +407,7 @@
                 SUBSTR("DbWT3470ToukeihyoMeisaichukan"."serviceKomokuCode",1,3),
                 "DbWT3470ToukeihyoMeisaichukan"."yoKaigoJotaiKubunCode"
         </if>
-        <if test="04==サービス項目コードのまとめ方">
+        <if test="'04'.toString()==サービス項目コードのまとめ方.toString()">
             SELECT
                 "DbWT3470ToukeihyoMeisaichukan"."serviceShuruiCode" AS DbWT3470ToukeihyoMeisaichukan_serviceShuruiCode,
                 "DbWT3470ToukeihyoMeisaichukan"."serviceKomokuCode" AS DbWT3470ToukeihyoMeisaichukan_sortYouKomokuCode,
