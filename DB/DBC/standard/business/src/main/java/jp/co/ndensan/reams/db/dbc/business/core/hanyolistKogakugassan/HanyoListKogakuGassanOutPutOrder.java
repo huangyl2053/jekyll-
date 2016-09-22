@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.business.core.hanyolistKogakugassankeisankekkarenrakuhyo;
+package jp.co.ndensan.reams.db.dbc.business.core.hanyolistKogakugassan;
 
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.uz.uza.lang.RString;

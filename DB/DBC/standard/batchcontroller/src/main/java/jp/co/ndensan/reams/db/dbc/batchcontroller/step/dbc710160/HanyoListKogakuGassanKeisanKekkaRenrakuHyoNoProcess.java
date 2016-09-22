@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import jp.co.ndensan.reams.db.dbc.business.core.hanyolistKogakugassankeisankekkarenrakuhyo.HanyoListKogakuGassanOutPutOrder;
+import jp.co.ndensan.reams.db.dbc.business.core.hanyolistKogakugassan.HanyoListKogakuGassanOutPutOrder;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_Over70_ShotokuKbn;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_ShotokuKbn;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_ChushutsuKubun;
