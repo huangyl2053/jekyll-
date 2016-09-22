@@ -30,7 +30,7 @@ public class DankaibeHihokensixyaCSVEntity {
     private RString 資格取得日;
     @CsvField(order = 6, name = "資格喪失日")
     private RString 資格喪失日;
-    @CsvField(order = 7, name = "資格喪失日")
+    @CsvField(order = 7, name = "賦課基準日")
     private RString 賦課基準日;
     @CsvField(order = 8, name = "保険者設定段階")
     private RString 保険者設定段階;

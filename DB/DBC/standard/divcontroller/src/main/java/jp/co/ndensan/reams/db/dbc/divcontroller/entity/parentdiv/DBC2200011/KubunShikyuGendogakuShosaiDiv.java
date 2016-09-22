@@ -39,6 +39,8 @@ public class KubunShikyuGendogakuShosaiDiv extends Panel {
     private TextBoxNum txtTanni;
     @JsonProperty("txtShikyuGendogaku")
     private TextBoxNum txtShikyuGendogaku;
+    @JsonProperty("hdnRirekiNo")
+    private TextBoxCode hdnRirekiNo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -206,6 +208,24 @@ public class KubunShikyuGendogakuShosaiDiv extends Panel {
     @JsonProperty("txtShikyuGendogaku")
     public void setTxtShikyuGendogaku(TextBoxNum txtShikyuGendogaku) {
         this.txtShikyuGendogaku = txtShikyuGendogaku;
+    }
+
+    /*
+     * gethdnRirekiNo
+     * @return hdnRirekiNo
+     */
+    @JsonProperty("hdnRirekiNo")
+    public TextBoxCode getHdnRirekiNo() {
+        return hdnRirekiNo;
+    }
+
+    /*
+     * sethdnRirekiNo
+     * @param hdnRirekiNo hdnRirekiNo
+     */
+    @JsonProperty("hdnRirekiNo")
+    public void setHdnRirekiNo(TextBoxCode hdnRirekiNo) {
+        this.hdnRirekiNo = hdnRirekiNo;
     }
 
     // </editor-fold>

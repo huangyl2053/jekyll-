@@ -503,53 +503,7 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
         if (processParamter.isCsvrenbanfuka()) {
             eucCsvEntity.set連番(new RString(String.valueOf(++i)));
         }
-        if (entity.getPsmEntity() != null) {
-            IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.getPsmEntity());
-            eucCsvEntity.set識別コード(kojin.get識別コード().value());
-            eucCsvEntity.set住民種別(kojin.get住民状態().住民状態略称());
-            eucCsvEntity.set氏名(kojin.get名称().getName().value());
-            eucCsvEntity.set氏名カナ(kojin.get名称().getKana().value());
-            eucCsvEntity.set生年月日(set年月日(kojin.get生年月日().toFlexibleDate()));
-            eucCsvEntity.set年齢(kojin.get年齢算出().get年齢());
-            eucCsvEntity.set性別(kojin.get性別().getName().getShortJapanese());
-            eucCsvEntity.set続柄コード(kojin.get続柄コードリスト().toTsuzukigaraCode().value());
-            eucCsvEntity.set世帯コード(kojin.get世帯コード().value());
-            eucCsvEntity.set世帯主名(kojin.get世帯主名().value());
-            eucCsvEntity.set住所コード(kojin.get住所().get全国住所コード().value());
-            eucCsvEntity.set郵便番号(kojin.get住所().get郵便番号().getEditedYubinNo());
-            RStringBuilder address = new RStringBuilder();
-            address.append(kojin.get住所().get住所()).append(kojin.get住所().get番地().getBanchi().value()).append(RString.FULL_SPACE)
-                    .append(kojin.get住所().get方書().value());
-            eucCsvEntity.set住所番地方書(address.toRString());
-            eucCsvEntity.set住所(kojin.get住所().get住所());
-            eucCsvEntity.set番地(kojin.get住所().get番地().getBanchi().value());
-            eucCsvEntity.set方書(kojin.get住所().get方書().value());
-            eucCsvEntity.set行政区コード(kojin.get行政区画().getGyoseiku().getコード().value());
-            eucCsvEntity.set行政区名(kojin.get行政区画().getGyoseiku().get名称());
-            eucCsvEntity.set地区１(kojin.get行政区画().getChiku1().get名称());
-            eucCsvEntity.set地区２(kojin.get行政区画().getChiku2().get名称());
-            eucCsvEntity.set地区３(kojin.get行政区画().getChiku3().get名称());
-            eucCsvEntity.set連絡先１(kojin.get連絡先１().value());
-            eucCsvEntity.set連絡先２(kojin.get連絡先２().value());
-            eucCsvEntity.set登録異動日(set年月日(kojin.get登録異動年月日()));
-            eucCsvEntity.set登録事由(kojin.get登録事由().get異動事由略称());
-            eucCsvEntity.set登録届出日(set年月日(kojin.get登録届出年月日()));
-            eucCsvEntity.set住定異動日(set年月日(kojin.get住定異動年月日()));
-            eucCsvEntity.set住定事由(kojin.get住定事由().get異動事由略称());
-            eucCsvEntity.set住定届出日(set年月日(kojin.get住定届出年月日()));
-            eucCsvEntity.set消除異動日(set年月日(kojin.get消除異動年月日()));
-            eucCsvEntity.set消除事由(kojin.get消除事由().get異動事由略称());
-            eucCsvEntity.set消除届出日(set年月日(kojin.get消除届出年月日()));
-            eucCsvEntity.set転出入理由(RString.EMPTY);
-            eucCsvEntity.set前住所郵便番号(kojin.get転入前().get郵便番号().getEditedYubinNo());
-            RStringBuilder addressZen = new RStringBuilder();
-            addressZen.append(kojin.get転入前().get住所()).append(kojin.get転入前().get番地().getBanchi().value()).append(RString.FULL_SPACE)
-                    .append(kojin.get転入前().get方書().value());
-            eucCsvEntity.set前住所番地方書(addressZen.toRString());
-            eucCsvEntity.set前住所(kojin.get転入前().get住所());
-            eucCsvEntity.set前住所番地(kojin.get転入前().get番地().getBanchi().value());
-            eucCsvEntity.set前住所方書(kojin.get転入前().get方書().value());
-        }
+        setPsmEntityNotNull(eucCsvEntity, entity);
         eucCsvEntity.set市町村コード(entity.get被保険者台帳管理_市町村コード());
         eucCsvEntity.set市町村名(get地方公共団体(new LasdecCode(entity.get被保険者台帳管理_市町村コード())).get市町村名());
         eucCsvEntity.set保険者コード(association.get地方公共団体コード().value());
@@ -590,6 +544,11 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
         }
         eucCsvEntity.set資格証記載保険者番号(!lasdecCode.isEmpty()
                 ? hokenshaList.get(lasdecCode).get証記載保険者番号().value() : RString.EMPTY);
+        setEucCsvEntityLow(eucCsvEntity, entity);
+        setEucCsvEntity2(eucCsvEntity, entity);
+    }
+
+    private void setEucCsvEntityLow(ShakaiFukushiHojinKeigenEucCsvEntity eucCsvEntity, ShakaiFukushiHojinKeigenEntity entity) {
         eucCsvEntity.set医療保険種別(set医療保険種別(entity.get医療保険加入状況_医療保険種別コード()));
         eucCsvEntity.set医療保険番号(entity.get医療保険加入状況_医療保険者番号());
         eucCsvEntity.set医療保険者名(entity.get医療保険加入状況_医療保険者名称());
@@ -650,7 +609,56 @@ public class HanyoListShakaiFukushiHojinKeigenProcess extends BatchProcessBase<S
         eucCsvEntity.set調査委託日(set年月日(entity.get今回調査依頼_認定調査依頼年月日()));
         eucCsvEntity.set調査予定日(set年月日(entity.get今回計画情報_認定調査予定年月日()));
         eucCsvEntity.set調査終了日(set年月日(entity.get今回完了情報_認定調査完了年月日()));
-        setEucCsvEntity2(eucCsvEntity, entity);
+    }
+
+    private void setPsmEntityNotNull(ShakaiFukushiHojinKeigenEucCsvEntity eucCsvEntity, ShakaiFukushiHojinKeigenEntity entity) {
+        if (entity.getPsmEntity() != null) {
+            IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.getPsmEntity());
+            eucCsvEntity.set識別コード(kojin.get識別コード().value());
+            eucCsvEntity.set住民種別(kojin.get住民状態().住民状態略称());
+            eucCsvEntity.set氏名(kojin.get名称().getName().value());
+            eucCsvEntity.set氏名カナ(kojin.get名称().getKana().value());
+            eucCsvEntity.set生年月日(set年月日(kojin.get生年月日().toFlexibleDate()));
+            eucCsvEntity.set年齢(kojin.get年齢算出().get年齢());
+            eucCsvEntity.set性別(kojin.get性別().getName().getShortJapanese());
+            eucCsvEntity.set続柄コード(kojin.get続柄コードリスト().toTsuzukigaraCode().value());
+            eucCsvEntity.set世帯コード(kojin.get世帯コード().value());
+            eucCsvEntity.set世帯主名(kojin.get世帯主名().value());
+            eucCsvEntity.set住所コード(kojin.get住所().get全国住所コード().value());
+            eucCsvEntity.set郵便番号(kojin.get住所().get郵便番号().getEditedYubinNo());
+            RStringBuilder address = new RStringBuilder();
+            address.append(kojin.get住所().get住所()).append(kojin.get住所().get番地().getBanchi().value()).append(RString.FULL_SPACE)
+                    .append(kojin.get住所().get方書().value());
+            eucCsvEntity.set住所番地方書(address.toRString());
+            eucCsvEntity.set住所(kojin.get住所().get住所());
+            eucCsvEntity.set番地(kojin.get住所().get番地().getBanchi().value());
+            eucCsvEntity.set方書(kojin.get住所().get方書().value());
+            eucCsvEntity.set行政区コード(kojin.get行政区画().getGyoseiku().getコード().value());
+            eucCsvEntity.set行政区名(kojin.get行政区画().getGyoseiku().get名称());
+            eucCsvEntity.set地区１(kojin.get行政区画().getChiku1().get名称());
+            eucCsvEntity.set地区２(kojin.get行政区画().getChiku2().get名称());
+            eucCsvEntity.set地区３(kojin.get行政区画().getChiku3().get名称());
+            eucCsvEntity.set連絡先１(kojin.get連絡先１().value());
+            eucCsvEntity.set連絡先２(kojin.get連絡先２().value());
+            eucCsvEntity.set登録異動日(set年月日(kojin.get登録異動年月日()));
+            eucCsvEntity.set登録事由(kojin.get登録事由().get異動事由略称());
+            eucCsvEntity.set登録届出日(set年月日(kojin.get登録届出年月日()));
+            eucCsvEntity.set住定異動日(set年月日(kojin.get住定異動年月日()));
+            eucCsvEntity.set住定事由(kojin.get住定事由().get異動事由略称());
+            eucCsvEntity.set住定届出日(set年月日(kojin.get住定届出年月日()));
+            eucCsvEntity.set消除異動日(set年月日(kojin.get消除異動年月日()));
+            eucCsvEntity.set消除事由(kojin.get消除事由().get異動事由略称());
+            eucCsvEntity.set消除届出日(set年月日(kojin.get消除届出年月日()));
+            eucCsvEntity.set転出入理由(RString.EMPTY);
+            eucCsvEntity.set前住所郵便番号(kojin.get転入前().get郵便番号().getEditedYubinNo());
+            RStringBuilder addressZen = new RStringBuilder();
+            addressZen.append(kojin.get転入前().get住所()).append(kojin.get転入前().get番地().getBanchi().value()).append(RString.FULL_SPACE)
+                    .append(kojin.get転入前().get方書().value());
+            eucCsvEntity.set前住所番地方書(addressZen.toRString());
+            eucCsvEntity.set前住所(kojin.get転入前().get住所());
+            eucCsvEntity.set前住所番地(kojin.get転入前().get番地().getBanchi().value());
+            eucCsvEntity.set前住所方書(kojin.get転入前().get方書().value());
+        }
     }
 
     private void setEucCsvEntity2(ShakaiFukushiHojinKeigenEucCsvEntity eucCsvEntity, ShakaiFukushiHojinKeigenEntity entity) {

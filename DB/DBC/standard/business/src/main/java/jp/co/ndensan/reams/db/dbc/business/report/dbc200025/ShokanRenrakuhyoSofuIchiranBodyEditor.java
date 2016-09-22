@@ -92,8 +92,9 @@ public class ShokanRenrakuhyoSofuIchiranBodyEditor
             source.list_14 = 償還連絡票一覧表データ.get償還払請求基本Entity().getYoshikiNo();
         }
         if (null != 償還連絡票一覧表データ.get識別番号管理Entity()) {
-            if (null != 償還連絡票一覧表データ.get識別番号管理Entity().getRyakusho()) {
-                source.list_15 = 償還連絡票一覧表データ.get識別番号管理Entity().getRyakusho().substringReturnAsPossible(NUM_0, NUM_6);
+            RString ryakusho = 償還連絡票一覧表データ.get識別番号管理Entity().getRyakusho();
+            if (null != ryakusho) {
+                source.list_15 = ryakusho.substringReturnAsPossible(NUM_0, NUM_6);
             }
         }
     }
