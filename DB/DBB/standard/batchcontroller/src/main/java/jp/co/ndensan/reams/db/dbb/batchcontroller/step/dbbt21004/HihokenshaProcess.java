@@ -142,7 +142,7 @@ public class HihokenshaProcess extends BatchProcessBase<DbT1001HihokenshaDaichoE
             List<MonthShichoson> 月別ランク情報 = rank.get月別ランク情報(資格情報, processParameter.get本算定賦課処理日().getYear());
             TsukibetsuRankTemp rankuEntity = new TsukibetsuRankTemp();
             rankuEntity.setHihokenshaNo(entity.getHihokenshaNo());
-            set月別ランク(rankuEntity, 月別ランク情報);
+            rankuEntity = set月別ランク(rankuEntity, 月別ランク情報);
             月別ランクTemp一時tableWriter.insert(rankuEntity);
         }
     }
@@ -182,7 +182,7 @@ public class HihokenshaProcess extends BatchProcessBase<DbT1001HihokenshaDaichoE
         processEntity.setLogicalDeletedFlag(entity.getLogicalDeletedFlag());
     }
 
-    private void set月別ランク(TsukibetsuRankTemp rankuEntity, List<MonthShichoson> 月別ランク情報リスト) {
+    private TsukibetsuRankTemp set月別ランク(TsukibetsuRankTemp rankuEntity, List<MonthShichoson> 月別ランク情報リスト) {
         for (MonthShichoson 月別ランク情報 : 月別ランク情報リスト) {
             if (Tsuki._4月.getコード().equals(月別ランク情報.get月().getコード())) {
                 rankuEntity.setRankKubun4Gatsu(月別ランク情報.getランク区分());
@@ -222,6 +222,7 @@ public class HihokenshaProcess extends BatchProcessBase<DbT1001HihokenshaDaichoE
                 rankuEntity.setShichosonCode3Gatsu(月別ランク情報.get市町村コード());
             }
         }
+        return rankuEntity;
     }
 
 }
