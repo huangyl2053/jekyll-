@@ -63,15 +63,13 @@ public class KubunShikyuGendogakuMainHandler {
     public void initializeDisplay(List<KubunShikyuGendoGaku> 居宅List,
             List<UwanoseKubunShikyuGendoGaku> 上乗せ居宅List) {
         List<KubunShikyuGendogakuData> entityList = new ArrayList<>();
-        if (居宅List != null) {
-            if (!居宅List.isEmpty()) {
-                居宅List横並びに(居宅List, entityList);
-            }
+        if (居宅List != null
+                && !居宅List.isEmpty()) {
+            居宅List横並びに(居宅List, entityList);
         }
-        if (上乗せ居宅List != null) {
-            if (!上乗せ居宅List.isEmpty()) {
-                上乗せ居宅List横並びに(上乗せ居宅List, entityList);
-            }
+        if (上乗せ居宅List != null
+                && !上乗せ居宅List.isEmpty()) {
+            上乗せ居宅List横並びに(上乗せ居宅List, entityList);
         }
         if (!entityList.isEmpty()) {
             状態１(entityList);
@@ -570,14 +568,13 @@ public class KubunShikyuGendogakuMainHandler {
         List<dgShikyuGendogaku_Row> rowList = div.getKubunShikyuGendogakuIchiran()
                 .getDgShikyuGendogaku().getDataSource();
         for (dgShikyuGendogaku_Row row : rowList) {
-            if (row.getTekiyoShuryoYm().getValue() != null) {
-                if (テーブル区分.equals(row.getTableKubun())
-                        && !RS_1.equals(row.getHdnSaishinFlag())
-                        && 適用開始年月.minusMonth(INDEX_1).toDateString().equals(
-                                row.getTekiyoShuryoYm().getValue().getYearMonth().toDateString())) {
-                    setUpdateList(FlexibleYearMonth.EMPTY, update居宅List, update上乗せ居宅List,
-                            row, 居宅HolderList, 上乗せ居宅HolderList);
-                }
+            if (row.getTekiyoShuryoYm().getValue() != null
+                    && テーブル区分.equals(row.getTableKubun())
+                    && !RS_1.equals(row.getHdnSaishinFlag())
+                    && 適用開始年月.minusMonth(INDEX_1).toDateString().equals(
+                            row.getTekiyoShuryoYm().getValue().getYearMonth().toDateString())) {
+                setUpdateList(FlexibleYearMonth.EMPTY, update居宅List, update上乗せ居宅List,
+                        row, 居宅HolderList, 上乗せ居宅HolderList);
             }
         }
         居宅manager.deleteAndUpdate居宅(delete居宅List, update居宅List);

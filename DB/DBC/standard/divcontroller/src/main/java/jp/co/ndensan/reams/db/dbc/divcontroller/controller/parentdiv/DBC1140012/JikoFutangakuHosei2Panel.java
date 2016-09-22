@@ -129,14 +129,12 @@ public class JikoFutangakuHosei2Panel {
         }
 
         FlexibleYear 対象年度 = 高額合算自己負担額補正保持Entity.get対象年度();
-        if (!平成20年度.equals(対象年度)) {
-            if (補正後20年以外のデータ入力check(div) && !ResponseHolder.isReRequest()) {
-                return ResponseData.of(div).addMessage(DbcWarningMessages.高額合算補正前コピー.getMessage()).respond();
-            }
-        } else if (平成20年度.equals(対象年度)) {
-            if (補正後20年度のデータ入力check4_9(div) && !ResponseHolder.isReRequest()) {
-                return ResponseData.of(div).addMessage(DbcWarningMessages.高額合算補正前コピー.getMessage()).respond();
-            }
+        if (!平成20年度.equals(対象年度)
+                && 補正後20年以外のデータ入力check(div) && !ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(DbcWarningMessages.高額合算補正前コピー.getMessage()).respond();
+        } else if (平成20年度.equals(対象年度)
+                && 補正後20年度のデータ入力check4_9(div) && !ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).addMessage(DbcWarningMessages.高額合算補正前コピー.getMessage()).respond();
         }
         if (MessageDialogSelectedResult.Yes.equals(ResponseHolder.getButtonType())) {
             if (!平成20年度.equals(対象年度)) {
@@ -951,10 +949,9 @@ public class JikoFutangakuHosei2Panel {
         if (handler24.is補正後チェック３(div)) {
             throw new ApplicationException(DbcErrorMessages.高額合算自己負担額関連２.getMessage());
         }
-        if (生年月日.plusYear(歳_75).isBeforeOrEquals(対象年_3月_31日)) {
-            if (handler24.is補正後チェック4_補正後(div)) {
-                throw new ApplicationException(DbcErrorMessages.うち70_74歳に係る負担額関連１.getMessage());
-            }
+        if (生年月日.plusYear(歳_75).isBeforeOrEquals(対象年_3月_31日)
+                && handler24.is補正後チェック4_補正後(div)) {
+            throw new ApplicationException(DbcErrorMessages.うち70_74歳に係る負担額関連１.getMessage());
         }
         int message_code = handler24.is補正後チェック4_6(div, 生年月日, 対象年度);
         if (INT_35 == message_code) {
@@ -983,10 +980,9 @@ public class JikoFutangakuHosei2Panel {
         if (handler23.is補正後チェック３(div)) {
             throw new ApplicationException(DbcErrorMessages.高額合算自己負担額関連２.getMessage());
         }
-        if (生年月日.plusYear(歳_75).isBeforeOrEquals(対象年_7月_31日)) {
-            if (handler23.is補正後チェック4_補正後(div)) {
-                throw new ApplicationException(DbcErrorMessages.うち70_74歳に係る負担額関連１.getMessage());
-            }
+        if (生年月日.plusYear(歳_75).isBeforeOrEquals(対象年_7月_31日)
+                && handler23.is補正後チェック4_補正後(div)) {
+            throw new ApplicationException(DbcErrorMessages.うち70_74歳に係る負担額関連１.getMessage());
         }
         int message_code = handler23.is補正後チェック8_10(div, 生年月日, 対象年度);
         if (INT_35 == message_code) {
