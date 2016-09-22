@@ -183,6 +183,8 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
         find.writeBy(reportSourceWriter);
 
         personalDataList.add(toPersonalData(t));
+        personalDataList.add(toSiteiPersonalData(t));
+
         if (parameter.get出力設定().contains(CSVSettings.連番付加)) {
             KakuninListCsvEntity eucCsvEntity = new KakuninListCsvEntity();
             NinteishaListSakuseiManager.createInstance().連番ありCSV情報設定(eucCsvEntity, t, i);
@@ -227,6 +229,13 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code(new RString("0003")), new RString("被保険者番号"),
                 entity.get被保険者番号().getColumnValue());
         return PersonalData.of(entity.getPsmEntity() == null ? ShikibetsuCode.EMPTY : entity.getPsmEntity().getShikibetsuCode(), expandedInfo);
+    }
+
+    private PersonalData toSiteiPersonalData(NinteishaListSakuseiEntity entity) {
+        if (entity.get世帯員リスト() != null && entity.get世帯員リスト().isEmpty()) {
+            return PersonalData.of(new ShikibetsuCode(entity.get世帯員リスト().get(0).get識別コード()));
+        }
+        return PersonalData.of(ShikibetsuCode.EMPTY);
     }
 
     private void バッチ出力条件リストの出力を行う() {
