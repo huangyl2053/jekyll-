@@ -64,6 +64,8 @@ class NinteiEnkiTsuchishoHakkoIchiranhyoBodyEditor implements INinteiEnkiTsuchis
 
     private void edit被保番号(NinteiEnkiTsuchishoHakkoIchiranhyoReportSource source) {
         source.listHakkoIchiranhyo_2 = entity.get被保番号();
+        source.shikibetsuCode = RString.EMPTY;
+        source.hihokenshaNo = entity.get被保番号();
     }
 
     private void edit氏名(NinteiEnkiTsuchishoHakkoIchiranhyoReportSource source) {
