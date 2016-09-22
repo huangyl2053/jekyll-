@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc710060.HanyoListKyodoJukyushaKogakuProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC710060.HanyoListKyodoJukyushaKogakuProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710060.DBC710060_HanyoListKyodoJukyushaKogakuParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc710060.HanyoListKyodoJukyushaKogakuProcessParameter;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
