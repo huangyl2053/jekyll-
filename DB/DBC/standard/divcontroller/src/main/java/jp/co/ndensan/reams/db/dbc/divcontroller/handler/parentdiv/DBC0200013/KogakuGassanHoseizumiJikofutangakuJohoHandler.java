@@ -71,6 +71,7 @@ public class KogakuGassanHoseizumiJikofutangakuJohoHandler {
             div.getTxtShori().setValue(処理区分);
         } else {
             div.getTxtShoriTaisho().setValue(RString.EMPTY);
+            div.getTxtShoriTaisho().setDisplayNone(true);
             div.getTxtShori().setValue(RString.EMPTY);
         }
         RDate 基準日 = RDate.getNowDate();
