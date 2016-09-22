@@ -94,16 +94,15 @@ public class IchijiHanteizumiDataShutsuryoku {
      * @return ResponseData<IchijiHanteizumiDataShutsuryokuDiv>
      */
     public ResponseData<IchijiHanteizumiDataShutsuryokuDiv> onClick_btnKensaku(IchijiHanteizumiDataShutsuryokuDiv div) {
+        ValidationMessageControlPairs validPairsMessage = new ValidationMessageControlPairs();
         if (申請日.equals(div.getRadJyoken().getSelectedKey())) {
-            ValidationMessageControlPairs validPairsMessage = getValidatisonHandlerr(div).get申請日必須入力チェック();
-            if (validPairsMessage.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(validPairsMessage).respond();
-            }
+            validPairsMessage = getValidatisonHandlerr(div).get申請日必須入力チェック();
+
         } else if (一次判定日.equals(div.getRadJyoken().getSelectedKey())) {
-            ValidationMessageControlPairs validPairs = getValidatisonHandlerr(div).get一次判定日必須チェック();
-            if (validPairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(validPairs).respond();
-            }
+            validPairsMessage = getValidatisonHandlerr(div).get一次判定日必須チェック();
+        }
+        if (validPairsMessage.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairsMessage).respond();
         }
         List<IchijiHanteizumiDataShutsuryokuBusiness> 一次判定情報List = finder.get次判定済みデータ(getHandler(div).createParam()).records();
         getHandler(div).setdgIchijiHanteiZumi(一次判定情報List);
