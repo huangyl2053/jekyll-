@@ -26,7 +26,7 @@ public class SogojigyohiKohiJukyushaBodyEditor implements ISogojigyohiKohiJukyus
 
     private final SogojigyohiKohiJukyushaEntity 帳票出力対象データ;
     private final boolean 集計Flag;
-    private final int eight = 8;
+    private static final int eight = 8;
 
     /**
      * コンストラクタです

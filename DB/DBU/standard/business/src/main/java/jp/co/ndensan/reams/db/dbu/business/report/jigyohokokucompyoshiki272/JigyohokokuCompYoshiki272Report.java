@@ -38,7 +38,6 @@ public class JigyohokokuCompYoshiki272Report extends Report<JigyohokokuCompYoshi
     private static final RString 年報 = new RString("年報");
     private static final RString 月報_1 = new RString("1");
     private static final RString 年報_2 = new RString("2");
-    private static final RString 過去集計分旧市町村区分_旧 = new RString("1");
 
     /**
      * インスタンスを生成します。
@@ -126,8 +125,8 @@ public class JigyohokokuCompYoshiki272Report extends Report<JigyohokokuCompYoshi
         RString 保険者番号 = RString.EMPTY;
         RString 保険者名 = RString.EMPTY;
         for (DbT7021JigyoHokokuTokeiDataEntity jigyohokokutokei : list) {
-            件数 = set件数(jigyohokokutokei);
-            給付額 = set給付額(jigyohokokutokei);
+            件数 = 件数.add(set件数(jigyohokokutokei));
+            給付額 = 件数.add(set給付額(jigyohokokutokei));
             保険者番号 = jigyohokokutokei.getShichosonCode().value();
             保険者名 = jigyohokokutokei.getShukeiKomokuMeisho();
         }

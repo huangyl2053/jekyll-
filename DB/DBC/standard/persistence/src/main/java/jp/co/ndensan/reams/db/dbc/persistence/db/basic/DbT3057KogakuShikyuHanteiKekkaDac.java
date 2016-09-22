@@ -42,6 +42,7 @@ public class DbT3057KogakuShikyuHanteiKekkaDac implements ISaveable<DbT3057Kogak
 
     @InjectSession
     private SqlSession session;
+    private static final String 被保番号 = "被保険者番号";
 
     /**
      * 主キーで高額介護サービス費支給判定結果を取得します。
@@ -59,7 +60,7 @@ public class DbT3057KogakuShikyuHanteiKekkaDac implements ISaveable<DbT3057Kogak
             FlexibleYearMonth サービス提供年月,
             HokenshaNo 証記載保険者番号,
             int 履歴番号) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保番号));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
         requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
@@ -69,10 +70,10 @@ public class DbT3057KogakuShikyuHanteiKekkaDac implements ISaveable<DbT3057Kogak
         return accessor.select().
                 table(DbT3057KogakuShikyuHanteiKekka.class).
                 where(and(
-                                eq(hihokenshaNo, 被保険者番号),
-                                eq(serviceTeikyoYM, サービス提供年月),
-                                eq(shoKisaiHokenshaNo, 証記載保険者番号),
-                                eq(rirekiNo, 履歴番号))).
+                        eq(hihokenshaNo, 被保険者番号),
+                        eq(serviceTeikyoYM, サービス提供年月),
+                        eq(shoKisaiHokenshaNo, 証記載保険者番号),
+                        eq(rirekiNo, 履歴番号))).
                 toObject(DbT3057KogakuShikyuHanteiKekkaEntity.class);
     }
 
@@ -88,20 +89,20 @@ public class DbT3057KogakuShikyuHanteiKekkaDac implements ISaveable<DbT3057Kogak
     public List<DbT3057KogakuShikyuHanteiKekkaEntity> selectAllByKey(
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保番号));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
                 table(DbT3057KogakuShikyuHanteiKekka.class).
                 where(and(
-                                eq(hihokenshaNo, 被保険者番号),
-                                eq(serviceTeikyoYM, サービス提供年月))).
+                        eq(hihokenshaNo, 被保険者番号),
+                        eq(serviceTeikyoYM, サービス提供年月))).
                 toList(DbT3057KogakuShikyuHanteiKekkaEntity.class);
     }
 
     /**
-     *
+     * サービス提供年月を取得する。
      *
      * @param 被保険者番号 HihokenshaNo
      * @return List<DbT3057KogakuShikyuHanteiKekkaEntity>
@@ -110,22 +111,22 @@ public class DbT3057KogakuShikyuHanteiKekkaDac implements ISaveable<DbT3057Kogak
     @Transaction
     public List<DbT3057KogakuShikyuHanteiKekkaEntity> selectサービス提供年月(HihokenshaNo 被保険者番号)
             throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保番号));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
                 table(DbT3057KogakuShikyuHanteiKekka.class).
                 where(and(
-                                eq(hihokenshaNo, 被保険者番号),
-                                not(eq(ketteiYMD, FlexibleDate.EMPTY)),
-                                or(eq(shinsaHohoKubun, ShinsaHohoKubun.審査依頼.getコード()),
-                                        eq(shinsaHohoKubun, ShinsaHohoKubun.審査済み.getコード())
-                                ))).
+                        eq(hihokenshaNo, 被保険者番号),
+                        not(eq(ketteiYMD, FlexibleDate.EMPTY)),
+                        or(eq(shinsaHohoKubun, ShinsaHohoKubun.審査依頼.getコード()),
+                                eq(shinsaHohoKubun, ShinsaHohoKubun.審査済み.getコード())
+                        ))).
                 order(by(serviceTeikyoYM, Order.DESC)).
                 toList(DbT3057KogakuShikyuHanteiKekkaEntity.class);
     }
 
     /**
-     * 管理番号
+     * 管理番号を取得する。
      *
      * @param 被保険者番号 HihokenshaNo
      * @param サービス提供年月 FlexibleYearMonth
@@ -137,22 +138,22 @@ public class DbT3057KogakuShikyuHanteiKekkaDac implements ISaveable<DbT3057Kogak
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月)
             throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保番号));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
                 table(DbT3057KogakuShikyuHanteiKekka.class).
                 where(and(
-                                eq(hihokenshaNo, 被保険者番号),
-                                not(eq(ketteiYMD, FlexibleDate.EMPTY)),
-                                eq(serviceTeikyoYM, サービス提供年月),
-                                or(eq(shinsaHohoKubun, ShinsaHohoKubun.審査依頼.getコード()),
-                                        eq(shinsaHohoKubun, ShinsaHohoKubun.審査済み.getコード())))).
+                        eq(hihokenshaNo, 被保険者番号),
+                        not(eq(ketteiYMD, FlexibleDate.EMPTY)),
+                        eq(serviceTeikyoYM, サービス提供年月),
+                        or(eq(shinsaHohoKubun, ShinsaHohoKubun.審査依頼.getコード()),
+                                eq(shinsaHohoKubun, ShinsaHohoKubun.審査済み.getコード())))).
                 order(by(rirekiNo, Order.DESC)).
                 toList(DbT3057KogakuShikyuHanteiKekkaEntity.class);
     }
 
     /**
-     * 前回発行日
+     * 前回発行日を取得する。
      *
      * @param 被保険者番号 HihokenshaNo
      * @param サービス提供年月
@@ -166,17 +167,17 @@ public class DbT3057KogakuShikyuHanteiKekkaDac implements ISaveable<DbT3057Kogak
             FlexibleYearMonth サービス提供年月,
             int 履歴番号)
             throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保番号));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
         return accessor.select().
                 table(DbT3057KogakuShikyuHanteiKekka.class).
                 where(and(
-                                eq(hihokenshaNo, 被保険者番号),
-                                not(eq(ketteiYMD, FlexibleDate.EMPTY)),
-                                eq(serviceTeikyoYM, サービス提供年月),
-                                eq(rirekiNo, 履歴番号),
-                                or(eq(shinsaHohoKubun, ShinsaHohoKubun.審査依頼.getコード()),
-                                        eq(shinsaHohoKubun, ShinsaHohoKubun.審査済み.getコード())))).
+                        eq(hihokenshaNo, 被保険者番号),
+                        not(eq(ketteiYMD, FlexibleDate.EMPTY)),
+                        eq(serviceTeikyoYM, サービス提供年月),
+                        eq(rirekiNo, 履歴番号),
+                        or(eq(shinsaHohoKubun, ShinsaHohoKubun.審査依頼.getコード()),
+                                eq(shinsaHohoKubun, ShinsaHohoKubun.審査済み.getコード())))).
                 toObject(DbT3057KogakuShikyuHanteiKekkaEntity.class);
     }
 

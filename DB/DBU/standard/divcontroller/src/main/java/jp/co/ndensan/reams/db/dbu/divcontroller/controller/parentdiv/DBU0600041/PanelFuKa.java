@@ -70,7 +70,7 @@ public class PanelFuKa {
             business.set介護徴収方法(介護徴収方法.get(0));
             ViewStateHolder.put(ViewStateKeys.賦課情報, business);
             getHandler(div).initializtion(賦課Newest, 介護徴収方法.get(0),
-                    fukaList, 前年の賦課Newest.get(0), 基準日時);
+                    賦課Newest, 前年の賦課Newest.get(0), 基準日時);
         }
         return ResponseData.of(div).respond();
     }

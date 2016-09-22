@@ -132,8 +132,8 @@ public class DBC8010001MainHandler {
 
         List<KeyValueDataSource> list3 = new ArrayList<>();
         KeyValueDataSource source5 = new KeyValueDataSource();
-        source5.setKey(Furikomi_SaishoriShitei.再処理.getCode());
-        source5.setValue(Furikomi_SaishoriShitei.再処理.getFullName());
+        source5.setKey(Furikomi_SaishoriShitei.再処理.getコード());
+        source5.setValue(Furikomi_SaishoriShitei.再処理.get名称());
         list3.add(source5);
         div.getChkSaisakusei().setDataSource(list3);
 
@@ -304,7 +304,7 @@ public class DBC8010001MainHandler {
 //        }
 //        FurikomiItakushaKoseiMapperParameter parameter;
 //        parameter = FurikomiItakushaKoseiMapperParameter.createSelectByKeyParam(null,SubGyomuCode.DBC介護給付,業務内区分,null,null,null);
-//        
+//
 //        list = FurikomiGroupItakushaItakushaKoseiFinder.getFurikomiGroupItakushItakushKosei(parameter);
 //        return list;
 //    }

@@ -241,19 +241,11 @@ public class SogojigyohiKohiJukyushaReadCsvFileProcess extends BatchProcessBase<
         return new FlexibleDate(yearMonth.toDateString().concat(new RString(lastDay)));
     }
 
-     private RString set字符(RString str) {
+    private RString set字符(RString str) {
         if (str.isNullOrEmpty()) {
             return RString.EMPTY;
         } else {
             return str;
-        }
-    }
-
-    private FlexibleDate set年月日(FlexibleDate date) {
-        if (null == date || date.isEmpty()) {
-            return FlexibleDate.EMPTY;
-        } else {
-            return date;
         }
     }
 
@@ -264,7 +256,7 @@ public class SogojigyohiKohiJukyushaReadCsvFileProcess extends BatchProcessBase<
             return yearMonth;
         }
     }
-    
+
     private Decimal set数値(Decimal decimal) {
         if (decimal == null) {
             return Decimal.ZERO;

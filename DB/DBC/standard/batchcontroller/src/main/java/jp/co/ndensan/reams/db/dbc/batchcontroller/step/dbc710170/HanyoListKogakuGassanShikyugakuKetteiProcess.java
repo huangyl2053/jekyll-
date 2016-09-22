@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc710170;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC710170;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -1162,6 +1162,7 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
         RString 出力順 = RString.EMPTY;
         if (order != null) {
             出力順 = MyBatisOrderByClauseCreator.create(HanyoListKogakuGassanShikyugakuKetteiOutPutOrder.class, order);
+            出力順 = 出力順.concat(コンマ);
         }
         if (RString.isNullOrEmpty(出力順)) {
             出力順 = 出力順.concat(ORDER_BY);

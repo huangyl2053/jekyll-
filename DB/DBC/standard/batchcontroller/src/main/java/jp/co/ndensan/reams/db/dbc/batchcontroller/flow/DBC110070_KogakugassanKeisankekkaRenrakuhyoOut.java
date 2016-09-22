@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110070.SofuTaishoDataS
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110070.SofuTaishoDataShutokuUpdateProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110070.UpdateKogakuGassanShikyuGakuKeisanKekkaMiSofuProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110070.UpdateKogakuGassanShikyuGakuKeisanKekkaSofuProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110130.HokenshaKyufujissekiOutListSakuseiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110130.HokenshaKyufujissekiOutListSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoInterfaceKanriKousinProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110070.DBC110070_KogakugassanKeisankekkaRenrakuhyoOutParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_SakuseiErrorListType;

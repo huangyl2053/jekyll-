@@ -6,9 +6,15 @@
 package jp.co.ndensan.reams.db.dbc.business.report.kyotakuservicekeikakusa;
 
 import jp.co.ndensan.reams.db.dbc.entity.report.kyotakuservicekeikakusakusei.KyotakuServiceKeikakuSakuseiSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 
 /**
  * 計画届出状況チェックリストHeaderEditorクラスです。
@@ -18,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class KyotakuServiceKeikakuSaBodyEditor implements IKyotakuServiceKeikakuSaEditor {
 
     private final KyotakuServiceKeikakuSaParam target;
+    private static final RString 文_被保険者番号 = new RString("被保険者番号");
 
     /**
      * コンストラクタです。
@@ -42,9 +49,7 @@ public class KyotakuServiceKeikakuSaBodyEditor implements IKyotakuServiceKeikaku
                 source.listList2_3 = 宛名.get住所().get住所();
                 source.listList3_2 = 宛名.get行政区画().getGyoseiku().get名称();
             }
-            if (帳票情報.get被保険者番号() != null) {
-                source.listList1_1 = 帳票情報.get被保険者番号().getColumnValue();
-            }
+
             if (帳票情報.get住民コード() != null) {
                 source.listList2_1 = 帳票情報.get住民コード().getColumnValue();
             }
@@ -91,6 +96,15 @@ public class KyotakuServiceKeikakuSaBodyEditor implements IKyotakuServiceKeikaku
             source.listList3_5 = 帳票情報.get事業者名称();
             source.listList1_12 = 帳票情報.get備考1();
             source.listList3_6 = 帳票情報.get備考2();
+
+            if (帳票情報.get被保険者番号() != null) {
+                HihokenshaNo 被保険者番号 = 帳票情報.get被保険者番号();
+                source.listList1_1 = 被保険者番号.getColumnValue();
+                PersonalData personalData = PersonalData.of(帳票情報.get住民コード(),
+                        new ExpandedInformation(new Code("003"), 文_被保険者番号, 被保険者番号.getColumnValue()));
+                AccessLogger.log(AccessLogType.照会, personalData);
+            }
+
         }
         return source;
 
