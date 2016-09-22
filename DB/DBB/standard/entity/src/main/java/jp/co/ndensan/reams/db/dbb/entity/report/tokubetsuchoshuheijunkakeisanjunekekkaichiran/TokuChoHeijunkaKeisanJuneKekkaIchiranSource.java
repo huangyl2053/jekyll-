@@ -2,7 +2,9 @@ package jp.co.ndensan.reams.db.dbb.entity.report.tokubetsuchoshuheijunkakeisanju
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 特別徴収平準化計算（特別徴収6月分）結果一覧表帳票Source
@@ -72,6 +74,7 @@ public class TokuChoHeijunkaKeisanJuneKekkaIchiranSource implements IReportSourc
     public RString listCenter_3;
     @ReportItem(name = "listCenter_4", length = 12, order = 30)
     public RString listCenter_4;
+    @ReportExpandedInfo(id = "A")
     @ReportItem(name = "listLower_1", length = 10, order = 31)
     public RString listLower_1;
     @ReportItem(name = "listLower_2", length = 15, order = 32)
@@ -99,6 +102,8 @@ public class TokuChoHeijunkaKeisanJuneKekkaIchiranSource implements IReportSourc
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
+    @ReportPerson(id = "A", order = 42)
+    public RString shikibetsuCode;
 // </editor-fold>
 
     /**
