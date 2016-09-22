@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 
 /**
@@ -76,6 +77,8 @@ class YokaigoNinteiEnkiTshuchishoEditor implements IYokaigoNinteiEnkiTshuchishoE
                 source.hihokenshaNo8 = dbT4101entity.getHihokenshaNo().substring(INT_7, INT_8);
                 source.hihokenshaNo9 = dbT4101entity.getHihokenshaNo().substring(INT_8, INT_9);
                 source.hihokenshaNo10 = dbT4101entity.getHihokenshaNo().substring(INT_9, INT_10);
+                source.shikibetsuCode = RString.EMPTY;
+                source.hihokenshaNo = dbT4101entity.getHihokenshaNo();
             }
             if (dbT4101entity.getHihokenshaName() != null) {
                 source.hihokenshaName = dbT4101entity.getHihokenshaName().getColumnValue();
