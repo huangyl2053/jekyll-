@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class KogakuShikyuFushikyuKetteiTsuchiHakkoBodyEditor implements IKogakuShikyuFushikyuKetteiTsuchiHakkoEditor {
 
-    private static final RString 支給計 = new RString("支給計");
+    // private static final RString 支給計 = new RString("支給計");
     private final KogakuShikyuFushikyuKetteiTsuchiHakkoEntity entity;
     private final int 連番;
 

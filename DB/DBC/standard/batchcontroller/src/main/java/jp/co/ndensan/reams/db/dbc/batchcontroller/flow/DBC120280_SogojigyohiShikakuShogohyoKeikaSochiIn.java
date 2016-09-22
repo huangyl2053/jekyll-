@@ -129,7 +129,7 @@ public class DBC120280_SogojigyohiShikakuShogohyoKeikaSochiIn
         parameter.setエントリ情報List(returnEntity.getFileNameList());
         parameter.setCodeNum(レコード件数合計);
         parameter.setLast(isLast);
-        parameter.set連番(レコード件数合計);
+        parameter.set連番(一時TBL登録件数);
         return loopBatch(ShikakuShogohyoJyohoReadCsvFileProcess.class).arguments(parameter).define();
     }
 
