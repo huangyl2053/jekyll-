@@ -96,7 +96,7 @@ public class TsuchiShoriManager {
     public SharedFileEntryDescriptor CSVファイル出力(List<DgTsuchishoHakkoBussiness> 画面更新情報ビジネス) {
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
         try (CsvWriter<TsuchiShoHakkouCsvEntity> csvWriter
-                = new CsvWriter.InstanceBuilder(filePath).canAppend(true).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
+                = new CsvWriter.InstanceBuilder(filePath).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8withBOM).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
             for (DgTsuchishoHakkoBussiness business : 画面更新情報ビジネス) {
                 csvWriter.writeLine(converterDataSourceFromToCsvEntity(business));
