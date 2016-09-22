@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110070;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110070;
 
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenDataSaisoFlag;
-import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc110070.KogakugassanKeisankekkaRenrakuhyoOutProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3072KogakuGassanShikyuGakuKeisanKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110070.KogakuGassanShikyuGakuKeisanKekkaRelateEntity;
@@ -24,14 +23,13 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-2670-030 zhaowei
  */
-public class UpdateKogakuGassanShikyuGakuKeisanKekkaSofuProcess extends BatchKeyBreakBase<KogakuGassanShikyuGakuKeisanKekkaTmpEntity> {
+public class UpdateKogakuGassanShikyuGakuKeisanKekkaMiSofuProcess extends BatchKeyBreakBase<KogakuGassanShikyuGakuKeisanKekkaTmpEntity> {
 
     private static final RString ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc110070."
-            + "IKogakugassanKeisankekkaRenrakuhyoOutMapper.get送付済データ");
+            + "IKogakugassanKeisankekkaRenrakuhyoOutMapper.get未送付データ");
     private static final int INT_1 = 1;
     private static final int INT_2 = 2;
     private SofuFileSakuseiProcessCore processCore;
-    private KogakugassanKeisankekkaRenrakuhyoOutProcessParameter processParameter;
     private KogakuGassanShikyuGakuKeisanKekkaRelateEntity 高額合算支給額計算結果;
 
     private int flag;
@@ -80,12 +78,13 @@ public class UpdateKogakuGassanShikyuGakuKeisanKekkaSofuProcess extends BatchKey
     @Override
     protected void afterExecute() {
         if (flag == INT_1) {
-            getBefore().get高額合算支給額計算結果().setSofuYM(
-                    new FlexibleYearMonth(processParameter.get処理年月().toString()));
+            getBefore().get高額合算支給額計算結果().setSofuYM(FlexibleYearMonth.EMPTY);
             getBefore().get高額合算支給額計算結果().setSaisoFG(KokuhorenDataSaisoFlag.再送不要.getコード());
             dbT3072TableWriter.update(getBefore().get高額合算支給額計算結果());
-            getBefore().get高額合算支給額計算結果明細().setSofuYM(new FlexibleYearMonth(processParameter.get処理年月().toString()));
-            dbT3073TableWriter.update(getBefore().get高額合算支給額計算結果明細());
+            if (getBefore().get高額合算支給額計算結果明細() != null) {
+                getBefore().get高額合算支給額計算結果明細().setSofuYM(FlexibleYearMonth.EMPTY);
+                dbT3073TableWriter.update(getBefore().get高額合算支給額計算結果明細());
+            }
         }
         if (flag == INT_2) {
             高額合算支給額計算結果 = processCore.getFinal高額合算支給額計算結果();
@@ -94,15 +93,17 @@ public class UpdateKogakuGassanShikyuGakuKeisanKekkaSofuProcess extends BatchKey
     }
 
     private void 高額合算支給額計算結果登録() {
-        高額合算支給額計算結果.get高額合算支給額計算結果().setSofuYM(
-                new FlexibleYearMonth(processParameter.get処理年月().toString()));
+        高額合算支給額計算結果.get高額合算支給額計算結果().setSofuYM(FlexibleYearMonth.EMPTY);
         高額合算支給額計算結果.get高額合算支給額計算結果().setSaisoFG(KokuhorenDataSaisoFlag.再送不要.getコード());
         dbT3072TableWriter.update(高額合算支給額計算結果.get高額合算支給額計算結果());
-        for (DbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiEntity 明細
-                : 高額合算支給額計算結果.get高額合算支給額計算結果明細リスト()) {
-            if (明細 != null) {
-                明細.setSofuYM(new FlexibleYearMonth(processParameter.get処理年月().toString()));
-                dbT3073TableWriter.update(明細);
+        if (高額合算支給額計算結果.get高額合算支給額計算結果明細リスト() != null
+                && !高額合算支給額計算結果.get高額合算支給額計算結果明細リスト().isEmpty()) {
+            for (DbT3073KogakuGassanShikyugakuKeisanKekkaMeisaiEntity 明細
+                    : 高額合算支給額計算結果.get高額合算支給額計算結果明細リスト()) {
+                if (明細 != null) {
+                    明細.setSofuYM(FlexibleYearMonth.EMPTY);
+                    dbT3073TableWriter.update(明細);
+                }
             }
         }
     }
