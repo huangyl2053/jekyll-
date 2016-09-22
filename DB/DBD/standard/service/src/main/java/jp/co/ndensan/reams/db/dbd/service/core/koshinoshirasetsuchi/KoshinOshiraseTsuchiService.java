@@ -73,9 +73,9 @@ public class KoshinOshiraseTsuchiService {
     private static final ReportIdDBD 帳票12 = ReportIdDBD.DBD511002;
     private static final RString SIGN = new RString(" ＞ ");
     private static final RString まる = new RString("○");
-    private static final String 明治 = "明治";
-    private static final String 昭和 = "昭和";
-    private static final String 大正 = "大正";
+    private static final RString 明治 = new RString("明治");
+    private static final RString 昭和 = new RString("昭和");
+    private static final RString 大正 = new RString("大正");
     private static final RString 抽出条件_申請書管理番号リスト = new RString("【申請書管理番号リスト】");
     private static final RString 抽出条件_出力対象区分 = new RString("【出力対象区分】");
     private static final RString 抽出条件_抽出対象期間開始 = new RString("【抽出対象期間(開始)】");
@@ -133,7 +133,6 @@ public class KoshinOshiraseTsuchiService {
         RStringBuilder 抽出対象期間開始builder = new RStringBuilder();
         RStringBuilder 抽出対象期間終了builder = new RStringBuilder();
         RStringBuilder 通知書発行日builder = new RStringBuilder();
-        RStringBuilder 出力順builder = new RStringBuilder();
 
         RString 出力対象区分 = RString.EMPTY;
         if (new RString("0").equals(parameter.get出力対象区分())) {
@@ -148,31 +147,6 @@ public class KoshinOshiraseTsuchiService {
         抽出対象期間開始builder.append(抽出条件_抽出対象期間開始).append(parameter.get抽出対象期間_開始());
         抽出対象期間終了builder.append(抽出条件_抽出対象期間終了).append(parameter.get抽出対象期間_終了());
         通知書発行日builder.append(抽出条件_通知書発行日).append(parameter.get通知書発行日());
-        出力順builder.append(抽出条件_出力順);
-
-        List<ISetSortItem> list = new ArrayList<>();
-        if (outputOrder != null) {
-            list = outputOrder.get設定項目リスト();
-        }
-        if (list != null && list.size() > NUM_0) {
-            出力順builder.append(list.get(NUM_0).get項目名()).append(SIGN);
-        }
-        if (list != null && list.size() > NUM_1) {
-            出力順builder.append(list.get(NUM_1).get項目名()).append(SIGN);
-        }
-        if (list != null && list.size() > NUM_2) {
-            出力順builder.append(list.get(NUM_2).get項目名()).append(SIGN);
-        }
-        if (list != null && list.size() > NUM_3) {
-            出力順builder.append(list.get(NUM_3).get項目名()).append(SIGN);
-        }
-        if (list != null && list.size() > NUM_4) {
-            出力順builder.append(list.get(NUM_4).get項目名()).append(SIGN);
-        }
-        RString 出力順RStr = 出力順builder.toRString();
-        if (出力順builder.length() > NUM_5) {
-            出力順RStr = 出力順builder.substring(0, 出力順builder.length() - NUM_3);
-        }
 
         RString 申請書管理番号 = 抽出条件_申請書管理番号リスト;
         int i = 0;
@@ -180,7 +154,7 @@ public class KoshinOshiraseTsuchiService {
             for (RString str : parameter.get申請書管理番号リスト()) {
                 i++;
                 申請書管理番号 = 申請書管理番号.concat(str).concat(RString.HALF_SPACE);
-                if (i == 8) {
+                if (i == NUM_8) {
                     出力条件.add(申請書管理番号);
                     申請書管理番号 = RString.FULL_SPACE.concat(RString.FULL_SPACE).concat(RString.FULL_SPACE).concat(RString.FULL_SPACE)
                             .concat(RString.FULL_SPACE).concat(RString.FULL_SPACE).concat(RString.FULL_SPACE).concat(RString.FULL_SPACE)
@@ -196,7 +170,7 @@ public class KoshinOshiraseTsuchiService {
         出力条件.add(抽出対象期間開始builder.toRString());
         出力条件.add(抽出対象期間終了builder.toRString());
         出力条件.add(通知書発行日builder.toRString());
-        出力条件.add(出力順RStr);
+        出力条件.add(get出力順RStr(outputOrder));
 
         if (帳票ID01TF) {
             RString 帳票ID = 帳票01.getReportId().getColumnValue();
@@ -280,16 +254,21 @@ public class KoshinOshiraseTsuchiService {
                 fillType(FillType.BLANK).toDateString());
         entity.set要介護認定終了日(koshinOshiraseEn.getDbV4001JukyushaDaicho().getNinteiYukoKikanShuryoYMD().wareki().separator(Separator.JAPANESE).
                 fillType(FillType.BLANK).toDateString());
-        if (koshinOshiraseEn.getDbV4001JukyushaDaicho().getYokaigoJotaiKubunCode() != null && !koshinOshiraseEn.getDbV4001JukyushaDaicho().getYokaigoJotaiKubunCode().getColumnValue().isEmpty()) {
+        if (koshinOshiraseEn.getDbV4001JukyushaDaicho().getYokaigoJotaiKubunCode() != null && !koshinOshiraseEn.
+                getDbV4001JukyushaDaicho().getYokaigoJotaiKubunCode().getColumnValue().isEmpty()) {
             if (koshinOshiraseEn.getDbt4101Entity().getKoroshoIfShikibetsuCode().getColumnValue().equals(new RString("99A"))) {
-                entity.set要介護状態区分(YokaigoJotaiKubun99.toValue(koshinOshiraseEn.getDbV4001JukyushaDaicho().getYokaigoJotaiKubunCode().getColumnValue()).get名称());
+                entity.set要介護状態区分(YokaigoJotaiKubun99.toValue(koshinOshiraseEn.getDbV4001JukyushaDaicho().
+                        getYokaigoJotaiKubunCode().getColumnValue()).get名称());
             } else if (koshinOshiraseEn.getDbt4101Entity().getKoroshoIfShikibetsuCode().getColumnValue().equals(new RString("02A"))) {
-                entity.set要介護状態区分(YokaigoJotaiKubun02.toValue(koshinOshiraseEn.getDbV4001JukyushaDaicho().getYokaigoJotaiKubunCode().getColumnValue()).get名称());
+                entity.set要介護状態区分(YokaigoJotaiKubun02.toValue(koshinOshiraseEn.getDbV4001JukyushaDaicho().
+                        getYokaigoJotaiKubunCode().getColumnValue()).get名称());
             } else if (koshinOshiraseEn.getDbt4101Entity().getKoroshoIfShikibetsuCode().getColumnValue().equals(new RString("06A"))) {
-                entity.set要介護状態区分(YokaigoJotaiKubun06.toValue(koshinOshiraseEn.getDbV4001JukyushaDaicho().getYokaigoJotaiKubunCode().getColumnValue()).get名称());
+                entity.set要介護状態区分(YokaigoJotaiKubun06.toValue(koshinOshiraseEn.getDbV4001JukyushaDaicho().
+                        getYokaigoJotaiKubunCode().getColumnValue()).get名称());
             } else if (koshinOshiraseEn.getDbt4101Entity().getKoroshoIfShikibetsuCode().getColumnValue().equals(new RString("09B"))
                     || koshinOshiraseEn.getDbt4101Entity().getKoroshoIfShikibetsuCode().getColumnValue().equals(new RString("09A"))) {
-                entity.set要介護状態区分(YokaigoJotaiKubun09.toValue(koshinOshiraseEn.getDbV4001JukyushaDaicho().getYokaigoJotaiKubunCode().getColumnValue()).get名称());
+                entity.set要介護状態区分(YokaigoJotaiKubun09.toValue(koshinOshiraseEn.getDbV4001JukyushaDaicho().
+                        getYokaigoJotaiKubunCode().getColumnValue()).get名称());
             }
         }
         return entity;
@@ -363,7 +342,7 @@ public class KoshinOshiraseTsuchiService {
         entity.set被保険者番号第8桁(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(NUM_7, NUM_8));
         entity.set被保険者番号第9桁(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(NUM_8, NUM_9));
         entity.set被保険者番号第10桁(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo().substring(NUM_9, NUM_10));
-        String nianhao = koshinOshiraseEn.getDbt4101Entity().getSeinengappiYMD().wareki().eraType(EraType.KANJI).getEra().toString();
+        RString nianhao = koshinOshiraseEn.getDbt4101Entity().getSeinengappiYMD().wareki().eraType(EraType.KANJI).getEra();
         if (nianhao.startsWith(明治)) {
             entity.set出生元号明治(まる);
             entity.set出生元号大正(RString.EMPTY);
@@ -402,7 +381,7 @@ public class KoshinOshiraseTsuchiService {
         } else if (koshinOshiraseEn.getDbt4101Entity().getKoroshoIfShikibetsuCode().equals(new Code("02A"))) {
             entity = prtKaigo(entity, eCode);
         } else if (koshinOshiraseEn.getDbt4101Entity().getKoroshoIfShikibetsuCode().equals(new Code("06A"))) {
-            entity = Kanri(entity, eCode);
+            entity = getShinseiShoEntity(entity, eCode);
         } else if (koshinOshiraseEn.getDbt4101Entity().getKoroshoIfShikibetsuCode().equals(new Code("09B"))
                 || koshinOshiraseEn.getDbt4101Entity().getKoroshoIfShikibetsuCode().equals(new Code("09A"))) {
             entity = sakusei(entity, eCode);
@@ -423,14 +402,18 @@ public class KoshinOshiraseTsuchiService {
         entity.set被保険者番号(koshinOshiraseEn.getDbt4101Entity().getHihokenshaNo());
         entity.set被保険者氏名(koshinOshiraseEn.getDbt4101Entity().getHihokenshaName().getColumnValue());
         if (koshinOshiraseEn.getDbt4101Entity().getKoroshoIfShikibetsuCode().getColumnValue().equals(new RString("99A"))) {
-            entity.set要介護度(YokaigoJotaiKubun99.toValue(koshinOshiraseEn.getDbV4001JukyushaDaicho().getYokaigoJotaiKubunCode().getColumnValue()).get名称());
+            entity.set要介護度(YokaigoJotaiKubun99.toValue(koshinOshiraseEn.getDbV4001JukyushaDaicho().
+                    getYokaigoJotaiKubunCode().getColumnValue()).get名称());
         } else if (koshinOshiraseEn.getDbt4101Entity().getKoroshoIfShikibetsuCode().getColumnValue().equals(new RString("02A"))) {
-            entity.set要介護度(YokaigoJotaiKubun02.toValue(koshinOshiraseEn.getDbV4001JukyushaDaicho().getYokaigoJotaiKubunCode().getColumnValue()).get名称());
+            entity.set要介護度(YokaigoJotaiKubun02.toValue(koshinOshiraseEn.getDbV4001JukyushaDaicho().
+                    getYokaigoJotaiKubunCode().getColumnValue()).get名称());
         } else if (koshinOshiraseEn.getDbt4101Entity().getKoroshoIfShikibetsuCode().getColumnValue().equals(new RString("06A"))) {
-            entity.set要介護度(YokaigoJotaiKubun06.toValue(koshinOshiraseEn.getDbV4001JukyushaDaicho().getYokaigoJotaiKubunCode().getColumnValue()).get名称());
+            entity.set要介護度(YokaigoJotaiKubun06.toValue(koshinOshiraseEn.getDbV4001JukyushaDaicho().
+                    getYokaigoJotaiKubunCode().getColumnValue()).get名称());
         } else if (koshinOshiraseEn.getDbt4101Entity().getKoroshoIfShikibetsuCode().getColumnValue().equals(new RString("09B"))
                 || koshinOshiraseEn.getDbt4101Entity().getKoroshoIfShikibetsuCode().getColumnValue().equals(new RString("09A"))) {
-            entity.set要介護度(YokaigoJotaiKubun09.toValue(koshinOshiraseEn.getDbV4001JukyushaDaicho().getYokaigoJotaiKubunCode().getColumnValue()).get名称());
+            entity.set要介護度(YokaigoJotaiKubun09.toValue(koshinOshiraseEn.getDbV4001JukyushaDaicho().
+                    getYokaigoJotaiKubunCode().getColumnValue()).get名称());
         }
 
         FlexibleDate ninteiShinseiYMD = koshinOshiraseEn.getDbt4101Entity().getNinteiShinseiYMD();
@@ -451,22 +434,15 @@ public class KoshinOshiraseTsuchiService {
             entity.set認定終了日(ninteiYukoKikanShuryoYMD.wareki().toDateString());
         }
         entity.set受給申請事由(koshinOshiraseEn.getDbt4101Entity().getNinteiShinseiRiyu());
-        entity.set申請区分_申請時(NinteiShinseiShinseijiKubunCode.toValue(koshinOshiraseEn.getDbt4101Entity().getNinteiShinseiShinseijiKubunCode().getColumnValue()).get名称());
+        entity.set申請区分_申請時(NinteiShinseiShinseijiKubunCode.toValue(koshinOshiraseEn.getDbt4101Entity().
+                getNinteiShinseiShinseijiKubunCode().getColumnValue()).get名称());
 
         Code ninteiShinseiHoreiKubunCode = koshinOshiraseEn.getDbt4101Entity().getNinteiShinseiHoreiKubunCode();
         if (ninteiShinseiHoreiKubunCode != null && !ninteiShinseiHoreiKubunCode.getColumnValue().isEmpty()) {
             entity.set申請区分_法令(NinteiShinseiHoreiCode.toValue(ninteiShinseiHoreiKubunCode.getColumnValue()).get名称());
         }
 
-        DbT4910NinteichosaItakusakiJohoEntity dbT4910Entity = koshinOshiraseEn.getDbT4910NinteichosaItakusakiJoho();
-        if (dbT4910Entity == null) {
-            dbT4910Entity = new DbT4910NinteichosaItakusakiJohoEntity();
-        }
-        JigyoshaNo jigyoshaNo = dbT4910Entity.getJigyoshaNo();
-        if (jigyoshaNo != null) {
-            entity.set居宅支援事業者コード(jigyoshaNo.getColumnValue());
-        }
-        entity.set居宅支援事業者名称(dbT4910Entity.getJigyoshaMeisho());
+        set通知書発行一覧By認定調査(entity, koshinOshiraseEn);
         JigyoshaNo nyushoShisetsuCode = koshinOshiraseEn.getDbt4101Entity().getNyushoShisetsuCode();
         if (nyushoShisetsuCode != null) {
             entity.set入所施設事業者コード(nyushoShisetsuCode.getColumnValue());
@@ -481,6 +457,48 @@ public class KoshinOshiraseTsuchiService {
         }
         entity.set連番(index);
         twonin.setTsuchishoHakoEntity(entity);
+    }
+
+    private void set通知書発行一覧By認定調査(KoshinOshiraseTsuchishoHakoEntity entity, KoshinOshiraseTsuchiUpdateEntity koshinOshiraseEn) {
+        DbT4910NinteichosaItakusakiJohoEntity dbT4910Entity = koshinOshiraseEn.getDbT4910NinteichosaItakusakiJoho();
+        if (dbT4910Entity == null) {
+            dbT4910Entity = new DbT4910NinteichosaItakusakiJohoEntity();
+        }
+        JigyoshaNo jigyoshaNo = dbT4910Entity.getJigyoshaNo();
+        if (jigyoshaNo != null) {
+            entity.set居宅支援事業者コード(jigyoshaNo.getColumnValue());
+        }
+        entity.set居宅支援事業者名称(dbT4910Entity.getJigyoshaMeisho());
+    }
+
+    private RString get出力順RStr(IOutputOrder outputOrder) {
+        RStringBuilder 出力順builder = new RStringBuilder();
+        出力順builder.append(抽出条件_出力順);
+
+        List<ISetSortItem> list = new ArrayList<>();
+        if (outputOrder != null) {
+            list = outputOrder.get設定項目リスト();
+        }
+        if (list != null && list.size() > NUM_0) {
+            出力順builder.append(list.get(NUM_0).get項目名()).append(SIGN);
+        }
+        if (list != null && list.size() > NUM_1) {
+            出力順builder.append(list.get(NUM_1).get項目名()).append(SIGN);
+        }
+        if (list != null && list.size() > NUM_2) {
+            出力順builder.append(list.get(NUM_2).get項目名()).append(SIGN);
+        }
+        if (list != null && list.size() > NUM_3) {
+            出力順builder.append(list.get(NUM_3).get項目名()).append(SIGN);
+        }
+        if (list != null && list.size() > NUM_4) {
+            出力順builder.append(list.get(NUM_4).get項目名()).append(SIGN);
+        }
+        RString 出力順RStr = 出力順builder.toRString();
+        if (出力順builder.length() > NUM_5) {
+            出力順RStr = 出力順builder.substring(0, 出力順builder.length() - NUM_3);
+        }
+        return 出力順RStr;
     }
 
     private ShinseiShoEntity shichoson(ShinseiShoEntity entity, Code eCode) {
@@ -523,7 +541,7 @@ public class KoshinOshiraseTsuchiService {
         return entity;
     }
 
-    private ShinseiShoEntity Kanri(ShinseiShoEntity entity, Code eCode) {
+    private ShinseiShoEntity getShinseiShoEntity(ShinseiShoEntity entity, Code eCode) {
         if (eCode.getColumnValue().equals(YokaigoJotaiKubun06.要介護1.getコード())) {
             set要介護(entity, まる, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                     RString.EMPTY, RString.EMPTY, RString.EMPTY);
