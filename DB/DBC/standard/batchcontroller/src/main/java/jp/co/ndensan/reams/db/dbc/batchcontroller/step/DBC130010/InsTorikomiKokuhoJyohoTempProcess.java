@@ -34,7 +34,36 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
     private IBatchTableWriter<TorikomiKokuhoJyohoEntity> torikomiKokuhoJyohoEntityWriter;
     private boolean 文言設定flag;
     private TorikomiKokuhoJyohoEntity 取込国保情報Entity;
+    private static final int 四 = 4;
+    private static final int 五 = 5;
+    private static final int 六 = 6;
+    private static final int 八 = 8;
+    private static final int 十 = 10;
+    private static final int 十二 = 12;
+    private static final int 十四 = 14;
+    private static final int 十六 = 16;
+    private static final int 十八 = 18;
+    private static final int 二十 = 20;
+    private static final int 二十二 = 22;
+    private static final int 二十八 = 28;
+    private static final int 三十六 = 36;
+    private static final int 三十八 = 38;
+    private static final int 四十 = 40;
+    private static final int 四十三 = 43;
+    private static final int 四十四 = 44;
+    private static final int 五十 = 50;
+    private static final int 五十二 = 52;
+    private static final int 六十 = 60;
+    private static final int 六十八 = 68;
+    private static final int 七十六 = 76;
+    private static final int 八十 = 80;
+    private static final int 八十四 = 84;
     private static final int 九十 = 90;
+    private static final int 九十二 = 92;
+    private static final int 一百一十二 = 112;
+    private static final int 一百二十 = 120;
+    private static final int 一百二十一 = 121;
+    private static final int 一百七十一 = 171;
     private static final int 三百四十一 = 341;
     private static final RString 正則表現_数値 = new RString("[0-9]*");
     private static final RString 正則表現_半角空白 = new RString("[ ]*");
@@ -440,43 +469,43 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
     }
 
     private void setEntity(RString 指定な文字列) {
-        取込国保情報Entity.set市町村コード(get指定位置な文字列(指定な文字列, 0, 6));
-        取込国保情報Entity.setIN住民コード(get指定位置な文字列(指定な文字列, 6, 12));
-        取込国保情報Entity.set履歴番号(get指定位置な文字列(指定な文字列, 18, 4));
-        取込国保情報Entity.set国保番号(get指定位置な文字列(指定な文字列, 22, 14));
-        取込国保情報Entity.set国保資格取得年月日(get指定位置な文字列(指定な文字列, 36, 8));
-        RString 国保資格喪失年月日 = get指定位置な文字列(指定な文字列, 44, 8);
+        取込国保情報Entity.set市町村コード(get指定位置な文字列(指定な文字列, 0, 六));
+        取込国保情報Entity.setIN住民コード(get指定位置な文字列(指定な文字列, 六, 十二));
+        取込国保情報Entity.set履歴番号(get指定位置な文字列(指定な文字列, 十八, 四));
+        取込国保情報Entity.set国保番号(get指定位置な文字列(指定な文字列, 二十二, 十四));
+        取込国保情報Entity.set国保資格取得年月日(get指定位置な文字列(指定な文字列, 三十六, 八));
+        RString 国保資格喪失年月日 = get指定位置な文字列(指定な文字列, 四十四, 八);
         if (is空白(国保資格喪失年月日)) {
             取込国保情報Entity.set国保資格喪失年月日(日付_99999999);
         } else {
             取込国保情報Entity.set国保資格喪失年月日(国保資格喪失年月日);
         }
-        取込国保情報Entity.set国保保険者番号(get指定位置な文字列(指定な文字列, 52, 8));
-        取込国保情報Entity.set国保保険証番号(get指定位置な文字列(指定な文字列, 60, 20));
-        取込国保情報Entity.set国保個人番号(get指定位置な文字列(指定な文字列, 80, 10));
+        取込国保情報Entity.set国保保険者番号(get指定位置な文字列(指定な文字列, 五十二, 八));
+        取込国保情報Entity.set国保保険証番号(get指定位置な文字列(指定な文字列, 六十, 二十));
+        取込国保情報Entity.set国保個人番号(get指定位置な文字列(指定な文字列, 八十, 十));
     }
 
     private void setEntityDensanNi(RString 指定な文字列) {
-        取込国保情報Entity.set国保保険者番号(get指定位置な文字列(指定な文字列, 0, 8));
-        取込国保情報Entity.set国保保険証番号(get指定位置な文字列(指定な文字列, 8, 20));
-        取込国保情報Entity.set国保個人番号(get指定位置な文字列(指定な文字列, 28, 10));
-        取込国保情報Entity.set市町村コード(get指定位置な文字列(指定な文字列, 38, 5));
-        取込国保情報Entity.set個人区分コード(get指定位置な文字列(指定な文字列, 43, 1));
-        取込国保情報Entity.setIN住民コード(get指定位置な文字列(指定な文字列, 44, 16));
-        取込国保情報Entity.set国保資格取得年月日(get指定位置な文字列(指定な文字列, 60, 8));
-        RString 国保資格喪失年月日 = get指定位置な文字列(指定な文字列, 68, 8);
+        取込国保情報Entity.set国保保険者番号(get指定位置な文字列(指定な文字列, 0, 八));
+        取込国保情報Entity.set国保保険証番号(get指定位置な文字列(指定な文字列, 八, 二十));
+        取込国保情報Entity.set国保個人番号(get指定位置な文字列(指定な文字列, 二十八, 十));
+        取込国保情報Entity.set市町村コード(get指定位置な文字列(指定な文字列, 三十八, 五));
+        取込国保情報Entity.set個人区分コード(get指定位置な文字列(指定な文字列, 四十三, 1));
+        取込国保情報Entity.setIN住民コード(get指定位置な文字列(指定な文字列, 四十四, 十六));
+        取込国保情報Entity.set国保資格取得年月日(get指定位置な文字列(指定な文字列, 六十, 八));
+        RString 国保資格喪失年月日 = get指定位置な文字列(指定な文字列, 六十八, 八);
         if (is空白(国保資格喪失年月日)) {
             取込国保情報Entity.set国保資格喪失年月日(日付_99999999);
         } else {
             取込国保情報Entity.set国保資格喪失年月日(国保資格喪失年月日);
         }
-        取込国保情報Entity.set国保退職該当日(get指定位置な文字列(指定な文字列, 76, 8));
-        取込国保情報Entity.set国保退職非該当日(get指定位置な文字列(指定な文字列, 84, 8));
-        取込国保情報Entity.setカナ氏名(get指定位置な文字列(指定な文字列, 92, 20));
-        取込国保情報Entity.set生年月日(get指定位置な文字列(指定な文字列, 112, 8));
-        取込国保情報Entity.set性別コード(get指定位置な文字列(指定な文字列, 120, 1));
-        取込国保情報Entity.set住所(get指定位置な文字列(指定な文字列, 121, 40));
-        取込国保情報Entity.set方書(get指定位置な文字列(指定な文字列, 171, 50));
+        取込国保情報Entity.set国保退職該当日(get指定位置な文字列(指定な文字列, 七十六, 八));
+        取込国保情報Entity.set国保退職非該当日(get指定位置な文字列(指定な文字列, 八十四, 八));
+        取込国保情報Entity.setカナ氏名(get指定位置な文字列(指定な文字列, 九十二, 二十));
+        取込国保情報Entity.set生年月日(get指定位置な文字列(指定な文字列, 一百一十二, 八));
+        取込国保情報Entity.set性別コード(get指定位置な文字列(指定な文字列, 一百二十, 1));
+        取込国保情報Entity.set住所(get指定位置な文字列(指定な文字列, 一百二十一, 四十));
+        取込国保情報Entity.set方書(get指定位置な文字列(指定な文字列, 一百七十一, 五十));
     }
 
     private boolean is空白(RString value) {
