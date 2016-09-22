@@ -9,8 +9,9 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
+ * 認定情報Entity
  *
- * @author x_miaocl
+ * @reamsid_L DBD-3610-050 x_miaocl
  */
 @lombok.Getter
 @lombok.Setter
