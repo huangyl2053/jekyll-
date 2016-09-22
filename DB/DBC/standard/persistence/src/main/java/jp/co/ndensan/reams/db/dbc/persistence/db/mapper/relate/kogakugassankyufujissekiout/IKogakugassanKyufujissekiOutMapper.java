@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassankyuf
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassankyufujissekiout.KogakugassanKyufujissekiDoSofuReportMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassankyufujissekiout.KogakugassanKyufujissekiGetSofuTaishoDataMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassankyufujissekiout.KogakugassanKyufujissekiUpdateDBMybatisParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3075KogakuGassanKyufuJissekiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassankyufujissekiout.DbWT38Q1KogakuGassanKyufuJissekiTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassankyufujissekiout.KogakuGassanKyufuJissekiDataEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassankyufujissekiout.KogakuGassanKyufuJissekiSofuEntity;
@@ -36,12 +35,17 @@ public interface IKogakugassanKyufujissekiOutMapper {
     DbWT38Q1KogakuGassanKyufuJissekiTempEntity get識別コード無しの対象データ();
 
     /**
-     * 高額合算給付実績データを取得する。
+     * 高額合算給付実績_送付済データを更新する。
      *
      * @param parameter KogakugassanKyufujissekiUpdateDBMybatisParameter
-     * @return DbT3075KogakuGassanKyufuJissekiEntity
      */
-    DbT3075KogakuGassanKyufuJissekiEntity get高額合算給付実績更新対象(KogakugassanKyufujissekiUpdateDBMybatisParameter parameter);
+    void update高額合算給付実績_送付済(KogakugassanKyufujissekiUpdateDBMybatisParameter parameter);
+
+    /**
+     * 高額合算給付実績_未送付データを更新する。
+     *
+     */
+    void update高額合算給付実績_未送付();
 
     /**
      * 送付ファイル作成データ件数を取得する。

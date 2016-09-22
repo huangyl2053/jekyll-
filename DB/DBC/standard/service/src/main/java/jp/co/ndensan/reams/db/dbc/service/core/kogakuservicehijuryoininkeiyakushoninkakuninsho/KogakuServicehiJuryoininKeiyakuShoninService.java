@@ -151,12 +151,6 @@ public class KogakuServicehiJuryoininKeiyakuShoninService {
         介護保険高額Entity.set括弧Right1(宛先Source.kakkoRight1);
         介護保険高額Entity.set括弧Right2(宛先Source.kakkoRight2);
         介護保険高額Entity.setカスタマバーコード(宛先Source.customerBarCode);
-        if (entity.getカナ名称() != null && !entity.getカナ名称().isEmpty()) {
-            介護保険高額Entity.set被保険者氏名カナ(entity.getカナ名称().value());
-        }
-        if (entity.get名称() != null && !entity.get名称().isEmpty()) {
-            介護保険高額Entity.set被保険者氏名(entity.get名称().value());
-        }
         if (高額介護事業者.getHihokenshaNo() != null && !高額介護事業者.getHihokenshaNo().isEmpty()) {
             介護保険高額Entity.set被保険者番号(高額介護事業者.getHihokenshaNo().value());
         }
@@ -188,7 +182,18 @@ public class KogakuServicehiJuryoininKeiyakuShoninService {
         if (利用者負担上限額 != null) {
             介護保険高額Entity.set利用者負担上限額(new RString(利用者負担上限額.toString()));
         }
+        edit介護保険高額名称(介護保険高額Entity, entity);
         return 介護保険高額Entity;
+    }
+
+    private void edit介護保険高額名称(KogakuServiceHiJyuryoItakuKeiyakuKakuninShoEntity 介護保険高額Entity,
+            KogakuServicehiJuryoininKeiyakuShoninKakuninshoEntity entity) {
+        if (entity.getカナ名称() != null && !entity.getカナ名称().isEmpty()) {
+            介護保険高額Entity.set被保険者氏名カナ(entity.getカナ名称().value());
+        }
+        if (entity.get名称() != null && !entity.get名称().isEmpty()) {
+            介護保険高額Entity.set被保険者氏名(entity.get名称().value());
+        }
     }
 
     private RString do日付編集パターン_4(FlexibleDate date) {

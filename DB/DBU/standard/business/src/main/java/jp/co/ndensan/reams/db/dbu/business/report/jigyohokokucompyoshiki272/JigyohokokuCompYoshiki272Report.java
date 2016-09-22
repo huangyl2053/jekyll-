@@ -14,9 +14,11 @@ import jp.co.ndensan.reams.db.dbu.entity.db.basic.DbT7021JigyoHokokuTokeiDataEnt
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshiki272.JigyohokokuCompYoshiki272Change;
 import jp.co.ndensan.reams.db.dbu.entity.db.relate.jigyohokokucompyoshiki272.JigyohokokuCompYoshiki272Entity;
 import jp.co.ndensan.reams.db.dbu.entity.report.jigyohokokucompyoshiki272.JigyohokokuCompYoshiki272ReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -63,6 +65,8 @@ public class JigyohokokuCompYoshiki272Report extends Report<JigyohokokuCompYoshi
         }
         for (List<DbT7021JigyoHokokuTokeiDataEntity> key : data_map.values()) {
             for (JigyohokokuCompYoshiki272Change change : getData(key)) {
+                change.set保険者番号(key.get(0).getShichosonCode().value());
+                change.set保険者名(key.get(0).getShukeiKomokuMeisho());
                 IJigyohokokuCompYoshiki272Editor bodyeditor = new JigyohokokuCompYoshiki272BodyEditor(change);
                 IJigyohokokuCompYoshiki272Builder builder = new JigyohokokuCompYoshiki272Builder(bodyeditor);
                 writer.writeLine(builder);
@@ -126,7 +130,7 @@ public class JigyohokokuCompYoshiki272Report extends Report<JigyohokokuCompYoshi
         RString 保険者名 = RString.EMPTY;
         for (DbT7021JigyoHokokuTokeiDataEntity jigyohokokutokei : list) {
             件数 = 件数.add(set件数(jigyohokokutokei));
-            給付額 = 件数.add(set給付額(jigyohokokutokei));
+            給付額 = 給付額.add(set給付額(jigyohokokutokei));
             保険者番号 = jigyohokokutokei.getShichosonCode().value();
             保険者名 = jigyohokokutokei.getShukeiKomokuMeisho();
         }
@@ -145,20 +149,22 @@ public class JigyohokokuCompYoshiki272Report extends Report<JigyohokokuCompYoshi
         RStringBuilder 集計範囲_SB = new RStringBuilder();
         if (月報_1.equals(entity.get年報月報区分())) {
             集計範囲_SB.append("（");
-            集計範囲_SB.append(new FlexibleDate(entity.get集計年月()).getYearMonth().wareki().firstYear(FirstYear.ICHI_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+            集計範囲_SB.append(new FlexibleDate(entity.get集計年月()).getYearMonth().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.ICHI_NEN).separator(Separator.JAPANESE)
+                    .fillType(FillType.BLANK).toDateString());
             集計範囲_SB.append("分）");
         }
         if (年報_2.equals(entity.get年報月報区分())) {
             集計範囲_SB.append("（");
-            集計範囲_SB.append(new FlexibleDate(entity.get集計年度()).getYearMonth().wareki().firstYear(FirstYear.ICHI_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
-            集計範囲_SB.append("分）");
-            集計範囲_SB.append(new FlexibleDate(entity.get集計期間FROM()).getYearMonth().wareki().firstYear(FirstYear.ICHI_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+            集計範囲_SB.append(new FlexibleYear(entity.get集計年度()).wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.ICHI_NEN).separator(Separator.JAPANESE)
+                    .fillType(FillType.BLANK).toDateString());
+            集計範囲_SB.append("度分）");
+            集計範囲_SB.append(new FlexibleDate(entity.get集計期間FROM()).getYearMonth().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.ICHI_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
             集計範囲_SB.append(" ～ ");
-            集計範囲_SB.append(new FlexibleDate(entity.get集計期間TO()).getYearMonth().wareki().firstYear(FirstYear.ICHI_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+            集計範囲_SB.append(new FlexibleDate(entity.get集計期間TO()).getYearMonth().wareki().eraType(EraType.KANJI)
+                    .firstYear(FirstYear.ICHI_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
         }
         return 集計範囲_SB.toRString();
     }

@@ -5,13 +5,17 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ServiceTy
  * 不正な動作の原因になります。
  */
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ServiceTypeModel;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * ServiceTypeInputCommonChildDiv のクラスファイル
@@ -20,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
  */
 public class ServiceTypeInputCommonChildDivDiv extends Panel implements IServiceTypeInputCommonChildDiv {
 
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -35,6 +39,8 @@ public class ServiceTypeInputCommonChildDivDiv extends Panel implements IService
     private TextBox txtServiceTypeName;
     @JsonProperty("hdnServiceRyakusho")
     private RString hdnServiceRyakusho;
+    @JsonProperty("hdnServiceModel")
+    private RString hdnServiceModel;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -114,6 +120,24 @@ public class ServiceTypeInputCommonChildDivDiv extends Panel implements IService
         this.hdnServiceRyakusho = hdnServiceRyakusho;
     }
 
+    /*
+     * gethdnServiceModel
+     * @return hdnServiceModel
+     */
+    @JsonProperty("hdnServiceModel")
+    public RString getHdnServiceModel() {
+        return hdnServiceModel;
+    }
+
+    /*
+     * sethdnServiceModel
+     * @param hdnServiceModel hdnServiceModel
+     */
+    @JsonProperty("hdnServiceModel")
+    public void setHdnServiceModel(RString hdnServiceModel) {
+        this.hdnServiceModel = hdnServiceModel;
+    }
+
     // </editor-fold>
     //--------------- この行より下にコードを追加してください -------------------
     @Override
@@ -124,6 +148,24 @@ public class ServiceTypeInputCommonChildDivDiv extends Panel implements IService
     @Override
     public void initialize(RString serviceTypeCode) {
         getHandler().initialize(serviceTypeCode);
+    }
+
+    /**
+     * 画面を画面初期化します。
+     *
+     * @param 基準年月 基準年月
+     * @param サービス種類リスト サービス種類リスト
+     * @param サービス分類リスト サービス分類リスト
+     * @param 抽出パターン 抽出パターン
+     */
+    @Override
+    public void initialize(FlexibleYearMonth 基準年月, List<RString> サービス種類リスト, List<RString> サービス分類リスト, RString 抽出パターン) {
+        ServiceTypeModel model = new ServiceTypeModel();
+        model.set基準年月(基準年月);
+        model.setサービス分類リスト(サービス分類リスト);
+        model.setサービス種類リスト(サービス種類リスト);
+        model.set抽出パターン(抽出パターン);
+        this.setHdnServiceModel(DataPassingConverter.serialize(model));
     }
 
     @Override

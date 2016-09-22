@@ -107,9 +107,7 @@ public class KoshinTaishoFinder {
         try (CsvWriter<SelectSyuuShadeTaCsvEntity> csvdeTeWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(true).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(true).build()) {
-            if (調査データ情報List == null || 調査データ情報List.size() <= 0) {
-                //                
-            } else {
+            if (調査データ情報List != null) {
                 for (SelectSyuuShadeTaEntity entity : 調査データ情報List) {
                     csvdeTeWriter.writeLine(setdetaEntity(entity));
                 }
@@ -203,13 +201,29 @@ public class KoshinTaishoFinder {
         if (sqlEntity.get認定調査受領年月日() != null) {
             entity.set認定調査受領年月日(sqlEntity.get認定調査受領年月日().wareki().toDateString());
         }
-        if (sqlEntity.get利用施設郵便番号() != null) {
-            RString three = sqlEntity.get利用施設郵便番号().substring(ZEOR, THREE);
-            RString four = sqlEntity.get利用施設郵便番号().substring(THREE, SEVEN);
-            entity.set利用施設郵便番号(three.concat(横木).concat(four));
+        setVoidEntity2(entity, sqlEntity);
+        setVoidEntity(entity, sqlEntity);
+        return entity;
+    }
+    private void setVoidEntity2(SelectSyuuShadeTaCsvEntity entity, SelectSyuuShadeTaEntity sqlEntity) {
+        if (sqlEntity.get認定調査実施場所コード() != null && !sqlEntity.get認定調査実施場所コード().isEmpty()) {
+            entity.set認定調査実施場所(ChosaJisshiBashoCode.toValue(sqlEntity.get認定調査実施場所コード()).get名称());
         }
-        if (sqlEntity.get認定調査特記事項受付年月日() != null) {
-            entity.set認定調査特記事項受付年月日(sqlEntity.get認定調査特記事項受付年月日().wareki().toDateString());
+        if (sqlEntity.get認定調査サービス区分コード() != null && !sqlEntity.get認定調査サービス区分コード().isEmpty()) {
+            entity.set認定調査サービス区分(ServiceKubunCode.toValue(sqlEntity.get認定調査サービス区分コード()).get名称());
+        }
+        if (sqlEntity.get原本マスク区分コード() != null && !sqlEntity.get原本マスク区分コード().isEmpty()) {
+            entity.set原本マスク区分(GenponMaskKubun.toValue(sqlEntity.get原本マスク区分コード()).get名称());
+        }
+        if (sqlEntity.get認定調査認知症高齢者の日常生活自立度コード() != null
+                && !sqlEntity.get認定調査認知症高齢者の日常生活自立度コード().isEmpty()) {
+            entity.set認定調査認知症高齢者の日常生活自立度(NinchishoNichijoSeikatsuJiritsudoCode.toValue(
+                    sqlEntity.get認定調査認知症高齢者の日常生活自立度コード()).get名称());
+        }
+        if (sqlEntity.get認定調査障害高齢者の日常生活自立度コード() != null
+                && !sqlEntity.get認定調査障害高齢者の日常生活自立度コード().isEmpty()) {
+            entity.set認定調査障害高齢者の日常生活自立度(ShogaiNichijoSeikatsuJiritsudoCode.toValue(
+                    sqlEntity.get認定調査障害高齢者の日常生活自立度コード()).get名称());
         }
         if (sqlEntity.get認定調査特記事項受領年月日() != null) {
             entity.set認定調査特記事項受領年月日(sqlEntity.get認定調査特記事項受領年月日().wareki().toDateString());
@@ -227,8 +241,6 @@ public class KoshinTaishoFinder {
                 entity.set調査項目文言(NinteichosaKomokuMapping09B.toValue(sqlEntity.get調査項目連番()).get名称());
             }
         }
-        setVoidEntity(entity, sqlEntity);
-        return entity;
     }
 
     private void setVoidEntity(SelectSyuuShadeTaCsvEntity entity, SelectSyuuShadeTaEntity sqlEntity) {
@@ -254,24 +266,13 @@ public class KoshinTaishoFinder {
         if (sqlEntity.get認定調査区分コード() != null && !sqlEntity.get認定調査区分コード().isEmpty()) {
             entity.set認定調査区分(ChosaKubun.toValue(sqlEntity.get認定調査区分コード()).get名称());
         }
-        if (sqlEntity.get認定調査実施場所コード() != null && !sqlEntity.get認定調査実施場所コード().isEmpty()) {
-            entity.set認定調査実施場所(ChosaJisshiBashoCode.toValue(sqlEntity.get認定調査実施場所コード()).get名称());
+        if (sqlEntity.get利用施設郵便番号() != null) {
+            RString three = sqlEntity.get利用施設郵便番号().substring(ZEOR, THREE);
+            RString four = sqlEntity.get利用施設郵便番号().substring(THREE, SEVEN);
+            entity.set利用施設郵便番号(three.concat(横木).concat(four));
         }
-        if (sqlEntity.get認定調査サービス区分コード() != null && !sqlEntity.get認定調査サービス区分コード().isEmpty()) {
-            entity.set認定調査サービス区分(ServiceKubunCode.toValue(sqlEntity.get認定調査サービス区分コード()).get名称());
-        }
-        if (sqlEntity.get原本マスク区分コード() != null && !sqlEntity.get原本マスク区分コード().isEmpty()) {
-            entity.set原本マスク区分(GenponMaskKubun.toValue(sqlEntity.get原本マスク区分コード()).get名称());
-        }
-        if (sqlEntity.get認定調査認知症高齢者の日常生活自立度コード() != null
-                && !sqlEntity.get認定調査認知症高齢者の日常生活自立度コード().isEmpty()) {
-            entity.set認定調査認知症高齢者の日常生活自立度(NinchishoNichijoSeikatsuJiritsudoCode.toValue(
-                sqlEntity.get認定調査認知症高齢者の日常生活自立度コード()).get名称());
-        }
-        if (sqlEntity.get認定調査障害高齢者の日常生活自立度コード() != null
-                && !sqlEntity.get認定調査障害高齢者の日常生活自立度コード().isEmpty()) {
-            entity.set認定調査障害高齢者の日常生活自立度(ShogaiNichijoSeikatsuJiritsudoCode.toValue(
-                sqlEntity.get認定調査障害高齢者の日常生活自立度コード()).get名称());
+        if (sqlEntity.get認定調査特記事項受付年月日() != null) {
+            entity.set認定調査特記事項受付年月日(sqlEntity.get認定調査特記事項受付年月日().wareki().toDateString());
         }
         entity.set申請書管理番号(sqlEntity.get申請書管理番号());
         entity.set厚労省IF識別コード(sqlEntity.get厚労省IF識別コード());

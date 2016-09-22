@@ -14,10 +14,10 @@ import jp.co.ndensan.reams.db.dbc.business.core.saishinsamoshitatetouroku.Saishi
 import jp.co.ndensan.reams.db.dbc.business.core.saishinsamoshitatetouroku.ServiceCodeBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.saishinsamoshitatetouroku.ServiceShuruiBusiness;
 import jp.co.ndensan.reams.db.dbc.business.core.saishinsamoshitatetouroku.TokuteiSinryoShikibetsuBusiness;
-import jp.co.ndensan.reams.db.dbc.business.core.shiharaihoho.UzT0007CodeBusiness;
 import jp.co.ndensan.reams.db.dbc.definition.core.kagomoshitate.KagoMoshitate_MoshitateshaKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1600011.SaishinsaMoshitateTourokuPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1600011.dgHihokenshaSearchGaitosha_Row;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSe
 import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -65,8 +64,6 @@ public class SaishinsaMoshitateTourokuPanelHandler {
     private static final RString 給付実績該当者一覧 = new RString("給付実績該当者一覧");
     private static final RString 広域保険者番号 = new RString("000000");
     private static final RString 特定診療費 = new RString("20");
-    private static final CodeShubetsu 申立事由_項目種別 = new CodeShubetsu("0021");
-    private static final CodeShubetsu 申立事由_理由種別 = new CodeShubetsu("0022");
     private static final RString FALSE = new RString("f");
     private static final RString TRUE = new RString("t");
     private static final RString FOUR_SPACES = new RString("    ");
@@ -167,14 +164,16 @@ public class SaishinsaMoshitateTourokuPanelHandler {
                         new FlexibleDate(再審査申立情報.get申立年月日()).wareki().toDateString(),
                         KagoMoshitate_MoshitateshaKubun.toValue(再審査申立情報.get申立者区分コード()).get名称(),
                         再審査申立情報.get申立単位数(),
-                        new UzT0007CodeBusiness(CodeMaster.getCode(
-                                        SubGyomuCode.DBC介護給付,
-                                        申立事由_項目種別,
-                                        new Code(再審査申立情報.get申立事由コード().substring(ZERO, TWO)))).getコード名称(),
-                        new UzT0007CodeBusiness(CodeMaster.getCode(
-                                        SubGyomuCode.DBC介護給付,
-                                        申立事由_理由種別,
-                                        new Code(再審査申立情報.get申立事由コード().substring(TWO)))).getコード名称(),
+                        CodeMaster.getCodeMeisho(
+                                SubGyomuCode.DBC介護給付,
+                                DBCCodeShubetsu.再審査申立事由コード_上２桁_申立対象項目コード.getコード(),
+                                new Code(再審査申立情報.get申立事由コード().substring(ZERO, TWO)),
+                                FlexibleDate.getNowDate()),
+                        CodeMaster.getCodeMeisho(
+                                SubGyomuCode.DBC介護給付,
+                                DBCCodeShubetsu.再審査申立事由コード_下２桁_申立理由番号.getコード(),
+                                new Code(再審査申立情報.get申立事由コード().substring(TWO)),
+                                FlexibleDate.getNowDate()),
                         国保連送付年月);
                 rowList.add(row);
             }
@@ -522,7 +521,10 @@ public class SaishinsaMoshitateTourokuPanelHandler {
 
     private void set申立理由DDL() {
         List<KeyValueDataSource> 申立理由DateSource = new ArrayList<>();
-        List<UzT0007CodeEntity> codeList = CodeMaster.getCode(SubGyomuCode.DBC介護給付, 申立事由_理由種別, FlexibleDate.getNowDate());
+        List<UzT0007CodeEntity> codeList = CodeMaster.getCode(
+                SubGyomuCode.DBC介護給付,
+                DBCCodeShubetsu.再審査申立事由コード_下２桁_申立理由番号.getコード(),
+                FlexibleDate.getNowDate());
         for (UzT0007CodeEntity entity : codeList) {
             RStringBuilder 申立理由 = new RStringBuilder();
             申立理由.append(entity.getコード().value());
@@ -536,7 +538,10 @@ public class SaishinsaMoshitateTourokuPanelHandler {
 
     private void set申立対象項目DDL() {
         List<KeyValueDataSource> 申立対象項目DateSource = new ArrayList<>();
-        List<UzT0007CodeEntity> codeList = CodeMaster.getCode(SubGyomuCode.DBC介護給付, 申立事由_項目種別, FlexibleDate.getNowDate());
+        List<UzT0007CodeEntity> codeList = CodeMaster.getCode(
+                SubGyomuCode.DBC介護給付,
+                DBCCodeShubetsu.再審査申立事由コード_上２桁_申立対象項目コード.getコード(),
+                FlexibleDate.getNowDate());
         for (UzT0007CodeEntity entity : codeList) {
             RStringBuilder 申立対象項目 = new RStringBuilder();
             申立対象項目.append(entity.getコード().value());
