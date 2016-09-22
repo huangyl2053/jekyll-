@@ -54,8 +54,8 @@ public class DBB051001_GennendoIdoFuka extends BatchFlowBase<DBB051001_GennendoI
     private static final String 賦課計算 = "calculateFukaTsujoIdo";
     private static final String 特徴依頼金計算_４月開始 = "calculateTokuchoIraikin4gatsuKaishi";
     private static final String 賦課の情報登録フロー = "choteiToroku";
-    private static final RString 賦課の情報登録フローBATCHID = new RString("FukaJohoTorokuFlow");
-    private static final RString 計算後情報作成BATCH_ID = new RString("KeisangoJohoSakuseiFlow");
+    private static final RString 賦課の情報登録フローBATCHID = new RString("DBB004001_FukaJohoToroku");
+    private static final RString 計算後情報作成BATCH_ID = new RString("DBB003001_KeisangoJohoSakusei");
     private static final String 計算後情報作成 = "keisangoJohoSakusei";
     private static final String 計算後情報テーブル削除 = "keisangoJohoDelete";
     private static final String 本算定異動_現年度_結果一覧表 = "spoolHonsanteiIdoKekkaIchiranData";
