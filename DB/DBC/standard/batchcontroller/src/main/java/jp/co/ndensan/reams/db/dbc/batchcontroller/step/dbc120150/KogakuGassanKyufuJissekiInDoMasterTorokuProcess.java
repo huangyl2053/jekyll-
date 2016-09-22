@@ -37,6 +37,7 @@ public class KogakuGassanKyufuJissekiInDoMasterTorokuProcess
     private KogakuGassanKyufuJissekiInLoginMybatisParameter dbParameter;
     private CountedItem 採番;
     private static final FlexibleYear 年度 = new FlexibleYear("0000");
+    private static final RString INT_0 = new RString("0");
     private static final RString INT_1 = new RString("1");
     private static final RString INT_2 = new RString("2");
     private int count = 0;
@@ -97,14 +98,14 @@ public class KogakuGassanKyufuJissekiInDoMasterTorokuProcess
         dbt3075entity.setShoriYM(高額合算給付実績一時.getShoriYM());
         dbt3075entity.setUketoriYM(parameter.get処理年月());
         dbt3075entity.setSofuYM(FlexibleYearMonth.EMPTY);
-        if (parameter.get処理区分() == null) {
+        if (parameter.get処理区分().equals(RString.EMPTY)) {
             dbt3075entity.setDataKubun(KaigoGassan_KyufuJissekiDataKubun.国保連からの返却データ以外.getCode());
         }
         if (parameter.get処理区分().equals(INT_1)) {
-            dbt3075entity.setDataKubun(KaigoGassan_KyufuJissekiDataKubun.国保連からの送付データ国保分.getCode());
+            dbt3075entity.setDataKubun(KaigoGassan_KyufuJissekiDataKubun.国保連からの送付データ後期分.getCode());
         }
         if (parameter.get処理区分().equals(INT_2)) {
-            dbt3075entity.setDataKubun(KaigoGassan_KyufuJissekiDataKubun.国保連からの送付データ後期分.getCode());
+            dbt3075entity.setDataKubun(KaigoGassan_KyufuJissekiDataKubun.国保連からの送付データ国保分.getCode());
         }
 
         dbT3075Writer.insert(dbt3075entity);
