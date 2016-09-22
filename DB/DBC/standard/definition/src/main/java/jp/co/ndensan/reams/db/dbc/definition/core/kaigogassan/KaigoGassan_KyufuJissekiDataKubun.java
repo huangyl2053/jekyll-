@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 介護合算_給付実績データ区分列挙型です。
  *
- * @reamsid_L DBC-2700-010 wangxingpeng
+ * @reamsid_L DBC-9999-022 wangxingpeng
  */
 public enum KaigoGassan_KyufuJissekiDataKubun {
 
@@ -64,9 +64,9 @@ public enum KaigoGassan_KyufuJissekiDataKubun {
      * @return {@code code} に対応する介護合算_給付実績データ区分
      */
     public static KaigoGassan_KyufuJissekiDataKubun toValue(RString code) {
-        for (KaigoGassan_KyufuJissekiDataKubun kaigogassankyufujissekidatakubun : KaigoGassan_KyufuJissekiDataKubun.values()) {
-            if (kaigogassankyufujissekidatakubun.code.equals(code)) {
-                return kaigogassankyufujissekidatakubun;
+        for (KaigoGassan_KyufuJissekiDataKubun kyufujisski : KaigoGassan_KyufuJissekiDataKubun.values()) {
+            if (kyufujisski.code.equals(code)) {
+                return kyufujisski;
             }
         }
         throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("介護合算_後期国保処理区分"));
