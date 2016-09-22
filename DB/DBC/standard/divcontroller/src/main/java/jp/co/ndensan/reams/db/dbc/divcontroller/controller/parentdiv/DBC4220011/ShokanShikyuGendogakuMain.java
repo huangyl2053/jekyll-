@@ -155,7 +155,7 @@ public class ShokanShikyuGendogakuMain {
                 ViewStateKeys.上乗せ償還払い給付種類支給限度額, UwanoseShokanShuruiShikyuGendoGakuHolder.class);
 
         List<ShokanShuruiShikyuGendoGaku> 償還list = 償還.getShokanShuruiShikyuGendoGakuList();
-        List<UwanoseShokanShuruiShikyuGendoGaku> 上乗せ償還list = 上乗せ償還.getuwanoseShokanShuruiShikyuGendoGakuList();
+        List<UwanoseShokanShuruiShikyuGendoGaku> 上乗せ償還list = 上乗せ償還.getuwanoseShokanShuruiShiList();
 
         if (!(div.getShokanShikyuGendogakuShosai().getTxtTekiyoKikanRange().isFromDisabled()
                 || div.getBtnCancel().isDisabled())) {

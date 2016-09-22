@@ -44,12 +44,12 @@ public class KyufuJissekiKihonJouhouMainHandler {
     private static final int INT_ITI = 1;
     private static final RString 設定不可 = new RString("0");
     private static final RString 総合事業 = new RString("5");
-    private static final FlexibleYearMonth 平成２４年４月 = new FlexibleYearMonth("201204");
     private static final FlexibleYearMonth 平成２０年４月 = new FlexibleYearMonth("200804");
     private static final FlexibleYearMonth 平成２０年５月 = new FlexibleYearMonth("200805");
     private static final FlexibleYearMonth 平成２０年６月 = new FlexibleYearMonth("200806");
     private static final FlexibleYearMonth 平成２０年７月 = new FlexibleYearMonth("200807");
     private static final FlexibleYearMonth 平成２０年８月 = new FlexibleYearMonth("200808");
+    private static final FlexibleYearMonth 平成２１年４月 = new FlexibleYearMonth("200904");
 
     /**
      * コンストラクタです。
@@ -184,6 +184,7 @@ public class KyufuJissekiKihonJouhouMainHandler {
             set合計内容エリア(給付実績基本);
         }
         set合計エリア閉();
+        set月ボタン(getサービス提供年月リスト(給付実績基本情報), サービス提供年月);
     }
 
     /**
@@ -209,6 +210,7 @@ public class KyufuJissekiKihonJouhouMainHandler {
             set合計内容エリア(給付実績基本);
         }
         set合計エリア閉();
+        set月ボタン(getサービス提供年月リスト(給付実績基本情報), サービス提供年月);
     }
 
     private void set各ボタン活性非活性設定(ShikibetsuNoKanri 識別番号管理データ) {
@@ -265,11 +267,11 @@ public class KyufuJissekiKihonJouhouMainHandler {
     private void set表示制御(FlexibleYearMonth サービス提供年月, NyuryokuShikibetsuNo 識別番号検索キー) {
         div.getTxtKyufuJissekiKihonChushiRiyu().setVisible(true);
         div.getTxtKyufuJissekiKihonNyushoMaeJokyo().setVisible(true);
-        if (平成２４年４月.isBeforeOrEquals(サービス提供年月) && get識別番号リスト().contains(識別番号検索キー)) {
+        if (平成２１年４月.isBeforeOrEquals(サービス提供年月) && get識別番号リスト().contains(識別番号検索キー)) {
             div.getTxtKyufuJissekiKihonChushiRiyu().setVisible(false);
         }
-        if (サービス提供年月.isBefore(平成２４年４月)
-                || (平成２４年４月.isBeforeOrEquals(サービス提供年月) && !get識別番号リスト().contains(識別番号検索キー))) {
+        if (サービス提供年月.isBefore(平成２１年４月)
+                || (平成２１年４月.isBeforeOrEquals(サービス提供年月) && !get識別番号リスト().contains(識別番号検索キー))) {
             div.getTxtKyufuJissekiKihonNyushoMaeJokyo().setVisible(false);
         }
     }
