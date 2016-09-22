@@ -57,7 +57,7 @@
                 ON C."hihokenshaNo" = E."hihokenshaNo"
                 AND C."ninteiYMD" <![CDATA[<=]]> #{基準日}
                 AND C."logicalDeletedFlag" = FALSE
-                INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS D 
+                INNER JOIN rgdb."DbT4101NinteiShinseiJoho" AS D 
                 ON D."shinseishoKanriNo" =C."shinseishoKanriNo"
                 LEFT JOIN rgdb."DbV1004ShisetsuNyutaisho" AS F
                 ON F."shikibetsuCode" = E."shikibetsuCode"
