@@ -81,7 +81,7 @@ public class DBC120280_SogojigyohiShikakuShogohyoKeikaSochiIn
                         ShikakuShogohyoJyohoReadCsvFileProcess.PARAMETER_OUT_FLOWENTITY);
                 if (flowEntity != null) {
                     処理対象年月 = flowEntity.getShoriYM();
-                    一時TBL登録件数 = 一時TBL登録件数 + flowEntity.get明細データ登録件数();
+                    一時TBL登録件数 = flowEntity.get明細データ登録件数();
                     レコード件数合計 = flowEntity.getCodeNum();
                 }
 
@@ -129,7 +129,7 @@ public class DBC120280_SogojigyohiShikakuShogohyoKeikaSochiIn
         parameter.setエントリ情報List(returnEntity.getFileNameList());
         parameter.setCodeNum(レコード件数合計);
         parameter.setLast(isLast);
-        parameter.set連番(レコード件数合計);
+        parameter.set連番(一時TBL登録件数);
         return loopBatch(ShikakuShogohyoJyohoReadCsvFileProcess.class).arguments(parameter).define();
     }
 
@@ -155,7 +155,7 @@ public class DBC120280_SogojigyohiShikakuShogohyoKeikaSochiIn
         parameter.set処理年月(getParameter().getShoriYM());
         parameter.set交換情報識別番号(交換情報識別番号);
         parameter.set処理対象年月(処理対象年月);
-        parameter.setレコード件数合計(レコード件数合計);
+        parameter.setレコード件数合計(一時TBL登録件数);
         parameter.setFileNameList(returnEntity.getFileNameList());
         return simpleBatch(KokuhorenkyoutsuDoInterfaceKanriKousinProcess.class).arguments(parameter).define();
     }

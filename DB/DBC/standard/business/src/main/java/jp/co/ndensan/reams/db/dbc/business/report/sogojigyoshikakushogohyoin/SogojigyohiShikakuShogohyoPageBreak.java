@@ -19,27 +19,27 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 public class SogojigyohiShikakuShogohyoPageBreak extends PageBreaker<SogojigyohiShikakuShogohyoInSource> {
 
     private static final RString 固定改頁項目 = new RString("保険者番号");
-    private final List<RString> breakKeys;
+    private final List<RString> breakKeysList;
 
     /**
      * コンストラクタです。
      *
-     * @param breakKeys List<RString>
+     * @param breakKeysList List<RString>
      */
-    public SogojigyohiShikakuShogohyoPageBreak(List<RString> breakKeys) {
-        this.breakKeys = breakKeys;
+    public SogojigyohiShikakuShogohyoPageBreak(List<RString> breakKeysList) {
+        this.breakKeysList = breakKeysList;
     }
 
     @Override
     public List<RString> breakKeys() {
-        return breakKeys;
+        return breakKeysList;
     }
 
     @Override
     public boolean isBreak(ReportLineRecord<SogojigyohiShikakuShogohyoInSource> currentSource,
             ReportLineRecord<SogojigyohiShikakuShogohyoInSource> nextSource) {
         boolean flg = false;
-        if (this.breakKeys.contains(固定改頁項目)
+        if (this.breakKeysList.contains(固定改頁項目)
                 && !currentSource.getSource().hokenshaNo.equals(nextSource.getSource().hokenshaNo)) {
             flg = true;
         }

@@ -25,8 +25,10 @@ import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
 import jp.co.ndensan.reams.db.dbd.service.core.basic.ShokanHanteiKekkaManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoHanyo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoHanyoManager;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -173,6 +175,12 @@ public class ShokanShikyuKetteiTsuchishoHakkouHandler {
         if (div.getShokanShikyuKetteiTsuchishoHakkouPrint().getTxtShiharaiYoteiYMD().getValue() != null) {
             支払予定日 = new FlexibleDate(div.getShokanShikyuKetteiTsuchishoHakkouPrint().getTxtShiharaiYoteiYMD().getValue().toDateString());
         }
+        ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
+        ChohyoSeigyoKyotsu 帳票制御共通 = chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100002_2.getReportId());
+        RString 定型文文字サイズ = RString.EMPTY;
+        if (帳票制御共通 != null && 帳票制御共通.get定型文文字サイズ() != null) {
+            定型文文字サイズ = 帳票制御共通.get定型文文字サイズ();
+        }
         ShokanHanteiKekkaManager shokanHanteiKekkaManager = new ShokanHanteiKekkaManager();
         ShokanHanteiKekka 償還払支給判定結果 = shokanHanteiKekkaManager.get償還払支給判定結果(被保険者番号, サービス提供年月, 整理番号);
         ShoukanbaraiShikyuketteiTsuuchishoOutputEntity 償還払支給決定通知書 = manage.
@@ -191,10 +199,10 @@ public class ShokanShikyuKetteiTsuchishoHakkouHandler {
         }
         if (帳票制御汎用.get設定値().equals(new RString("0"))) {
             ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiService printService = new ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiService();
-            return printService.print(getNashiIten(償還払支給決定通知書));
+            return printService.print(getNashiIten(償還払支給決定通知書, 定型文文字サイズ));
         } else {
             ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriService printService = new ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriService();
-            return printService.print(getAriItem(償還払支給決定通知書));
+            return printService.print(getAriItem(償還払支給決定通知書, 定型文文字サイズ));
         }
 
     }
@@ -328,7 +336,7 @@ public class ShokanShikyuKetteiTsuchishoHakkouHandler {
     }
 
     private List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiItem>
-            getNashiIten(ShoukanbaraiShikyuketteiTsuuchishoOutputEntity 償還払支給決定通知書) {
+            getNashiIten(ShoukanbaraiShikyuketteiTsuuchishoOutputEntity 償還払支給決定通知書, RString 定型文文字サイズ) {
         List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiItem> itemList = new ArrayList<>();
         ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiItem item = new ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiItem();
         item.setBunshoNo(償還払支給決定通知書.get償還払支給決定通知書().get文書番号());
@@ -456,12 +464,13 @@ public class ShokanShikyuKetteiTsuchishoHakkouHandler {
         item.setKakkoRight1(償還払支給決定通知書.get償還払支給決定通知書().getSamaBun1());
         item.setSamabunShimeiSmall1(償還払支給決定通知書.get償還払支給決定通知書().getSamabunShimeiSmall1());
         item.setCustomerBarCode(償還払支給決定通知書.get償還払支給決定通知書().getCustomerBarCode());
+        item.set定型文文字サイズ(定型文文字サイズ);
         itemList.add(item);
         return itemList;
     }
 
     private List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem>
-            getAriItem(ShoukanbaraiShikyuketteiTsuuchishoOutputEntity 償還払支給決定通知書) {
+            getAriItem(ShoukanbaraiShikyuketteiTsuuchishoOutputEntity 償還払支給決定通知書, RString 定型文文字サイズ) {
         List<ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem> items = new ArrayList<>();
         ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem item = new ShokanKetteiTsuchiShoShiharaiYoteiBiYijiAriItem();
         item.setBunshoNo(償還払支給決定通知書.get償還払支給決定通知書().get文書番号());
@@ -599,6 +608,7 @@ public class ShokanShikyuKetteiTsuchishoHakkouHandler {
         item.setKakkoRight1(償還払支給決定通知書.get償還払支給決定通知書().getSamaBun1());
         item.setSamabunShimeiSmall1(償還払支給決定通知書.get償還払支給決定通知書().getSamabunShimeiSmall1());
         item.setCustomerBarCode(償還払支給決定通知書.get償還払支給決定通知書().getCustomerBarCode());
+        item.set定型文文字サイズ(定型文文字サイズ);
         items.add(item);
         return items;
     }

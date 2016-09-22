@@ -34,7 +34,7 @@ public enum JikoFutangakushomeishoShutsuryokujunEnum implements IReportItems {
     /**
      * 市町村コード
      */
-    市町村コード(new RString("0016"), new RString(""), new RString("\"dbT3071KogakuGassanJikoFutanGakuMeisai_hokenshaNo\"")),
+    市町村コード(new RString("0016"), new RString(""), new RString("\"kogakuGassanTemp_shichosonCode\"")),
     /**
      * 証記載保険者番号
      */

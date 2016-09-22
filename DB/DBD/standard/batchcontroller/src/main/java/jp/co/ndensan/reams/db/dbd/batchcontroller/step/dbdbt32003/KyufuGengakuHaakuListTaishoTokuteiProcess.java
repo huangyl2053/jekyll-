@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 対象者把握情報の取得_Process処理クラスです．
  *
- * @author x_miaocl
+ * @reamsid_L DBD-3610-050 x_miaocl
  */
 public class KyufuGengakuHaakuListTaishoTokuteiProcess extends BatchProcessBase<KyufuGengakuHaakuListTaishoTokuteiEntity> {
 

@@ -19,36 +19,36 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
  */
 public class KogakuShikyuFushikyuKetteiTsuchiHakkoPageBreak extends PageBreaker<KogakuShikyuFushikyuKetteiTsuchiHakkoSource> {
 
-    private final List<RString> breakKeys;
+    private final List<RString> breakKeysList;
 
     /**
      * コンストラクタです。
      *
-     * @param breakKeys List<RString>
+     * @param breakKeysList List<RString>
      */
-    public KogakuShikyuFushikyuKetteiTsuchiHakkoPageBreak(List<RString> breakKeys) {
-        this.breakKeys = breakKeys;
+    public KogakuShikyuFushikyuKetteiTsuchiHakkoPageBreak(List<RString> breakKeysList) {
+        this.breakKeysList = breakKeysList;
     }
 
     @Override
     public List<RString> breakKeys() {
-        return breakKeys;
+        return breakKeysList;
     }
 
     @Override
     public boolean isBreak(ReportLineRecord<KogakuShikyuFushikyuKetteiTsuchiHakkoSource> currentSource,
             ReportLineRecord<KogakuShikyuFushikyuKetteiTsuchiHakkoSource> nextSource) {
         boolean flg = false;
-        if (this.breakKeys.contains(JigyoKogakuKetteiTsuchishoOutputOrder.郵便番号.get項目ID())
+        if (this.breakKeysList.contains(JigyoKogakuKetteiTsuchishoOutputOrder.郵便番号.get項目ID())
                 && !currentSource.getSource().listUpper_5.equals(nextSource.getSource().listUpper_5)) {
             flg = true;
-        } else if (this.breakKeys.contains(JigyoKogakuKetteiTsuchishoOutputOrder.市町村コード.get項目ID())
+        } else if (this.breakKeysList.contains(JigyoKogakuKetteiTsuchishoOutputOrder.市町村コード.get項目ID())
                 && !currentSource.getSource().hokenshaNo.equals(nextSource.getSource().hokenshaNo)) {
             flg = true;
-        } else if (this.breakKeys.contains(JigyoKogakuKetteiTsuchishoOutputOrder.被保険者番号.get項目ID())
+        } else if (this.breakKeysList.contains(JigyoKogakuKetteiTsuchishoOutputOrder.被保険者番号.get項目ID())
                 && !currentSource.getSource().listUpper_3.equals(nextSource.getSource().listUpper_3)) {
             flg = true;
-        } else if (this.breakKeys.contains(JigyoKogakuKetteiTsuchishoOutputOrder.決定通知番号.get項目ID())
+        } else if (this.breakKeysList.contains(JigyoKogakuKetteiTsuchishoOutputOrder.決定通知番号.get項目ID())
                 && !currentSource.getSource().listUpper_2.equals(nextSource.getSource().listUpper_2)) {
             flg = true;
         }

@@ -18,7 +18,7 @@ public class JigyoKogakuShikyuFushikyuKetteTsuchiBodyEditor
         implements IJigyoKogakuShikyuFushikyuKetteTsuchiEditor {
 
     private final JigyoKogakuShikyuFushikyuKetteTsuchiEntity entity;
-    private static final RString 支給計 = new RString("支給計");
+    //   private static final RString 支給計 = new RString("支給計");
     private int 連番;
 
     /**

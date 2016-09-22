@@ -19,37 +19,37 @@ public class UwanoseKubunShikyuGendoGakuHolder implements Serializable {
 
     private static final long serialVersionUID = -3935825012351482058L;
     private final Models<
-            UwanoseKubunShikyuGendoGakuIdentifier, UwanoseKubunShikyuGendoGaku> uwanoseKubunShikyuGendoGakuList;
+            UwanoseKubunShikyuGendoGakuIdentifier, UwanoseKubunShikyuGendoGaku> uwanoseKubunShikyuList;
 
     /**
      * UwanoseKubunShikyuGendoGakuHolderのobj作成です。
      */
     public UwanoseKubunShikyuGendoGakuHolder() {
-        this.uwanoseKubunShikyuGendoGakuList
+        this.uwanoseKubunShikyuList
                 = Models.create(new ArrayList<UwanoseKubunShikyuGendoGaku>());
     }
 
     /**
      * UwanoseKubunShikyuGendoGakuHolderのobj作成です。
      *
-     * @param uwanoseKubunShikyuGendoGakuList List<UwanoseKubunShikyuGendoGaku>
+     * @param uwanoseKubunShikyuList List<UwanoseKubunShikyuGendoGaku>
      */
     public UwanoseKubunShikyuGendoGakuHolder(
-            List<UwanoseKubunShikyuGendoGaku> uwanoseKubunShikyuGendoGakuList) {
-        this.uwanoseKubunShikyuGendoGakuList = Models.create(uwanoseKubunShikyuGendoGakuList);
+            List<UwanoseKubunShikyuGendoGaku> uwanoseKubunShikyuList) {
+        this.uwanoseKubunShikyuList = Models.create(uwanoseKubunShikyuList);
     }
 
     /**
      * UwanoseKubunShikyuGendoGakuHolderのobj作成です。
      *
-     * @param uwanoseKubunShikyuGendoGakuList
+     * @param uwanoseKubunShikyuList
      * Models<UwanoseKubunShikyuGendoGakuIdentifier,
      * UwanoseKubunShikyuGendoGaku>
      */
     public UwanoseKubunShikyuGendoGakuHolder(
             Models<
-                    UwanoseKubunShikyuGendoGakuIdentifier, UwanoseKubunShikyuGendoGaku> uwanoseKubunShikyuGendoGakuList) {
-        this.uwanoseKubunShikyuGendoGakuList = uwanoseKubunShikyuGendoGakuList;
+                    UwanoseKubunShikyuGendoGakuIdentifier, UwanoseKubunShikyuGendoGaku> uwanoseKubunShikyuList) {
+        this.uwanoseKubunShikyuList = uwanoseKubunShikyuList;
     }
 
     /**
@@ -58,7 +58,7 @@ public class UwanoseKubunShikyuGendoGakuHolder implements Serializable {
      * @return List<UwanoseKubunShikyuGendoGaku>
      */
     public List<UwanoseKubunShikyuGendoGaku> getUwanoseKubunShikyuGendoGakuList() {
-        return new ArrayList<>(uwanoseKubunShikyuGendoGakuList.values());
+        return new ArrayList<>(uwanoseKubunShikyuList.values());
     }
 
     /**
@@ -67,7 +67,7 @@ public class UwanoseKubunShikyuGendoGakuHolder implements Serializable {
      * @param uwanoseKubunShikyuGendoGaku UwanoseKubunShikyuGendoGaku
      */
     public void addUwanoseKubunShikyuGendoGaku(UwanoseKubunShikyuGendoGaku uwanoseKubunShikyuGendoGaku) {
-        uwanoseKubunShikyuGendoGakuList.add(uwanoseKubunShikyuGendoGaku);
+        uwanoseKubunShikyuList.add(uwanoseKubunShikyuGendoGaku);
     }
 
     /**
@@ -77,8 +77,8 @@ public class UwanoseKubunShikyuGendoGakuHolder implements Serializable {
      * @return UwanoseKubunShikyuGendoGaku
      */
     public UwanoseKubunShikyuGendoGaku getUwanoseKubunShikyuGendoGaku(UwanoseKubunShikyuGendoGakuIdentifier id) {
-        if (uwanoseKubunShikyuGendoGakuList.contains(id)) {
-            return uwanoseKubunShikyuGendoGakuList.clone().get(id);
+        if (uwanoseKubunShikyuList.contains(id)) {
+            return uwanoseKubunShikyuList.clone().get(id);
         }
         return null;
     }

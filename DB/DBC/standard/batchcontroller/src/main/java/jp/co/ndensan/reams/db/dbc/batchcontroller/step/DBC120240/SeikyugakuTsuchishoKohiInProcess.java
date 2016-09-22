@@ -102,6 +102,7 @@ public class SeikyugakuTsuchishoKohiInProcess extends BatchKeyBreakBase<DbWT1511
     protected void afterExecute() {
         csvWriter.close();
         batchReportWriter.close();
+        manager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
     }
 
     @Override

@@ -12,11 +12,11 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.euc.hanyolistkyodojukyusha.HanyoListKyodoJukyushaCsvEntityEditor;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.kyodoshoriyojukyushajoho.HizukeChushutsuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc710050.HanyoListKyodoJukyushaProcessParameter;
-import jp.co.ndensan.reams.db.dbc.entity.csv.dbc710050.HanyoListKyodoJukyushaCsvEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc710050.KyodoJukyushaKihonEntity;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc710050.IHanyoListKyodoJukyushaMapper;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.service.core.koseishichoson.KoseiShichosonJohoFinder;
-import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
+import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -24,7 +24,6 @@ import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFa
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -33,7 +32,7 @@ import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
-import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvListWriter;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -46,6 +45,7 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 汎用リスト_共同処理用受給者情報（基本）のバッチ用パラメータフロークラスです。
@@ -72,6 +72,12 @@ public class HanyoListKyodoJukyushaOutputProcess extends BatchProcessBase<KyodoJ
     private static final RString TITLE_処理対象年月 = new RString("　　　　　処理対象年月：");
     private static final RString TITLE_異動年月 = new RString("　　　　　異動年月　　：");
     private static final RString 各異動月の最新のみ = new RString("　　　　　■各異動月の最新情報のみ抽出する");
+    private static final RString 新規_黒 = new RString("■新規");
+    private static final RString 新規_白 = new RString("□新規");
+    private static final RString 変更_黒 = new RString("■変更");
+    private static final RString 変更_白 = new RString("□変更");
+    private static final RString 終了_黒 = new RString("■終了");
+    private static final RString 終了_白 = new RString("□終了");
     private static final RString TILDE = new RString("～");
     private static final LasdecCode 全市町村_CODE = new LasdecCode("000000");
     private static final RString 全市町村 = new RString("00000 全市町村");
@@ -81,6 +87,8 @@ public class HanyoListKyodoJukyushaOutputProcess extends BatchProcessBase<KyodoJ
     private static final RString DATANAME_被保険者番号 = new RString("被保険者番号");
     private HanyoListKyodoJukyushaProcessParameter parameter;
     private Association 地方公共団体情報;
+    private HanyoListKyodoJukyushaCsvEntityEditor editor;
+    private CsvListWriter csvListWriter;
     private Map<LasdecCode, KoseiShichosonMaster> 構成市町村マスタ;
     private List<PersonalData> personalDataList;
     private RString eucFilePath;
@@ -88,15 +96,19 @@ public class HanyoListKyodoJukyushaOutputProcess extends BatchProcessBase<KyodoJ
     private RString csv出力Flag;
     FileSpoolManager spoolManager;
 
-    @BatchWriter
-    private CsvWriter<HanyoListKyodoJukyushaCsvEntity> csvWriter;
-
     @Override
     protected void initialize() {
+
+        InstanceProvider.create(MapperProvider.class).create(IHanyoListKyodoJukyushaMapper.class).select共同処理用受給者情報(parameter.toMybatisParameter());
         構成市町村マスタ = new HashMap<>();
         連番 = 0;
         csv出力Flag = 定数_なし;
+        editor = new HanyoListKyodoJukyushaCsvEntityEditor();
         地方公共団体情報 = AssociationFinderFactory.createInstance().getAssociation();
+        spoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID,
+                UzUDE0831EucAccesslogFileType.Csv);
+        eucFilePath = Path.combinePath(spoolManager.getEucOutputDirectry(),
+                csvFileName);
         List<KoseiShichosonMaster> 現市町村情報 = KoseiShichosonJohoFinder.createInstance().get現市町村情報();
         for (int i = 0; i < 現市町村情報.size(); i++) {
             構成市町村マスタ.put(現市町村情報.get(i).get市町村コード(), 現市町村情報.get(i));
@@ -111,20 +123,21 @@ public class HanyoListKyodoJukyushaOutputProcess extends BatchProcessBase<KyodoJ
 
     @Override
     protected void createWriter() {
-        spoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID,
-                UzUDE0831EucAccesslogFileType.Csv);
-        eucFilePath = Path.combinePath(spoolManager.getEucOutputDirectry(),
-                csvFileName);
-        csvWriter = BatchWriters.csvWriter(HanyoListKyodoJukyushaCsvEntity.class).
-                filePath(eucFilePath).
-                setDelimiter(EUC_WRITER_DELIMITER).
-                setEnclosure(EUC_WRITER_ENCLOSURE).
-                setEncode(Encode.UTF_8withBOM).
-                setNewLine(NewLine.CRLF).
-                hasHeader(false).
-                build();
-        if (parameter.is項目名付加()) {
-            csvWriter.writeLine(HanyoListKyodoJukyushaCsvEntityEditor.getHeader());
+        if (!parameter.is項目名付加()) {
+            csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).setNewLine(NewLine.CRLF)
+                    .setDelimiter(EUC_WRITER_DELIMITER)
+                    .setEnclosure(EUC_WRITER_ENCLOSURE)
+                    .setEncode(Encode.UTF_8withBOM)
+                    .hasHeader(false)
+                    .build();
+        } else {
+            csvListWriter = new CsvListWriter.InstanceBuilder(eucFilePath).setNewLine(NewLine.CRLF)
+                    .setDelimiter(EUC_WRITER_DELIMITER)
+                    .setEnclosure(EUC_WRITER_ENCLOSURE)
+                    .setEncode(Encode.UTF_8withBOM)
+                    .hasHeader(true)
+                    .setHeader(editor.setHeaderList(parameter))
+                    .build();
         }
     }
 
@@ -132,9 +145,7 @@ public class HanyoListKyodoJukyushaOutputProcess extends BatchProcessBase<KyodoJ
     protected void process(KyodoJukyushaKihonEntity entity) {
         連番++;
         csv出力Flag = 定数_あり;
-        HanyoListKyodoJukyushaCsvEntityEditor edit = new HanyoListKyodoJukyushaCsvEntityEditor(entity, parameter,
-                地方公共団体情報, 構成市町村マスタ, 連番);
-        csvWriter.writeLine(edit.edit());
+        csvListWriter.writeLine(editor.setBodyList(entity, parameter, 地方公共団体情報, 構成市町村マスタ, 連番));
         ExpandedInformation expandedInformation = new ExpandedInformation(
                 CODE_0003, DATANAME_被保険者番号, entity.get共同処理用受給者異動基本送付().getHiHokenshaNo().getColumnValue());
         personalDataList.add(PersonalData.of(entity.get宛名().getShikibetsuCode(), expandedInformation));
@@ -143,7 +154,7 @@ public class HanyoListKyodoJukyushaOutputProcess extends BatchProcessBase<KyodoJ
 
     @Override
     protected void afterExecute() {
-        csvWriter.close();
+        csvListWriter.close();
         if (!personalDataList.isEmpty()) {
             AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
             spoolManager.spool(eucFilePath, accessLogUUID);
@@ -156,7 +167,7 @@ public class HanyoListKyodoJukyushaOutputProcess extends BatchProcessBase<KyodoJ
                 地方公共団体情報.get市町村名(),
                 new RString(String.valueOf(JobContextHolder.getJobId())),
                 日本語ファイル名,
-                new RString(csvWriter.getCount()),
+                new RString(csvListWriter.getCount()),
                 csv出力Flag,
                 csvFileName,
                 get抽出条件()
@@ -219,21 +230,21 @@ public class HanyoListKyodoJukyushaOutputProcess extends BatchProcessBase<KyodoJ
         RString 新規;
         if (parameter.get異動区分S() != null && !parameter.get異動区分S().isEmpty()) {
             if (parameter.get異動区分S().contains(INDEX_1)) {
-                新規 = new RString("■新規").concat("   ");
+                新規 = 新規_黒.concat("   ");
             } else {
-                新規 = new RString("□新規").concat("   ");
+                新規 = 新規_白.concat("   ");
             }
             RString 変更;
             if (parameter.get異動区分S().contains(INDEX_2)) {
-                変更 = new RString("■変更").concat("   ");
+                変更 = 変更_黒.concat("   ");
             } else {
-                変更 = new RString("□変更").concat("   ");
+                変更 = 変更_白.concat("   ");
             }
             RString 終了;
             if (parameter.get異動区分S().contains(INDEX_3)) {
-                終了 = new RString("■終了");
+                終了 = 終了_黒;
             } else {
-                終了 = new RString("□終了");
+                終了 = 終了_白;
             }
             抽出条件.add(TITLE_異動区分.concat(新規).concat(変更).concat(終了));
         }

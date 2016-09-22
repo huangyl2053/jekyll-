@@ -41,7 +41,7 @@
                   , 識別番号."kagoMoshitateYoshikiNo" AS 様式番号
                   , 基本."serviceTeikyoYM" AS サービス提供年月
                   , 基本."shinsaYM" AS 審査年月
-                  , 基本."kyufuJissekiKubunCode" AS 給付実績作成区分コード
+                  , 基本."kyufuSakuseiKubunCode" AS 給付実績作成区分コード
                   , 識別番号."kyufuBunruiKubun" AS 給付区分
                   , 基本."shokisaiHokenshaNo" AS 証記載保険者番号
                   , ROW_NUMBER() OVER ( 

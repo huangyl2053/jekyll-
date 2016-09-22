@@ -8,9 +8,9 @@ package jp.co.ndensan.reams.db.dbd.entity.db.relate.kyufugengakulist;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
- * 給付額減額滞納者把握情報
+ * 給付額減額滞納者把握情報Entity
  *
- * @author x_miaocl
+ * @reamsid_L DBD-3610-050 x_miaocl
  */
 @lombok.Getter
 @lombok.Setter

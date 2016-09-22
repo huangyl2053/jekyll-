@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc710050.HanyoListKyodoJukyushaNoRobanOutputProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc710050.HanyoListKyodoJukyushaOutputProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710050.DBC710050_HanyoListKyodoJukyushaKihonParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc710050.HanyoListKyodoJukyushaProcessParameter;
@@ -30,29 +29,17 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class DBC710050_HanyoListKyodoJukyushaKihon extends BatchFlowBase<DBC710050_HanyoListKyodoJukyushaKihonParameter> {
 
     private static final String 共同受給者基本情報 = "hanyoListKyodoJukyushaOutputProcess";
-    private static final String 共同受給者基本情報_連番しない = "hanyoListKyodoJukyushaNoRobanOutputProcess";
     private RDateTime システム日時;
 
     @Override
     protected void defineFlow() {
         システム日時 = RDateTime.now();
-        if (getParameter().isRenbanFuka()) {
-            executeStep(共同受給者基本情報);
-        } else {
-            executeStep(共同受給者基本情報_連番しない);
-        }
+        executeStep(共同受給者基本情報);
     }
 
     @Step(共同受給者基本情報)
     IBatchFlowCommand hanyoListKyodoJukyushaOutputProcess() {
         return loopBatch(HanyoListKyodoJukyushaOutputProcess.class)
-                .arguments(getProcessParameter())
-                .define();
-    }
-
-    @Step(共同受給者基本情報_連番しない)
-    IBatchFlowCommand hanyoListKyodoJukyushaNoRobanOutputProcess() {
-        return loopBatch(HanyoListKyodoJukyushaNoRobanOutputProcess.class)
                 .arguments(getProcessParameter())
                 .define();
     }

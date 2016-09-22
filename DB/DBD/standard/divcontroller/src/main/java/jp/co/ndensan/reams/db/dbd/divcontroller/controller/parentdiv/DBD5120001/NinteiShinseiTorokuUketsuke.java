@@ -18,11 +18,10 @@ import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxTelNo;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
@@ -36,6 +35,7 @@ public class NinteiShinseiTorokuUketsuke {
 
     private final RString 表示パターン_新規 = new RString("0");
     private final RString 照会 = new RString("照会");
+    private static final RString SELECT_KEY0 = new RString("key0");
 
     /**
      * 画面初期化
@@ -163,6 +163,7 @@ public class NinteiShinseiTorokuUketsuke {
      */
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onBeforeOpenDialog_btnChosaJokyo(NinteiShinseiTorokuUketsukeDiv div) {
 
+        getHandler(div).onBeforeOpenDialog_btnChosaJokyo();
         return ResponseData.of(div).respond();
     }
 
@@ -232,13 +233,20 @@ public class NinteiShinseiTorokuUketsuke {
             氏名.setValue(div.getCcdKaigoNinteiAtenaInfo().get被保険者氏名());
             div.getCcdShinseiTodokedesha().setTxtShimei(氏名);
             //カナ氏名TODO QA90931ご回答されたが、納品まで対応確認すれば間に合わない
-            TextBoxTelNo 電話番号 = new TextBoxTelNo();
-            電話番号.setDomain(new TelNo(div.getCcdKaigoNinteiAtenaInfo().get電話番号()));
-            div.getCcdShinseiTodokedesha().setTxtTelNo(電話番号);
+            div.getCcdShinseiTodokedesha().getTxtTelNo().setDomain(new TelNo(div.getCcdKaigoNinteiAtenaInfo().get電話番号()));
 
-            TextBoxYubinNo 郵便番号 = new TextBoxYubinNo();
-            郵便番号.setValue(div.getCcdKaigoNinteiAtenaInfo().get郵便番号());
-            div.getCcdShinseiTodokedesha().setTxtYubinNo(郵便番号);
+            if (SELECT_KEY0.equals(div.getCcdShinseiTodokedesha().getRadKannaiKangai().getSelectedKey())) {
+
+                YubinNo 郵便番号 = div.getCcdKaigoNinteiAtenaInfo().get郵便番号();
+                div.getCcdShinseiTodokedesha().getTxtYubinNo().setValue(郵便番号);
+
+                //div.getCcdShinseiTodokedesha().getCcdChoikiInput().load(new ChoikiCode(div.getCcdKaigoNinteiAtenaInfo().get住所()));
+            }
+//            else if (SELECT_KEY1.equals(div.getCcdShinseiTodokedesha().getRadKannaiKangai().getSelectedKey())) {
+//
+//                YubinNo 郵便番号 = result.getEntity().get申請届出者郵便番号();
+//                div.getCcdShinseiTodokedesha().getCcdZenkokuJushoInput().;
+//            }
         }
         return ResponseData.of(div).respond();
     }

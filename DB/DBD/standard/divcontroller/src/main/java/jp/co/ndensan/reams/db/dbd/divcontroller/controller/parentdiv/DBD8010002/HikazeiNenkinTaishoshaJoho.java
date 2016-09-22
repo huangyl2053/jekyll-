@@ -131,10 +131,10 @@ public class HikazeiNenkinTaishoshaJoho {
             ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
 
             if (単一保険者.equals(getHandler(div).広域と市町村判断())) {
-                getValidationHandler(div).validateFor処理状態(pairs);
+                getValidationHandler(div).validateFor処理状態単一(pairs);
                 getValidationHandler(div).validateForアップロード済みファイル名(pairs);
             } else {
-                getValidationHandler(div).validateFor処理状態(pairs);
+                getValidationHandler(div).validateFor処理状態広域(pairs);
                 getValidationHandler(div).validateFor取込チェックボックス(pairs);
             }
             if (pairs.iterator().hasNext()) {
@@ -253,7 +253,7 @@ public class HikazeiNenkinTaishoshaJoho {
 
         ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
         if (files.length > 0) {
-            getValidationHandler(div).validateFor処理状態(pairs);
+            getValidationHandler(div).validateFor処理状態単一(pairs);
             getValidationHandler(div).validateForアップロードファイル未指定(pairs);
             if (pairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(pairs).respond();
