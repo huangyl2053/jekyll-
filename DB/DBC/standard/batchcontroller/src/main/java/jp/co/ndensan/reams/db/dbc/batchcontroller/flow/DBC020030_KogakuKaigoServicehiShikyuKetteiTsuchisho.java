@@ -39,8 +39,8 @@ public class DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchisho
     @Override
     protected void defineFlow() {
         executeStep(高額サービス一時テーブルの登録);
-//        executeStep(高額サービス一時テーブルの設定);
-//        executeStep(高額介護サービス費支給判定結果の更新);
+        executeStep(高額サービス一時テーブルの設定);
+        executeStep(高額介護サービス費支給判定結果の更新);
         executeStep(帳票発行);
         executeStep(帳票発行_一覧表);
         executeStep(処理結果確認リスト発行処理);
@@ -89,7 +89,7 @@ public class DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchisho
     /**
      * 処理結果確認リスト発行処理です。
      *
-     * @return DoJishokogakuKetteiTsutishoReportProcess
+     * @return JigyoKogakuShoriKekkaKakuninListSakuseiProcess
      */
     @Step(処理結果確認リスト発行処理)
     protected IBatchFlowCommand doListSakuseiProcess() {
