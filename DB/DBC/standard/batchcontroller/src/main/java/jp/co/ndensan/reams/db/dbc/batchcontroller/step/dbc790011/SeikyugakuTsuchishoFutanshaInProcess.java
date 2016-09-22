@@ -20,12 +20,15 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHok
 import jp.co.ndensan.reams.db.dbz.business.core.hokenshainputguide.Hokensha;
 import jp.co.ndensan.reams.db.dbz.service.core.hokensha.HokenshaNyuryokuHojoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchCsvListReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchSimpleReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
+import jp.co.ndensan.reams.uz.uza.io.Encode;
+import jp.co.ndensan.reams.uz.uza.io.NewLine;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvListReader;
 import jp.co.ndensan.reams.uz.uza.io.csv.ListToObjectMappingHelper;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -36,7 +39,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  *
  * @reamsid_L DBC-2790-011 hemin
  */
-public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<RString> {
+public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<List<RString>> {
 
     private static final RString 請求額通知書一時_TABLE_NAME = new RString("DbWT1511SeikyugakuTsuchisho");
     private static final RString 帳票レコード種別_H1 = new RString("H1");
@@ -94,7 +97,8 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<RStri
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchSimpleReader(csvReaderPath);
+        return new BatchCsvListReader(new CsvListReader.InstanceBuilder(csvReaderPath)
+                .setDelimiter(区切り文字).setEncode(Encode.SJIS).hasHeader(false).setNewLine(NewLine.CRLF).build());
     }
 
     @Override
@@ -104,8 +108,7 @@ public class SeikyugakuTsuchishoFutanshaInProcess extends BatchProcessBase<RStri
     }
 
     @Override
-    protected void process(RString line) {
-        List<RString> data = line.split(区切り文字.toString());
+    protected void process(List<RString> data) {
         if (data != null && !data.isEmpty()) {
             if (レコード種別_3.equals(data.get(INDEX_0))) {
                 return;
