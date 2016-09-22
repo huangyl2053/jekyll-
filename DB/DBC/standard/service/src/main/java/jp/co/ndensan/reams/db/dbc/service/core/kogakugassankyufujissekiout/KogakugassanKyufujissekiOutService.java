@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.service.core.kogakugassankyufujissekiout;
 
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassankyufujissekiout.IKogakugassanKyufujissekiOutMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
-import jp.co.ndensan.reams.db.dbc.service.core.kogakugassanhoseisumijikofutangaku.KogakugassanFinder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
@@ -27,7 +26,7 @@ public class KogakugassanKyufujissekiOutService {
     }
 
     /**
-     * にて生成した{@link KogakugassanFinder}のインスタンスを返します。
+     * にて生成した{@link KogakugassanKyufujissekiOutService}のインスタンスを返します。
      *
      * @return KogakugassanFinder
      */
