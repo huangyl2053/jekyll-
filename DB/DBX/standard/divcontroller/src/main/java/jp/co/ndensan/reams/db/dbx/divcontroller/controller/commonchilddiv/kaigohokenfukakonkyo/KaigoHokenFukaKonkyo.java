@@ -50,19 +50,19 @@ public class KaigoHokenFukaKonkyo {
         if (識別コード != null) {
             List<FukaJohoRelateSearchResult> resultList = FukaJohoFinder.createInstance().
                     find全ての賦課の情報(識別コード).records();     //1.1
-            div.getTxtShikibetsuCode().setValue(div.get識別コード());
+            div.getTxtShikibetsuCode().setValue(識別コード.getColumnValue());
             if (!resultList.isEmpty()) {
-                ViewStateHolder.put(ViewStateKeys.総合事業種類情報, (Serializable) resultList);
+                ViewStateHolder.put(ViewStateKeys.賦課根拠情報, (Serializable) resultList);
                 int listSize = resultList.size();
                 FukaJohoRelateSearchResult resultMax = resultList.get(listSize - 1);   //1.2
                 ShoriDateKanri 処理日付管理情報 = ShoriDateKanriManager.createInstance().
                         get最大基準日時(resultMax.get介護賦課Result().get賦課年度());  //1.3
                 getHandler(div).init(処理日付管理情報, resultMax, resultList);
             }
+            ExpandedInformation expandedInfo = new ExpandedInformation(new Code(識別コード.getColumnValue()), ログコード,
+                    識別コード.getColumnValue());
+            AccessLogger.log(AccessLogType.照会, PersonalData.of(識別コード, expandedInfo));
         }
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code(div.get識別コード()), ログコード,
-                div.get識別コード());
-        AccessLogger.log(AccessLogType.照会, PersonalData.of(識別コード, expandedInfo));
         return ResponseData.of(div).respond();
     }
 
@@ -73,8 +73,8 @@ public class KaigoHokenFukaKonkyo {
      * @return ResponseData<KaigoHokenFukaKonkyoDiv>
      */
     public ResponseData<KaigoHokenFukaKonkyoDiv> onChange_ddlChoteiNendo(KaigoHokenFukaKonkyoDiv div) {
-        List<FukaJohoRelateSearchResult> 全て賦課情報 = ViewStateHolder.get(ViewStateKeys.総合事業種類情報, List.class);
-        getHandler(div).setDDL再表示(全て賦課情報);
+        List<FukaJohoRelateSearchResult> 賦課根拠情報List = ViewStateHolder.get(ViewStateKeys.賦課根拠情報, List.class);
+        getHandler(div).setDDL再表示(賦課根拠情報List);
         return ResponseData.of(div).respond();
     }
 
@@ -85,8 +85,8 @@ public class KaigoHokenFukaKonkyo {
      * @return ResponseData<KaigoHokenFukaKonkyoDiv>
      */
     public ResponseData<KaigoHokenFukaKonkyoDiv> onChange_ddlFukaNendo(KaigoHokenFukaKonkyoDiv div) {
-        List<FukaJohoRelateSearchResult> 全て賦課情報 = ViewStateHolder.get(ViewStateKeys.総合事業種類情報, List.class);
-        getHandler(div).set通知書番号DDL再表示(全て賦課情報);
+        List<FukaJohoRelateSearchResult> 賦課根拠情報List = ViewStateHolder.get(ViewStateKeys.賦課根拠情報, List.class);
+        getHandler(div).set通知書番号DDL再表示(賦課根拠情報List);
         return ResponseData.of(div).respond();
     }
 
@@ -97,8 +97,8 @@ public class KaigoHokenFukaKonkyo {
      * @return ResponseData<KaigoHokenFukaKonkyoDiv>
      */
     public ResponseData<KaigoHokenFukaKonkyoDiv> onClick_btnSearch(KaigoHokenFukaKonkyoDiv div) {
-        List<FukaJohoRelateSearchResult> 全て賦課情報 = ViewStateHolder.get(ViewStateKeys.総合事業種類情報, List.class);
-        getHandler(div).get指定賦課情報(全て賦課情報);
+        List<FukaJohoRelateSearchResult> 賦課根拠情報List = ViewStateHolder.get(ViewStateKeys.賦課根拠情報, List.class);
+        getHandler(div).get指定賦課情報(賦課根拠情報List);
         return ResponseData.of(div).respond();
     }
 
@@ -109,8 +109,8 @@ public class KaigoHokenFukaKonkyo {
      * @return ResponseData<KaigoHokenFukaKonkyoDiv>
      */
     public ResponseData<KaigoHokenFukaKonkyoDiv> onClick_btnBefore(KaigoHokenFukaKonkyoDiv div) {
-        List<FukaJohoRelateSearchResult> 全て賦課情報 = ViewStateHolder.get(ViewStateKeys.総合事業種類情報, List.class);
-        getHandler(div).get指定賦課情報前へ(全て賦課情報);
+        List<FukaJohoRelateSearchResult> 賦課根拠情報List = ViewStateHolder.get(ViewStateKeys.賦課根拠情報, List.class);
+        getHandler(div).get指定賦課情報前へ(賦課根拠情報List);
         return ResponseData.of(div).respond();
     }
 
@@ -121,8 +121,8 @@ public class KaigoHokenFukaKonkyo {
      * @return ResponseData<KaigoHokenFukaKonkyoDiv>
      */
     public ResponseData<KaigoHokenFukaKonkyoDiv> onClick_btnAfter(KaigoHokenFukaKonkyoDiv div) {
-        List<FukaJohoRelateSearchResult> 全て賦課情報 = ViewStateHolder.get(ViewStateKeys.総合事業種類情報, List.class);
-        getHandler(div).get指定賦課情報後へ(全て賦課情報);
+        List<FukaJohoRelateSearchResult> 賦課根拠情報List = ViewStateHolder.get(ViewStateKeys.賦課根拠情報, List.class);
+        getHandler(div).get指定賦課情報後へ(賦課根拠情報List);
         return ResponseData.of(div).respond();
     }
 
