@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.dbc180040;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180040.FutanWariaiInsertProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180040.FutanWariaiShoHakkoIchiranOutputProcess;

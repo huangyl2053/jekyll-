@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.business.report.dbbt21004.DankaiProcessEntityList;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbbbt21004.DankaibetuHihokensyasuIchiranhyoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt21004.DankaibetuHihokensyasuIchiranhyoProcessParameter;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.dankaiprocessentity.DankaiProcessEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.SetaiShotokuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.hihokenxiataixiou.HihokenshaTaihoTemp;
@@ -82,6 +83,7 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
     private List<DankaiProcessEntityList> dankaiProcessEntityList;
     private static final RString 使用する = new RString("1");
     private static final RString 使用しない = new RString("0");
+    private static final int ZERO = 0;
     private static final int ONE = 1;
     private static final int TWO = 2;
     private static final int THR = 3;
@@ -125,6 +127,21 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
     private HokenryoDankaiSettings hokenryoDankaiSettings;
     private HokenryoDankaiList hokenryoDankaiList;
     private HokenryoDankaiHantei hantei;
+    private final Decimal 基準年金収入額_01 = new Decimal(800000);
+    private final Decimal 基準年金収入額_02 = new Decimal(1200000);
+    private final Decimal 基準年金収入額_03 = new Decimal(800000);
+    private final Decimal 基準所得金額_01 = new Decimal(1200000);
+    private final Decimal 基準所得金額_02 = new Decimal(1900000);
+    private final Decimal 基準所得金額_03 = new Decimal(2900000);
+    private final RString 第1段階 = new RString("第1段階");
+    private final RString 第2段階 = new RString("第2段階");
+    private final RString 第3段階 = new RString("第3段階");
+    private final RString 第4段階 = new RString("第4段階");
+    private final RString 第5段階 = new RString("第5段階");
+    private final RString 第6段階 = new RString("第6段階");
+    private final RString 第7段階 = new RString("第7段階");
+    private final RString 第8段階 = new RString("第8段階");
+    private final RString 第9段階 = new RString("第9段階");
 
     @Override
     protected void createWriter() {
@@ -348,6 +365,25 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
         保険者設定段階Writer.insert(hokenshaDankaiTemp);
         HyojunDankaiTemp hyojunDankaiTemp = new HyojunDankaiTemp();
         hyojunDankaiTemp.set被保険者番号(dankaiProcessEntityList.get被保険者対象Temp().getHihokenshaNo());
+        保険料段階パラメータ = new HokenryoDankaiHanteiParameter();
+        保険料段階パラメータ.setFukaNendo(dankaiProcessEntityList.get被保険者対象Temp().getHukaNando());
+        保険料段階パラメータ.setFukaKonkyo(賦課根拠);
+        月別保険料制御情報 = get標準月別保険料制御情報(get保険料段階());
+        保険料段階パラメータ.setSeigyoJoho(月別保険料制御情報);
+        月別保険料段階 = hantei.determine月別保険料段階(保険料段階パラメータ);
+        月別保険料制御情報Map = new HashMap<>();
+        月別保険料制御情報Map.put(ONE, 月別保険料段階.get保険料段階04月());
+        月別保険料制御情報Map.put(TWO, 月別保険料段階.get保険料段階05月());
+        月別保険料制御情報Map.put(THR, 月別保険料段階.get保険料段階06月());
+        月別保険料制御情報Map.put(FOU, 月別保険料段階.get保険料段階07月());
+        月別保険料制御情報Map.put(FIV, 月別保険料段階.get保険料段階08月());
+        月別保険料制御情報Map.put(SIX, 月別保険料段階.get保険料段階09月());
+        月別保険料制御情報Map.put(SEV, 月別保険料段階.get保険料段階10月());
+        月別保険料制御情報Map.put(EIG, 月別保険料段階.get保険料段階11月());
+        月別保険料制御情報Map.put(NIN, 月別保険料段階.get保険料段階12月());
+        月別保険料制御情報Map.put(TEN, 月別保険料段階.get保険料段階01月());
+        月別保険料制御情報Map.put(ELE, 月別保険料段階.get保険料段階02月());
+        月別保険料制御情報Map.put(TWE, 月別保険料段階.get保険料段階03月());
         int k;
         for (k = ONE; k <= TWE; k++) {
             if (null != 月別保険料制御情報Map.get(k)
@@ -380,6 +416,57 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
             }
         }
 
+    }
+
+    private HokenryoDankaiList get保険料段階() {
+        List<jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai> serviceShuruiList = new ArrayList<>();
+        List<RString> 段階 = new ArrayList();
+        段階.add(第1段階);
+        段階.add(第2段階);
+        段階.add(第3段階);
+        段階.add(第4段階);
+        段階.add(第5段階);
+        段階.add(第6段階);
+        段階.add(第7段階);
+        段階.add(第8段階);
+        段階.add(第9段階);
+        for (int i = ZERO; i <= EIG; i++) {
+            DbT2013HokenryoDankaiEntity entity = new DbT2013HokenryoDankaiEntity();
+            entity.setRankuKubun(段階.get(i));
+            serviceShuruiList.add(new jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai(entity));
+        }
+        return new HokenryoDankaiList(serviceShuruiList);
+    }
+
+    private SeigyoJoho get標準月別保険料制御情報(HokenryoDankaiList 保険料段階リスト) {
+        boolean 未申告段階使用有無 = false;
+        if (使用する.equals(未申告段階使用)) {
+            未申告段階使用有無 = true;
+        } else if (使用しない.equals(未申告段階使用)) {
+            未申告段階使用有無 = false;
+        }
+        boolean 所得調査中段階使用有無 = false;
+        if (使用する.equals(所得調査中段階使用)) {
+            所得調査中段階使用有無 = true;
+        } else if (使用しない.equals(所得調査中段階使用)) {
+            所得調査中段階使用有無 = false;
+        }
+        boolean 課税取消段階使用有無 = false;
+        if (使用する.equals(課税取消段階使用)) {
+            課税取消段階使用有無 = true;
+        } else if (使用しない.equals(課税取消段階使用)) {
+            課税取消段階使用有無 = false;
+        }
+        SeigyojohoFactory seigyojohoFactory = InstanceProvider.create(SeigyojohoFactory.class);
+        SeigyoJoho 月別保険料制御情報 = seigyojohoFactory.createSeigyojoho(
+                保険料段階リスト, 基準年金収入額_01, 基準年金収入額_02, 基準年金収入額_03,
+                基準所得金額_01, 基準所得金額_02, 基準所得金額_03, null, null, null,
+                null, null, null, null, null, null,
+                null, null, null, null,
+                未申告段階使用有無, 未申告段階インデックス, KazeiKubun.toValue(未申告課税区分),
+                所得調査中段階使用有無, 所得調査中段階インデックス, KazeiKubun.toValue(所得調査中課税区分),
+                課税取消段階使用有無, 課税取消段階インデックス, KazeiKubun.toValue(課税取消課税区分));
+        return 月別保険料制御情報;
     }
 
     private SeigyoJoho get月別保険料制御情報(HokenryoDankaiList 保険料段階リスト) {
