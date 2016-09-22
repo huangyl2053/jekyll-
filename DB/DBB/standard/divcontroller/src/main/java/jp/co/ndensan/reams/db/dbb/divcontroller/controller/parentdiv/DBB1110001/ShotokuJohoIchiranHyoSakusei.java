@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.divcontroller.controller.parentdiv.DBB1110001;
 
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheinjunkakakutei.ShotokujohoIchiranhyoSakuseiBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB111001.DBB111001_ShotokujohoIchiranhyoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1110001.DBB1110001StateName;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1110001.ShotokuJohoIchiranHyoSakuseiDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1110001.ShotokuJohoIchiranHyoSakuseiHandler;
@@ -59,8 +59,8 @@ public class ShotokuJohoIchiranHyoSakusei {
      * @param div ShotokuJohoIchiranHyoSakuseiDiv
      * @return ResponseData<ShotokujohoIchiranhyoSakuseiBatchParameter>
      */
-    public ResponseData<ShotokujohoIchiranhyoSakuseiBatchParameter> onClick_Register(ShotokuJohoIchiranHyoSakuseiDiv div) {
-        ShotokujohoIchiranhyoSakuseiBatchParameter parameter = getHandler(div).creatBatchParameter();
+    public ResponseData<DBB111001_ShotokujohoIchiranhyoSakuseiParameter> onClick_Register(ShotokuJohoIchiranHyoSakuseiDiv div) {
+        DBB111001_ShotokujohoIchiranhyoSakuseiParameter parameter = getHandler(div).creatBatchParameter();
         return ResponseData.of(parameter).respond();
     }
 
