@@ -143,7 +143,7 @@ public enum ConfigKeysKokuhorenSofu {
      *
      * @return 国保連送付コンフィグ一覧のスケジュール設定有無
      */
-    public boolean getスケジュール設定有無() {
+    public boolean isスケジュール設定有無() {
         return sukejuruSetFlag;
     }
 
