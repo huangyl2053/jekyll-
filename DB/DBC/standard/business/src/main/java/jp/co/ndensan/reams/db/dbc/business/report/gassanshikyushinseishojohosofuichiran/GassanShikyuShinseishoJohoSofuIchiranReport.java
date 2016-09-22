@@ -23,6 +23,7 @@ public class GassanShikyuShinseishoJohoSofuIchiranReport extends Report<GassanSh
     private final YMDHMS システム日時;
     private final FlexibleYearMonth 処理年月;
     private final int 連番;
+    private final boolean flag;
 
     /**
      * コンストラクタです
@@ -31,21 +32,24 @@ public class GassanShikyuShinseishoJohoSofuIchiranReport extends Report<GassanSh
      * @param システム日時 YMDHMS
      * @param 処理年月 FlexibleYearMonth
      * @param 連番 int
+     * @param flag boolean
      */
     public GassanShikyuShinseishoJohoSofuIchiranReport(
             KogakugassanShikyushinseishoOutFileEntity entity,
             YMDHMS システム日時,
             FlexibleYearMonth 処理年月,
-            int 連番) {
+            int 連番,
+            boolean flag) {
         this.entity = entity;
         this.システム日時 = システム日時;
         this.処理年月 = 処理年月;
         this.連番 = 連番;
+        this.flag = flag;
     }
 
     @Override
     public void writeBy(ReportSourceWriter<GassanShikyuShinseishoJohoSofuIchiranSource> writer) {
-        IGassanShikyuShinseishoJohoSofuIchiranEditor editor = new GassanShikyuShinseishoJohoSofuIchiranEditor(entity, システム日時, 処理年月, 連番);
+        IGassanShikyuShinseishoJohoSofuIchiranEditor editor = new GassanShikyuShinseishoJohoSofuIchiranEditor(entity, システム日時, 処理年月, 連番, flag);
         IGassanShikyuShinseishoJohoSofuIchiranBuilder builder = new GassanShikyuShinseishoJohoSofuIchiranBuilder(editor);
         writer.writeLine(builder);
     }

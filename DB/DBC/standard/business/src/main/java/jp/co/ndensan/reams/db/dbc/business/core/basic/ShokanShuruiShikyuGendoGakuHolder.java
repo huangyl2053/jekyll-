@@ -18,34 +18,34 @@ import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
 public class ShokanShuruiShikyuGendoGakuHolder implements Serializable {
 
     private static final long serialVersionUID = -3935825012351482058L;
-    private final Models<ShokanShuruiShikyuGendoGakuIdentifier, ShokanShuruiShikyuGendoGaku> shokanShuruiShikyuGendoGakuList;
+    private final Models<ShokanShuruiShikyuGendoGakuIdentifier, ShokanShuruiShikyuGendoGaku> shokanShuruiShikyuList;
 
     /**
      * ShokanShuruiShikyuGendoGakuHolderのobj作成です。
      */
     public ShokanShuruiShikyuGendoGakuHolder() {
-        this.shokanShuruiShikyuGendoGakuList = Models.create(new ArrayList<ShokanShuruiShikyuGendoGaku>());
+        this.shokanShuruiShikyuList = Models.create(new ArrayList<ShokanShuruiShikyuGendoGaku>());
     }
 
     /**
      * ShokanShuruiShikyuGendoGakuHolderのobj作成です。
      *
-     * @param shokanShuruiShikyuGendoGakuList List<ShokanShuruiShikyuGendoGaku>
+     * @param shokanShuruiShikyuList List<ShokanShuruiShikyuGendoGaku>
      */
-    public ShokanShuruiShikyuGendoGakuHolder(List<ShokanShuruiShikyuGendoGaku> shokanShuruiShikyuGendoGakuList) {
-        this.shokanShuruiShikyuGendoGakuList = Models.create(shokanShuruiShikyuGendoGakuList);
+    public ShokanShuruiShikyuGendoGakuHolder(List<ShokanShuruiShikyuGendoGaku> shokanShuruiShikyuList) {
+        this.shokanShuruiShikyuList = Models.create(shokanShuruiShikyuList);
     }
 
     /**
      * ShokanShuruiShikyuGendoGakuHolderのobj作成です。
      *
-     * @param shokanShuruiShikyuGendoGakuList List<ShokanShuruiShikyuGendoGaku>
+     * @param shokanShuruiShikyuList List<ShokanShuruiShikyuGendoGaku>
      * Models<ShokanShuruiShikyuGendoGakuIdentifier,
      * ShokanShuruiShikyuGendoGaku>
      */
     public ShokanShuruiShikyuGendoGakuHolder(
-            Models<ShokanShuruiShikyuGendoGakuIdentifier, ShokanShuruiShikyuGendoGaku> shokanShuruiShikyuGendoGakuList) {
-        this.shokanShuruiShikyuGendoGakuList = shokanShuruiShikyuGendoGakuList;
+            Models<ShokanShuruiShikyuGendoGakuIdentifier, ShokanShuruiShikyuGendoGaku> shokanShuruiShikyuList) {
+        this.shokanShuruiShikyuList = shokanShuruiShikyuList;
     }
 
     /**
@@ -54,7 +54,7 @@ public class ShokanShuruiShikyuGendoGakuHolder implements Serializable {
      * @return List<ShokanShuruiShikyuGendoGaku>
      */
     public List<ShokanShuruiShikyuGendoGaku> getShokanShuruiShikyuGendoGakuList() {
-        return new ArrayList<>(shokanShuruiShikyuGendoGakuList.values());
+        return new ArrayList<>(shokanShuruiShikyuList.values());
     }
 
     /**
@@ -63,7 +63,7 @@ public class ShokanShuruiShikyuGendoGakuHolder implements Serializable {
      * @param shokanShuruiShikyuGendoGaku ShokanShuruiShikyuGendoGaku
      */
     public void addShokanShuruiShikyuGendoGaku(ShokanShuruiShikyuGendoGaku shokanShuruiShikyuGendoGaku) {
-        shokanShuruiShikyuGendoGakuList.add(shokanShuruiShikyuGendoGaku);
+        shokanShuruiShikyuList.add(shokanShuruiShikyuGendoGaku);
     }
 
     /**
@@ -73,8 +73,8 @@ public class ShokanShuruiShikyuGendoGakuHolder implements Serializable {
      * @return ShokanShuruiShikyuGendoGaku
      */
     public ShokanShuruiShikyuGendoGaku getShokanShuruiShikyuGendoGaku(ShokanShuruiShikyuGendoGakuIdentifier id) {
-        if (shokanShuruiShikyuGendoGakuList.contains(id)) {
-            return shokanShuruiShikyuGendoGakuList.clone().get(id);
+        if (shokanShuruiShikyuList.contains(id)) {
+            return shokanShuruiShikyuList.clone().get(id);
         }
         return null;
     }

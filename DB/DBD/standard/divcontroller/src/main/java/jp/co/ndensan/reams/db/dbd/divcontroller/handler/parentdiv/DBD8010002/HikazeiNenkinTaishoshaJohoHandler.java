@@ -373,17 +373,26 @@ public class HikazeiNenkinTaishoshaJohoHandler {
         DBD301010_HikazeiNenkinTaishoshaJohoTorikomiParameter parameter = new DBD301010_HikazeiNenkinTaishoshaJohoTorikomiParameter();
 
         parameter.set処理年度(new FlexibleYear(div.getDdlShoriNendo().getSelectedKey()));
-        parameter.set処理区分(div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getHdnShoriCode());
-        parameter.set対象月(div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getHdnTukiCode());
+        if (単一保険者.equals(広域と市町村判断())) {
+            parameter.set処理区分(div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getHdnShoriCode());
+            parameter.set対象月(div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getHdnTukiCode());
+            parameter.set処理日時(new YMDHMS(div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getTxtShoriNichiji()));
+            parameter.set処理状態(div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getTxtShoriJotai());
+        } else {
+            parameter.set処理区分(div.getDdlTuki().getSelectedKey().substring(INT_0, INT_1));
+            parameter.set処理区分(div.getDdlTuki().getSelectedKey().substring(INT_1, INT_4));
+            parameter.set処理日時(new YMDHMS(div.getTxtShoriNichiji().getValue()));
+            parameter.set処理状態(div.getTxtShoriJotai().getValue());
+        }
         parameter.setテスト処理(div.getHeddaeria().getChkTesutoShoriTorikomi().isAllSelected() ? RSTRING_1 : RSTRING_0);
         if (KEY0.equals(div.getChohyoShutsuryokuUmu().getRadSonotaChohyo().getSelectedKey())) {
             parameter.set出力区分(RSTRING_1);
         } else if (KEY1.equals(div.getChohyoShutsuryokuUmu().getRadSonotaChohyo().getSelectedKey())) {
             parameter.set出力区分(RSTRING_0);
         }
-        parameter.set処理状態(div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getTxtShoriJotai());
+
         parameter.set構成市町村コードリスト(構成市町村コードリスト);
-        parameter.set処理日時(new YMDHMS(div.getDgTanitsuTaishoShoriItchiran().getActiveRow().getTxtShoriNichiji()));
+
         parameter.set出力順ID1(div.getCcdChohyoSyuturyokuJun1().get出力順ID());
         parameter.set出力順ID2(div.getCcdChohyoSyuturyokuJun2().get出力順ID());
         parameter.set出力順ID3(div.getCcdChohyoSyuturyokuJun3().get出力順ID());
@@ -794,15 +803,15 @@ public class HikazeiNenkinTaishoshaJohoHandler {
             row.setTxtShichoson(master.get市町村名称());
 
             RString 年次月次 = RString.EMPTY;
-            if (RSTRING_0.equals(div.getDdlTuki().getSelectedKey().substring(INT_0))) {
+            if (RSTRING_0.equals(div.getDdlTuki().getSelectedKey().substring(INT_0, INT_1))) {
                 年次月次 = Z5100000;
-            } else if (RSTRING_1.equals(div.getDdlTuki().getSelectedKey().substring(INT_0))) {
+            } else if (RSTRING_1.equals(div.getDdlTuki().getSelectedKey().substring(INT_0, INT_1))) {
                 年次月次 = Z5200000;
             }
             List<UzT0885SharedFileEntryEntity> result = SharedFile.searchSharedFile(
                     年次月次.concat(div.getDdlShoriNendo().getSelectedKey()).
                     concat(div.getDdlTuki().getSelectedKey()).concat(new RString("_")).
-                    concat(master.get市町村コード().code市町村RString()).concat(new RString(".DTA")));
+                    concat(master.get市町村コード().getColumnValue()).concat(new RString(".DTA")));
 
             if (result == null || result.isEmpty()) {
                 this.setチェックボックスfor共有フォルダ無(master.get市町村コード(), row);

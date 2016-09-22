@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc710090.HanyoListKagoMoshitateNoRenbanOutputProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc710090.HanyoListKagoMoshitateOutputProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC710090.HanyoListKagoMoshitateNoRenbanOutputProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC710090.HanyoListKagoMoshitateOutputProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710090.DBC710090_HanyoListKagoMoshitateParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc710090.HanyoListKagoMoshitateProcessParameter;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;

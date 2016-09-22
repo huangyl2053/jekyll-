@@ -1,5 +1,6 @@
 package jp.co.ndensan.reams.db.dbc.entity.report.saishinsa;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
@@ -47,6 +48,7 @@ public class SaishinsaKetteitsuchishoTorikomiIchiranKohifutanshaBunSource implem
     @ReportItem(name = "kaipage5", length = 20, order = 16)
     public RString kaipage5;
     @ReportPerson(id = "A")
+    public ShikibetsuCode shikibetuCode;
     @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listLower_1", length = 10, order = 17)
     public RString listLower_1;

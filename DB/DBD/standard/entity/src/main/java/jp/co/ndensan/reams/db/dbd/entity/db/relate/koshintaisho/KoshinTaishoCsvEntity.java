@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * csv出力Entityです。
  *
- * @author_L DBD-2030-010 x_youyj
+ * @reamsid_L DBD-2030-010 x_youyj
  */
 @lombok.Getter
 @lombok.Setter

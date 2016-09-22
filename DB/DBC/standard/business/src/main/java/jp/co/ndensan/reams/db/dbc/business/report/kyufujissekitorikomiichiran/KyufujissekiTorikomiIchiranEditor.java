@@ -147,10 +147,9 @@ public class KyufujissekiTorikomiIchiranEditor implements
             } else if (entity.get給付実績_レコード件数DD() == レコード値_0) {
                 source.listUpper_12 = 中空まる;
             }
-        } else if (entity.get給付実績_レコード件数D1() == レコード値_0) {
-            if (レコード値_1 <= entity.get給付実績_レコード件数DD()) {
-                source.listUpper_12 = ソリッドまる;
-            }
+        } else if (entity.get給付実績_レコード件数D1() == レコード値_0 && レコード値_1 <= entity.get給付実績_レコード件数DD()) {
+            source.listUpper_12 = ソリッドまる;
+
         }
 
         source.listUpper_13 = getレコード種別(entity.get給付実績_レコード件数D2());
