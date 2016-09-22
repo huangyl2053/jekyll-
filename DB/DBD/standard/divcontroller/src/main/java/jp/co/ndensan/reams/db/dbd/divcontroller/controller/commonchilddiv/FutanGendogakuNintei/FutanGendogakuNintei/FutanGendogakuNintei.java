@@ -7,12 +7,21 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.controller.commonchilddiv.Futan
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.business.core.hikazenenkintaishosha.HikazeNenkinTaishosha;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdInformationMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.FutanGendogakuNintei.FutanGendogakuNintei.FutanGendogakuNinteiDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.commonchilddiv.FutanGendogakuNintei.FutanGendogakuNintei.FutanGendogakuNinteiHandler;
+import jp.co.ndensan.reams.db.dbd.service.core.hikazeinenkin.HikazeNenkinTaishoshaFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.business.core.date.DateEditor;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -61,8 +70,22 @@ public class FutanGendogakuNintei {
 
         ArrayList<jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.futangendogakunintei.FutanGendogakuNintei> 表示リスト
                 = ViewStateHolder.get(ViewStateKeys.負担限度額認定申請の情報, ArrayList.class);
-
-        getHandler(div).詳細表示(表示リスト);
+        
+        RString 被保険者番号 = div.getTxtHiddenHihokenshaNo();
+        RString configValue = DbBusinessConfig.get(ConfigNameDBB.日付関連_調定年度, RDate.getNowDate(), SubGyomuCode.DBB介護賦課);
+        List<HikazeNenkinTaishosha> List非課税年金情報 = HikazeNenkinTaishoshaFinder.createInstance().
+                select非課税年金情報(被保険者番号, new RYear(configValue.toString()));
+        RString 非課税年金情報;
+        String Str1 = "無(";
+        String Str2 = "有(";
+        String Str3 = "年度)";
+        RDate R年月日 = new RDate(configValue.toString().concat("0801"));
+        if (List非課税年金情報.isEmpty()) {
+            非課税年金情報 = new RString(Str1).concat(DateEditor.to和暦(R年月日).toString().substring(0, 3)).concat(Str3);
+        } else {
+            非課税年金情報 = new RString(Str2).concat(DateEditor.to和暦(R年月日).toString().substring(0, 3)).concat(Str3);
+        }
+        getHandler(div).詳細表示(表示リスト, 非課税年金情報);
         return ResponseData.of(div).respond();
     }
 
