@@ -109,7 +109,7 @@ public class KogakugassanKyufujissekiCreateSofuFileProcess extends BatchProcessB
         dbu保険者番号 = DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         csvFileName = PREFIX.concat(parameter.get交換情報識別番号()).concat(dbu保険者番号)
-                .concat(parameter.get処理年月().toDateString()).concat(FILE_TYPE);
+                .concat(parameter.get処理年月().toDateString()).concat(拡張子_TEMP).concat(FILE_TYPE);
     }
 
     @Override

@@ -49,8 +49,7 @@ public class DBC110110_KogakugassanKyufujissekiOut extends BatchFlowBase<DBC1101
     private static final String 送付除外区分設定 = "setSofuJogaiFlag";
     private static final String 送付ファイル作成 = "createSofuFile";
     private static final String 帳票出力 = "doSofuReport";
-    private static final String DB更新_送付済 = "updateDBSofusumi";
-    private static final String DB更新_未送付 = "updateDBMisofu";
+    private static final String DB更新 = "updateDB";
     private static final String 国保連インタフェース管理更新 = "doInterfaceKanriKousin";
     private static final String 処理結果リスト作成 = "doShoriKekkaListSakusei";
     private static final int INT_0 = 0;
@@ -76,9 +75,7 @@ public class DBC110110_KogakugassanKyufujissekiOut extends BatchFlowBase<DBC1101
             returnEntity = getResult(SofuTaishoEntity.class, new RString(送付ファイル作成),
                     KogakugassanKyufujissekiCreateSofuFileProcess.PARAMETER_OUT_OUTRETURNENTITY);
             executeStep(帳票出力);
-            // TODO QA1439
-//            executeStep(DB更新_送付済);
-//            executeStep(DB更新_未送付);
+            executeStep(DB更新);
         }
         executeStep(国保連インタフェース管理更新);
         executeStep(処理結果リスト作成);
@@ -164,29 +161,12 @@ public class DBC110110_KogakugassanKyufujissekiOut extends BatchFlowBase<DBC1101
      *
      * @return KogakugassanKyufujissekiUpdateDBProcess
      */
-    @Step(DB更新_送付済)
-    protected IBatchFlowCommand updateDBSofusumi() {
-        // TODO QA1439
+    @Step(DB更新)
+    protected IBatchFlowCommand updateDB() {
         KogakugassanKyufujissekiUpdateDBProcessParameter parameter
                 = new KogakugassanKyufujissekiUpdateDBProcessParameter();
         parameter.set処理年月(new FlexibleYearMonth(getParameter().get処理年月().toDateString()));
-        parameter.set送付除外フラグ(false);
-        return loopBatch(KogakugassanKyufujissekiUpdateDBProcess.class).arguments(parameter).define();
-    }
-
-    /**
-     * DB更新_未送付です。
-     *
-     * @return KogakugassanKyufujissekiUpdateDBProcess
-     */
-    @Step(DB更新_未送付)
-    protected IBatchFlowCommand updateDBMisofu() {
-        // TODO QA1439
-        KogakugassanKyufujissekiUpdateDBProcessParameter parameter
-                = new KogakugassanKyufujissekiUpdateDBProcessParameter();
-        parameter.set処理年月(new FlexibleYearMonth(getParameter().get処理年月().toDateString()));
-        parameter.set送付除外フラグ(true);
-        return loopBatch(KogakugassanKyufujissekiUpdateDBProcess.class).arguments(parameter).define();
+        return simpleBatch(KogakugassanKyufujissekiUpdateDBProcess.class).arguments(parameter).define();
     }
 
     /**
