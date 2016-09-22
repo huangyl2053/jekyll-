@@ -98,6 +98,9 @@ public class KokiKoreishaHandler {
         set保険者番号(hokenja);
         if (後期高齢者情報 != null) {
             div.getMeisaiPanel().getTxtRirekiNo().setValue(後期高齢者情報.get履歴番号());
+            if (後期高齢者情報.get後期高齢保険者番号_市町村() != null && !後期高齢者情報.get後期高齢保険者番号_市町村().isEmpty()) {
+                div.getMeisaiPanel().getDdlHokenshaNo().setSelectedKey(後期高齢者情報.get後期高齢保険者番号_市町村());
+            }
             if (後期高齢者情報.get後期高齢被保険者番号() != null) {
                 div.getMeisaiPanel().getTxtHihokenshaNo().setValue(後期高齢者情報.get後期高齢被保険者番号());
             }
@@ -119,7 +122,7 @@ public class KokiKoreishaHandler {
             if (後期高齢者情報.get保険者適用終了日() != null && !後期高齢者情報.get保険者適用終了日().isEmpty()) {
                 div.getMeisaiPanel().getTxtHokenshaShuryoYMD().setValue(new RDate(後期高齢者情報.get保険者適用終了日().toString()));
             }
-            if (後期高齢者情報.get資格取得事由コード() != null) {
+            if (後期高齢者情報.get資格取得事由コード() != null && !後期高齢者情報.get資格取得事由コード().isEmpty()) {
                 div.getMeisaiPanel().getDdlShikakuShutokuJiyu().setSelectedKey(後期高齢者情報.get資格取得事由コード());
             }
             if (後期高齢者情報.get資格喪失事由コード() != null) {
@@ -149,15 +152,14 @@ public class KokiKoreishaHandler {
         for (ShikakuShutokuJiyu code : ShikakuShutokuJiyu.values()) {
             dataSources.add(get資格取得事由(code));
         }
-        dataSources.add(new KeyValueDataSource(new RString("EMPTY"), RString.EMPTY));
         div.getMeisaiPanel().getDdlShikakuShutokuJiyu().setDataSource(dataSources);
     }
 
     private void set保険者番号(List<Hokenja> hokenja) {
         List<KeyValueDataSource> dataSources = new ArrayList<>();
         for (Hokenja 保険者番号 : hokenja) {
-            KeyValueDataSource keyValue = new KeyValueDataSource(保険者番号.get保険者番号().getColumnValue(),
-                    保険者番号.get保険者番号().value());
+            KeyValueDataSource keyValue = new KeyValueDataSource(保険者番号.get保険者番号().value(),
+                    保険者番号.get保険者番号().value().concat(RString.HALF_SPACE).concat(保険者番号.get保険者名()));
             dataSources.add(keyValue);
         }
         div.getMeisaiPanel().getDdlHokenshaNo().setDataSource(dataSources);
