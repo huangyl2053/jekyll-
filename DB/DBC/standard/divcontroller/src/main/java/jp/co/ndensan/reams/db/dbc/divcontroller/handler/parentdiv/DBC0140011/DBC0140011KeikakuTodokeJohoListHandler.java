@@ -35,8 +35,8 @@ public final class DBC0140011KeikakuTodokeJohoListHandler {
         if (div.getTbJukyuShinseibi().getToValue() != null) {
             parameter.setJyukyuushinseibiTo(new FlexibleDate(div.getTbJukyuShinseibi().getToValue().toDateString()));
         }
-        parameter.setTaisyoushatyuusyutu(div.getDdlTaishousha().getSelectedValue());
-        parameter.setTodokeidejyoukyou(div.getDdlTodokeJokyo().getSelectedValue());
+        parameter.setTaisyoushatyuusyutu(div.getDdlTaishousha().getSelectedKey());
+        parameter.setTodokeidejyoukyou(div.getDdlTodokeJokyo().getSelectedKey());
         if (div.getTbKijunbi().getValue() != null) {
             parameter.setKijyunbi(new FlexibleDate(div.getTbKijunbi().getValue().toDateString()));
         }
