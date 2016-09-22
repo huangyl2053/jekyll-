@@ -44,7 +44,7 @@ public class KogakuGassanShikyuShinseiTorokuValidator {
                 .thenAdd(KogakuGassanShikyuShinseiTorokuValidationMessage.計算期間加入期間内範囲制約)
                 .ifNot(KogakuGassanShikyuShinseiTorokuSpec.資格喪失チェック1)
                 .thenAdd(KogakuGassanShikyuShinseiTorokuValidationMessage.資格喪失1)
-                .ifNot(KogakuGassanShikyuShinseiTorokuSpec.資格喪失チェック1)
+                .ifNot(KogakuGassanShikyuShinseiTorokuSpec.資格喪失チェック2)
                 .thenAdd(KogakuGassanShikyuShinseiTorokuValidationMessage.資格喪失2)
                 .ifNot(KogakuGassanShikyuShinseiTorokuSpec.後期資格情報保険者番号チェック)
                 .thenAdd(KogakuGassanShikyuShinseiTorokuValidationMessage.後期保険者番号制約)

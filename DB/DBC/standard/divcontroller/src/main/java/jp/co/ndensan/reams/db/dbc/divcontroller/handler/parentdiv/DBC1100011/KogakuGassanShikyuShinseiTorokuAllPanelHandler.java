@@ -98,6 +98,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
     private static final int INT_3 = 3;
     private static final int INT_4 = 4;
     private static final int INT_5 = 5;
+    private static final int INT_6 = 6;
     private static final int INT_7 = 7;
     private static final int INT_11 = 11;
     private static final int INT_2008 = 2008;
@@ -240,6 +241,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         被保険者情報等TABクリア();
         国保後期資格情報TABクリア();
         保険者加入情報パネルクリア();
+        設定証記載保険者番号DDL();
         RDate nowDate = RDate.getNowDate();
         RString 保険者番号 = DbBusinessConfig.get(
                 ConfigNameDBU.保険者情報_保険者番号, nowDate, SubGyomuCode.DBU介護統計報告);
@@ -989,6 +991,16 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
             }
         }
         div.getDdlShokisaiHokenshaNo().setDataSource(dataSource);
+        if (resultMap != null && resultMap.get(resultMap.keySet().iterator().next()) != null) {
+            RString モード = resultMap.keySet().iterator().next();
+            if (!広域市町村モード.equals(モード)) {
+                div.getDdlShokisaiHokenshaNo().setSelectedIndex(INT_0);
+                RString 証記載保険者番号 = div.getDdlShokisaiHokenshaNo().getSelectedKey();
+                div.getTxtKaigoShikyuShinseishoSeiriBango3().setValue(証記載保険者番号);
+            }
+        } else {
+            div.getTxtKaigoShikyuShinseishoSeiriBango3().setValue(RString.EMPTY.padZeroToLeft(INT_6));
+        }
     }
 
     private void 設定所得区分DDL() {
