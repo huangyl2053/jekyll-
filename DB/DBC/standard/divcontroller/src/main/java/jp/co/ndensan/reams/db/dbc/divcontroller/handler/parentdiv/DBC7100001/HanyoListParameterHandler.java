@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710100.DBC710100_HanyoListKagoKekkaParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.kagomoshitate.KagoMoshitateKekka_HokenshaKubun;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7100001.ChushutsuJokenPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7100001.HanyoListParameterDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -36,7 +36,6 @@ public class HanyoListParameterHandler {
     private static final RString 公費負担者 = new RString("key2");
     private static final RString 経過措置_総合事業費 = new RString("key3");
     private static final RString 保険者_総合事業費 = new RString("key4");
-    private static final ReportId 帳票ID = new ReportId("DBC701010_HanyoList_KagoKekka");
 
     /**
      * コンストラクタ。
@@ -66,8 +65,8 @@ public class HanyoListParameterHandler {
             div.getChushutsuJokenPanel().getCcdHokenshaList().setVisible(false);
             div.getChushutsuJokenPanel().getCcdHokenshaList().setDisabled(true);
         }
-        //TODO  QA1352
-        div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, 帳票ID);
+
+        div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701010.getReportId());
     }
 
     /**
