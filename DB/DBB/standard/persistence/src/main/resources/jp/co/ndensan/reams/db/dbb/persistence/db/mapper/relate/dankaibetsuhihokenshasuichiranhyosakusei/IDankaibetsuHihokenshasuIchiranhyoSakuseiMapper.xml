@@ -179,6 +179,7 @@
         ON
             "HihokenshaTaihoTemp"."shikibetsuCode" = "DbT7006RoreiFukushiNenkinJukyusha"."shikibetsuCode"
         AND "DbT7006RoreiFukushiNenkinJukyusha"."jukyuKaishiYMD" <![CDATA[<]]> #{調定年月日}
+        ORDER BY "HihokenshaTaihoTemp"."hihokenshaNo"
     </select>
     <resultMap id="resultMap_DankaiProcessEntity" type="jp.co.ndensan.reams.db.dbb.entity.db.relate.dankaiprocessentity.DankaiProcessEntity" autoMapping="true">
         <id column="HihokenshaTaihoTemp_hihokenshaNo" />
