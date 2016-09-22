@@ -48,6 +48,7 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
     private static final RString 遷移区分_1 = new RString("1");
     private static final RString 処理区分_2 = new RString("2");
     private static final RString 処理区分_3 = new RString("3");
+    private static final RString ファイル付箋 = new RString("ShotokuJohoChushutsuTanitsuTasha");
     private static final RString 単一保険者でないため = new RString("単一保険者でないため");
     private static final RString 所得引出方法が不正のため = new RString("所得引出方法が不正のため");
     private static final RString 当初所得引出 = new RString("当初所得引出");
@@ -150,7 +151,7 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
         param.set出力順ID(new RString(div.getCcdChohyoShutsuryokujunTanitsuTasha().get出力順ID()));
         param.set市町村情報List(Collections.EMPTY_LIST);
         param.set共有ファイルID(共有ファイルID);
-        param.set共有ファイル名(div.getHiddenResult());
+        param.set共有ファイル名(ファイル付箋);
         return ShotokuJohoChushutsuRenkeitanitu.createInstance().createShotokuJohoDBB112001Parameter(param);
     }
 
@@ -167,7 +168,7 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameterHandler {
         param.set出力順ID(new RString(div.getCcdChohyoShutsuryokujunTanitsuTasha().get出力順ID()));
         param.set市町村情報List(Collections.EMPTY_LIST);
         param.set共有ファイルID(共有ファイルID);
-        param.set共有ファイル名(div.getHiddenResult());
+        param.set共有ファイル名(ファイル付箋);
         return ShotokuJohoChushutsuRenkeitanitu.createInstance().createShotokuJohoDBB112003Parameter(param);
     }
 
