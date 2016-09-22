@@ -19,13 +19,13 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class JigyohokokuCompYoshiki272Change {
 
-    private final RString listUpper_1;
-    private final RString listLower_1;
-    private final RString 作成日時;
-    private final RString 集計範囲;
-    private final RString 集計区分;
-    private final RString 保険者番号;
-    private final RString 保険者名;
+    private RString listUpper_1;
+    private RString listLower_1;
+    private RString 作成日時;
+    private RString 集計範囲;
+    private RString 集計区分;
+    private RString 保険者番号;
+    private RString 保険者名;
 
     /**
      *
