@@ -153,10 +153,6 @@ public class KyufuJissekiKihonJouhouMain {
                     get給付分類区分(給付実績基本, サービス提供年月), 給付実績基本情報, 給付実績ヘッダ情報2);
             ViewStateHolder.put(ViewStateKeys.サービス提供年月, サービス年月);
         }
-        div.getBtnZengetsu().setDisabled(true);
-        if (0 < 事業者番号の位置 - INT_NI && 事業者番号の位置 - INT_NI < 給付実績ヘッダ情報2.size()) {
-            div.getBtnZengetsu().setDisabled(false);
-        }
         return ResponseData.of(div).respond();
     }
 
@@ -188,10 +184,6 @@ public class KyufuJissekiKihonJouhouMain {
                     後整理番号, new NyuryokuShikibetsuNo(識別番号), get事業所名称(給付実績基本, サービス提供年月),
                     get給付分類区分(給付実績基本, サービス提供年月), 給付実績基本情報, 給付実績ヘッダ情報2);
             ViewStateHolder.put(ViewStateKeys.サービス提供年月, サービス年月);
-        }
-        div.getBtnJigetsu().setDisabled(true);
-        if (事業者番号の位置 + INT_NI < 給付実績ヘッダ情報2.size()) {
-            div.getBtnJigetsu().setDisabled(false);
         }
         return ResponseData.of(div).respond();
     }

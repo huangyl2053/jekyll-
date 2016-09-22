@@ -20,6 +20,12 @@ public class DankaibetsuShunoritsuEntity {
     private RString 市町村コード;
     private RString 市町村名称;
 
+    /**
+     * コンストラクタです。
+     *
+     * @param 市町村コード RString
+     * @param 市町村名称 RString
+     */
     public DankaibetsuShunoritsuEntity(RString 市町村コード, RString 市町村名称) {
         this.市町村コード = 市町村コード;
         this.市町村名称 = 市町村名称;

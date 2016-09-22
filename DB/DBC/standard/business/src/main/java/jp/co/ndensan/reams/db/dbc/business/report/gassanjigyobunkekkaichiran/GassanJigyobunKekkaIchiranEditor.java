@@ -78,14 +78,14 @@ public class GassanJigyobunKekkaIchiranEditor implements
 
         source.shori_ymd_hms = getSakuseiYmhm(RDate.getNowDate(), RTime.now());
         if (entity.get出力対象区分().equals(区分コード_1)) {
-            source.Data1 = 受取年月タイトル.concat(entity.get受取年月().wareki().
+            source.data1 = 受取年月タイトル.concat(entity.get受取年月().wareki().
                     eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                     separator(Separator.JAPANESE).fillType(FillType.BLANK).
                     toDateString());
 
         } else if (entity.get出力対象区分().equals(区分コード_2)) {
-            source.Data1 = 被保険者番号タイトル.concat(entity.get被保険者番号().value());
-            source.Data2 = 年度タイトル.concat(entity.get年度().wareki().
+            source.data1 = 被保険者番号タイトル.concat(entity.get被保険者番号().value());
+            source.data2 = 年度タイトル.concat(entity.get年度().wareki().
                     eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                     fillType(FillType.BLANK).toDateString().
                     concat(年度文字));

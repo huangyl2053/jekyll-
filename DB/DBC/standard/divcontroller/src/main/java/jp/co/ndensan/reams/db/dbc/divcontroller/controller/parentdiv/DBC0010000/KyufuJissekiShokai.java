@@ -76,6 +76,8 @@ public class KyufuJissekiShokai {
     private static final int INT_SJYUG = 35;
     private static final int INT_SJYUR = 36;
     private static final int INT_NJYUNG = 75;
+    private static final RString RS_ZERO = new RString(0);
+    private static final RString KEY = new RString("key0");
     private static final RString サービス提供月_開始 = new RString("04");
     private static final RString サービス提供月_終了 = new RString("03");
 
@@ -134,26 +136,9 @@ public class KyufuJissekiShokai {
             return ResponseData.of(div).addValidationMessages(validation).respond();
         }
         TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        FlexibleYearMonth サービス提供年月_開始 = FlexibleYearMonth.EMPTY;
-        FlexibleYearMonth サービス提供年月_終了 = FlexibleYearMonth.EMPTY;
+        FlexibleYearMonth サービス提供年月_開始 = getサービス提供年月_開始(div);
+        FlexibleYearMonth サービス提供年月_終了 = getサービス提供年月_終了(div);
         HihokenshaNo 被保険者番号 = 資格対象者.get被保険者番号();
-        if (!RString.isNullOrEmpty(div.getRadNendo().getSelectedKey())) {
-            RString 年度 = div.getDdlKyufuJissekiSearchNendo().getSelectedKey();
-            if (!RString.isNullOrEmpty(年度)) {
-                サービス提供年月_開始 = new FlexibleYearMonth(年度.concat(サービス提供月_開始));
-                サービス提供年月_終了 = new FlexibleYearMonth(
-                        new RString(Integer.parseInt(年度.toString()) + 1).concat(サービス提供月_終了));
-            }
-        } else {
-            if (div.getTxtKyufuJissekiSearchServiceTeikyoYM().getFromValue() != null) {
-                サービス提供年月_開始 = new FlexibleYearMonth(div.getTxtKyufuJissekiSearchServiceTeikyoYM().
-                        getFromValue().toDateString().substring(INT_ZERO, INT_ROKU));
-            }
-            if (div.getTxtKyufuJissekiSearchServiceTeikyoYM().getToValue() != null) {
-                サービス提供年月_終了 = new FlexibleYearMonth(div.getTxtKyufuJissekiSearchServiceTeikyoYM().
-                        getToValue().toDateString().substring(INT_ZERO, INT_ROKU));
-            }
-        }
         List<KyufuJissekiHedajyoho1> 給付実績ヘッダ情報1 = KyufuJissekiShokaiFinder.createInstance().
                 getKyufuJissekiHeaderJoho1(被保険者番号).records();
 //        KyufuJissekiPrmBusiness 給付実績情報照会情報 = KyufuJissekiShokaiFinder.createInstance().
@@ -575,6 +560,418 @@ public class KyufuJissekiShokai {
         return response_Meisai(div);
     }
 
+    /**
+     * 選択ボタンを押下する場合、画面へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Gokei_btnYM1(KyufuJissekiShokaiDiv div) {
+        return response_Gokei(div, INT_ICHI);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、画面へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Gokei_btnYM2(KyufuJissekiShokaiDiv div) {
+        return response_Gokei(div, INT_NI);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、画面へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Gokei_btnYM3(KyufuJissekiShokaiDiv div) {
+        return response_Gokei(div, INT_SAN);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、画面へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Gokei_btnYM4(KyufuJissekiShokaiDiv div) {
+        return response_Gokei(div, INT_YON);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、画面へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Gokei_btnYM5(KyufuJissekiShokaiDiv div) {
+        return response_Gokei(div, INT_GO);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、画面へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Gokei_btnYM6(KyufuJissekiShokaiDiv div) {
+        return response_Gokei(div, INT_ROKU);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、画面へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Gokei_btnYM7(KyufuJissekiShokaiDiv div) {
+        return response_Gokei(div, INT_NANA);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、画面へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Gokei_btnYM8(KyufuJissekiShokaiDiv div) {
+        return response_Gokei(div, INT_HACHI);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、画面へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Gokei_btnYM9(KyufuJissekiShokaiDiv div) {
+        return response_Gokei(div, INT_KYU);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、画面へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Gokei_btnYM10(KyufuJissekiShokaiDiv div) {
+        return response_Gokei(div, INT_JYU);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、画面へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Gokei_btnYM11(KyufuJissekiShokaiDiv div) {
+        return response_Gokei(div, INT_JYUI);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、画面へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Gokei_btnYM12(KyufuJissekiShokaiDiv div) {
+        return response_Gokei(div, INT_JYUN);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、画面へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Gokei_btnYM13(KyufuJissekiShokaiDiv div) {
+        return response_Gokei(div, INT_JYUS);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、画面へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Gokei_btnYM14(KyufuJissekiShokaiDiv div) {
+        return response_Gokei(div, INT_JYUY);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、画面へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Gokei_btnYM15(KyufuJissekiShokaiDiv div) {
+        return response_Gokei(div, INT_JYUG);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、画面へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Gokei_btnYM16(KyufuJissekiShokaiDiv div) {
+        return response_Gokei(div, INT_JYUR);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、画面へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Gokei_btnYM17(KyufuJissekiShokaiDiv div) {
+        return response_Gokei(div, INT_JYUNA);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、画面へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Gokei_btnYM18(KyufuJissekiShokaiDiv div) {
+        return response_Gokei(div, INT_JYUH);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、画面へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Gokei_btnYM19(KyufuJissekiShokaiDiv div) {
+        return response_Gokei(div, INT_JYUK);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、画面へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Gokei_btnYM20(KyufuJissekiShokaiDiv div) {
+        return response_Gokei(div, INT_NJYU);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、画面へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Gokei_btnYM21(KyufuJissekiShokaiDiv div) {
+        return response_Gokei(div, INT_NJYUI);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、画面へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Gokei_btnYM22(KyufuJissekiShokaiDiv div) {
+        return response_Gokei(div, INT_NJYUN);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、画面へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Gokei_btnYM23(KyufuJissekiShokaiDiv div) {
+        return response_Gokei(div, INT_NJYUS);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、画面へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Gokei_btnYM24(KyufuJissekiShokaiDiv div) {
+        return response_Gokei(div, INT_NJYUY);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、画面へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Gokei_btnYM25(KyufuJissekiShokaiDiv div) {
+        return response_Gokei(div, INT_NJYUG);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、画面へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Gokei_btnYM26(KyufuJissekiShokaiDiv div) {
+        return response_Gokei(div, INT_NJYUR);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、画面へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Gokei_btnYM27(KyufuJissekiShokaiDiv div) {
+        return response_Gokei(div, INT_NJYUNA);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、画面へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Gokei_btnYM28(KyufuJissekiShokaiDiv div) {
+        return response_Gokei(div, INT_NJYUH);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、画面へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Gokei_btnYM29(KyufuJissekiShokaiDiv div) {
+        return response_Gokei(div, INT_NJYUK);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、画面へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Gokei_btnYM30(KyufuJissekiShokaiDiv div) {
+        return response_Gokei(div, INT_SJYU);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、画面へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Gokei_btnYM31(KyufuJissekiShokaiDiv div) {
+        return response_Gokei(div, INT_SJYUI);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、画面へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Gokei_btnYM32(KyufuJissekiShokaiDiv div) {
+        return response_Gokei(div, INT_SJYUN);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、画面へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Gokei_btnYM33(KyufuJissekiShokaiDiv div) {
+        return response_Gokei(div, INT_SJYUS);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、画面へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Gokei_btnYM34(KyufuJissekiShokaiDiv div) {
+        return response_Gokei(div, INT_SJYUY);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、画面へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Gokei_btnYM35(KyufuJissekiShokaiDiv div) {
+        return response_Gokei(div, INT_SJYUG);
+    }
+
+    /**
+     * 選択ボタンを押下する場合、画面へ遷移します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_Gokei_btnYM36(KyufuJissekiShokaiDiv div) {
+        return response_Gokei(div, INT_SJYUR);
+    }
+
+    /**
+     * 「＜＜」ボタンを押下する場合、画面を表示します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_btnSento(KyufuJissekiShokaiDiv div) {
+        FlexibleYearMonth サービス提供年月_開始 = getサービス提供年月_開始(div);
+        FlexibleYearMonth サービス提供年月_終了 = getサービス提供年月_終了(div);
+        div.setHiddenZenBanGo(RS_ZERO);
+        getHandler(div).onClick_btnSento(サービス提供年月_開始, サービス提供年月_終了);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「＜」ボタンを押下する場合、画面を表示します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_btnMae(KyufuJissekiShokaiDiv div) {
+        getHandler(div).onClick_btnMae();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「＞」ボタンを押下する場合、画面を表示します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_btnTsugi(KyufuJissekiShokaiDiv div) {
+        getHandler(div).onClick_btnTsugi();
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「＞＞」ボタンを押下する場合、画面を表示します。
+     *
+     * @param div 給付実績照会検索一覧のDIV
+     * @return 給付実績照会検索一覧
+     */
+    public ResponseData<KyufuJissekiShokaiDiv> onClick_btnSaigo(KyufuJissekiShokaiDiv div) {
+        FlexibleYearMonth サービス提供年月_開始 = getサービス提供年月_開始(div);
+        FlexibleYearMonth サービス提供年月_終了 = getサービス提供年月_終了(div);
+        int 列 = サービス提供年月_終了.getBetweenMonths(サービス提供年月_開始) + INT_ICHI;
+        div.setHiddenZenBanGo(new RString(列 - INT_SJYUR + INT_ICHI));
+        div.setHiddenSaiGoBango(new RString(列 - INT_ICHI));
+        getHandler(div).onClick_btnSaigo(サービス提供年月_開始, サービス提供年月_終了);
+        return ResponseData.of(div).respond();
+    }
+
     private void setパラメータサービス提供年月(KyufuJissekiShokaiDiv div, int 列) {
         RString サービス提供年月 = div.getDgKyufuJissekiMeisaiList().getGridSetting().
                 getColumns().get(列 * INT_NI + INT_ICHI).getGroupName();
@@ -602,15 +999,61 @@ public class KyufuJissekiShokai {
         return ResponseData.of(div).forwardWithEventName(DBC0010000TransitionEventName.明細_集計).respond();
     }
 
-//    private ResponseData<KyufuJissekiShokaiDiv> response_GokeiKogakuKaigoService(KyufuJissekiShokaiDiv div) {
-//        return ResponseData.of(div).forwardWithEventName(DBC0010000TransitionEventName.高額介護サービス費).respond();
-//    }
-//
-//    private ResponseData<KyufuJissekiShokaiDiv> response_GokeiFukushiYogu(KyufuJissekiShokaiDiv div) {
-//        return ResponseData.of(div).forwardWithEventName(DBC0010000TransitionEventName.福祉用具購入費).respond();
-//    }
-//
-//    private ResponseData<KyufuJissekiShokaiDiv> response_GokeiJyutakuKayisyu(KyufuJissekiShokaiDiv div) {
-//        return ResponseData.of(div).forwardWithEventName(DBC0010000TransitionEventName.住宅改修費).respond();
-//    }
+    private FlexibleYearMonth getサービス提供年月_開始(KyufuJissekiShokaiDiv div) {
+        if (!RString.isNullOrEmpty(div.getRadNendo().getSelectedKey())) {
+            RString 年度 = div.getDdlKyufuJissekiSearchNendo().getSelectedKey();
+            if (!RString.isNullOrEmpty(年度)) {
+                return new FlexibleYearMonth(年度.concat(サービス提供月_開始));
+            }
+        } else {
+            if (div.getTxtKyufuJissekiSearchServiceTeikyoYM().getFromValue() != null) {
+                return new FlexibleYearMonth(div.getTxtKyufuJissekiSearchServiceTeikyoYM().
+                        getFromValue().toDateString().substring(INT_ZERO, INT_ROKU));
+            }
+        }
+        return FlexibleYearMonth.EMPTY;
+    }
+
+    private FlexibleYearMonth getサービス提供年月_終了(KyufuJissekiShokaiDiv div) {
+        if (!RString.isNullOrEmpty(div.getRadNendo().getSelectedKey())) {
+            RString 年度 = div.getDdlKyufuJissekiSearchNendo().getSelectedKey();
+            if (!RString.isNullOrEmpty(年度)) {
+                return new FlexibleYearMonth(
+                        new RString(Integer.parseInt(年度.toString()) + 1).concat(サービス提供月_終了));
+            }
+        } else {
+            if (div.getTxtKyufuJissekiSearchServiceTeikyoYM().getToValue() != null) {
+                return new FlexibleYearMonth(div.getTxtKyufuJissekiSearchServiceTeikyoYM().
+                        getToValue().toDateString().substring(INT_ZERO, INT_ROKU));
+            }
+        }
+        return FlexibleYearMonth.EMPTY;
+    }
+
+    private ResponseData<KyufuJissekiShokaiDiv> response_Gokei(KyufuJissekiShokaiDiv div, int ボタン列) {
+        if (KEY.equals(div.getRadTaisho1().getSelectedKey())) {
+            setパラメータサービス提供年月(div, ボタン列);
+            int 選択行 = div.getDgKyufuJissekiGokeiList().getClickedRowId();
+            if (INT_HACHI == 選択行) {
+                return response_GokeiKogakuKaigoService(div);
+            } else if (INT_KYU == 選択行) {
+                return response_GokeiFukushiYogu(div);
+            } else if (INT_JYU == 選択行) {
+                return response_GokeiJyutakuKayisyu(div);
+            }
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    private ResponseData<KyufuJissekiShokaiDiv> response_GokeiKogakuKaigoService(KyufuJissekiShokaiDiv div) {
+        return ResponseData.of(div).forwardWithEventName(DBC0010000TransitionEventName.高額介護サービス費).respond();
+    }
+
+    private ResponseData<KyufuJissekiShokaiDiv> response_GokeiFukushiYogu(KyufuJissekiShokaiDiv div) {
+        return ResponseData.of(div).forwardWithEventName(DBC0010000TransitionEventName.福祉用具購入費).respond();
+    }
+
+    private ResponseData<KyufuJissekiShokaiDiv> response_GokeiJyutakuKayisyu(KyufuJissekiShokaiDiv div) {
+        return ResponseData.of(div).forwardWithEventName(DBC0010000TransitionEventName.住宅改修費).respond();
+    }
 }

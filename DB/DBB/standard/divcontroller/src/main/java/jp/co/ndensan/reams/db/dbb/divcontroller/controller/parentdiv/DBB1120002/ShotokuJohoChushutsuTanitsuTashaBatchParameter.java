@@ -138,7 +138,8 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameter {
      * 「実行する」を押下場合、DBB112001 バリデーション、バッチパラメータの設定とバッチを起動します。
      *
      * @param div ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv
-     * @return ResponseData<DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuParameter>
+     * @return
+     * ResponseData<DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuParameter>
      */
     public ResponseData<DBB112001_ToushoShotokuJohoChushutsuRenkeiTanitsuParameter> onclick_batchRegister_DBB112001(
             ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv div) {
@@ -151,9 +152,10 @@ public class ShotokuJohoChushutsuTanitsuTashaBatchParameter {
      * 「実行する」を押下場合、DBB112003 バリデーション、バッチパラメータの設定とバッチを起動します。
      *
      * @param div ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv
-     * @return ResponseData<DBB112003_ShotokuJohoChushutsuRenkeiTanitsuParameter>
+     * @return
+     * ResponseData<DBB112003_ShotokuJohoChushutsuRenkeiTanitsuParameter>
      */
-    public ResponseData<DBB112003_ShotokuJohoChushutsuRenkeiTanitsuParameter> onclick_batchRegister__DBB112003(
+    public ResponseData<DBB112003_ShotokuJohoChushutsuRenkeiTanitsuParameter> onclick_batchRegister_DBB112003(
             ShotokuJohoChushutsuTanitsuTashaBatchParameterDiv div) {
         RDateTime 共有ファイルID = ViewStateHolder.get(ViewStateKeys.イメージ共有ファイルID, RDateTime.class);
         DBB112003_ShotokuJohoChushutsuRenkeiTanitsuParameter parameter = getHandler(div).getBatchParameter_DBB112003(共有ファイルID);
