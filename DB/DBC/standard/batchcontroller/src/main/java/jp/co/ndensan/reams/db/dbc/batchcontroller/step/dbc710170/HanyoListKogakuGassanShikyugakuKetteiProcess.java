@@ -10,13 +10,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.hanyolistkogakugassanshikyugakukettei.HanyoListKogakuGassanShikyugakuKetteiOutPutOrder;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.jigyobunkogakugassanshikyukettei.ShiharaiHohoKubun;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.jigyobunkogakugassanshikyukettei.ShikyuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_ShikyuFushikyuKubun;
-import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistkogakugassanshikyugakukettei.HanyoListKogakuGassanShikyugakuKetteiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.hanyolistkogakugassanshikyugakukettei.HanyoListKogakuGassanShikyugakuKetteiCSVEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3074KogakuGassanShikyuFushikyuKetteiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.hanyolistkogakugassanshikyugakukettei.HanyoListKogakuGassanShikyugakuKetteiEntity;
-import jp.co.ndensan.reams.db.dbd.definition.core.shokanbaraikyufu.ShikyuFushikyuKubun;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.ChokkinIdoJiyuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.jukyusha.JukyuShinseiJiyu;
@@ -660,7 +660,7 @@ public class HanyoListKogakuGassanShikyugakuKetteiProcess
         output.set決定年月日(get日付項目(高額合算支給不支給決定.getKetteiYMD()));
         output.set自己負担総額(doカンマ編集(高額合算支給不支給決定.getJikoFutanSogaku()));
         if (!RString.isNullOrEmpty(高額合算支給不支給決定.getShikyuKubunCode())) {
-            ShikyuFushikyuKubun 支給区分コード = ShikyuFushikyuKubun.toValue(高額合算支給不支給決定.getShikyuKubunCode());
+            ShikyuKubun 支給区分コード = ShikyuKubun.toValue(高額合算支給不支給決定.getShikyuKubunCode());
             output.set支給区分コード(支給区分コード != null ? 支給区分コード.get名称() : RString.EMPTY);
         }
         output.set支給額(doカンマ編集(高額合算支給不支給決定.getShikyugaku()));
