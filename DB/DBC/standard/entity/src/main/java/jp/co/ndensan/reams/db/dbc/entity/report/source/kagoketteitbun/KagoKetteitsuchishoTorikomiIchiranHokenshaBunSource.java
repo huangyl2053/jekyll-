@@ -5,10 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.report.source.kagoketteitbun;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 過誤決定通知書情報取込一覧表（保険者分）帳票Source
@@ -56,6 +58,8 @@ public class KagoKetteitsuchishoTorikomiIchiranHokenshaBunSource implements IRep
     public RString listUpper_2;
     @ReportItem(name = "listUpper_3", length = 10, order = 19)
     public RString listUpper_3;
+    @ReportPerson(id = "X")
+    public ShikibetsuCode shikibetuCode;
     @ReportExpandedInfo(id = "X", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listUpper_4", length = 10, order = 20)
     public RString listUpper_4;
