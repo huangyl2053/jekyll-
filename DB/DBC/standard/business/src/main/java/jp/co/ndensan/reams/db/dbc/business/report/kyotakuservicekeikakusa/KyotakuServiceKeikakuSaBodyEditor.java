@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
@@ -25,6 +26,7 @@ public class KyotakuServiceKeikakuSaBodyEditor implements IKyotakuServiceKeikaku
 
     private final KyotakuServiceKeikakuSaParam target;
     private static final RString 文_被保険者番号 = new RString("被保険者番号");
+    private static final RString 記号 = new RString("：");
 
     /**
      * コンストラクタです。
@@ -61,8 +63,11 @@ public class KyotakuServiceKeikakuSaBodyEditor implements IKyotakuServiceKeikaku
                 source.listList2_4 = new RString(帳票情報.get資格喪失日().toString());
             }
             source.listList3_3 = 帳票情報.get喪失事由();
+
             if (帳票情報.get受給申請日() != null) {
-                source.listList1_6 = new RString(帳票情報.get受給申請日().toString());
+                FlexibleDate 申請日 = 帳票情報.get受給申請日();
+                source.listList1_6 = new RString(申請日.toString());
+                source.listList3_4 = 帳票情報.get申請事由().concat(記号).concat(new RString(申請日.toString()));
             }
             source.listList1_7 = 帳票情報.get申請事由();
             source.listList1_8 = 帳票情報.get要介護度();
@@ -75,7 +80,7 @@ public class KyotakuServiceKeikakuSaBodyEditor implements IKyotakuServiceKeikaku
             if (帳票情報.get認定日().toString() != null) {
                 source.listList2_7 = new RString(帳票情報.get認定日().toString());
             }
-            source.listList3_4 = 帳票情報.get現在の申請状況();
+
             if (帳票情報.get計画届出日() != null) {
                 source.listList1_9 = new RString(帳票情報.get計画届出日().toString());
             }

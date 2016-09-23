@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -102,12 +103,6 @@ public class PostMainPanelHandler {
                     処理日付管理マスタnull処理(処理日付管理マスタ, 処理日付管理マスタに後期高齢の情報);
                 }
             }
-            if (処理日付管理マスタ.get基準日時() != null && !処理日付管理マスタ.get基準日時().isEmpty()) {
-                RDate 前回処理年月日 = 処理日付管理マスタ.get基準日時().getDate();
-                RTime 前回処理時分秒 = 処理日付管理マスタ.get基準日時().getRDateTime().getTime();
-                div.getTxtZenkaiYMD().setValue(前回処理年月日);
-                div.getTxtZenkaiTime().setValue(前回処理時分秒);
-            }
             RString 連携形式 = DbBusinessConfig.get(ConfigNameDBC.国保_後期高齢ＩＦ_国保格納場所, RDate.getNowDate(),
                     SubGyomuCode.DBC介護給付);
             switch (Integer.parseInt(連携形式.toString())) {
@@ -181,16 +176,16 @@ public class PostMainPanelHandler {
     private List<dgShichoson_Row> 一覧エリア(List<List> resultList) {
         List<dgShichoson_Row> listDataSource = new ArrayList();
         int bango = 1;
-        for (List item : resultList) {
+        for (List<RString> item : resultList) {
             dgShichoson_Row items = new dgShichoson_Row();
             items.setBango(new RString(String.valueOf(bango)));
-            if (item.get(0) != null || !item.get(0).toString().isEmpty()) {
+            if (!RString.isNullOrEmpty(item.get(0))) {
                 items.setShichosonMei(new RString(item.get(0).toString())
                         .concat(RString.HALF_SPACE).concat(item.get(1).toString()));
             } else {
                 items.setShichosonMei(RString.EMPTY);
             }
-            if (item.get(NUM_2) != null && !item.get(NUM_2).toString().isEmpty()) {
+            if (!RString.isNullOrEmpty(item.get(NUM_2))) {
                 items.setFileKakunoShoriNitiji(new RString(DateConverter.toWarekiHalf_Zero(new RDate(item.get(NUM_2).
                         toString().substring(0, NUM_8))).toString().concat(RString.HALF_SPACE.toString()).
                         concat(DateConverter.getTime141(new RTime(new RString(item.get(NUM_2).toString().
@@ -198,7 +193,7 @@ public class PostMainPanelHandler {
             } else {
                 items.setFileKakunoShoriNitiji(RString.EMPTY);
             }
-            if (item.get(NUM_3) != null && !item.get(NUM_3).toString().isEmpty()) {
+            if (!RString.isNullOrEmpty(item.get(NUM_3))) {
                 items.setKoikiTorikomiNitiji(new RString(DateConverter.toWarekiHalf_Zero(new RDate(item.get(NUM_3).
                         toString().substring(0, NUM_8))).toString().concat(RString.HALF_SPACE.toString()).
                         concat(DateConverter.getTime141(new RTime(new RString(item.get(NUM_3).toString().
@@ -232,6 +227,14 @@ public class PostMainPanelHandler {
         if (処理日付管理マスタ == null) {
             throw new ApplicationException(UrErrorMessages.存在しない.getMessage()
                     .replace(error情報.toString()).evaluate());
+        } else {
+            YMDHMS 基準日時 = 処理日付管理マスタ.get基準日時();
+            if (基準日時 != null && !基準日時.isEmpty()) {
+                RDate 前回処理年月日 = 基準日時.getDate();
+                RTime 前回処理時分秒 = 基準日時.getRDateTime().getTime();
+                div.getTxtZenkaiYMD().setValue(前回処理年月日);
+                div.getTxtZenkaiTime().setValue(前回処理時分秒);
+            }
         }
     }
 

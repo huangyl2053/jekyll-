@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc640011.KogakuGassanJikofutangakuShomeishoInProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC640011.KogakuGassanJikofutangakuShomeishoInProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.kogakugassanjikofutangakushomeishoin.KogakuGassanJikofutangakuShomeishoInParamerter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakugassanjikofutangakushomeishoin.KogakuGassanJikofutangakuShomeishoInProcessParamerter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangakushomeishoin.KogakuGassanJikofutangakuShomeishoFlowEntity;

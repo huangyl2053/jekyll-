@@ -6,9 +6,10 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassanjikofutangaku;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.KogakuGassanJSaiSyoriJyunbi.IKogakuGassanJSaiSyoriJyunbiMapperParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3070KogakuGassanJikoFutanGakuEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangakushomeishoin.DbWT37H1KogakuGassanaJikofutangakuTempEntity;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc120110.KogakuGassanJikofutangakuDoMasterTorokuParameter;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc120130.KogakuGassanJSaiSyoriJyunbiEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangakushomeishoin.DbWT37H2KogakuGassanaJikofutangakuMeisaiTempEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangakushomeishoin.KogakuGassanJikofutangakuShomeishoDateEntity;
 
 /**
  * 高額合算自己負担額証明書情報取込のmapperです。
@@ -20,29 +21,28 @@ public interface IKogakuGassanJSaiSyoriJyunbiMapper {
     /**
      * 高額合算自己負担額の再処理準備です。
      *
-     * @param parameter IKogakuGassanJSaiSyoriJyunbiMapperParameter
+     * @param parameter KogakuGassanJikofutangakuDoMasterTorokuParameter
      */
-    void do再処理準備(IKogakuGassanJSaiSyoriJyunbiMapperParameter parameter);
+    void do再処理準備(KogakuGassanJikofutangakuDoMasterTorokuParameter parameter);
 
     /**
      * 高額合算自己負担額のマスタ更新です。
      *
-     * @param parameter IKogakuGassanJSaiSyoriJyunbiMapperParameter
-     * @return List<DbT3070KogakuGassanJikoFutanGakuEntity>
+     * @return List<KogakuGassanJSaiSyoriJyunbiEntity>
      */
-    List<DbT3070KogakuGassanJikoFutanGakuEntity> doBeforeマスタ更新(IKogakuGassanJSaiSyoriJyunbiMapperParameter parameter);
+    List<KogakuGassanJSaiSyoriJyunbiEntity> select高額合算自己負担額一時と明細データ();
 
     /**
      * 高額合算自己負担額のマスタ更新です。
      *
-     * @param parameter IKogakuGassanJSaiSyoriJyunbiMapperParameter
+     * @return List<DbWT37H2KogakuGassanaJikofutangakuMeisaiTempEntity>
      */
-    void doマスタ更新(IKogakuGassanJSaiSyoriJyunbiMapperParameter parameter);
+    List<DbWT37H2KogakuGassanaJikofutangakuMeisaiTempEntity> select連番();
 
     /**
      * 高額合算自己負担額のselect連番です。
      *
-     * @return DbWT37H1KogakuGassanaJikofutangakuTempEntity
+     * @return List<KogakuGassanJikofutangakuShomeishoDateEntity>
      */
-    List<DbWT37H1KogakuGassanaJikofutangakuTempEntity> select連番();
+    List<KogakuGassanJikofutangakuShomeishoDateEntity> get帳票出力対象データ();
 }

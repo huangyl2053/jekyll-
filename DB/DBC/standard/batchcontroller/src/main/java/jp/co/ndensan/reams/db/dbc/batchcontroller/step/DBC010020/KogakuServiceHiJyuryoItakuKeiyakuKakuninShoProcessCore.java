@@ -77,11 +77,12 @@ public class KogakuServiceHiJyuryoItakuKeiyakuKakuninShoProcessCore {
      * 介護保険高額Entityを共通項目に設定します。
      *
      * @param entity KogakuServiceHiJyuryoItakuKeiyakuKakuninShoEntity
-     * @param processParameter KogakuServicehiJuryoininKeiyakuShoninKakuninshoProcessParameter
+     * @param processParameter
+     * KogakuServicehiJuryoininKeiyakuShoninKakuninshoProcessParameter
      * @param 確認書認証者情報 NinshoshaSource
      * @param 通知文1 RString
      * @param 通知文2 RString
-     * @return　確認書Entity KogakuServiceHiJyuryoItakuKeiyakuKakuninShoEntity
+     * @return KogakuServiceHiJyuryoItakuKeiyakuKakuninShoEntity
      */
     public KogakuServiceHiJyuryoItakuKeiyakuKakuninShoEntity edit確認書Entity(KogakuServiceHiJyuryoItakuKeiyakuKakuninShoEntity entity,
             KogakuServicehiJuryoininProcessParameter processParameter, NinshoshaSource 確認書認証者情報,
@@ -105,7 +106,8 @@ public class KogakuServiceHiJyuryoItakuKeiyakuKakuninShoProcessCore {
      * 一覧表帳票のパラメータを設定します。
      *
      * @param entity JuryoIninShoninKakuninshoIchiranEntity
-     * @param processParameter KogakuServicehiJuryoininKeiyakuShoninKakuninshoProcessParameter
+     * @param processParameter
+     * KogakuServicehiJuryoininKeiyakuShoninKakuninshoProcessParameter
      * @param 導入団体クラス Association
      * @return JuryoIninShoninKakuninshoIchiranParameter
      */

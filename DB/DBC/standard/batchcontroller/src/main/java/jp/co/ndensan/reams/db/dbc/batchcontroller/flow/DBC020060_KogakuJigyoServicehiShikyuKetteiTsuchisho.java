@@ -5,12 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020060.InsertKogakuJigyoKetteiTsuchishoInfoTempProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020060.JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020060.JigyoKogakuShikyuFushikyuKetteTsuchiSakuseiProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020060.JigyoKogakuShoriKekkaKakuninListSakuseiProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020060.UpdateKogakuJigyoKetteiTsuchishoInfoTempProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020060.UpdateKogakuKaigoServicehiHanteiKekkaProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020060.InsertKogakuJigyoKetteiTsuchishoInfoTempProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020060.JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020060.JigyoKogakuShikyuFushikyuKetteTsuchiSakuseiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020060.JigyoKogakuShoriKekkaKakuninListSakuseiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020060.UpdateKogakuJigyoKetteiTsuchishoInfoTempProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020060.UpdateKogakuKaigoServicehiHanteiKekkaProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020060.DBC020060_KogakuJigyoServicehiShikyuKetteiTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehishikyuketteitsuchisho.KogakuKaigoServiceProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;

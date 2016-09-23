@@ -226,4 +226,22 @@ public class JukyushaDaichoManager {
         entity.initializeMd5();
         return new JukyushaDaicho(entity);
     }
+
+    /**
+     * 受給申請事由を返します。
+     *
+     * @param 市町村コード 市町村コード
+     * @param 被保険者番号 HihokenshaNo
+     * @return JukyushaDaicho
+     */
+    @Transaction
+    public RString get最大履歴番号(LasdecCode 市町村コード, HihokenshaNo 被保険者番号) {
+        requireNonNull(市町村コード, UrSystemErrorMessages.値がnull.getReplacedMessage("市町村コード"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(被保険者番号NEW.toString()));
+        DbT4001JukyushaDaichoEntity entity = dac.select受給者台帳情報(市町村コード, 被保険者番号);
+        if (entity == null) {
+            return null;
+        }
+        return entity.getRirekiNo();
+    }
 }

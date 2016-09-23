@@ -93,6 +93,7 @@ public class SaishinsaKetteiReportProcess extends BatchKeyBreakBase<SaishinsaKet
     private SaishinsaKetteiResultEntity beforeEntity;
     private IOutputOrder 並び順;
     private List<RString> 改頁項目リスト;
+    private List<RString> breakList;
     private int 連番;
 
     private CsvWriter<SaishinsaKetteitsuchishoCSVEntity> eucCsvWriter;
@@ -107,6 +108,7 @@ public class SaishinsaKetteiReportProcess extends BatchKeyBreakBase<SaishinsaKet
         personalDataList = new ArrayList<>();
         識別コードset = new HashSet<>();
         改頁項目リスト = new ArrayList<>();
+        breakList = new ArrayList<>();
         出力順Map = new HashMap<>();
         並び順 = get並び順();
         連番 = 0;
@@ -131,6 +133,7 @@ public class SaishinsaKetteiReportProcess extends BatchKeyBreakBase<SaishinsaKet
         for (ISetSortItem item : 並び順.get設定項目リスト()) {
             if (item.is改頁項目()) {
                 改頁項目リスト.add(item.get項目名());
+                breakList.add(item.get項目ID());
             }
             if (index == INDEX_1) {
                 出力順Map.put(KEY_並び順の２件目, item.get項目名());
@@ -151,14 +154,15 @@ public class SaishinsaKetteiReportProcess extends BatchKeyBreakBase<SaishinsaKet
     @Override
     protected IBatchReader createReader() {
 
-        SaishinsaKetteiHokenshaInParameter mybatisParm = new SaishinsaKetteiHokenshaInParameter(出力順);
+        SaishinsaKetteiHokenshaInParameter mybatisParm = new SaishinsaKetteiHokenshaInParameter();
+        mybatisParm.set出力順(出力順);
         return new BatchDbReader(MAPPERPATH, mybatisParm);
     }
 
     @Override
     protected void createWriter() {
 
-        PageBreaker<SaishinsaKetteitsuchishoTorikomiIchiranHokenshaBunSource> breaker = new SaishinsaKetteiHokenshaInPageBreak(改頁項目リスト);
+        PageBreaker<SaishinsaKetteitsuchishoTorikomiIchiranHokenshaBunSource> breaker = new SaishinsaKetteiHokenshaInPageBreak(breakList);
         batchReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200048.getReportId().value())
                 .addBreak(breaker).create();
         reportSourceWriter = new ReportSourceWriter<>(batchReportWriter);

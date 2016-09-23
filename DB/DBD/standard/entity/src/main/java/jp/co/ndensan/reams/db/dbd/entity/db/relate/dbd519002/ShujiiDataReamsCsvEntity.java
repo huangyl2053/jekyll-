@@ -42,7 +42,6 @@ public class ShujiiDataReamsCsvEntity {
      * @param 主治医医療機関コード 主治医医療機関コード
      * @param 主治医コード 主治医コード
      * @param 主治医氏名 主治医氏名
-     * @param 主治医カナ 主治医カナ
      * @param 状況フラグ 状況フラグ
      */
     public ShujiiDataReamsCsvEntity(

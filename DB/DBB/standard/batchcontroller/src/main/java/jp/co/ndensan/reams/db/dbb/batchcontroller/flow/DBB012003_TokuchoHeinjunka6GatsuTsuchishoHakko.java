@@ -1,15 +1,15 @@
 package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012003.FukaJohoShutokuIkatsuHakoProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012003.FukaJohoShutokuProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012003.FukaZennendoTempTblCreateProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012003.HihokenshaKubunTo4gatsuKaishiProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012003.HihokenshaKubunTo6gatsuKaishiProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012003.KeizokuHihokenshaKubunUpdateProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012003.SystemTimeShutokuProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012003.TsuchishoHakoA4TypeProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012003.TsuchishoHakoB5TypeProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012003.TsuchishoIdoshaTorokuProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012003.FukaJohoShutokuIkatsuHakoProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012003.FukaJohoShutokuProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012003.FukaZennendoTempTblCreateProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012003.HihokenshaKubunTo4gatsuKaishiProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012003.HihokenshaKubunTo6gatsuKaishiProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012003.KeizokuHihokenshaKubunUpdateProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012003.SystemTimeShutokuProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012003.TsuchishoHakoA4TypeProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012003.TsuchishoHakoB5TypeProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012003.TsuchishoIdoshaTorokuProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB012003.DBB012003_TokuchoHeinjunka6GatsuTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB003001.DBB003001_KeisangoJohoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.tokuchoheijunka6tsuchishoikatsuhako.OutputChohyoIchiran;

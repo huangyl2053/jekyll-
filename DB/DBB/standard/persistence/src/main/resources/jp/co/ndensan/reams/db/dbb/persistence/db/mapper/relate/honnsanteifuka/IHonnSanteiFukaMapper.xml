@@ -404,13 +404,7 @@
             ORDER BY "FukaCalculateTemp"."dbT2002_choteiNendo",
                      "FukaCalculateTemp"."dbT2002_fukaNendo",
                      "FukaCalculateTemp"."dbT2002_tsuchishoNo",
-                     "FukaCalculateTemp"."dbT2002_shikibetsuCode",
-                     "UrT0508SeikatsuHogoJukyusha"."shikibetsuCode",
-                     "UrT0508SeikatsuHogoJukyusha"."gyomuCode",
-                     "UrT0508SeikatsuHogoJukyusha"."jukyuKaishiYMD",
-                     DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_hihokenshaNo",
-                     DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_rirekiNo",
-                     DbT1006KyokaisoGaitosha."dbT1006KyokaisoGaitosha_linkNo"
+                     "FukaCalculateTemp"."dbT2002_shikibetsuCode"
     </select>
     
    <sql id="allColumns_UrT0526SeikatsuHogoFujoShurui">
@@ -1789,7 +1783,6 @@
         AND "DbT2015KeisangoJoho"."fukaNendo"=#{賦課年度}
         AND "DbT2015KeisangoJoho"."koseiZengoKubun"='2'
         AND "DbT2015KeisangoJoho"."sakuseiShoriName"='本算定賦課'
-        AND "DbT2015KeisangoJoho"."choteiNichiji"=#{調定日時}
         ${出力順}
     </select>
     

@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120130.KogakuGassanJSa
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120130.KogakuGassanJSaiSyoriJyunbiDoMasterProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120130.KogakuGassanJSaiSyoriJyunbiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120130.KogakuGassanJikofutangakuShomeishoIchiranhyoSakusei;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc640011.KogakuGassanJikofutangakuShomeishoInProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC640011.KogakuGassanJikofutangakuShomeishoInProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDeleteReveicedFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoHihokenshaKanrenProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoInterfaceKanriKousinProcess;

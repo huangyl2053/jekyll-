@@ -56,7 +56,7 @@ public class HanyoListKyodoJukyushaProcessParameter implements IBatchProcessPara
      * @return {@link HanyoListKagoKekkaMybatisParameter}
      */
     public HanyoListKyodoJukyushaMybatisParameter toMybatisParameter() {
-        return new HanyoListKyodoJukyushaMybatisParameter(処理対象年月FROM, 処理対象年月TO, 日付抽出区分, 範囲指定,
-                直近のみ, 異動年月FROM, 異動年月TO, 削除含める, 各異動月の最新のみ, searchKey, 異動区分S);
+        return new HanyoListKyodoJukyushaMybatisParameter(処理対象年月FROM, 処理対象年月TO, 日付抽出区分,
+                異動年月FROM, 異動年月TO, 削除含める, 各異動月の最新のみ, searchKey, 異動区分S);
     }
 }

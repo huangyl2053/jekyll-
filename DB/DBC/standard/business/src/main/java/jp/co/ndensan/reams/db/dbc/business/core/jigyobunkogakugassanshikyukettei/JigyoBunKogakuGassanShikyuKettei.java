@@ -47,6 +47,7 @@ import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IReportItems;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.Katagaki;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -54,6 +55,7 @@ import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
@@ -180,7 +182,7 @@ public class JigyoBunKogakuGassanShikyuKettei {
         }
         eucEntity.set保険者コード(association.get地方公共団体コード().value());
         eucEntity.set保険者名(association.get市町村名());
-        eucEntity.set空白(new RString(" "));
+        eucEntity.set空白(RString.HALF_SPACE);
         eucEntity.set被保険者番号(entity.get被保険者番号());
         eucEntity.set資格取得事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getCodeShubetsu(), entity.get資格取得事由コード()));
         eucEntity.set資格取得日(set日付編集(entity.get資格取得年月日()));
@@ -445,7 +447,7 @@ public class JigyoBunKogakuGassanShikyuKettei {
         }
         eucEntity.set保険者コード(association.get地方公共団体コード().value());
         eucEntity.set保険者名(association.get市町村名());
-        eucEntity.set空白(new RString(" "));
+        eucEntity.set空白(RString.HALF_SPACE);
         eucEntity.set被保険者番号(entity.get被保険者番号());
         eucEntity.set資格取得事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getCodeShubetsu(), entity.get資格取得事由コード()));
         eucEntity.set資格取得日(set日付編集(entity.get資格取得年月日()));
@@ -742,7 +744,7 @@ public class JigyoBunKogakuGassanShikyuKettei {
         RStringBuilder builder = new RStringBuilder();
         builder.append(住所);
         builder.append(番地);
-        builder.append(new RString("　"));
+        builder.append(RString.FULL_SPACE);
         builder.append(方書);
         return builder.toRString();
     }
@@ -798,7 +800,7 @@ public class JigyoBunKogakuGassanShikyuKettei {
             jokenBuilder.append(new RString("保険者："));
             RStringBuilder 市町村名builder = new RStringBuilder();
             市町村名builder.append(processParameter.get保険者コード());
-            市町村名builder.append(new RString(" "));
+            市町村名builder.append(RString.HALF_SPACE);
             市町村名builder.append(市町村名);
             jokenBuilder.append(市町村名builder.toRString());
         }
@@ -824,7 +826,7 @@ public class JigyoBunKogakuGassanShikyuKettei {
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(new RString("金融機関："));
         jokenBuilder.append(processParameter.get金融機関コード());
-        jokenBuilder.append(new RString(" "));
+        jokenBuilder.append(RString.HALF_SPACE);
         jokenBuilder.append(processParameter.get金融機関名());
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
@@ -855,17 +857,21 @@ public class JigyoBunKogakuGassanShikyuKettei {
                 KensakuYusenKubun.未定義, AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBC介護給付));
         UaFt250FindAtesakiFunction uaFt250Psm = new UaFt250FindAtesakiFunction(atenaSearchKeyBuilder.build().get宛先検索キー());
         KozaSearchKeyBuilder keyBuilder = new KozaSearchKeyBuilder();
-        keyBuilder.set業務コード(GyomuCode.DB介護保険);
-        keyBuilder.setサブ業務コード(SubGyomuCode.DBC介護給付);
+        KozaSearchKeyBuilder searchKey = new KozaSearchKeyBuilder();
+        searchKey.set業務コード(GyomuCode.DB介護保険);
+        searchKey.setサブ業務コード(SubGyomuCode.DBC介護給付);
+        searchKey.set基準日(new FlexibleDate(RDate.getNowDate().toDateString()));
+        List<KamokuCode> kamokuList = new ArrayList<>();
         IKozaSearchKey iKozaSearchKey = keyBuilder.build();
-        return JigyoBunKogakuGassanShikyuKetteiMybatisParameter.createMybatisParameter(processParameter.get保険者コード(),
+        return JigyoBunKogakuGassanShikyuKetteiMybatisParameter.createMybatisParameter(iKozaSearchKey,
+                kamokuList,
+                processParameter.get保険者コード(),
                 processParameter.get対象年度(),
                 processParameter.get支給区分List(),
                 processParameter.get支払方法区分List(),
                 processParameter.get金融機関コード(),
                 new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString()),
                 new RString(uaFt250Psm.getParameterMap().get("psmAtesaki").toString()),
-                iKozaSearchKey,
                 出力順);
     }
 
@@ -896,10 +902,8 @@ public class JigyoBunKogakuGassanShikyuKettei {
         市町村コード(new RString("0016"), new RString(""), new RString("\"shichosonCode\"")),
         /**
          * 証記載保険者番号
-         *
-         * TODO QA1685 出力順について、ご提供した資料「帳票出力順管理.xls」より、取得した出力順項目はDB検索SQLで下記の項目がない
          */
-        証記載保険者番号(new RString("0103"), new RString(""), new RString("\"shoKisaiHokenshaNo\"")),
+        証記載保険者番号(new RString("0103"), new RString(""), new RString("\"hihokenshaNo\"")),
         /**
          * 被保険者番号
          */
@@ -910,14 +914,10 @@ public class JigyoBunKogakuGassanShikyuKettei {
         要介護度(new RString("0403"), new RString(""), new RString("\"yokaigoJotaiKubunCode\"")),
         /**
          * 認定開始日
-         *
-         * TODO QA1685 出力順について、ご提供した資料「帳票出力順管理.xls」より、取得した出力順項目はDB検索SQLで下記の項目がない
          */
-        認定開始日(new RString("0411"), new RString(""), new RString("\"ninteiKaishiYMD\"")),
+        認定開始日(new RString("0411"), new RString(""), new RString("\"ninteiYukoKikanKaishiYMD\"")),
         /**
          * 整理番号
-         *
-         * TODO QA1685 出力順について、ご提供した資料「帳票出力順管理.xls」より、取得した出力順項目はDB検索SQLで下記の項目がない
          */
         整理番号(new RString("0305"), new RString(""), new RString("shikyuSeiriNo\"")),
         /**
@@ -927,9 +927,8 @@ public class JigyoBunKogakuGassanShikyuKettei {
         /**
          * 通知書作成日
          *
-         * TODO QA1685 出力順について、ご提供した資料「帳票出力順管理.xls」より、取得した出力順項目はDB検索SQLで下記の項目がない
          */
-        通知書作成日(new RString("0410"), new RString(""), new RString("tsuchishoSakuseiYMD\""));
+        通知書作成日(new RString("0410"), new RString(""), new RString("ketteiTsuchiSakuseiYMD\""));
 
         private final RString 項目ID;
         private final RString フォームフィールド名;

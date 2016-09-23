@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc160020.ServicecodeIchiranProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC160020.ServicecodeIchiranProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC160020.DBC160020_ServicecodeIchiranParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.servicecodeichiran.ServicecodeIchiranProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;

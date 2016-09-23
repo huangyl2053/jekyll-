@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120160.KagoKetteiHokenshaDoIchiranhyoSakuseiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120160.KagoKetteiHokenshaDoIchiranhyoSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120170.KohifutanshaDoMasterTorokuProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120840.SogojigyohiKagoKetteiHokenshaReadCsvFileProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120840.SogojigyohiKagoKetteiHokenshaReadCsvFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDeleteReveicedFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoHihokenshaKanrenProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoInterfaceKanriKousinProcess;
