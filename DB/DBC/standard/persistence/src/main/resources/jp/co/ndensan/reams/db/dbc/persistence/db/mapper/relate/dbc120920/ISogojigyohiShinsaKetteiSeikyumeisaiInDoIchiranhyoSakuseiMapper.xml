@@ -8,7 +8,9 @@
 
     <select id="get帳票出力対象データ" 
             resultMap="resultMap_SogojigyohiShinsaKetteiSeikyumeisaiInEntity" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kokuhorenkyoutsuu.KokuhorenIchiranhyoMybatisParameter" fetchSize="500" resultOrdered="true">
-        SELECT *
+        SELECT ROW_NUMBER () over() AS rowNumber,T.*
+        FROM
+        (SELECT *
         FROM 
         "DbWT1611SinsaKetteiSeikyuMeisai"
         INNER JOIN 
@@ -17,11 +19,12 @@
         INNER JOIN
         "DbWT1613SinsaKetteiSeikyuGokei"
         ON "DbWT1611SinsaKetteiSeikyuMeisai"."meisaiRirekiNo" = "DbWT1613SinsaKetteiSeikyuGokei"."gokeiRirekiNo"
-        ${出力順}
+        ${出力順}) AS T
     </select>
     
     
     <resultMap id="resultMap_SogojigyohiShinsaKetteiSeikyumeisaiInEntity" type="jp.co.ndensan.reams.db.dbc.entity.csv.dbc120920.SogojigyohiShinsaKetteiSeikyumeisaiInEntity" autoMapping="true">
+        <id column="rowNumber"/>
         <id column="meisaiRirekiNo"/>
         <association property="審査決定請求明細一時TBL" resultMap="resultMap_DbWT1611SinsaKetteiSeikyuMeisaiEntity"/>
         <association property="審査決定請求高額一時TBL" resultMap="resultMap_DbWT1612SinsaKetteiSeikyuKogakuEntity"/>
