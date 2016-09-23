@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.IYokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.IValueObject;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -147,6 +148,9 @@ public class KyufuKanrihyoTorikomiKekkaIchiranBodyEditor implements IKyufuKanrih
         }
         if (導入形態コード.is広域()) {
             source.listLower_3 = getColumnValue(被保険者.get証記載保険者番号());
+        }
+        if (!RString.isNullOrEmpty(被保険者.get識別コード())) {
+            source.shikibetuCode = new ShikibetsuCode(被保険者.get識別コード());
         }
     }
 

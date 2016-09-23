@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinkekkaichiran;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
@@ -55,8 +56,9 @@ public class KyufujissekiKoshinkekkaIchiranSource implements IReportSource {
     public RString listUpper_3;
     @ReportItem(name = "listUpper_4", length = 2, order = 18)
     public RString listUpper_4;
-    @ReportPerson(id = "A")
-    @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
+    @ReportPerson(id = "X")
+    public ShikibetsuCode shikibetuCode;
+    @ReportExpandedInfo(id = "X", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listUpper_5", length = 10, order = 19)
     public RString listUpper_5;
     @ReportItem(name = "listUpper_6", length = 30, order = 20)
@@ -107,13 +109,25 @@ public class KyufujissekiKoshinkekkaIchiranSource implements IReportSource {
     public RString gokeiKensuTitle;
     @ReportItem(name = "gokeiKensu", length = 8, order = 43)
     public RString gokeiKensu;
+    @ReportItem(name = "yubinNo", length = 10, order = 68)
+    public RString yubinNo;
+    @ReportItem(name = "choikiCode", length = 10, order = 69)
+    public RString choikiCode;
+    @ReportItem(name = "gyoseikuCode", length = 10, order = 70)
+    public RString gyoseikuCode;
+    @ReportItem(name = "shimei50onKana", length = 10, order = 71)
+    public RString shimei50onKana;
+    @ReportItem(name = "shichosonCode", length = 10, order = 72)
+    public RString shichosonCode;
+    @ReportItem(name = "kyufuJissekiKubun", length = 10, order = 73)
+    public RString kyufuJissekiKubun;
+
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
-
     /**
      * TokubetsuChoshuKaishiTsuchishoKariHakkoIchiranSourceのenum
      */
@@ -161,6 +175,12 @@ public class KyufujissekiKoshinkekkaIchiranSource implements IReportSource {
         listLower_2,
         listLower_3,
         gokeiKensuTitle,
-        gokeiKensu
+        gokeiKensu,
+        kyufuJissekiKubun,
+        yubinNo,
+        choikiCode,
+        gyoseikuCode,
+        shimei50onKana,
+        shichosonCode
     }
 }
