@@ -58,6 +58,8 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
     private static final RString 起動 = new RString("1");
     private static final RString 停止 = new RString("0");
     private static final RString 連絡票を = new RString("btnUpdate");
+    private static final RString 新規データを削除しようとしています = new RString("新規データを削除しようとしています");
+    private static final RString 終了データを削除しようとしています = new RString("終了データを削除しようとしています");
 
     /**
      * 画面初期化です。
@@ -120,6 +122,35 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanel {
         if (THREE.equals(受給者訂正連絡票登録画面Div.get訂正区分コード())) {
             ViewStateHolder.put(ViewStateKeys.利用モード, 照会モード);
         }
+//        if (TWO.equals(result.get警告メッセージコード_新規())) {
+//            if (!ResponseHolder.isReRequest()
+//                    && !new RString(DbzWarningMessages.確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+//                    && !new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+//                WarningMessage message = new WarningMessage(
+//                        DbzWarningMessages.確認.getMessage().getCode(),
+//                        DbzWarningMessages.確認.getMessage().
+//                        replace(新規データを削除しようとしています.toString()).evaluate());
+//                return ResponseData.of(div).addMessage(message).respond();
+//            }
+//            if (new RString(DbzWarningMessages.確認.getMessage().getCode())
+//                    .equals(ResponseHolder.getMessageCode())
+//                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+//                result.setエラー有無(1);
+//            }
+//        } else if (TWO.equals(result.get警告メッセージコード_終了())) {
+//            if (!ResponseHolder.isReRequest()) {
+//                WarningMessage message = new WarningMessage(
+//                        DbzWarningMessages.確認.getMessage().getCode(),
+//                        DbzWarningMessages.確認.getMessage().
+//                        replace(終了データを削除しようとしています.toString()).evaluate());
+//                return ResponseData.of(div).addMessage(message).respond();
+//            }
+//            if (new RString(DbzWarningMessages.確認.getMessage().getCode())
+//                    .equals(ResponseHolder.getMessageCode())
+//                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+//                result.setエラー有無(1);
+//            }
+//        }
         if (0 == result.getエラー有無()) {
             div.getHdnFlag().setValue(起動);
         } else {
