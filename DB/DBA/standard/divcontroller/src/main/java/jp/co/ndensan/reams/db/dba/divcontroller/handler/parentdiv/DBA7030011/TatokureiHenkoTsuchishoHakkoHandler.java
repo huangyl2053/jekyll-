@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA7030011;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.tajushochitokureisyakanri.TaJushochiTokureisyaKanriMaster;
-import jp.co.ndensan.reams.db.dba.definition.reportid.ReportIdDBA;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7030011.TatokureiHenkoTsuchishoHakkoDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA7030011.dgJushochiTokureiRireki_Row;
 import jp.co.ndensan.reams.db.dba.service.core.tashichosonjushochitokureisharenrakuhyo.TashichosonJushochitokureishaRenrakuhyoFinder;
