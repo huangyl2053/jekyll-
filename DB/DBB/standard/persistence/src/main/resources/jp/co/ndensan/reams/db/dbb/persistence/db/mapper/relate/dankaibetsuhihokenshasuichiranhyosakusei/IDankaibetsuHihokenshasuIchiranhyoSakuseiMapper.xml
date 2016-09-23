@@ -25,10 +25,10 @@
                 AND ("shikakuSoshitsuYMD" IS NULL
                 OR #{資格基準日}<![CDATA[<=]]> "shikakuSoshitsuYMD")
                 <if test="市町村コード">
-                    AND ("koikinaiJushochiTokureiFlag" ='1' AND "koikinaiTokureiSochimotoShichosonCode" IN
+                    AND ("koikinaiJushochiTokureiFlag" ='1' AND "tokureiSochimotoShichosonCode" IN
                     <foreach collection="市町村コードList" item="市町村コード" open="(" separator="," close=")"> #{市町村コード} </foreach>
                     )
-                    OR ("koikinaiJushochiTokureiFlag" ='0' AND "koikinaiTokureiSochimotoShichosonCode" IN
+                    OR ("koikinaiJushochiTokureiFlag" ='0' AND "tokureiSochimotoShichosonCode" IN
                     <foreach collection="市町村コードList" item="市町村コード" open="(" separator="," close=")"> #{市町村コード} </foreach>
                     )
                 </if>
@@ -60,13 +60,13 @@
             "HihokenshaTaihoTemp"."shikakuHenkoTodokedeYMD" AS HihokenshaTaihoTemp_shikakuHenkoTodokedeYMD,
             "HihokenshaTaihoTemp"."jushochitokureiTekiyoJiyuCode" AS HihokenshaTaihoTemp_jushochitokureiTekiyoJiyuCode,
             "HihokenshaTaihoTemp"."jushochitokureiTekiyoYMD" AS HihokenshaTaihoTemp_jushochitokureiTekiyoYMD,
-            "HihokenshaTaihoTemp"."jushochitokureiTekiyoTodokedeYMD" AS HihokenshaTaihoTemp_jushochitokureiTekiyoTodokedeYMD,
+            "HihokenshaTaihoTemp"."tokureiTekiyoTodokedeYMD" AS HihokenshaTaihoTemp_tokureiTekiyoTodokedeYMD,
             "HihokenshaTaihoTemp"."jushochitokureiKaijoJiyuCode" AS HihokenshaTaihoTemp_jushochitokureiKaijoJiyuCode,
             "HihokenshaTaihoTemp"."jushochitokureiKaijoYMD" AS HihokenshaTaihoTemp_jushochitokureiKaijoYMD,
             "HihokenshaTaihoTemp"."jushochitokureiKaijoTodokedeYMD" AS HihokenshaTaihoTemp_jushochitokureiKaijoTodokedeYMD,
             "HihokenshaTaihoTemp"."jushochiTokureiFlag" AS HihokenshaTaihoTemp_jushochiTokureiFlag,
             "HihokenshaTaihoTemp"."koikinaiJushochiTokureiFlag" AS HihokenshaTaihoTemp_koikinaiJushochiTokureiFlag,
-            "HihokenshaTaihoTemp"."koikinaiTokureiSochimotoShichosonCode" AS HihokenshaTaihoTemp_koikinaiTokureiSochimotoShichosonCode,
+            "HihokenshaTaihoTemp"."tokureiSochimotoShichosonCode" AS HihokenshaTaihoTemp_tokureiSochimotoShichosonCode,
             "HihokenshaTaihoTemp"."kyuShichosonCode" AS HihokenshaTaihoTemp_kyuShichosonCode,
             "HihokenshaTaihoTemp"."logicalDeletedFlag" AS HihokenshaTaihoTemp_logicalDeletedFlag,
             "HihokenshaTaihoTemp"."outPutShichosonCode" AS HihokenshaTaihoTemp_outPutShichosonCode,
@@ -272,13 +272,13 @@
         <result property="shikakuHenkoTodokedeYMD" column="HihokenshaTaihoTemp_shikakuHenkoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="jushochitokureiTekiyoJiyuCode" column="HihokenshaTaihoTemp_jushochitokureiTekiyoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jushochitokureiTekiyoYMD" column="HihokenshaTaihoTemp_jushochitokureiTekiyoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
-        <result property="jushochitokureiTekiyoTodokedeYMD" column="HihokenshaTaihoTemp_jushochitokureiTekiyoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="tokureiTekiyoTodokedeYMD" column="HihokenshaTaihoTemp_tokureiTekiyoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="jushochitokureiKaijoJiyuCode" column="HihokenshaTaihoTemp_jushochitokureiKaijoJiyuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jushochitokureiKaijoYMD" column="HihokenshaTaihoTemp_jushochitokureiKaijoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="jushochitokureiKaijoTodokedeYMD" column="HihokenshaTaihoTemp_jushochitokureiKaijoTodokedeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="jushochiTokureiFlag" column="HihokenshaTaihoTemp_jushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="koikinaiJushochiTokureiFlag" column="HihokenshaTaihoTemp_koikinaiJushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="koikinaiTokureiSochimotoShichosonCode" column="HihokenshaTaihoTemp_koikinaiTokureiSochimotoShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <result property="tokureiSochimotoShichosonCode" column="HihokenshaTaihoTemp_tokureiSochimotoShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="kyuShichosonCode" column="HihokenshaTaihoTemp_kyuShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="logicalDeletedFlag" column="HihokenshaTaihoTemp_logicalDeletedFlag" />
         <result property="outPutShichosonCode" column="HihokenshaTaihoTemp_outPutShichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

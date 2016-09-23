@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb314001.GemmenProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB314001.GemmenProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB004001.DBB004001_FukaJohoTorokuParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB314001.DBB314001_GemmenParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;

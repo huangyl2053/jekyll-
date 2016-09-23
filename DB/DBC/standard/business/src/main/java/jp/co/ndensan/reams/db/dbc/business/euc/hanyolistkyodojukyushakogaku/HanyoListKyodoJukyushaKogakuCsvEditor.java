@@ -7,17 +7,20 @@ package jp.co.ndensan.reams.db.dbc.business.euc.hanyolistkyodojukyushakogaku;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_IdoKubunCode;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_JukyushaIdoJiyu;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_KyodoKogakuSetaiShotokuKubunCode;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_KyodoKogakuShotokuKubunCode;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc710060.HanyoListKyodoJukyushaKogakuProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc710060.HanyoListKyodoJukyushaKogakuEntity;
+import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -167,14 +170,16 @@ public class HanyoListKyodoJukyushaKogakuCsvEditor {
      *
      * @param entity HanyoListKyodoJukyushaKogakuEntity
      * @param param HanyoListKyodoJukyushaKogakuProcessParameter
+     * @param 構成市町村マスタ Map<LasdecCode, KoseiShichosonMaster>
      * @param 地方公共団体情報 Association
      * @param 連番 int
      * @return {@link List<RString>}
      */
-    public List<RString> setBodyList(HanyoListKyodoJukyushaKogakuEntity entity,
-            HanyoListKyodoJukyushaKogakuProcessParameter param, Association 地方公共団体情報, int 連番) {
+    public List<RString> setBodyList(HanyoListKyodoJukyushaKogakuEntity entity, HanyoListKyodoJukyushaKogakuProcessParameter param,
+            Map<LasdecCode, KoseiShichosonMaster> 構成市町村マスタ, Association 地方公共団体情報, int 連番) {
         List<RString> bodyList = new ArrayList<>();
         IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.get宛名());
+        DbT1001HihokenshaDaichoEntity 被保険者台帳管理 = entity.get被保険者台帳管理();
         if (param.is連番付加()) {
             bodyList.add(new RString(連番));
         }
@@ -239,9 +244,11 @@ public class HanyoListKyodoJukyushaKogakuCsvEditor {
         bodyList.add(kojin.get転入前().get番地().getBanchi().getColumnValue());
         bodyList.add(kojin.get転入前().get方書().getColumnValue());
         bodyList.add(entity.get被保険者台帳管理().getShichosonCode().getColumnValue());
-        Association association = AssociationFinderFactory.
-                createInstance().getAssociation(entity.get被保険者台帳管理().getShichosonCode());
-        bodyList.add(association.get市町村名());
+        if (構成市町村マスタ.containsKey(被保険者台帳管理.getShichosonCode())) {
+            bodyList.add(構成市町村マスタ.get(被保険者台帳管理.getShichosonCode()).get市町村名称());
+        } else {
+            bodyList.add(RString.EMPTY);
+        }
         bodyList.add(地方公共団体情報.getLasdecCode_().getColumnValue());
         bodyList.add(地方公共団体情報.get市町村名());
         bodyList.add(RString.HALF_SPACE);

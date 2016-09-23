@@ -84,4 +84,18 @@ public class DbT4121ShinseiRirekiJohoDac implements ISaveable<DbT4121ShinseiRire
         //return DbAccessors.saveByForDeletePhysical(new DbAccessorNormalType(session), entity);
         return DbAccessors.saveBy(new DbAccessorNormalType(session), entity);
     }
+
+    /**
+     * 主キーで申請履歴情報を取得します。
+     *
+     * @param entity entity
+     *
+     * @return DbT4121ShinseiRirekiJohoEntity
+     */
+    @Transaction
+    public int deletePhysical(DbT4121ShinseiRirekiJohoEntity entity) {
+        requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("申請履歴情報エンティティ"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+        return accessor.deletePhysical(entity).execute();
+    }
 }

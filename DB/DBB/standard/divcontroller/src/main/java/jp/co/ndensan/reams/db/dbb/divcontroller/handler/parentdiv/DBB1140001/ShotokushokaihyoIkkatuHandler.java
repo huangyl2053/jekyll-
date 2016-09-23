@@ -8,9 +8,9 @@ package jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB1140001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbb.business.core.saihakkofinder.SaiHakko;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB114001.DBB114001_ShotokuShokaihyoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.shotokushokaihyohakko.KoikiZenShichosonJohoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.shotokushokaihyohakko.SaiHakkoParameter;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.shotokushokaihyohakko.ShotokuShokaihyoHakkoBatchParameter;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1140001.ShotokushokaihyoIkkatuDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB1140001.dgSaihakko_Row;
 import jp.co.ndensan.reams.db.dbb.service.core.saihakkofinder.SaiHakkoFinder;
@@ -168,11 +168,11 @@ public class ShotokushokaihyoIkkatuHandler {
      * @param div ShotokushokaihyoIkkatuDiv
      * @param テストプリント boolean
      * @param 再発行する boolean
-     * @return ShotokuShokaihyoHakkoBatchParameter
+     * @return DBB114001_ShotokuShokaihyoHakkoParameter
      */
-    public ShotokuShokaihyoHakkoBatchParameter getParameter(ShotokushokaihyoIkkatuDiv div, boolean テストプリント,
+    public DBB114001_ShotokuShokaihyoHakkoParameter getParameter(ShotokushokaihyoIkkatuDiv div, boolean テストプリント,
             boolean 再発行する) {
-        ShotokuShokaihyoHakkoBatchParameter parameter = new ShotokuShokaihyoHakkoBatchParameter();
+        DBB114001_ShotokuShokaihyoHakkoParameter parameter = new DBB114001_ShotokuShokaihyoHakkoParameter();
         RYear 処理年度 = new RYear(div.getDdlShoriNendo().getSelectedKey());
         parameter.set処理年度(new FlexibleYear(new RString(処理年度.toString())));
         RDate 照会日 = div.getTxtShokaiYMD().getValue();

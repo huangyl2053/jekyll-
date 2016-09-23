@@ -26,7 +26,6 @@ public class KyodoIdoRenrakuhyoHenkoDetailDiv extends Panel {
      */
     @JsonProperty ("KyodoIdoRenrakuhyoHenkoDetailInfo")
     private KyodoJukyushaIdoRenrakuhyoDiv KyodoIdoRenrakuhyoHenkoDetailInfo;
-
     /*
      * [ GetterとSetterの作成 ]
      * クライアント側から取得した情報を元に検索を行い
@@ -37,6 +36,7 @@ public class KyodoIdoRenrakuhyoHenkoDetailDiv extends Panel {
      * getKyodoIdoRenrakuhyoHenkoDetailInfo
      * @return KyodoIdoRenrakuhyoHenkoDetailInfo
      */
+
     @JsonProperty ("KyodoIdoRenrakuhyoHenkoDetailInfo")
     public IKyodoJukyushaIdoRenrakuhyoDiv getKyodoIdoRenrakuhyoHenkoDetailInfo() {
         return KyodoIdoRenrakuhyoHenkoDetailInfo;
