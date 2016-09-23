@@ -3,20 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.dbc180010;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180010.HanteiTaishoshaTempProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180010.HanteiTaishoshaTuikaTempProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180010.JukyushaTaichoTempProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180010.RiyoshaFutanWariaiDeleteProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180010.RiyoshaFutanWariaiKonkyoDeleteProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180010.RiyoshaFutanWariaiMeisaiDeleteProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180010.ShoriDateKanriProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180010.ShoriKekkaKakuninListProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180010.SinseicyuDateDeleteProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180010.SogoJigyoTaishoshaTempProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180010.HanteiTaishoshaTempProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180010.HanteiTaishoshaTuikaTempProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180010.JukyushaTaichoTempProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180010.RiyoshaFutanWariaiDeleteProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180010.RiyoshaFutanWariaiKonkyoDeleteProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180010.RiyoshaFutanWariaiMeisaiDeleteProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180010.ShoriDateKanriProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180010.ShoriKekkaKakuninListProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180010.SinseicyuDateDeleteProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180010.SogoJigyoTaishoshaTempProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180020.DBC180020_IdoRiyoshaFutanwariaiHanteiParameter;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.nenjiriyoshafutanwariaihantei.DBC180010_NenjiRiyoshaFutanwariaiHanteiParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180010.DBC180010_NenjiRiyoshaFutanwariaiHanteiParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
