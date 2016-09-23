@@ -28,6 +28,7 @@ public class KoseiTaishoJissekiIchiranEntity {
     private FlexibleYearMonth サービス提供年月;
     private RString 市町村名;
     private RString 氏名;
+    private RString データ区分;
     private RString 入力識別番号;
     private RString 事業者番号;
     private RString 整理番号;
