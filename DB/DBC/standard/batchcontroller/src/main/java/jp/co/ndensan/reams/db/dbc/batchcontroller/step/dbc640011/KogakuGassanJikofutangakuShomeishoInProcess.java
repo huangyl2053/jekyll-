@@ -92,7 +92,7 @@ public class KogakuGassanJikofutangakuShomeishoInProcess extends BatchProcessBas
     private KogakuGassanJikofutangakuShomeishoInProcessParamerter parameter;
 
     private DbWT37H1KogakuGassanaJikofutangakuTempEntity dbWT37H1TempEntity;
-    private DbWT37H2KogakuGassanaJikofutangakuMeisaiTempEntity dbWT37H2TempEntity;
+    private DbWT37H2KogakuGassanaJikofutangakuMeisaiTempEntity dbWT37J1TempEntity;
     private DbWT0001HihokenshaEntity dbWT0001TempEntity;
     private KogakuGassanJikofutangakuShomeishoInCsvEntity csvEntity;
     private KagoKetteiHokenshaInControlCsvEntity controlCsvEntity;
@@ -118,8 +118,7 @@ public class KogakuGassanJikofutangakuShomeishoInProcess extends BatchProcessBas
         csvReaderPath = parameter.getPath().concat(File.separator).concat(parameter.getFileName());
         returnEntity = new KogakuGassanJikofutangakuShomeishoFlowEntity();
         flowEntity = new OutputParameter<>();
-        dbWT37H1TempEntity = new DbWT37H1KogakuGassanaJikofutangakuTempEntity();
-        dbWT37H2TempEntity = new DbWT37H2KogakuGassanaJikofutangakuMeisaiTempEntity();
+
         dbWT0001TempEntity = new DbWT0001HihokenshaEntity();
     }
 
@@ -154,14 +153,14 @@ public class KogakuGassanJikofutangakuShomeishoInProcess extends BatchProcessBas
             } else if (交換情報識別番号_37H1.equals(data.get(INDEX_2))) {
                 csvEntity = ListToObjectMappingHelper.toObject(KogakuGassanJikofutangakuShomeishoInCsvEntity.class, data);
                 renban = renban + 1;
-                set高額合算自己負担額一時TBL(dbWT37H1TempEntity, renban, csvEntity);
-                set高額合算自己負担額明細一時TBL(dbWT37H2TempEntity, renban, csvEntity);
+                set高額合算自己負担額一時TBL(renban, csvEntity);
+                set高額合算自己負担額明細一時TBL(renban, csvEntity);
                 set被保険者一時TBL(dbWT0001TempEntity, renban, csvEntity);
             } else if (交換情報識別番号_37J1.equals(data.get(INDEX_2))) {
                 csvEntity = ListToObjectMappingHelper.toObject(KogakuGassanJikofutangakuShomeishoInCsvEntity.class, data);
                 renban = renban + 1;
-                set高額合算自己負担額明細一時TBL(dbWT37H2TempEntity, renban, csvEntity);
-                set高額合算自己負担額一時TBL(dbWT37H1TempEntity, renban, csvEntity);
+                set高額合算自己負担額明細一時TBL(renban, csvEntity);
+                set高額合算自己負担額一時TBL(renban, csvEntity);
                 set被保険者一時TBL(dbWT0001TempEntity, renban, csvEntity);
             }
         }
@@ -186,9 +185,8 @@ public class KogakuGassanJikofutangakuShomeishoInProcess extends BatchProcessBas
         flowEntity.setValue(returnEntity);
     }
 
-    private void set高額合算自己負担額一時TBL(DbWT37H1KogakuGassanaJikofutangakuTempEntity dbWT37H1TempEntity,
-            int renban, KogakuGassanJikofutangakuShomeishoInCsvEntity csvEntity) {
-
+    private void set高額合算自己負担額一時TBL(int renban, KogakuGassanJikofutangakuShomeishoInCsvEntity csvEntity) {
+        dbWT37H1TempEntity = new DbWT37H1KogakuGassanaJikofutangakuTempEntity();
         dbWT37H1TempEntity.setRenban(renban);
         RString 被保険者番号 = csvEntity.get被保険者_証_番号();
         RString 保険者番号 = csvEntity.get保険者番号();
@@ -268,8 +266,9 @@ public class KogakuGassanJikofutangakuShomeishoInProcess extends BatchProcessBas
         高額合算自己負担額一時tableWriter.insert(dbWT37H1TempEntity);
     }
 
-    private void set高額合算自己負担額明細一時TBL(DbWT37H2KogakuGassanaJikofutangakuMeisaiTempEntity dbWT37J1TempEntity,
+    private void set高額合算自己負担額明細一時TBL(
             int renban, KogakuGassanJikofutangakuShomeishoInCsvEntity csvEntity) {
+        dbWT37J1TempEntity = new DbWT37H2KogakuGassanaJikofutangakuMeisaiTempEntity();
         dbWT37J1TempEntity.setRenban(renban);
         RString 被保険者番号 = csvEntity.get被保険者_証_番号();
         RString 保険者番号 = csvEntity.get保険者番号();
@@ -288,8 +287,8 @@ public class KogakuGassanJikofutangakuShomeishoInProcess extends BatchProcessBas
         dbWT37J1TempEntity.setSumi_under_70KogakuShikyuGaku(Decimal.ZERO);
         dbWT37J1TempEntity.setSumi_70_74KogakuShikyuGaku(Decimal.ZERO);
         dbWT37J1TempEntity.setSumi_Tekiyo(RString.EMPTY);
-        dbWT37J1TempEntity.setJikoFutangakuSaiFlag(true);
-        set対象年度月分の情報(dbWT37H2TempEntity, csvEntity);
+        dbWT37J1TempEntity.setJikoFutangakuSaiFlag(false);
+        set対象年度月分の情報(dbWT37J1TempEntity, csvEntity);
     }
 
     private void set被保険者一時TBL(DbWT0001HihokenshaEntity dbWT0001TempEntity,

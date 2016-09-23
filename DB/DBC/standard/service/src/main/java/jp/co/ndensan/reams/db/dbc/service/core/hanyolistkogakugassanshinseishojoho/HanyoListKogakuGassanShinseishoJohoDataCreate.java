@@ -529,10 +529,10 @@ public class HanyoListKogakuGassanShinseishoJohoDataCreate {
         if (entity.get受給者台帳_受給申請事由() != null) {
             受給申請事由コード = entity.get受給者台帳_受給申請事由();
         }
-        return getJukyuShinseiJiyu(受給申請事由コード, 受給申請事由, entity.get受給者台帳_要支援者認定申請区分());
+        return getJukyuShinseiJiyu(受給申請事由コード, entity.get受給者台帳_要支援者認定申請区分());
     }
 
-    private RString getJukyuShinseiJiyu(RString 受給申請事由コード, RString 受給申請事由, RString 要支援者認定申請区分) {
+    private RString getJukyuShinseiJiyu(RString 受給申請事由コード, RString 要支援者認定申請区分) {
         if (JukyuShinseiJiyu.初回申請.getコード().equals(受給申請事由コード)) {
             return 受給申請事由_初回申請;
         } else if (JukyuShinseiJiyu.再申請_有効期限内.getコード().equals(受給申請事由コード)) {
