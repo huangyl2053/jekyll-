@@ -59,11 +59,12 @@ public class HanyoListSaishinsaKekkaProcess extends BatchProcessBase<HanyoListSa
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBC701012");
     private static final RString コンマ = new RString(",");
     private static final RString ダブル引用符 = new RString("\"");
-    private static final RString FILENAME = new RString("HanyoList_SaishinsaMoshitate.csv");
+    private static final RString FILENAME = new RString("HanyoList_SaishinsaKekka.csv");
     private static final RString BATCHCSV = new RString("汎用リスト 再審査結果情報CSV");
     private static final RString 保険者コード_全市町村 = new RString("000000");
     private static final RString 市町村名_全市町村 = new RString("全市町村");
     private static final int NUM5 = 5;
+    private static final RString ZERO = new RString("0");
     private int 連番 = 1;
     private FileSpoolManager manager;
     private RString eucFilePath;
@@ -157,7 +158,7 @@ public class HanyoListSaishinsaKekkaProcess extends BatchProcessBase<HanyoListSa
 
     private RString get出力件数(Decimal 出力件数) {
         if (!flag) {
-            return new RString("0");
+            return ZERO;
         }
         RString 保険者コード = processParameter.getHokenshacode().value();
         if (保険者コード_全市町村.equals(保険者コード)) {

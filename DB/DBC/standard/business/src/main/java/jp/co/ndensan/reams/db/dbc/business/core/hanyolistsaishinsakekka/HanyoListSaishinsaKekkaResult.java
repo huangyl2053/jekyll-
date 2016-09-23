@@ -85,6 +85,18 @@ public class HanyoListSaishinsaKekkaResult {
     private static final RString サービス提供年月 = new RString("サービス提供年月：");
     private static final RString 事業者番号 = new RString("事業者番号：");
     private static final RString みなし = new RString("みなし");
+    private static final RString 保険者区分値 = new RString("保険者区分：　");
+    private static final RString 保険者分_CHECKNASHI = new RString("□保険者分");
+    private static final RString 公費負担者_CHECKNASHI = new RString("　　□公費負担者分");
+    private static final RString 保険者_総合事業費_CHECKNASHI = new RString("　　□総合事業費（保険者）分");
+    private static final RString 公費負担者_総合事業費_CHECKNASHI = new RString("　　□総合事業費（公費負担者）分");
+    private static final RString 保険者分_CHECKARU = new RString("■保険者分");
+    private static final RString 公費負担者_CHECKARU = new RString("　　■公費負担者分");
+    private static final RString 保険者_総合事業費_CHECKARU = new RString("　　■総合事業費（保険者）分");
+    private static final RString 公費負担者_総合事業費_CHECKARU = new RString("　　■総合事業費（公費負担者）分");
+    private static final Code 拡張情報_コード = new Code("0003");
+    private static final RString 拡張情報_被保険者番号 = new RString("被保険者番号");
+    private static final RString KIGO = new RString("　～　");
     private final HanyoListSaishinsaKekkaProcessParameter processParameter;
     private final List<PersonalData> personalDataList;
 
@@ -164,7 +176,7 @@ public class HanyoListSaishinsaKekkaResult {
         }
         eucEntity.set保険者コード(association.get地方公共団体コード());
         eucEntity.set保険者名(association.get市町村名());
-        eucEntity.set空白(new RString(" "));
+        eucEntity.set空白(RString.HALF_SPACE);
         eucEntity.set被保険者番号(nullToEmpty(entity.get被保険者番号()));
         eucEntity.set資格取得事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getCodeShubetsu(), entity.get資格取得事由コード()));
         eucEntity.set資格取得日(set日付編集(entity.get資格取得年月日()));
@@ -281,7 +293,7 @@ public class HanyoListSaishinsaKekkaResult {
         }
         eucEntity.set保険者コード(association.get地方公共団体コード());
         eucEntity.set保険者名(association.get市町村名());
-        eucEntity.set空白(new RString(" "));
+        eucEntity.set空白(RString.HALF_SPACE);
         eucEntity.set被保険者番号(nullToEmpty(entity.get被保険者番号()));
         eucEntity.set資格取得事由(getCodeNameByCode(DBACodeShubetsu.介護資格取得事由_被保険者.getCodeShubetsu(), entity.get資格取得事由コード()));
         eucEntity.set資格取得日(set日付編集(entity.get資格取得年月日()));
@@ -355,7 +367,7 @@ public class HanyoListSaishinsaKekkaResult {
             jokenBuilder.append(保険者);
             RStringBuilder 市町村名builder = new RStringBuilder();
             市町村名builder.append(processParameter.getHokenshacode().value());
-            市町村名builder.append(new RString(" "));
+            市町村名builder.append(RString.HALF_SPACE);
             市町村名builder.append(市町村名);
             jokenBuilder.append(市町村名builder.toRString());
         }
@@ -368,23 +380,24 @@ public class HanyoListSaishinsaKekkaResult {
         出力条件List.add(get期間(jokenBuilder, processParameter.getKokuhorentoriatsukaiFrom(),
                 processParameter.getKokuhorentoriatsukaiNengetsuTo()));
         jokenBuilder = new RStringBuilder();
-        jokenBuilder.append(new RString("保険者区分：　"));
-        RString 保険者分 = new RString("□保険者分");
-        RString 公費負担者 = new RString("　　□公費負担者分");
-        RString 保険者_総合事業費 = new RString("　　□総合事業費（保険者）分");
-        RString 公費負担者_総合事業費 = new RString("　　□総合事業費（公費負担者）分");
+        jokenBuilder.append(保険者区分値);
+        RString 保険者分 = 保険者分_CHECKNASHI;
+        RString 公費負担者 = 公費負担者_CHECKNASHI;
+        RString 保険者_総合事業費 = 保険者_総合事業費_CHECKNASHI;
+        RString 公費負担者_総合事業費 = 公費負担者_総合事業費_CHECKNASHI;
         for (RString 保険者区分 : processParameter.getHokenshaKubunList()) {
             if (KagoMoshitateKekka_HokenshaKubun.保険者.getコード().equals(保険者区分)) {
-                保険者分 = new RString("■保険者分");
+                保険者分 = 保険者分_CHECKARU;
             } else if (KagoMoshitateKekka_HokenshaKubun.公費負担者.getコード().equals(保険者区分)) {
-                公費負担者 = new RString("　　■公費負担者分");
+                公費負担者 = 公費負担者_CHECKARU;
             } else if (KagoMoshitateKekka_HokenshaKubun.保険者_総合事業費.getコード().equals(保険者区分)) {
-                保険者_総合事業費 = new RString("　　■総合事業費（保険者）分");
+                保険者_総合事業費 = 保険者_総合事業費_CHECKARU;
             } else if (KagoMoshitateKekka_HokenshaKubun.公費負担者_総合事業費.getコード().equals(保険者区分)) {
-                公費負担者_総合事業費 = new RString("　　■総合事業費（公費負担者）分");
+                公費負担者_総合事業費 = 公費負担者_総合事業費_CHECKARU;
             }
         }
         jokenBuilder.append(保険者分).append(公費負担者).append(保険者_総合事業費).append(公費負担者_総合事業費);
+        出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(サービス提供年月);
         出力条件List.add(get期間(jokenBuilder, processParameter.getSeverteikyounengetsuFrom(), processParameter.getSeverteikyounengetsuTo()));
@@ -621,7 +634,7 @@ public class HanyoListSaishinsaKekkaResult {
                 return PersonalData.of(entity.getPsmEntity().getShikibetsuCode());
             }
         } else {
-            ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"),
+            ExpandedInformation expandedInfo = new ExpandedInformation(拡張情報_コード, 拡張情報_被保険者番号,
                     nullToEmpty(entity.get被保険者番号()));
             if (entity.getPsmEntity() == null) {
                 return PersonalData.of(ShikibetsuCode.EMPTY);
@@ -694,7 +707,7 @@ public class HanyoListSaishinsaKekkaResult {
             jokenBuilder.append(new FlexibleDate(fromYMD).wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).
                     separator(Separator.JAPANESE).fillType(FillType.BLANK).getYearMonth());
         }
-        jokenBuilder.append(new RString("　～　"));
+        jokenBuilder.append(KIGO);
         if (!RString.isNullOrEmpty(toYMD)) {
             jokenBuilder.append(new FlexibleDate(toYMD).wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).
                     separator(Separator.JAPANESE).fillType(FillType.BLANK).getYearMonth());
@@ -774,7 +787,7 @@ public class HanyoListSaishinsaKekkaResult {
         RStringBuilder builder = new RStringBuilder();
         builder.append(住所);
         builder.append(番地);
-        builder.append(new RString("　"));
+        builder.append(RString.FULL_SPACE);
         builder.append(方書);
         return builder.toRString();
     }
