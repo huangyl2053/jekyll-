@@ -60,7 +60,6 @@ public class DBC050010_FurikomimeisaiFurikomiData extends BatchFlowBase<DBC05001
     private static final RString 支払方法_窓口 = new RString("2");
 
     private static RString 振込単位;
-    private static FurikomiGyomunaiKubun 振込業務内区分;
     private static ShoriName 処理名;
     private int レコード件数 = 0;
     private int 振込明細レコード件数 = 0;
@@ -95,6 +94,7 @@ public class DBC050010_FurikomimeisaiFurikomiData extends BatchFlowBase<DBC05001
 
     @Override
     protected void initialize() {
+        FurikomiGyomunaiKubun 振込業務内区分 = FurikomiGyomunaiKubun.事業高額;
         振込単位 = DbBusinessConfig.get(ConfigNameDBC.振込単位, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
         DBC050010_FurikomimeisaiFurikomiDataParameter parameter = getParameter();
 
@@ -124,6 +124,8 @@ public class DBC050010_FurikomimeisaiFurikomiData extends BatchFlowBase<DBC05001
                 処理名 = ShoriName.給付振込データ作成_高額;
             }
         }
+        // TODO
+        System.out.println(振込業務内区分.get名称());
     }
 
     @Override
