@@ -7,7 +7,9 @@ package jp.co.ndensan.reams.db.dbb.entity.report.source.tokubetsuchoshuiraijohoi
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 帳票設計_DBBPR82001_1_特別徴収依頼情報一覧表
@@ -55,6 +57,7 @@ public class TokubetsuChoshuIraiJohoIchiranSource implements IReportSource {
     public RString hyojicodeName2;
     @ReportItem(name = "hyojicodeName3", length = 8, order = 19)
     public RString hyojicodeName3;
+    @ReportExpandedInfo(id = "X", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listUpper_1", length = 10, order = 20)
     public RString listUpper_1;
     @ReportItem(name = "listUpper_2", length = 10, order = 21)
@@ -77,6 +80,7 @@ public class TokubetsuChoshuIraiJohoIchiranSource implements IReportSource {
     public RString listUpper_10;
     @ReportItem(name = "listUpper_11", length = 14, order = 30)
     public RString listUpper_11;
+    @ReportPerson(id = "X")
     @ReportItem(name = "listLower_1", length = 15, order = 31)
     public RString listLower_1;
     @ReportItem(name = "listLower_2", length = 4, order = 32)
