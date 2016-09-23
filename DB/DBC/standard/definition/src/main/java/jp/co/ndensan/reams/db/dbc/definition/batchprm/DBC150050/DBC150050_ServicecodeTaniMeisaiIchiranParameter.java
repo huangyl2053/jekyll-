@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC150050;
 
 import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -37,6 +36,7 @@ public class DBC150050_ServicecodeTaniMeisaiIchiranParameter extends BatchParame
     private static final String KEY_旧市町村コード = "旧市町村コード";
     private static final String KEY_旧市町村名称 = "旧市町村名称";
     private static final String KEY_導入形態コード = "導入形態コード";
+    private static final String KEY_出力順ID = "出力順ID";
 
     @BatchParameter(key = KEY_対象年月, name = "対象年月")
     private RString 対象年月;
@@ -57,7 +57,7 @@ public class DBC150050_ServicecodeTaniMeisaiIchiranParameter extends BatchParame
     @BatchParameter(key = KEY_地区指定, name = "地区指定")
     private RString 地区指定;
     @BatchParameter(key = KEY_選択地区リスト, name = "選択地区リスト")
-    private Map<RString, RString> 選択地区リスト;
+    private List<RString> 選択地区リスト;
     @BatchParameter(key = KEY_市町村コード, name = "市町村コード")
     private RString 市町村コード;
     @BatchParameter(key = KEY_市町村名称, name = "市町村名称")
@@ -68,4 +68,6 @@ public class DBC150050_ServicecodeTaniMeisaiIchiranParameter extends BatchParame
     private RString 旧市町村名称;
     @BatchParameter(key = KEY_導入形態コード, name = "導入形態コード")
     private RString 導入形態コード;
+    @BatchParameter(key = KEY_出力順ID, name = "出力順ID")
+    private Long 出力順ID;
 }

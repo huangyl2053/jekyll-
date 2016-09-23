@@ -32,53 +32,17 @@ public enum KogakuGassanShikyuShinseiTorokuPanelSpec implements IPredicate<Kogak
                 }
             },
     /**
-     * 介護支給申請書整理番号1必須。
+     * 介護支給申請書整理番号必須。
      */
-    介護支給申請書整理番号1必須 {
+    介護支給申請書整理番号必須 {
                 @Override
                 public boolean apply(KogakuGassanShikyuShinseiTorokuPanelDiv div) {
                     if (!div.getKogakuGassanShikyuShinseiTorokuSearch().getCbkKaigoShikyuShinseishoSeiriBango()
                     .getSelectedKeys().equals(Collections.EMPTY_LIST)) {
-                        return !div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtKaigoShikyuShinseishoSeiriBango1().getValue().isEmpty();
-                    }
-                    return true;
-                }
-            },
-    /**
-     * 介護支給申請書整理番号2必須。
-     */
-    介護支給申請書整理番号2必須 {
-                @Override
-                public boolean apply(KogakuGassanShikyuShinseiTorokuPanelDiv div) {
-                    if (!div.getKogakuGassanShikyuShinseiTorokuSearch().getCbkKaigoShikyuShinseishoSeiriBango()
-                    .getSelectedKeys().equals(Collections.EMPTY_LIST)) {
-                        return !div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtKaigoShikyuShinseishoSeiriBango2().getValue().isEmpty();
-                    }
-                    return true;
-                }
-            },
-    /**
-     * 介護支給申請書整理番号3必須。
-     */
-    介護支給申請書整理番号3必須 {
-                @Override
-                public boolean apply(KogakuGassanShikyuShinseiTorokuPanelDiv div) {
-                    if (!div.getKogakuGassanShikyuShinseiTorokuSearch().getCbkKaigoShikyuShinseishoSeiriBango()
-                    .getSelectedKeys().equals(Collections.EMPTY_LIST)) {
-                        return !div.getKogakuGassanShikyuShinseiTorokuSearch().getDdlKaigoShikyuShinseishoSeiriBango3().getSelectedValue().isEmpty();
-                    }
-                    return true;
-                }
-            },
-    /**
-     * 介護支給申請書整理番号4必須。
-     */
-    介護支給申請書整理番号4必須 {
-                @Override
-                public boolean apply(KogakuGassanShikyuShinseiTorokuPanelDiv div) {
-                    if (!div.getKogakuGassanShikyuShinseiTorokuSearch().getCbkKaigoShikyuShinseishoSeiriBango()
-                    .getSelectedKeys().equals(Collections.EMPTY_LIST)) {
-                        return !div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtKaigoShikyuShinseishoSeiriBango4().getValue().isEmpty();
+                        return !div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtKaigoShikyuShinseishoSeiriBango1().getValue().isEmpty()
+                        && !div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtKaigoShikyuShinseishoSeiriBango2().getValue().isEmpty()
+                        && !div.getKogakuGassanShikyuShinseiTorokuSearch().getDdlKaigoShikyuShinseishoSeiriBango3().getSelectedValue().isEmpty()
+                        && !div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtKaigoShikyuShinseishoSeiriBango4().getValue().isEmpty();
                     }
                     return true;
                 }
@@ -100,53 +64,17 @@ public enum KogakuGassanShikyuShinseiTorokuPanelSpec implements IPredicate<Kogak
                 }
             },
     /**
-     * 医療支給申請書整理番号1必須。
+     * 医療支給申請書整理番号必須。
      */
-    医療支給申請書整理番号1必須 {
+    医療支給申請書整理番号必須 {
                 @Override
                 public boolean apply(KogakuGassanShikyuShinseiTorokuPanelDiv div) {
                     if (!div.getKogakuGassanShikyuShinseiTorokuSearch().getCbkIryoShikyuShinseishoSeiriBango()
                     .getSelectedKeys().equals(Collections.EMPTY_LIST)) {
-                        return !div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtIryoShikyuShinseishoSeiriBango1().getValue().isEmpty();
-                    }
-                    return true;
-                }
-            },
-    /**
-     * 医療支給申請書整理番号2必須。
-     */
-    医療支給申請書整理番号2必須 {
-                @Override
-                public boolean apply(KogakuGassanShikyuShinseiTorokuPanelDiv div) {
-                    if (!div.getKogakuGassanShikyuShinseiTorokuSearch().getCbkIryoShikyuShinseishoSeiriBango()
-                    .getSelectedKeys().equals(Collections.EMPTY_LIST)) {
-                        return !div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtIryoShikyuShinseishoSeiriBango2().getValue().isEmpty();
-                    }
-                    return true;
-                }
-            },
-    /**
-     * 医療支給申請書整理番号3必須。
-     */
-    医療支給申請書整理番号3必須 {
-                @Override
-                public boolean apply(KogakuGassanShikyuShinseiTorokuPanelDiv div) {
-                    if (!div.getKogakuGassanShikyuShinseiTorokuSearch().getCbkIryoShikyuShinseishoSeiriBango()
-                    .getSelectedKeys().equals(Collections.EMPTY_LIST)) {
-                        return !div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtIryoShikyuShinseishoSeiriBango3().getValue().isEmpty();
-                    }
-                    return true;
-                }
-            },
-    /**
-     * 医療支給申請書整理番号4必須。
-     */
-    医療支給申請書整理番号4必須 {
-                @Override
-                public boolean apply(KogakuGassanShikyuShinseiTorokuPanelDiv div) {
-                    if (!div.getKogakuGassanShikyuShinseiTorokuSearch().getCbkIryoShikyuShinseishoSeiriBango()
-                    .getSelectedKeys().equals(Collections.EMPTY_LIST)) {
-                        return !div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtIryoShikyuShinseishoSeiriBango4().getValue().isEmpty();
+                        return !div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtIryoShikyuShinseishoSeiriBango1().getValue().isEmpty()
+                        && !div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtIryoShikyuShinseishoSeiriBango2().getValue().isEmpty()
+                        && !div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtIryoShikyuShinseishoSeiriBango3().getValue().isEmpty()
+                        && !div.getKogakuGassanShikyuShinseiTorokuSearch().getTxtIryoShikyuShinseishoSeiriBango4().getValue().isEmpty();
                     }
                     return true;
                 }
