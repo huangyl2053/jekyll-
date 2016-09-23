@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb012003;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB012003;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,11 +31,11 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
- * 「賦課情報取得」処理の「仮算定額変更情報一時作成」です。
+ * 「賦課情報取得」処理の「仮算定額変更情報一時作成」です。（一括発行の場合）
  *
  * @reamsid_L DBB-0820-030 xuyue
  */
-public class FukaJohoShutokuProcess extends BatchProcessBase<KarisanteiGakuHenkoEntity> {
+public class FukaJohoShutokuIkatsuHakoProcess extends BatchProcessBase<KarisanteiGakuHenkoEntity> {
 
     FukaJohoShutokuProcessParameter parameter;
     @BatchWriter
@@ -43,7 +43,8 @@ public class FukaJohoShutokuProcess extends BatchProcessBase<KarisanteiGakuHenko
 
     private static final RString 仮算定額変更情報一時_TABLE_NAME = new RString("DbT2002FukaTemp");
     private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate."
-            + "tokuchoheijunka6tsuchishoikatsuhako.ITokuchoHeijunka6gatsuTsuchishoIkatsuHakoMapper.select特徴平準化_6月分更新後とリアルのデータ");
+            + "tokuchoheijunka6tsuchishoikatsuhako.ITokuchoHeijunka6gatsuTsuchishoIkatsuHakoMapper."
+            + "select特徴平準化_6月分更新後とリアルのデータ_一括発行起動");
     private static final RString LEFT_FORMAT = new RString("'{");
     private static final RString RIGHT_FORMAT = new RString("}'");
     private static final RString MIDDLE_FORMAT = new RString(",");
@@ -62,9 +63,9 @@ public class FukaJohoShutokuProcess extends BatchProcessBase<KarisanteiGakuHenko
         RString 作成処理名 = ShoriName.特徴平準化計算_6月分.get名称();
 
         KozaSearchKeyBuilder builder = new KozaSearchKeyBuilder();
-        IKozaSearchKey key = builder.build();
         builder.setサブ業務コード(SubGyomuCode.DBB介護賦課);
         builder.set業務コード(GyomuCode.DB介護保険);
+        IKozaSearchKey key = builder.build();
         ShunoKamokuAuthority sut = InstanceProvider.create(ShunoKamokuAuthority.class);
         List<KamokuCode> list = sut.get更新権限科目コード(ControlDataHolder.getUserId());
         RStringBuilder rStringBuilder = new RStringBuilder();
