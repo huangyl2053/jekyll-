@@ -26,7 +26,6 @@ import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2004GemmenDac;
 import jp.co.ndensan.reams.db.dbb.service.core.basic.ChoshuHohoManager;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2002FukaDac;
 import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2003KibetsuDac;
-import jp.co.ndensan.reams.db.dbx.persistence.db.basic.UrT0705ChoteiKyotsuDac;
 import jp.co.ndensan.reams.ur.urc.business.core.shunokamoku.shunokamoku.IShunoKamoku;
 import jp.co.ndensan.reams.ur.urc.definition.core.shuno.tsuchishono.TsuchishoNo;
 import jp.co.ndensan.reams.ur.urc.definition.core.shunokamoku.shunokamoku.JigyoKubun;
@@ -71,14 +70,12 @@ public class SokujiFukaKouseiManager {
      * @param 介護賦課Dac {@link DbT2002FukaDac}
      * @param 介護期別Dac {@link DbT2003KibetsuDac}
      * @param 賦課の減免Dac {@link DbT2004GemmenDac}
-     * @param 調定共通Dac {@link UrT0705ChoteiKyotsuDac}
      */
     SokujiFukaKouseiManager(
             ChoshuHohoManager 介護徴収方法manager,
             DbT2002FukaDac 介護賦課Dac,
             DbT2003KibetsuDac 介護期別Dac,
-            DbT2004GemmenDac 賦課の減免Dac,
-            UrT0705ChoteiKyotsuDac 調定共通Dac) {
+            DbT2004GemmenDac 賦課の減免Dac) {
         this.介護徴収方法manager = 介護徴収方法manager;
         this.介護賦課Dac = 介護賦課Dac;
         this.介護期別Dac = 介護期別Dac;
