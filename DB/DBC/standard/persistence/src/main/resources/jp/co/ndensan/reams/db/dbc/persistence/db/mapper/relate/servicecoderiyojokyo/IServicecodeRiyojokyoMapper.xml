@@ -219,8 +219,10 @@
         </if>
         <if test="'00'.toString()==対象サービス種類.toString()">
         AND T2."serviceSyuruiCode" IN 
-             (11,12,13,14,15,16,17,21,22,23,24,25,26,27,28,31,32,33,34,35,36,37,38,39,43,46
-             ,51,52,53,54,59,61,62,63,64,65,66,67,68,69,71,72,73,74,75,76,77,78,79)
+            ('11','12','13','14','15','16','17','21','22','23','24','25','26','27','28','31','32','33','34','35','36'
+            ,'37','38','39','43','46'
+             ,'51','52','53','54','59','61','62','63','64','65','66','67','68','69','71','72','73','74'
+            ,'75','76','77','78','79')
         </if>
         <if test="対象サービス種類!=null and '00'.toString()!=対象サービス種類.toString()">
         AND T2."serviceSyuruiCode" = #{対象サービス種類}
@@ -268,7 +270,7 @@
                     <when test="市町村コード==null or 市町村コード.toString() == ''.toString()">
                             <choose>
                                     <when test="旧市町村コード==null or 旧市町村コード.toString() == ''.toString()">
-                                            <if test="'町域'.toString()==選択対象.toString()">
+                                            <if test="選択対象!=null and '町域'.toString()==選択対象.toString()">
                                                 AND "DbWT3470ToukeihyoMeisai"."machiikiCode" IN <foreach  
                                                 collection="対象コード"
                                                 item="item"
@@ -277,8 +279,8 @@
                                                 close=")">  
                                                 #{item}  
                                                 </foreach>
-                                            </if>
-                                            <if test="'地区１'.toString()==選択対象.toString()">
+                                            </if> 
+                                           <if test="選択対象!=null and '地区１'.toString()==選択対象.toString()">
                                                 AND "DbWT3470ToukeihyoMeisai"."chikuCode1" IN <foreach  
                                                 collection="対象コード"
                                                 item="item"
@@ -288,7 +290,7 @@
                                                 #{item}  
                                                 </foreach>
                                             </if>
-                                            <if test="'地区２'.toString()==選択対象.toString()">
+                                            <if test="選択対象!=null and '地区２'.toString()==選択対象.toString()">
                                                 AND "DbWT3470ToukeihyoMeisai"."chikuCode2" IN <foreach  
                                                 collection="対象コード"
                                                 item="item"
@@ -298,7 +300,7 @@
                                                 #{item}  
                                                 </foreach>
                                             </if>
-                                            <if test="'地区３'.toString()==選択対象.toString()">
+                                            <if test="選択対象!=null and '地区３'.toString()==選択対象.toString()">
                                                 AND "DbWT3470ToukeihyoMeisai"."chikuCode3" IN <foreach  
                                                 collection="対象コード"
                                                 item="item"
@@ -308,7 +310,7 @@
                                                 #{item}  
                                                 </foreach>
                                             </if>
-                                            <if test="'行政区'.toString()==選択対象.toString()">
+                                            <if test="選択対象!=null and '行政区'.toString()==選択対象.toString()">
                                                 AND "DbWT3470ToukeihyoMeisai"."gyoseikuCode" IN <foreach  
                                                 collection="対象コード"
                                                 item="item"
@@ -602,7 +604,8 @@
         <id column="dbT1001HihokenshaDaicho_hihokenshaNo"/>
         <id column="dbT1001HihokenshaDaicho_idoYMD"/>
         <id column="dbT1001HihokenshaDaicho_edaNo"/>
-        <result property="連番" column="DbWT3470ToukeihyoMeisai_renban"/>
+        <id column="DbWT3470ToukeihyoMeisai_renban"/>
+        <id property="連番" column="DbWT3470ToukeihyoMeisai_renban"/>
         <association property="給付実績" resultMap="resultMap_KyufuJissekiMeisaiEntity"/>
 	<association property="宛名" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
         <association property="被保険者台帳管理" resultMap="NewResultMap_DbT1001HihokenshaDaichoEntity"/>
