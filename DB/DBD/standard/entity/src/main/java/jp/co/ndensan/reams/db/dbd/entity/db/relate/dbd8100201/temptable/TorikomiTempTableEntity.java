@@ -58,7 +58,7 @@ public class TorikomiTempTableEntity extends DbTableEntityBase<TorikomiTempTable
     @TempTableColumnOrder(11)
     private RString dtyobi2;
     @TempTableColumnOrder(12)
-    private RString dtseinenngappi;
+    private FlexibleDate dtseinenngappi;
     @TempTableColumnOrder(13)
     private RString dtseibetsu;
     @TempTableColumnOrder(14)
