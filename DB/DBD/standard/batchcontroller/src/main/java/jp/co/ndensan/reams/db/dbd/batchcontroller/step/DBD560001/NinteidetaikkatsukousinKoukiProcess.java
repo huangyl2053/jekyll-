@@ -101,7 +101,7 @@ public class NinteidetaikkatsukousinKoukiProcess extends BatchProcessBase<Yokaig
     }
 
     private void set要介護認定結果情報(YokaigoNinteiInterfaceEntity entity, NinteiTanitsuProcessDataManager manager) {
-        if (entity.get二次判定結果() != null) {
+        if (entity.get要介護認定結果情報Entity().getNijiHanteiYMD() != null) {
             if (get要介護認定更新比較結果(entity, manager)) {
                 upDate要介護認定結果情報(entity, manager);
             }
