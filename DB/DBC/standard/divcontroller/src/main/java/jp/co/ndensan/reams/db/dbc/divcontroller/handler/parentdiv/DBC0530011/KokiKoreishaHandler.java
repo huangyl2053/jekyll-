@@ -167,8 +167,11 @@ public class KokiKoreishaHandler {
 
     private void set資格喪失事由() {
         List<KeyValueDataSource> dataSources = new ArrayList<>();
+        dataSources.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
         for (ShikakuSoshitsuJiyu code : ShikakuSoshitsuJiyu.values()) {
-            dataSources.add(get資格喪失事由(code));
+            if (!code.get名称().isEmpty()) {
+                dataSources.add(get資格喪失事由(code));
+            }
         }
         div.getMeisaiPanel().getDdlShikakuSoshitsuJiyu().setDataSource(dataSources);
     }
