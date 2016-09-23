@@ -259,12 +259,11 @@ public class PntKogakuGassanTorikomiIchiranProcess extends BatchKeyBreakBase<Kog
         csvEntity.set按分後支給額_うち70歳以上分(get金額(計算結果entity.getOver70_honninShikyugaku()));
         csvEntity.set備考(getRString(計算結果entity.getBiko()));
 
-        if (被保険者entity.getShikibetsuCode() != null && !被保険者entity.getShikibetsuCode().isEmpty()) {
-            if (!this.識別コードset.contains(被保険者entity.getShikibetsuCode())) {
-                this.識別コードset.add(被保険者entity.getShikibetsuCode());
-                PersonalData personalData = getPersonalData(被保険者entity);
-                this.personalDataList.add(personalData);
-            }
+        if (被保険者entity.getShikibetsuCode() != null && !被保険者entity.getShikibetsuCode().isEmpty()
+                && !this.識別コードset.contains(被保険者entity.getShikibetsuCode())) {
+            this.識別コードset.add(被保険者entity.getShikibetsuCode());
+            PersonalData personalData = getPersonalData(被保険者entity);
+            this.personalDataList.add(personalData);
         }
 
         return csvEntity;
