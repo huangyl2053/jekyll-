@@ -4,24 +4,19 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1140011;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TabPanel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxAtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * tplJikofutanKanriJoho1 のクラスファイル
- *
- * @reamsid_L DBC-2080-010 jiangzongyue
+ * tplJikofutanKanriJoho1 のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class tplJikofutanKanriJoho1Div extends TabPanel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -224,7 +219,7 @@ public class tplJikofutanKanriJoho1Div extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtKoukiHokenjaNO(TextBox txtKoukiHokenjaNO) {
+    public void  setTxtKoukiHokenjaNO(TextBox txtKoukiHokenjaNO) {
         this.getJikoFutangakuHoseiTotsugo1().setTxtKoukiHokenjaNO(txtKoukiHokenjaNO);
     }
 
@@ -234,7 +229,7 @@ public class tplJikofutanKanriJoho1Div extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtKoukiHihokenshaNO(TextBox txtKoukiHihokenshaNO) {
+    public void  setTxtKoukiHihokenshaNO(TextBox txtKoukiHihokenshaNO) {
         this.getJikoFutangakuHoseiTotsugo1().setTxtKoukiHihokenshaNO(txtKoukiHihokenshaNO);
     }
 
@@ -244,7 +239,7 @@ public class tplJikofutanKanriJoho1Div extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtKokuhoHokenjaNO(TextBox txtKokuhoHokenjaNO) {
+    public void  setTxtKokuhoHokenjaNO(TextBox txtKokuhoHokenjaNO) {
         this.getJikoFutangakuHoseiTotsugo2().setTxtKokuhoHokenjaNO(txtKokuhoHokenjaNO);
     }
 
@@ -254,7 +249,7 @@ public class tplJikofutanKanriJoho1Div extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtKokuhoHihokenshaKojinNO(TextBox txtKokuhoHihokenshaKojinNO) {
+    public void  setTxtKokuhoHihokenshaKojinNO(TextBox txtKokuhoHihokenshaKojinNO) {
         this.getJikoFutangakuHoseiTotsugo2().setTxtKokuhoHihokenshaKojinNO(txtKokuhoHihokenshaKojinNO);
     }
 
@@ -264,7 +259,7 @@ public class tplJikofutanKanriJoho1Div extends TabPanel {
     }
 
     @JsonIgnore
-    public void setTxtKokuhoHihokenshashouNO(TextBox txtKokuhoHihokenshashouNO) {
+    public void  setTxtKokuhoHihokenshashouNO(TextBox txtKokuhoHihokenshashouNO) {
         this.getJikoFutangakuHoseiTotsugo2().setTxtKokuhoHihokenshashouNO(txtKokuhoHihokenshashouNO);
     }
 
