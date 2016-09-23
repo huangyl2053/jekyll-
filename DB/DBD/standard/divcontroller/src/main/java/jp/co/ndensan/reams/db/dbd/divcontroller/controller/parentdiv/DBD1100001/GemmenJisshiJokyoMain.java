@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class GemmenJisshiJokyoMain {
 
+    private final int length = 32;
+
     /**
      * 画面初期化処理です。
      *
@@ -33,7 +35,6 @@ public class GemmenJisshiJokyoMain {
         div.getGemmenJisshiJokyoJoken().getCcdAtenaJoken().initialize();
         div.getGemmenJisshiJokyoJoken().getTxtTaishoNendo().setDomain(NendoUtil.getNendo(RDate.getNowDate()));
         List<RString> list = new ArrayList();
-        int length = 32;
         for (int i = 1; i < length; i++) {
             list.add(new RString(i));
         }

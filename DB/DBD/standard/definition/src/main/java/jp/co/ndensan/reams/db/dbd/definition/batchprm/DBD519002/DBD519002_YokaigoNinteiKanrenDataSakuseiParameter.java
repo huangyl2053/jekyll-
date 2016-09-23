@@ -21,7 +21,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 @Getter
 @Setter
-public class DBD519002Parameter extends BatchParameterBase {
+public class DBD519002_YokaigoNinteiKanrenDataSakuseiParameter extends BatchParameterBase {
 
     private static final long serialVersionUID = -7108768751931298237L;
     private static final String KONKAISHORIYMDTIME_FROM = "konkaishoriymdtime_from";

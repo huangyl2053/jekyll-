@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb014003;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB014003;
 
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuchokaritsuchishoikkatsuhakko.FuchoKariTsuchishoIkkatsuHakkoTempEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tmpidofukajoho.TmpIdoFukaJohoEntity;
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 普徴仮算定通知書一括発行の異動賦課情報一時テーブルに登録Processクラスです。
  *
- * @reamsid_L DBB-0710-030 gongliang
+ * @reamsid_L DBB-0710-030 yebangqiang
  */
 public class InsertTmpIdoFukaJohoProcess extends BatchProcessBase<FuchoKariTsuchishoIkkatsuHakkoTempEntity> {
 

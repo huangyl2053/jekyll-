@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.dbb014003;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB014003.DBB014003_FuchoKarisanteiTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB003001.DBB003001_KeisangoJohoSakuseiParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB014003.DBB014003_FuchoKarisanteiTsuchishoHakkoParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbb014003.FuchoKarisanteiTsuchishoHakkoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -28,10 +28,11 @@ public class DBB014003_FuchoKarisanteiTsuchishoHakko extends BatchFlowBase<DBB01
 
 //    @BatchWriter
 //    private BatchEntityCreatedTempTableWriter 異動賦課情報一時tableWriter;
-    private static final String 計算後情報作成 = "kiisagoJyohouSakusei";
+//    private static final String 最新調定日時取得 = "saishinChoteiNichijiShutoku";
+    private static final String 計算後情報作成 = "keisangoJohoSakusei";
 //    private static final String 異動賦課情報一時テーブル登録 = "insertTmpIdoFukaJoho";
 
-    private static final RString KEISANGOJOHOSAKUEEIFLOW_FLOWID = new RString("KeisangoJohoSakuseiFlow");
+    private static final RString KEISANGOJOHOSAKUEEIFLOW_FLOWID = new RString("DBB003001_KeisangoJohoSakusei");
 
     @Override
     protected void defineFlow() {

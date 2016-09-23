@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC010020;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc010010.JuryoIninShoninKakuninshoIchiranPageBreak;
 import jp.co.ndensan.reams.db.dbc.business.report.dbc100031.KogakuServiceHiJyuryoItakuKeiyakuKakuninShoReport;
 import jp.co.ndensan.reams.db.dbc.business.report.dbc200013.JuryoIninShoninKakuninshoIchiranReport;
@@ -36,8 +35,6 @@ import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFact
 import jp.co.ndensan.reams.ur.urz.service.core.ninshosha.NinshoshaFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
-import jp.co.ndensan.reams.ux.uxx.business.core.tsuchishoteikeibun.TsuchishoTeikeibunInfo;
-import jp.co.ndensan.reams.ux.uxx.service.core.tsuchishoteikeibun.TsuchishoTeikeibunManager;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchKeyBreakBase;
@@ -92,7 +89,6 @@ public class KogakuServicehiJuryoininKeiyakuShoninKakuninshoProcess extends Batc
     private IOutputOrder 出力順;
     private Association 導入団体クラス;
     private ChohyoSeigyoKyotsu 帳票制御共通;
-    private int パターン番号;
     private int ページ = 0;
     private RString 通知文1 = RString.EMPTY;
     private RString 通知文2 = RString.EMPTY;
@@ -131,17 +127,10 @@ public class KogakuServicehiJuryoininKeiyakuShoninKakuninshoProcess extends Batc
         }
         認証者 = NinshoshaFinderFactory.createInstance().get帳票認証者(GyomuCode.DB介護保険,
                 NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), processParameter.get通知日());
-        TsuchishoTeikeibunManager manager = new TsuchishoTeikeibunManager();
-        TsuchishoTeikeibunInfo teikeibun
-                = manager.get通知書定型文パターン(ReportIdDBC.DBC100031.getReportId(), SubGyomuCode.DBC介護給付);
-        if (teikeibun != null) {
-            パターン番号 = teikeibun.getパターン番号();
-        }
-        Map<Integer, RString> map = ReportUtil.get通知文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100031.getReportId(), KamokuCode.EMPTY, パターン番号);
-        if (パターン番号_1 == パターン番号) {
-            通知文1 = map.get(項目番号_1);
-            通知文2 = map.get(項目番号_2);
-        }
+        通知文1 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100031.getReportId(),
+                KamokuCode.EMPTY, パターン番号_1, 項目番号_1, FlexibleDate.getNowDate());
+        通知文2 = ReportUtil.get通知文(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC100031.getReportId(),
+                KamokuCode.EMPTY, パターン番号_1, 項目番号_2, FlexibleDate.getNowDate());
     }
 
     @Override
