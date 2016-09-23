@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00003.KakuninListCsvEnti
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00003.NinteishaListSakuseiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00003.SetaiInRisutoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
+import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
@@ -36,7 +38,7 @@ public class NinteishaListSakuseiBusiness {
      * @param t SQL取得情報
      * @param 連番 連番
      */
-    public void setEucCsvEntity(KakuninListCsvEntity eucCsvEntity, NinteishaListSakuseiEntity t, int 連番) {
+    public void setEucCsvEntity(KakuninListCsvEntity eucCsvEntity, NinteishaListSakuseiEntity t, int 連番, boolean is日付スラッシュ編集) {
         eucCsvEntity.set連番(new RString(連番));
         IKojin kojin = ShikibetsuTaishoFactory.createKojin(t.getPsmEntity());
         SetaiInRisutoEntity setaEntity = new SetaiInRisutoEntity();
@@ -55,78 +57,17 @@ public class NinteishaListSakuseiBusiness {
         eucCsvEntity.set住所(kojin.get住所().get住所());
         eucCsvEntity.set行政区コード(kojin.get行政区画().getGyoseiku().getコード().value());
         eucCsvEntity.set行政区(kojin.get行政区画().getGyoseiku().get名称());
-        if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getKohiJukyushaNo() != null) {
-            eucCsvEntity.set公費受給者番号(t.get訪問介護利用者負担額減額().getKohiJukyushaNo());
+        edit出力情報_訪問介護利用者負担額減額(eucCsvEntity, t, is日付スラッシュ編集);
+        edit出力情報_受給者について(eucCsvEntity, t);
+        if (t.get認定情報Entity() != null
+                && t.get認定情報Entity().get認定情報_要介護状態区分コード() != null
+                && t.get要介護認定申請情報_厚労省IF識別コード() != null) {
+            eucCsvEntity.set要介護度(YokaigoJotaiKubunSupport.toValue(KoroshoInterfaceShikibetsuCode.toValue(t.get認定情報Entity().get認定情報_要介護状態区分コード()),
+                    t.get要介護認定申請情報_厚労省IF識別コード()).getName());
         }
-
-        if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getHobetsuKubun() != null) {
-            eucCsvEntity.set法別番号(t.get訪問介護利用者負担額減額().getHobetsuKubun());
-        }
-        if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getKetteiKubun() != null) {
-            eucCsvEntity.set決定区分(t.get訪問介護利用者負担額減額().getKetteiKubun());
-        }
-
-        if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getShinseiYMD() != null) {
-            eucCsvEntity.set減免申請日(set年月日(t.get訪問介護利用者負担額減額().getShinseiYMD()));
-        }
-
-        if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getKetteiYMD() != null) {
-            eucCsvEntity.set減免決定日(set年月日(t.get訪問介護利用者負担額減額().getKetteiYMD()));
-        }
-
-        if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getTekiyoKaishiYMD() != null) {
-            eucCsvEntity.set減免適用日(set年月日(t.get訪問介護利用者負担額減額().getTekiyoKaishiYMD()));
-        }
-
-        if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getTekiyoShuryoYMD() != null) {
-            eucCsvEntity.set減免有効期限(set年月日(t.get訪問介護利用者負担額減額().getTekiyoShuryoYMD()));
-        }
-
-        if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getKyufuritsu() != null) {
-            eucCsvEntity.set給付率(new RString(t.get訪問介護利用者負担額減額().getKyufuritsu().value().toString()));
-        }
-
-        if (t.is老齢福祉年金受給者() == true) {
-            eucCsvEntity.set老齢福祉年金受給(SXING);
-        } else {
-            eucCsvEntity.set老齢福祉年金受給(SPACE);
-        }
-
-        if (t.is生活保護受給者() == true) {
-            eucCsvEntity.set生活保護受給区分(SXING);
-        } else {
-            eucCsvEntity.set生活保護受給区分(SPACE);
-        }
-        if (t.get本人課税区分().equals(KazeiKubun.課税.get名称())) {
-            eucCsvEntity.set課税区分(KE);
-        } else {
-            eucCsvEntity.set課税区分(SPACE);
-        }
-        if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getShogaishaTechoTokyu() != null) {
-            eucCsvEntity.set障害者手帳等級(t.get訪問介護利用者負担額減額().getShogaishaTechoTokyu());
-        }
-
-        if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getShogaishaTechoNo() != null) {
-            eucCsvEntity.set障害者番号(t.get訪問介護利用者負担額減額().getShogaishaTechoNo());
-        }
-
-        eucCsvEntity.set特定疾病(RString.isNullOrEmpty(t.get要介護認定申請情報_2号特定疾病コード()) ? RString.EMPTY
-                : TokuteiShippei.toValue(t.get要介護認定申請情報_2号特定疾病コード()).get名称());
-        if (t.is所得税課税者() == true) {
-            eucCsvEntity.set所得税課税区分(KE);
-        } else {
-            eucCsvEntity.set所得税課税区分(SPACE);
-        }
-        if (t.is受給者台帳Newest_旧措置者フラグ() == true) {
-            eucCsvEntity.set旧措置(JIUCUO);
-        } else {
-            eucCsvEntity.set旧措置(SPACE);
-        }
-
-        eucCsvEntity.set要介護度(t.get認定情報Entity().get認定情報_要介護状態区分コード());
-        eucCsvEntity.set認定日(set年月日(t.get認定情報Entity().get認定情報_認定年月日()));
-        eucCsvEntity.set認定開始日(set年月日(t.get認定情報Entity().get認定情報_認定有効期間開始年月日()));
-        eucCsvEntity.set認定終了日(set年月日(t.get認定情報Entity().get認定情報_認定有効期間終了年月日()));
+        eucCsvEntity.set認定日(set年月日(t.get認定情報Entity().get認定情報_認定年月日(), is日付スラッシュ編集));
+        eucCsvEntity.set認定開始日(set年月日(t.get認定情報Entity().get認定情報_認定有効期間開始年月日(), is日付スラッシュ編集));
+        eucCsvEntity.set認定終了日(set年月日(t.get認定情報Entity().get認定情報_認定有効期間終了年月日(), is日付スラッシュ編集));
 
         eucCsvEntity.set世帯員氏名(kojin.get名称().getName().value());
         eucCsvEntity.set世帯員住民種別(kojin.get住民状態().住民状態略称());
@@ -142,11 +83,86 @@ public class NinteishaListSakuseiBusiness {
         }
     }
 
-    private RString set年月日(FlexibleDate 年月日) {
+    private void edit出力情報_訪問介護利用者負担額減額(KakuninListCsvEntity eucCsvEntity, NinteishaListSakuseiEntity t, boolean is日付スラッシュ編集) {
+        if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getKohiJukyushaNo() != null) {
+            eucCsvEntity.set公費受給者番号(t.get訪問介護利用者負担額減額().getKohiJukyushaNo());
+        }
+
+        if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getHobetsuKubun() != null) {
+            eucCsvEntity.set法別番号(t.get訪問介護利用者負担額減額().getHobetsuKubun());
+        }
+        if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getKetteiKubun() != null) {
+            eucCsvEntity.set決定区分(t.get訪問介護利用者負担額減額().getKetteiKubun());
+        }
+
+        if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getShinseiYMD() != null) {
+            eucCsvEntity.set減免申請日(set年月日(t.get訪問介護利用者負担額減額().getShinseiYMD(), is日付スラッシュ編集));
+        }
+
+        if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getKetteiYMD() != null) {
+            eucCsvEntity.set減免決定日(set年月日(t.get訪問介護利用者負担額減額().getKetteiYMD(), is日付スラッシュ編集));
+        }
+
+        if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getTekiyoKaishiYMD() != null) {
+            eucCsvEntity.set減免適用日(set年月日(t.get訪問介護利用者負担額減額().getTekiyoKaishiYMD(), is日付スラッシュ編集));
+        }
+
+        if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getTekiyoShuryoYMD() != null) {
+            eucCsvEntity.set減免有効期限(set年月日(t.get訪問介護利用者負担額減額().getTekiyoShuryoYMD(), is日付スラッシュ編集));
+        }
+
+        if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getKyufuritsu() != null) {
+            eucCsvEntity.set給付率(new RString(t.get訪問介護利用者負担額減額().getKyufuritsu().value().toString()));
+        }
+    }
+
+    private void edit出力情報_受給者について(KakuninListCsvEntity eucCsvEntity, NinteishaListSakuseiEntity t) {
+        if (t.is老齢福祉年金受給者()) {
+            eucCsvEntity.set老齢福祉年金受給(SXING);
+        } else {
+            eucCsvEntity.set老齢福祉年金受給(SPACE);
+        }
+
+        if (t.is生活保護受給者()) {
+            eucCsvEntity.set生活保護受給区分(SXING);
+        } else {
+            eucCsvEntity.set生活保護受給区分(SPACE);
+        }
+        if (t.get本人課税区分().equals(KazeiKubun.課税.getコード())) {
+            eucCsvEntity.set課税区分(KE);
+        } else {
+            eucCsvEntity.set課税区分(SPACE);
+        }
+        if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getShogaishaTechoTokyu() != null) {
+            eucCsvEntity.set障害者手帳等級(t.get訪問介護利用者負担額減額().getShogaishaTechoTokyu());
+        }
+
+        if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getShogaishaTechoNo() != null) {
+            eucCsvEntity.set障害者番号(t.get訪問介護利用者負担額減額().getShogaishaTechoNo());
+        }
+
+        eucCsvEntity.set特定疾病(RString.isNullOrEmpty(t.get要介護認定申請情報_2号特定疾病コード()) ? RString.EMPTY
+                : TokuteiShippei.toValue(t.get要介護認定申請情報_2号特定疾病コード()).get名称());
+        if (t.is所得税課税者()) {
+            eucCsvEntity.set所得税課税区分(KE);
+        } else {
+            eucCsvEntity.set所得税課税区分(SPACE);
+        }
+        if (t.is受給者台帳Newest_旧措置者フラグ()) {
+            eucCsvEntity.set旧措置(JIUCUO);
+        } else {
+            eucCsvEntity.set旧措置(SPACE);
+        }
+    }
+
+    private RString set年月日(FlexibleDate 年月日, boolean is日付スラッシュ編集) {
         if (年月日 == null || 年月日.isEmpty()) {
             return RString.EMPTY;
         } else {
-            return 年月日.seireki().separator(Separator.SLASH).fillType(FillType.BLANK).toDateString();
+            if (is日付スラッシュ編集) {
+                return 年月日.seireki().separator(Separator.SLASH).fillType(FillType.ZERO).toDateString();
+            }
+            return 年月日.seireki().separator(Separator.NONE).fillType(FillType.NONE).toDateString();
         }
     }
 }

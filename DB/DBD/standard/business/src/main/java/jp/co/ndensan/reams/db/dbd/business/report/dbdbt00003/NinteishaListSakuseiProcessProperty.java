@@ -19,8 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class NinteishaListSakuseiProcessProperty {
 
     /**
-     * 帳票分類ID「DBD200003_HomonKaigoRiyoshaFutangakuGengakuGaitoshaIchiran」(DBD介護受給)
-     * 出力順設定可能項目です。
+     * 帳票分類ID「DBD200003_HomonKaigoRiyoshaFutangakuGengakuGaitoshaIchiran」(DBD介護受給) 出力順設定可能項目です。
      */
     public enum DBD200003_HomonKaigoRiyoshaFutangakuGengakuGaitoshaIchiran implements IReportItems {
 
@@ -55,14 +54,14 @@ public class NinteishaListSakuseiProcessProperty {
         /**
          * 被保険者番号
          */
-        被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString("")),;
+        被保険者番号(new RString("0104"), new RString("被保険者番号"), new RString(""));
 
         private final RString 項目ID;
         private final RString フォームフィールド名;
         private final RString myBatis項目名;
 
         private DBD200003_HomonKaigoRiyoshaFutangakuGengakuGaitoshaIchiran(RString 項目ID,
-                RString フォームフィールド名, 
+                RString フォームフィールド名,
                 RString myBatis項目名) {
             this.項目ID = 項目ID;
             this.フォームフィールド名 = フォームフィールド名;
