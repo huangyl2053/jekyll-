@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120110.KogakuGassanJik
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120110.KogakuGassanJikofutangakuDoMasterTorokuProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120110.KogakuGassanJikofutangakuDoMasterTorokuSaiShoriProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120110.KogakuGassanJikofutangakuKakunDoIchiranhyoSakuseiProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc640011.KogakuGassanJikofutangakuShomeishoInProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC640011.KogakuGassanJikofutangakuShomeishoInProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDeleteReveicedFileProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoHihokenshaKanrenProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.kokuhorenkyoutsu.KokuhorenkyoutsuDoInterfaceKanriKousinProcess;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc640011;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC640011;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigogassan.KaigoGassan_JikofutangakuShomeishoRealHakkoFlag;
