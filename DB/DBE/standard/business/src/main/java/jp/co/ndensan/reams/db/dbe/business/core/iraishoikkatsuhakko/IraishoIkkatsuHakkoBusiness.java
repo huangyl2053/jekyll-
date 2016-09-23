@@ -728,12 +728,14 @@ public class IraishoIkkatsuHakkoBusiness {
      * @param 出力ページ数 出力ページ数
      * @param 導入団体コード 導入団体コード
      * @param reportID RString
+     * @param reportName reportName
      * @return ReportOutputJokenhyoItem
      */
     public ReportOutputJokenhyoItem バッチ出力条件リストの出力(RString 市町村名,
             RString 出力ページ数,
             RString 導入団体コード,
-            RString reportID,RString reportName) {
+            RString reportID,
+            RString reportName) {
         RString csv出力有無 = new RString("無し");
         RString csvファイル名 = new RString("－");
         RString ジョブ番号 = new RString("56");
