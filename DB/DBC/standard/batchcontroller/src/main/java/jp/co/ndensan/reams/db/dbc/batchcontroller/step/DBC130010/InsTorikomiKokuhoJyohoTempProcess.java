@@ -5,6 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC130010;
 
+import java.io.UnsupportedEncodingException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc130010.InsTorikomiKokuhoJyohoTempProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130010.TorikomiKokuhoJyohoEntity;
@@ -16,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
+import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -31,7 +35,7 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
     private RString ファイル名称;
     private InsTorikomiKokuhoJyohoTempProcessParameter processParameter;
     @BatchWriter
-    private IBatchTableWriter<TorikomiKokuhoJyohoEntity> torikomiKokuhoJyohoEntityWriter;
+    private IBatchTableWriter<TorikomiKokuhoJyohoEntity> torikomiKokuhoJyohoWriter;
     private boolean 文言設定flag;
     private TorikomiKokuhoJyohoEntity 取込国保情報Entity;
     private static final int 四 = 4;
@@ -158,15 +162,20 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
 
     @Override
     protected void createWriter() {
-        torikomiKokuhoJyohoEntityWriter = BatchWriters.batchEntityCreatedTempTableWriter(
+        torikomiKokuhoJyohoWriter = BatchWriters.batchEntityCreatedTempTableWriter(
                 TorikomiKokuhoJyohoEntity.class).tempTableName(TEMP_TABLE).build();
     }
 
     @Override
     protected void process(RString result) {
         取込国保情報Entity = new TorikomiKokuhoJyohoEntity();
-        if (ＩＦ種類_電算.equals(processParameter.getIF種類())) {
-            int バイト数 = result.toString().getBytes().length;
+        if (ＩＦ種類_電算.equals(processParameter.getIf種類())) {
+            int バイト数 = 0;
+            try {
+                バイト数 = result.toString().getBytes(Encode.UTF_8.getName()).length;
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(InsTorikomiKokuhoJyohoTempProcess.class.getName()).log(Level.SEVERE, null, ex);
+            }
             RString 指定バイト数な文字列 = get指定バイト数な文字列(九十, result);
             setEntity(指定バイト数な文字列);
             if (九十 == バイト数) {
@@ -177,8 +186,13 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
             }
             エラーチェック処理_電算();
 
-        } else if (ＩＦ種類_電算２.equals(processParameter.getIF種類())) {
-            int バイト数 = result.toString().getBytes().length;
+        } else if (ＩＦ種類_電算２.equals(processParameter.getIf種類())) {
+            int バイト数 = 0;
+            try {
+                バイト数 = result.toString().getBytes(Encode.UTF_8.getName()).length;
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(InsTorikomiKokuhoJyohoTempProcess.class.getName()).log(Level.SEVERE, null, ex);
+            }
             RString 指定バイト数な文字列 = get指定バイト数な文字列(三百四十一, result);
             setEntityDensanNi(指定バイト数な文字列);
             if (三百四十一 == バイト数) {
@@ -191,25 +205,41 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
             エラーチェック処理_電算２();
         }
         if (取込国保情報Entity != null) {
-            torikomiKokuhoJyohoEntityWriter.insert(取込国保情報Entity);
+            torikomiKokuhoJyohoWriter.insert(取込国保情報Entity);
         }
     }
 
     private RString get指定バイト数な文字列(int 指定バイト数, RString 判断文字列) {
-        int 今バイト数 = 判断文字列.toString().getBytes().length;
+        int 今バイト数 = 0;
+        try {
+            今バイト数 = 判断文字列.toString().getBytes(Encode.UTF_8.getName()).length;
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(InsTorikomiKokuhoJyohoTempProcess.class.getName()).log(Level.SEVERE, null, ex);
+        }
         RString 指定バイト数な文字列 = 判断文字列;
         if (今バイト数 < 指定バイト数) {
             for (int i = 今バイト数; i < 指定バイト数; i++) {
                 指定バイト数な文字列 = 指定バイト数な文字列.concat(RString.HALF_SPACE);
             }
         } else {
-            return new RString(new String(指定バイト数な文字列.toString().getBytes(), 0, 指定バイト数));
+            try {
+                return new RString(new String(指定バイト数な文字列.toString().
+                        getBytes(Encode.UTF_8.getName()), 0, 指定バイト数, Encode.UTF_8.getName()));
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(InsTorikomiKokuhoJyohoTempProcess.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return 指定バイト数な文字列;
     }
 
     private RString get指定位置な文字列(RString 指定な文字列, int 開始位置, int 終了位置) {
-        return new RString(new String(指定な文字列.toString().getBytes(), 開始位置, 終了位置));
+        try {
+            return new RString(new String(指定な文字列.toString().
+                    getBytes(Encode.UTF_8.getName()), 開始位置, 終了位置, Encode.UTF_8.getName()));
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(InsTorikomiKokuhoJyohoTempProcess.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     private void エラーチェック処理_電算() {
@@ -217,7 +247,7 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
         IKokuhoShikakuIdoInMapper mapper = getMapper(IKokuhoShikakuIdoInMapper.class);
         Integer 件数 = mapper.get構成市町村マスタ(市町村コード);
         if (is空白(市町村コード) || !Pattern.compile(正則表現_数値.toString()).matcher(市町村コード).matches()
-                || (市町村コード.length() != 5 && 市町村コード.length() != 6)
+                || (市町村コード.length() != 五 && 市町村コード.length() != 六)
                 || (保険者区分_広域保険者.equals(processParameter.get保険者区分())
                 && 0 == 件数)) {
             取込国保情報Entity.setエラーコード(エラーコード_02);
@@ -259,6 +289,20 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
             取込国保情報Entity.setエラー区分(エラー区分_1);
         }
 
+        RString 国保保険者番号 = 取込国保情報Entity.get国保保険者番号();
+        if (!Pattern.compile(正則表現_数値.toString()).matcher(国保保険者番号).matches()) {
+            取込国保情報Entity.setエラーコード(エラーコード_08);
+            if (文言設定flag) {
+                取込国保情報Entity.setエラー文言(コード文言_国保保険者番号);
+                文言設定flag = false;
+            }
+            取込国保情報Entity.setエラー区分(エラー区分_1);
+        }
+
+        エラーチェック処理_電算用();
+    }
+
+    private void エラーチェック処理_電算用() {
         RString 資格取得日 = 取込国保情報Entity.get国保資格取得年月日();
         if (!new FlexibleDate(資格取得日).isValid()) {
             取込国保情報Entity.setエラーコード(エラーコード_06);
@@ -275,16 +319,6 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
             取込国保情報Entity.setエラーコード(エラーコード_07);
             if (文言設定flag) {
                 取込国保情報Entity.setエラー文言(コード文言_資格喪失日);
-                文言設定flag = false;
-            }
-            取込国保情報Entity.setエラー区分(エラー区分_1);
-        }
-
-        RString 国保保険者番号 = 取込国保情報Entity.get国保保険者番号();
-        if (!Pattern.compile(正則表現_数値.toString()).matcher(国保保険者番号).matches()) {
-            取込国保情報Entity.setエラーコード(エラーコード_08);
-            if (文言設定flag) {
-                取込国保情報Entity.setエラー文言(コード文言_国保保険者番号);
                 文言設定flag = false;
             }
             取込国保情報Entity.setエラー区分(エラー区分_1);
@@ -357,7 +391,7 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
         IKokuhoShikakuIdoInMapper mapper = getMapper(IKokuhoShikakuIdoInMapper.class);
         Integer 件数 = mapper.get構成市町村マスタ(市町村コード);
         if (is空白(市町村コード) || !Pattern.compile(正則表現_数値.toString()).matcher(市町村コード).matches()
-                || (市町村コード.length() != 5 && 市町村コード.length() != 6)
+                || (市町村コード.length() != 五 && 市町村コード.length() != 六)
                 || (保険者区分_広域保険者.equals(processParameter.get保険者区分())
                 && 0 == 件数)) {
             取込国保情報Entity.setエラーコード(エラーコード_55);
@@ -401,6 +435,11 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
             }
             取込国保情報Entity.setエラー区分(エラー区分_1);
         }
+        エラーチェック処理_電算２用部分1();
+        エラーチェック処理_電算２用部分2();
+    }
+
+    private void エラーチェック処理_電算２用部分1() {
 
         RString 国保退職非該当日 = 取込国保情報Entity.get国保退職非該当日();
         if ((!Pattern.compile(正則表現_半角空白.toString()).matcher(国保退職非該当日).matches()
@@ -434,6 +473,9 @@ public class InsTorikomiKokuhoJyohoTempProcess extends BatchProcessBase<RString>
             }
             取込国保情報Entity.setエラー区分(エラー区分_1);
         }
+    }
+
+    private void エラーチェック処理_電算２用部分2() {
 
         RString 性別コード = 取込国保情報Entity.get性別コード();
         if (!性別コード_1.equals(性別コード) && !性別コード_2.equals(性別コード) && !性別コード_3.equals(性別コード)) {

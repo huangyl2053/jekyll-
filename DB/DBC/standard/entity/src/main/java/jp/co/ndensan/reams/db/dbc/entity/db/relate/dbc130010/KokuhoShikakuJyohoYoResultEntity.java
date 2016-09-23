@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7123KokuhoShikakuInfoEntity
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class KokuhoShikakuＪyohoYoResultEntity {
+public class KokuhoShikakuJyohoYoResultEntity {
 
     private TorikomiKokuhoJyohoEntity 取込国保情報Entity;
     private DbT7123KokuhoShikakuInfoEntity 現在国保資格情報Entity;
