@@ -84,7 +84,8 @@ public class JukyushaKyufuJissekiDaichoHandler {
     }
 
     private void set初期化_抽出条件1() {
-        div.getTabChushutsuJoken().getTxtRangeYM().setFromValue(RDate.getNowDate().minusMonth(2));
+        RDate hakkoYMD = RDate.getNowDate().minusMonth(2);
+        div.getTabChushutsuJoken().getTxtRangeYM().setFromValue(new RDate(hakkoYMD.wareki().toDateString().toString()));
         div.getTabChushutsuJoken().getTxtRangeYM().setToValue(RDate.getNowDate().minusMonth(2));
     }
 
