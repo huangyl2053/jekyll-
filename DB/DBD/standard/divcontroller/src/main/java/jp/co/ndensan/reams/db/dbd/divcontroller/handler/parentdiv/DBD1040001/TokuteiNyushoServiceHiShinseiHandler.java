@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.tokubetsuchikikasa
 import jp.co.ndensan.reams.db.dbd.definition.core.gemmengengaku.KetteiKubun;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1040001.TokuteiNyushoServiceHiShinseiDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1040001.dgShinseiList_Row;
+import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.tokubetsuchikikasangemmen.TokubetsuChiikiKasanGemmenService;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
 import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShurui;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -32,6 +33,7 @@ import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -40,6 +42,8 @@ import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -53,10 +57,10 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 public class TokuteiNyushoServiceHiShinseiHandler {
 
     private final TokuteiNyushoServiceHiShinseiDiv div;
-    private final RString 申請メニュー = new RString("DBDMN21005");
-    //private final RString 申請メニュー = new RString("menu1");
-    private final RString 承認メニュー = new RString("menu1");
-    //private final RString 承認メニュー = new RString("DBDMN22005");
+    //private final RString 申請メニュー = new RString("DBDMN21005");
+    private final RString 申請メニュー = new RString("menu1");
+    //private final RString 承認メニュー = new RString("menu1");
+    private final RString 承認メニュー = new RString("DBDMN22005");
     private final RString 申請情報を追加する = new RString("申請情報を追加する");
     private static final RString 承認情報を追加する = new RString("承認情報を追加する");
     private static final RString 申請情報 = new RString("申請情報");
@@ -387,6 +391,169 @@ public class TokuteiNyushoServiceHiShinseiHandler {
         set初期状態制御();
         div.getShinsei().getShinseiList().setDisplayNone(false);
         div.getShinsei().getShinseiDetail().setDisplayNone(true);
+    }
+
+    /**
+     * 「申請情報を確定する」ボタン押下の処理です。
+     *
+     * @param viewStateList 処理開始の時、特別地域加算減免申請ListのViewState
+     * @param newViewStateList 処理した後、特別地域加算減免申請ListのViewState
+     * @param state 当該データの状態
+     * @param gemmenGengakuShinsei 減免減額申請
+     * @param builder 利用者負担額減額のBuilder
+     * @param 証記載保険者番号 当該データの証記載保険者番号
+     * @param 履歴番号 当該データの履歴番号
+     * @param taishoshaKey 前画面から渡された「対象者キー」
+     */
+    public void 承認情報を確定するボタン押下(ArrayList<TokubetsuChiikiKasanGemmenViewState> viewStateList,
+            ArrayList<TokubetsuChiikiKasanGemmenViewState> newViewStateList,
+            EntityDataState state, GemmenGengakuShinsei gemmenGengakuShinsei, TokubetsuchiikiKasanGemmenBuilder builder,
+            ShoKisaiHokenshaNo 証記載保険者番号, int 履歴番号, TaishoshaKey taishoshaKey) {
+
+        GemmenGengakuShinseiBuilder gemmenGengakuShinseiBuilder
+                = setGemmenGengakuShinseiBuilderBy入力データ(gemmenGengakuShinsei.createBuilderForEdit());
+        RString 決定区分 = div.getShinseiDetail().getRadKettaiKubun().getSelectedKey();
+        RString 確認番号 = RString.EMPTY;
+        FlexibleDate 決定日 = FlexibleDate.EMPTY;
+        FlexibleDate 適用日 = FlexibleDate.EMPTY;
+        FlexibleDate 有効期限 = FlexibleDate.EMPTY;
+        HokenKyufuRitsu 軽減率 = HokenKyufuRitsu.ZERO;
+        RString 非承認理由 = RString.EMPTY;
+        if (承認する_KEY.equals(決定区分)) {
+            軽減率 = new HokenKyufuRitsu(div.getShinseiDetail().getTxtKeigenRitsu().getValue());
+            確認番号 = div.getShinseiDetail().getTxtKakuninNo().getValue();
+            決定日 = div.getShinseiDetail().getTxtKettaiYMD().getValue();
+            適用日 = div.getShinseiDetail().getTxtTekiyoYMD().getValue();
+            有効期限 = div.getShinseiDetail().getTxtYukoKigenYMD().getValue();
+        } else {
+            軽減率 = new HokenKyufuRitsu(div.getShinseiDetail().getTxtKeigenRitsu().getValue());
+            確認番号 = div.getShinseiDetail().getKetteiJoho().getTxtKakuninNo().getText();
+            決定日 = div.getShinseiDetail().getTxtKettaiYMD().getValue();
+            適用日 = div.getShinseiDetail().getTxtTekiyoYMD().getValue();
+            有効期限 = div.getShinseiDetail().getTxtYukoKigenYMD().getValue();
+            非承認理由 = div.getShinseiDetail().getTxtHiShoninRiyu().getText();
+        }
+        builder.set減額率(軽減率);
+        builder.set確認番号(確認番号);
+        builder.set決定区分(決定区分);
+        builder.set決定年月日(決定日);
+        builder.set適用開始年月日(適用日);
+        builder.set適用終了年月日(有効期限);
+        builder.set非承認理由(非承認理由);
+        builder.set申請事由(div.getShinseiDetail().getTxtShinseiRiyu().getValue());
+        builder.set申請年月日(div.getShinseiDetail().getTxtShinseiYMD().getValue());
+        builder.setGemmenGengakuShinsei(gemmenGengakuShinseiBuilder.build());
+        TokubetsuChiikiKasanGemmenViewState inputView = new TokubetsuChiikiKasanGemmenViewState(builder.build(), state, 履歴番号);
+
+        newViewStateList.add(inputView);
+        for (TokubetsuChiikiKasanGemmenViewState viewState : viewStateList) {
+            if (viewState.getTokubetsuchiikiKasanGemmen().get履歴番号() != inputView.getTokubetsuchiikiKasanGemmen().get履歴番号()) {
+                newViewStateList.add(viewState);
+            }
+        }
+
+        List<dgShinseiList_Row> pageList = div.getShinseiList().getDgShinseiList().getDataSource();
+        boolean is新規 = true;
+        RString 状態 = RString.EMPTY;
+        if (EntityDataState.Added == state) {
+            状態 = 追加;
+        } else if (EntityDataState.Modified == state) {
+            状態 = 修正;
+        }
+
+        for (dgShinseiList_Row row : pageList) {
+            if (row.getHiddenShoKisaiHokenshaNo().equals(証記載保険者番号.value())
+                    && row.getHiddenShinseiRirekiNo().equals(new RString(履歴番号))) {
+                row.getTxtShinseiYMD().setValue(div.getShinseiDetail().getTxtShinseiYMD().getValue());
+                row.setShinseiRiyu(div.getShinseiDetail().getTxtShinseiRiyu().getValue());
+                row.setJotai(状態);
+                row.setKetteiKubun(決定区分);
+                row.getTxtKetteiYMD().setValue(決定日);
+                row.getTxtTekiyoYMD().setValue(適用日);
+                row.getTxtYukoKigenYMD().setValue(有効期限);
+                row.setKeigenritsu(new RString(軽減率.value().toString()));
+                row.setKakuninNo(確認番号);
+                row.setShoninShinaiRiyu(非承認理由);
+                is新規 = false;
+            }
+        }
+        List<dgShinseiList_Row> newRowList = new ArrayList<>(pageList);
+        if (is新規) {
+            dgShinseiList_Row row = new dgShinseiList_Row();
+            row.getTxtShinseiYMD().setValue(div.getShinseiDetail().getTxtShinseiYMD().getValue());
+            row.setShinseiRiyu(div.getShinseiDetail().getTxtShinseiRiyu().getValue());
+            row.setJotai(追加);
+            row.setKetteiKubun(決定区分);
+            row.getTxtKetteiYMD().setValue(決定日);
+            row.getTxtTekiyoYMD().setValue(適用日);
+            row.getTxtYukoKigenYMD().setValue(有効期限);
+            row.setKeigenritsu(new RString(軽減率.value().toString()));
+            row.setKakuninNo(確認番号);
+            row.setShoninShinaiRiyu(非承認理由);
+            row.setHiddenShoKisaiHokenshaNo(証記載保険者番号.value());
+            row.setHiddenShinseiRirekiNo(new RString(履歴番号));
+            newRowList.add(row);
+        }
+        div.getShinseiList().getDgShinseiList().setDataSource(newRowList);
+        set情報クリア(taishoshaKey);
+        set初期状態制御();
+        div.getShinsei().getShinseiList().setDisplayNone(false);
+        div.getShinsei().getShinseiDetail().setDisplayNone(true);
+    }
+
+    /**
+     * 申請情報エリアの入力情報をクリアします。
+     *
+     * @param taishoshaKey 前画面から渡された「対象者キー」
+     */
+    public void 入力情報をクリア(TaishoshaKey taishoshaKey) {
+        set情報クリア(taishoshaKey);
+    }
+
+    /**
+     * 申請一覧変更有無チェックを行います。
+     *
+     * @param list 利用者負担額減額の情報のViewStateリスト
+     * @return true:変更あり false:変更なし
+     */
+    public boolean 申請一覧_変更あり(ArrayList<TokubetsuChiikiKasanGemmenViewState> list) {
+        if (list == null || list.isEmpty()) {
+            return false;
+        }
+        boolean 変更あり = false;
+        for (TokubetsuChiikiKasanGemmenViewState tckgvs : list) {
+            if (EntityDataState.Unchanged != tckgvs.getState()) {
+                変更あり = true;
+            }
+        }
+        return 変更あり;
+    }
+
+    /**
+     * アクセスログのPersonalDataを取得する処理です。
+     *
+     * @param taishoshaKey 前画面から渡された「対象者キー」
+     * @return PersonalData
+     */
+    public PersonalData toPersonalData(TaishoshaKey taishoshaKey) {
+        ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
+        HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
+
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), 被保険者番号.value());
+        return PersonalData.of(識別コード, expandedInfo);
+    }
+
+    /**
+     * 有効期限を取得する処理です。
+     */
+    public void get有効期限By適用日() {
+        TokubetsuChiikiKasanGemmenService service = TokubetsuChiikiKasanGemmenService.createIntance();
+
+        FlexibleDate 適用日 = div.getShinseiDetail().getTxtTekiyoYMD().getValue();
+        if (適用日.isValid()) {
+            FlexibleDate 有効期限 = service.estimate有効期限(適用日);
+            div.getShinseiDetail().getTxtYukoKigenYMD().setValue(有効期限);
+        }
     }
 
     private GemmenGengakuShinseiBuilder setGemmenGengakuShinseiBuilderBy入力データ(GemmenGengakuShinseiBuilder gemmenGengakuShinseiBuilder) {
