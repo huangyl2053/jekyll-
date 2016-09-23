@@ -132,7 +132,7 @@
                                              WHERE   D1."jigyoshaNo" = D2."jigyoshaNo" 
                                              AND     D1."yukoKaishiYMD"  <![CDATA[<]]> D2."yukoKaishiYMD" )) AS "DbT7060KaigoJigyosha"
         ON TEMP."jigyoshaNo" = "DbT7060KaigoJigyosha"."jigyoshaNo"
-        WHERE    TEMP."jigyoshaNo" IS NOT NULL 
+        WHERE    TEMP."jigyoshaNo" IS NOT NULL  AND TEMP."jigyoshaNo" != ''
     </select>
     
     <resultMap id="resultMap_KaigokyufuhiKagoMoshitateshoOutGetjigyoshaNameEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110090.KaigokyufuhiKagoMoshitateshoOutGetjigyoshaNameEntity" autoMapping="true">
@@ -149,7 +149,7 @@
                TEMP.*
           FROM 
                 "DbWT1731KagoMoshitate" AS TEMP 
-          WHERE TEMP."shoKisaiHokenshaNo" IS NULL OR  TEMP."shoKisaiHokenshaNo" =''
+          WHERE TEMP."shoKisaiHokenshaName" IS NULL OR  TEMP."shoKisaiHokenshaName" =''
           AND TEMP."sofuJogaiFlag" = FALSE) AS dbWT1731 
           INNER JOIN ( SELECT A.* 
                        FROM
@@ -174,7 +174,7 @@
             TEMP.*
           FROM 
                 "DbWT1731KagoMoshitate" AS TEMP 
-          WHERE TEMP."shoKisaiHokenshaNo" IS NULL OR TEMP."shoKisaiHokenshaNo" =''
+          WHERE TEMP."shoKisaiHokenshaName" IS NULL OR TEMP."shoKisaiHokenshaName" =''
           AND TEMP."sofuJogaiFlag" = FALSE ) AS dbWT1731 
           INNER JOIN ( SELECT A.* 
                        FROM
