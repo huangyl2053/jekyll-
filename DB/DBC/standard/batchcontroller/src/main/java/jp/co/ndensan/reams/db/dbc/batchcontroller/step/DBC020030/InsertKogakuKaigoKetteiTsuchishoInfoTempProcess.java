@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020060;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020030;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,16 +29,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 高額総合事業サービス費支給（不支給）決定通知書作成の一時テーブル登録処理Process
  *
- * @reamsid_L DBC-2000-030 wangxue
+ * 高額サービス等支給（不支給）決定通知書情報一時TBLの登録処理のクラスです。
+ *
+ * @reamsid_L DBC-2000-030 xicongwang
  */
-public class InsertKogakuJigyoKetteiTsuchishoInfoTempProcess extends
-        BatchProcessBase<KetteiTsuchishoInfoTempResultEntity> {
+public class InsertKogakuKaigoKetteiTsuchishoInfoTempProcess extends BatchProcessBase<KetteiTsuchishoInfoTempResultEntity> {
 
     private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
-            + "kogakusogojigyoservice.IKogakuJigyoServicehiShikyuKetteiTsuchishoMapper.select事業高額決定通知書情報");
-    private static final RString 事業高額決定通知書情報一時_TABLE_NAME = new RString("KetteiTsuchishoInfoTempEntity");
+            + "kogakukaigoservice.IKogakuKaigoServicehiShikyuKetteiTsuchishoMapper.select高額サービス情報");
+    private static final RString 高額サービス決定通知書情報一時_TABLE_NAME = new RString("KetteiTsuchishoInfoTempEntity");
     private static final RString 処理結果確認リスト一時_TABLE_NAME = new RString("DbWT0203ShoriKekkaKakuninList");
 
     private KogakuKaigoServiceProcessParameter parameter;
@@ -46,28 +46,26 @@ public class InsertKogakuJigyoKetteiTsuchishoInfoTempProcess extends
     private InsertKetteiTsuchishoInfoTempMybatisParameter mybatisParameter;
 
     @BatchWriter
-    BatchEntityCreatedTempTableWriter 事業高額決定通知書情報一時tableWriter;
+    BatchEntityCreatedTempTableWriter 高額サービス決定通知書情報一時tableWriter;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 処理結果確認リスト一時tableWriter;
 
     @Override
     protected void initialize() {
-
         manager = ServicehiShikyuKetteiTsuchisho.createInstance();
+
     }
 
     @Override
     protected void createWriter() {
-
-        事業高額決定通知書情報一時tableWriter
-                = new BatchEntityCreatedTempTableWriter(事業高額決定通知書情報一時_TABLE_NAME, KetteiTsuchishoInfoTempEntity.class);
+        高額サービス決定通知書情報一時tableWriter
+                = new BatchEntityCreatedTempTableWriter(高額サービス決定通知書情報一時_TABLE_NAME, KetteiTsuchishoInfoTempEntity.class);
         処理結果確認リスト一時tableWriter
                 = new BatchEntityCreatedTempTableWriter(処理結果確認リスト一時_TABLE_NAME, DbWT0203ShoriKekkaKakuninListTempEntity.class);
     }
 
     @Override
     protected IBatchReader createReader() {
-
         IKozaSearchKey searchKey = new KozaSearchKeyBuilder()
                 .set業務コード(GyomuCode.DB介護保険)
                 .setサブ業務コード(SubGyomuCode.DBC介護給付)
@@ -80,8 +78,7 @@ public class InsertKogakuJigyoKetteiTsuchishoInfoTempProcess extends
 
     @Override
     protected void process(KetteiTsuchishoInfoTempResultEntity entity) {
-
-        事業高額決定通知書情報一時tableWriter.insert(manager.to決定通知書情報(entity));
+        高額サービス決定通知書情報一時tableWriter.insert(manager.to決定通知書情報(entity));
         if (null == entity.get宛名()) {
             処理結果確認リスト一時tableWriter.insert(get処理結果確認リスト(entity));
         }
@@ -102,4 +99,5 @@ public class InsertKogakuJigyoKetteiTsuchishoInfoTempProcess extends
         returnEntity.setBiko(RString.EMPTY);
         return returnEntity;
     }
+
 }
