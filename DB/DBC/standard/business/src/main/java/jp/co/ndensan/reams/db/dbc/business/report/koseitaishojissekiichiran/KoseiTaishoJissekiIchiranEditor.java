@@ -66,7 +66,7 @@ public class KoseiTaishoJissekiIchiranEditor implements
     @Override
     public KoseiTaishoJissekiIchiranSource edit(KoseiTaishoJissekiIchiranSource source) {
         source.title = タイトル;
-        source.printTimeStamp = getSakuseiYmhm(RDateTime.now()).concat(RString.FULL_SPACE).concat(日時作成);
+        source.printTimeStamp = getSakuseiYmhm(RDateTime.now()).concat(RString.HALF_SPACE).concat(日時作成);
         source.kaishiTimestamp = getSakuseiYmhm(開始日時);
         source.shuryoTimestamp = getSakuseiYmhm(終了日時);
         if (entity.get地方公共団体コード() != null) {
@@ -75,7 +75,7 @@ public class KoseiTaishoJissekiIchiranEditor implements
 
         source.cityName = entity.get市町村名();
 
-        if (INDEX_1.equals(出力順情報)) {
+        if (出力順情報.equals(INDEX_1)) {
             source.sort1 = 年度タイトル;
             source.sort2 = 被保険者番号タイトル;
         } else {
@@ -116,7 +116,7 @@ public class KoseiTaishoJissekiIchiranEditor implements
             if (!doカンマ編集(entity.get高額サービス費用額()).isEmpty()) {
                 source.listKyufuJisseki_12 = 前符号タイトル.concat(doカンマ編集(entity.get高額サービス費用額()));
             }
-
+            source.listKyufuJisseki_19 = doカンマ編集(entity.get自己負担差額());
         }
 
         return source;
