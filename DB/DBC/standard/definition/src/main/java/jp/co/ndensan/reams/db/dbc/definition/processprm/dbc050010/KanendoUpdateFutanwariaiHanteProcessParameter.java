@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 処理日付管理マスタ更新のプロセス用パラメータクラスです。
@@ -95,6 +96,10 @@ public class KanendoUpdateFutanwariaiHanteProcessParameter implements IBatchProc
      * @return KanendoUpdateFutanwariaiHanteMybatisParameter
      */
     public KanendoUpdateFutanwariaiHanteMybatisParameter toKanendoUpdateFutanwariaiHanteMybatisParameter() {
-        return new KanendoUpdateFutanwariaiHanteMybatisParameter(処理名.get名称());
+        if (処理名 != null) {
+            return new KanendoUpdateFutanwariaiHanteMybatisParameter(処理名.get名称());
+        }
+        return new KanendoUpdateFutanwariaiHanteMybatisParameter(RString.EMPTY);
+
     }
 }
