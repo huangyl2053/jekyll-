@@ -58,8 +58,6 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
     private static final RString PARAMETER = new RString("対象者検索");
     private static final RString SHINKI = new RString("新規");
     private static final RString SYUSEI = new RString("修正");
-    private static final RString 新規 = new RString("Added");
-    private static final RString 修正 = new RString("Modified");
     private static final RString TSUIKA = new RString("追加");
     private static final RString KOSHIN = new RString("修正");
     private static final RString SAKUJYO = new RString("削除");
@@ -86,13 +84,13 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
         }
         if (メニューID_施設入所により適用.equals(menuId) || メニューID_転入転出保留対象者管理.equals(menuId)) {
             if (!div.getCddTaJushochiTokureishaKanri().get適用情報一覧().isEmpty()
-                && div.getCddTaJushochiTokureishaKanri().get適用情報一覧().get(0).getKaijoTodokedeYMD().getValue() == null) {
+                    && div.getCddTaJushochiTokureishaKanri().get適用情報一覧().get(0).getKaijoTodokedeYMD().getValue() == null) {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnSave"), true);
             }
             return ResponseData.of(div).setState(DBA2040011StateName.追加適用);
         } else if (メニューID_施設退所により解除.equals(menuId)) {
             if (!div.getCddTaJushochiTokureishaKanri().get適用情報一覧().isEmpty()
-                && div.getCddTaJushochiTokureishaKanri().get適用情報一覧().get(0).getKaijoTodokedeYMD().getValue() != null) {
+                    && div.getCddTaJushochiTokureishaKanri().get適用情報一覧().get(0).getKaijoTodokedeYMD().getValue() != null) {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnSave"), true);
             }
             return ResponseData.of(div).setState(DBA2040011StateName.追加解除);
@@ -145,10 +143,10 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
         }
         RString menuId = ResponseHolder.getMenuID();
         if (((メニューID_施設入所により適用.equals(menuId) || メニューID_転入転出保留対象者管理.equals(menuId)
-              || メニューID_施設退所により解除.equals(menuId))
-             && (div.getCddTaJushochiTokureishaKanri().get適用情報一覧().isEmpty()
-                 || RowState.Unchanged.equals(div.getCddTaJushochiTokureishaKanri().get適用情報一覧().get(0).getRowState())))
-            || (メニューID_施設変更により変更.equals(menuId) && !get変更(div))) {
+                || メニューID_施設退所により解除.equals(menuId))
+                && (div.getCddTaJushochiTokureishaKanri().get適用情報一覧().isEmpty()
+                || RowState.Unchanged.equals(div.getCddTaJushochiTokureishaKanri().get適用情報一覧().get(0).getRowState())))
+                || (メニューID_施設変更により変更.equals(menuId) && !get変更(div))) {
             InformationMessage message = new InformationMessage(DbzInformationMessages.内容変更なしで保存不可.getMessage().getCode(),
                     DbzInformationMessages.内容変更なしで保存不可.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
@@ -158,7 +156,7 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
         }
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
-            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
 
             set処理実行(div);
             RealInitialLocker.release(LOCKINGKEY);
@@ -223,7 +221,7 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
             manager.checkHenkoJotai(paramaterList);
         }
         if (メニューID_施設入所により適用.equals(menuId) || メニューID_転入転出保留対象者管理.equals(menuId)
-            || メニューID_施設退所により解除.equals(menuId)) {
+                || メニューID_施設退所により解除.equals(menuId)) {
             div.getShikakuKihonJoho().getCddTaJushochiTokureishaKanri().saveTaJushochiTokurei(
                     ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class).get識別コード());
         }
@@ -256,7 +254,7 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
         boolean henko = false;
         for (dgShisetsuNyutaishoRireki_Row row : div.getCddShisetsuNyutaishoRirekiKanri().get施設入退所履歴一覧()) {
             if (TSUIKA.equals(row.getState()) || KOSHIN.equals(row.getState())
-                || SAKUJYO.equals(row.getState())) {
+                    || SAKUJYO.equals(row.getState())) {
                 henko = true;
                 break;
             }
