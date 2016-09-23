@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 2_世帯員把握のマッピング用XMLです。 -->
+<!-- @reamsid_L DBC-2770-060 jinjue -->
+<mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.fuka.ISetaiShotokuKazeiHanteiMapper">
+
+    <resultMap id="resultMap_RelateEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.setaiyin.SetaiYinEntity" autoMapping="true">
+        <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
+        <result property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result property="jukyuYMD" column="jukyuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="shotokuNendo" column="shotokuNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
+        <result property="juushotitokureigaitou" column="juushotitokureigaitou" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shotaishikibetsuCode" column="shotaishikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shotaihaakujukyuYMD" column="shotaihaakujukyuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="honninnkubun" column="honninnkubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kazeikubungennmenzen" column="kazeikubungennmenzen" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="kazeikubungennmengo" column="kazeikubungennmengo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="gekihenkanwasoti" column="gekihenkanwasoti" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shotaiCode" column="shotaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="seinenngappiYMD" column="seinenngappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="zokugaraCode" column="zokugaraCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="goukeishotokukingaku" column="goukeishotokukingaku" />
+        <result property="nenkinnshuunyuugaku" column="nenkinnshuunyuugaku" />
+        <result property="nenkinnshotokugaku" column="nenkinnshotokugaku" />
+        <result property="kazeishotokugaku" column="kazeishotokugaku"/>
+        <result property="tourokugyoumu" column="tourokugyoumu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shotaiinhihokenshaNo" column="shotaiinhihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="honninkazeikubnn" column="honninkazeikubnn" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shotaikazeikubun" column="shotaikazeikubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shoubokubun" column="shoubokubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="roureifukusikubun" column="roureifukusikubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shotokukubunCode" column="shotokukubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shotaishotokukubunCode" column="shotaishotokukubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="setaiCode" column="setaiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.SetaiCodeTypeHandler"/>
+        <result property="seinengappiYMD" column="seinengappiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="kazokuNo" column="kazokuNo" />
+    </resultMap>
+
+    <select id="select住所地特例該当" resultMap="resultMap_RelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110910.SetaiinHaakuSubMybitisParamter" fetchSize="500" resultOrdered="true">
+        SELECT
+        A."hihokenshaNo",
+        A."shikibetsuCode",
+        A."jukyuYMD",
+        A."shotokuNendo",
+        A."juushotitokureigaitou",
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."setaiCode" AS "setaiCode",
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."seinengappiYMD" AS "seinengappiYMD",
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."kazokuNo" AS "kazokuNo"
+        FROM "SetaiYinHaAKuToRiGaTemp" AS A
+        INNER JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
+        AS  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
+        ON	<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"=A."shikibetsuCode"
+        AND	<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shoriYMD"=A."jukyuYMD"
+        WHERE		A."juushotitokureigaitou"=#{住所地特例該当}
+
+    </select>
+    <select id="select住所地特例該当以外" resultMap="resultMap_RelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110910.SetaiinHaakuSubMybitisParamter" fetchSize="500" resultOrdered="true">
+        SELECT
+        B."hihokenshaNo" AS "hihokenshaNo",
+        B."setaiInshikibetsuCode" AS "shotaishikibetsuCode",
+        B."setaiHaakuKijunYMD" AS "shotaihaakujukyuYMD",
+        B."honninKubun" AS "honninnkubun",
+        C."shotokuNendo",
+        C."juushotitokureigaitou",
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."setaiCode" AS "setaiCode",
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."seinengappiYMD" AS "seinengappiYMD",
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."kazokuNo" AS "kazokuNo"
+        FROM rgdb."DbT7014KaigoSetai" AS B,
+        "SetaiYinHaAKuToRiGaTemp" AS C
+        INNER JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
+        AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
+        ON <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"=C."shikibetsuCode"
+        AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shoriYMD"=C."jukyuYMD"
+        WHERE C."juushotitokureigaitou" <![CDATA[<>]]> #{住所地特例該当}
+        AND C."hihokenshaNo" = B."hihokenshaNo"
+        AND C."jukyuYMD" = B."setaiHaakuKijunYMD"
+        AND B."kanriShikibetsuKubun"=#{管理識別区分}
+
+    </select>
+    <select id="select住所地特例以外の以外" resultMap="resultMap_RelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110910.SetaiinHaakuSubMybitisParamter" fetchSize="500" resultOrdered="true">
+        SELECT
+        A."hihokenshaNo",
+        A."shikibetsuCode",
+        A."jukyuYMD",
+        A."shotokuNendo",
+        A."juushotitokureigaitou"
+        FROM		"SetaiYinHaAKuToRiGaTemp" AS  A,
+        "SetaiYinShiyoTokuJyoHoTemp" AS B
+        WHERE		A."hihokenshaNo"<![CDATA[<>]]>  B."hihokenshaNo"
+    </select>
+    <select id="select生保区分" resultMap="resultMap_RelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110910.SetaiinHaakuSubMybitisParamter" fetchSize="500" resultOrdered="true">
+        SELECT
+        J."hihokenshaNo",
+        J."shikibetsuCode",
+        J."jukyuYMD",
+        J."shotokuNendo",
+        J."juushotitokureigaitou",
+        J."shotaiCode",
+        J."seinenngappiYMD",
+        J."zokugaraCode",
+        J."shotaishikibetsuCode",
+        J."shotaihaakujukyuYMD",
+        J."honninnkubun",
+        J."kazeikubungennmenzen",
+        J."kazeikubungennmengo",
+        J."gekihenkanwasoti",
+        J."goukeishotokukingaku",
+        J."nenkinnshuunyuugaku",
+        J."nenkinnshotokugaku",
+        J."kazeishotokugaku",
+        J."tourokugyoumu",
+        J."shotaiinhihokenshaNo",
+        J."honninkazeikubnn",
+        J."shotaikazeikubun",
+        J."shoubokubun",
+        J."roureifukusikubun",
+        J."shotokukubunCode",
+        J."shotaishotokukubunCode"
+        FROM
+        "SetaiYinShiyoTokuJyoHoTemp"	AS J
+        INNER JOIN  rgur."UrT0508SeikatsuHogoJukyusha" AS T508
+        ON 	J."shikibetsuCode"=T508."shikibetsuCode"
+        AND 	T508."gyomuCode"='DB'
+        AND 	T508."jukyuKaishiYMD"<![CDATA[<=]]> J."jukyuYMD"
+        AND  J."jukyuYMD"<![CDATA[<]]>T508."jukyuHaishiYMD"
+        INNER JOIN  rgur."UrT0528SeikatsuHogoTeishikikan" AS T528
+        ON 	T508."shikibetsuCode"=T528."shikibetsuCode"
+        AND	T508."gyomuCode"=T528."gyomuCode"
+        AND  T508."jukyuKaishiYMD" <![CDATA[<]]> T528."jukyuTeishiKaishiYMD"
+        AND	T528."jukyuTeishiShuryoYMD" <![CDATA[<]]> T508."jukyuKaishiYMD"
+    </select>
+    <select id="select老齢福祉区分" resultMap="resultMap_RelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110910.SetaiinHaakuSubMybitisParamter" fetchSize="500" resultOrdered="true">
+        SELECT
+        J."hihokenshaNo",
+        J."shikibetsuCode",
+        J."jukyuYMD",
+        J."shotokuNendo",
+        J."juushotitokureigaitou",
+        J."shotaiCode",
+        J."seinenngappiYMD",
+        J."zokugaraCode",
+        J."shotaishikibetsuCode",
+        J."shotaihaakujukyuYMD",
+        J."honninnkubun",
+        J."kazeikubungennmenzen",
+        J."kazeikubungennmengo",
+        J."gekihenkanwasoti",
+        J."goukeishotokukingaku",
+        J."nenkinnshuunyuugaku",
+        J."nenkinnshotokugaku",
+        J."kazeishotokugaku",
+        J."tourokugyoumu",
+        J."shotaiinhihokenshaNo",
+        J."honninkazeikubnn",
+        J."shotaikazeikubun",
+        J."shoubokubun",
+        J."roureifukusikubun",
+        J."shotokukubunCode",
+        J."shotaishotokukubunCode"
+        FROM
+        "SetaiYinShiyoTokuJyoHoTemp"	AS J
+        INNER JOIN  rgdb."DbT7006RoreiFukushiNenkinJukyusha" AS T7006
+        ON 	J."shikibetsuCode"=T7006."shikibetsuCode"
+        AND	T7006."jukyuKaishiYMD" <![CDATA[<=]]> J."jukyuYMD"
+        AND     J."jukyuYMD" <![CDATA[<=]]> T7006."jukyuHaishiYMD"
+    </select>
+    <select id="select介護所得" resultMap="resultMap_RelateEntity"
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110910.SetaiinHaakuSubMybitisParamter" fetchSize="500" resultOrdered="true">
+        SELECT
+        T2502."kazeiKubun" AS "kazeikubungennmenzen",
+        T2502."kazeiKubunGemmenGo" AS "kazeikubungennmengo",
+        T2502."gekihenKanwaKubun" AS "gekihenkanwasoti",
+        T2502."gokeiShotokuGaku" AS "goukeishotokukingaku",
+        T2502,"nenkiniShunyuGaku" AS "nenkinnshuunyuugaku",
+        T2502."nenkiniShotokuGaku" AS "nenkinnshotokugaku",
+        T2502."kazeiShotokuGaku" AS "kazeishotokugaku",
+        T2502."torokuGyomu" AS "tourokugyoumu"
+        FROM  rgdb."DbV2502KaigoShotoku" AS T2502,
+        "SetaiYinShiyoTokuJyoHoTemp"	AS A
+        WHERE		T2502."shikibetsuCode"=A."shikibetsuCode"
+        AND		T2502."shotokuNendo"=A."shotokuNendo"
+    </select>
+</mapper>
