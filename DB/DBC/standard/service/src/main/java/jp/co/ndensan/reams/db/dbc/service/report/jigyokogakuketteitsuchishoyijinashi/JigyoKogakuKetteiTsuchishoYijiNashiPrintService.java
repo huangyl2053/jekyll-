@@ -121,8 +121,8 @@ public class JigyoKogakuKetteiTsuchishoYijiNashiPrintService {
     private RString fetch設定値() {
         DbT7067ChohyoSeigyoHanyoDac dac = InstanceProvider.create(DbT7067ChohyoSeigyoHanyoDac.class);
         DbT7067ChohyoSeigyoHanyoEntity entity = dac.selectByKey(SubGyomuCode.DBC介護給付, 帳票分類ID, 管理年度, 項目名);
-        RString 設定値 = entity.getKomokuValue();
-        return 設定値;
+        return entity.getKomokuValue();
+
     }
 
     private static <T extends IReportSource, R extends Report<T>> ReportAssembler<T> createAssembler(
