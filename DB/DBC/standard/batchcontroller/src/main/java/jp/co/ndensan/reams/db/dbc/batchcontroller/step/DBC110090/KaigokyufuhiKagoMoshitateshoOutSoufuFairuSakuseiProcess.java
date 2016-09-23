@@ -93,7 +93,6 @@ public class KaigokyufuhiKagoMoshitateshoOutSoufuFairuSakuseiProcess extends Bat
     private int 総出力件数;
     private int レコード番号;
     private BatchDbReader reader;
-    private Encode 文字コード;
     private RString eucFilePath;
     private RString 出力ファイル名;
     private RString データ種別;
@@ -155,7 +154,7 @@ public class KaigokyufuhiKagoMoshitateshoOutSoufuFairuSakuseiProcess extends Bat
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath)
                 .setDelimiter(コンマ)
                 .setEnclosure(ダブル引用符)
-                .setEncode(文字コード)
+                .setEncode(Encode.UTF_8withBOM)
                 .setNewLine(NewLine.CRLF)
                 .hasHeader(false)
                 .build();
