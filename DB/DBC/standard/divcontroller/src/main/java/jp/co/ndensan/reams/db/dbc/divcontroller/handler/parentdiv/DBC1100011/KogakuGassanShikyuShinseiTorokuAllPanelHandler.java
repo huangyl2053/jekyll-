@@ -628,7 +628,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         } else if (削除.equals(高額合算申請書状態)) {
             if (追加.equals(状態)) {
                 高額合算申請書保持.delete高額合算申請書(高額合算申請書);
-            } else if (RString.isNullOrEmpty(状態) && || 修正.equals(状態)) {
+            } else if (RString.isNullOrEmpty(状態) || 修正.equals(状態)) {
                 KogakuGassanShinseisho 高額合算申請書Result = 高額合算申請書.get高額合算申請書();
                 高額合算申請書Result = 高額合算申請書Result.deleted();
                 高額合算申請書.set高額合算申請書(高額合算申請書Result);
