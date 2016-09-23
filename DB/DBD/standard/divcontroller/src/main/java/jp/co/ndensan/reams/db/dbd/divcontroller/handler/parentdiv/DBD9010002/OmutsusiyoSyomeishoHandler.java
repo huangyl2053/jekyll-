@@ -45,7 +45,6 @@ public class OmutsusiyoSyomeishoHandler {
     private static final RString 医療費控除証明書 = new RString("IryohiKojyoSyomeisho");
     private static final RString DB = new RString("DB");
     private static final RString 帳票分類ID = new RString("DBD100029_OmutsuShoumeisho");
-    private RString 表示対象のデータ区分 = RString.EMPTY;
 
     private final OmutsusiyoSyomeishoDiv div;
 
@@ -104,7 +103,6 @@ public class OmutsusiyoSyomeishoHandler {
         for (IryohiKojoEntityResult 医療費控除 : 医療費控除リスト) {
             if (控除対象年.equals(医療費控除.get控除対象年())) {
                 表示対象データ = 医療費控除;
-                表示対象のデータ区分 = 医療費控除.getデータ区分();
                 break;
             }
         }
@@ -118,8 +116,9 @@ public class OmutsusiyoSyomeishoHandler {
      * 「発行する」ボタンonClick
      *
      * @param 引き継ぎEntity 引き継ぎEntity
+     * @param 医療費控除リスト 医療費控除リスト
      */
-    public void publishReport(TaishoshaKey 引き継ぎEntity) {
+    public void publishReport(TaishoshaKey 引き継ぎEntity, List<IryohiKojoEntityResult> 医療費控除リスト) {
         ShikibetsuCode 識別コード = 引き継ぎEntity.get識別コード();
         HihokenshaNo 被保険者番号 = 引き継ぎEntity.get被保険者番号();
         OmutsusiyoSyomeishoEntity おむつ使用証明書Entity = IryoHiKojoKakuninSinsei.createIntance().editomutsusiyoSyomeisho(識別コード, 帳票分類ID);
@@ -129,9 +128,17 @@ public class OmutsusiyoSyomeishoHandler {
                 ExpandedInformation.newBuilder().code(new Code("003")).name(new RString("被保険者番号"))
                 .value(被保険者番号).build()));
         IryohiKojoManager manager = new IryohiKojoManager();
+        IryohiKojoEntityResult 表示対象データ = new IryohiKojoEntityResult();
+        RString 控除対象年 = div.getPanelShosaiEria().getDdlTaishonen().getSelectedKey();
+        for (IryohiKojoEntityResult 医療費控除 : 医療費控除リスト) {
+            if (控除対象年.equals(医療費控除.get控除対象年())) {
+                表示対象データ = 医療費控除;
+                break;
+            }
+        }
         IryohiKojo 医療費控除 = manager.get医療費控除(被保険者番号,
-                new FlexibleYear(div.getPanelShosaiEria().getDdlTaishonen().getSelectedKey()),
-                表示対象のデータ区分);
+                new FlexibleYear(控除対象年),
+                表示対象データ.getデータ区分());
         IryohiKojoBuilder builder = 医療費控除.createBuilderForEdit();
         builder.set発行年月日(new FlexibleDate(div.getPanelShosaiEria().getTxtSakuseiBi().getValue().toDateString()));
         manager.save医療費控除(builder.build());
