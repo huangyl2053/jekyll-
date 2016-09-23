@@ -25,13 +25,13 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.Kokuhore
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDoInterfaceKanriKousinProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuDoShoriKekkaListSakuseiProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kokuhorenkyotsu.KokuhorenkyotsuGetFileProcessParameter;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.kagoketteihokenshain.FlowEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -183,7 +183,7 @@ public class DBC120070_KogakuKyufuTaishoshaIn extends BatchFlowBase<DBC120070_Ko
         KohifutanshaDoIchiranhyoSakuseiProcessParameter parameter
                 = new KohifutanshaDoIchiranhyoSakuseiProcessParameter();
         parameter.setサブ業務コード(SubGyomuCode.DBC介護給付);
-        parameter.set帳票ID(new ReportId(帳票ID));
+        parameter.set帳票ID(ReportIdDBC.DBC200014.getReportId());
         parameter.set出力順ID(getParameter().get出力順ID());
         parameter.set処理年月(getParameter().get処理年月());
         parameter.setシステム日付(RDateTime.now());

@@ -19,14 +19,17 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHok
 import jp.co.ndensan.reams.db.dbz.business.core.hokenshainputguide.Hokensha;
 import jp.co.ndensan.reams.db.dbz.service.core.hokensha.HokenshaNyuryokuHojoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchCsvListReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchSimpleReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.io.Encode;
+import jp.co.ndensan.reams.uz.uza.io.NewLine;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvListReader;
 import jp.co.ndensan.reams.uz.uza.io.csv.ListToObjectMappingHelper;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -38,7 +41,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  *
  * @reamsid_L DBC-2730-010 chenjie
  */
-public class JukyushaKoshinKekkaInReadCsvFileProcess extends BatchProcessBase<RString> {
+public class JukyushaKoshinKekkaInReadCsvFileProcess extends BatchProcessBase<List<RString>> {
 
     /**
      * CSVファイル取込後の返したエンティティ
@@ -95,12 +98,12 @@ public class JukyushaKoshinKekkaInReadCsvFileProcess extends BatchProcessBase<RS
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchSimpleReader(parameter.getファイルパース());
+        return new BatchCsvListReader(new CsvListReader.InstanceBuilder(parameter.getファイルパース())
+                .setDelimiter(カンマ).setEncode(Encode.SJIS).hasHeader(false).setNewLine(NewLine.CRLF).build());
     }
 
     @Override
-    protected void process(RString line) {
-        List<RString> data = line.split(カンマ.toString());
+    protected void process(List<RString> data) {
         if (data != null && !data.isEmpty()) {
             if (レコード種別_エンド.equals(data.get(INDEX_0))) {
                 return;

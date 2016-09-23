@@ -16,6 +16,10 @@ var DBX;
                 return "onClick_btnSearch";
             };
 
+            Events.onClick_btnAfter = function () {
+                return "onClick_btnAfter";
+            };
+
             Events.onClick_btnBefore = function () {
                 return "onClick_btnBefore";
             };

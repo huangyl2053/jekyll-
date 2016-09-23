@@ -7,7 +7,9 @@ package jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jigyobunkogakugassanshi
 
 import java.util.List;
 import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.IKozaSearchKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.koza.KozaSearchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -18,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public final class JigyoBunKogakuGassanShikyuKetteiMybatisParameter implements IMyBatisParameter {
+public final class JigyoBunKogakuGassanShikyuKetteiMybatisParameter extends KozaSearchParameter implements IMyBatisParameter {
 
     private final RString 保険者コード;
     private final boolean is保険者コード;
@@ -30,13 +32,14 @@ public final class JigyoBunKogakuGassanShikyuKetteiMybatisParameter implements I
     private final boolean is金融機関コードNULL;
     private final RString psmShikibetsuTaisho;
     private final RString psmAtesaki;
-    private final IKozaSearchKey key;
     private final RString 出力順;
 
     /**
      * コンストラクタです。
      */
     private JigyoBunKogakuGassanShikyuKetteiMybatisParameter(
+            IKozaSearchKey key,
+            List<KamokuCode> list,
             RString 保険者コード,
             boolean is保険者コード,
             RString 対象年度,
@@ -47,8 +50,8 @@ public final class JigyoBunKogakuGassanShikyuKetteiMybatisParameter implements I
             boolean is金融機関コードNULL,
             RString psmShikibetsuTaisho,
             RString psmAtesaki,
-            IKozaSearchKey key,
             RString 出力順) {
+        super(key, list);
         this.保険者コード = 保険者コード;
         this.is保険者コード = is保険者コード;
         this.対象年度 = 対象年度;
@@ -59,7 +62,6 @@ public final class JigyoBunKogakuGassanShikyuKetteiMybatisParameter implements I
         this.is金融機関コードNULL = is金融機関コードNULL;
         this.psmShikibetsuTaisho = psmShikibetsuTaisho;
         this.psmAtesaki = psmAtesaki;
-        this.key = key;
         this.出力順 = 出力順;
     }
 
@@ -67,6 +69,7 @@ public final class JigyoBunKogakuGassanShikyuKetteiMybatisParameter implements I
      * MybatisParameterの作成です。
      *
      * @param 保険者コード 保険者コード
+     * @param list 科目コード
      * @param 支給区分List 支給区分List
      * @param 支払方法区分List 支払方法区分List
      * @param 金融機関コード 金融機関コード
@@ -77,21 +80,26 @@ public final class JigyoBunKogakuGassanShikyuKetteiMybatisParameter implements I
      * @param 出力順 出力順
      * @return JigyoBunKogakuGassanShikyuKetteiMybatisParameter
      */
-    public static JigyoBunKogakuGassanShikyuKetteiMybatisParameter createMybatisParameter(RString 保険者コード,
+    public static JigyoBunKogakuGassanShikyuKetteiMybatisParameter createMybatisParameter(
+            IKozaSearchKey key,
+            List<KamokuCode> list,
+            RString 保険者コード,
             RString 対象年度,
             List<RString> 支給区分List,
             List<RString> 支払方法区分List,
             RString 金融機関コード,
             RString psmShikibetsuTaisho,
             RString psmAtesaki,
-            IKozaSearchKey key,
             RString 出力順) {
         boolean is保険者コード = false;
         if (!RString.isNullOrEmpty(保険者コード) && !new RString("000000").equals(保険者コード)) {
             is保険者コード = true;
         }
 
-        return new JigyoBunKogakuGassanShikyuKetteiMybatisParameter(保険者コード,
+        return new JigyoBunKogakuGassanShikyuKetteiMybatisParameter(
+                key,
+                list,
+                保険者コード,
                 is保険者コード,
                 対象年度,
                 isnull(対象年度),
@@ -101,7 +109,6 @@ public final class JigyoBunKogakuGassanShikyuKetteiMybatisParameter implements I
                 isnull(金融機関コード),
                 psmShikibetsuTaisho,
                 psmAtesaki,
-                key,
                 出力順);
     }
 

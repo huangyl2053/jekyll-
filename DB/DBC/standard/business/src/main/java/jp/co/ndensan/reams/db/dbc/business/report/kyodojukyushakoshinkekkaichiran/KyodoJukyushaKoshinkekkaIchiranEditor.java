@@ -9,7 +9,10 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.core.chohyoseigyohanyo.ChohyoSeigyoHanyoKomokuMei;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_IdoKubunCode;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_JukyushaIdoJiyu;
+import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_KyodoKogakuRiyoshafutanDai2dankai;
+import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_KyodoKogakuRoreifukushinenkinJukyuUmu;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_KyodoKogakuSetaiShotokuKubunCode;
+import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_KyodoKogakuShikyuShinseishoShutsuryokuUmu;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_KyodoShokanIchijiSashitomeKubunCode;
 import jp.co.ndensan.reams.db.dbc.definition.core.jukyushaido.JukyushaIF_TeiseiKubunCode;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyodojukyushakoshinkekkaichiran.KyodoJukyushaKoshinkekkaIchiranReportData;
@@ -18,7 +21,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHok
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -160,11 +162,11 @@ public class KyodoJukyushaKoshinkekkaIchiranEditor implements IKyodoJukyushaKosh
             source.list5_8 = 帳票用データ.get共同処理一時TBL().get高_世帯主被保険者番号();
             source.list5_9 = get世帯所得区分コードと名称(帳票用データ.get共同処理一時TBL().get高_世帯所得区分コード());
             source.list5_10 = get所得区分コードと名称(帳票用データ.get共同処理一時TBL().get高_所得区分コード());
-            source.list5_11 = 帳票用データ.get共同処理一時TBL().get高_利用者負担第２段階();
-            source.list5_12 = 帳票用データ.get共同処理一時TBL().get高_支給申請書出力の有無();
-            source.list6_1 = 帳票用データ.get共同処理一時TBL().get高_老齢福祉年金受給の有無();
+            source.list5_11 = get第２段階コードと名称(帳票用データ.get共同処理一時TBL().get高_利用者負担第２段階());
+            source.list5_12 = get支給申請書出力の有無コードと名称(帳票用データ.get共同処理一時TBL().get高_支給申請書出力の有無());
+            source.list6_1 = get老齢福祉年金受給の有無コードと名称(帳票用データ.get共同処理一時TBL().get高_老齢福祉年金受給の有無());
         }
-        source.shikibetuCode = ShikibetsuCode.EMPTY;
+        source.shikibetuCode = 帳票用データ.get被保険者一時TBL().get識別コード();
         if (帳票用データ.get被保険者一時TBL().get被保険者番号() != null && !帳票用データ.get被保険者一時TBL().get被保険者番号().isEmpty()) {
             source.shinseishoKanriNo = new ExpandedInformation(new Code("0003"),
                     new RString("被保険者番号"), 帳票用データ.get被保険者一時TBL().get被保険者番号().value());
@@ -185,6 +187,7 @@ public class KyodoJukyushaKoshinkekkaIchiranEditor implements IKyodoJukyushaKosh
         printTimeStampSb.append(DATE_分);
         printTimeStampSb.append(String.format("%02d", printdate.getSecond()));
         printTimeStampSb.append(DATE_秒);
+        printTimeStampSb.append(RString.HALF_SPACE);
         printTimeStampSb.append(SAKUSEI);
         return printTimeStampSb.toRString();
     }
@@ -261,6 +264,27 @@ public class KyodoJukyushaKoshinkekkaIchiranEditor implements IKyodoJukyushaKosh
         return RString.EMPTY;
     }
 
+    private RString get第２段階コードと名称(RString コード) {
+        if (!RString.isNullOrEmpty(コード)) {
+            return コード.concat(JukyushaIF_KyodoKogakuRiyoshafutanDai2dankai.toValue(コード).get名称());
+        }
+        return RString.EMPTY;
+    }
+
+    private RString get支給申請書出力の有無コードと名称(RString コード) {
+        if (!RString.isNullOrEmpty(コード)) {
+            return コード.concat(JukyushaIF_KyodoKogakuShikyuShinseishoShutsuryokuUmu.toValue(コード).get名称());
+        }
+        return RString.EMPTY;
+    }
+
+    private RString get老齢福祉年金受給の有無コードと名称(RString コード) {
+        if (!RString.isNullOrEmpty(コード)) {
+            return コード.concat(JukyushaIF_KyodoKogakuRoreifukushinenkinJukyuUmu.toValue(コード).get名称());
+        }
+        return RString.EMPTY;
+    }
+
     private RString get住所(RString 住所) {
         if (!RString.isNullOrEmpty(住所) && 住所.length() <= INT_32) {
             return 住所;
@@ -310,7 +334,7 @@ public class KyodoJukyushaKoshinkekkaIchiranEditor implements IKyodoJukyushaKosh
         if (金額.contains(",")) {
             金額 = 金額転換(金額.split(","));
         }
-        return DecimalFormatter.toRString(new Decimal(金額.toString()), 0);
+        return DecimalFormatter.toコンマ区切りRString(new Decimal(金額.toString()), 0);
     }
 
     private RString 金額転換(List<RString> 金額) {

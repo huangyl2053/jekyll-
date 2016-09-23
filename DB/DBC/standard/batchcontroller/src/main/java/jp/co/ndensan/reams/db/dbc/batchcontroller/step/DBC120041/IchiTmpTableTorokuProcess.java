@@ -89,9 +89,9 @@ public class IchiTmpTableTorokuProcess extends BatchProcessBase<KyoudouShoriRela
     private DbWT0001HihokenshaEntity getDbWT0001HihokenshaEntity(KyoudouShoriRelateEntity relateEntity, Decimal renban) {
         DbWT0001HihokenshaEntity entity = new DbWT0001HihokenshaEntity();
         entity.setMeisaiRenban(renban);
-        entity.setOrgHihokenshaNo(new HihokenshaNo(relateEntity.get集約被保険者番号()));
-        entity.setServiceTeikyoYmd(new FlexibleDate(relateEntity.get集約異動年月日()));
-        entity.setHihokenshaNo(new HihokenshaNo(relateEntity.get集約被保険者番号()));
+        entity.setOrgHihokenshaNo(toHihokenshaNo(relateEntity.get集約被保険者番号()));
+        entity.setServiceTeikyoYmd(toFlexibleDate(relateEntity.get集約異動年月日()));
+        entity.setHihokenshaNo(toHihokenshaNo(relateEntity.get集約被保険者番号()));
         return entity;
     }
 
@@ -102,14 +102,14 @@ public class IchiTmpTableTorokuProcess extends BatchProcessBase<KyoudouShoriRela
         entity.setHokenshaName(relateEntity.get集約保険者名());
         entity.setHiHokenshaNo(relateEntity.get集約被保険者番号());
         entity.setIdoYMD(relateEntity.get集約異動年月日());
-        entity.setKihon_shikibetsuNo(relateEntity.get償_交換情報識別番号());
+        entity.setKihon_shikibetsuNo(relateEntity.get基_交換情報識別番号());
         entity.setKihon_idoYMD(relateEntity.get基_異動年月日());
         entity.setKihon_idoKubunCode(relateEntity.get基_異動区分コード());
         entity.setKihon_teiseiKubunCode(relateEntity.get基_訂正区分コード());
         entity.setKihon_teiseiYMD(relateEntity.get基_訂正年月日());
         entity.setKihon_jukyushaIdoJiyu(relateEntity.get基_異動事由());
         entity.setKihon_shoKisaiHokenshaNo(relateEntity.get基_証記載保険者番号());
-        entity.setKihon_hiHokenshaNo(relateEntity.get基_郵便番号());
+        entity.setKihon_hiHokenshaNo(relateEntity.get基_被保険者番号());
         entity.setKihon_hiHokenshaName(relateEntity.get基_被保険者氏名());
         entity.setKihon_telNo(relateEntity.get基_電話番号());
         entity.setKihon_yubinNo(relateEntity.get基_郵便番号());
@@ -149,5 +149,19 @@ public class IchiTmpTableTorokuProcess extends BatchProcessBase<KyoudouShoriRela
         DbWT0002KokuhorenTorikomiErrorEntity entity = new DbWT0002KokuhorenTorikomiErrorEntity();
         entity.setErrorKubun(KokuhorenJoho_TorikomiErrorKubun.取込対象データなし.getコード());
         return entity;
+    }
+
+    private FlexibleDate toFlexibleDate(RString 集約異動年月日) {
+        if (!RString.isNullOrEmpty(集約異動年月日)) {
+            return new FlexibleDate(集約異動年月日);
+        }
+        return FlexibleDate.EMPTY;
+    }
+
+    private HihokenshaNo toHihokenshaNo(RString 被保険者番号) {
+        if (!RString.isNullOrEmpty(被保険者番号)) {
+            return new HihokenshaNo(被保険者番号);
+        }
+        return HihokenshaNo.EMPTY;
     }
 }

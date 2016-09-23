@@ -100,7 +100,7 @@ public enum KogakuGassanShikyuShinseiTorokuValidationMessage implements IValidat
     /**
      * 開始計算期間6
      */
-    開始計算期間6(UrErrorMessages.入力値が不正_追加メッセージあり, "日付の指定に誤りがあります。[後期資格情報　加入期間（開始）]"),
+    開始計算期間6(UrErrorMessages.入力値が不正_追加メッセージあり, "日付の指定に誤りがあります。[後期資格情報　加入期間（終了）]"),
     /**
      * 終了計算期間1
      */

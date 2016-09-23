@@ -768,12 +768,17 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
                     separator(Separator.JAPANESE).
                     fillType(FillType.BLANK).toDateString().concat("（").concat(shiharaiShuryoYMD.getDayOfWeek().getShortTerm().concat("）")));
         }
-        entity.setShiharaiStart(set時間(shiharaiKaishiTime));
+        if (shiharaiKaishiYMD != null && !shiharaiKaishiYMD.isEmpty() || shiharaiShuryoYMD != null && !shiharaiShuryoYMD.isEmpty()) {
+            entity.setShiharaiStart(set時間(shiharaiKaishiTime));
+            entity.setShiharaiEnd(set時間(shiharaiShuryoTime));
+        } else {
+            entity.setShiharaiStart(RString.EMPTY);
+            entity.setShiharaiEnd(RString.EMPTY);
+        }
         if ((shiharaiKaishiYMD != null && !shiharaiKaishiYMD.isEmpty() || shiharaiShuryoYMD != null && !shiharaiShuryoYMD.isEmpty())
                 && (shiharaiKaishiTime != null && !shiharaiKaishiTime.isEmpty() || shiharaiShuryoTime != null && !shiharaiShuryoTime.isEmpty())) {
             entity.setKaraFugo(KARA);
         }
-        entity.setShiharaiEnd(set時間(shiharaiShuryoTime));
     }
 
     private int edit償還集計データ(RString 給付の種類, RString 給付の種類Total, int 償還集計データ件数) {

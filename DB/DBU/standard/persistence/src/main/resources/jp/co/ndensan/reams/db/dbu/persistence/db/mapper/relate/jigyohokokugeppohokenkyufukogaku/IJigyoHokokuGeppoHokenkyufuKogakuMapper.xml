@@ -142,4 +142,51 @@
          rgdb."DbT7021JigyoHokokuTokeiData"
      limit(1)
     </select>
+    
+    <update id="createTempJigyouJyoukyouHoukokuKougakuMotoData">
+        CREATE TEMPORARY TABLE "tempJigyouJyoukyouHoukokuKougaku"
+        (
+          "insertDantaiCd" rshare."UDD050ReamsDonyuDantaiCode" NOT NULL DEFAULT rshare."Fs001市町村Cd"(), -- Reamsコンフィグから読み取った団体(市町村)コード
+          "insertTimestamp" timestamp without time zone NOT NULL DEFAULT rshare."Fs003現在日時"(), -- 行挿入日時
+          "insertReamsLoginId" text NOT NULL DEFAULT rshare."Fs006CurrentReamsLoginId"(), -- 行挿入したReamsログインid。WebApがセットしていない場合は’’
+          "insertContextId" uuid NOT NULL DEFAULT rshare."Fs007CurrentContextId"(), -- 行挿入時の接続コンテキスト
+          "isDeleted" boolean NOT NULL DEFAULT false, -- 論理削除行であればtrue
+          "updateCount" integer NOT NULL DEFAULT 0, -- Update回数。追記型データ設計であれば、常に0
+          "lastUpdateTimestamp" timestamp without time zone DEFAULT rshare."Fs003現在日時"(), -- 最終Update日時。追記型データ設計であれば、常にnull
+          "lastUpdateReamsLoginId" text DEFAULT rshare."Fs006CurrentReamsLoginId"(), -- 最後にupdateしたReamsログインid
+          "dataMeiseiKubun" character varying(1), -- データ明細区分
+          "hihokenshaNo" rgdb."DbUDD002HihokenshaNo", -- 被保険者番号
+          "serviceTeikyoYM" rshare."UDD014YM", -- サービス提供年月
+          "rirekiNo" smallint, -- 履歴番号
+          "shoKisaiHokenshaNo" rgdb."DbUDD003HokenshaNo", -- 証記載保険者番号
+          "shikyuKubunCode" character varying(1), -- 支給区分コード	 1:支給,2:不支給
+          "shikyuKingaku" numeric(10,0), -- 支給額
+          "shiharaiSumiKingakuGokei" numeric(9,0), -- 支払済金額合計
+          "setaiShuyakuNo" character varying(10), -- 世帯集約番号
+          "yousikiKubun" character varying(1), -- 様式区分
+          "setaiGassanJyukyuuKubun" character varying(1), -- 世帯合算受給区分
+          "Biko1" character varying(2), -- 備考1
+          "Biko2" character varying(2), -- 備考2
+          "Biko3" character varying(2), -- 備考3
+          "Biko4" character varying(2), -- 備考4
+          "Biko5" character varying(2), -- 備考5
+          "inputShikibetsuNo" rgdb."DbUDD010NyuryokuShikibetsuNo", -- 入力識別番号
+          "kyufuSakuseiKubunCode" character varying(1), -- 給付実績情報作成区分コード
+          "kyufuJissekiKubunCode" character varying(1), -- 給付実績区分コード
+          "kohi1FutanNo" character varying(8), -- 公費１負担番号
+          "kohi2FutanNo" character varying(8), -- 公費２負担番号
+          "kohi3FutanNo" character varying(8), -- 公費３負担番号
+          "kohi1Shikyugaku" integer, -- 公費１支給額
+          "kohi2Shikyugaku" integer, -- 公費２支給額
+          "kohi3Shikyugaku" integer, -- 公費３支給額
+          "shinsaYM" rshare."UDD014YM", -- 審査年月
+          "hihokennshaKubunCode" character varying(1), -- 被保険者区分コード	 １号・２号
+          "shichosonCode" rshare."UDD023LasdecCode", -- 広住特措置元市町村コード
+          "kyuShichosonCode" rshare."UDD023LasdecCode" -- 旧市町村コード	 合併市町村の時は、旧市町村コードを設定
+        )
+        INHERITS (rshare."UzT0000RootTable")
+        WITH (
+          OIDS=FALSE
+        );
+    </update>
 </mapper>

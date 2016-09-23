@@ -49,10 +49,10 @@ public class NinteiShinseiTorokuUketsukeDiv extends Panel {
     private ButtonDialog btnTainoJokyo;
     @JsonProperty("tabShinseishaJoho")
     private tabShinseishaJohoDiv tabShinseishaJoho;
-    @JsonProperty("ccdKaigoNinteiAtenaInfo")
-    private KaigoNinteiAtenaInfoDiv ccdKaigoNinteiAtenaInfo;
     @JsonProperty("ccdKaigoNinteiShikakuInfo")
     private KaigoninteiShikakuInfoDiv ccdKaigoNinteiShikakuInfo;
+    @JsonProperty("ccdKaigoNinteiAtenaInfo")
+    private KaigoNinteiAtenaInfoDiv ccdKaigoNinteiAtenaInfo;
     @JsonProperty("hdnShinseishoKanriNo")
     private RString hdnShinseishoKanriNo;
     @JsonProperty("hdnShichosonCode")
@@ -97,6 +97,12 @@ public class NinteiShinseiTorokuUketsukeDiv extends Panel {
     private RString hdn表示判定キー;
     @JsonProperty("hdnSubGyomuCd")
     private RString hdnSubGyomuCd;
+    @JsonProperty("hdnRirekiNo")
+    private RString hdnRirekiNo;
+    @JsonProperty("hdnEdaban")
+    private RString hdnEdaban;
+    @JsonProperty("hdnJukyuShinseiJiyu")
+    private RString hdnJukyuShinseiJiyu;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -231,21 +237,21 @@ public class NinteiShinseiTorokuUketsukeDiv extends Panel {
     }
 
     /*
-     * getccdKaigoNinteiAtenaInfo
-     * @return ccdKaigoNinteiAtenaInfo
-     */
-    @JsonProperty("ccdKaigoNinteiAtenaInfo")
-    public IKaigoNinteiAtenaInfoDiv getCcdKaigoNinteiAtenaInfo() {
-        return ccdKaigoNinteiAtenaInfo;
-    }
-
-    /*
      * getccdKaigoNinteiShikakuInfo
      * @return ccdKaigoNinteiShikakuInfo
      */
     @JsonProperty("ccdKaigoNinteiShikakuInfo")
     public IKaigoninteiShikakuInfoDiv getCcdKaigoNinteiShikakuInfo() {
         return ccdKaigoNinteiShikakuInfo;
+    }
+
+    /*
+     * getccdKaigoNinteiAtenaInfo
+     * @return ccdKaigoNinteiAtenaInfo
+     */
+    @JsonProperty("ccdKaigoNinteiAtenaInfo")
+    public IKaigoNinteiAtenaInfoDiv getCcdKaigoNinteiAtenaInfo() {
+        return ccdKaigoNinteiAtenaInfo;
     }
 
     /*
@@ -645,6 +651,60 @@ public class NinteiShinseiTorokuUketsukeDiv extends Panel {
     }
 
     /*
+     * gethdnRirekiNo
+     * @return hdnRirekiNo
+     */
+    @JsonProperty("hdnRirekiNo")
+    public RString getHdnRirekiNo() {
+        return hdnRirekiNo;
+    }
+
+    /*
+     * sethdnRirekiNo
+     * @param hdnRirekiNo hdnRirekiNo
+     */
+    @JsonProperty("hdnRirekiNo")
+    public void setHdnRirekiNo(RString hdnRirekiNo) {
+        this.hdnRirekiNo = hdnRirekiNo;
+    }
+
+    /*
+     * gethdnEdaban
+     * @return hdnEdaban
+     */
+    @JsonProperty("hdnEdaban")
+    public RString getHdnEdaban() {
+        return hdnEdaban;
+    }
+
+    /*
+     * sethdnEdaban
+     * @param hdnEdaban hdnEdaban
+     */
+    @JsonProperty("hdnEdaban")
+    public void setHdnEdaban(RString hdnEdaban) {
+        this.hdnEdaban = hdnEdaban;
+    }
+
+    /*
+     * gethdnJukyuShinseiJiyu
+     * @return hdnJukyuShinseiJiyu
+     */
+    @JsonProperty("hdnJukyuShinseiJiyu")
+    public RString getHdnJukyuShinseiJiyu() {
+        return hdnJukyuShinseiJiyu;
+    }
+
+    /*
+     * sethdnJukyuShinseiJiyu
+     * @param hdnJukyuShinseiJiyu hdnJukyuShinseiJiyu
+     */
+    @JsonProperty("hdnJukyuShinseiJiyu")
+    public void setHdnJukyuShinseiJiyu(RString hdnJukyuShinseiJiyu) {
+        this.hdnJukyuShinseiJiyu = hdnJukyuShinseiJiyu;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -713,13 +773,13 @@ public class NinteiShinseiTorokuUketsukeDiv extends Panel {
     }
 
     @JsonIgnore
-    public INinteiInputDiv getCcdNinteiInput() {
-        return this.getTabShinseishaJoho().getTplShinseijoho().getCcdNinteiInput();
+    public INinteiShinseiTodokedeshaDiv getCcdShinseiTodokedesha() {
+        return this.getTabShinseishaJoho().getTplShinseijoho().getCcdShinseiTodokedesha();
     }
 
     @JsonIgnore
-    public INinteiShinseiTodokedeshaDiv getCcdShinseiTodokedesha() {
-        return this.getTabShinseishaJoho().getTplShinseijoho().getCcdShinseiTodokedesha();
+    public INinteiInputDiv getCcdNinteiInput() {
+        return this.getTabShinseishaJoho().getTplShinseijoho().getCcdNinteiInput();
     }
 
     @JsonIgnore

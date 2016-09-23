@@ -19,10 +19,12 @@ import jp.co.ndensan.reams.db.dbz.service.FukaTaishoshaKey;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
@@ -239,10 +241,12 @@ public class KaigoHihokenshaInfoPanelHandler {
                 : 宛名情報.get識別コード());
         div.getRentaiNofuGimushaInfo().getTxtSetaiCode().setDomain(宛名情報.get世帯コード() == null ? null
                 : 宛名情報.get世帯コード());
-        div.getRentaiNofuGimushaInfo().getTxtShimei().setValue(宛名情報.toEntity().getMeisho() == null ? RString.EMPTY
-                : 宛名情報.toEntity().getMeisho().getColumnValue());
-        div.getRentaiNofuGimushaInfo().getTxtUmareYMD().setValue(宛名情報.toEntity().getSeinengappiYMD() == null ? null
-                : new RDate(宛名情報.toEntity().getSeinengappiYMD().toString()));
+        AtenaMeisho meisho = 宛名情報.toEntity().getMeisho();
+        div.getRentaiNofuGimushaInfo().getTxtShimei().setValue(meisho == null ? RString.EMPTY
+                : meisho.getColumnValue());
+        FlexibleDate seinengappiYMD = 宛名情報.toEntity().getSeinengappiYMD();
+        div.getRentaiNofuGimushaInfo().getTxtUmareYMD().setValue(seinengappiYMD == null ? null
+                : new RDate(seinengappiYMD.toString()));
         div.getRentaiNofuGimushaInfo().getTxtSeibetsu().setValue(宛名情報.toEntity().getSeibetsuCode() == null ? RString.EMPTY
                 : Seibetsu.toValue(宛名情報.toEntity().getSeibetsuCode()).get名称());
         div.getRentaiNofuGimushaInfo().getTxtJuminShu().setValue(宛名情報.toEntity().getJuminJotaiCode() == null ? RString.EMPTY

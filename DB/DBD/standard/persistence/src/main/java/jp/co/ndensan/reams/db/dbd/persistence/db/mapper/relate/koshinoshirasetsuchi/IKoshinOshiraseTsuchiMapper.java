@@ -16,6 +16,12 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbd511002.KoshinOshiraseTsuch
  */
 public interface IKoshinOshiraseTsuchiMapper {
 
+    /**
+     * get帳票出力用情報を取得します。
+     *
+     * @param parameter KoshinOshiraseTsuchiMyBatisParameter
+     * @return List<KoshinOshiraseTsuchiUpdateEntity>
+     */
     List<KoshinOshiraseTsuchiUpdateEntity> get帳票出力用情報取得(KoshinOshiraseTsuchiMyBatisParameter parameter);
 
 }

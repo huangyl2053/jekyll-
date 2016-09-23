@@ -94,4 +94,20 @@ public class ShisetsuNyutaishoManager {
         }
         return 1 == dac.save(介護保険施設入退所.toEntity());
     }
+
+    /**
+     * 介護保険施設入退所を全件返します。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @return int
+     */
+    @Transaction
+    public int get最大履歴番号(ShikibetsuCode 識別コード) {
+        DbT1004ShisetsuNyutaishoEntity entity = dac.get最大履歴番号(識別コード);
+
+        if (entity == null) {
+            return 0;
+        }
+        return entity.getRirekiNo();
+    }
 }

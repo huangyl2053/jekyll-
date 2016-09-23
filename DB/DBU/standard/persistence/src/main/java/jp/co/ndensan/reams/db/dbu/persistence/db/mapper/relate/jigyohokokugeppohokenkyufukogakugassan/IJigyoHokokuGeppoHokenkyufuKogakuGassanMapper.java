@@ -78,4 +78,9 @@ public interface IJigyoHokokuGeppoHokenkyufuKogakuGassanMapper {
      * @return 事業状況報告統計情報
      */
     DbT7021JigyoHokokuTokeiDataEntity selectAll();
+
+    /**
+     * 事業状況報告統計元TEMPテーブルを作成します。
+     */
+    void createTempJigyouJyoukyouHoukokuGassanMotoData();
 }

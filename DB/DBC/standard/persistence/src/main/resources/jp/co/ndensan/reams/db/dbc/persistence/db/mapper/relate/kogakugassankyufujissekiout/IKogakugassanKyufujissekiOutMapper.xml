@@ -27,13 +27,13 @@
             rgdb."DbT3075KogakuGassanKyufuJisseki" AS dbt3075
         WHERE
         <if test="再処理区分 == 1">
-            dbt3075."kokanJohoShikibetsuNo" LIKE #{交換情報識別番号}
+            dbt3075."kokanJohoShikibetsuNo" LIKE '38Q%'
             AND (dbt3075."sofuYM" IS NULL OR dbt3075."sofuYM" = ''
             OR dbt3075."sofuYM" = #{処理年月})
             AND dbt3075."isDeleted" = false
         </if>
-        <if test="再処理区分 == 0">
-            dbt3075."kokanJohoShikibetsuNo" LIKE #{交換情報識別番号}
+        <if test="再処理区分 != 1">
+            dbt3075."kokanJohoShikibetsuNo" LIKE '38Q%'
             AND (dbt3075."sofuYM" IS NULL OR dbt3075."sofuYM" = '')
             AND dbt3075."isDeleted" = false
         </if>
@@ -105,20 +105,41 @@
         <result property="sofuJogaiFlag" column="DbWT38Q1_sofuJogaiFlag" typeHandler="org.apache.ibatis.type.BooleanTypeHandler"/>
     </resultMap>
     
-    <select id="get高額合算給付実績更新対象" resultOrdered="true" fetchSize="500"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassankyufujissekiout.KogakugassanKyufujissekiUpdateDBMybatisParameter"
-            resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3075KogakuGassanKyufuJissekiMapper.ResultMap_DbT3075KogakuGassanKyufuJissekiEntity">
-        SELECT
-            <include refid="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.basic.IDbT3075KogakuGassanKyufuJissekiMapper.allColumns_DbT3075KogakuGassanKyufuJisseki" />
+    <select id="update高額合算給付実績_送付済" 
+            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassankyufujissekiout.KogakugassanKyufujissekiUpdateDBMybatisParameter">
+        UPDATE
+            rgdb."DbT3075KogakuGassanKyufuJisseki"
+        SET 
+            "shoriYM" = #{処理年月},
+            "sofuYM" = #{処理年月},
+            "updateCount" = "updateCount" + 1,
+            "lastUpdateTimestamp" = now()
         FROM
-            rgdb."DbT3075KogakuGassanKyufuJisseki",
             "DbWT38Q1KogakuGassanKyufuJisseki" AS dbwt38Q1
         WHERE
             "DbT3075KogakuGassanKyufuJisseki"."kokanJohoShikibetsuNo" = dbwt38Q1."kokanJohoShikibetsuNo"
         AND "DbT3075KogakuGassanKyufuJisseki"."hihokenshaNo" = dbwt38Q1."hihokenshaNo"
         AND "DbT3075KogakuGassanKyufuJisseki"."shikyuShinseiSeiriNo" = dbwt38Q1."shikyuShinseiSeiriNo"
         AND "DbT3075KogakuGassanKyufuJisseki"."seiriNo" = dbwt38Q1."seiriNo"
-        AND dbwt38Q1."sofuJogaiFlag" = #{送付除外フラグ}
+        AND dbwt38Q1."sofuJogaiFlag" = false
+    </select>
+    
+    <select id="update高額合算給付実績_未送付" >
+        UPDATE
+            rgdb."DbT3075KogakuGassanKyufuJisseki"
+        SET 
+            "shoriYM" = '',
+            "sofuYM" = '',
+            "updateCount" = "updateCount" + 1,
+            "lastUpdateTimestamp" = now()
+        FROM
+            "DbWT38Q1KogakuGassanKyufuJisseki" AS dbwt38Q1
+        WHERE
+            "DbT3075KogakuGassanKyufuJisseki"."kokanJohoShikibetsuNo" = dbwt38Q1."kokanJohoShikibetsuNo"
+        AND "DbT3075KogakuGassanKyufuJisseki"."hihokenshaNo" = dbwt38Q1."hihokenshaNo"
+        AND "DbT3075KogakuGassanKyufuJisseki"."shikyuShinseiSeiriNo" = dbwt38Q1."shikyuShinseiSeiriNo"
+        AND "DbT3075KogakuGassanKyufuJisseki"."seiriNo" = dbwt38Q1."seiriNo"
+        AND dbwt38Q1."sofuJogaiFlag" = true
     </select>
     
     <select id="get送付ファイル作成データ件数" resultOrdered="true" fetchSize="500"

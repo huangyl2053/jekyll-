@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SetaiCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -79,6 +80,10 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
         }
         final UaFt200FindShikibetsuTaishoEntity 宛名の情報 = item.get宛名の情報();
         if (宛名の情報 != null) {
+            final ShikibetsuCode shikibetsuCode = 宛名の情報.getShikibetsuCode();
+            if (shikibetsuCode != null) {
+                source.shikibetsuCode = shikibetsuCode.getColumnValue();
+            }
             IKojin iKojin = ShikibetsuTaishoFactory.createKojin(宛名の情報);
             source.listUpper_4 = JushoHenshu.editJusho(帳票制御共通, iKojin, association);
             GyoseikuCode 行政区コード = 宛名の情報.getGyoseikuCode();
@@ -181,6 +186,10 @@ class TokubetsuChoshuHeijunkaKeisanJuneKekkaIchiranBodyEditor implements ITokube
         }
         final UaFt200FindShikibetsuTaishoEntity 宛名の情報 = item.get宛名の情報();
         if (宛名の情報 != null) {
+            final ShikibetsuCode shikibetsuCode = 宛名の情報.getShikibetsuCode();
+            if (shikibetsuCode != null) {
+                source.shikibetsuCode = shikibetsuCode.getColumnValue();
+            }
             IKojin iKojin = ShikibetsuTaishoFactory.createKojin(宛名の情報);
             source.listUpper_4 = JushoHenshu.editJusho(帳票制御共通, iKojin, association);
             GyoseikuCode 行政区コード = 宛名の情報.getGyoseikuCode();

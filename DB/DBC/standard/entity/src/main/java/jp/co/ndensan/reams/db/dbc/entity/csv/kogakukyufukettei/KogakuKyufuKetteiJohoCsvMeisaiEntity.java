@@ -9,7 +9,6 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Getter;
 import lombok.Setter;
@@ -61,9 +60,9 @@ public class KogakuKyufuKetteiJohoCsvMeisaiEntity {
     @CsvField(order = 180, name = "終了曜日")
     private RString 終了曜日;
     @CsvField(order = 190, name = "開始時間")
-    private RTime 開始時間;
+    private RString 開始時間;
     @CsvField(order = 200, name = "終了時間")
-    private RTime 終了時間;
+    private RString 終了時間;
     @CsvField(order = 210, name = "金融機関コード")
     private RString 金融機関コード;
     @CsvField(order = 220, name = "金融機関名")
