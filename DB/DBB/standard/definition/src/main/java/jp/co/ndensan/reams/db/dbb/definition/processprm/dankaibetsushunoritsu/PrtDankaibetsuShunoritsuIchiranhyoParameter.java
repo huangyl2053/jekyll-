@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.processprm.dankaibetsushunoritsu;
 
+import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dankaibetsushunoritsu.PrtDankaibetsuShunoritsuIchiranhyoMybatisParamter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
@@ -46,7 +47,7 @@ public class PrtDankaibetsuShunoritsuIchiranhyoParameter implements IBatchProces
     private RString 市町村情報名称;
     private RString 旧市町村情報;
     private RString 旧市町村情報名称;
-    private RString 完納出力区分;
+    private List<RString> 完納出力区分;
 
     /**
      * MYBATIS用パラメータを作成します。
