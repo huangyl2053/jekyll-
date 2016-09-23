@@ -21,7 +21,7 @@ public class KokuhoJyohoTorikomiKakuNinCsvEntity {
     @CsvField(order = 1, name = "市町村コード")
     private RString 市町村コード;
     @CsvField(order = 2, name = "IN住民コード")
-    private RString IN住民コード;
+    private RString iN住民コード;
     @CsvField(order = 3, name = "履歴番号")
     private RString 履歴番号;
     @CsvField(order = 4, name = "国保番号")
