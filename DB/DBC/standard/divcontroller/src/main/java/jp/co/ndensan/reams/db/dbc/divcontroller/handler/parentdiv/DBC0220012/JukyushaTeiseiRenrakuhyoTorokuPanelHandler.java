@@ -565,15 +565,21 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
                     get受給者異動送付entity().get認定有効期間終了年月日()));
         }
         受給者訂正連絡票Entity.set支給限度基準額1(new RString(受給者訂正情報.get受給者異動送付entity().
-                get短期入所サービス支給限度基準額()));
-        受給者訂正連絡票Entity.set上限管理適用開始年月日１(受給者訂正情報.get受給者異動送付entity().
-                get短期入所サービス上限管理適用期間開始年月日());
-        受給者訂正連絡票Entity.set上限管理終了年月日１(受給者訂正情報.get受給者異動送付entity().
-                get短期入所サービス上限管理適用期間終了年月日());
-        受給者訂正連絡票Entity.set支給限度基準額２(new RString(受給者訂正情報.get受給者異動送付entity().
                 get訪問通所サービス支給限度基準額()));
         受給者訂正連絡票Entity.set上限管理適用開始年月日１(受給者訂正情報.get受給者異動送付entity().
                 get訪問通所サービス上限管理適用期間開始年月日());
+        if (受給者訂正情報.get受給者異動送付entity().
+                get訪問通所サービス上限管理適用期間終了年月日() != null && !受給者訂正情報.get受給者異動送付entity().
+                get訪問通所サービス上限管理適用期間終了年月日().isEmpty()) {
+            受給者訂正連絡票Entity.set上限管理終了年月日１(new FlexibleDate(受給者訂正情報.get受給者異動送付entity().
+                    get訪問通所サービス上限管理適用期間終了年月日()));
+        }
+        受給者訂正連絡票Entity.set上限管理終了年月日２(受給者訂正情報.get受給者異動送付entity().
+                get短期入所サービス上限管理適用期間終了年月日());
+        受給者訂正連絡票Entity.set支給限度基準額２(new RString(受給者訂正情報.get受給者異動送付entity().
+                get短期入所サービス支給限度基準額()));
+        受給者訂正連絡票Entity.set上限管理適用開始年月日２(受給者訂正情報.get受給者異動送付entity().
+                get短期入所サービス上限管理適用期間開始年月日());
         if (受給者訂正情報.get受給者異動送付entity().
                 get償還払化終了年月日() != null && !受給者訂正情報.get受給者異動送付entity().
                 get償還払化終了年月日().isEmpty()) {
@@ -618,27 +624,22 @@ public class JukyushaTeiseiRenrakuhyoTorokuPanelHandler {
         受給者訂正連絡票Entity.set新３(受給者訂正情報.get受給者異動送付entity().
                 get居宅費_新３_負担限度額());
         if (受給者訂正情報.get受給者異動送付entity().
-                get住所地特例適用開始日() != null && !受給者訂正情報.get受給者異動送付entity().
-                get住所地特例適用開始日().isEmpty()) {
+                get負担限度額適用開始年月日() != null && !受給者訂正情報.get受給者異動送付entity().
+                get負担限度額適用開始年月日().isEmpty()) {
             受給者訂正連絡票Entity.set特定入所者適用開始年月日(new FlexibleDate(受給者訂正情報.get受給者異動送付entity().
-                    get住所地特例適用開始日()));
+                    get負担限度額適用開始年月日()));
         }
         if (受給者訂正情報.get受給者異動送付entity().
-                get住所地特例適用終了日() != null && !受給者訂正情報.get受給者異動送付entity().
-                get住所地特例適用終了日().isEmpty()) {
+                get負担限度額適用終了年月日() != null && !受給者訂正情報.get受給者異動送付entity().
+                get負担限度額適用終了年月日().isEmpty()) {
             受給者訂正連絡票Entity.set特定入所者適用終了年月日(new FlexibleDate(受給者訂正情報.get受給者異動送付entity().
-                    get住所地特例適用終了日()));
+                    get負担限度額適用終了年月日()));
         }
     }
 
     private void get受給者訂正連絡票Entity_One(
             JukyushaIdoRenrakuhyoTorokuEntity 受給者訂正連絡票Entity,
             JukyushaTeiseiRenrakuhyoTorokuFinderResult 受給者訂正情報) {
-        if (受給者訂正情報.get受給者異動送付entity().get訪問通所サービス上限管理適用期間終了年月日() != null
-                && !受給者訂正情報.get受給者異動送付entity().get訪問通所サービス上限管理適用期間終了年月日().isEmpty()) {
-            受給者訂正連絡票Entity.set上限管理適用開始年月日２(new FlexibleDate(受給者訂正情報.
-                    get受給者異動送付entity().get訪問通所サービス上限管理適用期間終了年月日()));
-        }
         受給者訂正連絡票Entity.set計画作成区分(受給者訂正情報.get受給者異動送付entity().
                 get居宅サービス計画作成区分コード());
         受給者訂正連絡票Entity.set居宅支援事業者番号(受給者訂正情報.get受給者異動送付entity().

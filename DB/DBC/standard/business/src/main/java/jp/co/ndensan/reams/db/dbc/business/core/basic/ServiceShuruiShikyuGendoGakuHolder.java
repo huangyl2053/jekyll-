@@ -18,36 +18,34 @@ import jp.co.ndensan.reams.db.dbz.business.core.uzclasses.Models;
 public class ServiceShuruiShikyuGendoGakuHolder implements Serializable {
 
     private static final long serialVersionUID = -3935825012351482058L;
-    private final Models<ServiceShuruiShikyuGendoGakuIdentifier, ServiceShuruiShikyuGendoGaku> serviceShuruiShikyuGendoGakuList;
+    private final Models<ServiceShuruiShikyuGendoGakuIdentifier, ServiceShuruiShikyuGendoGaku> serviceGendoGakuList;
 
     /**
      * ServiceShuruiShikyuGendoGakuHolderのobj作成です。
      */
     public ServiceShuruiShikyuGendoGakuHolder() {
-        this.serviceShuruiShikyuGendoGakuList = Models.create(new ArrayList<ServiceShuruiShikyuGendoGaku>());
+        this.serviceGendoGakuList = Models.create(new ArrayList<ServiceShuruiShikyuGendoGaku>());
     }
 
     /**
      * ServiceShuruiShikyuGendoGakuHolderのobj作成です。
      *
-     * @param serviceShuruiShikyuGendoGakuList
-     * List<ServiceShuruiShikyuGendoGaku>
+     * @param serviceGendoGakuList List<ServiceShuruiShikyuGendoGaku>
      */
-    public ServiceShuruiShikyuGendoGakuHolder(List<ServiceShuruiShikyuGendoGaku> serviceShuruiShikyuGendoGakuList) {
-        this.serviceShuruiShikyuGendoGakuList = Models.create(serviceShuruiShikyuGendoGakuList);
+    public ServiceShuruiShikyuGendoGakuHolder(List<ServiceShuruiShikyuGendoGaku> serviceGendoGakuList) {
+        this.serviceGendoGakuList = Models.create(serviceGendoGakuList);
     }
 
     /**
      * ServiceShuruiShikyuGendoGakuHolderのobj作成です。
      *
-     * @param serviceShuruiShikyuGendoGakuList
-     * List<ServiceShuruiShikyuGendoGaku>
+     * @param serviceGendoGakuList List<ServiceShuruiShikyuGendoGaku>
      * Models<ServiceShuruiShikyuGendoGakuIdentifier,
      * ServiceShuruiShikyuGendoGaku>
      */
     public ServiceShuruiShikyuGendoGakuHolder(
-            Models<ServiceShuruiShikyuGendoGakuIdentifier, ServiceShuruiShikyuGendoGaku> serviceShuruiShikyuGendoGakuList) {
-        this.serviceShuruiShikyuGendoGakuList = serviceShuruiShikyuGendoGakuList;
+            Models<ServiceShuruiShikyuGendoGakuIdentifier, ServiceShuruiShikyuGendoGaku> serviceGendoGakuList) {
+        this.serviceGendoGakuList = serviceGendoGakuList;
     }
 
     /**
@@ -56,7 +54,7 @@ public class ServiceShuruiShikyuGendoGakuHolder implements Serializable {
      * @return List<ServiceShuruiShikyuGendoGaku>
      */
     public List<ServiceShuruiShikyuGendoGaku> getServiceShuruiShikyuGendoGakuList() {
-        return new ArrayList<>(serviceShuruiShikyuGendoGakuList.values());
+        return new ArrayList<>(serviceGendoGakuList.values());
     }
 
     /**
@@ -65,7 +63,7 @@ public class ServiceShuruiShikyuGendoGakuHolder implements Serializable {
      * @param serviceShuruiShikyuGendoGaku ServiceShuruiShikyuGendoGaku
      */
     public void addServiceShuruiShikyuGendoGaku(ServiceShuruiShikyuGendoGaku serviceShuruiShikyuGendoGaku) {
-        serviceShuruiShikyuGendoGakuList.add(serviceShuruiShikyuGendoGaku);
+        serviceGendoGakuList.add(serviceShuruiShikyuGendoGaku);
     }
 
     /**
@@ -75,8 +73,8 @@ public class ServiceShuruiShikyuGendoGakuHolder implements Serializable {
      * @return ServiceShuruiShikyuGendoGaku
      */
     public ServiceShuruiShikyuGendoGaku getServiceShuruiShikyuGendoGaku(ServiceShuruiShikyuGendoGakuIdentifier id) {
-        if (serviceShuruiShikyuGendoGakuList.contains(id)) {
-            return serviceShuruiShikyuGendoGakuList.clone().get(id);
+        if (serviceGendoGakuList.contains(id)) {
+            return serviceGendoGakuList.clone().get(id);
         }
         return null;
     }

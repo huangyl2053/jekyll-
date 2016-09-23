@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc010010.JuryoininKeiyakuShoninKakuninshoProcess;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc010010.DBC010010_JuryoininKeiyakuShoninKakuninshoParameter;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC010010.JuryoininKeiyakuShoninKakuninshoProcess;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC010010.DBC010010_JuryoininKeiyakuShoninKakuninshoParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;

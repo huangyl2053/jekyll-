@@ -80,8 +80,6 @@ public class KogakuGassanShikyugakuKeisanKekkaInProcess extends BatchProcessBase
     private final RString 再送フラグ_再送不要 = new RString("0");
     private KagoKetteiHokenshaInControlCsvEntity controlCsvEntity;
     private KogakuGassanShikyugakuKeisanKekkaInHeaderEntity headRecordEntity;
-    private KogakuGassanShikyugakuKeisanKekkaInMeisaiEntity meisaiEntity;
-    private KogakuGassanShikyugakuKeisanKekkaInShukeiEntity shukeiEntity;
     private int 集計件数;
     private int レコード件数合計;
     private int 明細番号;
@@ -141,14 +139,14 @@ public class KogakuGassanShikyugakuKeisanKekkaInProcess extends BatchProcessBase
             明細番号 = INT_0;
             insert被保険者一時(headRecordEntity);
         } else if (明細レコード種別.equals(data.get(INT_3))) {
-            meisaiEntity = new KogakuGassanShikyugakuKeisanKekkaInMeisaiEntity();
-            meisaiEntity = ListToObjectMappingHelper.toObject(KogakuGassanShikyugakuKeisanKekkaInMeisaiEntity.class, data);
+            KogakuGassanShikyugakuKeisanKekkaInMeisaiEntity meisaiEntity
+                    = ListToObjectMappingHelper.toObject(KogakuGassanShikyugakuKeisanKekkaInMeisaiEntity.class, data);
             明細件数 = 明細件数 + INT_1;
             明細番号 = 明細番号 + INT_1;
             insert高額合算支給額計算結果明細(headRecordEntity, meisaiEntity);
         } else if (トレーラレコード種別.equals(data.get(INT_3))) {
-            shukeiEntity = new KogakuGassanShikyugakuKeisanKekkaInShukeiEntity();
-            shukeiEntity = ListToObjectMappingHelper.toObject(KogakuGassanShikyugakuKeisanKekkaInShukeiEntity.class, data);
+            KogakuGassanShikyugakuKeisanKekkaInShukeiEntity shukeiEntity
+                    = ListToObjectMappingHelper.toObject(KogakuGassanShikyugakuKeisanKekkaInShukeiEntity.class, data);
             insert高額合算支給額計算結果(headRecordEntity, shukeiEntity);
         }
     }

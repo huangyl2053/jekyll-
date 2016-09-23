@@ -63,6 +63,7 @@ public class DBC050010_FurikomimeisaiFurikomiData extends BatchFlowBase<DBC05001
     private static FurikomiGyomunaiKubun 振込業務内区分;
     private static ShoriName 処理名;
     private int レコード件数 = 0;
+    private int 振込明細レコード件数 = 0;
 
     private static final String 口座振込データの登録処理 = "kouzaFurikomiDataInsert";
     private static final String 一時テーブル作成_振込明細 = "tempTableCreateMaisai";
@@ -139,39 +140,45 @@ public class DBC050010_FurikomimeisaiFurikomiData extends BatchFlowBase<DBC05001
             executeStep(高額データ取得);
         }
         executeStep(処理結果確認リスト_振込データなし);
-        executeStep(被保険者台帳_宛名情報);
-        executeStep(被保険者台帳_宛名情報_エラー登録);
-        executeStep(還口座払の口座情報);
-        executeStep(振込データ作成);
-        executeStep(振込データ登録_口座振込一時処理);
+        振込明細レコード件数 = getResult(
+                Integer.class, new RString(処理結果確認リスト_振込データなし),
+                ShoriKekkaKakuninListDataNasiProcess.PARAMETER_OUT_COUNT);
 
-        レコード件数 = getResult(
-                Integer.class, new RString(振込データ登録_口座振込一時処理),
-                FurikomiDataTourokuProcess.PARAMETER_OUT_COUNT);
+        if (0 != 振込明細レコード件数) {
+            executeStep(被保険者台帳_宛名情報);
+            executeStep(被保険者台帳_宛名情報_エラー登録);
+            executeStep(還口座払の口座情報);
+            executeStep(振込データ作成);
+            executeStep(振込データ登録_口座振込一時処理);
+            レコード件数 = getResult(
+                    Integer.class, new RString(振込データ登録_口座振込一時処理),
+                    FurikomiDataTourokuProcess.PARAMETER_OUT_COUNT);
 
-        if (0 != レコード件数) {
-            executeStep(口座振込データの登録処理);
+            if (0 != レコード件数) {
+                executeStep(口座振込データの登録処理);
 
-            if (処理対象_償還高額_1.equals(getParameter().get処理対象().getコード())
-                    || 処理対象_償還_2.equals(getParameter().get処理対象().getコード())) {
+                if (処理対象_償還高額_1.equals(getParameter().get処理対象().getコード())
+                        || 処理対象_償還_2.equals(getParameter().get処理対象().getコード())) {
 
-                executeStep(依頼済登録_償還);
-                executeStep(依頼済取消_償還);
-            }
-            if (処理対象_償還高額_1.equals(getParameter().get処理対象().getコード())
-                    || 処理対象_高額_3.equals(getParameter().get処理対象().getコード())) {
-                executeStep(依頼済登録_高額介護);
-                executeStep(依頼済取消_高額介護);
-            }
-            executeStep(振込明細一覧表作成_受給取得状況);
-            executeStep(振込明細一覧表作成_申請データ有無確認);
-            executeStep(振込明細一覧表作成);
+                    executeStep(依頼済登録_償還);
+                    executeStep(依頼済取消_償還);
+                }
+                if (処理対象_償還高額_1.equals(getParameter().get処理対象().getコード())
+                        || 処理対象_高額_3.equals(getParameter().get処理対象().getコード())) {
+                    executeStep(依頼済登録_高額介護);
+                    executeStep(依頼済取消_高額介護);
+                }
+                executeStep(振込明細一覧表作成_受給取得状況);
+                executeStep(振込明細一覧表作成_申請データ有無確認);
+                executeStep(振込明細一覧表作成);
 
-            if (!(処理区分_明細一覧表作成.equals(getParameter().get処理区分().getコード())
-                    && 支払方法_窓口.equals(getParameter().get支払方法().getコード()))) {
-                executeStep(振込エラーリスト作成);
+                if (!(処理区分_明細一覧表作成.equals(getParameter().get処理区分().getコード())
+                        && 支払方法_窓口.equals(getParameter().get支払方法().getコード()))) {
+                    executeStep(振込エラーリスト作成);
+                }
             }
         }
+
         executeStep(処理結果確認リスト作成);
         executeStep(処理日付管理マスタの更新と出力条件表作成);
     }

@@ -6,12 +6,12 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.dbc180020;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.dataclear.ClearSetaiinJohoTempProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.dataclear.ClearSetainHakuNyuryokuTempProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.work1.HanteiKijunbiSetteiProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.work2.SetainHakunyuryokuProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.work2.SetainJohoSakuseiProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.work2.SetainTuikaProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.ClearSetaiinJohoTempProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.ClearSetainHakuNyuryokuTempProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.HanteiKijunbiSetteiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.SetainHakunyuryokuProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.SetainJohoSakuseiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.SetainTuikaProcess;
 import jp.co.ndensan.reams.db.dbc.business.core.riyoshafutanwariaihantei.HanteiKijunYMDInstance;
 import jp.co.ndensan.reams.db.dbc.business.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHanteiUtil;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180020.DBC180020_IdoRiyoshaFutanwariaiHanteiParameter;

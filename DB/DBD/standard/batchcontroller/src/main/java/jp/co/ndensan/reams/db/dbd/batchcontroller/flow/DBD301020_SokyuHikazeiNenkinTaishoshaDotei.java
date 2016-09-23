@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD301020.SokyuuFuicchiCs
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD301020.SokyuuGaitouIchirannCsvProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD301020.SokyuuSeinenngappiCsvProcess;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD301020.DBD301020_SokyuHikazeiNenkinTaishoshaDoteiParameter;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd8100202.HikazeNenkinTaishoshaDouteiBatchParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD301020.DBD301030_HikazeiNenkinTaishoshaDoteiParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -111,9 +111,9 @@ public class DBD301020_SokyuHikazeiNenkinTaishoshaDotei extends BatchFlowBase<DB
         return loopBatch(HikazeiNennkinnTaishousyaUpdateProcess.class).define();
     }
 
-    private HikazeNenkinTaishoshaDouteiBatchParameter createHikazeNenkinTaishoshaDouteiBatchParameter() {
+    private DBD301030_HikazeiNenkinTaishoshaDoteiParameter createHikazeNenkinTaishoshaDouteiBatchParameter() {
         DBD301020_SokyuHikazeiNenkinTaishoshaDoteiParameter batchParameter = getParameter();
-        HikazeNenkinTaishoshaDouteiBatchParameter subParameter = new HikazeNenkinTaishoshaDouteiBatchParameter();
+        DBD301030_HikazeiNenkinTaishoshaDoteiParameter subParameter = new DBD301030_HikazeiNenkinTaishoshaDoteiParameter();
         subParameter.set年度(batchParameter.get処理年度());
         subParameter.set対象月(batchParameter.get処理月());
         subParameter.set処理区分(batchParameter.get処理区分());

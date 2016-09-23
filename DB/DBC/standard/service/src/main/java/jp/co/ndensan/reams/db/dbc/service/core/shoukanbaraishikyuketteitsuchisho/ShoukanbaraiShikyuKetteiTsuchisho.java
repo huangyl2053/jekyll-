@@ -101,6 +101,7 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
     private static final RString あり = new RString("0");
     private static final RString なし = new RString("1");
     private static final ServiceShuruiCode 固定 = new ServiceShuruiCode("50");
+    private static final ServiceShuruiCode 固定77 = new ServiceShuruiCode("77");
     private static final int NUM_0 = 0;
     private static final int NUM_1 = 1;
     private static final int NUM_2 = 2;
@@ -150,6 +151,8 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
     private static final RString 分 = new RString("分");
     private static final RString RSTRING_00 = new RString("00");
     private static final RString RSTRING_12 = new RString("12");
+    private static final RString 複合型サービス = new RString("複合型サービス");
+    private static final RString 看護小規模多機能型居宅介護 = new RString("看護小規模多機能型居宅介護");
 
     /**
      * コンストラクタです。
@@ -232,6 +235,10 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
         RString 給付の種類Total = RString.EMPTY;
         if (!dbt3053entitys.isEmpty()) {
             for (DbT3053ShokanShukeiEntity entity3053 : dbt3053entitys) {
+                if (固定77.equals(entity3053.getServiceShuruiCode())) {
+                    給付の種類 = edit給付種類(サービス提供年月, 給付の種類);
+                    償還集計データ件数++;
+                }
                 for (DbT7130KaigoServiceShuruiEntity entity7130 : dbt7130entitys) {
                     if (entity7130.getServiceShuruiCd().equals(entity3053.getServiceShuruiCode())) {
                         給付の種類 = edit給付の種類(entity7130.getServiceShuruiRyakusho(), 給付の種類);
@@ -743,6 +750,7 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
         FlexibleDate shiharaiShuryoYMD = shoukanbaraiShikyuEntity.get償還払支給申請().getShiharaiShuryoYMD();
         RString shiharaiKaishiTime = shoukanbaraiShikyuEntity.get償還払支給申請().getShiharaiKaishiTime();
         RString shiharaiShuryoTime = shoukanbaraiShikyuEntity.get償還払支給申請().getShiharaiShuryoTime();
+        entity.setShiharaiEndYMD(RString.EMPTY);
         if (shiharaiKaishiYMD != null && !shiharaiKaishiYMD.isEmpty()) {
             entity.setShiharaiStartYMD(shiharaiKaishiYMD.wareki().
                     eraType(EraType.KANJI).
@@ -758,9 +766,6 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
                     separator(Separator.JAPANESE).
                     fillType(FillType.BLANK).toDateString().concat("（").concat(shiharaiShuryoYMD.getDayOfWeek().getShortTerm().concat("）"))));
         }
-        if (shiharaiShuryoYMD == null) {
-            entity.setShiharaiEndYMD(RString.EMPTY);
-        }
         if ((shiharaiKaishiYMD != null && !shiharaiKaishiYMD.isEmpty()) && (shiharaiShuryoYMD != null && !shiharaiShuryoYMD.isEmpty())) {
             entity.setShiharaiEndYMD(shiharaiShuryoYMD.wareki().
                     eraType(EraType.KANJI).
@@ -771,13 +776,12 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
         if (shiharaiKaishiYMD != null && !shiharaiKaishiYMD.isEmpty() || shiharaiShuryoYMD != null && !shiharaiShuryoYMD.isEmpty()) {
             entity.setShiharaiStart(set時間(shiharaiKaishiTime));
             entity.setShiharaiEnd(set時間(shiharaiShuryoTime));
+            if (shiharaiKaishiTime != null && !shiharaiKaishiTime.isEmpty() || shiharaiShuryoTime != null && !shiharaiShuryoTime.isEmpty()) {
+                entity.setKaraFugo(KARA);
+            }
         } else {
             entity.setShiharaiStart(RString.EMPTY);
             entity.setShiharaiEnd(RString.EMPTY);
-        }
-        if ((shiharaiKaishiYMD != null && !shiharaiKaishiYMD.isEmpty() || shiharaiShuryoYMD != null && !shiharaiShuryoYMD.isEmpty())
-                && (shiharaiKaishiTime != null && !shiharaiKaishiTime.isEmpty() || shiharaiShuryoTime != null && !shiharaiShuryoTime.isEmpty())) {
-            entity.setKaraFugo(KARA);
         }
     }
 
@@ -834,5 +838,24 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
             }
         }
         return 増減_不支給の理由;
+    }
+
+    private RString edit給付種類(FlexibleYearMonth サービス提供年月, RString 給付の種類) {
+        if (サービス提供年月.isBefore(new FlexibleYearMonth("201504"))) {
+            if (給付の種類.isEmpty()) {
+                給付の種類 = 給付の種類.concat(複合型サービス);
+            } else {
+                給付の種類 = 給付の種類.concat(間)
+                        .concat(複合型サービス);
+            }
+        } else {
+            if (給付の種類.isEmpty()) {
+                給付の種類 = 給付の種類.concat(看護小規模多機能型居宅介護);
+            } else {
+                給付の種類 = 給付の種類.concat(間)
+                        .concat(看護小規模多機能型居宅介護);
+            }
+        }
+        return 給付の種類;
     }
 }

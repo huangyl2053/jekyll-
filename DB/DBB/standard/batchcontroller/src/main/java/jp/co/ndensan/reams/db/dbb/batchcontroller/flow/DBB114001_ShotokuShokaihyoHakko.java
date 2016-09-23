@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB1140001.GetJuminjouhouProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB1140001.RinjiCreatTableProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB1140001.ShotokuShokaihyotoReportProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB114001.GetJuminjouhouProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB114001.RinjiCreatTableProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB114001.ShotokuShokaihyotoReportProcess;
 import jp.co.ndensan.reams.db.dbb.business.report.shotokushokaihyohakkoichiran.ShotokushokaihyoHakkoIchiranProperty;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB114001.DBB114001_ShotokuShokaihyoHakkoParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.fuka.SetaiShotokuKazeiHanteiBatchParameter;
