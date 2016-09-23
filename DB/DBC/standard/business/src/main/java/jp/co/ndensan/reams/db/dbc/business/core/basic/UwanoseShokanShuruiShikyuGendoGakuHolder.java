@@ -65,12 +65,11 @@ public class UwanoseShokanShuruiShikyuGendoGakuHolder implements Serializable {
     /**
      * UwanoseShokanShuruiShikyuGendoGakuのlistを設定します。
      *
-     * @param uwanoseShokanShuruiShikyuGendoGaku
-     * UwanoseShokanShuruiShikyuGendoGaku
+     * @param uwanoseShokanShuruiShi UwanoseShokanShuruiShikyuGendoGaku
      */
     public void addUwanoseShokanShuruiShikyuGendoGaku(
-            UwanoseShokanShuruiShikyuGendoGaku uwanoseShokanShuruiShikyuGendoGaku) {
-        uwanoseShokanShuruiShiList.add(uwanoseShokanShuruiShikyuGendoGaku);
+            UwanoseShokanShuruiShikyuGendoGaku uwanoseShokanShuruiShi) {
+        uwanoseShokanShuruiShiList.add(uwanoseShokanShuruiShi);
     }
 
     /**
