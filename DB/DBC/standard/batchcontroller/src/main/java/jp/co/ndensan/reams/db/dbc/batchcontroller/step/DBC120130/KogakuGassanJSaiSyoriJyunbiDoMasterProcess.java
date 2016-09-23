@@ -88,16 +88,8 @@ public class KogakuGassanJSaiSyoriJyunbiDoMasterProcess extends BatchProcessBase
             DbWT37H1KogakuGassanaJikofutangakuTempEntity dbwt37H1Entity) {
         DbWT37H1KogakuGassanaJikofutangakuTempEntity entity = new DbWT37H1KogakuGassanaJikofutangakuTempEntity();
         entity.setRirekiNo(dbt3070Entity.getRirekiNo());
+        entity.setKoshinFlag(true);
         entity.setJikoFutangakuSaiFlag(true);
-        if (dbt3070Entity.getSumi_Gokei_JikoFutanGaku() != null && dbt3070Entity.getSumi_Gokei_Under70KogakuShikyuGaku() != null) {
-            if (dbwt37H1Entity.getGokei_JikoFutanGaku()
-                    == (dbt3070Entity.getSumi_Gokei_JikoFutanGaku().subtract(dbt3070Entity.getSumi_Gokei_Under70KogakuShikyuGaku()))) {
-                entity.setJikoFutangakuSaiFlag(true);
-            } else {
-                entity.setJikoFutangakuSaiFlag(false);
-            }
-        }
-
         高額合算自己負担額一時tableWriter.update(entity);
     }
 
