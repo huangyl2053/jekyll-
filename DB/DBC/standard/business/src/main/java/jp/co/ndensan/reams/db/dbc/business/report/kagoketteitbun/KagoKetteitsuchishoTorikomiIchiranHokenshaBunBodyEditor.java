@@ -51,6 +51,7 @@ public class KagoKetteitsuchishoTorikomiIchiranHokenshaBunBodyEditor
         if (帳票用パラメター.is集計flg()) {
             edit集計(source);
         }
+        source.shikibetuCode = 帳票出力対象.get識別コード();
         return source;
     }
 
