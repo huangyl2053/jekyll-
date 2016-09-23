@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.dbc710030;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc10030.HanyoListKogakuKaigoServiceHiJokyoNoProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc10030.HanyoListKogakuKaigoServiceHiJokyoProcess;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyourisutosyuturyoku.HanyoListKogakuKaigoBatchParameter;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC10030.HanyoListKogakuKaigoServiceHiJokyoNoProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC10030.HanyoListKogakuKaigoServiceHiJokyoProcess;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710030.DBC710030_HanyoListKogakuKaigoServiceHiJokyoParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -17,8 +17,8 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBC-3092-020 sunhui
  */
-public class DBC710030_HanyoListKogakuKaigoServiceHiJokyoFlow
-        extends BatchFlowBase<HanyoListKogakuKaigoBatchParameter> {
+public class DBC710030_HanyoListKogakuKaigoServiceHiJokyo
+        extends BatchFlowBase<DBC710030_HanyoListKogakuKaigoServiceHiJokyoParameter> {
 
     private static final String CSV_EUC_PROCESS = "csvEucProcess";
 
