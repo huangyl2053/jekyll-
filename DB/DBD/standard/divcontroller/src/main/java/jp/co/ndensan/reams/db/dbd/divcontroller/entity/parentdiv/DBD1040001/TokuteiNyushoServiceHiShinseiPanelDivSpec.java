@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1040001;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.tokubetsuchikikasangemmen.TokubetsuChiikiKasanGemmenService;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -201,8 +202,53 @@ public enum TokuteiNyushoServiceHiShinseiPanelDivSpec implements IPredicate<Toku
             HihokenshaNo 被保険者番号 = new HihokenshaNo(div.getCcdKaigoKihon().get被保険者番号());
             FlexibleDate 適用日 = div.getShinseiDetail().getTxtTekiyoYMD().getValue();
 
-            boolean 利用者 = service.canBe利用者(被保険者番号, 適用日);
-            return 利用者;
+            return service.canBe利用者(被保険者番号, 適用日);
         }
     },
+    適用期間重複なしのチェック {
+        /**
+         * 適用期間重複なしのチェック。
+         *
+         * @param div 利用者負担額減額申請Div
+         * @return true:適用期間重複なし、false:適用期間重複あり。
+         */
+        @Override
+        public boolean apply(TokuteiNyushoServiceHiShinseiDiv div) {
+            RString 削除 = new RString("削除");
+
+            List<dgShinseiList_Row> list = div.getShinseiList().getDgShinseiList().getDataSource();
+            if (list == null || list.isEmpty()) {
+                return true;
+            }
+            FlexibleDate 適用日１;
+            FlexibleDate 適用日２;
+            FlexibleDate 有効期限１;
+            FlexibleDate 有効期限２;
+            dgShinseiList_Row row1;
+            dgShinseiList_Row row2;
+            for (int i = 0; i < list.size() - 1; i++) {
+                row1 = list.get(i);
+                適用日１ = row1.getTxtTekiyoYMD().getValue();
+                有効期限１ = row1.getTxtYukoKigenYMD().getValue();
+                if (削除.equals(row1.getJotai()) || 適用日１ == null || 適用日１.isEmpty() || 有効期限１ == null || 有効期限１.isEmpty()) {
+                    continue;
+                }
+                for (int j = i + 1; j < list.size(); j++) {
+                    row2 = list.get(j);
+                    適用日２ = row2.getTxtTekiyoYMD().getValue();
+                    有効期限２ = row2.getTxtYukoKigenYMD().getValue();
+                    if (削除.equals(row2.getJotai()) || 適用日２ == null || 適用日２.isEmpty() || 有効期限２ == null || 有効期限２.isEmpty()) {
+                        continue;
+                    }
+                    if (適用日２.isBeforeOrEquals(適用日１) && 有効期限１.isBeforeOrEquals(有効期限２)
+                            || 適用日１.isBeforeOrEquals(適用日２) && 有効期限２.isBeforeOrEquals(有効期限１)
+                            || (適用日２.isBeforeOrEquals(適用日１) && 適用日１.isBeforeOrEquals(有効期限２))
+                            || (適用日２.isBeforeOrEquals(有効期限１) && 有効期限１.isBeforeOrEquals(有効期限２))) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+    };
 }
