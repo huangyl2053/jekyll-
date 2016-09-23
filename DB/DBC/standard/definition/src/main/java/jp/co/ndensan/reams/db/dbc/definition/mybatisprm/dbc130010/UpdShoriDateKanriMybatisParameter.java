@@ -13,8 +13,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * バッチ設計_DBC130010_国保資格異動情報取込
  *
- * @author dengwei
+ * @reamsid_L DBC-3020-030 dengwei
  */
 @Getter
 @Setter

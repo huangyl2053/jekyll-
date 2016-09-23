@@ -5,8 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1070021;
 
+import jp.co.ndensan.reams.db.dbd.definition.reportid.ReportIdDBD;
 import jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD1070021.HomonKaigoRiyoshaFutangakuGengakuNinteishaList;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1070021.HomonKaigoRiyoshaFutanGengakuNinteishaListDiv;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -41,8 +43,7 @@ public class HomonKaigoRiyoshaFutanGengakuNinteishaListHandler {
      *
      */
     public void onLoad() {
-        // todo qa
-        //div.getCcdChohyoShuturyokujun().load(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD200014.getReportId());
+        div.getCcdChohyoShuturyokujun().load(SubGyomuCode.DBD介護受給, ReportIdDBD.DBD200003.getReportId());
         div.getTxtTaishoYM().setValue(new FlexibleDate(RDate.getNowDate().toDateString()));
         div.getTxtShotokuNendo().setValue(new FlexibleDate(RDate.getNowDate().toDateString()));
         div.getTxtKijunYMD().setValue(new FlexibleDate(RDate.getNowDate().toDateString()));

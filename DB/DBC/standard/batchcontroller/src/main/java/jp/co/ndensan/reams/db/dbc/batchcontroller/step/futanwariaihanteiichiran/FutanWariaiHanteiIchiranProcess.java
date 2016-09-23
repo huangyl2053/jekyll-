@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbc.definition.core.riyoshafutan.RiyoshaFutanWarit
 import jp.co.ndensan.reams.db.dbc.definition.processprm.futanwariaihanteiichiran.FutanWariaiHanteiIchiranProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.csv.futanwariaihanteiichiran.FutanWariaiHanteiIchiranCsvEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.futanwariaihanteiichiran.FlowEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.futanwariaihanteiichiran.FutanwariaiHanteiIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.nenjiriyoshafutanwariaihantei.DbWT1801ShoriKekkaKakuninListEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.futanwariaihanteiichiran.FutanWariaiHanteiIchiranSource;
@@ -32,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
+import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
@@ -96,7 +98,17 @@ public class FutanWariaiHanteiIchiranProcess extends BatchKeyBreakBase<Futanwari
     private final List<RString> rStringList = new ArrayList<>();
     private Association 導入団体クラス;
     private boolean flag;
+    private boolean isSJIS類字;
     private int 連番 = 0;
+    private OutputParameter<FlowEntity> flowEntity;
+    /**
+     * 送付対象データ取得後の返した
+     */
+    public static final RString PARAMETER_OUT_FLOWENTITY;
+
+    static {
+        PARAMETER_OUT_FLOWENTITY = new RString("flowEntity");
+    }
     @BatchWriter
     private BatchReportWriter<FutanWariaiHanteiIchiranSource> batchReportWriter;
     private ReportSourceWriter<FutanWariaiHanteiIchiranSource> reportSourceWriter;
@@ -110,6 +122,8 @@ public class FutanWariaiHanteiIchiranProcess extends BatchKeyBreakBase<Futanwari
         KaigoToiawasesakiConfig config = new KaigoToiawasesakiConfig();
         共通_文字コード = config.getEUC共通_文字コード();
         flag = true;
+        isSJIS類字 = false;
+        flowEntity = new OutputParameter<>();
     }
 
     @Override
@@ -125,10 +139,12 @@ public class FutanWariaiHanteiIchiranProcess extends BatchKeyBreakBase<Futanwari
             文字コード = Encode.SJIS;
         } else if (RSTRING_THREE.equals(共通_文字コード)) {
             文字コード = Encode.JIS;
+            isSJIS類字 = true;
         } else {
             文字コード = Encode.UTF_8withBOM;
         }
         eucFilePath = Path.combinePath(spoolWorkPath, CSVMEISHO);
+        flowEntity.setValue(new FlowEntity(eucFilePath, isSJIS類字));
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).

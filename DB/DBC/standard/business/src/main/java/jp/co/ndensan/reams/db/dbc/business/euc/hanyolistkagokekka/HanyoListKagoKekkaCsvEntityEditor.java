@@ -263,15 +263,15 @@ public class HanyoListKagoKekkaCsvEntityEditor {
     }
 
     private void edit_part2(HanyoListKagoKekkaCsvEntity csvEntity) {
-        csvEntity.set取扱年月(format日付項目(entity.get過誤決定明細().getToriatsukaiYM()));
         if (entity.get過誤決定明細() != null) {
+            csvEntity.set取扱年月(format日付項目(entity.get過誤決定明細().getToriatsukaiYM()));
             if (!RString.isNullOrEmpty(entity.get過誤決定明細().getHokenshaKubun())) {
                 csvEntity.set保険者区分(KagoMoshitateKekka_HokenshaKubun.toValue(entity.get過誤決定明細().getHokenshaKubun()).get略称());
             }
             csvEntity.set過誤事業者名(entity.get過誤決定事業者().getJigyoshaName().getColumnValue());
             csvEntity.set過誤事業者番号(entity.get過誤決定明細().getJigyoshoNo().getColumnValue());
         }
-        if (entity != null && entity.get介護サービス種類() != null) {
+        if (null != entity.get介護サービス種類()) {
             ServiceShuruiCode サービス種類コード = entity.get過誤決定明細().getServiceShuruiCode();
             if (サービス種類コード != null) {
                 csvEntity.setサービス種類(サービス種類コード.getColumnValue());
@@ -428,15 +428,15 @@ public class HanyoListKagoKekkaCsvEntityEditor {
     }
 
     private void noRenbanEdit_part2(HanyoListKagoKekkaNoRebanCsvEntity csvEntity) {
-        csvEntity.set取扱年月(format日付項目(entity.get過誤決定明細().getToriatsukaiYM()));
         if (entity.get過誤決定明細() != null) {
+            csvEntity.set取扱年月(format日付項目(entity.get過誤決定明細().getToriatsukaiYM()));
             if (!RString.isNullOrEmpty(entity.get過誤決定明細().getHokenshaKubun())) {
                 csvEntity.set保険者区分(KagoMoshitateKekka_HokenshaKubun.toValue(entity.get過誤決定明細().getHokenshaKubun()).get略称());
             }
             csvEntity.set過誤事業者名(entity.get過誤決定事業者().getJigyoshaName().getColumnValue());
             csvEntity.set過誤事業者番号(entity.get過誤決定明細().getJigyoshoNo().getColumnValue());
         }
-        if (entity != null && entity.get介護サービス種類() != null) {
+        if (entity.get介護サービス種類() != null) {
             ServiceShuruiCode サービス種類コード = entity.get過誤決定明細().getServiceShuruiCode();
             if (サービス種類コード != null) {
                 csvEntity.setサービス種類(サービス種類コード.getColumnValue());

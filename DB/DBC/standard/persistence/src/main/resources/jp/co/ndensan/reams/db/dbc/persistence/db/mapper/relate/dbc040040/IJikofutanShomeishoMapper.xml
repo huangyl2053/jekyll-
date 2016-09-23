@@ -124,6 +124,7 @@
     
     <resultMap id="resultMap_KogakuGassanTempSize" autoMapping="true"
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc040040.KogakuGassanNendoSizeEntity">
+        <id column="kogakuGassanTemp_hihokenshaNo" />
         <result property="採番件数" column="nendoListNum_listSize" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <association property="高額合算一時" resultMap="ResultMap_KogakuGassanTemp"/>
     </resultMap> 

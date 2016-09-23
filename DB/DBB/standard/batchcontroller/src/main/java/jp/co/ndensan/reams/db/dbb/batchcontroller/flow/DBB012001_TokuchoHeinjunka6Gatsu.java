@@ -45,7 +45,7 @@ public class DBB012001_TokuchoHeinjunka6Gatsu extends BatchFlowBase<DBB012001_To
     private static final String 賦課情報の登録 = "FukaJohoToroku";
     private static final String バッチ出力条件表 = "PrtReportOutputJokenhyoProcess";
     private static final String 処理日付管理テーブル更新 = "updateSystemTimeProcess";
-    private static final RString BATCH_ID = new RString("KeisangoJohoSakuseiFlow");
+    private static final RString BATCH_ID = new RString("DBB003001_KeisangoJohoSakusei");
     private static final RString FUKAJOHOTOROKUFLOW_FLOWID = new RString("DBB004001_FukaJohoToroku");
     private static RString 対象者ページ数;
     private static RString 対象外ページ数;

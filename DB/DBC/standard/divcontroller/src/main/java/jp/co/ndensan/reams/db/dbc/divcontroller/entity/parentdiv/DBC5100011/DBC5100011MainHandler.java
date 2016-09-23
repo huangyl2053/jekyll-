@@ -7,13 +7,13 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5100011;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC150010.DBC150010_RiyojokyoTokeihyoMeisaiListParameter;
 import jp.co.ndensan.reams.db.dbc.definition.core.tokeihyo.RiyojokyoTokeihyo_ShutsuryokuKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.tokeihyo.Tokeihyo_CSVEditKubun;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.Chiku;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -79,7 +79,7 @@ public class DBC5100011MainHandler {
         tempData.set旧市町村コード(div.getCcdChikuShichosonSelect().get旧市町村コード());
         tempData.set旧市町村名称(div.getCcdChikuShichosonSelect().get旧市町村名称());
         if (div.getCcdChikuShichosonSelect().get選択結果() != null) {
-            tempData.set選択地区リスト(div.getCcdChikuShichosonSelect().get選択結果().get(Chiku.地区.getコード()));
+            tempData.set選択地区リスト(div.getCcdChikuShichosonSelect().get選択結果());
         }
         tempData.set導入形態コード(DonyuKeitaiCode.toValue(div.getCcdChikuShichosonSelect().get導入形態コード()).getCode());
         tempData.set対象年月(div.getRadTaishoYM().getSelectedKey());
@@ -108,7 +108,7 @@ public class DBC5100011MainHandler {
             tempData.set終了居宅利用率(new RString(div.getTxtKyotakuRiyoritsuRange().getToValue().toString()));
         }
         if (div.getTxtTaishoYmRange().getToValue() != null) {
-            tempData.set終了年月(div.getTxtTaishoYmRange().getToValue().wareki().toDateString());
+            tempData.set終了年月(div.getTxtTaishoYmRange().getToValue().seireki().toDateString());
         }
         if (div.getTxtHomonRiyoritsuRange().getToValue() != null) {
             tempData.set終了訪問居宅利用率(new RString(div.getTxtHomonRiyoritsuRange().getToValue().toString()));
@@ -126,7 +126,7 @@ public class DBC5100011MainHandler {
             tempData.set開始居宅利用率(new RString(div.getTxtKyotakuRiyoritsuRange().getFromValue().toString()));
         }
         if (div.getTxtTaishoYmRange().getFromValue() != null) {
-            tempData.set開始年月(div.getTxtTaishoYmRange().getFromValue().wareki().toDateString());
+            tempData.set開始年月(div.getTxtTaishoYmRange().getFromValue().seireki().toDateString());
         }
         if (div.getTxtHomonRiyoritsuRange().getFromValue() != null) {
             tempData.set開始訪問居宅利用率(new RString(div.getTxtHomonRiyoritsuRange().getFromValue().toString()));
@@ -226,6 +226,8 @@ public class DBC5100011MainHandler {
             div.getRadHomonRiyoritsu().setSelectedKey(訪問利用率指定);
         }
         RString 開始訪問居宅利用率 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("開始訪問居宅利用率"));
+        Map<RString, RString> 選択地区リスト = restoreBatchParameterMap.getParameterValue(Map.class, new RString("選択地区リスト"));
+        div.getCcdChikuShichosonSelect().set選択結果(選択地区リスト);
         if (!RString.EMPTY.equals(開始訪問居宅利用率)) {
             div.getTxtHomonRiyoritsuRange().setFromValue(new Decimal(開始訪問居宅利用率.toString()));
         }

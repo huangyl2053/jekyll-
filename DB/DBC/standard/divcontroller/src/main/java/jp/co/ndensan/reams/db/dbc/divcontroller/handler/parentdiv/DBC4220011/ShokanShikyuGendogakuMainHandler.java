@@ -64,15 +64,13 @@ public class ShokanShikyuGendogakuMainHandler {
     public void initializeDisplay(List<ShokanShuruiShikyuGendoGaku> 償還list,
             List<UwanoseShokanShuruiShikyuGendoGaku> 上乗せ償還list) {
         List<ShokanShuruiShikyuGendoGakuData> entityList = new ArrayList<>();
-        if (償還list != null) {
-            if (!償還list.isEmpty()) {
-                step1(償還list, entityList);
-            }
+        if (償還list != null
+                && !償還list.isEmpty()) {
+            step1(償還list, entityList);
         }
-        if (上乗せ償還list != null) {
-            if (!上乗せ償還list.isEmpty()) {
-                step2(上乗せ償還list, entityList);
-            }
+        if (上乗せ償還list != null
+                && !上乗せ償還list.isEmpty()) {
+            step2(上乗せ償還list, entityList);
         }
         if (!entityList.isEmpty()) {
             List<dgShikyuGendogaku_Row> rowList = new ArrayList<>();
@@ -538,14 +536,13 @@ public class ShokanShikyuGendogakuMainHandler {
         List<dgShikyuGendogaku_Row> rowList = div.getShokanShikyuGendogakuIchiran()
                 .getDgShikyuGendogaku().getDataSource();
         for (dgShikyuGendogaku_Row row : rowList) {
-            if (row.getTekiyoShuryoYM().getValue() != null) {
-                if (テーブル区分.equals(row.getTableKubun())
-                        && !RS_1.equals(row.getHdnSaishinFlag())
-                        && 適用開始年月.minusMonth(INDEX_1).toDateString().equals(
-                                row.getTekiyoShuryoYM().getValue().getYearMonth().toDateString())) {
-                    setUpdateList(FlexibleYearMonth.EMPTY, update償還List, update上乗せList, row,
-                            償還HolderList, 上乗せ償還HolderList);
-                }
+            if (row.getTekiyoShuryoYM().getValue() != null
+                    && テーブル区分.equals(row.getTableKubun())
+                    && !RS_1.equals(row.getHdnSaishinFlag())
+                    && 適用開始年月.minusMonth(INDEX_1).toDateString().equals(
+                            row.getTekiyoShuryoYM().getValue().getYearMonth().toDateString())) {
+                setUpdateList(FlexibleYearMonth.EMPTY, update償還List, update上乗せList, row,
+                        償還HolderList, 上乗せ償還HolderList);
             }
         }
         償還manager.deleteAndUpdate償還(delete償還List, update償還List);

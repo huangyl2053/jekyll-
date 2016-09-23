@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbt21004;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +22,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankaiList;
 import jp.co.ndensan.reams.db.dbb.business.report.dbbt21004.DankaiProcessEntityList;
 import jp.co.ndensan.reams.db.dbb.definition.mybatisprm.dbbbt21004.DankaibetuHihokensyasuIchiranhyoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt21004.DankaibetuHihokensyasuIchiranhyoProcessParameter;
+import jp.co.ndensan.reams.db.dbb.entity.db.basic.DbT2013HokenryoDankaiEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.dankaiprocessentity.DankaiProcessEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.fuka.SetaiShotokuEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.hihokenxiataixiou.HihokenshaTaihoTemp;
@@ -27,6 +30,7 @@ import jp.co.ndensan.reams.db.dbb.entity.db.relate.hokenshadankaitemp.HokenshaDa
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.hyojundankaitemp.HyojunDankaiTemp;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.tukibeturanku.TsukibetsuRankTemp;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
+import jp.co.ndensan.reams.db.dbx.business.util.NendoUtil;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
@@ -47,6 +51,7 @@ import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.Month;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -82,6 +87,7 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
     private List<DankaiProcessEntityList> dankaiProcessEntityList;
     private static final RString 使用する = new RString("1");
     private static final RString 使用しない = new RString("0");
+    private static final int ZERO = 0;
     private static final int ONE = 1;
     private static final int TWO = 2;
     private static final int THR = 3;
@@ -94,6 +100,7 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
     private static final int TEN = 10;
     private static final int ELE = 11;
     private static final int TWE = 12;
+    private static final int DAY = 31;
     private Decimal 基準年金収入額01;
     private Decimal 基準年金収入額02;
     private Decimal 基準年金収入額03;
@@ -125,6 +132,21 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
     private HokenryoDankaiSettings hokenryoDankaiSettings;
     private HokenryoDankaiList hokenryoDankaiList;
     private HokenryoDankaiHantei hantei;
+    private final Decimal 基準年金収入額_01 = new Decimal(800000);
+    private final Decimal 基準年金収入額_02 = new Decimal(1200000);
+    private final Decimal 基準年金収入額_03 = new Decimal(800000);
+    private final Decimal 基準所得金額_01 = new Decimal(1200000);
+    private final Decimal 基準所得金額_02 = new Decimal(1900000);
+    private final Decimal 基準所得金額_03 = new Decimal(2900000);
+    private final RString 第1段階 = new RString("第1段階");
+    private final RString 第2段階 = new RString("第2段階");
+    private final RString 第3段階 = new RString("第3段階");
+    private final RString 第4段階 = new RString("第4段階");
+    private final RString 第5段階 = new RString("第5段階");
+    private final RString 第6段階 = new RString("第6段階");
+    private final RString 第7段階 = new RString("第7段階");
+    private final RString 第8段階 = new RString("第8段階");
+    private final RString 第9段階 = new RString("第9段階");
 
     @Override
     protected void createWriter() {
@@ -348,6 +370,25 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
         保険者設定段階Writer.insert(hokenshaDankaiTemp);
         HyojunDankaiTemp hyojunDankaiTemp = new HyojunDankaiTemp();
         hyojunDankaiTemp.set被保険者番号(dankaiProcessEntityList.get被保険者対象Temp().getHihokenshaNo());
+        保険料段階パラメータ = new HokenryoDankaiHanteiParameter();
+        保険料段階パラメータ.setFukaNendo(dankaiProcessEntityList.get被保険者対象Temp().getHukaNando());
+        保険料段階パラメータ.setFukaKonkyo(賦課根拠);
+        月別保険料制御情報 = get標準月別保険料制御情報(get保険料段階());
+        保険料段階パラメータ.setSeigyoJoho(月別保険料制御情報);
+        月別保険料段階 = hantei.determine月別保険料段階(保険料段階パラメータ);
+        月別保険料制御情報Map = new HashMap<>();
+        月別保険料制御情報Map.put(ONE, 月別保険料段階.get保険料段階04月());
+        月別保険料制御情報Map.put(TWO, 月別保険料段階.get保険料段階05月());
+        月別保険料制御情報Map.put(THR, 月別保険料段階.get保険料段階06月());
+        月別保険料制御情報Map.put(FOU, 月別保険料段階.get保険料段階07月());
+        月別保険料制御情報Map.put(FIV, 月別保険料段階.get保険料段階08月());
+        月別保険料制御情報Map.put(SIX, 月別保険料段階.get保険料段階09月());
+        月別保険料制御情報Map.put(SEV, 月別保険料段階.get保険料段階10月());
+        月別保険料制御情報Map.put(EIG, 月別保険料段階.get保険料段階11月());
+        月別保険料制御情報Map.put(NIN, 月別保険料段階.get保険料段階12月());
+        月別保険料制御情報Map.put(TEN, 月別保険料段階.get保険料段階01月());
+        月別保険料制御情報Map.put(ELE, 月別保険料段階.get保険料段階02月());
+        月別保険料制御情報Map.put(TWE, 月別保険料段階.get保険料段階03月());
         int k;
         for (k = ONE; k <= TWE; k++) {
             if (null != 月別保険料制御情報Map.get(k)
@@ -380,6 +421,57 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
             }
         }
 
+    }
+
+    private HokenryoDankaiList get保険料段階() {
+        List<jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai> serviceShuruiList = new ArrayList<>();
+        List<RString> 段階 = new ArrayList();
+        段階.add(第1段階);
+        段階.add(第2段階);
+        段階.add(第3段階);
+        段階.add(第4段階);
+        段階.add(第5段階);
+        段階.add(第6段階);
+        段階.add(第7段階);
+        段階.add(第8段階);
+        段階.add(第9段階);
+        for (int i = ZERO; i <= EIG; i++) {
+            DbT2013HokenryoDankaiEntity entity = new DbT2013HokenryoDankaiEntity();
+            entity.setRankuKubun(段階.get(i));
+            serviceShuruiList.add(new jp.co.ndensan.reams.db.dbb.business.core.kanri.HokenryoDankai(entity));
+        }
+        return new HokenryoDankaiList(serviceShuruiList);
+    }
+
+    private SeigyoJoho get標準月別保険料制御情報(HokenryoDankaiList 保険料段階リスト) {
+        boolean 未申告段階使用有無 = false;
+        if (使用する.equals(未申告段階使用)) {
+            未申告段階使用有無 = true;
+        } else if (使用しない.equals(未申告段階使用)) {
+            未申告段階使用有無 = false;
+        }
+        boolean 所得調査中段階使用有無 = false;
+        if (使用する.equals(所得調査中段階使用)) {
+            所得調査中段階使用有無 = true;
+        } else if (使用しない.equals(所得調査中段階使用)) {
+            所得調査中段階使用有無 = false;
+        }
+        boolean 課税取消段階使用有無 = false;
+        if (使用する.equals(課税取消段階使用)) {
+            課税取消段階使用有無 = true;
+        } else if (使用しない.equals(課税取消段階使用)) {
+            課税取消段階使用有無 = false;
+        }
+        SeigyojohoFactory seigyojohoFactory = InstanceProvider.create(SeigyojohoFactory.class);
+        SeigyoJoho 月別保険料制御情報 = seigyojohoFactory.createSeigyojoho(
+                保険料段階リスト, 基準年金収入額_01, 基準年金収入額_02, 基準年金収入額_03,
+                基準所得金額_01, 基準所得金額_02, 基準所得金額_03, null, null, null,
+                null, null, null, null, null, null,
+                null, null, null, null,
+                未申告段階使用有無, 未申告段階インデックス, KazeiKubun.toValue(未申告課税区分),
+                所得調査中段階使用有無, 所得調査中段階インデックス, KazeiKubun.toValue(所得調査中課税区分),
+                課税取消段階使用有無, 課税取消段階インデックス, KazeiKubun.toValue(課税取消課税区分));
+        return 月別保険料制御情報;
     }
 
     private SeigyoJoho get月別保険料制御情報(HokenryoDankaiList 保険料段階リスト) {
@@ -418,45 +510,86 @@ public class DankaiProcess extends BatchProcessBase<DankaiProcessEntity> {
             List<RoreiFukushiNenkinJukyusha> 老齢の情報のリスト, FlexibleDate 賦課基準日) {
         FukaKonkyo 賦課根拠 = new FukaKonkyo();
         賦課根拠.setFukakijunYMD(賦課基準日);
-        if (生保の情報リスト == null || 生保の情報リスト.isEmpty()) {
+        FlexibleDate 本年度開始日 = new FlexibleDate(NendoUtil.toNendoStartDate(賦課基準日.getYear()).toDateString());
+        FlexibleDate 本年度終了日 = new FlexibleDate(賦課基準日.plusYear(ONE).getYearValue(),
+                Month.MARCH.getValue(), DAY);
+        賦課根拠 = set生活保護(賦課根拠, 生保の情報リスト, 本年度開始日, 本年度終了日);
+        賦課根拠 = set老齢福祉年金(賦課根拠, 老齢の情報のリスト, 本年度開始日, 本年度終了日);
+        return 賦課根拠;
+    }
+
+    private FukaKonkyo set生活保護(FukaKonkyo 賦課根拠, List<SeikatsuHogoJukyusha> 生保情報のリスト,
+            FlexibleDate 本年度開始日, FlexibleDate 本年度終了日) {
+        List<SeikatsuHogoJukyusha> 生活保護の情報のリスト = new ArrayList<>();
+        for (SeikatsuHogoJukyusha entity : 生保情報のリスト) {
+            FlexibleDate 開始日 = entity.get受給開始日();
+            FlexibleDate 受給廃止日 = entity.get受給廃止日();
+            if (受給廃止日 == null || 受給廃止日.isEmpty()) {
+                受給廃止日 = FlexibleDate.MAX;
+            }
+            if (開始日 != null && !開始日.isEmpty()) {
+                if (開始日.isBefore(本年度終了日) && 本年度開始日.isBeforeOrEquals(開始日)) {
+                    生活保護の情報のリスト.add(entity);
+                } else if (受給廃止日.isBeforeOrEquals(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給廃止日)) {
+                    生活保護の情報のリスト.add(entity);
+                } else if (開始日.isBefore(本年度開始日) && 本年度終了日.isBefore(受給廃止日)) {
+                    生活保護の情報のリスト.add(entity);
+                }
+            }
+        }
+        if (!生活保護の情報のリスト.isEmpty()) {
+            Collections.sort(生活保護の情報のリスト, new Comparator<SeikatsuHogoJukyusha>() {
+                @Override
+                public int compare(SeikatsuHogoJukyusha o1, SeikatsuHogoJukyusha o2) {
+                    if (o2.get受給開始日().isBefore(o1.get受給開始日())) {
+                        return -1;
+                    }
+                    return 1;
+                }
+            });
+            賦課根拠.setSeihoStartYMD(生活保護の情報のリスト.get(0).get受給開始日());
+            賦課根拠.setSeihoEndYMD(生活保護の情報のリスト.get(0).get受給廃止日());
+        } else {
             賦課根拠.setSeihoStartYMD(FlexibleDate.EMPTY);
             賦課根拠.setSeihoEndYMD(FlexibleDate.EMPTY);
-        } else {
-            set生保情報(生保の情報リスト, 賦課根拠, 賦課基準日);
-        }
-        if (老齢の情報のリスト == null || 老齢の情報のリスト.isEmpty()) {
-            賦課根拠.setRoreiNenkinStartYMD(FlexibleDate.EMPTY);
-            賦課根拠.setRoreiNenkinEndYMD(FlexibleDate.EMPTY);
-        } else {
-            set老齢情報(老齢の情報のリスト, 賦課根拠, 賦課基準日);
         }
         return 賦課根拠;
     }
 
-    private void set生保情報(List<SeikatsuHogoJukyusha> 生保の情報リスト, FukaKonkyo 賦課根拠, FlexibleDate 賦課基準日) {
-        for (SeikatsuHogoJukyusha 生保情報 : 生保の情報リスト) {
-            if (!生保情報.toEntity().getIsDeleted() && (生保情報.get受給開始日() == null
-                    || 生保情報.get受給開始日().isEmpty() || 生保情報.get受給開始日().isBeforeOrEquals(賦課基準日))
-                    && (生保情報.get受給廃止日() == null || 生保情報.get受給廃止日().isEmpty()
-                    || 賦課基準日.isBefore(生保情報.get受給廃止日()))) {
-                賦課根拠.setSeihoStartYMD(生保情報.get受給開始日());
-                賦課根拠.setSeihoEndYMD(生保情報.get受給廃止日());
-                break;
+    private FukaKonkyo set老齢福祉年金(FukaKonkyo 賦課根拠, List<RoreiFukushiNenkinJukyusha> 老福の情報リスト,
+            FlexibleDate 本年度開始日, FlexibleDate 本年度終了日) {
+        List<RoreiFukushiNenkinJukyusha> 老齢福祉の情報リスト = new ArrayList<>();
+        for (RoreiFukushiNenkinJukyusha entity : 老福の情報リスト) {
+            FlexibleDate 開始日 = entity.get受給開始年月日();
+            FlexibleDate 受給廃止日 = entity.get受給終了年月日();
+            if (受給廃止日 == null || 受給廃止日.isEmpty()) {
+                受給廃止日 = FlexibleDate.MAX;
+            }
+            if (開始日 != null && !開始日.isEmpty()) {
+                if (開始日.isBeforeOrEquals(本年度終了日) && 本年度開始日.isBeforeOrEquals(開始日)) {
+                    老齢福祉の情報リスト.add(entity);
+                } else if (受給廃止日.isBeforeOrEquals(本年度終了日) && 本年度開始日.isBeforeOrEquals(受給廃止日)) {
+                    老齢福祉の情報リスト.add(entity);
+                } else if (開始日.isBefore(本年度開始日) && 本年度終了日.isBefore(受給廃止日)) {
+                    老齢福祉の情報リスト.add(entity);
+                }
             }
         }
-    }
+        if (!老齢福祉の情報リスト.isEmpty()) {
+            Collections.sort(老齢福祉の情報リスト, new Comparator<RoreiFukushiNenkinJukyusha>() {
+                @Override
+                public int compare(RoreiFukushiNenkinJukyusha o1, RoreiFukushiNenkinJukyusha o2) {
+                    if (o2.get受給開始年月日().isBefore(o1.get受給開始年月日())) {
+                        return -1;
+                    }
+                    return 1;
+                }
+            });
+            賦課根拠.setRoreiNenkinStartYMD(老齢福祉の情報リスト.get(0).get受給開始年月日());
+            賦課根拠.setRoreiNenkinEndYMD(老齢福祉の情報リスト.get(0).get受給終了年月日());
+        }
+        return 賦課根拠;
 
-    private void set老齢情報(List<RoreiFukushiNenkinJukyusha> 老齢の情報のリスト, FukaKonkyo 賦課根拠, FlexibleDate 賦課基準日) {
-        for (RoreiFukushiNenkinJukyusha 老齢情報 : 老齢の情報のリスト) {
-            if (!老齢情報.toEntity().getIsDeleted() && (老齢情報.get受給開始年月日() == null
-                    || 老齢情報.get受給開始年月日().isEmpty() || 老齢情報.get受給開始年月日().isBeforeOrEquals(賦課基準日))
-                    && (老齢情報.get受給終了年月日() == null || 老齢情報.get受給終了年月日().isEmpty()
-                    || 賦課基準日.isBefore(老齢情報.get受給終了年月日()))) {
-                賦課根拠.setRoreiNenkinStartYMD(老齢情報.get受給開始年月日());
-                賦課根拠.setRoreiNenkinEndYMD(老齢情報.get受給終了年月日());
-                break;
-            }
-        }
     }
 
     private void set老齢の情報(DbT7006RoreiFukushiNenkinJukyushaEntity entity) {

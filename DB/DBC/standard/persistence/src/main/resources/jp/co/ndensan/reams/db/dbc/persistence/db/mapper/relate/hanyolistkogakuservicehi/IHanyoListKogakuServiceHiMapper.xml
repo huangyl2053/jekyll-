@@ -286,6 +286,9 @@
         <if test="keteijohoUketoriymTo != null and !keteijohoUketoriymTo.isEmpty()">
             AND DbT3058."dbT3058KogakuShikyuShinsaKettei_ketteishaUketoriYM"<![CDATA[<=]]>#{keteijohoUketoriymTo}
         </if>
+        <if test="shinsaYM != null and !shinsaYM.isEmpty()">
+            AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_taishoshaHanteiShinsaYM"<![CDATA[<=]]>#{shinsaYM}
+        </if>
         <if test="shinseiKubun == 1">
             AND DbT3055."dbT3055KogakuKyufuTaishoshaGokei_jidoShokanTaishoFlag" <![CDATA[<>]]> '1'
         </if>

@@ -13,36 +13,29 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatena
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoatenainfo.KaigoAtenaInfo.KaigoAtenaInfoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.IKaigoShikakuKihonDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoshikakukihon.KaigoShikakuKihon.KaigoShikakuKihonDiv;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.HorizontalLine;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDateRange;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxYubinNo;
-import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxAtenaMeisho;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * JikoFutangakuJohoHoseiJohoDg のクラスファイル
- *
- * @reamsid_L DBC-2080-010 jiangzongyue
+ * JikoFutangakuJohoHoseiJohoDg のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class JikoFutangakuJohoHoseiJohoDgDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("linLine1")
+    private HorizontalLine linLine1;
+    @JsonProperty("dgJohoIchiranPanel")
+    private dgJohoIchiranPanelDiv dgJohoIchiranPanel;
     @JsonProperty("JikoFutangakuHoseiList")
     private JikoFutangakuHoseiListDiv JikoFutangakuHoseiList;
-    @JsonProperty("JikoFutangakuHoseiDetail")
-    private JikoFutangakuHoseiDetailDiv JikoFutangakuHoseiDetail;
     @JsonProperty("KogakuGassanShikyuShinseiTorokuKaigoKihon")
     private KaigoShikakuKihonDiv KogakuGassanShikyuShinseiTorokuKaigoKihon;
     @JsonProperty("ccdKanryoMessage")
@@ -56,6 +49,42 @@ public class JikoFutangakuJohoHoseiJohoDgDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getlinLine1
+     * @return linLine1
+     */
+    @JsonProperty("linLine1")
+    public HorizontalLine getLinLine1() {
+        return linLine1;
+    }
+
+    /*
+     * setlinLine1
+     * @param linLine1 linLine1
+     */
+    @JsonProperty("linLine1")
+    public void setLinLine1(HorizontalLine linLine1) {
+        this.linLine1 = linLine1;
+    }
+
+    /*
+     * getdgJohoIchiranPanel
+     * @return dgJohoIchiranPanel
+     */
+    @JsonProperty("dgJohoIchiranPanel")
+    public dgJohoIchiranPanelDiv getDgJohoIchiranPanel() {
+        return dgJohoIchiranPanel;
+    }
+
+    /*
+     * setdgJohoIchiranPanel
+     * @param dgJohoIchiranPanel dgJohoIchiranPanel
+     */
+    @JsonProperty("dgJohoIchiranPanel")
+    public void setDgJohoIchiranPanel(dgJohoIchiranPanelDiv dgJohoIchiranPanel) {
+        this.dgJohoIchiranPanel = dgJohoIchiranPanel;
+    }
+
     /*
      * getJikoFutangakuHoseiList
      * @return JikoFutangakuHoseiList
@@ -72,24 +101,6 @@ public class JikoFutangakuJohoHoseiJohoDgDiv extends Panel {
     @JsonProperty("JikoFutangakuHoseiList")
     public void setJikoFutangakuHoseiList(JikoFutangakuHoseiListDiv JikoFutangakuHoseiList) {
         this.JikoFutangakuHoseiList = JikoFutangakuHoseiList;
-    }
-
-    /*
-     * getJikoFutangakuHoseiDetail
-     * @return JikoFutangakuHoseiDetail
-     */
-    @JsonProperty("JikoFutangakuHoseiDetail")
-    public JikoFutangakuHoseiDetailDiv getJikoFutangakuHoseiDetail() {
-        return JikoFutangakuHoseiDetail;
-    }
-
-    /*
-     * setJikoFutangakuHoseiDetail
-     * @param JikoFutangakuHoseiDetail JikoFutangakuHoseiDetail
-     */
-    @JsonProperty("JikoFutangakuHoseiDetail")
-    public void setJikoFutangakuHoseiDetail(JikoFutangakuHoseiDetailDiv JikoFutangakuHoseiDetail) {
-        this.JikoFutangakuHoseiDetail = JikoFutangakuHoseiDetail;
     }
 
     /*
@@ -123,483 +134,483 @@ public class JikoFutangakuJohoHoseiJohoDgDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public HorizontalLine getLinLine1() {
-        return this.getJikoFutangakuHoseiList().getLinLine1();
-    }
-
-    @JsonIgnore
-    public void setLinLine1(HorizontalLine linLine1) {
-        this.getJikoFutangakuHoseiList().setLinLine1(linLine1);
-    }
-
-    @JsonIgnore
     public CheckBoxList getChkRirekiHyouji() {
-        return this.getJikoFutangakuHoseiList().getChkRirekiHyouji();
+        return this.getDgJohoIchiranPanel().getChkRirekiHyouji();
     }
 
     @JsonIgnore
-    public void setChkRirekiHyouji(CheckBoxList chkRirekiHyouji) {
-        this.getJikoFutangakuHoseiList().setChkRirekiHyouji(chkRirekiHyouji);
+    public void  setChkRirekiHyouji(CheckBoxList chkRirekiHyouji) {
+        this.getDgJohoIchiranPanel().setChkRirekiHyouji(chkRirekiHyouji);
     }
 
     @JsonIgnore
     public DataGrid<dgJohoIchiran_Row> getDgJohoIchiran() {
-        return this.getJikoFutangakuHoseiList().getDgJohoIchiran();
+        return this.getDgJohoIchiranPanel().getDgJohoIchiran();
     }
 
     @JsonIgnore
-    public void setDgJohoIchiran(DataGrid<dgJohoIchiran_Row> dgJohoIchiran) {
-        this.getJikoFutangakuHoseiList().setDgJohoIchiran(dgJohoIchiran);
+    public void  setDgJohoIchiran(DataGrid<dgJohoIchiran_Row> dgJohoIchiran) {
+        this.getDgJohoIchiranPanel().setDgJohoIchiran(dgJohoIchiran);
     }
 
     @JsonIgnore
     public HorizontalLine getLin02() {
-        return this.getJikoFutangakuHoseiDetail().getLin02();
+        return this.getJikoFutangakuHoseiList().getLin02();
     }
 
     @JsonIgnore
-    public void setLin02(HorizontalLine lin02) {
-        this.getJikoFutangakuHoseiDetail().setLin02(lin02);
+    public void  setLin02(HorizontalLine lin02) {
+        this.getJikoFutangakuHoseiList().setLin02(lin02);
+    }
+
+    @JsonIgnore
+    public JikoFutangakuHoseiDetailDiv getJikoFutangakuHoseiDetail() {
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail();
+    }
+
+    @JsonIgnore
+    public void  setJikoFutangakuHoseiDetail(JikoFutangakuHoseiDetailDiv JikoFutangakuHoseiDetail) {
+        this.getJikoFutangakuHoseiList().setJikoFutangakuHoseiDetail(JikoFutangakuHoseiDetail);
     }
 
     @JsonIgnore
     public TextBox getTxtSanteiKBN() {
-        return this.getJikoFutangakuHoseiDetail().getTxtSanteiKBN();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTxtSanteiKBN();
     }
 
     @JsonIgnore
-    public void setTxtSanteiKBN(TextBox txtSanteiKBN) {
-        this.getJikoFutangakuHoseiDetail().setTxtSanteiKBN(txtSanteiKBN);
+    public void  setTxtSanteiKBN(TextBox txtSanteiKBN) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().setTxtSanteiKBN(txtSanteiKBN);
     }
 
     @JsonIgnore
     public TextBoxDate getTxtTaishouNendo() {
-        return this.getJikoFutangakuHoseiDetail().getTxtTaishouNendo();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTxtTaishouNendo();
     }
 
     @JsonIgnore
-    public void setTxtTaishouNendo(TextBoxDate txtTaishouNendo) {
-        this.getJikoFutangakuHoseiDetail().setTxtTaishouNendo(txtTaishouNendo);
+    public void  setTxtTaishouNendo(TextBoxDate txtTaishouNendo) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().setTxtTaishouNendo(txtTaishouNendo);
     }
 
     @JsonIgnore
     public TextBox getTxtShoukisaiHokenjaNO() {
-        return this.getJikoFutangakuHoseiDetail().getTxtShoukisaiHokenjaNO();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTxtShoukisaiHokenjaNO();
     }
 
     @JsonIgnore
-    public void setTxtShoukisaiHokenjaNO(TextBox txtShoukisaiHokenjaNO) {
-        this.getJikoFutangakuHoseiDetail().setTxtShoukisaiHokenjaNO(txtShoukisaiHokenjaNO);
+    public void  setTxtShoukisaiHokenjaNO(TextBox txtShoukisaiHokenjaNO) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().setTxtShoukisaiHokenjaNO(txtShoukisaiHokenjaNO);
     }
 
     @JsonIgnore
     public TextBox getTxtShikyuShinseiSeiriNO() {
-        return this.getJikoFutangakuHoseiDetail().getTxtShikyuShinseiSeiriNO();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTxtShikyuShinseiSeiriNO();
     }
 
     @JsonIgnore
-    public void setTxtShikyuShinseiSeiriNO(TextBox txtShikyuShinseiSeiriNO) {
-        this.getJikoFutangakuHoseiDetail().setTxtShikyuShinseiSeiriNO(txtShikyuShinseiSeiriNO);
+    public void  setTxtShikyuShinseiSeiriNO(TextBox txtShikyuShinseiSeiriNO) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().setTxtShikyuShinseiSeiriNO(txtShikyuShinseiSeiriNO);
     }
 
     @JsonIgnore
     public TextBoxDate getTxtUketoriYM() {
-        return this.getJikoFutangakuHoseiDetail().getTxtUketoriYM();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTxtUketoriYM();
     }
 
     @JsonIgnore
-    public void setTxtUketoriYM(TextBoxDate txtUketoriYM) {
-        this.getJikoFutangakuHoseiDetail().setTxtUketoriYM(txtUketoriYM);
+    public void  setTxtUketoriYM(TextBoxDate txtUketoriYM) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().setTxtUketoriYM(txtUketoriYM);
     }
 
     @JsonIgnore
     public CheckBoxList getChkSaisouKBN() {
-        return this.getJikoFutangakuHoseiDetail().getChkSaisouKBN();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getChkSaisouKBN();
     }
 
     @JsonIgnore
-    public void setChkSaisouKBN(CheckBoxList chkSaisouKBN) {
-        this.getJikoFutangakuHoseiDetail().setChkSaisouKBN(chkSaisouKBN);
+    public void  setChkSaisouKBN(CheckBoxList chkSaisouKBN) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().setChkSaisouKBN(chkSaisouKBN);
     }
 
     @JsonIgnore
     public CheckBoxList getChkSoufuTaishougai() {
-        return this.getJikoFutangakuHoseiDetail().getChkSoufuTaishougai();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getChkSoufuTaishougai();
     }
 
     @JsonIgnore
-    public void setChkSoufuTaishougai(CheckBoxList chkSoufuTaishougai) {
-        this.getJikoFutangakuHoseiDetail().setChkSoufuTaishougai(chkSoufuTaishougai);
+    public void  setChkSoufuTaishougai(CheckBoxList chkSoufuTaishougai) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().setChkSoufuTaishougai(chkSoufuTaishougai);
     }
 
     @JsonIgnore
     public TextBoxDate getTxtHoseibiKatsu() {
-        return this.getJikoFutangakuHoseiDetail().getTxtHoseibiKatsu();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTxtHoseibiKatsu();
     }
 
     @JsonIgnore
-    public void setTxtHoseibiKatsu(TextBoxDate txtHoseibiKatsu) {
-        this.getJikoFutangakuHoseiDetail().setTxtHoseibiKatsu(txtHoseibiKatsu);
+    public void  setTxtHoseibiKatsu(TextBoxDate txtHoseibiKatsu) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().setTxtHoseibiKatsu(txtHoseibiKatsu);
     }
 
     @JsonIgnore
     public TextBoxDate getTxtHoseibiTan() {
-        return this.getJikoFutangakuHoseiDetail().getTxtHoseibiTan();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTxtHoseibiTan();
     }
 
     @JsonIgnore
-    public void setTxtHoseibiTan(TextBoxDate txtHoseibiTan) {
-        this.getJikoFutangakuHoseiDetail().setTxtHoseibiTan(txtHoseibiTan);
+    public void  setTxtHoseibiTan(TextBoxDate txtHoseibiTan) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().setTxtHoseibiTan(txtHoseibiTan);
     }
 
     @JsonIgnore
     public HorizontalLine getLinLine2() {
-        return this.getJikoFutangakuHoseiDetail().getLinLine2();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getLinLine2();
     }
 
     @JsonIgnore
-    public void setLinLine2(HorizontalLine linLine2) {
-        this.getJikoFutangakuHoseiDetail().setLinLine2(linLine2);
+    public void  setLinLine2(HorizontalLine linLine2) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().setLinLine2(linLine2);
     }
 
     @JsonIgnore
     public tabJikofutanKanriJohoNyuryokuDiv getTabJikofutanKanriJohoNyuryoku() {
-        return this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku();
     }
 
     @JsonIgnore
-    public void setTabJikofutanKanriJohoNyuryoku(tabJikofutanKanriJohoNyuryokuDiv tabJikofutanKanriJohoNyuryoku) {
-        this.getJikoFutangakuHoseiDetail().setTabJikofutanKanriJohoNyuryoku(tabJikofutanKanriJohoNyuryoku);
+    public void  setTabJikofutanKanriJohoNyuryoku(tabJikofutanKanriJohoNyuryokuDiv tabJikofutanKanriJohoNyuryoku) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().setTabJikofutanKanriJohoNyuryoku(tabJikofutanKanriJohoNyuryoku);
     }
 
     @JsonIgnore
     public tplJikofutanKanriJoho1Div getTplJikofutanKanriJoho1() {
-        return this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1();
     }
 
     @JsonIgnore
-    public void setTplJikofutanKanriJoho1(tplJikofutanKanriJoho1Div tplJikofutanKanriJoho1) {
-        this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().setTplJikofutanKanriJoho1(tplJikofutanKanriJoho1);
+    public void  setTplJikofutanKanriJoho1(tplJikofutanKanriJoho1Div tplJikofutanKanriJoho1) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().setTplJikofutanKanriJoho1(tplJikofutanKanriJoho1);
     }
 
     @JsonIgnore
     public TextBox getTxtIdouKBN() {
-        return this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getTxtIdouKBN();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getTxtIdouKBN();
     }
 
     @JsonIgnore
-    public void setTxtIdouKBN(TextBox txtIdouKBN) {
-        this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().setTxtIdouKBN(txtIdouKBN);
+    public void  setTxtIdouKBN(TextBox txtIdouKBN) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().setTxtIdouKBN(txtIdouKBN);
     }
 
     @JsonIgnore
     public DropDownList getDdlShotokuKBN() {
-        return this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getDdlShotokuKBN();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getDdlShotokuKBN();
     }
 
     @JsonIgnore
-    public void setDdlShotokuKBN(DropDownList ddlShotokuKBN) {
-        this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().setDdlShotokuKBN(ddlShotokuKBN);
+    public void  setDdlShotokuKBN(DropDownList ddlShotokuKBN) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().setDdlShotokuKBN(ddlShotokuKBN);
     }
 
     @JsonIgnore
     public DropDownList getDdl70SaiIjouShotokuKBN() {
-        return this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getDdl70SaiIjouShotokuKBN();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getDdl70SaiIjouShotokuKBN();
     }
 
     @JsonIgnore
-    public void setDdl70SaiIjouShotokuKBN(DropDownList ddl70SaiIjouShotokuKBN) {
-        this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().setDdl70SaiIjouShotokuKBN(ddl70SaiIjouShotokuKBN);
+    public void  setDdl70SaiIjouShotokuKBN(DropDownList ddl70SaiIjouShotokuKBN) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().setDdl70SaiIjouShotokuKBN(ddl70SaiIjouShotokuKBN);
     }
 
     @JsonIgnore
     public TextBoxAtenaMeisho getTxtHihokenshaShimei() {
-        return this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getTxtHihokenshaShimei();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getTxtHihokenshaShimei();
     }
 
     @JsonIgnore
-    public void setTxtHihokenshaShimei(TextBoxAtenaMeisho txtHihokenshaShimei) {
-        this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().setTxtHihokenshaShimei(txtHihokenshaShimei);
+    public void  setTxtHihokenshaShimei(TextBoxAtenaMeisho txtHihokenshaShimei) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().setTxtHihokenshaShimei(txtHihokenshaShimei);
     }
 
     @JsonIgnore
     public JikoFutangakuHoseiTotsugo1Div getJikoFutangakuHoseiTotsugo1() {
-        return this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getJikoFutangakuHoseiTotsugo1();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getJikoFutangakuHoseiTotsugo1();
     }
 
     @JsonIgnore
-    public void setJikoFutangakuHoseiTotsugo1(JikoFutangakuHoseiTotsugo1Div JikoFutangakuHoseiTotsugo1) {
-        this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().setJikoFutangakuHoseiTotsugo1(JikoFutangakuHoseiTotsugo1);
+    public void  setJikoFutangakuHoseiTotsugo1(JikoFutangakuHoseiTotsugo1Div JikoFutangakuHoseiTotsugo1) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().setJikoFutangakuHoseiTotsugo1(JikoFutangakuHoseiTotsugo1);
     }
 
     @JsonIgnore
     public TextBox getTxtKoukiHokenjaNO() {
-        return this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getJikoFutangakuHoseiTotsugo1().getTxtKoukiHokenjaNO();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getJikoFutangakuHoseiTotsugo1().getTxtKoukiHokenjaNO();
     }
 
     @JsonIgnore
-    public void setTxtKoukiHokenjaNO(TextBox txtKoukiHokenjaNO) {
-        this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getJikoFutangakuHoseiTotsugo1().setTxtKoukiHokenjaNO(txtKoukiHokenjaNO);
+    public void  setTxtKoukiHokenjaNO(TextBox txtKoukiHokenjaNO) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getJikoFutangakuHoseiTotsugo1().setTxtKoukiHokenjaNO(txtKoukiHokenjaNO);
     }
 
     @JsonIgnore
     public TextBox getTxtKoukiHihokenshaNO() {
-        return this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getJikoFutangakuHoseiTotsugo1().getTxtKoukiHihokenshaNO();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getJikoFutangakuHoseiTotsugo1().getTxtKoukiHihokenshaNO();
     }
 
     @JsonIgnore
-    public void setTxtKoukiHihokenshaNO(TextBox txtKoukiHihokenshaNO) {
-        this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getJikoFutangakuHoseiTotsugo1().setTxtKoukiHihokenshaNO(txtKoukiHihokenshaNO);
+    public void  setTxtKoukiHihokenshaNO(TextBox txtKoukiHihokenshaNO) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getJikoFutangakuHoseiTotsugo1().setTxtKoukiHihokenshaNO(txtKoukiHihokenshaNO);
     }
 
     @JsonIgnore
     public JikoFutangakuHoseiTotsugo2Div getJikoFutangakuHoseiTotsugo2() {
-        return this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getJikoFutangakuHoseiTotsugo2();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getJikoFutangakuHoseiTotsugo2();
     }
 
     @JsonIgnore
-    public void setJikoFutangakuHoseiTotsugo2(JikoFutangakuHoseiTotsugo2Div JikoFutangakuHoseiTotsugo2) {
-        this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().setJikoFutangakuHoseiTotsugo2(JikoFutangakuHoseiTotsugo2);
+    public void  setJikoFutangakuHoseiTotsugo2(JikoFutangakuHoseiTotsugo2Div JikoFutangakuHoseiTotsugo2) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().setJikoFutangakuHoseiTotsugo2(JikoFutangakuHoseiTotsugo2);
     }
 
     @JsonIgnore
     public TextBox getTxtKokuhoHokenjaNO() {
-        return this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getJikoFutangakuHoseiTotsugo2().getTxtKokuhoHokenjaNO();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getJikoFutangakuHoseiTotsugo2().getTxtKokuhoHokenjaNO();
     }
 
     @JsonIgnore
-    public void setTxtKokuhoHokenjaNO(TextBox txtKokuhoHokenjaNO) {
-        this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getJikoFutangakuHoseiTotsugo2().setTxtKokuhoHokenjaNO(txtKokuhoHokenjaNO);
+    public void  setTxtKokuhoHokenjaNO(TextBox txtKokuhoHokenjaNO) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getJikoFutangakuHoseiTotsugo2().setTxtKokuhoHokenjaNO(txtKokuhoHokenjaNO);
     }
 
     @JsonIgnore
     public TextBox getTxtKokuhoHihokenshaKojinNO() {
-        return this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getJikoFutangakuHoseiTotsugo2().getTxtKokuhoHihokenshaKojinNO();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getJikoFutangakuHoseiTotsugo2().getTxtKokuhoHihokenshaKojinNO();
     }
 
     @JsonIgnore
-    public void setTxtKokuhoHihokenshaKojinNO(TextBox txtKokuhoHihokenshaKojinNO) {
-        this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getJikoFutangakuHoseiTotsugo2().setTxtKokuhoHihokenshaKojinNO(txtKokuhoHihokenshaKojinNO);
+    public void  setTxtKokuhoHihokenshaKojinNO(TextBox txtKokuhoHihokenshaKojinNO) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getJikoFutangakuHoseiTotsugo2().setTxtKokuhoHihokenshaKojinNO(txtKokuhoHihokenshaKojinNO);
     }
 
     @JsonIgnore
     public TextBox getTxtKokuhoHihokenshashouNO() {
-        return this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getJikoFutangakuHoseiTotsugo2().getTxtKokuhoHihokenshashouNO();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getJikoFutangakuHoseiTotsugo2().getTxtKokuhoHihokenshashouNO();
     }
 
     @JsonIgnore
-    public void setTxtKokuhoHihokenshashouNO(TextBox txtKokuhoHihokenshashouNO) {
-        this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getJikoFutangakuHoseiTotsugo2().setTxtKokuhoHihokenshashouNO(txtKokuhoHihokenshashouNO);
+    public void  setTxtKokuhoHihokenshashouNO(TextBox txtKokuhoHihokenshashouNO) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getJikoFutangakuHoseiTotsugo2().setTxtKokuhoHihokenshashouNO(txtKokuhoHihokenshashouNO);
     }
 
     @JsonIgnore
     public TextBoxDate getTxtShinseiYMD() {
-        return this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getTxtShinseiYMD();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getTxtShinseiYMD();
     }
 
     @JsonIgnore
-    public void setTxtShinseiYMD(TextBoxDate txtShinseiYMD) {
-        this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().setTxtShinseiYMD(txtShinseiYMD);
+    public void  setTxtShinseiYMD(TextBoxDate txtShinseiYMD) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().setTxtShinseiYMD(txtShinseiYMD);
     }
 
     @JsonIgnore
     public TextBoxDateRange getTxtTaishouKeisanKikan() {
-        return this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getTxtTaishouKeisanKikan();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getTxtTaishouKeisanKikan();
     }
 
     @JsonIgnore
-    public void setTxtTaishouKeisanKikan(TextBoxDateRange txtTaishouKeisanKikan) {
-        this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().setTxtTaishouKeisanKikan(txtTaishouKeisanKikan);
+    public void  setTxtTaishouKeisanKikan(TextBoxDateRange txtTaishouKeisanKikan) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().setTxtTaishouKeisanKikan(txtTaishouKeisanKikan);
     }
 
     @JsonIgnore
     public TextBoxDateRange getTxtHihokenshaKikan() {
-        return this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getTxtHihokenshaKikan();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().getTxtHihokenshaKikan();
     }
 
     @JsonIgnore
-    public void setTxtHihokenshaKikan(TextBoxDateRange txtHihokenshaKikan) {
-        this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().setTxtHihokenshaKikan(txtHihokenshaKikan);
+    public void  setTxtHihokenshaKikan(TextBoxDateRange txtHihokenshaKikan) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho1().setTxtHihokenshaKikan(txtHihokenshaKikan);
     }
 
     @JsonIgnore
     public tplJikofutanKanriJoho2Div getTplJikofutanKanriJoho2() {
-        return this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2();
     }
 
     @JsonIgnore
-    public void setTplJikofutanKanriJoho2(tplJikofutanKanriJoho2Div tplJikofutanKanriJoho2) {
-        this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().setTplJikofutanKanriJoho2(tplJikofutanKanriJoho2);
+    public void  setTplJikofutanKanriJoho2(tplJikofutanKanriJoho2Div tplJikofutanKanriJoho2) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().setTplJikofutanKanriJoho2(tplJikofutanKanriJoho2);
     }
 
     @JsonIgnore
     public JikoFutangakuHoseiAtesakiDiv getJikoFutangakuHoseiAtesaki() {
-        return this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiAtesaki();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiAtesaki();
     }
 
     @JsonIgnore
-    public void setJikoFutangakuHoseiAtesaki(JikoFutangakuHoseiAtesakiDiv JikoFutangakuHoseiAtesaki) {
-        this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().setJikoFutangakuHoseiAtesaki(JikoFutangakuHoseiAtesaki);
+    public void  setJikoFutangakuHoseiAtesaki(JikoFutangakuHoseiAtesakiDiv JikoFutangakuHoseiAtesaki) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().setJikoFutangakuHoseiAtesaki(JikoFutangakuHoseiAtesaki);
     }
 
     @JsonIgnore
     public TextBoxAtenaMeisho getTxtAtesakiShimei() {
-        return this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiAtesaki().getTxtAtesakiShimei();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiAtesaki().getTxtAtesakiShimei();
     }
 
     @JsonIgnore
-    public void setTxtAtesakiShimei(TextBoxAtenaMeisho txtAtesakiShimei) {
-        this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiAtesaki().setTxtAtesakiShimei(txtAtesakiShimei);
+    public void  setTxtAtesakiShimei(TextBoxAtenaMeisho txtAtesakiShimei) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiAtesaki().setTxtAtesakiShimei(txtAtesakiShimei);
     }
 
     @JsonIgnore
     public TextBoxYubinNo getTxtAtesakiYubinNo() {
-        return this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiAtesaki().getTxtAtesakiYubinNo();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiAtesaki().getTxtAtesakiYubinNo();
     }
 
     @JsonIgnore
-    public void setTxtAtesakiYubinNo(TextBoxYubinNo txtAtesakiYubinNo) {
-        this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiAtesaki().setTxtAtesakiYubinNo(txtAtesakiYubinNo);
+    public void  setTxtAtesakiYubinNo(TextBoxYubinNo txtAtesakiYubinNo) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiAtesaki().setTxtAtesakiYubinNo(txtAtesakiYubinNo);
     }
 
     @JsonIgnore
     public TextBox getTxtAtesakiJusho() {
-        return this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiAtesaki().getTxtAtesakiJusho();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiAtesaki().getTxtAtesakiJusho();
     }
 
     @JsonIgnore
-    public void setTxtAtesakiJusho(TextBox txtAtesakiJusho) {
-        this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiAtesaki().setTxtAtesakiJusho(txtAtesakiJusho);
+    public void  setTxtAtesakiJusho(TextBox txtAtesakiJusho) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiAtesaki().setTxtAtesakiJusho(txtAtesakiJusho);
     }
 
     @JsonIgnore
     public JikoFutangakuHoseiMadoguchiDiv getJikoFutangakuHoseiMadoguchi() {
-        return this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi();
     }
 
     @JsonIgnore
-    public void setJikoFutangakuHoseiMadoguchi(JikoFutangakuHoseiMadoguchiDiv JikoFutangakuHoseiMadoguchi) {
-        this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().setJikoFutangakuHoseiMadoguchi(JikoFutangakuHoseiMadoguchi);
+    public void  setJikoFutangakuHoseiMadoguchi(JikoFutangakuHoseiMadoguchiDiv JikoFutangakuHoseiMadoguchi) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().setJikoFutangakuHoseiMadoguchi(JikoFutangakuHoseiMadoguchi);
     }
 
     @JsonIgnore
     public TextBox getTxtMadoguchiTaishoushaHantei() {
-        return this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().getTxtMadoguchiTaishoushaHantei();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().getTxtMadoguchiTaishoushaHantei();
     }
 
     @JsonIgnore
-    public void setTxtMadoguchiTaishoushaHantei(TextBox txtMadoguchiTaishoushaHantei) {
-        this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().setTxtMadoguchiTaishoushaHantei(txtMadoguchiTaishoushaHantei);
+    public void  setTxtMadoguchiTaishoushaHantei(TextBox txtMadoguchiTaishoushaHantei) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().setTxtMadoguchiTaishoushaHantei(txtMadoguchiTaishoushaHantei);
     }
 
     @JsonIgnore
     public TextBox getTxtMadoguchiShiharaiBasho() {
-        return this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().getTxtMadoguchiShiharaiBasho();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().getTxtMadoguchiShiharaiBasho();
     }
 
     @JsonIgnore
-    public void setTxtMadoguchiShiharaiBasho(TextBox txtMadoguchiShiharaiBasho) {
-        this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().setTxtMadoguchiShiharaiBasho(txtMadoguchiShiharaiBasho);
+    public void  setTxtMadoguchiShiharaiBasho(TextBox txtMadoguchiShiharaiBasho) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().setTxtMadoguchiShiharaiBasho(txtMadoguchiShiharaiBasho);
     }
 
     @JsonIgnore
     public TextBoxDate getTxtMadoguchiKaishiYMD() {
-        return this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().getTxtMadoguchiKaishiYMD();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().getTxtMadoguchiKaishiYMD();
     }
 
     @JsonIgnore
-    public void setTxtMadoguchiKaishiYMD(TextBoxDate txtMadoguchiKaishiYMD) {
-        this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().setTxtMadoguchiKaishiYMD(txtMadoguchiKaishiYMD);
+    public void  setTxtMadoguchiKaishiYMD(TextBoxDate txtMadoguchiKaishiYMD) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().setTxtMadoguchiKaishiYMD(txtMadoguchiKaishiYMD);
     }
 
     @JsonIgnore
     public TextBox getTxtMadoguchiKaishiYoubi() {
-        return this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().getTxtMadoguchiKaishiYoubi();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().getTxtMadoguchiKaishiYoubi();
     }
 
     @JsonIgnore
-    public void setTxtMadoguchiKaishiYoubi(TextBox txtMadoguchiKaishiYoubi) {
-        this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().setTxtMadoguchiKaishiYoubi(txtMadoguchiKaishiYoubi);
+    public void  setTxtMadoguchiKaishiYoubi(TextBox txtMadoguchiKaishiYoubi) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().setTxtMadoguchiKaishiYoubi(txtMadoguchiKaishiYoubi);
     }
 
     @JsonIgnore
     public TextBox getTxtMadoguchiKaishiJikan() {
-        return this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().getTxtMadoguchiKaishiJikan();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().getTxtMadoguchiKaishiJikan();
     }
 
     @JsonIgnore
-    public void setTxtMadoguchiKaishiJikan(TextBox txtMadoguchiKaishiJikan) {
-        this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().setTxtMadoguchiKaishiJikan(txtMadoguchiKaishiJikan);
+    public void  setTxtMadoguchiKaishiJikan(TextBox txtMadoguchiKaishiJikan) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().setTxtMadoguchiKaishiJikan(txtMadoguchiKaishiJikan);
     }
 
     @JsonIgnore
     public TextBox getTxtMadoguchiKaishiFun() {
-        return this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().getTxtMadoguchiKaishiFun();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().getTxtMadoguchiKaishiFun();
     }
 
     @JsonIgnore
-    public void setTxtMadoguchiKaishiFun(TextBox txtMadoguchiKaishiFun) {
-        this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().setTxtMadoguchiKaishiFun(txtMadoguchiKaishiFun);
+    public void  setTxtMadoguchiKaishiFun(TextBox txtMadoguchiKaishiFun) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().setTxtMadoguchiKaishiFun(txtMadoguchiKaishiFun);
     }
 
     @JsonIgnore
     public TextBoxDate getTxtMadoguchiShuryoYMD() {
-        return this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().getTxtMadoguchiShuryoYMD();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().getTxtMadoguchiShuryoYMD();
     }
 
     @JsonIgnore
-    public void setTxtMadoguchiShuryoYMD(TextBoxDate txtMadoguchiShuryoYMD) {
-        this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().setTxtMadoguchiShuryoYMD(txtMadoguchiShuryoYMD);
+    public void  setTxtMadoguchiShuryoYMD(TextBoxDate txtMadoguchiShuryoYMD) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().setTxtMadoguchiShuryoYMD(txtMadoguchiShuryoYMD);
     }
 
     @JsonIgnore
     public TextBox getTxtMadoguchiShuryoYoubi() {
-        return this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().getTxtMadoguchiShuryoYoubi();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().getTxtMadoguchiShuryoYoubi();
     }
 
     @JsonIgnore
-    public void setTxtMadoguchiShuryoYoubi(TextBox txtMadoguchiShuryoYoubi) {
-        this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().setTxtMadoguchiShuryoYoubi(txtMadoguchiShuryoYoubi);
+    public void  setTxtMadoguchiShuryoYoubi(TextBox txtMadoguchiShuryoYoubi) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().setTxtMadoguchiShuryoYoubi(txtMadoguchiShuryoYoubi);
     }
 
     @JsonIgnore
     public TextBox getTxtMadoguchiShuryoJikan() {
-        return this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().getTxtMadoguchiShuryoJikan();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().getTxtMadoguchiShuryoJikan();
     }
 
     @JsonIgnore
-    public void setTxtMadoguchiShuryoJikan(TextBox txtMadoguchiShuryoJikan) {
-        this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().setTxtMadoguchiShuryoJikan(txtMadoguchiShuryoJikan);
+    public void  setTxtMadoguchiShuryoJikan(TextBox txtMadoguchiShuryoJikan) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().setTxtMadoguchiShuryoJikan(txtMadoguchiShuryoJikan);
     }
 
     @JsonIgnore
     public TextBox getTxtMadoguchiShuryoFun() {
-        return this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().getTxtMadoguchiShuryoFun();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().getTxtMadoguchiShuryoFun();
     }
 
     @JsonIgnore
-    public void setTxtMadoguchiShuryoFun(TextBox txtMadoguchiShuryoFun) {
-        this.getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().setTxtMadoguchiShuryoFun(txtMadoguchiShuryoFun);
+    public void  setTxtMadoguchiShuryoFun(TextBox txtMadoguchiShuryoFun) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getTabJikofutanKanriJohoNyuryoku().getTplJikofutanKanriJoho2().getJikoFutangakuHoseiMadoguchi().setTxtMadoguchiShuryoFun(txtMadoguchiShuryoFun);
     }
 
     @JsonIgnore
     public Button getBtnJikofutangakuJohoNyuryoku() {
-        return this.getJikoFutangakuHoseiDetail().getBtnJikofutangakuJohoNyuryoku();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getBtnJikofutangakuJohoNyuryoku();
     }
 
     @JsonIgnore
-    public void setBtnJikofutangakuJohoNyuryoku(Button btnJikofutangakuJohoNyuryoku) {
-        this.getJikoFutangakuHoseiDetail().setBtnJikofutangakuJohoNyuryoku(btnJikofutangakuJohoNyuryoku);
+    public void  setBtnJikofutangakuJohoNyuryoku(Button btnJikofutangakuJohoNyuryoku) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().setBtnJikofutangakuJohoNyuryoku(btnJikofutangakuJohoNyuryoku);
     }
 
     @JsonIgnore
     public Button getBtnJikofutangakuJohoNiModoru() {
-        return this.getJikoFutangakuHoseiDetail().getBtnJikofutangakuJohoNiModoru();
+        return this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().getBtnJikofutangakuJohoNiModoru();
     }
 
     @JsonIgnore
-    public void setBtnJikofutangakuJohoNiModoru(Button btnJikofutangakuJohoNiModoru) {
-        this.getJikoFutangakuHoseiDetail().setBtnJikofutangakuJohoNiModoru(btnJikofutangakuJohoNiModoru);
+    public void  setBtnJikofutangakuJohoNiModoru(Button btnJikofutangakuJohoNiModoru) {
+        this.getJikoFutangakuHoseiList().getJikoFutangakuHoseiDetail().setBtnJikofutangakuJohoNiModoru(btnJikofutangakuJohoNiModoru);
     }
 
     // </editor-fold>

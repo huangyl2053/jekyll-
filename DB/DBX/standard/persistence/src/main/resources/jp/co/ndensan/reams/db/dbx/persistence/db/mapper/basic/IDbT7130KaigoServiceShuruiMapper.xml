@@ -106,5 +106,57 @@
         WHERE
           TEMP.rrkno = 1
     </select>
+    
+    <select resultOrdered="true" id="getServiceTypeList2" resultMap="ResultMap_DbT7130KaigoServiceShuruiEntity" 
+            parameterType="jp.co.ndensan.reams.db.dbx.definition.mybatisprm.servicecode.SabisuKodoParameter" fetchSize="500">
+        SELECT 
+          "serviceShuruiCd" AS "dbT7130KaigoServiceShurui_serviceShuruiCd",
+          "serviceShuruiMeisho" AS "dbT7130KaigoServiceShurui_serviceShuruiMeisho"
+        FROM 
+          rgdb."DbT7130KaigoServiceShurui"
+        WHERE
+          "teikyoKaishiYM" <![CDATA[<=]]> #{haakuKijunYM}
+          AND #{haakuKijunYM} <![CDATA[<=]]> "teikyoshuryoYM"
+        <if test="serviceShuruiFlag">
+            AND "serviceShuruiCd" IN
+            <foreach collection="serviceShurui" item="shurui" open="(" separator="," close=")"> #{shurui}</foreach>
+        </if>
+        <if test="serviceShuruiFlag">
+            <if test="serviceBunrruiFlag">
+                AND "serviceBunrruicode" IN
+                <foreach collection="serviceBunrrui" item="bunrrui" open="(" separator="," close=")"> #{bunrrui}</foreach>
+            </if>
+            <if test="!serviceBunrruiFlag">
+                <if test="patan1">
+                     AND substring("serviceShuruiCd", 1, 1) = '1'
+                </if>
+                <if test="patan2">
+                     AND substring("serviceShuruiCd", 1, 1) = '1'
+                     OR (substring("serviceShuruiCd", 1, 1) = '2'
+                     AND "serviceBunrruicode" = '01')
+                </if>
+                <if test="patan3">
+                     AND (substring("serviceShuruiCd", 1, 1) = '1'
+                     OR substring("serviceShuruiCd", 1, 1) = '2'
+                     OR substring("serviceShuruiCd", 1, 1) = '6'
+                     OR substring("serviceShuruiCd", 1, 1) = '7')
+                </if>
+                <if test="patan4">
+                     AND substring("serviceShuruiCd", 1, 1) = '6'
+                     OR (substring("serviceShuruiCd", 1, 1) = '2'
+                     AND "serviceBunrruicode" = '05')
+                     OR (substring("serviceShuruiCd", 1, 1) = '7'
+                     AND "serviceBunrruicode" = '08')
+                </if>
+                <if test="patan5">
+                     AND substring("serviceShuruiCd", 1, 1) = '1'
+                     OR (substring("serviceShuruiCd", 1, 1) = '2'
+                     AND "serviceBunrruicode" = '01')
+                     OR (substring("serviceShuruiCd", 1, 1) = '7'
+                     AND "serviceBunrruicode" = '07')
+                </if>
+            </if>
+        </if>
+    </select>
 
 </mapper>

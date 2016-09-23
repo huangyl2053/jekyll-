@@ -157,7 +157,7 @@
           </if>
           <if test="patan2">
                AND substring(DbT7130."serviceShuruiCd", 1, 1) = '1'
-               OR (substring(DbT7130."serviceShuruiCd", 1, 1) = '1'
+               OR (substring(DbT7130."serviceShuruiCd", 1, 1) = '2'
                AND DbT7130."serviceBunrruicode" = '01')
           </if>
           <if test="patan3">
@@ -174,7 +174,7 @@
                AND DbT7130."serviceBunrruicode" = '08')
           </if>
           <if test="patan5">
-               AND substring(DbT7130."serviceShuruiCd", 1, 1) = '6'
+               AND substring(DbT7130."serviceShuruiCd", 1, 1) = '1'
                OR (substring(DbT7130."serviceShuruiCd", 1, 1) = '2'
                AND DbT7130."serviceBunrruicode" = '01')
                OR (substring(DbT7130."serviceShuruiCd", 1, 1) = '7'

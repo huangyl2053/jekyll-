@@ -63,28 +63,28 @@ public class DBC120041_KyodoJukyushaInSub extends BatchFlowBase<DBC120041_KyodoJ
             try {
                 if (基本情報_5C3.equals(ファイル名.substring(2, ENDINDEX))) {
                     executeStep(一時TBL基本情報_5C3作成);
-                    レコード総件数 = レコード総件数 + getResult(Integer.class, new RString(一時TBL基本情報_5C3作成),
-                            CreateTmptable5C3Process.レコード件数);
+                    レコード総件数 = レコード総件数 + checkNull(getResult(Integer.class, new RString(一時TBL基本情報_5C3作成),
+                            CreateTmptable5C3Process.レコード件数));
                 } else if (償還情報_5D3.equals(ファイル名.substring(2, ENDINDEX))) {
                     executeStep(一時TBL償還情報_5D3作成);
-                    レコード総件数 = レコード総件数 + getResult(Integer.class, new RString(一時TBL償還情報_5D3作成),
-                            CreateTmptable5D3Process.レコード件数);
+                    レコード総件数 = レコード総件数 + checkNull(getResult(Integer.class, new RString(一時TBL償還情報_5D3作成),
+                            CreateTmptable5D3Process.レコード件数));
                 } else if (高額情報_5E3.equals(ファイル名.substring(2, ENDINDEX))) {
                     executeStep(一時TBL高額情報_5E3作成);
-                    レコード総件数 = レコード総件数 + getResult(Integer.class, new RString(一時TBL高額情報_5E3作成),
-                            CreateTmptable5E3Process.レコード件数);
+                    レコード総件数 = レコード総件数 + checkNull(getResult(Integer.class, new RString(一時TBL高額情報_5E3作成),
+                            CreateTmptable5E3Process.レコード件数));
                 } else if (基本情報_5C4.equals(ファイル名.substring(2, ENDINDEX))) {
                     executeStep(一時TBL基本情報_5C4作成);
-                    レコード総件数 = レコード総件数 + getResult(Integer.class, new RString(一時TBL基本情報_5C4作成),
-                            CreateTmptable5C4Process.レコード件数);
+                    レコード総件数 = レコード総件数 + checkNull(getResult(Integer.class, new RString(一時TBL基本情報_5C4作成),
+                            CreateTmptable5C4Process.レコード件数));
                 } else if (償還情報_5D4.equals(ファイル名.substring(2, ENDINDEX))) {
                     executeStep(一時TBL償還情報_5D4作成);
-                    レコード総件数 = レコード総件数 + getResult(Integer.class, new RString(一時TBL償還情報_5D4作成),
-                            CreateTmptable5D4Process.レコード件数);
+                    レコード総件数 = レコード総件数 + checkNull(getResult(Integer.class, new RString(一時TBL償還情報_5D4作成),
+                            CreateTmptable5D4Process.レコード件数));
                 } else if (高額情報_5E4.equals(ファイル名.substring(2, ENDINDEX))) {
                     executeStep(一時TBL高額情報_5E4作成);
-                    レコード総件数 = レコード総件数 + getResult(Integer.class, new RString(一時TBL高額情報_5E4作成),
-                            CreateTmptable5E4Process.レコード件数);
+                    レコード総件数 = レコード総件数 + checkNull(getResult(Integer.class, new RString(一時TBL高額情報_5E4作成),
+                            CreateTmptable5E4Process.レコード件数));
                 }
             } catch (Exception e) {
                 throw new BatchInterruptedException(e.getMessage());
@@ -197,5 +197,12 @@ public class DBC120041_KyodoJukyushaInSub extends BatchFlowBase<DBC120041_KyodoJ
     @Step(一時TBLの登録)
     protected IBatchFlowCommand ichiTmpTableTorokuProcess() {
         return loopBatch(IchiTmpTableTorokuProcess.class).define();
+    }
+
+    private Integer checkNull(Integer レコード件数) {
+        if (レコード件数 != null) {
+            return レコード件数;
+        }
+        return 0;
     }
 }

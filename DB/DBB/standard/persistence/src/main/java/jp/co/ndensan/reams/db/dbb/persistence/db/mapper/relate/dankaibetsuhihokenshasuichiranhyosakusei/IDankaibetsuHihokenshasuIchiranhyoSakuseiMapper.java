@@ -37,8 +37,8 @@ public interface IDankaibetsuHihokenshasuIchiranhyoSakuseiMapper {
     /**
      * 段階情報取得
      *
-     * @param parameter
-     * @return DankaiProcessEntity
+     * @param parameter DankaibetuHihokensyasuIchiranhyoMyBatisParameter
+     * @return List<DankaiProcessEntity>
      */
     List<DankaiProcessEntity> select段階情報取得(DankaibetuHihokensyasuIchiranhyoMyBatisParameter parameter);
 

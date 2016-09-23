@@ -615,7 +615,6 @@ public class ServiceRiyohyoInfoDivHandler {
      */
     public void setパネルにデータ反映() {
         dgServiceRiyohyoBeppyoList_Row row = div.getServiceRiyohyoBeppyoList().getDgServiceRiyohyoBeppyoList().getClickedItem();
-        RString 表示モード = ViewStateHolder.get(ViewStateKeys.表示モード, RString.class);
         if (合計なし.equals(row.getHdnGokeiGyoFlag())) {
             div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdJigyoshaInput().setNyuryokuShisetsuKodo(row.getHdnJigyoshaCode());
             div.getServiceRiyohyoBeppyoJigyoshaServiceInput().getCcdServiceCodeInput().setサービス種類コード(row.getHdnServiceShuruiCode());

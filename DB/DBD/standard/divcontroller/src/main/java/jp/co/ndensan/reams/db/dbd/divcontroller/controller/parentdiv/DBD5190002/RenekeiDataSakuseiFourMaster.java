@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD5190002;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD519002.DBD519002Parameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD519002.DBD519002_YokaigoNinteiKanrenDataSakuseiParameter;
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdQuestionMessages;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5190002.RenekeiDataSakuseiFourMasterDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5190002.RenekeiDataSakuseiFourMasterHandler;
@@ -78,8 +78,8 @@ public class RenekeiDataSakuseiFourMaster {
      * @param div ドメインオブジェクトを取り出したい {@link RenekeiDataSakuseiFourMasterDiv}
      * @return ResponseData<RenekeiDataSakuseiFourMasterBatchParameter>
      */
-    public ResponseData<DBD519002Parameter> onClick_btnBatchRegister(RenekeiDataSakuseiFourMasterDiv div) {
-        DBD519002Parameter parameter = getHandler(div).createParameter();
+    public ResponseData<DBD519002_YokaigoNinteiKanrenDataSakuseiParameter> onClick_btnBatchRegister(RenekeiDataSakuseiFourMasterDiv div) {
+        DBD519002_YokaigoNinteiKanrenDataSakuseiParameter parameter = getHandler(div).createParameter();
         return ResponseData.of(parameter).respond();
     }
 

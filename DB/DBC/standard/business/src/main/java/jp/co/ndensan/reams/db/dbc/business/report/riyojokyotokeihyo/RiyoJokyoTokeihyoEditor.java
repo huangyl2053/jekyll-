@@ -68,7 +68,7 @@ public class RiyoJokyoTokeihyoEditor implements IRiyoJokyoTokeihyoEditor {
         source.hokenshaName = item.get保険者名();
         source.hokenshaNo = item.get保険者番号();
         source.list1_1 = RiyojokyoTokeihyo_EditPattern.toValue(item.getリスト_サービス種類集計().get(0).getサービス種類コード()).get名称();
-        source.list1_2 = DecimalFormatter.toコンマ区切りRString(item.getリスト_サービス種類集計().get(0).get集計項目1_1(), 0);
+        source.list1_2 = this.金額(item.getリスト_サービス種類集計().get(0).get集計項目1_1());
         source.list1_3 = DecimalFormatter.toコンマ区切りRString(item.getリスト_サービス種類集計().get(0).get集計項目1_2(), 0);
         source.list1_4 = DecimalFormatter.toコンマ区切りRString(item.getリスト_サービス種類集計().get(0).get集計項目1_3(), 0);
         source.list1_5 = DecimalFormatter.toコンマ区切りRString(item.getリスト_サービス種類集計().get(0).get集計項目1_4(), 0);
@@ -229,6 +229,14 @@ public class RiyoJokyoTokeihyoEditor implements IRiyoJokyoTokeihyoEditor {
         } else {
             return DecimalFormatter.
                     toコンマ区切りRString(金額, 0);
+        }
+    }
+
+    private RString 金額(Decimal 金額) {
+        if (Decimal.ZERO != 金額) {
+            return DecimalFormatter.toコンマ区切りRString(item.getリスト_サービス種類集計().get(0).get集計項目1_1(), 0);
+        } else {
+            return RString.HALF_SPACE;
         }
     }
 }

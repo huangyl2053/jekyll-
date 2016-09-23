@@ -152,6 +152,16 @@ public class SaishinsaKetteitsuchishoTorikomiIchiranKohifutanshaBunSource implem
     public RString kogakuServicehiChoseiTanisu;
     @ReportItem(name = "kogakuServicehiChoseiFutangaku", length = 17, order = 67)
     public RString kogakuServicehiChoseiFutangaku;
+    @ReportItem(name = "yubinNo", length = 10, order = 68)
+    public RString yubinNo;
+    @ReportItem(name = "choikiCode", length = 10, order = 69)
+    public RString choikiCode;
+    @ReportItem(name = "gyoseikuCode", length = 10, order = 70)
+    public RString gyoseikuCode;
+    @ReportItem(name = "shimei50onKana", length = 10, order = 71)
+    public RString shimei50onKana;
+    @ReportItem(name = "shichosonCode", length = 10, order = 72)
+    public RString shichosonCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
@@ -231,6 +241,12 @@ public class SaishinsaKetteitsuchishoTorikomiIchiranKohifutanshaBunSource implem
         kogakuServicehiKetteiFutangaku,
         kogakuServicehiChoseiKensu,
         kogakuServicehiChoseiTanisu,
-        kogakuServicehiChoseiFutangaku
+        kogakuServicehiChoseiFutangaku,
+        yubinNo,
+        choikiCode,
+        gyoseikuCode,
+        shimei50onKana,
+        shichosonCode,
+        shikibetsuCode
     }
 }

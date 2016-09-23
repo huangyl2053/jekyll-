@@ -57,9 +57,9 @@ public class PostMainPanelFinder {
         if (再発行対象リスト != null && !再発行対象リスト.isEmpty()) {
             for (PostMainPanelEntity item : 再発行対象リスト) {
                 List items = new ArrayList();
-
-                if (item.get市町村コード() != null || !item.get市町村コード().toString().isEmpty()) {
-                    items.add(new RString(item.get市町村コード().toString()));
+                RString 市町村コード = new RString(item.get市町村コード().toString());
+                if (!RString.isNullOrEmpty(市町村コード)) {
+                    items.add(市町村コード);
                 } else {
                     items.add(RString.EMPTY);
                 }
@@ -101,8 +101,9 @@ public class PostMainPanelFinder {
         if (再発行対象リスト != null && !再発行対象リスト.isEmpty()) {
             for (PostMainPanelEntity item : 再発行対象リスト) {
                 List items = new ArrayList();
-                if (item.get市町村コード() != null || !item.get市町村コード().toString().isEmpty()) {
-                    items.add(new RString(item.get市町村コード().toString()));
+                RString 市町村コード = new RString(item.get市町村コード().toString());
+                if (!RString.isNullOrEmpty(市町村コード)) {
+                    items.add(市町村コード);
                 } else {
                     items.add(RString.EMPTY);
                 }

@@ -20,6 +20,10 @@ module DBX {
                 return "onClick_btnSearch";
             }
 
+            public static onClick_btnAfter(): string {
+                return "onClick_btnAfter";
+            }
+
             public static onClick_btnBefore(): string {
                 return "onClick_btnBefore";
             }
