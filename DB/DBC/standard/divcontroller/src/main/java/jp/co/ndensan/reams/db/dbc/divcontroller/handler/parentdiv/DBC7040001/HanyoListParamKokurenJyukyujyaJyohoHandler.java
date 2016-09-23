@@ -444,7 +444,7 @@ public class HanyoListParamKokurenJyukyujyaJyohoHandler {
             set日付(restoreBatchParameterMap);
             if (restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("kakuidozukinoSaishinNomi"))) {
                 List<RString> 各異動月S = new ArrayList<>();
-                各異動月S.add(各異動月);
+                各異動月S.add(すべてKEY0);
                 div.getChkIdotukiSaisinJohoChushutsu().setSelectedItemsByKey(各異動月S);
             }
         }
