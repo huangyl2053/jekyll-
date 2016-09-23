@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -50,6 +51,7 @@ public class KyufuTsuchiGenmenHoseiToroku {
     private static final int NUM_6 = 6;
     private static final int NUM_2 = 2;
     private static final int NUM_0 = 0;
+    private static final RString 完了メッセージ = new RString("給付費通知減免情報の更新が正常に行われました");
 
     /**
      * 画面初期化処理です。
@@ -177,6 +179,11 @@ public class KyufuTsuchiGenmenHoseiToroku {
             for (KyufuhiTuchiHosei kyufuhiTuchiHosei : models) {
                 kyufuhiTuchiHoseiManager.save給付費通知補正(kyufuhiTuchiHosei);
             }
+            TaishoshaKey 資格対象者 = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+            HihokenshaNo hiHokenshaNo = 資格対象者.get被保険者番号();
+            div.getCcdKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage()
+                    .replace(完了メッセージ.toString()).evaluate()), hiHokenshaNo.value(),
+                    div.getKyufuTsuchiGenmenHoseiTorokuKihon().get氏名カナ(), true);
             return ResponseData.of(div).setState(DBC1300011StateName.kanryo);
         }
         return ResponseData.of(div).respond();
