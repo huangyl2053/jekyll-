@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc040050.GetTaishoshaChushutsuProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc040050.SetKougakuGassanKetteiTsuuchishoProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc040050.UpdateDbT3074Process;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc040050.UpdateDbT7022Process;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040050.GetTaishoshaChushutsuProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040050.SetKougakuGassanKetteiTsuuchishoProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040050.UpdateDbT3074Process;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040050.UpdateDbT7022Process;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC040050.DBC040050_KogakugassanShikyuKetteitsuchishoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakugassanshikyuketteitsuchisho.KogakugassanShikyuKetteitsuchishoProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
