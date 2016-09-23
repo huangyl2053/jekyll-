@@ -254,13 +254,13 @@ public class IchiranServicecodeRiyojokyoProcess
 
     private RString get条件１(RString 条件) {
         RString 条件１ = new RString("");
-        条件１.concat(条件);
+        条件１ = 条件１.concat(条件);
         RString 年月範囲開始 = パターン56(parameter.get年月範囲開始());
         RString 年月範囲終了 = パターン56(parameter.get年月範囲終了());
         if (年月範囲開始.equals(年月範囲終了)) {
-            条件１.concat(年月範囲開始);
+            条件１ = 条件１.concat(年月範囲開始);
         } else {
-            条件１.concat(年月範囲開始).concat(接続).concat(年月範囲終了);
+            条件１ = 条件１.concat(年月範囲開始).concat(接続).concat(年月範囲終了);
         }
         return 条件１;
     }
@@ -270,12 +270,12 @@ public class IchiranServicecodeRiyojokyoProcess
             return RString.EMPTY;
         }
         RString 条件３ = new RString("");
-        条件３.concat(条件);
+        条件３ = 条件３.concat(条件);
         if (INT_1 < parameter.get対象コード().size()) {
-            条件３.concat(parameter.get対象コード().get(INT_0)).concat(波線).
+            条件３ = 条件３.concat(parameter.get対象コード().get(INT_0)).concat(波線).
                     concat(parameter.get対象コード().get(parameter.get対象コード().size() - INT_1));
         } else {
-            条件３.concat(parameter.get対象コード().get(INT_0));
+            条件３ = 条件３.concat(parameter.get対象コード().get(INT_0));
         }
         return 条件３;
     }
