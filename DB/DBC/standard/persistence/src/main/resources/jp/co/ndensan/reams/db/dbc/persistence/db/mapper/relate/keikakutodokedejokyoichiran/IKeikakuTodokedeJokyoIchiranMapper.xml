@@ -71,7 +71,9 @@
                 ,被保険者台帳管理."shikakuSoshitsuYMD"
                 ,被保険者台帳管理."shikakuSoshitsuJiyuCode"
                 ,被保険者台帳管理."jushochiTokureiFlag"
-                ,row_number() OVER (ORDER BY "idoYMD" DESC) AS 異動日降順
+                ,row_number() OVER (PARTITION BY 被保険者台帳管理."hihokenshaNo",
+                                    被保険者台帳管理."edaNo" 
+                                    ORDER BY 被保険者台帳管理."idoYMD" DESC) AS 異動日降順
             FROM
                 rgdb."DbT1001HihokenshaDaicho" AS 被保険者台帳管理
             WHERE
@@ -102,7 +104,9 @@
                 ,A."電話番号"
                 ,A."変更年月日"
                 ,A."事業者名称"
-                ,ROW_NUMBER() OVER (ORDER BY 居宅給付計画届出."rirekiNo" DESC) AS 最大順
+                ,ROW_NUMBER() OVER (PARTITION BY 居宅給付計画届出. "hihokenshaNo",
+                                    居宅給付計画届出. "taishoYM" 
+                                    ORDER BY 居宅給付計画届出."rirekiNo" DESC) AS 最大順
             FROM	
                 rgdb."DbT3005KyotakuKeikakuTodokede" AS 居宅給付計画届出
             LEFT JOIN
@@ -130,7 +134,9 @@
                             介護事業者指定サービス."jigyoshaNo"
                             ,介護事業者指定サービス."jigyoshaTelNo" AS 事業者電話番号
                             ,介護事業者指定サービス."jigyoshaName" AS 事業者名称
-                            ,ROW_NUMBER() OVER (ORDER BY 介護事業者指定サービス."yukoKaishiYMD" DESC) AS 直近
+                            ,ROW_NUMBER() OVER (PARTITION BY 介護事業者指定サービス. "jigyoshaNo",
+                                                介護事業者指定サービス. "serviceShuruiCode"
+                                                ORDER BY 介護事業者指定サービス."yukoKaishiYMD" DESC) AS 直近
                         FROM	
                             rgdb."DbT7063KaigoJigyoshaShiteiService" AS 介護事業者指定サービス
                         WHERE	
@@ -145,7 +151,9 @@
                             介護事業者指定サービス."jigyoshaNo"
                             ,介護事業者指定サービス."jigyoshaTelNo" AS 事業者電話番号
                             ,介護事業者指定サービス."jigyoshaName" AS 事業者名称
-                            ,ROW_NUMBER() OVER (ORDER BY 介護事業者指定サービス."yukoKaishiYMD" DESC) AS 直近
+                            ,ROW_NUMBER() OVER (PARTITION BY 介護事業者指定サービス. "jigyoshaNo",
+                                                介護事業者指定サービス. "serviceShuruiCode"
+                                                ORDER BY 介護事業者指定サービス."yukoKaishiYMD" DESC) AS 直近
                         FROM
                             rgdb."DbT7063KaigoJigyoshaShiteiService" AS 介護事業者指定サービス
                         WHERE
