@@ -6,10 +6,8 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5150011;
  */
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 
 /**
  * panServiceSyurui のクラスファイル
@@ -25,14 +23,8 @@ public class panServiceSyuruiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("btnServiceCode")
-    private ButtonDialog btnServiceCode;
-    @JsonProperty("txtSyuruiCode")
-    private TextBoxCode txtSyuruiCode;
-    @JsonProperty("txtServiceCode")
-    private TextBoxCode txtServiceCode;
-    @JsonProperty("dgServiceShuruiList")
-    private DataGrid<dgServiceShuruiList_Row> dgServiceShuruiList;
+    @JsonProperty("dgServiceBunruiList")
+    private DataGrid<dgServiceBunruiList_Row> dgServiceBunruiList;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -41,75 +33,21 @@ public class panServiceSyuruiDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getbtnServiceCode
-     * @return btnServiceCode
+     * getdgServiceBunruiList
+     * @return dgServiceBunruiList
      */
-    @JsonProperty("btnServiceCode")
-    public ButtonDialog getBtnServiceCode() {
-        return btnServiceCode;
+    @JsonProperty("dgServiceBunruiList")
+    public DataGrid<dgServiceBunruiList_Row> getDgServiceBunruiList() {
+        return dgServiceBunruiList;
     }
 
     /*
-     * setbtnServiceCode
-     * @param btnServiceCode btnServiceCode
+     * setdgServiceBunruiList
+     * @param dgServiceBunruiList dgServiceBunruiList
      */
-    @JsonProperty("btnServiceCode")
-    public void setBtnServiceCode(ButtonDialog btnServiceCode) {
-        this.btnServiceCode = btnServiceCode;
-    }
-
-    /*
-     * gettxtSyuruiCode
-     * @return txtSyuruiCode
-     */
-    @JsonProperty("txtSyuruiCode")
-    public TextBoxCode getTxtSyuruiCode() {
-        return txtSyuruiCode;
-    }
-
-    /*
-     * settxtSyuruiCode
-     * @param txtSyuruiCode txtSyuruiCode
-     */
-    @JsonProperty("txtSyuruiCode")
-    public void setTxtSyuruiCode(TextBoxCode txtSyuruiCode) {
-        this.txtSyuruiCode = txtSyuruiCode;
-    }
-
-    /*
-     * gettxtServiceCode
-     * @return txtServiceCode
-     */
-    @JsonProperty("txtServiceCode")
-    public TextBoxCode getTxtServiceCode() {
-        return txtServiceCode;
-    }
-
-    /*
-     * settxtServiceCode
-     * @param txtServiceCode txtServiceCode
-     */
-    @JsonProperty("txtServiceCode")
-    public void setTxtServiceCode(TextBoxCode txtServiceCode) {
-        this.txtServiceCode = txtServiceCode;
-    }
-
-    /*
-     * getdgServiceShuruiList
-     * @return dgServiceShuruiList
-     */
-    @JsonProperty("dgServiceShuruiList")
-    public DataGrid<dgServiceShuruiList_Row> getDgServiceShuruiList() {
-        return dgServiceShuruiList;
-    }
-
-    /*
-     * setdgServiceShuruiList
-     * @param dgServiceShuruiList dgServiceShuruiList
-     */
-    @JsonProperty("dgServiceShuruiList")
-    public void setDgServiceShuruiList(DataGrid<dgServiceShuruiList_Row> dgServiceShuruiList) {
-        this.dgServiceShuruiList = dgServiceShuruiList;
+    @JsonProperty("dgServiceBunruiList")
+    public void setDgServiceBunruiList(DataGrid<dgServiceBunruiList_Row> dgServiceBunruiList) {
+        this.dgServiceBunruiList = dgServiceBunruiList;
     }
 
     // </editor-fold>

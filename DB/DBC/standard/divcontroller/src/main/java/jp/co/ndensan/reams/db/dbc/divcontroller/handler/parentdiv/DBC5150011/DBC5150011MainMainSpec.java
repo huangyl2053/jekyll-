@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC5150011;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.servicecodeichiran.ChushutsuJokenKubun;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5150011.DBC5150011MainDiv;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 
@@ -48,15 +47,17 @@ public enum DBC5150011MainMainSpec implements IPredicate<DBC5150011MainDiv> {
     private static class SpecHelper {
 
         public static boolean isサービス種類コード_桁数チェック(DBC5150011MainDiv div) {
-            if (div.getRadMeisaiGokeiOut().getSelectedValue().equals(ChushutsuJokenKubun.サービスコードを指定.get名称())) {
-                return div.getTxtSyuruiCode().getValue().length() == 整数_TWO;
+            if (div.getRadChushutsuJokenServiceCode().getSelectedKey() != null
+                    && !div.getRadChushutsuJokenServiceCode().getSelectedKey().isEmpty()) {
+                return div.getCcdServiceCodeInput().getサービスコード1().length() == 整数_TWO;
             }
             return true;
         }
 
         public static boolean isサービス分類_指定なしチェック(DBC5150011MainDiv div) {
-            if (div.getRadMeisaiGokeiOut().getSelectedValue().equals(ChushutsuJokenKubun.サービス分類を指定.get名称())) {
-                return !div.getDgServiceShuruiList().getSelectedItems().isEmpty();
+            if (div.getRadChushutsuJokenServiceBunrui().getSelectedKey() != null
+                    && !div.getRadChushutsuJokenServiceBunrui().getSelectedKey().isEmpty()) {
+                return !div.getDgServiceBunruiList().getSelectedItems().isEmpty();
             }
             return true;
         }
@@ -64,6 +65,5 @@ public enum DBC5150011MainMainSpec implements IPredicate<DBC5150011MainDiv> {
         public static boolean is出力方法_指定なしチェック(DBC5150011MainDiv div) {
             return !div.getChkShutsuryokuTaisho().getSelectedItems().isEmpty();
         }
-
     }
 }
