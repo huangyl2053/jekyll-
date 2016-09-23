@@ -26,7 +26,6 @@ import jp.co.ndensan.reams.db.dbc.entity.csv.kaigokyufuhikagomoshitateshoout.Kai
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110090.DbWT1731KagoMoshitateTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110090.KaigokyufuhiKagoMoshitateshoOutDoBillOutEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kaigokyufuhikagomoshitateshoout.KyufuKagoMoshitateshojohoSofuIchiranSource;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikagomoshitateshojohosofuichiran.SogojigyohiKagoMoshitateshojohoSofuIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikagomoshitateshojohosofuichiran.SogojigyohiKagoMoshitateshojohoSofuSource;
 import jp.co.ndensan.reams.db.dbc.entity.report.sogojigyohikagomoshitateshojohosofuIchiran.SogojigyohiKagoMoshitateshojohoSofuIchiranSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
@@ -49,7 +48,6 @@ import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -62,7 +60,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -266,12 +263,9 @@ public class KaigokyufuhiKagoMoshitateshoOutDoBillOutProcess extends BatchKeyBre
                                 parameter.getシステム日付(), flag, 改頁項目名リスト, parameter.get処理年月(), 件数);
                 sogoReport.writeBy(sogojigyohiKagoSourceWriter);
             } else if (コード_179.equals(parameter.getコード())) {
-                SogojigyohiKagoMoshitateshojohoSofuIchiranEntity sogoJiEntity = new SogojigyohiKagoMoshitateshojohoSofuIchiranEntity();
-                sogoJiEntity.set被保険者一時TBL(this.exEtntity.getDbWT1001Entity());
-                sogoJiEntity.set過誤申立一時TBL(this.exEtntity.getDbWT1731Entity());
                 SogojigyohiKagoMoshitateshojohoSofuReport sogojiReport
-                        = new SogojigyohiKagoMoshitateshojohoSofuReport(sogoJiEntity, 並び順, new RYearMonth(parameter.get処理年月().toDateString()),
-                                new YMDHMS(parameter.getシステム日付()), 件数, 件数, flag);
+                        = new SogojigyohiKagoMoshitateshojohoSofuReport(this.exEtntity, 並び順, parameter.get処理年月(),
+                                parameter.getシステム日付(), 件数, flag);
                 sogojiReport.writeBy(sogojiWriter);
             }
 
@@ -310,12 +304,9 @@ public class KaigokyufuhiKagoMoshitateshoOutDoBillOutProcess extends BatchKeyBre
             sogoReport.writeBy(sogojigyohiKagoSourceWriter);
             sogojigyohiKagoReportWriter.close();
         } else if (コード_179.equals(parameter.getコード())) {
-            SogojigyohiKagoMoshitateshojohoSofuIchiranEntity sogoJiEntity = new SogojigyohiKagoMoshitateshojohoSofuIchiranEntity();
-            sogoJiEntity.set被保険者一時TBL(this.exEtntity.getDbWT1001Entity());
-            sogoJiEntity.set過誤申立一時TBL(this.exEtntity.getDbWT1731Entity());
             SogojigyohiKagoMoshitateshojohoSofuReport sogojiReport
-                    = new SogojigyohiKagoMoshitateshojohoSofuReport(sogoJiEntity, 並び順, new RYearMonth(parameter.get処理年月().toDateString()),
-                            new YMDHMS(parameter.getシステム日付()), 件数, 件数, true);
+                    = new SogojigyohiKagoMoshitateshojohoSofuReport(this.exEtntity, 並び順, parameter.get処理年月(),
+                            parameter.getシステム日付(), 件数, true);
             sogojiReport.writeBy(sogojiWriter);
             sogojiReportWriter.close();
         }
