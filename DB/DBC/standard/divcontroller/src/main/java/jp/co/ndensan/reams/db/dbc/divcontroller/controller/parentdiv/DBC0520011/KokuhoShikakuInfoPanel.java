@@ -100,7 +100,7 @@ public class KokuhoShikakuInfoPanel {
         }
         KokuhoShikakuInfo 国保資格詳細情報 = ViewStateHolder.get(ViewStateKeys.国保資格詳細情報, KokuhoShikakuInfo.class);
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
-        getHandler(div).onClick_btnBack(taishoshaKey.get被保険者番号(), div, 国保資格詳細情報);
+        getHandler(div).onClick_btnBack(taishoshaKey.get被保険者番号());
         return ResponseData.of(div).forwardWithEventName(DBC0520011TransitionEventName.対象者検索へ戻る).respond();
     }
 
