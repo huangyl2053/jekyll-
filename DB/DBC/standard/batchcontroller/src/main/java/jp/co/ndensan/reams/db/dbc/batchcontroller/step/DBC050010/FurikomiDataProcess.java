@@ -41,10 +41,10 @@ public class FurikomiDataProcess extends BatchProcessBase<FurikomiDataEntity> {
     private KozaJohoProcessParameter parameter;
     private FurikomiGyomunaiKubun 振込業務内区分;
     private boolean flag = true;
-    private final int INT10 = 10;
-    private final RString 名 = new RString("名");
-    private final RString 件 = new RString("件");
-    private final RString 文字 = new RString("△");
+    private static final int INT10 = 10;
+    private static final RString 名 = new RString("名");
+    private static final RString 件 = new RString("件");
+    private static final RString 文字 = new RString("△");
 
     @Override
     protected IBatchReader createReader() {
@@ -54,13 +54,13 @@ public class FurikomiDataProcess extends BatchProcessBase<FurikomiDataEntity> {
     @BatchWriter
     BatchEntityCreatedTempTableWriter dbWT0512ShoriKekkaKakuninList;
     @BatchWriter
-    BatchEntityCreatedTempTableWriter DbWT0511KozaFurikomi;
+    BatchEntityCreatedTempTableWriter dbWT0511KozaFurikomi;
 
     @Override
     protected void createWriter() {
         dbWT0512ShoriKekkaKakuninList = BatchEntityCreatedTempTableWriterBuilders.createBuilder(ShoriKekkaKakuninListTempTableEntity.class)
                 .tempTableName(ShoriKekkaKakuninListTempTableEntity.TABLE_NAME).build();
-        DbWT0511KozaFurikomi = BatchEntityCreatedTempTableWriterBuilders.createBuilder(KozaFurikomiTempTableEntity.class)
+        dbWT0511KozaFurikomi = BatchEntityCreatedTempTableWriterBuilders.createBuilder(KozaFurikomiTempTableEntity.class)
                 .tempTableName(KozaFurikomiTempTableEntity.TABLE_NAME).build();
     }
 
@@ -68,7 +68,7 @@ public class FurikomiDataProcess extends BatchProcessBase<FurikomiDataEntity> {
     protected void process(FurikomiDataEntity entity) {
         flag = false;
         KozaFurikomiTempTableEntity tempTable = setKozaFurikomiTempTableEntity(entity);
-        DbWT0511KozaFurikomi.insert(tempTable);
+        dbWT0511KozaFurikomi.insert(tempTable);
     }
 
     @Override
