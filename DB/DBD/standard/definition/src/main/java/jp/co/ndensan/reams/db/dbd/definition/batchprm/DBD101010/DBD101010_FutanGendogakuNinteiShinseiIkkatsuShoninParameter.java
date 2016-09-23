@@ -107,7 +107,7 @@ public class DBD101010_FutanGendogakuNinteiShinseiIkkatsuShoninParameter extends
     /**
      * 結果一覧出力のprocessパラメータを作成。
      *
-     * @param バッチ処理日時
+     * @param バッチ処理日時 YMDHMS
      * @return NinteiBatchKekkaListShutsuryokuProcessParameter
      */
     public NinteiBatchKekkaListShutsuryokuProcessParameter toNinteiBatchKekkaListShutsuryokuProcessParameter(YMDHMS バッチ処理日時) {
