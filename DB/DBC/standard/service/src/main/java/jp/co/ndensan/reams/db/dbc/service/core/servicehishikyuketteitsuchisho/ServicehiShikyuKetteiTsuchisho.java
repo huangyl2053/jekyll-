@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchish
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchisho.KetteiTsuchishoInfoTempResultEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakusogojigyoservice.IKogakuJigyoServicehiShikyuKetteiTsuchishoMapper;
 import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
-import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7067ChohyoSeigyoHanyoDac;
 import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEntity;
@@ -459,13 +458,14 @@ public class ServicehiShikyuKetteiTsuchisho {
     /**
      * 年度内連番を取得します。
      *
+     * @param 処理名 RString
      * @return 年度内連番
      */
-    public int get年度内連番() {
+    public int get年度内連番(RString 処理名) {
         IKogakuJigyoServicehiShikyuKetteiTsuchishoMapper mapper
                 = mapperProvider.create(IKogakuJigyoServicehiShikyuKetteiTsuchishoMapper.class);
-        return mapper.select最大年度内連番(SubGyomuCode.DBB介護賦課.getColumnValue(), 市町村コード,
-                ShoriName.事業高額サービス等支給不支給決定通知書一括作成.get名称(), 処理枝番, 年度_固定);
+        return mapper.select最大年度内連番(SubGyomuCode.DBC介護給付.getColumnValue(), 市町村コード,
+                処理名, 処理枝番, 年度_固定);
     }
 
     /**

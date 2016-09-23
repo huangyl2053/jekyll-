@@ -7,11 +7,9 @@ package jp.co.ndensan.reams.db.dbc.business.core.kyufujissekishokai;
 
 import java.io.Serializable;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiJutakuKaishuhi;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKihon;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKinkyuShisetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiKogakuKaigoServicehi;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiMeisaiJushochiTokurei;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiShokujiHiyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiShoteiShikkanShisetsuRyoyo;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiShukei;
@@ -20,7 +18,6 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.KyufujissekiTokuteiSinryoh
 import jp.co.ndensan.reams.db.dbz.business.core.basic.JukyushaDaicho;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -36,18 +33,13 @@ public class KyufuJissekiPrmBusiness implements Serializable {
 
     private static final long serialVersionUID = -5919506043541482841L;
 
-//    private DukanriJoho dukanriJoho; 共通管理情報
     private KojinKakuteiKey kojinKakuteiKey;
     private KyufuJissekiCommonHeader commonHeader;
-//    private SearchData searchData; 検索結果データ
+    private KyufuJissekiSearchDataBusiness searchData;
     private RString dataType;
     private RString hokenshaNO;
     private FlexibleYearMonth serviceSTYM;
     private FlexibleYearMonth serviceEDYM;
-    private RString maxKensu;
-    private DataRow selectRow;
-    private Boolean blnMaxKensuFG;
-    private Boolean blnRirekiFG;
     private List<KyufujissekiKihon> csData_A;
     private List<KyufujissekiMeisaiBusiness> csData_B;
     private List<KyufujissekiKinkyuShisetsuRyoyo> csData_C;
@@ -56,16 +48,15 @@ public class KyufuJissekiPrmBusiness implements Serializable {
     private List<KyufujissekiShokujiHiyo> csData_E;
     private List<KyufujissekiKyotakuServiceBusiness> csData_F;
     private List<KyufujissekiFukushiYoguHanbaihiBusiness> csData_G;
-    private List<KyufujissekiJutakuKaishuhi> csData_H;
+    private List<KyufujissekiJutakuKaishuhiBusiness> csData_H;
     private List<KyufujissekiKogakuKaigoServicehi> csData_I;
     private List<KyufujissekiTokuteiNyushosyaKaigoServiceHiyoBusiness> csData_K;
     private List<KyufuJissekiShakaiFukushiHojinKeigengakuBusiness> csData_L;
     private List<KyufuJissekiCareManagementHiBusiness> csData_M;
-    private List<KyufujissekiMeisaiJushochiTokurei> csData_N;
+    private List<KyufujissekiMeisaiJushochiTokureiBusiness> csData_N;
     private List<KyufujissekiShukei> csData_Z;
     private List<KyufujissekiShoteiShikkanShisetsuRyoyo> csData_P;
     private List<JukyushaDaicho> jukyushaData;
-//    private Data_N data_N; 給付実績情報照会
     private RString hiHokenShaName;
     private RString yoKaiGoDoName;
     private RString nenrei;

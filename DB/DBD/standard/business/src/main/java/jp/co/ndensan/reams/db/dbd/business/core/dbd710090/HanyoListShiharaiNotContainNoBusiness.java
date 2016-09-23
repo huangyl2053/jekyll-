@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.core.dbd710090;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.ChushutsuKomokuKubun;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt13011.GeneralPurposeListOutputEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt13011.GeneralPurposeListOutputNotContainNoEucCsvEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
@@ -705,14 +704,6 @@ public class HanyoListShiharaiNotContainNoBusiness {
             return YokaigoJotaiKubunSupport.toValue(KoroshoInterfaceShikibetsuCode.toValue(koroshoIfCode), code).getName();
         }
         return RString.EMPTY;
-    }
-
-    private RString edit抽出項目区分(RString 抽出項目区分) {
-        try {
-            return ChushutsuKomokuKubun.toValue(抽出項目区分).get名称();
-        } catch (Exception e) {
-            return RString.EMPTY;
-        }
     }
 
     private RString edit旧措置(boolean kyuSochishaFlag) {

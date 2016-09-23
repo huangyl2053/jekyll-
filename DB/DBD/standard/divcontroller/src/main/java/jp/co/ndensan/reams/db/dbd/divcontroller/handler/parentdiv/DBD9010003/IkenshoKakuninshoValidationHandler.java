@@ -6,11 +6,8 @@
 package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD9010003;
 
 import jp.co.ndensan.reams.db.dbd.definition.message.DbdErrorMessages;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010003.HikazeiNenkinKenJohoDiv;
-import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD8010003.HikazeiNenkinKenJohoSpec;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD9010003.IkenshoKakuninshoDiv;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD9010003.IkenshoKakuninshoDivSpec;
-import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD8010003.HikazeiNenkinKenJohoValidationHandler;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
@@ -26,14 +23,25 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class IkenshoKakuninshoValidationHandler {
     
+    private final IkenshoKakuninshoDiv div;
+
+    /**
+     * コンストラクタです。
+     * 
+     * @param div IkenshoKakuninshoDiv
+     */
+    public IkenshoKakuninshoValidationHandler(IkenshoKakuninshoDiv div) {
+        this.div = div;
+    }
+    
+    
     /**
      * 発行確認チェックを行います。
      *
      * @param pairs バリデーションコントロール
-     * @param div IkenshoKakuninshoDiv
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs 発行確認チェック(ValidationMessageControlPairs pairs, IkenshoKakuninshoDiv div) {
+    public ValidationMessageControlPairs 発行確認チェック(ValidationMessageControlPairs pairs) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
         messages.add(ValidateChain.validateStart(div).ifNot(IkenshoKakuninshoDivSpec.発行確認チェック)
                 .thenAdd(IkenshoKakuninshoValidationHandler.HakkoKakuninMessages.発行確認チェック).messages());

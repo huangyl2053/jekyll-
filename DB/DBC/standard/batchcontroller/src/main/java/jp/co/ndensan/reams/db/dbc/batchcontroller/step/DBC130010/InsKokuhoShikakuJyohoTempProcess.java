@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC130010;
 
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc130010.InsKokuhoShikakuJyohoTempProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130010.KokuhoShikakuJyohoInpotoyoEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130010.KokuhoShikakuＪyohoYoResultEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc130010.KokuhoShikakuJyohoYoResultEntity;
 import jp.co.ndensan.reams.db.dbd.definition.core.hikazeinenkin.TorokuKubun;
 import jp.co.ndensan.reams.ur.urz.batchcontroller.step.writer.BatchWriters;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-3020-030 dengwei
  */
-public class InsKokuhoShikakuJyohoTempProcess extends BatchProcessBase<KokuhoShikakuＪyohoYoResultEntity> {
+public class InsKokuhoShikakuJyohoTempProcess extends BatchProcessBase<KokuhoShikakuJyohoYoResultEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc130010.IKokuhoShikakuIdoInMapper.get国保資格情報インポート用データ");
@@ -53,24 +53,23 @@ public class InsKokuhoShikakuJyohoTempProcess extends BatchProcessBase<KokuhoShi
     }
 
     @Override
-    protected void process(KokuhoShikakuＪyohoYoResultEntity entity) {
+    protected void process(KokuhoShikakuJyohoYoResultEntity entity) {
         if (エラー区分_正常データ.equals(entity.get取込国保情報Entity().getエラー区分())) {
             国保資格情報インポート用Entityリストの編集(entity);
         }
 
         // TODO 既存の国保情報が画面登録データのために更新できなかった場合、更新エラーとみなして以下のエラー編集を行う
-        if (ＩＦ種類_電算.equals(processParameter.getIF種類())) {
-        }
-
-        if (ＩＦ種類_電算２.equals(processParameter.getIF種類())) {
-        }
-
+//        if (ＩＦ種類_電算.equals(processParameter.getIF種類())) {
+//        }
+//
+//        if (ＩＦ種類_電算２.equals(processParameter.getIF種類())) {
+//        }
         if (国保資格情報インポート用Entitｙ != null) {
             torikomiKokuhoJyohoEntityWriter.insert(国保資格情報インポート用Entitｙ);
         }
     }
 
-    private void 国保資格情報インポート用Entityリストの編集(KokuhoShikakuＪyohoYoResultEntity entity) {
+    private void 国保資格情報インポート用Entityリストの編集(KokuhoShikakuJyohoYoResultEntity entity) {
         if (取込形式_全件.equals(processParameter.get取込形式())) {
             // TODO 5.5.1.1　住民コード(識別コード)でマッチングしたデータであれば
             get国保資格情報インポート用Entitｙ(entity);
@@ -86,7 +85,7 @@ public class InsKokuhoShikakuJyohoTempProcess extends BatchProcessBase<KokuhoShi
         }
     }
 
-    private void get国保資格情報インポート用Entitｙ(KokuhoShikakuＪyohoYoResultEntity entity) {
+    private void get国保資格情報インポート用Entitｙ(KokuhoShikakuJyohoYoResultEntity entity) {
         国保資格情報インポート用Entitｙ = new KokuhoShikakuJyohoInpotoyoEntity();
         if (entity.get現在国保資格情報Entity() != null) {
             if (!TorokuKubun.画面登録.getコード().equals(entity.get現在国保資格情報Entity().getTorokuKubun())) {

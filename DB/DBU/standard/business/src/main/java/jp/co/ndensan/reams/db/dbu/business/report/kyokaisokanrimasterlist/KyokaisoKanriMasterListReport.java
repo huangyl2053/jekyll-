@@ -84,7 +84,7 @@ public class KyokaisoKanriMasterListReport extends Report<KyokaisoKanriMasterLis
                 reportSourceWriter.writeLine(builder);
             }
         }
-        if (bodyItemList == null || bodyItemList.isEmpty()) {
+        if (bodyItemList.isEmpty()) {
             KyokaisoKanriMasterListBodyTempItem tempItem = new KyokaisoKanriMasterListBodyTempItem();
             IKyokaisoKanriMasterListEditor headerEditor = new KyokaisoKanriMasterListHeaderEditor(headItem);
             IKyokaisoKanriMasterListEditor bodyEditor = new KyokaisoKanriMasterListBodyEditor(tempItem);

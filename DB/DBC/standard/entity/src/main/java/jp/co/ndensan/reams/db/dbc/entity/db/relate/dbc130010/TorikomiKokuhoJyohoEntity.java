@@ -22,7 +22,7 @@ public class TorikomiKokuhoJyohoEntity extends DbTableEntityBase<TorikomiKokuhoJ
 
     private RString 市町村コード;
     @PrimaryKey
-    private RString IN住民コード;
+    private RString iN住民コード;
     @PrimaryKey
     private RString 履歴番号;
     private RString 国保番号;

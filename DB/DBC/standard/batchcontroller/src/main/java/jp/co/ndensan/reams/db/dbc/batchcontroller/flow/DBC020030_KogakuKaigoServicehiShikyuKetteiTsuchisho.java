@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020030.InsertKogakuKai
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020030.KogakuKaigoServicehiDoChohyoHakkoProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020030.KogakuShikyuFushikyuKetteiTsuchiHakkoSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020030.UpdateKogakuShikyuHanteiKekkaProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020030.updateKogakuKaigoKetteiTsuchishoInfoTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020060.JigyoKogakuShoriKekkaKakuninListSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC020030.DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchishoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehishikyuketteitsuchisho.KogakuKaigoServiceProcessParameter;
@@ -54,6 +55,16 @@ public class DBC020030_KogakuKaigoServicehiShikyuKetteiTsuchisho
     @Step(高額サービス一時テーブルの登録)
     protected IBatchFlowCommand insertKogakuKaigoKetteiTsuchishoInfoTempProcess() {
         return loopBatch(InsertKogakuKaigoKetteiTsuchishoInfoTempProcess.class).arguments(creatParameter()).define();
+    }
+
+    /**
+     * 高額サービス一時テーブルの設定メソッドです
+     *
+     * @return バッチコマンド
+     */
+    @Step(高額サービス一時テーブルの設定)
+    protected IBatchFlowCommand updateKogakuKaigoKetteiTsuchishoInfoTempProcess() {
+        return loopBatch(updateKogakuKaigoKetteiTsuchishoInfoTempProcess.class).arguments(creatParameter()).define();
     }
 
     /**
