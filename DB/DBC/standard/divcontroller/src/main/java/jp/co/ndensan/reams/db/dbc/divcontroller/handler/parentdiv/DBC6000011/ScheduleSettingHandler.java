@@ -51,6 +51,8 @@ public class ScheduleSettingHandler {
     private static final RString RSTRING_ZERO = new RString("0");
     private static final RString KEY空白 = new RString("blank");
     private static final RString 受託あり = new RString("2");
+    private static final RString 処理なし = new RString("処理なし");
+    private static final RString 処理前 = new RString("処理前");
 
     /**
      * コンストラクタです。
@@ -143,6 +145,7 @@ public class ScheduleSettingHandler {
                         .set抽出開始日時(new YMDHMS(RString.EMPTY))
                         .set抽出終了日時(new YMDHMS(RString.EMPTY))
                         .set再処理可能区分(再処理前.equals(画面_処理状況))
+                        .set処理実行回数(Decimal.ZERO)
                         .setファイル名称１(RString.EMPTY)
                         .setファイル名称２(RString.EMPTY)
                         .setファイル名称３(RString.EMPTY)
@@ -496,5 +499,57 @@ public class ScheduleSettingHandler {
             }
         }
         return tList;
+    }
+
+    /**
+     * set取込処理状況
+     *
+     * @param list List<dgDataTorikomi_Row>
+     * @param 取込List List<KokuhorenInterfaceKanri>
+     * @return List<dgDataTorikomi_Row>
+     */
+    public List<dgDataTorikomi_Row> set取込処理状況(List<dgDataTorikomi_Row> list, List<KokuhorenInterfaceKanri> 取込List) {
+        Map<RString, KokuhorenInterfaceKanri> 取込Map = new HashMap<>();
+        RString 処理状況;
+        for (KokuhorenInterfaceKanri entity : 取込List) {
+            取込Map.put(entity.get交換情報識別番号(), entity);
+        }
+        for (dgDataTorikomi_Row rowData : list) {
+            if (取込Map.containsKey(rowData.getTxtKokanJohoSikibetsuBango())) {
+                処理状況 = 取込Map.get(rowData.getTxtKokanJohoSikibetsuBango()).get処理状態区分();
+                if (処理なし.equals(処理状況)) {
+                    rowData.getTxtTorikomiShoriJokyo().setSelectedValue(処理なし);
+                } else {
+                    rowData.getTxtTorikomiShoriJokyo().setSelectedValue(処理前);
+                }
+            }
+        }
+        return list;
+    }
+
+    /**
+     * set送付処理状況
+     *
+     * @param list List<dgDataSofu_Row>
+     * @param 送付List List<KokuhorenInterfaceKanri>
+     * @return List<dgDataSofu_Row>
+     */
+    public List<dgDataSofu_Row> set送付処理状況(List<dgDataSofu_Row> list, List<KokuhorenInterfaceKanri> 送付List) {
+        Map<RString, KokuhorenInterfaceKanri> 送付Map = new HashMap<>();
+        RString 処理状況;
+        for (KokuhorenInterfaceKanri entity : 送付List) {
+            送付Map.put(entity.get交換情報識別番号(), entity);
+        }
+        for (dgDataSofu_Row rowData : list) {
+            if (送付Map.containsKey(rowData.getTxtKokanJohoSikibetsuBango())) {
+                処理状況 = 送付Map.get(rowData.getTxtKokanJohoSikibetsuBango()).get処理状態区分();
+                if (処理なし.equals(処理状況)) {
+                    rowData.getTxtSofuShoriJokyo().setSelectedValue(処理なし);
+                } else {
+                    rowData.getTxtSofuShoriJokyo().setSelectedValue(処理前);
+                }
+            }
+        }
+        return list;
     }
 }
