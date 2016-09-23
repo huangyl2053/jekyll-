@@ -501,7 +501,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         } else if (削除.equals(加入歴状態)) {
             if (追加.equals(状態)) {
                 高額合算申請書保持.delete加入歴(加入歴);
-            } else if (RString.isNullOrEmpty(状態) && !削除.equals(状態)) {
+            } else if (RString.isNullOrEmpty(状態) || 修正.equals(状態)) {
                 KogakuGassanShinseishoKanyureki 加入歴Result = 加入歴.get高額合算申請書加入歴();
                 加入歴Result = 加入歴Result.deleted();
                 加入歴.set高額合算申請書加入歴(加入歴Result);
@@ -628,7 +628,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
         } else if (削除.equals(高額合算申請書状態)) {
             if (追加.equals(状態)) {
                 高額合算申請書保持.delete高額合算申請書(高額合算申請書);
-            } else if (RString.isNullOrEmpty(状態) && !削除.equals(状態)) {
+            } else if (RString.isNullOrEmpty(状態) && || 修正.equals(状態)) {
                 KogakuGassanShinseisho 高額合算申請書Result = 高額合算申請書.get高額合算申請書();
                 高額合算申請書Result = 高額合算申請書Result.deleted();
                 高額合算申請書.set高額合算申請書(高額合算申請書Result);
@@ -757,11 +757,14 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
                 .set支給申請書整理番号(引き継ぎデータ == null
                         ? RString.EMPTY.concat(div.getTxtKaigoShikyuShinseishoSeiriBango1().getValue())
                         .concat(div.getTxtKaigoShikyuShinseishoSeiriBango2().getValue())
-                        .concat(div.getTxtKaigoShikyuShinseishoSeiriBango3().getValue())
+                        .concat(div.getTxtKaigoShikyuShinseishoSeiriBango3().getValue() == null
+                                ? RString.EMPTY.padZeroToLeft(INT_6) : div.getTxtKaigoShikyuShinseishoSeiriBango3().getValue())
                         : RString.EMPTY.concat(div.getTxtKaigoShikyuShinseishoSeiriBango1().getValue())
                         .concat(div.getTxtKaigoShikyuShinseishoSeiriBango2().getValue())
-                        .concat(div.getTxtKaigoShikyuShinseishoSeiriBango3().getValue())
-                        .concat(div.getTxtKaigoShikyuShinseishoSeiriBango4().getValue()))
+                        .concat(div.getTxtKaigoShikyuShinseishoSeiriBango3().getValue() == null
+                                ? RString.EMPTY.padZeroToLeft(INT_6) : div.getTxtKaigoShikyuShinseishoSeiriBango3().getValue())
+                        .concat(div.getTxtKaigoShikyuShinseishoSeiriBango4().getValue() == null
+                                ? RString.EMPTY.padZeroToLeft(INT_6) : div.getTxtKaigoShikyuShinseishoSeiriBango4().getValue()))
                 .set国保支給申請書整理番号(RString.isNullOrEmpty(div.getTxtIryoShikyuShinseishoSeiriBango2().getValue())
                         && RString.isNullOrEmpty(div.getTxtIryoShikyuShinseishoSeiriBango3().getValue())
                         && RString.isNullOrEmpty(div.getTxtIryoShikyuShinseishoSeiriBango4().getValue())
@@ -1107,7 +1110,8 @@ public class KogakuGassanShikyuShinseiTorokuAllPanelHandler {
     }
 
     private void 申請情報データで設定(KogakuGassanShinseisho 高額合算申請書) {
-        RowState state = div.getDgShinseiIchiran().getClickedItem().getRowState();
+        RowState state = div.getDgShinseiIchiran().getClickedItem() == null
+                ? null : div.getDgShinseiIchiran().getClickedItem().getRowState();
         if (RowState.Added.equals(state)) {
             RDate nowDate = RDate.getNowDate();
             RString 保険者番号 = DbBusinessConfig.get(

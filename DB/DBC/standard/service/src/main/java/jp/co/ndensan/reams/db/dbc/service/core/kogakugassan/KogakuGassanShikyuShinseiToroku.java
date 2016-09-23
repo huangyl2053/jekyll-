@@ -69,6 +69,8 @@ public class KogakuGassanShikyuShinseiToroku {
     private static final RString KEY_対象年度 = new RString("対象年度");
     private static final RString KEY_保険者番号 = new RString("保険者番号");
     private static final RString KEY_整理番号 = new RString("整理番号");
+    private static final RString KEY_被保険者番号 = new RString("被保険者番号");
+    private static final RString KEY_履歴番号 = new RString("履歴番号");
     private static final RString 追加 = new RString("追加");
     private static final RString 修正 = new RString("修正");
     private static final RString 削除 = new RString("削除");
@@ -378,12 +380,14 @@ public class KogakuGassanShikyuShinseiToroku {
     }
 
     private RString getMaxKanyuRirekiNo(DbT3069KogakuGassanShinseishoKanyurekiEntity entity) {
-        DbT3069KogakuGassanShinseishoKanyurekiEntity result = 高額合算申請書加入歴Dac.selectMaxKanyuRirekiNo(
-                entity.getHihokenshaNo(),
-                entity.getTaishoNendo(),
-                entity.getHokenshaNo(),
-                entity.getSeiriNo(),
-                entity.getRirekiNo());
+        Map<String, Object> pram = new HashMap<>();
+        pram.put(KEY_対象年度.toString(), entity.getTaishoNendo());
+        pram.put(KEY_保険者番号.toString(), entity.getHokenshaNo());
+        pram.put(KEY_整理番号.toString(), entity.getSeiriNo());
+        pram.put(KEY_被保険者番号.toString(), entity.getHihokenshaNo());
+        pram.put(KEY_履歴番号.toString(), entity.getRirekiNo());
+        IKogakuGassanShikyuShinseiTorokuMapper mapper = this.mapperProvider.create(IKogakuGassanShikyuShinseiTorokuMapper.class);
+        DbT3069KogakuGassanShinseishoKanyurekiEntity result = mapper.selectMax加入履歴番号(pram);
         return result == null ? null : result.getKanyurekiNo();
     }
 }
