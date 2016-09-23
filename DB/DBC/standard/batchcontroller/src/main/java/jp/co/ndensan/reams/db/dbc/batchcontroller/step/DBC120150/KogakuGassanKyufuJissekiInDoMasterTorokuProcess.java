@@ -37,7 +37,6 @@ public class KogakuGassanKyufuJissekiInDoMasterTorokuProcess
     private KogakuGassanKyufuJissekiInLoginMybatisParameter dbParameter;
     private CountedItem 採番;
     private static final FlexibleYear 年度 = new FlexibleYear("0000");
-    private static final RString INT_0 = new RString("0");
     private static final RString INT_1 = new RString("1");
     private static final RString INT_2 = new RString("2");
     private int count = 0;
