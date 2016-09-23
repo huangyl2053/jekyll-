@@ -16,7 +16,6 @@ import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecur
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShoriDateKanri;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
@@ -186,8 +185,8 @@ public class JyukyushaDaichoHandler {
             parameter.set抽出条件設定区分(KEY1);
         }
         if (対象者.equals(div.getChushutsuJyouken().getRadChushutsuJyouken().getSelectedKey())) {
-            parameter.set被保険者番号_From(new HihokenshaNo(div.getTaishouSha().getTxtHihokenshaBangou().getFromValue().toString()));
-            parameter.set被保険者番号_To(new HihokenshaNo(div.getTaishouSha().getTxtHihokenshaBangou().getToValue().toString()));
+            parameter.set被保険者番号_From(new RString(div.getTaishouSha().getTxtHihokenshaBangou().getFromValue().toString()));
+            parameter.set被保険者番号_To(new RString(div.getTaishouSha().getTxtHihokenshaBangou().getToValue().toString()));
         }
         parameter.set今回抽出開始年月日(div.getTaishouKikan().getTxtKonkaiymdtime().getFromDateValue());
         parameter.set今回抽出開始時分秒(div.getTaishouKikan().getTxtKonkaiymdtime().getFromTimeValue());

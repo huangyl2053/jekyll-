@@ -29,9 +29,9 @@ public class DBD571001Parameter extends BatchParameterBase {
     @BatchParameter(key = "抽出条件設定区分", name = "抽出条件設定区分")
     private RString 抽出条件設定区分;
     @BatchParameter(key = "被保険者番号_From", name = "被保険者番号_From")
-    private HihokenshaNo 被保険者番号_From;
+    private RString 被保険者番号_From;
     @BatchParameter(key = "被保険者番号_To", name = "被保険者番号_To")
-    private HihokenshaNo 被保険者番号_To;
+    private RString 被保険者番号_To;
     @BatchParameter(key = "今回抽出開始年月日", name = "今回抽出開始年月日")
     private RDate 今回抽出開始年月日;
     @BatchParameter(key = "今回抽出開始時分秒", name = "今回抽出開始時分秒")
@@ -57,8 +57,8 @@ public class DBD571001Parameter extends BatchParameterBase {
     public IdoChushutsuDaichoProcessParameter toIdoChushutsuDaichoProcessParameter() {
         return new IdoChushutsuDaichoProcessParameter(
                 抽出条件設定区分,
-                被保険者番号_From,
-                被保険者番号_To,
+                new HihokenshaNo(被保険者番号_From),
+                new HihokenshaNo(被保険者番号_To),
                 今回抽出開始年月日,
                 今回抽出開始時分秒,
                 今回抽出終了年月日,
