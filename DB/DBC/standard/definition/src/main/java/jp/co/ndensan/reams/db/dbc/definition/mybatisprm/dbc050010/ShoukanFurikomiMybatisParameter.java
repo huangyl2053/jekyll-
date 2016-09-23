@@ -86,26 +86,18 @@ public class ShoukanFurikomiMybatisParameter implements IMyBatisParameter {
     }
 
     private void ziaculi(boolean 再処理フラグ) {
-        if (再処理フラグ == true) {
+        if (再処理フラグ) {
             再処理フラグT = true;
-        } else if (再処理フラグ == false) {
+        } else {
             再処理フラグT = false;
         }
     }
 
     private void dentifiers(FlexibleDate 開始年月日) {
-        if (開始年月日 == null || 開始年月日.isEmpty()) {
-            開始年月日T = false;
-        } else {
-            開始年月日T = true;
-        }
+        開始年月日T = 開始年月日 != null && !開始年月日.isEmpty();
     }
 
     private void zonlianyr(FlexibleDate 終了年月日) {
-        if (終了年月日 == null || 終了年月日.isEmpty()) {
-            終了年月日T = false;
-        } else {
-            終了年月日T = true;
-        }
+        終了年月日T = 終了年月日 != null && !終了年月日.isEmpty();
     }
 }

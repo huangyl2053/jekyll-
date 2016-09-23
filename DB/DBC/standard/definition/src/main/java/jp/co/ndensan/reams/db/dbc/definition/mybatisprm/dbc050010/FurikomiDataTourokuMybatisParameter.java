@@ -20,13 +20,19 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class FurikomiDataTourokuMybatisParameter implements IMyBatisParameter {
 
-    public static final RString 登録区分_通常 = new RString("1");
-    public static final RString 登録区分_差分 = new RString("2");
+    private static final RString 登録区分_通常 = new RString("1");
+    private static final RString 登録区分_差分 = new RString("2");
 
     private KinyuKikanCode 代表金融機関コード;
     private RString 振込グループコード;
     private RDate 振込指定年月日;
     private RString 登録区分;
+
+    /**
+     * コンストラクタです。
+     */
+    public FurikomiDataTourokuMybatisParameter() {
+    }
 
     /**
      * コンストラクタです。
