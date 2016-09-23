@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110090;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110090;
 
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110090.KaigokyufuhiKagoMoshitateshoGetKagoMoshitateListProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kaigokyufuhikagomoshitateshoout.KagoMoshitateMybatisParameter;
