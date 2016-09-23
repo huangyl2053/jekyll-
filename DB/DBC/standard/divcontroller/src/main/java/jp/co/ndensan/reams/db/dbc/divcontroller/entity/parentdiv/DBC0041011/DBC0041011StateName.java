@@ -16,7 +16,6 @@ public enum DBC0041011StateName implements IStateEnumerations {
 
     NoChange(""),
     Default("default");
-
     private final RString name;
 
     private DBC0041011StateName(String name) {
