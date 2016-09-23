@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbu.divcontroller.controller.parentdiv.DBU0010011
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.shichosonsentaku.ShichosonSelectorModel;
+import jp.co.ndensan.reams.db.dbu.definition.batchprm.DBU010010.DBU010010_JigyoHokokuGeppo_MainParameter;
 import jp.co.ndensan.reams.db.dbu.definition.core.jigyohokoku.Syorimei;
 import jp.co.ndensan.reams.db.dbu.divcontroller.entity.parentdiv.DBU0010011.JigyoJokyoHokokuGeppoSakuseiDiv;
 import jp.co.ndensan.reams.db.dbu.divcontroller.handler.parentdiv.DBU0010011.JigyoJokyoHokokuGeppoSakuseiHandler;
@@ -290,6 +291,16 @@ public class JigyoJokyoHokokuGeppoSakusei {
         ShichosonSelectorModel model = DataPassingConverter.deserialize(div.getShichosonKubun(), ShichosonSelectorModel.class);
         div.setShichosonKubun(DataPassingConverter.serialize(model));
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 実行するボタンを押します。
+     *
+     * @param div div
+     * @return ResponseData<DBU010010_JigyoHokokuGeppo_MainParameter>
+     */
+    public ResponseData<DBU010010_JigyoHokokuGeppo_MainParameter> onClick_Jikou(JigyoJokyoHokokuGeppoSakuseiDiv div) {
+        return ResponseData.of(getHandler(div).onClick_Jikou()).respond();
     }
 
     private List<ShoriDateKanri> get過去集計情報の取得() {

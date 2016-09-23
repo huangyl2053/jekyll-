@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5150011;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Space;
 
 /**
  * ShutsuryokuTaisoDetail のクラスファイル
@@ -24,8 +24,8 @@ public class ShutsuryokuTaisoDetailDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtTitle")
-    private TextBox txtTitle;
+    @JsonProperty("spa1")
+    private Space spa1;
     @JsonProperty("chkMeisaiCsvEdit")
     private CheckBoxList chkMeisaiCsvEdit;
 
@@ -36,21 +36,21 @@ public class ShutsuryokuTaisoDetailDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * gettxtTitle
-     * @return txtTitle
+     * getspa1
+     * @return spa1
      */
-    @JsonProperty("txtTitle")
-    public TextBox getTxtTitle() {
-        return txtTitle;
+    @JsonProperty("spa1")
+    public Space getSpa1() {
+        return spa1;
     }
 
     /*
-     * settxtTitle
-     * @param txtTitle txtTitle
+     * setspa1
+     * @param spa1 spa1
      */
-    @JsonProperty("txtTitle")
-    public void setTxtTitle(TextBox txtTitle) {
-        this.txtTitle = txtTitle;
+    @JsonProperty("spa1")
+    public void setSpa1(Space spa1) {
+        this.spa1 = spa1;
     }
 
     /*

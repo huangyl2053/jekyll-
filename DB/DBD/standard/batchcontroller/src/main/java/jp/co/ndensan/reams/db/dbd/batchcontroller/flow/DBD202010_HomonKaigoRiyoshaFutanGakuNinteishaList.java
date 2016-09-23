@@ -58,6 +58,11 @@ public class DBD202010_HomonKaigoRiyoshaFutanGakuNinteishaList
                 .define();
     }
 
+    /**
+     * 減免減額対象者判定用根拠作成バッチ
+     *
+     * @return IBatchFlowCommand
+     */
     @Step(減免減額対象者判定用根拠作成バッチ)
     protected IBatchFlowCommand jissiJyokyohyoHakkou() {
         return otherBatchFlow(減免減額対象者判定用根拠作成バッチID, SubGyomuCode.DBD介護受給,

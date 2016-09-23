@@ -12,12 +12,12 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.dbc5140011main.DBC5140011MainResult;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC150050.DBC150050_ServicecodeTaniMeisaiIchiranParameter;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5140011.DBC5140011MainDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5140011.dgServiceShuruiList_Row;
 import jp.co.ndensan.reams.db.dbc.service.core.dbc5140011main.DBC5140011MainFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.BatchParameterMap;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -37,12 +37,11 @@ public class DBC5140011MainHandler {
     private static final int 二 = 2;
     private static final int 三 = 3;
     private static final int ゼロ = 0;
-    private static final ReportId 帳票ID = new ReportId("DBC200005_ServiceCodeTaniMeisaiIchiran");
 
     /**
      * コンストラクタです。
      *
-     * @param div KogakuGassanShikyuShinseiTorokuPanelHandler
+     * @param div DBC5140011MainDiv
      */
     public DBC5140011MainHandler(DBC5140011MainDiv div) {
         this.div = div;
@@ -56,8 +55,8 @@ public class DBC5140011MainHandler {
         ViewStateHolder.put(ViewStateKeys.台帳種別表示, new RString("台帳種別表示有り"));
         div.getChushutsuJoken1().getCcdJigyoshaNo().initialize();
         div.getChikuShitei().getCcdChikuShichosonSelect().initialize();
-        div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, 帳票ID);
-        div.getCcdChohyoShutsuryokuKomoku().load(帳票ID.getColumnValue(), SubGyomuCode.DBC介護給付);
+        div.getCcdChohyoShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC200005.getReportId());
+        div.getCcdChohyoShutsuryokuKomoku().load(ReportIdDBC.DBC200005.getReportId().getColumnValue(), SubGyomuCode.DBC介護給付);
 
         List<DBC5140011MainResult> resultList = DBC5140011MainFinder.createInstance().get介護サービス種類データ();
         if (resultList.isEmpty()) {
@@ -240,13 +239,10 @@ public class DBC5140011MainHandler {
         if (市町村コード != null && !市町村コード.isEmpty()) {
             div.getChikuShitei().getCcdChikuShichosonSelect().set市町村コード(市町村コード);
         }
-//        RString 市町村名称 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("KEY_市町村名称"));
         RString 旧市町村コード = restoreBatchParameterMap.getParameterValue(RString.class, new RString("旧市町村コード"));
         if (旧市町村コード != null && !旧市町村コード.isEmpty()) {
             div.getChikuShitei().getCcdChikuShichosonSelect().set旧市町村コード(旧市町村コード);
         }
-//        RString 旧市町村名称 = restoreBatchParameterMap.getParameterValue(RString.class, new RString("KEY_旧市町村名称"));
-//        RString 導入形態コード = restoreBatchParameterMap.getParameterValue(RString.class, new RString("KEY_導入形態コード"));
     }
 
     private void pamaRestore1(BatchParameterMap restoreBatchParameterMap) throws IllegalArgumentException {

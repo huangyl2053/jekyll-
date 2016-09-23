@@ -61,21 +61,21 @@ public class KozaJohoProcess extends BatchProcessBase<KozaJohoEntity> {
             + "relate.dbc050010.IKozaJohoMapper.get口座情報");
     private KozaJohoProcessParameter parameter;
     private KozaJohoMybatisParameter mybatisParameter;
-    private final RString RSTRING1 = new RString("1");
-    private final RString RSTRING2 = new RString("2");
-    private final RString RSTRING3 = new RString("3");
-    private final RString ゼロ1 = new RString("0");
-    private final RString ゼロ3 = new RString("000");
-    private final RString ゼロ4 = new RString("0000");
-    private final RString ゼロ6 = new RString("000000");
-    private final RString ゼロ7 = new RString("0000000");
-    private final RString ゼロ10 = new RString("0000000000");
-    private final int INT1 = 1;
-    private final int INT3 = 3;
-    private final int INT4 = 4;
-    private final int INT6 = 6;
-    private final int INT7 = 7;
-    private final int INT10 = 10;
+    private static final RString RSTRING1 = new RString("1");
+    private static final RString RSTRING2 = new RString("2");
+    private static final RString RSTRING3 = new RString("3");
+    private static final RString ゼロ1 = new RString("0");
+    private static final RString ゼロ3 = new RString("000");
+    private static final RString ゼロ4 = new RString("0000");
+    private static final RString ゼロ6 = new RString("000000");
+    private static final RString ゼロ7 = new RString("0000000");
+    private static final RString ゼロ10 = new RString("0000000000");
+    private static final int INT1 = 1;
+    private static final int INT3 = 3;
+    private static final int INT4 = 4;
+    private static final int INT6 = 6;
+    private static final int INT7 = 7;
+    private static final int INT10 = 10;
     private RString 支払方法区分コード;
     private RString 口座名寄せキー;
     private RString 金融機関コード;
@@ -155,16 +155,13 @@ public class KozaJohoProcess extends BatchProcessBase<KozaJohoEntity> {
             tempTable.setKozaNayoseKey(set口座名寄せキー(口座, editorKoza, tempTable));
 
         } else if (RSTRING3.equals(支払方法区分コード)) {
-            FlexibleDate 依頼日 = new FlexibleDate(parameter.get振込指定年月日().toDateString());//TODO QA553
-
+            FlexibleDate 依頼日 = new FlexibleDate(parameter.get振込指定年月日().toDateString());
+            //TODO QA553
             KinyuKikanManager kinyuKikanManager = KinyuKikanManager.createInstance();
             KinyuKikan 金融機関情報 = null;
             DbT3077JuryoininKeiyakuJigyoshaEntity dbt3077Entity = entity.get受領委任契約事業者Entity();
             if (dbt3077Entity != null) {
-                KinyuKikanCode kinyuKikanCode = dbt3077Entity.getKinyuKikanCode();
-                if (kinyuKikanCode != null && !kinyuKikanCode.isEmpty()) {
-                    金融機関情報 = kinyuKikanManager.getValidKinyuKikanOn(依頼日, kinyuKikanCode.value());
-                }
+                金融機関情報 = set金融機関情報(dbt3077Entity, 金融機関情報, kinyuKikanManager, 依頼日);
                 setsetTempTable2(dbt3077Entity, 金融機関情報, tempTable);
             }
             tempTable.setKozaDataFlag(true);
@@ -180,6 +177,15 @@ public class KozaJohoProcess extends BatchProcessBase<KozaJohoEntity> {
 
     }
 
+    private KinyuKikan set金融機関情報(DbT3077JuryoininKeiyakuJigyoshaEntity dbt3077Entity, KinyuKikan 金融機関情報,
+            KinyuKikanManager kinyuKikanManager, FlexibleDate 依頼日) {
+        KinyuKikanCode kinyuKikanCode = dbt3077Entity.getKinyuKikanCode();
+        if (kinyuKikanCode != null && !kinyuKikanCode.isEmpty()) {
+            金融機関情報 = kinyuKikanManager.getValidKinyuKikanOn(依頼日, kinyuKikanCode.value());
+        }
+        return 金融機関情報;
+    }
+
     private void setsetTempTable2(DbT3077JuryoininKeiyakuJigyoshaEntity dbt3077Entity, KinyuKikan 金融機関情報,
             FurikomiDetailTempTableEntity tempTable) {
 
@@ -192,9 +198,10 @@ public class KozaJohoProcess extends BatchProcessBase<KozaJohoEntity> {
             }
         }
         RString 口座種別 = dbt3077Entity.getKozaShubetsu();
-        if (口座種別 != null && !口座種別.isEmpty()) {
-            if (金融機関情報 != null) {
-                set預金種別名称(金融機関情報, 口座種別, tempTable);
+        if (口座種別 != null && !口座種別.isEmpty() && 金融機関情報 != null) {
+            YokinShubetsuPattern 預金種別 = 金融機関情報.get預金種別(口座種別);
+            if (預金種別 != null) {
+                tempTable.setYokinShubetsuName(預金種別.get預金種別略称());
             }
         }
         tempTable.setYokinShubetsuCode(口座種別);
@@ -210,16 +217,9 @@ public class KozaJohoProcess extends BatchProcessBase<KozaJohoEntity> {
 
     }
 
-    private void set預金種別名称(KinyuKikan 金融機関情報, RString 口座種別, FurikomiDetailTempTableEntity tempTable) {
-        YokinShubetsuPattern 預金種別 = 金融機関情報.get預金種別(口座種別);
-        if (預金種別 != null) {
-            tempTable.setYokinShubetsuName(預金種別.get預金種別略称());
-        }
-    }
-
     private void set支店(KinyuKikan 金融機関情報, FurikomiDetailTempTableEntity tempTable, KinyuKikanShitenCode shitenCode) {
         FlexibleDate システム日付 = new FlexibleDate(RDate.getNowDate().toDateString());
-        if (金融機関情報.isゆうちょ銀行() == false) {
+        if (!金融機関情報.isゆうちょ銀行()) {
             KinyuKikanShiten 支店 = 金融機関情報.get支店(shitenCode, システム日付);
             tempTable.setKinyuKikanShitenName(支店.get支店名称());
             tempTable.setKinyuKikanShitenKanaName(支店.get支店カナ名称());

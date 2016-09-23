@@ -2,8 +2,8 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- @reamsid_L DBC-2570-030 wangxue -->
 
-<!-- <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc110050.IShokanRenrakuhyoOutMapper">
-    <select resultOrdered="true" id="get償還払支給申請データ" 
+ <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc110050.IShokanRenrakuhyoOutMapper">
+    <!-- <select resultOrdered="true" id="get償還払支給申請データ" 
             parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc110050.ShokanRenrakuhyoOutMybatisParameter"
             resultType="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3034ShokanShinseiEntity" fetchSize="500">
         SELECT
@@ -46,5 +46,5 @@
                 OR CONCAT(申請."serviceTeikyoYM",'01') <![CDATA[<]]> 被保険者."shikakuSoshitsuYMD"
                 )
         )
-    </select>
-</mapper> -->
+    </select> -->
+</mapper>

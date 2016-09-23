@@ -8,6 +8,8 @@ package jp.co.ndensan.reams.db.dbd.service.core.gemmengengaku.tokubetsuchikikasa
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.shinsei.GemmenGengakuShinsei;
+import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.tokubetsuchikikasangemmen.TokubetsuChiikiKasanGemmenViewState;
 import jp.co.ndensan.reams.db.dbd.business.core.gemmengengaku.tokubetsuchikikasangemmen.TokubetsuchiikiKasanGemmen;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.riyoshafutangengaku.RiyoshaFutangakuGengakuServiceMapperParameter;
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmengengaku.tokubetsuchikikasangemmen.TokubetsuChiikiKasanGemmenParameter;
@@ -31,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.config.BusinessConfig;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -47,6 +50,7 @@ public class TokubetsuChiikiKasanGemmenService {
     private static final int INDEX_4 = 4;
     private final DbT4001JukyushaDaichoDac dac;
     private final DbT3105SogoJigyoTaishoshaDac dbT3105Dac;
+    private final TokubetsuchiikiKasanGemmenManager manager;
 
     /**
      * コンストラクタです。
@@ -55,6 +59,7 @@ public class TokubetsuChiikiKasanGemmenService {
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         dac = InstanceProvider.create(DbT4001JukyushaDaichoDac.class);
         dbT3105Dac = InstanceProvider.create(DbT3105SogoJigyoTaishoshaDac.class);
+        manager = TokubetsuchiikiKasanGemmenManager.createInstance();
     }
 
     /**
@@ -190,5 +195,71 @@ public class TokubetsuChiikiKasanGemmenService {
             return true;
         }
         return !dbT3105Dac.selectFor総合事業対象者の判定(被保険者番号, 適用日).isEmpty();
+    }
+
+    /**
+     * 画面の保存処理です。
+     *
+     * @param 削除List 削除List
+     * @param 追加List 追加List
+     * @param 修正List 修正List
+     * @param 履歴修正ありList 履歴修正ありList
+     */
+    @Transaction
+    public void 保存処理(List<TokubetsuChiikiKasanGemmenViewState> 削除List, List<TokubetsuChiikiKasanGemmenViewState> 追加List,
+            List<TokubetsuChiikiKasanGemmenViewState> 修正List, List<TokubetsuChiikiKasanGemmenViewState> 履歴修正ありList) {
+
+        if (!削除List.isEmpty()) {
+            delete(削除List);
+        }
+        if (!修正List.isEmpty()) {
+            更新or登録(修正List);
+        }
+        if (!履歴修正ありList.isEmpty()) {
+            delete(履歴修正ありList);
+            更新or登録(履歴修正ありList);
+        }
+        if (!追加List.isEmpty()) {
+            更新or登録(追加List);
+        }
+
+    }
+
+    private void 更新or登録(List<TokubetsuChiikiKasanGemmenViewState> 保存List) {
+
+        TokubetsuchiikiKasanGemmen joho;
+        for (TokubetsuChiikiKasanGemmenViewState viewState : 保存List) {
+
+            int 処理後履歴番号 = viewState.getShorigoRirekiNo();
+            joho = viewState.getTokubetsuchiikiKasanGemmen();
+
+            if (処理後履歴番号 == joho.get履歴番号()) {
+                manager.save(joho);
+            } else {
+                insert(joho, 処理後履歴番号);
+            }
+        }
+    }
+
+    private void insert(TokubetsuchiikiKasanGemmen joho, int 処理後履歴番号) {
+
+        joho = joho.createBuilderForEdit().set履歴番号(処理後履歴番号).setState(EntityDataState.Added).build();
+        List<GemmenGengakuShinsei> gemmenGengakuShinseiList = joho.getGemmenGengakuShinseiList();
+        for (GemmenGengakuShinsei 減免減額申請 : gemmenGengakuShinseiList) {
+            if (GemmenGengakuShurui.特別地域加算減免.getコード().equals(減免減額申請.get減免減額種類())) {
+                減免減額申請 = 減免減額申請.createBuilderForEdit().set履歴番号(処理後履歴番号).setState(EntityDataState.Added).build();
+                joho = joho.createBuilderForEdit().setGemmenGengakuShinsei(減免減額申請).build();
+            }
+        }
+        manager.save(joho);
+    }
+
+    private void delete(List<TokubetsuChiikiKasanGemmenViewState> 削除List) {
+
+        TokubetsuchiikiKasanGemmen joho;
+        for (TokubetsuChiikiKasanGemmenViewState viewState : 削除List) {
+            joho = viewState.getTokubetsuchiikiKasanGemmen();
+            manager.delete特別地域加算減免(joho);
+        }
     }
 }

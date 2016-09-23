@@ -20,17 +20,17 @@ import lombok.Setter;
 public class FlowEntity {
 
     private RString ファイルパス;
-    private boolean ISSJIS類字;
+    private boolean 類字;
 
     /**
      * コンストラクタです。
      *
      * @param ファイルパス ファイルパス
-     * @param ISSJIS類字 ISSJIS類字
+     * @param 類字 類字
      */
-    public FlowEntity(RString ファイルパス, boolean ISSJIS類字) {
+    public FlowEntity(RString ファイルパス, boolean 類字) {
         this.ファイルパス = ファイルパス;
-        this.ISSJIS類字 = ISSJIS類字;
+        this.類字 = 類字;
     }
 
 }

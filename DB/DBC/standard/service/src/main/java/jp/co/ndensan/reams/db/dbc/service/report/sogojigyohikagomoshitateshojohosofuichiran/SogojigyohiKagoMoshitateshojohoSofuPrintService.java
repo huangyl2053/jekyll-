@@ -7,11 +7,11 @@ package jp.co.ndensan.reams.db.dbc.service.report.sogojigyohikagomoshitateshojoh
 
 import jp.co.ndensan.reams.db.dbc.business.report.sogojigyohikagomoshitateshojohosofu.SogojigyohiKagoMoshitateshojohoSofuProperty;
 import jp.co.ndensan.reams.db.dbc.business.report.sogojigyohikagomoshitateshojohosofu.SogojigyohiKagoMoshitateshojohoSofuReport;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikagomoshitateshojohosofuichiran.SogojigyohiKagoMoshitateshojohoSofuIchiranEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110090.KaigokyufuhiKagoMoshitateshoOutDoBillOutEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikagomoshitateshojohosofuichiran.SogojigyohiKagoMoshitateshojohoSofuSource;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -32,21 +32,19 @@ public class SogojigyohiKagoMoshitateshojohoSofuPrintService {
     /**
      * 帳票設計_DBC200079_総合事業費過誤申立書情報送付一覧表
      *
-     * @param 送付一覧表データ SogojigyohiKagoMoshitateshojohoSofuIchiranEntity
+     * @param 送付一覧表データ KaigokyufuhiKagoMoshitateshoOutDoBillOutEntity
      * @param 出力順情報 IOutputOrder
-     * @param 処理年月 RYearMonth
-     * @param 作成日時 YMDHMS
-     * @param 連番 int
+     * @param 処理年月 FlexibleYearMonth
+     * @param 作成日時 RDateTime
      * @param 合計 int
      * @param flag boolean
      * @return SourceDataCollection
      */
     public SourceDataCollection printSingle(
-            SogojigyohiKagoMoshitateshojohoSofuIchiranEntity 送付一覧表データ,
+            KaigokyufuhiKagoMoshitateshoOutDoBillOutEntity 送付一覧表データ,
             IOutputOrder 出力順情報,
-            RYearMonth 処理年月,
-            YMDHMS 作成日時,
-            int 連番,
+            FlexibleYearMonth 処理年月,
+            RDateTime 作成日時,
             int 合計,
             boolean flag) {
         if (送付一覧表データ == null) {
@@ -54,7 +52,7 @@ public class SogojigyohiKagoMoshitateshojohoSofuPrintService {
         }
         SourceDataCollection collection;
         try (ReportManager reportManager = new ReportManager()) {
-            print(送付一覧表データ, 出力順情報, 処理年月, 作成日時, 連番, 合計, flag, reportManager);
+            print(送付一覧表データ, 出力順情報, 処理年月, 作成日時, 合計, flag, reportManager);
             collection = reportManager.publish();
         }
         return collection;
@@ -62,21 +60,19 @@ public class SogojigyohiKagoMoshitateshojohoSofuPrintService {
 
     /**
      *
-     * @param 送付一覧表データ SogojigyohiKagoMoshitateshojohoSofuIchiranEntity
+     * @param 送付一覧表データ KaigokyufuhiKagoMoshitateshoOutDoBillOutEntity
      * @param 出力順情報 IOutputOrder
      * @param 処理年月 RYearMonth
-     * @param 作成日時 YMDHMS
-     * @param 連番 int
+     * @param 作成日時 RDateTime
      * @param 合計 int
      * @param flag boolean
      * @param reportManager ReportManager
      */
     public void print(
-            SogojigyohiKagoMoshitateshojohoSofuIchiranEntity 送付一覧表データ,
+            KaigokyufuhiKagoMoshitateshoOutDoBillOutEntity 送付一覧表データ,
             IOutputOrder 出力順情報,
-            RYearMonth 処理年月,
-            YMDHMS 作成日時,
-            int 連番,
+            FlexibleYearMonth 処理年月,
+            RDateTime 作成日時,
             int 合計,
             boolean flag,
             ReportManager reportManager) {
@@ -84,7 +80,7 @@ public class SogojigyohiKagoMoshitateshojohoSofuPrintService {
         try (ReportAssembler<SogojigyohiKagoMoshitateshojohoSofuSource> assembler = createAssembler(property, reportManager)) {
             ReportSourceWriter<SogojigyohiKagoMoshitateshojohoSofuSource> reportSourceWriter
                     = new ReportSourceWriter(assembler);
-            new SogojigyohiKagoMoshitateshojohoSofuReport(送付一覧表データ, 出力順情報, 処理年月, 作成日時, 連番, 合計, flag).writeBy(reportSourceWriter);
+            new SogojigyohiKagoMoshitateshojohoSofuReport(送付一覧表データ, 出力順情報, 処理年月, 作成日時, 合計, flag).writeBy(reportSourceWriter);
         }
     }
 

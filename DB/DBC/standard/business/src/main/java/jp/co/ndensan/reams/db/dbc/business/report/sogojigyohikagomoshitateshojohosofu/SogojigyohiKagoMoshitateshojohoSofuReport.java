@@ -33,7 +33,7 @@ public class SogojigyohiKagoMoshitateshojohoSofuReport extends Report<Sogojigyoh
      * @param 送付一覧表データ SogojigyohiKagoMoshitateshojohoSofuIchiranEntity
      * @param 出力順情報 IOutputOrder
      * @param 処理年月 FlexibleYearMonth
-     * @param 作成日時 YMDHMS
+     * @param 作成日時 RDateTime
      * @param 合計 int
      * @param flag boolean
      */

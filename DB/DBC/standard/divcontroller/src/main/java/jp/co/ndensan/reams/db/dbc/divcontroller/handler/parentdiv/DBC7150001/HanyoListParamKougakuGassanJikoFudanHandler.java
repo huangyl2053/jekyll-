@@ -44,7 +44,7 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
     private static final RString 項目名付加 = new RString("1");
     private static final RString 連番付加 = new RString("2");
     private static final RString 日付 = new RString("3");
-    private static final int 調定年度を含めて8年分 = 8;
+    private static final int 含めて8年分 = 8;
     private static final int INDEX_ゼロ = 0;
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
@@ -154,6 +154,23 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
         } else if (KEY2.equals(div.getRadDataShurui().getSelectedKey())) {
             batchparam.setDataShurui(TWO);
         }
+        batchparam = setFlexibleDate(batchparam);
+        batchparam = setChkCsvHenshuHoho(batchparam);
+        if (div.getChushutsuJokenPanel().getCcdHokenshaList().isVisible()) {
+            batchparam.setHokenshaNo(div.getCcdHokenshaList().getSelectedItem().get市町村コード().getColumnValue());
+        }
+        if (null != div.getCcdShutsuryokujun().getSelected出力順()) {
+            batchparam.setShutsuryokuju(div.getCcdShutsuryokujun().getSelected出力順().get出力順ID());
+        }
+        if (null != div.getCcdShutsuryokuKoumoku()) {
+            batchparam.setShutsuryokuTomoku(div.getCcdShutsuryokuKoumoku().get出力項目ID());
+        } else {
+            batchparam.setShutsuryokuTomoku(RString.EMPTY);
+        }
+        return batchparam;
+    }
+
+    private DBC710150_HanyoListKogakuGassanJikoFutangakuParameter setFlexibleDate(DBC710150_HanyoListKogakuGassanJikoFutangakuParameter batchparam) {
         if (すべて.equals(div.getRadHoseuJokyo().getSelectedValue())) {
             batchparam.setHoseuJokyo(RString.EMPTY);
         } else if (KEY1.equals(div.getRadHoseuJokyo().getSelectedKey())) {
@@ -180,18 +197,6 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
         }
         if (div.getChkSofuTaishogaiFukumu().getSelectedKeys() != null && !div.getChkSofuTaishogaiFukumu().getSelectedKeys().isEmpty()) {
             batchparam.setSofuTaishogaiFukumu(true);
-        }
-        batchparam = setChkCsvHenshuHoho(batchparam);
-        if (div.getChushutsuJokenPanel().getCcdHokenshaList().isVisible()) {
-            batchparam.setHokenshaNo(div.getCcdHokenshaList().getSelectedItem().get市町村コード().getColumnValue());
-        }
-        if (null != div.getCcdShutsuryokujun().getSelected出力順()) {
-            batchparam.setShutsuryokuju(div.getCcdShutsuryokujun().getSelected出力順().get出力順ID());
-        }
-        if (null != div.getCcdShutsuryokuKoumoku()) {
-            batchparam.setShutsuryokuTomoku(div.getCcdShutsuryokuKoumoku().get出力項目ID());
-        } else {
-            batchparam.setShutsuryokuTomoku(RString.EMPTY);
         }
         return batchparam;
     }
@@ -255,7 +260,7 @@ public class HanyoListParamKougakuGassanJikoFudanHandler {
         KeyValueDataSource dataSourceBlank = new KeyValueDataSource(BLANK, RString.EMPTY);
         dataSourceList.add(dataSourceBlank);
         for (int i = 日付関連_調定年度.getYearValue(); 日付関連_当初年度.getYearValue() <= i; i--) {
-            if (i <= 日付関連_調定年度.getYearValue() - 調定年度を含めて8年分) {
+            if (i <= 日付関連_調定年度.getYearValue() - 含めて8年分) {
                 break;
             }
             KeyValueDataSource 調定年度Key = new KeyValueDataSource();

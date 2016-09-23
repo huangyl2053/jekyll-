@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Space;
 
 /**
  * ShutsuryokuTaisho のクラスファイル
@@ -76,13 +76,13 @@ public class ShutsuryokuTaishoDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public TextBox getTxtTitle() {
-        return this.getShutsuryokuTaisoDetail().getTxtTitle();
+    public Space getSpa1() {
+        return this.getShutsuryokuTaisoDetail().getSpa1();
     }
 
     @JsonIgnore
-    public void setTxtTitle(TextBox txtTitle) {
-        this.getShutsuryokuTaisoDetail().setTxtTitle(txtTitle);
+    public void setSpa1(Space spa1) {
+        this.getShutsuryokuTaisoDetail().setSpa1(spa1);
     }
 
     @JsonIgnore
