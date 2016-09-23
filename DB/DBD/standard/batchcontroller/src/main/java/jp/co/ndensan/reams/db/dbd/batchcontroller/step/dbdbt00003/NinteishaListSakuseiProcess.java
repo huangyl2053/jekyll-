@@ -170,7 +170,6 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
                     hasHeader(parameter.get出力設定().contains(CSVSettings.項目名付加)).
                     build();
         }
-
     }
 
     @Override
@@ -186,14 +185,9 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
         personalDataList.add(toSiteiPersonalData(t));
 
         if (parameter.get出力設定().contains(CSVSettings.連番付加)) {
-            KakuninListCsvEntity eucCsvEntity = new KakuninListCsvEntity();
-            NinteishaListSakuseiManager.createInstance().連番ありCSV情報設定(eucCsvEntity, t, i,
-                    parameter.get出力設定().contains(CSVSettings.日付スラッシュ編集));
-            eucCsvWriter.writeLine(eucCsvEntity);
+            write連番付加のCSV出力情報設定(t);
         } else {
-            KakuninListNoRenbanCsvEntity eucCsvEntity = new KakuninListNoRenbanCsvEntity();
-            NinteishaListSakuseiManager.createInstance().連番なしCSV情報設定(eucCsvEntity, t,
-                    parameter.get出力設定().contains(CSVSettings.日付スラッシュ編集));
+            write非連番付加のCSV出力情報設定(t);
         }
     }
 
@@ -207,6 +201,49 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
         }
         manager.spool(eucFilePath, log);
         バッチ出力条件リストの出力を行う();
+    }
+
+    private void write連番付加のCSV出力情報設定(NinteishaListSakuseiEntity t) {
+        if (t.get世帯員リスト() != null && !t.get世帯員リスト().isEmpty()) {
+            for (int index = 0; index < t.get世帯員リスト().size(); index++) {
+                if (0 == index) {
+                    KakuninListCsvEntity eucCsvEntity = new KakuninListCsvEntity();
+                    NinteishaListSakuseiManager.createInstance().連番ありCSV情報設定(eucCsvEntity, t, i,
+                            parameter.get出力設定().contains(CSVSettings.日付スラッシュ編集), true, true, index);
+                    eucCsvWriter.writeLine(eucCsvEntity);
+                } else {
+                    KakuninListCsvEntity eucCsvEntity = new KakuninListCsvEntity();
+                    NinteishaListSakuseiManager.createInstance().連番ありCSV情報設定(eucCsvEntity, t, i,
+                            parameter.get出力設定().contains(CSVSettings.日付スラッシュ編集), false, true, index);
+                    eucCsvWriter.writeLine(eucCsvEntity);
+                }
+            }
+        } else {
+            KakuninListCsvEntity eucCsvEntity = new KakuninListCsvEntity();
+            NinteishaListSakuseiManager.createInstance().連番ありCSV情報設定(eucCsvEntity, t, i,
+                    parameter.get出力設定().contains(CSVSettings.日付スラッシュ編集), true, false, 0);
+            eucCsvWriter.writeLine(eucCsvEntity);
+        }
+    }
+
+    private void write非連番付加のCSV出力情報設定(NinteishaListSakuseiEntity t) {
+        if (t.get世帯員リスト() != null && !t.get世帯員リスト().isEmpty()) {
+            for (int index = 0; index < t.get世帯員リスト().size(); index++) {
+                if (0 == index) {
+                    KakuninListNoRenbanCsvEntity eucCsvEntity = new KakuninListNoRenbanCsvEntity();
+                    NinteishaListSakuseiManager.createInstance().連番なしCSV情報設定(eucCsvEntity, t,
+                            parameter.get出力設定().contains(CSVSettings.日付スラッシュ編集), true, true, index);
+                } else {
+                    KakuninListNoRenbanCsvEntity eucCsvEntity = new KakuninListNoRenbanCsvEntity();
+                    NinteishaListSakuseiManager.createInstance().連番なしCSV情報設定(eucCsvEntity, t,
+                            parameter.get出力設定().contains(CSVSettings.日付スラッシュ編集), false, true, index);
+                }
+            }
+        } else {
+            KakuninListNoRenbanCsvEntity eucCsvEntity = new KakuninListNoRenbanCsvEntity();
+            NinteishaListSakuseiManager.createInstance().連番なしCSV情報設定(eucCsvEntity, t,
+                    parameter.get出力設定().contains(CSVSettings.日付スラッシュ編集), true, false, 0);
+        }
     }
 
     private void edit帳票用データ(NinteishaListSakuseiEntity t) {

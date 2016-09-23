@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120130;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120130;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -57,7 +57,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbColumnMappable;
  *
  * @reamsid_L DBC-2640-010 zhengshenlei
  */
-public class KogakuGassanJikofutangakuShomeishoIchiranhyoSakusei extends BatchKeyBreakBase<KogakuGassanJikofutangakuShomeishoDateEntity> {
+public class KogakuGassanJikofutangakuShomeishoIchiranhyoSakuseiProcess extends BatchKeyBreakBase<KogakuGassanJikofutangakuShomeishoDateEntity> {
 
     private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "KogakuGassanJikofutangaku.IKogakuGassanJSaiSyoriJyunbiMapper.get帳票出力対象データ");
