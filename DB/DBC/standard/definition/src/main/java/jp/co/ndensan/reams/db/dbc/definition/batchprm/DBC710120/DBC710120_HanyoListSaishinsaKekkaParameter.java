@@ -6,9 +6,11 @@
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710120;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.hanyolistsaishinsakekka.HanyoListSaishinsaKekkaProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -36,7 +38,6 @@ public class DBC710120_HanyoListSaishinsaKekkaParameter extends BatchParameterBa
     private static final String SEVERTEIKYOUNENGETSUFROM = "severteikyounengetsufrom";
     private static final String SEVERTEIKYOUNENGETSUTO = "severteikyounengetsuto";
     private static final String JIGYOUSHABANGOU = "jigyoushabangou";
-
     @BatchParameter(key = CHOHYOID, name = "帳票ID")
     private RString chohyoId;
     @BatchParameter(key = SHUTSURYOKUJUNID, name = "出力順ID")
@@ -45,7 +46,7 @@ public class DBC710120_HanyoListSaishinsaKekkaParameter extends BatchParameterBa
     private RString shutsuryokuKomokuId;
     @BatchParameter(key = KOMOKUMEIFUKA, name = "項目名付加")
     private boolean komokumeiFuka;
-    @BatchParameter(key = RENBANFUKA, name = "連番付加 ")
+    @BatchParameter(key = RENBANFUKA, name = "連番付加")
     private boolean renbanFuka;
     @BatchParameter(key = HITSUKEHENSHU, name = "日付編集")
     private boolean hitsukeHenshu;
@@ -114,5 +115,30 @@ public class DBC710120_HanyoListSaishinsaKekkaParameter extends BatchParameterBa
         this.severteikyounengetsufrom = severteikyounengetsufrom;
         this.severteikyounengetsuto = severteikyounengetsuto;
         this.jigyoushabangou = jigyoushabangou;
+    }
+
+    /**
+     * 汎用リスト 再審査申立情報のパラメータを作成します。
+     *
+     * @param date date
+     * @return SaishinsamoshitateProcessParameter
+     */
+    public HanyoListSaishinsaKekkaProcessParameter toHanyoListSaishinsaKekkaProcessParameterr(FlexibleDate date) {
+        return new HanyoListSaishinsaKekkaProcessParameter(
+                chohyoId,
+                shutsuryokujunId,
+                shutsuryokuKomokuId,
+                komokumeiFuka,
+                renbanFuka,
+                hitsukeHenshu,
+                hokenshacode,
+                kokuhorentoriatsukaifrom,
+                kokuhorentoriatsukainenetsuto,
+                hokenshakubun,
+                severteikyounengetsufrom,
+                severteikyounengetsuto,
+                jigyoushabangou,
+                date
+        );
     }
 }

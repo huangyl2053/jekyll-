@@ -34,7 +34,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class ShuruiShikyuGendogakuMain {
 
-    private static int state;
+    private int state;
     private static final int 標準 = 1;
     private static final int 保存 = 2;
     private static final int 修正 = 3;

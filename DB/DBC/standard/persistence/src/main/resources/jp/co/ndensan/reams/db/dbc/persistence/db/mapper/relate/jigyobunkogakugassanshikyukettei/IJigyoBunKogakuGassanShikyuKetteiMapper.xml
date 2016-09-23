@@ -124,6 +124,7 @@
         )
         SELECT
         <include refid="事業高額合算情報" />,
+        口座.*,
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />,
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />
         FROM(
@@ -269,8 +270,8 @@
         ON "uaT0310Koza_kozaId" = 事業高額合算情報."kozaid"
         where
         1 = 1
-        <if test="is金融機関コードNULL">
-            AND  口座."kinyuKikanCode" = #{金融機関コード}
+        <if test="!is金融機関コードNULL">
+            AND  口座."uaT0310Koza_kinyuKikanCode" = #{金融機関コード}
         </if>
         ${出力順}
     </select>

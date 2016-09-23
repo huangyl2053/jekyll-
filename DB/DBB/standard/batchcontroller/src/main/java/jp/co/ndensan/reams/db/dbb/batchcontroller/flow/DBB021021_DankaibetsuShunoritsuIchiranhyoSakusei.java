@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb021021.InsDankaibetsuShunoritsuTmpProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb021021.PrtDankaibetsuShunoritsuIchiranhyoProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB021021.InsDankaibetsuShunoritsuTmpProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB021021.PrtDankaibetsuShunoritsuIchiranhyoProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB021021.DBB021021_DankaibetsuShunoritsuIchiranhyoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dankaibetsushunoritsu.InsDankaibetsuShunoritsuTmpProcessParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dankaibetsushunoritsu.PrtDankaibetsuShunoritsuIchiranhyoParameter;
@@ -27,15 +27,15 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class DBB021021_DankaibetsuShunoritsuIchiranhyoSakusei extends
         BatchFlowBase<DBB021021_DankaibetsuShunoritsuIchiranhyoSakuseiParameter> {
 
-    private static final String INS_DANKAIBETSU_SHUNORITSU = "insDankaibetsuShunoritsuTmpProcess";
-    private static final String PRT_DANKAIBETSU_SHUNORITSU_ICHIRANHYO = "prtDankaibetsuShunoritsuIchiranhyoProcess";
+    private static final String INS_DANKAIBETSU = "insDankaibetsuShunoritsuTmpProcess";
+    private static final String PRT_DANKAIBETSU_ICHIRANHYO = "prtDankaibetsuShunoritsuIchiranhyoProcess";
     private static final RString 生年月日年齢区分_生年月日 = new RString("生年月日");
     private static final RString 生年月日年齢区分_年齢 = new RString("年齢");
 
     @Override
     protected void defineFlow() {
-        executeStep(INS_DANKAIBETSU_SHUNORITSU);
-        executeStep(PRT_DANKAIBETSU_SHUNORITSU_ICHIRANHYO);
+        executeStep(INS_DANKAIBETSU);
+        executeStep(PRT_DANKAIBETSU_ICHIRANHYO);
     }
 
     /**
@@ -43,7 +43,7 @@ public class DBB021021_DankaibetsuShunoritsuIchiranhyoSakusei extends
      *
      * @return バッチコマンド
      */
-    @Step(INS_DANKAIBETSU_SHUNORITSU)
+    @Step(INS_DANKAIBETSU)
     protected IBatchFlowCommand insDankaibetsuShunoritsuTmpProcess() {
         return loopBatch(InsDankaibetsuShunoritsuTmpProcess.class).
                 arguments(createInsProcessParameter()).define();
@@ -54,7 +54,7 @@ public class DBB021021_DankaibetsuShunoritsuIchiranhyoSakusei extends
      *
      * @return バッチコマンド
      */
-    @Step(PRT_DANKAIBETSU_SHUNORITSU_ICHIRANHYO)
+    @Step(PRT_DANKAIBETSU_ICHIRANHYO)
     protected IBatchFlowCommand prtDankaibetsuShunoritsuIchiranhyoProcess() {
         return loopBatch(PrtDankaibetsuShunoritsuIchiranhyoProcess.class).
                 arguments(createPrtProcessParameter()).define();

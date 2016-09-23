@@ -213,6 +213,8 @@ public class DBC4000011MainHandler {
         }
         clear詳細パネル();
         定率定額区分選択();
+        div.getServiceShosai().getTxtTeikyoKikanYM().setToDisabled(true);
+        編集状態の画面制御();
     }
 
     /**
@@ -225,13 +227,23 @@ public class DBC4000011MainHandler {
     public KaigoServiceNaiyouIdentifier 修正する(KaigoServiceNaiyouHolder holder) {
         KaigoServiceNaiyouIdentifier identifier = サービス内容一覧選択(holder);
         set詳細表示制御(false);
+        div.getServiceShosai().getTxtTeikyoKikanYM().setFromDisabled(true);
+        div.getServiceShosai().getTxtTeikyoKikanYM().setToDisabled(true);
         div.getServiceNaiyoIchiran().getBtnTsuika().setDisabled(true);
         List<dgService_Row> rows = div.getServiceNaiyoIchiran().getDgService().getDataSource();
         for (dgService_Row row : rows) {
             row.setDeleteButtonState(DataGridButtonState.Disabled);
             row.setModifyButtonState(DataGridButtonState.Disabled);
         }
-        List<dgService_Row> 選択rows = div.getServiceNaiyoIchiran().getDgService().getSelectedItems();
+        編集状態の画面制御();
+        return identifier;
+    }
+
+    private void 編集状態の画面制御() {
+        List<dgService_Row> 選択rows = div.getServiceNaiyoIchiran().getDgService().getDataSource();
+        if (選択rows == null || 選択rows.isEmpty()) {
+            return;
+        }
         RString サービス分類コード = 選択rows.get(INT_0).getServiceBunrruicode();
         RString サービス小分類 = 選択rows.get(INT_0).getServiceShoBunrui();
         RString サービス種類 = div.getKensakuJoken().getCcdServiceCdInput().getサービスコード1();
@@ -266,7 +278,6 @@ public class DBC4000011MainHandler {
         } else {
             div.getServiceShosai().getChkGaibuService().setDisabled(true);
         }
-        return identifier;
     }
 
     /**
