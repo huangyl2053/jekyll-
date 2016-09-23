@@ -10,7 +10,7 @@ import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD519002.ChosaitakusakiD
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD519002.ShujiiDataCsvProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD519002.ShujiiIryokikanDataCsvProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD519002.YokaigoNinteiGaibuDataUpdateProcess;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD519002.DBD519002Parameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD519002.DBD519002_YokaigoNinteiKanrenDataSakuseiParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBD;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBD-2100-020 liwul
  */
-public class DBD519002 extends BatchFlowBase<DBD519002Parameter> {
+public class DBD519002_YokaigoNinteiKanrenDataSakusei extends BatchFlowBase<DBD519002_YokaigoNinteiKanrenDataSakuseiParameter> {
 
     private RString iF種類情報;
     private static final RString IF種類情報_電算 = new RString("2");
