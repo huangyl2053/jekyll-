@@ -17,6 +17,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ninteishinsei.Nintei
 import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ninteishinsei.NinteiShinseiCodeModel.HyojiMode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiTodokedeDaikoKubunCode;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
@@ -39,6 +40,7 @@ public class NinteiShinseiTorokuUketsuke {
     private final RString 表示パターン_新規 = new RString("0");
     private final RString 照会 = new RString("照会");
     private static final RString SELECT_KEY0 = new RString("key0");
+    private static final RString 要介護認定申請情報登録 = new RString("要介護認定申請情報登録");
 
     /**
      * 画面初期化
@@ -395,8 +397,15 @@ public class NinteiShinseiTorokuUketsuke {
 //            getValidationHandler().validateFor被保険者台帳に該当なし(pairs, div);
 //        }
         getHandler(div).onClick_btnUpdate();
-
-        return ResponseData.of(div).setState(DBD5120001StateName.新規完了);
+        div.getCcdKaigoKanryoMessage().setSuccessMessage(new RString(
+                UrInformationMessages.正常終了.getMessage().replace(要介護認定申請情報登録.toString()).evaluate()));
+        RString 表示パターン = getHandler(div).get表示パターン();
+        if (表示パターン_新規.equals(表示パターン)) {
+            return ResponseData.of(div).setState(DBD5120001StateName.新規完了);
+        } else {
+            return ResponseData.of(div).setState(DBD5120001StateName.削除修正完了);
+        }
+        return ResponseData.of(div).respond();
     }
 
     private NinteiShinseiTorokuUketsukeHandler getHandler(NinteiShinseiTorokuUketsukeDiv div) {
