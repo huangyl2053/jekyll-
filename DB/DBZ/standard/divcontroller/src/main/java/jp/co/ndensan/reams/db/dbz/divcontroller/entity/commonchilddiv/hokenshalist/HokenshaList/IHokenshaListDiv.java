@@ -60,6 +60,6 @@ public interface IHokenshaListDiv extends ICommonChildDivBaseProperties {
      *
      * @param 証記載保険者番号
      */
-    void setSelectedShichosonIfExist(ShoKisaiHokenshaNo 証記載保険者番号);
+    void setSelectedShoKisaiHokenshaNoIfExist(ShoKisaiHokenshaNo 証記載保険者番号);
 
 }
