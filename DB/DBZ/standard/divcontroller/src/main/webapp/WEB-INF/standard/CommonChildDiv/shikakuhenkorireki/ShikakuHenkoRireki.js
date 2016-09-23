@@ -63,6 +63,8 @@ var DBZ;
                     this.controls = controls;
                 }
                 DisplayType.prototype.shokai = function () {
+                    this.controls.btnAdd().visible = false;
+                    this.controls.HenkoInput().visible = false;
                     this.controls.dgHenko().readOnly = false;
 
                     var gridSetting = this.controls.dgHenko().gridSetting;

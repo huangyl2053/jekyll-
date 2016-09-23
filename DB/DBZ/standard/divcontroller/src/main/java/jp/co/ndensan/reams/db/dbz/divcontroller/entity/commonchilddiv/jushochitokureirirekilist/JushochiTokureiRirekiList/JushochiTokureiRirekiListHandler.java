@@ -302,6 +302,12 @@ public class JushochiTokureiRirekiListHandler {
 
         // 画面に初期化表示制御
         initBtnDisplay();
+        
+        if (JushochiTokureiRirekiListDiv.DisplayType.shokai.equals(jutokuRirekiDiv.getMode_DisplayType())) {
+            jutokuRirekiDiv.getBtnAdd().setVisible(false);
+            jutokuRirekiDiv.getJutokuInput().setVisible(false);
+        }
+            
 
     }
 

@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoikiZenSh
 import jp.co.ndensan.reams.db.dbz.business.core.koseishichosonmaster.koseishichosonmaster.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbz.business.core.shichoson.Shichoson;
 import jp.co.ndensan.reams.db.dbz.definition.core.shikakukubun.ShikakuKubun;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.jushochitokureirirekilist.JushochiTokureiRirekiList.JushochiTokureiRirekiListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.shikakuhenkorireki.ShikakuHenkoRirekiDiv;
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.hihousyosai.HihousyosaiFinder;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -53,6 +55,7 @@ public class HihokenshaShisakuPanalHandler {
     private final RString 合併情報区分 = new RString("1");
     private final RString 広域保険者 = new RString("1");
     private final RString 単一保険者 = new RString("2");
+    private final RString 照会 = new RString("shokai");
     private final HihokenshaShikakuTeiseiManager manager = HihokenshaShikakuTeiseiManager.createInstance();
 
     /**
@@ -79,9 +82,9 @@ public class HihokenshaShisakuPanalHandler {
 
         if (状態_追加.equals(viewState)) {
             get画面初期の追加更新モードの表示制御();
-            get住所地特例情報取得(被保番号, 識別コード, FlexibleDate.EMPTY);
-            get資格変更履歴情報取得(被保番号, 識別コード, FlexibleDate.EMPTY);
-            get施設入退所情報取得(識別コード);
+            get住所地特例情報取得(viewState, 被保番号, 識別コード, FlexibleDate.EMPTY);
+            get資格変更履歴情報取得(viewState, 被保番号, 識別コード, FlexibleDate.EMPTY);
+            get施設入退所情報取得(viewState, 識別コード);
         } else if (状態_修正.equals(viewState)) {
             get画面初期の追加更新モードの表示制御();
             set資格詳細情報設定(viewState, 資格得喪情報, 被保番号, 識別コード, 資格得喪情報.getShutokuDate());
@@ -350,9 +353,9 @@ public class HihokenshaShisakuPanalHandler {
             ShikibetsuCode 識別コード,
             FlexibleDate 取得日) {
         set資格得喪情報設定(viewState, 識別コード, 資格得喪情報);
-        get住所地特例情報取得(被保険者番号, 識別コード, 取得日);
-        get資格変更履歴情報取得(被保険者番号, 識別コード, 取得日);
-        get施設入退所情報取得(識別コード);
+        get住所地特例情報取得(viewState,被保険者番号, 識別コード, 取得日);
+        get資格変更履歴情報取得(viewState,被保険者番号, 識別コード, 取得日);
+        get施設入退所情報取得(viewState,識別コード);
     }
 
     private void set資格得喪情報設定(RString viewState, ShikibetsuCode 識別コード, ShikakuRirekiJoho 資格得喪情報) {
@@ -415,19 +418,31 @@ public class HihokenshaShisakuPanalHandler {
         return new FlexibleDate(date.toDateString());
     }
 
-    private void get住所地特例情報取得(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード, FlexibleDate 取得日) {
+    private void get住所地特例情報取得(RString viewState,HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード, FlexibleDate 取得日) {
+        if (状態_照会.equals(viewState)) {
+            panelDiv.getShikakuShosai().getTabShisakuShosaiRireki().getCcdJushochiTokureiRirekiList().setDisplayType(JushochiTokureiRirekiListDiv.DisplayType.shokai);
+        }
         panelDiv.getShikakuShosai().getTabShisakuShosaiRireki().getCcdJushochiTokureiRirekiList().initialize(
                 被保険者番号, 識別コード, 取得日);
+
     }
 
-    private void get資格変更履歴情報取得(HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード, FlexibleDate 取得日) {
+    private void get資格変更履歴情報取得(RString viewState,HihokenshaNo 被保険者番号, ShikibetsuCode 識別コード, FlexibleDate 取得日) {
+        if (状態_照会.equals(viewState)) {
+            panelDiv.getShikakuShosai().getTabShisakuShosaiRireki().getCcdShikakuHenkoRireki().setDisplayTypeBykey(照会);
+        }
         panelDiv.getShikakuShosai().getTabShisakuShosaiRireki().getCcdShikakuHenkoRireki().initialize(
                 被保険者番号, 識別コード, 取得日);
+
     }
 
-    private void get施設入退所情報取得(ShikibetsuCode 識別コード) {
+    private void get施設入退所情報取得(RString viewState,ShikibetsuCode 識別コード) {
         RString 台帳種別 = new RString("1");
+        if (状態_照会.equals(viewState)) {
+            panelDiv.getShikakuShosai().getTabShisakuShosaiRireki().getCcdShisetsuNyutaishoRirekiKanri().setShokaiMode();
+        }
         panelDiv.getShikakuShosai().getTabShisakuShosaiRireki().getCcdShisetsuNyutaishoRirekiKanri().initialize(識別コード, 台帳種別);
+
     }
 
     /**

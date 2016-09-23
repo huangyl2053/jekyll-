@@ -218,7 +218,7 @@ public class ShoKaishuKirokuKanriHandler {
                 codeShubetsu, new FlexibleDate(RDate.getNowDate().toDateString()));
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         for (UzT0007CodeEntity codeValueObject : codeValueList) {
-            dataSourceList.add(new KeyValueDataSource(codeValueObject.getコード().getKey(), codeValueObject.getコード略称()));
+            dataSourceList.add(new KeyValueDataSource(codeValueObject.getコード().getKey(), codeValueObject.getコード名称()));
         }
         return dataSourceList;
     }

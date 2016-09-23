@@ -122,6 +122,8 @@ public class ShikakuHenkoRirekiHandler {
             div.getDgHenko().getGridSetting().setIsShowModifyButtonColumn(false);
             div.getDgHenko().getGridSetting().setIsShowDeleteButtonColumn(false);
             div.getDgHenko().getGridSetting().setIsShowRowState(false);
+            div.getBtnAdd().setVisible(false);
+            div.getHenkoInput().setVisible(false);
         } else if (ShikakuHenkoRirekiDiv.DisplayType.toroku.equals(div.getMode_DisplayType())) {
             div.getBtnAdd().setDisabled(false);
             div.setMode_ShoriNichijiDisplayMode(ShikakuHenkoRirekiDiv.ShoriNichijiDisplayMode.VisibleFalse);

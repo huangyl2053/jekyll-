@@ -12,15 +12,14 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishuK
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishuKirokuKanri.ValidationHandler;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishuKirokuKanri.dgKoufuKaishu_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -137,6 +136,7 @@ public class ShoKaishuKirokuKanri {
 
         if (状態_修正.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             shoKaishuDiv.getDgKoufuKaishu().getClickedItem().setStatus(状態_修正);
+            shoKaishuDiv.getDgKoufuKaishu().getClickedItem().setRowState(RowState.Modified);
             List<dgKoufuKaishu_Row> list = shoKaishuDiv.getDgKoufuKaishu().getDataSource();
             int rowcount = shoKaishuDiv.getDgKoufuKaishu().getClickedItem().getId();
             dgKoufuKaishu_Row row = list.get(rowcount);
@@ -157,6 +157,7 @@ public class ShoKaishuKirokuKanri {
         }
         if (状態_削除.equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
             shoKaishuDiv.getDgKoufuKaishu().getClickedItem().setStatus(状態_削除);
+            shoKaishuDiv.getDgKoufuKaishu().getClickedItem().setRowState(RowState.Deleted);
         }
         shoKaishuDiv.getPanelInput().getTxtKoufuType().clearValue();
         shoKaishuDiv.getPanelInput().getTxtKoufuDate().clearValue();

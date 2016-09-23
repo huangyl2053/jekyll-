@@ -111,6 +111,8 @@ public class ShisetsuNyutaishoRirekiKanriHandler {
         }
         switch (div.getMode_DisplayMode()) {
             case 照会:
+                div.getBtnAddShisetsuNyutaisho().setVisible(false);
+                div.getShisetsuNyutaishoInput().setVisible(false);
                 break;
             case 照会選択有:
                 break;
