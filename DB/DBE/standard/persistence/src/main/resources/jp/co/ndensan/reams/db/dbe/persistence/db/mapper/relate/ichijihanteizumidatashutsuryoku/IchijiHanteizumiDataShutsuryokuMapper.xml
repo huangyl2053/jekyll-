@@ -473,7 +473,7 @@
                         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijihanteizumidatashutsuryoku.IchijiHanteizumiDataShutsuryokuMapper.allColumns_ZenkaiNinteichosahyoChosaItem09B"/>,
                         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijihanteizumidatashutsuryoku.IchijiHanteizumiDataShutsuryokuMapper.allColumns_ZenkaiNinteichosahyoChosaItem06A"/>,
                         <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijihanteizumidatashutsuryoku.IchijiHanteizumiDataShutsuryokuMapper.allColumns_ZenkaiNinteichosahyoChosaItem02A"/>,
-                        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijihanteizumidatashutsuryoku.IchijiHanteizumiDataShutsuryokuMapper.allColumns_ZenkaiNinteichosahyoChosaItem99A"/>
+                        <include refid="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijihanteizumidatashutsuryoku.IchijiHanteizumiDataShutsuryokuMapper.allColumns_ZenkaiNinteichosahyoChosaItem99A"/>,
                         G."ninchishoNichijoSeikatsuJiritsudoCode"  AS "障害高齢者自立度日常生活自立度",
                         G."shogaiNichijoSeikatsuJiritsudoCode" AS "認知症高齢者自立度日常生活自立度",
                         A."shinseishoKanriNo" AS "申請書管理番号",
@@ -1413,6 +1413,6 @@
            CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 70 THEN  H2."researchItem" END AS 前回物や衣類を壊す,
            CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 71 THEN  H2."researchItem" END AS 前回不潔行為,
            CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 72 THEN  H2."researchItem" END AS 前回異食行動,
-           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 73 THEN  H2."researchItem" END AS 前回性的行動,
+           CASE WHEN  A1."koroshoIfShikibetsuCode" = '99A' AND H2."remban" = 73 THEN  H2."researchItem" END AS 前回性的行動
     </sql>
 </mapper>
