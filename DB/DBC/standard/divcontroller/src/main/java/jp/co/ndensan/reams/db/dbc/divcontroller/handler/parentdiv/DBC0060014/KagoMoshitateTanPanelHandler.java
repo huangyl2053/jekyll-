@@ -84,22 +84,24 @@ public class KagoMoshitateTanPanelHandler {
      */
     public void setShohinSourcre(List<KyufuKanrihyoShokaiDataModel> kksbsList, boolean tanflg) {
         List<dgServive_Row> serviceRowList = new ArrayList();
-        if (tanflg && kksbsList != null) {
-            for (KyufuKanrihyoShokaiDataModel jigyoshaInput : kksbsList) {
-                if (KyotakuServiceKubun.短期入所.getコード().equals(jigyoshaInput.get給付管理票種別区分コード())) {
-                    dgServive_Row servive_Row = new dgServive_Row();
-                    servive_Row.setDefaultDataName0(jigyoshaInput.get給付管理票明細行番号());
-                    if (jigyoshaInput.getサービス事業所番号() != null) {
-                        servive_Row.setDefaultDataName1(jigyoshaInput.getサービス事業所番号().value());
-                    }
-                    servive_Row.setDefaultDataName2(jigyoshaInput.getサービス事業者名());
-                    servive_Row.setDefaultDataName3(ServiceShikibetsuCode.toValue(jigyoshaInput.get指定_基準該当_地域密着型サービス識別コード()).get名称());
-                    if (jigyoshaInput.getサービス種類コード() != null && (!jigyoshaInput.getサービス種類コード().isEmpty())) {
-                        servive_Row.setDefaultDataName4(ServiceCategoryShurui.toValue(jigyoshaInput.getサービス種類コード().value()).get名称());
-                    }
-                    servive_Row.setDefaultDataName5(new RString(jigyoshaInput.get給付計画合計単位数_日数()));
-                    serviceRowList.add(servive_Row);
+        if (tanflg && kksbsList == null) {
+            div.getService().getDgServive().setDataSource(new ArrayList());
+            return;
+        }
+        for (KyufuKanrihyoShokaiDataModel jigyoshaInput : kksbsList) {
+            if (KyotakuServiceKubun.短期入所.getコード().equals(jigyoshaInput.get給付管理票種別区分コード())) {
+                dgServive_Row servive_Row = new dgServive_Row();
+                servive_Row.setDefaultDataName0(jigyoshaInput.get給付管理票明細行番号());
+                if (jigyoshaInput.getサービス事業所番号() != null) {
+                    servive_Row.setDefaultDataName1(jigyoshaInput.getサービス事業所番号().value());
                 }
+                servive_Row.setDefaultDataName2(jigyoshaInput.getサービス事業者名());
+                servive_Row.setDefaultDataName3(ServiceShikibetsuCode.toValue(jigyoshaInput.get指定_基準該当_地域密着型サービス識別コード()).get名称());
+                if (jigyoshaInput.getサービス種類コード() != null && (!jigyoshaInput.getサービス種類コード().isEmpty())) {
+                    servive_Row.setDefaultDataName4(ServiceCategoryShurui.toValue(jigyoshaInput.getサービス種類コード().value()).get名称());
+                }
+                servive_Row.setDefaultDataName5(new RString(jigyoshaInput.get給付計画合計単位数_日数()));
+                serviceRowList.add(servive_Row);
             }
         }
         div.getDgServive().setDataSource(serviceRowList);
