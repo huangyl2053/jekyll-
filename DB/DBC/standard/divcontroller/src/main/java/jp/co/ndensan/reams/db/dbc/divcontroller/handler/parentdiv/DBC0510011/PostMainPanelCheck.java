@@ -208,6 +208,15 @@ public class PostMainPanelCheck {
         }
     }
 
+    /**
+     * 市町村コード検査
+     *
+     * @param 導入形態コード Code
+     * @param hasread RString
+     * @param row dgShichoson_Row
+     * @param from int
+     * @param to int
+     */
     public void 市町村コード(Code 導入形態コード, RString hasread, int from, int to, dgShichoson_Row row) {
         if (導入形態コード.toString().equals(NUM_120.toString())) {
             RString 市町村コード = div.getHdnShichosonCD().getValue();
