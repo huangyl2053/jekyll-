@@ -37,7 +37,7 @@
             </if>
             <if test="is旧措置者区分_旧措置者">
                 AND (受給者台帳."logicalDeletedFlag" = false
-                AND 受給者情報."kyuSochishaFlag" = true )
+                AND 受給者台帳."kyuSochishaFlag" = true )
             </if>
             <if test="is旧措置者区分_旧措置者以外">
                 AND NOT EXIST (
