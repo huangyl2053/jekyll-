@@ -60,7 +60,7 @@ public class ShotokuDankaiBetsuShunoritsuIchiranSource implements IReportSource 
     @ReportItem(name = "list_17", length = 6, order = 23)
     public RString list_17;
     @ReportItem(name = "list_18", length = 6, order = 24)
-    public RString KamokuCode;
+    public RString kamokuCode;
     @ReportItem(name = "isPageBreaker", length = 6, order = 25)
     public RString isPageBreaker;
     @ReportItem(name = "hdn_list_1", length = 7, order = 26)
