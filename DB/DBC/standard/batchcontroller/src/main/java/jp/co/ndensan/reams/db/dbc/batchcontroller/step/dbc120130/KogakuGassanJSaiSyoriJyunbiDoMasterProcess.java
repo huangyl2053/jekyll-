@@ -6,13 +6,14 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120130;
 
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorKubun;
+import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc120110.KogakuGassanJikofutangakuDoMasterTorokuProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3070KogakuGassanJikoFutanGakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc120130.KogakuGassanJSaiSyoriJyunbiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangakushomeishoin.DbWT37H1KogakuGassanaJikofutangakuTempEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangakushomeishoin.DbWT37H2KogakuGassanaJikofutangakuMeisaiTempEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT0002KokuhorenTorikomiErrorEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
@@ -30,18 +31,16 @@ public class KogakuGassanJSaiSyoriJyunbiDoMasterProcess extends BatchProcessBase
             + "kogakugassanjikofutangaku.IKogakuGassanJSaiSyoriJyunbiMapper.select高額合算自己負担額一時と明細データ");
     private static final RString 処理結果リスト一時_TABLE_NAME = new RString("DbWT0002KokuhorenTorikomiError");
     private static final RString 高額合算自己負担額一時_TABLE_NAME = new RString("DbWT37H1KogakuGassanaJikofutangaku");
-    private static final RString 高額合算自己負担額明細一時TBL_TABLE_NAME = new RString("DbWT37H2KogakuGassanaJikofutangakuMeisai");
 
-//    @BatchWriter
-//    BatchPermanentTableWriter 高額合算自己負担額TBLWriter;
+    @BatchWriter
+    BatchPermanentTableWriter 高額合算自己負担額TBLWriter;
     @BatchWriter
     IBatchTableWriter 処理結果リスト一時tbWriter;
     @BatchWriter
     BatchEntityCreatedTempTableWriter 高額合算自己負担額一時tableWriter;
-    @BatchWriter
-    BatchEntityCreatedTempTableWriter 高額合算自己負担額明細一時tableWriter;
 
-//    private KogakuGassanJikofutangakuDoMasterTorokuProcessParameter parameter;
+    private KogakuGassanJikofutangakuDoMasterTorokuProcessParameter parameter;
+
     @Override
     protected IBatchReader createReader() {
         return new BatchDbReader(MAPPERPATH);
@@ -49,15 +48,12 @@ public class KogakuGassanJSaiSyoriJyunbiDoMasterProcess extends BatchProcessBase
 
     @Override
     protected void createWriter() {
-//        高額合算自己負担額TBLWriter
-//                = new BatchPermanentTableWriter(DbT3070KogakuGassanJikoFutanGakuEntity.class);
+        高額合算自己負担額TBLWriter
+                = new BatchPermanentTableWriter(DbT3070KogakuGassanJikoFutanGakuEntity.class);
         処理結果リスト一時tbWriter
                 = new BatchEntityCreatedTempTableWriter(処理結果リスト一時_TABLE_NAME, DbWT0002KokuhorenTorikomiErrorEntity.class);
         高額合算自己負担額一時tableWriter
                 = new BatchEntityCreatedTempTableWriter(高額合算自己負担額一時_TABLE_NAME, DbWT37H1KogakuGassanaJikofutangakuTempEntity.class);
-        高額合算自己負担額明細一時tableWriter
-                = new BatchEntityCreatedTempTableWriter(高額合算自己負担額明細一時TBL_TABLE_NAME, DbWT37H2KogakuGassanaJikofutangakuMeisaiTempEntity.class);
-
     }
 
     @Override
@@ -65,19 +61,20 @@ public class KogakuGassanJSaiSyoriJyunbiDoMasterProcess extends BatchProcessBase
         DbWT37H1KogakuGassanaJikofutangakuTempEntity 高額合算自己負担額一時entity = entity.get高額合算自己負担額一時entity();
         DbT3070KogakuGassanJikoFutanGakuEntity 高額合算自己負担額entity = entity.get高額合算自己負担額entity();
         if (高額合算自己負担額一時entity != null && 高額合算自己負担額entity != null) {
-//            高額合算自己負担額TBLマスタ更新(高額合算自己負担額一時entity);
+            高額合算自己負担額TBLマスタ更新(高額合算自己負担額一時entity);
             高額合算自己負担額一時TBLマスタ更新(高額合算自己負担額entity, 高額合算自己負担額一時entity);
         } else {
             処理結果リスト一時に登録(高額合算自己負担額一時entity);
         }
     }
 
-//    private void 高額合算自己負担額TBLマスタ更新(DbWT37H1KogakuGassanaJikofutangakuTempEntity tempEntity) {
-//        DbT3070KogakuGassanJikoFutanGakuEntity updateEntity = new DbT3070KogakuGassanJikoFutanGakuEntity();
-//        updateEntity.setJikoFutanSeiriNo(tempEntity.getJikoFutanSeiriNo());
-//        updateEntity.setShomeisho_UketoriYM(parameter.get処理年月());
-//        高額合算自己負担額TBLWriter.update(updateEntity);
-//    }
+    private void 高額合算自己負担額TBLマスタ更新(DbWT37H1KogakuGassanaJikofutangakuTempEntity tempEntity) {
+        DbT3070KogakuGassanJikoFutanGakuEntity updateEntity = new DbT3070KogakuGassanJikoFutanGakuEntity();
+        updateEntity.setJikoFutanSeiriNo(tempEntity.getJikoFutanSeiriNo());
+        updateEntity.setShomeisho_UketoriYM(parameter.get処理年月());
+        高額合算自己負担額TBLWriter.update(updateEntity);
+    }
+
     private void 高額合算自己負担額一時TBLマスタ更新(
             DbT3070KogakuGassanJikoFutanGakuEntity dbt3070Entity,
             DbWT37H1KogakuGassanaJikofutangakuTempEntity dbwt37H1Entity) {
