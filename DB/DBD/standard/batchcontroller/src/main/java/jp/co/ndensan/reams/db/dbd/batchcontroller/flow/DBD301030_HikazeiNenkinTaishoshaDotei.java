@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbd.batchcontroller.flow.dbd8100202;
+package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd8100202.ChofukuTorikomiDataDeleteShoriProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd8100202.HikazeNenkinTaishoFirProcess;
@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd8100202.ShimeiKanaTots
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd8100202.ShimeiKanaTotsugoResultProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd8100202.ShimeiKanaTotsugoSedProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.dbd8100202.ShimeiKanaTotsugoTouItuninProcess;
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.dbd8100202.HikazeNenkinTaishoshaDouteiBatchParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD301020.DBD301030_HikazeiNenkinTaishoshaDoteiParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100202.JissekiDataIchijiSakuseiProcessParamter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBD-4910-040 x_lilh
  */
-public class HikazeNenkinTaishoshaDouteiFlow extends BatchFlowBase<HikazeNenkinTaishoshaDouteiBatchParameter> {
+public class DBD301030_HikazeiNenkinTaishoshaDotei extends BatchFlowBase<DBD301030_HikazeiNenkinTaishoshaDoteiParameter> {
 
     private static final RString 処理区_1 = new RString("1");
     private static final RString 処理区_9 = new RString("9");
@@ -171,7 +171,7 @@ public class HikazeNenkinTaishoshaDouteiFlow extends BatchFlowBase<HikazeNenkinT
     }
 
     private JissekiDataIchijiSakuseiProcessParamter createProcessParameter() {
-        HikazeNenkinTaishoshaDouteiBatchParameter parameter = getParameter();
+        DBD301030_HikazeiNenkinTaishoshaDoteiParameter parameter = getParameter();
         return parameter.toJissekiDataIchijiSakuseiProcessParamter();
     }
 }
