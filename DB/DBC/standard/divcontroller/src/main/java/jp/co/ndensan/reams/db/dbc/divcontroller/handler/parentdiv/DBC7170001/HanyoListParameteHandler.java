@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710170.DBC710170_HanyoListKogakuGassanShikyugakuKetteiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.hanyolist.jigyobunkogakugassanshikyukettei.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.core.kaigokogakugassan.Kaigogassan_ShikyuFushikyuKubun;
+import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7170001.ChushutsuJokenPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC7170001.HanyoListParameteDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBB;
@@ -18,7 +19,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.gemmen.niteishalist.CSVSettings;
 import jp.co.ndensan.reams.uz.uza.biz.KinyuKikanCode;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -43,7 +43,6 @@ public class HanyoListParameteHandler {
     private static final RString BLANK = new RString("0");
     private static final RString 全市町村 = new RString("全市町村");
     private static final int 調定年度を含めて8年分 = 8;
-    private static final ReportId 帳票ID = new ReportId("DBC701017_HanyoList_KogakuGassanShikyugakuKettei");
 
     /**
      * コンストラクタ。
@@ -76,8 +75,8 @@ public class HanyoListParameteHandler {
             div.getChushutsuJokenPanel().getCcdHokenshaList().setVisible(false);
             div.getChushutsuJokenPanel().getCcdHokenshaList().setDisabled(true);
         }
-        //TODO  QA1352
-        div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, 帳票ID);
+
+        div.getCcdShutsuryokujun().load(SubGyomuCode.DBC介護給付, ReportIdDBC.DBC701017.getReportId());
     }
 
     /**
