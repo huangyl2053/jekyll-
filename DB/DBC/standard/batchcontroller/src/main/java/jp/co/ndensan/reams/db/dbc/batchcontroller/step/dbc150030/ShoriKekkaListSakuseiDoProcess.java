@@ -60,6 +60,8 @@ public class ShoriKekkaListSakuseiDoProcess
     private int 行目;
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
+    private static final RString NUM = new RString("99");
+    private static final RString ERROR = new RString("取込対象データなし");
 
     @Override
     protected void initialize() {
@@ -121,7 +123,11 @@ public class ShoriKekkaListSakuseiDoProcess
         output.setキー3(entity.getKey3());
         output.setキー4(entity.getKey4());
         output.setキー5(entity.getKey5());
-        output.setエラー内容(entity.getErrorKubun());
+        if (NUM != entity.getErrorKubun()) {
+            output.setエラー内容(entity.getErrorKubun());
+        } else {
+            output.setエラー内容(ERROR);
+        }
         output.set備考(entity.getBiko());
 
         return output;
@@ -149,7 +155,11 @@ public class ShoriKekkaListSakuseiDoProcess
         if (entity.getKey5() != null) {
             output.setキー5(entity.getKey5());
         }
-        output.setエラー内容(entity.getErrorKubun());
+        if (NUM != entity.getErrorKubun()) {
+            output.setエラー内容(entity.getErrorKubun());
+        } else {
+            output.setエラー内容(ERROR);
+        }
         output.set備考(entity.getBiko());
         return output;
     }
