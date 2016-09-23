@@ -24,7 +24,6 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class KogakuFurikomiMybatisParameter implements IMyBatisParameter {
 
-    private Furikomi_ShihraiHohoShitei 支払方法;
     private Furikomi_MeisaiIchiranChushutsuTaisho 抽出対象;
     private boolean 再処理フラグ;
     private FlexibleDate 開始年月日;
