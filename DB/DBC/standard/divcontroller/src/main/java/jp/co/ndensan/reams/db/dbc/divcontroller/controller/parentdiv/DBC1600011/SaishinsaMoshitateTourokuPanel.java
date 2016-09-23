@@ -313,7 +313,6 @@ public class SaishinsaMoshitateTourokuPanel {
             div.getKagoMoshitatePanel().setHdn排他状態フラグ(FALSE);
             responseData = ResponseData.of(div).setState(DBC1600011StateName.detail_notUpdate);
             responseData.addValidationMessages(getValidationHandler(div).get他のユーザが使用中エラーメッセージ());
-            ResponseData.of(div).setState(null).addValidationMessages(getValidationHandler(div).get他のユーザが使用中エラーメッセージ());
         } else {
             div.getKagoMoshitatePanel().setHdn排他状態フラグ(TRUE);
             responseData = ResponseData.of(div).setState(DBC1600011StateName.detail);
@@ -346,7 +345,7 @@ public class SaishinsaMoshitateTourokuPanel {
         LockingKey key = new LockingKey(前排他キー);
         if (!RealInitialLocker.tryGetLock(key)) {
             div.getKagoMoshitatePanel().setHdn排他状態フラグ(FALSE);
-            responseData = ResponseData.of(div).setState(DBC1600011StateName.KanryoMessage);
+            responseData = ResponseData.of(div).setState(DBC1600011StateName.detail_notUpdate);
             responseData.addValidationMessages(getValidationHandler(div).get他のユーザが使用中エラーメッセージ());
         } else {
             div.getKagoMoshitatePanel().setHdn排他状態フラグ(TRUE);

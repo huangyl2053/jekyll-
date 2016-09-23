@@ -97,6 +97,12 @@ public class RirekiShuseiDataPass implements Serializable {
     private YubinNo 郵便番号;
     private RString 住所;
     private TelNo 電話番号;
+    private Code 前回要介護状態区分コード;
+    private FlexibleDate 前回認定年月日;
+    private FlexibleDate 前回認定有効開始年月日;
+    private FlexibleDate 前回認定有効終了年月日;
+    private RString 調査員への連絡事項;
+    private RString 主治医への連絡事項;
 
     private RString 認定調査員コード;
     private RString 調査員氏名;

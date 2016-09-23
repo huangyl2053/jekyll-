@@ -342,6 +342,10 @@ public class RirekiShuseiHandler {
         konkai.set事業者番号(new JigyoshaNo(naiyo.get事業者コード()));
         konkai.set届出代行区分(new Code(naiyo.get届出代行区分()));
         konkai.set本人との関係性(naiyo.get本人との関係性());
+        konkai.set氏名(naiyo.get氏名());
+
+        konkai.set主治医への連絡事項(div.getCcdShujiiIryokikanAndShujiiInput().getRenrakuJiko());
+        konkai.set調査員への連絡事項(div.getCcdChosaItakusakiAndChosainInput().getChosainRenrakuJiko());
 
         NinteiInputNaiyo inputNaiyo = div.getCcdNinteiJohoInput().getNaiyo();
         konkai.set要介護状態区分コード(new Code(inputNaiyo.get要介護度コード()));
@@ -365,6 +369,11 @@ public class RirekiShuseiHandler {
             }
             count = count + 1;
         }
+        konkai.set前回要介護状態区分コード(new Code(div.getCcdZenkaiNinteiKekka().getTxtYokaigodo().getValue()));
+        konkai.set前回認定年月日(div.getCcdZenkaiNinteiKekka().getTxtNinteiDay().getValue());
+        konkai.set前回認定有効開始年月日(div.getCcdZenkaiNinteiKekka().getTxtYukoKikanFrom().getValue());
+        konkai.set前回認定有効終了年月日(div.getCcdZenkaiNinteiKekka().getTxtYukoKikanTo().getValue());
+
         konkai.set削除事由コード(new Code(div.getCcdShinseiSonotaJohoInput().get削除事由()));
         konkai.set異動理由(div.getCcdShinseiSonotaJohoInput().get理由());
         konkai.set取下年月日(div.getCcdShinseiSonotaJohoInput().get取消日());

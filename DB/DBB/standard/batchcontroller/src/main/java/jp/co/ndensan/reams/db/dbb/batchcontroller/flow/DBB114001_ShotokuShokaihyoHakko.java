@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.batchcontroller.flow.dbb1140001;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb1140001.GetJuminjouhouProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb1140001.RinjiCreatTableProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbb1140001.ShotokuShokaihyotoReportProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB1140001.GetJuminjouhouProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB1140001.RinjiCreatTableProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB1140001.ShotokuShokaihyotoReportProcess;
 import jp.co.ndensan.reams.db.dbb.business.report.shotokushokaihyohakkoichiran.ShotokushokaihyoHakkoIchiranProperty;
-import jp.co.ndensan.reams.db.dbb.definition.batchprm.shotokushokaihyohakko.ShotokuShokaihyoHakkoBatchParameter;
+import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB114001.DBB114001_ShotokuShokaihyoHakkoParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.fuka.SetaiShotokuKazeiHanteiBatchParameter;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.SetaiinHaakuKanriShikibetsuKubun;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
@@ -24,11 +24,11 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * バッチ設計_DBBBT51001_所得照会票一括発行
+ * バッチ設計_DBBBT51001_所得照会票一括発行のクラス。
  *
  * @reamsid_L DBB-1720-040 lijunjun
  */
-public class DBB1140001_ShotokuShokaihyoHakkoFlow extends BatchFlowBase<ShotokuShokaihyoHakkoBatchParameter> {
+public class DBB114001_ShotokuShokaihyoHakko extends BatchFlowBase<DBB114001_ShotokuShokaihyoHakkoParameter> {
 
     private static final String GETJUMINJOUHOU_DATA_PROCESS = "getJuminjouhouProcess";
     private static final String RINJICREAT_TABLE_PROCESS = "rinjiCreatTableProcess";
@@ -109,7 +109,7 @@ public class DBB1140001_ShotokuShokaihyoHakkoFlow extends BatchFlowBase<ShotokuS
      */
     @Step(GETJUMINJOUHOU_DATA_PROCESS)
     protected IBatchFlowCommand getJuminjouhouProcess() {
-        ShotokuShokaihyoHakkoBatchParameter param = new ShotokuShokaihyoHakkoBatchParameter();
+        DBB114001_ShotokuShokaihyoHakkoParameter param = new DBB114001_ShotokuShokaihyoHakkoParameter();
         param.set出力順(出力順);
         param.set改頁項目ID(改頁項目ID);
         return loopBatch(GetJuminjouhouProcess.class).arguments(param.toProcessParameter()).define();
@@ -122,7 +122,7 @@ public class DBB1140001_ShotokuShokaihyoHakkoFlow extends BatchFlowBase<ShotokuS
      */
     @Step(PRT_SHOTOKUSHOKAIHYO_PROCESS)
     protected IBatchFlowCommand printShotokuShokaihyoProcess() {
-        ShotokuShokaihyoHakkoBatchParameter param = new ShotokuShokaihyoHakkoBatchParameter();
+        DBB114001_ShotokuShokaihyoHakkoParameter param = new DBB114001_ShotokuShokaihyoHakkoParameter();
         param.set出力順(出力順);
         param.set改頁項目ID(改頁項目ID);
         return simpleBatch(ShotokuShokaihyotoReportProcess.class).arguments(param.toProcessParameter()).define();
