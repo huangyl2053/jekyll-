@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.kyufuhitsuchishodetail;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.kyufuhitsuchishodetail.KyufuhiTsuchishoDetailEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhitsuchishodetail.KyufuhiTsuchishoDetailEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.kyufuhitsuchishodetail.KyufuhiTsuchishoDetailReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
