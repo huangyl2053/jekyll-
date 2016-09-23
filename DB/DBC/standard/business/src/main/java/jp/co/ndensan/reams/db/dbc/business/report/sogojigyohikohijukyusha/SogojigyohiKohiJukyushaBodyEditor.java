@@ -26,7 +26,7 @@ public class SogojigyohiKohiJukyushaBodyEditor implements ISogojigyohiKohiJukyus
 
     private final SogojigyohiKohiJukyushaEntity 帳票出力対象データ;
     private final boolean 集計Flag;
-    private static final int eight = 8;
+    private static final int EIGHT = 8;
 
     /**
      * コンストラクタです
@@ -90,12 +90,12 @@ public class SogojigyohiKohiJukyushaBodyEditor implements ISogojigyohiKohiJukyus
         if (null == item) {
             upPart = RString.EMPTY;
             downPart = RString.EMPTY;
-        } else if (item.length() <= eight) {
+        } else if (item.length() <= EIGHT) {
             upPart = item;
             downPart = RString.EMPTY;
         } else {
-            upPart = item.substring(0, eight);
-            downPart = item.substring(eight);
+            upPart = item.substring(0, EIGHT);
+            downPart = item.substring(EIGHT);
         }
         twoPart.add(upPart);
         twoPart.add(downPart);
