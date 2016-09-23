@@ -3,19 +3,23 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1140011;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Sep 20 10:03:40 CST 2016
+ * Thu Sep 22 15:32:35 CST 2016 
  */
 
-import jp.co.ndensan.reams.uz.uza.lang.RString;
+
+
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+
 
 /**
- * dgJohoIchiran_Row のクラスファイル
- *
- * @reamsid_L DBC-2080-010 jiangzongyue
+ * dgJohoIchiran_Row のクラスファイル 
+ * 
+ * @author 自動生成
  */
+
 public class dgJohoIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
 
     private RString txtTaishoNendo;
     private RString txtSanteiKubun;
