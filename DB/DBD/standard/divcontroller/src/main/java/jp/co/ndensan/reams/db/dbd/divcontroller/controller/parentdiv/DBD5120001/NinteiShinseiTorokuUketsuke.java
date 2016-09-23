@@ -405,7 +405,6 @@ public class NinteiShinseiTorokuUketsuke {
         } else {
             return ResponseData.of(div).setState(DBD5120001StateName.削除修正完了);
         }
-        return ResponseData.of(div).respond();
     }
 
     private NinteiShinseiTorokuUketsukeHandler getHandler(NinteiShinseiTorokuUketsukeDiv div) {
