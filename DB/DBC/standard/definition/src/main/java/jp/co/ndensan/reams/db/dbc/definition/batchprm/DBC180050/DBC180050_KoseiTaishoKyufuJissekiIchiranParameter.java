@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180050;
 
+import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -20,8 +21,18 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class DBC180050_KoseiTaishoKyufuJissekiIchiranParameter extends BatchParameterBase {
 
+    private static final String NENDO = "年度";
+    private static final String CHUSHUTUKIKAN_KAISHIHIJI = "抽出期間開始日時";
+    private static final String CHUSHUTUKIKAN_SYURYOHIJI = "抽出期間終了日時";
+    private static final String SHUTURYO_KUJUN = "出力順ID";
+
+    @BatchParameter(key = NENDO, name = "年度")
     private FlexibleYear 年度;
+    @BatchParameter(key = CHUSHUTUKIKAN_KAISHIHIJI, name = "抽出期間開始日時")
     private YMDHMS 抽出期間開始日時;
+    @BatchParameter(key = CHUSHUTUKIKAN_SYURYOHIJI, name = "抽出期間終了日時")
     private YMDHMS 抽出期間終了日時;
+    @BatchParameter(key = SHUTURYO_KUJUN, name = "出力順ID")
     private RString 出力順ID;
+
 }
