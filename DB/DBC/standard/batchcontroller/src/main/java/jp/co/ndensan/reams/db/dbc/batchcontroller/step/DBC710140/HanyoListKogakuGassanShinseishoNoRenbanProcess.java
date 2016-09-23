@@ -631,6 +631,14 @@ public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcess
         csvEntity.set資格喪失事由(HEAD_資格喪失事由);
         csvEntity.set加入期間開始年月日(HEAD_加入期間_開始年月日);
         csvEntity.set加入期間終了年月日(HEAD_加入期間_終了年月日);
+
+        setMesai(csvEntity);
+
+        return csvEntity;
+
+    }
+
+    private void setMesai(HanyoListKogakuGassanShinseishoJohoNoRenbanCSVEntity csvEntity) {
         csvEntity.set国保保険者番号(HEAD_国保保険者番号);
         csvEntity.set国保保険者名称(HEAD_国保保険者名称);
         csvEntity.set国保被保険者証記号(HEAD_国保被保険者証記号);
@@ -696,7 +704,5 @@ public class HanyoListKogakuGassanShinseishoNoRenbanProcess extends BatchProcess
         csvEntity.set加入１０証明書番号(HEAD_加入１０証明書番号);
         csvEntity.set支給申請書情報送付年月(HEAD_支給申請書情報送付年月);
         csvEntity.set自己負担額計算年月(HEAD_自己負担額計算年月);
-
-        return csvEntity;
     }
 }
