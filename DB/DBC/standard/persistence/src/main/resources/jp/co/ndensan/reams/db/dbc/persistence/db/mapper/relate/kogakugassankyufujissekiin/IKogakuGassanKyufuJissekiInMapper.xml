@@ -74,10 +74,15 @@
         FROM
         "DbWT38P1KogakuGassanKyufuJisseki" AS DbWT38P1
         WHERE
-        DbWT38P1."hihokenshaNoIn" = DbT3075."hihokenshaNo"
-        AND DbWT38P1."shikyuShinseiSeiriNo" = DbT3075."shikyuShinseiSeiriNo"
-        AND DbWT38P1."jikoFutanSeiriNo" = DbT3075."jikoFutanSeiriNo"
-        AND DbWT38P1."shikyuGaku" = DbT3075."shikyuGaku"   
+        DbT3075."hihokenshaNo" = DbWT38P1."hihokenshaNoIn" 
+        AND DbT3075."shikyuShinseiSeiriNo"= DbWT38P1."shikyuShinseiSeiriNo" 
+        AND  DbT3075."jikoFutanSeiriNo"= DbWT38P1."jikoFutanSeiriNo" 
+        AND  DbT3075."shikyuGaku" = DbWT38P1."shikyuGaku" 
+        AND (DbT3075."sofuYM" IS NULL  OR  DbT3075."sofuYM"='' )
+        AND (DbT3075."uketoriYM" ='' OR DbT3075."uketoriYM" IS NULL  OR  DbT3075."uketoriYM" = #{処理年月} )
+        AND (DbT3075."kokanJohoShikibetsuNo"  LIKE '38Q_'
+        OR(DbT3075."kokanJohoShikibetsuNo"  LIKE'38P_'
+        AND DbT3075."dataKubun" = '1'))
     </update>
     <resultMap id="resultMap_KogakuGassanKyufuJissekiInEntity" 
                type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassankyufujissekiin.KogakuGassanKyufuJissekiInEntity" autoMapping="true">
