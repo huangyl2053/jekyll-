@@ -82,7 +82,14 @@ public class JuminIdoRendoShikakuSoshitsuShibo {
         return entity;
     }
 
-    private void shiboHihodaicho(UaFt200FindShikibetsuTaishoEntity 住民異動情報,
+    /**
+     * 被保険者死亡処理です。
+     *
+     * @param 住民異動情報 UaFt200FindShikibetsuTaishoEntity
+     * @param storeConfigParamter StoreConfigParamter
+     * @param entity JuminIdoRendoShikakuTorokuEntity
+     */
+    public void shiboHihodaicho(UaFt200FindShikibetsuTaishoEntity 住民異動情報,
             StoreConfigParamter storeConfigParamter,
             JuminIdoRendoShikakuTorokuEntity entity) {
         FlexibleDate 到達日_65 = FlexibleDate.EMPTY;
