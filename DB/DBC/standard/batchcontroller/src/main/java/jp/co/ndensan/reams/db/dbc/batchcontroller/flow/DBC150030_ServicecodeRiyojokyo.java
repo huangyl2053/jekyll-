@@ -187,6 +187,7 @@ public class DBC150030_ServicecodeRiyojokyo
         KyufuJissekiMeisaiGetProcessParameter kyufuJissekiParameter = new KyufuJissekiMeisaiGetProcessParameter();
         kyufuJissekiParameter.set対象年月指定(getParameter().get対象年月指定());
         kyufuJissekiParameter.set選択対象(getParameter().get選択対象());
+        kyufuJissekiParameter.set対象サービス種類(getParameter().get対象サービス種類());
         if (getParameter().get旧市町村情報() != null) {
             kyufuJissekiParameter.set旧市町村コード(getParameter().get旧市町村情報().getコード());
             kyufuJissekiParameter.set旧市町村名(getParameter().get旧市町村情報().get名称());

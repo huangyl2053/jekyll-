@@ -55,7 +55,6 @@ public class DvKogakuServiceJohoHandler {
     private static final RString RSTRING_5 = new RString("5");
     private static final RString モード１ = new RString("DBCMN23001");
     private static final RString モード２ = new RString("DBCMN23019");
-//    private static final RString モード１ = new RString("高額サービス費状況");
 
     /**
      * コンストラクタです。
@@ -371,13 +370,13 @@ public class DvKogakuServiceJohoHandler {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         for (ShoriJokyo 処理状況 : ShoriJokyo.values()) {
             if (state.equals(モード１)) {
-                KeyValueDataSource dataSource = new KeyValueDataSource(処理状況.getコード(), 処理状況.get名称());
+                KeyValueDataSource dataSource = new KeyValueDataSource(処理状況.getコード(), 処理状況.get略称());
                 dataSourceList.add(dataSource);
             }
             if (state.equals(モード２)) {
                 RString コード = 処理状況.getコード();
                 if (!コード.equals(RSTRING_4) && !コード.equals(RSTRING_5)) {
-                    KeyValueDataSource dataSource = new KeyValueDataSource(処理状況.getコード(), 処理状況.get名称());
+                    KeyValueDataSource dataSource = new KeyValueDataSource(処理状況.getコード(), 処理状況.get略称());
                     dataSourceList.add(dataSource);
                 }
             }

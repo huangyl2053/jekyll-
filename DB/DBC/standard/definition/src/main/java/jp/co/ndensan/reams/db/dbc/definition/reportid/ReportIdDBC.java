@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public enum ReportIdDBC {
 
+    DBC701019(new ReportId("DBC701019_HanyoListJigyoKogakuServiceHiJokyo"), new RString("")),
+    DBC701003(new ReportId("DBC701003_HanyoListKogakuKaigoServiceHiJokyo"), new RString("")),
     /**
      * 受給者給付実績台帳作成
      *
@@ -33,6 +35,11 @@ public enum ReportIdDBC {
      */
     DBC200002(new ReportId("DBC200002_JukyushaKyufuJissekiIchiran"),
             new RString("受給者給付実績一覧表")),
+    /**
+     * サービスコード単位明細リスト
+     */
+    DBC200005(new ReportId("DBC200005_ServiceCodeTaniMeisaiIchiran"),
+            new RString("サービスコード単位明細リスト")),
     /**
      * 高額合算支給額計算結果連絡票情報取込一覧表
      */

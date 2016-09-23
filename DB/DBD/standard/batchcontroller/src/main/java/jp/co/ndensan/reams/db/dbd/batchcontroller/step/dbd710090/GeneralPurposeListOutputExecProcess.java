@@ -110,15 +110,16 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
             + "IGeneralPurposeListOutputMapper.getGeneralPurposeListOutputInfo");
 
     private Association 地方公共団体情報;
+    private IAssociationFinder finder;
     private HokenshaList 保険者リスト;
     private FileSpoolManager manager;
     private RString eucFilePath;
     private List<PersonalData> personalDataList;
-    private int i = 0;
 
     @Override
     protected void initialize() {
         地方公共団体情報 = AssociationFinderFactory.createInstance().getAssociation();
+        finder = AssociationFinderFactory.createInstance();
         保険者リスト = HokenshaListLoader.createInstance().getShichosonCodeNameList(GyomuBunrui.介護事務);
         personalDataList = new ArrayList<>();
     }
@@ -154,11 +155,17 @@ public class GeneralPurposeListOutputExecProcess extends BatchProcessBase<Genera
 
         if (processParamter.is連番付加()) {
             GeneralPurposeListOutputEucCsvEntity eucCsvEntity = new GeneralPurposeListOutputEucCsvEntity();
+            if (entity.get被保険者台帳管理_市町村コード() != null && !entity.get被保険者台帳管理_市町村コード().isEmpty()) {
+                eucCsvEntity.set市町村名(finder.getAssociation(new LasdecCode(entity.get被保険者台帳管理_市町村コード())).get市町村名());
+            }
             HanyoListShiharaiHohoHenkoManager.createInstance().連番ありCSV情報設定(eucCsvEntity, entity, csvcount, 地方公共団体情報, 保険者リスト,
                     processParamter.is日付スラッシュ付加());
             eucCsvWriter.writeLine(eucCsvEntity);
         } else {
             GeneralPurposeListOutputNotContainNoEucCsvEntity eucCsvEntity = new GeneralPurposeListOutputNotContainNoEucCsvEntity();
+            if (entity.get被保険者台帳管理_市町村コード() != null && !entity.get被保険者台帳管理_市町村コード().isEmpty()) {
+                eucCsvEntity.set市町村名(finder.getAssociation(new LasdecCode(entity.get被保険者台帳管理_市町村コード())).get市町村名());
+            }
             HanyoListShiharaiHohoHenkoManager.createInstance().連番なしCSV情報設定(eucCsvEntity, entity, 地方公共団体情報, 保険者リスト,
                     processParamter.is日付スラッシュ付加());
             eucNotContainNoCsvWriter.writeLine(eucCsvEntity);

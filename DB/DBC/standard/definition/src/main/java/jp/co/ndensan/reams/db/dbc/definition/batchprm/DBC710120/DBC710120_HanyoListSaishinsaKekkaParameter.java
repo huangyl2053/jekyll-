@@ -123,7 +123,7 @@ public class DBC710120_HanyoListSaishinsaKekkaParameter extends BatchParameterBa
      * @param date date
      * @return SaishinsamoshitateProcessParameter
      */
-    public HanyoListSaishinsaKekkaProcessParameter toHanyoListSaishinsaKekkaProcessParameterr(FlexibleDate date) {
+    public HanyoListSaishinsaKekkaProcessParameter toHanyoListSaishinsaKekkaProcessParameter(FlexibleDate date) {
         return new HanyoListSaishinsaKekkaProcessParameter(
                 chohyoId,
                 shutsuryokujunId,
