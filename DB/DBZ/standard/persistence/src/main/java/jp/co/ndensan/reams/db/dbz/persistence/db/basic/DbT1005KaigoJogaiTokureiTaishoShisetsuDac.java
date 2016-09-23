@@ -112,8 +112,8 @@ public class DbT1005KaigoJogaiTokureiTaishoShisetsuDac implements ISaveable<DbT1
     /**
      * 事業者番号で介護除外住所地特例対象施設を取得します。
      *
-     * @param 事業者種類 事業者種別
-     * @param 事業者種別 事業者番号
+     * @param 事業者番号 JigyoshaNo
+     * @param 事業者種別 JigyosyaType
      * @return 介護除外住所地特例対象施設
      * @throws NullPointerException 引数のいずれかがnullの場合
      */
