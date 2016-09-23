@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.entity.db.kyufuhitsuchishosealer;
+package jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhitsuchishosealer;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
