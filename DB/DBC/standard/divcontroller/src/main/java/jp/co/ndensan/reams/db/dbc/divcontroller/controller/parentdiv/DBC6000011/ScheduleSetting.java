@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC6000011;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.KokuhorenInterfaceKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.hihokenshashikakuteisei.SukejuruRirekiJohoListEntity;
@@ -93,6 +94,8 @@ public class ScheduleSetting {
      * @return ResponseData<ScheduleSettingDiv>
      */
     public ResponseData<ScheduleSettingDiv> onClick_btnDisplay(ScheduleSettingDiv div) {
+        boolean 送付新規Flag = false;
+        boolean 取込新規Flag = false;
         RDate 画面処理年月 = div.getTxtShoriNengetsu().getValue();
         if (画面処理年月 == null) {
             return ResponseData.of(div).respond();
@@ -126,7 +129,8 @@ public class ScheduleSetting {
                 // CHECKSTYLE IGNORE NestedIfDepth FOR NEXT 1 LINES
                 if (new RString(DbcQuestionMessages.国保連連携スケジュール_新規設定確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                         && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                    List<dgDataSofu_Row> sList = getHandler(div).スケジュール履歴情報処理_送付(送付List);
+                    送付新規Flag = true;
+                    List<dgDataSofu_Row> sList = getHandler(div).スケジュール履歴情報処理_送付(new ArrayList<KokuhorenInterfaceKanri>());
                     div.getDgDataSofu().setDataSource(sList);
                 }
             } else {
@@ -157,7 +161,8 @@ public class ScheduleSetting {
                 // CHECKSTYLE IGNORE NestedIfDepth FOR NEXT 1 LINES
                 if (new RString(DbcQuestionMessages.国保連連携スケジュール_新規設定確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                         && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                    List<dgDataTorikomi_Row> tList = getHandler(div).スケジュール履歴情報処理_取込(取込List);
+                    取込新規Flag = true;
+                    List<dgDataTorikomi_Row> tList = getHandler(div).スケジュール履歴情報処理_取込(new ArrayList<KokuhorenInterfaceKanri>());
                     div.getDgDataTorikomi().setDataSource(tList);
                 }
             } else {
@@ -165,8 +170,16 @@ public class ScheduleSetting {
             }
         }
         SukejuruRirekiJohoListEntity entity = new SukejuruRirekiJohoListEntity();
-        entity.setスケジュール履歴情報_送付List(送付List);
-        entity.setスケジュール履歴情報_取込List(取込List);
+        if (送付新規Flag) {
+            entity.setスケジュール履歴情報_送付List(new ArrayList<KokuhorenInterfaceKanri>());
+        } else {
+            entity.setスケジュール履歴情報_送付List(送付List);
+        }
+        if (取込新規Flag) {
+            entity.setスケジュール履歴情報_取込List(new ArrayList<KokuhorenInterfaceKanri>());
+        } else {
+            entity.setスケジュール履歴情報_取込List(取込List);
+        }
         ViewStateHolder.put(ViewStateKeys.スケジュール履歴情報Entity, entity);
         return ResponseData.of(div).respond();
     }
