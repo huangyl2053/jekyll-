@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.db.dbd.service.core.ninteienkitsuchishohakko.NinteiEn
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJohoChild;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -435,11 +434,11 @@ public class NinteiEnkiTsuchishoHakkoHandler {
         return parameter;
     }
 
-    private List<ShinseishoKanriNo> get申請書管理番号リスト() {
-        List<ShinseishoKanriNo> 申請書管理番号リスト = new ArrayList<>();
+    private List<RString> get申請書管理番号リスト() {
+        List<RString> 申請書管理番号リスト = new ArrayList<>();
         List<dgHakkotaishosha_Row> rowList = div.getDgHakkotaishosha().getSelectedItems();
         for (dgHakkotaishosha_Row row : rowList) {
-            申請書管理番号リスト.add(new ShinseishoKanriNo(row.getShinseishokanrino()));
+            申請書管理番号リスト.add(row.getShinseishokanrino());
         }
         return 申請書管理番号リスト;
     }
