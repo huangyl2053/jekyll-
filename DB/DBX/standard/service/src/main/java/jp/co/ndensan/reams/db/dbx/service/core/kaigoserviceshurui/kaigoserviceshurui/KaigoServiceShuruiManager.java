@@ -274,7 +274,7 @@ public class KaigoServiceShuruiManager {
 
         DbT7130KaigoServiceShuruiEntity サービス種類情報リスト = 介護サービス種類Dac.select介護サービス(list);
         List<KeyValueDataSource> dataSource = new ArrayList<>();
-        dataSource.add(new KeyValueDataSource(サービス種類情報リスト.getServiceShuruiMeisho(),
+        dataSource.add(new KeyValueDataSource(サービス種類情報リスト.getServiceShuruiCd().getColumnValue(),
                 サービス種類情報リスト.getServiceShuruiMeisho()));
         dataSource.add(new KeyValueDataSource(ZERO, すべて));
         return dataSource;
