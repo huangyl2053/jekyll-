@@ -5,8 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB021051.AtenaSealJohoShutokuProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB021051.ChohyoJohoShutokuProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB021051.ShoriKekkaListProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB021051.DBB021051_AtenaSealSakuseiParameter;
+import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
+import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * バッチ設計_DBB021051_宛名シール作成（介護賦課）のバッチクラスです。
