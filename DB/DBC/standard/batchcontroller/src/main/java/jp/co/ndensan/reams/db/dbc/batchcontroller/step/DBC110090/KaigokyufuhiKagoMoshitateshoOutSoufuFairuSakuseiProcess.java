@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc110090;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC110090;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC110090.KaigokyufuhiKagoMoshitateshoSoufuFairuSakuseiProcessParameter;
@@ -27,9 +28,19 @@ import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
+import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
+import jp.co.ndensan.reams.uz.uza.externalcharacter.BinaryCharacterConvertParameter;
+import jp.co.ndensan.reams.uz.uza.externalcharacter.BinaryCharacterConvertParameterBuilder;
+import jp.co.ndensan.reams.uz.uza.externalcharacter.CharacterAttribute;
+import jp.co.ndensan.reams.uz.uza.externalcharacter.CharacterConvertTable;
+import jp.co.ndensan.reams.uz.uza.externalcharacter.ReamsUnicodeToBinaryConverter;
+import jp.co.ndensan.reams.uz.uza.externalcharacter.RecordConvertMaterial;
+import jp.co.ndensan.reams.uz.uza.io.ByteWriter;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
+import jp.co.ndensan.reams.uz.uza.io.FileReader;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
@@ -57,6 +68,8 @@ public class KaigokyufuhiKagoMoshitateshoOutSoufuFairuSakuseiProcess extends Bat
     private static final RString RSTRING_000 = new RString("000");
     private static final RString RSTRING_0000000000 = new RString("0000000000");
     private static final RString RSTRING_000001 = new RString("000001");
+    private static final RString 拡張子_TEMP = new RString("temp");
+    private static final RString 拡張子 = new RString("\r\n");
 
     /**
      * 総出力件数カウンターです。
@@ -103,13 +116,6 @@ public class KaigokyufuhiKagoMoshitateshoOutSoufuFairuSakuseiProcess extends Bat
 
         総出力件数 = INT_0;
         レコード番号 = INT_0;
-        RString 国保連送付外字_変換区分 = DbBusinessConfig.get(ConfigNameDBC.国保連送付外字_変換区分, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
-        if (国保連送付外字_変換区分_1.equals(国保連送付外字_変換区分)) {
-            文字コード = Encode.SJIS;
-        } else {
-            // TODO QA90831 文字コードがありません。
-            文字コード = Encode.UTF_8withBOM;
-        }
 
         if (コード_173.equals(processParameter.getコード())) {
             出力ファイル名 = ファイル名_前.concat(コード_173)
@@ -172,13 +178,16 @@ public class KaigokyufuhiKagoMoshitateshoOutSoufuFairuSakuseiProcess extends Bat
         レコード番号 = レコード番号 + 1;
         KogakugassanSoufuFairuSakuseiEndEntity endEntity = this.getEndEntity();
         eucCsvWriter.writeLine(endEntity);
-        // TODO
+        eucCsvWriter.close();
+        do外字類似変換();
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(出力ファイル名));
         sfd = SharedFile.defineSharedFile(sfd, 1, SharedFile.GROUP_ALL, null, true, null);
+        CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
+        SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(eucFilePath), opts);
         outputCount.setValue(総出力件数);
         entryList.add(sfd);
         outputEntry.setValue(entryList);
-        eucCsvWriter.close();
+
     }
 
     private KogakugassanSoufuFairuSakuseiEndEntity getEndEntity() {
@@ -234,4 +243,39 @@ public class KaigokyufuhiKagoMoshitateshoOutSoufuFairuSakuseiProcess extends Bat
         return controlEntity;
     }
 
+    private static CharacterConvertTable getCharacterConvertTable() {
+        RString 国保連送付外字_変換区分 = DbBusinessConfig.get(ConfigNameDBC.国保連送付外字_変換区分, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
+        if (!国保連送付外字_変換区分_1.equals(国保連送付外字_変換区分)) {
+            return CharacterConvertTable.Sjis;
+        } else {
+            return CharacterConvertTable.SjisRuiji;
+        }
+    }
+
+    private void do外字類似変換() {
+        try (FileReader reader = new FileReader(eucFilePath, Encode.UTF_8withBOM);
+                ByteWriter writer = new ByteWriter(eucFilePath.replace(拡張子_TEMP, RString.EMPTY))) {
+            for (RString record = reader.readLine(); record != null; record = reader.readLine()) {
+                BinaryCharacterConvertParameter convertParameter = new BinaryCharacterConvertParameterBuilder(
+                        new RecordConvertMaterial(getCharacterConvertTable(), CharacterAttribute.混在))
+                        .enabledConvertError(true)
+                        .build();
+                ReamsUnicodeToBinaryConverter converter = new ReamsUnicodeToBinaryConverter(convertParameter);
+                writer.write(converter.convert(record.concat(拡張子)));
+            }
+            writer.close();
+            reader.close();
+        }
+        deleteEmptyFile(eucFilePath);
+    }
+
+    private void deleteEmptyFile(RString filePath) {
+        if (RString.isNullOrEmpty(filePath)) {
+            return;
+        }
+        File file = new File(filePath.toString());
+        if (file.exists()) {
+            file.getAbsoluteFile().deleteOnExit();
+        }
+    }
 }
