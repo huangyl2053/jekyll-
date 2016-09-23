@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbc.business.report.saishinsaketteihokenshain;
 
 import java.util.List;
-import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.saishinsaketteihokenshain.SaishinsaKetteiResultEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.source.saishinsaketteihokenshain.SaishinsaKetteitsuchishoTorikomiIchiranHokenshaBunSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
@@ -33,17 +32,11 @@ public class SaishinsaKetteiHokenshaInEditor implements ISaishinsaKetteiHokensha
 
     private final SaishinsaKetteiResultEntity 帳票出力対象データ;
     private final FlexibleYearMonth 処理年月;
-    private final Map<RString, RString> 出力順Map;
-    private final List<RString> 改頁リスト;
+    private final List<RString> 出力項目リスト;
     private final RDateTime 作成日時;
     private final boolean 集計Flag;
     private final int 連番;
 
-    private static final RString KEY_並び順の２件目 = new RString("KEY_並び順の２件目");
-    private static final RString KEY_並び順の３件目 = new RString("KEY_並び順の３件目");
-    private static final RString KEY_並び順の４件目 = new RString("KEY_並び順の４件目");
-    private static final RString KEY_並び順の５件目 = new RString("KEY_並び順の５件目");
-    private static final RString KEY_並び順の６件目 = new RString("KEY_並び順の６件目");
     private static final RString 申立タイトル = new RString("＜再審査申立＞");
     private static final RString 申立件数タイトル = new RString("件数");
     private static final RString 申立単位数タイトル = new RString("単位数");
@@ -60,32 +53,30 @@ public class SaishinsaKetteiHokenshaInEditor implements ISaishinsaKetteiHokensha
     private static final RString 高額介護サービス費タイトル = new RString("高額介護サービス費");
 
     private static final RString SAKUSEI = new RString("作成");
+    private static final int INT_0 = 0;
     private static final int INT_1 = 1;
     private static final int INT_2 = 2;
     private static final int INT_3 = 3;
     private static final int INT_4 = 4;
-    private static final int INT_5 = 5;
 
     /**
      * コンストラクタです
      *
      * @param 帳票出力対象データ SaishinsaKetteiResultEntity
      * @param 処理年月 FlexibleYearMonth
-     * @param 出力順Map Map<RString, RString>
      * @param 作成日時 RDateTime
-     * @param 改頁リスト List<RString>
+     * @param 出力項目リスト List<RString>
      * @param 集計Flag boolean
      * @param 連番 int
      */
     public SaishinsaKetteiHokenshaInEditor(
             SaishinsaKetteiResultEntity 帳票出力対象データ,
             FlexibleYearMonth 処理年月,
-            Map<RString, RString> 出力順Map, RDateTime 作成日時,
-            List<RString> 改頁リスト, boolean 集計Flag, int 連番) {
+            RDateTime 作成日時,
+            List<RString> 出力項目リスト, boolean 集計Flag, int 連番) {
         this.帳票出力対象データ = 帳票出力対象データ;
         this.処理年月 = 処理年月;
-        this.出力順Map = 出力順Map;
-        this.改頁リスト = 改頁リスト;
+        this.出力項目リスト = 出力項目リスト;
         this.作成日時 = 作成日時;
         this.集計Flag = 集計Flag;
         this.連番 = 連番;
@@ -111,18 +102,18 @@ public class SaishinsaKetteiHokenshaInEditor implements ISaishinsaKetteiHokensha
         source.hokenshaName = 帳票出力対象データ.get保険者名();
         source.shoKisaiHokenshaNo = getColumnValue(帳票出力対象データ.get証記載保険者番号());
         source.shoKisaiHokenshaName = 帳票出力対象データ.get証記載保険者名();
-        source.shutsuryokujun1 = get並び順(KEY_並び順の２件目);
-        source.shutsuryokujun2 = get並び順(KEY_並び順の３件目);
-        source.shutsuryokujun3 = get並び順(KEY_並び順の４件目);
-        source.shutsuryokujun4 = get並び順(KEY_並び順の５件目);
-        source.shutsuryokujun5 = get並び順(KEY_並び順の６件目);
-        if (改頁リスト != null) {
-            source.kaipage1 = get改頁(INT_1);
-            source.kaipage2 = get改頁(INT_2);
-            source.kaipage3 = get改頁(INT_3);
-            source.kaipage4 = get改頁(INT_4);
-            source.kaipage5 = get改頁(INT_5);
+        if (出力項目リスト != null && !出力項目リスト.isEmpty()) {
+            source.shutsuryokujun1 = get出力項目(INT_0);
+            source.shutsuryokujun2 = get出力項目(INT_1);
+            source.shutsuryokujun3 = get出力項目(INT_2);
+            source.shutsuryokujun4 = get出力項目(INT_3);
+            source.shutsuryokujun5 = get出力項目(INT_4);
         }
+        source.kaipage1 = RString.EMPTY;
+        source.kaipage2 = RString.EMPTY;
+        source.kaipage3 = RString.EMPTY;
+        source.kaipage4 = RString.EMPTY;
+        source.kaipage5 = RString.EMPTY;
         source.listUpper_1 = new RString(連番);
         source.listUpper_2 = doパターン54(帳票出力対象データ.get取扱年月());
         source.listUpper_3 = getColumnValue(帳票出力対象データ.get事業者番号());
@@ -182,12 +173,8 @@ public class SaishinsaKetteiHokenshaInEditor implements ISaishinsaKetteiHokensha
         return source;
     }
 
-    private RString get並び順(RString 並び順Key) {
-        return 出力順Map.containsKey(並び順Key) ? 出力順Map.get(並び順Key) : RString.EMPTY;
-    }
-
-    private RString get改頁(int index) {
-        return index < 改頁リスト.size() ? 改頁リスト.get(index) : RString.EMPTY;
+    private RString get出力項目(int index) {
+        return index < 出力項目リスト.size() ? 出力項目リスト.get(index) : RString.EMPTY;
     }
 
     private RString doパターン54(FlexibleYearMonth 年月) {
