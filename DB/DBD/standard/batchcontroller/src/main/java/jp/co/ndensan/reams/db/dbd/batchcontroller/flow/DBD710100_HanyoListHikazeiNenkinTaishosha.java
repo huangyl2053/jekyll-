@@ -20,16 +20,15 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 public class DBD710100_HanyoListHikazeiNenkinTaishosha extends BatchFlowBase<DBD710100_HanyoListHikazeiNenkinTaishoshaParameter> {
 
     private static final String 非課税年金対象者 = "HikazeiNenkinTaishosha";
-    private RDate date;
 
     @Override
     protected void defineFlow() {
-        date = RDate.getNowDate();
         executeStep(非課税年金対象者);
     }
 
     @Step(非課税年金対象者)
     IBatchFlowCommand callHikazeiNenkinTaishosha() {
+        RDate date = RDate.getNowDate();
         return loopBatch(HanyoListHikazeiNenkinTaishoshaProcess.class).arguments(getParameter().toProcessParameter(date)).define();
     }
 }

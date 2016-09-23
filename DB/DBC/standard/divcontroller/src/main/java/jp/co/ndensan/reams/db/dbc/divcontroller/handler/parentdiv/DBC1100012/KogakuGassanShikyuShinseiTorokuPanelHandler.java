@@ -282,15 +282,24 @@ public class KogakuGassanShikyuShinseiTorokuPanelHandler {
                     row.getTxtKeisan().setValue(new FlexibleDate(shoJohoResult.get高額合算申請書().get自己負担額計算年月().toDateString()));
                 }
                 if (shoJohoResult.get高額合算申請書().get申請代表者氏名() != null) {
-                    row.setTxtShinseiDaihyoshaName(shoJohoResult.get高額合算申請書().get申請代表者氏名().value());
+                    row.setTxtShinseiDaihyoshaName(shoJohoResult.get高額合算申請書().get申請代表者氏名().getColumnValue());
                 }
                 if (shoJohoResult.get高額合算申請書().get申請年月日() != null) {
                     row.getTxtShinseiYMD().setValue(shoJohoResult.get高額合算申請書().get申請年月日());
                 }
+                if (shoJohoResult.get高額合算申請書().get申請代表者郵便番号() != null) {
+                    row.setTxtBango(shoJohoResult.get高額合算申請書().get申請代表者郵便番号().getColumnValue());
+                }
+                if (shoJohoResult.get高額合算申請書().get申請代表者住所() != null) {
+                    row.setTxtSyusyou(shoJohoResult.get高額合算申請書().get申請代表者住所());
+                }
+                if (shoJohoResult.get高額合算申請書().get申請代表者電話番号() != null) {
+                    row.setTxtTelbanngo(shoJohoResult.get高額合算申請書().get申請代表者電話番号().getColumnValue());
+                }
                 row.setTxtHihokenshaNo(shoJohoResult.get高額合算申請書().get被保険者番号().value());
-                row.setTxtHihokenshaName(shoJohoResult.get被保険者名().value());
+                row.setTxtHihokenshaName(shoJohoResult.get被保険者名().getColumnValue());
                 row.setTxtTaishoNendo(shoJohoResult.get高額合算申請書().get対象年度().toDateString());
-                row.setTxtShikibetuCode(shoJohoResult.get識別コード().value());
+                row.setTxtShikibetuCode(shoJohoResult.get識別コード().getColumnValue());
                 row.setTxtHokenshaNo(shoJohoResult.get高額合算申請書().get保険者番号().value());
                 row.setTxtSeiriNo(shoJohoResult.get高額合算申請書().get整理番号());
                 row.setTxtRirekiNo(new RString(shoJohoResult.get高額合算申請書().get履歴番号().toString()));
