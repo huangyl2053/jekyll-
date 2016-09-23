@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD206010;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbd.business.core.dbd206010.TyohyoShutuyukuOrderKey;
 import jp.co.ndensan.reams.db.dbd.business.report.dbd200017.JigyoshoMukeShakaiFukushiHojinKeigenTaishoshoIchiranReport;
@@ -48,6 +50,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -60,6 +63,8 @@ public class TyohyoShutuyukuProcess extends BatchKeyBreakBase<ShafukugemmenTaish
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbd.persistence.db.mapper."
             + "relate.jigyoshomukeshakai.IShafukugemmenTaishoshaJohoMapper.get社福減免対象者情報");
     private DBD206010TyohyoProcessParameter processParameter;
+    private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
+            new RString(JigyoshoMukeShakaiFukushiHojinKeigenReportSource.ReportSourceFields.jigyoshaCd.name())));
     private static Association association;
     private IOutputOrder outputOrder;
     private static final int NUM5 = 5;
@@ -116,8 +121,8 @@ public class TyohyoShutuyukuProcess extends BatchKeyBreakBase<ShafukugemmenTaish
         List<RString> pageBreakKeys = new ArrayList<>();
         set改頁Key(outputOrder, pageBreakKeys);
         if (!pageBreakKeys.isEmpty()) {
-            batchReportWriter = BatchReportFactory.createBatchReportWriter(REPORT_DBD200017.value())
-                    .addBreak(new TyohyoShutuyukuSourcePageBreak(pageBreakKeys)).create();
+            batchReportWriter = BatchReportFactory.createBatchReportWriter(REPORT_DBD200017.value()).addBreak(
+                    new BreakerCatalog<JigyoshoMukeShakaiFukushiHojinKeigenReportSource>().simplePageBreaker(pageBreakKeys)).create();
         } else {
             batchReportWriter = BatchReportFactory.createBatchReportWriter(REPORT_DBD200017.value(), SubGyomuCode.DBD介護受給).create();
         }
@@ -152,6 +157,8 @@ public class TyohyoShutuyukuProcess extends BatchKeyBreakBase<ShafukugemmenTaish
     }
 
     private void set改頁Key(IOutputOrder outputOrder, List<RString> pageBreakKeys) {
+        pageBreakKeys.addAll(PAGE_BREAK_KEYS);
+        pageBreakKeys.add(new RString(JigyoshoMukeShakaiFukushiHojinKeigenReportSource.ReportSourceFields.hokenshaNo.name()));
         RString 改頁１ = RString.EMPTY;
         RString 改頁２ = RString.EMPTY;
         RString 改頁３ = RString.EMPTY;

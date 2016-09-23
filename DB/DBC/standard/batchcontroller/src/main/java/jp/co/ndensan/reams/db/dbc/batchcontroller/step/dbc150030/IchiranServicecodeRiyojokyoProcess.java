@@ -53,8 +53,8 @@ public class IchiranServicecodeRiyojokyoProcess
     private static final RString 帳票出力順 = new RString("ORDER BY "
             + "\"DbWT3470chohyouShutsuryokuyou\".\"serviceShuruiCode\" ASC"
             + ", \"DbWT3470chohyouShutsuryokuyou\".\"sortYouKomokuCode\" ASC");
-    private static final RString 対象年月指定_サービス対象年月 = new RString("サービス対象年月");
-    private static final RString 対象年月指定_審査年月 = new RString("審査年月");
+    private static final RString 対象年月指定_サービス対象年月 = new RString("00");
+    private static final RString 対象年月指定_審査年月 = new RString("01");
     private static final RString 提供月 = new RString("提供月：");
     private static final RString 審査月 = new RString("審査月：");
     private static final RString 選択対象_町域 = new RString("町域");
@@ -338,7 +338,7 @@ public class IchiranServicecodeRiyojokyoProcess
         } else if (選択対象_行政区.equals(parameter.get選択対象())) {
             reportEntity.set条件３(get条件３(行政区));
         }
-        if (!RString.isNullOrEmpty(提供月)
+        if (!RString.isNullOrEmpty(parameter.get旧市町村コード())
                 && !旧市町村情報_000000.equals(parameter.get旧市町村コード())
                 && parameter.get旧市町村名() != null) {
             reportEntity.set条件３(new RString("").concat(旧市町村名).concat(parameter.get旧市町村名()));

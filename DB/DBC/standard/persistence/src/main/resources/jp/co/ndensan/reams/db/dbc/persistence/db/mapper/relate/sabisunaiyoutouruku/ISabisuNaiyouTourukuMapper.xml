@@ -20,7 +20,7 @@
                         SELECT 'X' FROM 
                             rgdb."DbT7130KaigoServiceShurui" A  
                          WHERE T7130."serviceShuruiCd" = A."serviceShuruiCd"
-                            AND A."teikyoKaishiYM" > T7130."teikyoKaishiYM" 
+                            AND A."teikyoKaishiYM" <![CDATA[>]]> T7130."teikyoKaishiYM" 
             )
          INNER JOIN   
              rgdb."UzT0007Code" T0007_1

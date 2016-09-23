@@ -49,7 +49,7 @@ public enum DBC4000011MainSpec implements IPredicate<DBC4000011MainDiv> {
                 if (!サービスコード.equals(row.getServiceCd())) {
                     continue;
                 }
-                if (row.getTeikyoShuryoYM() == null) {
+                if (RString.isNullOrEmpty(row.getTeikyoShuryoYM())) {
                     直近データ = row;
                 } else {
                     同サービスRow.add(row);

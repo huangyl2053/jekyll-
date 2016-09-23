@@ -494,110 +494,6 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
         return false;
     }
 
-    private void getMaxKaijoYmd(JuminIdoRendoShikakuTorokuEntity entity,
-            UaFt200FindShikibetsuTaishoEntity 住民異動情報,
-            TemParamter paramter) {
-
-        FlexibleDate tmp除外解除日 = FlexibleDate.EMPTY;
-        FlexibleDate 資格喪失日 = FlexibleDate.EMPTY;
-        FlexibleDate 資格喪失届出日 = FlexibleDate.EMPTY;
-        FlexibleDate tmp除外解除届出日 = FlexibleDate.EMPTY;
-        FlexibleDate tmp他特解除日 = FlexibleDate.EMPTY;
-        FlexibleDate tmp他特解除届出日 = FlexibleDate.EMPTY;
-        FlexibleDate tmp日付01 = FlexibleDate.EMPTY;
-        FlexibleDate tmp日付02 = FlexibleDate.EMPTY;
-        FlexibleDate tmp日付11 = FlexibleDate.EMPTY;
-        FlexibleDate tmp日付12 = FlexibleDate.EMPTY;
-        if (entity.get適用除外者台帳EntityList() != null) {
-            DbT1002TekiyoJogaishaEntity dbT1002Entity = entity.get適用除外者台帳EntityList().get(0);
-            if (dbT1002Entity != null) {
-                tmp除外解除日 = nullToMin(dbT1002Entity.getKaijoYMD());
-                tmp除外解除届出日 = nullToMin(dbT1002Entity.getKaijoTodokedeYMD());
-            }
-        }
-        if (entity.get他市町村住所地特例EntityList() != null) {
-            DbT1003TashichosonJushochiTokureiEntity dbT1003Entity = entity.get他市町村住所地特例EntityList().get(0);
-            if (dbT1003Entity != null) {
-                tmp他特解除日 = dbT1003Entity.getKaijoYMD();
-                tmp他特解除届出日 = dbT1003Entity.getKaijoTodokedeYMD();
-            }
-        }
-        if (entity.get被保険者台帳EntityList() != null) {
-
-            DbT1001HihokenshaDaichoEntity dbT1001Entity = entity.get被保険者台帳EntityList().get(0);
-            if (dbT1001Entity != null) {
-                資格喪失日 = dbT1001Entity.getShikakuSoshitsuYMD();
-                資格喪失届出日 = dbT1001Entity.getShikakuSoshitsuTodokedeYMD();
-            }
-        }
-        FlexibleDate 異動年月日 = 住民異動情報.getIdoYMD();
-        FlexibleDate 異動届出年月日 = 住民異動情報.getTodokedeYMD();
-        if (tmp除外解除日.isBeforeOrEquals(tmp他特解除日)) {
-
-            tmp日付01 = tmp他特解除日;
-            tmp日付02 = tmp他特解除届出日;
-        }
-        if (tmp他特解除日.isBefore(tmp除外解除日)) {
-
-            tmp日付01 = tmp除外解除日;
-            tmp日付02 = tmp除外解除届出日;
-        }
-        if (nullToMin(異動年月日).isBefore(nullToMin(資格喪失日))) {
-
-            tmp日付11 = 資格喪失日;
-            tmp日付12 = 資格喪失届出日;
-        }
-        if (nullToMin(資格喪失日).isBeforeOrEquals(異動年月日)) {
-            tmp日付11 = 異動年月日;
-            tmp日付12 = 異動届出年月日;
-        }
-        if (tmp日付01.isBefore(tmp日付11)) {
-            paramter.set登録異動日(tmp日付11);
-            paramter.set登録届出日(tmp日付11);
-        }
-        if (nullToMin(tmp日付11).isBefore(tmp日付01)) {
-            paramter.set登録異動日(tmp日付01);
-            paramter.set登録届出日(tmp日付01);
-        }
-        getMaxKaijoYmd_tmp日付02_tmp日付01(paramter, tmp日付02, tmp日付01,
-                tmp日付12, tmp除外解除届出日, tmp他特解除届出日, 異動届出年月日, 資格喪失届出日);
-    }
-
-    private void getMaxKaijoYmd_tmp日付02_tmp日付01(TemParamter paramter,
-            FlexibleDate tmp日付02,
-            FlexibleDate tmp日付01,
-            FlexibleDate tmp日付12,
-            FlexibleDate tmp除外解除届出日,
-            FlexibleDate tmp他特解除届出日,
-            FlexibleDate 異動届出年月日,
-            FlexibleDate 資格喪失届出日) {
-        if (nullToMin(tmp日付02).equals(nullToMin(tmp日付01))) {
-            paramter.set登録異動日(tmp日付01);
-            if (tmp除外解除届出日.isBefore(tmp他特解除届出日)) {
-
-                tmp日付02 = tmp他特解除届出日;
-            }
-            if (tmp他特解除届出日.isBeforeOrEquals(tmp除外解除届出日)) {
-
-                tmp日付02 = tmp除外解除届出日;
-            }
-            if (nullToMin(異動届出年月日).isBefore(nullToMin(資格喪失届出日))) {
-                tmp日付12 = 資格喪失届出日;
-            }
-            if (nullToMin(資格喪失届出日).isBeforeOrEquals(異動届出年月日)) {
-                tmp日付12 = 異動届出年月日;
-            }
-            if (nullToMin(tmp日付02).isBefore(nullToMin(tmp日付12))) {
-
-                paramter.set登録届出日(tmp日付12);
-            }
-            if (nullToMin(tmp日付12).isBeforeOrEquals(nullToMin(tmp日付02))) {
-
-                paramter.set登録届出日(tmp日付02);
-            }
-        }
-    }
-
     /**
      * 被保台帳データがない場合の被保台帳の死亡処理を行う。
      *
@@ -802,7 +698,13 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
         entity.set転出保留作成事由コード(転出保留作成事由コード);
     }
 
-    private void searchHihodaicho(JuminIdoRendoShikakuTorokuEntity entity, RString データ抽出ＰＴＮ) {
+    /**
+     * 取得した被保険者台帳データから、異動日、枝番が最大のデータを取得する。
+     *
+     * @param entity JuminIdoRendoShikakuTorokuEntity
+     * @param データ抽出ＰＴＮ RString
+     */
+    public void searchHihodaicho(JuminIdoRendoShikakuTorokuEntity entity, RString データ抽出ＰＴＮ) {
 
         List<DbT1001HihokenshaDaichoEntity> dbT1001List = entity.get被保険者台帳EntityList();
         List<DbT1001HihokenshaDaichoEntity> list = new ArrayList<>();
@@ -828,8 +730,15 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
         entity.set被保険者台帳EntityList(list);
     }
 
+    /**
+     * 処理対象の識別コードを保有する適用除外者のデータを取得する。
+     *
+     * @param 住民異動情報 UaFt200FindShikibetsuTaishoEntity
+     * @param 被保険者台帳 DbV1001HihokenshaDaichoEntity
+     * @param entity JuminIdoRendoShikakuTorokuEntity
+     */
     @Transaction
-    private void getJogai(UaFt200FindShikibetsuTaishoEntity 住民異動情報, DbV1001HihokenshaDaichoEntity 被保険者台帳,
+    public void getJogai(UaFt200FindShikibetsuTaishoEntity 住民異動情報, DbV1001HihokenshaDaichoEntity 被保険者台帳,
             JuminIdoRendoShikakuTorokuEntity entity) {
 
         if (被保険者台帳.getHihokenshaNo() == null || 被保険者台帳.getHihokenshaNo().value().isEmpty()) {
@@ -1017,7 +926,15 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
         return builder.build();
     }
 
-    private RString getTaTokureiEdaNo(
+    /**
+     * 処理対象の識別コードを保有する他特例者のデータを取得する。
+     *
+     * @param entity JuminIdoRendoShikakuTorokuEntity
+     * @param 識別コード ShikibetsuCode
+     * @param 異動日 FlexibleDate
+     * @return 枝番
+     */
+    public RString getTaTokureiEdaNo(
             JuminIdoRendoShikakuTorokuEntity entity,
             ShikibetsuCode 識別コード,
             FlexibleDate 異動日) {
@@ -1301,7 +1218,14 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
         }
     }
 
-    private DbT1004ShisetsuNyutaishoEntity searchShisetsu(List<DbT1004ShisetsuNyutaishoEntity> listDbT1004, RString 台帳種別) {
+    /**
+     * 取得した施設入退所データから、指定の施設区分である入所日が最大のデータを取得する。
+     *
+     * @param listDbT1004 List<DbT1004ShisetsuNyutaishoEntity>
+     * @param 台帳種別 RString
+     * @return DbT1004ShisetsuNyutaishoEntity
+     */
+    public DbT1004ShisetsuNyutaishoEntity searchShisetsu(List<DbT1004ShisetsuNyutaishoEntity> listDbT1004, RString 台帳種別) {
         Collections.sort(listDbT1004, new JuminIdoRendoShikakuSoshitsuShiboKyoTu.Comparators());
         for (DbT1004ShisetsuNyutaishoEntity entity : listDbT1004) {
             if (台帳種別.equals(entity.getDaichoShubetsu())) {
@@ -1311,8 +1235,15 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
         return null;
     }
 
+    /**
+     * 処理対象の識別コードを保有する他特例者のデータを取得する。
+     *
+     * @param 住民異動情報 UaFt200FindShikibetsuTaishoEntity
+     * @param 被保険者台帳 DbV1001HihokenshaDaichoEntity
+     * @param entity JuminIdoRendoShikakuTorokuEntity
+     */
     @Transaction
-    private void getGetTaTokurei(UaFt200FindShikibetsuTaishoEntity 住民異動情報, DbV1001HihokenshaDaichoEntity 被保険者台帳,
+    public void getGetTaTokurei(UaFt200FindShikibetsuTaishoEntity 住民異動情報, DbV1001HihokenshaDaichoEntity 被保険者台帳,
             JuminIdoRendoShikakuTorokuEntity entity) {
 
         if (被保険者台帳.getHihokenshaNo() == null || 被保険者台帳.getHihokenshaNo().value().isEmpty()) {
@@ -1324,8 +1255,15 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
         }
     }
 
+    /**
+     * 処理対象の識別コードを保有する施設入退所のデータを取得する。
+     *
+     * @param 住民異動情報 UaFt200FindShikibetsuTaishoEntity
+     * @param 被保険者台帳 DbV1001HihokenshaDaichoEntity
+     * @param entity JuminIdoRendoShikakuTorokuEntity
+     */
     @Transaction
-    private void getGetShisetsu(UaFt200FindShikibetsuTaishoEntity 住民異動情報, DbV1001HihokenshaDaichoEntity 被保険者台帳,
+    public void getGetShisetsu(UaFt200FindShikibetsuTaishoEntity 住民異動情報, DbV1001HihokenshaDaichoEntity 被保険者台帳,
             JuminIdoRendoShikakuTorokuEntity entity) {
 
         if (被保険者台帳.getHihokenshaNo() == null || 被保険者台帳.getHihokenshaNo().value().isEmpty()) {
@@ -1337,8 +1275,15 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
         }
     }
 
+    /**
+     * 処理対象の識別コードを保有する被保険者台帳のデータを取得する。
+     *
+     * @param 住民異動情報 UaFt200FindShikibetsuTaishoEntity
+     * @param 被保険者台帳 DbV1001HihokenshaDaichoEntity
+     * @param entity JuminIdoRendoShikakuTorokuEntity
+     */
     @Transaction
-    private void getHihokensyadaicho(UaFt200FindShikibetsuTaishoEntity 住民異動情報, DbV1001HihokenshaDaichoEntity 被保険者台帳,
+    public void getHihokensyadaicho(UaFt200FindShikibetsuTaishoEntity 住民異動情報, DbV1001HihokenshaDaichoEntity 被保険者台帳,
             JuminIdoRendoShikakuTorokuEntity entity) {
         if (被保険者台帳.getHihokenshaNo() == null || 被保険者台帳.getHihokenshaNo().value().isEmpty()) {
 
@@ -1522,7 +1467,15 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
         return builder.build().toEntity();
     }
 
-    private RString getJogaiEdaNo(JuminIdoRendoShikakuTorokuEntity entity,
+    /**
+     * 同一識別コード、同一異動日のデータにおける最大枝番＋１を取得する。
+     *
+     * @param entity JuminIdoRendoShikakuTorokuEntity
+     * @param 識別コード ShikibetsuCode
+     * @param 異動日 FlexibleDate
+     * @return 枝番
+     */
+    public RString getJogaiEdaNo(JuminIdoRendoShikakuTorokuEntity entity,
             ShikibetsuCode 識別コード,
             FlexibleDate 異動日) {
         RString 枝番;
@@ -1715,6 +1668,120 @@ public class JuminIdoRendoShikakuSoshitsuShiboKyoTu {
         entity.set適用除外者台帳EntityList(list適用除外者台帳);
         entity.set介護保険施設入退所EntityList(list施設入退所);
         return false;
+    }
+
+    /**
+     * 適用除外解除日、適用除外解除届出日、他特解除日、他特解除届出日 、
+     * 異動年月日、異動届出年月日、資格喪失日、資格喪失届出日の中で最大の異動日、届出日を取得する。
+     *
+     * @param entity JuminIdoRendoShikakuTorokuEntity
+     * @param 住民異動情報 UaFt200FindShikibetsuTaishoEntity
+     * @param paramter TemParamter
+     */
+    public void getMaxKaijoYmd(
+            JuminIdoRendoShikakuTorokuEntity entity,
+            UaFt200FindShikibetsuTaishoEntity 住民異動情報,
+            TemParamter paramter) {
+
+        FlexibleDate tmp除外解除日 = FlexibleDate.EMPTY;
+        FlexibleDate 資格喪失日 = FlexibleDate.EMPTY;
+        FlexibleDate 資格喪失届出日 = FlexibleDate.EMPTY;
+        FlexibleDate tmp除外解除届出日 = FlexibleDate.EMPTY;
+        FlexibleDate tmp他特解除日 = FlexibleDate.EMPTY;
+        FlexibleDate tmp他特解除届出日 = FlexibleDate.EMPTY;
+        FlexibleDate tmp日付01 = FlexibleDate.EMPTY;
+        FlexibleDate tmp日付02 = FlexibleDate.EMPTY;
+        FlexibleDate tmp日付11 = FlexibleDate.EMPTY;
+        FlexibleDate tmp日付12 = FlexibleDate.EMPTY;
+        if (entity.get適用除外者台帳EntityList() != null) {
+            DbT1002TekiyoJogaishaEntity dbT1002Entity = entity.get適用除外者台帳EntityList().get(0);
+            if (dbT1002Entity != null) {
+                tmp除外解除日 = nullToMin(dbT1002Entity.getKaijoYMD());
+                tmp除外解除届出日 = nullToMin(dbT1002Entity.getKaijoTodokedeYMD());
+            }
+        }
+        if (entity.get他市町村住所地特例EntityList() != null) {
+            DbT1003TashichosonJushochiTokureiEntity dbT1003Entity = entity.get他市町村住所地特例EntityList().get(0);
+            if (dbT1003Entity != null) {
+                tmp他特解除日 = dbT1003Entity.getKaijoYMD();
+                tmp他特解除届出日 = dbT1003Entity.getKaijoTodokedeYMD();
+            }
+        }
+        if (entity.get被保険者台帳EntityList() != null) {
+
+            DbT1001HihokenshaDaichoEntity dbT1001Entity = entity.get被保険者台帳EntityList().get(0);
+            if (dbT1001Entity != null) {
+                資格喪失日 = dbT1001Entity.getShikakuSoshitsuYMD();
+                資格喪失届出日 = dbT1001Entity.getShikakuSoshitsuTodokedeYMD();
+            }
+        }
+        FlexibleDate 異動年月日 = 住民異動情報.getIdoYMD();
+        FlexibleDate 異動届出年月日 = 住民異動情報.getTodokedeYMD();
+        if (tmp除外解除日.isBeforeOrEquals(tmp他特解除日)) {
+
+            tmp日付01 = tmp他特解除日;
+            tmp日付02 = tmp他特解除届出日;
+        }
+        if (tmp他特解除日.isBefore(tmp除外解除日)) {
+
+            tmp日付01 = tmp除外解除日;
+            tmp日付02 = tmp除外解除届出日;
+        }
+        if (nullToMin(異動年月日).isBefore(nullToMin(資格喪失日))) {
+
+            tmp日付11 = 資格喪失日;
+            tmp日付12 = 資格喪失届出日;
+        }
+        if (nullToMin(資格喪失日).isBeforeOrEquals(異動年月日)) {
+            tmp日付11 = 異動年月日;
+            tmp日付12 = 異動届出年月日;
+        }
+        if (tmp日付01.isBefore(tmp日付11)) {
+            paramter.set登録異動日(tmp日付11);
+            paramter.set登録届出日(tmp日付11);
+        }
+        if (nullToMin(tmp日付11).isBefore(tmp日付01)) {
+            paramter.set登録異動日(tmp日付01);
+            paramter.set登録届出日(tmp日付01);
+        }
+        getMaxKaijoYmd_tmp日付02_tmp日付01(paramter, tmp日付02, tmp日付01,
+                tmp日付12, tmp除外解除届出日, tmp他特解除届出日, 異動届出年月日, 資格喪失届出日);
+    }
+
+    private void getMaxKaijoYmd_tmp日付02_tmp日付01(
+            TemParamter paramter,
+            FlexibleDate tmp日付02,
+            FlexibleDate tmp日付01,
+            FlexibleDate tmp日付12,
+            FlexibleDate tmp除外解除届出日,
+            FlexibleDate tmp他特解除届出日,
+            FlexibleDate 異動届出年月日,
+            FlexibleDate 資格喪失届出日) {
+        if (nullToMin(tmp日付02).equals(nullToMin(tmp日付01))) {
+            paramter.set登録異動日(tmp日付01);
+            if (tmp除外解除届出日.isBefore(tmp他特解除届出日)) {
+
+                tmp日付02 = tmp他特解除届出日;
+            }
+            if (tmp他特解除届出日.isBeforeOrEquals(tmp除外解除届出日)) {
+
+                tmp日付02 = tmp除外解除届出日;
+            }
+            if (nullToMin(異動届出年月日).isBefore(nullToMin(資格喪失届出日))) {
+                tmp日付12 = 資格喪失届出日;
+            }
+            if (nullToMin(資格喪失届出日).isBeforeOrEquals(異動届出年月日)) {
+                tmp日付12 = 異動届出年月日;
+            }
+            if (nullToMin(tmp日付02).isBefore(nullToMin(tmp日付12))) {
+
+                paramter.set登録届出日(tmp日付12);
+            }
+            if (nullToMin(tmp日付12).isBeforeOrEquals(nullToMin(tmp日付02))) {
+
+                paramter.set登録届出日(tmp日付02);
+            }
+        }
     }
 
     private FlexibleDate nullToMin(FlexibleDate date) {

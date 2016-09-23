@@ -56,9 +56,9 @@
             ,居宅サービス計画."todokedeYMD" AS 居宅サービス計画_todokedeYMD
             ,居宅サービス計画."tekiyoKaishiYMD" AS 居宅サービス計画_tekiyoKaishiYMD
             ,居宅サービス計画."tekiyoShuryoYMD" AS 居宅サービス計画_tekiyoShuryoYMD
-            ,居宅サービス計画."keikakuJigyoshaNo" AS 居宅サービス計画_keikakuJigyoshaNo
+            ,居宅サービス計画."事業者番号" AS 居宅サービス計画_keikakuJigyoshaNo
             ,居宅サービス計画."sakuseiKubunCode" AS 居宅サービス計画_sakuseiKubunCode
-            ,居宅サービス計画."電話番号" AS 居宅サービス計画_jigyoshaTelNo
+            ,居宅サービス計画."事業者電話番号" AS 居宅サービス計画_jigyoshaTelNo
             ,居宅サービス計画."変更年月日" AS 居宅サービス計画_jigyoshaHenkoYMD
             ,居宅サービス計画."事業者名称" AS 居宅サービス計画_jigyoshaName
         FROM
@@ -99,9 +99,9 @@
                 ,A."taishoYM"
                 ,A."tekiyoKaishiYMD"
                 ,A."tekiyoShuryoYMD"
-                ,A."keikakuJigyoshaNo"
+                ,A."事業者番号"
                 ,A."sakuseiKubunCode"
-                ,A."電話番号"
+                ,A."事業者電話番号"
                 ,A."変更年月日"
                 ,A."事業者名称"
                 ,ROW_NUMBER() OVER (PARTITION BY 居宅給付計画届出. "hihokenshaNo",
@@ -117,11 +117,11 @@
                     ,居宅給付計画事業者作成."tekiyoKaishiYMD"
                     ,居宅給付計画事業者作成."tekiyoShuryoYMD"
                     ,居宅給付計画事業者作成."jigyoshaHenkoYMD" AS 変更年月日
-                    ,居宅給付計画事業者作成."keikakuJigyoshaNo"
+                    ,居宅給付計画事業者作成."keikakuJigyoshaNo" AS 事業者番号
                     ,居宅給付計画事業者作成."sakuseiKubunCode"
                     ,CASE 居宅給付計画事業者作成."sakuseiKubunCode"
                         WHEN '4' THEN B2."事業者電話番号"
-                        ELSE B1."事業者電話番号" END AS 電話番号
+                        ELSE B1."事業者電話番号" END AS 事業者電話番号
                     ,CASE 居宅給付計画事業者作成."sakuseiKubunCode"
                         WHEN '4' THEN B2."事業者名称"
                         ELSE B1."事業者名称" END AS 事業者名称

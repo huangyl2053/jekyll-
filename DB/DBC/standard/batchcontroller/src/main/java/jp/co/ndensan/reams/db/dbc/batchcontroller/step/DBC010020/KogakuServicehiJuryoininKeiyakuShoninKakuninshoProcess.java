@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC010020;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc010010.JuryoIninShoninKakuninshoIchiranPageBreak;
 import jp.co.ndensan.reams.db.dbc.business.report.dbc100031.KogakuServiceHiJyuryoItakuKeiyakuKakuninShoReport;
 import jp.co.ndensan.reams.db.dbc.business.report.dbc200013.JuryoIninShoninKakuninshoIchiranReport;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakuservicehijuryoininkeiyakushoninkakuninsho.KogakuServicehiJuryoininProcessParameter;
@@ -145,7 +144,7 @@ public class KogakuServicehiJuryoininKeiyakuShoninKakuninshoProcess extends Batc
             一覧表ReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200013.getReportId().value()).create();
         } else {
             一覧表ReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200013.getReportId().value()).addBreak(
-                    new JuryoIninShoninKakuninshoIchiranPageBreak(breakProcessCore.改頁項())).create();
+                    new KogakuServicehiJuryoininKeiyakuShoninKakuninshoPageBreak(breakProcessCore.改頁項())).create();
         }
         一覧表SourceWriter = new ReportSourceWriter<>(一覧表ReportWriter);
         確認書ReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100031.getReportId().value()).create();
