@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -256,7 +257,7 @@ public class KogakuServicehiHanteiDoIchiranhyoSakuseiProcess extends BatchKeyBre
         csvEntity.set被保険者カナ氏名(出力データ.get被保険者_宛名カナ名称());
         csvEntity.set被保険者氏名(出力データ.get被保険者_宛名名称());
         csvEntity.set町域コード(出力データ.get被保険者_町域コード());
-        csvEntity.set郵便番号(出力データ.get被保険者_郵便番号());
+        csvEntity.set郵便番号(get郵便番号(new YubinNo(出力データ.get被保険者_郵便番号())));
         csvEntity.set住所(編集住所(出力データ.get被保険者_住所(), 出力データ.get被保険者_番地(), 出力データ.get被保険者_方書()));
         csvEntity.set行政区コード(出力データ.get被保険者_行政区コード());
         csvEntity.set行政区(出力データ.get被保険者_行政区名());
@@ -311,5 +312,12 @@ public class KogakuServicehiHanteiDoIchiranhyoSakuseiProcess extends BatchKeyBre
             return entity.getColumnValue();
         }
         return RString.EMPTY;
+    }
+
+    private RString get郵便番号(YubinNo yubinNo) {
+        if (yubinNo == null) {
+            return RString.EMPTY;
+        }
+        return yubinNo.getEditedYubinNo();
     }
 }
