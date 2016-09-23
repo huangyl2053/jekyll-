@@ -26,4 +26,5 @@ public class ShotokuJohoChushutsuGamenParameter {
     private RString 出力順ID;
     private RDateTime 共有ファイルID;
     private RString 共有ファイル名;
+    private RString ファイル名;
 }
