@@ -34,10 +34,11 @@ public class NinteishaListSakuseiManager {
      * @param eucCsvEntity 出力CSV情報
      * @param t SQL取得情報
      * @param 連番 連番
+     * @param is日付スラッシュ編集 is日付スラッシュ編集
      */
-    public void 連番ありCSV情報設定(KakuninListCsvEntity eucCsvEntity, NinteishaListSakuseiEntity t, int 連番) {
+    public void 連番ありCSV情報設定(KakuninListCsvEntity eucCsvEntity, NinteishaListSakuseiEntity t, int 連番, boolean is日付スラッシュ編集) {
         NinteishaListSakuseiBusiness bus = new NinteishaListSakuseiBusiness();
-        bus.setEucCsvEntity(eucCsvEntity, t, 連番);
+        bus.setEucCsvEntity(eucCsvEntity, t, 連番, is日付スラッシュ編集);
     }
 
     /**
@@ -45,9 +46,10 @@ public class NinteishaListSakuseiManager {
      *
      * @param eucCsvEntity 出力CSV情報
      * @param t SQL取得情報
+     * @param is日付スラッシュ編集 is日付スラッシュ編集
      */
-    public void 連番なしCSV情報設定(KakuninListNoRenbanCsvEntity eucCsvEntity, NinteishaListSakuseiEntity t) {
+    public void 連番なしCSV情報設定(KakuninListNoRenbanCsvEntity eucCsvEntity, NinteishaListSakuseiEntity t, boolean is日付スラッシュ編集) {
         NinteishaListSakuseiNoRenbaBusiness bus = new NinteishaListSakuseiNoRenbaBusiness();
-        bus.setEucCsvEntity(eucCsvEntity, t);
+        bus.setEucCsvEntity(eucCsvEntity, t, is日付スラッシュ編集);
     }
 }
