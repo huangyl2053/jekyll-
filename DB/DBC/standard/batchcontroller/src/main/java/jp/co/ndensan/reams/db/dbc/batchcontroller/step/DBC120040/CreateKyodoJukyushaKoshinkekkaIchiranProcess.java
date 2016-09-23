@@ -59,7 +59,7 @@ public class CreateKyodoJukyushaKoshinkekkaIchiranProcess extends BatchKeyBreakB
     private static final List<RString> PAGE_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(
             new RString(KyodoJukyushaKoshinkekkaIchiranReportSource.ReportSourceFields.hokenshaNo.name())));
     private static final ReportId REPORT_DBC200057 = ReportIdDBC.DBC200057.getReportId();
-    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBC200057"));
+    private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBC200056"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private KyodoJukyushaIchiranCSVData kyodoJukyushaIchiranCSVData;
@@ -86,7 +86,7 @@ public class CreateKyodoJukyushaKoshinkekkaIchiranProcess extends BatchKeyBreakB
         parameter.setSubGyomuCode(SubGyomuCode.DBC介護給付);
         parameter.setChohyoBunruiID(REPORT_DBC200057.value());
         parameter.setKanriNendo(new RString("0000"));
-        parameter.setKomokuName(ChohyoSeigyoHanyoKomokuMei.帳票タイトル_定期.get名称());
+        parameter.setKomokuName(ChohyoSeigyoHanyoKomokuMei.帳票タイトル.get名称());
         帳票タイトル = mapper.帳票タイトルの取得(parameter);
         kyodoJukyushaIchiranCSVData = new KyodoJukyushaIchiranCSVData();
         作成日時 = RDate.getNowDateTime();
@@ -95,7 +95,7 @@ public class CreateKyodoJukyushaKoshinkekkaIchiranProcess extends BatchKeyBreakB
         識別コードList = new ArrayList<>();
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.Euc, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         spoolWorkPath = manager.getEucOutputDirectry();
-        eucFilename = Path.combinePath(spoolWorkPath, new RString("DBC200057_KyodoJukyushaIchiran.csv"));
+        eucFilename = Path.combinePath(spoolWorkPath, new RString("DBC200056_KyodoJukyushaKoshinkekkaIchiran.csv"));
         eucCsvWriterJunitoJugo = new CsvWriter.InstanceBuilder(eucFilename).
                 setEncode(Encode.SJIS)
                 .setDelimiter(EUC_WRITER_DELIMITER)
