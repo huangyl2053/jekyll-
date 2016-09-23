@@ -62,7 +62,13 @@ public enum JyukyushaDaichoDivSpec implements IPredicate<JyukyushaDaichoDiv> {
                     Konkaitotime = div.getChushutsuJyouken().getTaishouKikan().getTxtKonkaiymdtime().getToTimeValue();
                     YMDHMS konkaifromYMDHMS = new YMDHMS(Konkaifromdate, Konkaifromtime);
                     YMDHMS konkaitoYMDHMS = new YMDHMS(Konkaitodate, Konkaitotime);
-                    return !konkaitoYMDHMS.isBefore(konkaifromYMDHMS) && !Konkaitotime.isBefore(Konkaifromtime);
+                    boolean konkaidate = false;
+                    if (Konkaifromdate.equals(Konkaitodate)) {
+                        konkaidate = Konkaifromtime.isBefore(Konkaitotime);
+                    } else {
+                        konkaidate = konkaifromYMDHMS.isBeforeOrEquals(konkaitoYMDHMS);
+                    }
+                    return konkaidate;
                 }
             },
     被保険者番号非空チェック {
