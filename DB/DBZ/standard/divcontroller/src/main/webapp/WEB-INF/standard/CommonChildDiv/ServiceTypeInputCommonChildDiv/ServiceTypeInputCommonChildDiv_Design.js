@@ -11,6 +11,10 @@ var DBZ;
             Events.onChange_txtServiceType = function () {
                 return "onChange_txtServiceType";
             };
+
+            Events.onBeforeDialg = function () {
+                return "onBeforeDialg";
+            };
             return Events;
         })();
         ServiceTypeInputCommonChildDiv.Events = Events;
