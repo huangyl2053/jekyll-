@@ -258,13 +258,7 @@ public class ShotokuDankaibetsuShunoritsuIchiranHandler {
             parameter.set市町村情報(市町村情報);
             parameter.set旧市町村情報(旧市町村情報);
         }
-        RString 完納出力 = NUM_0;
-        for (RString string : 完納出力区分) {
-            if (string.equals(KEY_0)) {
-                完納出力 = NUM_1;
-            }
-        }
-        parameter.set完納出力区分(完納出力);
+        parameter.set完納出力区分(完納出力区分);
         return parameter;
     }
 
