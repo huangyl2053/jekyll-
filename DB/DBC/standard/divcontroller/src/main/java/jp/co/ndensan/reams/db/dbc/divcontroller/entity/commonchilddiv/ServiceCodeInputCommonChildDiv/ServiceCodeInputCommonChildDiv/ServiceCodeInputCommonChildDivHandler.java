@@ -60,6 +60,9 @@ public class ServiceCodeInputCommonChildDivHandler {
      */
     public void onBeforeOpenDialog_btnSearch() {
         ServiceCodeModel serviceCode = DataPassingConverter.deserialize(div.getServiceCodeModel(), ServiceCodeModel.class);
+        if (serviceCode == null) {
+            serviceCode = new ServiceCodeModel();
+        }
         serviceCode.setサービス種類コード(div.getTxtServiceCode1().getValue());
         serviceCode.setサービス項目コード(div.getTxtServiceCode2().getValue());
         div.setServiceCodeModel(DataPassingConverter.serialize(serviceCode));
