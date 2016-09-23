@@ -322,7 +322,9 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
         reportList.set事業者名称(entity.get事業者名称());
         if (entity.get対象年月() == null) {
             reportList.set備考1(定値_届出なし);
-        } else if (entity.get適用終了年月日().isBefore(processParameter.getKijyunbi())) {
+        } else if (entity.get適用終了年月日() != null
+                && !entity.get適用終了年月日().isEmpty()
+                && entity.get適用終了年月日().isBefore(processParameter.getKijyunbi())) {
             reportList.set備考1(定値_有効なし);
         }
         if (!RS_3.equals(entity.get作成区分コード())
