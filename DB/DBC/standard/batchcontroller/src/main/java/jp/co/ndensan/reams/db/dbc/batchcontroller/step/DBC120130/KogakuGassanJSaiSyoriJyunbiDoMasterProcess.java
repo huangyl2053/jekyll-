@@ -70,7 +70,7 @@ public class KogakuGassanJSaiSyoriJyunbiDoMasterProcess extends BatchProcessBase
         DbT3070KogakuGassanJikoFutanGakuEntity 高額合算自己負担額entity = entity.get高額合算自己負担額entity();
         if (高額合算自己負担額一時entity != null && 高額合算自己負担額entity != null) {
             高額合算自己負担額TBLマスタ更新(高額合算自己負担額一時entity);
-            高額合算自己負担額一時TBLマスタ更新(高額合算自己負担額entity, 高額合算自己負担額一時entity);
+            高額合算自己負担額一時TBLマスタ更新(高額合算自己負担額entity);
         } else {
             処理結果リスト一時に登録(高額合算自己負担額一時entity);
         }
@@ -84,8 +84,7 @@ public class KogakuGassanJSaiSyoriJyunbiDoMasterProcess extends BatchProcessBase
     }
 
     private void 高額合算自己負担額一時TBLマスタ更新(
-            DbT3070KogakuGassanJikoFutanGakuEntity dbt3070Entity,
-            DbWT37H1KogakuGassanaJikofutangakuTempEntity dbwt37H1Entity) {
+            DbT3070KogakuGassanJikoFutanGakuEntity dbt3070Entity) {
         DbWT37H1KogakuGassanaJikofutangakuTempEntity entity = new DbWT37H1KogakuGassanaJikofutangakuTempEntity();
         entity.setRirekiNo(dbt3070Entity.getRirekiNo());
         entity.setKoshinFlag(true);
