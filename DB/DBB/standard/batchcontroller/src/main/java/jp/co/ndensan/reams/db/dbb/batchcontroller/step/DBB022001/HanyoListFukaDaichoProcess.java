@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbbt22001;
+package jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB022001;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +14,10 @@ import jp.co.ndensan.reams.db.dbb.definition.batchprm.hanyolist.fukadaicho.Kijun
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.hanyolist.fukadaicho.ShikakuKubun;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHohoKibetsu;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.hanyolistfukadaicho.HanyoListFukaDaichoProcessParameter;
+import jp.co.ndensan.reams.db.dbb.entity.db.relate.hanyolistfukadaicho.HanyoListFukaDaichoCsvEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.hanyolistfukadaicho.HanyoListFukaDaichoEntity;
-import jp.co.ndensan.reams.db.dbb.entity.db.relate.hanyolistfukadaicho.HanyoListFukaDaichoNoRenbanCsvEntity;
 import jp.co.ndensan.reams.db.dbb.entity.db.relate.hanyolistfukadaicho.HanyoListFukaDaichoTmpEntity;
-import jp.co.ndensan.reams.db.dbb.service.core.hanyolistfukadaicho.HanyoListFukaDaichoCsvNoRenbanEditor;
+import jp.co.ndensan.reams.db.dbb.service.core.hanyolistfukadaicho.HanyoListFukaDaichoCsvEditor;
 import jp.co.ndensan.reams.db.dbb.service.core.kanri.HokenryoDankaiSettings;
 import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoDonyuKeitai;
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
@@ -79,7 +79,7 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
  *
  * @reamsid_L DBB-1900-030 zhaowei
  */
-public class HanyoListFukaDaichoNoRenbanProcess extends BatchKeyBreakBase<HanyoListFukaDaichoTmpEntity> {
+public class HanyoListFukaDaichoProcess extends BatchKeyBreakBase<HanyoListFukaDaichoTmpEntity> {
 
     private static final RString ID = new RString("jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate."
             + "hanyolistfukadaicho.IHanyoListFukaDaichoMapper.getHanyoListFukaDaicho");
@@ -183,15 +183,16 @@ public class HanyoListFukaDaichoNoRenbanProcess extends BatchKeyBreakBase<HanyoL
     private static final RString 地区3SHOW = new RString("　　　地区3：");
     private static final RString 保険者SHOW = new RString("　　　保険者：");
     private static final int INDEX_ZERO = 0;
-    private HanyoListFukaDaichoCsvNoRenbanEditor csvEditor;
+    private HanyoListFukaDaichoCsvEditor csvEditor;
     private HanyoListFukaDaichoProcessParameter processParameter;
     private List<PersonalData> personalDataList;
     private HokenryoDankaiList 保険料段階リスト;
-    List<KoseiShichosonMaster> 構成市町村マスタlist;
+    private List<KoseiShichosonMaster> 構成市町村マスタlist;
     private Association 地方公共団体;
     private FileSpoolManager manager;
     private YMDHMS システム日時;
     private RString eucFilePath;
+    private Decimal 連番;
 
     private int flag;
     private HokenryoDankaiSettings hokenryoDankaiSettings;
@@ -200,14 +201,15 @@ public class HanyoListFukaDaichoNoRenbanProcess extends BatchKeyBreakBase<HanyoL
     private HanyoListFukaDaichoEntity 賦課台帳;
     private HanyoListFukaDaichoProcessCore breakProcessCore;
     @BatchWriter
-    private CsvWriter<HanyoListFukaDaichoNoRenbanCsvEntity> csvWriter;
+    private CsvWriter<HanyoListFukaDaichoCsvEntity> csvWriter;
 
     @Override
     protected void initialize() {
         flag = 0;
+        連番 = Decimal.ONE;
         出力順 = RString.EMPTY;
         システム日時 = YMDHMS.now();
-        csvEditor = new HanyoListFukaDaichoCsvNoRenbanEditor();
+        csvEditor = new HanyoListFukaDaichoCsvEditor();
         personalDataList = new ArrayList<>();
         地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         hokenryoDankaiSettings = HokenryoDankaiSettings.createInstance();
@@ -293,7 +295,7 @@ public class HanyoListFukaDaichoNoRenbanProcess extends BatchKeyBreakBase<HanyoL
         }
 
         if ((personalDataList == null || personalDataList.isEmpty()) && processParameter.is項目名付加()) {
-            csvWriter.writeLine(new HanyoListFukaDaichoNoRenbanCsvEntity());
+            csvWriter.writeLine(new HanyoListFukaDaichoCsvEntity());
         }
         csvWriter.close();
         if (personalDataList == null || personalDataList.isEmpty()) {
@@ -307,8 +309,9 @@ public class HanyoListFukaDaichoNoRenbanProcess extends BatchKeyBreakBase<HanyoL
 
     private void csvファイル出力() {
         if (賦課台帳 != null && is出力データ(賦課台帳)) {
-            csvWriter.writeLine(csvEditor.editor(賦課台帳, processParameter, 保険料段階リスト, 構成市町村マスタlist,
+            csvWriter.writeLine(csvEditor.editor(賦課台帳, processParameter, 連番, 保険料段階リスト, 構成市町村マスタlist,
                     new FlexibleDate(システム日時.getDate().toDateString())));
+            連番 = 連番.add(Decimal.ONE);
             personalDataList.add(toPersonalData(賦課台帳));
         }
     }
