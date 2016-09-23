@@ -2,7 +2,7 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- @reamsid_L DBC-2640-010 zhengshenlei -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.kogakugassanjikofutangaku.IKogakuGassanJSaiSyoriJyunbiMapper">
-    <update id="do再処理準備" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc120110.KogakuGassanJikofutangakuDoMasterTorokuParameter" >
+<!--    <update id="do再処理準備" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc120110.KogakuGassanJikofutangakuDoMasterTorokuParameter" >
         UPDATE rgdb."DbT3070KogakuGassanJikoFutanGaku"
         SET    "jikoFutanSeiriNo" = '',
                "shomeisho_UketoriYM" = ''
@@ -528,7 +528,7 @@
         <result property="バッチ補正実施年月日" column="dbT3070_batchHoseiJissiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="リアル補正実施年月日" column="dbT3070_realHoseiJissiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
     </resultMap>
-    <!--DbWT37H1KogakuGassanaJikofutangakuTempEntity-->
+    DbWT37H1KogakuGassanaJikofutangakuTempEntity
         <resultMap id="ResultMap_DbWT37H1KogakuGassanaJikofutangakuTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakugassanjikofutangakushomeishoin.DbWT37H1KogakuGassanaJikofutangakuTempEntity" autoMapping="true">
         <id property="renban" column="dbWT37H1_renban"/>
         <id property="hokenshaNoIn" column="dbWT37H1_hokenshaNoIn" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
@@ -696,5 +696,5 @@
         <result property="自己負担額合計_うち70_74歳" column="dbWT37H1_gokei_70_74JikoFutanGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="高額介護サービス費" column="dbWT37H1_gokei_Under70KogakuShikyuGaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
         <result property="識別コード" column="dbWT0001_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
-    </resultMap>
+    </resultMap>-->
 </mapper>
