@@ -41,7 +41,7 @@ public class DBC8010001MainValidationHandler {
     /**
      * 振込指定日休日チェック。
      *
-     * @param pairs
+     * @param pairs ValidationMessageControlPairs
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs validateFor振込指定日休日(ValidationMessageControlPairs pairs) {
@@ -57,7 +57,7 @@ public class DBC8010001MainValidationHandler {
     /**
      * 振込指定日過去日チェック。
      *
-     * @param pairs
+     * @param pairs ValidationMessageControlPairs
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs validateFor振込指定日過去日(ValidationMessageControlPairs pairs) {
@@ -73,7 +73,7 @@ public class DBC8010001MainValidationHandler {
     /**
      * 正・振込指定日休日チェック。
      *
-     * @param pairs
+     * @param pairs ValidationMessageControlPairs
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs validateFor正振込指定日休日(ValidationMessageControlPairs pairs) {
@@ -89,12 +89,12 @@ public class DBC8010001MainValidationHandler {
     /**
      * 正・振込指定日過去日チェック。
      *
-     * @param pairs
+     * @param pairs ValidationMessageControlPairs
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs validateFor正振込指定日過去日(ValidationMessageControlPairs pairs) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
-        NoInputMessages checkMessage = new NoInputMessages(DbzErrorMessages.期間が不正_過去日付不可,div.getTxtCorrectFurikomiShiteiYMD().getValue().toString(),RDate.getNowDate().toString());
+        NoInputMessages checkMessage = new NoInputMessages(DbzErrorMessages.期間が不正_過去日付不可, div.getTxtCorrectFurikomiShiteiYMD().getValue().toString(), RDate.getNowDate().toString());
         messages.add(ValidateChain.validateStart(div).ifNot(DBC8010001MainDivSpec.正振込指定日過去日チェック)
                 .thenAdd(checkMessage).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().add(checkMessage,
@@ -104,23 +104,26 @@ public class DBC8010001MainValidationHandler {
 
     /**
      * 今回対象日・開始日未入力チェック。
+     *
      * @return boolean
      */
     public boolean validateFor今回対象日開始日未入力() {
         return null == div.getTxtKonkaiTaishoYmdRange().getFromValue() || RString.EMPTY.equals(div.getTxtKonkaiTaishoYmdRange().getFromValue().toDateString());
     }
-    
+
     /**
      * 決定者受取年月・開始年月未入力チェック。
+     *
      * @return boolean
      */
-    public boolean validateFor決定者受取年月開始年月未入力(){
+    public boolean validateFor決定者受取年月開始年月未入力() {
         return null == div.getTxtKetteishaUketoriYmRange().getFromValue() || RString.EMPTY.equals(div.getTxtKetteishaUketoriYmRange().getFromValue().toDateString());
     }
-    
+
     /**
      * 再処理対象データ存在チェック。
-     * @param pairs
+     *
+     * @param pairs ValidationMessageControlPairs
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs validateFor再処理対象データ存在(ValidationMessageControlPairs pairs) {
@@ -132,8 +135,8 @@ public class DBC8010001MainValidationHandler {
                 div.getTxtFurikomiShiteiYMD()).build().check(messages));
         return pairs;
     }
-    
-    public ValidationMessageControlPairs validateFor修正対象データ存在(ValidationMessageControlPairs pairs){
+
+    public ValidationMessageControlPairs validateFor修正対象データ存在(ValidationMessageControlPairs pairs) {
         IValidationMessages messages = ValidationMessagesFactory.createInstance();
         NoInputMessages checkMessage = new NoInputMessages(DbcErrorMessages.口座振込データ登録なし_修正不可);
         messages.add(ValidateChain.validateStart(div).ifNot(DBC8010001MainDivSpec.修正対象データ存在チェック)

@@ -411,7 +411,7 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
         entity.set被保険者番号10(temp_被保険者番号.substring(NUM_9));
         entity.setUketsukeYMD(shoukanbaraiShikyuEntity.get償還払支給申請().getUketsukeYMD());
         entity.setKetteiYMD(shoukanbaraiShikyuEntity.get償還払支給判定結果().getKetteiYMD());
-        entity.setShiharaiKingakuUchiwakeRiyoshabun(shoukanbaraiShikyuEntity.get償還払支給判定結果().getShiharaiKingakuUchiwakeRiyoshabun());
+        entity.setShiharaiKingakuRiyoshabun(shoukanbaraiShikyuEntity.get償還払支給判定結果().getShiharaiKingakuUchiwakeRiyoshabun());
         entity.setServiceTeikyoYM(shoukanbaraiShikyuEntity.get償還払支給判定結果().getServiceTeikyoYM());
         KyufuSHurui kyufuSHurui = getKyufuSHurui(被保険者番号, 整理番号, サービス提供年月, 差額支給対象者区分);
         entity.set給付の種類1(kyufuSHurui.get給付の種類1());

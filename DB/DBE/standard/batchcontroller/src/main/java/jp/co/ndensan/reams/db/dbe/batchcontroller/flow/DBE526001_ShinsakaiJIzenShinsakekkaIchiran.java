@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE526001.ShinsakaiJizenshinsakekkaIchiranProcess;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE526001.DBE526001_ShinsakaiJIzenShinsakekkaIchiranParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -15,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBE-1640-020 zhaoyao
  */
-public class DBE526001_ShinsakaiJIzenShinsakekkaIchiran extends BatchFlowBase<jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE526001.DBE526001_ShinsakaiJIzenShinsakekkaIchiranParameter> {
+public class DBE526001_ShinsakaiJIzenShinsakekkaIchiran extends BatchFlowBase<DBE526001_ShinsakaiJIzenShinsakekkaIchiranParameter> {
 
     private static final String JIZEN_SHINSAKEKKA_ICHIRAN = "shinsakaiJizenshinsakekkaIchiran";
 

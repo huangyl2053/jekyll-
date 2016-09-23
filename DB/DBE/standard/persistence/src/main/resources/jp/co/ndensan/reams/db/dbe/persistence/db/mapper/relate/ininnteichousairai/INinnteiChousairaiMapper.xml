@@ -4,7 +4,7 @@
 <!-- @reamsid_L DBE-0010-010 sunhaidi -->
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ininnteichousairai.INinnteiChousairaiMapper">
-    <resultMap id="result_NinnteiChousairaiEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.basic.ninnteichousairai.NinnteiChousairaiEntity">
+    <resultMap id="result_NinnteiChousairaiEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninnteichousairai.NinnteiChousairaiEntity">
         <result property="ninteichosaItakusakiCode" column="Temp_ninteichosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="jigyoshaMeisho" column="Temp_jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="waritsukeChiku" column="Temp_waritsukeChiku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChikuCodeTypeHandler"/>
@@ -96,7 +96,7 @@
         , DbT5910NinteichosaItakusakiJoho."kikanKubun"
         , DbT7051KoseiShichosonMaster."shichosonMeisho"
     </select>
-    <resultMap id="result_ChousaIn" type="jp.co.ndensan.reams.db.dbe.entity.db.basic.ninnteichousairai.NinnteiChousairaiEntity">
+    <resultMap id="result_ChousaIn" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninnteichousairai.NinnteiChousairaiEntity">
         <result property="ninteiChosainNo" column="Temp_ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="chosainShimei" column="Temp_chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="chosainKanaShimei" column="Temp_chosainKanaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -183,7 +183,7 @@
         , DbT5913ChosainJoho."chosainShikaku"
         , DbT5913ChosainJoho."chosaKanoNinzuPerMonth"
     </select>
-    <resultMap id="result_WaritsukeEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.basic.ninnteichousairai.WaritsukeEntity">
+    <resultMap id="result_WaritsukeEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninnteichousairai.WaritsukeEntity">
         <result property="koroshoIfShikibetsuCode" column="koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="hihokenshaName" column="hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
@@ -415,7 +415,7 @@
         dbT5201."iraishoShutsuryokuYMD"
     </select>
 
-    <resultMap id="getNinteichosaIraiJohoList_resultMap" type="jp.co.ndensan.reams.db.dbe.entity.db.basic.ninnteichousairai.NinteichosaIraiJohoRelateEntity">
+    <resultMap id="getNinteichosaIraiJohoList_resultMap" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninnteichousairai.NinteichosaIraiJohoRelateEntity">
         <collection property="ninteiKanryoJohoEntity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.ResultMap_DbT5105NinteiKanryoJohoEntity"/>
         <collection property="ninteichosaIraiJohoEntity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.ResultMap_DbT5201NinteichosaIraiJohoEntity"/>
     </resultMap>
@@ -611,7 +611,7 @@
         ON DbT5105NinteiKanryoJoho."dbT5105NinteiKanryoJoho_shinseishoKanriNo" = waritsuke."shinseishoKanriNo"
     </select>
 
-    <resultMap id="result_ShiteWaritsukeEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.basic.ninnteichousairai.WaritsukeEntity">
+    <resultMap id="result_ShiteWaritsukeEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninnteichousairai.WaritsukeEntity">
         <result property="koroshoIfShikibetsuCode" column="koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="hihokenshaName" column="hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
@@ -741,7 +741,7 @@
         dbT5101."chosaKubun"
     </select>
 
-    <resultMap id="result_ShiteWaritsukeSaiEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.basic.ninnteichousairai.WaritsukeEntity">
+    <resultMap id="result_ShiteWaritsukeSaiEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninnteichousairai.WaritsukeEntity">
         <result property="koroshoIfShikibetsuCode" column="koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="hihokenshaName" column="hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
@@ -902,7 +902,7 @@
         dbT5201Nintei."shinseishoKanriNo" = #{申請書管理番号}
         )
     </select>
-    <resultMap id="result_SaiChekkuhyoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.basic.ninnteichousairai.SaiChekkuhyoEntity">
+    <resultMap id="result_SaiChekkuhyoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninnteichousairai.SaiChekkuhyoEntity">
         <result property="ichijiHanteiKekkaCode" column="ichijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="nijiHanteiYMD" column="nijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="nijiHanteiYokaigoJotaiKubun" column="nijiHanteiYokaigoJotaiKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

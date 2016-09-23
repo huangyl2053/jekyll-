@@ -53,7 +53,6 @@ public class DBC130010_KokuhoShikakuIdoIn extends BatchFlowBase<DBC130010_Kokuho
     @Override
     protected void defineFlow() {
         for (RString value : getParameter().getShoriShichoson()) {
-            市町村識別ID = RString.EMPTY;
             市町村識別ID = value;
             executeStep(INS_TORIKOMIKOKUHOJYOHOTEMP);
         }
@@ -66,48 +65,48 @@ public class DBC130010_KokuhoShikakuIdoIn extends BatchFlowBase<DBC130010_Kokuho
     }
 
     @Step(INS_TORIKOMIKOKUHOJYOHOTEMP)
-    protected IBatchFlowCommand INS_TORIKOMIKOKUHOJYOHOTEMP() {
+    protected IBatchFlowCommand 取込国保情報一時表登録() {
         return loopBatch(InsTorikomiKokuhoJyohoTempProcess.class)
                 .arguments(getInsTorikomiKokuhoJyohoTempProcessParameter())
                 .define();
     }
 
     @Step(UPD_TORIKOMIKOKUHOJYOHOTEMP2)
-    protected IBatchFlowCommand UPD_TORIKOMIKOKUHOJYOHOTEMP2() {
+    protected IBatchFlowCommand 取込国保情報一時表更新() {
         return loopBatch(UpdTorikomiKokuhoJyohoTemp2Process.class)
                 .arguments(getUpdTorikomiKokuhoJyohoTemp2ProcessParameter())
                 .define();
     }
 
     @Step(UPD_TORIKOMIKOKUHOJYOHOTEMP3)
-    protected IBatchFlowCommand UPD_TORIKOMIKOKUHOJYOHOTEMP3() {
+    protected IBatchFlowCommand 取込国保情報一時表再更新() {
         return loopBatch(UpdTorikomiKokuhoJyohoTemp3Process.class)
                 .arguments(getUpdTorikomiKokuhoJyohoTemp3ProcessParameter())
                 .define();
     }
 
     @Step(INS_KOKUHOSHIKAKUJYOHOTEMP)
-    protected IBatchFlowCommand INS_KOKUHOSHIKAKUJYOHOTEMP() {
+    protected IBatchFlowCommand 国保資格情報インポート用一時表登録() {
         return loopBatch(InsKokuhoShikakuJyohoTempProcess.class)
                 .arguments(getInsKokuhoShikakuJyohoTempProcessParameter())
                 .define();
     }
 
     @Step(INS_KOKUHOSHIKAKUJYOHO)
-    protected IBatchFlowCommand INS_KOKUHOSHIKAKUJYOHO() {
+    protected IBatchFlowCommand 国保資格情報に登録() {
         return loopBatch(InsKokuhoShikakuJyohoProcess.class)
                 .arguments(getInsKokuhoShikakuJyohoProcessParameter())
                 .define();
     }
 
     @Step(UPD_SHORIDATEKANRI)
-    protected IBatchFlowCommand UPD_SHORIDATEKANRI() {
+    protected IBatchFlowCommand 処理管理日付マスタ更新() {
         return simpleBatch(UpdShoriDateKanriProcess.class)
                 .arguments(getUpdShoriDateKanriProcessParameter()).define();
     }
 
     @Step(CREATE_CSVFILE)
-    protected IBatchFlowCommand CREATE_CSVFILE() {
+    protected IBatchFlowCommand 取込確認CSVファイル出力() {
         return loopBatch(KokuhoCsvFyiiruSyutuRyokuProcess.class).define();
     }
 

@@ -164,6 +164,10 @@ public enum ReportIdDBD {
      */
     DBD100029(new ReportId("DBD100029_OmutsuShoumeisho"), new RString("おむつ証明書")),
     /**
+     *  主治医意見書確認書の帳票ＩＤです。
+     */
+    DBD100030(new ReportId("DBD100030_ShujiiIkenshoKakuninsho"), new RString(" 主治医意見書確認書")),
+    /**
      * 要介護認定結果通知書の帳票ＩＤです。
      */
     DBD532001(new ReportId("DBD532001_YokaigoNinteiKekkaTshuchisho"), new RString("要介護認定結果通知書")),

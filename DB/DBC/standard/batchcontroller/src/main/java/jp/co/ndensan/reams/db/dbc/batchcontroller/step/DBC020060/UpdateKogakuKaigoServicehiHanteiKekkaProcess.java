@@ -39,8 +39,10 @@ public class UpdateKogakuKaigoServicehiHanteiKekkaProcess extends
     private static final RString 処理枝番 = new RString("0000");
     private static final RString 年度_固定 = new RString("0000");
     private static final RString 年度内連番_01 = new RString("01");
+    private static final RString 固定_0 = new RString("0");
     private static final int INDEX_0 = 0;
     private static final int INDEX_1 = 1;
+    private static final int INDEX_9 = 9;
 
     private KogakuKaigoServiceProcessParameter parameter;
     ServicehiShikyuKetteiTsuchisho manager;
@@ -55,7 +57,7 @@ public class UpdateKogakuKaigoServicehiHanteiKekkaProcess extends
     @Override
     protected void initialize() {
         manager = ServicehiShikyuKetteiTsuchisho.createInstance();
-        度内連番 = manager.get年度内連番();
+        度内連番 = manager.get年度内連番(ShoriName.事業高額サービス等支給不支給決定通知書一括作成.get名称());
 
     }
 
@@ -73,7 +75,7 @@ public class UpdateKogakuKaigoServicehiHanteiKekkaProcess extends
 
     @Override
     protected void beforeExecute() {
-        DbT7022ShoriDateKanriEntity trmpEntity = getShoriDateEntity(度内連番);
+        DbT7022ShoriDateKanriEntity trmpEntity = getShoriDateEntity();
         処理日付管理マスタwriter.insert(trmpEntity);
     }
 
@@ -86,17 +88,20 @@ public class UpdateKogakuKaigoServicehiHanteiKekkaProcess extends
         }
     }
 
-    private DbT7022ShoriDateKanriEntity getShoriDateEntity(int 年度内連番) {
+    private DbT7022ShoriDateKanriEntity getShoriDateEntity() {
         DbT7022ShoriDateKanriEntity tempEntity = new DbT7022ShoriDateKanriEntity();
         tempEntity.setSubGyomuCode(SubGyomuCode.DBC介護給付);
         tempEntity.setShichosonCode(new LasdecCode(市町村コード));
         tempEntity.setShoriName(ShoriName.事業高額サービス等支給不支給決定通知書一括作成.get名称());
         tempEntity.setShoriEdaban(処理枝番);
         tempEntity.setNendo(new FlexibleYear(年度_固定));
-        if (年度内連番 == INDEX_0) {
+        if (度内連番 == INDEX_0) {
             tempEntity.setNendoNaiRenban(年度内連番_01);
+        } else if (度内連番 < INDEX_9) {
+
+            tempEntity.setNendoNaiRenban(固定_0.concat(new RString(度内連番 + INDEX_1)));
         } else {
-            tempEntity.setNendoNaiRenban(new RString(年度内連番 + INDEX_1));
+            tempEntity.setNendoNaiRenban(new RString(度内連番 + INDEX_1));
         }
         if (抽出モード_受付日.equals(parameter.get抽出モード()) || 抽出モード_決定日.equals(parameter.get抽出モード())) {
             tempEntity.setTaishoKaishiYMD(new FlexibleDate(parameter.get抽出条件日付From().toDateString()));

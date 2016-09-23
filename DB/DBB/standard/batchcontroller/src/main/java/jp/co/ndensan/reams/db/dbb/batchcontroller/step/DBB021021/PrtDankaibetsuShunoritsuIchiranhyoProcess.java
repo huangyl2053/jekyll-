@@ -292,18 +292,18 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         boolean is市町村コード改頁 = new ShotokuDankaiBetsuShunoritsuIchiranPageBreak(改頁List).
                 is市町村コード改頁(entity, beforeEntity);
         if (is市町村コード改頁) {
-            if (完納出力区分_出力しない.equals(parameter.get完納出力区分())) {
+            if (完納出力区分_出力しない.equals(parameter.get完納出力区分().get(INT_0))) {
                 帳票タイトル = RString.EMPTY;
                 最終頁帳票タイトル = RString.EMPTY;
-            } else if (完納出力区分_出力する.equals(parameter.get完納出力区分())) {
+            } else if (完納出力区分_出力する.equals(parameter.get完納出力区分().get(INT_0))) {
                 帳票タイトル = TEXT_完納分;
                 最終頁帳票タイトル = TEXT_完納分;
             }
         } else {
-            if (完納出力区分_出力しない.equals(parameter.get完納出力区分())) {
+            if (完納出力区分_出力しない.equals(parameter.get完納出力区分().get(INT_0))) {
                 帳票タイトル = get徴収方法(entity.getKamokuCode());
                 最終頁帳票タイトル = RString.EMPTY;
-            } else if (完納出力区分_出力する.equals(parameter.get完納出力区分())) {
+            } else if (完納出力区分_出力する.equals(parameter.get完納出力区分().get(INT_0))) {
                 帳票タイトル = get完納分徴収方法(entity.getKamokuCode());
                 最終頁帳票タイトル = TEXT_完納分;
             }
@@ -456,9 +456,9 @@ public class PrtDankaibetsuShunoritsuIchiranhyoProcess
         }
         出力条件リスト.add(get条件(TEXT_生年月日, 生年月日Builder.toRString()));
         get出力条件表市町村の作成(出力条件リスト);
-        if (ZERO.equals(parameter.get完納出力区分())) {
+        if (ZERO.equals(parameter.get完納出力区分().get(INT_0))) {
             出力条件リスト.add(get条件(TEXT_収納区分, TEXT_完納分を出力する));
-        } else if (ONE.equals(parameter.get完納出力区分())) {
+        } else if (ONE.equals(parameter.get完納出力区分().get(INT_0))) {
             出力条件リスト.add(get条件(TEXT_収納区分, TEXT_未納分を出力する));
         }
         return 出力条件リスト;

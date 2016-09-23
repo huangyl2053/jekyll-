@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dba.batchcontroller.step.DBA010010;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.definition.mybatisprm.nenreitotatsushikakuido.NenreiIdoHanteiMybatisParameter;
 import jp.co.ndensan.reams.db.dba.definition.processprm.dba010010.HihokenshaDaichoKoshinProcessParameter;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.hihokenshadaichokoshin.ShikakuIdoTaishoshaEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.nenreitotatsushikakuido.INenreitotatsuShikakuIdoRelateMapper;
@@ -61,11 +62,6 @@ public class HihokenshaDaichoKoshinProcess extends BatchProcessBase<ShikakuIdoTa
         hihokenshaDaichoKoshin = HihokenshaDaichoKoshin.createInstance();
         開始日 = parameter.get開始日();
         終了日 = parameter.get終了日();
-    }
-
-    @Override
-    protected void beforeExecute() {
-        super.beforeExecute();
         if (parameter.is通常運用時()) {
             DbT7022ShoriDateKanriEntity entity = mapper.selectバッチ内で抽出条件();
             if (entity != null) {
@@ -120,16 +116,18 @@ public class HihokenshaDaichoKoshinProcess extends BatchProcessBase<ShikakuIdoTa
                 JuminJotai.住民, FlexibleDate.MAX, AgeArrivalDay.前日);
         FlexibleDate age = ageCalculator.get年齢到達日(AGE_65);
 
-        if (!mapper.select他市町村住所地特例(entity.get識別コード(), age).isEmpty()) {
+        NenreiIdoHanteiMybatisParameter sqlParam = parameter.toNenreiIdoHanteiMybatisParameter(entity.get識別コード(), age);
+
+        if (!mapper.select他市町村住所地特例(sqlParam).isEmpty()) {
             return;
         }
-        if (!mapper.select適用除外者(entity.get識別コード(), age).isEmpty()) {
+        if (!mapper.select適用除外者(sqlParam).isEmpty()) {
             return;
         }
-        if (!mapper.select資格取得除外者(entity.get識別コード()).isEmpty()) {
+        if (!mapper.select資格取得除外者(sqlParam).isEmpty()) {
             return;
         }
-        if (!mapper.select転入保留対象者(entity.get識別コード()).isEmpty()) {
+        if (!mapper.select転入保留対象者(sqlParam).isEmpty()) {
             return;
         }
         DbT1001HihokenshaDaichoEntity dbT1001Entity = hihokenshaDaichoKoshin.updHihokenshaDaicho(entity);

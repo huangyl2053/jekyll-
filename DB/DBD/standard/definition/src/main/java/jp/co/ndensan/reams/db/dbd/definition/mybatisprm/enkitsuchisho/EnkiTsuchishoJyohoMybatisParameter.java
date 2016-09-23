@@ -6,8 +6,8 @@
 package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.enkitsuchisho;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 帳票設計_DBD522001_要介護認定延期通知書タイトルバッチパラメタークラスです．
@@ -19,14 +19,14 @@ import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class EnkiTsuchishoJyohoMybatisParameter implements IMyBatisParameter {
 
-    private List<ShinseishoKanriNo> shinseishokanribangorisuto;
+    private List<RString> shinseishokanribangorisuto;
 
     /**
      * コンストラクタです。
      *
      * @param 申請書管理番号リスト shinseishokanribangorisuto
      */
-    public EnkiTsuchishoJyohoMybatisParameter(List<ShinseishoKanriNo> 申請書管理番号リスト) {
+    public EnkiTsuchishoJyohoMybatisParameter(List<RString> 申請書管理番号リスト) {
         this.shinseishokanribangorisuto = 申請書管理番号リスト;
     }
 }

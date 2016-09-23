@@ -24,7 +24,6 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -50,8 +49,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class KougakuKetteiTuutisyo {
 
     private TaishoshaKey key;
-    private LockingKey 排他キー;
-    private final RString BUTTON_NAME = new RString("btnHakkou");
+    private static final RString BUTTON_NAME = new RString("btnHakkou");
 
     /**
      * 画面初期化のメソッドです。

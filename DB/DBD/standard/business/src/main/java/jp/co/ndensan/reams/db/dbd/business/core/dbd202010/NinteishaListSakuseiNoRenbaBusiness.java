@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00003.KakuninListNoRenba
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00003.NinteishaListSakuseiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00003.SetaiInRisutoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
@@ -18,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 訪問介護利用者負担額減額認定者リス発行ビジネスクラスです。
@@ -109,6 +111,25 @@ public class NinteishaListSakuseiNoRenbaBusiness {
         if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getKetteiKubun() != null) {
             eucCsvEntity.set決定区分(t.get訪問介護利用者負担額減額().getKetteiKubun());
         }
+        edit出力情報_日期について(eucCsvEntity, t, is日付スラッシュ編集);
+        if (t.get訪問介護利用者負担額減額() != null) {
+            HokenKyufuRitsu kyufuritsu = t.get訪問介護利用者負担額減額().getKyufuritsu();
+            if (kyufuritsu != null) {
+                Decimal 給付率Vlaue = kyufuritsu.value();
+                eucCsvEntity.set給付率(new RString(給付率Vlaue.toString()));
+            }
+        }
+
+        if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getShogaishaTechoTokyu() != null) {
+            eucCsvEntity.set障害者手帳等級(t.get訪問介護利用者負担額減額().getShogaishaTechoTokyu());
+        }
+
+        if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getShogaishaTechoNo() != null) {
+            eucCsvEntity.set障害者番号(t.get訪問介護利用者負担額減額().getShogaishaTechoNo());
+        }
+    }
+
+    private void edit出力情報_日期について(KakuninListNoRenbanCsvEntity eucCsvEntity, NinteishaListSakuseiEntity t, boolean is日付スラッシュ編集) {
 
         if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getShinseiYMD() != null) {
             eucCsvEntity.set減免申請日(set年月日(t.get訪問介護利用者負担額減額().getShinseiYMD(), is日付スラッシュ編集));
@@ -126,28 +147,17 @@ public class NinteishaListSakuseiNoRenbaBusiness {
             eucCsvEntity.set減免有効期限(set年月日(t.get訪問介護利用者負担額減額().getTekiyoShuryoYMD(), is日付スラッシュ編集));
         }
 
-        if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getKyufuritsu() != null) {
-            eucCsvEntity.set給付率(new RString(t.get訪問介護利用者負担額減額().getKyufuritsu().value().toString()));
-        }
-
-        if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getShogaishaTechoTokyu() != null) {
-            eucCsvEntity.set障害者手帳等級(t.get訪問介護利用者負担額減額().getShogaishaTechoTokyu());
-        }
-
-        if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getShogaishaTechoNo() != null) {
-            eucCsvEntity.set障害者番号(t.get訪問介護利用者負担額減額().getShogaishaTechoNo());
-        }
     }
 
     private void edit出力情報_受給者(KakuninListNoRenbanCsvEntity eucCsvEntity, NinteishaListSakuseiEntity t) {
 
-        if (t.is老齢福祉年金受給者() == true) {
+        if (t.is老齢福祉年金受給者()) {
             eucCsvEntity.set老齢福祉年金受給(SXING);
         } else {
             eucCsvEntity.set老齢福祉年金受給(SPACE);
         }
 
-        if (t.is生活保護受給者() == true) {
+        if (t.is生活保護受給者()) {
             eucCsvEntity.set生活保護受給区分(SXING);
         } else {
             eucCsvEntity.set生活保護受給区分(SPACE);
@@ -160,12 +170,12 @@ public class NinteishaListSakuseiNoRenbaBusiness {
 
         eucCsvEntity.set特定疾病(RString.isNullOrEmpty(t.get要介護認定申請情報_2号特定疾病コード()) ? RString.EMPTY
                 : TokuteiShippei.toValue(t.get要介護認定申請情報_2号特定疾病コード()).get名称());
-        if (t.is所得税課税者() == true) {
+        if (t.is所得税課税者()) {
             eucCsvEntity.set所得税課税区分(KE);
         } else {
             eucCsvEntity.set所得税課税区分(SPACE);
         }
-        if (t.is受給者台帳Newest_旧措置者フラグ() == true) {
+        if (t.is受給者台帳Newest_旧措置者フラグ()) {
             eucCsvEntity.set旧措置(JIUCUO);
         } else {
             eucCsvEntity.set旧措置(SPACE);

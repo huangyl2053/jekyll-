@@ -29,11 +29,10 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.hurikomiitiran.meisaidata.Mei
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc200101detail.FurikomiMeisaiIchiranDetailReportSource;
 import jp.co.ndensan.reams.db.dbc.entity.report.dbc200101gokei.FurikomiMeisaiIchiranGokeiReportSource;
 import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc050010.IShikyugakuJohoMapper;
+import jp.co.ndensan.reams.db.dbc.service.core.shikyugakujohomanager.ShikyugakuJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.util.report.ChohyoUtil;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7067ChohyoSeigyoHanyoEntity;
-import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7067ChohyoSeigyoHanyoDac;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.MyBatisOrderByClauseCreator;
 import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
@@ -54,7 +53,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 振込明細一覧表作成_Processクラスです．
@@ -120,7 +118,7 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
     private int 様式連番 = 0;
 
     @BatchWriter
-    private BatchEntityCreatedTempTableWriter ShoriKekkaKakuninListTempTable;
+    private BatchEntityCreatedTempTableWriter shoriKekkaKakuninListTempTable;
     private BatchReportWriter<FurikomiMeisaiIchiranDetailReportSource> batchReportWriter_明細一覧表;
     private ReportSourceWriter<FurikomiMeisaiIchiranDetailReportSource> reportSourceWriter_明細一覧表;
     private BatchReportWriter<FurikomiMeisaiIchiranGokeiReportSource> batchReportWriter_合計一覧表;
@@ -133,7 +131,7 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
         } else {
             項目名 = ChohyoSeigyoHanyoKomokuMei.帳票タイトル_窓口.get名称();
         }
-        fetch設定値();
+        設定値 = ShikyugakuJohoManager.createInstance().fetch設定値(帳票分類ID, 管理年度, 項目名);
         if (parameter.get出力順ID() != 0) {
             IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
             long 帳票出力順ID = parameter.get出力順ID();
@@ -225,7 +223,7 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
 
     @Override
     protected void createWriter() {
-        ShoriKekkaKakuninListTempTable
+        shoriKekkaKakuninListTempTable
                 = new BatchEntityCreatedTempTableWriter(処理結果確認リスト一時TBL, ShoriKekkaKakuninListTempTableEntity.class);
         batchReportWriter_明細一覧表 = BatchReportFactory.createBatchReportWriter(
                 ReportIdDBC.DBC200101_明細.getReportId().value(), SubGyomuCode.DBC介護給付).create();
@@ -298,9 +296,9 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
     @Override
     protected void afterExecute() {
         if (parameter.get処理区分().getコード().equals(処理区分3)) {
-            ShoriKekkaKakuninListTempTableEntity ShoriKekkaKakuninList = new ShoriKekkaKakuninListTempTableEntity();
-            ShoriKekkaKakuninList.setBiko(処理区分3);
-            ShoriKekkaKakuninListTempTable.insert(ShoriKekkaKakuninList);
+            ShoriKekkaKakuninListTempTableEntity shoriKekkaKakuninList = new ShoriKekkaKakuninListTempTableEntity();
+            shoriKekkaKakuninList.setBiko(処理区分3);
+            shoriKekkaKakuninListTempTable.insert(shoriKekkaKakuninList);
         }
         for (int i = 0; i < NUM11; i++) {
             振込明細一覧表合計.get(NUM11).setその他件数(振込明細一覧表合計.get(i).getその他件数().add(振込明細一覧表合計.get(NUM11).getその他件数()));
@@ -473,16 +471,6 @@ public class ShikyugakuJohoProcess extends BatchProcessBase<ShikyugakuJohoEntity
         } else {
             entity.setその他件数(entity.getその他件数().add(NUM1));
             entity.setその他金額(entity.getその他金額().add(金額));
-        }
-    }
-
-    private void fetch設定値() {
-        DbT7067ChohyoSeigyoHanyoDac dac = InstanceProvider.create(DbT7067ChohyoSeigyoHanyoDac.class);
-        DbT7067ChohyoSeigyoHanyoEntity entity = dac.selectByKey(SubGyomuCode.DBC介護給付, 帳票分類ID, 管理年度, 項目名);
-        if (entity != null) {
-            設定値 = entity.getKomokuValue();
-        } else {
-            設定値 = RString.EMPTY;
         }
     }
 }

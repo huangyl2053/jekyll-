@@ -63,17 +63,15 @@ public class HanyoListBatchParamHandler {
         div.getCcdShutsuryokuKoumoku().load(ReportIdDBC.DBC701020.getReportId().value(), SubGyomuCode.DBC介護給付);
         FlexibleYear 所得年度 = new HizukeConfig().get所得年度();
         List<KeyValueDataSource> list = new ArrayList<>();
-        if (所得年度 != null && !所得年度.isEmpty()) {
-            if (!所得年度.isBefore(固定年度)) {
-                for (int i = 0; i <= 所得年度.getBetweenYears(固定年度); i++) {
-                    KeyValueDataSource dataSource = new KeyValueDataSource();
-                    RStringBuilder builder = new RStringBuilder();
-                    builder.append("key");
-                    builder.append(i);
-                    dataSource.setKey(builder.toRString());
-                    dataSource.setValue(所得年度.minusYear(i).wareki().toDateString());
-                    list.add(dataSource);
-                }
+        if (所得年度 != null && !所得年度.isEmpty() && !所得年度.isBefore(固定年度)) {
+            for (int i = 0; i <= 所得年度.getBetweenYears(固定年度); i++) {
+                KeyValueDataSource dataSource = new KeyValueDataSource();
+                RStringBuilder builder = new RStringBuilder();
+                builder.append("key");
+                builder.append(i);
+                dataSource.setKey(builder.toRString());
+                dataSource.setValue(所得年度.minusYear(i).wareki().toDateString());
+                list.add(dataSource);
             }
         }
         div.getChushutsuJokenPanel().getDdlTaishoNendo().setDataSource(list);

@@ -30,6 +30,12 @@ public class KyufugakuGengakuHaakuIchiran {
     public KyufugakuGengakuHaakuIchiran() {
     }
 
+    /**
+     * 給付額減額滞納者把握パラメターを取得します．
+     *
+     * @param div div
+     * @return 給付額減額滞納者把握パラメター
+     */
     public KyufuGengakuHaakuIchiranBatchParameter createKyufuGengakuHaakuIchiranParameter(ChishutsuJokenParameterDiv div) {
         KyufuGengakuHaakuIchiranBatchParameter parameter = new KyufuGengakuHaakuIchiranBatchParameter();
 

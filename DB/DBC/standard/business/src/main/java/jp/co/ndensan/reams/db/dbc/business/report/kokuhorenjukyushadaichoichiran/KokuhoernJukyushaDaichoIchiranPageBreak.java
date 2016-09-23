@@ -44,11 +44,20 @@ public class KokuhoernJukyushaDaichoIchiranPageBreak extends PageBreaker<Jukyush
         } else if (this.breakKeysList.contains(KokuhorenJukyushaDaichoIchiranProperty.DBC200006ShutsuryokujunEnum.被保険者番号.get項目ID())
                 && !currentSource.getSource().listList1_4.equals(nextSource.getSource().listList1_4)) {
             flag = true;
+        } else if (this.breakKeysList.contains(KokuhorenJukyushaDaichoIchiranProperty.DBC200006ShutsuryokujunEnum.郵便番号.get項目ID())
+                && !currentSource.getSource().yubinNo.equals(nextSource.getSource().yubinNo)) {
+            flag = true;
         } else if (this.breakKeysList.contains(KokuhorenJukyushaDaichoIchiranProperty.DBC200006ShutsuryokujunEnum.町域コード.get項目ID())
                 && !currentSource.getSource().listList2_4.equals(nextSource.getSource().listList2_4)) {
             flag = true;
         } else if (this.breakKeysList.contains(KokuhorenJukyushaDaichoIchiranProperty.DBC200006ShutsuryokujunEnum.行政区コード.get項目ID())
                 && !currentSource.getSource().listList1_6.equals(nextSource.getSource().listList1_6)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(KokuhorenJukyushaDaichoIchiranProperty.DBC200006ShutsuryokujunEnum.氏名５０音カナ.get項目ID())
+                && !currentSource.getSource().shimei50onKana.equals(nextSource.getSource().shimei50onKana)) {
+            flag = true;
+        } else if (this.breakKeysList.contains(KokuhorenJukyushaDaichoIchiranProperty.DBC200006ShutsuryokujunEnum.市町村コード.get項目ID())
+                && !currentSource.getSource().shichosonCode.equals(nextSource.getSource().shichosonCode)) {
             flag = true;
         }
         return flag;

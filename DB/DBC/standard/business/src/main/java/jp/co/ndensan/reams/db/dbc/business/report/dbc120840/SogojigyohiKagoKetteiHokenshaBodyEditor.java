@@ -32,7 +32,8 @@ public class SogojigyohiKagoKetteiHokenshaBodyEditor
     private static final RString 総合事業費_負担額タイトル = new RString("総合事業費");
 
     /**
-     *  コンストラクタです
+     * コンストラクタです
+     *
      * @param 帳票出力対象データ SogojigyohiKagoKetteiHokenshaChohyoEntity
      * @param 集計Flag boolean
      * @param no int
@@ -72,6 +73,7 @@ public class SogojigyohiKagoKetteiHokenshaBodyEditor
         }
         source.listLower_3 = 帳票出力対象データ.get過誤申立事由();
         source.listLower_4 = doカンマ編集(帳票出力対象データ.get負担額());
+        source.shikibetuCode = 帳票出力対象データ.get識別コード();
     }
 
     private void edit集計(SogojigyohiKagoKetteiTorikomiIchiranSource source) {
@@ -79,11 +81,10 @@ public class SogojigyohiKagoKetteiHokenshaBodyEditor
         source.tanisuTitle = 単位数タイトル;
         source.futangakuTitle = 負担額タイトル;
         source.sogojigyohiTitle = 総合事業費_負担額タイトル;
-        
+
         source.sogojigyohiKensu = doカンマ編集(帳票出力対象データ.get総合事業費_件数());
         source.sogojigyohiTanisu = doカンマ編集(帳票出力対象データ.get総合事業費_単位数());
         source.sogojigyohiFutangaku = doカンマ編集(帳票出力対象データ.get総合事業費_負担額());
-       
 
     }
 

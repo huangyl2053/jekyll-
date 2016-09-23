@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00003.KakuninListCsvEnti
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00003.NinteishaListSakuseiEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt00003.SetaiInRisutoEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.fuka.KazeiKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
@@ -18,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 訪問介護利用者負担額減額認定者リス発行ビジネスクラスです。
@@ -106,7 +108,17 @@ public class NinteishaListSakuseiBusiness {
         if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getKetteiKubun() != null) {
             eucCsvEntity.set決定区分(t.get訪問介護利用者負担額減額().getKetteiKubun());
         }
+        edit出力情報_日期について(eucCsvEntity, t, is日付スラッシュ編集);
+        if (t.get訪問介護利用者負担額減額() != null) {
+            HokenKyufuRitsu kyufuritsuValue = t.get訪問介護利用者負担額減額().getKyufuritsu();
+            if (kyufuritsuValue != null) {
+                Decimal 給付率Value = kyufuritsuValue.value();
+                eucCsvEntity.set給付率(new RString(給付率Value.toString()));
+            }
+        }
+    }
 
+    private void edit出力情報_日期について(KakuninListCsvEntity eucCsvEntity, NinteishaListSakuseiEntity t, boolean is日付スラッシュ編集) {
         if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getShinseiYMD() != null) {
             eucCsvEntity.set減免申請日(set年月日(t.get訪問介護利用者負担額減額().getShinseiYMD(), is日付スラッシュ編集));
         }
@@ -121,10 +133,6 @@ public class NinteishaListSakuseiBusiness {
 
         if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getTekiyoShuryoYMD() != null) {
             eucCsvEntity.set減免有効期限(set年月日(t.get訪問介護利用者負担額減額().getTekiyoShuryoYMD(), is日付スラッシュ編集));
-        }
-
-        if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getKyufuritsu() != null) {
-            eucCsvEntity.set給付率(new RString(t.get訪問介護利用者負担額減額().getKyufuritsu().value().toString()));
         }
     }
 

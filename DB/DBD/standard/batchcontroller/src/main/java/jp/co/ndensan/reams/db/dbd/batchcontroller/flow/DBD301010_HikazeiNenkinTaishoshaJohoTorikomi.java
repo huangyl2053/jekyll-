@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.batchcontroller.flow;
 
+import java.util.List;
+import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD301010.FileReaderProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD301010.FuicchiCsvProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD301010.GaitouIchirannCsvProcess;
 import jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD301010.HikazeiNennkinTaishouSyaJohoCsvCreateProcess;
@@ -20,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -36,6 +39,7 @@ public class DBD301010_HikazeiNenkinTaishoshaJohoTorikomi extends BatchFlowBase<
 
     private static final RString 処理区_1 = new RString("1");
     private static final RString 処理区_9 = new RString("9");
+    private static final String ファイル取込 = "ファイル取込";
     private static final String 取込データ一時作成 = "取込データ一時作成";
     private static final String 非課税年金対象者同定 = "非課税年金対象者同定";
     private static final String 非課税年金対象者情報一覧CSV作成 = "非課税年金対象者情報一覧CSV作成";
@@ -47,10 +51,19 @@ public class DBD301010_HikazeiNenkinTaishoshaJohoTorikomi extends BatchFlowBase<
     private static final String 更新非課税年金対象者 = "更新非課税年金対象者";
     private static final String 処理日付管理マスタ更新 = "処理日付管理マスタ更新";
     private final RString 処理状態 = new RString("3");
+    private List<UzT0885SharedFileEntryEntity> ファイルリスト;
+    private UzT0885SharedFileEntryEntity tempEntry;
 
     @Override
     protected void defineFlow() {
-        executeStep(取込データ一時作成);
+        executeStep(ファイル取込);
+        ファイルリスト = getResult(
+                List.class, new RString(ファイル取込),
+                FileReaderProcess.PARAMETER_OUT_COUNT);
+        for (UzT0885SharedFileEntryEntity entry : ファイルリスト) {
+            tempEntry = entry;
+            executeStep(取込データ一時作成);
+        }
         executeStep(非課税年金対象者情報一覧CSV作成);
         executeStep(非課税年金対象者同定);
         executeStep(非課税年金対象者情報_該当一覧CSV);
@@ -67,6 +80,18 @@ public class DBD301010_HikazeiNenkinTaishoshaJohoTorikomi extends BatchFlowBase<
     }
 
     /**
+     * ファイル取込
+     *
+     * @return IBatchFlowCommand
+     */
+    @Step(ファイル取込)
+    protected IBatchFlowCommand fileReaderProcess() {
+        return simpleBatch(FileReaderProcess.class)
+                .arguments(getParameter().toFileReaderProcessParameter())
+                .define();
+    }
+
+    /**
      * 取込データ一時作成
      *
      * @return IBatchFlowCommand
@@ -74,7 +99,7 @@ public class DBD301010_HikazeiNenkinTaishoshaJohoTorikomi extends BatchFlowBase<
     @Step(取込データ一時作成)
     protected IBatchFlowCommand reportProcess() {
         return loopBatch(TorikomiProcess.class)
-                .arguments(getParameter().toTorikomiProcessParameter())
+                .arguments(getParameter().toTorikomiProcessParameter(tempEntry))
                 .define();
     }
 

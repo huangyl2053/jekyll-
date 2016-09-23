@@ -22,9 +22,12 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
  * @reamsid_L DBC-2180-070 x_liuwei
  */
 public class FurikomiMeisaiYoshikiBetsuKingakuShukei {
-    private final int length = 25;
+
+    private static final int length = 25;
+
     /**
      * 印字様式番号別集計。
+     *
      * @param inList
      * @return List<InjiYoushikiBangouBetuKingaku>
      */
@@ -149,7 +152,7 @@ public class FurikomiMeisaiYoshikiBetsuKingakuShukei {
         YoushikiBangouBetuKingakuEntity entity = group.get(0);
         RString 様式番号RS = get様式番号RS();
         List<RString> groupRS = 様式番号RS.split(";");
-        
+
         for (int i = 1; i < length; i++) {
             int index = i - 1;
             List<RString> list = groupRS.get(index).split(",");

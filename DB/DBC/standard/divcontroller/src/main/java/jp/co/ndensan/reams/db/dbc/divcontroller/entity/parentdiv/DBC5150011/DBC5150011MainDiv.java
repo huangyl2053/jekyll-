@@ -7,14 +7,9 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5150011;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
-import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDiv.IServiceCodeInputCommonChildDiv;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
  * DBC5150011Main のクラスファイル
@@ -81,23 +76,43 @@ public class DBC5150011MainDiv extends PanelBatchParameter {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public TextBoxDate getTxtKijyouDate() {
-        return this.getChushutsuJoken().getTxtKijyouDate();
+    public TextBoxDate getTxtKijunYM() {
+        return this.getChushutsuJoken().getTxtKijunYM();
     }
 
     @JsonIgnore
-    public void setTxtKijyouDate(TextBoxDate txtKijyouDate) {
-        this.getChushutsuJoken().setTxtKijyouDate(txtKijyouDate);
+    public void setTxtKijunYM(TextBoxDate txtKijunYM) {
+        this.getChushutsuJoken().setTxtKijunYM(txtKijunYM);
     }
 
     @JsonIgnore
-    public RadioButton getRadMeisaiGokeiOut() {
-        return this.getChushutsuJoken().getRadMeisaiGokeiOut();
+    public RadioButton getRadChushutsuJokenAll() {
+        return this.getChushutsuJoken().getRadChushutsuJokenAll();
     }
 
     @JsonIgnore
-    public void setRadMeisaiGokeiOut(RadioButton radMeisaiGokeiOut) {
-        this.getChushutsuJoken().setRadMeisaiGokeiOut(radMeisaiGokeiOut);
+    public void setRadChushutsuJokenAll(RadioButton radChushutsuJokenAll) {
+        this.getChushutsuJoken().setRadChushutsuJokenAll(radChushutsuJokenAll);
+    }
+
+    @JsonIgnore
+    public RadioButton getRadChushutsuJokenServiceCode() {
+        return this.getChushutsuJoken().getRadChushutsuJokenServiceCode();
+    }
+
+    @JsonIgnore
+    public void setRadChushutsuJokenServiceCode(RadioButton radChushutsuJokenServiceCode) {
+        this.getChushutsuJoken().setRadChushutsuJokenServiceCode(radChushutsuJokenServiceCode);
+    }
+
+    @JsonIgnore
+    public RadioButton getRadChushutsuJokenServiceBunrui() {
+        return this.getChushutsuJoken().getRadChushutsuJokenServiceBunrui();
+    }
+
+    @JsonIgnore
+    public void setRadChushutsuJokenServiceBunrui(RadioButton radChushutsuJokenServiceBunrui) {
+        this.getChushutsuJoken().setRadChushutsuJokenServiceBunrui(radChushutsuJokenServiceBunrui);
     }
 
     @JsonIgnore
@@ -111,43 +126,18 @@ public class DBC5150011MainDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public ButtonDialog getBtnServiceCode() {
-        return this.getChushutsuJoken().getPanServiceSyurui().getBtnServiceCode();
+    public DataGrid<dgServiceBunruiList_Row> getDgServiceBunruiList() {
+        return this.getChushutsuJoken().getPanServiceSyurui().getDgServiceBunruiList();
     }
 
     @JsonIgnore
-    public void setBtnServiceCode(ButtonDialog btnServiceCode) {
-        this.getChushutsuJoken().getPanServiceSyurui().setBtnServiceCode(btnServiceCode);
+    public void setDgServiceBunruiList(DataGrid<dgServiceBunruiList_Row> dgServiceBunruiList) {
+        this.getChushutsuJoken().getPanServiceSyurui().setDgServiceBunruiList(dgServiceBunruiList);
     }
 
     @JsonIgnore
-    public TextBoxCode getTxtSyuruiCode() {
-        return this.getChushutsuJoken().getPanServiceSyurui().getTxtSyuruiCode();
-    }
-
-    @JsonIgnore
-    public void setTxtSyuruiCode(TextBoxCode txtSyuruiCode) {
-        this.getChushutsuJoken().getPanServiceSyurui().setTxtSyuruiCode(txtSyuruiCode);
-    }
-
-    @JsonIgnore
-    public TextBoxCode getTxtServiceCode() {
-        return this.getChushutsuJoken().getPanServiceSyurui().getTxtServiceCode();
-    }
-
-    @JsonIgnore
-    public void setTxtServiceCode(TextBoxCode txtServiceCode) {
-        this.getChushutsuJoken().getPanServiceSyurui().setTxtServiceCode(txtServiceCode);
-    }
-
-    @JsonIgnore
-    public DataGrid<dgServiceShuruiList_Row> getDgServiceShuruiList() {
-        return this.getChushutsuJoken().getPanServiceSyurui().getDgServiceShuruiList();
-    }
-
-    @JsonIgnore
-    public void setDgServiceShuruiList(DataGrid<dgServiceShuruiList_Row> dgServiceShuruiList) {
-        this.getChushutsuJoken().getPanServiceSyurui().setDgServiceShuruiList(dgServiceShuruiList);
+    public IServiceCodeInputCommonChildDiv getCcdServiceCodeInput() {
+        return this.getChushutsuJoken().getCcdServiceCodeInput();
     }
 
     @JsonIgnore
@@ -171,13 +161,13 @@ public class DBC5150011MainDiv extends PanelBatchParameter {
     }
 
     @JsonIgnore
-    public TextBox getTxtTitle() {
-        return this.getShutsuryokuTaisho().getShutsuryokuTaisoDetail().getTxtTitle();
+    public Space getSpa1() {
+        return this.getShutsuryokuTaisho().getShutsuryokuTaisoDetail().getSpa1();
     }
 
     @JsonIgnore
-    public void setTxtTitle(TextBox txtTitle) {
-        this.getShutsuryokuTaisho().getShutsuryokuTaisoDetail().setTxtTitle(txtTitle);
+    public void setSpa1(Space spa1) {
+        this.getShutsuryokuTaisho().getShutsuryokuTaisoDetail().setSpa1(spa1);
     }
 
     @JsonIgnore

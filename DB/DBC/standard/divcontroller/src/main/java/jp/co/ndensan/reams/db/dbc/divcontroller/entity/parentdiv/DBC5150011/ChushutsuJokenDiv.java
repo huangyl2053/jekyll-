@@ -7,11 +7,11 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC5150011;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDiv.IServiceCodeInputCommonChildDiv;
+import jp.co.ndensan.reams.db.dbc.divcontroller.entity.commonchilddiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDiv.ServiceCodeInputCommonChildDivDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
@@ -28,12 +28,18 @@ public class ChushutsuJokenDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtKijyouDate")
-    private TextBoxDate txtKijyouDate;
-    @JsonProperty("radMeisaiGokeiOut")
-    private RadioButton radMeisaiGokeiOut;
+    @JsonProperty("txtKijunYM")
+    private TextBoxDate txtKijunYM;
+    @JsonProperty("radChushutsuJokenAll")
+    private RadioButton radChushutsuJokenAll;
+    @JsonProperty("radChushutsuJokenServiceCode")
+    private RadioButton radChushutsuJokenServiceCode;
+    @JsonProperty("radChushutsuJokenServiceBunrui")
+    private RadioButton radChushutsuJokenServiceBunrui;
     @JsonProperty("panServiceSyurui")
     private panServiceSyuruiDiv panServiceSyurui;
+    @JsonProperty("ccdServiceCodeInput")
+    private ServiceCodeInputCommonChildDivDiv ccdServiceCodeInput;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -42,39 +48,75 @@ public class ChushutsuJokenDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * gettxtKijyouDate
-     * @return txtKijyouDate
+     * gettxtKijunYM
+     * @return txtKijunYM
      */
-    @JsonProperty("txtKijyouDate")
-    public TextBoxDate getTxtKijyouDate() {
-        return txtKijyouDate;
+    @JsonProperty("txtKijunYM")
+    public TextBoxDate getTxtKijunYM() {
+        return txtKijunYM;
     }
 
     /*
-     * settxtKijyouDate
-     * @param txtKijyouDate txtKijyouDate
+     * settxtKijunYM
+     * @param txtKijunYM txtKijunYM
      */
-    @JsonProperty("txtKijyouDate")
-    public void setTxtKijyouDate(TextBoxDate txtKijyouDate) {
-        this.txtKijyouDate = txtKijyouDate;
+    @JsonProperty("txtKijunYM")
+    public void setTxtKijunYM(TextBoxDate txtKijunYM) {
+        this.txtKijunYM = txtKijunYM;
     }
 
     /*
-     * getradMeisaiGokeiOut
-     * @return radMeisaiGokeiOut
+     * getradChushutsuJokenAll
+     * @return radChushutsuJokenAll
      */
-    @JsonProperty("radMeisaiGokeiOut")
-    public RadioButton getRadMeisaiGokeiOut() {
-        return radMeisaiGokeiOut;
+    @JsonProperty("radChushutsuJokenAll")
+    public RadioButton getRadChushutsuJokenAll() {
+        return radChushutsuJokenAll;
     }
 
     /*
-     * setradMeisaiGokeiOut
-     * @param radMeisaiGokeiOut radMeisaiGokeiOut
+     * setradChushutsuJokenAll
+     * @param radChushutsuJokenAll radChushutsuJokenAll
      */
-    @JsonProperty("radMeisaiGokeiOut")
-    public void setRadMeisaiGokeiOut(RadioButton radMeisaiGokeiOut) {
-        this.radMeisaiGokeiOut = radMeisaiGokeiOut;
+    @JsonProperty("radChushutsuJokenAll")
+    public void setRadChushutsuJokenAll(RadioButton radChushutsuJokenAll) {
+        this.radChushutsuJokenAll = radChushutsuJokenAll;
+    }
+
+    /*
+     * getradChushutsuJokenServiceCode
+     * @return radChushutsuJokenServiceCode
+     */
+    @JsonProperty("radChushutsuJokenServiceCode")
+    public RadioButton getRadChushutsuJokenServiceCode() {
+        return radChushutsuJokenServiceCode;
+    }
+
+    /*
+     * setradChushutsuJokenServiceCode
+     * @param radChushutsuJokenServiceCode radChushutsuJokenServiceCode
+     */
+    @JsonProperty("radChushutsuJokenServiceCode")
+    public void setRadChushutsuJokenServiceCode(RadioButton radChushutsuJokenServiceCode) {
+        this.radChushutsuJokenServiceCode = radChushutsuJokenServiceCode;
+    }
+
+    /*
+     * getradChushutsuJokenServiceBunrui
+     * @return radChushutsuJokenServiceBunrui
+     */
+    @JsonProperty("radChushutsuJokenServiceBunrui")
+    public RadioButton getRadChushutsuJokenServiceBunrui() {
+        return radChushutsuJokenServiceBunrui;
+    }
+
+    /*
+     * setradChushutsuJokenServiceBunrui
+     * @param radChushutsuJokenServiceBunrui radChushutsuJokenServiceBunrui
+     */
+    @JsonProperty("radChushutsuJokenServiceBunrui")
+    public void setRadChushutsuJokenServiceBunrui(RadioButton radChushutsuJokenServiceBunrui) {
+        this.radChushutsuJokenServiceBunrui = radChushutsuJokenServiceBunrui;
     }
 
     /*
@@ -96,46 +138,25 @@ public class ChushutsuJokenDiv extends Panel {
     }
 
     /*
+     * getccdServiceCodeInput
+     * @return ccdServiceCodeInput
+     */
+    @JsonProperty("ccdServiceCodeInput")
+    public IServiceCodeInputCommonChildDiv getCcdServiceCodeInput() {
+        return ccdServiceCodeInput;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public ButtonDialog getBtnServiceCode() {
-        return this.getPanServiceSyurui().getBtnServiceCode();
+    public DataGrid<dgServiceBunruiList_Row> getDgServiceBunruiList() {
+        return this.getPanServiceSyurui().getDgServiceBunruiList();
     }
 
     @JsonIgnore
-    public void setBtnServiceCode(ButtonDialog btnServiceCode) {
-        this.getPanServiceSyurui().setBtnServiceCode(btnServiceCode);
-    }
-
-    @JsonIgnore
-    public TextBoxCode getTxtSyuruiCode() {
-        return this.getPanServiceSyurui().getTxtSyuruiCode();
-    }
-
-    @JsonIgnore
-    public void setTxtSyuruiCode(TextBoxCode txtSyuruiCode) {
-        this.getPanServiceSyurui().setTxtSyuruiCode(txtSyuruiCode);
-    }
-
-    @JsonIgnore
-    public TextBoxCode getTxtServiceCode() {
-        return this.getPanServiceSyurui().getTxtServiceCode();
-    }
-
-    @JsonIgnore
-    public void setTxtServiceCode(TextBoxCode txtServiceCode) {
-        this.getPanServiceSyurui().setTxtServiceCode(txtServiceCode);
-    }
-
-    @JsonIgnore
-    public DataGrid<dgServiceShuruiList_Row> getDgServiceShuruiList() {
-        return this.getPanServiceSyurui().getDgServiceShuruiList();
-    }
-
-    @JsonIgnore
-    public void setDgServiceShuruiList(DataGrid<dgServiceShuruiList_Row> dgServiceShuruiList) {
-        this.getPanServiceSyurui().setDgServiceShuruiList(dgServiceShuruiList);
+    public void setDgServiceBunruiList(DataGrid<dgServiceBunruiList_Row> dgServiceBunruiList) {
+        this.getPanServiceSyurui().setDgServiceBunruiList(dgServiceBunruiList);
     }
 
     // </editor-fold>

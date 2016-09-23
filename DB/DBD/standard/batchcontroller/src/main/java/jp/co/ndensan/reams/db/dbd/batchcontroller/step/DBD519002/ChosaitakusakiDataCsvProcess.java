@@ -129,8 +129,14 @@ public class ChosaitakusakiDataCsvProcess extends BatchProcessBase<Chosaitakusak
         RString 市町村名 = association.get市町村名();
         RString ジョブ番号 = new RString(String.valueOf(JobContextHolder.getJobId()));
         RString 出力件数 = new RString(シーケンシャル番号);
-        RString 今回処理日時開始日時 = para.getKonkaishoriymdtime_from().getDate().wareki().toDateString();
-        RString 今回処理日時終了日時 = para.getKonkaishoriymdtime_to().getDate().wareki().toDateString();
+        RString 今回処理日時開始日時 = RString.EMPTY;
+        RString 今回処理日時終了日時 = RString.EMPTY;
+        if (para.getKonkaishoriymdtime_from() != null) {
+            今回処理日時開始日時 = para.getKonkaishoriymdtime_from().getDate().wareki().toDateString();
+        }
+        if (para.getKonkaishoriymdtime_to() != null) {
+            今回処理日時終了日時 = para.getKonkaishoriymdtime_to().getDate().wareki().toDateString();
+        }
         List<RString> 出力条件 = new ArrayList<>();
         出力条件.add(出力件数_状況フラグ);
         出力条件.add(出力件数_今回処理日時開始日時.concat(今回処理日時開始日時));
