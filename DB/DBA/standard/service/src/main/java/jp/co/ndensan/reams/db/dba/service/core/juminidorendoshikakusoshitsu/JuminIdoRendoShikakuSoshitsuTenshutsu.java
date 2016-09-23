@@ -199,7 +199,14 @@ public class JuminIdoRendoShikakuSoshitsuTenshutsu {
         entity.set被保険者台帳EntityList(list);
     }
 
-    private void getCheckJukyushaDaicho(UaFt200FindShikibetsuTaishoEntity 住民異動情報, DbV1001HihokenshaDaichoEntity 被保険者台帳,
+    /**
+     * 受給者かどうかチェックするです。
+     *
+     * @param 住民異動情報 UaFt200FindShikibetsuTaishoEntity
+     * @param 被保険者台帳 DbV1001HihokenshaDaichoEntity
+     * @param entity JuminIdoRendoShikakuTorokuEntity
+     */
+    public void getCheckJukyushaDaicho(UaFt200FindShikibetsuTaishoEntity 住民異動情報, DbV1001HihokenshaDaichoEntity 被保険者台帳,
             JuminIdoRendoShikakuTorokuEntity entity) {
 
         if (被保険者台帳.getHihokenshaNo() == null || 被保険者台帳.getHihokenshaNo().value().isEmpty()) {

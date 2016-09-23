@@ -24,8 +24,8 @@ public class NinteiBatchKekkaListShutsuryokuMybatisParameter implements IMyBatis
     /**
      * コンストラクタです。
      *
-     * @param 認定期間_開始日
-     * @param 認定期間_終了日
+     * @param 認定期間_開始日 認定期間_開始日
+     * @param 認定期間_終了日 認定期間_終了日
      */
     public NinteiBatchKekkaListShutsuryokuMybatisParameter(
             FlexibleDate 認定期間_開始日,

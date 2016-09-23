@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenKyufuRitsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.NyuryokuShikibetsuNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -299,7 +300,10 @@ public class KyufuJissekiKihonJouhouMainHandler {
     private void set申請内容エリア(KyufujissekiKihon 給付実績基本情報, FlexibleYearMonth サービス提供年月,
             RString 事業所名称, RString 給付分類区分) {
         div.getTxtKyufuJissekiKihonSakuseiKubun().setValue(get作成区分(給付実績基本情報.get給付実績情報作成区分コード()));
-        div.getTxtKyufuJissekiKihonYokaigodo().setValue(div.getCcdKyufuJissekiHeader().get要介護度());
+        if (!RString.isNullOrEmpty(給付実績基本情報.get要介護状態区分コード())) {
+            div.getTxtKyufuJissekiKihonYokaigodo().setValue(YokaigoJotaiKubunSupport.toValue(サービス提供年月,
+                    給付実績基本情報.get要介護状態区分コード()).getName());
+        }
         if (給付実績基本情報.get認定有効期間_開始年月日() != null && !給付実績基本情報.get認定有効期間_開始年月日().isEmpty()) {
             div.getTxtYukoKaishiYMD().setValue(new RDate(給付実績基本情報.get認定有効期間_開始年月日().toString()));
         }
