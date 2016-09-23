@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc120130;
 
 import jp.co.ndensan.reams.db.dbc.definition.core.kokuhorenif.KokuhorenJoho_TorikomiErrorKubun;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc120110.KogakuGassanJikofutangakuDoMasterTorokuParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc120110.KogakuGassanJikofutangakuDoMasterTorokuProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3070KogakuGassanJikoFutanGakuEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc120130.KogakuGassanJSaiSyoriJyunbiEntity;
@@ -40,10 +41,17 @@ public class KogakuGassanJSaiSyoriJyunbiDoMasterProcess extends BatchProcessBase
     BatchEntityCreatedTempTableWriter 高額合算自己負担額一時tableWriter;
 
     private KogakuGassanJikofutangakuDoMasterTorokuProcessParameter parameter;
+    private KogakuGassanJikofutangakuDoMasterTorokuParameter dbParameter;
+
+    @Override
+    protected void initialize() {
+        dbParameter = new KogakuGassanJikofutangakuDoMasterTorokuParameter();
+        dbParameter.set処理年月(parameter.get処理年月());
+    }
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MAPPERPATH);
+        return new BatchDbReader(MAPPERPATH, dbParameter);
     }
 
     @Override
