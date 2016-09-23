@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0320011;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.dbc010010.DBC010010_JuryoininKeiyakuShoninKakuninshoParameter;
+import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC010010.DBC010010_JuryoininKeiyakuShoninKakuninshoParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0320011.DBC0320011StateName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0320011.JuryoIninKeiyakuShoninKakuninshoDiv;

@@ -7,8 +7,11 @@ package jp.co.ndensan.reams.db.dbc.service.core.jukyushateiseirenrakuhyotorokuma
 
 import jp.co.ndensan.reams.db.dbc.business.core.basic.JukyushaIdoRenrakuhyo;
 import jp.co.ndensan.reams.db.dbc.business.core.jukyushateiseirenrakuhyotorokumanager.JukyushaTeiseiRenrakuhyoTorokuManagerResult;
+import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.jukyushateiseirenrakuhyotorokumanager.JukyushaTeiseiRenrakuhyoTorokuManagerParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3001JukyushaIdoRenrakuhyoEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3001JukyushaIdoRenrakuhyoDac;
+import jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.jukyushateiseirenrakuhyotorokumanager.IJukyushaTeiseiRenrakuhyoTorokuManagerMapper;
+import jp.co.ndensan.reams.db.dbc.service.core.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -25,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class JukyushaTeiseiRenrakuhyoTorokuManager {
 
     private final DbT3001JukyushaIdoRenrakuhyoDac 受給者異動送付Dac;
+    private final MapperProvider mapperProvider;
     private static final RString ONE = new RString("1");
     private static final RString TWO = new RString("2");
     private static final RString THREE = new RString("3");
@@ -33,6 +37,7 @@ public class JukyushaTeiseiRenrakuhyoTorokuManager {
      * コンストラクタです。
      */
     public JukyushaTeiseiRenrakuhyoTorokuManager() {
+        this.mapperProvider = InstanceProvider.create(MapperProvider.class);
         this.受給者異動送付Dac = InstanceProvider.create(DbT3001JukyushaIdoRenrakuhyoDac.class);
     }
 
@@ -74,9 +79,13 @@ public class JukyushaTeiseiRenrakuhyoTorokuManager {
                 result.setエラー有無(1);
                 result.setエラーメッセージコード(new RString(UrErrorMessages.既に存在.getMessage().getCode()));
             } else {
+                IJukyushaTeiseiRenrakuhyoTorokuManagerMapper mapper = mapperProvider.create(
+                        IJukyushaTeiseiRenrakuhyoTorokuManagerMapper.class);
+                JukyushaTeiseiRenrakuhyoTorokuManagerParameter parameter
+                        = new JukyushaTeiseiRenrakuhyoTorokuManagerParameter(受給者訂正連絡票登録画面Div.get異動年月日(),
+                                受給者訂正連絡票登録画面Div.get被保険者番号());
                 DbT3001JukyushaIdoRenrakuhyoEntity minRirekiNoの受給者異動送付
-                        = 受給者異動送付Dac.selectMaxRirekiNoByMinIdoYMD(受給者訂正連絡票登録画面Div.get被保険者番号(),
-                                受給者訂正連絡票登録画面Div.get異動年月日());
+                        = mapper.selectMaxRirekiNoByMinIdoYMD(parameter);
                 get警告メッセージコード(受給者訂正連絡票登録画面Div, result, minRirekiNoの受給者異動送付);
             }
         }

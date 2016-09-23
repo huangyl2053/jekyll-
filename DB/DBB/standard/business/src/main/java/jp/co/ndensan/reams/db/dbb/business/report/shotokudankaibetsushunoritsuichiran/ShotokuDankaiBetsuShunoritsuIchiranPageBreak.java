@@ -62,7 +62,7 @@ public class ShotokuDankaiBetsuShunoritsuIchiranPageBreak extends PageBreaker<Sh
                 flag = true;
             }
         } else if (this.breakKeysList.contains(科目コード)
-                && !currentSource.getSource().KamokuCode.equals(nextSource.getSource().KamokuCode)) {
+                && !currentSource.getSource().kamokuCode.equals(nextSource.getSource().kamokuCode)) {
             flag = true;
         } else if (this.breakKeysList.contains(構成市町村コード)
                 && !currentSource.getSource().shichosonCode.equals(nextSource.getSource().shichosonCode)) {

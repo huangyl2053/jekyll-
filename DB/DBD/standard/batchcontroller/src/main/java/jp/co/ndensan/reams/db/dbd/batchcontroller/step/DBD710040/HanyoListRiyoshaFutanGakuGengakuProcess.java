@@ -50,13 +50,9 @@ import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.Shikibet
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.psm.DataShutokuKubun;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
-import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
-import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.ChohyoShutsuryokujunFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.reportoutputorder.IChohyoShutsuryokujunFinder;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.EucFileOutputJokenhyoFactory;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
@@ -65,7 +61,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -168,7 +163,7 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
     private static final RString カラ = new RString("～");
     private static final RString 左記号 = new RString("(");
     private static final RString 右記号 = new RString(")");
-    private static final RString SHOKISAIHIHOKENSHANO = new RString("利用者負担額減額_証記載保険者番号");
+//    private static final RString SHOKISAIHIHOKENSHANO = new RString("利用者負担額減額_証記載保険者番号");
     private static final RString HIHOKENSHANO = new RString("利用者負担額減額_被保険者番号");
     private FileSpoolManager manager;
     private RString eucFilePath;
@@ -187,7 +182,7 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
 
     @Override
     protected IBatchReader createReader() {
-        RString 出力順 = get出力順();
+        RString 出力順 = HIHOKENSHANO;
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
 //        List<JuminShubetsu> 住民種別List = new ArrayList<>();
@@ -249,38 +244,37 @@ public class HanyoListRiyoshaFutanGakuGengakuProcess extends BatchProcessBase<Ri
         バッチ出力条件リストの出力();
     }
 
-    private RString get出力順() {
-        RStringBuilder orderByClause = new RStringBuilder("order by");
-        List<RString> 出力DB項目名 = new ArrayList();
-        List<RString> 出力DB項目 = new ArrayList();
-        IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
-        IOutputOrder order = finder.get出力順(SubGyomuCode.DBD介護受給, new ReportId(processParamter.getCyohyoid()),
-                Long.valueOf(processParamter.getSyutsuryokujunparameter().toString()));
-        List<ISetSortItem> 設定項目リスト = order.get設定項目リスト();
-        for (ISetSortItem item : 設定項目リスト) {
-            出力DB項目名.add(item.getDB項目名());
-            出力DB項目.add(item.getDB項目名().concat(SPACE).concat(item.get昇降順().getOrder()));
-        }
-        if (出力DB項目名.contains(SHOKISAIHIHOKENSHANO) && !出力DB項目名.contains(HIHOKENSHANO)) {
-            for (int index = 0; index < 出力DB項目.size(); index++) {
-                if (出力DB項目.get(index).startsWith(SHOKISAIHIHOKENSHANO)) {
-                    出力DB項目.add(index + 1, HIHOKENSHANO);
-                }
-            }
-        } else if (!出力DB項目名.contains(SHOKISAIHIHOKENSHANO) && !出力DB項目名.contains(HIHOKENSHANO)) {
-            出力DB項目.add(SHOKISAIHIHOKENSHANO);
-            出力DB項目.add(HIHOKENSHANO);
-        }
-        for (int j = 0; j < 出力DB項目.size(); j++) {
-            if (j != 0) {
-                orderByClause = orderByClause.append(SPACE).append(COMMA).append(SPACE).append(出力DB項目.get(j));
-            } else {
-                orderByClause = orderByClause.append(SPACE).append(出力DB項目.get(j));
-            }
-        }
-        return orderByClause.toRString();
-    }
-
+//    private RString get出力順() {
+//        RStringBuilder orderByClause = new RStringBuilder("order by");
+//        List<RString> 出力DB項目名 = new ArrayList();
+//        List<RString> 出力DB項目 = new ArrayList();
+//        IChohyoShutsuryokujunFinder finder = ChohyoShutsuryokujunFinderFactory.createInstance();
+//        IOutputOrder order = finder.get出力順(SubGyomuCode.DBD介護受給, new ReportId(processParamter.getCyohyoid()),
+//                Long.valueOf(processParamter.getSyutsuryokujunparameter().toString()));
+//        List<ISetSortItem> 設定項目リスト = order.get設定項目リスト();
+//        for (ISetSortItem item : 設定項目リスト) {
+//            出力DB項目名.add(item.getDB項目名());
+//            出力DB項目.add(item.getDB項目名().concat(SPACE).concat(item.get昇降順().getOrder()));
+//        }
+//        if (出力DB項目名.contains(SHOKISAIHIHOKENSHANO) && !出力DB項目名.contains(HIHOKENSHANO)) {
+//            for (int index = 0; index < 出力DB項目.size(); index++) {
+//                if (出力DB項目.get(index).startsWith(SHOKISAIHIHOKENSHANO)) {
+//                    出力DB項目.add(index + 1, HIHOKENSHANO);
+//                }
+//            }
+//        } else if (!出力DB項目名.contains(SHOKISAIHIHOKENSHANO) && !出力DB項目名.contains(HIHOKENSHANO)) {
+//            出力DB項目.add(SHOKISAIHIHOKENSHANO);
+//            出力DB項目.add(HIHOKENSHANO);
+//        }
+//        for (int j = 0; j < 出力DB項目.size(); j++) {
+//            if (j != 0) {
+//                orderByClause = orderByClause.append(SPACE).append(COMMA).append(SPACE).append(出力DB項目.get(j));
+//            } else {
+//                orderByClause = orderByClause.append(SPACE).append(出力DB項目.get(j));
+//            }
+//        }
+//        return orderByClause.toRString();
+//    }
     private RiyoshaFutanGakuGengakuEucCsvEntity setBlank() {
         RiyoshaFutanGakuGengakuEucCsvEntity eucCsvEntity = new RiyoshaFutanGakuGengakuEucCsvEntity();
         eucCsvEntity.set識別コード(RString.EMPTY);

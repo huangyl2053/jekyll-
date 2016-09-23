@@ -16,6 +16,10 @@ module DBZ {
                 return "onChange_txtServiceType";
             }
 
+            public static onBeforeDialg(): string {
+                return "onBeforeDialg";
+            }
+
         }
 
         export class Controls {

@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWrite
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -22,10 +23,21 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class ShoriKekkaKakuninListDataNasiProcess extends BatchProcessBase<ShoriKekkaKakuninListTempTableEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc050010.IShoriKekkaKakuninListDataNasiMapper.select処理結果確認リスト一時情報");
+            "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc050010.IShoriKekkaKakuninListDataNasiMapper.select振込明細一時情報");
 
-    private static final int 処理結果確認リスト件数なし = 0;
+    private static final int 振込明細一時件数なし = 0;
     private int count = 0;
+    private OutputParameter<Integer> outputCount;
+    public static final RString PARAMETER_OUT_COUNT;
+
+    static {
+        PARAMETER_OUT_COUNT = new RString("outputCount");
+    }
+
+    @Override
+    protected void initialize() {
+        outputCount = new OutputParameter<>();
+    }
 
     @BatchWriter
     BatchEntityCreatedTempTableWriter shoriKekkaKakuninListDataNasi;
@@ -48,7 +60,8 @@ public class ShoriKekkaKakuninListDataNasiProcess extends BatchProcessBase<Shori
 
     @Override
     protected void afterExecute() {
-        if (処理結果確認リスト件数なし == count) {
+        outputCount.setValue(count);
+        if (振込明細一時件数なし == count) {
             shoriKekkaKakuninListDataNasi.insert(create処理結果確認_振込データなし());
         }
     }

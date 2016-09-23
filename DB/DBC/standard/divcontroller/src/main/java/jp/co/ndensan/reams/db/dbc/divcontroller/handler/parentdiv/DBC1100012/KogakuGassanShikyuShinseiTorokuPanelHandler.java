@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakugassanshikyushinseitoroku.ShinseishoJohoResult;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakugassanshikyushinseitoroku.ShinseishoJohoSearchParameter;
-import jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC1100012.KogakuGassanShikyuShinseiTorokuPanel;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1100012.KogakuGassanShikyuShinseiTorokuPanelDiv;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1100012.dgTorokuSearchResult_Row;
 import jp.co.ndensan.reams.db.dbc.service.core.kogakugassan.KogakuGassanShikyuShinseiToroku;
@@ -51,15 +50,6 @@ public class KogakuGassanShikyuShinseiTorokuPanelHandler {
     private static final RString 空 = new RString("　");
     private static final RString 単一市町村モード = new RString("単一市町村モード");
     private static final RString 広域市町村モード = new RString("広域市町村モード");
-    private static final RString 高額合算支給申請書登録変更申請 = new RString("高額合算　支給申請書登録・変更");
-    private static final RString 高額合算支給申請書登録取下げ申請 = new RString("高額合算　支給申請書登録・取下げ");
-    private static final RString 高額合算支給申請書訂正 = new RString("高額合算　支給申請書・訂正");
-    private static final RString 高額合算支給申請書写登録変更申請 = new RString("高額合算　支給申請書（写）・変更");
-    private static final RString 高額合算支給申請書写登録取下げ申請 = new RString("高額合算　支給申請書（写）・取下げ");
-    private static final RString 高額合算支給申請書写訂正 = new RString("高額合算　支給申請書（写）・訂正");
-    private static final RString 自己負担額証明書交付申請書登録変更申請 = new RString("高額合算　自己負担額証明書交付申請書登録・変更");
-    private static final RString 自己負担額証明書交付申請書登録取下げ申請 = new RString("高額合算　自己負担額証明書交付申請書登録・取下げ");
-    private static final RString 自己負担額証明書交付申請書訂正 = new RString("高額合算　自己負担額証明書交付申請書登録・訂正");
 
     /**
      * コンストラクタです。
@@ -115,67 +105,6 @@ public class KogakuGassanShikyuShinseiTorokuPanelHandler {
         }
 
         状態1(モード);
-    }
-
-    /**
-     * タイトルのメソッドます。
-     *
-     * @param メニューID RString
-     * @return RString
-     */
-    public RString switchFor(RString メニューID) {
-        final Integer one = 1;
-        final Integer two = 2;
-        final Integer three = 3;
-        RString タイトル = new RString("");
-
-        switch (メニューID.toString()) {
-            case "DBCMN61002":
-                タイトル = 高額合算支給申請書登録変更申請;
-                KogakuGassanShikyuShinseiTorokuPanel.set申請状態(two);
-                KogakuGassanShikyuShinseiTorokuPanel.set申請状況(one);
-                break;
-            case "DBCMN61003":
-                タイトル = 高額合算支給申請書登録取下げ申請;
-                KogakuGassanShikyuShinseiTorokuPanel.set申請状態(three);
-                KogakuGassanShikyuShinseiTorokuPanel.set申請状況(one);
-                break;
-            case "DBCMN61004":
-                タイトル = 高額合算支給申請書訂正;
-                KogakuGassanShikyuShinseiTorokuPanel.set申請状況(one);
-                break;
-            case "DBCMN61006":
-                タイトル = 高額合算支給申請書写登録変更申請;
-                KogakuGassanShikyuShinseiTorokuPanel.set申請状態(two);
-                KogakuGassanShikyuShinseiTorokuPanel.set申請状況(three);
-                break;
-            case "DBCMN61007":
-                タイトル = 高額合算支給申請書写登録取下げ申請;
-                KogakuGassanShikyuShinseiTorokuPanel.set申請状態(three);
-                KogakuGassanShikyuShinseiTorokuPanel.set申請状況(three);
-                break;
-            case "DBCMN61008":
-                タイトル = 高額合算支給申請書写訂正;
-                KogakuGassanShikyuShinseiTorokuPanel.set申請状況(three);
-                break;
-            case "DBCMN61010":
-                タイトル = 自己負担額証明書交付申請書登録変更申請;
-                KogakuGassanShikyuShinseiTorokuPanel.set申請状態(two);
-                KogakuGassanShikyuShinseiTorokuPanel.set申請状況(two);
-                break;
-            case "DBCMN61011":
-                タイトル = 自己負担額証明書交付申請書登録取下げ申請;
-                KogakuGassanShikyuShinseiTorokuPanel.set申請状態(three);
-                KogakuGassanShikyuShinseiTorokuPanel.set申請状況(two);
-                break;
-            case "DBCMN61012":
-                タイトル = 自己負担額証明書交付申請書訂正;
-                KogakuGassanShikyuShinseiTorokuPanel.set申請状況(two);
-                break;
-            default:
-                break;
-        }
-        return タイトル;
     }
 
     /**
@@ -334,7 +263,7 @@ public class KogakuGassanShikyuShinseiTorokuPanelHandler {
                 申請基本情報検索有無, 申請代表者氏名前方一致, 申請代表者氏名, 被保険者情報検索有無, 被保険者番号,
                 被保険者氏名前方一致, 被保険者氏名, null);
         List<ShinseishoJohoResult> list = KogakuGassanShikyuShinseiToroku.createInstance().getShinseishoJoho(pama);
-        if (list.isEmpty()) {
+        if (list != null && list.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.該当データなし.getMessage());
         } else {
             List<dgTorokuSearchResult_Row> rowList = new ArrayList<>();
