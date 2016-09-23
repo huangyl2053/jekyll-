@@ -48,6 +48,9 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaList {
     private static final RString 旧措置者のみ = new RString("kyusochishaNomi");
     private static final RString 平11年 = new RString("1999");
     private static final RString 平12年 = new RString("2000");
+    private static final RString KEY0 = new RString("all");
+    private static final RString KEY1 = new RString("56");
+    private static final RString KEY2 = new RString("57");
     private static final int NO_0 = 0;
     private static final int NO_1 = 1;
     private static final int NO_4 = 4;
@@ -177,15 +180,15 @@ public class HomonKaigoRiyoshaFutangakuGengakuNinteishaList {
      * @return bparamt
      */
     public DBD202010_HomonKaigoRiyoshaFutanGakuNinteishaListParameter set法別区分の設定(HomonKaigoRiyoshaFutanGengakuNinteishaListDiv div) {
-        RString ddlhobetsu = div.getDdlHobetsuKubun().getSelectedValue();
-        if (ddlhobetsu.equals(new RString("全て"))) {
+        RString ddlhobetsu = div.getDdlHobetsuKubun().getSelectedKey();
+        if (ddlhobetsu.equals(KEY0)) {
             bparamt.set法別区分(HobetsuKubun.すべて);
-        } else if (ddlhobetsu.equals(new RString("施行時ホームヘルプ(56)"))) {
+        } else if (ddlhobetsu.equals(KEY1)) {
             bparamt.set法別区分(HobetsuKubun.施行時ホームヘルプ);
-        } else if (ddlhobetsu.equals(new RString("障害ヘルプ全額免除(58)"))) {
-            bparamt.set法別区分(HobetsuKubun.障害ヘルプ全額免除);
-        } else {
+        } else if (ddlhobetsu.equals(KEY2)) {
             bparamt.set法別区分(HobetsuKubun.障害時ホームヘルプ);
+        } else {
+            bparamt.set法別区分(HobetsuKubun.障害ヘルプ全額免除);
         }
         return bparamt;
     }

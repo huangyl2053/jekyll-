@@ -127,7 +127,7 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
         key.setデータ取得区分(DataShutokuKubun.基準日時点の最新のレコード);
-        key.set基準日(parameter.get基準日());
+        key.set基準日(parameter.get課税判定等基準日());
         UaFt200FindShikibetsuTaishoFunction uaFt200Psm = new UaFt200FindShikibetsuTaishoFunction(key.getPSM検索キー());
         RString psmShikibetsuTaisho = new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
         outputOrder = ChohyoShutsuryokujunFinderFactory.createInstance()
@@ -187,11 +187,13 @@ public class NinteishaListSakuseiProcess extends BatchProcessBase<NinteishaListS
 
         if (parameter.get出力設定().contains(CSVSettings.連番付加)) {
             KakuninListCsvEntity eucCsvEntity = new KakuninListCsvEntity();
-            NinteishaListSakuseiManager.createInstance().連番ありCSV情報設定(eucCsvEntity, t, i);
+            NinteishaListSakuseiManager.createInstance().連番ありCSV情報設定(eucCsvEntity, t, i,
+                    parameter.get出力設定().contains(CSVSettings.日付スラッシュ編集));
             eucCsvWriter.writeLine(eucCsvEntity);
         } else {
             KakuninListNoRenbanCsvEntity eucCsvEntity = new KakuninListNoRenbanCsvEntity();
-            NinteishaListSakuseiManager.createInstance().連番なしCSV情報設定(eucCsvEntity, t);
+            NinteishaListSakuseiManager.createInstance().連番なしCSV情報設定(eucCsvEntity, t,
+                    parameter.get出力設定().contains(CSVSettings.日付スラッシュ編集));
         }
     }
 
