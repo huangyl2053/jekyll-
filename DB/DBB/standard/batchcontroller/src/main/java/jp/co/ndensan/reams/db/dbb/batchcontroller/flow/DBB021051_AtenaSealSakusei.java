@@ -21,26 +21,26 @@ public class DBB021051_AtenaSealSakusei extends BatchFlowBase<DBB021051_AtenaSea
 
     @Override
     protected void defineFlow() {
-//        executeStep(宛名シール情報取得);
-//        executeStep(帳票出力用情報取得);
-//        boolean hasError = getResult(Boolean.class, new RString(宛名シール情報取得), AtenaSealJohoShutokuProcess.HAS_ERROR);
-//        if (hasError) {
-//            executeStep(処理結果リストCSV);
-//        }
+        executeStep(宛名シール情報取得);
+        executeStep(帳票出力用情報取得);
+        boolean hasError = getResult(Boolean.class, new RString(宛名シール情報取得), AtenaSealJohoShutokuProcess.HAS_ERROR);
+        if (hasError) {
+            executeStep(処理結果リストCSV);
+        }
     }
 
-//    @Step(宛名シール情報取得)
-//    IBatchFlowCommand atenaSealJohoShutokuProcess() {
-//        return loopBatch(AtenaSealJohoShutokuProcess.class).arguments(getParameter().toDBB021051ProcessParameter()).define();
-//    }
-//
-//    @Step(帳票出力用情報取得)
-//    IBatchFlowCommand chohyoJohoShutokuProcess() {
-//        return loopBatch(ChohyoJohoShutokuProcess.class).arguments(getParameter().toDBB021051ProcessParameter()).define();
-//    }
-//
-//    @Step(処理結果リストCSV)
-//    IBatchFlowCommand shoriKekkaListProcess() {
-//        return loopBatch(ShoriKekkaListProcess.class).arguments(getParameter().toDBB021051ProcessParameter()).define();
-//    }
+    @Step(宛名シール情報取得)
+    IBatchFlowCommand atenaSealJohoShutokuProcess() {
+        return loopBatch(AtenaSealJohoShutokuProcess.class).arguments(getParameter().toDBB021051ProcessParameter()).define();
+    }
+
+    @Step(帳票出力用情報取得)
+    IBatchFlowCommand chohyoJohoShutokuProcess() {
+        return loopBatch(ChohyoJohoShutokuProcess.class).arguments(getParameter().toDBB021051ProcessParameter()).define();
+    }
+
+    @Step(処理結果リストCSV)
+    IBatchFlowCommand shoriKekkaListProcess() {
+        return loopBatch(ShoriKekkaListProcess.class).arguments(getParameter().toDBB021051ProcessParameter()).define();
+    }
 }

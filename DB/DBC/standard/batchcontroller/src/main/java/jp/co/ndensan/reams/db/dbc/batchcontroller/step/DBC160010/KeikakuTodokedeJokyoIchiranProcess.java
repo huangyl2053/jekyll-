@@ -328,39 +328,35 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
     }
 
     private boolean check(KeikakuTodokedeJokyoIchiranEntity entity) {
-        if (processParameter.getJyukyuushinseibiFrom() != null
+        if (!(processParameter.getJyukyuushinseibiFrom() != null
                 && !processParameter.getJyukyuushinseibiFrom().isEmpty()
                 && entity.get受給申請年月日() != null
                 && !entity.get受給申請年月日().isEmpty()
-                && entity.get受給申請年月日().isBefore(processParameter.getJyukyuushinseibiFrom())) {
-            return true;
-        }
-        if (processParameter.getJyukyuushinseibiTo() != null
+                && entity.get受給申請年月日().isBefore(processParameter.getJyukyuushinseibiFrom()))) {
+            return false;
+        } else if (!(processParameter.getJyukyuushinseibiTo() != null
                 && !processParameter.getJyukyuushinseibiTo().isEmpty()
                 && entity.get受給申請年月日() != null
                 && !entity.get受給申請年月日().isEmpty()
-                && processParameter.getJyukyuushinseibiTo().isBefore(entity.get受給申請年月日())) {
-            return true;
-        }
-        if (受給者申請中者のみ.equals(processParameter.getTaisyoushatyuusyutu())
-                && !RS_0000.equals(entity.get履歴番号())) {
-            return true;
-        }
-        if (!(RS_1.equals(entity.get住所地特例フラグ())
+                && processParameter.getJyukyuushinseibiTo().isBefore(entity.get受給申請年月日()))) {
+            return false;
+        } else if (!(受給者申請中者のみ.equals(processParameter.getTaisyoushatyuusyutu())
+                && !RS_0000.equals(entity.get履歴番号()))) {
+            return false;
+        } else if (RS_1.equals(entity.get住所地特例フラグ())
                 && 全受給者_施設含む.equals(processParameter.getTaisyoushatyuusyutu())
                 && (entity.get資格喪失年月日() == null
-                || !entity.get資格取得年月日().equals(entity.get資格喪失年月日())))) {
-            return true;
-        }
-        if (entity.get施設フラウ() != null
-                && !(全受給者_施設含む.equals(processParameter.getTaisyoushatyuusyutu()))) {
-            return true;
+                || !entity.get資格取得年月日().equals(entity.get資格喪失年月日()))) {
+            return false;
+        } else if (!(entity.get施設フラウ() != null
+                && !(全受給者_施設含む.equals(processParameter.getTaisyoushatyuusyutu())))) {
+            return false;
         }
         return check2(entity);
     }
 
     private boolean check2(KeikakuTodokedeJokyoIchiranEntity entity) {
-        if (未提出者のみ.equals(processParameter.getTodokeidejyoukyou())
+        if (!(未提出者のみ.equals(processParameter.getTodokeidejyoukyou())
                 && entity.get適用開始年月日() != null
                 && !entity.get適用開始年月日().isEmpty()
                 && processParameter.getKijyunbi() != null
@@ -368,14 +364,14 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
                 && entity.get適用開始年月日().isBeforeOrEquals(processParameter.getKijyunbi())
                 && (entity.get適用終了年月日() == null
                 || (!entity.get適用終了年月日().isEmpty()
-                && processParameter.getKijyunbi().isBeforeOrEquals(entity.get適用終了年月日())))) {
-            return true;
+                && processParameter.getKijyunbi().isBeforeOrEquals(entity.get適用終了年月日()))))) {
+            return false;
         }
-        return 提出者のみ.equals(processParameter.getTodokeidejyoukyou())
+        return !(提出者のみ.equals(processParameter.getTodokeidejyoukyou())
                 && entity.get適用終了年月日() != null
                 && processParameter.getKijyunbi() != null
                 && !processParameter.getKijyunbi().isEmpty()
-                && entity.get適用終了年月日().isBefore(processParameter.getKijyunbi());
+                && entity.get適用終了年月日().isBefore(processParameter.getKijyunbi()));
     }
 
 }
