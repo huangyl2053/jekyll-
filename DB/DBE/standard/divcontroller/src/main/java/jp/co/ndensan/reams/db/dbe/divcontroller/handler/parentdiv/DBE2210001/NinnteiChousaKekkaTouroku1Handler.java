@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2210001;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousakekkatouroku1.TempData;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku02A_17;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosahyokomoku.GaikyochosaKomoku02A_18;
@@ -280,9 +281,10 @@ public class NinnteiChousaKekkaTouroku1Handler {
      * 予防給付サービス名称を設定します。
      *
      * @param temp_厚労省IF識別コード 厚労省IF識別コード
+     * @param map 切り替え前の設定値
      * @return 予防給付状況
      */
-    public RString 予防給付サービス名称取得(RString temp_厚労省IF識別コード) {
+    public RString 予防給付サービス名称取得(RString temp_厚労省IF識別コード, Map<Integer, Decimal> map) {
 
         List<dgRiyoServiceJyokyo_Row> halfListTmp = new ArrayList<>();
         if (厚労省IF識別コード_06A.equals(temp_厚労省IF識別コード)) {
@@ -346,6 +348,17 @@ public class NinnteiChousaKekkaTouroku1Handler {
                 予防給付状況 = 予防給付状況.concat(カンマ);
             }
         }
+        if (map != null) {
+            List<Integer> 連番List = get予防給付サービス連番List(temp_厚労省IF識別コード);
+            int index = 0;
+            int 連番;
+            予防給付状況 = RString.EMPTY;
+            for (dgRiyoServiceJyokyo_Row firstRow : halfList) {
+                連番 = 連番List.get(index++);
+                firstRow.getServiceJokyo().setValue(map.get(連番));
+                予防給付状況 = 予防給付状況.concat(new RString(map.get(連番).toString())).concat(カンマ);
+            }
+        }
         div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoServiceJyokyo().setDataSource(halfList);
         return 予防給付状況;
     }
@@ -364,21 +377,22 @@ public class NinnteiChousaKekkaTouroku1Handler {
      * @param is再調査の場合 true:再調査の場合
      * @param 厚労省IF識別コード 厚労省IF識別コード
      * @param 変更前の設定値 変更前の設定値
+     * @param map 切り替え前の設定値
      */
-    public void 利用サービスGrid表示(RString 現在の選択, boolean is再調査の場合, RString 厚労省IF識別コード, RString 変更前の設定値) {
+    public void 利用サービスGrid表示(RString 現在の選択, boolean is再調査の場合, RString 厚労省IF識別コード, RString 変更前の設定値, Map<Integer, Decimal> map) {
 
         if (予防給付サービス_選択.toString().equalsIgnoreCase(現在の選択.toString())) {
-            予防給付サービス名称取得(厚労省IF識別コード);
+            予防給付サービス名称取得(厚労省IF識別コード, map);
         } else {
-            介護給付サービス名称取得(厚労省IF識別コード);
+            介護給付サービス名称取得(厚労省IF識別コード, map);
         }
         if (is再調査の場合) {
-            利用サービスGridの破棄(変更前の設定値);
+            利用サービスGridの破棄(変更前の設定値, map);
         }
         div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoServiceJyokyo().setVisible(true);
     }
 
-    private RString 介護給付サービス名称取得(RString temp_厚労省IF識別コード) {
+    private RString 介護給付サービス名称取得(RString temp_厚労省IF識別コード, Map<Integer, Decimal> map) {
         List<dgRiyoServiceJyokyo_Row> halfListTmp = new ArrayList<>();
 
         if (厚労省IF識別コード_06A.equals(temp_厚労省IF識別コード)) {
@@ -454,6 +468,17 @@ public class NinnteiChousaKekkaTouroku1Handler {
                 halfList.add(rowData);
             }
             介護給付状況 = 介護給付状況.concat(カンマ);
+        }
+        if (map != null) {
+            List<Integer> 連番List = get介護給付サービス連番List(temp_厚労省IF識別コード);
+            int index = 0;
+            int 連番;
+            介護給付状況 = RString.EMPTY;
+            for (dgRiyoServiceJyokyo_Row firstRow : halfList) {
+                連番 = 連番List.get(index++);
+                firstRow.getServiceJokyo().setValue(map.get(連番));
+                介護給付状況 = 介護給付状況.concat(new RString(map.get(連番).toString())).concat(カンマ);
+            }
         }
         div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoServiceJyokyo().setDataSource(halfList);
         return 介護給付状況;
@@ -531,7 +556,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
         List<dgRiyoServiceJyokyo_Row> halfList = div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoServiceJyokyo().getDataSource();
         RString 予防給付状況 = RString.EMPTY;
         if (halfList == null || halfList.isEmpty()) {
-            予防給付状況 = 予防給付サービス名称取得(厚労省IF識別コード);
+            予防給付状況 = 予防給付サービス名称取得(厚労省IF識別コード, null);
             halfList = div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoServiceJyokyo().getDataSource();
         }
 
@@ -570,7 +595,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
         List<dgRiyoServiceJyokyo_Row> halfList = div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoServiceJyokyo().getDataSource();
         RString 介護給付状況 = RString.EMPTY;
         if (halfList == null || halfList.isEmpty()) {
-            介護給付状況 = 介護給付サービス名称取得(厚労省IF識別コード);
+            介護給付状況 = 介護給付サービス名称取得(厚労省IF識別コード, null);
             halfList = div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoServiceJyokyo().getDataSource();
         }
 
@@ -696,13 +721,14 @@ public class NinnteiChousaKekkaTouroku1Handler {
      * @param is再調査の場合 true:再調査の場合
      * @param 厚労省IF識別コード 厚労省IF識別コード
      * @param 変更前の設定値 変更前の設定値
+     * @param map 切り替え前の設定値
      */
-    public void 利用サービスの切り替え(RString 現在の選択, boolean is再調査の場合, RString 厚労省IF識別コード, RString 変更前の設定値) {
+    public void 利用サービスの切り替え(RString 現在の選択, boolean is再調査の場合, RString 厚労省IF識別コード, RString 変更前の設定値,  Map<Integer, Decimal> map) {
         if (なし_選択.toString().equalsIgnoreCase(現在の選択.toString())) {
             利用サービスGrid非表示();
             利用サービスGridのクリア();
         } else {
-            利用サービスGrid表示(現在の選択, is再調査の場合, 厚労省IF識別コード, 変更前の設定値);
+            利用サービスGrid表示(現在の選択, is再調査の場合, 厚労省IF識別コード, 変更前の設定値, map);
         }
     }
 
@@ -710,9 +736,13 @@ public class NinnteiChousaKekkaTouroku1Handler {
      * 利用サービスGridの破棄を行います。
      *
      * @param 変更前の設定値 変更前の設定値
+     * @param map 切り替え前の設定値
      */
-    public void 利用サービスGridの破棄(RString 変更前の設定値) {
+    public void 利用サービスGridの破棄(RString 変更前の設定値, Map<Integer, Decimal> map) {
 
+        if (map != null) {
+            return;
+        }
         List<dgRiyoServiceJyokyo_Row> fistHalf = div.getDgRiyoServiceJyokyo().getDataSource();
 
         if (変更前の設定値 == null || 変更前の設定値.isEmpty()) {
