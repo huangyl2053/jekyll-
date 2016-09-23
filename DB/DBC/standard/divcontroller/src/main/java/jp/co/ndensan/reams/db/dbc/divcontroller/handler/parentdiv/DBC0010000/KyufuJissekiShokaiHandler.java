@@ -82,11 +82,9 @@ public class KyufuJissekiShokaiHandler {
     private static final int INT_YJYUY = 44;
     private static final int INT_YJYUG = 45;
     private static final int INT_YJYUR = 46;
-    private static final int INT_YJYUNA = 47;
     private static final int INT_YJYUH = 48;
     private static final int INT_NJYUNG = 75;
     private static final RString RS_ZERO = new RString(0);
-    private static final RString RS_ICHI = new RString(1);
     private static final RString 指定居宅サービス = new RString("指定居宅サービス");
     private static final RString 居宅介護 = new RString("居宅介護");
     private static final RString 指定施設サービス等 = new RString("指定施設サービス等");
