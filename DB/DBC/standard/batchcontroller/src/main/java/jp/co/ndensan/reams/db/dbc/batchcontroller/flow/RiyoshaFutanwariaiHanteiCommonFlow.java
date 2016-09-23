@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.work3.HanteiTaishoshaTuikaProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.work5.SeikatsuHogoGaitoJohoTempProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.work6.FutanWariaiHanteiNenziProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.HanteiTaishoshaTuikaProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.SeikatsuHogoGaitoJohoTempProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.FutanWariaiHanteiNenziProcess;
 import jp.co.ndensan.reams.db.dbc.business.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHanteiUtil;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180020.DBC180020_IdoRiyoshaFutanwariaiHanteiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc180020.DBC180020ProcessParameter;
