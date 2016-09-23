@@ -30,6 +30,6 @@ public class DBC710120_HanyoListSaishinsaKekka extends BatchFlowBase<DBC710120_H
 
     @Step(再審査結果情報)
     IBatchFlowCommand callKijunShunyugakuTekiyoRebanari() {
-        return loopBatch(HanyoListSaishinsaKekkaProcess.class).arguments(getParameter().toHanyoListSaishinsaKekkaProcessParameterr(date)).define();
+        return loopBatch(HanyoListSaishinsaKekkaProcess.class).arguments(getParameter().toHanyoListSaishinsaKekkaProcessParameter(date)).define();
     }
 }
