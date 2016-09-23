@@ -62,9 +62,9 @@ public enum Furikomi_MeisaiIchiranChushutsuTaisho {
      */
     public static Furikomi_MeisaiIchiranChushutsuTaisho toValue(RString code) {
 
-        for (Furikomi_MeisaiIchiranChushutsuTaisho furikomi_MeisaiIchiranChushutsuTaisho : Furikomi_MeisaiIchiranChushutsuTaisho.values()) {
-            if (furikomi_MeisaiIchiranChushutsuTaisho.code.equals(code)) {
-                return furikomi_MeisaiIchiranChushutsuTaisho;
+        for (Furikomi_MeisaiIchiranChushutsuTaisho meisaiIchiranChushutsuTaisho : Furikomi_MeisaiIchiranChushutsuTaisho.values()) {
+            if (meisaiIchiranChushutsuTaisho.code.equals(code)) {
+                return meisaiIchiranChushutsuTaisho;
             }
         }
         throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("振込_明細一覧抽出対象"));
