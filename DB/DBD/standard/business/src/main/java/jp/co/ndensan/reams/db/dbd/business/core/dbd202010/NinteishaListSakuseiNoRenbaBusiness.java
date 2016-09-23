@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 訪問介護利用者負担額減額認定者リス発行ビジネスクラスです。
@@ -72,9 +73,12 @@ public class NinteishaListSakuseiNoRenbaBusiness {
                 eucCsvEntity.set要介護度(YokaigoJotaiKubunSupport.toValue(KoroshoInterfaceShikibetsuCode.toValue(t.get認定情報Entity().get認定情報_要介護状態区分コード()),
                         t.get要介護認定申請情報_厚労省IF識別コード()).getName());
             }
-            eucCsvEntity.set認定日(set年月日(t.get認定情報Entity().get認定情報_認定年月日(), is日付スラッシュ編集));
-            eucCsvEntity.set認定開始日(set年月日(t.get認定情報Entity().get認定情報_認定有効期間開始年月日(), is日付スラッシュ編集));
-            eucCsvEntity.set認定終了日(set年月日(t.get認定情報Entity().get認定情報_認定有効期間終了年月日(), is日付スラッシュ編集));
+            if (t.get認定情報Entity() != null) {
+                eucCsvEntity.set認定日(set年月日(t.get認定情報Entity().get認定情報_認定年月日(), is日付スラッシュ編集));
+                eucCsvEntity.set認定開始日(set年月日(t.get認定情報Entity().get認定情報_認定有効期間開始年月日(), is日付スラッシュ編集));
+                eucCsvEntity.set認定終了日(set年月日(t.get認定情報Entity().get認定情報_認定有効期間終了年月日(), is日付スラッシュ編集));
+            }
+
         }
 
         if (has世帯員情報) {
@@ -124,7 +128,8 @@ public class NinteishaListSakuseiNoRenbaBusiness {
         }
 
         if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getKyufuritsu() != null) {
-            eucCsvEntity.set給付率(new RString(t.get訪問介護利用者負担額減額().getKyufuritsu().value().toString()));
+            Decimal 給付率Vlaue = t.get訪問介護利用者負担額減額().getKyufuritsu().value();
+            eucCsvEntity.set給付率(new RString(給付率Vlaue.toString()));
         }
 
         if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getShogaishaTechoTokyu() != null) {
@@ -138,13 +143,13 @@ public class NinteishaListSakuseiNoRenbaBusiness {
 
     private void edit出力情報_受給者(KakuninListNoRenbanCsvEntity eucCsvEntity, NinteishaListSakuseiEntity t) {
 
-        if (t.is老齢福祉年金受給者() == true) {
+        if (t.is老齢福祉年金受給者()) {
             eucCsvEntity.set老齢福祉年金受給(SXING);
         } else {
             eucCsvEntity.set老齢福祉年金受給(SPACE);
         }
 
-        if (t.is生活保護受給者() == true) {
+        if (t.is生活保護受給者()) {
             eucCsvEntity.set生活保護受給区分(SXING);
         } else {
             eucCsvEntity.set生活保護受給区分(SPACE);
@@ -157,12 +162,12 @@ public class NinteishaListSakuseiNoRenbaBusiness {
 
         eucCsvEntity.set特定疾病(RString.isNullOrEmpty(t.get要介護認定申請情報_2号特定疾病コード()) ? RString.EMPTY
                 : TokuteiShippei.toValue(t.get要介護認定申請情報_2号特定疾病コード()).get名称());
-        if (t.is所得税課税者() == true) {
+        if (t.is所得税課税者()) {
             eucCsvEntity.set所得税課税区分(KE);
         } else {
             eucCsvEntity.set所得税課税区分(SPACE);
         }
-        if (t.is受給者台帳Newest_旧措置者フラグ() == true) {
+        if (t.is受給者台帳Newest_旧措置者フラグ()) {
             eucCsvEntity.set旧措置(JIUCUO);
         } else {
             eucCsvEntity.set旧措置(SPACE);

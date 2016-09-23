@@ -11,12 +11,14 @@ import java.util.List;
 import java.util.Set;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakujigyoservicehishikyuketteitsuchisho.JigyoKogakuKetteiTsuchishoOutputOrder;
 import jp.co.ndensan.reams.db.dbc.business.report.jigyokogakuketteitsuchishoyijiari.JigyoKogakuKetteiTsuchishoYijiAriReport;
+import jp.co.ndensan.reams.db.dbc.business.report.jigyokogakuketteitsuchishoyijinashi.JigyoKogakuKetteiTsuchishoYijiNashiReport;
 import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehishikyuketteitsuchisho.JigyoKogakuKetteiTsuchishoReportParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehishikyuketteitsuchisho.KogakuKaigoServiceProcessParameter;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchisho.KetteiTsuchishoInfoTempResultEntity;
 import jp.co.ndensan.reams.db.dbc.entity.jigyokogakuketteitsuchishoyijiari.JigyoKogakuKetteiTsuchishoYijiAriSource;
+import jp.co.ndensan.reams.db.dbc.entity.jigyokogakuketteitsuchishoyijinashi.JigyoKogakuKetteiTsuchishoYijiNashiSource;
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakuketteitsuchishosealer2.KogakuKetteiTsuchiShoEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.servicehishikyuketteitsuchisho.ServicehiShikyuKetteiTsuchisho;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
@@ -69,8 +71,12 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchProcessB
     private RString 出力順情報;
     private int 連番;
     private RString 設定値;
+    private NinshoshaSource ninshoshaSource1;
     private NinshoshaSource ninshoshaSource2;
 
+    @BatchWriter
+    BatchReportWriter<JigyoKogakuKetteiTsuchishoYijiNashiSource> batchReportWriter1;
+    ReportSourceWriter<JigyoKogakuKetteiTsuchishoYijiNashiSource> reportSourceWriter1;
     @BatchWriter
     BatchReportWriter<JigyoKogakuKetteiTsuchishoYijiAriSource> batchReportWriter2;
     ReportSourceWriter<JigyoKogakuKetteiTsuchishoYijiAriSource> reportSourceWriter2;
@@ -97,6 +103,10 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchProcessB
 
     @Override
     protected void createWriter() {
+        batchReportWriter1 = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100061.getReportId().getColumnValue()).create();
+        reportSourceWriter1 = new ReportSourceWriter<>(batchReportWriter1);
+        ninshoshaSource1 = ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付, 帳票分類ID, FlexibleDate.getNowDate(),
+                NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter1);
         batchReportWriter2 = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100062.getReportId().getColumnValue()).create();
         reportSourceWriter2 = new ReportSourceWriter<>(batchReportWriter2);
         ninshoshaSource2 = ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付, 帳票分類ID, FlexibleDate.getNowDate(),
@@ -111,6 +121,9 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchProcessB
                 .concat(entity.get被保険者番号().getColumnValue());
         if (!条件set.contains(tempStr)) {
             KogakuKetteiTsuchiShoEntity reportEntity = getReportEntity(entity);
+            JigyoKogakuKetteiTsuchishoYijiNashiReport report1 = new JigyoKogakuKetteiTsuchishoYijiNashiReport(設定値,
+                    reportEntity, ninshoshaSource1, parameter.get文書番号(), 通知書定型文);
+            report1.writeBy(reportSourceWriter1);
             JigyoKogakuKetteiTsuchishoYijiAriReport report2 = new JigyoKogakuKetteiTsuchishoYijiAriReport(設定値,
                     reportEntity, ninshoshaSource2, parameter.get文書番号(), 通知書定型文);
             report2.writeBy(reportSourceWriter2);
@@ -143,6 +156,7 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchProcessB
 
         // TODO QA
         List<RString> list = new ArrayList<>();
+        list.add(RString.EMPTY);
         return list;
     }
 

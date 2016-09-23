@@ -12,6 +12,7 @@ import java.util.Set;
 import jp.co.ndensan.reams.db.dbc.business.core.kogakujigyoservicehishikyuketteitsuchisho.JigyoKogakuKetteiTsuchishoOutputOrder;
 import jp.co.ndensan.reams.db.dbc.business.report.kogakuketteitsuchishosealer2.KogakuKetteiTsuchiShoSealer2Report;
 import jp.co.ndensan.reams.db.dbc.business.report.kogakuketteitsuchishoshiharaiyoteibiyijiari.KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriReport;
+import jp.co.ndensan.reams.db.dbc.business.report.kogakuketteitsuchishoshiharaiyoteibiyijinashi.KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiReport;
 import jp.co.ndensan.reams.db.dbc.business.report.tokubetsuchoshukaishitsuchishokarihakkoichiran.KogakuKetteiTsuchiShoSealerReport;
 import jp.co.ndensan.reams.db.dbc.definition.core.shiharaihoho.ShiharaiHohoKubun;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.kogakukaigoservicehishikyuketteitsuchisho.JigyoKogakuKetteiTsuchishoReportParameter;
@@ -19,6 +20,7 @@ import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehishik
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakuketteitsuchishoshiharaiyoteibiyijiari.KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakuketteitsuchishoshiharaiyoteibiyijiari.KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kogakuketteitsuchishoshiharaiyoteibiyijinashi.KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiSource;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchisho.KetteiTsuchishoInfoTempResultEntity;
 import jp.co.ndensan.reams.db.dbc.entity.kogakuketteitsuchishosealer2.KogakuKetteiTsuchiShoSealer2Source;
 import jp.co.ndensan.reams.db.dbc.entity.report.kogakuketteitsuchishosealer.KogakuKetteiTsuchiShoSealerSource;
@@ -76,10 +78,14 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
     private List<RString> タイトルlist;
     private int 連番;
     private RString 設定値;
+    private NinshoshaSource ninshoshaSource1;
     private NinshoshaSource ninshoshaSource2;
     private NinshoshaSource ninshoshaSource3;
     private NinshoshaSource ninshoshaSource4;
 
+    @BatchWriter
+    BatchReportWriter<KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiSource> batchReportWriter1;
+    ReportSourceWriter<KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiSource> reportSourceWriter1;
     @BatchWriter
     BatchReportWriter<KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource> batchReportWriter2;
     ReportSourceWriter<KogakuKetteiTsuchiShoShiharaiYoteiBiYijiSource> reportSourceWriter2;
@@ -115,12 +121,16 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
     @Override
     protected void createWriter() {
 
+        batchReportWriter1 = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100007_支給.getReportId().getColumnValue()).create();
+        reportSourceWriter1 = new ReportSourceWriter<>(batchReportWriter1);
         batchReportWriter2 = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100008.getReportId().getColumnValue()).create();
         reportSourceWriter2 = new ReportSourceWriter<>(batchReportWriter2);
         batchReportWriter3 = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100009.getReportId().getColumnValue()).create();
         reportSourceWriter3 = new ReportSourceWriter<>(batchReportWriter3);
         batchReportWriter4 = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100010.getReportId().getColumnValue()).create();
         reportSourceWriter4 = new ReportSourceWriter<>(batchReportWriter4);
+        ninshoshaSource1 = ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付, 帳票分類ID,
+                FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter1);
         ninshoshaSource2 = ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付, 帳票分類ID,
                 FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.保険者印.getコード(), KenmeiFuyoKubunType.付与なし, reportSourceWriter2);
         ninshoshaSource3 = ReportUtil.get認証者情報(SubGyomuCode.DBC介護給付, 帳票分類ID,
@@ -137,6 +147,10 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
         if (!条件set.contains(tempStr)) {
 
             KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriEntity reportEntity = getReportEntity(entity);
+            KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiReport report1
+                    = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiNashiReport(reportEntity, 連番, 設定値, 通知書定型文, ninshoshaSource1);
+            report1.writeBy(reportSourceWriter1);
+
             KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriReport report2
                     = new KogakuKetteiTsuchiShoShiharaiYoteiBiYijiAriReport(reportEntity, 連番, 設定値, 通知書定型文, ninshoshaSource2);
             report2.writeBy(reportSourceWriter2);
@@ -181,6 +195,7 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchProcessBase<K
     private List<RString> get通知書定型文() {
         // TODO QA
         List<RString> list = new ArrayList<>();
+        list.add(RString.EMPTY);
         return list;
     }
 

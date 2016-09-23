@@ -16,6 +16,12 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
  */
 public interface IKanendoUpdateFutanwariaiHanteiMapper {
 
+    /**
+     * 処理日付管理マスタ更新
+     *
+     * @param parameter 処理日付管理マスタ更新SQL用パラメター
+     * @return 処理日付管理マスタ情報
+     */
     List<DbT7022ShoriDateKanriEntity> get処理日付管理マスタ更新(KanendoUpdateFutanwariaiHanteMybatisParameter parameter);
 
 }

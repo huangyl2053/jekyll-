@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchish
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.servicehishikyuketteitsuchisho.KetteiTsuchishoInfoTempResultEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.jigyokogakushikyufushikyukettetsuchiichiran.JigyoKogakuShikyuFushikyuKetteTsuchiSource;
 import jp.co.ndensan.reams.db.dbd.definition.core.shokanbaraikyufu.ShikyuFushikyuKubun;
+import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBACodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.business.core.kanri.JushoHenshu;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ChohyoSeigyoKyotsuManager;
@@ -37,7 +38,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -52,7 +52,6 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
-import jp.co.ndensan.reams.uz.uza.util.code.entity.UzT0007CodeEntity;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
@@ -71,7 +70,6 @@ public class JigyoKogakuShikyuFushikyuKetteTsuchiSakuseiProcess extends BatchKey
     private static final RString 自動償還フラグ_TRUE = new RString("※");
     private static final RString 自動償還フラグ_FALSE = new RString(" ");
     private static final RString 被保険者氏名_出力ない = new RString("該当データがありません");
-    private static final CodeShubetsu 資格喪失事由_コード種別 = new CodeShubetsu("0010");
     private static final int INT_0 = 0;
     private static final int INT_1 = 1;
     private static final int INT_2 = 2;
@@ -206,7 +204,9 @@ public class JigyoKogakuShikyuFushikyuKetteTsuchiSakuseiProcess extends BatchKey
         ShikyuFushikyuKubun 支給不支給区分 = ShikyuFushikyuKubun.toValue(entity.get支給結果());
         returnEntity.set支給_不支給_決定区分(支給不支給区分.get名称());
         returnEntity.set資格喪失日(formatDate(entity.get資格喪失年月日()));
-        returnEntity.set喪失事由(get略称(資格喪失事由_コード種別, new Code(entity.get資格喪失事由コード())));
+        RString 喪失事由 = CodeMaster.getCodeMeisho(SubGyomuCode.DBA介護資格, DBACodeShubetsu.介護資格喪失事由_被保険者.getコード(),
+                new Code(entity.get資格喪失事由コード()), FlexibleDate.getNowDate());
+        returnEntity.set喪失事由(喪失事由);
         if (entity.is自動償還対象フラグ()) {
             returnEntity.set自動償還(自動償還フラグ_TRUE);
         } else {
@@ -273,13 +273,5 @@ public class JigyoKogakuShikyuFushikyuKetteTsuchiSakuseiProcess extends BatchKey
             return RString.EMPTY;
         }
         return DecimalFormatter.toコンマ区切りRString(data, 0);
-    }
-
-    private RString get略称(CodeShubetsu コード種別, Code コード) {
-        UzT0007CodeEntity entity = CodeMaster.getCode(コード種別, コード);
-        if (entity == null) {
-            return RString.EMPTY;
-        }
-        return entity.getコード略称();
     }
 }

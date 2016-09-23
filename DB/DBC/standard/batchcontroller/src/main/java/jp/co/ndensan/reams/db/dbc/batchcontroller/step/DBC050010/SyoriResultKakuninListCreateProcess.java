@@ -79,6 +79,7 @@ public class SyoriResultKakuninListCreateProcess extends BatchProcessBase<ShoriK
     @Override
     protected void afterExecute() {
         eucCsvWriter.close();
+        manager.spool(eucFilePath);
     }
 
     private void edit処理結果確認リスト情報(ShoriKekkaKakuninListCsvEntity eucCsvEntity, ShoriKekkaKakuninListTempTableEntity t, int count) {

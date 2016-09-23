@@ -6,10 +6,8 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC120190;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import jp.co.ndensan.reams.db.dbc.business.core.saishinsaketteihokenshain.SaishinsaKetteiCSVDataCreate;
 import jp.co.ndensan.reams.db.dbc.business.core.saishinsaketteihokenshain.SaishinsaKetteiHokenshaInOutPutOrder;
@@ -70,15 +68,7 @@ public class SaishinsaKetteiReportProcess extends BatchKeyBreakBase<SaishinsaKet
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final int INDEX_1 = 1;
-    private static final int INDEX_2 = 2;
-    private static final int INDEX_3 = 3;
-    private static final int INDEX_4 = 4;
     private static final int INDEX_5 = 5;
-    private static final RString KEY_並び順の２件目 = new RString("KEY_並び順の２件目");
-    private static final RString KEY_並び順の３件目 = new RString("KEY_並び順の３件目");
-    private static final RString KEY_並び順の４件目 = new RString("KEY_並び順の４件目");
-    private static final RString KEY_並び順の５件目 = new RString("KEY_並び順の５件目");
-    private static final RString KEY_並び順の６件目 = new RString("KEY_並び順の６件目");
     private static final Code EUC_CODE = new Code("0003");
     private static final RString EUC_CODE_NAME = new RString("被保険者番号");
 
@@ -88,11 +78,10 @@ public class SaishinsaKetteiReportProcess extends BatchKeyBreakBase<SaishinsaKet
     private SaishinsaKetteiProcessParameter parameter;
     private RString 出力順;
     private Set<ShikibetsuCode> 識別コードset = new HashSet<>();
-    private Map<RString, RString> 出力順Map;
     private List<PersonalData> personalDataList;
     private SaishinsaKetteiResultEntity beforeEntity;
     private IOutputOrder 並び順;
-    private List<RString> 改頁項目リスト;
+    private List<RString> 出力項目リスト;
     private List<RString> breakList;
     private int 連番;
 
@@ -107,9 +96,8 @@ public class SaishinsaKetteiReportProcess extends BatchKeyBreakBase<SaishinsaKet
         service = SaishinsaKetteiCSVDataCreate.createInstance();
         personalDataList = new ArrayList<>();
         識別コードset = new HashSet<>();
-        改頁項目リスト = new ArrayList<>();
+        出力項目リスト = new ArrayList<>();
         breakList = new ArrayList<>();
-        出力順Map = new HashMap<>();
         並び順 = get並び順();
         連番 = 0;
         if (null == 並び順) {
@@ -128,27 +116,14 @@ public class SaishinsaKetteiReportProcess extends BatchKeyBreakBase<SaishinsaKet
                 }
             }
         }
-        改頁項目リスト.add(SaishinsaKetteiHokenshaInOutPutOrder.証記載保険者番号.get項目ID());
-        int index = 0;
-        for (ISetSortItem item : 並び順.get設定項目リスト()) {
-            if (item.is改頁項目()) {
-                改頁項目リスト.add(item.get項目名());
-                breakList.add(item.get項目ID());
+        breakList.add(SaishinsaKetteiHokenshaInOutPutOrder.証記載保険者番号.get項目ID());
+        int index = INDEX_1;
+        for (ISetSortItem setSortItem : 並び順.get設定項目リスト()) {
+            if (index <= INDEX_5) {
+                出力項目リスト.add(setSortItem.get項目名());
             }
-            if (index == INDEX_1) {
-                出力順Map.put(KEY_並び順の２件目, item.get項目名());
-            } else if (index == INDEX_2) {
-                出力順Map.put(KEY_並び順の３件目, item.get項目名());
-            } else if (index == INDEX_3) {
-                出力順Map.put(KEY_並び順の４件目, item.get項目名());
-            } else if (index == INDEX_4) {
-                出力順Map.put(KEY_並び順の５件目, item.get項目名());
-            } else if (index == INDEX_5) {
-                出力順Map.put(KEY_並び順の６件目, item.get項目名());
-            }
-            index = index + 1;
+            index = index + INDEX_1;
         }
-
     }
 
     @Override
@@ -192,8 +167,8 @@ public class SaishinsaKetteiReportProcess extends BatchKeyBreakBase<SaishinsaKet
             }
             SaishinsaKetteiHokenshaInReport report = new SaishinsaKetteiHokenshaInReport(beforeEntity,
                     parameter.get処理年月(),
-                    出力順Map, parameter.getシステム日付(),
-                    改頁項目リスト, 集計flg, 連番);
+                    parameter.getシステム日付(),
+                    出力項目リスト, 集計flg, 連番);
             report.writeBy(reportSourceWriter);
         }
         if (null == beforeEntity) {
@@ -221,8 +196,8 @@ public class SaishinsaKetteiReportProcess extends BatchKeyBreakBase<SaishinsaKet
         if (null != beforeEntity) {
             SaishinsaKetteiHokenshaInReport report = new SaishinsaKetteiHokenshaInReport(beforeEntity,
                     parameter.get処理年月(),
-                    出力順Map, parameter.getシステム日付(),
-                    改頁項目リスト, true, 連番);
+                    parameter.getシステム日付(),
+                    出力項目リスト, true, 連番);
             report.writeBy(reportSourceWriter);
             eucCsvWriter.writeLine(service.to集計項目(beforeEntity));
         }

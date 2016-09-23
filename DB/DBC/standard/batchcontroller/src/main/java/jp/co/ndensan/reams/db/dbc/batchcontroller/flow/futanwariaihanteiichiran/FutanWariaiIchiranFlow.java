@@ -44,7 +44,7 @@ public class FutanWariaiIchiranFlow extends BatchFlowBase<DBC180020_IdoRiyoshaFu
         FlowEntity flowEntity = getResult(FlowEntity.class, new RString(負担割合判定一覧の作成),
                 FutanWariaiHanteiIchiranProcess.PARAMETER_OUT_FLOWENTITY);
         processParameter.setファイルパス(flowEntity.getファイルパス());
-        if (flowEntity.isISSJIS類字()) {
+        if (flowEntity.is類字()) {
             executeStep(文字コードに変換する);
         }
     }

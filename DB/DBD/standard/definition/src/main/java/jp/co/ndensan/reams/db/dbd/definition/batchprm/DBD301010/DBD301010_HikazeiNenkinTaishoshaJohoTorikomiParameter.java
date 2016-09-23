@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD301010;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100201.FileReaderProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100201.FuicchiCsvProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100201.GaitouIchirannCsvProcessParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100201.HikazeiNennkinDeleteProcessParameter;
@@ -16,6 +17,7 @@ import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd8100201.TorikomiProce
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
+import jp.co.ndensan.reams.uz.uza.cooperation.entity.UzT0885SharedFileEntryEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -74,12 +76,22 @@ public class DBD301010_HikazeiNenkinTaishoshaJohoTorikomiParameter extends Batch
     private Long 出力順ID4;
 
     /**
+     * ファイル取込のParameterです。
+     *
+     * @return FileReaderProcessParameter
+     */
+    public FileReaderProcessParameter toFileReaderProcessParameter() {
+        return new FileReaderProcessParameter(処理年度, 処理区分, 対象月, 構成市町村コードリスト);
+    }
+
+    /**
      * 取込データ一時作成_共有ファイルに取得CSVデータパラメターを取得します．
      *
+     * @param entry UzT0885SharedFileEntryEntity
      * @return 取込データ一時作成_共有ファイルに取得CSVデータパラメター
      */
-    public TorikomiProcessParameter toTorikomiProcessParameter() {
-        return new TorikomiProcessParameter(処理年度, 処理区分, 対象月, 構成市町村コードリスト);
+    public TorikomiProcessParameter toTorikomiProcessParameter(UzT0885SharedFileEntryEntity entry) {
+        return new TorikomiProcessParameter(処理年度, 処理区分, 対象月, 構成市町村コードリスト, entry);
     }
 
     /**

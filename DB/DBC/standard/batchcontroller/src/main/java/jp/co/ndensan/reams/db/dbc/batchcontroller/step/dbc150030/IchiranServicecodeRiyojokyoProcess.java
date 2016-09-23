@@ -53,8 +53,8 @@ public class IchiranServicecodeRiyojokyoProcess
     private static final RString 帳票出力順 = new RString("ORDER BY "
             + "\"DbWT3470chohyouShutsuryokuyou\".\"serviceShuruiCode\" ASC"
             + ", \"DbWT3470chohyouShutsuryokuyou\".\"sortYouKomokuCode\" ASC");
-    private static final RString 対象年月指定_サービス対象年月 = new RString("サービス対象年月");
-    private static final RString 対象年月指定_審査年月 = new RString("審査年月");
+    private static final RString 対象年月指定_サービス対象年月 = new RString("00");
+    private static final RString 対象年月指定_審査年月 = new RString("01");
     private static final RString 提供月 = new RString("提供月：");
     private static final RString 審査月 = new RString("審査月：");
     private static final RString 選択対象_町域 = new RString("町域");
@@ -254,13 +254,13 @@ public class IchiranServicecodeRiyojokyoProcess
 
     private RString get条件１(RString 条件) {
         RString 条件１ = new RString("");
-        条件１.concat(条件);
+        条件１ = 条件１.concat(条件);
         RString 年月範囲開始 = パターン56(parameter.get年月範囲開始());
         RString 年月範囲終了 = パターン56(parameter.get年月範囲終了());
         if (年月範囲開始.equals(年月範囲終了)) {
-            条件１.concat(年月範囲開始);
+            条件１ = 条件１.concat(年月範囲開始);
         } else {
-            条件１.concat(年月範囲開始).concat(接続).concat(年月範囲終了);
+            条件１ = 条件１.concat(年月範囲開始).concat(接続).concat(年月範囲終了);
         }
         return 条件１;
     }
@@ -270,12 +270,12 @@ public class IchiranServicecodeRiyojokyoProcess
             return RString.EMPTY;
         }
         RString 条件３ = new RString("");
-        条件３.concat(条件);
+        条件３ = 条件３.concat(条件);
         if (INT_1 < parameter.get対象コード().size()) {
-            条件３.concat(parameter.get対象コード().get(INT_0)).concat(波線).
+            条件３ = 条件３.concat(parameter.get対象コード().get(INT_0)).concat(波線).
                     concat(parameter.get対象コード().get(parameter.get対象コード().size() - INT_1));
         } else {
-            条件３.concat(parameter.get対象コード().get(INT_0));
+            条件３ = 条件３.concat(parameter.get対象コード().get(INT_0));
         }
         return 条件３;
     }
@@ -338,7 +338,7 @@ public class IchiranServicecodeRiyojokyoProcess
         } else if (選択対象_行政区.equals(parameter.get選択対象())) {
             reportEntity.set条件３(get条件３(行政区));
         }
-        if (!RString.isNullOrEmpty(提供月)
+        if (!RString.isNullOrEmpty(parameter.get旧市町村コード())
                 && !旧市町村情報_000000.equals(parameter.get旧市町村コード())
                 && parameter.get旧市町村名() != null) {
             reportEntity.set条件３(new RString("").concat(旧市町村名).concat(parameter.get旧市町村名()));

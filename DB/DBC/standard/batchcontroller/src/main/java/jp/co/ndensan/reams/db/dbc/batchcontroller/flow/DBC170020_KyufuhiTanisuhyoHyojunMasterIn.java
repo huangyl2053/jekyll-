@@ -19,8 +19,8 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  */
 public class DBC170020_KyufuhiTanisuhyoHyojunMasterIn extends BatchFlowBase<DBC170020_KyufuhiTanisuhyoHyojunMasterInParameter> {
 
-    private final static String データのバックアップ = "backupKaigoServiceNaiyou";
-    private final static String 取込データ一時作成 = "backupKaigoServiceNaiyou";
+    private static final String データのバックアップ = "backupKaigoServiceNaiyou";
+    private static final String 取込データ一時作成 = "backupKaigoServiceNaiyou";
 
     @Override
     protected void defineFlow() {

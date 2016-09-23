@@ -21,6 +21,9 @@ import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class TaishoshaIchijiTokuteiTableEntity extends DbTableEntityBase<TaishoshaIchijiTokuteiTableEntity> implements IDbAccessable {
 
+    /**
+     * 対象者一次特定一時テーブル名称
+     */
     public static final RString TABLE_NAME;
 
     static {

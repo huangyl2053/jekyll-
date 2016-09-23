@@ -8,10 +8,10 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ininnteichousair
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninnteichousairai.NinnteiChousairaiParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninnteichousairai.SaiChekkuhyoParameter;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.ninnteichousairai.NinnteiChousairaiEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.ninnteichousairai.NinteichosaIraiJohoRelateEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.ninnteichousairai.SaiChekkuhyoEntity;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.ninnteichousairai.WaritsukeEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninnteichousairai.NinnteiChousairaiEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninnteichousairai.NinteichosaIraiJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninnteichousairai.SaiChekkuhyoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninnteichousairai.WaritsukeEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 

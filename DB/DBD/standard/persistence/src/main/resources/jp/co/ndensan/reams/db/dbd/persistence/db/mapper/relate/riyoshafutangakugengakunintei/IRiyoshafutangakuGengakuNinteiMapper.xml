@@ -131,6 +131,7 @@
                         有効受給認定結果."yokaigoJotaiKubunCode" AS 認定情報_要介護状態区分コード,
                         有効受給認定結果."ninteiYMD"  AS 認定情報_認定年月日,
                         有効受給認定結果."ninteiYukoKikanKaishiYMD" AS 認定情報_認定有効期間開始年月日,
+                        有効受給認定結果."shinseishoKanriNo"  AS 認定情報_申請書管理番号,
                         有効受給認定結果."ninteiYukoKikanShuryoYMD" AS 認定情報_認定有効期間終了年月日
                     FROM (
                         SELECT
@@ -150,7 +151,7 @@
         ON 認定情報."認定情報_被保険者番号" = A."被保険者番号"
         LEFT JOIN
                 rgdb."DbT4101NinteiShinseiJoho" AS 要介護認定申請情報
-                ON 認定情報."認定情報_被保険者番号"  = 要介護認定申請情報."hihokenshaNo"
+                ON 認定情報."認定情報_申請書管理番号"  = 要介護認定申請情報."shinseishoKanriNo"
         <!--旧措置者かどうかの判断のため、最新の受給者台帳を取得-->
         LEFT JOIN
                 rgdb."DbV4001JukyushaDaicho" AS 受給者台帳Newest
@@ -205,8 +206,8 @@
                         1=1
                         <if test="is対象期間指定_対象年度">
                             AND (訪問介護利用者負担額減額."ketteiKubun" = #{決定区分_承認する}
-                            AND #{対象年度の開始年月日} <![CDATA[<=]]> 訪問介護利用者負担額減額."tekiyoKaishiYMD"
-                            AND 訪問介護利用者負担額減額."tekiyoShuryoYMD" <![CDATA[<=]]> #{対象年度の終了年月日} )
+                                 AND #{対象年度の開始年月日} <![CDATA[<=]]> 訪問介護利用者負担額減額."tekiyoKaishiYMD"
+                                 AND 訪問介護利用者負担額減額."tekiyoShuryoYMD" <![CDATA[<=]]> #{対象年度の終了年月日} )
                             OR ((訪問介護利用者負担額減額."ketteiKubun" is null or 訪問介護利用者負担額減額."ketteiKubun" = '')
                                 AND #{対象年度の開始年月日} <![CDATA[<=]]> 訪問介護利用者負担額減額."shinseiYMD"
                                 AND 訪問介護利用者負担額減額."shinseiYMD" <![CDATA[<=]]> #{対象年度の終了年月日})
@@ -253,6 +254,6 @@
                 AND 訪問介護利用者負担額減額."hobetsuKubun" = #{法別区分障害全額免除}
             </if>
         </if>
-        <!--#{出力順}-->
+        ${出力順}
 </select>
 </mapper>

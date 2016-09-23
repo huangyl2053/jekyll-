@@ -32,6 +32,7 @@ public class TajutokuIdoTeiseiHandler {
      * 他市町村住所地特例者異動の訂正初期化の設定します。
      *
      * @param 識別コード 識別コード
+     * @param 台帳種別 台帳種別
      */
     public void load(ShikibetsuCode 識別コード, RString 台帳種別) {
         div.getTajutokuIdoTeiseiKihonJoho().getCcdKaigoAtenaJoho().initialize(識別コード);

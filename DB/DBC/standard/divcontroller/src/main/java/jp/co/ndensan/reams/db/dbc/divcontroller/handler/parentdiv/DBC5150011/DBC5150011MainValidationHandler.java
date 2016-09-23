@@ -52,7 +52,7 @@ public class DBC5150011MainValidationHandler {
 
     private ValidationDictionary createサービス種類コードDictionary() {
         return new ValidationDictionaryBuilder()
-                .add(DBC5150011MainValidationHandler.IdocheckMessages.桁数チェック, div.getTxtSyuruiCode())
+                .add(DBC5150011MainValidationHandler.IdocheckMessages.桁数チェック)
                 .build();
     }
 
@@ -68,7 +68,7 @@ public class DBC5150011MainValidationHandler {
 
     private ValidationDictionary createサービス分類Dictionary() {
         return new ValidationDictionaryBuilder()
-                .add(DBC5150011MainValidationHandler.IdocheckMessages.サービス分類, div.getDgServiceShuruiList())
+                .add(DBC5150011MainValidationHandler.IdocheckMessages.サービス分類, div.getDgServiceBunruiList())
                 .build();
     }
 

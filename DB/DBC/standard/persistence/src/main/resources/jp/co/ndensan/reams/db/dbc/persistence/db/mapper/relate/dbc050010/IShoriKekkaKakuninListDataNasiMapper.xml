@@ -5,11 +5,11 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc050010.IShoriKekkaKakuninListDataNasiMapper">
-    <select id="select処理結果確認リスト一時情報"
-            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.ShoriKekkaKakuninListTempTableEntity"
+    <select id="select振込明細一時情報"
+            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc050010.FurikomiDetailTempTableEntity"
             fetchSize="500" resultOrdered="true">
        SELECT
         *
-       FROM "DbWT0512ShoriKekkaKakuninList"
+       FROM "DbWT0510FurikomiMeisai"
     </select>
 </mapper>

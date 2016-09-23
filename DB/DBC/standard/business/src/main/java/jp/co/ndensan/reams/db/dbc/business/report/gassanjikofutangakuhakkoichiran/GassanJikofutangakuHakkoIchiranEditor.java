@@ -64,12 +64,12 @@ public class GassanJikofutangakuHakkoIchiranEditor implements
         source.printTimeStamp = getSakuseiYmhm(RDate.getNowDate(), RTime.now());
         source.hokenshaNo = entity.get保険者番号().value();
         source.hokenshaName = entity.get保険者名();
-        source.郵便番号 = entity.郵便番号;
-        source.町域コード = entity.町域コード;
-        source.行政区コード = entity.行政区コード;
-        source.市町村コード = entity.市町村コード;
-        source.証記載保険者番号 = entity.証記載保険者番号;
-        source.氏名５０音カナ = entity.氏名５０音カナ;
+        source.郵便番号 = entity.get郵便番号();
+        source.町域コード = entity.get町域コード();
+        source.行政区コード = entity.get行政区コード();
+        source.市町村コード = entity.get市町村コード();
+        source.証記載保険者番号 = entity.get証記載保険者番号();
+        source.氏名５０音カナ = entity.get氏名５０音カナ();
 
         setHeader(source);
 

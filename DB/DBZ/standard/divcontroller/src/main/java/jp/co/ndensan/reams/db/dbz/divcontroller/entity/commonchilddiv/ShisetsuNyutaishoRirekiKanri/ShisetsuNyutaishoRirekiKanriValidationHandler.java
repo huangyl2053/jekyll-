@@ -8,6 +8,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuN
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.definition.core.daichokubun.DaichoType;
+import jp.co.ndensan.reams.db.dbz.definition.core.shisetsushurui.ShisetsuType;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.divcontroller.validations.TextBoxFlexibleDateValidator;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -28,6 +30,7 @@ public class ShisetsuNyutaishoRirekiKanriValidationHandler {
     private final ShisetsuNyutaishoRirekiKanriDiv div;
     private final RString 追加 = new RString("追加");
     private final RString 更新 = new RString("修正");
+    private final RString RS_ICHI = new RString("1");
 
     /**
      * コンストラクタです。
@@ -41,9 +44,10 @@ public class ShisetsuNyutaishoRirekiKanriValidationHandler {
     /**
      * 「確認する」ボタンを押下します。
      *
+     * @param 住所地特例フラグ 住所地特例フラグ
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs validateForUpdate() {
+    public ValidationMessageControlPairs validateForUpdate(RString 住所地特例フラグ) {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         validPairs.add(TextBoxFlexibleDateValidator.validate暦上日(div.getTxtNyushoDate()));
         validPairs.add(TextBoxFlexibleDateValidator.validate暦上日OrEmpty(div.getTxtTaishoDate()));
@@ -156,20 +160,19 @@ public class ShisetsuNyutaishoRirekiKanriValidationHandler {
                         div.getTxtTaishoDate()));
             }
         }
-// TODO 凌護行 被保険者台帳管理の直近データ取得の条件が無し、QA1740回答まち、2016/09/23
-//        if (!ShisetsuNyutaishoRirekiKanriDiv.Riyou.適用除外者対象機能.equals(div.getMode_Riyou())
-//                && !ShisetsuNyutaishoRirekiKanriDiv.Riyou.他市町村住所地特例者対象機能.equals(div.getMode_Riyou())
-//                && DaichoType.被保険者.getコード().equals(div.getCcdShisetsuJoho().getDaichoShubetsu())
-//                && (ShisetsuType.介護保険施設.getコード().equals(div.getCcdShisetsuJoho().get施設種類())
-//                || ShisetsuType.住所地特例対象施設.getコード().equals(div.getCcdShisetsuJoho().get施設種類()))
-//                && RString.isNullOrEmpty(div.getTxtHokensha().getValue())) {
-//            if (rowList.isEmpty()) {
-//                return validPairs;
-//            } else {
-////if (KoikinaiJushochitokureishaKubun.広域内住所地特例者.getコード().equals(rowList.get(0).get)){
-//
-//            }
-//        }
+
+        return check保険者番号(validPairs, 住所地特例フラグ);
+    }
+    
+    private ValidationMessageControlPairs check保険者番号(ValidationMessageControlPairs validPairs, RString 住所地特例フラグ) {
+        if (!ShisetsuNyutaishoRirekiKanriDiv.Riyou.適用除外者対象機能.equals(div.getMode_Riyou())
+                && !ShisetsuNyutaishoRirekiKanriDiv.Riyou.他市町村住所地特例者対象機能.equals(div.getMode_Riyou())
+                && DaichoType.被保険者.getコード().equals(div.getCcdShisetsuJoho().getDaichoShubetsu())
+                && (ShisetsuType.介護保険施設.getコード().equals(div.getCcdShisetsuJoho().get施設種類())
+                || ShisetsuType.住所地特例対象施設.getコード().equals(div.getCcdShisetsuJoho().get施設種類()))
+                && RString.isNullOrEmpty(div.getTxtHokensha().getValue()) && RS_ICHI.equals(住所地特例フラグ)) {
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.保険者番号, div.getTxtHokensha()));
+        }
         return validPairs;
     }
 

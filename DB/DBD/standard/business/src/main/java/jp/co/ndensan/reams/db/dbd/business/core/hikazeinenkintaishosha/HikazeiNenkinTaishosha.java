@@ -21,6 +21,8 @@ import jp.co.ndensan.reams.db.dbd.entity.euc.hikazeinenkintaishosha.HikazeiNenki
 import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.AtesakiFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
+import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
+import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt200FindShikibetsuTaishoFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.UaFt250FindAtesakiFunction;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.IShikibetsuTaisho;
@@ -57,6 +59,7 @@ import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminShubetsu
 import jp.co.ndensan.reams.uz.uza.biz.ChikuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ChoikiCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyoseikuCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -84,12 +87,11 @@ public class HikazeiNenkinTaishosha {
     private static final RString 金額_ZERO = new RString("0");
     private static final RString RHKAKKO = new RString("）");
     private static final RString LFKAKKO = new RString("（");
-    private static final RString EMPTY = new RString("　");
     private static final RString TILDE = new RString("　～　");
     private static final RString KORUN = new RString(":");
     private static final RString 空白 = new RString(" ");
     private static final RString 抽出対象者 = new RString("【抽出対象者】");
-    private static final RString 市町村コード = new RString("000000");
+    private static final LasdecCode 市町村コード = new LasdecCode("000000");
     private static final RString 保険者 = new RString("保険者：");
     private static final RString 市 = new RString("市");
     private static final RString 年指定_年度 = new RString("11");
@@ -158,6 +160,21 @@ public class HikazeiNenkinTaishosha {
         UaFt250FindAtesakiFunction uaFt250Psm = new UaFt250FindAtesakiFunction(atenaSearchKeyBuilder.build().get宛先検索キー());
         RString psmAtesaki = new RString(uaFt250Psm.getParameterMap().get("psmAtesaki").toString());
         RString psmShikibetsuTaisho = new RString(uaFt200Psm.getParameterMap().get("psmShikibetsuTaisho").toString());
+        int 年齢From = getBP年齢(processParameter.get宛名抽出条件().getNenreiRange().getFrom());
+        int 年齢To = getBP年齢(processParameter.get宛名抽出条件().getNenreiRange().getTo());
+        RDate 年齢基準日;
+        if (processParameter.get宛名抽出条件().getNenreiKijunbi() == null) {
+            年齢基準日 = processParameter.getDate();
+        } else {
+            年齢基準日 = processParameter.get宛名抽出条件().getNenreiKijunbi();
+        }
+        FlexibleDate 消除異動年月日 = FlexibleDate.EMPTY;
+        AgeCalculator ageCalculator = new AgeCalculator(DateOfBirthFactory.createInstance(
+                new FlexibleDate(年齢基準日.toDateString())),
+                JuminJotai.住登外,
+                消除異動年月日);
+        RString 年齢From逆算 = new RString(ageCalculator.get年齢到達日(-年齢From).toString());
+        RString 年齢To逆算 = new RString(ageCalculator.get年齢到達日(-年齢To).toString());
         return HikazeiNenkinTaishoshaMybatisParameter.createMybatisParameter(
                 processParameter.get抽出方法(),
                 processParameter.get被保険者抽出方法(),
@@ -165,6 +182,10 @@ public class HikazeiNenkinTaishosha {
                 processParameter.is最新情報(),
                 processParameter.get抽出年度(),
                 processParameter.getDate(),
+                年齢From,
+                年齢To,
+                年齢From逆算,
+                年齢To逆算,
                 psmShikibetsuTaisho,
                 psmAtesaki);
     }
@@ -276,7 +297,7 @@ public class HikazeiNenkinTaishosha {
         }
         eucEntity.set被保険者番号(entity.get被保険者番号());
         eucEntity.set年度(get年度(entity.get年度()));
-        //eucEntity.set処理区分(RString.EMPTY); Enum存在しない。
+        //TODO 処理区分  Enum存在しない QA1722
         eucEntity.set対象月(entity.get対象月());
         eucEntity.set基礎年金番号(entity.get基礎年金番号());
         eucEntity.set現基礎年金番号(entity.get現基礎年金番号());
@@ -288,7 +309,7 @@ public class HikazeiNenkinTaishosha {
         eucEntity.setIf性別(SeibetsuCodeNenkinTokuchoType.toValue(entity.getIf性別()).get性別名称());
         eucEntity.setIfカナ氏名(entity.getIfカナ氏名());
         eucEntity.setIf漢字氏名(entity.getIf漢字氏名());
-        eucEntity.setIf郵便番号(entity.getIf郵便番号());
+        eucEntity.setIf郵便番号(entity.getIf郵便番号().getEditedYubinNo());
         eucEntity.setIfカナ住所(entity.getIfカナ住所());
         eucEntity.setIf漢字住所(entity.getIf漢字住所());
         eucEntity.setIf対象年(get対象年(entity.getIf対象年()));
@@ -468,7 +489,7 @@ public class HikazeiNenkinTaishosha {
         }
         eucEntity.set被保険者番号(entity.get被保険者番号());
         eucEntity.set年度(get年度(entity.get年度()));
-        //eucEntity.set処理区分(RString.EMPTY); Enum存在しない。
+        //TODO 処理区分  Enum存在しない QA1722
         eucEntity.set対象月(entity.get対象月());
         eucEntity.set基礎年金番号(entity.get基礎年金番号());
         eucEntity.set現基礎年金番号(entity.get現基礎年金番号());
@@ -480,7 +501,7 @@ public class HikazeiNenkinTaishosha {
         eucEntity.setIf性別(SeibetsuCodeNenkinTokuchoType.toValue(entity.getIf性別()).get性別名称());
         eucEntity.setIfカナ氏名(entity.getIfカナ氏名());
         eucEntity.setIf漢字氏名(entity.getIf漢字氏名());
-        eucEntity.setIf郵便番号(entity.getIf郵便番号());
+        eucEntity.setIf郵便番号(entity.getIf郵便番号().getEditedYubinNo());
         eucEntity.setIfカナ住所(entity.getIfカナ住所());
         eucEntity.setIf漢字住所(entity.getIf漢字住所());
         eucEntity.setIf対象年(get対象年(entity.getIf対象年()));
@@ -598,8 +619,9 @@ public class HikazeiNenkinTaishosha {
         RStringBuilder jokenBuilder = new RStringBuilder();
         jokenBuilder.append(抽出対象者);
         出力条件List.add(jokenBuilder.toRString());
-        if (!RString.EMPTY.equals(processParameter.get宛名抽出条件().getShichoson_Code().value())
-                && !市町村コード.equals(processParameter.get宛名抽出条件().getShichoson_Code().value())) {
+        if (processParameter.get宛名抽出条件().getShichoson_Code() != null
+                && !processParameter.get宛名抽出条件().getShichoson_Code().isEmpty()
+                && !市町村コード.equals(processParameter.get宛名抽出条件().getShichoson_Code())) {
             jokenBuilder = new RStringBuilder();
             jokenBuilder.append(保険者);
             jokenBuilder.append(市町村名);
@@ -633,13 +655,14 @@ public class HikazeiNenkinTaishosha {
             jokenBuilder.append(被保険者以外のみ);
             出力条件List.add(jokenBuilder.toRString());
         }
-        set年齢_生年月日(jokenBuilder, 出力条件List);
-        set町域_行政区(jokenBuilder, 出力条件List);
-        set地区(jokenBuilder, 出力条件List);
+        set年齢_生年月日(出力条件List);
+        set町域_行政区(出力条件List);
+        set地区(出力条件List);
         return 出力条件List;
     }
 
-    private void set年齢_生年月日(RStringBuilder jokenBuilder, List<RString> 出力条件List) {
+    private void set年齢_生年月日(List<RString> 出力条件List) {
+        RStringBuilder jokenBuilder;
         RDate 年齢基準日 = processParameter.get宛名抽出条件().getNenreiKijunbi();
         if (年齢基準日 != null && !年齢基準日.toDateString().isNullOrEmpty()) {
             jokenBuilder = new RStringBuilder();
@@ -662,8 +685,7 @@ public class HikazeiNenkinTaishosha {
                 jokenBuilder.append(歳);
             }
             jokenBuilder.append(年齢_年齢基準日);
-            jokenBuilder.append(年齢基準日.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+            jokenBuilder.append(get生年月日(年齢基準日));
             jokenBuilder.append(RHKAKKO);
             出力条件List.add(jokenBuilder.toRString());
         }
@@ -672,30 +694,27 @@ public class HikazeiNenkinTaishosha {
         if (!isNullorEmpty(生年月日From) && !isNullorEmpty(生年月日To)) {
             jokenBuilder = new RStringBuilder();
             jokenBuilder.append(生年月日);
-            jokenBuilder.append(生年月日From.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+            jokenBuilder.append(get生年月日(生年月日From));
             jokenBuilder.append(TILDE);
-            jokenBuilder.append(生年月日To.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+            jokenBuilder.append(get生年月日(生年月日To));
             出力条件List.add(jokenBuilder.toRString());
         } else if (!isNullorEmpty(生年月日From) && isNullorEmpty(生年月日To)) {
             jokenBuilder = new RStringBuilder();
             jokenBuilder.append(生年月日);
-            jokenBuilder.append(生年月日From.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+            jokenBuilder.append(get生年月日(生年月日From));
             jokenBuilder.append(TILDE);
             出力条件List.add(jokenBuilder.toRString());
         } else if (isNullorEmpty(生年月日From) && !isNullorEmpty(生年月日To)) {
             jokenBuilder = new RStringBuilder();
             jokenBuilder.append(生年月日);
             jokenBuilder.append(TILDE);
-            jokenBuilder.append(生年月日To.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).
-                    separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
+            jokenBuilder.append(get生年月日(生年月日To));
             出力条件List.add(jokenBuilder.toRString());
         }
     }
 
-    private void set町域_行政区(RStringBuilder jokenBuilder, List<RString> 出力条件List) {
+    private void set町域_行政区(List<RString> 出力条件List) {
+        RStringBuilder jokenBuilder;
         RString 町域From = processParameter.get宛名抽出条件().getJusho_From();
         RString 町域To = processParameter.get宛名抽出条件().getJusho_To();
         RString 町域From名称 = processParameter.get宛名抽出条件().getJusho_FromMesho();
@@ -770,7 +789,8 @@ public class HikazeiNenkinTaishosha {
         }
     }
 
-    private void set地区(RStringBuilder jokenBuilder, List<RString> 出力条件List) {
+    private void set地区(List<RString> 出力条件List) {
+        RStringBuilder jokenBuilder;
         RString 地区１From = processParameter.get宛名抽出条件().getChiku1_From();
         RString 地区１To = processParameter.get宛名抽出条件().getChiku1_To();
         RString 地区１From名称 = processParameter.get宛名抽出条件().getChiku1_FromMesho();
@@ -980,9 +1000,21 @@ public class HikazeiNenkinTaishosha {
         RStringBuilder builder = new RStringBuilder();
         builder.append(住所);
         builder.append(番地);
-        builder.append(EMPTY);
+        builder.append(RString.FULL_SPACE);
         builder.append(方書);
         return builder.toRString();
     }
 
+    private RString get生年月日(RDate date) {
+        return date.wareki().eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).
+                separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+    }
+
+    private int getBP年齢(Decimal value) {
+        if (value == null) {
+            return 0;
+        } else {
+            return value.intValue();
+        }
+    }
 }

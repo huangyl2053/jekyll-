@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 訪問介護利用者負担額減額認定者リス発行ビジネスクラスです。
@@ -70,9 +71,11 @@ public class NinteishaListSakuseiBusiness {
                 eucCsvEntity.set要介護度(YokaigoJotaiKubunSupport.toValue(KoroshoInterfaceShikibetsuCode.toValue(t.get認定情報Entity().get認定情報_要介護状態区分コード()),
                         t.get要介護認定申請情報_厚労省IF識別コード()).getName());
             }
-            eucCsvEntity.set認定日(set年月日(t.get認定情報Entity().get認定情報_認定年月日(), is日付スラッシュ編集));
-            eucCsvEntity.set認定開始日(set年月日(t.get認定情報Entity().get認定情報_認定有効期間開始年月日(), is日付スラッシュ編集));
-            eucCsvEntity.set認定終了日(set年月日(t.get認定情報Entity().get認定情報_認定有効期間終了年月日(), is日付スラッシュ編集));
+            if (t.get認定情報Entity() != null) {
+                eucCsvEntity.set認定日(set年月日(t.get認定情報Entity().get認定情報_認定年月日(), is日付スラッシュ編集));
+                eucCsvEntity.set認定開始日(set年月日(t.get認定情報Entity().get認定情報_認定有効期間開始年月日(), is日付スラッシュ編集));
+                eucCsvEntity.set認定終了日(set年月日(t.get認定情報Entity().get認定情報_認定有効期間終了年月日(), is日付スラッシュ編集));
+            }
         }
 
         if (has世帯員情報) {
@@ -122,7 +125,8 @@ public class NinteishaListSakuseiBusiness {
         }
 
         if (t.get訪問介護利用者負担額減額() != null && t.get訪問介護利用者負担額減額().getKyufuritsu() != null) {
-            eucCsvEntity.set給付率(new RString(t.get訪問介護利用者負担額減額().getKyufuritsu().value().toString()));
+            Decimal 給付率Value = t.get訪問介護利用者負担額減額().getKyufuritsu().value();
+            eucCsvEntity.set給付率(new RString(給付率Value.toString()));
         }
     }
 

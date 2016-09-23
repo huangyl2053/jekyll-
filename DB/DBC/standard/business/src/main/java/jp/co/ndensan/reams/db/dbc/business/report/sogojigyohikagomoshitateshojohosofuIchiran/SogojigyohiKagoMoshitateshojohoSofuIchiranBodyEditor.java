@@ -34,7 +34,6 @@ public class SogojigyohiKagoMoshitateshojohoSofuIchiranBodyEditor implements ISo
     private final boolean 合計出力flag;
     private final int 件数;
 
-    private int 連番 = 1;
     private static final int NUM_0 = 0;
     private static final RString 合計件数 = new RString("合計件数");
     private static final RString 漢字_件 = new RString("件");
@@ -57,7 +56,7 @@ public class SogojigyohiKagoMoshitateshojohoSofuIchiranBodyEditor implements ISo
     public SogojigyohiKagoMoshitateshojohoSofuIchiranSource edit(SogojigyohiKagoMoshitateshojohoSofuIchiranSource source) {
         DbWT1731KagoMoshitateTempEntity 過誤申立一時TBL = 帳票出力対象データ.getDbWT1731Entity();
         DbWT1001HihokenshaTempEntity 被保険者一時TBL = 帳票出力対象データ.getDbWT1001Entity();
-        source.listUpper_1 = new RString(連番);
+        source.listUpper_1 = new RString(件数);
         source.listUpper_2 = 過誤申立一時TBL.getJigyoshaNo().getColumnValue();
         source.listUpper_3 = 過誤申立一時TBL.getJigyoshaName();
 
@@ -91,7 +90,6 @@ public class SogojigyohiKagoMoshitateshojohoSofuIchiranBodyEditor implements ISo
             source.gokeiKensuTitle = 合計件数;
             source.gokeiKensu = DecimalFormatter.toコンマ区切りRString(new Decimal(件数), NUM_0).concat(漢字_件);
         }
-        連番++;
         return source;
     }
 

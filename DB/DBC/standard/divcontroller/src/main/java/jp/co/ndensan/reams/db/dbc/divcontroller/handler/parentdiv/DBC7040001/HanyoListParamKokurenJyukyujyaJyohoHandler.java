@@ -38,14 +38,11 @@ public class HanyoListParamKokurenJyukyujyaJyohoHandler {
     private static final RString すべて = new RString("0");
     private static final RString 最新履歴のみ = new RString("1");
     private static final RString 範囲指定 = new RString("2");
-    private static final RString 老齢_すべて = new RString("key0");
+    private static final RString すべてKEY0 = new RString("key0");
     private static final RString 老齢_受給なし = new RString("key1");
     private static final RString 老齢_受給あり = new RString("key2");
-    private static final RString 各異動月 = new RString("key0");
-    private static final RString 利用者_すべて = new RString("key0");
     private static final RString 利用者_該当なし = new RString("key1");
     private static final RString 利用者_該当あり = new RString("key2");
-    private static final RString 公費負担_すべて = new RString("key0");
     private static final RString 公費負担_なし = new RString("key1");
     private static final RString 公費負担_あり生保 = new RString("key2");
     private static final RString 利用者_適用なし = new RString("0");
@@ -273,7 +270,7 @@ public class HanyoListParamKokurenJyukyujyaJyohoHandler {
         parameter.setShotokuKubun(div.getChkShotokuKubun().getSelectedKeys());
         List<Boolean> roreiKubuns = new ArrayList<>();
         RString roreikubun = div.getRadRoreiNenkinJukyuKubun().getSelectedKey();
-        if (老齢_すべて.equals(roreikubun)) {
+        if (すべてKEY0.equals(roreikubun)) {
             roreiKubuns.add(true);
             roreiKubuns.add(false);
         } else if (老齢_受給なし.equals(roreikubun)) {
@@ -284,7 +281,7 @@ public class HanyoListParamKokurenJyukyujyaJyohoHandler {
         parameter.setRoreiNenkinJyukyuKubun(roreiKubuns);
         List<Boolean> riyoshas = new ArrayList<>();
         RString riyosha = div.getRadRoreiNenkinJukyuKubun().getSelectedKey();
-        if (利用者_すべて.equals(riyosha)) {
+        if (すべてKEY0.equals(riyosha)) {
             riyoshas.add(true);
             riyoshas.add(false);
         } else if (利用者_該当なし.equals(riyosha)) {
@@ -355,7 +352,7 @@ public class HanyoListParamKokurenJyukyujyaJyohoHandler {
         parameter.setJigyoshaBanggo(setJigyoshaNo(div.getCcdkyotakuSienJigyoshaBango().getNyuryokuShisetsuKodo()));
         List<Boolean> futangakugengakus = new ArrayList<>();
         RString futangakugengaku = div.getRadKohiFutangakuGengaku().getSelectedKey();
-        if (公費負担_すべて.equals(futangakugengaku)) {
+        if (すべてKEY0.equals(futangakugengaku)) {
             futangakugengakus.add(true);
             futangakugengakus.add(false);
         } else if (公費負担_なし.equals(futangakugengaku)) {
@@ -447,7 +444,7 @@ public class HanyoListParamKokurenJyukyujyaJyohoHandler {
             set日付(restoreBatchParameterMap);
             if (restoreBatchParameterMap.getParameterValue(Boolean.class, new RString("kakuidozukinoSaishinNomi"))) {
                 List<RString> 各異動月S = new ArrayList<>();
-                各異動月S.add(各異動月);
+                各異動月S.add(すべてKEY0);
                 div.getChkIdotukiSaisinJohoChushutsu().setSelectedItemsByKey(各異動月S);
             }
         }
@@ -482,7 +479,7 @@ public class HanyoListParamKokurenJyukyujyaJyohoHandler {
         }
         div.getChkShotokuKubun().setSelectedItemsByKey(shotokuKubuns);
         if (restoreBatchParameterMap.getParameterValue(List.class, new RString("roreiNenkinJyukyuKubun")).size() == 2) {
-            div.getRadRoreiNenkinJukyuKubun().setSelectedKey(老齢_すべて);
+            div.getRadRoreiNenkinJukyuKubun().setSelectedKey(すべてKEY0);
         } else {
             for (Object roreiNenkinJyukyuKubun : restoreBatchParameterMap.getParameterValue(List.class, new RString("roreiNenkinJyukyuKubun"))) {
                 if ((boolean) roreiNenkinJyukyuKubun) {
@@ -493,7 +490,7 @@ public class HanyoListParamKokurenJyukyujyaJyohoHandler {
             }
         }
         if (restoreBatchParameterMap.getParameterValue(List.class, new RString("ryoshaFutanDainiDankai")).size() == 2) {
-            div.getRadRiyoshaFutanDai2Dankai().setSelectedKey(利用者_すべて);
+            div.getRadRiyoshaFutanDai2Dankai().setSelectedKey(すべてKEY0);
         } else {
             for (Object ryoshaFutanDainiDankai : restoreBatchParameterMap.getParameterValue(List.class, new RString("ryoshaFutanDainiDankai"))) {
                 if ((boolean) ryoshaFutanDainiDankai) {
@@ -518,7 +515,7 @@ public class HanyoListParamKokurenJyukyujyaJyohoHandler {
             div.getCcdkyotakuSienJigyoshaBango().clear();
         }
         if (restoreBatchParameterMap.getParameterValue(List.class, new RString("kohiFutanJyogengakuGengaku")).size() == 2) {
-            div.getRadKohiFutangakuGengaku().setSelectedKey(公費負担_すべて);
+            div.getRadKohiFutangakuGengaku().setSelectedKey(すべてKEY0);
         } else {
             for (Object kohiFutanJyogengakuGengaku : restoreBatchParameterMap.getParameterValue(List.class,
                     new RString("kohiFutanJyogengakuGengaku"))) {

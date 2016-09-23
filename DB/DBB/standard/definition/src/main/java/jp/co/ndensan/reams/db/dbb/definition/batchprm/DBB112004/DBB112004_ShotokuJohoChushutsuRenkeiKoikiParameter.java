@@ -34,6 +34,8 @@ public class DBB112004_ShotokuJohoChushutsuRenkeiKoikiParameter extends BatchPar
     private static final String KEY_SHUTSURYOKUJUN_ID = "shutsuryokujunID";
     private static final String NAME_CHOHYO_ID = "帳票ID";
     private static final String KEY_CHOHYO_ID = "chohyoID";
+    private static final String NAME_FILES_NAME = "ファイル名";
+    private static final String KEY_FILES_NAME = "filesname";
     private static final String NAME_SHARE_FILES_NAME = "共有ファイル名";
     private static final String KEY_SHARE_FILES_NAME = "sharefilesname";
     private static final String NAME_SHARE_FILES_ID = "共有ファイルID";
@@ -51,6 +53,8 @@ public class DBB112004_ShotokuJohoChushutsuRenkeiKoikiParameter extends BatchPar
     private RString 出力順ID;
     @BatchParameter(key = KEY_CHOHYO_ID, name = NAME_CHOHYO_ID)
     private ReportId 帳票ID;
+    @BatchParameter(key = KEY_FILES_NAME, name = NAME_FILES_NAME)
+    private RString ファイル名;
     @BatchParameter(key = KEY_SHARE_FILES_NAME, name = NAME_SHARE_FILES_NAME)
     private RString 共有ファイル名;
     @BatchParameter(key = KEY_SHARE_FILES_ID, name = NAME_SHARE_FILES_ID)
@@ -71,6 +75,7 @@ public class DBB112004_ShotokuJohoChushutsuRenkeiKoikiParameter extends BatchPar
                 市町村情報List,
                 出力順ID,
                 帳票ID,
+                ファイル名,
                 共有ファイル名,
                 共有ファイルID,
                 処理区分,

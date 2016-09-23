@@ -171,13 +171,13 @@ public class HihokenshaProcess extends BatchProcessBase<DbT1001HihokenshaDaichoE
         processEntity.setShikakuHenkoTodokedeYMD(entity.getShikakuHenkoTodokedeYMD());
         processEntity.setJushochitokureiTekiyoJiyuCode(entity.getJushochitokureiTekiyoJiyuCode());
         processEntity.setJushochitokureiTekiyoYMD(entity.getJushochitokureiTekiyoYMD());
-        processEntity.setTokureiTekiyoTodokedeYMD(entity.getJushochitokureiTekiyoTodokedeYMD());
+        processEntity.setTekiyoTodokedeYMD(entity.getJushochitokureiTekiyoTodokedeYMD());
         processEntity.setJushochitokureiKaijoJiyuCode(entity.getJushochitokureiKaijoJiyuCode());
         processEntity.setJushochitokureiKaijoYMD(entity.getJushochitokureiKaijoYMD());
-        processEntity.setJushochitokureiKaijoTodokedeYMD(entity.getJushochitokureiKaijoTodokedeYMD());
+        processEntity.setTokureiKaijoTodokedeYMD(entity.getJushochitokureiKaijoTodokedeYMD());
         processEntity.setJushochiTokureiFlag(entity.getJushochiTokureiFlag());
         processEntity.setKoikinaiJushochiTokureiFlag(entity.getKoikinaiJushochiTokureiFlag());
-        processEntity.setTokureiSochimotoShichosonCode(entity.getKoikinaiTokureiSochimotoShichosonCode());
+        processEntity.setSochimotoShichosonCode(entity.getKoikinaiTokureiSochimotoShichosonCode());
         processEntity.setKyuShichosonCode(entity.getKyuShichosonCode());
         processEntity.setLogicalDeletedFlag(entity.getLogicalDeletedFlag());
     }

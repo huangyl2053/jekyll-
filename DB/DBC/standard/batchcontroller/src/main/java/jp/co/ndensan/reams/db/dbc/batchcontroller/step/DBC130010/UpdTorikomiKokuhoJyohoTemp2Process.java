@@ -29,7 +29,7 @@ public class UpdTorikomiKokuhoJyohoTemp2Process extends BatchProcessBase<Torikom
     private List<TorikomiKokuhoJyohoEntity> 取込国保情報Entityリスト;
     private int 検索件数;
     @BatchWriter
-    private IBatchTableWriter<TorikomiKokuhoJyohoEntity> torikomiKokuhoJyohoEntityWriter;
+    private IBatchTableWriter<TorikomiKokuhoJyohoEntity> torikomiKokuhoJyohoWriter;
     private UpdTorikomiKokuhoJyohoTemp2ProcessParameter processParameter;
     private static final RString ＩＦ種類_電算 = new RString("1");
     private static final RString ＩＦ種類_電算２ = new RString("2");
@@ -53,7 +53,7 @@ public class UpdTorikomiKokuhoJyohoTemp2Process extends BatchProcessBase<Torikom
 
     @Override
     protected void createWriter() {
-        torikomiKokuhoJyohoEntityWriter = BatchWriters.batchEntityCreatedTempTableWriter(
+        torikomiKokuhoJyohoWriter = BatchWriters.batchEntityCreatedTempTableWriter(
                 TorikomiKokuhoJyohoEntity.class).tempTableName(TEMP_TABLE).build();
     }
 
@@ -66,13 +66,13 @@ public class UpdTorikomiKokuhoJyohoTemp2Process extends BatchProcessBase<Torikom
         }
 
         if (検索件数 > 1) {
-            if (ＩＦ種類_電算.equals(processParameter.getIF種類())) {
+            if (ＩＦ種類_電算.equals(processParameter.getIf種類())) {
                 entity.setエラーコード(エラーコード_14);
                 entity.setエラー文言(コード文言_住民コード);
                 entity.setエラー区分(エラー区分);
             }
 
-            if (ＩＦ種類_電算２.equals(processParameter.getIF種類())) {
+            if (ＩＦ種類_電算２.equals(processParameter.getIf種類())) {
                 entity.setエラーコード(エラーコード_70);
                 entity.setエラー文言(コード文言_住民コード);
                 entity.setエラー区分(エラー区分);
@@ -82,6 +82,6 @@ public class UpdTorikomiKokuhoJyohoTemp2Process extends BatchProcessBase<Torikom
         //TODO  仕様の意味は分かりません
         //4.3　4.1にて取得したレコードの中で、資格取得日、資格喪失日が最も大きいレコードに対して項目編集を行なう
         //4.4　バッチパラメータ．保険者区分が "1"(単独保険者)の場合 単一時、住民コードの長さ＞12桁の場合、住民コードの後方１２桁を設定
-        torikomiKokuhoJyohoEntityWriter.update(entity);
+        torikomiKokuhoJyohoWriter.update(entity);
     }
 }

@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.business.core.dbd710090;
 
-import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.ChushutsuKomokuKubun;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt13011.GeneralPurposeListOutputEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.dbdbt13011.GeneralPurposeListOutputEucCsvEntity;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaList;
@@ -26,8 +25,6 @@ import jp.co.ndensan.reams.ua.uax.business.core.atesaki.IAtesaki;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
-import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
-import jp.co.ndensan.reams.ur.urz.service.core.association.IAssociationFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -114,7 +111,8 @@ public class HanyoListShiharaiHohoHenkoBusiness {
      * @param 日付スラッシュ付加 日付スラッシュ付加
      */
     public void setEucCsvEntity(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
-            GeneralPurposeListOutputEntity entity, int count, Association 地方公共団体情報, HokenshaList 保険者リスト, boolean 日付スラッシュ付加) {
+            GeneralPurposeListOutputEntity entity, int count, Association 地方公共団体情報, HokenshaList 保険者リスト,
+            boolean 日付スラッシュ付加) {
 
         eucCsvEntity.set連番(new RString(String.valueOf(count)));
         set宛名情報について(eucCsvEntity, entity, 地方公共団体情報, 日付スラッシュ付加);
@@ -154,7 +152,6 @@ public class HanyoListShiharaiHohoHenkoBusiness {
 
     private void set宛名情報について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
             GeneralPurposeListOutputEntity entity, Association 地方公共団体情報, boolean 日付スラッシュ付加) {
-        //宛名 を IKojin
         if (entity.getPsmEntity() != null) {
             IKojin kojin = ShikibetsuTaishoFactory.createKojin(entity.getPsmEntity());
             eucCsvEntity.set識別コード(kojin.get識別コード().getColumnValue());
@@ -209,7 +206,6 @@ public class HanyoListShiharaiHohoHenkoBusiness {
 
     private void set宛先情報について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
             GeneralPurposeListOutputEntity entity) {
-        //宛先 を IAtesaki
         if (entity.getAtesakiEntity() != null) {
             IAtesaki atesaki = AtesakiFactory.createInstance(entity.getAtesakiEntity());
             eucCsvEntity.set送付先氏名(atesaki.get宛先名称().getName().getColumnValue());
@@ -229,10 +225,6 @@ public class HanyoListShiharaiHohoHenkoBusiness {
 
     private void set被保険者台帳管理について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
             GeneralPurposeListOutputEntity entity, HokenshaList 保険者リスト, boolean 日付スラッシュ付加) {
-        //被保険者台帳管理
-        if (entity.get被保険者台帳管理_市町村コード() != null && !entity.get被保険者台帳管理_市町村コード().isEmpty()) {
-            eucCsvEntity.set市町村名(edit市町村(new LasdecCode(entity.get被保険者台帳管理_市町村コード())));
-        }
 
         eucCsvEntity.set市町村コード(entity.get被保険者台帳管理_市町村コード());
         eucCsvEntity.set被保険者番号(entity.get被保険者台帳管理_被保険者番号());
@@ -260,7 +252,6 @@ public class HanyoListShiharaiHohoHenkoBusiness {
 
     private void set医療保険加入状況について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
             GeneralPurposeListOutputEntity entity) {
-        //医療保険加入状況
         if (entity.get医療保険加入状況_医療保険種別コード() != null && !entity.get医療保険加入状況_医療保険種別コード().isEmpty()) {
             eucCsvEntity.set医療保険種別(getコードマスタ(DBACodeShubetsu.医療保険種類.getコード(),
                     new Code(entity.get医療保険加入状況_医療保険種別コード())));
@@ -273,7 +264,6 @@ public class HanyoListShiharaiHohoHenkoBusiness {
 
     private void set受給者台帳(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
             GeneralPurposeListOutputEntity entity, boolean 日付スラッシュ付加) {
-        //受給者台帳
         eucCsvEntity.set特定疾病(entity.get受給者台帳_2号特定疾病コード());
         eucCsvEntity.set受給申請事由(edit受給申請事由(entity.get受給者台帳_受給申請事由(), entity.get受給者台帳_要支援者認定申請区分()));
         eucCsvEntity.set申請理由(entity.get受給者台帳_申請理由());
@@ -322,7 +312,6 @@ public class HanyoListShiharaiHohoHenkoBusiness {
 
     private void set今回申請届出について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
             GeneralPurposeListOutputEntity entity) {
-        //今回申請届出
         eucCsvEntity.set申請氏名(entity.get今回申請届出_申請届出者氏名());
         eucCsvEntity.set申請氏名カナ(entity.get今回申請届出_申請届出者氏名カナ());
         eucCsvEntity.set申請者郵便番号(edit郵便番号(entity.get今回申請届出_申請届出者郵便番号()));
@@ -334,14 +323,12 @@ public class HanyoListShiharaiHohoHenkoBusiness {
 
     private void set申請届出事業者について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
             GeneralPurposeListOutputEntity entity) {
-        //申請届出事業者
         eucCsvEntity.set申請代行事業者名(entity.get申請届出事業者_事業者名称());
         eucCsvEntity.set申請代行事業者名カナ(entity.get申請届出事業者_事業者名称カナ());
     }
 
     private void set今回申請について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
             GeneralPurposeListOutputEntity entity, boolean 日付スラッシュ付加) {
-        //今回申請
         eucCsvEntity.set調査委託先コード(entity.get今回申請_認定調査委託先コード());
         eucCsvEntity.set調査員コード(entity.get今回申請_認定調査員コード());
 
@@ -363,7 +350,6 @@ public class HanyoListShiharaiHohoHenkoBusiness {
 
     private void set今回調査委託先について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
             GeneralPurposeListOutputEntity entity) {
-        //今回調査委託先
         eucCsvEntity.set委託先名(entity.get今回調査委託先_事業者名称());
         eucCsvEntity.set委託先名カナ(entity.get今回調査委託先_事業者名称カナ());
         eucCsvEntity.set委託先代表者名(entity.get今回調査委託先_代表者名());
@@ -384,8 +370,6 @@ public class HanyoListShiharaiHohoHenkoBusiness {
 
     private void set今回調査員について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
             GeneralPurposeListOutputEntity entity) {
-
-        //今回調査員
         eucCsvEntity.set調査員氏名(entity.get今回調査員_調査員氏名());
         eucCsvEntity.set調査員氏名カナ(entity.get今回調査員_調査員氏名カナ());
         eucCsvEntity.set調査員性別(entity.get今回調査員_性別());
@@ -403,8 +387,6 @@ public class HanyoListShiharaiHohoHenkoBusiness {
 
     private void set今回主治医医療機関について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
             GeneralPurposeListOutputEntity entity) {
-
-        //今回主治医医療機関
         eucCsvEntity.set医療機関名称(entity.get今回主治医医療機関_医療機関名称());
         eucCsvEntity.set医療機関名称カナ(entity.get今回主治医医療機関_医療機関名称カナ());
         eucCsvEntity.set医療機関代表者名(entity.get今回主治医医療機関_代表者名());
@@ -417,8 +399,6 @@ public class HanyoListShiharaiHohoHenkoBusiness {
 
     private void set今回主治医について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
             GeneralPurposeListOutputEntity entity) {
-
-        //今回主治医
         eucCsvEntity.set主治医名(entity.get今回主治医_主治医氏名());
         eucCsvEntity.set主治医名カナ(entity.get今回主治医_主治医カナ());
         eucCsvEntity.set主治医性別(entity.get今回主治医_性別());
@@ -428,13 +408,11 @@ public class HanyoListShiharaiHohoHenkoBusiness {
 
     private void set今回調査依頼について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
             GeneralPurposeListOutputEntity entity, boolean 日付スラッシュ付加) {
-        //今回調査依頼
         eucCsvEntity.set調査委託日(edit年月日_yyyymmdd(entity.get今回調査依頼_認定調査依頼年月日(), 日付スラッシュ付加));
     }
 
     private void set今回計画情報について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
             GeneralPurposeListOutputEntity entity, boolean 日付スラッシュ付加) {
-        //今回計画情報
         eucCsvEntity.set調査予定日(edit年月日_yyyymmdd(entity.get今回計画情報_認定調査予定年月日(), 日付スラッシュ付加));
         eucCsvEntity.set意見予定日(edit年月日_yyyymmdd(entity.get今回計画情報_主治医意見書登録予定年月日(), 日付スラッシュ付加));
         eucCsvEntity.set審査予定日(edit年月日_yyyymmdd(entity.get今回計画情報_認定審査会予定年月日(), 日付スラッシュ付加));
@@ -443,38 +421,32 @@ public class HanyoListShiharaiHohoHenkoBusiness {
 
     private void set今回完了情報について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
             GeneralPurposeListOutputEntity entity, boolean 日付スラッシュ付加) {
-        //今回完了情報
         eucCsvEntity.set調査終了日(edit年月日_yyyymmdd(entity.get今回完了情報_認定調査完了年月日(), 日付スラッシュ付加));
     }
 
     private void set今回意見書作成依頼について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
             GeneralPurposeListOutputEntity entity, boolean 日付スラッシュ付加) {
-        //今回意見書作成依頼
         eucCsvEntity.set意見依頼日(edit年月日_yyyymmdd(entity.get今回意見書作成依頼_主治医意見書作成依頼年月日(), 日付スラッシュ付加));
     }
 
     private void set今回意見書情報について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
             GeneralPurposeListOutputEntity entity, boolean 日付スラッシュ付加) {
-        //今回意見書情報
         eucCsvEntity.set意見取寄日(edit年月日_yyyymmdd(entity.get今回意見書情報_主治医意見書受領年月日(), 日付スラッシュ付加));
     }
 
     private void set今回一次判定結果について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
             GeneralPurposeListOutputEntity entity, boolean 日付スラッシュ付加) {
-        //今回一次判定結果
         eucCsvEntity.set一次判定日(edit年月日_yyyymmdd(entity.get今回一次判定結果_要介護認定一次判定年月日(), 日付スラッシュ付加));
     }
 
     private void set今回結果情報について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
             GeneralPurposeListOutputEntity entity, boolean 日付スラッシュ付加) {
-        //今回結果情報
         eucCsvEntity.set資料作成日(edit年月日_yyyymmdd(entity.get今回結果情報_介護認定審査会資料作成年月日(), 日付スラッシュ付加));
         eucCsvEntity.set審査会意見(entity.get今回結果情報_介護認定審査会意見());
     }
 
     private void set初回受給情報について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
             GeneralPurposeListOutputEntity entity, boolean 日付スラッシュ付加) {
-        //初回受給情報
         eucCsvEntity.set初回申請日(edit年月日_yyyymmdd(entity.get初回受給情報_受給申請年月日(), 日付スラッシュ付加));
         eucCsvEntity.set初回認定日(edit年月日_yyyymmdd(entity.get初回受給情報_認定年月日(), 日付スラッシュ付加));
 
@@ -490,13 +462,11 @@ public class HanyoListShiharaiHohoHenkoBusiness {
 
     private void set初回申請について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
             GeneralPurposeListOutputEntity entity) {
-        //初回申請
         eucCsvEntity.set初回支援申請事由(edit支援申請(entity.get初回申請_要支援者認定申請区分()));
     }
 
     private void set前回受給情報について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
             GeneralPurposeListOutputEntity entity, boolean 日付スラッシュ付加) {
-        //前回受給情報
         eucCsvEntity.set前回申請日(edit年月日_yyyymmdd(entity.get前回受給情報_受給申請年月日(), 日付スラッシュ付加));
         eucCsvEntity.set前回認定日(edit年月日_yyyymmdd(entity.get前回受給情報_認定年月日(), 日付スラッシュ付加));
         eucCsvEntity.set前回要介護度(edit要介護度(entity.get前回申請_厚労省IF識別コード(),
@@ -512,13 +482,11 @@ public class HanyoListShiharaiHohoHenkoBusiness {
 
     private void set前回申請について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
             GeneralPurposeListOutputEntity entity) {
-        //前回申請
         eucCsvEntity.set前回支援申請事由(edit支援申請(entity.get前回申請_要支援者認定申請区分()));
     }
 
     private void set前々回受給情報について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
             GeneralPurposeListOutputEntity entity, boolean 日付スラッシュ付加) {
-        //前々回受給情報
         eucCsvEntity.set前々回申請日(edit年月日_yyyymmdd(entity.get前々回受給情報_受給申請年月日(), 日付スラッシュ付加));
         eucCsvEntity.set前々回認定日(edit年月日_yyyymmdd(entity.get前々回受給情報_認定年月日(), 日付スラッシュ付加));
         eucCsvEntity.set前々回要介護度(edit要介護度(entity.get前々回申請_厚労省IF識別コード(),
@@ -535,32 +503,27 @@ public class HanyoListShiharaiHohoHenkoBusiness {
 
     private void set今回調査結果_基本について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
             GeneralPurposeListOutputEntity entity) {
-        //今回調査結果_基本
         eucCsvEntity.set障害高齢者自立度(edit障害高齢者自立度(entity.get今回調査結果_基本_認定調査_障害高齢者の日常生活自立度コード()));
         eucCsvEntity.set認知症高齢者自立度(edit認知症高齢者自立度(entity.get今回調査結果_基本_認定調査_認知症高齢者の日常生活自立度コード()));
     }
 
     private void set介護保険施設入退所について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
             GeneralPurposeListOutputEntity entity, boolean 日付スラッシュ付加) {
-        //介護保険施設入退所
         eucCsvEntity.set指定事業者コード(entity.get施設入所_入所施設コード());
         eucCsvEntity.set施設入所日(edit年月日_yyyymmdd(entity.get施設入所_入所年月日(), 日付スラッシュ付加));
         eucCsvEntity.set施設退所日(edit年月日_yyyymmdd(entity.get施設入所_退所年月日(), 日付スラッシュ付加));
-        //この項目は実装外
         eucCsvEntity.set転出先保険者番号(RString.EMPTY);
 
     }
 
     private void set居宅届出について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
             GeneralPurposeListOutputEntity entity, boolean 日付スラッシュ付加) {
-        //居宅届出
         eucCsvEntity.set届出区分(edit届出区分(entity.get居宅届出_届出区分()));
         eucCsvEntity.set計画届出日(edit年月日_yyyymmdd(entity.get居宅届出_届出年月日(), 日付スラッシュ付加));
     }
 
     private void set事業者作成について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
             GeneralPurposeListOutputEntity entity, boolean 日付スラッシュ付加) {
-        //事業者作成
         eucCsvEntity.set居宅計画作成区分(edit居宅計画作成区分(entity.get事業者作成_作成区分コード()));
         eucCsvEntity.set計画事業者番号(entity.get事業者作成_計画事業者番号());
         eucCsvEntity.set計画適用開始日(edit年月日_yyyymmdd(entity.get事業者作成_適用開始年月日(), 日付スラッシュ付加));
@@ -569,21 +532,18 @@ public class HanyoListShiharaiHohoHenkoBusiness {
 
     private void set計画事業者について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
             GeneralPurposeListOutputEntity entity) {
-        //計画事業者
         eucCsvEntity.set計画事業者名(entity.get計画事業者_事業者名称());
         eucCsvEntity.set計画事業者カナ(entity.get計画事業者_事業者名称カナ());
     }
 
     private void set計画事業者代表者について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
             GeneralPurposeListOutputEntity entity) {
-        //計画事業者代表者
         eucCsvEntity.set計画管理者名(entity.get計画事業者代表者_代表者名());
         eucCsvEntity.set計画管理者カナ(entity.get計画事業者代表者_代表者名カナ());
     }
 
     private void set自己作成について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
             GeneralPurposeListOutputEntity entity, boolean 日付スラッシュ付加) {
-        //自己作成
         eucCsvEntity.set計画作成日(edit年月日_yyyymmdd(entity.get自己作成_計画作成年月日(), 日付スラッシュ付加));
         eucCsvEntity.set計画変更日(edit年月日_yyyymmdd(entity.get自己作成_計画変更年月日(), 日付スラッシュ付加));
         eucCsvEntity.set変更理由(entity.get自己作成_計画変更事由());
@@ -591,7 +551,6 @@ public class HanyoListShiharaiHohoHenkoBusiness {
 
     private void set指定事業者について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
             GeneralPurposeListOutputEntity entity, boolean 日付スラッシュ付加) {
-        //指定事業者
         if (is入所施設種類_11(entity.get施設入所_入所施設種類())) {
             eucCsvEntity.set指定事業者代表者名(entity.get指定事業者代表者_代表者名());
             eucCsvEntity.set指定事業者代表者名カナ(entity.get指定事業者代表者_代表者名カナ());
@@ -614,7 +573,6 @@ public class HanyoListShiharaiHohoHenkoBusiness {
 
     private void set除外他特適用施設について(GeneralPurposeListOutputEucCsvEntity eucCsvEntity,
             GeneralPurposeListOutputEntity entity, boolean 日付スラッシュ付加) {
-        //除外他特適用施設
         if (is入所施設種類_12_21(entity.get施設入所_入所施設種類())) {
             eucCsvEntity.set指定事業者名(entity.get除外他特適用施設_事業者名称());
             eucCsvEntity.set指定事業者名カナ(entity.get除外他特適用施設_事業者名称カナ());
@@ -717,25 +675,11 @@ public class HanyoListShiharaiHohoHenkoBusiness {
 
     }
 
-    private RString edit抽出項目区分(RString 抽出項目区分) {
-        try {
-            return ChushutsuKomokuKubun.toValue(抽出項目区分).get名称();
-        } catch (Exception e) {
-            return RString.EMPTY;
-        }
-    }
-
     private RString edit旧措置(boolean kyuSochishaFlag) {
         if (kyuSochishaFlag) {
             return 旧措置者;
         }
         return RString.EMPTY;
-    }
-
-    private RString edit市町村(LasdecCode 市町村コード) {
-        IAssociationFinder finder = AssociationFinderFactory.createInstance();
-        Association 地方公共団体 = finder.getAssociation(市町村コード);
-        return 地方公共団体.get市町村名();
     }
 
     private RString getコードマスタ(CodeShubetsu コード種別, Code コード) {

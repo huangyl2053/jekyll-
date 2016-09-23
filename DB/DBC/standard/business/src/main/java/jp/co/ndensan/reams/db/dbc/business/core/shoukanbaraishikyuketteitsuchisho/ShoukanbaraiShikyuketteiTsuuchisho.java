@@ -47,7 +47,7 @@ public class ShoukanbaraiShikyuketteiTsuuchisho {
 
     private FlexibleDate uketsukeYMD;
     private FlexibleDate ketteiYMD;
-    private Decimal shiharaiKingakuUchiwakeRiyoshabun;
+    private Decimal shiharaiKingakuRiyoshabun;
     private FlexibleYearMonth serviceTeikyoYM;
     private RString 給付の種類1;
     private RString 給付の種類2;
