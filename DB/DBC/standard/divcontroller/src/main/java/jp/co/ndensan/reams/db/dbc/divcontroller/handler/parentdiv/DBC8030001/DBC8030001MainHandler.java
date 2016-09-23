@@ -61,7 +61,7 @@ public class DBC8030001MainHandler {
             業務内区分 = FurikomiGyomunaiKubun.高額合算.getコード();
         } else if (メニューID.equals(new RString("DBCMNL3004"))) {
             業務内区分 = FurikomiGyomunaiKubun.事業高額.getコード();
-        } else if(メニューID.equals(new RString("DBCMNN2005"))){
+        } else if (メニューID.equals(new RString("DBCMNN2005"))) {
             業務内区分 = FurikomiGyomunaiKubun.事業高額合算.getコード();
         }
         List<RString> list = new ArrayList<>();

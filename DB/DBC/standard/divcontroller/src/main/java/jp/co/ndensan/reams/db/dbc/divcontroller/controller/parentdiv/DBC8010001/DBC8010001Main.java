@@ -46,7 +46,7 @@ public class DBC8010001Main {
     /**
      * 処理選択ラジオボタンonChange。
      *
-     * @param div
+     * @param div DBC8010001MainDiv
      * @return ResponseData<DBC8010001MainDiv>
      */
     public ResponseData<DBC8010001MainDiv> onChange_RadShoriSentaku(DBC8010001MainDiv div) {
@@ -57,7 +57,7 @@ public class DBC8010001Main {
     /**
      * 再作成するチェックボックスonClick。
      *
-     * @param div
+     * @param div DBC8010001MainDiv
      * @return ResponseData<DBC8010001MainDiv>
      */
     public ResponseData<DBC8010001MainDiv> onClick_ChkSaisakusei(DBC8010001MainDiv div) {
@@ -68,7 +68,7 @@ public class DBC8010001Main {
     /**
      * 支払方法ラジオボタンonChange。
      *
-     * @param div
+     * @param div DBC8010001MainDiv
      * @return ResponseData<DBC8010001MainDiv>
      */
     public ResponseData<DBC8010001MainDiv> onChange_RadSiharaihohou(DBC8010001MainDiv div) {
@@ -79,7 +79,7 @@ public class DBC8010001Main {
     /**
      * 抽出対象ラジオボタンonChange。
      *
-     * @param div
+     * @param div DBC8010001MainDiv
      * @return ResponseData<DBC8010001MainDiv>
      */
     public ResponseData<DBC8010001MainDiv> onChange_RadChushutsuTaisho(DBC8010001MainDiv div) {
@@ -90,7 +90,7 @@ public class DBC8010001Main {
     /**
      * 入力チェック。
      *
-     * @param div
+     * @param div DBC8010001MainDiv
      * @return ResponseData<DBC8010001MainDiv>
      */
     public ResponseData<DBC8010001MainDiv> onClickCheck_btnBatchRegister(DBC8010001MainDiv div) {
@@ -119,15 +119,11 @@ public class DBC8010001Main {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
 
-        if (!div.getTxtKonkaiTaishoYmdRange().isDisabled()) {
-            if (getValidationHandler(div).validateFor今回対象日開始日未入力()) {
-                return ResponseData.of(div).addMessage(DbcQuestionMessages.開始年月日未入力_データ全部発行.getMessage()).respond();
-            }
+        if (!div.getTxtKonkaiTaishoYmdRange().isDisabled() && getValidationHandler(div).validateFor今回対象日開始日未入力()) {
+            return ResponseData.of(div).addMessage(DbcQuestionMessages.開始年月日未入力_データ全部発行.getMessage()).respond();
         }
-        if (!div.getTxtKetteishaUketoriYmRange().isDisabled()) {
-            if (getValidationHandler(div).validateFor決定者受取年月開始年月未入力()) {
-                return ResponseData.of(div).addMessage(DbcQuestionMessages.開始年月日未入力_データ全部発行.getMessage()).respond();
-            }
+        if (!div.getTxtKetteishaUketoriYmRange().isDisabled() && getValidationHandler(div).validateFor決定者受取年月開始年月未入力()) {
+            return ResponseData.of(div).addMessage(DbcQuestionMessages.開始年月日未入力_データ全部発行.getMessage()).respond();
         }
         return ResponseData.of(div).respond();
     }
@@ -135,7 +131,7 @@ public class DBC8010001Main {
     /**
      * バッチを呼び出す。
      *
-     * @param div
+     * @param div DBC8010001MainDiv
      * @return ResponseData<DBC050010_FurikomimeisaiFurikomiDataParameter>
      */
     public ResponseData<DBC050010_FurikomimeisaiFurikomiDataParameter> onClick_btnBatchRegister(DBC8010001MainDiv div) {

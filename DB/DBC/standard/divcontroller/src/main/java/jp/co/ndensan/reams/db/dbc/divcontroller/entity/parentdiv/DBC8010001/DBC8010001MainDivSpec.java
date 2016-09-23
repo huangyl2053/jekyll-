@@ -5,9 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC8010001;
 
-import java.util.ArrayList;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC8010001.DBC8010001MainHandler;
 import jp.co.ndensan.reams.ux.uxx.definition.mybatisprm.kozafurikomi.kozafurikomi.KozaFurikomiMapperParameter;
 import jp.co.ndensan.reams.ux.uxx.service.core.kozafurikomi.kozafurikomi.KozaFurikomiManager;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -18,6 +15,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 振込明細・振込みデータ作成のバリデーションクラスです。
+ *
  * @reamsid_L DBC-2180-010 x_liuwei
  */
 public enum DBC8010001MainDivSpec implements IPredicate<DBC8010001MainDiv> {
@@ -28,7 +26,7 @@ public enum DBC8010001MainDivSpec implements IPredicate<DBC8010001MainDiv> {
     実行不可 {
                 @Override
                 public boolean apply(DBC8010001MainDiv div) {
-                    DBC8010001MainHandler handler = new DBC8010001MainHandler(div);
+//                    DBC8010001MainHandler handler = new DBC8010001MainHandler(div);
 //                    List list = new ArrayList();
 //TODO                    List<FurikomiGroupItakushaRelateEntity> list = handler.getFurikomiGroupItakushaRelateEntity();
 //                    return 0 != list.size();
