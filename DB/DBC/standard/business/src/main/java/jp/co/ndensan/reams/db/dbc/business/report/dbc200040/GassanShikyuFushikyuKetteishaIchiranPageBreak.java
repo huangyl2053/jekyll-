@@ -20,6 +20,9 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
  */
 public class GassanShikyuFushikyuKetteishaIchiranPageBreak extends PageBreaker<GassanShikyuFushikyuKetteishaIchiranSource> {
 
+    private static final int NO_15 = 15;
+    private static final int NO_13 = 13;
+
     private final List<RString> breakKeysList;
 
     /**
