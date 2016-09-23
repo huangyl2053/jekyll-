@@ -95,7 +95,7 @@ public class HokenshaListDiv extends Panel implements IHokenshaListDiv {
     }
 
     @Override
-    public void setSelectedShichosonIfExist(ShoKisaiHokenshaNo 証記載保険者番号) {
-        this.createHandler().setSelectedShichsonIfExist(証記載保険者番号);
+    public void setSelectedShoKisaiHokenshaNoIfExist(ShoKisaiHokenshaNo 証記載保険者番号) {
+        this.createHandler().setSelectedShoKisaiHokenshaNoIfExist(証記載保険者番号);
     }
 }
