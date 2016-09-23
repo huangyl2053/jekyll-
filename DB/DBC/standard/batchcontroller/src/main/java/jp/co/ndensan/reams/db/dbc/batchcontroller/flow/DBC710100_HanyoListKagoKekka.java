@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc710100.HanyoListKagoKekkaNoRenbanOutputProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc710100.HanyoListKagoKekkaOutputProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC710100.HanyoListKagoKekkaNoRenbanOutputProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC710100.HanyoListKagoKekkaOutputProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC710100.DBC710100_HanyoListKagoKekkaParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc710100.HanyoListKagoKekkaProcessParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
