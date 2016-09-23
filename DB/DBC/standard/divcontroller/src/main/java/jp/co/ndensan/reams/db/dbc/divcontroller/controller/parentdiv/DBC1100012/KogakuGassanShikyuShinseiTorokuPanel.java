@@ -267,17 +267,33 @@ public class KogakuGassanShikyuShinseiTorokuPanel {
     private KogakuGassanShinseishoDataResult session作成(KogakuGassanShikyuShinseiTorokuPanelDiv div) {
         dgTorokuSearchResult_Row row = div.getKogakuGassanShikyuShinseiTorokuSearchResult().getDgTorokuSearchResult().getClickedItem();
         KogakuGassanShinseishoDataResult dataResult = new KogakuGassanShinseishoDataResult();
-        dataResult.set被保険者番号(new HihokenshaNo(row.getTxtHihokenshaNo()));
-        dataResult.set対象年度(new FlexibleYear(row.getTxtTaishoNendo()));
-        dataResult.set保険者番号(new HokenshaNo(row.getTxtHokenshaNo()));
+        if (row.getTxtHihokenshaNo() != null) {
+            dataResult.set被保険者番号(new HihokenshaNo(row.getTxtHihokenshaNo()));
+        }
+        if (row.getTxtTaishoNendo() != null) {
+            dataResult.set対象年度(new FlexibleYear(row.getTxtTaishoNendo()));
+        }
+        if (row.getTxtHokenshaNo() != null) {
+            dataResult.set保険者番号(new HokenshaNo(row.getTxtHokenshaNo()));
+        }
         if (row.getTxtShikyuShinseishoNo() != null) {
             dataResult.set整理番号(row.getTxtShikyuShinseishoNo().substring(十一, 十七));
         }
-        dataResult.set申請代表者氏名(new AtenaMeisho(row.getTxtShiseishimei()));
-        dataResult.set申請代表者郵便番号(new YubinNo(row.getTxtBango()));
-        dataResult.set申請代表者住所(row.getTxtSyusyou());
-        dataResult.set申請代表者電話番号(new TelNo(row.getTxtTelbanngo()));
-        dataResult.set履歴番号(new Decimal(row.getTxtRirekiNo().toString()));
+        if (row.getTxtShinseiDaihyoshaName() != null) {
+            dataResult.set申請代表者氏名(new AtenaMeisho(row.getTxtShinseiDaihyoshaName()));
+        }
+        if (row.getTxtBango() != null) {
+            dataResult.set申請代表者郵便番号(new YubinNo(row.getTxtBango()));
+        }
+        if (row.getTxtSyusyou() != null) {
+            dataResult.set申請代表者住所(row.getTxtSyusyou());
+        }
+        if (row.getTxtTelbanngo() != null) {
+            dataResult.set申請代表者電話番号(new TelNo(row.getTxtTelbanngo()));
+        }
+        if (row.getTxtRirekiNo().toString() != null) {
+            dataResult.set履歴番号(new Decimal(row.getTxtRirekiNo().toString()));
+        }
         return dataResult;
     }
 
