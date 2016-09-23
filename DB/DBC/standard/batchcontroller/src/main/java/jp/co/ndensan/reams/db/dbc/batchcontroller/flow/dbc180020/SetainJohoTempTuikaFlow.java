@@ -6,14 +6,14 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow.dbc180020;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.dataclear.ClearHanteiHihonkenshaNoTempProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.dataclear.ClearSetainHakuNyuryokuTempProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.dataclear.ClearTmpSetaiShotokuProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.work1.HanteiKijunbiSetteiProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.work2.SetainHakunyuryokuProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.work2.SetainJohoSakuseiProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.work4.TsukibetsuHanteiTaishoshaTempNigaimeProcess;
-import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.work4.TsukibetsuHanteiTaishoshaTempProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.ClearHanteiHihonkenshaNoTempProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.ClearSetainHakuNyuryokuTempProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.ClearTmpSetaiShotokuProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.HanteiKijunbiSetteiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.SetainHakunyuryokuProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.SetainJohoSakuseiProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.TsukibetsuHanteiTaishoshaTempNigaimeProcess;
+import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.TsukibetsuHanteiTaishoshaTempProcess;
 import jp.co.ndensan.reams.db.dbc.business.core.riyoshafutanwariaihantei.HanteiKijunYMDInstance;
 import jp.co.ndensan.reams.db.dbc.business.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHanteiUtil;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180020.DBC180020_IdoRiyoshaFutanwariaiHanteiParameter;
