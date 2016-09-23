@@ -53,6 +53,7 @@
 
     <sql id="事業高額合算情報">
         事業高額合算情報."shichosonCode" AS "shichosonCode",
+        事業高額合算情報."kozaid" AS "kozaid",
         事業高額合算情報."hihokenshaNo" AS "hihokenshaNo",
         事業高額合算情報."shikibetsuCode" AS "shikibetsuCode",
         事業高額合算情報."shikakuShutokuJiyuCode" AS "shikakuShutokuJiyuCode",
@@ -123,7 +124,6 @@
         )
         SELECT
         <include refid="事業高額合算情報" />,
-        <!--"koza".*,-->
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />,
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />
         FROM(
@@ -151,6 +151,7 @@
         受給者台帳."kyuSochishaFlag",
         受給者台帳."minashiCode",
         受給者台帳."chokkinIdoJiyuCode",
+        受給者台帳."kozaid",
         事業高額合算支給不支給決定."taishoNendo",
         事業高額合算支給不支給決定."hokenshaNo",
         事業高額合算支給不支給決定."shikyuSeiriNo",
@@ -188,10 +189,6 @@
         rgdb."DbV1001HihokenshaDaicho" AS 被保険者台帳管理
         ON
         抽出対象."hihokenshaNo" = 被保険者台帳管理."hihokenshaNo"
-        <!--TODO QA1600 口座を取得する場合、パラメータを未明示-->
-        <!--        LEFT JOIN
-        (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS "koza"
-        ON "koza"."kozaid" = 抽出対象."kozaid"-->
         LEFT JOIN
         (SELECT
         有効履歴."hihokenshaNo",
@@ -254,9 +251,6 @@
             AND 被保険者台帳管理."koikinaiTokureiSochimotoShichosonCode" = #{保険者コード})
             )
         </if>
-        <!--        <if test="is金融機関コード">
-            AND  "koza"."kinyuKikanCode" = #{金融機関コード}
-        </if>-->
         )AS 事業高額合算情報
         INNER JOIN
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
@@ -270,6 +264,14 @@
         ON
         事業高額合算情報."shikibetsuCode" =
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.as_Atesaki" />."shikibetsuCode"
+         LEFT JOIN
+        (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS 口座
+        ON "uaT0310Koza_kozaId" = 事業高額合算情報."kozaid"
+        where
+        1 = 1
+        <if test="is金融機関コードNULL">
+            AND  口座."kinyuKikanCode" = #{金融機関コード}
+        </if>
         ${出力順}
     </select>
 </mapper>

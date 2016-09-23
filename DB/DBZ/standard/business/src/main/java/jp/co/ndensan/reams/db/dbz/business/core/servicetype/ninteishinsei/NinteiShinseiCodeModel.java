@@ -20,9 +20,18 @@ public class NinteiShinseiCodeModel implements Serializable {
 
     private static final long serialVersionUID = 7323078136744691791L;
 
+    /**
+     * 表示モード
+     */
     public enum HyojiMode {
 
+        /**
+         * 入力モード
+         */
         InputMode,
+        /**
+         * 照会モード
+         */
         ShokaiMode;
     }
 

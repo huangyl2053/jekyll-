@@ -89,8 +89,6 @@ public class FutanGendogakuNinteiShinseishoHakko extends BatchProcessBase<FutanG
     private RString 出力順;
     private List<RString> 通知書定型文;
     private HokenshaList hokenshaList;
-    private boolean is旧措置者;
-    private boolean isNot旧措置者;
     private int i = 0;
 
     @Override
@@ -190,7 +188,6 @@ public class FutanGendogakuNinteiShinseishoHakko extends BatchProcessBase<FutanG
             );
             TokuteiFutangendogakuShinseishoReport report = TokuteiFutangendogakuShinseishoReport.createFrom(item);
             report.writeBy(sourceWriter);
-            is旧措置者 = true;
         } else {
             FutangendogakuNinteiShinseishoBodyItem bodyItem = new FutangendogakuNinteiShinseishoBodyItem(
                     通知書定型文.get(1),
@@ -207,7 +204,6 @@ public class FutanGendogakuNinteiShinseishoHakko extends BatchProcessBase<FutanG
             );
             FutangendogakuNinteiShinseishoReport report = FutangendogakuNinteiShinseishoReport.createReport(bodyItem);
             report.writeBy(reportSourceWriter);
-            isNot旧措置者 = true;
         }
     }
 

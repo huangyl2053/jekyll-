@@ -242,7 +242,7 @@ public class HanyoListKyodoJukyushaShokanCsvEditor {
         bodyList.add(kojin.get転入前().get方書().getColumnValue());
         bodyList.add(被保険者台帳管理.getShichosonCode().getColumnValue());
         if (構成市町村マスタ.containsKey(被保険者台帳管理.getShichosonCode())) {
-            bodyList.add(構成市町村マスタ.get(shokanEntity.get被保険者台帳管理().getShichosonCode()).get市町村名称());
+            bodyList.add(構成市町村マスタ.get(被保険者台帳管理.getShichosonCode()).get市町村名称());
         } else {
             bodyList.add(RString.EMPTY);
         }

@@ -21,13 +21,16 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.kokuhorenkyotsu.DbWT0001Hihok
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinin.DbWT1111KyufuJissekiEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.shokanshikyuketteiin.DbWT0002KokuhorenTorikomiErrorEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.kyufujissekikoshinin.KyufuJissekiKoshinReadCsvFileService;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchCsvListReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchSimpleReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
+import jp.co.ndensan.reams.uz.uza.io.Encode;
+import jp.co.ndensan.reams.uz.uza.io.NewLine;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvListReader;
 import jp.co.ndensan.reams.uz.uza.io.csv.ListToObjectMappingHelper;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -38,7 +41,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  *
  * @reamsid_L DBC-2470-010 liuhui
  */
-public class KyufuJissekiKoshinReadCsvFileProcess extends BatchProcessBase<RString> {
+public class KyufuJissekiKoshinReadCsvFileProcess extends BatchProcessBase<List<RString>> {
 
     /**
      * returnEntity
@@ -101,7 +104,8 @@ public class KyufuJissekiKoshinReadCsvFileProcess extends BatchProcessBase<RStri
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchSimpleReader(parameter.get保存先フォルダ());
+        return new BatchCsvListReader(new CsvListReader.InstanceBuilder(parameter.get保存先フォルダ())
+                .setDelimiter(カンマ).setEncode(Encode.SJIS).hasHeader(false).setNewLine(NewLine.CRLF).build());
     }
 
     @Override
@@ -116,8 +120,7 @@ public class KyufuJissekiKoshinReadCsvFileProcess extends BatchProcessBase<RStri
     }
 
     @Override
-    protected void process(RString line) {
-        List<RString> data = line.split(カンマ.toString());
+    protected void process(List<RString> data) {
         if (エンドレコード種別.equals(data.get(INDEX_0))) {
             return;
         }

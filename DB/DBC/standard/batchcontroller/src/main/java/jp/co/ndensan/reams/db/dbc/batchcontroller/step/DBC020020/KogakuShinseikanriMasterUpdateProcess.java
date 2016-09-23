@@ -28,7 +28,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 public class KogakuShinseikanriMasterUpdateProcess extends BatchProcessBase<KogakuKaigoServiceHiRelateEntity> {
 
     private static final RString MYBATIS_ID = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
-                                                          + "kogakukaigoservicehikyufuoshirasetsuchisho.IKogakuKaigoServicehiOshiraseHakkoMapper.get高額介護申請管理マスタのデータ");
+            + "kogakukaigoservicehikyufuoshirasetsuchisho.IKogakuKaigoServicehiOshiraseHakkoMapper.get高額介護申請管理マスタのデータ");
     private KogakuKaigoServicehiOshiraseHakkoProcessParameter parameter;
 
     @BatchWriter

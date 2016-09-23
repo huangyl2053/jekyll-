@@ -190,7 +190,7 @@ public class KyodoJukyushaIchiranCSVData {
             csvEntity.set基_訂正区分名称(get訂正区分名称(data.get共同処理一時TBL().get基_訂正区分コード()));
             csvEntity.set基_順序(data.get共同処理一時TBL().get基_帳票出力順序コード());
             csvEntity.set基_証記載保険者番号(data.get共同処理一時TBL().get基_証記載保険者番号());
-            csvEntity.set基_被保険者氏名(data.get共同処理一時TBL().get基_被保険者番号());
+            csvEntity.set基_被保険者氏名(data.get共同処理一時TBL().get基_被保険者氏名());
             csvEntity.set基_電話番号(data.get共同処理一時TBL().get基_電話番号());
             csvEntity.set基_郵便番号(data.get共同処理一時TBL().get基_郵便番号());
             csvEntity.set基_住所カナ(data.get共同処理一時TBL().get基_住所カナ());
@@ -256,14 +256,14 @@ public class KyodoJukyushaIchiranCSVData {
         printTimeStampSb.append(作成日時.getDate().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
                 separator(Separator.JAPANESE).
                 fillType(FillType.BLANK).toDateString());
-        printTimeStampSb.append(SANKAKU);
+        printTimeStampSb.append(RString.HALF_SPACE);
         printTimeStampSb.append(String.format("%02d", 作成日時.getHour()));
         printTimeStampSb.append(DATE_時);
         printTimeStampSb.append(String.format("%02d", 作成日時.getMinute()));
         printTimeStampSb.append(DATE_分);
         printTimeStampSb.append(String.format("%02d", 作成日時.getSecond()));
         printTimeStampSb.append(DATE_秒);
-        printTimeStampSb.append(SANKAKU);
+        printTimeStampSb.append(RString.HALF_SPACE);
         printTimeStampSb.append(SAKUSEI);
         return printTimeStampSb.toRString();
     }
@@ -354,7 +354,7 @@ public class KyodoJukyushaIchiranCSVData {
         if (金額.contains(",")) {
             金額 = 金額転換(金額.split(","));
         }
-        return DecimalFormatter.toRString(new Decimal(金額.toString()), 0);
+        return DecimalFormatter.toコンマ区切りRString(new Decimal(金額.toString()), 0);
     }
 
     private RString 金額転換(List<RString> 金額) {

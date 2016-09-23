@@ -15,7 +15,6 @@ public interface IKogakuGassanJikofutangakuShomeishoMapper {
     /**
      * select高額合算自己負担額一時TBL件数。
      *
-     * @param entity DbWT37H1KogakuGassanaJikofutangakuTempEntity
      * @return 高額合算自己負担額一時TBL件数
      */
     int select高額合算自己負担額一時TBL件数();

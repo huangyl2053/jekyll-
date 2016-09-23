@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 public class KogakugassanKyufujissekiUpdateDBProcessParameter implements IBatchProcessParameter {
 
     private FlexibleYearMonth 処理年月;
-    private boolean 送付除外フラグ;
 
     /**
      * MybatisParameter取得です。
@@ -28,6 +27,6 @@ public class KogakugassanKyufujissekiUpdateDBProcessParameter implements IBatchP
      * @return {@link KogakugassanKyufujissekiUpdateDBMybatisParameter}
      */
     public KogakugassanKyufujissekiUpdateDBMybatisParameter toMybatisParameter() {
-        return new KogakugassanKyufujissekiUpdateDBMybatisParameter(this.送付除外フラグ);
+        return new KogakugassanKyufujissekiUpdateDBMybatisParameter(処理年月);
     }
 }

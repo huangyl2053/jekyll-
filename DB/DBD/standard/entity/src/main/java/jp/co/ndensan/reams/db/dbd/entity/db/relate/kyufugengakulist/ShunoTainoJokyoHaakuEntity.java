@@ -37,39 +37,39 @@ public class ShunoTainoJokyoHaakuEntity {
     private ShikibetsuCode shikibetsuCode;
     private AtenaKanaMeisho hihokenshaShimeiKana;
     private AtenaMeisho hihokenshaShimei;
-    private SetaiCode setaiCode;//世帯番号
+    private SetaiCode setaiCode;
     private GyoseikuCode gyoseikuCode;
-    private RString gyoseikuName;//行政区
-    private ZenkokuJushoCode jushoCode;//住所コード
+    private RString gyoseikuName;
+    private ZenkokuJushoCode jushoCode;
     private YubinNo yubinNo;
-    private AtenaJusho jusho;//住所
+    private AtenaJusho jusho;
     private FlexibleDate shikakuShutokuYMD;
     private FlexibleDate shikakuSoshitsuYMD;
-    private RString shikakuSoshitsuJiyuCode;//喪失事由
+    private RString shikakuSoshitsuJiyuCode;
     private RString hihokennshaKubunCode;
     private RString koikinaiJushochiTokureiFlag;
-    private boolean seihoFlag;//生保フラグ
+    private boolean seihoFlag;
     private Code koroshoIfShikibetsuCode;
     private Code yokaigoJotaiKubunCode;
     private FlexibleDate ninteiYukoKikanKaishiYMD;
     private FlexibleDate ninteiYukoKikanShuryoYMD;
     private FlexibleDate ninteiYMD;
-    private boolean shiseityuFlag;//申請中フラグ
-    private FlexibleDate jukyuShinseiYMD;//
+    private boolean shiseityuFlag;
+    private FlexibleDate jukyuShinseiYMD;
     private RYear choteiNendo;
     private RYear fukaNendo;
     private RString tokucho_FuchoKubun;
     private TsuchishoNo tsuchishoNo;
-    private RString kibetsu;//期別
+    private RString kibetsu;
     private Decimal choteigaku;
     private Decimal shunyugaku;
-    private Decimal minogaku;//未納額
+    private Decimal minogaku;
     private RDate shunyuYMD;
     private RDate tokusokujoHakkoYMD;
-    private FlexibleDate jikoKisanYMD;//時効起算日
+    private FlexibleDate jikoKisanYMD;
     private RString jikoKisanJiyu;
-    private RString minoKannoKubun;//未納完納区分DBZ
-    private RString jikoKubun;//時効区分DBZ
+    private RString minoKannoKubun;
+    private RString jikoKubun;
     private HihokenshaNo hihokenshaNo2;
     private DbT4022ShiharaiHohoHenkoTainoEntity shiharaiHohoHenkoTaino;
 

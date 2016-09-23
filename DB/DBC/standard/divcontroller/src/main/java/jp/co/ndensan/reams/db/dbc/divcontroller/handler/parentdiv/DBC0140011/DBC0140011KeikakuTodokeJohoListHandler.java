@@ -41,7 +41,7 @@ public final class DBC0140011KeikakuTodokeJohoListHandler {
             parameter.setKijyunbi(new FlexibleDate(div.getTbKijunbi().getValue().toDateString()));
         }
         if (div.getPrintOrderCv().get出力順ID() != null) {
-            parameter.setShutsuryokujunId(new Long(div.getPrintOrderCv().get出力順ID()));
+            parameter.setShutsuryokujunId(div.getPrintOrderCv().get出力順ID());
         }
         return parameter;
 

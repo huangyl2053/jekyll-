@@ -164,6 +164,22 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
     }
 
     /**
+     * 自己負担額証明書交付申請有CheckBoxのイベントです。
+     *
+     * @param div JikoFutangakuHoseiDiv
+     * @return ResponseData
+     */
+    public ResponseData<KogakuGassanShikyuShinseiTorokuAllPanelDiv> onChange_chkKofuShinseiUmu(
+            KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
+        if (Collections.EMPTY_LIST.equals(div.getChkKofuShinseiUmu().getSelectedKeys())) {
+            div.getDdlShikyuShinseiKeitai().setRequired(true);
+        } else {
+            div.getDdlShikyuShinseiKeitai().setRequired(false);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 申請情報グリッド「追加」ボタンのイベントです。
      *
      * @param div JikoFutangakuHoseiDiv
@@ -197,6 +213,9 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
         排他制御(前排他キー);
         handler.画面内共有子DIV初期化処理新規場合(対象者);
         handler.新規初期値取得設定();
+        onChange_chkKofuShinseiUmu(div);
+        ViewStateHolder.put(ViewStateKeys.高額合算申請書, null);
+        ViewStateHolder.put(ViewStateKeys.高額合算申請書状態, 追加);
         return ResponseData.of(div).setState(DBC1100011StateName.申請登録加入履歴一覧);
     }
 
@@ -451,6 +470,7 @@ public class KogakuGassanShikyuShinseiTorokuAllPanel {
         KogakuGassanShinseishoHoji 高額合算申請書保持New = handler.高額合算申請書編集(
                 高額合算申請書, 高額合算申請書保持, 高額合算申請書状態, 引き継ぎデータ, 対象者);
         handler.申請情報グリッドへ反映(高額合算申請書保持New, false);
+        handler.onClick_btnShinseiJohoModoru();
         div.getKanyuRirekiIchiran().setIsOpen(true);
         div.getKanyuRirekiInput().setIsOpen(false);
         ViewStateHolder.put(ViewStateKeys.高額合算申請書保持Entity, 高額合算申請書保持New);

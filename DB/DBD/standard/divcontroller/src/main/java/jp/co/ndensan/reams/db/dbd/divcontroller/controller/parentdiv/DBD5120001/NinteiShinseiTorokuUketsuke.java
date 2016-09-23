@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD5120001.Nin
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaisho;
+import jp.co.ndensan.reams.db.dbz.business.core.ShisetsuNyutaishoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ninteishinsei.NinteiShinseiCodeModel;
 import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ninteishinsei.NinteiShinseiCodeModel.HyojiMode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiTodokedeDaikoKubunCode;
@@ -24,6 +26,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.IconName;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  *
@@ -73,7 +76,6 @@ public class NinteiShinseiTorokuUketsuke {
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onBeforeOpenDialog_btnIryoHokenGuide(NinteiShinseiTorokuUketsukeDiv div) {
 
         div.setHdnMode(照会);
-
         return ResponseData.of(div).respond();
     }
 
@@ -109,7 +111,6 @@ public class NinteiShinseiTorokuUketsuke {
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onBeforeOpenDialog_btnNyuinAndShisetsuNyusho(NinteiShinseiTorokuUketsukeDiv div) {
 
         div.setHdnMode(照会);
-
         return ResponseData.of(div).respond();
     }
 
@@ -121,6 +122,9 @@ public class NinteiShinseiTorokuUketsuke {
      */
     public ResponseData<NinteiShinseiTorokuUketsukeDiv> onOkClose_ShisetsuNyutaisho(NinteiShinseiTorokuUketsukeDiv div) {
 
+        Models<ShisetsuNyutaishoIdentifier, ShisetsuNyutaisho> 施設入退所情報Model
+                = ViewStateHolder.get(ViewStateKeys.施設入退所情報, Models.class);
+        this.getHandler(div).onOkClose_ShisetsuNyutaisho(施設入退所情報Model);
         div.getBtnNyuinAndShisetsuNyusho().setIconNameEnum(IconName.Complete);
         return ResponseData.of(div).respond();
     }

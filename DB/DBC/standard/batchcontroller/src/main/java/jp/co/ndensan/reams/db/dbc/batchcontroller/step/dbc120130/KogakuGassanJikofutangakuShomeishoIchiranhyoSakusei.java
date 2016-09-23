@@ -117,8 +117,7 @@ public class KogakuGassanJikofutangakuShomeishoIchiranhyoSakusei extends BatchKe
         if (null == 並び順) {
             throw new BatchInterruptedException(UrErrorMessages.実行不可.getMessage()
                     .replace(実行不可MESSAGE.toString()).toString());
-        }
-        if (null != 並び順) {
+        } else {
             int i = 0;
             for (ISetSortItem item : 並び順.get設定項目リスト()) {
                 if (item.is改頁項目()) {
@@ -176,7 +175,6 @@ public class KogakuGassanJikofutangakuShomeishoIchiranhyoSakusei extends BatchKe
         if (null == beforeEntity) {
             csvWriter.writeLine(service.toヘッダのデータ(entity, parameter, 連番));
         } else {
-            boolean 改頁Flag = new KogakuGassanJikofutangakuShomeiPageBreak(改頁リスト).is改頁(entity, beforeEntity);
             連番_NO = 連番_NO + 1;
             KogakuGassanJikofutangakuShomeiReport report = new KogakuGassanJikofutangakuShomeiReport(parameter.get処理年月(),
                     beforeEntity, 並び順の１件目, 並び順の２件目,
@@ -203,7 +201,6 @@ public class KogakuGassanJikofutangakuShomeishoIchiranhyoSakusei extends BatchKe
                     並び順の３件目, 並び順の４件目, 並び順の５件目, 改頁項目リスト, new YMDHMS(parameter.getシステム日付()), 連番_NO);
             report.writeBy(reportSourceWriter);
         }
-        csvWriter.close();
         if (null != personalDataList && !personalDataList.isEmpty()) {
             AccessLogUUID log = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
             manager.spool(eucFilePath, log);

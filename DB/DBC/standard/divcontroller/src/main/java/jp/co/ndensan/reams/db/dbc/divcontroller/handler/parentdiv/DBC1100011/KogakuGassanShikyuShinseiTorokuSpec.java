@@ -357,17 +357,15 @@ public enum KogakuGassanShikyuShinseiTorokuSpec implements IPredicate<KogakuGass
         }
 
         public static boolean is資格喪失チェック1(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            RDate 資格喪失日 = div.getTxtShikakuSoshitsuYMD().getValue();
-            boolean flg1 = 資格喪失日 == null || RString.isNullOrEmpty(資格喪失日.toDateString());
-            boolean flg2 = div.getDdlShikakuSoshitsuJiyu().getSelectedIndex() != INT_0;
-            return !(flg1 && flg2);
+            boolean flg1 = RString.isNullOrEmpty(div.getTxtShikakuSoshitsuYMD().getText());
+            boolean flg2 = div.getDdlShikakuSoshitsuJiyu().getSelectedIndex() == INT_0;
+            return !flg1 || flg2;
         }
 
         public static boolean is資格喪失チェック2(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            RDate 資格喪失日 = div.getTxtShikakuSoshitsuYMD().getValue();
-            boolean flg1 = 資格喪失日 != null && !RString.isNullOrEmpty(資格喪失日.toDateString());
+            boolean flg1 = !RString.isNullOrEmpty(div.getTxtShikakuSoshitsuYMD().getText());
             boolean flg2 = div.getDdlShikakuSoshitsuJiyu().getSelectedIndex() == INT_0;
-            return !(flg1 && flg2);
+            return !flg1 || !flg2;
         }
 
         public static boolean is後期資格情報保険者番号(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
@@ -401,8 +399,8 @@ public enum KogakuGassanShikyuShinseiTorokuSpec implements IPredicate<KogakuGass
         }
 
         public static boolean is介護日付チェック(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            if (RString.isNullOrEmpty(div.getTxtKanyuKikanYMD().getFromText())
-                    || RString.isNullOrEmpty(div.getTxtKanyuKikanYMD().getToText())) {
+            if (div.getTxtKanyuKikanYMD().getFromValue() == null
+                    || div.getTxtKanyuKikanYMD().getToValue() == null) {
                 return true;
             }
             return div.getTxtKanyuKikanYMD().getFromValue().compareTo(
@@ -410,8 +408,8 @@ public enum KogakuGassanShikyuShinseiTorokuSpec implements IPredicate<KogakuGass
         }
 
         public static boolean is被保日付チェック(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            if (RString.isNullOrEmpty(div.getTxtTaishoKeisanKikanYMD().getFromText())
-                    || RString.isNullOrEmpty(div.getTxtTaishoKeisanKikanYMD().getToText())) {
+            if (div.getTxtTaishoKeisanKikanYMD().getFromValue() == null
+                    || div.getTxtTaishoKeisanKikanYMD().getToValue() == null) {
                 return true;
             }
             return div.getTxtTaishoKeisanKikanYMD().getFromValue().compareTo(
@@ -419,8 +417,8 @@ public enum KogakuGassanShikyuShinseiTorokuSpec implements IPredicate<KogakuGass
         }
 
         public static boolean is国保日付チェック(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            if (RString.isNullOrEmpty(div.getTxtKokuhoKanyuKikanYMD().getFromText())
-                    || RString.isNullOrEmpty(div.getTxtKokuhoKanyuKikanYMD().getToText())) {
+            if (div.getTxtKokuhoKanyuKikanYMD().getFromValue() == null
+                    || div.getTxtKokuhoKanyuKikanYMD().getToValue() == null) {
                 return true;
             }
             return div.getTxtKokuhoKanyuKikanYMD().getFromValue().compareTo(
@@ -428,8 +426,8 @@ public enum KogakuGassanShikyuShinseiTorokuSpec implements IPredicate<KogakuGass
         }
 
         public static boolean is後期日付チェック(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            if (RString.isNullOrEmpty(div.getTxtKokiKanyuKikanYMD().getFromText())
-                    || RString.isNullOrEmpty(div.getTxtKokiKanyuKikanYMD().getToText())) {
+            if (div.getTxtKokiKanyuKikanYMD().getFromValue() == null
+                    || div.getTxtKokiKanyuKikanYMD().getToValue() == null) {
                 return true;
             }
             return div.getTxtKokiKanyuKikanYMD().getFromValue().compareTo(
@@ -437,8 +435,8 @@ public enum KogakuGassanShikyuShinseiTorokuSpec implements IPredicate<KogakuGass
         }
 
         public static boolean is開始計算期間チェック1(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            if (RString.isNullOrEmpty(div.getTxtTaishoKeisanKikanYMD().getFromText())
-                    || RString.isNullOrEmpty(div.getTxtKanyuKikanYMD().getFromText())) {
+            if (div.getTxtTaishoKeisanKikanYMD().getFromValue() == null
+                    || div.getTxtKanyuKikanYMD().getFromValue() == null) {
                 return true;
             }
             return div.getTxtTaishoKeisanKikanYMD().getFromValue().compareTo(
@@ -446,8 +444,8 @@ public enum KogakuGassanShikyuShinseiTorokuSpec implements IPredicate<KogakuGass
         }
 
         public static boolean is開始計算期間チェック2(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            if (RString.isNullOrEmpty(div.getTxtTaishoKeisanKikanYMD().getFromText())
-                    || RString.isNullOrEmpty(div.getTxtKanyuKikanYMD().getToText())) {
+            if (div.getTxtTaishoKeisanKikanYMD().getFromValue() == null
+                    || div.getTxtKanyuKikanYMD().getToValue() == null) {
                 return true;
             }
             return div.getTxtTaishoKeisanKikanYMD().getFromValue().compareTo(
@@ -455,8 +453,8 @@ public enum KogakuGassanShikyuShinseiTorokuSpec implements IPredicate<KogakuGass
         }
 
         public static boolean is開始計算期間チェック3(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            if (RString.isNullOrEmpty(div.getTxtTaishoKeisanKikanYMD().getFromText())
-                    || RString.isNullOrEmpty(div.getTxtKokuhoKanyuKikanYMD().getFromText())) {
+            if (div.getTxtTaishoKeisanKikanYMD().getFromValue() == null
+                    || div.getTxtKokuhoKanyuKikanYMD().getFromValue() == null) {
                 return true;
             }
             return div.getTxtTaishoKeisanKikanYMD().getFromValue().compareTo(
@@ -464,8 +462,8 @@ public enum KogakuGassanShikyuShinseiTorokuSpec implements IPredicate<KogakuGass
         }
 
         public static boolean is開始計算期間チェック4(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            if (RString.isNullOrEmpty(div.getTxtTaishoKeisanKikanYMD().getFromText())
-                    || RString.isNullOrEmpty(div.getTxtKokuhoKanyuKikanYMD().getToText())) {
+            if (div.getTxtTaishoKeisanKikanYMD().getFromValue() == null
+                    || div.getTxtKokuhoKanyuKikanYMD().getToValue() == null) {
                 return true;
             }
             return div.getTxtTaishoKeisanKikanYMD().getFromValue().compareTo(
@@ -473,8 +471,8 @@ public enum KogakuGassanShikyuShinseiTorokuSpec implements IPredicate<KogakuGass
         }
 
         public static boolean is開始計算期間チェック5(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            if (RString.isNullOrEmpty(div.getTxtTaishoKeisanKikanYMD().getFromText())
-                    || RString.isNullOrEmpty(div.getTxtKokiKanyuKikanYMD().getFromText())) {
+            if (div.getTxtTaishoKeisanKikanYMD().getFromValue() == null
+                    || div.getTxtKokiKanyuKikanYMD().getFromValue() == null) {
                 return true;
             }
             return div.getTxtTaishoKeisanKikanYMD().getFromValue().compareTo(
@@ -482,8 +480,8 @@ public enum KogakuGassanShikyuShinseiTorokuSpec implements IPredicate<KogakuGass
         }
 
         public static boolean is開始計算期間チェック6(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            if (RString.isNullOrEmpty(div.getTxtTaishoKeisanKikanYMD().getFromText())
-                    || RString.isNullOrEmpty(div.getTxtKokiKanyuKikanYMD().getToText())) {
+            if (div.getTxtTaishoKeisanKikanYMD().getFromValue() == null
+                    || div.getTxtKokiKanyuKikanYMD().getToValue() == null) {
                 return true;
             }
             return div.getTxtTaishoKeisanKikanYMD().getFromValue().compareTo(
@@ -491,57 +489,57 @@ public enum KogakuGassanShikyuShinseiTorokuSpec implements IPredicate<KogakuGass
         }
 
         public static boolean is終了計算期間チェック1(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            if (RString.isNullOrEmpty(div.getTxtTaishoKeisanKikanYMD().getToText())
-                    || RString.isNullOrEmpty(div.getTxtKanyuKikanYMD().getFromText())) {
+            if (div.getTxtTaishoKeisanKikanYMD().getToValue() == null
+                    || div.getTxtKanyuKikanYMD().getFromValue() == null) {
                 return true;
             }
-            return div.getTxtTaishoKeisanKikanYMD().getToValue().compareTo(
-                    div.getTxtKokuhoKanyuKikanYMD().getFromValue()) <= INT_0;
+            return div.getTxtKanyuKikanYMD().getFromValue().compareTo(
+                    div.getTxtTaishoKeisanKikanYMD().getToValue()) <= INT_0;
         }
 
         public static boolean is終了計算期間チェック2(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            if (RString.isNullOrEmpty(div.getTxtTaishoKeisanKikanYMD().getToText())
-                    || RString.isNullOrEmpty(div.getTxtKanyuKikanYMD().getToText())) {
+            if (div.getTxtTaishoKeisanKikanYMD().getToValue() == null
+                    || div.getTxtKanyuKikanYMD().getToValue() == null) {
                 return true;
             }
-            return div.getTxtTaishoKeisanKikanYMD().getToValue().compareTo(
-                    div.getTxtKanyuKikanYMD().getToValue()) <= INT_0;
+            return div.getTxtKanyuKikanYMD().getToValue().compareTo(
+                    div.getTxtTaishoKeisanKikanYMD().getToValue()) <= INT_0;
         }
 
         public static boolean is終了計算期間チェック3(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            if (RString.isNullOrEmpty(div.getTxtTaishoKeisanKikanYMD().getToText())
-                    || RString.isNullOrEmpty(div.getTxtKokuhoKanyuKikanYMD().getFromText())) {
+            if (div.getTxtTaishoKeisanKikanYMD().getToValue() == null
+                    || div.getTxtKokuhoKanyuKikanYMD().getFromValue() == null) {
                 return true;
             }
-            return div.getTxtTaishoKeisanKikanYMD().getToValue().compareTo(
-                    div.getTxtKokuhoKanyuKikanYMD().getFromValue()) <= INT_0;
+            return div.getTxtKokuhoKanyuKikanYMD().getFromValue().compareTo(
+                    div.getTxtTaishoKeisanKikanYMD().getToValue()) <= INT_0;
         }
 
         public static boolean is終了計算期間チェック4(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            if (RString.isNullOrEmpty(div.getTxtTaishoKeisanKikanYMD().getToText())
-                    || RString.isNullOrEmpty(div.getTxtKokuhoKanyuKikanYMD().getToText())) {
+            if (div.getTxtTaishoKeisanKikanYMD().getToValue() == null
+                    || div.getTxtKokuhoKanyuKikanYMD().getToValue() == null) {
                 return true;
             }
-            return div.getTxtTaishoKeisanKikanYMD().getToValue().compareTo(
-                    div.getTxtKokuhoKanyuKikanYMD().getToValue()) <= INT_0;
+            return div.getTxtKokuhoKanyuKikanYMD().getToValue().compareTo(
+                    div.getTxtTaishoKeisanKikanYMD().getToValue()) <= INT_0;
         }
 
         public static boolean is終了計算期間チェック5(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            if (RString.isNullOrEmpty(div.getTxtTaishoKeisanKikanYMD().getToText())
-                    || RString.isNullOrEmpty(div.getTxtKokuhoKanyuKikanYMD().getFromText())) {
+            if (div.getTxtTaishoKeisanKikanYMD().getToValue() == null
+                    || div.getTxtKokiKanyuKikanYMD().getFromValue() == null) {
                 return true;
             }
-            return div.getTxtTaishoKeisanKikanYMD().getToValue().compareTo(
-                    div.getTxtKokuhoKanyuKikanYMD().getFromValue()) <= INT_0;
+            return div.getTxtKokiKanyuKikanYMD().getFromValue().compareTo(
+                    div.getTxtTaishoKeisanKikanYMD().getToValue()) <= INT_0;
         }
 
         public static boolean is終了計算期間チェック6(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {
-            if (RString.isNullOrEmpty(div.getTxtTaishoKeisanKikanYMD().getFromText())
-                    || RString.isNullOrEmpty(div.getTxtKokiKanyuKikanYMD().getToText())) {
+            if (div.getTxtTaishoKeisanKikanYMD().getFromValue() == null
+                    || div.getTxtKokiKanyuKikanYMD().getToValue() == null) {
                 return true;
             }
-            return div.getTxtTaishoKeisanKikanYMD().getToValue().compareTo(
-                    div.getTxtKokiKanyuKikanYMD().getToValue()) <= INT_0;
+            return div.getTxtKokiKanyuKikanYMD().getToValue().compareTo(
+                    div.getTxtTaishoKeisanKikanYMD().getToValue()) <= INT_0;
         }
 
         public static boolean is保険加入期間が不正チェック(KogakuGassanShikyuShinseiTorokuAllPanelDiv div) {

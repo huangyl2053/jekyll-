@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC150010;
 
+import java.util.Map;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -49,7 +50,7 @@ public class DBC150010_RiyojokyoTokeihyoMeisaiListParameter extends BatchParamet
     @BatchParameter(key = "地区指定", name = "地区指定")
     private RString 地区指定;
     @BatchParameter(key = "選択地区リスト", name = "選択地区リスト")
-    private RString 選択地区リスト;
+    private Map<RString, RString> 選択地区リスト;
     @BatchParameter(key = "市町村コード", name = "市町村コード")
     private RString 市町村コード;
     @BatchParameter(key = "市町村名称", name = "市町村名称")

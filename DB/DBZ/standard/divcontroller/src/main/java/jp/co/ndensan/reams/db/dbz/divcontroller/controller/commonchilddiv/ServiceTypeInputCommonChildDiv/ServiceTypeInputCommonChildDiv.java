@@ -9,12 +9,14 @@ import jp.co.ndensan.reams.db.dbx.business.core.kaigoserviceshurui.kaigoservices
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
 import jp.co.ndensan.reams.db.dbx.definition.mybatisprm.kaigoserviceshurui.KaigoServiceShuruiMapperParameter;
 import jp.co.ndensan.reams.db.dbx.service.core.kaigoserviceshurui.kaigoserviceshurui.KaigoServiceShuruiManager;
+import jp.co.ndensan.reams.db.dbz.business.core.servicetype.ServiceTypeModel;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ServiceTypeInputCommonChildDiv.ServiceTypeInputCommonChildDiv.ServiceTypeInputCommonChildDivDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ServiceTypeInputCommonChildDiv.ServiceTypeInputCommonChildDiv.ServiceTypeInputCommonChildHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  *
@@ -50,6 +52,9 @@ public class ServiceTypeInputCommonChildDiv {
         KaigoServiceShuruiMapperParameter param = KaigoServiceShuruiMapperParameter.createSelectByKeyParam(
                 new ServiceShuruiCode(div.getTxtServiceType().getValue()),
                 new FlexibleYearMonth(RDate.getNowDate().getYearMonth().toDateString()));
+        ServiceTypeModel model = DataPassingConverter.deserialize(div.getHdnServiceModel(), ServiceTypeModel.class);
+        model.setサービス種類コード(div.getTxtServiceType().getValue());
+        div.setHdnServiceModel(DataPassingConverter.serialize(model));
         SearchResult<KaigoServiceShurui> focusServiceTypeList = service.getFocusServiceTypeList(param);
         getHandler(div).setServiceTypeName(focusServiceTypeList.records());
         return ResponseData.of(div).respond();
