@@ -118,7 +118,7 @@ public class JikoFutangakuJohoHoseiJohoDg {
             if (resultList != null) {
                 handler.履歴を表示printLog(resultList, 対象者.get識別コード(), 被保険者番号);
             } else {
-                div.getJikoFutangakuHoseiList().getChkRirekiHyouji().setDisabled(true);
+                div.getChkRirekiHyouji().setDisabled(true);
             }
         }
         return ResponseData.of(div).setState(DBC1140011StateName.自己負担額一覧);
@@ -135,8 +135,7 @@ public class JikoFutangakuJohoHoseiJohoDg {
         HihokenshaNo 被保険者番号 = 対象者.get被保険者番号();
         JikoFutangakuJohoHoseiJohoDgHandler handler = getHandler(div);
         List<KogakuGassanJikoFutanGaku> resultList;
-        List<RString> selectedKeys = div.getJikoFutangakuHoseiList()
-                .getChkRirekiHyouji().getSelectedKeys();
+        List<RString> selectedKeys = div.getChkRirekiHyouji().getSelectedKeys();
         if (Collections.EMPTY_LIST.equals(selectedKeys)) {
             ViewStateHolder.put(ViewStateKeys.一覧データ, CODE_ZERO);
             JikoFutangakuHoseiFinder finder = JikoFutangakuHoseiFinder.createInstance();
@@ -151,7 +150,7 @@ public class JikoFutangakuJohoHoseiJohoDg {
         if (resultList != null) {
             handler.onClick_chkRirekiHyouji(resultList, 被保険者番号, 対象者.get識別コード());
         } else {
-            div.getJikoFutangakuHoseiList().getChkRirekiHyouji().setDisabled(true);
+            div.getChkRirekiHyouji().setDisabled(true);
         }
         return ResponseData.of(div).respond();
     }
@@ -257,11 +256,11 @@ public class JikoFutangakuJohoHoseiJohoDg {
             handler.initializeDisplay(対象者);
             RString 一覧flg = ViewStateHolder.get(ViewStateKeys.一覧データ, RString.class);
             if (CODE_ZERO.equals(一覧flg)) {
-                div.getJikoFutangakuHoseiList().getChkRirekiHyouji().setSelectedItemsByKey(Collections.EMPTY_LIST);
+                div.getChkRirekiHyouji().setSelectedItemsByKey(Collections.EMPTY_LIST);
             } else {
                 List<RString> keyList = new ArrayList();
                 keyList.add(KEY_ZERO);
-                div.getJikoFutangakuHoseiList().getChkRirekiHyouji().setSelectedItemsByKey(keyList);
+                div.getChkRirekiHyouji().setSelectedItemsByKey(keyList);
             }
             onClick_chkRirekiHyouji(div);
             return ResponseData.of(div).setState(DBC1140011StateName.自己負担額一覧);
@@ -296,8 +295,6 @@ public class JikoFutangakuJohoHoseiJohoDg {
         if (自己負担額保持 == null) {
             自己負担額保持 = new KogakuGassanJikofutangakuHosei();
             自己負担額保持 = set自己負担額保持回目１(自己負担額保持, result);
-        } else {
-            自己負担額保持.set呼び出しフラグ(CODE_ONE);
         }
         ViewStateHolder.put(ViewStateKeys.高額合算自己負担額補正保持Entity, 自己負担額保持);
         return ResponseData.of(div).forwardWithEventName(DBC1140011TransitionEventName.自己負担額入力).parameter(平成年度);
