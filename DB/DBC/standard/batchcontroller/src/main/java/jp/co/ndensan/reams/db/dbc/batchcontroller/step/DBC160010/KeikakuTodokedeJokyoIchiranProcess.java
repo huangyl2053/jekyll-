@@ -128,12 +128,16 @@ public class KeikakuTodokedeJokyoIchiranProcess extends BatchProcessBase<Keikaku
         システム日付 = RDateTime.now();
 
         if (processParameter.getJyukyuushinseibiFrom() != null) {
-            受給申請日From = new RString(processParameter.getJyukyuushinseibiFrom().toString());
+            受給申請日From = processParameter.getJyukyuushinseibiFrom().wareki()
+                    .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         } else {
             受給申請日From = RString.EMPTY;
         }
         if (processParameter.getJyukyuushinseibiTo() != null) {
-            受給申請日To = new RString(processParameter.getJyukyuushinseibiTo().toString());
+            受給申請日To = processParameter.getJyukyuushinseibiTo().wareki()
+                    .eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
+                    .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         } else {
             受給申請日To = RString.EMPTY;
         }
