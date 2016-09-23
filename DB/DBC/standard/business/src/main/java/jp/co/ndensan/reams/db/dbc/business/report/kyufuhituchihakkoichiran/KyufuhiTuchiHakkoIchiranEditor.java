@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.report.kyufuhituchihakkoichiran;
 
-import jp.co.ndensan.reams.db.dbc.entity.db.kyufuhituchihakkoichiran.KyufuhiTuchiHakkoIchiranEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufuhituchihakoichiran.KyufuhiTuchiHakkoIchiranEntity;
 import jp.co.ndensan.reams.db.dbc.entity.report.kyufuhituchihakkoichiran.KyufuhiTuchiHakkoIchiranReportSource;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
