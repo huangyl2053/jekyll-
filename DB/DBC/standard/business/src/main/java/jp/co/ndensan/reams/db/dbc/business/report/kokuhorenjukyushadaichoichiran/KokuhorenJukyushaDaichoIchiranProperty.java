@@ -121,7 +121,7 @@ public class KokuhorenJukyushaDaichoIchiranProperty extends ReportPropertyBase<J
         /**
          * 郵便番号
          */
-        郵便番号(new RString("0001"), new RString(""), new RString("DbWT0001.\"yubinNo\"")),
+        郵便番号(new RString("0001"), new RString("yubinNo"), new RString("DbWT0001.\"yubinNo\"")),
         /**
          * 町域コード
          */
@@ -133,11 +133,11 @@ public class KokuhorenJukyushaDaichoIchiranProperty extends ReportPropertyBase<J
         /**
          * 氏名５０音カナ
          */
-        氏名５０音カナ(new RString("0010"), new RString(""), new RString("DbWT0001.\"shimei50onKana\"")),
+        氏名５０音カナ(new RString("0010"), new RString("shimei50onKana"), new RString("DbWT0001.\"shimei50onKana\"")),
         /**
          * 市町村コード
          */
-        市町村コード(new RString("0016"), new RString(""), new RString("DbWT0001.\"shichosonCode\""));
+        市町村コード(new RString("0016"), new RString("shichosonCode"), new RString("DbWT0001.\"shichosonCode\""));
 
         private final RString 項目ID;
         private final RString フォームフィールド名;

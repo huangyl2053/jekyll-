@@ -1,8 +1,12 @@
 package jp.co.ndensan.reams.db.dbc.entity.report.jukyushakoshinkekkaichiran;
 
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 国保連保有受給者のReportSource
@@ -52,6 +56,9 @@ public class JukyushaKoshinkekkaIchiranSource implements IReportSource {
     public RString listList1_2;
     @ReportItem(name = "listList1_3", length = 8, order = 20)
     public RString listList1_3;
+    @ReportPerson(id = "X")
+    public ShikibetsuCode shikibetuCode;
+    @ReportExpandedInfo(id = "X", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listList1_4", length = 10, order = 21)
     public RString listList1_4;
     @ReportItem(name = "listList1_5", length = 40, order = 22)
@@ -214,6 +221,16 @@ public class JukyushaKoshinkekkaIchiranSource implements IReportSource {
     public RString listList8_12;
     @ReportItem(name = "listList8_13", length = 20, order = 101)
     public RString listList8_13;
+    @ReportItem(name = "yubinNo", length = 20, order = 102)
+    public RString yubinNo;
+    @ReportItem(name = "choikiCode", length = 20, order = 103)
+    public RString choikiCode;
+    @ReportItem(name = "gyoseikuCode", length = 20, order = 104)
+    public RString gyoseikuCode;
+    @ReportItem(name = "shimei50onKana", length = 20, order = 105)
+    public RString shimei50onKana;
+    @ReportItem(name = "shichosonCode", length = 20, order = 106)
+    public LasdecCode shichosonCode;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

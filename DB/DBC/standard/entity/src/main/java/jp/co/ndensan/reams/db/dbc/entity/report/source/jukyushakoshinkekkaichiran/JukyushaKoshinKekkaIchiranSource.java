@@ -6,9 +6,12 @@
 package jp.co.ndensan.reams.db.dbc.entity.report.source.jukyushakoshinkekkaichiran;
 
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 受給者情報更新結果情報一覧表帳票Source
@@ -16,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
  * @reamsid_L DBC-2730-030 chenjie
  */
 public class JukyushaKoshinKekkaIchiranSource implements IReportSource {
+
     @ReportItem(name = "printTimeStamp", length = 34, order = 1)
     public RString printTimeStamp;
     @ReportItem(name = "title", length = 10, order = 2)
@@ -56,6 +60,9 @@ public class JukyushaKoshinKekkaIchiranSource implements IReportSource {
     public RString listList1_2;
     @ReportItem(name = "listList1_3", length = 8, order = 20)
     public RString listList1_3;
+    @ReportPerson(id = "X")
+    public ShikibetsuCode shikibetuCode;
+    @ReportExpandedInfo(id = "X", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listList1_4", length = 10, order = 21)
     public RString listList1_4;
     @ReportItem(name = "listList1_5", length = 40, order = 22)
@@ -234,10 +241,12 @@ public class JukyushaKoshinKekkaIchiranSource implements IReportSource {
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
+
     /**
      * JukyushaKoshinKekkaIchiranSource
      */
     public enum ReportSourceFields {
+
         printTimeStamp,
         title,
         hokenshaNo,
