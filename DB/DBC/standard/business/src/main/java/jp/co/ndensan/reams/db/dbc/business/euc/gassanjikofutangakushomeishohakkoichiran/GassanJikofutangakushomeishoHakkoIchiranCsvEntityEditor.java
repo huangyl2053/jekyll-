@@ -112,7 +112,7 @@ public class GassanJikofutangakushomeishoHakkoIchiranCsvEntityEditor {
         return dateTime.toRString();
     }
 
-    public RString getFormat(Decimal sum) {
+    private RString getFormat(Decimal sum) {
         if (sum == null) {
             return TXTZERO;
         }
