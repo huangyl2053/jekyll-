@@ -5,10 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbb.batchcontroller.flow;
 
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbt21004.DankaiProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbt21004.DankaibetsuHihokenshasuReportCSVProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbt21004.DankaibetsuHihokenshasuReportProcess;
-import jp.co.ndensan.reams.db.dbb.batchcontroller.step.dbbt21004.HihokenshaProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB021031.DankaiProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB021031.DankaibetsuHihokenshasuReportCSVProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB021031.DankaibetsuHihokenshasuReportProcess;
+import jp.co.ndensan.reams.db.dbb.batchcontroller.step.DBB021031.HihokenshaProcess;
 import jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB021031.DBB021031_DankaibetsuHihokenshasuIchiranhyoSakuseiParameter;
 import jp.co.ndensan.reams.db.dbb.definition.processprm.dbbbt21004.DankaibetuHihokensyasuIchiranhyoProcessParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.fuka.SetaiShotokuKazeiHanteiBatchParameter;
