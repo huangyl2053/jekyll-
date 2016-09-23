@@ -646,11 +646,57 @@ public class HonsanteiTsuchishoIkkatsuHakkoSyori {
      */
     public TmpHonsanteiTsuchishoTableEntity to賦課情報_決定変更判定(HonsanteiTsuchishoTempEntity entity,
             RString 選択通知書, RString 出力順グループ名) {
-        TmpHonsanteiTsuchishoTableEntity tempEntity = to賦課情報(entity);
+        TmpHonsanteiTsuchishoTableEntity tempEntity = to賦課情報_決定変更(entity);
         tempEntity.set決定変更区分(選択通知書);
         tempEntity.set出力順グループ指定(出力順グループ名);
+        tempEntity.set生活保護区分(entity.get生活保護区分());
+        tempEntity.set更正前情報有無区分(entity.get更正前情報有無区分());
         return tempEntity;
 
+    }
+
+    /**
+     * 賦課情報取得するメソッドです。
+     *
+     * @param entity HonsanteiTsuchishoTempEntity
+     * @return TmpHonsanteiTsuchishoTableEntity 賦課情報
+     */
+    public TmpHonsanteiTsuchishoTableEntity to賦課情報_決定変更(HonsanteiTsuchishoTempEntity entity) {
+
+        TmpHonsanteiTsuchishoTableEntity tmpEntity = new TmpHonsanteiTsuchishoTableEntity();
+
+        set計算後情報_更正後(entity.get計算後情報_更正後(), tmpEntity);
+
+        if (entity.get計算後情報_更正前() != null && entity.get計算後情報_更正前().getTsuchishoNo() != null
+                && !entity.get計算後情報_更正前().getTsuchishoNo().isEmpty()) {
+            set計算後情報_更正前(entity.get計算後情報_更正前(), tmpEntity);
+        }
+
+        set対象者追加含む情報_更正後(entity.get対象者_追加含む_情報_更正後(), tmpEntity);
+        if (entity.get対象者_追加含む_情報_更正前() != null && entity.get対象者_追加含む_情報_更正前().getShoriNendo() != null
+                && !entity.get対象者_追加含む_情報_更正前().getShoriNendo().isEmpty()) {
+            set対象者追加含む情報_更正前(entity.get対象者_追加含む_情報_更正前(), tmpEntity);
+        }
+
+        if (entity.get宛名() != null) {
+            set宛名の全項目(entity.get宛名(), tmpEntity);
+        }
+        if (entity.get宛先() != null && entity.get宛先().getShikibetsuCode() != null) {
+            set宛先の全項目(entity.get宛先(), tmpEntity);
+        }
+        if (entity.get納組() != null && entity.get納組().getSeikyuHoho() != null
+                && entity.get納組().getSeikyuHoho().getShikibetsuCode() != null) {
+            set納組情報の全項目(entity.get納組(), tmpEntity);
+        }
+        if (entity.get特定口座() != null && entity.get特定口座().getUaT0310KozaEntity() != null
+                && entity.get特定口座().getUaT0310KozaEntity().getKozaId() != 0) {
+            set口座情報の全項目(entity.get特定口座(), tmpEntity);
+        }
+        if (entity.get宛先代納() != null && entity.get宛先代納().getShikibetsuCode() != null) {
+            set宛先代納の全項目(entity.get宛先代納(), tmpEntity);
+        }
+
+        return tmpEntity;
     }
 
     /**
@@ -670,7 +716,7 @@ public class HonsanteiTsuchishoIkkatsuHakkoSyori {
         if (entity.get宛名() != null) {
             set宛名の全項目(entity.get宛名(), tmpEntity);
         }
-        if (entity.get宛先() != null) {
+        if (entity.get宛先() != null && entity.get宛先().getShikibetsuCode() != null) {
             set宛先の全項目(entity.get宛先(), tmpEntity);
         }
         if (entity.get納組() != null && entity.get納組().getSeikyuHoho() != null
@@ -681,7 +727,7 @@ public class HonsanteiTsuchishoIkkatsuHakkoSyori {
                 && entity.get特定口座().getUaT0310KozaEntity().getKozaId() != 0) {
             set口座情報の全項目(entity.get特定口座(), tmpEntity);
         }
-        if (entity.get宛先代納() != null) {
+        if (entity.get宛先代納() != null && entity.get宛先代納().getShikibetsuCode() != null) {
             set宛先代納の全項目(entity.get宛先代納(), tmpEntity);
         }
         tmpEntity.set更正前情報有無区分(定値区分_0);
@@ -816,6 +862,131 @@ public class HonsanteiTsuchishoIkkatsuHakkoSyori {
         tmpEntity.setDbT2015KeisangoJoho_fuShunyuGaku14(計算後情報.getFuShunyuGaku14());
     }
 
+    private void set計算後情報_更正前(DbT2015KeisangoJohoEntity 計算後情報, TmpHonsanteiTsuchishoTableEntity tmpEntity) {
+        tmpEntity.setChoteiNendo(計算後情報.getChoteiNendo());
+        tmpEntity.setFukaNendo(計算後情報.getFukaNendo());
+        tmpEntity.setTsuchishoNo(計算後情報.getTsuchishoNo());
+        tmpEntity.setKoseiZengoKubun(計算後情報.getKoseiZengoKubun());
+        tmpEntity.setSakuseiShoriName(計算後情報.getSakuseiShoriName());
+        tmpEntity.setFukaRirekiNo(計算後情報.getFukaRirekiNo());
+        tmpEntity.setHihokenshaNo(計算後情報.getHihokenshaNo());
+        tmpEntity.setShikibetsuCode(計算後情報.getShikibetsuCode());
+        tmpEntity.setSetaiCode(計算後情報.getSetaiCode());
+        tmpEntity.setSetaiInsu(計算後情報.getSetaiInsu());
+        tmpEntity.setShikakuShutokuYMD(計算後情報.getShikakuShutokuYMD());
+        tmpEntity.setShikakuShutokuJiyu(計算後情報.getShikakuShutokuJiyu());
+        tmpEntity.setShikakuSoshitsuYMD(計算後情報.getShikakuSoshitsuYMD());
+        tmpEntity.setShikakuSoshitsuJiyu(計算後情報.getShikakuSoshitsuJiyu());
+        tmpEntity.setSeihofujoShurui(計算後情報.getSeihofujoShurui());
+        tmpEntity.setSeihoKaishiYMD(計算後情報.getSeihoKaishiYMD());
+        tmpEntity.setSeihoHaishiYMD(計算後情報.getSeihoHaishiYMD());
+        tmpEntity.setRonenKaishiYMD(計算後情報.getRonenKaishiYMD());
+        tmpEntity.setRonenHaishiYMD(計算後情報.getRonenHaishiYMD());
+        tmpEntity.setFukaYMD(計算後情報.getFukaYMD());
+        tmpEntity.setKazeiKubun(計算後情報.getKazeiKubun());
+        tmpEntity.setSetaikazeiKubun(計算後情報.getSetaikazeiKubun());
+        tmpEntity.setGokeiShotokuGaku(計算後情報.getGokeiShotokuGaku());
+        tmpEntity.setNenkinShunyuGaku(計算後情報.getNenkinShunyuGaku());
+        tmpEntity.setHokenryoDankai(計算後情報.getHokenryoDankai());
+        tmpEntity.setHokenryoDankai1(計算後情報.getHokenryoDankai1());
+        tmpEntity.setNengakuHokenryo1(計算後情報.getNengakuHokenryo1());
+        tmpEntity.setTsukiwariStartYM1(計算後情報.getTsukiwariStartYM1());
+        tmpEntity.setTsukiwariEndYM1(計算後情報.getTsukiwariEndYM1());
+        tmpEntity.setHokenryoDankai2(計算後情報.getHokenryoDankai2());
+        tmpEntity.setNengakuHokenryo2(計算後情報.getNengakuHokenryo2());
+        tmpEntity.setTsukiwariStartYM2(計算後情報.getTsukiwariStartYM2());
+        tmpEntity.setTsukiwariEndYM2(計算後情報.getTsukiwariEndYM2());
+        tmpEntity.setChoteiNichiji(計算後情報.getChoteiNichiji());
+        tmpEntity.setChoteiJiyu1(計算後情報.getChoteiJiyu1());
+        tmpEntity.setChoteiJiyu2(計算後情報.getChoteiJiyu2());
+        tmpEntity.setChoteiJiyu3(計算後情報.getChoteiJiyu3());
+        tmpEntity.setChoteiJiyu4(計算後情報.getChoteiJiyu4());
+        tmpEntity.setKoseiM(計算後情報.getKoseiM());
+        tmpEntity.setGemmenMaeHokenryo(計算後情報.getGemmenMaeHokenryo());
+        tmpEntity.setGemmenGaku(計算後情報.getGemmenGaku());
+        tmpEntity.setKakuteiHokenryo(計算後情報.getKakuteiHokenryo());
+        tmpEntity.setHokenryoDankaiKarisanntei(計算後情報.getHokenryoDankaiKarisanntei());
+        tmpEntity.setChoshuHohoRirekiNo(計算後情報.getChoshuHohoRirekiNo());
+        tmpEntity.setIdoKijunNichiji(計算後情報.getIdoKijunNichiji());
+        tmpEntity.setKozaKubun(計算後情報.getKozaKubun());
+        tmpEntity.setKyokaisoKubun(計算後情報.getKyokaisoKubun());
+        tmpEntity.setShokkenKubun(計算後情報.getShokkenKubun());
+        tmpEntity.setFukaShichosonCode(計算後情報.getFukaShichosonCode());
+        tmpEntity.setTkSaishutsuKampuGaku(計算後情報.getTkSaishutsuKampuGaku());
+        tmpEntity.setFuSaishutsuKampuGaku(計算後情報.getFuSaishutsuKampuGaku());
+        tmpEntity.setTkKibetsuGaku01(計算後情報.getTkKibetsuGaku01());
+        tmpEntity.setTkKibetsuGaku02(計算後情報.getTkKibetsuGaku02());
+        tmpEntity.setTkKibetsuGaku03(計算後情報.getTkKibetsuGaku03());
+        tmpEntity.setTkKibetsuGaku04(計算後情報.getTkKibetsuGaku04());
+        tmpEntity.setTkKibetsuGaku05(計算後情報.getTkKibetsuGaku05());
+        tmpEntity.setTkKibetsuGaku06(計算後情報.getTkKibetsuGaku06());
+        tmpEntity.setFuKibetsuGaku01(計算後情報.getFuKibetsuGaku01());
+        tmpEntity.setFuKibetsuGaku02(計算後情報.getFuKibetsuGaku02());
+        tmpEntity.setFuKibetsuGaku03(計算後情報.getFuKibetsuGaku03());
+        tmpEntity.setFuKibetsuGaku04(計算後情報.getFuKibetsuGaku04());
+        tmpEntity.setFuKibetsuGaku05(計算後情報.getFuKibetsuGaku05());
+        tmpEntity.setFuKibetsuGaku06(計算後情報.getFuKibetsuGaku06());
+        tmpEntity.setFuKibetsuGaku07(計算後情報.getFuKibetsuGaku07());
+        tmpEntity.setFuKibetsuGaku08(計算後情報.getFuKibetsuGaku08());
+        tmpEntity.setFuKibetsuGaku09(計算後情報.getFuKibetsuGaku09());
+        tmpEntity.setFuKibetsuGaku10(計算後情報.getFuKibetsuGaku10());
+        tmpEntity.setFuKibetsuGaku11(計算後情報.getFuKibetsuGaku11());
+        tmpEntity.setFuKibetsuGaku12(計算後情報.getFuKibetsuGaku12());
+        tmpEntity.setFuKibetsuGaku13(計算後情報.getFuKibetsuGaku13());
+        tmpEntity.setFuKibetsuGaku14(計算後情報.getFuKibetsuGaku14());
+        tmpEntity.setChoshuHoho4gatsu(計算後情報.getChoshuHoho4gatsu());
+        tmpEntity.setChoshuHoho5gatsu(計算後情報.getChoshuHoho5gatsu());
+        tmpEntity.setChoshuHoho6gatsu(計算後情報.getChoshuHoho6gatsu());
+        tmpEntity.setChoshuHoho7gatsu(計算後情報.getChoshuHoho7gatsu());
+        tmpEntity.setChoshuHoho8gatsu(計算後情報.getChoshuHoho8gatsu());
+        tmpEntity.setChoshuHoho9gatsu(計算後情報.getChoshuHoho9gatsu());
+        tmpEntity.setChoshuHoho10gatsu(計算後情報.getChoshuHoho10gatsu());
+        tmpEntity.setChoshuHoho11gatsu(計算後情報.getChoshuHoho11gatsu());
+        tmpEntity.setChoshuHoho12gatsu(計算後情報.getChoshuHoho12gatsu());
+        tmpEntity.setChoshuHoho1gatsu(計算後情報.getChoshuHoho1gatsu());
+        tmpEntity.setChoshuHoho2gatsu(計算後情報.getChoshuHoho2gatsu());
+        tmpEntity.setChoshuHoho3gatsu(計算後情報.getChoshuHoho3gatsu());
+        tmpEntity.setChoshuHohoYoku4gatsu(計算後情報.getChoshuHohoYoku4gatsu());
+        tmpEntity.setChoshuHohoYoku5gatsu(計算後情報.getChoshuHohoYoku5gatsu());
+        tmpEntity.setChoshuHohoYoku6gatsu(計算後情報.getChoshuHohoYoku6gatsu());
+        tmpEntity.setChoshuHohoYoku7gatsu(計算後情報.getChoshuHohoYoku7gatsu());
+        tmpEntity.setChoshuHohoYoku8gatsu(計算後情報.getChoshuHohoYoku8gatsu());
+        tmpEntity.setChoshuHohoYoku9gatsu(計算後情報.getChoshuHohoYoku9gatsu());
+        tmpEntity.setKariNenkinNo(計算後情報.getKariNenkinNo());
+        tmpEntity.setKariNenkinCode(計算後情報.getKariNenkinCode());
+        tmpEntity.setKariHosokuM(計算後情報.getKariHosokuM());
+        tmpEntity.setHonNenkinNo(計算後情報.getHonNenkinNo());
+        tmpEntity.setHonNenkinCode(計算後情報.getHonNenkinCode());
+        tmpEntity.setHonHosokuM(計算後情報.getHonHosokuM());
+        tmpEntity.setYokunendoKariNenkinNo(計算後情報.getYokunendoKariNenkinNo());
+        tmpEntity.setYokunendoKariNenkinCode(計算後情報.getYokunendoKariNenkinCode());
+        tmpEntity.setYokunendoKariHosokuM(計算後情報.getYokunendoKariHosokuM());
+        tmpEntity.setIraiSohuzumiFlag(計算後情報.getIraiSohuzumiFlag());
+        tmpEntity.setTsuikaIraiSohuzumiFlag(計算後情報.getTsuikaIraiSohuzumiFlag());
+        tmpEntity.setTokuchoTeishiNichiji(計算後情報.getTokuchoTeishiNichiji());
+        tmpEntity.setTokuchoTeishiJiyuCode(計算後情報.getTokuchoTeishiJiyuCode());
+        tmpEntity.setTkShunyuGaku01(計算後情報.getTkShunyuGaku01());
+        tmpEntity.setTkShunyuGaku02(計算後情報.getTkShunyuGaku02());
+        tmpEntity.setTkShunyuGaku03(計算後情報.getTkShunyuGaku03());
+        tmpEntity.setTkShunyuGaku04(計算後情報.getTkShunyuGaku04());
+        tmpEntity.setTkShunyuGaku05(計算後情報.getTkShunyuGaku05());
+        tmpEntity.setTkShunyuGaku06(計算後情報.getTkShunyuGaku06());
+        tmpEntity.setFuShunyuGaku01(計算後情報.getFuShunyuGaku01());
+        tmpEntity.setFuShunyuGaku02(計算後情報.getFuShunyuGaku02());
+        tmpEntity.setFuShunyuGaku03(計算後情報.getFuShunyuGaku03());
+        tmpEntity.setFuShunyuGaku04(計算後情報.getFuShunyuGaku04());
+        tmpEntity.setFuShunyuGaku05(計算後情報.getFuShunyuGaku05());
+        tmpEntity.setFuShunyuGaku06(計算後情報.getFuShunyuGaku06());
+        tmpEntity.setFuShunyuGaku07(計算後情報.getFuShunyuGaku07());
+        tmpEntity.setFuShunyuGaku08(計算後情報.getFuShunyuGaku08());
+        tmpEntity.setFuShunyuGaku09(計算後情報.getFuShunyuGaku09());
+        tmpEntity.setFuShunyuGaku10(計算後情報.getFuShunyuGaku10());
+        tmpEntity.setFuShunyuGaku11(計算後情報.getFuShunyuGaku11());
+        tmpEntity.setFuShunyuGaku12(計算後情報.getFuShunyuGaku12());
+        tmpEntity.setFuShunyuGaku13(計算後情報.getFuShunyuGaku13());
+        tmpEntity.setFuShunyuGaku14(計算後情報.getFuShunyuGaku14());
+    }
+
     private void set対象者追加含む情報_更正後(UeT0511NenkinTokuchoKaifuJohoEntity 対象者_追加含む_情報,
             TmpHonsanteiTsuchishoTableEntity tmpEntity) {
         tmpEntity.setUeT0511after_gyomuCode(対象者_追加含む_情報.getGyomuCode());
@@ -870,6 +1041,62 @@ public class HonsanteiTsuchishoIkkatsuHakkoSyori {
         tmpEntity.setUeT0511after_dtTeishiYM(対象者_追加含む_情報.getDtTeishiYM());
         tmpEntity.setUeT0511after_dtYobi4Juminzei(対象者_追加含む_情報.getDtYobi4Juminzei());
         tmpEntity.setUeT0511after_dtKojinNo(対象者_追加含む_情報.getDtKojinNo());
+    }
+
+    private void set対象者追加含む情報_更正前(UeT0511NenkinTokuchoKaifuJohoEntity 対象者_追加含む_情報,
+            TmpHonsanteiTsuchishoTableEntity tmpEntity) {
+        tmpEntity.setUeT0511_gyomuCode(対象者_追加含む_情報.getGyomuCode());
+        tmpEntity.setUeT0511_shoriNendo(対象者_追加含む_情報.getShoriNendo());
+        tmpEntity.setUeT0511_tsuchiNaiyoCode(対象者_追加含む_情報.getTsuchiNaiyoCode());
+        tmpEntity.setUeT0511_shoriTaishoYM(対象者_追加含む_情報.getShoriTaishoYM());
+        tmpEntity.setUeT0511_kisoNenkinNo(対象者_追加含む_情報.getKisoNenkinNo());
+        tmpEntity.setUeT0511_nenkinCode(対象者_追加含む_情報.getNenkinCode());
+        tmpEntity.setUeT0511_koseiCityCode(対象者_追加含む_情報.getKoseiCityCode());
+        tmpEntity.setUeT0511_renban(対象者_追加含む_情報.getRenban());
+        tmpEntity.setUeT0511_shoriTimestamp(対象者_追加含む_情報.getShoriTimestamp());
+        tmpEntity.setUeT0511_renkeiShubetsu(対象者_追加含む_情報.getRenkeiShubetsu());
+        tmpEntity.setUeT0511_hosokuTsuki(対象者_追加含む_情報.getHosokuTsuki());
+        tmpEntity.setUeT0511_tenbikiTsuki(対象者_追加含む_情報.getTenbikiTsuki());
+        tmpEntity.setUeT0511_shikibetsuCode(対象者_追加含む_情報.getShikibetsuCode());
+        tmpEntity.setUeT0511_hihokenshaNo(対象者_追加含む_情報.getHihokenshaNo());
+        tmpEntity.setUeT0511_kokuhoSetaiCode(対象者_追加含む_情報.getKokuhoSetaiCode());
+        tmpEntity.setUeT0511_dtCityCode(対象者_追加含む_情報.getDtCityCode());
+        tmpEntity.setUeT0511_dtTokubetsuChoshuGimushaCode(getCode(対象者_追加含む_情報.getDtTokubetsuChoshuGimushaCode()));
+        tmpEntity.setUeT0511_dtTsuchiNaiyoCode(対象者_追加含む_情報.getDtTsuchiNaiyoCode());
+        tmpEntity.setUeT0511_dtBaitaiCode(対象者_追加含む_情報.getDtBaitaiCode());
+        tmpEntity.setUeT0511_dtTokubetsuChoshuSeidoCode(対象者_追加含む_情報.getDtTokubetsuChoshuSeidoCode());
+        tmpEntity.setUeT0511_dtSakuseiYMD(対象者_追加含む_情報.getDtSakuseiYMD());
+        tmpEntity.setUeT0511_dtKisoNenkinNo(対象者_追加含む_情報.getDtKisoNenkinNo());
+        tmpEntity.setUeT0511_dtNenkinCode(対象者_追加含む_情報.getDtNenkinCode());
+        tmpEntity.setUeT0511_dtYobi1(対象者_追加含む_情報.getDtYobi1());
+        tmpEntity.setUeT0511_dtBirthDay(対象者_追加含む_情報.getDtBirthDay());
+        tmpEntity.setUeT0511_dtSeibetsu(対象者_追加含む_情報.getDtSeibetsu());
+        tmpEntity.setUeT0511_dtKanaShimei(対象者_追加含む_情報.getDtKanaShimei());
+        tmpEntity.setUeT0511_dtShiftCode1(対象者_追加含む_情報.getDtShiftCode1());
+        tmpEntity.setUeT0511_dtKanjiShimei(対象者_追加含む_情報.getDtKanjiShimei());
+        tmpEntity.setUeT0511_dtShiftCode2(対象者_追加含む_情報.getDtShiftCode2());
+        tmpEntity.setUeT0511_dtYubinNo(対象者_追加含む_情報.getDtYubinNo());
+        tmpEntity.setUeT0511_dtKanaJusho(対象者_追加含む_情報.getDtKanaJusho());
+        tmpEntity.setUeT0511_dtShiftCode3(対象者_追加含む_情報.getDtShiftCode3());
+        tmpEntity.setUeT0511_dtKanjiJusho(対象者_追加含む_情報.getDtKanjiJusho());
+        tmpEntity.setUeT0511_dtShiftCode4(対象者_追加含む_情報.getDtShiftCode4());
+        tmpEntity.setUeT0511_dtKakushuKubun(対象者_追加含む_情報.getDtKakushuKubun());
+        tmpEntity.setUeT0511_dtShoriKekka(対象者_追加含む_情報.getDtShoriKekka());
+        tmpEntity.setUeT0511_dtKokiIkanCode(対象者_追加含む_情報.getDtKokiIkanCode());
+        tmpEntity.setUeT0511_dtKakushuYMD(対象者_追加含む_情報.getDtKakushuYMD());
+        tmpEntity.setUeT0511_dtKakushuKingaku1(対象者_追加含む_情報.getDtKakushuKingaku1());
+        tmpEntity.setUeT0511_dtKakushuKingaku2(対象者_追加含む_情報.getDtKakushuKingaku2());
+        tmpEntity.setUeT0511_dtKakushuKingaku3(対象者_追加含む_情報.getDtKakushuKingaku3());
+        tmpEntity.setUeT0511_dtYobi2(対象者_追加含む_情報.getDtYobi2());
+        tmpEntity.setUeT0511_dtKyosaiNenkinshoshoKigoNo(対象者_追加含む_情報.getDtKyosaiNenkinshoshoKigoNo());
+        tmpEntity.setUeT0511_dtKakushuKingaku4(対象者_追加含む_情報.getDtKakushuKingaku4());
+        tmpEntity.setUeT0511_dtKakushuKingaku5(対象者_追加含む_情報.getDtKakushuKingaku5());
+        tmpEntity.setUeT0511_dtKakushuKingaku6(対象者_追加含む_情報.getDtKakushuKingaku6());
+        tmpEntity.setUeT0511_dtKakushuKingaku7(対象者_追加含む_情報.getDtKakushuKingaku7());
+        tmpEntity.setUeT0511_dtKakushuKingaku8(対象者_追加含む_情報.getDtKakushuKingaku8());
+        tmpEntity.setUeT0511_dtTeishiYM(対象者_追加含む_情報.getDtTeishiYM());
+        tmpEntity.setUeT0511_dtYobi4Juminzei(対象者_追加含む_情報.getDtYobi4Juminzei());
+        tmpEntity.setUeT0511_dtKojinNo(対象者_追加含む_情報.getDtKojinNo());
     }
 
     private void set宛名の全項目(UaFt200FindShikibetsuTaishoEntity 宛名, TmpHonsanteiTsuchishoTableEntity tmpEntity) {
