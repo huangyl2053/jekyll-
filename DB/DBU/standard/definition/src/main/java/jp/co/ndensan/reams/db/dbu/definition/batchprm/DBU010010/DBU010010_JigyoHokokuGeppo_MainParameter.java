@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 事業状況報告資料（月報）作成のパラメータクラスです
  *
- * @reamsid_L DBU-5530-030 dongyabin
+ * @reamsid_L DBU-5550-060 dongyabin
  */
 @lombok.Getter
 @lombok.Setter
