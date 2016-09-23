@@ -33,7 +33,6 @@ public class KaigokyufuhiKagoMoshitateshoOutBodyEditor implements IKaigokyufuhiK
     private final boolean 合計出力flag;
     private final int 件数;
 
-    private int 連番 = 1;
     private static final RString 合計件数 = new RString("合計件数");
     private static final RString 漢字_件 = new RString("件");
 
@@ -54,7 +53,7 @@ public class KaigokyufuhiKagoMoshitateshoOutBodyEditor implements IKaigokyufuhiK
 
     @Override
     public KyufuKagoMoshitateshojohoSofuIchiranSource edit(KyufuKagoMoshitateshojohoSofuIchiranSource source) {
-        source.listUpper_1 = new RString(連番);
+        source.listUpper_1 = new RString(件数);
         source.listUpper_2 = 帳票出力対象データ.getDbWT1731Entity().getJigyoshaNo().getColumnValue();
         source.listUpper_3 = 帳票出力対象データ.getDbWT1731Entity().getJigyoshaName();
         source.listUpper_4 = 帳票出力対象データ.getDbWT1731Entity().getHiHokenshaNo().getColumnValue();
@@ -86,7 +85,6 @@ public class KaigokyufuhiKagoMoshitateshoOutBodyEditor implements IKaigokyufuhiK
             source.gokeiKensuTitle = 合計件数;
             source.gokeiKensu = doカンマ編集(new Decimal(件数)).concat(漢字_件);
         }
-        連番++;
         return source;
     }
 
