@@ -32,6 +32,7 @@ public class KoseiTaishoJissekiIchiranReport extends Report<KoseiTaishoJissekiIc
      * @param entity KoseiTaishoJissekiIchiranEntity
      * @param 開始日時 RDateTime
      * @param 終了日時 RDateTime
+     * @param 出力順情報 IOutputOrder
      * @param 連番 int
      */
     public KoseiTaishoJissekiIchiranReport(KoseiTaishoJissekiIchiranEntity entity,
