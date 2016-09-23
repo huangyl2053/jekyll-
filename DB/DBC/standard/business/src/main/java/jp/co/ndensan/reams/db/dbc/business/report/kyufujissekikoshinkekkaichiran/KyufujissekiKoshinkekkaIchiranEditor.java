@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbc.entity.db.relate.chohyoshutsuryokutaishodate.C
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.kyufujissekikoshinkekkaichiran.KyufujissekiKoshinkekkaIchiranSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBCCodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -143,6 +144,15 @@ public class KyufujissekiKoshinkekkaIchiranEditor implements IKyufujissekiKoshin
             editor給付実績_レコード件数(source);
             editorAdd(source);
             editor集計(source);
+            if (!RString.isNullOrEmpty(entity.get被保険者_識別コード())) {
+                source.shikibetuCode = new ShikibetsuCode(entity.get被保険者_識別コード());
+            }
+            source.kyufuJissekiKubun = getNotNull(entity.get給付実績_給付実績区分());
+            source.yubinNo = getNotNull(entity.get被保険者_郵便番号());
+            source.choikiCode = getNotNull(entity.get被保険者_町域コード());
+            source.gyoseikuCode = getNotNull(entity.get被保険者_行政区コード());
+            source.shimei50onKana = getNotNull(entity.get被保険者_氏名50音カナ());
+            source.shichosonCode = getNotNull(entity.get被保険者_市町村コード());
         }
         return source;
     }
@@ -261,5 +271,12 @@ public class KyufujissekiKoshinkekkaIchiranEditor implements IKyufujissekiKoshin
                 source.kaipage5 = 改頁項目List.get(NUM_4);
             }
         }
+    }
+
+    private RString getNotNull(RString str) {
+        if (RString.isNullOrEmpty(str)) {
+            return RString.EMPTY;
+        }
+        return str;
     }
 }

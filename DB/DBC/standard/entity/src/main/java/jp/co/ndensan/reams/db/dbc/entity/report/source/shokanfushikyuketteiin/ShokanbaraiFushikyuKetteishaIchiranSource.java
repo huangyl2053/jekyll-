@@ -1,9 +1,11 @@
 package jp.co.ndensan.reams.db.dbc.entity.report.source.shokanfushikyuketteiin;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 帳票設計_DBC200022_償還払不支給決定者一覧表 ShokanbaraiFushikyuKetteishaIchiranSource
@@ -43,7 +45,9 @@ public class ShokanbaraiFushikyuKetteishaIchiranSource implements IReportSource 
     public RString kaipage5;
     @ReportItem(name = "listUpper_1", length = 6, order = 15)
     public RString listUpper_1;
-    @ReportExpandedInfo(id = "A", code = "0003", name = "被保険者番号")
+    @ReportPerson(id = "X")
+    public ShikibetsuCode shikibetuCode;
+    @ReportExpandedInfo(id = "X", code = "0003", name = "被保険者番号")
     @ReportItem(name = "listUpper_2", length = 10, order = 16)
     public RString listUpper_2;
     @ReportItem(name = "listUpper_3", length = 20, order = 17)
@@ -78,6 +82,10 @@ public class ShokanbaraiFushikyuKetteishaIchiranSource implements IReportSource 
     public RString listLower_7;
     @ReportItem(name = "listLower_8", length = 38, order = 32)
     public RString listLower_8;
+    @ReportItem(name = "yubinNo", length = 10, order = 68)
+    public RString yubinNo;
+    @ReportItem(name = "shimei50onKana", length = 10, order = 71)
+    public RString shimei50onKana;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
