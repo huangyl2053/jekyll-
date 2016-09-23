@@ -18,13 +18,16 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHok
 import jp.co.ndensan.reams.db.dbz.business.core.hokenshainputguide.Hokensha;
 import jp.co.ndensan.reams.db.dbz.service.core.hokensha.HokenshaNyuryokuHojoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.core.hokenja.HokenjaNo;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchCsvListReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
-import jp.co.ndensan.reams.uz.uza.batch.process.BatchSimpleReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
+import jp.co.ndensan.reams.uz.uza.io.Encode;
+import jp.co.ndensan.reams.uz.uza.io.NewLine;
+import jp.co.ndensan.reams.uz.uza.io.csv.CsvListReader;
 import jp.co.ndensan.reams.uz.uza.io.csv.ListToObjectMappingHelper;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
@@ -37,7 +40,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
  *
  * @reamsid_L DBC-2740-010 fuyanling
  */
-public class KokuhorenJukyushaInReadCsvFileProcess extends BatchProcessBase<RString> {
+public class KokuhorenJukyushaInReadCsvFileProcess extends BatchProcessBase<List<RString>> {
 
     /**
      * CSVファイル取込後の返したエンティティ
@@ -84,7 +87,8 @@ public class KokuhorenJukyushaInReadCsvFileProcess extends BatchProcessBase<RStr
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchSimpleReader(parameter.get保存先フォルダ());
+        return new BatchCsvListReader(new CsvListReader.InstanceBuilder(parameter.get保存先フォルダ())
+                .setDelimiter(区切り文字).setEncode(Encode.SJIS).hasHeader(false).setNewLine(NewLine.CRLF).build());
     }
 
     @Override
@@ -99,8 +103,7 @@ public class KokuhorenJukyushaInReadCsvFileProcess extends BatchProcessBase<RStr
     }
 
     @Override
-    protected void process(RString line) {
-        List<RString> data = line.split(区切り文字.toString());
+    protected void process(List<RString> data) {
         if (data != null && !data.isEmpty()) {
             if (レコード種別_エンド.equals(data.get(INDEX_0))) {
                 return;
@@ -251,7 +254,7 @@ public class KokuhorenJukyushaInReadCsvFileProcess extends BatchProcessBase<RStr
         明細Entity.setState(EntityDataState.Added);
         被保険者一時tableWriter.insert(明細Entity);
     }
-    
+
     private Decimal getDecimal(RString decimalStr) {
         if (RString.isNullOrEmpty(decimalStr) || !Decimal.canConvert(decimalStr)) {
             return Decimal.ZERO;

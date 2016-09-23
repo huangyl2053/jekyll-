@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbx.business.core.fukajoho;
 
+import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.business.core.fuka.Fuka;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -16,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class FukaJohoRelateSearchResult {
+public class FukaJohoRelateSearchResult implements Serializable {
 
     private Fuka 介護賦課Result;
     private int 期;

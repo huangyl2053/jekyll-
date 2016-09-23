@@ -34,6 +34,10 @@
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzBusiness</artifactId>
         </dependency>
+        <dependency>
+            <groupId>jp.co.ndensan.reams.ue.uex</groupId>
+            <artifactId>UexDefinition</artifactId>
+        </dependency>
         <!-- �?���?-->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>

@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.service.report.gassanshikyushinseishojohosofu
 import jp.co.ndensan.reams.db.dbc.business.report.gassanshikyushinseishojohosofuichiran.GassanShikyuShinseishoJohoSofuIchiranProperty;
 import jp.co.ndensan.reams.db.dbc.business.report.gassanshikyushinseishojohosofuichiran.GassanShikyuShinseishoJohoSofuIchiranReport;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110060.KogakugassanShikyushinseishoOutFileEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.gassanshikyushinseishojohosofuIchiran.GassanShikyuShinseishoJohoSofuIchiranSource;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.gassanshikyushinseishojohosofuichiran.GassanShikyuShinseishoJohoSofuIchiranSource;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;

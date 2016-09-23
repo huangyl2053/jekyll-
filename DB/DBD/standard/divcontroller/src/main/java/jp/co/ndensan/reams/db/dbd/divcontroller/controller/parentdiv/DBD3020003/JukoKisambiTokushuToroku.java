@@ -62,9 +62,10 @@ public class JukoKisambiTokushuToroku {
         TaishoshaKey taishoshaKey = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         HihokenshaNo 被保険者番号 = taishoshaKey.get被保険者番号();
         ShikibetsuCode 識別コード = taishoshaKey.get識別コード();
-        ShoKisaiHokenshaNo 証記載保険者番号 = ViewStateHolder.get(ViewStateKeys.証記載保険者番号, ShoKisaiHokenshaNo.class);
-        証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("880888"));
-        div.setHdnShoKisaiHokenshaNo(証記載保険者番号 == null ? RString.EMPTY : 証記載保険者番号.getColumnValue());
+        //ShoKisaiHokenshaNo 証記載保険者番号 = ViewStateHolder.get(ViewStateKeys.証記載保険者番号, ShoKisaiHokenshaNo.class);
+        ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(new RString("880888"));
+        div.setHdnShoKisaiHokenshaNo(証記載保険者番号.getColumnValue());
+        //div.setHdnShoKisaiHokenshaNo(証記載保険者番号 == null ? RString.EMPTY : 証記載保険者番号.getColumnValue());
 
         boolean データなし = true;
         if (被保険者番号 == null || 被保険者番号.isEmpty()) {

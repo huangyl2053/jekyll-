@@ -276,7 +276,7 @@ public class HanyoListJukyushaDaichoPanelHandler {
             if (年度差 > 最大DDL表示) {
                 年度差 = 最大DDL表示;
             }
-            for (int i = 0; i <= 年度差; i++) {
+            for (int i = 0; i < 年度差; i++) {
                 KeyValueDataSource keyValueDataSource = new KeyValueDataSource();
                 keyValueDataSource.setKey(new FlexibleDate(調定年度.concat(月日の補正)).minusYear(i).getYear().toDateString());
                 keyValueDataSource.setValue(new FlexibleDate(調定年度.concat(月日の補正)).minusYear(i).wareki().getYear());
@@ -310,7 +310,7 @@ public class HanyoListJukyushaDaichoPanelHandler {
             if (年度差 > 最大DDL表示) {
                 年度差 = 最大DDL表示;
             }
-            for (int i = 0; i <= 年度差; i++) {
+            for (int i = 0; i < 年度差; i++) {
                 RString 算出した日付 = new FlexibleDate(調定年度.concat(月日の補正)).minusYear(i + 1).getYear().toDateString();
                 KeyValueDataSource keyValueDataSource = new KeyValueDataSource();
                 keyValueDataSource.setKey(算出した日付);

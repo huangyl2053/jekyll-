@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- @reamsid_L DBD-5820-030 zhengsongling -->
+
+<!-- どのマッパーインターフェースと対応するかを指定する -->
+<mapper namespace="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.hanyolisthikazeinenkintaishosha.IHanyoListHikazeiNenkinTaishoshaMapper">
+<resultMap id="resultMap_getHikazeiNenkinTaishosha" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.hanyolisthikazeinenkintaishosha.HikazeiNenkinTaishoshaEntity" autoMapping="true">
+<result property="市町村コード" column="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="年度" column="年度" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="処理区分" column="処理区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="対象月" column="対象月" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="基礎年金番号" column="基礎年金番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="現基礎年金番号" column="現基礎年金番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="if市町村コード" column="if市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="if年金保険者コード" column="if年金保険者コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="if通知内容コード" column="if通知内容コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="if作成年月日" column="if作成年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="if性別" column="if性別" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="ifカナ氏名" column="ifカナ氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="if郵便番号" column="if郵便番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="ifカナ住所" column="ifカナ住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="if対象年" column="if対象年" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="if訂正表示" column="if訂正表示" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="if各種区分" column="if各種区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="if処理結果" column="if処理結果" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="if金額１" column="if金額１" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<result property="登録区分" column="登録区分" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+<association property="psmEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.UaFt200FindShikibetsuTaishoEntity"/>
+<association property="atesakiEntity" resultMap="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.resultAtesakiEntity"/>
+</resultMap>
+<select resultOrdered="true" id="get汎用リスト" resultMap="resultMap_getHikazeiNenkinTaishosha"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.hikazeinenkintaishosha.HikazeiNenkinTaishoshaMybatisParameter"
+        fetchSize="500">
+    SELECT 
+        最新被保台帳."shichosonCode" AS 市町村コード,
+        最新被保台帳."hihokenshaNo" AS 被保険者番号,
+        非課税年金対象者."nendo" AS 年度,
+        非課税年金対象者."shorikubun" AS 処理区分,
+        非課税年金対象者."taishom" AS 対象月,
+        非課税年金対象者."kisonenkinno" AS 基礎年金番号,
+        非課税年金対象者."genkisonenkinno" AS 現基礎年金番号,
+        非課税年金対象者."nenkincode" AS 年金コード,
+        非課税年金対象者."dtcitycode" AS if市町村コード,
+        非課税年金対象者."dtnenkinhokenshacode" AS if年金保険者コード,
+        非課税年金対象者."dttsuchinaiyocode" AS if通知内容コード,
+        非課税年金対象者."dtsakuseiymd" AS if作成年月日,
+        非課税年金対象者."dtseibetsu" AS if性別,
+        非課税年金対象者."dtkanashimei" AS ifカナ氏名,
+        非課税年金対象者."dtkanjishimei" AS if漢字氏名,
+        非課税年金対象者."dtyubinno" AS if郵便番号,
+        非課税年金対象者."dtkanajusho" AS ifカナ住所,
+        非課税年金対象者."dtkanjijusho" AS if漢字住所,
+        非課税年金対象者."dttaishoy" AS if対象年,
+        非課税年金対象者."dtteiseihyoji" AS if訂正表示,
+        非課税年金対象者."dtkakushukubun" AS if各種区分,
+        非課税年金対象者."dtshorikekka" AS if処理結果,
+        非課税年金対象者."dtkingaku1" AS if金額１,
+        非課税年金対象者."torokukubun" AS 登録区分,
+    <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />,
+    <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />
+    FROM
+        rgdb."DbT4037HikazeNenkinTaishosha" AS 非課税年金対象者
+    INNER JOIN
+        rgdb."DbV1001HihokenshaDaicho" AS 最新被保台帳
+    ON
+        最新被保台帳."hihokenshaNo" = 非課税年金対象者."hihokenshano"
+    <if test="is最新情報">
+    INNER JOIN (
+        SELECT
+            非課税年金対象者2."年度" AS nendo,
+            非課税年金対象者2."処理区分" AS shorikubun,
+            非課税年金対象者2."対象月" AS 対象月,
+            非課税年金対象者2."基礎年金番号" AS kisonenkinno,
+            非課税年金対象者2."現基礎年金番号" AS genkisonenkinno,
+            非課税年金対象者2."年金コード" AS nenkincode,
+            非課税年金対象者2."被保険者番号" AS hihokenshano,
+            非課税年金対象者2."登録区分" AS torokukubun
+        FROM(
+            SELECT 
+                "DbT4037HikazeNenkinTaishosha"."nendo" AS 年度,
+                "DbT4037HikazeNenkinTaishosha"."shorikubun" AS 処理区分,
+                "DbT4037HikazeNenkinTaishosha"."taishom" AS 対象月,
+                "DbT4037HikazeNenkinTaishosha"."kisonenkinno" AS 基礎年金番号,
+                "DbT4037HikazeNenkinTaishosha"."genkisonenkinno" AS 現基礎年金番号,
+                "DbT4037HikazeNenkinTaishosha"."nenkincode" AS 年金コード,
+                "DbT4037HikazeNenkinTaishosha"."hihokenshano" AS 被保険者番号,
+                "DbT4037HikazeNenkinTaishosha"."torokukubun" AS 登録区分,
+                ROW_NUMBER() OVER (PARTITION BY "DbT4037HikazeNenkinTaishosha"."dttaishoy",
+                                    "DbT4037HikazeNenkinTaishosha"."dtnenkinhokenshacode",
+                                    "DbT4037HikazeNenkinTaishosha"."genkisonenkinno",
+                                    "DbT4037HikazeNenkinTaishosha"."nenkincode"
+                                    ORDER BY "DbT4037HikazeNenkinTaishosha"."dtsakuseiymd" DESC) AS 非課税年金対象者_最新
+            FROM
+                rgdb."DbT4037HikazeNenkinTaishosha"
+            WHERE
+                "DbT4037HikazeNenkinTaishosha"."isDeleted" = false
+            ) AS 非課税年金対象者2
+        WHERE
+            非課税年金対象者2."非課税年金対象者_最新" = '1'
+    ) AS 非課税年金対象者3
+    ON
+        (非課税年金対象者3."nendo" = 非課税年金対象者."nendo" AND
+         非課税年金対象者3."shorikubun" = 非課税年金対象者."shorikubun" AND
+         非課税年金対象者3."kisonenkinno" = 非課税年金対象者."kisonenkinno" AND
+         非課税年金対象者3."genkisonenkinno" = 非課税年金対象者."genkisonenkinno" AND
+         非課税年金対象者3."nenkincode" = 非課税年金対象者."nenkincode" AND
+         非課税年金対象者3."hihokenshano" = 非課税年金対象者."hihokenshano" AND
+         非課税年金対象者3."torokukubun" = 非課税年金対象者."torokukubun")
+    </if>
+    INNER JOIN 
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho" />
+        AS <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" /> 
+    ON
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" = 最新被保台帳."shikibetsuCode"
+    INNER JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.tableName_PsmAtesaki" /> AS "Atesaki"
+    ON
+        "Atesaki"."shikibetsuCode" = 最新被保台帳."shikibetsuCode"
+    WHERE
+        非課税年金対象者."isDeleted" = false
+    <if test="is年度">
+        AND 非課税年金対象者."nendo" = #{年度BP}
+    </if>
+    <if test="is対象年">
+        AND 非課税年金対象者."dttaishoy" =  #{年度BP}
+    </if>
+    <if test="is被保険者のみ">
+        AND 非課税年金対象者."hihokenshano" <![CDATA[<>]]> ''
+    </if>
+    <if test="is被保険者以外のみ">
+        AND 非課税年金対象者."hihokenshano" = ''
+    </if>
+    <if test="has年齢From">
+        AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."seinengappiYMD" <![CDATA[<=]]> #{年齢From逆算}
+    </if>
+    <if test="has年齢To">
+        AND #{年齢To逆算} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."seinengappiYMD"
+    </if>
+    <if test="has生年月日From">
+        AND #{生年月日From} <![CDATA[<=]]> <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."seinengappiYMD"
+    </if>
+    <if test="has生年月日To">
+        AND <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."seinengappiYMD" <![CDATA[<=]]> #{生年月日To}
+    </if>
+    <if test="has保険者コード">
+        AND 非課税年金対象者."dtcitycode" = #{保険者コード}
+    </if>
+</select>
+</mapper>

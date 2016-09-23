@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 特徴送付情報連携のマッピング用XMLです。 -->
+<!-- @reamsid_L DBB-1790-040 yuanzhenxia    -->
+
+<mapper namespace="jp.co.ndensan.reams.db.dbb.persistence.db.mapper.relate.tokuchosofujohorenkei.ITokuchoSofuJohoRenkeiMapper">
+    <select resultOrdered="true" id="select特徴送付情報連携のデータ" parameterType="jp.co.ndensan.reams.db.dbb.definition.mybatisprm.tokuchosofujohorenkei.TokuchoSofuJohoRenkeiMybitisParameter"
+            resultType="jp.co.ndensan.reams.db.dbb.entity.db.relate.tokuchosofujohorenkei.TokuchoSofuJohoRenkeiEntity" >
+       SELECT
+        年金特徴回付情報."koseiCityCode" as "構成市町村コード",
+        年金特徴回付情報."shoriTaishoYM" as "処理対象年月",
+        年金特徴回付情報."dtCityCode" as "市町村コードDT",
+        年金特徴回付情報."dtTokubetsuChoshuGimushaCode" as "特別徴収義務者コードDT",
+        年金特徴回付情報."dtTokubetsuChoshuSeidoCode" as "特別徴収制度コードDT",
+        年金特徴回付情報."dtBaitaiCode" as "媒体コードDT",
+        年金特徴回付情報."dtTsuchiNaiyoCode" as "通知内容コードDT",
+        年金特徴回付情報."dtSakuseiYMD" as "作成年月日DT",
+        年金特徴回付情報."dtKisoNenkinNo" as "基礎年金番号DT",
+        年金特徴回付情報."dtNenkinCode" as "年金コードDT",
+        年金特徴回付情報."dtBirthDay" as "生年月日DT",
+        年金特徴回付情報."dtSeibetsu" as "性別DT",
+        年金特徴回付情報."dtKanaShimei" as "カナ氏名DT",
+        年金特徴回付情報."dtShiftCode1" as "シフトコード1DT",
+        年金特徴回付情報."dtKanjiShimei" as "漢字氏名DT",
+        年金特徴回付情報."dtShiftCode2" as "シフトコード2DT",
+        年金特徴回付情報."dtYubinNo" as "郵便番号DT",
+        年金特徴回付情報."dtKanaJusho" as "カナ住民DT",
+        年金特徴回付情報."dtShiftCode3" as "シフトコード3DT",
+        年金特徴回付情報."dtKanjiJusho" as "漢字住所DT",
+        年金特徴回付情報."dtShiftCode4" as "シフトコード4DT",
+        年金特徴回付情報."dtKakushuKubun" as "各種区分DT",
+        年金特徴回付情報."dtShoriKekka" as "処理結果DT",
+        年金特徴回付情報."dtKakushuYMD" as "各種年月日DT",
+        年金特徴回付情報."dtKakushuKingaku1" as "各種金額欄1DT",
+        年金特徴回付情報."dtKakushuKingaku2" as "各種金額欄2DT",
+        年金特徴回付情報."dtKakushuKingaku3" as "各種金額欄3DT",
+        年金特徴回付情報."dtKyosaiNenkinshoshoKigoNo" as "共済年金証記号番号DT",
+        年金特徴回付情報."dtKokiIkanCode" as "後期移管コードDT",
+        年金特徴回付情報."dtYobi1" as "予備1DT",
+        年金特徴回付情報."dtYobi2" as "予備2DT",
+        介護保険年金特徴対象者情報."kaigohokenHihokenshaNo" as "介護保険被保険者番号",
+        介護保険年金特徴対象者情報."kojinCodeKubun" as "個人コード区分",
+        介護保険年金特徴対象者情報."kojinCode" as "個人コード",
+        介護保険年金特徴対象者情報."kaigohokenJushochitokureiKubun" as "介護保険住所地特例区分",
+        介護保険年金特徴対象者情報."hosokuYMD" as "捕捉年月日",
+        介護保険年金特徴対象者情報."taikiFlag" as "待機フラグ",
+        介護保険年金特徴対象者情報."yobi" as "予備"
+       FROM
+           rgue."UeT0511NenkinTokuchoKaifuJoho" 年金特徴回付情報
+        INNER JOIN 
+           rgue."UeT0515KaigohokenNenkinTokuchoTaishoshaJoho550" 介護保険年金特徴対象者情報 
+        ON
+           介護保険年金特徴対象者情報."kisoNenkinNo" = 年金特徴回付情報."kisoNenkinNo"
+        AND 介護保険年金特徴対象者情報."nenkinCode" = 年金特徴回付情報."nenkinCode"
+        AND 介護保険年金特徴対象者情報."shoriTimestamp" = 年金特徴回付情報."shoriTimestamp"
+       WHERE
+            年金特徴回付情報."shoriNendo" = #{処理年度}
+        AND 年金特徴回付情報."shoriTaishoYM" = #{処理対象年月}
+        AND 年金特徴回付情報."koseiCityCode" in 
+        <foreach collection="市町村コードリスト" item="code" open="(" separator="," close=")"> #{code} </foreach>
+       ORDER BY
+        年金特徴回付情報."koseiCityCode",
+        年金特徴回付情報."dtTokubetsuChoshuGimushaCode",
+        年金特徴回付情報."dtTsuchiNaiyoCode",
+        年金特徴回付情報."dtKisoNenkinNo",
+        年金特徴回付情報."dtNenkinCode"
+    </select>
+</mapper>
+
+

@@ -48,11 +48,12 @@ public class KogakuGassanJSaiSyoriJyunbiDoMasterProcess extends BatchProcessBase
 
     @Override
     protected void createWriter() {
+        高額合算自己負担額TBLWriter
+                = new BatchPermanentTableWriter(DbT3070KogakuGassanJikoFutanGakuEntity.class);
         処理結果リスト一時tbWriter
                 = new BatchEntityCreatedTempTableWriter(処理結果リスト一時_TABLE_NAME, DbWT0002KokuhorenTorikomiErrorEntity.class);
         高額合算自己負担額一時tableWriter
                 = new BatchEntityCreatedTempTableWriter(高額合算自己負担額一時_TABLE_NAME, DbWT37H1KogakuGassanaJikofutangakuTempEntity.class);
-
     }
 
     @Override

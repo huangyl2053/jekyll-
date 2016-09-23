@@ -5,9 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD710100;
 
+import jp.co.ndensan.reams.db.dbd.definition.processprm.hikazeinenkintaishosha.HikazeiNenkinTaishoshaProcessParameter;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -95,5 +97,27 @@ public class DBD710100_HanyoListHikazeiNenkinTaishoshaParameter extends BatchPar
         this.宛名抽出条件 = 宛名抽出条件;
         this.出力順 = 出力順;
         this.出力項目 = 出力項目;
+    }
+
+    /**
+     * 汎用リスト出力(非課税年金対象者)のパラメータを作成します。
+     *
+     * @param date date
+     * @return SaishinsamoshitateProcessParameter
+     */
+    public HikazeiNenkinTaishoshaProcessParameter toProcessParameter(RDate date) {
+        return new HikazeiNenkinTaishoshaProcessParameter(
+                抽出方法,
+                抽出年度,
+                被保険者抽出方法,
+                最新情報,
+                項目名付加,
+                連番付加,
+                日付編集,
+                宛名抽出条件,
+                出力順,
+                出力項目,
+                date
+        );
     }
 }
