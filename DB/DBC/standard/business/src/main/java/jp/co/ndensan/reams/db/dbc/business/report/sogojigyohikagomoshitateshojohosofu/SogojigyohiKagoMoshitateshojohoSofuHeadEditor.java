@@ -7,17 +7,17 @@ package jp.co.ndensan.reams.db.dbc.business.report.sogojigyohikagomoshitateshojo
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikagomoshitateshojohosofuichiran.SogojigyohiKagoMoshitateshojohoSofuIchiranEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc110090.KaigokyufuhiKagoMoshitateshoOutDoBillOutEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.sogojigyohikagomoshitateshojohosofuichiran.SogojigyohiKagoMoshitateshojohoSofuSource;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.IOutputOrder;
 import jp.co.ndensan.reams.ur.urz.business.core.reportoutputorder.ISetSortItem;
-import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.lang.Width;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
@@ -29,10 +29,10 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
  */
 public class SogojigyohiKagoMoshitateshojohoSofuHeadEditor implements ISogojigyohiKagoMoshitateshojohoSofuEditor {
 
-    private SogojigyohiKagoMoshitateshojohoSofuIchiranEntity 送付一覧表データ;
+    private KaigokyufuhiKagoMoshitateshoOutDoBillOutEntity 送付一覧表データ;
     private final IOutputOrder 出力順情報;
-    private final RYearMonth 処理年月;
-    private final YMDHMS 作成日時;
+    private final FlexibleYearMonth 処理年月;
+    private final RDateTime 作成日時;
     private static final int INDEX_0 = 0;
     private static final int INDEX_1 = 1;
     private static final int INDEX_2 = 2;
@@ -49,10 +49,10 @@ public class SogojigyohiKagoMoshitateshojohoSofuHeadEditor implements ISogojigyo
      * @param 作成日時 YMDHMS
      */
     public SogojigyohiKagoMoshitateshojohoSofuHeadEditor(
-            SogojigyohiKagoMoshitateshojohoSofuIchiranEntity 送付一覧表データ,
+            KaigokyufuhiKagoMoshitateshoOutDoBillOutEntity 送付一覧表データ,
             IOutputOrder 出力順情報,
-            RYearMonth 処理年月,
-            YMDHMS 作成日時) {
+            FlexibleYearMonth 処理年月,
+            RDateTime 作成日時) {
         this.送付一覧表データ = 送付一覧表データ;
         this.出力順情報 = 出力順情報;
         this.処理年月 = 処理年月;
@@ -66,19 +66,19 @@ public class SogojigyohiKagoMoshitateshojohoSofuHeadEditor implements ISogojigyo
             source.sofuYM = 処理年月.wareki().eraType(EraType.KANJI_RYAKU).
                     firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
         }
-        if (送付一覧表データ.get過誤申立一時TBL().getHokenshaNo() != null) {
-            source.hokenshaNo = 送付一覧表データ.get過誤申立一時TBL().getHokenshaNo().value();
+        if (送付一覧表データ.getDbWT1731Entity().getHokenshaNo() != null) {
+            source.hokenshaNo = 送付一覧表データ.getDbWT1731Entity().getHokenshaNo().value();
         }
-        source.hokenshaName = 送付一覧表データ.get過誤申立一時TBL().getHokenshaName();
-        if (送付一覧表データ.get過誤申立一時TBL().getShoKisaiHokenshaNo() != null) {
-            source.shokisaiHokenshaNo = 送付一覧表データ.get過誤申立一時TBL().getShoKisaiHokenshaNo().value();
+        source.hokenshaName = 送付一覧表データ.getDbWT1731Entity().getHokenshaName();
+        if (送付一覧表データ.getDbWT1731Entity().getShoKisaiHokenshaNo() != null) {
+            source.shokisaiHokenshaNo = 送付一覧表データ.getDbWT1731Entity().getShoKisaiHokenshaNo().value();
         }
-        source.shokisaiHokenshaName = 送付一覧表データ.get過誤申立一時TBL().getShoKisaiHokenshaName();
+        source.shokisaiHokenshaName = 送付一覧表データ.getDbWT1731Entity().getShoKisaiHokenshaName();
         setHeader(source);
         return source;
     }
 
-    private RString get印刷日時(YMDHMS datetime) {
+    private RString get印刷日時(RDateTime datetime) {
         RStringBuilder sakuseiYMD = new RStringBuilder();
         sakuseiYMD.append(datetime.getDate().wareki().
                 eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).
@@ -86,7 +86,7 @@ public class SogojigyohiKagoMoshitateshojohoSofuHeadEditor implements ISogojigyo
                 fillType(FillType.NONE).
                 width(Width.HALF).toDateString());
         sakuseiYMD.append(RString.HALF_SPACE);
-        sakuseiYMD.append(datetime.getRDateTime().getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
+        sakuseiYMD.append(datetime.getTime().toFormattedTimeString(DisplayTimeFormat.HH時mm分ss秒));
         sakuseiYMD.append(RString.HALF_SPACE);
         sakuseiYMD.append(日時作成);
         return sakuseiYMD.toRString();
