@@ -955,7 +955,7 @@ public class SokujiFukaKouseiMain {
         if (賦課の情報 == null || 賦課の情報.getKibetsuList().isEmpty() || textBoxNum == null) {
             return is差異がある;
         }
-        Decimal 期別金額 = textBoxNum.getValue();
+        Decimal 期別金額 = textBoxNum.getValue() == null ? Decimal.ZERO : textBoxNum.getValue();
         List<Kibetsu> 介護期別List = new ArrayList<>(賦課の情報.getKibetsuList());
         Boolean is介護期別ない = Boolean.TRUE;
         for (Kibetsu 介護期別 : 介護期別List) {

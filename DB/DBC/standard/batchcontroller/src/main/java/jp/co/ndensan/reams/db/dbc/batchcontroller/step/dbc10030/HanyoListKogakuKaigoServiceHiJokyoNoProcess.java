@@ -111,6 +111,16 @@ public class HanyoListKogakuKaigoServiceHiJokyoNoProcess extends BatchProcessBas
     private static final RString SPLIT = new RString("|");
     private static final RString 区分_1 = new RString("1");
     private static final RString 区分_2 = new RString("2");
+    private static final RString DBC701003 = new RString("DBC701003");
+    private static final RString DBC701019 = new RString("DBC701019");
+    private static final RString 高額介護サービス費状況CSV = new RString("汎用リスト　高額介護サービス費状況CSV");
+    private static final RString 英数字ファイル名_高額介護サービス費状況CSV = new RString("HanyoList_KogakuKaigoServiceHiJokyo.csv");
+    private static final RString 事業高額サービス費状況CSV = new RString("汎用リスト　事業高額サービス費状況CSV");
+    private static final RString 英数字ファイル名_事業高額サービス費状況CSV = new RString("HanyoList_JigyoKogakuServiceHiJokyo.csv");
+    private static final RString データ読み込みID1 = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
+            + "hanyolistkogakuservicehi.IHanyoListKogakuServiceHiMapper.selectAllデータ");
+    private static final RString データ読み込みID2 = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
+            + "hanyolistkogakuservicehi.IHanyoListKogakuServiceHiMapper.selectAllModeデータ");
     private RString preBreakKey;
     private HanyoListKogakuKaigoProcessParameter parameter;
     private HanyoListKogakuKaigoEucCsvNoEntityEditor dataNoCreate;
@@ -130,19 +140,17 @@ public class HanyoListKogakuKaigoServiceHiJokyoNoProcess extends BatchProcessBas
     @Override
     protected void initialize() {
         if (1 == parameter.getModo()) {
-            readDataId = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
-                    + "hanyolistkogakuservicehi.IHanyoListKogakuServiceHiMapper.selectAllデータ");
-            eucEntityId = new EucEntityId(new RString("DBC701003"));
-            eucId = new ReportId("DBC701003");
-            日本語ファイル名 = new RString("汎用リスト　高額介護サービス費状況CSV");
-            英数字ファイル名 = new RString("HanyoList_KogakuKaigoServiceHiJokyo.csv");
+            readDataId = データ読み込みID1;
+            eucEntityId = new EucEntityId(DBC701003);
+            eucId = new ReportId(DBC701003);
+            日本語ファイル名 = 高額介護サービス費状況CSV;
+            英数字ファイル名 = 英数字ファイル名_高額介護サービス費状況CSV;
         } else if (2 == parameter.getModo()) {
-            readDataId = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
-                    + "hanyolistkogakuservicehi.IHanyoListKogakuServiceHiMapper.selectAllModeデータ");
-            eucEntityId = new EucEntityId(new RString("DBC701019"));
-            eucId = new ReportId("DBC701019");
-            日本語ファイル名 = new RString("汎用リスト　事業高額サービス費状況CSV");
-            英数字ファイル名 = new RString("HanyoList_JigyoKogakuServiceHiJokyo.csv");
+            readDataId = データ読み込みID2;
+            eucEntityId = new EucEntityId(DBC701019);
+            eucId = new ReportId(DBC701019);
+            日本語ファイル名 = 事業高額サービス費状況CSV;
+            英数字ファイル名 = 英数字ファイル名_事業高額サービス費状況CSV;
             this.modoFlag = false;
         }
     }

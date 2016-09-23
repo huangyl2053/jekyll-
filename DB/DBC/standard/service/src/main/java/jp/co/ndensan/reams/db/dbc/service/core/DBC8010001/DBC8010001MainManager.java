@@ -14,8 +14,9 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
+ * 振込明細・振込みデータ作成を管理するクラスです。
  *
- * @reamsid_L x_liuwei
+ * @reamsid_L DBC-2180-010 x_liuwei
  */
 public class DBC8010001MainManager {
 
