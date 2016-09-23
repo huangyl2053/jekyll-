@@ -131,7 +131,10 @@ public class TokubetsuChoshuIdojohoIchiranEditor implements ITokubetsuChoshuIdoj
         source.listLower_6 = KakushuKubun.toValue(特徴異動追加情報.getTsuchiNaiyoCode(), 特徴異動追加情報.getDtKakushuKubun()).get各種区分名称();
         source.listLower_7 = 特徴異動追加情報.getDtYubinNo();
         source.listLower_8 = 特徴異動追加情報.getDtKanjiJusho();
-        source.shikibetsuCode = 特徴異動追加情報.getShikibetsuCode().getColumnValue();
+        ShikibetsuCode shikibetsuCode = 特徴異動追加情報.getShikibetsuCode();
+        if (null != shikibetsuCode) {
+            source.shikibetsuCode = shikibetsuCode.getColumnValue();
+        }
         return source;
     }
 
