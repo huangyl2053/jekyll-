@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbb.definition.batchprm.DBB021021;
 
+import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
@@ -65,5 +66,5 @@ public class DBB021021_DankaibetsuShunoritsuIchiranhyoSakuseiParameter extends B
     @BatchParameter(key = "旧市町村情報", name = "旧市町村情報")
     private DankaibetsuShunoritsuEntity 旧市町村情報;
     @BatchParameter(key = "完納出力区分", name = "完納出力区分")
-    private RString 完納出力区分;
+    private List<RString> 完納出力区分;
 }

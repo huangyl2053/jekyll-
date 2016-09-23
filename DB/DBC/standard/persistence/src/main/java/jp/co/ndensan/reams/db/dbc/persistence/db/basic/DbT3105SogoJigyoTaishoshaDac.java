@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.ISaveable;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
 import static jp.co.ndensan.reams.uz.uza.util.db.Order.DESC;
 import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
@@ -37,6 +38,9 @@ public class DbT3105SogoJigyoTaishoshaDac implements ISaveable<DbT3105SogoJigyoT
 
     @InjectSession
     private SqlSession session;
+    private static final RString KEY_被保険者番号 = new RString("被保険者番号");
+    private static final RString KEY_世帯基準日 = new RString("世帯基準日");
+    private static final RString KEY_履歴番号 = new RString("履歴番号");
 
     /**
      * 主キーで総合事業対象者を取得します。
@@ -50,8 +54,8 @@ public class DbT3105SogoJigyoTaishoshaDac implements ISaveable<DbT3105SogoJigyoT
     public DbT3105SogoJigyoTaishoshaEntity selectByKey(
             HihokenshaNo 被保険者番号,
             int 履歴番号) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage("履歴番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_被保険者番号.toString()));
+        requireNonNull(履歴番号, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_履歴番号.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -93,8 +97,7 @@ public class DbT3105SogoJigyoTaishoshaDac implements ISaveable<DbT3105SogoJigyoT
     }
 
     /**
-     * requireNonNull(entity,
-     * UrSystemErrorMessages.値がnull.getReplacedMessage(総合事業対象者タエンティティ.toString()));
+     * requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage(総合事業対象者タエンティティ.toString()));
      *
      * DbT3105SogoJigyoTaishoshaEntityを登録します。状態によってinsert/update/delete処理に振り分けられます。
      *
@@ -117,7 +120,7 @@ public class DbT3105SogoJigyoTaishoshaDac implements ISaveable<DbT3105SogoJigyoT
     @Transaction
     public List<DbT3105SogoJigyoTaishoshaEntity> selectBy被保険者番号(
             HihokenshaNo 被保険者番号) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_被保険者番号.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -137,7 +140,7 @@ public class DbT3105SogoJigyoTaishoshaDac implements ISaveable<DbT3105SogoJigyoT
     @Transaction
     public List<DbT3105SogoJigyoTaishoshaEntity> get総合事業対象者(
             HihokenshaNo 被保険者番号) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_被保険者番号.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
@@ -158,7 +161,7 @@ public class DbT3105SogoJigyoTaishoshaDac implements ISaveable<DbT3105SogoJigyoT
     @Transaction
     public List<DbT3105SogoJigyoTaishoshaEntity> select総合事業対象者一覧By被保険者番号(HihokenshaNo 被保険者番号)
             throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("KEY_被保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_被保険者番号.toString()));
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
         return accessor.select().
@@ -180,8 +183,8 @@ public class DbT3105SogoJigyoTaishoshaDac implements ISaveable<DbT3105SogoJigyoT
     public List<DbT3105SogoJigyoTaishoshaEntity> get事業対象(
             HihokenshaNo 被保険者番号,
             FlexibleDate 世帯基準日) throws NullPointerException {
-        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
-        requireNonNull(世帯基準日, UrSystemErrorMessages.値がnull.getReplacedMessage("世帯基準日"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_被保険者番号.toString()));
+        requireNonNull(世帯基準日, UrSystemErrorMessages.値がnull.getReplacedMessage(KEY_世帯基準日.toString()));
 
         DbAccessorNormalType accessor = new DbAccessorNormalType(session);
 
