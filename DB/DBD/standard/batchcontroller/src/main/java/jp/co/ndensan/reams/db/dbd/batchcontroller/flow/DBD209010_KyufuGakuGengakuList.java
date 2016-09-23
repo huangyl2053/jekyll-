@@ -47,7 +47,7 @@ public class DBD209010_KyufuGakuGengakuList extends BatchFlowBase<DBD209010_Kyuf
      * @return バッチコマンド
      */
     @Step(対象者管理情報の取得)
-    protected IBatchFlowCommand KyufuGengakuKanriListTaishoTokuteiProcess() {
+    protected IBatchFlowCommand kyufuGengakuKanriListTaishoTokuteiProcess() {
         return loopBatch(TaishoShaKanriJohoProcess.class)
                 .arguments(getParameter().toTaishoshaIchijiTokuteiProcessParameter())
                 .define();
@@ -59,7 +59,7 @@ public class DBD209010_KyufuGakuGengakuList extends BatchFlowBase<DBD209010_Kyuf
      * @return バッチコマンド
      */
     @Step(給付額減額滞納者把握情報取得)
-    protected IBatchFlowCommand KyufuGengakuKanriListSakuseiProcess() {
+    protected IBatchFlowCommand kyufuGengakuKanriListSakuseiProcess() {
         return loopBatch(KyufuGakuGengakuTainoShaProcess.class)
                 .arguments(getParameter().toKyufuGakuGengakuTainoShaProcessParameter(rDateTime))
                 .define();
