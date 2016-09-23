@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc020060;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC020030;
 
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kogakukaigoservicehishikyuketteitsuchisho.KogakuKaigoServiceProcessParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3111JigyoKogakuShikyuHanteiKekkaEntity;
+import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3057KogakuShikyuHanteiKekkaEntity;
 import jp.co.ndensan.reams.db.dbc.service.core.servicehishikyuketteitsuchisho.ServicehiShikyuKetteiTsuchisho;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.ShoriName;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7022ShoriDateKanriEntity;
@@ -23,15 +23,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  *
- * 高額総合事業サービス費支給（不支給）決定通知書作成のDB更新処理Processです。
+ * 高額介護サービス費支給判定結果の更新処理のクラスです。
  *
- * @reamsid_L DBC-2000-030 wangxue
+ * @reamsid_L DBC-2000-030 xicongwang
  */
-public class UpdateKogakuKaigoServicehiHanteiKekkaProcess extends
-        BatchProcessBase<DbT3111JigyoKogakuShikyuHanteiKekkaEntity> {
+public class UpdateKogakuShikyuHanteiKekkaProcess extends BatchProcessBase<DbT3057KogakuShikyuHanteiKekkaEntity> {
 
     private static final RString MAPPERPATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
-            + "kogakusogojigyoservice.IKogakuJigyoServicehiShikyuKetteiTsuchishoMapper.get更新の判定結果データ");
+            + "kogakukaigoservice.IKogakuKaigoServicehiShikyuKetteiTsuchishoMapper.select支給判定結果");
     private static final RString 抽出モード_受付日 = new RString("1");
     private static final RString 抽出モード_決定日 = new RString("2");
     private static final RString 抽出モード_決定者受付年月 = new RString("3");
@@ -44,19 +43,23 @@ public class UpdateKogakuKaigoServicehiHanteiKekkaProcess extends
 
     private KogakuKaigoServiceProcessParameter parameter;
     ServicehiShikyuKetteiTsuchisho manager;
-
     private int 度内連番;
 
     @BatchWriter
-    BatchPermanentTableWriter<DbT3111JigyoKogakuShikyuHanteiKekkaEntity> 支給判定結果Writer;
+    BatchPermanentTableWriter 支給判定結果tableWriter;
     @BatchWriter
-    BatchPermanentTableWriter<DbT7022ShoriDateKanriEntity> 処理日付管理マスタwriter;
+    BatchPermanentTableWriter permanentTableWriter;
 
     @Override
     protected void initialize() {
         manager = ServicehiShikyuKetteiTsuchisho.createInstance();
         度内連番 = manager.get年度内連番();
+    }
 
+    @Override
+    protected void createWriter() {
+        支給判定結果tableWriter = new BatchPermanentTableWriter(DbT3057KogakuShikyuHanteiKekkaEntity.class);
+        permanentTableWriter = new BatchPermanentTableWriter(DbT7022ShoriDateKanriEntity.class);
     }
 
     @Override
@@ -65,24 +68,17 @@ public class UpdateKogakuKaigoServicehiHanteiKekkaProcess extends
     }
 
     @Override
-    protected void createWriter() {
-
-        支給判定結果Writer = new BatchPermanentTableWriter<>(DbT3111JigyoKogakuShikyuHanteiKekkaEntity.class);
-        処理日付管理マスタwriter = new BatchPermanentTableWriter<>(DbT7022ShoriDateKanriEntity.class);
-    }
-
-    @Override
     protected void beforeExecute() {
         DbT7022ShoriDateKanriEntity trmpEntity = getShoriDateEntity(度内連番);
-        処理日付管理マスタwriter.insert(trmpEntity);
+        permanentTableWriter.insert(trmpEntity);
+
     }
 
     @Override
-    protected void process(DbT3111JigyoKogakuShikyuHanteiKekkaEntity entity) {
-
-        if (null != parameter.get決定日()) {
+    protected void process(DbT3057KogakuShikyuHanteiKekkaEntity entity) {
+        if (parameter.get決定日() != null) {
             entity.setKetteiYMD(new FlexibleDate(parameter.get決定日().toDateString()));
-            支給判定結果Writer.update(entity);
+            支給判定結果tableWriter.update(entity);
         }
     }
 
