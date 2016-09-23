@@ -51,7 +51,10 @@ public class DvKogakuServiceJohoHandler {
     private static final RString 項目名 = new RString("1");
     private static final RString 連番 = new RString("2");
     private static final RString 日付スラッシュ = new RString("3");
+    private static final RString RSTRING_4 = new RString("4");
+    private static final RString RSTRING_5 = new RString("5");
     private static final RString モード１ = new RString("DBCMN23001");
+    private static final RString モード２ = new RString("DBCMN23019");
 //    private static final RString モード１ = new RString("高額サービス費状況");
 
     /**
@@ -80,8 +83,7 @@ public class DvKogakuServiceJohoHandler {
      */
     public void initialize(RString state) {
         DvKogakuChushutsuJokenDiv panel = div.getDvKogakuServiceParam().getDvKogakuChushutsuJoken();
-        //TODO QA.1565
-        panel.getDdlKogakuShoriJokyo().setDataSource(get処理状況リスト());
+        panel.getDdlKogakuShoriJokyo().setDataSource(get処理状況リスト(state));
         panel.getDdlKogakuSanteiKijun().setDataSource(get算定基準リスト());
         panel.getRadKogakuTaishosha().setDataSource(get対象者リスト());
         panel.getRadKogakuShinseiKubun().setDataSource(get申請区分リスト());
@@ -365,11 +367,20 @@ public class DvKogakuServiceJohoHandler {
         batchparam.setHizukeHeshu(div.getDvCsvHenshuHoho().getChkCsvHenshuHoho().getSelectedKeys().contains(日付スラッシュ));
     }
 
-    private List<KeyValueDataSource> get処理状況リスト() {
+    private List<KeyValueDataSource> get処理状況リスト(RString state) {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         for (ShoriJokyo 処理状況 : ShoriJokyo.values()) {
-            KeyValueDataSource dataSource = new KeyValueDataSource(処理状況.getコード(), 処理状況.get名称());
-            dataSourceList.add(dataSource);
+            if (state.equals(モード１)) {
+                KeyValueDataSource dataSource = new KeyValueDataSource(処理状況.getコード(), 処理状況.get名称());
+                dataSourceList.add(dataSource);
+            }
+            if (state.equals(モード２)) {
+                RString コード = 処理状況.getコード();
+                if (!コード.equals(RSTRING_4) && !コード.equals(RSTRING_5)) {
+                    KeyValueDataSource dataSource = new KeyValueDataSource(処理状況.getコード(), 処理状況.get名称());
+                    dataSourceList.add(dataSource);
+                }
+            }
         }
         return dataSourceList;
     }
