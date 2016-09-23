@@ -1522,14 +1522,11 @@ public class IchijiHanteizumiDataShutsuryokuHandler {
     }
 
     private RString get意見書状況結果(RString 今回調査, RString 前回調査) {
-        if (RString.isNullOrEmpty(前回調査) || 今回調査.equals(前回調査)) {
+        if (RString.isNullOrEmpty(前回調査) || 今回調査.equals(前回調査) || RString.isNullOrEmpty(今回調査)) {
             return RString.EMPTY;
         }
-        int 結果 = (Integer.parseInt(今回調査.toString())) - Integer.parseInt(前回調査.toString());
-        if (結果 < 0) {
-            return new RString(結果).substring(1);
-        }
-        return new RString(結果);
+
+        return new RString(Integer.parseInt(今回調査.toString()) - Integer.parseInt(前回調査.toString()));
     }
 
     private List<RString> 主治医差分(IchijiHanteizumiDataBusiness business) {
