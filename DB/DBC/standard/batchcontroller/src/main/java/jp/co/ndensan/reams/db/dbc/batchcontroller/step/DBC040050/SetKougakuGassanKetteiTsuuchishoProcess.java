@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc040050;
+package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC040050;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,9 +67,11 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
@@ -85,6 +87,11 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.source.breaks.PageBreaker;
@@ -141,6 +148,7 @@ public class SetKougakuGassanKetteiTsuuchishoProcess extends BatchKeyBreakBase<K
     private RString eucFilePath;
     private KogakugassanShikyuKetteitsuchishoEntity nowentity;
     private List<RString> 通知文情報;
+    private List<PersonalData> personalDataList;
     private boolean key_1flag = false;
     private boolean key_2flag = false;
     private boolean key_3flag = false;
@@ -155,7 +163,7 @@ public class SetKougakuGassanKetteiTsuuchishoProcess extends BatchKeyBreakBase<K
     private static final RString HEADER_エラー内容 = new RString("エラー内容");
     private static final RString HEADER_備考 = new RString("備考");
     private static final RString バッチＩＤ = new RString("DBC040050_KogakugassanShikyuKetteitsuchisho");
-    private static final ReportId 帳票分類ID = new ReportId("DBC200201_GassanJigyobunKetteiTsuchisho");
+    private static final ReportId 帳票分類ID = new ReportId("DBC100053_GassanKetteiTsuchisho");
     private static final ReportId 出力順帳票分類ID = new ReportId("DBC100053_GassanKetteiTsuchisho");
     private static final FlexibleYear 管理年度 = new FlexibleYear("0000");
     private static final RString 項目名_取り消し線 = new RString("取り消し線");
@@ -172,7 +180,8 @@ public class SetKougakuGassanKetteiTsuuchishoProcess extends BatchKeyBreakBase<K
     private static final ReportId 帳票分類ID_内部帳票文字切れ = new ReportId("DBC100053_GassanKetteiTsuchisho");
     private static final ReportId 帳票共通_帳票分類ID = new ReportId("DBC200201_GassanJigyobunKetteiTsuchisho");
     private static final RString ORDER_BY = new RString("order by");
-    private static final FlexibleDate 作成日_QA = new FlexibleDate("20160501");
+    private static final Code アクセスログ_CODE = new Code("0003");
+    private static final RString アクセスログ_NAME = new RString("被保険者番号");
 
     private BatchReportWriter<GassanShikyuFushikyuKetteishaIchiranSource> batchReportWriter_一覧表;
     private ReportSourceWriter<GassanShikyuFushikyuKetteishaIchiranSource> reportSourceWriter_一覧表;
@@ -200,7 +209,7 @@ public class SetKougakuGassanKetteiTsuuchishoProcess extends BatchKeyBreakBase<K
         headerList = new ArrayList<>();
         改頁項目リスト = new ArrayList<>();
         支給不支給区分 = RString.EMPTY;
-        連番 = INT_1;
+        連番 = INT_0;
         支給不支給件数 = INT_0;
         自己負担総額の合計金額 = Decimal.ZERO;
         支給額の合計金額 = Decimal.ZERO;
@@ -252,6 +261,7 @@ public class SetKougakuGassanKetteiTsuuchishoProcess extends BatchKeyBreakBase<K
         eucFilePath = Path.combinePath(spoolWorkPath, 出力ファイル名);
         nowentity = null;
         通知文情報 = get通知文情報();
+        personalDataList = new ArrayList<>();
     }
 
     @Override
@@ -345,9 +355,7 @@ public class SetKougakuGassanKetteiTsuuchishoProcess extends BatchKeyBreakBase<K
     @Override
     protected void usualProcess(KogakugassanShikyuKetteitsuchishoEntity entity) {
         nowentity = entity;
-        if (getBefore() != null && new GassanShikyuFushikyuKetteishaIchiranPageBreak(改頁項目リスト).is改頁(entity, getBefore())) {
-            連番 = INT_1;
-        }
+
         if (entity.get被保検者情報() == null) {
             List<RString> outputList = getCSVファイル(entity);
             csvListWriter.writeLine(outputList);
@@ -381,6 +389,7 @@ public class SetKougakuGassanKetteiTsuuchishoProcess extends BatchKeyBreakBase<K
             高額合算支給決定者一覧表Entity.set改頁5(entity.getKaiPeiji5());
             高額合算支給決定者一覧表Entity.set支給不支給区分(支給不支給区分);
             高額合算支給決定者一覧表Entity.set帳票通番(対象件数);
+            高額合算支給決定者一覧表Entity.set履歴番号(連番);
             GassanShikyuFushikyuKetteishaIchiranReport 一覧表合計report = new GassanShikyuFushikyuKetteishaIchiranReport(高額合算支給決定者一覧表Entity,
                     processParameter.get処理日時(), true, getGassanShikyuFushikyuKetteishaIchiranParameter(), 帳票タイトル_内部帳票文字切れ制御);
             一覧表合計report.writeBy(reportSourceWriter_一覧表);
@@ -388,13 +397,16 @@ public class SetKougakuGassanKetteiTsuuchishoProcess extends BatchKeyBreakBase<K
             自己負担総額の合計金額 = Decimal.ZERO;
             支給額の合計金額 = Decimal.ZERO;
         }
+        if (getBefore() != null && new GassanShikyuFushikyuKetteishaIchiranPageBreak(改頁項目リスト).is改頁(entity, getBefore())) {
+            連番 = INT_0;
+        }
+        連番++;
         KogakugassanShikyuKetteiTsuchiIchiran 高額合算支給決定者一覧表Entity
                 = get高額合算支給決定者一覧表Entity(entity, 口座情報Entity, 宛名識別対象情報);
         GassanShikyuFushikyuKetteishaIchiranReport 一覧表report = new GassanShikyuFushikyuKetteishaIchiranReport(高額合算支給決定者一覧表Entity,
                 processParameter.get処理日時(), false, getGassanShikyuFushikyuKetteishaIchiranParameter(), 帳票タイトル_内部帳票文字切れ制御);
         一覧表report.writeBy(reportSourceWriter_一覧表);
         支給不支給件数++;
-        連番++;
         if (entity.getJikoFutanSogaku() != null) {
             自己負担総額の合計金額 = 自己負担総額の合計金額.add(entity.getJikoFutanSogaku());
         }
@@ -402,6 +414,7 @@ public class SetKougakuGassanKetteiTsuuchishoProcess extends BatchKeyBreakBase<K
             支給額の合計金額 = 支給額の合計金額.add(entity.getShikyugaku());
         }
         支給不支給区分 = entity.getShikyuKubun();
+        toPersonalData(entity);
     }
 
     @Override
@@ -420,15 +433,23 @@ public class SetKougakuGassanKetteiTsuuchishoProcess extends BatchKeyBreakBase<K
             高額合算支給決定者一覧表Entity.set改頁5(nowentity.getKaiPeiji5());
             高額合算支給決定者一覧表Entity.set支給不支給区分(支給不支給区分);
             高額合算支給決定者一覧表Entity.set帳票通番(対象件数);
+            高額合算支給決定者一覧表Entity.set履歴番号(連番);
             GassanShikyuFushikyuKetteishaIchiranReport 一覧表合計report = new GassanShikyuFushikyuKetteishaIchiranReport(高額合算支給決定者一覧表Entity,
                     processParameter.get処理日時(), true, getGassanShikyuFushikyuKetteishaIchiranParameter(), 帳票タイトル_内部帳票文字切れ制御);
             一覧表合計report.writeBy(reportSourceWriter_一覧表);
         }
+        AccessLogUUID accessLog = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
+        AccessLogger.log(AccessLogType.照会, personalDataList);
         csvListWriter.close();
-        eucmanager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
+        eucmanager.spool(SubGyomuCode.DBC介護給付, eucFilePath, accessLog);
         batchReportWriter_通知書_DBC100053.close();
         batchReportWriter_通知書_DBC100054.close();
         batchReportWriter_一覧表.close();
+    }
+
+    private void toPersonalData(KogakugassanShikyuKetteitsuchishoEntity entity) {
+        ExpandedInformation expandedInfo = new ExpandedInformation(アクセスログ_CODE, アクセスログ_NAME, entity.getHihokenshaNo().value());
+        personalDataList.add(PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo));
     }
 
     private List<RString> getCSVファイル(KogakugassanShikyuKetteitsuchishoEntity entity) {
@@ -617,7 +638,7 @@ public class SetKougakuGassanKetteiTsuuchishoProcess extends BatchKeyBreakBase<K
         高額合算支給決定者一覧表Entity.set支給区分コード(高額合算支給決定通知書データ.getShikyuKubunCode());
         高額合算支給決定者一覧表Entity.set自己負担総額(高額合算支給決定通知書データ.getJikoFutanSogaku());
         高額合算支給決定者一覧表Entity.set支給額(高額合算支給決定通知書データ.getShikyugaku());
-        高額合算支給決定者一覧表Entity.set支給区分コード(高額合算支給決定通知書データ.getShikyuKubunCode());
+        高額合算支給決定者一覧表Entity.set支払方法区分(高額合算支給決定通知書データ.getShiharaiHohoKubun());
         高額合算支給決定者一覧表Entity.set支払場所(高額合算支給決定通知書データ.getShiharaiBasho());
         高額合算支給決定者一覧表Entity.set支払期間開始年月日(高額合算支給決定通知書データ.getShiharaiKaishiYMD());
         高額合算支給決定者一覧表Entity.set支払期間終了年月日(高額合算支給決定通知書データ.getShiharaiShuryoYMD());
